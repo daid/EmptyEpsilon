@@ -4,6 +4,7 @@
 #include "main.h"
 
 REGISTER_MULTIPLAYER_CLASS(SpaceStation, "SpaceStation");
+
 SpaceStation::SpaceStation()
 : SpaceObject(200, "SpaceStation")
 {
@@ -19,7 +20,7 @@ void SpaceStation::draw3D()
     objectShader.setParameter("illuminationMap", *textureManager.getTexture("space_station_4_illumination.jpg"));
     objectShader.setParameter("specularMap", *textureManager.getTexture("space_station_4_specular.jpg"));
     sf::Shader::bind(&objectShader);
-    Mesh* m = Mesh::getMesh("space_station_4.obj");
+    Mesh* m = Mesh::getMesh("space_station_4.obj");//Is this destroyed somehwere?
     m->render();
 }
 

@@ -25,6 +25,7 @@ public:
     //Beam runtime state
     float cooldown;
 };
+
 class WeaponTube : public sf::NonCopyable
 {
 public:
@@ -34,36 +35,38 @@ public:
 
 class SpaceShip : public SpaceObject, public Updatable
 {
+    //TODO: Getting statistics from some external file (location of beam weapons, shields, hull, etc).
+    //This will make adding multiple ships a *lot* easier.
 public:
     const static int maxBeamWeapons = 16;
     const static int maxWeaponTubes = 16;
-    
+
     float targetRotation;
     float impulseRequest;
     float currentImpulse;
-    
+
     bool hasWarpdrive;
     int8_t warpRequest;
     float currentWarp;
-    
+
     bool hasJumpdrive;
     float jumpDistance;
     float jumpDelay;
-    
+
     int8_t weaponTubes;
     WeaponTube weaponTube[maxWeaponTubes];
     BeamWeapon beamWeapons[maxBeamWeapons];
-    
+
     int32_t targetId;
 
     SpaceShip();
-    
+
     virtual void draw3D();
     virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale);
     virtual void update(float delta);
-    
+
     P<SpaceObject> getTarget();
-    
+
     void onReceiveCommand(int32_t clientId, sf::Packet& packet);
     void commandTargetRotation(float target);
     void commandImpulse(float target);

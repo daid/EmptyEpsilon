@@ -12,7 +12,7 @@ GameGlobalInfo::GameGlobalInfo()
 : MultiplayerObject("GameGlobalInfo")
 {
     assert(!gameGlobalInfo);
-    
+
     gameGlobalInfo = this;
     for(int n=0; n<maxPlayerShips; n++)
     {
@@ -33,7 +33,7 @@ void GameGlobalInfo::setPlayerShip(int index, P<SpaceShip> ship)
 {
     assert(index >= 0 && index < maxPlayerShips);
     assert(gameServer);
-    
+
     if (ship)
         playerShipId[index] = ship->getMultiplayerId();
     else
@@ -57,7 +57,7 @@ int GameGlobalInfo::insertPlayerShip(P<SpaceShip> ship)
             return n;
         }
     }
-    printf("?!?\n");
+    printf("Unable to insert ship?!?\n");
     return -1;
 }
 
@@ -74,14 +74,14 @@ PlayerInfo::PlayerInfo()
         crewPosition[n] = false;
         registerMemberReplication(&crewPosition[n]);
     }
-    
+
     playerInfoList.push_back(this);
 }
 
 void PlayerInfo::setCrewPosition(ECrewPosition position, bool active)
 {
     //crewPosition[position] = active;
-    
+
     sf::Packet packet;
     packet << CMD_UPDATE_CREW_POSITION << int32_t(position) << active;
     sendCommand(packet);

@@ -16,8 +16,7 @@ REGISTER_MULTIPLAYER_CLASS(SpaceShip, "SpaceShip");
 SpaceShip::SpaceShip()
 : SpaceObject(50, "SpaceShip")
 {
-    setCollisionPhysics(true, false);
-
+    setCollisionPhysics(true, false); //Physics stuff.
     targetRotation = getRotation();
     impulseRequest = 0;
     currentImpulse = 0;
@@ -28,7 +27,7 @@ SpaceShip::SpaceShip()
     jumpDistance = 0.0;
     jumpDelay = 0.0;
     weaponTubes = 6;
-    
+
     registerMemberReplication(&targetRotation);
     registerMemberReplication(&impulseRequest);
     registerMemberReplication(&currentImpulse);
@@ -39,15 +38,15 @@ SpaceShip::SpaceShip()
     registerMemberReplication(&jumpDelay, 0.2);
     registerMemberReplication(&weaponTubes);
     registerMemberReplication(&targetId);
-    
-    for(int n=0; n<maxBeamWeapons; n++)
+
+    for(int n=0; n < maxBeamWeapons; n++)
     {
         beamWeapons[n].arc = 0;
         beamWeapons[n].direction = 0;
         beamWeapons[n].range = 0;
         beamWeapons[n].cycleTime = 6.0;
         beamWeapons[n].cooldown = 0.0;
-        
+
         registerMemberReplication(&beamWeapons[n].arc);
         registerMemberReplication(&beamWeapons[n].direction);
         registerMemberReplication(&beamWeapons[n].range);
@@ -89,7 +88,7 @@ void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float
         sf::Color color = sf::Color::Red;
         if (beamWeapons[n].cooldown > 0)
             color = sf::Color(255, 255 * (beamWeapons[n].cooldown / beamWeapons[n].cycleTime), 0);
-        
+
         sf::VertexArray a(sf::LinesStrip, 3);
         a[0].color = color;
         a[1].color = color;
@@ -101,7 +100,7 @@ void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float
         a[1].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction - beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale;
         a[2].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction - beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale * 1.3f;
         window.draw(a);
-        
+
         int arcPoints = int(beamWeapons[n].arc / 10) + 1;
         sf::VertexArray arc(sf::LinesStrip, arcPoints);
         for(int i=0; i<arcPoints; i++)
@@ -140,7 +139,7 @@ void SpaceShip::update(float delta)
         setAngularVelocity(-10);
     else
         setAngularVelocity(rotationDiff * 10.0);
-    
+
     if (hasJumpdrive && jumpDelay > 0)
     {
         if (currentImpulse > 1.0)
@@ -195,7 +194,7 @@ void SpaceShip::update(float delta)
         if (beamWeapons[n].cooldown > 0.0)
             beamWeapons[n].cooldown -= delta;
     }
-    
+
     P<SpaceObject> target = getTarget();
     if (gameServer && target && delta > 0) // Only fire beam weapons if we are on the server, have a target, and are not paused.
     {
@@ -257,7 +256,7 @@ void SpaceShip::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             int8_t tubeNr;
             EMissileWeapons type;
             packet >> tubeNr >> type;
-            
+
             if (tubeNr >= 0 && tubeNr < maxWeaponTubes)
                 weaponTube[tubeNr].typeLoaded = type;
         }
@@ -266,7 +265,7 @@ void SpaceShip::onReceiveCommand(int32_t clientId, sf::Packet& packet)
         {
             int8_t tubeNr;
             packet >> tubeNr;
-            
+
             if (tubeNr >= 0 && tubeNr < maxWeaponTubes)
                 weaponTube[tubeNr].typeLoaded = MW_None;
         }
@@ -275,7 +274,7 @@ void SpaceShip::onReceiveCommand(int32_t clientId, sf::Packet& packet)
         {
             int8_t tubeNr;
             packet >> tubeNr;
-            
+
             if (tubeNr >= 0 && tubeNr < maxWeaponTubes)
                 weaponTube[tubeNr].typeLoaded = MW_None;
         }

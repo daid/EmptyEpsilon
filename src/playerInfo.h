@@ -24,15 +24,15 @@ enum ECrewPosition
 class GameGlobalInfo : public MultiplayerObject
 {
 public:
-    static const int maxPlayerShips = 32;
+    static const int maxPlayerShips = 32; //Cause we had to set it at something.
 private:
     int32_t playerShipId[maxPlayerShips];
 public:
     GameGlobalInfo();
-    
+
     P<SpaceShip> getPlayerShip(int index);
     void setPlayerShip(int index, P<SpaceShip> ship);
-    
+
     int findPlayerShip(P<SpaceShip> ship);
     int insertPlayerShip(P<SpaceShip> ship);
 };
@@ -41,11 +41,11 @@ class PlayerInfo : public MultiplayerObject
 {
 public:
     int32_t clientId;
-    
+
     bool crewPosition[maxCrewPositions];
-    
+
     PlayerInfo();
-    
+
     bool isMainScreen();
     void setCrewPosition(ECrewPosition position, bool active);
     virtual void onReceiveCommand(int32_t clientId, sf::Packet& packet);
