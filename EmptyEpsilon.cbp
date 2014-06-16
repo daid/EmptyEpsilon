@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="EmptyEpsilon" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output=".bin/Debug/EmptyEpsilon" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add library="sfml-window-d" />
+					<Add library="sfml-audio-d" />
+					<Add library="sfml-graphics-d" />
+					<Add library="sfml-main-d" />
+					<Add library="sfml-system-d" />
+					<Add library="sfml-network-d" />
+					<Add library="opengl32" />
+					<Add library="glu32" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output=".bin/Release/EmptyEpsilon" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="../../SFML-2.1/include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="sfml-audio" />
+					<Add library="sfml-graphics" />
+					<Add library="sfml-main" />
+					<Add library="sfml-system" />
+					<Add library="sfml-window" />
+					<Add library="sfml-network" />
+					<Add library="opengl32" />
+					<Add library="glu32" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add directory="../SFML-2.1/include" />
+			<Add directory="../SeriousProton/src" />
+		</Compiler>
+		<Linker>
+			<Add directory="../SFML-2.1/lib" />
+		</Linker>
+		<Unit filename="../SeriousProton/src/Box2D/Box2D.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/Shapes/b2ChainShape.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/Shapes/b2ChainShape.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/Shapes/b2CircleShape.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/Shapes/b2CircleShape.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/Shapes/b2EdgeShape.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/Shapes/b2EdgeShape.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/Shapes/b2PolygonShape.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/Shapes/b2PolygonShape.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/Shapes/b2Shape.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/b2BroadPhase.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/b2BroadPhase.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/b2CollideCircle.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/b2CollideEdge.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/b2CollidePolygon.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/b2Collision.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/b2Collision.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/b2Distance.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/b2Distance.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/b2DynamicTree.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/b2DynamicTree.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/b2TimeOfImpact.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Collision/b2TimeOfImpact.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Common/b2BlockAllocator.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Common/b2BlockAllocator.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Common/b2Draw.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Common/b2Draw.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Common/b2GrowableStack.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Common/b2Math.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Common/b2Math.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Common/b2Settings.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Common/b2Settings.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Common/b2StackAllocator.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Common/b2StackAllocator.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Common/b2Timer.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Common/b2Timer.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Contacts/b2CircleContact.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Contacts/b2CircleContact.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Contacts/b2Contact.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Contacts/b2Contact.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Contacts/b2ContactSolver.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Contacts/b2ContactSolver.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Contacts/b2PolygonContact.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Contacts/b2PolygonContact.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2DistanceJoint.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2DistanceJoint.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2FrictionJoint.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2FrictionJoint.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2GearJoint.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2GearJoint.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2Joint.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2Joint.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2MotorJoint.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2MotorJoint.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2MouseJoint.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2MouseJoint.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2PrismaticJoint.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2PulleyJoint.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2PulleyJoint.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2RevoluteJoint.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2RopeJoint.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2RopeJoint.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2WeldJoint.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2WeldJoint.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2WheelJoint.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/Joints/b2WheelJoint.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/b2Body.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/b2Body.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/b2ContactManager.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/b2ContactManager.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/b2Fixture.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/b2Fixture.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/b2Island.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/b2Island.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/b2TimeStep.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/b2World.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/b2World.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/b2WorldCallbacks.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Dynamics/b2WorldCallbacks.h" />
+		<Unit filename="../SeriousProton/src/Box2D/Rope/b2Rope.cpp" />
+		<Unit filename="../SeriousProton/src/Box2D/Rope/b2Rope.h" />
+		<Unit filename="../SeriousProton/src/Collisionable.cpp" />
+		<Unit filename="../SeriousProton/src/Collisionable.h" />
+		<Unit filename="../SeriousProton/src/P.h" />
+		<Unit filename="../SeriousProton/src/Renderable.cpp" />
+		<Unit filename="../SeriousProton/src/Renderable.h" />
+		<Unit filename="../SeriousProton/src/Updatable.cpp" />
+		<Unit filename="../SeriousProton/src/Updatable.h" />
+		<Unit filename="../SeriousProton/src/engine.cpp" />
+		<Unit filename="../SeriousProton/src/engine.h" />
+		<Unit filename="../SeriousProton/src/event.cpp" />
+		<Unit filename="../SeriousProton/src/event.h" />
+		<Unit filename="../SeriousProton/src/gameEntity.cpp" />
+		<Unit filename="../SeriousProton/src/gameEntity.h" />
+		<Unit filename="../SeriousProton/src/httpServer.cpp" />
+		<Unit filename="../SeriousProton/src/httpServer.h" />
+		<Unit filename="../SeriousProton/src/input.cpp" />
+		<Unit filename="../SeriousProton/src/input.h" />
+		<Unit filename="../SeriousProton/src/lua/lapi.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lapi.h" />
+		<Unit filename="../SeriousProton/src/lua/lauxlib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lauxlib.h" />
+		<Unit filename="../SeriousProton/src/lua/lbaselib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lbitlib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lcode.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lcode.h" />
+		<Unit filename="../SeriousProton/src/lua/lcorolib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lctype.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lctype.h" />
+		<Unit filename="../SeriousProton/src/lua/ldblib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/ldebug.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/ldebug.h" />
+		<Unit filename="../SeriousProton/src/lua/ldo.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/ldo.h" />
+		<Unit filename="../SeriousProton/src/lua/ldump.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lfunc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lfunc.h" />
+		<Unit filename="../SeriousProton/src/lua/lgc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lgc.h" />
+		<Unit filename="../SeriousProton/src/lua/linit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/liolib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/llex.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/llex.h" />
+		<Unit filename="../SeriousProton/src/lua/llimits.h" />
+		<Unit filename="../SeriousProton/src/lua/lmathlib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lmem.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lmem.h" />
+		<Unit filename="../SeriousProton/src/lua/loadlib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lobject.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lobject.h" />
+		<Unit filename="../SeriousProton/src/lua/lopcodes.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lopcodes.h" />
+		<Unit filename="../SeriousProton/src/lua/loslib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lparser.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lparser.h" />
+		<Unit filename="../SeriousProton/src/lua/lstate.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lstate.h" />
+		<Unit filename="../SeriousProton/src/lua/lstring.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lstring.h" />
+		<Unit filename="../SeriousProton/src/lua/lstrlib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/ltable.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/ltable.h" />
+		<Unit filename="../SeriousProton/src/lua/ltablib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/ltm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/ltm.h" />
+		<Unit filename="../SeriousProton/src/lua/lua.h" />
+		<Unit filename="../SeriousProton/src/lua/lua.hpp" />
+		<Unit filename="../SeriousProton/src/lua/luaconf.h" />
+		<Unit filename="../SeriousProton/src/lua/lualib.h" />
+		<Unit filename="../SeriousProton/src/lua/lundump.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lundump.h" />
+		<Unit filename="../SeriousProton/src/lua/lvm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lvm.h" />
+		<Unit filename="../SeriousProton/src/lua/lzio.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/lua/lzio.h" />
+		<Unit filename="../SeriousProton/src/multiplayer.cpp" />
+		<Unit filename="../SeriousProton/src/multiplayer.h" />
+		<Unit filename="../SeriousProton/src/postProcessManager.cpp" />
+		<Unit filename="../SeriousProton/src/postProcessManager.h" />
+		<Unit filename="../SeriousProton/src/random.h" />
+		<Unit filename="../SeriousProton/src/resources.cpp" />
+		<Unit filename="../SeriousProton/src/resources.h" />
+		<Unit filename="../SeriousProton/src/scriptInterface.cpp" />
+		<Unit filename="../SeriousProton/src/scriptInterface.h" />
+		<Unit filename="../SeriousProton/src/scriptInterfaceMagic.cpp" />
+		<Unit filename="../SeriousProton/src/scriptInterfaceMagic.h" />
+		<Unit filename="../SeriousProton/src/soundManager.cpp" />
+		<Unit filename="../SeriousProton/src/soundManager.h" />
+		<Unit filename="../SeriousProton/src/stringImproved.cpp" />
+		<Unit filename="../SeriousProton/src/stringImproved.h" />
+		<Unit filename="../SeriousProton/src/textureManager.cpp" />
+		<Unit filename="../SeriousProton/src/textureManager.h" />
+		<Unit filename="../SeriousProton/src/vectorUtils.h" />
+		<Unit filename="../SeriousProton/src/windowManager.cpp" />
+		<Unit filename="../SeriousProton/src/windowManager.h" />
+		<Unit filename="src/crewUI.cpp" />
+		<Unit filename="src/crewUI.h" />
+		<Unit filename="src/epsilonServer.cpp" />
+		<Unit filename="src/epsilonServer.h" />
+		<Unit filename="src/gui.cpp" />
+		<Unit filename="src/gui.h" />
+		<Unit filename="src/main.cpp" />
+		<Unit filename="src/main.h" />
+		<Unit filename="src/mainMenus.cpp" />
+		<Unit filename="src/mainMenus.h" />
+		<Unit filename="src/mainScreen.cpp" />
+		<Unit filename="src/mainScreen.h" />
+		<Unit filename="src/mainUI.cpp" />
+		<Unit filename="src/mainUI.h" />
+		<Unit filename="src/mesh.cpp" />
+		<Unit filename="src/mesh.h" />
+		<Unit filename="src/playerInfo.cpp" />
+		<Unit filename="src/playerInfo.h" />
+		<Unit filename="src/shipSelectionScreen.cpp" />
+		<Unit filename="src/shipSelectionScreen.h" />
+		<Unit filename="src/spaceObject.cpp" />
+		<Unit filename="src/spaceObject.h" />
+		<Unit filename="src/spaceStation.cpp" />
+		<Unit filename="src/spaceStation.h" />
+		<Unit filename="src/spaceship.cpp" />
+		<Unit filename="src/spaceship.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
