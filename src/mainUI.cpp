@@ -9,18 +9,18 @@ void MainUI::onGui()
         destroy();
         new ShipSelectionScreen();
     }
-    
-    if (gameServer)
+
+    if (gameServer) //Check if instance is running as gameserver
     {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
             engine->setGameSpeed(1.0);
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
-            engine->setGameSpeed(0.0);
-#ifdef DEBUG
-        text(sf::FloatRect(0, 0, 1600, 20), string(gameServer->getSendDataRate()) + " bytes per second", AlignRight, 15);
-#endif
+            engine->setGameSpeed(0.0); //Pause game.
+        #ifdef DEBUG
+            text(sf::FloatRect(0, 0, 1600, 20), string(gameServer->getSendDataRate()) + " bytes per second", AlignRight, 15);
+        #endif
     }
-    
+
     if (engine->getGameSpeed() == 0.0)
     {
         text(sf::FloatRect(0, 400, 1600, 100), "Game Paused", AlignCenter, 70);
@@ -52,7 +52,7 @@ void MainUI::drawHeadingCircle(sf::Vector2f position, float size)
     radarRangeCircle.setOrigin(size, size);
     radarRangeCircle.setPosition(position);
     window.draw(radarRangeCircle);
-    
+    //Draw big lines in the degree circle.
     sf::VertexArray tigs(sf::Lines, 360/20*2);
     for(unsigned int n=0; n<360; n+=20)
     {
@@ -60,6 +60,8 @@ void MainUI::drawHeadingCircle(sf::Vector2f position, float size)
         tigs[n/20*2+1].position = position + sf::vector2FromAngle(float(n)) * (size - 20);
     }
     window.draw(tigs);
+
+    //Draw the small lines in the degree circle.
     sf::VertexArray smallTigs(sf::Lines, 360/5*2);
     for(unsigned int n=0; n<360; n+=5)
     {
