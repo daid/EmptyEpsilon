@@ -3,6 +3,7 @@
 
 #include "engine.h"
 #include "spaceObject.h"
+#include "shipTemplate.h"
 
 enum EMissileWeapons
 {
@@ -37,6 +38,9 @@ class SpaceShip : public SpaceObject, public Updatable
 public:
     const static int maxBeamWeapons = 16;
     const static int maxWeaponTubes = 16;
+    
+    string templateName;
+    P<ShipTemplate> shipTemplate;
     
     float targetRotation;
     float impulseRequest;

@@ -2,6 +2,8 @@
 #include "spaceship.h"
 #include "mesh.h"
 #include "main.h"
+#include "shipTemplate.h"
+#include "beamEffect.h"
 
 static const int16_t CMD_TARGET_ROTATION = 0x0001;
 static const int16_t CMD_IMPULSE = 0x0002;
@@ -62,22 +64,33 @@ SpaceShip::SpaceShip()
         registerMemberReplication(&weaponTube[n].typeLoaded);
         registerMemberReplication(&weaponTube[n].loadingDelay, 0.5);
     }
+    registerMemberReplication(&templateName);
+
+    templateName = "scout";
+
     beamWeapons[0].arc = 90.0;
+    beamWeapons[0].direction = -20;
     beamWeapons[0].range = 1000.0;
-    beamWeapons[1].arc = 30.0;
-    beamWeapons[1].direction = 180;
-    beamWeapons[1].range = 2000.0;
+    
+    beamWeapons[1].arc = 90.0;
+    beamWeapons[1].direction = 20;
+    beamWeapons[1].range = 1000.0;
+    
+    beamWeapons[2].arc = 30.0;
+    beamWeapons[2].direction = 180;
+    beamWeapons[2].range = 2000.0;
 }
 
 void SpaceShip::draw3D()
 {
-    glTranslatef(0, 0, 10);
-    glScalef(3.0, 3.0, 3.0);
-    objectShader.setParameter("baseMap", *textureManager.getTexture("space_frigate_6_color.png"));
-    objectShader.setParameter("illuminationMap", *textureManager.getTexture("space_frigate_6_illumination.png"));
-    objectShader.setParameter("specularMap", *textureManager.getTexture("space_frigate_6_specular.png"));
+    if (!shipTemplate) return;
+    
+    glScalef(shipTemplate->scale, shipTemplate->scale, shipTemplate->scale);
+    objectShader.setParameter("baseMap", *textureManager.getTexture(shipTemplate->colorTexture));
+    objectShader.setParameter("illuminationMap", *textureManager.getTexture(shipTemplate->illuminationTexture));
+    objectShader.setParameter("specularMap", *textureManager.getTexture(shipTemplate->specularTexture));
     sf::Shader::bind(&objectShader);
-    Mesh* m = Mesh::getMesh("space_frigate_6.obj");
+    Mesh* m = Mesh::getMesh(shipTemplate->model);
     m->render();
 }
 
@@ -122,6 +135,9 @@ void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float
 
 void SpaceShip::update(float delta)
 {
+    if (!shipTemplate)
+        shipTemplate = ShipTemplate::getTemplate(templateName);
+
     float rotationDiff = targetRotation - getRotation();
     if (rotationDiff < -180)
     {
@@ -212,6 +228,9 @@ void SpaceShip::update(float delta)
                 if (abs(angleDiff) < beamWeapons[n].arc / 2.0)
                 {
                     beamWeapons[n].cooldown = beamWeapons[n].cycleTime;
+                    P<BeamEffect> effect = new BeamEffect();
+                    effect->setSource(this, shipTemplate->beamPosition[n] * shipTemplate->scale);
+                    effect->setTarget(target);
                 }
             }
         }

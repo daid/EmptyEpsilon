@@ -1,5 +1,6 @@
 #include <SFML/OpenGL.hpp>
 #include "spaceStation.h"
+#include "shipTemplate.h"
 #include "mesh.h"
 #include "main.h"
 
@@ -13,13 +14,15 @@ SpaceStation::SpaceStation()
 
 void SpaceStation::draw3D()
 {
+    P<ShipTemplate> t = ShipTemplate::getTemplate("small-station");
+
     glTranslatef(0, 0, 50);
-    glScalef(10.0, 10.0, 10.0);
-    objectShader.setParameter("baseMap", *textureManager.getTexture("space_station_4_color.jpg"));
-    objectShader.setParameter("illuminationMap", *textureManager.getTexture("space_station_4_illumination.jpg"));
-    objectShader.setParameter("specularMap", *textureManager.getTexture("space_station_4_specular.jpg"));
+    glScalef(t->scale, t->scale, t->scale);
+    objectShader.setParameter("baseMap", *textureManager.getTexture(t->colorTexture));
+    objectShader.setParameter("illuminationMap", *textureManager.getTexture(t->illuminationTexture));
+    objectShader.setParameter("specularMap", *textureManager.getTexture(t->specularTexture));
     sf::Shader::bind(&objectShader);
-    Mesh* m = Mesh::getMesh("space_station_4.obj");
+    Mesh* m = Mesh::getMesh(t->model);
     m->render();
 }
 

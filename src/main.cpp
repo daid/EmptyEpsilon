@@ -38,6 +38,9 @@ int main(int argc, char** argv)
     P<ResourceStream> fragmentStream = getResourceStream("objectShader.frag");
     objectShader.loadFromStream(**vertexStream, **fragmentStream);
     
+    P<ScriptObject> shipTemplatesScript = new ScriptObject("shipTemplates.lua");
+    shipTemplatesScript->destroy();
+    
     new MainMenu();
     
     engine->runMainLoop();
