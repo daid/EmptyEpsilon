@@ -307,6 +307,8 @@
 		<Unit filename="../SeriousProton/src/vectorUtils.h" />
 		<Unit filename="../SeriousProton/src/windowManager.cpp" />
 		<Unit filename="../SeriousProton/src/windowManager.h" />
+		<Unit filename="src/beamEffect.cpp" />
+		<Unit filename="src/beamEffect.h" />
 		<Unit filename="src/crewUI.cpp" />
 		<Unit filename="src/crewUI.h" />
 		<Unit filename="src/epsilonServer.cpp" />
@@ -327,6 +329,8 @@
 		<Unit filename="src/playerInfo.h" />
 		<Unit filename="src/shipSelectionScreen.cpp" />
 		<Unit filename="src/shipSelectionScreen.h" />
+		<Unit filename="src/shipTemplate.cpp" />
+		<Unit filename="src/shipTemplate.h" />
 		<Unit filename="src/spaceObject.cpp" />
 		<Unit filename="src/spaceObject.h" />
 		<Unit filename="src/spaceStation.cpp" />

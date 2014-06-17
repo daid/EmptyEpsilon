@@ -142,6 +142,12 @@ void GUI::draw9Cut(sf::FloatRect rect, string texture, sf::Color color)
         sprite.setScale(scale, scale);
         cornerSizeR *= scale;
     }
+    if (cornerSizeT > rect.width / 2)
+    {
+        scale = float(rect.width / 2) / cornerSizeR;
+        sprite.setScale(scale, scale);
+        cornerSizeR *= scale;
+    }
     sprite.setColor(color);
     sprite.setOrigin(0, 0);
     //TopLeft
@@ -161,16 +167,40 @@ void GUI::draw9Cut(sf::FloatRect rect, string texture, sf::Color color)
     sprite.setTextureRect(sf::IntRect(textureSize.width - cornerSizeT, textureSize.height - cornerSizeT, cornerSizeT, cornerSizeT));
     renderTarget->draw(sprite);
     
-    //Top
-    sprite.setPosition(rect.left + cornerSizeR, rect.top);
-    sprite.setTextureRect(sf::IntRect(cornerSizeT, 0, textureSize.width - cornerSizeT * 2, cornerSizeT));
-    sprite.setScale((rect.width - cornerSizeR*2) / float(textureSize.width - cornerSizeT * 2), scale);
-    renderTarget->draw(sprite);
-    //Bottom
-    sprite.setPosition(rect.left + cornerSizeR, rect.top + rect.height - cornerSizeR);
-    sprite.setTextureRect(sf::IntRect(cornerSizeT, textureSize.height - cornerSizeT, textureSize.width - cornerSizeT * 2, cornerSizeT));
-    sprite.setScale((rect.width - cornerSizeR*2) / float(textureSize.width - cornerSizeT * 2), scale);
-    renderTarget->draw(sprite);
+    if (rect.width > cornerSizeR * 2)
+    {
+        //Top
+        sprite.setPosition(rect.left + cornerSizeR, rect.top);
+        sprite.setTextureRect(sf::IntRect(cornerSizeT, 0, textureSize.width - cornerSizeT * 2, cornerSizeT));
+        sprite.setScale((rect.width - cornerSizeR*2) / float(textureSize.width - cornerSizeT * 2), scale);
+        renderTarget->draw(sprite);
+        //Bottom
+        sprite.setPosition(rect.left + cornerSizeR, rect.top + rect.height - cornerSizeR);
+        sprite.setTextureRect(sf::IntRect(cornerSizeT, textureSize.height - cornerSizeT, textureSize.width - cornerSizeT * 2, cornerSizeT));
+        sprite.setScale((rect.width - cornerSizeR*2) / float(textureSize.width - cornerSizeT * 2), scale);
+        renderTarget->draw(sprite);
+    }
+    if (rect.height > cornerSizeR * 2)
+    {
+        //left
+        sprite.setPosition(rect.left, rect.top + cornerSizeR);
+        sprite.setTextureRect(sf::IntRect(0, cornerSizeT, cornerSizeT, 1));
+        sprite.setScale(scale, rect.height - cornerSizeR*2);
+        renderTarget->draw(sprite);
+        //Right
+        sprite.setPosition(rect.left + rect.width - cornerSizeR, rect.top + cornerSizeR);
+        sprite.setTextureRect(sf::IntRect(textureSize.width - cornerSizeT, cornerSizeT, cornerSizeT, 1));
+        sprite.setScale(scale, rect.height - cornerSizeR*2);
+        renderTarget->draw(sprite);
+    }
+    if (rect.width > cornerSizeR * 2 && rect.height > cornerSizeR * 2)
+    {
+        //Center
+        sprite.setPosition(rect.left + cornerSizeR, rect.top + cornerSizeR);
+        sprite.setTextureRect(sf::IntRect(cornerSizeT, cornerSizeT, 1, 1));
+        sprite.setScale(rect.width - cornerSizeR*2, rect.height - cornerSizeR*2);
+        renderTarget->draw(sprite);
+    }
 }
 
 MouseRenderer::MouseRenderer()

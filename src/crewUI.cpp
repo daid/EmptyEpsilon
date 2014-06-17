@@ -192,11 +192,13 @@ void CrewUI::tacticalUI()
             break;
         case WTS_Loading:
             toggleButton(sf::FloatRect(20, 840 - 50 * n, 150, 50), false, "Loading", 35);
-            toggleButton(sf::FloatRect(170, 840 - 50 * n, 350, 50), false, getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), 35);
+            text(sf::FloatRect(170, 840 - 50 * n, 350, 50), getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), AlignCenter, 35);
+            toggleButton(sf::FloatRect(170, 840 - 50 * n, 350 * (1.0 - (mySpaceship->weaponTube[n].delay / mySpaceship->tubeLoadTime)), 50), false, "");
             break;
         case WTS_Unloading:
             toggleButton(sf::FloatRect(20, 840 - 50 * n, 150, 50), false, "Unloading", 25);
-            toggleButton(sf::FloatRect(170, 840 - 50 * n, 350, 50), false, getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), 35);
+            text(sf::FloatRect(170, 840 - 50 * n, 350, 50), getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), AlignCenter, 35);
+            toggleButton(sf::FloatRect(170, 840 - 50 * n, 350 * (mySpaceship->weaponTube[n].delay / mySpaceship->tubeLoadTime), 50), false, "");
             break;
         }
     }
