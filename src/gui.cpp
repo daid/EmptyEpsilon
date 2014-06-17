@@ -56,16 +56,7 @@ void GUI::text(sf::FloatRect rect, string text, EAlign align, float fontSize)
 
 bool GUI::button(sf::FloatRect rect, string textValue, float fontSize)
 {
-    sf::Sprite sprite;
-    textureManager.setTexture(sprite, "button_background");
-    if (rect.contains(mousePosition))
-        sprite.setColor(sf::Color(255,255,255, 128));
-    else
-        sprite.setColor(sf::Color::White);
-    sprite.setOrigin(0, 0);
-    sprite.setPosition(rect.left, rect.top);
-    sprite.setScale(rect.width / sprite.getTextureRect().width, rect.height / sprite.getTextureRect().height);
-    renderTarget->draw(sprite);
+    draw9Cut(rect, "button_background", rect.contains(mousePosition) ? sf::Color(255,255,255, 128) : sf::Color::White);
 
     text(rect, textValue, AlignCenter, fontSize);
     if (mouseClick && rect.contains(mousePosition))
@@ -75,24 +66,20 @@ bool GUI::button(sf::FloatRect rect, string textValue, float fontSize)
 
 bool GUI::toggleButton(sf::FloatRect rect, bool active, string textValue, float fontSize)
 {
-    sf::Sprite sprite;
-    textureManager.setTexture(sprite, "button_background");
+    sf::Color buttonColor;
     if (rect.contains(mousePosition))
     {
         if (active)
-            sprite.setColor(sf::Color(255,255,255, 192));
+            buttonColor = sf::Color(255,255,255, 192);
         else
-            sprite.setColor(sf::Color(255,255,255, 64));
+            buttonColor = sf::Color(255,255,255, 64);
     }else{
         if (active)
-            sprite.setColor(sf::Color(255,255,255, 255));
+            buttonColor = sf::Color(255,255,255, 255);
         else
-            sprite.setColor(sf::Color(255,255,255, 128));
+            buttonColor = sf::Color(255,255,255, 128);
     }
-    sprite.setOrigin(0, 0);
-    sprite.setPosition(rect.left, rect.top);
-    sprite.setScale(rect.width / sprite.getTextureRect().width, rect.height / sprite.getTextureRect().height);
-    renderTarget->draw(sprite);
+    draw9Cut(rect, "button_background", buttonColor);
 
     text(rect, textValue, AlignCenter, fontSize);
     if (mouseClick && rect.contains(mousePosition))
@@ -107,22 +94,18 @@ float GUI::vslider(sf::FloatRect rect, float value, float minValue, float maxVal
     background.setFillColor(sf::Color(255,255,255,32));
     renderTarget->draw(background);
 
+    float y;
+    y = rect.top + (rect.height - rect.width) * (0 - minValue) / (maxValue - minValue);
     sf::RectangleShape backgroundZero(sf::Vector2f(rect.width, 8.0));
-    backgroundZero.setPosition(rect.left, rect.top + rect.height / 2.0 - 4.0);
+    backgroundZero.setPosition(rect.left, y + rect.width / 2.0 - 4.0);
     backgroundZero.setFillColor(sf::Color(0,0,0,32));
     renderTarget->draw(backgroundZero);
     
-    float y = rect.top + (rect.height - rect.width) * (value - minValue) / (maxValue - minValue);
-    sf::Sprite sprite;
-    textureManager.setTexture(sprite, "button_background");
+    y = rect.top + (rect.height - rect.width) * (value - minValue) / (maxValue - minValue);
+    sf::Color color = sf::Color::White;
     if (rect.contains(mousePosition) && mousePosition.y >= y && mousePosition.y <= y + rect.width)
-        sprite.setColor(sf::Color(255,255,255, 128));
-    else
-        sprite.setColor(sf::Color::White);
-    sprite.setOrigin(0, 0);
-    sprite.setPosition(rect.left, y);
-    sprite.setScale(rect.width / sprite.getTextureRect().width, rect.width / sprite.getTextureRect().height);
-    renderTarget->draw(sprite);
+        color = sf::Color(255,255,255, 128);
+    draw9Cut(sf::FloatRect(rect.left, y, rect.width, rect.width), "button_background", color);
 
     if (rect.contains(mousePosition) && mouseDown)
     {
@@ -143,6 +126,51 @@ float GUI::vslider(sf::FloatRect rect, float value, float minValue, float maxVal
     }
 
     return value;
+}
+
+void GUI::draw9Cut(sf::FloatRect rect, string texture, sf::Color color)
+{
+    sf::Sprite sprite;
+    textureManager.setTexture(sprite, texture);
+    sf::IntRect textureSize = sprite.getTextureRect();
+    int cornerSizeT = textureSize.height / 2;
+    float cornerSizeR = cornerSizeT;
+    float scale = 1.0;
+    if (cornerSizeT > rect.height / 2)
+    {
+        scale = float(rect.height / 2) / cornerSizeR;
+        sprite.setScale(scale, scale);
+        cornerSizeR *= scale;
+    }
+    sprite.setColor(color);
+    sprite.setOrigin(0, 0);
+    //TopLeft
+    sprite.setPosition(rect.left, rect.top);
+    sprite.setTextureRect(sf::IntRect(0, 0, cornerSizeT, cornerSizeT));
+    renderTarget->draw(sprite);
+    //BottomLeft
+    sprite.setPosition(rect.left, rect.top + rect.height - cornerSizeR);
+    sprite.setTextureRect(sf::IntRect(0, textureSize.height - cornerSizeT, cornerSizeT, cornerSizeT));
+    renderTarget->draw(sprite);
+    //TopRight
+    sprite.setPosition(rect.left + rect.width - cornerSizeR, rect.top);
+    sprite.setTextureRect(sf::IntRect(textureSize.width - cornerSizeT, 0, cornerSizeT, cornerSizeT));
+    renderTarget->draw(sprite);
+    //BottomRight
+    sprite.setPosition(rect.left + rect.width - cornerSizeR, rect.top + rect.height - cornerSizeR);
+    sprite.setTextureRect(sf::IntRect(textureSize.width - cornerSizeT, textureSize.height - cornerSizeT, cornerSizeT, cornerSizeT));
+    renderTarget->draw(sprite);
+    
+    //Top
+    sprite.setPosition(rect.left + cornerSizeR, rect.top);
+    sprite.setTextureRect(sf::IntRect(cornerSizeT, 0, textureSize.width - cornerSizeT * 2, cornerSizeT));
+    sprite.setScale((rect.width - cornerSizeR*2) / float(textureSize.width - cornerSizeT * 2), scale);
+    renderTarget->draw(sprite);
+    //Bottom
+    sprite.setPosition(rect.left + cornerSizeR, rect.top + rect.height - cornerSizeR);
+    sprite.setTextureRect(sf::IntRect(cornerSizeT, textureSize.height - cornerSizeT, textureSize.width - cornerSizeT * 2, cornerSizeT));
+    sprite.setScale((rect.width - cornerSizeR*2) / float(textureSize.width - cornerSizeT * 2), scale);
+    renderTarget->draw(sprite);
 }
 
 MouseRenderer::MouseRenderer()

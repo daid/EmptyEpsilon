@@ -29,6 +29,7 @@ SpaceShip::SpaceShip()
     hasJumpdrive = true;
     jumpDistance = 0.0;
     jumpDelay = 0.0;
+    tubeLoadTime = 8.0;
     weaponTubes = 6;
     
     registerMemberReplication(&targetRotation);
@@ -39,6 +40,7 @@ SpaceShip::SpaceShip()
     registerMemberReplication(&currentWarp);
     registerMemberReplication(&hasJumpdrive);
     registerMemberReplication(&jumpDelay, 0.2);
+    registerMemberReplication(&tubeLoadTime);
     registerMemberReplication(&weaponTubes);
     registerMemberReplication(&targetId);
     
@@ -59,15 +61,22 @@ SpaceShip::SpaceShip()
     for(int n=0; n<maxWeaponTubes; n++)
     {
         weaponTube[n].typeLoaded = MW_None;
-        weaponTube[n].loadingDelay = 0.0;
+        weaponTube[n].state = WTS_Empty;
+        weaponTube[n].delay = 0.0;
 
         registerMemberReplication(&weaponTube[n].typeLoaded);
-        registerMemberReplication(&weaponTube[n].loadingDelay, 0.5);
+        registerMemberReplication(&weaponTube[n].state);
+        registerMemberReplication(&weaponTube[n].delay, 0.5);
+    }
+    for(int n=0; n<MW_Count; n++)
+    {
+        weaponStorage[n] = 0;
+        registerMemberReplication(&weaponStorage[n]);
     }
     registerMemberReplication(&templateName);
 
-    templateName = "scout";
 
+    templateName = "scout";
     beamWeapons[0].arc = 90.0;
     beamWeapons[0].direction = -20;
     beamWeapons[0].range = 1000.0;
@@ -79,6 +88,11 @@ SpaceShip::SpaceShip()
     beamWeapons[2].arc = 30.0;
     beamWeapons[2].direction = 180;
     beamWeapons[2].range = 2000.0;
+    
+    weaponStorage[MW_Homing] = 15;
+    weaponStorage[MW_Nuke] = 2;
+    weaponStorage[MW_Mine] = 20;
+    weaponStorage[MW_EMP] = 5;
 }
 
 void SpaceShip::draw3D()
@@ -235,6 +249,28 @@ void SpaceShip::update(float delta)
             }
         }
     }
+    
+    for(int n=0; n<maxWeaponTubes; n++)
+    {
+        if (weaponTube[n].delay > 0.0)
+        {
+            weaponTube[n].delay -= delta;
+        }else{
+            switch(weaponTube[n].state)
+            {
+            case WTS_Loading:
+                weaponTube[n].state = WTS_Loaded;
+                break;
+            case WTS_Unloading:
+                weaponTube[n].state = WTS_Empty;
+                weaponStorage[weaponTube[n].typeLoaded] ++;
+                weaponTube[n].typeLoaded = MW_None;
+                break;
+            default:
+                break;
+            }
+        }
+    }
 }
 
 P<SpaceObject> SpaceShip::getTarget()
@@ -277,8 +313,16 @@ void SpaceShip::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             EMissileWeapons type;
             packet >> tubeNr >> type;
             
-            if (tubeNr >= 0 && tubeNr < maxWeaponTubes)
-                weaponTube[tubeNr].typeLoaded = type;
+            if (tubeNr >= 0 && tubeNr < maxWeaponTubes && type > MW_None && type < MW_Count)
+            {
+                if (weaponTube[tubeNr].state == WTS_Empty && weaponStorage[type] > 0)
+                {
+                    weaponTube[tubeNr].state = WTS_Loading;
+                    weaponTube[tubeNr].delay = tubeLoadTime;
+                    weaponTube[tubeNr].typeLoaded = type;
+                    weaponStorage[type]--;
+                }
+            }
         }
         break;
     case CMD_UNLOAD_TUBE:
@@ -286,8 +330,11 @@ void SpaceShip::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             int8_t tubeNr;
             packet >> tubeNr;
             
-            if (tubeNr >= 0 && tubeNr < maxWeaponTubes)
-                weaponTube[tubeNr].typeLoaded = MW_None;
+            if (tubeNr >= 0 && tubeNr < maxWeaponTubes && weaponTube[tubeNr].state == WTS_Loaded)
+            {
+                weaponTube[tubeNr].state = WTS_Unloading;
+                weaponTube[tubeNr].delay = tubeLoadTime;
+            }
         }
         break;
     case CMD_FIRE_TUBE:
@@ -295,8 +342,11 @@ void SpaceShip::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             int8_t tubeNr;
             packet >> tubeNr;
             
-            if (tubeNr >= 0 && tubeNr < maxWeaponTubes)
+            if (tubeNr >= 0 && tubeNr < maxWeaponTubes && weaponTube[tubeNr].state == WTS_Loaded)
+            {
+                weaponTube[tubeNr].state = WTS_Empty;
                 weaponTube[tubeNr].typeLoaded = MW_None;
+            }
         }
         break;
     }

@@ -29,6 +29,9 @@ public:
     static bool toggleButton(sf::FloatRect rect, bool active, string textValue, float fontSize = 30);
     static float vslider(sf::FloatRect rect, float value, float minValue, float maxValue);
     static sf::RenderTarget* getRenderTarget() { return renderTarget; }
+
+private:
+    static void draw9Cut(sf::FloatRect rect, string texture, sf::Color color=sf::Color::White);
 };
 
 class MouseRenderer : public Renderable

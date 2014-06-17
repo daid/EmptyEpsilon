@@ -14,6 +14,13 @@ enum EMissileWeapons
     MW_EMP,
     MW_Count
 };
+enum EWeaponTubeState
+{
+    WTS_Empty,
+    WTS_Loading,
+    WTS_Loaded,
+    WTS_Unloading
+};
 
 class BeamWeapon : public sf::NonCopyable
 {
@@ -30,7 +37,8 @@ class WeaponTube : public sf::NonCopyable
 {
 public:
     EMissileWeapons typeLoaded;
-    float loadingDelay;
+    EWeaponTubeState state;
+    float delay;
 };
 
 class SpaceShip : public SpaceObject, public Updatable
@@ -54,8 +62,11 @@ public:
     float jumpDistance;
     float jumpDelay;
     
+    int8_t weaponStorage[MW_Count];
     int8_t weaponTubes;
+    float tubeLoadTime;
     WeaponTube weaponTube[maxWeaponTubes];
+    
     BeamWeapon beamWeapons[maxBeamWeapons];
     
     int32_t targetId;
@@ -89,6 +100,17 @@ static inline sf::Packet& operator >> (sf::Packet& packet, EMissileWeapons& mw)
     int8_t tmp;
     packet >> tmp;
     mw = EMissileWeapons(tmp);
+    return packet;
+}
+static inline sf::Packet& operator << (sf::Packet& packet, const EWeaponTubeState& mw)
+{
+    return packet << int8_t(mw);
+}
+static inline sf::Packet& operator >> (sf::Packet& packet, EWeaponTubeState& mw)
+{
+    int8_t tmp;
+    packet >> tmp;
+    mw = EWeaponTubeState(tmp);
     return packet;
 }
 

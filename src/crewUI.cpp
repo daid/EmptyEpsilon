@@ -29,6 +29,7 @@ void CrewUI::onGui()
             tacticalUI();
             break;
         default:
+            drawStatic();
             text(sf::FloatRect(0, 500, 1600, 100), "???", AlignCenter, 100);
             break;
         }
@@ -41,7 +42,7 @@ void CrewUI::onGui()
     {
         if (myPlayerInfo->crewPosition[n])
         {
-            if (button(sf::FloatRect(200 * offset, 0, 200, 20), getCrewPositionName(ECrewPosition(n)), 20))
+            if (toggleButton(sf::FloatRect(200 * offset, 0, 200, 20), showPosition == ECrewPosition(n), getCrewPositionName(ECrewPosition(n)), 20))
             {
                 showPosition = ECrewPosition(n);
             }
@@ -165,7 +166,7 @@ void CrewUI::tacticalUI()
 
     for(int n=0; n<MW_Count; n++)
     {
-        if (toggleButton(sf::FloatRect(10, 440 + n * 30, 200, 30), tubeLoadType == n, getMissileWeaponName(EMissileWeapons(n)), 25))
+        if (toggleButton(sf::FloatRect(10, 440 + n * 30, 200, 30), tubeLoadType == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(mySpaceship->weaponStorage[n]), 25))
         {
             if (tubeLoadType == n)
                 tubeLoadType = MW_None;
@@ -176,22 +177,27 @@ void CrewUI::tacticalUI()
     
     for(int n=0; n<mySpaceship->weaponTubes; n++)
     {
-        if (mySpaceship->weaponTube[n].typeLoaded == MW_None)
+        switch(mySpaceship->weaponTube[n].state)
         {
-            if (toggleButton(sf::FloatRect(20, 840 - 50 * n, 150, 50), tubeLoadType != MW_None, "Load", 35) && tubeLoadType != MW_None)
-            {
+        case WTS_Empty:
+            if (toggleButton(sf::FloatRect(20, 840 - 50 * n, 150, 50), tubeLoadType != MW_None && mySpaceship->weaponStorage[tubeLoadType] > 0, "Load", 35) && tubeLoadType != MW_None)
                 mySpaceship->commandLoadTube(n, tubeLoadType);
-            }
             toggleButton(sf::FloatRect(170, 840 - 50 * n, 350, 50), false, "Empty", 35);
-        }else{
+            break;
+        case WTS_Loaded:
             if (button(sf::FloatRect(20, 840 - 50 * n, 150, 50), "Unload", 35))
-            {
                 mySpaceship->commandUnloadTube(n);
-            }
             if (button(sf::FloatRect(170, 840 - 50 * n, 350, 50), getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), 35))
-            {
                 mySpaceship->commandFireTube(n);
-            }
+            break;
+        case WTS_Loading:
+            toggleButton(sf::FloatRect(20, 840 - 50 * n, 150, 50), false, "Loading", 35);
+            toggleButton(sf::FloatRect(170, 840 - 50 * n, 350, 50), false, getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), 35);
+            break;
+        case WTS_Unloading:
+            toggleButton(sf::FloatRect(20, 840 - 50 * n, 150, 50), false, "Unloading", 25);
+            toggleButton(sf::FloatRect(170, 840 - 50 * n, 350, 50), false, getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), 35);
+            break;
         }
     }
 }
