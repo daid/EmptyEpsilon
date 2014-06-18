@@ -14,6 +14,7 @@ BeamEffect::BeamEffect()
     registerMemberReplication(&sourceOffset);
     registerMemberReplication(&targetOffset);
     registerMemberReplication(&targetLocation, 1.0);
+    registerMemberReplication(&hitNormal);
 }
 
 void BeamEffect::draw3DTransparent()
@@ -32,13 +33,8 @@ void BeamEffect::draw3DTransparent()
     glVertex3f(v.x - offset.x, v.y - offset.y, targetOffset.z);
     glEnd();
     
-    P<SpaceObject> target = gameServer->getObjectById(targetId);
-    sf::Vector3f hitPos(targetLocation.x, targetLocation.y, targetOffset.z);
-    sf::Vector3f targetPos(target->getPosition().x, target->getPosition().y, 0);
-    sf::Vector3f shieldNormal = sf::normalize(targetPos - hitPos);
-    
-    sf::Vector3f side = sf::cross(shieldNormal, sf::Vector3f(0, 0, 1));
-    sf::Vector3f up = sf::cross(side, shieldNormal);
+    sf::Vector3f side = sf::cross(hitNormal, sf::Vector3f(0, 0, 1));
+    sf::Vector3f up = sf::cross(side, hitNormal);
     
     sf::Vector3f v0(v.x, v.y, targetOffset.z);
     
@@ -98,9 +94,12 @@ void BeamEffect::setTarget(P<SpaceObject> target, sf::Vector2f hitLocation)
     targetId = target->getMultiplayerId();
     float r = target->getRadius();
     targetOffset = sf::Vector3f(hitLocation.x + random(-r/2.0, r/2.0), hitLocation.y + random(-r/2.0, r/2.0), random(-r/4.0, r/4.0));
+
     if (target->hasShield())
-    {
         targetOffset = sf::normalize(targetOffset) * r;
-    }
     update(0);
+
+    sf::Vector3f hitPos(targetLocation.x, targetLocation.y, targetOffset.z);
+    sf::Vector3f targetPos(target->getPosition().x, target->getPosition().y, 0);
+    hitNormal = sf::normalize(targetPos - hitPos);
 }

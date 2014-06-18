@@ -11,6 +11,7 @@ class BeamEffect : public SpaceObject, public Updatable
     sf::Vector3f sourceOffset;
     sf::Vector3f targetOffset;
     sf::Vector2f targetLocation;
+    sf::Vector3f hitNormal;
 public:
     BeamEffect();
 
