@@ -14,7 +14,7 @@ class BeamEffect : public SpaceObject, public Updatable
 public:
     BeamEffect();
 
-    virtual void draw3D();
+    virtual void draw3DTransparent();
     virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale);
     virtual void update(float delta);
     

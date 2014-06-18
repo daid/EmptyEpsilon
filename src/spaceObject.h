@@ -22,6 +22,7 @@ public:
     float getRadius() { return objectRadius; }
     
     virtual void draw3D();
+    virtual void draw3DTransparent() {}
     virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale);
 
     virtual bool hasShield() { return false; }

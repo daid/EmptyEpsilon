@@ -38,20 +38,20 @@ void SpaceStation::draw3D()
     Mesh* m = Mesh::getMesh(t->model);
     m->render();
     glPopMatrix();
-    
+}
+
+void SpaceStation::draw3DTransparent()
+{
     if (shieldHitEffect > 0)
     {
         basicShader.setParameter("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
         sf::Shader::bind(&basicShader);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_ONE, GL_ONE);
         float f = (shields / maxShields) * shieldHitEffect;
         glColor4f(f, f, f, 1);
-        glRotatef(engine->getElapsedTime() * 180, 0, 0, 1);
+        glRotatef(engine->getElapsedTime() * 5, 0, 0, 1);
         glScalef(getRadius(), getRadius(), getRadius());
-        m = Mesh::getMesh("sphere.obj");
+        Mesh* m = Mesh::getMesh("sphere.obj");
         m->render();
-        glDisable(GL_BLEND);
     }
 }
 

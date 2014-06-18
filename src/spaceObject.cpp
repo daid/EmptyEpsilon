@@ -13,14 +13,6 @@ SpaceObject::SpaceObject(float collisionRange, string multiplayerName)
 
 void SpaceObject::draw3D()
 {
-    glBegin(GL_LINES);
-    glVertex3f(0, 0, -10);
-    glVertex3f(0, 0,  10);
-    glVertex3f(0, -50, 0);
-    glVertex3f(0,  50, 0);
-    glVertex3f(-50, 0, 0);
-    glVertex3f( 50, 0, 0);
-    glEnd();
 }
 
 void SpaceObject::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale)

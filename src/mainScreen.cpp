@@ -138,6 +138,25 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
         glPopMatrix();
     }
     sf::Shader::bind(NULL);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE, GL_ONE);
+    glDisable(GL_CULL_FACE);
+    glDepthMask(false);
+    foreach(SpaceObject, obj, spaceObjectList)
+    {
+        glPushMatrix();
+        glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
+        glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
+        glRotatef(obj->getRotation(), 0, 0, 1);
+        
+        obj->draw3DTransparent();
+        glPopMatrix();
+    }
+    glDepthMask(true);
+    glDisable(GL_BLEND);
+    glEnable(GL_CULL_FACE);
+    sf::Shader::bind(NULL);
+    glColor3f(1, 1, 1);
 
 #ifdef DEBUG
     glDisable(GL_DEPTH_TEST);

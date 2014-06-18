@@ -16,6 +16,7 @@ public:
     SpaceStation();
     
     virtual void draw3D();
+    virtual void draw3DTransparent();
     virtual void update(float delta);
     
     virtual bool hasShield() { return shields > 0; }
