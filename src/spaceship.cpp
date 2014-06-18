@@ -14,6 +14,12 @@ static const int16_t CMD_LOAD_TUBE = 0x0006;
 static const int16_t CMD_UNLOAD_TUBE = 0x0007;
 static const int16_t CMD_FIRE_TUBE = 0x0008;
 
+#include "scriptInterface.h"
+REGISTER_SCRIPT_CLASS(SpaceShip)
+{
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setShipTemplate);
+}
+
 REGISTER_MULTIPLAYER_CLASS(SpaceShip, "SpaceShip");
 SpaceShip::SpaceShip()
 : SpaceObject(50, "SpaceShip")
@@ -93,6 +99,12 @@ SpaceShip::SpaceShip()
     weaponStorage[MW_Nuke] = 2;
     weaponStorage[MW_Mine] = 20;
     weaponStorage[MW_EMP] = 5;
+}
+
+void SpaceShip::setShipTemplate(string templateName)
+{
+    this->templateName = templateName;
+    shipTemplate = ShipTemplate::getTemplate(templateName);
 }
 
 void SpaceShip::draw3D()
@@ -234,17 +246,21 @@ void SpaceShip::update(float delta)
         float angle = sf::vector2ToAngle(diff);
         for(int n=0; n<maxBeamWeapons; n++)
         {
-            if (beamWeapons[n].cooldown <= 0.0 && distance < beamWeapons[n].range)
+            if (target && beamWeapons[n].cooldown <= 0.0 && distance < beamWeapons[n].range)
             {
                 float angleDiff = angle - (beamWeapons[n].direction + getRotation());
                 while(angleDiff > 180) angleDiff -= 360;
                 while(angleDiff < -180) angleDiff += 360;
                 if (abs(angleDiff) < beamWeapons[n].arc / 2.0)
                 {
+                    sf::Vector2f hitLocation = target->getPosition() - (diff / distance) * target->getRadius();
+                    
                     beamWeapons[n].cooldown = beamWeapons[n].cycleTime;
                     P<BeamEffect> effect = new BeamEffect();
                     effect->setSource(this, shipTemplate->beamPosition[n] * shipTemplate->scale);
-                    effect->setTarget(target);
+                    effect->setTarget(target, hitLocation);
+                    
+                    target->takeDamage(30, hitLocation, DT_Energy);
                 }
             }
         }

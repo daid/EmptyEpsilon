@@ -6,6 +6,7 @@ PVector<SpaceObject> spaceObjectList;
 SpaceObject::SpaceObject(float collisionRange, string multiplayerName)
 : Collisionable(collisionRange), MultiplayerObject(multiplayerName)
 {
+    objectRadius = collisionRange;
     spaceObjectList.push_back(this);
     registerCollisionableReplication();
 }

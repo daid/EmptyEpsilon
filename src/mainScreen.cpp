@@ -105,6 +105,7 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
         glEnd();
         glPopMatrix();
     }
+    glColor4f(1,1,1,1);
     glDisable(GL_BLEND);
     sf::Texture::bind(NULL);
     glDepthMask(true);

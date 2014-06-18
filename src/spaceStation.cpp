@@ -4,18 +4,31 @@
 #include "mesh.h"
 #include "main.h"
 
+#include "scriptInterface.h"
+REGISTER_SCRIPT_CLASS(SpaceStation)
+{
+}
+
 REGISTER_MULTIPLAYER_CLASS(SpaceStation, "SpaceStation");
 SpaceStation::SpaceStation()
-: SpaceObject(200, "SpaceStation")
+: SpaceObject(300, "SpaceStation")
 {
     setCollisionBox(sf::Vector2f(400, 400));
     setCollisionPhysics(true, true);
+    
+    shields = maxShields;
+    hullStrength = maxHullStrength;
+    
+    registerMemberReplication(&shields, 0.5);
+    registerMemberReplication(&shieldHitEffect, 0.5);
+    shieldHitEffect = 0.0;
 }
 
 void SpaceStation::draw3D()
 {
     P<ShipTemplate> t = ShipTemplate::getTemplate("small-station");
 
+    glPushMatrix();
     glTranslatef(0, 0, 50);
     glScalef(t->scale, t->scale, t->scale);
     objectShader.setParameter("baseMap", *textureManager.getTexture(t->colorTexture));
@@ -24,8 +37,51 @@ void SpaceStation::draw3D()
     sf::Shader::bind(&objectShader);
     Mesh* m = Mesh::getMesh(t->model);
     m->render();
+    glPopMatrix();
+    
+    if (shieldHitEffect > 0)
+    {
+        basicShader.setParameter("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
+        sf::Shader::bind(&basicShader);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_ONE, GL_ONE);
+        float f = (shields / maxShields) * shieldHitEffect;
+        glColor4f(f, f, f, 1);
+        glRotatef(engine->getElapsedTime() * 180, 0, 0, 1);
+        glScalef(getRadius(), getRadius(), getRadius());
+        m = Mesh::getMesh("sphere.obj");
+        m->render();
+        glDisable(GL_BLEND);
+    }
 }
 
 void SpaceStation::update(float delta)
 {
+    if (shields < maxShields)
+    {
+        shields += delta * shieldRechargeRate;
+        if (shields > maxShields)
+            shields = maxShields;
+    }
+    if (shieldHitEffect > 0)
+    {
+        shieldHitEffect -= delta;
+    }
+}
+
+void SpaceStation::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type)
+{
+    shields -= damageAmount;
+    if (shields < 0)
+    {
+        if (type != DT_EMP)
+        {
+            hullStrength -= damageAmount;
+            if (hullStrength <= 0.0)
+                destroy();
+        }
+        shields = 0;
+    }else{
+        shieldHitEffect = 1.0;
+    }
 }

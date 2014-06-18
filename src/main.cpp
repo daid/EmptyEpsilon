@@ -3,6 +3,7 @@
 #include "main.h"
 
 sf::Shader objectShader;
+sf::Shader basicShader;
 sf::Font mainFont;
 RenderLayer* backgroundLayer;
 RenderLayer* objectLayer;
@@ -15,6 +16,7 @@ int main(int argc, char** argv)
     new Engine();
     new DirectoryResourceProvider("resources/");
     textureManager.setDefaultSmooth(true);
+    textureManager.setDefaultRepeated(true);
 
     //Setup the rendering layers.
     backgroundLayer = new RenderLayer();
@@ -37,6 +39,9 @@ int main(int argc, char** argv)
     P<ResourceStream> vertexStream = getResourceStream("objectShader.vert");
     P<ResourceStream> fragmentStream = getResourceStream("objectShader.frag");
     objectShader.loadFromStream(**vertexStream, **fragmentStream);
+    vertexStream = getResourceStream("basicShader.vert");
+    fragmentStream = getResourceStream("basicShader.frag");
+    basicShader.loadFromStream(**vertexStream, **fragmentStream);
     
     P<ScriptObject> shipTemplatesScript = new ScriptObject("shipTemplates.lua");
     shipTemplatesScript->destroy();

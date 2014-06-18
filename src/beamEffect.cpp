@@ -1,6 +1,7 @@
 #include <SFML/OpenGL.hpp>
 #include "beamEffect.h"
 #include "spaceship.h"
+#include "mesh.h"
 
 REGISTER_MULTIPLAYER_CLASS(BeamEffect, "BeamEffect");
 BeamEffect::BeamEffect()
@@ -62,9 +63,14 @@ void BeamEffect::setSource(P<SpaceObject> source, sf::Vector3f offset)
     update(0);
 }
 
-void BeamEffect::setTarget(P<SpaceObject> target)
+void BeamEffect::setTarget(P<SpaceObject> target, sf::Vector2f hitLocation)
 {
     targetId = target->getMultiplayerId();
-    targetOffset = sf::Vector3f(random(-40, 40), random(-40, 40), random(-40, 40));
+    targetOffset = sf::Vector3f(hitLocation.x + random(-20, 20), hitLocation.y + random(-20, 20), random(-10, 10));
+    if (target->hasShield())
+    {
+        float r = target->getRadius();
+        targetOffset = sf::normalize(targetOffset) * r;
+    }
     update(0);
 }

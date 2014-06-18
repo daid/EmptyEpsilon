@@ -77,6 +77,8 @@ public:
     virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale);
     virtual void update(float delta);
     
+    void setShipTemplate(string templateName);
+    
     P<SpaceObject> getTarget();
     
     void onReceiveCommand(int32_t clientId, sf::Packet& packet);
