@@ -2,6 +2,7 @@
 #include "mainMenus.h"
 #include "main.h"
 
+sf::Vector3f cameraPosition;
 sf::Shader objectShader;
 sf::Shader basicShader;
 sf::Font mainFont;

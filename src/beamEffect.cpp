@@ -22,26 +22,35 @@ void BeamEffect::draw3DTransparent()
     sf::Shader::bind(NULL);
     sf::Texture::bind(NULL);
     
-    sf::Vector2f v = targetLocation - getPosition();
-    sf::Vector2f normal = sf::normalize(v);
-    sf::Vector2f offset(normal.y * 4.0f, -normal.x * 4.0f);
+    glTranslatef(-getPosition().x, -getPosition().y, 0);
+    sf::Vector3f startPoint(getPosition().x, getPosition().y, sourceOffset.z);
+    sf::Vector3f endPoint(targetLocation.x, targetLocation.y, targetOffset.z);
+    sf::Vector3f eyeNormal = sf::normalize(sf::cross(cameraPosition - startPoint, endPoint - startPoint));
+    
     glColor3f(lifetime, lifetime, lifetime);
-    glBegin(GL_QUADS);
-    glVertex3f(v.x + offset.x, v.y + offset.y, targetOffset.z);
-    glVertex3f(offset.x, offset.y, sourceOffset.z);
-    glVertex3f(-offset.x, -offset.y, sourceOffset.z);
-    glVertex3f(v.x - offset.x, v.y - offset.y, targetOffset.z);
-    glEnd();
+    {
+        sf::Vector3f v0 = startPoint + eyeNormal * 4.0f;
+        sf::Vector3f v1 = endPoint + eyeNormal * 4.0f;
+        sf::Vector3f v2 = endPoint - eyeNormal * 4.0f;
+        sf::Vector3f v3 = startPoint - eyeNormal * 4.0f;
+        glBegin(GL_QUADS);
+        glVertex3f(v0.x, v0.y, v0.z);
+        glVertex3f(v1.x, v1.y, v1.z);
+        glVertex3f(v2.x, v2.y, v2.z);
+        glVertex3f(v3.x, v3.y, v3.z);
+        glEnd();
+    }
     
     sf::Vector3f side = sf::cross(hitNormal, sf::Vector3f(0, 0, 1));
     sf::Vector3f up = sf::cross(side, hitNormal);
     
-    sf::Vector3f v0(v.x, v.y, targetOffset.z);
+    sf::Vector3f v0(targetLocation.x, targetLocation.y, targetOffset.z);
     
-    sf::Vector3f v1 = v0 + side * 20.0f + up * 20.0f;
-    sf::Vector3f v2 = v0 - side * 20.0f + up * 20.0f;
-    sf::Vector3f v3 = v0 - side * 20.0f - up * 20.0f;
-    sf::Vector3f v4 = v0 + side * 20.0f - up * 20.0f;
+    float ring_size = Tween<float>::easeOutQuad(lifetime, 1.0, 0.0, 10.0f, 80.0f);
+    sf::Vector3f v1 = v0 + side * ring_size + up * ring_size;
+    sf::Vector3f v2 = v0 - side * ring_size + up * ring_size;
+    sf::Vector3f v3 = v0 - side * ring_size - up * ring_size;
+    sf::Vector3f v4 = v0 + side * ring_size - up * ring_size;
     
     basicShader.setParameter("textureMap", *textureManager.getTexture("fire_ring.png"));
     sf::Shader::bind(&basicShader);

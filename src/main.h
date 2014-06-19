@@ -5,6 +5,7 @@
 
 #define VERSION_NUMBER 0x0000
 
+extern sf::Vector3f cameraPosition;
 extern sf::Shader objectShader;
 extern sf::Shader basicShader;
 extern sf::Font mainFont;

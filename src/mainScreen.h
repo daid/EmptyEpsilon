@@ -6,7 +6,6 @@
 
 class MainScreenUI : public MainUI
 {
-    sf::Vector3f cameraPosition;
 public:
     MainScreenUI();
     

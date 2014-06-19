@@ -1,6 +1,7 @@
 #include <SFML/OpenGL.hpp>
 #include "mainScreen.h"
 #include "shipSelectionScreen.h"
+#include "main.h"
 
 MainScreenUI::MainScreenUI()
 {
