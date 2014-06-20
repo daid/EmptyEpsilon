@@ -80,7 +80,7 @@ void BeamEffect::update(float delta)
     if (source)
         setPosition(source->getPosition() + rotateVector(sf::Vector2f(sourceOffset.x, sourceOffset.y), source->getRotation()));
     if (target)
-        targetLocation = target->getPosition() + rotateVector(sf::Vector2f(targetOffset.x, targetOffset.y), target->getRotation());
+        targetLocation = target->getPosition() + sf::Vector2f(targetOffset.x, targetOffset.y);
     
     lifetime -= delta;
     if (lifetime < 0)
@@ -98,6 +98,7 @@ void BeamEffect::setTarget(P<SpaceObject> target, sf::Vector2f hitLocation)
 {
     targetId = target->getMultiplayerId();
     float r = target->getRadius();
+    hitLocation -= target->getPosition();
     targetOffset = sf::Vector3f(hitLocation.x + random(-r/2.0, r/2.0), hitLocation.y + random(-r/2.0, r/2.0), random(-r/4.0, r/4.0));
 
     if (target->hasShield())

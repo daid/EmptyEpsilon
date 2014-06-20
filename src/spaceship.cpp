@@ -42,7 +42,9 @@ SpaceShip::SpaceShip()
     impulseMaxSpeed = 600.0;
     warpSpeedPerWarpLevel = 1000.0;
     targetId = -1;
+    hull_strength = hull_max = 70;
     front_shield = rear_shield = front_shield_max = rear_shield_max = 50;
+    front_shield_hit_effect = rear_shield_hit_effect = 0;
     
     registerMemberReplication(&targetRotation);
     registerMemberReplication(&impulseRequest);
@@ -117,6 +119,7 @@ void SpaceShip::setShipTemplate(string templateName)
         beamWeapons[n].damage = shipTemplate->beams[n].damage;
     }
     weaponTubes = shipTemplate->weaponTubes;
+    hull_strength = hull_max = shipTemplate->hull;
     front_shield = shipTemplate->frontShields;
     rear_shield = shipTemplate->rearShields;
     front_shield_max = shipTemplate->frontShields;
@@ -220,6 +223,18 @@ void SpaceShip::update(float delta)
         setRadius(shipTemplate->radius);
     }
 
+    if (front_shield < front_shield_max)
+    {
+        front_shield += delta * shield_recharge_rate;
+        if (front_shield > front_shield_max)
+            front_shield = front_shield_max;
+    }
+    if (rear_shield < front_shield_max)
+    {
+        rear_shield += delta * shield_recharge_rate;
+        if (rear_shield > rear_shield_max)
+            rear_shield = rear_shield_max;
+    }
     if (front_shield_hit_effect > 0)
         front_shield_hit_effect -= delta;
     if (rear_shield_hit_effect > 0)
@@ -375,9 +390,9 @@ void SpaceShip::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDam
     {
         if (type != DT_EMP)
         {
-            //hullStrength -= damageAmount;
-            //if (hullStrength <= 0.0)
-            //    destroy();
+            hull_strength -= -(*shield);
+            if (hull_strength <= 0.0)
+                destroy();
         }
         *shield = 0.0;
     }else{

@@ -12,6 +12,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeam);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubePosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubes);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setHull);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShields);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSpeed);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWarpSpeed);
@@ -49,6 +50,7 @@ ShipTemplate::ShipTemplate()
     }
     radius = 50.0;
     weaponTubes = 0;
+    hull = 70;
     frontShields = 0;
     rearShields = 0.0;
     impulseSpeed = 500.0;

@@ -38,6 +38,7 @@ public:
     BeamTemplate beams[maxBeamWeapons];
     int weaponTubes;
     sf::Vector2f tubePosition[maxWeaponTubes];
+    float hull;
     float frontShields, rearShields;
     float impulseSpeed, turnSpeed, warpSpeed;
     bool jumpDrive, cloaking;
@@ -53,6 +54,7 @@ public:
     void setBeam(int index, float arc, float direction, float range, float cycle_time, float damage);
     void setTubePosition(int index, sf::Vector2f position);
     void setTubes(int amount) { weaponTubes = std::min(maxWeaponTubes, amount); }
+    void setHull(float amount) { hull = amount; }
     void setShields(float front, float rear) { frontShields = front; rearShields = rear; }
     void setSpeed(float impulse, float turn) { impulseSpeed = impulse; turnSpeed = turn; }
     void setWarpSpeed(float warp) { warpSpeed = warp; }

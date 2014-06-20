@@ -35,6 +35,7 @@ public:
 
 class SpaceShip : public SpaceObject, public Updatable
 {
+    const static float shield_recharge_rate = 2.0f;
 public:
     string templateName;
     P<ShipTemplate> shipTemplate;
@@ -61,6 +62,7 @@ public:
     
     BeamWeapon beamWeapons[maxBeamWeapons];
     
+    float hull_strength, hull_max;
     float front_shield, rear_shield;
     float front_shield_max, rear_shield_max;
     float front_shield_hit_effect, rear_shield_hit_effect;

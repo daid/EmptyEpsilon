@@ -10,6 +10,7 @@ template:setTubePosition(1, 0, 18, -3.5)
 template:setBeam(0, 90, -15, 1000.0, 6.0, 12)
 template:setBeam(1, 90,  15, 1000.0, 6.0, 12)
 template:setTubes(2) -- Amount of torpedo tubes
+template:setHull(70)
 template:setShields(80, 80)
 template:setSpeed(600, 10)
 template:setWarpSpeed(1000)
@@ -26,6 +27,7 @@ template:setBeamPosition(0, 0, 23, -1.8)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 60, 0, 1000.0, 4.0, 1)
 template:setTubes(0) -- Amount of torpedo tubes
+template:setHull(50)
 template:setShields(30, 30)
 template:setSpeed(800, 30)
 template:setWarpSpeed(0)

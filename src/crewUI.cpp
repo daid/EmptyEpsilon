@@ -167,6 +167,7 @@ void CrewUI::weaponsUI()
     mySpaceship->drawRadar(*window, sf::Vector2f(800, 450), 400.0f / radarDistance, false);
     drawHeadingCircle(sf::Vector2f(800, 450), 400);
     //!Radar
+    text(sf::FloatRect(10, 100, 200, 20), "Shields: " + string(int(100 * mySpaceship->front_shield / mySpaceship->front_shield_max)) + "/" + string(int(100 * mySpaceship->rear_shield / mySpaceship->rear_shield_max)), AlignLeft, 20);
 
     for(int n=0; n<MW_Count; n++)
     {
