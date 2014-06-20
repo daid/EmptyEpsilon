@@ -29,6 +29,22 @@ void MainUI::onGui()
     }
 }
 
+void MainUI::mainScreenSelectGUI()
+{
+    if (button(sf::FloatRect(1400, 40, 200, 40), "Front", 30))
+        mySpaceship->commandMainScreenSetting(MSS_Front);
+    if (button(sf::FloatRect(1400, 80, 200, 40), "Back", 30))
+        mySpaceship->commandMainScreenSetting(MSS_Back);
+    if (button(sf::FloatRect(1400, 120, 200, 40), "Left", 30))
+        mySpaceship->commandMainScreenSetting(MSS_Left);
+    if (button(sf::FloatRect(1400, 160, 200, 40), "Right", 30))
+        mySpaceship->commandMainScreenSetting(MSS_Right);
+    if (button(sf::FloatRect(1400, 200, 200, 40), "Tactical", 30))
+        mySpaceship->commandMainScreenSetting(MSS_Tactical);
+    if (button(sf::FloatRect(1400, 240, 200, 40), "Long-Range", 30))
+        mySpaceship->commandMainScreenSetting(MSS_LongRange);
+}
+
 void MainUI::drawStatic(float alpha)
 {
     sf::Sprite staticDisplay;

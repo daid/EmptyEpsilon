@@ -12,9 +12,19 @@ MainScreenUI::MainScreenUI()
 void MainScreenUI::onGui()
 {
     if (mySpaceship)
-        render3dView(*getRenderTarget());
-    else
+    {
+        switch(mySpaceship->mainScreenSetting)
+        {
+        case MSS_Front:
+        case MSS_Back:
+        case MSS_Left:
+        case MSS_Right:
+            render3dView(*getRenderTarget());
+            break;
+        }
+    }else{
         drawStatic();
+    }
     
     MainUI::onGui();
 }
@@ -56,6 +66,13 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         viewRotation += 45;
 #endif
+    switch(mySpaceship->mainScreenSetting)
+    {
+    case MSS_Front: break;
+    case MSS_Back: viewRotation += 180; break;
+    case MSS_Left: viewRotation -= 90; break;
+    case MSS_Right: viewRotation += 90; break;
+    }
     glRotatef(-viewRotation, 0, 0, 1);
 
     sf::Texture::bind(textureManager.getTexture("Stars"), sf::Texture::Pixels);

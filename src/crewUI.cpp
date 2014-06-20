@@ -25,9 +25,11 @@ void CrewUI::onGui()
         {
         case helmsOfficer:
             helmsUI();
+            mainScreenSelectGUI();
             break;
         case weaponsOfficer:
             weaponsUI();
+            mainScreenSelectGUI();
             break;
         case scienceOfficer:
             scienceUI();

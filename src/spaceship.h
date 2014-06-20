@@ -12,6 +12,15 @@ enum EWeaponTubeState
     WTS_Loaded,
     WTS_Unloading
 };
+enum EMainScreenSetting
+{
+    MSS_Front,
+    MSS_Back,
+    MSS_Left,
+    MSS_Right,
+    MSS_Tactical,
+    MSS_LongRange
+};
 
 class BeamWeapon : public sf::NonCopyable
 {
@@ -39,6 +48,7 @@ class SpaceShip : public SpaceObject, public Updatable
 public:
     string templateName;
     P<ShipTemplate> shipTemplate;
+    EMainScreenSetting mainScreenSetting;
     
     float targetRotation;
     float impulseRequest;
@@ -93,6 +103,7 @@ public:
     void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
     void commandUnloadTube(int8_t tubeNumber);
     void commandFireTube(int8_t tubeNumber);
+    void commandMainScreenSetting(EMainScreenSetting mainScreen);
 };
 
 string getMissileWeaponName(EMissileWeapons missile);
@@ -116,6 +127,17 @@ static inline sf::Packet& operator >> (sf::Packet& packet, EWeaponTubeState& mw)
     int8_t tmp;
     packet >> tmp;
     mw = EWeaponTubeState(tmp);
+    return packet;
+}
+static inline sf::Packet& operator << (sf::Packet& packet, const EMainScreenSetting& e)
+{
+    return packet << int8_t(e);
+}
+static inline sf::Packet& operator >> (sf::Packet& packet, EMainScreenSetting& e)
+{
+    int8_t tmp;
+    packet >> tmp;
+    e = EMainScreenSetting(tmp);
     return packet;
 }
 

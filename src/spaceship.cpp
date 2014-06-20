@@ -14,6 +14,7 @@ static const int16_t CMD_SET_TARGET = 0x0005;
 static const int16_t CMD_LOAD_TUBE = 0x0006;
 static const int16_t CMD_UNLOAD_TUBE = 0x0007;
 static const int16_t CMD_FIRE_TUBE = 0x0008;
+static const int16_t CMD_SET_MAIN_SCREEN_SETTING = 0x0009;
 
 #include "scriptInterface.h"
 REGISTER_SCRIPT_CLASS(SpaceShip)
@@ -27,6 +28,7 @@ SpaceShip::SpaceShip()
 {
     setCollisionPhysics(true, false);
 
+    mainScreenSetting = MSS_Front;
     targetRotation = getRotation();
     impulseRequest = 0;
     currentImpulse = 0;
@@ -46,6 +48,7 @@ SpaceShip::SpaceShip()
     front_shield = rear_shield = front_shield_max = rear_shield_max = 50;
     front_shield_hit_effect = rear_shield_hit_effect = 0;
     
+    registerMemberReplication(&mainScreenSetting);
     registerMemberReplication(&targetRotation);
     registerMemberReplication(&impulseRequest);
     registerMemberReplication(&currentImpulse);
@@ -487,6 +490,9 @@ void SpaceShip::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             }
         }
         break;
+    case CMD_SET_MAIN_SCREEN_SETTING:
+        packet >> mainScreenSetting;
+        break;
     }
 }
 
@@ -546,6 +552,13 @@ void SpaceShip::commandFireTube(int8_t tubeNumber)
 {
     sf::Packet packet;
     packet << CMD_FIRE_TUBE << tubeNumber;
+    sendCommand(packet);
+}
+
+void SpaceShip::commandMainScreenSetting(EMainScreenSetting mainScreen)
+{
+    sf::Packet packet;
+    packet << CMD_SET_MAIN_SCREEN_SETTING << mainScreen;
     sendCommand(packet);
 }
 
