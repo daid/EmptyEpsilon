@@ -8,7 +8,8 @@ class MainUI : public GUI
 public:
     virtual void onGui();
     
-    void drawStatic();
+    void drawStatic(float alpha=1.0);
+    void drawRaderBackground(sf::Vector2f position, float size, float scale);
     void drawHeadingCircle(sf::Vector2f position, float size);
 };
 

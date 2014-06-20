@@ -36,7 +36,7 @@ void GUI::render(sf::RenderTarget& window)
     init = false;
 }
 
-void GUI::text(sf::FloatRect rect, string text, EAlign align, float fontSize)
+void GUI::text(sf::FloatRect rect, string text, EAlign align, float fontSize, sf::Color color)
 {
     sf::Text textElement(text, mainFont, fontSize);
     switch(align)
@@ -51,6 +51,7 @@ void GUI::text(sf::FloatRect rect, string text, EAlign align, float fontSize)
         textElement.setPosition(rect.left + rect.width / 2.0 - textElement.getLocalBounds().width / 2.0 - textElement.getLocalBounds().left, rect.top + rect.height / 2.0 - textElement.getLocalBounds().height / 2.0 - textElement.getLocalBounds().top);
         break;
     }
+    textElement.setColor(color);
     renderTarget->draw(textElement);
 }
 

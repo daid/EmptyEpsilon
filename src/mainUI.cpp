@@ -29,7 +29,7 @@ void MainUI::onGui()
     }
 }
 
-void MainUI::drawStatic()
+void MainUI::drawStatic(float alpha)
 {
     sf::Sprite staticDisplay;
     textureManager.getTexture("noise.png")->setRepeated(true);
@@ -38,7 +38,44 @@ void MainUI::drawStatic()
     staticDisplay.setOrigin(sf::Vector2f(1024, 1024));
     staticDisplay.setScale(3.0, 3.0);
     staticDisplay.setPosition(sf::Vector2f(random(-512, 512), random(-512, 512)));
+    staticDisplay.setColor(sf::Color(255, 255, 255, 255*alpha));
     getRenderTarget()->draw(staticDisplay);
+}
+
+void MainUI::drawRaderBackground(sf::Vector2f position, float size, float scale)
+{
+    const static float sector_size = 20000;
+    sf::Vector2f player_position = mySpaceship->getPosition();
+    int sector_x_min = int((player_position.x - (size / scale)) / sector_size) - 1;
+    int sector_x_max = int((player_position.x + (size / scale)) / sector_size);
+    int sector_y_min = int((player_position.y - (size / scale)) / sector_size) - 1;
+    int sector_y_max = int((player_position.y + (size / scale)) / sector_size);
+    sf::VertexArray lines_x(sf::Lines, 2 * (sector_x_max - sector_x_min + 1));
+    sf::VertexArray lines_y(sf::Lines, 2 * (sector_y_max - sector_y_min + 1));
+    sf::Color color(64, 64, 128);
+    for(int sector_x = sector_x_min; sector_x <= sector_x_max; sector_x++)
+    {
+        float x = position.x + ((sector_x * sector_size) - player_position.x) * scale;
+        lines_x[(sector_x - sector_x_min)*2].position = sf::Vector2f(x, 0);
+        lines_x[(sector_x - sector_x_min)*2].color = color;
+        lines_x[(sector_x - sector_x_min)*2+1].position = sf::Vector2f(x, 900);
+        lines_x[(sector_x - sector_x_min)*2+1].color = color;
+        for(int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
+        {
+            float y = position.y + ((sector_y * sector_size) - player_position.y) * scale;
+            text(sf::FloatRect(x, y, 30, 30), string(char('M' + sector_y)) + string(sector_x), AlignLeft, 30, sf::Color(64, 64, 128));
+        }
+    }
+    for(int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
+    {
+        float y = position.y + ((sector_y * sector_size) - player_position.y) * scale;
+        lines_y[(sector_y - sector_y_min)*2].position = sf::Vector2f(0, y);
+        lines_y[(sector_y - sector_y_min)*2].color = color;
+        lines_y[(sector_y - sector_y_min)*2+1].position = sf::Vector2f(1600, y);
+        lines_y[(sector_y - sector_y_min)*2+1].color = color;
+    }
+    getRenderTarget()->draw(lines_x);
+    getRenderTarget()->draw(lines_y);
 }
 
 void MainUI::drawHeadingCircle(sf::Vector2f position, float size)
