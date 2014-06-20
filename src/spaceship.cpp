@@ -63,6 +63,8 @@ SpaceShip::SpaceShip()
     registerMemberReplication(&rear_shield, 1.0);
     registerMemberReplication(&front_shield_max);
     registerMemberReplication(&rear_shield_max);
+    registerMemberReplication(&front_shield_hit_effect, 0.5);
+    registerMemberReplication(&rear_shield_hit_effect, 0.5);
     
     for(int n=0; n<maxBeamWeapons; n++)
     {
@@ -144,6 +146,28 @@ void SpaceShip::draw3D()
     m->render();
 }
 
+void SpaceShip::draw3DTransparent()
+{
+    if (front_shield_hit_effect > 0 || rear_shield_hit_effect > 0)
+    {
+        basicShader.setParameter("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
+        sf::Shader::bind(&basicShader);
+        float f = (front_shield / front_shield_max) * front_shield_hit_effect;
+        glColor4f(f, f, f, 1);
+        glRotatef(engine->getElapsedTime() * 5, 0, 1, 0);
+        glScalef(getRadius() * 1.2, getRadius() * 1.2, getRadius() * 1.2);
+        Mesh* m = Mesh::getMesh("half_sphere.obj");
+        if (front_shield_hit_effect > 0.0)
+            m->render();
+
+        f = (rear_shield / rear_shield_max) * rear_shield_hit_effect;
+        glColor4f(f, f, f, 1);
+        glScalef(1, -1, 1);
+        if (rear_shield_hit_effect > 0.0)
+            m->render();
+    }
+}
+
 void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
     if (!long_range)
@@ -195,6 +219,11 @@ void SpaceShip::update(float delta)
         shipTemplate = ShipTemplate::getTemplate(templateName);
         setRadius(shipTemplate->radius);
     }
+
+    if (front_shield_hit_effect > 0)
+        front_shield_hit_effect -= delta;
+    if (rear_shield_hit_effect > 0)
+        rear_shield_hit_effect -= delta;
 
     float rotationDiff = targetRotation - getRotation();
     if (rotationDiff < -180)
@@ -328,6 +357,34 @@ P<SpaceObject> SpaceShip::getTarget()
     return gameClient->getObjectById(targetId);
 }
 
+void SpaceShip::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type)
+{
+    float angle = sf::vector2ToAngle(getPosition() - damageLocation);
+    bool front_hit = !(angle > -90 && angle < 90);
+    float* shield = &front_shield;
+    float* shield_hit_effect = &front_shield_hit_effect;
+    if (!front_hit)
+    {
+        shield = &rear_shield;
+        shield_hit_effect = &rear_shield_hit_effect;
+    }
+    
+    *shield -= damageAmount;
+
+    if (*shield < 0)
+    {
+        if (type != DT_EMP)
+        {
+            //hullStrength -= damageAmount;
+            //if (hullStrength <= 0.0)
+            //    destroy();
+        }
+        *shield = 0.0;
+    }else{
+        *shield_hit_effect = 1.0;
+    }
+}
+
 void SpaceShip::onReceiveCommand(int32_t clientId, sf::Packet& packet)
 {
     int16_t command;
@@ -392,6 +449,7 @@ void SpaceShip::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             
             if (tubeNr >= 0 && tubeNr < maxWeaponTubes && weaponTube[tubeNr].state == WTS_Loaded)
             {
+                sf::Vector2f fireLocation = getPosition() + sf::rotateVector(shipTemplate->tubePosition[tubeNr], getRotation()) * shipTemplate->scale;
                 switch(weaponTube[tubeNr].typeLoaded)
                 {
                 case MW_Homing:
@@ -399,7 +457,7 @@ void SpaceShip::onReceiveCommand(int32_t clientId, sf::Packet& packet)
                         P<HomingMissile> missile = new HomingMissile();
                         missile->owner = this;
                         missile->target_id = targetId;
-                        missile->setPosition(getPosition());
+                        missile->setPosition(fireLocation);
                         missile->setRotation(getRotation());
                     }
                     break;

@@ -4,6 +4,8 @@ template = ShipTemplate():setName("player-cruiser"):setMesh("space_frigate_6.obj
 -- Visual positions of the beams (blender: Y, -X, Z)
 template:setBeamPosition(0, -8, -1.6, -2)
 template:setBeamPosition(1,  8, -1.6, -2)
+template:setTubePosition(0, 0, 18, -3.5)
+template:setTubePosition(1, 0, 18, -3.5)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 90, -15, 1000.0, 6.0, 12)
 template:setBeam(1, 90,  15, 1000.0, 6.0, 12)

@@ -10,6 +10,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadius);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamPosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeam);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubePosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubes);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShields);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSpeed);
@@ -93,6 +94,14 @@ void ShipTemplate::setBeam(int index, float arc, float direction, float range, f
     beams[index].range = range;
     beams[index].cycle_time = cycle_time;
     beams[index].damage = damage;
+}
+
+
+void ShipTemplate::setTubePosition(int index, sf::Vector2f position)
+{
+    if (index < 0 || index > maxWeaponTubes)
+        return;
+    tubePosition[index] = position;
 }
 
 P<ShipTemplate> ShipTemplate::getTemplate(string name)
