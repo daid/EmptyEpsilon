@@ -18,6 +18,7 @@ int main(int argc, char** argv)
     new DirectoryResourceProvider("resources/");
     textureManager.setDefaultSmooth(true);
     textureManager.setDefaultRepeated(true);
+    textureManager.setAutoSprite(false);
 
     //Setup the rendering layers.
     backgroundLayer = new RenderLayer();

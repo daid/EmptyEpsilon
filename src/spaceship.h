@@ -5,15 +5,6 @@
 #include "spaceObject.h"
 #include "shipTemplate.h"
 
-enum EMissileWeapons
-{
-    MW_None = -1,
-    MW_Homing = 0,
-    MW_Nuke,
-    MW_Mine,
-    MW_EMP,
-    MW_Count
-};
 enum EWeaponTubeState
 {
     WTS_Empty,
@@ -30,6 +21,7 @@ public:
     float direction;
     float range;
     float cycleTime;
+    float damage;//Server side only
     //Beam runtime state
     float cooldown;
 };
@@ -44,19 +36,19 @@ public:
 class SpaceShip : public SpaceObject, public Updatable
 {
 public:
-    const static int maxBeamWeapons = 16;
-    const static int maxWeaponTubes = 16;
-    
     string templateName;
     P<ShipTemplate> shipTemplate;
     
     float targetRotation;
     float impulseRequest;
     float currentImpulse;
+    float rotationSpeed;
+    float impulseMaxSpeed;
     
     bool hasWarpdrive;
     int8_t warpRequest;
     float currentWarp;
+    float warpSpeedPerWarpLevel;
     
     bool hasJumpdrive;
     float jumpDistance;

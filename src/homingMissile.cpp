@@ -1,27 +1,27 @@
 #include <SFML/OpenGL.hpp>
 #include "homingMissile.h"
 
-REGISTER_MULTIPLAYER_CLASS(HomingMissle, "HomingMissile");
-HomingMissle::HomingMissle()
-: SpaceObject(2, "HomingMissile")
+REGISTER_MULTIPLAYER_CLASS(HomingMissile, "HomingMissile");
+HomingMissile::HomingMissile()
+: SpaceObject(10, "HomingMissile")
 {
     lifetime = totalLifetime;
     registerMemberReplication(&target_id);
 }
 
-void HomingMissle::draw3D()
+void HomingMissile::draw3D()
 {
     glBegin(GL_LINES);
     glVertex3f(0, 0, 0);
-    glVertex3f(2, 0, 0);
+    glVertex3f(10, 0, 0);
     glEnd();
 }
 
-void HomingMissle::draw3DTransparent()
+void HomingMissile::draw3DTransparent()
 {
 }
 
-void HomingMissle::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void HomingMissile::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
     if (long_range) return;
 
@@ -34,10 +34,40 @@ void HomingMissle::drawRadar(sf::RenderTarget& window, sf::Vector2f position, fl
     window.draw(objectSprite);
 }
 
-void HomingMissle::update(float delta)
+void HomingMissile::update(float delta)
 {
+    P<SpaceObject> target;
+    if (gameServer)
+        target = gameServer->getObjectById(target_id);
+    else
+        target = gameClient->getObjectById(target_id);
+    if (target)
+    {
+        float angleDiff = sf::vector2ToAngle(target->getPosition() - getPosition()) - getRotation();
+        while(angleDiff < -180) angleDiff += 360;
+        while(angleDiff > 180) angleDiff -= 360;
+        
+        if (angleDiff > 1.0)
+            setAngularVelocity(turnSpeed);
+        else if (angleDiff < -1.0)
+            setAngularVelocity(turnSpeed * -1.0f);
+        else
+            setAngularVelocity(angleDiff * turnSpeed);
+    }
+    
     lifetime -= delta;
     if (lifetime < 0)
         destroy();
     setVelocity(sf::vector2FromAngle(getRotation()) * speed);
+}
+
+void HomingMissile::collision(Collisionable* target)
+{
+    if (!gameServer)
+        return;
+    P<SpaceObject> hitObject = P<Collisionable>(target);
+    if (!hitObject || hitObject == owner)
+        return;
+    hitObject->takeDamage(20, getPosition(), DT_Kinetic);
+    destroy();
 }
