@@ -44,7 +44,9 @@ void MainUI::drawStatic(float alpha)
 
 void MainUI::drawRaderBackground(sf::Vector2f position, float size, float scale)
 {
-    const static float sector_size = 20000;
+    const float sector_size = 20000;
+    const float sub_sector_size = sector_size / 8;
+    
     sf::Vector2f player_position = mySpaceship->getPosition();
     int sector_x_min = int((player_position.x - (size / scale)) / sector_size) - 1;
     int sector_x_max = int((player_position.x + (size / scale)) / sector_size);
@@ -52,7 +54,7 @@ void MainUI::drawRaderBackground(sf::Vector2f position, float size, float scale)
     int sector_y_max = int((player_position.y + (size / scale)) / sector_size);
     sf::VertexArray lines_x(sf::Lines, 2 * (sector_x_max - sector_x_min + 1));
     sf::VertexArray lines_y(sf::Lines, 2 * (sector_y_max - sector_y_min + 1));
-    sf::Color color(64, 64, 128);
+    sf::Color color(64, 64, 128, 128);
     for(int sector_x = sector_x_min; sector_x <= sector_x_max; sector_x++)
     {
         float x = position.x + ((sector_x * sector_size) - player_position.x) * scale;
@@ -63,7 +65,7 @@ void MainUI::drawRaderBackground(sf::Vector2f position, float size, float scale)
         for(int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
         {
             float y = position.y + ((sector_y * sector_size) - player_position.y) * scale;
-            text(sf::FloatRect(x, y, 30, 30), string(char('M' + sector_y)) + string(sector_x), AlignLeft, 30, sf::Color(64, 64, 128));
+            text(sf::FloatRect(x, y, 30, 30), string(char('A' + (sector_y + 5))) + string(sector_x + 5), AlignLeft, 30, color);
         }
     }
     for(int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
@@ -76,6 +78,23 @@ void MainUI::drawRaderBackground(sf::Vector2f position, float size, float scale)
     }
     getRenderTarget()->draw(lines_x);
     getRenderTarget()->draw(lines_y);
+    
+    int sub_sector_x_min = int((player_position.x - (size / scale)) / sub_sector_size) - 1;
+    int sub_sector_x_max = int((player_position.x + (size / scale)) / sub_sector_size);
+    int sub_sector_y_min = int((player_position.y - (size / scale)) / sub_sector_size) - 1;
+    int sub_sector_y_max = int((player_position.y + (size / scale)) / sub_sector_size);
+    sf::VertexArray points(sf::Points, (sub_sector_x_max - sub_sector_x_min + 1) * (sub_sector_y_max - sub_sector_y_min + 1));
+    for(int sector_x = sub_sector_x_min; sector_x <= sub_sector_x_max; sector_x++)
+    {
+        float x = position.x + ((sector_x * sub_sector_size) - player_position.x) * scale;
+        for(int sector_y = sub_sector_y_min; sector_y <= sub_sector_y_max; sector_y++)
+        {
+            float y = position.y + ((sector_y * sub_sector_size) - player_position.y) * scale;
+            points[(sector_x - sub_sector_x_min) + (sector_y - sub_sector_y_min) * (sub_sector_x_max - sub_sector_x_min + 1)].position = sf::Vector2f(x, y);
+            points[(sector_x - sub_sector_x_min) + (sector_y - sub_sector_y_min) * (sub_sector_x_max - sub_sector_x_min + 1)].color = color;
+        }
+    }
+    getRenderTarget()->draw(points);
 }
 
 void MainUI::drawHeadingCircle(sf::Vector2f position, float size)
