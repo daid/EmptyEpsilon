@@ -118,7 +118,7 @@ string getCrewPositionName(ECrewPosition position)
     switch(position)
     {
     case helmsOfficer: return "Helms";
-    case tacticalOfficer: return "Tactical";
+    case weaponsOfficer: return "Weapons";
     case engineering: return "Engineering";
     case scienceOfficer: return "Science";
     case commsOfficer: return "Comms";

@@ -120,36 +120,39 @@ void SpaceShip::draw3D()
     m->render();
 }
 
-void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale)
+void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
-    for(int n=0; n<maxBeamWeapons; n++)
+    if (!long_range)
     {
-        if (beamWeapons[n].range == 0.0) continue;
-        sf::Color color = sf::Color::Red;
-        if (beamWeapons[n].cooldown > 0)
-            color = sf::Color(255, 255 * (beamWeapons[n].cooldown / beamWeapons[n].cycleTime), 0);
-        
-        sf::VertexArray a(sf::LinesStrip, 3);
-        a[0].color = color;
-        a[1].color = color;
-        a[2].color = sf::Color(color.r, color.g, color.b, 0);
-        a[0].position = position;
-        a[1].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction + beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale;
-        a[2].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction + beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale * 1.3f;
-        window.draw(a);
-        a[1].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction - beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale;
-        a[2].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction - beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale * 1.3f;
-        window.draw(a);
-        
-        int arcPoints = int(beamWeapons[n].arc / 10) + 1;
-        sf::VertexArray arc(sf::LinesStrip, arcPoints);
-        for(int i=0; i<arcPoints; i++)
+        for(int n=0; n<maxBeamWeapons; n++)
         {
-            arc[i].color = color;
-            arc[i].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction - beamWeapons[n].arc / 2.0f + 10 * i)) * beamWeapons[n].range * scale;
+            if (beamWeapons[n].range == 0.0) continue;
+            sf::Color color = sf::Color::Red;
+            if (beamWeapons[n].cooldown > 0)
+                color = sf::Color(255, 255 * (beamWeapons[n].cooldown / beamWeapons[n].cycleTime), 0);
+            
+            sf::VertexArray a(sf::LinesStrip, 3);
+            a[0].color = color;
+            a[1].color = color;
+            a[2].color = sf::Color(color.r, color.g, color.b, 0);
+            a[0].position = position;
+            a[1].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction + beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale;
+            a[2].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction + beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale * 1.3f;
+            window.draw(a);
+            a[1].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction - beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale;
+            a[2].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction - beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale * 1.3f;
+            window.draw(a);
+            
+            int arcPoints = int(beamWeapons[n].arc / 10) + 1;
+            sf::VertexArray arc(sf::LinesStrip, arcPoints);
+            for(int i=0; i<arcPoints; i++)
+            {
+                arc[i].color = color;
+                arc[i].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction - beamWeapons[n].arc / 2.0f + 10 * i)) * beamWeapons[n].range * scale;
+            }
+            arc[arcPoints-1].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction + beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale;
+            window.draw(arc);
         }
-        arc[arcPoints-1].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction + beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale;
-        window.draw(arc);
     }
 
     sf::Sprite objectSprite;

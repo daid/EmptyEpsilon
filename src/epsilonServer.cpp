@@ -15,10 +15,15 @@ EpsilonServer::EpsilonServer()
     
     //TMP
     mySpaceship = new SpaceShip();
+    gameGlobalInfo->insertPlayerShip(mySpaceship);
     randomNebulas();
+    
     //for(int n=0; n<50;n++)
     //    (new SpaceShip())->setPosition(sf::vector2FromAngle(0.0f) * (50.0f + n * 100.0f));
-    (new SpaceShip())->setPosition(sf::Vector2f(100, 100));
+    P<SpaceShip> ship = new SpaceShip();
+    ship->setPosition(sf::Vector2f(100, 100));
+    gameGlobalInfo->insertPlayerShip(ship);
+    
     (new SpaceStation())->setPosition(sf::Vector2f(0, -500));
 }
 

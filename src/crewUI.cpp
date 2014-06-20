@@ -25,8 +25,11 @@ void CrewUI::onGui()
         case helmsOfficer:
             helmsUI();
             break;
-        case tacticalOfficer:
-            tacticalUI();
+        case weaponsOfficer:
+            weaponsUI();
+            break;
+        case scienceOfficer:
+            scienceUI();
             break;
         default:
             drawStatic();
@@ -67,12 +70,10 @@ void CrewUI::helmsUI()
     
     //Radar
     float radarDistance = 5000;
-    drawHeadingCircle(sf::Vector2f(800, 450), 400);
-    
     foreach(SpaceObject, obj, spaceObjectList)
     {
         if (obj != mySpaceship && sf::length(obj->getPosition() - mySpaceship->getPosition()) < radarDistance)
-            obj->drawRadar(*window, sf::Vector2f(800, 450) + (obj->getPosition() - mySpaceship->getPosition()) / radarDistance * 400.0f, 400.0f / radarDistance);
+            obj->drawRadar(*window, sf::Vector2f(800, 450) + (obj->getPosition() - mySpaceship->getPosition()) / radarDistance * 400.0f, 400.0f / radarDistance, false);
     }
 
     P<SpaceObject> target = mySpaceship->getTarget();
@@ -83,7 +84,8 @@ void CrewUI::helmsUI()
         objectSprite.setPosition(sf::Vector2f(800, 450) + (target->getPosition() - mySpaceship->getPosition()) / radarDistance * 400.0f);
         window->draw(objectSprite);
     }
-    mySpaceship->drawRadar(*window, sf::Vector2f(800, 450), 400.0f / radarDistance);
+    mySpaceship->drawRadar(*window, sf::Vector2f(800, 450), 400.0f / radarDistance, false);
+    drawHeadingCircle(sf::Vector2f(800, 450), 400);
     //!Radar
     
     float res = vslider(sf::FloatRect(20, 500, 50, 300), mySpaceship->impulseRequest, 1.0, -1.0);
@@ -118,8 +120,8 @@ void CrewUI::helmsUI()
         }
     }
 }
-#include <typeinfo> 
-void CrewUI::tacticalUI()
+
+void CrewUI::weaponsUI()
 {
     sf::RenderTarget* window = getRenderTarget();
     P<InputHandler> inputHandler = engine->getObject("inputHandler");
@@ -145,12 +147,10 @@ void CrewUI::tacticalUI()
         }
     }
 
-    drawHeadingCircle(sf::Vector2f(800, 450), 400);
-    
     foreach(SpaceObject, obj, spaceObjectList)
     {
         if (obj != mySpaceship && sf::length(obj->getPosition() - mySpaceship->getPosition()) < radarDistance)
-            obj->drawRadar(*window, sf::Vector2f(800, 450) + (obj->getPosition() - mySpaceship->getPosition()) / radarDistance * 400.0f, 400.0f / radarDistance);
+            obj->drawRadar(*window, sf::Vector2f(800, 450) + (obj->getPosition() - mySpaceship->getPosition()) / radarDistance * 400.0f, 400.0f / radarDistance, false);
     }
     
     P<SpaceObject> target = mySpaceship->getTarget();
@@ -161,7 +161,8 @@ void CrewUI::tacticalUI()
         objectSprite.setPosition(sf::Vector2f(800, 450) + (target->getPosition() - mySpaceship->getPosition()) / radarDistance * 400.0f);
         window->draw(objectSprite);
     }
-    mySpaceship->drawRadar(*window, sf::Vector2f(800, 450), 400.0f / radarDistance);
+    mySpaceship->drawRadar(*window, sf::Vector2f(800, 450), 400.0f / radarDistance, false);
+    drawHeadingCircle(sf::Vector2f(800, 450), 400);
     //!Radar
 
     for(int n=0; n<MW_Count; n++)
@@ -202,4 +203,50 @@ void CrewUI::tacticalUI()
             break;
         }
     }
+}
+
+void CrewUI::scienceUI()
+{
+    sf::RenderTarget* window = getRenderTarget();
+    P<InputHandler> inputHandler = engine->getObject("inputHandler");
+    sf::Vector2f mouse = inputHandler->getMousePos();
+
+
+    float radarDistance = 50000;
+
+    //Radar
+    if (inputHandler->mouseIsPressed(sf::Mouse::Left))
+    {
+        sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
+        if (sf::length(diff) < 400)
+        {
+            P<SpaceObject> target;
+            sf::Vector2f mousePosition = mySpaceship->getPosition() + diff / 400.0f * radarDistance;
+            PVector<Collisionable> list = CollisionManager::queryArea(mousePosition - sf::Vector2f(200, 200), mousePosition + sf::Vector2f(200, 200));
+            foreach(Collisionable, obj, list)
+            {
+                P<SpaceObject> spaceObject = obj;
+                if (spaceObject && spaceObject != mySpaceship)
+                    target = spaceObject;
+            }
+            scienceTarget = target;
+        }
+    }
+
+    foreach(SpaceObject, obj, spaceObjectList)
+    {
+        if (obj != mySpaceship && sf::length(obj->getPosition() - mySpaceship->getPosition()) < radarDistance)
+            obj->drawRadar(*window, sf::Vector2f(800, 450) + (obj->getPosition() - mySpaceship->getPosition()) / radarDistance * 400.0f, 400.0f / radarDistance, true);
+    }
+    
+    if (scienceTarget)
+    {
+        sf::Sprite objectSprite;
+        textureManager.setTexture(objectSprite, "redicule.png");
+        objectSprite.setPosition(sf::Vector2f(800, 450) + (scienceTarget->getPosition() - mySpaceship->getPosition()) / radarDistance * 400.0f);
+        window->draw(objectSprite);
+    }
+    mySpaceship->drawRadar(*window, sf::Vector2f(800, 450), 400.0f / radarDistance, true);
+    drawHeadingCircle(sf::Vector2f(800, 450), 400);
+    //!Radar
 }

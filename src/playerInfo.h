@@ -14,7 +14,7 @@ extern PVector<PlayerInfo> playerInfoList;
 enum ECrewPosition
 {
     helmsOfficer,
-    tacticalOfficer,
+    weaponsOfficer,
     engineering,
     scienceOfficer,
     commsOfficer,

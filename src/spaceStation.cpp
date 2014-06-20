@@ -55,6 +55,14 @@ void SpaceStation::draw3DTransparent()
     }
 }
 
+void SpaceStation::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange)
+{
+    sf::Sprite objectSprite;
+    textureManager.setTexture(objectSprite, "RadarBlip.png");
+    objectSprite.setPosition(position);
+    window.draw(objectSprite);
+}
+
 void SpaceStation::update(float delta)
 {
     if (shields < maxShields)

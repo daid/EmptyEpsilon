@@ -17,13 +17,14 @@ class SpaceObject : public Collisionable, public MultiplayerObject
 {
     float objectRadius;
 public:
+    int8_t fractionId;
     SpaceObject(float collisionRange, string multiplayerName);
     
     float getRadius() { return objectRadius; }
     
     virtual void draw3D();
     virtual void draw3DTransparent() {}
-    virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale);
+    virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
 
     virtual bool hasShield() { return false; }
     virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type) {}

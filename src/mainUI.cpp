@@ -44,14 +44,6 @@ void MainUI::drawStatic()
 void MainUI::drawHeadingCircle(sf::Vector2f position, float size)
 {
     sf::RenderTarget& window = *getRenderTarget();
-
-    sf::CircleShape radarRangeCircle(size, 64);
-    radarRangeCircle.setOutlineThickness(4.0f);
-    radarRangeCircle.setOutlineColor(sf::Color(128,128,128,32));
-    radarRangeCircle.setFillColor(sf::Color::Transparent);
-    radarRangeCircle.setOrigin(size, size);
-    radarRangeCircle.setPosition(position);
-    window.draw(radarRangeCircle);
     
     sf::VertexArray tigs(sf::Lines, 360/20*2);
     for(unsigned int n=0; n<360; n+=20)
@@ -75,4 +67,20 @@ void MainUI::drawHeadingCircle(sf::Vector2f position, float size)
         text.setRotation(n);
         window.draw(text);
     }
+    sf::Sprite cutOff;
+    textureManager.setTexture(cutOff, "radarCutoff.png");
+    cutOff.setPosition(position);
+    cutOff.setScale(size / float(cutOff.getTextureRect().width) * 2.1, size / float(cutOff.getTextureRect().width) * 2.1);
+    window.draw(cutOff);
+    
+    sf::RectangleShape rectH(sf::Vector2f(1600, position.y - size * 1.05));
+    rectH.setFillColor(sf::Color::Black);
+    window.draw(rectH);
+    rectH.setPosition(0, position.y + size * 1.05);
+    window.draw(rectH);
+    sf::RectangleShape rectV(sf::Vector2f(position.x - size * 1.05, 900));
+    rectV.setFillColor(sf::Color::Black);
+    window.draw(rectV);
+    rectV.setPosition(position.x + size * 1.05, 0);
+    window.draw(rectV);
 }

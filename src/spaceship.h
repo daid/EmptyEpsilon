@@ -74,7 +74,7 @@ public:
     SpaceShip();
     
     virtual void draw3D();
-    virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale);
+    virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
     virtual void update(float delta);
     
     void setShipTemplate(string templateName);

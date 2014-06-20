@@ -49,7 +49,14 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
         glRotatef(-60, 1, 0, 0);
 #endif
-    glRotatef(-mySpaceship->getRotation(), 0, 0, 1);
+    float viewRotation = mySpaceship->getRotation();
+#ifdef DEBUG
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        viewRotation -= 45;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        viewRotation += 45;
+#endif
+    glRotatef(-viewRotation, 0, 0, 1);
 
     sf::Texture::bind(textureManager.getTexture("Stars"), sf::Texture::Pixels);
     glDepthMask(false);
@@ -112,7 +119,7 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
     glDepthMask(true);
     glEnable(GL_DEPTH_TEST);
     
-    sf::Vector2f cameraPosition2D = mySpaceship->getPosition() + sf::vector2FromAngle(mySpaceship->getRotation()) * -200.0f;
+    sf::Vector2f cameraPosition2D = mySpaceship->getPosition() + sf::vector2FromAngle(viewRotation) * -200.0f;
     sf::Vector3f targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, 100);
 #ifdef DEBUG
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))

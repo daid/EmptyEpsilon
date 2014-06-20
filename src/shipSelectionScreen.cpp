@@ -47,7 +47,22 @@ void ShipSelectionScreen::onGui()
                 new CrewUI();
             }
         }
+    }else{
+        if (mySpaceship)
+        {
+            if (button(sf::FloatRect(800, 800, 300, 50), "Join vessel"))
+            {
+                destroy();
+                if (myPlayerInfo->isMainScreen())
+                {
+                    new MainScreenUI();
+                }else{
+                    new CrewUI();
+                }
+            }
+        }
     }
+    
     for(int n=0; n<GameGlobalInfo::maxPlayerShips; n++)
     {
         if (gameGlobalInfo->getPlayerShip(n))

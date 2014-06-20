@@ -8,6 +8,9 @@ SpaceObject::SpaceObject(float collisionRange, string multiplayerName)
 {
     objectRadius = collisionRange;
     spaceObjectList.push_back(this);
+    fractionId = 0;
+    
+    registerMemberReplication(&fractionId);
     registerCollisionableReplication();
 }
 
@@ -15,7 +18,7 @@ void SpaceObject::draw3D()
 {
 }
 
-void SpaceObject::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale)
+void SpaceObject::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange)
 {
     sf::Sprite objectSprite;
     textureManager.setTexture(objectSprite, "RadarBlip.png");

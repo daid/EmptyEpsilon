@@ -10,12 +10,14 @@ class CrewUI : public MainUI
     ECrewPosition showPosition;
     EMissileWeapons tubeLoadType;
     float jumpDistance;
+    P<SpaceObject> scienceTarget;
 public:
     CrewUI();
     
     virtual void onGui();
     
     void helmsUI();
-    void tacticalUI();
+    void weaponsUI();
+    void scienceUI();
 };
 #endif//CREW_UI_H

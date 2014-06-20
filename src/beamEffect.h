@@ -16,7 +16,6 @@ public:
     BeamEffect();
 
     virtual void draw3DTransparent();
-    virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale);
     virtual void update(float delta);
     
     void setSource(P<SpaceObject> source, sf::Vector3f offset);

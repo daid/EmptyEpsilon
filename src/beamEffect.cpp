@@ -66,10 +66,6 @@ void BeamEffect::draw3DTransparent()
     glEnd();
 }
 
-void BeamEffect::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale)
-{
-}
-
 void BeamEffect::update(float delta)
 {
     P<SpaceObject> source, target;
@@ -106,6 +102,8 @@ void BeamEffect::setTarget(P<SpaceObject> target, sf::Vector2f hitLocation)
 
     if (target->hasShield())
         targetOffset = sf::normalize(targetOffset) * r;
+    else
+        targetOffset = sf::normalize(targetOffset) * random(0, r / 2.0);
     update(0);
 
     sf::Vector3f hitPos(targetLocation.x, targetLocation.y, targetOffset.z);
