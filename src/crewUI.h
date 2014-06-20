@@ -10,7 +10,9 @@ class CrewUI : public MainUI
     ECrewPosition showPosition;
     EMissileWeapons tubeLoadType;
     float jumpDistance;
+    
     P<SpaceObject> scienceTarget;
+    float scienceRadarDistance;
 public:
     CrewUI();
     

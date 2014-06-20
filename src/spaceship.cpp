@@ -4,6 +4,7 @@
 #include "main.h"
 #include "shipTemplate.h"
 #include "beamEffect.h"
+#include "homingMissile.h"
 
 static const int16_t CMD_TARGET_ROTATION = 0x0001;
 static const int16_t CMD_IMPULSE = 0x0002;
@@ -159,6 +160,8 @@ void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float
     textureManager.setTexture(objectSprite, "RadarArrow.png");
     objectSprite.setRotation(getRotation());
     objectSprite.setPosition(position);
+    if (long_range)
+        objectSprite.setScale(0.7, 0.7);
     window.draw(objectSprite);
 }
 
@@ -363,6 +366,10 @@ void SpaceShip::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             
             if (tubeNr >= 0 && tubeNr < maxWeaponTubes && weaponTube[tubeNr].state == WTS_Loaded)
             {
+                P<HomingMissle> missile = new HomingMissle();
+                missile->setPosition(getPosition());
+                missile->setRotation(getRotation());
+                
                 weaponTube[tubeNr].state = WTS_Empty;
                 weaponTube[tubeNr].typeLoaded = MW_None;
             }

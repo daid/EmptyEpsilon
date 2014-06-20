@@ -5,6 +5,7 @@ CrewUI::CrewUI()
 {
     jumpDistance = 1.0;
     tubeLoadType = MW_None;
+    scienceRadarDistance = 50000;
     
     for(int n=0; n<maxCrewPositions; n++)
     {
@@ -140,7 +141,7 @@ void CrewUI::weaponsUI()
             foreach(Collisionable, obj, list)
             {
                 P<SpaceObject> spaceObject = obj;
-                if (spaceObject && spaceObject != mySpaceship)
+                if (spaceObject && spaceObject->canBeTargeted() && spaceObject != mySpaceship)
                     target = spaceObject;
             }
             mySpaceship->commandSetTarget(target);
@@ -212,7 +213,7 @@ void CrewUI::scienceUI()
     sf::Vector2f mouse = inputHandler->getMousePos();
 
 
-    float radarDistance = 50000;
+    float radarDistance = scienceRadarDistance;
 
     //Radar
     if (inputHandler->mouseIsPressed(sf::Mouse::Left))
@@ -226,7 +227,7 @@ void CrewUI::scienceUI()
             foreach(Collisionable, obj, list)
             {
                 P<SpaceObject> spaceObject = obj;
-                if (spaceObject && spaceObject != mySpaceship)
+                if (spaceObject && spaceObject->canBeTargeted() && spaceObject != mySpaceship)
                     target = spaceObject;
             }
             scienceTarget = target;
@@ -249,4 +250,22 @@ void CrewUI::scienceUI()
     mySpaceship->drawRadar(*window, sf::Vector2f(800, 450), 400.0f / radarDistance, true);
     drawHeadingCircle(sf::Vector2f(800, 450), 400);
     //!Radar
+    
+    if (scienceTarget)
+    {
+        float distance = sf::length(scienceTarget->getPosition() - mySpaceship->getPosition());
+        float heading = sf::vector2ToAngle(scienceTarget->getPosition() - mySpaceship->getPosition());
+        if (heading < 0) heading += 360;
+        text(sf::FloatRect(20, 100, 100, 20), "Distance: " + string(distance / 1000.0, 1) + "km", AlignLeft, 20);
+        text(sf::FloatRect(20, 120, 100, 20), "Heading: " + string(int(heading)), AlignLeft, 20);
+    }
+    
+    if (scienceRadarDistance == 50000 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 1x", 25))
+            scienceRadarDistance = 25000;
+    else if (scienceRadarDistance == 25000 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 2x", 25))
+            scienceRadarDistance = 12500;
+    else if (scienceRadarDistance == 12500 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 4x", 25))
+            scienceRadarDistance = 5000;
+    else if (scienceRadarDistance == 5000 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 10x", 25))
+            scienceRadarDistance = 50000;
 }

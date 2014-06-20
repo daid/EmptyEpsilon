@@ -26,6 +26,7 @@ public:
     virtual void draw3DTransparent() {}
     virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
 
+    virtual bool canBeTargeted() { return false; }
     virtual bool hasShield() { return false; }
     virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type) {}
 };

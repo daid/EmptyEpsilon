@@ -21,6 +21,7 @@ EpsilonServer::EpsilonServer()
     //for(int n=0; n<50;n++)
     //    (new SpaceShip())->setPosition(sf::vector2FromAngle(0.0f) * (50.0f + n * 100.0f));
     P<SpaceShip> ship = new SpaceShip();
+    ship->setShipTemplate("fighter");
     ship->setPosition(sf::Vector2f(100, 100));
     gameGlobalInfo->insertPlayerShip(ship);
     
