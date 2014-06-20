@@ -42,6 +42,7 @@ SpaceShip::SpaceShip()
     impulseMaxSpeed = 600.0;
     warpSpeedPerWarpLevel = 1000.0;
     targetId = -1;
+    front_shield = rear_shield = front_shield_max = rear_shield_max = 50;
     
     registerMemberReplication(&targetRotation);
     registerMemberReplication(&impulseRequest);
@@ -50,7 +51,7 @@ SpaceShip::SpaceShip()
     registerMemberReplication(&warpRequest);
     registerMemberReplication(&currentWarp);
     registerMemberReplication(&hasJumpdrive);
-    registerMemberReplication(&jumpDelay, 0.2);
+    registerMemberReplication(&jumpDelay, 0.5);
     registerMemberReplication(&tubeLoadTime);
     registerMemberReplication(&weaponTubes);
     registerMemberReplication(&targetId);
@@ -58,6 +59,10 @@ SpaceShip::SpaceShip()
     registerMemberReplication(&impulseMaxSpeed);
     registerMemberReplication(&warpSpeedPerWarpLevel);
     registerMemberReplication(&templateName);
+    registerMemberReplication(&front_shield, 1.0);
+    registerMemberReplication(&rear_shield, 1.0);
+    registerMemberReplication(&front_shield_max);
+    registerMemberReplication(&rear_shield_max);
     
     for(int n=0; n<maxBeamWeapons; n++)
     {
@@ -110,7 +115,10 @@ void SpaceShip::setShipTemplate(string templateName)
         beamWeapons[n].damage = shipTemplate->beams[n].damage;
     }
     weaponTubes = shipTemplate->weaponTubes;
-    //float frontShields, rearShields;
+    front_shield = shipTemplate->frontShields;
+    rear_shield = shipTemplate->rearShields;
+    front_shield_max = shipTemplate->frontShields;
+    rear_shield_max = shipTemplate->rearShields;
     impulseMaxSpeed = shipTemplate->impulseSpeed;
     rotationSpeed = shipTemplate->turnSpeed;
     hasWarpdrive = shipTemplate->warpSpeed > 0.0;
@@ -119,6 +127,8 @@ void SpaceShip::setShipTemplate(string templateName)
     //shipTemplate->cloaking;
     for(int n=0; n<MW_Count; n++)
         weaponStorage[n] = shipTemplate->weaponStorage[n];
+    
+    setRadius(shipTemplate->radius);
 }
 
 void SpaceShip::draw3D()
@@ -181,7 +191,10 @@ void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float
 void SpaceShip::update(float delta)
 {
     if (!shipTemplate)
+    {
         shipTemplate = ShipTemplate::getTemplate(templateName);
+        setRadius(shipTemplate->radius);
+    }
 
     float rotationDiff = targetRotation - getRotation();
     if (rotationDiff < -180)

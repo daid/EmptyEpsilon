@@ -32,6 +32,7 @@ class ShipTemplate : public PObject
     string name;
 public:
     float scale;
+    float radius;
     string model, colorTexture, specularTexture, illuminationTexture;
     sf::Vector3f beamPosition[maxBeamWeapons];
     BeamTemplate beams[maxBeamWeapons];
@@ -45,6 +46,7 @@ public:
     
     void setName(string name);
     void setScale(float scale) { this->scale = scale; }
+    void setRadius(float radius) { this->radius = radius; }
     void setMesh(string model, string colorTexture, string specularTexture, string illuminationTexture);
     void setBeamPosition(int index, sf::Vector3f position);
     void setBeam(int index, float arc, float direction, float range, float cycle_time, float damage);

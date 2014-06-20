@@ -19,7 +19,7 @@ SpaceStation::SpaceStation()
     shields = maxShields;
     hullStrength = maxHullStrength;
     
-    registerMemberReplication(&shields, 0.5);
+    registerMemberReplication(&shields, 1.0);
     registerMemberReplication(&shieldHitEffect, 0.5);
     shieldHitEffect = 0.0;
 }

@@ -21,6 +21,7 @@ public:
     SpaceObject(float collisionRange, string multiplayerName);
     
     float getRadius() { return objectRadius; }
+    void setRadius(float radius) { objectRadius = radius; setCollisionRadius(radius); }
     
     virtual void draw3D();
     virtual void draw3DTransparent() {}

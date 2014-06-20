@@ -1,6 +1,7 @@
 template = ShipTemplate():setName("small-station"):setMesh("space_station_4.obj", "space_station_4_color.jpg", "space_station_4_specular.jpg", "space_station_4_illumination.jpg"):setScale(10)
-template = ShipTemplate():setName("player-cruiser"):setMesh("space_frigate_6.obj", "space_frigate_6_color.png", "space_frigate_6_specular.png", "space_frigate_6_illumination.png"):setScale(3)
--- Visual positions of the beams
+
+template = ShipTemplate():setName("player-cruiser"):setMesh("space_frigate_6.obj", "space_frigate_6_color.png", "space_frigate_6_specular.png", "space_frigate_6_illumination.png"):setScale(3):setRadius(50)
+-- Visual positions of the beams (blender: Y, -X, Z)
 template:setBeamPosition(0, -8, -1.6, -2)
 template:setBeamPosition(1,  8, -1.6, -2)
 --                  Arc, Dir, Range, CycleTime, Dmg
@@ -17,4 +18,18 @@ template:setWeaponStorage("Nuke", 2)
 template:setWeaponStorage("Mine", 6)
 template:setWeaponStorage("EMP", 4)
 
-template = ShipTemplate():setName("fighter"):setMesh("small_fighter_1.obj", "small_fighter_1_color.jpg", "small_fighter_1_specular.jpg", "small_fighter_1_illumination.jpg"):setScale(3)
+template = ShipTemplate():setName("fighter"):setMesh("small_fighter_1.obj", "small_fighter_1_color.jpg", "small_fighter_1_specular.jpg", "small_fighter_1_illumination.jpg"):setScale(1.5):setRadius(20)
+-- Visual positions of the beams (blender: Y, -X, Z)
+template:setBeamPosition(0, 0, 23, -1.8)
+--                  Arc, Dir, Range, CycleTime, Dmg
+template:setBeam(0, 60, 0, 1000.0, 4.0, 1)
+template:setTubes(0) -- Amount of torpedo tubes
+template:setShields(30, 30)
+template:setSpeed(800, 30)
+template:setWarpSpeed(0)
+template:setJumpDrive(false)
+template:setCloaking(false)
+template:setWeaponStorage("Homing", 0)
+template:setWeaponStorage("Nuke", 0)
+template:setWeaponStorage("Mine", 0)
+template:setWeaponStorage("EMP", 0)

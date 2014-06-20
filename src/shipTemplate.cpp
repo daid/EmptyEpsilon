@@ -7,6 +7,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setName);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setMesh);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setScale);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadius);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamPosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeam);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubes);
@@ -45,6 +46,7 @@ ShipTemplate::ShipTemplate()
         beams[n].range = 0.0;
         beams[n].damage = 0.0;
     }
+    radius = 50.0;
     weaponTubes = 0;
     frontShields = 0;
     rearShields = 0.0;

@@ -61,6 +61,9 @@ public:
     
     BeamWeapon beamWeapons[maxBeamWeapons];
     
+    float front_shield, rear_shield;
+    float front_shield_max, rear_shield_max;
+    
     int32_t targetId;
 
     SpaceShip();
