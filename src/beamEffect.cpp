@@ -19,14 +19,13 @@ BeamEffect::BeamEffect()
 
 void BeamEffect::draw3DTransparent()
 {
-    sf::Shader::bind(NULL);
-    sf::Texture::bind(NULL);
-    
     glTranslatef(-getPosition().x, -getPosition().y, 0);
     sf::Vector3f startPoint(getPosition().x, getPosition().y, sourceOffset.z);
     sf::Vector3f endPoint(targetLocation.x, targetLocation.y, targetOffset.z);
     sf::Vector3f eyeNormal = sf::normalize(sf::cross(cameraPosition - startPoint, endPoint - startPoint));
     
+    basicShader.setParameter("textureMap", *textureManager.getTexture("beam_texture.png"));
+    sf::Shader::bind(&basicShader);
     glColor3f(lifetime, lifetime, lifetime);
     {
         sf::Vector3f v0 = startPoint + eyeNormal * 4.0f;
@@ -34,9 +33,13 @@ void BeamEffect::draw3DTransparent()
         sf::Vector3f v2 = endPoint - eyeNormal * 4.0f;
         sf::Vector3f v3 = startPoint - eyeNormal * 4.0f;
         glBegin(GL_QUADS);
+        glTexCoord2f(0, 0);
         glVertex3f(v0.x, v0.y, v0.z);
+        glTexCoord2f(0, 1);
         glVertex3f(v1.x, v1.y, v1.z);
+        glTexCoord2f(1, 1);
         glVertex3f(v2.x, v2.y, v2.z);
+        glTexCoord2f(1, 0);
         glVertex3f(v3.x, v3.y, v3.z);
         glEnd();
     }

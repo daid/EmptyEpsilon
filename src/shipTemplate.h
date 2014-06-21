@@ -28,9 +28,9 @@ public:
 class ShipTemplate : public PObject
 {
     static std::map<string, P<ShipTemplate> > templateMap;
-
-    string name;
 public:
+    string name;
+
     float scale;
     float radius;
     string model, colorTexture, specularTexture, illuminationTexture;

@@ -25,6 +25,7 @@ EpsilonServer::EpsilonServer()
     gameGlobalInfo->insertPlayerShip(ship);
     
     P<SpaceStation> station = new SpaceStation();
+    station->fractionId = 2;
     station->setPosition(sf::Vector2f(0, -500));
     mySpaceship->commandSetTarget(station);
 

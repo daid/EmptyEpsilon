@@ -276,6 +276,11 @@ void CrewUI::scienceUI()
         text(sf::FloatRect(20, 100, 100, 20), fractionInfo[scienceTarget->fractionId].name, AlignLeft, 20);
         text(sf::FloatRect(20, 120, 100, 20), "Distance: " + string(distance / 1000.0, 1) + "km", AlignLeft, 20);
         text(sf::FloatRect(20, 140, 100, 20), "Heading: " + string(int(heading)), AlignLeft, 20);
+        P<SpaceShip> ship = scienceTarget;
+        if (ship && ship->shipTemplate)
+        {
+            text(sf::FloatRect(20, 160, 100, 20), ship->shipTemplate->name, AlignLeft, 20);
+        }
     }
     
     if (scienceRadarDistance == 50000 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 1x", 25))
