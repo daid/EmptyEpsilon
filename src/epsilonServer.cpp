@@ -24,7 +24,9 @@ EpsilonServer::EpsilonServer()
     ship->setPosition(sf::Vector2f(100, 100));
     gameGlobalInfo->insertPlayerShip(ship);
     
-    (new SpaceStation())->setPosition(sf::Vector2f(0, -500));
+    P<SpaceStation> station = new SpaceStation();
+    station->setPosition(sf::Vector2f(0, -500));
+    mySpaceship->commandSetTarget(station);
 
     soundManager.playMusic("music/Dream Raid Full Version (Mock Up).ogg");
 }

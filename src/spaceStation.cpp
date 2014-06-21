@@ -2,6 +2,7 @@
 #include "spaceStation.h"
 #include "shipTemplate.h"
 #include "mesh.h"
+#include "explosionEffect.h"
 #include "main.h"
 
 #include "scriptInterface.h"
@@ -88,7 +89,13 @@ void SpaceStation::takeDamage(float damageAmount, sf::Vector2f damageLocation, E
         {
             hullStrength -= damageAmount;
             if (hullStrength <= 0.0)
+            {
+                ExplosionEffect* e = new ExplosionEffect();
+                e->setSize(getRadius());
+                e->setPosition(getPosition());
+                
                 destroy();
+            }
         }
         shields = 0;
     }else{
