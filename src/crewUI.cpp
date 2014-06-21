@@ -173,8 +173,11 @@ void CrewUI::weaponsUI()
     //!Radar
     text(sf::FloatRect(10, 100, 200, 20), "Energy: " + string(int(mySpaceship->energy_level)), AlignLeft, 20);
     text(sf::FloatRect(10, 120, 200, 20), "Shields: " + string(int(100 * mySpaceship->front_shield / mySpaceship->front_shield_max)) + "/" + string(int(100 * mySpaceship->rear_shield / mySpaceship->rear_shield_max)), AlignLeft, 20);
-    if (toggleButton(sf::FloatRect(10, 140, 200, 30), mySpaceship->shields_active, mySpaceship->shields_active ? "Shields:ON" : "Shields:OFF", 25))
-        mySpaceship->commandSetShields(!mySpaceship->shields_active);
+    if (mySpaceship->front_shield_max > 0 || mySpaceship->rear_shield_max > 0)
+    {
+        if (toggleButton(sf::FloatRect(10, 140, 200, 30), mySpaceship->shields_active, mySpaceship->shields_active ? "Shields:ON" : "Shields:OFF", 25))
+            mySpaceship->commandSetShields(!mySpaceship->shields_active);
+    }
 
     float y = 900 - 10;
     for(int n=0; n<mySpaceship->weaponTubes; n++)
