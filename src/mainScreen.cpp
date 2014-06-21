@@ -221,14 +221,6 @@ void MainScreenUI::renderTactical(sf::RenderTarget& window)
             obj->drawRadar(window, sf::Vector2f(800, 450) + (obj->getPosition() - mySpaceship->getPosition()) / radarDistance * 400.0f, 400.0f / radarDistance, false);
     }
     
-    P<SpaceObject> target = mySpaceship->getTarget();
-    if (target)
-    {
-        sf::Sprite objectSprite;
-        textureManager.setTexture(objectSprite, "redicule.png");
-        objectSprite.setPosition(sf::Vector2f(800, 450) + (target->getPosition() - mySpaceship->getPosition()) / radarDistance * 400.0f);
-        window.draw(objectSprite);
-    }
     mySpaceship->drawRadar(window, sf::Vector2f(800, 450), 400.0f / radarDistance, false);
     drawHeadingCircle(sf::Vector2f(800, 450), 400);
 }

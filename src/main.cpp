@@ -1,5 +1,6 @@
 #include "gui.h"
 #include "mainMenus.h"
+#include "fractionInfo.h"
 #include "main.h"
 
 sf::Vector3f cameraPosition;
@@ -47,6 +48,11 @@ int main(int argc, char** argv)
     
     P<ScriptObject> shipTemplatesScript = new ScriptObject("shipTemplates.lua");
     shipTemplatesScript->destroy();
+    
+    fractionInfo[0].name = "Neutral";
+    fractionInfo[1].name = "Human";
+    fractionInfo[2].name = "SpaceCow";
+    FractionInfo::setState(1, 2, FVF_Enemy);
     
     new MainMenu();
     

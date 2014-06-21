@@ -4,6 +4,7 @@
 #include "main.h"
 #include "shipTemplate.h"
 #include "beamEffect.h"
+#include "fractionInfo.h"
 #include "homingMissile.h"
 
 SpaceShip::SpaceShip(string multiplayerClassName)
@@ -314,7 +315,7 @@ void SpaceShip::update(float delta)
         float angle = sf::vector2ToAngle(diff);
         for(int n=0; n<maxBeamWeapons; n++)
         {
-            if (target && beamWeapons[n].cooldown <= 0.0 && distance < beamWeapons[n].range)
+            if (target && fractionInfo[fractionId].states[target->fractionId] == FVF_Enemy && beamWeapons[n].cooldown <= 0.0 && distance < beamWeapons[n].range)
             {
                 float angleDiff = angle - (beamWeapons[n].direction + getRotation());
                 while(angleDiff > 180) angleDiff -= 360;

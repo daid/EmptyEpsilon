@@ -18,6 +18,7 @@ PlayerSpaceship::PlayerSpaceship()
 {
     energy_level = 1000;
     mainScreenSetting = MSS_Front;
+    fractionId = 1;
 
     registerMemberReplication(&energy_level);
     registerMemberReplication(&mainScreenSetting);
@@ -25,8 +26,6 @@ PlayerSpaceship::PlayerSpaceship()
 
 void PlayerSpaceship::update(float delta)
 {
-    if (energy_level < 1000.0)
-        energy_level += delta * energy_recharge_per_second;
     if (shields_active)
         useEnergy(delta * energy_shield_use_per_second);
     
@@ -41,6 +40,9 @@ void PlayerSpaceship::update(float delta)
     }
     
     SpaceShip::update(delta);
+
+    if (energy_level < 1000.0)
+        energy_level += delta * energy_recharge_per_second;
 }
 
 void PlayerSpaceship::executeJump(float distance)

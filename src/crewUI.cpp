@@ -1,5 +1,6 @@
 #include "crewUI.h"
 #include "playerInfo.h"
+#include "fractionInfo.h"
 
 CrewUI::CrewUI()
 {
@@ -272,8 +273,9 @@ void CrewUI::scienceUI()
         float distance = sf::length(scienceTarget->getPosition() - mySpaceship->getPosition());
         float heading = sf::vector2ToAngle(scienceTarget->getPosition() - mySpaceship->getPosition());
         if (heading < 0) heading += 360;
-        text(sf::FloatRect(20, 100, 100, 20), "Distance: " + string(distance / 1000.0, 1) + "km", AlignLeft, 20);
-        text(sf::FloatRect(20, 120, 100, 20), "Heading: " + string(int(heading)), AlignLeft, 20);
+        text(sf::FloatRect(20, 100, 100, 20), fractionInfo[scienceTarget->fractionId].name, AlignLeft, 20);
+        text(sf::FloatRect(20, 120, 100, 20), "Distance: " + string(distance / 1000.0, 1) + "km", AlignLeft, 20);
+        text(sf::FloatRect(20, 140, 100, 20), "Heading: " + string(int(heading)), AlignLeft, 20);
     }
     
     if (scienceRadarDistance == 50000 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 1x", 25))
