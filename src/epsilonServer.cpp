@@ -25,6 +25,8 @@ EpsilonServer::EpsilonServer()
     gameGlobalInfo->insertPlayerShip(ship);
     
     (new SpaceStation())->setPosition(sf::Vector2f(0, -500));
+
+    soundManager.playMusic("music/Dream Raid Full Version (Mock Up).ogg");
 }
 
 void EpsilonServer::onNewClient(int32_t clientId)
@@ -45,8 +47,12 @@ void EpsilonServer::onDisconnectClient(int32_t clientId)
 
 void disconnectFromServer()
 {
+    soundManager.stopMusic();
+
     if (gameClient)
         gameClient->destroy();
+    if (gameServer)
+        gameServer->destroy();
     if (gameGlobalInfo)
         gameGlobalInfo->destroy();
     foreach(PlayerInfo, i, playerInfoList)
