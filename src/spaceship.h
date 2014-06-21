@@ -44,7 +44,7 @@ public:
 
 class SpaceShip : public SpaceObject, public Updatable
 {
-    const static float shield_recharge_rate = 2.0f;
+    const static float shield_recharge_rate = 0.2f;
 public:
     string templateName;
     P<ShipTemplate> shipTemplate;

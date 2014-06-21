@@ -7,7 +7,7 @@
 class SpaceStation : public SpaceObject, public Updatable
 {
     static const float maxShields = 400.0;
-    static const float shieldRechargeRate = 2.0;
+    static const float shieldRechargeRate = 0.2;
     static const float maxHullStrength = 200;
     float shields;
     float hullStrength;
