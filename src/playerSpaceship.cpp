@@ -18,7 +18,7 @@ PlayerSpaceship::PlayerSpaceship()
 {
     energy_level = 1000;
     mainScreenSetting = MSS_Front;
-    fractionId = 1;
+    factionId = 1;
     hull_damage_indicator = 0.0;
 
     registerMemberReplication(&hull_damage_indicator, 0.5);

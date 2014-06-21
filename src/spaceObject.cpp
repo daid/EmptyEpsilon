@@ -8,9 +8,9 @@ SpaceObject::SpaceObject(float collisionRange, string multiplayerName)
 {
     objectRadius = collisionRange;
     spaceObjectList.push_back(this);
-    fractionId = 0;
+    factionId = 0;
     
-    registerMemberReplication(&fractionId);
+    registerMemberReplication(&factionId);
     registerCollisionableReplication();
 }
 

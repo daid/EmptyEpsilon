@@ -17,7 +17,7 @@ void MainUI::onGui()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
             engine->setGameSpeed(0.0);
 #ifdef DEBUG
-        text(sf::FloatRect(0, 0, 1600, 20), string(gameServer->getSendDataRate()) + " bytes per second", AlignRight, 15);
+        text(sf::FloatRect(0, 0, 1600 - 5, 20), string(gameServer->getSendDataRate()) + " bytes per second", AlignRight, 15);
 #endif
     }
     

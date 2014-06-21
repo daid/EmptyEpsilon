@@ -11,10 +11,6 @@ HomingMissile::HomingMissile()
 
 void HomingMissile::draw3D()
 {
-    glBegin(GL_LINES);
-    glVertex3f(0, 0, 0);
-    glVertex3f(10, 0, 0);
-    glEnd();
 }
 
 void HomingMissile::draw3DTransparent()

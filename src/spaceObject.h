@@ -17,7 +17,7 @@ class SpaceObject : public Collisionable, public MultiplayerObject
 {
     float objectRadius;
 public:
-    int8_t fractionId;
+    int8_t factionId;
     SpaceObject(float collisionRange, string multiplayerName);
     
     float getRadius() { return objectRadius; }

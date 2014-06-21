@@ -1,6 +1,6 @@
 #include "cpuShip.h"
 #include "playerInfo.h"
-#include "fractionInfo.h"
+#include "factionInfo.h"
 
 #include "scriptInterface.h"
 REGISTER_SCRIPT_CLASS(CpuShip)
@@ -12,7 +12,7 @@ REGISTER_MULTIPLAYER_CLASS(CpuShip, "CpuShip");
 CpuShip::CpuShip()
 : SpaceShip("CpuShip")
 {
-    fractionId = 2;
+    factionId = 2;
     state = AI_Engage;
 }
 
@@ -27,6 +27,27 @@ void CpuShip::update(float delta)
     switch(state)
     {
     case AI_Engage:
+        float target_distance;
+        PVector<Collisionable> objectList = CollisionManager::queryArea(getPosition() - sf::Vector2f(5000, 5000), getPosition() + sf::Vector2f(5000, 5000));
+        P<SpaceObject> new_target;
+        foreach(Collisionable, obj, objectList)
+        {
+            P<SpaceObject> space_object = obj;
+            if (!space_object || !space_object->canBeTargeted() || factionInfo[factionId].states[space_object->factionId] != FVF_Enemy || space_object == target)
+                continue;
+            float distance = sf::length(space_object->getPosition() - getPosition());
+            if (!new_target || target_distance > distance)
+            {
+                new_target = space_object;
+                target_distance = distance;
+            }
+        }
+        if (new_target && (!target || (sf::length(target->getPosition() - getPosition()) > target_distance * 1.5f && target_distance > 1500.0)))
+        {
+            target = new_target;
+            targetId = new_target->getMultiplayerId();
+        }
+
         if (target)
         {
             sf::Vector2f position_diff = target->getPosition() - getPosition();
@@ -39,22 +60,6 @@ void CpuShip::update(float delta)
                 impulseRequest = (distance - 500.0f) / 500.0f;
         }else{
             impulseRequest = 0.0;
-            float target_distance;
-            
-            PVector<Collisionable> objectList = CollisionManager::queryArea(getPosition() - sf::Vector2f(5000, 5000), getPosition() + sf::Vector2f(5000, 5000));
-            foreach(Collisionable, obj, objectList)
-            {
-                P<SpaceObject> space_object = obj;
-                if (!space_object || !space_object->canBeTargeted() || fractionInfo[fractionId].states[space_object->fractionId] != FVF_Enemy)
-                    continue;
-                float distance = sf::length(space_object->getPosition() - getPosition());
-                if (!target || target_distance > distance)
-                {
-                    target = space_object;
-                    targetId = target->getMultiplayerId();
-                    target_distance = distance;
-                }
-            }
         }
         break;
     }

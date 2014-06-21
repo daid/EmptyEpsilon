@@ -4,7 +4,7 @@
 #include "main.h"
 #include "shipTemplate.h"
 #include "beamEffect.h"
-#include "fractionInfo.h"
+#include "factionInfo.h"
 #include "explosionEffect.h"
 #include "homingMissile.h"
 
@@ -306,7 +306,7 @@ void SpaceShip::update(float delta)
         float angle = sf::vector2ToAngle(diff);
         for(int n=0; n<maxBeamWeapons; n++)
         {
-            if (target && fractionInfo[fractionId].states[target->fractionId] == FVF_Enemy && beamWeapons[n].cooldown <= 0.0 && distance < beamWeapons[n].range)
+            if (target && factionInfo[factionId].states[target->factionId] == FVF_Enemy && beamWeapons[n].cooldown <= 0.0 && distance < beamWeapons[n].range)
             {
                 float angleDiff = sf::angleDifference(beamWeapons[n].direction + getRotation(), angle);
                 if (abs(angleDiff) < beamWeapons[n].arc / 2.0)
