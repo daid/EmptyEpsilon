@@ -30,6 +30,10 @@ void PlayerSpaceship::update(float delta)
     if (shields_active)
         useEnergy(delta * energy_shield_use_per_second);
     
+    //Static energy drain
+    float drain = 3 + 1 + 1 + 2 + 4 + 6 + 5 + 5;//Temp values till engineering is implemented.
+    energy_level -= delta * drain * 0.02;
+    
     if (hasWarpdrive && warpRequest > 0 && !(hasJumpdrive && jumpDelay > 0))
     {
         if (!useEnergy(energy_warp_per_second * delta * float(warpRequest * warpRequest) * (shields_active ? 1.5 : 1.0)))
