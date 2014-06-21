@@ -18,12 +18,12 @@ EpsilonServer::EpsilonServer()
     
     //TMP
     mySpaceship = new PlayerSpaceship();
-    mySpaceship->setShipTemplate("player-cruiser");
+    mySpaceship->setShipTemplate("Player Cruiser");
     gameGlobalInfo->insertPlayerShip(mySpaceship);
     randomNebulas();
     
     P<PlayerSpaceship> ship = new PlayerSpaceship();
-    ship->setShipTemplate("fighter");
+    ship->setShipTemplate("Fighter");
     ship->setPosition(sf::Vector2f(100, 100));
     gameGlobalInfo->insertPlayerShip(ship);
     
@@ -34,7 +34,7 @@ EpsilonServer::EpsilonServer()
     for(int n=0; n<100; n++)
     {
         P<CpuShip> s = new CpuShip();
-        s->setShipTemplate("fighter");
+        s->setShipTemplate("Fighter");
         s->setPosition(sf::vector2FromAngle(random(0, 360)) * random(5000, 20000));
     }
 }

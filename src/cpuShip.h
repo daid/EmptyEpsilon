@@ -3,20 +3,29 @@
 
 #include "spaceShip.h"
 
-enum EAIState
+enum EAIOrder
 {
-    AI_Engage,
-    AI_Disengage,
-    AI_Flee,
+    AI_Idle,            //Don't do anything, don't even attack.
+    AI_Roaming,         //Fly around and engage at will, without a clear target
+    AI_StandGround,     //Keep current position, do not fly away, but attack nearby targets.
+    AI_DefendLocation,  //Defend against enemies getting close to [order_target_location]
+    AI_DefendTarget,    //Defend against enemies getting close to [order_target] (falls back to AI_Roaming if the target is destroyed)
+    AI_FlyFormation,    //Fly [order_target_location] offset from [order_target]. Allows for nicely flying in formation.
+    AI_FlyTowards,      //Fly towards [order_target_location], attacking enemies that get too close, but disengage and continue when enemy is too far.
+    AI_Attack,          //Attack [order_target] very specificly.
 };
 
 class CpuShip : public SpaceShip
 {
-    EAIState state;
+    EAIOrder orders;
+    sf::Vector2f order_target_location;
+    P<SpaceObject> order_target;
 public:
     CpuShip();
     
     virtual void update(float delta);
+    
+    P<SpaceObject> findBestTarget(sf::Vector2f position, float radius);
 };
 
 #endif//CPU_SHIP_H

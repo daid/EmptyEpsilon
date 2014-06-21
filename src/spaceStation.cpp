@@ -27,7 +27,7 @@ SpaceStation::SpaceStation()
 
 void SpaceStation::draw3D()
 {
-    P<ShipTemplate> t = ShipTemplate::getTemplate("small-station");
+    P<ShipTemplate> t = ShipTemplate::getTemplate("Small Station");
 
     glPushMatrix();
     glTranslatef(0, 0, 50);

@@ -115,7 +115,7 @@ void CrewUI::helmsUI()
     {
         float x = mySpaceship->hasWarpdrive ? 180 : 100;
         jumpDistance = vslider(sf::FloatRect(x, 500, 50, 300), jumpDistance, 20.0, 1.0);
-        text(sf::FloatRect(x, 800, 50, 20), string(jumpDistance) + "km", AlignLeft, 50);
+        text(sf::FloatRect(x, 800, 50, 20), string(jumpDistance) + "km", AlignLeft, 20);
         if (mySpaceship->jumpDelay > 0.0)
         {
             text(sf::FloatRect(x, 820, 50, 20), string(int(mySpaceship->jumpDelay) + 1), AlignLeft, 20);
@@ -284,11 +284,11 @@ void CrewUI::scienceUI()
     }
     
     if (scienceRadarDistance == 50000 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 1x", 25))
-            scienceRadarDistance = 25000;
+        scienceRadarDistance = 25000;
     else if (scienceRadarDistance == 25000 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 2x", 25))
-            scienceRadarDistance = 12500;
+        scienceRadarDistance = 12500;
     else if (scienceRadarDistance == 12500 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 4x", 25))
-            scienceRadarDistance = 5000;
+        scienceRadarDistance = 5000;
     else if (scienceRadarDistance == 5000 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 10x", 25))
-            scienceRadarDistance = 50000;
+        scienceRadarDistance = 50000;
 }
