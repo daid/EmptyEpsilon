@@ -43,9 +43,7 @@ void HomingMissile::update(float delta)
         target = gameClient->getObjectById(target_id);
     if (target)
     {
-        float angleDiff = sf::vector2ToAngle(target->getPosition() - getPosition()) - getRotation();
-        while(angleDiff < -180) angleDiff += 360;
-        while(angleDiff > 180) angleDiff -= 360;
+        float angleDiff = sf::angleDifference(getRotation(), sf::vector2ToAngle(target->getPosition() - getPosition()));
         
         if (angleDiff > 1.0)
             setAngularVelocity(turnSpeed);
@@ -53,6 +51,8 @@ void HomingMissile::update(float delta)
             setAngularVelocity(turnSpeed * -1.0f);
         else
             setAngularVelocity(angleDiff * turnSpeed);
+    }else{
+        setAngularVelocity(0);
     }
     
     lifetime -= delta;

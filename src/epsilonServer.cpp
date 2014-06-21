@@ -36,7 +36,6 @@ EpsilonServer::EpsilonServer()
         P<CpuShip> s = new CpuShip();
         s->setShipTemplate("fighter");
         s->setPosition(sf::vector2FromAngle(random(0, 360)) * random(5000, 20000));
-        s->targetId = mySpaceship->getMultiplayerId();
     }
 }
 

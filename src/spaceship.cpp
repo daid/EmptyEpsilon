@@ -228,17 +228,7 @@ void SpaceShip::update(float delta)
     if (rear_shield_hit_effect > 0)
         rear_shield_hit_effect -= delta;
 
-    float rotationDiff = targetRotation - getRotation();
-    if (rotationDiff < -180)
-    {
-        targetRotation += 360;
-        rotationDiff = targetRotation - getRotation();
-    }
-    if (rotationDiff > 180)
-    {
-        targetRotation -= 360;
-        rotationDiff = targetRotation - getRotation();
-    }
+    float rotationDiff = sf::angleDifference(getRotation(), targetRotation);
 
     if (rotationDiff > 1.0)
         setAngularVelocity(rotationSpeed);
@@ -318,9 +308,7 @@ void SpaceShip::update(float delta)
         {
             if (target && fractionInfo[fractionId].states[target->fractionId] == FVF_Enemy && beamWeapons[n].cooldown <= 0.0 && distance < beamWeapons[n].range)
             {
-                float angleDiff = angle - (beamWeapons[n].direction + getRotation());
-                while(angleDiff > 180) angleDiff -= 360;
-                while(angleDiff < -180) angleDiff += 360;
+                float angleDiff = sf::angleDifference(beamWeapons[n].direction + getRotation(), angle);
                 if (abs(angleDiff) < beamWeapons[n].arc / 2.0)
                 {
                     fireBeamWeapon(n, target);
@@ -430,9 +418,7 @@ void SpaceShip::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDam
 {
     if (shields_active)
     {
-        float angle = sf::vector2ToAngle(getPosition() - damageLocation) - getRotation();
-        while (angle > 180) angle -= 360;
-        while (angle < -180) angle += 360;
+        float angle = sf::angleDifference(getRotation(), sf::vector2ToAngle(getPosition() - damageLocation));
         bool front_hit = !(angle > -90 && angle < 90);
         float* shield = &front_shield;
         float* shield_hit_effect = &front_shield_hit_effect;
@@ -464,7 +450,7 @@ void SpaceShip::hullDamage(float damageAmount, sf::Vector2f damageLocation, EDam
     if (hull_strength <= 0.0)
     {
         ExplosionEffect* e = new ExplosionEffect();
-        e->setSize(getRadius());
+        e->setSize(getRadius() * 1.5);
         e->setPosition(getPosition());
         
         destroy();

@@ -13,6 +13,7 @@ class PlayerSpaceship : public SpaceShip
 
 public:
     float energy_level;
+    float hull_damage_indicator;
     
     EMainScreenSetting mainScreenSetting;
 
@@ -32,6 +33,7 @@ public:
     
     virtual void executeJump(float distance);
     virtual void fireBeamWeapon(int index, P<SpaceObject> target);
+    virtual void hullDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type);
 
     virtual void update(float delta);
     bool useEnergy(float amount) { if (energy_level >= amount) { energy_level -= amount; return true; } return false; }

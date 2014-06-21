@@ -21,6 +21,13 @@ void MainUI::onGui()
 #endif
     }
     
+    if (mySpaceship && mySpaceship->hull_damage_indicator > 0.0)
+    {
+        sf::RectangleShape fullScreenOverlay(sf::Vector2f(1600, 900));
+        fullScreenOverlay.setFillColor(sf::Color(255, 0, 0, 255 * mySpaceship->hull_damage_indicator));
+        getRenderTarget()->draw(fullScreenOverlay);
+    }
+    
     if (engine->getGameSpeed() == 0.0)
     {
         text(sf::FloatRect(0, 400, 1600, 100), "Game Paused", AlignCenter, 70);

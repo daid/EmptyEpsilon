@@ -19,30 +19,41 @@ PlayerSpaceship::PlayerSpaceship()
     energy_level = 1000;
     mainScreenSetting = MSS_Front;
     fractionId = 1;
+    hull_damage_indicator = 0.0;
 
+    registerMemberReplication(&hull_damage_indicator, 0.5);
     registerMemberReplication(&energy_level);
     registerMemberReplication(&mainScreenSetting);
 }
 
 void PlayerSpaceship::update(float delta)
 {
-    if (shields_active)
-        useEnergy(delta * energy_shield_use_per_second);
+    if (hull_damage_indicator > 0)
+        hull_damage_indicator -= delta;
     
-    //Static energy drain
-    float drain = 3 + 1 + 1 + 2 + 4 + 6 + 5 + 5;//Temp values till engineering is implemented.
-    energy_level -= delta * drain * 0.02;
-    
-    if (hasWarpdrive && warpRequest > 0 && !(hasJumpdrive && jumpDelay > 0))
+    if (gameServer)
     {
-        if (!useEnergy(energy_warp_per_second * delta * float(warpRequest * warpRequest) * (shields_active ? 1.5 : 1.0)))
-            warpRequest = 0;
+        if (shields_active)
+            useEnergy(delta * energy_shield_use_per_second);
+        
+        //Static energy drain
+        float drain = 3 + 1 + 1 + 2 + 4 + 6 + 5 + 5;//Temp values till engineering is implemented.
+        energy_level -= delta * drain * 0.02;
+        
+        if (hasWarpdrive && warpRequest > 0 && !(hasJumpdrive && jumpDelay > 0))
+        {
+            if (!useEnergy(energy_warp_per_second * delta * float(warpRequest * warpRequest) * (shields_active ? 1.5 : 1.0)))
+                warpRequest = 0;
+        }
     }
     
     SpaceShip::update(delta);
 
-    if (energy_level < 1000.0)
-        energy_level += delta * energy_recharge_per_second;
+    if (gameServer)
+    {
+        if (energy_level < 1000.0)
+            energy_level += delta * energy_recharge_per_second;
+    }
 }
 
 void PlayerSpaceship::executeJump(float distance)
@@ -55,6 +66,13 @@ void PlayerSpaceship::fireBeamWeapon(int idx, P<SpaceObject> target)
 {
     if (useEnergy(energy_per_beam_fire))
         SpaceShip::fireBeamWeapon(idx, target);
+}
+
+void PlayerSpaceship::hullDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type)
+{
+    if (type != DT_EMP)
+        hull_damage_indicator = 0.5;
+    SpaceShip::hullDamage(damageAmount, damageLocation, type);
 }
 
 void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
