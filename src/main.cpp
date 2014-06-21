@@ -4,6 +4,7 @@
 #include "main.h"
 
 sf::Vector3f cameraPosition;
+float cameraRotation;
 sf::Shader objectShader;
 sf::Shader basicShader;
 sf::Font mainFont;

@@ -5,6 +5,7 @@
 #include "shipTemplate.h"
 #include "beamEffect.h"
 #include "fractionInfo.h"
+#include "explosionEffect.h"
 #include "homingMissile.h"
 
 SpaceShip::SpaceShip(string multiplayerClassName)
@@ -429,7 +430,9 @@ void SpaceShip::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDam
 {
     if (shields_active)
     {
-        float angle = sf::vector2ToAngle(getPosition() - damageLocation);
+        float angle = sf::vector2ToAngle(getPosition() - damageLocation) - getRotation();
+        while (angle > 180) angle -= 360;
+        while (angle < -180) angle += 360;
         bool front_hit = !(angle > -90 && angle < 90);
         float* shield = &front_shield;
         float* shield_hit_effect = &front_shield_hit_effect;
@@ -459,7 +462,13 @@ void SpaceShip::hullDamage(float damageAmount, sf::Vector2f damageLocation, EDam
         return;
     hull_strength -= damageAmount;
     if (hull_strength <= 0.0)
+    {
+        ExplosionEffect* e = new ExplosionEffect();
+        e->setSize(getRadius());
+        e->setPosition(getPosition());
+        
         destroy();
+    }
 }
 
 string getMissileWeaponName(EMissileWeapons missile)

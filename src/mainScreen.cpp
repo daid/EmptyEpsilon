@@ -29,7 +29,7 @@ void MainScreenUI::onGui()
             break;
         }
     }else{
-        drawStatic();
+        render3dView(*getRenderTarget());
     }
     
     MainUI::onGui();
@@ -60,26 +60,29 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
     
     glRotatef(90, 1, 0, 0);
     glScalef(1,1,-1);
-    glRotatef(-15, 1, 0, 0);
+    glRotatef(-35, 1, 0, 0);
 #ifdef DEBUG
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-        glRotatef(-60, 1, 0, 0);
+        glRotatef(-50, 1, 0, 0);
 #endif
-    float viewRotation = mySpaceship->getRotation();
-#ifdef DEBUG
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        viewRotation -= 45;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        viewRotation += 45;
-#endif
-    switch(mySpaceship->mainScreenSetting)
+    if (mySpaceship)
     {
-    case MSS_Back: viewRotation += 180; break;
-    case MSS_Left: viewRotation -= 90; break;
-    case MSS_Right: viewRotation += 90; break;
-    default: break;
+        cameraRotation = mySpaceship->getRotation();
+#ifdef DEBUG
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+            cameraRotation -= 45;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+            cameraRotation += 45;
+#endif
+        switch(mySpaceship->mainScreenSetting)
+        {
+        case MSS_Back: cameraRotation += 180; break;
+        case MSS_Left: cameraRotation -= 90; break;
+        case MSS_Right: cameraRotation += 90; break;
+        default: break;
+        }
     }
-    glRotatef(-viewRotation, 0, 0, 1);
+    glRotatef(-cameraRotation, 0, 0, 1);
 
     sf::Texture::bind(textureManager.getTexture("Stars"), sf::Texture::Pixels);
     glDepthMask(false);
@@ -142,13 +145,16 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
     glDepthMask(true);
     glEnable(GL_DEPTH_TEST);
     
-    sf::Vector2f cameraPosition2D = mySpaceship->getPosition() + sf::vector2FromAngle(viewRotation) * -200.0f;
-    sf::Vector3f targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, 100);
+    if (mySpaceship)
+    {
+        sf::Vector2f cameraPosition2D = mySpaceship->getPosition() + sf::vector2FromAngle(cameraRotation) * -300.0f;
+        sf::Vector3f targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, 300);
 #ifdef DEBUG
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-        targetCameraPosition.z = 3000.0;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+            targetCameraPosition.z = 3000.0;
 #endif
-    cameraPosition = cameraPosition * 0.9f + targetCameraPosition * 0.1f;
+        cameraPosition = cameraPosition * 0.9f + targetCameraPosition * 0.1f;
+    }
     
     {
         float lightpos[4] = {0, 0, 1000, 1.0};

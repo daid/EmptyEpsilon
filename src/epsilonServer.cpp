@@ -2,6 +2,7 @@
 #include "playerInfo.h"
 #include "spaceObject.h"
 #include "spaceStation.h"
+#include "cpuShip.h"
 #include "main.h"
 
 EpsilonServer::EpsilonServer()
@@ -12,6 +13,8 @@ EpsilonServer::EpsilonServer()
     info->clientId = 0;
     myPlayerInfo = info;
     engine->setGameSpeed(0.0);
+    
+    soundManager.playMusic("music/Dream Raid Full Version (Mock Up).ogg");
     
     //TMP
     mySpaceship = new PlayerSpaceship();
@@ -25,11 +28,16 @@ EpsilonServer::EpsilonServer()
     gameGlobalInfo->insertPlayerShip(ship);
     
     P<SpaceStation> station = new SpaceStation();
-    station->fractionId = 2;
     station->setPosition(sf::Vector2f(0, -500));
     mySpaceship->commandSetTarget(station);
-
-    soundManager.playMusic("music/Dream Raid Full Version (Mock Up).ogg");
+    
+    for(int n=0; n<100; n++)
+    {
+        P<CpuShip> s = new CpuShip();
+        s->setShipTemplate("fighter");
+        s->setPosition(sf::vector2FromAngle(random(0, 360)) * random(5000, 20000));
+        s->targetId = mySpaceship->getMultiplayerId();
+    }
 }
 
 void EpsilonServer::onNewClient(int32_t clientId)
