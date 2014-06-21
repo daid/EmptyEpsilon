@@ -91,6 +91,8 @@ void CrewUI::helmsUI()
     mySpaceship->drawRadar(*window, sf::Vector2f(800, 450), 400.0f / radarDistance, false);
     drawHeadingCircle(sf::Vector2f(800, 450), 400);
     //!Radar
+
+    text(sf::FloatRect(10, 100, 200, 20), "Energy: " + string(int(mySpaceship->energy_level)), AlignLeft, 20);
     
     float res = vslider(sf::FloatRect(20, 500, 50, 300), mySpaceship->impulseRequest, 1.0, -1.0);
     if (res > -0.15 && res < 0.15)
@@ -112,7 +114,7 @@ void CrewUI::helmsUI()
     {
         float x = mySpaceship->hasWarpdrive ? 180 : 100;
         jumpDistance = vslider(sf::FloatRect(x, 500, 50, 300), jumpDistance, 20.0, 1.0);
-        text(sf::FloatRect(x, 800, 50, 20), string(jumpDistance) + "km", AlignLeft, 20);
+        text(sf::FloatRect(x, 800, 50, 20), string(jumpDistance) + "km", AlignLeft, 50);
         if (mySpaceship->jumpDelay > 0.0)
         {
             text(sf::FloatRect(x, 820, 50, 20), string(int(mySpaceship->jumpDelay) + 1), AlignLeft, 20);
@@ -169,44 +171,48 @@ void CrewUI::weaponsUI()
     mySpaceship->drawRadar(*window, sf::Vector2f(800, 450), 400.0f / radarDistance, false);
     drawHeadingCircle(sf::Vector2f(800, 450), 400);
     //!Radar
-    text(sf::FloatRect(10, 100, 200, 20), "Shields: " + string(int(100 * mySpaceship->front_shield / mySpaceship->front_shield_max)) + "/" + string(int(100 * mySpaceship->rear_shield / mySpaceship->rear_shield_max)), AlignLeft, 20);
+    text(sf::FloatRect(10, 100, 200, 20), "Energy: " + string(int(mySpaceship->energy_level)), AlignLeft, 20);
+    text(sf::FloatRect(10, 120, 200, 20), "Shields: " + string(int(100 * mySpaceship->front_shield / mySpaceship->front_shield_max)) + "/" + string(int(100 * mySpaceship->rear_shield / mySpaceship->rear_shield_max)), AlignLeft, 20);
+
+    float y = 900 - 10;
+    for(int n=0; n<mySpaceship->weaponTubes; n++)
+    {
+        y -= 50;
+        switch(mySpaceship->weaponTube[n].state)
+        {
+        case WTS_Empty:
+            if (toggleButton(sf::FloatRect(20, y, 150, 50), tubeLoadType != MW_None && mySpaceship->weaponStorage[tubeLoadType] > 0, "Load", 35) && tubeLoadType != MW_None)
+                mySpaceship->commandLoadTube(n, tubeLoadType);
+            toggleButton(sf::FloatRect(170, y, 350, 50), false, "Empty", 35);
+            break;
+        case WTS_Loaded:
+            if (button(sf::FloatRect(20, y, 150, 50), "Unload", 35))
+                mySpaceship->commandUnloadTube(n);
+            if (button(sf::FloatRect(170, y, 350, 50), getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), 35))
+                mySpaceship->commandFireTube(n);
+            break;
+        case WTS_Loading:
+            toggleButton(sf::FloatRect(20, y, 150, 50), false, "Loading", 35);
+            text(sf::FloatRect(170, y, 350, 50), getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), AlignCenter, 35);
+            toggleButton(sf::FloatRect(170, 840 - 50 * n, 350 * (1.0 - (mySpaceship->weaponTube[n].delay / mySpaceship->tubeLoadTime)), 50), false, "");
+            break;
+        case WTS_Unloading:
+            toggleButton(sf::FloatRect(20, y, 150, 50), false, "Unloading", 25);
+            text(sf::FloatRect(170, y, 350, 50), getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), AlignCenter, 35);
+            toggleButton(sf::FloatRect(170, y, 350 * (mySpaceship->weaponTube[n].delay / mySpaceship->tubeLoadTime), 50), false, "");
+            break;
+        }
+    }
 
     for(int n=0; n<MW_Count; n++)
     {
-        if (toggleButton(sf::FloatRect(10, 440 + n * 30, 200, 30), tubeLoadType == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(mySpaceship->weaponStorage[n]), 25))
+        y -= 30;
+        if (toggleButton(sf::FloatRect(10, y, 200, 30), tubeLoadType == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(mySpaceship->weaponStorage[n]), 25))
         {
             if (tubeLoadType == n)
                 tubeLoadType = MW_None;
             else
                 tubeLoadType = EMissileWeapons(n);
-        }
-    }
-    
-    for(int n=0; n<mySpaceship->weaponTubes; n++)
-    {
-        switch(mySpaceship->weaponTube[n].state)
-        {
-        case WTS_Empty:
-            if (toggleButton(sf::FloatRect(20, 840 - 50 * n, 150, 50), tubeLoadType != MW_None && mySpaceship->weaponStorage[tubeLoadType] > 0, "Load", 35) && tubeLoadType != MW_None)
-                mySpaceship->commandLoadTube(n, tubeLoadType);
-            toggleButton(sf::FloatRect(170, 840 - 50 * n, 350, 50), false, "Empty", 35);
-            break;
-        case WTS_Loaded:
-            if (button(sf::FloatRect(20, 840 - 50 * n, 150, 50), "Unload", 35))
-                mySpaceship->commandUnloadTube(n);
-            if (button(sf::FloatRect(170, 840 - 50 * n, 350, 50), getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), 35))
-                mySpaceship->commandFireTube(n);
-            break;
-        case WTS_Loading:
-            toggleButton(sf::FloatRect(20, 840 - 50 * n, 150, 50), false, "Loading", 35);
-            text(sf::FloatRect(170, 840 - 50 * n, 350, 50), getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), AlignCenter, 35);
-            toggleButton(sf::FloatRect(170, 840 - 50 * n, 350 * (1.0 - (mySpaceship->weaponTube[n].delay / mySpaceship->tubeLoadTime)), 50), false, "");
-            break;
-        case WTS_Unloading:
-            toggleButton(sf::FloatRect(20, 840 - 50 * n, 150, 50), false, "Unloading", 25);
-            text(sf::FloatRect(170, 840 - 50 * n, 350, 50), getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), AlignCenter, 35);
-            toggleButton(sf::FloatRect(170, 840 - 50 * n, 350 * (mySpaceship->weaponTube[n].delay / mySpaceship->tubeLoadTime), 50), false, "");
-            break;
         }
     }
 }

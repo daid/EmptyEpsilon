@@ -45,10 +45,17 @@ public:
 class SpaceShip : public SpaceObject, public Updatable
 {
     const static float shield_recharge_rate = 0.2f;
+    const static float energy_recharge_per_second = 1.0f;
+    const static float energy_shield_use_per_second = 2.0f;
+    const static float energy_per_jump_km = 8.0f;
+    const static float energy_per_beam_fire = 3.0f;
+    const static float energy_warp_per_second = 1.0;
 public:
     string templateName;
     P<ShipTemplate> shipTemplate;
     EMainScreenSetting mainScreenSetting;
+    
+    float energy_level;
     
     float targetRotation;
     float impulseRequest;
@@ -73,6 +80,7 @@ public:
     BeamWeapon beamWeapons[maxBeamWeapons];
     
     float hull_strength, hull_max;
+    bool shields_active;
     float front_shield, rear_shield;
     float front_shield_max, rear_shield_max;
     float front_shield_hit_effect, rear_shield_hit_effect;
@@ -90,6 +98,7 @@ public:
     virtual bool hasShield() { return front_shield > (front_shield_max / 50.0) || rear_shield > (rear_shield_max / 50.0); }
     virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type);
     
+    bool useEnergy(float amount) { if (energy_level >= amount) { energy_level -= amount; return true; } return false; }
     void setShipTemplate(string templateName);
     
     P<SpaceObject> getTarget();

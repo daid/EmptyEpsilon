@@ -28,6 +28,7 @@ SpaceShip::SpaceShip()
 {
     setCollisionPhysics(true, false);
 
+    energy_level = 1000;
     mainScreenSetting = MSS_Front;
     targetRotation = getRotation();
     impulseRequest = 0;
@@ -45,6 +46,7 @@ SpaceShip::SpaceShip()
     warpSpeedPerWarpLevel = 1000.0;
     targetId = -1;
     hull_strength = hull_max = 70;
+    shields_active = false;
     front_shield = rear_shield = front_shield_max = rear_shield_max = 50;
     front_shield_hit_effect = rear_shield_hit_effect = 0;
     
@@ -226,6 +228,10 @@ void SpaceShip::update(float delta)
         setRadius(shipTemplate->radius);
     }
 
+    if (energy_level < 1000.0)
+        energy_level += delta * energy_recharge_per_second;
+    if (shields_active)
+        useEnergy(delta * energy_shield_use_per_second);
     if (front_shield < front_shield_max)
     {
         front_shield += delta * shield_recharge_rate;
@@ -273,7 +279,10 @@ void SpaceShip::update(float delta)
         jumpDelay -= delta;
         if (jumpDelay <= 0.0)
         {
-            setPosition(getPosition() + sf::vector2FromAngle(getRotation()) * jumpDistance * 1000.0f);
+            if (useEnergy(jumpDistance * energy_per_jump_km))
+            {
+                setPosition(getPosition() + sf::vector2FromAngle(getRotation()) * jumpDistance * 1000.0f);
+            }
             jumpDelay = 0.0;
         }
     }else if (hasWarpdrive && (warpRequest > 0 || currentWarp > 0))
@@ -284,7 +293,7 @@ void SpaceShip::update(float delta)
             if (currentImpulse > 1.0)
                 currentImpulse = 1.0;
         }else{
-            if (currentWarp < warpRequest)
+            if (currentWarp < warpRequest && useEnergy(energy_warp_per_second * delta * float(warpRequest * warpRequest) * (shields_active ? 1.5 : 1.0)))
             {
                 currentWarp += delta;
                 if (currentWarp > warpRequest)
@@ -325,7 +334,7 @@ void SpaceShip::update(float delta)
         float angle = sf::vector2ToAngle(diff);
         for(int n=0; n<maxBeamWeapons; n++)
         {
-            if (target && beamWeapons[n].cooldown <= 0.0 && distance < beamWeapons[n].range)
+            if (target && beamWeapons[n].cooldown <= 0.0 && distance < beamWeapons[n].range && useEnergy(energy_per_beam_fire))
             {
                 float angleDiff = angle - (beamWeapons[n].direction + getRotation());
                 while(angleDiff > 180) angleDiff -= 360;
@@ -377,29 +386,36 @@ P<SpaceObject> SpaceShip::getTarget()
 
 void SpaceShip::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type)
 {
-    float angle = sf::vector2ToAngle(getPosition() - damageLocation);
-    bool front_hit = !(angle > -90 && angle < 90);
-    float* shield = &front_shield;
-    float* shield_hit_effect = &front_shield_hit_effect;
-    if (!front_hit)
+    if (shields_active)
     {
-        shield = &rear_shield;
-        shield_hit_effect = &rear_shield_hit_effect;
-    }
-    
-    *shield -= damageAmount;
-
-    if (*shield < 0)
-    {
-        if (type != DT_EMP)
+        float angle = sf::vector2ToAngle(getPosition() - damageLocation);
+        bool front_hit = !(angle > -90 && angle < 90);
+        float* shield = &front_shield;
+        float* shield_hit_effect = &front_shield_hit_effect;
+        if (!front_hit)
         {
-            hull_strength -= -(*shield);
-            if (hull_strength <= 0.0)
-                destroy();
+            shield = &rear_shield;
+            shield_hit_effect = &rear_shield_hit_effect;
         }
-        *shield = 0.0;
+        
+        *shield -= damageAmount;
+
+        if (*shield < 0)
+        {
+            if (type != DT_EMP)
+            {
+                hull_strength -= -(*shield);
+                if (hull_strength <= 0.0)
+                    destroy();
+            }
+            *shield = 0.0;
+        }else{
+            *shield_hit_effect = 1.0;
+        }
     }else{
-        *shield_hit_effect = 1.0;
+        hull_strength -= damageAmount;
+        if (hull_strength <= 0.0)
+            destroy();
     }
 }
 
