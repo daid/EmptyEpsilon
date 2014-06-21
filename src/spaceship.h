@@ -45,17 +45,10 @@ public:
 class SpaceShip : public SpaceObject, public Updatable
 {
     const static float shield_recharge_rate = 0.2f;
-    const static float energy_recharge_per_second = 1.0f;
-    const static float energy_shield_use_per_second = 2.0f;
-    const static float energy_per_jump_km = 8.0f;
-    const static float energy_per_beam_fire = 3.0f;
-    const static float energy_warp_per_second = 1.0;
+
 public:
     string templateName;
     P<ShipTemplate> shipTemplate;
-    EMainScreenSetting mainScreenSetting;
-    
-    float energy_level;
     
     float targetRotation;
     float impulseRequest;
@@ -73,6 +66,7 @@ public:
     float jumpDelay;
     
     int8_t weaponStorage[MW_Count];
+    int8_t weaponStorageMax[MW_Count];
     int8_t weaponTubes;
     float tubeLoadTime;
     WeaponTube weaponTube[maxWeaponTubes];
@@ -87,7 +81,7 @@ public:
     
     int32_t targetId;
 
-    SpaceShip();
+    SpaceShip(string multiplayerClassName);
     
     virtual void draw3D();
     virtual void draw3DTransparent();
@@ -97,22 +91,17 @@ public:
     virtual bool canBeTargeted() { return true; }
     virtual bool hasShield() { return front_shield > (front_shield_max / 50.0) || rear_shield > (rear_shield_max / 50.0); }
     virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type);
+    virtual void hullDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type);
+    virtual void executeJump(float distance);
+    virtual void fireBeamWeapon(int index, P<SpaceObject> target);
     
-    bool useEnergy(float amount) { if (energy_level >= amount) { energy_level -= amount; return true; } return false; }
+    void loadTube(int tubeNr, EMissileWeapons type);
+    void fireTube(int tubeNr);
+    void initJump(float distance);
+    
     void setShipTemplate(string templateName);
     
     P<SpaceObject> getTarget();
-    
-    void onReceiveCommand(int32_t clientId, sf::Packet& packet);
-    void commandTargetRotation(float target);
-    void commandImpulse(float target);
-    void commandWarp(int8_t target);
-    void commandJump(float distance);
-    void commandSetTarget(P<SpaceObject> target);
-    void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
-    void commandUnloadTube(int8_t tubeNumber);
-    void commandFireTube(int8_t tubeNumber);
-    void commandMainScreenSetting(EMainScreenSetting mainScreen);
 };
 
 string getMissileWeaponName(EMissileWeapons missile);

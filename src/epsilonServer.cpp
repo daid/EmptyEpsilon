@@ -14,12 +14,12 @@ EpsilonServer::EpsilonServer()
     engine->setGameSpeed(0.0);
     
     //TMP
-    mySpaceship = new SpaceShip();
+    mySpaceship = new PlayerSpaceship();
     mySpaceship->setShipTemplate("player-cruiser");
     gameGlobalInfo->insertPlayerShip(mySpaceship);
     randomNebulas();
     
-    P<SpaceShip> ship = new SpaceShip();
+    P<PlayerSpaceship> ship = new PlayerSpaceship();
     ship->setShipTemplate("fighter");
     ship->setPosition(sf::Vector2f(100, 100));
     gameGlobalInfo->insertPlayerShip(ship);

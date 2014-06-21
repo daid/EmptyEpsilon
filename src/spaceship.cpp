@@ -6,30 +6,11 @@
 #include "beamEffect.h"
 #include "homingMissile.h"
 
-static const int16_t CMD_TARGET_ROTATION = 0x0001;
-static const int16_t CMD_IMPULSE = 0x0002;
-static const int16_t CMD_WARP = 0x0003;
-static const int16_t CMD_JUMP = 0x0004;
-static const int16_t CMD_SET_TARGET = 0x0005;
-static const int16_t CMD_LOAD_TUBE = 0x0006;
-static const int16_t CMD_UNLOAD_TUBE = 0x0007;
-static const int16_t CMD_FIRE_TUBE = 0x0008;
-static const int16_t CMD_SET_MAIN_SCREEN_SETTING = 0x0009;
-
-#include "scriptInterface.h"
-REGISTER_SCRIPT_CLASS(SpaceShip)
-{
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setShipTemplate);
-}
-
-REGISTER_MULTIPLAYER_CLASS(SpaceShip, "SpaceShip");
-SpaceShip::SpaceShip()
-: SpaceObject(50, "SpaceShip")
+SpaceShip::SpaceShip(string multiplayerClassName)
+: SpaceObject(50, multiplayerClassName)
 {
     setCollisionPhysics(true, false);
 
-    energy_level = 1000;
-    mainScreenSetting = MSS_Front;
     targetRotation = getRotation();
     impulseRequest = 0;
     currentImpulse = 0;
@@ -50,7 +31,6 @@ SpaceShip::SpaceShip()
     front_shield = rear_shield = front_shield_max = rear_shield_max = 50;
     front_shield_hit_effect = rear_shield_hit_effect = 0;
     
-    registerMemberReplication(&mainScreenSetting);
     registerMemberReplication(&targetRotation);
     registerMemberReplication(&impulseRequest);
     registerMemberReplication(&currentImpulse);
@@ -102,6 +82,7 @@ SpaceShip::SpaceShip()
     {
         weaponStorage[n] = 0;
         registerMemberReplication(&weaponStorage[n]);
+        registerMemberReplication(&weaponStorageMax[n]);
     }
 }
 
@@ -136,7 +117,7 @@ void SpaceShip::setShipTemplate(string templateName)
     hasJumpdrive = shipTemplate->jumpDrive;
     //shipTemplate->cloaking;
     for(int n=0; n<MW_Count; n++)
-        weaponStorage[n] = shipTemplate->weaponStorage[n];
+        weaponStorage[n] = weaponStorageMax[n] = shipTemplate->weaponStorage[n];
     
     setRadius(shipTemplate->radius);
 }
@@ -228,10 +209,6 @@ void SpaceShip::update(float delta)
         setRadius(shipTemplate->radius);
     }
 
-    if (energy_level < 1000.0)
-        energy_level += delta * energy_recharge_per_second;
-    if (shields_active)
-        useEnergy(delta * energy_shield_use_per_second);
     if (front_shield < front_shield_max)
     {
         front_shield += delta * shield_recharge_rate;
@@ -270,19 +247,22 @@ void SpaceShip::update(float delta)
     
     if (hasJumpdrive && jumpDelay > 0)
     {
-        if (currentImpulse > 1.0)
+        if (currentImpulse > 0.0)
         {
             currentImpulse -= delta;
             if (currentImpulse < 0.0)
                 currentImpulse = 0.0;
         }
+        if (currentWarp > 0.0)
+        {
+            currentWarp -= delta;
+            if (currentWarp < 0.0)
+                currentWarp = 0.0;
+        }
         jumpDelay -= delta;
         if (jumpDelay <= 0.0)
         {
-            if (useEnergy(jumpDistance * energy_per_jump_km))
-            {
-                setPosition(getPosition() + sf::vector2FromAngle(getRotation()) * jumpDistance * 1000.0f);
-            }
+            executeJump(jumpDistance);
             jumpDelay = 0.0;
         }
     }else if (hasWarpdrive && (warpRequest > 0 || currentWarp > 0))
@@ -293,7 +273,7 @@ void SpaceShip::update(float delta)
             if (currentImpulse > 1.0)
                 currentImpulse = 1.0;
         }else{
-            if (currentWarp < warpRequest && useEnergy(energy_warp_per_second * delta * float(warpRequest * warpRequest) * (shields_active ? 1.5 : 1.0)))
+            if (currentWarp < warpRequest)
             {
                 currentWarp += delta;
                 if (currentWarp > warpRequest)
@@ -334,21 +314,14 @@ void SpaceShip::update(float delta)
         float angle = sf::vector2ToAngle(diff);
         for(int n=0; n<maxBeamWeapons; n++)
         {
-            if (target && beamWeapons[n].cooldown <= 0.0 && distance < beamWeapons[n].range && useEnergy(energy_per_beam_fire))
+            if (target && beamWeapons[n].cooldown <= 0.0 && distance < beamWeapons[n].range)
             {
                 float angleDiff = angle - (beamWeapons[n].direction + getRotation());
                 while(angleDiff > 180) angleDiff -= 360;
                 while(angleDiff < -180) angleDiff += 360;
                 if (abs(angleDiff) < beamWeapons[n].arc / 2.0)
                 {
-                    sf::Vector2f hitLocation = target->getPosition() - (diff / distance) * target->getRadius();
-                    
-                    beamWeapons[n].cooldown = beamWeapons[n].cycleTime;
-                    P<BeamEffect> effect = new BeamEffect();
-                    effect->setSource(this, shipTemplate->beamPosition[n] * shipTemplate->scale);
-                    effect->setTarget(target, hitLocation);
-                    
-                    target->takeDamage(beamWeapons[n].damage, hitLocation, DT_Energy);
+                    fireBeamWeapon(n, target);
                 }
             }
         }
@@ -384,6 +357,73 @@ P<SpaceObject> SpaceShip::getTarget()
     return gameClient->getObjectById(targetId);
 }
 
+void SpaceShip::executeJump(float distance)
+{
+    setPosition(getPosition() + sf::vector2FromAngle(getRotation()) * distance * 1000.0f);
+}
+
+void SpaceShip::fireBeamWeapon(int index, P<SpaceObject> target)
+{
+    sf::Vector2f hitLocation = target->getPosition() - sf::normalize(target->getPosition() - getPosition()) * target->getRadius();
+    
+    beamWeapons[index].cooldown = beamWeapons[index].cycleTime;
+    P<BeamEffect> effect = new BeamEffect();
+    effect->setSource(this, shipTemplate->beamPosition[index] * shipTemplate->scale);
+    effect->setTarget(target, hitLocation);
+    
+    target->takeDamage(beamWeapons[index].damage, hitLocation, DT_Energy);
+}
+
+void SpaceShip::loadTube(int tubeNr, EMissileWeapons type)
+{
+    if (tubeNr >= 0 && tubeNr < maxWeaponTubes && type > MW_None && type < MW_Count)
+    {
+        if (weaponTube[tubeNr].state == WTS_Empty && weaponStorage[type] > 0)
+        {
+            weaponTube[tubeNr].state = WTS_Loading;
+            weaponTube[tubeNr].delay = tubeLoadTime;
+            weaponTube[tubeNr].typeLoaded = type;
+            weaponStorage[type]--;
+        }
+    }
+}
+
+void SpaceShip::fireTube(int tubeNr)
+{
+    if (tubeNr >= 0 && tubeNr < maxWeaponTubes && weaponTube[tubeNr].state == WTS_Loaded)
+    {
+        sf::Vector2f fireLocation = getPosition() + sf::rotateVector(shipTemplate->tubePosition[tubeNr], getRotation()) * shipTemplate->scale;
+        switch(weaponTube[tubeNr].typeLoaded)
+        {
+        case MW_Homing:
+            {
+                P<HomingMissile> missile = new HomingMissile();
+                missile->owner = this;
+                missile->target_id = targetId;
+                missile->setPosition(fireLocation);
+                missile->setRotation(getRotation());
+            }
+            break;
+        case MW_Nuke:
+        case MW_Mine:
+        case MW_EMP:
+        default:
+            break;
+        }
+        weaponTube[tubeNr].state = WTS_Empty;
+        weaponTube[tubeNr].typeLoaded = MW_None;
+    }
+}
+
+void SpaceShip::initJump(float distance)
+{
+    if (jumpDelay <= 0.0)
+    {
+        jumpDistance = distance;
+        jumpDelay = 10.0;
+    }
+}
+            
 void SpaceShip::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type)
 {
     if (shields_active)
@@ -402,180 +442,23 @@ void SpaceShip::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDam
 
         if (*shield < 0)
         {
-            if (type != DT_EMP)
-            {
-                hull_strength -= -(*shield);
-                if (hull_strength <= 0.0)
-                    destroy();
-            }
+            hullDamage(-(*shield), damageLocation, type);
             *shield = 0.0;
         }else{
             *shield_hit_effect = 1.0;
         }
     }else{
-        hull_strength -= damageAmount;
-        if (hull_strength <= 0.0)
-            destroy();
+        hullDamage(damageAmount, damageLocation, type);
     }
 }
 
-void SpaceShip::onReceiveCommand(int32_t clientId, sf::Packet& packet)
+void SpaceShip::hullDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type)
 {
-    int16_t command;
-    packet >> command;
-    switch(command)
-    {
-    case CMD_TARGET_ROTATION:
-        packet >> targetRotation;
-        break;
-    case CMD_IMPULSE:
-        packet >> impulseRequest;
-        break;
-    case CMD_WARP:
-        packet >> warpRequest;
-        break;
-    case CMD_JUMP:
-        if (jumpDelay <= 0.0)
-        {
-            packet >> jumpDistance;
-            jumpDelay = 10.0;
-        }
-        break;
-    case CMD_SET_TARGET:
-        {
-            packet >> targetId;
-        }
-        break;
-    case CMD_LOAD_TUBE:
-        {
-            int8_t tubeNr;
-            EMissileWeapons type;
-            packet >> tubeNr >> type;
-            
-            if (tubeNr >= 0 && tubeNr < maxWeaponTubes && type > MW_None && type < MW_Count)
-            {
-                if (weaponTube[tubeNr].state == WTS_Empty && weaponStorage[type] > 0)
-                {
-                    weaponTube[tubeNr].state = WTS_Loading;
-                    weaponTube[tubeNr].delay = tubeLoadTime;
-                    weaponTube[tubeNr].typeLoaded = type;
-                    weaponStorage[type]--;
-                }
-            }
-        }
-        break;
-    case CMD_UNLOAD_TUBE:
-        {
-            int8_t tubeNr;
-            packet >> tubeNr;
-            
-            if (tubeNr >= 0 && tubeNr < maxWeaponTubes && weaponTube[tubeNr].state == WTS_Loaded)
-            {
-                weaponTube[tubeNr].state = WTS_Unloading;
-                weaponTube[tubeNr].delay = tubeLoadTime;
-            }
-        }
-        break;
-    case CMD_FIRE_TUBE:
-        {
-            int8_t tubeNr;
-            packet >> tubeNr;
-            
-            if (tubeNr >= 0 && tubeNr < maxWeaponTubes && weaponTube[tubeNr].state == WTS_Loaded)
-            {
-                sf::Vector2f fireLocation = getPosition() + sf::rotateVector(shipTemplate->tubePosition[tubeNr], getRotation()) * shipTemplate->scale;
-                switch(weaponTube[tubeNr].typeLoaded)
-                {
-                case MW_Homing:
-                    {
-                        P<HomingMissile> missile = new HomingMissile();
-                        missile->owner = this;
-                        missile->target_id = targetId;
-                        missile->setPosition(fireLocation);
-                        missile->setRotation(getRotation());
-                    }
-                    break;
-                case MW_Nuke:
-                case MW_Mine:
-                case MW_EMP:
-                default:
-                    break;
-                }
-                weaponTube[tubeNr].state = WTS_Empty;
-                weaponTube[tubeNr].typeLoaded = MW_None;
-            }
-        }
-        break;
-    case CMD_SET_MAIN_SCREEN_SETTING:
-        packet >> mainScreenSetting;
-        break;
-    }
-}
-
-void SpaceShip::commandTargetRotation(float target)
-{
-    sf::Packet packet;
-    packet << CMD_TARGET_ROTATION << target;
-    sendCommand(packet);
-}
-
-void SpaceShip::commandImpulse(float target)
-{
-    sf::Packet packet;
-    packet << CMD_IMPULSE << target;
-    sendCommand(packet);
-}
-
-void SpaceShip::commandWarp(int8_t target)
-{
-    sf::Packet packet;
-    packet << CMD_WARP << target;
-    sendCommand(packet);
-}
-
-void SpaceShip::commandJump(float distance)
-{
-    sf::Packet packet;
-    packet << CMD_JUMP << distance;
-    sendCommand(packet);
-}
-
-void SpaceShip::commandSetTarget(P<SpaceObject> target)
-{
-    sf::Packet packet;
-    if (target)
-        packet << CMD_SET_TARGET << target->getMultiplayerId();
-    else
-        packet << CMD_SET_TARGET << int32_t(-1);
-    sendCommand(packet);
-}
-
-void SpaceShip::commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType)
-{
-    sf::Packet packet;
-    packet << CMD_LOAD_TUBE << tubeNumber << missileType;
-    sendCommand(packet);
-}
-
-void SpaceShip::commandUnloadTube(int8_t tubeNumber)
-{
-    sf::Packet packet;
-    packet << CMD_UNLOAD_TUBE << tubeNumber;
-    sendCommand(packet);
-}
-
-void SpaceShip::commandFireTube(int8_t tubeNumber)
-{
-    sf::Packet packet;
-    packet << CMD_FIRE_TUBE << tubeNumber;
-    sendCommand(packet);
-}
-
-void SpaceShip::commandMainScreenSetting(EMainScreenSetting mainScreen)
-{
-    sf::Packet packet;
-    packet << CMD_SET_MAIN_SCREEN_SETTING << mainScreen;
-    sendCommand(packet);
+    if (type == DT_EMP)
+        return;
+    hull_strength -= damageAmount;
+    if (hull_strength <= 0.0)
+        destroy();
 }
 
 string getMissileWeaponName(EMissileWeapons missile)
