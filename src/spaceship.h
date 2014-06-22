@@ -80,6 +80,8 @@ public:
     float front_shield_hit_effect, rear_shield_hit_effect;
     
     int32_t targetId;
+    
+    bool scanned_by_player;
 
     SpaceShip(string multiplayerClassName);
     

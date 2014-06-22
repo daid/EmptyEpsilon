@@ -14,6 +14,8 @@ class PlayerSpaceship : public SpaceShip
 public:
     float energy_level;
     float hull_damage_indicator;
+    P<SpaceShip> scanning_ship; //Server only
+    float scanning_delay;
     
     EMainScreenSetting mainScreenSetting;
 
@@ -30,6 +32,7 @@ public:
     void commandFireTube(int8_t tubeNumber);
     void commandSetShields(bool enabled);
     void commandMainScreenSetting(EMainScreenSetting mainScreen);
+    void commandScan(P<SpaceObject> object);
     
     virtual void executeJump(float distance);
     virtual void fireBeamWeapon(int index, P<SpaceObject> target);

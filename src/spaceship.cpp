@@ -3,6 +3,7 @@
 #include "mesh.h"
 #include "main.h"
 #include "shipTemplate.h"
+#include "playerInfo.h"
 #include "beamEffect.h"
 #include "factionInfo.h"
 #include "explosionEffect.h"
@@ -32,6 +33,7 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     shields_active = false;
     front_shield = rear_shield = front_shield_max = rear_shield_max = 50;
     front_shield_hit_effect = rear_shield_hit_effect = 0;
+    scanned_by_player = false;
     
     registerMemberReplication(&targetRotation);
     registerMemberReplication(&impulseRequest);
@@ -54,6 +56,7 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     registerMemberReplication(&rear_shield_max);
     registerMemberReplication(&front_shield_hit_effect, 0.5);
     registerMemberReplication(&rear_shield_hit_effect, 0.5);
+    registerMemberReplication(&scanned_by_player);
     
     for(int n=0; n<maxBeamWeapons; n++)
     {
@@ -200,6 +203,13 @@ void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float
     objectSprite.setPosition(position);
     if (long_range)
         objectSprite.setScale(0.7, 0.7);
+    if (scanned_by_player && mySpaceship)
+    {
+        if (factionInfo[factionId].states[mySpaceship->factionId] == FVF_Enemy)
+            objectSprite.setColor(sf::Color::Red);
+    }else{
+        objectSprite.setColor(sf::Color(128, 128, 128));
+    }
     window.draw(objectSprite);
 }
 

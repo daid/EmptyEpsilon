@@ -273,13 +273,26 @@ void CrewUI::scienceUI()
         float distance = sf::length(scienceTarget->getPosition() - mySpaceship->getPosition());
         float heading = sf::vector2ToAngle(scienceTarget->getPosition() - mySpaceship->getPosition());
         if (heading < 0) heading += 360;
-        text(sf::FloatRect(20, 100, 100, 20), factionInfo[scienceTarget->factionId].name, AlignLeft, 20);
-        text(sf::FloatRect(20, 120, 100, 20), "Distance: " + string(distance / 1000.0, 1) + "km", AlignLeft, 20);
-        text(sf::FloatRect(20, 140, 100, 20), "Heading: " + string(int(heading)), AlignLeft, 20);
+        text(sf::FloatRect(20, 100, 100, 20), "Distance: " + string(distance / 1000.0, 1) + "km", AlignLeft, 20);
+        text(sf::FloatRect(20, 120, 100, 20), "Heading: " + string(int(heading)), AlignLeft, 20);
+
         P<SpaceShip> ship = scienceTarget;
-        if (ship && ship->shipTemplate)
+        if (ship && !ship->scanned_by_player)
         {
-            text(sf::FloatRect(20, 160, 100, 20), ship->shipTemplate->name, AlignLeft, 20);
+            if (mySpaceship->scanning_delay > 0.0)
+            {
+                text(sf::FloatRect(20, 140, 150, 30), string(int(ceilf(mySpaceship->scanning_delay))), AlignCenter, 25);
+            }else{
+                if (button(sf::FloatRect(20, 140, 150, 30), "Scan", 25))
+                    mySpaceship->commandScan(scienceTarget);
+            }
+        }else{
+            text(sf::FloatRect(20, 140, 100, 20), factionInfo[scienceTarget->factionId].name, AlignLeft, 20);
+            if (ship && ship->shipTemplate)
+            {
+                text(sf::FloatRect(20, 160, 100, 20), ship->shipTemplate->name, AlignLeft, 20);
+                text(sf::FloatRect(20, 180, 200, 20), "Shields: " + string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), AlignLeft, 20);
+            }
         }
     }
     

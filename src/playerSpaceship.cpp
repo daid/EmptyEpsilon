@@ -10,6 +10,7 @@ static const int16_t CMD_UNLOAD_TUBE = 0x0007;
 static const int16_t CMD_FIRE_TUBE = 0x0008;
 static const int16_t CMD_SET_SHIELDS = 0x0009;
 static const int16_t CMD_SET_MAIN_SCREEN_SETTING = 0x000A;
+static const int16_t CMD_SCAN_OBJECT = 0x000B;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -20,10 +21,12 @@ PlayerSpaceship::PlayerSpaceship()
     mainScreenSetting = MSS_Front;
     factionId = 1;
     hull_damage_indicator = 0.0;
+    scanned_by_player = true;
 
     registerMemberReplication(&hull_damage_indicator, 0.5);
     registerMemberReplication(&energy_level);
     registerMemberReplication(&mainScreenSetting);
+    registerMemberReplication(&scanning_delay, 0.5);
 }
 
 void PlayerSpaceship::update(float delta)
@@ -45,6 +48,18 @@ void PlayerSpaceship::update(float delta)
             if (!useEnergy(energy_warp_per_second * delta * float(warpRequest * warpRequest) * (shields_active ? 1.5 : 1.0)))
                 warpRequest = 0;
         }
+    }
+
+    if (scanning_ship)
+    {
+        scanning_delay -= delta;
+        if (scanning_delay < 0)
+        {
+            scanning_ship->scanned_by_player = true;
+            scanning_ship = NULL;
+        }
+    }else{
+        scanning_delay = 0.0;
     }
     
     SpaceShip::update(delta);
@@ -137,6 +152,19 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
     case CMD_SET_MAIN_SCREEN_SETTING:
         packet >> mainScreenSetting;
         break;
+    case CMD_SCAN_OBJECT:
+        {
+            int32_t id;
+            packet >> id;
+            
+            P<SpaceShip> ship = gameServer->getObjectById(id);
+            if (ship)
+            {
+                scanning_ship = ship;
+                scanning_delay = 8.0;
+            }
+        }
+        break;
     }
 }
 
@@ -210,5 +238,12 @@ void PlayerSpaceship::commandMainScreenSetting(EMainScreenSetting mainScreen)
 {
     sf::Packet packet;
     packet << CMD_SET_MAIN_SCREEN_SETTING << mainScreen;
+    sendCommand(packet);
+}
+
+void PlayerSpaceship::commandScan(P<SpaceObject> object)
+{
+    sf::Packet packet;
+    packet << CMD_SCAN_OBJECT << object->getMultiplayerId();
     sendCommand(packet);
 }
