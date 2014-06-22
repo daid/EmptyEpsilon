@@ -17,6 +17,7 @@ CpuShip::CpuShip()
     
     setRotation(random(0, 360));
     targetRotation = getRotation();
+    shields_active = true;
 }
 
 void CpuShip::update(float delta)
@@ -50,7 +51,7 @@ void CpuShip::update(float delta)
         target_distance = sf::length(target->getPosition() - getPosition());
     
     //Find new target
-    if (orders == AI_StandGround || orders == AI_Roaming)
+    if (orders == AI_StandGround || orders == AI_Roaming || orders == AI_FlyTowards)
         new_target = findBestTarget(getPosition(), 5000);
     if (orders == AI_DefendLocation)
         new_target = findBestTarget(order_target_location, 5000);

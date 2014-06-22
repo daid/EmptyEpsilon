@@ -35,11 +35,12 @@ void ShipSelectionScreen::onGui()
 
     if (gameServer)
     {
-        if (button(sf::FloatRect(800, 800, 300, 50), "Launch vessel"))
+    }
+    if (mySpaceship)
+    {
+        if (button(sf::FloatRect(800, 800, 300, 50), "Ready"))
         {
             destroy();
-            if (gameGlobalInfo->findPlayerShip(mySpaceship) < 0)
-                gameGlobalInfo->insertPlayerShip(mySpaceship);
             if (myPlayerInfo->isMainScreen())
             {
                 new MainScreenUI();
@@ -47,37 +48,15 @@ void ShipSelectionScreen::onGui()
                 new CrewUI();
             }
         }
-    }else{
-        if (mySpaceship)
-        {
-            if (button(sf::FloatRect(800, 800, 300, 50), "Join vessel"))
-            {
-                destroy();
-                if (myPlayerInfo->isMainScreen())
-                {
-                    new MainScreenUI();
-                }else{
-                    new CrewUI();
-                }
-            }
-        }
     }
     
     for(int n=0; n<GameGlobalInfo::maxPlayerShips; n++)
     {
-        if (gameGlobalInfo->getPlayerShip(n))
+        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
+        if (ship && ship->shipTemplate)
         {
-            if (button(sf::FloatRect(200, 300 + n * 50, 300, 50), "Join vessel " + string(n)))
-            {
-                mySpaceship = gameGlobalInfo->getPlayerShip(n);
-                destroy();
-                if (myPlayerInfo->isMainScreen())
-                {
-                    new MainScreenUI();
-                }else{
-                    new CrewUI();
-                }
-            }
+            if (toggleButton(sf::FloatRect(200, 300 + n * 50, 300, 50), mySpaceship == ship, ship->shipTemplate->name + " " + string(n)))
+                mySpaceship = ship;
         }
     }
 }
