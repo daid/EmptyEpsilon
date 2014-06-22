@@ -114,7 +114,7 @@ void CrewUI::helmsUI()
     if (mySpaceship->hasJumpdrive)
     {
         float x = mySpaceship->hasWarpdrive ? 180 : 100;
-        jumpDistance = vslider(sf::FloatRect(x, 500, 50, 300), jumpDistance, 20.0, 1.0);
+        jumpDistance = vslider(sf::FloatRect(x, 500, 50, 300), jumpDistance, 40.0, 1.0);
         text(sf::FloatRect(x, 800, 50, 20), string(jumpDistance) + "km", AlignLeft, 20);
         if (mySpaceship->jumpDelay > 0.0)
         {

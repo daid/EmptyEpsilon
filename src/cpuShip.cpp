@@ -52,13 +52,13 @@ void CpuShip::update(float delta)
     
     //Find new target
     if (orders == AI_StandGround || orders == AI_Roaming || orders == AI_FlyTowards)
-        new_target = findBestTarget(getPosition(), 5000);
+        new_target = findBestTarget(getPosition(), 7000);
     if (orders == AI_DefendLocation)
-        new_target = findBestTarget(order_target_location, 5000);
+        new_target = findBestTarget(order_target_location, 7000);
     if (orders == AI_DefendTarget)
     {
         if (order_target)
-            new_target = findBestTarget(order_target->getPosition(), 5000);
+            new_target = findBestTarget(order_target->getPosition(), 7000);
     }
     if (orders == AI_Attack)
         new_target = order_target;
@@ -67,13 +67,13 @@ void CpuShip::update(float delta)
     {
         if (orders == AI_Idle)
             target = NULL;
-        if (orders == AI_StandGround && target_distance > 5000)
+        if (orders == AI_StandGround && target_distance > 8000)
             target = NULL;
-        if (orders == AI_DefendLocation && target_distance > 5000)
+        if (orders == AI_DefendLocation && target_distance > 8000)
             target = NULL;
-        if (orders == AI_DefendTarget && target_distance > 5000)
+        if (orders == AI_DefendTarget && target_distance > 8000)
             target = NULL;
-        if (orders == AI_FlyTowards && target_distance > 5000)
+        if (orders == AI_FlyTowards && target_distance > 8000)
             target = NULL;
         
         if (!target)
@@ -135,6 +135,9 @@ void CpuShip::update(float delta)
             // 1) we are looking for a target
             // 2) we ran out of missiles
             // 3) we have no weapons
+            new_target = findBestTarget(getPosition(), 20000);
+            if (new_target)
+                targetId = new_target->getMultiplayerId();
             break;
         case AI_StandGround:     //Keep current position, do not fly away, but attack nearby targets.
             targetRotation = getRotation();

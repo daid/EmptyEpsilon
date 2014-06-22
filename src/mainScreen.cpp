@@ -157,9 +157,9 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
     }
     
     {
-        float lightpos[4] = {0, 0, 1000, 1.0};
+        float lightpos[4] = {20000, 20000, 20000, 1.0};
         glPushMatrix();
-        glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
+        //glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
         glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
         glPopMatrix();
     }
