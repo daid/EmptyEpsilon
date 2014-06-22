@@ -13,7 +13,7 @@ CpuShip::CpuShip()
 : SpaceShip("CpuShip")
 {
     factionId = 2;
-    orders = AI_Roaming;
+    orders = AI_Idle;
     
     setRotation(random(0, 360));
     targetRotation = getRotation();
@@ -25,6 +25,23 @@ void CpuShip::update(float delta)
 
     if (!gameServer)
         return;
+    
+    //Check the weapon state, 
+    bool has_missiles = weaponTubes > 0 && weaponStorage[MW_Homing] > 0, has_beams = false;
+    //If we have weapon tubes, load them with torpedoes
+    for(int n=0; n<weaponTubes; n++)
+    {
+        if (weaponTube[n].state == WTS_Empty && weaponStorage[MW_Homing] > 0)
+            loadTube(n, MW_Homing);
+    }
+    for(int n=0; n<maxBeamWeapons; n++)
+    {
+        if (beamWeapons[n].range > 0)
+        {
+            has_beams = true;
+            break;
+        }
+    }
 
     P<SpaceObject> target = getTarget();
     P<SpaceObject> new_target;
@@ -41,8 +58,6 @@ void CpuShip::update(float delta)
     {
         if (order_target)
             new_target = findBestTarget(order_target->getPosition(), 5000);
-        else
-            orders = AI_Roaming;
     }
     if (orders == AI_Attack)
         new_target = order_target;
@@ -76,16 +91,38 @@ void CpuShip::update(float delta)
     }
 
     //If we have a target, engage the target.
-    if (target)
+    if (target && (has_missiles || has_beams))
     {
+        float attack_distance = 4000.0;
+        if (has_beams)
+            attack_distance = 700.0;
+        
         sf::Vector2f position_diff = target->getPosition() - getPosition();
         float distance = sf::length(position_diff);
-        
         targetRotation = sf::vector2ToAngle(position_diff);
-        if (distance > 1000)
+        
+        if (distance > 7000 && hasWarpdrive)
+        {
+            warpRequest = 1.0;
+        }else{
+            warpRequest = 0.0;
+        }
+        if (distance > 10000 && hasJumpdrive && jumpDelay <= 0.0)
+        {
+            if (fabs(sf::angleDifference(targetRotation, getRotation())) < 1.0)
+                initJump(distance - 3000);
+        }
+        
+        if (distance > attack_distance + impulseMaxSpeed)
             impulseRequest = 1.0f;
         else
-            impulseRequest = (distance - 500.0f) / 500.0f;
+            impulseRequest = (distance - attack_distance) / impulseMaxSpeed;
+        
+        if (distance < 4500 && has_missiles)
+        {
+            for(int n=0; n<weaponTubes; n++)
+                fireTube(n);
+        }
     }else{
         //When we are not attacking a target, follow orders
         switch(orders)
@@ -93,6 +130,10 @@ void CpuShip::update(float delta)
         case AI_Idle:            //Don't do anything, don't even attack.
             break;
         case AI_Roaming:         //Fly around and engage at will, without a clear target
+            //Could mean 3 things
+            // 1) we are looking for a target
+            // 2) we ran out of missiles
+            // 3) we have no weapons
             break;
         case AI_StandGround:     //Keep current position, do not fly away, but attack nearby targets.
             targetRotation = getRotation();
@@ -104,8 +145,13 @@ void CpuShip::update(float delta)
             impulseRequest = 1.0;
             break;
         case AI_DefendTarget:    //Defend against enemies getting close to [order_target] (falls back to AI_Roaming if the target is destroyed)
-            targetRotation = sf::vector2ToAngle(order_target->getPosition() - getPosition());
-            impulseRequest = 1.0;
+            if (order_target)
+            {
+                targetRotation = sf::vector2ToAngle(order_target->getPosition() - getPosition());
+                impulseRequest = 1.0;
+            }else{
+                orders = AI_Roaming;    //We pretty much lost our defending target, so just start roaming.
+            }
             break;
         case AI_FlyFormation:    //Fly [order_target_location] offset from [order_target]. Allows for nicely flying in formation.
             break;
@@ -138,4 +184,45 @@ P<SpaceObject> CpuShip::findBestTarget(sf::Vector2f position, float radius)
         }
     }
     return target;
+}
+
+void CpuShip::orderRoaming()
+{
+    orders = AI_Roaming;
+}
+
+void CpuShip::orderStandGround()
+{
+    orders = AI_StandGround;
+}
+
+void CpuShip::orderDefendLocation(sf::Vector2f position)
+{
+    orders = AI_DefendLocation;
+    order_target_location = position;
+}
+
+void CpuShip::orderDefendTarget(P<SpaceObject> object)
+{
+    orders = AI_DefendTarget;
+    order_target = object;
+}
+
+void CpuShip::orderFlyFormation(P<SpaceObject> object, sf::Vector2f offset)
+{
+    orders = AI_FlyFormation;
+    order_target = object;
+    order_target_location = offset;
+}
+
+void CpuShip::orderFlyTowards(sf::Vector2f target)
+{
+    orders = AI_FlyTowards;
+    order_target_location = target;
+}
+
+void CpuShip::orderAttack(P<SpaceObject> object)
+{
+    orders = AI_Attack;
+    order_target = object;
 }

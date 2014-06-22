@@ -26,6 +26,14 @@ public:
     virtual void update(float delta);
     
     P<SpaceObject> findBestTarget(sf::Vector2f position, float radius);
+    
+    void orderRoaming();
+    void orderStandGround();
+    void orderDefendLocation(sf::Vector2f position);
+    void orderDefendTarget(P<SpaceObject> object);
+    void orderFlyFormation(P<SpaceObject> object, sf::Vector2f offset);
+    void orderFlyTowards(sf::Vector2f target);
+    void orderAttack(P<SpaceObject> object);
 };
 
 #endif//CPU_SHIP_H

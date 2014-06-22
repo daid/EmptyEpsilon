@@ -31,11 +31,15 @@ EpsilonServer::EpsilonServer()
     station->setPosition(sf::Vector2f(0, -500));
     mySpaceship->commandSetTarget(station);
     
-    for(int n=0; n<100; n++)
+    for(int n=0; n<1; n++)
     {
         P<CpuShip> s = new CpuShip();
-        s->setShipTemplate("Fighter");
+        if (random(0, 100) < 10)
+            s->setShipTemplate("Missile Cruiser");
+        else
+            s->setShipTemplate("Fighter");
         s->setPosition(sf::vector2FromAngle(random(0, 360)) * random(5000, 20000));
+        s->orderRoaming();
     }
 }
 
