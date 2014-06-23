@@ -83,24 +83,21 @@ void PlayerSpaceship::update(float delta)
         }
         if (energy_level < 0.0)
             energy_level = 0.0;
+        float max_power_level = 3.0;
         if (energy_level < 10.0)
         {
             //Out of energy, we do not care how much power you put into systems, everything is bad now.
-            impulseMaxSpeed = shipTemplate->impulseSpeed * 0.1;
-            rotationSpeed = shipTemplate->turnSpeed * 0.1;
-            warpSpeedPerWarpLevel = shipTemplate->warpSpeed * 0.1;
-            jumpSpeedFactor = 0.1;
+            max_power_level = 0.1;
             shields_active = false;
-        }else{
-            beamRechargeFactor = systems[PS_BeamWeapons].powerLevel;
-            tubeRechargeFactor = systems[PS_MissileSystem].powerLevel;
-            rotationSpeed = shipTemplate->turnSpeed * systems[PS_Maneuver].powerLevel;
-            impulseMaxSpeed = shipTemplate->impulseSpeed * systems[PS_Impulse].powerLevel;
-            warpSpeedPerWarpLevel = shipTemplate->warpSpeed * systems[PS_Warp].powerLevel;
-            jumpSpeedFactor = systems[PS_JumpDrive].powerLevel;
-            front_shield_recharge_factor = systems[PS_FrontShield].powerLevel;
-            rear_shield_recharge_factor = systems[PS_RearShield].powerLevel;
         }
+        beamRechargeFactor = std::min(systems[PS_BeamWeapons].powerLevel, max_power_level);
+        tubeRechargeFactor = std::min(systems[PS_MissileSystem].powerLevel, max_power_level);
+        rotationSpeed = shipTemplate->turnSpeed * std::min(systems[PS_Maneuver].powerLevel, max_power_level);
+        impulseMaxSpeed = shipTemplate->impulseSpeed * std::min(systems[PS_Impulse].powerLevel, max_power_level);
+        warpSpeedPerWarpLevel = shipTemplate->warpSpeed * std::min(systems[PS_Warp].powerLevel, max_power_level);
+        jumpSpeedFactor = std::min(systems[PS_JumpDrive].powerLevel, max_power_level);
+        front_shield_recharge_factor = std::min(systems[PS_FrontShield].powerLevel, max_power_level);
+        rear_shield_recharge_factor = std::min(systems[PS_RearShield].powerLevel, max_power_level);
 
         if (hasWarpdrive && warpRequest > 0 && !(hasJumpdrive && jumpDelay > 0))
         {
