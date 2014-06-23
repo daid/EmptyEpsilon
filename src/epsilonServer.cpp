@@ -23,7 +23,7 @@ EpsilonServer::EpsilonServer()
     randomNebulas();
     
     P<PlayerSpaceship> ship = new PlayerSpaceship();
-    ship->setShipTemplate("Fighter");
+    ship->setShipTemplate("Dreadnought");
     ship->setPosition(sf::Vector2f(100, 100));
     gameGlobalInfo->insertPlayerShip(ship);
     
