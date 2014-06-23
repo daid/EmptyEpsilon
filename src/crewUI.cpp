@@ -241,22 +241,23 @@ void CrewUI::engineeringUI()
     }
     text(sf::FloatRect(10, 100, 200, 20), "Energy: " + string(int(mySpaceship->energy_level)) + " (" + string(net_power) + ")", AlignLeft, 20);
     
-    int y = 20;
+    int x = 20;
     for(int n=0; n<PS_COUNT; n++)
     {
         if (n == PS_Warp && !mySpaceship->hasWarpdrive) continue;
         if (n == PS_JumpDrive && !mySpaceship->hasJumpdrive) continue;
         
-        vtext(sf::FloatRect(y, 550, 50, 300), getPlayerSystemName(EPlayerSystem(n)) + " " + string(mySpaceship->systems[n].heatLevel), AlignLeft);
-        float ret = vslider(sf::FloatRect(y + 50, 550, 50, 300), mySpaceship->systems[n].powerLevel, 3.0, 0.0, 1.0);
+        text(sf::FloatRect(x, 530, 140, 20), string(int(mySpaceship->systems[n].powerLevel * 100)) + "% (" + string(int(mySpaceship->systems[n].heatLevel * 100)) + "%)", AlignCenter, 20);
+        vtext(sf::FloatRect(x, 550, 50, 300), getPlayerSystemName(EPlayerSystem(n)), AlignLeft);
+        float ret = vslider(sf::FloatRect(x + 50, 550, 50, 300), mySpaceship->systems[n].powerLevel, 3.0, 0.0, 1.0);
         if (ret < 1.25 && ret > 0.75)
             ret = 1.0;
         if (mySpaceship->systems[n].powerLevel != ret)
             mySpaceship->commandSetSystemPower(EPlayerSystem(n), ret);
-        ret = vslider(sf::FloatRect(y + 110, 550, 50, 300), mySpaceship->systems[n].coolantLevel, 10.0, 0.0);
+        ret = vslider(sf::FloatRect(x + 110, 550, 50, 300), mySpaceship->systems[n].coolantLevel, 10.0, 0.0);
         if (mySpaceship->systems[n].coolantLevel != ret)
             mySpaceship->commandSetSystemCoolant(EPlayerSystem(n), ret);
-        y += 160;
+        x += 160;
     }
 }
 
