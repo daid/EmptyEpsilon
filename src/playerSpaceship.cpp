@@ -73,7 +73,10 @@ void PlayerSpaceship::update(float delta)
             if (n == PS_Warp && !hasWarpdrive) continue;
             if (n == PS_JumpDrive && !hasJumpdrive) continue;
             
-            energy_level -= delta * systems[n].powerUserFactor * systems[n].powerLevel * 0.02;
+            if (systems[n].powerUserFactor < 0.0)   //When we generate power, use the health of this system in the equation
+                energy_level -= delta * systems[n].powerUserFactor * systems[n].health * systems[n].powerLevel * 0.02;
+            else
+                energy_level -= delta * systems[n].powerUserFactor * systems[n].powerLevel * 0.02;
             systems[n].heatLevel += delta * powf(1.7, systems[n].powerLevel - 1.0) * system_heatup_per_second;
             systems[n].heatLevel -= delta * (1.0 + systems[n].coolantLevel * 0.1) * system_heatup_per_second;
             if (systems[n].heatLevel > 1.0)

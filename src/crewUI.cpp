@@ -237,7 +237,10 @@ void CrewUI::engineeringUI()
     {
         if (n == PS_Warp && !mySpaceship->hasWarpdrive) continue;
         if (n == PS_JumpDrive && !mySpaceship->hasJumpdrive) continue;
-        net_power -= mySpaceship->systems[n].powerUserFactor * mySpaceship->systems[n].powerLevel;
+        if (mySpaceship->systems[n].powerUserFactor < 0)
+            net_power -= mySpaceship->systems[n].powerUserFactor * mySpaceship->systems[n].health * mySpaceship->systems[n].powerLevel;
+        else
+            net_power -= mySpaceship->systems[n].powerUserFactor * mySpaceship->systems[n].powerLevel;
     }
     text(sf::FloatRect(10, 100, 200, 20), "Energy: " + string(int(mySpaceship->energy_level)) + " (" + string(net_power) + ")", AlignLeft, 20);
     text(sf::FloatRect(10, 120, 200, 20), "Hull: " + string(int(mySpaceship->hull_strength * 100 / mySpaceship->hull_max)), AlignLeft, 20);
