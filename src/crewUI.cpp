@@ -251,8 +251,11 @@ void CrewUI::engineeringUI()
         float ret = vslider(sf::FloatRect(y + 50, 550, 50, 300), mySpaceship->systems[n].powerLevel, 3.0, 0.0, 1.0);
         if (ret < 1.25 && ret > 0.75)
             ret = 1.0;
-        mySpaceship->systems[n].powerLevel = ret;
-        vslider(sf::FloatRect(y + 110, 550, 50, 300), 0.0, 10.0, 0.0);
+        if (mySpaceship->systems[n].powerLevel != ret)
+            mySpaceship->commandSetSystemPower(EPlayerSystem(n), ret);
+        ret = vslider(sf::FloatRect(y + 110, 550, 50, 300), mySpaceship->systems[n].coolantLevel, 10.0, 0.0);
+        if (mySpaceship->systems[n].coolantLevel != ret)
+            mySpaceship->commandSetSystemCoolant(EPlayerSystem(n), ret);
         y += 160;
     }
 }

@@ -59,6 +59,8 @@ public:
     void commandSetShields(bool enabled);
     void commandMainScreenSetting(EMainScreenSetting mainScreen);
     void commandScan(P<SpaceObject> object);
+    void commandSetSystemPower(EPlayerSystem system, float power_level);
+    void commandSetSystemCoolant(EPlayerSystem system, float coolant_level);
     
     virtual void executeJump(float distance);
     virtual void fireBeamWeapon(int index, P<SpaceObject> target);
@@ -68,5 +70,6 @@ public:
     bool useEnergy(float amount) { if (energy_level >= amount) { energy_level -= amount; return true; } return false; }
 };
 string getPlayerSystemName(EPlayerSystem system);
+REGISTER_MULTIPLAYER_ENUM(EPlayerSystem);
 
 #endif//PLAYER_SPACESHIP_H

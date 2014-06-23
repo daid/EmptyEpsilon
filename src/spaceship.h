@@ -107,38 +107,8 @@ public:
 };
 
 string getMissileWeaponName(EMissileWeapons missile);
-static inline sf::Packet& operator << (sf::Packet& packet, const EMissileWeapons& mw)
-{
-    return packet << int8_t(mw);
-}
-static inline sf::Packet& operator >> (sf::Packet& packet, EMissileWeapons& mw)
-{
-    int8_t tmp;
-    packet >> tmp;
-    mw = EMissileWeapons(tmp);
-    return packet;
-}
-static inline sf::Packet& operator << (sf::Packet& packet, const EWeaponTubeState& mw)
-{
-    return packet << int8_t(mw);
-}
-static inline sf::Packet& operator >> (sf::Packet& packet, EWeaponTubeState& mw)
-{
-    int8_t tmp;
-    packet >> tmp;
-    mw = EWeaponTubeState(tmp);
-    return packet;
-}
-static inline sf::Packet& operator << (sf::Packet& packet, const EMainScreenSetting& e)
-{
-    return packet << int8_t(e);
-}
-static inline sf::Packet& operator >> (sf::Packet& packet, EMainScreenSetting& e)
-{
-    int8_t tmp;
-    packet >> tmp;
-    e = EMainScreenSetting(tmp);
-    return packet;
-}
+REGISTER_MULTIPLAYER_ENUM(EMissileWeapons);
+REGISTER_MULTIPLAYER_ENUM(EWeaponTubeState);
+REGISTER_MULTIPLAYER_ENUM(EMainScreenSetting);
 
 #endif//SPACE_SHIP_H

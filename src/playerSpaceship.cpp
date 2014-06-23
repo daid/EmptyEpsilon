@@ -11,6 +11,8 @@ static const int16_t CMD_FIRE_TUBE = 0x0008;
 static const int16_t CMD_SET_SHIELDS = 0x0009;
 static const int16_t CMD_SET_MAIN_SCREEN_SETTING = 0x000A;
 static const int16_t CMD_SCAN_OBJECT = 0x000B;
+static const int16_t CMD_SET_SYSTEM_POWER = 0x000C;
+static const int16_t CMD_SET_SYSTEM_COOLANT = 0x000D;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -197,6 +199,24 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             }
         }
         break;
+    case CMD_SET_SYSTEM_POWER:
+        {
+            EPlayerSystem system;
+            float level;
+            packet >> system >> level;
+            if (system < PS_COUNT && level >= 0.0 && level <= 3.0)
+                systems[system].powerLevel = level;
+        }
+        break;
+    case CMD_SET_SYSTEM_COOLANT:
+        {
+            EPlayerSystem system;
+            float level;
+            packet >> system >> level;
+            if (system < PS_COUNT && level >= 0.0 && level <= 3.0)
+                systems[system].coolantLevel = level;
+        }
+        break;
     }
 }
 
@@ -277,6 +297,20 @@ void PlayerSpaceship::commandScan(P<SpaceObject> object)
 {
     sf::Packet packet;
     packet << CMD_SCAN_OBJECT << object->getMultiplayerId();
+    sendCommand(packet);
+}
+
+void PlayerSpaceship::commandSetSystemPower(EPlayerSystem system, float power_level)
+{
+    sf::Packet packet;
+    packet << CMD_SET_SYSTEM_POWER << system << power_level;
+    sendCommand(packet);
+}
+
+void PlayerSpaceship::commandSetSystemCoolant(EPlayerSystem system, float coolant_level)
+{
+    sf::Packet packet;
+    packet << CMD_SET_SYSTEM_COOLANT << system << coolant_level;
     sendCommand(packet);
 }
 
