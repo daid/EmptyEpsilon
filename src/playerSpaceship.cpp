@@ -77,7 +77,10 @@ void PlayerSpaceship::update(float delta)
             systems[n].heatLevel += delta * powf(1.7, systems[n].powerLevel - 1.0) * system_heatup_per_second;
             systems[n].heatLevel -= delta * (1.0 + systems[n].coolantLevel * 0.1) * system_heatup_per_second;
             if (systems[n].heatLevel > 1.0)
+            {
                 systems[n].heatLevel = 1.0;
+                systems[n].health -= delta * damage_per_second_on_overheat;
+            }
             if (systems[n].heatLevel < 0.0)
                 systems[n].heatLevel = 0.0;
         }

@@ -36,6 +36,7 @@ class PlayerSpaceship : public SpaceShip
     const static float energy_warp_per_second = 1.0f;
     const static float system_heatup_per_second = 0.1f;
     const static float maxCoolant = 10.0;
+    const static float damage_per_second_on_overheat = 0.2;
 public:
     PlayerSystem systems[PS_COUNT];
 
