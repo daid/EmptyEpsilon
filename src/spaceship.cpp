@@ -23,6 +23,7 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     hasJumpdrive = true;
     jumpDistance = 0.0;
     jumpDelay = 0.0;
+    jumpSpeedFactor = 1.0;
     tubeLoadTime = 8.0;
     weaponTubes = 0;
     rotationSpeed = 10.0;
@@ -34,6 +35,8 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     front_shield = rear_shield = front_shield_max = rear_shield_max = 50;
     front_shield_hit_effect = rear_shield_hit_effect = 0;
     scanned_by_player = false;
+    beamRechargeFactor = 1.0;
+    tubeRechargeFactor = 1.0;
     
     registerMemberReplication(&targetRotation);
     registerMemberReplication(&impulseRequest);
@@ -223,13 +226,13 @@ void SpaceShip::update(float delta)
 
     if (front_shield < front_shield_max)
     {
-        front_shield += delta * shield_recharge_rate;
+        front_shield += delta * shield_recharge_rate * front_shield_recharge_factor;
         if (front_shield > front_shield_max)
             front_shield = front_shield_max;
     }
     if (rear_shield < front_shield_max)
     {
-        rear_shield += delta * shield_recharge_rate;
+        rear_shield += delta * shield_recharge_rate * rear_shield_recharge_factor;
         if (rear_shield > rear_shield_max)
             rear_shield = rear_shield_max;
     }
@@ -261,7 +264,7 @@ void SpaceShip::update(float delta)
             if (currentWarp < 0.0)
                 currentWarp = 0.0;
         }
-        jumpDelay -= delta;
+        jumpDelay -= delta * jumpSpeedFactor;
         if (jumpDelay <= 0.0)
         {
             executeJump(jumpDistance);
@@ -305,7 +308,7 @@ void SpaceShip::update(float delta)
     for(int n=0; n<maxBeamWeapons; n++)
     {
         if (beamWeapons[n].cooldown > 0.0)
-            beamWeapons[n].cooldown -= delta;
+            beamWeapons[n].cooldown -= delta * beamRechargeFactor;
     }
     
     P<SpaceObject> target = getTarget();
@@ -331,7 +334,7 @@ void SpaceShip::update(float delta)
     {
         if (weaponTube[n].delay > 0.0)
         {
-            weaponTube[n].delay -= delta;
+            weaponTube[n].delay -= delta * tubeRechargeFactor;
         }else{
             switch(weaponTube[n].state)
             {

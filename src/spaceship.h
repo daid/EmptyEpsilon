@@ -64,16 +64,20 @@ public:
     bool hasJumpdrive;
     float jumpDistance;
     float jumpDelay;
+    float jumpSpeedFactor;
     
     int8_t weaponStorage[MW_Count];
     int8_t weaponStorageMax[MW_Count];
     int8_t weaponTubes;
     float tubeLoadTime;
+    float tubeRechargeFactor;
     WeaponTube weaponTube[maxWeaponTubes];
     
+    float beamRechargeFactor;
     BeamWeapon beamWeapons[maxBeamWeapons];
     
     float hull_strength, hull_max;
+    float front_shield_recharge_factor, rear_shield_recharge_factor;
     bool shields_active;
     float front_shield, rear_shield;
     float front_shield_max, rear_shield_max;

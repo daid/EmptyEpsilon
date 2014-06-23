@@ -27,8 +27,13 @@ PlayerSpaceship::PlayerSpaceship()
 
     registerMemberReplication(&hull_damage_indicator, 0.5);
     registerMemberReplication(&energy_level);
+    registerMemberReplication(&jumpSpeedFactor);
+    registerMemberReplication(&beamRechargeFactor);
+    registerMemberReplication(&tubeRechargeFactor);
     registerMemberReplication(&mainScreenSetting);
     registerMemberReplication(&scanning_delay, 0.5);
+    registerMemberReplication(&front_shield_recharge_factor);
+    registerMemberReplication(&rear_shield_recharge_factor);
     
     for(int n=0; n<PS_COUNT; n++)
     {
@@ -78,6 +83,24 @@ void PlayerSpaceship::update(float delta)
         }
         if (energy_level < 0.0)
             energy_level = 0.0;
+        if (energy_level < 10.0)
+        {
+            //Out of energy, we do not care how much power you put into systems, everything is bad now.
+            impulseMaxSpeed = shipTemplate->impulseSpeed * 0.1;
+            rotationSpeed = shipTemplate->turnSpeed * 0.1;
+            warpSpeedPerWarpLevel = shipTemplate->warpSpeed * 0.1;
+            jumpSpeedFactor = 0.1;
+            shields_active = false;
+        }else{
+            beamRechargeFactor = systems[PS_BeamWeapons].powerLevel;
+            tubeRechargeFactor = systems[PS_MissileSystem].powerLevel;
+            rotationSpeed = shipTemplate->turnSpeed * systems[PS_Maneuver].powerLevel;
+            impulseMaxSpeed = shipTemplate->impulseSpeed * systems[PS_Impulse].powerLevel;
+            warpSpeedPerWarpLevel = shipTemplate->warpSpeed * systems[PS_Warp].powerLevel;
+            jumpSpeedFactor = systems[PS_JumpDrive].powerLevel;
+            front_shield_recharge_factor = systems[PS_FrontShield].powerLevel;
+            rear_shield_recharge_factor = systems[PS_RearShield].powerLevel;
+        }
 
         if (hasWarpdrive && warpRequest > 0 && !(hasJumpdrive && jumpDelay > 0))
         {
