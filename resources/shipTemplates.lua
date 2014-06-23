@@ -70,7 +70,7 @@ template:setSpeed(40, 6)
 template:setWeaponStorage("Homing", 10)
 
 
-template = ShipTemplate():setName("Adv. Gunship"):setMesh("dark_fighter_6.obj", "dark_fighter_6_color.png", "dark_fighter_6_specular.jpg", "dark_fighter_6_illumination.jpg"):setScale(3.5):setRadius(100)
+template = ShipTemplate():setName("Adv. Gunship"):setMesh("dark_fighter_6.obj", "dark_fighter_6_color.png", "dark_fighter_6_specular.png", "dark_fighter_6_illumination.png"):setScale(3.5):setRadius(100)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
 template:setBeamPosition(0,-28.2, 21, -2)
 template:setBeamPosition(1, 28.2, 21, -2)
