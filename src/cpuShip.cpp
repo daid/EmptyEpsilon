@@ -170,7 +170,7 @@ void CpuShip::update(float delta)
 
 P<SpaceObject> CpuShip::findBestTarget(sf::Vector2f position, float radius)
 {
-    float target_distance;
+    float target_distance = 0.0;
     PVector<Collisionable> objectList = CollisionManager::queryArea(position - sf::Vector2f(radius, radius), position + sf::Vector2f(radius, radius));
     P<SpaceObject> target;
     foreach(Collisionable, obj, objectList)

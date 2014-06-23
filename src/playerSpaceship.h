@@ -35,6 +35,7 @@ class PlayerSpaceship : public SpaceShip
     const static float energy_per_beam_fire = 3.0f;
     const static float energy_warp_per_second = 1.0f;
     const static float system_heatup_per_second = 0.1f;
+    const static float maxCoolant = 10.0;
 public:
     PlayerSystem systems[PS_COUNT];
 
@@ -65,6 +66,7 @@ public:
     virtual void executeJump(float distance);
     virtual void fireBeamWeapon(int index, P<SpaceObject> target);
     virtual void hullDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type);
+    void setSystemCoolant(EPlayerSystem system, float level);
 
     virtual void update(float delta);
     bool useEnergy(float amount) { if (energy_level >= amount) { energy_level -= amount; return true; } return false; }

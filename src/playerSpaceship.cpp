@@ -34,10 +34,12 @@ PlayerSpaceship::PlayerSpaceship()
     {
         systems[n].health = 0.0;
         systems[n].powerLevel = 1.0;
+        systems[n].coolantLevel = 0.0;
         systems[n].heatLevel = 0.0;
         
         registerMemberReplication(&systems[n].health);
         registerMemberReplication(&systems[n].powerLevel);
+        registerMemberReplication(&systems[n].coolantLevel);
         registerMemberReplication(&systems[n].heatLevel, 1.0);
     }
     systems[PS_Reactor].powerUserFactor = -30.0;
@@ -67,7 +69,7 @@ void PlayerSpaceship::update(float delta)
             if (n == PS_JumpDrive && !hasJumpdrive) continue;
             
             energy_level -= delta * systems[n].powerUserFactor * systems[n].powerLevel * 0.02;
-            systems[n].heatLevel += delta * powf(1.5, systems[n].powerLevel - 1.0) * system_heatup_per_second;
+            systems[n].heatLevel += delta * powf(1.7, systems[n].powerLevel - 1.0) * system_heatup_per_second;
             systems[n].heatLevel -= delta * (1.0 + systems[n].coolantLevel * 0.1) * system_heatup_per_second;
             if (systems[n].heatLevel > 1.0)
                 systems[n].heatLevel = 1.0;
@@ -122,6 +124,34 @@ void PlayerSpaceship::hullDamage(float damageAmount, sf::Vector2f damageLocation
     if (type != DT_EMP)
         hull_damage_indicator = 0.5;
     SpaceShip::hullDamage(damageAmount, damageLocation, type);
+}
+
+void PlayerSpaceship::setSystemCoolant(EPlayerSystem system, float level)
+{
+    float total_coolant = 0;
+    int cnt = 0;
+    for(int n=0; n<PS_COUNT; n++)
+    {
+        if (n == PS_Warp && !hasWarpdrive) continue;
+        if (n == PS_JumpDrive && !hasJumpdrive) continue;
+        if (n == system) continue;
+        
+        total_coolant += systems[n].coolantLevel;
+        cnt++;
+    }
+    if (total_coolant > maxCoolant - level)
+    {
+        for(int n=0; n<PS_COUNT; n++)
+        {
+            if (n == PS_Warp && !hasWarpdrive) continue;
+            if (n == PS_JumpDrive && !hasJumpdrive) continue;
+            if (n == system) continue;
+            
+            systems[n].coolantLevel *= (maxCoolant - level) / total_coolant;
+        }        
+    }
+    
+    systems[system].coolantLevel = level;
 }
 
 void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
@@ -213,8 +243,8 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             EPlayerSystem system;
             float level;
             packet >> system >> level;
-            if (system < PS_COUNT && level >= 0.0 && level <= 3.0)
-                systems[system].coolantLevel = level;
+            if (system < PS_COUNT && level >= 0.0 && level <= 10.0)
+                setSystemCoolant(system, level);
         }
         break;
     }
