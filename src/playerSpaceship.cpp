@@ -37,7 +37,7 @@ PlayerSpaceship::PlayerSpaceship()
     
     for(int n=0; n<PS_COUNT; n++)
     {
-        systems[n].health = 0.0;
+        systems[n].health = 1.0;
         systems[n].powerLevel = 1.0;
         systems[n].coolantLevel = 0.0;
         systems[n].heatLevel = 0.0;
@@ -90,14 +90,14 @@ void PlayerSpaceship::update(float delta)
             max_power_level = 0.1;
             shields_active = false;
         }
-        beamRechargeFactor = std::min(systems[PS_BeamWeapons].powerLevel, max_power_level);
-        tubeRechargeFactor = std::min(systems[PS_MissileSystem].powerLevel, max_power_level);
-        rotationSpeed = shipTemplate->turnSpeed * std::min(systems[PS_Maneuver].powerLevel, max_power_level);
-        impulseMaxSpeed = shipTemplate->impulseSpeed * std::min(systems[PS_Impulse].powerLevel, max_power_level);
-        warpSpeedPerWarpLevel = shipTemplate->warpSpeed * std::min(systems[PS_Warp].powerLevel, max_power_level);
-        jumpSpeedFactor = std::min(systems[PS_JumpDrive].powerLevel, max_power_level);
-        front_shield_recharge_factor = std::min(systems[PS_FrontShield].powerLevel, max_power_level);
-        rear_shield_recharge_factor = std::min(systems[PS_RearShield].powerLevel, max_power_level);
+        beamRechargeFactor = std::min(systems[PS_BeamWeapons].powerLevel * systems[PS_BeamWeapons].health, max_power_level);
+        tubeRechargeFactor = std::min(systems[PS_MissileSystem].powerLevel * systems[PS_MissileSystem].health, max_power_level);
+        rotationSpeed = shipTemplate->turnSpeed * std::min(systems[PS_Maneuver].powerLevel * systems[PS_Maneuver].health, max_power_level);
+        impulseMaxSpeed = shipTemplate->impulseSpeed * std::min(systems[PS_Impulse].powerLevel * systems[PS_Impulse].health, max_power_level);
+        warpSpeedPerWarpLevel = shipTemplate->warpSpeed * std::min(systems[PS_Warp].powerLevel * systems[PS_Warp].health, max_power_level);
+        jumpSpeedFactor = std::min(systems[PS_JumpDrive].powerLevel * systems[PS_JumpDrive].health, max_power_level);
+        front_shield_recharge_factor = std::min(systems[PS_FrontShield].powerLevel * systems[PS_FrontShield].health, max_power_level);
+        rear_shield_recharge_factor = std::min(systems[PS_RearShield].powerLevel * systems[PS_RearShield].health, max_power_level);
 
         if (hasWarpdrive && warpRequest > 0 && !(hasJumpdrive && jumpDelay > 0))
         {
@@ -129,7 +129,7 @@ void PlayerSpaceship::update(float delta)
 
 void PlayerSpaceship::executeJump(float distance)
 {
-    if (useEnergy(distance * energy_per_jump_km))
+    if (useEnergy(distance * energy_per_jump_km) && systems[PS_JumpDrive].health > 0.0)
         SpaceShip::executeJump(distance);
 }
 
