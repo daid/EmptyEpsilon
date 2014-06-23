@@ -248,7 +248,9 @@ void CrewUI::engineeringUI()
         if (n == PS_Warp && !mySpaceship->hasWarpdrive) continue;
         if (n == PS_JumpDrive && !mySpaceship->hasJumpdrive) continue;
         
-        text(sf::FloatRect(x, 530, 140, 20), string(int(mySpaceship->systems[n].powerLevel * 100)) + "% (" + string(int(mySpaceship->systems[n].heatLevel * 100)) + "%)", AlignCenter, 20);
+        text(sf::FloatRect(x, 490, 140, 20), string(int(mySpaceship->systems[n].health * 100)) + "%", AlignCenter, 20);
+        text(sf::FloatRect(x, 510, 140, 20), string(int(mySpaceship->systems[n].heatLevel * 100)) + "%", AlignCenter, 20);
+        text(sf::FloatRect(x, 530, 140, 20), string(int(mySpaceship->systems[n].powerLevel * 100)) + "%", AlignCenter, 20);
         vtext(sf::FloatRect(x, 550, 50, 300), getPlayerSystemName(EPlayerSystem(n)), AlignLeft);
         float ret = vslider(sf::FloatRect(x + 50, 550, 50, 300), mySpaceship->systems[n].powerLevel, 3.0, 0.0, 1.0);
         if (ret < 1.25 && ret > 0.75)
