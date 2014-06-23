@@ -49,7 +49,7 @@ void BeamEffect::draw3DTransparent()
     
     sf::Vector3f v0(targetLocation.x, targetLocation.y, targetOffset.z);
     
-    float ring_size = Tween<float>::easeOutQuad(lifetime, 1.0, 0.0, 10.0f, 80.0f);
+    float ring_size = Tween<float>::easeOutCubic(lifetime, 1.0, 0.0, 10.0f, 80.0f);
     sf::Vector3f v1 = v0 + side * ring_size + up * ring_size;
     sf::Vector3f v2 = v0 - side * ring_size + up * ring_size;
     sf::Vector3f v3 = v0 - side * ring_size - up * ring_size;

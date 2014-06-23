@@ -42,13 +42,33 @@ void GUI::text(sf::FloatRect rect, string text, EAlign align, float fontSize, sf
     switch(align)
     {
     case AlignLeft:
-        textElement.setPosition(rect.left - textElement.getLocalBounds().left, rect.top + rect.height / 2.0 - textElement.getLocalBounds().height / 2.0 - textElement.getLocalBounds().top);
+        textElement.setPosition(rect.left - textElement.getLocalBounds().left, rect.top + rect.height / 2.0 - textElement.getLocalBounds().height / 2.0 - textElement.getLocalBounds().top / 2.0);
         break;
     case AlignRight:
-        textElement.setPosition(rect.left + rect.width - textElement.getLocalBounds().width - textElement.getLocalBounds().left, rect.top + rect.height / 2.0 - textElement.getLocalBounds().height / 2.0 - textElement.getLocalBounds().top);
+        textElement.setPosition(rect.left + rect.width - textElement.getLocalBounds().width - textElement.getLocalBounds().left, rect.top + rect.height / 2.0 - textElement.getLocalBounds().height / 2.0 - textElement.getLocalBounds().top / 2.0);
         break;
     case AlignCenter:
-        textElement.setPosition(rect.left + rect.width / 2.0 - textElement.getLocalBounds().width / 2.0 - textElement.getLocalBounds().left, rect.top + rect.height / 2.0 - textElement.getLocalBounds().height / 2.0 - textElement.getLocalBounds().top);
+        textElement.setPosition(rect.left + rect.width / 2.0 - textElement.getLocalBounds().width / 2.0 - textElement.getLocalBounds().left, rect.top + rect.height / 2.0 - textElement.getLocalBounds().height / 2.0 - textElement.getLocalBounds().top / 2.0);
+        break;
+    }
+    textElement.setColor(color);
+    renderTarget->draw(textElement);
+}
+
+void GUI::vtext(sf::FloatRect rect, string text, EAlign align, float fontSize, sf::Color color)
+{
+    sf::Text textElement(text, mainFont, fontSize);
+    textElement.setRotation(-90);
+    switch(align)
+    {
+    case AlignLeft:
+        textElement.setPosition(rect.left + rect.width / 2.0 - textElement.getLocalBounds().height / 2.0 - textElement.getLocalBounds().top / 2.0, rect.top + rect.height);
+        break;
+    case AlignRight:
+        textElement.setPosition(rect.left + rect.width / 2.0 - textElement.getLocalBounds().height / 2.0 - textElement.getLocalBounds().top / 2.0, rect.top + textElement.getLocalBounds().left + textElement.getLocalBounds().width);
+        break;
+    case AlignCenter:
+        textElement.setPosition(rect.left + rect.width / 2.0 - textElement.getLocalBounds().height / 2.0 - textElement.getLocalBounds().top / 2.0, rect.top + rect.height / 2.0 + textElement.getLocalBounds().width / 2.0 + textElement.getLocalBounds().left);
         break;
     }
     textElement.setColor(color);
@@ -88,7 +108,7 @@ bool GUI::toggleButton(sf::FloatRect rect, bool active, string textValue, float 
     return false;
 }
 
-float GUI::vslider(sf::FloatRect rect, float value, float minValue, float maxValue)
+float GUI::vslider(sf::FloatRect rect, float value, float minValue, float maxValue, float normalValue)
 {
     sf::RectangleShape background(sf::Vector2f(rect.width, rect.height));
     background.setPosition(rect.left, rect.top);
@@ -96,7 +116,7 @@ float GUI::vslider(sf::FloatRect rect, float value, float minValue, float maxVal
     renderTarget->draw(background);
 
     float y;
-    y = rect.top + (rect.height - rect.width) * (0 - minValue) / (maxValue - minValue);
+    y = rect.top + (rect.height - rect.width) * (normalValue - minValue) / (maxValue - minValue);
     sf::RectangleShape backgroundZero(sf::Vector2f(rect.width, 8.0));
     backgroundZero.setPosition(rect.left, y + rect.width / 2.0 - 4.0);
     backgroundZero.setFillColor(sf::Color(0,0,0,32));

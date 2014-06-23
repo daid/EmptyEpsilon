@@ -20,6 +20,7 @@ public:
     
     void helmsUI();
     void weaponsUI();
+    void engineeringUI();
     void scienceUI();
 };
 #endif//CREW_UI_H

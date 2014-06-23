@@ -32,6 +32,9 @@ void CrewUI::onGui()
             weaponsUI();
             mainScreenSelectGUI();
             break;
+        case engineering:
+            engineeringUI();
+            break;
         case scienceOfficer:
             scienceUI();
             break;
@@ -220,6 +223,37 @@ void CrewUI::weaponsUI()
             else
                 tubeLoadType = EMissileWeapons(n);
         }
+    }
+}
+
+void CrewUI::engineeringUI()
+{
+    sf::RenderTarget* window = getRenderTarget();
+    P<InputHandler> inputHandler = engine->getObject("inputHandler");
+    sf::Vector2f mouse = inputHandler->getMousePos();
+
+    float net_power = 0.0;
+    for(int n=0; n<PS_COUNT; n++)
+    {
+        if (n == PS_Warp && !mySpaceship->hasWarpdrive) continue;
+        if (n == PS_JumpDrive && !mySpaceship->hasJumpdrive) continue;
+        net_power -= mySpaceship->systems[n].powerUserFactor * mySpaceship->systems[n].powerLevel;
+    }
+    text(sf::FloatRect(10, 100, 200, 20), "Energy: " + string(int(mySpaceship->energy_level)) + " (" + string(net_power) + ")", AlignLeft, 20);
+    
+    int y = 20;
+    for(int n=0; n<PS_COUNT; n++)
+    {
+        if (n == PS_Warp && !mySpaceship->hasWarpdrive) continue;
+        if (n == PS_JumpDrive && !mySpaceship->hasJumpdrive) continue;
+        
+        vtext(sf::FloatRect(y, 550, 50, 300), getPlayerSystemName(EPlayerSystem(n)) + " " + string(mySpaceship->systems[n].heatLevel), AlignLeft);
+        float ret = vslider(sf::FloatRect(y + 50, 550, 50, 300), mySpaceship->systems[n].powerLevel, 3.0, 0.0, 1.0);
+        if (ret < 1.25 && ret > 0.75)
+            ret = 1.0;
+        mySpaceship->systems[n].powerLevel = ret;
+        vslider(sf::FloatRect(y + 110, 550, 50, 300), 0.0, 10.0, 0.0);
+        y += 160;
     }
 }
 

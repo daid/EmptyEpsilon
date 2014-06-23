@@ -3,15 +3,41 @@
 
 #include "spaceship.h"
 
+class PlayerSystem
+{
+public:
+    float health; //1.0-0.0, where 0.0 is fully broken.
+    float powerLevel; //0.0-3.0, default 1.0
+    float heatLevel; //0.0-1.0, system will damage at 1.0
+    float coolantLevel; //0.0-10.0
+    
+    float powerUserFactor;//const
+};
+
+enum EPlayerSystem
+{
+    PS_Reactor,
+    PS_BeamWeapons,
+    PS_MissileSystem,
+    PS_Maneuver,
+    PS_Impulse,
+    PS_Warp,
+    PS_JumpDrive,
+    PS_FrontShield,
+    PS_RearShield,
+    PS_COUNT
+};
+
 class PlayerSpaceship : public SpaceShip
 {
-    const static float energy_recharge_per_second = 1.0f;
     const static float energy_shield_use_per_second = 1.5f;
     const static float energy_per_jump_km = 8.0f;
     const static float energy_per_beam_fire = 3.0f;
-    const static float energy_warp_per_second = 1.0;
-
+    const static float energy_warp_per_second = 1.0f;
+    const static float system_heatup_per_second = 0.1f;
 public:
+    PlayerSystem systems[PS_COUNT];
+
     float energy_level;
     float hull_damage_indicator;
     P<SpaceShip> scanning_ship; //Server only
@@ -41,5 +67,6 @@ public:
     virtual void update(float delta);
     bool useEnergy(float amount) { if (energy_level >= amount) { energy_level -= amount; return true; } return false; }
 };
+string getPlayerSystemName(EPlayerSystem system);
 
 #endif//PLAYER_SPACESHIP_H

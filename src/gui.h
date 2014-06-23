@@ -25,9 +25,10 @@ public:
     virtual void onGui() = 0;
 
     static void text(sf::FloatRect rect, string text, EAlign align = AlignLeft, float textSize = 30, sf::Color color=sf::Color::White);
+    static void vtext(sf::FloatRect rect, string text, EAlign align = AlignLeft, float textSize = 30, sf::Color color=sf::Color::White);
     static bool button(sf::FloatRect rect, string text, float textSize = 30);
     static bool toggleButton(sf::FloatRect rect, bool active, string textValue, float fontSize = 30);
-    static float vslider(sf::FloatRect rect, float value, float minValue, float maxValue);
+    static float vslider(sf::FloatRect rect, float value, float minValue, float maxValue, float normalValue = 0.0);
     static sf::RenderTarget* getRenderTarget() { return renderTarget; }
 
 private:
