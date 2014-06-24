@@ -202,14 +202,14 @@ void CrewUI::weaponsUI()
                 mySpaceship->commandFireTube(n);
             break;
         case WTS_Loading:
+            progressBar(sf::FloatRect(170, 840 - 50 * n, 350, 50), mySpaceship->weaponTube[n].delay, mySpaceship->tubeLoadTime, 0.0);
             toggleButton(sf::FloatRect(20, y, 150, 50), false, "Loading", 35);
             text(sf::FloatRect(170, y, 350, 50), getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), AlignCenter, 35);
-            toggleButton(sf::FloatRect(170, 840 - 50 * n, 350 * (1.0 - (mySpaceship->weaponTube[n].delay / mySpaceship->tubeLoadTime)), 50), false, "");
             break;
         case WTS_Unloading:
+            progressBar(sf::FloatRect(170, 840 - 50 * n, 350, 50), mySpaceship->weaponTube[n].delay, 0.0, mySpaceship->tubeLoadTime);
             toggleButton(sf::FloatRect(20, y, 150, 50), false, "Unloading", 25);
             text(sf::FloatRect(170, y, 350, 50), getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), AlignCenter, 35);
-            toggleButton(sf::FloatRect(170, y, 350 * (mySpaceship->weaponTube[n].delay / mySpaceship->tubeLoadTime), 50), false, "");
             break;
         }
     }
@@ -252,15 +252,15 @@ void CrewUI::engineeringUI()
         if (n == PS_Warp && !mySpaceship->hasWarpdrive) continue;
         if (n == PS_JumpDrive && !mySpaceship->hasJumpdrive) continue;
         
-        text(sf::FloatRect(x, 490, 140, 20), string(int(mySpaceship->systems[n].health * 100)) + "%", AlignCenter, 20);
-        text(sf::FloatRect(x, 510, 140, 20), string(int(mySpaceship->systems[n].heatLevel * 100)) + "%", AlignCenter, 20);
-        text(sf::FloatRect(x, 530, 140, 20), string(int(mySpaceship->systems[n].powerLevel * 100)) + "%", AlignCenter, 20);
+        vtext(sf::FloatRect(x + 20, 550, 30, 300), "Dmg:" + string(int(100 - mySpaceship->systems[n].health * 100)) + "%", AlignRight, 15);
         vtext(sf::FloatRect(x, 550, 50, 300), getPlayerSystemName(EPlayerSystem(n)), AlignLeft);
+        text(sf::FloatRect(x + 50, 530, 50, 20), string(int(mySpaceship->systems[n].powerLevel * 100)) + "%", AlignCenter, 20);
         float ret = vslider(sf::FloatRect(x + 50, 550, 50, 300), mySpaceship->systems[n].powerLevel, 3.0, 0.0, 1.0);
         if (ret < 1.25 && ret > 0.75)
             ret = 1.0;
         if (mySpaceship->systems[n].powerLevel != ret)
             mySpaceship->commandSetSystemPower(EPlayerSystem(n), ret);
+        vprogressBar(sf::FloatRect(x + 110, 500, 50, 50), mySpaceship->systems[n].heatLevel, 0.0, 1.0, sf::Color(255, 255 * (1.0 - mySpaceship->systems[n].heatLevel), 0));
         ret = vslider(sf::FloatRect(x + 110, 550, 50, 300), mySpaceship->systems[n].coolantLevel, 10.0, 0.0);
         if (mySpaceship->systems[n].coolantLevel != ret)
             mySpaceship->commandSetSystemCoolant(EPlayerSystem(n), ret);

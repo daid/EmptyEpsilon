@@ -75,6 +75,47 @@ void GUI::vtext(sf::FloatRect rect, string text, EAlign align, float fontSize, s
     renderTarget->draw(textElement);
 }
 
+void GUI::progressBar(sf::FloatRect rect, float value, float min_value, float max_value, sf::Color color)
+{
+    rect.left += 4.0;
+    rect.top += 4.0;
+    rect.width -= 8.0;
+    rect.height -= 8.0;
+
+    sf::RectangleShape background(sf::Vector2f(rect.width, rect.height));
+    background.setPosition(rect.left, rect.top);
+    background.setFillColor(sf::Color::Transparent);
+    background.setOutlineColor(sf::Color(32, 32, 32, 255));
+    background.setOutlineThickness(4.0);
+    renderTarget->draw(background);
+
+    sf::RectangleShape bar_fill(sf::Vector2f(rect.width * (value - min_value) / (max_value - min_value), rect.height));
+    bar_fill.setPosition(rect.left, rect.top);
+    bar_fill.setFillColor(color);
+    renderTarget->draw(bar_fill);
+}
+
+void GUI::vprogressBar(sf::FloatRect rect, float value, float min_value, float max_value, sf::Color color)
+{
+    rect.left += 4.0;
+    rect.top += 4.0;
+    rect.width -= 8.0;
+    rect.height -= 8.0;
+
+    sf::RectangleShape background(sf::Vector2f(rect.width, rect.height));
+    background.setPosition(rect.left, rect.top);
+    background.setFillColor(sf::Color::Transparent);
+    background.setOutlineColor(sf::Color(32, 32, 32, 255));
+    background.setOutlineThickness(4.0);
+    renderTarget->draw(background);
+
+    float h = rect.height * (value - min_value) / (max_value - min_value);
+    sf::RectangleShape bar_fill(sf::Vector2f(rect.width, h));
+    bar_fill.setPosition(rect.left, rect.top + rect.height - h);
+    bar_fill.setFillColor(color);
+    renderTarget->draw(bar_fill);
+}
+
 bool GUI::button(sf::FloatRect rect, string textValue, float fontSize)
 {
     draw9Cut(rect, "button_background", rect.contains(mousePosition) ? sf::Color(255,255,255, 128) : sf::Color::White);
