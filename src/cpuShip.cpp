@@ -144,6 +144,7 @@ void CpuShip::update(float delta)
             impulseRequest = 0;
             break;
         case AI_FlyTowards:      //Fly towards [order_target_location], attacking enemies that get too close, but disengage and continue when enemy is too far.
+        case AI_FlyTowardsBlind: //Fly towards [order_target_location], not attacking anything
         case AI_DefendLocation:  //Defend against enemies getting close to [order_target_location]
             targetRotation = sf::vector2ToAngle(order_target_location - getPosition());
             impulseRequest = 1.0;

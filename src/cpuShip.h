@@ -12,6 +12,7 @@ enum EAIOrder
     AI_DefendTarget,    //Defend against enemies getting close to [order_target] (falls back to AI_Roaming if the target is destroyed)
     AI_FlyFormation,    //Fly [order_target_location] offset from [order_target]. Allows for nicely flying in formation.
     AI_FlyTowards,      //Fly towards [order_target_location], attacking enemies that get too close, but disengage and continue when enemy is too far.
+    AI_FlyTowardsBlind, //Fly towards [order_target_location], not attacking anything
     AI_Attack,          //Attack [order_target] very specificly.
 };
 
