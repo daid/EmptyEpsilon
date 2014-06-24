@@ -17,19 +17,9 @@ EpsilonServer::EpsilonServer()
     soundManager.playMusic("music/Dream Raid Full Version (Mock Up).ogg");
     
     //TMP
-    mySpaceship = new PlayerSpaceship();
-    mySpaceship->setShipTemplate("Player Cruiser");
-    gameGlobalInfo->insertPlayerShip(mySpaceship);
     randomNebulas();
-    
-    P<PlayerSpaceship> ship = new PlayerSpaceship();
-    ship->setShipTemplate("Dreadnought");
-    ship->setPosition(sf::Vector2f(100, 100));
-    gameGlobalInfo->insertPlayerShip(ship);
-    
     P<SpaceStation> station = new SpaceStation();
     station->setPosition(sf::Vector2f(0, -500));
-    mySpaceship->commandSetTarget(station);
     
     for(int n=0; n<100; n++)
     {

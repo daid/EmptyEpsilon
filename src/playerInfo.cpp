@@ -57,7 +57,6 @@ int GameGlobalInfo::insertPlayerShip(P<PlayerSpaceship> ship)
             return n;
         }
     }
-    printf("?!?\n");
     return -1;
 }
 
