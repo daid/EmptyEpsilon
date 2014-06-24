@@ -38,7 +38,7 @@ void ShipSelectionScreen::onGui()
     }
     if (mySpaceship)
     {
-        if (button(sf::FloatRect(800, 800, 300, 50), "Ready"))
+        if (button(sf::FloatRect(800, 700, 300, 50), "Ready"))
         {
             destroy();
             if (myPlayerInfo->isMainScreen())
@@ -58,5 +58,10 @@ void ShipSelectionScreen::onGui()
             if (toggleButton(sf::FloatRect(200, 300 + n * 50, 300, 50), mySpaceship == ship, ship->shipTemplate->name + " " + string(n)))
                 mySpaceship = ship;
         }
+    }
+    
+    if (button(sf::FloatRect(1350, 830, 200, 50), "Quit game"))
+    {
+        engine->shutdown();
     }
 }

@@ -153,7 +153,10 @@ void CrewUI::weaponsUI()
             {
                 P<SpaceObject> spaceObject = obj;
                 if (spaceObject && spaceObject->canBeTargeted() && spaceObject != mySpaceship)
-                    target = spaceObject;
+                {
+                    if (!target || sf::length(mousePosition - spaceObject->getPosition()) < sf::length(mousePosition - target->getPosition()))
+                        target = spaceObject;
+                }
             }
             mySpaceship->commandSetTarget(target);
         }
@@ -285,12 +288,15 @@ void CrewUI::scienceUI()
         {
             P<SpaceObject> target;
             sf::Vector2f mousePosition = mySpaceship->getPosition() + diff / 400.0f * radarDistance;
-            PVector<Collisionable> list = CollisionManager::queryArea(mousePosition - sf::Vector2f(200, 200), mousePosition + sf::Vector2f(200, 200));
+            PVector<Collisionable> list = CollisionManager::queryArea(mousePosition - sf::Vector2f(radarDistance / 100, radarDistance / 100), mousePosition + sf::Vector2f(radarDistance / 100, radarDistance / 100));
             foreach(Collisionable, obj, list)
             {
                 P<SpaceObject> spaceObject = obj;
                 if (spaceObject && spaceObject->canBeTargeted() && spaceObject != mySpaceship)
-                    target = spaceObject;
+                {
+                    if (!target || sf::length(mousePosition - spaceObject->getPosition()) < sf::length(mousePosition - target->getPosition()))
+                        target = spaceObject;
+                }
             }
             scienceTarget = target;
         }

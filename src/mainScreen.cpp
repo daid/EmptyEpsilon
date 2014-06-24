@@ -60,7 +60,7 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
     
     glRotatef(90, 1, 0, 0);
     glScalef(1,1,-1);
-    glRotatef(-35, 1, 0, 0);
+    glRotatef(-25, 1, 0, 0);
 #ifdef DEBUG
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
         glRotatef(-50, 1, 0, 0);
