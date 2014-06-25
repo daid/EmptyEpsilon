@@ -232,7 +232,9 @@ void CrewUI::weaponsUI()
 
 void CrewUI::engineeringUI()
 {
-    drawShipInternals(sf::Vector2f(800, 250), mySpaceship);
+    sf::RenderTarget* window = getRenderTarget();
+    P<InputHandler> inputHandler = engine->getObject("inputHandler");
+    sf::Vector2f mouse = inputHandler->getMousePos();
 
     float net_power = 0.0;
     for(int n=0; n<SYS_COUNT; n++)
@@ -246,10 +248,13 @@ void CrewUI::engineeringUI()
     text(sf::FloatRect(10, 100, 200, 20), "Energy: " + string(int(mySpaceship->energy_level)) + " (" + string(net_power) + ")", AlignLeft, 20);
     text(sf::FloatRect(10, 120, 200, 20), "Hull: " + string(int(mySpaceship->hull_strength * 100 / mySpaceship->hull_max)), AlignLeft, 20);
     
+    ESystem highlight_system = SYS_None;
     int x = 20;
     for(int n=0; n<SYS_COUNT; n++)
     {
         if (!mySpaceship->hasSystem(ESystem(n))) continue;
+        if (sf::FloatRect(x + 20, 530, 140, 320).contains(mouse))
+            highlight_system = ESystem(n);
         
         vtext(sf::FloatRect(x + 20, 550, 30, 300), "Dmg:" + string(int(100 - mySpaceship->systems[n].health * 100)) + "%", AlignRight, 15);
         vtext(sf::FloatRect(x, 550, 50, 300), getSystemName(ESystem(n)), AlignLeft);
@@ -265,6 +270,8 @@ void CrewUI::engineeringUI()
             mySpaceship->commandSetSystemCoolant(ESystem(n), ret);
         x += 160;
     }
+
+    drawShipInternals(sf::Vector2f(800, 250), mySpaceship, highlight_system);
 }
 
 void CrewUI::scienceUI()

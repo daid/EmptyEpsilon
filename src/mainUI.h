@@ -13,7 +13,7 @@ public:
     void drawStatic(float alpha=1.0);
     void drawRaderBackground(sf::Vector2f position, float size, float scale);
     void drawHeadingCircle(sf::Vector2f position, float size);
-    void drawShipInternals(sf::Vector2f position, P<SpaceShip> ship);
+    void drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESystem highlight_system);
 };
 
 #endif//MAIN_UI_H

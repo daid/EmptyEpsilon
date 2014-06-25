@@ -41,22 +41,22 @@ class BeamTemplate : public sf::NonCopyable
 public:
     float arc, direction, range, cycle_time, damage;
 };
-class ShipRoom
+class ShipRoomTemplate
 {
 public:
     sf::Vector2i position;
     sf::Vector2i size;
     ESystem system;
     
-    ShipRoom(sf::Vector2i position, sf::Vector2i size, ESystem system) : position(position), size(size), system(system) {}
+    ShipRoomTemplate(sf::Vector2i position, sf::Vector2i size, ESystem system) : position(position), size(size), system(system) {}
 };
-class ShipDoor
+class ShipDoorTemplate
 {
 public:
     sf::Vector2i position;
     bool horizontal;
 
-    ShipDoor(sf::Vector2i position, bool horizontal) : position(position), horizontal(horizontal) {}
+    ShipDoorTemplate(sf::Vector2i position, bool horizontal) : position(position), horizontal(horizontal) {}
 };
 
 class ShipTemplate : public PObject
@@ -78,8 +78,8 @@ public:
     bool jumpDrive, cloaking;
     int weaponStorage[MW_Count];
     
-    std::vector<ShipRoom> rooms;
-    std::vector<ShipDoor> doors;
+    std::vector<ShipRoomTemplate> rooms;
+    std::vector<ShipDoorTemplate> doors;
 
     ShipTemplate();
     
@@ -98,9 +98,9 @@ public:
     void setJumpDrive(bool enabled) { jumpDrive = enabled; }
     void setCloaking(bool enabled) { cloaking = enabled; }
     void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon != MW_None) weaponStorage[weapon] = amount; }
-    void addRoom(sf::Vector2i position, sf::Vector2i size) { rooms.push_back(ShipRoom(position, size, SYS_None)); }
-    void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system) { rooms.push_back(ShipRoom(position, size, system)); }
-    void addDoor(sf::Vector2i position, bool horizontal) { doors.push_back(ShipDoor(position, horizontal)); }
+    void addRoom(sf::Vector2i position, sf::Vector2i size) { rooms.push_back(ShipRoomTemplate(position, size, SYS_None)); }
+    void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system) { rooms.push_back(ShipRoomTemplate(position, size, system)); }
+    void addDoor(sf::Vector2i position, bool horizontal) { doors.push_back(ShipDoorTemplate(position, horizontal)); }
 public:
     static P<ShipTemplate> getTemplate(string name);
 };
