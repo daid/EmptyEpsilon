@@ -14,20 +14,6 @@ public:
     float powerUserFactor;//const
 };
 
-enum EPlayerSystem
-{
-    PS_Reactor,
-    PS_BeamWeapons,
-    PS_MissileSystem,
-    PS_Maneuver,
-    PS_Impulse,
-    PS_Warp,
-    PS_JumpDrive,
-    PS_FrontShield,
-    PS_RearShield,
-    PS_COUNT
-};
-
 class PlayerSpaceship : public SpaceShip
 {
     const static float energy_shield_use_per_second = 1.5f;
@@ -38,7 +24,7 @@ class PlayerSpaceship : public SpaceShip
     const static float maxCoolant = 10.0;
     const static float damage_per_second_on_overheat = 0.2;
 public:
-    PlayerSystem systems[PS_COUNT];
+    PlayerSystem systems[SYS_COUNT];
 
     float energy_level;
     float hull_damage_indicator;
@@ -61,18 +47,16 @@ public:
     void commandSetShields(bool enabled);
     void commandMainScreenSetting(EMainScreenSetting mainScreen);
     void commandScan(P<SpaceObject> object);
-    void commandSetSystemPower(EPlayerSystem system, float power_level);
-    void commandSetSystemCoolant(EPlayerSystem system, float coolant_level);
+    void commandSetSystemPower(ESystem system, float power_level);
+    void commandSetSystemCoolant(ESystem system, float coolant_level);
     
     virtual void executeJump(float distance);
     virtual void fireBeamWeapon(int index, P<SpaceObject> target);
     virtual void hullDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type);
-    void setSystemCoolant(EPlayerSystem system, float level);
+    void setSystemCoolant(ESystem system, float level);
 
     virtual void update(float delta);
     bool useEnergy(float amount) { if (energy_level >= amount) { energy_level -= amount; return true; } return false; }
 };
-string getPlayerSystemName(EPlayerSystem system);
-REGISTER_MULTIPLAYER_ENUM(EPlayerSystem);
 
 #endif//PLAYER_SPACESHIP_H

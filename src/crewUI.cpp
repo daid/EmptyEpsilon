@@ -232,15 +232,12 @@ void CrewUI::weaponsUI()
 
 void CrewUI::engineeringUI()
 {
-    sf::RenderTarget* window = getRenderTarget();
-    P<InputHandler> inputHandler = engine->getObject("inputHandler");
-    sf::Vector2f mouse = inputHandler->getMousePos();
+    drawShipInternals(sf::Vector2f(800, 250), mySpaceship);
 
     float net_power = 0.0;
-    for(int n=0; n<PS_COUNT; n++)
+    for(int n=0; n<SYS_COUNT; n++)
     {
-        if (n == PS_Warp && !mySpaceship->hasWarpdrive) continue;
-        if (n == PS_JumpDrive && !mySpaceship->hasJumpdrive) continue;
+        if (!mySpaceship->hasSystem(ESystem(n))) continue;
         if (mySpaceship->systems[n].powerUserFactor < 0)
             net_power -= mySpaceship->systems[n].powerUserFactor * mySpaceship->systems[n].health * mySpaceship->systems[n].powerLevel;
         else
@@ -250,23 +247,22 @@ void CrewUI::engineeringUI()
     text(sf::FloatRect(10, 120, 200, 20), "Hull: " + string(int(mySpaceship->hull_strength * 100 / mySpaceship->hull_max)), AlignLeft, 20);
     
     int x = 20;
-    for(int n=0; n<PS_COUNT; n++)
+    for(int n=0; n<SYS_COUNT; n++)
     {
-        if (n == PS_Warp && !mySpaceship->hasWarpdrive) continue;
-        if (n == PS_JumpDrive && !mySpaceship->hasJumpdrive) continue;
+        if (!mySpaceship->hasSystem(ESystem(n))) continue;
         
         vtext(sf::FloatRect(x + 20, 550, 30, 300), "Dmg:" + string(int(100 - mySpaceship->systems[n].health * 100)) + "%", AlignRight, 15);
-        vtext(sf::FloatRect(x, 550, 50, 300), getPlayerSystemName(EPlayerSystem(n)), AlignLeft);
+        vtext(sf::FloatRect(x, 550, 50, 300), getSystemName(ESystem(n)), AlignLeft);
         text(sf::FloatRect(x + 50, 530, 50, 20), string(int(mySpaceship->systems[n].powerLevel * 100)) + "%", AlignCenter, 20);
         float ret = vslider(sf::FloatRect(x + 50, 550, 50, 300), mySpaceship->systems[n].powerLevel, 3.0, 0.0, 1.0);
         if (ret < 1.25 && ret > 0.75)
             ret = 1.0;
         if (mySpaceship->systems[n].powerLevel != ret)
-            mySpaceship->commandSetSystemPower(EPlayerSystem(n), ret);
+            mySpaceship->commandSetSystemPower(ESystem(n), ret);
         vprogressBar(sf::FloatRect(x + 110, 500, 50, 50), mySpaceship->systems[n].heatLevel, 0.0, 1.0, sf::Color(255, 255 * (1.0 - mySpaceship->systems[n].heatLevel), 0));
         ret = vslider(sf::FloatRect(x + 110, 550, 50, 300), mySpaceship->systems[n].coolantLevel, 10.0, 0.0);
         if (mySpaceship->systems[n].coolantLevel != ret)
-            mySpaceship->commandSetSystemCoolant(EPlayerSystem(n), ret);
+            mySpaceship->commandSetSystemCoolant(ESystem(n), ret);
         x += 160;
     }
 }

@@ -23,6 +23,36 @@ template:setWeaponStorage("Nuke", 2)
 template:setWeaponStorage("Mine", 6)
 template:setWeaponStorage("EMP", 4)
 
+template:addRoomSystem(1, 0, 2, 1, "Maneuver");
+template:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
+template:addRoom(2, 2, 2, 1);
+
+template:addRoomSystem(0, 3, 1, 2, "RearShield");
+template:addRoomSystem(1, 3, 2, 2, "Reactor");
+template:addRoomSystem(3, 3, 2, 2, "Warp");
+template:addRoomSystem(5, 3, 1, 2, "JumpDrive");
+template:addRoom(6, 3, 2, 1);
+template:addRoom(6, 4, 2, 1);
+template:addRoomSystem(8, 3, 1, 2, "FrontShield");
+
+template:addRoom(2, 5, 2, 1);
+template:addRoomSystem(1, 6, 2, 1, "MissileSystem");
+template:addRoomSystem(1, 7, 2, 1, "Impulse");
+
+template:addDoor(1, 1, true);
+template:addDoor(2, 2, true);
+template:addDoor(3, 3, true);
+template:addDoor(1, 3, false);
+template:addDoor(3, 4, false);
+template:addDoor(3, 5, true);
+template:addDoor(2, 6, true);
+template:addDoor(1, 7, true);
+template:addDoor(5, 3, false);
+template:addDoor(6, 3, false);
+template:addDoor(6, 4, false);
+template:addDoor(8, 3, false);
+template:addDoor(8, 4, false);
+
 --[[ Neutral or special ship types --]]
 --Tug, used for transport of small goods (like weapons)
 template = ShipTemplate():setName("Tug"):setMesh("space_tug.obj", "space_tug_color.jpg", "space_tug_illumination.jpg", "space_tug_illumination.jpg"):setScale(3):setRadius(40)

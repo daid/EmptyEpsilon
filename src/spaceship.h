@@ -105,6 +105,8 @@ public:
     void fireTube(int tubeNr);
     void initJump(float distance);
     
+    bool hasSystem(ESystem system);
+    
     void setShipTemplate(string templateName);
     
     P<SpaceObject> getTarget();

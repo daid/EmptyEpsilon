@@ -40,6 +40,7 @@ void ShipSelectionScreen::onGui()
             mySpaceship = new PlayerSpaceship();
             mySpaceship->setShipTemplate("Player Cruiser");
             mySpaceship->setRotation(random(0, 360));
+            mySpaceship->targetRotation = mySpaceship->getRotation();
             mySpaceship->setPosition(sf::Vector2f(random(-10, 10), random(-10, 10)));
             if (gameGlobalInfo->insertPlayerShip(mySpaceship) < 0)
             {

@@ -470,6 +470,13 @@ void SpaceShip::hullDamage(float damageAmount, sf::Vector2f damageLocation, EDam
     }
 }
 
+bool SpaceShip::hasSystem(ESystem system)
+{
+    if (system == SYS_Warp && !hasWarpdrive) return false;
+    if (system == SYS_JumpDrive && !hasJumpdrive) return false;
+    return true;
+}
+
 string getMissileWeaponName(EMissileWeapons missile)
 {
     switch(missile)

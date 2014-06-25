@@ -19,10 +19,44 @@ enum EMissileWeapons
 /* Define script conversion function for the EMissileWeapons enum. */
 template<> void convert<EMissileWeapons>::param(lua_State* L, int& idx, EMissileWeapons& es);
 
+enum ESystem
+{
+    SYS_None = -1,
+    SYS_Reactor = 0,
+    SYS_BeamWeapons,
+    SYS_MissileSystem,
+    SYS_Maneuver,
+    SYS_Impulse,
+    SYS_Warp,
+    SYS_JumpDrive,
+    SYS_FrontShield,
+    SYS_RearShield,
+    SYS_COUNT
+};
+/* Define script conversion function for the ESystem enum. */
+template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es);
+
 class BeamTemplate : public sf::NonCopyable
 {
 public:
     float arc, direction, range, cycle_time, damage;
+};
+class ShipRoom
+{
+public:
+    sf::Vector2i position;
+    sf::Vector2i size;
+    ESystem system;
+    
+    ShipRoom(sf::Vector2i position, sf::Vector2i size, ESystem system) : position(position), size(size), system(system) {}
+};
+class ShipDoor
+{
+public:
+    sf::Vector2i position;
+    bool horizontal;
+
+    ShipDoor(sf::Vector2i position, bool horizontal) : position(position), horizontal(horizontal) {}
 };
 
 class ShipTemplate : public PObject
@@ -43,6 +77,9 @@ public:
     float impulseSpeed, turnSpeed, warpSpeed;
     bool jumpDrive, cloaking;
     int weaponStorage[MW_Count];
+    
+    std::vector<ShipRoom> rooms;
+    std::vector<ShipDoor> doors;
 
     ShipTemplate();
     
@@ -61,8 +98,13 @@ public:
     void setJumpDrive(bool enabled) { jumpDrive = enabled; }
     void setCloaking(bool enabled) { cloaking = enabled; }
     void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon != MW_None) weaponStorage[weapon] = amount; }
+    void addRoom(sf::Vector2i position, sf::Vector2i size) { rooms.push_back(ShipRoom(position, size, SYS_None)); }
+    void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system) { rooms.push_back(ShipRoom(position, size, system)); }
+    void addDoor(sf::Vector2i position, bool horizontal) { doors.push_back(ShipDoor(position, horizontal)); }
 public:
     static P<ShipTemplate> getTemplate(string name);
 };
+string getSystemName(ESystem system);
+REGISTER_MULTIPLAYER_ENUM(ESystem);
 
 #endif//SHIP_TEMPLATE_H

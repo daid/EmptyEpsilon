@@ -35,7 +35,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&front_shield_recharge_factor);
     registerMemberReplication(&rear_shield_recharge_factor);
     
-    for(int n=0; n<PS_COUNT; n++)
+    for(int n=0; n<SYS_COUNT; n++)
     {
         systems[n].health = 1.0;
         systems[n].powerLevel = 1.0;
@@ -47,15 +47,15 @@ PlayerSpaceship::PlayerSpaceship()
         registerMemberReplication(&systems[n].coolantLevel);
         registerMemberReplication(&systems[n].heatLevel, 1.0);
     }
-    systems[PS_Reactor].powerUserFactor = -30.0;
-    systems[PS_BeamWeapons].powerUserFactor = 3.0;
-    systems[PS_MissileSystem].powerUserFactor = 1.0;
-    systems[PS_Maneuver].powerUserFactor = 2.0;
-    systems[PS_Impulse].powerUserFactor = 4.0;
-    systems[PS_Warp].powerUserFactor = 6.0;
-    systems[PS_JumpDrive].powerUserFactor = 6.0;
-    systems[PS_FrontShield].powerUserFactor = 5.0;
-    systems[PS_RearShield].powerUserFactor = 5.0;
+    systems[SYS_Reactor].powerUserFactor = -30.0;
+    systems[SYS_BeamWeapons].powerUserFactor = 3.0;
+    systems[SYS_MissileSystem].powerUserFactor = 1.0;
+    systems[SYS_Maneuver].powerUserFactor = 2.0;
+    systems[SYS_Impulse].powerUserFactor = 4.0;
+    systems[SYS_Warp].powerUserFactor = 6.0;
+    systems[SYS_JumpDrive].powerUserFactor = 6.0;
+    systems[SYS_FrontShield].powerUserFactor = 5.0;
+    systems[SYS_RearShield].powerUserFactor = 5.0;
 }
 
 void PlayerSpaceship::update(float delta)
@@ -68,10 +68,9 @@ void PlayerSpaceship::update(float delta)
         if (shields_active)
             useEnergy(delta * energy_shield_use_per_second);
         
-        for(int n=0; n<PS_COUNT; n++)
+        for(int n=0; n<SYS_COUNT; n++)
         {
-            if (n == PS_Warp && !hasWarpdrive) continue;
-            if (n == PS_JumpDrive && !hasJumpdrive) continue;
+            if (!hasSystem(ESystem(n))) continue;
             
             if (systems[n].powerUserFactor < 0.0)   //When we generate power, use the health of this system in the equation
                 energy_level -= delta * systems[n].powerUserFactor * systems[n].health * systems[n].powerLevel * 0.02;
@@ -98,14 +97,14 @@ void PlayerSpaceship::update(float delta)
             max_power_level = 0.1;
             shields_active = false;
         }
-        beamRechargeFactor = std::min(systems[PS_BeamWeapons].powerLevel * systems[PS_BeamWeapons].health, max_power_level);
-        tubeRechargeFactor = std::min(systems[PS_MissileSystem].powerLevel * systems[PS_MissileSystem].health, max_power_level);
-        rotationSpeed = shipTemplate->turnSpeed * std::min(systems[PS_Maneuver].powerLevel * systems[PS_Maneuver].health, max_power_level);
-        impulseMaxSpeed = shipTemplate->impulseSpeed * std::min(systems[PS_Impulse].powerLevel * systems[PS_Impulse].health, max_power_level);
-        warpSpeedPerWarpLevel = shipTemplate->warpSpeed * std::min(systems[PS_Warp].powerLevel * systems[PS_Warp].health, max_power_level);
-        jumpSpeedFactor = std::min(systems[PS_JumpDrive].powerLevel * systems[PS_JumpDrive].health, max_power_level);
-        front_shield_recharge_factor = std::min(systems[PS_FrontShield].powerLevel * systems[PS_FrontShield].health, max_power_level);
-        rear_shield_recharge_factor = std::min(systems[PS_RearShield].powerLevel * systems[PS_RearShield].health, max_power_level);
+        beamRechargeFactor = std::min(systems[SYS_BeamWeapons].powerLevel * systems[SYS_BeamWeapons].health, max_power_level);
+        tubeRechargeFactor = std::min(systems[SYS_MissileSystem].powerLevel * systems[SYS_MissileSystem].health, max_power_level);
+        rotationSpeed = shipTemplate->turnSpeed * std::min(systems[SYS_Maneuver].powerLevel * systems[SYS_Maneuver].health, max_power_level);
+        impulseMaxSpeed = shipTemplate->impulseSpeed * std::min(systems[SYS_Impulse].powerLevel * systems[SYS_Impulse].health, max_power_level);
+        warpSpeedPerWarpLevel = shipTemplate->warpSpeed * std::min(systems[SYS_Warp].powerLevel * systems[SYS_Warp].health, max_power_level);
+        jumpSpeedFactor = std::min(systems[SYS_JumpDrive].powerLevel * systems[SYS_JumpDrive].health, max_power_level);
+        front_shield_recharge_factor = std::min(systems[SYS_FrontShield].powerLevel * systems[SYS_FrontShield].health, max_power_level);
+        rear_shield_recharge_factor = std::min(systems[SYS_RearShield].powerLevel * systems[SYS_RearShield].health, max_power_level);
 
         if (hasWarpdrive && warpRequest > 0 && !(hasJumpdrive && jumpDelay > 0))
         {
@@ -137,7 +136,7 @@ void PlayerSpaceship::update(float delta)
 
 void PlayerSpaceship::executeJump(float distance)
 {
-    if (useEnergy(distance * energy_per_jump_km) && systems[PS_JumpDrive].health > 0.0)
+    if (useEnergy(distance * energy_per_jump_km) && systems[SYS_JumpDrive].health > 0.0)
         SpaceShip::executeJump(distance);
 }
 
@@ -152,7 +151,7 @@ void PlayerSpaceship::hullDamage(float damageAmount, sf::Vector2f damageLocation
     if (type != DT_EMP)
     {
         hull_damage_indicator = 0.5;
-        EPlayerSystem random_system = EPlayerSystem(irandom(0, PS_COUNT - 1));
+        ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
         //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
         float system_damage = (damageAmount / hull_max) * 5.0;
         if (type == DT_Kinetic)
@@ -164,14 +163,13 @@ void PlayerSpaceship::hullDamage(float damageAmount, sf::Vector2f damageLocation
     SpaceShip::hullDamage(damageAmount, damageLocation, type);
 }
 
-void PlayerSpaceship::setSystemCoolant(EPlayerSystem system, float level)
+void PlayerSpaceship::setSystemCoolant(ESystem system, float level)
 {
     float total_coolant = 0;
     int cnt = 0;
-    for(int n=0; n<PS_COUNT; n++)
+    for(int n=0; n<SYS_COUNT; n++)
     {
-        if (n == PS_Warp && !hasWarpdrive) continue;
-        if (n == PS_JumpDrive && !hasJumpdrive) continue;
+        if (!hasSystem(ESystem(n))) continue;
         if (n == system) continue;
         
         total_coolant += systems[n].coolantLevel;
@@ -179,10 +177,9 @@ void PlayerSpaceship::setSystemCoolant(EPlayerSystem system, float level)
     }
     if (total_coolant > maxCoolant - level)
     {
-        for(int n=0; n<PS_COUNT; n++)
+        for(int n=0; n<SYS_COUNT; n++)
         {
-            if (n == PS_Warp && !hasWarpdrive) continue;
-            if (n == PS_JumpDrive && !hasJumpdrive) continue;
+            if (!hasSystem(ESystem(n))) continue;
             if (n == system) continue;
             
             systems[n].coolantLevel *= (maxCoolant - level) / total_coolant;
@@ -269,19 +266,19 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
         break;
     case CMD_SET_SYSTEM_POWER:
         {
-            EPlayerSystem system;
+            ESystem system;
             float level;
             packet >> system >> level;
-            if (system < PS_COUNT && level >= 0.0 && level <= 3.0)
+            if (system < SYS_COUNT && level >= 0.0 && level <= 3.0)
                 systems[system].powerLevel = level;
         }
         break;
     case CMD_SET_SYSTEM_COOLANT:
         {
-            EPlayerSystem system;
+            ESystem system;
             float level;
             packet >> system >> level;
-            if (system < PS_COUNT && level >= 0.0 && level <= 10.0)
+            if (system < SYS_COUNT && level >= 0.0 && level <= 10.0)
                 setSystemCoolant(system, level);
         }
         break;
@@ -368,34 +365,16 @@ void PlayerSpaceship::commandScan(P<SpaceObject> object)
     sendCommand(packet);
 }
 
-void PlayerSpaceship::commandSetSystemPower(EPlayerSystem system, float power_level)
+void PlayerSpaceship::commandSetSystemPower(ESystem system, float power_level)
 {
     sf::Packet packet;
     packet << CMD_SET_SYSTEM_POWER << system << power_level;
     sendCommand(packet);
 }
 
-void PlayerSpaceship::commandSetSystemCoolant(EPlayerSystem system, float coolant_level)
+void PlayerSpaceship::commandSetSystemCoolant(ESystem system, float coolant_level)
 {
     sf::Packet packet;
     packet << CMD_SET_SYSTEM_COOLANT << system << coolant_level;
     sendCommand(packet);
-}
-
-string getPlayerSystemName(EPlayerSystem system)
-{
-    switch(system)
-    {
-    case PS_Reactor: return "Reactor";
-    case PS_BeamWeapons: return "Beam Weapons";
-    case PS_MissileSystem: return "Missile System";
-    case PS_Maneuver: return "Maneuvering";
-    case PS_Impulse: return "Impulse Engines";
-    case PS_Warp: return "Warp Drive";
-    case PS_JumpDrive: return "Jump Drive";
-    case PS_FrontShield: return "Front Shields";
-    case PS_RearShield: return "Rear Shields";
-    default:
-        return "UNKNOWN";
-    }
 }

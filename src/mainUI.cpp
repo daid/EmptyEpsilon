@@ -163,3 +163,44 @@ void MainUI::drawHeadingCircle(sf::Vector2f position, float size)
     rectV.setPosition(position.x + size * 1.05, 0);
     window.draw(rectV);
 }
+
+void MainUI::drawShipInternals(sf::Vector2f position, P<SpaceShip> ship)
+{
+    if (!ship || !ship->shipTemplate) return;
+    sf::RenderTarget& window = *getRenderTarget();
+    P<ShipTemplate> st = ship->shipTemplate;
+    
+    sf::Vector2i size(0, 0);
+    for(unsigned int n=0; n<st->rooms.size(); n++)
+    {
+        size.x = std::max(size.x, st->rooms[n].position.x + st->rooms[n].size.x);
+        size.y = std::max(size.y, st->rooms[n].position.y + st->rooms[n].size.y);
+    }
+
+    position.x -= size.x * 16;
+    position.y -= size.y * 16;
+    for(unsigned int n=0; n<st->rooms.size(); n++)
+    {
+        sf::RectangleShape room(sf::Vector2f(st->rooms[n].size.x, st->rooms[n].size.y) * 32.0f - sf::Vector2f(4, 4));
+        room.setPosition(position + sf::Vector2f(st->rooms[n].position) * 32.0f + sf::Vector2f(4, 4));
+        room.setFillColor(sf::Color(96, 96, 96, 255));
+        room.setOutlineColor(sf::Color(192, 192, 192, 255));
+        room.setOutlineThickness(4.0);
+        window.draw(room);
+        
+    }
+    for(unsigned int n=0; n<st->doors.size(); n++)
+    {
+        sf::RectangleShape door;
+        if (st->doors[n].horizontal)
+        {
+            door.setSize(sf::Vector2f(24.0, 4.0));
+            door.setPosition(position + sf::Vector2f(st->doors[n].position) * 32.0f + sf::Vector2f(6, 0));
+        }else{
+            door.setSize(sf::Vector2f(4.0, 24.0));
+            door.setPosition(position + sf::Vector2f(st->doors[n].position) * 32.0f + sf::Vector2f(0, 6));
+        }
+        door.setFillColor(sf::Color(255, 128, 32, 255));
+        window.draw(door);
+    }
+}

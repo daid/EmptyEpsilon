@@ -19,6 +19,9 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCloaking);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWeaponStorage);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoom);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoomSystem);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addDoor);
 }
 
 /* Define script conversion function for the EMissileWeapons enum. */
@@ -36,6 +39,33 @@ template<> void convert<EMissileWeapons>::param(lua_State* L, int& idx, EMissile
     else
         es = MW_None;
 }
+
+/* Define script conversion function for the EMissileWeapons enum. */
+template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es)
+{
+    const char* str = luaL_checkstring(L, idx++);
+    if (strcasecmp(str, "Reactor") == 0)
+        es = SYS_Reactor;
+    else if (strcasecmp(str, "BeamWeapons") == 0)
+        es = SYS_BeamWeapons;
+    else if (strcasecmp(str, "MissileSystem") == 0)
+        es = SYS_MissileSystem;
+    else if (strcasecmp(str, "Maneuver") == 0)
+        es = SYS_Maneuver;
+    else if (strcasecmp(str, "Impulse") == 0)
+        es = SYS_Impulse;
+    else if (strcasecmp(str, "Warp") == 0)
+        es = SYS_Warp;
+    else if (strcasecmp(str, "JumpDrive") == 0)
+        es = SYS_JumpDrive;
+    else if (strcasecmp(str, "FrontShield") == 0)
+        es = SYS_FrontShield;
+    else if (strcasecmp(str, "RearShield") == 0)
+        es = SYS_RearShield;
+    else
+        es = SYS_None;
+}
+
 std::map<string, P<ShipTemplate> > ShipTemplate::templateMap;
 
 ShipTemplate::ShipTemplate()
@@ -109,4 +139,22 @@ void ShipTemplate::setTubePosition(int index, sf::Vector2f position)
 P<ShipTemplate> ShipTemplate::getTemplate(string name)
 {
     return templateMap[name];
+}
+
+string getSystemName(ESystem system)
+{
+    switch(system)
+    {
+    case SYS_Reactor: return "Reactor";
+    case SYS_BeamWeapons: return "Beam Weapons";
+    case SYS_MissileSystem: return "Missile System";
+    case SYS_Maneuver: return "Maneuvering";
+    case SYS_Impulse: return "Impulse Engines";
+    case SYS_Warp: return "Warp Drive";
+    case SYS_JumpDrive: return "Jump Drive";
+    case SYS_FrontShield: return "Front Shields";
+    case SYS_RearShield: return "Rear Shields";
+    default:
+        return "UNKNOWN";
+    }
 }
