@@ -232,7 +232,6 @@ void CrewUI::weaponsUI()
 
 void CrewUI::engineeringUI()
 {
-    sf::RenderTarget* window = getRenderTarget();
     P<InputHandler> inputHandler = engine->getObject("inputHandler");
     sf::Vector2f mouse = inputHandler->getMousePos();
 

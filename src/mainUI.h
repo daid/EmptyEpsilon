@@ -2,7 +2,7 @@
 #define MAIN_UI_H
 
 #include "gui.h"
-#include "spaceShip.h"
+#include "spaceship.h"
 
 class MainUI : public GUI
 {
