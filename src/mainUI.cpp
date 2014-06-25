@@ -189,7 +189,7 @@ void MainUI::drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESystem
         room.setOutlineColor(sf::Color(192, 192, 192, 255));
         room.setOutlineThickness(4.0);
         window.draw(room);
-        if (st->rooms[n].system != SYS_None)
+        if (st->rooms[n].system != SYS_None && ship->hasSystem(ESystem(n)))
         {
             sf::Sprite sprite;
             textureManager.setTexture(sprite, "redicule.png");

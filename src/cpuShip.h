@@ -1,7 +1,7 @@
 #ifndef CPU_SHIP_H
 #define CPU_SHIP_H
 
-#include "spaceShip.h"
+#include "spaceship.h"
 
 enum EAIOrder
 {
