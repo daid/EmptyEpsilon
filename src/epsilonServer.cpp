@@ -28,7 +28,7 @@ EpsilonServer::EpsilonServer()
             s->setShipTemplate("Missile Cruiser");
         else
             s->setShipTemplate("Fighter");
-        s->setPosition(sf::vector2FromAngle(random(0, 360)) * random(5000, 20000));
+        s->setPosition(sf::vector2FromAngle(random(0, 360)) * random(7000, 20000));
         s->orderRoaming();
     }
 }

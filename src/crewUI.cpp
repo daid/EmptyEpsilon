@@ -77,7 +77,7 @@ void CrewUI::helmsUI()
     
     //Radar
     float radarDistance = 5000;
-    drawRaderBackground(sf::Vector2f(800, 450), 400, 400.0f / radarDistance);
+    drawRaderBackground(mySpaceship->getPosition(), sf::Vector2f(800, 450), 400, 400.0f / radarDistance);
     foreach(SpaceObject, obj, spaceObjectList)
     {
         if (obj != mySpaceship && sf::length(obj->getPosition() - mySpaceship->getPosition()) < radarDistance)
@@ -140,7 +140,7 @@ void CrewUI::weaponsUI()
     float radarDistance = 5000;
 
     //Radar
-    drawRaderBackground(sf::Vector2f(800, 450), 400, 400.0f / radarDistance);
+    drawRaderBackground(mySpaceship->getPosition(), sf::Vector2f(800, 450), 400, 400.0f / radarDistance);
     if (inputHandler->mouseIsPressed(sf::Mouse::Left))
     {
         sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
@@ -282,7 +282,7 @@ void CrewUI::scienceUI()
 
     //Radar
     float radarDistance = scienceRadarDistance;
-    drawRaderBackground(sf::Vector2f(800, 450), 400, 400.0f / radarDistance);
+    drawRaderBackground(mySpaceship->getPosition(), sf::Vector2f(800, 450), 400, 400.0f / radarDistance);
     if (inputHandler->mouseIsPressed(sf::Mouse::Left))
     {
         sf::Vector2f diff = mouse - sf::Vector2f(800, 450);

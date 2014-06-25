@@ -135,9 +135,12 @@ void CpuShip::update(float delta)
             // 1) we are looking for a target
             // 2) we ran out of missiles
             // 3) we have no weapons
-            new_target = findBestTarget(getPosition(), 20000);
-            if (new_target)
-                targetId = new_target->getMultiplayerId();
+            if (has_missiles || has_beams)
+            {
+                new_target = findBestTarget(getPosition(), 20000);
+                if (new_target)
+                    targetId = new_target->getMultiplayerId();
+            }
             break;
         case AI_StandGround:     //Keep current position, do not fly away, but attack nearby targets.
             targetRotation = getRotation();

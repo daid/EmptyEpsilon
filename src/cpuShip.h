@@ -18,9 +18,9 @@ enum EAIOrder
 
 class CpuShip : public SpaceShip
 {
-    EAIOrder orders;
-    sf::Vector2f order_target_location;
-    P<SpaceObject> order_target;
+    EAIOrder orders;                    //Server only
+    sf::Vector2f order_target_location; //Server only
+    P<SpaceObject> order_target;        //Server only
 public:
     CpuShip();
     

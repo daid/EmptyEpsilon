@@ -219,7 +219,7 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
 void MainScreenUI::renderTactical(sf::RenderTarget& window)
 {
     float radarDistance = 5000;
-    drawRaderBackground(sf::Vector2f(800, 450), 400, 400.0f / radarDistance);
+    drawRaderBackground(mySpaceship->getPosition(), sf::Vector2f(800, 450), 400, 400.0f / radarDistance);
 
     foreach(SpaceObject, obj, spaceObjectList)
     {
@@ -234,7 +234,7 @@ void MainScreenUI::renderTactical(sf::RenderTarget& window)
 void MainScreenUI::renderLongRange(sf::RenderTarget& window)
 {
     float radarDistance = 50000;
-    drawRaderBackground(sf::Vector2f(800, 450), 800, 400.0f / radarDistance);
+    drawRaderBackground(mySpaceship->getPosition(), sf::Vector2f(800, 450), 800, 400.0f / radarDistance);
 
     foreach(SpaceObject, obj, spaceObjectList)
     {

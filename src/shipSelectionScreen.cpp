@@ -2,6 +2,7 @@
 #include "playerInfo.h"
 #include "mainScreen.h"
 #include "crewUI.h"
+#include "gameMasterUI.h"
 
 ShipSelectionScreen::ShipSelectionScreen()
 {
@@ -33,22 +34,6 @@ void ShipSelectionScreen::onGui()
         text(sf::FloatRect(1100, 150 + 50 * n, 300, 50), string(cnt));
     }
 
-    if (gameServer)
-    {
-        if (button(sf::FloatRect(200, 700, 300, 50), "Spawn new ship"))
-        {
-            mySpaceship = new PlayerSpaceship();
-            mySpaceship->setShipTemplate("Player Cruiser");
-            mySpaceship->setRotation(random(0, 360));
-            mySpaceship->targetRotation = mySpaceship->getRotation();
-            mySpaceship->setPosition(sf::Vector2f(random(-10, 10), random(-10, 10)));
-            if (gameGlobalInfo->insertPlayerShip(mySpaceship) < 0)
-            {
-                mySpaceship->destroy();
-            }
-        }
-    }
-    
     if (mySpaceship)
     {
         if (button(sf::FloatRect(800, 700, 300, 50), "Ready"))
@@ -70,6 +55,29 @@ void ShipSelectionScreen::onGui()
         {
             if (toggleButton(sf::FloatRect(200 + (n / 8) * 300, 250 + (n % 8) * 50, 300, 50), mySpaceship == ship, ship->shipTemplate->name + " " + string(n)))
                 mySpaceship = ship;
+        }
+    }
+
+    if (gameServer)
+    {
+        if (button(sf::FloatRect(200, 700, 300, 50), "Spawn new ship"))
+        {
+            mySpaceship = new PlayerSpaceship();
+            mySpaceship->setShipTemplate("Player Cruiser");
+            mySpaceship->setRotation(random(0, 360));
+            mySpaceship->targetRotation = mySpaceship->getRotation();
+            mySpaceship->setPosition(sf::Vector2f(random(-10, 10), random(-10, 10)));
+            if (gameGlobalInfo->insertPlayerShip(mySpaceship) < 0)
+            {
+                mySpaceship->destroy();
+            }
+        }
+        
+        if (button(sf::FloatRect(800, 550, 300, 50), "Game Master"))
+        {
+            mySpaceship = NULL;
+            destroy();
+            new GameMasterUI();
         }
     }
     
