@@ -181,14 +181,22 @@ void MainUI::drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESystem
     position.y -= size.y * 16;
     for(unsigned int n=0; n<st->rooms.size(); n++)
     {
-        sf::RectangleShape room(sf::Vector2f(st->rooms[n].size.x, st->rooms[n].size.y) * 32.0f - sf::Vector2f(4, 4));
+        sf::RectangleShape room(sf::Vector2f(st->rooms[n].size) * 32.0f - sf::Vector2f(4, 4));
         room.setPosition(position + sf::Vector2f(st->rooms[n].position) * 32.0f + sf::Vector2f(4, 4));
         room.setFillColor(sf::Color(96, 96, 96, 255));
         if (st->rooms[n].system == highlight_system && highlight_system != SYS_None)
             room.setFillColor(sf::Color(128, 128, 32, 255));
         room.setOutlineColor(sf::Color(192, 192, 192, 255));
         room.setOutlineThickness(4.0);
-        window.draw(room);        
+        window.draw(room);
+        if (st->rooms[n].system != SYS_None)
+        {
+            sf::Sprite sprite;
+            textureManager.setTexture(sprite, "redicule.png");
+            sprite.setScale(0.7, 0.7);
+            sprite.setPosition(position + sf::Vector2f(st->rooms[n].position) * 32.0f + sf::Vector2f(st->rooms[n].size) * 16.0f + sf::Vector2f(2, 2));
+            window.draw(sprite);
+        }
     }
     for(unsigned int n=0; n<st->doors.size(); n++)
     {
