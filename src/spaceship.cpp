@@ -350,7 +350,8 @@ void SpaceShip::update(float delta)
                 break;
             case WTS_Unloading:
                 weaponTube[n].state = WTS_Empty;
-                weaponStorage[weaponTube[n].typeLoaded] ++;
+                if (weaponStorage[weaponTube[n].typeLoaded] < weaponStorageMax[weaponTube[n].typeLoaded])
+                    weaponStorage[weaponTube[n].typeLoaded] ++;
                 weaponTube[n].typeLoaded = MW_None;
                 break;
             default:
