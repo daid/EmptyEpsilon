@@ -102,24 +102,30 @@ void CpuShip::update(float delta)
         float distance = sf::length(position_diff);
         targetRotation = sf::vector2ToAngle(position_diff);
         
-        if (distance > 7000 && hasWarpdrive)
+        if (orders == AI_StandGround)
         {
-            warpRequest = 1.0;
-        }else{
+            impulseRequest = 0.0f;
             warpRequest = 0.0;
-        }
-        if (distance > 10000 && hasJumpdrive && jumpDelay <= 0.0)
-        {
-            if (fabs(sf::angleDifference(targetRotation, getRotation())) < 1.0)
-                initJump(distance - 3000);
+        }else{
+            if (distance > 7000 && hasWarpdrive)
+            {
+                warpRequest = 1.0;
+            }else{
+                warpRequest = 0.0;
+            }
+            if (distance > 10000 && hasJumpdrive && jumpDelay <= 0.0)
+            {
+                if (fabs(sf::angleDifference(targetRotation, getRotation())) < 1.0)
+                    initJump(distance - 3000);
+            }
+            
+            if (distance > attack_distance + impulseMaxSpeed)
+                impulseRequest = 1.0f;
+            else
+                impulseRequest = (distance - attack_distance) / impulseMaxSpeed;
         }
         
-        if (distance > attack_distance + impulseMaxSpeed)
-            impulseRequest = 1.0f;
-        else
-            impulseRequest = (distance - attack_distance) / impulseMaxSpeed;
-        
-        if (distance < 4500 && has_missiles)
+        if (distance < 4500 && has_missiles && fabs(sf::angleDifference(targetRotation, getRotation())) < 30.0)
         {
             for(int n=0; n<weaponTubes; n++)
                 fireTube(n);

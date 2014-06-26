@@ -38,7 +38,7 @@ void GameMasterUI::onGui()
     {
         sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
         sf::Vector2f mousePosition = view_position + diff / 400.0f * view_distance;
-        if (sf::length(mouse - mouse_down_pos) > 2.0f)
+        if (sf::length(mouse - mouse_down_pos) > 5.0f)
         {
             selection->setPosition(mousePosition);
         }
@@ -99,6 +99,9 @@ void GameMasterUI::onGui()
             y += 30;
             if (toggleButton(sf::FloatRect(20, y, 150, 30), cpuShip->getOrder() == AI_Roaming, "Roaming", 20))
                 cpuShip->orderRoaming();
+            y += 30;
+            if (toggleButton(sf::FloatRect(20, y, 150, 30), cpuShip->getOrder() == AI_StandGround, "Stand Ground", 18))
+                cpuShip->orderStandGround();
             y += 30;
             
             for(int n=0; n<MW_Count; n++)
