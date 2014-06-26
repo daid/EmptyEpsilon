@@ -308,12 +308,16 @@
 		<Unit filename="../SeriousProton/src/vectorUtils.h" />
 		<Unit filename="../SeriousProton/src/windowManager.cpp" />
 		<Unit filename="../SeriousProton/src/windowManager.h" />
+		<Unit filename="src/EMPMissile.cpp" />
+		<Unit filename="src/EMPMissile.h" />
 		<Unit filename="src/beamEffect.cpp" />
 		<Unit filename="src/beamEffect.h" />
 		<Unit filename="src/cpuShip.cpp" />
 		<Unit filename="src/cpuShip.h" />
 		<Unit filename="src/crewUI.cpp" />
 		<Unit filename="src/crewUI.h" />
+		<Unit filename="src/electricExplosionEffect.cpp" />
+		<Unit filename="src/electricExplosionEffect.h" />
 		<Unit filename="src/epsilonServer.cpp" />
 		<Unit filename="src/epsilonServer.h" />
 		<Unit filename="src/explosionEffect.cpp" />

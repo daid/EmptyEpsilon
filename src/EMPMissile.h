@@ -1,15 +1,15 @@
-#ifndef NUKE_H
-#define NUKE_H
+#ifndef EMP_MISSILE_H
+#define EMP_MISSILE_H
 
 #include "spaceObject.h"
 
-class Nuke : public SpaceObject, public Updatable
+class EMPMissile : public SpaceObject, public Updatable
 {
     const static float speed = 400.0f;
     const static float turnSpeed = 50.0f;
-    const static float totalLifetime = 12.0f;
+    const static float totalLifetime = 8.0f;
     const static float blastRange = 1000.0f;
-    const static float damageAtCenter = 160.0f;
+    const static float damageAtCenter = 200.0f;
     const static float damageAtEdge = 30.0f;
     
     float lifetime;
@@ -17,7 +17,7 @@ public:
     P<SpaceObject> owner; //Only valid on server.
     int32_t target_id;
 
-    Nuke();
+    EMPMissile();
 
     virtual void draw3D();
     virtual void draw3DTransparent();

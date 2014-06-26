@@ -68,7 +68,7 @@ void HomingMissile::collision(Collisionable* target)
     if (!gameServer)
         return;
     P<SpaceObject> hitObject = P<Collisionable>(target);
-    if (!hitObject || hitObject == owner)
+    if (!hitObject || hitObject == owner || !hitObject->canBeTargeted())
         return;
     hitObject->takeDamage(20, getPosition(), DT_Kinetic);
     P<ExplosionEffect> e = new ExplosionEffect();

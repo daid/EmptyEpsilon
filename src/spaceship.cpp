@@ -7,6 +7,7 @@
 #include "beamEffect.h"
 #include "factionInfo.h"
 #include "explosionEffect.h"
+#include "EMPMissile.h"
 #include "homingMissile.h"
 #include "nuke.h"
 
@@ -425,7 +426,18 @@ void SpaceShip::fireTube(int tubeNr)
             }
             break;
         case MW_Mine:
+            {
+            }
+            break;
         case MW_EMP:
+            {
+                P<EMPMissile> missile = new EMPMissile();
+                missile->owner = this;
+                missile->target_id = targetId;
+                missile->setPosition(fireLocation);
+                missile->setRotation(getRotation());
+            }
+            break;
         default:
             break;
         }
