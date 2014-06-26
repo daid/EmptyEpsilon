@@ -93,10 +93,25 @@ void GameMasterUI::onGui()
                 window.draw(a);
             }
             
-            if (toggleButton(sf::FloatRect(20, 100, 150, 30), cpuShip->getOrder() == AI_Idle, "Idle", 20))
+            float y = 100;
+            if (toggleButton(sf::FloatRect(20, y, 150, 30), cpuShip->getOrder() == AI_Idle, "Idle", 20))
                 cpuShip->orderIdle();
-            if (toggleButton(sf::FloatRect(20, 130, 150, 30), cpuShip->getOrder() == AI_Roaming, "Roaming", 20))
+            y += 30;
+            if (toggleButton(sf::FloatRect(20, y, 150, 30), cpuShip->getOrder() == AI_Roaming, "Roaming", 20))
                 cpuShip->orderRoaming();
+            y += 30;
+            
+            for(int n=0; n<MW_Count; n++)
+            {
+                if (cpuShip->weaponStorageMax[n] < 1)
+                    continue;
+                text(sf::FloatRect(20, y, 130, 30), getMissileWeaponName(EMissileWeapons(n)) + ": " + string(cpuShip->weaponStorage[n]) + "/" + string(cpuShip->weaponStorageMax[n]), AlignLeft, 20);
+                if (button(sf::FloatRect(200, y, 100, 30), "Refill", 15))
+                {
+                    cpuShip->weaponStorage[n] = cpuShip->weaponStorageMax[n];
+                }
+                y += 30;
+            }
         }
         
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Delete))
