@@ -32,6 +32,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&tubeRechargeFactor);
     registerMemberReplication(&mainScreenSetting);
     registerMemberReplication(&scanning_delay, 0.5);
+    registerMemberReplication(&shields_active);
     registerMemberReplication(&front_shield_recharge_factor);
     registerMemberReplication(&rear_shield_recharge_factor);
     
