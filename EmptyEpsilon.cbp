@@ -336,6 +336,8 @@
 		<Unit filename="src/mainUI.h" />
 		<Unit filename="src/mesh.cpp" />
 		<Unit filename="src/mesh.h" />
+		<Unit filename="src/nuke.cpp" />
+		<Unit filename="src/nuke.h" />
 		<Unit filename="src/playerInfo.cpp" />
 		<Unit filename="src/playerInfo.h" />
 		<Unit filename="src/playerSpaceship.cpp" />

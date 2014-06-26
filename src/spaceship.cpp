@@ -8,6 +8,7 @@
 #include "factionInfo.h"
 #include "explosionEffect.h"
 #include "homingMissile.h"
+#include "nuke.h"
 
 SpaceShip::SpaceShip(string multiplayerClassName)
 : SpaceObject(50, multiplayerClassName)
@@ -414,6 +415,14 @@ void SpaceShip::fireTube(int tubeNr)
             }
             break;
         case MW_Nuke:
+            {
+                P<Nuke> missile = new Nuke();
+                missile->owner = this;
+                missile->target_id = targetId;
+                missile->setPosition(fireLocation);
+                missile->setRotation(getRotation());
+            }
+            break;
         case MW_Mine:
         case MW_EMP:
         default:

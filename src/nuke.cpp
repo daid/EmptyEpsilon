@@ -1,16 +1,16 @@
 #include <SFML/OpenGL.hpp>
-#include "homingMissile.h"
+#include "Nuke.h"
 #include "explosionEffect.h"
 
-REGISTER_MULTIPLAYER_CLASS(HomingMissile, "HomingMissile");
-HomingMissile::HomingMissile()
-: SpaceObject(10, "HomingMissile")
+REGISTER_MULTIPLAYER_CLASS(Nuke, "Nuke");
+Nuke::Nuke()
+: SpaceObject(10, "Nuke")
 {
     lifetime = totalLifetime;
     registerMemberReplication(&target_id);
 }
 
-void HomingMissile::draw3D()
+void Nuke::draw3D()
 {
     sf::Shader::bind(NULL);
     glColor3f(1, 1, 1);
@@ -19,11 +19,11 @@ void HomingMissile::draw3D()
     glEnd();
 }
 
-void HomingMissile::draw3DTransparent()
+void Nuke::draw3DTransparent()
 {
 }
 
-void HomingMissile::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Nuke::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
     if (long_range) return;
 
@@ -31,12 +31,12 @@ void HomingMissile::drawRadar(sf::RenderTarget& window, sf::Vector2f position, f
     textureManager.setTexture(objectSprite, "RadarArrow.png");
     objectSprite.setRotation(getRotation());
     objectSprite.setPosition(position);
-    objectSprite.setColor(sf::Color(255, 200, 0));
-    objectSprite.setScale(0.5, 0.5);
+    objectSprite.setColor(sf::Color(255, 100, 32));
+    objectSprite.setScale(0.6, 0.6);
     window.draw(objectSprite);
 }
 
-void HomingMissile::update(float delta)
+void Nuke::update(float delta)
 {
     P<SpaceObject> target;
     if (gameServer)
@@ -63,16 +63,31 @@ void HomingMissile::update(float delta)
     setVelocity(sf::vector2FromAngle(getRotation()) * speed);
 }
 
-void HomingMissile::collision(Collisionable* target)
+void Nuke::collision(Collisionable* target)
 {
     if (!gameServer)
         return;
     P<SpaceObject> hitObject = P<Collisionable>(target);
     if (!hitObject || hitObject == owner)
         return;
-    hitObject->takeDamage(20, getPosition(), DT_Kinetic);
+    PVector<Collisionable> hitList = CollisionManager::queryArea(getPosition() - sf::Vector2f(blastRange, blastRange), getPosition() + sf::Vector2f(blastRange, blastRange));
+    foreach(Collisionable, c, hitList)
+    {
+        P<SpaceObject> obj = c;
+        if (obj)
+        {
+            float dist = sf::length(getPosition() - obj->getPosition()) - obj->getRadius();
+            if (dist < 0) dist = 0;
+            if (dist < blastRange)
+            {
+                printf("Damage: %f\n", damageAtCenter - (damageAtCenter - damageAtEdge) * dist / blastRange);
+                obj->takeDamage(damageAtCenter - (damageAtCenter - damageAtEdge) * dist / blastRange, getPosition(), DT_Kinetic);
+            }
+        }
+    }
+
     P<ExplosionEffect> e = new ExplosionEffect();
-    e->setSize(30);
+    e->setSize(blastRange);
     e->setPosition(getPosition());
     destroy();
 }
