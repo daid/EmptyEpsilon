@@ -1,5 +1,5 @@
 #include <SFML/OpenGL.hpp>
-#include "Nuke.h"
+#include "nuke.h"
 #include "explosionEffect.h"
 
 REGISTER_MULTIPLAYER_CLASS(Nuke, "Nuke");

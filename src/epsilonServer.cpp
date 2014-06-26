@@ -3,6 +3,7 @@
 #include "spaceObject.h"
 #include "spaceStation.h"
 #include "cpuShip.h"
+#include "mine.h"
 #include "main.h"
 
 EpsilonServer::EpsilonServer()
@@ -30,6 +31,11 @@ EpsilonServer::EpsilonServer()
             s->setShipTemplate("Fighter");
         s->setPosition(sf::vector2FromAngle(random(0, 360)) * random(7000, 20000));
         s->orderRoaming();
+    }
+    for(int n=0; n<100; n++)
+    {
+        P<Mine> m = new Mine();
+        m->setPosition(sf::vector2FromAngle(random(0, 360)) * random(7000, 20000));
     }
 }
 

@@ -9,6 +9,7 @@
 #include "explosionEffect.h"
 #include "EMPMissile.h"
 #include "homingMissile.h"
+#include "mine.h"
 #include "nuke.h"
 
 SpaceShip::SpaceShip(string multiplayerClassName)
@@ -427,6 +428,10 @@ void SpaceShip::fireTube(int tubeNr)
             break;
         case MW_Mine:
             {
+                P<Mine> missile = new Mine();
+                missile->setPosition(fireLocation);
+                missile->setRotation(getRotation());
+                missile->eject();
             }
             break;
         case MW_EMP:

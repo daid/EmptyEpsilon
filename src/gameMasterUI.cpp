@@ -26,7 +26,7 @@ void GameMasterUI::onGui()
         foreach(Collisionable, obj, list)
         {
             P<SpaceObject> spaceObject = obj;
-            if (spaceObject && spaceObject->canBeTargeted())
+            if (spaceObject)
             {
                 if (!target || sf::length(mousePosition - spaceObject->getPosition()) < sf::length(mousePosition - target->getPosition()))
                     target = spaceObject;
