@@ -28,6 +28,7 @@ public:
     
     P<SpaceObject> findBestTarget(sf::Vector2f position, float radius);
     
+    void orderIdle();
     void orderRoaming();
     void orderStandGround();
     void orderDefendLocation(sf::Vector2f position);
@@ -35,6 +36,9 @@ public:
     void orderFlyFormation(P<SpaceObject> object, sf::Vector2f offset);
     void orderFlyTowards(sf::Vector2f target);
     void orderAttack(P<SpaceObject> object);
+    
+    EAIOrder getOrder() { return orders; }
 };
+string getAIOrderString(EAIOrder order);
 
 #endif//CPU_SHIP_H

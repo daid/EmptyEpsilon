@@ -320,6 +320,8 @@
 		<Unit filename="src/explosionEffect.h" />
 		<Unit filename="src/factionInfo.cpp" />
 		<Unit filename="src/factionInfo.h" />
+		<Unit filename="src/gameMasterUI.cpp" />
+		<Unit filename="src/gameMasterUI.h" />
 		<Unit filename="src/gui.cpp" />
 		<Unit filename="src/gui.h" />
 		<Unit filename="src/homingMissile.cpp" />

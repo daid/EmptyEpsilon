@@ -103,6 +103,7 @@ public:
     void addDoor(sf::Vector2i position, bool horizontal) { doors.push_back(ShipDoorTemplate(position, horizontal)); }
 public:
     static P<ShipTemplate> getTemplate(string name);
+    static std::vector<string> getTemplateNameList();
 };
 string getSystemName(ESystem system);
 REGISTER_MULTIPLAYER_ENUM(ESystem);

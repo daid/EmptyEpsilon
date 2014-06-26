@@ -3,7 +3,7 @@
 
 #include "engine.h"
 
-const static int maxFactions = 3;
+const static int maxFactions = 5;
 class FactionInfo;
 extern FactionInfo factionInfo[maxFactions];
 
@@ -20,6 +20,7 @@ public:
     FactionInfo();
     
     string name;
+    sf::Color gm_color;
     
     EFactionVsFactionState states[maxFactions];
     

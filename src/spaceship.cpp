@@ -34,6 +34,7 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     shields_active = false;
     front_shield = rear_shield = front_shield_max = rear_shield_max = 50;
     front_shield_hit_effect = rear_shield_hit_effect = 0;
+    front_shield_recharge_factor = rear_shield_recharge_factor = 1.0;
     scanned_by_player = false;
     beamRechargeFactor = 1.0;
     tubeRechargeFactor = 1.0;
@@ -216,8 +217,7 @@ void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float
             objectSprite.setColor(sf::Color(128, 128, 128));
         }
     }else{
-        if (factionInfo[factionId].states[1] == FVF_Enemy)
-            objectSprite.setColor(sf::Color::Red);
+        objectSprite.setColor(factionInfo[factionId].gm_color);
     }
     window.draw(objectSprite);
 }

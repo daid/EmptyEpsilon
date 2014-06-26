@@ -194,6 +194,11 @@ P<SpaceObject> CpuShip::findBestTarget(sf::Vector2f position, float radius)
     return target;
 }
 
+void CpuShip::orderIdle()
+{
+    orders = AI_Idle;
+}
+
 void CpuShip::orderRoaming()
 {
     orders = AI_Roaming;
@@ -234,3 +239,21 @@ void CpuShip::orderAttack(P<SpaceObject> object)
     orders = AI_Attack;
     order_target = object;
 }
+
+string getAIOrderString(EAIOrder order)
+{
+    switch(order)
+    {
+    case AI_Idle: return "Idle";
+    case AI_Roaming: return "Roaming";
+    case AI_StandGround: return "Stand Ground";
+    case AI_DefendLocation: return "Defend Location";
+    case AI_DefendTarget: return "Defend Target";
+    case AI_FlyFormation: return "Fly in formation";
+    case AI_FlyTowards: return "Fly towards";
+    case AI_FlyTowardsBlind: return "Fly towards (ignore all)";
+    case AI_Attack: return "Attack";
+    }
+    return "Unknown";
+}
+

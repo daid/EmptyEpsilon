@@ -1,5 +1,6 @@
 #include <SFML/OpenGL.hpp>
 #include "homingMissile.h"
+#include "explosionEffect.h"
 
 REGISTER_MULTIPLAYER_CLASS(HomingMissile, "HomingMissile");
 HomingMissile::HomingMissile()
@@ -65,5 +66,8 @@ void HomingMissile::collision(Collisionable* target)
     if (!hitObject || hitObject == owner)
         return;
     hitObject->takeDamage(20, getPosition(), DT_Kinetic);
+    P<ExplosionEffect> e = new ExplosionEffect();
+    e->setSize(30);
+    e->setPosition(getPosition());
     destroy();
 }

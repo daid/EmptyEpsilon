@@ -21,7 +21,7 @@ EpsilonServer::EpsilonServer()
     P<SpaceStation> station = new SpaceStation();
     station->setPosition(sf::Vector2f(0, -500));
     
-    for(int n=0; n<100; n++)
+    for(int n=0; n<10; n++)
     {
         P<CpuShip> s = new CpuShip();
         if (random(0, 100) < 10)

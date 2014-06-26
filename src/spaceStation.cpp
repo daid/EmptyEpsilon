@@ -1,6 +1,8 @@
 #include <SFML/OpenGL.hpp>
 #include "spaceStation.h"
 #include "shipTemplate.h"
+#include "playerInfo.h"
+#include "factionInfo.h"
 #include "mesh.h"
 #include "explosionEffect.h"
 #include "main.h"
@@ -63,6 +65,13 @@ void SpaceStation::drawRadar(sf::RenderTarget& window, sf::Vector2f position, fl
     objectSprite.setPosition(position);
     if (long_range)
         objectSprite.setScale(0.7, 0.7);
+    if (mySpaceship)
+    {
+        if (factionInfo[factionId].states[mySpaceship->factionId] == FVF_Enemy)
+            objectSprite.setColor(sf::Color::Red);
+    }else{
+        objectSprite.setColor(factionInfo[factionId].gm_color);
+    }
     window.draw(objectSprite);
 }
 

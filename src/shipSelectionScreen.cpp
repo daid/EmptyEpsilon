@@ -60,7 +60,7 @@ void ShipSelectionScreen::onGui()
 
     if (gameServer)
     {
-        if (button(sf::FloatRect(200, 700, 300, 50), "Spawn new ship"))
+        if (button(sf::FloatRect(200, 700, 300, 50), "Spawn player ship"))
         {
             mySpaceship = new PlayerSpaceship();
             mySpaceship->setShipTemplate("Player Cruiser");
@@ -73,7 +73,7 @@ void ShipSelectionScreen::onGui()
             }
         }
         
-        if (button(sf::FloatRect(800, 550, 300, 50), "Game Master"))
+        if (button(sf::FloatRect(1200, 150, 300, 50), "Game Master"))
         {
             mySpaceship = NULL;
             destroy();

@@ -53,7 +53,22 @@ int main(int argc, char** argv)
     factionInfo[0].name = "Neutral";
     factionInfo[1].name = "Human";
     factionInfo[2].name = "SpaceCow";
+    factionInfo[3].name = "Sheeple";
+    factionInfo[4].name = "PirateScorpions";
+    factionInfo[0].gm_color = sf::Color(128, 128, 128);
+    factionInfo[1].gm_color = sf::Color(255, 255, 255);
+    factionInfo[2].gm_color = sf::Color(255, 0, 0);
+    factionInfo[3].gm_color = sf::Color(255, 128, 0);
+    factionInfo[4].gm_color = sf::Color(255, 0, 128);
+    FactionInfo::setState(0, 4, FVF_Enemy);
+
     FactionInfo::setState(1, 2, FVF_Enemy);
+    FactionInfo::setState(1, 3, FVF_Enemy);
+    FactionInfo::setState(1, 4, FVF_Enemy);
+    
+    FactionInfo::setState(2, 3, FVF_Enemy);
+    FactionInfo::setState(2, 4, FVF_Enemy);
+    FactionInfo::setState(3, 4, FVF_Enemy);
     
     new MainMenu();
     
