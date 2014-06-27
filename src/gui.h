@@ -14,14 +14,14 @@ class GUI: public Renderable
 {
     static sf::RenderTarget* renderTarget;
     static sf::Vector2f mousePosition;
-    static int mouseClick;
-    static int mouseDown;
+    static int mouse_click;
+    static int mouse_down;
     bool init;
 public:
     GUI();
-    
+
     virtual void render(sf::RenderTarget& window);
-    
+
     virtual void onGui() = 0;
 
     static void text(sf::FloatRect rect, string text, EAlign align = AlignLeft, float textSize = 30);
@@ -35,9 +35,9 @@ class MouseRenderer : public Renderable
 {
 public:
     bool visible;
-    
+
     MouseRenderer();
-    
+
     virtual void render(sf::RenderTarget& window);
 };
 

@@ -3,9 +3,9 @@
 
 CrewUI::CrewUI()
 {
-    jumpDistance = 1.0;
+    jump_distance = 1.0;
     tubeLoadType = MW_None;
-    
+
     for(int n=0; n<maxCrewPositions; n++)
     {
         if (myPlayerInfo->crewPosition[n])
@@ -48,7 +48,7 @@ void CrewUI::onGui()
             offset++;
         }
     }
-    
+
     MainUI::onGui();
 }
 
@@ -63,11 +63,11 @@ void CrewUI::helmsUI()
         if (sf::length(diff) < 400)
             mySpaceship->commandTargetRotation(sf::vector2ToAngle(diff));
     }
-    
+
     //Radar
     float radarDistance = 5000;
     drawHeadingCircle(sf::Vector2f(800, 450), 400);
-    
+
     foreach(SpaceObject, obj, spaceObjectList)
     {
         if (obj != mySpaceship && sf::length(obj->getPosition() - mySpaceship->getPosition()) < radarDistance)
@@ -84,7 +84,7 @@ void CrewUI::helmsUI()
     }
     mySpaceship->drawRadar(*window, sf::Vector2f(800, 450), 400.0f / radarDistance);
     //!Radar
-    
+
     float res = vslider(sf::FloatRect(20, 500, 50, 300), mySpaceship->impulseRequest, 1.0, -1.0);
     if (res > -0.15 && res < 0.15)
         res = 0.0;
@@ -104,20 +104,20 @@ void CrewUI::helmsUI()
     if (mySpaceship->hasJumpdrive)
     {
         float x = mySpaceship->hasWarpdrive ? 180 : 100;
-        jumpDistance = vslider(sf::FloatRect(x, 500, 50, 300), jumpDistance, 20.0, 1.0);
-        text(sf::FloatRect(x, 800, 50, 20), string(jumpDistance) + "km", AlignLeft, 20);
+        jump_distance = vslider(sf::FloatRect(x, 500, 50, 300), jump_distance, 20.0, 1.0);
+        text(sf::FloatRect(x, 800, 50, 20), string(jump_distance) + "km", AlignLeft, 20);
         if (mySpaceship->jumpDelay > 0.0)
         {
             text(sf::FloatRect(x, 820, 50, 20), string(int(mySpaceship->jumpDelay) + 1), AlignLeft, 20);
         }else{
             if (button(sf::FloatRect(x, 820, 70, 30), "Jump", 20))
             {
-                mySpaceship->commandJump(jumpDistance);
+                mySpaceship->commandJump(jump_distance);
             }
         }
     }
 }
-#include <typeinfo> 
+#include <typeinfo>
 void CrewUI::tacticalUI()
 {
     sf::RenderTarget* window = getRenderTarget();
@@ -145,13 +145,13 @@ void CrewUI::tacticalUI()
     }
 
     drawHeadingCircle(sf::Vector2f(800, 450), 400);
-    
+
     foreach(SpaceObject, obj, spaceObjectList)
     {
         if (obj != mySpaceship && sf::length(obj->getPosition() - mySpaceship->getPosition()) < radarDistance)
             obj->drawRadar(*window, sf::Vector2f(800, 450) + (obj->getPosition() - mySpaceship->getPosition()) / radarDistance * 400.0f, 400.0f / radarDistance);
     }
-    
+
     P<SpaceObject> target = mySpaceship->getTarget();
     if (target)
     {
@@ -173,7 +173,7 @@ void CrewUI::tacticalUI()
                 tubeLoadType = EMissileWeapons(n);
         }
     }
-    
+
     for(int n=0; n<mySpaceship->weaponTubes; n++)
     {
         if (mySpaceship->weaponTube[n].typeLoaded == MW_None)

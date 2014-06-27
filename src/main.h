@@ -10,7 +10,7 @@ extern sf::Font mainFont;
 extern RenderLayer* backgroundLayer;
 extern RenderLayer* objectLayer;
 extern RenderLayer* effectLayer;
-extern RenderLayer* hudLayer;
+extern RenderLayer* hud_layer;
 extern RenderLayer* mouseLayer;
 
 #endif//MAIN_H

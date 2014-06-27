@@ -7,7 +7,7 @@ sf::Font mainFont;
 RenderLayer* backgroundLayer;
 RenderLayer* objectLayer;
 RenderLayer* effectLayer;
-RenderLayer* hudLayer;
+RenderLayer* hud_layer;
 RenderLayer* mouseLayer;
 
 int main(int argc, char** argv)
@@ -20,8 +20,8 @@ int main(int argc, char** argv)
     backgroundLayer = new RenderLayer();
     objectLayer = new RenderLayer(backgroundLayer);
     effectLayer = new RenderLayer(objectLayer);
-    hudLayer = new RenderLayer(effectLayer);
-    mouseLayer = new RenderLayer(hudLayer);
+    hud_layer = new RenderLayer(effectLayer);
+    mouseLayer = new RenderLayer(hud_layer);
     defaultRenderLayer = objectLayer;
 
     int width = 1600;
@@ -30,18 +30,18 @@ int main(int argc, char** argv)
     engine->registerObject("windowManager", new WindowManager(width, height, false, mouseLayer, fsaa));
     engine->registerObject("inputHandler", new InputHandler());
     engine->registerObject("mouseRenderer", new MouseRenderer());
-    
+
     P<ResourceStream> stream = getResourceStream("sansation.ttf");
     mainFont.loadFromStream(**stream);
 
     P<ResourceStream> vertexStream = getResourceStream("objectShader.vert");
     P<ResourceStream> fragmentStream = getResourceStream("objectShader.frag");
     objectShader.loadFromStream(**vertexStream, **fragmentStream);
-    
+
     new MainMenu();
-    
+
     engine->runMainLoop();
-    
+
     delete engine;
     return 0;
 }

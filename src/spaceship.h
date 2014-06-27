@@ -50,7 +50,7 @@ public:
     float currentWarp;
 
     bool hasJumpdrive;
-    float jumpDistance;
+    float jump_distance;
     float jumpDelay;
 
     int8_t weaponTubes;

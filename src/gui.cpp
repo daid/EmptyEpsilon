@@ -54,7 +54,7 @@ void GUI::text(sf::FloatRect rect, string text, EAlign align, float fontSize)
     renderTarget->draw(textElement);
 }
 
-bool GUI::button(sf::FloatRect rect, string textValue, float fontSize)
+bool GUI::button(sf::FloatRect rect, string text_value, float font_size)
 {
     sf::Sprite sprite;
     textureManager.setTexture(sprite, "button_background");
@@ -67,13 +67,13 @@ bool GUI::button(sf::FloatRect rect, string textValue, float fontSize)
     sprite.setScale(rect.width / sprite.getTextureRect().width, rect.height / sprite.getTextureRect().height);
     renderTarget->draw(sprite);
 
-    text(rect, textValue, AlignCenter, fontSize);
+    text(rect, text_value, AlignCenter, font_size);
     if (mouse_click && rect.contains(mousePosition))
         return true;
     return false;
 }
 
-bool GUI::toggleButton(sf::FloatRect rect, bool active, string textValue, float fontSize)
+bool GUI::toggleButton(sf::FloatRect rect, bool active, string text_value, float font_size)
 {
     sf::Sprite sprite;
     textureManager.setTexture(sprite, "button_background");
@@ -94,13 +94,13 @@ bool GUI::toggleButton(sf::FloatRect rect, bool active, string textValue, float 
     sprite.setScale(rect.width / sprite.getTextureRect().width, rect.height / sprite.getTextureRect().height);
     renderTarget->draw(sprite);
 
-    text(rect, textValue, AlignCenter, fontSize);
+    text(rect, text_value, AlignCenter, font_size);
     if (mouse_click && rect.contains(mousePosition))
         return true;
     return false;
 }
 
-float GUI::vslider(sf::FloatRect rect, float value, float minValue, float maxValue)
+float GUI::vslider(sf::FloatRect rect, float value, float min_value, float max_value)
 {
     sf::RectangleShape background(sf::Vector2f(rect.width, rect.height));
     background.setPosition(rect.left, rect.top);
@@ -112,7 +112,7 @@ float GUI::vslider(sf::FloatRect rect, float value, float minValue, float maxVal
     backgroundZero.setFillColor(sf::Color(0,0,0,32));
     renderTarget->draw(backgroundZero);
 
-    float y = rect.top + (rect.height - rect.width) * (value - minValue) / (maxValue - minValue);
+    float y = rect.top + (rect.height - rect.width) * (value - min_value) / (max_value - min_value);
     sf::Sprite sprite;
     textureManager.setTexture(sprite, "button_background");
     if (rect.contains(mousePosition) && mousePosition.y >= y && mousePosition.y <= y + rect.width)
@@ -127,18 +127,18 @@ float GUI::vslider(sf::FloatRect rect, float value, float minValue, float maxVal
     if (rect.contains(mousePosition) && mouse_down)
     {
         value = (mousePosition.y - rect.top - (rect.width / 2.0)) / (rect.height - rect.width);
-        value = minValue + (maxValue - minValue) * value;
-        if (minValue < maxValue)
+        value = min_value + (max_value - min_value) * value;
+        if (min_value < max_value)
         {
-            if (value < minValue)
-                value = minValue;
-            if (value > maxValue)
-                value = maxValue;
+            if (value < min_value)
+                value = min_value;
+            if (value > max_value)
+                value = max_value;
         }else{
-            if (value > minValue)
-                value = minValue;
-            if (value < maxValue)
-                value = maxValue;
+            if (value > min_value)
+                value = min_value;
+            if (value < max_value)
+                value = max_value;
         }
     }
 

@@ -24,7 +24,7 @@ SpaceShip::SpaceShip()
     warpRequest = 0.0;
     currentWarp = 0.0;
     hasJumpdrive = true;
-    jumpDistance = 0.0;
+    jump_distance = 0.0;
     jumpDelay = 0.0;
     weaponTubes = 6;
 
@@ -151,7 +151,7 @@ void SpaceShip::update(float delta)
         jumpDelay -= delta;
         if (jumpDelay <= 0.0)
         {
-            setPosition(getPosition() + sf::vector2FromAngle(getRotation()) * jumpDistance * 1000.0f);
+            setPosition(getPosition() + sf::vector2FromAngle(getRotation()) * jump_distance * 1000.0f);
             jumpDelay = 0.0;
         }
     }else if (hasWarpdrive && (warpRequest > 0 || currentWarp > 0))
@@ -242,7 +242,7 @@ void SpaceShip::onReceiveCommand(int32_t clientId, sf::Packet& packet)
     case CMD_JUMP:
         if (jumpDelay <= 0.0)
         {
-            packet >> jumpDistance;
+            packet >> jump_distance;
             jumpDelay = 10.0;
         }
         break;
