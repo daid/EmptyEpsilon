@@ -18,6 +18,7 @@ CpuShip::CpuShip()
     setRotation(random(0, 360));
     targetRotation = getRotation();
     shields_active = true;
+    missile_fire_delay = 0.0;
 }
 
 void CpuShip::update(float delta)
@@ -26,6 +27,9 @@ void CpuShip::update(float delta)
 
     if (!gameServer)
         return;
+        
+    if (missile_fire_delay > 0.0)
+        missile_fire_delay -= delta;
     
     //Check the weapon state, 
     bool has_missiles = weaponTubes > 0 && weaponStorage[MW_Homing] > 0, has_beams = false;
@@ -128,7 +132,13 @@ void CpuShip::update(float delta)
         if (distance < 4500 && has_missiles && fabs(sf::angleDifference(targetRotation, getRotation())) < 30.0)
         {
             for(int n=0; n<weaponTubes; n++)
-                fireTube(n);
+            {
+                if (weaponTube[n].state == WTS_Loaded && missile_fire_delay <= 0.0)
+                {
+                    fireTube(n);
+                    missile_fire_delay = tubeLoadTime / weaponTubes / 2.0;
+                }
+            }
         }
     }else{
         //When we are not attacking a target, follow orders

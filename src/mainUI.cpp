@@ -51,9 +51,9 @@ void MainUI::onGui()
     
     if (engine->getGameSpeed() == 0.0)
     {
-        text(sf::FloatRect(0, 400, 1600, 100), "Game Paused", AlignCenter, 70);
+        text(sf::FloatRect(0, 600, 1600, 100), "Game Paused", AlignCenter, 70);
         if (gameServer)
-            text(sf::FloatRect(0, 480, 1600, 30), "(Press [SPACE] to resume)", AlignCenter, 30);
+            text(sf::FloatRect(0, 680, 1600, 30), "(Press [SPACE] to resume)", AlignCenter, 30);
     }
 }
 

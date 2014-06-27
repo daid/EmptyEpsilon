@@ -21,6 +21,7 @@ class CpuShip : public SpaceShip
     EAIOrder orders;                    //Server only
     sf::Vector2f order_target_location; //Server only
     P<SpaceObject> order_target;        //Server only
+    float missile_fire_delay;
 public:
     CpuShip();
     

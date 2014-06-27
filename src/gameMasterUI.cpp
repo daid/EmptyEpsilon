@@ -7,6 +7,7 @@ GameMasterUI::GameMasterUI()
 {
     view_distance = 50000;
     current_faction = 2;
+    allow_object_drag = false;
 }
 
 void GameMasterUI::onGui()
@@ -33,7 +34,7 @@ void GameMasterUI::onGui()
         }
         selection = target;
     }
-    if (selection && InputHandler::mouseIsDown(sf::Mouse::Left) && mouse.x > 300)
+    if (selection && allow_object_drag && InputHandler::mouseIsDown(sf::Mouse::Left) && mouse.x > 300)
     {
         sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
         sf::Vector2f mousePosition = view_position + diff / 400.0f * view_distance;
@@ -149,6 +150,9 @@ void GameMasterUI::onGui()
             }
         }
     }
+    
+    if (toggleButton(sf::FloatRect(20, 840, 250, 30), allow_object_drag, "Drag Objects"))
+        allow_object_drag = !allow_object_drag;
 
     MainUI::onGui();
     prev_mouse_pos = mouse;

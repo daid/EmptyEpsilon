@@ -13,6 +13,7 @@ class GameMasterUI : public MainUI
     sf::Vector2f view_position;
     float view_distance;
     P<SpaceObject> selection;
+    bool allow_object_drag;
 public:
     GameMasterUI();
     
