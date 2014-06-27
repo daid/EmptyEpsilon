@@ -13,6 +13,7 @@ RenderLayer* objectLayer;
 RenderLayer* effectLayer;
 RenderLayer* hudLayer;
 RenderLayer* mouseLayer;
+PostProcessor* glitchPostProcessor;
 
 int main(int argc, char** argv)
 {
@@ -28,12 +29,14 @@ int main(int argc, char** argv)
     effectLayer = new RenderLayer(objectLayer);
     hudLayer = new RenderLayer(effectLayer);
     mouseLayer = new RenderLayer(hudLayer);
+    glitchPostProcessor = new PostProcessor("glitch", mouseLayer);
+    glitchPostProcessor->enabled = false;
     defaultRenderLayer = objectLayer;
 
     int width = 1600;
     int height = 900;
     int fsaa = 0;
-    engine->registerObject("windowManager", new WindowManager(width, height, false, mouseLayer, fsaa));
+    engine->registerObject("windowManager", new WindowManager(width, height, false, glitchPostProcessor, fsaa));
     engine->registerObject("mouseRenderer", new MouseRenderer());
     
     P<ResourceStream> stream = getResourceStream("sansation.ttf");

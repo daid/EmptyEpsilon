@@ -1,6 +1,7 @@
 #include "playerSpaceship.h"
 #include "repairCrew.h"
 #include "explosionEffect.h"
+#include "main.h"
 
 static const int16_t CMD_TARGET_ROTATION = 0x0001;
 static const int16_t CMD_IMPULSE = 0x0002;
@@ -25,9 +26,11 @@ PlayerSpaceship::PlayerSpaceship()
     mainScreenSetting = MSS_Front;
     factionId = 1;
     hull_damage_indicator = 0.0;
+    warp_indicator = 0.0;
     scanned_by_player = true;
 
     registerMemberReplication(&hull_damage_indicator, 0.5);
+    registerMemberReplication(&warp_indicator, 0.5);
     registerMemberReplication(&energy_level);
     registerMemberReplication(&jumpSpeedFactor);
     registerMemberReplication(&beamRechargeFactor);
@@ -74,7 +77,9 @@ void PlayerSpaceship::update(float delta)
 {
     if (hull_damage_indicator > 0)
         hull_damage_indicator -= delta;
-    
+    if (warp_indicator > 0)
+        warp_indicator -= delta;
+
     if (gameServer)
     {
         if (shields_active)
@@ -163,7 +168,10 @@ void PlayerSpaceship::update(float delta)
 void PlayerSpaceship::executeJump(float distance)
 {
     if (useEnergy(distance * energy_per_jump_km) && systems[SYS_JumpDrive].health > 0.0)
+    {
+        warp_indicator = 2.0;
         SpaceShip::executeJump(distance);
+    }
 }
 
 void PlayerSpaceship::fireBeamWeapon(int idx, P<SpaceObject> target)

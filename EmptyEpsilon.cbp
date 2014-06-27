@@ -348,6 +348,8 @@
 		<Unit filename="src/playerInfo.h" />
 		<Unit filename="src/playerSpaceship.cpp" />
 		<Unit filename="src/playerSpaceship.h" />
+		<Unit filename="src/repairCrew.cpp" />
+		<Unit filename="src/repairCrew.h" />
 		<Unit filename="src/shipSelectionScreen.cpp" />
 		<Unit filename="src/shipSelectionScreen.h" />
 		<Unit filename="src/shipTemplate.cpp" />

@@ -28,6 +28,7 @@ public:
 
     float energy_level;
     float hull_damage_indicator;
+    float warp_indicator;
     P<SpaceShip> scanning_ship; //Server only
     float scanning_delay;
     

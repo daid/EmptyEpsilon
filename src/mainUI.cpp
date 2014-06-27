@@ -22,11 +22,31 @@ void MainUI::onGui()
 #endif
     }
     
-    if (mySpaceship && mySpaceship->hull_damage_indicator > 0.0)
+    if (mySpaceship)
     {
-        sf::RectangleShape fullScreenOverlay(sf::Vector2f(1600, 900));
-        fullScreenOverlay.setFillColor(sf::Color(255, 0, 0, 255 * mySpaceship->hull_damage_indicator));
-        getRenderTarget()->draw(fullScreenOverlay);
+        if (mySpaceship->hull_damage_indicator > 0.0)
+        {
+            sf::RectangleShape fullScreenOverlay(sf::Vector2f(1600, 900));
+            fullScreenOverlay.setFillColor(sf::Color(255, 0, 0, 255 * mySpaceship->hull_damage_indicator));
+            getRenderTarget()->draw(fullScreenOverlay);
+        }
+        
+        if (mySpaceship->warp_indicator > 0.0)
+        {
+            if (mySpaceship->warp_indicator > 1.0)
+            {
+                sf::RectangleShape fullScreenOverlay(sf::Vector2f(1600, 900));
+                fullScreenOverlay.setFillColor(sf::Color(0, 0, 0, 255 * (mySpaceship->warp_indicator - 1.0)));
+                getRenderTarget()->draw(fullScreenOverlay);
+            }
+            glitchPostProcessor->enabled = true;
+            glitchPostProcessor->setUniform("magtitude", mySpaceship->warp_indicator * 10.0);
+            glitchPostProcessor->setUniform("delta", random(0, 360));
+        }else{
+            glitchPostProcessor->enabled = false;
+        }
+    }else{
+        glitchPostProcessor->enabled = false;
     }
     
     if (engine->getGameSpeed() == 0.0)

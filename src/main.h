@@ -15,5 +15,6 @@ extern RenderLayer* objectLayer;
 extern RenderLayer* effectLayer;
 extern RenderLayer* hudLayer;
 extern RenderLayer* mouseLayer;
+extern PostProcessor* glitchPostProcessor;
 
 #endif//MAIN_H
