@@ -3,11 +3,11 @@
 
 sf::RenderTarget* GUI::renderTarget;
 sf::Vector2f GUI::mousePosition;
-int GUI::mouseClick;
-int GUI::mouseDown;
+int GUI::mouse_click;
+int GUI::mouse_down;
 
 GUI::GUI()
-: Renderable(hudLayer)
+: Renderable(hud_layer)
 {
     init = true;
 }
@@ -16,23 +16,23 @@ void GUI::render(sf::RenderTarget& window)
 {
     P<InputHandler> inputHandler = engine->getObject("inputHandler");
     mousePosition = inputHandler->getMousePos();
-    mouseClick = 0;
-    mouseDown = 0;
+    mouse_click = 0;
+    mouse_down = 0;
     if (!init)//Do not send mouse clicks the first render, as we can just be created because of a mouseclick.
     {
         if (inputHandler->mouseIsPressed(sf::Mouse::Left))
-            mouseClick = 1;
+            mouse_click = 1;
         else if (inputHandler->mouseIsPressed(sf::Mouse::Right))
-            mouseClick = 2;
+            mouse_click = 2;
         if (inputHandler->mouseIsDown(sf::Mouse::Left))
-            mouseDown = 1;
+            mouse_down = 1;
         else if (inputHandler->mouseIsDown(sf::Mouse::Right))
-            mouseDown = 2;
+            mouse_down = 2;
         renderTarget = &window;
         onGui();
         renderTarget = NULL;
     }
-    
+
     init = false;
 }
 
@@ -68,7 +68,7 @@ bool GUI::button(sf::FloatRect rect, string textValue, float fontSize)
     renderTarget->draw(sprite);
 
     text(rect, textValue, AlignCenter, fontSize);
-    if (mouseClick && rect.contains(mousePosition))
+    if (mouse_click && rect.contains(mousePosition))
         return true;
     return false;
 }
@@ -95,7 +95,7 @@ bool GUI::toggleButton(sf::FloatRect rect, bool active, string textValue, float 
     renderTarget->draw(sprite);
 
     text(rect, textValue, AlignCenter, fontSize);
-    if (mouseClick && rect.contains(mousePosition))
+    if (mouse_click && rect.contains(mousePosition))
         return true;
     return false;
 }
@@ -111,7 +111,7 @@ float GUI::vslider(sf::FloatRect rect, float value, float minValue, float maxVal
     backgroundZero.setPosition(rect.left, rect.top + rect.height / 2.0 - 4.0);
     backgroundZero.setFillColor(sf::Color(0,0,0,32));
     renderTarget->draw(backgroundZero);
-    
+
     float y = rect.top + (rect.height - rect.width) * (value - minValue) / (maxValue - minValue);
     sf::Sprite sprite;
     textureManager.setTexture(sprite, "button_background");
@@ -124,7 +124,7 @@ float GUI::vslider(sf::FloatRect rect, float value, float minValue, float maxVal
     sprite.setScale(rect.width / sprite.getTextureRect().width, rect.width / sprite.getTextureRect().height);
     renderTarget->draw(sprite);
 
-    if (rect.contains(mousePosition) && mouseDown)
+    if (rect.contains(mousePosition) && mouse_down)
     {
         value = (mousePosition.y - rect.top - (rect.width / 2.0)) / (rect.height - rect.width);
         value = minValue + (maxValue - minValue) * value;
@@ -157,7 +157,7 @@ void MouseRenderer::render(sf::RenderTarget& window)
 
     P<InputHandler> inputHandler = engine->getObject("inputHandler");
     sf::Vector2f mouse = inputHandler->getMousePos();
-    
+
     sf::Sprite mouseSprite;
     textureManager.setTexture(mouseSprite, "mouse.png");
     mouseSprite.setPosition(mouse);
