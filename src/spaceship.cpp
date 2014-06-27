@@ -44,22 +44,22 @@ SpaceShip::SpaceShip()
         beam_weapons[n].arc = 0;
         beam_weapons[n].direction = 0;
         beam_weapons[n].range = 0;
-        beam_weapons[n].cycleTime = 6.0;
+        beam_weapons[n].cycle_time = 6.0;
         beam_weapons[n].cooldown = 0.0;
 
         registerMemberReplication(&beam_weapons[n].arc);
         registerMemberReplication(&beam_weapons[n].direction);
         registerMemberReplication(&beam_weapons[n].range);
-        registerMemberReplication(&beam_weapons[n].cycleTime);
+        registerMemberReplication(&beam_weapons[n].cycle_time);
         registerMemberReplication(&beam_weapons[n].cooldown, 0.2);
     }
     for(int n=0; n<max_weapon_tubes; n++)
     {
-        weapon_tube[n].typeLoaded = MW_None;
-        weapon_tube[n].loadingDelay = 0.0;
+        weapon_tube[n].type_loaded = MW_None;
+        weapon_tube[n].loading_delay = 0.0;
 
-        registerMemberReplication(&weapon_tube[n].typeLoaded);
-        registerMemberReplication(&weapon_tube[n].loadingDelay, 0.5);
+        registerMemberReplication(&weapon_tube[n].type_loaded);
+        registerMemberReplication(&weapon_tube[n].loading_delay, 0.5);
     }
     beam_weapons[0].arc = 90.0;
     beam_weapons[0].range = 1000.0;
@@ -87,7 +87,7 @@ void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float
         if (beam_weapons[n].range == 0.0) continue;
         sf::Color color = sf::Color::Red;
         if (beam_weapons[n].cooldown > 0)
-            color = sf::Color(255, 255 * (beam_weapons[n].cooldown / beam_weapons[n].cycleTime), 0);
+            color = sf::Color(255, 255 * (beam_weapons[n].cooldown / beam_weapons[n].cycle_time), 0);
 
         sf::VertexArray a(sf::LinesStrip, 3);
         a[0].color = color;
@@ -210,7 +210,7 @@ void SpaceShip::update(float delta)
                 while(angleDiff < -180) angleDiff += 360;
                 if (abs(angleDiff) < beam_weapons[n].arc / 2.0)
                 {
-                    beam_weapons[n].cooldown = beam_weapons[n].cycleTime;
+                    beam_weapons[n].cooldown = beam_weapons[n].cycle_time;
                 }
             }
         }
@@ -258,7 +258,7 @@ void SpaceShip::onReceiveCommand(int32_t client_id, sf::Packet& packet)
             packet >> tubeNr >> type;
 
             if (tubeNr >= 0 && tubeNr < max_weapon_tubes)
-                weapon_tube[tubeNr].typeLoaded = type;
+                weapon_tube[tubeNr].type_loaded = type;
         }
         break;
     case CMD_UNLOAD_TUBE:
@@ -267,16 +267,16 @@ void SpaceShip::onReceiveCommand(int32_t client_id, sf::Packet& packet)
             packet >> tubeNr;
 
             if (tubeNr >= 0 && tubeNr < max_weapon_tubes)
-                weapon_tube[tubeNr].typeLoaded = MW_None;
+                weapon_tube[tubeNr].type_loaded = MW_None;
         }
         break;
     case CMD_FIRE_TUBE:
         {
-            int8_t tubeNr;
-            packet >> tubeNr;
+            int8_t tube_nr;
+            packet >> tube_nr;
 
-            if (tubeNr >= 0 && tubeNr < max_weapon_tubes)
-                weapon_tube[tubeNr].typeLoaded = MW_None;
+            if (tube_nr >= 0 && tube_nr < max_weapon_tubes)
+                weapon_tube[tube_nr].type_loaded = MW_None;
         }
         break;
     }

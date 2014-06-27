@@ -3,7 +3,7 @@
 
 //TODO: This is pretty nasty. Needs to be fixed!
 sf::RenderTarget* GUI::renderTarget;
-sf::Vector2f GUI::mousePosition;
+sf::Vector2f GUI::mouse_position;
 int GUI::mouse_click;
 int GUI::mouse_down;
 
@@ -16,7 +16,7 @@ GUI::GUI()
 void GUI::render(sf::RenderTarget& window)
 {
     P<InputHandler> inputHandler = engine->getObject("inputHandler");
-    mousePosition = inputHandler->getMousePos();
+    mouse_position = inputHandler->getMousePos();
     mouse_click = 0;
     mouse_down = 0;
     if (!init)//Do not send mouse clicks the first render, as we can just be created because of a mouseclick.
@@ -59,7 +59,7 @@ bool GUI::button(sf::FloatRect rect, string text_value, float font_size)
 {
     sf::Sprite sprite;
     texture_manager.setTexture(sprite, "button_background");
-    if (rect.contains(mousePosition))
+    if (rect.contains(mouse_position))
         sprite.setColor(sf::Color(255,255,255, 128));
     else
         sprite.setColor(sf::Color::White);
@@ -69,7 +69,7 @@ bool GUI::button(sf::FloatRect rect, string text_value, float font_size)
     renderTarget->draw(sprite);
 
     text(rect, text_value, AlignCenter, font_size);
-    if (mouse_click && rect.contains(mousePosition))
+    if (mouse_click && rect.contains(mouse_position))
         return true;
     return false;
 }
@@ -78,7 +78,7 @@ bool GUI::toggleButton(sf::FloatRect rect, bool active, string text_value, float
 {
     sf::Sprite sprite;
     texture_manager.setTexture(sprite, "button_background");
-    if (rect.contains(mousePosition))
+    if (rect.contains(mouse_position))
     {
         if (active)
             sprite.setColor(sf::Color(255,255,255, 192));
@@ -96,7 +96,7 @@ bool GUI::toggleButton(sf::FloatRect rect, bool active, string text_value, float
     renderTarget->draw(sprite);
 
     text(rect, text_value, AlignCenter, font_size);
-    if (mouse_click && rect.contains(mousePosition))
+    if (mouse_click && rect.contains(mouse_position))
         return true;
     return false;
 }
@@ -116,7 +116,7 @@ float GUI::vslider(sf::FloatRect rect, float value, float min_value, float max_v
     float y = rect.top + (rect.height - rect.width) * (value - min_value) / (max_value - min_value);
     sf::Sprite sprite;
     texture_manager.setTexture(sprite, "button_background");
-    if (rect.contains(mousePosition) && mousePosition.y >= y && mousePosition.y <= y + rect.width)
+    if (rect.contains(mouse_position) && mouse_position.y >= y && mouse_position.y <= y + rect.width)
         sprite.setColor(sf::Color(255,255,255, 128));
     else
         sprite.setColor(sf::Color::White);
@@ -125,9 +125,9 @@ float GUI::vslider(sf::FloatRect rect, float value, float min_value, float max_v
     sprite.setScale(rect.width / sprite.getTextureRect().width, rect.width / sprite.getTextureRect().height);
     renderTarget->draw(sprite);
 
-    if (rect.contains(mousePosition) && mouse_down)
+    if (rect.contains(mouse_position) && mouse_down)
     {
-        value = (mousePosition.y - rect.top - (rect.width / 2.0)) / (rect.height - rect.width);
+        value = (mouse_position.y - rect.top - (rect.width / 2.0)) / (rect.height - rect.width);
         value = min_value + (max_value - min_value) * value;
         if (min_value < max_value)
         {

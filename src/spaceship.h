@@ -21,7 +21,7 @@ public:
     float arc;
     float direction;
     float range;
-    float cycleTime;
+    float cycle_time;
     //Beam runtime state
     float cooldown;
 };
@@ -29,8 +29,8 @@ public:
 class WeaponTube : public sf::NonCopyable
 {
 public:
-    EMissileWeapons typeLoaded;
-    float loadingDelay;
+    EMissileWeapons type_loaded;
+    float loading_delay;
 };
 
 class SpaceShip : public SpaceObject, public Updatable

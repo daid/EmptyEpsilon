@@ -4,7 +4,7 @@
 CrewUI::CrewUI()
 {
     jump_distance = 1.0;
-    tubeLoadType = MW_None;
+    tube_load_type = MW_None;
 
     for(int n=0; n<max_crew_positions; n++)
     {
@@ -78,7 +78,7 @@ void CrewUI::helmsUI()
     if (target)
     {
         sf::Sprite object_sprite;
-        texture_manager.setTexture(object_sprite, "redicule.png");
+        texture_manager.setTexture(object_sprite, "redicule.png"); //Hihi redicule.
         object_sprite.setPosition(sf::Vector2f(800, 450) + (target->getPosition() - my_spaceship->getPosition()) / radar_distance * 400.0f);
         window->draw(object_sprite);
     }
@@ -121,24 +121,24 @@ void CrewUI::helmsUI()
 void CrewUI::tacticalUI()
 {
     sf::RenderTarget* window = getRenderTarget();
-    P<InputHandler> inputHandler = engine->getObject("inputHandler");
-    sf::Vector2f mouse = inputHandler->getMousePos();
-    float radarDistance = 5000;
+    P<InputHandler> input_handler = engine->getObject("inputHandler");
+    sf::Vector2f mouse = input_handler->getMousePos();
+    float radar_distance = 5000; //TODO: Hardcoded. Also, why is it declared again here? It's also declared in helms UI. This should be a ship option.
 
     //Radar
-    if (inputHandler->mouseIsPressed(sf::Mouse::Left))
+    if (input_handler->mouseIsPressed(sf::Mouse::Left))
     {
         sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
         if (sf::length(diff) < 400)
         {
             P<SpaceObject> target;
-            sf::Vector2f mousePosition = my_spaceship->getPosition() + diff / 400.0f * radarDistance;
-            PVector<Collisionable> list = CollisionManager::queryArea(mousePosition - sf::Vector2f(50, 50), mousePosition + sf::Vector2f(50, 50));
+            sf::Vector2f mouse_position = my_spaceship->getPosition() + diff / 400.0f * radar_distance;
+            PVector<Collisionable> list = CollisionManager::queryArea(mouse_position - sf::Vector2f(50, 50), mouse_position + sf::Vector2f(50, 50));
             foreach(Collisionable, obj, list)
             {
-                P<SpaceObject> spaceObject = obj;
-                if (spaceObject && spaceObject != my_spaceship)
-                    target = spaceObject;
+                P<SpaceObject> space_object = obj;
+                if (space_object && space_object != my_spaceship)
+                    target = space_object;
             }
             my_spaceship->commandSetTarget(target);
         }
@@ -148,39 +148,39 @@ void CrewUI::tacticalUI()
 
     foreach(SpaceObject, obj, space_object_list)
     {
-        if (obj != my_spaceship && sf::length(obj->getPosition() - my_spaceship->getPosition()) < radarDistance)
-            obj->drawRadar(*window, sf::Vector2f(800, 450) + (obj->getPosition() - my_spaceship->getPosition()) / radarDistance * 400.0f, 400.0f / radarDistance);
+        if (obj != my_spaceship && sf::length(obj->getPosition() - my_spaceship->getPosition()) < radar_distance)
+            obj->drawRadar(*window, sf::Vector2f(800, 450) + (obj->getPosition() - my_spaceship->getPosition()) / radar_distance * 400.0f, 400.0f / radar_distance);
     }
 
     P<SpaceObject> target = my_spaceship->getTarget();
     if (target)
     {
-        sf::Sprite objectSprite;
-        texture_manager.setTexture(objectSprite, "redicule.png");
-        objectSprite.setPosition(sf::Vector2f(800, 450) + (target->getPosition() - my_spaceship->getPosition()) / radarDistance * 400.0f);
-        window->draw(objectSprite);
+        sf::Sprite object_sprite;
+        texture_manager.setTexture(object_sprite, "redicule.png");
+        object_sprite.setPosition(sf::Vector2f(800, 450) + (target->getPosition() - my_spaceship->getPosition()) / radar_distance * 400.0f);
+        window->draw(object_sprite);
     }
-    my_spaceship->drawRadar(*window, sf::Vector2f(800, 450), 400.0f / radarDistance);
+    my_spaceship->drawRadar(*window, sf::Vector2f(800, 450), 400.0f / radar_distance);
     //!Radar
 
-    for(int n=0; n<MW_Count; n++)
+    for(int n = 0; n < MW_Count; n++)
     {
-        if (toggleButton(sf::FloatRect(10, 440 + n * 30, 200, 30), tubeLoadType == n, getMissileWeaponName(EMissileWeapons(n)), 25))
+        if (toggleButton(sf::FloatRect(10, 440 + n * 30, 200, 30), tube_load_type == n, getMissileWeaponName(EMissileWeapons(n)), 25))
         {
-            if (tubeLoadType == n)
-                tubeLoadType = MW_None;
+            if (tube_load_type == n)
+                tube_load_type = MW_None;
             else
-                tubeLoadType = EMissileWeapons(n);
+                tube_load_type = EMissileWeapons(n);
         }
     }
 
-    for(int n=0; n<my_spaceship->weapon_tubes; n++)
+    for(int n = 0; n < my_spaceship->weapon_tubes; n++)
     {
-        if (my_spaceship->weapon_tube[n].typeLoaded == MW_None)
+        if (my_spaceship->weapon_tube[n].type_loaded == MW_None)
         {
-            if (toggleButton(sf::FloatRect(20, 840 - 50 * n, 150, 50), tubeLoadType != MW_None, "Load", 35) && tubeLoadType != MW_None)
+            if (toggleButton(sf::FloatRect(20, 840 - 50 * n, 150, 50), tube_load_type != MW_None, "Load", 35) && tube_load_type != MW_None)
             {
-                my_spaceship->commandLoadTube(n, tubeLoadType);
+                my_spaceship->commandLoadTube(n, tube_load_type);
             }
             toggleButton(sf::FloatRect(170, 840 - 50 * n, 350, 50), false, "Empty", 35);
         }else{
@@ -188,7 +188,7 @@ void CrewUI::tacticalUI()
             {
                 my_spaceship->commandUnloadTube(n);
             }
-            if (button(sf::FloatRect(170, 840 - 50 * n, 350, 50), getMissileWeaponName(my_spaceship->weapon_tube[n].typeLoaded), 35))
+            if (button(sf::FloatRect(170, 840 - 50 * n, 350, 50), getMissileWeaponName(my_spaceship->weapon_tube[n].type_loaded), 35))
             {
                 my_spaceship->commandFireTube(n);
             }

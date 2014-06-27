@@ -13,7 +13,7 @@ enum EAlign
 class GUI: public Renderable
 {
     static sf::RenderTarget* renderTarget;
-    static sf::Vector2f mousePosition;
+    static sf::Vector2f mouse_position;
     static int mouse_click;
     static int mouse_down;
     bool init;
