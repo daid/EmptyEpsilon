@@ -18,7 +18,7 @@ class NebulaInfo
 {
 public:
     sf::Vector3f vector;
-    std::string textureName;
+    std::string texture_name;
 };
 extern std::vector<NebulaInfo> nebulaInfo;
 void randomNebulas();

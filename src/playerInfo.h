@@ -6,10 +6,10 @@
 
 class PlayerInfo;
 class GameGlobalInfo;
-extern P<GameGlobalInfo> gameGlobalInfo;
+extern P<GameGlobalInfo> game_global_info;
 extern P<PlayerInfo> my_player_info;
 extern P<SpaceShip> my_spaceship;
-extern PVector<PlayerInfo> playerInfoList;
+extern PVector<PlayerInfo> player_info_list;
 
 enum ECrewPosition
 {
@@ -24,9 +24,9 @@ enum ECrewPosition
 class GameGlobalInfo : public MultiplayerObject
 {
 public:
-    static const int maxPlayerShips = 32; //Cause we had to set it at something.
+    static const int max_player_ships = 32; //Cause we had to set it at something.
 private:
-    int32_t playerShipId[maxPlayerShips];
+    int32_t player_ship_id[max_player_ships];
 public:
     GameGlobalInfo();
 

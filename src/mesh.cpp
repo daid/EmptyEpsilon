@@ -9,7 +9,7 @@ Mesh::Mesh()
 {
     vertices = NULL;
     indices = NULL;
-    vertexCount = 0;
+    vertex_count = 0;
 }
 
 Mesh::~Mesh()
@@ -22,7 +22,7 @@ void Mesh::render()
 {
     glColor3f(1,1,1);
     glBegin(GL_TRIANGLES);
-    for(int n=0; n<vertexCount; n++)
+    for(int n=0; n<vertex_count; n++)
     {
         glTexCoord2f(vertices[n].uv[0], vertices[n].uv[1]);
         glNormal3f(vertices[n].normal[0], vertices[n].normal[1], vertices[n].normal[2]);
@@ -47,12 +47,12 @@ Mesh* Mesh::getMesh(string filename)
     P<ResourceStream> stream = getResourceStream(filename);
     if (!stream)
         return NULL;
-    
+
     std::vector<sf::Vector3f> vertices;
     std::vector<sf::Vector3f> normals;
     std::vector<sf::Vector2f> texCoords;
     std::vector<IndexInfo> indices;
-    
+
     ret = new Mesh();
     do
     {
@@ -76,7 +76,7 @@ Mesh* Mesh::getMesh(string filename)
                     std::vector<string> p0 = parts[1].split("/");
                     std::vector<string> p1 = parts[n].split("/");
                     std::vector<string> p2 = parts[n-1].split("/");
-                    
+
                     IndexInfo info;
                     info.v = p0[0].toInt() - 1;
                     info.t = p0[1].toInt() - 1;
@@ -94,9 +94,9 @@ Mesh* Mesh::getMesh(string filename)
             }else{
                 //printf("%s\n", parts[0].c_str());
             }
-        } 
+        }
     }while(stream->tell() < stream->getSize());
-    ret->vertexCount = indices.size();
+    ret->vertex_count = indices.size();
     ret->vertices = new MeshVertex[indices.size()];
     for(unsigned int n=0; n<indices.size(); n++)
     {
@@ -109,7 +109,7 @@ Mesh* Mesh::getMesh(string filename)
         ret->vertices[n].uv[0] = texCoords[indices[n].t].x;
         ret->vertices[n].uv[1] = 1.0 - texCoords[indices[n].t].y;
     }
-    
+
     meshMap[filename] = ret;
     return ret;
 }

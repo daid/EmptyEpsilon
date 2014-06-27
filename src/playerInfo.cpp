@@ -2,54 +2,54 @@
 
 static const int16_t CMD_UPDATE_CREW_POSITION = 0x0001;
 
-P<GameGlobalInfo> gameGlobalInfo;
+P<GameGlobalInfo> game_global_info;
 P<PlayerInfo> my_player_info;
 P<SpaceShip> my_spaceship;
-PVector<PlayerInfo> playerInfoList;
+PVector<PlayerInfo> player_info_list;
 
 REGISTER_MULTIPLAYER_CLASS(GameGlobalInfo, "GameGlobalInfo")
 GameGlobalInfo::GameGlobalInfo()
 : MultiplayerObject("GameGlobalInfo")
 {
-    assert(!gameGlobalInfo);
+    assert(!game_global_info);
 
-    gameGlobalInfo = this;
-    for(int n=0; n<maxPlayerShips; n++)
+    game_global_info = this;
+    for(int n=0; n<max_player_ships; n++)
     {
-        playerShipId[n] = -1;
-        registerMemberReplication(&playerShipId[n]);
+        player_ship_id[n] = -1;
+        registerMemberReplication(&player_ship_id[n]);
     }
 }
 
 P<SpaceShip> GameGlobalInfo::getPlayerShip(int index)
 {
-    assert(index >= 0 && index < maxPlayerShips);
+    assert(index >= 0 && index < max_player_ships);
     if (gameServer)
-        return gameServer->getObjectById(playerShipId[index]);
-    return gameClient->getObjectById(playerShipId[index]);
+        return gameServer->getObjectById(player_ship_id[index]);
+    return gameClient->getObjectById(player_ship_id[index]);
 }
 
 void GameGlobalInfo::setPlayerShip(int index, P<SpaceShip> ship)
 {
-    assert(index >= 0 && index < maxPlayerShips);
+    assert(index >= 0 && index < max_player_ships);
     assert(gameServer);
 
     if (ship)
-        playerShipId[index] = ship->getMultiplayerId();
+        player_ship_id[index] = ship->getMultiplayerId();
     else
-        playerShipId[index] = -1;
+        player_ship_id[index] = -1;
 }
 
 int GameGlobalInfo::findPlayerShip(P<SpaceShip> ship)
 {
-    for(int n=0; n<maxPlayerShips; n++)
+    for(int n=0; n<max_player_ships; n++)
         if (getPlayerShip(n) == ship)
             return n;
     return -1;
 }
 int GameGlobalInfo::insertPlayerShip(P<SpaceShip> ship)
 {
-    for(int n=0; n<maxPlayerShips; n++)
+    for(int n=0; n<max_player_ships; n++)
     {
         if (!getPlayerShip(n))
         {
@@ -75,7 +75,7 @@ PlayerInfo::PlayerInfo()
         registerMemberReplication(&crewPosition[n]);
     }
 
-    playerInfoList.push_back(this);
+    player_info_list.push_back(this);
 }
 
 void PlayerInfo::setCrewPosition(ECrewPosition position, bool active)

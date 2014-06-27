@@ -4,8 +4,8 @@
 
 MainScreenUI::MainScreenUI()
 {
-    P<MouseRenderer> mouseRenderer = engine->getObject("mouseRenderer");
-    mouseRenderer->visible = false;
+    P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer");
+    mouse_renderer->visible = false;
 }
 
 void MainScreenUI::onGui()
@@ -20,8 +20,8 @@ void MainScreenUI::onGui()
 
 void MainScreenUI::destroy()
 {
-    P<MouseRenderer> mouseRenderer = engine->getObject("mouseRenderer");
-    mouseRenderer->visible = true;
+    P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer");
+    mouse_renderer->visible = true;
     MainUI::destroy();
 }
 
@@ -49,7 +49,7 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
         glRotatef(-60, 1, 0, 0);
 #endif
     glRotatef(-my_spaceship->getRotation(), 0, 0, 1);
-
+    //What is being drawn here? Skybox?
     sf::Texture::bind(texture_manager.getTexture("Stars"), sf::Texture::Pixels);
     glDepthMask(false);
     glBegin(GL_TRIANGLE_STRIP);
@@ -89,7 +89,7 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
     glTexCoord2f(   0, 1024); glVertex3f(-100, 100,-100);
     glEnd();
 
-    for(unsigned int n=0; n<nebulaInfo.size(); n++)
+    for(unsigned int n = 0; n < nebulaInfo.size(); n++)
     {
         sf::Texture::bind(texture_manager.getTexture(nebulaInfo[n].textureName), sf::Texture::Pixels);
         glEnable(GL_BLEND);
@@ -110,18 +110,18 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
     glDepthMask(true);
     glEnable(GL_DEPTH_TEST);
 
-    sf::Vector2f cameraPosition2D = my_spaceship->getPosition() + sf::vector2FromAngle(my_spaceship->getRotation()) * -200.0f;
-    sf::Vector3f targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, 100);
+    sf::Vector2f camera_position_2D = my_spaceship->getPosition() + sf::vector2FromAngle(my_spaceship->getRotation()) * -200.0f;
+    sf::Vector3f target_camera_position(camera_position_2D.x, camera_position_2D.y, 100);
 #ifdef DEBUG
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-        targetCameraPosition.z = 3000.0;
+        target_camera_position.z = 3000.0;
 #endif
-    cameraPosition = cameraPosition * 0.9f + targetCameraPosition * 0.1f;
+    camera_position = camera_position * 0.9f + target_camera_position * 0.1f;
 
     {
         float lightpos[4] = {0, 0, 1000, 1.0};
         glPushMatrix();
-        glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
+        glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
         glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
         glPopMatrix();
     }
@@ -129,7 +129,7 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
     foreach(SpaceObject, obj, space_object_list)
     {
         glPushMatrix();
-        glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
+        glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
         glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
         glRotatef(obj->getRotation(), 0, 0, 1);
 
@@ -143,7 +143,7 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
     foreach(SpaceObject, obj, space_object_list)
     {
         glPushMatrix();
-        glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
+        glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
         glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
         glRotatef(obj->getRotation(), 0, 0, 1);
 

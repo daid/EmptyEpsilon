@@ -32,19 +32,19 @@ void EpsilonServer::onNewClient(int32_t client_id)
 void EpsilonServer::onDisconnectClient(int32_t client_id)
 {
     printf("Client left: %i\n", client_id);
-    foreach(PlayerInfo, i, playerInfoList)
+    foreach(PlayerInfo, i, player_info_list)
         if (i->client_id == client_id)
             i->destroy();
-    playerInfoList.update();
+    player_info_list.update();
 }
 
 void disconnectFromServer()
 {
     if (gameClient)
         gameClient->destroy();
-    if (gameGlobalInfo)
-        gameGlobalInfo->destroy();
-    foreach(PlayerInfo, i, playerInfoList)
+    if (game_global_info)
+        game_global_info->destroy();
+    foreach(PlayerInfo, i, player_info_list)
         i->destroy();
     foreach(GameEntity, e, entityList)
         e->destroy();

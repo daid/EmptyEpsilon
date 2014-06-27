@@ -78,10 +78,10 @@ void JoinServerScreen::onGui()
 
     if (gameClient->getClientId() > 0)
     {
-        foreach(PlayerInfo, i, playerInfoList)
+        foreach(PlayerInfo, i, player_info_list)
             if (i->client_id == gameClient->getClientId())
                 my_player_info = i;
-        if (my_player_info && gameGlobalInfo)
+        if (my_player_info && game_global_info)
         {
             new ShipSelectionScreen();
             destroy();
