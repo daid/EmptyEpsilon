@@ -20,15 +20,7 @@ Mesh::~Mesh()
 
 void Mesh::render()
 {
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_NORMAL_ARRAY);
-    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    glDisableClientState(GL_COLOR_ARRAY);
-    glVertexPointer(3, GL_FLOAT, sizeof(float) * (3 * 2 + 2), &vertices[0].position[0]);
-    glNormalPointer(GL_FLOAT, sizeof(float) * (3 * 2 + 2), &vertices[0].normal[0]);
-    glTexCoordPointer(2, GL_FLOAT, sizeof(float) * (3 * 2 + 2), &vertices[0].uv[0]);
-    glDrawArrays(GL_TRIANGLES, 0, vertexCount);
-    /*
+    glColor3f(1,1,1);
     glBegin(GL_TRIANGLES);
     for(int n=0; n<vertexCount; n++)
     {
@@ -37,13 +29,6 @@ void Mesh::render()
         glVertex3f(vertices[n].position[0], vertices[n].position[1], vertices[n].position[2]);
     }
     glEnd();
-    */
-}
-
-sf::Vector3f Mesh::randomPoint()
-{
-    int idx = irandom(0, vertexCount-1);
-    return sf::Vector3f(vertices[idx].position[0], vertices[idx].position[1], vertices[idx].position[2]);
 }
 
 struct IndexInfo

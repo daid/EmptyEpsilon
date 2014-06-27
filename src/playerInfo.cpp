@@ -4,7 +4,7 @@ static const int16_t CMD_UPDATE_CREW_POSITION = 0x0001;
 
 P<GameGlobalInfo> gameGlobalInfo;
 P<PlayerInfo> myPlayerInfo;
-P<PlayerSpaceship> mySpaceship;
+P<SpaceShip> mySpaceship;
 PVector<PlayerInfo> playerInfoList;
 
 REGISTER_MULTIPLAYER_CLASS(GameGlobalInfo, "GameGlobalInfo")
@@ -21,7 +21,7 @@ GameGlobalInfo::GameGlobalInfo()
     }
 }
 
-P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)
+P<SpaceShip> GameGlobalInfo::getPlayerShip(int index)
 {
     assert(index >= 0 && index < maxPlayerShips);
     if (gameServer)
@@ -29,7 +29,7 @@ P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)
     return gameClient->getObjectById(playerShipId[index]);
 }
 
-void GameGlobalInfo::setPlayerShip(int index, P<PlayerSpaceship> ship)
+void GameGlobalInfo::setPlayerShip(int index, P<SpaceShip> ship)
 {
     assert(index >= 0 && index < maxPlayerShips);
     assert(gameServer);
@@ -40,14 +40,14 @@ void GameGlobalInfo::setPlayerShip(int index, P<PlayerSpaceship> ship)
         playerShipId[index] = -1;
 }
 
-int GameGlobalInfo::findPlayerShip(P<PlayerSpaceship> ship)
+int GameGlobalInfo::findPlayerShip(P<SpaceShip> ship)
 {
     for(int n=0; n<maxPlayerShips; n++)
         if (getPlayerShip(n) == ship)
             return n;
     return -1;
 }
-int GameGlobalInfo::insertPlayerShip(P<PlayerSpaceship> ship)
+int GameGlobalInfo::insertPlayerShip(P<SpaceShip> ship)
 {
     for(int n=0; n<maxPlayerShips; n++)
     {
@@ -57,10 +57,7 @@ int GameGlobalInfo::insertPlayerShip(P<PlayerSpaceship> ship)
             return n;
         }
     }
-<<<<<<< HEAD
     printf("Unable to insert ship?!?\n");
-=======
->>>>>>> origin/master
     return -1;
 }
 
@@ -121,7 +118,7 @@ string getCrewPositionName(ECrewPosition position)
     switch(position)
     {
     case helmsOfficer: return "Helms";
-    case weaponsOfficer: return "Weapons";
+    case tacticalOfficer: return "Tactical";
     case engineering: return "Engineering";
     case scienceOfficer: return "Science";
     case commsOfficer: return "Comms";

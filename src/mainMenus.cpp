@@ -12,9 +12,6 @@ MainMenu::MainMenu()
     
 void MainMenu::onGui()
 {
-    text(sf::FloatRect(0, 100, 1600, 300), "Empty", AlignCenter, 180);
-    text(sf::FloatRect(0, 250, 1600, 300), "Epsilon", AlignCenter, 200);
-    text(sf::FloatRect(0, 440, 1600, 100), "Version: " + string(VERSION_NUMBER), AlignCenter, 20);
     if (button(sf::FloatRect(50, 680, 300, 50), "Start server"))
     {
         new EpsilonServer();

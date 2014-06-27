@@ -6,6 +6,7 @@
 
 class MainScreenUI : public MainUI
 {
+    sf::Vector3f cameraPosition;
 public:
     MainScreenUI();
     
@@ -13,8 +14,8 @@ public:
     virtual void destroy();
     
     void render3dView(sf::RenderTarget& window);
-    void renderTactical(sf::RenderTarget& window);
-    void renderLongRange(sf::RenderTarget& window);
+    void renderMap(sf::RenderTarget& window);
+    void renderRadar(sf::RenderTarget& window);
 };
 
 #endif//MAIN_SCREEN_H

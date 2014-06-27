@@ -2,8 +2,6 @@
 #include "playerInfo.h"
 #include "spaceObject.h"
 #include "spaceStation.h"
-#include "cpuShip.h"
-#include "mine.h"
 #include "main.h"
 
 EpsilonServer::EpsilonServer()
@@ -15,28 +13,13 @@ EpsilonServer::EpsilonServer()
     myPlayerInfo = info;
     engine->setGameSpeed(0.0);
     
-    soundManager.playMusic("music/Dream Raid Full Version (Mock Up).ogg");
-    
     //TMP
+    mySpaceship = new SpaceShip();
     randomNebulas();
-    P<SpaceStation> station = new SpaceStation();
-    station->setPosition(sf::Vector2f(0, -500));
-    
-    for(int n=0; n<10; n++)
-    {
-        P<CpuShip> s = new CpuShip();
-        if (random(0, 100) < 10)
-            s->setShipTemplate("Missile Cruiser");
-        else
-            s->setShipTemplate("Fighter");
-        s->setPosition(sf::vector2FromAngle(random(0, 360)) * random(7000, 20000));
-        s->orderRoaming();
-    }
-    for(int n=0; n<100; n++)
-    {
-        P<Mine> m = new Mine();
-        m->setPosition(sf::vector2FromAngle(random(0, 360)) * random(7000, 20000));
-    }
+    //for(int n=0; n<50;n++)
+    //    (new SpaceShip())->setPosition(sf::vector2FromAngle(0.0f) * (50.0f + n * 100.0f));
+    (new SpaceShip())->setPosition(sf::Vector2f(100, 100));
+    (new SpaceStation())->setPosition(sf::Vector2f(0, -500));
 }
 
 void EpsilonServer::onNewClient(int32_t clientId)
@@ -57,12 +40,8 @@ void EpsilonServer::onDisconnectClient(int32_t clientId)
 
 void disconnectFromServer()
 {
-    soundManager.stopMusic();
-
     if (gameClient)
         gameClient->destroy();
-    if (gameServer)
-        gameServer->destroy();
     if (gameGlobalInfo)
         gameGlobalInfo->destroy();
     foreach(PlayerInfo, i, playerInfoList)

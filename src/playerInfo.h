@@ -2,19 +2,19 @@
 #define PLAYER_INFO_H
 
 #include "engine.h"
-#include "playerSpaceship.h"
+#include "spaceship.h"
 
 class PlayerInfo;
 class GameGlobalInfo;
 extern P<GameGlobalInfo> gameGlobalInfo;
 extern P<PlayerInfo> myPlayerInfo;
-extern P<PlayerSpaceship> mySpaceship;
+extern P<SpaceShip> mySpaceship;
 extern PVector<PlayerInfo> playerInfoList;
 
 enum ECrewPosition
 {
     helmsOfficer,
-    weaponsOfficer,
+    tacticalOfficer,
     engineering,
     scienceOfficer,
     commsOfficer,
@@ -29,21 +29,12 @@ private:
     int32_t playerShipId[maxPlayerShips];
 public:
     GameGlobalInfo();
-<<<<<<< HEAD
 
     P<SpaceShip> getPlayerShip(int index);
     void setPlayerShip(int index, P<SpaceShip> ship);
 
     int findPlayerShip(P<SpaceShip> ship);
     int insertPlayerShip(P<SpaceShip> ship);
-=======
-    
-    P<PlayerSpaceship> getPlayerShip(int index);
-    void setPlayerShip(int index, P<PlayerSpaceship> ship);
-    
-    int findPlayerShip(P<PlayerSpaceship> ship);
-    int insertPlayerShip(P<PlayerSpaceship> ship);
->>>>>>> origin/master
 };
 
 class PlayerInfo : public MultiplayerObject

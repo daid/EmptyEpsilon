@@ -2,7 +2,6 @@
 #include "playerInfo.h"
 #include "mainScreen.h"
 #include "crewUI.h"
-#include "gameMasterUI.h"
 
 ShipSelectionScreen::ShipSelectionScreen()
 {
@@ -34,11 +33,13 @@ void ShipSelectionScreen::onGui()
         text(sf::FloatRect(1100, 150 + 50 * n, 300, 50), string(cnt));
     }
 
-    if (mySpaceship)
+    if (gameServer)
     {
-        if (button(sf::FloatRect(800, 700, 300, 50), "Ready"))
+        if (button(sf::FloatRect(800, 800, 300, 50), "Launch vessel"))
         {
             destroy();
+            if (gameGlobalInfo->findPlayerShip(mySpaceship) < 0)
+                gameGlobalInfo->insertPlayerShip(mySpaceship);
             if (myPlayerInfo->isMainScreen())
             {
                 new MainScreenUI();
@@ -47,40 +48,21 @@ void ShipSelectionScreen::onGui()
             }
         }
     }
-    
     for(int n=0; n<GameGlobalInfo::maxPlayerShips; n++)
     {
-        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
-        if (ship && ship->shipTemplate)
+        if (gameGlobalInfo->getPlayerShip(n))
         {
-            if (toggleButton(sf::FloatRect(200 + (n / 8) * 300, 250 + (n % 8) * 50, 300, 50), mySpaceship == ship, ship->shipTemplate->name + " " + string(n)))
-                mySpaceship = ship;
-        }
-    }
-
-    if (gameServer)
-    {
-        if (button(sf::FloatRect(200, 700, 300, 50), "Spawn player ship"))
-        {
-            mySpaceship = new PlayerSpaceship();
-            mySpaceship->setShipTemplate("Player Cruiser");
-            mySpaceship->setRotation(random(0, 360));
-            mySpaceship->targetRotation = mySpaceship->getRotation();
-            mySpaceship->setPosition(sf::Vector2f(random(-10, 10), random(-10, 10)));
-            if (gameGlobalInfo->insertPlayerShip(mySpaceship) < 0)
+            if (button(sf::FloatRect(200, 300 + n * 50, 300, 50), "Join vessel " + string(n)))
             {
-                mySpaceship->destroy();
+                mySpaceship = gameGlobalInfo->getPlayerShip(n);
+                destroy();
+                if (myPlayerInfo->isMainScreen())
+                {
+                    new MainScreenUI();
+                }else{
+                    new CrewUI();
+                }
             }
         }
-        
-        if (button(sf::FloatRect(1200, 150, 300, 50), "Game Master"))
-        {
-            mySpaceship = NULL;
-            destroy();
-            new GameMasterUI();
-        }
     }
-    
-    if (button(sf::FloatRect(1350, 830, 200, 50), "Quit game"))
-        engine->shutdown();
 }
