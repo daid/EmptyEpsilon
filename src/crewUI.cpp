@@ -371,7 +371,7 @@ void CrewUI::scienceUI()
         {
             if (mySpaceship->scanning_delay > 0.0)
             {
-                text(sf::FloatRect(20, 140, 150, 30), string(int(ceilf(mySpaceship->scanning_delay))), AlignCenter, 25);
+                progressBar(sf::FloatRect(20, 140, 150, 30), mySpaceship->scanning_delay, 8.0, 0.0);
             }else{
                 if (button(sf::FloatRect(20, 140, 150, 30), "Scan", 25))
                     mySpaceship->commandScan(scienceTarget);
