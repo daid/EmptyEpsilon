@@ -22,6 +22,7 @@ public:
     ~Mesh();
     
     void render();
+    sf::Vector3f randomPoint();
 
     static Mesh* getMesh(string filename);
 };

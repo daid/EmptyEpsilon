@@ -1,0 +1,33 @@
+#ifndef MINE_H
+#define MINE_H
+
+#include "spaceObject.h"
+
+class Mine : public SpaceObject, public Updatable
+{
+    const static float speed = -600.0f;
+    const static float blastRange = 1000.0f;
+    const static float ejectDelay = 3.0f;
+    const static float triggerDelay = 1.0f;
+    const static float damageAtCenter = 160.0f;
+    const static float damageAtEdge = 60.0f;
+    
+public:
+    bool triggered;       //Only valid on server.
+    float triggerTimeout; //Only valid on server.
+    float ejectTimeout;   //Only valid on server.
+
+    Mine();
+
+    virtual void draw3D();
+    virtual void draw3DTransparent();
+    virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
+    virtual void update(float delta);
+    
+    virtual void collision(Collisionable* target);
+    void eject();
+    void explode();
+};
+
+#endif//NUKE_H
+
