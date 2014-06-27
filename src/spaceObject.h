@@ -4,12 +4,12 @@
 #include "engine.h"
 
 class SpaceObject;
-extern PVector<SpaceObject> spaceObjectList;
+extern PVector<SpaceObject> space_object_list;
 class SpaceObject : public Collisionable, public MultiplayerObject
 {
 public:
     SpaceObject(float collisionRange, string multiplayerName);
-    
+
     virtual void draw3D();
     virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale);
 };

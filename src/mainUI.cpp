@@ -32,8 +32,8 @@ void MainUI::onGui()
 void MainUI::drawStatic()
 {
     sf::Sprite staticDisplay;
-    textureManager.getTexture("noise.png")->setRepeated(true);
-    textureManager.setTexture(staticDisplay, "noise.png");
+    texture_manager.getTexture("noise.png")->setRepeated(true);
+    texture_manager.setTexture(staticDisplay, "noise.png");
     staticDisplay.setTextureRect(sf::IntRect(0, 0, 2048, 2048));
     staticDisplay.setOrigin(sf::Vector2f(1024, 1024));
     staticDisplay.setScale(3.0, 3.0);

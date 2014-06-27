@@ -9,7 +9,7 @@
 MainMenu::MainMenu()
 {
 }
-    
+
 void MainMenu::onGui()
 {
     if (button(sf::FloatRect(50, 680, 300, 50), "Start server"))
@@ -43,7 +43,7 @@ void ServerBrowserMenu::onGui()
         if (button(sf::FloatRect(50, 50 + 30 * n, 500, 30), (selectionIndex == n ? "*" : "") + serverList[n].name + " (" + serverList[n].address.toString() + ")"))
             selectionIndex = n;
     }
-    
+
     if (button(sf::FloatRect(50, 800, 300, 50), "Back"))
     {
         destroy();
@@ -68,7 +68,7 @@ JoinServerScreen::JoinServerScreen()
 void JoinServerScreen::onGui()
 {
     text(sf::FloatRect(300, 300, 1000, 50), "Connecting...");
-    
+
     if (button(sf::FloatRect(50, 800, 300, 50), "Cancel") || !gameClient)
     {
         destroy();
@@ -79,9 +79,9 @@ void JoinServerScreen::onGui()
     if (gameClient->getClientId() > 0)
     {
         foreach(PlayerInfo, i, playerInfoList)
-            if (i->clientId == gameClient->getClientId())
-                myPlayerInfo = i;
-        if (myPlayerInfo && gameGlobalInfo)
+            if (i->client_id == gameClient->getClientId())
+                my_player_info = i;
+        if (my_player_info && gameGlobalInfo)
         {
             new ShipSelectionScreen();
             destroy();

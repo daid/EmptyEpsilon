@@ -3,8 +3,8 @@
 static const int16_t CMD_UPDATE_CREW_POSITION = 0x0001;
 
 P<GameGlobalInfo> gameGlobalInfo;
-P<PlayerInfo> myPlayerInfo;
-P<SpaceShip> mySpaceship;
+P<PlayerInfo> my_player_info;
+P<SpaceShip> my_spaceship;
 PVector<PlayerInfo> playerInfoList;
 
 REGISTER_MULTIPLAYER_CLASS(GameGlobalInfo, "GameGlobalInfo")
@@ -66,10 +66,10 @@ REGISTER_MULTIPLAYER_CLASS(PlayerInfo, "PlayerInfo");
 PlayerInfo::PlayerInfo()
 : MultiplayerObject("PlayerInfo")
 {
-    clientId = -1;
-    registerMemberReplication(&clientId);
+    client_id = -1;
+    registerMemberReplication(&client_id);
 
-    for(int n=0; n<maxCrewPositions; n++)
+    for(int n=0; n<max_crew_positions; n++)
     {
         crewPosition[n] = false;
         registerMemberReplication(&crewPosition[n]);
@@ -87,9 +87,9 @@ void PlayerInfo::setCrewPosition(ECrewPosition position, bool active)
     sendCommand(packet);
 }
 
-void PlayerInfo::onReceiveCommand(int32_t clientId, sf::Packet& packet)
+void PlayerInfo::onReceiveCommand(int32_t client_id, sf::Packet& packet)
 {
-    if (clientId != this->clientId) return;
+    if (client_id != this->client_id) return;
     int16_t command;
     packet >> command;
     switch(command)
@@ -107,7 +107,7 @@ void PlayerInfo::onReceiveCommand(int32_t clientId, sf::Packet& packet)
 
 bool PlayerInfo::isMainScreen()
 {
-    for(int n=0; n<maxCrewPositions; n++)
+    for(int n=0; n<max_crew_positions; n++)
         if (crewPosition[n])
             return false;
     return true;

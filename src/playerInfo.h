@@ -7,8 +7,8 @@
 class PlayerInfo;
 class GameGlobalInfo;
 extern P<GameGlobalInfo> gameGlobalInfo;
-extern P<PlayerInfo> myPlayerInfo;
-extern P<SpaceShip> mySpaceship;
+extern P<PlayerInfo> my_player_info;
+extern P<SpaceShip> my_spaceship;
 extern PVector<PlayerInfo> playerInfoList;
 
 enum ECrewPosition
@@ -18,7 +18,7 @@ enum ECrewPosition
     engineering,
     scienceOfficer,
     commsOfficer,
-    maxCrewPositions
+    max_crew_positions
 };
 
 class GameGlobalInfo : public MultiplayerObject
@@ -40,15 +40,15 @@ public:
 class PlayerInfo : public MultiplayerObject
 {
 public:
-    int32_t clientId;
+    int32_t client_id;
 
-    bool crewPosition[maxCrewPositions];
+    bool crewPosition[max_crew_positions];
 
     PlayerInfo();
 
     bool isMainScreen();
     void setCrewPosition(ECrewPosition position, bool active);
-    virtual void onReceiveCommand(int32_t clientId, sf::Packet& packet);
+    virtual void onReceiveCommand(int32_t client_id, sf::Packet& packet);
 };
 
 string getCrewPositionName(ECrewPosition position);

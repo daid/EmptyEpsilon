@@ -14,7 +14,7 @@ int main(int argc, char** argv)
 {
     new Engine();
     new DirectoryResourceProvider("resources/");
-    textureManager.setDefaultSmooth(true);
+    texture_manager.setDefaultSmooth(true);
 
     //Setup the rendering layers.
     background_layer = new RenderLayer();

@@ -10,11 +10,11 @@ MainScreenUI::MainScreenUI()
 
 void MainScreenUI::onGui()
 {
-    if (mySpaceship)
+    if (my_spaceship)
         render3dView(*getRenderTarget());
     else
         drawStatic();
-    
+
     MainUI::onGui();
 }
 
@@ -40,7 +40,7 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    
+
     glRotatef(90, 1, 0, 0);
     glScalef(1,1,-1);
     glRotatef(-15, 1, 0, 0);
@@ -48,9 +48,9 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
         glRotatef(-60, 1, 0, 0);
 #endif
-    glRotatef(-mySpaceship->getRotation(), 0, 0, 1);
+    glRotatef(-my_spaceship->getRotation(), 0, 0, 1);
 
-    sf::Texture::bind(textureManager.getTexture("Stars"), sf::Texture::Pixels);
+    sf::Texture::bind(texture_manager.getTexture("Stars"), sf::Texture::Pixels);
     glDepthMask(false);
     glBegin(GL_TRIANGLE_STRIP);
     glTexCoord2f(1024,    0); glVertex3f( 100, 100, 100);
@@ -91,7 +91,7 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
 
     for(unsigned int n=0; n<nebulaInfo.size(); n++)
     {
-        sf::Texture::bind(textureManager.getTexture(nebulaInfo[n].textureName), sf::Texture::Pixels);
+        sf::Texture::bind(texture_manager.getTexture(nebulaInfo[n].textureName), sf::Texture::Pixels);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE);
         glPushMatrix();
@@ -109,15 +109,15 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
     sf::Texture::bind(NULL);
     glDepthMask(true);
     glEnable(GL_DEPTH_TEST);
-    
-    sf::Vector2f cameraPosition2D = mySpaceship->getPosition() + sf::vector2FromAngle(mySpaceship->getRotation()) * -200.0f;
+
+    sf::Vector2f cameraPosition2D = my_spaceship->getPosition() + sf::vector2FromAngle(my_spaceship->getRotation()) * -200.0f;
     sf::Vector3f targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, 100);
 #ifdef DEBUG
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
         targetCameraPosition.z = 3000.0;
 #endif
     cameraPosition = cameraPosition * 0.9f + targetCameraPosition * 0.1f;
-    
+
     {
         float lightpos[4] = {0, 0, 1000, 1.0};
         glPushMatrix();
@@ -126,13 +126,13 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
         glPopMatrix();
     }
 
-    foreach(SpaceObject, obj, spaceObjectList)
+    foreach(SpaceObject, obj, space_object_list)
     {
         glPushMatrix();
         glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
         glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
         glRotatef(obj->getRotation(), 0, 0, 1);
-        
+
         obj->draw3D();
         glPopMatrix();
     }
@@ -140,13 +140,13 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
 
 #ifdef DEBUG
     glDisable(GL_DEPTH_TEST);
-    foreach(SpaceObject, obj, spaceObjectList)
+    foreach(SpaceObject, obj, space_object_list)
     {
         glPushMatrix();
         glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
         glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
         glRotatef(obj->getRotation(), 0, 0, 1);
-        
+
         std::vector<sf::Vector2f> collisionShape = obj->getCollisionShape();
         glBegin(GL_LINE_LOOP);
         for(unsigned int n=0; n<collisionShape.size(); n++)
@@ -155,7 +155,7 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
         glPopMatrix();
     }
 #endif
-    
+
     window.popGLStates();
 }
 

@@ -7,7 +7,7 @@
 
 class CrewUI : public MainUI
 {
-    ECrewPosition showPosition;
+    ECrewPosition show_position;
     EMissileWeapons tubeLoadType;
     float jump_distance;
 public:

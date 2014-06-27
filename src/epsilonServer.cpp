@@ -9,12 +9,12 @@ EpsilonServer::EpsilonServer()
 {
     new GameGlobalInfo();
     PlayerInfo* info = new PlayerInfo();
-    info->clientId = 0;
-    myPlayerInfo = info;
+    info->client_id = 0;
+    my_player_info = info;
     engine->setGameSpeed(0.0);
-    
+
     //TMP
-    mySpaceship = new SpaceShip();
+    my_spaceship = new SpaceShip();
     randomNebulas();
     //for(int n=0; n<50;n++)
     //    (new SpaceShip())->setPosition(sf::vector2FromAngle(0.0f) * (50.0f + n * 100.0f));
@@ -22,18 +22,18 @@ EpsilonServer::EpsilonServer()
     (new SpaceStation())->setPosition(sf::Vector2f(0, -500));
 }
 
-void EpsilonServer::onNewClient(int32_t clientId)
+void EpsilonServer::onNewClient(int32_t client_id)
 {
-    printf("New client: %i\n", clientId);
+    printf("New client: %i\n", client_id);
     PlayerInfo* info = new PlayerInfo();
-    info->clientId = clientId;
+    info->client_id = client_id;
 }
 
-void EpsilonServer::onDisconnectClient(int32_t clientId)
+void EpsilonServer::onDisconnectClient(int32_t client_id)
 {
-    printf("Client left: %i\n", clientId);
+    printf("Client left: %i\n", client_id);
     foreach(PlayerInfo, i, playerInfoList)
-        if (i->clientId == clientId)
+        if (i->client_id == client_id)
             i->destroy();
     playerInfoList.update();
 }
@@ -48,8 +48,8 @@ void disconnectFromServer()
         i->destroy();
     foreach(GameEntity, e, entityList)
         e->destroy();
-    foreach(SpaceObject, o, spaceObjectList)
+    foreach(SpaceObject, o, space_object_list)
         o->destroy();
-    if (myPlayerInfo)
-        myPlayerInfo->destroy();
+    if (my_player_info)
+        my_player_info->destroy();
 }

@@ -38,26 +38,26 @@ class SpaceShip : public SpaceObject, public Updatable
     //TODO: Getting statistics from some external file (location of beam weapons, shields, hull, etc).
     //This will make adding multiple ships a *lot* easier.
 public:
-    const static int maxBeamWeapons = 16;
-    const static int maxWeaponTubes = 16;
+    const static int max_beam_weapons = 16;
+    const static int max_weapon_tubes = 16;
 
-    float targetRotation;
-    float impulseRequest;
-    float currentImpulse;
+    float target_rotation;
+    float impulse_request;
+    float current_impulse;
 
-    bool hasWarpdrive;
-    int8_t warpRequest;
-    float currentWarp;
+    bool has_warp_drive;
+    int8_t warp_request;
+    float current_warp;
 
-    bool hasJumpdrive;
+    bool has_jump_drive;
     float jump_distance;
-    float jumpDelay;
+    float jump_delay;
 
-    int8_t weaponTubes;
-    WeaponTube weaponTube[maxWeaponTubes];
-    BeamWeapon beamWeapons[maxBeamWeapons];
+    int8_t weapon_tubes;
+    WeaponTube weapon_tube[max_weapon_tubes];
+    BeamWeapon beam_weapons[max_beam_weapons];
 
-    int32_t targetId;
+    int32_t target_id;
 
     SpaceShip();
 
@@ -67,7 +67,7 @@ public:
 
     P<SpaceObject> getTarget();
 
-    void onReceiveCommand(int32_t clientId, sf::Packet& packet);
+    void onReceiveCommand(int32_t client_id, sf::Packet& packet);
     void commandTargetRotation(float target);
     void commandImpulse(float target);
     void commandWarp(int8_t target);

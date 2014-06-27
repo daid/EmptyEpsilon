@@ -58,7 +58,7 @@ void GUI::text(sf::FloatRect rect, string text, EAlign align, float fontSize)
 bool GUI::button(sf::FloatRect rect, string text_value, float font_size)
 {
     sf::Sprite sprite;
-    textureManager.setTexture(sprite, "button_background");
+    texture_manager.setTexture(sprite, "button_background");
     if (rect.contains(mousePosition))
         sprite.setColor(sf::Color(255,255,255, 128));
     else
@@ -77,7 +77,7 @@ bool GUI::button(sf::FloatRect rect, string text_value, float font_size)
 bool GUI::toggleButton(sf::FloatRect rect, bool active, string text_value, float font_size)
 {
     sf::Sprite sprite;
-    textureManager.setTexture(sprite, "button_background");
+    texture_manager.setTexture(sprite, "button_background");
     if (rect.contains(mousePosition))
     {
         if (active)
@@ -115,7 +115,7 @@ float GUI::vslider(sf::FloatRect rect, float value, float min_value, float max_v
 
     float y = rect.top + (rect.height - rect.width) * (value - min_value) / (max_value - min_value);
     sf::Sprite sprite;
-    textureManager.setTexture(sprite, "button_background");
+    texture_manager.setTexture(sprite, "button_background");
     if (rect.contains(mousePosition) && mousePosition.y >= y && mousePosition.y <= y + rect.width)
         sprite.setColor(sf::Color(255,255,255, 128));
     else
@@ -160,7 +160,7 @@ void MouseRenderer::render(sf::RenderTarget& window)
     sf::Vector2f mouse = inputHandler->getMousePos();
 
     sf::Sprite mouseSprite;
-    textureManager.setTexture(mouseSprite, "mouse.png");
+    texture_manager.setTexture(mouseSprite, "mouse.png");
     mouseSprite.setPosition(mouse);
     window.draw(mouseSprite);
 }

@@ -1,12 +1,12 @@
 #include <SFML/OpenGL.hpp>
 #include "spaceObject.h"
 
-PVector<SpaceObject> spaceObjectList;
+PVector<SpaceObject> space_object_list;
 
 SpaceObject::SpaceObject(float collisionRange, string multiplayerName)
 : Collisionable(collisionRange), MultiplayerObject(multiplayerName)
 {
-    spaceObjectList.push_back(this);
+    space_object_list.push_back(this);
     registerCollisionableReplication();
 }
 
@@ -25,7 +25,7 @@ void SpaceObject::draw3D()
 void SpaceObject::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale)
 {
     sf::Sprite objectSprite;
-    textureManager.setTexture(objectSprite, "RadarBlip.png");
+    texture_manager.setTexture(objectSprite, "RadarBlip.png");
     objectSprite.setPosition(position);
     window.draw(objectSprite);
 }
