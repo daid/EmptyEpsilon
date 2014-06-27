@@ -1,6 +1,7 @@
 #include "mainUI.h"
 #include "main.h"
 #include "shipSelectionScreen.h"
+#include "repairCrew.h"
 
 void MainUI::onGui()
 {
@@ -169,19 +170,11 @@ void MainUI::drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESystem
     sf::RenderTarget& window = *getRenderTarget();
     P<ShipTemplate> st = ship->shipTemplate;
     
-    sf::Vector2i size(0, 0);
+    const float room_size = 48.0f;
     for(unsigned int n=0; n<st->rooms.size(); n++)
     {
-        size.x = std::max(size.x, st->rooms[n].position.x + st->rooms[n].size.x);
-        size.y = std::max(size.y, st->rooms[n].position.y + st->rooms[n].size.y);
-    }
-
-    position.x -= size.x * 16;
-    position.y -= size.y * 16;
-    for(unsigned int n=0; n<st->rooms.size(); n++)
-    {
-        sf::RectangleShape room(sf::Vector2f(st->rooms[n].size) * 32.0f - sf::Vector2f(4, 4));
-        room.setPosition(position + sf::Vector2f(st->rooms[n].position) * 32.0f + sf::Vector2f(4, 4));
+        sf::RectangleShape room(sf::Vector2f(st->rooms[n].size) * room_size - sf::Vector2f(4, 4));
+        room.setPosition(position + sf::Vector2f(st->rooms[n].position) * room_size + sf::Vector2f(4, 4));
         room.setFillColor(sf::Color(96, 96, 96, 255));
         if (st->rooms[n].system == highlight_system && highlight_system != SYS_None)
             room.setFillColor(sf::Color(128, 128, 32, 255));
@@ -193,7 +186,7 @@ void MainUI::drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESystem
             sf::Sprite sprite;
             textureManager.setTexture(sprite, "redicule.png");
             sprite.setScale(0.7, 0.7);
-            sprite.setPosition(position + sf::Vector2f(st->rooms[n].position) * 32.0f + sf::Vector2f(st->rooms[n].size) * 16.0f + sf::Vector2f(2, 2));
+            sprite.setPosition(position + sf::Vector2f(st->rooms[n].position) * room_size + sf::Vector2f(st->rooms[n].size) * room_size / 2.0f + sf::Vector2f(2, 2));
             window.draw(sprite);
         }
     }
@@ -202,11 +195,11 @@ void MainUI::drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESystem
         sf::RectangleShape door;
         if (st->doors[n].horizontal)
         {
-            door.setSize(sf::Vector2f(24.0, 4.0));
-            door.setPosition(position + sf::Vector2f(st->doors[n].position) * 32.0f + sf::Vector2f(6, 0));
+            door.setSize(sf::Vector2f(room_size - 8.0, 4.0));
+            door.setPosition(position + sf::Vector2f(st->doors[n].position) * room_size + sf::Vector2f(6, 0));
         }else{
-            door.setSize(sf::Vector2f(4.0, 24.0));
-            door.setPosition(position + sf::Vector2f(st->doors[n].position) * 32.0f + sf::Vector2f(0, 6));
+            door.setSize(sf::Vector2f(4.0, room_size - 8.0));
+            door.setPosition(position + sf::Vector2f(st->doors[n].position) * room_size + sf::Vector2f(0, 6));
         }
         door.setFillColor(sf::Color(255, 128, 32, 255));
         window.draw(door);

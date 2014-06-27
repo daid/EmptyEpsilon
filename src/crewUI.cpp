@@ -1,6 +1,7 @@
 #include "crewUI.h"
 #include "playerInfo.h"
 #include "factionInfo.h"
+#include "repairCrew.h"
 
 CrewUI::CrewUI()
 {
@@ -232,6 +233,8 @@ void CrewUI::weaponsUI()
 
 void CrewUI::engineeringUI()
 {
+    if (!mySpaceship->shipTemplate) return;
+    sf::RenderTarget& window = *getRenderTarget();
     P<InputHandler> inputHandler = engine->getObject("inputHandler");
     sf::Vector2f mouse = inputHandler->getMousePos();
 
@@ -270,7 +273,41 @@ void CrewUI::engineeringUI()
         x += 160;
     }
 
-    drawShipInternals(sf::Vector2f(800, 250), mySpaceship, highlight_system);
+    sf::Vector2i interior_size = mySpaceship->shipTemplate->interiorSize();
+    sf::Vector2f interial_position = sf::Vector2f(800, 250) - sf::Vector2f(interior_size) * 48.0f / 2.0f;
+    drawShipInternals(interial_position, mySpaceship, highlight_system);
+
+    PVector<RepairCrew> rc_list = getRepairCrewFor(mySpaceship);
+    foreach(RepairCrew, rc, rc_list)
+    {
+        sf::Vector2f position = interial_position + sf::Vector2f(rc->position) * 48.0f + sf::Vector2f(1.0, 1.0) * 48.0f / 2.0f + sf::Vector2f(2.0, 2.0);
+        sf::Sprite sprite;
+        textureManager.setTexture(sprite, "RadarBlip.png");
+        sprite.setPosition(position);
+        window.draw(sprite);
+        
+        if (inputHandler->mouseIsPressed(sf::Mouse::Left) && sf::length(mouse - position) < 48.0f/2.0)
+        {
+            selected_crew = rc;
+        }
+        
+        if (selected_crew == rc)
+        {
+            sf::Sprite select_sprite;
+            textureManager.setTexture(select_sprite, "redicule.png");
+            select_sprite.setPosition(position);
+            window.draw(select_sprite);
+        }
+    }
+    
+    if (inputHandler->mouseIsPressed(sf::Mouse::Right) && selected_crew)
+    {
+        sf::Vector2i target_pos = sf::Vector2i((mouse - interial_position) / 48.0f);
+        if (target_pos.x >= 0 && target_pos.x < interior_size.x && target_pos.y >= 0 && target_pos.y < interior_size.y)
+        {
+            selected_crew->commandSetTargetPosition(target_pos);
+        }
+    }
 }
 
 void CrewUI::scienceUI()

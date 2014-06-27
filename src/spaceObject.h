@@ -30,6 +30,8 @@ public:
     virtual bool canBeTargeted() { return false; }
     virtual bool hasShield() { return false; }
     virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type) {}
+    
+    static void damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, EDamageType type, float min_range);
 };
 
 class NebulaInfo

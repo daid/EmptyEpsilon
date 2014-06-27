@@ -85,20 +85,7 @@ void Mine::eject()
 
 void Mine::explode()
 {
-    PVector<Collisionable> hitList = CollisionManager::queryArea(getPosition() - sf::Vector2f(blastRange, blastRange), getPosition() + sf::Vector2f(blastRange, blastRange));
-    foreach(Collisionable, c, hitList)
-    {
-        P<SpaceObject> obj = c;
-        if (obj)
-        {
-            float dist = sf::length(getPosition() - obj->getPosition()) - obj->getRadius() - getRadius();
-            if (dist < 0) dist = 0;
-            if (dist < blastRange)
-            {
-                obj->takeDamage(damageAtCenter - (damageAtCenter - damageAtEdge) * dist / blastRange, getPosition(), DT_Kinetic);
-            }
-        }
-    }
+    SpaceObject::damageArea(getPosition(), blastRange, damageAtEdge, damageAtCenter, DT_Kinetic, getRadius());
 
     P<ExplosionEffect> e = new ExplosionEffect();
     e->setSize(blastRange);

@@ -1,4 +1,6 @@
 #include "playerSpaceship.h"
+#include "repairCrew.h"
+#include "explosionEffect.h"
 
 static const int16_t CMD_TARGET_ROTATION = 0x0001;
 static const int16_t CMD_IMPULSE = 0x0002;
@@ -57,6 +59,15 @@ PlayerSpaceship::PlayerSpaceship()
     systems[SYS_JumpDrive].powerUserFactor = 6.0;
     systems[SYS_FrontShield].powerUserFactor = 5.0;
     systems[SYS_RearShield].powerUserFactor = 5.0;
+    
+    if (gameServer)
+    {
+        for(int n=0; n<3; n++)
+        {
+            P<RepairCrew> rc = new RepairCrew();
+            rc->ship_id = getMultiplayerId();
+        }
+    }
 }
 
 void PlayerSpaceship::update(float delta)
@@ -89,6 +100,20 @@ void PlayerSpaceship::update(float delta)
             if (systems[n].heatLevel < 0.0)
                 systems[n].heatLevel = 0.0;
         }
+        
+        if (systems[SYS_Reactor].health < 0.3 && systems[SYS_Reactor].heatLevel == 1.0)
+        {
+            //Ok, you screwed up. Seriously, your reactor is heavy damaged and overheated. So it will explode.
+            ExplosionEffect* e = new ExplosionEffect();
+            e->setSize(1000.0f);
+            e->setPosition(getPosition());
+            
+            SpaceObject::damageArea(getPosition(), 1000, 60, 160, DT_Kinetic, 0.0);
+            
+            destroy();
+            return;
+        }
+        
         if (energy_level < 0.0)
             energy_level = 0.0;
         float max_power_level = 3.0;

@@ -136,6 +136,27 @@ void ShipTemplate::setTubePosition(int index, sf::Vector2f position)
     tubePosition[index] = position;
 }
 
+sf::Vector2i ShipTemplate::interiorSize()
+{
+    sf::Vector2i size(0, 0);
+    for(unsigned int n=0; n<rooms.size(); n++)
+    {
+        size.x = std::max(size.x, rooms[n].position.x + rooms[n].size.x);
+        size.y = std::max(size.y, rooms[n].position.y + rooms[n].size.y);
+    }
+    return size;
+}
+
+ESystem ShipTemplate::getSystemAtRoom(sf::Vector2i position)
+{
+    for(unsigned int n=0; n<rooms.size(); n++)
+    {
+        if (rooms[n].position.x <= position.x && rooms[n].position.x + rooms[n].size.x > position.x && rooms[n].position.y <= position.y && rooms[n].position.y + rooms[n].size.y > position.y)
+            return rooms[n].system;
+    }
+    return SYS_None;
+}
+
 P<ShipTemplate> ShipTemplate::getTemplate(string name)
 {
     return templateMap[name];

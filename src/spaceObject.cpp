@@ -22,6 +22,25 @@ void SpaceObject::drawRadar(sf::RenderTarget& window, sf::Vector2f position, flo
 {
 }
 
+void SpaceObject::damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, EDamageType type, float min_range)
+{
+    PVector<Collisionable> hitList = CollisionManager::queryArea(position - sf::Vector2f(blast_range, blast_range), position + sf::Vector2f(blast_range, blast_range));
+    foreach(Collisionable, c, hitList)
+    {
+        P<SpaceObject> obj = c;
+        if (obj)
+        {
+            float dist = sf::length(position - obj->getPosition()) - obj->getRadius() - min_range;
+            if (dist < 0) dist = 0;
+            if (dist < blast_range)
+            {
+                obj->takeDamage(max_damage - (max_damage - min_damage) * dist / blast_range, position, type);
+            }
+        }
+    }
+}
+
+
 std::vector<NebulaInfo> nebulaInfo;
 
 void randomNebulas()
