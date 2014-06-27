@@ -67,9 +67,8 @@ void CrewUI::onGui()
 void CrewUI::helmsUI()
 {
     sf::RenderTarget* window = getRenderTarget();
-    P<InputHandler> inputHandler = engine->getObject("inputHandler");
-    sf::Vector2f mouse = inputHandler->getMousePos();
-    if (inputHandler->mouseIsPressed(sf::Mouse::Left))
+    sf::Vector2f mouse = InputHandler::getMousePos();
+    if (InputHandler::mouseIsPressed(sf::Mouse::Left))
     {
         sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
         if (sf::length(diff) < 400)
@@ -136,13 +135,12 @@ void CrewUI::helmsUI()
 void CrewUI::weaponsUI()
 {
     sf::RenderTarget* window = getRenderTarget();
-    P<InputHandler> inputHandler = engine->getObject("inputHandler");
-    sf::Vector2f mouse = inputHandler->getMousePos();
+    sf::Vector2f mouse = InputHandler::getMousePos();
     float radarDistance = 5000;
 
     //Radar
     drawRaderBackground(mySpaceship->getPosition(), sf::Vector2f(800, 450), 400, 400.0f / radarDistance);
-    if (inputHandler->mouseIsPressed(sf::Mouse::Left))
+    if (InputHandler::mouseIsPressed(sf::Mouse::Left))
     {
         sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
         if (sf::length(diff) < 400)
@@ -235,8 +233,7 @@ void CrewUI::engineeringUI()
 {
     if (!mySpaceship->shipTemplate) return;
     sf::RenderTarget& window = *getRenderTarget();
-    P<InputHandler> inputHandler = engine->getObject("inputHandler");
-    sf::Vector2f mouse = inputHandler->getMousePos();
+    sf::Vector2f mouse = InputHandler::getMousePos();
 
     float net_power = 0.0;
     for(int n=0; n<SYS_COUNT; n++)
@@ -286,7 +283,7 @@ void CrewUI::engineeringUI()
         sprite.setPosition(position);
         window.draw(sprite);
         
-        if (inputHandler->mouseIsPressed(sf::Mouse::Left) && sf::length(mouse - position) < 48.0f/2.0)
+        if (InputHandler::mouseIsPressed(sf::Mouse::Left) && sf::length(mouse - position) < 48.0f/2.0)
         {
             selected_crew = rc;
         }
@@ -300,7 +297,7 @@ void CrewUI::engineeringUI()
         }
     }
     
-    if (inputHandler->mouseIsPressed(sf::Mouse::Right) && selected_crew)
+    if (InputHandler::mouseIsPressed(sf::Mouse::Right) && selected_crew)
     {
         sf::Vector2i target_pos = sf::Vector2i((mouse - interial_position) / 48.0f);
         if (target_pos.x >= 0 && target_pos.x < interior_size.x && target_pos.y >= 0 && target_pos.y < interior_size.y)
@@ -313,14 +310,13 @@ void CrewUI::engineeringUI()
 void CrewUI::scienceUI()
 {
     sf::RenderTarget* window = getRenderTarget();
-    P<InputHandler> inputHandler = engine->getObject("inputHandler");
-    sf::Vector2f mouse = inputHandler->getMousePos();
+    sf::Vector2f mouse = InputHandler::getMousePos();
 
 
     //Radar
     float radarDistance = scienceRadarDistance;
     drawRaderBackground(mySpaceship->getPosition(), sf::Vector2f(800, 450), 400, 400.0f / radarDistance);
-    if (inputHandler->mouseIsPressed(sf::Mouse::Left))
+    if (InputHandler::mouseIsPressed(sf::Mouse::Left))
     {
         sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
         if (sf::length(diff) < 400)

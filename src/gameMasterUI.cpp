@@ -12,10 +12,9 @@ GameMasterUI::GameMasterUI()
 void GameMasterUI::onGui()
 {
     sf::RenderTarget& window = *getRenderTarget();
-    P<InputHandler> inputHandler = engine->getObject("inputHandler");
-    sf::Vector2f mouse = inputHandler->getMousePos();
+    sf::Vector2f mouse = InputHandler::getMousePos();
 
-    if (inputHandler->mouseIsPressed(sf::Mouse::Left) && mouse.x > 300)
+    if (InputHandler::mouseIsPressed(sf::Mouse::Left) && mouse.x > 300)
     {
         mouse_down_pos = mouse;
         sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
@@ -34,7 +33,7 @@ void GameMasterUI::onGui()
         }
         selection = target;
     }
-    if (selection && inputHandler->mouseIsDown(sf::Mouse::Left) && mouse.x > 300)
+    if (selection && InputHandler::mouseIsDown(sf::Mouse::Left) && mouse.x > 300)
     {
         sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
         sf::Vector2f mousePosition = view_position + diff / 400.0f * view_distance;
@@ -44,12 +43,12 @@ void GameMasterUI::onGui()
         }
     }
     
-    view_distance *= 1.0 - (inputHandler->getMouseWheelDelta() * 0.1f);
+    view_distance *= 1.0 - (InputHandler::getMouseWheelDelta() * 0.1f);
     if (view_distance > 100000)
         view_distance = 100000;
     if (view_distance < 5000)
         view_distance = 5000;
-    if (inputHandler->mouseIsDown(sf::Mouse::Middle))
+    if (InputHandler::mouseIsDown(sf::Mouse::Middle))
     {
         view_position += (prev_mouse_pos - mouse) / 400.0f * view_distance;
     }

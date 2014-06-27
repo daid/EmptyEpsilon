@@ -34,7 +34,6 @@ int main(int argc, char** argv)
     int height = 900;
     int fsaa = 0;
     engine->registerObject("windowManager", new WindowManager(width, height, false, mouseLayer, fsaa));
-    engine->registerObject("inputHandler", new InputHandler());
     engine->registerObject("mouseRenderer", new MouseRenderer());
     
     P<ResourceStream> stream = getResourceStream("sansation.ttf");

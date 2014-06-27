@@ -14,19 +14,18 @@ GUI::GUI()
 
 void GUI::render(sf::RenderTarget& window)
 {
-    P<InputHandler> inputHandler = engine->getObject("inputHandler");
-    mousePosition = inputHandler->getMousePos();
+    mousePosition = InputHandler::getMousePos();
     mouseClick = 0;
     mouseDown = 0;
     if (!init)//Do not send mouse clicks the first render, as we can just be created because of a mouseclick.
     {
-        if (inputHandler->mouseIsPressed(sf::Mouse::Left))
+        if (InputHandler::mouseIsPressed(sf::Mouse::Left))
             mouseClick = 1;
-        else if (inputHandler->mouseIsPressed(sf::Mouse::Right))
+        else if (InputHandler::mouseIsPressed(sf::Mouse::Right))
             mouseClick = 2;
-        if (inputHandler->mouseIsDown(sf::Mouse::Left))
+        if (InputHandler::mouseIsDown(sf::Mouse::Left))
             mouseDown = 1;
-        else if (inputHandler->mouseIsDown(sf::Mouse::Right))
+        else if (InputHandler::mouseIsDown(sf::Mouse::Right))
             mouseDown = 2;
         renderTarget = &window;
         onGui();
@@ -275,8 +274,7 @@ void MouseRenderer::render(sf::RenderTarget& window)
 {
     if (!visible) return;
 
-    P<InputHandler> inputHandler = engine->getObject("inputHandler");
-    sf::Vector2f mouse = inputHandler->getMousePos();
+    sf::Vector2f mouse = InputHandler::getMousePos();
     
     sf::Sprite mouseSprite;
     textureManager.setTexture(mouseSprite, "mouse.png");
