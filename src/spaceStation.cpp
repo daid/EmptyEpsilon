@@ -16,10 +16,10 @@ void SpaceStation::draw3D()
 {
     glTranslatef(0, 0, 50);
     glScalef(10.0, 10.0, 10.0);
-    objectShader.setParameter("baseMap", *textureManager.getTexture("space_station_4_color.jpg"));
-    objectShader.setParameter("illuminationMap", *textureManager.getTexture("space_station_4_illumination.jpg"));
-    objectShader.setParameter("specularMap", *textureManager.getTexture("space_station_4_specular.jpg"));
-    sf::Shader::bind(&objectShader);
+    object_shader.setParameter("baseMap", *textureManager.getTexture("space_station_4_color.jpg"));
+    object_shader.setParameter("illuminationMap", *textureManager.getTexture("space_station_4_illumination.jpg"));
+    object_shader.setParameter("specularMap", *textureManager.getTexture("space_station_4_specular.jpg"));
+    sf::Shader::bind(&object_shader);
     Mesh* m = Mesh::getMesh("space_station_4.obj");//Is this destroyed somehwere?
     m->render();
 }

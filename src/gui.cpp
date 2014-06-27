@@ -1,6 +1,7 @@
 #include "gui.h"
 #include "main.h"
 
+//TODO: This is pretty nasty. Needs to be fixed!
 sf::RenderTarget* GUI::renderTarget;
 sf::Vector2f GUI::mousePosition;
 int GUI::mouse_click;
@@ -38,7 +39,7 @@ void GUI::render(sf::RenderTarget& window)
 
 void GUI::text(sf::FloatRect rect, string text, EAlign align, float fontSize)
 {
-    sf::Text textElement(text, mainFont, fontSize);
+    sf::Text textElement(text, main_font, fontSize);
     switch(align)
     {
     case AlignLeft:
@@ -146,7 +147,7 @@ float GUI::vslider(sf::FloatRect rect, float value, float min_value, float max_v
 }
 
 MouseRenderer::MouseRenderer()
-: Renderable(mouseLayer)
+: Renderable(mouse_layer)
 {
     visible = true;
 }

@@ -72,10 +72,10 @@ void SpaceShip::draw3D()
 {
     glTranslatef(0, 0, 10);
     glScalef(3.0, 3.0, 3.0);
-    objectShader.setParameter("baseMap", *textureManager.getTexture("space_frigate_6_color.png"));
-    objectShader.setParameter("illuminationMap", *textureManager.getTexture("space_frigate_6_illumination.png"));
-    objectShader.setParameter("specularMap", *textureManager.getTexture("space_frigate_6_specular.png"));
-    sf::Shader::bind(&objectShader);
+    object_shader.setParameter("baseMap", *textureManager.getTexture("space_frigate_6_color.png"));
+    object_shader.setParameter("illuminationMap", *textureManager.getTexture("space_frigate_6_illumination.png"));
+    object_shader.setParameter("specularMap", *textureManager.getTexture("space_frigate_6_specular.png"));
+    sf::Shader::bind(&object_shader);
     Mesh* m = Mesh::getMesh("space_frigate_6.obj");
     m->render();
 }

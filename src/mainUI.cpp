@@ -71,7 +71,7 @@ void MainUI::drawHeadingCircle(sf::Vector2f position, float size)
     window.draw(smallTigs);
     for(unsigned int n=0; n<360; n+=20)
     {
-        sf::Text text(string(n), mainFont, 15);
+        sf::Text text(string(n), main_font, 15);
         text.setPosition(position + sf::vector2FromAngle(float(n)) * (size - 25));
         text.setOrigin(text.getLocalBounds().width / 2.0, text.getLocalBounds().height / 2.0);
         text.setRotation(n);
