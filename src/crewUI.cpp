@@ -35,13 +35,16 @@ void CrewUI::onGui()
             break;
         case engineering:
             engineeringUI();
+            mainScreenSelectGUI();
             break;
         case scienceOfficer:
             scienceUI();
+            mainScreenSelectGUI();
             break;
         default:
             drawStatic();
             text(sf::FloatRect(0, 500, 1600, 100), "???", AlignCenter, 100);
+            mainScreenSelectGUI();
             break;
         }
     }else{
