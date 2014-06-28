@@ -156,10 +156,7 @@ bool GUI::toggleButton(sf::FloatRect rect, bool active, string textValue, float 
 
 float GUI::vslider(sf::FloatRect rect, float value, float minValue, float maxValue, float normalValue)
 {
-    sf::RectangleShape background(sf::Vector2f(rect.width, rect.height));
-    background.setPosition(rect.left, rect.top);
-    background.setFillColor(sf::Color(255,255,255,32));
-    renderTarget->draw(background);
+    draw9Cut(rect, "button_background", sf::Color(32,32,32, 255));
 
     float y;
     y = rect.top + (rect.height - rect.width) * (normalValue - minValue) / (maxValue - minValue);
