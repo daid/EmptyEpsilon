@@ -117,9 +117,8 @@ void GUI::vprogressBar(sf::FloatRect rect, float value, float min_value, float m
 
 bool GUI::button(sf::FloatRect rect, string textValue, float fontSize)
 {
-    draw9Cut(rect, "button_background", rect.contains(mousePosition) ? sf::Color(255,255,255, 128) : sf::Color::White);
-
-    text(rect, textValue, AlignCenter, fontSize);
+    draw9Cut(rect, "button_background", rect.contains(mousePosition) ? sf::Color(128,128,128,255) : sf::Color::White);
+    text(rect, textValue, AlignCenter, fontSize, sf::Color::Black);
     if (mouseClick && rect.contains(mousePosition))
         return true;
     return false;
@@ -127,9 +126,9 @@ bool GUI::button(sf::FloatRect rect, string textValue, float fontSize)
 
 void GUI::disabledButton(sf::FloatRect rect, string textValue, float textSize)
 {
-    draw9Cut(rect, "button_background", sf::Color(255,255,255, 128));
+    draw9Cut(rect, "button_background", sf::Color(128,128,128, 255));
 
-    text(rect, textValue, AlignCenter, textSize);
+    text(rect, textValue, AlignCenter, textSize, sf::Color::Black);
 }
 
 bool GUI::toggleButton(sf::FloatRect rect, bool active, string textValue, float fontSize)
@@ -138,18 +137,18 @@ bool GUI::toggleButton(sf::FloatRect rect, bool active, string textValue, float 
     if (rect.contains(mousePosition))
     {
         if (active)
-            buttonColor = sf::Color(255,255,255, 192);
+            buttonColor = sf::Color(192,192,192, 255);
         else
-            buttonColor = sf::Color(255,255,255, 64);
+            buttonColor = sf::Color( 96, 96, 96, 255);
     }else{
         if (active)
             buttonColor = sf::Color(255,255,255, 255);
         else
-            buttonColor = sf::Color(255,255,255, 128);
+            buttonColor = sf::Color(128,128,128, 128);
     }
     draw9Cut(rect, "button_background", buttonColor);
 
-    text(rect, textValue, AlignCenter, fontSize);
+    text(rect, textValue, AlignCenter, fontSize, sf::Color::Black);
     if (mouseClick && rect.contains(mousePosition))
         return true;
     return false;
@@ -201,7 +200,7 @@ void GUI::draw9Cut(sf::FloatRect rect, string texture, sf::Color color)
     sf::Sprite sprite;
     textureManager.setTexture(sprite, texture);
     sf::IntRect textureSize = sprite.getTextureRect();
-    int cornerSizeT = textureSize.height / 2;
+    int cornerSizeT = textureSize.height / 3;
     float cornerSizeR = cornerSizeT;
     float scale = 1.0;
     if (cornerSizeT > rect.height / 2)

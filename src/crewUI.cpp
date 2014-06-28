@@ -2,6 +2,7 @@
 #include "playerInfo.h"
 #include "factionInfo.h"
 #include "repairCrew.h"
+#include "spaceStation.h"
 
 CrewUI::CrewUI()
 {
@@ -128,7 +129,7 @@ void CrewUI::helmsUI()
         {
             text(sf::FloatRect(x, 820, 50, 20), string(int(ceilf(mySpaceship->jumpDelay))), AlignLeft, 20);
         }else{
-            if (button(sf::FloatRect(x, 820, 70, 30), "Jump", 20))
+            if (button(sf::FloatRect(x - 10, 820, 70, 30), "Jump", 20))
             {
                 mySpaceship->commandJump(jumpDistance);
             }
@@ -136,7 +137,22 @@ void CrewUI::helmsUI()
         x += 80;
     }
     
-    button(sf::FloatRect(x, 800, 280, 50), "Request Dock", 30);
+    PVector<Collisionable> obj_list = CollisionManager::queryArea(mySpaceship->getPosition() - sf::Vector2f(1000, 1000), mySpaceship->getPosition() + sf::Vector2f(1000, 1000));
+    bool near_station = false;
+    foreach(Collisionable, obj, obj_list)
+    {
+        P<SpaceStation> station = obj;
+        if (station && sf::length(station->getPosition() - mySpaceship->getPosition()) < 1000.0)
+        {
+            near_station = true;
+            break;
+        }
+    }
+    
+    if (near_station)
+        button(sf::FloatRect(x, 800, 280, 50), "Request Dock", 30);
+    else
+        disabledButton(sf::FloatRect(x, 800, 280, 50), "Request Dock", 30);
 }
 
 void CrewUI::weaponsUI()
