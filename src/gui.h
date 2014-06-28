@@ -29,6 +29,7 @@ public:
     static void progressBar(sf::FloatRect rect, float value, float min_value = 0.0, float max_value = 1.0, sf::Color color=sf::Color::White);
     static void vprogressBar(sf::FloatRect rect, float value, float min_value = 0.0, float max_value = 1.0, sf::Color color=sf::Color::White);
     static bool button(sf::FloatRect rect, string text, float textSize = 30);
+    static void disabledButton(sf::FloatRect rect, string text, float textSize = 30);
     static bool toggleButton(sf::FloatRect rect, bool active, string textValue, float fontSize = 30);
     static float vslider(sf::FloatRect rect, float value, float minValue, float maxValue, float normalValue = 0.0);
     static sf::RenderTarget* getRenderTarget() { return renderTarget; }

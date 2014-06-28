@@ -125,6 +125,13 @@ bool GUI::button(sf::FloatRect rect, string textValue, float fontSize)
     return false;
 }
 
+void GUI::disabledButton(sf::FloatRect rect, string textValue, float textSize)
+{
+    draw9Cut(rect, "button_background", sf::Color(255,255,255, 128));
+
+    text(rect, textValue, AlignCenter, textSize);
+}
+
 bool GUI::toggleButton(sf::FloatRect rect, bool active, string textValue, float fontSize)
 {
     sf::Color buttonColor;
