@@ -1,45 +1,34 @@
 #include <SFML/OpenGL.hpp>
 #include "spaceObject.h"
 
-PVector<SpaceObject> spaceObjectList;
+PVector<SpaceObject> space_object_list;
 
 SpaceObject::SpaceObject(float collisionRange, string multiplayerName)
 : Collisionable(collisionRange), MultiplayerObject(multiplayerName)
 {
-    objectRadius = collisionRange;
-    spaceObjectList.push_back(this);
-    factionId = 0;
-    
-    registerMemberReplication(&factionId);
+    space_object_list.push_back(this);
     registerCollisionableReplication();
 }
 
 void SpaceObject::draw3D()
 {
+    glBegin(GL_LINES);
+    glVertex3f(0, 0, -10);
+    glVertex3f(0, 0,  10);
+    glVertex3f(0, -50, 0);
+    glVertex3f(0,  50, 0);
+    glVertex3f(-50, 0, 0);
+    glVertex3f( 50, 0, 0);
+    glEnd();
 }
 
-void SpaceObject::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange)
+void SpaceObject::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale)
 {
+    sf::Sprite objectSprite;
+    texture_manager.setTexture(objectSprite, "RadarBlip.png");
+    objectSprite.setPosition(position);
+    window.draw(objectSprite);
 }
-
-void SpaceObject::damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, EDamageType type, float min_range)
-{
-    PVector<Collisionable> hitList = CollisionManager::queryArea(position - sf::Vector2f(blast_range, blast_range), position + sf::Vector2f(blast_range, blast_range));
-    foreach(Collisionable, c, hitList)
-    {
-        P<SpaceObject> obj = c;
-        if (obj)
-        {
-            float dist = sf::length(position - obj->getPosition()) - obj->getRadius() - min_range;
-            if (dist < 0) dist = 0;
-            if (dist < blast_range)
-            {
-                obj->takeDamage(max_damage - (max_damage - min_damage) * dist / blast_range, position, type);
-            }
-        }
-    }
-}
-
 
 std::vector<NebulaInfo> nebulaInfo;
 

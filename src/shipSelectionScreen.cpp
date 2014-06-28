@@ -2,7 +2,6 @@
 #include "playerInfo.h"
 #include "mainScreen.h"
 #include "crewUI.h"
-#include "gameMasterUI.h"
 
 ShipSelectionScreen::ShipSelectionScreen()
 {
@@ -12,34 +11,36 @@ void ShipSelectionScreen::onGui()
 {
     {
         int mainCnt = 0;
-        foreach(PlayerInfo, i, playerInfoList)
+        foreach(PlayerInfo, i, player_info_list)
         {
             if (i->isMainScreen())
                 mainCnt++;
         }
 
-        text(sf::FloatRect(800, 100, 300, 50), string(myPlayerInfo->isMainScreen() ? "*" : " ") + "Main screen", AlignCenter);
+        text(sf::FloatRect(800, 100, 300, 50), string(my_player_info->isMainScreen() ? "*" : " ") + "Main screen", AlignCenter);
         text(sf::FloatRect(1100, 100, 300, 50), string(mainCnt));
     }
-    for(int n=0; n<maxCrewPositions; n++)
+    for(int n = 0; n < max_crew_positions; n++)
     {
-        if (toggleButton(sf::FloatRect(800, 150 + 50 * n, 300, 50), myPlayerInfo->crewPosition[n], getCrewPositionName(ECrewPosition(n))))
+        if (toggleButton(sf::FloatRect(800, 150 + 50 * n, 300, 50), my_player_info->crewPosition[n], getCrewPositionName(ECrewPosition(n))))
         {
-            myPlayerInfo->setCrewPosition(ECrewPosition(n), !myPlayerInfo->crewPosition[n]);
+            my_player_info->setCrewPosition(ECrewPosition(n), !my_player_info->crewPosition[n]);
         }
         int cnt = 0;
-        foreach(PlayerInfo, i, playerInfoList)
+        foreach(PlayerInfo, i, player_info_list)
             if (i->crewPosition[n])
                 cnt++;
         text(sf::FloatRect(1100, 150 + 50 * n, 300, 50), string(cnt));
     }
 
-    if (mySpaceship)
+    if (gameServer)
     {
-        if (button(sf::FloatRect(800, 700, 300, 50), "Ready"))
+        if (button(sf::FloatRect(800, 800, 300, 50), "Launch vessel"))
         {
             destroy();
-            if (myPlayerInfo->isMainScreen())
+            if (game_global_info->findPlayerShip(my_spaceship) < 0)
+                game_global_info->insertPlayerShip(my_spaceship);
+            if (my_player_info->isMainScreen())
             {
                 new MainScreenUI();
             }else{
@@ -47,40 +48,21 @@ void ShipSelectionScreen::onGui()
             }
         }
     }
-    
-    for(int n=0; n<GameGlobalInfo::maxPlayerShips; n++)
+    for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
     {
-        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
-        if (ship && ship->shipTemplate)
+        if (game_global_info->getPlayerShip(n))
         {
-            if (toggleButton(sf::FloatRect(200 + (n / 8) * 300, 250 + (n % 8) * 50, 300, 50), mySpaceship == ship, ship->shipTemplate->name + " " + string(n)))
-                mySpaceship = ship;
-        }
-    }
-
-    if (gameServer)
-    {
-        if (button(sf::FloatRect(200, 700, 300, 50), "Spawn player ship"))
-        {
-            mySpaceship = new PlayerSpaceship();
-            mySpaceship->setShipTemplate("Player Cruiser");
-            mySpaceship->setRotation(random(0, 360));
-            mySpaceship->targetRotation = mySpaceship->getRotation();
-            mySpaceship->setPosition(sf::Vector2f(random(-10, 10), random(-10, 10)));
-            if (gameGlobalInfo->insertPlayerShip(mySpaceship) < 0)
+            if (button(sf::FloatRect(200, 300 + n * 50, 300, 50), "Join vessel " + string(n)))
             {
-                mySpaceship->destroy();
+                my_spaceship = game_global_info->getPlayerShip(n);
+                destroy();
+                if (my_player_info->isMainScreen())
+                {
+                    new MainScreenUI();
+                }else{
+                    new CrewUI();
+                }
             }
         }
-        
-        if (button(sf::FloatRect(1200, 150, 300, 50), "Game Master"))
-        {
-            mySpaceship = NULL;
-            destroy();
-            new GameMasterUI();
-        }
     }
-    
-    if (button(sf::FloatRect(1350, 830, 200, 50), "Quit game"))
-        engine->shutdown();
 }

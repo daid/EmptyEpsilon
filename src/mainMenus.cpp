@@ -9,12 +9,9 @@
 MainMenu::MainMenu()
 {
 }
-    
+
 void MainMenu::onGui()
 {
-    text(sf::FloatRect(0, 100, 1600, 300), "Empty", AlignCenter, 180);
-    text(sf::FloatRect(0, 250, 1600, 300), "Epsilon", AlignCenter, 200);
-    text(sf::FloatRect(0, 440, 1600, 100), "Version: " + string(VERSION_NUMBER), AlignCenter, 20);
     if (button(sf::FloatRect(50, 680, 300, 50), "Start server"))
     {
         new EpsilonServer();
@@ -46,7 +43,7 @@ void ServerBrowserMenu::onGui()
         if (button(sf::FloatRect(50, 50 + 30 * n, 500, 30), (selectionIndex == n ? "*" : "") + serverList[n].name + " (" + serverList[n].address.toString() + ")"))
             selectionIndex = n;
     }
-    
+
     if (button(sf::FloatRect(50, 800, 300, 50), "Back"))
     {
         destroy();
@@ -71,7 +68,7 @@ JoinServerScreen::JoinServerScreen()
 void JoinServerScreen::onGui()
 {
     text(sf::FloatRect(300, 300, 1000, 50), "Connecting...");
-    
+
     if (button(sf::FloatRect(50, 800, 300, 50), "Cancel") || !gameClient)
     {
         destroy();
@@ -81,10 +78,10 @@ void JoinServerScreen::onGui()
 
     if (gameClient->getClientId() > 0)
     {
-        foreach(PlayerInfo, i, playerInfoList)
-            if (i->clientId == gameClient->getClientId())
-                myPlayerInfo = i;
-        if (myPlayerInfo && gameGlobalInfo)
+        foreach(PlayerInfo, i, player_info_list)
+            if (i->client_id == gameClient->getClientId())
+                my_player_info = i;
+        if (my_player_info && game_global_info)
         {
             new ShipSelectionScreen();
             destroy();

@@ -4,25 +4,18 @@
 #include "mainUI.h"
 #include "playerInfo.h"
 #include "spaceship.h"
-#include "repairCrew.h"
 
 class CrewUI : public MainUI
 {
-    ECrewPosition showPosition;
-    EMissileWeapons tubeLoadType;
-    float jumpDistance;
-    P<RepairCrew> selected_crew;
-    
-    P<SpaceObject> scienceTarget;
-    float scienceRadarDistance;
+    ECrewPosition show_position;
+    EMissileWeapons tube_load_type;
+    float jump_distance;
 public:
     CrewUI();
-    
+
     virtual void onGui();
-    
+
     void helmsUI();
-    void weaponsUI();
-    void engineeringUI();
-    void scienceUI();
+    void tacticalUI();
 };
 #endif//CREW_UI_H

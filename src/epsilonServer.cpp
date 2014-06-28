@@ -2,8 +2,6 @@
 #include "playerInfo.h"
 #include "spaceObject.h"
 #include "spaceStation.h"
-#include "cpuShip.h"
-#include "mine.h"
 #include "main.h"
 
 EpsilonServer::EpsilonServer()
@@ -11,66 +9,47 @@ EpsilonServer::EpsilonServer()
 {
     new GameGlobalInfo();
     PlayerInfo* info = new PlayerInfo();
-    info->clientId = 0;
-    myPlayerInfo = info;
+    info->client_id = 0;
+    my_player_info = info;
     engine->setGameSpeed(0.0);
-    
-    soundManager.playMusic("music/Dream Raid Full Version (Mock Up).ogg");
-    
+
     //TMP
+    my_spaceship = new SpaceShip();
     randomNebulas();
-    P<SpaceStation> station = new SpaceStation();
-    station->setPosition(sf::Vector2f(0, -500));
-    
-    for(int n=0; n<10; n++)
-    {
-        P<CpuShip> s = new CpuShip();
-        if (random(0, 100) < 10)
-            s->setShipTemplate("Missile Cruiser");
-        else
-            s->setShipTemplate("Fighter");
-        s->setPosition(sf::vector2FromAngle(random(0, 360)) * random(7000, 20000));
-        s->orderRoaming();
-    }
-    for(int n=0; n<100; n++)
-    {
-        P<Mine> m = new Mine();
-        m->setPosition(sf::vector2FromAngle(random(0, 360)) * random(7000, 20000));
-    }
+    //for(int n=0; n<50;n++)
+    //    (new SpaceShip())->setPosition(sf::vector2FromAngle(0.0f) * (50.0f + n * 100.0f));
+    (new SpaceShip())->setPosition(sf::Vector2f(100, 100));
+    (new SpaceStation())->setPosition(sf::Vector2f(0, -500));
 }
 
-void EpsilonServer::onNewClient(int32_t clientId)
+void EpsilonServer::onNewClient(int32_t client_id)
 {
-    printf("New client: %i\n", clientId);
+    printf("New client: %i\n", client_id);
     PlayerInfo* info = new PlayerInfo();
-    info->clientId = clientId;
+    info->client_id = client_id;
 }
 
-void EpsilonServer::onDisconnectClient(int32_t clientId)
+void EpsilonServer::onDisconnectClient(int32_t client_id)
 {
-    printf("Client left: %i\n", clientId);
-    foreach(PlayerInfo, i, playerInfoList)
-        if (i->clientId == clientId)
+    printf("Client left: %i\n", client_id);
+    foreach(PlayerInfo, i, player_info_list)
+        if (i->client_id == client_id)
             i->destroy();
-    playerInfoList.update();
+    player_info_list.update();
 }
 
 void disconnectFromServer()
 {
-    soundManager.stopMusic();
-
     if (gameClient)
         gameClient->destroy();
-    if (gameServer)
-        gameServer->destroy();
-    if (gameGlobalInfo)
-        gameGlobalInfo->destroy();
-    foreach(PlayerInfo, i, playerInfoList)
+    if (game_global_info)
+        game_global_info->destroy();
+    foreach(PlayerInfo, i, player_info_list)
         i->destroy();
     foreach(GameEntity, e, entityList)
         e->destroy();
-    foreach(SpaceObject, o, spaceObjectList)
+    foreach(SpaceObject, o, space_object_list)
         o->destroy();
-    if (myPlayerInfo)
-        myPlayerInfo->destroy();
+    if (my_player_info)
+        my_player_info->destroy();
 }

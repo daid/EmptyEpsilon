@@ -2,54 +2,54 @@
 
 static const int16_t CMD_UPDATE_CREW_POSITION = 0x0001;
 
-P<GameGlobalInfo> gameGlobalInfo;
-P<PlayerInfo> myPlayerInfo;
-P<PlayerSpaceship> mySpaceship;
-PVector<PlayerInfo> playerInfoList;
+P<GameGlobalInfo> game_global_info;
+P<PlayerInfo> my_player_info;
+P<SpaceShip> my_spaceship;
+PVector<PlayerInfo> player_info_list;
 
 REGISTER_MULTIPLAYER_CLASS(GameGlobalInfo, "GameGlobalInfo")
 GameGlobalInfo::GameGlobalInfo()
 : MultiplayerObject("GameGlobalInfo")
 {
-    assert(!gameGlobalInfo);
-    
-    gameGlobalInfo = this;
-    for(int n=0; n<maxPlayerShips; n++)
+    assert(!game_global_info);
+
+    game_global_info = this;
+    for(int n=0; n<max_player_ships; n++)
     {
-        playerShipId[n] = -1;
-        registerMemberReplication(&playerShipId[n]);
+        player_ship_id[n] = -1;
+        registerMemberReplication(&player_ship_id[n]);
     }
 }
 
-P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)
+P<SpaceShip> GameGlobalInfo::getPlayerShip(int index)
 {
-    assert(index >= 0 && index < maxPlayerShips);
+    assert(index >= 0 && index < max_player_ships);
     if (gameServer)
-        return gameServer->getObjectById(playerShipId[index]);
-    return gameClient->getObjectById(playerShipId[index]);
+        return gameServer->getObjectById(player_ship_id[index]);
+    return gameClient->getObjectById(player_ship_id[index]);
 }
 
-void GameGlobalInfo::setPlayerShip(int index, P<PlayerSpaceship> ship)
+void GameGlobalInfo::setPlayerShip(int index, P<SpaceShip> ship)
 {
-    assert(index >= 0 && index < maxPlayerShips);
+    assert(index >= 0 && index < max_player_ships);
     assert(gameServer);
-    
+
     if (ship)
-        playerShipId[index] = ship->getMultiplayerId();
+        player_ship_id[index] = ship->getMultiplayerId();
     else
-        playerShipId[index] = -1;
+        player_ship_id[index] = -1;
 }
 
-int GameGlobalInfo::findPlayerShip(P<PlayerSpaceship> ship)
+int GameGlobalInfo::findPlayerShip(P<SpaceShip> ship)
 {
-    for(int n=0; n<maxPlayerShips; n++)
+    for(int n=0; n<max_player_ships; n++)
         if (getPlayerShip(n) == ship)
             return n;
     return -1;
 }
-int GameGlobalInfo::insertPlayerShip(P<PlayerSpaceship> ship)
+int GameGlobalInfo::insertPlayerShip(P<SpaceShip> ship)
 {
-    for(int n=0; n<maxPlayerShips; n++)
+    for(int n=0; n<max_player_ships; n++)
     {
         if (!getPlayerShip(n))
         {
@@ -57,6 +57,7 @@ int GameGlobalInfo::insertPlayerShip(P<PlayerSpaceship> ship)
             return n;
         }
     }
+    printf("Unable to insert ship?!?\n");
     return -1;
 }
 
@@ -65,30 +66,30 @@ REGISTER_MULTIPLAYER_CLASS(PlayerInfo, "PlayerInfo");
 PlayerInfo::PlayerInfo()
 : MultiplayerObject("PlayerInfo")
 {
-    clientId = -1;
-    registerMemberReplication(&clientId);
+    client_id = -1;
+    registerMemberReplication(&client_id);
 
-    for(int n=0; n<maxCrewPositions; n++)
+    for(int n=0; n<max_crew_positions; n++)
     {
         crewPosition[n] = false;
         registerMemberReplication(&crewPosition[n]);
     }
-    
-    playerInfoList.push_back(this);
+
+    player_info_list.push_back(this);
 }
 
 void PlayerInfo::setCrewPosition(ECrewPosition position, bool active)
 {
     //crewPosition[position] = active;
-    
+
     sf::Packet packet;
     packet << CMD_UPDATE_CREW_POSITION << int32_t(position) << active;
     sendCommand(packet);
 }
 
-void PlayerInfo::onReceiveCommand(int32_t clientId, sf::Packet& packet)
+void PlayerInfo::onReceiveCommand(int32_t client_id, sf::Packet& packet)
 {
-    if (clientId != this->clientId) return;
+    if (client_id != this->client_id) return;
     int16_t command;
     packet >> command;
     switch(command)
@@ -106,7 +107,7 @@ void PlayerInfo::onReceiveCommand(int32_t clientId, sf::Packet& packet)
 
 bool PlayerInfo::isMainScreen()
 {
-    for(int n=0; n<maxCrewPositions; n++)
+    for(int n=0; n<max_crew_positions; n++)
         if (crewPosition[n])
             return false;
     return true;
@@ -117,7 +118,7 @@ string getCrewPositionName(ECrewPosition position)
     switch(position)
     {
     case helmsOfficer: return "Helms";
-    case weaponsOfficer: return "Weapons";
+    case tacticalOfficer: return "Tactical";
     case engineering: return "Engineering";
     case scienceOfficer: return "Science";
     case commsOfficer: return "Comms";
