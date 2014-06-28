@@ -13,31 +13,37 @@ enum EAlign
 class GUI: public Renderable
 {
     static sf::RenderTarget* renderTarget;
-    static sf::Vector2f mouse_position;
-    static int mouse_click;
-    static int mouse_down;
+    static sf::Vector2f mousePosition;
+    static int mouseClick;
+    static int mouseDown;
     bool init;
 public:
     GUI();
-
+    
     virtual void render(sf::RenderTarget& window);
-
+    
     virtual void onGui() = 0;
 
-    static void text(sf::FloatRect rect, string text, EAlign align = AlignLeft, float textSize = 30);
+    static void text(sf::FloatRect rect, string text, EAlign align = AlignLeft, float textSize = 30, sf::Color color=sf::Color::White);
+    static void vtext(sf::FloatRect rect, string text, EAlign align = AlignLeft, float textSize = 30, sf::Color color=sf::Color::White);
+    static void progressBar(sf::FloatRect rect, float value, float min_value = 0.0, float max_value = 1.0, sf::Color color=sf::Color::White);
+    static void vprogressBar(sf::FloatRect rect, float value, float min_value = 0.0, float max_value = 1.0, sf::Color color=sf::Color::White);
     static bool button(sf::FloatRect rect, string text, float textSize = 30);
     static bool toggleButton(sf::FloatRect rect, bool active, string textValue, float fontSize = 30);
-    static float vslider(sf::FloatRect rect, float value, float minValue, float maxValue);
+    static float vslider(sf::FloatRect rect, float value, float minValue, float maxValue, float normalValue = 0.0);
     static sf::RenderTarget* getRenderTarget() { return renderTarget; }
+
+private:
+    static void draw9Cut(sf::FloatRect rect, string texture, sf::Color color=sf::Color::White);
 };
 
 class MouseRenderer : public Renderable
 {
 public:
     bool visible;
-
+    
     MouseRenderer();
-
+    
     virtual void render(sf::RenderTarget& window);
 };
 

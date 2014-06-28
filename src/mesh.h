@@ -13,15 +13,16 @@ public:
 
 class Mesh : public sf::NonCopyable
 {
-    int vertex_count;
+    int vertexCount;
     MeshVertex* vertices;
     int16_t* indices;
 
     Mesh();
 public:
     ~Mesh();
-
+    
     void render();
+    sf::Vector3f randomPoint();
 
     static Mesh* getMesh(string filename);
 };

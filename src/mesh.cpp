@@ -9,7 +9,7 @@ Mesh::Mesh()
 {
     vertices = NULL;
     indices = NULL;
-    vertex_count = 0;
+    vertexCount = 0;
 }
 
 Mesh::~Mesh()
@@ -20,15 +20,30 @@ Mesh::~Mesh()
 
 void Mesh::render()
 {
-    glColor3f(1,1,1);
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_NORMAL_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    glDisableClientState(GL_COLOR_ARRAY);
+    glVertexPointer(3, GL_FLOAT, sizeof(float) * (3 * 2 + 2), &vertices[0].position[0]);
+    glNormalPointer(GL_FLOAT, sizeof(float) * (3 * 2 + 2), &vertices[0].normal[0]);
+    glTexCoordPointer(2, GL_FLOAT, sizeof(float) * (3 * 2 + 2), &vertices[0].uv[0]);
+    glDrawArrays(GL_TRIANGLES, 0, vertexCount);
+    /*
     glBegin(GL_TRIANGLES);
-    for(int n=0; n<vertex_count; n++)
+    for(int n=0; n<vertexCount; n++)
     {
         glTexCoord2f(vertices[n].uv[0], vertices[n].uv[1]);
         glNormal3f(vertices[n].normal[0], vertices[n].normal[1], vertices[n].normal[2]);
         glVertex3f(vertices[n].position[0], vertices[n].position[1], vertices[n].position[2]);
     }
     glEnd();
+    */
+}
+
+sf::Vector3f Mesh::randomPoint()
+{
+    int idx = irandom(0, vertexCount-1);
+    return sf::Vector3f(vertices[idx].position[0], vertices[idx].position[1], vertices[idx].position[2]);
 }
 
 struct IndexInfo
@@ -47,12 +62,12 @@ Mesh* Mesh::getMesh(string filename)
     P<ResourceStream> stream = getResourceStream(filename);
     if (!stream)
         return NULL;
-
+    
     std::vector<sf::Vector3f> vertices;
     std::vector<sf::Vector3f> normals;
     std::vector<sf::Vector2f> texCoords;
     std::vector<IndexInfo> indices;
-
+    
     ret = new Mesh();
     do
     {
@@ -76,7 +91,7 @@ Mesh* Mesh::getMesh(string filename)
                     std::vector<string> p0 = parts[1].split("/");
                     std::vector<string> p1 = parts[n].split("/");
                     std::vector<string> p2 = parts[n-1].split("/");
-
+                    
                     IndexInfo info;
                     info.v = p0[0].toInt() - 1;
                     info.t = p0[1].toInt() - 1;
@@ -94,9 +109,9 @@ Mesh* Mesh::getMesh(string filename)
             }else{
                 //printf("%s\n", parts[0].c_str());
             }
-        }
+        } 
     }while(stream->tell() < stream->getSize());
-    ret->vertex_count = indices.size();
+    ret->vertexCount = indices.size();
     ret->vertices = new MeshVertex[indices.size()];
     for(unsigned int n=0; n<indices.size(); n++)
     {
@@ -109,7 +124,7 @@ Mesh* Mesh::getMesh(string filename)
         ret->vertices[n].uv[0] = texCoords[indices[n].t].x;
         ret->vertices[n].uv[1] = 1.0 - texCoords[indices[n].t].y;
     }
-
+    
     meshMap[filename] = ret;
     return ret;
 }
