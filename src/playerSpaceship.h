@@ -50,6 +50,8 @@ public:
     void commandScan(P<SpaceObject> object);
     void commandSetSystemPower(ESystem system, float power_level);
     void commandSetSystemCoolant(ESystem system, float coolant_level);
+    void commandDock(P<SpaceStation> station);
+    void commandUndock();
     
     virtual void executeJump(float distance);
     virtual void fireBeamWeapon(int index, P<SpaceObject> target);

@@ -41,6 +41,7 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     scanned_by_player = false;
     beamRechargeFactor = 1.0;
     tubeRechargeFactor = 1.0;
+    docking_state = DS_NotDocking;
     
     registerMemberReplication(&targetRotation);
     registerMemberReplication(&impulseRequest);
@@ -64,6 +65,7 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     registerMemberReplication(&front_shield_hit_effect, 0.5);
     registerMemberReplication(&rear_shield_hit_effect, 0.5);
     registerMemberReplication(&scanned_by_player);
+    registerMemberReplication(&docking_state);
     
     for(int n=0; n<maxBeamWeapons; n++)
     {
@@ -232,6 +234,26 @@ void SpaceShip::update(float delta)
         shipTemplate = ShipTemplate::getTemplate(templateName);
         setRadius(shipTemplate->radius);
     }
+    
+    if (docking_state == DS_Docking)
+    {
+        if (!docking_target)
+            docking_state = DS_NotDocking;
+        else
+            targetRotation = sf::vector2ToAngle(getPosition() - docking_target->getPosition());
+        if (fabs(sf::angleDifference(targetRotation, getRotation())) < 10.0)
+            impulseRequest = -1.0;
+        else
+            impulseRequest = 0.0;
+    }
+    if (docking_state == DS_Docked)
+    {
+        if (!docking_target)
+            docking_state = DS_NotDocking;
+        else
+            targetRotation = sf::vector2ToAngle(getPosition() - docking_target->getPosition());
+        impulseRequest = 0.0;
+    }
 
     if (front_shield < front_shield_max)
     {
@@ -321,7 +343,7 @@ void SpaceShip::update(float delta)
     }
     
     P<SpaceObject> target = getTarget();
-    if (gameServer && target && delta > 0) // Only fire beam weapons if we are on the server, have a target, and are not paused.
+    if (gameServer && target && delta > 0 && docking_state == DS_NotDocking) // Only fire beam weapons if we are on the server, have a target, and are not paused.
     {
         sf::Vector2f diff = target->getPosition() - getPosition();
         float distance = sf::length(diff);
@@ -387,6 +409,16 @@ void SpaceShip::fireBeamWeapon(int index, P<SpaceObject> target)
     target->takeDamage(beamWeapons[index].damage, hitLocation, DT_Energy);
 }
 
+void SpaceShip::collision(Collisionable* other)
+{
+    if (docking_state == DS_Docking)
+    {
+        P<SpaceStation> station = P<Collisionable>(other);
+        if (station == docking_target)
+            docking_state = DS_Docked;
+    }
+}
+
 void SpaceShip::loadTube(int tubeNr, EMissileWeapons type)
 {
     if (tubeNr >= 0 && tubeNr < maxWeaponTubes && type > MW_None && type < MW_Count)
@@ -403,63 +435,84 @@ void SpaceShip::loadTube(int tubeNr, EMissileWeapons type)
 
 void SpaceShip::fireTube(int tubeNr)
 {
-    if (tubeNr >= 0 && tubeNr < maxWeaponTubes && weaponTube[tubeNr].state == WTS_Loaded)
+    if (docking_state != DS_NotDocking) return;
+    if (tubeNr < 0 || tubeNr >= maxWeaponTubes) return;
+    if (weaponTube[tubeNr].state != WTS_Loaded) return;
+
+    sf::Vector2f fireLocation = getPosition() + sf::rotateVector(shipTemplate->tubePosition[tubeNr], getRotation()) * shipTemplate->scale;
+    switch(weaponTube[tubeNr].typeLoaded)
     {
-        sf::Vector2f fireLocation = getPosition() + sf::rotateVector(shipTemplate->tubePosition[tubeNr], getRotation()) * shipTemplate->scale;
-        switch(weaponTube[tubeNr].typeLoaded)
+    case MW_Homing:
         {
-        case MW_Homing:
-            {
-                P<HomingMissile> missile = new HomingMissile();
-                missile->owner = this;
-                missile->target_id = targetId;
-                missile->setPosition(fireLocation);
-                missile->setRotation(getRotation());
-            }
-            break;
-        case MW_Nuke:
-            {
-                P<Nuke> missile = new Nuke();
-                missile->owner = this;
-                missile->target_id = targetId;
-                missile->setPosition(fireLocation);
-                missile->setRotation(getRotation());
-            }
-            break;
-        case MW_Mine:
-            {
-                P<Mine> missile = new Mine();
-                missile->setPosition(fireLocation);
-                missile->setRotation(getRotation());
-                missile->eject();
-            }
-            break;
-        case MW_EMP:
-            {
-                P<EMPMissile> missile = new EMPMissile();
-                missile->owner = this;
-                missile->target_id = targetId;
-                missile->setPosition(fireLocation);
-                missile->setRotation(getRotation());
-            }
-            break;
-        default:
-            break;
+            P<HomingMissile> missile = new HomingMissile();
+            missile->owner = this;
+            missile->target_id = targetId;
+            missile->setPosition(fireLocation);
+            missile->setRotation(getRotation());
         }
-        weaponTube[tubeNr].state = WTS_Empty;
-        weaponTube[tubeNr].typeLoaded = MW_None;
+        break;
+    case MW_Nuke:
+        {
+            P<Nuke> missile = new Nuke();
+            missile->owner = this;
+            missile->target_id = targetId;
+            missile->setPosition(fireLocation);
+            missile->setRotation(getRotation());
+        }
+        break;
+    case MW_Mine:
+        {
+            P<Mine> missile = new Mine();
+            missile->setPosition(fireLocation);
+            missile->setRotation(getRotation());
+            missile->eject();
+        }
+        break;
+    case MW_EMP:
+        {
+            P<EMPMissile> missile = new EMPMissile();
+            missile->owner = this;
+            missile->target_id = targetId;
+            missile->setPosition(fireLocation);
+            missile->setRotation(getRotation());
+        }
+        break;
+    default:
+        break;
     }
+    weaponTube[tubeNr].state = WTS_Empty;
+    weaponTube[tubeNr].typeLoaded = MW_None;
 }
 
 void SpaceShip::initJump(float distance)
 {
+    if (docking_state != DS_NotDocking) return;
     if (jumpDelay <= 0.0)
     {
         jumpDistance = distance;
         jumpDelay = 10.0;
     }
 }
-            
+
+void SpaceShip::requestDock(P<SpaceStation> target)
+{
+    if (!target || docking_state != DS_NotDocking)
+        return;
+    if (sf::length(getPosition() - target->getPosition()) > 1000)
+        return;
+    
+    docking_state = DS_Docking;
+    docking_target = target;
+}
+void SpaceShip::requestUndock()
+{
+    if (docking_state == DS_Docked)
+    {
+        docking_state = DS_NotDocking;
+        impulseRequest = 0.5;
+    }
+}
+
 void SpaceShip::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type)
 {
     if (shields_active)

@@ -16,6 +16,8 @@ static const int16_t CMD_SET_MAIN_SCREEN_SETTING = 0x000A;
 static const int16_t CMD_SCAN_OBJECT = 0x000B;
 static const int16_t CMD_SET_SYSTEM_POWER = 0x000C;
 static const int16_t CMD_SET_SYSTEM_COOLANT = 0x000D;
+static const int16_t CMD_DOCK = 0x000E;
+static const int16_t CMD_UNDOCK = 0x000F;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -79,6 +81,11 @@ void PlayerSpaceship::update(float delta)
         hull_damage_indicator -= delta;
     if (warp_indicator > 0)
         warp_indicator -= delta;
+    
+    if (docking_state == DS_Docked)
+    {
+        energy_level += delta * 10.0;
+    }
 
     if (gameServer)
     {
@@ -316,6 +323,16 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
                 setSystemCoolant(system, level);
         }
         break;
+    case CMD_DOCK:
+        {
+            int32_t id;
+            packet >> id;
+            requestDock(gameServer->getObjectById(id));
+        }
+        break;
+    case CMD_UNDOCK:
+        requestUndock();
+        break;
     }
 }
 
@@ -410,5 +427,20 @@ void PlayerSpaceship::commandSetSystemCoolant(ESystem system, float coolant_leve
 {
     sf::Packet packet;
     packet << CMD_SET_SYSTEM_COOLANT << system << coolant_level;
+    sendCommand(packet);
+}
+
+void PlayerSpaceship::commandDock(P<SpaceStation> station)
+{
+    if (!station) return;
+    sf::Packet packet;
+    packet << CMD_DOCK << station->getMultiplayerId();
+    sendCommand(packet);
+}
+
+void PlayerSpaceship::commandUndock()
+{
+    sf::Packet packet;
+    packet << CMD_UNDOCK;
     sendCommand(packet);
 }

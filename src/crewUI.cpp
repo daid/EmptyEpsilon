@@ -136,23 +136,39 @@ void CrewUI::helmsUI()
         }
         x += 80;
     }
-    
-    PVector<Collisionable> obj_list = CollisionManager::queryArea(mySpaceship->getPosition() - sf::Vector2f(1000, 1000), mySpaceship->getPosition() + sf::Vector2f(1000, 1000));
-    bool near_station = false;
-    foreach(Collisionable, obj, obj_list)
+
+    switch(mySpaceship->docking_state)
     {
-        P<SpaceStation> station = obj;
-        if (station && sf::length(station->getPosition() - mySpaceship->getPosition()) < 1000.0)
+    case DS_NotDocking:
         {
-            near_station = true;
-            break;
+            PVector<Collisionable> obj_list = CollisionManager::queryArea(mySpaceship->getPosition() - sf::Vector2f(1000, 1000), mySpaceship->getPosition() + sf::Vector2f(1000, 1000));
+            P<SpaceStation> station;
+            foreach(Collisionable, obj, obj_list)
+            {
+                station = obj;
+                if (station && sf::length(station->getPosition() - mySpaceship->getPosition()) < 1000.0)
+                {
+                    break;
+                }
+            }
+            
+            if (station)
+            {
+                if (button(sf::FloatRect(x, 800, 280, 50), "Request Dock", 30))
+                    mySpaceship->commandDock(station);
+            }else{
+                disabledButton(sf::FloatRect(x, 800, 280, 50), "Request Dock", 30);
+            }
         }
+        break;
+    case DS_Docking:
+        disabledButton(sf::FloatRect(x, 800, 280, 50), "Docking...", 30);
+        break;
+    case DS_Docked:
+        if (button(sf::FloatRect(x, 800, 280, 50), "Undock", 30))
+            mySpaceship->commandUndock();
+        break;
     }
-    
-    if (near_station)
-        button(sf::FloatRect(x, 800, 280, 50), "Request Dock", 30);
-    else
-        disabledButton(sf::FloatRect(x, 800, 280, 50), "Request Dock", 30);
 }
 
 void CrewUI::weaponsUI()

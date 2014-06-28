@@ -4,6 +4,7 @@
 #include "engine.h"
 #include "spaceObject.h"
 #include "shipTemplate.h"
+#include "spaceStation.h"
 
 enum EWeaponTubeState
 {
@@ -20,6 +21,12 @@ enum EMainScreenSetting
     MSS_Right,
     MSS_Tactical,
     MSS_LongRange
+};
+enum EDockingState
+{
+    DS_NotDocking,
+    DS_Docking,
+    DS_Docked
 };
 
 class BeamWeapon : public sf::NonCopyable
@@ -86,6 +93,9 @@ public:
     int32_t targetId;
     
     bool scanned_by_player;
+    
+    EDockingState docking_state;
+    P<SpaceStation> docking_target; //Server only
 
     SpaceShip(string multiplayerClassName);
     
@@ -100,10 +110,13 @@ public:
     virtual void hullDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type);
     virtual void executeJump(float distance);
     virtual void fireBeamWeapon(int index, P<SpaceObject> target);
+    virtual void collision(Collisionable* other);
     
     void loadTube(int tubeNr, EMissileWeapons type);
     void fireTube(int tubeNr);
     void initJump(float distance);
+    void requestDock(P<SpaceStation> target);
+    void requestUndock();
     
     bool hasSystem(ESystem system);
     
@@ -116,5 +129,6 @@ string getMissileWeaponName(EMissileWeapons missile);
 REGISTER_MULTIPLAYER_ENUM(EMissileWeapons);
 REGISTER_MULTIPLAYER_ENUM(EWeaponTubeState);
 REGISTER_MULTIPLAYER_ENUM(EMainScreenSetting);
+REGISTER_MULTIPLAYER_ENUM(EDockingState);
 
 #endif//SPACE_SHIP_H
