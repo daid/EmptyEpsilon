@@ -189,6 +189,7 @@ void MainUI::drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESystem
     if (!ship || !ship->shipTemplate) return;
     sf::RenderTarget& window = *getRenderTarget();
     P<ShipTemplate> st = ship->shipTemplate;
+    P<PlayerSpaceship> playerSpaceship = ship;
     
     const float room_size = 48.0f;
     for(unsigned int n=0; n<st->rooms.size(); n++)
@@ -196,8 +197,18 @@ void MainUI::drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESystem
         sf::RectangleShape room(sf::Vector2f(st->rooms[n].size) * room_size - sf::Vector2f(4, 4));
         room.setPosition(position + sf::Vector2f(st->rooms[n].position) * room_size + sf::Vector2f(4, 4));
         room.setFillColor(sf::Color(96, 96, 96, 255));
-        if (st->rooms[n].system == highlight_system && highlight_system != SYS_None)
-            room.setFillColor(sf::Color(128, 128, 32, 255));
+        if (st->rooms[n].system != SYS_None)
+        {
+            float f = 1.0;
+            if (playerSpaceship)
+                f = playerSpaceship->systems[st->rooms[n].system].health;
+            if (st->rooms[n].system == highlight_system)
+            {
+                room.setFillColor(sf::Color(127 + 128 * (1.0 - f), 128 * f, 32 * f, 255));
+            }else{
+                room.setFillColor(sf::Color(96 + 128 * (1.0 - f), 96 * f, 96 * f, 255));
+            }
+        }
         room.setOutlineColor(sf::Color(192, 192, 192, 255));
         room.setOutlineThickness(4.0);
         window.draw(room);
