@@ -32,6 +32,8 @@ public:
     static void disabledButton(sf::FloatRect rect, string text, float textSize = 30);
     static bool toggleButton(sf::FloatRect rect, bool active, string textValue, float fontSize = 30);
     static float vslider(sf::FloatRect rect, float value, float minValue, float maxValue, float normalValue = 0.0);
+    static string textEntry(sf::FloatRect rect, string value, float fontSize = 30);
+
     static sf::RenderTarget* getRenderTarget() { return renderTarget; }
 
 private:

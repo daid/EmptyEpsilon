@@ -59,17 +59,17 @@ void MainUI::onGui()
 
 void MainUI::mainScreenSelectGUI()
 {
-    if (button(sf::FloatRect(1400, 40, 200, 40), "Front", 30))
+    if (button(sf::FloatRect(1400, 40, 200, 40), "Front", 28))
         mySpaceship->commandMainScreenSetting(MSS_Front);
-    if (button(sf::FloatRect(1400, 80, 200, 40), "Back", 30))
+    if (button(sf::FloatRect(1400, 80, 200, 40), "Back", 28))
         mySpaceship->commandMainScreenSetting(MSS_Back);
-    if (button(sf::FloatRect(1400, 120, 200, 40), "Left", 30))
+    if (button(sf::FloatRect(1400, 120, 200, 40), "Left", 28))
         mySpaceship->commandMainScreenSetting(MSS_Left);
-    if (button(sf::FloatRect(1400, 160, 200, 40), "Right", 30))
+    if (button(sf::FloatRect(1400, 160, 200, 40), "Right", 28))
         mySpaceship->commandMainScreenSetting(MSS_Right);
-    if (button(sf::FloatRect(1400, 200, 200, 40), "Tactical", 30))
+    if (button(sf::FloatRect(1400, 200, 200, 40), "Tactical", 28))
         mySpaceship->commandMainScreenSetting(MSS_Tactical);
-    if (button(sf::FloatRect(1400, 240, 200, 40), "Long-Range", 30))
+    if (button(sf::FloatRect(1400, 240, 200, 40), "Long-Range", 28))
         mySpaceship->commandMainScreenSetting(MSS_LongRange);
 }
 
@@ -215,8 +215,37 @@ void MainUI::drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESystem
         if (st->rooms[n].system != SYS_None && ship->hasSystem(ESystem(n)))
         {
             sf::Sprite sprite;
-            textureManager.setTexture(sprite, "redicule.png");
-            sprite.setScale(0.7, 0.7);
+            switch(st->rooms[n].system)
+            {
+            case SYS_Reactor:
+                textureManager.setTexture(sprite, "icon_generator.png");
+                break;
+            case SYS_BeamWeapons:
+                textureManager.setTexture(sprite, "icon_beam.png");
+                break;
+            case SYS_MissileSystem:
+                textureManager.setTexture(sprite, "icon_missile.png");
+                break;
+            case SYS_Maneuver:
+                textureManager.setTexture(sprite, "icon_maneuver.png");
+                break;
+            case SYS_Impulse:
+                textureManager.setTexture(sprite, "icon_impulse.png");
+                break;
+            case SYS_Warp:
+            case SYS_JumpDrive:
+                textureManager.setTexture(sprite, "icon_warp.png");
+                break;
+            case SYS_FrontShield:
+                textureManager.setTexture(sprite, "icon_front_shield.png");
+                break;
+            case SYS_RearShield:
+                textureManager.setTexture(sprite, "icon_rear_shield.png");
+                break;
+            default:
+                textureManager.setTexture(sprite, "particle.png");
+                break;
+            }
             sprite.setPosition(position + sf::Vector2f(st->rooms[n].position) * room_size + sf::Vector2f(st->rooms[n].size) * room_size / 2.0f + sf::Vector2f(2, 2));
             window.draw(sprite);
         }

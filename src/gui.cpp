@@ -38,16 +38,17 @@ void GUI::render(sf::RenderTarget& window)
 void GUI::text(sf::FloatRect rect, string text, EAlign align, float fontSize, sf::Color color)
 {
     sf::Text textElement(text, mainFont, fontSize);
+    float y = rect.top + rect.height / 2.0 - (textElement.getLocalBounds().height + textElement.getLocalBounds().top) / 2.0 - fontSize / 8.0;
     switch(align)
     {
     case AlignLeft:
-        textElement.setPosition(rect.left - textElement.getLocalBounds().left, rect.top + rect.height / 2.0 - textElement.getLocalBounds().height / 2.0 - textElement.getLocalBounds().top);
+        textElement.setPosition(rect.left - textElement.getLocalBounds().left, y);
         break;
     case AlignRight:
-        textElement.setPosition(rect.left + rect.width - textElement.getLocalBounds().width - textElement.getLocalBounds().left, rect.top + rect.height / 2.0 - textElement.getLocalBounds().height / 2.0 - textElement.getLocalBounds().top);
+        textElement.setPosition(rect.left + rect.width - textElement.getLocalBounds().width - textElement.getLocalBounds().left, y);
         break;
     case AlignCenter:
-        textElement.setPosition(rect.left + rect.width / 2.0 - textElement.getLocalBounds().width / 2.0 - textElement.getLocalBounds().left, rect.top + rect.height / 2.0 - textElement.getLocalBounds().height / 2.0 - textElement.getLocalBounds().top);
+        textElement.setPosition(rect.left + rect.width / 2.0 - textElement.getLocalBounds().width / 2.0 - textElement.getLocalBounds().left, y);
         break;
     }
     textElement.setColor(color);
@@ -189,6 +190,17 @@ float GUI::vslider(sf::FloatRect rect, float value, float minValue, float maxVal
         }
     }
 
+    return value;
+}
+
+string GUI::textEntry(sf::FloatRect rect, string value, float fontSize)
+{
+    draw9Cut(rect, "button_background", sf::Color(192,192,192,255));
+    text(sf::FloatRect(rect.left + 16, rect.top, rect.width, rect.height), value + "_", AlignLeft, fontSize, sf::Color::Black);
+    
+    if (InputHandler::keyboardIsPressed(sf::Keyboard::BackSpace) && value.length() > 0)
+        value = value.substr(0, -1);
+    value += InputHandler::getKeyboardTextEntry();
     return value;
 }
 

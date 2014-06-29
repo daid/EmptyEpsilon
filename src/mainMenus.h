@@ -13,18 +13,23 @@ public:
 
 class ServerBrowserMenu : public GUI
 {
+    string manual_ip;
+    
     P<ServerScanner> scanner;
     unsigned int selectionIndex;
 public:
     ServerBrowserMenu();
+    virtual ~ServerBrowserMenu();
     
     virtual void onGui();
 };
 
 class JoinServerScreen : public GUI
 {
+    sf::IpAddress ip;
+    int connect_delay;
 public:
-    JoinServerScreen();
+    JoinServerScreen(sf::IpAddress ip);
 
     virtual void onGui();
 };

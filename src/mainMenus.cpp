@@ -14,7 +14,8 @@ void MainMenu::onGui()
 {
     text(sf::FloatRect(0, 100, 1600, 300), "Empty", AlignCenter, 180);
     text(sf::FloatRect(0, 250, 1600, 300), "Epsilon", AlignCenter, 200);
-    text(sf::FloatRect(0, 440, 1600, 100), "Version: " + string(VERSION_NUMBER), AlignCenter, 20);
+    text(sf::FloatRect(0, 480, 1600, 100), "Version: " + string(VERSION_NUMBER), AlignCenter, 20);
+    
     if (button(sf::FloatRect(50, 680, 300, 50), "Start server"))
     {
         new EpsilonServer();
@@ -36,6 +37,12 @@ ServerBrowserMenu::ServerBrowserMenu()
 {
     scanner = new ServerScanner(VERSION_NUMBER);
     selectionIndex = 0;
+    manual_ip = sf::IpAddress::getLocalAddress().toString();
+}
+
+ServerBrowserMenu::~ServerBrowserMenu()
+{
+    scanner->destroy();
 }
 
 void ServerBrowserMenu::onGui()
@@ -43,7 +50,7 @@ void ServerBrowserMenu::onGui()
     std::vector<ServerScanner::ServerInfo> serverList = scanner->getServerList();
     for(unsigned int n=0; n<serverList.size(); n++)
     {
-        if (button(sf::FloatRect(50, 50 + 30 * n, 500, 30), (selectionIndex == n ? "*" : "") + serverList[n].name + " (" + serverList[n].address.toString() + ")"))
+        if (toggleButton(sf::FloatRect(50, 50 + 35 * n, 700, 35), selectionIndex == n, serverList[n].name + " (" + serverList[n].address.toString() + ")"))
             selectionIndex = n;
     }
     
@@ -52,42 +59,65 @@ void ServerBrowserMenu::onGui()
         destroy();
         new MainMenu();
     }
-    if (button(sf::FloatRect(450, 800, 300, 50), "Join"))
+    
+    if (selectionIndex < serverList.size())
     {
-        if (selectionIndex < serverList.size())
+        if (button(sf::FloatRect(450, 800, 300, 50), "Join"))
         {
-            sf::IpAddress ip = serverList[selectionIndex].address;
+            new JoinServerScreen(serverList[selectionIndex].address);
             destroy();
-            new GameClient(ip);
-            new JoinServerScreen();
         }
+    }else{
+        disabledButton(sf::FloatRect(450, 800, 300, 50), "Join");
+    }
+
+    manual_ip = textEntry(sf::FloatRect(1250, 740, 300, 50), manual_ip);
+    if (button(sf::FloatRect(1250, 800, 300, 50), "Connect"))
+    {
+            new JoinServerScreen(sf::IpAddress(manual_ip));
+            destroy();
     }
 }
 
-JoinServerScreen::JoinServerScreen()
+JoinServerScreen::JoinServerScreen(sf::IpAddress ip)
+: ip(ip)
 {
+    connect_delay = 2;
 }
 
 void JoinServerScreen::onGui()
 {
     text(sf::FloatRect(300, 300, 1000, 50), "Connecting...");
     
-    if (button(sf::FloatRect(50, 800, 300, 50), "Cancel") || !gameClient)
+    if (button(sf::FloatRect(50, 800, 300, 50), "Cancel"))
     {
         destroy();
         disconnectFromServer();
         new ServerBrowserMenu();
+        return;
     }
-
-    if (gameClient->getClientId() > 0)
+    
+    if (connect_delay > 0)
     {
-        foreach(PlayerInfo, i, playerInfoList)
-            if (i->clientId == gameClient->getClientId())
-                myPlayerInfo = i;
-        if (myPlayerInfo && gameGlobalInfo)
+        connect_delay--;
+        if (!connect_delay)
+            new GameClient(ip);
+    }else{
+        if (!gameClient)
         {
-            new ShipSelectionScreen();
             destroy();
+            disconnectFromServer();
+            new ServerBrowserMenu();
+        }else if (gameClient->getClientId() > 0)
+        {
+            foreach(PlayerInfo, i, playerInfoList)
+                if (i->clientId == gameClient->getClientId())
+                    myPlayerInfo = i;
+            if (myPlayerInfo && gameGlobalInfo)
+            {
+                new ShipSelectionScreen();
+                destroy();
+            }
         }
     }
 }
