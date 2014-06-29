@@ -145,7 +145,7 @@ bool GUI::toggleButton(sf::FloatRect rect, bool active, string textValue, float 
         if (active)
             buttonColor = sf::Color(255,255,255, 255);
         else
-            buttonColor = sf::Color(128,128,128, 128);
+            buttonColor = sf::Color(128,128,128, 255);
     }
     draw9Cut(rect, "button_background", buttonColor);
 
@@ -163,7 +163,7 @@ float GUI::vslider(sf::FloatRect rect, float value, float minValue, float maxVal
     y = rect.top + (rect.height - rect.width) * (normalValue - minValue) / (maxValue - minValue);
     sf::RectangleShape backgroundZero(sf::Vector2f(rect.width, 8.0));
     backgroundZero.setPosition(rect.left, y + rect.width / 2.0 - 4.0);
-    backgroundZero.setFillColor(sf::Color(0,0,0,32));
+    backgroundZero.setFillColor(sf::Color(8,8,8,255));
     renderTarget->draw(backgroundZero);
     
     y = rect.top + (rect.height - rect.width) * (value - minValue) / (maxValue - minValue);

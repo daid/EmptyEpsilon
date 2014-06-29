@@ -60,6 +60,8 @@ void ShipSelectionScreen::onGui()
 
     if (gameServer)
     {
+        gameServer->setServerName(textEntry(sf::FloatRect(200, 50, 300, 50), gameServer->getServerName()));
+        text(sf::FloatRect(200, 100, 300, 50), sf::IpAddress::getLocalAddress().toString(), AlignCenter, 30);
         if (button(sf::FloatRect(200, 700, 300, 50), "Spawn player ship"))
         {
             mySpaceship = new PlayerSpaceship();
