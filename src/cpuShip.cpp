@@ -12,7 +12,7 @@ REGISTER_MULTIPLAYER_CLASS(CpuShip, "CpuShip");
 CpuShip::CpuShip()
 : SpaceShip("CpuShip")
 {
-    factionId = 2;
+    faction_id = 2;
     orders = AI_Idle;
     
     setRotation(random(0, 360));
@@ -196,7 +196,7 @@ P<SpaceObject> CpuShip::findBestTarget(sf::Vector2f position, float radius)
     foreach(Collisionable, obj, objectList)
     {
         P<SpaceObject> space_object = obj;
-        if (!space_object || !space_object->canBeTargeted() || factionInfo[factionId].states[space_object->factionId] != FVF_Enemy || space_object == target)
+        if (!space_object || !space_object->canBeTargeted() || factionInfo[faction_id].states[space_object->faction_id] != FVF_Enemy || space_object == target)
             continue;
         float distance = sf::length(space_object->getPosition() - position);
         if (distance > radius)

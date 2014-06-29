@@ -26,10 +26,12 @@ PlayerSpaceship::PlayerSpaceship()
 {
     energy_level = 1000;
     mainScreenSetting = MSS_Front;
-    factionId = 1;
+    faction_id = 1;
     hull_damage_indicator = 0.0;
     warp_indicator = 0.0;
     scanned_by_player = true;
+    comms_state = CS_Inactive;
+    comms_open_delay = 0.0;
 
     registerMemberReplication(&hull_damage_indicator, 0.5);
     registerMemberReplication(&warp_indicator, 0.5);
@@ -42,6 +44,8 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&shields_active);
     registerMemberReplication(&front_shield_recharge_factor);
     registerMemberReplication(&rear_shield_recharge_factor);
+    registerMemberReplication(&comms_state);
+    registerMemberReplication(&comms_open_delay, 1.0);
     
     for(int n=0; n<SYS_COUNT; n++)
     {

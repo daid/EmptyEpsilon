@@ -1,6 +1,7 @@
 #include <SFML/OpenGL.hpp>
 #include "spaceship.h"
 #include "mesh.h"
+#include "gui.h"
 #include "main.h"
 #include "shipTemplate.h"
 #include "playerInfo.h"
@@ -204,6 +205,8 @@ void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float
             arc[arcPoints-1].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction + beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale;
             window.draw(arc);
         }
+    }else{
+        GUI::text(sf::FloatRect(position.x, position.y - 15, 0, 0), getCallSign(), AlignCenter, 12);
     }
 
     sf::Sprite objectSprite;
@@ -216,13 +219,13 @@ void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float
     {
         if (scanned_by_player)
         {
-            if (factionInfo[factionId].states[mySpaceship->factionId] == FVF_Enemy)
+            if (factionInfo[faction_id].states[mySpaceship->faction_id] == FVF_Enemy)
                 objectSprite.setColor(sf::Color::Red);
         }else{
             objectSprite.setColor(sf::Color(128, 128, 128));
         }
     }else{
-        objectSprite.setColor(factionInfo[factionId].gm_color);
+        objectSprite.setColor(factionInfo[faction_id].gm_color);
     }
     window.draw(objectSprite);
 }
@@ -350,7 +353,7 @@ void SpaceShip::update(float delta)
         float angle = sf::vector2ToAngle(diff);
         for(int n=0; n<maxBeamWeapons; n++)
         {
-            if (target && factionInfo[factionId].states[target->factionId] == FVF_Enemy && beamWeapons[n].cooldown <= 0.0 && distance < beamWeapons[n].range)
+            if (target && factionInfo[faction_id].states[target->faction_id] == FVF_Enemy && beamWeapons[n].cooldown <= 0.0 && distance < beamWeapons[n].range)
             {
                 float angleDiff = sf::angleDifference(beamWeapons[n].direction + getRotation(), angle);
                 if (abs(angleDiff) < beamWeapons[n].arc / 2.0)
@@ -561,6 +564,16 @@ bool SpaceShip::hasSystem(ESystem system)
     if (system == SYS_Warp && !hasWarpdrive) return false;
     if (system == SYS_JumpDrive && !hasJumpdrive) return false;
     return true;
+}
+
+string SpaceShip::getCallSign()
+{
+    int32_t id = getMultiplayerId();
+    if (id < 100)
+        return "S" + string(id);
+    else if (id < 200)
+        return "NC" + string(id - 100);
+    return "CV" + string(id - 200);
 }
 
 string getMissileWeaponName(EMissileWeapons missile)

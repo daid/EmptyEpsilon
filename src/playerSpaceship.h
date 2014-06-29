@@ -3,6 +3,13 @@
 
 #include "spaceship.h"
 
+enum ECommsState
+{
+    CS_Inactive,
+    CS_OpeningChannel,
+    CS_ChannelOpen
+};
+
 class PlayerSystem
 {
 public:
@@ -16,6 +23,7 @@ public:
 
 class PlayerSpaceship : public SpaceShip
 {
+public:
     const static float energy_shield_use_per_second = 1.5f;
     const static float energy_per_jump_km = 8.0f;
     const static float energy_per_beam_fire = 3.0f;
@@ -23,7 +31,8 @@ class PlayerSpaceship : public SpaceShip
     const static float system_heatup_per_second = 0.1f;
     const static float maxCoolant = 10.0;
     const static float damage_per_second_on_overheat = 0.2;
-public:
+    const static float max_comm_range = 50000;
+
     PlayerSystem systems[SYS_COUNT];
 
     float energy_level;
@@ -31,6 +40,10 @@ public:
     float warp_indicator;
     P<SpaceShip> scanning_ship; //Server only
     float scanning_delay;
+    
+    ECommsState comms_state;
+    float comms_open_delay;
+    string comms_incomming_message;
     
     EMainScreenSetting mainScreenSetting;
 
@@ -53,6 +66,8 @@ public:
     void commandDock(P<SpaceStation> station);
     void commandUndock();
     
+    virtual string getCallSign() { return ""; }
+    
     virtual void executeJump(float distance);
     virtual void fireBeamWeapon(int index, P<SpaceObject> target);
     virtual void hullDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type);
@@ -61,5 +76,6 @@ public:
     virtual void update(float delta);
     bool useEnergy(float amount) { if (energy_level >= amount) { energy_level -= amount; return true; } return false; }
 };
+REGISTER_MULTIPLAYER_ENUM(ECommsState);
 
 #endif//PLAYER_SPACESHIP_H

@@ -104,6 +104,7 @@ public:
     virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
     virtual void update(float delta);
     
+    virtual string getCallSign();
     virtual bool canBeTargeted() { return true; }
     virtual bool hasShield() { return front_shield > (front_shield_max / 50.0) || rear_shield > (rear_shield_max / 50.0); }
     virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type);

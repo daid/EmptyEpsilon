@@ -67,10 +67,10 @@ void SpaceStation::drawRadar(sf::RenderTarget& window, sf::Vector2f position, fl
         objectSprite.setScale(0.7, 0.7);
     if (mySpaceship)
     {
-        if (factionInfo[factionId].states[mySpaceship->factionId] == FVF_Enemy)
+        if (factionInfo[faction_id].states[mySpaceship->faction_id] == FVF_Enemy)
             objectSprite.setColor(sf::Color::Red);
     }else{
-        objectSprite.setColor(factionInfo[factionId].gm_color);
+        objectSprite.setColor(factionInfo[faction_id].gm_color);
     }
     window.draw(objectSprite);
 }

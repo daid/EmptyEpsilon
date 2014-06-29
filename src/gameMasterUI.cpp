@@ -74,7 +74,7 @@ void GameMasterUI::onGui()
         P<SpaceShip> ship = selection;
         if (ship && ship->shipTemplate)
         {
-            text(sf::FloatRect(20, 20, 100, 20), factionInfo[ship->factionId].name + " " + ship->shipTemplate->name, AlignLeft, 20);
+            text(sf::FloatRect(20, 20, 100, 20), factionInfo[ship->faction_id].name + " " + ship->shipTemplate->name, AlignLeft, 20);
             text(sf::FloatRect(20, 40, 100, 20), "Hull: " + string(ship->hull_strength), AlignLeft, 20);
             text(sf::FloatRect(20, 60, 100, 20), "Shields: " + string(ship->front_shield) + ", " + string(ship->rear_shield), AlignLeft, 20);
         }
@@ -134,7 +134,8 @@ void GameMasterUI::onGui()
         if (button(sf::FloatRect(20, 100, 150, 30), "Station", 20))
         {
             selection = new SpaceStation();
-            selection->factionId = current_faction;
+            selection->faction_id = current_faction;
+            selection->setPosition(view_position + sf::vector2FromAngle(random(0, 360)) * random(0, view_distance * 0.1));
         }
         std::vector<string> template_names = ShipTemplate::getTemplateNameList();
         for(unsigned int n=0; n<template_names.size(); n++)
@@ -142,7 +143,7 @@ void GameMasterUI::onGui()
             if (button(sf::FloatRect(20, 150 + n * 30, 150, 30), template_names[n], 20))
             {
                 P<CpuShip> s = new CpuShip();
-                s->factionId = current_faction;
+                s->faction_id = current_faction;
                 s->setShipTemplate(template_names[n]);
                 s->setPosition(view_position + sf::vector2FromAngle(random(0, 360)) * random(0, view_distance * 0.1));
                 

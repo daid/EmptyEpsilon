@@ -20,6 +20,7 @@ public:
     virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
     virtual void update(float delta);
     
+    virtual string getCallSign() { return "DS" + string(getMultiplayerId()); }
     virtual bool canBeTargeted() { return true; }
     virtual bool hasShield() { return shields > (maxShields / 50.0); }
     virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type);

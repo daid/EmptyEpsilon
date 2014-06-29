@@ -6,6 +6,16 @@
 #include "spaceship.h"
 #include "repairCrew.h"
 
+enum CommsOpenChannelType
+{
+    OCT_None,
+    OCT_Station,
+    OCT_FriendlyShip,
+    OCT_NeutralShip,
+    OCT_EnemyShip,
+    OCT_UnknownShip,
+};
+
 class CrewUI : public MainUI
 {
     ECrewPosition showPosition;
@@ -15,6 +25,8 @@ class CrewUI : public MainUI
     
     P<SpaceObject> scienceTarget;
     float scienceRadarDistance;
+    
+    CommsOpenChannelType comms_open_channel_type;
 public:
     CrewUI();
     
@@ -24,5 +36,7 @@ public:
     void weaponsUI();
     void engineeringUI();
     void scienceUI();
+    void commsUI();
 };
+
 #endif//CREW_UI_H

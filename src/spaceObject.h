@@ -17,7 +17,7 @@ class SpaceObject : public Collisionable, public MultiplayerObject
 {
     float objectRadius;
 public:
-    int8_t factionId;
+    int8_t faction_id;
     SpaceObject(float collisionRange, string multiplayerName);
     
     float getRadius() { return objectRadius; }
@@ -27,6 +27,7 @@ public:
     virtual void draw3DTransparent() {}
     virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
 
+    virtual string getCallSign() { return "??? (" + string(getMultiplayerId()) + ")"; }
     virtual bool canBeTargeted() { return false; }
     virtual bool hasShield() { return false; }
     virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type) {}

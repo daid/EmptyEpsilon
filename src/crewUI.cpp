@@ -9,6 +9,7 @@ CrewUI::CrewUI()
     jumpDistance = 1.0;
     tubeLoadType = MW_None;
     scienceRadarDistance = 50000;
+    comms_open_channel_type = OCT_None;
     
     for(int n=0; n<maxCrewPositions; n++)
     {
@@ -40,6 +41,10 @@ void CrewUI::onGui()
             break;
         case scienceOfficer:
             scienceUI();
+            mainScreenSelectGUI();
+            break;
+        case commsOfficer:
+            commsUI();
             mainScreenSelectGUI();
             break;
         default:
@@ -351,7 +356,6 @@ void CrewUI::scienceUI()
     sf::RenderTarget* window = getRenderTarget();
     sf::Vector2f mouse = InputHandler::getMousePos();
 
-
     //Radar
     float radarDistance = scienceRadarDistance;
     drawRaderBackground(mySpaceship->getPosition(), sf::Vector2f(800, 450), 400, 400.0f / radarDistance);
@@ -398,25 +402,26 @@ void CrewUI::scienceUI()
         float distance = sf::length(scienceTarget->getPosition() - mySpaceship->getPosition());
         float heading = sf::vector2ToAngle(scienceTarget->getPosition() - mySpaceship->getPosition());
         if (heading < 0) heading += 360;
-        text(sf::FloatRect(20, 100, 100, 20), "Distance: " + string(distance / 1000.0, 1) + "km", AlignLeft, 20);
-        text(sf::FloatRect(20, 120, 100, 20), "Heading: " + string(int(heading)), AlignLeft, 20);
+        text(sf::FloatRect(20, 100, 100, 20), scienceTarget->getCallSign(), AlignLeft, 20);
+        text(sf::FloatRect(20, 120, 100, 20), "Distance: " + string(distance / 1000.0, 1) + "km", AlignLeft, 20);
+        text(sf::FloatRect(20, 140, 100, 20), "Heading: " + string(int(heading)), AlignLeft, 20);
 
         P<SpaceShip> ship = scienceTarget;
         if (ship && !ship->scanned_by_player)
         {
             if (mySpaceship->scanning_delay > 0.0)
             {
-                progressBar(sf::FloatRect(20, 140, 150, 30), mySpaceship->scanning_delay, 8.0, 0.0);
+                progressBar(sf::FloatRect(20, 160, 150, 30), mySpaceship->scanning_delay, 8.0, 0.0);
             }else{
-                if (button(sf::FloatRect(20, 140, 150, 30), "Scan", 25))
+                if (button(sf::FloatRect(20, 160, 150, 30), "Scan", 25))
                     mySpaceship->commandScan(scienceTarget);
             }
         }else{
-            text(sf::FloatRect(20, 140, 100, 20), factionInfo[scienceTarget->factionId].name, AlignLeft, 20);
+            text(sf::FloatRect(20, 160, 100, 20), factionInfo[scienceTarget->faction_id].name, AlignLeft, 20);
             if (ship && ship->shipTemplate)
             {
-                text(sf::FloatRect(20, 160, 100, 20), ship->shipTemplate->name, AlignLeft, 20);
-                text(sf::FloatRect(20, 180, 200, 20), "Shields: " + string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), AlignLeft, 20);
+                text(sf::FloatRect(20, 180, 100, 20), ship->shipTemplate->name, AlignLeft, 20);
+                text(sf::FloatRect(20, 200, 200, 20), "Shields: " + string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), AlignLeft, 20);
             }
         }
     }
@@ -429,4 +434,108 @@ void CrewUI::scienceUI()
         scienceRadarDistance = 5000;
     else if (scienceRadarDistance == 5000 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 10x", 25))
         scienceRadarDistance = 50000;
+}
+
+void CrewUI::commsUI()
+{
+    switch(mySpaceship->comms_state)
+    {
+    case CS_Inactive:
+        {
+            PVector<SpaceObject> station_list;
+            PVector<SpaceObject> friendly_list;
+            PVector<SpaceObject> neutral_list;
+            PVector<SpaceObject> enemy_list;
+            PVector<SpaceObject> unknown_list;
+            foreach(SpaceObject, obj, spaceObjectList)
+            {
+                if (sf::length(obj->getPosition() - mySpaceship->getPosition()) < PlayerSpaceship::max_comm_range)
+                {
+                    P<SpaceStation> station = obj;
+                    P<SpaceShip> ship = obj;
+                    if (station)
+                        station_list.push_back(station);
+                    if (ship)
+                    {
+                        P<PlayerSpaceship> playership = ship;
+                        if (playership)
+                            continue;
+                        if (ship->scanned_by_player)
+                        {
+                            switch(factionInfo[mySpaceship->faction_id].states[ship->faction_id])
+                            {
+                            case FVF_Friendly:
+                                friendly_list.push_back(ship);
+                                break;
+                            case FVF_Neutral:
+                                neutral_list.push_back(ship);
+                                break;
+                            case FVF_Enemy:
+                                enemy_list.push_back(ship);
+                                break;
+                            }
+                        }else{
+                            unknown_list.push_back(ship);
+                        }
+                    }
+                }
+            }
+            
+            text(sf::FloatRect(50, 100, 300, 50), "Open comm channel to:");
+            if (comms_open_channel_type == OCT_None)
+            {
+                if (button(sf::FloatRect(50, 150, 300, 50), "Station (" + string(station_list.size()) + ")"))
+                    comms_open_channel_type = OCT_Station;
+                if (button(sf::FloatRect(50, 200, 300, 50), "Friendly ship (" + string(friendly_list.size()) + ")"))
+                    comms_open_channel_type = OCT_FriendlyShip;
+                if (button(sf::FloatRect(50, 250, 300, 50), "Neutral ship (" + string(neutral_list.size()) + ")"))
+                    comms_open_channel_type = OCT_NeutralShip;
+                if (button(sf::FloatRect(50, 300, 300, 50), "Enemy ship (" + string(enemy_list.size()) + ")"))
+                    comms_open_channel_type = OCT_EnemyShip;
+                if (button(sf::FloatRect(50, 350, 300, 50), "Unknown ship (" + string(unknown_list.size()) + ")"))
+                    comms_open_channel_type = OCT_UnknownShip;
+            }else{
+                PVector<SpaceObject> show_list;
+                switch(comms_open_channel_type)
+                {
+                case OCT_Station:
+                    show_list = station_list;
+                    break;
+                case OCT_FriendlyShip:
+                    show_list = friendly_list;
+                    break;
+                case OCT_NeutralShip:
+                    show_list = neutral_list;
+                    break;
+                case OCT_EnemyShip:
+                    show_list = enemy_list;
+                    break;
+                case OCT_UnknownShip:
+                    show_list = unknown_list;
+                    break;
+                default:
+                    break;
+                }
+                float x = 50;
+                float y = 150;
+                foreach(SpaceObject, obj, show_list)
+                {
+                    button(sf::FloatRect(x, y, 300, 50), obj->getCallSign());
+                    y += 50;
+                    if (y > 700)
+                    {
+                        y = 150;
+                        x += 300;
+                    }
+                }
+                if (button(sf::FloatRect(50, 800, 300, 50), "Back"))
+                    comms_open_channel_type = OCT_None;
+            }
+        }
+        break;
+    case CS_OpeningChannel:
+        break;
+    case CS_ChannelOpen:
+        break;
+    }
 }
