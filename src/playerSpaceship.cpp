@@ -18,6 +18,8 @@ static const int16_t CMD_SET_SYSTEM_POWER = 0x000C;
 static const int16_t CMD_SET_SYSTEM_COOLANT = 0x000D;
 static const int16_t CMD_DOCK = 0x000E;
 static const int16_t CMD_UNDOCK = 0x000F;
+static const int16_t CMD_OPEN_COMM = 0x0010;
+static const int16_t CMD_CLOSE_COMM = 0x0011;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -90,9 +92,25 @@ void PlayerSpaceship::update(float delta)
     {
         energy_level += delta * 10.0;
     }
-
+    
     if (gameServer)
     {
+        if (comms_state == CS_OpeningChannel)
+        {
+            if (comms_open_delay > 0)
+            {
+                comms_open_delay -= delta;
+            }else{
+                comms_state = CS_ChannelOpen;
+                //TODO: Initiate comms.
+            }
+        }
+        if (comms_state == CS_ChannelOpen)
+        {
+            if (!comms_target || sf::length(getPosition() - comms_target->getPosition()) > max_comm_range)
+                comms_state = CS_ChannelBroken;
+        }
+
         if (shields_active)
             useEnergy(delta * energy_shield_use_per_second);
         
@@ -348,6 +366,22 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
     case CMD_UNDOCK:
         requestUndock();
         break;
+    case CMD_OPEN_COMM:
+        if (comms_state == CS_Inactive)
+        {
+            int32_t id;
+            packet >> id;
+            comms_target = gameServer->getObjectById(id);
+            if (comms_target)
+            {
+                comms_state = CS_OpeningChannel;
+                comms_open_delay = comms_channel_open_time;
+            }
+        }
+        break;
+    case CMD_CLOSE_COMM:
+        comms_state = CS_Inactive;
+        break;
     }
 }
 
@@ -457,5 +491,20 @@ void PlayerSpaceship::commandUndock()
 {
     sf::Packet packet;
     packet << CMD_UNDOCK;
+    sendCommand(packet);
+}
+
+void PlayerSpaceship::commandOpenComm(P<SpaceObject> obj)
+{
+    if (!obj) return;
+    sf::Packet packet;
+    packet << CMD_OPEN_COMM << obj->getMultiplayerId();
+    sendCommand(packet);
+}
+
+void PlayerSpaceship::commandCloseComm()
+{
+    sf::Packet packet;
+    packet << CMD_CLOSE_COMM;
     sendCommand(packet);
 }

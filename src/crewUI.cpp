@@ -520,7 +520,11 @@ void CrewUI::commsUI()
                 float y = 150;
                 foreach(SpaceObject, obj, show_list)
                 {
-                    button(sf::FloatRect(x, y, 300, 50), obj->getCallSign());
+                    if (button(sf::FloatRect(x, y, 300, 50), obj->getCallSign()))
+                    {
+                        mySpaceship->commandOpenComm(obj);
+                        comms_open_channel_type = OCT_None;
+                    }
                     y += 50;
                     if (y > 700)
                     {
@@ -534,8 +538,18 @@ void CrewUI::commsUI()
         }
         break;
     case CS_OpeningChannel:
+        text(sf::FloatRect(50, 100, 300, 50), "Opening communication channel...");
+        if (button(sf::FloatRect(50, 800, 300, 50), "Cancel call"))
+            mySpaceship->commandCloseComm();
         break;
     case CS_ChannelOpen:
+        if (button(sf::FloatRect(50, 800, 300, 50), "Close channel"))
+            mySpaceship->commandCloseComm();
+        break;
+    case CS_ChannelBroken:
+        text(sf::FloatRect(50, 100, 300, 50), "ERROR 5812 - Checksum failed.");
+        if (button(sf::FloatRect(50, 800, 300, 50), "Close channel"))
+            mySpaceship->commandCloseComm();
         break;
     }
 }
