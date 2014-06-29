@@ -121,7 +121,10 @@ bool GUI::button(sf::FloatRect rect, string textValue, float fontSize)
     draw9Cut(rect, "button_background", rect.contains(mousePosition) ? sf::Color(128,128,128,255) : sf::Color::White);
     text(rect, textValue, AlignCenter, fontSize, sf::Color::Black);
     if (mouseClick && rect.contains(mousePosition))
+    {
+        soundManager.playSound("button.wav");
         return true;
+    }
     return false;
 }
 
@@ -151,7 +154,10 @@ bool GUI::toggleButton(sf::FloatRect rect, bool active, string textValue, float 
 
     text(rect, textValue, AlignCenter, fontSize, sf::Color::Black);
     if (mouseClick && rect.contains(mousePosition))
+    {
+        soundManager.playSound("button.wav");
         return true;
+    }
     return false;
 }
 

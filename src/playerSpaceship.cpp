@@ -76,7 +76,7 @@ PlayerSpaceship::PlayerSpaceship()
 }
 
 void PlayerSpaceship::update(float delta)
-{
+{        
     if (hull_damage_indicator > 0)
         hull_damage_indicator -= delta;
     if (warp_indicator > 0)
@@ -287,7 +287,18 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
         }
         break;
     case CMD_SET_SHIELDS:
-        packet >> shields_active;
+        {
+            bool active;
+            packet >> active;
+            if (active != shields_active)
+            {
+                shields_active = active;
+                if (active)
+                    soundManager.playSound("shield_up.wav");
+                else
+                    soundManager.playSound("shield_down.wav");
+            }
+        }
         break;
     case CMD_SET_MAIN_SCREEN_SETTING:
         packet >> mainScreenSetting;

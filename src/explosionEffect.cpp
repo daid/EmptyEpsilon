@@ -87,6 +87,8 @@ void ExplosionEffect::draw3DTransparent()
 
 void ExplosionEffect::update(float delta)
 {
+    if (delta > 0 && lifetime == maxLifetime)
+        soundManager.playSound("explosion.wav", getPosition(), size, 1.0);
     lifetime -= delta;
     if (lifetime < 0)
         destroy();

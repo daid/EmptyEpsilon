@@ -85,6 +85,8 @@ void BeamEffect::update(float delta)
     if (target)
         targetLocation = target->getPosition() + sf::Vector2f(targetOffset.x, targetOffset.y);
     
+    if (delta > 0 && lifetime == 1.0)
+        soundManager.playSound("laser.wav", getPosition(), 500.0, 1.0);
     lifetime -= delta;
     if (lifetime < 0)
         destroy();

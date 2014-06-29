@@ -57,6 +57,8 @@ void Nuke::update(float delta)
         setAngularVelocity(0);
     }
     
+    if (delta > 0 && lifetime == totalLifetime)
+        soundManager.playSound("missile_launch.wav", getPosition(), 200.0, 1.0);
     lifetime -= delta;
     if (lifetime < 0)
         destroy();

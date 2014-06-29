@@ -217,11 +217,11 @@ void CrewUI::weaponsUI()
     mySpaceship->drawRadar(*window, sf::Vector2f(800, 450), 400.0f / radarDistance, false);
     drawHeadingCircle(sf::Vector2f(800, 450), 400);
     //!Radar
-    text(sf::FloatRect(10, 100, 200, 20), "Energy: " + string(int(mySpaceship->energy_level)), AlignLeft, 20);
-    text(sf::FloatRect(10, 120, 200, 20), "Shields: " + string(int(100 * mySpaceship->front_shield / mySpaceship->front_shield_max)) + "/" + string(int(100 * mySpaceship->rear_shield / mySpaceship->rear_shield_max)), AlignLeft, 20);
+    text(sf::FloatRect(20, 100, 200, 20), "Energy: " + string(int(mySpaceship->energy_level)), AlignLeft, 20);
+    text(sf::FloatRect(20, 120, 200, 20), "Shields: " + string(int(100 * mySpaceship->front_shield / mySpaceship->front_shield_max)) + "/" + string(int(100 * mySpaceship->rear_shield / mySpaceship->rear_shield_max)), AlignLeft, 20);
     if (mySpaceship->front_shield_max > 0 || mySpaceship->rear_shield_max > 0)
     {
-        if (toggleButton(sf::FloatRect(10, 140, 200, 30), mySpaceship->shields_active, mySpaceship->shields_active ? "Shields:ON" : "Shields:OFF", 25))
+        if (toggleButton(sf::FloatRect(20, 140, 200, 30), mySpaceship->shields_active, mySpaceship->shields_active ? "Shields:ON" : "Shields:OFF", 25))
             mySpaceship->commandSetShields(!mySpaceship->shields_active);
     }
 
@@ -245,12 +245,12 @@ void CrewUI::weaponsUI()
         case WTS_Loading:
             progressBar(sf::FloatRect(170, 840 - 50 * n, 350, 50), mySpaceship->weaponTube[n].delay, mySpaceship->tubeLoadTime, 0.0);
             disabledButton(sf::FloatRect(20, y, 150, 50), "Loading", 35);
-            text(sf::FloatRect(170, y, 350, 50), getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), AlignCenter, 35);
+            text(sf::FloatRect(170, y, 350, 50), getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), AlignCenter, 35, sf::Color::Black);
             break;
         case WTS_Unloading:
             progressBar(sf::FloatRect(170, 840 - 50 * n, 350, 50), mySpaceship->weaponTube[n].delay, 0.0, mySpaceship->tubeLoadTime);
             disabledButton(sf::FloatRect(20, y, 150, 50), "Unloading", 25);
-            text(sf::FloatRect(170, y, 350, 50), getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), AlignCenter, 35);
+            text(sf::FloatRect(170, y, 350, 50), getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), AlignCenter, 35, sf::Color::Black);
             break;
         }
     }
@@ -258,7 +258,7 @@ void CrewUI::weaponsUI()
     for(int n=0; n<MW_Count; n++)
     {
         y -= 30;
-        if (toggleButton(sf::FloatRect(10, y, 200, 30), tubeLoadType == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(mySpaceship->weaponStorage[n]), 25))
+        if (toggleButton(sf::FloatRect(20, y, 200, 30), tubeLoadType == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(mySpaceship->weaponStorage[n]), 25))
         {
             if (tubeLoadType == n)
                 tubeLoadType = MW_None;

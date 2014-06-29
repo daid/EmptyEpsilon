@@ -24,6 +24,8 @@ void MainUI::onGui()
     
     if (mySpaceship)
     {
+        soundManager.setListenerPosition(mySpaceship->getPosition(), mySpaceship->getRotation());
+        
         if (mySpaceship->hull_damage_indicator > 0.0)
         {
             sf::RectangleShape fullScreenOverlay(sf::Vector2f(1600, 900));
