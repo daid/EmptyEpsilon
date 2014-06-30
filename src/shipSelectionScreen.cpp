@@ -1,4 +1,6 @@
 #include "shipSelectionScreen.h"
+#include "epsilonServer.h"
+#include "mainMenus.h"
 #include "playerInfo.h"
 #include "mainScreen.h"
 #include "crewUI.h"
@@ -81,8 +83,19 @@ void ShipSelectionScreen::onGui()
             destroy();
             new GameMasterUI();
         }
+
+        if (button(sf::FloatRect(50, 800, 300, 50), "Close server"))
+        {
+            destroy();
+            disconnectFromServer();
+            new MainMenu();
+        }
+    }else{
+        if (button(sf::FloatRect(50, 800, 300, 50), "Disconnect"))
+        {
+            destroy();
+            disconnectFromServer();
+            new MainMenu();
+        }
     }
-    
-    if (button(sf::FloatRect(1350, 830, 200, 50), "Quit game"))
-        engine->shutdown();
 }

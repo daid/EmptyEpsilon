@@ -97,8 +97,14 @@ void RepairCrew::update(float delta)
     P<PlayerSpaceship> ship;
     if (gameServer)
         ship = gameServer->getObjectById(ship_id);
-    else
+    else if (gameClient)
         ship = gameClient->getObjectById(ship_id);
+    else
+    {
+        destroy();
+        return;
+    }
+        
 
     if (gameServer && !ship)
     {
