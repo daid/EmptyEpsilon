@@ -5,8 +5,9 @@
 
 REGISTER_MULTIPLAYER_CLASS(Mine, "Mine");
 Mine::Mine()
-: SpaceObject(800, "Mine")
+: SpaceObject(50, "Mine")
 {
+    setCollisionRadius(trigger_range);
     triggered = false;
     triggerTimeout = triggerDelay;
     ejectTimeout = 0.0;
@@ -36,8 +37,8 @@ void Mine::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scal
 
     if (!mySpaceship && gameServer)
     {
-        sf::CircleShape hitRadius(getRadius() * scale);
-        hitRadius.setOrigin(getRadius() * scale, getRadius() * scale);
+        sf::CircleShape hitRadius(trigger_range * scale);
+        hitRadius.setOrigin(trigger_range * scale, trigger_range * scale);
         hitRadius.setPosition(position);
         hitRadius.setFillColor(sf::Color::Transparent);
         if (triggered)
@@ -85,7 +86,7 @@ void Mine::eject()
 
 void Mine::explode()
 {
-    SpaceObject::damageArea(getPosition(), blastRange, damageAtEdge, damageAtCenter, DT_Kinetic, getRadius());
+    SpaceObject::damageArea(getPosition(), blastRange, damageAtEdge, damageAtCenter, DT_Kinetic, blastRange);
 
     P<ExplosionEffect> e = new ExplosionEffect();
     e->setSize(blastRange);
