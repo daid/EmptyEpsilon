@@ -106,12 +106,12 @@ void GameMasterUI::onGui()
             
             for(int n=0; n<MW_Count; n++)
             {
-                if (cpuShip->weaponStorageMax[n] < 1)
+                if (cpuShip->weapon_storage_max[n] < 1)
                     continue;
-                text(sf::FloatRect(20, y, 130, 30), getMissileWeaponName(EMissileWeapons(n)) + ": " + string(cpuShip->weaponStorage[n]) + "/" + string(cpuShip->weaponStorageMax[n]), AlignLeft, 20);
+                text(sf::FloatRect(20, y, 130, 30), getMissileWeaponName(EMissileWeapons(n)) + ": " + string(cpuShip->weapon_storage[n]) + "/" + string(cpuShip->weapon_storage_max[n]), AlignLeft, 20);
                 if (button(sf::FloatRect(200, y, 100, 30), "Refill", 15))
                 {
-                    cpuShip->weaponStorage[n] = cpuShip->weaponStorageMax[n];
+                    cpuShip->weapon_storage[n] = cpuShip->weapon_storage_max[n];
                 }
                 y += 30;
             }

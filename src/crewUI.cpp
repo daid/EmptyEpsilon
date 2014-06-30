@@ -237,7 +237,7 @@ void CrewUI::weaponsUI()
         switch(mySpaceship->weaponTube[n].state)
         {
         case WTS_Empty:
-            if (toggleButton(sf::FloatRect(20, y, 150, 50), tubeLoadType != MW_None && mySpaceship->weaponStorage[tubeLoadType] > 0, "Load", 35) && tubeLoadType != MW_None)
+            if (toggleButton(sf::FloatRect(20, y, 150, 50), tubeLoadType != MW_None && mySpaceship->weapon_storage[tubeLoadType] > 0, "Load", 35) && tubeLoadType != MW_None)
                 mySpaceship->commandLoadTube(n, tubeLoadType);
             disabledButton(sf::FloatRect(170, y, 350, 50), "Empty", 35);
             break;
@@ -263,7 +263,7 @@ void CrewUI::weaponsUI()
     for(int n=0; n<MW_Count; n++)
     {
         y -= 30;
-        if (toggleButton(sf::FloatRect(20, y, 200, 30), tubeLoadType == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(mySpaceship->weaponStorage[n]), 25))
+        if (toggleButton(sf::FloatRect(20, y, 200, 30), tubeLoadType == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(mySpaceship->weapon_storage[n]), 25))
         {
             if (tubeLoadType == n)
                 tubeLoadType = MW_None;

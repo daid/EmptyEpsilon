@@ -126,9 +126,9 @@ bool SpaceStation::openCommChannel(P<PlayerSpaceship> ship)
             return true;
         }
         ship->setCommsMessage("Welcome to our lovely station");
-        ship->addCommsReply(1, "Please re-stock our homing missiles.");
+        ship->addCommsReply(1, "Do you have spare homing missiles for us?");
         ship->addCommsReply(2, "Please re-stock our mines.");
-        ship->addCommsReply(3, "Please re-stock our nukes.");
+        ship->addCommsReply(3, "Can you supply us with some nukes.");
         ship->addCommsReply(4, "Please re-stock our EMP Missiles.");
     }
     return true;
@@ -138,6 +138,30 @@ void SpaceStation::commChannelMessage(P<PlayerSpaceship> ship, int32_t message_i
 {
     switch(message_id)
     {
+    case 1:
+        if (ship->weapon_storage[MW_Homing] >= ship->weapon_storage_max[MW_Homing] / 2)
+        {
+            ship->setCommsMessage("You seem to have more then enough missiles");
+        }else{
+            ship->weapon_storage[MW_Homing] = ship->weapon_storage_max[MW_Homing] / 2;
+            ship->setCommsMessage("We generously resupplied you with some free homing missiles.\nPut them to good use.");
+        }
+        break;
+    case 2:
+        if (ship->weapon_storage[MW_Mine] >= ship->weapon_storage_max[MW_Mine])
+        {
+            ship->setCommsMessage("You are fully stocked with mines.");
+        }else{
+            ship->weapon_storage[MW_Mine] = ship->weapon_storage_max[MW_Mine] / 2;
+            ship->setCommsMessage("Here, have some mines.\nMines are good defensive weapons.");
+        }
+        break;
+    case 3:
+        ship->setCommsMessage("We do not deal in weapons of mass destruction.");
+        break;
+    case 4:
+        ship->setCommsMessage("We do not deal in weapons of mass disruption.");
+        break;
     default:
         ship->setCommsMessage("Sorry, Dave, I can't let you do that");
     }

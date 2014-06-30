@@ -89,7 +89,7 @@ ShipTemplate::ShipTemplate()
     jumpDrive = false;
     cloaking = false;
     for(int n=0; n<MW_Count; n++)
-        weaponStorage[n] = 0;
+        weapon_storage[n] = 0;
 }
 
 void ShipTemplate::setName(string name)

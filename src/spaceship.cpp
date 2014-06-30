@@ -95,9 +95,10 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     }
     for(int n=0; n<MW_Count; n++)
     {
-        weaponStorage[n] = 0;
-        registerMemberReplication(&weaponStorage[n]);
-        registerMemberReplication(&weaponStorageMax[n]);
+        weapon_storage[n] = 0;
+        weapon_storage_max[n] = 0;
+        registerMemberReplication(&weapon_storage[n]);
+        registerMemberReplication(&weapon_storage_max[n]);
     }
 }
 
@@ -132,7 +133,7 @@ void SpaceShip::setShipTemplate(string templateName)
     hasJumpdrive = shipTemplate->jumpDrive;
     //shipTemplate->cloaking;
     for(int n=0; n<MW_Count; n++)
-        weaponStorage[n] = weaponStorageMax[n] = shipTemplate->weaponStorage[n];
+        weapon_storage[n] = weapon_storage_max[n] = shipTemplate->weapon_storage[n];
     
     setRadius(shipTemplate->radius);
 }
@@ -377,8 +378,8 @@ void SpaceShip::update(float delta)
                 break;
             case WTS_Unloading:
                 weaponTube[n].state = WTS_Empty;
-                if (weaponStorage[weaponTube[n].typeLoaded] < weaponStorageMax[weaponTube[n].typeLoaded])
-                    weaponStorage[weaponTube[n].typeLoaded] ++;
+                if (weapon_storage[weaponTube[n].typeLoaded] < weapon_storage_max[weaponTube[n].typeLoaded])
+                    weapon_storage[weaponTube[n].typeLoaded] ++;
                 weaponTube[n].typeLoaded = MW_None;
                 break;
             default:
@@ -426,12 +427,12 @@ void SpaceShip::loadTube(int tubeNr, EMissileWeapons type)
 {
     if (tubeNr >= 0 && tubeNr < maxWeaponTubes && type > MW_None && type < MW_Count)
     {
-        if (weaponTube[tubeNr].state == WTS_Empty && weaponStorage[type] > 0)
+        if (weaponTube[tubeNr].state == WTS_Empty && weapon_storage[type] > 0)
         {
             weaponTube[tubeNr].state = WTS_Loading;
             weaponTube[tubeNr].delay = tubeLoadTime;
             weaponTube[tubeNr].typeLoaded = type;
-            weaponStorage[type]--;
+            weapon_storage[type]--;
         }
     }
 }
@@ -580,7 +581,7 @@ string SpaceShip::getCallSign()
     case 6: return "C-" + string(id % 100);
     case 7: return "OV" + string(id % 100);
     }
-    return "X-" + string(id)
+    return "X-" + string(id);
 }
 
 string getMissileWeaponName(EMissileWeapons missile)

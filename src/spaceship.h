@@ -73,8 +73,8 @@ public:
     float jumpDelay;
     float jumpSpeedFactor;
     
-    int8_t weaponStorage[MW_Count];
-    int8_t weaponStorageMax[MW_Count];
+    int8_t weapon_storage[MW_Count];
+    int8_t weapon_storage_max[MW_Count];
     int8_t weaponTubes;
     float tubeLoadTime;
     float tubeRechargeFactor;

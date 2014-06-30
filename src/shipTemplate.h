@@ -76,7 +76,7 @@ public:
     float frontShields, rearShields;
     float impulseSpeed, turnSpeed, warpSpeed;
     bool jumpDrive, cloaking;
-    int weaponStorage[MW_Count];
+    int weapon_storage[MW_Count];
     
     std::vector<ShipRoomTemplate> rooms;
     std::vector<ShipDoorTemplate> doors;
@@ -97,7 +97,7 @@ public:
     void setWarpSpeed(float warp) { warpSpeed = warp; }
     void setJumpDrive(bool enabled) { jumpDrive = enabled; }
     void setCloaking(bool enabled) { cloaking = enabled; }
-    void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon != MW_None) weaponStorage[weapon] = amount; }
+    void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon != MW_None) weapon_storage[weapon] = amount; }
     void addRoom(sf::Vector2i position, sf::Vector2i size) { rooms.push_back(ShipRoomTemplate(position, size, SYS_None)); }
     void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system) { rooms.push_back(ShipRoomTemplate(position, size, system)); }
     void addDoor(sf::Vector2i position, bool horizontal) { doors.push_back(ShipDoorTemplate(position, horizontal)); }

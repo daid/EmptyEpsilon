@@ -31,11 +31,11 @@ void CpuShip::update(float delta)
         missile_fire_delay -= delta;
     
     //Check the weapon state, 
-    bool has_missiles = weaponTubes > 0 && weaponStorage[MW_Homing] > 0, has_beams = false;
+    bool has_missiles = weaponTubes > 0 && weapon_storage[MW_Homing] > 0, has_beams = false;
     //If we have weapon tubes, load them with torpedoes
     for(int n=0; n<weaponTubes; n++)
     {
-        if (weaponTube[n].state == WTS_Empty && weaponStorage[MW_Homing] > 0)
+        if (weaponTube[n].state == WTS_Empty && weapon_storage[MW_Homing] > 0)
             loadTube(n, MW_Homing);
     }
     for(int n=0; n<maxBeamWeapons; n++)
