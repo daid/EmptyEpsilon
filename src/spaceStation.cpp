@@ -119,6 +119,10 @@ bool SpaceStation::openCommChannel(P<PlayerSpaceship> ship)
     if (isFriendly(ship))
     {
         ship->setCommsMessage("Good day captain,\nWhat can we do for you today?");
+        ship->addCommsReply(2001, "Do you have spare homing missiles for us?");
+        ship->addCommsReply(2002, "Please re-stock our mines.");
+        ship->addCommsReply(2003, "Can you supply us with some nukes.");
+        ship->addCommsReply(2004, "Please re-stock our EMP Missiles.");
     }else{
         if (ship->docking_state != DS_Docked || ship->docking_target != this)
         {
@@ -126,10 +130,10 @@ bool SpaceStation::openCommChannel(P<PlayerSpaceship> ship)
             return true;
         }
         ship->setCommsMessage("Welcome to our lovely station");
-        ship->addCommsReply(1, "Do you have spare homing missiles for us?");
-        ship->addCommsReply(2, "Please re-stock our mines.");
-        ship->addCommsReply(3, "Can you supply us with some nukes.");
-        ship->addCommsReply(4, "Please re-stock our EMP Missiles.");
+        ship->addCommsReply(1001, "Do you have spare homing missiles for us?");
+        ship->addCommsReply(1002, "Please re-stock our mines.");
+        ship->addCommsReply(1003, "Can you supply us with some nukes.");
+        ship->addCommsReply(1004, "Please re-stock our EMP Missiles.");
     }
     return true;
 }
@@ -138,7 +142,7 @@ void SpaceStation::commChannelMessage(P<PlayerSpaceship> ship, int32_t message_i
 {
     switch(message_id)
     {
-    case 1:
+    case 1001:
         if (ship->weapon_storage[MW_Homing] >= ship->weapon_storage_max[MW_Homing] / 2)
         {
             ship->setCommsMessage("You seem to have more then enough missiles");
@@ -147,20 +151,57 @@ void SpaceStation::commChannelMessage(P<PlayerSpaceship> ship, int32_t message_i
             ship->setCommsMessage("We generously resupplied you with some free homing missiles.\nPut them to good use.");
         }
         break;
-    case 2:
+    case 1002:
         if (ship->weapon_storage[MW_Mine] >= ship->weapon_storage_max[MW_Mine])
         {
             ship->setCommsMessage("You are fully stocked with mines.");
         }else{
-            ship->weapon_storage[MW_Mine] = ship->weapon_storage_max[MW_Mine] / 2;
+            ship->weapon_storage[MW_Mine] = ship->weapon_storage_max[MW_Mine];
             ship->setCommsMessage("Here, have some mines.\nMines are good defensive weapons.");
         }
         break;
-    case 3:
+    case 1003:
         ship->setCommsMessage("We do not deal in weapons of mass destruction.");
         break;
-    case 4:
+    case 1004:
         ship->setCommsMessage("We do not deal in weapons of mass disruption.");
+        break;
+
+    case 2001:
+        if (ship->weapon_storage[MW_Homing] >= ship->weapon_storage_max[MW_Homing])
+        {
+            ship->setCommsMessage("Sorry sir, but you are fully stocked with homing missiles.");
+        }else{
+            ship->weapon_storage[MW_Homing] = ship->weapon_storage_max[MW_Homing] / 2;
+            ship->setCommsMessage("Filled up your missile supply.");
+        }
+        break;
+    case 2002:
+        if (ship->weapon_storage[MW_Mine] >= ship->weapon_storage_max[MW_Mine])
+        {
+            ship->setCommsMessage("Captain,\nYou have all the mines you can fit in that ship.");
+        }else{
+            ship->weapon_storage[MW_Mine] = ship->weapon_storage_max[MW_Mine];
+            ship->setCommsMessage("Loaded you up with mines.");
+        }
+        break;
+    case 2003:
+        if (ship->weapon_storage[MW_Nuke] >= ship->weapon_storage_max[MW_Nuke])
+        {
+            ship->setCommsMessage("All nukes are charged and primed for distruction.");
+        }else{
+            ship->weapon_storage[MW_Nuke] = ship->weapon_storage_max[MW_Nuke];
+            ship->setCommsMessage("You are fully loaded,\nand ready to explode things.");
+        }
+        break;
+    case 2004:
+        if (ship->weapon_storage[MW_EMP] >= ship->weapon_storage_max[MW_EMP])
+        {
+            ship->setCommsMessage("All storage for EMP missiles is filled sir.");
+        }else{
+            ship->weapon_storage[MW_EMP] = ship->weapon_storage_max[MW_EMP];
+            ship->setCommsMessage("Recallibrated the electronics and\nfitted you with all the EMP missiles you can carry.");
+        }
         break;
     default:
         ship->setCommsMessage("Sorry, Dave, I can't let you do that");

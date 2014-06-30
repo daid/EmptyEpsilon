@@ -152,6 +152,8 @@
 		<Unit filename="../SeriousProton/src/Collisionable.cpp" />
 		<Unit filename="../SeriousProton/src/Collisionable.h" />
 		<Unit filename="../SeriousProton/src/P.h" />
+		<Unit filename="../SeriousProton/src/PlayerController.cpp" />
+		<Unit filename="../SeriousProton/src/PlayerController.h" />
 		<Unit filename="../SeriousProton/src/Renderable.cpp" />
 		<Unit filename="../SeriousProton/src/Renderable.h" />
 		<Unit filename="../SeriousProton/src/Updatable.cpp" />
