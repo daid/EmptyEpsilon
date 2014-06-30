@@ -110,9 +110,7 @@ void GameMasterUI::onGui()
                     continue;
                 text(sf::FloatRect(20, y, 130, 30), getMissileWeaponName(EMissileWeapons(n)) + ": " + string(cpuShip->weapon_storage[n]) + "/" + string(cpuShip->weapon_storage_max[n]), AlignLeft, 20);
                 if (button(sf::FloatRect(200, y, 100, 30), "Refill", 15))
-                {
                     cpuShip->weapon_storage[n] = cpuShip->weapon_storage_max[n];
-                }
                 y += 30;
             }
         }
@@ -135,6 +133,7 @@ void GameMasterUI::onGui()
         {
             selection = new SpaceStation();
             selection->faction_id = current_faction;
+            selection->setRotation(random(0, 360));
             selection->setPosition(view_position + sf::vector2FromAngle(random(0, 360)) * random(0, view_distance * 0.1));
         }
         std::vector<string> template_names = ShipTemplate::getTemplateNameList();
