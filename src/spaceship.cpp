@@ -569,11 +569,18 @@ bool SpaceShip::hasSystem(ESystem system)
 string SpaceShip::getCallSign()
 {
     int32_t id = getMultiplayerId();
-    if (id < 100)
-        return "S" + string(id);
-    else if (id < 200)
-        return "NC" + string(id - 100);
-    return "CV" + string(id - 200);
+    switch(id / 100)
+    {
+    case 0: return "S" + string(id % 100);
+    case 1: return "NC" + string(id % 100);
+    case 2: return "CV" + string(id % 100);
+    case 3: return "SS " + string(id % 100);
+    case 4: return "VS" + string(id % 100);
+    case 5: return "BR" + string(id % 100);
+    case 6: return "C-" + string(id % 100);
+    case 7: return "OV" + string(id % 100);
+    }
+    return "X-" + string(id)
 }
 
 string getMissileWeaponName(EMissileWeapons missile)
