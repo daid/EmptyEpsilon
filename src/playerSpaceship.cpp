@@ -20,6 +20,7 @@ static const int16_t CMD_DOCK = 0x000E;
 static const int16_t CMD_UNDOCK = 0x000F;
 static const int16_t CMD_OPEN_COMM = 0x0010;
 static const int16_t CMD_CLOSE_COMM = 0x0011;
+static const int16_t CMD_SEND_COMM = 0x0012;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -34,6 +35,7 @@ PlayerSpaceship::PlayerSpaceship()
     scanned_by_player = true;
     comms_state = CS_Inactive;
     comms_open_delay = 0.0;
+    comms_reply_count = 0;
 
     registerMemberReplication(&hull_damage_indicator, 0.5);
     registerMemberReplication(&warp_indicator, 0.5);
@@ -61,6 +63,9 @@ PlayerSpaceship::PlayerSpaceship()
         registerMemberReplication(&systems[n].coolantLevel);
         registerMemberReplication(&systems[n].heatLevel, 1.0);
     }
+    registerMemberReplication(&comms_reply_count);
+    for (int n=0; n<max_comms_reply_count; n++)
+        registerMemberReplication(&comms_reply[n].message);
     systems[SYS_Reactor].powerUserFactor = -30.0;
     systems[SYS_BeamWeapons].powerUserFactor = 3.0;
     systems[SYS_MissileSystem].powerUserFactor = 1.0;
@@ -101,8 +106,16 @@ void PlayerSpaceship::update(float delta)
             {
                 comms_open_delay -= delta;
             }else{
-                comms_state = CS_ChannelOpen;
-                //TODO: Initiate comms.
+                if (!comms_target || sf::length(getPosition() - comms_target->getPosition()) > max_comm_range)
+                {
+                    comms_state = CS_ChannelBroken;
+                }else{
+                    comms_reply_count = 0;
+                    if (comms_target->openCommChannel(this))
+                        comms_state = CS_ChannelOpen;
+                    else
+                        comms_state = CS_ChannelFailed;
+                }
             }
         }
         if (comms_state == CS_ChannelOpen)
@@ -252,6 +265,20 @@ void PlayerSpaceship::setSystemCoolant(ESystem system, float level)
     systems[system].coolantLevel = level;
 }
 
+void PlayerSpaceship::setCommsMessage(string message)
+{
+    comms_incomming_message = message;
+}
+
+void PlayerSpaceship::addCommsReply(int32_t id, string message)
+{
+    if (comms_reply_count == max_comms_reply_count)
+        return;
+    comms_reply[comms_reply_count].id = id;
+    comms_reply[comms_reply_count].message = message;
+    comms_reply_count++;
+}
+
 void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
 {
     int16_t command;
@@ -382,6 +409,19 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
     case CMD_CLOSE_COMM:
         comms_state = CS_Inactive;
         break;
+    case CMD_SEND_COMM:
+        if (comms_state == CS_ChannelOpen && comms_target)
+        {
+            int8_t index;
+            packet >> index;
+            if (index < comms_reply_count)
+            {
+                comms_incomming_message = "?";
+                comms_reply_count = 0;
+                comms_target->commChannelMessage(this, comms_reply[index].id);
+            }
+        }
+        break;
     }
 }
 
@@ -506,5 +546,12 @@ void PlayerSpaceship::commandCloseComm()
 {
     sf::Packet packet;
     packet << CMD_CLOSE_COMM;
+    sendCommand(packet);
+}
+
+void PlayerSpaceship::commandSendComm(int8_t index)
+{
+    sf::Packet packet;
+    packet << CMD_SEND_COMM << index;
     sendCommand(packet);
 }

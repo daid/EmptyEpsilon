@@ -67,7 +67,7 @@ void SpaceStation::drawRadar(sf::RenderTarget& window, sf::Vector2f position, fl
         objectSprite.setScale(0.7, 0.7);
     if (mySpaceship)
     {
-        if (factionInfo[faction_id].states[mySpaceship->faction_id] == FVF_Enemy)
+        if (isEnemy(mySpaceship))
             objectSprite.setColor(sf::Color::Red);
     }else{
         objectSprite.setColor(factionInfo[faction_id].gm_color);
@@ -109,5 +109,36 @@ void SpaceStation::takeDamage(float damageAmount, sf::Vector2f damageLocation, E
         shields = 0;
     }else{
         shieldHitEffect = 1.0;
+    }
+}
+
+bool SpaceStation::openCommChannel(P<PlayerSpaceship> ship)
+{
+    if (isEnemy(ship))
+        return false;
+    if (isFriendly(ship))
+    {
+        ship->setCommsMessage("Good day captain,\nWhat can we do for you today?");
+    }else{
+        if (ship->docking_state != DS_Docked || ship->docking_target != this)
+        {
+            ship->setCommsMessage("Greetings sir.\nIf you want to do business please dock with us first.");
+            return true;
+        }
+        ship->setCommsMessage("Welcome to our lovely station");
+        ship->addCommsReply(1, "Please re-stock our homing missiles.");
+        ship->addCommsReply(2, "Please re-stock our mines.");
+        ship->addCommsReply(3, "Please re-stock our nukes.");
+        ship->addCommsReply(4, "Please re-stock our EMP Missiles.");
+    }
+    return true;
+}
+
+void SpaceStation::commChannelMessage(P<PlayerSpaceship> ship, int32_t message_id)
+{
+    switch(message_id)
+    {
+    default:
+        ship->setCommsMessage("Sorry, Dave, I can't let you do that");
     }
 }

@@ -481,7 +481,7 @@ void CrewUI::commsUI()
                 }
             }
             
-            text(sf::FloatRect(50, 100, 300, 50), "Open comm channel to:");
+            text(sf::FloatRect(50, 100, 600, 50), "Open comm channel to:");
             if (comms_open_channel_type == OCT_None)
             {
                 if (button(sf::FloatRect(50, 150, 300, 50), "Station (" + string(station_list.size()) + ")"))
@@ -538,16 +538,42 @@ void CrewUI::commsUI()
         }
         break;
     case CS_OpeningChannel:
-        text(sf::FloatRect(50, 100, 300, 50), "Opening communication channel...");
+        text(sf::FloatRect(50, 100, 600, 50), "Opening communication channel...");
+        progressBar(sf::FloatRect(50, 150, 600, 50), mySpaceship->comms_open_delay, PlayerSpaceship::comms_channel_open_time, 0.0);
         if (button(sf::FloatRect(50, 800, 300, 50), "Cancel call"))
             mySpaceship->commandCloseComm();
         break;
     case CS_ChannelOpen:
+        {
+            std::vector<string> lines = mySpaceship->comms_incomming_message.split("\n");
+            float y = 100;
+            for(unsigned int n=0; n<lines.size(); n++)
+            {
+                text(sf::FloatRect(50, y, 600, 30), lines[n]);
+                y += 30;
+            }
+            y += 30;
+            for(int n=0; n<mySpaceship->comms_reply_count; n++)
+            {
+                if (button(sf::FloatRect(50, y, 600, 50), mySpaceship->comms_reply[n].message))
+                {
+                    mySpaceship->commandSendComm(n);
+                }
+                y += 50;
+            }
+            
+            if (button(sf::FloatRect(50, 800, 300, 50), "Close channel"))
+                mySpaceship->commandCloseComm();
+        }
+        break;
+    case CS_ChannelFailed:
+        text(sf::FloatRect(50, 100, 600, 50), "Failed to open communication channel.");
+        text(sf::FloatRect(50, 150, 600, 50), "No response.");
         if (button(sf::FloatRect(50, 800, 300, 50), "Close channel"))
             mySpaceship->commandCloseComm();
         break;
     case CS_ChannelBroken:
-        text(sf::FloatRect(50, 100, 300, 50), "ERROR 5812 - Checksum failed.");
+        text(sf::FloatRect(50, 100, 600, 50), "ERROR 5812 - Checksum failed.");
         if (button(sf::FloatRect(50, 800, 300, 50), "Close channel"))
             mySpaceship->commandCloseComm();
         break;

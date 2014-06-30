@@ -12,6 +12,7 @@ enum EDamageType
 };
 
 class SpaceObject;
+class PlayerSpaceship;
 extern PVector<SpaceObject> spaceObjectList;
 class SpaceObject : public Collisionable, public MultiplayerObject
 {
@@ -32,7 +33,13 @@ public:
     virtual bool hasShield() { return false; }
     virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type) {}
     
+    virtual bool openCommChannel(P<PlayerSpaceship> ship) { return false; }
+    virtual void commChannelMessage(P<PlayerSpaceship> ship, int32_t message_id) {}
+    
     static void damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, EDamageType type, float min_range);
+    
+    bool isEnemy(P<SpaceObject> obj);
+    bool isFriendly(P<SpaceObject> obj);
 };
 
 class NebulaInfo

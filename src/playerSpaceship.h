@@ -8,6 +8,7 @@ enum ECommsState
     CS_Inactive,
     CS_OpeningChannel,
     CS_ChannelOpen,
+    CS_ChannelFailed,
     CS_ChannelBroken
 };
 
@@ -22,6 +23,13 @@ public:
     float powerUserFactor;//const
 };
 
+class PlayerCommsReply
+{
+public:
+    int32_t id; //server only
+    string message;
+};
+
 class PlayerSpaceship : public SpaceShip
 {
 public:
@@ -34,6 +42,7 @@ public:
     const static float damage_per_second_on_overheat = 0.2;
     const static float max_comm_range = 50000;
     const static float comms_channel_open_time = 2.0;
+    const static int max_comms_reply_count = 16;
 
     PlayerSystem systems[SYS_COUNT];
 
@@ -47,6 +56,8 @@ public:
     float comms_open_delay;
     string comms_incomming_message;
     P<SpaceObject> comms_target;    //Server only
+    int8_t comms_reply_count;
+    PlayerCommsReply comms_reply[max_comms_reply_count];
     
     EMainScreenSetting mainScreenSetting;
 
@@ -70,6 +81,7 @@ public:
     void commandUndock();
     void commandOpenComm(P<SpaceObject> obj);
     void commandCloseComm();
+    void commandSendComm(int8_t index);
     
     virtual string getCallSign() { return ""; }
     
@@ -80,6 +92,9 @@ public:
 
     virtual void update(float delta);
     bool useEnergy(float amount) { if (energy_level >= amount) { energy_level -= amount; return true; } return false; }
+    
+    void setCommsMessage(string message);
+    void addCommsReply(int32_t id, string message);
 };
 REGISTER_MULTIPLAYER_ENUM(ECommsState);
 

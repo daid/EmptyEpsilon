@@ -1,5 +1,6 @@
 #include <SFML/OpenGL.hpp>
 #include "spaceObject.h"
+#include "factionInfo.h"
 
 PVector<SpaceObject> spaceObjectList;
 
@@ -20,6 +21,16 @@ void SpaceObject::draw3D()
 
 void SpaceObject::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange)
 {
+}
+
+bool SpaceObject::isEnemy(P<SpaceObject> obj)
+{
+    return factionInfo[faction_id].states[obj->faction_id] == FVF_Enemy;
+}
+
+bool SpaceObject::isFriendly(P<SpaceObject> obj)
+{
+    return factionInfo[faction_id].states[obj->faction_id] == FVF_Friendly;
 }
 
 void SpaceObject::damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, EDamageType type, float min_range)

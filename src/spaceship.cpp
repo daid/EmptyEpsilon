@@ -219,7 +219,7 @@ void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float
     {
         if (scanned_by_player)
         {
-            if (factionInfo[faction_id].states[mySpaceship->faction_id] == FVF_Enemy)
+            if (isEnemy(mySpaceship) == FVF_Enemy)
                 objectSprite.setColor(sf::Color::Red);
         }else{
             objectSprite.setColor(sf::Color(128, 128, 128));

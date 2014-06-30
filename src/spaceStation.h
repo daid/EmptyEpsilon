@@ -24,6 +24,9 @@ public:
     virtual bool canBeTargeted() { return true; }
     virtual bool hasShield() { return shields > (maxShields / 50.0); }
     virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type);
+
+    virtual bool openCommChannel(P<PlayerSpaceship> ship);
+    virtual void commChannelMessage(P<PlayerSpaceship> ship, int32_t message_id);
 };
 
 #endif//SPACE_SHIP_H

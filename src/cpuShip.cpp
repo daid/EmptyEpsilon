@@ -1,6 +1,5 @@
 #include "cpuShip.h"
 #include "playerInfo.h"
-#include "factionInfo.h"
 
 #include "scriptInterface.h"
 REGISTER_SCRIPT_CLASS(CpuShip)
@@ -196,7 +195,7 @@ P<SpaceObject> CpuShip::findBestTarget(sf::Vector2f position, float radius)
     foreach(Collisionable, obj, objectList)
     {
         P<SpaceObject> space_object = obj;
-        if (!space_object || !space_object->canBeTargeted() || factionInfo[faction_id].states[space_object->faction_id] != FVF_Enemy || space_object == target)
+        if (!space_object || !space_object->canBeTargeted() || !isEnemy(space_object) || space_object == target)
             continue;
         float distance = sf::length(space_object->getPosition() - position);
         if (distance > radius)
