@@ -19,3 +19,7 @@
 *.exe
 *.out
 *.app
+
+# Code::Blocks runtime files
+*.depend
+*.layout

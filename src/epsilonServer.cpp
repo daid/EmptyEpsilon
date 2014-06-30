@@ -3,6 +3,7 @@
 #include "spaceObject.h"
 #include "spaceStation.h"
 #include "cpuShip.h"
+#include "asteroid.h"
 #include "mine.h"
 #include "main.h"
 
@@ -36,6 +37,11 @@ EpsilonServer::EpsilonServer()
     {
         P<Mine> m = new Mine();
         m->setPosition(sf::vector2FromAngle(random(0, 360)) * random(7000, 20000));
+    }
+    for(int n=0; n<1000; n++)
+    {
+        P<Asteroid> a = new Asteroid();
+        a->setPosition(sf::vector2FromAngle(random(0, 360)) * random(7000, 20000));
     }
 }
 

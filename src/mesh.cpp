@@ -28,16 +28,6 @@ void Mesh::render()
     glNormalPointer(GL_FLOAT, sizeof(float) * (3 * 2 + 2), &vertices[0].normal[0]);
     glTexCoordPointer(2, GL_FLOAT, sizeof(float) * (3 * 2 + 2), &vertices[0].uv[0]);
     glDrawArrays(GL_TRIANGLES, 0, vertexCount);
-    /*
-    glBegin(GL_TRIANGLES);
-    for(int n=0; n<vertexCount; n++)
-    {
-        glTexCoord2f(vertices[n].uv[0], vertices[n].uv[1]);
-        glNormal3f(vertices[n].normal[0], vertices[n].normal[1], vertices[n].normal[2]);
-        glVertex3f(vertices[n].position[0], vertices[n].position[1], vertices[n].position[2]);
-    }
-    glEnd();
-    */
 }
 
 sf::Vector3f Mesh::randomPoint()

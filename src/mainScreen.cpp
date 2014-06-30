@@ -163,8 +163,20 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
         glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
         glPopMatrix();
     }
-
+    
+    PVector<SpaceObject> renderList;
+    sf::Vector2f viewVector = sf::vector2FromAngle(cameraRotation);
     foreach(SpaceObject, obj, spaceObjectList)
+    {
+        float depth = sf::dot(viewVector, obj->getPosition() - sf::Vector2f(cameraPosition.x, cameraPosition.y));
+        if (depth < -obj->getRadius() * 2)
+            continue;
+        if (depth > 0 && obj->getRadius() / depth < 1.0 / 500)
+            continue;
+        renderList.push_back(obj);
+    }
+
+    foreach(SpaceObject, obj, renderList)
     {
         glPushMatrix();
         glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
@@ -179,7 +191,7 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
     glBlendFunc(GL_ONE, GL_ONE);
     glDisable(GL_CULL_FACE);
     glDepthMask(false);
-    foreach(SpaceObject, obj, spaceObjectList)
+    foreach(SpaceObject, obj, renderList)
     {
         glPushMatrix();
         glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
