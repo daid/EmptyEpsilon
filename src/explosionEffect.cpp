@@ -4,8 +4,9 @@
 
 REGISTER_MULTIPLAYER_CLASS(ExplosionEffect, "ExplosionEffect");
 ExplosionEffect::ExplosionEffect()
-: SpaceObject(1.0, "ExplosionEffect")
+: SpaceObject(1000.0, "ExplosionEffect")
 {
+    setCollisionRadius(1.0);
     lifetime = maxLifetime;
     for(int n=0; n<particleCount; n++)
         particleDirections[n] = sf::normalize(sf::Vector3f(random(-1, 1), random(-1, 1), random(-1, 1))) * random(0.8, 1.2);

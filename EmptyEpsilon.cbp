@@ -312,6 +312,8 @@
 		<Unit filename="../SeriousProton/src/windowManager.h" />
 		<Unit filename="src/EMPMissile.cpp" />
 		<Unit filename="src/EMPMissile.h" />
+		<Unit filename="src/asteroid.cpp" />
+		<Unit filename="src/asteroid.h" />
 		<Unit filename="src/beamEffect.cpp" />
 		<Unit filename="src/beamEffect.h" />
 		<Unit filename="src/cpuShip.cpp" />
@@ -346,6 +348,8 @@
 		<Unit filename="src/mine.h" />
 		<Unit filename="src/nuke.cpp" />
 		<Unit filename="src/nuke.h" />
+		<Unit filename="src/particleEffect.cpp" />
+		<Unit filename="src/particleEffect.h" />
 		<Unit filename="src/playerInfo.cpp" />
 		<Unit filename="src/playerInfo.h" />
 		<Unit filename="src/playerSpaceship.cpp" />

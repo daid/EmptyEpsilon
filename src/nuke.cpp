@@ -1,5 +1,6 @@
 #include <SFML/OpenGL.hpp>
 #include "nuke.h"
+#include "particleEffect.h"
 #include "explosionEffect.h"
 
 REGISTER_MULTIPLAYER_CLASS(Nuke, "Nuke");
@@ -63,6 +64,9 @@ void Nuke::update(float delta)
     if (lifetime < 0)
         destroy();
     setVelocity(sf::vector2FromAngle(getRotation()) * speed);
+
+    if (delta > 0)
+        ParticleEngine::spawn(sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(1, 1, 1), sf::Vector3f(0, 0, 0), 5, 20, 5.0);
 }
 
 void Nuke::collision(Collisionable* target)

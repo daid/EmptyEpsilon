@@ -1,6 +1,7 @@
 #include <SFML/OpenGL.hpp>
 #include "mainScreen.h"
 #include "shipSelectionScreen.h"
+#include "particleEffect.h"
 #include "main.h"
 
 MainScreenUI::MainScreenUI()
@@ -201,6 +202,12 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
         obj->draw3DTransparent();
         glPopMatrix();
     }
+
+    glPushMatrix();
+    glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
+    ParticleEngine::render();
+    glPopMatrix();
+    
     glDepthMask(true);
     glDisable(GL_BLEND);
     glEnable(GL_CULL_FACE);
