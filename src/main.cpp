@@ -38,6 +38,7 @@ int main(int argc, char** argv)
     int fsaa = 0;
     engine->registerObject("windowManager", new WindowManager(width, height, false, glitchPostProcessor, fsaa));
     engine->registerObject("mouseRenderer", new MouseRenderer());
+    soundManager.setMusicVolume(50);
     
     P<ResourceStream> stream = getResourceStream("sansation.ttf");
     mainFont.loadFromStream(**stream);

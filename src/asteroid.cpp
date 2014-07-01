@@ -3,6 +3,11 @@
 #include "explosionEffect.h"
 #include "main.h"
 
+#include "scriptInterface.h"
+REGISTER_SCRIPT_SUBCLASS(Asteroid, SpaceObject)
+{
+}
+
 REGISTER_MULTIPLAYER_CLASS(Asteroid, "Asteroid");
 Asteroid::Asteroid()
 : SpaceObject(70, "Asteroid")

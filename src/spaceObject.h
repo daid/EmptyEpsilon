@@ -40,6 +40,7 @@ public:
     
     bool isEnemy(P<SpaceObject> obj);
     bool isFriendly(P<SpaceObject> obj);
+    void setFaction(int faction_id) { this->faction_id = faction_id; }
 };
 
 class NebulaInfo

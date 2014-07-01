@@ -2,9 +2,19 @@
 #include "playerInfo.h"
 
 #include "scriptInterface.h"
-REGISTER_SCRIPT_CLASS(CpuShip)
+REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceObject)
 {
+    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setPosition);
+    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setRotation);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setShipTemplate);
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderIdle);
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderRoaming);
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderStandGround);
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderDefendLocation);
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderDefendTarget);
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyFormation);
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyTowards);
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderAttack);
 }
 
 REGISTER_MULTIPLAYER_CLASS(CpuShip, "CpuShip");

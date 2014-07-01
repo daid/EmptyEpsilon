@@ -8,7 +8,7 @@
 #include "main.h"
 
 #include "scriptInterface.h"
-REGISTER_SCRIPT_CLASS(SpaceStation)
+REGISTER_SCRIPT_SUBCLASS(SpaceStation, SpaceObject)
 {
 }
 

@@ -2,6 +2,14 @@
 #include "spaceObject.h"
 #include "factionInfo.h"
 
+#include "scriptInterface.h"
+REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
+{
+    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setPosition);
+    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setRotation);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setFaction);
+}
+
 PVector<SpaceObject> spaceObjectList;
 
 SpaceObject::SpaceObject(float collisionRange, string multiplayerName)
