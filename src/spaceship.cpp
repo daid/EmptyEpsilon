@@ -220,7 +220,7 @@ void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float
     {
         if (scanned_by_player)
         {
-            if (isEnemy(mySpaceship) == FVF_Enemy)
+            if (isEnemy(mySpaceship))
                 objectSprite.setColor(sf::Color::Red);
         }else{
             objectSprite.setColor(sf::Color(128, 128, 128));
@@ -262,12 +262,16 @@ void SpaceShip::update(float delta)
     if (front_shield < front_shield_max)
     {
         front_shield += delta * shield_recharge_rate * front_shield_recharge_factor;
+        if (docking_state == DS_Docked)
+            front_shield += delta * shield_recharge_rate * front_shield_recharge_factor * 3.0;
         if (front_shield > front_shield_max)
             front_shield = front_shield_max;
     }
     if (rear_shield < front_shield_max)
     {
         rear_shield += delta * shield_recharge_rate * rear_shield_recharge_factor;
+        if (docking_state == DS_Docked)
+            rear_shield += delta * shield_recharge_rate * rear_shield_recharge_factor * 3.0;
         if (rear_shield > rear_shield_max)
             rear_shield = rear_shield_max;
     }
@@ -354,7 +358,7 @@ void SpaceShip::update(float delta)
         float angle = sf::vector2ToAngle(diff);
         for(int n=0; n<maxBeamWeapons; n++)
         {
-            if (target && factionInfo[faction_id].states[target->faction_id] == FVF_Enemy && beamWeapons[n].cooldown <= 0.0 && distance < beamWeapons[n].range)
+            if (target && isEnemy(target) && beamWeapons[n].cooldown <= 0.0 && distance < beamWeapons[n].range)
             {
                 float angleDiff = sf::angleDifference(beamWeapons[n].direction + getRotation(), angle);
                 if (abs(angleDiff) < beamWeapons[n].arc / 2.0)
@@ -500,7 +504,7 @@ void SpaceShip::initJump(float distance)
 
 void SpaceShip::requestDock(P<SpaceStation> target)
 {
-    if (!target || docking_state != DS_NotDocking)
+    if (!target || docking_state != DS_NotDocking || isEnemy(target))
         return;
     if (sf::length(getPosition() - target->getPosition()) > 1000)
         return;

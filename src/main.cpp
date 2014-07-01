@@ -35,8 +35,12 @@ int main(int argc, char** argv)
 
     int width = 1600;
     int height = 900;
-    int fsaa = 0;
-    engine->registerObject("windowManager", new WindowManager(width, height, false, glitchPostProcessor, fsaa));
+    int fsaa = 2;
+    bool fullscreen = true;
+#ifdef DEBUG
+    fullscreen = false;
+#endif
+    engine->registerObject("windowManager", new WindowManager(width, height, fullscreen, glitchPostProcessor, fsaa));
     engine->registerObject("mouseRenderer", new MouseRenderer());
     soundManager.setMusicVolume(50);
     
