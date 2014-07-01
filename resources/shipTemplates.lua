@@ -2,7 +2,7 @@
 template = ShipTemplate():setName("Small Station"):setMesh("space_station_4.obj", "space_station_4_color.jpg", "space_station_4_specular.jpg", "space_station_4_illumination.jpg"):setScale(10)
 
 --[[ Player ships --]]
-template = ShipTemplate():setName("Player Cruiser"):setMesh("space_frigate_6.obj", "space_frigate_6_color.png", "space_frigate_6_specular.png", "space_frigate_6_illumination.png"):setScale(3):setRadius(50)
+template = ShipTemplate():setName("Player Cruiser"):setMesh("space_frigate_6.obj", "space_frigate_6_color.png", "space_frigate_6_specular.png", "space_frigate_6_illumination.png"):setScale(6):setRadius(100)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
 template:setBeamPosition(0, -8, -1.6, -2)
 template:setBeamPosition(1,  8, -1.6, -2)
@@ -55,7 +55,7 @@ template:addDoor(8, 4, false);
 
 --[[ Neutral or special ship types --]]
 --Tug, used for transport of small goods (like weapons)
-template = ShipTemplate():setName("Tug"):setMesh("space_tug.obj", "space_tug_color.jpg", "space_tug_illumination.jpg", "space_tug_illumination.jpg"):setScale(3):setRadius(40)
+template = ShipTemplate():setName("Tug"):setMesh("space_tug.obj", "space_tug_color.jpg", "space_tug_illumination.jpg", "space_tug_illumination.jpg"):setScale(6):setRadius(80)
 template:setHull(50)
 template:setShields(20, 20)
 template:setSpeed(60, 6)
@@ -65,7 +65,7 @@ template:setWeaponStorage("Mine", 3)
 template:setWeaponStorage("EMP", 2)
 
 --[[ Enemy ship types --]]
-template = ShipTemplate():setName("Fighter"):setMesh("small_fighter_1.obj", "small_fighter_1_color.jpg", "small_fighter_1_specular.jpg", "small_fighter_1_illumination.jpg"):setScale(1.5):setRadius(20)
+template = ShipTemplate():setName("Fighter"):setMesh("small_fighter_1.obj", "small_fighter_1_color.jpg", "small_fighter_1_specular.jpg", "small_fighter_1_illumination.jpg"):setScale(3):setRadius(40)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
 template:setBeamPosition(0, 0, 23, -1.8)
 --                  Arc, Dir, Range, CycleTime, Dmg
@@ -75,7 +75,7 @@ template:setHull(50)
 template:setShields(30, 30)
 template:setSpeed(100, 30)
 
-template = ShipTemplate():setName("Cruiser"):setMesh("space_frigate_6.obj", "space_frigate_6_color.png", "space_frigate_6_specular.png", "space_frigate_6_illumination.png"):setScale(3):setRadius(50)
+template = ShipTemplate():setName("Cruiser"):setMesh("space_frigate_6.obj", "space_frigate_6_color.png", "space_frigate_6_specular.png", "space_frigate_6_illumination.png"):setScale(6):setRadius(100)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
 template:setBeamPosition(0, -8, -1.6, -2)
 template:setBeamPosition(1,  8, -1.6, -2)
@@ -88,7 +88,7 @@ template:setHull(70)
 template:setShields(40, 40)
 template:setSpeed(40, 7)
 
-template = ShipTemplate():setName("Missile Cruiser"):setMesh("space_cruiser_4.obj", "space_cruiser_4_color.jpg", "space_cruiser_4_illumination.jpg", "space_cruiser_4_illumination.jpg"):setScale(4):setRadius(50)
+template = ShipTemplate():setName("Missile Cruiser"):setMesh("space_cruiser_4.obj", "space_cruiser_4_color.jpg", "space_cruiser_4_illumination.jpg", "space_cruiser_4_illumination.jpg"):setScale(8):setRadius(100)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
 template:setTubePosition(0, -10, 2, -2.3)
 template:setTubePosition(1,  10, 2, -2.3)
@@ -100,7 +100,7 @@ template:setSpeed(40, 6)
 template:setWeaponStorage("Homing", 10)
 
 
-template = ShipTemplate():setName("Adv. Gunship"):setMesh("dark_fighter_6.obj", "dark_fighter_6_color.png", "dark_fighter_6_specular.png", "dark_fighter_6_illumination.png"):setScale(3.5):setRadius(100)
+template = ShipTemplate():setName("Adv. Gunship"):setMesh("dark_fighter_6.obj", "dark_fighter_6_color.png", "dark_fighter_6_specular.png", "dark_fighter_6_illumination.png"):setScale(7):setRadius(200)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
 template:setBeamPosition(0,-28.2, 21, -2)
 template:setBeamPosition(1, 28.2, 21, -2)
@@ -116,7 +116,7 @@ template:setSpeed(50, 8)
 template:setWeaponStorage("Homing", 6)
 
 
-template = ShipTemplate():setName("Dreadnought"):setMesh("space_cruiser_4.obj", "space_cruiser_4_color.jpg", "space_cruiser_4_illumination.jpg", "space_cruiser_4_illumination.jpg"):setScale(8):setRadius(100)
+template = ShipTemplate():setName("Dreadnought"):setMesh("space_cruiser_4.obj", "space_cruiser_4_color.jpg", "space_cruiser_4_illumination.jpg", "space_cruiser_4_illumination.jpg"):setScale(16):setRadius(200)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
 template:setBeamPosition(0, -10, 2, -2.3)
 template:setBeamPosition(1,  10, 2, -2.3)

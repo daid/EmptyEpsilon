@@ -11,7 +11,7 @@ class Mine : public SpaceObject, public Updatable
     const static float ejectDelay = 3.0f;
     const static float triggerDelay = 1.0f;
     const static float damageAtCenter = 160.0f;
-    const static float damageAtEdge = 60.0f;
+    const static float damageAtEdge = 30.0f;
     
 public:
     bool triggered;       //Only valid on server.

@@ -6,7 +6,7 @@
 class HomingMissile : public SpaceObject, public Updatable
 {
     const static float speed = 500.0f;
-    const static float turnSpeed = 150.0f;
+    const static float turnSpeed = 100.0f;
     const static float totalLifetime = 12.0f;
     
     float lifetime;

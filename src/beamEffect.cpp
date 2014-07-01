@@ -6,8 +6,9 @@
 
 REGISTER_MULTIPLAYER_CLASS(BeamEffect, "BeamEffect");
 BeamEffect::BeamEffect()
-: SpaceObject(1, "BeamEffect")
+: SpaceObject(1000, "BeamEffect")
 {
+    setCollisionRadius(1.0);
     lifetime = 1.0;
     registerMemberReplication(&sourceId);
     registerMemberReplication(&targetId);

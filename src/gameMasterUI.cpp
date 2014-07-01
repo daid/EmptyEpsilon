@@ -59,6 +59,19 @@ void GameMasterUI::onGui()
     foreach(SpaceObject, obj, spaceObjectList)
     {
         obj->drawRadar(window, sf::Vector2f(800, 450) + (obj->getPosition() - view_position) / view_distance * 400.0f, 400.0f / view_distance, view_distance > 10000);
+        P<CpuShip> cpuShip = obj;
+        if (cpuShip)
+        {
+            P<SpaceObject> target = cpuShip->getTarget();
+            if (target)
+            {
+                sf::VertexArray a(sf::Lines, 2);
+                a[0].position = sf::Vector2f(800, 450) + (cpuShip->getPosition() - view_position) / view_distance * 400.0f;
+                a[1].position = sf::Vector2f(800, 450) + (target->getPosition() - view_position) / view_distance * 400.0f;
+                a[0].color = a[1].color = sf::Color(255, 255, 255, 32);
+                window.draw(a);
+            }
+        }
     }
     sf::RectangleShape sidebackBackground(sf::Vector2f(300, 900));
     sidebackBackground.setFillColor(sf::Color(0, 0, 0, 128));
@@ -82,16 +95,6 @@ void GameMasterUI::onGui()
         if (cpuShip)
         {
             text(sf::FloatRect(20, 80, 100, 20), "Orders: " + getAIOrderString(cpuShip->getOrder()), AlignLeft, 20);
-            
-            P<SpaceObject> target = cpuShip->getTarget();
-            if (target)
-            {
-                sf::VertexArray a(sf::Lines, 2);
-                a[0].position = sf::Vector2f(800, 450) + (cpuShip->getPosition() - view_position) / view_distance * 400.0f;
-                a[1].position = sf::Vector2f(800, 450) + (target->getPosition() - view_position) / view_distance * 400.0f;
-                a[0].color = a[1].color = sf::Color(255, 255, 255, 32);
-                window.draw(a);
-            }
             
             float y = 100;
             if (toggleButton(sf::FloatRect(20, y, 150, 30), cpuShip->getOrder() == AI_Idle, "Idle", 20))

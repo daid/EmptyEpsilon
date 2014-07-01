@@ -59,8 +59,8 @@ void Mine::update(float delta)
         particleTimeout -= delta;
     }else{
         sf::Vector3f pos = sf::Vector3f(getPosition().x, getPosition().y, 0);
-        ParticleEngine::spawn(pos, pos + sf::Vector3f(random(-100, 100), random(-100, 100), random(-100, 100)), sf::Vector3f(1, 1, 1), sf::Vector3f(0, 0, 1), 30, 0, 5.0);
-        particleTimeout = 0.5;
+        ParticleEngine::spawn(pos, pos + sf::Vector3f(random(-100, 100), random(-100, 100), random(-100, 100)), sf::Vector3f(1, 1, 1), sf::Vector3f(0, 0, 1), 30, 0, 10.0);
+        particleTimeout = 0.4;
     }
 
     if (ejectTimeout > 0.0)
