@@ -13,11 +13,6 @@ Nuke::Nuke()
 
 void Nuke::draw3D()
 {
-    sf::Shader::bind(NULL);
-    glColor3f(1, 1, 1);
-    glBegin(GL_POINTS);
-    glVertex3f(0, 0, 0);
-    glEnd();
 }
 
 void Nuke::draw3DTransparent()
@@ -66,7 +61,7 @@ void Nuke::update(float delta)
     setVelocity(sf::vector2FromAngle(getRotation()) * speed);
 
     if (delta > 0)
-        ParticleEngine::spawn(sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(1, 1, 1), sf::Vector3f(0, 0, 0), 5, 20, 5.0);
+        ParticleEngine::spawn(sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(1, 0.5, 0.5), sf::Vector3f(0, 0, 0), 8, 30, 5.0);
 }
 
 void Nuke::collision(Collisionable* target)

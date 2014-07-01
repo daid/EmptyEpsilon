@@ -17,6 +17,7 @@ public:
     bool triggered;       //Only valid on server.
     float triggerTimeout; //Only valid on server.
     float ejectTimeout;   //Only valid on server.
+    float particleTimeout;
 
     Mine();
 

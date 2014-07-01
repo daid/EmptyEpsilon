@@ -1,6 +1,7 @@
 #include <SFML/OpenGL.hpp>
 #include "mine.h"
 #include "playerInfo.h"
+#include "particleEffect.h"
 #include "explosionEffect.h"
 
 REGISTER_MULTIPLAYER_CLASS(Mine, "Mine");
@@ -11,6 +12,7 @@ Mine::Mine()
     triggered = false;
     triggerTimeout = triggerDelay;
     ejectTimeout = 0.0;
+    particleTimeout = 0.0;
 }
 
 void Mine::draw3D()
@@ -52,6 +54,15 @@ void Mine::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scal
 
 void Mine::update(float delta)
 {
+    if (particleTimeout > 0)
+    {
+        particleTimeout -= delta;
+    }else{
+        sf::Vector3f pos = sf::Vector3f(getPosition().x, getPosition().y, 0);
+        ParticleEngine::spawn(pos, pos + sf::Vector3f(random(-100, 100), random(-100, 100), random(-100, 100)), sf::Vector3f(1, 1, 1), sf::Vector3f(0, 0, 1), 30, 0, 5.0);
+        particleTimeout = 0.5;
+    }
+
     if (ejectTimeout > 0.0)
     {
         ejectTimeout -= delta;

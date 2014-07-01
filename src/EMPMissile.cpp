@@ -13,11 +13,6 @@ EMPMissile::EMPMissile()
 
 void EMPMissile::draw3D()
 {
-    sf::Shader::bind(NULL);
-    glColor3f(1, 1, 1);
-    glBegin(GL_POINTS);
-    glVertex3f(0, 0, 0);
-    glEnd();
 }
 
 void EMPMissile::draw3DTransparent()
@@ -66,7 +61,7 @@ void EMPMissile::update(float delta)
     setVelocity(sf::vector2FromAngle(getRotation()) * speed);
 
     if (delta > 0)
-        ParticleEngine::spawn(sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(1, 1, 1), sf::Vector3f(0, 0, 0), 5, 20, 5.0);
+        ParticleEngine::spawn(sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(0.5, 0.5, 1), sf::Vector3f(0, 0, 0), 8, 30, 5.0);
 }
 
 void EMPMissile::collision(Collisionable* target)
