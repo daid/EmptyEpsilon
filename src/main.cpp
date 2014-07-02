@@ -1,6 +1,7 @@
 #include "gui.h"
 #include "mainMenus.h"
 #include "factionInfo.h"
+#include "spaceObject.h"
 #include "main.h"
 
 sf::Vector3f cameraPosition;
@@ -43,6 +44,8 @@ int main(int argc, char** argv)
     engine->registerObject("windowManager", new WindowManager(width, height, fullscreen, glitchPostProcessor, fsaa));
     engine->registerObject("mouseRenderer", new MouseRenderer());
     soundManager.setMusicVolume(50);
+
+    randomNebulas();
     
     P<ResourceStream> stream = getResourceStream("sansation.ttf");
     mainFont.loadFromStream(**stream);

@@ -1,6 +1,7 @@
 #include "playerInfo.h"
 
 static const int16_t CMD_UPDATE_CREW_POSITION = 0x0001;
+static const int16_t CMD_UPDATE_SHIP_ID = 0x0002;
 
 P<GameGlobalInfo> gameGlobalInfo;
 P<PlayerInfo> myPlayerInfo;
@@ -73,16 +74,22 @@ PlayerInfo::PlayerInfo()
         crewPosition[n] = false;
         registerMemberReplication(&crewPosition[n]);
     }
+    registerMemberReplication(&ship_id);
     
     playerInfoList.push_back(this);
 }
 
 void PlayerInfo::setCrewPosition(ECrewPosition position, bool active)
 {
-    //crewPosition[position] = active;
-    
     sf::Packet packet;
     packet << CMD_UPDATE_CREW_POSITION << int32_t(position) << active;
+    sendCommand(packet);
+}
+
+void PlayerInfo::setShipId(int32_t id)
+{
+    sf::Packet packet;
+    packet << CMD_UPDATE_SHIP_ID << id;
     sendCommand(packet);
 }
 
@@ -100,6 +107,9 @@ void PlayerInfo::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             packet >> position >> active;
             crewPosition[position] = active;
         }
+        break;
+    case CMD_UPDATE_SHIP_ID:
+        packet >> ship_id;
         break;
     }
 }

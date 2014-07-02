@@ -43,11 +43,13 @@ public:
     int32_t clientId;
     
     bool crewPosition[maxCrewPositions];
+    int32_t ship_id;
     
     PlayerInfo();
     
     bool isMainScreen();
     void setCrewPosition(ECrewPosition position, bool active);
+    void setShipId(int32_t id);
     virtual void onReceiveCommand(int32_t clientId, sf::Packet& packet);
 };
 

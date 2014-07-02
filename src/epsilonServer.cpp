@@ -17,9 +17,9 @@ EpsilonServer::EpsilonServer()
     engine->setGameSpeed(0.0);
     
     soundManager.playMusic("music/Dream Raid Full Version (Mock Up).ogg");
+    //return;
     
     //TMP
-    randomNebulas();
     P<SpaceStation> station = new SpaceStation();
     station->setPosition(sf::Vector2f(0, -500));
     

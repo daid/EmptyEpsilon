@@ -16,6 +16,7 @@ class Mesh : public sf::NonCopyable
     int vertexCount;
     MeshVertex* vertices;
     int16_t* indices;
+    unsigned int vbo;
 
     Mesh();
 public:
