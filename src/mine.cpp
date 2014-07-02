@@ -4,6 +4,11 @@
 #include "particleEffect.h"
 #include "explosionEffect.h"
 
+#include "scriptInterface.h"
+REGISTER_SCRIPT_SUBCLASS(Mine, SpaceObject)
+{
+}
+
 REGISTER_MULTIPLAYER_CLASS(Mine, "Mine");
 Mine::Mine()
 : SpaceObject(50, "Mine")

@@ -17,33 +17,6 @@ EpsilonServer::EpsilonServer()
     engine->setGameSpeed(0.0);
     
     soundManager.playMusic("music/Dream Raid Full Version (Mock Up).ogg");
-    //return;
-    
-    //TMP
-    P<SpaceStation> station = new SpaceStation();
-    station->setPosition(sf::Vector2f(0, -500));
-    
-    for(int n=0; n<10; n++)
-    {
-        P<CpuShip> s = new CpuShip();
-        if (random(0, 100) < 10)
-            s->setShipTemplate("Missile Cruiser");
-        else
-            s->setShipTemplate("Fighter");
-        s->setPosition(sf::vector2FromAngle(random(0, 360)) * random(7000, 20000));
-        s->orderRoaming();
-    }
-    for(int n=0; n<100; n++)
-    {
-        P<Mine> m = new Mine();
-        m->setPosition(sf::vector2FromAngle(random(0, 360)) * random(7000, 20000));
-    }
-    
-    for(int n=0; n<1000; n++)
-    {
-        P<Asteroid> a = new Asteroid();
-        a->setPosition(sf::vector2FromAngle(random(0, 360)) * random(7000, 20000));
-    }
 }
 
 void EpsilonServer::onNewClient(int32_t clientId)
@@ -80,4 +53,6 @@ void disconnectFromServer()
         o->destroy();
     if (myPlayerInfo)
         myPlayerInfo->destroy();
+    if (engine->getObject("scenario"))
+        engine->getObject("scenario")->destroy();
 }

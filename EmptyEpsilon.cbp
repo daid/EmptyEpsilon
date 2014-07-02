@@ -33,7 +33,6 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add directory="../../SFML-2.1/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -50,6 +49,8 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-DGLEW_NO_GLU" />
+			<Add option="-DGLEW_STATIC" />
 			<Add directory="../SFML-2.1/include" />
 			<Add directory="../SeriousProton/src" />
 		</Compiler>
@@ -151,6 +152,12 @@
 		<Unit filename="../SeriousProton/src/Box2D/Rope/b2Rope.h" />
 		<Unit filename="../SeriousProton/src/Collisionable.cpp" />
 		<Unit filename="../SeriousProton/src/Collisionable.h" />
+		<Unit filename="../SeriousProton/src/GL/glew.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../SeriousProton/src/GL/glew.h" />
+		<Unit filename="../SeriousProton/src/GL/glxew.h" />
+		<Unit filename="../SeriousProton/src/GL/wglew.h" />
 		<Unit filename="../SeriousProton/src/P.h" />
 		<Unit filename="../SeriousProton/src/PlayerController.cpp" />
 		<Unit filename="../SeriousProton/src/PlayerController.h" />

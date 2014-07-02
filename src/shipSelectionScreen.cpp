@@ -8,9 +8,36 @@
 
 ShipSelectionScreen::ShipSelectionScreen()
 {
+    active_scenario_index = 0;
+    
     if (gameServer)
     {
-        std::vector<string> scenarios = findResources("scenario_*.lua");
+        std::vector<string> scenario_filenames = findResources("scenario_*.lua");
+        std::sort(scenario_filenames.begin(), scenario_filenames.end());
+        
+        for(unsigned int n=0; n<scenario_filenames.size(); n++)
+        {
+            P<ResourceStream> stream = getResourceStream(scenario_filenames[n]);
+            if (!stream) continue;
+            
+            ScenarioInfo info;
+            info.filename = scenario_filenames[n];
+            info.name = scenario_filenames[n].substr(9, -4);
+            
+            for(int i=0; i<10; i++)
+            {
+                string line = stream->readLine().strip();
+                if (!line.startswith("--"))
+                    continue;
+                line = line.substr(2).strip();
+                if (line.startswith("Name:"))
+                    info.name = line.substr(5).strip();
+                if (line.startswith("Description:"))
+                    info.description = line.substr(12).strip();
+            }
+
+            scenarios.push_back(info);
+        }
     }
 }
 
@@ -47,6 +74,8 @@ void ShipSelectionScreen::onGui()
     {
         if (button(sf::FloatRect(800, 700, 300, 50), "Ready"))
         {
+            if (gameServer && !engine->getObject("scenario") && active_scenario_index < int(scenarios.size()))
+                engine->registerObject("scenario", new ScriptObject(scenarios[active_scenario_index].filename));
             destroy();
             if (myPlayerInfo->isMainScreen())
             {
@@ -99,6 +128,9 @@ void ShipSelectionScreen::onGui()
         
         if (button(sf::FloatRect(1200, 150, 300, 50), "Game Master"))
         {
+            if (gameServer && !engine->getObject("scenario") && active_scenario_index < int(scenarios.size()))
+                engine->registerObject("scenario", new ScriptObject(scenarios[active_scenario_index].filename));
+
             mySpaceship = NULL;
             myPlayerInfo->setShipId(-1);
             destroy();
@@ -110,6 +142,16 @@ void ShipSelectionScreen::onGui()
             destroy();
             disconnectFromServer();
             new MainMenu();
+        }
+        
+        if (active_scenario_index < int(scenarios.size()) && !engine->getObject("scenario"))
+        {
+            active_scenario_index += selector(sf::FloatRect(1200, 700, 300, 50), scenarios[active_scenario_index].name);
+            if (active_scenario_index < 0)
+                active_scenario_index = scenarios.size() - 1;
+            if (active_scenario_index >= int(scenarios.size()))
+                active_scenario_index = 0;
+            text(sf::FloatRect(1200, 750, 300, 20), scenarios[active_scenario_index].description, AlignRight, 15);
         }
     }else{
         if (button(sf::FloatRect(50, 800, 300, 50), "Disconnect"))
