@@ -111,7 +111,7 @@ void PlayerSpaceship::update(float delta)
                     comms_state = CS_ChannelBroken;
                 }else{
                     comms_reply_count = 0;
-                    if (comms_target->openCommChannel(this))
+                    if (comms_script_interface.openCommChannel(this, comms_target, comms_target->comms_script_name))
                         comms_state = CS_ChannelOpen;
                     else
                         comms_state = CS_ChannelFailed;
@@ -418,7 +418,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             {
                 comms_incomming_message = "?";
                 comms_reply_count = 0;
-                comms_target->commChannelMessage(this, comms_reply[index].id);
+                comms_script_interface.commChannelMessage(comms_reply[index].id);
             }
         }
         break;

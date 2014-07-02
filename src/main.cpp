@@ -36,7 +36,7 @@ int main(int argc, char** argv)
 
     int width = 1600;
     int height = 900;
-    int fsaa = 2;
+    int fsaa = 0;
     bool fullscreen = true;
 #ifdef DEBUG
     fullscreen = false;

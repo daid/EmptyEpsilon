@@ -2,6 +2,7 @@
 #define PLAYER_SPACESHIP_H
 
 #include "spaceship.h"
+#include "commsScriptInterface.h"
 
 enum ECommsState
 {
@@ -58,6 +59,7 @@ public:
     P<SpaceObject> comms_target;    //Server only
     int8_t comms_reply_count;
     PlayerCommsReply comms_reply[max_comms_reply_count];
+    CommsScriptInterface comms_script_interface;  //Server only
     
     EMainScreenSetting mainScreenSetting;
 
