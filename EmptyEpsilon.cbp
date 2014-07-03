@@ -49,8 +49,6 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="-DGLEW_NO_GLU" />
-			<Add option="-DGLEW_STATIC" />
 			<Add directory="../SFML-2.1/include" />
 			<Add directory="../SeriousProton/src" />
 		</Compiler>
