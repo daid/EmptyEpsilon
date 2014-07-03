@@ -13,7 +13,7 @@ CrewUI::CrewUI()
     
     for(int n=0; n<maxCrewPositions; n++)
     {
-        if (myPlayerInfo->crewPosition[n])
+        if (myPlayerInfo->crew_position[n])
         {
             showPosition = ECrewPosition(n);
             break;
@@ -29,30 +29,26 @@ void CrewUI::onGui()
         {
         case helmsOfficer:
             helmsUI();
-            mainScreenSelectGUI();
             break;
         case weaponsOfficer:
             weaponsUI();
-            mainScreenSelectGUI();
             break;
         case engineering:
             engineeringUI();
-            mainScreenSelectGUI();
             break;
         case scienceOfficer:
             scienceUI();
-            mainScreenSelectGUI();
             break;
         case commsOfficer:
             commsUI();
-            mainScreenSelectGUI();
             break;
         default:
             drawStatic();
             text(sf::FloatRect(0, 500, 1600, 100), "???", AlignCenter, 100);
-            mainScreenSelectGUI();
             break;
         }
+        if (myPlayerInfo->main_screen_control)
+            mainScreenSelectGUI();
     }else{
         drawStatic();
     }
@@ -60,7 +56,7 @@ void CrewUI::onGui()
     int offset = 0;
     for(int n=0; n<maxCrewPositions; n++)
     {
-        if (myPlayerInfo->crewPosition[n])
+        if (myPlayerInfo->crew_position[n])
         {
             if (toggleButton(sf::FloatRect(200 * offset, 0, 200, 25), showPosition == ECrewPosition(n), getCrewPositionName(ECrewPosition(n)), 20))
             {

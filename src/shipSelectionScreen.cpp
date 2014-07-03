@@ -54,29 +54,43 @@ void ShipSelectionScreen::onGui()
     if (mySpaceship)
     {
         int32_t my_ship_id = mySpaceship->getMultiplayerId();
-        {
-            int mainCnt = 0;
-            foreach(PlayerInfo, i, playerInfoList)
-            {
-                if (i->ship_id == my_ship_id && i->isMainScreen())
-                    mainCnt++;
-            }
 
-            text(sf::FloatRect(800, 100, 300, 50), string(myPlayerInfo->isMainScreen() ? "*" : " ") + "Main screen", AlignCenter);
-            text(sf::FloatRect(1100, 100, 300, 50), string(mainCnt));
+        int main_screen_control_cnt = 0;
+        int mainCnt = 0;
+        foreach(PlayerInfo, i, playerInfoList)
+        {
+            if (i->ship_id == my_ship_id && i->isMainScreen())
+                mainCnt++;
+            if (i->ship_id == my_ship_id && i->main_screen_control)
+                main_screen_control_cnt++;
         }
+
+        text(sf::FloatRect(800, 100, 300, 50), string(myPlayerInfo->isMainScreen() ? "*" : " ") + "Main screen", AlignCenter);
+        text(sf::FloatRect(1100, 100, 300, 50), string(mainCnt));
+        
+        float y = 150;
         for(int n=0; n<maxCrewPositions; n++)
         {
-            if (toggleButton(sf::FloatRect(800, 150 + 50 * n, 300, 50), myPlayerInfo->crewPosition[n], getCrewPositionName(ECrewPosition(n))))
+            if (toggleButton(sf::FloatRect(800, y, 300, 50), myPlayerInfo->crew_position[n], getCrewPositionName(ECrewPosition(n))))
             {
-                myPlayerInfo->setCrewPosition(ECrewPosition(n), !myPlayerInfo->crewPosition[n]);
+                myPlayerInfo->setCrewPosition(ECrewPosition(n), !myPlayerInfo->crew_position[n]);
             }
             int cnt = 0;
             foreach(PlayerInfo, i, playerInfoList)
-                if (i->ship_id == my_ship_id && i->crewPosition[n])
+                if (i->ship_id == my_ship_id && i->crew_position[n])
                     cnt++;
-            text(sf::FloatRect(1100, 150 + 50 * n, 300, 50), string(cnt));
+            text(sf::FloatRect(1100, y, 300, 50), string(cnt));
+            y += 50;
         }
+        y += 30;
+        if (!myPlayerInfo->isMainScreen())
+        {
+            if (toggleButton(sf::FloatRect(800, y, 300, 50), myPlayerInfo->main_screen_control, "Control main screen"))
+                myPlayerInfo->setMainScreenControl(!myPlayerInfo->main_screen_control);
+        }else{
+            disabledButton(sf::FloatRect(800, y, 300, 50), "Control main screen");
+        }
+        text(sf::FloatRect(1100, y, 300, 50), string(main_screen_control_cnt));
 
         if (button(sf::FloatRect(800, 700, 300, 50), "Ready"))
         {

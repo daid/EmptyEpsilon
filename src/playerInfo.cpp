@@ -2,6 +2,7 @@
 
 static const int16_t CMD_UPDATE_CREW_POSITION = 0x0001;
 static const int16_t CMD_UPDATE_SHIP_ID = 0x0002;
+static const int16_t CMD_UPDATE_MAIN_SCREEN_CONTROL = 0x0003;
 
 P<GameGlobalInfo> gameGlobalInfo;
 P<PlayerInfo> myPlayerInfo;
@@ -67,14 +68,16 @@ PlayerInfo::PlayerInfo()
 : MultiplayerObject("PlayerInfo")
 {
     clientId = -1;
+    main_screen_control = false;
     registerMemberReplication(&clientId);
 
     for(int n=0; n<maxCrewPositions; n++)
     {
-        crewPosition[n] = false;
-        registerMemberReplication(&crewPosition[n]);
+        crew_position[n] = false;
+        registerMemberReplication(&crew_position[n]);
     }
     registerMemberReplication(&ship_id);
+    registerMemberReplication(&main_screen_control);
     
     playerInfoList.push_back(this);
 }
@@ -93,6 +96,13 @@ void PlayerInfo::setShipId(int32_t id)
     sendCommand(packet);
 }
 
+void PlayerInfo::setMainScreenControl(bool control)
+{
+    sf::Packet packet;
+    packet << CMD_UPDATE_MAIN_SCREEN_CONTROL << control;
+    sendCommand(packet);
+}
+
 void PlayerInfo::onReceiveCommand(int32_t clientId, sf::Packet& packet)
 {
     if (clientId != this->clientId) return;
@@ -105,11 +115,28 @@ void PlayerInfo::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             int32_t position;
             bool active;
             packet >> position >> active;
-            crewPosition[position] = active;
+            crew_position[position] = active;
+            
+            if (isMainScreen())
+                main_screen_control = false;
+            if (active && mySpaceship)
+            {
+                int main_screen_control_cnt = 0;
+                foreach(PlayerInfo, i, playerInfoList)
+                {
+                    if (i->ship_id == mySpaceship->getMultiplayerId() && i->main_screen_control)
+                        main_screen_control_cnt++;
+                }
+                if (main_screen_control_cnt == 0)
+                    main_screen_control = true;
+            }
         }
         break;
     case CMD_UPDATE_SHIP_ID:
         packet >> ship_id;
+        break;
+    case CMD_UPDATE_MAIN_SCREEN_CONTROL:
+        packet >> main_screen_control;
         break;
     }
 }
@@ -117,7 +144,7 @@ void PlayerInfo::onReceiveCommand(int32_t clientId, sf::Packet& packet)
 bool PlayerInfo::isMainScreen()
 {
     for(int n=0; n<maxCrewPositions; n++)
-        if (crewPosition[n])
+        if (crew_position[n])
             return false;
     return true;
 }

@@ -42,7 +42,8 @@ class PlayerInfo : public MultiplayerObject
 public:
     int32_t clientId;
     
-    bool crewPosition[maxCrewPositions];
+    bool crew_position[maxCrewPositions];
+    bool main_screen_control;
     int32_t ship_id;
     
     PlayerInfo();
@@ -50,6 +51,7 @@ public:
     bool isMainScreen();
     void setCrewPosition(ECrewPosition position, bool active);
     void setShipId(int32_t id);
+    void setMainScreenControl(bool control);
     virtual void onReceiveCommand(int32_t clientId, sf::Packet& packet);
 };
 
