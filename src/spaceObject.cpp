@@ -8,6 +8,7 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setPosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setRotation);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setFaction);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setCommsScript);
 }
 
 PVector<SpaceObject> spaceObjectList;

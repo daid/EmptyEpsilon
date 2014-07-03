@@ -68,6 +68,12 @@ void CpuShip::update(float delta)
         new_target = findBestTarget(getPosition(), 7000);
     if (orders == AI_DefendLocation)
         new_target = findBestTarget(order_target_location, 7000);
+    if (orders == AI_FlyFormation && order_target)
+    {
+        P<SpaceShip> ship = order_target;
+        if (ship && ship->getTarget())
+            new_target = ship->getTarget();
+    }
     if (orders == AI_DefendTarget)
     {
         if (order_target)
@@ -87,6 +93,8 @@ void CpuShip::update(float delta)
         if (orders == AI_DefendTarget && target_distance > 8000)
             target = NULL;
         if (orders == AI_FlyTowards && target_distance > 8000)
+            target = NULL;
+        if (orders == AI_FlyFormation && target_distance > 5000)
             target = NULL;
         
         if (!target)
@@ -154,6 +162,7 @@ void CpuShip::update(float delta)
         switch(orders)
         {
         case AI_Idle:            //Don't do anything, don't even attack.
+            impulseRequest = 0.0;
             break;
         case AI_Roaming:         //Fly around and engage at will, without a clear target
             //Could mean 3 things
@@ -166,6 +175,7 @@ void CpuShip::update(float delta)
                 if (new_target)
                     targetId = new_target->getMultiplayerId();
             }
+            impulseRequest = 0.0;
             break;
         case AI_StandGround:     //Keep current position, do not fly away, but attack nearby targets.
             targetRotation = getRotation();
@@ -187,13 +197,39 @@ void CpuShip::update(float delta)
             }
             break;
         case AI_FlyFormation:    //Fly [order_target_location] offset from [order_target]. Allows for nicely flying in formation.
+            if (order_target)
+            {
+                sf::Vector2f target_position = order_target->getPosition() + sf::rotateVector(order_target_location, order_target->getRotation());
+                
+                float r = getRadius() * 5.0;
+                targetRotation = sf::vector2ToAngle(target_position - getPosition());
+                float dist = sf::length(target_position - getPosition());
+                if (sf::length(target_position - getPosition()) > r)
+                {
+                    float angle_diff = sf::angleDifference(targetRotation, getRotation());
+                    if (angle_diff > 10.0)
+                        impulseRequest = 0.0;
+                    else if (angle_diff > 5.0)
+                        impulseRequest = (10.0 - angle_diff) / 5.0;
+                    else
+                        impulseRequest = 1.0;
+                }else{
+                    if (dist > r / 2.0)
+                    {
+                        targetRotation += sf::angleDifference(targetRotation, order_target->getRotation()) * (1.0 - dist / r);
+                        impulseRequest = dist / r;
+                    }else{
+                        targetRotation = order_target->getRotation();
+                        impulseRequest = 0.0;
+                    }
+                }
+            }
             break;
         case AI_Attack:          //Attack [order_target] very specificly.
             targetRotation = getRotation();
             impulseRequest = 0;
             break;
         }
-        impulseRequest = 0.0;
     }
 }
 

@@ -42,6 +42,7 @@ public:
     bool isEnemy(P<SpaceObject> obj);
     bool isFriendly(P<SpaceObject> obj);
     void setFaction(int faction_id) { this->faction_id = faction_id; }
+    void setCommsScript(string script_name) { this->comms_script_name = script_name; }
 };
 
 class NebulaInfo

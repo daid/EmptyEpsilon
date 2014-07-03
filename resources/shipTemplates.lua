@@ -134,5 +134,5 @@ template:setBeam(5,100, 180,  800.0, 6.0, 4)
 template:setTubes(2) -- Amount of torpedo tubes
 template:setHull(70)
 template:setShields(300, 300)
-template:setSpeed(40, 5)
+template:setSpeed(40, 2)
 template:setWeaponStorage("Homing", 20)
