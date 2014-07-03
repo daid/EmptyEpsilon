@@ -50,6 +50,10 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&rear_shield_recharge_factor);
     registerMemberReplication(&comms_state);
     registerMemberReplication(&comms_open_delay, 1.0);
+    registerMemberReplication(&comms_reply_count);
+    registerMemberReplication(&comms_incomming_message);
+    for (int n=0; n<max_comms_reply_count; n++)
+        registerMemberReplication(&comms_reply[n].message);
     
     for(int n=0; n<SYS_COUNT; n++)
     {
@@ -63,9 +67,6 @@ PlayerSpaceship::PlayerSpaceship()
         registerMemberReplication(&systems[n].coolantLevel);
         registerMemberReplication(&systems[n].heatLevel, 1.0);
     }
-    registerMemberReplication(&comms_reply_count);
-    for (int n=0; n<max_comms_reply_count; n++)
-        registerMemberReplication(&comms_reply[n].message);
     systems[SYS_Reactor].powerUserFactor = -30.0;
     systems[SYS_BeamWeapons].powerUserFactor = 3.0;
     systems[SYS_MissileSystem].powerUserFactor = 1.0;
@@ -199,6 +200,8 @@ void PlayerSpaceship::update(float delta)
         //Client side
         if (scanning_delay > 0.0)
             scanning_delay -= delta;
+        if (comms_open_delay > 0)
+            comms_open_delay -= delta;
     }
     
     SpaceShip::update(delta);

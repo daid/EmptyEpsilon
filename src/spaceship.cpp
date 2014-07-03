@@ -241,24 +241,27 @@ void SpaceShip::update(float delta)
         setRadius(shipTemplate->radius);
     }
     
-    if (docking_state == DS_Docking)
+    if (gameServer)
     {
-        if (!docking_target)
-            docking_state = DS_NotDocking;
-        else
-            targetRotation = sf::vector2ToAngle(getPosition() - docking_target->getPosition());
-        if (fabs(sf::angleDifference(targetRotation, getRotation())) < 10.0)
-            impulseRequest = -1.0;
-        else
+        if (docking_state == DS_Docking)
+        {
+            if (!docking_target)
+                docking_state = DS_NotDocking;
+            else
+                targetRotation = sf::vector2ToAngle(getPosition() - docking_target->getPosition());
+            if (fabs(sf::angleDifference(targetRotation, getRotation())) < 10.0)
+                impulseRequest = -1.0;
+            else
+                impulseRequest = 0.0;
+        }
+        if (docking_state == DS_Docked)
+        {
+            if (!docking_target)
+                docking_state = DS_NotDocking;
+            else
+                targetRotation = sf::vector2ToAngle(getPosition() - docking_target->getPosition());
             impulseRequest = 0.0;
-    }
-    if (docking_state == DS_Docked)
-    {
-        if (!docking_target)
-            docking_state = DS_NotDocking;
-        else
-            targetRotation = sf::vector2ToAngle(getPosition() - docking_target->getPosition());
-        impulseRequest = 0.0;
+        }
     }
 
     if (front_shield < front_shield_max)

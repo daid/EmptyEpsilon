@@ -15,7 +15,7 @@ enum EWeaponTubeState
 };
 enum EMainScreenSetting
 {
-    MSS_Front,
+    MSS_Front = 0,
     MSS_Back,
     MSS_Left,
     MSS_Right,
@@ -24,7 +24,7 @@ enum EMainScreenSetting
 };
 enum EDockingState
 {
-    DS_NotDocking,
+    DS_NotDocking = 0,
     DS_Docking,
     DS_Docked
 };

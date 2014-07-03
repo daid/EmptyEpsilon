@@ -270,4 +270,5 @@ void MainScreenUI::renderLongRange(sf::RenderTarget& window)
         window.draw(objectSprite);
     }
     mySpaceship->drawRadar(window, sf::Vector2f(800, 450), 400.0f / radarDistance, true);
+    drawHeadingCircle(sf::Vector2f(800, 450), 400);
 }
