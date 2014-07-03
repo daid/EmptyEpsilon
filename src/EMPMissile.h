@@ -9,7 +9,7 @@ class EMPMissile : public SpaceObject, public Updatable
     const static float turnSpeed = 50.0f;
     const static float totalLifetime = 8.0f;
     const static float blastRange = 1000.0f;
-    const static float damageAtCenter = 200.0f;
+    const static float damageAtCenter = 160.0f;
     const static float damageAtEdge = 30.0f;
     
     float lifetime;
