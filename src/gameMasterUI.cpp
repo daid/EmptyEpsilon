@@ -97,13 +97,13 @@ void GameMasterUI::onGui()
             text(sf::FloatRect(20, 80, 100, 20), "Orders: " + getAIOrderString(cpuShip->getOrder()), AlignLeft, 20);
             
             float y = 100;
-            if (toggleButton(sf::FloatRect(20, y, 150, 30), cpuShip->getOrder() == AI_Idle, "Idle", 20))
+            if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_Idle, "Idle", 20))
                 cpuShip->orderIdle();
             y += 30;
-            if (toggleButton(sf::FloatRect(20, y, 150, 30), cpuShip->getOrder() == AI_Roaming, "Roaming", 20))
+            if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_Roaming, "Roaming", 20))
                 cpuShip->orderRoaming();
             y += 30;
-            if (toggleButton(sf::FloatRect(20, y, 150, 30), cpuShip->getOrder() == AI_StandGround, "Stand Ground", 18))
+            if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_StandGround, "Stand Ground", 18))
                 cpuShip->orderStandGround();
             y += 30;
             
@@ -126,13 +126,13 @@ void GameMasterUI::onGui()
         text(sf::FloatRect(20, 20, 100, 20), "Create new:", AlignLeft, 20);
         for(int f=0; f<maxFactions; f++)
         {
-            if (toggleButton(sf::FloatRect(20, 500 + 30 * f, 150, 30), current_faction == f, factionInfo[f].name, 20))
+            if (toggleButton(sf::FloatRect(20, 500 + 30 * f, 250, 30), current_faction == f, factionInfo[f].name, 20))
             {
                 current_faction = f;
             }
         }
         
-        if (button(sf::FloatRect(20, 100, 150, 30), "Station", 20))
+        if (button(sf::FloatRect(20, 100, 250, 30), "Station", 20))
         {
             selection = new SpaceStation();
             selection->faction_id = current_faction;
@@ -140,9 +140,10 @@ void GameMasterUI::onGui()
             selection->setPosition(view_position + sf::vector2FromAngle(random(0, 360)) * random(0, view_distance * 0.1));
         }
         std::vector<string> template_names = ShipTemplate::getTemplateNameList();
+        std::sort(template_names.begin(), template_names.end());
         for(unsigned int n=0; n<template_names.size(); n++)
         {
-            if (button(sf::FloatRect(20, 150 + n * 30, 150, 30), template_names[n], 20))
+            if (button(sf::FloatRect(20, 150 + n * 30, 250, 30), template_names[n] + "(" + string(ShipTemplate::getTemplate(template_names[n])->frontShields) + ")", 20))
             {
                 P<CpuShip> s = new CpuShip();
                 s->faction_id = current_faction;

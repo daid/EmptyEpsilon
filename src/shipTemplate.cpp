@@ -95,8 +95,10 @@ ShipTemplate::ShipTemplate()
 
 void ShipTemplate::setName(string name)
 {
-    this->name = name;
     templateMap[name] = this;
+    if (name.startswith("Player "))
+        name = name.substr(7);
+    this->name = name;
 }
 
 void ShipTemplate::setMesh(string model, string colorTexture, string specularTexture, string illuminationTexture)

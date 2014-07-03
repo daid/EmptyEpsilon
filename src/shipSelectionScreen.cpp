@@ -43,35 +43,41 @@ ShipSelectionScreen::ShipSelectionScreen()
 
 void ShipSelectionScreen::onGui()
 {
-    int32_t my_ship_id = -1;
-    if (mySpaceship)
-        my_ship_id = mySpaceship->getMultiplayerId();
+    if (!gameServer && !gameClient)
     {
-        int mainCnt = 0;
-        foreach(PlayerInfo, i, playerInfoList)
-        {
-            if (i->ship_id == my_ship_id && i->isMainScreen())
-                mainCnt++;
-        }
-
-        text(sf::FloatRect(800, 100, 300, 50), string(myPlayerInfo->isMainScreen() ? "*" : " ") + "Main screen", AlignCenter);
-        text(sf::FloatRect(1100, 100, 300, 50), string(mainCnt));
-    }
-    for(int n=0; n<maxCrewPositions; n++)
-    {
-        if (toggleButton(sf::FloatRect(800, 150 + 50 * n, 300, 50), myPlayerInfo->crewPosition[n], getCrewPositionName(ECrewPosition(n))))
-        {
-            myPlayerInfo->setCrewPosition(ECrewPosition(n), !myPlayerInfo->crewPosition[n]);
-        }
-        int cnt = 0;
-        foreach(PlayerInfo, i, playerInfoList)
-            if (i->ship_id == my_ship_id && i->crewPosition[n])
-                cnt++;
-        text(sf::FloatRect(1100, 150 + 50 * n, 300, 50), string(cnt));
+        destroy();
+        disconnectFromServer();
+        new MainMenu();
+        return;
     }
 
     if (mySpaceship)
     {
+        int32_t my_ship_id = mySpaceship->getMultiplayerId();
+        {
+            int mainCnt = 0;
+            foreach(PlayerInfo, i, playerInfoList)
+            {
+                if (i->ship_id == my_ship_id && i->isMainScreen())
+                    mainCnt++;
+            }
+
+            text(sf::FloatRect(800, 100, 300, 50), string(myPlayerInfo->isMainScreen() ? "*" : " ") + "Main screen", AlignCenter);
+            text(sf::FloatRect(1100, 100, 300, 50), string(mainCnt));
+        }
+        for(int n=0; n<maxCrewPositions; n++)
+        {
+            if (toggleButton(sf::FloatRect(800, 150 + 50 * n, 300, 50), myPlayerInfo->crewPosition[n], getCrewPositionName(ECrewPosition(n))))
+            {
+                myPlayerInfo->setCrewPosition(ECrewPosition(n), !myPlayerInfo->crewPosition[n]);
+            }
+            int cnt = 0;
+            foreach(PlayerInfo, i, playerInfoList)
+                if (i->ship_id == my_ship_id && i->crewPosition[n])
+                    cnt++;
+            text(sf::FloatRect(1100, 150 + 50 * n, 300, 50), string(cnt));
+        }
+
         if (button(sf::FloatRect(800, 700, 300, 50), "Ready"))
         {
             if (gameServer && !engine->getObject("scenario") && active_scenario_index < int(scenarios.size()))

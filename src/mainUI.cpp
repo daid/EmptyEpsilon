@@ -1,10 +1,20 @@
 #include "mainUI.h"
+#include "mainMenus.h"
+#include "epsilonServer.h"
 #include "main.h"
 #include "shipSelectionScreen.h"
 #include "repairCrew.h"
 
 void MainUI::onGui()
 {
+    if (!gameServer && !gameClient)
+    {
+        destroy();
+        disconnectFromServer();
+        new MainMenu();
+        return;
+    }
+    
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) || sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace))
     {
         destroy();

@@ -118,6 +118,7 @@ public:
 public:
     static P<ShipTemplate> getTemplate(string name);
     static std::vector<string> getTemplateNameList();
+    static std::vector<string> getPlayerTemplateNameList();
 };
 string getSystemName(ESystem system);
 REGISTER_MULTIPLAYER_ENUM(ESystem);
