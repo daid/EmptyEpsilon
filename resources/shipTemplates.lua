@@ -100,7 +100,7 @@ template:setTubePosition(1,  10, 2, -2.3)
 template:addEngineEmitor(-2.1500, -13, 0.3,  0.2, 0.2, 1.0, 2.0)
 template:addEngineEmitor( 2.1500, -13, 0.3,  0.2, 0.2, 1.0, 2.0)
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setTubes(2) -- Amount of torpedo tubes
+template:setTubes(1) -- Amount of torpedo tubes
 template:setHull(70)
 template:setShields(50, 50)
 template:setSpeed(40, 6)
@@ -122,7 +122,7 @@ template:setTubes(2) -- Amount of torpedo tubes
 template:setHull(70)
 template:setShields(100, 100)
 template:setSpeed(50, 8)
-template:setWeaponStorage("Homing", 6)
+template:setWeaponStorage("Homing", 2)
 
 
 template = ShipTemplate():setName("Dreadnought"):setMesh("space_cruiser_4.obj", "space_cruiser_4_color.jpg", "space_cruiser_4_illumination.jpg", "space_cruiser_4_illumination.jpg"):setScale(16):setRadius(200)
@@ -142,8 +142,7 @@ template:setBeam(2,100, -60,  800.0, 6.0, 4)
 template:setBeam(3,100,  60,  800.0, 6.0, 4)
 template:setBeam(4, 30,   0, 1500.0, 6.0, 4)
 template:setBeam(5,100, 180,  800.0, 6.0, 4)
-template:setTubes(2) -- Amount of torpedo tubes
+template:setTubes(0) -- Amount of torpedo tubes
 template:setHull(70)
 template:setShields(300, 300)
-template:setSpeed(40, 2)
-template:setWeaponStorage("Homing", 20)
+template:setSpeed(20, 1)
