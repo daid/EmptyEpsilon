@@ -10,6 +10,7 @@
 #include "explosionEffect.h"
 #include "EMPMissile.h"
 #include "homingMissile.h"
+#include "particleEffect.h"
 #include "mine.h"
 #include "nuke.h"
 
@@ -18,6 +19,7 @@ SpaceShip::SpaceShip(string multiplayerClassName)
 {
     setCollisionPhysics(true, false);
 
+    engine_emit_delay = 0.0;
     targetRotation = getRotation();
     impulseRequest = 0;
     currentImpulse = 0;
@@ -390,6 +392,22 @@ void SpaceShip::update(float delta)
                 break;
             }
         }
+    }
+    
+    if (engine_emit_delay > 0.0)
+    {
+        engine_emit_delay -= delta;
+    }else{
+        for(unsigned int n=0; n<shipTemplate->engine_emitors.size(); n++)
+        {
+            sf::Vector3f offset = shipTemplate->engine_emitors[n].position * shipTemplate->scale;
+            sf::Vector2f pos2d = getPosition() + sf::rotateVector(sf::Vector2f(offset.x, offset.y), getRotation());
+            sf::Vector3f color = shipTemplate->engine_emitors[n].color;
+            sf::Vector3f pos3d = sf::Vector3f(pos2d.x, pos2d.y, offset.z);
+            float scale = shipTemplate->scale * shipTemplate->engine_emitors[n].scale;
+            ParticleEngine::spawn(pos3d, pos3d, color, color, scale, 0.0, 5.0);
+        }
+        engine_emit_delay += 0.1;
     }
 }
 

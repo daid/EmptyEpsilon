@@ -22,6 +22,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoom);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoomSystem);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addDoor);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addEngineEmitor);
 }
 
 /* Define script conversion function for the EMissileWeapons enum. */

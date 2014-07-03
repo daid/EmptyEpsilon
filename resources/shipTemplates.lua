@@ -8,6 +8,7 @@ template:setBeamPosition(0, -8, -1.6, -2)
 template:setBeamPosition(1,  8, -1.6, -2)
 template:setTubePosition(0, 0, 18, -3.5)
 template:setTubePosition(1, 0, 18, -3.5)
+template:addEngineEmitor(0, -18, -1,  0.2, 0.2, 1.0, 4.0)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 90, -15, 1000.0, 6.0, 12)
 template:setBeam(1, 90,  15, 1000.0, 6.0, 12)
@@ -56,6 +57,8 @@ template:addDoor(8, 4, false);
 --[[ Neutral or special ship types --]]
 --Tug, used for transport of small goods (like weapons)
 template = ShipTemplate():setName("Tug"):setMesh("space_tug.obj", "space_tug_color.jpg", "space_tug_illumination.jpg", "space_tug_illumination.jpg"):setScale(6):setRadius(80)
+template:addEngineEmitor(-2.1500, -13, 0.3,  0.2, 0.2, 1.0, 2.0)
+template:addEngineEmitor( 2.1500, -13, 0.3,  0.2, 0.2, 1.0, 2.0)
 template:setHull(50)
 template:setShields(20, 20)
 template:setSpeed(60, 6)
@@ -68,6 +71,7 @@ template:setWeaponStorage("EMP", 2)
 template = ShipTemplate():setName("Fighter"):setMesh("small_fighter_1.obj", "small_fighter_1_color.jpg", "small_fighter_1_specular.jpg", "small_fighter_1_illumination.jpg"):setScale(3):setRadius(40)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
 template:setBeamPosition(0, 0, 23, -1.8)
+template:addEngineEmitor(0, -8, 0.5,  1.0, 0.2, 0.2, 1.0)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 60, 0, 1000.0, 4.0, 2)
 template:setTubes(0) -- Amount of torpedo tubes
@@ -80,6 +84,7 @@ template = ShipTemplate():setName("Cruiser"):setMesh("space_frigate_6.obj", "spa
 template:setBeamPosition(0, -8, -1.6, -2)
 template:setBeamPosition(1,  8, -1.6, -2)
 template:setTubePosition(0, 0, 18, -3.5)
+template:addEngineEmitor(0, -18, -1,  0.2, 0.2, 1.0, 4.0)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 90, -15, 1000.0, 6.0, 4)
 template:setBeam(1, 90,  15, 1000.0, 6.0, 4)
@@ -92,6 +97,8 @@ template = ShipTemplate():setName("Missile Cruiser"):setMesh("space_cruiser_4.ob
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
 template:setTubePosition(0, -10, 2, -2.3)
 template:setTubePosition(1,  10, 2, -2.3)
+template:addEngineEmitor(-2.1500, -13, 0.3,  0.2, 0.2, 1.0, 2.0)
+template:addEngineEmitor( 2.1500, -13, 0.3,  0.2, 0.2, 1.0, 2.0)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setTubes(2) -- Amount of torpedo tubes
 template:setHull(70)
@@ -106,6 +113,8 @@ template:setBeamPosition(0,-28.2, 21, -2)
 template:setBeamPosition(1, 28.2, 21, -2)
 template:setTubePosition(0,-7.5, 11, -3)
 template:setTubePosition(1, 7.5, 11, -3)
+template:addEngineEmitor(-1.5, -28, -5,  1.0, 0.2, 0.2, 2.0)
+template:addEngineEmitor( 1.5, -28, -5,  1.0, 0.2, 0.2, 2.0)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 40,-5, 1000.0, 6.0, 4)
 template:setBeam(1, 40, 5, 1000.0, 6.0, 4)
@@ -124,6 +133,8 @@ template:setBeamPosition(2, -10, 2, -2.3)
 template:setBeamPosition(3,  10, 2, -2.3)
 template:setTubePosition(0, -10, 2, -2.3)
 template:setTubePosition(1,  10, 2, -2.3)
+template:addEngineEmitor(-2.1500, -13, 0.3,  0.2, 0.2, 1.0, 2.0)
+template:addEngineEmitor( 2.1500, -13, 0.3,  0.2, 0.2, 1.0, 2.0)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 90, -30, 1000.0, 6.0, 4)
 template:setBeam(1, 90,  30, 1000.0, 6.0, 4)

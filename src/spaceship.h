@@ -56,6 +56,7 @@ class SpaceShip : public SpaceObject, public Updatable
 public:
     string templateName;
     P<ShipTemplate> shipTemplate;
+    float engine_emit_delay;
     
     float targetRotation;
     float impulseRequest;

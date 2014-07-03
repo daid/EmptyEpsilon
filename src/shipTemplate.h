@@ -58,6 +58,15 @@ public:
 
     ShipDoorTemplate(sf::Vector2i position, bool horizontal) : position(position), horizontal(horizontal) {}
 };
+class EngineEmitorTemplate
+{
+public:
+    sf::Vector3f position;
+    sf::Vector3f color;
+    float scale;
+
+    EngineEmitorTemplate(sf::Vector3f position, sf::Vector3f color, float scale) : position(position), color(color), scale(scale) {}
+};
 
 class ShipTemplate : public PObject
 {
@@ -80,6 +89,7 @@ public:
     
     std::vector<ShipRoomTemplate> rooms;
     std::vector<ShipDoorTemplate> doors;
+    std::vector<EngineEmitorTemplate> engine_emitors;
 
     ShipTemplate();
     
@@ -101,6 +111,7 @@ public:
     void addRoom(sf::Vector2i position, sf::Vector2i size) { rooms.push_back(ShipRoomTemplate(position, size, SYS_None)); }
     void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system) { rooms.push_back(ShipRoomTemplate(position, size, system)); }
     void addDoor(sf::Vector2i position, bool horizontal) { doors.push_back(ShipDoorTemplate(position, horizontal)); }
+    void addEngineEmitor(sf::Vector3f position, sf::Vector3f color, float scale) { engine_emitors.push_back(EngineEmitorTemplate(position, color, scale)); }
     
     sf::Vector2i interiorSize();
     ESystem getSystemAtRoom(sf::Vector2i position);
