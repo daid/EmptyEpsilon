@@ -13,11 +13,12 @@ Asteroid::Asteroid()
 : SpaceObject(70, "Asteroid")
 {
     setRotation(random(0, 360));
-    setAngularVelocity(random(0.2, 1.0));
+    rotation_speed = random(0.1, 0.8);
 }
 
 void Asteroid::draw3D()
 {
+    glRotatef(engine->getElapsedTime() * rotation_speed, 0, 0, 1);
     glScalef(70, 70, 70);
     objectShader.setParameter("baseMap", *textureManager.getTexture("asteroid.png"));
     objectShader.setParameter("illuminationMap", *textureManager.getTexture("none.png"));

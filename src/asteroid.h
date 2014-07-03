@@ -6,6 +6,8 @@
 class Asteroid : public SpaceObject
 {
 public:
+    float rotation_speed;
+    
     Asteroid();
 
     virtual void draw3D();

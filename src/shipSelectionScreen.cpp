@@ -93,13 +93,13 @@ void ShipSelectionScreen::onGui()
         {
             if (n < 8)
             {
-                if (toggleButton(sf::FloatRect(200, 250 + (n % 8) * 50, 300, 50), mySpaceship == ship, ship->shipTemplate->name + " " + string(n)))
+                if (toggleButton(sf::FloatRect(200, 250 + (n % 8) * 50, 300, 50), mySpaceship == ship, ship->shipTemplate->name + " " + string(n + 1)))
                 {
                     mySpaceship = ship;
                     myPlayerInfo->setShipId(mySpaceship->getMultiplayerId());
                 }
             }else{
-                if (toggleButton(sf::FloatRect(200 + 200 + (n / 8) * 100, 250 + (n % 8) * 50, 100, 50), mySpaceship == ship, string(n)))
+                if (toggleButton(sf::FloatRect(200 + 200 + (n / 8) * 100, 250 + (n % 8) * 50, 100, 50), mySpaceship == ship, string(n + 1)))
                 {
                     mySpaceship = ship;
                     myPlayerInfo->setShipId(mySpaceship->getMultiplayerId());
