@@ -3,6 +3,7 @@
 #include "shipTemplate.h"
 #include "playerInfo.h"
 #include "factionInfo.h"
+#include "gui.h"
 #include "mesh.h"
 #include "explosionEffect.h"
 #include "main.h"
@@ -66,7 +67,10 @@ void SpaceStation::drawRadar(sf::RenderTarget& window, sf::Vector2f position, fl
     textureManager.setTexture(objectSprite, "RadarBlip.png");
     objectSprite.setPosition(position);
     if (long_range)
+    {
+        GUI::text(sf::FloatRect(position.x, position.y - 15, 0, 0), getCallSign(), AlignCenter, 12);
         objectSprite.setScale(0.7, 0.7);
+    }
     if (mySpaceship)
     {
         if (isEnemy(mySpaceship))
