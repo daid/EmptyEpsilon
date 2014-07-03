@@ -484,15 +484,15 @@ void CrewUI::commsUI()
             text(sf::FloatRect(50, 100, 600, 50), "Open comm channel to:");
             if (comms_open_channel_type == OCT_None)
             {
-                if (button(sf::FloatRect(50, 150, 300, 50), "Station (" + string(station_list.size()) + ")"))
+                if (button(sf::FloatRect(50, 150, 300, 50), "Station (" + string(int(station_list.size())) + ")"))
                     comms_open_channel_type = OCT_Station;
-                if (button(sf::FloatRect(50, 200, 300, 50), "Friendly ship (" + string(friendly_list.size()) + ")"))
+                if (button(sf::FloatRect(50, 200, 300, 50), "Friendly ship (" + string(int(friendly_list.size())) + ")"))
                     comms_open_channel_type = OCT_FriendlyShip;
-                if (button(sf::FloatRect(50, 250, 300, 50), "Neutral ship (" + string(neutral_list.size()) + ")"))
+                if (button(sf::FloatRect(50, 250, 300, 50), "Neutral ship (" + string(int(neutral_list.size())) + ")"))
                     comms_open_channel_type = OCT_NeutralShip;
-                if (button(sf::FloatRect(50, 300, 300, 50), "Enemy ship (" + string(enemy_list.size()) + ")"))
+                if (button(sf::FloatRect(50, 300, 300, 50), "Enemy ship (" + string(int(enemy_list.size())) + ")"))
                     comms_open_channel_type = OCT_EnemyShip;
-                if (button(sf::FloatRect(50, 350, 300, 50), "Unknown ship (" + string(unknown_list.size()) + ")"))
+                if (button(sf::FloatRect(50, 350, 300, 50), "Unknown ship (" + string(int(unknown_list.size())) + ")"))
                     comms_open_channel_type = OCT_UnknownShip;
             }else{
                 PVector<SpaceObject> show_list;
