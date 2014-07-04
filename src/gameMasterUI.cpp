@@ -149,6 +149,7 @@ void GameMasterUI::onGui()
                 s->faction_id = current_faction;
                 s->setShipTemplate(template_names[n]);
                 s->setPosition(view_position + sf::vector2FromAngle(random(0, 360)) * random(0, view_distance * 0.1));
+                s->orderRoaming();
                 
                 selection = s;
             }

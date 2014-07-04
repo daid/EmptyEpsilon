@@ -421,6 +421,11 @@ void CrewUI::scienceUI()
                 text(sf::FloatRect(20, 200, 200, 20), "Shields: " + string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), AlignLeft, 20);
             }
         }
+        P<SpaceStation> station = scienceTarget;
+        if (station)
+        {
+            text(sf::FloatRect(20, 200, 200, 20), "Shields: " + string(int(station->shields)), AlignLeft, 20);
+        }
     }
     
     if (scienceRadarDistance == 50000 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 1x", 25))
