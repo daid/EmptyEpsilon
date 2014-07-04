@@ -75,6 +75,8 @@ void SpaceStation::drawRadar(sf::RenderTarget& window, sf::Vector2f position, fl
     {
         if (isEnemy(mySpaceship))
             objectSprite.setColor(sf::Color::Red);
+        if (isFriendly(mySpaceship))
+            objectSprite.setColor(sf::Color(128, 255, 128));
     }else{
         objectSprite.setColor(factionInfo[faction_id].gm_color);
     }
