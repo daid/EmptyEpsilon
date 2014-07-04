@@ -238,7 +238,7 @@ void PlayerSpaceship::hullDamage(float damageAmount, sf::Vector2f damageLocation
     if (type != DT_EMP)
     {
         hull_damage_indicator = 1.5;
-        for(int n=0; n<5; n++)
+        for(int n=0; n<10; n++)
         {
             ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
             //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
