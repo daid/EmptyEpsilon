@@ -67,14 +67,16 @@ void CpuShip::update(float delta)
         target_distance = sf::length(target->getPosition() - getPosition());
     
     //Find new target
-    if (orders == AI_StandGround || orders == AI_Roaming || orders == AI_FlyTowards)
+    if (orders == AI_Roaming)
+        new_target = findBestTarget(getPosition(), 20000);
+    if (orders == AI_StandGround || orders == AI_FlyTowards)
         new_target = findBestTarget(getPosition(), 7000);
     if (orders == AI_DefendLocation)
         new_target = findBestTarget(order_target_location, 7000);
     if (orders == AI_FlyFormation && order_target)
     {
         P<SpaceShip> ship = order_target;
-        if (ship && ship->getTarget())
+        if (ship && ship->getTarget() && sf::length(ship->getTarget()->getPosition() - getPosition()) < 5000)
             new_target = ship->getTarget();
     }
     if (orders == AI_DefendTarget)
@@ -97,7 +99,7 @@ void CpuShip::update(float delta)
             target = NULL;
         if (orders == AI_FlyTowards && target_distance > 8000)
             target = NULL;
-        if (orders == AI_FlyFormation && target_distance > 5000)
+        if (orders == AI_FlyFormation && target_distance > 6000)
             target = NULL;
         
         if (!target)
@@ -265,11 +267,13 @@ void CpuShip::orderIdle()
 
 void CpuShip::orderRoaming()
 {
+    targetRotation = getRotation();
     orders = AI_Roaming;
 }
 
 void CpuShip::orderStandGround()
 {
+    targetRotation = getRotation();
     orders = AI_StandGround;
 }
 
