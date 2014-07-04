@@ -75,7 +75,7 @@ template:addEngineEmitor(0, -8, 0.5,  1.0, 0.2, 0.2, 1.0)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 60, 0, 1000.0, 4.0, 2)
 template:setTubes(0) -- Amount of torpedo tubes
-template:setHull(50)
+template:setHull(30)
 template:setShields(30, 30)
 template:setSpeed(100, 30)
 

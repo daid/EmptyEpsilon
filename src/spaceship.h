@@ -119,6 +119,7 @@ public:
     void initJump(float distance);
     void requestDock(P<SpaceStation> target);
     void requestUndock();
+    void setScanned(bool value) { scanned_by_player = value; }
     
     bool hasSystem(ESystem system);
     
