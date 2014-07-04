@@ -119,7 +119,7 @@ template:addEngineEmitor( 1.5, -28, -5,  1.0, 0.2, 0.2, 2.0)
 template:setBeam(0, 40,-5, 1000.0, 6.0, 4)
 template:setBeam(1, 40, 5, 1000.0, 6.0, 4)
 template:setTubes(2) -- Amount of torpedo tubes
-template:setHull(70)
+template:setHull(100)
 template:setShields(100, 100)
 template:setSpeed(50, 8)
 template:setWeaponStorage("Homing", 2)

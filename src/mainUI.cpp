@@ -36,10 +36,17 @@ void MainUI::onGui()
     {
         soundManager.setListenerPosition(mySpaceship->getPosition(), mySpaceship->getRotation());
         
+        if (mySpaceship->front_shield < mySpaceship->front_shield_max / 10.0 || mySpaceship->rear_shield < mySpaceship->rear_shield_max / 10.0)
+        {
+            sf::RectangleShape fullScreenOverlay(sf::Vector2f(1600, 900));
+            float f = fabsf(fmodf(engine->getElapsedTime() * 2.0, 2.0) - 1.0);
+            fullScreenOverlay.setFillColor(sf::Color(255, 0, 0, 16 + 32 * f));
+            getRenderTarget()->draw(fullScreenOverlay);
+        }
         if (mySpaceship->hull_damage_indicator > 0.0)
         {
             sf::RectangleShape fullScreenOverlay(sf::Vector2f(1600, 900));
-            fullScreenOverlay.setFillColor(sf::Color(255, 0, 0, 255 * mySpaceship->hull_damage_indicator));
+            fullScreenOverlay.setFillColor(sf::Color(255, 0, 0, 128 * (mySpaceship->hull_damage_indicator / 1.5)));
             getRenderTarget()->draw(fullScreenOverlay);
         }
         
