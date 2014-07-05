@@ -43,6 +43,10 @@ void MainScreenUI::destroy()
     MainUI::destroy();
 }
 
+float camera_ship_angle = 30.0f;
+float camera_ship_distance = 420.0f;
+float camera_ship_height = 420.0f;
+
 void MainScreenUI::render3dView(sf::RenderTarget& window)
 {
     window.pushGLStates();
@@ -61,10 +65,19 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
     
     glRotatef(90, 1, 0, 0);
     glScalef(1,1,-1);
-    glRotatef(-25, 1, 0, 0);
+    glRotatef(-camera_ship_angle, 1, 0, 0);
 #ifdef DEBUG
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
         glRotatef(-50, 1, 0, 0);
+    /*
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) camera_ship_angle += 1.0;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) camera_ship_angle -= 1.0;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) camera_ship_height += 10.0;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) camera_ship_height -= 10.0;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) camera_ship_distance += 10.0;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) camera_ship_distance -= 10.0;
+    printf("%f %f %f\n", camera_ship_angle, camera_ship_height, camera_ship_distance);
+    */
 #endif
     if (mySpaceship)
     {
@@ -148,8 +161,8 @@ void MainScreenUI::render3dView(sf::RenderTarget& window)
     
     if (mySpaceship)
     {
-        sf::Vector2f cameraPosition2D = mySpaceship->getPosition() + sf::vector2FromAngle(cameraRotation) * -300.0f;
-        sf::Vector3f targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, 300);
+        sf::Vector2f cameraPosition2D = mySpaceship->getPosition() + sf::vector2FromAngle(cameraRotation) * -camera_ship_distance;
+        sf::Vector3f targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
 #ifdef DEBUG
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
             targetCameraPosition.z = 3000.0;
