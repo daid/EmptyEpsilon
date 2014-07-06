@@ -69,7 +69,7 @@ void CpuShip::update(float delta)
     
     //Find new target
     if (orders == AI_Roaming)
-        new_target = findBestTarget(getPosition(), 20000);
+        new_target = findBestTarget(getPosition(), 50000);
     if (orders == AI_StandGround || orders == AI_FlyTowards)
         new_target = findBestTarget(getPosition(), 7000);
     if (orders == AI_DefendLocation)
@@ -129,16 +129,15 @@ void CpuShip::update(float delta)
         float distance = sf::length(position_diff);
         targetRotation = sf::vector2ToAngle(position_diff);
         
+        warpRequest = 0.0;
         if (orders == AI_StandGround)
         {
             impulseRequest = 0.0f;
-            warpRequest = 0.0;
         }else{
-            if (distance > 7000 && hasWarpdrive)
+            if (hasWarpdrive && fabs(sf::angleDifference(targetRotation, getRotation())) < 50.0)
             {
-                warpRequest = 1.0;
-            }else{
-                warpRequest = 0.0;
+                if ((has_missiles && distance > 7000) || (!has_missiles && distance > 2000))
+                    warpRequest = 1.0;
             }
             if (distance > 10000 && hasJumpdrive && jumpDelay <= 0.0)
             {
