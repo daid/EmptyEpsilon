@@ -3,6 +3,16 @@
 #include "engine.h"
 #include "mesh.h"
 
+static inline int readInt(P<ResourceStream> stream)
+{
+    int32_t ret = 0;
+    stream->read(&ret, sizeof(int32_t));
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__ || defined(WIN32)
+    return (ret & 0xFF) << 24 | (ret & 0xFF00) << 8 | (ret & 0xFF0000) >> 8 | (ret & 0xFF000000) >> 24;
+#endif
+    return ret;
+}
+
 const unsigned int NO_BUFFER = 0;
 
 static std::map<string, Mesh*> meshMap;
@@ -79,66 +89,76 @@ Mesh* Mesh::getMesh(string filename)
     if (!stream)
         return NULL;
     
-    std::vector<sf::Vector3f> vertices;
-    std::vector<sf::Vector3f> normals;
-    std::vector<sf::Vector2f> texCoords;
-    std::vector<IndexInfo> indices;
-    
     ret = new Mesh();
-    do
+    if (filename.endswith(".obj"))
     {
-        string line = stream->readLine();
-        if (line.length() > 0 && line[0] != '#')
+        std::vector<sf::Vector3f> vertices;
+        std::vector<sf::Vector3f> normals;
+        std::vector<sf::Vector2f> texCoords;
+        std::vector<IndexInfo> indices;
+        
+        do
         {
-            std::vector<string> parts = line.split();
-            if (parts[0] == "v")
+            string line = stream->readLine();
+            if (line.length() > 0 && line[0] != '#')
             {
-                vertices.push_back(sf::Vector3f(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat()));
-            }else if (parts[0] == "vn")
-            {
-                normals.push_back(sf::normalize(sf::Vector3f(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat())));
-            }else if (parts[0] == "vt")
-            {
-                texCoords.push_back(sf::Vector2f(parts[1].toFloat(), parts[2].toFloat()));
-            }else if (parts[0] == "f")
-            {
-                for(unsigned int n=3; n<parts.size(); n++)
+                std::vector<string> parts = line.split();
+                if (parts[0] == "v")
                 {
-                    std::vector<string> p0 = parts[1].split("/");
-                    std::vector<string> p1 = parts[n].split("/");
-                    std::vector<string> p2 = parts[n-1].split("/");
-                    
-                    IndexInfo info;
-                    info.v = p0[0].toInt() - 1;
-                    info.t = p0[1].toInt() - 1;
-                    info.n = p0[2].toInt() - 1;
-                    indices.push_back(info);
-                    info.v = p1[0].toInt() - 1;
-                    info.t = p1[1].toInt() - 1;
-                    info.n = p1[2].toInt() - 1;
-                    indices.push_back(info);
-                    info.v = p2[0].toInt() - 1;
-                    info.t = p2[1].toInt() - 1;
-                    info.n = p2[2].toInt() - 1;
-                    indices.push_back(info);
+                    vertices.push_back(sf::Vector3f(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat()));
+                }else if (parts[0] == "vn")
+                {
+                    normals.push_back(sf::normalize(sf::Vector3f(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat())));
+                }else if (parts[0] == "vt")
+                {
+                    texCoords.push_back(sf::Vector2f(parts[1].toFloat(), parts[2].toFloat()));
+                }else if (parts[0] == "f")
+                {
+                    for(unsigned int n=3; n<parts.size(); n++)
+                    {
+                        std::vector<string> p0 = parts[1].split("/");
+                        std::vector<string> p1 = parts[n].split("/");
+                        std::vector<string> p2 = parts[n-1].split("/");
+                        
+                        IndexInfo info;
+                        info.v = p0[0].toInt() - 1;
+                        info.t = p0[1].toInt() - 1;
+                        info.n = p0[2].toInt() - 1;
+                        indices.push_back(info);
+                        info.v = p1[0].toInt() - 1;
+                        info.t = p1[1].toInt() - 1;
+                        info.n = p1[2].toInt() - 1;
+                        indices.push_back(info);
+                        info.v = p2[0].toInt() - 1;
+                        info.t = p2[1].toInt() - 1;
+                        info.n = p2[2].toInt() - 1;
+                        indices.push_back(info);
+                    }
+                }else{
+                    //printf("%s\n", parts[0].c_str());
                 }
-            }else{
-                //printf("%s\n", parts[0].c_str());
-            }
-        } 
-    }while(stream->tell() < stream->getSize());
-    ret->vertexCount = indices.size();
-    ret->vertices = new MeshVertex[indices.size()];
-    for(unsigned int n=0; n<indices.size(); n++)
+            } 
+        }while(stream->tell() < stream->getSize());
+        ret->vertexCount = indices.size();
+        ret->vertices = new MeshVertex[indices.size()];
+        for(unsigned int n=0; n<indices.size(); n++)
+        {
+            ret->vertices[n].position[0] = vertices[indices[n].v].z;
+            ret->vertices[n].position[1] = vertices[indices[n].v].x;
+            ret->vertices[n].position[2] = vertices[indices[n].v].y;
+            ret->vertices[n].normal[0] = normals[indices[n].n].z;
+            ret->vertices[n].normal[1] = normals[indices[n].n].x;
+            ret->vertices[n].normal[2] = normals[indices[n].n].y;
+            ret->vertices[n].uv[0] = texCoords[indices[n].t].x;
+            ret->vertices[n].uv[1] = 1.0 - texCoords[indices[n].t].y;
+        }
+    }else if (filename.endswith(".model"))
     {
-        ret->vertices[n].position[0] = vertices[indices[n].v].z;
-        ret->vertices[n].position[1] = vertices[indices[n].v].x;
-        ret->vertices[n].position[2] = vertices[indices[n].v].y;
-        ret->vertices[n].normal[0] = normals[indices[n].n].z;
-        ret->vertices[n].normal[1] = normals[indices[n].n].x;
-        ret->vertices[n].normal[2] = normals[indices[n].n].y;
-        ret->vertices[n].uv[0] = texCoords[indices[n].t].x;
-        ret->vertices[n].uv[1] = 1.0 - texCoords[indices[n].t].y;
+        ret->vertexCount = readInt(stream);
+        ret->vertices = new MeshVertex[ret->vertexCount];
+        stream->read(ret->vertices, sizeof(MeshVertex) * ret->vertexCount);
+    }else{
+        printf("Unknown mesh format: %s\n", filename.c_str());
     }
     
     meshMap[filename] = ret;

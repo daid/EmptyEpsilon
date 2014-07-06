@@ -142,7 +142,12 @@ void CpuShip::update(float delta)
             if (distance > 10000 && hasJumpdrive && jumpDelay <= 0.0)
             {
                 if (fabs(sf::angleDifference(targetRotation, getRotation())) < 1.0)
-                    initJump(distance - 3000);
+                {
+                    if (has_missiles)
+                        initJump(distance - 8000);
+                    else
+                        initJump(distance - 3000);
+                }
             }
             
             if (distance > attack_distance + impulseMaxSpeed)

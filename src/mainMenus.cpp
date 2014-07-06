@@ -31,6 +31,17 @@ void MainMenu::onGui()
     {
         engine->shutdown();
     }
+    
+    float y = 100;
+    text(sf::FloatRect(0, y, 1550, 25), "Credits", AlignRight, 25); y+= 25;
+    text(sf::FloatRect(0, y, 1550, 20), "Programming:", AlignRight, 20); y+= 20;
+    text(sf::FloatRect(0, y, 1550, 18), "Daid (github.com/daid)", AlignRight, 18); y+= 18;
+    y += 10;
+    text(sf::FloatRect(0, y, 1550, 20), "Music:", AlignRight, 20); y+= 20;
+    text(sf::FloatRect(0, y, 1550, 18), "Matthew Pablo (www.matthewpablo.com)", AlignRight, 18); y+= 18;
+    y += 10;
+    text(sf::FloatRect(0, y, 1550, 20), "Models:", AlignRight, 20); y+= 20;
+    text(sf::FloatRect(0, y, 1550, 18), "Angryfly (turbosquid.com)", AlignRight, 18); y+= 18;
 }
 
 ServerBrowserMenu::ServerBrowserMenu()

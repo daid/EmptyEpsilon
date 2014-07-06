@@ -2,6 +2,7 @@
 #include "mainMenus.h"
 #include "factionInfo.h"
 #include "spaceObject.h"
+#include "packResourceProvider.h"
 #include "main.h"
 
 sf::Vector3f cameraPosition;
@@ -20,6 +21,7 @@ int main(int argc, char** argv)
 {
     new Engine();
     new DirectoryResourceProvider("resources/");
+    new PackResourceProvider("packs/Angryfly.pack");
     textureManager.setDefaultSmooth(true);
     textureManager.setDefaultRepeated(true);
     textureManager.setAutoSprite(false);

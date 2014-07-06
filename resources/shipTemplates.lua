@@ -1,8 +1,8 @@
 --[[ Stations --]]
-template = ShipTemplate():setName("Small Station"):setMesh("space_station_4.obj", "space_station_4_color.jpg", "space_station_4_specular.jpg", "space_station_4_illumination.jpg"):setScale(10)
+template = ShipTemplate():setName("Small Station"):setMesh("space_station_4.model", "space_station_4_color.jpg", "space_station_4_specular.jpg", "space_station_4_illumination.jpg"):setScale(10)
 
 --[[ Player ships --]]
-template = ShipTemplate():setName("Player Cruiser"):setMesh("space_frigate_6.obj", "space_frigate_6_color.png", "space_frigate_6_specular.png", "space_frigate_6_illumination.png"):setScale(6):setRadius(100)
+template = ShipTemplate():setName("Player Cruiser"):setMesh("space_frigate_6.model", "space_frigate_6_color.png", "space_frigate_6_specular.png", "space_frigate_6_illumination.png"):setScale(6):setRadius(100)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
 template:setBeamPosition(0, -8, -1.6, -2)
 template:setBeamPosition(1,  8, -1.6, -2)
@@ -56,7 +56,7 @@ template:addDoor(8, 4, false);
 
 --[[ Neutral or special ship types --]]
 --Tug, used for transport of small goods (like weapons)
-template = ShipTemplate():setName("Tug"):setMesh("space_tug.obj", "space_tug_color.jpg", "space_tug_illumination.jpg", "space_tug_illumination.jpg"):setScale(6):setRadius(80)
+template = ShipTemplate():setName("Tug"):setMesh("space_tug.model", "space_tug_color.jpg", "space_tug_illumination.jpg", "space_tug_illumination.jpg"):setScale(6):setRadius(80)
 template:addEngineEmitor(-2.1500, -13, 0.3,  0.2, 0.2, 1.0, 2.0)
 template:addEngineEmitor( 2.1500, -13, 0.3,  0.2, 0.2, 1.0, 2.0)
 template:setHull(50)
@@ -69,7 +69,7 @@ template:setWeaponStorage("EMP", 2)
 
 --[[ Enemy ship types --]]
 -- Fighters are quick agile ships that do not do a lot of damage, but usually come in larger groups. They are easy to take out, but should not be underestimated.
-template = ShipTemplate():setName("Fighter"):setMesh("small_fighter_1.obj", "small_fighter_1_color.jpg", "small_fighter_1_specular.jpg", "small_fighter_1_illumination.jpg"):setScale(3):setRadius(40)
+template = ShipTemplate():setName("Fighter"):setMesh("small_fighter_1.model", "small_fighter_1_color.jpg", "small_fighter_1_specular.jpg", "small_fighter_1_illumination.jpg"):setScale(3):setRadius(40)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
 template:setBeamPosition(0, 0, 23, -1.8)
 template:addEngineEmitor(0, -8, 0.5,  1.0, 0.2, 0.2, 1.0)
@@ -81,7 +81,7 @@ template:setShields(30, 30)
 template:setSpeed(100, 30)
 
 -- The cruiser is an average ship you can encounter, it has average shields, and average beams. It's pretty much average with nothing special.
-template = ShipTemplate():setName("Cruiser"):setMesh("space_frigate_6.obj", "space_frigate_6_color.png", "space_frigate_6_specular.png", "space_frigate_6_illumination.png"):setScale(6):setRadius(100)
+template = ShipTemplate():setName("Cruiser"):setMesh("space_frigate_6.model", "space_frigate_6_color.png", "space_frigate_6_specular.png", "space_frigate_6_illumination.png"):setScale(6):setRadius(100)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
 template:setBeamPosition(0, -8, -1.6, -2)
 template:setBeamPosition(1,  8, -1.6, -2)
@@ -96,7 +96,7 @@ template:setShields(40, 40)
 template:setSpeed(40, 6)
 
 -- The missile cruiser is a long range missile firing platform. It cannot handle a lot of damage, but can do a lot of damage if not dealth with properly.
-template = ShipTemplate():setName("Missile Cruiser"):setMesh("space_cruiser_4.obj", "space_cruiser_4_color.jpg", "space_cruiser_4_illumination.jpg", "space_cruiser_4_illumination.jpg"):setScale(8):setRadius(100)
+template = ShipTemplate():setName("Missile Cruiser"):setMesh("space_cruiser_4.model", "space_cruiser_4_color.jpg", "space_cruiser_4_illumination.jpg", "space_cruiser_4_illumination.jpg"):setScale(8):setRadius(100)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
 template:setTubePosition(0, -10, 2, -2.3)
 template:setTubePosition(1,  10, 2, -2.3)
@@ -110,7 +110,7 @@ template:setSpeed(40, 4)
 template:setWeaponStorage("Homing", 10)
 
 -- The advanced gunship is a ship equiped with 2 homing missiles to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself.
-template = ShipTemplate():setName("Adv. Gunship"):setMesh("dark_fighter_6.obj", "dark_fighter_6_color.png", "dark_fighter_6_specular.png", "dark_fighter_6_illumination.png"):setScale(7):setRadius(200)
+template = ShipTemplate():setName("Adv. Gunship"):setMesh("dark_fighter_6.model", "dark_fighter_6_color.png", "dark_fighter_6_specular.png", "dark_fighter_6_illumination.png"):setScale(7):setRadius(200)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
 template:setBeamPosition(0,-28.2, 21, -2)
 template:setBeamPosition(1, 28.2, 21, -2)
@@ -128,7 +128,7 @@ template:setSpeed(40, 5)
 template:setWeaponStorage("Homing", 2)
 
 -- The Strikeship is a warp-drive equiped figher build for quick strikes, it's fast, it's aggile, but does not do an extreme amount of damage, and lacks in rear shields.
-template = ShipTemplate():setName("Strikeship"):setMesh("dark_fighter_6.obj", "dark_fighter_6_color.png", "dark_fighter_6_specular.png", "dark_fighter_6_illumination.png"):setScale(5):setRadius(140)
+template = ShipTemplate():setName("Strikeship"):setMesh("dark_fighter_6.model", "dark_fighter_6_color.png", "dark_fighter_6_specular.png", "dark_fighter_6_illumination.png"):setScale(5):setRadius(140)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
 template:setBeamPosition(0,-28.2, 21, -2)
 template:setBeamPosition(1, 28.2, 21, -2)
@@ -144,7 +144,7 @@ template:setSpeed(55, 12)
 template:setWarpSpeed(1000)
 
 -- The Dreadnough is a flying fortress, it's slow, slow to turn, but packs a huge amount of beam weapons in the front. Taking it head-on is suicide.
-template = ShipTemplate():setName("Dreadnought"):setMesh("space_cruiser_4.obj", "space_cruiser_4_color.jpg", "space_cruiser_4_illumination.jpg", "space_cruiser_4_illumination.jpg"):setScale(16):setRadius(200)
+template = ShipTemplate():setName("Dreadnought"):setMesh("space_cruiser_4.model", "space_cruiser_4_color.jpg", "space_cruiser_4_illumination.jpg", "space_cruiser_4_illumination.jpg"):setScale(16):setRadius(200)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
 template:setBeamPosition(0, -10, 2, -2.3)
 template:setBeamPosition(1,  10, 2, -2.3)
