@@ -1,11 +1,11 @@
 #ifndef GAME_MASTER_UI_H
 #define GAME_MASTER_UI_H
 
-#include "mainUI.h"
+#include "mainUIBase.h"
 #include "playerInfo.h"
 #include "spaceship.h"
 
-class GameMasterUI : public MainUI
+class GameMasterUI : public MainUIBase
 {
     int current_faction;
     sf::Vector2f mouse_down_pos;

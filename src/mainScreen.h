@@ -2,9 +2,9 @@
 #define MAIN_SCREEN_H
 
 #include "gui.h"
-#include "mainUI.h"
+#include "mainUIBase.h"
 
-class MainScreenUI : public MainUI
+class MainScreenUI : public MainUIBase
 {
 public:
     MainScreenUI();
@@ -12,7 +12,6 @@ public:
     virtual void onGui();
     virtual void destroy();
     
-    void render3dView(sf::RenderTarget& window);
     void renderTactical(sf::RenderTarget& window);
     void renderLongRange(sf::RenderTarget& window);
 };

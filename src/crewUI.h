@@ -1,7 +1,7 @@
 #ifndef CREW_UI_H
 #define CREW_UI_H
 
-#include "mainUI.h"
+#include "mainUIBase.h"
 #include "playerInfo.h"
 #include "spaceship.h"
 #include "repairCrew.h"
@@ -16,7 +16,7 @@ enum CommsOpenChannelType
     OCT_UnknownShip,
 };
 
-class CrewUI : public MainUI
+class CrewUI : public MainUIBase
 {
     ECrewPosition showPosition;
     EMissileWeapons tubeLoadType;

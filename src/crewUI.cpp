@@ -66,7 +66,7 @@ void CrewUI::onGui()
         }
     }
     
-    MainUI::onGui();
+    MainUIBase::onGui();
 }
 
 void CrewUI::helmsUI()
