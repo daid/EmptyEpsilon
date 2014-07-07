@@ -16,18 +16,18 @@ def main(filename, for_target='Release'):
 		app_dir = '%s.app' % (EXECUTABLE)
 		contents_dir = '%s/Contents' % (app_dir)
 		frameworks_dir = '%s/Frameworks' % (contents_dir)
-		EXECUTABLE = '%s.app/Contents/MacOS/%s' % (contents_dir, EXECUTABLE)
+		EXECUTABLE = '%s/MacOS/%s' % (contents_dir, EXECUTABLE)
 		if os.path.exists(app_dir):
 			shutil.rmtree(app_dir)
 		os.makedirs(os.path.dirname(EXECUTABLE))
 		os.makedirs(frameworks_dir)
-		shutil.copytree('/Library/Frameworks/sfml-audio.framework', frameworks_dir)
-		shutil.copytree('/Library/Frameworks/sfml-graphics.framework', frameworks_dir)
-		shutil.copytree('/Library/Frameworks/sfml-network.framework', frameworks_dir)
-		shutil.copytree('/Library/Frameworks/sfml-system.framework', frameworks_dir)
-		shutil.copytree('/Library/Frameworks/sfml-window.framework', frameworks_dir)
-		shutil.copytree('/Library/Frameworks/sndfile.framework', frameworks_dir)
-		shutil.copytree('/Library/Frameworks/freetype.framework', frameworks_dir)
+		shutil.copytree('/Library/Frameworks/sfml-audio.framework', frameworks_dir + '/sfml-audio.framework')
+		shutil.copytree('/Library/Frameworks/sfml-graphics.framework', frameworks_dir + '/sfml-graphics.framework')
+		shutil.copytree('/Library/Frameworks/sfml-network.framework', frameworks_dir + '/sfml-network.framework')
+		shutil.copytree('/Library/Frameworks/sfml-system.framework', frameworks_dir + '/sfml-system.framework')
+		shutil.copytree('/Library/Frameworks/sfml-window.framework', frameworks_dir + '/sfml-window.framework')
+		shutil.copytree('/Library/Frameworks/sndfile.framework', frameworks_dir + '/sndfile.framework')
+		shutil.copytree('/Library/Frameworks/freetype.framework', frameworks_dir + '/freetype.framework')
 	CC = 'gcc'
 	CXX = 'g++'
 	BUILD_DIR = '_build'
