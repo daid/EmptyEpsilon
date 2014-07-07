@@ -1,5 +1,6 @@
 import sys
 import os
+import platform
 try:
 	from xml.etree import cElementTree as ElementTree
 except:
@@ -7,6 +8,8 @@ except:
 
 def main(filename, for_target='Release'):
 	EXECUTABLE = os.path.splitext(filename)[0]
+	if platform.system() == "Windows":
+		EXECUTABLE += '.exe'
 	CC = 'gcc'
 	CXX = 'g++'
 	BUILD_DIR = '_build'
@@ -68,4 +71,9 @@ def main(filename, for_target='Release'):
 	print '[Goal] %s' % (cmd)
 	os.system(cmd)
 
-main("EmptyEpsilon.cbp")
+if platform.system() == "Windows":
+	main("EmptyEpsilon.cbp", "Release")
+if platform.system() == "Linux":
+	main("EmptyEpsilon.cbp", "Linux Release")
+if platform.system() == "Darwin":
+	main("EmptyEpsilon.cbp", "MacOS Release")
