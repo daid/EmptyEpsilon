@@ -53,7 +53,7 @@ function init()
 		end
 	end
 	
-	for cnt=1,random(2, 4) do
+	for cnt=1,random(2, 5) do
 		a = random(0, 360)
 		a2 = random(0, 360)
 		d = random(3000, 40000)
@@ -62,6 +62,22 @@ function init()
 			dx1, dy1 = vectorFromAngle(a2, random(-1000, 1000))
 			dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
 			Asteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2)
+		end
+	end
+
+	for cnt=1,random(0, 3) do
+		a = random(0, 360)
+		a2 = random(0, 360)
+		d = random(20000, 40000)
+		x, y = vectorFromAngle(a, d)
+		for nx=-1,1 do
+			for ny=-5,5 do
+				if random(0, 100) < 90 then
+					dx1, dy1 = vectorFromAngle(a2, (nx * 1000) + random(-100, 100))
+					dx2, dy2 = vectorFromAngle(a2 + 90, (ny * 1000) + random(-100, 100))
+					Mine():setPosition(x + dx1 + dx2, y + dy1 + dy2)
+				end
+			end
 		end
 	end
 end

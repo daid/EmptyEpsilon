@@ -7,7 +7,7 @@ GameMasterUI::GameMasterUI()
 {
     view_distance = 50000;
     current_faction = 2;
-    allow_object_drag = false;
+    allow_object_drag = engine->getGameSpeed() == 0.0;
 }
 
 void GameMasterUI::onGui()
