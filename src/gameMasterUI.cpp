@@ -156,7 +156,7 @@ void GameMasterUI::onGui()
         }
     }
     
-    if (toggleButton(sf::FloatRect(20, 840, 250, 30), allow_object_drag, "Drag Objects"))
+    if (toggleButton(sf::FloatRect(20, 820, 250, 50), allow_object_drag, "Drag Objects"))
         allow_object_drag = !allow_object_drag;
 
     MainUI::onGui();

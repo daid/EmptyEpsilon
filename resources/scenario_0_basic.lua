@@ -1,12 +1,12 @@
 -- Name: Basic
 -- Description: Basic scenarios, a few random stations, with random stuff around them are under attack by enemies.
 
-function vectorFromAngle(angle)
-	return math.sin(angle / 180 * math.pi), -math.cos(angle / 180 * math.pi)
+function vectorFromAngle(angle, length)
+	return math.sin(angle / 180 * math.pi) * length, -math.cos(angle / 180 * math.pi) * length
 end
 function setCirclePos(obj, x, y, angle, distance)
-	dx, dy = vectorFromAngle(angle)
-	return obj:setPosition(x + dx * distance, y + dy * distance)
+	dx, dy = vectorFromAngle(angle, distance)
+	return obj:setPosition(x + dx, y + dy)
 end
 
 function init()
@@ -50,6 +50,18 @@ function init()
 		else
 			setCirclePos(CpuShip():setShipTemplate('Adv. Striker'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100))
 			setCirclePos(CpuShip():setShipTemplate('Adv. Striker'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100))
+		end
+	end
+	
+	for cnt=1,random(2, 4) do
+		a = random(0, 360)
+		a2 = random(0, 360)
+		d = random(3000, 40000)
+		x, y = vectorFromAngle(a, d)
+		for acnt=1,50 do
+			dx1, dy1 = vectorFromAngle(a2, random(-1000, 1000))
+			dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
+			Asteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2)
 		end
 	end
 end

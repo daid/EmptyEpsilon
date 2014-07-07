@@ -19,7 +19,7 @@ Asteroid::Asteroid()
 void Asteroid::draw3D()
 {
     glRotatef(engine->getElapsedTime() * rotation_speed, 0, 0, 1);
-    glScalef(70, 70, 70);
+    glScalef(getRadius(), getRadius(), getRadius());
     objectShader.setParameter("baseMap", *textureManager.getTexture("asteroid.png"));
     objectShader.setParameter("illuminationMap", *textureManager.getTexture("none.png"));
     objectShader.setParameter("specularMap", *textureManager.getTexture("none.png"));
@@ -35,7 +35,10 @@ void Asteroid::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float 
     objectSprite.setRotation(getRotation());
     objectSprite.setPosition(position);
     objectSprite.setColor(sf::Color(255, 200, 100));
-    objectSprite.setScale(0.2, 0.2);
+    float size = getRadius() * scale / objectSprite.getTextureRect().width * 2;
+    if (size < 0.2)
+        size = 0.2;
+    objectSprite.setScale(size, size);
     window.draw(objectSprite);
 }
 
