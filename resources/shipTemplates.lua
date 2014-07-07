@@ -143,6 +143,22 @@ template:setShields(80, 30)
 template:setSpeed(55, 12)
 template:setWarpSpeed(1000)
 
+-- The Adv. Striker is a jump-drive equiped figher build for quick strikes, it's slow but very aggile, but does not do an extreme amount of damage, and lacks in shields. However, due to the jump driver, it's quick to get into the action.
+template = ShipTemplate():setName("Adv. Striker"):setMesh("dark_fighter_6.model", "dark_fighter_6_color.png", "dark_fighter_6_specular.png", "dark_fighter_6_illumination.png"):setScale(5):setRadius(140)
+-- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
+template:setBeamPosition(0,-28.2, 21, -2)
+template:setBeamPosition(1, 28.2, 21, -2)
+template:addEngineEmitor(-1.5, -28, -5,  1.0, 0.2, 0.2, 2.0)
+template:addEngineEmitor( 1.5, -28, -5,  1.0, 0.2, 0.2, 2.0)
+--                  Arc, Dir, Range, CycleTime, Dmg
+template:setBeam(0, 50,-15, 1000.0, 6.0, 3)
+template:setBeam(1, 50, 15, 1000.0, 6.0, 3)
+template:setTubes(0) -- Amount of torpedo tubes
+template:setHull(70)
+template:setShields(50, 30)
+template:setSpeed(30, 12)
+template:setJumpDrive(true)
+
 -- The Dreadnough is a flying fortress, it's slow, slow to turn, but packs a huge amount of beam weapons in the front. Taking it head-on is suicide.
 template = ShipTemplate():setName("Dreadnought"):setMesh("space_cruiser_4.model", "space_cruiser_4_color.jpg", "space_cruiser_4_illumination.jpg", "space_cruiser_4_illumination.jpg"):setScale(16):setRadius(200)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)

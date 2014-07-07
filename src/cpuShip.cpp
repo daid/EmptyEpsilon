@@ -69,7 +69,7 @@ void CpuShip::update(float delta)
     
     //Find new target
     if (orders == AI_Roaming)
-        new_target = findBestTarget(getPosition(), 50000);
+        new_target = findBestTarget(getPosition(), 8000);
     if (orders == AI_StandGround || orders == AI_FlyTowards)
         new_target = findBestTarget(getPosition(), 7000);
     if (orders == AI_DefendLocation)
@@ -146,10 +146,12 @@ void CpuShip::update(float delta)
             {
                 if (fabs(sf::angleDifference(targetRotation, getRotation())) < 1.0)
                 {
+                    float jump = distance - 3000;
                     if (has_missiles)
-                        initJump(distance - 8000);
-                    else
-                        initJump(distance - 3000);
+                        jump = distance - 8000;
+                    if (jump > 10000)
+                        jump = 10000;
+                    initJump(jump / 1000);
                 }
             }
             
@@ -184,11 +186,20 @@ void CpuShip::update(float delta)
             // 3) we have no weapons
             if (has_missiles || has_beams)
             {
-                new_target = findBestTarget(getPosition(), 20000);
+                new_target = findBestTarget(getPosition(), 50000);
                 if (new_target)
+                {
                     targetId = new_target->getMultiplayerId();
+                }else{
+                    sf::Vector2f diff = order_target_location - getPosition();
+                    if (sf::length(diff) < 1000.0)
+                        order_target_location = sf::Vector2f(random(-30000, 30000), random(-30000, 30000));
+                    targetRotation = sf::vector2ToAngle(diff);
+                    impulseRequest = 1.0;
+                }
+            }else{
+                impulseRequest = 0.0;
             }
-            impulseRequest = 0.0;
             break;
         case AI_StandGround:     //Keep current position, do not fly away, but attack nearby targets.
             targetRotation = getRotation();
