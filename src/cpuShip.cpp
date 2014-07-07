@@ -236,6 +236,8 @@ void CpuShip::update(float delta)
                         impulseRequest = 0.0;
                     }
                 }
+            }else{
+                orders = AI_Roaming;
             }
             break;
         case AI_Attack:          //Attack [order_target] very specificly.
