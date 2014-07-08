@@ -9,6 +9,7 @@
 ShipSelectionScreen::ShipSelectionScreen()
 {
     active_scenario_index = 0;
+    ship_template_index = 0;
     
     if (gameServer)
     {
@@ -71,6 +72,7 @@ void ShipSelectionScreen::onGui()
         float y = 150;
         for(int n=0; n<maxCrewPositions; n++)
         {
+            if (n == singlePilot) y += 30;
             if (toggleButton(sf::FloatRect(800, y, 300, 50), myPlayerInfo->crew_position[n], getCrewPositionName(ECrewPosition(n))))
             {
                 myPlayerInfo->setCrewPosition(ECrewPosition(n), !myPlayerInfo->crew_position[n]);
@@ -130,15 +132,25 @@ void ShipSelectionScreen::onGui()
 
     if (gameServer)
     {
+        std::vector<string> templates = ShipTemplate::getPlayerTemplateNameList();
         gameServer->setServerName(textEntry(sf::FloatRect(200, 50, 300, 50), gameServer->getServerName()));
         text(sf::FloatRect(200, 100, 300, 50), sf::IpAddress::getLocalAddress().toString(), AlignCenter, 30);
+
+        if (ship_template_index < int(templates.size()))
+        {
+            ship_template_index += selector(sf::FloatRect(200, 750, 300, 50), templates[ship_template_index]);
+            if (ship_template_index < 0)
+                ship_template_index = templates.size() - 1;
+            if (ship_template_index >= int(templates.size()))
+                ship_template_index = 0;
+        }
         if (button(sf::FloatRect(200, 700, 300, 50), "Spawn player ship"))
         {
             mySpaceship = new PlayerSpaceship();
-            mySpaceship->setShipTemplate("Player Cruiser");
+            mySpaceship->setShipTemplate(templates[ship_template_index]);
             mySpaceship->setRotation(random(0, 360));
             mySpaceship->targetRotation = mySpaceship->getRotation();
-            mySpaceship->setPosition(sf::Vector2f(random(-10, 10), random(-10, 10)));
+            mySpaceship->setPosition(sf::Vector2f(random(-100, 100), random(-100, 100)));
             myPlayerInfo->setShipId(mySpaceship->getMultiplayerId());
             if (gameGlobalInfo->insertPlayerShip(mySpaceship) < 0)
             {

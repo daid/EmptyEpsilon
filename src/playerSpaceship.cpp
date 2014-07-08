@@ -21,6 +21,7 @@ static const int16_t CMD_UNDOCK = 0x000F;
 static const int16_t CMD_OPEN_COMM = 0x0010;
 static const int16_t CMD_CLOSE_COMM = 0x0011;
 static const int16_t CMD_SEND_COMM = 0x0012;
+static const int16_t CMD_SET_AUTO_REPAIR = 0x0013;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -36,6 +37,7 @@ PlayerSpaceship::PlayerSpaceship()
     comms_state = CS_Inactive;
     comms_open_delay = 0.0;
     comms_reply_count = 0;
+    auto_repair_enabled = true;
 
     registerMemberReplication(&hull_damage_indicator, 0.5);
     registerMemberReplication(&hull_strength, 0.5);
@@ -50,6 +52,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&shields_active);
     registerMemberReplication(&front_shield_recharge_factor);
     registerMemberReplication(&rear_shield_recharge_factor);
+    registerMemberReplication(&auto_repair_enabled);
     registerMemberReplication(&comms_state);
     registerMemberReplication(&comms_open_delay, 1.0);
     registerMemberReplication(&comms_reply_count);
@@ -436,6 +439,9 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             }
         }
         break;
+    case CMD_SET_AUTO_REPAIR:
+        packet >> auto_repair_enabled;
+        break;
     }
 }
 
@@ -567,5 +573,12 @@ void PlayerSpaceship::commandSendComm(int8_t index)
 {
     sf::Packet packet;
     packet << CMD_SEND_COMM << index;
+    sendCommand(packet);
+}
+
+void PlayerSpaceship::commandSetAutoRepair(bool enabled)
+{
+    sf::Packet packet;
+    packet << CMD_SET_AUTO_REPAIR << enabled;
     sendCommand(packet);
 }

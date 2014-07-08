@@ -177,7 +177,7 @@ void SpaceShip::draw3DTransparent()
 
 void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
-    if (!long_range)
+    if (!long_range && scanned_by_player)
     {
         for(int n=0; n<maxBeamWeapons; n++)
         {
@@ -273,7 +273,7 @@ void SpaceShip::update(float delta)
     {
         front_shield += delta * shield_recharge_rate * front_shield_recharge_factor;
         if (docking_state == DS_Docked)
-            front_shield += delta * shield_recharge_rate * front_shield_recharge_factor * 3.0;
+            front_shield += delta * shield_recharge_rate * front_shield_recharge_factor * 5.0;
         if (front_shield > front_shield_max)
             front_shield = front_shield_max;
     }
@@ -281,7 +281,7 @@ void SpaceShip::update(float delta)
     {
         rear_shield += delta * shield_recharge_rate * rear_shield_recharge_factor;
         if (docking_state == DS_Docked)
-            rear_shield += delta * shield_recharge_rate * rear_shield_recharge_factor * 3.0;
+            rear_shield += delta * shield_recharge_rate * rear_shield_recharge_factor * 5.0;
         if (rear_shield > rear_shield_max)
             rear_shield = rear_shield_max;
     }
@@ -594,6 +594,8 @@ bool SpaceShip::hasSystem(ESystem system)
 {
     if (system == SYS_Warp && !hasWarpdrive) return false;
     if (system == SYS_JumpDrive && !hasJumpdrive) return false;
+    if (system == SYS_FrontShield && front_shield_max <= 0) return false;
+    if (system == SYS_RearShield && rear_shield_max <= 0) return false;
     return true;
 }
 

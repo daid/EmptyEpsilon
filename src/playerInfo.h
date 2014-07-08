@@ -18,6 +18,7 @@ enum ECrewPosition
     engineering,
     scienceOfficer,
     commsOfficer,
+    singlePilot,
     maxCrewPositions
 };
 

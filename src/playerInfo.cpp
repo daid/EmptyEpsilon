@@ -158,6 +158,7 @@ string getCrewPositionName(ECrewPosition position)
     case engineering: return "Engineering";
     case scienceOfficer: return "Science";
     case commsOfficer: return "Comms";
+    case singlePilot: return "Single Pilot";
     default: return "ErrUnk: " + string(position);
     }
 }

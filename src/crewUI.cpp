@@ -42,6 +42,9 @@ void CrewUI::onGui()
         case commsOfficer:
             commsUI();
             break;
+        case singlePilot:
+            singlePilotUI();
+            break;
         default:
             drawStatic();
             text(sf::FloatRect(0, 500, 1600, 100), "???", AlignCenter, 100);
@@ -71,7 +74,6 @@ void CrewUI::onGui()
 
 void CrewUI::helmsUI()
 {
-    sf::RenderTarget* window = getRenderTarget();
     sf::Vector2f mouse = InputHandler::getMousePos();
     if (InputHandler::mouseIsPressed(sf::Mouse::Left))
     {
@@ -80,106 +82,32 @@ void CrewUI::helmsUI()
             mySpaceship->commandTargetRotation(sf::vector2ToAngle(diff));
     }
     
-    //Radar
-    float radarDistance = 5000;
-    drawRaderBackground(mySpaceship->getPosition(), sf::Vector2f(800, 450), 400, 400.0f / radarDistance);
-    foreach(SpaceObject, obj, spaceObjectList)
-    {
-        if (obj != mySpaceship && sf::length(obj->getPosition() - mySpaceship->getPosition()) < radarDistance)
-            obj->drawRadar(*window, sf::Vector2f(800, 450) + (obj->getPosition() - mySpaceship->getPosition()) / radarDistance * 400.0f, 400.0f / radarDistance, false);
-    }
-
-    P<SpaceObject> target = mySpaceship->getTarget();
-    if (target)
-    {
-        sf::Sprite objectSprite;
-        textureManager.setTexture(objectSprite, "redicule.png");
-        objectSprite.setPosition(sf::Vector2f(800, 450) + (target->getPosition() - mySpaceship->getPosition()) / radarDistance * 400.0f);
-        window->draw(objectSprite);
-    }
-    mySpaceship->drawRadar(*window, sf::Vector2f(800, 450), 400.0f / radarDistance, false);
-    drawHeadingCircle(sf::Vector2f(800, 450), 400);
-    //!Radar
+    drawRadar(sf::Vector2f(800, 450), 400, 5000, false, mySpaceship->getTarget());
 
     text(sf::FloatRect(10, 100, 200, 20), "Energy: " + string(int(mySpaceship->energy_level)), AlignLeft, 20);
     
-    float res = vslider(sf::FloatRect(20, 500, 50, 300), mySpaceship->impulseRequest, 1.0, -1.0);
-    if (res > -0.15 && res < 0.15)
-        res = 0.0;
-    if (res != mySpaceship->impulseRequest)
-        mySpaceship->commandImpulse(res);
-    text(sf::FloatRect(20, 800, 50, 20), string(int(mySpaceship->impulseRequest * 100)) + "%", AlignLeft, 20);
-    text(sf::FloatRect(20, 820, 50, 20), string(int(mySpaceship->currentImpulse * 100)) + "%", AlignLeft, 20);
+    impulseSlider(sf::FloatRect(20, 500, 50, 300), 20);
 
     float x = 100;
     if (mySpaceship->hasWarpdrive)
     {
-        res = vslider(sf::FloatRect(x, 500, 50, 300), mySpaceship->warpRequest, 4.0, 0.0);
-        if (res != mySpaceship->warpRequest)
-            mySpaceship->commandWarp(res);
-        text(sf::FloatRect(100, 800, 50, 20), string(int(mySpaceship->warpRequest)), AlignLeft, 20);
-        text(sf::FloatRect(100, 820, 50, 20), string(int(mySpaceship->currentWarp * 100)) + "%", AlignLeft, 20);
+        warpSlider(sf::FloatRect(x, 500, 50, 300), 20);
         x += 80;
     }
     if (mySpaceship->hasJumpdrive)
     {
-        jumpDistance = vslider(sf::FloatRect(x, 500, 50, 300), jumpDistance, 40.0, 1.0, 1.0);
-        jumpDistance = roundf(jumpDistance * 10.0f) / 10.0f;
-        text(sf::FloatRect(x, 800, 50, 20), string(jumpDistance, 1) + "km", AlignLeft, 20);
-        if (mySpaceship->jumpDelay > 0.0)
-        {
-            text(sf::FloatRect(x, 820, 50, 20), string(int(ceilf(mySpaceship->jumpDelay))), AlignLeft, 20);
-        }else{
-            if (button(sf::FloatRect(x - 10, 820, 70, 30), "Jump", 20))
-            {
-                mySpaceship->commandJump(jumpDistance);
-            }
-        }
+        jumpSlider(sf::FloatRect(x, 500, 50, 300), 20);
         x += 80;
     }
 
-    switch(mySpaceship->docking_state)
-    {
-    case DS_NotDocking:
-        {
-            PVector<Collisionable> obj_list = CollisionManager::queryArea(mySpaceship->getPosition() - sf::Vector2f(1000, 1000), mySpaceship->getPosition() + sf::Vector2f(1000, 1000));
-            P<SpaceStation> station;
-            foreach(Collisionable, obj, obj_list)
-            {
-                station = obj;
-                if (station && sf::length(station->getPosition() - mySpaceship->getPosition()) < 1000.0)
-                {
-                    break;
-                }
-            }
-            
-            if (station)
-            {
-                if (button(sf::FloatRect(x, 800, 280, 50), "Request Dock", 30))
-                    mySpaceship->commandDock(station);
-            }else{
-                disabledButton(sf::FloatRect(x, 800, 280, 50), "Request Dock", 30);
-            }
-        }
-        break;
-    case DS_Docking:
-        disabledButton(sf::FloatRect(x, 800, 280, 50), "Docking...", 30);
-        break;
-    case DS_Docked:
-        if (button(sf::FloatRect(x, 800, 280, 50), "Undock", 30))
-            mySpaceship->commandUndock();
-        break;
-    }
+    dockingButton(sf::FloatRect(x, 800, 280, 50), 30);
 }
 
 void CrewUI::weaponsUI()
 {
-    sf::RenderTarget* window = getRenderTarget();
     sf::Vector2f mouse = InputHandler::getMousePos();
     float radarDistance = 5000;
 
-    //Radar
-    drawRaderBackground(mySpaceship->getPosition(), sf::Vector2f(800, 450), 400, 400.0f / radarDistance);
     if (InputHandler::mouseIsPressed(sf::Mouse::Left))
     {
         sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
@@ -200,24 +128,8 @@ void CrewUI::weaponsUI()
             mySpaceship->commandSetTarget(target);
         }
     }
+    drawRadar(sf::Vector2f(800, 450), 400, radarDistance, false, mySpaceship->getTarget());
 
-    foreach(SpaceObject, obj, spaceObjectList)
-    {
-        if (obj != mySpaceship && sf::length(obj->getPosition() - mySpaceship->getPosition()) < radarDistance)
-            obj->drawRadar(*window, sf::Vector2f(800, 450) + (obj->getPosition() - mySpaceship->getPosition()) / radarDistance * 400.0f, 400.0f / radarDistance, false);
-    }
-    
-    P<SpaceObject> target = mySpaceship->getTarget();
-    if (target)
-    {
-        sf::Sprite objectSprite;
-        textureManager.setTexture(objectSprite, "redicule.png");
-        objectSprite.setPosition(sf::Vector2f(800, 450) + (target->getPosition() - mySpaceship->getPosition()) / radarDistance * 400.0f);
-        window->draw(objectSprite);
-    }
-    mySpaceship->drawRadar(*window, sf::Vector2f(800, 450), 400.0f / radarDistance, false);
-    drawHeadingCircle(sf::Vector2f(800, 450), 400);
-    //!Radar
     text(sf::FloatRect(20, 100, 200, 20), "Energy: " + string(int(mySpaceship->energy_level)), AlignLeft, 20);
     text(sf::FloatRect(20, 120, 200, 20), "Shields: " + string(int(100 * mySpaceship->front_shield / mySpaceship->front_shield_max)) + "/" + string(int(100 * mySpaceship->rear_shield / mySpaceship->rear_shield_max)), AlignLeft, 20);
     if (mySpaceship->front_shield_max > 0 || mySpaceship->rear_shield_max > 0)
@@ -226,45 +138,25 @@ void CrewUI::weaponsUI()
             mySpaceship->commandSetShields(!mySpaceship->shields_active);
     }
 
-    float y = 900 - 10;
-    for(int n=0; n<mySpaceship->weaponTubes; n++)
+    if (mySpaceship->weaponTubes > 0)
     {
-        y -= 50;
-        switch(mySpaceship->weaponTube[n].state)
+        float y = 900 - 10;
+        for(int n=0; n<mySpaceship->weaponTubes; n++)
         {
-        case WTS_Empty:
-            if (toggleButton(sf::FloatRect(20, y, 150, 50), tubeLoadType != MW_None && mySpaceship->weapon_storage[tubeLoadType] > 0, "Load", 35) && tubeLoadType != MW_None)
-                mySpaceship->commandLoadTube(n, tubeLoadType);
-            disabledButton(sf::FloatRect(170, y, 350, 50), "Empty", 35);
-            break;
-        case WTS_Loaded:
-            if (button(sf::FloatRect(20, y, 150, 50), "Unload", 35))
-                mySpaceship->commandUnloadTube(n);
-            if (button(sf::FloatRect(170, y, 350, 50), getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), 35))
-                mySpaceship->commandFireTube(n);
-            break;
-        case WTS_Loading:
-            progressBar(sf::FloatRect(170, 840 - 50 * n, 350, 50), mySpaceship->weaponTube[n].delay, mySpaceship->tubeLoadTime, 0.0);
-            disabledButton(sf::FloatRect(20, y, 150, 50), "Loading", 35);
-            text(sf::FloatRect(170, y, 350, 50), getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), AlignCenter, 35, sf::Color::Black);
-            break;
-        case WTS_Unloading:
-            progressBar(sf::FloatRect(170, 840 - 50 * n, 350, 50), mySpaceship->weaponTube[n].delay, 0.0, mySpaceship->tubeLoadTime);
-            disabledButton(sf::FloatRect(20, y, 150, 50), "Unloading", 25);
-            text(sf::FloatRect(170, y, 350, 50), getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), AlignCenter, 35, sf::Color::Black);
-            break;
+            y -= 50;
+            weaponTube(n, sf::FloatRect(20, y, 150, 50), sf::FloatRect(170, y, 350, 50), 35);
         }
-    }
 
-    for(int n=0; n<MW_Count; n++)
-    {
-        y -= 30;
-        if (toggleButton(sf::FloatRect(20, y, 200, 30), tubeLoadType == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(mySpaceship->weapon_storage[n]), 25))
+        for(int n=0; n<MW_Count; n++)
         {
-            if (tubeLoadType == n)
-                tubeLoadType = MW_None;
-            else
-                tubeLoadType = EMissileWeapons(n);
+            y -= 30;
+            if (toggleButton(sf::FloatRect(20, y, 200, 30), tubeLoadType == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(mySpaceship->weapon_storage[n]), 25))
+            {
+                if (tubeLoadType == n)
+                    tubeLoadType = MW_None;
+                else
+                    tubeLoadType = EMissileWeapons(n);
+            }
         }
     }
 }
@@ -284,9 +176,13 @@ void CrewUI::engineeringUI()
         else
             net_power -= mySpaceship->systems[n].powerUserFactor * mySpaceship->systems[n].powerLevel;
     }
-    text(sf::FloatRect(10, 100, 200, 20), "Energy: " + string(int(mySpaceship->energy_level)) + " (" + string(net_power) + ")", AlignLeft, 20);
-    text(sf::FloatRect(10, 120, 200, 20), "Hull: " + string(int(mySpaceship->hull_strength * 100 / mySpaceship->hull_max)), AlignLeft, 20);
-    text(sf::FloatRect(10, 140, 200, 20), "Shields: " + string(int(100 * mySpaceship->front_shield / mySpaceship->front_shield_max)) + "/" + string(int(100 * mySpaceship->rear_shield / mySpaceship->rear_shield_max)), AlignLeft, 20);
+    text(sf::FloatRect(50, 100, 200, 20), "Energy: " + string(int(mySpaceship->energy_level)) + " (" + string(net_power) + ")", AlignLeft, 20);
+    text(sf::FloatRect(50, 120, 200, 20), "Hull: " + string(int(mySpaceship->hull_strength * 100 / mySpaceship->hull_max)), AlignLeft, 20);
+    text(sf::FloatRect(50, 140, 200, 20), "Shields: " + string(int(100 * mySpaceship->front_shield / mySpaceship->front_shield_max)) + "/" + string(int(100 * mySpaceship->rear_shield / mySpaceship->rear_shield_max)), AlignLeft, 20);
+    if (toggleButton(sf::FloatRect(50, 200, 250, 50), mySpaceship->auto_repair_enabled, "Auto-Repair", 30))
+    {
+        mySpaceship->commandSetAutoRepair(!mySpaceship->auto_repair_enabled);
+    }
     
     ESystem highlight_system = SYS_None;
     int x = 20;
@@ -350,12 +246,9 @@ void CrewUI::engineeringUI()
 
 void CrewUI::scienceUI()
 {
-    sf::RenderTarget* window = getRenderTarget();
     sf::Vector2f mouse = InputHandler::getMousePos();
 
-    //Radar
     float radarDistance = scienceRadarDistance;
-    drawRaderBackground(mySpaceship->getPosition(), sf::Vector2f(800, 450), 400, 400.0f / radarDistance);
     if (InputHandler::mouseIsPressed(sf::Mouse::Left))
     {
         sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
@@ -377,22 +270,7 @@ void CrewUI::scienceUI()
         }
     }
 
-    foreach(SpaceObject, obj, spaceObjectList)
-    {
-        if (obj != mySpaceship && sf::length(obj->getPosition() - mySpaceship->getPosition()) < radarDistance)
-            obj->drawRadar(*window, sf::Vector2f(800, 450) + (obj->getPosition() - mySpaceship->getPosition()) / radarDistance * 400.0f, 400.0f / radarDistance, true);
-    }
-    
-    if (scienceTarget)
-    {
-        sf::Sprite objectSprite;
-        textureManager.setTexture(objectSprite, "redicule.png");
-        objectSprite.setPosition(sf::Vector2f(800, 450) + (scienceTarget->getPosition() - mySpaceship->getPosition()) / radarDistance * 400.0f);
-        window->draw(objectSprite);
-    }
-    mySpaceship->drawRadar(*window, sf::Vector2f(800, 450), 400.0f / radarDistance, true);
-    drawHeadingCircle(sf::Vector2f(800, 450), 400);
-    //!Radar
+    drawRadar(sf::Vector2f(800, 450), 400, radarDistance, true, scienceTarget);
     
     if (scienceTarget)
     {
@@ -578,6 +456,230 @@ void CrewUI::commsUI()
         text(sf::FloatRect(50, 100, 600, 50), "ERROR 5812 - Checksum failed.");
         if (button(sf::FloatRect(50, 800, 300, 50), "Close channel"))
             mySpaceship->commandCloseComm();
+        break;
+    }
+}
+
+void CrewUI::singlePilotUI()
+{
+    float radarDistance = 5000;
+    sf::Vector2f mouse = InputHandler::getMousePos();
+
+    if (InputHandler::mouseIsPressed(sf::Mouse::Left))
+    {
+        sf::Vector2f diff = mouse - sf::Vector2f(400, 450);
+        if (sf::length(diff) < 380)
+        {
+            P<SpaceObject> target;
+            sf::Vector2f mousePosition = mySpaceship->getPosition() + diff / 380.0f * radarDistance;
+            PVector<Collisionable> list = CollisionManager::queryArea(mousePosition - sf::Vector2f(50, 50), mousePosition + sf::Vector2f(50, 50));
+            foreach(Collisionable, obj, list)
+            {
+                P<SpaceObject> spaceObject = obj;
+                if (spaceObject && spaceObject->canBeTargeted() && spaceObject != mySpaceship)
+                {
+                    if (!target || sf::length(mousePosition - spaceObject->getPosition()) < sf::length(mousePosition - target->getPosition()))
+                        target = spaceObject;
+                }
+            }
+            if (target)
+                mySpaceship->commandSetTarget(target);
+            else
+                mySpaceship->commandTargetRotation(sf::vector2ToAngle(diff));
+        }
+    }
+    
+    drawRadar(sf::Vector2f(400, 450), 380, radarDistance, false, mySpaceship->getTarget(), sf::FloatRect(0, 0, 800, 900));
+
+    text(sf::FloatRect(10, 30, 200, 20), "Energy: " + string(int(mySpaceship->energy_level)), AlignLeft, 20);
+    text(sf::FloatRect(10, 50, 200, 20), "Hull: " + string(int(mySpaceship->hull_strength * 100 / mySpaceship->hull_max)), AlignLeft, 20);
+    text(sf::FloatRect(10, 70, 200, 20), "Shields: " + string(int(100 * mySpaceship->front_shield / mySpaceship->front_shield_max)) + "/" + string(int(100 * mySpaceship->rear_shield / mySpaceship->rear_shield_max)), AlignLeft, 20);
+    if (mySpaceship->front_shield_max > 0 || mySpaceship->rear_shield_max > 0)
+    {
+        if (toggleButton(sf::FloatRect(10, 90, 170, 25), mySpaceship->shields_active, mySpaceship->shields_active ? "Shields:ON" : "Shields:OFF", 20))
+            mySpaceship->commandSetShields(!mySpaceship->shields_active);
+    }
+    dockingButton(sf::FloatRect(10, 115, 170, 25), 20);
+    
+    impulseSlider(sf::FloatRect(10, 650, 40, 200), 15);
+    float x = 60;
+    if (mySpaceship->hasWarpdrive)
+    {
+        warpSlider(sf::FloatRect(x, 650, 40, 200), 15);
+        x += 50;
+    }
+    if (mySpaceship->hasJumpdrive)
+    {
+        jumpSlider(sf::FloatRect(x, 650, 40, 200), 15);
+        x += 50;
+    }
+
+    if (mySpaceship->weaponTubes > 0)
+    {
+        float y = 900 - 5;
+        for(int n=0; n<mySpaceship->weaponTubes; n++)
+        {
+            y -= 30;
+            weaponTube(n, sf::FloatRect(700, y, 100, 30), sf::FloatRect(500, y, 200, 30), 20);
+        }
+
+        for(int n=0; n<MW_Count; n++)
+        {
+            y -= 25;
+            if (toggleButton(sf::FloatRect(650, y, 150, 25), tubeLoadType == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(mySpaceship->weapon_storage[n]), 20))
+            {
+                if (tubeLoadType == n)
+                    tubeLoadType = MW_None;
+                else
+                    tubeLoadType = EMissileWeapons(n);
+            }
+        }
+    }
+    
+    if (mySpaceship->getTarget())
+    {
+        P<SpaceObject> target = mySpaceship->getTarget();
+        float distance = sf::length(target->getPosition() - mySpaceship->getPosition());
+        float heading = sf::vector2ToAngle(target->getPosition() - mySpaceship->getPosition());
+        if (heading < 0) heading += 360;
+        text(sf::FloatRect(700, 50, 100, 20), target->getCallSign(), AlignRight, 20);
+        text(sf::FloatRect(700, 70, 100, 20), "Distance: " + string(distance / 1000.0, 1) + "km", AlignRight, 20);
+        text(sf::FloatRect(700, 90, 100, 20), "Heading: " + string(int(heading)), AlignRight, 20);
+
+        P<SpaceShip> ship = target;
+        if (ship && !ship->scanned_by_player)
+        {
+            if (mySpaceship->scanning_delay > 0.0)
+            {
+                progressBar(sf::FloatRect(700, 110, 100, 20), mySpaceship->scanning_delay, 8.0, 0.0);
+            }else{
+                if (button(sf::FloatRect(700, 110, 100, 30), "Scan", 20))
+                    mySpaceship->commandScan(target);
+            }
+        }else{
+            text(sf::FloatRect(700, 110, 100, 20), factionInfo[target->faction_id].name, AlignRight, 20);
+            if (ship && ship->shipTemplate)
+            {
+                text(sf::FloatRect(700, 130, 100, 20), ship->shipTemplate->name, AlignRight, 20);
+                text(sf::FloatRect(700, 150, 100, 20), "Shields: " + string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), AlignRight, 20);
+            }
+        }
+        P<SpaceStation> station = target;
+        if (station)
+        {
+            text(sf::FloatRect(700, 150, 100, 20), "Shields: " + string(int(station->shields)), AlignRight, 20);
+        }
+    }
+
+    switch(mySpaceship->mainScreenSetting)
+    {
+    case MSS_LongRange:
+        drawRadar(sf::Vector2f(1200, 450), 380, 50000, true, NULL, sf::FloatRect(800, 0, 800, 900));
+        break;
+    case MSS_Tactical:
+        drawRadar(sf::Vector2f(1200, 450), 380, 5000, false, NULL, sf::FloatRect(800, 0, 800, 900));
+        break;
+    default:
+        draw3Dworld(sf::FloatRect(800, 0, 800, 900));
+        break;
+    }
+}
+
+void CrewUI::impulseSlider(sf::FloatRect rect, float text_size)
+{
+    float res = vslider(rect, mySpaceship->impulseRequest, 1.0, -1.0);
+    if (res > -0.15 && res < 0.15)
+        res = 0.0;
+    if (res != mySpaceship->impulseRequest)
+        mySpaceship->commandImpulse(res);
+    text(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(int(mySpaceship->impulseRequest * 100)) + "%", AlignLeft, text_size);
+    text(sf::FloatRect(rect.left, rect.top + rect.height + text_size, rect.width, text_size), string(int(mySpaceship->currentImpulse * 100)) + "%", AlignLeft, text_size);
+}
+
+void CrewUI::warpSlider(sf::FloatRect rect, float text_size)
+{
+    float res = vslider(rect, mySpaceship->warpRequest, 4.0, 0.0);
+    if (res != mySpaceship->warpRequest)
+        mySpaceship->commandWarp(res);
+    text(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(int(mySpaceship->warpRequest)), AlignLeft, text_size);
+    text(sf::FloatRect(rect.left, rect.top + rect.height + text_size, rect.width, text_size), string(int(mySpaceship->currentWarp * 100)) + "%", AlignLeft, text_size);
+}
+
+void CrewUI::jumpSlider(sf::FloatRect rect, float text_size)
+{
+    jumpDistance = vslider(rect, jumpDistance, 40.0, 1.0, 1.0);
+    jumpDistance = roundf(jumpDistance * 10.0f) / 10.0f;
+    text(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(jumpDistance, 1) + "km", AlignLeft, text_size);
+    if (mySpaceship->jumpDelay > 0.0)
+    {
+        text(sf::FloatRect(rect.left, rect.top + rect.height + text_size, rect.width, text_size), string(int(ceilf(mySpaceship->jumpDelay))), AlignLeft, text_size);
+    }else{
+        if (button(sf::FloatRect(rect.left - text_size / 2, rect.top + rect.height + text_size, rect.width + text_size, text_size), "Jump", text_size))
+        {
+            mySpaceship->commandJump(jumpDistance);
+        }
+    }
+}
+
+void CrewUI::dockingButton(sf::FloatRect rect, float text_size)
+{
+    switch(mySpaceship->docking_state)
+    {
+    case DS_NotDocking:
+        {
+            PVector<Collisionable> obj_list = CollisionManager::queryArea(mySpaceship->getPosition() - sf::Vector2f(1000, 1000), mySpaceship->getPosition() + sf::Vector2f(1000, 1000));
+            P<SpaceStation> station;
+            foreach(Collisionable, obj, obj_list)
+            {
+                station = obj;
+                if (station && sf::length(station->getPosition() - mySpaceship->getPosition()) < 1000.0)
+                    break;
+                station = NULL;
+            }
+            
+            if (station)
+            {
+                if (button(rect, "Request Dock", text_size))
+                    mySpaceship->commandDock(station);
+            }else{
+                disabledButton(rect, "Request Dock", text_size);
+            }
+        }
+        break;
+    case DS_Docking:
+        disabledButton(rect, "Docking...", text_size);
+        break;
+    case DS_Docked:
+        if (button(rect, "Undock", text_size))
+            mySpaceship->commandUndock();
+        break;
+    }
+}
+
+void CrewUI::weaponTube(int n, sf::FloatRect load_rect, sf::FloatRect fire_rect, float text_size)
+{
+    switch(mySpaceship->weaponTube[n].state)
+    {
+    case WTS_Empty:
+        if (toggleButton(load_rect, tubeLoadType != MW_None && mySpaceship->weapon_storage[tubeLoadType] > 0, "Load", text_size) && tubeLoadType != MW_None)
+            mySpaceship->commandLoadTube(n, tubeLoadType);
+        disabledButton(fire_rect, "Empty", text_size);
+        break;
+    case WTS_Loaded:
+        if (button(load_rect, "Unload", text_size))
+            mySpaceship->commandUnloadTube(n);
+        if (button(fire_rect, getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), text_size))
+            mySpaceship->commandFireTube(n);
+        break;
+    case WTS_Loading:
+        progressBar(fire_rect, mySpaceship->weaponTube[n].delay, mySpaceship->tubeLoadTime, 0.0);
+        disabledButton(load_rect, "Loading", text_size);
+        text(fire_rect, getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), AlignCenter, text_size, sf::Color::Black);
+        break;
+    case WTS_Unloading:
+        progressBar(fire_rect, mySpaceship->weaponTube[n].delay, 0.0, mySpaceship->tubeLoadTime);
+        disabledButton(load_rect, "Unloading", text_size * 0.8);
+        text(fire_rect, getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), AlignCenter, text_size, sf::Color::Black);
         break;
     }
 }

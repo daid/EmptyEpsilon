@@ -54,6 +54,45 @@ template:addDoor(6, 4, false);
 template:addDoor(8, 3, false);
 template:addDoor(8, 4, false);
 
+template = ShipTemplate():setName("Player Fighter"):setMesh("small_fighter_1.model", "small_fighter_1_color.jpg", "small_fighter_1_specular.jpg", "small_fighter_1_illumination.jpg"):setScale(4):setRadius(60)
+-- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
+template:setBeamPosition(0, 0, 23, -1.8)
+template:addEngineEmitor(0, -8, 0.5,  1.0, 0.2, 0.2, 1.0)
+--                  Arc, Dir, Range, CycleTime, Dmg
+template:setBeam(0, 40, -10, 1000.0, 6.0, 8)
+template:setBeam(1, 40,  10, 1000.0, 6.0, 8)
+template:setTubes(1) -- Amount of torpedo tubes
+template:setHull(40)
+template:setShields(40, 40)
+template:setSpeed(80, 20)
+template:setWarpSpeed(1000)
+template:setJumpDrive(false)
+template:setCloaking(false)
+template:setWeaponStorage("Homing", 4)
+template:setWeaponStorage("EMP", 1)
+
+template:addRoomSystem(3, 0, 1, 1, "Maneuver");
+template:addRoomSystem(1, 0, 2, 1, "BeamWeapons");
+
+template:addRoomSystem(0, 1, 1, 2, "RearShield");
+template:addRoomSystem(1, 1, 2, 2, "Reactor");
+template:addRoomSystem(3, 1, 2, 1, "Warp");
+template:addRoomSystem(3, 2, 2, 1, "JumpDrive");
+template:addRoomSystem(5, 1, 1, 2, "FrontShield");
+
+template:addRoomSystem(1, 3, 2, 1, "MissileSystem");
+template:addRoomSystem(3, 3, 1, 1, "Impulse");
+
+template:addDoor(2, 1, true);
+template:addDoor(3, 1, true);
+template:addDoor(1, 1, false);
+template:addDoor(3, 1, false);
+template:addDoor(3, 2, false);
+template:addDoor(3, 3, true);
+template:addDoor(2, 3, true);
+template:addDoor(5, 1, false);
+template:addDoor(5, 2, false);
+
 --[[ Neutral or special ship types --]]
 --Tug, used for transport of small goods (like weapons)
 template = ShipTemplate():setName("Tug"):setMesh("space_tug.model", "space_tug_color.jpg", "space_tug_illumination.jpg", "space_tug_illumination.jpg"):setScale(6):setRadius(80)

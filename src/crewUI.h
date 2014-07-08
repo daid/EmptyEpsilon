@@ -37,6 +37,15 @@ public:
     void engineeringUI();
     void scienceUI();
     void commsUI();
+
+    void singlePilotUI();
+    
+    
+    void impulseSlider(sf::FloatRect rect, float text_size);
+    void warpSlider(sf::FloatRect rect, float text_size);
+    void jumpSlider(sf::FloatRect rect, float text_size);
+    void dockingButton(sf::FloatRect rect, float text_size);
+    void weaponTube(int n, sf::FloatRect load_rect, sf::FloatRect fire_rect, float text_size);
 };
 
 #endif//CREW_UI_H

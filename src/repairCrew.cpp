@@ -139,6 +139,21 @@ void RepairCrew::update(float delta)
                 if (ship->systems[system].health > 1.0)
                     ship->systems[system].health = 1.0;
             }
+            if (ship->auto_repair_enabled && pos == target_position && (system == SYS_None || !ship->hasSystem(system) || ship->systems[system].health == 1.0))
+            {
+                int n=irandom(0, SYS_COUNT - 1);
+
+                if (ship->hasSystem(ESystem(n)) && ship->systems[n].health < 1.0)
+                {
+                    for(unsigned int idx=0; idx<ship->shipTemplate->rooms.size(); idx++)
+                    {
+                        if (ship->shipTemplate->rooms[idx].system == ESystem(n))
+                        {
+                            target_position = ship->shipTemplate->rooms[idx].position + sf::Vector2i(irandom(0, ship->shipTemplate->rooms[idx].size.x - 1), irandom(0, ship->shipTemplate->rooms[idx].size.y - 1));
+                        }
+                    }
+                }
+            }
         }
         break;
     case RC_MoveLeft:

@@ -107,24 +107,24 @@ void MainUIBase::drawStatic(float alpha)
     getRenderTarget()->draw(staticDisplay);
 }
 
-void MainUIBase::drawRaderBackground(sf::Vector2f view_position, sf::Vector2f position, float size, float scale)
+void MainUIBase::drawRaderBackground(sf::Vector2f view_position, sf::Vector2f position, float size, float scale, sf::FloatRect rect)
 {
     const float sector_size = 20000;
     const float sub_sector_size = sector_size / 8;
     
-    int sector_x_min = int((view_position.x - (size / scale)) / sector_size) - 1;
-    int sector_x_max = int((view_position.x + (size / scale)) / sector_size);
-    int sector_y_min = int((view_position.y - (size / scale)) / sector_size) - 1;
-    int sector_y_max = int((view_position.y + (size / scale)) / sector_size);
+    int sector_x_min = floor((view_position.x - (size / scale)) / sector_size) + 1;
+    int sector_x_max = floor((view_position.x + (size / scale)) / sector_size);
+    int sector_y_min = floor((view_position.y - (size / scale)) / sector_size) + 1;
+    int sector_y_max = floor((view_position.y + (size / scale)) / sector_size);
     sf::VertexArray lines_x(sf::Lines, 2 * (sector_x_max - sector_x_min + 1));
     sf::VertexArray lines_y(sf::Lines, 2 * (sector_y_max - sector_y_min + 1));
     sf::Color color(64, 64, 128, 128);
     for(int sector_x = sector_x_min; sector_x <= sector_x_max; sector_x++)
     {
         float x = position.x + ((sector_x * sector_size) - view_position.x) * scale;
-        lines_x[(sector_x - sector_x_min)*2].position = sf::Vector2f(x, 0);
+        lines_x[(sector_x - sector_x_min)*2].position = sf::Vector2f(x, rect.top);
         lines_x[(sector_x - sector_x_min)*2].color = color;
-        lines_x[(sector_x - sector_x_min)*2+1].position = sf::Vector2f(x, 900);
+        lines_x[(sector_x - sector_x_min)*2+1].position = sf::Vector2f(x, rect.top + rect.height);
         lines_x[(sector_x - sector_x_min)*2+1].color = color;
         for(int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
         {
@@ -135,18 +135,18 @@ void MainUIBase::drawRaderBackground(sf::Vector2f view_position, sf::Vector2f po
     for(int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
     {
         float y = position.y + ((sector_y * sector_size) - view_position.y) * scale;
-        lines_y[(sector_y - sector_y_min)*2].position = sf::Vector2f(0, y);
+        lines_y[(sector_y - sector_y_min)*2].position = sf::Vector2f(rect.left, y);
         lines_y[(sector_y - sector_y_min)*2].color = color;
-        lines_y[(sector_y - sector_y_min)*2+1].position = sf::Vector2f(1600, y);
+        lines_y[(sector_y - sector_y_min)*2+1].position = sf::Vector2f(rect.left + rect.width, y);
         lines_y[(sector_y - sector_y_min)*2+1].color = color;
     }
     getRenderTarget()->draw(lines_x);
     getRenderTarget()->draw(lines_y);
     
-    int sub_sector_x_min = int((view_position.x - (size / scale)) / sub_sector_size) - 1;
-    int sub_sector_x_max = int((view_position.x + (size / scale)) / sub_sector_size);
-    int sub_sector_y_min = int((view_position.y - (size / scale)) / sub_sector_size) - 1;
-    int sub_sector_y_max = int((view_position.y + (size / scale)) / sub_sector_size);
+    int sub_sector_x_min = floor((view_position.x - (size / scale)) / sub_sector_size) + 1;
+    int sub_sector_x_max = floor((view_position.x + (size / scale)) / sub_sector_size);
+    int sub_sector_y_min = floor((view_position.y - (size / scale)) / sub_sector_size) + 1;
+    int sub_sector_y_max = floor((view_position.y + (size / scale)) / sub_sector_size);
     sf::VertexArray points(sf::Points, (sub_sector_x_max - sub_sector_x_min + 1) * (sub_sector_y_max - sub_sector_y_min + 1));
     for(int sector_x = sub_sector_x_min; sector_x <= sub_sector_x_max; sector_x++)
     {
@@ -161,7 +161,7 @@ void MainUIBase::drawRaderBackground(sf::Vector2f view_position, sf::Vector2f po
     getRenderTarget()->draw(points);
 }
 
-void MainUIBase::drawHeadingCircle(sf::Vector2f position, float size)
+void MainUIBase::drawHeadingCircle(sf::Vector2f position, float size, sf::FloatRect rect)
 {
     sf::RenderTarget& window = *getRenderTarget();
     
@@ -187,22 +187,55 @@ void MainUIBase::drawHeadingCircle(sf::Vector2f position, float size)
         text.setRotation(n);
         window.draw(text);
     }
+}
+
+void MainUIBase::drawRadarCuttoff(sf::Vector2f position, float size, sf::FloatRect rect)
+{
+    sf::RenderTarget& window = *getRenderTarget();
+    
     sf::Sprite cutOff;
     textureManager.setTexture(cutOff, "radarCutoff.png");
     cutOff.setPosition(position);
     cutOff.setScale(size / float(cutOff.getTextureRect().width) * 2.1, size / float(cutOff.getTextureRect().width) * 2.1);
     window.draw(cutOff);
     
-    sf::RectangleShape rectH(sf::Vector2f(1600, position.y - size * 1.05));
+    sf::RectangleShape rectH(sf::Vector2f(rect.width, position.y - size * 1.05 - rect.top));
     rectH.setFillColor(sf::Color::Black);
+    rectH.setPosition(rect.left, rect.top);
     window.draw(rectH);
-    rectH.setPosition(0, position.y + size * 1.05);
+    rectH.setPosition(rect.left, position.y + size * 1.05);
     window.draw(rectH);
-    sf::RectangleShape rectV(sf::Vector2f(position.x - size * 1.05, 900));
+    
+    sf::RectangleShape rectV(sf::Vector2f(position.x - size * 1.05 - rect.left, rect.height));
     rectV.setFillColor(sf::Color::Black);
+    rectV.setPosition(rect.left, rect.top);
     window.draw(rectV);
-    rectV.setPosition(position.x + size * 1.05, 0);
+    rectV.setPosition(position.x + size * 1.05, rect.top);
     window.draw(rectV);
+}
+
+void MainUIBase::drawRadar(sf::Vector2f position, float size, float range, bool long_range, P<SpaceObject> target, sf::FloatRect rect)
+{
+    sf::RenderTarget& window = *getRenderTarget();
+
+    if (long_range)
+        drawRaderBackground(mySpaceship->getPosition(), position, size, size / range, rect);
+    foreach(SpaceObject, obj, spaceObjectList)
+    {
+        if (obj != mySpaceship && sf::length(obj->getPosition() - mySpaceship->getPosition()) < range)
+            obj->drawRadar(window, position + (obj->getPosition() - mySpaceship->getPosition()) / range * size, size / range, long_range);
+    }
+
+    if (target)
+    {
+        sf::Sprite objectSprite;
+        textureManager.setTexture(objectSprite, "redicule.png");
+        objectSprite.setPosition(position + (target->getPosition() - mySpaceship->getPosition()) / range * size);
+        window.draw(objectSprite);
+    }
+    mySpaceship->drawRadar(window, position, size / range, long_range);
+    drawHeadingCircle(position, size, rect);
+    drawRadarCuttoff(position, size, rect);
 }
 
 void MainUIBase::drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESystem highlight_system)
@@ -218,7 +251,7 @@ void MainUIBase::drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESy
         sf::RectangleShape room(sf::Vector2f(st->rooms[n].size) * room_size - sf::Vector2f(4, 4));
         room.setPosition(position + sf::Vector2f(st->rooms[n].position) * room_size + sf::Vector2f(4, 4));
         room.setFillColor(sf::Color(96, 96, 96, 255));
-        if (st->rooms[n].system != SYS_None)
+        if (st->rooms[n].system != SYS_None && ship->hasSystem(ESystem(n)))
         {
             float f = 1.0;
             if (playerSpaceship)
@@ -233,7 +266,7 @@ void MainUIBase::drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESy
         room.setOutlineColor(sf::Color(192, 192, 192, 255));
         room.setOutlineThickness(4.0);
         window.draw(room);
-        if (st->rooms[n].system != SYS_None && ship->hasSystem(ESystem(n)))
+        if (st->rooms[n].system != SYS_None && ship->hasSystem(st->rooms[n].system))
         {
             sf::Sprite sprite;
             switch(st->rooms[n].system)

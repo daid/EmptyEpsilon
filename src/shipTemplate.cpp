@@ -174,6 +174,15 @@ std::vector<string> ShipTemplate::getTemplateNameList()
     return ret;
 }
 
+std::vector<string> ShipTemplate::getPlayerTemplateNameList()
+{
+    std::vector<string> ret;
+    for(std::map<string, P<ShipTemplate> >::iterator i = templateMap.begin(); i != templateMap.end(); i++)
+        if (!i->first.endswith("Station") && i->first.startswith("Player"))
+            ret.push_back(i->first);
+    return ret;
+}
+
 string getSystemName(ESystem system)
 {
     switch(system)

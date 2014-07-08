@@ -52,6 +52,7 @@ public:
     float warp_indicator;
     P<SpaceShip> scanning_ship; //Server only
     float scanning_delay;
+    bool auto_repair_enabled;
     
     ECommsState comms_state;
     float comms_open_delay;
@@ -84,6 +85,7 @@ public:
     void commandOpenComm(P<SpaceObject> obj);
     void commandCloseComm();
     void commandSendComm(int8_t index);
+    void commandSetAutoRepair(bool enabled);
     
     virtual string getCallSign() { return ""; }
     
