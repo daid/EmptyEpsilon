@@ -149,13 +149,16 @@ void CrewUI::weaponsUI()
 
         for(int n=0; n<MW_Count; n++)
         {
-            y -= 30;
-            if (toggleButton(sf::FloatRect(20, y, 200, 30), tubeLoadType == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(mySpaceship->weapon_storage[n]), 25))
+            if (mySpaceship->weapon_storage_max[n] > 0)
             {
-                if (tubeLoadType == n)
-                    tubeLoadType = MW_None;
-                else
-                    tubeLoadType = EMissileWeapons(n);
+                y -= 30;
+                if (toggleButton(sf::FloatRect(20, y, 200, 30), tubeLoadType == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(mySpaceship->weapon_storage[n]), 25))
+                {
+                    if (tubeLoadType == n)
+                        tubeLoadType = MW_None;
+                    else
+                        tubeLoadType = EMissileWeapons(n);
+                }
             }
         }
     }
@@ -525,13 +528,16 @@ void CrewUI::singlePilotUI()
 
         for(int n=0; n<MW_Count; n++)
         {
-            y -= 25;
-            if (toggleButton(sf::FloatRect(650, y, 150, 25), tubeLoadType == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(mySpaceship->weapon_storage[n]), 20))
+            if (mySpaceship->weapon_storage_max[n] > 0)
             {
-                if (tubeLoadType == n)
-                    tubeLoadType = MW_None;
-                else
-                    tubeLoadType = EMissileWeapons(n);
+                y -= 25;
+                if (toggleButton(sf::FloatRect(650, y, 150, 25), tubeLoadType == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(mySpaceship->weapon_storage[n]), 20))
+                {
+                    if (tubeLoadType == n)
+                        tubeLoadType = MW_None;
+                    else
+                        tubeLoadType = EMissileWeapons(n);
+                }
             }
         }
     }
