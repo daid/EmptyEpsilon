@@ -12,7 +12,7 @@ template:addEngineEmitor(0, -18, -1,  0.2, 0.2, 1.0, 4.0)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 90, -15, 1000.0, 6.0, 12)
 template:setBeam(1, 90,  15, 1000.0, 6.0, 12)
-template:setTubes(2) -- Amount of torpedo tubes
+template:setTubes(2, 8.0) -- Amount of torpedo tubes, and loading time of the tubes.
 template:setHull(70)
 template:setShields(80, 80)
 template:setSpeed(60, 10)
@@ -61,7 +61,7 @@ template:addEngineEmitor(0, -8, 0.5,  1.0, 0.2, 0.2, 1.0)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 40, -10, 1000.0, 6.0, 8)
 template:setBeam(1, 40,  10, 1000.0, 6.0, 8)
-template:setTubes(1) -- Amount of torpedo tubes
+template:setTubes(1, 10.0) -- Amount of torpedo tubes, loading time
 template:setHull(40)
 template:setShields(40, 40)
 template:setSpeed(80, 20)
@@ -114,7 +114,6 @@ template:setBeamPosition(0, 0, 23, -1.8)
 template:addEngineEmitor(0, -8, 0.5,  1.0, 0.2, 0.2, 1.0)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 60, 0, 1000.0, 4.0, 2)
-template:setTubes(0) -- Amount of torpedo tubes
 template:setHull(30)
 template:setShields(30, 30)
 template:setSpeed(100, 30)
@@ -129,7 +128,6 @@ template:addEngineEmitor(0, -18, -1,  0.2, 0.2, 1.0, 4.0)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 90, -15, 1000.0, 6.0, 3)
 template:setBeam(1, 90,  15, 1000.0, 6.0, 3)
-template:setTubes(0) -- Amount of torpedo tubes
 template:setHull(70)
 template:setShields(40, 40)
 template:setSpeed(40, 6)
@@ -142,10 +140,10 @@ template:setTubePosition(1,  10, 2, -2.3)
 template:addEngineEmitor(-2.1500, -13, 0.3,  0.2, 0.2, 1.0, 2.0)
 template:addEngineEmitor( 2.1500, -13, 0.3,  0.2, 0.2, 1.0, 2.0)
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setTubes(1) -- Amount of torpedo tubes
+template:setTubes(1, 25.0)
 template:setHull(40)
 template:setShields(50, 50)
-template:setSpeed(40, 4)
+template:setSpeed(30, 3)
 template:setWeaponStorage("Homing", 10)
 
 -- The advanced gunship is a ship equiped with 2 homing missiles to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself.
@@ -160,7 +158,7 @@ template:addEngineEmitor( 1.5, -28, -5,  1.0, 0.2, 0.2, 2.0)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 50,-15, 1000.0, 6.0, 4)
 template:setBeam(1, 50, 15, 1000.0, 6.0, 4)
-template:setTubes(2) -- Amount of torpedo tubes
+template:setTubes(2, 8.0) -- Amount of torpedo tubes
 template:setHull(100)
 template:setShields(100, 80)
 template:setSpeed(40, 5)
@@ -176,7 +174,6 @@ template:addEngineEmitor( 1.5, -28, -5,  1.0, 0.2, 0.2, 2.0)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 40,-5, 1000.0, 6.0, 3)
 template:setBeam(1, 40, 5, 1000.0, 6.0, 3)
-template:setTubes(0) -- Amount of torpedo tubes
 template:setHull(100)
 template:setShields(80, 30)
 template:setSpeed(55, 12)
@@ -192,7 +189,6 @@ template:addEngineEmitor( 1.5, -28, -5,  1.0, 0.2, 0.2, 2.0)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 50,-15, 1000.0, 6.0, 3)
 template:setBeam(1, 50, 15, 1000.0, 6.0, 3)
-template:setTubes(0) -- Amount of torpedo tubes
 template:setHull(70)
 template:setShields(50, 30)
 template:setSpeed(30, 12)
@@ -216,7 +212,7 @@ template:setBeam(2,100, -60, 1000.0, 6.0, 4)
 template:setBeam(3,100,  60, 1000.0, 6.0, 4)
 template:setBeam(4, 30,   0, 2000.0, 6.0, 4)
 template:setBeam(5,100, 180, 1200.0, 6.0, 4)
-template:setTubes(0) -- Amount of torpedo tubes
 template:setHull(70)
 template:setShields(300, 300)
 template:setSpeed(20, 1)
+

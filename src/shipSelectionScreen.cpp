@@ -72,7 +72,7 @@ void ShipSelectionScreen::onGui()
         float y = 150;
         for(int n=0; n<maxCrewPositions; n++)
         {
-            if (n == singlePilot) y += 30;
+            if (n == singlePilot) y += 25;
             if (toggleButton(sf::FloatRect(800, y, 300, 50), myPlayerInfo->crew_position[n], getCrewPositionName(ECrewPosition(n))))
             {
                 myPlayerInfo->setCrewPosition(ECrewPosition(n), !myPlayerInfo->crew_position[n]);
@@ -84,7 +84,7 @@ void ShipSelectionScreen::onGui()
             text(sf::FloatRect(1100, y, 300, 50), string(cnt));
             y += 50;
         }
-        y += 30;
+        y += 25;
         if (!myPlayerInfo->isMainScreen())
         {
             if (toggleButton(sf::FloatRect(800, y, 300, 50), myPlayerInfo->main_screen_control, "Control main screen"))
@@ -94,7 +94,7 @@ void ShipSelectionScreen::onGui()
         }
         text(sf::FloatRect(1100, y, 300, 50), string(main_screen_control_cnt));
 
-        if (button(sf::FloatRect(800, 700, 300, 50), "Ready"))
+        if (button(sf::FloatRect(800, 600, 300, 50), "Ready"))
         {
             if (gameServer && !engine->getObject("scenario") && active_scenario_index < int(scenarios.size()))
                 engine->registerObject("scenario", new ScriptObject(scenarios[active_scenario_index].filename));
@@ -115,13 +115,13 @@ void ShipSelectionScreen::onGui()
         {
             if (n < 8)
             {
-                if (toggleButton(sf::FloatRect(200, 250 + (n % 8) * 50, 300, 50), mySpaceship == ship, ship->shipTemplate->name + " " + string(n + 1)))
+                if (toggleButton(sf::FloatRect(200, 150 + (n % 8) * 50, 300, 50), mySpaceship == ship, ship->shipTemplate->name + " " + string(n + 1)))
                 {
                     mySpaceship = ship;
                     myPlayerInfo->setShipId(mySpaceship->getMultiplayerId());
                 }
             }else{
-                if (toggleButton(sf::FloatRect(200 + 200 + (n / 8) * 100, 250 + (n % 8) * 50, 100, 50), mySpaceship == ship, string(n + 1)))
+                if (toggleButton(sf::FloatRect(200 + 200 + (n / 8) * 100, 150 + (n % 8) * 50, 100, 50), mySpaceship == ship, string(n + 1)))
                 {
                     mySpaceship = ship;
                     myPlayerInfo->setShipId(mySpaceship->getMultiplayerId());
@@ -138,13 +138,13 @@ void ShipSelectionScreen::onGui()
 
         if (ship_template_index < int(templates.size()))
         {
-            ship_template_index += selector(sf::FloatRect(200, 750, 300, 50), templates[ship_template_index]);
+            ship_template_index += selector(sf::FloatRect(200, 650, 300, 50), templates[ship_template_index]);
             if (ship_template_index < 0)
                 ship_template_index = templates.size() - 1;
             if (ship_template_index >= int(templates.size()))
                 ship_template_index = 0;
         }
-        if (button(sf::FloatRect(200, 700, 300, 50), "Spawn player ship"))
+        if (button(sf::FloatRect(200, 600, 300, 50), "Spawn player ship"))
         {
             mySpaceship = new PlayerSpaceship();
             mySpaceship->setShipTemplate(templates[ship_template_index]);
@@ -178,12 +178,12 @@ void ShipSelectionScreen::onGui()
         
         if (active_scenario_index < int(scenarios.size()) && !engine->getObject("scenario"))
         {
-            active_scenario_index += selector(sf::FloatRect(1200, 700, 300, 50), scenarios[active_scenario_index].name);
+            active_scenario_index += selector(sf::FloatRect(800, 650, 300, 50), scenarios[active_scenario_index].name);
             if (active_scenario_index < 0)
                 active_scenario_index = scenarios.size() - 1;
             if (active_scenario_index >= int(scenarios.size()))
                 active_scenario_index = 0;
-            text(sf::FloatRect(1200, 750, 300, 20), scenarios[active_scenario_index].description, AlignRight, 15);
+            text(sf::FloatRect(800, 700, 300, 20), scenarios[active_scenario_index].description, AlignRight, 15);
         }
     }else{
         if (button(sf::FloatRect(50, 800, 300, 50), "Disconnect"))

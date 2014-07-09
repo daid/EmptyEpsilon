@@ -81,6 +81,7 @@ ShipTemplate::ShipTemplate()
     }
     radius = 50.0;
     weaponTubes = 0;
+    tube_load_time = 8.0;
     hull = 70;
     frontShields = 0;
     rearShields = 0.0;

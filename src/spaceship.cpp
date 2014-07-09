@@ -133,6 +133,7 @@ void SpaceShip::setShipTemplate(string templateName)
     hasWarpdrive = shipTemplate->warpSpeed > 0.0;
     warpSpeedPerWarpLevel = shipTemplate->warpSpeed;
     hasJumpdrive = shipTemplate->jumpDrive;
+    tubeLoadTime = shipTemplate->tube_load_time;
     //shipTemplate->cloaking;
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = weapon_storage_max[n] = shipTemplate->weapon_storage[n];
@@ -177,7 +178,7 @@ void SpaceShip::draw3DTransparent()
 
 void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
-    if (!long_range && scanned_by_player)
+    if (!long_range && (scanned_by_player || !mySpaceship))
     {
         for(int n=0; n<maxBeamWeapons; n++)
         {
@@ -340,6 +341,10 @@ void SpaceShip::update(float delta)
             }
         }
     }else{
+        if (impulseRequest > 1.0)
+            impulseRequest = 1.0;
+        if (impulseRequest < -1.0)
+            impulseRequest = -1.0;
         if (currentImpulse < impulseRequest)
         {
             currentImpulse += delta;

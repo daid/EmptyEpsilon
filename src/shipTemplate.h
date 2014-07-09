@@ -80,6 +80,7 @@ public:
     sf::Vector3f beamPosition[maxBeamWeapons];
     BeamTemplate beams[maxBeamWeapons];
     int weaponTubes;
+    float tube_load_time;
     sf::Vector2f tubePosition[maxWeaponTubes];
     float hull;
     float frontShields, rearShields;
@@ -100,7 +101,7 @@ public:
     void setBeamPosition(int index, sf::Vector3f position);
     void setBeam(int index, float arc, float direction, float range, float cycle_time, float damage);
     void setTubePosition(int index, sf::Vector2f position);
-    void setTubes(int amount) { weaponTubes = std::min(maxWeaponTubes, amount); }
+    void setTubes(int amount, float load_time) { weaponTubes = std::min(maxWeaponTubes, amount); tube_load_time = load_time; }
     void setHull(float amount) { hull = amount; }
     void setShields(float front, float rear) { frontShields = front; rearShields = rear; }
     void setSpeed(float impulse, float turn) { impulseSpeed = impulse; turnSpeed = turn; }

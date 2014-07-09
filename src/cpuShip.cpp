@@ -279,6 +279,9 @@ P<SpaceObject> CpuShip::findBestTarget(sf::Vector2f position, float radius)
         float distance = sf::length(space_object->getPosition() - position);
         if (distance > radius)
             continue;
+        P<SpaceStation> station = space_object;
+        if (station)
+            distance += 5000;
         if (!target || target_distance > distance)
         {
             target = space_object;
