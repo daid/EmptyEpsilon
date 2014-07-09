@@ -21,7 +21,8 @@ static const int16_t CMD_UNDOCK = 0x000F;
 static const int16_t CMD_OPEN_COMM = 0x0010;
 static const int16_t CMD_CLOSE_COMM = 0x0011;
 static const int16_t CMD_SEND_COMM = 0x0012;
-static const int16_t CMD_SET_AUTO_REPAIR = 0x0013;
+static const int16_t CMD_SEND_COMM_PLAYER = 0x0013;
+static const int16_t CMD_SET_AUTO_REPAIR = 0x0014;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -123,14 +124,29 @@ void PlayerSpaceship::update(float delta)
                     comms_state = CS_ChannelBroken;
                 }else{
                     comms_reply_count = 0;
-                    if (comms_script_interface.openCommChannel(this, comms_target, comms_target->comms_script_name))
-                        comms_state = CS_ChannelOpen;
-                    else
-                        comms_state = CS_ChannelFailed;
+                    P<PlayerSpaceship> playerShip = comms_target;
+                    if (playerShip)
+                    {
+                        if (playerShip->comms_state == CS_Inactive || playerShip->comms_state == CS_ChannelFailed || playerShip->comms_state == CS_ChannelBroken)
+                        {
+                            comms_state = CS_ChannelOpenPlayer;
+                            comms_incomming_message = "Opened comms to " + playerShip->shipTemplate->name;
+                            playerShip->comms_state = CS_ChannelOpenPlayer;
+                            playerShip->comms_target = this;
+                            playerShip->comms_incomming_message = "Incomming comms from " + playerShip->shipTemplate->name;
+                        }else{
+                            comms_state = CS_ChannelFailed;
+                        }
+                    }else{
+                        if (comms_script_interface.openCommChannel(this, comms_target, comms_target->comms_script_name))
+                            comms_state = CS_ChannelOpen;
+                        else
+                            comms_state = CS_ChannelFailed;
+                    }
                 }
             }
         }
-        if (comms_state == CS_ChannelOpen)
+        if (comms_state == CS_ChannelOpen || comms_state == CS_ChannelOpenPlayer)
         {
             if (!comms_target || sf::length(getPosition() - comms_target->getPosition()) > max_comm_range)
                 comms_state = CS_ChannelBroken;
@@ -424,6 +440,11 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
         }
         break;
     case CMD_CLOSE_COMM:
+        if (comms_state == CS_ChannelOpenPlayer && comms_target)
+        {
+            P<PlayerSpaceship> playerShip = comms_target;
+            playerShip->comms_state = CS_Inactive;
+        }
         comms_state = CS_Inactive;
         break;
     case CMD_SEND_COMM:
@@ -437,6 +458,17 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
                 comms_reply_count = 0;
                 comms_script_interface.commChannelMessage(comms_reply[index].id);
             }
+        }
+        break;
+    case CMD_SEND_COMM_PLAYER:
+        if (comms_state == CS_ChannelOpenPlayer)
+        {
+            string message;
+            packet >> message;
+            comms_incomming_message = comms_incomming_message + "\n<" + message;
+            P<PlayerSpaceship> playership = comms_target;
+            if (playership)
+                playership->comms_incomming_message = playership->comms_incomming_message + "\n>" + message;
         }
         break;
     case CMD_SET_AUTO_REPAIR:
@@ -573,6 +605,13 @@ void PlayerSpaceship::commandSendComm(int8_t index)
 {
     sf::Packet packet;
     packet << CMD_SEND_COMM << index;
+    sendCommand(packet);
+}
+
+void PlayerSpaceship::commandSendCommPlayer(string message)
+{
+    sf::Packet packet;
+    packet << CMD_SEND_COMM_PLAYER << message;
     sendCommand(packet);
 }
 

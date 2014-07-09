@@ -14,6 +14,7 @@ enum CommsOpenChannelType
     OCT_NeutralShip,
     OCT_EnemyShip,
     OCT_UnknownShip,
+    OCT_PlayerShip,
 };
 
 class CrewUI : public MainUIBase
@@ -27,6 +28,7 @@ class CrewUI : public MainUIBase
     float scienceRadarDistance;
     
     CommsOpenChannelType comms_open_channel_type;
+    string comms_player_message;
 public:
     CrewUI();
     

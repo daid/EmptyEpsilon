@@ -17,7 +17,7 @@ void MainUIBase::onGui()
         return;
     }
     
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) || sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) || sf::Keyboard::isKeyPressed(sf::Keyboard::Home))
     {
         destroy();
         new ShipSelectionScreen();

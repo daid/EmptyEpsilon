@@ -330,6 +330,7 @@ void CrewUI::commsUI()
             PVector<SpaceObject> neutral_list;
             PVector<SpaceObject> enemy_list;
             PVector<SpaceObject> unknown_list;
+            PVector<SpaceObject> player_list;
             foreach(SpaceObject, obj, spaceObjectList)
             {
                 if (sf::length(obj->getPosition() - mySpaceship->getPosition()) < PlayerSpaceship::max_comm_range)
@@ -337,28 +338,32 @@ void CrewUI::commsUI()
                     P<SpaceStation> station = obj;
                     P<SpaceShip> ship = obj;
                     if (station)
-                        station_list.push_back(station);
+                        station_list.push_back(obj);
                     if (ship)
                     {
                         P<PlayerSpaceship> playership = ship;
                         if (playership)
+                        {
+                            if (playership != mySpaceship)
+                                player_list.push_back(obj);
                             continue;
+                        }
                         if (ship->scanned_by_player)
                         {
                             switch(factionInfo[mySpaceship->faction_id].states[ship->faction_id])
                             {
                             case FVF_Friendly:
-                                friendly_list.push_back(ship);
+                                friendly_list.push_back(obj);
                                 break;
                             case FVF_Neutral:
-                                neutral_list.push_back(ship);
+                                neutral_list.push_back(obj);
                                 break;
                             case FVF_Enemy:
-                                enemy_list.push_back(ship);
+                                enemy_list.push_back(obj);
                                 break;
                             }
                         }else{
-                            unknown_list.push_back(ship);
+                            unknown_list.push_back(obj);
                         }
                     }
                 }
@@ -367,16 +372,44 @@ void CrewUI::commsUI()
             text(sf::FloatRect(50, 100, 600, 50), "Open comm channel to:");
             if (comms_open_channel_type == OCT_None)
             {
-                if (button(sf::FloatRect(50, 150, 300, 50), "Station (" + string(int(station_list.size())) + ")"))
-                    comms_open_channel_type = OCT_Station;
-                if (button(sf::FloatRect(50, 200, 300, 50), "Friendly ship (" + string(int(friendly_list.size())) + ")"))
-                    comms_open_channel_type = OCT_FriendlyShip;
-                if (button(sf::FloatRect(50, 250, 300, 50), "Neutral ship (" + string(int(neutral_list.size())) + ")"))
-                    comms_open_channel_type = OCT_NeutralShip;
-                if (button(sf::FloatRect(50, 300, 300, 50), "Enemy ship (" + string(int(enemy_list.size())) + ")"))
-                    comms_open_channel_type = OCT_EnemyShip;
-                if (button(sf::FloatRect(50, 350, 300, 50), "Unknown ship (" + string(int(unknown_list.size())) + ")"))
-                    comms_open_channel_type = OCT_UnknownShip;
+                float y = 150;
+                if (station_list.size() > 0)
+                {
+                    if (button(sf::FloatRect(50, y, 300, 50), "Station (" + string(int(station_list.size())) + ")"))
+                        comms_open_channel_type = OCT_Station;
+                    y += 50;
+                }
+                if (friendly_list.size() > 0)
+                {
+                    if (button(sf::FloatRect(50, y, 300, 50), "Friendly ship (" + string(int(friendly_list.size())) + ")"))
+                        comms_open_channel_type = OCT_FriendlyShip;
+                    y += 50;
+                }
+                if (neutral_list.size() > 0)
+                {
+                    if (button(sf::FloatRect(50, y, 300, 50), "Neutral ship (" + string(int(neutral_list.size())) + ")"))
+                        comms_open_channel_type = OCT_NeutralShip;
+                    y += 50;
+                }
+                if (enemy_list.size() > 0)
+                {
+                    if (button(sf::FloatRect(50, y, 300, 50), "Enemy ship (" + string(int(enemy_list.size())) + ")"))
+                        comms_open_channel_type = OCT_EnemyShip;
+                    y += 50;
+                }
+                if (unknown_list.size() > 0)
+                {
+                    if (button(sf::FloatRect(50, y, 300, 50), "Unknown ship (" + string(int(unknown_list.size())) + ")"))
+                        comms_open_channel_type = OCT_UnknownShip;
+                    y += 50;
+                }
+                if (player_list.size() > 0)
+                {
+                    y += 20;
+                    if (button(sf::FloatRect(50, y, 300, 50), "Player (" + string(int(player_list.size())) + ")"))
+                        comms_open_channel_type = OCT_PlayerShip;
+                    y += 50;
+                }
             }else{
                 PVector<SpaceObject> show_list;
                 switch(comms_open_channel_type)
@@ -396,6 +429,8 @@ void CrewUI::commsUI()
                 case OCT_UnknownShip:
                     show_list = unknown_list;
                     break;
+                case OCT_PlayerShip:
+                    show_list = player_list;
                 default:
                     break;
                 }
@@ -403,12 +438,23 @@ void CrewUI::commsUI()
                 float y = 150;
                 foreach(SpaceObject, obj, show_list)
                 {
-                    if (button(sf::FloatRect(x, y, 300, 50), obj->getCallSign()))
+                    P<PlayerSpaceship> playerShip = obj;
+                    if (playerShip)
                     {
-                        mySpaceship->commandOpenComm(obj);
-                        comms_open_channel_type = OCT_None;
+                        if (button(sf::FloatRect(x, y, 300, 50), playerShip->shipTemplate->name))
+                        {
+                            mySpaceship->commandOpenComm(obj);
+                            comms_open_channel_type = OCT_None;
+                        }
+                        y += 50;
+                    }else{
+                        if (button(sf::FloatRect(x, y, 300, 50), obj->getCallSign()))
+                        {
+                            mySpaceship->commandOpenComm(obj);
+                            comms_open_channel_type = OCT_None;
+                        }
+                        y += 50;
                     }
-                    y += 50;
                     if (y > 700)
                     {
                         y = 150;
@@ -443,6 +489,28 @@ void CrewUI::commsUI()
                     mySpaceship->commandSendComm(n);
                 }
                 y += 50;
+            }
+            
+            if (button(sf::FloatRect(50, 800, 300, 50), "Close channel"))
+                mySpaceship->commandCloseComm();
+        }
+        break;
+    case CS_ChannelOpenPlayer:
+        {
+            std::vector<string> lines = mySpaceship->comms_incomming_message.split("\n");
+            float y = 100;
+            static const unsigned int max_lines = 20;
+            for(unsigned int n=lines.size() > max_lines ? lines.size() - max_lines : 0; n<lines.size(); n++)
+            {
+                text(sf::FloatRect(50, y, 600, 30), lines[n]);
+                y += 30;
+            }
+            y += 30;
+            comms_player_message = textEntry(sf::FloatRect(50, y, 600, 50), comms_player_message);
+            if (button(sf::FloatRect(650, y, 300, 50), "Send") || InputHandler::keyboardIsPressed(sf::Keyboard::Return))
+            {
+                mySpaceship->commandSendCommPlayer(comms_player_message);
+                comms_player_message = "";
             }
             
             if (button(sf::FloatRect(50, 800, 300, 50), "Close channel"))

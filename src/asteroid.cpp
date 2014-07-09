@@ -10,7 +10,7 @@ REGISTER_SCRIPT_SUBCLASS(Asteroid, SpaceObject)
 
 REGISTER_MULTIPLAYER_CLASS(Asteroid, "Asteroid");
 Asteroid::Asteroid()
-: SpaceObject(70, "Asteroid")
+: SpaceObject(120, "Asteroid")
 {
     setRotation(random(0, 360));
     rotation_speed = random(0.1, 0.8);

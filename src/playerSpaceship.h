@@ -9,6 +9,7 @@ enum ECommsState
     CS_Inactive,
     CS_OpeningChannel,
     CS_ChannelOpen,
+    CS_ChannelOpenPlayer,
     CS_ChannelFailed,
     CS_ChannelBroken
 };
@@ -85,6 +86,7 @@ public:
     void commandOpenComm(P<SpaceObject> obj);
     void commandCloseComm();
     void commandSendComm(int8_t index);
+    void commandSendCommPlayer(string message);
     void commandSetAutoRepair(bool enabled);
     
     virtual string getCallSign() { return ""; }

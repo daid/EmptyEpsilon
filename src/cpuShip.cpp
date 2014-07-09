@@ -113,11 +113,18 @@ void CpuShip::update(float delta)
         float new_distance = sf::length(new_target->getPosition() - getPosition());
         P<SpaceStation> station = target;
         if (station)
-            target_distance += 5000;
-        if (!target || (target_distance > new_distance * 1.5f && new_distance > 1500.0))
         {
-            target = new_target;
-            targetId = new_target->getMultiplayerId();
+            if (target_distance > new_distance - 5000)
+            {
+                target = new_target;
+                targetId = new_target->getMultiplayerId();
+            }
+        }else{
+            if (!target || (target_distance > new_distance * 1.5f && new_distance > 1500.0))
+            {
+                target = new_target;
+                targetId = new_target->getMultiplayerId();
+            }
         }
     }
 

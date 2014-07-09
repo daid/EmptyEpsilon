@@ -66,6 +66,7 @@ void SpaceStation::drawRadar(sf::RenderTarget& window, sf::Vector2f position, fl
     sf::Sprite objectSprite;
     textureManager.setTexture(objectSprite, "RadarBlip.png");
     objectSprite.setPosition(position);
+
     if (long_range)
     {
         GUI::text(sf::FloatRect(position.x, position.y - 15, 0, 0), getCallSign(), AlignCenter, 12);
