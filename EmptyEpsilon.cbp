@@ -402,8 +402,8 @@
 		<Unit filename="src/mainMenus.h" />
 		<Unit filename="src/mainScreen.cpp" />
 		<Unit filename="src/mainScreen.h" />
-		<Unit filename="src/mainUI.cpp" />
-		<Unit filename="src/mainUI.h" />
+		<Unit filename="src/mainUIBase.cpp" />
+		<Unit filename="src/mainUIBase.h" />
 		<Unit filename="src/mesh.cpp" />
 		<Unit filename="src/mesh.h" />
 		<Unit filename="src/mine.cpp" />

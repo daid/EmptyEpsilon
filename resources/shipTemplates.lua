@@ -216,3 +216,21 @@ template:setHull(70)
 template:setShields(300, 300)
 template:setSpeed(20, 1)
 
+
+-- The weapons-platform is a stationary platform with beam-weapons. It's extremely slow to turn, but it's beam weapons do a huge amount of damage.
+template = ShipTemplate():setName("Weapons platform"):setMesh("space_cruiser_4.model", "space_cruiser_4_color.jpg", "space_cruiser_4_illumination.jpg", "space_cruiser_4_illumination.jpg"):setScale(8):setRadius(100)
+-- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
+template:setBeamPosition(0, -10, 2, -2.3)
+template:setBeamPosition(1,  10, 2, -2.3)
+template:setBeamPosition(2, -10, 2, -2.3)
+template:setBeamPosition(3,  10, 2, -2.3)
+--                  Arc, Dir, Range, CycleTime, Dmg
+template:setBeam(0, 30,   0, 4000.0, 1.5, 10)
+template:setBeam(1, 30,  60, 4000.0, 1.5, 10)
+template:setBeam(2, 30, 120, 4000.0, 1.5, 10)
+template:setBeam(3, 30, 180, 4000.0, 1.5, 10)
+template:setBeam(4, 30, 240, 4000.0, 1.5, 10)
+template:setBeam(5, 30, 300, 4000.0, 1.5, 10)
+template:setHull(70)
+template:setShields(120, 120)
+template:setSpeed(0, 0.5)
