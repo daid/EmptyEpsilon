@@ -15,19 +15,22 @@ PackResourceProvider::PackResourceProvider(string filename)
 {
     FILE* f = fopen(filename.c_str(), "rb");
     int version = readInt(f);
-    int file_count = readInt(f);
-    printf("Loaded: %s with %d files\n", filename.c_str(), file_count);
-    for(int n=0; n<file_count; n++)
+    if (version == 0)
     {
-        int8_t filename_size = 0;
-        fread(&filename_size, sizeof(int8_t), 1, f);
-        char buffer[filename_size + 1];
-        fread(&buffer, filename_size, 1, f);
-        buffer[filename_size] = '\0';
-        int position = readInt(f);
-        int size = readInt(f);
-        
-        files[string(buffer)] = PackResourceInfo(position, size);
+        int file_count = readInt(f);
+        printf("Loaded: %s with %d files\n", filename.c_str(), file_count);
+        for(int n=0; n<file_count; n++)
+        {
+            int8_t filename_size = 0;
+            fread(&filename_size, sizeof(int8_t), 1, f);
+            char buffer[filename_size + 1];
+            fread(&buffer, filename_size, 1, f);
+            buffer[filename_size] = '\0';
+            int position = readInt(f);
+            int size = readInt(f);
+            
+            files[string(buffer)] = PackResourceInfo(position, size);
+        }
     }
     fclose(f);
 }

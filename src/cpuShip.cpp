@@ -211,13 +211,19 @@ void CpuShip::update(float delta)
         case AI_FlyTowards:      //Fly towards [order_target_location], attacking enemies that get too close, but disengage and continue when enemy is too far.
         case AI_FlyTowardsBlind: //Fly towards [order_target_location], not attacking anything
         case AI_DefendLocation:  //Defend against enemies getting close to [order_target_location]
-            targetRotation = sf::vector2ToAngle(order_target_location - getPosition());
+            {
+                sf::Vector2f target_position = order_target_location;
+                target_position += sf::vector2FromAngle(sf::vector2ToAngle(target_position - getPosition()) + 170.0f) * 1500.0f;
+                targetRotation = sf::vector2ToAngle(target_position - getPosition());
+            }
             impulseRequest = 1.0;
             break;
         case AI_DefendTarget:    //Defend against enemies getting close to [order_target] (falls back to AI_Roaming if the target is destroyed)
             if (order_target)
             {
-                targetRotation = sf::vector2ToAngle(order_target->getPosition() - getPosition());
+                sf::Vector2f target_position = order_target->getPosition();
+                target_position += sf::vector2FromAngle(sf::vector2ToAngle(target_position - getPosition()) + 170.0f) * 1500.0f;
+                targetRotation = sf::vector2ToAngle(target_position - getPosition());
                 impulseRequest = 1.0;
             }else{
                 orders = AI_Roaming;    //We pretty much lost our defending target, so just start roaming.

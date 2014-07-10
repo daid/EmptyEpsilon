@@ -9,6 +9,10 @@ function mainMenu()
 			addCommsReply("Can you send a supply drop?", function()
 				setCommsMessage("Sorry sir, we do not have spare supply ships available right now.");
 			end)
+			addCommsReply("Please send backup!", function()
+				ship = CpuShip():setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):setShipTemplate("Fighter"):setScanned(true):orderDefendTarget(player)
+				setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist you");
+			end)
 			return true
 		end
 		

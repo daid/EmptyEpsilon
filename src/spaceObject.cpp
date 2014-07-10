@@ -7,10 +7,14 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setPosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setRotation);
+    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getPosition);
+    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getRotation);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setFaction);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getFaction);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setCommsScript);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isEnemy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isFriendly);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getCallSign);
 }
 
 PVector<SpaceObject> spaceObjectList;
