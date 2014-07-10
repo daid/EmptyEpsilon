@@ -14,6 +14,17 @@
 #include "mine.h"
 #include "nuke.h"
 
+#include "scriptInterface.h"
+REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
+{
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setShipTemplate);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanned);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isDocked);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponStorage);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponStorageMax);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponStorage);
+}
+
 SpaceShip::SpaceShip(string multiplayerClassName)
 : SpaceObject(50, multiplayerClassName)
 {

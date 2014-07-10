@@ -3,6 +3,11 @@
 #include "explosionEffect.h"
 #include "main.h"
 
+#include "scriptInterface.h"
+REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
+{
+}
+
 static const int16_t CMD_TARGET_ROTATION = 0x0001;
 static const int16_t CMD_IMPULSE = 0x0002;
 static const int16_t CMD_WARP = 0x0003;

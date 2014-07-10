@@ -126,6 +126,11 @@ public:
     void setShipTemplate(string templateName);
     
     P<SpaceObject> getTarget();
+    
+    bool isDocked() { return docking_state == DS_Docked; }
+    int getWeaponStorage(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage[weapon]; }
+    int getWeaponStorageMax(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage_max[weapon]; }
+    void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage[weapon] = amount; }
 };
 
 string getMissileWeaponName(EMissileWeapons missile);

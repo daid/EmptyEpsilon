@@ -2,12 +2,8 @@
 #include "playerInfo.h"
 
 #include "scriptInterface.h"
-REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceObject)
+REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceShip)
 {
-    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setPosition);
-    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setRotation);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setShipTemplate);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanned);
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderIdle);
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderRoaming);
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderStandGround);

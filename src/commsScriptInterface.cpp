@@ -2,53 +2,6 @@
 
 static CommsScriptInterface* comms_script_interface;
 
-static int lua_isEnemy(lua_State* L)
-{
-    lua_pushboolean(L, comms_script_interface->ship->isEnemy(comms_script_interface->target));
-    return 1;
-}
-
-static int lua_isFriendly(lua_State* L)
-{
-    lua_pushboolean(L, comms_script_interface->ship->isFriendly(comms_script_interface->target));
-    return 1;
-}
-
-static int lua_getWeaponStorage(lua_State* L)
-{
-    int param = 1;
-    EMissileWeapons weapon;
-    convert<EMissileWeapons>::param(L, param, weapon);
-    lua_pushinteger(L, comms_script_interface->ship->weapon_storage[weapon]);
-    return 1;
-}
-
-static int lua_getWeaponStorageMax(lua_State* L)
-{
-    int param = 1;
-    EMissileWeapons weapon;
-    convert<EMissileWeapons>::param(L, param, weapon);
-    lua_pushinteger(L, comms_script_interface->ship->weapon_storage_max[weapon]);
-    return 1;
-}
-
-static int lua_setWeaponStorage(lua_State* L)
-{
-    int param = 1;
-    EMissileWeapons weapon;
-    int count;
-    convert<EMissileWeapons>::param(L, param, weapon);
-    convert<int>::param(L, param, count);
-    comms_script_interface->ship->weapon_storage[weapon] = count;
-    return 0;
-}
-
-static int lua_isDocked(lua_State* L)
-{
-    lua_pushboolean(L, comms_script_interface->ship->docking_state == DS_Docked && comms_script_interface->ship->docking_target == comms_script_interface->target);
-    return 1;
-}
-
 static int lua_setCommsMessage(lua_State* L)
 {
     comms_script_interface->has_message = true;
@@ -76,14 +29,10 @@ bool CommsScriptInterface::openCommChannel(P<PlayerSpaceship> ship, P<SpaceObjec
     if (scriptObject)
         scriptObject->destroy();
     scriptObject = new ScriptObject();
-    scriptObject->registerFunction("isEnemy", lua_isEnemy);
-    scriptObject->registerFunction("isFriendly", lua_isFriendly);
-    scriptObject->registerFunction("isDocked", lua_isDocked);
+    scriptObject->registerObject(ship, "PlayerSpaceship", "player");
+    scriptObject->registerObject(target, "SpaceObject", "comms_target");
     scriptObject->registerFunction("setCommsMessage", lua_setCommsMessage);
     scriptObject->registerFunction("addCommsReply", lua_addCommsReply);
-    scriptObject->registerFunction("getWeaponStorage", lua_getWeaponStorage);
-    scriptObject->registerFunction("getWeaponStorageMax", lua_getWeaponStorageMax);
-    scriptObject->registerFunction("setWeaponStorage", lua_setWeaponStorage);
     has_message = false;
     scriptObject->run(script_name);
     comms_script_interface = NULL;
