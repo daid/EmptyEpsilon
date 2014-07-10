@@ -485,6 +485,7 @@ void SpaceShip::fireTube(int tubeNr)
         {
             P<HomingMissile> missile = new HomingMissile();
             missile->owner = this;
+            missile->faction_id = faction_id;
             missile->target_id = targetId;
             missile->setPosition(fireLocation);
             missile->setRotation(getRotation());
@@ -494,6 +495,7 @@ void SpaceShip::fireTube(int tubeNr)
         {
             P<Nuke> missile = new Nuke();
             missile->owner = this;
+            missile->faction_id = faction_id;
             missile->target_id = targetId;
             missile->setPosition(fireLocation);
             missile->setRotation(getRotation());
@@ -502,6 +504,7 @@ void SpaceShip::fireTube(int tubeNr)
     case MW_Mine:
         {
             P<Mine> missile = new Mine();
+            missile->faction_id = faction_id;
             missile->setPosition(fireLocation);
             missile->setRotation(getRotation());
             missile->eject();
@@ -511,6 +514,7 @@ void SpaceShip::fireTube(int tubeNr)
         {
             P<EMPMissile> missile = new EMPMissile();
             missile->owner = this;
+            missile->faction_id = faction_id;
             missile->target_id = targetId;
             missile->setPosition(fireLocation);
             missile->setRotation(getRotation());

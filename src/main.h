@@ -8,6 +8,7 @@
 extern sf::Vector3f cameraPosition;
 extern float cameraRotation;
 extern sf::Shader objectShader;
+extern sf::Shader simpleObjectShader;
 extern sf::Shader basicShader;
 extern sf::Font mainFont;
 extern RenderLayer* backgroundLayer;

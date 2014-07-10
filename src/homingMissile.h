@@ -21,8 +21,10 @@ public:
     virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
     virtual void update(float delta);
     
+    virtual bool canBeTargetedByPlayer() { return true; }
+    
     virtual void collision(Collisionable* target);
-    virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type) { if (type == DT_EMP) destroy(); }
+    virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type) { if (type == DT_EMP || type == DT_Energy) destroy(); }
 };
 
 #endif//HOMING_MISSLE_H

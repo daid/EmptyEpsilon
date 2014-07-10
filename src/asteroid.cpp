@@ -20,10 +20,8 @@ void Asteroid::draw3D()
 {
     glRotatef(engine->getElapsedTime() * rotation_speed, 0, 0, 1);
     glScalef(getRadius(), getRadius(), getRadius());
-    objectShader.setParameter("baseMap", *textureManager.getTexture("asteroid.png"));
-    objectShader.setParameter("illuminationMap", *textureManager.getTexture("none.png"));
-    objectShader.setParameter("specularMap", *textureManager.getTexture("none.png"));
-    sf::Shader::bind(&objectShader);
+    simpleObjectShader.setParameter("baseMap", *textureManager.getTexture("asteroid.png"));
+    sf::Shader::bind(&simpleObjectShader);
     Mesh* m = Mesh::getMesh("asteroid.obj");
     m->render();
 }

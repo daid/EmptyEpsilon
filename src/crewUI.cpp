@@ -119,7 +119,7 @@ void CrewUI::weaponsUI()
             foreach(Collisionable, obj, list)
             {
                 P<SpaceObject> spaceObject = obj;
-                if (spaceObject && spaceObject->canBeTargeted() && spaceObject != mySpaceship)
+                if (spaceObject && spaceObject->canBeTargetedByPlayer() && spaceObject != mySpaceship)
                 {
                     if (!target || sf::length(mousePosition - spaceObject->getPosition()) < sf::length(mousePosition - target->getPosition()))
                         target = spaceObject;
@@ -547,7 +547,7 @@ void CrewUI::singlePilotUI()
             foreach(Collisionable, obj, list)
             {
                 P<SpaceObject> spaceObject = obj;
-                if (spaceObject && spaceObject->canBeTargeted() && spaceObject != mySpaceship)
+                if (spaceObject && spaceObject->canBeTargetedByPlayer() && spaceObject != mySpaceship)
                 {
                     if (!target || sf::length(mousePosition - spaceObject->getPosition()) < sf::length(mousePosition - target->getPosition()))
                         target = spaceObject;
