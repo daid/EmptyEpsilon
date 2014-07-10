@@ -645,17 +645,39 @@ void CrewUI::singlePilotUI()
         }
     }
 
-    switch(mySpaceship->mainScreenSetting)
+    if (mySpaceship->comms_state == CS_ChannelOpenPlayer)
     {
-    case MSS_LongRange:
-        drawRadar(sf::Vector2f(1200, 450), 380, 50000, true, NULL, sf::FloatRect(800, 0, 800, 900));
-        break;
-    case MSS_Tactical:
-        drawRadar(sf::Vector2f(1200, 450), 380, 5000, false, NULL, sf::FloatRect(800, 0, 800, 900));
-        break;
-    default:
-        draw3Dworld(sf::FloatRect(800, 0, 800, 900));
-        break;
+        std::vector<string> lines = mySpaceship->comms_incomming_message.split("\n");
+        float y = 100;
+        static const unsigned int max_lines = 20;
+        for(unsigned int n=lines.size() > max_lines ? lines.size() - max_lines : 0; n<lines.size(); n++)
+        {
+            text(sf::FloatRect(820, y, 600, 30), lines[n]);
+            y += 30;
+        }
+        y += 30;
+        comms_player_message = textEntry(sf::FloatRect(820, y, 450, 50), comms_player_message);
+        if (button(sf::FloatRect(1270, y, 110, 50), "Send") || InputHandler::keyboardIsPressed(sf::Keyboard::Return))
+        {
+            mySpaceship->commandSendCommPlayer(comms_player_message);
+            comms_player_message = "";
+        }
+        
+        if (button(sf::FloatRect(820, 800, 300, 50), "Close channel"))
+            mySpaceship->commandCloseComm();
+    }else{
+        switch(mySpaceship->mainScreenSetting)
+        {
+        case MSS_LongRange:
+            drawRadar(sf::Vector2f(1200, 450), 380, 50000, true, NULL, sf::FloatRect(800, 0, 800, 900));
+            break;
+        case MSS_Tactical:
+            drawRadar(sf::Vector2f(1200, 450), 380, 5000, false, NULL, sf::FloatRect(800, 0, 800, 900));
+            break;
+        default:
+            draw3Dworld(sf::FloatRect(800, 0, 800, 900));
+            break;
+        }
     }
 }
 
