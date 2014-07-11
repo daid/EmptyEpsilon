@@ -118,6 +118,15 @@ void GameMasterUI::onGui()
             }
         }
         
+        text(sf::FloatRect(20, 480, 250, 20), "Change faction:", AlignCenter, 20);
+        for(int f=0; f<maxFactions; f++)
+        {
+            if (toggleButton(sf::FloatRect(20, 500 + 30 * f, 250, 30), selection->getFaction() == f, factionInfo[f].name, 20))
+            {
+                selection->setFaction(f);
+            }
+        }
+        
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Delete))
         {
             selection->destroy();
