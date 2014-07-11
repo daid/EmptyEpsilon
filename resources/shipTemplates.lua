@@ -15,7 +15,7 @@ template:setBeam(1, 90,  15, 1000.0, 6.0, 12)
 template:setTubes(2, 8.0) -- Amount of torpedo tubes, and loading time of the tubes.
 template:setHull(70)
 template:setShields(80, 80)
-template:setSpeed(60, 10)
+template:setSpeed(90, 10)
 template:setWarpSpeed(0)
 template:setJumpDrive(true)
 template:setCloaking(false)
@@ -64,12 +64,11 @@ template:setBeam(1, 40,  10, 1000.0, 6.0, 8)
 template:setTubes(1, 10.0) -- Amount of torpedo tubes, loading time
 template:setHull(40)
 template:setShields(40, 40)
-template:setSpeed(80, 20)
-template:setWarpSpeed(1000)
+template:setSpeed(110, 20)
+template:setWarpSpeed(0)
 template:setJumpDrive(false)
 template:setCloaking(false)
 template:setWeaponStorage("Homing", 4)
-template:setWeaponStorage("EMP", 1)
 
 template:addRoomSystem(3, 0, 1, 1, "Maneuver");
 template:addRoomSystem(1, 0, 2, 1, "BeamWeapons");
@@ -100,7 +99,7 @@ template:addEngineEmitor(-2.1500, -13, 0.3,  0.2, 0.2, 1.0, 2.0)
 template:addEngineEmitor( 2.1500, -13, 0.3,  0.2, 0.2, 1.0, 2.0)
 template:setHull(50)
 template:setShields(20, 20)
-template:setSpeed(60, 6)
+template:setSpeed(90, 6)
 template:setWeaponStorage("Homing", 5)
 template:setWeaponStorage("Nuke", 1)
 template:setWeaponStorage("Mine", 3)
@@ -116,7 +115,7 @@ template:addEngineEmitor(0, -8, 0.5,  1.0, 0.2, 0.2, 1.0)
 template:setBeam(0, 60, 0, 1000.0, 4.0, 2)
 template:setHull(30)
 template:setShields(30, 30)
-template:setSpeed(100, 30)
+template:setSpeed(120, 30)
 
 -- The cruiser is an average ship you can encounter, it has average shields, and average beams. It's pretty much average with nothing special.
 template = ShipTemplate():setName("Cruiser"):setMesh("space_frigate_6.model", "space_frigate_6_color.png", "space_frigate_6_specular.png", "space_frigate_6_illumination.png"):setScale(6):setRadius(100)
@@ -130,7 +129,7 @@ template:setBeam(0, 90, -15, 1000.0, 6.0, 3)
 template:setBeam(1, 90,  15, 1000.0, 6.0, 3)
 template:setHull(70)
 template:setShields(40, 40)
-template:setSpeed(40, 6)
+template:setSpeed(60, 6)
 
 -- The missile cruiser is a long range missile firing platform. It cannot handle a lot of damage, but can do a lot of damage if not dealth with properly.
 template = ShipTemplate():setName("Missile Cruiser"):setMesh("space_cruiser_4.model", "space_cruiser_4_color.jpg", "space_cruiser_4_illumination.jpg", "space_cruiser_4_illumination.jpg"):setScale(8):setRadius(100)
@@ -143,7 +142,7 @@ template:addEngineEmitor( 2.1500, -13, 0.3,  0.2, 0.2, 1.0, 2.0)
 template:setTubes(1, 25.0)
 template:setHull(40)
 template:setShields(50, 50)
-template:setSpeed(30, 3)
+template:setSpeed(45, 3)
 template:setWeaponStorage("Homing", 10)
 
 -- The advanced gunship is a ship equiped with 2 homing missiles to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself.
@@ -161,7 +160,7 @@ template:setBeam(1, 50, 15, 1000.0, 6.0, 4)
 template:setTubes(2, 8.0) -- Amount of torpedo tubes
 template:setHull(100)
 template:setShields(100, 80)
-template:setSpeed(40, 5)
+template:setSpeed(60, 5)
 template:setWeaponStorage("Homing", 2)
 
 -- The Strikeship is a warp-drive equiped figher build for quick strikes, it's fast, it's aggile, but does not do an extreme amount of damage, and lacks in rear shields.
@@ -176,7 +175,7 @@ template:setBeam(0, 40,-5, 1000.0, 6.0, 3)
 template:setBeam(1, 40, 5, 1000.0, 6.0, 3)
 template:setHull(100)
 template:setShields(80, 30)
-template:setSpeed(55, 12)
+template:setSpeed(70, 12)
 template:setWarpSpeed(1000)
 
 -- The Adv. Striker is a jump-drive equiped figher build for quick strikes, it's slow but very aggile, but does not do an extreme amount of damage, and lacks in shields. However, due to the jump driver, it's quick to get into the action.
@@ -191,7 +190,7 @@ template:setBeam(0, 50,-15, 1000.0, 6.0, 3)
 template:setBeam(1, 50, 15, 1000.0, 6.0, 3)
 template:setHull(70)
 template:setShields(50, 30)
-template:setSpeed(30, 12)
+template:setSpeed(45, 12)
 template:setJumpDrive(true)
 
 -- The Dreadnough is a flying fortress, it's slow, slow to turn, but packs a huge amount of beam weapons in the front. Taking it head-on is suicide.
@@ -214,7 +213,7 @@ template:setBeam(4, 30,   0, 2000.0, 6.0, 4)
 template:setBeam(5,100, 180, 1200.0, 6.0, 4)
 template:setHull(70)
 template:setShields(300, 300)
-template:setSpeed(20, 1)
+template:setSpeed(30, 1)
 
 
 -- The weapons-platform is a stationary platform with beam-weapons. It's extremely slow to turn, but it's beam weapons do a huge amount of damage.
