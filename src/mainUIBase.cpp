@@ -9,7 +9,7 @@
 
 void MainUIBase::onGui()
 {
-    if (!gameServer && !gameClient)
+    if (gameClient && !gameClient->isConnected())
     {
         destroy();
         disconnectFromServer();
@@ -30,7 +30,7 @@ void MainUIBase::onGui()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
             engine->setGameSpeed(0.0);
 #ifdef DEBUG
-        text(sf::FloatRect(0, 0, 1600 - 5, 20), string(gameServer->getSendDataRate()) + " bytes per second", AlignRight, 15);
+        text(sf::FloatRect(0, 0, 1600 - 5, 20), string(int(gameServer->getSendDataRate() / 1000)) + " kb per second", AlignRight, 15);
 #endif
     }
     

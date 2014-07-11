@@ -57,12 +57,12 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     tubeRechargeFactor = 1.0;
     docking_state = DS_NotDocking;
     
-    registerMemberReplication(&targetRotation);
-    registerMemberReplication(&impulseRequest);
-    registerMemberReplication(&currentImpulse);
+    registerMemberReplication(&targetRotation, 0.5);
+    registerMemberReplication(&impulseRequest, 0.1);
+    registerMemberReplication(&currentImpulse, 0.1);
     registerMemberReplication(&hasWarpdrive);
-    registerMemberReplication(&warpRequest);
-    registerMemberReplication(&currentWarp);
+    registerMemberReplication(&warpRequest, 0.1);
+    registerMemberReplication(&currentWarp, 0.1);
     registerMemberReplication(&hasJumpdrive);
     registerMemberReplication(&jumpDelay, 0.5);
     registerMemberReplication(&tubeLoadTime);

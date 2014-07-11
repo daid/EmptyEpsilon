@@ -44,7 +44,7 @@ ShipSelectionScreen::ShipSelectionScreen()
 
 void ShipSelectionScreen::onGui()
 {
-    if (!gameServer && !gameClient)
+    if (gameClient && !gameClient->isConnected())
     {
         destroy();
         disconnectFromServer();

@@ -78,6 +78,7 @@ ShipTemplate::ShipTemplate()
         beams[n].direction = 0.0;
         beams[n].range = 0.0;
         beams[n].damage = 0.0;
+        beams[n].cycle_time = 0.0;
     }
     radius = 50.0;
     weaponTubes = 0;

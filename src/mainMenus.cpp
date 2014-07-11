@@ -114,7 +114,7 @@ void JoinServerScreen::onGui()
         if (!connect_delay)
             new GameClient(ip);
     }else{
-        if (!gameClient)
+        if (!gameClient->isConnected())
         {
             destroy();
             disconnectFromServer();
