@@ -29,11 +29,9 @@ int main(int argc, char** argv)
     if (bundle)
     {
         CFURLRef url = CFBundleCopyResourcesDirectoryURL(bundle);
-        CFStringRef str = CFURLCopyFileSystemPath(url, kCFURLPOSIXPathStyle);
         char path[PATH_MAX];
-        CFStringGetCString(str, path, PATH_MAX, kCFStringEncodingASCII );
+        CFURLGetFileSystemRepresentation(url, true, (unsigned char*)path, PATH_MAX);
         chdir(path);
-        CFRelease(str);
         CFRelease(url);
     }
 #endif

@@ -94,6 +94,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-framework OpenGL" />
+					<Add option="-framework Foundation" />
 					<Add library="sfml-audio" />
 					<Add library="sfml-graphics" />
 					<Add library="sfml-system" />
