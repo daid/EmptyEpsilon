@@ -5,6 +5,10 @@
 #include "packResourceProvider.h"
 #include "main.h"
 
+#ifdef __APPLE__
+#include <CoreFoundation/CoreFoundation.h>
+#endif
+
 sf::Vector3f cameraPosition;
 float cameraRotation;
 sf::Shader objectShader;
@@ -20,6 +24,20 @@ PostProcessor* glitchPostProcessor;
 
 int main(int argc, char** argv)
 {
+#ifdef __APPLE__
+    CFBundleRef bundle = CFBundleGetMainBundle();
+    if (bundle)
+    {
+        CFURLRef url = CFBundleCopyResourcesDirectoryURL(bundle);
+        CFStringRef str = CFURLCopyFileSystemPath(url, kCFURLPOSIXPathStyle);
+        char path[PATH_MAX];
+        CFStringGetCString(str, path, PATH_MAX, kCFStringEncodingASCII );
+        chdir(path);
+        CFRelease(str);
+        CFRelease(url);
+    }
+#endif
+
     new Engine();
     new DirectoryResourceProvider("resources/");
     new PackResourceProvider("packs/Angryfly.pack");
