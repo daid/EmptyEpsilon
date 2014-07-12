@@ -42,7 +42,7 @@ void Asteroid::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float 
 
 void Asteroid::collision(Collisionable* target)
 {
-    if (!gameServer)
+    if (!isServer())
         return;
     P<SpaceObject> hitObject = P<Collisionable>(target);
     if (!hitObject || !hitObject->canBeTargeted())

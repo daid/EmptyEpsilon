@@ -352,6 +352,13 @@
 		<Unit filename="../SeriousProton/src/lua/lzio.h" />
 		<Unit filename="../SeriousProton/src/multiplayer.cpp" />
 		<Unit filename="../SeriousProton/src/multiplayer.h" />
+		<Unit filename="../SeriousProton/src/multiplayer_client.cpp" />
+		<Unit filename="../SeriousProton/src/multiplayer_client.h" />
+		<Unit filename="../SeriousProton/src/multiplayer_internal.h" />
+		<Unit filename="../SeriousProton/src/multiplayer_server.cpp" />
+		<Unit filename="../SeriousProton/src/multiplayer_server.h" />
+		<Unit filename="../SeriousProton/src/multiplayer_server_scanner.cpp" />
+		<Unit filename="../SeriousProton/src/multiplayer_server_scanner.h" />
 		<Unit filename="../SeriousProton/src/postProcessManager.cpp" />
 		<Unit filename="../SeriousProton/src/postProcessManager.h" />
 		<Unit filename="../SeriousProton/src/random.h" />
