@@ -45,6 +45,7 @@ PlayerSpaceship::PlayerSpaceship()
     comms_reply_count = 0;
     auto_repair_enabled = true;
 
+    updateMemberReplicationUpdateDelay(&targetRotation, 0.1);
     registerMemberReplication(&hull_damage_indicator, 0.5);
     registerMemberReplication(&hull_strength, 0.5);
     registerMemberReplication(&hull_max);
