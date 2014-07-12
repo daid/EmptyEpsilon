@@ -57,9 +57,9 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     tubeRechargeFactor = 1.0;
     docking_state = DS_NotDocking;
     
-    registerMemberReplication(&targetRotation, 0.5);
+    registerMemberReplication(&targetRotation, 1.5);
     registerMemberReplication(&impulseRequest, 0.1);
-    registerMemberReplication(&currentImpulse, 0.1);
+    registerMemberReplication(&currentImpulse, 0.5);
     registerMemberReplication(&hasWarpdrive);
     registerMemberReplication(&warpRequest, 0.1);
     registerMemberReplication(&currentWarp, 0.1);
@@ -94,7 +94,7 @@ SpaceShip::SpaceShip(string multiplayerClassName)
         registerMemberReplication(&beamWeapons[n].direction);
         registerMemberReplication(&beamWeapons[n].range);
         registerMemberReplication(&beamWeapons[n].cycleTime);
-        registerMemberReplication(&beamWeapons[n].cooldown, 0.2);
+        registerMemberReplication(&beamWeapons[n].cooldown, 0.5);
     }
     for(int n=0; n<maxWeaponTubes; n++)
     {
