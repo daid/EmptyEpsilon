@@ -5,7 +5,7 @@
 MainScreenUI::MainScreenUI()
 {
     P<MouseRenderer> mouseRenderer = engine->getObject("mouseRenderer");
-    mouseRenderer->visible = false;
+    if (mouseRenderer) mouseRenderer->visible = false;
 }
 
 void MainScreenUI::onGui()
@@ -37,7 +37,7 @@ void MainScreenUI::onGui()
 void MainScreenUI::destroy()
 {
     P<MouseRenderer> mouseRenderer = engine->getObject("mouseRenderer");
-    mouseRenderer->visible = true;
+    if (mouseRenderer) mouseRenderer->visible = true;
     MainUIBase::destroy();
 }
 
