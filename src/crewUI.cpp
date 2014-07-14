@@ -446,6 +446,7 @@ void CrewUI::commsUI()
                         if (button(sf::FloatRect(x, y, 300, 50), playerShip->shipTemplate->name))
                         {
                             mySpaceship->commandOpenTextComm(obj);
+                            mySpaceship->commandOpenVoiceComm(obj);
                             comms_open_channel_type = OCT_None;
                         }
                         y += 50;
@@ -473,7 +474,10 @@ void CrewUI::commsUI()
         text(sf::FloatRect(50, 100, 600, 50), "Opening communication channel...");
         progressBar(sf::FloatRect(50, 150, 600, 50), mySpaceship->comms_open_delay, PlayerSpaceship::comms_channel_open_time, 0.0);
         if (button(sf::FloatRect(50, 800, 300, 50), "Cancel call"))
-            mySpaceship->commandCloseTextComm();
+            {
+                mySpaceship->commandCloseTextComm();
+                mySpaceship->commandCloseVoiceComm();
+            }
         break;
     case CS_ChannelOpen:
         {

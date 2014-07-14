@@ -25,11 +25,12 @@ static const int16_t CMD_DOCK = 0x000E;
 static const int16_t CMD_UNDOCK = 0x000F;
 static const int16_t CMD_OPEN_TEXT_COMM = 0x0010; //TEXT communication
 static const int16_t CMD_CLOSE_TEXT_COMM = 0x0011;
-static const int16_t CMD_SEND_COMM = 0x0012;
-static const int16_t CMD_SEND_COMM_PLAYER = 0x0013;
+static const int16_t CMD_SEND_TEXT_COMM = 0x0012;
+static const int16_t CMD_SEND_TEXT_COMM_PLAYER = 0x0013;
 static const int16_t CMD_SET_AUTO_REPAIR = 0x0014;
 static const int16_t CMD_OPEN_VOICE_COMM = 0x0015; // VOIP communication
 static const int16_t CMD_CLOSE_VOICE_COMM = 0x0016;
+static const int16_t CMD_SEND_VOICE_COMM = 0x0017;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -455,7 +456,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
         }
         comms_state = CS_Inactive;
         break;
-    case CMD_SEND_COMM:
+    case CMD_SEND_TEXT_COMM:
         if (comms_state == CS_ChannelOpen && comms_target)
         {
             int8_t index;
@@ -468,7 +469,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             }
         }
         break;
-    case CMD_SEND_COMM_PLAYER:
+    case CMD_SEND_TEXT_COMM_PLAYER:
         if (comms_state == CS_ChannelOpenPlayer)
         {
             string message;
@@ -627,14 +628,14 @@ void PlayerSpaceship::commandCloseTextComm()
 void PlayerSpaceship::commandSendComm(int8_t index)
 {
     sf::Packet packet;
-    packet << CMD_SEND_COMM << index;
+    packet << CMD_SEND_TEXT_COMM << index;
     sendCommand(packet);
 }
 
 void PlayerSpaceship::commandSendCommPlayer(string message)
 {
     sf::Packet packet;
-    packet << CMD_SEND_COMM_PLAYER << message;
+    packet << CMD_SEND_TEXT_COMM_PLAYER << message;
     sendCommand(packet);
 }
 
