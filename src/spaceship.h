@@ -44,7 +44,7 @@ public:
 class WeaponTube : public sf::NonCopyable
 {
 public:
-    EMissileWeapons typeLoaded;
+    EMissileWeapons type_loaded;
     EWeaponTubeState state;
     float delay;
 };
@@ -55,7 +55,7 @@ class SpaceShip : public SpaceObject, public Updatable
 
 public:
     string templateName;
-    P<ShipTemplate> shipTemplate;
+    P<ShipTemplate> ship_template;
     float engine_emit_delay;
 
     float targetRotation;

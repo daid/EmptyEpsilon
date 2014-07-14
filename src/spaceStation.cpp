@@ -19,14 +19,14 @@ SpaceStation::SpaceStation()
 {
     setCollisionBox(sf::Vector2f(400, 400));
     setCollisionPhysics(true, true);
-    
+
     shields = maxShields;
     hullStrength = maxHullStrength;
-    
+
     registerMemberReplication(&shields, 1.0);
     registerMemberReplication(&shieldHitEffect, 0.5);
     shieldHitEffect = 0.0;
-    
+
     comms_script_name = "comms_station.lua";
 }
 
@@ -111,7 +111,7 @@ void SpaceStation::takeDamage(float damageAmount, sf::Vector2f damageLocation, E
                 ExplosionEffect* e = new ExplosionEffect();
                 e->setSize(getRadius());
                 e->setPosition(getPosition());
-                
+
                 destroy();
             }
         }

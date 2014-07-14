@@ -139,10 +139,10 @@ void PlayerSpaceship::update(float delta)
                         if (playerShip->comms_state == CS_Inactive || playerShip->comms_state == CS_ChannelFailed || playerShip->comms_state == CS_ChannelBroken)
                         {
                             comms_state = CS_ChannelOpenPlayer;
-                            comms_incomming_message = "Opened comms to " + playerShip->shipTemplate->name;
+                            comms_incomming_message = "Opened comms to " + playerShip->ship_template->name;
                             playerShip->comms_state = CS_ChannelOpenPlayer;
                             playerShip->comms_target = this;
-                            playerShip->comms_incomming_message = "Incomming comms from " + playerShip->shipTemplate->name;
+                            playerShip->comms_incomming_message = "Incomming comms from " + playerShip->ship_template->name;
                         }else{
                             comms_state = CS_ChannelFailed;
                         }
@@ -209,9 +209,9 @@ void PlayerSpaceship::update(float delta)
         }
         beamRechargeFactor = std::min(systems[SYS_BeamWeapons].power_level * systems[SYS_BeamWeapons].health, max_power_level);
         tubeRechargeFactor = std::min(systems[SYS_MissileSystem].power_level * systems[SYS_MissileSystem].health, max_power_level);
-        rotationSpeed = shipTemplate->turnSpeed * std::min(systems[SYS_Maneuver].power_level * systems[SYS_Maneuver].health, max_power_level);
-        impulseMaxSpeed = shipTemplate->impulseSpeed * std::min(systems[SYS_Impulse].power_level * systems[SYS_Impulse].health, max_power_level);
-        warpSpeedPerWarpLevel = shipTemplate->warpSpeed * std::min(systems[SYS_Warp].power_level * systems[SYS_Warp].health, max_power_level);
+        rotationSpeed = ship_template->turnSpeed * std::min(systems[SYS_Maneuver].power_level * systems[SYS_Maneuver].health, max_power_level);
+        impulseMaxSpeed = ship_template->impulseSpeed * std::min(systems[SYS_Impulse].power_level * systems[SYS_Impulse].health, max_power_level);
+        warpSpeedPerWarpLevel = ship_template->warpSpeed * std::min(systems[SYS_Warp].power_level * systems[SYS_Warp].health, max_power_level);
         jumpSpeedFactor = std::min(systems[SYS_JumpDrive].power_level * systems[SYS_JumpDrive].health, max_power_level);
         front_shield_recharge_factor = std::min(systems[SYS_FrontShield].power_level * systems[SYS_FrontShield].health, max_power_level);
         rear_shield_recharge_factor = std::min(systems[SYS_RearShield].power_level * systems[SYS_RearShield].health, max_power_level);

@@ -240,9 +240,9 @@ void MainUIBase::drawRadar(sf::Vector2f position, float size, float range, bool 
 
 void MainUIBase::drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESystem highlight_system)
 {
-    if (!ship || !ship->shipTemplate) return;
+    if (!ship || !ship->ship_template) return;
     sf::RenderTarget& window = *getRenderTarget();
-    P<ShipTemplate> st = ship->shipTemplate;
+    P<ShipTemplate> st = ship->ship_template;
     P<PlayerSpaceship> playerSpaceship = ship;
 
     const float room_size = 48.0f;

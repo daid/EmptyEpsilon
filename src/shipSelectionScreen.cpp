@@ -111,11 +111,11 @@ void ShipSelectionScreen::onGui()
     for(int n=0; n<GameGlobalInfo::maxPlayerShips; n++)
     {
         P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
-        if (ship && ship->shipTemplate)
+        if (ship && ship->ship_template)
         {
             if (n < 8)
             {
-                if (toggleButton(sf::FloatRect(200, 150 + (n % 8) * 50, 300, 50), mySpaceship == ship, ship->shipTemplate->name + " " + string(n + 1)))
+                if (toggleButton(sf::FloatRect(200, 150 + (n % 8) * 50, 300, 50), mySpaceship == ship, ship->ship_template->name + " " + string(n + 1)))
                 {
                     mySpaceship = ship;
                     my_player_info->setShipId(mySpaceship->getMultiplayerId());

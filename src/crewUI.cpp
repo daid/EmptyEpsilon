@@ -166,7 +166,7 @@ void CrewUI::weaponsUI()
 
 void CrewUI::engineeringUI()
 {
-    if (!mySpaceship->shipTemplate) return;
+    if (!mySpaceship->ship_template) return;
     sf::RenderTarget& window = *getRenderTarget();
     sf::Vector2f mouse = InputHandler::getMousePos();
 
@@ -210,7 +210,7 @@ void CrewUI::engineeringUI()
         x += 160;
     }
 
-    sf::Vector2i interior_size = mySpaceship->shipTemplate->interiorSize();
+    sf::Vector2i interior_size = mySpaceship->ship_template->interiorSize();
     sf::Vector2f interial_position = sf::Vector2f(800, 250) - sf::Vector2f(interior_size) * 48.0f / 2.0f;
     drawShipInternals(interial_position, mySpaceship, highlight_system);
 
@@ -296,9 +296,9 @@ void CrewUI::scienceUI()
             }
         }else{
             text(sf::FloatRect(20, 160, 100, 20), factionInfo[scienceTarget->faction_id].name, AlignLeft, 20);
-            if (ship && ship->shipTemplate)
+            if (ship && ship->ship_template)
             {
-                text(sf::FloatRect(20, 180, 100, 20), ship->shipTemplate->name, AlignLeft, 20);
+                text(sf::FloatRect(20, 180, 100, 20), ship->ship_template->name, AlignLeft, 20);
                 text(sf::FloatRect(20, 200, 200, 20), "Shields: " + string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), AlignLeft, 20);
             }
         }
@@ -443,7 +443,7 @@ void CrewUI::commsUI()
                     P<PlayerSpaceship> playerShip = obj;
                     if (playerShip) //Why do we make a distinction here? Seems to me a player ship also has a callsign?
                     {
-                        if (button(sf::FloatRect(x, y, 300, 50), playerShip->shipTemplate->name))
+                        if (button(sf::FloatRect(x, y, 300, 50), playerShip->ship_template->name))
                         {
                             mySpaceship->commandOpenTextComm(obj);
                             mySpaceship->commandOpenVoiceComm(obj);
@@ -639,9 +639,9 @@ void CrewUI::singlePilotUI()
             }
         }else{
             text(sf::FloatRect(700, 110, 100, 20), factionInfo[target->faction_id].name, AlignRight, 20);
-            if (ship && ship->shipTemplate)
+            if (ship && ship->ship_template)
             {
-                text(sf::FloatRect(700, 130, 100, 20), ship->shipTemplate->name, AlignRight, 20);
+                text(sf::FloatRect(700, 130, 100, 20), ship->ship_template->name, AlignRight, 20);
                 text(sf::FloatRect(700, 150, 100, 20), "Shields: " + string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), AlignRight, 20);
             }
         }
@@ -771,18 +771,18 @@ void CrewUI::weaponTube(int n, sf::FloatRect load_rect, sf::FloatRect fire_rect,
     case WTS_Loaded:
         if (button(load_rect, "Unload", text_size))
             mySpaceship->commandUnloadTube(n);
-        if (button(fire_rect, getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), text_size))
+        if (button(fire_rect, getMissileWeaponName(mySpaceship->weaponTube[n].type_loaded), text_size))
             mySpaceship->commandFireTube(n);
         break;
     case WTS_Loading:
         progressBar(fire_rect, mySpaceship->weaponTube[n].delay, mySpaceship->tubeLoadTime, 0.0);
         disabledButton(load_rect, "Loading", text_size);
-        text(fire_rect, getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), AlignCenter, text_size, sf::Color::Black);
+        text(fire_rect, getMissileWeaponName(mySpaceship->weaponTube[n].type_loaded), AlignCenter, text_size, sf::Color::Black);
         break;
     case WTS_Unloading:
         progressBar(fire_rect, mySpaceship->weaponTube[n].delay, 0.0, mySpaceship->tubeLoadTime);
         disabledButton(load_rect, "Unloading", text_size * 0.8);
-        text(fire_rect, getMissileWeaponName(mySpaceship->weaponTube[n].typeLoaded), AlignCenter, text_size, sf::Color::Black);
+        text(fire_rect, getMissileWeaponName(mySpaceship->weaponTube[n].type_loaded), AlignCenter, text_size, sf::Color::Black);
         break;
     }
 }
