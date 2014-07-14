@@ -23,11 +23,13 @@ static const int16_t CMD_SET_SYSTEM_POWER = 0x000C;
 static const int16_t CMD_SET_SYSTEM_COOLANT = 0x000D;
 static const int16_t CMD_DOCK = 0x000E;
 static const int16_t CMD_UNDOCK = 0x000F;
-static const int16_t CMD_OPEN_COMM = 0x0010;
-static const int16_t CMD_CLOSE_COMM = 0x0011;
+static const int16_t CMD_OPEN_TEXT_COMM = 0x0010; //TEXT communication
+static const int16_t CMD_CLOSE_TEXT_COMM = 0x0011;
 static const int16_t CMD_SEND_COMM = 0x0012;
 static const int16_t CMD_SEND_COMM_PLAYER = 0x0013;
 static const int16_t CMD_SET_AUTO_REPAIR = 0x0014;
+static const int16_t CMD_OPEN_VOICE_COMM = 0x0015; // VOIP communication
+static const int16_t CMD_CLOSE_VOICE_COMM = 0x0016;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -66,14 +68,14 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&comms_incomming_message);
     for (int n=0; n<max_comms_reply_count; n++)
         registerMemberReplication(&comms_reply[n].message);
-    
+
     for(int n=0; n<SYS_COUNT; n++)
     {
         systems[n].health = 1.0;
         systems[n].powerLevel = 1.0;
         systems[n].coolantLevel = 0.0;
         systems[n].heatLevel = 0.0;
-        
+
         registerMemberReplication(&systems[n].health);
         registerMemberReplication(&systems[n].powerLevel);
         registerMemberReplication(&systems[n].coolantLevel);
@@ -88,7 +90,7 @@ PlayerSpaceship::PlayerSpaceship()
     systems[SYS_JumpDrive].powerUserFactor = 6.0;
     systems[SYS_FrontShield].powerUserFactor = 5.0;
     systems[SYS_RearShield].powerUserFactor = 5.0;
-    
+
     if (gameServer)
     {
         for(int n=0; n<3; n++)
@@ -100,12 +102,12 @@ PlayerSpaceship::PlayerSpaceship()
 }
 
 void PlayerSpaceship::update(float delta)
-{        
+{
     if (hull_damage_indicator > 0)
         hull_damage_indicator -= delta;
     if (warp_indicator > 0)
         warp_indicator -= delta;
-    
+
     if (docking_state == DS_Docked)
     {
         energy_level += delta * 10.0;
@@ -116,7 +118,7 @@ void PlayerSpaceship::update(float delta)
                 hull_strength = hull_max;
         }
     }
-    
+
     if (gameServer)
     {
         if (comms_state == CS_OpeningChannel)
@@ -160,11 +162,11 @@ void PlayerSpaceship::update(float delta)
 
         if (shields_active)
             useEnergy(delta * energy_shield_use_per_second);
-        
+
         for(int n=0; n<SYS_COUNT; n++)
         {
             if (!hasSystem(ESystem(n))) continue;
-            
+
             if (systems[n].powerUserFactor < 0.0)   //When we generate power, use the health of this system in the equation
                 energy_level -= delta * systems[n].powerUserFactor * systems[n].health * systems[n].powerLevel * 0.02;
             else
@@ -181,20 +183,20 @@ void PlayerSpaceship::update(float delta)
             if (systems[n].heatLevel < 0.0)
                 systems[n].heatLevel = 0.0;
         }
-        
+
         if (systems[SYS_Reactor].health < 0.3 && systems[SYS_Reactor].heatLevel == 1.0)
         {
             //Ok, you screwed up. Seriously, your reactor is heavy damaged and overheated. So it will explode.
             ExplosionEffect* e = new ExplosionEffect();
             e->setSize(1000.0f);
             e->setPosition(getPosition());
-            
+
             SpaceObject::damageArea(getPosition(), 1000, 60, 160, DT_Kinetic, 0.0);
-            
+
             destroy();
             return;
         }
-        
+
         if (energy_level < 0.0)
             energy_level = 0.0;
         float max_power_level = 3.0;
@@ -236,7 +238,7 @@ void PlayerSpaceship::update(float delta)
         if (comms_open_delay > 0)
             comms_open_delay -= delta;
     }
-    
+
     SpaceShip::update(delta);
 
     if (energy_level > 1000.0)
@@ -286,7 +288,7 @@ void PlayerSpaceship::setSystemCoolant(ESystem system, float level)
     {
         if (!hasSystem(ESystem(n))) continue;
         if (n == system) continue;
-        
+
         total_coolant += systems[n].coolantLevel;
         cnt++;
     }
@@ -296,11 +298,11 @@ void PlayerSpaceship::setSystemCoolant(ESystem system, float level)
         {
             if (!hasSystem(ESystem(n))) continue;
             if (n == system) continue;
-            
+
             systems[n].coolantLevel *= (maxCoolant - level) / total_coolant;
         }
     }
-    
+
     systems[system].coolantLevel = level;
 }
 
@@ -350,7 +352,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             int8_t tubeNr;
             EMissileWeapons type;
             packet >> tubeNr >> type;
-            
+
             loadTube(tubeNr, type);
         }
         break;
@@ -358,7 +360,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
         {
             int8_t tubeNr;
             packet >> tubeNr;
-            
+
             if (tubeNr >= 0 && tubeNr < maxWeaponTubes && weaponTube[tubeNr].state == WTS_Loaded)
             {
                 weaponTube[tubeNr].state = WTS_Unloading;
@@ -370,7 +372,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
         {
             int8_t tubeNr;
             packet >> tubeNr;
-            
+
             fireTube(tubeNr);
         }
         break;
@@ -395,7 +397,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
         {
             int32_t id;
             packet >> id;
-            
+
             P<SpaceShip> ship = gameServer->getObjectById(id);
             if (ship)
             {
@@ -432,7 +434,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
     case CMD_UNDOCK:
         requestUndock();
         break;
-    case CMD_OPEN_COMM:
+    case CMD_OPEN_TEXT_COMM:
         if (comms_state == CS_Inactive)
         {
             int32_t id;
@@ -445,7 +447,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             }
         }
         break;
-    case CMD_CLOSE_COMM:
+    case CMD_CLOSE_TEXT_COMM:
         if (comms_state == CS_ChannelOpenPlayer && comms_target)
         {
             P<PlayerSpaceship> playerShip = comms_target;
@@ -596,14 +598,14 @@ void PlayerSpaceship::commandOpenComm(P<SpaceObject> obj)
 {
     if (!obj) return;
     sf::Packet packet;
-    packet << CMD_OPEN_COMM << obj->getMultiplayerId();
+    packet << CMD_OPEN_TEXT_COMM << obj->getMultiplayerId();
     sendCommand(packet);
 }
 
 void PlayerSpaceship::commandCloseComm()
 {
     sf::Packet packet;
-    packet << CMD_CLOSE_COMM;
+    packet << CMD_CLOSE_TEXT_COMM;
     sendCommand(packet);
 }
 

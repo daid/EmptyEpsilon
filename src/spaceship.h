@@ -57,54 +57,54 @@ public:
     string templateName;
     P<ShipTemplate> shipTemplate;
     float engine_emit_delay;
-    
+
     float targetRotation;
     float impulseRequest;
     float currentImpulse;
     float rotationSpeed;
     float impulseMaxSpeed;
-    
+
     bool hasWarpdrive;
     int8_t warpRequest;
     float currentWarp;
     float warpSpeedPerWarpLevel;
-    
+
     bool hasJumpdrive;
     float jumpDistance;
     float jumpDelay;
     float jumpSpeedFactor;
-    
+
     int8_t weapon_storage[MW_Count];
     int8_t weapon_storage_max[MW_Count];
     int8_t weaponTubes;
     float tubeLoadTime;
     float tubeRechargeFactor;
     WeaponTube weaponTube[maxWeaponTubes];
-    
+
     float beamRechargeFactor;
     BeamWeapon beamWeapons[maxBeamWeapons];
-    
+
     float hull_strength, hull_max;
     float front_shield_recharge_factor, rear_shield_recharge_factor;
     bool shields_active;
     float front_shield, rear_shield;
     float front_shield_max, rear_shield_max;
     float front_shield_hit_effect, rear_shield_hit_effect;
-    
+
     int32_t targetId;
-    
-    bool scanned_by_player;
-    
+
+    bool scanned_by_player; //Is this really smart with multiple players?
+
     EDockingState docking_state;
     P<SpaceStation> docking_target; //Server only
 
     SpaceShip(string multiplayerClassName);
-    
+
     virtual void draw3D();
     virtual void draw3DTransparent();
     virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
     virtual void update(float delta);
-    
+
     virtual string getCallSign();
     virtual bool canBeTargeted() { return true; }
     virtual bool hasShield() { return front_shield > (front_shield_max / 50.0) || rear_shield > (rear_shield_max / 50.0); }
@@ -113,20 +113,20 @@ public:
     virtual void executeJump(float distance);
     virtual void fireBeamWeapon(int index, P<SpaceObject> target);
     virtual void collision(Collisionable* other);
-    
+
     void loadTube(int tubeNr, EMissileWeapons type);
     void fireTube(int tubeNr);
     void initJump(float distance);
     void requestDock(P<SpaceStation> target);
     void requestUndock();
     void setScanned(bool value) { scanned_by_player = value; }
-    
+
     bool hasSystem(ESystem system);
-    
+
     void setShipTemplate(string templateName);
-    
+
     P<SpaceObject> getTarget();
-    
+
     bool isDocked() { return docking_state == DS_Docked; }
     int getWeaponStorage(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage[weapon]; }
     int getWeaponStorageMax(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage_max[weapon]; }
