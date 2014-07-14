@@ -480,6 +480,23 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
                 playership->comms_incomming_message = playership->comms_incomming_message + "\n>" + message;
         }
         break;
+    case CMD_OPEN_VOICE_COMM:
+        if (comms_state == CS_ChannelOpenPlayer)
+        {
+            //Setup audio recorder & streamer
+        }
+        break;
+    case CMD_CLOSE_VOICE_COMM:
+        if (comms_state == CS_ChannelOpenPlayer)
+        {
+            //stop audio recorder & streamer
+        }
+        break;
+    case CMD_SEND_VOICE_COMM:
+        {
+            //Piece of voice stream recieved. Do something.
+        }
+
     case CMD_SET_AUTO_REPAIR:
         packet >> auto_repair_enabled;
         break;
