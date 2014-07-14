@@ -95,10 +95,10 @@ ERepairCrewAction pathFind(sf::Vector2i start_pos, sf::Vector2i target_pos, P<Sh
 void RepairCrew::update(float delta)
 {
     P<PlayerSpaceship> ship;
-    if (gameServer)
-        ship = gameServer->getObjectById(ship_id);
-    else if (gameClient)
-        ship = gameClient->getObjectById(ship_id);
+    if (game_server)
+        ship = game_server->getObjectById(ship_id);
+    else if (game_client)
+        ship = game_client->getObjectById(ship_id);
     else
     {
         destroy();
@@ -106,7 +106,7 @@ void RepairCrew::update(float delta)
     }
 
 
-    if (gameServer && !ship)
+    if (game_server && !ship)
     {
         destroy();
         return;

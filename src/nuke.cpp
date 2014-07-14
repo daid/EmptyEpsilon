@@ -35,14 +35,14 @@ void Nuke::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scal
 void Nuke::update(float delta)
 {
     P<SpaceObject> target;
-    if (gameServer)
-        target = gameServer->getObjectById(target_id);
+    if (game_server)
+        target = game_server->getObjectById(target_id);
     else
-        target = gameClient->getObjectById(target_id);
+        target = game_client->getObjectById(target_id);
     if (target)
     {
         float angleDiff = sf::angleDifference(getRotation(), sf::vector2ToAngle(target->getPosition() - getPosition()));
-        
+
         if (angleDiff > 1.0)
             setAngularVelocity(turnSpeed);
         else if (angleDiff < -1.0)
@@ -52,7 +52,7 @@ void Nuke::update(float delta)
     }else{
         setAngularVelocity(0);
     }
-    
+
     if (delta > 0 && lifetime == totalLifetime)
         soundManager.playSound("missile_launch.wav", getPosition(), 200.0, 1.0);
     lifetime -= delta;
@@ -66,14 +66,14 @@ void Nuke::update(float delta)
 
 void Nuke::collision(Collisionable* target)
 {
-    if (!gameServer)
+    if (!game_server)
         return;
     P<SpaceObject> hitObject = P<Collisionable>(target);
     if (!hitObject || hitObject == owner || !hitObject->canBeTargeted())
         return;
-    
+
     SpaceObject::damageArea(getPosition(), blastRange, damageAtEdge, damageAtCenter, DT_Kinetic, getRadius());
-    
+
     P<ExplosionEffect> e = new ExplosionEffect();
     e->setSize(blastRange);
     e->setPosition(getPosition());

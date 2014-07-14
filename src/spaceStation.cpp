@@ -72,11 +72,11 @@ void SpaceStation::drawRadar(sf::RenderTarget& window, sf::Vector2f position, fl
         GUI::text(sf::FloatRect(position.x, position.y - 15, 0, 0), getCallSign(), AlignCenter, 12);
         objectSprite.setScale(0.7, 0.7);
     }
-    if (mySpaceship)
+    if (my_spaceship)
     {
-        if (isEnemy(mySpaceship))
+        if (isEnemy(my_spaceship))
             objectSprite.setColor(sf::Color::Red);
-        if (isFriendly(mySpaceship))
+        if (isFriendly(my_spaceship))
             objectSprite.setColor(sf::Color(128, 255, 128));
     }else{
         objectSprite.setColor(factionInfo[faction_id].gm_color);

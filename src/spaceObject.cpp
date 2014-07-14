@@ -17,15 +17,15 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getCallSign);
 }
 
-PVector<SpaceObject> spaceObjectList;
+PVector<SpaceObject> space_object_list;
 
-SpaceObject::SpaceObject(float collisionRange, string multiplayerName)
-: Collisionable(collisionRange), MultiplayerObject(multiplayerName)
+SpaceObject::SpaceObject(float collision_range, string multiplayer_name)
+: Collisionable(collision_range), MultiplayerObject(multiplayer_name)
 {
-    objectRadius = collisionRange;
-    spaceObjectList.push_back(this);
+    object_radius = collision_range;
+    space_object_list.push_back(this);
     faction_id = 0;
-    
+
     registerMemberReplication(&faction_id);
     registerCollisionableReplication();
 }

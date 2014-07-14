@@ -114,15 +114,15 @@ void JoinServerScreen::onGui()
         if (!connect_delay)
             new GameClient(ip);
     }else{
-        if (!gameClient->isConnected())
+        if (!game_client->isConnected())
         {
             destroy();
             disconnectFromServer();
             new ServerBrowserMenu();
-        }else if (gameClient->getClientId() > 0)
+        }else if (game_client->getClientId() > 0)
         {
             foreach(PlayerInfo, i, playerInfoList)
-                if (i->clientId == gameClient->getClientId())
+                if (i->clientId == game_client->getClientId())
                     my_player_info = i;
             if (my_player_info && gameGlobalInfo)
             {

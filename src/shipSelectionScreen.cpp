@@ -11,7 +11,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     active_scenario_index = 0;
     ship_template_index = 0;
 
-    if (gameServer)
+    if (game_server)
     {
         std::vector<string> scenario_filenames = findResources("scenario_*.lua");
         std::sort(scenario_filenames.begin(), scenario_filenames.end());
@@ -44,7 +44,7 @@ ShipSelectionScreen::ShipSelectionScreen()
 
 void ShipSelectionScreen::onGui()
 {
-    if (gameClient && !gameClient->isConnected())
+    if (game_client && !game_client->isConnected())
     {
         destroy();
         disconnectFromServer();
@@ -52,9 +52,9 @@ void ShipSelectionScreen::onGui()
         return;
     }
 
-    if (mySpaceship)
+    if (my_spaceship)
     {
-        int32_t my_ship_id = mySpaceship->getMultiplayerId();
+        int32_t my_ship_id = my_spaceship->getMultiplayerId();
 
         int main_screen_control_cnt = 0;
         int mainCnt = 0;
@@ -96,7 +96,7 @@ void ShipSelectionScreen::onGui()
 
         if (button(sf::FloatRect(800, 600, 300, 50), "Ready"))
         {
-            if (gameServer && !engine->getObject("scenario") && active_scenario_index < int(scenarios.size()))
+            if (game_server && !engine->getObject("scenario") && active_scenario_index < int(scenarios.size()))
                 engine->registerObject("scenario", new ScriptObject(scenarios[active_scenario_index].filename));
             destroy();
             if (my_player_info->isMainScreen())
@@ -115,25 +115,25 @@ void ShipSelectionScreen::onGui()
         {
             if (n < 8)
             {
-                if (toggleButton(sf::FloatRect(200, 150 + (n % 8) * 50, 300, 50), mySpaceship == ship, ship->ship_template->name + " " + string(n + 1)))
+                if (toggleButton(sf::FloatRect(200, 150 + (n % 8) * 50, 300, 50), my_spaceship == ship, ship->ship_template->name + " " + string(n + 1)))
                 {
-                    mySpaceship = ship;
-                    my_player_info->setShipId(mySpaceship->getMultiplayerId());
+                    my_spaceship = ship;
+                    my_player_info->setShipId(my_spaceship->getMultiplayerId());
                 }
             }else{
-                if (toggleButton(sf::FloatRect(200 + 200 + (n / 8) * 100, 150 + (n % 8) * 50, 100, 50), mySpaceship == ship, string(n + 1)))
+                if (toggleButton(sf::FloatRect(200 + 200 + (n / 8) * 100, 150 + (n % 8) * 50, 100, 50), my_spaceship == ship, string(n + 1)))
                 {
-                    mySpaceship = ship;
-                    my_player_info->setShipId(mySpaceship->getMultiplayerId());
+                    my_spaceship = ship;
+                    my_player_info->setShipId(my_spaceship->getMultiplayerId());
                 }
             }
         }
     }
 
-    if (gameServer)
+    if (game_server)
     {
         std::vector<string> templates = ShipTemplate::getPlayerTemplateNameList();
-        gameServer->setServerName(textEntry(sf::FloatRect(200, 50, 300, 50), gameServer->getServerName()));
+        game_server->setServerName(textEntry(sf::FloatRect(200, 50, 300, 50), game_server->getServerName()));
         text(sf::FloatRect(200, 100, 300, 50), sf::IpAddress::getLocalAddress().toString(), AlignCenter, 30);
 
         if (ship_template_index < int(templates.size()))
@@ -146,24 +146,24 @@ void ShipSelectionScreen::onGui()
         }
         if (button(sf::FloatRect(200, 600, 300, 50), "Spawn player ship"))
         {
-            mySpaceship = new PlayerSpaceship();
-            mySpaceship->setShipTemplate(templates[ship_template_index]);
-            mySpaceship->setRotation(random(0, 360));
-            mySpaceship->targetRotation = mySpaceship->getRotation();
-            mySpaceship->setPosition(sf::Vector2f(random(-100, 100), random(-100, 100)));
-            my_player_info->setShipId(mySpaceship->getMultiplayerId());
-            if (gameGlobalInfo->insertPlayerShip(mySpaceship) < 0)
+            my_spaceship = new PlayerSpaceship();
+            my_spaceship->setShipTemplate(templates[ship_template_index]);
+            my_spaceship->setRotation(random(0, 360));
+            my_spaceship->targetRotation = my_spaceship->getRotation();
+            my_spaceship->setPosition(sf::Vector2f(random(-100, 100), random(-100, 100)));
+            my_player_info->setShipId(my_spaceship->getMultiplayerId());
+            if (gameGlobalInfo->insertPlayerShip(my_spaceship) < 0)
             {
-                mySpaceship->destroy();
+                my_spaceship->destroy();
             }
         }
 
         if (button(sf::FloatRect(1200, 150, 300, 50), "Game Master"))
         {
-            if (gameServer && !engine->getObject("scenario") && active_scenario_index < int(scenarios.size()))
+            if (game_server && !engine->getObject("scenario") && active_scenario_index < int(scenarios.size()))
                 engine->registerObject("scenario", new ScriptObject(scenarios[active_scenario_index].filename));
 
-            mySpaceship = NULL;
+            my_spaceship = NULL;
             my_player_info->setShipId(-1);
             destroy();
             new GameMasterUI();

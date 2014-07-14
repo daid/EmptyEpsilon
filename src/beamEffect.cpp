@@ -24,7 +24,7 @@ void BeamEffect::draw3DTransparent()
     sf::Vector3f startPoint(getPosition().x, getPosition().y, sourceOffset.z);
     sf::Vector3f endPoint(targetLocation.x, targetLocation.y, targetOffset.z);
     sf::Vector3f eyeNormal = sf::normalize(sf::cross(cameraPosition - startPoint, endPoint - startPoint));
-    
+
     basicShader.setParameter("textureMap", *textureManager.getTexture("beam_texture.png"));
     sf::Shader::bind(&basicShader);
     glColor3f(lifetime, lifetime, lifetime);
@@ -44,18 +44,18 @@ void BeamEffect::draw3DTransparent()
         glVertex3f(v3.x, v3.y, v3.z);
         glEnd();
     }
-    
+
     sf::Vector3f side = sf::cross(hitNormal, sf::Vector3f(0, 0, 1));
     sf::Vector3f up = sf::cross(side, hitNormal);
-    
+
     sf::Vector3f v0(targetLocation.x, targetLocation.y, targetOffset.z);
-    
+
     float ring_size = Tween<float>::easeOutCubic(lifetime, 1.0, 0.0, 10.0f, 80.0f);
     sf::Vector3f v1 = v0 + side * ring_size + up * ring_size;
     sf::Vector3f v2 = v0 - side * ring_size + up * ring_size;
     sf::Vector3f v3 = v0 - side * ring_size - up * ring_size;
     sf::Vector3f v4 = v0 + side * ring_size - up * ring_size;
-    
+
     basicShader.setParameter("textureMap", *textureManager.getTexture("fire_ring.png"));
     sf::Shader::bind(&basicShader);
     glBegin(GL_QUADS);
@@ -73,19 +73,19 @@ void BeamEffect::draw3DTransparent()
 void BeamEffect::update(float delta)
 {
     P<SpaceObject> source, target;
-    if (gameServer)
+    if (game_server)
     {
-        source = gameServer->getObjectById(sourceId);
-        target = gameServer->getObjectById(targetId);
+        source = game_server->getObjectById(sourceId);
+        target = game_server->getObjectById(targetId);
     }else{
-        source = gameClient->getObjectById(sourceId);
-        target = gameClient->getObjectById(targetId);
+        source = game_client->getObjectById(sourceId);
+        target = game_client->getObjectById(targetId);
     }
     if (source)
         setPosition(source->getPosition() + rotateVector(sf::Vector2f(sourceOffset.x, sourceOffset.y), source->getRotation()));
     if (target)
         targetLocation = target->getPosition() + sf::Vector2f(targetOffset.x, targetOffset.y);
-    
+
     if (delta > 0 && lifetime == 1.0)
         soundManager.playSound("laser.wav", getPosition(), 500.0, 1.0);
     lifetime -= delta;

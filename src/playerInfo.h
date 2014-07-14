@@ -8,7 +8,7 @@ class PlayerInfo;
 class GameGlobalInfo;
 extern P<GameGlobalInfo> gameGlobalInfo;
 extern P<PlayerInfo> my_player_info;
-extern P<PlayerSpaceship> mySpaceship;
+extern P<PlayerSpaceship> my_spaceship;
 extern PVector<PlayerInfo> playerInfoList;
 
 enum ECrewPosition

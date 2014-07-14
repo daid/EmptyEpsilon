@@ -92,7 +92,7 @@ PlayerSpaceship::PlayerSpaceship()
     systems[SYS_FrontShield].power_user_factor = 5.0;
     systems[SYS_RearShield].power_user_factor = 5.0;
 
-    if (gameServer)
+    if (game_server)
     {
         for(int n=0; n<3; n++)
         {
@@ -120,7 +120,7 @@ void PlayerSpaceship::update(float delta)
         }
     }
 
-    if (gameServer)
+    if (game_server)
     {
         if (comms_state == CS_OpeningChannel)
         {
@@ -399,7 +399,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             int32_t id;
             packet >> id;
 
-            P<SpaceShip> ship = gameServer->getObjectById(id);
+            P<SpaceShip> ship = game_server->getObjectById(id);
             if (ship)
             {
                 scanning_ship = ship;
@@ -429,7 +429,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
         {
             int32_t id;
             packet >> id;
-            requestDock(gameServer->getObjectById(id));
+            requestDock(game_server->getObjectById(id));
         }
         break;
     case CMD_UNDOCK:
@@ -440,7 +440,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
         {
             int32_t id;
             packet >> id;
-            comms_target = gameServer->getObjectById(id);
+            comms_target = game_server->getObjectById(id);
             if (comms_target)
             {
                 comms_state = CS_OpeningChannel;

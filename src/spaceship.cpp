@@ -189,7 +189,7 @@ void SpaceShip::draw3DTransparent()
 
 void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
-    if (!long_range && (scanned_by_player || !mySpaceship))
+    if (!long_range && (scanned_by_player || !my_spaceship))
     {
         for(int n=0; n<maxBeamWeapons; n++)
         {
@@ -230,16 +230,16 @@ void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float
     objectSprite.setPosition(position);
     if (long_range)
         objectSprite.setScale(0.7, 0.7);
-    if (mySpaceship == this)
+    if (my_spaceship == this)
     {
         objectSprite.setColor(sf::Color(192, 192, 255));
-    }else if (mySpaceship)
+    }else if (my_spaceship)
     {
         if (scanned_by_player)
         {
-            if (isEnemy(mySpaceship))
+            if (isEnemy(my_spaceship))
                 objectSprite.setColor(sf::Color::Red);
-            if (isFriendly(mySpaceship))
+            if (isFriendly(my_spaceship))
                 objectSprite.setColor(sf::Color(128, 255, 128));
         }else{
             objectSprite.setColor(sf::Color(128, 128, 128));
@@ -258,7 +258,7 @@ void SpaceShip::update(float delta)
         setRadius(ship_template->radius);
     }
 
-    if (gameServer)
+    if (game_server)
     {
         if (docking_state == DS_Docking)
         {
@@ -377,7 +377,7 @@ void SpaceShip::update(float delta)
     }
 
     P<SpaceObject> target = getTarget();
-    if (gameServer && target && delta > 0 && docking_state == DS_NotDocking) // Only fire beam weapons if we are on the server, have a target, and are not paused.
+    if (game_server && target && delta > 0 && docking_state == DS_NotDocking) // Only fire beam weapons if we are on the server, have a target, and are not paused.
     {
         sf::Vector2f diff = target->getPosition() - getPosition();
         float distance = sf::length(diff);
@@ -437,9 +437,9 @@ void SpaceShip::update(float delta)
 
 P<SpaceObject> SpaceShip::getTarget()
 {
-    if (gameServer)
-        return gameServer->getObjectById(targetId);
-    return gameClient->getObjectById(targetId);
+    if (game_server)
+        return game_server->getObjectById(targetId);
+    return game_client->getObjectById(targetId);
 }
 
 void SpaceShip::executeJump(float distance)

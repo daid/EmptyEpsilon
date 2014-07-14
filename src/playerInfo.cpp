@@ -6,7 +6,7 @@ static const int16_t CMD_UPDATE_MAIN_SCREEN_CONTROL = 0x0003;
 
 P<GameGlobalInfo> gameGlobalInfo;
 P<PlayerInfo> my_player_info;
-P<PlayerSpaceship> mySpaceship;
+P<PlayerSpaceship> my_spaceship;
 PVector<PlayerInfo> playerInfoList;
 
 REGISTER_MULTIPLAYER_CLASS(GameGlobalInfo, "GameGlobalInfo")
@@ -26,15 +26,15 @@ GameGlobalInfo::GameGlobalInfo()
 P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)
 {
     assert(index >= 0 && index < maxPlayerShips);
-    if (gameServer)
-        return gameServer->getObjectById(playerShipId[index]);
-    return gameClient->getObjectById(playerShipId[index]);
+    if (game_server)
+        return game_server->getObjectById(playerShipId[index]);
+    return game_client->getObjectById(playerShipId[index]);
 }
 
 void GameGlobalInfo::setPlayerShip(int index, P<PlayerSpaceship> ship)
 {
     assert(index >= 0 && index < maxPlayerShips);
-    assert(gameServer);
+    assert(game_server);
 
     if (ship)
         playerShipId[index] = ship->getMultiplayerId();
@@ -119,12 +119,12 @@ void PlayerInfo::onReceiveCommand(int32_t clientId, sf::Packet& packet)
 
             if (isMainScreen())
                 main_screen_control = false;
-            if (active && mySpaceship)
+            if (active && my_spaceship)
             {
                 int main_screen_control_cnt = 0;
                 foreach(PlayerInfo, i, playerInfoList)
                 {
-                    if (i->ship_id == mySpaceship->getMultiplayerId() && i->main_screen_control)
+                    if (i->ship_id == my_spaceship->getMultiplayerId() && i->main_screen_control)
                         main_screen_control_cnt++;
                 }
                 if (main_screen_control_cnt == 0)

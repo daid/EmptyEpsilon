@@ -10,9 +10,9 @@ MainScreenUI::MainScreenUI()
 
 void MainScreenUI::onGui()
 {
-    if (mySpaceship)
+    if (my_spaceship)
     {
-        switch(mySpaceship->main_screen_setting)
+        switch(my_spaceship->main_screen_setting)
         {
         case MSS_Front:
         case MSS_Back:
@@ -43,7 +43,7 @@ void MainScreenUI::destroy()
 
 void MainScreenUI::renderTactical(sf::RenderTarget& window)
 {
-    drawRadar(sf::Vector2f(800, 450), 400, 5000, false, mySpaceship->getTarget());
+    drawRadar(sf::Vector2f(800, 450), 400, 5000, false, my_spaceship->getTarget());
 }
 
 void MainScreenUI::renderLongRange(sf::RenderTarget& window)

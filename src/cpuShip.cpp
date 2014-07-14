@@ -31,7 +31,7 @@ void CpuShip::update(float delta)
 {
     SpaceShip::update(delta);
 
-    if (!gameServer)
+    if (!game_server)
         return;
 
     if (missile_fire_delay > 0.0)

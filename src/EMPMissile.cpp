@@ -7,7 +7,7 @@ REGISTER_MULTIPLAYER_CLASS(EMPMissile, "EMPMissile");
 EMPMissile::EMPMissile()
 : SpaceObject(10, "EMPMissile")
 {
-    lifetime = totalLifetime;
+    lifetime = total_lifetime;
     registerMemberReplication(&target_id);
 }
 
@@ -24,7 +24,7 @@ void EMPMissile::drawRadar(sf::RenderTarget& window, sf::Vector2f position, floa
     if (long_range) return;
 
     sf::Sprite objectSprite;
-    textureManager.setTexture(objectSprite, "RadarArrow.png");
+    textureManager.setTexture(objectSprite, "RadarArrow.png"); //TODO; Hardcoded
     objectSprite.setRotation(getRotation());
     objectSprite.setPosition(position);
     objectSprite.setColor(sf::Color(100, 32, 255));
@@ -35,25 +35,25 @@ void EMPMissile::drawRadar(sf::RenderTarget& window, sf::Vector2f position, floa
 void EMPMissile::update(float delta)
 {
     P<SpaceObject> target;
-    if (gameServer)
-        target = gameServer->getObjectById(target_id);
+    if (game_server)
+        target = game_server->getObjectById(target_id);
     else
-        target = gameClient->getObjectById(target_id);
+        target = game_client->getObjectById(target_id);
     if (target)
     {
-        float angleDiff = sf::angleDifference(getRotation(), sf::vector2ToAngle(target->getPosition() - getPosition()));
-        
-        if (angleDiff > 1.0)
-            setAngularVelocity(turnSpeed);
-        else if (angleDiff < -1.0)
-            setAngularVelocity(turnSpeed * -1.0f);
+        float angle_diff = sf::angleDifference(getRotation(), sf::vector2ToAngle(target->getPosition() - getPosition()));
+
+        if (angle_diff > 1.0)
+            setAngularVelocity(turn_speed);
+        else if (angle_diff < -1.0)
+            setAngularVelocity(turn_speed * -1.0f);
         else
-            setAngularVelocity(angleDiff * turnSpeed);
+            setAngularVelocity(angle_diff * turn_speed);
     }else{
         setAngularVelocity(0);
     }
-    
-    if (delta > 0 && lifetime == totalLifetime)
+
+    if (delta > 0 && lifetime == total_lifetime)
         soundManager.playSound("missile_launch.wav", getPosition(), 200.0, 1.0);
     lifetime -= delta;
     if (lifetime < 0)
@@ -66,12 +66,12 @@ void EMPMissile::update(float delta)
 
 void EMPMissile::collision(Collisionable* target)
 {
-    if (!gameServer)
+    if (!game_server)
         return;
     P<SpaceObject> hitObject = P<Collisionable>(target);
     if (!hitObject || hitObject == owner || !hitObject->canBeTargeted())
         return;
-    
+
     SpaceObject::damageArea(getPosition(), blastRange, damageAtEdge, damageAtCenter, DT_EMP, getRadius());
 
     P<ElectricExplosionEffect> e = new ElectricExplosionEffect();
