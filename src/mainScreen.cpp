@@ -12,7 +12,7 @@ void MainScreenUI::onGui()
 {
     if (mySpaceship)
     {
-        switch(mySpaceship->mainScreenSetting)
+        switch(mySpaceship->main_screen_setting)
         {
         case MSS_Front:
         case MSS_Back:
@@ -30,7 +30,7 @@ void MainScreenUI::onGui()
     }else{
         draw3Dworld();
     }
-    
+
     MainUIBase::onGui();
 }
 

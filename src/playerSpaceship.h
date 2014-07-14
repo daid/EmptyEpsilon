@@ -18,11 +18,11 @@ class PlayerSystem
 {
 public:
     float health; //1.0-0.0, where 0.0 is fully broken.
-    float powerLevel; //0.0-3.0, default 1.0
-    float heatLevel; //0.0-1.0, system will damage at 1.0
-    float coolantLevel; //0.0-10.0
+    float power_level; //0.0-3.0, default 1.0
+    float heat_level; //0.0-1.0, system will damage at 1.0
+    float coolant_level; //0.0-10.0
 
-    float powerUserFactor;//const
+    float power_user_factor;//const
 };
 
 class PlayerCommsReply
@@ -40,7 +40,7 @@ public:
     const static float energy_per_beam_fire = 3.0f;
     const static float energy_warp_per_second = 1.0f;
     const static float system_heatup_per_second = 0.1f;
-    const static float maxCoolant = 10.0;
+    const static float max_coolant = 10.0;
     const static float damage_per_second_on_overheat = 0.2;
     const static float max_comm_range = 50000;
     const static float comms_channel_open_time = 2.0;
@@ -63,7 +63,7 @@ public:
     PlayerCommsReply comms_reply[max_comms_reply_count];
     CommsScriptInterface comms_script_interface;  //Server only
 
-    EMainScreenSetting mainScreenSetting;
+    EMainScreenSetting main_screen_setting;
 
     PlayerSpaceship();
 

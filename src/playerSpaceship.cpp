@@ -38,7 +38,7 @@ PlayerSpaceship::PlayerSpaceship()
 : SpaceShip("PlayerSpaceship")
 {
     energy_level = 1000;
-    mainScreenSetting = MSS_Front;
+    main_screen_setting = MSS_Front;
     faction_id = 1;
     hull_damage_indicator = 0.0;
     warp_indicator = 0.0;
@@ -57,7 +57,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&jumpSpeedFactor);
     registerMemberReplication(&beamRechargeFactor);
     registerMemberReplication(&tubeRechargeFactor);
-    registerMemberReplication(&mainScreenSetting);
+    registerMemberReplication(&main_screen_setting);
     registerMemberReplication(&scanning_delay, 0.5);
     registerMemberReplication(&shields_active);
     registerMemberReplication(&front_shield_recharge_factor);
@@ -73,24 +73,24 @@ PlayerSpaceship::PlayerSpaceship()
     for(int n=0; n<SYS_COUNT; n++)
     {
         systems[n].health = 1.0;
-        systems[n].powerLevel = 1.0;
-        systems[n].coolantLevel = 0.0;
-        systems[n].heatLevel = 0.0;
+        systems[n].power_level = 1.0;
+        systems[n].coolant_level = 0.0;
+        systems[n].heat_level = 0.0;
 
         registerMemberReplication(&systems[n].health);
-        registerMemberReplication(&systems[n].powerLevel);
-        registerMemberReplication(&systems[n].coolantLevel);
-        registerMemberReplication(&systems[n].heatLevel, 1.0);
+        registerMemberReplication(&systems[n].power_level);
+        registerMemberReplication(&systems[n].coolant_level);
+        registerMemberReplication(&systems[n].heat_level, 1.0);
     }
-    systems[SYS_Reactor].powerUserFactor = -30.0;
-    systems[SYS_BeamWeapons].powerUserFactor = 3.0;
-    systems[SYS_MissileSystem].powerUserFactor = 1.0;
-    systems[SYS_Maneuver].powerUserFactor = 2.0;
-    systems[SYS_Impulse].powerUserFactor = 4.0;
-    systems[SYS_Warp].powerUserFactor = 6.0;
-    systems[SYS_JumpDrive].powerUserFactor = 6.0;
-    systems[SYS_FrontShield].powerUserFactor = 5.0;
-    systems[SYS_RearShield].powerUserFactor = 5.0;
+    systems[SYS_Reactor].power_user_factor = -30.0;
+    systems[SYS_BeamWeapons].power_user_factor = 3.0;
+    systems[SYS_MissileSystem].power_user_factor = 1.0;
+    systems[SYS_Maneuver].power_user_factor = 2.0;
+    systems[SYS_Impulse].power_user_factor = 4.0;
+    systems[SYS_Warp].power_user_factor = 6.0;
+    systems[SYS_JumpDrive].power_user_factor = 6.0;
+    systems[SYS_FrontShield].power_user_factor = 5.0;
+    systems[SYS_RearShield].power_user_factor = 5.0;
 
     if (gameServer)
     {
@@ -168,24 +168,24 @@ void PlayerSpaceship::update(float delta)
         {
             if (!hasSystem(ESystem(n))) continue;
 
-            if (systems[n].powerUserFactor < 0.0)   //When we generate power, use the health of this system in the equation
-                energy_level -= delta * systems[n].powerUserFactor * systems[n].health * systems[n].powerLevel * 0.02;
+            if (systems[n].power_user_factor < 0.0)   //When we generate power, use the health of this system in the equation
+                energy_level -= delta * systems[n].power_user_factor * systems[n].health * systems[n].power_level * 0.02;
             else
-                energy_level -= delta * systems[n].powerUserFactor * systems[n].powerLevel * 0.02;
-            systems[n].heatLevel += delta * powf(1.7, systems[n].powerLevel - 1.0) * system_heatup_per_second;
-            systems[n].heatLevel -= delta * (1.0 + systems[n].coolantLevel * 0.1) * system_heatup_per_second;
-            if (systems[n].heatLevel > 1.0)
+                energy_level -= delta * systems[n].power_user_factor * systems[n].power_level * 0.02;
+            systems[n].heat_level += delta * powf(1.7, systems[n].power_level - 1.0) * system_heatup_per_second;
+            systems[n].heat_level -= delta * (1.0 + systems[n].coolant_level * 0.1) * system_heatup_per_second;
+            if (systems[n].heat_level > 1.0)
             {
-                systems[n].heatLevel = 1.0;
+                systems[n].heat_level = 1.0;
                 systems[n].health -= delta * damage_per_second_on_overheat;
                 if (systems[n].health < 0.0)
                     systems[n].health = 0.0;
             }
-            if (systems[n].heatLevel < 0.0)
-                systems[n].heatLevel = 0.0;
+            if (systems[n].heat_level < 0.0)
+                systems[n].heat_level = 0.0;
         }
 
-        if (systems[SYS_Reactor].health < 0.3 && systems[SYS_Reactor].heatLevel == 1.0)
+        if (systems[SYS_Reactor].health < 0.3 && systems[SYS_Reactor].heat_level == 1.0)
         {
             //Ok, you screwed up. Seriously, your reactor is heavy damaged and overheated. So it will explode.
             ExplosionEffect* e = new ExplosionEffect();
@@ -207,14 +207,14 @@ void PlayerSpaceship::update(float delta)
             max_power_level = 0.1;
             shields_active = false;
         }
-        beamRechargeFactor = std::min(systems[SYS_BeamWeapons].powerLevel * systems[SYS_BeamWeapons].health, max_power_level);
-        tubeRechargeFactor = std::min(systems[SYS_MissileSystem].powerLevel * systems[SYS_MissileSystem].health, max_power_level);
-        rotationSpeed = shipTemplate->turnSpeed * std::min(systems[SYS_Maneuver].powerLevel * systems[SYS_Maneuver].health, max_power_level);
-        impulseMaxSpeed = shipTemplate->impulseSpeed * std::min(systems[SYS_Impulse].powerLevel * systems[SYS_Impulse].health, max_power_level);
-        warpSpeedPerWarpLevel = shipTemplate->warpSpeed * std::min(systems[SYS_Warp].powerLevel * systems[SYS_Warp].health, max_power_level);
-        jumpSpeedFactor = std::min(systems[SYS_JumpDrive].powerLevel * systems[SYS_JumpDrive].health, max_power_level);
-        front_shield_recharge_factor = std::min(systems[SYS_FrontShield].powerLevel * systems[SYS_FrontShield].health, max_power_level);
-        rear_shield_recharge_factor = std::min(systems[SYS_RearShield].powerLevel * systems[SYS_RearShield].health, max_power_level);
+        beamRechargeFactor = std::min(systems[SYS_BeamWeapons].power_level * systems[SYS_BeamWeapons].health, max_power_level);
+        tubeRechargeFactor = std::min(systems[SYS_MissileSystem].power_level * systems[SYS_MissileSystem].health, max_power_level);
+        rotationSpeed = shipTemplate->turnSpeed * std::min(systems[SYS_Maneuver].power_level * systems[SYS_Maneuver].health, max_power_level);
+        impulseMaxSpeed = shipTemplate->impulseSpeed * std::min(systems[SYS_Impulse].power_level * systems[SYS_Impulse].health, max_power_level);
+        warpSpeedPerWarpLevel = shipTemplate->warpSpeed * std::min(systems[SYS_Warp].power_level * systems[SYS_Warp].health, max_power_level);
+        jumpSpeedFactor = std::min(systems[SYS_JumpDrive].power_level * systems[SYS_JumpDrive].health, max_power_level);
+        front_shield_recharge_factor = std::min(systems[SYS_FrontShield].power_level * systems[SYS_FrontShield].health, max_power_level);
+        rear_shield_recharge_factor = std::min(systems[SYS_RearShield].power_level * systems[SYS_RearShield].health, max_power_level);
 
         if (hasWarpdrive && warpRequest > 0 && !(hasJumpdrive && jumpDelay > 0))
         {
@@ -290,21 +290,21 @@ void PlayerSpaceship::setSystemCoolant(ESystem system, float level)
         if (!hasSystem(ESystem(n))) continue;
         if (n == system) continue;
 
-        total_coolant += systems[n].coolantLevel;
+        total_coolant += systems[n].coolant_level;
         cnt++;
     }
-    if (total_coolant > maxCoolant - level)
+    if (total_coolant > max_coolant - level)
     {
         for(int n=0; n<SYS_COUNT; n++)
         {
             if (!hasSystem(ESystem(n))) continue;
             if (n == system) continue;
 
-            systems[n].coolantLevel *= (maxCoolant - level) / total_coolant;
+            systems[n].coolant_level *= (max_coolant - level) / total_coolant;
         }
     }
 
-    systems[system].coolantLevel = level;
+    systems[system].coolant_level = level;
 }
 
 void PlayerSpaceship::setCommsMessage(string message)
@@ -392,7 +392,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
         }
         break;
     case CMD_SET_MAIN_SCREEN_SETTING:
-        packet >> mainScreenSetting;
+        packet >> main_screen_setting;
         break;
     case CMD_SCAN_OBJECT:
         {
@@ -413,7 +413,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             float level;
             packet >> system >> level;
             if (system < SYS_COUNT && level >= 0.0 && level <= 3.0)
-                systems[system].powerLevel = level;
+                systems[system].power_level = level;
         }
         break;
     case CMD_SET_SYSTEM_COOLANT:

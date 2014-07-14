@@ -174,10 +174,10 @@ void CrewUI::engineeringUI()
     for(int n=0; n<SYS_COUNT; n++)
     {
         if (!mySpaceship->hasSystem(ESystem(n))) continue;
-        if (mySpaceship->systems[n].powerUserFactor < 0)
-            net_power -= mySpaceship->systems[n].powerUserFactor * mySpaceship->systems[n].health * mySpaceship->systems[n].powerLevel;
+        if (mySpaceship->systems[n].power_user_factor < 0)
+            net_power -= mySpaceship->systems[n].power_user_factor * mySpaceship->systems[n].health * mySpaceship->systems[n].power_level;
         else
-            net_power -= mySpaceship->systems[n].powerUserFactor * mySpaceship->systems[n].powerLevel;
+            net_power -= mySpaceship->systems[n].power_user_factor * mySpaceship->systems[n].power_level;
     }
     text(sf::FloatRect(50, 100, 200, 20), "Energy: " + string(int(mySpaceship->energy_level)) + " (" + string(net_power) + ")", AlignLeft, 20);
     text(sf::FloatRect(50, 120, 200, 20), "Hull: " + string(int(mySpaceship->hull_strength * 100 / mySpaceship->hull_max)), AlignLeft, 20);
@@ -197,15 +197,15 @@ void CrewUI::engineeringUI()
 
         vtext(sf::FloatRect(x + 20, 550, 30, 300), "Dmg:" + string(int(100 - mySpaceship->systems[n].health * 100)) + "%", AlignRight, 15);
         vtext(sf::FloatRect(x, 550, 50, 300), getSystemName(ESystem(n)), AlignLeft);
-        text(sf::FloatRect(x + 50, 530, 50, 20), string(int(mySpaceship->systems[n].powerLevel * 100)) + "%", AlignCenter, 20);
-        float ret = vslider(sf::FloatRect(x + 50, 550, 50, 300), mySpaceship->systems[n].powerLevel, 3.0, 0.0, 1.0);
+        text(sf::FloatRect(x + 50, 530, 50, 20), string(int(mySpaceship->systems[n].power_level * 100)) + "%", AlignCenter, 20);
+        float ret = vslider(sf::FloatRect(x + 50, 550, 50, 300), mySpaceship->systems[n].power_level, 3.0, 0.0, 1.0);
         if (ret < 1.25 && ret > 0.75)
             ret = 1.0;
-        if (mySpaceship->systems[n].powerLevel != ret)
+        if (mySpaceship->systems[n].power_level != ret)
             mySpaceship->commandSetSystemPower(ESystem(n), ret);
-        vprogressBar(sf::FloatRect(x + 110, 500, 50, 50), mySpaceship->systems[n].heatLevel, 0.0, 1.0, sf::Color(255, 255 * (1.0 - mySpaceship->systems[n].heatLevel), 0));
-        ret = vslider(sf::FloatRect(x + 110, 550, 50, 300), mySpaceship->systems[n].coolantLevel, 10.0, 0.0);
-        if (mySpaceship->systems[n].coolantLevel != ret)
+        vprogressBar(sf::FloatRect(x + 110, 500, 50, 50), mySpaceship->systems[n].heat_level, 0.0, 1.0, sf::Color(255, 255 * (1.0 - mySpaceship->systems[n].heat_level), 0));
+        ret = vslider(sf::FloatRect(x + 110, 550, 50, 300), mySpaceship->systems[n].coolant_level, 10.0, 0.0);
+        if (mySpaceship->systems[n].coolant_level != ret)
             mySpaceship->commandSetSystemCoolant(ESystem(n), ret);
         x += 160;
     }
@@ -673,7 +673,7 @@ void CrewUI::singlePilotUI()
         if (button(sf::FloatRect(820, 800, 300, 50), "Close channel"))
             mySpaceship->commandCloseTextComm();
     }else{
-        switch(mySpaceship->mainScreenSetting)
+        switch(mySpaceship->main_screen_setting)
         {
         case MSS_LongRange:
             drawRadar(sf::Vector2f(1200, 450), 380, 50000, true, NULL, sf::FloatRect(800, 0, 800, 900));
