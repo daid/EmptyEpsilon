@@ -594,7 +594,7 @@ void PlayerSpaceship::commandUndock()
     sendCommand(packet);
 }
 
-void PlayerSpaceship::commandOpenComm(P<SpaceObject> obj)
+void PlayerSpaceship::commandOpenTextComm(P<SpaceObject> obj)
 {
     if (!obj) return;
     sf::Packet packet;
@@ -602,7 +602,22 @@ void PlayerSpaceship::commandOpenComm(P<SpaceObject> obj)
     sendCommand(packet);
 }
 
-void PlayerSpaceship::commandCloseComm()
+void PlayerSpaceship::commandOpenVoiceComm(P<SpaceObject> obj)
+{
+    if(!obj) return;
+    sf::Packet packet;
+    packet << CMD_OPEN_VOICE_COMM << obj->getMultiplayerId();
+    sendCommand(packet);
+}
+
+void PlayerSpaceship::commandCloseVoiceComm()
+{
+    sf::Packet packet;
+    packet << CMD_CLOSE_VOICE_COMM;
+    sendCommand(packet);
+}
+
+void PlayerSpaceship::commandCloseTextComm()
 {
     sf::Packet packet;
     packet << CMD_CLOSE_TEXT_COMM;

@@ -323,7 +323,7 @@ void CrewUI::commsUI()
 {
     switch(mySpaceship->comms_state)
     {
-    case CS_Inactive:
+    case CS_Inactive: //Standard state; not doing anything in particular.
         {
             PVector<SpaceObject> station_list;
             PVector<SpaceObject> friendly_list;
@@ -331,10 +331,10 @@ void CrewUI::commsUI()
             PVector<SpaceObject> enemy_list;
             PVector<SpaceObject> unknown_list;
             PVector<SpaceObject> player_list;
-            foreach(SpaceObject, obj, spaceObjectList)
+            foreach(SpaceObject, obj, spaceObjectList) //Loop through all objects in space.
             {
                 if (sf::length(obj->getPosition() - mySpaceship->getPosition()) < PlayerSpaceship::max_comm_range)
-                {
+                { //Object is within range
                     P<SpaceStation> station = obj;
                     P<SpaceShip> ship = obj;
                     if (station)
@@ -410,47 +410,50 @@ void CrewUI::commsUI()
                         comms_open_channel_type = OCT_PlayerShip;
                     y += 50;
                 }
-            }else{
+            }else
+            { //Target is selected (eg; subsection between station/friendly/neutral/etc).
                 PVector<SpaceObject> show_list;
                 switch(comms_open_channel_type)
                 {
-                case OCT_Station:
-                    show_list = station_list;
-                    break;
-                case OCT_FriendlyShip:
-                    show_list = friendly_list;
-                    break;
-                case OCT_NeutralShip:
-                    show_list = neutral_list;
-                    break;
-                case OCT_EnemyShip:
-                    show_list = enemy_list;
-                    break;
-                case OCT_UnknownShip:
-                    show_list = unknown_list;
-                    break;
-                case OCT_PlayerShip:
-                    show_list = player_list;
-                default:
-                    break;
+                    case OCT_Station:
+                        show_list = station_list;
+                        break;
+                    case OCT_FriendlyShip:
+                        show_list = friendly_list;
+                        break;
+                    case OCT_NeutralShip:
+                        show_list = neutral_list;
+                        break;
+                    case OCT_EnemyShip:
+                        show_list = enemy_list;
+                        break;
+                    case OCT_UnknownShip:
+                        show_list = unknown_list;
+                        break;
+                    case OCT_PlayerShip:
+                        show_list = player_list;
+                    default:
+                        break;
                 }
+
                 float x = 50;
                 float y = 150;
                 foreach(SpaceObject, obj, show_list)
                 {
                     P<PlayerSpaceship> playerShip = obj;
-                    if (playerShip)
+                    if (playerShip) //Why do we make a distinction here? Seems to me a player ship also has a callsign?
                     {
                         if (button(sf::FloatRect(x, y, 300, 50), playerShip->shipTemplate->name))
                         {
-                            mySpaceship->commandOpenComm(obj);
+                            mySpaceship->commandOpenTextComm(obj);
                             comms_open_channel_type = OCT_None;
                         }
                         y += 50;
-                    }else{
+                    } else
+                    {
                         if (button(sf::FloatRect(x, y, 300, 50), obj->getCallSign()))
                         {
-                            mySpaceship->commandOpenComm(obj);
+                            mySpaceship->commandOpenTextComm(obj);
                             comms_open_channel_type = OCT_None;
                         }
                         y += 50;
@@ -470,7 +473,7 @@ void CrewUI::commsUI()
         text(sf::FloatRect(50, 100, 600, 50), "Opening communication channel...");
         progressBar(sf::FloatRect(50, 150, 600, 50), mySpaceship->comms_open_delay, PlayerSpaceship::comms_channel_open_time, 0.0);
         if (button(sf::FloatRect(50, 800, 300, 50), "Cancel call"))
-            mySpaceship->commandCloseComm();
+            mySpaceship->commandCloseTextComm();
         break;
     case CS_ChannelOpen:
         {
@@ -492,7 +495,7 @@ void CrewUI::commsUI()
             }
 
             if (button(sf::FloatRect(50, 800, 300, 50), "Close channel"))
-                mySpaceship->commandCloseComm();
+                mySpaceship->commandCloseTextComm();
         }
         break;
     case CS_ChannelOpenPlayer:
@@ -514,19 +517,19 @@ void CrewUI::commsUI()
             }
 
             if (button(sf::FloatRect(50, 800, 300, 50), "Close channel"))
-                mySpaceship->commandCloseComm();
+                mySpaceship->commandCloseTextComm();
         }
         break;
     case CS_ChannelFailed:
         text(sf::FloatRect(50, 100, 600, 50), "Failed to open communication channel.");
         text(sf::FloatRect(50, 150, 600, 50), "No response.");
         if (button(sf::FloatRect(50, 800, 300, 50), "Close channel"))
-            mySpaceship->commandCloseComm();
+            mySpaceship->commandCloseTextComm();
         break;
     case CS_ChannelBroken:
         text(sf::FloatRect(50, 100, 600, 50), "ERROR 5812 - Checksum failed.");
         if (button(sf::FloatRect(50, 800, 300, 50), "Close channel"))
-            mySpaceship->commandCloseComm();
+            mySpaceship->commandCloseTextComm();
         break;
     }
 }
@@ -664,7 +667,7 @@ void CrewUI::singlePilotUI()
         }
 
         if (button(sf::FloatRect(820, 800, 300, 50), "Close channel"))
-            mySpaceship->commandCloseComm();
+            mySpaceship->commandCloseTextComm();
     }else{
         switch(mySpaceship->mainScreenSetting)
         {

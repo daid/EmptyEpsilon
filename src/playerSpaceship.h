@@ -21,7 +21,7 @@ public:
     float powerLevel; //0.0-3.0, default 1.0
     float heatLevel; //0.0-1.0, system will damage at 1.0
     float coolantLevel; //0.0-10.0
-    
+
     float powerUserFactor;//const
 };
 
@@ -54,7 +54,7 @@ public:
     P<SpaceShip> scanning_ship; //Server only
     float scanning_delay;
     bool auto_repair_enabled;
-    
+
     ECommsState comms_state;
     float comms_open_delay;
     string comms_incomming_message;
@@ -62,7 +62,7 @@ public:
     int8_t comms_reply_count;
     PlayerCommsReply comms_reply[max_comms_reply_count];
     CommsScriptInterface comms_script_interface;  //Server only
-    
+
     EMainScreenSetting mainScreenSetting;
 
     PlayerSpaceship();
@@ -83,14 +83,16 @@ public:
     void commandSetSystemCoolant(ESystem system, float coolant_level);
     void commandDock(P<SpaceStation> station);
     void commandUndock();
-    void commandOpenComm(P<SpaceObject> obj);
-    void commandCloseComm();
+    void commandOpenTextComm(P<SpaceObject> obj);
+    void commandCloseTextComm();
+    void commandOpenVoiceComm(P<SpaceObject> obj);
+    void commandCloseVoiceComm();
     void commandSendComm(int8_t index);
     void commandSendCommPlayer(string message);
     void commandSetAutoRepair(bool enabled);
-    
+
     virtual string getCallSign() { return ""; }
-    
+
     virtual void executeJump(float distance);
     virtual void fireBeamWeapon(int index, P<SpaceObject> target);
     virtual void hullDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type);
@@ -98,7 +100,7 @@ public:
 
     virtual void update(float delta);
     bool useEnergy(float amount) { if (energy_level >= amount) { energy_level -= amount; return true; } return false; }
-    
+
     void setCommsMessage(string message);
     void addCommsReply(int32_t id, string message);
 };
