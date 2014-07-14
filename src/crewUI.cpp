@@ -6,14 +6,14 @@
 
 CrewUI::CrewUI()
 {
-    jumpDistance = 1.0;
-    tubeLoadType = MW_None;
-    scienceRadarDistance = 50000;
+    jump_distance = 1.0;
+    tube_load_type = MW_None;
+    science_radar_distance = 50000;
     comms_open_channel_type = OCT_None;
-    
-    for(int n=0; n<maxCrewPositions; n++)
+
+    for(int n=0; n<max_crew_positions; n++)
     {
-        if (myPlayerInfo->crew_position[n])
+        if (my_player_info->crew_position[n])
         {
             showPosition = ECrewPosition(n);
             break;
@@ -50,16 +50,16 @@ void CrewUI::onGui()
             text(sf::FloatRect(0, 500, 1600, 100), "???", AlignCenter, 100);
             break;
         }
-        if (myPlayerInfo->main_screen_control)
+        if (my_player_info->main_screen_control)
             mainScreenSelectGUI();
     }else{
         drawStatic();
     }
 
     int offset = 0;
-    for(int n=0; n<maxCrewPositions; n++)
+    for(int n=0; n<max_crew_positions; n++)
     {
-        if (myPlayerInfo->crew_position[n])
+        if (my_player_info->crew_position[n])
         {
             if (toggleButton(sf::FloatRect(200 * offset, 0, 200, 25), showPosition == ECrewPosition(n), getCrewPositionName(ECrewPosition(n)), 20))
             {
@@ -68,7 +68,7 @@ void CrewUI::onGui()
             offset++;
         }
     }
-    
+
     MainUIBase::onGui();
 }
 
@@ -81,11 +81,11 @@ void CrewUI::helmsUI()
         if (sf::length(diff) < 400)
             mySpaceship->commandTargetRotation(sf::vector2ToAngle(diff));
     }
-    
+
     drawRadar(sf::Vector2f(800, 450), 400, 5000, false, mySpaceship->getTarget());
 
     text(sf::FloatRect(10, 100, 200, 20), "Energy: " + string(int(mySpaceship->energy_level)), AlignLeft, 20);
-    
+
     impulseSlider(sf::FloatRect(20, 500, 50, 300), 20);
 
     float x = 100;
@@ -152,12 +152,12 @@ void CrewUI::weaponsUI()
             if (mySpaceship->weapon_storage_max[n] > 0)
             {
                 y -= 30;
-                if (toggleButton(sf::FloatRect(20, y, 200, 30), tubeLoadType == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(mySpaceship->weapon_storage[n]), 25))
+                if (toggleButton(sf::FloatRect(20, y, 200, 30), tube_load_type == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(mySpaceship->weapon_storage[n]), 25))
                 {
-                    if (tubeLoadType == n)
-                        tubeLoadType = MW_None;
+                    if (tube_load_type == n)
+                        tube_load_type = MW_None;
                     else
-                        tubeLoadType = EMissileWeapons(n);
+                        tube_load_type = EMissileWeapons(n);
                 }
             }
         }
@@ -186,7 +186,7 @@ void CrewUI::engineeringUI()
     {
         mySpaceship->commandSetAutoRepair(!mySpaceship->auto_repair_enabled);
     }
-    
+
     ESystem highlight_system = SYS_None;
     int x = 20;
     for(int n=0; n<SYS_COUNT; n++)
@@ -194,7 +194,7 @@ void CrewUI::engineeringUI()
         if (!mySpaceship->hasSystem(ESystem(n))) continue;
         if (sf::FloatRect(x + 20, 530, 140, 320).contains(mouse))
             highlight_system = ESystem(n);
-        
+
         vtext(sf::FloatRect(x + 20, 550, 30, 300), "Dmg:" + string(int(100 - mySpaceship->systems[n].health * 100)) + "%", AlignRight, 15);
         vtext(sf::FloatRect(x, 550, 50, 300), getSystemName(ESystem(n)), AlignLeft);
         text(sf::FloatRect(x + 50, 530, 50, 20), string(int(mySpaceship->systems[n].powerLevel * 100)) + "%", AlignCenter, 20);
@@ -222,12 +222,12 @@ void CrewUI::engineeringUI()
         textureManager.setTexture(sprite, "RadarBlip.png");
         sprite.setPosition(position);
         window.draw(sprite);
-        
+
         if (InputHandler::mouseIsPressed(sf::Mouse::Left) && sf::length(mouse - position) < 48.0f/2.0)
         {
             selected_crew = rc;
         }
-        
+
         if (selected_crew == rc)
         {
             sf::Sprite select_sprite;
@@ -236,7 +236,7 @@ void CrewUI::engineeringUI()
             window.draw(select_sprite);
         }
     }
-    
+
     if (InputHandler::mouseIsPressed(sf::Mouse::Right) && selected_crew)
     {
         sf::Vector2i target_pos = sf::Vector2i((mouse - interial_position) / 48.0f);
@@ -251,7 +251,7 @@ void CrewUI::scienceUI()
 {
     sf::Vector2f mouse = InputHandler::getMousePos();
 
-    float radarDistance = scienceRadarDistance;
+    float radarDistance = science_radar_distance;
     if (InputHandler::mouseIsPressed(sf::Mouse::Left))
     {
         sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
@@ -274,7 +274,7 @@ void CrewUI::scienceUI()
     }
 
     drawRadar(sf::Vector2f(800, 450), 400, radarDistance, true, scienceTarget);
-    
+
     if (scienceTarget)
     {
         float distance = sf::length(scienceTarget->getPosition() - mySpaceship->getPosition());
@@ -308,15 +308,15 @@ void CrewUI::scienceUI()
             text(sf::FloatRect(20, 200, 200, 20), "Shields: " + string(int(station->shields)), AlignLeft, 20);
         }
     }
-    
-    if (scienceRadarDistance == 50000 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 1x", 25))
-        scienceRadarDistance = 25000;
-    else if (scienceRadarDistance == 25000 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 2x", 25))
-        scienceRadarDistance = 12500;
-    else if (scienceRadarDistance == 12500 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 4x", 25))
-        scienceRadarDistance = 5000;
-    else if (scienceRadarDistance == 5000 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 10x", 25))
-        scienceRadarDistance = 50000;
+
+    if (science_radar_distance == 50000 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 1x", 25))
+        science_radar_distance = 25000;
+    else if (science_radar_distance == 25000 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 2x", 25))
+        science_radar_distance = 12500;
+    else if (science_radar_distance == 12500 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 4x", 25))
+        science_radar_distance = 5000;
+    else if (science_radar_distance == 5000 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 10x", 25))
+        science_radar_distance = 50000;
 }
 
 void CrewUI::commsUI()
@@ -368,7 +368,7 @@ void CrewUI::commsUI()
                     }
                 }
             }
-            
+
             text(sf::FloatRect(50, 100, 600, 50), "Open comm channel to:");
             if (comms_open_channel_type == OCT_None)
             {
@@ -490,7 +490,7 @@ void CrewUI::commsUI()
                 }
                 y += 50;
             }
-            
+
             if (button(sf::FloatRect(50, 800, 300, 50), "Close channel"))
                 mySpaceship->commandCloseComm();
         }
@@ -512,7 +512,7 @@ void CrewUI::commsUI()
                 mySpaceship->commandSendCommPlayer(comms_player_message);
                 comms_player_message = "";
             }
-            
+
             if (button(sf::FloatRect(50, 800, 300, 50), "Close channel"))
                 mySpaceship->commandCloseComm();
         }
@@ -559,7 +559,7 @@ void CrewUI::singlePilotUI()
                 mySpaceship->commandTargetRotation(sf::vector2ToAngle(diff));
         }
     }
-    
+
     drawRadar(sf::Vector2f(400, 450), 380, radarDistance, false, mySpaceship->getTarget(), sf::FloatRect(0, 0, 800, 900));
 
     text(sf::FloatRect(10, 30, 200, 20), "Energy: " + string(int(mySpaceship->energy_level)), AlignLeft, 20);
@@ -571,7 +571,7 @@ void CrewUI::singlePilotUI()
             mySpaceship->commandSetShields(!mySpaceship->shields_active);
     }
     dockingButton(sf::FloatRect(10, 115, 170, 25), 20);
-    
+
     impulseSlider(sf::FloatRect(10, 650, 40, 200), 15);
     float x = 60;
     if (mySpaceship->hasWarpdrive)
@@ -599,17 +599,17 @@ void CrewUI::singlePilotUI()
             if (mySpaceship->weapon_storage_max[n] > 0)
             {
                 y -= 25;
-                if (toggleButton(sf::FloatRect(650, y, 150, 25), tubeLoadType == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(mySpaceship->weapon_storage[n]), 20))
+                if (toggleButton(sf::FloatRect(650, y, 150, 25), tube_load_type == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(mySpaceship->weapon_storage[n]), 20))
                 {
-                    if (tubeLoadType == n)
-                        tubeLoadType = MW_None;
+                    if (tube_load_type == n)
+                        tube_load_type = MW_None;
                     else
-                        tubeLoadType = EMissileWeapons(n);
+                        tube_load_type = EMissileWeapons(n);
                 }
             }
         }
     }
-    
+
     if (mySpaceship->getTarget())
     {
         P<SpaceObject> target = mySpaceship->getTarget();
@@ -662,7 +662,7 @@ void CrewUI::singlePilotUI()
             mySpaceship->commandSendCommPlayer(comms_player_message);
             comms_player_message = "";
         }
-        
+
         if (button(sf::FloatRect(820, 800, 300, 50), "Close channel"))
             mySpaceship->commandCloseComm();
     }else{
@@ -703,16 +703,16 @@ void CrewUI::warpSlider(sf::FloatRect rect, float text_size)
 
 void CrewUI::jumpSlider(sf::FloatRect rect, float text_size)
 {
-    jumpDistance = vslider(rect, jumpDistance, 40.0, 1.0, 1.0);
-    jumpDistance = roundf(jumpDistance * 10.0f) / 10.0f;
-    text(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(jumpDistance, 1) + "km", AlignLeft, text_size);
+    jump_distance = vslider(rect, jump_distance, 40.0, 1.0, 1.0);
+    jump_distance = roundf(jump_distance * 10.0f) / 10.0f;
+    text(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(jump_distance, 1) + "km", AlignLeft, text_size);
     if (mySpaceship->jumpDelay > 0.0)
     {
         text(sf::FloatRect(rect.left, rect.top + rect.height + text_size, rect.width, text_size), string(int(ceilf(mySpaceship->jumpDelay))), AlignLeft, text_size);
     }else{
         if (button(sf::FloatRect(rect.left - text_size / 2, rect.top + rect.height + text_size, rect.width + text_size, text_size), "Jump", text_size))
         {
-            mySpaceship->commandJump(jumpDistance);
+            mySpaceship->commandJump(jump_distance);
         }
     }
 }
@@ -732,7 +732,7 @@ void CrewUI::dockingButton(sf::FloatRect rect, float text_size)
                     break;
                 station = NULL;
             }
-            
+
             if (station)
             {
                 if (button(rect, "Request Dock", text_size))
@@ -757,8 +757,8 @@ void CrewUI::weaponTube(int n, sf::FloatRect load_rect, sf::FloatRect fire_rect,
     switch(mySpaceship->weaponTube[n].state)
     {
     case WTS_Empty:
-        if (toggleButton(load_rect, tubeLoadType != MW_None && mySpaceship->weapon_storage[tubeLoadType] > 0, "Load", text_size) && tubeLoadType != MW_None)
-            mySpaceship->commandLoadTube(n, tubeLoadType);
+        if (toggleButton(load_rect, tube_load_type != MW_None && mySpaceship->weapon_storage[tube_load_type] > 0, "Load", text_size) && tube_load_type != MW_None)
+            mySpaceship->commandLoadTube(n, tube_load_type);
         disabledButton(fire_rect, "Empty", text_size);
         break;
     case WTS_Loaded:

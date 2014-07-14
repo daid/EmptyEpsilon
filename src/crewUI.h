@@ -20,20 +20,20 @@ enum CommsOpenChannelType
 class CrewUI : public MainUIBase
 {
     ECrewPosition showPosition;
-    EMissileWeapons tubeLoadType;
-    float jumpDistance;
+    EMissileWeapons tube_load_type;
+    float jump_distance;
     P<RepairCrew> selected_crew;
-    
+
     P<SpaceObject> scienceTarget;
-    float scienceRadarDistance;
-    
+    float science_radar_distance;
+
     CommsOpenChannelType comms_open_channel_type;
     string comms_player_message;
 public:
     CrewUI();
-    
+
     virtual void onGui();
-    
+
     void helmsUI();
     void weaponsUI();
     void engineeringUI();
@@ -41,8 +41,8 @@ public:
     void commsUI();
 
     void singlePilotUI();
-    
-    
+
+
     void impulseSlider(sf::FloatRect rect, float text_size);
     void warpSlider(sf::FloatRect rect, float text_size);
     void jumpSlider(sf::FloatRect rect, float text_size);

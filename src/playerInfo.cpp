@@ -5,7 +5,7 @@ static const int16_t CMD_UPDATE_SHIP_ID = 0x0002;
 static const int16_t CMD_UPDATE_MAIN_SCREEN_CONTROL = 0x0003;
 
 P<GameGlobalInfo> gameGlobalInfo;
-P<PlayerInfo> myPlayerInfo;
+P<PlayerInfo> my_player_info;
 P<PlayerSpaceship> mySpaceship;
 PVector<PlayerInfo> playerInfoList;
 
@@ -14,7 +14,7 @@ GameGlobalInfo::GameGlobalInfo()
 : MultiplayerObject("GameGlobalInfo")
 {
     assert(!gameGlobalInfo);
-    
+
     gameGlobalInfo = this;
     for(int n=0; n<maxPlayerShips; n++)
     {
@@ -35,7 +35,7 @@ void GameGlobalInfo::setPlayerShip(int index, P<PlayerSpaceship> ship)
 {
     assert(index >= 0 && index < maxPlayerShips);
     assert(gameServer);
-    
+
     if (ship)
         playerShipId[index] = ship->getMultiplayerId();
     else
@@ -71,14 +71,14 @@ PlayerInfo::PlayerInfo()
     main_screen_control = false;
     registerMemberReplication(&clientId);
 
-    for(int n=0; n<maxCrewPositions; n++)
+    for(int n=0; n<max_crew_positions; n++)
     {
         crew_position[n] = false;
         registerMemberReplication(&crew_position[n]);
     }
     registerMemberReplication(&ship_id);
     registerMemberReplication(&main_screen_control);
-    
+
     playerInfoList.push_back(this);
 }
 
@@ -116,7 +116,7 @@ void PlayerInfo::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             bool active;
             packet >> position >> active;
             crew_position[position] = active;
-            
+
             if (isMainScreen())
                 main_screen_control = false;
             if (active && mySpaceship)
@@ -143,7 +143,7 @@ void PlayerInfo::onReceiveCommand(int32_t clientId, sf::Packet& packet)
 
 bool PlayerInfo::isMainScreen()
 {
-    for(int n=0; n<maxCrewPositions; n++)
+    for(int n=0; n<max_crew_positions; n++)
         if (crew_position[n])
             return false;
     return true;

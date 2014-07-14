@@ -10,21 +10,21 @@ ShipSelectionScreen::ShipSelectionScreen()
 {
     active_scenario_index = 0;
     ship_template_index = 0;
-    
+
     if (gameServer)
     {
         std::vector<string> scenario_filenames = findResources("scenario_*.lua");
         std::sort(scenario_filenames.begin(), scenario_filenames.end());
-        
+
         for(unsigned int n=0; n<scenario_filenames.size(); n++)
         {
             P<ResourceStream> stream = getResourceStream(scenario_filenames[n]);
             if (!stream) continue;
-            
+
             ScenarioInfo info;
             info.filename = scenario_filenames[n];
             info.name = scenario_filenames[n].substr(9, -4);
-            
+
             for(int i=0; i<10; i++)
             {
                 string line = stream->readLine().strip();
@@ -66,16 +66,16 @@ void ShipSelectionScreen::onGui()
                 main_screen_control_cnt++;
         }
 
-        text(sf::FloatRect(800, 100, 300, 50), string(myPlayerInfo->isMainScreen() ? "*" : " ") + "Main screen", AlignCenter);
+        text(sf::FloatRect(800, 100, 300, 50), string(my_player_info->isMainScreen() ? "*" : " ") + "Main screen", AlignCenter);
         text(sf::FloatRect(1100, 100, 300, 50), string(mainCnt));
-        
+
         float y = 150;
-        for(int n=0; n<maxCrewPositions; n++)
+        for(int n=0; n<max_crew_positions; n++)
         {
             if (n == singlePilot) y += 25;
-            if (toggleButton(sf::FloatRect(800, y, 300, 50), myPlayerInfo->crew_position[n], getCrewPositionName(ECrewPosition(n))))
+            if (toggleButton(sf::FloatRect(800, y, 300, 50), my_player_info->crew_position[n], getCrewPositionName(ECrewPosition(n))))
             {
-                myPlayerInfo->setCrewPosition(ECrewPosition(n), !myPlayerInfo->crew_position[n]);
+                my_player_info->setCrewPosition(ECrewPosition(n), !my_player_info->crew_position[n]);
             }
             int cnt = 0;
             foreach(PlayerInfo, i, playerInfoList)
@@ -85,10 +85,10 @@ void ShipSelectionScreen::onGui()
             y += 50;
         }
         y += 25;
-        if (!myPlayerInfo->isMainScreen())
+        if (!my_player_info->isMainScreen())
         {
-            if (toggleButton(sf::FloatRect(800, y, 300, 50), myPlayerInfo->main_screen_control, "Control main screen"))
-                myPlayerInfo->setMainScreenControl(!myPlayerInfo->main_screen_control);
+            if (toggleButton(sf::FloatRect(800, y, 300, 50), my_player_info->main_screen_control, "Control main screen"))
+                my_player_info->setMainScreenControl(!my_player_info->main_screen_control);
         }else{
             disabledButton(sf::FloatRect(800, y, 300, 50), "Control main screen");
         }
@@ -99,7 +99,7 @@ void ShipSelectionScreen::onGui()
             if (gameServer && !engine->getObject("scenario") && active_scenario_index < int(scenarios.size()))
                 engine->registerObject("scenario", new ScriptObject(scenarios[active_scenario_index].filename));
             destroy();
-            if (myPlayerInfo->isMainScreen())
+            if (my_player_info->isMainScreen())
             {
                 new MainScreenUI();
             }else{
@@ -107,7 +107,7 @@ void ShipSelectionScreen::onGui()
             }
         }
     }
-    
+
     for(int n=0; n<GameGlobalInfo::maxPlayerShips; n++)
     {
         P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
@@ -118,13 +118,13 @@ void ShipSelectionScreen::onGui()
                 if (toggleButton(sf::FloatRect(200, 150 + (n % 8) * 50, 300, 50), mySpaceship == ship, ship->shipTemplate->name + " " + string(n + 1)))
                 {
                     mySpaceship = ship;
-                    myPlayerInfo->setShipId(mySpaceship->getMultiplayerId());
+                    my_player_info->setShipId(mySpaceship->getMultiplayerId());
                 }
             }else{
                 if (toggleButton(sf::FloatRect(200 + 200 + (n / 8) * 100, 150 + (n % 8) * 50, 100, 50), mySpaceship == ship, string(n + 1)))
                 {
                     mySpaceship = ship;
-                    myPlayerInfo->setShipId(mySpaceship->getMultiplayerId());
+                    my_player_info->setShipId(mySpaceship->getMultiplayerId());
                 }
             }
         }
@@ -151,20 +151,20 @@ void ShipSelectionScreen::onGui()
             mySpaceship->setRotation(random(0, 360));
             mySpaceship->targetRotation = mySpaceship->getRotation();
             mySpaceship->setPosition(sf::Vector2f(random(-100, 100), random(-100, 100)));
-            myPlayerInfo->setShipId(mySpaceship->getMultiplayerId());
+            my_player_info->setShipId(mySpaceship->getMultiplayerId());
             if (gameGlobalInfo->insertPlayerShip(mySpaceship) < 0)
             {
                 mySpaceship->destroy();
             }
         }
-        
+
         if (button(sf::FloatRect(1200, 150, 300, 50), "Game Master"))
         {
             if (gameServer && !engine->getObject("scenario") && active_scenario_index < int(scenarios.size()))
                 engine->registerObject("scenario", new ScriptObject(scenarios[active_scenario_index].filename));
 
             mySpaceship = NULL;
-            myPlayerInfo->setShipId(-1);
+            my_player_info->setShipId(-1);
             destroy();
             new GameMasterUI();
         }
@@ -175,7 +175,7 @@ void ShipSelectionScreen::onGui()
             disconnectFromServer();
             new MainMenu();
         }
-        
+
         if (active_scenario_index < int(scenarios.size()) && !engine->getObject("scenario"))
         {
             active_scenario_index += selector(sf::FloatRect(800, 650, 300, 50), scenarios[active_scenario_index].name);
