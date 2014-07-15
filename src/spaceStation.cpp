@@ -98,6 +98,16 @@ void SpaceStation::update(float delta)
     }
 }
 
+bool SpaceStation::canBeDockedBy(P<SpaceObject> obj)
+{
+    if (isEnemy(obj))
+        return false;
+    P<SpaceShip> ship = obj;
+    if (!ship)
+        return false;
+    return true;
+}
+
 void SpaceStation::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type)
 {
     shields -= damageAmount;

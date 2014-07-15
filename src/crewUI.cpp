@@ -724,19 +724,19 @@ void CrewUI::dockingButton(sf::FloatRect rect, float text_size)
     case DS_NotDocking:
         {
             PVector<Collisionable> obj_list = CollisionManager::queryArea(mySpaceship->getPosition() - sf::Vector2f(1000, 1000), mySpaceship->getPosition() + sf::Vector2f(1000, 1000));
-            P<SpaceStation> station;
+            P<SpaceObject> dock_object;
             foreach(Collisionable, obj, obj_list)
             {
-                station = obj;
-                if (station && sf::length(station->getPosition() - mySpaceship->getPosition()) < 1000.0)
+                dock_object = obj;
+                if (dock_object && dock_object->canBeDockedBy(mySpaceship) && sf::length(dock_object->getPosition() - mySpaceship->getPosition()) < 1000.0)
                     break;
-                station = NULL;
+                dock_object = NULL;
             }
             
-            if (station)
+            if (dock_object)
             {
                 if (button(rect, "Request Dock", text_size))
-                    mySpaceship->commandDock(station);
+                    mySpaceship->commandDock(dock_object);
             }else{
                 disabledButton(rect, "Request Dock", text_size);
             }

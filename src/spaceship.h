@@ -96,7 +96,7 @@ public:
     bool scanned_by_player;
     
     EDockingState docking_state;
-    P<SpaceStation> docking_target; //Server only
+    P<SpaceObject> docking_target; //Server only
 
     SpaceShip(string multiplayerClassName);
     
@@ -117,7 +117,7 @@ public:
     void loadTube(int tubeNr, EMissileWeapons type);
     void fireTube(int tubeNr);
     void initJump(float distance);
-    void requestDock(P<SpaceStation> target);
+    void requestDock(P<SpaceObject> target);
     void requestUndock();
     void setScanned(bool value) { scanned_by_player = value; }
     

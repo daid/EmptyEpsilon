@@ -23,6 +23,7 @@ public:
     
     virtual string getCallSign() { return "DS" + string(getMultiplayerId()); }
     virtual bool canBeTargeted() { return true; }
+    virtual bool canBeDockedBy(P<SpaceObject> obj);
     virtual bool hasShield() { return shields > (maxShields / 50.0); }
     virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type);
 };

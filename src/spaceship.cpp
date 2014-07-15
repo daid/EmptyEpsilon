@@ -463,8 +463,8 @@ void SpaceShip::collision(Collisionable* other)
 {
     if (docking_state == DS_Docking)
     {
-        P<SpaceStation> station = P<Collisionable>(other);
-        if (station == docking_target)
+        P<SpaceObject> dock_object = P<Collisionable>(other);
+        if (dock_object == docking_target)
             docking_state = DS_Docked;
     }
 }
@@ -548,9 +548,9 @@ void SpaceShip::initJump(float distance)
     }
 }
 
-void SpaceShip::requestDock(P<SpaceStation> target)
+void SpaceShip::requestDock(P<SpaceObject> target)
 {
-    if (!target || docking_state != DS_NotDocking || isEnemy(target))
+    if (!target || docking_state != DS_NotDocking || !target->canBeDockedBy(this))
         return;
     if (sf::length(getPosition() - target->getPosition()) > 1000)
         return;

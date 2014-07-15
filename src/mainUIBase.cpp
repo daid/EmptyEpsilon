@@ -31,6 +31,7 @@ void MainUIBase::onGui()
             engine->setGameSpeed(0.0);
 #ifdef DEBUG
         text(sf::FloatRect(0, 0, 1600 - 5, 20), string(gameServer->getSendDataRate() / 1000) + " kb per second", AlignRight, 15);
+        text(sf::FloatRect(0, 20, 1600 - 5, 20), string(gameServer->getSendDataRatePerClient() / 1000) + " kb per client", AlignRight, 15);
 #endif
     }
     

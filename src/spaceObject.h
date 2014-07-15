@@ -32,6 +32,7 @@ public:
     virtual string getCallSign() { return "??? (" + string(getMultiplayerId()) + ")"; }
     virtual bool canBeTargeted() { return false; }
     virtual bool canBeTargetedByPlayer() { return canBeTargeted(); }
+    virtual bool canBeDockedBy(P<SpaceObject> obj) { return false; }
     virtual bool hasShield() { return false; }
     virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type) {}
     
