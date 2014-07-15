@@ -3,16 +3,18 @@
 
 #include "engine.h"
 #include "spaceObject.h"
+#include "shipTemplate.h"
 
 class SpaceStation : public SpaceObject, public Updatable
 {
-    static const float maxShields = 400.0;
     static const float shieldRechargeRate = 0.2;
-    static const float maxHullStrength = 200;
     float shieldHitEffect;
+
+    string templateName;
+    P<ShipTemplate> shipTemplate;   //Space stations use a shipTemplate to get hull/shield and graphical information.
 public:
-    float shields;
-    float hull_strength;
+    float shields, shields_max;
+    float hull_strength, hull_max;
 
     SpaceStation();
     
@@ -24,8 +26,10 @@ public:
     virtual string getCallSign() { return "DS" + string(getMultiplayerId()); }
     virtual bool canBeTargeted() { return true; }
     virtual bool canBeDockedBy(P<SpaceObject> obj);
-    virtual bool hasShield() { return shields > (maxShields / 50.0); }
+    virtual bool hasShield() { return shields > (shields_max / 50.0); }
     virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type);
+    
+    void setTemplate(string templateName);
 };
 
 #endif//SPACE_SHIP_H

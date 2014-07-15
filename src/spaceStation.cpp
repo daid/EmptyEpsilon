@@ -11,6 +11,7 @@
 #include "scriptInterface.h"
 REGISTER_SCRIPT_SUBCLASS(SpaceStation, SpaceObject)
 {
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, setTemplate);
 }
 
 REGISTER_MULTIPLAYER_CLASS(SpaceStation, "SpaceStation");
@@ -20,28 +21,32 @@ SpaceStation::SpaceStation()
     setCollisionBox(sf::Vector2f(400, 400));
     setCollisionPhysics(true, true);
     
-    shields = maxShields;
-    hull_strength = maxHullStrength;
+    shields = shields_max = 400;
+    hull_strength = hull_max = 200;
     
+    registerMemberReplication(&templateName);
     registerMemberReplication(&shields, 1.0);
+    registerMemberReplication(&shields_max);
     registerMemberReplication(&shieldHitEffect, 0.5);
     shieldHitEffect = 0.0;
     
     comms_script_name = "comms_station.lua";
+    
+    setTemplate("Small Station");
 }
 
 void SpaceStation::draw3D()
 {
-    P<ShipTemplate> t = ShipTemplate::getTemplate("Small Station");
+    if (!shipTemplate) return;
 
     glPushMatrix();
     glTranslatef(0, 0, 50);
-    glScalef(t->scale, t->scale, t->scale);
-    objectShader.setParameter("baseMap", *textureManager.getTexture(t->colorTexture));
-    objectShader.setParameter("illuminationMap", *textureManager.getTexture(t->illuminationTexture));
-    objectShader.setParameter("specularMap", *textureManager.getTexture(t->specularTexture));
+    glScalef(shipTemplate->scale, shipTemplate->scale, shipTemplate->scale);
+    objectShader.setParameter("baseMap", *textureManager.getTexture(shipTemplate->colorTexture));
+    objectShader.setParameter("illuminationMap", *textureManager.getTexture(shipTemplate->illuminationTexture));
+    objectShader.setParameter("specularMap", *textureManager.getTexture(shipTemplate->specularTexture));
     sf::Shader::bind(&objectShader);
-    Mesh* m = Mesh::getMesh(t->model);
+    Mesh* m = Mesh::getMesh(shipTemplate->model);
     m->render();
     glPopMatrix();
 }
@@ -52,7 +57,7 @@ void SpaceStation::draw3DTransparent()
     {
         basicShader.setParameter("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
         sf::Shader::bind(&basicShader);
-        float f = (shields / maxShields) * shieldHitEffect;
+        float f = (shields / shields_max) * shieldHitEffect;
         glColor4f(f, f, f, 1);
         glRotatef(engine->getElapsedTime() * 5, 0, 0, 1);
         glScalef(getRadius(), getRadius(), getRadius());
@@ -86,11 +91,11 @@ void SpaceStation::drawRadar(sf::RenderTarget& window, sf::Vector2f position, fl
 
 void SpaceStation::update(float delta)
 {
-    if (shields < maxShields)
+    if (shields < shields_max)
     {
         shields += delta * shieldRechargeRate;
-        if (shields > maxShields)
-            shields = maxShields;
+        if (shields > shields_max)
+            shields = shields_max;
     }
     if (shieldHitEffect > 0)
     {
@@ -129,4 +134,18 @@ void SpaceStation::takeDamage(float damageAmount, sf::Vector2f damageLocation, E
     }else{
         shieldHitEffect = 1.0;
     }
+}
+
+void SpaceStation::setTemplate(string templateName)
+{
+    this->templateName = templateName;
+    shipTemplate = ShipTemplate::getTemplate(templateName);
+    if (!shipTemplate)
+    {
+        printf("Failed to find template for station: %s\n", templateName.c_str());
+        return;
+    }
+    
+    hull_strength = hull_max = shipTemplate->hull;
+    shields = shields_max = shipTemplate->frontShields;
 }
