@@ -91,6 +91,12 @@ void GameMasterUI::onGui()
             text(sf::FloatRect(20, 40, 100, 20), "Hull: " + string(ship->hull_strength), AlignLeft, 20);
             text(sf::FloatRect(20, 60, 100, 20), "Shields: " + string(ship->front_shield) + ", " + string(ship->rear_shield), AlignLeft, 20);
         }
+        P<SpaceStation> station = selection;
+        if (station)
+        {
+            text(sf::FloatRect(20, 40, 100, 20), "Hull: " + string(station->hull_strength), AlignLeft, 20);
+            text(sf::FloatRect(20, 60, 100, 20), "Shields: " + string(station->shields), AlignLeft, 20);
+        }
         P<CpuShip> cpuShip = selection;
         if (cpuShip)
         {

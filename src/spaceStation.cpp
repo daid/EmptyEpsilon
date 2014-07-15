@@ -21,7 +21,7 @@ SpaceStation::SpaceStation()
     setCollisionPhysics(true, true);
     
     shields = maxShields;
-    hullStrength = maxHullStrength;
+    hull_strength = maxHullStrength;
     
     registerMemberReplication(&shields, 1.0);
     registerMemberReplication(&shieldHitEffect, 0.5);
@@ -115,8 +115,8 @@ void SpaceStation::takeDamage(float damageAmount, sf::Vector2f damageLocation, E
     {
         if (type != DT_EMP)
         {
-            hullStrength -= damageAmount;
-            if (hullStrength <= 0.0)
+            hull_strength -= damageAmount;
+            if (hull_strength <= 0.0)
             {
                 ExplosionEffect* e = new ExplosionEffect();
                 e->setSize(getRadius());

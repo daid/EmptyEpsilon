@@ -12,7 +12,7 @@ class SpaceStation : public SpaceObject, public Updatable
     float shieldHitEffect;
 public:
     float shields;
-    float hullStrength;
+    float hull_strength;
 
     SpaceStation();
     
