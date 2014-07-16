@@ -9,60 +9,60 @@
 
 void MainUIBase::onGui()
 {
-    if (gameClient && !gameClient->isConnected())
+    if (game_client && !game_client->isConnected())
     {
         destroy();
         disconnectFromServer();
         new MainMenu();
         return;
     }
-    
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) || sf::Keyboard::isKeyPressed(sf::Keyboard::Home))
     {
         destroy();
         new ShipSelectionScreen();
     }
-    
-    if (gameServer)
+
+    if (game_server)
     {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
             engine->setGameSpeed(1.0);
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
             engine->setGameSpeed(0.0);
 #ifdef DEBUG
-        text(sf::FloatRect(0, 0, 1600 - 5, 20), string(gameServer->getSendDataRate() / 1000) + " kb per second", AlignRight, 15);
-        text(sf::FloatRect(0, 20, 1600 - 5, 20), string(gameServer->getSendDataRatePerClient() / 1000) + " kb per client", AlignRight, 15);
+        text(sf::FloatRect(0, 0, 1600 - 5, 20), string(game_server->getSendDataRate() / 1000) + " kb per second", AlignRight, 15);
+        text(sf::FloatRect(0, 20, 1600 - 5, 20), string(game_server->getSendDataRatePerClient() / 1000) + " kb per client", AlignRight, 15);
 #endif
     }
-    
-    if (mySpaceship)
+
+    if (my_spaceship)
     {
-        soundManager.setListenerPosition(mySpaceship->getPosition(), mySpaceship->getRotation());
-        
-        if (mySpaceship->front_shield < mySpaceship->front_shield_max / 10.0 || mySpaceship->rear_shield < mySpaceship->rear_shield_max / 10.0)
+        soundManager.setListenerPosition(my_spaceship->getPosition(), my_spaceship->getRotation());
+
+        if (my_spaceship->front_shield < my_spaceship->front_shield_max / 10.0 || my_spaceship->rear_shield < my_spaceship->rear_shield_max / 10.0)
         {
             sf::RectangleShape fullScreenOverlay(sf::Vector2f(1600, 900));
             float f = fabsf(fmodf(engine->getElapsedTime() * 2.0, 2.0) - 1.0);
             fullScreenOverlay.setFillColor(sf::Color(255, 0, 0, 16 + 32 * f));
             getRenderTarget()->draw(fullScreenOverlay);
         }
-        if (mySpaceship->hull_damage_indicator > 0.0)
+        if (my_spaceship->hull_damage_indicator > 0.0)
         {
             sf::RectangleShape fullScreenOverlay(sf::Vector2f(1600, 900));
-            fullScreenOverlay.setFillColor(sf::Color(255, 0, 0, 128 * (mySpaceship->hull_damage_indicator / 1.5)));
+            fullScreenOverlay.setFillColor(sf::Color(255, 0, 0, 128 * (my_spaceship->hull_damage_indicator / 1.5)));
             getRenderTarget()->draw(fullScreenOverlay);
         }
-        
-        if (mySpaceship->warp_indicator > 0.0)
+
+        if (my_spaceship->warp_indicator > 0.0)
         {
-            if (mySpaceship->warp_indicator > 1.0)
+            if (my_spaceship->warp_indicator > 1.0)
             {
                 sf::RectangleShape fullScreenOverlay(sf::Vector2f(1600, 900));
-                fullScreenOverlay.setFillColor(sf::Color(0, 0, 0, 255 * (mySpaceship->warp_indicator - 1.0)));
+                fullScreenOverlay.setFillColor(sf::Color(0, 0, 0, 255 * (my_spaceship->warp_indicator - 1.0)));
                 getRenderTarget()->draw(fullScreenOverlay);
             }
             glitchPostProcessor->enabled = true;
-            glitchPostProcessor->setUniform("magtitude", mySpaceship->warp_indicator * 10.0);
+            glitchPostProcessor->setUniform("magtitude", my_spaceship->warp_indicator * 10.0);
             glitchPostProcessor->setUniform("delta", random(0, 360));
         }else{
             glitchPostProcessor->enabled = false;
@@ -70,11 +70,11 @@ void MainUIBase::onGui()
     }else{
         glitchPostProcessor->enabled = false;
     }
-    
+
     if (engine->getGameSpeed() == 0.0)
     {
         text(sf::FloatRect(0, 600, 1600, 100), "Game Paused", AlignCenter, 70);
-        if (gameServer)
+        if (game_server)
             text(sf::FloatRect(0, 680, 1600, 30), "(Press [SPACE] to resume)", AlignCenter, 30);
     }
 }
@@ -82,17 +82,17 @@ void MainUIBase::onGui()
 void MainUIBase::mainScreenSelectGUI()
 {
     if (button(sf::FloatRect(1400, 40, 200, 40), "Front", 28))
-        mySpaceship->commandMainScreenSetting(MSS_Front);
+        my_spaceship->commandMainScreenSetting(MSS_Front);
     if (button(sf::FloatRect(1400, 80, 200, 40), "Back", 28))
-        mySpaceship->commandMainScreenSetting(MSS_Back);
+        my_spaceship->commandMainScreenSetting(MSS_Back);
     if (button(sf::FloatRect(1400, 120, 200, 40), "Left", 28))
-        mySpaceship->commandMainScreenSetting(MSS_Left);
+        my_spaceship->commandMainScreenSetting(MSS_Left);
     if (button(sf::FloatRect(1400, 160, 200, 40), "Right", 28))
-        mySpaceship->commandMainScreenSetting(MSS_Right);
+        my_spaceship->commandMainScreenSetting(MSS_Right);
     if (button(sf::FloatRect(1400, 200, 200, 40), "Tactical", 28))
-        mySpaceship->commandMainScreenSetting(MSS_Tactical);
+        my_spaceship->commandMainScreenSetting(MSS_Tactical);
     if (button(sf::FloatRect(1400, 240, 200, 40), "Long-Range", 28))
-        mySpaceship->commandMainScreenSetting(MSS_LongRange);
+        my_spaceship->commandMainScreenSetting(MSS_LongRange);
 }
 
 void MainUIBase::drawStatic(float alpha)
@@ -112,7 +112,7 @@ void MainUIBase::drawRaderBackground(sf::Vector2f view_position, sf::Vector2f po
 {
     const float sector_size = 20000;
     const float sub_sector_size = sector_size / 8;
-    
+
     int sector_x_min = floor((view_position.x - (size / scale)) / sector_size) + 1;
     int sector_x_max = floor((view_position.x + (size / scale)) / sector_size);
     int sector_y_min = floor((view_position.y - (size / scale)) / sector_size) + 1;
@@ -143,7 +143,7 @@ void MainUIBase::drawRaderBackground(sf::Vector2f view_position, sf::Vector2f po
     }
     getRenderTarget()->draw(lines_x);
     getRenderTarget()->draw(lines_y);
-    
+
     int sub_sector_x_min = floor((view_position.x - (size / scale)) / sub_sector_size) + 1;
     int sub_sector_x_max = floor((view_position.x + (size / scale)) / sub_sector_size);
     int sub_sector_y_min = floor((view_position.y - (size / scale)) / sub_sector_size) + 1;
@@ -165,7 +165,7 @@ void MainUIBase::drawRaderBackground(sf::Vector2f view_position, sf::Vector2f po
 void MainUIBase::drawHeadingCircle(sf::Vector2f position, float size, sf::FloatRect rect)
 {
     sf::RenderTarget& window = *getRenderTarget();
-    
+
     sf::VertexArray tigs(sf::Lines, 360/20*2);
     for(unsigned int n=0; n<360; n+=20)
     {
@@ -193,20 +193,20 @@ void MainUIBase::drawHeadingCircle(sf::Vector2f position, float size, sf::FloatR
 void MainUIBase::drawRadarCuttoff(sf::Vector2f position, float size, sf::FloatRect rect)
 {
     sf::RenderTarget& window = *getRenderTarget();
-    
+
     sf::Sprite cutOff;
     textureManager.setTexture(cutOff, "radarCutoff.png");
     cutOff.setPosition(position);
     cutOff.setScale(size / float(cutOff.getTextureRect().width) * 2.1, size / float(cutOff.getTextureRect().width) * 2.1);
     window.draw(cutOff);
-    
+
     sf::RectangleShape rectH(sf::Vector2f(rect.width, position.y - size * 1.05 - rect.top));
     rectH.setFillColor(sf::Color::Black);
     rectH.setPosition(rect.left, rect.top);
     window.draw(rectH);
     rectH.setPosition(rect.left, position.y + size * 1.05);
     window.draw(rectH);
-    
+
     sf::RectangleShape rectV(sf::Vector2f(position.x - size * 1.05 - rect.left, rect.height));
     rectV.setFillColor(sf::Color::Black);
     rectV.setPosition(rect.left, rect.top);
@@ -220,32 +220,32 @@ void MainUIBase::drawRadar(sf::Vector2f position, float size, float range, bool 
     sf::RenderTarget& window = *getRenderTarget();
 
     if (long_range)
-        drawRaderBackground(mySpaceship->getPosition(), position, size, size / range, rect);
-    foreach(SpaceObject, obj, spaceObjectList)
+        drawRaderBackground(my_spaceship->getPosition(), position, size, size / range, rect);
+    foreach(SpaceObject, obj, space_object_list)
     {
-        if (obj != mySpaceship && sf::length(obj->getPosition() - mySpaceship->getPosition()) < range)
-            obj->drawRadar(window, position + (obj->getPosition() - mySpaceship->getPosition()) / range * size, size / range, long_range);
+        if (obj != my_spaceship && sf::length(obj->getPosition() - my_spaceship->getPosition()) < range)
+            obj->drawRadar(window, position + (obj->getPosition() - my_spaceship->getPosition()) / range * size, size / range, long_range);
     }
 
     if (target)
     {
         sf::Sprite objectSprite;
         textureManager.setTexture(objectSprite, "redicule.png");
-        objectSprite.setPosition(position + (target->getPosition() - mySpaceship->getPosition()) / range * size);
+        objectSprite.setPosition(position + (target->getPosition() - my_spaceship->getPosition()) / range * size);
         window.draw(objectSprite);
     }
-    mySpaceship->drawRadar(window, position, size / range, long_range);
+    my_spaceship->drawRadar(window, position, size / range, long_range);
     drawHeadingCircle(position, size, rect);
     drawRadarCuttoff(position, size, rect);
 }
 
 void MainUIBase::drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESystem highlight_system)
 {
-    if (!ship || !ship->shipTemplate) return;
+    if (!ship || !ship->ship_template) return;
     sf::RenderTarget& window = *getRenderTarget();
-    P<ShipTemplate> st = ship->shipTemplate;
+    P<ShipTemplate> st = ship->ship_template;
     P<PlayerSpaceship> playerSpaceship = ship;
-    
+
     const float room_size = 48.0f;
     for(unsigned int n=0; n<st->rooms.size(); n++)
     {
@@ -333,7 +333,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
     float sx = window.getSize().x * window.getView().getViewport().width / 1600.0f;
     float sy = window.getSize().y * window.getView().getViewport().height / 900.0f;
     glViewport(rect.left * sx, rect.top * sy, rect.width * sx, rect.height * sy);
-    
+
     glClearDepth(1.f);
     glClear(GL_DEPTH_BUFFER_BIT);
     glDepthMask(GL_TRUE);
@@ -345,7 +345,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    
+
     glRotatef(90, 1, 0, 0);
     glScalef(1,1,-1);
     glRotatef(-camera_ship_angle, 1, 0, 0);
@@ -362,16 +362,16 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
     printf("%f %f %f\n", camera_ship_angle, camera_ship_height, camera_ship_distance);
     */
 #endif
-    if (mySpaceship)
+    if (my_spaceship)
     {
-        cameraRotation = mySpaceship->getRotation();
+        cameraRotation = my_spaceship->getRotation();
 #ifdef DEBUG
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
             cameraRotation -= 45;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
             cameraRotation += 45;
 #endif
-        switch(mySpaceship->mainScreenSetting)
+        switch(my_spaceship->main_screen_setting)
         {
         case MSS_Back: cameraRotation += 180; break;
         case MSS_Left: cameraRotation -= 90; break;
@@ -441,10 +441,10 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
     sf::Texture::bind(NULL);
     glDepthMask(true);
     glEnable(GL_DEPTH_TEST);
-    
-    if (mySpaceship)
+
+    if (my_spaceship)
     {
-        sf::Vector2f cameraPosition2D = mySpaceship->getPosition() + sf::vector2FromAngle(cameraRotation) * -camera_ship_distance;
+        sf::Vector2f cameraPosition2D = my_spaceship->getPosition() + sf::vector2FromAngle(cameraRotation) * -camera_ship_distance;
         sf::Vector3f targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
 #ifdef DEBUG
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
@@ -452,7 +452,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
 #endif
         cameraPosition = cameraPosition * 0.9f + targetCameraPosition * 0.1f;
     }
-    
+
     {
         float lightpos[4] = {20000, 20000, 20000, 1.0};
         glPushMatrix();
@@ -460,10 +460,10 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
         glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
         glPopMatrix();
     }
-    
+
     PVector<SpaceObject> renderList;
     sf::Vector2f viewVector = sf::vector2FromAngle(cameraRotation);
-    foreach(SpaceObject, obj, spaceObjectList)
+    foreach(SpaceObject, obj, space_object_list)
     {
         float depth = sf::dot(viewVector, obj->getPosition() - sf::Vector2f(cameraPosition.x, cameraPosition.y));
         if (depth < -obj->getRadius() * 2)
@@ -479,7 +479,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
         glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
         glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
         glRotatef(obj->getRotation(), 0, 0, 1);
-        
+
         obj->draw3D();
         glPopMatrix();
     }
@@ -494,7 +494,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
         glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
         glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
         glRotatef(obj->getRotation(), 0, 0, 1);
-        
+
         obj->draw3DTransparent();
         glPopMatrix();
     }
@@ -503,7 +503,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
     glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
     ParticleEngine::render();
     glPopMatrix();
-    
+
     glDepthMask(true);
     glDisable(GL_BLEND);
     glEnable(GL_CULL_FACE);
@@ -512,13 +512,13 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
 
 #ifdef DEBUG
     glDisable(GL_DEPTH_TEST);
-    foreach(SpaceObject, obj, spaceObjectList)
+    foreach(SpaceObject, obj, space_object_list)
     {
         glPushMatrix();
         glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
         glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
         glRotatef(obj->getRotation(), 0, 0, 1);
-        
+
         std::vector<sf::Vector2f> collisionShape = obj->getCollisionShape();
         glBegin(GL_LINE_LOOP);
         for(unsigned int n=0; n<collisionShape.size(); n++)
@@ -527,6 +527,6 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
         glPopMatrix();
     }
 #endif
-    
+
     window.popGLStates();
 }

@@ -28,27 +28,27 @@ void Asteroid::draw3D()
 
 void Asteroid::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
-    sf::Sprite objectSprite;
-    textureManager.setTexture(objectSprite, "RadarBlip.png");
-    objectSprite.setRotation(getRotation());
-    objectSprite.setPosition(position);
-    objectSprite.setColor(sf::Color(255, 200, 100));
-    float size = getRadius() * scale / objectSprite.getTextureRect().width * 2;
+    sf::Sprite object_sprite;
+    textureManager.setTexture(object_sprite, "RadarBlip.png");
+    object_sprite.setRotation(getRotation());
+    object_sprite.setPosition(position);
+    object_sprite.setColor(sf::Color(255, 200, 100));
+    float size = getRadius() * scale / object_sprite.getTextureRect().width * 2;
     if (size < 0.2)
         size = 0.2;
-    objectSprite.setScale(size, size);
-    window.draw(objectSprite);
+    object_sprite.setScale(size, size);
+    window.draw(object_sprite);
 }
 
 void Asteroid::collision(Collisionable* target)
 {
     if (!isServer())
         return;
-    P<SpaceObject> hitObject = P<Collisionable>(target);
-    if (!hitObject || !hitObject->canBeTargeted())
+    P<SpaceObject> hit_object = P<Collisionable>(target);
+    if (!hit_object || !hit_object->canBeTargeted())
         return;
-    
-    hitObject->takeDamage(35, getPosition(), DT_Kinetic);
+
+    hit_object->takeDamage(35, getPosition(), DT_Kinetic);
 
     P<ExplosionEffect> e = new ExplosionEffect();
     e->setSize(getRadius());

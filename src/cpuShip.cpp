@@ -20,7 +20,7 @@ CpuShip::CpuShip()
 {
     faction_id = 2;
     orders = AI_Idle;
-    
+
     setRotation(random(0, 360));
     targetRotation = getRotation();
     shields_active = true;
@@ -31,13 +31,13 @@ void CpuShip::update(float delta)
 {
     SpaceShip::update(delta);
 
-    if (!gameServer)
+    if (!game_server)
         return;
-        
+
     if (missile_fire_delay > 0.0)
         missile_fire_delay -= delta;
-    
-    //Check the weapon state, 
+
+    //Check the weapon state,
     bool has_missiles = weaponTubes > 0 && weapon_storage[MW_Homing] > 0;
     bool has_beams = false;
     //If we have weapon tubes, load them with torpedoes
@@ -45,7 +45,7 @@ void CpuShip::update(float delta)
     {
         if (weaponTube[n].state == WTS_Empty && weapon_storage[MW_Homing] > 0)
             loadTube(n, MW_Homing);
-        if (weaponTube[n].state == WTS_Loaded && weaponTube[n].typeLoaded == MW_Homing)
+        if (weaponTube[n].state == WTS_Loaded && weaponTube[n].type_loaded == MW_Homing)
             has_missiles = true;
     }
     for(int n=0; n<maxBeamWeapons; n++)
@@ -62,7 +62,7 @@ void CpuShip::update(float delta)
     float target_distance = 0.0;
     if (target)
         target_distance = sf::length(target->getPosition() - getPosition());
-    
+
     //Find new target
     if (orders == AI_Roaming)
         new_target = findBestTarget(getPosition(), 8000);
@@ -98,11 +98,11 @@ void CpuShip::update(float delta)
             target = NULL;
         if (orders == AI_FlyFormation && target_distance > 6000)
             target = NULL;
-        
+
         if (!target)
             targetId = -1;
     }
-    
+
     //Check if we want to switch to a new target
     if (new_target)
     {
@@ -130,11 +130,11 @@ void CpuShip::update(float delta)
         float attack_distance = 4000.0;
         if (has_beams)
             attack_distance = 700.0;
-        
+
         sf::Vector2f position_diff = target->getPosition() - getPosition();
         float distance = sf::length(position_diff);
         targetRotation = sf::vector2ToAngle(position_diff);
-        
+
         warpRequest = 0.0;
         if (orders == AI_StandGround)
         {
@@ -157,13 +157,13 @@ void CpuShip::update(float delta)
                     initJump(jump / 1000);
                 }
             }
-            
+
             if (distance > attack_distance + impulseMaxSpeed)
                 impulseRequest = 1.0f;
             else
                 impulseRequest = (distance - attack_distance) / impulseMaxSpeed;
         }
-        
+
         if (distance < 4500 && has_missiles && fabs(sf::angleDifference(targetRotation, getRotation())) < 30.0)
         {
             for(int n=0; n<weaponTubes; n++)
@@ -233,7 +233,7 @@ void CpuShip::update(float delta)
             if (order_target)
             {
                 sf::Vector2f target_position = order_target->getPosition() + sf::rotateVector(order_target_location, order_target->getRotation());
-                
+
                 float r = getRadius() * 5.0;
                 targetRotation = sf::vector2ToAngle(target_position - getPosition());
                 float dist = sf::length(target_position - getPosition());

@@ -7,8 +7,8 @@
 class PlayerInfo;
 class GameGlobalInfo;
 extern P<GameGlobalInfo> gameGlobalInfo;
-extern P<PlayerInfo> myPlayerInfo;
-extern P<PlayerSpaceship> mySpaceship;
+extern P<PlayerInfo> my_player_info;
+extern P<PlayerSpaceship> my_spaceship;
 extern PVector<PlayerInfo> playerInfoList;
 
 enum ECrewPosition
@@ -19,7 +19,7 @@ enum ECrewPosition
     scienceOfficer,
     commsOfficer,
     singlePilot,
-    maxCrewPositions
+    max_crew_positions
 };
 
 class GameGlobalInfo : public MultiplayerObject
@@ -30,10 +30,10 @@ private:
     int32_t playerShipId[maxPlayerShips];
 public:
     GameGlobalInfo();
-    
+
     P<PlayerSpaceship> getPlayerShip(int index);
     void setPlayerShip(int index, P<PlayerSpaceship> ship);
-    
+
     int findPlayerShip(P<PlayerSpaceship> ship);
     int insertPlayerShip(P<PlayerSpaceship> ship);
 };
@@ -42,13 +42,13 @@ class PlayerInfo : public MultiplayerObject
 {
 public:
     int32_t clientId;
-    
-    bool crew_position[maxCrewPositions];
+
+    bool crew_position[max_crew_positions];
     bool main_screen_control;
     int32_t ship_id;
-    
+
     PlayerInfo();
-    
+
     bool isMainScreen();
     void setCrewPosition(ECrewPosition position, bool active);
     void setShipId(int32_t id);

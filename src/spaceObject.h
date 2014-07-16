@@ -13,18 +13,18 @@ enum EDamageType
 
 class SpaceObject;
 class PlayerSpaceship;
-extern PVector<SpaceObject> spaceObjectList;
+extern PVector<SpaceObject> space_object_list;
 class SpaceObject : public Collisionable, public MultiplayerObject
 {
-    float objectRadius;
+    float object_radius;
 public:
     int8_t faction_id;
     string comms_script_name;
     SpaceObject(float collisionRange, string multiplayerName);
-    
-    float getRadius() { return objectRadius; }
-    void setRadius(float radius) { objectRadius = radius; setCollisionRadius(radius); }
-    
+
+    float getRadius() { return object_radius; }
+    void setRadius(float radius) { object_radius = radius; setCollisionRadius(radius); }
+
     virtual void draw3D();
     virtual void draw3DTransparent() {}
     virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
@@ -35,12 +35,12 @@ public:
     virtual bool canBeDockedBy(P<SpaceObject> obj) { return false; }
     virtual bool hasShield() { return false; }
     virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type) {}
-    
+
     //virtual bool openCommChannel(P<PlayerSpaceship> ship) { return false; }
     //virtual void commChannelMessage(P<PlayerSpaceship> ship, int32_t message_id) {}
-    
+
     static void damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, EDamageType type, float min_range);
-    
+
     bool isEnemy(P<SpaceObject> obj);
     bool isFriendly(P<SpaceObject> obj);
     void setFaction(int faction_id) { this->faction_id = faction_id; }

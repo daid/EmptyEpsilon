@@ -43,7 +43,7 @@ void GameMasterUI::onGui()
             selection->setPosition(mousePosition);
         }
     }
-    
+
     view_distance *= 1.0 - (InputHandler::getMouseWheelDelta() * 0.1f);
     if (view_distance > 100000)
         view_distance = 100000;
@@ -53,10 +53,10 @@ void GameMasterUI::onGui()
     {
         view_position += (prev_mouse_pos - mouse) / 400.0f * view_distance;
     }
-    
+
     drawRaderBackground(view_position, sf::Vector2f(800, 450), 800, 400.0f / view_distance);
 
-    foreach(SpaceObject, obj, spaceObjectList)
+    foreach(SpaceObject, obj, space_object_list)
     {
         obj->drawRadar(window, sf::Vector2f(800, 450) + (obj->getPosition() - view_position) / view_distance * 400.0f, 400.0f / view_distance, view_distance > 10000);
         P<CpuShip> cpuShip = obj;
@@ -83,11 +83,11 @@ void GameMasterUI::onGui()
         textureManager.setTexture(objectSprite, "redicule.png");
         objectSprite.setPosition(sf::Vector2f(800, 450) + (selection->getPosition() - view_position) / view_distance * 400.0f);
         window.draw(objectSprite);
-        
+
         P<SpaceShip> ship = selection;
-        if (ship && ship->shipTemplate)
+        if (ship && ship->ship_template)
         {
-            text(sf::FloatRect(20, 20, 100, 20), factionInfo[ship->faction_id].name + " " + ship->shipTemplate->name, AlignLeft, 20);
+            text(sf::FloatRect(20, 20, 100, 20), factionInfo[ship->faction_id].name + " " + ship->ship_template->name, AlignLeft, 20);
             text(sf::FloatRect(20, 40, 100, 20), "Hull: " + string(ship->hull_strength), AlignLeft, 20);
             text(sf::FloatRect(20, 60, 100, 20), "Shields: " + string(ship->front_shield) + ", " + string(ship->rear_shield), AlignLeft, 20);
         }
@@ -101,7 +101,7 @@ void GameMasterUI::onGui()
         if (cpuShip)
         {
             text(sf::FloatRect(20, 80, 100, 20), "Orders: " + getAIOrderString(cpuShip->getOrder()), AlignLeft, 20);
-            
+
             float y = 100;
             if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_Idle, "Idle", 20))
                 cpuShip->orderIdle();
@@ -112,7 +112,7 @@ void GameMasterUI::onGui()
             if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_StandGround, "Stand Ground", 18))
                 cpuShip->orderStandGround();
             y += 30;
-            
+
             for(int n=0; n<MW_Count; n++)
             {
                 if (cpuShip->weapon_storage_max[n] < 1)
@@ -123,7 +123,7 @@ void GameMasterUI::onGui()
                 y += 30;
             }
         }
-        
+
         text(sf::FloatRect(20, 480, 250, 20), "Change faction:", AlignCenter, 20);
         for(int f=0; f<maxFactions; f++)
         {
@@ -132,7 +132,7 @@ void GameMasterUI::onGui()
                 selection->setFaction(f);
             }
         }
-        
+
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Delete))
         {
             selection->destroy();
@@ -146,7 +146,7 @@ void GameMasterUI::onGui()
                 current_faction = f;
             }
         }
-        
+
         if (button(sf::FloatRect(20, 100, 250, 30), "Station", 20))
         {
             selection = new SpaceStation();
@@ -165,12 +165,12 @@ void GameMasterUI::onGui()
                 s->setShipTemplate(template_names[n]);
                 s->setPosition(view_position + sf::vector2FromAngle(random(0, 360)) * random(0, view_distance * 0.1));
                 s->orderRoaming();
-                
+
                 selection = s;
             }
         }
     }
-    
+
     if (toggleButton(sf::FloatRect(20, 820, 250, 50), allow_object_drag, "Drag Objects"))
         allow_object_drag = !allow_object_drag;
 

@@ -11,11 +11,11 @@ RepairCrew::RepairCrew()
     ship_id = -1;
     position.x = -1;
     action = RC_Idle;
-    
+
     registerMemberReplication(&ship_id);
     registerMemberReplication(&position, 1.0);
     registerMemberReplication(&target_position);
-    
+
     repairCrewList.push_back(this);
 }
 
@@ -53,7 +53,7 @@ ERepairCrewAction pathFind(sf::Vector2i start_pos, sf::Vector2i target_pos, P<Sh
             node[t->doors[n].position.x - 1][t->doors[n].position.y].right = true;
         }
     }
-    
+
     std::vector<sf::Vector2i> search_points;
     search_points.push_back(start_pos);
     while(search_points.size() > 0)
@@ -62,7 +62,7 @@ ERepairCrewAction pathFind(sf::Vector2i start_pos, sf::Vector2i target_pos, P<Sh
         if (pos == target_pos)
             return node[pos.x][pos.y].arrive_action;
         search_points.erase(search_points.begin());
-        
+
         if (node[pos.x][pos.y].right && node[pos.x + 1][pos.y].arrive_action == RC_Idle)
         {
             node[pos.x + 1][pos.y].arrive_action = node[pos.x][pos.y].arrive_action;
@@ -88,39 +88,39 @@ ERepairCrewAction pathFind(sf::Vector2i start_pos, sf::Vector2i target_pos, P<Sh
             search_points.push_back(sf::Vector2i(pos.x, pos.y - 1));
         }
     }
-    
+
     return RC_Idle;
 }
 
 void RepairCrew::update(float delta)
 {
     P<PlayerSpaceship> ship;
-    if (gameServer)
-        ship = gameServer->getObjectById(ship_id);
-    else if (gameClient)
-        ship = gameClient->getObjectById(ship_id);
+    if (game_server)
+        ship = game_server->getObjectById(ship_id);
+    else if (game_client)
+        ship = game_client->getObjectById(ship_id);
     else
     {
         destroy();
         return;
     }
-        
 
-    if (gameServer && !ship)
+
+    if (game_server && !ship)
     {
         destroy();
         return;
     }
-    if (!ship || !ship->shipTemplate)
+    if (!ship || !ship->ship_template)
         return;
-    
+
     if (position.x < -0.5)
     {
-        int n=irandom(0, ship->shipTemplate->rooms.size() - 1);
-        position = sf::Vector2f(ship->shipTemplate->rooms[n].position + sf::Vector2i(irandom(0, ship->shipTemplate->rooms[n].size.x - 1), irandom(0, ship->shipTemplate->rooms[n].size.y - 1)));
+        int n=irandom(0, ship->ship_template->rooms.size() - 1);
+        position = sf::Vector2f(ship->ship_template->rooms[n].position + sf::Vector2i(irandom(0, ship->ship_template->rooms[n].size.x - 1), irandom(0, ship->ship_template->rooms[n].size.y - 1)));
         target_position = sf::Vector2i(position);
     }
-    
+
     action_delay -= delta;
     sf::Vector2i pos = sf::Vector2i(position + sf::Vector2f(0.5, 0.5));
     switch(action)
@@ -129,10 +129,10 @@ void RepairCrew::update(float delta)
         {
             action_delay = 1.0 / move_speed;
             if (pos != target_position)
-                action = pathFind(pos, target_position, ship->shipTemplate);
+                action = pathFind(pos, target_position, ship->ship_template);
             position = sf::Vector2f(pos);
-            
-            ESystem system = ship->shipTemplate->getSystemAtRoom(pos);
+
+            ESystem system = ship->ship_template->getSystemAtRoom(pos);
             if (system != SYS_None)
             {
                 ship->systems[system].health += repair_per_second * delta;
@@ -145,11 +145,11 @@ void RepairCrew::update(float delta)
 
                 if (ship->hasSystem(ESystem(n)) && ship->systems[n].health < 1.0)
                 {
-                    for(unsigned int idx=0; idx<ship->shipTemplate->rooms.size(); idx++)
+                    for(unsigned int idx=0; idx<ship->ship_template->rooms.size(); idx++)
                     {
-                        if (ship->shipTemplate->rooms[idx].system == ESystem(n))
+                        if (ship->ship_template->rooms[idx].system == ESystem(n))
                         {
-                            target_position = ship->shipTemplate->rooms[idx].position + sf::Vector2i(irandom(0, ship->shipTemplate->rooms[idx].size.x - 1), irandom(0, ship->shipTemplate->rooms[idx].size.y - 1));
+                            target_position = ship->ship_template->rooms[idx].position + sf::Vector2i(irandom(0, ship->ship_template->rooms[idx].size.x - 1), irandom(0, ship->ship_template->rooms[idx].size.y - 1));
                         }
                     }
                 }
@@ -203,7 +203,7 @@ PVector<RepairCrew> getRepairCrewFor(P<PlayerSpaceship> ship)
     PVector<RepairCrew> ret;
     if (!ship)
         return ret;
-    
+
     foreach(RepairCrew, c, repairCrewList)
         if (c->ship_id == ship->getMultiplayerId())
             ret.push_back(c);

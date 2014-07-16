@@ -13,9 +13,9 @@ EpsilonServer::EpsilonServer()
     new GameGlobalInfo();
     PlayerInfo* info = new PlayerInfo();
     info->clientId = 0;
-    myPlayerInfo = info;
+    my_player_info = info;
     engine->setGameSpeed(0.0);
-    
+
     soundManager.playMusic("music/Dream Raid Full Version (Mock Up).ogg");
 }
 
@@ -39,20 +39,20 @@ void disconnectFromServer()
 {
     soundManager.stopMusic();
 
-    if (gameClient)
-        gameClient->destroy();
-    if (gameServer)
-        gameServer->destroy();
+    if (game_client)
+        game_client->destroy();
+    if (game_server)
+        game_server->destroy();
     if (gameGlobalInfo)
         gameGlobalInfo->destroy();
     foreach(PlayerInfo, i, playerInfoList)
         i->destroy();
     foreach(GameEntity, e, entityList)
         e->destroy();
-    foreach(SpaceObject, o, spaceObjectList)
+    foreach(SpaceObject, o, space_object_list)
         o->destroy();
-    if (myPlayerInfo)
-        myPlayerInfo->destroy();
+    if (my_player_info)
+        my_player_info->destroy();
     if (engine->getObject("scenario"))
         engine->getObject("scenario")->destroy();
 }

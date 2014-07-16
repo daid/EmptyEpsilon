@@ -29,7 +29,7 @@ SpaceStation::SpaceStation()
     registerMemberReplication(&shields_max);
     registerMemberReplication(&shieldHitEffect, 0.5);
     shieldHitEffect = 0.0;
-    
+
     comms_script_name = "comms_station.lua";
     
     setTemplate("Small Station");
@@ -77,11 +77,11 @@ void SpaceStation::drawRadar(sf::RenderTarget& window, sf::Vector2f position, fl
         GUI::text(sf::FloatRect(position.x, position.y - 15, 0, 0), getCallSign(), AlignCenter, 12);
         objectSprite.setScale(0.7, 0.7);
     }
-    if (mySpaceship)
+    if (my_spaceship)
     {
-        if (isEnemy(mySpaceship))
+        if (isEnemy(my_spaceship))
             objectSprite.setColor(sf::Color::Red);
-        if (isFriendly(mySpaceship))
+        if (isFriendly(my_spaceship))
             objectSprite.setColor(sf::Color(128, 255, 128));
     }else{
         objectSprite.setColor(factionInfo[faction_id].gm_color);
@@ -126,7 +126,7 @@ void SpaceStation::takeDamage(float damageAmount, sf::Vector2f damageLocation, E
                 ExplosionEffect* e = new ExplosionEffect();
                 e->setSize(getRadius());
                 e->setPosition(getPosition());
-                
+
                 destroy();
             }
         }

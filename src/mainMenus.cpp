@@ -9,13 +9,13 @@
 MainMenu::MainMenu()
 {
 }
-    
+
 void MainMenu::onGui()
 {
     text(sf::FloatRect(0, 100, 1600, 300), "Empty", AlignCenter, 180);
     text(sf::FloatRect(0, 250, 1600, 300), "Epsilon", AlignCenter, 200);
     text(sf::FloatRect(0, 480, 1600, 100), "Version: " + string(VERSION_NUMBER), AlignCenter, 20);
-    
+
     if (button(sf::FloatRect(50, 680, 300, 50), "Start server"))
     {
         new EpsilonServer();
@@ -31,7 +31,7 @@ void MainMenu::onGui()
     {
         engine->shutdown();
     }
-    
+
     float y = 100;
     text(sf::FloatRect(0, y, 1550, 25), "Credits", AlignRight, 25); y+= 25;
     text(sf::FloatRect(0, y, 1550, 20), "Programming:", AlignRight, 20); y+= 20;
@@ -64,13 +64,13 @@ void ServerBrowserMenu::onGui()
         if (toggleButton(sf::FloatRect(50, 50 + 35 * n, 700, 35), selectionIndex == n, serverList[n].name + " (" + serverList[n].address.toString() + ")"))
             selectionIndex = n;
     }
-    
+
     if (button(sf::FloatRect(50, 800, 300, 50), "Back"))
     {
         destroy();
         new MainMenu();
     }
-    
+
     if (selectionIndex < serverList.size())
     {
         if (button(sf::FloatRect(450, 800, 300, 50), "Join"))
@@ -99,7 +99,7 @@ JoinServerScreen::JoinServerScreen(sf::IpAddress ip)
 void JoinServerScreen::onGui()
 {
     text(sf::FloatRect(300, 300, 1000, 50), "Connecting...");
-    
+
     if (button(sf::FloatRect(50, 800, 300, 50), "Cancel"))
     {
         destroy();
@@ -107,24 +107,24 @@ void JoinServerScreen::onGui()
         new ServerBrowserMenu();
         return;
     }
-    
+
     if (connect_delay > 0)
     {
         connect_delay--;
         if (!connect_delay)
             new GameClient(ip);
     }else{
-        if (!gameClient->isConnected())
+        if (!game_client->isConnected())
         {
             destroy();
             disconnectFromServer();
             new ServerBrowserMenu();
-        }else if (gameClient->getClientId() > 0)
+        }else if (game_client->getClientId() > 0)
         {
             foreach(PlayerInfo, i, playerInfoList)
-                if (i->clientId == gameClient->getClientId())
-                    myPlayerInfo = i;
-            if (myPlayerInfo && gameGlobalInfo)
+                if (i->clientId == game_client->getClientId())
+                    my_player_info = i;
+            if (my_player_info && gameGlobalInfo)
             {
                 new ShipSelectionScreen();
                 destroy();

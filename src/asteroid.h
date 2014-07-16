@@ -7,12 +7,14 @@ class Asteroid : public SpaceObject
 {
 public:
     float rotation_speed;
-    
+
     Asteroid();
 
     virtual void draw3D();
+
+    //Is actually a drawOnRadar();
     virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
-    
+
     virtual void collision(Collisionable* target);
 };
 

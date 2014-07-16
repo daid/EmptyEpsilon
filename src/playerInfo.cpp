@@ -5,8 +5,8 @@ static const int16_t CMD_UPDATE_SHIP_ID = 0x0002;
 static const int16_t CMD_UPDATE_MAIN_SCREEN_CONTROL = 0x0003;
 
 P<GameGlobalInfo> gameGlobalInfo;
-P<PlayerInfo> myPlayerInfo;
-P<PlayerSpaceship> mySpaceship;
+P<PlayerInfo> my_player_info;
+P<PlayerSpaceship> my_spaceship;
 PVector<PlayerInfo> playerInfoList;
 
 REGISTER_MULTIPLAYER_CLASS(GameGlobalInfo, "GameGlobalInfo")
@@ -14,7 +14,7 @@ GameGlobalInfo::GameGlobalInfo()
 : MultiplayerObject("GameGlobalInfo")
 {
     assert(!gameGlobalInfo);
-    
+
     gameGlobalInfo = this;
     for(int n=0; n<maxPlayerShips; n++)
     {
@@ -26,16 +26,16 @@ GameGlobalInfo::GameGlobalInfo()
 P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)
 {
     assert(index >= 0 && index < maxPlayerShips);
-    if (gameServer)
-        return gameServer->getObjectById(playerShipId[index]);
-    return gameClient->getObjectById(playerShipId[index]);
+    if (game_server)
+        return game_server->getObjectById(playerShipId[index]);
+    return game_client->getObjectById(playerShipId[index]);
 }
 
 void GameGlobalInfo::setPlayerShip(int index, P<PlayerSpaceship> ship)
 {
     assert(index >= 0 && index < maxPlayerShips);
-    assert(gameServer);
-    
+    assert(game_server);
+
     if (ship)
         playerShipId[index] = ship->getMultiplayerId();
     else
@@ -71,14 +71,14 @@ PlayerInfo::PlayerInfo()
     main_screen_control = false;
     registerMemberReplication(&clientId);
 
-    for(int n=0; n<maxCrewPositions; n++)
+    for(int n=0; n<max_crew_positions; n++)
     {
         crew_position[n] = false;
         registerMemberReplication(&crew_position[n]);
     }
     registerMemberReplication(&ship_id);
     registerMemberReplication(&main_screen_control);
-    
+
     playerInfoList.push_back(this);
 }
 
@@ -116,15 +116,15 @@ void PlayerInfo::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             bool active;
             packet >> position >> active;
             crew_position[position] = active;
-            
+
             if (isMainScreen())
                 main_screen_control = false;
-            if (active && mySpaceship)
+            if (active && my_spaceship)
             {
                 int main_screen_control_cnt = 0;
                 foreach(PlayerInfo, i, playerInfoList)
                 {
-                    if (i->ship_id == mySpaceship->getMultiplayerId() && i->main_screen_control)
+                    if (i->ship_id == my_spaceship->getMultiplayerId() && i->main_screen_control)
                         main_screen_control_cnt++;
                 }
                 if (main_screen_control_cnt == 0)
@@ -143,7 +143,7 @@ void PlayerInfo::onReceiveCommand(int32_t clientId, sf::Packet& packet)
 
 bool PlayerInfo::isMainScreen()
 {
-    for(int n=0; n<maxCrewPositions; n++)
+    for(int n=0; n<max_crew_positions; n++)
         if (crew_position[n])
             return false;
     return true;

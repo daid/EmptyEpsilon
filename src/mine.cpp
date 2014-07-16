@@ -42,7 +42,7 @@ void Mine::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scal
     objectSprite.setScale(0.3, 0.3);
     window.draw(objectSprite);
 
-    if (!mySpaceship && gameServer)
+    if (!my_spaceship && game_server)
     {
         sf::CircleShape hitRadius(trigger_range * scale);
         hitRadius.setOrigin(trigger_range * scale, trigger_range * scale);
@@ -86,12 +86,12 @@ void Mine::update(float delta)
 
 void Mine::collision(Collisionable* target)
 {
-    if (!gameServer || triggered || ejectTimeout > 0.0)
+    if (!game_server || triggered || ejectTimeout > 0.0)
         return;
     P<SpaceObject> hitObject = P<Collisionable>(target);
     if (!hitObject || !hitObject->canBeTargeted())
         return;
-    
+
     triggered = true;
 }
 
