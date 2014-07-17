@@ -102,7 +102,9 @@ Mesh* Mesh::getMesh(string filename)
             string line = stream->readLine();
             if (line.length() > 0 && line[0] != '#')
             {
-                std::vector<string> parts = line.split();
+                std::vector<string> parts = line.strip().split();
+                if (parts.size() < 1)
+                    continue;
                 if (parts[0] == "v")
                 {
                     vertices.push_back(sf::Vector3f(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat()));
