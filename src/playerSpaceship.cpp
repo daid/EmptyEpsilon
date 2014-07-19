@@ -483,6 +483,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
     case CMD_OPEN_VOICE_COMM:
         if (comms_state == CS_ChannelOpenPlayer)
         {
+            network_audio_stream.startListening(9002); //HARDCODED
             //Setup audio recorder & streamer
         }
         break;
