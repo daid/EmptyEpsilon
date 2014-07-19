@@ -494,6 +494,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
         break;
     case CMD_SEND_VOICE_COMM:
         {
+            std::cout << "Recieved voice chat" << std::endl;
             //Piece of voice stream recieved. Do something.
         }
 

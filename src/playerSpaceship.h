@@ -4,6 +4,8 @@
 #include "spaceship.h"
 #include "commsScriptInterface.h"
 
+#include <iostream>
+
 enum ECommsState
 {
     CS_Inactive,
