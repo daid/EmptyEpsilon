@@ -483,6 +483,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
     case CMD_OPEN_VOICE_COMM:
         if (comms_state == CS_ChannelOpenPlayer)
         {
+            network_audio_stream.startListening(9002); //HARDCODED
             //Setup audio recorder & streamer
         }
         break;
@@ -494,6 +495,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
         break;
     case CMD_SEND_VOICE_COMM:
         {
+            std::cout << "Recieved voice chat" << std::endl;
             //Piece of voice stream recieved. Do something.
         }
 

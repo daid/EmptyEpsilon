@@ -3,6 +3,9 @@
 
 #include "spaceship.h"
 #include "commsScriptInterface.h"
+#include "networkRecorder.h"
+#include "networkAudioStream.h"
+#include <iostream>
 
 enum ECommsState
 {
@@ -47,7 +50,8 @@ public:
     const static int max_comms_reply_count = 16;
 
     PlayerSystem systems[SYS_COUNT];
-
+    NetworkRecorder network_recorder;
+    NetworkAudioStream network_audio_stream;
     float energy_level;
     float hull_damage_indicator;
     float warp_indicator;
