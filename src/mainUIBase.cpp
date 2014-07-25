@@ -451,14 +451,15 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
             targetCameraPosition.z = 3000.0;
 #endif
         cameraPosition = cameraPosition * 0.9f + targetCameraPosition * 0.1f;
+        
+        //float lightpos[4] = {cameraPosition.x, cameraPosition.y, cameraPosition.z, 1.0};
+        float lightpos[4] = {0, 0, 0, 1.0};
+        glLightfv(GL_LIGHT1, GL_POSITION, lightpos);
     }
 
     {
         float lightpos[4] = {20000, 20000, 20000, 1.0};
-        glPushMatrix();
-        //glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
         glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
-        glPopMatrix();
     }
 
     PVector<SpaceObject> renderList;
