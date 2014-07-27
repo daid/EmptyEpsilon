@@ -84,6 +84,11 @@ function init()
 			end
 		end
 	end
+
+	a = random(0, 360)
+	d = random(30000, 45000)
+	x, y = vectorFromAngle(a, d)
+	BlackHole():setPosition(x, y)
 end
 
 function update(delta)
