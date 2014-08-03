@@ -40,7 +40,6 @@ void SpaceStation::draw3D()
     if (!shipTemplate) return;
 
     glPushMatrix();
-    glTranslatef(0, 0, 50);
     glScalef(shipTemplate->scale, shipTemplate->scale, shipTemplate->scale);
     objectShader.setParameter("baseMap", *textureManager.getTexture(shipTemplate->colorTexture));
     objectShader.setParameter("illuminationMap", *textureManager.getTexture(shipTemplate->illuminationTexture));

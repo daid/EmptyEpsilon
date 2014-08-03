@@ -390,6 +390,8 @@
 		<Unit filename="src/asteroid.h" />
 		<Unit filename="src/beamEffect.cpp" />
 		<Unit filename="src/beamEffect.h" />
+		<Unit filename="src/blackHole.cpp" />
+		<Unit filename="src/blackHole.h" />
 		<Unit filename="src/commsScriptInterface.cpp" />
 		<Unit filename="src/commsScriptInterface.h" />
 		<Unit filename="src/cpuShip.cpp" />

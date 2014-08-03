@@ -274,9 +274,12 @@ void SpaceShip::update(float delta)
         if (docking_state == DS_Docked)
         {
             if (!docking_target)
+            {
                 docking_state = DS_NotDocking;
-            else
+            }else{
+                setPosition(docking_target->getPosition() + sf::rotateVector(docking_offset, docking_target->getRotation()));
                 targetRotation = sf::vector2ToAngle(getPosition() - docking_target->getPosition());
+            }
             impulseRequest = 0.0;
         }
     }
@@ -465,7 +468,10 @@ void SpaceShip::collision(Collisionable* other)
     {
         P<SpaceObject> dock_object = P<Collisionable>(other);
         if (dock_object == docking_target)
+        {
             docking_state = DS_Docked;
+            docking_offset = sf::rotateVector(getPosition() - other->getPosition(), -other->getRotation());
+        }
     }
 }
 
