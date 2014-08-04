@@ -302,6 +302,32 @@ void PlayerSpaceship::setSystemCoolant(ESystem system, float level)
 
             systems[n].coolant_level *= (max_coolant - level) / total_coolant;
         }
+    }else{
+        if (total_coolant > 0)
+        {
+            for(int n=0; n<SYS_COUNT; n++)
+            {
+                if (!hasSystem(ESystem(n))) continue;
+                if (n == system) continue;
+
+                systems[n].coolant_level *= (max_coolant - level) / total_coolant;
+            }
+        }else{
+            float spare_coolant = max_coolant - total_coolant - level;
+            int cnt = 0;
+            for(int n=0; n<SYS_COUNT; n++)
+            {
+                if (!hasSystem(ESystem(n))) continue;
+                if (n == system) continue;
+                cnt += 1;
+            }
+            for(int n=0; n<SYS_COUNT; n++)
+            {
+                if (!hasSystem(ESystem(n))) continue;
+                if (n == system) continue;
+                systems[n].coolant_level += spare_coolant / cnt;
+            }
+        }
     }
 
     systems[system].coolant_level = level;
