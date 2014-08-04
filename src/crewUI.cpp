@@ -108,10 +108,11 @@ void CrewUI::weaponsUI()
 {
     sf::Vector2f mouse = InputHandler::getMousePos();
     float radarDistance = 5000;
+    sf::Vector2f radar_position = getWindowSize() / 2.0f;
 
     if (InputHandler::mouseIsPressed(sf::Mouse::Left))
     {
-        sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
+        sf::Vector2f diff = mouse - radar_position;
         if (sf::length(diff) < 400)
         {
             P<SpaceObject> target;
@@ -129,7 +130,7 @@ void CrewUI::weaponsUI()
             my_spaceship->commandSetTarget(target);
         }
     }
-    drawRadar(sf::Vector2f(800, 450), 400, radarDistance, false, my_spaceship->getTarget());
+    drawRadar(radar_position, 400, radarDistance, false, my_spaceship->getTarget());
 
     text(sf::FloatRect(20, 100, 200, 20), "Energy: " + string(int(my_spaceship->energy_level)), AlignLeft, 20);
     text(sf::FloatRect(20, 120, 200, 20), "Shields: " + string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "/" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)), AlignLeft, 20);
