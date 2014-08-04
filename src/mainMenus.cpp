@@ -12,9 +12,9 @@ MainMenu::MainMenu()
 
 void MainMenu::onGui()
 {
-    text(sf::FloatRect(0, 100, 1600, 300), "Empty", AlignCenter, 180);
-    text(sf::FloatRect(0, 250, 1600, 300), "Epsilon", AlignCenter, 200);
-    text(sf::FloatRect(0, 480, 1600, 100), "Version: " + string(VERSION_NUMBER), AlignCenter, 20);
+    text(sf::FloatRect(0, 100, getWindowSize().x, 300), "Empty", AlignCenter, 180);
+    text(sf::FloatRect(0, 250, getWindowSize().x, 300), "Epsilon", AlignCenter, 200);
+    text(sf::FloatRect(0, 480, getWindowSize().x, 100), "Version: " + string(VERSION_NUMBER), AlignCenter, 20);
 
     if (button(sf::FloatRect(50, 680, 300, 50), "Start server"))
     {
@@ -33,15 +33,15 @@ void MainMenu::onGui()
     }
 
     float y = 100;
-    text(sf::FloatRect(0, y, 1550, 25), "Credits", AlignRight, 25); y+= 25;
-    text(sf::FloatRect(0, y, 1550, 20), "Programming:", AlignRight, 20); y+= 20;
-    text(sf::FloatRect(0, y, 1550, 18), "Daid (github.com/daid)", AlignRight, 18); y+= 18;
+    text(sf::FloatRect(0, y, getWindowSize().x - 50, 25), "Credits", AlignRight, 25); y+= 25;
+    text(sf::FloatRect(0, y, getWindowSize().x - 50, 20), "Programming:", AlignRight, 20); y+= 20;
+    text(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "Daid (github.com/daid)", AlignRight, 18); y+= 18;
     y += 10;
-    text(sf::FloatRect(0, y, 1550, 20), "Music:", AlignRight, 20); y+= 20;
-    text(sf::FloatRect(0, y, 1550, 18), "Matthew Pablo (www.matthewpablo.com)", AlignRight, 18); y+= 18;
+    text(sf::FloatRect(0, y, getWindowSize().x - 50, 20), "Music:", AlignRight, 20); y+= 20;
+    text(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "Matthew Pablo (www.matthewpablo.com)", AlignRight, 18); y+= 18;
     y += 10;
-    text(sf::FloatRect(0, y, 1550, 20), "Models:", AlignRight, 20); y+= 20;
-    text(sf::FloatRect(0, y, 1550, 18), "Angryfly (turbosquid.com)", AlignRight, 18); y+= 18;
+    text(sf::FloatRect(0, y, getWindowSize().x - 50, 20), "Models:", AlignRight, 20); y+= 20;
+    text(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "Angryfly (turbosquid.com)", AlignRight, 18); y+= 18;
 }
 
 ServerBrowserMenu::ServerBrowserMenu()
@@ -82,8 +82,8 @@ void ServerBrowserMenu::onGui()
         disabledButton(sf::FloatRect(450, 800, 300, 50), "Join");
     }
 
-    manual_ip = textEntry(sf::FloatRect(1250, 740, 300, 50), manual_ip);
-    if (button(sf::FloatRect(1250, 800, 300, 50), "Connect"))
+    manual_ip = textEntry(sf::FloatRect(getWindowSize().x - 350, 740, 300, 50), manual_ip);
+    if (button(sf::FloatRect(getWindowSize().x - 350, 800, 300, 50), "Connect"))
     {
             new JoinServerScreen(sf::IpAddress(manual_ip));
             destroy();
@@ -98,7 +98,7 @@ JoinServerScreen::JoinServerScreen(sf::IpAddress ip)
 
 void JoinServerScreen::onGui()
 {
-    text(sf::FloatRect(300, 300, 1000, 50), "Connecting...");
+    text(sf::FloatRect(0, 300, getWindowSize().x, 50), "Connecting...", AlignCenter);
 
     if (button(sf::FloatRect(50, 800, 300, 50), "Cancel"))
     {

@@ -60,6 +60,7 @@ int main(int argc, char** argv)
 #ifdef DEBUG
     fullscreen = false;
 #endif
+    //width = height / 3 * 4;
     engine->registerObject("windowManager", new WindowManager(width, height, fullscreen, glitchPostProcessor, fsaa));
     engine->registerObject("mouseRenderer", new MouseRenderer());
     soundManager.setMusicVolume(50);

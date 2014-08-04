@@ -3,6 +3,7 @@
 
 sf::RenderTarget* GUI::renderTarget;
 sf::Vector2f GUI::mousePosition;
+sf::Vector2f GUI::windowSize;
 int GUI::mouseClick;
 int GUI::mouseDown;
 
@@ -28,6 +29,7 @@ void GUI::render(sf::RenderTarget& window)
         else if (InputHandler::mouseIsDown(sf::Mouse::Right))
             mouseDown = 2;
         renderTarget = &window;
+        windowSize = window.getView().getSize();
         onGui();
         renderTarget = NULL;
     }

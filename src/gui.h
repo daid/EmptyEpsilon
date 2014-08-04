@@ -14,6 +14,7 @@ class GUI: public Renderable
 {
     static sf::RenderTarget* renderTarget;
     static sf::Vector2f mousePosition;
+    static sf::Vector2f windowSize;
     static int mouseClick;
     static int mouseDown;
     bool init;
@@ -36,6 +37,7 @@ public:
     static string textEntry(sf::FloatRect rect, string value, float fontSize = 30);
 
     static sf::RenderTarget* getRenderTarget() { return renderTarget; }
+    static sf::Vector2f getWindowSize() { return windowSize; }
 
 private:
     static void draw9Cut(sf::FloatRect rect, string texture, sf::Color color=sf::Color::White);

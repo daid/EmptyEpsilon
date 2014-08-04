@@ -30,8 +30,8 @@ void MainUIBase::onGui()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
             engine->setGameSpeed(0.0);
 #ifdef DEBUG
-        text(sf::FloatRect(0, 0, 1600 - 5, 20), string(game_server->getSendDataRate() / 1000) + " kb per second", AlignRight, 15);
-        text(sf::FloatRect(0, 20, 1600 - 5, 20), string(game_server->getSendDataRatePerClient() / 1000) + " kb per client", AlignRight, 15);
+        text(sf::FloatRect(0, 0, getWindowSize().x - 5, 20), string(game_server->getSendDataRate() / 1000) + " kb per second", AlignRight, 15);
+        text(sf::FloatRect(0, 20, getWindowSize().x - 5, 20), string(game_server->getSendDataRatePerClient() / 1000) + " kb per client", AlignRight, 15);
 #endif
     }
 
@@ -41,14 +41,14 @@ void MainUIBase::onGui()
 
         if (my_spaceship->front_shield < my_spaceship->front_shield_max / 10.0 || my_spaceship->rear_shield < my_spaceship->rear_shield_max / 10.0)
         {
-            sf::RectangleShape fullScreenOverlay(sf::Vector2f(1600, 900));
+            sf::RectangleShape fullScreenOverlay(sf::Vector2f(getWindowSize().x, 900));
             float f = fabsf(fmodf(engine->getElapsedTime() * 2.0, 2.0) - 1.0);
             fullScreenOverlay.setFillColor(sf::Color(255, 0, 0, 16 + 32 * f));
             getRenderTarget()->draw(fullScreenOverlay);
         }
         if (my_spaceship->hull_damage_indicator > 0.0)
         {
-            sf::RectangleShape fullScreenOverlay(sf::Vector2f(1600, 900));
+            sf::RectangleShape fullScreenOverlay(sf::Vector2f(getWindowSize().x, 900));
             fullScreenOverlay.setFillColor(sf::Color(255, 0, 0, 128 * (my_spaceship->hull_damage_indicator / 1.5)));
             getRenderTarget()->draw(fullScreenOverlay);
         }
@@ -57,7 +57,7 @@ void MainUIBase::onGui()
         {
             if (my_spaceship->warp_indicator > 1.0)
             {
-                sf::RectangleShape fullScreenOverlay(sf::Vector2f(1600, 900));
+                sf::RectangleShape fullScreenOverlay(sf::Vector2f(getWindowSize().x, 900));
                 fullScreenOverlay.setFillColor(sf::Color(0, 0, 0, 255 * (my_spaceship->warp_indicator - 1.0)));
                 getRenderTarget()->draw(fullScreenOverlay);
             }
@@ -73,25 +73,25 @@ void MainUIBase::onGui()
 
     if (engine->getGameSpeed() == 0.0)
     {
-        text(sf::FloatRect(0, 600, 1600, 100), "Game Paused", AlignCenter, 70);
+        text(sf::FloatRect(0, 600, getWindowSize().x, 100), "Game Paused", AlignCenter, 70);
         if (game_server)
-            text(sf::FloatRect(0, 680, 1600, 30), "(Press [SPACE] to resume)", AlignCenter, 30);
+            text(sf::FloatRect(0, 680, getWindowSize().x, 30), "(Press [SPACE] to resume)", AlignCenter, 30);
     }
 }
 
 void MainUIBase::mainScreenSelectGUI()
 {
-    if (button(sf::FloatRect(1400, 40, 200, 40), "Front", 28))
+    if (button(sf::FloatRect(getWindowSize().x - 200, 40, 200, 40), "Front", 28))
         my_spaceship->commandMainScreenSetting(MSS_Front);
-    if (button(sf::FloatRect(1400, 80, 200, 40), "Back", 28))
+    if (button(sf::FloatRect(getWindowSize().x - 200, 80, 200, 40), "Back", 28))
         my_spaceship->commandMainScreenSetting(MSS_Back);
-    if (button(sf::FloatRect(1400, 120, 200, 40), "Left", 28))
+    if (button(sf::FloatRect(getWindowSize().x - 200, 120, 200, 40), "Left", 28))
         my_spaceship->commandMainScreenSetting(MSS_Left);
-    if (button(sf::FloatRect(1400, 160, 200, 40), "Right", 28))
+    if (button(sf::FloatRect(getWindowSize().x - 200, 160, 200, 40), "Right", 28))
         my_spaceship->commandMainScreenSetting(MSS_Right);
-    if (button(sf::FloatRect(1400, 200, 200, 40), "Tactical", 28))
+    if (button(sf::FloatRect(getWindowSize().x - 200, 200, 200, 40), "Tactical", 28))
         my_spaceship->commandMainScreenSetting(MSS_Tactical);
-    if (button(sf::FloatRect(1400, 240, 200, 40), "Long-Range", 28))
+    if (button(sf::FloatRect(getWindowSize().x - 200, 240, 200, 40), "Long-Range", 28))
         my_spaceship->commandMainScreenSetting(MSS_LongRange);
 }
 
@@ -330,7 +330,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
     sf::RenderTarget& window = *getRenderTarget();
     window.pushGLStates();
 
-    float sx = window.getSize().x * window.getView().getViewport().width / 1600.0f;
+    float sx = window.getSize().x * window.getView().getViewport().width / getWindowSize().x;
     float sy = window.getSize().y * window.getView().getViewport().height / 900.0f;
     glViewport(rect.left * sx, rect.top * sy, rect.width * sx, rect.height * sy);
 
