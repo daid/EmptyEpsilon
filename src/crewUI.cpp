@@ -205,6 +205,21 @@ void CrewUI::engineeringUI()
         if (my_spaceship->systems[n].power_level != ret)
             my_spaceship->commandSetSystemPower(ESystem(n), ret);
         vprogressBar(sf::FloatRect(x + 110, 500, 50, 50), my_spaceship->systems[n].heat_level, 0.0, 1.0, sf::Color(255, 255 * (1.0 - my_spaceship->systems[n].heat_level), 0));
+        float heating_diff = powf(1.7, my_spaceship->systems[n].power_level - 1.0) - (1.0 + my_spaceship->systems[n].coolant_level * 0.1);
+        if (my_spaceship->systems[n].heat_level > 0.0 && fabs(heating_diff) > 0.0)
+        {
+            sf::Sprite arrow;
+            textureManager.setTexture(arrow, "gui_arrow.png");
+            arrow.setPosition(x + 135, 525);
+            float f = 50 / float(arrow.getTextureRect().height);
+            arrow.setScale(f, f);
+            if (heating_diff < 0)
+                arrow.setRotation(-90);
+            else
+                arrow.setRotation(90);
+            arrow.setColor(sf::Color(255, 255, 255, std::min(255, int(255 * fabs(heating_diff)))));
+            getRenderTarget()->draw(arrow);
+        }
         ret = vslider(sf::FloatRect(x + 110, 550, 50, 300), my_spaceship->systems[n].coolant_level, 10.0, 0.0);
         if (my_spaceship->systems[n].coolant_level != ret)
             my_spaceship->commandSetSystemCoolant(ESystem(n), ret);
@@ -212,7 +227,7 @@ void CrewUI::engineeringUI()
     }
 
     sf::Vector2i interior_size = my_spaceship->ship_template->interiorSize();
-    sf::Vector2f interial_position = sf::Vector2f(800, 250) - sf::Vector2f(interior_size) * 48.0f / 2.0f;
+    sf::Vector2f interial_position = sf::Vector2f(getWindowSize().x / 2.0, 250) - sf::Vector2f(interior_size) * 48.0f / 2.0f;
     drawShipInternals(interial_position, my_spaceship, highlight_system);
 
     PVector<RepairCrew> rc_list = getRepairCrewFor(my_spaceship);
