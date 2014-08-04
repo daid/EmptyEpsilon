@@ -15,12 +15,14 @@ GameGlobalInfo::GameGlobalInfo()
 {
     assert(!gameGlobalInfo);
 
+    victory_faction = -1;
     gameGlobalInfo = this;
     for(int n=0; n<maxPlayerShips; n++)
     {
         playerShipId[n] = -1;
         registerMemberReplication(&playerShipId[n]);
     }
+    registerMemberReplication(&victory_faction);
 }
 
 P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)

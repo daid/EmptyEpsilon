@@ -27,6 +27,7 @@ class GameGlobalInfo : public MultiplayerObject
 public:
     static const int maxPlayerShips = 32;
 private:
+    int victory_faction;
     int32_t playerShipId[maxPlayerShips];
 public:
     GameGlobalInfo();
@@ -36,6 +37,9 @@ public:
 
     int findPlayerShip(P<PlayerSpaceship> ship);
     int insertPlayerShip(P<PlayerSpaceship> ship);
+    
+    void setVictory(int faction_id) { victory_faction = faction_id; }
+    int getVictoryFaction() { return victory_faction; }
 };
 
 class PlayerInfo : public MultiplayerObject

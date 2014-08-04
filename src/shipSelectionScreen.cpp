@@ -96,8 +96,7 @@ void ShipSelectionScreen::onGui()
 
         if (button(sf::FloatRect(800, 600, 300, 50), "Ready"))
         {
-            if (game_server && !engine->getObject("scenario") && active_scenario_index < int(scenarios.size()))
-                engine->registerObject("scenario", new ScriptObject(scenarios[active_scenario_index].filename));
+            startScenario();
             destroy();
             if (my_player_info->isMainScreen())
             {
@@ -160,9 +159,8 @@ void ShipSelectionScreen::onGui()
 
         if (button(sf::FloatRect(1200, 150, 300, 50), "Game Master"))
         {
-            if (game_server && !engine->getObject("scenario") && active_scenario_index < int(scenarios.size()))
-                engine->registerObject("scenario", new ScriptObject(scenarios[active_scenario_index].filename));
-
+            startScenario();
+            
             my_spaceship = NULL;
             my_player_info->setShipId(-1);
             destroy();
@@ -192,5 +190,25 @@ void ShipSelectionScreen::onGui()
             disconnectFromServer();
             new MainMenu();
         }
+    }
+}
+
+int lua_victory(lua_State* L)
+{
+    int victory_faction = luaL_checkinteger(L, 1);
+    gameGlobalInfo->setVictory(victory_faction);
+    engine->getObject("scenario")->destroy();
+    engine->setGameSpeed(0.0);
+    return 0;
+}
+
+void ShipSelectionScreen::startScenario()
+{
+    if (game_server && !engine->getObject("scenario") && active_scenario_index < int(scenarios.size()))
+    {
+        P<ScriptObject> script = new ScriptObject();
+        script->registerFunction("victory", lua_victory);
+        script->run(scenarios[active_scenario_index].filename);
+        engine->registerObject("scenario", script);
     }
 }

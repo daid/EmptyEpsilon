@@ -11,9 +11,10 @@ end
 
 function init()
 	enemyList = {}
+	friendlyList = {}
 
 	for n=1, 3 do
-		setCirclePos(SpaceStation():setFaction(1), 0, 0, n * 360 / 3 + random(-30, 30), random(15000, 20000))
+		table.insert(friendlyList, setCirclePos(SpaceStation():setFaction(1), 0, 0, n * 360 / 3 + random(-30, 30), random(15000, 20000)))
 	end
 	
 	enemy_group_count = 5
@@ -48,7 +49,7 @@ function init()
 			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 		elseif type < 8.0 then
-			setCirclePos(CpuShip():setShipTemplate('Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100))
+			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 		elseif type < 9.0 then
 			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Fighter'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 		else
@@ -93,12 +94,21 @@ end
 
 function update(delta)
 	enemy_count = 0
+	friendly_count = 0
 	for _, enemy in ipairs(enemyList) do
-		if g:isValid() then
+		if enemy:isValid() then
 			enemy_count = enemy_count + 1
 		end
 	end
+	for _, friendly in ipairs(friendlyList) do
+		if friendly:isValid() then
+			friendly_count = friendly_count + 1
+		end
+	end
 	if enemy_count == 0 then
-		--No victory function yet
+		victory(1);	--Victory for the humans.
+	end
+	if friendly_count == 0 then
+		victory(2);	--Victory for the SpaceCows (==defeat for the humans)
 	end
 end

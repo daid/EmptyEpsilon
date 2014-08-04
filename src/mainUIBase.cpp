@@ -4,6 +4,7 @@
 #include "epsilonServer.h"
 #include "main.h"
 #include "particleEffect.h"
+#include "factionInfo.h"
 #include "shipSelectionScreen.h"
 #include "repairCrew.h"
 
@@ -25,10 +26,13 @@ void MainUIBase::onGui()
 
     if (game_server)
     {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-            engine->setGameSpeed(1.0);
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
-            engine->setGameSpeed(0.0);
+        if (gameGlobalInfo->getVictoryFaction() < 0)
+        {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+                engine->setGameSpeed(1.0);
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
+                engine->setGameSpeed(0.0);
+        }
 #ifdef DEBUG
         text(sf::FloatRect(0, 0, getWindowSize().x - 5, 20), string(game_server->getSendDataRate() / 1000) + " kb per second", AlignRight, 15);
         text(sf::FloatRect(0, 20, getWindowSize().x - 5, 20), string(game_server->getSendDataRatePerClient() / 1000) + " kb per client", AlignRight, 15);
@@ -73,9 +77,23 @@ void MainUIBase::onGui()
 
     if (engine->getGameSpeed() == 0.0)
     {
-        text(sf::FloatRect(0, 600, getWindowSize().x, 100), "Game Paused", AlignCenter, 70);
-        if (game_server)
-            text(sf::FloatRect(0, 680, getWindowSize().x, 30), "(Press [SPACE] to resume)", AlignCenter, 30);
+        if (gameGlobalInfo->getVictoryFaction() < 0)
+        {
+            text(sf::FloatRect(0, 600, getWindowSize().x, 100), "Game Paused", AlignCenter, 70);
+            if (game_server)
+                text(sf::FloatRect(0, 680, getWindowSize().x, 30), "(Press [SPACE] to resume)", AlignCenter, 30);
+        }else{
+            if (my_spaceship)
+            {
+                if (factionInfo[gameGlobalInfo->getVictoryFaction()].states[my_spaceship->getFaction()] == FVF_Enemy)
+                    text(sf::FloatRect(0, 600, getWindowSize().x, 100), "Defeat!", AlignCenter, 70);
+                else
+                    text(sf::FloatRect(0, 600, getWindowSize().x, 100), "Victory!", AlignCenter, 70);
+            }else{
+                text(sf::FloatRect(0, 600, getWindowSize().x, 100), "Game Finished", AlignCenter, 70);
+                text(sf::FloatRect(0, 680, getWindowSize().x, 100), factionInfo[gameGlobalInfo->getVictoryFaction()].name + " wins", AlignCenter, 70);
+            }
+        }
     }
 }
 

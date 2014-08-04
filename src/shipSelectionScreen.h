@@ -21,6 +21,9 @@ public:
     ShipSelectionScreen();
     
     virtual void onGui();
+
+private:
+    void startScenario();   //Server only
 };
 
 #endif//SHIP_SELECTION_SCREEN_H
