@@ -309,7 +309,7 @@ void CrewUI::scienceUI()
             {
                 progressBar(sf::FloatRect(20, 160, 150, 30), my_spaceship->scanning_delay, 8.0, 0.0);
             }else{
-                if (button(sf::FloatRect(20, 160, 150, 30), "Scan", 25))
+                if (button(sf::FloatRect(20, 160, 200, 40), "Scan", 30))
                     my_spaceship->commandScan(scienceTarget);
             }
         }else{
@@ -327,13 +327,13 @@ void CrewUI::scienceUI()
         }
     }
 
-    if (science_radar_distance == 50000 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 1x", 25))
+    if (science_radar_distance == 50000 && button(sf::FloatRect(20, 800, 200, 40), "Zoom: 1x", 30))
         science_radar_distance = 25000;
-    else if (science_radar_distance == 25000 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 2x", 25))
+    else if (science_radar_distance == 25000 && button(sf::FloatRect(20, 800, 200, 40), "Zoom: 2x", 30))
         science_radar_distance = 12500;
-    else if (science_radar_distance == 12500 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 4x", 25))
+    else if (science_radar_distance == 12500 && button(sf::FloatRect(20, 800, 200, 40), "Zoom: 4x", 30))
         science_radar_distance = 5000;
-    else if (science_radar_distance == 5000 && button(sf::FloatRect(20, 850, 150, 30), "Zoom: 10x", 25))
+    else if (science_radar_distance == 5000 && button(sf::FloatRect(20, 800, 200, 40), "Zoom: 10x", 30))
         science_radar_distance = 50000;
 }
 
