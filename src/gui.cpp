@@ -79,6 +79,12 @@ void GUI::vtext(sf::FloatRect rect, string text, EAlign align, float fontSize, s
 
 void GUI::progressBar(sf::FloatRect rect, float value, float min_value, float max_value, sf::Color color)
 {
+    float f = (value - min_value) / (max_value - min_value);
+    
+    draw9Cut(rect, "button_background", color, f);
+    draw9Cut(rect, "border_background");
+return;
+    
     rect.left += 4.0;
     rect.top += 4.0;
     rect.width -= 8.0;
@@ -247,7 +253,7 @@ string GUI::textEntry(sf::FloatRect rect, string value, float fontSize)
     return value;
 }
 
-void GUI::draw9Cut(sf::FloatRect rect, string texture, sf::Color color)
+void GUI::draw9Cut(sf::FloatRect rect, string texture, sf::Color color, float width_factor)
 {
     sf::Sprite sprite;
     textureManager.setTexture(sprite, texture);
@@ -267,57 +273,82 @@ void GUI::draw9Cut(sf::FloatRect rect, string texture, sf::Color color)
         sprite.setScale(scale, scale);
         cornerSizeR *= scale;
     }
+    
     sprite.setColor(color);
     sprite.setOrigin(0, 0);
+    
+    float f = 1.0;
+    if (cornerSizeR > rect.width * width_factor)
+        f = rect.width * width_factor / cornerSizeR;
+    
     //TopLeft
     sprite.setPosition(rect.left, rect.top);
-    sprite.setTextureRect(sf::IntRect(0, 0, cornerSizeT, cornerSizeT));
+    sprite.setTextureRect(sf::IntRect(0, 0, cornerSizeT * f, cornerSizeT));
     renderTarget->draw(sprite);
     //BottomLeft
     sprite.setPosition(rect.left, rect.top + rect.height - cornerSizeR);
-    sprite.setTextureRect(sf::IntRect(0, textureSize.height - cornerSizeT, cornerSizeT, cornerSizeT));
+    sprite.setTextureRect(sf::IntRect(0, textureSize.height - cornerSizeT, cornerSizeT * f, cornerSizeT));
     renderTarget->draw(sprite);
-    //TopRight
-    sprite.setPosition(rect.left + rect.width - cornerSizeR, rect.top);
-    sprite.setTextureRect(sf::IntRect(textureSize.width - cornerSizeT, 0, cornerSizeT, cornerSizeT));
-    renderTarget->draw(sprite);
-    //BottomRight
-    sprite.setPosition(rect.left + rect.width - cornerSizeR, rect.top + rect.height - cornerSizeR);
-    sprite.setTextureRect(sf::IntRect(textureSize.width - cornerSizeT, textureSize.height - cornerSizeT, cornerSizeT, cornerSizeT));
-    renderTarget->draw(sprite);
-    
+
+    if (rect.height > cornerSizeR * 2)
+    {
+        //left
+        sprite.setPosition(rect.left, rect.top + cornerSizeR);
+        sprite.setTextureRect(sf::IntRect(0, cornerSizeT, cornerSizeT * f, 1));
+        sprite.setScale(scale, rect.height - cornerSizeR*2);
+        renderTarget->draw(sprite);
+        sprite.setScale(scale, scale);
+    }
+    if (f < 1.0)
+        return;
+
+    if (rect.width - cornerSizeR > rect.width * width_factor)
+        f = (width_factor - cornerSizeR / rect.width) * (rect.width / (rect.width - cornerSizeR * 2));
+
     if (rect.width > cornerSizeR * 2)
     {
         //Top
         sprite.setPosition(rect.left + cornerSizeR, rect.top);
         sprite.setTextureRect(sf::IntRect(cornerSizeT, 0, textureSize.width - cornerSizeT * 2, cornerSizeT));
-        sprite.setScale((rect.width - cornerSizeR*2) / float(textureSize.width - cornerSizeT * 2), scale);
+        sprite.setScale((rect.width - cornerSizeR*2) / float(textureSize.width - cornerSizeT * 2) * f, scale);
         renderTarget->draw(sprite);
         //Bottom
         sprite.setPosition(rect.left + cornerSizeR, rect.top + rect.height - cornerSizeR);
         sprite.setTextureRect(sf::IntRect(cornerSizeT, textureSize.height - cornerSizeT, textureSize.width - cornerSizeT * 2, cornerSizeT));
-        sprite.setScale((rect.width - cornerSizeR*2) / float(textureSize.width - cornerSizeT * 2), scale);
+        sprite.setScale((rect.width - cornerSizeR*2) / float(textureSize.width - cornerSizeT * 2) * f, scale);
         renderTarget->draw(sprite);
+        sprite.setScale(scale, scale);
     }
-    if (rect.height > cornerSizeR * 2)
-    {
-        //left
-        sprite.setPosition(rect.left, rect.top + cornerSizeR);
-        sprite.setTextureRect(sf::IntRect(0, cornerSizeT, cornerSizeT, 1));
-        sprite.setScale(scale, rect.height - cornerSizeR*2);
-        renderTarget->draw(sprite);
-        //Right
-        sprite.setPosition(rect.left + rect.width - cornerSizeR, rect.top + cornerSizeR);
-        sprite.setTextureRect(sf::IntRect(textureSize.width - cornerSizeT, cornerSizeT, cornerSizeT, 1));
-        sprite.setScale(scale, rect.height - cornerSizeR*2);
-        renderTarget->draw(sprite);
-    }
+
     if (rect.width > cornerSizeR * 2 && rect.height > cornerSizeR * 2)
     {
         //Center
         sprite.setPosition(rect.left + cornerSizeR, rect.top + cornerSizeR);
         sprite.setTextureRect(sf::IntRect(cornerSizeT, cornerSizeT, 1, 1));
-        sprite.setScale(rect.width - cornerSizeR*2, rect.height - cornerSizeR*2);
+        sprite.setScale((rect.width - cornerSizeR*2) * f, rect.height - cornerSizeR*2);
+        renderTarget->draw(sprite);
+        sprite.setScale(scale, scale);
+    }
+    if (f < 1.0)
+        return;
+    if (width_factor < 1.0)
+        f = (width_factor - (rect.width - cornerSizeR) / rect.width) * (rect.width / cornerSizeR);
+    
+    //TopRight
+    sprite.setPosition(rect.left + rect.width - cornerSizeR, rect.top);
+    sprite.setTextureRect(sf::IntRect(textureSize.width - cornerSizeT, 0, cornerSizeT * f, cornerSizeT));
+    renderTarget->draw(sprite);
+    //BottomRight
+    sprite.setPosition(rect.left + rect.width - cornerSizeR, rect.top + rect.height - cornerSizeR);
+    sprite.setTextureRect(sf::IntRect(textureSize.width - cornerSizeT, textureSize.height - cornerSizeT, cornerSizeT * f, cornerSizeT));
+    renderTarget->draw(sprite);
+
+    if (rect.height > cornerSizeR * 2)
+    {
+        //Right
+        sprite.setPosition(rect.left + rect.width - cornerSizeR, rect.top + cornerSizeR);
+        sprite.setTextureRect(sf::IntRect(textureSize.width - cornerSizeT, cornerSizeT, cornerSizeT * f, 1));
+        sprite.setScale(scale, rect.height - cornerSizeR*2);
         renderTarget->draw(sprite);
     }
 }

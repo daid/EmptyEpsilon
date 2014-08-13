@@ -40,7 +40,7 @@ public:
     static sf::Vector2f getWindowSize() { return windowSize; }
 
 private:
-    static void draw9Cut(sf::FloatRect rect, string texture, sf::Color color=sf::Color::White);
+    static void draw9Cut(sf::FloatRect rect, string texture, sf::Color color=sf::Color::White, float width_factor = 1.0);
 };
 
 class MouseRenderer : public Renderable
