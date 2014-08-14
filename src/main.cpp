@@ -35,6 +35,14 @@ int main(int argc, char** argv)
         CFRelease(url);
     }
 #endif
+    std::map<string, string> startup_parameters;
+    for(int n=1; n<argc; n++)
+    {
+        char* value = strchr(argv[n], '=');
+        if (!value) continue;
+        *value++ = '\0';
+        startup_parameters[string(argv[n]).strip()] = string(value).strip();
+    }
 
     new Engine();
     new DirectoryResourceProvider("resources/");
@@ -57,12 +65,24 @@ int main(int argc, char** argv)
     int height = 900;
     int fsaa = 0;
     bool fullscreen = true;
-#ifdef DEBUG
-    fullscreen = false;
-#endif
-    //width = height / 3 * 4;
+
+    if (startup_parameters.find("fullscreen") != startup_parameters.end())
+        fullscreen = startup_parameters["fullscreen"].toInt();
+
+    sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+    if (desktop.height / 3 * 4 == desktop.width || startup_parameters["screen43"].toInt() != 0)
+        width = height / 3 * 4;
     engine->registerObject("windowManager", new WindowManager(width, height, fullscreen, glitchPostProcessor, fsaa));
-    engine->registerObject("mouseRenderer", new MouseRenderer());
+    if (startup_parameters["touchscreen"].toInt())
+    {
+        InputHandler::touch_screen = true;
+    }else{
+        engine->registerObject("mouseRenderer", new MouseRenderer());
+    }
+    if (startup_parameters["swapmousexy"].toInt())
+    {
+        InputHandler::swap_xy = true;
+    }
     soundManager.setMusicVolume(50);
 
     randomNebulas();
