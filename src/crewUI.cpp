@@ -94,21 +94,22 @@ void CrewUI::helmsUI()
 
     keyValueDisplay(sf::FloatRect(20, 100, 200, 40), 0.5, "Energy", string(int(my_spaceship->energy_level)), 25);
 
-    impulseSlider(sf::FloatRect(20, 500, 50, 300), 20);
+    impulseSlider(sf::FloatRect(20, 400, 50, 300), 20);
 
     float x = 100;
     if (my_spaceship->hasWarpdrive)
     {
-        warpSlider(sf::FloatRect(x, 500, 50, 300), 20);
+        warpSlider(sf::FloatRect(x, 400, 50, 300), 20);
         x += 80;
     }
     if (my_spaceship->hasJumpdrive)
     {
-        jumpSlider(sf::FloatRect(x, 500, 50, 300), 20);
+        jumpSlider(sf::FloatRect(x, 400, 50, 300), 20);
         x += 80;
+        jumpButton(sf::FloatRect(20, 750, 280, 50), 30);
     }
 
-    dockingButton(sf::FloatRect(x, 800, 280, 50), 30);
+    dockingButton(sf::FloatRect(20, 800, 280, 50), 30);
 }
 
 void CrewUI::weaponsUI()
@@ -672,6 +673,7 @@ void CrewUI::singlePilotUI()
     if (my_spaceship->hasJumpdrive)
     {
         jumpSlider(sf::FloatRect(x, 650, 40, 200), 15);
+        jumpButton(sf::FloatRect(x, 865, 80, 30), 20);
         x += 50;
     }
 
@@ -796,14 +798,16 @@ void CrewUI::jumpSlider(sf::FloatRect rect, float text_size)
     jump_distance = vslider(rect, jump_distance, 40.0, 1.0, 1.0);
     jump_distance = roundf(jump_distance * 10.0f) / 10.0f;
     text(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(jump_distance, 1) + "km", AlignLeft, text_size);
+}
+
+void CrewUI::jumpButton(sf::FloatRect rect, float text_size)
+{
     if (my_spaceship->jumpDelay > 0.0)
     {
-        text(sf::FloatRect(rect.left, rect.top + rect.height + text_size, rect.width, text_size), string(int(ceilf(my_spaceship->jumpDelay))), AlignLeft, text_size);
+        keyValueDisplay(rect, 0.5, "Jump in", string(int(ceilf(my_spaceship->jumpDelay))), text_size);
     }else{
-        if (button(sf::FloatRect(rect.left - text_size / 2, rect.top + rect.height + text_size, rect.width + text_size, text_size), "Jump", text_size))
-        {
+        if (button(rect, "Jump", text_size))
             my_spaceship->commandJump(jump_distance);
-        }
     }
 }
 
