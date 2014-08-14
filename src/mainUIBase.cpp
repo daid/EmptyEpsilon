@@ -270,7 +270,7 @@ void MainUIBase::drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESy
         sf::RectangleShape room(sf::Vector2f(st->rooms[n].size) * room_size - sf::Vector2f(4, 4));
         room.setPosition(position + sf::Vector2f(st->rooms[n].position) * room_size + sf::Vector2f(4, 4));
         room.setFillColor(sf::Color(96, 96, 96, 255));
-        if (st->rooms[n].system != SYS_None && ship->hasSystem(ESystem(n)))
+        if (st->rooms[n].system != SYS_None && ship->hasSystem(st->rooms[n].system))
         {
             float f = 1.0;
             if (playerSpaceship)

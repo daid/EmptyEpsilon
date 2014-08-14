@@ -238,8 +238,8 @@ string GUI::textEntry(sf::FloatRect rect, string value, float fontSize)
 void GUI::keyValueDisplay(sf::FloatRect rect, float div_distance, string key, string value, float textSize)
 {
     const float div_size = 3.0;
-    draw9Cut(rect, "button_background", sf::Color::White, div_distance);
     draw9Cut(rect, "border_background");
+    draw9Cut(rect, "button_background", sf::Color::White, div_distance);
     text(sf::FloatRect(rect.left, rect.top, rect.width * div_distance - div_size, rect.height), key, AlignRight, textSize, sf::Color::Black);
     text(sf::FloatRect(rect.left + rect.width * div_distance + div_size, rect.top, rect.width * (1.0 - div_distance), rect.height), value, AlignLeft, textSize);
 }
