@@ -35,6 +35,7 @@ public:
     static float vslider(sf::FloatRect rect, float value, float minValue, float maxValue, float normalValue = 0.0);
     static int selector(sf::FloatRect rect, string text, float textSize = 30);
     static string textEntry(sf::FloatRect rect, string value, float fontSize = 30);
+    static void keyValueDisplay(sf::FloatRect, float div_distance, string key, string value, float textSize = 30.0f);
 
     static sf::RenderTarget* getRenderTarget() { return renderTarget; }
     static sf::Vector2f getWindowSize() { return windowSize; }

@@ -25,6 +25,8 @@ private:
     EMissileWeapons tube_load_type;
     float jump_distance;
     P<RepairCrew> selected_crew;
+    
+    ESystem engineering_selected_system;
 
     P<SpaceObject> scienceTarget;
     float science_radar_distance;

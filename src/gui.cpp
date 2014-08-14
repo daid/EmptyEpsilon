@@ -153,7 +153,7 @@ bool GUI::toggleButton(sf::FloatRect rect, bool active, string textValue, float 
 
 float GUI::vslider(sf::FloatRect rect, float value, float minValue, float maxValue, float normalValue)
 {
-    draw9Cut(rect, "button_background", sf::Color(32,32,32, 255));
+    draw9Cut(rect, "button_background", sf::Color(64,64,64, 255));
 
     float y;
     y = rect.top + (rect.height - rect.width) * (normalValue - minValue) / (maxValue - minValue);
@@ -233,6 +233,15 @@ string GUI::textEntry(sf::FloatRect rect, string value, float fontSize)
         value = value.substr(0, -1);
     value += InputHandler::getKeyboardTextEntry();
     return value;
+}
+
+void GUI::keyValueDisplay(sf::FloatRect rect, float div_distance, string key, string value, float textSize)
+{
+    const float div_size = 3.0;
+    draw9Cut(rect, "button_background", sf::Color::White, div_distance);
+    draw9Cut(rect, "border_background");
+    text(sf::FloatRect(rect.left, rect.top, rect.width * div_distance - div_size, rect.height), key, AlignRight, textSize, sf::Color::Black);
+    text(sf::FloatRect(rect.left + rect.width * div_distance + div_size, rect.top, rect.width * (1.0 - div_distance), rect.height), value, AlignLeft, textSize);
 }
 
 void GUI::draw9Cut(sf::FloatRect rect, string texture, sf::Color color, float width_factor)

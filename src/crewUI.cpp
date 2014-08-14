@@ -10,6 +10,7 @@ CrewUI::CrewUI()
     tube_load_type = MW_None;
     science_radar_distance = 50000;
     comms_open_channel_type = OCT_None;
+    engineering_selected_system = SYS_None;
 
     for(int n=0; n<max_crew_positions; n++)
     {
@@ -55,17 +56,23 @@ void CrewUI::onGui()
     }else{
         drawStatic();
     }
-
-    int offset = 0;
+    
+    int cnt = 0;
     for(int n=0; n<max_crew_positions; n++)
-    {
         if (my_player_info->crew_position[n])
+            cnt++;
+    
+    if (cnt > 1)
+    {
+        int offset = 0;
+        for(int n=0; n<max_crew_positions; n++)
         {
-            if (toggleButton(sf::FloatRect(200 * offset, 0, 200, 25), show_position == ECrewPosition(n), getCrewPositionName(ECrewPosition(n)), 20))
+            if (my_player_info->crew_position[n])
             {
-                show_position = ECrewPosition(n);
+                if (toggleButton(sf::FloatRect(200 * offset, 0, 200, 25), show_position == ECrewPosition(n), getCrewPositionName(ECrewPosition(n)), 20))
+                    show_position = ECrewPosition(n);
+                offset++;
             }
-            offset++;
         }
     }
 
@@ -85,7 +92,7 @@ void CrewUI::helmsUI()
 
     drawRadar(radar_center, 400, 5000, false, my_spaceship->getTarget());
 
-    text(sf::FloatRect(10, 100, 200, 20), "Energy: " + string(int(my_spaceship->energy_level)), AlignLeft, 20);
+    keyValueDisplay(sf::FloatRect(20, 100, 200, 40), 0.5, "Energy", string(int(my_spaceship->energy_level)), 25);
 
     impulseSlider(sf::FloatRect(20, 500, 50, 300), 20);
 
@@ -132,11 +139,11 @@ void CrewUI::weaponsUI()
     }
     drawRadar(radar_position, 400, radarDistance, false, my_spaceship->getTarget());
 
-    text(sf::FloatRect(20, 100, 200, 20), "Energy: " + string(int(my_spaceship->energy_level)), AlignLeft, 20);
-    text(sf::FloatRect(20, 120, 200, 20), "Shields: " + string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "/" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)), AlignLeft, 20);
+    keyValueDisplay(sf::FloatRect(20, 100, 200, 40), 0.5, "Energy", string(int(my_spaceship->energy_level)), 25);
+    keyValueDisplay(sf::FloatRect(20, 140, 200, 40), 0.5, "Shields", string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "/" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)), 25);
     if (my_spaceship->front_shield_max > 0 || my_spaceship->rear_shield_max > 0)
     {
-        if (toggleButton(sf::FloatRect(20, 140, 200, 30), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 25))
+        if (toggleButton(sf::FloatRect(20, 180, 200, 40), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 30))
             my_spaceship->commandSetShields(!my_spaceship->shields_active);
     }
 
@@ -181,50 +188,105 @@ void CrewUI::engineeringUI()
         else
             net_power -= my_spaceship->systems[n].power_user_factor * my_spaceship->systems[n].power_level;
     }
-    text(sf::FloatRect(50, 100, 200, 20), "Energy: " + string(int(my_spaceship->energy_level)) + " (" + string(net_power) + ")", AlignLeft, 20);
-    text(sf::FloatRect(50, 120, 200, 20), "Hull: " + string(int(my_spaceship->hull_strength * 100 / my_spaceship->hull_max)), AlignLeft, 20);
-    text(sf::FloatRect(50, 140, 200, 20), "Shields: " + string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "/" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)), AlignLeft, 20);
-    if (toggleButton(sf::FloatRect(50, 200, 250, 50), my_spaceship->auto_repair_enabled, "Auto-Repair", 30))
+    keyValueDisplay(sf::FloatRect(20, 100, 300, 40), 0.5, "Energy", string(int(my_spaceship->energy_level)) + " (" + string(net_power) + ")", 25);
+    keyValueDisplay(sf::FloatRect(20, 140, 300, 40), 0.5, "Hull", string(int(my_spaceship->hull_strength * 100 / my_spaceship->hull_max)), 25);
+    keyValueDisplay(sf::FloatRect(20, 180, 300, 40), 0.5, "Shields", string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "/" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)), 25);
+    if (toggleButton(sf::FloatRect(20, 250, 300, 50), my_spaceship->auto_repair_enabled, "Auto-Repair", 30))
     {
         my_spaceship->commandSetAutoRepair(!my_spaceship->auto_repair_enabled);
     }
 
     ESystem highlight_system = SYS_None;
-    int x = 20;
-    for(int n=0; n<SYS_COUNT; n++)
+    if (false)
     {
-        if (!my_spaceship->hasSystem(ESystem(n))) continue;
-        if (sf::FloatRect(x + 20, 530, 140, 320).contains(mouse))
-            highlight_system = ESystem(n);
-
-        vtext(sf::FloatRect(x + 20, 550, 30, 300), "Dmg:" + string(int(100 - my_spaceship->systems[n].health * 100)) + "%", AlignRight, 15);
-        vtext(sf::FloatRect(x, 550, 50, 300), getSystemName(ESystem(n)), AlignLeft);
-        text(sf::FloatRect(x + 50, 530, 50, 20), string(int(my_spaceship->systems[n].power_level * 100)) + "%", AlignCenter, 20);
-        float ret = vslider(sf::FloatRect(x + 50, 550, 50, 300), my_spaceship->systems[n].power_level, 3.0, 0.0, 1.0);
-        if (ret < 1.25 && ret > 0.75)
-            ret = 1.0;
-        if (my_spaceship->systems[n].power_level != ret)
-            my_spaceship->commandSetSystemPower(ESystem(n), ret);
-        vprogressBar(sf::FloatRect(x + 110, 500, 50, 50), my_spaceship->systems[n].heat_level, 0.0, 1.0, sf::Color(255, 255 * (1.0 - my_spaceship->systems[n].heat_level), 0));
-        float heating_diff = powf(1.7, my_spaceship->systems[n].power_level - 1.0) - (1.0 + my_spaceship->systems[n].coolant_level * 0.1);
-        if (my_spaceship->systems[n].heat_level > 0.0 && fabs(heating_diff) > 0.0)
+        int x = 0;
+        for(int n=0; n<SYS_COUNT; n++)
         {
-            sf::Sprite arrow;
-            textureManager.setTexture(arrow, "gui_arrow.png");
-            arrow.setPosition(x + 135, 525);
-            float f = 50 / float(arrow.getTextureRect().height);
-            arrow.setScale(f, f);
-            if (heating_diff < 0)
-                arrow.setRotation(-90);
-            else
-                arrow.setRotation(90);
-            arrow.setColor(sf::Color(255, 255, 255, std::min(255, int(255 * fabs(heating_diff)))));
-            getRenderTarget()->draw(arrow);
+            if (!my_spaceship->hasSystem(ESystem(n))) continue;
+            if (sf::FloatRect(x + 20, 530, 140, 320).contains(mouse))
+                highlight_system = ESystem(n);
+
+            vtext(sf::FloatRect(x + 20, 550, 30, 300), "Dmg:" + string(int(100 - my_spaceship->systems[n].health * 100)) + "%", AlignRight, 15);
+            vtext(sf::FloatRect(x, 550, 50, 300), getSystemName(ESystem(n)), AlignLeft);
+            text(sf::FloatRect(x + 50, 530, 50, 20), string(int(my_spaceship->systems[n].power_level * 100)) + "%", AlignCenter, 20);
+            float ret = vslider(sf::FloatRect(x + 50, 550, 50, 300), my_spaceship->systems[n].power_level, 3.0, 0.0, 1.0);
+            if (ret < 1.25 && ret > 0.75)
+                ret = 1.0;
+            if (my_spaceship->systems[n].power_level != ret)
+                my_spaceship->commandSetSystemPower(ESystem(n), ret);
+            vprogressBar(sf::FloatRect(x + 110, 500, 50, 50), my_spaceship->systems[n].heat_level, 0.0, 1.0, sf::Color(255, 255 * (1.0 - my_spaceship->systems[n].heat_level), 0));
+            float heating_diff = powf(1.7, my_spaceship->systems[n].power_level - 1.0) - (1.0 + my_spaceship->systems[n].coolant_level * 0.1);
+            if (my_spaceship->systems[n].heat_level > 0.0 && fabs(heating_diff) > 0.0)
+            {
+                sf::Sprite arrow;
+                textureManager.setTexture(arrow, "gui_arrow.png");
+                arrow.setPosition(x + 135, 525);
+                float f = 50 / float(arrow.getTextureRect().height);
+                arrow.setScale(f, f);
+                if (heating_diff < 0)
+                    arrow.setRotation(-90);
+                else
+                    arrow.setRotation(90);
+                arrow.setColor(sf::Color(255, 255, 255, std::min(255, int(255 * fabs(heating_diff)))));
+                getRenderTarget()->draw(arrow);
+            }
+            ret = vslider(sf::FloatRect(x + 110, 550, 50, 300), my_spaceship->systems[n].coolant_level, 10.0, 0.0);
+            if (my_spaceship->systems[n].coolant_level != ret)
+                my_spaceship->commandSetSystemCoolant(ESystem(n), ret);
+            x += 150;
         }
-        ret = vslider(sf::FloatRect(x + 110, 550, 50, 300), my_spaceship->systems[n].coolant_level, 10.0, 0.0);
-        if (my_spaceship->systems[n].coolant_level != ret)
-            my_spaceship->commandSetSystemCoolant(ESystem(n), ret);
-        x += 160;
+    }else{
+        int y = 470;
+        for(int n=0; n<SYS_COUNT; n++)
+        {
+            if (!my_spaceship->hasSystem(ESystem(n))) continue;
+            if (toggleButton(sf::FloatRect(50, y, 300, 50), ESystem(n) == engineering_selected_system, getSystemName(ESystem(n)), 30))
+                engineering_selected_system = ESystem(n);
+            
+            float health = my_spaceship->systems[n].health;
+            progressBar(sf::FloatRect(350, y, 100, 50), health, 0.0, 1.0, sf::Color(64, 128 * health, 64 * health));
+            text(sf::FloatRect(350, y, 100, 50), string(int(health * 100)) + "%", AlignCenter, 20);
+            
+            float heat = my_spaceship->systems[n].heat_level;
+            progressBar(sf::FloatRect(450, y, 50, 50), heat, 0.0, 1.0, sf::Color(128, 128 * (1.0 - heat), 0));
+            float heating_diff = powf(1.7, my_spaceship->systems[n].power_level - 1.0) - (1.0 + my_spaceship->systems[n].coolant_level * 0.1);
+            if (my_spaceship->systems[n].heat_level > 0.0 && fabs(heating_diff) > 0.0)
+            {
+                sf::Sprite arrow;
+                textureManager.setTexture(arrow, "gui_arrow.png");
+                arrow.setPosition(450 + 25, y + 25);
+                float f = 50 / float(arrow.getTextureRect().height);
+                arrow.setScale(f, f);
+                if (heating_diff < 0)
+                    arrow.setRotation(-90);
+                else
+                    arrow.setRotation(90);
+                arrow.setColor(sf::Color(255, 255, 255, std::min(255, int(255 * fabs(heating_diff)))));
+                getRenderTarget()->draw(arrow);
+            }
+            float power = my_spaceship->systems[n].power_level;
+            progressBar(sf::FloatRect(500, y, 50, 50), power, 0.0, 3.0, sf::Color(192, 192, 0));
+            float coolant = my_spaceship->systems[n].coolant_level;
+            progressBar(sf::FloatRect(550, y, 50, 50), coolant, 0.0, 10.0, sf::Color(0, 128, 128));
+            
+            y += 50;
+        }
+        
+        if (my_spaceship->hasSystem(engineering_selected_system))
+        {
+            //vtext(sf::FloatRect(670, 470, 30, 400), getSystemName(engineering_selected_system), AlignLeft);
+            vtext(sf::FloatRect(770, 470, 30, 400), "Power", AlignLeft);
+            float ret = vslider(sf::FloatRect(800, 470, 60, 400), my_spaceship->systems[engineering_selected_system].power_level, 3.0, 0.0, 1.0);
+            if (ret < 1.25 && ret > 0.75)
+                ret = 1.0;
+            if (my_spaceship->systems[engineering_selected_system].power_level != ret)
+                my_spaceship->commandSetSystemPower(engineering_selected_system, ret);
+                
+            vtext(sf::FloatRect(870, 470, 30, 400), "Coolant", AlignLeft);
+            ret = vslider(sf::FloatRect(900, 470, 60, 400), my_spaceship->systems[engineering_selected_system].coolant_level, 10.0, 0.0);
+            if (my_spaceship->systems[engineering_selected_system].coolant_level != ret)
+                my_spaceship->commandSetSystemCoolant(engineering_selected_system, ret);
+        }
     }
 
     sf::Vector2i interior_size = my_spaceship->ship_template->interiorSize();
@@ -254,7 +316,7 @@ void CrewUI::engineeringUI()
         }
     }
 
-    if (InputHandler::mouseIsPressed(sf::Mouse::Right) && selected_crew)
+    if (InputHandler::mouseIsPressed(sf::Mouse::Left) && selected_crew)
     {
         sf::Vector2i target_pos = sf::Vector2i((mouse - interial_position) / 48.0f);
         if (target_pos.x >= 0 && target_pos.x < interior_size.x && target_pos.y >= 0 && target_pos.y < interior_size.y)
@@ -277,7 +339,7 @@ void CrewUI::scienceUI()
         {
             P<SpaceObject> target;
             sf::Vector2f mousePosition = my_spaceship->getPosition() + diff / 400.0f * radarDistance;
-            PVector<Collisionable> list = CollisionManager::queryArea(mousePosition - sf::Vector2f(radarDistance / 100, radarDistance / 100), mousePosition + sf::Vector2f(radarDistance / 100, radarDistance / 100));
+            PVector<Collisionable> list = CollisionManager::queryArea(mousePosition - sf::Vector2f(radarDistance / 30, radarDistance / 30), mousePosition + sf::Vector2f(radarDistance / 30, radarDistance / 30));
             foreach(Collisionable, obj, list)
             {
                 P<SpaceObject> spaceObject = obj;
@@ -298,32 +360,32 @@ void CrewUI::scienceUI()
         float distance = sf::length(scienceTarget->getPosition() - my_spaceship->getPosition());
         float heading = sf::vector2ToAngle(scienceTarget->getPosition() - my_spaceship->getPosition());
         if (heading < 0) heading += 360;
-        text(sf::FloatRect(20, 100, 100, 20), scienceTarget->getCallSign(), AlignLeft, 20);
-        text(sf::FloatRect(20, 120, 100, 20), "Distance: " + string(distance / 1000.0, 1) + "km", AlignLeft, 20);
-        text(sf::FloatRect(20, 140, 100, 20), "Heading: " + string(int(heading)), AlignLeft, 20);
+        keyValueDisplay(sf::FloatRect(20, 100, 200, 30), 0.5, "Callsign", scienceTarget->getCallSign(), 20);
+        keyValueDisplay(sf::FloatRect(20, 130, 200, 30), 0.5, "Distance", string(distance / 1000.0, 1) + "km", 20);
+        keyValueDisplay(sf::FloatRect(20, 160, 200, 30), 0.5, "Heading", string(int(heading)), 20);
 
         P<SpaceShip> ship = scienceTarget;
         if (ship && !ship->scanned_by_player)
         {
             if (my_spaceship->scanning_delay > 0.0)
             {
-                progressBar(sf::FloatRect(20, 160, 150, 30), my_spaceship->scanning_delay, 8.0, 0.0);
+                progressBar(sf::FloatRect(20, 190, 200, 40), my_spaceship->scanning_delay, 8.0, 0.0);
             }else{
-                if (button(sf::FloatRect(20, 160, 200, 40), "Scan", 30))
+                if (button(sf::FloatRect(20, 190, 200, 40), "Scan", 30))
                     my_spaceship->commandScan(scienceTarget);
             }
         }else{
-            text(sf::FloatRect(20, 160, 100, 20), factionInfo[scienceTarget->faction_id].name, AlignLeft, 20);
+            keyValueDisplay(sf::FloatRect(20, 190, 200, 30), 0.5, "Faction", factionInfo[scienceTarget->faction_id].name, 20);
             if (ship && ship->ship_template)
             {
-                text(sf::FloatRect(20, 180, 100, 20), ship->ship_template->name, AlignLeft, 20);
-                text(sf::FloatRect(20, 200, 200, 20), "Shields: " + string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), AlignLeft, 20);
+                keyValueDisplay(sf::FloatRect(20, 220, 200, 30), 0.5, "Type", ship->ship_template->name, 20);
+                keyValueDisplay(sf::FloatRect(20, 250, 200, 30), 0.5, "Shields", string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), 20);
             }
         }
         P<SpaceStation> station = scienceTarget;
         if (station)
         {
-            text(sf::FloatRect(20, 200, 200, 20), "Shields: " + string(int(station->shields)), AlignLeft, 20);
+            keyValueDisplay(sf::FloatRect(20, 220, 200, 30), 0.5, "Shields", string(int(station->shields)), 20);
         }
     }
 
@@ -590,9 +652,9 @@ void CrewUI::singlePilotUI()
 
     drawRadar(radar_center, radar_size, radarDistance, false, my_spaceship->getTarget(), sf::FloatRect(0, 0, getWindowSize().x / 2.0f, 900));
 
-    text(sf::FloatRect(10, 30, 200, 20), "Energy: " + string(int(my_spaceship->energy_level)), AlignLeft, 20);
-    text(sf::FloatRect(10, 50, 200, 20), "Hull: " + string(int(my_spaceship->hull_strength * 100 / my_spaceship->hull_max)), AlignLeft, 20);
-    text(sf::FloatRect(10, 70, 200, 20), "Shields: " + string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "/" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)), AlignLeft, 20);
+    keyValueDisplay(sf::FloatRect(10, 30, 200, 20), 0.5, "Energy", string(int(my_spaceship->energy_level)), 20);
+    keyValueDisplay(sf::FloatRect(10, 50, 200, 20), 0.5, "Hull", string(int(my_spaceship->hull_strength * 100 / my_spaceship->hull_max)), 20);
+    keyValueDisplay(sf::FloatRect(10, 70, 200, 20), 0.5, "Shields", string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "/" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)), 20);
     if (my_spaceship->front_shield_max > 0 || my_spaceship->rear_shield_max > 0)
     {
         if (toggleButton(sf::FloatRect(10, 90, 170, 25), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 20))

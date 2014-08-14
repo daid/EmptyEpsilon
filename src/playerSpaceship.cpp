@@ -46,7 +46,7 @@ PlayerSpaceship::PlayerSpaceship()
     comms_state = CS_Inactive;
     comms_open_delay = 0.0;
     comms_reply_count = 0;
-    auto_repair_enabled = true;
+    auto_repair_enabled = false;
 
     updateMemberReplicationUpdateDelay(&targetRotation, 0.1);
     registerMemberReplication(&hull_damage_indicator, 0.5);
@@ -311,21 +311,6 @@ void PlayerSpaceship::setSystemCoolant(ESystem system, float level)
                 if (n == system) continue;
 
                 systems[n].coolant_level *= (max_coolant - level) / total_coolant;
-            }
-        }else{
-            float spare_coolant = max_coolant - total_coolant - level;
-            int cnt = 0;
-            for(int n=0; n<SYS_COUNT; n++)
-            {
-                if (!hasSystem(ESystem(n))) continue;
-                if (n == system) continue;
-                cnt += 1;
-            }
-            for(int n=0; n<SYS_COUNT; n++)
-            {
-                if (!hasSystem(ESystem(n))) continue;
-                if (n == system) continue;
-                systems[n].coolant_level += spare_coolant / cnt;
             }
         }
     }

@@ -618,6 +618,7 @@ void SpaceShip::hullDamage(float damageAmount, sf::Vector2f damageLocation, EDam
 
 bool SpaceShip::hasSystem(ESystem system)
 {
+    if (system == SYS_None || system == SYS_COUNT) return false;
     if (system == SYS_Warp && !hasWarpdrive) return false;
     if (system == SYS_JumpDrive && !hasJumpdrive) return false;
     if (system == SYS_FrontShield && front_shield_max <= 0) return false;
