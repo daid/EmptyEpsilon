@@ -7,11 +7,11 @@ try:
 except:
 	from xml.etree import ElementTree
 
-def main(filename, for_target='Release'):
+def compile(filename, system, for_target='Release'):
 	EXECUTABLE = os.path.splitext(filename)[0]
-	if platform.system() == "Windows":
+	if system == "Windows":
 		EXECUTABLE += '.exe'
-	if platform.system() == "Darwin":
+	if system == "Darwin":
 		#Build a MacOS .app thingy.
 		app_dir = '%s.app' % (EXECUTABLE)
 		contents_dir = '%s/Contents' % (app_dir)
@@ -37,6 +37,11 @@ def main(filename, for_target='Release'):
 	BUILD_DIR = '_build'
 	CFLAGS = '-O3'
 	LDFLAGS = ''
+	
+	if system == "Windows" and platform.system() != "Windows":
+		CC = 'i686-w64-mingw32-' + CC
+		CXX = 'i686-w64-mingw32-' + CXX
+	
 	xml = ElementTree.parse(filename)
 	filenames = []
 	obj_filenames = []
@@ -76,6 +81,7 @@ def main(filename, for_target='Release'):
 								LDFLAGS += ' -L%s' % (add.attrib['directory'])
 	if not os.path.isdir(BUILD_DIR):
 		os.mkdir(BUILD_DIR)
+	
 	filenames = filter(lambda f: f.endswith('.c') or f.endswith('.cpp'), filenames)
 	for filename in filenames:
 		obj_filename = os.path.splitext(os.path.basename(filename))[0] + '.o'
@@ -87,15 +93,22 @@ def main(filename, for_target='Release'):
 		cmd = '%s %s -o %s/%s -c %s' % (cc, CFLAGS, BUILD_DIR, obj_filename, filename)
 		print '[%d%%] %s' % (filenames.index(filename) * 100 / len(filenames), cmd)
 		if not os.path.isfile('%s/%s' % (BUILD_DIR, obj_filename)):
-			os.system(cmd)
+			if os.system(cmd) != 0:
+				return
 	
 	cmd = '%s -o %s %s %s' % (CXX, EXECUTABLE, ' '.join(map(lambda n: '%s/%s' % (BUILD_DIR, n), obj_filenames)), LDFLAGS)
 	print '[Goal] %s' % (cmd)
-	os.system(cmd)
+	if os.system(cmd) != 0:
+		return
 
-if platform.system() == "Windows":
-	main("EmptyEpsilon.cbp", "Release")
-if platform.system() == "Linux":
-	main("EmptyEpsilon.cbp", "Linux Release")
-if platform.system() == "Darwin":
-	main("EmptyEpsilon.cbp", "MacOS Release")
+system = platform.system()
+for arg in sys.argv[1:]:
+	if arg == "win32":
+		system = "Windows"
+
+if system == "Windows":
+	compile("EmptyEpsilon.cbp", system, "Release")
+if system == "Linux":
+	compile("EmptyEpsilon.cbp", system, "Linux Release")
+if system == "Darwin":
+	compile("EmptyEpsilon.cbp", system, "MacOS Release")

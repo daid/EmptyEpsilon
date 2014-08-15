@@ -26,7 +26,7 @@
 					<Add library="sfml-network-d" />
 					<Add library="opengl32" />
 					<Add library="glu32" />
-					<Add library="Iphlpapi" />
+					<Add library="iphlpapi" />
 					<Add library="wsock32" />
 					<Add directory="../../SFML-2.1/lib" />
 				</Linker>
@@ -49,7 +49,7 @@
 					<Add library="sfml-network" />
 					<Add library="opengl32" />
 					<Add library="glu32" />
-					<Add library="Iphlpapi" />
+					<Add library="iphlpapi" />
 					<Add library="wsock32" />
 				</Linker>
 			</Target>

@@ -1,3 +1,4 @@
+#include <string.h>
 #include "gui.h"
 #include "mainMenus.h"
 #include "factionInfo.h"
