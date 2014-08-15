@@ -24,7 +24,6 @@ public:
     
     EFactionVsFactionState states[maxFactions];
     
-    
     static void setState(int id1, int id2, EFactionVsFactionState state);
 };
 

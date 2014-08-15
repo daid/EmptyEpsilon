@@ -11,7 +11,8 @@ function mainMenu()
 			end)
 			addCommsReply("Please send backup!", function()
 				--ship = CpuShip():setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):setShipTemplate("Fighter"):setScanned(true):orderDefendTarget(player)
-				setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist you");
+				--setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist you");
+				setCommsMessage("We cannot spare any ships for you right now.");
 			end)
 			return true
 		end

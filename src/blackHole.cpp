@@ -27,9 +27,11 @@ void BlackHole::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float
     textureManager.setTexture(object_sprite, "RadarBlip.png");
     object_sprite.setRotation(getRotation());
     object_sprite.setPosition(position);
-    object_sprite.setColor(sf::Color(0, 0, 0));
     float size = getRadius() * scale / object_sprite.getTextureRect().width * 2;
     object_sprite.setScale(size, size);
+    object_sprite.setColor(sf::Color(64, 64, 255));
+    window.draw(object_sprite);
+    object_sprite.setColor(sf::Color(0, 0, 0));
     window.draw(object_sprite);
 }
 

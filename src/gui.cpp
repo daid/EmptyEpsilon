@@ -81,8 +81,11 @@ void GUI::progressBar(sf::FloatRect rect, float value, float min_value, float ma
 {
     float f = (value - min_value) / (max_value - min_value);
     
-    draw9Cut(rect, "button_background", color, f);
+    if (color != sf::Color::White)
+        draw9Cut(rect, "button_background", color, f);
     draw9Cut(rect, "border_background");
+    if (color == sf::Color::White)
+        draw9Cut(rect, "button_background", color, f);
 }
 
 void GUI::vprogressBar(sf::FloatRect rect, float value, float min_value, float max_value, sf::Color color)
