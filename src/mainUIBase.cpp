@@ -14,7 +14,7 @@ void MainUIBase::onGui()
     {
         destroy();
         disconnectFromServer();
-        new MainMenu();
+        returnToMainMenu();
         return;
     }
 

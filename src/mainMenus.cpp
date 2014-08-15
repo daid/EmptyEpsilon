@@ -68,7 +68,7 @@ void ServerBrowserMenu::onGui()
     if (button(sf::FloatRect(50, 800, 300, 50), "Back"))
     {
         destroy();
-        new MainMenu();
+        returnToMainMenu();
     }
 
     if (selectionIndex < serverList.size())

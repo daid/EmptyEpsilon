@@ -48,7 +48,7 @@ void ShipSelectionScreen::onGui()
     {
         destroy();
         disconnectFromServer();
-        new MainMenu();
+        returnToMainMenu();
         return;
     }
 
@@ -171,7 +171,7 @@ void ShipSelectionScreen::onGui()
         {
             destroy();
             disconnectFromServer();
-            new MainMenu();
+            returnToMainMenu();
         }
 
         if (active_scenario_index < int(scenarios.size()) && !engine->getObject("scenario"))
@@ -188,7 +188,7 @@ void ShipSelectionScreen::onGui()
         {
             destroy();
             disconnectFromServer();
-            new MainMenu();
+            returnToMainMenu();
         }
     }
 }

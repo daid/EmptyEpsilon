@@ -22,6 +22,8 @@ RenderLayer* hudLayer;
 RenderLayer* mouseLayer;
 PostProcessor* glitchPostProcessor;
 
+static std::map<string, string> startup_parameters;
+
 int main(int argc, char** argv)
 {
 #ifdef __APPLE__
@@ -35,7 +37,6 @@ int main(int argc, char** argv)
         CFRelease(url);
     }
 #endif
-    std::map<string, string> startup_parameters;
     for(int n=1; n<argc; n++)
     {
         char* value = strchr(argv[n], '=');
@@ -123,10 +124,20 @@ int main(int argc, char** argv)
     FactionInfo::setState(2, 4, FVF_Enemy);
     FactionInfo::setState(3, 4, FVF_Enemy);
     
-    new MainMenu();
+    returnToMainMenu();
     
     engine->runMainLoop();
     
     delete engine;
     return 0;
+}
+
+void returnToMainMenu()
+{
+    if (startup_parameters["autoconnect"].toInt())
+    {
+        new MainMenu();
+    }else{
+        new MainMenu();
+    }
 }

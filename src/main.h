@@ -18,4 +18,6 @@ extern RenderLayer* hudLayer;
 extern RenderLayer* mouseLayer;
 extern PostProcessor* glitchPostProcessor;
 
+void returnToMainMenu();
+
 #endif//MAIN_H
