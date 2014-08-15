@@ -137,7 +137,10 @@ void returnToMainMenu()
 {
     if (startup_parameters["autoconnect"].toInt())
     {
-        new MainMenu();
+        int crew_position = startup_parameters["autoconnect"].toInt() - 1;
+        if (crew_position < 0) crew_position = 0;
+        if (crew_position > max_crew_positions) crew_position = max_crew_positions;
+        new AutoConnectScreen(ECrewPosition(crew_position), startup_parameters["autocontrolmainscreen"].toInt());
     }else{
         new MainMenu();
     }

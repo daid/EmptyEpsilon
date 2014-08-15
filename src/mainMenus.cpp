@@ -1,6 +1,8 @@
 #include "engine.h"
 #include "mainMenus.h"
 #include "main.h"
+#include "crewUI.h"
+#include "mainScreen.h"
 #include "epsilonServer.h"
 #include "playerInfo.h"
 #include "spaceship.h"
@@ -128,6 +130,95 @@ void JoinServerScreen::onGui()
             {
                 new ShipSelectionScreen();
                 destroy();
+            }
+        }
+    }
+}
+
+AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_main_screen)
+: crew_position(crew_position), control_main_screen(control_main_screen)
+{
+    scanner = new ServerScanner(VERSION_NUMBER);
+}
+
+AutoConnectScreen::~AutoConnectScreen()
+{
+    if (scanner)
+        scanner->destroy();
+}
+
+void AutoConnectScreen::onGui()
+{
+    if (scanner)
+    {
+        std::vector<ServerScanner::ServerInfo> serverList = scanner->getServerList();
+        text(sf::FloatRect(0, 300, getWindowSize().x, 50), "Searching for server...", AlignCenter, 50);
+        
+        if (serverList.size() > 0)
+        {
+            text(sf::FloatRect(0, 350, getWindowSize().x, 30), "Found server " + serverList[0].name, AlignCenter, 30);
+            connect_to_address = serverList[0].address;
+            connect_delay = 2;
+            scanner->destroy();
+        }
+    }else{
+        if (connect_delay > 0)
+        {
+            text(sf::FloatRect(0, 300, getWindowSize().x, 50), "Connecting...", AlignCenter, 50);
+            connect_delay--;
+            if (!connect_delay)
+                new GameClient(connect_to_address);
+        }else{
+            if (!game_client->isConnected())
+            {
+                disconnectFromServer();
+                scanner = new ServerScanner(VERSION_NUMBER);
+            }else if (game_client->getClientId() > 0)
+            {
+                foreach(PlayerInfo, i, playerInfoList)
+                    if (i->clientId == game_client->getClientId())
+                        my_player_info = i;
+                if (my_player_info && gameGlobalInfo)
+                {
+                    text(sf::FloatRect(0, 300, getWindowSize().x, 50), "Waiting for ship...", AlignCenter, 50);
+                    if (!my_spaceship)
+                    {
+                        for(int n=0; n<GameGlobalInfo::maxPlayerShips; n++)
+                        {
+                            P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
+                            if (ship && ship->ship_template)
+                            {
+                                int cnt = 0;
+                                foreach(PlayerInfo, i, playerInfoList)
+                                    if (i->ship_id == ship->getMultiplayerId() && i->crew_position[n])
+                                        cnt++;
+                                if (cnt == 0)
+                                {
+                                    if (crew_position != max_crew_positions)
+                                    {
+                                        my_player_info->setCrewPosition(crew_position, true);
+                                        my_player_info->setMainScreenControl(control_main_screen);
+                                    }
+                                    my_player_info->setShipId(ship->getMultiplayerId());
+                                    my_spaceship = ship;
+                                }
+                            }
+                        }
+                    }else{
+                        if (my_spaceship->getMultiplayerId() == my_player_info->ship_id && (crew_position == max_crew_positions || my_player_info->crew_position[crew_position]))
+                        {
+                            destroy();
+                            if (my_player_info->isMainScreen())
+                            {
+                                new MainScreenUI();
+                            }else{
+                                new CrewUI();
+                            }
+                        }
+                    }
+                }else{
+                    text(sf::FloatRect(0, 300, getWindowSize().x, 50), "Waiting for game state...", AlignCenter, 50);
+                }
             }
         }
     }

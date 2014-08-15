@@ -121,17 +121,6 @@ void PlayerInfo::onReceiveCommand(int32_t clientId, sf::Packet& packet)
 
             if (isMainScreen())
                 main_screen_control = false;
-            if (active && my_spaceship)
-            {
-                int main_screen_control_cnt = 0;
-                foreach(PlayerInfo, i, playerInfoList)
-                {
-                    if (i->ship_id == my_spaceship->getMultiplayerId() && i->main_screen_control)
-                        main_screen_control_cnt++;
-                }
-                if (main_screen_control_cnt == 0)
-                    main_screen_control = true;
-            }
         }
         break;
     case CMD_UPDATE_SHIP_ID:

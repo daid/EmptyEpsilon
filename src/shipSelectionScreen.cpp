@@ -1,6 +1,6 @@
 #include "shipSelectionScreen.h"
 #include "epsilonServer.h"
-#include "mainMenus.h"
+#include "main.h"
 #include "playerInfo.h"
 #include "mainScreen.h"
 #include "crewUI.h"
@@ -75,7 +75,20 @@ void ShipSelectionScreen::onGui()
             if (n == singlePilot) y += 25;
             if (toggleButton(sf::FloatRect(800, y, 300, 50), my_player_info->crew_position[n], getCrewPositionName(ECrewPosition(n))))
             {
-                my_player_info->setCrewPosition(ECrewPosition(n), !my_player_info->crew_position[n]);
+                bool active = !my_player_info->crew_position[n];
+                my_player_info->setCrewPosition(ECrewPosition(n), active);
+
+                if (active && my_spaceship)
+                {
+                    int main_screen_control_cnt = 0;
+                    foreach(PlayerInfo, i, playerInfoList)
+                    {
+                        if (i->ship_id == my_spaceship->getMultiplayerId() && i->main_screen_control)
+                            main_screen_control_cnt++;
+                    }
+                    if (main_screen_control_cnt == 0)
+                        my_player_info->setMainScreenControl(true);
+                }
             }
             int cnt = 0;
             foreach(PlayerInfo, i, playerInfoList)

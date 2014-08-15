@@ -3,7 +3,9 @@
 
 #include "engine.h"
 
+#ifndef VERSION_NUMBER
 #define VERSION_NUMBER 0x0000
+#endif
 
 extern sf::Vector3f cameraPosition;
 extern float cameraRotation;

@@ -2,6 +2,7 @@
 #define MAIN_MENUS_H
 
 #include "gui.h"
+#include "playerInfo.h"
 
 class MainMenu : public GUI
 {
@@ -31,6 +32,20 @@ class JoinServerScreen : public GUI
 public:
     JoinServerScreen(sf::IpAddress ip);
 
+    virtual void onGui();
+};
+
+class AutoConnectScreen : public GUI
+{
+    P<ServerScanner> scanner;
+    sf::IpAddress connect_to_address;
+    int connect_delay;
+    ECrewPosition crew_position;
+    bool control_main_screen;
+public:
+    AutoConnectScreen(ECrewPosition crew_position, bool control_main_screen);
+    virtual ~AutoConnectScreen();
+    
     virtual void onGui();
 };
 
