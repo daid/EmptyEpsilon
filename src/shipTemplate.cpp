@@ -28,14 +28,14 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
 /* Define script conversion function for the EMissileWeapons enum. */
 template<> void convert<EMissileWeapons>::param(lua_State* L, int& idx, EMissileWeapons& es)
 {
-    const char* str = luaL_checkstring(L, idx++);
-    if (strcasecmp(str, "Homing") == 0)
+    string str = string(luaL_checkstring(L, idx++)).lower();
+    if (str == "homing")
         es = MW_Homing;
-    else if (strcasecmp(str, "Nuke") == 0)
+    else if (str == "nuke")
         es = MW_Nuke;
-    else if (strcasecmp(str, "Mine") == 0)
+    else if (str == "mine")
         es = MW_Mine;
-    else if (strcasecmp(str, "EMP") == 0)
+    else if (str == "emp")
         es = MW_EMP;
     else
         es = MW_None;
@@ -44,24 +44,24 @@ template<> void convert<EMissileWeapons>::param(lua_State* L, int& idx, EMissile
 /* Define script conversion function for the EMissileWeapons enum. */
 template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es)
 {
-    const char* str = luaL_checkstring(L, idx++);
-    if (strcasecmp(str, "Reactor") == 0)
+    string str = string(luaL_checkstring(L, idx++)).lower();
+    if (str == "reactor")
         es = SYS_Reactor;
-    else if (strcasecmp(str, "BeamWeapons") == 0)
+    else if (str == "beamweapons")
         es = SYS_BeamWeapons;
-    else if (strcasecmp(str, "MissileSystem") == 0)
+    else if (str == "missilesystem")
         es = SYS_MissileSystem;
-    else if (strcasecmp(str, "Maneuver") == 0)
+    else if (str == "maneuver")
         es = SYS_Maneuver;
-    else if (strcasecmp(str, "Impulse") == 0)
+    else if (str == "impulse")
         es = SYS_Impulse;
-    else if (strcasecmp(str, "Warp") == 0)
+    else if (str == "warp")
         es = SYS_Warp;
-    else if (strcasecmp(str, "JumpDrive") == 0)
+    else if (str == "jumpdrive")
         es = SYS_JumpDrive;
-    else if (strcasecmp(str, "FrontShield") == 0)
+    else if (str == "frontshield")
         es = SYS_FrontShield;
-    else if (strcasecmp(str, "RearShield") == 0)
+    else if (str == "rearshield")
         es = SYS_RearShield;
     else
         es = SYS_None;
