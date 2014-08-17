@@ -110,6 +110,8 @@ int main(int argc, char** argv)
     factionInfo[2].name = "SpaceCow";
     factionInfo[3].name = "Sheeple";
     factionInfo[4].name = "PirateScorpions";
+    factionInfo[0].description = "The neutral faction consists out of\ncreatures from all races.\n\nThey are not affiated with anyone,\nbut do not feed the need for war.\nThey rather trade peacefully.";
+    factionInfo[1].description = "Humans.\nNo race in the gallaxy is looked at as\nstrange as the humans.\nWhile all other races where driven to the\nstars out of greed or intressed in science\n\nThe humans where the only race to start\nwith galaxic exploration because they\nblew up their home planet by mistake.";
     factionInfo[0].gm_color = sf::Color(128, 128, 128);
     factionInfo[1].gm_color = sf::Color(255, 255, 255);
     factionInfo[2].gm_color = sf::Color(255, 0, 0);

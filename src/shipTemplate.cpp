@@ -126,6 +126,8 @@ void ShipTemplate::setBeam(int index, float arc, float direction, float range, f
 {
     if (index < 0 || index > maxBeamWeapons)
         return;
+    while(direction < 0)
+        direction += 360;
     beams[index].arc = arc;
     beams[index].direction = direction;
     beams[index].range = range;

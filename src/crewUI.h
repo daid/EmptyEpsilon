@@ -16,6 +16,13 @@ enum CommsOpenChannelType
     OCT_UnknownShip,
     OCT_PlayerShip,
 };
+enum ScienceDatabaseType
+{
+    SDT_None,
+    SDT_Factions,
+    SDT_Ships,
+    SDT_Weapons
+};
 
 class CrewUI : public MainUIBase
 {
@@ -30,6 +37,9 @@ private:
 
     P<SpaceObject> scienceTarget;
     float science_radar_distance;
+    bool science_show_radar;
+    ScienceDatabaseType science_database_type;
+    int science_sub_selection;
 
     CommsOpenChannelType comms_open_channel_type;
     string comms_player_message;

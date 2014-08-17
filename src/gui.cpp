@@ -40,19 +40,37 @@ void GUI::render(sf::RenderTarget& window)
 void GUI::text(sf::FloatRect rect, string text, EAlign align, float fontSize, sf::Color color)
 {
     sf::Text textElement(text, mainFont, fontSize);
-    float y = rect.top + rect.height / 2.0 - (textElement.getLocalBounds().height + textElement.getLocalBounds().top) / 2.0 - fontSize / 8.0;
+    float y = 0;
+    float x = 0;
     switch(align)
     {
     case AlignLeft:
-        textElement.setPosition(rect.left - textElement.getLocalBounds().left, y);
-        break;
     case AlignRight:
-        textElement.setPosition(rect.left + rect.width - textElement.getLocalBounds().width - textElement.getLocalBounds().left, y);
-        break;
     case AlignCenter:
-        textElement.setPosition(rect.left + rect.width / 2.0 - textElement.getLocalBounds().width / 2.0 - textElement.getLocalBounds().left, y);
+        y = rect.top + rect.height / 2.0 - (textElement.getLocalBounds().height + textElement.getLocalBounds().top) / 2.0 - fontSize / 8.0;
+        break;
+    case AlignTopLeft:
+    case AlignTopRight:
+    case AlignTopCenter:
+        y = rect.top - textElement.getLocalBounds().top;
         break;
     }
+    switch(align)
+    {
+    case AlignLeft:
+    case AlignTopLeft:
+        x = rect.left - textElement.getLocalBounds().left;
+        break;
+    case AlignRight:
+    case AlignTopRight:
+        x = rect.left + rect.width - textElement.getLocalBounds().width - textElement.getLocalBounds().left;
+        break;
+    case AlignCenter:
+    case AlignTopCenter:
+        x = rect.left + rect.width / 2.0 - textElement.getLocalBounds().width / 2.0 - textElement.getLocalBounds().left;
+        break;
+    }
+    textElement.setPosition(x, y);
     textElement.setColor(color);
     renderTarget->draw(textElement);
 }
@@ -61,18 +79,25 @@ void GUI::vtext(sf::FloatRect rect, string text, EAlign align, float fontSize, s
 {
     sf::Text textElement(text, mainFont, fontSize);
     textElement.setRotation(-90);
+    float x = 0;
+    float y = 0;
+    x = rect.left + rect.width / 2.0 - textElement.getLocalBounds().height / 2.0 - textElement.getLocalBounds().top / 2.0;
     switch(align)
     {
     case AlignLeft:
-        textElement.setPosition(rect.left + rect.width / 2.0 - textElement.getLocalBounds().height / 2.0 - textElement.getLocalBounds().top / 2.0, rect.top + rect.height);
+    case AlignTopLeft:
+        y = rect.top + rect.height;
         break;
     case AlignRight:
-        textElement.setPosition(rect.left + rect.width / 2.0 - textElement.getLocalBounds().height / 2.0 - textElement.getLocalBounds().top / 2.0, rect.top + textElement.getLocalBounds().left + textElement.getLocalBounds().width);
+    case AlignTopRight:
+        y = rect.top + textElement.getLocalBounds().left + textElement.getLocalBounds().width;
         break;
     case AlignCenter:
-        textElement.setPosition(rect.left + rect.width / 2.0 - textElement.getLocalBounds().height / 2.0 - textElement.getLocalBounds().top / 2.0, rect.top + rect.height / 2.0 + textElement.getLocalBounds().width / 2.0 + textElement.getLocalBounds().left);
+    case AlignTopCenter:
+        y = rect.top + rect.height / 2.0 + textElement.getLocalBounds().width / 2.0 + textElement.getLocalBounds().left;
         break;
     }
+    textElement.setPosition(x, y);
     textElement.setColor(color);
     renderTarget->draw(textElement);
 }
@@ -225,6 +250,11 @@ int GUI::selector(sf::FloatRect rect, string textValue, float textSize)
         return 1;
     }
     return 0;
+}
+
+int GUI::box(sf::FloatRect rect)
+{
+    draw9Cut(rect, "border_background");
 }
 
 string GUI::textEntry(sf::FloatRect rect, string value, float fontSize)

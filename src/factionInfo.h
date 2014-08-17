@@ -20,6 +20,7 @@ public:
     FactionInfo();
     
     string name;
+    string description;
     sf::Color gm_color;
     
     EFactionVsFactionState states[maxFactions];
