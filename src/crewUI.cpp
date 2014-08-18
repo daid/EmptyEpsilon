@@ -144,11 +144,11 @@ void CrewUI::weaponsUI()
     }
     drawRadar(radar_position, 400, radarDistance, false, my_spaceship->getTarget());
 
-    keyValueDisplay(sf::FloatRect(20, 100, 200, 40), 0.5, "Energy", string(int(my_spaceship->energy_level)), 25);
-    keyValueDisplay(sf::FloatRect(20, 140, 200, 40), 0.5, "Shields", string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "/" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)), 25);
+    keyValueDisplay(sf::FloatRect(20, 100, 250, 40), 0.5, "Energy", string(int(my_spaceship->energy_level)), 25);
+    keyValueDisplay(sf::FloatRect(20, 140, 250, 40), 0.5, "Shields", string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "/" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)), 25);
     if (my_spaceship->front_shield_max > 0 || my_spaceship->rear_shield_max > 0)
     {
-        if (toggleButton(sf::FloatRect(20, 180, 200, 40), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 30))
+        if (toggleButton(sf::FloatRect(20, 180, 250, 40), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 30))
             my_spaceship->commandSetShields(!my_spaceship->shields_active);
     }
 
@@ -383,7 +383,7 @@ void CrewUI::scienceUI()
                         my_spaceship->commandScan(scienceTarget);
                 }
             }else{
-                keyValueDisplay(sf::FloatRect(20, 190, 200, 30), 0.5, "Faction", factionInfo[scienceTarget->faction_id].name, 20);
+                keyValueDisplay(sf::FloatRect(20, 190, 200, 30), 0.5, "Faction", factionInfo[scienceTarget->faction_id]->name, 20);
                 if (ship && ship->ship_template)
                 {
                     keyValueDisplay(sf::FloatRect(20, 220, 200, 30), 0.5, "Type", ship->ship_template->name, 20);
@@ -426,30 +426,30 @@ void CrewUI::scienceUI()
         case SDT_None:
             break;
         case SDT_Factions:
-            for(int n=0; n<maxFactions; n++)
+            for(unsigned int n=0; n<factionInfo.size(); n++)
             {
-                if (toggleButton(sf::FloatRect(240, 100 + n * 50, 250, 50), science_sub_selection == n, factionInfo[n].name, 30))
+                if (toggleButton(sf::FloatRect(240, 100 + n * 50, 250, 50), science_sub_selection == n, factionInfo[n]->name, 30))
                     science_sub_selection = n;
             }
             if (science_sub_selection > -1)
             {
                 float y = 100;
-                for(int n=0; n<maxFactions; n++)
+                for(unsigned int n=0; n<factionInfo.size(); n++)
                 {
                     if (n == science_sub_selection) continue;
                     
                     string stance = "Neutral";
-                    switch(factionInfo[science_sub_selection].states[n])
+                    switch(factionInfo[science_sub_selection]->states[n])
                     {
                     case FVF_Neutral: stance = "Neutral"; break;
                     case FVF_Enemy: stance = "Enemy"; break;
                     case FVF_Friendly: stance = "Friendly"; break;
                     }
-                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, factionInfo[n].name, stance, 20);
+                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, factionInfo[n]->name, stance, 20);
                     y += 40;
                 }
                 box(sf::FloatRect(500, y, 400, 400));
-                text(sf::FloatRect(520, y + 20, 360, 360), factionInfo[science_sub_selection].description, AlignTopLeft, 20);
+                text(sf::FloatRect(520, y + 20, 360, 360), factionInfo[science_sub_selection]->description, AlignTopLeft, 20);
             }
             break;
         case SDT_Ships:
@@ -521,7 +521,7 @@ void CrewUI::scienceUI()
                     {
                         if (ship_template->weapon_storage[n] > 0)
                         {
-                            keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, getMissileWeaponName(EMissileWeapons(n)), string(ship_template->weapon_storage[n]), 20); y += 40;
+                            keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Storage " + getMissileWeaponName(EMissileWeapons(n)), string(ship_template->weapon_storage[n]), 20); y += 40;
                         }
                     }
                 }
@@ -569,7 +569,7 @@ void CrewUI::commsUI()
                         }
                         if (ship->scanned_by_player)
                         {
-                            switch(factionInfo[my_spaceship->faction_id].states[ship->faction_id])
+                            switch(factionInfo[my_spaceship->faction_id]->states[ship->faction_id])
                             {
                             case FVF_Friendly:
                                 friendly_list.push_back(obj);
@@ -861,7 +861,7 @@ void CrewUI::singlePilotUI()
                     my_spaceship->commandScan(target);
             }
         }else{
-            text(sf::FloatRect(getWindowSize().x / 2.0 - 100, 110, 100, 20), factionInfo[target->faction_id].name, AlignRight, 20);
+            text(sf::FloatRect(getWindowSize().x / 2.0 - 100, 110, 100, 20), factionInfo[target->faction_id]->name, AlignRight, 20);
             if (ship && ship->ship_template)
             {
                 text(sf::FloatRect(getWindowSize().x / 2.0 - 100, 130, 100, 20), ship->ship_template->name, AlignRight, 20);

@@ -87,7 +87,7 @@ void GameMasterUI::onGui()
         P<SpaceShip> ship = selection;
         if (ship && ship->ship_template)
         {
-            text(sf::FloatRect(20, 20, 100, 20), factionInfo[ship->faction_id].name + " " + ship->ship_template->name, AlignLeft, 20);
+            text(sf::FloatRect(20, 20, 100, 20), factionInfo[ship->faction_id]->name + " " + ship->ship_template->name, AlignLeft, 20);
             text(sf::FloatRect(20, 40, 100, 20), "Hull: " + string(ship->hull_strength), AlignLeft, 20);
             text(sf::FloatRect(20, 60, 100, 20), "Shields: " + string(ship->front_shield) + ", " + string(ship->rear_shield), AlignLeft, 20);
         }
@@ -125,9 +125,9 @@ void GameMasterUI::onGui()
         }
 
         text(sf::FloatRect(20, 480, 250, 20), "Change faction:", AlignCenter, 20);
-        for(int f=0; f<maxFactions; f++)
+        for(unsigned int f=0; f<factionInfo.size(); f++)
         {
-            if (toggleButton(sf::FloatRect(20, 500 + 30 * f, 250, 30), selection->getFaction() == f, factionInfo[f].name, 20))
+            if (toggleButton(sf::FloatRect(20, 500 + 30 * f, 250, 30), selection->getFaction() == f, factionInfo[f]->name, 20))
             {
                 selection->setFaction(f);
             }
@@ -139,9 +139,9 @@ void GameMasterUI::onGui()
         }
     }else{
         text(sf::FloatRect(20, 20, 100, 20), "Create new:", AlignLeft, 20);
-        for(int f=0; f<maxFactions; f++)
+        for(unsigned int f=0; f<factionInfo.size(); f++)
         {
-            if (toggleButton(sf::FloatRect(20, 500 + 30 * f, 250, 30), current_faction == f, factionInfo[f].name, 20))
+            if (toggleButton(sf::FloatRect(20, 500 + 30 * f, 250, 30), current_faction == f, factionInfo[f]->name, 20))
             {
                 current_faction = f;
             }

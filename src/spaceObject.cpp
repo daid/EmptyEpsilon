@@ -40,12 +40,12 @@ void SpaceObject::drawRadar(sf::RenderTarget& window, sf::Vector2f position, flo
 
 bool SpaceObject::isEnemy(P<SpaceObject> obj)
 {
-    return factionInfo[faction_id].states[obj->faction_id] == FVF_Enemy;
+    return factionInfo[faction_id]->states[obj->faction_id] == FVF_Enemy;
 }
 
 bool SpaceObject::isFriendly(P<SpaceObject> obj)
 {
-    return factionInfo[faction_id].states[obj->faction_id] == FVF_Friendly;
+    return factionInfo[faction_id]->states[obj->faction_id] == FVF_Friendly;
 }
 
 void SpaceObject::damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, EDamageType type, float min_range)

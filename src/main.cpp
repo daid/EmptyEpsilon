@@ -101,31 +101,14 @@ int main(int argc, char** argv)
     vertexStream = getResourceStream("basicShader.vert");
     fragmentStream = getResourceStream("basicShader.frag");
     basicShader.loadFromStream(**vertexStream, **fragmentStream);
-    
-    P<ScriptObject> shipTemplatesScript = new ScriptObject("shipTemplates.lua");
-    shipTemplatesScript->destroy();
-    
-    factionInfo[0].name = "Neutral";
-    factionInfo[1].name = "Human";
-    factionInfo[2].name = "SpaceCow";
-    factionInfo[3].name = "Sheeple";
-    factionInfo[4].name = "PirateScorpions";
-    factionInfo[0].description = "The neutral faction consists out of\ncreatures from all races.\n\nThey are not affiated with anyone,\nbut do not feed the need for war.\nThey rather trade peacefully.";
-    factionInfo[1].description = "Humans.\nNo race in the gallaxy is looked at as\nstrange as the humans.\nWhile all other races where driven to the\nstars out of greed or intressed in science\n\nThe humans where the only race to start\nwith galaxic exploration because they\nblew up their home planet by mistake.";
-    factionInfo[0].gm_color = sf::Color(128, 128, 128);
-    factionInfo[1].gm_color = sf::Color(255, 255, 255);
-    factionInfo[2].gm_color = sf::Color(255, 0, 0);
-    factionInfo[3].gm_color = sf::Color(255, 128, 0);
-    factionInfo[4].gm_color = sf::Color(255, 0, 128);
-    FactionInfo::setState(0, 4, FVF_Enemy);
 
-    FactionInfo::setState(1, 2, FVF_Enemy);
-    FactionInfo::setState(1, 3, FVF_Enemy);
-    FactionInfo::setState(1, 4, FVF_Enemy);
+    P<ScriptObject> shipTemplatesScript = new ScriptObject("shipTemplates.lua");
+    if (shipTemplatesScript)
+        shipTemplatesScript->destroy();
     
-    FactionInfo::setState(2, 3, FVF_Enemy);
-    FactionInfo::setState(2, 4, FVF_Enemy);
-    FactionInfo::setState(3, 4, FVF_Enemy);
+    P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");
+    if (factionInfoScript)
+        factionInfoScript->destroy();
     
     returnToMainMenu();
     

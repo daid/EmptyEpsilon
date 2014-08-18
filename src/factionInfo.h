@@ -3,9 +3,8 @@
 
 #include "engine.h"
 
-const static int maxFactions = 5;
 class FactionInfo;
-extern FactionInfo factionInfo[maxFactions];
+extern PVector<FactionInfo> factionInfo;
 
 enum EFactionVsFactionState
 {
@@ -14,7 +13,7 @@ enum EFactionVsFactionState
     FVF_Enemy
 };
 
-class FactionInfo
+class FactionInfo : public PObject
 {
 public:
     FactionInfo();
@@ -23,9 +22,13 @@ public:
     string description;
     sf::Color gm_color;
     
-    EFactionVsFactionState states[maxFactions];
+    std::vector<EFactionVsFactionState> states;
     
-    static void setState(int id1, int id2, EFactionVsFactionState state);
+    void setName(string name) { this->name = name; }
+    void setGMColor(int r, int g, int b) { gm_color = sf::Color(r, g, b); }
+    void setDescription(string description) { this->description = description; }
+    void setEnemy(P<FactionInfo> other);
+    void setFriendly(P<FactionInfo> other);
 };
 
 #endif//Faction_INFO_H
