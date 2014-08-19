@@ -252,9 +252,15 @@ int GUI::selector(sf::FloatRect rect, string textValue, float textSize)
     return 0;
 }
 
-int GUI::box(sf::FloatRect rect)
+void GUI::box(sf::FloatRect rect)
 {
     draw9Cut(rect, "border_background");
+}
+
+void GUI::textbox(sf::FloatRect rect, string text, EAlign align, float textSize, sf::Color color)
+{
+    box(rect);
+    GUI::text(sf::FloatRect(rect.left + textSize, rect.top + textSize, rect.width - textSize * 2, rect.height - textSize * 2), text, align, textSize, color);
 }
 
 string GUI::textEntry(sf::FloatRect rect, string value, float fontSize)

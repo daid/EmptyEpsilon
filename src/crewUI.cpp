@@ -452,8 +452,7 @@ void CrewUI::scienceUI()
                     keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, factionInfo[n]->name, stance, 20);
                     y += 40;
                 }
-                box(sf::FloatRect(500, y, 400, 400));
-                text(sf::FloatRect(520, y + 20, 360, 360), factionInfo[science_sub_selection]->description, AlignTopLeft, 20);
+                textbox(sf::FloatRect(500, y, 400, 400), factionInfo[science_sub_selection]->description, AlignTopLeft, 20);
             }
             break;
         case SDT_Ships:
@@ -550,6 +549,38 @@ void CrewUI::scienceUI()
                 if (toggleButton(sf::FloatRect(240, y, 250, 50), science_sub_selection == nr, "EMP", 30))
                     science_sub_selection = nr;
                 y += 50; nr ++;
+                
+                y = 100;
+                switch(science_sub_selection)
+                {
+                case 0://Homing missile
+                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Range", "6km", 20.0f); y += 40;
+                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Damage", "30", 20.0f); y += 40;
+                    textbox(sf::FloatRect(500, y, 400, 400), "The standard homing missile is the\ndefault weapon of choice for many ships", AlignTopLeft, 20);
+                    break;
+                case 1://Nuke
+                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Range", "4.8km", 20.0f); y += 40;
+                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Blast radius", "1km", 20.0f); y += 40;
+                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Maximal Damage", "160", 20.0f); y += 40;
+                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Minimal Damage", "30", 20.0f); y += 40;
+                    textbox(sf::FloatRect(500, y, 400, 400), "The heavy nuke is a fearsome weapon\nwhich is known to take out multiple\nships in a single shot.\n\nSome captains question the use of these\nweapons, due to the ease of friendly-fire\nincidents. And unknown prolonged\neffect on the crew of using these\nweapons in space.", AlignTopLeft, 20);
+                    break;
+                case 2://Mine
+                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Drop distance", "1.2km", 20.0f); y += 40;
+                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Trigger distance", "0.6km", 20.0f); y += 40;
+                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Blast radius", "1km", 20.0f); y += 40;
+                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Maximal Damage", "160", 20.0f); y += 40;
+                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Minimal Damage", "30", 20.0f); y += 40;
+                    textbox(sf::FloatRect(500, y, 400, 400), "Mines are often placed in a defensive\nperimeter around stations\n\nThere are also old mine fields scattered\naround the universe from older wars.\n\nSome fearless captains have used mines\nas offensive weapons.\nBut this is with great risk.", AlignTopLeft, 20);
+                    break;
+                case 3://EMP
+                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Range", "4.8km", 20.0f); y += 40;
+                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Blast radius", "1km", 20.0f); y += 40;
+                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Maximal Damage", "160", 20.0f); y += 40;
+                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Minimal Damage", "30", 20.0f); y += 40;
+                    textbox(sf::FloatRect(500, y, 400, 400), "The EMP is a shield-only damaging\nweapon It matches the heavy nuke in\ndamage but does no hull damage.\n\nThe EMP missile is smaller and easier\nto storage then the heavy nuke.\nAnd thus many captains preferer it's use\nover nukes.", AlignTopLeft, 20);
+                    break;
+                }
             }
             break;
         }

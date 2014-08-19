@@ -37,7 +37,8 @@ public:
     static bool toggleButton(sf::FloatRect rect, bool active, string textValue, float fontSize = 30);
     static float vslider(sf::FloatRect rect, float value, float minValue, float maxValue, float normalValue = 0.0);
     static int selector(sf::FloatRect rect, string text, float textSize = 30);
-    static int box(sf::FloatRect rect);
+    static void box(sf::FloatRect rect);
+    static void textbox(sf::FloatRect rect, string text, EAlign align = AlignTopLeft, float textSize = 30, sf::Color color=sf::Color::White);
     static string textEntry(sf::FloatRect rect, string value, float fontSize = 30);
     static void keyValueDisplay(sf::FloatRect, float div_distance, string key, string value, float textSize = 30.0f);
 
