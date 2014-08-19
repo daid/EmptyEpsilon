@@ -43,8 +43,8 @@ public:
 
     bool isEnemy(P<SpaceObject> obj);
     bool isFriendly(P<SpaceObject> obj);
-    void setFaction(int faction_id) { this->faction_id = faction_id; }
-    int getFaction() { return faction_id; }
+    void setFaction(unsigned int faction_id) { this->faction_id = faction_id; }
+    unsigned int getFaction() { return faction_id; }
     void setCommsScript(string script_name) { this->comms_script_name = script_name; }
 };
 

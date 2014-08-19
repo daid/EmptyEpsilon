@@ -337,7 +337,7 @@ void CrewUI::scienceUI()
     
     if (science_show_radar)
     {
-        sf::Vector2f radar_center = getWindowSize() / 2.0f;
+        sf::Vector2f radar_center = sf::Vector2f((getWindowSize().x - 250) / 2.0f, getWindowSize().y / 2.0f);
 
         float radarDistance = science_radar_distance;
         if (InputHandler::mouseIsPressed(sf::Mouse::Left))
@@ -365,45 +365,49 @@ void CrewUI::scienceUI()
 
         if (scienceTarget)
         {
+            float x = getWindowSize().x - 270;
+            float y = 400;
             float distance = sf::length(scienceTarget->getPosition() - my_spaceship->getPosition());
             float heading = sf::vector2ToAngle(scienceTarget->getPosition() - my_spaceship->getPosition());
             if (heading < 0) heading += 360;
-            keyValueDisplay(sf::FloatRect(20, 100, 200, 30), 0.5, "Callsign", scienceTarget->getCallSign(), 20);
-            keyValueDisplay(sf::FloatRect(20, 130, 200, 30), 0.5, "Distance", string(distance / 1000.0, 1) + "km", 20);
-            keyValueDisplay(sf::FloatRect(20, 160, 200, 30), 0.5, "Heading", string(int(heading)), 20);
+            keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Callsign", scienceTarget->getCallSign(), 20); y += 30;
+            keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Distance", string(distance / 1000.0, 1) + "km", 20); y += 30;
+            keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Heading", string(int(heading)), 20); y += 30;
 
             P<SpaceShip> ship = scienceTarget;
             if (ship && !ship->scanned_by_player)
             {
                 if (my_spaceship->scanning_delay > 0.0)
                 {
-                    progressBar(sf::FloatRect(20, 190, 200, 40), my_spaceship->scanning_delay, 8.0, 0.0);
+                    progressBar(sf::FloatRect(x, y, 250, 50), my_spaceship->scanning_delay, 8.0, 0.0);
+                    y += 50;
                 }else{
-                    if (button(sf::FloatRect(20, 190, 200, 40), "Scan", 30))
+                    if (button(sf::FloatRect(x, y, 250, 50), "Scan", 30))
                         my_spaceship->commandScan(scienceTarget);
+                    y += 50;
                 }
             }else{
-                keyValueDisplay(sf::FloatRect(20, 190, 200, 30), 0.5, "Faction", factionInfo[scienceTarget->faction_id]->name, 20);
+                keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Faction", factionInfo[scienceTarget->faction_id]->name, 20); y += 30;
                 if (ship && ship->ship_template)
                 {
-                    keyValueDisplay(sf::FloatRect(20, 220, 200, 30), 0.5, "Type", ship->ship_template->name, 20);
-                    keyValueDisplay(sf::FloatRect(20, 250, 200, 30), 0.5, "Shields", string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), 20);
+                    keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Type", ship->ship_template->name, 20); y += 30;
+                    keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Shields", string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), 20); y += 30;
                 }
             }
             P<SpaceStation> station = scienceTarget;
             if (station)
             {
-                keyValueDisplay(sf::FloatRect(20, 220, 200, 30), 0.5, "Shields", string(int(station->shields)), 20);
+                keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Shields", string(int(station->shields)), 20); y += 30;
             }
         }
 
-        if (science_radar_distance == 50000 && button(sf::FloatRect(20, 720, 200, 50), "Zoom: 1x", 30))
+        if (science_radar_distance == 50000 && button(sf::FloatRect(getWindowSize().x - 490, 820, 200, 50), "Zoom: 1x", 30))
             science_radar_distance = 25000;
-        else if (science_radar_distance == 25000 && button(sf::FloatRect(20, 720, 200, 50), "Zoom: 2x", 30))
+        else if (science_radar_distance == 25000 && button(sf::FloatRect(getWindowSize().x - 490, 820, 200, 50), "Zoom: 2x", 30))
             science_radar_distance = 12500;
-        else if (science_radar_distance == 12500 && button(sf::FloatRect(20, 720, 200, 50), "Zoom: 4x", 30))
+        else if (science_radar_distance == 12500 && button(sf::FloatRect(getWindowSize().x - 490, 820, 200, 50), "Zoom: 4x", 30))
             science_radar_distance = 5000;
-        else if (science_radar_distance == 5000 && button(sf::FloatRect(20, 720, 200, 50), "Zoom: 10x", 30))
+        else if (science_radar_distance == 5000 && button(sf::FloatRect(getWindowSize().x - 490, 820, 200, 50), "Zoom: 10x", 30))
             science_radar_distance = 50000;
     }else{
         if (toggleButton(sf::FloatRect(20, 100, 200, 50), science_database_type == SDT_Factions, "Factions", 30))
@@ -428,7 +432,7 @@ void CrewUI::scienceUI()
         case SDT_Factions:
             for(unsigned int n=0; n<factionInfo.size(); n++)
             {
-                if (toggleButton(sf::FloatRect(240, 100 + n * 50, 250, 50), science_sub_selection == n, factionInfo[n]->name, 30))
+                if (toggleButton(sf::FloatRect(240, 100 + n * 50, 250, 50), science_sub_selection == int(n), factionInfo[n]->name, 30))
                     science_sub_selection = n;
             }
             if (science_sub_selection > -1)
@@ -436,7 +440,7 @@ void CrewUI::scienceUI()
                 float y = 100;
                 for(unsigned int n=0; n<factionInfo.size(); n++)
                 {
-                    if (n == science_sub_selection) continue;
+                    if (int(n) == science_sub_selection) continue;
                     
                     string stance = "Neutral";
                     switch(factionInfo[science_sub_selection]->states[n])
@@ -527,11 +531,32 @@ void CrewUI::scienceUI()
                 }
             }
             break;
+        case SDT_Weapons:
+            {
+                float y = 100;
+                int nr = 0;
+                if (toggleButton(sf::FloatRect(240, y, 250, 50), science_sub_selection == nr, "Homing missile", 30))
+                    science_sub_selection = nr;
+                y += 50; nr ++;
+                
+                if (toggleButton(sf::FloatRect(240, y, 250, 50), science_sub_selection == nr, "Nuke", 30))
+                    science_sub_selection = nr;
+                y += 50; nr ++;
+
+                if (toggleButton(sf::FloatRect(240, y, 250, 50), science_sub_selection == nr, "Mine", 30))
+                    science_sub_selection = nr;
+                y += 50; nr ++;
+
+                if (toggleButton(sf::FloatRect(240, y, 250, 50), science_sub_selection == nr, "EMP", 30))
+                    science_sub_selection = nr;
+                y += 50; nr ++;
+            }
+            break;
         }
     }
-    if (toggleButton(sf::FloatRect(20, 820, 200, 50), science_show_radar, "Radar", 30))
+    if (toggleButton(sf::FloatRect(20, 770, 200, 50), science_show_radar, "Radar", 30))
         science_show_radar = true;
-    if (toggleButton(sf::FloatRect(220, 820, 200, 50), !science_show_radar, "Database", 30))
+    if (toggleButton(sf::FloatRect(20, 820, 200, 50), !science_show_radar, "Database", 30))
     {
         science_show_radar = false;
         science_database_type = SDT_None;

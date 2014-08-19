@@ -218,19 +218,23 @@ void MainUIBase::drawRadarCuttoff(sf::Vector2f position, float size, sf::FloatRe
     cutOff.setScale(size / float(cutOff.getTextureRect().width) * 2.1, size / float(cutOff.getTextureRect().width) * 2.1);
     window.draw(cutOff);
 
-    sf::RectangleShape rectH(sf::Vector2f(rect.width, position.y - size * 1.05 - rect.top));
-    rectH.setFillColor(sf::Color::Black);
-    rectH.setPosition(rect.left, rect.top);
-    window.draw(rectH);
-    rectH.setPosition(rect.left, position.y + size * 1.05);
-    window.draw(rectH);
+    sf::RectangleShape rectTop(sf::Vector2f(rect.width, position.y - size * 1.05 - rect.top));
+    rectTop.setFillColor(sf::Color::Black);
+    rectTop.setPosition(rect.left, rect.top);
+    window.draw(rectTop);
+    sf::RectangleShape rectBottom(sf::Vector2f(rect.width, rect.height - (position.y + size * 1.05)));
+    rectBottom.setFillColor(sf::Color::Black);
+    rectBottom.setPosition(rect.left, position.y + size * 1.05);
+    window.draw(rectBottom);
 
-    sf::RectangleShape rectV(sf::Vector2f(position.x - size * 1.05 - rect.left, rect.height));
-    rectV.setFillColor(sf::Color::Black);
-    rectV.setPosition(rect.left, rect.top);
-    window.draw(rectV);
-    rectV.setPosition(position.x + size * 1.05, rect.top);
-    window.draw(rectV);
+    sf::RectangleShape rectLeft(sf::Vector2f(position.x - size * 1.05 - rect.left, rect.height));
+    rectLeft.setFillColor(sf::Color::Black);
+    rectLeft.setPosition(rect.left, rect.top);
+    window.draw(rectLeft);
+    sf::RectangleShape rectRight(sf::Vector2f(rect.width - (position.x + size * 1.05), rect.height));
+    rectRight.setFillColor(sf::Color::Black);
+    rectRight.setPosition(position.x + size * 1.05, rect.top);
+    window.draw(rectRight);
 }
 
 void MainUIBase::drawRadar(sf::Vector2f position, float size, float range, bool long_range, P<SpaceObject> target, sf::FloatRect rect)

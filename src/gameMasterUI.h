@@ -7,7 +7,7 @@
 
 class GameMasterUI : public MainUIBase
 {
-    int current_faction;
+    unsigned int current_faction;
     sf::Vector2f mouse_down_pos;
     sf::Vector2f prev_mouse_pos;
     sf::Vector2f view_position;
