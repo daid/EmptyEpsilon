@@ -56,6 +56,57 @@ template:addDoor(6, 4, false);
 template:addDoor(8, 3, false);
 template:addDoor(8, 4, false);
 
+template = ShipTemplate():setName("Player Missile Cruiser"):setMesh("space_cruiser_4.model", "space_cruiser_4_color.jpg", "space_cruiser_4_illumination.jpg", "space_cruiser_4_illumination.jpg"):setScale(10):setRadius(125)
+-- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
+template:setTubePosition(0, -10, 2, -2.3)
+template:setTubePosition(1,  10, 2, -2.3)
+template:setTubePosition(2, -10, 2, -2.3)
+template:setTubePosition(3,  10, 2, -2.3)
+template:addEngineEmitor(-2.1500, -13, 0.3,  0.2, 0.2, 1.0, 2.0)
+template:addEngineEmitor( 2.1500, -13, 0.3,  0.2, 0.2, 1.0, 2.0)
+--                  Arc, Dir, Range, CycleTime, Dmg
+template:setTubes(4, 8.0)
+template:setHull(70)
+template:setShields(110, 70)
+template:setSpeed(60, 8)
+template:setWarpSpeed(800)
+template:setJumpDrive(false)
+template:setCloaking(false)
+template:setWeaponStorage("Homing", 20)
+template:setWeaponStorage("Nuke", 2)
+template:setWeaponStorage("Mine", 6)
+template:setWeaponStorage("EMP", 4)
+
+template:addRoomSystem(1, 0, 2, 1, "Maneuver");
+template:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
+template:addRoom(2, 2, 2, 1);
+
+template:addRoomSystem(0, 3, 1, 2, "RearShield");
+template:addRoomSystem(1, 3, 2, 2, "Reactor");
+template:addRoomSystem(3, 3, 2, 2, "Warp");
+template:addRoomSystem(5, 3, 1, 2, "JumpDrive");
+template:addRoom(6, 3, 2, 1);
+template:addRoom(6, 4, 2, 1);
+template:addRoomSystem(8, 3, 1, 2, "FrontShield");
+
+template:addRoom(2, 5, 2, 1);
+template:addRoomSystem(1, 6, 2, 1, "MissileSystem");
+template:addRoomSystem(1, 7, 2, 1, "Impulse");
+
+template:addDoor(1, 1, true);
+template:addDoor(2, 2, true);
+template:addDoor(3, 3, true);
+template:addDoor(1, 3, false);
+template:addDoor(3, 4, false);
+template:addDoor(3, 5, true);
+template:addDoor(2, 6, true);
+template:addDoor(1, 7, true);
+template:addDoor(5, 3, false);
+template:addDoor(6, 3, false);
+template:addDoor(6, 4, false);
+template:addDoor(8, 3, false);
+template:addDoor(8, 4, false);
+
 template = ShipTemplate():setName("Player Fighter"):setMesh("small_fighter_1.model", "small_fighter_1_color.jpg", "small_fighter_1_specular.jpg", "small_fighter_1_illumination.jpg"):setScale(4):setRadius(60)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
 template:setBeamPosition(0, 0, 23, -1.8)

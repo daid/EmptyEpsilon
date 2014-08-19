@@ -146,11 +146,6 @@ void CrewUI::weaponsUI()
 
     keyValueDisplay(sf::FloatRect(20, 100, 250, 40), 0.5, "Energy", string(int(my_spaceship->energy_level)), 25);
     keyValueDisplay(sf::FloatRect(20, 140, 250, 40), 0.5, "Shields", string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "/" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)), 25);
-    if (my_spaceship->front_shield_max > 0 || my_spaceship->rear_shield_max > 0)
-    {
-        if (toggleButton(sf::FloatRect(20, 180, 250, 40), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 30))
-            my_spaceship->commandSetShields(!my_spaceship->shields_active);
-    }
 
     if (my_spaceship->weaponTubes > 0)
     {
@@ -175,6 +170,13 @@ void CrewUI::weaponsUI()
                 }
             }
         }
+    }
+
+    float x = getWindowSize().x - 270;
+    if (my_spaceship->front_shield_max > 0 || my_spaceship->rear_shield_max > 0)
+    {
+        if (toggleButton(sf::FloatRect(x, 840, 250, 50), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 30))
+            my_spaceship->commandSetShields(!my_spaceship->shields_active);
     }
 }
 
