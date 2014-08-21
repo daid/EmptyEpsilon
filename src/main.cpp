@@ -1,6 +1,7 @@
 #include <string.h>
 #include "gui.h"
 #include "mainMenus.h"
+#include "mouseCalibrator.h"
 #include "factionInfo.h"
 #include "spaceObject.h"
 #include "packResourceProvider.h"
@@ -81,9 +82,16 @@ int main(int argc, char** argv)
     }else{
         engine->registerObject("mouseRenderer", new MouseRenderer());
     }
-    if (startup_parameters["swapmousexy"].toInt())
+    if (startup_parameters["touchcalibfile"] != "")
     {
-        InputHandler::swap_xy = true;
+        FILE* f = fopen(startup_parameters["touchcalibfile"].c_str(), "r");
+        if (f)
+        {
+            float m[6];
+            if (fscanf(f, "%f %f %f %f %f %f", &m[0], &m[1], &m[2], &m[3], &m[4], &m[5]) == 6)
+                InputHandler::mouse_transform = sf::Transform(m[0], m[1], m[2], m[3], m[4], m[5], 0, 0, 1);
+            fclose(f);
+        }
     }
     soundManager.setMusicVolume(50);
 
@@ -126,6 +134,9 @@ void returnToMainMenu()
         if (crew_position < 0) crew_position = 0;
         if (crew_position > max_crew_positions) crew_position = max_crew_positions;
         new AutoConnectScreen(ECrewPosition(crew_position), startup_parameters["autocontrolmainscreen"].toInt());
+    }else if (startup_parameters["touchcalib"].toInt())
+    {
+        new MouseCalibrator(startup_parameters["touchcalibfile"]);
     }else{
         new MainMenu();
     }

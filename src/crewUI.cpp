@@ -172,12 +172,14 @@ void CrewUI::weaponsUI()
         }
     }
 
-    float x = getWindowSize().x - 270;
+    float x = getWindowSize().x - 290;
     if (my_spaceship->front_shield_max > 0 || my_spaceship->rear_shield_max > 0)
     {
-        if (toggleButton(sf::FloatRect(x, 840, 250, 50), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 30))
+        if (toggleButton(sf::FloatRect(x, 840, 270, 50), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 30))
             my_spaceship->commandSetShields(!my_spaceship->shields_active);
     }
+    textbox(sf::FloatRect(x, 740, 270, 50), "Beam Type", AlignCenter, 30);
+    selector(sf::FloatRect(x, 790, 270, 50), "QuantumCas", 30);
 }
 
 void CrewUI::engineeringUI()
@@ -369,12 +371,18 @@ void CrewUI::scienceUI()
         {
             float x = getWindowSize().x - 270;
             float y = 400;
-            float distance = sf::length(scienceTarget->getPosition() - my_spaceship->getPosition());
-            float heading = sf::vector2ToAngle(scienceTarget->getPosition() - my_spaceship->getPosition());
+            sf::Vector2f position_diff = scienceTarget->getPosition() - my_spaceship->getPosition();
+            float distance = sf::length(position_diff);
+            float heading = sf::vector2ToAngle(position_diff);
             if (heading < 0) heading += 360;
+            float rel_velocity = dot(scienceTarget->getVelocity(), position_diff / distance) - dot(my_spaceship->getVelocity(), position_diff / distance);
+            if (fabs(rel_velocity) < 0.01)
+                rel_velocity = 0.0;
+            
             keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Callsign", scienceTarget->getCallSign(), 20); y += 30;
             keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Distance", string(distance / 1000.0, 1) + "km", 20); y += 30;
             keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Heading", string(int(heading)), 20); y += 30;
+            keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Rel.Speed", string(rel_velocity / 1000 * 60, 1) + "km/min", 20); y += 30;
 
             P<SpaceShip> ship = scienceTarget;
             if (ship && !ship->scanned_by_player)
