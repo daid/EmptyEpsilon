@@ -87,7 +87,7 @@ void CrewUI::helmsUI()
 {
     sf::Vector2f mouse = InputHandler::getMousePos();
     sf::Vector2f radar_center = getWindowSize() / 2.0f;
-    if (InputHandler::mouseIsPressed(sf::Mouse::Left))
+    if (InputHandler::mouseIsPressed(sf::Mouse::Left) || InputHandler::mouseIsReleased(sf::Mouse::Left))
     {
         sf::Vector2f diff = mouse - radar_center;
         if (sf::length(diff) < 400)
@@ -122,7 +122,7 @@ void CrewUI::weaponsUI()
     float radarDistance = 5000;
     sf::Vector2f radar_position = getWindowSize() / 2.0f;
 
-    if (InputHandler::mouseIsPressed(sf::Mouse::Left))
+    if (InputHandler::mouseIsReleased(sf::Mouse::Left))
     {
         sf::Vector2f diff = mouse - radar_position;
         if (sf::length(diff) < 400)
@@ -311,7 +311,7 @@ void CrewUI::engineeringUI()
         sprite.setPosition(position);
         window.draw(sprite);
 
-        if (InputHandler::mouseIsPressed(sf::Mouse::Left) && sf::length(mouse - position) < 48.0f/2.0)
+        if (InputHandler::mouseIsReleased(sf::Mouse::Left) && sf::length(mouse - position) < 48.0f/2.0)
         {
             selected_crew = rc;
         }
@@ -325,7 +325,7 @@ void CrewUI::engineeringUI()
         }
     }
 
-    if (InputHandler::mouseIsPressed(sf::Mouse::Left) && selected_crew)
+    if (InputHandler::mouseIsReleased(sf::Mouse::Left) && selected_crew)
     {
         sf::Vector2i target_pos = sf::Vector2i((mouse - interial_position) / 48.0f);
         if (target_pos.x >= 0 && target_pos.x < interior_size.x && target_pos.y >= 0 && target_pos.y < interior_size.y)
@@ -344,7 +344,7 @@ void CrewUI::scienceUI()
         sf::Vector2f radar_center = sf::Vector2f((getWindowSize().x - 250) / 2.0f, getWindowSize().y / 2.0f);
 
         float radarDistance = science_radar_distance;
-        if (InputHandler::mouseIsPressed(sf::Mouse::Left))
+        if (InputHandler::mouseIsReleased(sf::Mouse::Left))
         {
             sf::Vector2f diff = mouse - radar_center;
             if (sf::length(diff) < 400)
@@ -831,7 +831,7 @@ void CrewUI::singlePilotUI()
     radar_center.x /= 2.0f;
     float radar_size = radar_center.x - 20;
 
-    if (InputHandler::mouseIsPressed(sf::Mouse::Left))
+    if (InputHandler::mouseIsReleased(sf::Mouse::Left))
     {
         sf::Vector2f diff = mouse - radar_center;
         if (sf::length(diff) < radar_size)
