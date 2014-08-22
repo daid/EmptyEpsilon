@@ -5,7 +5,7 @@ function mainMenu()
 
 	if player:isFriendly(comms_target) then
 		if not player:isDocked() then
-			setCommsMessage("Good day captain,\nIf you need supplies please dock with us first.");
+			setCommsMessage("Good day officer,\nIf you need supplies please dock with us first.");
 			addCommsReply("Can you send a supply drop?", function()
 				setCommsMessage("Sorry sir, we do not have spare supply ships available right now.");
 			end)
@@ -18,7 +18,7 @@ function mainMenu()
 		end
 		
 		-- Friendly station
-		setCommsMessage("Good day captain,\nWhat can we do for you today?")
+		setCommsMessage("Good day officer,\nWhat can we do for you today?")
 		addCommsReply("Do you have spare homing missiles for us?", function()
 			if not player:isDocked() then setCommsMessage("You need to stay docked for that action."); return end
 			if player:getWeaponStorage("Homing") >= player:getWeaponStorageMax("Homing") then
