@@ -54,6 +54,8 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     front_shield_recharge_factor = rear_shield_recharge_factor = 1.0;
     scanned_by_player = false;
     beamRechargeFactor = 1.0;
+    beam_frequency = random(0, max_frequency);
+    shield_frequency = random(0, max_frequency);
     tubeRechargeFactor = 1.0;
     docking_state = DS_NotDocking;
 
@@ -76,10 +78,12 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     registerMemberReplication(&rear_shield, 1.0);
     registerMemberReplication(&front_shield_max);
     registerMemberReplication(&rear_shield_max);
+    registerMemberReplication(&shield_frequency);
     registerMemberReplication(&front_shield_hit_effect, 0.5);
     registerMemberReplication(&rear_shield_hit_effect, 0.5);
     registerMemberReplication(&scanned_by_player);
     registerMemberReplication(&docking_state);
+    registerMemberReplication(&beam_frequency);
 
     for(int n=0; n<maxBeamWeapons; n++)
     {
@@ -660,4 +664,9 @@ string getMissileWeaponName(EMissileWeapons missile)
     default:
         return "UNK: " + string(int(missile));
     }
+}
+
+string frequencyToString(int frequency)
+{
+    return string(400 + (frequency * 20)) + "Thz";
 }

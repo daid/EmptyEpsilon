@@ -94,6 +94,8 @@ public:
     void commandSendComm(int8_t index);
     void commandSendCommPlayer(string message);
     void commandSetAutoRepair(bool enabled);
+    void commandSetBeamFrequency(int frequency);
+    void commandSetShieldFrequency(int frequency);
 
     virtual string getCallSign() { return ""; }
 

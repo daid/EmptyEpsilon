@@ -178,8 +178,11 @@ void CrewUI::weaponsUI()
         if (toggleButton(sf::FloatRect(x, 840, 270, 50), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 30))
             my_spaceship->commandSetShields(!my_spaceship->shields_active);
     }
-    textbox(sf::FloatRect(x, 740, 270, 50), "Beam Freq.", AlignCenter, 30);
-    selector(sf::FloatRect(x, 790, 270, 50), "Freq. A", 30);
+    box(sf::FloatRect(x, 740, 270, 100));
+    text(sf::FloatRect(x, 740, 270, 50), "Beam Freq.", AlignCenter, 30);
+    int frequency = my_spaceship->beam_frequency + selector(sf::FloatRect(x, 790, 270, 50), frequencyToString(my_spaceship->beam_frequency), 30);
+    if (frequency != my_spaceship->beam_frequency)
+        my_spaceship->commandSetBeamFrequency(frequency);
 }
 
 void CrewUI::engineeringUI()

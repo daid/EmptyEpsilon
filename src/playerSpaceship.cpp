@@ -31,6 +31,8 @@ static const int16_t CMD_SET_AUTO_REPAIR = 0x0014;
 static const int16_t CMD_OPEN_VOICE_COMM = 0x0015; // VOIP communication
 static const int16_t CMD_CLOSE_VOICE_COMM = 0x0016;
 static const int16_t CMD_SEND_VOICE_COMM = 0x0017;
+static const int16_t CMD_SET_BEAM_FREQUENCY = 0x0018;
+static const int16_t CMD_SET_SHIELD_FREQUENCY = 0x0019;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -509,9 +511,26 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             std::cout << "Recieved voice chat" << std::endl;
             //Piece of voice stream recieved. Do something.
         }
-
+        break;
     case CMD_SET_AUTO_REPAIR:
         packet >> auto_repair_enabled;
+        break;
+    case CMD_SET_BEAM_FREQUENCY:
+        packet >> beam_frequency;
+        if (beam_frequency < 0)
+            beam_frequency = 0;
+        if (beam_frequency > SpaceShip::max_frequency)
+            beam_frequency = SpaceShip::max_frequency;
+        break;
+    case CMD_SET_SHIELD_FREQUENCY:
+        if (!shields_active)
+        {
+            packet >> shield_frequency;
+            if (shield_frequency < 0)
+                shield_frequency = 0;
+            if (shield_frequency > SpaceShip::max_frequency)
+                shield_frequency = SpaceShip::max_frequency;
+        }
         break;
     }
 }
@@ -673,5 +692,19 @@ void PlayerSpaceship::commandSetAutoRepair(bool enabled)
 {
     sf::Packet packet;
     packet << CMD_SET_AUTO_REPAIR << enabled;
+    sendCommand(packet);
+}
+
+void PlayerSpaceship::commandSetBeamFrequency(int frequency)
+{
+    sf::Packet packet;
+    packet << CMD_SET_BEAM_FREQUENCY << frequency;
+    sendCommand(packet);
+}
+
+void PlayerSpaceship::commandSetShieldFrequency(int frequency)
+{
+    sf::Packet packet;
+    packet << CMD_SET_SHIELD_FREQUENCY << frequency;
     sendCommand(packet);
 }
