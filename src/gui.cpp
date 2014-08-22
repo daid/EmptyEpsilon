@@ -277,6 +277,38 @@ void GUI::box(sf::FloatRect rect)
 
 void GUI::textbox(sf::FloatRect rect, string text, EAlign align, float textSize, sf::Color color)
 {
+    {
+        unsigned currentOffset = 0;
+        bool firstWord = true;
+        std::size_t wordBegining = 0;
+
+        for (std::size_t pos(0); pos < text.length(); ++pos)
+        {
+            char currentChar = text[pos];
+            if (currentChar == '\n')
+            {
+                currentOffset = 0;
+                firstWord = true;
+                continue;
+            } else if (currentChar == ' ')
+            {
+                wordBegining = pos;
+                firstWord = false;
+            }
+
+            sf::Glyph glyph = mainFont.getGlyph(currentChar, textSize, false);
+            currentOffset += glyph.advance;
+
+            if (!firstWord && currentOffset > rect.width - textSize * 2)
+            {
+                pos = wordBegining;
+                text[pos] = '\n';
+                firstWord = true;
+                currentOffset = 0;
+            }
+        }
+    }
+
     box(rect);
     GUI::text(sf::FloatRect(rect.left + textSize, rect.top + textSize, rect.width - textSize * 2, rect.height - textSize * 2), text, align, textSize, color);
 }

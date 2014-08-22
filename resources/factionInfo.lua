@@ -1,17 +1,16 @@
 neutral = FactionInfo():setName("Independent")
 neutral:setGMColor(128, 128, 128)
 neutral:setDescription([[The Independent are those with no strong affiliation for any of the other factions.
- Despite being seen as a faction, they are not truely one. Most traders consider themselves independent, but certain voices have started to speak up about creating a merchant faction.]])
+
+Despite being seen as a faction, they are not truely one. Most traders consider themselves independent, but certain voices have started to speak up about creating a merchant faction.]])
 
 human = FactionInfo():setName("Human Navy")
 human:setGMColor(255, 255, 255)
 human:setDescription([[The remenants of the human navy.
 
-While all other races where driven to the
-stars out of greed or intressed in science
+While all other races where driven to the stars out of greed or intressed in science
 
-The humans where the only race to start
-with galaxic exploration because their home world could no longer sustain their population]])
+The humans where the only race to start with galaxic exploration because their home world could no longer sustain their population]])
 
 spaceCow = FactionInfo():setName("SpaceCow")
 spaceCow:setGMColor(255, 0, 0)
