@@ -178,8 +178,8 @@ void CrewUI::weaponsUI()
         if (toggleButton(sf::FloatRect(x, 840, 270, 50), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 30))
             my_spaceship->commandSetShields(!my_spaceship->shields_active);
     }
-    textbox(sf::FloatRect(x, 740, 270, 50), "Beam Type", AlignCenter, 30);
-    selector(sf::FloatRect(x, 790, 270, 50), "QuantumCas", 30);
+    textbox(sf::FloatRect(x, 740, 270, 50), "Beam Freq.", AlignCenter, 30);
+    selector(sf::FloatRect(x, 790, 270, 50), "Freq. A", 30);
 }
 
 void CrewUI::engineeringUI()
@@ -281,18 +281,18 @@ void CrewUI::engineeringUI()
             y += 50;
         }
         
+        box(sf::FloatRect(600, 470, 270, 400));
         if (my_spaceship->hasSystem(engineering_selected_system))
         {
-            //vtext(sf::FloatRect(670, 470, 30, 400), getSystemName(engineering_selected_system), AlignLeft);
-            vtext(sf::FloatRect(770, 470, 30, 400), "Power", AlignLeft);
-            float ret = vslider(sf::FloatRect(800, 470, 60, 400), my_spaceship->systems[engineering_selected_system].power_level, 3.0, 0.0, 1.0);
+            vtext(sf::FloatRect(630, 490, 30, 360), "Power", AlignLeft);
+            float ret = vslider(sf::FloatRect(660, 490, 60, 360), my_spaceship->systems[engineering_selected_system].power_level, 3.0, 0.0, 1.0);
             if (ret < 1.25 && ret > 0.75)
                 ret = 1.0;
             if (my_spaceship->systems[engineering_selected_system].power_level != ret)
                 my_spaceship->commandSetSystemPower(engineering_selected_system, ret);
-                
-            vtext(sf::FloatRect(870, 470, 30, 400), "Coolant", AlignLeft);
-            ret = vslider(sf::FloatRect(900, 470, 60, 400), my_spaceship->systems[engineering_selected_system].coolant_level, 10.0, 0.0);
+
+            vtext(sf::FloatRect(730, 490, 30, 360), "Coolant", AlignLeft);
+            ret = vslider(sf::FloatRect(760, 490, 60, 360), my_spaceship->systems[engineering_selected_system].coolant_level, 10.0, 0.0);
             if (my_spaceship->systems[engineering_selected_system].coolant_level != ret)
                 my_spaceship->commandSetSystemCoolant(engineering_selected_system, ret);
         }
@@ -337,6 +337,7 @@ void CrewUI::engineeringUI()
 
 void CrewUI::scienceUI()
 {
+    //TODO: Unions to give speed/time estimate
     sf::Vector2f mouse = InputHandler::getMousePos();
     
     if (science_show_radar)
@@ -1067,13 +1068,13 @@ void CrewUI::weaponTube(int n, sf::FloatRect load_rect, sf::FloatRect fire_rect,
         break;
     case WTS_Loading:
         progressBar(fire_rect, my_spaceship->weaponTube[n].delay, my_spaceship->tubeLoadTime, 0.0);
+        text(fire_rect, getMissileWeaponName(my_spaceship->weaponTube[n].type_loaded), AlignCenter, text_size, sf::Color(128, 128, 128));
         disabledButton(load_rect, "Loading", text_size);
-        text(fire_rect, getMissileWeaponName(my_spaceship->weaponTube[n].type_loaded), AlignCenter, text_size, sf::Color::Black);
         break;
     case WTS_Unloading:
         progressBar(fire_rect, my_spaceship->weaponTube[n].delay, 0.0, my_spaceship->tubeLoadTime);
+        text(fire_rect, getMissileWeaponName(my_spaceship->weaponTube[n].type_loaded), AlignCenter, text_size, sf::Color(128, 128, 128));
         disabledButton(load_rect, "Unloading", text_size * 0.8);
-        text(fire_rect, getMissileWeaponName(my_spaceship->weaponTube[n].type_loaded), AlignCenter, text_size, sf::Color::Black);
         break;
     }
 }
