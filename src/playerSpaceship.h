@@ -45,6 +45,7 @@ public:
     const static float system_heatup_per_second = 0.1f;
     const static float max_coolant = 10.0;
     const static float damage_per_second_on_overheat = 0.2;
+    const static float shield_calibration_time = 10.0f;
     const static float max_comm_range = 50000;
     const static float comms_channel_open_time = 2.0;
     const static int max_comms_reply_count = 16;
@@ -57,6 +58,7 @@ public:
     float warp_indicator;
     P<SpaceShip> scanning_ship; //Server only
     float scanning_delay;
+    float shield_calibration_delay;
     bool auto_repair_enabled;
 
     ECommsState comms_state;

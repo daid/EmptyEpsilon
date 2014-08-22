@@ -252,6 +252,24 @@ int GUI::selector(sf::FloatRect rect, string textValue, float textSize)
     return 0;
 }
 
+void GUI::disabledSelector(sf::FloatRect rect, string textValue, float textSize)
+{
+    draw9Cut(rect, "border_background", sf::Color::White);
+    text(rect, textValue, AlignCenter, textSize, sf::Color(128, 128, 128));
+    
+    sf::Sprite arrow;
+    textureManager.setTexture(arrow, "gui_arrow.png");
+    arrow.setPosition(rect.left + rect.height / 2.0, rect.top + rect.height / 2.0);
+    float f = rect.height / float(arrow.getTextureRect().height);
+    arrow.setScale(f, f);
+    arrow.setColor(sf::Color(128, 128, 128, 255));
+    renderTarget->draw(arrow);
+    arrow.setPosition(rect.left + rect.width - rect.height / 2.0, rect.top + rect.height / 2.0);
+    arrow.setRotation(180);
+    arrow.setColor(sf::Color(128, 128, 128, 255));
+    renderTarget->draw(arrow);
+}
+
 void GUI::box(sf::FloatRect rect)
 {
     draw9Cut(rect, "border_background");

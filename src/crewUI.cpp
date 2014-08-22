@@ -15,6 +15,7 @@ CrewUI::CrewUI()
     
     comms_open_channel_type = OCT_None;
     engineering_selected_system = SYS_None;
+    engineering_shield_new_frequency = SpaceShip::max_frequency / 2;
 
     for(int n=0; n<max_crew_positions; n++)
     {
@@ -203,107 +204,90 @@ void CrewUI::engineeringUI()
     keyValueDisplay(sf::FloatRect(20, 100, 300, 40), 0.5, "Energy", string(int(my_spaceship->energy_level)) + " (" + string(net_power) + ")", 25);
     keyValueDisplay(sf::FloatRect(20, 140, 300, 40), 0.5, "Hull", string(int(my_spaceship->hull_strength * 100 / my_spaceship->hull_max)), 25);
     keyValueDisplay(sf::FloatRect(20, 180, 300, 40), 0.5, "Shields", string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "/" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)), 25);
+    /*
     if (toggleButton(sf::FloatRect(20, 250, 300, 50), my_spaceship->auto_repair_enabled, "Auto-Repair", 30))
     {
         my_spaceship->commandSetAutoRepair(!my_spaceship->auto_repair_enabled);
     }
+    */
 
-    ESystem highlight_system = SYS_None;
-    if (false)
+    int y = 470;
+    for(int n=0; n<SYS_COUNT; n++)
     {
-        int x = 0;
-        for(int n=0; n<SYS_COUNT; n++)
-        {
-            if (!my_spaceship->hasSystem(ESystem(n))) continue;
-            if (sf::FloatRect(x + 20, 530, 140, 320).contains(mouse))
-                highlight_system = ESystem(n);
-
-            vtext(sf::FloatRect(x + 20, 550, 30, 300), "Dmg:" + string(int(100 - my_spaceship->systems[n].health * 100)) + "%", AlignRight, 15);
-            vtext(sf::FloatRect(x, 550, 50, 300), getSystemName(ESystem(n)), AlignLeft);
-            text(sf::FloatRect(x + 50, 530, 50, 20), string(int(my_spaceship->systems[n].power_level * 100)) + "%", AlignCenter, 20);
-            float ret = vslider(sf::FloatRect(x + 50, 550, 50, 300), my_spaceship->systems[n].power_level, 3.0, 0.0, 1.0);
-            if (ret < 1.25 && ret > 0.75)
-                ret = 1.0;
-            if (my_spaceship->systems[n].power_level != ret)
-                my_spaceship->commandSetSystemPower(ESystem(n), ret);
-            vprogressBar(sf::FloatRect(x + 110, 500, 50, 50), my_spaceship->systems[n].heat_level, 0.0, 1.0, sf::Color(255, 255 * (1.0 - my_spaceship->systems[n].heat_level), 0));
-            float heating_diff = powf(1.7, my_spaceship->systems[n].power_level - 1.0) - (1.0 + my_spaceship->systems[n].coolant_level * 0.1);
-            if (my_spaceship->systems[n].heat_level > 0.0 && fabs(heating_diff) > 0.0)
-            {
-                sf::Sprite arrow;
-                textureManager.setTexture(arrow, "gui_arrow.png");
-                arrow.setPosition(x + 135, 525);
-                float f = 50 / float(arrow.getTextureRect().height);
-                arrow.setScale(f, f);
-                if (heating_diff < 0)
-                    arrow.setRotation(-90);
-                else
-                    arrow.setRotation(90);
-                arrow.setColor(sf::Color(255, 255, 255, std::min(255, int(255 * fabs(heating_diff)))));
-                getRenderTarget()->draw(arrow);
-            }
-            ret = vslider(sf::FloatRect(x + 110, 550, 50, 300), my_spaceship->systems[n].coolant_level, 10.0, 0.0);
-            if (my_spaceship->systems[n].coolant_level != ret)
-                my_spaceship->commandSetSystemCoolant(ESystem(n), ret);
-            x += 150;
-        }
-    }else{
-        int y = 470;
-        for(int n=0; n<SYS_COUNT; n++)
-        {
-            if (!my_spaceship->hasSystem(ESystem(n))) continue;
-            if (toggleButton(sf::FloatRect(50, y, 300, 50), ESystem(n) == engineering_selected_system, getSystemName(ESystem(n)), 30))
-                engineering_selected_system = ESystem(n);
-            
-            float health = my_spaceship->systems[n].health;
-            progressBar(sf::FloatRect(350, y, 100, 50), health, 0.0, 1.0, sf::Color(64, 128 * health, 64 * health));
-            text(sf::FloatRect(350, y, 100, 50), string(int(health * 100)) + "%", AlignCenter, 20);
-            
-            float heat = my_spaceship->systems[n].heat_level;
-            progressBar(sf::FloatRect(450, y, 50, 50), heat, 0.0, 1.0, sf::Color(128, 128 * (1.0 - heat), 0));
-            float heating_diff = powf(1.7, my_spaceship->systems[n].power_level - 1.0) - (1.0 + my_spaceship->systems[n].coolant_level * 0.1);
-            if (my_spaceship->systems[n].heat_level > 0.0 && fabs(heating_diff) > 0.0)
-            {
-                sf::Sprite arrow;
-                textureManager.setTexture(arrow, "gui_arrow.png");
-                arrow.setPosition(450 + 25, y + 25);
-                float f = 50 / float(arrow.getTextureRect().height);
-                arrow.setScale(f, f);
-                if (heating_diff < 0)
-                    arrow.setRotation(-90);
-                else
-                    arrow.setRotation(90);
-                arrow.setColor(sf::Color(255, 255, 255, std::min(255, int(255 * fabs(heating_diff)))));
-                getRenderTarget()->draw(arrow);
-            }
-            float power = my_spaceship->systems[n].power_level;
-            progressBar(sf::FloatRect(500, y, 50, 50), power, 0.0, 3.0, sf::Color(192, 192, 0));
-            float coolant = my_spaceship->systems[n].coolant_level;
-            progressBar(sf::FloatRect(550, y, 50, 50), coolant, 0.0, 10.0, sf::Color(0, 128, 128));
-            
-            y += 50;
-        }
+        if (!my_spaceship->hasSystem(ESystem(n))) continue;
+        if (toggleButton(sf::FloatRect(50, y, 300, 50), ESystem(n) == engineering_selected_system, getSystemName(ESystem(n)), 30))
+            engineering_selected_system = ESystem(n);
         
-        box(sf::FloatRect(600, 470, 270, 400));
-        if (my_spaceship->hasSystem(engineering_selected_system))
+        float health = my_spaceship->systems[n].health;
+        progressBar(sf::FloatRect(350, y, 100, 50), health, 0.0, 1.0, sf::Color(64, 128 * health, 64 * health));
+        text(sf::FloatRect(350, y, 100, 50), string(int(health * 100)) + "%", AlignCenter, 20);
+        
+        float heat = my_spaceship->systems[n].heat_level;
+        progressBar(sf::FloatRect(450, y, 50, 50), heat, 0.0, 1.0, sf::Color(128, 128 * (1.0 - heat), 0));
+        float heating_diff = powf(1.7, my_spaceship->systems[n].power_level - 1.0) - (1.0 + my_spaceship->systems[n].coolant_level * 0.1);
+        if (my_spaceship->systems[n].heat_level > 0.0 && fabs(heating_diff) > 0.0)
         {
-            vtext(sf::FloatRect(630, 490, 30, 360), "Power", AlignLeft);
-            float ret = vslider(sf::FloatRect(660, 490, 60, 360), my_spaceship->systems[engineering_selected_system].power_level, 3.0, 0.0, 1.0);
-            if (ret < 1.25 && ret > 0.75)
-                ret = 1.0;
-            if (my_spaceship->systems[engineering_selected_system].power_level != ret)
-                my_spaceship->commandSetSystemPower(engineering_selected_system, ret);
-
-            vtext(sf::FloatRect(730, 490, 30, 360), "Coolant", AlignLeft);
-            ret = vslider(sf::FloatRect(760, 490, 60, 360), my_spaceship->systems[engineering_selected_system].coolant_level, 10.0, 0.0);
-            if (my_spaceship->systems[engineering_selected_system].coolant_level != ret)
-                my_spaceship->commandSetSystemCoolant(engineering_selected_system, ret);
+            sf::Sprite arrow;
+            textureManager.setTexture(arrow, "gui_arrow.png");
+            arrow.setPosition(450 + 25, y + 25);
+            float f = 50 / float(arrow.getTextureRect().height);
+            arrow.setScale(f, f);
+            if (heating_diff < 0)
+                arrow.setRotation(-90);
+            else
+                arrow.setRotation(90);
+            arrow.setColor(sf::Color(255, 255, 255, std::min(255, int(255 * fabs(heating_diff)))));
+            getRenderTarget()->draw(arrow);
         }
+        float power = my_spaceship->systems[n].power_level;
+        progressBar(sf::FloatRect(500, y, 50, 50), power, 0.0, 3.0, sf::Color(192, 192, 0));
+        float coolant = my_spaceship->systems[n].coolant_level;
+        progressBar(sf::FloatRect(550, y, 50, 50), coolant, 0.0, 10.0, sf::Color(0, 128, 128));
+        
+        y += 50;
+    }
+    
+    box(sf::FloatRect(600, 470, 270, 400));
+    if (my_spaceship->hasSystem(engineering_selected_system))
+    {
+        vtext(sf::FloatRect(630, 490, 30, 360), "Power", AlignLeft);
+        float ret = vslider(sf::FloatRect(660, 490, 60, 360), my_spaceship->systems[engineering_selected_system].power_level, 3.0, 0.0, 1.0);
+        if (ret < 1.25 && ret > 0.75)
+            ret = 1.0;
+        if (my_spaceship->systems[engineering_selected_system].power_level != ret)
+            my_spaceship->commandSetSystemPower(engineering_selected_system, ret);
+
+        vtext(sf::FloatRect(730, 490, 30, 360), "Coolant", AlignLeft);
+        ret = vslider(sf::FloatRect(760, 490, 60, 360), my_spaceship->systems[engineering_selected_system].coolant_level, 10.0, 0.0);
+        if (my_spaceship->systems[engineering_selected_system].coolant_level != ret)
+            my_spaceship->commandSetSystemCoolant(engineering_selected_system, ret);
     }
 
+    ///Shield frequency configuration
+    float x = getWindowSize().x - 320;
+    //box(sf::FloatRect(x, 470, 300, 400));
+    text(sf::FloatRect(x, 470, 300, 50), "Shield Freq.", AlignCenter, 30);
+    textbox(sf::FloatRect(x, 520, 300, 50), frequencyToString(my_spaceship->shield_frequency), AlignCenter, 30);
+    
+    text(sf::FloatRect(x, 570, 300, 50), "Change Freq.", AlignCenter, 30);
+    if (my_spaceship->shield_calibration_delay > 0.0)
+    {
+        textbox(sf::FloatRect(x, 620, 300, 50), "Calibrating", AlignCenter, 30);
+        progressBar(sf::FloatRect(x, 670, 300, 50), my_spaceship->shield_calibration_delay, PlayerSpaceship::shield_calibration_time, 0);
+    }else{
+        engineering_shield_new_frequency += selector(sf::FloatRect(x, 620, 300, 50), frequencyToString(engineering_shield_new_frequency), 30);
+        if (engineering_shield_new_frequency < 0)
+            engineering_shield_new_frequency = 0;
+        if (engineering_shield_new_frequency > SpaceShip::max_frequency)
+            engineering_shield_new_frequency = SpaceShip::max_frequency;
+        if (button(sf::FloatRect(x, 670, 300, 50), "Calibrate", 30))
+            my_spaceship->commandSetShieldFrequency(engineering_shield_new_frequency);
+    }
+
+    ///Draw the ship interior
     sf::Vector2i interior_size = my_spaceship->ship_template->interiorSize();
     sf::Vector2f interial_position = sf::Vector2f(getWindowSize().x / 2.0, 250) - sf::Vector2f(interior_size) * 48.0f / 2.0f;
-    drawShipInternals(interial_position, my_spaceship, highlight_system);
+    drawShipInternals(interial_position, my_spaceship, engineering_selected_system);
 
     PVector<RepairCrew> rc_list = getRepairCrewFor(my_spaceship);
     foreach(RepairCrew, rc, rc_list)
