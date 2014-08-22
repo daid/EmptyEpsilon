@@ -676,7 +676,7 @@ float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency)
     
     float diff = abs(beam_frequency - shield_frequency);
     float f1 = sinf(Tween<float>::linear(diff, 0, SpaceShip::max_frequency, 0, M_PI * (1.2 + shield_frequency * 0.05)) + M_PI / 2);
-    f1 = f1 * Tween<float>::linear(diff, 0, SpaceShip::max_frequency, 1.0, 0.1);
+    f1 = f1 * Tween<float>::easeInCubic(diff, 0, SpaceShip::max_frequency, 1.0, 0.1);
     f1 = Tween<float>::linear(f1, 1.0, -1.0, 0.5, 1.5);
     return f1;
 }
