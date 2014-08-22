@@ -1,5 +1,5 @@
 -- Name: Basic
--- Description: Basic scenarios, a few random stations, with random stuff around them are under attack by enemies.
+-- Description: Basic scenario. A few random stations, with random stuff around them, are under attack by enemies.
 
 function vectorFromAngle(angle, length)
 	return math.sin(angle / 180 * math.pi) * length, -math.cos(angle / 180 * math.pi) * length
@@ -106,9 +106,9 @@ function update(delta)
 		end
 	end
 	if enemy_count == 0 then
-		victory(1);	--Victory for the humans.
+		victory(1);	--Victory for the humans (eg; players). Note that this can happen if the players kill themselves (and then blow up the enemies)
 	end
 	if friendly_count == 0 then
-		victory(2);	--Victory for the SpaceCows (==defeat for the humans)
+		victory(2);	--Victory for the SpaceCows (== defeat for the players)
 	end
 end
