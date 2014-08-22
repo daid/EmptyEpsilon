@@ -158,6 +158,18 @@ template:setWeaponStorage("Nuke", 1)
 template:setWeaponStorage("Mine", 3)
 template:setWeaponStorage("EMP", 2)
 
+
+
+--List of possible fighters --
+-- Intercepter (anti fighter) -> High speed, low visibility, front beam weapons
+-- Bomber (anti capital) -> Low speed, high visibility, high armor (for a fighter), high shields (for a fighter), multiple missiles
+	-- Bomber mine
+
+-- Mine ship -- 
+	-- deploys some mines (the ones that don't explode with a km blast radius) and use long range beam weapons to fight
+
+
+
 --[[ Enemy ship types --]]
 -- Fighters are quick agile ships that do not do a lot of damage, but usually come in larger groups. They are easy to take out, but should not be underestimated.
 template = ShipTemplate():setName("Fighter"):setMesh("small_fighter_1.model", "small_fighter_1_color.jpg", "small_fighter_1_specular.jpg", "small_fighter_1_illumination.jpg"):setScale(3):setRadius(40)
@@ -171,6 +183,15 @@ template:setShields(30, 30)
 template:setSpeed(120, 30)
 
 -- The cruiser is an average ship you can encounter, it has average shields, and average beams. It's pretty much average with nothing special.
+-- Karnack cruiser mark I
+	-- Fabricated by: Repulse shipyards
+	-- Due to it's versitility, this ship has found wide adoptation in most factions. Most factions have extensively retrofitted these ships
+	-- to suit their combat doctrines. Because it's an older model, most factions have been selling stripped versions. This practice has led to this ship becomming an all time favourite with smugglers and other civillian parties. However, they have used it's adaptable nature to re-fit them with (illigal) weaponry.
+
+-- Karnack Cruiser mark II
+	-- Fabricated by: Repulse shipyards
+	-- The sucessor to the widly sucesfull mark I cruiser. This ship has several notable improvements over the original ship, including better armor, slightly improved weaponry and customization by the shipyards. The latter improvement was the most requested feature by several factions once they realized that their old surplus mark I ships were used for less savoury purposes.
+
 template = ShipTemplate():setName("Cruiser"):setMesh("space_frigate_6.model", "space_frigate_6_color.png", "space_frigate_6_specular.png", "space_frigate_6_illumination.png"):setScale(6):setRadius(100)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
 template:setBeamPosition(0, -8, -1.6, -2)
@@ -184,6 +205,9 @@ template:setHull(70)
 template:setShields(40, 40)
 template:setSpeed(60, 6)
 
+-- Polaris missle cruiser mark I
+	-- Fabricated by: Repulse shipyards
+	-- TODO
 -- The missile cruiser is a long range missile firing platform. It cannot handle a lot of damage, but can do a lot of damage if not dealth with properly.
 template = ShipTemplate():setName("Missile Cruiser"):setMesh("space_cruiser_4.model", "space_cruiser_4_color.jpg", "space_cruiser_4_illumination.jpg", "space_cruiser_4_illumination.jpg"):setScale(8):setRadius(100)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
