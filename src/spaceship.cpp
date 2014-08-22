@@ -463,7 +463,7 @@ void SpaceShip::fireBeamWeapon(int index, P<SpaceObject> target)
     effect->setSource(this, ship_template->beamPosition[index] * ship_template->scale);
     effect->setTarget(target, hitLocation);
 
-    target->takeDamage(beamWeapons[index].damage, hitLocation, DT_Energy);
+    target->takeDamage(beamWeapons[index].damage, hitLocation, DT_Energy, beam_frequency);
 }
 
 void SpaceShip::collision(Collisionable* other)
@@ -577,10 +577,13 @@ void SpaceShip::requestUndock()
     }
 }
 
-void SpaceShip::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type)
+void SpaceShip::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type, int frequency)
 {
     if (shields_active)
     {
+        float factor = 1.0;
+        if (type == DT_Energy)
+            factor = frequencyVsFrequencyDamageFactor(frequency, shield_frequency);
         float angle = sf::angleDifference(getRotation(), sf::vector2ToAngle(getPosition() - damageLocation));
         bool front_hit = !(angle > -90 && angle < 90);
         float* shield = &front_shield;
@@ -591,11 +594,11 @@ void SpaceShip::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDam
             shield_hit_effect = &rear_shield_hit_effect;
         }
 
-        *shield -= damageAmount;
+        *shield -= damageAmount * factor;
 
         if (*shield < 0)
         {
-            hullDamage(-(*shield), damageLocation, type);
+            hullDamage(-(*shield) / factor, damageLocation, type);
             *shield = 0.0;
         }else{
             *shield_hit_effect = 1.0;
@@ -668,6 +671,9 @@ string getMissileWeaponName(EMissileWeapons missile)
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency)
 {
+    if (beam_frequency < 0 || shield_frequency < 0)
+        return 1.0;
+    
     float diff = abs(beam_frequency - shield_frequency);
     float f1 = sinf(Tween<float>::linear(diff, 0, SpaceShip::max_frequency, 0, M_PI * (1.2 + shield_frequency * 0.05)) + M_PI / 2);
     f1 = f1 * Tween<float>::linear(diff, 0, SpaceShip::max_frequency, 1.0, 0.1);

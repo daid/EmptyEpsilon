@@ -176,7 +176,9 @@ void CrewUI::weaponsUI()
     float x = getWindowSize().x - 290;
     if (my_spaceship->front_shield_max > 0 || my_spaceship->rear_shield_max > 0)
     {
-        if (toggleButton(sf::FloatRect(x, 840, 270, 50), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 30))
+        if (my_spaceship->shield_calibration_delay > 0.0)
+            disabledButton(sf::FloatRect(x, 840, 270, 50), "Calibrating", 30);
+        else if (toggleButton(sf::FloatRect(x, 840, 270, 50), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 30))
             my_spaceship->commandSetShields(!my_spaceship->shields_active);
     }
     box(sf::FloatRect(x, 740, 270, 100));

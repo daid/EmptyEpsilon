@@ -112,7 +112,7 @@ bool SpaceStation::canBeDockedBy(P<SpaceObject> obj)
     return true;
 }
 
-void SpaceStation::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type)
+void SpaceStation::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type, int frequency)
 {
     shields -= damageAmount;
     if (shields < 0)

@@ -34,7 +34,7 @@ public:
     virtual bool canBeTargetedByPlayer() { return canBeTargeted(); }
     virtual bool canBeDockedBy(P<SpaceObject> obj) { return false; }
     virtual bool hasShield() { return false; }
-    virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type) {}
+    virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type, int frequency=-1) {}
 
     //virtual bool openCommChannel(P<PlayerSpaceship> ship) { return false; }
     //virtual void commChannelMessage(P<PlayerSpaceship> ship, int32_t message_id) {}

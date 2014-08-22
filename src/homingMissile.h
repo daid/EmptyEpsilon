@@ -24,7 +24,7 @@ public:
     virtual bool canBeTargetedByPlayer() { return true; }
     
     virtual void collision(Collisionable* target);
-    virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type) { if (type != DT_Kinetic) destroy(); }
+    virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type, int frequency=-1) { if (type != DT_Kinetic) destroy(); }
 };
 
 #endif//HOMING_MISSLE_H
