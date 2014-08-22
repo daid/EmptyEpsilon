@@ -157,6 +157,7 @@ template:setWeaponStorage("Homing", 5)
 template:setWeaponStorage("Nuke", 1)
 template:setWeaponStorage("Mine", 3)
 template:setWeaponStorage("EMP", 2)
+template:setDescription([[The tugboat is a reliable, but small and un-armed transport ship. Due to it's low cost, it is a favourite ship to teach the ropes to fledgeling captains, without risking friendly fire.]])
 
 
 
