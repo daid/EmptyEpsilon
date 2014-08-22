@@ -73,6 +73,7 @@ class ShipTemplate : public PObject
     static std::map<string, P<ShipTemplate> > templateMap;
 public:
     string name;
+    string description;
 
     float scale;
     float radius;
@@ -95,6 +96,7 @@ public:
     ShipTemplate();
     
     void setName(string name);
+    void setDescription(string description) { this->description = description; }
     void setScale(float scale) { this->scale = scale; }
     void setRadius(float radius) { this->radius = radius; }
     void setMesh(string model, string colorTexture, string specularTexture, string illuminationTexture);

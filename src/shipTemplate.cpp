@@ -5,6 +5,7 @@
 REGISTER_SCRIPT_CLASS(ShipTemplate)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setName);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDescription);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setMesh);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setScale);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadius);
