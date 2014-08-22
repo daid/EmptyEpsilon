@@ -390,6 +390,26 @@ void CrewUI::scienceUI()
                 {
                     keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Type", ship->ship_template->name, 20); y += 30;
                     keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Shields", string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), 20); y += 30;
+
+                    box(sf::FloatRect(x, y, 250, 100));
+                    int freq = frequencyCurve(sf::FloatRect(x + 20, y + 30, 210, 60), false, true, ship->shield_frequency);
+                    if (freq > -1)
+                    {
+                        text(sf::FloatRect(x + 20, y, 210, 30), frequencyToString(freq) + " " + string(int(frequencyVsFrequencyDamageFactor(freq, ship->shield_frequency) * 100)) + "% dmg", AlignCenter, 20);
+                    }else{
+                        text(sf::FloatRect(x + 20, y, 210, 30), "Shields", AlignCenter, 20);
+                    }
+                    y += 100;
+
+                    box(sf::FloatRect(x, y, 250, 100));
+                    freq = frequencyCurve(sf::FloatRect(x + 20, y + 30, 210, 60), true, false, ship->beam_frequency);
+                    if (freq > -1)
+                    {
+                        text(sf::FloatRect(x + 20, y, 210, 30), frequencyToString(freq) + " " + string(int(frequencyVsFrequencyDamageFactor(ship->beam_frequency, freq) * 100)) + "% dmg", AlignCenter, 20);
+                    }else{
+                        text(sf::FloatRect(x + 20, y, 210, 30), "Beams", AlignCenter, 20);
+                    }
+                    y += 100;
                 }
             }
             P<SpaceStation> station = scienceTarget;
@@ -1064,4 +1084,35 @@ void CrewUI::weaponTube(int n, sf::FloatRect load_rect, sf::FloatRect fire_rect,
         disabledButton(load_rect, "Unloading", text_size * 0.8);
         break;
     }
+}
+
+int CrewUI::frequencyCurve(sf::FloatRect rect, bool frequency_is_beam, bool more_damage_is_positive, int frequency)
+{
+    sf::RenderTarget& window = *getRenderTarget();
+    
+    float w = rect.width / (SpaceShip::max_frequency + 1);
+    for(int n=0; n<=SpaceShip::max_frequency; n++)
+    {
+        float x = rect.left + w * n;
+        float f;
+        if (frequency_is_beam)
+            f = frequencyVsFrequencyDamageFactor(frequency, n);
+        else
+            f = frequencyVsFrequencyDamageFactor(n, frequency);
+        f = Tween<float>::linear(f, 0.5, 1.5, 1.0, 0.0);
+        float h = rect.height * f;
+        sf::RectangleShape bar(sf::Vector2f(w * 0.8, h));
+        bar.setPosition(x, rect.top + rect.height - h);
+        if (more_damage_is_positive)
+            bar.setFillColor(sf::Color(255 * f, 255 * (1.0 - f), 0));
+        else
+            bar.setFillColor(sf::Color(255 * (1.0 - f), 255 * f, 0));
+        window.draw(bar);
+    }
+    
+    if (rect.contains(InputHandler::getMousePos()))
+    {
+        return int((InputHandler::getMousePos().x - rect.left) / w);
+    }
+    return -1;
 }

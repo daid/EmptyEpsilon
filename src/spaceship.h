@@ -137,6 +137,8 @@ public:
     void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage[weapon] = amount; }
 };
 
+float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);
+
 string getMissileWeaponName(EMissileWeapons missile);
 REGISTER_MULTIPLAYER_ENUM(EMissileWeapons);
 REGISTER_MULTIPLAYER_ENUM(EWeaponTubeState);
