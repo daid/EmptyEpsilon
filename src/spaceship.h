@@ -52,8 +52,9 @@ public:
 class SpaceShip : public SpaceObject, public Updatable
 {
     const static float shield_recharge_rate = 0.2f;
-
 public:
+    const static int max_frequency = 20;
+
     string templateName;
     P<ShipTemplate> ship_template;
     float engine_emit_delay;
@@ -82,11 +83,13 @@ public:
     WeaponTube weaponTube[maxWeaponTubes];
 
     float beamRechargeFactor;
+    int beam_frequency;
     BeamWeapon beamWeapons[maxBeamWeapons];
 
     float hull_strength, hull_max;
     float front_shield_recharge_factor, rear_shield_recharge_factor;
     bool shields_active;
+    int shield_frequency;
     float front_shield, rear_shield;
     float front_shield_max, rear_shield_max;
     float front_shield_hit_effect, rear_shield_hit_effect;
@@ -139,5 +142,7 @@ REGISTER_MULTIPLAYER_ENUM(EMissileWeapons);
 REGISTER_MULTIPLAYER_ENUM(EWeaponTubeState);
 REGISTER_MULTIPLAYER_ENUM(EMainScreenSetting);
 REGISTER_MULTIPLAYER_ENUM(EDockingState);
+
+string frequencyToString(int frequency);
 
 #endif//SPACE_SHIP_H

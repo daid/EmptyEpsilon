@@ -87,7 +87,7 @@ void CrewUI::helmsUI()
 {
     sf::Vector2f mouse = InputHandler::getMousePos();
     sf::Vector2f radar_center = getWindowSize() / 2.0f;
-    if (InputHandler::mouseIsPressed(sf::Mouse::Left))
+    if (InputHandler::mouseIsPressed(sf::Mouse::Left) || InputHandler::mouseIsReleased(sf::Mouse::Left))
     {
         sf::Vector2f diff = mouse - radar_center;
         if (sf::length(diff) < 400)
@@ -122,7 +122,7 @@ void CrewUI::weaponsUI()
     float radarDistance = 5000;
     sf::Vector2f radar_position = getWindowSize() / 2.0f;
 
-    if (InputHandler::mouseIsPressed(sf::Mouse::Left))
+    if (InputHandler::mouseIsReleased(sf::Mouse::Left))
     {
         sf::Vector2f diff = mouse - radar_position;
         if (sf::length(diff) < 400)
@@ -172,12 +172,17 @@ void CrewUI::weaponsUI()
         }
     }
 
-    float x = getWindowSize().x - 270;
+    float x = getWindowSize().x - 290;
     if (my_spaceship->front_shield_max > 0 || my_spaceship->rear_shield_max > 0)
     {
-        if (toggleButton(sf::FloatRect(x, 840, 250, 50), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 30))
+        if (toggleButton(sf::FloatRect(x, 840, 270, 50), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 30))
             my_spaceship->commandSetShields(!my_spaceship->shields_active);
     }
+    box(sf::FloatRect(x, 740, 270, 100));
+    text(sf::FloatRect(x, 740, 270, 50), "Beam Freq.", AlignCenter, 30);
+    int frequency = my_spaceship->beam_frequency + selector(sf::FloatRect(x, 790, 270, 50), frequencyToString(my_spaceship->beam_frequency), 30);
+    if (frequency != my_spaceship->beam_frequency)
+        my_spaceship->commandSetBeamFrequency(frequency);
 }
 
 void CrewUI::engineeringUI()
@@ -279,18 +284,18 @@ void CrewUI::engineeringUI()
             y += 50;
         }
         
+        box(sf::FloatRect(600, 470, 270, 400));
         if (my_spaceship->hasSystem(engineering_selected_system))
         {
-            //vtext(sf::FloatRect(670, 470, 30, 400), getSystemName(engineering_selected_system), AlignLeft);
-            vtext(sf::FloatRect(770, 470, 30, 400), "Power", AlignLeft);
-            float ret = vslider(sf::FloatRect(800, 470, 60, 400), my_spaceship->systems[engineering_selected_system].power_level, 3.0, 0.0, 1.0);
+            vtext(sf::FloatRect(630, 490, 30, 360), "Power", AlignLeft);
+            float ret = vslider(sf::FloatRect(660, 490, 60, 360), my_spaceship->systems[engineering_selected_system].power_level, 3.0, 0.0, 1.0);
             if (ret < 1.25 && ret > 0.75)
                 ret = 1.0;
             if (my_spaceship->systems[engineering_selected_system].power_level != ret)
                 my_spaceship->commandSetSystemPower(engineering_selected_system, ret);
-                
-            vtext(sf::FloatRect(870, 470, 30, 400), "Coolant", AlignLeft);
-            ret = vslider(sf::FloatRect(900, 470, 60, 400), my_spaceship->systems[engineering_selected_system].coolant_level, 10.0, 0.0);
+
+            vtext(sf::FloatRect(730, 490, 30, 360), "Coolant", AlignLeft);
+            ret = vslider(sf::FloatRect(760, 490, 60, 360), my_spaceship->systems[engineering_selected_system].coolant_level, 10.0, 0.0);
             if (my_spaceship->systems[engineering_selected_system].coolant_level != ret)
                 my_spaceship->commandSetSystemCoolant(engineering_selected_system, ret);
         }
@@ -309,7 +314,7 @@ void CrewUI::engineeringUI()
         sprite.setPosition(position);
         window.draw(sprite);
 
-        if (InputHandler::mouseIsPressed(sf::Mouse::Left) && sf::length(mouse - position) < 48.0f/2.0)
+        if (InputHandler::mouseIsReleased(sf::Mouse::Left) && sf::length(mouse - position) < 48.0f/2.0)
         {
             selected_crew = rc;
         }
@@ -323,7 +328,7 @@ void CrewUI::engineeringUI()
         }
     }
 
-    if (InputHandler::mouseIsPressed(sf::Mouse::Left) && selected_crew)
+    if (InputHandler::mouseIsReleased(sf::Mouse::Left) && selected_crew)
     {
         sf::Vector2i target_pos = sf::Vector2i((mouse - interial_position) / 48.0f);
         if (target_pos.x >= 0 && target_pos.x < interior_size.x && target_pos.y >= 0 && target_pos.y < interior_size.y)
@@ -335,6 +340,7 @@ void CrewUI::engineeringUI()
 
 void CrewUI::scienceUI()
 {
+    //TODO: Unions to give speed/time estimate
     sf::Vector2f mouse = InputHandler::getMousePos();
     
     if (science_show_radar)
@@ -342,7 +348,7 @@ void CrewUI::scienceUI()
         sf::Vector2f radar_center = sf::Vector2f((getWindowSize().x - 250) / 2.0f, getWindowSize().y / 2.0f);
 
         float radarDistance = science_radar_distance;
-        if (InputHandler::mouseIsPressed(sf::Mouse::Left))
+        if (InputHandler::mouseIsReleased(sf::Mouse::Left))
         {
             sf::Vector2f diff = mouse - radar_center;
             if (sf::length(diff) < 400)
@@ -369,12 +375,18 @@ void CrewUI::scienceUI()
         {
             float x = getWindowSize().x - 270;
             float y = 400;
-            float distance = sf::length(scienceTarget->getPosition() - my_spaceship->getPosition());
-            float heading = sf::vector2ToAngle(scienceTarget->getPosition() - my_spaceship->getPosition());
+            sf::Vector2f position_diff = scienceTarget->getPosition() - my_spaceship->getPosition();
+            float distance = sf::length(position_diff);
+            float heading = sf::vector2ToAngle(position_diff);
             if (heading < 0) heading += 360;
+            float rel_velocity = dot(scienceTarget->getVelocity(), position_diff / distance) - dot(my_spaceship->getVelocity(), position_diff / distance);
+            if (fabs(rel_velocity) < 0.01)
+                rel_velocity = 0.0;
+            
             keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Callsign", scienceTarget->getCallSign(), 20); y += 30;
             keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Distance", string(distance / 1000.0, 1) + "km", 20); y += 30;
             keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Heading", string(int(heading)), 20); y += 30;
+            keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Rel.Speed", string(rel_velocity / 1000 * 60, 1) + "km/min", 20); y += 30;
 
             P<SpaceShip> ship = scienceTarget;
             if (ship && !ship->scanned_by_player)
@@ -823,7 +835,7 @@ void CrewUI::singlePilotUI()
     radar_center.x /= 2.0f;
     float radar_size = radar_center.x - 20;
 
-    if (InputHandler::mouseIsPressed(sf::Mouse::Left))
+    if (InputHandler::mouseIsReleased(sf::Mouse::Left))
     {
         sf::Vector2f diff = mouse - radar_center;
         if (sf::length(diff) < radar_size)
@@ -1059,13 +1071,13 @@ void CrewUI::weaponTube(int n, sf::FloatRect load_rect, sf::FloatRect fire_rect,
         break;
     case WTS_Loading:
         progressBar(fire_rect, my_spaceship->weaponTube[n].delay, my_spaceship->tubeLoadTime, 0.0);
+        text(fire_rect, getMissileWeaponName(my_spaceship->weaponTube[n].type_loaded), AlignCenter, text_size, sf::Color(128, 128, 128));
         disabledButton(load_rect, "Loading", text_size);
-        text(fire_rect, getMissileWeaponName(my_spaceship->weaponTube[n].type_loaded), AlignCenter, text_size, sf::Color::Black);
         break;
     case WTS_Unloading:
         progressBar(fire_rect, my_spaceship->weaponTube[n].delay, 0.0, my_spaceship->tubeLoadTime);
+        text(fire_rect, getMissileWeaponName(my_spaceship->weaponTube[n].type_loaded), AlignCenter, text_size, sf::Color(128, 128, 128));
         disabledButton(load_rect, "Unloading", text_size * 0.8);
-        text(fire_rect, getMissileWeaponName(my_spaceship->weaponTube[n].type_loaded), AlignCenter, text_size, sf::Color::Black);
         break;
     }
 }

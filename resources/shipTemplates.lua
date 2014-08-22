@@ -56,7 +56,7 @@ template:addDoor(6, 4, false);
 template:addDoor(8, 3, false);
 template:addDoor(8, 4, false);
 
-template = ShipTemplate():setName("Player Missile Cruiser"):setMesh("space_cruiser_4.model", "space_cruiser_4_color.jpg", "space_cruiser_4_illumination.jpg", "space_cruiser_4_illumination.jpg"):setScale(10):setRadius(125)
+template = ShipTemplate():setName("Player Missile Cr."):setMesh("space_cruiser_4.model", "space_cruiser_4_color.jpg", "space_cruiser_4_illumination.jpg", "space_cruiser_4_illumination.jpg"):setScale(10):setRadius(125)
 -- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
 template:setTubePosition(0, -10, 2, -2.3)
 template:setTubePosition(1,  10, 2, -2.3)

@@ -25,7 +25,7 @@ public:
     virtual void update(float delta);
 
     virtual void collision(Collisionable* target);
-    virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type) { if (type == DT_EMP) destroy(); }
+    virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type) { if (type != DT_Kinetic) destroy(); }
 };
 
 #endif//NUKE_H

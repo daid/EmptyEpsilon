@@ -222,7 +222,7 @@ void MainUIBase::drawRadarCuttoff(sf::Vector2f position, float size, sf::FloatRe
     rectTop.setFillColor(sf::Color::Black);
     rectTop.setPosition(rect.left, rect.top);
     window.draw(rectTop);
-    sf::RectangleShape rectBottom(sf::Vector2f(rect.width, rect.height - (position.y + size * 1.05)));
+    sf::RectangleShape rectBottom(sf::Vector2f(rect.width, rect.height - size * 1.05 - (position.y - rect.top)));
     rectBottom.setFillColor(sf::Color::Black);
     rectBottom.setPosition(rect.left, position.y + size * 1.05);
     window.draw(rectBottom);
@@ -231,7 +231,7 @@ void MainUIBase::drawRadarCuttoff(sf::Vector2f position, float size, sf::FloatRe
     rectLeft.setFillColor(sf::Color::Black);
     rectLeft.setPosition(rect.left, rect.top);
     window.draw(rectLeft);
-    sf::RectangleShape rectRight(sf::Vector2f(rect.width - (position.x + size * 1.05), rect.height));
+    sf::RectangleShape rectRight(sf::Vector2f(rect.width - size * 1.05 - (position.x - rect.left), rect.height));
     rectRight.setFillColor(sf::Color::Black);
     rectRight.setPosition(position.x + size * 1.05, rect.top);
     window.draw(rectRight);
