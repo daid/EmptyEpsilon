@@ -48,6 +48,7 @@ PlayerSpaceship::PlayerSpaceship()
     comms_state = CS_Inactive;
     comms_open_delay = 0.0;
     comms_reply_count = 0;
+    shield_calibration_delay = 0.0;
     auto_repair_enabled = false;
 
     updateMemberReplicationUpdateDelay(&targetRotation, 0.1);
@@ -62,6 +63,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&main_screen_setting);
     registerMemberReplication(&scanning_delay, 0.5);
     registerMemberReplication(&shields_active);
+    registerMemberReplication(&shield_calibration_delay, 0.5);
     registerMemberReplication(&front_shield_recharge_factor);
     registerMemberReplication(&rear_shield_recharge_factor);
     registerMemberReplication(&auto_repair_enabled);
@@ -110,6 +112,10 @@ void PlayerSpaceship::update(float delta)
         hull_damage_indicator -= delta;
     if (warp_indicator > 0)
         warp_indicator -= delta;
+    if (shield_calibration_delay > 0)
+    {
+        shield_calibration_delay -= delta * (front_shield_recharge_factor + rear_shield_recharge_factor) / 2.0;
+    }
 
     if (docking_state == DS_Docked)
     {
@@ -394,7 +400,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
         {
             bool active;
             packet >> active;
-            if (active != shields_active)
+            if (shield_calibration_delay <= 0.0 && active != shields_active)
             {
                 shields_active = active;
                 if (active)
@@ -523,13 +529,20 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             beam_frequency = SpaceShip::max_frequency;
         break;
     case CMD_SET_SHIELD_FREQUENCY:
-        if (!shields_active)
+        if (shield_calibration_delay <= 0.0)
         {
-            packet >> shield_frequency;
-            if (shield_frequency < 0)
-                shield_frequency = 0;
-            if (shield_frequency > SpaceShip::max_frequency)
-                shield_frequency = SpaceShip::max_frequency;
+            int new_frequency;
+            packet >> new_frequency;
+            if (new_frequency != shield_frequency)
+            {
+                shield_frequency = new_frequency;
+                shield_calibration_delay = shield_calibration_time;
+                shields_active = false;
+                if (shield_frequency < 0)
+                    shield_frequency = 0;
+                if (shield_frequency > SpaceShip::max_frequency)
+                    shield_frequency = SpaceShip::max_frequency;
+            }
         }
         break;
     }

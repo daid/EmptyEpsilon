@@ -11,7 +11,7 @@
 				<Option object_output=".obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="fullscreen=0 screen43=1 touchscreen=0 swapmousexy=0 autoconnect=0" />
+				<Option parameters="fullscreen=0 screen43=1 touchscreen=0 swapmousexy=0 autoconnect=0 touchcalib=0 " />
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DDEBUG" />
@@ -429,6 +429,8 @@
 		<Unit filename="src/mesh.h" />
 		<Unit filename="src/mine.cpp" />
 		<Unit filename="src/mine.h" />
+		<Unit filename="src/mouseCalibrator.cpp" />
+		<Unit filename="src/mouseCalibrator.h" />
 		<Unit filename="src/nuke.cpp" />
 		<Unit filename="src/nuke.h" />
 		<Unit filename="src/packResourceProvider.cpp" />

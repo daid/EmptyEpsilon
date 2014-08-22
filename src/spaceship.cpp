@@ -54,8 +54,8 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     front_shield_recharge_factor = rear_shield_recharge_factor = 1.0;
     scanned_by_player = false;
     beamRechargeFactor = 1.0;
-    beam_frequency = random(0, max_frequency);
-    shield_frequency = random(0, max_frequency);
+    beam_frequency = irandom(0, max_frequency);
+    shield_frequency = irandom(0, max_frequency);
     tubeRechargeFactor = 1.0;
     docking_state = DS_NotDocking;
 

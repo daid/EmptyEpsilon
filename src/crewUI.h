@@ -34,6 +34,7 @@ private:
     P<RepairCrew> selected_crew;
     
     ESystem engineering_selected_system;
+    int engineering_shield_new_frequency;
 
     P<SpaceObject> scienceTarget;
     float science_radar_distance;
