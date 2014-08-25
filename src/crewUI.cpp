@@ -1079,7 +1079,10 @@ void CrewUI::jumpButton(sf::FloatRect rect, float text_size)
 {
     if (my_spaceship->jumpDelay > 0.0)
     {
-        keyValueDisplay(rect, 0.5, "Jump in", string(int(ceilf(my_spaceship->jumpDelay))), text_size);
+        if (rect.width < text_size * 5)
+            textbox(rect, string(int(ceilf(my_spaceship->jumpDelay))), AlignCenter, text_size);
+        else
+            keyValueDisplay(rect, 0.5, "Jump in", string(int(ceilf(my_spaceship->jumpDelay))), text_size);
     }else{
         if (button(rect, "Jump", text_size))
             my_spaceship->commandJump(jump_distance);
