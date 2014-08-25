@@ -468,6 +468,9 @@ void CrewUI::scienceUI()
                                 text(sf::FloatRect(x + 20, y, 210, 30), "Beams", AlignCenter, 20);
                             }
                             y += 100;
+                        }else{
+                            if (button(sf::FloatRect(x, y, 250, 50), "Scan", 30))
+                                my_spaceship->commandScan(scienceTarget);
                         }
                     }
                 }
