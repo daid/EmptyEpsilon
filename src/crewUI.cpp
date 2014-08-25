@@ -387,7 +387,7 @@ void CrewUI::scienceUI()
         sf::Vector2f radar_center = sf::Vector2f((getWindowSize().x - 250) / 2.0f, getWindowSize().y / 2.0f);
 
         float radarDistance = science_radar_distance;
-        if (InputHandler::mouseIsReleased(sf::Mouse::Left))
+        if (InputHandler::mouseIsReleased(sf::Mouse::Left) && my_spaceship->scanning_delay <= 0.0)
         {
             sf::Vector2f diff = mouse - radar_center;
             if (sf::length(diff) < 400)
@@ -415,7 +415,7 @@ void CrewUI::scienceUI()
             float x = getWindowSize().x - 270;
             float y = 400;
             textbox(sf::FloatRect(x, y, 250, 30), "Scanning", AlignCenter, 20); y += 30;
-            progressBar(sf::FloatRect(x, y, 250, 50), my_spaceship->scanning_delay, 8.0, 0.0); y += 50;
+            progressBar(sf::FloatRect(x, y, 250, 50), my_spaceship->scanning_delay, 6.0, 0.0); y += 50;
         }else{
             if (scienceTarget)
             {
