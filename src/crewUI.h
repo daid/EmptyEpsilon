@@ -24,13 +24,26 @@ enum ScienceDatabaseType
     SDT_Weapons
 };
 
-class CrewUI : public MainUIBase
+class HelmsGhostDot
+{
+public:
+    const static float total_lifetime = 60.0f;
+    
+    sf::Vector2f position;
+    float lifetime;
+    
+    HelmsGhostDot(sf::Vector2f pos) : position(pos), lifetime(total_lifetime) {}
+};
+
+class CrewUI : public MainUIBase, public Updatable
 {
 private:
     //Members
     ECrewPosition show_position;
     EMissileWeapons tube_load_type;
     float jump_distance;
+    float helms_ghost_delay;
+    std::vector<HelmsGhostDot> helms_ghost_dot;
     P<RepairCrew> selected_crew;
     
     ESystem engineering_selected_system;
@@ -48,6 +61,7 @@ public:
     CrewUI();
 
     virtual void onGui();
+    virtual void update(float delta);
 
     void helmsUI();
     void weaponsUI();

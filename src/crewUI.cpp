@@ -7,6 +7,7 @@
 CrewUI::CrewUI()
 {
     jump_distance = 1.0;
+    helms_ghost_delay = 0.0;
     tube_load_type = MW_None;
     science_radar_distance = 50000;
     science_show_radar = true;
@@ -61,7 +62,7 @@ void CrewUI::onGui()
     }else{
         drawStatic();
     }
-    
+        
     int cnt = 0;
     for(int n=0; n<max_crew_positions; n++)
         if (my_player_info->crew_position[n])
@@ -84,6 +85,38 @@ void CrewUI::onGui()
     MainUIBase::onGui();
 }
 
+void CrewUI::update(float delta)
+{
+    if (!my_spaceship)
+        return;
+    
+    if (helms_ghost_delay > 0)
+    {
+        helms_ghost_delay -= delta;
+    }else{
+        helms_ghost_delay = 5.0;
+
+        foreach(SpaceObject, obj, space_object_list)
+        {
+            P<SpaceShip> ship = obj;
+            if (ship && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000.0)
+            {
+                helms_ghost_dot.push_back(HelmsGhostDot(obj->getPosition()));
+            }
+        }
+    }
+    for(unsigned int n=0; n<helms_ghost_dot.size(); n++)
+    {
+        HelmsGhostDot& ghost = helms_ghost_dot[n];
+        ghost.lifetime -= delta;
+        if (ghost.lifetime <= 0.0)
+        {
+            helms_ghost_dot.erase(helms_ghost_dot.begin() + n);
+            n--;
+        }
+    }
+}
+
 void CrewUI::helmsUI()
 {
     sf::Vector2f mouse = InputHandler::getMousePos();
@@ -94,10 +127,30 @@ void CrewUI::helmsUI()
         if (sf::length(diff) < 400)
             my_spaceship->commandTargetRotation(sf::vector2ToAngle(diff));
     }
+    
+    sf::VertexArray ghost_dots(sf::Points, helms_ghost_dot.size());
+    for(unsigned int n=0; n<helms_ghost_dot.size(); n++)
+    {
+        ghost_dots[n].position = radar_center + (helms_ghost_dot[n].position - my_spaceship->getPosition()) / 5000.0f * 400.0f;
+        ghost_dots[n].color = sf::Color(255, 255, 255, 255 * (helms_ghost_dot[n].lifetime / HelmsGhostDot::total_lifetime));
+    }
+    getRenderTarget()->draw(ghost_dots);
 
     drawRadar(radar_center, 400, 5000, false, my_spaceship->getTarget());
+    if (InputHandler::mouseIsDown(sf::Mouse::Left))
+    {
+        sf::Vector2f diff = mouse - radar_center;
+        if (sf::length(diff) < 400)
+        {
+            sf::Vector2f text_pos = mouse;
+            if (engine->getObject("mouseRenderer"))
+                text_pos.y -= 10.0;
+            text(sf::FloatRect(text_pos.x, text_pos.y, 0, 0), string(fmodf(sf::vector2ToAngle(diff) + 360.0, 360.0), 1), AlignCenter, 20);
+        }
+    }
 
-    keyValueDisplay(sf::FloatRect(20, 100, 200, 40), 0.5, "Energy", string(int(my_spaceship->energy_level)), 25);
+    keyValueDisplay(sf::FloatRect(20, 100, 200, 40), 0.6, "Energy", string(int(my_spaceship->energy_level)), 25);
+    keyValueDisplay(sf::FloatRect(20, 140, 200, 40), 0.6, "Heading", string(fmodf(my_spaceship->getRotation() + 360.0, 360.0), 1), 25);
 
     impulseSlider(sf::FloatRect(20, 400, 50, 300), 20);
 
@@ -575,7 +628,7 @@ void CrewUI::scienceUI()
                 {
                 case 0://Homing missile
                     keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Range", "6km", 20.0f); y += 40;
-                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Damage", "30", 20.0f); y += 40;
+                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Damage", "20", 20.0f); y += 40;
                     textbox(sf::FloatRect(500, y, 400, 400), "The standard homing missile is the\ndefault weapon of choice for many ships", AlignTopLeft, 20);
                     break;
                 case 1://Nuke
