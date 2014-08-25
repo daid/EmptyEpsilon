@@ -170,7 +170,7 @@ void ShipSelectionScreen::onGui()
             }
         }
 
-        if (button(sf::FloatRect(1200, 150, 300, 50), "Game Master"))
+        if (button(sf::FloatRect(800, 800, 300, 50), "Game Master"))
         {
             startScenario();
             

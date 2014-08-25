@@ -52,7 +52,7 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     front_shield = rear_shield = front_shield_max = rear_shield_max = 50;
     front_shield_hit_effect = rear_shield_hit_effect = 0;
     front_shield_recharge_factor = rear_shield_recharge_factor = 1.0;
-    scanned_by_player = false;
+    scanned_by_player = SS_NotScanned;
     beamRechargeFactor = 1.0;
     beam_frequency = irandom(0, max_frequency);
     shield_frequency = irandom(0, max_frequency);
@@ -193,7 +193,7 @@ void SpaceShip::draw3DTransparent()
 
 void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
-    if (!long_range && (scanned_by_player || !my_spaceship))
+    if (!long_range && ((scanned_by_player == SS_FullScan) || !my_spaceship))
     {
         for(int n=0; n<maxBeamWeapons; n++)
         {
@@ -239,7 +239,7 @@ void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float
         objectSprite.setColor(sf::Color(192, 192, 255));
     }else if (my_spaceship)
     {
-        if (scanned_by_player)
+        if (scanned_by_player != SS_NotScanned)
         {
             if (isEnemy(my_spaceship))
                 objectSprite.setColor(sf::Color::Red);

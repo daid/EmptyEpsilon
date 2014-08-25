@@ -28,6 +28,12 @@ enum EDockingState
     DS_Docking,
     DS_Docked
 };
+enum EScannedState
+{
+    SS_NotScanned,
+    SS_SimpleScan,
+    SS_FullScan
+};
 
 class BeamWeapon : public sf::NonCopyable
 {
@@ -96,7 +102,7 @@ public:
 
     int32_t targetId;
 
-    bool scanned_by_player; //Is this really smart with multiple players?
+    EScannedState scanned_by_player; //Is this really smart with multiple players? No, does not really work well with multiple ships, and causes lots of problems with PvP.
 
     EDockingState docking_state;
     P<SpaceObject> docking_target; //Server only
@@ -123,7 +129,7 @@ public:
     void initJump(float distance);
     void requestDock(P<SpaceObject> target);
     void requestUndock();
-    void setScanned(bool value) { scanned_by_player = value; }
+    void setScanned(bool scanned) { scanned_by_player = scanned ? SS_FullScan : SS_NotScanned; }
 
     bool hasSystem(ESystem system);
 
@@ -144,6 +150,7 @@ REGISTER_MULTIPLAYER_ENUM(EMissileWeapons);
 REGISTER_MULTIPLAYER_ENUM(EWeaponTubeState);
 REGISTER_MULTIPLAYER_ENUM(EMainScreenSetting);
 REGISTER_MULTIPLAYER_ENUM(EDockingState);
+REGISTER_MULTIPLAYER_ENUM(EScannedState);
 
 string frequencyToString(int frequency);
 

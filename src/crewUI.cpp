@@ -410,67 +410,72 @@ void CrewUI::scienceUI()
 
         drawRadar(radar_center, 400, radarDistance, true, scienceTarget);
 
-        if (scienceTarget)
+        if (my_spaceship->scanning_delay > 0.0)
         {
             float x = getWindowSize().x - 270;
             float y = 400;
-            sf::Vector2f position_diff = scienceTarget->getPosition() - my_spaceship->getPosition();
-            float distance = sf::length(position_diff);
-            float heading = sf::vector2ToAngle(position_diff);
-            if (heading < 0) heading += 360;
-            float rel_velocity = dot(scienceTarget->getVelocity(), position_diff / distance) - dot(my_spaceship->getVelocity(), position_diff / distance);
-            if (fabs(rel_velocity) < 0.01)
-                rel_velocity = 0.0;
-            
-            keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Callsign", scienceTarget->getCallSign(), 20); y += 30;
-            keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Distance", string(distance / 1000.0, 1) + "km", 20); y += 30;
-            keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Heading", string(int(heading)), 20); y += 30;
-            keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Rel.Speed", string(rel_velocity / 1000 * 60, 1) + "km/min", 20); y += 30;
-
-            P<SpaceShip> ship = scienceTarget;
-            if (ship && !ship->scanned_by_player)
+            textbox(sf::FloatRect(x, y, 250, 30), "Scanning", AlignCenter, 20); y += 30;
+            progressBar(sf::FloatRect(x, y, 250, 50), my_spaceship->scanning_delay, 8.0, 0.0); y += 50;
+        }else{
+            if (scienceTarget)
             {
-                if (my_spaceship->scanning_delay > 0.0)
+                float x = getWindowSize().x - 270;
+                float y = 400;
+                sf::Vector2f position_diff = scienceTarget->getPosition() - my_spaceship->getPosition();
+                float distance = sf::length(position_diff);
+                float heading = sf::vector2ToAngle(position_diff);
+                if (heading < 0) heading += 360;
+                float rel_velocity = dot(scienceTarget->getVelocity(), position_diff / distance) - dot(my_spaceship->getVelocity(), position_diff / distance);
+                if (fabs(rel_velocity) < 0.01)
+                    rel_velocity = 0.0;
+                
+                keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Callsign", scienceTarget->getCallSign(), 20); y += 30;
+                keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Distance", string(distance / 1000.0, 1) + "km", 20); y += 30;
+                keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Heading", string(int(heading)), 20); y += 30;
+                keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Rel.Speed", string(rel_velocity / 1000 * 60, 1) + "km/min", 20); y += 30;
+
+                P<SpaceShip> ship = scienceTarget;
+                if (ship && ship->scanned_by_player == SS_NotScanned)
                 {
-                    progressBar(sf::FloatRect(x, y, 250, 50), my_spaceship->scanning_delay, 8.0, 0.0);
-                    y += 50;
-                }else{
                     if (button(sf::FloatRect(x, y, 250, 50), "Scan", 30))
                         my_spaceship->commandScan(scienceTarget);
                     y += 50;
+                }else{
+                    keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Faction", factionInfo[scienceTarget->faction_id]->name, 20); y += 30;
+                    if (ship && ship->ship_template)
+                    {
+                        keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Type", ship->ship_template->name, 20); y += 30;
+                        keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Shields", string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), 20); y += 30;
+
+                        if (ship->scanned_by_player == SS_FullScan)
+                        {
+                            box(sf::FloatRect(x, y, 250, 100));
+                            int freq = frequencyCurve(sf::FloatRect(x + 20, y + 30, 210, 60), false, true, ship->shield_frequency);
+                            if (freq > -1)
+                            {
+                                text(sf::FloatRect(x + 20, y, 210, 30), frequencyToString(freq) + " " + string(int(frequencyVsFrequencyDamageFactor(freq, ship->shield_frequency) * 100)) + "% dmg", AlignCenter, 20);
+                            }else{
+                                text(sf::FloatRect(x + 20, y, 210, 30), "Shields", AlignCenter, 20);
+                            }
+                            y += 100;
+
+                            box(sf::FloatRect(x, y, 250, 100));
+                            freq = frequencyCurve(sf::FloatRect(x + 20, y + 30, 210, 60), true, false, ship->beam_frequency);
+                            if (freq > -1)
+                            {
+                                text(sf::FloatRect(x + 20, y, 210, 30), frequencyToString(freq) + " " + string(int(frequencyVsFrequencyDamageFactor(ship->beam_frequency, freq) * 100)) + "% dmg", AlignCenter, 20);
+                            }else{
+                                text(sf::FloatRect(x + 20, y, 210, 30), "Beams", AlignCenter, 20);
+                            }
+                            y += 100;
+                        }
+                    }
                 }
-            }else{
-                keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Faction", factionInfo[scienceTarget->faction_id]->name, 20); y += 30;
-                if (ship && ship->ship_template)
+                P<SpaceStation> station = scienceTarget;
+                if (station)
                 {
-                    keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Type", ship->ship_template->name, 20); y += 30;
-                    keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Shields", string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), 20); y += 30;
-
-                    box(sf::FloatRect(x, y, 250, 100));
-                    int freq = frequencyCurve(sf::FloatRect(x + 20, y + 30, 210, 60), false, true, ship->shield_frequency);
-                    if (freq > -1)
-                    {
-                        text(sf::FloatRect(x + 20, y, 210, 30), frequencyToString(freq) + " " + string(int(frequencyVsFrequencyDamageFactor(freq, ship->shield_frequency) * 100)) + "% dmg", AlignCenter, 20);
-                    }else{
-                        text(sf::FloatRect(x + 20, y, 210, 30), "Shields", AlignCenter, 20);
-                    }
-                    y += 100;
-
-                    box(sf::FloatRect(x, y, 250, 100));
-                    freq = frequencyCurve(sf::FloatRect(x + 20, y + 30, 210, 60), true, false, ship->beam_frequency);
-                    if (freq > -1)
-                    {
-                        text(sf::FloatRect(x + 20, y, 210, 30), frequencyToString(freq) + " " + string(int(frequencyVsFrequencyDamageFactor(ship->beam_frequency, freq) * 100)) + "% dmg", AlignCenter, 20);
-                    }else{
-                        text(sf::FloatRect(x + 20, y, 210, 30), "Beams", AlignCenter, 20);
-                    }
-                    y += 100;
+                    keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Shields", string(int(station->shields)), 20); y += 30;
                 }
-            }
-            P<SpaceStation> station = scienceTarget;
-            if (station)
-            {
-                keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Shields", string(int(station->shields)), 20); y += 30;
             }
         }
 
@@ -696,7 +701,7 @@ void CrewUI::commsUI()
                                 player_list.push_back(obj);
                             continue;
                         }
-                        if (ship->scanned_by_player)
+                        if (ship->scanned_by_player != SS_NotScanned)
                         {
                             switch(factionInfo[my_spaceship->faction_id]->states[ship->faction_id])
                             {
@@ -980,7 +985,7 @@ void CrewUI::singlePilotUI()
         text(sf::FloatRect(getWindowSize().x / 2.0 - 100, 90, 100, 20), "Heading: " + string(int(heading)), AlignRight, 20);
 
         P<SpaceShip> ship = target;
-        if (ship && !ship->scanned_by_player)
+        if (ship && ship->scanned_by_player == SS_NotScanned)
         {
             if (my_spaceship->scanning_delay > 0.0)
             {

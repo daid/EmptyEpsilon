@@ -44,7 +44,7 @@ PlayerSpaceship::PlayerSpaceship()
     faction_id = 1;
     hull_damage_indicator = 0.0;
     warp_indicator = 0.0;
-    scanned_by_player = true;
+    scanned_by_player = SS_FullScan;
     comms_state = CS_Inactive;
     comms_open_delay = 0.0;
     comms_reply_count = 0;
@@ -234,7 +234,17 @@ void PlayerSpaceship::update(float delta)
             scanning_delay -= delta;
             if (scanning_delay < 0)
             {
-                scanning_ship->scanned_by_player = true;
+                switch(scanning_ship->scanned_by_player)
+                {
+                case SS_NotScanned:
+                    scanning_ship->scanned_by_player = SS_SimpleScan;
+                    break;
+                case SS_SimpleScan:
+                    scanning_ship->scanned_by_player = SS_FullScan;
+                    break;
+                case SS_FullScan:
+                    break;
+                }
                 scanning_ship = NULL;
             }
         }else{
@@ -422,7 +432,7 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
             if (ship)
             {
                 scanning_ship = ship;
-                scanning_delay = 8.0;
+                scanning_delay = 6.0;
             }
         }
         break;
