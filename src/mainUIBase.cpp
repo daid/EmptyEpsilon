@@ -126,15 +126,16 @@ void MainUIBase::drawStatic(float alpha)
     getRenderTarget()->draw(staticDisplay);
 }
 
-void MainUIBase::drawRaderBackground(sf::Vector2f view_position, sf::Vector2f position, float size, float scale, sf::FloatRect rect)
+void MainUIBase::drawRaderBackground(sf::Vector2f view_position, sf::Vector2f position, float size, float range, sf::FloatRect rect)
 {
     const float sector_size = 20000;
     const float sub_sector_size = sector_size / 8;
 
-    int sector_x_min = floor((view_position.x - (size / scale)) / sector_size) + 1;
-    int sector_x_max = floor((view_position.x + (size / scale)) / sector_size);
-    int sector_y_min = floor((view_position.y - (size / scale)) / sector_size) + 1;
-    int sector_y_max = floor((view_position.y + (size / scale)) / sector_size);
+    float scale = size / range;
+    int sector_x_min = floor((view_position.x - (position.x - rect.left) / scale) / sector_size) + 1;
+    int sector_x_max = floor((view_position.x + (rect.left + rect.width - position.x) / scale) / sector_size);
+    int sector_y_min = floor((view_position.y - (position.y - rect.top) / scale) / sector_size) + 1;
+    int sector_y_max = floor((view_position.y + (rect.top + rect.height - position.y) / scale) / sector_size);
     sf::VertexArray lines_x(sf::Lines, 2 * (sector_x_max - sector_x_min + 1));
     sf::VertexArray lines_y(sf::Lines, 2 * (sector_y_max - sector_y_min + 1));
     sf::Color color(64, 64, 128, 128);
@@ -162,10 +163,10 @@ void MainUIBase::drawRaderBackground(sf::Vector2f view_position, sf::Vector2f po
     getRenderTarget()->draw(lines_x);
     getRenderTarget()->draw(lines_y);
 
-    int sub_sector_x_min = floor((view_position.x - (size / scale)) / sub_sector_size) + 1;
-    int sub_sector_x_max = floor((view_position.x + (size / scale)) / sub_sector_size);
-    int sub_sector_y_min = floor((view_position.y - (size / scale)) / sub_sector_size) + 1;
-    int sub_sector_y_max = floor((view_position.y + (size / scale)) / sub_sector_size);
+    int sub_sector_x_min = floor((view_position.x - (position.x - rect.left) / scale) / sub_sector_size) + 1;
+    int sub_sector_x_max = floor((view_position.x + (rect.left + rect.width - position.x) / scale) / sub_sector_size);
+    int sub_sector_y_min = floor((view_position.y - (position.y - rect.top) / scale) / sub_sector_size) + 1;
+    int sub_sector_y_max = floor((view_position.y + (rect.top + rect.height - position.y) / scale) / sub_sector_size);
     sf::VertexArray points(sf::Points, (sub_sector_x_max - sub_sector_x_min + 1) * (sub_sector_y_max - sub_sector_y_min + 1));
     for(int sector_x = sub_sector_x_min; sector_x <= sub_sector_x_max; sector_x++)
     {
@@ -242,7 +243,7 @@ void MainUIBase::drawRadar(sf::Vector2f position, float size, float range, bool 
     sf::RenderTarget& window = *getRenderTarget();
 
     if (long_range)
-        drawRaderBackground(my_spaceship->getPosition(), position, size, size / range, rect);
+        drawRaderBackground(my_spaceship->getPosition(), position, size, range, rect);
     foreach(SpaceObject, obj, space_object_list)
     {
         if (obj != my_spaceship && sf::length(obj->getPosition() - my_spaceship->getPosition()) < range)

@@ -54,7 +54,7 @@ void GameMasterUI::onGui()
         view_position += (prev_mouse_pos - mouse) / 400.0f * view_distance;
     }
 
-    drawRaderBackground(view_position, sf::Vector2f(800, 450), 800, 400.0f / view_distance);
+    drawRaderBackground(view_position, sf::Vector2f(800, 450), 400.0, view_distance);
 
     foreach(SpaceObject, obj, space_object_list)
     {
