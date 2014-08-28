@@ -59,3 +59,12 @@ void FactionInfo::setFriendly(P<FactionInfo> other)
         factionInfo[id2]->states[id1] = FVF_Friendly;
     }
 }
+
+int FactionInfo::findFactionId(string name)
+{
+    for(unsigned int n=0; n<factionInfo.size(); n++)
+        if (factionInfo[n]->name == name)
+            return n;
+    printf("Failed to find faction: %s\n", name.c_str());
+    return 0;
+}

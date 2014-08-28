@@ -6,7 +6,7 @@ function setCirclePos(obj, angle, distance)
 end
 
 function init()
-    SpaceStation():setPosition(0, -500):setRotation(random(0, 360)):setFaction(0)
+    SpaceStation():setPosition(0, -500):setRotation(random(0, 360)):setFaction("Independent")
     
     for n=1,5 do
         ship = CpuShip():setShipTemplate("Cruiser"):orderRoaming()

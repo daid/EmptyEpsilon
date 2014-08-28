@@ -26,7 +26,7 @@ void MainUIBase::onGui()
 
     if (game_server)
     {
-        if (gameGlobalInfo->getVictoryFaction() < 0)
+        if (gameGlobalInfo->getVictoryFactionId() < 0)
         {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
                 engine->setGameSpeed(1.0);
@@ -77,7 +77,7 @@ void MainUIBase::onGui()
 
     if (engine->getGameSpeed() == 0.0)
     {
-        if (gameGlobalInfo->getVictoryFaction() < 0)
+        if (gameGlobalInfo->getVictoryFactionId() < 0)
         {
             text(sf::FloatRect(0, 600, getWindowSize().x, 100), "Game Paused", AlignCenter, 70);
             if (game_server)
@@ -85,13 +85,13 @@ void MainUIBase::onGui()
         }else{
             if (my_spaceship)
             {
-                if (factionInfo[gameGlobalInfo->getVictoryFaction()]->states[my_spaceship->getFaction()] == FVF_Enemy)
+                if (factionInfo[gameGlobalInfo->getVictoryFactionId()]->states[my_spaceship->getFactionId()] == FVF_Enemy)
                     text(sf::FloatRect(0, 600, getWindowSize().x, 100), "Defeat!", AlignCenter, 70);
                 else
                     text(sf::FloatRect(0, 600, getWindowSize().x, 100), "Victory!", AlignCenter, 70);
             }else{
                 text(sf::FloatRect(0, 600, getWindowSize().x, 100), "Game Finished", AlignCenter, 70);
-                text(sf::FloatRect(0, 680, getWindowSize().x, 100), factionInfo[gameGlobalInfo->getVictoryFaction()]->name + " wins", AlignCenter, 70);
+                text(sf::FloatRect(0, 680, getWindowSize().x, 100), factionInfo[gameGlobalInfo->getVictoryFactionId()]->name + " wins", AlignCenter, 70);
             }
         }
     }

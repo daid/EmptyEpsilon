@@ -29,6 +29,8 @@ public:
     void setDescription(string description) { this->description = description; }
     void setEnemy(P<FactionInfo> other);
     void setFriendly(P<FactionInfo> other);
+    
+    static int findFactionId(string name);
 };
 
 #endif//Faction_INFO_H

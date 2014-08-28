@@ -3,6 +3,7 @@
 
 #include "engine.h"
 #include "mesh.h"
+#include "factionInfo.h"
 
 enum EDamageType
 {
@@ -43,8 +44,9 @@ public:
 
     bool isEnemy(P<SpaceObject> obj);
     bool isFriendly(P<SpaceObject> obj);
-    void setFaction(unsigned int faction_id) { this->faction_id = faction_id; }
-    unsigned int getFaction() { return faction_id; }
+    void setFaction(string faction_name) { this->faction_id = FactionInfo::findFactionId(faction_name); }
+    void setFactionId(unsigned int faction_id) { this->faction_id = faction_id; }
+    unsigned int getFactionId() { return faction_id; }
     void setCommsScript(string script_name) { this->comms_script_name = script_name; }
 };
 

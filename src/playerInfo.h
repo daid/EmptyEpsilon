@@ -38,8 +38,8 @@ public:
     int findPlayerShip(P<PlayerSpaceship> ship);
     int insertPlayerShip(P<PlayerSpaceship> ship);
     
-    void setVictory(int faction_id) { victory_faction = faction_id; }
-    int getVictoryFaction() { return victory_faction; }
+    void setVictory(string faction_name) { victory_faction = FactionInfo::findFactionId(faction_name); }
+    int getVictoryFactionId() { return victory_faction; }
 };
 
 class PlayerInfo : public MultiplayerObject

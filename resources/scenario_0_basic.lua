@@ -14,7 +14,7 @@ function init()
 	friendlyList = {}
 
 	for n=1, 3 do
-		table.insert(friendlyList, setCirclePos(SpaceStation():setFaction(1), 0, 0, n * 360 / 3 + random(-30, 30), random(15000, 20000)))
+		table.insert(friendlyList, setCirclePos(SpaceStation():setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(15000, 20000)))
 	end
 	
 	enemy_group_count = 5
@@ -106,9 +106,9 @@ function update(delta)
 		end
 	end
 	if enemy_count == 0 then
-		victory(1);	--Victory for the humans (eg; players). Note that this can happen if the players kill themselves (and then blow up the enemies)
+		victory("Human Navy");	--Victory for the humans (eg; players). Note that this can happen if the players kill themselves (and then blow up the enemies)
 	end
 	if friendly_count == 0 then
-		victory(2);	--Victory for the SpaceCows (== defeat for the players)
+		victory("SpaceCow");	--Victory for the SpaceCows (== defeat for the players)
 	end
 end

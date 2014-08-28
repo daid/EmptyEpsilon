@@ -10,7 +10,8 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getPosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getRotation);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setFaction);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getFaction);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setFactionId);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getFactionId);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setCommsScript);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isEnemy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isFriendly);

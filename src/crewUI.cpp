@@ -145,6 +145,8 @@ void CrewUI::helmsUI()
             sf::Vector2f text_pos = mouse;
             if (engine->getObject("mouseRenderer"))
                 text_pos.y -= 10.0;
+            else
+                text_pos.y -= 20.0;
             text(sf::FloatRect(text_pos.x, text_pos.y, 0, 0), string(fmodf(sf::vector2ToAngle(diff) + 360.0, 360.0), 1), AlignCenter, 20);
         }
     }
@@ -677,6 +679,58 @@ void CrewUI::scienceUI()
 
 void CrewUI::commsUI()
 {
+    sf::RenderTarget& window = *getRenderTarget();
+
+    PVector<SpaceObject> friendly_objects;
+    foreach(SpaceObject, obj, space_object_list)
+    {
+        if (obj->faction_id == my_spaceship->faction_id)
+        {
+            P<SpaceShip> ship = obj;
+            if (ship)
+            {
+                friendly_objects.push_back(obj);
+            }else{
+                P<SpaceStation> station = obj;
+                if (station)
+                    friendly_objects.push_back(obj);
+            }
+        }
+    }
+
+    sf::RectangleShape background(getWindowSize());
+    background.setFillColor(sf::Color::Black);
+    window.draw(background);
+    
+    sf::Vector2f radar_center = sf::Vector2f(getWindowSize().x - 450, 450);
+    float scale = (400.0 / 50000.0);
+    sf::CircleShape circle(5000.0 * scale, 32);
+    circle.setFillColor(sf::Color(20, 20, 20));
+    circle.setOrigin(5000.0 * scale, 5000.0 * scale);
+    foreach(SpaceObject, obj, friendly_objects)
+    {
+        circle.setPosition(radar_center + (obj->getPosition() - my_spaceship->getPosition()) * scale);
+        window.draw(circle);
+    }
+    drawRaderBackground(my_spaceship->getPosition(), radar_center, 400, 50000.0);
+    foreach(SpaceObject, obj, friendly_objects)
+    {
+        sf::Vector2f screen_position = radar_center + (obj->getPosition() - my_spaceship->getPosition()) * scale;
+        obj->drawRadar(window, screen_position, scale, true);
+
+        sf::Sprite object_sprite;
+        textureManager.setTexture(object_sprite, "waypoint.png");
+        object_sprite.setColor(sf::Color(128, 128, 255, 192));
+        object_sprite.setPosition(screen_position - sf::Vector2f(0, 10));
+        object_sprite.setScale(0.6, 0.6);
+        window.draw(object_sprite);
+        text(sf::FloatRect(screen_position.x, screen_position.y - 26, 0, 0), "WP1", AlignCenter, 12);
+    }
+    
+    sf::RectangleShape left_cover(sf::Vector2f(getWindowSize().x - 900, 900));
+    left_cover.setFillColor(sf::Color::Black);
+    window.draw(left_cover);
+    //drawRadarCuttoff(sf::Vector2f(getWindowSize().x - 450, 450), 400);
     switch(my_spaceship->comms_state)
     {
     case CS_Inactive: //Standard state; not doing anything in particular.

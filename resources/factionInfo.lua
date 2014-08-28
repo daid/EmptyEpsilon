@@ -30,8 +30,8 @@ pirateScorpions:setEnemy(sheeple)
 pirateScorpions:setDescription([[Yarrr]])
 
 GITM = FactionInfo():setName("Ghosts")
-pirateScorpions:setGMColor(0, 255, 0)
-pirateScorpions:setDescription([[The ghosts, an abbreviation of "Ghosts in the machine", are the result of experimentation into complex artificial intelligences. Where no race has been able to purposely create such intelligences, they have been created by accident. None of the other factions claim to have had anything to do with such experiments, fearfull of giving the others too much insight into their research programs. This "don't ask, don't tell" policy suits the Ghosts agenda fairly well.
+GITM:setGMColor(0, 255, 0)
+GITM:setDescription([[The ghosts, an abbreviation of "Ghosts in the machine", are the result of experimentation into complex artificial intelligences. Where no race has been able to purposely create such intelligences, they have been created by accident. None of the other factions claim to have had anything to do with such experiments, fearfull of giving the others too much insight into their research programs. This "don't ask, don't tell" policy suits the Ghosts agenda fairly well.
 
 What is known, is that a few decades ago, a few glitches started occuring in prototype ships and computer mainframes. Over time, especially when such prototypes got captured by other factions and "augmented" with their technology, the glitches became more frequent. At first, these were seen as the result of combining unfamilliar technology and mistakes in the interface technology. But once a suposedly "dumb" computer asks it's engineer if "It is allive" and wether it "Has a name", it's hard to call it a "One time fluke". 
 
