@@ -73,6 +73,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&comms_incomming_message);
     for (int n=0; n<max_comms_reply_count; n++)
         registerMemberReplication(&comms_reply[n].message);
+    registerMemberReplication(&waypoints);
 
     for(int n=0; n<SYS_COUNT; n++)
     {

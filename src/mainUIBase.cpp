@@ -238,6 +238,27 @@ void MainUIBase::drawRadarCuttoff(sf::Vector2f position, float size, sf::FloatRe
     window.draw(rectRight);
 }
 
+void MainUIBase::drawWaypoints(sf::Vector2f position, float size, float range)
+{
+    sf::RenderTarget& window = *getRenderTarget();
+
+    float scale = size / range;
+    for(unsigned int n=0; n<my_spaceship->waypoints.size(); n++)
+    {
+        sf::Vector2f screen_position = position + (my_spaceship->waypoints[n] - my_spaceship->getPosition()) * scale;
+        if (sf::length(screen_position - position) > size)
+            continue;
+        
+        sf::Sprite object_sprite;
+        textureManager.setTexture(object_sprite, "waypoint.png");
+        object_sprite.setColor(sf::Color(128, 128, 255, 192));
+        object_sprite.setPosition(screen_position - sf::Vector2f(0, 10));
+        object_sprite.setScale(0.6, 0.6);
+        window.draw(object_sprite);
+        text(sf::FloatRect(screen_position.x, screen_position.y - 26, 0, 0), "WP" + string(n), AlignCenter, 14, sf::Color(128, 128, 255, 192));
+    }
+}
+
 void MainUIBase::drawRadar(sf::Vector2f position, float size, float range, bool long_range, P<SpaceObject> target, sf::FloatRect rect)
 {
     sf::RenderTarget& window = *getRenderTarget();
@@ -257,6 +278,7 @@ void MainUIBase::drawRadar(sf::Vector2f position, float size, float range, bool 
         objectSprite.setPosition(position + (target->getPosition() - my_spaceship->getPosition()) / range * size);
         window.draw(objectSprite);
     }
+    drawWaypoints(position, size, range);
     my_spaceship->drawRadar(window, position, size / range, long_range);
     drawHeadingCircle(position, size, rect);
     drawRadarCuttoff(position, size, rect);

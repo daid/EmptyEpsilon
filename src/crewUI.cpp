@@ -457,7 +457,7 @@ void CrewUI::scienceUI()
                             {
                                 text(sf::FloatRect(x + 20, y, 210, 30), frequencyToString(freq) + " " + string(int(frequencyVsFrequencyDamageFactor(freq, ship->shield_frequency) * 100)) + "% dmg", AlignCenter, 20);
                             }else{
-                                text(sf::FloatRect(x + 20, y, 210, 30), "Shields", AlignCenter, 20);
+                                text(sf::FloatRect(x + 20, y, 210, 30), "Your dmg on", AlignCenter, 20);
                             }
                             y += 100;
 
@@ -467,7 +467,7 @@ void CrewUI::scienceUI()
                             {
                                 text(sf::FloatRect(x + 20, y, 210, 30), frequencyToString(freq) + " " + string(int(frequencyVsFrequencyDamageFactor(ship->beam_frequency, freq) * 100)) + "% dmg", AlignCenter, 20);
                             }else{
-                                text(sf::FloatRect(x + 20, y, 210, 30), "Beams", AlignCenter, 20);
+                                text(sf::FloatRect(x + 20, y, 210, 30), "Dmg recieved at", AlignCenter, 20);
                             }
                             y += 100;
                         }else{
@@ -717,15 +717,9 @@ void CrewUI::commsUI()
     {
         sf::Vector2f screen_position = radar_center + (obj->getPosition() - my_spaceship->getPosition()) * scale;
         obj->drawRadar(window, screen_position, scale, true);
-
-        sf::Sprite object_sprite;
-        textureManager.setTexture(object_sprite, "waypoint.png");
-        object_sprite.setColor(sf::Color(128, 128, 255, 192));
-        object_sprite.setPosition(screen_position - sf::Vector2f(0, 10));
-        object_sprite.setScale(0.6, 0.6);
-        window.draw(object_sprite);
-        text(sf::FloatRect(screen_position.x, screen_position.y - 26, 0, 0), "WP1", AlignCenter, 12);
     }
+    drawWaypoints(radar_center, 400, 50000.0);
+    drawRadarCuttoff(radar_center, 400, sf::FloatRect(getWindowSize().x - 900, 0, 900, 900));
     
     sf::RectangleShape left_cover(sf::Vector2f(getWindowSize().x - 900, 900));
     left_cover.setFillColor(sf::Color::Black);
@@ -1219,14 +1213,14 @@ int CrewUI::frequencyCurve(sf::FloatRect rect, bool frequency_is_beam, bool more
             f = frequencyVsFrequencyDamageFactor(frequency, n);
         else
             f = frequencyVsFrequencyDamageFactor(n, frequency);
-        f = Tween<float>::linear(f, 0.5, 1.5, 1.0, 0.0);
+        f = Tween<float>::linear(f, 0.5, 1.5, 0.1, 1.0);
         float h = rect.height * f;
         sf::RectangleShape bar(sf::Vector2f(w * 0.8, h));
         bar.setPosition(x, rect.top + rect.height - h);
         if (more_damage_is_positive)
-            bar.setFillColor(sf::Color(255 * f, 255 * (1.0 - f), 0));
-        else
             bar.setFillColor(sf::Color(255 * (1.0 - f), 255 * f, 0));
+        else
+            bar.setFillColor(sf::Color(255 * f, 255 * (1.0 - f), 0));
         window.draw(bar);
     }
     

@@ -68,6 +68,7 @@ public:
     int8_t comms_reply_count;
     PlayerCommsReply comms_reply[max_comms_reply_count];
     CommsScriptInterface comms_script_interface;  //Server only
+    std::vector<sf::Vector2f> waypoints;
 
     EMainScreenSetting main_screen_setting;
 
