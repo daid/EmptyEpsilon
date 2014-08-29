@@ -411,6 +411,18 @@ void CrewUI::scienceUI()
         }
 
         drawRadar(radar_center, 400, radarDistance, true, scienceTarget);
+        if (scienceTarget)
+        {
+            float y = 415;
+            sf::VertexArray target_line(sf::LinesStrip, 4);
+            target_line[0].position = radar_center + (scienceTarget->getPosition() - my_spaceship->getPosition()) / radarDistance * 400.0f;
+            target_line[0].position.x += 16;
+            target_line[1].position = sf::Vector2f(getWindowSize().x - 300 - fabs(target_line[0].position.y - y), target_line[0].position.y);
+            target_line[2].position = sf::Vector2f(getWindowSize().x - 300, y);
+            target_line[3].position = sf::Vector2f(getWindowSize().x - 270, y);
+            target_line[0].color = target_line[1].color = target_line[2].color = target_line[3].color = sf::Color(255, 255, 255, 128);
+            getRenderTarget()->draw(target_line);
+        }
 
         if (my_spaceship->scanning_delay > 0.0)
         {
