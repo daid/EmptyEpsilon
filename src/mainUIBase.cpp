@@ -8,6 +8,11 @@
 #include "shipSelectionScreen.h"
 #include "repairCrew.h"
 
+MainUIBase::MainUIBase()
+{
+    scan_angle = 0.0;
+}
+
 void MainUIBase::onGui()
 {
     if (game_client && !game_client->isConnected())
@@ -94,6 +99,47 @@ void MainUIBase::onGui()
                 text(sf::FloatRect(0, 680, getWindowSize().x, 100), factionInfo[gameGlobalInfo->getVictoryFactionId()]->name + " wins", AlignCenter, 70);
             }
         }
+    }
+}
+
+void MainUIBase::update(float delta)
+{
+    if (!my_spaceship)
+        return;
+    
+    scan_angle += delta * 20.0f;
+    if (scan_angle > 360)
+        scan_angle -= 360;
+    foreach(SpaceObject, obj, space_object_list)
+    {
+        float angle = sf::vector2ToAngle(obj->getPosition() - my_spaceship->getPosition());
+        float diff = sf::angleDifference(angle, scan_angle);
+        if (diff > 0.0 && diff < 5.0f)
+        {
+            int index = -1;
+            for(unsigned int n=0; n<scan_ghost.size(); n++)
+            {
+                if (scan_ghost[n].object == obj)
+                {
+                    index = n;
+                    break;
+                }
+            }
+            if (index == -1)
+            {
+                index = scan_ghost.size();
+                scan_ghost.push_back(ScanGhost());
+                scan_ghost[index].object = obj;
+            }
+            scan_ghost[index].position = obj->getPosition();
+        }
+    }
+    for(unsigned int n=0; n<scan_ghost.size(); n++)
+    {
+        if (scan_ghost[n].object)
+            continue;
+        scan_ghost.erase(scan_ghost.begin() + n);
+        n--;
     }
 }
 
@@ -259,23 +305,57 @@ void MainUIBase::drawWaypoints(sf::Vector2f position, float size, float range)
     }
 }
 
+void MainUIBase::drawRadarSweep(sf::Vector2f position, float size, float angle)
+{
+    sf::RenderTarget& window = *getRenderTarget();
+    
+    sf::VertexArray sweep(sf::Triangles, 3);
+    for(int n=0; n<10; n++)
+    {
+        sweep[0].position = position;
+        sweep[0].color = sf::Color(0, 255, 0, n * 5);
+        sweep[1].position = position + sf::vector2FromAngle(float(n) - 10.0f + angle) * size * 1.1f;
+        sweep[1].color = sf::Color(0, 255, 0, n * 5);
+        sweep[2].position = position + sf::vector2FromAngle(float(n) - 9.0f + angle) * size * 1.1f;
+        sweep[2].color = sf::Color(0, 255, 0, n * 5);
+        window.draw(sweep);
+    }
+}
+
 void MainUIBase::drawRadar(sf::Vector2f position, float size, float range, bool long_range, P<SpaceObject> target, sf::FloatRect rect)
 {
     sf::RenderTarget& window = *getRenderTarget();
+    sf::Vector2f target_position;
+    if (target)
+        target_position = target->getPosition();
 
     if (long_range)
-        drawRaderBackground(my_spaceship->getPosition(), position, size, range, rect);
-    foreach(SpaceObject, obj, space_object_list)
     {
-        if (obj != my_spaceship && sf::length(obj->getPosition() - my_spaceship->getPosition()) < range)
-            obj->drawRadar(window, position + (obj->getPosition() - my_spaceship->getPosition()) / range * size, size / range, long_range);
+        drawRaderBackground(my_spaceship->getPosition(), position, size, range, rect);
+        drawRadarSweep(position, size, scan_angle);
+        for(unsigned int n=0; n<scan_ghost.size(); n++)
+        {
+            P<SpaceObject> obj = scan_ghost[n].object;
+            if(!obj)
+                continue;
+            if (obj != my_spaceship && sf::length(scan_ghost[n].position - my_spaceship->getPosition()) < range)
+                obj->drawRadar(window, position + (scan_ghost[n].position - my_spaceship->getPosition()) / range * size, size / range, long_range);
+            if (obj == target)
+                target_position = scan_ghost[n].position;
+        }
+    }else{
+        foreach(SpaceObject, obj, space_object_list)
+        {
+            if (obj != my_spaceship && sf::length(obj->getPosition() - my_spaceship->getPosition()) < range)
+                obj->drawRadar(window, position + (obj->getPosition() - my_spaceship->getPosition()) / range * size, size / range, long_range);
+        }
     }
 
     if (target)
     {
         sf::Sprite objectSprite;
         textureManager.setTexture(objectSprite, "redicule.png");
-        objectSprite.setPosition(position + (target->getPosition() - my_spaceship->getPosition()) / range * size);
+        objectSprite.setPosition(position + (target_position - my_spaceship->getPosition()) / range * size);
         window.draw(objectSprite);
     }
     drawWaypoints(position, size, range);

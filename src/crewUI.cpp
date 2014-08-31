@@ -89,7 +89,7 @@ void CrewUI::update(float delta)
 {
     if (!my_spaceship)
         return;
-    
+        
     if (helms_ghost_delay > 0)
     {
         helms_ghost_delay -= delta;
@@ -115,6 +115,8 @@ void CrewUI::update(float delta)
             n--;
         }
     }
+    
+    MainUIBase::update(delta);
 }
 
 void CrewUI::helmsUI()
@@ -395,15 +397,21 @@ void CrewUI::scienceUI()
             if (sf::length(diff) < 400)
             {
                 P<SpaceObject> target;
-                sf::Vector2f mousePosition = my_spaceship->getPosition() + diff / 400.0f * radarDistance;
-                PVector<Collisionable> list = CollisionManager::queryArea(mousePosition - sf::Vector2f(radarDistance / 30, radarDistance / 30), mousePosition + sf::Vector2f(radarDistance / 30, radarDistance / 30));
-                foreach(Collisionable, obj, list)
+                float target_pixel_distance;
+                for(unsigned int n=0; n<scan_ghost.size(); n++)
                 {
-                    P<SpaceObject> spaceObject = obj;
-                    if (spaceObject && spaceObject->canBeTargeted() && spaceObject != my_spaceship)
+                    P<SpaceObject> obj = scan_ghost[n].object;
+                    if(!obj || !obj->canBeTargeted() || obj == my_spaceship)
+                        continue;
+                    sf::Vector2f position = radar_center + (scan_ghost[n].position - my_spaceship->getPosition()) / radarDistance * 400.0f;
+                    float pixel_distance = sf::length(position - mouse);
+                    if (pixel_distance < 30)
                     {
-                        if (!target || sf::length(mousePosition - spaceObject->getPosition()) < sf::length(mousePosition - target->getPosition()))
-                            target = spaceObject;
+                        if (!target || pixel_distance < target_pixel_distance)
+                        {
+                            target = obj;
+                            target_pixel_distance = pixel_distance;
+                        }
                     }
                 }
                 scienceTarget = target;
@@ -411,11 +419,16 @@ void CrewUI::scienceUI()
         }
 
         drawRadar(radar_center, 400, radarDistance, true, scienceTarget);
+        sf::Vector2f target_position;
         if (scienceTarget)
         {
+            target_position = scienceTarget->getPosition();
+            for(unsigned int n=0; n<scan_ghost.size(); n++)
+                if (scan_ghost[n].object == scienceTarget)
+                    target_position = scan_ghost[n].position;
             float y = 415;
             sf::VertexArray target_line(sf::LinesStrip, 4);
-            target_line[0].position = radar_center + (scienceTarget->getPosition() - my_spaceship->getPosition()) / radarDistance * 400.0f;
+            target_line[0].position = radar_center + (target_position - my_spaceship->getPosition()) / radarDistance * 400.0f;
             target_line[0].position.x += 16;
             target_line[1].position = sf::Vector2f(getWindowSize().x - 300 - fabs(target_line[0].position.y - y), target_line[0].position.y);
             target_line[2].position = sf::Vector2f(getWindowSize().x - 300, y);
@@ -435,7 +448,7 @@ void CrewUI::scienceUI()
             {
                 float x = getWindowSize().x - 270;
                 float y = 400;
-                sf::Vector2f position_diff = scienceTarget->getPosition() - my_spaceship->getPosition();
+                sf::Vector2f position_diff = target_position - my_spaceship->getPosition();
                 float distance = sf::length(position_diff);
                 float heading = sf::vector2ToAngle(position_diff);
                 if (heading < 0) heading += 360;

@@ -35,7 +35,7 @@ public:
     HelmsGhostDot(sf::Vector2f pos) : position(pos), lifetime(total_lifetime) {}
 };
 
-class CrewUI : public MainUIBase, public Updatable
+class CrewUI : public MainUIBase
 {
 private:
     //Members
