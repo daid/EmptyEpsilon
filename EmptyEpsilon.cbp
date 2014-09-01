@@ -409,6 +409,8 @@
 		<Unit filename="src/crewHelmsUI.h" />
 		<Unit filename="src/crewScienceUI.cpp" />
 		<Unit filename="src/crewScienceUI.h" />
+		<Unit filename="src/crewSinglePilotUI.cpp" />
+		<Unit filename="src/crewSinglePilotUI.h" />
 		<Unit filename="src/crewUI.cpp" />
 		<Unit filename="src/crewUI.h" />
 		<Unit filename="src/crewWeaponsUI.cpp" />

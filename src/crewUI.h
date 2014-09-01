@@ -32,8 +32,6 @@ public:
     virtual void onGui();
     virtual void onCrewUI();
 
-    void singlePilotUI();
-
     void impulseSlider(sf::FloatRect rect, float text_size);
     void warpSlider(sf::FloatRect rect, float text_size);
     void jumpSlider(float& jump_distance, sf::FloatRect rect, float text_size);

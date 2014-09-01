@@ -5,6 +5,7 @@
 #include "crewEngineeringUI.h"
 #include "crewScienceUI.h"
 #include "crewCommsUI.h"
+#include "crewSinglePilotUI.h"
 
 static const int16_t CMD_UPDATE_CREW_POSITION = 0x0001;
 static const int16_t CMD_UPDATE_SHIP_ID = 0x0002;
@@ -180,6 +181,9 @@ void PlayerInfo::spawnUI()
             break;
         case commsOfficer:
             new CrewCommsUI();
+            break;
+        case singlePilot:
+            new CrewSinglePilotUI();
             break;
         default:
             new CrewUI();
