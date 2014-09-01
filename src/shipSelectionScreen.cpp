@@ -111,12 +111,7 @@ void ShipSelectionScreen::onGui()
         {
             startScenario();
             destroy();
-            if (my_player_info->isMainScreen())
-            {
-                new MainScreenUI();
-            }else{
-                new CrewUI();
-            }
+            my_player_info->spawnUI();
         }
     }
 

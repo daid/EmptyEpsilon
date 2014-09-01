@@ -24,59 +24,22 @@ enum ScienceDatabaseType
     SDT_Weapons
 };
 
-class HelmsGhostDot
-{
-public:
-    const static float total_lifetime = 60.0f;
-    
-    sf::Vector2f position;
-    float lifetime;
-    
-    HelmsGhostDot(sf::Vector2f pos) : position(pos), lifetime(total_lifetime) {}
-};
-
 class CrewUI : public MainUIBase
 {
-private:
-    //Members
-    ECrewPosition show_position;
-    EMissileWeapons tube_load_type;
-    float jump_distance;
-    float helms_ghost_delay;
-    std::vector<HelmsGhostDot> helms_ghost_dot;
-    P<RepairCrew> selected_crew;
-    
-    ESystem engineering_selected_system;
-    int engineering_shield_new_frequency;
-
-    P<SpaceObject> scienceTarget;
-    float science_radar_distance;
-    bool science_show_radar;
-    ScienceDatabaseType science_database_type;
-    int science_sub_selection;
-
-    CommsOpenChannelType comms_open_channel_type;
-    string comms_player_message;
 public:
     CrewUI();
 
     virtual void onGui();
-    virtual void update(float delta);
-
-    void helmsUI();
-    void weaponsUI();
-    void engineeringUI();
-    void scienceUI();
-    void commsUI();
+    virtual void onCrewUI();
 
     void singlePilotUI();
 
     void impulseSlider(sf::FloatRect rect, float text_size);
     void warpSlider(sf::FloatRect rect, float text_size);
-    void jumpSlider(sf::FloatRect rect, float text_size);
-    void jumpButton(sf::FloatRect rect, float text_size);
+    void jumpSlider(float& jump_distance, sf::FloatRect rect, float text_size);
+    void jumpButton(float jump_distance, sf::FloatRect rect, float text_size);
     void dockingButton(sf::FloatRect rect, float text_size);
-    void weaponTube(int n, sf::FloatRect load_rect, sf::FloatRect fire_rect, float text_size);
+    void weaponTube(EMissileWeapons load_type, int n, sf::FloatRect load_rect, sf::FloatRect fire_rect, float text_size);
     int frequencyCurve(sf::FloatRect rect, bool frequency_is_beam, bool more_damage_is_positive, int frequency);
 };
 

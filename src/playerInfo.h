@@ -47,6 +47,7 @@ class PlayerInfo : public MultiplayerObject
 public:
     int32_t clientId;
 
+    ECrewPosition crew_active_position;
     bool crew_position[max_crew_positions];
     bool main_screen_control;
     int32_t ship_id;
@@ -58,6 +59,8 @@ public:
     void setShipId(int32_t id);
     void setMainScreenControl(bool control);
     virtual void onReceiveCommand(int32_t clientId, sf::Packet& packet);
+    
+    void spawnUI();
 };
 
 string getCrewPositionName(ECrewPosition position);

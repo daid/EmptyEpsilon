@@ -114,7 +114,7 @@ void MainUIBase::update(float delta)
     {
         float angle = sf::vector2ToAngle(obj->getPosition() - my_spaceship->getPosition());
         float diff = sf::angleDifference(angle, scan_angle);
-        if (diff > 0.0 && diff < 5.0f)
+        if ((diff > 0.0 && diff < 5.0f) || sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000.0f)
         {
             int index = -1;
             for(unsigned int n=0; n<scan_ghost.size(); n++)

@@ -208,12 +208,7 @@ void AutoConnectScreen::onGui()
                         if (my_spaceship->getMultiplayerId() == my_player_info->ship_id && (crew_position == max_crew_positions || my_player_info->crew_position[crew_position]))
                         {
                             destroy();
-                            if (my_player_info->isMainScreen())
-                            {
-                                new MainScreenUI();
-                            }else{
-                                new CrewUI();
-                            }
+                            my_player_info->spawnUI();
                         }
                     }
                 }else{

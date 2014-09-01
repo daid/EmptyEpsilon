@@ -1,4 +1,10 @@
 #include "playerInfo.h"
+#include "mainScreen.h"
+#include "crewHelmsUI.h"
+#include "crewWeaponsUI.h"
+#include "crewEngineeringUI.h"
+#include "crewScienceUI.h"
+#include "crewCommsUI.h"
 
 static const int16_t CMD_UPDATE_CREW_POSITION = 0x0001;
 static const int16_t CMD_UPDATE_SHIP_ID = 0x0002;
@@ -73,6 +79,7 @@ PlayerInfo::PlayerInfo()
     main_screen_control = false;
     registerMemberReplication(&clientId);
 
+    crew_active_position = helmsOfficer;
     for(int n=0; n<max_crew_positions; n++)
     {
         crew_position[n] = false;
@@ -138,6 +145,47 @@ bool PlayerInfo::isMainScreen()
         if (crew_position[n])
             return false;
     return true;
+}
+
+void PlayerInfo::spawnUI()
+{
+    if (my_player_info->isMainScreen())
+    {
+        new MainScreenUI();
+    }else{
+        if (!crew_position[crew_active_position])
+        {
+            for(int n=0; n<max_crew_positions; n++)
+            {
+                if (crew_position[n])
+                {
+                    crew_active_position = ECrewPosition(n);
+                    break;
+                }
+            }
+        }
+        switch(crew_active_position)
+        {
+        case helmsOfficer:
+            new CrewHelmsUI();
+            break;
+        case weaponsOfficer:
+            new CrewWeaponsUI();
+            break;
+        case engineering:
+            new CrewEngineeringUI();
+            break;
+        case scienceOfficer:
+            new CrewScienceUI();
+            break;
+        case commsOfficer:
+            new CrewCommsUI();
+            break;
+        default:
+            new CrewUI();
+            break;
+        }
+    }
 }
 
 string getCrewPositionName(ECrewPosition position)
