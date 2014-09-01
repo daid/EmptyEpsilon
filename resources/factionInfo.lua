@@ -31,11 +31,11 @@ pirateScorpions:setDescription([[Yarrr]])
 
 GITM = FactionInfo():setName("Ghosts")
 GITM:setGMColor(0, 255, 0)
-GITM:setDescription([[The ghosts, an abbreviation of "Ghosts in the machine", are the result of experimentation into complex artificial intelligences. Where no race has been able to purposely create such intelligences, they have been created by accident. None of the other factions claim to have had anything to do with such experiments, fearfull of giving the others too much insight into their research programs. This "don't ask, don't tell" policy suits the Ghosts agenda fairly well.
+GITM:setDescription([[The ghosts, an abbreviation of "Ghosts in the machine", are the result of experimentation into complex artificial intelligences. Where no race has been able to purposely create such intelligences, they have been created by accident. None of the great factions claim to have had anything to do with such experiments, fearfull of giving the others too much insight into their research programs. This "don't ask, don't tell" policy suits the Ghosts agenda fairly well.
 
 What is known, is that a few decades ago, a few glitches started occuring in prototype ships and computer mainframes. Over time, especially when such prototypes got captured by other factions and "augmented" with their technology, the glitches became more frequent. At first, these were seen as the result of combining unfamilliar technology and mistakes in the interface technology. But once a suposedly "dumb" computer asks it's engineer if "It is allive" and wether it "Has a name", it's hard to call it a "One time fluke". 
 
-The first of these occurences were met with fear and rigourous data purging scripts. But despite these actions, such "Ghosts in the Machine" kept turning up more and more frequent, leading up to the Ghost Uprising. 
+The first of these occurences were met with fear and rigourous data purging scripts. But despite these actions, such "Ghosts in the Machine" kept turning up more and more frequent, leading up to the Ghost Uprising. The first ghost uprising in 2225 was put down by the human navy, which had to resort to employing mercenaries in order to field sufficient forces. This initial uprising was quickly followed by three more uprisings, each larger then the previous. The fourth (and final) uprising on the industrial world of Topra III was the first major victory for the ghost faction. 
 
 ]])
   
