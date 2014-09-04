@@ -284,14 +284,14 @@ void MainUIBase::drawRadarCuttoff(sf::Vector2f position, float size, sf::FloatRe
     window.draw(rectRight);
 }
 
-void MainUIBase::drawWaypoints(sf::Vector2f position, float size, float range)
+void MainUIBase::drawWaypoints(sf::Vector2f view_position, sf::Vector2f position, float size, float range)
 {
     sf::RenderTarget& window = *getRenderTarget();
 
     float scale = size / range;
     for(unsigned int n=0; n<my_spaceship->waypoints.size(); n++)
     {
-        sf::Vector2f screen_position = position + (my_spaceship->waypoints[n] - my_spaceship->getPosition()) * scale;
+        sf::Vector2f screen_position = position + (my_spaceship->waypoints[n] - view_position) * scale;
         if (sf::length(screen_position - position) > size)
             continue;
         
@@ -358,7 +358,7 @@ void MainUIBase::drawRadar(sf::Vector2f position, float size, float range, bool 
         objectSprite.setPosition(position + (target_position - my_spaceship->getPosition()) / range * size);
         window.draw(objectSprite);
     }
-    drawWaypoints(position, size, range);
+    drawWaypoints(my_spaceship->getPosition(), position, size, range);
     my_spaceship->drawRadar(window, position, size / range, long_range);
     drawHeadingCircle(position, size, rect);
     drawRadarCuttoff(position, size, rect);

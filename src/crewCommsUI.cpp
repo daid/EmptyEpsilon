@@ -2,6 +2,7 @@
 
 CrewCommsUI::CrewCommsUI()
 {
+    mode = mode_default;
     comms_open_channel_type = OCT_None;
 }
 
@@ -25,33 +26,68 @@ void CrewCommsUI::onCrewUI()
             }
         }
     }
-
+    
+    float x = getWindowSize().x - 900;
+    sf::Vector2f radar_center = sf::Vector2f(x + 450, 450);
+    float radar_size = 450.0f;
+    float radar_distance = 50000.0f;
+    sf::Vector2f mouse = InputHandler::getMousePos();
+    if (InputHandler::mouseIsDown(sf::Mouse::Left))
+    {
+        if (mouse.x > x)
+        {
+            radar_view_position += (previous_mouse - mouse) / radar_size * radar_distance;
+        }
+    }
+    previous_mouse = mouse;
+    
     sf::RectangleShape background(getWindowSize());
     background.setFillColor(sf::Color::Black);
     window.draw(background);
     
-    sf::Vector2f radar_center = sf::Vector2f(getWindowSize().x - 450, 450);
-    float scale = (400.0 / 50000.0);
+    float scale = (radar_size / radar_distance);
     sf::CircleShape circle(5000.0 * scale, 32);
     circle.setFillColor(sf::Color(20, 20, 20));
     circle.setOrigin(5000.0 * scale, 5000.0 * scale);
     foreach(SpaceObject, obj, friendly_objects)
     {
-        circle.setPosition(radar_center + (obj->getPosition() - my_spaceship->getPosition()) * scale);
+        circle.setPosition(radar_center + (obj->getPosition() - radar_view_position) * scale);
         window.draw(circle);
     }
-    drawRaderBackground(my_spaceship->getPosition(), radar_center, 400, 50000.0);
+    drawRaderBackground(radar_view_position, radar_center, radar_size, radar_distance);
     foreach(SpaceObject, obj, friendly_objects)
     {
-        sf::Vector2f screen_position = radar_center + (obj->getPosition() - my_spaceship->getPosition()) * scale;
+        sf::Vector2f screen_position = radar_center + (obj->getPosition() - radar_view_position) * scale;
         obj->drawRadar(window, screen_position, scale, true);
     }
-    drawWaypoints(radar_center, 900, 50000.0);
+    drawWaypoints(radar_view_position, radar_center, radar_size, radar_distance);
     
-    sf::RectangleShape left_cover(sf::Vector2f(getWindowSize().x - 900, 900));
+    sf::RectangleShape left_cover(sf::Vector2f(x, 900));
     left_cover.setFillColor(sf::Color::Black);
     window.draw(left_cover);
-    //drawRadarCuttoff(sf::Vector2f(getWindowSize().x - 450, 450), 400);
+    
+    switch(mode)
+    {
+    case mode_default:
+        if (button(sf::FloatRect(x - 300, 100, 250, 50), "Add waypoint"))
+        {
+            mode = mode_place_waypoint;
+        }
+        break;
+    case mode_place_waypoint:
+        if (button(sf::FloatRect(x - 300, 100, 250, 50), "Cancel"))
+        {
+            mode = mode_default;
+        }
+        if (InputHandler::mouseIsReleased(sf::Mouse::Left) && mouse.x > x)
+        {
+            sf::Vector2f point = radar_view_position + (mouse - radar_center) / radar_size * radar_distance;
+            my_spaceship->commandAddWaypoint(point);
+            mode = mode_default;
+        }
+        break;
+    }
+    
     switch(my_spaceship->comms_state)
     {
     case CS_Inactive: //Standard state; not doing anything in particular.

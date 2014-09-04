@@ -33,6 +33,8 @@ static const int16_t CMD_CLOSE_VOICE_COMM = 0x0016;
 static const int16_t CMD_SEND_VOICE_COMM = 0x0017;
 static const int16_t CMD_SET_BEAM_FREQUENCY = 0x0018;
 static const int16_t CMD_SET_SHIELD_FREQUENCY = 0x0019;
+static const int16_t CMD_ADD_WAYPOINT = 0x001A;
+static const int16_t CMD_REMOVE_WAYPOINT = 0x001B;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -533,16 +535,20 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
         packet >> auto_repair_enabled;
         break;
     case CMD_SET_BEAM_FREQUENCY:
-        packet >> beam_frequency;
-        if (beam_frequency < 0)
-            beam_frequency = 0;
-        if (beam_frequency > SpaceShip::max_frequency)
-            beam_frequency = SpaceShip::max_frequency;
+        {
+            int32_t new_frequency;
+            packet >> new_frequency;
+            beam_frequency = new_frequency;
+            if (beam_frequency < 0)
+                beam_frequency = 0;
+            if (beam_frequency > SpaceShip::max_frequency)
+                beam_frequency = SpaceShip::max_frequency;
+        }
         break;
     case CMD_SET_SHIELD_FREQUENCY:
         if (shield_calibration_delay <= 0.0)
         {
-            int new_frequency;
+            int32_t new_frequency;
             packet >> new_frequency;
             if (new_frequency != shield_frequency)
             {
@@ -554,6 +560,22 @@ void PlayerSpaceship::onReceiveCommand(int32_t clientId, sf::Packet& packet)
                 if (shield_frequency > SpaceShip::max_frequency)
                     shield_frequency = SpaceShip::max_frequency;
             }
+        }
+        break;
+    case CMD_ADD_WAYPOINT:
+        {
+            sf::Vector2f position;
+            packet >> position;
+            if (waypoints.size() < 32)
+                waypoints.push_back(position);
+        }
+        break;
+    case CMD_REMOVE_WAYPOINT:
+        {
+            int32_t index;
+            packet >> index;
+            if (index >= 0 && index < int(waypoints.size()))
+                waypoints.erase(waypoints.begin() + index);
         }
         break;
     }
@@ -719,16 +741,30 @@ void PlayerSpaceship::commandSetAutoRepair(bool enabled)
     sendCommand(packet);
 }
 
-void PlayerSpaceship::commandSetBeamFrequency(int frequency)
+void PlayerSpaceship::commandSetBeamFrequency(int32_t frequency)
 {
     sf::Packet packet;
     packet << CMD_SET_BEAM_FREQUENCY << frequency;
     sendCommand(packet);
 }
 
-void PlayerSpaceship::commandSetShieldFrequency(int frequency)
+void PlayerSpaceship::commandSetShieldFrequency(int32_t frequency)
 {
     sf::Packet packet;
     packet << CMD_SET_SHIELD_FREQUENCY << frequency;
+    sendCommand(packet);
+}
+
+void PlayerSpaceship::commandAddWaypoint(sf::Vector2f position)
+{
+    sf::Packet packet;
+    packet << CMD_ADD_WAYPOINT << position;
+    sendCommand(packet);
+}
+
+void PlayerSpaceship::commandRemoveWaypoint(int32_t index)
+{
+    sf::Packet packet;
+    packet << CMD_REMOVE_WAYPOINT << index;
     sendCommand(packet);
 }

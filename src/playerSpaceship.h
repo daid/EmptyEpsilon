@@ -97,8 +97,10 @@ public:
     void commandSendComm(int8_t index);
     void commandSendCommPlayer(string message);
     void commandSetAutoRepair(bool enabled);
-    void commandSetBeamFrequency(int frequency);
-    void commandSetShieldFrequency(int frequency);
+    void commandSetBeamFrequency(int32_t frequency);
+    void commandSetShieldFrequency(int32_t frequency);
+    void commandAddWaypoint(sf::Vector2f position);
+    void commandRemoveWaypoint(int32_t index);
 
     virtual string getCallSign() { return ""; }
 
