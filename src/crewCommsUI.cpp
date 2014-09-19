@@ -3,14 +3,26 @@
 CrewCommsUI::CrewCommsUI()
 {
     mode = mode_default;
-    comms_open_channel_type = OCT_None;
+    selection_type = select_none;
+    radar_distance = 50000.0f;
 }
 
 void CrewCommsUI::onCrewUI()
 {
+    if (my_spaceship->comms_state == CS_Inactive)
+    {
+        drawCommsRadar();
+    }else{
+        drawCommsChannel();
+    }
+}
+
+void CrewCommsUI::drawCommsRadar()
+{
     sf::RenderTarget& window = *getRenderTarget();
 
     PVector<SpaceObject> friendly_objects;
+    PVector<SpaceObject> visible_objects;
     foreach(SpaceObject, obj, space_object_list)
     {
         if (obj->faction_id == my_spaceship->faction_id)
@@ -26,11 +38,26 @@ void CrewCommsUI::onCrewUI()
             }
         }
     }
+    foreach(SpaceObject, obj, space_object_list)
+    {
+        foreach(SpaceObject, friendly, friendly_objects)
+        {
+            if (sf::length(friendly->getPosition() - obj->getPosition()) < 5000.0f)
+            {
+                visible_objects.push_back(obj);
+                break;
+            }
+        }
+    }
+    
+    if (!selection_object && selection_type == select_object)
+        selection_type = select_none;
+    if (selection_type == select_waypoint && selection_waypoint_index >= my_spaceship->waypoints.size())
+        selection_type = select_none;
     
     float x = getWindowSize().x - 900;
     sf::Vector2f radar_center = sf::Vector2f(x + 450, 450);
     float radar_size = 450.0f;
-    float radar_distance = 50000.0f;
     sf::Vector2f mouse = InputHandler::getMousePos();
     if (InputHandler::mouseIsDown(sf::Mouse::Left))
     {
@@ -55,30 +82,112 @@ void CrewCommsUI::onCrewUI()
         window.draw(circle);
     }
     drawRaderBackground(radar_view_position, radar_center, radar_size, radar_distance);
-    foreach(SpaceObject, obj, friendly_objects)
+    foreach(SpaceObject, obj, visible_objects)
     {
         sf::Vector2f screen_position = radar_center + (obj->getPosition() - radar_view_position) * scale;
         obj->drawRadar(window, screen_position, scale, true);
     }
     drawWaypoints(radar_view_position, radar_center, radar_size, radar_distance);
+    if(selection_type != select_none)
+    {
+        sf::Vector2f position;
+        if (selection_type == select_object)
+            position = selection_object->getPosition();
+        if (selection_type == select_waypoint)
+            position = my_spaceship->waypoints[selection_waypoint_index];
+        position = radar_center + (position - radar_view_position) * scale;
+        if (selection_type == select_waypoint)
+            position.y -= 10;
+        
+        sf::Sprite objectSprite;
+        textureManager.setTexture(objectSprite, "redicule.png");
+        objectSprite.setPosition(position);
+        window.draw(objectSprite);
+    }
     
     sf::RectangleShape left_cover(sf::Vector2f(x, 900));
     left_cover.setFillColor(sf::Color::Black);
     window.draw(left_cover);
     
+    float y = 100;
     switch(mode)
     {
     case mode_default:
-        if (button(sf::FloatRect(x - 300, 100, 250, 50), "Add waypoint"))
+        if (button(sf::FloatRect(x - 270, y, 250, 50), "Add waypoint"))
         {
             mode = mode_place_waypoint;
         }
+        y += 50;
+        if (InputHandler::mouseIsReleased(sf::Mouse::Left) && mouse.x > x)
+        {
+            P<SpaceObject> target;
+            float target_pixel_distance;
+            foreach(SpaceObject, obj, visible_objects)
+            {
+                if(obj == my_spaceship)
+                    continue;
+                sf::Vector2f screen_position = radar_center + (obj->getPosition() - radar_view_position) * scale;
+                float pixel_distance = sf::length(screen_position - mouse);
+                if (pixel_distance < 30)
+                {
+                    if (!target || pixel_distance < target_pixel_distance)
+                    {
+                        target = obj;
+                        target_pixel_distance = pixel_distance;
+                    }
+                }
+            }
+            if (target)
+            {
+                selection_type = select_object;
+                selection_object = target;
+            }else{
+                for(unsigned int n=0; n<my_spaceship->waypoints.size(); n++)
+                {
+                    sf::Vector2f screen_position = radar_center + (my_spaceship->waypoints[n] - radar_view_position) * scale;
+                    if (sf::length(screen_position - mouse) < 30)
+                    {
+                        selection_type = select_waypoint;
+                        selection_waypoint_index = n;
+                    }
+                }
+            }
+        }
+
+        switch(selection_type)
+        {
+        case select_none:
+            break;
+        case select_object:
+            {
+                P<SpaceStation> station = selection_object;
+                P<SpaceShip> ship = selection_object;
+                if (station || ship)
+                {
+                    if (button(sf::FloatRect(x - 270, y, 250, 50), "Open comms"))
+                    {
+                        my_spaceship->commandOpenTextComm(selection_object);
+                    }
+                }
+            }
+            break;
+        case select_waypoint:
+            if (button(sf::FloatRect(x - 270, y, 250, 50), "Delete Waypoint"))
+            {
+                my_spaceship->commandRemoveWaypoint(selection_waypoint_index);
+                selection_type = select_none;
+            }
+            break;
+        }
         break;
     case mode_place_waypoint:
-        if (button(sf::FloatRect(x - 300, 100, 250, 50), "Cancel"))
+        if (button(sf::FloatRect(x - 270, y, 250, 50), "Cancel"))
         {
             mode = mode_default;
         }
+        y += 50;
+        
+        text(sf::FloatRect(x + 450, 100, 0, 50), "Place new waypoint", AlignCenter);
         if (InputHandler::mouseIsReleased(sf::Mouse::Left) && mouse.x > x)
         {
             sf::Vector2f point = radar_view_position + (mouse - radar_center) / radar_size * radar_distance;
@@ -87,164 +196,27 @@ void CrewCommsUI::onCrewUI()
         }
         break;
     }
-    
+
+    int zoom_level = round(50000.0f / radar_distance);
+    zoom_level += selector(sf::FloatRect(x - 270, 820, 250, 50), "Zoom: " + string(zoom_level) + "x", 30);
+    zoom_level = std::min(std::max(zoom_level, 1), 10);
+    radar_distance = 50000.0 / zoom_level;
+}
+
+void CrewCommsUI::drawCommsChannel()
+{
     switch(my_spaceship->comms_state)
     {
     case CS_Inactive: //Standard state; not doing anything in particular.
-        {
-            PVector<SpaceObject> station_list;
-            PVector<SpaceObject> friendly_list;
-            PVector<SpaceObject> neutral_list;
-            PVector<SpaceObject> enemy_list;
-            PVector<SpaceObject> unknown_list;
-            PVector<SpaceObject> player_list;
-            foreach(SpaceObject, obj, space_object_list) //Loop through all objects in space.
-            {
-                if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < PlayerSpaceship::max_comm_range)
-                { //Object is within range
-                    P<SpaceStation> station = obj;
-                    P<SpaceShip> ship = obj;
-                    if (station)
-                        station_list.push_back(obj);
-                    if (ship)
-                    {
-                        P<PlayerSpaceship> playership = ship;
-                        if (playership)
-                        {
-                            if (playership != my_spaceship)
-                                player_list.push_back(obj);
-                            continue;
-                        }
-                        if (ship->scanned_by_player != SS_NotScanned)
-                        {
-                            switch(factionInfo[my_spaceship->faction_id]->states[ship->faction_id])
-                            {
-                            case FVF_Friendly:
-                                friendly_list.push_back(obj);
-                                break;
-                            case FVF_Neutral:
-                                neutral_list.push_back(obj);
-                                break;
-                            case FVF_Enemy:
-                                enemy_list.push_back(obj);
-                                break;
-                            }
-                        }else{
-                            unknown_list.push_back(obj);
-                        }
-                    }
-                }
-            }
-
-            text(sf::FloatRect(50, 100, 600, 50), "Open comm channel to:");
-            if (comms_open_channel_type == OCT_None)
-            {
-                float y = 150;
-                if (station_list.size() > 0)
-                {
-                    if (button(sf::FloatRect(50, y, 300, 50), "Station (" + string(int(station_list.size())) + ")"))
-                        comms_open_channel_type = OCT_Station;
-                    y += 50;
-                }
-                if (friendly_list.size() > 0)
-                {
-                    if (button(sf::FloatRect(50, y, 300, 50), "Friendly ship (" + string(int(friendly_list.size())) + ")"))
-                        comms_open_channel_type = OCT_FriendlyShip;
-                    y += 50;
-                }
-                if (neutral_list.size() > 0)
-                {
-                    if (button(sf::FloatRect(50, y, 300, 50), "Neutral ship (" + string(int(neutral_list.size())) + ")"))
-                        comms_open_channel_type = OCT_NeutralShip;
-                    y += 50;
-                }
-                if (enemy_list.size() > 0)
-                {
-                    if (button(sf::FloatRect(50, y, 300, 50), "Enemy ship (" + string(int(enemy_list.size())) + ")"))
-                        comms_open_channel_type = OCT_EnemyShip;
-                    y += 50;
-                }
-                if (unknown_list.size() > 0)
-                {
-                    if (button(sf::FloatRect(50, y, 300, 50), "Unknown ship (" + string(int(unknown_list.size())) + ")"))
-                        comms_open_channel_type = OCT_UnknownShip;
-                    y += 50;
-                }
-                if (player_list.size() > 0)
-                {
-                    y += 20;
-                    if (button(sf::FloatRect(50, y, 300, 50), "Player (" + string(int(player_list.size())) + ")"))
-                        comms_open_channel_type = OCT_PlayerShip;
-                    y += 50;
-                }
-            }else
-            { //Target is selected (eg; subsection between station/friendly/neutral/etc).
-                PVector<SpaceObject> show_list;
-                switch(comms_open_channel_type)
-                {
-                    case OCT_Station:
-                        show_list = station_list;
-                        break;
-                    case OCT_FriendlyShip:
-                        show_list = friendly_list;
-                        break;
-                    case OCT_NeutralShip:
-                        show_list = neutral_list;
-                        break;
-                    case OCT_EnemyShip:
-                        show_list = enemy_list;
-                        break;
-                    case OCT_UnknownShip:
-                        show_list = unknown_list;
-                        break;
-                    case OCT_PlayerShip:
-                        show_list = player_list;
-                    default:
-                        break;
-                }
-
-                float x = 50;
-                float y = 150;
-                foreach(SpaceObject, obj, show_list)
-                {
-                    P<PlayerSpaceship> playerShip = obj;
-                    if (playerShip) //Why do we make a distinction here? Seems to me a player ship also has a callsign?
-                    {
-                        if (button(sf::FloatRect(x, y, 300, 50), playerShip->ship_template->name))
-                        {
-                            my_spaceship->commandOpenTextComm(obj);
-                            my_spaceship->commandOpenVoiceComm(obj);
-                            comms_open_channel_type = OCT_None;
-                        }
-                        y += 50;
-                    } else
-                    {
-                        if (button(sf::FloatRect(x, y, 300, 50), obj->getCallSign()))
-                        {
-                            my_spaceship->commandOpenTextComm(obj);
-                            comms_open_channel_type = OCT_None;
-                        }
-                        y += 50;
-                    }
-                    if (y > 700)
-                    {
-                        y = 150;
-                        x += 300;
-                    }
-                }
-                if (button(sf::FloatRect(50, 800, 300, 50), "Back"))
-                    comms_open_channel_type = OCT_None;
-            }
-        }
         break;
     case CS_OpeningChannel:
         text(sf::FloatRect(50, 100, 600, 50), "Opening communication channel...");
         progressBar(sf::FloatRect(50, 150, 600, 50), my_spaceship->comms_open_delay, PlayerSpaceship::comms_channel_open_time, 0.0);
         if (button(sf::FloatRect(50, 800, 300, 50), "Cancel call"))
-            {
-                my_spaceship->commandCloseTextComm();
-                my_spaceship->commandCloseVoiceComm();
-            }
+        {
+            my_spaceship->commandCloseTextComm();
+            my_spaceship->commandCloseVoiceComm();
+        }
         break;
     case CS_ChannelOpen:
         {

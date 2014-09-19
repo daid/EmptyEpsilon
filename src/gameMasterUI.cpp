@@ -129,7 +129,7 @@ void GameMasterUI::onGui()
         {
             if (toggleButton(sf::FloatRect(20, 500 + 30 * f, 250, 30), selection->getFactionId() == f, factionInfo[f]->name, 20))
             {
-                selection->setFaction(f);
+                selection->setFactionId(f);
             }
         }
 
@@ -150,7 +150,7 @@ void GameMasterUI::onGui()
         if (button(sf::FloatRect(20, 100, 250, 30), "Station", 20))
         {
             selection = new SpaceStation();
-            selection->faction_id = current_faction;
+            selection->setFactionId(current_faction);
             selection->setRotation(random(0, 360));
             selection->setPosition(view_position + sf::vector2FromAngle(random(0, 360)) * random(0, view_distance * 0.1));
         }

@@ -3,6 +3,14 @@
 
 #include "crewUI.h"
 
+enum ScienceDatabaseType
+{
+    SDT_None,
+    SDT_Factions,
+    SDT_Ships,
+    SDT_Weapons
+};
+
 class CrewScienceUI : public CrewUI
 {
     P<SpaceObject> scienceTarget;

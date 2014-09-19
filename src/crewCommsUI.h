@@ -8,18 +8,31 @@ enum CommsStationMode
     mode_default,
     mode_place_waypoint
 };
+enum CommsSelectionType
+{
+    select_none,
+    select_object,
+    select_waypoint
+};
 
 class CrewCommsUI : public CrewUI
 {
     sf::Vector2f previous_mouse;
     sf::Vector2f radar_view_position;
+    float radar_distance;
     CommsStationMode mode;
-    CommsOpenChannelType comms_open_channel_type;
+    CommsSelectionType selection_type;
+    P<SpaceObject> selection_object;
+    unsigned int selection_waypoint_index;
+    
     string comms_player_message;
 public:
     CrewCommsUI();
     
     virtual void onCrewUI();
+    
+    void drawCommsRadar();
+    void drawCommsChannel();
 };
 
 #endif//CREW_SCIENCE_UI

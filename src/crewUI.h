@@ -6,24 +6,6 @@
 #include "spaceship.h"
 #include "repairCrew.h"
 
-enum CommsOpenChannelType
-{
-    OCT_None,
-    OCT_Station,
-    OCT_FriendlyShip,
-    OCT_NeutralShip,
-    OCT_EnemyShip,
-    OCT_UnknownShip,
-    OCT_PlayerShip,
-};
-enum ScienceDatabaseType
-{
-    SDT_None,
-    SDT_Factions,
-    SDT_Ships,
-    SDT_Weapons
-};
-
 class CrewUI : public MainUIBase
 {
 public:
