@@ -1,4 +1,5 @@
 #include "crewCommsUI.h"
+#include "mine.h"
 
 CrewCommsUI::CrewCommsUI()
 {
@@ -25,7 +26,7 @@ void CrewCommsUI::drawCommsRadar()
     PVector<SpaceObject> visible_objects;
     foreach(SpaceObject, obj, space_object_list)
     {
-        if (obj->faction_id == my_spaceship->faction_id)
+        if (obj->isFriendly(my_spaceship))
         {
             P<SpaceShip> ship = obj;
             if (ship)
@@ -162,11 +163,19 @@ void CrewCommsUI::drawCommsRadar()
             {
                 P<SpaceStation> station = selection_object;
                 P<SpaceShip> ship = selection_object;
+                P<Mine> mine = selection_object;
                 if (station || ship)
                 {
                     if (button(sf::FloatRect(x - 270, y, 250, 50), "Open comms"))
                     {
                         my_spaceship->commandOpenTextComm(selection_object);
+                    }
+                }
+                if (mine && mine->isFriendly(my_spaceship))
+                {
+                    if (button(sf::FloatRect(x - 270, y, 250, 50), "Detonate"))
+                    {
+                        mine->explode();
                     }
                 }
             }

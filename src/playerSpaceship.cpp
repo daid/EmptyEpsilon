@@ -6,6 +6,8 @@
 #include "scriptInterface.h"
 REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
 {
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getWaypoint);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getWaypointCount);
 }
 
 static const int16_t CMD_TARGET_ROTATION = 0x0001;
@@ -196,14 +198,14 @@ void PlayerSpaceship::update(float delta)
                 systems[n].heat_level = 0.0;
         }
 
-        if (systems[SYS_Reactor].health < 0.3 && systems[SYS_Reactor].heat_level == 1.0)
+        if (systems[SYS_Reactor].health < 0.2 && systems[SYS_Reactor].heat_level == 1.0)
         {
             //Ok, you screwed up. Seriously, your reactor is heavy damaged and overheated. So it will explode.
             ExplosionEffect* e = new ExplosionEffect();
             e->setSize(1000.0f);
             e->setPosition(getPosition());
 
-            SpaceObject::damageArea(getPosition(), 1000, 60, 160, DT_Kinetic, 0.0);
+            SpaceObject::damageArea(getPosition(), 500, 30, 60, DT_Kinetic, 0.0);
 
             destroy();
             return;

@@ -167,7 +167,10 @@ ESystem ShipTemplate::getSystemAtRoom(sf::Vector2i position)
 
 P<ShipTemplate> ShipTemplate::getTemplate(string name)
 {
-    return templateMap[name];
+    if (templateMap.find(name) != templateMap.end())
+        return templateMap[name];
+    printf("Ship template not found: %s\n", name.c_str());
+    return NULL;
 }
 
 std::vector<string> ShipTemplate::getTemplateNameList()

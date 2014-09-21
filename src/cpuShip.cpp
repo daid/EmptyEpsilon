@@ -25,6 +25,8 @@ CpuShip::CpuShip()
     targetRotation = getRotation();
     shields_active = true;
     missile_fire_delay = 0.0;
+
+    comms_script_name = "comms_ship.lua";
 }
 
 void CpuShip::update(float delta)

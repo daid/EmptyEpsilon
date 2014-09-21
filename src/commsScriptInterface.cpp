@@ -1,4 +1,5 @@
 #include "commsScriptInterface.h"
+#include "cpuShip.h"
 
 static CommsScriptInterface* comms_script_interface;
 
@@ -30,7 +31,10 @@ bool CommsScriptInterface::openCommChannel(P<PlayerSpaceship> ship, P<SpaceObjec
         scriptObject->destroy();
     scriptObject = new ScriptObject();
     scriptObject->registerObject(ship, "PlayerSpaceship", "player");
-    scriptObject->registerObject(target, "SpaceObject", "comms_target");
+    if (P<CpuShip>(target))
+        scriptObject->registerObject(target, "CpuShip", "comms_target");
+    else
+        scriptObject->registerObject(target, "SpaceObject", "comms_target");
     scriptObject->registerFunction("setCommsMessage", lua_setCommsMessage);
     scriptObject->registerFunction("addCommsReply", lua_addCommsReply);
     has_message = false;

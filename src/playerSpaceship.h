@@ -114,6 +114,8 @@ public:
 
     void setCommsMessage(string message);
     void addCommsReply(int32_t id, string message);
+    int getWaypointCount() { return waypoints.size(); }
+    sf::Vector2f getWaypoint(int index) { if (index >= 0 && index < int(waypoints.size())) return waypoints[index]; return sf::Vector2f(0, 0); }
 };
 REGISTER_MULTIPLAYER_ENUM(ECommsState);
 

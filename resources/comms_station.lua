@@ -10,9 +10,16 @@ function mainMenu()
 				setCommsMessage("Sorry sir, we do not have spare supply ships available right now.");
 			end)
 			addCommsReply("Please send backup!", function()
-				--ship = CpuShip():setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):setShipTemplate("Fighter"):setScanned(true):orderDefendTarget(player)
-				--setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist you");
-				setCommsMessage("We cannot spare any ships for you right now.");
+				--setCommsMessage("We cannot spare any ships for you right now.");
+				setCommsMessage("Where does the backup needs to go?");
+				for n=0,player:getWaypointCount()-1 do
+					addCommsReply("WP" .. n, function()
+						ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setShipTemplate("Fighter"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
+						setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n);
+						addCommsReply("Back", mainMenu)
+					end)
+				end
+				addCommsReply("Back", mainMenu)
 			end)
 			return true
 		end
