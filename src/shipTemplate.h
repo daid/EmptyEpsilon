@@ -77,6 +77,8 @@ public:
 
     float scale;
     float radius;
+    sf::Vector2f collision_box;
+    int size_class; //The size class defines which ships can define to which, you can dock to anything a size class bigger then you.
     string model, colorTexture, specularTexture, illuminationTexture;
     sf::Vector3f beamPosition[maxBeamWeapons];
     BeamTemplate beams[maxBeamWeapons];
@@ -99,6 +101,8 @@ public:
     void setDescription(string description) { this->description = description; }
     void setScale(float scale) { this->scale = scale; }
     void setRadius(float radius) { this->radius = radius; }
+    void setCollisionBox(sf::Vector2f collision_box) { this->collision_box = collision_box; }
+    void setSizeClass(int size_class) { this->size_class = size_class; }
     void setMesh(string model, string colorTexture, string specularTexture, string illuminationTexture);
     void setBeamPosition(int index, sf::Vector3f position);
     void setBeam(int index, float arc, float direction, float range, float cycle_time, float damage);

@@ -43,8 +43,11 @@ def buildPack(name):
 	for filename in filenames:
 		filename = filename.encode('ascii')
 		if os.path.isfile(filename):
-			if os.path.splitext(filename)[1] == '.obj':
+			ext = os.path.splitext(filename)[1]
+			if ext == '.obj':
 				data, filename = convertObj(filename)
+			elif ext == '.rar' or ext == '.zip':
+				continue
 			else:
 				f = open(filename, "rb")
 				data = f.read()

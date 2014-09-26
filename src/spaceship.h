@@ -122,6 +122,7 @@ public:
     virtual void hullDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type);
     virtual void executeJump(float distance);
     virtual void fireBeamWeapon(int index, P<SpaceObject> target);
+    virtual bool canBeDockedBy(P<SpaceObject> obj);
     virtual void collision(Collisionable* other);
 
     void loadTube(int tubeNr, EMissileWeapons type);

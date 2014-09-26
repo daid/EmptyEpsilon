@@ -8,7 +8,9 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDescription);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setMesh);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setScale);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSizeClass);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadius);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCollisionBox);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamPosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeam);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubePosition);
@@ -82,6 +84,8 @@ ShipTemplate::ShipTemplate()
         beams[n].cycle_time = 0.0;
     }
     radius = 50.0;
+    collision_box = sf::Vector2f(0, 0);
+    size_class = 10;
     weaponTubes = 0;
     tube_load_time = 8.0;
     hull = 70;

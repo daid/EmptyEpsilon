@@ -1,5 +1,6 @@
 --[[ Stations --]]
 template = ShipTemplate():setName("Small Station"):setMesh("space_station_4.model", "space_station_4_color.jpg", "space_station_4_specular.jpg", "space_station_4_illumination.jpg"):setScale(10)
+template:setCollisionBox(400, 400)
 template:setHull(200)
 template:setShields(400, 0)
 
@@ -160,7 +161,6 @@ template:setWeaponStorage("EMP", 2)
 template:setDescription([[The tugboat is a reliable, but small and un-armed transport ship. Due to it's low cost, it is a favourite ship to teach the ropes to fledgeling captains, without risking friendly fire.]])
 
 
-
 --List of possible fighters --
 -- Intercepter (anti fighter) -> High speed, low visibility, front beam weapons
 -- Bomber (anti capital) -> Low speed, high visibility, high armor (for a fighter), high shields (for a fighter), multiple missiles
@@ -293,6 +293,42 @@ template:setHull(70)
 template:setShields(300, 300)
 template:setSpeed(30, 1)
 
+-- The battle station is a huge ship with many defensive features. It can be docked by smaller ships.
+template = ShipTemplate():setName("Battlestation"):setMesh("Ender Battlecruiser.obj", "Ender Battlecruiser.jpg", "space_cruiser_4_illumination.jpg", "space_cruiser_4_illumination.jpg"):setScale(5):setRadius(1000)
+template:setCollisionBox(600, 2000)
+template:setSizeClass(11)
+-- Visual positions of the beams/missiletubes (blender: Y, -X, Z)
+template:setBeamPosition(0, -71, 66, 12)
+template:setBeamPosition(1, -71, 66, -12)
+template:setBeamPosition(2,  71, 66, 12)
+template:setBeamPosition(3,  71, 66, -12)
+template:setBeamPosition(4, -71, -23, 12)
+template:setBeamPosition(5, -71, -23, -12)
+template:setBeamPosition(6,  71, -23, 12)
+template:setBeamPosition(7,  71, -23, -12)
+template:setBeamPosition(8, -71, -112, 12)
+template:setBeamPosition(9, -71, -112, -12)
+template:setBeamPosition(10,  71, -112, 12)
+template:setBeamPosition(11,  71, -112, -12)
+template:addEngineEmitor(-30, -180, 1.2,  0.2, 0.2, 1.0, 20.0)
+template:addEngineEmitor( 30, -180, 1.2,  0.2, 0.2, 1.0, 20.0)
+--                  Arc, Dir, Range, CycleTime, Dmg
+template:setBeam(0, 120, -90, 2500.0, 6.0, 4)
+template:setBeam(1, 120, -90, 2500.0, 6.0, 4)
+template:setBeam(2, 120,  90, 2500.0, 6.0, 4)
+template:setBeam(3, 120,  90, 2500.0, 6.0, 4)
+template:setBeam(4, 120, -90, 2500.0, 6.0, 4)
+template:setBeam(5, 120, -90, 2500.0, 6.0, 4)
+template:setBeam(6, 120,  90, 2500.0, 6.0, 4)
+template:setBeam(7, 120,  90, 2500.0, 6.0, 4)
+template:setBeam(8, 120, -90, 2500.0, 6.0, 4)
+template:setBeam(9, 120, -90, 2500.0, 6.0, 4)
+template:setBeam(10, 120,  90, 2500.0, 6.0, 4)
+template:setBeam(11, 120,  90, 2500.0, 6.0, 4)
+template:setHull(100)
+template:setShields(500, 500)
+template:setSpeed(10, 0.5)
+template:setJumpDrive(true)
 
 -- The weapons-platform is a stationary platform with beam-weapons. It's extremely slow to turn, but it's beam weapons do a huge amount of damage.
 template = ShipTemplate():setName("Weapons platform"):setMesh("space_cruiser_4.model", "space_cruiser_4_color.jpg", "space_cruiser_4_illumination.jpg", "space_cruiser_4_illumination.jpg"):setScale(8):setRadius(100)

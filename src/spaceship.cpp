@@ -154,6 +154,8 @@ void SpaceShip::setShipTemplate(string templateName)
         weapon_storage[n] = weapon_storage_max[n] = ship_template->weapon_storage[n];
 
     setRadius(ship_template->radius);
+    if (ship_template->collision_box.x > 0 && ship_template->collision_box.y > 0)
+        setCollisionBox(ship_template->collision_box);
 }
 
 void SpaceShip::draw3D()
@@ -202,16 +204,17 @@ void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float
             if (beamWeapons[n].cooldown > 0)
                 color = sf::Color(255, 255 * (beamWeapons[n].cooldown / beamWeapons[n].cycleTime), 0);
 
+            sf::Vector2f beam_offset = sf::rotateVector(sf::Vector2f(ship_template->beamPosition[n].x, ship_template->beamPosition[n].y) * ship_template->scale * scale, getRotation());
             sf::VertexArray a(sf::LinesStrip, 3);
             a[0].color = color;
             a[1].color = color;
             a[2].color = sf::Color(color.r, color.g, color.b, 0);
-            a[0].position = position;
-            a[1].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction + beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale;
-            a[2].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction + beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale * 1.3f;
+            a[0].position = beam_offset + position;
+            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction + beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale;
+            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction + beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale * 1.3f;
             window.draw(a);
-            a[1].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction - beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale;
-            a[2].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction - beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale * 1.3f;
+            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction - beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale;
+            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction - beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale * 1.3f;
             window.draw(a);
 
             int arcPoints = int(beamWeapons[n].arc / 10) + 1;
@@ -219,9 +222,9 @@ void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float
             for(int i=0; i<arcPoints; i++)
             {
                 arc[i].color = color;
-                arc[i].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction - beamWeapons[n].arc / 2.0f + 10 * i)) * beamWeapons[n].range * scale;
+                arc[i].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction - beamWeapons[n].arc / 2.0f + 10 * i)) * beamWeapons[n].range * scale;
             }
-            arc[arcPoints-1].position = position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction + beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale;
+            arc[arcPoints-1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction + beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale;
             window.draw(arc);
         }
     }else{
@@ -386,17 +389,21 @@ void SpaceShip::update(float delta)
     P<SpaceObject> target = getTarget();
     if (game_server && target && delta > 0 && docking_state == DS_NotDocking) // Only fire beam weapons if we are on the server, have a target, and are not paused.
     {
-        sf::Vector2f diff = target->getPosition() - getPosition();
-        float distance = sf::length(diff);
-        float angle = sf::vector2ToAngle(diff);
         for(int n=0; n<maxBeamWeapons; n++)
         {
-            if (target && isEnemy(target) && beamWeapons[n].cooldown <= 0.0 && distance < beamWeapons[n].range)
+            if (target && isEnemy(target) && beamWeapons[n].cooldown <= 0.0)
             {
-                float angleDiff = sf::angleDifference(beamWeapons[n].direction + getRotation(), angle);
-                if (abs(angleDiff) < beamWeapons[n].arc / 2.0)
+                sf::Vector2f diff = target->getPosition() - (getPosition() + sf::rotateVector(sf::Vector2f(ship_template->beamPosition[n].x, ship_template->beamPosition[n].y) * ship_template->scale, getRotation()));
+                float distance = sf::length(diff) - target->getRadius() / 2.0;
+                float angle = sf::vector2ToAngle(diff);
+                
+                if (distance < beamWeapons[n].range)
                 {
-                    fireBeamWeapon(n, target);
+                    float angleDiff = sf::angleDifference(beamWeapons[n].direction + getRotation(), angle);
+                    if (abs(angleDiff) < beamWeapons[n].arc / 2.0)
+                    {
+                        fireBeamWeapon(n, target);
+                    }
                 }
             }
         }
@@ -464,6 +471,16 @@ void SpaceShip::fireBeamWeapon(int index, P<SpaceObject> target)
     effect->setTarget(target, hitLocation);
 
     target->takeDamage(beamWeapons[index].damage, hitLocation, DT_Energy, beam_frequency);
+}
+
+bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)
+{
+    if (isEnemy(obj) || !ship_template)
+        return false;
+    P<SpaceShip> ship = obj;
+    if (!ship || !ship->ship_template)
+        return false;
+    return ship_template->size_class > ship->ship_template->size_class;
 }
 
 void SpaceShip::collision(Collisionable* other)
