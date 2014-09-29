@@ -145,11 +145,11 @@ Mesh* Mesh::getMesh(string filename)
         ret->vertices = new MeshVertex[indices.size()];
         for(unsigned int n=0; n<indices.size(); n++)
         {
-            ret->vertices[n].position[0] = vertices[indices[n].v].z;
-            ret->vertices[n].position[1] = vertices[indices[n].v].x;
+            ret->vertices[n].position[0] = -vertices[indices[n].v].x;
+            ret->vertices[n].position[1] = vertices[indices[n].v].z;
             ret->vertices[n].position[2] = vertices[indices[n].v].y;
-            ret->vertices[n].normal[0] = normals[indices[n].n].z;
-            ret->vertices[n].normal[1] = normals[indices[n].n].x;
+            ret->vertices[n].normal[0] = -normals[indices[n].n].x;
+            ret->vertices[n].normal[1] = normals[indices[n].n].z;
             ret->vertices[n].normal[2] = normals[indices[n].n].y;
             ret->vertices[n].uv[0] = texCoords[indices[n].t].x;
             ret->vertices[n].uv[1] = 1.0 - texCoords[indices[n].t].y;

@@ -677,11 +677,11 @@ void PlayerSpaceship::commandSetSystemCoolant(ESystem system, float coolant_leve
     sendCommand(packet);
 }
 
-void PlayerSpaceship::commandDock(P<SpaceStation> station)
+void PlayerSpaceship::commandDock(P<SpaceObject> object)
 {
-    if (!station) return;
+    if (!object) return;
     sf::Packet packet;
-    packet << CMD_DOCK << station->getMultiplayerId();
+    packet << CMD_DOCK << object->getMultiplayerId();
     sendCommand(packet);
 }
 

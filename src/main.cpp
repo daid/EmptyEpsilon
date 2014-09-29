@@ -23,6 +23,7 @@ RenderLayer* effectLayer;
 RenderLayer* hudLayer;
 RenderLayer* mouseLayer;
 PostProcessor* glitchPostProcessor;
+PostProcessor* warpPostProcessor;
 
 static std::map<string, string> startup_parameters;
 
@@ -46,7 +47,7 @@ int main(int argc, char** argv)
         *value++ = '\0';
         startup_parameters[string(argv[n]).strip()] = string(value).strip();
     }
-
+    
     new Engine();
     new DirectoryResourceProvider("resources/");
     new DirectoryResourceProvider("packs/SolCommand/");
@@ -63,6 +64,8 @@ int main(int argc, char** argv)
     mouseLayer = new RenderLayer(hudLayer);
     glitchPostProcessor = new PostProcessor("glitch", mouseLayer);
     glitchPostProcessor->enabled = false;
+    warpPostProcessor = new PostProcessor("warp", glitchPostProcessor);
+    warpPostProcessor->enabled = false;
     defaultRenderLayer = objectLayer;
 
     int width = 1600;
@@ -76,7 +79,7 @@ int main(int argc, char** argv)
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     if (desktop.height / 3 * 4 == desktop.width || startup_parameters["screen43"].toInt() != 0)
         width = height / 3 * 4;
-    engine->registerObject("windowManager", new WindowManager(width, height, fullscreen, glitchPostProcessor, fsaa));
+    engine->registerObject("windowManager", new WindowManager(width, height, fullscreen, warpPostProcessor, fsaa));
     if (startup_parameters["touchscreen"].toInt())
     {
         InputHandler::touch_screen = true;

@@ -76,8 +76,8 @@ void CrewScienceUI::onCrewUI()
                 float y = 400;
                 sf::Vector2f position_diff = target_position - my_spaceship->getPosition();
                 float distance = sf::length(position_diff);
-                float heading = sf::vector2ToAngle(position_diff);
-                if (heading < 0) heading += 360;
+                float heading = sf::vector2ToAngle(position_diff) - 270;
+                while(heading < 0) heading += 360;
                 float rel_velocity = dot(scienceTarget->getVelocity(), position_diff / distance) - dot(my_spaceship->getVelocity(), position_diff / distance);
                 if (fabs(rel_velocity) < 0.01)
                     rel_velocity = 0.0;

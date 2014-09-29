@@ -88,7 +88,7 @@ public:
     void commandScan(P<SpaceObject> object);
     void commandSetSystemPower(ESystem system, float power_level);
     void commandSetSystemCoolant(ESystem system, float coolant_level);
-    void commandDock(P<SpaceStation> station);
+    void commandDock(P<SpaceObject> station);
     void commandUndock();
     void commandOpenTextComm(P<SpaceObject> obj);
     void commandCloseTextComm();

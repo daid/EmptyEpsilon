@@ -70,7 +70,7 @@ void CrewHelmsUI::onCrewUI()
                 text_pos.y -= 10.0;
             else
                 text_pos.y -= 20.0;
-            text(sf::FloatRect(text_pos.x, text_pos.y, 0, 0), string(fmodf(sf::vector2ToAngle(diff) + 360.0, 360.0), 1), AlignCenter, 20);
+            text(sf::FloatRect(text_pos.x, text_pos.y, 0, 0), string(fmodf(sf::vector2ToAngle(diff) + 360.0 + 360.0 - 270.0, 360.0), 1), AlignCenter, 20);
         }
     }
 

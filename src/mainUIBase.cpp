@@ -76,6 +76,17 @@ void MainUIBase::onGui()
         }else{
             glitchPostProcessor->enabled = false;
         }
+        if (my_spaceship->currentWarp > 0.0)
+        {
+            warpPostProcessor->enabled = true;
+            warpPostProcessor->setUniform("amount", my_spaceship->currentWarp * 0.01);
+        }else if (my_spaceship->jumpDelay > 0.0 && my_spaceship->jumpDelay < 2.0)
+        {
+            warpPostProcessor->enabled = true;
+            warpPostProcessor->setUniform("amount", (2.0 - my_spaceship->jumpDelay) * 0.1);
+        }else{
+            warpPostProcessor->enabled = false;
+        }
     }else{
         glitchPostProcessor->enabled = false;
     }
@@ -234,21 +245,21 @@ void MainUIBase::drawHeadingCircle(sf::Vector2f position, float size, sf::FloatR
     sf::VertexArray tigs(sf::Lines, 360/20*2);
     for(unsigned int n=0; n<360; n+=20)
     {
-        tigs[n/20*2].position = position + sf::vector2FromAngle(float(n)) * size;
-        tigs[n/20*2+1].position = position + sf::vector2FromAngle(float(n)) * (size - 20);
+        tigs[n/20*2].position = position + sf::vector2FromAngle(float(n) - 90) * size;
+        tigs[n/20*2+1].position = position + sf::vector2FromAngle(float(n) - 90) * (size - 20);
     }
     window.draw(tigs);
     sf::VertexArray smallTigs(sf::Lines, 360/5*2);
     for(unsigned int n=0; n<360; n+=5)
     {
-        smallTigs[n/5*2].position = position + sf::vector2FromAngle(float(n)) * size;
-        smallTigs[n/5*2+1].position = position + sf::vector2FromAngle(float(n)) * (size - 10);
+        smallTigs[n/5*2].position = position + sf::vector2FromAngle(float(n) - 90) * size;
+        smallTigs[n/5*2+1].position = position + sf::vector2FromAngle(float(n) - 90) * (size - 10);
     }
     window.draw(smallTigs);
     for(unsigned int n=0; n<360; n+=20)
     {
         sf::Text text(string(n), mainFont, 15);
-        text.setPosition(position + sf::vector2FromAngle(float(n)) * (size - 25));
+        text.setPosition(position + sf::vector2FromAngle(float(n) - 90) * (size - 25));
         text.setOrigin(text.getLocalBounds().width / 2.0, text.getLocalBounds().height / 2.0);
         text.setRotation(n);
         window.draw(text);
@@ -504,7 +515,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
         default: break;
         }
     }
-    glRotatef(-cameraRotation, 0, 0, 1);
+    glRotatef(-cameraRotation - 90, 0, 0, 1);
 
     sf::Texture::bind(textureManager.getTexture("Stars"), sf::Texture::Pixels);
     glDepthMask(false);

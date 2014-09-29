@@ -19,6 +19,7 @@ extern RenderLayer* effectLayer;
 extern RenderLayer* hudLayer;
 extern RenderLayer* mouseLayer;
 extern PostProcessor* glitchPostProcessor;
+extern PostProcessor* warpPostProcessor;
 
 void returnToMainMenu();
 

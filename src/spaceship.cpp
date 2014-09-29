@@ -238,10 +238,6 @@ void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float
     if (long_range)
     {
         objectSprite.setScale(0.7, 0.7);
-    }else{
-        float sprite_scale = scale * getRadius() / objectSprite.getTextureRect().width * 4;
-        sprite_scale = (1.0 + sprite_scale) / 2.0;
-        objectSprite.setScale(sprite_scale, sprite_scale);
     }
     if (my_spaceship == this)
     {
@@ -498,6 +494,8 @@ void SpaceShip::collision(Collisionable* other)
         {
             docking_state = DS_Docked;
             docking_offset = sf::rotateVector(getPosition() - other->getPosition(), -other->getRotation());
+            float length = sf::length(docking_offset);
+            docking_offset = docking_offset / length * (length + 2.0f);
         }
     }
 }

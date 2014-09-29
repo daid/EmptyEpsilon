@@ -20,5 +20,6 @@ void main()
 	vec3 specular = texture2D(specularMap, gl_TexCoord[0].st).rgb;
 	
 	gl_FragColor = vec4(((base - illumination) * intensity) + (specular * specularIntensity) + illumination, gl_Color.a);
+	//gl_FragColor = vec4(base, gl_Color.a);
 	//gl_FragColor = vec4(specular * specularIntensity, gl_Color.a);
 }
