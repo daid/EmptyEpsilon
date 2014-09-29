@@ -104,7 +104,7 @@ void CrewSinglePilotUI::onCrewUI()
         {
             if (my_spaceship->scanning_delay > 0.0)
             {
-                progressBar(sf::FloatRect(getWindowSize().x / 2.0 - 100, 110, 100, 20), my_spaceship->scanning_delay, 8.0, 0.0);
+                progressBar(sf::FloatRect(getWindowSize().x / 2.0 - 100, 110, 100, 20), my_spaceship->scanning_delay, 6.0, 0.0);
             }else{
                 if (button(sf::FloatRect(getWindowSize().x / 2.0 - 100, 110, 100, 30), "Scan", 20))
                     my_spaceship->commandScan(target);
@@ -115,6 +115,16 @@ void CrewSinglePilotUI::onCrewUI()
             {
                 text(sf::FloatRect(getWindowSize().x / 2.0 - 100, 130, 100, 20), ship->ship_template->name, AlignRight, 20);
                 text(sf::FloatRect(getWindowSize().x / 2.0 - 100, 150, 100, 20), "Shields: " + string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), AlignRight, 20);
+                if (ship->scanned_by_player == SS_SimpleScan)
+                {
+                    if (my_spaceship->scanning_delay > 0.0)
+                    {
+                        progressBar(sf::FloatRect(getWindowSize().x / 2.0 - 100, 170, 100, 20), my_spaceship->scanning_delay, 6.0, 0.0);
+                    }else{
+                        if (button(sf::FloatRect(getWindowSize().x / 2.0 - 100, 170, 100, 30), "Scan", 20))
+                            my_spaceship->commandScan(target);
+                    }
+                }
             }
         }
         P<SpaceStation> station = target;
