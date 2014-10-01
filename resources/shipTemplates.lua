@@ -327,7 +327,7 @@ template:setBeam(9, 120, -90, 2500.0, 6.0, 4)
 template:setBeam(10, 120,  90, 2500.0, 6.1, 4)
 template:setBeam(11, 120,  90, 2500.0, 6.0, 4)
 template:setHull(100)
-template:setShields(500, 500)
+template:setShields(1500, 1500)
 template:setSpeed(10, 0.5)
 template:setJumpDrive(true)
 

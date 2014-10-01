@@ -2,7 +2,7 @@
 
 CrewHelmsUI::CrewHelmsUI()
 {
-    jump_distance = 1.0;
+    jump_distance = 10.0;
     ghost_delay = 0.0;
 }
 

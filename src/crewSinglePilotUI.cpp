@@ -4,7 +4,7 @@
 CrewSinglePilotUI::CrewSinglePilotUI()
 {
     tube_load_type = MW_None;
-    jump_distance = 1.0;
+    jump_distance = 10.0;
 }
 
 void CrewSinglePilotUI::onCrewUI()

@@ -2,10 +2,17 @@
 #include "shipSelectionScreen.h"
 #include "main.h"
 
-MainScreenUI::MainScreenUI()
+MainScreenBaseUI::MainScreenBaseUI()
 {
     P<MouseRenderer> mouseRenderer = engine->getObject("mouseRenderer");
     if (mouseRenderer) mouseRenderer->visible = false;
+}
+
+void MainScreenBaseUI::destroy()
+{
+    P<MouseRenderer> mouseRenderer = engine->getObject("mouseRenderer");
+    if (mouseRenderer) mouseRenderer->visible = true;
+    MainUIBase::destroy();
 }
 
 void MainScreenUI::onGui()
@@ -62,14 +69,7 @@ void MainScreenUI::onGui()
         draw3Dworld();
     }
 
-    MainUIBase::onGui();
-}
-
-void MainScreenUI::destroy()
-{
-    P<MouseRenderer> mouseRenderer = engine->getObject("mouseRenderer");
-    if (mouseRenderer) mouseRenderer->visible = true;
-    MainUIBase::destroy();
+    MainScreenBaseUI::onGui();
 }
 
 void MainScreenUI::renderTactical(sf::RenderTarget& window)
@@ -84,9 +84,6 @@ void MainScreenUI::renderLongRange(sf::RenderTarget& window)
 
 ShipWindowUI::ShipWindowUI()
 {
-    P<MouseRenderer> mouseRenderer = engine->getObject("mouseRenderer");
-    if (mouseRenderer) mouseRenderer->visible = false;
-    
     window_angle = 0;
 }
 
@@ -115,17 +112,26 @@ void ShipWindowUI::onGui()
             camera_pitch = 90.0f;
         }
 #endif
-
-        draw3Dworld();
     }
     draw3Dworld();
 
     MainUIBase::onGui();
 }
 
-void ShipWindowUI::destroy()
+void TopDownUI::onGui()
 {
-    P<MouseRenderer> mouseRenderer = engine->getObject("mouseRenderer");
-    if (mouseRenderer) mouseRenderer->visible = true;
-    MainUIBase::destroy();
+    if (my_spaceship)
+    {
+        camera_yaw = -90.0f;
+        camera_pitch = 90.0f;
+        
+        sf::Vector2f position = my_spaceship->getPosition();
+
+        camera_position.x = position.x;
+        camera_position.y = position.y;
+        camera_position.z = 7000.0;
+    }
+    draw3Dworld();
+
+    MainUIBase::onGui();
 }

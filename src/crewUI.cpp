@@ -76,7 +76,7 @@ void CrewUI::warpSlider(sf::FloatRect rect, float text_size)
 
 void CrewUI::jumpSlider(float& jump_distance, sf::FloatRect rect, float text_size)
 {
-    jump_distance = vslider(rect, jump_distance, 40.0, 1.0, 1.0);
+    jump_distance = vslider(rect, jump_distance, 40.0, 5.0, 10.0);
     jump_distance = roundf(jump_distance * 10.0f) / 10.0f;
     text(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(jump_distance, 1) + "km", AlignLeft, text_size);
 }
