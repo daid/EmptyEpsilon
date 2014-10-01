@@ -14,10 +14,14 @@ Asteroid::Asteroid()
 {
     setRotation(random(0, 360));
     rotation_speed = random(0.1, 0.8);
+    z = random(-100, 100);
+    
+    registerMemberReplication(&z);
 }
 
 void Asteroid::draw3D()
 {
+    glTranslatef(0, 0, z);
     glRotatef(engine->getElapsedTime() * rotation_speed, 0, 0, 1);
     glScalef(getRadius(), getRadius(), getRadius());
     simpleObjectShader.setParameter("baseMap", *textureManager.getTexture("asteroid.png"));

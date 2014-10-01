@@ -16,4 +16,15 @@ public:
     void renderLongRange(sf::RenderTarget& window);
 };
 
+class ShipWindowUI : public MainUIBase
+{
+public:
+    float window_angle;
+    
+    ShipWindowUI();
+    
+    virtual void onGui();
+    virtual void destroy();
+};
+
 #endif//MAIN_SCREEN_H

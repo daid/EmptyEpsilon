@@ -7,6 +7,7 @@ class Asteroid : public SpaceObject
 {
 public:
     float rotation_speed;
+    float z;
 
     Asteroid();
 

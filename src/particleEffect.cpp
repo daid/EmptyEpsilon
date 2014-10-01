@@ -20,7 +20,7 @@ void ParticleEngine::render()
         sf::Vector3f color = Tween<sf::Vector3f>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.color, p.end.color);
         float size = Tween<float>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.size, p.end.size);
         
-        sf::Vector3f eyeNormal = sf::normalize(cameraPosition - position);
+        sf::Vector3f eyeNormal = sf::normalize(camera_position - position);
         sf::Vector3f up = sf::cross(eyeNormal, sf::Vector3f(0, 0, 1));
         sf::Vector3f side = sf::cross(eyeNormal, up);
         up = up * size;
@@ -54,7 +54,7 @@ void ParticleEngine::spawn(sf::Vector3f position, sf::Vector3f end_position, sf:
 {
     if (!particleEngine) particleEngine = new ParticleEngine();
     
-    if (sf::length(position - cameraPosition) / (size + end_size) < 0.1)
+    if (sf::length(position - camera_position) / (size + end_size) < 0.1)
         return;
 
     unsigned int idx = particles.size();

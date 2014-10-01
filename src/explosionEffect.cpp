@@ -67,7 +67,7 @@ void ExplosionEffect::draw3DTransparent()
     glBegin(GL_QUADS);
     for(int n=0; n<particleCount; n++)
     {
-        sf::Vector3f eyeNormal = sf::normalize(cameraPosition - particleDirections[n]);
+        sf::Vector3f eyeNormal = sf::normalize(camera_position - particleDirections[n]);
         sf::Vector3f up = sf::cross(eyeNormal, sf::Vector3f(0, 0, 1));
         sf::Vector3f side = sf::cross(eyeNormal, up);
         up = up * size / 32.0f;

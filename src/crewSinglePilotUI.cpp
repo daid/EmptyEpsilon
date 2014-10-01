@@ -1,4 +1,5 @@
 #include "crewSinglePilotUI.h"
+#include "main.h"
 
 CrewSinglePilotUI::CrewSinglePilotUI()
 {
@@ -164,6 +165,36 @@ void CrewSinglePilotUI::onCrewUI()
             drawRadar(sf::Vector2f(getWindowSize().x / 4 * 3, 450), radar_size, 5000, false, NULL, sf::FloatRect(getWindowSize().x / 2.0f, 0, getWindowSize().x / 2.0f, 900));
             break;
         default:
+            camera_yaw = my_spaceship->getRotation();
+    #ifdef DEBUG
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+                camera_yaw -= 45;
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+                camera_yaw += 45;
+    #endif
+            switch(my_spaceship->main_screen_setting)
+            {
+            case MSS_Back: camera_yaw += 180; break;
+            case MSS_Left: camera_yaw -= 90; break;
+            case MSS_Right: camera_yaw += 90; break;
+            default: break;
+            }
+            camera_pitch = 30.0f;
+
+            const float camera_ship_distance = 420.0f;
+            const float camera_ship_height = 420.0f;
+            sf::Vector2f cameraPosition2D = my_spaceship->getPosition() + sf::vector2FromAngle(camera_yaw) * -camera_ship_distance;
+            sf::Vector3f targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
+    #ifdef DEBUG
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+            {
+                targetCameraPosition.x = my_spaceship->getPosition().x;
+                targetCameraPosition.y = my_spaceship->getPosition().y;
+                targetCameraPosition.z = 3000.0;
+                camera_pitch = 90.0f;
+            }
+    #endif
+            camera_position = camera_position * 0.9f + targetCameraPosition * 0.1f;
             draw3Dworld(sf::FloatRect(getWindowSize().x / 2.0f, 0, getWindowSize().x / 2.0f, 900));
             break;
         }

@@ -7,8 +7,9 @@
 #define VERSION_NUMBER 0x0000
 #endif
 
-extern sf::Vector3f cameraPosition;
-extern float cameraRotation;
+extern sf::Vector3f camera_position;
+extern float camera_yaw;
+extern float camera_pitch;
 extern sf::Shader objectShader;
 extern sf::Shader simpleObjectShader;
 extern sf::Shader basicShader;

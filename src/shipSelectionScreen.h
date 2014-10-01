@@ -17,6 +17,8 @@ class ShipSelectionScreen : public GUI
     std::vector<ScenarioInfo> scenarios;    //Server only
     int active_scenario_index;              //Server only
     int ship_template_index;                //Server only
+    bool alternative_screen_selection;
+    int window_angle;
 public:
     ShipSelectionScreen();
     

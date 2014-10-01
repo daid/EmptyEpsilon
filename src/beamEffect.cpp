@@ -23,7 +23,7 @@ void BeamEffect::draw3DTransparent()
     glTranslatef(-getPosition().x, -getPosition().y, 0);
     sf::Vector3f startPoint(getPosition().x, getPosition().y, sourceOffset.z);
     sf::Vector3f endPoint(targetLocation.x, targetLocation.y, targetOffset.z);
-    sf::Vector3f eyeNormal = sf::normalize(sf::cross(cameraPosition - startPoint, endPoint - startPoint));
+    sf::Vector3f eyeNormal = sf::normalize(sf::cross(camera_position - startPoint, endPoint - startPoint));
 
     basicShader.setParameter("textureMap", *textureManager.getTexture("beam_texture.png"));
     sf::Shader::bind(&basicShader);

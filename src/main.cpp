@@ -11,8 +11,9 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
-sf::Vector3f cameraPosition;
-float cameraRotation;
+sf::Vector3f camera_position;
+float camera_yaw;
+float camera_pitch;
 sf::Shader objectShader;
 sf::Shader simpleObjectShader;
 sf::Shader basicShader;

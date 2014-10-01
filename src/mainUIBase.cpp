@@ -1,4 +1,5 @@
 #include <SFML/OpenGL.hpp>
+#include <limits>
 #include "mainUIBase.h"
 #include "mainMenus.h"
 #include "epsilonServer.h"
@@ -457,17 +458,14 @@ void MainUIBase::drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESy
     }
 }
 
-static float camera_ship_angle = 30.0f;
-static float camera_ship_distance = 420.0f;
-static float camera_ship_height = 420.0f;
-
 void MainUIBase::draw3Dworld(sf::FloatRect rect)
 {
     sf::RenderTarget& window = *getRenderTarget();
     window.pushGLStates();
 
+    float camera_fov = 60.0f;
     float sx = window.getSize().x * window.getView().getViewport().width / getWindowSize().x;
-    float sy = window.getSize().y * window.getView().getViewport().height / 900.0f;
+    float sy = window.getSize().y * window.getView().getViewport().height / getWindowSize().y;
     glViewport(rect.left * sx, rect.top * sy, rect.width * sx, rect.height * sy);
 
     glClearDepth(1.f);
@@ -477,45 +475,15 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(60.f, rect.width/rect.height, 1.f, 16000.f);
+    gluPerspective(camera_fov, rect.width/rect.height, 1.f, 16000.f);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
     glRotatef(90, 1, 0, 0);
     glScalef(1,1,-1);
-    glRotatef(-camera_ship_angle, 1, 0, 0);
-#ifdef DEBUG
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-        glRotatef(-50, 1, 0, 0);
-    /*
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) camera_ship_angle += 1.0;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) camera_ship_angle -= 1.0;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) camera_ship_height += 10.0;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) camera_ship_height -= 10.0;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) camera_ship_distance += 10.0;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) camera_ship_distance -= 10.0;
-    printf("%f %f %f\n", camera_ship_angle, camera_ship_height, camera_ship_distance);
-    */
-#endif
-    if (my_spaceship)
-    {
-        cameraRotation = my_spaceship->getRotation();
-#ifdef DEBUG
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-            cameraRotation -= 45;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-            cameraRotation += 45;
-#endif
-        switch(my_spaceship->main_screen_setting)
-        {
-        case MSS_Back: cameraRotation += 180; break;
-        case MSS_Left: cameraRotation -= 90; break;
-        case MSS_Right: cameraRotation += 90; break;
-        default: break;
-        }
-    }
-    glRotatef(-cameraRotation - 90, 0, 0, 1);
+    glRotatef(-camera_pitch, 1, 0, 0);
+    glRotatef(-camera_yaw - 90, 0, 0, 1);
 
     sf::Texture::bind(textureManager.getTexture("Stars"), sf::Texture::Pixels);
     glDepthMask(false);
@@ -578,32 +546,28 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
     glDepthMask(true);
     glEnable(GL_DEPTH_TEST);
 
-    if (my_spaceship)
     {
-        sf::Vector2f cameraPosition2D = my_spaceship->getPosition() + sf::vector2FromAngle(cameraRotation) * -camera_ship_distance;
-        sf::Vector3f targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
-#ifdef DEBUG
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-            targetCameraPosition.z = 3000.0;
-#endif
-        cameraPosition = cameraPosition * 0.9f + targetCameraPosition * 0.1f;
+        float lightpos1[4] = {0, 0, 0, 1.0};
+        glLightfv(GL_LIGHT1, GL_POSITION, lightpos1);
         
-        //float lightpos[4] = {cameraPosition.x, cameraPosition.y, cameraPosition.z, 1.0};
-        float lightpos[4] = {0, 0, 0, 1.0};
-        glLightfv(GL_LIGHT1, GL_POSITION, lightpos);
-    }
-
-    {
-        float lightpos[4] = {20000, 20000, 20000, 1.0};
-        glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
+        float lightpos0[4] = {20000, 20000, 20000, 1.0};
+        glLightfv(GL_LIGHT0, GL_POSITION, lightpos0);
     }
 
     PVector<SpaceObject> renderList;
-    sf::Vector2f viewVector = sf::vector2FromAngle(cameraRotation);
+    sf::Vector2f viewVector = sf::vector2FromAngle(camera_yaw);
+    float depth_cutoff_back = camera_position.z * -tanf((90+camera_pitch + camera_fov/2.0) / 180.0f * M_PI);
+    float depth_cutoff_front = camera_position.z * -tanf((90+camera_pitch - camera_fov/2.0) / 180.0f * M_PI);
+    if (camera_pitch - camera_fov/2.0 <= 0.0)
+        depth_cutoff_front = std::numeric_limits<float>::infinity();
+    if (camera_pitch + camera_fov/2.0 >= 180.0)
+        depth_cutoff_back = -std::numeric_limits<float>::infinity();
     foreach(SpaceObject, obj, space_object_list)
     {
-        float depth = sf::dot(viewVector, obj->getPosition() - sf::Vector2f(cameraPosition.x, cameraPosition.y));
-        if (depth < -obj->getRadius() * 2)
+        float depth = sf::dot(viewVector, obj->getPosition() - sf::Vector2f(camera_position.x, camera_position.y));
+        if (depth + obj->getRadius() < depth_cutoff_back)
+            continue;
+        if (depth - obj->getRadius() > depth_cutoff_front)
             continue;
         if (depth > 0 && obj->getRadius() / depth < 1.0 / 500)
             continue;
@@ -613,7 +577,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
     foreach(SpaceObject, obj, renderList)
     {
         glPushMatrix();
-        glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
+        glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
         glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
         glRotatef(obj->getRotation(), 0, 0, 1);
 
@@ -628,7 +592,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
     foreach(SpaceObject, obj, renderList)
     {
         glPushMatrix();
-        glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
+        glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
         glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
         glRotatef(obj->getRotation(), 0, 0, 1);
 
@@ -637,7 +601,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
     }
 
     glPushMatrix();
-    glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
+    glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
     ParticleEngine::render();
     glPopMatrix();
 
@@ -652,7 +616,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
     foreach(SpaceObject, obj, space_object_list)
     {
         glPushMatrix();
-        glTranslatef(-cameraPosition.x,-cameraPosition.y, -cameraPosition.z);
+        glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
         glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
         glRotatef(obj->getRotation(), 0, 0, 1);
 
