@@ -146,12 +146,14 @@ void MainUIBase::update(float delta)
             scan_ghost[index].position = obj->getPosition();
         }
     }
-    for(unsigned int n=0; n<scan_ghost.size(); n++)
+    for(std::vector<ScanGhost>::iterator i = scan_ghost.begin(); i != scan_ghost.end();)
     {
-        if (scan_ghost[n].object)
+        if (i->object)
+        {
+            i++;
             continue;
-        scan_ghost.erase(scan_ghost.begin() + n);
-        n--;
+        }
+        i = scan_ghost.erase(i);
     }
 }
 
