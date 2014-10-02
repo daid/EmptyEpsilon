@@ -66,24 +66,3 @@ void SpaceObject::damageArea(sf::Vector2f position, float blast_range, float min
         }
     }
 }
-
-
-std::vector<NebulaInfo> nebulaInfo;
-
-void randomNebulas()
-{
-    NebulaInfo info;
-    nebulaInfo.clear();
-    for(unsigned int n=0; n<10; n++)
-    {
-        info.vector = sf::Vector3f(random(-1, 1), random(-1, 1), random(-1, 1));
-        info.textureName = "Nebula1";
-        nebulaInfo.push_back(info);
-        info.vector = sf::Vector3f(random(-1, 1), random(-1, 1), random(-1, 1));
-        info.textureName = "Nebula2";
-        nebulaInfo.push_back(info);
-        info.vector = sf::Vector3f(random(-1, 1), random(-1, 1), random(-1, 1));
-        info.textureName = "Nebula3";
-        nebulaInfo.push_back(info);
-    }
-}

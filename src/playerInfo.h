@@ -22,14 +22,24 @@ enum ECrewPosition
     max_crew_positions
 };
 
+class NebulaInfo
+{
+public:
+    sf::Vector3f vector;
+    string textureName;
+};
+
 class GameGlobalInfo : public MultiplayerObject
 {
 public:
     static const int maxPlayerShips = 32;
+    static const int maxNebula = 32;
 private:
     int victory_faction;
     int32_t playerShipId[maxPlayerShips];
 public:
+    NebulaInfo nebulaInfo[maxNebula];
+    
     GameGlobalInfo();
 
     P<PlayerSpaceship> getPlayerShip(int index);

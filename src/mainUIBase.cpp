@@ -526,21 +526,24 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
     glTexCoord2f(   0, 1024); glVertex3f(-100, 100,-100);
     glEnd();
 
-    for(unsigned int n=0; n<nebulaInfo.size(); n++)
+    if (gameGlobalInfo)
     {
-        sf::Texture::bind(textureManager.getTexture(nebulaInfo[n].textureName), sf::Texture::Pixels);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-        glPushMatrix();
-        glRotatef(180, nebulaInfo[n].vector.x, nebulaInfo[n].vector.y, nebulaInfo[n].vector.z);
-        glColor4f(1,1,1,0.1);
-        glBegin(GL_TRIANGLE_STRIP);
-        glTexCoord2f(1024,    0); glVertex3f( 100, 100, 100);
-        glTexCoord2f(   0,    0); glVertex3f( 100, 100,-100);
-        glTexCoord2f(1024, 1024); glVertex3f(-100, 100, 100);
-        glTexCoord2f(   0, 1024); glVertex3f(-100, 100,-100);
-        glEnd();
-        glPopMatrix();
+        for(int n=0; n<GameGlobalInfo::maxNebula; n++)
+        {
+            sf::Texture::bind(textureManager.getTexture(gameGlobalInfo->nebulaInfo[n].textureName), sf::Texture::Pixels);
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+            glPushMatrix();
+            glRotatef(180, gameGlobalInfo->nebulaInfo[n].vector.x, gameGlobalInfo->nebulaInfo[n].vector.y, gameGlobalInfo->nebulaInfo[n].vector.z);
+            glColor4f(1,1,1,0.1);
+            glBegin(GL_TRIANGLE_STRIP);
+            glTexCoord2f(1024,    0); glVertex3f( 100, 100, 100);
+            glTexCoord2f(   0,    0); glVertex3f( 100, 100,-100);
+            glTexCoord2f(1024, 1024); glVertex3f(-100, 100, 100);
+            glTexCoord2f(   0, 1024); glVertex3f(-100, 100,-100);
+            glEnd();
+            glPopMatrix();
+        }
     }
     glColor4f(1,1,1,1);
     glDisable(GL_BLEND);

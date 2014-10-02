@@ -100,8 +100,6 @@ int main(int argc, char** argv)
     }
     soundManager.setMusicVolume(50);
 
-    randomNebulas();
-    
     P<ResourceStream> stream = getResourceStream("sansation.ttf");
     mainFont.loadFromStream(**stream);
 

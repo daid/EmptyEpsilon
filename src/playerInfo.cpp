@@ -29,6 +29,13 @@ GameGlobalInfo::GameGlobalInfo()
         playerShipId[n] = -1;
         registerMemberReplication(&playerShipId[n]);
     }
+    for(int n=0; n<maxNebula; n++)
+    {
+        nebulaInfo[n].vector = sf::Vector3f(random(-1, 1), random(-1, 1), random(-1, 1));
+        nebulaInfo[n].textureName = "Nebula" + string(irandom(1, 3));
+        registerMemberReplication(&nebulaInfo[n].vector);
+        registerMemberReplication(&nebulaInfo[n].textureName);
+    }
     registerMemberReplication(&victory_faction);
 }
 

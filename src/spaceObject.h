@@ -50,13 +50,4 @@ public:
     void setCommsScript(string script_name) { this->comms_script_name = script_name; }
 };
 
-class NebulaInfo
-{
-public:
-    sf::Vector3f vector;
-    std::string textureName;
-};
-extern std::vector<NebulaInfo> nebulaInfo;
-void randomNebulas();
-
 #endif//SPACE_OBJECT_H
