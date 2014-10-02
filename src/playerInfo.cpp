@@ -96,24 +96,24 @@ void PlayerInfo::setCrewPosition(ECrewPosition position, bool active)
 {
     sf::Packet packet;
     packet << CMD_UPDATE_CREW_POSITION << int32_t(position) << active;
-    sendCommand(packet);
+    sendClientCommand(packet);
 }
 
 void PlayerInfo::setShipId(int32_t id)
 {
     sf::Packet packet;
     packet << CMD_UPDATE_SHIP_ID << id;
-    sendCommand(packet);
+    sendClientCommand(packet);
 }
 
 void PlayerInfo::setMainScreenControl(bool control)
 {
     sf::Packet packet;
     packet << CMD_UPDATE_MAIN_SCREEN_CONTROL << control;
-    sendCommand(packet);
+    sendClientCommand(packet);
 }
 
-void PlayerInfo::onReceiveCommand(int32_t clientId, sf::Packet& packet)
+void PlayerInfo::onReceiveClientCommand(int32_t clientId, sf::Packet& packet)
 {
     if (clientId != this->clientId) return;
     int16_t command;

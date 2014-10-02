@@ -179,7 +179,7 @@ void SpaceShip::draw3DTransparent()
         sf::Shader::bind(&basicShader);
         float f = (front_shield / front_shield_max) * front_shield_hit_effect;
         glColor4f(f, f, f, 1);
-        glRotatef(engine->getElapsedTime() * 5, 0, 1, 0);
+        glRotatef(engine->getElapsedTime() * 5, 1, 0, 0);
         glScalef(getRadius() * 1.2, getRadius() * 1.2, getRadius() * 1.2);
         Mesh* m = Mesh::getMesh("half_sphere.obj");
         if (front_shield_hit_effect > 0.0)

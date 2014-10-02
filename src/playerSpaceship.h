@@ -74,7 +74,7 @@ public:
 
     PlayerSpaceship();
 
-    void onReceiveCommand(int32_t clientId, sf::Packet& packet);
+    void onReceiveClientCommand(int32_t clientId, sf::Packet& packet);
     void commandTargetRotation(float target);
     void commandImpulse(float target);
     void commandWarp(int8_t target);

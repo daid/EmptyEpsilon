@@ -179,7 +179,7 @@ void RepairCrew::update(float delta)
     }
 }
 
-void RepairCrew::onReceiveCommand(int32_t clientId, sf::Packet& packet)
+void RepairCrew::onReceiveClientCommand(int32_t clientId, sf::Packet& packet)
 {
     int16_t command;
     packet >> command;
@@ -195,7 +195,7 @@ void RepairCrew::commandSetTargetPosition(sf::Vector2i position)
 {
     sf::Packet packet;
     packet << CMD_SET_TARGET_POSITION << position;
-    sendCommand(packet);
+    sendClientCommand(packet);
 }
 
 PVector<RepairCrew> getRepairCrewFor(P<PlayerSpaceship> ship)

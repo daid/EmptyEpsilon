@@ -117,6 +117,7 @@ void CrewCommsUI::drawCommsRadar()
         if (button(sf::FloatRect(x - 270, y, 250, 50), "Add waypoint"))
         {
             mode = mode_place_waypoint;
+            selection_type = select_none;
         }
         y += 50;
         if (InputHandler::mouseIsReleased(sf::Mouse::Left) && mouse.x > x)

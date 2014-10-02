@@ -84,7 +84,7 @@ void ShipSelectionScreen::onGui()
             if (window_angle >= 360)
                 window_angle -= 360;
             
-            if (button(sf::FloatRect(800, 250, 300, 50), "Top down"))
+            if (button(sf::FloatRect(800, 250, 300, 50), "Top down 3D"))
             {
                 startScenario();
 
