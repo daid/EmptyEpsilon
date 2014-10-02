@@ -92,9 +92,9 @@ void ShipWindowUI::onGui()
     if (my_spaceship)
     {
         if (InputHandler::keyboardIsPressed(sf::Keyboard::Left))
-            window_angle -= 15;
+            window_angle -= 5;
         if (InputHandler::keyboardIsPressed(sf::Keyboard::Right))
-            window_angle += 15;
+            window_angle += 5;
         
         camera_yaw = my_spaceship->getRotation() + window_angle;
         camera_pitch = 0.0f;
