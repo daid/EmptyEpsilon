@@ -434,20 +434,24 @@ void SpaceShip::update(float delta)
         }
     }
 
-    if (engine_emit_delay > 0.0)
+    if (currentImpulse != 0.0 || getAngularVelocity() != 0.0)
     {
-        engine_emit_delay -= delta;
-    }else{
-        for(unsigned int n=0; n<ship_template->engine_emitors.size(); n++)
+        if (engine_emit_delay > 0.0)
         {
-            sf::Vector3f offset = ship_template->engine_emitors[n].position * ship_template->scale;
-            sf::Vector2f pos2d = getPosition() + sf::rotateVector(sf::Vector2f(offset.x, offset.y), getRotation());
-            sf::Vector3f color = ship_template->engine_emitors[n].color;
-            sf::Vector3f pos3d = sf::Vector3f(pos2d.x, pos2d.y, offset.z);
-            float scale = ship_template->scale * ship_template->engine_emitors[n].scale;
-            ParticleEngine::spawn(pos3d, pos3d, color, color, scale, 0.0, 5.0);
+            engine_emit_delay -= delta;
+        }else{
+            for(unsigned int n=0; n<ship_template->engine_emitors.size(); n++)
+            {
+                sf::Vector3f offset = ship_template->engine_emitors[n].position * ship_template->scale;
+                sf::Vector2f pos2d = getPosition() + sf::rotateVector(sf::Vector2f(offset.x, offset.y), getRotation());
+                sf::Vector3f color = ship_template->engine_emitors[n].color;
+                sf::Vector3f pos3d = sf::Vector3f(pos2d.x, pos2d.y, offset.z);
+                float scale = ship_template->scale * ship_template->engine_emitors[n].scale;
+                scale *= std::max(fabs(getAngularVelocity() / rotationSpeed), fabs(currentImpulse));
+                ParticleEngine::spawn(pos3d, pos3d, color, color, scale, 0.0, 5.0);
+            }
+            engine_emit_delay += 0.1;
         }
-        engine_emit_delay += 0.1;
     }
 }
 
