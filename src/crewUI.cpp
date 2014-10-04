@@ -60,7 +60,10 @@ void CrewUI::impulseSlider(sf::FloatRect rect, float text_size)
     if (res > -0.15 && res < 0.15)
         res = 0.0;
     if (res != my_spaceship->impulseRequest)
+    {
         my_spaceship->commandImpulse(res);
+        my_spaceship->impulseRequest = res; //Set the impulseRequest directly, so it looks smooth on the client.
+    }
     text(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(int(my_spaceship->impulseRequest * 100)) + "%", AlignLeft, text_size);
     text(sf::FloatRect(rect.left, rect.top + rect.height + text_size, rect.width, text_size), string(int(my_spaceship->currentImpulse * 100)) + "%", AlignLeft, text_size);
 }
