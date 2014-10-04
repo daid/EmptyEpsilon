@@ -148,13 +148,16 @@ def compile(filename, system, for_target='Release'):
 		return
 
 system = platform.system()
+target = "Release"
 for arg in sys.argv[1:]:
 	if arg == "win32":
 		system = "Windows"
+	if arg == "debug":
+		target = "Debug"
 
 if system == "Windows":
-	compile("EmptyEpsilon.cbp", system, "Release")
+	compile("EmptyEpsilon.cbp", system, target)
 if system == "Linux":
-	compile("EmptyEpsilon.cbp", system, "Linux Release")
+	compile("EmptyEpsilon.cbp", system, "Linux %s" % (target))
 if system == "Darwin":
-	compile("EmptyEpsilon.cbp", system, "MacOS Release")
+	compile("EmptyEpsilon.cbp", system, "MacOS %s" % (target))
