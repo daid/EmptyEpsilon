@@ -7,6 +7,40 @@ try:
 except:
 	from xml.etree import ElementTree
 
+class DependencyFinder(object):
+	def __init__(self, filename, include_search_paths):
+		self._include_search_paths = include_search_paths
+		self._dependencies = {}
+		self._find(filename)
+		self._max_modify_time = self._dependencies[filename]
+		for value in self._dependencies.values():
+			if value:
+				self._max_modify_time = max(value, self._max_modify_time)
+	
+	def _find(self, filename):
+		if filename in self._dependencies:
+			return
+		full_filename = filename
+		if not os.path.isfile(full_filename):
+			for include_search_path in self._include_search_paths:
+				joined_path = os.path.join(include_search_path, filename)
+				if os.path.isfile(joined_path):
+					full_filename = joined_path
+					break
+		if not os.path.isfile(full_filename):
+			self._dependencies[filename] = False
+			return
+		for line in open(full_filename):
+			if line.strip().startswith('#'):
+				if line.strip()[1:].strip().startswith('include'):
+					if '<' in line and '>' in line:
+						include_name = line[line.find('<')+1:line.find('>')]
+						self._find(include_name)
+		self._dependencies[filename] = os.stat(full_filename).st_mtime
+	
+	def getModifyTime(self):
+		return self._max_modify_time
+
 def compile(filename, system, for_target='Release'):
 	EXECUTABLE = os.path.splitext(filename)[0]
 	if system == "Windows":
@@ -41,10 +75,14 @@ def compile(filename, system, for_target='Release'):
 	if system == "Windows" and platform.system() != "Windows":
 		CC = 'i686-w64-mingw32-' + CC
 		CXX = 'i686-w64-mingw32-' + CXX
+	if system == "Windows" and platform.system() == "Windows":
+		CC = 'C:/codeblocks/mingw/bin/mingw32-' + CC
+		CXX = 'C:/codeblocks/mingw/bin/mingw32-' + CXX
 	
 	xml = ElementTree.parse(filename)
 	filenames = []
 	obj_filenames = []
+	include_search_paths = []
 	for project in xml.findall('Project'):
 		for unit in project.findall('Unit'):
 			filenames.append(unit.attrib['filename'])
@@ -53,6 +91,7 @@ def compile(filename, system, for_target='Release'):
 				if 'option' in add.attrib:
 					CFLAGS += ' %s' % (add.attrib['option'])
 				if 'directory' in add.attrib:
+					include_search_paths.append(add.attrib['directory'])
 					CFLAGS += ' -I%s' % (add.attrib['directory'])
 		for linker in project.findall('Linker'):
 			for add in linker.findall('Add'):
@@ -70,6 +109,7 @@ def compile(filename, system, for_target='Release'):
 							if 'option' in add.attrib:
 								CFLAGS += ' %s' % (add.attrib['option'])
 							if 'directory' in add.attrib:
+								include_search_paths.append(add.attrib['directory'])
 								CFLAGS += ' -I%s' % (add.attrib['directory'])
 					for linker in target.findall('Linker'):
 						for add in linker.findall('Add'):
@@ -92,7 +132,13 @@ def compile(filename, system, for_target='Release'):
 			cc = CXX
 		cmd = '%s %s -o %s/%s -c %s' % (cc, CFLAGS, BUILD_DIR, obj_filename, filename)
 		print '[%d%%] %s' % (filenames.index(filename) * 100 / len(filenames), cmd)
-		if not os.path.isfile('%s/%s' % (BUILD_DIR, obj_filename)):
+		if os.path.isfile('%s/%s' % (BUILD_DIR, obj_filename)):
+			source_modify_time = DependencyFinder(filename, include_search_paths).getModifyTime()
+			binary_modify_time = os.stat('%s/%s' % (BUILD_DIR, obj_filename)).st_mtime
+			if source_modify_time > binary_modify_time:
+				if os.system(cmd) != 0:
+					return
+		else:
 			if os.system(cmd) != 0:
 				return
 	
