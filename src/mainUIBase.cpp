@@ -12,6 +12,14 @@
 MainUIBase::MainUIBase()
 {
     scan_angle = 0.0;
+
+    foreach(SpaceObject, obj, space_object_list)
+    {
+        int index = scan_ghost.size();
+        scan_ghost.push_back(ScanGhost());
+        scan_ghost[index].object = obj;
+        scan_ghost[index].position = obj->getPosition();
+    }
 }
 
 void MainUIBase::onGui()
