@@ -231,6 +231,8 @@
 		<Unit filename="../SeriousProton/src/engine.h" />
 		<Unit filename="../SeriousProton/src/event.cpp" />
 		<Unit filename="../SeriousProton/src/event.h" />
+		<Unit filename="../SeriousProton/src/fixedSocket.cpp" />
+		<Unit filename="../SeriousProton/src/fixedSocket.h" />
 		<Unit filename="../SeriousProton/src/gameEntity.cpp" />
 		<Unit filename="../SeriousProton/src/gameEntity.h" />
 		<Unit filename="../SeriousProton/src/httpServer.cpp" />
