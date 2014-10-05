@@ -64,11 +64,11 @@
 					<Add option="-DDEBUG" />
 				</Compiler>
 				<Linker>
-					<Add library="sfml-window-d" />
-					<Add library="sfml-audio-d" />
-					<Add library="sfml-graphics-d" />
-					<Add library="sfml-system-d" />
-					<Add library="sfml-network-d" />
+					<Add library="sfml-window" />
+					<Add library="sfml-audio" />
+					<Add library="sfml-graphics" />
+					<Add library="sfml-system" />
+					<Add library="sfml-network" />
 					<Add library="GL" />
 					<Add library="GLU" />
 				</Linker>
