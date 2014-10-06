@@ -14,7 +14,7 @@ function init()
 	friendlyList = {}
 
 	for n=1, 3 do
-		table.insert(friendlyList, setCirclePos(SpaceStation():setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(15000, 20000)))
+		table.insert(friendlyList, setCirclePos(SpaceStation():setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
 	end
 	
 	enemy_group_count = 5
@@ -87,7 +87,7 @@ function init()
 	end
 
 	a = random(0, 360)
-	d = random(30000, 45000)
+	d = random(10000, 45000)
 	x, y = vectorFromAngle(a, d)
 	BlackHole():setPosition(x, y)
 end

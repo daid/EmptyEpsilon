@@ -84,25 +84,33 @@ void GameMasterUI::onGui()
         objectSprite.setPosition(sf::Vector2f(800, 450) + (selection->getPosition() - view_position) / view_distance * 400.0f);
         window.draw(objectSprite);
 
+        float y = 20;
         P<SpaceShip> ship = selection;
         if (ship && ship->ship_template)
         {
-            text(sf::FloatRect(20, 20, 100, 20), factionInfo[ship->faction_id]->name + " " + ship->ship_template->name, AlignLeft, 20);
-            text(sf::FloatRect(20, 40, 100, 20), "Hull: " + string(ship->hull_strength), AlignLeft, 20);
-            text(sf::FloatRect(20, 60, 100, 20), "Shields: " + string(ship->front_shield) + ", " + string(ship->rear_shield), AlignLeft, 20);
+            text(sf::FloatRect(20, y, 100, 20), factionInfo[ship->faction_id]->name + " " + ship->ship_template->name, AlignLeft, 20);
+            y += 20;
+            text(sf::FloatRect(20, y, 100, 20), "Hull: " + string(ship->hull_strength), AlignLeft, 20);
+            y += 20;
+            text(sf::FloatRect(20, y, 100, 20), "Shields: " + string(ship->front_shield) + ", " + string(ship->rear_shield), AlignLeft, 20);
+            y += 20;
         }
         P<SpaceStation> station = selection;
         if (station)
         {
-            text(sf::FloatRect(20, 40, 100, 20), "Hull: " + string(station->hull_strength), AlignLeft, 20);
-            text(sf::FloatRect(20, 60, 100, 20), "Shields: " + string(station->shields), AlignLeft, 20);
+            text(sf::FloatRect(20, y, 100, 20), factionInfo[station->faction_id]->name, AlignLeft, 20);
+            y += 20;
+            text(sf::FloatRect(20, y, 100, 20), "Hull: " + string(station->hull_strength), AlignLeft, 20);
+            y += 20;
+            text(sf::FloatRect(20, y, 100, 20), "Shields: " + string(station->shields), AlignLeft, 20);
+            y += 20;
         }
         P<CpuShip> cpuShip = selection;
         if (cpuShip)
         {
-            text(sf::FloatRect(20, 80, 100, 20), "Orders: " + getAIOrderString(cpuShip->getOrder()), AlignLeft, 20);
+            text(sf::FloatRect(20, y, 100, 20), "Orders: " + getAIOrderString(cpuShip->getOrder()), AlignLeft, 20);
+            y += 20;
 
-            float y = 100;
             if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_Idle, "Idle", 20))
                 cpuShip->orderIdle();
             y += 30;
@@ -112,14 +120,19 @@ void GameMasterUI::onGui()
             if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_StandGround, "Stand Ground", 18))
                 cpuShip->orderStandGround();
             y += 30;
-
+            if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_DefendLocation, "Defend location", 18))
+                cpuShip->orderDefendLocation(cpuShip->getPosition());
+            y += 30;
+        }
+        if (ship)
+        {
             for(int n=0; n<MW_Count; n++)
             {
-                if (cpuShip->weapon_storage_max[n] < 1)
+                if (ship->weapon_storage_max[n] < 1)
                     continue;
-                text(sf::FloatRect(20, y, 130, 30), getMissileWeaponName(EMissileWeapons(n)) + ": " + string(cpuShip->weapon_storage[n]) + "/" + string(cpuShip->weapon_storage_max[n]), AlignLeft, 20);
+                text(sf::FloatRect(20, y, 130, 30), getMissileWeaponName(EMissileWeapons(n)) + ": " + string(ship->weapon_storage[n]) + "/" + string(ship->weapon_storage_max[n]), AlignLeft, 20);
                 if (button(sf::FloatRect(200, y, 100, 30), "Refill", 15))
-                    cpuShip->weapon_storage[n] = cpuShip->weapon_storage_max[n];
+                    ship->weapon_storage[n] = ship->weapon_storage_max[n];
                 y += 30;
             }
         }

@@ -257,8 +257,7 @@ void ShipSelectionScreen::onGui()
 
 int lua_victory(lua_State* L)
 {
-    const char* victory_faction = luaL_checkstring(L, 1);
-    gameGlobalInfo->setVictory(FactionInfo::findFactionId(victory_faction));
+    gameGlobalInfo->setVictory(luaL_checkstring(L, 1));
     engine->getObject("scenario")->destroy();
     engine->setGameSpeed(0.0);
     return 0;
