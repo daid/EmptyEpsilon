@@ -54,8 +54,11 @@ void ShipSelectionScreen::onGui()
         return;
     }
     
+    box(sf::FloatRect(780, 30, 340, 540));
+    box(sf::FloatRect(780, 80, 340, 490));
     if (alternative_screen_selection)
     {
+        text(sf::FloatRect(780, 30, 340, 50), "Alternative options", AlignCenter);
         if (game_server)
         {
             if (button(sf::FloatRect(800, 100, 300, 50), "Game Master"))
@@ -91,8 +94,11 @@ void ShipSelectionScreen::onGui()
                 destroy();
                 new TopDownUI();
             }
+        }else{
+            text(sf::FloatRect(800, 150, 300, 50), "Select a ship", AlignCenter, 30);
         }
     }else{
+        text(sf::FloatRect(780, 30, 340, 50), "Normal options", AlignCenter);
         if (my_spaceship)
         {
             int32_t my_ship_id = my_spaceship->getMultiplayerId();
@@ -112,7 +118,7 @@ void ShipSelectionScreen::onGui()
                 for(int n=0; n<max_crew_positions; n++)
                     my_player_info->setCrewPosition(ECrewPosition(n), false);
             }
-            text(sf::FloatRect(1100, 100, 300, 50), string(mainCnt));
+            text(sf::FloatRect(800, 100, 280, 50), string(mainCnt), AlignRight, 30, sf::Color::Black);
 
             float y = 150;
             for(int n=0; n<max_crew_positions; n++)
@@ -139,18 +145,18 @@ void ShipSelectionScreen::onGui()
                 foreach(PlayerInfo, i, playerInfoList)
                     if (i->ship_id == my_ship_id && i->crew_position[n])
                         cnt++;
-                text(sf::FloatRect(1100, y, 300, 50), string(cnt));
+                text(sf::FloatRect(800, y, 280, 50), string(cnt), AlignRight, 30, sf::Color::Black);
                 y += 50;
             }
             y += 25;
             if (!my_player_info->isMainScreen())
             {
-                if (toggleButton(sf::FloatRect(800, y, 300, 50), my_player_info->main_screen_control, "Control main screen"))
+                if (toggleButton(sf::FloatRect(800, y, 300, 50), my_player_info->main_screen_control, "Main screen ctrl"))
                     my_player_info->setMainScreenControl(!my_player_info->main_screen_control);
             }else{
-                disabledButton(sf::FloatRect(800, y, 300, 50), "Control main screen");
+                disabledButton(sf::FloatRect(800, y, 300, 50), "Main screen ctrl");
             }
-            text(sf::FloatRect(1100, y, 300, 50), string(main_screen_control_cnt));
+            text(sf::FloatRect(800, y, 280, 50), string(main_screen_control_cnt), AlignRight, 30, sf::Color::Black);
 
             if (button(sf::FloatRect(800, 600, 300, 50), "Ready"))
             {
@@ -158,17 +164,19 @@ void ShipSelectionScreen::onGui()
                 destroy();
                 my_player_info->spawnUI();
             }
-
-            if (active_scenario_index < int(scenarios.size()) && !engine->getObject("scenario"))
-            {
-                active_scenario_index += selector(sf::FloatRect(800, 650, 300, 50), scenarios[active_scenario_index].name);
-                if (active_scenario_index < 0)
-                    active_scenario_index = scenarios.size() - 1;
-                if (active_scenario_index >= int(scenarios.size()))
-                    active_scenario_index = 0;
-                text(sf::FloatRect(800, 700, 300, 20), scenarios[active_scenario_index].description, AlignRight, 15);
-            }
+        }else{
+            text(sf::FloatRect(800, 100, 300, 50), "Select a ship", AlignCenter, 30);
         }
+    }
+
+    if (active_scenario_index < int(scenarios.size()) && !engine->getObject("scenario"))
+    {
+        active_scenario_index += selector(sf::FloatRect(800, 650, 300, 50), scenarios[active_scenario_index].name);
+        if (active_scenario_index < 0)
+            active_scenario_index = scenarios.size() - 1;
+        if (active_scenario_index >= int(scenarios.size()))
+            active_scenario_index = 0;
+        text(sf::FloatRect(800, 700, 300, 20), scenarios[active_scenario_index].description, AlignRight, 15);
     }
 
     for(int n=0; n<GameGlobalInfo::maxPlayerShips; n++)
@@ -249,8 +257,8 @@ void ShipSelectionScreen::onGui()
 
 int lua_victory(lua_State* L)
 {
-    int victory_faction = luaL_checkinteger(L, 1);
-    gameGlobalInfo->setVictory(victory_faction);
+    const char* victory_faction = luaL_checkstring(L, 1);
+    gameGlobalInfo->setVictory(FactionInfo::findFactionId(victory_faction));
     engine->getObject("scenario")->destroy();
     engine->setGameSpeed(0.0);
     return 0;
