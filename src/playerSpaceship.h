@@ -7,6 +7,17 @@
 #include "networkAudioStream.h"
 #include <iostream>
 
+enum ECrewPosition
+{
+    helmsOfficer,
+    weaponsOfficer,
+    engineering,
+    scienceOfficer,
+    commsOfficer,
+    singlePilot,
+    max_crew_positions
+};
+
 enum ECommsState
 {
     CS_Inactive,
@@ -49,6 +60,7 @@ public:
     const static float max_comm_range = 50000;
     const static float comms_channel_open_time = 2.0;
     const static int max_comms_reply_count = 16;
+    const static int max_self_destruct_codes = 3;
 
     PlayerSystem systems[SYS_COUNT];
     NetworkRecorder network_recorder;
@@ -71,6 +83,12 @@ public:
     std::vector<sf::Vector2f> waypoints;
 
     EMainScreenSetting main_screen_setting;
+    
+    bool activate_self_destruct;
+    uint32_t self_destruct_code[max_self_destruct_codes];
+    bool self_destruct_code_confirmed[max_self_destruct_codes];
+    ECrewPosition self_destruct_code_entry_position[max_self_destruct_codes];
+    ECrewPosition self_destruct_code_show_position[max_self_destruct_codes];
 
     PlayerSpaceship();
 
@@ -101,6 +119,9 @@ public:
     void commandSetShieldFrequency(int32_t frequency);
     void commandAddWaypoint(sf::Vector2f position);
     void commandRemoveWaypoint(int32_t index);
+    void commandActivateSelfDestruct();
+    void commandCancelSelfDestruct();
+    void commandConfirmDestructCode(int8_t index, uint32_t code);
 
     virtual string getCallSign() { return ""; }
 
@@ -118,5 +139,6 @@ public:
     sf::Vector2f getWaypoint(int index) { if (index >= 0 && index < int(waypoints.size())) return waypoints[index]; return sf::Vector2f(0, 0); }
 };
 REGISTER_MULTIPLAYER_ENUM(ECommsState);
+REGISTER_MULTIPLAYER_ENUM(ECrewPosition);
 
 #endif//PLAYER_SPACESHIP_H

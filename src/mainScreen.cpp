@@ -65,6 +65,17 @@ void MainScreenUI::onGui()
             renderLongRange(*getRenderTarget());
             break;
         }
+        if (my_spaceship->activate_self_destruct)
+        {
+            boxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 150));
+            box(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100));
+            text(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100), "SELF DESTRUCT ACTIVATED", AlignCenter, 50);
+            int todo = 0;
+            for(int n=0; n<PlayerSpaceship::max_self_destruct_codes; n++)
+                if (!my_spaceship->self_destruct_code_confirmed[n])
+                    todo++;
+            text(sf::FloatRect(getWindowSize().x / 2 - 400, 295, 800, 50), "Waiting for autorization input: "+string(todo)+" left", AlignCenter, 30);
+        }
     }else{
         draw3Dworld();
     }

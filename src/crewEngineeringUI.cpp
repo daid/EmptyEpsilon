@@ -2,6 +2,7 @@
 
 CrewEngineeringUI::CrewEngineeringUI()
 {
+    self_destruct_open = false;
     selected_system = SYS_None;
     shield_new_frequency = SpaceShip::max_frequency / 2;
 }
@@ -31,6 +32,29 @@ void CrewEngineeringUI::onCrewUI()
         my_spaceship->commandSetAutoRepair(!my_spaceship->auto_repair_enabled);
     }
     */
+    
+    if (my_spaceship->activate_self_destruct)
+    {
+        box(sf::FloatRect(20, 220, 300, 140));
+        box(sf::FloatRect(20, 270, 300, 90));
+        text(sf::FloatRect(20, 220, 300, 50), "Self destruct", AlignCenter, 30);
+        if (button(sf::FloatRect(40, 290, 260, 50), "Cancel", 30))
+            my_spaceship->commandCancelSelfDestruct();
+    }else{
+        if (!self_destruct_open)
+        {
+            if (button(sf::FloatRect(20, 220, 300, 50), "Self destruct", 30))
+                self_destruct_open = true;
+        }else{
+            box(sf::FloatRect(20, 220, 300, 140));
+            box(sf::FloatRect(20, 270, 300, 90));
+            text(sf::FloatRect(20, 220, 300, 50), "Self destruct", AlignCenter, 30);
+            if (button(sf::FloatRect(40, 290, 260, 50), "Confirm", 30))
+                my_spaceship->commandActivateSelfDestruct();
+            if (InputHandler::mouseIsReleased(sf::Mouse::Left))
+                self_destruct_open = false;
+        }
+    }
 
     int y = 470;
     for(int n=0; n<SYS_COUNT; n++)

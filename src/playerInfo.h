@@ -11,17 +11,6 @@ extern P<PlayerInfo> my_player_info;
 extern P<PlayerSpaceship> my_spaceship;
 extern PVector<PlayerInfo> playerInfoList;
 
-enum ECrewPosition
-{
-    helmsOfficer,
-    weaponsOfficer,
-    engineering,
-    scienceOfficer,
-    commsOfficer,
-    singlePilot,
-    max_crew_positions
-};
-
 class NebulaInfo
 {
 public:

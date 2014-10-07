@@ -13,8 +13,13 @@ void CrewUI::onGui()
     if (my_spaceship)
     {
         onCrewUI();
-        if (my_player_info->main_screen_control)
-            mainScreenSelectGUI();
+        if (my_spaceship->activate_self_destruct)
+        {
+            selfDestructGUI();
+        }else{
+            if (my_player_info->main_screen_control)
+                mainScreenSelectGUI();
+        }
     }else{
         drawStatic();
     }

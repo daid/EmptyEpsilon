@@ -167,18 +167,104 @@ void MainUIBase::update(float delta)
 
 void MainUIBase::mainScreenSelectGUI()
 {
-    if (button(sf::FloatRect(getWindowSize().x - 200, 40, 200, 40), "Front", 28))
+    float x = getWindowSize().x - 200;
+    if (button(sf::FloatRect(x, 40, 200, 40), "Front", 28))
         my_spaceship->commandMainScreenSetting(MSS_Front);
-    if (button(sf::FloatRect(getWindowSize().x - 200, 80, 200, 40), "Back", 28))
+    if (button(sf::FloatRect(x, 80, 200, 40), "Back", 28))
         my_spaceship->commandMainScreenSetting(MSS_Back);
-    if (button(sf::FloatRect(getWindowSize().x - 200, 120, 200, 40), "Left", 28))
+    if (button(sf::FloatRect(x, 120, 200, 40), "Left", 28))
         my_spaceship->commandMainScreenSetting(MSS_Left);
-    if (button(sf::FloatRect(getWindowSize().x - 200, 160, 200, 40), "Right", 28))
+    if (button(sf::FloatRect(x, 160, 200, 40), "Right", 28))
         my_spaceship->commandMainScreenSetting(MSS_Right);
-    if (button(sf::FloatRect(getWindowSize().x - 200, 200, 200, 40), "Tactical", 28))
+    if (button(sf::FloatRect(x, 200, 200, 40), "Tactical", 28))
         my_spaceship->commandMainScreenSetting(MSS_Tactical);
-    if (button(sf::FloatRect(getWindowSize().x - 200, 240, 200, 40), "Long-Range", 28))
+    if (button(sf::FloatRect(x, 240, 200, 40), "Long-Range", 28))
         my_spaceship->commandMainScreenSetting(MSS_LongRange);
+}
+
+void MainUIBase::selfDestructGUI()
+{
+    int entry_position = -1;
+    int show_position = -1;
+    for(int n=0; n<PlayerSpaceship::max_self_destruct_codes; n++)
+    {
+        if (my_player_info->crew_active_position == my_spaceship->self_destruct_code_entry_position[n])
+            entry_position = n;
+        if (my_player_info->crew_active_position == my_spaceship->self_destruct_code_show_position[n])
+            show_position = n;
+    }
+    
+    float y = 40;
+    if (entry_position > -1)
+    {
+        if (my_spaceship->self_destruct_code_confirmed[entry_position])
+        {
+            float x = getWindowSize().x - 200;
+            boxWithBackground(sf::FloatRect(x, y, 200, 80));
+            y += 10;
+            text(sf::FloatRect(x, y, 200, 25), "SELF DESTRUCT", AlignCenter, 20);
+            x += 25;
+            y += 30;
+            text(sf::FloatRect(x, y, 150, 25), "Code: " + string(char('A' + entry_position)) + " confirmed", AlignCenter, 20);
+            y += 20;
+        }else{
+            float x = getWindowSize().x - 200;
+            boxWithBackground(sf::FloatRect(x, y, 200, 340));
+            y += 10;
+            text(sf::FloatRect(x, y, 200, 25), "SELF DESTRUCT", AlignCenter, 20);
+            y += 25;
+            box(sf::FloatRect(x, y, 200, 50));
+            x += 25;
+            text(sf::FloatRect(x, y, 150, 50), self_destruct_input + "_", AlignLeft, 20);
+            y += 50;
+            text(sf::FloatRect(x, y, 150, 25), "Enter code: " + string(char('A' + entry_position)), AlignCenter, 20);
+            y += 25;
+            
+            if (button(sf::FloatRect(x, y, 50, 50), "1", 30))
+                self_destruct_input += "1";
+            if (button(sf::FloatRect(x+50, y, 50, 50), "2", 30))
+                self_destruct_input += "2";
+            if (button(sf::FloatRect(x+100, y, 50, 50), "3", 30))
+                self_destruct_input += "3";
+            y += 50;
+            if (button(sf::FloatRect(x, y, 50, 50), "4", 30))
+                self_destruct_input += "4";
+            if (button(sf::FloatRect(x+50, y, 50, 50), "5", 30))
+                self_destruct_input += "5";
+            if (button(sf::FloatRect(x+100, y, 50, 50), "6", 30))
+                self_destruct_input += "6";
+            y += 50;
+            if (button(sf::FloatRect(x, y, 50, 50), "7", 30))
+                self_destruct_input += "7";
+            if (button(sf::FloatRect(x+50, y, 50, 50), "8", 30))
+                self_destruct_input += "8";
+            if (button(sf::FloatRect(x+100, y, 50, 50), "9", 30))
+                self_destruct_input += "9";
+            y += 50;
+            if (button(sf::FloatRect(x, y, 50, 50), "Clr", 20))
+                self_destruct_input = "";
+            if (button(sf::FloatRect(x+50, y, 50, 50), "0", 30))
+                self_destruct_input += "0";
+            if (button(sf::FloatRect(x+100, y, 50, 50), "OK", 20))
+            {
+                my_spaceship->commandConfirmDestructCode(entry_position, self_destruct_input.toInt());
+                self_destruct_input = "";
+            }
+            y += 60;
+        }
+        y += 25;
+    }
+    if (show_position > -1)
+    {
+        float x = getWindowSize().x - 200;
+        boxWithBackground(sf::FloatRect(x, y, 200, 80));
+        y += 10;
+        text(sf::FloatRect(x, y, 200, 25), "SELF DESTRUCT", AlignCenter, 20);
+        x += 25;
+        y += 30;
+        text(sf::FloatRect(x, y, 150, 25), "Code " + string(char('A' + show_position)) + ": " + string(my_spaceship->self_destruct_code[show_position]), AlignCenter, 20);
+        y += 20;
+    }
 }
 
 void MainUIBase::drawStatic(float alpha)

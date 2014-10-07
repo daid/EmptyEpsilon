@@ -37,6 +37,9 @@ static const int16_t CMD_SET_BEAM_FREQUENCY = 0x0018;
 static const int16_t CMD_SET_SHIELD_FREQUENCY = 0x0019;
 static const int16_t CMD_ADD_WAYPOINT = 0x001A;
 static const int16_t CMD_REMOVE_WAYPOINT = 0x001B;
+static const int16_t CMD_ACTIVATE_SELF_DESTRUCT = 0x001C;
+static const int16_t CMD_CANCEL_SELF_DESTRUCT = 0x001D;
+static const int16_t CMD_CONFIRM_SELF_DESTRUCT = 0x001E;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -54,6 +57,7 @@ PlayerSpaceship::PlayerSpaceship()
     comms_reply_count = 0;
     shield_calibration_delay = 0.0;
     auto_repair_enabled = false;
+    activate_self_destruct = false;
 
     updateMemberReplicationUpdateDelay(&targetRotation, 0.1);
     registerMemberReplication(&hull_damage_indicator, 0.5);
@@ -78,6 +82,18 @@ PlayerSpaceship::PlayerSpaceship()
     for (int n=0; n<max_comms_reply_count; n++)
         registerMemberReplication(&comms_reply[n].message);
     registerMemberReplication(&waypoints);
+    registerMemberReplication(&activate_self_destruct);
+    for(int n=0; n<max_self_destruct_codes; n++)
+    {
+        self_destruct_code[n] = 0;
+        self_destruct_code_confirmed[n] = false;
+        self_destruct_code_entry_position[n] = helmsOfficer;
+        self_destruct_code_show_position[n] = helmsOfficer;
+        registerMemberReplication(&self_destruct_code[n]);
+        registerMemberReplication(&self_destruct_code_confirmed[n]);
+        registerMemberReplication(&self_destruct_code_entry_position[n]);
+        registerMemberReplication(&self_destruct_code_show_position[n]);
+    }
 
     for(int n=0; n<SYS_COUNT; n++)
     {
@@ -254,6 +270,28 @@ void PlayerSpaceship::update(float delta)
             }
         }else{
             scanning_delay = 0.0;
+        }
+
+        if (activate_self_destruct)
+        {
+            bool do_self_destruct = true;
+            for(int n=0; n<max_self_destruct_codes; n++)
+                if (!self_destruct_code_confirmed[n])
+                    do_self_destruct = false;
+            if (do_self_destruct)
+            {
+                for(int n=0; n<5; n++)
+                {
+                    ExplosionEffect* e = new ExplosionEffect();
+                    e->setSize(1000.0f);
+                    e->setPosition(getPosition() + sf::rotateVector(sf::Vector2f(0, random(0, 500)), random(0, 360)));
+                }
+
+                SpaceObject::damageArea(getPosition(), 1500, 100, 200, DT_Kinetic, 0.0);
+
+                destroy();
+                return;
+            }
         }
     }else{
         //Client side
@@ -580,6 +618,44 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t clientId, sf::Packet& packe
                 waypoints.erase(waypoints.begin() + index);
         }
         break;
+    case CMD_ACTIVATE_SELF_DESTRUCT:
+        activate_self_destruct = true;
+        for(int n=0; n<max_self_destruct_codes; n++)
+        {
+            self_destruct_code[n] = irandom(0, 999999);
+            self_destruct_code_confirmed[n] = false;
+            self_destruct_code_entry_position[n] = max_crew_positions;
+            while(self_destruct_code_entry_position[n] == max_crew_positions)
+            {
+                self_destruct_code_entry_position[n] = ECrewPosition(irandom(0, commsOfficer));
+                for(int i=0; i<n; i++)
+                    if (self_destruct_code_entry_position[n] == self_destruct_code_entry_position[i])
+                        self_destruct_code_entry_position[n] = max_crew_positions;
+            }
+            self_destruct_code_show_position[n] = max_crew_positions;
+            while(self_destruct_code_show_position[n] == max_crew_positions)
+            {
+                self_destruct_code_show_position[n] = ECrewPosition(irandom(0, commsOfficer));
+                if (self_destruct_code_show_position[n] == self_destruct_code_entry_position[n])
+                    self_destruct_code_show_position[n] = max_crew_positions;
+                for(int i=0; i<n; i++)
+                    if (self_destruct_code_show_position[n] == self_destruct_code_show_position[i])
+                        self_destruct_code_show_position[n] = max_crew_positions;
+            }
+        }
+        break;
+    case CMD_CANCEL_SELF_DESTRUCT:
+        activate_self_destruct = false;
+        break;
+    case CMD_CONFIRM_SELF_DESTRUCT:
+        {
+            int8_t index;
+            uint32_t code;
+            packet >> index >> code;
+            if (index >= 0 && index < max_self_destruct_codes && self_destruct_code[index] == code)
+                self_destruct_code_confirmed[index] = true;
+        }
+        break;
     }
 }
 
@@ -768,5 +844,26 @@ void PlayerSpaceship::commandRemoveWaypoint(int32_t index)
 {
     sf::Packet packet;
     packet << CMD_REMOVE_WAYPOINT << index;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandActivateSelfDestruct()
+{
+    sf::Packet packet;
+    packet << CMD_ACTIVATE_SELF_DESTRUCT;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandCancelSelfDestruct()
+{
+    sf::Packet packet;
+    packet << CMD_CANCEL_SELF_DESTRUCT;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandConfirmDestructCode(int8_t index, uint32_t code)
+{
+    sf::Packet packet;
+    packet << CMD_CONFIRM_SELF_DESTRUCT << index << code;
     sendClientCommand(packet);
 }

@@ -275,6 +275,12 @@ void GUI::box(sf::FloatRect rect)
     draw9Cut(rect, "border_background");
 }
 
+void GUI::boxWithBackground(sf::FloatRect rect)
+{
+    draw9Cut(rect, "button_background", sf::Color::Black);
+    draw9Cut(rect, "border_background");
+}
+
 void GUI::textbox(sf::FloatRect rect, string text, EAlign align, float textSize, sf::Color color)
 {
     {

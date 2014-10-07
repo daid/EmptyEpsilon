@@ -16,6 +16,7 @@ class MainUIBase : public GUI, public Updatable
 public:
     float scan_angle;
     std::vector<ScanGhost> scan_ghost;
+    string self_destruct_input;
 
     MainUIBase();
 
@@ -23,6 +24,7 @@ public:
     virtual void update(float delta);
     
     void mainScreenSelectGUI();
+    void selfDestructGUI();
     void drawStatic(float alpha=1.0);
     void drawRaderBackground(sf::Vector2f view_position, sf::Vector2f position, float size, float range, sf::FloatRect rect = sf::FloatRect(0, 0, getWindowSize().x, 900));
     void drawHeadingCircle(sf::Vector2f position, float size, sf::FloatRect rect = sf::FloatRect(0, 0, getWindowSize().x, 900));

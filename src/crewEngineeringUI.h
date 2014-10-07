@@ -5,12 +5,12 @@
 
 class CrewEngineeringUI : public CrewUI
 {
-public:
     P<RepairCrew> selected_crew;
+    bool self_destruct_open;
     
     ESystem selected_system;
     int shield_new_frequency;
-    
+public:
     CrewEngineeringUI();
     
     virtual void onCrewUI();
