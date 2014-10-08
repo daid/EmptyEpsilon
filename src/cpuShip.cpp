@@ -11,6 +11,7 @@ REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderDefendTarget);
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyFormation);
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyTowards);
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyTowardsBlind);
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderAttack);
 }
 
@@ -332,6 +333,12 @@ void CpuShip::orderFlyFormation(P<SpaceObject> object, sf::Vector2f offset)
 }
 
 void CpuShip::orderFlyTowards(sf::Vector2f target)
+{
+    orders = AI_FlyTowards;
+    order_target_location = target;
+}
+
+void CpuShip::orderFlyTowardsBlind(sf::Vector2f target)
 {
     orders = AI_FlyTowards;
     order_target_location = target;

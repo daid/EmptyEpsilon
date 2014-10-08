@@ -36,6 +36,7 @@ public:
     void orderDefendTarget(P<SpaceObject> object);
     void orderFlyFormation(P<SpaceObject> object, sf::Vector2f offset);
     void orderFlyTowards(sf::Vector2f target);
+    void orderFlyTowardsBlind(sf::Vector2f target);
     void orderAttack(P<SpaceObject> object);
     
     EAIOrder getOrder() { return orders; }

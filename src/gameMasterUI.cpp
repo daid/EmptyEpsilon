@@ -21,14 +21,14 @@ void GameMasterUI::onGui()
         sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
 
         P<SpaceObject> target;
-        sf::Vector2f mousePosition = view_position + diff / 400.0f * view_distance;
-        PVector<Collisionable> list = CollisionManager::queryArea(mousePosition - sf::Vector2f(0.1 * view_distance, 0.1 * view_distance), mousePosition + sf::Vector2f(0.1 * view_distance, 0.1 * view_distance));
+        sf::Vector2f mouse_world_position = view_position + diff / 400.0f * view_distance;
+        PVector<Collisionable> list = CollisionManager::queryArea(mouse_world_position - sf::Vector2f(0.1 * view_distance, 0.1 * view_distance), mouse_world_position + sf::Vector2f(0.1 * view_distance, 0.1 * view_distance));
         foreach(Collisionable, obj, list)
         {
             P<SpaceObject> spaceObject = obj;
             if (spaceObject)
             {
-                if (!target || sf::length(mousePosition - spaceObject->getPosition()) < sf::length(mousePosition - target->getPosition()))
+                if (!target || sf::length(mouse_world_position - spaceObject->getPosition()) < sf::length(mouse_world_position - target->getPosition()))
                     target = spaceObject;
             }
         }
@@ -37,10 +37,42 @@ void GameMasterUI::onGui()
     if (selection && allow_object_drag && InputHandler::mouseIsDown(sf::Mouse::Left) && mouse.x > 300)
     {
         sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
-        sf::Vector2f mousePosition = view_position + diff / 400.0f * view_distance;
+        sf::Vector2f mouse_world_position = view_position + diff / 400.0f * view_distance;
         if (sf::length(mouse - mouse_down_pos) > 5.0f)
         {
-            selection->setPosition(mousePosition);
+            selection->setPosition(mouse_world_position);
+        }
+    }
+    if (selection && InputHandler::mouseIsReleased(sf::Mouse::Right) && mouse.x > 300)
+    {
+        P<CpuShip> cpuShip = selection;
+        if (selection)
+        {
+            sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
+
+            P<SpaceObject> target;
+            sf::Vector2f mouse_world_position = view_position + diff / 400.0f * view_distance;
+            PVector<Collisionable> list = CollisionManager::queryArea(mouse_world_position - sf::Vector2f(0.1 * view_distance, 0.1 * view_distance), mouse_world_position + sf::Vector2f(0.1 * view_distance, 0.1 * view_distance));
+            foreach(Collisionable, obj, list)
+            {
+                P<SpaceObject> spaceObject = obj;
+                if (spaceObject)
+                {
+                    if (!target || sf::length(mouse_world_position - spaceObject->getPosition()) < sf::length(mouse_world_position - target->getPosition()))
+                        target = spaceObject;
+                }
+            }
+            if (target && target->canBeTargeted())
+            {
+                if (selection->isEnemy(target))
+                {
+                    cpuShip->orderAttack(target);
+                }else{
+                    cpuShip->orderDefendTarget(target);
+                }
+            }else{
+                cpuShip->orderFlyTowardsBlind(mouse_world_position);
+            }
         }
     }
 
