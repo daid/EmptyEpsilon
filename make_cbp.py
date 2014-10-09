@@ -68,7 +68,7 @@ def compile(filename, system, for_target='Release'):
 		shutil.copytree('packs', resources_dir + '/packs')
 	CC = 'gcc'
 	CXX = 'g++'
-	BUILD_DIR = '_build'
+	BUILD_DIR = '_build_' + system + '_' + for_target
 	CFLAGS = '-O3'
 	LDFLAGS = ''
 	
