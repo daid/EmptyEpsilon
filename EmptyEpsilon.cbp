@@ -15,7 +15,7 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DDEBUG" />
-					<Add directory="../../SFML-2.1/include" />
+					<Add directory="../SFML-2.1/include" />
 				</Compiler>
 				<Linker>
 					<Add library="sfml-window-d" />
@@ -28,7 +28,7 @@
 					<Add library="glu32" />
 					<Add library="iphlpapi" />
 					<Add library="wsock32" />
-					<Add directory="../../SFML-2.1/lib" />
+					<Add directory="../SFML-2.1/lib" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -39,6 +39,7 @@
 				<Option parameters="fullscreen=1 screen43=1 touchscreen=0" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="../SFML-2.1/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -52,6 +53,7 @@
 					<Add library="glu32" />
 					<Add library="iphlpapi" />
 					<Add library="wsock32" />
+					<Add directory="../SFML-2.1/lib" />
 				</Linker>
 			</Target>
 			<Target title="Linux Debug">
@@ -113,11 +115,9 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="../SFML-2.1/include" />
 			<Add directory="../SeriousProton/src" />
 		</Compiler>
 		<Linker>
-			<Add directory="../SFML-2.1/lib" />
 		</Linker>
 		<Unit filename="../SeriousProton/src/Box2D/Box2D.h" />
 		<Unit filename="../SeriousProton/src/Box2D/Collision/Shapes/b2ChainShape.cpp" />

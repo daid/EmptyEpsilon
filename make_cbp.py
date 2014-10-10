@@ -2,6 +2,7 @@ import sys
 import os
 import platform
 import shutil
+import datetime
 try:
 	from xml.etree import cElementTree as ElementTree
 except:
@@ -68,8 +69,9 @@ def compile(filename, system, for_target='Release'):
 		shutil.copytree('packs', resources_dir + '/packs')
 	CC = 'gcc'
 	CXX = 'g++'
-	BUILD_DIR = '_build_' + system + '_' + for_target
-	CFLAGS = '-O3'
+	BUILD_DIR = '_build_' + system + '_' + for_target.replace(' ', '_')
+	CFLAGS = ''
+#	CFLAGS += '-DVERSION_NUMBER=%04d%02d%02d' % (datetime.date.today().year, datetime.date.today().month, datetime.date.today().day)
 	LDFLAGS = ''
 	
 	if system == "Windows" and platform.system() != "Windows":
