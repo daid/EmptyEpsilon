@@ -1,4 +1,5 @@
 #include "blackHole.h"
+#include "pathPlanner.h"
 
 #include "scriptInterface.h"
 REGISTER_SCRIPT_SUBCLASS(BlackHole, SpaceObject)
@@ -10,6 +11,7 @@ BlackHole::BlackHole()
 : SpaceObject(5000, "BlackHole")
 {
     update_delta = 0.0;
+    PathPlanner::addAvoidObject(this, 7000);
 }
 
 void BlackHole::update(float delta)

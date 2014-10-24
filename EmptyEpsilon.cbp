@@ -452,6 +452,8 @@
 		<Unit filename="src/packResourceProvider.h" />
 		<Unit filename="src/particleEffect.cpp" />
 		<Unit filename="src/particleEffect.h" />
+		<Unit filename="src/pathPlanner.cpp" />
+		<Unit filename="src/pathPlanner.h" />
 		<Unit filename="src/playerInfo.cpp" />
 		<Unit filename="src/playerInfo.h" />
 		<Unit filename="src/playerSpaceship.cpp" />

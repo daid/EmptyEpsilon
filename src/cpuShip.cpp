@@ -1,5 +1,6 @@
 #include "cpuShip.h"
 #include "playerInfo.h"
+#include "pathPlanner.h"
 
 #include "scriptInterface.h"
 REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceShip)
@@ -225,6 +226,8 @@ void CpuShip::update(float delta)
             if (order_target)
             {
                 sf::Vector2f target_position = order_target->getPosition();
+                pathPlanner.plan(getPosition(), target_position);
+                target_position = pathPlanner.route[0];
                 target_position += sf::vector2FromAngle(sf::vector2ToAngle(target_position - getPosition()) + 170.0f) * 1500.0f;
                 targetRotation = sf::vector2ToAngle(target_position - getPosition());
                 impulseRequest = 1.0;

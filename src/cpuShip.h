@@ -1,6 +1,7 @@
 #ifndef CPU_SHIP_H
 #define CPU_SHIP_H
 
+#include "pathPlanner.h"
 #include "spaceship.h"
 
 enum EAIOrder
@@ -22,6 +23,8 @@ class CpuShip : public SpaceShip
     sf::Vector2f order_target_location; //Server only
     P<SpaceObject> order_target;        //Server only
     float missile_fire_delay;
+    
+    PathPlanner pathPlanner;
 public:
     CpuShip();
     
@@ -40,6 +43,8 @@ public:
     void orderAttack(P<SpaceObject> object);
     
     EAIOrder getOrder() { return orders; }
+    
+    friend class GameMasterUI;
 };
 string getAIOrderString(EAIOrder order);
 

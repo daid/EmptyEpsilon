@@ -2,6 +2,7 @@
 #include "factionInfo.h"
 #include "cpuShip.h"
 #include "spaceStation.h"
+#include "blackHole.h"
 
 GameMasterUI::GameMasterUI()
 {
@@ -14,14 +15,13 @@ void GameMasterUI::onGui()
 {
     sf::RenderTarget& window = *getRenderTarget();
     sf::Vector2f mouse = InputHandler::getMousePos();
+    sf::Vector2f mouse_world_position = view_position + (mouse - sf::Vector2f(800, 450)) / 400.0f * view_distance;
 
     if (InputHandler::mouseIsPressed(sf::Mouse::Left) && mouse.x > 300)
     {
         mouse_down_pos = mouse;
-        sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
 
         P<SpaceObject> target;
-        sf::Vector2f mouse_world_position = view_position + diff / 400.0f * view_distance;
         PVector<Collisionable> list = CollisionManager::queryArea(mouse_world_position - sf::Vector2f(0.1 * view_distance, 0.1 * view_distance), mouse_world_position + sf::Vector2f(0.1 * view_distance, 0.1 * view_distance));
         foreach(Collisionable, obj, list)
         {
@@ -36,8 +36,6 @@ void GameMasterUI::onGui()
     }
     if (selection && allow_object_drag && InputHandler::mouseIsDown(sf::Mouse::Left) && mouse.x > 300)
     {
-        sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
-        sf::Vector2f mouse_world_position = view_position + diff / 400.0f * view_distance;
         if (sf::length(mouse - mouse_down_pos) > 5.0f)
         {
             selection->setPosition(mouse_world_position);
@@ -48,10 +46,8 @@ void GameMasterUI::onGui()
         P<CpuShip> cpuShip = selection;
         if (selection)
         {
-            sf::Vector2f diff = mouse - sf::Vector2f(800, 450);
 
             P<SpaceObject> target;
-            sf::Vector2f mouse_world_position = view_position + diff / 400.0f * view_distance;
             PVector<Collisionable> list = CollisionManager::queryArea(mouse_world_position - sf::Vector2f(0.1 * view_distance, 0.1 * view_distance), mouse_world_position + sf::Vector2f(0.1 * view_distance, 0.1 * view_distance));
             foreach(Collisionable, obj, list)
             {
@@ -103,6 +99,15 @@ void GameMasterUI::onGui()
                 a[0].color = a[1].color = sf::Color(255, 255, 255, 32);
                 window.draw(a);
             }
+            sf::VertexArray a(sf::LinesStrip, cpuShip->pathPlanner.route.size() + 1);
+            a[0].position = sf::Vector2f(800, 450) + (cpuShip->getPosition() - view_position) / view_distance * 400.0f;
+            a[0].color = sf::Color(255, 255, 255, 32);
+            for(unsigned int n=0; n<cpuShip->pathPlanner.route.size(); n++)
+            {
+                a[n+1].position = sf::Vector2f(800, 450) + (cpuShip->pathPlanner.route[n] - view_position) / view_distance * 400.0f;
+                a[n+1].color = sf::Color(255, 255, 255, 32);
+            }
+            window.draw(a);
         }
     }
     sf::RectangleShape sidebackBackground(sf::Vector2f(300, 900));
@@ -199,6 +204,12 @@ void GameMasterUI::onGui()
             selection->setRotation(random(0, 360));
             selection->setPosition(view_position + sf::vector2FromAngle(random(0, 360)) * random(0, view_distance * 0.1));
         }
+        if (button(sf::FloatRect(20, 130, 250, 30), "BlackHole", 20))
+        {
+            selection = new BlackHole();
+            selection->setPosition(view_position + sf::vector2FromAngle(random(0, 360)) * random(0, view_distance * 0.1));
+        }
+        
         std::vector<string> template_names = ShipTemplate::getTemplateNameList();
         std::sort(template_names.begin(), template_names.end());
         for(unsigned int n=0; n<template_names.size(); n++)
