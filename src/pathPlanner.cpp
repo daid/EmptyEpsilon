@@ -1,12 +1,40 @@
 #include "pathPlanner.h"
 
-std::list<PathPlanner::PathPlannerAvoidObject> PathPlanner::big_objects;
+P<PathPlannerManager> PathPlannerManager::instance;
+
+void PathPlannerManager::addAvoidObject(P<SpaceObject> source, float size)
+{
+    big_objects.push_back(PathPlannerAvoidObject(source, size));
+}
+
+void PathPlannerManager::update(float delta)
+{
+    for(std::list<PathPlannerManager::PathPlannerAvoidObject>::iterator i = big_objects.begin(); i != big_objects.end(); )
+    {
+        if (i->source)
+        {
+            i++;
+        }else{
+            i = big_objects.erase(i);
+        }
+    }
+}
+
+PathPlanner::PathPlanner()
+{
+    manager = PathPlannerManager::getInstance();
+}
 
 void PathPlanner::plan(sf::Vector2f start, sf::Vector2f end)
 {
     route.clear();
     recursivePlan(start, end);
     route.push_back(end);
+}
+
+void PathPlanner::clear()
+{
+    route.clear();
 }
 
 void PathPlanner::recursivePlan(sf::Vector2f start, sf::Vector2f end)
@@ -21,20 +49,17 @@ void PathPlanner::recursivePlan(sf::Vector2f start, sf::Vector2f end)
     }
 }
 
-void PathPlanner::addAvoidObject(P<SpaceObject> source, float size)
-{
-    big_objects.push_back(PathPlannerAvoidObject(source, size));
-}
-
 bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2f& new_point)
 {
     sf::Vector2f startEndDiff = end - start;
     float startEndLength = sf::length(startEndDiff);
+    if (startEndLength < 100.0)
+        return false;
     float firstAvoidF = startEndLength;
-    PathPlannerAvoidObject avoidObject(NULL, 0);
+    PathPlannerManager::PathPlannerAvoidObject avoidObject(NULL, 0);
     sf::Vector2f firstAvoidQ;
 
-    for(std::list<PathPlanner::PathPlannerAvoidObject>::iterator i = big_objects.begin(); i != big_objects.end(); )
+    for(std::list<PathPlannerManager::PathPlannerAvoidObject>::iterator i = manager->big_objects.begin(); i != manager->big_objects.end(); )
     {
         if (i->source)
         {
@@ -55,7 +80,7 @@ bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2
             }
             i++;
         }else{
-            i = big_objects.erase(i);
+            i = manager->big_objects.erase(i);
         }
     }
     if (firstAvoidF < startEndLength)

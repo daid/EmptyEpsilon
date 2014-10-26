@@ -11,7 +11,7 @@ BlackHole::BlackHole()
 : SpaceObject(5000, "BlackHole")
 {
     update_delta = 0.0;
-    PathPlanner::addAvoidObject(this, 7000);
+    PathPlannerManager::getInstance()->addAvoidObject(this, 7000);
 }
 
 void BlackHole::update(float delta)

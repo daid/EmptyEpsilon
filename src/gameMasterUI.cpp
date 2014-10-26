@@ -214,7 +214,7 @@ void GameMasterUI::onGui()
         std::sort(template_names.begin(), template_names.end());
         for(unsigned int n=0; n<template_names.size(); n++)
         {
-            if (button(sf::FloatRect(20, 150 + n * 30, 250, 30), template_names[n] + "(" + string(ShipTemplate::getTemplate(template_names[n])->frontShields) + ")", 20))
+            if (button(sf::FloatRect(20, 170 + n * 30, 250, 30), template_names[n] + "(" + string(ShipTemplate::getTemplate(template_names[n])->frontShields) + ")", 20))
             {
                 P<CpuShip> s = new CpuShip();
                 s->faction_id = current_faction;

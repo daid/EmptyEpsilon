@@ -139,33 +139,11 @@ void CpuShip::update(float delta)
         float distance = sf::length(position_diff);
         targetRotation = sf::vector2ToAngle(position_diff);
 
-        warpRequest = 0.0;
         if (orders == AI_StandGround)
         {
-            impulseRequest = 0.0f;
+            pathPlanner.clear();
         }else{
-            if (hasWarpdrive && fabs(sf::angleDifference(targetRotation, getRotation())) < 50.0)
-            {
-                if ((has_missiles && distance > 7000) || (!has_missiles && distance > 2000))
-                    warpRequest = 1.0;
-            }
-            if (distance > 10000 && hasJumpdrive && jumpDelay <= 0.0)
-            {
-                if (fabs(sf::angleDifference(targetRotation, getRotation())) < 1.0)
-                {
-                    float jump = distance - 3000;
-                    if (has_missiles)
-                        jump = distance - 8000;
-                    if (jump > 10000)
-                        jump = 10000;
-                    initJump(jump / 1000);
-                }
-            }
-
-            if (distance > attack_distance + impulseMaxSpeed)
-                impulseRequest = 1.0f;
-            else
-                impulseRequest = (distance - attack_distance) / impulseMaxSpeed;
+            pathPlanner.plan(getPosition(), target->getPosition());
         }
 
         if (distance < 4500 && has_missiles && fabs(sf::angleDifference(targetRotation, getRotation())) < 30.0)
@@ -184,7 +162,7 @@ void CpuShip::update(float delta)
         switch(orders)
         {
         case AI_Idle:            //Don't do anything, don't even attack.
-            impulseRequest = 0.0;
+            pathPlanner.clear();
             break;
         case AI_Roaming:         //Fly around and engage at will, without a clear target
             //Could mean 3 things
@@ -201,16 +179,14 @@ void CpuShip::update(float delta)
                     sf::Vector2f diff = order_target_location - getPosition();
                     if (sf::length(diff) < 1000.0)
                         order_target_location = sf::Vector2f(random(-30000, 30000), random(-30000, 30000));
-                    targetRotation = sf::vector2ToAngle(diff);
-                    impulseRequest = 1.0;
+                    pathPlanner.plan(getPosition(), order_target_location);
                 }
             }else{
-                impulseRequest = 0.0;
+                pathPlanner.clear();
             }
             break;
         case AI_StandGround:     //Keep current position, do not fly away, but attack nearby targets.
-            targetRotation = getRotation();
-            impulseRequest = 0;
+            pathPlanner.clear();
             break;
         case AI_FlyTowards:      //Fly towards [order_target_location], attacking enemies that get too close, but disengage and continue when enemy is too far.
         case AI_FlyTowardsBlind: //Fly towards [order_target_location], not attacking anything
@@ -218,19 +194,16 @@ void CpuShip::update(float delta)
             {
                 sf::Vector2f target_position = order_target_location;
                 target_position += sf::vector2FromAngle(sf::vector2ToAngle(target_position - getPosition()) + 170.0f) * 1500.0f;
-                targetRotation = sf::vector2ToAngle(target_position - getPosition());
+                pathPlanner.plan(getPosition(), target_position);
             }
-            impulseRequest = 1.0;
             break;
         case AI_DefendTarget:    //Defend against enemies getting close to [order_target] (falls back to AI_Roaming if the target is destroyed)
             if (order_target)
             {
                 sf::Vector2f target_position = order_target->getPosition();
-                pathPlanner.plan(getPosition(), target_position);
                 target_position = pathPlanner.route[0];
-                target_position += sf::vector2FromAngle(sf::vector2ToAngle(target_position - getPosition()) + 170.0f) * 1500.0f;
-                targetRotation = sf::vector2ToAngle(target_position - getPosition());
-                impulseRequest = 1.0;
+                target_position += sf::vector2FromAngle(sf::vector2ToAngle(target_position - getPosition()) + 170.0f) * (1500.0f + order_target->getRadius());
+                pathPlanner.plan(getPosition(), target_position);
             }else{
                 orders = AI_Roaming;    //We pretty much lost our defending target, so just start roaming.
             }
@@ -238,6 +211,7 @@ void CpuShip::update(float delta)
         case AI_FlyFormation:    //Fly [order_target_location] offset from [order_target]. Allows for nicely flying in formation.
             if (order_target)
             {
+                /*
                 sf::Vector2f target_position = order_target->getPosition() + sf::rotateVector(order_target_location, order_target->getRotation());
 
                 float r = getRadius() * 5.0;
@@ -262,15 +236,55 @@ void CpuShip::update(float delta)
                         impulseRequest = 0.0;
                     }
                 }
+                */
+                sf::Vector2f target_position = order_target->getPosition() + sf::rotateVector(order_target_location, order_target->getRotation());
+                pathPlanner.plan(getPosition(), target_position);
             }else{
                 orders = AI_Roaming;
             }
             break;
         case AI_Attack:          //Attack [order_target] very specificly.
-            targetRotation = getRotation();
-            impulseRequest = 0;
+            pathPlanner.clear();
             break;
         }
+    }
+    
+    if (pathPlanner.route.size() > 0)
+    {
+        sf::Vector2f diff = pathPlanner.route[0] - getPosition();
+        float distance = sf::length(diff);
+
+        targetRotation = sf::vector2ToAngle(diff);
+        
+        if (hasWarpdrive && fabs(sf::angleDifference(targetRotation, getRotation())) < 50.0)
+        {
+            if (distance > 2000)
+                warpRequest = 1.0;
+        }else{
+            warpRequest = 0.0;
+        }
+        if (distance > 10000 && hasJumpdrive && jumpDelay <= 0.0)
+        {
+            if (fabs(sf::angleDifference(targetRotation, getRotation())) < 1.0)
+            {
+                float jump = distance - 3000;
+                if (has_missiles)
+                    jump = distance - 8000;
+                if (jump > 10000)
+                    jump = 10000;
+                jump += random(-1500, 1500);
+                initJump(jump / 1000);
+            }
+        }
+
+        if (distance > 700 + impulseMaxSpeed)
+            impulseRequest = 1.0f;
+        else
+            impulseRequest = (distance - 700) / impulseMaxSpeed;
+    }else{
+        targetRotation = getRotation();
+        warpRequest = 0.0;
+        impulseRequest = 0.0f;
     }
 }
 
