@@ -31,6 +31,7 @@ public:
 class PathPlanner : public sf::NonCopyable
 {
 private:
+    unsigned int insert_idx, remove_idx, remove_idx2;
     PathPlannerManager* manager;
 public:
     PathPlanner();

@@ -27,9 +27,58 @@ PathPlanner::PathPlanner()
 
 void PathPlanner::plan(sf::Vector2f start, sf::Vector2f end)
 {
-    route.clear();
-    recursivePlan(start, end);
-    route.push_back(end);
+    if (route.size() == 0 || sf::length(route.back() - end) > 2000)
+    {
+        route.clear();
+        recursivePlan(start, end);
+        route.push_back(end);
+        
+        insert_idx = 0;
+        remove_idx = 1;
+        remove_idx2 = 1;
+    }else{
+        route.back() = end;
+        
+        sf::Vector2f p0 = start;
+        if (insert_idx < route.size())
+        {
+            if (insert_idx > 0)
+                p0 = route[insert_idx - 1];
+            sf::Vector2f p1 = route[insert_idx];
+            
+            sf::Vector2f new_point;
+            if (checkToAvoid(p0, p1, new_point))
+            {
+                route.insert(route.begin() + insert_idx, new_point);
+            }
+            insert_idx++;
+        }else if (remove_idx < route.size())
+        {
+            if (remove_idx > 1)
+                p0 = route[remove_idx - 2];
+            sf::Vector2f p1 = route[remove_idx];
+            if (!checkToAvoid(p0, p1, route[remove_idx-1]))
+            {
+                route.erase(route.begin() + remove_idx - 1);
+            }else{
+                remove_idx++;
+            }
+        }else if (remove_idx2 < route.size())
+        {
+            sf::Vector2f new_point;
+            sf::Vector2f p1 = route[remove_idx2];
+            if (!checkToAvoid(p0, p1, new_point))
+            {
+                route.erase(route.begin(), route.begin() + remove_idx2);
+            }else{
+                remove_idx2++;
+            }
+        }else{
+            insert_idx = 0;
+            remove_idx = 1;
+            remove_idx2 = 1;
+        }
+    }
 }
 
 void PathPlanner::clear()
