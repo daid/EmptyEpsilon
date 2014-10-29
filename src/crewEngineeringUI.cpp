@@ -60,21 +60,21 @@ void CrewEngineeringUI::onCrewUI()
     for(int n=0; n<SYS_COUNT; n++)
     {
         if (!my_spaceship->hasSystem(ESystem(n))) continue;
-        if (toggleButton(sf::FloatRect(50, y, 300, 50), ESystem(n) == selected_system, getSystemName(ESystem(n)), 30))
+        if (toggleButton(sf::FloatRect(20, y, 300, 50), ESystem(n) == selected_system, getSystemName(ESystem(n)), 30))
             selected_system = ESystem(n);
         
         float health = my_spaceship->systems[n].health;
-        progressBar(sf::FloatRect(350, y, 100, 50), health, 0.0, 1.0, sf::Color(64, 128 * health, 64 * health));
-        text(sf::FloatRect(350, y, 100, 50), string(int(health * 100)) + "%", AlignCenter, 20);
+        progressBar(sf::FloatRect(320, y, 100, 50), health, 0.0, 1.0, sf::Color(64, 128 * health, 64 * health));
+        text(sf::FloatRect(320, y, 100, 50), string(int(health * 100)) + "%", AlignCenter, 20);
         
         float heat = my_spaceship->systems[n].heat_level;
-        progressBar(sf::FloatRect(450, y, 50, 50), heat, 0.0, 1.0, sf::Color(128, 128 * (1.0 - heat), 0));
+        progressBar(sf::FloatRect(420, y, 50, 50), heat, 0.0, 1.0, sf::Color(128, 128 * (1.0 - heat), 0));
         float heating_diff = powf(1.7, my_spaceship->systems[n].power_level - 1.0) - (1.0 + my_spaceship->systems[n].coolant_level * 0.1);
         if (my_spaceship->systems[n].heat_level > 0.0 && fabs(heating_diff) > 0.0)
         {
             sf::Sprite arrow;
             textureManager.setTexture(arrow, "gui_arrow.png");
-            arrow.setPosition(450 + 25, y + 25);
+            arrow.setPosition(420 + 25, y + 25);
             float f = 50 / float(arrow.getTextureRect().height);
             arrow.setScale(f, f);
             if (heating_diff < 0)
@@ -85,32 +85,32 @@ void CrewEngineeringUI::onCrewUI()
             getRenderTarget()->draw(arrow);
         }
         float power = my_spaceship->systems[n].power_level;
-        progressBar(sf::FloatRect(500, y, 50, 50), power, 0.0, 3.0, sf::Color(192, 192, 0));
+        progressBar(sf::FloatRect(470, y, 50, 50), power, 0.0, 3.0, sf::Color(192, 192, 0));
         float coolant = my_spaceship->systems[n].coolant_level;
-        progressBar(sf::FloatRect(550, y, 50, 50), coolant, 0.0, 10.0, sf::Color(0, 128, 128));
+        progressBar(sf::FloatRect(520, y, 50, 50), coolant, 0.0, 10.0, sf::Color(0, 128, 128));
         
         y += 50;
     }
     
-    box(sf::FloatRect(600, 470, 270, 400));
+    box(sf::FloatRect(570, 470, 270, 400));
     if (my_spaceship->hasSystem(selected_system))
     {
-        vtext(sf::FloatRect(630, 490, 30, 360), "Power", AlignLeft);
-        float ret = vslider(sf::FloatRect(660, 490, 60, 360), my_spaceship->systems[selected_system].power_level, 3.0, 0.0, 1.0);
+        vtext(sf::FloatRect(600, 490, 30, 360), "Power", AlignLeft);
+        float ret = vslider(sf::FloatRect(630, 490, 60, 360), my_spaceship->systems[selected_system].power_level, 3.0, 0.0, 1.0);
         if (ret < 1.25 && ret > 0.75)
             ret = 1.0;
         if (my_spaceship->systems[selected_system].power_level != ret)
             my_spaceship->commandSetSystemPower(selected_system, ret);
 
-        vtext(sf::FloatRect(730, 490, 30, 360), "Coolant", AlignLeft);
-        ret = vslider(sf::FloatRect(760, 490, 60, 360), my_spaceship->systems[selected_system].coolant_level, 10.0, 0.0);
+        vtext(sf::FloatRect(700, 490, 30, 360), "Coolant", AlignLeft);
+        ret = vslider(sf::FloatRect(730, 490, 60, 360), my_spaceship->systems[selected_system].coolant_level, 10.0, 0.0);
         if (my_spaceship->systems[selected_system].coolant_level != ret)
             my_spaceship->commandSetSystemCoolant(selected_system, ret);
     }
 
     ///Shield frequency configuration
-    float x = getWindowSize().x - 320;
-    //box(sf::FloatRect(x, 470, 300, 400));
+    float x = getWindowSize().x - 330;
+    box(sf::FloatRect(x - 20, 470, 340, 400));
     text(sf::FloatRect(x, 470, 300, 50), "Shield Freq.", AlignCenter, 30);
     textbox(sf::FloatRect(x, 520, 300, 50), frequencyToString(my_spaceship->shield_frequency), AlignCenter, 30);
     
