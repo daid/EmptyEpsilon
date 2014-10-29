@@ -1,5 +1,6 @@
 #include "epsilonServer.h"
 #include "playerInfo.h"
+#include "gameGlobalInfo.h"
 #include "spaceObject.h"
 #include "spaceStation.h"
 #include "cpuShip.h"

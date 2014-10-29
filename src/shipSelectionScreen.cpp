@@ -2,6 +2,7 @@
 #include "epsilonServer.h"
 #include "main.h"
 #include "playerInfo.h"
+#include "gameGlobalInfo.h"
 #include "mainScreen.h"
 #include "crewUI.h"
 #include "gameMasterUI.h"

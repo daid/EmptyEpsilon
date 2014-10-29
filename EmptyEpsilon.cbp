@@ -117,8 +117,6 @@
 			<Add option="-Wall" />
 			<Add directory="../SeriousProton/src" />
 		</Compiler>
-		<Linker>
-		</Linker>
 		<Unit filename="../SeriousProton/src/Box2D/Box2D.h" />
 		<Unit filename="../SeriousProton/src/Box2D/Collision/Shapes/b2ChainShape.cpp" />
 		<Unit filename="../SeriousProton/src/Box2D/Collision/Shapes/b2ChainShape.h" />
@@ -426,6 +424,8 @@
 		<Unit filename="src/explosionEffect.h" />
 		<Unit filename="src/factionInfo.cpp" />
 		<Unit filename="src/factionInfo.h" />
+		<Unit filename="src/gameGlobalInfo.cpp" />
+		<Unit filename="src/gameGlobalInfo.h" />
 		<Unit filename="src/gameMasterUI.cpp" />
 		<Unit filename="src/gameMasterUI.h" />
 		<Unit filename="src/gui.cpp" />

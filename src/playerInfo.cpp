@@ -11,73 +11,9 @@ static const int16_t CMD_UPDATE_CREW_POSITION = 0x0001;
 static const int16_t CMD_UPDATE_SHIP_ID = 0x0002;
 static const int16_t CMD_UPDATE_MAIN_SCREEN_CONTROL = 0x0003;
 
-P<GameGlobalInfo> gameGlobalInfo;
 P<PlayerInfo> my_player_info;
 P<PlayerSpaceship> my_spaceship;
 PVector<PlayerInfo> playerInfoList;
-
-REGISTER_MULTIPLAYER_CLASS(GameGlobalInfo, "GameGlobalInfo")
-GameGlobalInfo::GameGlobalInfo()
-: MultiplayerObject("GameGlobalInfo")
-{
-    assert(!gameGlobalInfo);
-
-    victory_faction = -1;
-    gameGlobalInfo = this;
-    for(int n=0; n<maxPlayerShips; n++)
-    {
-        playerShipId[n] = -1;
-        registerMemberReplication(&playerShipId[n]);
-    }
-    for(int n=0; n<maxNebula; n++)
-    {
-        nebulaInfo[n].vector = sf::Vector3f(random(-1, 1), random(-1, 1), random(-1, 1));
-        nebulaInfo[n].textureName = "Nebula" + string(irandom(1, 3));
-        registerMemberReplication(&nebulaInfo[n].vector);
-        registerMemberReplication(&nebulaInfo[n].textureName);
-    }
-    registerMemberReplication(&victory_faction);
-}
-
-P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)
-{
-    assert(index >= 0 && index < maxPlayerShips);
-    if (game_server)
-        return game_server->getObjectById(playerShipId[index]);
-    return game_client->getObjectById(playerShipId[index]);
-}
-
-void GameGlobalInfo::setPlayerShip(int index, P<PlayerSpaceship> ship)
-{
-    assert(index >= 0 && index < maxPlayerShips);
-    assert(game_server);
-
-    if (ship)
-        playerShipId[index] = ship->getMultiplayerId();
-    else
-        playerShipId[index] = -1;
-}
-
-int GameGlobalInfo::findPlayerShip(P<PlayerSpaceship> ship)
-{
-    for(int n=0; n<maxPlayerShips; n++)
-        if (getPlayerShip(n) == ship)
-            return n;
-    return -1;
-}
-int GameGlobalInfo::insertPlayerShip(P<PlayerSpaceship> ship)
-{
-    for(int n=0; n<maxPlayerShips; n++)
-    {
-        if (!getPlayerShip(n))
-        {
-            setPlayerShip(n, ship);
-            return n;
-        }
-    }
-    return -1;
-}
-
 
 REGISTER_MULTIPLAYER_CLASS(PlayerInfo, "PlayerInfo");
 PlayerInfo::PlayerInfo()

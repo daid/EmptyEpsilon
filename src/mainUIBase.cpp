@@ -8,6 +8,7 @@
 #include "factionInfo.h"
 #include "shipSelectionScreen.h"
 #include "repairCrew.h"
+#include "gameGlobalInfo.h"
 
 MainUIBase::MainUIBase()
 {

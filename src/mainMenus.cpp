@@ -5,6 +5,7 @@
 #include "mainScreen.h"
 #include "epsilonServer.h"
 #include "playerInfo.h"
+#include "gameGlobalInfo.h"
 #include "spaceship.h"
 #include "shipSelectionScreen.h"
 
