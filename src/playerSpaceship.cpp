@@ -312,6 +312,8 @@ void PlayerSpaceship::executeJump(float distance)
     if (useEnergy(distance * energy_per_jump_km) && systems[SYS_JumpDrive].health > 0.0)
     {
         warp_indicator = 2.0;
+        float f = systems[SYS_JumpDrive].health;
+        distance = (distance * f) + (distance * (1.0 - f) * random(0.5, 1.5));
         SpaceShip::executeJump(distance);
     }
 }
