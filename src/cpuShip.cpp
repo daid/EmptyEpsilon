@@ -266,9 +266,13 @@ void CpuShip::update(float delta)
         {
             if (fabs(sf::angleDifference(targetRotation, getRotation())) < 1.0)
             {
-                float jump = distance - 3000;
-                if (has_missiles)
-                    jump = distance - 8000;
+                float jump = distance;
+                if (pathPlanner.route.size() < 2)
+                {
+                    jump -= 3000;
+                    if (has_missiles)
+                        jump -= 5000;
+                }
                 if (jump > 10000)
                     jump = 10000;
                 jump += random(-1500, 1500);
