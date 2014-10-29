@@ -114,9 +114,9 @@ bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2
         {
             sf::Vector2f position = i->source->getPosition();
             float f = sf::dot(startEndDiff, position - start) / startEndLength;
-            if (f > 0 && f < startEndLength)
+            if (f > 0 && f < startEndLength - i->size)
             {
-                sf::Vector2f q = start + (end - start) / startEndLength * f;
+                sf::Vector2f q = start + startEndDiff / startEndLength * f;
                 if ((q - position) < i->size)
                 {
                     if (f < firstAvoidF)

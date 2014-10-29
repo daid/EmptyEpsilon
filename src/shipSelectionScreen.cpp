@@ -258,7 +258,8 @@ void ShipSelectionScreen::onGui()
 int lua_victory(lua_State* L)
 {
     gameGlobalInfo->setVictory(luaL_checkstring(L, 1));
-    engine->getObject("scenario")->destroy();
+    if (engine->getObject("scenario"))
+        engine->getObject("scenario")->destroy();
     engine->setGameSpeed(0.0);
     return 0;
 }

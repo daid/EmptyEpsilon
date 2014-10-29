@@ -22,7 +22,7 @@ public:
 
     void addAvoidObject(P<SpaceObject> source, float size);
     
-    static PathPlannerManager* getInstance() { if (!instance) instance = new PathPlannerManager(); return *instance; }
+    static P<PathPlannerManager> getInstance() { if (!instance) instance = new PathPlannerManager(); return *instance; }
     
     friend class PathPlanner;
 };
@@ -32,7 +32,7 @@ class PathPlanner : public sf::NonCopyable
 {
 private:
     unsigned int insert_idx, remove_idx, remove_idx2;
-    PathPlannerManager* manager;
+    P<PathPlannerManager> manager;
 public:
     PathPlanner();
     

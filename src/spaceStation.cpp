@@ -7,6 +7,7 @@
 #include "mesh.h"
 #include "explosionEffect.h"
 #include "main.h"
+#include "pathPlanner.h"
 
 #include "scriptInterface.h"
 REGISTER_SCRIPT_SUBCLASS(SpaceStation, SpaceObject)
@@ -33,6 +34,8 @@ SpaceStation::SpaceStation()
     comms_script_name = "comms_station.lua";
     
     setTemplate("Small Station");
+    
+    PathPlannerManager::getInstance()->addAvoidObject(this, getRadius());
 }
 
 void SpaceStation::draw3D()
