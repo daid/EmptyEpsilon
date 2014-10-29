@@ -4,6 +4,10 @@ function mainMenu()
 	end
 
 	if player:isFriendly(comms_target) then
+		if comms_target:areEnemiesInRange(5000) then
+			setCommsMessage("We are under attack! No time for chatting!");
+			return true
+		end
 		if not player:isDocked() then
 			setCommsMessage("Good day officer,\nIf you need supplies please dock with us first.");
 			addCommsReply("Can you send a supply drop?", function()

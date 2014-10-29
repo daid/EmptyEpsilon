@@ -48,6 +48,7 @@ public:
     void setFactionId(unsigned int faction_id) { this->faction_id = faction_id; }
     unsigned int getFactionId() { return faction_id; }
     void setCommsScript(string script_name) { this->comms_script_name = script_name; }
+    bool areEnemiesInRange(float range);
 };
 
 #endif//SPACE_OBJECT_H

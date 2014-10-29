@@ -16,6 +16,7 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isEnemy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isFriendly);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getCallSign);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, areEnemiesInRange);
 }
 
 PVector<SpaceObject> space_object_list;
@@ -65,4 +66,22 @@ void SpaceObject::damageArea(sf::Vector2f position, float blast_range, float min
             }
         }
     }
+}
+
+bool SpaceObject::areEnemiesInRange(float range)
+{
+    PVector<Collisionable> hitList = CollisionManager::queryArea(getPosition() - sf::Vector2f(range, range), getPosition() + sf::Vector2f(range, range));
+    foreach(Collisionable, c, hitList)
+    {
+        P<SpaceObject> obj = c;
+        if (obj && isEnemy(obj))
+        {
+            float dist = sf::length(getPosition() - obj->getPosition()) - obj->getRadius();
+            if (dist < range)
+            {
+                return true;
+            }
+        }
+    }
+    return false;
 }
