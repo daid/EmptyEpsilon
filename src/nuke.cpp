@@ -19,7 +19,7 @@ void Nuke::draw3DTransparent()
 {
 }
 
-void Nuke::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Nuke::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
     if (long_range) return;
 

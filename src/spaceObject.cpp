@@ -36,7 +36,7 @@ void SpaceObject::draw3D()
 {
 }
 
-void SpaceObject::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange)
+void SpaceObject::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange)
 {
 }
 

@@ -193,7 +193,7 @@ void SpaceShip::draw3DTransparent()
     }
 }
 
-void SpaceShip::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
     if (!long_range && ((scanned_by_player == SS_FullScan) || !my_spaceship))
     {

@@ -68,7 +68,7 @@ void SpaceStation::draw3DTransparent()
     }
 }
 
-void SpaceStation::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
     sf::Sprite objectSprite;
     textureManager.setTexture(objectSprite, "RadarBlip.png");

@@ -19,7 +19,7 @@ void EMPMissile::draw3DTransparent()
 {
 }
 
-void EMPMissile::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void EMPMissile::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
     if (long_range) return;
 

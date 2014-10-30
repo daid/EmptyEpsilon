@@ -448,7 +448,7 @@ void MainUIBase::drawRadar(sf::Vector2f position, float size, float range, bool 
             if(!obj)
                 continue;
             if (obj != my_spaceship && sf::length(scan_ghost[n].position - my_spaceship->getPosition()) < range)
-                obj->drawRadar(window, position + (scan_ghost[n].position - my_spaceship->getPosition()) / range * size, size / range, long_range);
+                obj->drawOnRadar(window, position + (scan_ghost[n].position - my_spaceship->getPosition()) / range * size, size / range, long_range);
             if (obj == target)
                 target_position = scan_ghost[n].position;
         }
@@ -456,7 +456,7 @@ void MainUIBase::drawRadar(sf::Vector2f position, float size, float range, bool 
         foreach(SpaceObject, obj, space_object_list)
         {
             if (obj != my_spaceship && sf::length(obj->getPosition() - my_spaceship->getPosition()) < range)
-                obj->drawRadar(window, position + (obj->getPosition() - my_spaceship->getPosition()) / range * size, size / range, long_range);
+                obj->drawOnRadar(window, position + (obj->getPosition() - my_spaceship->getPosition()) / range * size, size / range, long_range);
         }
     }
 
@@ -468,7 +468,7 @@ void MainUIBase::drawRadar(sf::Vector2f position, float size, float range, bool 
         window.draw(objectSprite);
     }
     drawWaypoints(my_spaceship->getPosition(), position, size, range);
-    my_spaceship->drawRadar(window, position, size / range, long_range);
+    my_spaceship->drawOnRadar(window, position, size / range, long_range);
     drawHeadingCircle(position, size, rect);
     drawRadarCuttoff(position, size, rect);
 }

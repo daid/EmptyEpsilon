@@ -13,8 +13,7 @@ public:
 
     virtual void draw3D();
 
-    //Is actually a drawOnRadar();
-    virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
+    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
 
     virtual void collision(Collisionable* target);
 };

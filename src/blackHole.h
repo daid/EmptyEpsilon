@@ -12,7 +12,7 @@ public:
     virtual void update(float delta);
 
     virtual void draw3D();
-    virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
+    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
 
     virtual void collision(Collisionable* target);
 };

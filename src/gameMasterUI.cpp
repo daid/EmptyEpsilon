@@ -86,7 +86,7 @@ void GameMasterUI::onGui()
 
     foreach(SpaceObject, obj, space_object_list)
     {
-        obj->drawRadar(window, sf::Vector2f(800, 450) + (obj->getPosition() - view_position) / view_distance * 400.0f, 400.0f / view_distance, view_distance > 10000);
+        obj->drawOnRadar(window, sf::Vector2f(800, 450) + (obj->getPosition() - view_position) / view_distance * 400.0f, 400.0f / view_distance, view_distance > 10000);
         P<CpuShip> cpuShip = obj;
         if (cpuShip)
         {

@@ -30,7 +30,7 @@ void Asteroid::draw3D()
     m->render();
 }
 
-void Asteroid::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Asteroid::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "RadarBlip.png");

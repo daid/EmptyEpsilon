@@ -28,7 +28,7 @@ public:
 
     virtual void draw3D();
     virtual void draw3DTransparent() {}
-    virtual void drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
+    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
 
     virtual string getCallSign() { return "??? (" + string(getMultiplayerId()) + ")"; }
     virtual bool canBeTargeted() { return false; }

@@ -23,7 +23,7 @@ void BlackHole::draw3D()
 {
 }
 
-void BlackHole::drawRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void BlackHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "RadarBlip.png");

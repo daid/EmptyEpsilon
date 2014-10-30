@@ -86,7 +86,7 @@ void CrewCommsUI::drawCommsRadar()
     foreach(SpaceObject, obj, visible_objects)
     {
         sf::Vector2f screen_position = radar_center + (obj->getPosition() - radar_view_position) * scale;
-        obj->drawRadar(window, screen_position, scale, true);
+        obj->drawOnRadar(window, screen_position, scale, true);
     }
     drawWaypoints(radar_view_position, radar_center, radar_size, radar_distance);
     if(selection_type != select_none)
