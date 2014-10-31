@@ -44,27 +44,25 @@ void SupplyDrop::collision(Collisionable* target)
     P<SpaceShip> ship = P<Collisionable>(target);
     if (ship && isFriendly(ship))
     {
+        bool picked_up = false;
         P<PlayerSpaceship> player = ship;
         if (player)
         {
             player->energy_level += energy;
-            energy = 0.0f;
+            picked_up = true;
         }
         for(int n=0; n<MW_Count; n++)
         {
-            if (weapon_storage[n] > 0 && ship->weapon_storage[n] < ship->weapon_storage_max[n])
+            uint8_t delta = std::min(int(weapon_storage[n]), ship->weapon_storage_max[n] - ship->weapon_storage[n]);
+            if (delta > 0)
             {
-                uint8_t delta = std::min(int(weapon_storage[n]), ship->weapon_storage_max[n] - ship->weapon_storage[n]);
                 ship->weapon_storage[n] += delta;
                 weapon_storage[n] -= delta;
+                picked_up = true;
             }
         }
         
-        for(int n=0; n<MW_Count; n++)
-            if (weapon_storage[n] > 0)
-                return;
-        if (energy > 0.0)
-            return;
-        destroy();
+        if (picked_up)
+            destroy();
     }
 }

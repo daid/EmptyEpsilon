@@ -190,6 +190,8 @@ void CpuShip::update(float delta)
             break;
         case AI_FlyTowards:      //Fly towards [order_target_location], attacking enemies that get too close, but disengage and continue when enemy is too far.
         case AI_FlyTowardsBlind: //Fly towards [order_target_location], not attacking anything
+            pathPlanner.plan(getPosition(), order_target_location);
+            break;
         case AI_DefendLocation:  //Defend against enemies getting close to [order_target_location]
             {
                 sf::Vector2f target_position = order_target_location;
