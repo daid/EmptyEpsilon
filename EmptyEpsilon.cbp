@@ -470,6 +470,8 @@
 		<Unit filename="src/spaceStation.h" />
 		<Unit filename="src/spaceship.cpp" />
 		<Unit filename="src/spaceship.h" />
+		<Unit filename="src/supplyDrop.cpp" />
+		<Unit filename="src/supplyDrop.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
