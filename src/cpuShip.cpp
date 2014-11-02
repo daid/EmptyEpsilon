@@ -281,11 +281,14 @@ void CpuShip::update(float delta)
                 initJump(jump / 1000);
             }
         }
+        float keep_distance = 700;
+        if (!target)
+            keep_distance = 100.0;
 
-        if (distance > 700 + impulseMaxSpeed)
+        if (distance > keep_distance + impulseMaxSpeed)
             impulseRequest = 1.0f;
         else
-            impulseRequest = (distance - 700) / impulseMaxSpeed;
+            impulseRequest = (distance - keep_distance) / impulseMaxSpeed;
     }else{
         targetRotation = getRotation();
         warpRequest = 0.0;

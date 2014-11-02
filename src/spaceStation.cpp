@@ -35,7 +35,7 @@ SpaceStation::SpaceStation()
     
     setTemplate("Small Station");
     
-    PathPlannerManager::getInstance()->addAvoidObject(this, getRadius());
+    PathPlannerManager::getInstance()->addAvoidObject(this, getRadius() * 1.5f);
 }
 
 void SpaceStation::draw3D()
