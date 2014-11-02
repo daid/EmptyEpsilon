@@ -51,6 +51,7 @@ int main(int argc, char** argv)
     
     new Engine();
     new DirectoryResourceProvider("resources/");
+    new DirectoryResourceProvider("scripts/");
     new DirectoryResourceProvider("packs/SolCommand/");
     new PackResourceProvider("packs/Angryfly.pack");
     textureManager.setDefaultSmooth(true);
