@@ -79,6 +79,7 @@ string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
         return "Jump-drive";
     case PWJ_WarpAndJumpDrive:
         return "Both";
+    default:
+        return "?";
     }
-    return "?";
 }
