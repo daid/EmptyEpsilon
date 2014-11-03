@@ -23,6 +23,8 @@ GameGlobalInfo::GameGlobalInfo()
         registerMemberReplication(&nebulaInfo[n].textureName);
     }
     registerMemberReplication(&victory_faction);
+    
+    player_warp_jump_drive_setting = PWJ_ShipDefault;
 }
 
 P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)
@@ -51,6 +53,7 @@ int GameGlobalInfo::findPlayerShip(P<PlayerSpaceship> ship)
             return n;
     return -1;
 }
+
 int GameGlobalInfo::insertPlayerShip(P<PlayerSpaceship> ship)
 {
     for(int n=0; n<maxPlayerShips; n++)
@@ -62,4 +65,20 @@ int GameGlobalInfo::insertPlayerShip(P<PlayerSpaceship> ship)
         }
     }
     return -1;
+}
+
+string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
+{
+    switch(player_warp_jump_drive)
+    {
+    case PWJ_ShipDefault:
+        return "Ship default";
+    case PWJ_WarpDrive:
+        return "Warp-drive";
+    case PWJ_JumpDrive:
+        return "Jump-drive";
+    case PWJ_WarpAndJumpDrive:
+        return "Both";
+    }
+    return "?";
 }

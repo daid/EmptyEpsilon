@@ -8,6 +8,7 @@
 #include "gameGlobalInfo.h"
 #include "spaceship.h"
 #include "shipSelectionScreen.h"
+#include "serverCreationScreen.h"
 
 MainMenu::MainMenu()
 {
@@ -22,7 +23,7 @@ void MainMenu::onGui()
     if (button(sf::FloatRect(50, 680, 300, 50), "Start server"))
     {
         new EpsilonServer();
-        new ShipSelectionScreen();
+        new ServerCreationScreen();
         destroy();
     }
     if (button(sf::FloatRect(50, 740, 300, 50), "Start client"))

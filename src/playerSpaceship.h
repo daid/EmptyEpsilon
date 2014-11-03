@@ -123,7 +123,7 @@ public:
     void commandCancelSelfDestruct();
     void commandConfirmDestructCode(int8_t index, uint32_t code);
 
-    virtual string getCallSign() { return ""; }
+    virtual string getCallSign() { return "PL" + string(getMultiplayerId()); }
 
     virtual void executeJump(float distance);
     virtual void fireBeamWeapon(int index, P<SpaceObject> target);

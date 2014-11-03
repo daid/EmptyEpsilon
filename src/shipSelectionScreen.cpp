@@ -9,40 +9,9 @@
 
 ShipSelectionScreen::ShipSelectionScreen()
 {
-    active_scenario_index = 0;
     ship_template_index = 0;
     alternative_screen_selection = false;
     window_angle = 0;
-
-    if (game_server)
-    {
-        std::vector<string> scenario_filenames = findResources("scenario_*.lua");
-        std::sort(scenario_filenames.begin(), scenario_filenames.end());
-
-        for(unsigned int n=0; n<scenario_filenames.size(); n++)
-        {
-            P<ResourceStream> stream = getResourceStream(scenario_filenames[n]);
-            if (!stream) continue;
-
-            ScenarioInfo info;
-            info.filename = scenario_filenames[n];
-            info.name = scenario_filenames[n].substr(9, -4);
-
-            for(int i=0; i<10; i++)
-            {
-                string line = stream->readLine().strip();
-                if (!line.startswith("--"))
-                    continue;
-                line = line.substr(2).strip();
-                if (line.startswith("Name:"))
-                    info.name = line.substr(5).strip();
-                if (line.startswith("Description:"))
-                    info.description = line.substr(12).strip();
-            }
-
-            scenarios.push_back(info);
-        }
-    }
 }
 
 void ShipSelectionScreen::onGui()
@@ -64,8 +33,6 @@ void ShipSelectionScreen::onGui()
         {
             if (button(sf::FloatRect(800, 100, 300, 50), "Game Master"))
             {
-                startScenario();
-                
                 my_spaceship = NULL;
                 my_player_info->setShipId(-1);
                 destroy();
@@ -76,8 +43,6 @@ void ShipSelectionScreen::onGui()
         {
             if (button(sf::FloatRect(800, 150, 300, 50), "Window"))
             {
-                startScenario();
-
                 destroy();
                 P<ShipWindowUI> ui = new ShipWindowUI();
                 ui->window_angle = window_angle;
@@ -90,8 +55,6 @@ void ShipSelectionScreen::onGui()
             
             if (button(sf::FloatRect(800, 250, 300, 50), "Top down 3D"))
             {
-                startScenario();
-
                 destroy();
                 new TopDownUI();
             }
@@ -161,23 +124,12 @@ void ShipSelectionScreen::onGui()
 
             if (button(sf::FloatRect(800, 600, 300, 50), "Ready"))
             {
-                startScenario();
                 destroy();
                 my_player_info->spawnUI();
             }
         }else{
             text(sf::FloatRect(800, 100, 300, 50), "Select a ship", AlignCenter, 30);
         }
-    }
-
-    if (active_scenario_index < int(scenarios.size()) && !engine->getObject("scenario"))
-    {
-        active_scenario_index += selector(sf::FloatRect(800, 650, 300, 50), scenarios[active_scenario_index].name);
-        if (active_scenario_index < 0)
-            active_scenario_index = scenarios.size() - 1;
-        if (active_scenario_index >= int(scenarios.size()))
-            active_scenario_index = 0;
-        text(sf::FloatRect(800, 700, 300, 20), scenarios[active_scenario_index].description, AlignRight, 15);
     }
 
     for(int n=0; n<GameGlobalInfo::maxPlayerShips; n++)
@@ -205,7 +157,7 @@ void ShipSelectionScreen::onGui()
     if (game_server)
     {
         std::vector<string> templates = ShipTemplate::getPlayerTemplateNameList();
-        game_server->setServerName(textEntry(sf::FloatRect(200, 50, 300, 50), game_server->getServerName()));
+        textbox(sf::FloatRect(200, 50, 300, 50), game_server->getServerName(), AlignCenter);
         text(sf::FloatRect(200, 100, 300, 50), sf::IpAddress::getLocalAddress().toString(), AlignCenter, 30);
 
         if (ship_template_index < int(templates.size()))
@@ -224,6 +176,28 @@ void ShipSelectionScreen::onGui()
             my_spaceship->targetRotation = my_spaceship->getRotation();
             my_spaceship->setPosition(sf::Vector2f(random(-100, 100), random(-100, 100)));
             my_player_info->setShipId(my_spaceship->getMultiplayerId());
+            switch(gameGlobalInfo->player_warp_jump_drive_setting)
+            {
+            default:
+                break;
+            case PWJ_WarpDrive:
+                my_spaceship->hasWarpdrive = true;
+                if (my_spaceship->warpSpeedPerWarpLevel < 100)
+                    my_spaceship->warpSpeedPerWarpLevel = 1000;
+                my_spaceship->hasJumpdrive = false;
+                break;
+            case PWJ_JumpDrive:
+                my_spaceship->hasWarpdrive = false;
+                my_spaceship->warpSpeedPerWarpLevel = 0;
+                my_spaceship->hasJumpdrive = true;
+                break;
+            case PWJ_WarpAndJumpDrive:
+                my_spaceship->hasWarpdrive = true;
+                if (my_spaceship->warpSpeedPerWarpLevel < 100)
+                    my_spaceship->warpSpeedPerWarpLevel = 1000;
+                my_spaceship->hasJumpdrive = true;
+                break;
+            }
             if (gameGlobalInfo->insertPlayerShip(my_spaceship) < 0)
             {
                 my_spaceship->destroy();
@@ -253,25 +227,5 @@ void ShipSelectionScreen::onGui()
             disconnectFromServer();
             returnToMainMenu();
         }
-    }
-}
-
-int lua_victory(lua_State* L)
-{
-    gameGlobalInfo->setVictory(luaL_checkstring(L, 1));
-    if (engine->getObject("scenario"))
-        engine->getObject("scenario")->destroy();
-    engine->setGameSpeed(0.0);
-    return 0;
-}
-
-void ShipSelectionScreen::startScenario()
-{
-    if (game_server && !engine->getObject("scenario") && active_scenario_index < int(scenarios.size()))
-    {
-        P<ScriptObject> script = new ScriptObject();
-        script->registerFunction("victory", lua_victory);
-        script->run(scenarios[active_scenario_index].filename);
-        engine->registerObject("scenario", script);
     }
 }

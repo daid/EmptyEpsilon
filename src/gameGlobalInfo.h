@@ -13,6 +13,15 @@ public:
     string textureName;
 };
 
+enum EPlayerWarpJumpDrive
+{
+    PWJ_ShipDefault = 0,
+    PWJ_WarpDrive,
+    PWJ_JumpDrive,
+    PWJ_WarpAndJumpDrive,
+    PWJ_MAX,
+};
+
 class GameGlobalInfo : public MultiplayerObject
 {
 public:
@@ -23,6 +32,7 @@ private:
     int32_t playerShipId[maxPlayerShips];
 public:
     NebulaInfo nebulaInfo[maxNebula];
+    EPlayerWarpJumpDrive player_warp_jump_drive_setting;
     
     GameGlobalInfo();
 
@@ -35,5 +45,7 @@ public:
     void setVictory(string faction_name) { victory_faction = FactionInfo::findFactionId(faction_name); }
     int getVictoryFactionId() { return victory_faction; }
 };
+
+string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive);
 
 #endif//GAME_GLOBAL_INFO_H

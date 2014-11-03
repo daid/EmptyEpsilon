@@ -1,6 +1,7 @@
 #include "mainScreen.h"
 #include "shipSelectionScreen.h"
 #include "main.h"
+#include "playerInfo.h"
 
 MainScreenBaseUI::MainScreenBaseUI()
 {

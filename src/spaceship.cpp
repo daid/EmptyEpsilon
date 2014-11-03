@@ -228,7 +228,8 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
             window.draw(arc);
         }
     }else{
-        GUI::text(sf::FloatRect(position.x, position.y - 15, 0, 0), getCallSign(), AlignCenter, 12);
+        if (my_spaceship != this)
+            GUI::text(sf::FloatRect(position.x, position.y - 15, 0, 0), getCallSign(), AlignCenter, 12);
     }
 
     sf::Sprite objectSprite;
