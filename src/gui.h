@@ -21,6 +21,7 @@ class GUI: public Renderable
     static int mouseClick;
     static int mouseDown;
     bool init;
+    static PVector<GUI> gui_stack;
 public:
     GUI();
     

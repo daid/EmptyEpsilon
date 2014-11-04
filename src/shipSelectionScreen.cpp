@@ -139,7 +139,7 @@ void ShipSelectionScreen::onGui()
         {
             if (n < 8)
             {
-                if (toggleButton(sf::FloatRect(200, 150 + (n % 8) * 50, 300, 50), my_spaceship == ship, ship->ship_template->name + " " + string(n + 1)))
+                if (toggleButton(sf::FloatRect(200, 150 + (n % 8) * 50, 300, 50), my_spaceship == ship, ship->ship_type_name + " " + string(n + 1)))
                 {
                     my_spaceship = ship;
                     my_player_info->setShipId(my_spaceship->getMultiplayerId());

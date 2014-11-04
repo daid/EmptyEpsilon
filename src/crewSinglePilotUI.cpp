@@ -114,7 +114,7 @@ void CrewSinglePilotUI::onCrewUI()
             text(sf::FloatRect(getWindowSize().x / 2.0 - 100, 110, 100, 20), factionInfo[target->faction_id]->name, AlignRight, 20);
             if (ship && ship->ship_template)
             {
-                text(sf::FloatRect(getWindowSize().x / 2.0 - 100, 130, 100, 20), ship->ship_template->name, AlignRight, 20);
+                text(sf::FloatRect(getWindowSize().x / 2.0 - 100, 130, 100, 20), ship->ship_type_name, AlignRight, 20);
                 text(sf::FloatRect(getWindowSize().x / 2.0 - 100, 150, 100, 20), "Shields: " + string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), AlignRight, 20);
                 if (ship->scanned_by_player == SS_SimpleScan)
                 {

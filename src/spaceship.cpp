@@ -74,6 +74,7 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     registerMemberReplication(&impulseMaxSpeed);
     registerMemberReplication(&warpSpeedPerWarpLevel);
     registerMemberReplication(&templateName);
+    registerMemberReplication(&ship_type_name);
     registerMemberReplication(&front_shield, 1.0);
     registerMemberReplication(&rear_shield, 1.0);
     registerMemberReplication(&front_shield_max);
@@ -122,6 +123,7 @@ SpaceShip::SpaceShip(string multiplayerClassName)
 void SpaceShip::setShipTemplate(string templateName)
 {
     this->templateName = templateName;
+    this->ship_type_name = templateName;
     ship_template = ShipTemplate::getTemplate(templateName);
     if (!ship_template)
     {

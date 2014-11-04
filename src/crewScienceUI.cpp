@@ -97,7 +97,7 @@ void CrewScienceUI::onCrewUI()
                     keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Faction", factionInfo[scienceTarget->faction_id]->name, 20); y += 30;
                     if (ship && ship->ship_template)
                     {
-                        keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Type", ship->ship_template->name, 20); y += 30;
+                        keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Type", ship->ship_type_name, 20); y += 30;
                         keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Shields", string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), 20); y += 30;
 
                         if (ship->scanned_by_player == SS_FullScan)

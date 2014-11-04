@@ -20,4 +20,13 @@ public:
     virtual void onGui();
 };
 
+class GameMasterShipRetrofit : public GUI
+{
+private:
+    P<SpaceShip> ship;
+public:
+    GameMasterShipRetrofit(P<SpaceShip> ship);
+    virtual void onGui();
+};
+
 #endif//GAME_MASTER_UI_H

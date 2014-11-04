@@ -62,6 +62,7 @@ public:
     const static int max_frequency = 20;
 
     string templateName;
+    string ship_type_name;
     P<ShipTemplate> ship_template;
     float engine_emit_delay;
 

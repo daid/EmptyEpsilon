@@ -6,31 +6,44 @@ sf::Vector2f GUI::mousePosition;
 sf::Vector2f GUI::windowSize;
 int GUI::mouseClick;
 int GUI::mouseDown;
+PVector<GUI> GUI::gui_stack;
 
 GUI::GUI()
 : Renderable(hudLayer)
 {
     init = true;
+    gui_stack.push_back(this);
 }
 
 void GUI::render(sf::RenderTarget& window)
 {
-    mousePosition = InputHandler::getMousePos();
+    mousePosition = sf::Vector2f(-1, -1);
     mouseClick = 0;
     mouseDown = 0;
+    gui_stack.update();
     if (!init)//Do not send mouse clicks the first render, as we can just be created because of a mouseclick.
     {
-        if (InputHandler::mouseIsReleased(sf::Mouse::Left))
-            mouseClick = 1;
-        else if (InputHandler::mouseIsReleased(sf::Mouse::Right))
-            mouseClick = 2;
-        if (InputHandler::mouseIsDown(sf::Mouse::Left))
-            mouseDown = 1;
-        else if (InputHandler::mouseIsDown(sf::Mouse::Right))
-            mouseDown = 2;
+        if (gui_stack.back() == this)   //Only handle mouse actions when we are at the top of the GUI stack.
+        {
+            mousePosition = InputHandler::getMousePos();
+            if (InputHandler::mouseIsReleased(sf::Mouse::Left))
+                mouseClick = 1;
+            else if (InputHandler::mouseIsReleased(sf::Mouse::Right))
+                mouseClick = 2;
+            if (InputHandler::mouseIsDown(sf::Mouse::Left))
+                mouseDown = 1;
+            else if (InputHandler::mouseIsDown(sf::Mouse::Right))
+                mouseDown = 2;
+        }
         renderTarget = &window;
         windowSize = window.getView().getSize();
         onGui();
+        if (gui_stack.back() != this)
+        {
+            sf::RectangleShape fullScreenOverlay(sf::Vector2f(getWindowSize().x, getWindowSize().y));
+            fullScreenOverlay.setFillColor(sf::Color(0, 0, 0, 128));
+            window.draw(fullScreenOverlay);
+        }
         renderTarget = NULL;
     }
     

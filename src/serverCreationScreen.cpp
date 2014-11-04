@@ -1,5 +1,6 @@
 #include "serverCreationScreen.h"
 #include "shipSelectionScreen.h"
+#include "gameMasterUI.h"
 #include "gameGlobalInfo.h"
 
 ServerCreationScreen::ServerCreationScreen()
@@ -71,6 +72,13 @@ void ServerCreationScreen::onGui()
         startScenario();
         destroy();
         new ShipSelectionScreen();
+    }
+
+    if (button(sf::FloatRect(600, 800, 300, 50), "Game Master"))
+    {
+        startScenario();
+        destroy();
+        new GameMasterUI();
     }
 }
 

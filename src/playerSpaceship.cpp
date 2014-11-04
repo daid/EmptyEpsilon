@@ -168,10 +168,10 @@ void PlayerSpaceship::update(float delta)
                         if (playerShip->comms_state == CS_Inactive || playerShip->comms_state == CS_ChannelFailed || playerShip->comms_state == CS_ChannelBroken)
                         {
                             comms_state = CS_ChannelOpenPlayer;
-                            comms_incomming_message = "Opened comms to " + playerShip->ship_template->name;
+                            comms_incomming_message = "Opened comms to " + playerShip->getCallSign();
                             playerShip->comms_state = CS_ChannelOpenPlayer;
                             playerShip->comms_target = this;
-                            playerShip->comms_incomming_message = "Incomming comms from " + playerShip->ship_template->name;
+                            playerShip->comms_incomming_message = "Incomming comms from " + playerShip->getCallSign();
                         }else{
                             comms_state = CS_ChannelFailed;
                         }

@@ -125,7 +125,7 @@ void GameMasterUI::onGui()
         P<SpaceShip> ship = selection;
         if (ship && ship->ship_template)
         {
-            text(sf::FloatRect(20, y, 100, 20), factionInfo[ship->faction_id]->name + " " + ship->ship_template->name, AlignLeft, 20);
+            text(sf::FloatRect(20, y, 100, 20), factionInfo[ship->faction_id]->name + " " + ship->ship_type_name, AlignLeft, 20);
             y += 20;
             text(sf::FloatRect(20, y, 100, 20), "Hull: " + string(ship->hull_strength), AlignLeft, 20);
             y += 20;
@@ -172,6 +172,12 @@ void GameMasterUI::onGui()
                     ship->weapon_storage[n] = ship->weapon_storage_max[n];
                 y += 30;
             }
+            y += 10;
+            if (button(sf::FloatRect(20, y, 250, 30), "Retrofit ship", 20))
+            {
+                new GameMasterShipRetrofit(ship);
+            }
+            y += 30;
         }
 
         text(sf::FloatRect(20, 480, 250, 20), "Change faction:", AlignCenter, 20);
@@ -232,4 +238,68 @@ void GameMasterUI::onGui()
 
     MainUIBase::onGui();
     prev_mouse_pos = mouse;
+}
+
+GameMasterShipRetrofit::GameMasterShipRetrofit(P<SpaceShip> ship)
+: ship(ship)
+{
+}
+
+void GameMasterShipRetrofit::onGui()
+{
+    if (!ship)
+    {
+        destroy();
+        return;
+    }
+    float x = getWindowSize().x / 2 - 400;
+    float y = 200;
+    boxWithBackground(sf::FloatRect(x - 30, y - 30, 860, 460));
+
+    ship->ship_type_name = textEntry(sf::FloatRect(x, y, 300, 30), ship->ship_type_name, 20);
+    y += 30;
+    ship->weaponTubes += selector(sf::FloatRect(x, y, 300, 30), "Missile tubes: " + string(ship->weaponTubes), 20);
+    if (ship->weaponTubes < 0)
+        ship->weaponTubes = maxWeaponTubes;
+    if (ship->weaponTubes > maxWeaponTubes)
+        ship->weaponTubes = 0;
+    y += 30;
+    for(int n=0; n<MW_Count; n++)
+    {
+        int diff = selector(sf::FloatRect(x, y, 300, 30), getMissileWeaponName(EMissileWeapons(n)) + ": " + string(ship->weapon_storage[n]) + "/" + string(ship->weapon_storage_max[n]), 20);
+        y += 30;
+        ship->weapon_storage[n] += diff;
+        ship->weapon_storage_max[n] += diff;
+        if (ship->weapon_storage_max[n] < 0)
+            ship->weapon_storage_max[n] = 0;
+        if (ship->weapon_storage[n] < 0)
+            ship->weapon_storage[n] = 0;
+    }
+    int diff = selector(sf::FloatRect(x, y, 300, 30), string("WarpDrive: ") + (ship->hasWarpdrive ? "Yes" : "No"), 20);
+    y += 30;
+    if (diff)
+    {
+        ship->hasWarpdrive = !ship->hasWarpdrive;
+        if (ship->warpSpeedPerWarpLevel < 100)
+            ship->warpSpeedPerWarpLevel = 1000;
+    }
+    if (selector(sf::FloatRect(x, y, 300, 30), string("JumpDrive: ") + (ship->hasJumpdrive ? "Yes" : "No"), 20))
+        ship->hasJumpdrive = !ship->hasJumpdrive;
+    y += 30;
+    ship->impulseMaxSpeed += selector(sf::FloatRect(x, y, 300, 30), "Max speed: " + string(ship->impulseMaxSpeed), 20);
+    y += 30;
+    ship->rotationSpeed += selector(sf::FloatRect(x, y, 300, 30), "Rotation speed: " + string(ship->rotationSpeed), 20);
+    y += 30;
+    diff = selector(sf::FloatRect(x, y, 300, 30), "Front shield: " + string(ship->front_shield) + "/" + string(ship->front_shield_max), 20);
+    ship->front_shield += diff * 15;
+    ship->front_shield_max += diff * 15;
+    y += 30;
+    diff = selector(sf::FloatRect(x, y, 300, 30), "Front shield: " + string(ship->rear_shield) + "/" + string(ship->rear_shield_max), 20);
+    ship->rear_shield += diff * 15;
+    ship->rear_shield_max += diff * 15;
+    y += 30;
+    
+    y += 10;
+    if (button(sf::FloatRect(x, y, 300, 50), "Ok"))
+        destroy();
 }
