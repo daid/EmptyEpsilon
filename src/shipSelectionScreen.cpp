@@ -92,18 +92,6 @@ void ShipSelectionScreen::onGui()
                 {
                     bool active = !my_player_info->crew_position[n];
                     my_player_info->setCrewPosition(ECrewPosition(n), active);
-
-                    if (active && my_spaceship)
-                    {
-                        int main_screen_control_cnt = 0;
-                        foreach(PlayerInfo, i, playerInfoList)
-                        {
-                            if (i->ship_id == my_spaceship->getMultiplayerId() && i->main_screen_control)
-                                main_screen_control_cnt++;
-                        }
-                        if (main_screen_control_cnt == 0)
-                            my_player_info->setMainScreenControl(true);
-                    }
                 }
                 int cnt = 0;
                 foreach(PlayerInfo, i, playerInfoList)

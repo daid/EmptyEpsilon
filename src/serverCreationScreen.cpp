@@ -65,9 +65,7 @@ void ServerCreationScreen::onGui()
     box(sf::FloatRect(100, 350, 500, 50));
     text(sf::FloatRect(100, 350, 200, 50), "Frequencies:", AlignRight);
     if(selector(sf::FloatRect(300, 350, 300, 50), gameGlobalInfo->use_beam_shield_frequencies ? "Yes" : "No"))
-    {
         gameGlobalInfo->use_beam_shield_frequencies = !gameGlobalInfo->use_beam_shield_frequencies;
-    }
 
     box(sf::FloatRect(620, 50, 460, 80 + scenarios.size() * 35));
     textbox(sf::FloatRect(620, 50, 460, 50), "Scenario", AlignCenter);

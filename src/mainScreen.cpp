@@ -21,6 +21,51 @@ void MainScreenUI::onGui()
 {
     if (my_spaceship)
     {
+        if (InputHandler::mouseIsReleased(sf::Mouse::Left))
+        {
+            switch(my_spaceship->main_screen_setting)
+            {
+            case MSS_Front: my_spaceship->commandMainScreenSetting(MSS_Left); break;
+            case MSS_Left: my_spaceship->commandMainScreenSetting(MSS_Back); break;
+            case MSS_Back: my_spaceship->commandMainScreenSetting(MSS_Right); break;
+            case MSS_Right: my_spaceship->commandMainScreenSetting(MSS_Front); break;
+            default: my_spaceship->commandMainScreenSetting(MSS_Front); break;
+            }
+        }
+        if (InputHandler::mouseIsReleased(sf::Mouse::Right))
+        {
+            switch(my_spaceship->main_screen_setting)
+            {
+            case MSS_Front: my_spaceship->commandMainScreenSetting(MSS_Right); break;
+            case MSS_Right: my_spaceship->commandMainScreenSetting(MSS_Back); break;
+            case MSS_Back: my_spaceship->commandMainScreenSetting(MSS_Left); break;
+            case MSS_Left: my_spaceship->commandMainScreenSetting(MSS_Front); break;
+            default: my_spaceship->commandMainScreenSetting(MSS_Front); break;
+            }
+        }
+        if (InputHandler::mouseIsReleased(sf::Mouse::Middle))
+        {
+            switch(my_spaceship->main_screen_setting)
+            {
+            case MSS_Front: my_spaceship->commandMainScreenSetting(MSS_Tactical); break;
+            case MSS_Tactical: my_spaceship->commandMainScreenSetting(MSS_LongRange); break;
+            case MSS_LongRange: my_spaceship->commandMainScreenSetting(MSS_Tactical); break;
+            default: my_spaceship->commandMainScreenSetting(MSS_Tactical); break;
+            }
+        }
+        if (InputHandler::keyboardIsReleased(sf::Keyboard::Up))
+            my_spaceship->commandMainScreenSetting(MSS_Front);
+        if (InputHandler::keyboardIsReleased(sf::Keyboard::Left))
+            my_spaceship->commandMainScreenSetting(MSS_Left);
+        if (InputHandler::keyboardIsReleased(sf::Keyboard::Right))
+            my_spaceship->commandMainScreenSetting(MSS_Right);
+        if (InputHandler::keyboardIsReleased(sf::Keyboard::Down))
+            my_spaceship->commandMainScreenSetting(MSS_Back);
+        if (InputHandler::keyboardIsReleased(sf::Keyboard::Tab))
+            my_spaceship->commandMainScreenSetting(MSS_Tactical);
+        if (InputHandler::keyboardIsReleased(sf::Keyboard::Space))
+            my_spaceship->commandMainScreenSetting(MSS_LongRange);
+        
         camera_yaw = my_spaceship->getRotation();
 #ifdef DEBUG
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
