@@ -56,9 +56,10 @@ void CrewCommsUI::drawCommsRadar()
     if (selection_type == select_waypoint && selection_waypoint_index >= my_spaceship->waypoints.size())
         selection_type = select_none;
     
-    float x = getWindowSize().x - 900;
-    sf::Vector2f radar_center = sf::Vector2f(x + 450, 450);
-    float radar_size = 450.0f;
+    float x = 300;
+    float w = getWindowSize().x - x;
+    float radar_size = w / 2.0f;
+    sf::Vector2f radar_center = sf::Vector2f(x + w / 2.0f, 450);
     sf::Vector2f mouse = InputHandler::getMousePos();
     if (InputHandler::mouseIsDown(sf::Mouse::Left))
     {

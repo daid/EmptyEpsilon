@@ -47,7 +47,7 @@ void ServerCreationScreen::onGui()
     
     textbox(sf::FloatRect(100, 200, 500, 50), "Player ships", AlignCenter);
     box(sf::FloatRect(100, 250, 500, 50));
-    text(sf::FloatRect(100, 250, 200, 50), "Warp/Jump:", AlignRight);
+    text(sf::FloatRect(100, 250, 200, 50), "Warp/Jump: ", AlignRight);
     int offset = selector(sf::FloatRect(300, 250, 300, 50), playerWarpJumpDriveToString(gameGlobalInfo->player_warp_jump_drive_setting), 30);
     gameGlobalInfo->player_warp_jump_drive_setting = EPlayerWarpJumpDrive(int(gameGlobalInfo->player_warp_jump_drive_setting) + offset);
     if (gameGlobalInfo->player_warp_jump_drive_setting < PWJ_ShipDefault)
@@ -55,7 +55,7 @@ void ServerCreationScreen::onGui()
     if (gameGlobalInfo->player_warp_jump_drive_setting >= PWJ_MAX)
         gameGlobalInfo->player_warp_jump_drive_setting = PWJ_ShipDefault;
     box(sf::FloatRect(100, 300, 500, 50));
-    text(sf::FloatRect(100, 300, 200, 50), "Radar range:", AlignRight);
+    text(sf::FloatRect(100, 300, 200, 50), "Radar range: ", AlignRight);
     offset = selector(sf::FloatRect(300, 300, 300, 50), string(int(gameGlobalInfo->long_range_radar_range)), 30);
     gameGlobalInfo->long_range_radar_range += offset * 5000.0;
     if (gameGlobalInfo->long_range_radar_range < 10000.0)
@@ -63,7 +63,7 @@ void ServerCreationScreen::onGui()
     if (gameGlobalInfo->long_range_radar_range > 50000.0)
         gameGlobalInfo->long_range_radar_range = 50000.0;
     box(sf::FloatRect(100, 350, 500, 50));
-    text(sf::FloatRect(100, 350, 200, 50), "Frequencies:", AlignRight);
+    text(sf::FloatRect(100, 350, 200, 50), "Frequencies: ", AlignRight);
     if(selector(sf::FloatRect(300, 350, 300, 50), gameGlobalInfo->use_beam_shield_frequencies ? "Yes" : "No"))
         gameGlobalInfo->use_beam_shield_frequencies = !gameGlobalInfo->use_beam_shield_frequencies;
 

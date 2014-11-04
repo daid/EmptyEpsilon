@@ -2,7 +2,7 @@
 -- Description: Basic scenario. A few random stations, with random stuff around them, are under attack by enemies.
 
 function vectorFromAngle(angle, length)
-	return math.sin(angle / 180 * math.pi) * length, -math.cos(angle / 180 * math.pi) * length
+	return math.cos(angle / 180 * math.pi) * length, math.sin(angle / 180 * math.pi) * length
 end
 function setCirclePos(obj, x, y, angle, distance)
 	dx, dy = vectorFromAngle(angle, distance)

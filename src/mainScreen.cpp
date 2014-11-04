@@ -67,12 +67,6 @@ void MainScreenUI::onGui()
             my_spaceship->commandMainScreenSetting(MSS_LongRange);
         
         camera_yaw = my_spaceship->getRotation();
-#ifdef DEBUG
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-            camera_yaw -= 45;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-            camera_yaw += 45;
-#endif
         switch(my_spaceship->main_screen_setting)
         {
         case MSS_Back: camera_yaw += 180; break;
