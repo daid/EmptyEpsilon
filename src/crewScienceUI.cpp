@@ -103,25 +103,28 @@ void CrewScienceUI::onCrewUI()
 
                         if (ship->scanned_by_player == SS_FullScan)
                         {
-                            box(sf::FloatRect(x, y, 250, 100));
-                            int freq = frequencyCurve(sf::FloatRect(x + 20, y + 30, 210, 60), false, true, ship->shield_frequency);
-                            if (freq > -1)
+                            if (gameGlobalInfo->use_beam_shield_frequencies)
                             {
-                                text(sf::FloatRect(x + 20, y, 210, 30), frequencyToString(freq) + " " + string(int(frequencyVsFrequencyDamageFactor(freq, ship->shield_frequency) * 100)) + "% dmg", AlignCenter, 20);
-                            }else{
-                                text(sf::FloatRect(x + 20, y, 210, 30), "Your dmg on", AlignCenter, 20);
-                            }
-                            y += 100;
+                                box(sf::FloatRect(x, y, 250, 100));
+                                int freq = frequencyCurve(sf::FloatRect(x + 20, y + 30, 210, 60), false, true, ship->shield_frequency);
+                                if (freq > -1)
+                                {
+                                    text(sf::FloatRect(x + 20, y, 210, 30), frequencyToString(freq) + " " + string(int(frequencyVsFrequencyDamageFactor(freq, ship->shield_frequency) * 100)) + "% dmg", AlignCenter, 20);
+                                }else{
+                                    text(sf::FloatRect(x + 20, y, 210, 30), "Your dmg on", AlignCenter, 20);
+                                }
+                                y += 100;
 
-                            box(sf::FloatRect(x, y, 250, 100));
-                            freq = frequencyCurve(sf::FloatRect(x + 20, y + 30, 210, 60), true, false, ship->beam_frequency);
-                            if (freq > -1)
-                            {
-                                text(sf::FloatRect(x + 20, y, 210, 30), frequencyToString(freq) + " " + string(int(frequencyVsFrequencyDamageFactor(ship->beam_frequency, freq) * 100)) + "% dmg", AlignCenter, 20);
-                            }else{
-                                text(sf::FloatRect(x + 20, y, 210, 30), "Dmg recieved at", AlignCenter, 20);
+                                box(sf::FloatRect(x, y, 250, 100));
+                                freq = frequencyCurve(sf::FloatRect(x + 20, y + 30, 210, 60), true, false, ship->beam_frequency);
+                                if (freq > -1)
+                                {
+                                    text(sf::FloatRect(x + 20, y, 210, 30), frequencyToString(freq) + " " + string(int(frequencyVsFrequencyDamageFactor(ship->beam_frequency, freq) * 100)) + "% dmg", AlignCenter, 20);
+                                }else{
+                                    text(sf::FloatRect(x + 20, y, 210, 30), "Dmg recieved at", AlignCenter, 20);
+                                }
+                                y += 100;
                             }
-                            y += 100;
                         }else{
                             if (button(sf::FloatRect(x, y, 250, 50), "Scan", 30))
                                 my_spaceship->commandScan(scienceTarget);

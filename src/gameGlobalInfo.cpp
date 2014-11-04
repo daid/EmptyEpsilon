@@ -25,9 +25,11 @@ GameGlobalInfo::GameGlobalInfo()
     
     player_warp_jump_drive_setting = PWJ_ShipDefault;
     long_range_radar_range = 25000;
+    use_beam_shield_frequencies = true;
 
     registerMemberReplication(&victory_faction);
     registerMemberReplication(&long_range_radar_range);
+    registerMemberReplication(&use_beam_shield_frequencies);
 }
 
 P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)

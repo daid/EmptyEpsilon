@@ -1,4 +1,5 @@
 #include "crewWeaponsUI.h"
+#include "gameGlobalInfo.h"
 
 CrewWeaponsUI::CrewWeaponsUI()
 {
@@ -69,9 +70,13 @@ void CrewWeaponsUI::onCrewUI()
         else if (toggleButton(sf::FloatRect(x, 840, 270, 50), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 30))
             my_spaceship->commandSetShields(!my_spaceship->shields_active);
     }
-    box(sf::FloatRect(x, 740, 270, 100));
-    text(sf::FloatRect(x, 740, 270, 50), "Beam Freq.", AlignCenter, 30);
-    int frequency = my_spaceship->beam_frequency + selector(sf::FloatRect(x, 790, 270, 50), frequencyToString(my_spaceship->beam_frequency), 30);
-    if (frequency != my_spaceship->beam_frequency)
-        my_spaceship->commandSetBeamFrequency(frequency);
+    
+    if (gameGlobalInfo->use_beam_shield_frequencies)
+    {
+        box(sf::FloatRect(x, 740, 270, 100));
+        text(sf::FloatRect(x, 740, 270, 50), "Beam Freq.", AlignCenter, 30);
+        int frequency = my_spaceship->beam_frequency + selector(sf::FloatRect(x, 790, 270, 50), frequencyToString(my_spaceship->beam_frequency), 30);
+        if (frequency != my_spaceship->beam_frequency)
+            my_spaceship->commandSetBeamFrequency(frequency);
+    }
 }

@@ -13,6 +13,7 @@
 #include "particleEffect.h"
 #include "mine.h"
 #include "nuke.h"
+#include "gameGlobalInfo.h"
 
 #include "scriptInterface.h"
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
@@ -610,7 +611,7 @@ void SpaceShip::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDam
     if (shields_active)
     {
         float factor = 1.0;
-        if (type == DT_Energy)
+        if (type == DT_Energy && gameGlobalInfo->use_beam_shield_frequencies)
             factor = frequencyVsFrequencyDamageFactor(frequency, shield_frequency);
         float angle = sf::angleDifference(getRotation(), sf::vector2ToAngle(getPosition() - damageLocation));
         bool front_hit = !(angle > -90 && angle < 90);

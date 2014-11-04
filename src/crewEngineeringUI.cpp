@@ -1,4 +1,5 @@
 #include "crewEngineeringUI.h"
+#include "gameGlobalInfo.h"
 
 CrewEngineeringUI::CrewEngineeringUI()
 {
@@ -108,25 +109,28 @@ void CrewEngineeringUI::onCrewUI()
             my_spaceship->commandSetSystemCoolant(selected_system, ret);
     }
 
-    ///Shield frequency configuration
-    float x = getWindowSize().x - 330;
-    box(sf::FloatRect(x - 20, 470, 340, 400));
-    text(sf::FloatRect(x, 470, 300, 50), "Shield Freq.", AlignCenter, 30);
-    textbox(sf::FloatRect(x, 520, 300, 50), frequencyToString(my_spaceship->shield_frequency), AlignCenter, 30);
-    
-    text(sf::FloatRect(x, 570, 300, 50), "Change Freq.", AlignCenter, 30);
-    if (my_spaceship->shield_calibration_delay > 0.0)
+    if (gameGlobalInfo->use_beam_shield_frequencies)
     {
-        textbox(sf::FloatRect(x, 620, 300, 50), "Calibrating", AlignCenter, 30);
-        progressBar(sf::FloatRect(x, 670, 300, 50), my_spaceship->shield_calibration_delay, PlayerSpaceship::shield_calibration_time, 0);
-    }else{
-        shield_new_frequency += selector(sf::FloatRect(x, 620, 300, 50), frequencyToString(shield_new_frequency), 30);
-        if (shield_new_frequency < 0)
-            shield_new_frequency = 0;
-        if (shield_new_frequency > SpaceShip::max_frequency)
-            shield_new_frequency = SpaceShip::max_frequency;
-        if (button(sf::FloatRect(x, 670, 300, 50), "Calibrate", 30))
-            my_spaceship->commandSetShieldFrequency(shield_new_frequency);
+        ///Shield frequency configuration
+        float x = getWindowSize().x - 330;
+        box(sf::FloatRect(x - 20, 470, 340, 400));
+        text(sf::FloatRect(x, 470, 300, 50), "Shield Freq.", AlignCenter, 30);
+        textbox(sf::FloatRect(x, 520, 300, 50), frequencyToString(my_spaceship->shield_frequency), AlignCenter, 30);
+        
+        text(sf::FloatRect(x, 570, 300, 50), "Change Freq.", AlignCenter, 30);
+        if (my_spaceship->shield_calibration_delay > 0.0)
+        {
+            textbox(sf::FloatRect(x, 620, 300, 50), "Calibrating", AlignCenter, 30);
+            progressBar(sf::FloatRect(x, 670, 300, 50), my_spaceship->shield_calibration_delay, PlayerSpaceship::shield_calibration_time, 0);
+        }else{
+            shield_new_frequency += selector(sf::FloatRect(x, 620, 300, 50), frequencyToString(shield_new_frequency), 30);
+            if (shield_new_frequency < 0)
+                shield_new_frequency = 0;
+            if (shield_new_frequency > SpaceShip::max_frequency)
+                shield_new_frequency = SpaceShip::max_frequency;
+            if (button(sf::FloatRect(x, 670, 300, 50), "Calibrate", 30))
+                my_spaceship->commandSetShieldFrequency(shield_new_frequency);
+        }
     }
 
     ///Draw the ship interior
