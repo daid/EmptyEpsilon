@@ -1,8 +1,9 @@
 #include "crewScienceUI.h"
+#include "gameGlobalInfo.h"
 
 CrewScienceUI::CrewScienceUI()
 {
-    science_radar_distance = 50000;
+    science_radar_zoom = 1;
     science_show_radar = true;
     science_database_type = SDT_None;
     science_sub_selection = -1;
@@ -16,7 +17,7 @@ void CrewScienceUI::onCrewUI()
     {
         sf::Vector2f radar_center = sf::Vector2f((getWindowSize().x - 250) / 2.0f, getWindowSize().y / 2.0f);
 
-        float radarDistance = science_radar_distance;
+        float radarDistance = gameGlobalInfo->long_range_radar_range / science_radar_zoom;
         if (InputHandler::mouseIsReleased(sf::Mouse::Left) && my_spaceship->scanning_delay <= 0.0)
         {
             sf::Vector2f diff = mouse - radar_center;
@@ -135,14 +136,14 @@ void CrewScienceUI::onCrewUI()
             }
         }
 
-        if (science_radar_distance == 50000 && button(sf::FloatRect(getWindowSize().x - 490, 820, 200, 50), "Zoom: 1x", 30))
-            science_radar_distance = 25000;
-        else if (science_radar_distance == 25000 && button(sf::FloatRect(getWindowSize().x - 490, 820, 200, 50), "Zoom: 2x", 30))
-            science_radar_distance = 12500;
-        else if (science_radar_distance == 12500 && button(sf::FloatRect(getWindowSize().x - 490, 820, 200, 50), "Zoom: 4x", 30))
-            science_radar_distance = 5000;
-        else if (science_radar_distance == 5000 && button(sf::FloatRect(getWindowSize().x - 490, 820, 200, 50), "Zoom: 10x", 30))
-            science_radar_distance = 50000;
+        if (science_radar_zoom == 1 && button(sf::FloatRect(getWindowSize().x - 490, 820, 200, 50), "Zoom: 1x", 30))
+            science_radar_zoom = 2;
+        else if (science_radar_zoom == 2 && button(sf::FloatRect(getWindowSize().x - 490, 820, 200, 50), "Zoom: 2x", 30))
+            science_radar_zoom = 4;
+        else if (science_radar_zoom == 4 && button(sf::FloatRect(getWindowSize().x - 490, 820, 200, 50), "Zoom: 4x", 30))
+            science_radar_zoom = 10;
+        else if (science_radar_zoom == 10 && button(sf::FloatRect(getWindowSize().x - 490, 820, 200, 50), "Zoom: 10x", 30))
+            science_radar_zoom = 1;
     }else{
         if (toggleButton(sf::FloatRect(20, 100, 200, 50), science_database_type == SDT_Factions, "Factions", 30))
         {

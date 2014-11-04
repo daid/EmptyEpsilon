@@ -57,7 +57,6 @@ public:
     const static float max_coolant = 10.0;
     const static float damage_per_second_on_overheat = 0.2;
     const static float shield_calibration_time = 10.0f;
-    const static float max_comm_range = 50000;
     const static float comms_channel_open_time = 2.0;
     const static int max_comms_reply_count = 16;
     const static int max_self_destruct_codes = 3;

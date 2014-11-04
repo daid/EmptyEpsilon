@@ -1,4 +1,5 @@
 #include "crewSinglePilotUI.h"
+#include "gameGlobalInfo.h"
 #include "main.h"
 
 CrewSinglePilotUI::CrewSinglePilotUI()
@@ -159,7 +160,7 @@ void CrewSinglePilotUI::onCrewUI()
         switch(my_spaceship->main_screen_setting)
         {
         case MSS_LongRange:
-            drawRadar(sf::Vector2f(getWindowSize().x / 4 * 3, 450), radar_size, 50000, true, NULL, sf::FloatRect(getWindowSize().x / 2.0f, 0, getWindowSize().x / 2.0f, 900));
+            drawRadar(sf::Vector2f(getWindowSize().x / 4 * 3, 450), radar_size, gameGlobalInfo->long_range_radar_range, true, NULL, sf::FloatRect(getWindowSize().x / 2.0f, 0, getWindowSize().x / 2.0f, 900));
             break;
         case MSS_Tactical:
             drawRadar(sf::Vector2f(getWindowSize().x / 4 * 3, 450), radar_size, 5000, false, NULL, sf::FloatRect(getWindowSize().x / 2.0f, 0, getWindowSize().x / 2.0f, 900));

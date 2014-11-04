@@ -1,6 +1,7 @@
 #include "mainScreen.h"
 #include "shipSelectionScreen.h"
 #include "main.h"
+#include "gameGlobalInfo.h"
 #include "playerInfo.h"
 
 MainScreenBaseUI::MainScreenBaseUI()
@@ -91,7 +92,7 @@ void MainScreenUI::renderTactical(sf::RenderTarget& window)
 
 void MainScreenUI::renderLongRange(sf::RenderTarget& window)
 {
-    drawRadar(sf::Vector2f(800, 450), 400, 50000, true, NULL);
+    drawRadar(sf::Vector2f(800, 450), 400, gameGlobalInfo->long_range_radar_range, true, NULL);
 }
 
 ShipWindowUI::ShipWindowUI()

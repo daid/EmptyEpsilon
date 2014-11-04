@@ -22,9 +22,12 @@ GameGlobalInfo::GameGlobalInfo()
         registerMemberReplication(&nebulaInfo[n].vector);
         registerMemberReplication(&nebulaInfo[n].textureName);
     }
-    registerMemberReplication(&victory_faction);
     
     player_warp_jump_drive_setting = PWJ_ShipDefault;
+    long_range_radar_range = 25000;
+
+    registerMemberReplication(&victory_faction);
+    registerMemberReplication(&long_range_radar_range);
 }
 
 P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)

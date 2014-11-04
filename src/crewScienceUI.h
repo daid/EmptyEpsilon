@@ -14,7 +14,7 @@ enum ScienceDatabaseType
 class CrewScienceUI : public CrewUI
 {
     P<SpaceObject> scienceTarget;
-    float science_radar_distance;
+    int science_radar_zoom;
     bool science_show_radar;
     ScienceDatabaseType science_database_type;
     int science_sub_selection;

@@ -54,6 +54,14 @@ void ServerCreationScreen::onGui()
         gameGlobalInfo->player_warp_jump_drive_setting = EPlayerWarpJumpDrive(int(PWJ_MAX) - 1);
     if (gameGlobalInfo->player_warp_jump_drive_setting >= PWJ_MAX)
         gameGlobalInfo->player_warp_jump_drive_setting = PWJ_ShipDefault;
+    box(sf::FloatRect(100, 300, 500, 50));
+    text(sf::FloatRect(100, 300, 200, 50), "Radar range:", AlignRight);
+    offset = selector(sf::FloatRect(300, 300, 300, 50), string(int(gameGlobalInfo->long_range_radar_range)), 30);
+    gameGlobalInfo->long_range_radar_range += offset * 5000.0;
+    if (gameGlobalInfo->long_range_radar_range < 10000.0)
+        gameGlobalInfo->long_range_radar_range = 10000.0;
+    if (gameGlobalInfo->long_range_radar_range > 50000.0)
+        gameGlobalInfo->long_range_radar_range = 50000.0;
 
     box(sf::FloatRect(620, 50, 460, 80 + scenarios.size() * 35));
     textbox(sf::FloatRect(620, 50, 460, 50), "Scenario", AlignCenter);

@@ -33,6 +33,7 @@ private:
 public:
     NebulaInfo nebulaInfo[maxNebula];
     EPlayerWarpJumpDrive player_warp_jump_drive_setting;
+    float long_range_radar_range;
     
     GameGlobalInfo();
 

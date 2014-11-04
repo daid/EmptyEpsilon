@@ -157,7 +157,7 @@ void PlayerSpaceship::update(float delta)
             {
                 comms_open_delay -= delta;
             }else{
-                if (!comms_target || sf::length(getPosition() - comms_target->getPosition()) > max_comm_range)
+                if (!comms_target)
                 {
                     comms_state = CS_ChannelBroken;
                 }else{
@@ -186,7 +186,7 @@ void PlayerSpaceship::update(float delta)
         }
         if (comms_state == CS_ChannelOpen || comms_state == CS_ChannelOpenPlayer)
         {
-            if (!comms_target || sf::length(getPosition() - comms_target->getPosition()) > max_comm_range)
+            if (!comms_target)
                 comms_state = CS_ChannelBroken;
         }
 
