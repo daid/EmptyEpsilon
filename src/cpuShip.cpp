@@ -258,7 +258,7 @@ void CpuShip::update(float delta)
 
         targetRotation = sf::vector2ToAngle(diff);
         
-        if (hasWarpdrive && fabs(sf::angleDifference(targetRotation, getRotation())) < 50.0 && distance > 2000)
+        if (hasWarpdrive && fabs(sf::angleDifference(targetRotation, getRotation())) < 30.0 && distance > 2000)
         {
             warpRequest = 1.0;
         }else{
