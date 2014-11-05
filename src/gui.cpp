@@ -23,7 +23,7 @@ void GUI::render(sf::RenderTarget& window)
     gui_stack.update();
     if (!init)//Do not send mouse clicks the first render, as we can just be created because of a mouseclick.
     {
-        if (gui_stack.back() == this)   //Only handle mouse actions when we are at the top of the GUI stack.
+        if (isActive())   //Only handle mouse actions when we are at the top of the GUI stack.
         {
             mousePosition = InputHandler::getMousePos();
             if (InputHandler::mouseIsReleased(sf::Mouse::Left))
@@ -38,7 +38,7 @@ void GUI::render(sf::RenderTarget& window)
         renderTarget = &window;
         windowSize = window.getView().getSize();
         onGui();
-        if (gui_stack.back() != this)
+        if (!isActive())
         {
             sf::RectangleShape fullScreenOverlay(sf::Vector2f(getWindowSize().x, getWindowSize().y));
             fullScreenOverlay.setFillColor(sf::Color(0, 0, 0, 128));
@@ -48,6 +48,11 @@ void GUI::render(sf::RenderTarget& window)
     }
     
     init = false;
+}
+
+bool GUI::isActive()
+{
+    return gui_stack.back() == this;
 }
 
 void GUI::text(sf::FloatRect rect, string text, EAlign align, float fontSize, sf::Color color)

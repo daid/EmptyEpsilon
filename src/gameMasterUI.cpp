@@ -17,35 +17,11 @@ void GameMasterUI::onGui()
     sf::Vector2f mouse = InputHandler::getMousePos();
     sf::Vector2f mouse_world_position = view_position + (mouse - sf::Vector2f(800, 450)) / 400.0f * view_distance;
 
-    if (InputHandler::mouseIsPressed(sf::Mouse::Left) && mouse.x > 300)
+    if (isActive())
     {
-        mouse_down_pos = mouse;
-
-        P<SpaceObject> target;
-        PVector<Collisionable> list = CollisionManager::queryArea(mouse_world_position - sf::Vector2f(0.1 * view_distance, 0.1 * view_distance), mouse_world_position + sf::Vector2f(0.1 * view_distance, 0.1 * view_distance));
-        foreach(Collisionable, obj, list)
+        if (InputHandler::mouseIsPressed(sf::Mouse::Left) && mouse.x > 300)
         {
-            P<SpaceObject> spaceObject = obj;
-            if (spaceObject)
-            {
-                if (!target || sf::length(mouse_world_position - spaceObject->getPosition()) < sf::length(mouse_world_position - target->getPosition()))
-                    target = spaceObject;
-            }
-        }
-        selection = target;
-    }
-    if (selection && allow_object_drag && InputHandler::mouseIsDown(sf::Mouse::Left) && mouse.x > 300)
-    {
-        if (sf::length(mouse - mouse_down_pos) > 5.0f)
-        {
-            selection->setPosition(mouse_world_position);
-        }
-    }
-    if (selection && InputHandler::mouseIsReleased(sf::Mouse::Right) && mouse.x > 300)
-    {
-        P<CpuShip> cpuShip = selection;
-        if (selection)
-        {
+            mouse_down_pos = mouse;
 
             P<SpaceObject> target;
             PVector<Collisionable> list = CollisionManager::queryArea(mouse_world_position - sf::Vector2f(0.1 * view_distance, 0.1 * view_distance), mouse_world_position + sf::Vector2f(0.1 * view_distance, 0.1 * view_distance));
@@ -58,28 +34,55 @@ void GameMasterUI::onGui()
                         target = spaceObject;
                 }
             }
-            if (target && target->canBeTargeted())
+            selection = target;
+        }
+        if (selection && allow_object_drag && InputHandler::mouseIsDown(sf::Mouse::Left) && mouse.x > 300)
+        {
+            if (sf::length(mouse - mouse_down_pos) > 5.0f)
             {
-                if (selection->isEnemy(target))
-                {
-                    cpuShip->orderAttack(target);
-                }else{
-                    cpuShip->orderDefendTarget(target);
-                }
-            }else{
-                cpuShip->orderFlyTowardsBlind(mouse_world_position);
+                selection->setPosition(mouse_world_position);
             }
         }
-    }
+        if (selection && InputHandler::mouseIsReleased(sf::Mouse::Right) && mouse.x > 300)
+        {
+            P<CpuShip> cpuShip = selection;
+            if (selection)
+            {
 
-    view_distance *= 1.0 - (InputHandler::getMouseWheelDelta() * 0.1f);
-    if (view_distance > 100000)
-        view_distance = 100000;
-    if (view_distance < 5000)
-        view_distance = 5000;
-    if (InputHandler::mouseIsDown(sf::Mouse::Middle))
-    {
-        view_position += (prev_mouse_pos - mouse) / 400.0f * view_distance;
+                P<SpaceObject> target;
+                PVector<Collisionable> list = CollisionManager::queryArea(mouse_world_position - sf::Vector2f(0.1 * view_distance, 0.1 * view_distance), mouse_world_position + sf::Vector2f(0.1 * view_distance, 0.1 * view_distance));
+                foreach(Collisionable, obj, list)
+                {
+                    P<SpaceObject> spaceObject = obj;
+                    if (spaceObject)
+                    {
+                        if (!target || sf::length(mouse_world_position - spaceObject->getPosition()) < sf::length(mouse_world_position - target->getPosition()))
+                            target = spaceObject;
+                    }
+                }
+                if (target && target->canBeTargeted())
+                {
+                    if (selection->isEnemy(target))
+                    {
+                        cpuShip->orderAttack(target);
+                    }else{
+                        cpuShip->orderDefendTarget(target);
+                    }
+                }else{
+                    cpuShip->orderFlyTowardsBlind(mouse_world_position);
+                }
+            }
+        }
+
+        view_distance *= 1.0 - (InputHandler::getMouseWheelDelta() * 0.1f);
+        if (view_distance > 100000)
+            view_distance = 100000;
+        if (view_distance < 5000)
+            view_distance = 5000;
+        if (InputHandler::mouseIsDown(sf::Mouse::Middle))
+        {
+            view_position += (prev_mouse_pos - mouse) / 400.0f * view_distance;
+        }
     }
 
     drawRaderBackground(view_position, sf::Vector2f(800, 450), 400.0, view_distance);
@@ -252,12 +255,43 @@ void GameMasterShipRetrofit::onGui()
         destroy();
         return;
     }
-    float x = getWindowSize().x / 2 - 400;
+    float x = getWindowSize().x / 2 - 325;
     float y = 200;
-    boxWithBackground(sf::FloatRect(x - 30, y - 30, 860, 460));
+    boxWithBackground(sf::FloatRect(x - 30, y - 30, 710, 460));
 
     ship->ship_type_name = textEntry(sf::FloatRect(x, y, 300, 30), ship->ship_type_name, 20);
     y += 30;
+    int diff = selector(sf::FloatRect(x, y, 300, 30), string("WarpDrive: ") + (ship->hasWarpdrive ? "Yes" : "No"), 20);
+    y += 30;
+    if (diff)
+    {
+        ship->hasWarpdrive = !ship->hasWarpdrive;
+        if (ship->warpSpeedPerWarpLevel < 100)
+            ship->warpSpeedPerWarpLevel = 1000;
+    }
+    if (selector(sf::FloatRect(x, y, 300, 30), string("JumpDrive: ") + (ship->hasJumpdrive ? "Yes" : "No"), 20))
+        ship->hasJumpdrive = !ship->hasJumpdrive;
+    y += 30;
+    ship->impulseMaxSpeed += selector(sf::FloatRect(x, y, 300, 30), "Max speed: " + string(ship->impulseMaxSpeed), 20);
+    y += 30;
+    ship->rotationSpeed += selector(sf::FloatRect(x, y, 300, 30), "Rotation speed: " + string(ship->rotationSpeed), 20);
+    y += 30;
+    diff = selector(sf::FloatRect(x, y, 300, 30), "Hull: " + string(ship->hull_strength) + "/" + string(ship->hull_max), 20);
+    ship->hull_strength = std::max(0.0f, ship->hull_strength + diff * 5);
+    ship->hull_max = std::max(0.0f, ship->hull_max + diff * 5);
+    y += 30;
+    diff = selector(sf::FloatRect(x, y, 300, 30), "Front shield: " + string(ship->front_shield) + "/" + string(ship->front_shield_max), 20);
+    ship->front_shield = std::max(0.0f, ship->front_shield + diff * 15);
+    ship->front_shield_max = std::max(0.0f, ship->front_shield_max + diff * 15);
+    y += 30;
+    diff = selector(sf::FloatRect(x, y, 300, 30), "Front shield: " + string(ship->rear_shield) + "/" + string(ship->rear_shield_max), 20);
+    ship->rear_shield = std::max(0.0f, ship->rear_shield + diff * 15);
+    ship->rear_shield_max = std::max(0.0f, ship->rear_shield_max + diff * 15);
+    y += 30;
+
+    x += 350;
+    y = 200;
+
     ship->weaponTubes += selector(sf::FloatRect(x, y, 300, 30), "Missile tubes: " + string(ship->weaponTubes), 20);
     if (ship->weaponTubes < 0)
         ship->weaponTubes = maxWeaponTubes;
@@ -275,29 +309,6 @@ void GameMasterShipRetrofit::onGui()
         if (ship->weapon_storage[n] < 0)
             ship->weapon_storage[n] = 0;
     }
-    int diff = selector(sf::FloatRect(x, y, 300, 30), string("WarpDrive: ") + (ship->hasWarpdrive ? "Yes" : "No"), 20);
-    y += 30;
-    if (diff)
-    {
-        ship->hasWarpdrive = !ship->hasWarpdrive;
-        if (ship->warpSpeedPerWarpLevel < 100)
-            ship->warpSpeedPerWarpLevel = 1000;
-    }
-    if (selector(sf::FloatRect(x, y, 300, 30), string("JumpDrive: ") + (ship->hasJumpdrive ? "Yes" : "No"), 20))
-        ship->hasJumpdrive = !ship->hasJumpdrive;
-    y += 30;
-    ship->impulseMaxSpeed += selector(sf::FloatRect(x, y, 300, 30), "Max speed: " + string(ship->impulseMaxSpeed), 20);
-    y += 30;
-    ship->rotationSpeed += selector(sf::FloatRect(x, y, 300, 30), "Rotation speed: " + string(ship->rotationSpeed), 20);
-    y += 30;
-    diff = selector(sf::FloatRect(x, y, 300, 30), "Front shield: " + string(ship->front_shield) + "/" + string(ship->front_shield_max), 20);
-    ship->front_shield += diff * 15;
-    ship->front_shield_max += diff * 15;
-    y += 30;
-    diff = selector(sf::FloatRect(x, y, 300, 30), "Front shield: " + string(ship->rear_shield) + "/" + string(ship->rear_shield_max), 20);
-    ship->rear_shield += diff * 15;
-    ship->rear_shield_max += diff * 15;
-    y += 30;
     
     y += 10;
     if (button(sf::FloatRect(x, y, 300, 50), "Ok"))

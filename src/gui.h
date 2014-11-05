@@ -28,6 +28,8 @@ public:
     virtual void render(sf::RenderTarget& window);
     
     virtual void onGui() = 0;
+    
+    bool isActive();
 
     static void text(sf::FloatRect rect, string text, EAlign align = AlignLeft, float textSize = 30, sf::Color color=sf::Color::White);
     static void vtext(sf::FloatRect rect, string text, EAlign align = AlignLeft, float textSize = 30, sf::Color color=sf::Color::White);
