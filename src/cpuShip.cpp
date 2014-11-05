@@ -77,7 +77,7 @@ void CpuShip::update(float delta)
     if (orders == AI_FlyFormation && order_target)
     {
         P<SpaceShip> ship = order_target;
-        if (ship && ship->getTarget() && sf::length(ship->getTarget()->getPosition() - getPosition()) < 5000)
+        if (ship && ship->getTarget() && (ship->getTarget()->getPosition() - getPosition()) < 5000.0f)
             new_target = ship->getTarget();
     }
     if (orders == AI_DefendTarget)
@@ -177,7 +177,7 @@ void CpuShip::update(float delta)
                     targetId = new_target->getMultiplayerId();
                 }else{
                     sf::Vector2f diff = order_target_location - getPosition();
-                    if (sf::length(diff) < 1000.0)
+                    if (diff < 1000.0f)
                         order_target_location = sf::Vector2f(random(-30000, 30000), random(-30000, 30000));
                     pathPlanner.plan(getPosition(), order_target_location);
                 }

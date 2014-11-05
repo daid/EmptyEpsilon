@@ -57,10 +57,13 @@ void PathPlanner::plan(sf::Vector2f start, sf::Vector2f end)
             if (remove_idx > 1)
                 p0 = route[remove_idx - 2];
             sf::Vector2f p1 = route[remove_idx];
-            if (!checkToAvoid(p0, p1, route[remove_idx-1]))
+            sf::Vector2f new_position;
+            if (!checkToAvoid(p0, p1, new_position))
             {
                 route.erase(route.begin() + remove_idx - 1);
             }else{
+                if ((route[remove_idx-1] - new_position) > 200.0f)
+                    route[remove_idx-1] = new_position;
                 remove_idx++;
             }
         }else if (remove_idx2 < route.size())
