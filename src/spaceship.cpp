@@ -648,6 +648,11 @@ void SpaceShip::hullDamage(float damageAmount, sf::Vector2f damageLocation, EDam
         e->setSize(getRadius() * 1.5);
         e->setPosition(getPosition());
 
+        for(unsigned int n=0; n<factionInfo.size(); n++)
+        {
+            if (factionInfo[n]->states[faction_id] == FVF_Enemy)
+                factionInfo[n]->reputation_points += (hull_max + front_shield_max + rear_shield_max) * 0.1;
+        }
         destroy();
     }
 }

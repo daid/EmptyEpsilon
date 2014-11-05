@@ -171,7 +171,7 @@ void GameMasterUI::onGui()
                 if (ship->weapon_storage_max[n] < 1)
                     continue;
                 text(sf::FloatRect(20, y, 130, 30), getMissileWeaponName(EMissileWeapons(n)) + ": " + string(ship->weapon_storage[n]) + "/" + string(ship->weapon_storage_max[n]), AlignLeft, 20);
-                if (button(sf::FloatRect(200, y, 100, 30), "Refill", 15))
+                if (button(sf::FloatRect(170, y, 100, 30), "Refill", 15))
                     ship->weapon_storage[n] = ship->weapon_storage_max[n];
                 y += 30;
             }

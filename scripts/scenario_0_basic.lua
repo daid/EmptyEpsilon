@@ -16,6 +16,7 @@ function init()
 	for n=1, 3 do
 		table.insert(friendlyList, setCirclePos(SpaceStation():setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
 	end
+	friendlyList[1]:addReputationPoints(300.0)
 	
 	enemy_group_count = 5
 	for cnt=1,enemy_group_count do
@@ -110,5 +111,7 @@ function update(delta)
 	end
 	if friendly_count == 0 then
 		victory("SpaceCow");	--Victory for the SpaceCows (== defeat for the players)
+	else
+		friendlyList[1]:addReputationPoints(delta * friendly_count * 0.1)
 	end
 end

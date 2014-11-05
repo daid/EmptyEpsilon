@@ -30,6 +30,11 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&victory_faction);
     registerMemberReplication(&long_range_radar_range);
     registerMemberReplication(&use_beam_shield_frequencies);
+    
+    for(unsigned int n=0; n<factionInfo.size(); n++)
+    {
+        factionInfo[n]->reputation_points = 0.0;
+    }
 }
 
 P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)

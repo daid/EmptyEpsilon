@@ -10,30 +10,38 @@ function mainMenu()
 		end
 		if not player:isDocked() then
 			setCommsMessage("Good day officer,\nIf you need supplies please dock with us first.");
-			addCommsReply("Can you send a supply drop?", function()
+			addCommsReply("Can you send a supply drop? (100rep)", function()
 				--setCommsMessage("Sorry sir, we do not have spare supply ships available right now.");
 				setCommsMessage("Where do we need to drop off your supplies?");
 				for n=0,player:getWaypointCount()-1 do
 					addCommsReply("WP" .. n, function()
-						local position_x, position_y = comms_target:getPosition()
-						local target_x, target_y = player:getWaypoint(n)
-						local script = ScriptObject()
-						script:setGlobal("position_x", position_x):setGlobal("position_y", position_y)
-						script:setGlobal("target_x", target_x):setGlobal("target_y", target_y)
-						script:setGlobal("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-						setCommsMessage("We have dispatched a supply ship towards WP" .. n);
+						if player:takeReputationPoints(100) then
+							local position_x, position_y = comms_target:getPosition()
+							local target_x, target_y = player:getWaypoint(n)
+							local script = ScriptObject()
+							script:setGlobal("position_x", position_x):setGlobal("position_y", position_y)
+							script:setGlobal("target_x", target_x):setGlobal("target_y", target_y)
+							script:setGlobal("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
+							setCommsMessage("We have dispatched a supply ship towards WP" .. n);
+						else
+							setCommsMessage("Not enough rep!");
+						end
 						addCommsReply("Back", mainMenu)
 					end)
 				end
 				addCommsReply("Back", mainMenu)
 			end)
-			addCommsReply("Please send backup!", function()
+			addCommsReply("Please send backup! (75rep)", function()
 				--setCommsMessage("We cannot spare any ships for you right now.");
 				setCommsMessage("Where does the backup needs to go?");
 				for n=0,player:getWaypointCount()-1 do
 					addCommsReply("WP" .. n, function()
-						ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setShipTemplate("Fighter"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
-						setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n);
+						if player:takeReputationPoints(100) then
+							ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setShipTemplate("Fighter"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
+							setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n);
+						else
+							setCommsMessage("Not enough rep!");
+						end
 						addCommsReply("Back", mainMenu)
 					end)
 				end
@@ -42,7 +50,7 @@ function mainMenu()
 			return true
 		end
 		
-		-- Friendly station
+		-- Friendly station, docked.
 		setCommsMessage("Good day officer,\nWhat can we do for you today?")
 		addCommsReply("Do you have spare homing missiles for us?", function()
 			if not player:isDocked() then setCommsMessage("You need to stay docked for that action."); return end

@@ -17,6 +17,9 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isFriendly);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getCallSign);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, areEnemiesInRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getReputationPoints);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, takeReputationPoints);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, addReputationPoints);
 }
 
 PVector<SpaceObject> space_object_list;
