@@ -293,6 +293,9 @@ void CpuShip::update(float delta)
         targetRotation = getRotation();
         warpRequest = 0.0;
         impulseRequest = 0.0f;
+
+        if (orders == AI_StandGround && target)
+            targetRotation = sf::vector2ToAngle(target->getPosition() - getPosition());
     }
 }
 
