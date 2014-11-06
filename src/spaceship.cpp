@@ -393,7 +393,7 @@ void SpaceShip::update(float delta)
     }
 
     P<SpaceObject> target = getTarget();
-    if (game_server && target && delta > 0 && docking_state == DS_NotDocking) // Only fire beam weapons if we are on the server, have a target, and are not paused.
+    if (game_server && target && delta > 0 && currentWarp == 0.0 && docking_state == DS_NotDocking) // Only fire beam weapons if we are on the server, have a target, and are not paused.
     {
         for(int n=0; n<maxBeamWeapons; n++)
         {
@@ -525,6 +525,7 @@ void SpaceShip::loadTube(int tubeNr, EMissileWeapons type)
 void SpaceShip::fireTube(int tubeNr)
 {
     if (docking_state != DS_NotDocking) return;
+    if (currentWarp > 0.0) return;
     if (tubeNr < 0 || tubeNr >= maxWeaponTubes) return;
     if (weaponTube[tubeNr].state != WTS_Loaded) return;
 
