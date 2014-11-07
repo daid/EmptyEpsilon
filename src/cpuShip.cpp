@@ -257,8 +257,9 @@ void CpuShip::update(float delta)
         float distance = sf::length(diff);
 
         targetRotation = sf::vector2ToAngle(diff);
+        float rotation_diff = fabs(sf::angleDifference(targetRotation, getRotation()));
         
-        if (hasWarpdrive && fabs(sf::angleDifference(targetRotation, getRotation())) < 30.0 && distance > 2000)
+        if (hasWarpdrive && rotation_diff < 30.0 && distance > 2000)
         {
             warpRequest = 1.0;
         }else{
@@ -266,7 +267,7 @@ void CpuShip::update(float delta)
         }
         if (distance > 10000 && hasJumpdrive && jumpDelay <= 0.0)
         {
-            if (fabs(sf::angleDifference(targetRotation, getRotation())) < 1.0)
+            if (rotation_diff < 1.0)
             {
                 float jump = distance;
                 if (pathPlanner.route.size() < 2)
@@ -284,11 +285,17 @@ void CpuShip::update(float delta)
         float keep_distance = 700;
         if (!target)
             keep_distance = 100.0;
+        if (pathPlanner.route.size() > 1)
+            keep_distance = 0.0;
 
         if (distance > keep_distance + impulseMaxSpeed)
             impulseRequest = 1.0f;
         else
             impulseRequest = (distance - keep_distance) / impulseMaxSpeed;
+        if (rotation_diff > 90)
+            impulseRequest = -impulseRequest;
+        else if (rotation_diff < 45)
+            impulseRequest *= 1.0 - ((rotation_diff - 45.0f) / 45.0);
     }else{
         targetRotation = getRotation();
         warpRequest = 0.0;
