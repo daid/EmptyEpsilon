@@ -63,7 +63,7 @@ void MainScreenUI::onGui()
             my_spaceship->commandMainScreenSetting(MSS_Back);
         if (InputHandler::keyboardIsReleased(sf::Keyboard::Tab))
             my_spaceship->commandMainScreenSetting(MSS_Tactical);
-        if (InputHandler::keyboardIsReleased(sf::Keyboard::Space))
+        if (InputHandler::keyboardIsReleased(sf::Keyboard::Q))
             my_spaceship->commandMainScreenSetting(MSS_LongRange);
         
         camera_yaw = my_spaceship->getRotation();
@@ -109,13 +109,16 @@ void MainScreenUI::onGui()
         if (my_spaceship->activate_self_destruct)
         {
             boxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 150));
-            box(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100));
-            text(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100), "SELF DESTRUCT ACTIVATED", AlignCenter, 50);
+            textbox(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100), "SELF DESTRUCT ACTIVATED", AlignCenter, 50);
             int todo = 0;
             for(int n=0; n<PlayerSpaceship::max_self_destruct_codes; n++)
                 if (!my_spaceship->self_destruct_code_confirmed[n])
                     todo++;
             text(sf::FloatRect(getWindowSize().x / 2 - 400, 295, 800, 50), "Waiting for autorization input: "+string(todo)+" left", AlignCenter, 30);
+        }
+        if (my_spaceship->jumpDelay > 0.0)
+        {
+            textbox(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100), "Jump in: " + string(int(ceilf(my_spaceship->jumpDelay))), AlignCenter, 50);
         }
     }else{
         draw3Dworld();

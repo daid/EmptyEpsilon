@@ -624,7 +624,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t clientId, sf::Packet& packe
         activate_self_destruct = true;
         for(int n=0; n<max_self_destruct_codes; n++)
         {
-            self_destruct_code[n] = irandom(0, 999999);
+            self_destruct_code[n] = irandom(0, 99999);
             self_destruct_code_confirmed[n] = false;
             self_destruct_code_entry_position[n] = max_crew_positions;
             while(self_destruct_code_entry_position[n] == max_crew_positions)
