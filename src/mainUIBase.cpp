@@ -447,15 +447,27 @@ void MainUIBase::drawRadar(sf::Vector2f position, float size, float range, bool 
             P<SpaceObject> obj = scan_ghost[n].object;
             if(!obj)
                 continue;
-            if (obj != my_spaceship && sf::length(scan_ghost[n].position - my_spaceship->getPosition()) < range)
+            if (obj != my_spaceship && (scan_ghost[n].position - my_spaceship->getPosition()) < range + obj->getRadius())
                 obj->drawOnRadar(window, position + (scan_ghost[n].position - my_spaceship->getPosition()) / range * size, size / range, long_range);
             if (obj == target)
                 target_position = scan_ghost[n].position;
         }
     }else{
+        for(float circle_size=1000.0f; circle_size < range; circle_size+=1000.0f)
+        {
+            float s = circle_size * size / range;
+            sf::CircleShape circle(s, 30);
+            circle.setOrigin(s, s);
+            circle.setPosition(position);
+            circle.setFillColor(sf::Color::Transparent);
+            circle.setOutlineColor(sf::Color(255, 255, 255, 16));
+            circle.setOutlineThickness(2.0);
+            window.draw(circle);
+            text(sf::FloatRect(position.x, position.y - s - 20, 0, 0), string(int(circle_size / 1000.0f + 0.1f)) + "km", AlignCenter, 20, sf::Color(255, 255, 255, 32));
+        }
         foreach(SpaceObject, obj, space_object_list)
         {
-            if (obj != my_spaceship && sf::length(obj->getPosition() - my_spaceship->getPosition()) < range)
+            if (obj != my_spaceship && (obj->getPosition() - my_spaceship->getPosition()) < range + obj->getRadius())
                 obj->drawOnRadar(window, position + (obj->getPosition() - my_spaceship->getPosition()) / range * size, size / range, long_range);
         }
     }

@@ -74,8 +74,11 @@ void CrewHelmsUI::onCrewUI()
         }
     }
 
-    keyValueDisplay(sf::FloatRect(20, 100, 200, 40), 0.6, "Energy", string(int(my_spaceship->energy_level)), 25);
-    keyValueDisplay(sf::FloatRect(20, 140, 200, 40), 0.6, "Heading", string(fmodf(my_spaceship->getRotation() + 360.0, 360.0), 1), 25);
+    keyValueDisplay(sf::FloatRect(20, 100, 240, 40), 0.45, "Energy", string(int(my_spaceship->energy_level)), 20);
+    keyValueDisplay(sf::FloatRect(20, 140, 240, 40), 0.45, "Heading", string(fmodf(my_spaceship->getRotation() + 360.0, 360.0), 1), 20);
+    float velocity = sf::length(my_spaceship->getVelocity()) / 1000 * 60;
+    string velocity_text = string(velocity, 1);
+    keyValueDisplay(sf::FloatRect(20, 180, 240, 40), 0.45, "Speed", velocity_text + "km/min", 20);
 
     impulseSlider(sf::FloatRect(20, 400, 50, 300), 20);
 
