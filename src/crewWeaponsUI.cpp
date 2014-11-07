@@ -10,11 +10,11 @@ void CrewWeaponsUI::onCrewUI()
 {
     sf::Vector2f mouse = InputHandler::getMousePos();
     float radarDistance = 5000;
-    sf::Vector2f radar_position = getWindowSize() / 2.0f;
+    sf::Vector2f radar_center = getWindowSize() / 2.0f;
 
     if (InputHandler::mouseIsReleased(sf::Mouse::Left))
     {
-        sf::Vector2f diff = mouse - radar_position;
+        sf::Vector2f diff = mouse - radar_center;
         if (sf::length(diff) < 400)
         {
             P<SpaceObject> target;
@@ -32,7 +32,7 @@ void CrewWeaponsUI::onCrewUI()
             my_spaceship->commandSetTarget(target);
         }
     }
-    drawRadar(radar_position, 400, radarDistance, false, my_spaceship->getTarget());
+    drawRadar(radar_center, 400, radarDistance, false, my_spaceship->getTarget());
 
     keyValueDisplay(sf::FloatRect(20, 100, 250, 40), 0.5, "Energy", string(int(my_spaceship->energy_level)), 25);
     keyValueDisplay(sf::FloatRect(20, 140, 250, 40), 0.5, "Shields", string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "/" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)), 25);
@@ -69,6 +69,8 @@ void CrewWeaponsUI::onCrewUI()
             disabledButton(sf::FloatRect(x, 840, 270, 50), "Calibrating", 30);
         else if (toggleButton(sf::FloatRect(x, 840, 270, 50), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 30))
             my_spaceship->commandSetShields(!my_spaceship->shields_active);
+        damagePowerDisplay(sf::FloatRect(x, 840, 270 / 2.0, 50), SYS_FrontShield, 20);
+        damagePowerDisplay(sf::FloatRect(x + 270 / 2.0, 840, 270 / 2.0, 50), SYS_RearShield, 20);
     }
     
     if (gameGlobalInfo->use_beam_shield_frequencies)
@@ -78,5 +80,8 @@ void CrewWeaponsUI::onCrewUI()
         int frequency = my_spaceship->beam_frequency + selector(sf::FloatRect(x, 790, 270, 50), frequencyToString(my_spaceship->beam_frequency), 30);
         if (frequency != my_spaceship->beam_frequency)
             my_spaceship->commandSetBeamFrequency(frequency);
+        damagePowerDisplay(sf::FloatRect(x, 740, 270, 100), SYS_BeamWeapons, 20);
+    }else{
+        damagePowerDisplay(sf::FloatRect(radar_center.x - 140, radar_center.y + 150, 280, 50), SYS_BeamWeapons, 20);
     }
 }

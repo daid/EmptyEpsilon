@@ -21,6 +21,7 @@ public:
     void dockingButton(sf::FloatRect rect, float text_size);
     void weaponTube(EMissileWeapons load_type, int n, sf::FloatRect load_rect, sf::FloatRect fire_rect, float text_size);
     int frequencyCurve(sf::FloatRect rect, bool frequency_is_beam, bool more_damage_is_positive, int frequency);
+    void damagePowerDisplay(sf::FloatRect rect, ESystem system, float text_size);
 };
 
 #endif//CREW_UI_H

@@ -71,6 +71,7 @@ void CrewUI::impulseSlider(sf::FloatRect rect, float text_size)
     }
     text(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(int(my_spaceship->impulseRequest * 100)) + "%", AlignLeft, text_size);
     text(sf::FloatRect(rect.left, rect.top + rect.height + text_size, rect.width, text_size), string(int(my_spaceship->currentImpulse * 100)) + "%", AlignLeft, text_size);
+    damagePowerDisplay(rect, SYS_Impulse, text_size);
 }
 
 void CrewUI::warpSlider(sf::FloatRect rect, float text_size)
@@ -80,6 +81,7 @@ void CrewUI::warpSlider(sf::FloatRect rect, float text_size)
         my_spaceship->commandWarp(res);
     text(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(int(my_spaceship->warpRequest)), AlignLeft, text_size);
     text(sf::FloatRect(rect.left, rect.top + rect.height + text_size, rect.width, text_size), string(int(my_spaceship->currentWarp * 100)) + "%", AlignLeft, text_size);
+    damagePowerDisplay(rect, SYS_Warp, text_size);
 }
 
 void CrewUI::jumpSlider(float& jump_distance, sf::FloatRect rect, float text_size)
@@ -101,6 +103,7 @@ void CrewUI::jumpButton(float jump_distance, sf::FloatRect rect, float text_size
         if (button(rect, "Jump", text_size))
             my_spaceship->commandJump(jump_distance);
     }
+    damagePowerDisplay(rect, SYS_JumpDrive, text_size);
 }
 
 void CrewUI::dockingButton(sf::FloatRect rect, float text_size)
@@ -164,6 +167,7 @@ void CrewUI::weaponTube(EMissileWeapons load_type, int n, sf::FloatRect load_rec
         disabledButton(load_rect, "Unloading", text_size * 0.8);
         break;
     }
+    damagePowerDisplay(fire_rect, SYS_MissileSystem, text_size);
 }
 
 int CrewUI::frequencyCurve(sf::FloatRect rect, bool frequency_is_beam, bool more_damage_is_positive, int frequency)
@@ -195,4 +199,35 @@ int CrewUI::frequencyCurve(sf::FloatRect rect, bool frequency_is_beam, bool more
         return int((InputHandler::getMousePos().x - rect.left) / w);
     }
     return -1;
+}
+
+void CrewUI::damagePowerDisplay(sf::FloatRect rect, ESystem system, float text_size)
+{
+    if (!my_spaceship->hasSystem(system))
+        return;
+    sf::Color color;
+    string display_text;
+    
+    float power = my_spaceship->systems[system].power_level;
+    float health = my_spaceship->systems[system].health;
+    if (health == 0.0)
+    {
+        color = sf::Color::Red;
+        display_text = "DAMAGED";
+    }else if (power == 0.0)
+    {
+        color = sf::Color::Red;
+        display_text = "NO POWER";
+    }else if (power < 0.3)
+    {
+        color = sf::Color(255, 128, 0);
+        display_text = "LOW POWER";
+    }else{
+        return;
+    }
+    boxWithBackground(rect, color, sf::Color(0, 0, 0, 128));
+    if (rect.height > rect.width)
+        vtext(rect, display_text, AlignCenter, text_size, color);
+    else
+        text(rect, display_text, AlignCenter, text_size, color);
 }

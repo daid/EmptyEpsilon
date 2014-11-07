@@ -11,7 +11,7 @@
 				<Option object_output=".obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="fullscreen=1 screen43=1 touchscreen=1 autoconnect=0 touchcalib=0 " />
+				<Option parameters="fullscreen=0 screen43=1 touchscreen=0 autoconnect=0 touchcalib=0 " />
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DDEBUG" />

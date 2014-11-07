@@ -288,15 +288,15 @@ void GUI::disabledSelector(sf::FloatRect rect, string textValue, float textSize)
     renderTarget->draw(arrow);
 }
 
-void GUI::box(sf::FloatRect rect)
+void GUI::box(sf::FloatRect rect, sf::Color color)
 {
-    draw9Cut(rect, "border_background");
+    draw9Cut(rect, "border_background", color);
 }
 
-void GUI::boxWithBackground(sf::FloatRect rect)
+void GUI::boxWithBackground(sf::FloatRect rect, sf::Color color, sf::Color bg_color)
 {
-    draw9Cut(rect, "button_background", sf::Color::Black);
-    draw9Cut(rect, "border_background");
+    draw9Cut(rect, "button_background", bg_color);
+    draw9Cut(rect, "border_background", color);
 }
 
 void GUI::textbox(sf::FloatRect rect, string text, EAlign align, float textSize, sf::Color color)
