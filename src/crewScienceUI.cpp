@@ -12,7 +12,7 @@ CrewScienceUI::CrewScienceUI()
 void CrewScienceUI::onCrewUI()
 {
     sf::Vector2f mouse = InputHandler::getMousePos();
-    
+
     if (science_show_radar)
     {
         sf::Vector2f radar_center = sf::Vector2f((getWindowSize().x - 250) / 2.0f, getWindowSize().y / 2.0f);
@@ -82,7 +82,7 @@ void CrewScienceUI::onCrewUI()
                 float rel_velocity = dot(scienceTarget->getVelocity(), position_diff / distance) - dot(my_spaceship->getVelocity(), position_diff / distance);
                 if (fabs(rel_velocity) < 0.01)
                     rel_velocity = 0.0;
-                
+
                 keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Callsign", scienceTarget->getCallSign(), 20); y += 30;
                 keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Distance", string(distance / 1000.0, 1) + "km", 20); y += 30;
                 keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Heading", string(int(heading)), 20); y += 30;
@@ -111,7 +111,7 @@ void CrewScienceUI::onCrewUI()
                                 {
                                     text(sf::FloatRect(x + 20, y, 210, 30), frequencyToString(freq) + " " + string(int(frequencyVsFrequencyDamageFactor(freq, ship->shield_frequency) * 100)) + "% dmg", AlignCenter, 20);
                                 }else{
-                                    text(sf::FloatRect(x + 20, y, 210, 30), "Your dmg on", AlignCenter, 20);
+                                    text(sf::FloatRect(x + 20, y, 210, 30), "Your damage on", AlignCenter, 20);
                                 }
                                 y += 100;
 
@@ -121,7 +121,7 @@ void CrewScienceUI::onCrewUI()
                                 {
                                     text(sf::FloatRect(x + 20, y, 210, 30), frequencyToString(freq) + " " + string(int(frequencyVsFrequencyDamageFactor(ship->beam_frequency, freq) * 100)) + "% dmg", AlignCenter, 20);
                                 }else{
-                                    text(sf::FloatRect(x + 20, y, 210, 30), "Dmg recieved at", AlignCenter, 20);
+                                    text(sf::FloatRect(x + 20, y, 210, 30), "Damage recieved from", AlignCenter, 20);
                                 }
                                 y += 100;
                             }
@@ -179,7 +179,7 @@ void CrewScienceUI::onCrewUI()
                 for(unsigned int n=0; n<factionInfo.size(); n++)
                 {
                     if (int(n) == science_sub_selection) continue;
-                    
+
                     string stance = "Neutral";
                     switch(factionInfo[science_sub_selection]->states[n])
                     {
@@ -275,7 +275,7 @@ void CrewScienceUI::onCrewUI()
                 if (toggleButton(sf::FloatRect(240, y, 250, 50), science_sub_selection == nr, "Homing missile", 30))
                     science_sub_selection = nr;
                 y += 50; nr ++;
-                
+
                 if (toggleButton(sf::FloatRect(240, y, 250, 50), science_sub_selection == nr, "Nuke", 30))
                     science_sub_selection = nr;
                 y += 50; nr ++;
@@ -287,7 +287,7 @@ void CrewScienceUI::onCrewUI()
                 if (toggleButton(sf::FloatRect(240, y, 250, 50), science_sub_selection == nr, "EMP", 30))
                     science_sub_selection = nr;
                 y += 50; nr ++;
-                
+
                 y = 100;
                 switch(science_sub_selection)
                 {
