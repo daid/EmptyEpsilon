@@ -16,10 +16,10 @@ FactionInfo::FactionInfo()
     foreach(FactionInfo, i, factionInfo)
         i->states.push_back(FVF_Neutral);
     factionInfo.push_back(this);
-    
-    for(unsigned int n=0; n<factionInfo.size(); n++)
+
+    for(unsigned int n = 0; n < factionInfo.size(); n++)
         states.push_back(FVF_Neutral);
-    for(unsigned int n=0; n<factionInfo.size(); n++)
+    for(unsigned int n = 0; n < factionInfo.size(); n++)
         if (factionInfo[n] == this)
             states[n] = FVF_Friendly;
 }
@@ -28,7 +28,7 @@ void FactionInfo::setEnemy(P<FactionInfo> other)
 {
     int id1 = -1;
     int id2 = -1;
-    for(unsigned int n=0; n<factionInfo.size(); n++)
+    for(unsigned int n = 0; n < factionInfo.size(); n++)
     {
         if (factionInfo[n] == this)
             id1 = n;
@@ -46,7 +46,7 @@ void FactionInfo::setFriendly(P<FactionInfo> other)
 {
     int id1 = -1;
     int id2 = -1;
-    for(unsigned int n=0; n<factionInfo.size(); n++)
+    for(unsigned int n = 0; n < factionInfo.size(); n++)
     {
         if (factionInfo[n] == this)
             id1 = n;
@@ -62,7 +62,7 @@ void FactionInfo::setFriendly(P<FactionInfo> other)
 
 int FactionInfo::findFactionId(string name)
 {
-    for(unsigned int n=0; n<factionInfo.size(); n++)
+    for(unsigned int n = 0; n < factionInfo.size(); n++)
         if (factionInfo[n]->name == name)
             return n;
     printf("Failed to find faction: %s\n", name.c_str());

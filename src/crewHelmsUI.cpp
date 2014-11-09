@@ -10,11 +10,12 @@ void CrewHelmsUI::update(float delta)
 {
     if (!my_spaceship)
         return;
-        
+
+    ///Ghost dots are the dots drawn on screen to indicate previous positions of the ship.
     if (ghost_delay > 0)
     {
         ghost_delay -= delta;
-    }else{
+    } else {
         ghost_delay = 5.0;
 
         foreach(SpaceObject, obj, space_object_list)
@@ -26,7 +27,8 @@ void CrewHelmsUI::update(float delta)
             }
         }
     }
-    for(unsigned int n=0; n<ghost_dot.size(); n++)
+
+    for(unsigned int n=0; n < ghost_dot.size(); n++)
     {
         HelmsGhostDot& ghost = ghost_dot[n];
         ghost.lifetime -= delta;
@@ -36,7 +38,7 @@ void CrewHelmsUI::update(float delta)
             n--;
         }
     }
-    
+
     CrewUI::update(delta);
 }
 
@@ -50,7 +52,7 @@ void CrewHelmsUI::onCrewUI()
         if (sf::length(diff) < 400)
             my_spaceship->commandTargetRotation(sf::vector2ToAngle(diff));
     }
-    
+
     sf::VertexArray ghost_dots(sf::Points, ghost_dot.size());
     for(unsigned int n=0; n<ghost_dot.size(); n++)
     {
