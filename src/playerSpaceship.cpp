@@ -744,6 +744,7 @@ void PlayerSpaceship::commandScan(P<SpaceObject> object)
 void PlayerSpaceship::commandSetSystemPower(ESystem system, float power_level)
 {
     sf::Packet packet;
+    systems[system].power_level = power_level;
     packet << CMD_SET_SYSTEM_POWER << system << power_level;
     sendClientCommand(packet);
 }
@@ -751,6 +752,7 @@ void PlayerSpaceship::commandSetSystemPower(ESystem system, float power_level)
 void PlayerSpaceship::commandSetSystemCoolant(ESystem system, float coolant_level)
 {
     sf::Packet packet;
+    systems[system].coolant_level = coolant_level;
     packet << CMD_SET_SYSTEM_COOLANT << system << coolant_level;
     sendClientCommand(packet);
 }
