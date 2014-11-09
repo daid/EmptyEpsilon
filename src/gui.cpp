@@ -197,6 +197,44 @@ bool GUI::toggleButton(sf::FloatRect rect, bool active, string textValue, float 
     return false;
 }
 
+float GUI::hslider(sf::FloatRect rect, float value, float minValue, float maxValue, float normalValue)
+{
+    draw9Cut(rect, "button_background", sf::Color(64,64,64, 255));
+
+    float x;
+    x = rect.left + (rect.width - rect.height) * (normalValue - minValue) / (maxValue - minValue);
+    sf::RectangleShape backgroundZero(sf::Vector2f(8.0, rect.height));
+    backgroundZero.setPosition(x + rect.height / 2.0 - 4.0, rect.top);
+    backgroundZero.setFillColor(sf::Color(8,8,8,255));
+    renderTarget->draw(backgroundZero);
+    
+    x = rect.left + (rect.width - rect.height) * (value - minValue) / (maxValue - minValue);
+    sf::Color color = sf::Color::White;
+    if (rect.contains(mousePosition) && mousePosition.x >= x && mousePosition.x <= x + rect.height)
+        color = sf::Color(255,255,255, 128);
+    draw9Cut(sf::FloatRect(x, rect.top, rect.height, rect.height), "button_background", color);
+
+    if (rect.contains(mousePosition) && mouseDown)
+    {
+        value = (mousePosition.x - rect.left - (rect.height / 2.0)) / (rect.width - rect.height);
+        value = minValue + (maxValue - minValue) * value;
+        if (minValue < maxValue)
+        {
+            if (value < minValue)
+                value = minValue;
+            if (value > maxValue)
+                value = maxValue;
+        }else{
+            if (value > minValue)
+                value = minValue;
+            if (value < maxValue)
+                value = maxValue;
+        }
+    }
+
+    return value;
+}
+
 float GUI::vslider(sf::FloatRect rect, float value, float minValue, float maxValue, float normalValue)
 {
     draw9Cut(rect, "button_background", sf::Color(64,64,64, 255));

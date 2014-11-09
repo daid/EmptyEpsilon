@@ -20,15 +20,20 @@ void MainMenu::onGui()
     text(sf::FloatRect(0, 250, getWindowSize().x, 300), "Epsilon", AlignCenter, 200);
     text(sf::FloatRect(0, 480, getWindowSize().x, 100), "Version: " + string(VERSION_NUMBER), AlignCenter, 20);
 
-    if (button(sf::FloatRect(50, 680, 300, 50), "Start server"))
+    if (button(sf::FloatRect(50, 620, 300, 50), "Start server"))
     {
         new EpsilonServer();
         new ServerCreationScreen();
         destroy();
     }
-    if (button(sf::FloatRect(50, 740, 300, 50), "Start client"))
+    if (button(sf::FloatRect(50, 680, 300, 50), "Start client"))
     {
         new ServerBrowserMenu();
+        destroy();
+    }
+    if (button(sf::FloatRect(50, 740, 300, 50), "Options"))
+    {
+        new OptionsMenu();
         destroy();
     }
     if (button(sf::FloatRect(50, 800, 300, 50), "Quit"))
@@ -49,6 +54,36 @@ void MainMenu::onGui()
     y += 10;
     text(sf::FloatRect(0, y, getWindowSize().x - 50, 20), "Models:", AlignRight, 20); y+= 20;
     text(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "SolCommand (http://solcommand.blogspot.com/)", AlignRight, 18); y+= 18;
+}
+
+OptionsMenu::OptionsMenu()
+{
+}
+
+void OptionsMenu::onGui()
+{
+    P<WindowManager> windowManager = engine->getObject("windowManager");
+    if (button(sf::FloatRect(50, 100, 300, 50), string("Fullscreen: ") + (windowManager->isFullscreen() ? "Yes" : "No")))
+    {
+        windowManager->setFullscreen(!windowManager->isFullscreen());
+    }
+    int fsaa = windowManager->getFSAA();
+    if (fsaa < 1)
+        fsaa = 1;
+    int offset = selector(sf::FloatRect(50, 160, 300, 50), "FSAA: " + string(fsaa) + "x");
+    if (offset < 0 && fsaa > 1)
+        windowManager->setFSAA(fsaa / 2);
+    if (offset > 0 && fsaa < 8)
+        windowManager->setFSAA(fsaa * 2);
+    
+    text(sf::FloatRect(50, 220, 300, 50), "Music Volume", AlignCenter);
+    soundManager.setMusicVolume(hslider(sf::FloatRect(50, 270, 300, 50), soundManager.getMusicVolume(), 0, 100, 50.0));
+    
+    if (button(sf::FloatRect(50, 800, 300, 50), "Back"))
+    {
+        destroy();
+        returnToMainMenu();
+    }
 }
 
 ServerBrowserMenu::ServerBrowserMenu()

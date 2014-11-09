@@ -12,6 +12,14 @@ public:
     virtual void onGui();
 };
 
+class OptionsMenu : public GUI
+{
+public:
+    OptionsMenu();
+    
+    virtual void onGui();
+};
+
 class ServerBrowserMenu : public GUI
 {
     string manual_ip;

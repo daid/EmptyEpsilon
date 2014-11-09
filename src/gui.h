@@ -38,6 +38,7 @@ public:
     static bool button(sf::FloatRect rect, string text, float textSize = 30);
     static void disabledButton(sf::FloatRect rect, string text, float textSize = 30);
     static bool toggleButton(sf::FloatRect rect, bool active, string textValue, float fontSize = 30);
+    static float hslider(sf::FloatRect rect, float value, float minValue, float maxValue, float normalValue = 0.0);
     static float vslider(sf::FloatRect rect, float value, float minValue, float maxValue, float normalValue = 0.0);
     static int selector(sf::FloatRect rect, string text, float textSize = 30);
     static void disabledSelector(sf::FloatRect rect, string text, float textSize = 30);
