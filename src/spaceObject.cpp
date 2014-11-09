@@ -1,6 +1,7 @@
 #include <SFML/OpenGL.hpp>
 #include "spaceObject.h"
 #include "factionInfo.h"
+#include "gameGlobalInfo.h"
 
 #include "scriptInterface.h"
 REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
@@ -87,4 +88,28 @@ bool SpaceObject::areEnemiesInRange(float range)
         }
     }
     return false;
+}
+
+int SpaceObject::getReputationPoints()
+{
+    if (gameGlobalInfo->reputation_points.size() < faction_id)
+        return 0;
+    return gameGlobalInfo->reputation_points[faction_id];
+}
+
+bool SpaceObject::takeReputationPoints(float amount)
+{
+    if (gameGlobalInfo->reputation_points.size() < faction_id)
+        return false;
+     if (gameGlobalInfo->reputation_points[faction_id] < amount)
+        return false;
+    gameGlobalInfo->reputation_points[faction_id] -= amount;
+    return true;
+}
+
+void SpaceObject::addReputationPoints(float amount)
+{
+    if (gameGlobalInfo->reputation_points.size() < faction_id)
+        return;
+    gameGlobalInfo->reputation_points[faction_id] += amount;
 }

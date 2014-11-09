@@ -31,6 +31,7 @@ private:
     int victory_faction;
     int32_t playerShipId[maxPlayerShips];
 public:
+    std::vector<float> reputation_points;
     NebulaInfo nebulaInfo[maxNebula];
     EPlayerWarpJumpDrive player_warp_jump_drive_setting;
     float long_range_radar_range;

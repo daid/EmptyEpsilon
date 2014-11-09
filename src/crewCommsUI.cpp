@@ -115,7 +115,7 @@ void CrewCommsUI::drawCommsRadar()
     switch(mode)
     {
     case mode_default:
-        keyValueDisplay(sf::FloatRect(x - 270, y, 250, 30), 0.5, "Rep: ", int(factionInfo[my_spaceship->faction_id]->reputation_points), 20.0);
+        keyValueDisplay(sf::FloatRect(x - 270, y, 250, 30), 0.5, "Rep: ", int(my_spaceship->getReputationPoints()), 20.0);
         y += 30;
         if (button(sf::FloatRect(x - 270, y, 250, 50), "Add waypoint"))
         {
@@ -235,7 +235,7 @@ void CrewCommsUI::drawCommsChannel()
         {
             std::vector<string> lines = my_spaceship->comms_incomming_message.split("\n");
             float y = 100;
-            keyValueDisplay(sf::FloatRect(50, y, 300, 30), 0.5, "Rep: ", int(factionInfo[my_spaceship->faction_id]->reputation_points), 20.0f);
+            keyValueDisplay(sf::FloatRect(50, y, 300, 30), 0.5, "Rep: ", int(my_spaceship->getReputationPoints()), 20.0f);
             y += 50;
             for(unsigned int n=0; n<lines.size(); n++)
             {

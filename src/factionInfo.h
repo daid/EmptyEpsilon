@@ -21,7 +21,6 @@ public:
     string name;
     string description;
     sf::Color gm_color;
-    float reputation_points;
     
     std::vector<EFactionVsFactionState> states;
     

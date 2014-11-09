@@ -46,9 +46,9 @@ public:
     bool isFriendly(P<SpaceObject> obj);
     void setFaction(string faction_name) { this->faction_id = FactionInfo::findFactionId(faction_name); }
     void setFactionId(unsigned int faction_id) { this->faction_id = faction_id; }
-    int getReputationPoints() { return factionInfo[faction_id]->reputation_points; }
-    bool takeReputationPoints(float amount) { if (factionInfo[faction_id]->reputation_points >= amount) { factionInfo[faction_id]->reputation_points -= amount; return true; } return false; }
-    void addReputationPoints(float amount) { factionInfo[faction_id]->reputation_points += amount; }
+    int getReputationPoints();
+    bool takeReputationPoints(float amount);
+    void addReputationPoints(float amount);
     unsigned int getFactionId() { return faction_id; }
     void setCommsScript(string script_name) { this->comms_script_name = script_name; }
     bool areEnemiesInRange(float range);
