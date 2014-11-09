@@ -28,17 +28,6 @@ enum ECommsState
     CS_ChannelBroken
 };
 
-class PlayerSystem
-{
-public:
-    float health; //1.0-0.0, where 0.0 is fully broken.
-    float power_level; //0.0-3.0, default 1.0
-    float heat_level; //0.0-1.0, system will damage at 1.0
-    float coolant_level; //0.0-10.0
-
-    float power_user_factor;//const
-};
-
 class PlayerCommsReply
 {
 public:
@@ -61,7 +50,6 @@ public:
     const static int max_comms_reply_count = 16;
     const static int max_self_destruct_codes = 3;
 
-    PlayerSystem systems[SYS_COUNT];
     NetworkRecorder network_recorder;
     NetworkAudioStream network_audio_stream;
     float energy_level;
@@ -131,6 +119,8 @@ public:
 
     virtual void update(float delta);
     bool useEnergy(float amount) { if (energy_level >= amount) { energy_level -= amount; return true; } return false; }
+    
+    float getNetPowerUsage();
 
     void setCommsMessage(string message);
     void addCommsReply(int32_t id, string message);

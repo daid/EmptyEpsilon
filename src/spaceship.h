@@ -35,6 +35,15 @@ enum EScannedState
     SS_FullScan
 };
 
+class ShipSystem
+{
+public:
+    float health; //1.0-0.0, where 0.0 is fully broken.
+    float power_level; //0.0-3.0, default 1.0
+    float heat_level; //0.0-1.0, system will damage at 1.0
+    float coolant_level; //0.0-10.0
+};
+
 class BeamWeapon : public sf::NonCopyable
 {
 public:
@@ -66,6 +75,8 @@ public:
     P<ShipTemplate> ship_template;
     float engine_emit_delay;
 
+    ShipSystem systems[SYS_COUNT];
+
     float targetRotation;
     float impulseRequest;
     float currentImpulse;
@@ -80,7 +91,6 @@ public:
     bool hasJumpdrive;
     float jumpDistance;
     float jumpDelay;
-    float jumpSpeedFactor;
 
     int8_t weapon_storage[MW_Count];
     int8_t weapon_storage_max[MW_Count];
@@ -89,12 +99,10 @@ public:
     float tubeRechargeFactor;
     WeaponTube weaponTube[maxWeaponTubes];
 
-    float beamRechargeFactor;
     int beam_frequency;
     BeamWeapon beamWeapons[maxBeamWeapons];
 
     float hull_strength, hull_max;
-    float front_shield_recharge_factor, rear_shield_recharge_factor;
     bool shields_active;
     int shield_frequency;
     float front_shield, rear_shield;
@@ -134,6 +142,7 @@ public:
     void setScanned(bool scanned) { scanned_by_player = scanned ? SS_FullScan : SS_NotScanned; }
 
     bool hasSystem(ESystem system);
+    float getSystemEffectiveness(ESystem system);
 
     void setShipTemplate(string templateName);
 

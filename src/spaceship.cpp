@@ -41,7 +41,6 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     hasJumpdrive = true;
     jumpDistance = 0.0;
     jumpDelay = 0.0;
-    jumpSpeedFactor = 1.0;
     tubeLoadTime = 8.0;
     weaponTubes = 0;
     rotationSpeed = 10.0;
@@ -52,12 +51,9 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     shields_active = false;
     front_shield = rear_shield = front_shield_max = rear_shield_max = 50;
     front_shield_hit_effect = rear_shield_hit_effect = 0;
-    front_shield_recharge_factor = rear_shield_recharge_factor = 1.0;
     scanned_by_player = SS_NotScanned;
-    beamRechargeFactor = 1.0;
     beam_frequency = irandom(0, max_frequency);
     shield_frequency = irandom(0, max_frequency);
-    tubeRechargeFactor = 1.0;
     docking_state = DS_NotDocking;
 
     registerMemberReplication(&targetRotation, 1.5);
@@ -86,6 +82,16 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     registerMemberReplication(&scanned_by_player);
     registerMemberReplication(&docking_state);
     registerMemberReplication(&beam_frequency);
+
+    for(int n=0; n<SYS_COUNT; n++)
+    {
+        systems[n].health = 1.0;
+        systems[n].power_level = 1.0;
+        systems[n].coolant_level = 0.0;
+        systems[n].heat_level = 0.0;
+
+        registerMemberReplication(&systems[n].health, 0.1);
+    }
 
     for(int n=0; n<maxBeamWeapons; n++)
     {
@@ -299,17 +305,17 @@ void SpaceShip::update(float delta)
 
     if (front_shield < front_shield_max)
     {
-        front_shield += delta * shield_recharge_rate * front_shield_recharge_factor;
+        front_shield += delta * shield_recharge_rate * getSystemEffectiveness(SYS_FrontShield);
         if (docking_state == DS_Docked)
-            front_shield += delta * shield_recharge_rate * front_shield_recharge_factor * 5.0;
+            front_shield += delta * shield_recharge_rate * getSystemEffectiveness(SYS_FrontShield) * 5.0;
         if (front_shield > front_shield_max)
             front_shield = front_shield_max;
     }
     if (rear_shield < front_shield_max)
     {
-        rear_shield += delta * shield_recharge_rate * rear_shield_recharge_factor;
+        rear_shield += delta * shield_recharge_rate * getSystemEffectiveness(SYS_RearShield);
         if (docking_state == DS_Docked)
-            rear_shield += delta * shield_recharge_rate * rear_shield_recharge_factor * 5.0;
+            rear_shield += delta * shield_recharge_rate * getSystemEffectiveness(SYS_RearShield) * 5.0;
         if (rear_shield > rear_shield_max)
             rear_shield = rear_shield_max;
     }
@@ -325,7 +331,7 @@ void SpaceShip::update(float delta)
     else if (rotationDiff < -1.0)
         setAngularVelocity(-rotationSpeed);
     else
-        setAngularVelocity(rotationDiff * rotationSpeed);
+        setAngularVelocity(rotationDiff * rotationSpeed * getSystemEffectiveness(SYS_Maneuver));
 
     if (hasJumpdrive && jumpDelay > 0)
     {
@@ -341,7 +347,7 @@ void SpaceShip::update(float delta)
             if (currentWarp < 0.0)
                 currentWarp = 0.0;
         }
-        jumpDelay -= delta * jumpSpeedFactor;
+        jumpDelay -= delta * getSystemEffectiveness(SYS_JumpDrive);
         if (jumpDelay <= 0.0)
         {
             executeJump(jumpDistance);
@@ -384,12 +390,12 @@ void SpaceShip::update(float delta)
                 currentImpulse = impulseRequest;
         }
     }
-    setVelocity(sf::vector2FromAngle(getRotation()) * (currentImpulse * impulseMaxSpeed + currentWarp * warpSpeedPerWarpLevel));
+    setVelocity(sf::vector2FromAngle(getRotation()) * (currentImpulse * impulseMaxSpeed * getSystemEffectiveness(SYS_Impulse) + currentWarp * warpSpeedPerWarpLevel * getSystemEffectiveness(SYS_Warp)));
 
     for(int n=0; n<maxBeamWeapons; n++)
     {
         if (beamWeapons[n].cooldown > 0.0)
-            beamWeapons[n].cooldown -= delta * beamRechargeFactor;
+            beamWeapons[n].cooldown -= delta * getSystemEffectiveness(SYS_BeamWeapons);
     }
 
     P<SpaceObject> target = getTarget();
@@ -419,7 +425,7 @@ void SpaceShip::update(float delta)
     {
         if (weaponTube[n].delay > 0.0)
         {
-            weaponTube[n].delay -= delta * tubeRechargeFactor;
+            weaponTube[n].delay -= delta * getSystemEffectiveness(SYS_MissileSystem);
         }else{
             switch(weaponTube[n].state)
             {
@@ -468,6 +474,10 @@ P<SpaceObject> SpaceShip::getTarget()
 
 void SpaceShip::executeJump(float distance)
 {
+    float f = systems[SYS_JumpDrive].health;
+    if (f <= 0.0)
+        return;
+    distance = (distance * f) + (distance * (1.0 - f) * random(0.5, 1.5));
     setPosition(getPosition() + sf::vector2FromAngle(getRotation()) * distance * 1000.0f);
 }
 
@@ -666,6 +676,11 @@ bool SpaceShip::hasSystem(ESystem system)
     if (system == SYS_FrontShield && front_shield_max <= 0) return false;
     if (system == SYS_RearShield && rear_shield_max <= 0) return false;
     return true;
+}
+
+float SpaceShip::getSystemEffectiveness(ESystem system)
+{
+    return systems[system].power_level * systems[system].health;
 }
 
 string SpaceShip::getCallSign()

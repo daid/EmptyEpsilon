@@ -10,6 +10,18 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getWaypointCount);
 }
 
+static float system_power_user_factor[] = {
+    /*SYS_Reactor*/ -30.0,
+    /*SYS_BeamWeapons*/ 3.0,
+    /*SYS_MissileSystem*/ 1.0,
+    /*SYS_Maneuver*/ 2.0,
+    /*SYS_Impulse*/ 4.0,
+    /*SYS_Warp*/ 6.0,
+    /*SYS_JumpDrive*/ 6.0,
+    /*SYS_FrontShield*/ 5.0,
+    /*SYS_RearShield*/ 5.0,
+};
+
 static const int16_t CMD_TARGET_ROTATION = 0x0001;
 static const int16_t CMD_IMPULSE = 0x0002;
 static const int16_t CMD_WARP = 0x0003;
@@ -65,15 +77,10 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&hull_max);
     registerMemberReplication(&warp_indicator, 0.5);
     registerMemberReplication(&energy_level);
-    registerMemberReplication(&jumpSpeedFactor);
-    registerMemberReplication(&beamRechargeFactor);
-    registerMemberReplication(&tubeRechargeFactor);
     registerMemberReplication(&main_screen_setting);
     registerMemberReplication(&scanning_delay, 0.5);
     registerMemberReplication(&shields_active);
     registerMemberReplication(&shield_calibration_delay, 0.5);
-    registerMemberReplication(&front_shield_recharge_factor);
-    registerMemberReplication(&rear_shield_recharge_factor);
     registerMemberReplication(&auto_repair_enabled);
     registerMemberReplication(&comms_state);
     registerMemberReplication(&comms_open_delay, 1.0);
@@ -102,20 +109,10 @@ PlayerSpaceship::PlayerSpaceship()
         systems[n].coolant_level = 0.0;
         systems[n].heat_level = 0.0;
 
-        registerMemberReplication(&systems[n].health);
         registerMemberReplication(&systems[n].power_level);
         registerMemberReplication(&systems[n].coolant_level);
         registerMemberReplication(&systems[n].heat_level, 1.0);
     }
-    systems[SYS_Reactor].power_user_factor = -30.0;
-    systems[SYS_BeamWeapons].power_user_factor = 3.0;
-    systems[SYS_MissileSystem].power_user_factor = 1.0;
-    systems[SYS_Maneuver].power_user_factor = 2.0;
-    systems[SYS_Impulse].power_user_factor = 4.0;
-    systems[SYS_Warp].power_user_factor = 6.0;
-    systems[SYS_JumpDrive].power_user_factor = 6.0;
-    systems[SYS_FrontShield].power_user_factor = 5.0;
-    systems[SYS_RearShield].power_user_factor = 5.0;
 
     if (game_server)
     {
@@ -135,7 +132,7 @@ void PlayerSpaceship::update(float delta)
         warp_indicator -= delta;
     if (shield_calibration_delay > 0)
     {
-        shield_calibration_delay -= delta * (front_shield_recharge_factor + rear_shield_recharge_factor) / 2.0;
+        shield_calibration_delay -= delta * (getSystemEffectiveness(SYS_FrontShield) + getSystemEffectiveness(SYS_RearShield)) / 2.0;
     }
 
     if (docking_state == DS_Docked)
@@ -192,15 +189,12 @@ void PlayerSpaceship::update(float delta)
 
         if (shields_active)
             useEnergy(delta * energy_shield_use_per_second);
-
+        
+        energy_level += delta * getNetPowerUsage() * 0.02 * delta;
         for(int n=0; n<SYS_COUNT; n++)
         {
             if (!hasSystem(ESystem(n))) continue;
 
-            if (systems[n].power_user_factor < 0.0)   //When we generate power, use the health of this system in the equation
-                energy_level -= delta * systems[n].power_user_factor * systems[n].health * systems[n].power_level * 0.02;
-            else
-                energy_level -= delta * systems[n].power_user_factor * systems[n].power_level * 0.02;
             systems[n].heat_level += delta * powf(1.7, systems[n].power_level - 1.0) * system_heatup_per_second;
             systems[n].heat_level -= delta * (1.0 + systems[n].coolant_level * 0.1) * system_heatup_per_second;
             if (systems[n].heat_level > 1.0)
@@ -236,14 +230,6 @@ void PlayerSpaceship::update(float delta)
             max_power_level = 0.1;
             shields_active = false;
         }
-        beamRechargeFactor = std::min(systems[SYS_BeamWeapons].power_level * systems[SYS_BeamWeapons].health, max_power_level);
-        tubeRechargeFactor = std::min(systems[SYS_MissileSystem].power_level * systems[SYS_MissileSystem].health, max_power_level);
-        rotationSpeed = ship_template->turnSpeed * std::min(systems[SYS_Maneuver].power_level * systems[SYS_Maneuver].health, max_power_level);
-        impulseMaxSpeed = ship_template->impulseSpeed * std::min(systems[SYS_Impulse].power_level * systems[SYS_Impulse].health, max_power_level);
-        warpSpeedPerWarpLevel = ship_template->warpSpeed * std::min(systems[SYS_Warp].power_level * systems[SYS_Warp].health, max_power_level);
-        jumpSpeedFactor = std::min(systems[SYS_JumpDrive].power_level * systems[SYS_JumpDrive].health, max_power_level);
-        front_shield_recharge_factor = std::min(systems[SYS_FrontShield].power_level * systems[SYS_FrontShield].health, max_power_level);
-        rear_shield_recharge_factor = std::min(systems[SYS_RearShield].power_level * systems[SYS_RearShield].health, max_power_level);
 
         if (hasWarpdrive && warpRequest > 0 && !(hasJumpdrive && jumpDelay > 0))
         {
@@ -312,8 +298,6 @@ void PlayerSpaceship::executeJump(float distance)
     if (useEnergy(distance * energy_per_jump_km) && systems[SYS_JumpDrive].health > 0.0)
     {
         warp_indicator = 2.0;
-        float f = systems[SYS_JumpDrive].health;
-        distance = (distance * f) + (distance * (1.0 - f) * random(0.5, 1.5));
         SpaceShip::executeJump(distance);
     }
 }
@@ -379,6 +363,20 @@ void PlayerSpaceship::setSystemCoolant(ESystem system, float level)
     }
 
     systems[system].coolant_level = level;
+}
+
+float PlayerSpaceship::getNetPowerUsage()
+{
+    float net_power = 0.0;
+    for(int n=0; n<SYS_COUNT; n++)
+    {
+        if (!hasSystem(ESystem(n))) continue;
+        if (system_power_user_factor[n] < 0) //When we generate power, use the health of this system in the equation
+            net_power -= system_power_user_factor[n] * systems[n].health * systems[n].power_level;
+        else
+            net_power -= system_power_user_factor[n] * systems[n].power_level;
+    }
+    return net_power;
 }
 
 void PlayerSpaceship::setCommsMessage(string message)

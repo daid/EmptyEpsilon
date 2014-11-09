@@ -15,15 +15,7 @@ void CrewEngineeringUI::onCrewUI()
     sf::RenderTarget& window = *getRenderTarget();
     sf::Vector2f mouse = InputHandler::getMousePos();
 
-    float net_power = 0.0;
-    for(int n=0; n<SYS_COUNT; n++)
-    {
-        if (!my_spaceship->hasSystem(ESystem(n))) continue;
-        if (my_spaceship->systems[n].power_user_factor < 0)
-            net_power -= my_spaceship->systems[n].power_user_factor * my_spaceship->systems[n].health * my_spaceship->systems[n].power_level;
-        else
-            net_power -= my_spaceship->systems[n].power_user_factor * my_spaceship->systems[n].power_level;
-    }
+    float net_power = my_spaceship->getNetPowerUsage();
     keyValueDisplay(sf::FloatRect(20, 100, 300, 40), 0.5, "Energy", string(int(my_spaceship->energy_level)) + " (" + string(net_power) + ")", 25);
     keyValueDisplay(sf::FloatRect(20, 140, 300, 40), 0.5, "Hull", string(int(my_spaceship->hull_strength * 100 / my_spaceship->hull_max)), 25);
     keyValueDisplay(sf::FloatRect(20, 180, 300, 40), 0.5, "Shields", string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "/" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)), 25);
