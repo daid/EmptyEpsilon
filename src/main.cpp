@@ -80,7 +80,19 @@ int main(int argc, char** argv)
 
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     if (desktop.height / 3 * 4 == desktop.width || startup_parameters["screen43"].toInt() != 0)
+    {
         width = height / 3 * 4;
+    }else{
+        width = height * desktop.width / desktop.height;
+        if (width < height / 3 * 4)
+            width = height / 3 * 4;
+    }
+    if (startup_parameters["fsaa"].toInt() > 0)
+    {
+        fsaa = startup_parameters["fsaa"].toInt();
+        if (fsaa < 2)
+            fsaa = 2;
+    }
     engine->registerObject("windowManager", new WindowManager(width, height, fullscreen, warpPostProcessor, fsaa));
     if (startup_parameters["touchscreen"].toInt())
     {
