@@ -84,7 +84,7 @@ ERepairCrewDirection pathFind(sf::Vector2i start_pos, sf::Vector2i target_pos, P
         if (pos.y > 0 && node[pos.x][pos.y - 1].down && node[pos.x][pos.y - 1].arrive_direction == RC_None)
         {
             node[pos.x][pos.y - 1].arrive_direction = node[pos.x][pos.y].arrive_direction;
-            if (node[pos.x][pos.y - 1].arrive_direction == RC_Idle) node[pos.x][pos.y - 1].arrive_direction = RC_Up;
+            if (node[pos.x][pos.y - 1].arrive_direction == RC_None) node[pos.x][pos.y - 1].arrive_direction = RC_Up;
             search_points.push_back(sf::Vector2i(pos.x, pos.y - 1));
         }
     }
@@ -166,6 +166,7 @@ void RepairCrew::update(float delta)
     case RC_Move:
         switch(direction)
         {
+        case RC_None: break;
         case RC_Left: position.x -= delta * move_speed; break;
         case RC_Right: position.x += delta * move_speed; break;
         case RC_Up: position.y -= delta * move_speed; break;

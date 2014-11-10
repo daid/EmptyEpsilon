@@ -94,7 +94,7 @@ void ServerCreationScreen::onGui()
     }
 }
 
-int lua_victory(lua_State* L)
+static int victory(lua_State* L)
 {
     gameGlobalInfo->setVictory(luaL_checkstring(L, 1));
     if (engine->getObject("scenario"))
@@ -102,11 +102,11 @@ int lua_victory(lua_State* L)
     engine->setGameSpeed(0.0);
     return 0;
 }
+REGISTER_SCRIPT_FUNCTION(victory);
 
 void ServerCreationScreen::startScenario()
 {
     P<ScriptObject> script = new ScriptObject();
-    script->registerFunction("victory", lua_victory);
     script->run(scenarios[active_scenario_index].filename);
     engine->registerObject("scenario", script);
 }
