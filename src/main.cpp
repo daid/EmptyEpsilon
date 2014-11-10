@@ -41,6 +41,22 @@ int main(int argc, char** argv)
         CFRelease(url);
     }
 #endif
+    FILE* f = fopen("options.ini", "r");
+    if (f)
+    {
+        char buffer[1024];
+        while(fgets(buffer, sizeof(buffer), f))
+        {
+            string line = string(buffer).strip();
+            if (line.find("=") > -1)
+            {
+                string key = line.substr(0, line.find("="));
+                string value = line.substr(line.find("=") + 1);
+                startup_parameters[key] = value;
+            }
+        }
+        fclose(f);
+    }
     for(int n=1; n<argc; n++)
     {
         char* value = strchr(argv[n], '=');
@@ -112,7 +128,11 @@ int main(int argc, char** argv)
             fclose(f);
         }
     }
-    soundManager.setMusicVolume(50);
+    
+    if (startup_parameters.find("music_volume") != startup_parameters.end())
+        soundManager.setMusicVolume(startup_parameters["music_volume"].toFloat());
+    else
+        soundManager.setMusicVolume(50);
 
     P<ResourceStream> stream = getResourceStream("sansation.ttf");
     mainFont.loadFromStream(**stream);
@@ -138,8 +158,23 @@ int main(int argc, char** argv)
     returnToMainMenu();
     
     engine->runMainLoop();
+
+    f = fopen("options.ini", "w");
+    if (f)
+    {
+        P<WindowManager> windowManager = engine->getObject("windowManager");
+        startup_parameters["fsaa"] = windowManager->getFSAA();
+        startup_parameters["fullscreen"] = windowManager->isFullscreen() ? 1 : 0;
+        startup_parameters["music_volume"] = soundManager.getMusicVolume();
+        for(std::map<string, string>::iterator i = startup_parameters.begin(); i != startup_parameters.end(); i++)
+        {
+            fprintf(f, "%s=%s\n", i->first.c_str(), i->second.c_str());
+        }
+        fclose(f);
+    }
     
     delete engine;
+    
     return 0;
 }
 
