@@ -19,6 +19,8 @@ enum EAIOrder
 
 class CpuShip : public SpaceShip
 {
+    static const float auto_system_repair_per_second = 0.005f;
+    
     EAIOrder orders;                    //Server only
     sf::Vector2f order_target_location; //Server only
     P<SpaceObject> order_target;        //Server only

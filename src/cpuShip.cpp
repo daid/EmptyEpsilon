@@ -37,6 +37,9 @@ void CpuShip::update(float delta)
 
     if (!game_server)
         return;
+    
+    for(int n=0; n<SYS_COUNT; n++)
+        systems[n].health = std::min(1.0f, systems[n].health + delta * auto_system_repair_per_second);
 
     if (missile_fire_delay > 0.0)
         missile_fire_delay -= delta;

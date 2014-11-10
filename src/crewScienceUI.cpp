@@ -53,28 +53,44 @@ void CrewScienceUI::onCrewUI()
             for(unsigned int n = 0; n < scan_ghost.size(); n++)
                 if (scan_ghost[n].object == scienceTarget)
                     target_position = scan_ghost[n].position;
-            float y = 415;
-            sf::VertexArray target_line(sf::LinesStrip, 4);
-            target_line[0].position = radar_center + (target_position - my_spaceship->getPosition()) / radarDistance * 400.0f;
-            target_line[0].position.x += 16;
-            target_line[1].position = sf::Vector2f(getWindowSize().x - 300 - fabs(target_line[0].position.y - y), target_line[0].position.y);
-            target_line[2].position = sf::Vector2f(getWindowSize().x - 300, y);
-            target_line[3].position = sf::Vector2f(getWindowSize().x - 270, y);
-            target_line[0].color = target_line[1].color = target_line[2].color = target_line[3].color = sf::Color(255, 255, 255, 128);
-            getRenderTarget()->draw(target_line);
+            sf::Vector2f end_point_1(getWindowSize().x - 300, 215);
+            sf::Vector2f end_point_2(getWindowSize().x - 270, 215);
+            sf::Vector2f start_point = radar_center + (target_position - my_spaceship->getPosition()) / radarDistance * 400.0f;
+            start_point.x += 16;
+
+            if (end_point_1.x - fabs(start_point.y - end_point_1.y) > start_point.x + 16)
+            {
+                sf::VertexArray target_line(sf::LinesStrip, 4);
+                target_line[0].position = start_point;
+                target_line[1].position = sf::Vector2f(end_point_1.x - fabs(start_point.y - end_point_1.y), start_point.y);
+                target_line[2].position = end_point_1;
+                target_line[3].position = end_point_2;
+                target_line[0].color = target_line[1].color = target_line[2].color = target_line[3].color = sf::Color(255, 255, 255, 128);
+                getRenderTarget()->draw(target_line);
+            }else{
+                sf::VertexArray target_line(sf::LinesStrip, 6);
+                target_line[0].position = start_point;
+                target_line[1].position = start_point + sf::Vector2f(16, 0);
+                target_line[2].position = sf::Vector2f(end_point_1.x - 16, start_point.y - (end_point_1.x - 16 - start_point.x - 16));
+                target_line[3].position = end_point_1 + sf::Vector2f(-16, 16);
+                target_line[4].position = end_point_1;
+                target_line[5].position = end_point_2;
+                target_line[0].color = target_line[1].color = target_line[2].color = target_line[3].color = target_line[4].color = target_line[5].color = sf::Color(255, 255, 255, 128);
+                getRenderTarget()->draw(target_line);
+            }
         }
 
         if (my_spaceship->scanning_delay > 0.0)
         {
             float x = getWindowSize().x - 270;
-            float y = 400;
+            float y = 200;
             textbox(sf::FloatRect(x, y, 250, 30), "Scanning", AlignCenter, 20); y += 30;
             progressBar(sf::FloatRect(x, y, 250, 50), my_spaceship->scanning_delay, 6.0, 0.0); y += 50;
         } else {
             if (scienceTarget)
             {
                 float x = getWindowSize().x - 270;
-                float y = 400;
+                float y = 200;
                 sf::Vector2f position_diff = target_position - my_spaceship->getPosition();
                 float distance = sf::length(position_diff);
                 float heading = sf::vector2ToAngle(position_diff) - 270;
@@ -96,7 +112,7 @@ void CrewScienceUI::onCrewUI()
                     y += 50;
                 }else{
                     keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Faction", factionInfo[scienceTarget->faction_id]->name, 20); y += 30;
-                    if (ship && ship->ship_template)
+                    if (ship)
                     {
                         keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Type", ship->ship_type_name, 20); y += 30;
                         keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Shields", string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), 20); y += 30;
@@ -124,6 +140,11 @@ void CrewScienceUI::onCrewUI()
                                     text(sf::FloatRect(x + 20, y, 210, 30), "Damage recieved from", AlignCenter, 20);
                                 }
                                 y += 100;
+                            }
+                            
+                            for(int n=0; n<SYS_COUNT; n++)
+                            {
+                                keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.75, getSystemName(ESystem(n)), string(int(ship->systems[n].health * 100.0f)) + "%", 20); y += 30;
                             }
                         }else{
                             if (button(sf::FloatRect(x, y, 250, 50), "Scan", 30))
@@ -296,7 +317,7 @@ void CrewScienceUI::onCrewUI()
                 {
                 case 0://Homing missile
                     keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Range", "6km", 20.0f); y += 40;
-                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Damage", "20", 20.0f); y += 40;
+                    keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Damage", "30", 20.0f); y += 40;
                     textbox(sf::FloatRect(500, y, 400, 400), "The standard homing missile is the\ndefault weapon of choice for many ships", AlignTopLeft, 20);
                     break;
                 case 1://Nuke

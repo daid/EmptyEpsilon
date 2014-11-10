@@ -317,17 +317,6 @@ void PlayerSpaceship::hullDamage(float damageAmount, sf::Vector2f damageLocation
     if (type != DT_EMP)
     {
         hull_damage_indicator = 1.5;
-        for(int n=0; n<10; n++)
-        {
-            ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
-            //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
-            float system_damage = (damageAmount / hull_max) * 3.0;
-            if (type == DT_Kinetic)
-                system_damage *= 2.0;   //Missile weapons do more system damage, as they penetrate the hull easier.
-            systems[random_system].health -= system_damage;
-            if (systems[random_system].health < -1.0)
-                systems[random_system].health = -1.0;
-        }
     }
     SpaceShip::hullDamage(damageAmount, damageLocation, type);
 }
