@@ -54,6 +54,9 @@ void MainMenu::onGui()
     y += 10;
     text(sf::FloatRect(0, y, getWindowSize().x - 50, 20), "Models:", AlignRight, 20); y+= 20;
     text(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "SolCommand (http://solcommand.blogspot.com/)", AlignRight, 18); y+= 18;
+    y += 10;
+    text(sf::FloatRect(0, y, getWindowSize().x - 50, 20), "Crew sprites:", AlignRight, 20); y+= 20;
+    text(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "Tokka (http://bekeen.de/)", AlignRight, 18); y+= 18;
 }
 
 OptionsMenu::OptionsMenu()

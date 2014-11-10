@@ -57,6 +57,7 @@ int main(int argc, char** argv)
     textureManager.setDefaultSmooth(true);
     textureManager.setDefaultRepeated(true);
     textureManager.setAutoSprite(false);
+    textureManager.getTexture("Tokka_WalkingMan.png", sf::Vector2i(6, 1));
 
     //Setup the rendering layers.
     backgroundLayer = new RenderLayer();
@@ -133,7 +134,7 @@ int main(int argc, char** argv)
     P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");
     if (factionInfoScript)
         factionInfoScript->destroy();
-    
+
     returnToMainMenu();
     
     engine->runMainLoop();

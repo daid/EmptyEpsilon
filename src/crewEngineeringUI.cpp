@@ -135,8 +135,28 @@ void CrewEngineeringUI::onCrewUI()
     {
         sf::Vector2f position = interial_position + sf::Vector2f(rc->position) * 48.0f + sf::Vector2f(1.0, 1.0) * 48.0f / 2.0f + sf::Vector2f(2.0, 2.0);
         sf::Sprite sprite;
-        textureManager.setTexture(sprite, "RadarBlip.png");
+        if (rc->action == RC_Move)
+            textureManager.setTexture(sprite, "Tokka_WalkingMan.png", int(rc->action_delay * 12) % 6);
+        else
+            textureManager.setTexture(sprite, "Tokka_WalkingMan.png", 0);
+        sprite.setScale(0.9, 0.9);
         sprite.setPosition(position);
+        switch(rc->direction)
+        {
+        case RC_Left:
+            sprite.setRotation(180);
+            break;
+        case RC_Right:
+            sprite.setRotation(0);
+            break;
+        case RC_None:
+        case RC_Up:
+            sprite.setRotation(-90);
+            break;
+        case RC_Down:
+            sprite.setRotation(90);
+            break;
+        }
         window.draw(sprite);
 
         if (InputHandler::mouseIsReleased(sf::Mouse::Left) && sf::length(mouse - position) < 48.0f/2.0)

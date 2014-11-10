@@ -7,10 +7,15 @@
 enum ERepairCrewAction
 {
     RC_Idle,
-    RC_MoveLeft,
-    RC_MoveRight,
-    RC_MoveUp,
-    RC_MoveDown,
+    RC_Move
+};
+enum ERepairCrewDirection
+{
+    RC_None,
+    RC_Up,
+    RC_Down,
+    RC_Left,
+    RC_Right
 };
 
 class RepairCrew : public MultiplayerObject, public Updatable
@@ -21,6 +26,7 @@ public:
     sf::Vector2f position;
     sf::Vector2i target_position;
     ERepairCrewAction action;
+    ERepairCrewDirection direction;
     float action_delay;
     int32_t ship_id;
     

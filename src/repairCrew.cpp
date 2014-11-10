@@ -21,11 +21,11 @@ RepairCrew::RepairCrew()
 
 struct PathNode
 {
-    ERepairCrewAction arrive_action;
+    ERepairCrewDirection arrive_direction;
     bool right, down;
 };
 
-ERepairCrewAction pathFind(sf::Vector2i start_pos, sf::Vector2i target_pos, P<ShipTemplate> t)
+ERepairCrewDirection pathFind(sf::Vector2i start_pos, sf::Vector2i target_pos, P<ShipTemplate> t)
 {
     sf::Vector2i size = t->interiorSize();
     PathNode node[size.x][size.y];
@@ -60,36 +60,36 @@ ERepairCrewAction pathFind(sf::Vector2i start_pos, sf::Vector2i target_pos, P<Sh
     {
         sf::Vector2i pos = search_points[0];
         if (pos == target_pos)
-            return node[pos.x][pos.y].arrive_action;
+            return node[pos.x][pos.y].arrive_direction;
         search_points.erase(search_points.begin());
 
-        if (node[pos.x][pos.y].right && node[pos.x + 1][pos.y].arrive_action == RC_Idle)
+        if (node[pos.x][pos.y].right && node[pos.x + 1][pos.y].arrive_direction == RC_None)
         {
-            node[pos.x + 1][pos.y].arrive_action = node[pos.x][pos.y].arrive_action;
-            if (node[pos.x + 1][pos.y].arrive_action == RC_Idle) node[pos.x + 1][pos.y].arrive_action = RC_MoveRight;
+            node[pos.x + 1][pos.y].arrive_direction = node[pos.x][pos.y].arrive_direction;
+            if (node[pos.x + 1][pos.y].arrive_direction == RC_None) node[pos.x + 1][pos.y].arrive_direction = RC_Right;
             search_points.push_back(sf::Vector2i(pos.x + 1, pos.y));
         }
-        if (pos.x > 0 && node[pos.x - 1][pos.y].right && node[pos.x - 1][pos.y].arrive_action == RC_Idle)
+        if (pos.x > 0 && node[pos.x - 1][pos.y].right && node[pos.x - 1][pos.y].arrive_direction == RC_None)
         {
-            node[pos.x - 1][pos.y].arrive_action = node[pos.x][pos.y].arrive_action;
-            if (node[pos.x - 1][pos.y].arrive_action == RC_Idle) node[pos.x - 1][pos.y].arrive_action = RC_MoveLeft;
+            node[pos.x - 1][pos.y].arrive_direction = node[pos.x][pos.y].arrive_direction;
+            if (node[pos.x - 1][pos.y].arrive_direction == RC_None) node[pos.x - 1][pos.y].arrive_direction = RC_Left;
             search_points.push_back(sf::Vector2i(pos.x - 1, pos.y));
         }
-        if (node[pos.x][pos.y].down && node[pos.x][pos.y + 1].arrive_action == RC_Idle)
+        if (node[pos.x][pos.y].down && node[pos.x][pos.y + 1].arrive_direction == RC_None)
         {
-            node[pos.x][pos.y + 1].arrive_action = node[pos.x][pos.y].arrive_action;
-            if (node[pos.x][pos.y + 1].arrive_action == RC_Idle) node[pos.x][pos.y + 1].arrive_action = RC_MoveDown;
+            node[pos.x][pos.y + 1].arrive_direction = node[pos.x][pos.y].arrive_direction;
+            if (node[pos.x][pos.y + 1].arrive_direction == RC_None) node[pos.x][pos.y + 1].arrive_direction = RC_Down;
             search_points.push_back(sf::Vector2i(pos.x, pos.y + 1));
         }
-        if (pos.y > 0 && node[pos.x][pos.y - 1].down && node[pos.x][pos.y - 1].arrive_action == RC_Idle)
+        if (pos.y > 0 && node[pos.x][pos.y - 1].down && node[pos.x][pos.y - 1].arrive_direction == RC_None)
         {
-            node[pos.x][pos.y - 1].arrive_action = node[pos.x][pos.y].arrive_action;
-            if (node[pos.x][pos.y - 1].arrive_action == RC_Idle) node[pos.x][pos.y - 1].arrive_action = RC_MoveUp;
+            node[pos.x][pos.y - 1].arrive_direction = node[pos.x][pos.y].arrive_direction;
+            if (node[pos.x][pos.y - 1].arrive_direction == RC_Idle) node[pos.x][pos.y - 1].arrive_direction = RC_Up;
             search_points.push_back(sf::Vector2i(pos.x, pos.y - 1));
         }
     }
 
-    return RC_Idle;
+    return RC_None;
 }
 
 void RepairCrew::update(float delta)
@@ -129,7 +129,14 @@ void RepairCrew::update(float delta)
         {
             action_delay = 1.0 / move_speed;
             if (pos != target_position)
-                action = pathFind(pos, target_position, ship->ship_template);
+            {
+                ERepairCrewDirection new_direction = pathFind(pos, target_position, ship->ship_template);
+                if (new_direction != RC_None)
+                {
+                    action = RC_Move;
+                    direction = new_direction;
+                }
+            }
             position = sf::Vector2f(pos);
 
             ESystem system = ship->ship_template->getSystemAtRoom(pos);
@@ -156,23 +163,14 @@ void RepairCrew::update(float delta)
             }
         }
         break;
-    case RC_MoveLeft:
-        position.x -= delta * move_speed;
-        if (action_delay < 0.0)
-            action = RC_Idle;
-        break;
-    case RC_MoveRight:
-        position.x += delta * move_speed;
-        if (action_delay < 0.0)
-            action = RC_Idle;
-        break;
-    case RC_MoveUp:
-        position.y -= delta * move_speed;
-        if (action_delay < 0.0)
-            action = RC_Idle;
-        break;
-    case RC_MoveDown:
-        position.y += delta * move_speed;
+    case RC_Move:
+        switch(direction)
+        {
+        case RC_Left: position.x -= delta * move_speed; break;
+        case RC_Right: position.x += delta * move_speed; break;
+        case RC_Up: position.y -= delta * move_speed; break;
+        case RC_Down: position.y += delta * move_speed; break;
+        }
         if (action_delay < 0.0)
             action = RC_Idle;
         break;
