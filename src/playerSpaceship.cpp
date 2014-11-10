@@ -190,7 +190,7 @@ void PlayerSpaceship::update(float delta)
         if (shields_active)
             useEnergy(delta * energy_shield_use_per_second);
         
-        energy_level += delta * getNetPowerUsage() * 0.02 * delta;
+        energy_level += delta * getNetPowerUsage() * 0.02;
         for(int n=0; n<SYS_COUNT; n++)
         {
             if (!hasSystem(ESystem(n))) continue;
@@ -201,14 +201,14 @@ void PlayerSpaceship::update(float delta)
             {
                 systems[n].heat_level = 1.0;
                 systems[n].health -= delta * damage_per_second_on_overheat;
-                if (systems[n].health < 0.0)
-                    systems[n].health = 0.0;
+                if (systems[n].health < -1.0)
+                    systems[n].health = -1.0;
             }
             if (systems[n].heat_level < 0.0)
                 systems[n].heat_level = 0.0;
         }
 
-        if (systems[SYS_Reactor].health < 0.2 && systems[SYS_Reactor].heat_level == 1.0)
+        if (systems[SYS_Reactor].health < -0.9 && systems[SYS_Reactor].heat_level == 1.0)
         {
             //Ok, you screwed up. Seriously, your reactor is heavy damaged and overheated. So it will explode.
             ExplosionEffect* e = new ExplosionEffect();
@@ -223,12 +223,16 @@ void PlayerSpaceship::update(float delta)
 
         if (energy_level < 0.0)
             energy_level = 0.0;
-        float max_power_level = 3.0;
         if (energy_level < 10.0)
         {
             //Out of energy, we do not care how much power you put into systems, everything is bad now.
-            max_power_level = 0.1;
             shields_active = false;
+            for(int n=0; n<SYS_COUNT; n++)
+            {
+                if (!hasSystem(ESystem(n))) continue;
+                if (n == SYS_Reactor) continue;
+                systems[n].power_level = 0.1;
+            }
         }
 
         if (hasWarpdrive && warpRequest > 0 && !(hasJumpdrive && jumpDelay > 0))
@@ -321,8 +325,8 @@ void PlayerSpaceship::hullDamage(float damageAmount, sf::Vector2f damageLocation
             if (type == DT_Kinetic)
                 system_damage *= 2.0;   //Missile weapons do more system damage, as they penetrate the hull easier.
             systems[random_system].health -= system_damage;
-            if (systems[random_system].health < 0.0)
-                systems[random_system].health = 0.0;
+            if (systems[random_system].health < -1.0)
+                systems[random_system].health = -1.0;
         }
     }
     SpaceShip::hullDamage(damageAmount, damageLocation, type);

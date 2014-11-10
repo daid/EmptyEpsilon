@@ -86,7 +86,7 @@ ShipTemplate::ShipTemplate()
     radius = 50.0;
     collision_box = sf::Vector2f(0, 0);
     size_class = 10;
-    weaponTubes = 0;
+    weapon_tubes = 0;
     tube_load_time = 8.0;
     hull = 70;
     frontShields = 0;

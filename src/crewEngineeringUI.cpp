@@ -57,7 +57,10 @@ void CrewEngineeringUI::onCrewUI()
             selected_system = ESystem(n);
         
         float health = my_spaceship->systems[n].health;
-        progressBar(sf::FloatRect(320, y, 100, 50), health, 0.0, 1.0, sf::Color(64, 128 * health, 64 * health));
+        if (health < 0.0)
+            progressBar(sf::FloatRect(320, y, 100, 50), health, 0.0, -1.0, sf::Color(128, 32, 32));
+        else
+            progressBar(sf::FloatRect(320, y, 100, 50), health, 0.0, 1.0, sf::Color(64, 128 * health, 64 * health));
         text(sf::FloatRect(320, y, 100, 50), string(int(health * 100)) + "%", AlignCenter, 20);
         
         float heat = my_spaceship->systems[n].heat_level;

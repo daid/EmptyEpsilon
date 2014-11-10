@@ -94,7 +94,7 @@ public:
 
     int8_t weapon_storage[MW_Count];
     int8_t weapon_storage_max[MW_Count];
-    int8_t weaponTubes;
+    int8_t weapon_tubes;
     float tubeLoadTime;
     float tubeRechargeFactor;
     WeaponTube weaponTube[maxWeaponTubes];

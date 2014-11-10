@@ -502,7 +502,9 @@ void MainUIBase::drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESy
         {
             float f = 1.0;
             if (playerSpaceship)
-                f = playerSpaceship->systems[st->rooms[n].system].health;
+            {
+                f = std::max(0.0f, playerSpaceship->systems[st->rooms[n].system].health);
+            }
             if (st->rooms[n].system == highlight_system)
             {
                 room.setFillColor(sf::Color(127 + 128 * (1.0 - f), 128 * f, 32 * f, 255));

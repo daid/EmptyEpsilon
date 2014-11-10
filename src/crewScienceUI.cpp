@@ -256,9 +256,9 @@ void CrewScienceUI::onCrewUI()
                             keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, name + " beam weapon", string(ship_template->beams[n].damage / ship_template->beams[n].cycle_time, 2) + " DPS", 20); y += 40;
                         }
                     }
-                    if (ship_template->weaponTubes > 0)
+                    if (ship_template->weapon_tubes > 0)
                     {
-                        keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Missile tubes", string(ship_template->weaponTubes), 20); y += 40;
+                        keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Missile tubes", string(ship_template->weapon_tubes), 20); y += 40;
                         keyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, "Missile load time", string(int(ship_template->tube_load_time)), 20); y += 40;
                     }
                     for(int n=0; n < MW_Count; n++)

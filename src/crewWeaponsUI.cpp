@@ -37,10 +37,10 @@ void CrewWeaponsUI::onCrewUI()
     keyValueDisplay(sf::FloatRect(20, 100, 250, 40), 0.5, "Energy", string(int(my_spaceship->energy_level)), 25);
     keyValueDisplay(sf::FloatRect(20, 140, 250, 40), 0.5, "Shields", string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "/" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)), 25);
 
-    if (my_spaceship->weaponTubes > 0)
+    if (my_spaceship->weapon_tubes > 0)
     {
         float y = 900 - 10;
-        for(int n=0; n<my_spaceship->weaponTubes; n++)
+        for(int n=0; n<my_spaceship->weapon_tubes; n++)
         {
             y -= 50;
             weaponTube(tube_load_type, n, sf::FloatRect(20, y, 150, 50), sf::FloatRect(170, y, 350, 50), 35);

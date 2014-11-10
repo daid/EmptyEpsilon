@@ -42,7 +42,7 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     jumpDistance = 0.0;
     jumpDelay = 0.0;
     tubeLoadTime = 8.0;
-    weaponTubes = 0;
+    weapon_tubes = 0;
     rotationSpeed = 10.0;
     impulseMaxSpeed = 600.0;
     warpSpeedPerWarpLevel = 1000.0;
@@ -65,7 +65,7 @@ SpaceShip::SpaceShip(string multiplayerClassName)
     registerMemberReplication(&hasJumpdrive);
     registerMemberReplication(&jumpDelay, 0.5);
     registerMemberReplication(&tubeLoadTime);
-    registerMemberReplication(&weaponTubes);
+    registerMemberReplication(&weapon_tubes);
     registerMemberReplication(&targetId);
     registerMemberReplication(&rotationSpeed);
     registerMemberReplication(&impulseMaxSpeed);
@@ -146,7 +146,7 @@ void SpaceShip::setShipTemplate(string templateName)
         beamWeapons[n].cycleTime = ship_template->beams[n].cycle_time;
         beamWeapons[n].damage = ship_template->beams[n].damage;
     }
-    weaponTubes = ship_template->weaponTubes;
+    weapon_tubes = ship_template->weapon_tubes;
     hull_strength = hull_max = ship_template->hull;
     front_shield = ship_template->frontShields;
     rear_shield = ship_template->rearShields;
@@ -670,17 +670,36 @@ void SpaceShip::hullDamage(float damageAmount, sf::Vector2f damageLocation, EDam
 
 bool SpaceShip::hasSystem(ESystem system)
 {
-    if (system == SYS_None || system == SYS_COUNT) return false;
-    if (system == SYS_Warp && !hasWarpdrive) return false;
-    if (system == SYS_JumpDrive && !hasJumpdrive) return false;
-    if (system == SYS_FrontShield && front_shield_max <= 0) return false;
-    if (system == SYS_RearShield && rear_shield_max <= 0) return false;
+    switch(system)
+    {
+    case SYS_None:
+    case SYS_COUNT:
+        return false;
+    case SYS_Warp:
+        return hasWarpdrive;
+    case SYS_JumpDrive:
+        return hasJumpdrive;
+    case SYS_MissileSystem:
+        return weapon_tubes > 0;
+    case SYS_FrontShield:
+        return front_shield_max > 0;
+    case SYS_RearShield:
+        return rear_shield_max > 0;
+    case SYS_Reactor:
+        return true;
+    case SYS_BeamWeapons:
+        return true;
+    case SYS_Maneuver:
+        return rotationSpeed > 0.0;
+    case SYS_Impulse:
+        return impulseMaxSpeed > 0.0;
+    }
     return true;
 }
 
 float SpaceShip::getSystemEffectiveness(ESystem system)
 {
-    return systems[system].power_level * systems[system].health;
+    return std::max(0.0f, systems[system].power_level * systems[system].health);
 }
 
 string SpaceShip::getCallSign()

@@ -82,7 +82,7 @@ public:
     string model, colorTexture, specularTexture, illuminationTexture;
     sf::Vector3f beamPosition[maxBeamWeapons];
     BeamTemplate beams[maxBeamWeapons];
-    int weaponTubes;
+    int weapon_tubes;
     float tube_load_time;
     sf::Vector2f tubePosition[maxWeaponTubes];
     float hull;
@@ -107,7 +107,7 @@ public:
     void setBeamPosition(int index, sf::Vector3f position);
     void setBeam(int index, float arc, float direction, float range, float cycle_time, float damage);
     void setTubePosition(int index, sf::Vector2f position);
-    void setTubes(int amount, float load_time) { weaponTubes = std::min(maxWeaponTubes, amount); tube_load_time = load_time; }
+    void setTubes(int amount, float load_time) { weapon_tubes = std::min(maxWeaponTubes, amount); tube_load_time = load_time; }
     void setHull(float amount) { hull = amount; }
     void setShields(float front, float rear) { frontShields = front; rearShields = rear; }
     void setSpeed(float impulse, float turn) { impulseSpeed = impulse; turnSpeed = turn; }

@@ -292,11 +292,11 @@ void GameMasterShipRetrofit::onGui()
     x += 350;
     y = 200;
 
-    ship->weaponTubes += selector(sf::FloatRect(x, y, 300, 30), "Missile tubes: " + string(ship->weaponTubes), 20);
-    if (ship->weaponTubes < 0)
-        ship->weaponTubes = maxWeaponTubes;
-    if (ship->weaponTubes > maxWeaponTubes)
-        ship->weaponTubes = 0;
+    ship->weapon_tubes += selector(sf::FloatRect(x, y, 300, 30), "Missile tubes: " + string(ship->weapon_tubes), 20);
+    if (ship->weapon_tubes < 0)
+        ship->weapon_tubes = maxWeaponTubes;
+    if (ship->weapon_tubes > maxWeaponTubes)
+        ship->weapon_tubes = 0;
     y += 30;
     for(int n=0; n<MW_Count; n++)
     {

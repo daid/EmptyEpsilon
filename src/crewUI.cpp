@@ -210,7 +210,7 @@ void CrewUI::damagePowerDisplay(sf::FloatRect rect, ESystem system, float text_s
     
     float power = my_spaceship->systems[system].power_level;
     float health = my_spaceship->systems[system].health;
-    if (health == 0.0)
+    if (health <= 0.0)
     {
         color = sf::Color::Red;
         display_text = "DAMAGED";

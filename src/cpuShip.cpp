@@ -42,10 +42,10 @@ void CpuShip::update(float delta)
         missile_fire_delay -= delta;
 
     //Check the weapon state,
-    bool has_missiles = weaponTubes > 0 && weapon_storage[MW_Homing] > 0;
+    bool has_missiles = weapon_tubes > 0 && weapon_storage[MW_Homing] > 0;
     bool has_beams = false;
     //If we have weapon tubes, load them with torpedoes
-    for(int n=0; n<weaponTubes; n++)
+    for(int n=0; n<weapon_tubes; n++)
     {
         if (weaponTube[n].state == WTS_Empty && weapon_storage[MW_Homing] > 0)
             loadTube(n, MW_Homing);
@@ -148,12 +148,12 @@ void CpuShip::update(float delta)
 
         if (distance < 4500 && has_missiles && fabs(sf::angleDifference(targetRotation, getRotation())) < 30.0)
         {
-            for(int n=0; n<weaponTubes; n++)
+            for(int n=0; n<weapon_tubes; n++)
             {
                 if (weaponTube[n].state == WTS_Loaded && missile_fire_delay <= 0.0)
                 {
                     fireTube(n);
-                    missile_fire_delay = tubeLoadTime / weaponTubes / 2.0;
+                    missile_fire_delay = tubeLoadTime / weapon_tubes / 2.0;
                 }
             }
         }

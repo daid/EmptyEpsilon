@@ -66,10 +66,10 @@ void CrewSinglePilotUI::onCrewUI()
         x += 50;
     }
 
-    if (my_spaceship->weaponTubes > 0)
+    if (my_spaceship->weapon_tubes > 0)
     {
         float y = 900 - 5;
-        for(int n=0; n<my_spaceship->weaponTubes; n++)
+        for(int n=0; n<my_spaceship->weapon_tubes; n++)
         {
             y -= 30;
             weaponTube(tube_load_type, n, sf::FloatRect(getWindowSize().x / 2.0 - 100, y, 100, 30), sf::FloatRect(getWindowSize().x / 2.0 - 300, y, 200, 30), 20);
