@@ -543,8 +543,8 @@ void SpaceShip::fireTube(int tubeNr)
 {
     if (scanned_by_player == SS_NotScanned)
     {
-        P<SpaceShip> ship = target;
-        if (!ship || ship->scanned_by_player != SS_NotScanned)
+        P<SpaceShip> ship = getTarget();
+        if (getTarget() && (!ship || ship->scanned_by_player != SS_NotScanned))
             scanned_by_player = SS_FriendOrFoeIdentified;
     }
 
