@@ -7,7 +7,7 @@ GameGlobalInfo::GameGlobalInfo()
 : MultiplayerObject("GameGlobalInfo")
 {
     assert(!gameGlobalInfo);
-
+    
     victory_faction = -1;
     gameGlobalInfo = this;
     for(int n=0; n<maxPlayerShips; n++)
@@ -23,10 +23,13 @@ GameGlobalInfo::GameGlobalInfo()
         registerMemberReplication(&nebulaInfo[n].textureName);
     }
     
+    global_message_timeout = 0.0;
     player_warp_jump_drive_setting = PWJ_ShipDefault;
     long_range_radar_range = 25000;
     use_beam_shield_frequencies = true;
 
+    registerMemberReplication(&global_message);
+    registerMemberReplication(&global_message_timeout, 1.0);
     registerMemberReplication(&victory_faction);
     registerMemberReplication(&long_range_radar_range);
     registerMemberReplication(&use_beam_shield_frequencies);
@@ -76,6 +79,14 @@ int GameGlobalInfo::insertPlayerShip(P<PlayerSpaceship> ship)
     return -1;
 }
 
+void GameGlobalInfo::update(float delta)
+{
+    if (global_message_timeout > 0.0)
+    {
+        global_message_timeout -= delta;
+    }
+}
+
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
 {
     switch(player_warp_jump_drive)
@@ -92,3 +103,21 @@ string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
         return "?";
     }
 }
+
+static int victory(lua_State* L)
+{
+    gameGlobalInfo->setVictory(luaL_checkstring(L, 1));
+    if (engine->getObject("scenario"))
+        engine->getObject("scenario")->destroy();
+    engine->setGameSpeed(0.0);
+    return 0;
+}
+REGISTER_SCRIPT_FUNCTION(victory);
+
+static int globalMessage(lua_State* L)
+{
+    gameGlobalInfo->global_message = luaL_checkstring(L, 1);
+    gameGlobalInfo->global_message_timeout = 5.0;
+    return 0;
+}
+REGISTER_SCRIPT_FUNCTION(globalMessage);

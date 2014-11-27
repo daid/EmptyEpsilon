@@ -94,16 +94,6 @@ void ServerCreationScreen::onGui()
     }
 }
 
-static int victory(lua_State* L)
-{
-    gameGlobalInfo->setVictory(luaL_checkstring(L, 1));
-    if (engine->getObject("scenario"))
-        engine->getObject("scenario")->destroy();
-    engine->setGameSpeed(0.0);
-    return 0;
-}
-REGISTER_SCRIPT_FUNCTION(victory);
-
 void ServerCreationScreen::startScenario()
 {
     P<ScriptObject> script = new ScriptObject();

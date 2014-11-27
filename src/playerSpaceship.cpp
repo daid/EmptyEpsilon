@@ -1,6 +1,7 @@
 #include "playerSpaceship.h"
 #include "repairCrew.h"
 #include "explosionEffect.h"
+#include "gameGlobalInfo.h"
 #include "main.h"
 
 #include "scriptInterface.h"

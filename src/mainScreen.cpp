@@ -118,7 +118,13 @@ void MainScreenUI::onGui()
         }
         if (my_spaceship->jumpDelay > 0.0)
         {
-            textbox(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100), "Jump in: " + string(int(ceilf(my_spaceship->jumpDelay))), AlignCenter, 50);
+            boxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100));
+            text(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100), "Jump in: " + string(int(ceilf(my_spaceship->jumpDelay))), AlignCenter, 50);
+        }
+        if (gameGlobalInfo->global_message_timeout > 0.0)
+        {
+            boxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 400, 300, 800, 100));
+            text(sf::FloatRect(getWindowSize().x / 2 - 400, 300, 800, 100), gameGlobalInfo->global_message, AlignCenter, 50);
         }
     }else{
         draw3Dworld();

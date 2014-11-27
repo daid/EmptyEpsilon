@@ -22,7 +22,7 @@ enum EPlayerWarpJumpDrive
     PWJ_MAX,
 };
 
-class GameGlobalInfo : public MultiplayerObject
+class GameGlobalInfo : public MultiplayerObject, public Updatable
 {
 public:
     static const int maxPlayerShips = 32;
@@ -32,6 +32,7 @@ private:
     int32_t playerShipId[maxPlayerShips];
 public:
     string global_message;
+    float global_message_timeout;
 
     std::vector<float> reputation_points;
     NebulaInfo nebulaInfo[maxNebula];
@@ -49,6 +50,8 @@ public:
     
     void setVictory(string faction_name) { victory_faction = FactionInfo::findFactionId(faction_name); }
     int getVictoryFactionId() { return victory_faction; }
+    
+    virtual void update(float delta);
 };
 
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive);
