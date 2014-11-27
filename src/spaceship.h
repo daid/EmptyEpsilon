@@ -31,6 +31,7 @@ enum EDockingState
 enum EScannedState
 {
     SS_NotScanned,
+    SS_FriendOrFoeIdentified,
     SS_SimpleScan,
     SS_FullScan
 };

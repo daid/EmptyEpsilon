@@ -105,7 +105,7 @@ void CrewScienceUI::onCrewUI()
                 keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Rel.Speed", string(rel_velocity / 1000 * 60, 1) + "km/min", 20); y += 30;
 
                 P<SpaceShip> ship = scienceTarget;
-                if (ship && ship->scanned_by_player == SS_NotScanned)
+                if (ship && (ship->scanned_by_player == SS_NotScanned || ship->scanned_by_player == SS_FriendOrFoeIdentified))
                 {
                     if (button(sf::FloatRect(x, y, 250, 50), "Scan", 30))
                         my_spaceship->commandScan(scienceTarget);

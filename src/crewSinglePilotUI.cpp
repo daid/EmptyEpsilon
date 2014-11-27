@@ -102,7 +102,7 @@ void CrewSinglePilotUI::onCrewUI()
         text(sf::FloatRect(getWindowSize().x / 2.0 - 100, 90, 100, 20), "Heading: " + string(int(heading)), AlignRight, 20);
 
         P<SpaceShip> ship = target;
-        if (ship && ship->scanned_by_player == SS_NotScanned)
+        if (ship && (ship->scanned_by_player == SS_NotScanned || ship->scanned_by_player == SS_FriendOrFoeIdentified))
         {
             if (my_spaceship->scanning_delay > 0.0)
             {

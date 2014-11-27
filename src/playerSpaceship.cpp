@@ -249,6 +249,7 @@ void PlayerSpaceship::update(float delta)
                 switch(scanning_ship->scanned_by_player)
                 {
                 case SS_NotScanned:
+                case SS_FriendOrFoeIdentified:
                     scanning_ship->scanned_by_player = SS_SimpleScan;
                     break;
                 case SS_SimpleScan:

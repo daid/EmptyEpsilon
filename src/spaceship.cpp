@@ -483,6 +483,13 @@ void SpaceShip::executeJump(float distance)
 
 void SpaceShip::fireBeamWeapon(int index, P<SpaceObject> target)
 {
+    if (scanned_by_player == SS_NotScanned)
+    {
+        P<SpaceShip> ship = target;
+        if (!ship || ship->scanned_by_player != SS_NotScanned)
+            scanned_by_player = SS_FriendOrFoeIdentified;
+    }
+    
     sf::Vector2f hitLocation = target->getPosition() - sf::normalize(target->getPosition() - getPosition()) * target->getRadius();
 
     beamWeapons[index].cooldown = beamWeapons[index].cycleTime;
@@ -534,6 +541,13 @@ void SpaceShip::loadTube(int tubeNr, EMissileWeapons type)
 
 void SpaceShip::fireTube(int tubeNr)
 {
+    if (scanned_by_player == SS_NotScanned)
+    {
+        P<SpaceShip> ship = target;
+        if (!ship || ship->scanned_by_player != SS_NotScanned)
+            scanned_by_player = SS_FriendOrFoeIdentified;
+    }
+
     if (docking_state != DS_NotDocking) return;
     if (currentWarp > 0.0) return;
     if (tubeNr < 0 || tubeNr >= maxWeaponTubes) return;
