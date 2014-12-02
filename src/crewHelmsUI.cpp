@@ -99,4 +99,12 @@ void CrewHelmsUI::onCrewUI()
     }
 
     dockingButton(sf::FloatRect(20, 800, 280, 50), 30);
+    
+    x = getWindowSize().x - 300;
+    button(sf::FloatRect(x+70, 650, 140, 50), "Boost");
+    button(sf::FloatRect(x, 700, 140, 50), "<<--");
+    button(sf::FloatRect(x+140, 700, 140, 50), "-->>");
+    button(sf::FloatRect(x, 750, 280, 50), "Turnaround");
+    progressBar(sf::FloatRect(x, 800, 280, 50), 100, 0, 100);
+    text(sf::FloatRect(x, 800, 280, 50), "Combat maneuver ready", AlignCenter, 20, sf::Color::Black);
 }

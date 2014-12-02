@@ -33,8 +33,8 @@ public:
 
     static void text(sf::FloatRect rect, string text, EAlign align = AlignLeft, float textSize = 30, sf::Color color=sf::Color::White);
     static void vtext(sf::FloatRect rect, string text, EAlign align = AlignLeft, float textSize = 30, sf::Color color=sf::Color::White);
-    static void progressBar(sf::FloatRect rect, float value, float min_value = 0.0, float max_value = 1.0, sf::Color color=sf::Color::White);
-    static void vprogressBar(sf::FloatRect rect, float value, float min_value = 0.0, float max_value = 1.0, sf::Color color=sf::Color::White);
+    static void progressBar(sf::FloatRect rect, float value, float min_value = 0.0, float max_value = 1.0, sf::Color color=sf::Color(192, 192, 192));
+    static void vprogressBar(sf::FloatRect rect, float value, float min_value = 0.0, float max_value = 1.0, sf::Color color=sf::Color(192, 192, 192));
     static bool button(sf::FloatRect rect, string text, float textSize = 30);
     static void disabledButton(sf::FloatRect rect, string text, float textSize = 30);
     static bool toggleButton(sf::FloatRect rect, bool active, string textValue, float fontSize = 30);

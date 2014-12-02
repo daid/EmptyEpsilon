@@ -59,6 +59,8 @@ public:
     float scanning_delay;
     float shield_calibration_delay;
     bool auto_repair_enabled;
+    
+    float combat_maneuver_delay;
 
     ECommsState comms_state;
     float comms_open_delay;

@@ -27,12 +27,14 @@ GameGlobalInfo::GameGlobalInfo()
     player_warp_jump_drive_setting = PWJ_ShipDefault;
     long_range_radar_range = 25000;
     use_beam_shield_frequencies = true;
+    use_system_damage = true;
 
     registerMemberReplication(&global_message);
     registerMemberReplication(&global_message_timeout, 1.0);
     registerMemberReplication(&victory_faction);
     registerMemberReplication(&long_range_radar_range);
     registerMemberReplication(&use_beam_shield_frequencies);
+    registerMemberReplication(&use_system_damage);
     
     for(unsigned int n=0; n<factionInfo.size(); n++)
         reputation_points.push_back(0);

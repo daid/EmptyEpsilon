@@ -39,6 +39,7 @@ public:
     EPlayerWarpJumpDrive player_warp_jump_drive_setting;
     float long_range_radar_range;
     bool use_beam_shield_frequencies;
+    bool use_system_damage;
     
     GameGlobalInfo();
 

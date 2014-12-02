@@ -667,16 +667,19 @@ void SpaceShip::hullDamage(float damageAmount, sf::Vector2f damageLocation, EDam
     if (type == DT_EMP)
         return;
 
-    for(int n=0; n<5; n++)
+    if (gameGlobalInfo->use_system_damage)
     {
-        ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
-        //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
-        float system_damage = (damageAmount / hull_max) * 1.0;
-        if (type == DT_Energy)
-            system_damage *= 3.0;   //Beam weapons do more system damage, as they penetrate the hull easier.
-        systems[random_system].health -= system_damage;
-        if (systems[random_system].health < -1.0)
-            systems[random_system].health = -1.0;
+        for(int n=0; n<5; n++)
+        {
+            ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
+            //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
+            float system_damage = (damageAmount / hull_max) * 1.0;
+            if (type == DT_Energy)
+                system_damage *= 3.0;   //Beam weapons do more system damage, as they penetrate the hull easier.
+            systems[random_system].health -= system_damage;
+            if (systems[random_system].health < -1.0)
+                systems[random_system].health = -1.0;
+        }
     }
 
     hull_strength -= damageAmount;
@@ -726,7 +729,9 @@ bool SpaceShip::hasSystem(ESystem system)
 
 float SpaceShip::getSystemEffectiveness(ESystem system)
 {
-    return std::max(0.0f, systems[system].power_level * systems[system].health);
+    if (gameGlobalInfo->use_system_damage)
+        return std::max(0.0f, systems[system].power_level * systems[system].health);
+    return std::max(0.0f, systems[system].power_level * (1.0f - systems[system].heat_level));
 }
 
 string SpaceShip::getCallSign()

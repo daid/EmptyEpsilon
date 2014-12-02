@@ -115,7 +115,7 @@ PlayerSpaceship::PlayerSpaceship()
         registerMemberReplication(&systems[n].heat_level, 1.0);
     }
 
-    if (game_server)
+    if (game_server && gameGlobalInfo->use_system_damage)
     {
         for(int n=0; n<3; n++)
         {
@@ -191,7 +191,7 @@ void PlayerSpaceship::update(float delta)
         if (shields_active)
             useEnergy(delta * energy_shield_use_per_second);
         
-        energy_level += delta * getNetPowerUsage() * 0.02;
+        energy_level += delta * getNetPowerUsage() * 0.04;
         for(int n=0; n<SYS_COUNT; n++)
         {
             if (!hasSystem(ESystem(n))) continue;
@@ -201,9 +201,12 @@ void PlayerSpaceship::update(float delta)
             if (systems[n].heat_level > 1.0)
             {
                 systems[n].heat_level = 1.0;
-                systems[n].health -= delta * damage_per_second_on_overheat;
-                if (systems[n].health < -1.0)
-                    systems[n].health = -1.0;
+                if (gameGlobalInfo->use_system_damage)
+                {
+                    systems[n].health -= delta * damage_per_second_on_overheat;
+                    if (systems[n].health < -1.0)
+                        systems[n].health = -1.0;
+                }
             }
             if (systems[n].heat_level < 0.0)
                 systems[n].heat_level = 0.0;
@@ -367,7 +370,7 @@ float PlayerSpaceship::getNetPowerUsage()
     {
         if (!hasSystem(ESystem(n))) continue;
         if (system_power_user_factor[n] < 0) //When we generate power, use the health of this system in the equation
-            net_power -= system_power_user_factor[n] * systems[n].health * systems[n].power_level;
+            net_power -= system_power_user_factor[n] * getSystemEffectiveness(ESystem(n));
         else
             net_power -= system_power_user_factor[n] * systems[n].power_level;
     }
