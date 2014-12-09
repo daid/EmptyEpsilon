@@ -29,4 +29,11 @@ public:
     virtual void onGui();
 };
 
+class GameMasterGlobalMessageEntry : public GUI
+{
+    string message;
+public:
+    virtual void onGui();
+};
+
 #endif//GAME_MASTER_UI_H

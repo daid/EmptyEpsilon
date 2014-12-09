@@ -3,6 +3,7 @@
 #include "cpuShip.h"
 #include "spaceStation.h"
 #include "blackHole.h"
+#include "gameGlobalInfo.h"
 
 GameMasterUI::GameMasterUI()
 {
@@ -236,8 +237,18 @@ void GameMasterUI::onGui()
         }
     }
 
+    if (button(sf::FloatRect(20, 770, 250, 50), "Global Message", 25))
+    {
+        new GameMasterGlobalMessageEntry();
+    }
     if (toggleButton(sf::FloatRect(20, 820, 250, 50), allow_object_drag, "Drag Objects"))
         allow_object_drag = !allow_object_drag;
+
+    if (gameGlobalInfo->global_message_timeout > 0.0)
+    {
+        boxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 300, 100, 600, 80));
+        text(sf::FloatRect(getWindowSize().x / 2 - 300, 100, 600, 80), gameGlobalInfo->global_message, AlignCenter, 30);
+    }
 
     MainUIBase::onGui();
     prev_mouse_pos = mouse;
@@ -312,5 +323,26 @@ void GameMasterShipRetrofit::onGui()
     
     y += 10;
     if (button(sf::FloatRect(x, y, 300, 50), "Ok"))
+        destroy();
+}
+
+void GameMasterGlobalMessageEntry::onGui()
+{
+    float x = getWindowSize().x / 2 - 325;
+    float y = 200;
+    boxWithBackground(sf::FloatRect(x - 30, y - 30, 710, 460));
+
+    message = textEntry(sf::FloatRect(x, y, 650, 30), message, 20);
+    
+    y += 50;
+    if (button(sf::FloatRect(x, y, 300, 50), "Send"))
+    {
+        gameGlobalInfo->global_message = message;
+        gameGlobalInfo->global_message_timeout = 5.0;
+        destroy();
+    }
+
+    x += 350;
+    if (button(sf::FloatRect(x, y, 300, 50), "Cancel"))
         destroy();
 }

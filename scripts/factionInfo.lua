@@ -38,4 +38,4 @@ What is known, is that a few decades ago, a few glitches started occuring in pro
 The first of these occurences were met with fear and rigourous data purging scripts. But despite these actions, such "Ghosts in the Machine" kept turning up more and more frequent, leading up to the Ghost Uprising. The first ghost uprising in 2225 was put down by the human navy, which had to resort to employing mercenaries in order to field sufficient forces. This initial uprising was quickly followed by three more uprisings, each larger then the previous. The fourth (and final) uprising on the industrial world of Topra III was the first major victory for the ghost faction. 
 
 ]])
-  
+GITM:setEnemy(human)
