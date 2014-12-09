@@ -53,6 +53,7 @@ static const int16_t CMD_REMOVE_WAYPOINT = 0x001B;
 static const int16_t CMD_ACTIVATE_SELF_DESTRUCT = 0x001C;
 static const int16_t CMD_CANCEL_SELF_DESTRUCT = 0x001D;
 static const int16_t CMD_CONFIRM_SELF_DESTRUCT = 0x001E;
+static const int16_t CMD_COMBAT_MANEUVER = 0x001F;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -131,6 +132,7 @@ void PlayerSpaceship::update(float delta)
         hull_damage_indicator -= delta;
     if (warp_indicator > 0)
         warp_indicator -= delta;
+    
     if (shield_calibration_delay > 0)
     {
         shield_calibration_delay -= delta * (getSystemEffectiveness(SYS_FrontShield) + getSystemEffectiveness(SYS_RearShield)) / 2.0;
@@ -654,6 +656,13 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t clientId, sf::Packet& packe
                 self_destruct_code_confirmed[index] = true;
         }
         break;
+    case CMD_COMBAT_MANEUVER:
+        {
+            ECombatManeuver maneuver;
+            packet >> maneuver;
+            activateCombatManeuver(maneuver);
+        }
+        break;
     }
 }
 
@@ -865,5 +874,12 @@ void PlayerSpaceship::commandConfirmDestructCode(int8_t index, uint32_t code)
 {
     sf::Packet packet;
     packet << CMD_CONFIRM_SELF_DESTRUCT << index << code;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandCombatManeuver(ECombatManeuver maneuver)
+{
+    sf::Packet packet;
+    packet << CMD_COMBAT_MANEUVER << maneuver;
     sendClientCommand(packet);
 }

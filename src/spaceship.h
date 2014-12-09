@@ -35,6 +35,13 @@ enum EScannedState
     SS_SimpleScan,
     SS_FullScan
 };
+enum ECombatManeuver
+{
+    CM_Boost,
+    CM_StrafeLeft,
+    CM_StrafeRight,
+    CM_Turn
+};
 
 class ShipSystem
 {
@@ -70,6 +77,7 @@ class SpaceShip : public SpaceObject, public Updatable
     const static float shield_recharge_rate = 0.2f;
 public:
     const static int max_frequency = 20;
+    const static float max_combat_maneuver_delay = 9.0f;
 
     string templateName;
     string ship_type_name;
@@ -88,6 +96,9 @@ public:
     int8_t warpRequest;
     float currentWarp;
     float warpSpeedPerWarpLevel;
+    float combat_maneuver_delay;
+    ECombatManeuver combat_maneuver;
+    float combat_maneuver_active;
 
     bool hasJumpdrive;
     float jumpDistance;
@@ -141,6 +152,7 @@ public:
     void requestDock(P<SpaceObject> target);
     void requestUndock();
     void setScanned(bool scanned) { scanned_by_player = scanned ? SS_FullScan : SS_NotScanned; }
+    void activateCombatManeuver(ECombatManeuver maneuver);
 
     bool hasSystem(ESystem system);
     float getSystemEffectiveness(ESystem system);
@@ -163,6 +175,7 @@ REGISTER_MULTIPLAYER_ENUM(EWeaponTubeState);
 REGISTER_MULTIPLAYER_ENUM(EMainScreenSetting);
 REGISTER_MULTIPLAYER_ENUM(EDockingState);
 REGISTER_MULTIPLAYER_ENUM(EScannedState);
+REGISTER_MULTIPLAYER_ENUM(ECombatManeuver);
 
 string frequencyToString(int frequency);
 

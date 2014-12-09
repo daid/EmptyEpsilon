@@ -60,8 +60,6 @@ public:
     float shield_calibration_delay;
     bool auto_repair_enabled;
     
-    float combat_maneuver_delay;
-
     ECommsState comms_state;
     float comms_open_delay;
     string comms_incomming_message;
@@ -111,6 +109,7 @@ public:
     void commandActivateSelfDestruct();
     void commandCancelSelfDestruct();
     void commandConfirmDestructCode(int8_t index, uint32_t code);
+    void commandCombatManeuver(ECombatManeuver maneuver);
 
     virtual string getCallSign() { return "PL" + string(getMultiplayerId()); }
 
