@@ -11,6 +11,7 @@ end
 
 function init()
 	waveNumber = 0
+	spawnWaveDelay = nil
 	enemyList = {}
 	friendlyList = {}
 
@@ -107,6 +108,17 @@ function spawnWave()
 end
 
 function update(delta)
+	if spawnWaveDelay ~= nil then
+		spawnWaveDelay = spawnWaveDelay - delta
+		if spawnWaveDelay < 5 then
+			globalMessage(math.ceil(spawnWaveDelay));
+		end
+		if spawnWaveDelay < 0 then
+			spawnWave();
+			spawnWaveDelay = nil;
+		end
+		return
+	end
 	enemy_count = 0
 	friendly_count = 0
 	for _, enemy in ipairs(enemyList) do
@@ -120,7 +132,8 @@ function update(delta)
 		end
 	end
 	if enemy_count == 0 then
-		spawnWave();
+		spawnWaveDelay = 15.0;
+		globalMessage("Wave cleared!");
 	end
 	if friendly_count == 0 then
 		victory("Ghosts");	--Victory for the Ghosts (== defeat for the players)
