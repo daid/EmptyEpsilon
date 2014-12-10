@@ -206,9 +206,9 @@ void CpuShip::update(float delta)
             if (order_target)
             {
                 sf::Vector2f target_position = order_target->getPosition();
+                pathPlanner.plan(getPosition(), target_position);
                 target_position = pathPlanner.route[0];
                 target_position += sf::vector2FromAngle(sf::vector2ToAngle(target_position - getPosition()) + 170.0f) * (1500.0f + order_target->getRadius());
-                pathPlanner.plan(getPosition(), target_position);
             }else{
                 orders = AI_Roaming;    //We pretty much lost our defending target, so just start roaming.
             }
