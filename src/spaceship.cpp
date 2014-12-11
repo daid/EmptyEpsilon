@@ -188,6 +188,8 @@ void SpaceShip::draw3D()
 
 void SpaceShip::draw3DTransparent()
 {
+    if (!ship_template) return;
+    
     if (front_shield_hit_effect > 0 || rear_shield_hit_effect > 0)
     {
         basicShader.setParameter("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
@@ -205,6 +207,19 @@ void SpaceShip::draw3DTransparent()
         glScalef(1, -1, 1);
         if (rear_shield_hit_effect > 0.0)
             m->render();
+    }
+    
+    if (hasJumpdrive && jumpDelay > 0.0f)
+    {
+        glScalef(ship_template->scale, ship_template->scale, ship_template->scale);
+        glDepthFunc(GL_EQUAL);
+        float f = 1.0f - (jumpDelay / 10.0f);
+        glColor4f(f, f, f, 1);
+        basicShader.setParameter("textureMap", *textureManager.getTexture("electric_sphere_texture.png"));
+        sf::Shader::bind(&basicShader);
+        Mesh* m = Mesh::getMesh(ship_template->model);
+        m->render();
+        glDepthFunc(GL_LESS);
     }
 }
 
@@ -471,12 +486,13 @@ void SpaceShip::update(float delta)
         }
     }
 
-    if (currentImpulse != 0.0 || getAngularVelocity() != 0.0)
+    if (engine_emit_delay > 0.0)
     {
-        if (engine_emit_delay > 0.0)
+        engine_emit_delay -= delta;
+    }else{
+        engine_emit_delay += 0.1;
+        if (currentImpulse != 0.0 || getAngularVelocity() != 0.0)
         {
-            engine_emit_delay -= delta;
-        }else{
             for(unsigned int n=0; n<ship_template->engine_emitors.size(); n++)
             {
                 sf::Vector3f offset = ship_template->engine_emitors[n].position * ship_template->scale;
@@ -487,7 +503,21 @@ void SpaceShip::update(float delta)
                 scale *= std::max(fabs(getAngularVelocity() / rotationSpeed), fabs(currentImpulse));
                 ParticleEngine::spawn(pos3d, pos3d, color, color, scale, 0.0, 5.0);
             }
-            engine_emit_delay += 0.1;
+        }
+        
+        if (hasJumpdrive && jumpDelay > 0.0f && ship_template)
+        {
+            Mesh* m = Mesh::getMesh(ship_template->model);
+            
+            int cnt = (10.0f - jumpDelay);
+            for(int n=0; n<cnt; n++)
+            {
+                sf::Vector3f offset = m->randomPoint() * ship_template->scale;
+                sf::Vector2f pos2d = getPosition() + sf::rotateVector(sf::Vector2f(offset.x, offset.y), getRotation());
+                sf::Vector3f color = sf::Vector3f(0.6, 0.6, 1);
+                sf::Vector3f pos3d = sf::Vector3f(pos2d.x, pos2d.y, offset.z);
+                ParticleEngine::spawn(pos3d, pos3d, color, color, getRadius() / 15.0f, 0.0, 3.0);
+            }
         }
     }
 }

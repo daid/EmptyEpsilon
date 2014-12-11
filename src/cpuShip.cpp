@@ -185,6 +185,7 @@ void CpuShip::update(float delta)
                     pathPlanner.plan(getPosition(), order_target_location);
                 }
             }else{
+                //TODO: Find someething which can re-stock our weapons.
                 pathPlanner.clear();
             }
             break;
