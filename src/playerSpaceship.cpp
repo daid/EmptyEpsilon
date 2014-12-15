@@ -657,6 +657,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t clientId, sf::Packet& packe
         }
         break;
     case CMD_COMBAT_MANEUVER:
+        if (useEnergy(50))
         {
             ECombatManeuver maneuver;
             packet >> maneuver;
