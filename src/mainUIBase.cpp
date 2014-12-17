@@ -56,8 +56,6 @@ void MainUIBase::onGui()
 
     if (my_spaceship)
     {
-        soundManager.setListenerPosition(my_spaceship->getPosition(), my_spaceship->getRotation());
-
         if (my_spaceship->front_shield < my_spaceship->front_shield_max / 10.0 || my_spaceship->rear_shield < my_spaceship->rear_shield_max / 10.0)
         {
             sf::RectangleShape fullScreenOverlay(sf::Vector2f(getWindowSize().x, 900));
@@ -571,6 +569,10 @@ void MainUIBase::drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESy
 
 void MainUIBase::draw3Dworld(sf::FloatRect rect)
 {
+    if (my_spaceship)
+        soundManager.setListenerPosition(my_spaceship->getPosition(), my_spaceship->getRotation());
+    else
+        soundManager.setListenerPosition(sf::Vector2f(camera_position.x, camera_position.y), camera_yaw);
     sf::RenderTarget& window = *getRenderTarget();
     window.pushGLStates();
 

@@ -13,6 +13,7 @@
 #include "particleEffect.h"
 #include "mine.h"
 #include "nuke.h"
+#include "warpJammer.h"
 #include "gameGlobalInfo.h"
 
 #include "scriptInterface.h"
@@ -354,6 +355,14 @@ void SpaceShip::update(float delta)
     else
         setAngularVelocity(rotationDiff * rotationSpeed * getSystemEffectiveness(SYS_Maneuver));
 
+    if ((hasJumpdrive && jumpDelay > 0) || (hasWarpdrive && warpRequest > 0))
+    {
+        if (WarpJammer::isWarpJammed(getPosition()))
+        {
+            jumpDelay = 0;
+            warpRequest = 0.0f;
+        }
+    }
     if (hasJumpdrive && jumpDelay > 0)
     {
         if (currentImpulse > 0.0)
@@ -535,7 +544,10 @@ void SpaceShip::executeJump(float distance)
     if (f <= 0.0)
         return;
     distance = (distance * f) + (distance * (1.0 - f) * random(0.5, 1.5));
-    setPosition(getPosition() + sf::vector2FromAngle(getRotation()) * distance * 1000.0f);
+    sf::Vector2f target_position = getPosition() + sf::vector2FromAngle(getRotation()) * distance * 1000.0f;
+    if (WarpJammer::isWarpJammed(target_position))
+        target_position = WarpJammer::getFirstNoneJammedPosition(getPosition(), target_position);
+    setPosition(target_position);
 }
 
 void SpaceShip::fireBeamWeapon(int index, P<SpaceObject> target)

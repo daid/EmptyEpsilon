@@ -474,6 +474,8 @@
 		<Unit filename="src/spaceship.h" />
 		<Unit filename="src/supplyDrop.cpp" />
 		<Unit filename="src/supplyDrop.h" />
+		<Unit filename="src/warpJammer.cpp" />
+		<Unit filename="src/warpJammer.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

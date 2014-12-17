@@ -3,6 +3,7 @@
 #include "factionInfo.h"
 #include "repairCrew.h"
 #include "spaceStation.h"
+#include "warpJammer.h"
 
 CrewUI::CrewUI()
 {
@@ -214,6 +215,10 @@ void CrewUI::damagePowerDisplay(sf::FloatRect rect, ESystem system, float text_s
     {
         color = sf::Color::Red;
         display_text = "DAMAGED";
+    }else if ((system == SYS_Warp || system == SYS_JumpDrive) && WarpJammer::isWarpJammed(my_spaceship->getPosition()))
+    {
+        color = sf::Color::Red;
+        display_text = "JAMMED";
     }else if (power == 0.0)
     {
         color = sf::Color::Red;

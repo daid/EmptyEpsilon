@@ -16,6 +16,9 @@ ShipSelectionScreen::ShipSelectionScreen()
 
 void ShipSelectionScreen::onGui()
 {
+    //Easiest place to ensure that positional sound is disabled on console views. As soon as a 3D view is rendered positional sound is enabled again.
+    soundManager.disablePositionalSound();
+
     if (game_client && !game_client->isConnected())
     {
         destroy();
