@@ -90,7 +90,6 @@ sf::Vector2f WarpJammer::getFirstNoneJammedPosition(sf::Vector2f start, sf::Vect
             }
         }
     }
-    printf("%f %f\n", first_jammer_f, startEndLength);
     if (!first_jammer)
         return end;
     
