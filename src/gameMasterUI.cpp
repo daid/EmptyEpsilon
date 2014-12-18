@@ -1,3 +1,5 @@
+#include <limits>
+
 #include "gameMasterUI.h"
 #include "factionInfo.h"
 #include "cpuShip.h"
@@ -10,6 +12,7 @@ GameMasterUI::GameMasterUI()
     view_distance = 50000;
     current_faction = 2;
     allow_object_drag = engine->getGameSpeed() == 0.0;
+    click_and_drag_state = CD_None;
 }
 
 void GameMasterUI::onGui()
@@ -23,54 +26,95 @@ void GameMasterUI::onGui()
         if (InputHandler::mouseIsPressed(sf::Mouse::Left) && mouse.x > 300)
         {
             mouse_down_pos = mouse;
-
-            P<SpaceObject> target;
-            PVector<Collisionable> list = CollisionManager::queryArea(mouse_world_position - sf::Vector2f(0.1 * view_distance, 0.1 * view_distance), mouse_world_position + sf::Vector2f(0.1 * view_distance, 0.1 * view_distance));
-            foreach(Collisionable, obj, list)
+            click_and_drag_state = CD_BoxSelect;
+            foreach(SpaceObject, obj, selection)
             {
-                P<SpaceObject> spaceObject = obj;
-                if (spaceObject)
+                if (sf::length(mouse_world_position - obj->getPosition()) < 0.1 * view_distance)
+                    click_and_drag_state = CD_DragObjects;
+            }
+        }
+        if (InputHandler::mouseIsReleased(sf::Mouse::Left))
+        {
+            if (click_and_drag_state == CD_BoxSelect)
+            {
+                selection.clear();
+                
+                if (mouse_down_pos == mouse)
                 {
-                    if (!target || sf::length(mouse_world_position - spaceObject->getPosition()) < sf::length(mouse_world_position - target->getPosition()))
-                        target = spaceObject;
+                    P<SpaceObject> target;
+                    PVector<Collisionable> list = CollisionManager::queryArea(mouse_world_position - sf::Vector2f(0.1 * view_distance, 0.1 * view_distance), mouse_world_position + sf::Vector2f(0.1 * view_distance, 0.1 * view_distance));
+                    foreach(Collisionable, obj, list)
+                    {
+                        P<SpaceObject> spaceObject = obj;
+                        if (spaceObject)
+                        {
+                            if (!target || sf::length(mouse_world_position - spaceObject->getPosition()) < sf::length(mouse_world_position - target->getPosition()))
+                                target = spaceObject;
+                        }
+                    }
+                    selection.clear();
+                    if (target)
+                        selection.push_back(target);
+                }else{
+                    sf::Vector2f mouse_down_world_position = view_position + (mouse_down_pos - sf::Vector2f(800, 450)) / 400.0f * view_distance;
+                    PVector<Collisionable> list = CollisionManager::queryArea(mouse_world_position, mouse_down_world_position);
+                    foreach(Collisionable, obj, list)
+                    {
+                        P<SpaceObject> spaceObject = obj;
+                        if (spaceObject)
+                            selection.push_back(spaceObject);
+                    }
                 }
             }
-            selection = target;
+            click_and_drag_state = CD_None;
         }
-        if (selection && allow_object_drag && InputHandler::mouseIsDown(sf::Mouse::Left) && mouse.x > 300)
+        if (allow_object_drag && click_and_drag_state == CD_DragObjects && InputHandler::mouseIsDown(sf::Mouse::Left) && mouse.x > 300)
         {
             if (sf::length(mouse - mouse_down_pos) > 5.0f)
             {
-                selection->setPosition(mouse_world_position);
+                foreach(SpaceObject, obj, selection)
+                    obj->setPosition(obj->getPosition() + (mouse - prev_mouse_pos) / 400.0f * view_distance);
             }
         }
-        if (selection && InputHandler::mouseIsReleased(sf::Mouse::Right) && mouse.x > 300)
+        if (InputHandler::mouseIsReleased(sf::Mouse::Right) && mouse.x > 300)
         {
-            P<CpuShip> cpuShip = selection;
-            if (selection)
+            sf::Vector2f upper_bound(-std::numeric_limits<float>::max(), -std::numeric_limits<float>::max());
+            sf::Vector2f lower_bound(std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
+            foreach(SpaceObject, obj, selection)
             {
-
-                P<SpaceObject> target;
-                PVector<Collisionable> list = CollisionManager::queryArea(mouse_world_position - sf::Vector2f(0.1 * view_distance, 0.1 * view_distance), mouse_world_position + sf::Vector2f(0.1 * view_distance, 0.1 * view_distance));
-                foreach(Collisionable, obj, list)
+                lower_bound.x = std::min(lower_bound.x, obj->getPosition().x);
+                lower_bound.y = std::min(lower_bound.y, obj->getPosition().y);
+                upper_bound.x = std::max(upper_bound.x, obj->getPosition().x);
+                upper_bound.y = std::max(upper_bound.y, obj->getPosition().y);
+            }
+            sf::Vector2f objects_center = (upper_bound + lower_bound) / 2.0f;
+            foreach(SpaceObject, obj, selection)
+            {
+                P<CpuShip> cpuShip = obj;
+                if (cpuShip)
                 {
-                    P<SpaceObject> spaceObject = obj;
-                    if (spaceObject)
+                    P<SpaceObject> target;
+                    PVector<Collisionable> list = CollisionManager::queryArea(mouse_world_position - sf::Vector2f(0.1 * view_distance, 0.1 * view_distance), mouse_world_position + sf::Vector2f(0.1 * view_distance, 0.1 * view_distance));
+                    foreach(Collisionable, collisionable, list)
                     {
-                        if (!target || sf::length(mouse_world_position - spaceObject->getPosition()) < sf::length(mouse_world_position - target->getPosition()))
-                            target = spaceObject;
+                        P<SpaceObject> spaceObject = collisionable;
+                        if (spaceObject)
+                        {
+                            if (!target || sf::length(mouse_world_position - spaceObject->getPosition()) < sf::length(mouse_world_position - target->getPosition()))
+                                target = spaceObject;
+                        }
                     }
-                }
-                if (target && target->canBeTargeted())
-                {
-                    if (selection->isEnemy(target))
+                    if (target && target != obj && target->canBeTargeted())
                     {
-                        cpuShip->orderAttack(target);
+                        if (obj->isEnemy(target))
+                        {
+                            cpuShip->orderAttack(target);
+                        }else{
+                            cpuShip->orderDefendTarget(target);
+                        }
                     }else{
-                        cpuShip->orderDefendTarget(target);
+                        cpuShip->orderFlyTowardsBlind(mouse_world_position + (obj->getPosition() - objects_center));
                     }
-                }else{
-                    cpuShip->orderFlyTowardsBlind(mouse_world_position);
                 }
             }
         }
@@ -87,6 +131,16 @@ void GameMasterUI::onGui()
     }
 
     drawRaderBackground(view_position, sf::Vector2f(800, 450), 400.0, view_distance);
+    if (click_and_drag_state == CD_BoxSelect)
+    {
+        sf::RectangleShape rect;
+        rect.setPosition(mouse);
+        rect.setSize(mouse_down_pos - mouse);
+        rect.setFillColor(sf::Color(255, 255, 255, 8));
+        rect.setOutlineColor(sf::Color(255, 255, 255, 32));
+        rect.setOutlineThickness(2.0);
+        window.draw(rect);
+    }
 
     foreach(SpaceObject, obj, space_object_list)
     {
@@ -118,15 +172,26 @@ void GameMasterUI::onGui()
     sidebackBackground.setFillColor(sf::Color(0, 0, 0, 128));
     window.draw(sidebackBackground);
 
-    if (selection)
+    foreach(SpaceObject, obj, selection)
     {
         sf::Sprite objectSprite;
         textureManager.setTexture(objectSprite, "redicule.png");
-        objectSprite.setPosition(sf::Vector2f(800, 450) + (selection->getPosition() - view_position) / view_distance * 400.0f);
+        objectSprite.setPosition(sf::Vector2f(800, 450) + (obj->getPosition() - view_position) / view_distance * 400.0f);
         window.draw(objectSprite);
+    }
 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Delete))
+    {
+        foreach(SpaceObject, obj, selection)
+            obj->destroy();
+        selection.clear();
+    }
+
+    if (selection.size() == 1)
+    {
+        P<SpaceObject> obj = selection[0];
         float y = 20;
-        P<SpaceShip> ship = selection;
+        P<SpaceShip> ship = obj;
         if (ship && ship->ship_template)
         {
             text(sf::FloatRect(20, y, 100, 20), factionInfo[ship->faction_id]->name + " " + ship->ship_type_name, AlignLeft, 20);
@@ -136,7 +201,7 @@ void GameMasterUI::onGui()
             text(sf::FloatRect(20, y, 100, 20), "Shields: " + string(ship->front_shield) + ", " + string(ship->rear_shield), AlignLeft, 20);
             y += 20;
         }
-        P<SpaceStation> station = selection;
+        P<SpaceStation> station = obj;
         if (station)
         {
             text(sf::FloatRect(20, y, 100, 20), factionInfo[station->faction_id]->name, AlignLeft, 20);
@@ -146,7 +211,7 @@ void GameMasterUI::onGui()
             text(sf::FloatRect(20, y, 100, 20), "Shields: " + string(station->shields), AlignLeft, 20);
             y += 20;
         }
-        P<CpuShip> cpuShip = selection;
+        P<CpuShip> cpuShip = obj;
         if (cpuShip)
         {
             text(sf::FloatRect(20, y, 100, 20), "Orders: " + getAIOrderString(cpuShip->getOrder()), AlignLeft, 20);
@@ -187,15 +252,11 @@ void GameMasterUI::onGui()
         text(sf::FloatRect(20, 480, 250, 20), "Change faction:", AlignCenter, 20);
         for(unsigned int f=0; f<factionInfo.size(); f++)
         {
-            if (toggleButton(sf::FloatRect(20, 500 + 30 * f, 250, 30), selection->getFactionId() == f, factionInfo[f]->name, 20))
+            if (toggleButton(sf::FloatRect(20, 500 + 30 * f, 250, 30), selection[0]->getFactionId() == f, factionInfo[f]->name, 20))
             {
-                selection->setFactionId(f);
+                foreach(SpaceObject, obj, selection)
+                    obj->setFactionId(f);
             }
-        }
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Delete))
-        {
-            selection->destroy();
         }
     }else{
         text(sf::FloatRect(20, 20, 100, 20), "Create new:", AlignLeft, 20);
@@ -209,15 +270,17 @@ void GameMasterUI::onGui()
 
         if (button(sf::FloatRect(20, 100, 250, 30), "Station", 20))
         {
-            selection = new SpaceStation();
-            selection->setFactionId(current_faction);
-            selection->setRotation(random(0, 360));
-            selection->setPosition(view_position + sf::vector2FromAngle(random(0, 360)) * random(0, view_distance * 0.1));
+            selection.clear();
+            selection.push_back(new SpaceStation());
+            selection[0]->setFactionId(current_faction);
+            selection[0]->setRotation(random(0, 360));
+            selection[0]->setPosition(view_position + sf::vector2FromAngle(random(0, 360)) * random(0, view_distance * 0.1));
         }
         if (button(sf::FloatRect(20, 130, 250, 30), "BlackHole", 20))
         {
-            selection = new BlackHole();
-            selection->setPosition(view_position + sf::vector2FromAngle(random(0, 360)) * random(0, view_distance * 0.1));
+            selection.clear();
+            selection.push_back(new BlackHole());
+            selection[0]->setPosition(view_position + sf::vector2FromAngle(random(0, 360)) * random(0, view_distance * 0.1));
         }
         
         std::vector<string> template_names = ShipTemplate::getTemplateNameList();
@@ -231,8 +294,9 @@ void GameMasterUI::onGui()
                 s->setShipTemplate(template_names[n]);
                 s->setPosition(view_position + sf::vector2FromAngle(random(0, 360)) * random(0, view_distance * 0.1));
                 s->orderRoaming();
-
-                selection = s;
+                
+                selection.clear();
+                selection.push_back(s);
             }
         }
     }

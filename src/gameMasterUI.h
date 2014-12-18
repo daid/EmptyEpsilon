@@ -5,14 +5,22 @@
 #include "playerInfo.h"
 #include "spaceship.h"
 
+enum EClickAndDragState
+{
+    CD_None,
+    CD_BoxSelect,
+    CD_DragObjects
+};
+
 class GameMasterUI : public MainUIBase
 {
     unsigned int current_faction;
+    EClickAndDragState click_and_drag_state;
     sf::Vector2f mouse_down_pos;
     sf::Vector2f prev_mouse_pos;
     sf::Vector2f view_position;
     float view_distance;
-    P<SpaceObject> selection;
+    PVector<SpaceObject> selection;
     bool allow_object_drag;
 public:
     GameMasterUI();
