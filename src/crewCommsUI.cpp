@@ -63,7 +63,7 @@ void CrewCommsUI::drawCommsRadar()
     sf::Vector2f mouse = InputHandler::getMousePos();
     if (InputHandler::mouseIsDown(sf::Mouse::Left))
     {
-        if (mouse.x > x)
+        if (mouse.x > x && previous_mouse.x > x)
         {
             radar_view_position += (previous_mouse - mouse) / radar_size * radar_distance;
         }
