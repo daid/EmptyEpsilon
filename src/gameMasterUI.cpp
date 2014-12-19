@@ -5,12 +5,12 @@
 #include "cpuShip.h"
 #include "spaceStation.h"
 #include "blackHole.h"
+#include "warpJammer.h"
 #include "gameGlobalInfo.h"
 
 GameMasterUI::GameMasterUI()
 {
     view_distance = 50000;
-    current_faction = 2;
     allow_object_drag = engine->getGameSpeed() == 0.0;
     click_and_drag_state = CD_None;
 }
@@ -258,53 +258,13 @@ void GameMasterUI::onGui()
                     obj->setFactionId(f);
             }
         }
-    }else{
-        text(sf::FloatRect(20, 20, 100, 20), "Create new:", AlignLeft, 20);
-        for(unsigned int f=0; f<factionInfo.size(); f++)
-        {
-            if (toggleButton(sf::FloatRect(20, 500 + 30 * f, 250, 30), current_faction == f, factionInfo[f]->name, 20))
-            {
-                current_faction = f;
-            }
-        }
-
-        if (button(sf::FloatRect(20, 100, 250, 30), "Station", 20))
-        {
-            selection.clear();
-            selection.push_back(new SpaceStation());
-            selection[0]->setFactionId(current_faction);
-            selection[0]->setRotation(random(0, 360));
-            selection[0]->setPosition(view_position + sf::vector2FromAngle(random(0, 360)) * random(0, view_distance * 0.1));
-        }
-        if (button(sf::FloatRect(20, 130, 250, 30), "BlackHole", 20))
-        {
-            selection.clear();
-            selection.push_back(new BlackHole());
-            selection[0]->setPosition(view_position + sf::vector2FromAngle(random(0, 360)) * random(0, view_distance * 0.1));
-        }
-        
-        std::vector<string> template_names = ShipTemplate::getTemplateNameList();
-        std::sort(template_names.begin(), template_names.end());
-        for(unsigned int n=0; n<template_names.size(); n++)
-        {
-            if (button(sf::FloatRect(20, 170 + n * 30, 250, 30), template_names[n] + "(" + string(ShipTemplate::getTemplate(template_names[n])->frontShields) + ")", 20))
-            {
-                P<CpuShip> s = new CpuShip();
-                s->faction_id = current_faction;
-                s->setShipTemplate(template_names[n]);
-                s->setPosition(view_position + sf::vector2FromAngle(random(0, 360)) * random(0, view_distance * 0.1));
-                s->orderRoaming();
-                
-                selection.clear();
-                selection.push_back(s);
-            }
-        }
     }
+    
+    if (button(sf::FloatRect(20, 720, 250, 50), "Create...", 30))
+        new GameMasterCreateObjectWindow(view_position);
 
     if (button(sf::FloatRect(20, 770, 250, 50), "Global Message", 25))
-    {
         new GameMasterGlobalMessageEntry();
-    }
     if (toggleButton(sf::FloatRect(20, 820, 250, 50), allow_object_drag, "Drag Objects"))
         allow_object_drag = !allow_object_drag;
 
@@ -407,6 +367,78 @@ void GameMasterGlobalMessageEntry::onGui()
     }
 
     x += 350;
+    if (button(sf::FloatRect(x, y, 300, 50), "Cancel"))
+        destroy();
+}
+
+unsigned int GameMasterCreateObjectWindow::current_faction = 2;
+
+GameMasterCreateObjectWindow::GameMasterCreateObjectWindow(sf::Vector2f position)
+: position(position)
+{
+}
+
+void GameMasterCreateObjectWindow::onGui()
+{
+    float x = getWindowSize().x / 2 - 325;
+    float y = 200;
+    boxWithBackground(sf::FloatRect(x - 30, y - 30, 710, 460));
+
+    for(unsigned int f=0; f<factionInfo.size(); f++)
+    {
+        if (toggleButton(sf::FloatRect(x, y, 250, 30), current_faction == f, factionInfo[f]->name, 20))
+            current_faction = f;
+        y += 30;
+    }
+    y += 30;
+
+    if (button(sf::FloatRect(x, y, 300, 30), "Station", 20))
+    {
+        P<SpaceObject> obj = new SpaceStation();
+        obj->setFactionId(current_faction);
+        obj->setRotation(random(0, 360));
+        obj->setPosition(position);
+        destroy();
+    }
+    y += 30;
+    if (button(sf::FloatRect(x, y, 300, 30), "WarpJammer", 20))
+    {
+        P<SpaceObject> obj = new WarpJammer();
+        obj->setFactionId(current_faction);
+        obj->setRotation(random(0, 360));
+        obj->setPosition(position);
+        destroy();
+    }
+    y += 30;
+    if (button(sf::FloatRect(x, y, 300, 30), "BlackHole", 20))
+    {
+        P<SpaceObject> obj = new BlackHole();
+        obj->setPosition(position);
+        destroy();
+    }
+    y += 30;
+
+    x += 350;
+    y = 200;
+
+    std::vector<string> template_names = ShipTemplate::getTemplateNameList();
+    std::sort(template_names.begin(), template_names.end());
+    for(unsigned int n=0; n<template_names.size(); n++)
+    {
+        if (button(sf::FloatRect(x, y, 300, 30), template_names[n] + "(" + string(ShipTemplate::getTemplate(template_names[n])->frontShields) + ")", 20))
+        {
+            P<CpuShip> s = new CpuShip();
+            s->setFactionId(current_faction);
+            s->setShipTemplate(template_names[n]);
+            s->setPosition(position);
+            s->orderRoaming();
+            
+            destroy();
+        }
+        y += 30;
+    }
+    
+    y += 10;
     if (button(sf::FloatRect(x, y, 300, 50), "Cancel"))
         destroy();
 }

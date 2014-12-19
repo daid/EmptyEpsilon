@@ -14,7 +14,6 @@ enum EClickAndDragState
 
 class GameMasterUI : public MainUIBase
 {
-    unsigned int current_faction;
     EClickAndDragState click_and_drag_state;
     sf::Vector2f mouse_down_pos;
     sf::Vector2f prev_mouse_pos;
@@ -41,6 +40,17 @@ class GameMasterGlobalMessageEntry : public GUI
 {
     string message;
 public:
+    virtual void onGui();
+};
+
+class GameMasterCreateObjectWindow : public GUI
+{
+    sf::Vector2f position;
+    static unsigned int current_faction;
+    
+public:
+    GameMasterCreateObjectWindow(sf::Vector2f position);
+
     virtual void onGui();
 };
 
