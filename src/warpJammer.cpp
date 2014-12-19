@@ -1,6 +1,7 @@
 #include <SFML/OpenGL.hpp>
 #include "warpJammer.h"
 #include "playerInfo.h"
+#include "explosionEffect.h"
 #include "main.h"
 
 #include "scriptInterface.h"
@@ -17,6 +18,7 @@ WarpJammer::WarpJammer()
 : SpaceObject(100, "WarpJammer")
 {
     range = 7000.0;
+    hull = 50;
     
     jammer_list.push_back(this);
     
@@ -27,7 +29,7 @@ void WarpJammer::draw3D()
 {
     float scale = 1.0;
     glScalef(scale, scale, scale);
-    glRotatef(35, 1, 0, 0);
+    glRotatef(90, 1, 0, 0);
     objectShader.setParameter("baseMap", *textureManager.getTexture("ammo_box.png"));
     objectShader.setParameter("illuminationMap", *textureManager.getTexture("ammo_box_illumination.png"));
     objectShader.setParameter("specularMap", *textureManager.getTexture("ammo_box_specular.png"));
@@ -50,13 +52,30 @@ void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, fl
     object_sprite.setScale(size, size);
     window.draw(object_sprite);
     
-    sf::CircleShape range_circle(range * scale);
-    range_circle.setOrigin(range * scale, range * scale);
-    range_circle.setPosition(position);
-    range_circle.setFillColor(sf::Color::Transparent);
-    range_circle.setOutlineColor(sf::Color(255, 255, 255, 32));
-    range_circle.setOutlineThickness(2.0);
-    window.draw(range_circle);
+    if (long_range)
+    {
+        sf::CircleShape range_circle(range * scale);
+        range_circle.setOrigin(range * scale, range * scale);
+        range_circle.setPosition(position);
+        range_circle.setFillColor(sf::Color::Transparent);
+        range_circle.setOutlineColor(sf::Color(255, 255, 255, 32));
+        range_circle.setOutlineThickness(2.0);
+        window.draw(range_circle);
+    }
+}
+
+void WarpJammer::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type, int frequency)
+{
+    if (type == DT_EMP)
+        return;
+    hull -= damageAmount;
+    if (hull <= 0)
+    {
+        P<ExplosionEffect> e = new ExplosionEffect();
+        e->setSize(getRadius());
+        e->setPosition(getPosition());
+        destroy();
+    }
 }
 
 bool WarpJammer::isWarpJammed(sf::Vector2f position)

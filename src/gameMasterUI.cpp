@@ -11,7 +11,9 @@
 GameMasterUI::GameMasterUI()
 {
     view_distance = 50000;
-    allow_object_drag = engine->getGameSpeed() == 0.0;
+    mouse_mode = MM_None;
+    if (engine->getGameSpeed() == 0.0)
+        mouse_mode = MM_Drag;
     click_and_drag_state = CD_None;
 }
 
@@ -27,48 +29,60 @@ void GameMasterUI::onGui()
         {
             mouse_down_pos = mouse;
             click_and_drag_state = CD_BoxSelect;
-            foreach(SpaceObject, obj, selection)
+            if (mouse_mode == MM_Drag)
             {
-                if (sf::length(mouse_world_position - obj->getPosition()) < 0.1 * view_distance)
-                    click_and_drag_state = CD_DragObjects;
+                foreach(SpaceObject, obj, selection)
+                {
+                    if (sf::length(mouse_world_position - obj->getPosition()) < 0.1 * view_distance)
+                        click_and_drag_state = CD_DragObjects;
+                }
             }
         }
-        if (InputHandler::mouseIsReleased(sf::Mouse::Left))
+        if (InputHandler::mouseIsReleased(sf::Mouse::Left) && mouse.x > 300)
         {
-            if (click_and_drag_state == CD_BoxSelect)
+            switch(mouse_mode)
             {
-                selection.clear();
-                
-                if (mouse_down_pos == mouse)
+            case MM_None:
+            case MM_Drag:
+                if (click_and_drag_state == CD_BoxSelect)
                 {
-                    P<SpaceObject> target;
-                    PVector<Collisionable> list = CollisionManager::queryArea(mouse_world_position - sf::Vector2f(0.1 * view_distance, 0.1 * view_distance), mouse_world_position + sf::Vector2f(0.1 * view_distance, 0.1 * view_distance));
-                    foreach(Collisionable, obj, list)
+                    selection.clear();
+                    
+                    if (mouse_down_pos == mouse)
                     {
-                        P<SpaceObject> spaceObject = obj;
-                        if (spaceObject)
+                        P<SpaceObject> target;
+                        PVector<Collisionable> list = CollisionManager::queryArea(mouse_world_position - sf::Vector2f(0.1 * view_distance, 0.1 * view_distance), mouse_world_position + sf::Vector2f(0.1 * view_distance, 0.1 * view_distance));
+                        foreach(Collisionable, obj, list)
                         {
-                            if (!target || sf::length(mouse_world_position - spaceObject->getPosition()) < sf::length(mouse_world_position - target->getPosition()))
-                                target = spaceObject;
+                            P<SpaceObject> spaceObject = obj;
+                            if (spaceObject)
+                            {
+                                if (!target || sf::length(mouse_world_position - spaceObject->getPosition()) < sf::length(mouse_world_position - target->getPosition()))
+                                    target = spaceObject;
+                            }
+                        }
+                        selection.clear();
+                        if (target)
+                            selection.push_back(target);
+                    }else{
+                        sf::Vector2f mouse_down_world_position = view_position + (mouse_down_pos - sf::Vector2f(800, 450)) / 400.0f * view_distance;
+                        PVector<Collisionable> list = CollisionManager::queryArea(mouse_world_position, mouse_down_world_position);
+                        foreach(Collisionable, obj, list)
+                        {
+                            P<SpaceObject> spaceObject = obj;
+                            if (spaceObject)
+                                selection.push_back(spaceObject);
                         }
                     }
-                    selection.clear();
-                    if (target)
-                        selection.push_back(target);
-                }else{
-                    sf::Vector2f mouse_down_world_position = view_position + (mouse_down_pos - sf::Vector2f(800, 450)) / 400.0f * view_distance;
-                    PVector<Collisionable> list = CollisionManager::queryArea(mouse_world_position, mouse_down_world_position);
-                    foreach(Collisionable, obj, list)
-                    {
-                        P<SpaceObject> spaceObject = obj;
-                        if (spaceObject)
-                            selection.push_back(spaceObject);
-                    }
                 }
+                break;
+            case MM_Create:
+                new GameMasterCreateObjectWindow(mouse_world_position);
+                break;
             }
             click_and_drag_state = CD_None;
         }
-        if (allow_object_drag && click_and_drag_state == CD_DragObjects && InputHandler::mouseIsDown(sf::Mouse::Left) && mouse.x > 300)
+        if (mouse_mode == MM_Drag && click_and_drag_state == CD_DragObjects && InputHandler::mouseIsDown(sf::Mouse::Left) && mouse.x > 300)
         {
             if (sf::length(mouse - mouse_down_pos) > 5.0f)
             {
@@ -259,14 +273,25 @@ void GameMasterUI::onGui()
             }
         }
     }
-    
-    if (button(sf::FloatRect(20, 720, 250, 50), "Create...", 30))
-        new GameMasterCreateObjectWindow(view_position);
 
-    if (button(sf::FloatRect(20, 770, 250, 50), "Global Message", 25))
+    if (button(sf::FloatRect(20, 720, 250, 50), "Global Message", 25))
         new GameMasterGlobalMessageEntry();
-    if (toggleButton(sf::FloatRect(20, 820, 250, 50), allow_object_drag, "Drag Objects"))
-        allow_object_drag = !allow_object_drag;
+    
+    if (toggleButton(sf::FloatRect(20, 770, 250, 50), mouse_mode == MM_Create, "Create...", 30))
+    {
+        if (mouse_mode == MM_Create)
+            mouse_mode = MM_None;
+        else
+            mouse_mode = MM_Create;
+    }
+
+    if (toggleButton(sf::FloatRect(20, 820, 250, 50), mouse_mode == MM_Drag, "Drag Objects"))
+    {
+        if (mouse_mode == MM_Drag)
+            mouse_mode = MM_None;
+        else
+            mouse_mode = MM_Drag;
+    }
 
     if (gameGlobalInfo->global_message_timeout > 0.0)
     {
