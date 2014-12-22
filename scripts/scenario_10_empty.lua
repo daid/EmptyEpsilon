@@ -3,7 +3,7 @@
 
 function init()
 	SpaceStation():setPosition(300, 300):setFaction("Human Navy"):setRotation(random(0, 360))
-	WarpJammer():setPosition(-300, -300)
+	Nebula():setPosition(-5000, 0)
 end
 
 function update(delta)

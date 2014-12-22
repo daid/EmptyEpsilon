@@ -98,6 +98,8 @@ sf::Vector2f WarpJammer::getFirstNoneJammedPosition(sf::Vector2f start, sf::Vect
     foreach(WarpJammer, wj, jammer_list)
     {
         float f = sf::dot(startEndDiff, wj->getPosition() - start) / startEndLength;
+        if (f < 0.0)
+            f = 0;
         sf::Vector2f q = start + startEndDiff / startEndLength * f;
         if ((q - wj->getPosition()) < wj->range)
         {

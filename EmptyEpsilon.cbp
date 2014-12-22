@@ -446,6 +446,8 @@
 		<Unit filename="src/mine.h" />
 		<Unit filename="src/mouseCalibrator.cpp" />
 		<Unit filename="src/mouseCalibrator.h" />
+		<Unit filename="src/nebula.cpp" />
+		<Unit filename="src/nebula.h" />
 		<Unit filename="src/nuke.cpp" />
 		<Unit filename="src/nuke.h" />
 		<Unit filename="src/packResourceProvider.cpp" />

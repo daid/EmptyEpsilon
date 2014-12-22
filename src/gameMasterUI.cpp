@@ -5,6 +5,7 @@
 #include "cpuShip.h"
 #include "spaceStation.h"
 #include "blackHole.h"
+#include "nebula.h"
 #include "warpJammer.h"
 #include "gameGlobalInfo.h"
 
@@ -438,6 +439,13 @@ void GameMasterCreateObjectWindow::onGui()
     if (button(sf::FloatRect(x, y, 300, 30), "BlackHole", 20))
     {
         P<SpaceObject> obj = new BlackHole();
+        obj->setPosition(position);
+        destroy();
+    }
+    y += 30;
+    if (button(sf::FloatRect(x, y, 300, 30), "Nebula", 20))
+    {
+        P<SpaceObject> obj = new Nebula();
         obj->setPosition(position);
         destroy();
     }

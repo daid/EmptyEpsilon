@@ -9,6 +9,7 @@
 #include "shipSelectionScreen.h"
 #include "repairCrew.h"
 #include "gameGlobalInfo.h"
+#include "nebula.h"
 
 MainUIBase::MainUIBase()
 {
@@ -133,7 +134,7 @@ void MainUIBase::update(float delta)
     {
         float angle = sf::vector2ToAngle(obj->getPosition() - my_spaceship->getPosition());
         float diff = sf::angleDifference(angle, scan_angle);
-        if ((diff > 0.0 && diff < 5.0f) || sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000.0f)
+        if ((diff > 0.0 && diff < 5.0f) || (obj->getPosition() - my_spaceship->getPosition()) < 5000.0f)
         {
             int index = -1;
             for(unsigned int n=0; n<scan_ghost.size(); n++)
@@ -155,7 +156,7 @@ void MainUIBase::update(float delta)
     }
     for(std::vector<ScanGhost>::iterator i = scan_ghost.begin(); i != scan_ghost.end();)
     {
-        if (i->object)
+        if (i->object && (!i->object->hideInNebula() || (i->object->getPosition() - my_spaceship->getPosition()) < 5000.0f || !Nebula::blockedByNebula(my_spaceship->getPosition(), i->object->getPosition())))
         {
             i++;
             continue;
@@ -412,18 +413,21 @@ void MainUIBase::drawWaypoints(sf::Vector2f view_position, sf::Vector2f position
     }
 }
 
-void MainUIBase::drawRadarSweep(sf::Vector2f position, float size, float angle)
+void MainUIBase::drawRadarSweep(sf::Vector2f position, float range, float size, float angle)
 {
     sf::RenderTarget& window = *getRenderTarget();
     
     sf::VertexArray sweep(sf::Triangles, 3);
     for(int n=0; n<10; n++)
     {
+        float length = size * 1.1;
+        if (my_spaceship)
+            length = sf::length(Nebula::getFirstBlockedPosition(my_spaceship->getPosition(), my_spaceship->getPosition() + sf::vector2FromAngle(float(n) - 9.0f + angle) * range) - my_spaceship->getPosition()) / range * size;
         sweep[0].position = position;
         sweep[0].color = sf::Color(0, 255, 0, n * 5);
-        sweep[1].position = position + sf::vector2FromAngle(float(n) - 10.0f + angle) * size * 1.1f;
+        sweep[1].position = position + sf::vector2FromAngle(float(n) - 10.0f + angle) * length;
         sweep[1].color = sf::Color(0, 255, 0, n * 5);
-        sweep[2].position = position + sf::vector2FromAngle(float(n) - 9.0f + angle) * size * 1.1f;
+        sweep[2].position = position + sf::vector2FromAngle(float(n) - 9.0f + angle) * length;
         sweep[2].color = sf::Color(0, 255, 0, n * 5);
         window.draw(sweep);
     }
@@ -439,7 +443,7 @@ void MainUIBase::drawRadar(sf::Vector2f position, float size, float range, bool 
     if (long_range)
     {
         drawRaderBackground(my_spaceship->getPosition(), position, size, range, rect);
-        drawRadarSweep(position, size, scan_angle);
+        drawRadarSweep(position, range, size, scan_angle);
         for(unsigned int n=0; n<scan_ghost.size(); n++)
         {
             P<SpaceObject> obj = scan_ghost[n].object;
