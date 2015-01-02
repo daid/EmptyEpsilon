@@ -102,8 +102,13 @@ void MainUIBase::onGui()
 
     if (engine->getGameSpeed() == 0.0)
     {
+        sf::RectangleShape fullScreenOverlay(sf::Vector2f(getWindowSize().x, 900));
+        fullScreenOverlay.setFillColor(sf::Color(0, 0, 0, 64));
+        getRenderTarget()->draw(fullScreenOverlay);
+        
         if (gameGlobalInfo->getVictoryFactionId() < 0)
         {
+            boxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 250, 600, 500, game_server ? 130 : 100));
             text(sf::FloatRect(0, 600, getWindowSize().x, 100), "Game Paused", AlignCenter, 70);
             if (game_server)
                 text(sf::FloatRect(0, 680, getWindowSize().x, 30), "(Press [SPACE] to resume)", AlignCenter, 30);

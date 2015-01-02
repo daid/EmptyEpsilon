@@ -37,7 +37,7 @@ void CrewUI::onGui()
         {
             if (my_player_info->crew_position[n])
             {
-                if (toggleButton(sf::FloatRect(200 * offset, 0, 200, 25), my_player_info->crew_active_position == ECrewPosition(n), getCrewPositionName(ECrewPosition(n)), 20))
+                if (toggleButton(sf::FloatRect(200 * offset, 0, 200, 35), my_player_info->crew_active_position == ECrewPosition(n), getCrewPositionName(ECrewPosition(n)), 20))
                 {
                     if (my_player_info->crew_active_position != ECrewPosition(n))
                     {

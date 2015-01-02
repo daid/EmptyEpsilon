@@ -704,10 +704,11 @@ void SpaceShip::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDam
 {
     if (shields_active)
     {
-        float factor = 1.0;
+        float frequency_damage_factor = 1.0;
         if (type == DT_Energy && gameGlobalInfo->use_beam_shield_frequencies)
-            factor = frequencyVsFrequencyDamageFactor(frequency, shield_frequency);
+            frequency_damage_factor = frequencyVsFrequencyDamageFactor(frequency, shield_frequency);
         float angle = sf::angleDifference(getRotation(), sf::vector2ToAngle(getPosition() - damageLocation));
+        ESystem system = SYS_FrontShield;
         bool front_hit = !(angle > -90 && angle < 90);
         float* shield = &front_shield;
         float* shield_hit_effect = &front_shield_hit_effect;
@@ -715,13 +716,15 @@ void SpaceShip::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDam
         {
             shield = &rear_shield;
             shield_hit_effect = &rear_shield_hit_effect;
+            system = SYS_RearShield;
         }
+        float shield_damage_factor = 1.25 - getSystemEffectiveness(system) * 0.25;
 
-        *shield -= damageAmount * factor;
+        *shield -= damageAmount * frequency_damage_factor * shield_damage_factor;
 
         if (*shield < 0)
         {
-            hullDamage(-(*shield) / factor, damageLocation, type);
+            hullDamage(-(*shield) / frequency_damage_factor, damageLocation, type);
             *shield = 0.0;
         }else{
             *shield_hit_effect = 1.0;
