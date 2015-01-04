@@ -1,6 +1,7 @@
 #include "cpuShip.h"
 #include "playerInfo.h"
 #include "pathPlanner.h"
+#include "nebula.h"
 
 #include "scriptInterface.h"
 REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceShip)
@@ -67,6 +68,13 @@ void CpuShip::update(float delta)
     P<SpaceObject> target = getTarget();
     P<SpaceObject> new_target;
     float target_distance = 0.0;
+    if (target && target->hideInNebula() && (target->getPosition() - getPosition()) > 5000.0f && Nebula::blockedByNebula(getPosition(), target->getPosition()))
+    {
+        if (orders == AI_Roaming)
+            order_target_location = target->getPosition();
+        target = NULL;
+    }
+
     if (target)
         target_distance = sf::length(target->getPosition() - getPosition());
 
@@ -320,6 +328,8 @@ P<SpaceObject> CpuShip::findBestTarget(sf::Vector2f position, float radius)
     {
         P<SpaceObject> space_object = obj;
         if (!space_object || !space_object->canBeTargeted() || !isEnemy(space_object) || space_object == target)
+            continue;
+        if (space_object->hideInNebula() && (space_object->getPosition() - getPosition()) > 5000.0f && Nebula::blockedByNebula(getPosition(), space_object->getPosition()))
             continue;
         float distance = sf::length(space_object->getPosition() - position);
         if (distance > radius)
