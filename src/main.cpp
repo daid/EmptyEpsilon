@@ -137,15 +137,18 @@ int main(int argc, char** argv)
     P<ResourceStream> stream = getResourceStream("sansation.ttf");
     mainFont.loadFromStream(**stream);
 
-    P<ResourceStream> vertexStream = getResourceStream("objectShader.vert");
-    P<ResourceStream> fragmentStream = getResourceStream("objectShader.frag");
-    objectShader.loadFromStream(**vertexStream, **fragmentStream);
-    vertexStream = getResourceStream("simpleObjectShader.vert");
-    fragmentStream = getResourceStream("simpleObjectShader.frag");
-    simpleObjectShader.loadFromStream(**vertexStream, **fragmentStream);
-    vertexStream = getResourceStream("basicShader.vert");
-    fragmentStream = getResourceStream("basicShader.frag");
-    basicShader.loadFromStream(**vertexStream, **fragmentStream);
+    if (sf::Shader::isAvailable())
+    {
+        P<ResourceStream> vertexStream = getResourceStream("objectShader.vert");
+        P<ResourceStream> fragmentStream = getResourceStream("objectShader.frag");
+        objectShader.loadFromStream(**vertexStream, **fragmentStream);
+        vertexStream = getResourceStream("simpleObjectShader.vert");
+        fragmentStream = getResourceStream("simpleObjectShader.frag");
+        simpleObjectShader.loadFromStream(**vertexStream, **fragmentStream);
+        vertexStream = getResourceStream("basicShader.vert");
+        fragmentStream = getResourceStream("basicShader.frag");
+        basicShader.loadFromStream(**vertexStream, **fragmentStream);
+    }
 
     P<ScriptObject> shipTemplatesScript = new ScriptObject("shipTemplates.lua");
     if (shipTemplatesScript)
