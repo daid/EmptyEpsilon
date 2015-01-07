@@ -20,6 +20,10 @@ function init()
 
 	local x, y = friendlyList[1]:getPosition()
 	setCirclePos(Nebula(), x, y, random(0, 360), 6000)
+
+	for n=1, 5 do
+		setCirclePos(Nebula(), 0, 0, random(0, 360), random(20000, 45000))
+	end
 	
 	enemy_group_count = 5
 	for cnt=1,enemy_group_count do
