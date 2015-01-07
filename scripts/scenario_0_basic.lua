@@ -17,6 +17,9 @@ function init()
 		table.insert(friendlyList, setCirclePos(SpaceStation():setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
 	end
 	friendlyList[1]:addReputationPoints(300.0)
+
+	local x, y = friendlyList[1]:getPosition()
+	setCirclePos(Nebula(), x, y, random(0, 360), 6000)
 	
 	enemy_group_count = 5
 	for cnt=1,enemy_group_count do

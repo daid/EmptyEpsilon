@@ -26,7 +26,6 @@ Nebula::Nebula()
         clouds[n].size = random(1024, 2048);
         clouds[n].texture = irandom(1, 3);
         clouds[n].offset = sf::vector2FromAngle(float(n * 360 / cloud_count)) * random(clouds[n].size / 2.0f, getRadius() - clouds[n].size);
-        printf("%f %f\n", clouds[n].offset.x, clouds[n].offset.y);
     }
     
     nebula_list.push_back(this);
