@@ -196,25 +196,40 @@ void CrewEngineeringUI::onPauseHelpGui()
     float line_x = x - 200;
 
     textboxWithBackground(sf::FloatRect(x, y, 300, 80), "Select a system to adjust power and coolant levels.", AlignTopLeft, 20);
+    drawUILine(sf::Vector2f(300, 590), sf::Vector2f(x, y + 25), line_x);
+    line_x += 10;
+    drawUILine(sf::Vector2f(670, 570), sf::Vector2f(x, y + 35), line_x);
+    drawUILine(sf::Vector2f(750, 570), sf::Vector2f(x, y + 35), line_x);
+    line_x += 40;
     y += 80;
     textboxWithBackground(sf::FloatRect(x, y, 300, 140), "These bars give a quick overview of system status. Showing: damage, overheating, power level and coolant amount.", AlignTopLeft, 20);
+    drawUILine(sf::Vector2f(400, 540), sf::Vector2f(x, y + 25), line_x);
+    line_x += 40;
     y += 140;
     textboxWithBackground(sf::FloatRect(x, y, 300, 100), "Order repair crew around in the ship to repair damaged systems.", AlignTopLeft, 20);
+    drawUILine(sf::Vector2f(getWindowSize().x / 2, 250), sf::Vector2f(x, y + 25), line_x);
+    line_x += 40;
     y += 100;
     if (gameGlobalInfo->use_beam_shield_frequencies)
     {
-        textboxWithBackground(sf::FloatRect(x, y, 300, 100), "Set shield frequencies to prevent shield damage.", AlignTopLeft, 20);
-        y += 100;
+        textboxWithBackground(sf::FloatRect(x, y, 300, 80), "Set shield frequencies to reduce shield damage.", AlignTopLeft, 20);
+        drawUILine(sf::Vector2f(getWindowSize().x - 300, 640), sf::Vector2f(x, y + 25), line_x);
+        drawUILine(sf::Vector2f(getWindowSize().x - 300, 690), sf::Vector2f(x, y + 25), line_x);
+        line_x += 40;
+        y += 80;
     }
     textboxWithBackground(sf::FloatRect(x, y, 300, 80), "And always, listen to your captain!", AlignTopLeft, 20);
 
 
     x = 20;
     y = 200;
-    textboxWithBackground(sf::FloatRect(x, y, 300, 100), "Tip: Overheating system are less efficient.", AlignTopLeft, 20);
-    y += 100;
+    textboxWithBackground(sf::FloatRect(x, y, 300, 80), "Tip: Overheating system are less efficient.", AlignTopLeft, 20);
+    y += 80;
     textboxWithBackground(sf::FloatRect(x, y, 300, 100), "Tip: You have a fixed amount of coolant. Distribute it well.", AlignTopLeft, 20);
     y += 100;
-    textboxWithBackground(sf::FloatRect(x, y, 300, 100), "Tip: Let the captain set priorities.", AlignTopLeft, 20);
-    y += 100;
+    if (gameGlobalInfo->use_beam_shield_frequencies)
+    {
+        textboxWithBackground(sf::FloatRect(x, y, 300, 100), "Tip: Communicate with science about shield frequencies.", AlignTopLeft, 20);
+        y += 100;
+    }
 }
