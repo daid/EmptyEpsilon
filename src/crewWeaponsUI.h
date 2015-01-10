@@ -11,6 +11,7 @@ public:
     CrewWeaponsUI();
     
     virtual void onCrewUI();
+    virtual void onPauseHelpGui();
 };
 
 #endif//CREW_WEAPONS_UI

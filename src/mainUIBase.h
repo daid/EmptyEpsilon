@@ -22,6 +22,7 @@ public:
 
     virtual void onGui();
     virtual void update(float delta);
+    virtual void onPauseHelpGui() {}
     
     void mainScreenSelectGUI();
     void selfDestructGUI();
@@ -33,6 +34,7 @@ public:
     void drawRadarSweep(sf::Vector2f position, float range, float size, float angle);
     void drawRadar(sf::Vector2f position, float size, float range, bool long_range, P<SpaceObject> target, sf::FloatRect rect = sf::FloatRect(0, 0, getWindowSize().x, 900));
     void drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESystem highlight_system);
+    void drawUILine(sf::Vector2f start, sf::Vector2f end, float x_split);
     void draw3Dworld(sf::FloatRect rect = sf::FloatRect(0, 0, getWindowSize().x, 900));
 };
 

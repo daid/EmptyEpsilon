@@ -121,3 +121,51 @@ void CrewHelmsUI::onCrewUI()
         text(sf::FloatRect(x, 800, 280, 50), "Combat maneuver ready", AlignCenter, 20, sf::Color::Black);
     }
 }
+
+void CrewHelmsUI::onPauseHelpGui()
+{
+    float x = getWindowSize().x - 300;
+    float y = 50;
+    float line_x = x - 200;
+    textboxWithBackground(sf::FloatRect(x, y, 300, 80), "Control your ship by setting a heading and speed", AlignTopLeft, 20);
+    drawUILine(sf::Vector2f(getWindowSize().x / 2.0f, 300), sf::Vector2f(x, y + 25), line_x);
+    line_x += 10;
+    drawUILine(sf::Vector2f(60, 420), sf::Vector2f(x, y + 35), line_x);
+    line_x += 40;
+    y += 80;
+
+    if (my_spaceship->hasWarpdrive)
+    {
+        textboxWithBackground(sf::FloatRect(x, y, 300, 80), "Use the warp drive to cover long distances (drains energy fast)", AlignTopLeft, 20);
+        drawUILine(sf::Vector2f(140, 480), sf::Vector2f(x, y + 25), line_x);
+        line_x += 40;
+        y += 80;
+    }
+    if (my_spaceship->hasJumpdrive)
+    {
+        textboxWithBackground(sf::FloatRect(x, y, 300, 80), "Use the jump drive to cover long distances (uses energy)", AlignTopLeft, 20);
+        drawUILine(sf::Vector2f(my_spaceship->hasWarpdrive ? 220 : 140, 520), sf::Vector2f(x, y + 25), line_x);
+        line_x += 10;
+        drawUILine(sf::Vector2f(280, 770), sf::Vector2f(x, y + 35), line_x);
+        line_x += 40;
+        y += 80;
+    }
+    textboxWithBackground(sf::FloatRect(x, y, 300, 80), "When near a station, dock for energy recharge.", AlignTopLeft, 20);
+    drawUILine(sf::Vector2f(280, 820), sf::Vector2f(x, y + 35), line_x);
+    line_x += 40;
+    y += 80;
+    textboxWithBackground(sf::FloatRect(x, y, 300, 100), "During combat, use maneuvers to gain an edge on enemies.", AlignTopLeft, 20);
+    drawUILine(sf::Vector2f(x+80, 670), sf::Vector2f(x, y + 35), line_x);
+    drawUILine(sf::Vector2f(x+10, 720), sf::Vector2f(x, y + 35), line_x);
+    drawUILine(sf::Vector2f(x+10, 770), sf::Vector2f(x, y + 35), line_x);
+    drawUILine(sf::Vector2f(x+10, 820), sf::Vector2f(x, y + 35), line_x);
+    line_x += 40;
+    y += 100;
+
+    textboxWithBackground(sf::FloatRect(x, y, 300, 80), "And always, listen to your captain!", AlignTopLeft, 20);
+
+    x = 20;
+    y = 200;
+    textboxWithBackground(sf::FloatRect(x, y, 300, 100), "Tip: The arcs shown at your ship indicates what the beam weapons can hit.", AlignTopLeft, 20);
+    y += 100;
+}

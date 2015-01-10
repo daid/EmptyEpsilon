@@ -25,6 +25,8 @@ public:
     
     virtual void update(float delta);
     virtual void onCrewUI();
+    
+    virtual void onPauseHelpGui();
 };
 
 #endif//CREW_HELMS_UI

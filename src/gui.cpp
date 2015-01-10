@@ -375,6 +375,12 @@ void GUI::textbox(sf::FloatRect rect, string text, EAlign align, float textSize,
     GUI::text(sf::FloatRect(rect.left + textSize, rect.top + textSize, rect.width - textSize * 2, rect.height - textSize * 2), text, align, textSize, color);
 }
 
+void GUI::textboxWithBackground(sf::FloatRect rect, string text, EAlign align, float textSize, sf::Color color, sf::Color bg_color)
+{
+    draw9Cut(rect, "button_background", bg_color);
+    textbox(rect, text, align, textSize, color);
+}
+
 string GUI::textEntry(sf::FloatRect rect, string value, float fontSize)
 {
     draw9Cut(rect, "button_background", sf::Color(192,192,192,255));

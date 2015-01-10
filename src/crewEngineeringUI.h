@@ -14,6 +14,7 @@ public:
     CrewEngineeringUI();
     
     virtual void onCrewUI();
+    virtual void onPauseHelpGui();
 };
 
 #endif//CREW_ENGINEERING_UI

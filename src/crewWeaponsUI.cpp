@@ -85,3 +85,50 @@ void CrewWeaponsUI::onCrewUI()
         damagePowerDisplay(sf::FloatRect(radar_center.x - 140, radar_center.y + 150, 280, 50), SYS_BeamWeapons, 20);
     }
 }
+
+void CrewWeaponsUI::onPauseHelpGui()
+{
+    float x = getWindowSize().x - 300;
+    float y = 50;
+    float line_x = x - 200;
+
+    if (my_spaceship->weapon_tubes > 0)
+    {
+        textboxWithBackground(sf::FloatRect(x, y, 300, 60), "1) Load your weapons", AlignTopLeft, 20);
+        drawUILine(sf::Vector2f(210, 870 - my_spaceship->weapon_tubes * 50), sf::Vector2f(x, y + 25), line_x);
+        line_x += 10;
+        y += 60;
+        textboxWithBackground(sf::FloatRect(x, y, 300, 60), "2) Set a target", AlignTopLeft, 20);
+        drawUILine(sf::Vector2f(getWindowSize().x / 2.0f, 300), sf::Vector2f(x, y + 25), line_x);
+        line_x += 10;
+        y += 60;
+        textboxWithBackground(sf::FloatRect(x, y, 300, 60), "3) Fire the missile!", AlignTopLeft, 20);
+        drawUILine(sf::Vector2f(500, 920 - my_spaceship->weapon_tubes * 50), sf::Vector2f(x, y + 25), line_x);
+        line_x += 40;
+        y += 60;
+    }
+    textboxWithBackground(sf::FloatRect(x, y, 300, 100), "During combat, activate the shields to prevent hull damage. Drains energy.", AlignTopLeft, 20);
+    drawUILine(sf::Vector2f(x + 10, 860), sf::Vector2f(x, y + 25), line_x);
+    line_x += 40;
+    y += 100;
+    if (gameGlobalInfo->use_beam_shield_frequencies)
+    {
+        textboxWithBackground(sf::FloatRect(x, y, 300, 80), "Set beam frequency for optimal beam damage.", AlignTopLeft, 20);
+        drawUILine(sf::Vector2f(x + 10, 760), sf::Vector2f(x, y + 25), line_x);
+        line_x += 40;
+        y += 80;
+    }
+
+    textboxWithBackground(sf::FloatRect(x, y, 300, 80), "And always, listen to your captain!", AlignTopLeft, 20);
+
+
+    x = 20;
+    y = 200;
+    textboxWithBackground(sf::FloatRect(x, y, 300, 100), "Tip: The set target is also used for beam weapon targeting.", AlignTopLeft, 20);
+    y += 100;
+    if (gameGlobalInfo->use_beam_shield_frequencies)
+    {
+        textboxWithBackground(sf::FloatRect(x, y, 300, 100), "Tip: Communicate with science about beam frequencies.", AlignTopLeft, 20);
+        y += 100;
+    }
+}

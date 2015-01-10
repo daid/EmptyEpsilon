@@ -53,6 +53,8 @@ void CrewScienceUI::onCrewUI()
             for(unsigned int n = 0; n < scan_ghost.size(); n++)
                 if (scan_ghost[n].object == scienceTarget)
                     target_position = scan_ghost[n].position;
+            drawUILine(radar_center + (target_position - my_spaceship->getPosition()) / radarDistance * 400.0f + sf::Vector2f(16.0f, 0), sf::Vector2f(getWindowSize().x - 270, 215), getWindowSize().x - 320);
+            /*
             sf::Vector2f end_point_1(getWindowSize().x - 300, 215);
             sf::Vector2f end_point_2(getWindowSize().x - 270, 215);
             sf::Vector2f start_point = radar_center + (target_position - my_spaceship->getPosition()) / radarDistance * 400.0f;
@@ -78,6 +80,7 @@ void CrewScienceUI::onCrewUI()
                 target_line[0].color = target_line[1].color = target_line[2].color = target_line[3].color = target_line[4].color = target_line[5].color = sf::Color(255, 255, 255, 128);
                 getRenderTarget()->draw(target_line);
             }
+            */
         }
 
         if (my_spaceship->scanning_delay > 0.0)

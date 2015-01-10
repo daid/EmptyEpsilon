@@ -45,6 +45,7 @@ public:
     static void box(sf::FloatRect rect, sf::Color color=sf::Color::White);
     static void boxWithBackground(sf::FloatRect rect, sf::Color color=sf::Color::White, sf::Color bg_color=sf::Color::Black);
     static void textbox(sf::FloatRect rect, string text, EAlign align = AlignTopLeft, float textSize = 30, sf::Color color=sf::Color::White);
+    static void textboxWithBackground(sf::FloatRect rect, string text, EAlign align = AlignTopLeft, float textSize = 30, sf::Color color=sf::Color::White, sf::Color bg_color=sf::Color::Black);
     static string textEntry(sf::FloatRect rect, string value, float fontSize = 30);
     static void keyValueDisplay(sf::FloatRect, float div_distance, string key, string value, float textSize = 30.0f);
 

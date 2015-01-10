@@ -4,7 +4,7 @@
 CrewEngineeringUI::CrewEngineeringUI()
 {
     self_destruct_open = false;
-    selected_system = SYS_None;
+    selected_system = SYS_Reactor;
     shield_new_frequency = SpaceShip::max_frequency / 2;
 }
 
@@ -187,4 +187,34 @@ void CrewEngineeringUI::onCrewUI()
             selected_crew->commandSetTargetPosition(target_pos);
         }
     }
+}
+
+void CrewEngineeringUI::onPauseHelpGui()
+{
+    float x = getWindowSize().x - 300;
+    float y = 50;
+    float line_x = x - 200;
+
+    textboxWithBackground(sf::FloatRect(x, y, 300, 80), "Select a system to adjust power and coolant levels.", AlignTopLeft, 20);
+    y += 80;
+    textboxWithBackground(sf::FloatRect(x, y, 300, 140), "These bars give a quick overview of system status. Showing: damage, overheating, power level and coolant amount.", AlignTopLeft, 20);
+    y += 140;
+    textboxWithBackground(sf::FloatRect(x, y, 300, 100), "Order repair crew around in the ship to repair damaged systems.", AlignTopLeft, 20);
+    y += 100;
+    if (gameGlobalInfo->use_beam_shield_frequencies)
+    {
+        textboxWithBackground(sf::FloatRect(x, y, 300, 100), "Set shield frequencies to prevent shield damage.", AlignTopLeft, 20);
+        y += 100;
+    }
+    textboxWithBackground(sf::FloatRect(x, y, 300, 80), "And always, listen to your captain!", AlignTopLeft, 20);
+
+
+    x = 20;
+    y = 200;
+    textboxWithBackground(sf::FloatRect(x, y, 300, 100), "Tip: Overheating system are less efficient.", AlignTopLeft, 20);
+    y += 100;
+    textboxWithBackground(sf::FloatRect(x, y, 300, 100), "Tip: You have a fixed amount of coolant. Distribute it well.", AlignTopLeft, 20);
+    y += 100;
+    textboxWithBackground(sf::FloatRect(x, y, 300, 100), "Tip: Let the captain set priorities.", AlignTopLeft, 20);
+    y += 100;
 }

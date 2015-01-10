@@ -102,12 +102,15 @@ void MainUIBase::onGui()
 
     if (engine->getGameSpeed() == 0.0)
     {
-        sf::RectangleShape fullScreenOverlay(sf::Vector2f(getWindowSize().x, 900));
-        fullScreenOverlay.setFillColor(sf::Color(0, 0, 0, 64));
-        getRenderTarget()->draw(fullScreenOverlay);
-        
         if (gameGlobalInfo->getVictoryFactionId() < 0)
         {
+            sf::RectangleShape fullScreenOverlay(sf::Vector2f(getWindowSize().x, 900));
+            fullScreenOverlay.setFillColor(sf::Color(0, 0, 0, 128));
+            getRenderTarget()->draw(fullScreenOverlay);
+            
+            if (my_spaceship)
+                onPauseHelpGui();
+            
             boxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 250, 600, 500, game_server ? 130 : 100));
             text(sf::FloatRect(0, 600, getWindowSize().x, 100), "Game Paused", AlignCenter, 70);
             if (game_server)
@@ -574,6 +577,27 @@ void MainUIBase::drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESy
         door.setFillColor(sf::Color(255, 128, 32, 255));
         window.draw(door);
     }
+}
+
+void MainUIBase::drawUILine(sf::Vector2f start, sf::Vector2f end, float x_split)
+{
+    float x_vert = x_split;
+    float y_offset = std::max(-16.0f, std::min(16.0f, (start.y - end.y) / 2.0f));
+    float x_offset_end = fabs(y_offset);
+    float x_offset_start = fabs(y_offset);
+    if (end.x < x_split)
+        x_offset_end = -x_offset_end;
+    if (start.x < x_split)
+        x_offset_start = -x_offset_start;
+    sf::VertexArray ui_line(sf::LinesStrip, 6);
+    ui_line[5].position = end;
+    ui_line[4].position = sf::Vector2f(x_vert + x_offset_end, end.y);
+    ui_line[3].position = sf::Vector2f(x_vert, end.y + y_offset);
+    ui_line[2].position = sf::Vector2f(x_vert, start.y - y_offset);
+    ui_line[1].position = sf::Vector2f(x_vert + x_offset_start, start.y);
+    ui_line[0].position = start;
+    ui_line[0].color = ui_line[1].color = ui_line[2].color = ui_line[3].color = ui_line[4].color = ui_line[5].color = sf::Color(128, 128, 128);
+    getRenderTarget()->draw(ui_line);
 }
 
 void MainUIBase::draw3Dworld(sf::FloatRect rect)
