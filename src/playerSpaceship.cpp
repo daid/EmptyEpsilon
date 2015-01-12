@@ -42,18 +42,16 @@ static const int16_t CMD_OPEN_TEXT_COMM = 0x0010; //TEXT communication
 static const int16_t CMD_CLOSE_TEXT_COMM = 0x0011;
 static const int16_t CMD_SEND_TEXT_COMM = 0x0012;
 static const int16_t CMD_SEND_TEXT_COMM_PLAYER = 0x0013;
-static const int16_t CMD_SET_AUTO_REPAIR = 0x0014;
-static const int16_t CMD_OPEN_VOICE_COMM = 0x0015; // VOIP communication
-static const int16_t CMD_CLOSE_VOICE_COMM = 0x0016;
-static const int16_t CMD_SEND_VOICE_COMM = 0x0017;
-static const int16_t CMD_SET_BEAM_FREQUENCY = 0x0018;
-static const int16_t CMD_SET_SHIELD_FREQUENCY = 0x0019;
-static const int16_t CMD_ADD_WAYPOINT = 0x001A;
-static const int16_t CMD_REMOVE_WAYPOINT = 0x001B;
-static const int16_t CMD_ACTIVATE_SELF_DESTRUCT = 0x001C;
-static const int16_t CMD_CANCEL_SELF_DESTRUCT = 0x001D;
-static const int16_t CMD_CONFIRM_SELF_DESTRUCT = 0x001E;
-static const int16_t CMD_COMBAT_MANEUVER = 0x001F;
+static const int16_t CMD_ANSWER_COMM_HAIL = 0x0014;
+static const int16_t CMD_SET_AUTO_REPAIR = 0x0016;
+static const int16_t CMD_SET_BEAM_FREQUENCY = 0x0017;
+static const int16_t CMD_SET_SHIELD_FREQUENCY = 0x0018;
+static const int16_t CMD_ADD_WAYPOINT = 0x0019;
+static const int16_t CMD_REMOVE_WAYPOINT = 0x001A;
+static const int16_t CMD_ACTIVATE_SELF_DESTRUCT = 0x001B;
+static const int16_t CMD_CANCEL_SELF_DESTRUCT = 0x001C;
+static const int16_t CMD_CONFIRM_SELF_DESTRUCT = 0x001D;
+static const int16_t CMD_COMBAT_MANEUVER = 0x001E;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -165,15 +163,13 @@ void PlayerSpaceship::update(float delta)
                     P<PlayerSpaceship> playerShip = comms_target;
                     if (playerShip)
                     {
+                        comms_open_delay = PlayerSpaceship::comms_channel_open_time;
+                        
                         if (playerShip->comms_state == CS_Inactive || playerShip->comms_state == CS_ChannelFailed || playerShip->comms_state == CS_ChannelBroken)
                         {
-                            comms_state = CS_ChannelOpenPlayer;
-                            comms_incomming_message = "Opened comms to " + playerShip->getCallSign();
-                            playerShip->comms_state = CS_ChannelOpenPlayer;
+                            playerShip->comms_state = CS_BeingHailed;
                             playerShip->comms_target = this;
-                            playerShip->comms_incomming_message = "Incomming comms from " + playerShip->getCallSign();
-                        }else{
-                            comms_state = CS_ChannelFailed;
+                            playerShip->comms_incomming_message = "Hailed by " + getCallSign();
                         }
                     }else{
                         if (comms_script_interface.openCommChannel(this, comms_target, comms_target->comms_script_name))
@@ -508,15 +504,18 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t clientId, sf::Packet& packe
         requestUndock();
         break;
     case CMD_OPEN_TEXT_COMM:
-        if (comms_state == CS_Inactive)
+        if (comms_state == CS_Inactive || comms_state == CS_BeingHailed)
         {
             int32_t id;
             packet >> id;
             comms_target = game_server->getObjectById(id);
             if (comms_target)
             {
+                P<PlayerSpaceship> player = comms_target;
                 comms_state = CS_OpeningChannel;
                 comms_open_delay = comms_channel_open_time;
+            }else{
+                comms_state = CS_Inactive;
             }
         }
         break;
@@ -527,6 +526,29 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t clientId, sf::Packet& packe
             playerShip->comms_state = CS_Inactive;
         }
         comms_state = CS_Inactive;
+        break;
+    case CMD_ANSWER_COMM_HAIL:
+        if (comms_state == CS_BeingHailed)
+        {
+            bool anwser;
+            packet >> anwser;
+            P<PlayerSpaceship> playerShip = comms_target;
+            
+            if (playerShip)
+            {
+                if (anwser)
+                {
+                    comms_state = CS_ChannelOpenPlayer;
+                    playerShip->comms_state = CS_ChannelOpenPlayer;
+                    
+                    comms_incomming_message = "Opened comms to " + playerShip->getCallSign();
+                    playerShip->comms_incomming_message = "Opened comms to " + getCallSign();
+                }else{
+                    comms_state = CS_Inactive;
+                    playerShip->comms_state = CS_ChannelFailed;
+                }
+            }
+        }
         break;
     case CMD_SEND_TEXT_COMM:
         if (comms_state == CS_ChannelOpen && comms_target)
@@ -550,25 +572,6 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t clientId, sf::Packet& packe
             P<PlayerSpaceship> playership = comms_target;
             if (playership)
                 playership->comms_incomming_message = playership->comms_incomming_message + "\n>" + message;
-        }
-        break;
-    case CMD_OPEN_VOICE_COMM:
-        if (comms_state == CS_ChannelOpenPlayer)
-        {
-            network_audio_stream.startListening(9002); //HARDCODED
-            //Setup audio recorder & streamer
-        }
-        break;
-    case CMD_CLOSE_VOICE_COMM:
-        if (comms_state == CS_ChannelOpenPlayer)
-        {
-            //stop audio recorder & streamer
-        }
-        break;
-    case CMD_SEND_VOICE_COMM:
-        {
-            std::cout << "Recieved voice chat" << std::endl;
-            //Piece of voice stream recieved. Do something.
         }
         break;
     case CMD_SET_AUTO_REPAIR:
@@ -786,25 +789,17 @@ void PlayerSpaceship::commandOpenTextComm(P<SpaceObject> obj)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandOpenVoiceComm(P<SpaceObject> obj)
-{
-    if(!obj) return;
-    sf::Packet packet;
-    packet << CMD_OPEN_VOICE_COMM << obj->getMultiplayerId();
-    sendClientCommand(packet);
-}
-
-void PlayerSpaceship::commandCloseVoiceComm()
-{
-    sf::Packet packet;
-    packet << CMD_CLOSE_VOICE_COMM;
-    sendClientCommand(packet);
-}
-
 void PlayerSpaceship::commandCloseTextComm()
 {
     sf::Packet packet;
     packet << CMD_CLOSE_TEXT_COMM;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandAnswerCommHail(bool awnser)
+{
+    sf::Packet packet;
+    packet << CMD_ANSWER_COMM_HAIL << awnser;
     sendClientCommand(packet);
 }
 

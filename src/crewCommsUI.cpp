@@ -10,11 +10,19 @@ CrewCommsUI::CrewCommsUI()
 
 void CrewCommsUI::onCrewUI()
 {
-    if (my_spaceship->comms_state == CS_Inactive)
+    switch(my_spaceship->comms_state)
     {
+    case CS_Inactive: //Standard state; not doing anything in particular.
+    case CS_BeingHailed:
         drawCommsRadar();
-    }else{
+        break;
+    case CS_OpeningChannel:
+    case CS_ChannelOpen:
+    case CS_ChannelOpenPlayer:
+    case CS_ChannelFailed:
+    case CS_ChannelBroken:
         drawCommsChannel();
+        break;
     }
 }
 
@@ -209,6 +217,16 @@ void CrewCommsUI::drawCommsRadar()
         }
         break;
     }
+    
+    if (my_spaceship->comms_state == CS_BeingHailed)
+    {
+        box(sf::FloatRect(0, 450, 300, 170));
+        text(sf::FloatRect(20, 470, 260, 30), my_spaceship->comms_incomming_message, AlignCenter, 25);
+        if (button(sf::FloatRect(20, 500, 260, 50), "Answer"))
+            my_spaceship->commandAnswerCommHail(true);
+        if (button(sf::FloatRect(20, 550, 260, 50), "Ignore"))
+            my_spaceship->commandAnswerCommHail(false);
+    }
 
     int zoom_level = round(50000.0f / radar_distance);
     zoom_level += selector(sf::FloatRect(x - 270, 820, 250, 50), "Zoom: " + string(zoom_level) + "x", 30);
@@ -221,6 +239,8 @@ void CrewCommsUI::drawCommsChannel()
     switch(my_spaceship->comms_state)
     {
     case CS_Inactive: //Standard state; not doing anything in particular.
+    case CS_BeingHailed:
+        //This is never reached, as drawCommsChannel should not be called with these stats.
         break;
     case CS_OpeningChannel:
         text(sf::FloatRect(50, 100, 600, 50), "Opening communication channel...");
@@ -228,7 +248,6 @@ void CrewCommsUI::drawCommsChannel()
         if (button(sf::FloatRect(50, 800, 300, 50), "Cancel call"))
         {
             my_spaceship->commandCloseTextComm();
-            my_spaceship->commandCloseVoiceComm();
         }
         break;
     case CS_ChannelOpen:

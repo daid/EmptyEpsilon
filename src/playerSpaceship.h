@@ -22,6 +22,7 @@ enum ECommsState
 {
     CS_Inactive,
     CS_OpeningChannel,
+    CS_BeingHailed,
     CS_ChannelOpen,
     CS_ChannelOpenPlayer,
     CS_ChannelFailed,
@@ -97,8 +98,7 @@ public:
     void commandUndock();
     void commandOpenTextComm(P<SpaceObject> obj);
     void commandCloseTextComm();
-    void commandOpenVoiceComm(P<SpaceObject> obj);
-    void commandCloseVoiceComm();
+    void commandAnswerCommHail(bool awnser);
     void commandSendComm(int8_t index);
     void commandSendCommPlayer(string message);
     void commandSetAutoRepair(bool enabled);
