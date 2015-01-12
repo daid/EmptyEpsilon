@@ -117,7 +117,7 @@ function update(delta)
 		victory("Human Navy");	--Victory for the humans (eg; players). Note that this can happen if the players kill themselves (and then blow up the enemies)
 	end
 	if friendly_count == 0 then
-		victory("SpaceCow");	--Victory for the SpaceCows (== defeat for the players)
+		victory("Kraylor");	--Victory for the Kraylor (== defeat for the players)
 	else
 		friendlyList[1]:addReputationPoints(delta * friendly_count * 0.1)
 	end

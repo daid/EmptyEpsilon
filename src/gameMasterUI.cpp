@@ -265,14 +265,10 @@ void GameMasterUI::onGui()
         }
 
         text(sf::FloatRect(20, 480, 250, 20), "Change faction:", AlignCenter, 20);
-        for(unsigned int f=0; f<factionInfo.size(); f++)
-        {
-            if (toggleButton(sf::FloatRect(20, 500 + 30 * f, 250, 30), selection[0]->getFactionId() == f, factionInfo[f]->name, 20))
-            {
-                foreach(SpaceObject, obj, selection)
-                    obj->setFactionId(f);
-            }
-        }
+        unsigned int new_id = selection[0]->getFactionId() + selector(sf::FloatRect(20, 500, 250, 50), factionInfo[selection[0]->getFactionId()]->name);
+        if (new_id != selection[0]->getFactionId() && new_id < factionInfo.size())
+            foreach(SpaceObject, obj, selection)
+                obj->setFactionId(new_id);
     }
 
     if (button(sf::FloatRect(20, 720, 250, 50), "Global Message", 25))

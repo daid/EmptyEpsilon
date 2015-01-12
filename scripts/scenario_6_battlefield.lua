@@ -1,5 +1,5 @@
 -- Name: Battlefield
--- Description: The Humans are fighting off the PirateScorpions who are on all out war on a neutral station.
+-- Description: The Humans are fighting off the Exuari who are on all out war on a neutral station.
 
 function setCirclePos(obj, x, y, angle, distance)
 	obj:setPosition(x + math.sin(angle / 180 * math.pi) * distance, y + -math.cos(angle / 180 * math.pi) * distance)
@@ -25,15 +25,15 @@ function init()
 	end
 
 	for n=1,20 do
-		CpuShip():setShipTemplate("Fighter"):setPosition(random(-13000, 13000), random(5000, 8000)):setFaction("PirateScorpions"):orderRoaming():setScanned(true)
+		CpuShip():setShipTemplate("Fighter"):setPosition(random(-13000, 13000), random(5000, 8000)):setFaction("Exuari"):orderRoaming():setScanned(true)
 	end
 	for n=1,10 do
-		CpuShip():setShipTemplate("Cruiser"):setPosition(random(-13000, 13000), random(5000, 8000)):setFaction("PirateScorpions"):orderRoaming()
+		CpuShip():setShipTemplate("Cruiser"):setPosition(random(-13000, 13000), random(5000, 8000)):setFaction("Exuari"):orderRoaming()
 	end
 	for n=1,3 do
-		CpuShip():setShipTemplate("Adv. Gunship"):setPosition(random(-13000, 13000), 5000):setFaction("PirateScorpions"):orderRoaming()
+		CpuShip():setShipTemplate("Adv. Gunship"):setPosition(random(-13000, 13000), 5000):setFaction("Exuari"):orderRoaming()
 	end
-	CpuShip():setShipTemplate("Dreadnought"):setPosition(0, 7000):setFaction("PirateScorpions"):orderRoaming():setRotation(0)
+	CpuShip():setShipTemplate("Dreadnought"):setPosition(0, 7000):setFaction("Exuari"):orderRoaming():setRotation(0)
 end
 
 function update(delta)
