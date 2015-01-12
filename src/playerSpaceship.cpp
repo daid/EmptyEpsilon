@@ -504,7 +504,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t clientId, sf::Packet& packe
         requestUndock();
         break;
     case CMD_OPEN_TEXT_COMM:
-        if (comms_state == CS_Inactive || comms_state == CS_BeingHailed)
+        if (comms_state == CS_Inactive || comms_state == CS_BeingHailed || comms_state == CS_BeingHailedByGM)
         {
             int32_t id;
             packet >> id;
@@ -549,6 +549,20 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t clientId, sf::Packet& packe
                 }
             }
         }
+        if (comms_state == CS_BeingHailedByGM)
+        {
+            bool anwser;
+            packet >> anwser;
+            
+            if (anwser)
+            {
+                comms_state = CS_ChannelOpenGM;
+                
+                comms_incomming_message = "Opened comms";
+            }else{
+                comms_state = CS_Inactive;
+            }
+        }
         break;
     case CMD_SEND_TEXT_COMM:
         if (comms_state == CS_ChannelOpen && comms_target)
@@ -564,13 +578,13 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t clientId, sf::Packet& packe
         }
         break;
     case CMD_SEND_TEXT_COMM_PLAYER:
-        if (comms_state == CS_ChannelOpenPlayer)
+        if (comms_state == CS_ChannelOpenPlayer || comms_state == CS_ChannelOpenGM)
         {
             string message;
             packet >> message;
             comms_incomming_message = comms_incomming_message + "\n<" + message;
             P<PlayerSpaceship> playership = comms_target;
-            if (playership)
+            if (comms_state == CS_ChannelOpenPlayer && playership)
                 playership->comms_incomming_message = playership->comms_incomming_message + "\n>" + message;
         }
         break;

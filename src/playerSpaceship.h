@@ -23,8 +23,10 @@ enum ECommsState
     CS_Inactive,
     CS_OpeningChannel,
     CS_BeingHailed,
+    CS_BeingHailedByGM,
     CS_ChannelOpen,
     CS_ChannelOpenPlayer,
+    CS_ChannelOpenGM,
     CS_ChannelFailed,
     CS_ChannelBroken
 };

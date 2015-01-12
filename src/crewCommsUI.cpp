@@ -14,11 +14,13 @@ void CrewCommsUI::onCrewUI()
     {
     case CS_Inactive: //Standard state; not doing anything in particular.
     case CS_BeingHailed:
+    case CS_BeingHailedByGM:
         drawCommsRadar();
         break;
     case CS_OpeningChannel:
     case CS_ChannelOpen:
     case CS_ChannelOpenPlayer:
+    case CS_ChannelOpenGM:
     case CS_ChannelFailed:
     case CS_ChannelBroken:
         drawCommsChannel();
@@ -218,10 +220,10 @@ void CrewCommsUI::drawCommsRadar()
         break;
     }
     
-    if (my_spaceship->comms_state == CS_BeingHailed)
+    if (my_spaceship->comms_state == CS_BeingHailed || my_spaceship->comms_state == CS_BeingHailedByGM)
     {
         box(sf::FloatRect(0, 450, 300, 170));
-        text(sf::FloatRect(20, 470, 260, 30), my_spaceship->comms_incomming_message, AlignCenter, 25);
+        text(sf::FloatRect(20, 470, 260, 30), my_spaceship->comms_incomming_message, AlignCenter, 20);
         if (button(sf::FloatRect(20, 500, 260, 50), "Answer"))
             my_spaceship->commandAnswerCommHail(true);
         if (button(sf::FloatRect(20, 550, 260, 50), "Ignore"))
@@ -240,6 +242,7 @@ void CrewCommsUI::drawCommsChannel()
     {
     case CS_Inactive: //Standard state; not doing anything in particular.
     case CS_BeingHailed:
+    case CS_BeingHailedByGM:
         //This is never reached, as drawCommsChannel should not be called with these stats.
         break;
     case CS_OpeningChannel:
@@ -276,6 +279,7 @@ void CrewCommsUI::drawCommsChannel()
         }
         break;
     case CS_ChannelOpenPlayer:
+    case CS_ChannelOpenGM:
         {
             std::vector<string> lines = my_spaceship->comms_incomming_message.split("\n");
             float y = 100;

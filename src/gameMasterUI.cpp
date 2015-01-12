@@ -263,6 +263,15 @@ void GameMasterUI::onGui()
             }
             y += 30;
         }
+        P<PlayerSpaceship> player = obj;
+        if (player)
+        {
+            if (button(sf::FloatRect(20, y, 250, 30), "Hail ship", 20))
+            {
+                new GameMasterHailUI(player);
+            }
+            y += 30;
+        }
 
         text(sf::FloatRect(20, 480, 250, 20), "Change faction:", AlignCenter, 20);
         unsigned int new_id = selection[0]->getFactionId() + selector(sf::FloatRect(20, 500, 250, 50), factionInfo[selection[0]->getFactionId()]->name);
@@ -470,4 +479,78 @@ void GameMasterCreateObjectWindow::onGui()
     y += 10;
     if (button(sf::FloatRect(x, y, 300, 50), "Cancel"))
         destroy();
+}
+
+GameMasterHailUI::GameMasterHailUI(P<PlayerSpaceship> player)
+: player(player)
+{
+    hail_name = "Main Command";
+}
+
+void GameMasterHailUI::onGui()
+{
+    if (!player)
+    {
+        destroy();
+        return;
+    }
+
+    float x = getWindowSize().x / 2 - 425;
+    float y = 100;
+    boxWithBackground(sf::FloatRect(x - 30, y - 30, 960, 840));
+    
+    switch(player->comms_state)
+    {
+    case CS_Inactive:
+    case CS_ChannelFailed:
+    case CS_ChannelBroken:
+        text(sf::FloatRect(x, y, 300, 50), "Use name:", AlignRight);
+        hail_name = textEntry(sf::FloatRect(x + 300, y, 300, 50), hail_name, 25);
+        y += 50;
+        if (button(sf::FloatRect(x, y, 300, 50), "Call"))
+        {
+            player->comms_state = CS_BeingHailedByGM;
+            player->comms_incomming_message = "Hailed by " + hail_name;
+        }
+        break;
+    case CS_OpeningChannel:
+    case CS_BeingHailed:
+    case CS_ChannelOpen:
+    case CS_ChannelOpenPlayer:
+        text(sf::FloatRect(x + 300, y, 300, 50), "Target still communicating with someone.");
+        y += 50;
+        if (button(sf::FloatRect(x, y, 300, 50), "Abort his call"))
+        {
+            player->commandCloseTextComm();
+        }
+        break;
+    case CS_BeingHailedByGM:
+        text(sf::FloatRect(x + 300, y, 300, 50), "Waiting for response.");
+        break;
+    case CS_ChannelOpenGM:
+        std::vector<string> lines = player->comms_incomming_message.split("\n");
+        static const unsigned int max_lines = 20;
+        for(unsigned int n=lines.size() > max_lines ? lines.size() - max_lines : 0; n<lines.size(); n++)
+        {
+            text(sf::FloatRect(x, y, 600, 30), lines[n]);
+            y += 30;
+        }
+        y += 30;
+        comms_message = textEntry(sf::FloatRect(x, y, 600, 50), comms_message);
+        if (button(sf::FloatRect(x + 600, y, 300, 50), "Send") || InputHandler::keyboardIsPressed(sf::Keyboard::Return))
+        {
+            player->comms_incomming_message = player->comms_incomming_message + "\n>" + comms_message;
+            comms_message = "";
+        }
+        break;
+    }
+
+    if (button(sf::FloatRect(x, 825, 300, 50), "Cancel"))
+    {
+        if (player->comms_state == CS_BeingHailedByGM)
+            player->comms_state = CS_Inactive;
+        if (player->comms_state == CS_ChannelOpenGM)
+            player->comms_state = CS_Inactive;
+        destroy();
+    }
 }

@@ -60,4 +60,15 @@ public:
     virtual void onGui();
 };
 
+class GameMasterHailUI : public GUI
+{
+    string hail_name;
+    string comms_message;
+    P<PlayerSpaceship> player;
+public:
+    GameMasterHailUI(P<PlayerSpaceship> player);
+
+    virtual void onGui();
+};
+
 #endif//GAME_MASTER_UI_H
