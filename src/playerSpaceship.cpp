@@ -45,13 +45,14 @@ static const int16_t CMD_SEND_TEXT_COMM_PLAYER = 0x0013;
 static const int16_t CMD_ANSWER_COMM_HAIL = 0x0014;
 static const int16_t CMD_SET_AUTO_REPAIR = 0x0016;
 static const int16_t CMD_SET_BEAM_FREQUENCY = 0x0017;
-static const int16_t CMD_SET_SHIELD_FREQUENCY = 0x0018;
-static const int16_t CMD_ADD_WAYPOINT = 0x0019;
-static const int16_t CMD_REMOVE_WAYPOINT = 0x001A;
-static const int16_t CMD_ACTIVATE_SELF_DESTRUCT = 0x001B;
-static const int16_t CMD_CANCEL_SELF_DESTRUCT = 0x001C;
-static const int16_t CMD_CONFIRM_SELF_DESTRUCT = 0x001D;
-static const int16_t CMD_COMBAT_MANEUVER = 0x001E;
+static const int16_t CMD_SET_BEAM_SYSTEM_TARGET = 0x0018;
+static const int16_t CMD_SET_SHIELD_FREQUENCY = 0x0019;
+static const int16_t CMD_ADD_WAYPOINT = 0x001A;
+static const int16_t CMD_REMOVE_WAYPOINT = 0x001B;
+static const int16_t CMD_ACTIVATE_SELF_DESTRUCT = 0x001C;
+static const int16_t CMD_CANCEL_SELF_DESTRUCT = 0x001D;
+static const int16_t CMD_CONFIRM_SELF_DESTRUCT = 0x001E;
+static const int16_t CMD_COMBAT_MANEUVER = 0x001F;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -82,6 +83,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&shields_active);
     registerMemberReplication(&shield_calibration_delay, 0.5);
     registerMemberReplication(&auto_repair_enabled);
+    registerMemberReplication(&beam_system_target);
     registerMemberReplication(&comms_state);
     registerMemberReplication(&comms_open_delay, 1.0);
     registerMemberReplication(&comms_reply_count);
@@ -217,7 +219,8 @@ void PlayerSpaceship::update(float delta)
             e->setSize(1000.0f);
             e->setPosition(getPosition());
 
-            SpaceObject::damageArea(getPosition(), 500, 30, 60, DT_Kinetic, 0.0);
+            DamageInfo info(DT_Kinetic, getPosition());
+            SpaceObject::damageArea(getPosition(), 500, 30, 60, info, 0.0);
 
             destroy();
             return;
@@ -280,7 +283,8 @@ void PlayerSpaceship::update(float delta)
                     e->setPosition(getPosition() + sf::rotateVector(sf::Vector2f(0, random(0, 500)), random(0, 360)));
                 }
 
-                SpaceObject::damageArea(getPosition(), 1500, 100, 200, DT_Kinetic, 0.0);
+                DamageInfo info(DT_Kinetic, getPosition());
+                SpaceObject::damageArea(getPosition(), 1500, 100, 200, info, 0.0);
 
                 destroy();
                 return;
@@ -315,13 +319,13 @@ void PlayerSpaceship::fireBeamWeapon(int idx, P<SpaceObject> target)
         SpaceShip::fireBeamWeapon(idx, target);
 }
 
-void PlayerSpaceship::hullDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type)
+void PlayerSpaceship::hullDamage(float damageAmount, DamageInfo& info)
 {
-    if (type != DT_EMP)
+    if (info.type != DT_EMP)
     {
         hull_damage_indicator = 1.5;
     }
-    SpaceShip::hullDamage(damageAmount, damageLocation, type);
+    SpaceShip::hullDamage(damageAmount, info);
 }
 
 void PlayerSpaceship::setSystemCoolant(ESystem system, float level)
@@ -602,6 +606,17 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t clientId, sf::Packet& packe
                 beam_frequency = SpaceShip::max_frequency;
         }
         break;
+    case CMD_SET_BEAM_SYSTEM_TARGET:
+        {
+            ESystem system;
+            packet >> system;
+            beam_system_target = system;
+            if (beam_system_target < SYS_None)
+                beam_system_target = SYS_None;
+            if (beam_system_target > ESystem(int(SYS_COUNT) - 1))
+                beam_system_target = ESystem(int(SYS_COUNT) - 1);
+        }
+        break;
     case CMD_SET_SHIELD_FREQUENCY:
         if (shield_calibration_delay <= 0.0)
         {
@@ -842,6 +857,13 @@ void PlayerSpaceship::commandSetBeamFrequency(int32_t frequency)
 {
     sf::Packet packet;
     packet << CMD_SET_BEAM_FREQUENCY << frequency;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetBeamSystemTarget(ESystem system)
+{
+    sf::Packet packet;
+    packet << CMD_SET_BEAM_SYSTEM_TARGET << system;
     sendClientCommand(packet);
 }
 

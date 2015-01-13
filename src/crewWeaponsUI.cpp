@@ -72,15 +72,38 @@ void CrewWeaponsUI::onCrewUI()
         damagePowerDisplay(sf::FloatRect(x, 840, 270 / 2.0, 50), SYS_FrontShield, 20);
         damagePowerDisplay(sf::FloatRect(x + 270 / 2.0, 840, 270 / 2.0, 50), SYS_RearShield, 20);
     }
-    
-    if (gameGlobalInfo->use_beam_shield_frequencies)
+
+    float y = 690;
+    float h = 150;
+    if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
     {
-        box(sf::FloatRect(x, 740, 270, 100));
-        text(sf::FloatRect(x, 740, 270, 50), "Beam Freq.", AlignCenter, 30);
-        int frequency = my_spaceship->beam_frequency + selector(sf::FloatRect(x, 790, 270, 50), frequencyToString(my_spaceship->beam_frequency), 30);
-        if (frequency != my_spaceship->beam_frequency)
-            my_spaceship->commandSetBeamFrequency(frequency);
-        damagePowerDisplay(sf::FloatRect(x, 740, 270, 100), SYS_BeamWeapons, 20);
+        if (!gameGlobalInfo->use_beam_shield_frequencies || !gameGlobalInfo->use_system_damage)
+        {
+            h = 100;
+            y += 50;
+        }
+        box(sf::FloatRect(x, y, 270, h));
+        text(sf::FloatRect(x, y, 270, 50), "Beam Info", AlignCenter, 28);
+        if (gameGlobalInfo->use_beam_shield_frequencies)
+        {
+            int frequency = my_spaceship->beam_frequency + selector(sf::FloatRect(x, y + 50, 270, 50), frequencyToString(my_spaceship->beam_frequency), 28);
+            if (frequency != my_spaceship->beam_frequency)
+                my_spaceship->commandSetBeamFrequency(frequency);
+        }
+        if (gameGlobalInfo->use_system_damage)
+        {
+            string system_name = getSystemName(my_spaceship->beam_system_target);
+            if (my_spaceship->beam_system_target == SYS_None)
+                system_name = "Hull";
+            ESystem new_system = ESystem(int(my_spaceship->beam_system_target) + selector(sf::FloatRect(x, y + h - 50, 270, 50), system_name, 28));
+            if (new_system < SYS_None)
+                new_system = SYS_None;
+            if (new_system > ESystem(int(SYS_COUNT) - 1))
+                new_system = ESystem(int(SYS_COUNT) - 1);
+            if (new_system != my_spaceship->beam_system_target)
+                my_spaceship->commandSetBeamSystemTarget(new_system);
+        }
+        damagePowerDisplay(sf::FloatRect(x, y, 270, h), SYS_BeamWeapons, 20);
     }else{
         damagePowerDisplay(sf::FloatRect(radar_center.x - 140, radar_center.y + 150, 280, 50), SYS_BeamWeapons, 20);
     }

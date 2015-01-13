@@ -105,6 +105,7 @@ public:
     void commandSendCommPlayer(string message);
     void commandSetAutoRepair(bool enabled);
     void commandSetBeamFrequency(int32_t frequency);
+    void commandSetBeamSystemTarget(ESystem system);
     void commandSetShieldFrequency(int32_t frequency);
     void commandAddWaypoint(sf::Vector2f position);
     void commandRemoveWaypoint(int32_t index);
@@ -117,7 +118,7 @@ public:
 
     virtual void executeJump(float distance);
     virtual void fireBeamWeapon(int index, P<SpaceObject> target);
-    virtual void hullDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type);
+    virtual void hullDamage(float damageAmount, DamageInfo& info);
     void setSystemCoolant(ESystem system, float level);
 
     virtual void update(float delta);

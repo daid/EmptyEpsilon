@@ -71,7 +71,8 @@ void HomingMissile::collision(Collisionable* target)
     P<SpaceObject> hitObject = P<Collisionable>(target);
     if (!hitObject || hitObject == owner || !hitObject->canBeTargeted())
         return;
-    hitObject->takeDamage(30, getPosition(), DT_Kinetic);
+    DamageInfo info(DT_Kinetic, getPosition());
+    hitObject->takeDamage(30, info);
     P<ExplosionEffect> e = new ExplosionEffect();
     e->setSize(30);
     e->setPosition(getPosition());

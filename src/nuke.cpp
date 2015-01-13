@@ -72,7 +72,8 @@ void Nuke::collision(Collisionable* target)
     if (!hitObject || hitObject == owner || !hitObject->canBeTargeted())
         return;
 
-    SpaceObject::damageArea(getPosition(), blastRange, damageAtEdge, damageAtCenter, DT_Kinetic, getRadius());
+    DamageInfo info(DT_Kinetic, getPosition());
+    SpaceObject::damageArea(getPosition(), blastRange, damageAtEdge, damageAtCenter, info, getRadius());
 
     P<ExplosionEffect> e = new ExplosionEffect();
     e->setSize(blastRange);

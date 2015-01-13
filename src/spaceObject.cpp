@@ -54,7 +54,7 @@ bool SpaceObject::isFriendly(P<SpaceObject> obj)
     return factionInfo[faction_id]->states[obj->faction_id] == FVF_Friendly;
 }
 
-void SpaceObject::damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, EDamageType type, float min_range)
+void SpaceObject::damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, DamageInfo& info, float min_range)
 {
     PVector<Collisionable> hitList = CollisionManager::queryArea(position - sf::Vector2f(blast_range, blast_range), position + sf::Vector2f(blast_range, blast_range));
     foreach(Collisionable, c, hitList)
@@ -66,7 +66,7 @@ void SpaceObject::damageArea(sf::Vector2f position, float blast_range, float min
             if (dist < 0) dist = 0;
             if (dist < blast_range)
             {
-                obj->takeDamage(max_damage - (max_damage - min_damage) * dist / blast_range, position, type);
+                obj->takeDamage(max_damage - (max_damage - min_damage) * dist / blast_range, info);
             }
         }
     }

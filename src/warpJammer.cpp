@@ -64,9 +64,9 @@ void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, fl
     }
 }
 
-void WarpJammer::takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type, int frequency)
+void WarpJammer::takeDamage(float damageAmount, DamageInfo& info)
 {
-    if (type == DT_EMP)
+    if (info.type == DT_EMP)
         return;
     hull -= damageAmount;
     if (hull <= 0)

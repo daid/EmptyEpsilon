@@ -112,6 +112,7 @@ public:
     WeaponTube weaponTube[maxWeaponTubes];
 
     int beam_frequency;
+    ESystem beam_system_target;
     BeamWeapon beamWeapons[maxBeamWeapons];
 
     float hull_strength, hull_max;
@@ -139,8 +140,8 @@ public:
     virtual string getCallSign();
     virtual bool canBeTargeted() { return true; }
     virtual bool hasShield() { return front_shield > (front_shield_max / 50.0) || rear_shield > (rear_shield_max / 50.0); }
-    virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type, int frequency=-1);
-    virtual void hullDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type);
+    virtual void takeDamage(float damageAmount, DamageInfo& info);
+    virtual void hullDamage(float damageAmount, DamageInfo& info);
     virtual void executeJump(float distance);
     virtual void fireBeamWeapon(int index, P<SpaceObject> target);
     virtual bool canBeDockedBy(P<SpaceObject> obj);

@@ -52,7 +52,8 @@ void Asteroid::collision(Collisionable* target)
     if (!hit_object || !hit_object->canBeTargeted())
         return;
 
-    hit_object->takeDamage(35, getPosition(), DT_Kinetic);
+    DamageInfo info(DT_Kinetic, getPosition());
+    hit_object->takeDamage(35, info);
 
     P<ExplosionEffect> e = new ExplosionEffect();
     e->setSize(getRadius());

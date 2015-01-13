@@ -72,7 +72,8 @@ void EMPMissile::collision(Collisionable* target)
     if (!hitObject || hitObject == owner || !hitObject->canBeTargeted())
         return;
 
-    SpaceObject::damageArea(getPosition(), blastRange, damageAtEdge, damageAtCenter, DT_EMP, getRadius());
+    DamageInfo info(DT_EMP, getPosition());
+    SpaceObject::damageArea(getPosition(), blastRange, damageAtEdge, damageAtCenter, info, getRadius());
 
     P<ElectricExplosionEffect> e = new ElectricExplosionEffect();
     e->setSize(blastRange);

@@ -27,7 +27,7 @@ public:
     virtual bool canBeTargeted() { return true; }
     virtual bool canBeDockedBy(P<SpaceObject> obj);
     virtual bool hasShield() { return shields > (shields_max / 50.0); }
-    virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type, int frequency=-1);
+    virtual void takeDamage(float damageAmount, DamageInfo& info);
     
     void setTemplate(string templateName);
 };

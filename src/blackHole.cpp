@@ -51,11 +51,12 @@ void BlackHole::collision(Collisionable* target)
         if (isServer())
             target->destroy();
     }
+    DamageInfo info(DT_Kinetic, getPosition());
     if (force > 100.0 && isServer())
     {
         P<SpaceObject> obj = P<Collisionable>(target);
         if (obj)
-            obj->takeDamage(force * update_delta / 10.0f, getPosition(), DT_Kinetic);
+            obj->takeDamage(force * update_delta / 10.0f, info);
     }
     target->setPosition(target->getPosition() + diff / distance * update_delta * force);
 }

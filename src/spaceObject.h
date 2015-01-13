@@ -4,12 +4,25 @@
 #include "engine.h"
 #include "mesh.h"
 #include "factionInfo.h"
+#include "shipTemplate.h"
 
 enum EDamageType
 {
     DT_Energy,
     DT_Kinetic,
     DT_EMP
+};
+class DamageInfo
+{
+public:
+    EDamageType type;
+    sf::Vector2f location;
+    int frequency;
+    ESystem system_target;
+    
+    DamageInfo(EDamageType type, sf::Vector2f location)
+    : type(type), location(location), frequency(-1), system_target(SYS_None)
+    {}
 };
 
 class SpaceObject;
@@ -36,9 +49,9 @@ public:
     virtual bool canBeDockedBy(P<SpaceObject> obj) { return false; }
     virtual bool hasShield() { return false; }
     virtual bool hideInNebula() { return true; }
-    virtual void takeDamage(float damageAmount, sf::Vector2f damageLocation, EDamageType type, int frequency=-1) {}
+    virtual void takeDamage(float damageAmount, DamageInfo& info) {}
 
-    static void damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, EDamageType type, float min_range);
+    static void damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, DamageInfo& info, float min_range);
 
     bool isEnemy(P<SpaceObject> obj);
     bool isFriendly(P<SpaceObject> obj);
