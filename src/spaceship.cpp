@@ -756,6 +756,16 @@ void SpaceShip::hullDamage(float damage_amount, DamageInfo& info)
             systems[info.system_target].health -= system_damage;
             if (systems[info.system_target].health < -1.0)
                 systems[info.system_target].health = -1.0;
+
+            for(int n=0; n<2; n++)
+            {
+                ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
+                //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
+                float system_damage = (damage_amount / hull_max) * 1.0;
+                systems[random_system].health -= system_damage;
+                if (systems[random_system].health < -1.0)
+                    systems[random_system].health = -1.0;
+            }
             
             if (info.type == DT_Energy)
                 damage_amount *= 0.02;
