@@ -42,7 +42,7 @@ public:
     void clear();
 private:
     void recursivePlan(sf::Vector2f start, sf::Vector2f end);
-    bool checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2f& new_point);
+    bool checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2f& new_point, sf::Vector2f* alt_point=NULL);
 };
 
 #endif//PATH_PLANNER_H

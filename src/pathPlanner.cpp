@@ -60,11 +60,12 @@ void PathPlanner::plan(sf::Vector2f start, sf::Vector2f end)
                 p0 = route[remove_idx - 2];
             sf::Vector2f p1 = route[remove_idx];
             sf::Vector2f new_position;
-            if (!checkToAvoid(p0, p1, new_position))
+            sf::Vector2f alt_position;
+            if (!checkToAvoid(p0, p1, new_position, &alt_position))
             {
                 route.erase(route.begin() + remove_idx - 1);
             }else{
-                if ((route[remove_idx-1] - new_position) > 200.0f)
+                if ((route[remove_idx-1] - new_position) > 200.0f && (route[remove_idx-1] - alt_position) > 200.0f)
                     route[remove_idx-1] = new_position;
                 remove_idx++;
             }
@@ -103,7 +104,7 @@ void PathPlanner::recursivePlan(sf::Vector2f start, sf::Vector2f end)
     }
 }
 
-bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2f& new_point)
+bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2f& new_point, sf::Vector2f* alt_point)
 {
     sf::Vector2f startEndDiff = end - start;
     float startEndLength = sf::length(startEndDiff);
@@ -141,6 +142,8 @@ bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2
     {
         sf::Vector2f position = avoidObject.source->getPosition();
         new_point = position + sf::normalize(firstAvoidQ - position) * avoidObject.size * 1.1f;
+        if (alt_point)
+            *alt_point = position - sf::normalize(firstAvoidQ - position) * avoidObject.size * 1.1f;
         return true;
     }
     return false;
