@@ -41,6 +41,8 @@ void GameMasterUI::onGui()
         }
         if (InputHandler::mouseIsReleased(sf::Mouse::Left) && mouse.x > 300)
         {
+            if (mouse_down_pos == mouse && click_and_drag_state == CD_DragObjects)
+                click_and_drag_state = CD_BoxSelect;
             switch(mouse_mode)
             {
             case MM_None:
@@ -128,7 +130,10 @@ void GameMasterUI::onGui()
                             cpuShip->orderDefendTarget(target);
                         }
                     }else{
-                        cpuShip->orderFlyTowardsBlind(mouse_world_position + (obj->getPosition() - objects_center));
+                        if (InputHandler::keyboardIsDown(sf::Keyboard::LShift) || InputHandler::keyboardIsDown(sf::Keyboard::RShift))
+                            cpuShip->orderFlyTowardsBlind(mouse_world_position + (obj->getPosition() - objects_center));
+                        else
+                            cpuShip->orderFlyTowards(mouse_world_position + (obj->getPosition() - objects_center));
                     }
                 }
             }
@@ -202,11 +207,10 @@ void GameMasterUI::onGui()
         selection.clear();
     }
 
+    float y = 20;
     if (selection.size() == 1)
     {
-        P<SpaceObject> obj = selection[0];
-        float y = 20;
-        P<SpaceShip> ship = obj;
+        P<SpaceShip> ship = selection[0];
         if (ship && ship->ship_template)
         {
             text(sf::FloatRect(20, y, 100, 20), factionInfo[ship->faction_id]->name + " " + ship->ship_type_name, AlignLeft, 20);
@@ -216,7 +220,7 @@ void GameMasterUI::onGui()
             text(sf::FloatRect(20, y, 100, 20), "Shields: " + string(ship->front_shield) + ", " + string(ship->rear_shield), AlignLeft, 20);
             y += 20;
         }
-        P<SpaceStation> station = obj;
+        P<SpaceStation> station = selection[0];
         if (station)
         {
             text(sf::FloatRect(20, y, 100, 20), factionInfo[station->faction_id]->name, AlignLeft, 20);
@@ -226,25 +230,45 @@ void GameMasterUI::onGui()
             text(sf::FloatRect(20, y, 100, 20), "Shields: " + string(station->shields), AlignLeft, 20);
             y += 20;
         }
-        P<CpuShip> cpuShip = obj;
+    }
+    
+    P<CpuShip> cpuShip;
+    foreach(SpaceObject, obj, selection)
+    {
+        cpuShip = obj;
         if (cpuShip)
-        {
-            text(sf::FloatRect(20, y, 100, 20), "Orders: " + getAIOrderString(cpuShip->getOrder()), AlignLeft, 20);
-            y += 20;
+            break;
+    }
+    if (cpuShip)
+    {
+        text(sf::FloatRect(20, y, 100, 20), "Orders: " + getAIOrderString(cpuShip->getOrder()), AlignLeft, 20);
+        y += 20;
 
-            if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_Idle, "Idle", 20))
-                cpuShip->orderIdle();
-            y += 30;
-            if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_Roaming, "Roaming", 20))
-                cpuShip->orderRoaming();
-            y += 30;
-            if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_StandGround, "Stand Ground", 18))
-                cpuShip->orderStandGround();
-            y += 30;
-            if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_DefendLocation, "Defend location", 18))
-                cpuShip->orderDefendLocation(cpuShip->getPosition());
-            y += 30;
-        }
+        if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_Idle, "Idle", 20))
+            foreach(SpaceObject, obj, selection)
+                if (P<CpuShip>(obj))
+                    P<CpuShip>(obj)->orderIdle();
+        y += 30;
+        if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_Roaming, "Roaming", 20))
+            foreach(SpaceObject, obj, selection)
+                if (P<CpuShip>(obj))
+                    P<CpuShip>(obj)->orderRoaming();
+        y += 30;
+        if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_StandGround, "Stand Ground", 18))
+            foreach(SpaceObject, obj, selection)
+                if (P<CpuShip>(obj))
+                    P<CpuShip>(obj)->orderStandGround();
+        y += 30;
+        if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_DefendLocation, "Defend location", 18))
+            foreach(SpaceObject, obj, selection)
+                if (P<CpuShip>(obj))
+                    P<CpuShip>(obj)->orderDefendLocation(obj->getPosition());
+        y += 30;
+    }
+    
+    if (selection.size() == 1)
+    {
+        P<SpaceShip> ship = selection[0];
         if (ship)
         {
             for(int n=0; n<MW_Count; n++)
@@ -263,7 +287,7 @@ void GameMasterUI::onGui()
             }
             y += 30;
         }
-        P<PlayerSpaceship> player = obj;
+        P<PlayerSpaceship> player = selection[0];
         if (player)
         {
             if (button(sf::FloatRect(20, y, 250, 30), "Hail ship", 20))
@@ -272,7 +296,10 @@ void GameMasterUI::onGui()
             }
             y += 30;
         }
-
+    }
+    
+    if (selection.size() > 1)
+    {
         text(sf::FloatRect(20, 480, 250, 20), "Change faction:", AlignCenter, 20);
         unsigned int new_id = selection[0]->getFactionId() + selector(sf::FloatRect(20, 500, 250, 50), factionInfo[selection[0]->getFactionId()]->name);
         if (new_id != selection[0]->getFactionId() && new_id < factionInfo.size())
@@ -321,9 +348,9 @@ void GameMasterShipRetrofit::onGui()
         destroy();
         return;
     }
-    float x = getWindowSize().x / 2 - 325;
+    float x = getWindowSize().x / 2 - 475;
     float y = 200;
-    boxWithBackground(sf::FloatRect(x - 30, y - 30, 710, 460));
+    boxWithBackground(sf::FloatRect(x - 30, y - 30, 1010, 460));
 
     ship->ship_type_name = textEntry(sf::FloatRect(x, y, 300, 30), ship->ship_type_name, 20);
     y += 30;
@@ -374,6 +401,19 @@ void GameMasterShipRetrofit::onGui()
             ship->weapon_storage_max[n] = 0;
         if (ship->weapon_storage[n] < 0)
             ship->weapon_storage[n] = 0;
+    }
+
+    x += 350;
+    y = 200;
+    for(int n=0; n<SYS_COUNT; n++)
+    {
+        ESystem system = ESystem(n);
+        if (ship->hasSystem(system))
+        {
+            int diff = selector(sf::FloatRect(x, y, 300, 30), getSystemName(system) + ": " + string(ship->systems[n].health * 100) + "%", 20);
+            y += 30;
+            ship->systems[n].health = std::min(1.0f, std::max(-1.0f, ship->systems[n].health + diff * 0.10f));
+        }
     }
     
     y += 10;

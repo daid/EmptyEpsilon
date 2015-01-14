@@ -390,7 +390,7 @@ void CpuShip::orderFlyTowards(sf::Vector2f target)
 
 void CpuShip::orderFlyTowardsBlind(sf::Vector2f target)
 {
-    orders = AI_FlyTowards;
+    orders = AI_FlyTowardsBlind;
     order_target_location = target;
 }
 
