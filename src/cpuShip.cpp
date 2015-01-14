@@ -205,6 +205,13 @@ void CpuShip::update(float delta)
         case AI_FlyTowards:      //Fly towards [order_target_location], attacking enemies that get too close, but disengage and continue when enemy is too far.
         case AI_FlyTowardsBlind: //Fly towards [order_target_location], not attacking anything
             pathPlanner.plan(getPosition(), order_target_location);
+            if ((getPosition() - order_target_location) < getRadius())
+            {
+                if (orders == AI_FlyTowards)
+                    orderDefendLocation(order_target_location);
+                else
+                    orderIdle();
+            }
             break;
         case AI_DefendLocation:  //Defend against enemies getting close to [order_target_location]
             {
