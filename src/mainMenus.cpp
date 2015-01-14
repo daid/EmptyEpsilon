@@ -204,6 +204,10 @@ void AutoConnectScreen::onGui()
             connect_delay = 2;
             scanner->destroy();
         }
+        string position_name = "Main screen";
+        if (crew_position < max_crew_positions)
+            position_name = getCrewPositionName(crew_position);
+        text(sf::FloatRect(0, 400, getWindowSize().x, 30), position_name, AlignCenter, 50);
     }else{
         if (connect_delay > 0)
         {
