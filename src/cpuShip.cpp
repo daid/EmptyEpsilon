@@ -111,6 +111,8 @@ void CpuShip::update(float delta)
             target = NULL;
         if (orders == AI_FlyTowards && target_distance > 8000)
             target = NULL;
+        if (orders == AI_FlyTowardsBlind)
+            target = NULL;
         if (orders == AI_FlyFormation && target_distance > 6000)
             target = NULL;
 
