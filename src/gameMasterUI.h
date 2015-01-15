@@ -28,6 +28,8 @@ class GameMasterUI : public MainUIBase
     float view_distance;
     PVector<SpaceObject> selection;
 public:
+    string create_object_script;
+    
     GameMasterUI();
     
     virtual void onGui();
@@ -51,11 +53,11 @@ public:
 
 class GameMasterCreateObjectWindow : public GUI
 {
-    sf::Vector2f position;
     static unsigned int current_faction;
     
+    P<GameMasterUI> ui;
 public:
-    GameMasterCreateObjectWindow(sf::Vector2f position);
+    GameMasterCreateObjectWindow(P<GameMasterUI> ui);
 
     virtual void onGui();
 };

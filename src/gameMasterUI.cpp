@@ -80,7 +80,11 @@ void GameMasterUI::onGui()
                 }
                 break;
             case MM_Create:
-                new GameMasterCreateObjectWindow(mouse_world_position);
+                {
+                    P<ScriptObject> so = new ScriptObject();
+                    so->runCode(create_object_script + ":setPosition("+string(mouse_world_position.x)+","+string(mouse_world_position.y)+")");
+                    so->destroy();
+                }
                 break;
             }
             click_and_drag_state = CD_None;
@@ -200,11 +204,18 @@ void GameMasterUI::onGui()
         window.draw(objectSprite);
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Delete))
+    if (InputHandler::keyboardIsPressed(sf::Keyboard::Delete))
     {
         foreach(SpaceObject, obj, selection)
             obj->destroy();
         selection.clear();
+    }
+    if (InputHandler::keyboardIsPressed(sf::Keyboard::Space))
+    {
+        if (mouse_mode == MM_None)
+            mouse_mode = MM_Drag;
+        else
+            mouse_mode = MM_None;
     }
 
     float y = 20;
@@ -312,10 +323,8 @@ void GameMasterUI::onGui()
     
     if (toggleButton(sf::FloatRect(20, 770, 250, 50), mouse_mode == MM_Create, "Create...", 30))
     {
-        if (mouse_mode == MM_Create)
-            mouse_mode = MM_None;
-        else
-            mouse_mode = MM_Create;
+        mouse_mode = MM_Create;
+        new GameMasterCreateObjectWindow(this);
     }
 
     if (toggleButton(sf::FloatRect(20, 820, 250, 50), mouse_mode == MM_Drag, "Drag Objects"))
@@ -444,8 +453,8 @@ void GameMasterGlobalMessageEntry::onGui()
 
 unsigned int GameMasterCreateObjectWindow::current_faction = 2;
 
-GameMasterCreateObjectWindow::GameMasterCreateObjectWindow(sf::Vector2f position)
-: position(position)
+GameMasterCreateObjectWindow::GameMasterCreateObjectWindow(P<GameMasterUI> ui)
+: ui(ui)
 {
 }
 
@@ -465,33 +474,25 @@ void GameMasterCreateObjectWindow::onGui()
 
     if (button(sf::FloatRect(x, y, 300, 30), "Station", 20))
     {
-        P<SpaceObject> obj = new SpaceStation();
-        obj->setFactionId(current_faction);
-        obj->setRotation(random(0, 360));
-        obj->setPosition(position);
+        ui->create_object_script = "SpaceStation():setRotation(random(0, 360)):setFactionId(" + string(current_faction) + ")";
         destroy();
     }
     y += 30;
     if (button(sf::FloatRect(x, y, 300, 30), "WarpJammer", 20))
     {
-        P<SpaceObject> obj = new WarpJammer();
-        obj->setFactionId(current_faction);
-        obj->setRotation(random(0, 360));
-        obj->setPosition(position);
+        ui->create_object_script = "WarpJammer():setRotation(random(0, 360)):setFactionId(" + string(current_faction) + ")";
         destroy();
     }
     y += 30;
     if (button(sf::FloatRect(x, y, 300, 30), "BlackHole", 20))
     {
-        P<SpaceObject> obj = new BlackHole();
-        obj->setPosition(position);
+        ui->create_object_script = "BlackHole()";
         destroy();
     }
     y += 30;
     if (button(sf::FloatRect(x, y, 300, 30), "Nebula", 20))
     {
-        P<SpaceObject> obj = new Nebula();
-        obj->setPosition(position);
+        ui->create_object_script = "Nebula()";
         destroy();
     }
     y += 30;
@@ -505,12 +506,7 @@ void GameMasterCreateObjectWindow::onGui()
     {
         if (button(sf::FloatRect(x, y, 300, 30), template_names[n] + "(" + string(ShipTemplate::getTemplate(template_names[n])->frontShields) + ")", 20))
         {
-            P<CpuShip> s = new CpuShip();
-            s->setFactionId(current_faction);
-            s->setShipTemplate(template_names[n]);
-            s->setPosition(position);
-            s->orderRoaming();
-            
+            ui->create_object_script = "CpuShip():setRotation(random(0, 360)):setFactionId(" + string(current_faction) + "):setShipTemplate(\"" + template_names[n] + "\"):orderRoaming()";
             destroy();
         }
         y += 30;
