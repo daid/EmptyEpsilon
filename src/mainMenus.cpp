@@ -18,7 +18,7 @@ void MainMenu::onGui()
 {
     text(sf::FloatRect(0, 100, getWindowSize().x, 300), "Empty", AlignCenter, 180);
     text(sf::FloatRect(0, 250, getWindowSize().x, 300), "Epsilon", AlignCenter, 200);
-    text(sf::FloatRect(0, 480, getWindowSize().x, 100), "Version: " + string(VERSION_NUMBER), AlignCenter, 20);
+    text(sf::FloatRect(0, 480, getWindowSize().x, 100), "Version: " + string(VERSION_NUMBER, 16), AlignCenter, 20);
 
     if (button(sf::FloatRect(50, 620, 300, 50), "Start server"))
     {
