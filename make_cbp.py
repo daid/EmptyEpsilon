@@ -85,7 +85,7 @@ def compile(filename, system, for_target='Release'):
 		ee_git_hash = f.read().strip()
 	with open("../SeriousProton/.git/refs/heads/master", "r") as f:
 		sp_git_hash = f.read().strip()
-	version = (int(ee_git_hash[0:8], 16) + int(sp_git_hash[0:8], 16)) & 0xFFFFFFFF
+	version = (int(ee_git_hash[0:8], 16) + int(sp_git_hash[0:8], 16)) & 0x7FFFFFFF
 	CFLAGS += '-DVERSION_NUMBER=%d' % (version)
 	
 	xml = ElementTree.parse(filename)
