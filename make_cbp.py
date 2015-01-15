@@ -80,6 +80,13 @@ def compile(filename, system, for_target='Release'):
 	if system == "Windows" and platform.system() == "Windows":
 		CC = 'C:/codeblocks/mingw/bin/mingw32-' + CC
 		CXX = 'C:/codeblocks/mingw/bin/mingw32-' + CXX
+
+	with open(".git/refs/heads/master", "r") as f:
+		ee_git_hash = f.read().strip()
+	with open("../SeriousProton/.git/refs/heads/master", "r") as f:
+		sp_git_hash = f.read().strip()
+	version = (int(ee_git_hash[0:8], 16) + int(sp_git_hash[0:8], 16)) & 0xFFFFFFFF
+	CFLAGS += '-DVERSION_NUMBER=%d' % (version)
 	
 	xml = ElementTree.parse(filename)
 	filenames = []
