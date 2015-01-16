@@ -140,7 +140,7 @@ void MainScreenUI::renderTactical(sf::RenderTarget& window)
 
 void MainScreenUI::renderLongRange(sf::RenderTarget& window)
 {
-    drawRadar(sf::Vector2f(800, 450), 400, gameGlobalInfo->long_range_radar_range, true, NULL);
+    drawRadar(sf::Vector2f(800, 450), 400, 10000, true, NULL);
 }
 
 ShipWindowUI::ShipWindowUI()

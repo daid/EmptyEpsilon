@@ -56,10 +56,16 @@ void CpuShip::update(float delta)
         if (weaponTube[n].state == WTS_Loaded && weaponTube[n].type_loaded == MW_Homing)
             has_missiles = true;
     }
+    
+    float beam_weapon_range = 0;
     for(int n=0; n<maxBeamWeapons; n++)
     {
         if (beamWeapons[n].range > 0)
         {
+            if (sf::angleDifference(beamWeapons[n].direction, 0.0f) < beamWeapons[n].arc / 2.0f)
+            {
+                beam_weapon_range = std::max(beam_weapon_range, beamWeapons[n].range);
+            }
             has_beams = true;
             break;
         }
@@ -141,13 +147,12 @@ void CpuShip::update(float delta)
         }
     }
 
+    float attack_distance = 4000.0;
+    if (has_beams)
+        attack_distance = beam_weapon_range * 0.7;
     //If we have a target, engage the target.
     if (target && (has_missiles || has_beams))
     {
-        float attack_distance = 4000.0;
-        if (has_beams)
-            attack_distance = 700.0;
-
         sf::Vector2f position_diff = target->getPosition() - getPosition();
         float distance = sf::length(position_diff);
         targetRotation = sf::vector2ToAngle(position_diff);
@@ -304,7 +309,7 @@ void CpuShip::update(float delta)
                 initJump(jump / 1000);
             }
         }
-        float keep_distance = 700;
+        float keep_distance = attack_distance;
         if (!target)
             keep_distance = 100.0;
         if (pathPlanner.route.size() > 1)

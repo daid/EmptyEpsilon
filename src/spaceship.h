@@ -77,7 +77,7 @@ class SpaceShip : public SpaceObject, public Updatable
     const static float shield_recharge_rate = 0.2f;
 public:
     const static int max_frequency = 20;
-    const static float max_combat_maneuver_delay = 9.0f;
+    const static float max_combat_maneuver_delay = 14.0f;
 
     string templateName;
     string ship_type_name;

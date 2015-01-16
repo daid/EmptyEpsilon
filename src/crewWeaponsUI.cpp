@@ -29,7 +29,8 @@ void CrewWeaponsUI::onCrewUI()
                         target = spaceObject;
                 }
             }
-            my_spaceship->commandSetTarget(target);
+            if (target)
+                my_spaceship->commandSetTarget(target);
         }
     }
     drawRadar(radar_center, 400, radarDistance, false, my_spaceship->getTarget());

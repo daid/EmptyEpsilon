@@ -440,7 +440,7 @@ void SpaceShip::update(float delta)
             setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() + 90) * impulseMaxSpeed * getSystemEffectiveness(SYS_Impulse) * 7.0f);
             break;
         case CM_Turn:
-            setAngularVelocity(180.0);
+            setAngularVelocity(180.0 / 3.0);
             break;
         }
     }else if (combat_maneuver_delay > 0)
@@ -844,7 +844,7 @@ void SpaceShip::activateCombatManeuver(ECombatManeuver maneuver)
         return;
     combat_maneuver_delay = max_combat_maneuver_delay;
     combat_maneuver = maneuver;
-    combat_maneuver_active = 1.0;
+    combat_maneuver_active = 3.0;
     if (maneuver == CM_Turn)
         targetRotation += 180;
 }
