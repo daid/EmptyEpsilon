@@ -69,8 +69,7 @@ void CrewWeaponsUI::onCrewUI()
             disabledButton(sf::FloatRect(x, 840, 270, 50), "Calibrating", 30);
         else if (toggleButton(sf::FloatRect(x, 840, 270, 50), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 30))
             my_spaceship->commandSetShields(!my_spaceship->shields_active);
-        damagePowerDisplay(sf::FloatRect(x, 840, 270 / 2.0, 50), SYS_FrontShield, 20);
-        damagePowerDisplay(sf::FloatRect(x + 270 / 2.0, 840, 270 / 2.0, 50), SYS_RearShield, 20);
+        damagePowerDisplay(sf::FloatRect(x, 840, 270, 50), SYS_FrontShield, 20);
     }
 
     float y = 690;

@@ -211,6 +211,12 @@ void CrewUI::damagePowerDisplay(sf::FloatRect rect, ESystem system, float text_s
     
     float power = my_spaceship->systems[system].power_level;
     float health = my_spaceship->systems[system].health;
+    int alpha = 128;
+    if (system == SYS_FrontShield)
+    {
+        power = std::max(power, my_spaceship->systems[SYS_RearShield].power_level);
+        health = std::max(health, my_spaceship->systems[SYS_RearShield].health);
+    }
     if (health <= 0.0)
     {
         color = sf::Color::Red;
@@ -226,11 +232,12 @@ void CrewUI::damagePowerDisplay(sf::FloatRect rect, ESystem system, float text_s
     }else if (power < 0.3)
     {
         color = sf::Color(255, 128, 0);
+        alpha = 64;
         display_text = "LOW POWER";
     }else{
         return;
     }
-    boxWithBackground(rect, color, sf::Color(0, 0, 0, 128));
+    boxWithBackground(rect, color, sf::Color(0, 0, 0, alpha));
     if (rect.height > rect.width)
         vtext(rect, display_text, AlignCenter, text_size, color);
     else
