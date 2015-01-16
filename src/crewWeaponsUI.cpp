@@ -15,7 +15,7 @@ void CrewWeaponsUI::onCrewUI()
     if (InputHandler::mouseIsReleased(sf::Mouse::Left))
     {
         sf::Vector2f diff = mouse - radar_center;
-        if (sf::length(diff) < 400)
+        if (sf::length(diff) < 400 && (mouse.x > 520 || mouse.y < 890 - 50 * my_spaceship->weapon_tubes))
         {
             P<SpaceObject> target;
             sf::Vector2f mousePosition = my_spaceship->getPosition() + diff / 400.0f * radarDistance;
@@ -29,8 +29,7 @@ void CrewWeaponsUI::onCrewUI()
                         target = spaceObject;
                 }
             }
-            if (target)
-                my_spaceship->commandSetTarget(target);
+            my_spaceship->commandSetTarget(target);
         }
     }
     drawRadar(radar_center, 400, radarDistance, false, my_spaceship->getTarget());
