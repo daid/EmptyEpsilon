@@ -46,8 +46,8 @@ void CpuShip::update(float delta)
         missile_fire_delay -= delta;
 
     //Check the weapon state,
-    bool has_missiles = weapon_tubes > 0 && weapon_storage[MW_Homing] > 0;
-    bool has_beams = false;
+    has_missiles = weapon_tubes > 0 && weapon_storage[MW_Homing] > 0;
+    has_beams = false;
     //If we have weapon tubes, load them with torpedoes
     for(int n=0; n<weapon_tubes; n++)
     {
@@ -57,7 +57,7 @@ void CpuShip::update(float delta)
             has_missiles = true;
     }
     
-    float beam_weapon_range = 0;
+    beam_weapon_range = 0;
     for(int n=0; n<maxBeamWeapons; n++)
     {
         if (beamWeapons[n].range > 0)
@@ -73,7 +73,6 @@ void CpuShip::update(float delta)
 
     P<SpaceObject> target = getTarget();
     P<SpaceObject> new_target;
-    float target_distance = 0.0;
     if (target && target->hideInNebula() && (target->getPosition() - getPosition()) > 5000.0f && Nebula::blockedByNebula(getPosition(), target->getPosition()))
     {
         if (orders == AI_Roaming)
@@ -81,10 +80,7 @@ void CpuShip::update(float delta)
         target = NULL;
     }
 
-    if (target)
-        target_distance = sf::length(target->getPosition() - getPosition());
-
-    //Find new target
+    //Find new target which we might switch to
     if (orders == AI_Roaming)
         new_target = findBestTarget(getPosition(), 8000);
     if (orders == AI_StandGround || orders == AI_FlyTowards)
@@ -104,9 +100,11 @@ void CpuShip::update(float delta)
     }
     if (orders == AI_Attack)
         new_target = order_target;
+    
     //Check if we need to drop the current target
     if (target)
     {
+        float target_distance = sf::length(target->getPosition() - getPosition());
         if (orders == AI_Idle)
             target = NULL;
         if (orders == AI_StandGround && target_distance > 8000)
@@ -129,21 +127,10 @@ void CpuShip::update(float delta)
     //Check if we want to switch to a new target
     if (new_target)
     {
-        float new_distance = sf::length(new_target->getPosition() - getPosition());
-        P<SpaceStation> station = target;
-        if (station)
+        if (!target || betterTarget(new_target, target))
         {
-            if (target_distance > new_distance - 5000)
-            {
-                target = new_target;
-                targetId = new_target->getMultiplayerId();
-            }
-        }else{
-            if (!target || (target_distance > new_distance * 1.5f && new_distance > 1500.0))
-            {
-                target = new_target;
-                targetId = new_target->getMultiplayerId();
-            }
+            target = new_target;
+            targetId = new_target->getMultiplayerId();
         }
     }
 
@@ -335,7 +322,7 @@ void CpuShip::update(float delta)
 
 P<SpaceObject> CpuShip::findBestTarget(sf::Vector2f position, float radius)
 {
-    float target_distance = 0.0;
+    float target_score = 0.0;
     PVector<Collisionable> objectList = CollisionManager::queryArea(position - sf::Vector2f(radius, radius), position + sf::Vector2f(radius, radius));
     P<SpaceObject> target;
     foreach(Collisionable, obj, objectList)
@@ -345,19 +332,53 @@ P<SpaceObject> CpuShip::findBestTarget(sf::Vector2f position, float radius)
             continue;
         if (space_object->hideInNebula() && (space_object->getPosition() - getPosition()) > 5000.0f && Nebula::blockedByNebula(getPosition(), space_object->getPosition()))
             continue;
-        float distance = sf::length(space_object->getPosition() - position);
-        if (distance > radius)
-            continue;
-        P<SpaceStation> station = space_object;
-        if (station)
-            distance += 5000;
-        if (!target || target_distance > distance)
+        float score = targetScore(space_object);
+        if (!target || score > target_score)
         {
             target = space_object;
-            target_distance = distance;
+            target_score = score;
         }
     }
     return target;
+}
+
+float CpuShip::targetScore(P<SpaceObject> target)
+{
+    sf::Vector2f position_difference = target->getPosition() - getPosition();
+    float distance = sf::length(position_difference);
+    //sf::Vector2f position_difference_normal = position_difference / distance;
+    //float rel_velocity = dot(target->getVelocity(), position_difference_normal) - dot(getVelocity(), position_difference_normal);
+    float angle_difference = sf::angleDifference(getRotation(), sf::vector2ToAngle(position_difference));
+    float score = -distance - fabsf(angle_difference / rotationSpeed * impulseMaxSpeed) * 1.5f;
+    if (P<SpaceStation>(target))
+        score -= 5000;
+    if (distance < 5000 && has_missiles)
+        score += 500;
+    /*
+    if (distance < beam_weapon_range)
+    {
+        for(int n=0; n<maxBeamWeapons; n++)
+        {
+            if (distance < beamWeapons[n].range)
+            {
+                //if (sf::angleDifference(angle_difference, beamWeapons[n].direction) < beamWeapons[n].arc / 2.0f)
+                //    score += 1000;
+            }
+        }
+    }
+    */
+    return score;
+}
+
+bool CpuShip::betterTarget(P<SpaceObject> new_target, P<SpaceObject> current_target)
+{
+    float new_score = targetScore(new_target);
+    float current_score = targetScore(current_target);
+    if (new_score > current_score * 1.5f)
+        return true;
+    if (new_score > current_score + 5000.0f)
+        return true;
+    return false;
 }
 
 void CpuShip::orderIdle()

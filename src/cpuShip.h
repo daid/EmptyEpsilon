@@ -25,14 +25,16 @@ class CpuShip : public SpaceShip
     sf::Vector2f order_target_location; //Server only
     P<SpaceObject> order_target;        //Server only
     float missile_fire_delay;
+
+    bool has_missiles;//Server only, updated every update
+    bool has_beams;//Server only, updated every update
+    float beam_weapon_range;//Server only, updated every update
     
     PathPlanner pathPlanner;
 public:
     CpuShip();
     
     virtual void update(float delta);
-    
-    P<SpaceObject> findBestTarget(sf::Vector2f position, float radius);
     
     void orderIdle();
     void orderRoaming();
@@ -47,6 +49,11 @@ public:
     EAIOrder getOrder() { return orders; }
     
     friend class GameMasterUI;
+
+private:
+    P<SpaceObject> findBestTarget(sf::Vector2f position, float radius);
+    float targetScore(P<SpaceObject> target);
+    bool betterTarget(P<SpaceObject> new_target, P<SpaceObject> current_target);
 };
 string getAIOrderString(EAIOrder order);
 

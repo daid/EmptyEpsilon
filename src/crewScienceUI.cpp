@@ -24,7 +24,7 @@ void CrewScienceUI::onCrewUI()
             if (sf::length(diff) < 400)
             {
                 P<SpaceObject> target;
-                float target_pixel_distance;
+                float target_pixel_distance = 0.0;
                 for(unsigned int n=0; n<scan_ghost.size(); n++)
                 {
                     P<SpaceObject> obj = scan_ghost[n].object;

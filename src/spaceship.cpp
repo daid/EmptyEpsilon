@@ -352,9 +352,9 @@ void SpaceShip::update(float delta)
     float rotationDiff = sf::angleDifference(getRotation(), targetRotation);
 
     if (rotationDiff > 1.0)
-        setAngularVelocity(rotationSpeed);
+        setAngularVelocity(rotationSpeed * getSystemEffectiveness(SYS_Maneuver));
     else if (rotationDiff < -1.0)
-        setAngularVelocity(-rotationSpeed);
+        setAngularVelocity(-rotationSpeed * getSystemEffectiveness(SYS_Maneuver));
     else
         setAngularVelocity(rotationDiff * rotationSpeed * getSystemEffectiveness(SYS_Maneuver));
 

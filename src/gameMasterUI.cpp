@@ -178,7 +178,7 @@ void GameMasterUI::onGui()
                 sf::VertexArray a(sf::Lines, 2);
                 a[0].position = sf::Vector2f(800, 450) + (cpuShip->getPosition() - view_position) / view_distance * 400.0f;
                 a[1].position = sf::Vector2f(800, 450) + (target->getPosition() - view_position) / view_distance * 400.0f;
-                a[0].color = a[1].color = sf::Color(255, 255, 255, 32);
+                a[0].color = a[1].color = sf::Color(255, 128, 128, 32);
                 window.draw(a);
             }
             sf::VertexArray a(sf::LinesStrip, cpuShip->pathPlanner.route.size() + 1);
@@ -190,6 +190,12 @@ void GameMasterUI::onGui()
                 a[n+1].color = sf::Color(255, 255, 255, 32);
             }
             window.draw(a);
+        }
+        if (selection.size() == 1 && P<CpuShip>(selection[0]))
+        {
+            P<CpuShip> cpu = selection[0];
+            sf::Vector2f pos = sf::Vector2f(800, 450) + (obj->getPosition() - view_position) / view_distance * 400.0f;
+            text(sf::FloatRect(pos.x, pos.y - 20.0f, 0.0f, 0.0f), string(cpu->targetScore(obj)), AlignCenter, 20);
         }
     }
     sf::RectangleShape sidebackBackground(sf::Vector2f(300, 900));

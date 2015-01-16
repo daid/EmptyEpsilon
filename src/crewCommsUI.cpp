@@ -136,7 +136,7 @@ void CrewCommsUI::drawCommsRadar()
         if (InputHandler::mouseIsReleased(sf::Mouse::Left) && mouse.x > x)
         {
             P<SpaceObject> target;
-            float target_pixel_distance;
+            float target_pixel_distance = 0.0;
             foreach(SpaceObject, obj, visible_objects)
             {
                 if(obj == my_spaceship)
