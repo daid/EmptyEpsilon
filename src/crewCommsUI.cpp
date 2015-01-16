@@ -283,7 +283,25 @@ void CrewCommsUI::drawCommsChannel()
         {
             std::vector<string> lines = my_spaceship->comms_incomming_message.split("\n");
             float y = 100;
-            static const unsigned int max_lines = 20;
+            unsigned int max_lines = 20;
+
+            if (!engine->getObject("mouseRenderer"))
+            {
+                string keyboard_entry = onScreenKeyboard();
+                if (keyboard_entry == "\n")
+                {
+                    my_spaceship->commandSendCommPlayer(comms_player_message);
+                    comms_player_message = "";
+                }else if (keyboard_entry == "\r")
+                {
+                    if (comms_player_message.length() > 0)
+                        comms_player_message = comms_player_message.substr(0, -1);;
+                }else{
+                    comms_player_message += keyboard_entry;
+                }
+                max_lines = 10;
+            }
+
             for(unsigned int n=lines.size() > max_lines ? lines.size() - max_lines : 0; n<lines.size(); n++)
             {
                 text(sf::FloatRect(50, y, 600, 30), lines[n]);

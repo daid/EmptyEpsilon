@@ -243,3 +243,37 @@ void CrewUI::damagePowerDisplay(sf::FloatRect rect, ESystem system, float text_s
     else
         text(rect, display_text, AlignCenter, text_size, color);
 }
+
+string CrewUI::onScreenKeyboard()
+{
+    string ret = "";
+    float size = 60;
+    float text_size = 40;
+    float x = getWindowSize().x / 2.0 - size * 7.5;
+    float y = 790;
+    
+    string line = "1234567890-=";
+    for(unsigned int n=0; n<line.size(); n++)
+        if (button(sf::FloatRect(x + n * size, y - size * 5, size, size), line[n], text_size))
+            ret += line[n];
+    if (button(sf::FloatRect(x + 12 * size, y - size * 5, size * 2, size), "<-", text_size))
+        ret += "\b";
+    line = "QWERTYUIOP()";
+    for(unsigned int n=0; n<line.size(); n++)
+        if (button(sf::FloatRect(x + size * 0.5 + n * size, y - size * 4, size, size), line[n], text_size))
+            ret += line[n];
+    line = "ASDFGHJKL;'";
+    for(unsigned int n=0; n<line.size(); n++)
+        if (button(sf::FloatRect(x + size * 1.0 + n * size, y - size * 3, size, size), line[n], text_size))
+            ret += line[n];
+    if (button(sf::FloatRect(x + 12 * size, y - size * 3, size * 2, size), "Send", text_size))
+        ret += "\n";
+    line = "ZXCVBNM,./";
+    for(unsigned int n=0; n<line.size(); n++)
+        if (button(sf::FloatRect(x + size * 1.5 + n * size, y - size * 2, size, size), line[n], text_size))
+            ret += line[n];
+    if (button(sf::FloatRect(x + size * 2.0, y - size, size * 9, size), "", text_size))
+        ret += " ";
+    
+    return ret;
+}
