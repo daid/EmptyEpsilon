@@ -78,7 +78,7 @@ void CrewHelmsUI::onCrewUI()
     damagePowerDisplay(sf::FloatRect(radar_center.x - 140, radar_center.y + 150, 280, 50), SYS_Maneuver, 20);
 
     keyValueDisplay(sf::FloatRect(20, 100, 240, 40), 0.45, "Energy", string(int(my_spaceship->energy_level)), 20);
-    keyValueDisplay(sf::FloatRect(20, 140, 240, 40), 0.45, "Heading", string(fmodf(my_spaceship->getRotation() + 360.0, 360.0), 1), 20);
+    keyValueDisplay(sf::FloatRect(20, 140, 240, 40), 0.45, "Heading", string(fmodf(my_spaceship->getRotation() + 360.0 + 360.0 - 270.0, 360.0), 1), 20);
     float velocity = sf::length(my_spaceship->getVelocity()) / 1000 * 60;
     string velocity_text = string(velocity, 1);
     keyValueDisplay(sf::FloatRect(20, 180, 240, 40), 0.45, "Speed", velocity_text + "km/min", 20);
