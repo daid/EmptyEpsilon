@@ -8,7 +8,7 @@ function mainMenu()
 			setCommsMessage("We are under attack! No time for chatting!");
 			return true
 		end
-		if not player:isDocked() then
+		if not player:isDocked(comms_target) then
 			setCommsMessage("Good day officer,\nIf you need supplies please dock with us first.");
 			addCommsReply("Can you send a supply drop? (100rep)", function()
 				--setCommsMessage("Sorry sir, we do not have spare supply ships available right now.");
@@ -53,7 +53,7 @@ function mainMenu()
 		-- Friendly station, docked.
 		setCommsMessage("Good day officer,\nWhat can we do for you today?")
 		addCommsReply("Do you have spare homing missiles for us?", function()
-			if not player:isDocked() then setCommsMessage("You need to stay docked for that action."); return end
+			if not player:isDocked(comms_target) then setCommsMessage("You need to stay docked for that action."); return end
 			if player:getWeaponStorage("Homing") >= player:getWeaponStorageMax("Homing") then
 				setCommsMessage("Sorry sir, but you are fully stocked with homing missiles.");
 				addCommsReply("Back", mainMenu)
@@ -64,7 +64,7 @@ function mainMenu()
 			end
 		end)
 		addCommsReply("Please re-stock our mines.", function()
-			if not player:isDocked() then setCommsMessage("You need to stay docked for that action."); return end
+			if not player:isDocked(comms_target) then setCommsMessage("You need to stay docked for that action."); return end
 			if player:getWeaponStorage("Mine") >= player:getWeaponStorageMax("Mine") then
 				setCommsMessage("Captain,\nYou have all the mines you can fit in that ship.");
 				addCommsReply("Back", mainMenu)
@@ -75,7 +75,7 @@ function mainMenu()
 			end
 		end)
 		addCommsReply("Can you supply us with some nukes.", function()
-			if not player:isDocked() then setCommsMessage("You need to stay docked for that action."); return end
+			if not player:isDocked(comms_target) then setCommsMessage("You need to stay docked for that action."); return end
 			if player:getWeaponStorage("Nuke") >= player:getWeaponStorageMax("Nuke") then
 				setCommsMessage("All nukes are charged and primed for distruction.");
 				addCommsReply("Back", mainMenu)
@@ -86,7 +86,7 @@ function mainMenu()
 			end
 		end)
 		addCommsReply("Please re-stock our EMP Missiles.", function()
-			if not player:isDocked() then setCommsMessage("You need to stay docked for that action."); return end
+			if not player:isDocked(comms_target) then setCommsMessage("You need to stay docked for that action."); return end
 			if player:getWeaponStorage("EMP") >= player:getWeaponStorageMax("EMP") then
 				setCommsMessage("All storage for EMP missiles is filled sir.");
 				addCommsReply("Back", mainMenu)
@@ -97,7 +97,7 @@ function mainMenu()
 			end
 		end)
 	else
-		if not player:isDocked() then
+		if not player:isDocked(comms_target) then
 			setCommsMessage("Greetings sir.\nIf you want to do business please dock with us first.");
 			return true
 		end
@@ -105,7 +105,7 @@ function mainMenu()
 		-- Neutral station
 		setCommsMessage("Welcome to our lovely station")
 		addCommsReply("Do you have spare homing missiles for us?", function()
-			if not player:isDocked() then setCommsMessage("You need to stay docked for that action."); return end
+			if not player:isDocked(comms_target) then setCommsMessage("You need to stay docked for that action."); return end
 			if player:getWeaponStorage("Homing") >= player:getWeaponStorageMax("Homing") / 2 then
 				setCommsMessage("You seem to have more then enough missiles");
 				addCommsReply("Back", mainMenu)
@@ -116,7 +116,7 @@ function mainMenu()
 			end
 		end)
 		addCommsReply("Please re-stock our mines.", function()
-			if not player:isDocked() then setCommsMessage("You need to stay docked for that action."); return end
+			if not player:isDocked(comms_target) then setCommsMessage("You need to stay docked for that action."); return end
 			if player:getWeaponStorage("Mine") >= player:getWeaponStorageMax("Mine") then
 				setCommsMessage("You are fully stocked with mines.");
 				addCommsReply("Back", mainMenu)

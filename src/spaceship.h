@@ -162,7 +162,7 @@ public:
 
     P<SpaceObject> getTarget();
 
-    bool isDocked() { return docking_state == DS_Docked; }
+    bool isDocked(P<SpaceObject> target) { return docking_state == DS_Docked && docking_target == target; }
     int getWeaponStorage(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage[weapon]; }
     int getWeaponStorageMax(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage_max[weapon]; }
     void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage[weapon] = amount; }
