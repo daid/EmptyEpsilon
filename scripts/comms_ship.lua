@@ -15,6 +15,11 @@ function mainMenu()
 				end
 			end
 		end)
+		addCommsReply("Assist me", function()
+			setCommsMessage("Heading towards you to assist you");
+			comms_target:orderDefendTarget(player)
+			addCommsReply("Back", mainMenu)
+		end)
 		return true
 	end
 	if player:isEnemy(comms_target) then
