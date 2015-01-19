@@ -862,6 +862,18 @@ string SpaceShip::getCallSign()
     case 5: return "BR" + string(id % 100);
     case 6: return "C-" + string(id % 100);
     case 7: return "OV" + string(id % 100);
+    case 8: return "CCN" + string(id % 100);
+    case 9: return "CSS" + string(id % 100);
+    case 10: return "FMS" + string(id % 100);
+    case 11: return "PWB" + string(id % 100);
+    case 12: return "VK" + string(id % 100);
+    case 13: return "ECS" + string(id % 100);
+    case 14: return "UTI" + string(id % 100);
+    case 15: return "F" + string(id % 100);
+    case 16: return "Z-" + string(id % 100);
+    case 17: return "RMS" + string(id % 100);
+    case 18: return "ISS" + string(id % 100);
+    case 19: return "YLT" + string(id % 100);
     }
     return "X-" + string(id);
 }
