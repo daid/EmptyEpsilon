@@ -34,7 +34,7 @@ function mainMenu()
 			addCommsReply("Please send backup! (75rep)", function()
 				--setCommsMessage("We cannot spare any ships for you right now.");
 				setCommsMessage("Where does the backup needs to go?");
-				for n=0,player:getWaypointCount()-1 do
+				for n=1,player:getWaypointCount() do
 					addCommsReply("WP" .. n, function()
 						if player:takeReputationPoints(100) then
 							ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setShipTemplate("Fighter"):setScanned(true):orderDefendLocation(player:getWaypoint(n))

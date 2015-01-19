@@ -31,13 +31,6 @@ enum ECommsState
     CS_ChannelBroken
 };
 
-class PlayerCommsReply
-{
-public:
-    int32_t id; //server only
-    string message;
-};
-
 class PlayerSpaceship : public SpaceShip
 {
 public:
@@ -67,8 +60,8 @@ public:
     float comms_open_delay;
     string comms_incomming_message;
     P<SpaceObject> comms_target;    //Server only
-    int8_t comms_reply_count;
-    PlayerCommsReply comms_reply[max_comms_reply_count];
+    std::vector<int> comms_reply_id;
+    std::vector<string> comms_reply_message;
     CommsScriptInterface comms_script_interface;  //Server only
     std::vector<sf::Vector2f> waypoints;
 
@@ -101,7 +94,7 @@ public:
     void commandOpenTextComm(P<SpaceObject> obj);
     void commandCloseTextComm();
     void commandAnswerCommHail(bool awnser);
-    void commandSendComm(int8_t index);
+    void commandSendComm(uint8_t index);
     void commandSendCommPlayer(string message);
     void commandSetAutoRepair(bool enabled);
     void commandSetBeamFrequency(int32_t frequency);
@@ -129,7 +122,7 @@ public:
     void setCommsMessage(string message);
     void addCommsReply(int32_t id, string message);
     int getWaypointCount() { return waypoints.size(); }
-    sf::Vector2f getWaypoint(int index) { if (index >= 0 && index < int(waypoints.size())) return waypoints[index]; return sf::Vector2f(0, 0); }
+    sf::Vector2f getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1]; return sf::Vector2f(0, 0); }
 };
 REGISTER_MULTIPLAYER_ENUM(ECommsState);
 REGISTER_MULTIPLAYER_ENUM(ECrewPosition);

@@ -417,7 +417,7 @@ void MainUIBase::drawWaypoints(sf::Vector2f view_position, sf::Vector2f position
         object_sprite.setPosition(screen_position - sf::Vector2f(0, 10));
         object_sprite.setScale(0.6, 0.6);
         window.draw(object_sprite);
-        text(sf::FloatRect(screen_position.x, screen_position.y - 26, 0, 0), "WP" + string(n), AlignCenter, 14, sf::Color(128, 128, 255, 192));
+        text(sf::FloatRect(screen_position.x, screen_position.y - 26, 0, 0), "WP" + string(n + 1), AlignCenter, 14, sf::Color(128, 128, 255, 192));
     }
 }
 

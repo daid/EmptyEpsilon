@@ -26,6 +26,7 @@ class CrewCommsUI : public CrewUI
     unsigned int selection_waypoint_index;
     
     string comms_player_message;
+    unsigned int comms_reply_view_offset;
 public:
     CrewCommsUI();
     

@@ -67,7 +67,6 @@ PlayerSpaceship::PlayerSpaceship()
     scanned_by_player = SS_FullScan;
     comms_state = CS_Inactive;
     comms_open_delay = 0.0;
-    comms_reply_count = 0;
     shield_calibration_delay = 0.0;
     auto_repair_enabled = false;
     activate_self_destruct = false;
@@ -86,10 +85,8 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&beam_system_target);
     registerMemberReplication(&comms_state);
     registerMemberReplication(&comms_open_delay, 1.0);
-    registerMemberReplication(&comms_reply_count);
+    registerMemberReplication(&comms_reply_message);
     registerMemberReplication(&comms_incomming_message);
-    for (int n=0; n<max_comms_reply_count; n++)
-        registerMemberReplication(&comms_reply[n].message);
     registerMemberReplication(&waypoints);
     registerMemberReplication(&activate_self_destruct);
     for(int n=0; n<max_self_destruct_codes; n++)
@@ -161,7 +158,8 @@ void PlayerSpaceship::update(float delta)
                 {
                     comms_state = CS_ChannelBroken;
                 }else{
-                    comms_reply_count = 0;
+                    comms_reply_id.clear();
+                    comms_reply_message.clear();
                     P<PlayerSpaceship> playerShip = comms_target;
                     if (playerShip)
                     {
@@ -386,11 +384,10 @@ void PlayerSpaceship::setCommsMessage(string message)
 
 void PlayerSpaceship::addCommsReply(int32_t id, string message)
 {
-    if (comms_reply_count == max_comms_reply_count)
+    if (comms_reply_id.size() >= 200)
         return;
-    comms_reply[comms_reply_count].id = id;
-    comms_reply[comms_reply_count].message = message;
-    comms_reply_count++;
+    comms_reply_id.push_back(id);
+    comms_reply_message.push_back(message);
 }
 
 void PlayerSpaceship::onReceiveClientCommand(int32_t clientId, sf::Packet& packet)
@@ -571,13 +568,15 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t clientId, sf::Packet& packe
     case CMD_SEND_TEXT_COMM:
         if (comms_state == CS_ChannelOpen && comms_target)
         {
-            int8_t index;
+            uint8_t index;
             packet >> index;
-            if (index < comms_reply_count)
+            if (index < comms_reply_id.size())
             {
                 comms_incomming_message = "?";
-                comms_reply_count = 0;
-                comms_script_interface.commChannelMessage(comms_reply[index].id);
+                int id = comms_reply_id[index];
+                comms_reply_id.clear();
+                comms_reply_message.clear();
+                comms_script_interface.commChannelMessage(id);
             }
         }
         break;
@@ -832,7 +831,7 @@ void PlayerSpaceship::commandAnswerCommHail(bool awnser)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandSendComm(int8_t index)
+void PlayerSpaceship::commandSendComm(uint8_t index)
 {
     sf::Packet packet;
     packet << CMD_SEND_TEXT_COMM << index;

@@ -6,6 +6,7 @@ CrewCommsUI::CrewCommsUI()
     mode = mode_default;
     selection_type = select_none;
     radar_distance = 50000.0f;
+    comms_reply_view_offset = 0;
 }
 
 void CrewCommsUI::onCrewUI()
@@ -265,13 +266,29 @@ void CrewCommsUI::drawCommsChannel()
                 y += 30;
             }
             y += 30;
-            for(int n=0; n<my_spaceship->comms_reply_count; n++)
+            
+            if (my_spaceship->comms_reply_message.size() <= comms_reply_view_offset)
+                comms_reply_view_offset = 0;
+            const int comm_reply_per_page = 8;
+            unsigned int cnt = std::min(comm_reply_per_page, int(my_spaceship->comms_reply_message.size() - comms_reply_view_offset));
+            for(unsigned int n=0; n<cnt; n++)
             {
-                if (button(sf::FloatRect(50, y, 600, 50), my_spaceship->comms_reply[n].message))
+                if (button(sf::FloatRect(50, y, 600, 50), my_spaceship->comms_reply_message[n + comms_reply_view_offset]))
                 {
-                    my_spaceship->commandSendComm(n);
+                    my_spaceship->commandSendComm(n + comms_reply_view_offset);
+                    comms_reply_view_offset = 0;
                 }
                 y += 50;
+            }
+            if (comms_reply_view_offset > 0)
+            {
+                if (button(sf::FloatRect(50, y, 200, 50), "<-"))
+                    comms_reply_view_offset -= comm_reply_per_page;
+            }
+            if (comms_reply_view_offset + comm_reply_per_page < my_spaceship->comms_reply_message.size())
+            {
+                if (button(sf::FloatRect(450, y, 200, 50), "->"))
+                    comms_reply_view_offset += comm_reply_per_page;
             }
 
             if (button(sf::FloatRect(50, 800, 300, 50), "Close channel"))

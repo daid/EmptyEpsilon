@@ -6,7 +6,7 @@ function mainMenu()
 				setCommsMessage("No waypoints set, please set a waypoint first.");
 			else
 				setCommsMessage("Which waypoint do we need to defend?");
-				for n=0,player:getWaypointCount()-1 do
+				for n=1,player:getWaypointCount() do
 					addCommsReply("Defend at WP" .. n, function()
 						comms_target:orderDefendLocation(player:getWaypoint(n))
 						setCommsMessage("We are heading to assist at WP" .. n);
