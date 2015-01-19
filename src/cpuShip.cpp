@@ -15,6 +15,7 @@ REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyTowards);
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyTowardsBlind);
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderAttack);
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderDock);
 }
 
 REGISTER_MULTIPLAYER_CLASS(CpuShip, "CpuShip");
@@ -79,6 +80,8 @@ void CpuShip::update(float delta)
             order_target_location = target->getPosition();
         target = NULL;
     }
+    if (target && !isEnemy(target))
+        target = NULL;
 
     //Find new target which we might switch to
     if (orders == AI_Roaming)
@@ -119,9 +122,6 @@ void CpuShip::update(float delta)
             target = NULL;
         if (orders == AI_FlyFormation && target_distance > 6000)
             target = NULL;
-
-        if (!target)
-            targetId = -1;
     }
 
     //Check if we want to switch to a new target
@@ -130,9 +130,12 @@ void CpuShip::update(float delta)
         if (!target || betterTarget(new_target, target))
         {
             target = new_target;
-            targetId = new_target->getMultiplayerId();
         }
     }
+    if (!target)
+        targetId = -1;
+    else
+        targetId = target->getMultiplayerId();
 
     float attack_distance = 4000.0;
     if (has_beams)
@@ -261,11 +264,32 @@ void CpuShip::update(float delta)
         case AI_Attack:          //Attack [order_target] very specificly.
             pathPlanner.clear();
             break;
+        case AI_Dock:            //Dock with [order_target]
+            if (order_target)
+            {
+                sf::Vector2f target_position = order_target->getPosition();
+                sf::Vector2f diff = getPosition() - target_position;
+                float dist = sf::length(diff);
+                if (dist < 600)
+                {
+                    requestDock(order_target);
+                    pathPlanner.clear();
+                }else{
+                    target_position += (diff / dist) * 500.0f;
+                    pathPlanner.plan(getPosition(), target_position);
+                }
+            }else{
+                orders = AI_Roaming;    //We pretty much lost our defending target, so just start roaming.
+            }
+            break;
         }
     }
     
     if (pathPlanner.route.size() > 0)
     {
+        if (docking_state == DS_Docked)
+            requestUndock();
+    
         sf::Vector2f diff = pathPlanner.route[0] - getPosition();
         float distance = sf::length(diff);
 
@@ -434,6 +458,12 @@ void CpuShip::orderAttack(P<SpaceObject> object)
     order_target = object;
 }
 
+void CpuShip::orderDock(P<SpaceObject> object)
+{
+    orders = AI_Dock;
+    order_target = object;
+}
+
 string getAIOrderString(EAIOrder order)
 {
     switch(order)
@@ -447,6 +477,7 @@ string getAIOrderString(EAIOrder order)
     case AI_FlyTowards: return "Fly towards";
     case AI_FlyTowardsBlind: return "Fly towards (ignore all)";
     case AI_Attack: return "Attack";
+    case AI_Dock: return "Dock";
     }
     return "Unknown";
 }

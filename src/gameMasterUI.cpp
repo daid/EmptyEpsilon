@@ -109,6 +109,7 @@ void GameMasterUI::onGui()
                 upper_bound.y = std::max(upper_bound.y, obj->getPosition().y);
             }
             sf::Vector2f objects_center = (upper_bound + lower_bound) / 2.0f;
+            bool shift_down = InputHandler::keyboardIsDown(sf::Keyboard::LShift) || InputHandler::keyboardIsDown(sf::Keyboard::RShift);
             foreach(SpaceObject, obj, selection)
             {
                 P<CpuShip> cpuShip = obj;
@@ -131,10 +132,13 @@ void GameMasterUI::onGui()
                         {
                             cpuShip->orderAttack(target);
                         }else{
-                            cpuShip->orderDefendTarget(target);
+                            if (!shift_down && target->canBeDockedBy(cpuShip))
+                                cpuShip->orderDock(target);
+                            else
+                                cpuShip->orderDefendTarget(target);
                         }
                     }else{
-                        if (InputHandler::keyboardIsDown(sf::Keyboard::LShift) || InputHandler::keyboardIsDown(sf::Keyboard::RShift))
+                        if (shift_down)
                             cpuShip->orderFlyTowardsBlind(mouse_world_position + (obj->getPosition() - objects_center));
                         else
                             cpuShip->orderFlyTowards(mouse_world_position + (obj->getPosition() - objects_center));

@@ -14,6 +14,7 @@ enum EAIOrder
     AI_FlyFormation,    //Fly [order_target_location] offset from [order_target]. Allows for nicely flying in formation.
     AI_FlyTowards,      //Fly towards [order_target_location], attacking enemies that get too close, but disengage and continue when enemy is too far.
     AI_FlyTowardsBlind, //Fly towards [order_target_location], not attacking anything
+    AI_Dock,            //Dock with target
     AI_Attack,          //Attack [order_target] very specificly.
 };
 
@@ -45,6 +46,7 @@ public:
     void orderFlyTowards(sf::Vector2f target);
     void orderFlyTowardsBlind(sf::Vector2f target);
     void orderAttack(P<SpaceObject> object);
+    void orderDock(P<SpaceObject> object);
     
     EAIOrder getOrder() { return orders; }
     
