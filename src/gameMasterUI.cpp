@@ -317,7 +317,7 @@ void GameMasterUI::onGui()
         }
     }
     
-    if (selection.size() > 1)
+    if (selection.size() > 0)
     {
         text(sf::FloatRect(20, 480, 250, 20), "Change faction:", AlignCenter, 20);
         unsigned int new_id = selection[0]->getFactionId() + selector(sf::FloatRect(20, 500, 250, 50), factionInfo[selection[0]->getFactionId()]->name);
@@ -365,9 +365,9 @@ void GameMasterShipRetrofit::onGui()
         destroy();
         return;
     }
-    float x = getWindowSize().x / 2 - 475;
+    float x = getWindowSize().x / 2 - 500;
     float y = 200;
-    boxWithBackground(sf::FloatRect(x - 30, y - 30, 1010, 460));
+    boxWithBackground(sf::FloatRect(x - 30, y - 30, 1060, 460));
 
     ship->ship_type_name = textEntry(sf::FloatRect(x, y, 300, 30), ship->ship_type_name, 20);
     y += 30;
