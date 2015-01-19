@@ -14,6 +14,8 @@ function init()
 	spawnWaveDelay = nil
 	enemyList = {}
 	friendlyList = {}
+	
+	PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
 
 	for n=1, 2 do
 		table.insert(friendlyList, SpaceStation():setFaction("Human Navy"):setPosition(random(-5000, 5000), random(-5000, 5000)))

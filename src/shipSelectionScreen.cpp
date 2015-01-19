@@ -123,6 +123,7 @@ void ShipSelectionScreen::onGui()
         }
     }
 
+    int shipCount = 0;
     for(int n=0; n<GameGlobalInfo::maxPlayerShips; n++)
     {
         P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
@@ -142,7 +143,12 @@ void ShipSelectionScreen::onGui()
                     my_player_info->setShipId(my_spaceship->getMultiplayerId());
                 }
             }
+            shipCount++;
         }
+    }
+    if (shipCount == 0)
+    {
+        textbox(sf::FloatRect(200, 150, 300, 100), "Waiting for server to spawn a ship", AlignCenter, 30);
     }
 
     if (game_server)
@@ -162,36 +168,13 @@ void ShipSelectionScreen::onGui()
         if (button(sf::FloatRect(200, 600, 300, 50), "Spawn player ship"))
         {
             my_spaceship = new PlayerSpaceship();
-            my_spaceship->setShipTemplate(templates[ship_template_index]);
-            my_spaceship->setRotation(random(0, 360));
-            my_spaceship->targetRotation = my_spaceship->getRotation();
-            my_spaceship->setPosition(sf::Vector2f(random(-100, 100), random(-100, 100)));
-            my_player_info->setShipId(my_spaceship->getMultiplayerId());
-            switch(gameGlobalInfo->player_warp_jump_drive_setting)
+            if (my_spaceship)
             {
-            default:
-                break;
-            case PWJ_WarpDrive:
-                my_spaceship->hasWarpdrive = true;
-                if (my_spaceship->warpSpeedPerWarpLevel < 100)
-                    my_spaceship->warpSpeedPerWarpLevel = 1000;
-                my_spaceship->hasJumpdrive = false;
-                break;
-            case PWJ_JumpDrive:
-                my_spaceship->hasWarpdrive = false;
-                my_spaceship->warpSpeedPerWarpLevel = 0;
-                my_spaceship->hasJumpdrive = true;
-                break;
-            case PWJ_WarpAndJumpDrive:
-                my_spaceship->hasWarpdrive = true;
-                if (my_spaceship->warpSpeedPerWarpLevel < 100)
-                    my_spaceship->warpSpeedPerWarpLevel = 1000;
-                my_spaceship->hasJumpdrive = true;
-                break;
-            }
-            if (gameGlobalInfo->insertPlayerShip(my_spaceship) < 0)
-            {
-                my_spaceship->destroy();
+                my_spaceship->setShipTemplate(templates[ship_template_index]);
+                my_spaceship->setRotation(random(0, 360));
+                my_spaceship->targetRotation = my_spaceship->getRotation();
+                my_spaceship->setPosition(sf::Vector2f(random(-100, 100), random(-100, 100)));
+                my_player_info->setShipId(my_spaceship->getMultiplayerId());
             }
         }
     }

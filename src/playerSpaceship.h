@@ -108,6 +108,8 @@ public:
     void commandCombatManeuver(ECombatManeuver maneuver);
 
     virtual string getCallSign() { return "PL" + string(getMultiplayerId()); }
+    
+    virtual void setShipTemplate(string templateName);
 
     virtual void executeJump(float distance);
     virtual void fireBeamWeapon(int index, P<SpaceObject> target);

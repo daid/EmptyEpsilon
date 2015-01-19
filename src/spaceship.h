@@ -158,7 +158,7 @@ public:
     bool hasSystem(ESystem system);
     float getSystemEffectiveness(ESystem system);
 
-    void setShipTemplate(string templateName);
+    virtual void setShipTemplate(string templateName);
 
     P<SpaceObject> getTarget();
 

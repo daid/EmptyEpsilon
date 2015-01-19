@@ -121,6 +121,11 @@ PlayerSpaceship::PlayerSpaceship()
             rc->ship_id = getMultiplayerId();
         }
     }
+
+    if (gameGlobalInfo->insertPlayerShip(this) < 0)
+    {
+        destroy();
+    }
 }
 
 void PlayerSpaceship::update(float delta)
@@ -300,6 +305,34 @@ void PlayerSpaceship::update(float delta)
 
     if (energy_level > 1000.0)
         energy_level = 1000.0;
+}
+
+void PlayerSpaceship::setShipTemplate(string templateName)
+{
+    SpaceShip::setShipTemplate(templateName);
+    
+    switch(gameGlobalInfo->player_warp_jump_drive_setting)
+    {
+    default:
+        break;
+    case PWJ_WarpDrive:
+        hasWarpdrive = true;
+        if (warpSpeedPerWarpLevel < 100)
+            warpSpeedPerWarpLevel = 1000;
+        hasJumpdrive = false;
+        break;
+    case PWJ_JumpDrive:
+        hasWarpdrive = false;
+        warpSpeedPerWarpLevel = 0;
+        hasJumpdrive = true;
+        break;
+    case PWJ_WarpAndJumpDrive:
+        hasWarpdrive = true;
+        if (warpSpeedPerWarpLevel < 100)
+            warpSpeedPerWarpLevel = 1000;
+        hasJumpdrive = true;
+        break;
+    }
 }
 
 void PlayerSpaceship::executeJump(float distance)
