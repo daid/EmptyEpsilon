@@ -47,10 +47,20 @@ void MainScreenUI::onGui()
         {
             switch(my_spaceship->main_screen_setting)
             {
-            case MSS_Front: my_spaceship->commandMainScreenSetting(MSS_Tactical); break;
-            case MSS_Tactical: my_spaceship->commandMainScreenSetting(MSS_LongRange); break;
-            case MSS_LongRange: my_spaceship->commandMainScreenSetting(MSS_Tactical); break;
-            default: my_spaceship->commandMainScreenSetting(MSS_Tactical); break;
+            default:
+                if (gameGlobalInfo->allow_main_screen_tactical_radar)
+                    my_spaceship->commandMainScreenSetting(MSS_Tactical);
+                else if (gameGlobalInfo->allow_main_screen_long_range_radar)
+                    my_spaceship->commandMainScreenSetting(MSS_LongRange);
+                break;
+            case MSS_Tactical:
+                if (gameGlobalInfo->allow_main_screen_long_range_radar)
+                    my_spaceship->commandMainScreenSetting(MSS_LongRange);
+                break;
+            case MSS_LongRange:
+                if (gameGlobalInfo->allow_main_screen_tactical_radar)
+                    my_spaceship->commandMainScreenSetting(MSS_Tactical);
+                break;
             }
         }
         if (InputHandler::keyboardIsReleased(sf::Keyboard::Up))
@@ -61,9 +71,9 @@ void MainScreenUI::onGui()
             my_spaceship->commandMainScreenSetting(MSS_Right);
         if (InputHandler::keyboardIsReleased(sf::Keyboard::Down))
             my_spaceship->commandMainScreenSetting(MSS_Back);
-        if (InputHandler::keyboardIsReleased(sf::Keyboard::Tab))
+        if (InputHandler::keyboardIsReleased(sf::Keyboard::Tab) && gameGlobalInfo->allow_main_screen_tactical_radar)
             my_spaceship->commandMainScreenSetting(MSS_Tactical);
-        if (InputHandler::keyboardIsReleased(sf::Keyboard::Q))
+        if (InputHandler::keyboardIsReleased(sf::Keyboard::Q) && gameGlobalInfo->allow_main_screen_long_range_radar)
             my_spaceship->commandMainScreenSetting(MSS_LongRange);
         
         camera_yaw = my_spaceship->getRotation();

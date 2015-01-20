@@ -40,6 +40,8 @@ public:
     float long_range_radar_range;
     bool use_beam_shield_frequencies;
     bool use_system_damage;
+    bool allow_main_screen_tactical_radar;
+    bool allow_main_screen_long_range_radar;
     
     GameGlobalInfo();
 

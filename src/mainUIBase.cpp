@@ -176,18 +176,31 @@ void MainUIBase::update(float delta)
 void MainUIBase::mainScreenSelectGUI()
 {
     float x = getWindowSize().x - 200;
-    if (button(sf::FloatRect(x, 40, 200, 40), "Front", 28))
+    float y = 40;
+    if (button(sf::FloatRect(x, y, 200, 40), "Front", 28))
         my_spaceship->commandMainScreenSetting(MSS_Front);
-    if (button(sf::FloatRect(x, 80, 200, 40), "Back", 28))
+    y += 40;
+    if (button(sf::FloatRect(x, y, 200, 40), "Back", 28))
         my_spaceship->commandMainScreenSetting(MSS_Back);
-    if (button(sf::FloatRect(x, 120, 200, 40), "Left", 28))
+    y += 40;
+    if (button(sf::FloatRect(x, y, 200, 40), "Left", 28))
         my_spaceship->commandMainScreenSetting(MSS_Left);
-    if (button(sf::FloatRect(x, 160, 200, 40), "Right", 28))
+    y += 40;
+    if (button(sf::FloatRect(x, y, 200, 40), "Right", 28))
         my_spaceship->commandMainScreenSetting(MSS_Right);
-    if (button(sf::FloatRect(x, 200, 200, 40), "Tactical", 28))
-        my_spaceship->commandMainScreenSetting(MSS_Tactical);
-    if (button(sf::FloatRect(x, 240, 200, 40), "Long-Range", 28))
-        my_spaceship->commandMainScreenSetting(MSS_LongRange);
+    y += 40;
+    if (gameGlobalInfo->allow_main_screen_tactical_radar)
+    {
+        if (button(sf::FloatRect(x, y, 200, 40), "Tactical", 28))
+            my_spaceship->commandMainScreenSetting(MSS_Tactical);
+        y += 40;
+    }
+    if (gameGlobalInfo->allow_main_screen_long_range_radar)
+    {
+        if (button(sf::FloatRect(x, y, 200, 40), "Long-Range", 28))
+            my_spaceship->commandMainScreenSetting(MSS_LongRange);
+        y += 40;
+    }
 }
 
 void MainUIBase::selfDestructGUI()
