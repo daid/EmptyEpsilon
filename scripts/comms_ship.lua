@@ -1,3 +1,6 @@
+-- Name: Basic ship comms
+-- Description: Simple ship comms that allows setting orders if friendly. Default script for any cpuShip.
+
 function mainMenu()
 	if player:isFriendly(comms_target) then
 		setCommsMessage("Sir, how can we assist?");

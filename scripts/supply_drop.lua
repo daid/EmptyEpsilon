@@ -1,5 +1,5 @@
 function init()
-	my_ship = CpuShip():setCommsScript("supply_drop_comms.lua"):setFactionId(faction_id):setPosition(position_x, position_y):setShipTemplate("Tug"):setScanned(true):orderFlyTowardsBlind(target_x, target_y)
+	my_ship = CpuShip():setCommsScript("comms_supply_drop.lua"):setFactionId(faction_id):setPosition(position_x, position_y):setShipTemplate("Tug"):setScanned(true):orderFlyTowardsBlind(target_x, target_y)
 	state = 0
 end
 
