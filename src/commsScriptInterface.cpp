@@ -37,13 +37,8 @@ bool CommsScriptInterface::openCommChannel(P<PlayerSpaceship> ship, P<SpaceObjec
     if (scriptObject)
         scriptObject->destroy();
     scriptObject = new ScriptObject();
-    scriptObject->registerObject(ship, "PlayerSpaceship", "player");
-    if (P<CpuShip>(target))
-        scriptObject->registerObject(target, "CpuShip", "comms_target");
-    else if (P<PlayerSpaceship>(target))
-        scriptObject->registerObject(target, "PlayerSpaceship", "comms_target");
-    else
-        scriptObject->registerObject(target, "SpaceObject", "comms_target");
+    scriptObject->registerObject(ship, "player");
+    scriptObject->registerObject(target, "comms_target");
     has_message = false;
     scriptObject->run(script_name);
     comms_script_interface = NULL;
