@@ -18,6 +18,7 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isFriendly);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getCallSign);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, areEnemiesInRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getObjectsInRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getReputationPoints);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, takeReputationPoints);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, addReputationPoints);
@@ -80,14 +81,26 @@ bool SpaceObject::areEnemiesInRange(float range)
         P<SpaceObject> obj = c;
         if (obj && isEnemy(obj))
         {
-            float dist = sf::length(getPosition() - obj->getPosition()) - obj->getRadius();
-            if (dist < range)
-            {
+            if (getPosition() - obj->getPosition() < range + obj->getRadius())
                 return true;
-            }
         }
     }
     return false;
+}
+
+PVector<SpaceObject> SpaceObject::getObjectsInRange(float range)
+{
+    PVector<SpaceObject> ret;
+    PVector<Collisionable> hitList = CollisionManager::queryArea(getPosition() - sf::Vector2f(range, range), getPosition() + sf::Vector2f(range, range));
+    foreach(Collisionable, c, hitList)
+    {
+        P<SpaceObject> obj = c;
+        if (obj && getPosition() - obj->getPosition() < range + obj->getRadius())
+        {
+            ret.push_back(obj);
+        }
+    }
+    return ret;
 }
 
 int SpaceObject::getReputationPoints()

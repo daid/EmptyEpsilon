@@ -23,6 +23,15 @@ function mainMenu()
 			comms_target:orderDefendTarget(player)
 			addCommsReply("Back", mainMenu)
 		end)
+		for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
+			if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+				addCommsReply("Dock at " .. obj:getCallSign(), function()
+					setCommsMessage("Docking at " .. obj:getCallSign());
+					comms_target:orderDock(obj)
+					addCommsReply("Back", mainMenu)
+				end)
+			end
+		end
 		return true
 	end
 	if player:isEnemy(comms_target) then
