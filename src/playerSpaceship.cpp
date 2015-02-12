@@ -122,9 +122,12 @@ PlayerSpaceship::PlayerSpaceship()
         }
     }
 
-    if (gameGlobalInfo->insertPlayerShip(this) < 0)
+    if (game_server)
     {
-        destroy();
+        if (gameGlobalInfo->insertPlayerShip(this) < 0)
+        {
+            destroy();
+        }
     }
 }
 
