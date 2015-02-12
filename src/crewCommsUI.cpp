@@ -312,7 +312,7 @@ void CrewCommsUI::drawCommsChannel()
                 {
                     my_spaceship->commandSendCommPlayer(comms_player_message);
                     comms_player_message = "";
-                }else if (keyboard_entry == "\r")
+                }else if (keyboard_entry == "\b")
                 {
                     if (comms_player_message.length() > 0)
                         comms_player_message = comms_player_message.substr(0, -1);;

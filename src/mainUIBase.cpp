@@ -42,7 +42,7 @@ void MainUIBase::onGui()
 
     if (game_server)
     {
-        if (gameGlobalInfo->getVictoryFactionId() < 0)
+        if (gameGlobalInfo->getVictoryFactionId() < 0 && isActive())
         {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
                 engine->setGameSpeed(1.0);

@@ -216,13 +216,13 @@ void GameMasterUI::onGui()
         window.draw(objectSprite);
     }
 
-    if (InputHandler::keyboardIsPressed(sf::Keyboard::Delete))
+    if (InputHandler::keyboardIsPressed(sf::Keyboard::Delete) && isActive())
     {
         foreach(SpaceObject, obj, selection)
             obj->destroy();
         selection.clear();
     }
-    if (InputHandler::keyboardIsPressed(sf::Keyboard::Space))
+    if (InputHandler::keyboardIsPressed(sf::Keyboard::Space) && isActive())
     {
         if (mouse_mode == MM_None)
             mouse_mode = MM_Drag;
