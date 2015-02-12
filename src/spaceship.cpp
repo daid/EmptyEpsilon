@@ -407,6 +407,7 @@ void SpaceShip::update(float delta)
             }
         }
     }else{
+        currentWarp = 0.0;
         if (impulseRequest > 1.0)
             impulseRequest = 1.0;
         if (impulseRequest < -1.0)
