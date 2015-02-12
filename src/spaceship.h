@@ -166,6 +166,13 @@ public:
     int getWeaponStorage(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage[weapon]; }
     int getWeaponStorageMax(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage_max[weapon]; }
     void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage[weapon] = amount; }
+    float getHull() { return hull_strength; }
+    float getHullMax() { return hull_max; }
+    float getFrontShield() { return front_shield; }
+    float getFrontShieldMax() { return front_shield_max; }
+    float getRearShield() { return rear_shield; }
+    float getRearShieldMax() { return rear_shield_max; }
+    bool getShieldsActive() { return shields_active; }
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);
