@@ -11,7 +11,6 @@ function mainMenu()
 		if not player:isDocked(comms_target) then
 			setCommsMessage("Good day officer,\nIf you need supplies please dock with us first.");
 			addCommsReply("Can you send a supply drop? (100rep)", function()
-				--setCommsMessage("Sorry sir, we do not have spare supply ships available right now.");
 				setCommsMessage("Where do we need to drop off your supplies?");
 				for n=1,player:getWaypointCount() do
 					addCommsReply("WP" .. n, function()
@@ -32,7 +31,6 @@ function mainMenu()
 				addCommsReply("Back", mainMenu)
 			end)
 			addCommsReply("Please send backup! (150rep)", function()
-				--setCommsMessage("We cannot spare any ships for you right now.");
 				setCommsMessage("Where does the backup needs to go?");
 				for n=1,player:getWaypointCount() do
 					addCommsReply("WP" .. n, function()
