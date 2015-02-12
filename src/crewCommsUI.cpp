@@ -54,7 +54,7 @@ void CrewCommsUI::drawCommsRadar()
     {
         foreach(SpaceObject, friendly, friendly_objects)
         {
-            if (sf::length(friendly->getPosition() - obj->getPosition()) < 5000.0f)
+            if ((friendly->getPosition() - obj->getPosition()) < 5000.0f + obj->getRadius())
             {
                 visible_objects.push_back(obj);
                 break;
@@ -273,10 +273,13 @@ void CrewCommsUI::drawCommsChannel()
             unsigned int cnt = std::min(comm_reply_per_page, int(my_spaceship->comms_reply_message.size() - comms_reply_view_offset));
             for(unsigned int n=0; n<cnt; n++)
             {
-                if (button(sf::FloatRect(50, y, 600, 50), my_spaceship->comms_reply_message[n + comms_reply_view_offset]))
+                if (n + comms_reply_view_offset < my_spaceship->comms_reply_message.size()) //Extra check, as the my_spaceship->commandSendComm can modify the comms_reply_message list when the relay station is ran on the server.
                 {
-                    my_spaceship->commandSendComm(n + comms_reply_view_offset);
-                    comms_reply_view_offset = 0;
+                    if (button(sf::FloatRect(50, y, 600, 50), my_spaceship->comms_reply_message[n + comms_reply_view_offset]))
+                    {
+                        my_spaceship->commandSendComm(n + comms_reply_view_offset);
+                        comms_reply_view_offset = 0;
+                    }
                 }
                 y += 50;
             }
