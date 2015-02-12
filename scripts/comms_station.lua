@@ -13,7 +13,7 @@ function mainMenu()
 			addCommsReply("Can you send a supply drop? (100rep)", function()
 				--setCommsMessage("Sorry sir, we do not have spare supply ships available right now.");
 				setCommsMessage("Where do we need to drop off your supplies?");
-				for n=0,player:getWaypointCount()-1 do
+				for n=1,player:getWaypointCount() do
 					addCommsReply("WP" .. n, function()
 						if player:takeReputationPoints(100) then
 							local position_x, position_y = comms_target:getPosition()
@@ -31,12 +31,12 @@ function mainMenu()
 				end
 				addCommsReply("Back", mainMenu)
 			end)
-			addCommsReply("Please send backup! (75rep)", function()
+			addCommsReply("Please send backup! (150rep)", function()
 				--setCommsMessage("We cannot spare any ships for you right now.");
 				setCommsMessage("Where does the backup needs to go?");
 				for n=1,player:getWaypointCount() do
 					addCommsReply("WP" .. n, function()
-						if player:takeReputationPoints(100) then
+						if player:takeReputationPoints(150) then
 							ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setShipTemplate("Fighter"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
 							setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n);
 						else
