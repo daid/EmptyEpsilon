@@ -26,7 +26,7 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
 
 PVector<SpaceObject> space_object_list;
 
-SpaceObject::SpaceObject(float collision_range, string multiplayer_name)
+SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float multiplayer_significant_range)
 : Collisionable(collision_range), MultiplayerObject(multiplayer_name)
 {
     object_radius = collision_range;
@@ -34,7 +34,7 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name)
     faction_id = 0;
 
     registerMemberReplication(&faction_id);
-    registerCollisionableReplication();
+    registerCollisionableReplication(multiplayer_significant_range);
 }
 
 void SpaceObject::draw3D()

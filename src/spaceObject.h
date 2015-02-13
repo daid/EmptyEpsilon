@@ -34,7 +34,7 @@ class SpaceObject : public Collisionable, public MultiplayerObject
 public:
     uint8_t faction_id;
     string comms_script_name;
-    SpaceObject(float collisionRange, string multiplayerName);
+    SpaceObject(float collisionRange, string multiplayerName, float multiplayer_significant_range=-1);
 
     float getRadius() { return object_radius; }
     void setRadius(float radius) { object_radius = radius; setCollisionRadius(radius); }

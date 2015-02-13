@@ -130,7 +130,7 @@ public:
     P<SpaceObject> docking_target; //Server only
     sf::Vector2f docking_offset; //Server only
 
-    SpaceShip(string multiplayerClassName);
+    SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
 
     virtual void draw3D();
     virtual void draw3DTransparent();

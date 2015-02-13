@@ -57,7 +57,7 @@ static const int16_t CMD_COMBAT_MANEUVER = 0x001F;
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
 PlayerSpaceship::PlayerSpaceship()
-: SpaceShip("PlayerSpaceship")
+: SpaceShip("PlayerSpaceship", 5000)
 {
     energy_level = 1000;
     main_screen_setting = MSS_Front;
