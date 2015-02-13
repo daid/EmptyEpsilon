@@ -36,7 +36,7 @@ void MainMenu::onGui()
         new OptionsMenu();
         destroy();
     }
-    if (button(sf::FloatRect(50, 800, 300, 50), "Quit"))
+    if (button(sf::FloatRect(50, 800, 300, 50), "Quit") || InputHandler::keyboardIsPressed(sf::Keyboard::Escape))
     {
         engine->shutdown();
     }
@@ -82,7 +82,7 @@ void OptionsMenu::onGui()
     text(sf::FloatRect(50, 220, 300, 50), "Music Volume", AlignCenter);
     soundManager.setMusicVolume(hslider(sf::FloatRect(50, 270, 300, 50), soundManager.getMusicVolume(), 0, 100, 50.0));
     
-    if (button(sf::FloatRect(50, 800, 300, 50), "Back"))
+    if (button(sf::FloatRect(50, 800, 300, 50), "Back") || InputHandler::keyboardIsPressed(sf::Keyboard::Escape))
     {
         destroy();
         returnToMainMenu();
@@ -110,7 +110,7 @@ void ServerBrowserMenu::onGui()
             selectionIndex = n;
     }
 
-    if (button(sf::FloatRect(50, 800, 300, 50), "Back"))
+    if (button(sf::FloatRect(50, 800, 300, 50), "Back") || InputHandler::keyboardIsPressed(sf::Keyboard::Escape))
     {
         destroy();
         returnToMainMenu();

@@ -34,19 +34,22 @@ void MainUIBase::onGui()
         return;
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) || sf::Keyboard::isKeyPressed(sf::Keyboard::Home))
+    if (isActive())
     {
-        destroy();
-        new ShipSelectionScreen();
+        if (InputHandler::keyboardIsPressed(sf::Keyboard::Escape) || InputHandler::keyboardIsPressed(sf::Keyboard::Home))
+        {
+            destroy();
+            new ShipSelectionScreen();
+        }
     }
 
     if (game_server)
     {
         if (gameGlobalInfo->getVictoryFactionId() < 0 && isActive())
         {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+            if (InputHandler::keyboardIsPressed(sf::Keyboard::Space))
                 engine->setGameSpeed(1.0);
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
+            if (InputHandler::keyboardIsPressed(sf::Keyboard::P))
                 engine->setGameSpeed(0.0);
         }
 #ifdef DEBUG
