@@ -442,10 +442,10 @@ void SpaceShip::update(float delta)
             setVelocity(getVelocity() + sf::vector2FromAngle(getRotation()) * impulseMaxSpeed * getSystemEffectiveness(SYS_Impulse) * 10.0f);
             break;
         case CM_StrafeLeft:
-            setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() - 90) * impulseMaxSpeed * getSystemEffectiveness(SYS_Impulse) * 7.0f);
+            setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() - 90) * impulseMaxSpeed * getSystemEffectiveness(SYS_Impulse) * 5.0f);
             break;
         case CM_StrafeRight:
-            setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() + 90) * impulseMaxSpeed * getSystemEffectiveness(SYS_Impulse) * 7.0f);
+            setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() + 90) * impulseMaxSpeed * getSystemEffectiveness(SYS_Impulse) * 5.0f);
             break;
         case CM_Turn:
             setAngularVelocity(180.0 / 3.0);
