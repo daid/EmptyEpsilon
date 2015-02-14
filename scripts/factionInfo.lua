@@ -1,36 +1,33 @@
 neutral = FactionInfo():setName("Independent")
 neutral:setGMColor(128, 128, 128)
-neutral:setDescription([[The Independent are those with no strong affiliation for any of the other factions.
-
-Despite being seen as a faction, they are not truely one. Most traders consider themselves independent, but certain voices have started to speak up about creating a merchant faction.]])
+neutral:setDescription([[
+The Independent are those with no strong affiliation for any of the other factions.Despite being seen as a faction, they are not truely one. Most traders consider themselves independent, but certain voices have started to speak up about creating a merchant faction.]])
 
 human = FactionInfo():setName("Human Navy")
 human:setGMColor(255, 255, 255)
 human:setDescription([[The remenants of the human navy.
 
-While all other races where driven to the stars out of greed or scientific research, the humans where the only race to start with galaxic exploration because their home world could no longer sustain their population. They are seen as a virus or plague by some other races due to the rate at which they can breed and spread.]])
+While all other races where driven to the stars out of greed or scientific research, the humans where the only race to start with galaxic exploration because their home world could no longer sustain their population. They are seen as a virus or plague by some other races due to the rate at which they can breed and spread. Only the human navy is found out in space, due to regulation of spaceships. This has however, not completely kept other humans from spacefaring outside of the navy. Quite a few humans sign up on (alien) trader vessels or pirate ships.]])
 
 kraylor = FactionInfo():setName("Kraylor")
 kraylor:setGMColor(255, 0, 0)
 kraylor:setEnemy(human)
-kraylor:setDescription([[The reptile like Kraylor are a race of warriors.
+kraylor:setDescription([[The reptile like Kraylor are a race of warriors with a strong religious dogma. 
 
-As soon as they where space bound, the Kraylor set out to clean other planets from infidels. Their hierarchy is build on strength, anything you can kill is yours to kill. Anything you can lift without someone stopping you is yours. They only submit to something stronger.
+As soon as the Kraylor obtained reliable space flight, they imediately set out to  conquer and subjugate unbelievers. Their hierarcy is solely based on physical might. Anything you can kill is yours to kill. Anything you can take is yours. 
 
-They see humans as weak creatures, as they die in minutes when exposed to space. While Kraylor can live for weeks without air, food or even gravity. Because of this Kraylor ships do not contain escape pods, as they just jump out into space.]])
+They see humans as weak creatures, as they die in minutes when exposed to space. While Kraylor can live for weeks without air, food or even gravity. Because of this, and the fact that it as seen as a 'weak way out' Kraylor ships do not contain escape pods.]])
 
 arlenians = FactionInfo():setName("Arlenians")
 arlenians:setGMColor(255, 128, 0)
 arlenians:setEnemy(kraylor)
-arlenians:setDescription([[Alerians have evolved long ago to avoid death. And where the first race to ever roam the stars.
-They are seen as large blobs of meat, but have strong telepatic powers. However, they are very peaceful as they see little value in material posession.
+arlenians:setDescription([[Alerians have long ago made the step toward being an energy based life form. They have used their considerable technological advancement to 'shed' their physical forms. They are seen as the first race to explore the galaxy.
+Their energy forms also give them acces to rather strong telepathic power. Despite all these advantages, they are very peaceful as they see little value in material posession.
 
-Long ago Arlenians explored most of the galaxy already. But they grew borred and lonely alogn the stars. So they set out to give their anti-gravity technology to other races. All other races space based technology is based on Arlenian anti-gravity technology. The Arlenians are always exporing to find new races to add to the galaxtic playground.
-
-Now they explore the galaxy to observe other races progress. Like humans watching an ant-farm.
+ For some unknown reason, they started to give their anti-grav technology to other races, which led to almost all technology from the star faring races being based of arlenian technology. Foul tongues claim that the arlenians see the other races as playthings to add to their galactic playground, but most are more than happy to accept their technology, hoping it wil give them an advantage over the others.
 
 Destroying an Arlenian ship does not actually kill the Arlenian, it just phases the creature out of existence at that specific region and time of space.
-Still, the Kraylor are set and bound on their destruction. As they see Arlenians as weak and powerless.]])
+Still, the Kraylor are set and bound on their destruction, As they see Arlenians as weak and powerless.]])
 
 exuari = FactionInfo():setName("Exuari")
 exuari:setGMColor(255, 0, 128)
@@ -38,7 +35,7 @@ exuari:setEnemy(neutral)
 exuari:setEnemy(human)
 exuari:setEnemy(kraylor)
 exuari:setEnemy(arlenians)
-exuari:setDescription([[Description: A race of predatory amphibians with long noses. They once had an empire that stretched half-way across the galaxy, but their territory is now limited to a handful of star systems. For some strange reason, they find death to be outrageously funny. Several of their most famous comedians have died on stage.
+exuari:setDescription([[ A race of predatory amphibians with long noses. They once had an empire that stretched half-way across the galaxy, but their territory is now limited to a handful of star systems. For some strange reason, they find death to be outrageously funny. Several of their most famous comedians have died on stage.
 
 They found out that death of other races is a better way to have fun then letting heir own die, and because of that attack everything not Exauri on sight.]])
 
