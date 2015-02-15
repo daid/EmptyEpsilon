@@ -11,7 +11,7 @@ class SpaceStation : public SpaceObject, public Updatable
     float shieldHitEffect;
 
     string templateName;
-    P<ShipTemplate> shipTemplate;   //Space stations use a shipTemplate to get hull/shield and graphical information.
+    P<ShipTemplate> ship_template;   //Space stations use a shipTemplate to get hull/shield and graphical information.
 public:
     float shields, shields_max;
     float hull_strength, hull_max;

@@ -1,5 +1,5 @@
 --[[ Stations --]]
-template = ShipTemplate():setName("Small Station"):setMesh("space_station_4.model", "space_station_4_color.jpg", "space_station_4_specular.jpg", "space_station_4_illumination.jpg"):setScale(10)
+template = ShipTemplate():setName("Small Station"):setMesh("space_station_4.model", "space_station_4_color.jpg", "space_station_4_specular.jpg", "space_station_4_illumination.jpg"):setScale(10):setRadius(300)
 template:setCollisionBox(400, 400)
 template:setHull(200)
 template:setShields(400, 0)

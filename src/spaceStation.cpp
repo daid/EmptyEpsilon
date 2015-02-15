@@ -19,7 +19,6 @@ REGISTER_MULTIPLAYER_CLASS(SpaceStation, "SpaceStation");
 SpaceStation::SpaceStation()
 : SpaceObject(300, "SpaceStation")
 {
-    setCollisionBox(sf::Vector2f(400, 400));
     setCollisionPhysics(true, true);
     
     shields = shields_max = 400;
@@ -40,15 +39,15 @@ SpaceStation::SpaceStation()
 
 void SpaceStation::draw3D()
 {
-    if (!shipTemplate) return;
+    if (!ship_template) return;
 
     glPushMatrix();
-    glScalef(shipTemplate->scale, shipTemplate->scale, shipTemplate->scale);
-    objectShader.setParameter("baseMap", *textureManager.getTexture(shipTemplate->colorTexture));
-    objectShader.setParameter("illuminationMap", *textureManager.getTexture(shipTemplate->illuminationTexture));
-    objectShader.setParameter("specularMap", *textureManager.getTexture(shipTemplate->specularTexture));
+    glScalef(ship_template->scale, ship_template->scale, ship_template->scale);
+    objectShader.setParameter("baseMap", *textureManager.getTexture(ship_template->colorTexture));
+    objectShader.setParameter("illuminationMap", *textureManager.getTexture(ship_template->illuminationTexture));
+    objectShader.setParameter("specularMap", *textureManager.getTexture(ship_template->specularTexture));
     sf::Shader::bind(&objectShader);
-    Mesh* m = Mesh::getMesh(shipTemplate->model);
+    Mesh* m = Mesh::getMesh(ship_template->model);
     m->render();
     glPopMatrix();
 }
@@ -141,13 +140,17 @@ void SpaceStation::takeDamage(float damageAmount, DamageInfo& info)
 void SpaceStation::setTemplate(string templateName)
 {
     this->templateName = templateName;
-    shipTemplate = ShipTemplate::getTemplate(templateName);
-    if (!shipTemplate)
+    ship_template = ShipTemplate::getTemplate(templateName);
+    if (!ship_template)
     {
         printf("Failed to find template for station: %s\n", templateName.c_str());
         return;
     }
     
-    hull_strength = hull_max = shipTemplate->hull;
-    shields = shields_max = shipTemplate->frontShields;
+    hull_strength = hull_max = ship_template->hull;
+    shields = shields_max = ship_template->frontShields;
+
+    setRadius(ship_template->radius);
+    if (ship_template->collision_box.x > 0 && ship_template->collision_box.y > 0)
+        setCollisionBox(ship_template->collision_box);
 }
