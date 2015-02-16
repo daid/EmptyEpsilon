@@ -5,6 +5,7 @@
 #include "factionInfo.h"
 #include "spaceObject.h"
 #include "packResourceProvider.h"
+#include "scienceDatabase.h"
 #include "main.h"
 
 #ifdef __APPLE__
@@ -157,6 +158,12 @@ int main(int argc, char** argv)
     P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");
     if (factionInfoScript)
         factionInfoScript->destroy();
+    
+    fillDefaultDatabaseData();
+    
+    P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
+    if (scienceInfoScript)
+        scienceInfoScript->destroy();
 
     returnToMainMenu();
     
