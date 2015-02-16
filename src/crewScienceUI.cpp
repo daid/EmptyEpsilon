@@ -7,6 +7,7 @@ CrewScienceUI::CrewScienceUI()
     science_show_radar = true;
     science_database_type = SDT_None;
     science_sub_selection = -1;
+    science_description_line_nr = 0;
 }
 
 void CrewScienceUI::onCrewUI()
@@ -195,7 +196,10 @@ void CrewScienceUI::onCrewUI()
             for(unsigned int n = 0; n < factionInfo.size(); n++)
             {
                 if (toggleButton(sf::FloatRect(240, 100 + n * 50, 250, 50), science_sub_selection == int(n), factionInfo[n]->name, 30))
+                {
                     science_sub_selection = n;
+                    science_description_line_nr = 0;
+                }
             }
             if (science_sub_selection > -1)
             {
@@ -215,9 +219,7 @@ void CrewScienceUI::onCrewUI()
                     y += 40;
                 }
 
-                textbox(sf::FloatRect(500, y, 500, 750), factionInfo[science_sub_selection]->description, AlignTopLeft, 20);
-                //float ret = vslider(sf::FloatRect(925, y, 60, 400), 0, 100, 0);
-
+                science_description_line_nr = scrolltextbox(sf::FloatRect(500, y, 600, 550), factionInfo[science_sub_selection]->description, science_description_line_nr, AlignTopLeft, 20);
             }
             break;
         case SDT_Ships:

@@ -275,37 +275,16 @@ float GUI::vslider(sf::FloatRect rect, float value, float minValue, float maxVal
 
 int GUI::selector(sf::FloatRect rect, string textValue, float textSize)
 {
+    int ret = 0;
+    
     draw9Cut(rect, "border_background", sf::Color::White);
     text(rect, textValue, AlignCenter, textSize, sf::Color::White);
     
-    sf::Sprite arrow;
-    textureManager.setTexture(arrow, "gui_arrow.png");
-    arrow.setPosition(rect.left + rect.height / 2.0, rect.top + rect.height / 2.0);
-    float f = rect.height / float(arrow.getTextureRect().height);
-    arrow.setScale(f, f);
-    if (sf::FloatRect(rect.left, rect.top, rect.height, rect.height).contains(mousePosition))
-        arrow.setColor(sf::Color(128, 128, 128, 255));
-    renderTarget->draw(arrow);
-    arrow.setPosition(rect.left + rect.width - rect.height / 2.0, rect.top + rect.height / 2.0);
-    arrow.setRotation(180);
-    if (sf::FloatRect(rect.left + rect.width - rect.height, rect.top, rect.height, rect.height).contains(mousePosition))
-        arrow.setColor(sf::Color(128, 128, 128, 255));
-    else
-        arrow.setColor(sf::Color::White);
-    renderTarget->draw(arrow);
-
-    if (sf::FloatRect(rect.left, rect.top, rect.height, rect.height).contains(mousePosition) && mouseClick)
-    {
-        soundManager.playSound("button.wav");
-        return -1;
-    }
-
-    if (sf::FloatRect(rect.left + rect.width - rect.height, rect.top, rect.height, rect.height).contains(mousePosition) && mouseClick)
-    {
-        soundManager.playSound("button.wav");
-        return 1;
-    }
-    return 0;
+    if (drawArrow(sf::FloatRect(rect.left, rect.top, rect.height, rect.height), false, 0))
+        ret = -1;
+    if (drawArrow(sf::FloatRect(rect.left + rect.width - rect.height, rect.top, rect.height, rect.height), false, 180))
+        ret = 1;
+    return ret;
 }
 
 void GUI::disabledSelector(sf::FloatRect rect, string textValue, float textSize)
@@ -313,17 +292,8 @@ void GUI::disabledSelector(sf::FloatRect rect, string textValue, float textSize)
     draw9Cut(rect, "border_background", sf::Color::White);
     text(rect, textValue, AlignCenter, textSize, sf::Color(128, 128, 128));
     
-    sf::Sprite arrow;
-    textureManager.setTexture(arrow, "gui_arrow.png");
-    arrow.setPosition(rect.left + rect.height / 2.0, rect.top + rect.height / 2.0);
-    float f = rect.height / float(arrow.getTextureRect().height);
-    arrow.setScale(f, f);
-    arrow.setColor(sf::Color(128, 128, 128, 255));
-    renderTarget->draw(arrow);
-    arrow.setPosition(rect.left + rect.width - rect.height / 2.0, rect.top + rect.height / 2.0);
-    arrow.setRotation(180);
-    arrow.setColor(sf::Color(128, 128, 128, 255));
-    renderTarget->draw(arrow);
+    drawArrow(sf::FloatRect(rect.left, rect.top, rect.height, rect.height), true, 0);
+    drawArrow(sf::FloatRect(rect.left + rect.width - rect.height, rect.top, rect.height, rect.height), true, 180);
 }
 
 void GUI::box(sf::FloatRect rect, sf::Color color)
@@ -379,6 +349,86 @@ void GUI::textboxWithBackground(sf::FloatRect rect, string text, EAlign align, f
 {
     draw9Cut(rect, "button_background", bg_color);
     textbox(rect, text, align, textSize, color);
+}
+
+int GUI::scrolltextbox(sf::FloatRect rect, string text, int start_line_nr, EAlign align, float textSize, sf::Color color)
+{
+    int line_count = 1;
+    {
+        float currentOffset = 0;
+        bool firstWord = true;
+        std::size_t wordBegining = 0;
+
+        for (std::size_t pos(0); pos < text.length(); ++pos)
+        {
+            char currentChar = text[pos];
+            if (currentChar == '\n')
+            {
+                currentOffset = 0;
+                firstWord = true;
+                line_count += 1;
+                continue;
+            } else if (currentChar == ' ')
+            {
+                wordBegining = pos;
+                firstWord = false;
+            }
+
+            sf::Glyph glyph = mainFont.getGlyph(currentChar, textSize, false);
+            currentOffset += glyph.advance;
+
+            if (!firstWord && currentOffset > rect.width - textSize * 2 - 50)
+            {
+                pos = wordBegining;
+                text[pos] = '\n';
+                firstWord = true;
+                currentOffset = 0;
+                line_count += 1;
+            }
+        }
+    }
+    
+    int start_pos = 0;
+    for(int n=0; n<start_line_nr; n++)
+    {
+        int next = text.find("\n", start_pos) + 1;
+        if (next > 0)
+            start_pos = next;
+    }
+    if (start_pos > 0)
+        text = text.substr(start_pos);
+    int max_lines = (rect.height - textSize * 2) / mainFont.getLineSpacing(textSize);
+    if (line_count - start_line_nr > max_lines)
+    {
+        int end_pos = 0;
+        for(int n=0; n<max_lines; n++)
+        {
+            int next = text.find("\n", end_pos) + 1;
+            if (next > 0)
+                end_pos = next;
+        }
+        if (end_pos > 0)
+            text = text.substr(0, end_pos);
+    }
+
+    box(rect);
+    GUI::text(sf::FloatRect(rect.left + textSize, rect.top + textSize, rect.width - textSize * 2 - 50, rect.height - textSize * 2), text, align, textSize, color);
+
+    //Side scrollbar
+    box(sf::FloatRect(rect.left + rect.width - 50, rect.top, 50, rect.height));
+    if (drawArrow(sf::FloatRect(rect.left + rect.width - 50, rect.top, 50, 50), false, 90))
+        start_line_nr -= 1;
+    if (drawArrow(sf::FloatRect(rect.left + rect.width - 50, rect.top + rect.height - 50, 50, 50), false, -90))
+        start_line_nr += 1;
+    if (start_line_nr >= line_count - max_lines)
+        start_line_nr = line_count - max_lines - 1;
+    if (start_line_nr < 0)
+        start_line_nr = 0;
+
+    float f = std::min(1.0f, float(max_lines) / float(line_count));
+    draw9Cut(sf::FloatRect(rect.left + rect.width - 50, rect.top + 50 + (rect.height - 100) * (1.0f - f) * float(start_line_nr) / float(line_count - max_lines - 1), 50, (rect.height - 100) * f), "button_background", sf::Color(255,255,255,255));
+
+    return start_line_nr;
 }
 
 string GUI::textEntry(sf::FloatRect rect, string value, float fontSize)
@@ -499,6 +549,25 @@ void GUI::draw9Cut(sf::FloatRect rect, string texture, sf::Color color, float wi
         sprite.setScale(scale, rect.height - cornerSizeR*2);
         renderTarget->draw(sprite);
     }
+}
+
+bool GUI::drawArrow(sf::FloatRect rect, bool disabled, float rotation)
+{
+    sf::Sprite arrow;
+    textureManager.setTexture(arrow, "gui_arrow.png");
+    arrow.setPosition(rect.left + rect.width / 2.0, rect.top + rect.height / 2.0);
+    float f = rect.height / float(arrow.getTextureRect().height);
+    arrow.setScale(f, f);
+    arrow.setRotation(rotation);
+    if (sf::FloatRect(rect.left, rect.top, rect.height, rect.height).contains(mousePosition) || disabled)
+        arrow.setColor(sf::Color(128, 128, 128, 255));
+    renderTarget->draw(arrow);
+    if (!disabled && sf::FloatRect(rect.left, rect.top, rect.height, rect.height).contains(mousePosition) && mouseClick)
+    {
+        soundManager.playSound("button.wav");
+        return true;
+    }
+    return false;
 }
 
 MouseRenderer::MouseRenderer()

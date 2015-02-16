@@ -46,6 +46,7 @@ public:
     static void boxWithBackground(sf::FloatRect rect, sf::Color color=sf::Color::White, sf::Color bg_color=sf::Color::Black);
     static void textbox(sf::FloatRect rect, string text, EAlign align = AlignTopLeft, float textSize = 30, sf::Color color=sf::Color::White);
     static void textboxWithBackground(sf::FloatRect rect, string text, EAlign align = AlignTopLeft, float textSize = 30, sf::Color color=sf::Color::White, sf::Color bg_color=sf::Color::Black);
+    static int scrolltextbox(sf::FloatRect rect, string text, int start_line_nr, EAlign align = AlignTopLeft, float textSize = 30, sf::Color color=sf::Color::White);
     static string textEntry(sf::FloatRect rect, string value, float fontSize = 30);
     static void keyValueDisplay(sf::FloatRect, float div_distance, string key, string value, float textSize = 30.0f);
 
@@ -54,6 +55,7 @@ public:
 
 private:
     static void draw9Cut(sf::FloatRect rect, string texture, sf::Color color=sf::Color::White, float width_factor = 1.0);
+    static bool drawArrow(sf::FloatRect rect, bool disabled=false, float rotation=0.0);
 };
 
 class MouseRenderer : public Renderable

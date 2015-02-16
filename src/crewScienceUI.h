@@ -18,6 +18,7 @@ class CrewScienceUI : public CrewUI
     bool science_show_radar;
     ScienceDatabaseType science_database_type;
     int science_sub_selection;
+    int science_description_line_nr;
 
 public:
     CrewScienceUI();
