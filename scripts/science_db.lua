@@ -6,16 +6,16 @@ weapons = ScienceDatabase():setName('Weapons')
 item = weapons:addEntry('Homing missile')
 item:addKeyValue('Range', '6km')
 item:addKeyValue('Damage', '30')
-item:setLongDescription([[The standard homing missile is the default weapon of choice for many ships]])
+item:setLongDescription([[This target seeking missile is the work horse of many ships. It's compact enought to be fitted on frigates and packs enough punch to be used on larger ships, albeit with more than a single missile tube.]])
 
 item = weapons:addEntry('Nuke')
 item:addKeyValue('Range', '4.8km')
 item:addKeyValue('Blast radius', '1km')
 item:addKeyValue('Damage at center', '160')
 item:addKeyValue('Damage at edge', '30')
-item:setLongDescription([[The heavy nuke is a fearsome weapon which is known to take out multiple ships in a single shot.
-Some captains question the use of these weapons, due to the ease of friendly-fire incidents.
-And unknown prolonged effect on the crew of using these weapons in space.]])
+item:setLongDescription([[The nuclear missile is the same as the homing missile, but with a greatly increased (nuklear) payload. It is capable of taking out multiple ships in a single shot.
+Some captains question the use of these weapons as they have lead to 'fragging' or un-intentional friendly fire. 
+The shielding of ships should protect the crew from any harmfull radiation, but seeing that these weapons are often used in the thick of battle, there is no way of knowing if the hull plating or shield will provide enough protection.]])
 
 item = weapons:addEntry('Mine')
 item:addKeyValue('Drop distance', '1.2km')
