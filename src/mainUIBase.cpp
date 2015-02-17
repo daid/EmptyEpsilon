@@ -446,7 +446,12 @@ void MainUIBase::drawRadarSweep(sf::Vector2f position, float range, float size, 
     {
         float length = size * 1.1;
         if (my_spaceship)
-            length = sf::length(Nebula::getFirstBlockedPosition(my_spaceship->getPosition(), my_spaceship->getPosition() + sf::vector2FromAngle(float(n) - 9.0f + angle) * range) - my_spaceship->getPosition()) / range * size;
+        {
+            length = sf::length(Nebula::getFirstBlockedPosition(my_spaceship->getPosition(), my_spaceship->getPosition() + sf::vector2FromAngle(float(n) - 9.0f + angle) * range) - my_spaceship->getPosition());
+            if (length < 5000.0f)
+                length = 5000.0f;
+            length = length / range * size;
+        }
         sweep[0].position = position;
         sweep[0].color = sf::Color(0, 255, 0, n * 5);
         sweep[1].position = position + sf::vector2FromAngle(float(n) - 10.0f + angle) * length;
