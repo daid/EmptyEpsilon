@@ -236,7 +236,7 @@ void GameMasterUI::onGui()
         P<SpaceShip> ship = selection[0];
         if (ship && ship->ship_template)
         {
-            text(sf::FloatRect(20, y, 100, 20), factionInfo[ship->faction_id]->name + " " + ship->ship_type_name, AlignLeft, 20);
+            text(sf::FloatRect(20, y, 100, 20), factionInfo[ship->getFactionId()]->name + " " + ship->ship_type_name, AlignLeft, 20);
             y += 20;
             text(sf::FloatRect(20, y, 100, 20), "Hull: " + string(ship->hull_strength), AlignLeft, 20);
             y += 20;
@@ -246,7 +246,7 @@ void GameMasterUI::onGui()
         P<SpaceStation> station = selection[0];
         if (station)
         {
-            text(sf::FloatRect(20, y, 100, 20), factionInfo[station->faction_id]->name, AlignLeft, 20);
+            text(sf::FloatRect(20, y, 100, 20), factionInfo[station->getFactionId()]->name, AlignLeft, 20);
             y += 20;
             text(sf::FloatRect(20, y, 100, 20), "Hull: " + string(station->hull_strength), AlignLeft, 20);
             y += 20;

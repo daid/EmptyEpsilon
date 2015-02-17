@@ -22,7 +22,7 @@ REGISTER_MULTIPLAYER_CLASS(CpuShip, "CpuShip");
 CpuShip::CpuShip()
 : SpaceShip("CpuShip")
 {
-    faction_id = 2;
+    setFactionId(2);
     orders = AI_Idle;
 
     setRotation(random(0, 360));

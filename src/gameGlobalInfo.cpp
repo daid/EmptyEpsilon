@@ -8,6 +8,7 @@ GameGlobalInfo::GameGlobalInfo()
 {
     assert(!gameGlobalInfo);
     
+    callsign_counter = 0;
     victory_faction = -1;
     gameGlobalInfo = this;
     for(int n=0; n<maxPlayerShips; n++)
@@ -91,6 +92,25 @@ void GameGlobalInfo::update(float delta)
     {
         global_message_timeout -= delta;
     }
+}
+
+string GameGlobalInfo::getNextShipCallsign()
+{
+    callsign_counter += 1;
+    switch(irandom(0, 9))
+    {
+    case 0: return "S" + string(callsign_counter);
+    case 1: return "NC" + string(callsign_counter);
+    case 2: return "CV" + string(callsign_counter);
+    case 3: return "SS" + string(callsign_counter);
+    case 4: return "VS" + string(callsign_counter);
+    case 5: return "BR" + string(callsign_counter);
+    case 6: return "CSS" + string(callsign_counter);
+    case 7: return "UTI" + string(callsign_counter);
+    case 8: return "VK" + string(callsign_counter);
+    case 9: return "CCN" + string(callsign_counter);
+    }
+    return "SS" + string(callsign_counter);
 }
 
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)

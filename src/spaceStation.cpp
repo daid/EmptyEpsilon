@@ -85,7 +85,7 @@ void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, 
         if (isFriendly(my_spaceship))
             objectSprite.setColor(sf::Color(128, 255, 128));
     }else{
-        objectSprite.setColor(factionInfo[faction_id]->gm_color);
+        objectSprite.setColor(factionInfo[getFactionId()]->gm_color);
     }
     window.draw(objectSprite);
 }

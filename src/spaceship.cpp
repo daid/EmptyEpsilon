@@ -68,6 +68,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     shield_frequency = irandom(0, max_frequency);
     docking_state = DS_NotDocking;
 
+    registerMemberReplication(&ship_callsign);
     registerMemberReplication(&targetRotation, 1.5);
     registerMemberReplication(&impulseRequest, 0.1);
     registerMemberReplication(&currentImpulse, 0.5);
@@ -140,6 +141,9 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         registerMemberReplication(&weapon_storage[n]);
         registerMemberReplication(&weapon_storage_max[n]);
     }
+
+    if (game_server)
+        ship_callsign = gameGlobalInfo->getNextShipCallsign();
 }
 
 void SpaceShip::setShipTemplate(string templateName)
@@ -296,7 +300,7 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
             objectSprite.setColor(sf::Color(192, 192, 192));
         }
     }else{
-        objectSprite.setColor(factionInfo[faction_id]->gm_color);
+        objectSprite.setColor(factionInfo[getFactionId()]->gm_color);
     }
     window.draw(objectSprite);
 }
@@ -643,7 +647,7 @@ void SpaceShip::fireTube(int tubeNr)
         {
             P<HomingMissile> missile = new HomingMissile();
             missile->owner = this;
-            missile->faction_id = faction_id;
+            missile->setFactionId(getFactionId());
             missile->target_id = targetId;
             missile->setPosition(fireLocation);
             missile->setRotation(getRotation());
@@ -653,7 +657,7 @@ void SpaceShip::fireTube(int tubeNr)
         {
             P<Nuke> missile = new Nuke();
             missile->owner = this;
-            missile->faction_id = faction_id;
+            missile->setFactionId(getFactionId());
             missile->target_id = targetId;
             missile->setPosition(fireLocation);
             missile->setRotation(getRotation());
@@ -662,7 +666,7 @@ void SpaceShip::fireTube(int tubeNr)
     case MW_Mine:
         {
             P<Mine> missile = new Mine();
-            missile->faction_id = faction_id;
+            missile->setFactionId(getFactionId());
             missile->setPosition(fireLocation);
             missile->setRotation(getRotation());
             missile->eject();
@@ -672,7 +676,7 @@ void SpaceShip::fireTube(int tubeNr)
         {
             P<EMPMissile> missile = new EMPMissile();
             missile->owner = this;
-            missile->faction_id = faction_id;
+            missile->setFactionId(getFactionId());
             missile->target_id = targetId;
             missile->setPosition(fireLocation);
             missile->setRotation(getRotation());
@@ -803,7 +807,7 @@ void SpaceShip::hullDamage(float damage_amount, DamageInfo& info)
 
         for(unsigned int n=0; n<factionInfo.size(); n++)
         {
-            if (factionInfo[n]->states[faction_id] == FVF_Enemy)
+            if (factionInfo[n]->states[getFactionId()] == FVF_Enemy)
                 gameGlobalInfo->reputation_points[n] += (hull_max + front_shield_max + rear_shield_max) * 0.1;
         }
         destroy();
@@ -859,31 +863,7 @@ void SpaceShip::activateCombatManeuver(ECombatManeuver maneuver)
 
 string SpaceShip::getCallSign()
 {
-    int32_t id = getMultiplayerId();
-    switch(id / 100)
-    {
-    case 0: return "S" + string(id % 100);
-    case 1: return "NC" + string(id % 100);
-    case 2: return "CV" + string(id % 100);
-    case 3: return "SS " + string(id % 100);
-    case 4: return "VS" + string(id % 100);
-    case 5: return "BR" + string(id % 100);
-    case 6: return "C-" + string(id % 100);
-    case 7: return "OV" + string(id % 100);
-    case 8: return "CCN" + string(id % 100);
-    case 9: return "CSS" + string(id % 100);
-    case 10: return "FMS" + string(id % 100);
-    case 11: return "PWB" + string(id % 100);
-    case 12: return "VK" + string(id % 100);
-    case 13: return "ECS" + string(id % 100);
-    case 14: return "UTI" + string(id % 100);
-    case 15: return "F" + string(id % 100);
-    case 16: return "Z-" + string(id % 100);
-    case 17: return "RMS" + string(id % 100);
-    case 18: return "ISS" + string(id % 100);
-    case 19: return "YLT" + string(id % 100);
-    }
-    return "X-" + string(id);
+    return ship_callsign;
 }
 
 string getMissileWeaponName(EMissileWeapons missile)

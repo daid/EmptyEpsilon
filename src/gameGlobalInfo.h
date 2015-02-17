@@ -30,6 +30,7 @@ public:
 private:
     int victory_faction;
     int32_t playerShipId[maxPlayerShips];
+    int callsign_counter;
 public:
     string global_message;
     float global_message_timeout;
@@ -55,6 +56,8 @@ public:
     int getVictoryFactionId() { return victory_faction; }
     
     virtual void update(float delta);
+    
+    string getNextShipCallsign();
 };
 
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive);

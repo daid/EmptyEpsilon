@@ -31,8 +31,8 @@ extern PVector<SpaceObject> space_object_list;
 class SpaceObject : public Collisionable, public MultiplayerObject
 {
     float object_radius;
-public:
     uint8_t faction_id;
+public:
     string comms_script_name;
     SpaceObject(float collisionRange, string multiplayerName, float multiplayer_significant_range=-1);
 

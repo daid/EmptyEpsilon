@@ -15,6 +15,8 @@ enum EFactionVsFactionState
 
 class FactionInfo : public PObject
 {
+private:
+    int callsign_counter;
 public:
     FactionInfo();
     
@@ -29,6 +31,8 @@ public:
     void setDescription(string description) { this->description = description; }
     void setEnemy(P<FactionInfo> other);
     void setFriendly(P<FactionInfo> other);
+    
+    void reset();
     
     static int findFactionId(string name);
 };

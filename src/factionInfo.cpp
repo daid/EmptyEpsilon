@@ -68,3 +68,7 @@ int FactionInfo::findFactionId(string name)
     printf("Failed to find faction: %s\n", name.c_str());
     return 0;
 }
+
+void FactionInfo::reset()
+{
+}

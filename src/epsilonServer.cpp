@@ -16,6 +16,8 @@ EpsilonServer::EpsilonServer()
     info->clientId = 0;
     my_player_info = info;
     engine->setGameSpeed(0.0);
+    for(unsigned int n=0; n<factionInfo.size(); n++)
+        factionInfo[n]->reset();
 
     soundManager.playMusic("music/Dream Raid Full Version (Mock Up).ogg");
 }

@@ -61,7 +61,6 @@ PlayerSpaceship::PlayerSpaceship()
 {
     energy_level = 1000;
     main_screen_setting = MSS_Front;
-    faction_id = 1;
     hull_damage_indicator = 0.0;
     warp_indicator = 0.0;
     scanned_by_player = SS_FullScan;
@@ -70,6 +69,8 @@ PlayerSpaceship::PlayerSpaceship()
     shield_calibration_delay = 0.0;
     auto_repair_enabled = false;
     activate_self_destruct = false;
+
+    setFactionId(1);
 
     updateMemberReplicationUpdateDelay(&targetRotation, 0.1);
     registerMemberReplication(&hull_damage_indicator, 0.5);

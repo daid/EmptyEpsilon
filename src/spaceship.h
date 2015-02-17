@@ -82,6 +82,7 @@ public:
     string templateName;
     string ship_type_name;
     P<ShipTemplate> ship_template;
+    string ship_callsign;
     float engine_emit_delay;
 
     ShipSystem systems[SYS_COUNT];
