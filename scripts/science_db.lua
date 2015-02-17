@@ -2,6 +2,13 @@
 	Everything in the science database files is just readable data for the science officer.
 	This data does not effect the game in any other way and just contributes to the lore.
 --]]
+space_objects = ScienceDatabase():setName('Natural occurences')
+item = space_objects:addEntry('Asteroid')
+item:setLongDescription([[Asteroids are minor planets, usually smaller than a few kilometers. The larger variants are sometimes refered to as planetoids. ]])
+
+item = space_objects:addEntry('Neblua')
+item:setLongDescription([[Neblua are the birthing place of new stars. These gas fields, usually created by the death of an old star, slowly from new stars due to the gravitational pull of the gas molecules. Due to the ever changing nature of gas nebulaes, most radar and scanning technolgy is unable to detect objects that lie within. Science officers are therefore advised to rely on visual observations.]])
+
 weapons = ScienceDatabase():setName('Weapons')
 item = weapons:addEntry('Homing missile')
 item:addKeyValue('Range', '6km')
