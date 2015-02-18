@@ -13,6 +13,9 @@ h1 {
 	border-right-style: none;
 	border-radius: 0px;
 }
+a {
+	outline: none;
+}
 #icons {
 	margin: 0;
 	padding: 0;
