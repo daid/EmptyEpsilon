@@ -18,6 +18,7 @@ float camera_pitch;
 sf::Shader objectShader;
 sf::Shader simpleObjectShader;
 sf::Shader basicShader;
+sf::Shader billboardShader;
 sf::Font mainFont;
 RenderLayer* backgroundLayer;
 RenderLayer* objectLayer;
@@ -149,6 +150,9 @@ int main(int argc, char** argv)
         vertexStream = getResourceStream("basicShader.vert");
         fragmentStream = getResourceStream("basicShader.frag");
         basicShader.loadFromStream(**vertexStream, **fragmentStream);
+        vertexStream = getResourceStream("billboardShader.vert");
+        fragmentStream = getResourceStream("billboardShader.frag");
+        billboardShader.loadFromStream(**vertexStream, **fragmentStream);
     }
 
     P<ScriptObject> shipTemplatesScript = new ScriptObject("shipTemplates.lua");

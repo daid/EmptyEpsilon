@@ -23,7 +23,7 @@ Nebula::Nebula()
     
     for(int n=0; n<cloud_count; n++)
     {
-        clouds[n].size = random(1024, 2048);
+        clouds[n].size = random(1024, 1024 * 4);
         clouds[n].texture = irandom(1, 3);
         clouds[n].offset = sf::vector2FromAngle(float(n * 360 / cloud_count)) * random(clouds[n].size / 2.0f, getRadius() - clouds[n].size);
     }
@@ -34,39 +34,31 @@ Nebula::Nebula()
 void Nebula::draw3DTransparent()
 {
     glRotatef(getRotation(), 0, 0, -1);
+    glTranslatef(-getPosition().x, -getPosition().y, 0);
     for(int n=0; n<cloud_count; n++)
     {
         NebulaCloud& cloud = clouds[n];
 
-        sf::Vector3f position = sf::Vector3f(getPosition().x, getPosition().y, 0);
-        sf::Vector3f offset = sf::Vector3f(cloud.offset.x, cloud.offset.y, 0);
+        sf::Vector3f position = sf::Vector3f(getPosition().x, getPosition().y, 0) + sf::Vector3f(cloud.offset.x, cloud.offset.y, 0);
         float size = cloud.size;
         
-        float distance = sf::length(camera_position - (position + offset));
+        float distance = sf::length(camera_position - position);
         float alpha = 1.0 - (distance / 10000.0f);
         if (alpha < 0.0)
             continue;
 
-        sf::Vector3f eyeNormal = camera_position - (position + offset);
-        sf::Vector3f side = sf::cross(eyeNormal, sf::Vector3f(0, 0, 1));
-        sf::Vector3f up = sf::cross(eyeNormal, side);
-        up = sf::normalize(up) * size;
-        side = sf::normalize(side) * size;
-
-        basicShader.setParameter("textureMap", *textureManager.getTexture("Nebula" + string(cloud.texture) + ".png"));
-        sf::Shader::bind(&basicShader);
-        
+        billboardShader.setParameter("textureMap", *textureManager.getTexture("Nebula" + string(cloud.texture) + ".png"));
+        sf::Shader::bind(&billboardShader);
         glBegin(GL_QUADS);
-        glColor4f(1, 1, 1, alpha * 0.8);
-        sf::Vector3f v;
+        glColor4f(alpha * 0.8, alpha * 0.8, alpha * 0.8, size);
         glTexCoord2f(0, 0);
-        v = offset - up - side; glVertex3f(v.x, v.y, v.z);
+        glVertex3f(position.x, position.y, position.z);
         glTexCoord2f(1, 0);
-        v = offset + up - side; glVertex3f(v.x, v.y, v.z);
+        glVertex3f(position.x, position.y, position.z);
         glTexCoord2f(1, 1);
-        v = offset + up + side; glVertex3f(v.x, v.y, v.z);
+        glVertex3f(position.x, position.y, position.z);
         glTexCoord2f(0, 1);
-        v = offset - up + side; glVertex3f(v.x, v.y, v.z);
+        glVertex3f(position.x, position.y, position.z);
         glEnd();
     }
 }

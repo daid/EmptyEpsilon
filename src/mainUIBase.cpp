@@ -629,6 +629,8 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
         soundManager.setListenerPosition(sf::Vector2f(camera_position.x, camera_position.y), camera_yaw);
     sf::RenderTarget& window = *getRenderTarget();
     window.pushGLStates();
+    
+    billboardShader.setParameter("camera_position", camera_position);
 
     float camera_fov = 60.0f;
     float sx = window.getSize().x * window.getView().getViewport().width / getWindowSize().x;

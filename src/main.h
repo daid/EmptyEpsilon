@@ -13,6 +13,7 @@ extern float camera_pitch;
 extern sf::Shader objectShader;
 extern sf::Shader simpleObjectShader;
 extern sf::Shader basicShader;
+extern sf::Shader billboardShader;
 extern sf::Font mainFont;
 extern RenderLayer* backgroundLayer;
 extern RenderLayer* objectLayer;

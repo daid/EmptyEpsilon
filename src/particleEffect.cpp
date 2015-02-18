@@ -7,8 +7,8 @@ std::vector<Particle> ParticleEngine::particles;
 
 void ParticleEngine::render()
 {
-    basicShader.setParameter("textureMap", *textureManager.getTexture("particle.png"));
-    sf::Shader::bind(&basicShader);
+    billboardShader.setParameter("textureMap", *textureManager.getTexture("particle.png"));
+    sf::Shader::bind(&billboardShader);
     glBegin(GL_QUADS);
     for(unsigned int n=0; n<particles.size(); n++)
     {
@@ -20,24 +20,18 @@ void ParticleEngine::render()
         sf::Vector3f color = Tween<sf::Vector3f>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.color, p.end.color);
         float size = Tween<float>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.size, p.end.size);
         
-        sf::Vector3f eyeNormal = sf::normalize(camera_position - position);
-        sf::Vector3f up = sf::cross(eyeNormal, sf::Vector3f(0, 0, 1));
-        sf::Vector3f side = sf::cross(eyeNormal, up);
-        up = up * size;
-        side = side * size;
-        
-        glColor3f(color.x, color.y, color.z);
-        sf::Vector3f v;
+        glColor4f(color.x, color.y, color.z, size);
         glTexCoord2f(0, 0);
-        v = position - up - side; glVertex3f(v.x, v.y, v.z);
+        glVertex3f(position.x, position.y, position.z);
         glTexCoord2f(1, 0);
-        v = position + up - side; glVertex3f(v.x, v.y, v.z);
+        glVertex3f(position.x, position.y, position.z);
         glTexCoord2f(1, 1);
-        v = position + up + side; glVertex3f(v.x, v.y, v.z);
+        glVertex3f(position.x, position.y, position.z);
         glTexCoord2f(0, 1);
-        v = position - up + side; glVertex3f(v.x, v.y, v.z);
+        glVertex3f(position.x, position.y, position.z);
     }
     glEnd();
+    sf::Shader::bind(NULL);
 }
 
 void ParticleEngine::update(float delta)
