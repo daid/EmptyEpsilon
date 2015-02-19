@@ -81,12 +81,13 @@ def compile(filename, system, for_target='Release'):
 		CC = 'C:/codeblocks/mingw/bin/mingw32-' + CC
 		CXX = 'C:/codeblocks/mingw/bin/mingw32-' + CXX
 
-	with open(".git/refs/heads/master", "r") as f:
-		ee_git_hash = f.read().strip()
-	with open("../SeriousProton/.git/refs/heads/master", "r") as f:
-		sp_git_hash = f.read().strip()
-	version = (int(ee_git_hash[0:8], 16) + int(sp_git_hash[0:8], 16)) & 0x7FFFFFFF
-	CFLAGS += '-DVERSION_NUMBER=%d' % (version)
+	if for_target == 'Release':
+		with open(".git/refs/heads/master", "r") as f:
+			ee_git_hash = f.read().strip()
+		with open("../SeriousProton/.git/refs/heads/master", "r") as f:
+			sp_git_hash = f.read().strip()
+		version = (int(ee_git_hash[0:8], 16) + int(sp_git_hash[0:8], 16)) & 0x7FFFFFFF
+		CFLAGS += '-DVERSION_NUMBER=%d' % (version)
 	
 	xml = ElementTree.parse(filename)
 	filenames = []
@@ -141,7 +142,7 @@ def compile(filename, system, for_target='Release'):
 			cc = CXX
 		cmd = '%s %s -o %s/%s -c %s' % (cc, CFLAGS, BUILD_DIR, obj_filename, filename)
 		print '[%d%%] %s' % (filenames.index(filename) * 100 / len(filenames), cmd)
-		if os.path.isfile('%s/%s' % (BUILD_DIR, obj_filename)):
+		if os.path.isfile('%s/%s' % (BUILD_DIR, obj_filename)) and for_target != 'Release':
 			source_modify_time = DependencyFinder(filename, include_search_paths).getModifyTime()
 			binary_modify_time = os.stat('%s/%s' % (BUILD_DIR, obj_filename)).st_mtime
 			if source_modify_time > binary_modify_time:
