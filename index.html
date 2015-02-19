@@ -2,14 +2,13 @@
 <html lang="us">
 <head>
 	<meta charset="utf-8">
-	<title>EmptyEpsilon - Multiplayer Space Simulator</title>
+	<title>EmptyEpsilon - Multiplayer Space Bridge Simulator</title>
 	<link href="jquery-ui.min.css" rel="stylesheet">
 	<link href="main.css" rel="stylesheet">
 </head>
 <body>
 
 <h1>EmptyEpsilon</h1>
-
 <div id="tabs">
 	<ul>
 		<li><a href="#tabs-info">Info</a></li>
@@ -31,6 +30,16 @@
 		So, all in all. Nice game. But we wrote our own due to lack of features.
 		<h2>Contact</h2>
 		The best place to talk about bridge simulation and EmptyEpsilon is the <a href="http://bridgesim.net/">The Starship Bridge Simulation Network</a>
+		
+		<h2>Donations</h2>
+		<p>EmptyEpsilon is a 100% free game. We made this because we wanted to play the game we envisioned for ourselves. The problem is, we are not artists. So we need to buy 3D models for the game.</p>
+		<p>Currently we are raising money to buy <a href="http://www.turbosquid.com/3d-models/4-space-station-max/679444">larger 3D station models</a></p>
+		<p><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+		<input type="hidden" name="cmd" value="_s-xclick">
+		<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----">
+		<input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+		<img alt="" border="0" src="https://www.paypalobjects.com/nl_NL/i/scr/pixel.gif" width="1" height="1">
+		</form></p>
 	</div>
 	<div id="tabs-media">
 		<p><img src="screenshots/mainscreen.png"></p>
@@ -81,17 +90,17 @@
 			</div>
 			<div id="running-tabs-limited">
 				<p>
-					TODO
+					TODO (You can run a limited setup with less computers, running multiple stations on a single computer)
 				</p>
 			</div>
 			<div id="running-tabs-auto">
 				<p>
-					TODO
+					TODO (You can make EmptyEpsilon auto connect to any available server on the network, and selecting a station instantly. Lowering setup time)
 				</p>
 			</div>
 			<div id="running-tabs-gm">
 				<p>
-					TODO
+					TODO (You have access to a GM screen on the server, which gives you a lot of control on the game, allowing tweaks while the game is playing, making for an more intresting game)
 				</p>
 			</div>
 		</div>
@@ -174,8 +183,14 @@
 		</div>
 	</div>
 	<div id="tabs-download">
-		Sorry, no downloads yet. The sourcecode is up on github at:<br/>
-		<a href="https://github.com/daid/EmptyEpsilon">https://github.com/daid/EmptyEpsilon</a><br/>
+		<h2>Download</h2>
+		<p>Downloads for Windows and Apple are available at: <a href="http://software.ultimaker.com/EmptyEpsilon/">[download list]</a></p>
+		<p>You need to use the same version for all users or else the game will not work correctly. Mixing different versions is not supported.</p>
+		<p>Storage for downloads provided by <a href="http://ultimaker.com/">Ultimaker</a>. Many thanks that they allow us to use their build and download servers. If you are concidering an 3D printer, buy from Ultimaker, they are nice people.</p>
+		<h2>Source</h2>
+		<p>The sourcecode is up on github at:</p>
+		<p><a href="https://github.com/daid/EmptyEpsilon">https://github.com/daid/EmptyEpsilon</a> (Game source code)</p>
+		<p><a href="https://github.com/daid/SeriousProton">https://github.com/daid/SeriousProton</a> (Engine source code)</p>
 	</div>
 </div>
 
@@ -189,11 +204,12 @@ $(function() {
 	$.each($("img"), function(idx, element)
 	{
 		element = $(element)
+		if (element.attr('src').indexOf('screenshots/') != 0)
+			return true;
 		element.css('width', '200px');
 		var wrapper = $("<span style='position: relative'>");
 		var button = $("<span class='ui-icon ui-icon-circle-zoomin' style='position: absolute; bottom: 6px; right: 4px;'></span>");
 		scale_function = function() {
-			console.log(element.css('width'))
 			if (element.css('width') == '200px')
 				element.animate({'width': element[0].naturalWidth + 'px'}, 500);
 			else
