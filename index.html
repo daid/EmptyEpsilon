@@ -2,7 +2,7 @@
 <html lang="us">
 <head>
 	<meta charset="utf-8">
-	<title>EmptyEpsilon - Space Simulator</title>
+	<title>EmptyEpsilon - Multiplayer Space Simulator</title>
 	<link href="jquery-ui.min.css" rel="stylesheet">
 	<link href="main.css" rel="stylesheet">
 </head>
@@ -18,165 +18,165 @@
 		<li><a href="#tabs-stations">Stations</a></li>
 		<li><a href="#tabs-download">Download</a></li>
 	</ul>
-<div id="tabs-info">
-	<h2>What is it?</h2>
-	EmptyEpsilon is a space ship bridge simulator game. It's fully open source, can be modified in any way people wish.
-	<h2>What does this mean?</h2>
-	EmptyEpsilon allows you to play a space ship bridge. Like seen in <a href="http://en.wikipedia.org/wiki/Star_Trek">Star Trek</a>. So you gather a bunch of friends and act like a real starship crew.
-	Where everyone has their own station with their own job to do. Except for one person, his job will be the roll of the captain. He has to manage the whole crew by talking (or shouting) with them.
-	<h2>Artemis Spaceship Bridge Simulator?</h2>
-	<a href="http://www.artemis.eochu.com/">Artemis Spaceship Bridge Simulator</a> was the inspiration for EmptyEpsilon. It's pretty good as a bridge simulator. But I and some other guys had some issues with it.
-	For example, the "comms" station of Artemis is pretty limited causing that station to be boring for the player. There where also issues with the game desyncing, causing confusion alogn players.
-	Also the GameMaster screen pretty much did not what I wanted to see from a GameMaster screen.<br>
-	So, all in all. Nice game. But we wrote our own due to lack of features.
-	<h2>Contact</h2>
-	The best place to talk about bridge simulation and EmptyEpsilon is the <a href="http://bridgesim.net/">The Starship Bridge Simulation Network</a>
-</div>
-<div id="tabs-media">
-	<p><img src="screenshots/mainscreen.png"></p>
-	<p>Main screen view from a cruiser near a station being attacked by two enemy cruisers.</p>
-	<p><img src="screenshots/helms.png"></p>
-	<p>View on the helms officers screen. Controls the movement of the ship.</p>
-	<p><img src="screenshots/weapons.png"></p>
-	<p>View on the helms weapons screen. Controls the weapons and shields of the ship.</p>
-	<p><img src="screenshots/engineering.png"></p>
-	<p>View on the engineering screen. Can boost different subsystems and repair systems.</p>
-	<p><img src="screenshots/science.png"></p>
-	<p>View on the science officers screen. Has long range scanners.</p>
-	<p><img src="screenshots/relay.png"></p>
-	<p>View on the relay officers screen. Can see friendly ships, and what's in the short range radar range of friendly ships. Can call ships and stations for different requests.</p>
-</div>
-<div id="tabs-running">
-	<div id="running-tabs">
-		<ul>
-			<li><a href="#running-tabs-standard">Standard setup</a></li>
-			<li><a href="#running-tabs-limited">Limited setup</a></li>
-			<li><a href="#running-tabs-auto">Automated setup</a></li>
-			<li><a href="#running-tabs-gm">Game Master</a></li>
-		</ul>
-		<div id="running-tabs-standard">
-			<p>
-				To run EmptyEpsilon you need the following equipment:
+	<div id="tabs-info">
+		<h2>What is it?</h2>
+		EmptyEpsilon is a space ship bridge simulator game. It's fully open source, can be modified in any way people wish.
+		<h2>What does this mean?</h2>
+		EmptyEpsilon allows you to play a space ship bridge. Like seen in <a href="http://en.wikipedia.org/wiki/Star_Trek">Star Trek</a>. So you gather a bunch of friends and act like a real starship crew.
+		Where everyone has their own station with their own job to do. Except for one person, his job will be the roll of the captain. He has to manage the whole crew by talking (or shouting) with them.
+		<h2>Artemis Spaceship Bridge Simulator?</h2>
+		<a href="http://www.artemis.eochu.com/">Artemis Spaceship Bridge Simulator</a> was the inspiration for EmptyEpsilon. It's pretty good as a bridge simulator. But I and some other guys had some issues with it.
+		For example, the "comms" station of Artemis is pretty limited causing that station to be boring for the player. There where also issues with the game desyncing, causing confusion alogn players.
+		Also the GameMaster screen pretty much did not what I wanted to see from a GameMaster screen.<br>
+		So, all in all. Nice game. But we wrote our own due to lack of features.
+		<h2>Contact</h2>
+		The best place to talk about bridge simulation and EmptyEpsilon is the <a href="http://bridgesim.net/">The Starship Bridge Simulation Network</a>
+	</div>
+	<div id="tabs-media">
+		<p><img src="screenshots/mainscreen.png"></p>
+		<p>Main screen view from a cruiser near a station being attacked by two enemy cruisers.</p>
+		<p><img src="screenshots/helms.png"></p>
+		<p>View on the helms officers screen. Controls the movement of the ship.</p>
+		<p><img src="screenshots/weapons.png"></p>
+		<p>View on the helms weapons screen. Controls the weapons and shields of the ship.</p>
+		<p><img src="screenshots/engineering.png"></p>
+		<p>View on the engineering screen. Can boost different subsystems and repair systems.</p>
+		<p><img src="screenshots/science.png"></p>
+		<p>View on the science officers screen. Has long range scanners.</p>
+		<p><img src="screenshots/relay.png"></p>
+		<p>View on the relay officers screen. Can see friendly ships, and what's in the short range radar range of friendly ships. Can call ships and stations for different requests.</p>
+	</div>
+	<div id="tabs-running">
+		<div id="running-tabs">
+			<ul>
+				<li><a href="#running-tabs-standard">Standard setup</a></li>
+				<li><a href="#running-tabs-limited">Limited setup</a></li>
+				<li><a href="#running-tabs-auto">Automated setup</a></li>
+				<li><a href="#running-tabs-gm">Game Master</a></li>
+			</ul>
+			<div id="running-tabs-standard">
+				<p>
+					To run EmptyEpsilon you need the following equipment:
+					<ul>
+						<li>6 computers (laptops or desktops)</li>
+						<li>One big screen (large monitor, tv or beamer)</li>
+						<li>A stable network (wifi can work, but cabled network is prefered)</li>
+					</ul>
+					5 of the 6 computers will run "stations" these are for the players that need to control different parts of the ship.
+					The last computer is for the main screen. This screen does not need any input and should be visible for all players.
+				</p>
+				<p>
+					Designate a single player as Captain. He will order the other players around.
+					His computer can be used as main screen, and his only job is to talk with the other players and tell them what they should do.
+				</p>
+				<p>
+					The other 5 players each man a different station. The description on what each station can do can be found at station tabs.
+				</p>
+				<h2>Running the game</h2>
+				<p>
+					After starting the game the computer selected for the main screen can best be the server. The other stations should connect as clients.
+					After starting a server, and selecting a scenario (we recommend the "Waves" or "Basic" scenario for first games) you should spawn a player ship for everyone to join.
+					Everyone should select the ship, choose their designated station. And you're off. Easy as pie.
+				</p>
+			</div>
+			<div id="running-tabs-limited">
+				<p>
+					TODO
+				</p>
+			</div>
+			<div id="running-tabs-auto">
+				<p>
+					TODO
+				</p>
+			</div>
+			<div id="running-tabs-gm">
+				<p>
+					TODO
+				</p>
+			</div>
+		</div>
+	</div>
+	<div id="tabs-stations">
+		<div id="station-tabs">
+			<ul>
+				<li><a href="#station-tabs-main">Main screen/Captain</a></li>
+				<li><a href="#station-tabs-helm">Helms</a></li>
+				<li><a href="#station-tabs-weapons">Weapons</a></li>
+				<li><a href="#station-tabs-engineering">Engineering</a></li>
+				<li><a href="#station-tabs-science">Science</a></li>
+				<li><a href="#station-tabs-relay">Relay</a></li>
+			</ul>
+			<div id="station-tabs-main">
+				<p><img src="screenshots/mainscreen.png"></p>
+				<p>
+					The captain has zero direct control of the ship. However, he is tasked with keeping the whole crew together and setting tactics.
+					The main screen should be setup on a large monitor or beamer, visible for all players.
+				</p>
+				<h2>The captains tasks include (but are not limited to):</h2>
 				<ul>
-					<li>6 computers (laptops or desktops)</li>
-					<li>One big screen (large monitor, tv or beamer)</li>
-					<li>A stable network (wifi can work, but cabled network is prefered)</li>
+					<li>Planning the next actions</li>
+					<li>Co-ordinating combat tactics</li>
+					<li>Preventing mutiny</li>
+					<li>Setting priorities</li>
 				</ul>
-				5 of the 6 computers will run "stations" these are for the players that need to control different parts of the ship.
-				The last computer is for the main screen. This screen does not need any input and should be visible for all players.
-			</p>
-			<p>
-				Designate a single player as Captain. He will order the other players around.
-				His computer can be used as main screen, and his only job is to talk with the other players and tell them what they should do.
-			</p>
-			<p>
-				The other 5 players each man a different station. The description on what each station can do can be found at station tabs.
-			</p>
-			<h2>Running the game</h2>
-			<p>
-				After starting the game the computer selected for the main screen can best be the server. The other stations should connect as clients.
-				After starting a server, and selecting a scenario (we recommend the "Waves" or "Basic" scenario for first games) you should spawn a player ship for everyone to join.
-				Everyone should select the ship, choose their designated station. And you're off. Easy as pie.
-			</p>
-		</div>
-		<div id="running-tabs-limited">
-			<p>
-				TODO
-			</p>
-		</div>
-		<div id="running-tabs-auto">
-			<p>
-				TODO
-			</p>
-		</div>
-		<div id="running-tabs-gm">
-			<p>
-				TODO
-			</p>
-		</div>
-	</div>
-</div>
-<div id="tabs-stations">
-	<div id="station-tabs">
-		<ul>
-			<li><a href="#station-tabs-main">Main screen/Captain</a></li>
-			<li><a href="#station-tabs-helm">Helms</a></li>
-			<li><a href="#station-tabs-weapons">Weapons</a></li>
-			<li><a href="#station-tabs-engineering">Engineering</a></li>
-			<li><a href="#station-tabs-science">Science</a></li>
-			<li><a href="#station-tabs-relay">Relay</a></li>
-		</ul>
-		<div id="station-tabs-main">
-			<p><img src="screenshots/mainscreen.png"></p>
-			<p>
-				The captain has zero direct control of the ship. However, he is tasked with keeping the whole crew together and setting tactics.
-				The main screen should be setup on a large monitor or beamer, visible for all players.
-			</p>
-			<h2>The captains tasks include (but are not limited to):</h2>
-			<ul>
-				<li>Planning the next actions</li>
-				<li>Co-ordinating combat tactics</li>
-				<li>Preventing mutiny</li>
-				<li>Setting priorities</li>
-			</ul>
-			<h2>Controls:</h2>
-			<p>(Note that these controls are optional, and do not have to be used to play the game, but could be used in custom hardware setups)</p>
-			<ul>
-				<li>Left mouse button: Rotate the main screen 90deg to the left</li>
-				<li>Right mouse button: Rotate the main screen 90deg to the right</li>
-				<li>Middle mouse button: Switch between ship, radar and long range radar view</li>
-				<li>Up key: Set mainscreen view to forward view</li>
-				<li>Down key: Set mainscreen view to rear view</li>
-				<li>Left key: Set mainscreen view to left view</li>
-				<li>Right key: Set mainscreen view to right view</li>
-				<li>Tab key: Set mainscreen view to short range radar view</li>
-				<li>Q key: Set mainscreen view to long range radar view</li>
-			</ul>
-			<h2>Notes</h2>
-			<p>
-				There are a lot of ways to setup the mainscreen and captain role. You can designate a single station to give control of the main screen.
-				But you can also give the captain direct control of the main screen with the above controls.
-			</p>
-			<p>
-				A simple "custom" hardware setup for the captain would be using tape to attach a 3 button mouse to an armchair.
-			</p>
-		</div>
-		<div id="station-tabs-helm">
-			<p><img src="screenshots/helms.png"></p>
-			<p>
-				TODO
-			</p>
-		</div>
-		<div id="station-tabs-weapons">
-			<p><img src="screenshots/weapons.png"></p>
-			<p>
-				TODO
-			</p>
-		</div>
-		<div id="station-tabs-engineering">
-			<p><img src="screenshots/engineering.png"></p>
-			<p>
-				TODO
-			</p>
-		</div>
-		<div id="station-tabs-science">
-			<p><img src="screenshots/science.png"></p>
-			<p>
-				TODO
-			</p>
-		</div>
-		<div id="station-tabs-relay">
-			<p><img src="screenshots/relay.png"></p>
-			<p>
-				TODO
-			</p>
+				<h2>Controls:</h2>
+				<p>(Note that these controls are optional, and do not have to be used to play the game, but could be used in custom hardware setups)</p>
+				<ul>
+					<li>Left mouse button: Rotate the main screen 90deg to the left</li>
+					<li>Right mouse button: Rotate the main screen 90deg to the right</li>
+					<li>Middle mouse button: Switch between ship, radar and long range radar view</li>
+					<li>Up key: Set mainscreen view to forward view</li>
+					<li>Down key: Set mainscreen view to rear view</li>
+					<li>Left key: Set mainscreen view to left view</li>
+					<li>Right key: Set mainscreen view to right view</li>
+					<li>Tab key: Set mainscreen view to short range radar view</li>
+					<li>Q key: Set mainscreen view to long range radar view</li>
+				</ul>
+				<h2>Notes</h2>
+				<p>
+					There are a lot of ways to setup the mainscreen and captain role. You can designate a single station to give control of the main screen.
+					But you can also give the captain direct control of the main screen with the above controls.
+				</p>
+				<p>
+					A simple "custom" hardware setup for the captain would be using tape to attach a 3 button mouse to an armchair.
+				</p>
+			</div>
+			<div id="station-tabs-helm">
+				<p><img src="screenshots/helms.png"></p>
+				<p>
+					TODO
+				</p>
+			</div>
+			<div id="station-tabs-weapons">
+				<p><img src="screenshots/weapons.png"></p>
+				<p>
+					TODO
+				</p>
+			</div>
+			<div id="station-tabs-engineering">
+				<p><img src="screenshots/engineering.png"></p>
+				<p>
+					TODO
+				</p>
+			</div>
+			<div id="station-tabs-science">
+				<p><img src="screenshots/science.png"></p>
+				<p>
+					TODO
+				</p>
+			</div>
+			<div id="station-tabs-relay">
+				<p><img src="screenshots/relay.png"></p>
+				<p>
+					TODO
+				</p>
+			</div>
 		</div>
 	</div>
-</div>
-<div id="tabs-download">
-	Sorry, no downloads yet. The sourcecode is up on github at:<br/>
-	<a href="https://github.com/daid/EmptyEpsilon">https://github.com/daid/EmptyEpsilon</a><br/>
-</div>
+	<div id="tabs-download">
+		Sorry, no downloads yet. The sourcecode is up on github at:<br/>
+		<a href="https://github.com/daid/EmptyEpsilon">https://github.com/daid/EmptyEpsilon</a><br/>
+	</div>
 </div>
 
 <script src="jquery.js"></script>
@@ -186,6 +186,24 @@ $(function() {
 	$("#tabs").tabs();
 	$("#station-tabs").tabs();
 	$("#running-tabs").tabs();
+	$.each($("img"), function(idx, element)
+	{
+		element = $(element)
+		element.css('width', '200px');
+		var wrapper = $("<span style='position: relative'>");
+		var button = $("<span class='ui-icon ui-icon-circle-zoomin' style='position: absolute; bottom: 6px; right: 4px;'></span>");
+		scale_function = function() {
+			console.log(element.css('width'))
+			if (element.css('width') == '200px')
+				element.animate({'width': element[0].naturalWidth + 'px'}, 500);
+			else
+				element.animate({'width': '200px'}, 500);
+		}
+		element.click(scale_function);
+		button.click(scale_function);
+		element.wrap(wrapper);
+		element.after(button);
+	});
 });
 </script>
 </body>

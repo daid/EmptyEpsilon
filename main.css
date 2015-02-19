@@ -6,6 +6,7 @@ body{
 }
 h1 {
 	font-size: 10em;
+	margin-bottom: 25px;
 }
 .ui-tabs-nav {
 	border-top-style: none;
