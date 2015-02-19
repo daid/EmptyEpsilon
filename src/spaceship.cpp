@@ -705,6 +705,8 @@ void SpaceShip::requestDock(P<SpaceObject> target)
         return;
     if (sf::length(getPosition() - target->getPosition()) > 1000)
         return;
+    if (hasJumpdrive && jumpDelay > 0.0f)
+        return;
 
     docking_state = DS_Docking;
     docking_target = target;
