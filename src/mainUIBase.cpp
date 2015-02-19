@@ -777,6 +777,30 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
     ParticleEngine::render();
     glPopMatrix();
 
+    if (my_spaceship && my_spaceship->getTarget())
+    {
+        P<SpaceObject> target = my_spaceship->getTarget();
+        glDisable(GL_DEPTH_TEST);
+        glPushMatrix();
+        glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
+        glTranslatef(target->getPosition().x, target->getPosition().y, 0);
+
+        billboardShader.setParameter("textureMap", *textureManager.getTexture("redicule2.png"));
+        sf::Shader::bind(&billboardShader);
+        glBegin(GL_QUADS);
+        glColor4f(0.5, 0.5, 0.5, target->getRadius() * 2.5);
+        glTexCoord2f(0, 0);
+        glVertex3f(0, 0, 0);
+        glTexCoord2f(1, 0);
+        glVertex3f(0, 0, 0);
+        glTexCoord2f(1, 1);
+        glVertex3f(0, 0, 0);
+        glTexCoord2f(0, 1);
+        glVertex3f(0, 0, 0);
+        glEnd();
+        glPopMatrix();
+    }
+
     glDepthMask(true);
     glDisable(GL_BLEND);
     glEnable(GL_CULL_FACE);
