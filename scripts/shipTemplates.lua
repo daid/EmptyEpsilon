@@ -1,8 +1,23 @@
 --[[ Stations --]]
-template = ShipTemplate():setName("Small Station"):setMesh("space_station_4.model", "space_station_4_color.jpg", "space_station_4_specular.jpg", "space_station_4_illumination.jpg"):setScale(10):setRadius(300)
+template = ShipTemplate():setName("Small Station"):setMesh("space_station_4/space_station_4.model", "space_station_4/space_station_4_color.jpg", "space_station_4/space_station_4_specular.jpg", "space_station_4/space_station_4_illumination.jpg"):setRenderOffset(0, 0, 5):setScale(10):setRadius(300)
 template:setCollisionBox(400, 400)
-template:setHull(200)
-template:setShields(400, 0)
+template:setHull(150)
+template:setShields(300, 0)
+
+template = ShipTemplate():setName("Medium Station"):setMesh("space_station_3/space_station_3.model", "space_station_3/space_station_3_color.jpg", "space_station_3/space_station_3_specular.jpg", "space_station_3/space_station_3_illumination.jpg"):setRenderOffset(10, 0, 5):setScale(20):setRadius(1000)
+template:setCollisionBox(1200, 1000)
+template:setHull(400)
+template:setShields(800, 0)
+
+template = ShipTemplate():setName("Large Station"):setMesh("space_station_2/space_station_2.model", "space_station_2/space_station_2_color.jpg", "space_station_2/space_station_2_specular.jpg", "space_station_2/space_station_2_illumination.jpg"):setRenderOffset(10, 0, 5):setScale(20):setRadius(1300)
+template:setCollisionBox(1400, 1000)
+template:setHull(500)
+template:setShields(1000, 0)
+
+template = ShipTemplate():setName("Huge Station"):setMesh("space_station_1/space_station_1.model", "space_station_1/space_station_1_color.jpg", "space_station_1/space_station_1_specular.jpg", "space_station_1/space_station_1_illumination.jpg"):setRenderOffset(0, 0, 5):setScale(20):setRadius(1500)
+template:setCollisionBox(2000, 1800)
+template:setHull(800)
+template:setShields(1200, 0)
 
 --[[ Player ships --]]
 template = ShipTemplate():setName("Player Cruiser"):setMesh("space_frigate_6.model", "space_frigate_6_color.png", "space_frigate_6_specular.png", "space_frigate_6_illumination.png"):setScale(6):setRadius(100)

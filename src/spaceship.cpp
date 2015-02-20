@@ -191,6 +191,7 @@ void SpaceShip::draw3D()
     if (!ship_template) return;
 
     glScalef(ship_template->scale, ship_template->scale, ship_template->scale);
+    glTranslatef(ship_template->renderOffset.x, ship_template->renderOffset.y, ship_template->renderOffset.z);
     objectShader.setParameter("baseMap", *textureManager.getTexture(ship_template->colorTexture));
     objectShader.setParameter("illuminationMap", *textureManager.getTexture(ship_template->illuminationTexture));
     objectShader.setParameter("specularMap", *textureManager.getTexture(ship_template->specularTexture));

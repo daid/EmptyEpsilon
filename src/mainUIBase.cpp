@@ -471,6 +471,18 @@ void MainUIBase::drawRadar(sf::Vector2f position, float size, float range, bool 
 
     if (long_range)
     {
+        for(float circle_size=5000.0f; circle_size < range; circle_size+=5000.0f)
+        {
+            float s = circle_size * size / range;
+            sf::CircleShape circle(s, 50);
+            circle.setOrigin(s, s);
+            circle.setPosition(position);
+            circle.setFillColor(sf::Color::Transparent);
+            circle.setOutlineColor(sf::Color(255, 255, 255, 16));
+            circle.setOutlineThickness(2.0);
+            window.draw(circle);
+            text(sf::FloatRect(position.x, position.y - s - 20, 0, 0), string(int(circle_size / 1000.0f + 0.1f)) + "km", AlignCenter, 20, sf::Color(255, 255, 255, 32));
+        }
         drawRaderBackground(my_spaceship->getPosition(), position, size, range, rect);
         drawRadarSweep(position, range, size, scan_angle);
         for(unsigned int n=0; n<scan_ghost.size(); n++)
@@ -487,7 +499,7 @@ void MainUIBase::drawRadar(sf::Vector2f position, float size, float range, bool 
         for(float circle_size=1000.0f; circle_size < range; circle_size+=1000.0f)
         {
             float s = circle_size * size / range;
-            sf::CircleShape circle(s, 30);
+            sf::CircleShape circle(s, 50);
             circle.setOrigin(s, s);
             circle.setPosition(position);
             circle.setFillColor(sf::Color::Transparent);

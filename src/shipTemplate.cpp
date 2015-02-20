@@ -8,6 +8,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDescription);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setMesh);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setScale);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRenderOffset);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSizeClass);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadius);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCollisionBox);

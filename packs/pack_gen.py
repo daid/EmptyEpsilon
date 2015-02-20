@@ -38,10 +38,11 @@ def convertObj(filename):
 
 def buildPack(name):
 	os.chdir(name)
-	filenames = glob.glob('*')
+	filenames = glob.glob('*') + glob.glob('*/*')
 	files = {}
 	for filename in filenames:
 		filename = filename.encode('ascii')
+		filename = filename.replace('\\', '/')
 		if os.path.isfile(filename):
 			ext = os.path.splitext(filename)[1]
 			if ext == '.obj':

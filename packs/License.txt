@@ -1,3 +1,4 @@
-The AngryFly pack is only to be distributed as a whole, without modifications with copies of EmptyEpsilon
-As the files build up to the pack are licensed under the "Royalty-Free-License" from TurboSquid.
+The AngryFly pack is only to be distributed as a whole, without modifications with copies of EmptyEpsilon.
+
+As the files build up to the pack are licensed under the "Royalty-Free-License" from TurboSquid. So no other redistrubution, or reverse engineering of the pack files is allowed.
 See: http://support.turbosquid.com/entries/31030006-Royalty-Free-License

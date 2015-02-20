@@ -191,7 +191,7 @@ void CrewSinglePilotUI::onCrewUI()
             {
                 targetCameraPosition.x = my_spaceship->getPosition().x;
                 targetCameraPosition.y = my_spaceship->getPosition().y;
-                targetCameraPosition.z = 3000.0;
+                targetCameraPosition.z = 6000.0;
                 camera_pitch = 90.0f;
             }
     #endif

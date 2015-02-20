@@ -45,6 +45,7 @@ void MainMenu::onGui()
     text(sf::FloatRect(0, y, getWindowSize().x - 50, 25), "Credits", AlignRight, 25); y+= 25;
     text(sf::FloatRect(0, y, getWindowSize().x - 50, 20), "Programming:", AlignRight, 20); y+= 20;
     text(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "Daid (github.com/daid)", AlignRight, 18); y+= 18;
+    text(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "Nallath (github.com/nallath)", AlignRight, 18); y+= 18;
     y += 10;
     text(sf::FloatRect(0, y, getWindowSize().x - 50, 20), "Music:", AlignRight, 20); y+= 20;
     text(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "Matthew Pablo (www.matthewpablo.com)", AlignRight, 18); y+= 18;
@@ -57,6 +58,9 @@ void MainMenu::onGui()
     y += 10;
     text(sf::FloatRect(0, y, getWindowSize().x - 50, 20), "Crew sprites:", AlignRight, 20); y+= 20;
     text(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "Tokka (http://bekeen.de/)", AlignRight, 18); y+= 18;
+    y += 10;
+    text(sf::FloatRect(0, y, getWindowSize().x - 50, 20), "Special thanks:", AlignRight, 20); y+= 20;
+    text(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "Marty Lewis (MadKat)", AlignRight, 18); y+= 18;
 }
 
 OptionsMenu::OptionsMenu()
