@@ -34,6 +34,40 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getShieldsActive);
 }
 
+/* Define script conversion function for the EMainScreenSetting enum. */
+template<> void convert<EMainScreenSetting>::param(lua_State* L, int& idx, EMainScreenSetting& mss)
+{
+    string str = string(luaL_checkstring(L, idx++)).lower();
+    if (str == "front")
+        mss = MSS_Front;
+    else if (str == "back")
+        mss = MSS_Back;
+    else if (str == "left")
+        mss = MSS_Left;
+    else if (str == "right")
+        mss = MSS_Right;
+    else if (str == "tactical")
+        mss = MSS_Tactical;
+    else if (str == "longrange")
+        mss = MSS_LongRange;
+    else
+        mss = MSS_Front;
+}
+template<> void convert<ECombatManeuver>::param(lua_State* L, int& idx, ECombatManeuver& cm)
+{
+    string str = string(luaL_checkstring(L, idx++)).lower();
+    if (str == "boost")
+        cm = CM_Boost;
+    else if (str == "turn")
+        cm = CM_Turn;
+    else if (str == "strafeleft")
+        cm = CM_StrafeLeft;
+    else if (str == "straferight")
+        cm = CM_StrafeRight;
+    else
+        cm = CM_Boost;
+}
+
 SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_range)
 : SpaceObject(50, multiplayerClassName, multiplayer_significant_range)
 {

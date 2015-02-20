@@ -71,12 +71,14 @@ void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, 
     sf::Sprite objectSprite;
     textureManager.setTexture(objectSprite, "RadarBlip.png");
     objectSprite.setPosition(position);
+    float sprite_scale = scale * getRadius() / objectSprite.getTextureRect().width * 1.5;
 
     if (long_range)
     {
         GUI::text(sf::FloatRect(position.x, position.y - 15, 0, 0), getCallSign(), AlignCenter, 12);
-        objectSprite.setScale(0.7, 0.7);
+        sprite_scale *= 0.7;
     }
+    objectSprite.setScale(sprite_scale, sprite_scale);
     if (my_spaceship)
     {
         if (isEnemy(my_spaceship))

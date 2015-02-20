@@ -22,6 +22,8 @@ enum EMainScreenSetting
     MSS_Tactical,
     MSS_LongRange
 };
+template<> void convert<EMainScreenSetting>::param(lua_State* L, int& idx, EMainScreenSetting& mss);
+
 enum EDockingState
 {
     DS_NotDocking = 0,
@@ -42,6 +44,7 @@ enum ECombatManeuver
     CM_StrafeRight,
     CM_Turn
 };
+template<> void convert<ECombatManeuver>::param(lua_State* L, int& idx, ECombatManeuver& cm);
 
 class ShipSystem
 {
