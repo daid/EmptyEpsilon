@@ -72,7 +72,7 @@ void ServerCreationScreen::onGui()
     box(sf::FloatRect(x, y, 550, 50));
     text(sf::FloatRect(x, y, 250, 50), "Tactical radar: ", AlignRight);
     if (selector(sf::FloatRect(x + 250, y, 300, 50), gameGlobalInfo->allow_main_screen_tactical_radar ? "Yes" : "No", 30))
-        gameGlobalInfo->allow_main_screen_long_range_radar = !gameGlobalInfo->allow_main_screen_tactical_radar;
+        gameGlobalInfo->allow_main_screen_tactical_radar = !gameGlobalInfo->allow_main_screen_tactical_radar;
     y += 50;
     box(sf::FloatRect(x, y, 550, 50));
     text(sf::FloatRect(x, y, 250, 50), "Long range radar: ", AlignRight);
