@@ -15,6 +15,10 @@ Some general contributing rules.
 2. Be precise in your issues; Why do you post the issue, what do you expect, what is happening, why is your feature worth time, what operating system, etc. Issues that are not clear will be subject to rule 1. with extreme prejudice.
 3. Despite the above two, input/ feedback / people playing this game is very much valued. If you have ideas/suggestings/ want to donate beer, drop a line.
 
+Contributing (Donation)
+===========
+If you don't have the skills to help coding / create models, but you do want to give something back, you can always donate a bit. All donations will go directly towards buying better assets for the game (in this case; more/better 3D models). You can find the instructions on; http://daid.github.io/EmptyEpsilon/
+
 Contributing (Coder)
 ============
 If you are a coder and want to contribute, there are a few things to take into account. 
