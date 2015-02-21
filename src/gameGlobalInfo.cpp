@@ -151,7 +151,7 @@ REGISTER_SCRIPT_FUNCTION(globalMessage);
 static int getPlayerShip(lua_State* L)
 {
     int index = luaL_checkinteger(L, 1);
-    if (index == 0)
+    if (index == -1)
     {
         for(index = 0; index<GameGlobalInfo::maxPlayerShips; index++)
         {
