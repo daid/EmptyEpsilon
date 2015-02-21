@@ -7,7 +7,7 @@
 #include "packResourceProvider.h"
 #include "scienceDatabase.h"
 #include "main.h"
-#include "httpServer.h"
+#include "httpScriptAccess.h"
 
 #ifdef __APPLE__
 #include <CoreFoundation/CoreFoundation.h>
@@ -80,6 +80,15 @@ int main(int argc, char** argv)
     textureManager.setDefaultRepeated(true);
     textureManager.setAutoSprite(false);
     textureManager.getTexture("Tokka_WalkingMan.png", sf::Vector2i(6, 1));
+    
+    if (false)
+    {
+        LOG(INFO) << "Enabling HTTP script access.";
+        LOG(INFO) << "NOTE: This is potentially a risk!";
+        HttpServer* server = new HttpServer();
+        server->addHandler(new HttpRequestFileHandler("www"));
+        server->addHandler(new HttpScriptHandler());
+    }
 
     //Setup the rendering layers.
     backgroundLayer = new RenderLayer();

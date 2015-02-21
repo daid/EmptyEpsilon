@@ -11,14 +11,14 @@ void CrewWeaponsUI::onCrewUI()
     sf::Vector2f mouse = InputHandler::getMousePos();
     float radarDistance = 5000;
     sf::Vector2f radar_center = getWindowSize() / 2.0f;
+    sf::Vector2f diff = mouse - radar_center;
+    sf::Vector2f mousePosition = my_spaceship->getPosition() + diff / 400.0f * radarDistance;
 
     if (InputHandler::mouseIsReleased(sf::Mouse::Left))
     {
-        sf::Vector2f diff = mouse - radar_center;
         if (sf::length(diff) < 400 && (mouse.x > 520 || mouse.y < 890 - 50 * my_spaceship->weapon_tubes))
         {
             P<SpaceObject> target;
-            sf::Vector2f mousePosition = my_spaceship->getPosition() + diff / 400.0f * radarDistance;
             PVector<Collisionable> list = CollisionManager::queryArea(mousePosition - sf::Vector2f(50, 50), mousePosition + sf::Vector2f(50, 50));
             foreach(Collisionable, obj, list)
             {
@@ -32,6 +32,30 @@ void CrewWeaponsUI::onCrewUI()
             my_spaceship->commandSetTarget(target);
         }
     }
+    /*
+    {
+        float missile_target_angle = sf::vector2ToAngle(diff);
+        float angle_diff = sf::angleDifference(missile_target_angle, my_spaceship->getRotation());
+        float turn_rate = 50.0f;
+        float speed = 400.0f;
+        float turn_radius = ((360.0f / turn_rate) * speed) / (2 * M_PI);
+        
+        float left_or_right = 90;
+        if (angle_diff > 0)
+            left_or_right = -90;
+        
+        sf::Vector2f turn_center = sf::vector2FromAngle(my_spaceship->getRotation() + left_or_right) * turn_radius;
+        sf::Vector2f turn_exit = turn_center + sf::vector2FromAngle(missile_target_angle - left_or_right) * turn_radius;
+
+        sf::VertexArray a(sf::LinesStrip, 5);
+        a[0].position = radar_center;
+        a[1].position = radar_center + (turn_center + sf::vector2FromAngle(my_spaceship->getRotation() - angle_diff / 4.0f - left_or_right) * turn_radius) / radarDistance * 400.0f;
+        a[2].position = radar_center + (turn_center + sf::vector2FromAngle(my_spaceship->getRotation() - angle_diff / 4.0f * 3.0f - left_or_right) * turn_radius) / radarDistance * 400.0f;
+        a[3].position = radar_center + turn_exit / radarDistance * 400.0f;
+        a[4].position = radar_center + (turn_exit + sf::vector2FromAngle(missile_target_angle) * radarDistance) / radarDistance * 400.0f;
+        getRenderTarget()->draw(a);
+    }
+    */
     drawRadar(radar_center, 400, radarDistance, false, my_spaceship->getTarget());
 
     keyValueDisplay(sf::FloatRect(20, 100, 250, 40), 0.5, "Energy", string(int(my_spaceship->energy_level)), 25);
