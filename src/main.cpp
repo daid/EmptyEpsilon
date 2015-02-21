@@ -81,7 +81,7 @@ int main(int argc, char** argv)
     textureManager.setAutoSprite(false);
     textureManager.getTexture("Tokka_WalkingMan.png", sf::Vector2i(6, 1));
     
-    if (false)
+    if (startup_parameters["httpserver"].toInt() != 0)
     {
         LOG(INFO) << "Enabling HTTP script access.";
         LOG(INFO) << "NOTE: This is potentially a risk!";
