@@ -160,7 +160,7 @@ Mesh* Mesh::getMesh(string filename)
         ret->vertices = new MeshVertex[ret->vertexCount];
         stream->read(ret->vertices, sizeof(MeshVertex) * ret->vertexCount);
     }else{
-        printf("Unknown mesh format: %s\n", filename.c_str());
+        LOG(ERROR) << "Unknown mesh format: " << filename;
     }
     
     meshMap[filename] = ret;

@@ -24,14 +24,14 @@ EpsilonServer::EpsilonServer()
 
 void EpsilonServer::onNewClient(int32_t clientId)
 {
-    printf("New client: %i\n", clientId);
+    LOG(INFO) << "New client: " << clientId;
     PlayerInfo* info = new PlayerInfo();
     info->clientId = clientId;
 }
 
 void EpsilonServer::onDisconnectClient(int32_t clientId)
 {
-    printf("Client left: %i\n", clientId);
+    LOG(INFO) << "Client left: " << clientId;
     foreach(PlayerInfo, i, playerInfoList)
         if (i->clientId == clientId)
             i->destroy();

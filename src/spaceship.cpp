@@ -187,7 +187,7 @@ void SpaceShip::setShipTemplate(string templateName)
     ship_template = ShipTemplate::getTemplate(templateName);
     if (!ship_template)
     {
-        printf("Failed to find ship template: %s\n", templateName.c_str());
+        LOG(ERROR) << "Failed to find ship template: " << templateName;
         return;
     }
 

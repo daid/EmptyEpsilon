@@ -7,6 +7,7 @@
 #include "packResourceProvider.h"
 #include "scienceDatabase.h"
 #include "main.h"
+#include "httpServer.h"
 
 #ifdef __APPLE__
 #include <CoreFoundation/CoreFoundation.h>
@@ -42,6 +43,9 @@ int main(int argc, char** argv)
         chdir(path);
         CFRelease(url);
     }
+#endif
+#ifdef DEBUG
+    Logging::setLogLevel(LOGLEVEL_DEBUG);
 #endif
     FILE* f = fopen("options.ini", "r");
     if (f)

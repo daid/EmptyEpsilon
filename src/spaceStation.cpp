@@ -144,7 +144,7 @@ void SpaceStation::setTemplate(string templateName)
     ship_template = ShipTemplate::getTemplate(templateName);
     if (!ship_template)
     {
-        printf("Failed to find template for station: %s\n", templateName.c_str());
+        LOG(ERROR) << "Failed to find template for station: " << templateName;
         return;
     }
     

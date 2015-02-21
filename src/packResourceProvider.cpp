@@ -18,7 +18,7 @@ PackResourceProvider::PackResourceProvider(string filename)
     if (version == 0)
     {
         int file_count = readInt(f);
-        printf("Loaded: %s with %d files\n", filename.c_str(), file_count);
+        LOG(INFO) << "Loaded: " << filename << " with " << file_count << " files";
         for(int n=0; n<file_count; n++)
         {
             int8_t filename_size = 0;

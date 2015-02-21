@@ -65,7 +65,7 @@ int FactionInfo::findFactionId(string name)
     for(unsigned int n = 0; n < factionInfo.size(); n++)
         if (factionInfo[n]->name == name)
             return n;
-    printf("Failed to find faction: %s\n", name.c_str());
+    LOG(ERROR) << "Failed to find faction: " << name;
     return 0;
 }
 

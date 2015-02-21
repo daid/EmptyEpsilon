@@ -115,10 +115,6 @@ void ShipTemplate::setMesh(string model, string colorTexture, string specularTex
     this->colorTexture = colorTexture;
     this->specularTexture = specularTexture;
     this->illuminationTexture = illuminationTexture;
-    Mesh::getMesh(model);
-    textureManager.getTexture(colorTexture);
-    textureManager.getTexture(specularTexture);
-    textureManager.getTexture(illuminationTexture);
 }
 
 void ShipTemplate::setBeamPosition(int index, sf::Vector3f position)
@@ -174,7 +170,7 @@ P<ShipTemplate> ShipTemplate::getTemplate(string name)
 {
     if (templateMap.find(name) != templateMap.end())
         return templateMap[name];
-    printf("Ship template not found: %s\n", name.c_str());
+    LOG(ERROR) << "Ship template not found: " << name;
     return NULL;
 }
 

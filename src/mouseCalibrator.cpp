@@ -53,9 +53,6 @@ void MouseCalibrator::onGui()
 
 void MouseCalibrator::calculateMatrix()
 {
-    for(int n=0; n<3; n++)
-        printf("%f %f %f %f\n", mouse_point[n].x, mouse_point[n].y, screen_point[n].x, screen_point[n].y);
-    
     float Q = ((mouse_point[0].x - mouse_point[2].x) * (mouse_point[1].y - mouse_point[2].y)) - ((mouse_point[1].x - mouse_point[2].x) * (mouse_point[0].y - mouse_point[2].y));
 
     if( Q == 0.0 )
@@ -68,7 +65,6 @@ void MouseCalibrator::calculateMatrix()
     float F = (mouse_point[2].x * screen_point[1].y - mouse_point[1].x * screen_point[2].y) * mouse_point[0].y + (mouse_point[0].x * screen_point[2].y - mouse_point[2].x * screen_point[0].y) * mouse_point[1].y + (mouse_point[1].x * screen_point[0].y - mouse_point[0].x * screen_point[1].y) * mouse_point[2].y;
     
     InputHandler::mouse_transform = sf::Transform(A/Q, B/Q, C/Q, D/Q, E/Q, F/Q, 0, 0, 1);
-    printf("%f %f %f\n%f %f %f\n", A/Q, B/Q, C/Q, D/Q, E/Q, F/Q);
     FILE* f = fopen(filename.c_str(), "w");
     fprintf(f, "%f %f %f %f %f %f\n", A/Q, B/Q, C/Q, D/Q, E/Q, F/Q);
     fclose(f);
