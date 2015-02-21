@@ -65,9 +65,9 @@ void SpaceObject::damageArea(sf::Vector2f position, float blast_range, float min
         {
             float dist = sf::length(position - obj->getPosition()) - obj->getRadius() - min_range;
             if (dist < 0) dist = 0;
-            if (dist < blast_range)
+            if (dist < blast_range - min_range)
             {
-                obj->takeDamage(max_damage - (max_damage - min_damage) * dist / blast_range, info);
+                obj->takeDamage(max_damage - (max_damage - min_damage) * dist / (blast_range - min_range), info);
             }
         }
     }

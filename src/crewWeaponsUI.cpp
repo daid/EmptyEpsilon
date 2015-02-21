@@ -23,7 +23,7 @@ void CrewWeaponsUI::onCrewUI()
             foreach(Collisionable, obj, list)
             {
                 P<SpaceObject> spaceObject = obj;
-                if (spaceObject && spaceObject->canBeTargetedByPlayer() && spaceObject != my_spaceship)
+                if (spaceObject && spaceObject->canBeTargeted() && spaceObject != my_spaceship)
                 {
                     if (!target || sf::length(mousePosition - spaceObject->getPosition()) < sf::length(mousePosition - target->getPosition()))
                         target = spaceObject;

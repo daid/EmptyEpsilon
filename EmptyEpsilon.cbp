@@ -237,6 +237,8 @@
 		<Unit filename="../SeriousProton/src/httpServer.h" />
 		<Unit filename="../SeriousProton/src/input.cpp" />
 		<Unit filename="../SeriousProton/src/input.h" />
+		<Unit filename="../SeriousProton/src/logging.cpp" />
+		<Unit filename="../SeriousProton/src/logging.h" />
 		<Unit filename="../SeriousProton/src/lua/lapi.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -444,6 +446,8 @@
 		<Unit filename="src/mesh.h" />
 		<Unit filename="src/mine.cpp" />
 		<Unit filename="src/mine.h" />
+		<Unit filename="src/missileWeapon.cpp" />
+		<Unit filename="src/missileWeapon.h" />
 		<Unit filename="src/mouseCalibrator.cpp" />
 		<Unit filename="src/mouseCalibrator.h" />
 		<Unit filename="src/nebula.cpp" />

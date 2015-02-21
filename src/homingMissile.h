@@ -1,30 +1,14 @@
 #ifndef HOMING_MISSLE_H
 #define HOMING_MISSLE_H
 
-#include "spaceObject.h"
+#include "missileWeapon.h"
 
-class HomingMissile : public SpaceObject, public Updatable
+class HomingMissile : public MissileWeapon
 {
-    const static float speed = 500.0f;
-    const static float turnSpeed = 100.0f;
-    const static float totalLifetime = 12.0f;
-    
-    float lifetime;
 public:
-    P<SpaceObject> owner; //Only valid on server.
-    int32_t target_id;
-
     HomingMissile();
-
-    virtual void draw3D();
-    virtual void draw3DTransparent();
-    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
-    virtual void update(float delta);
     
-    virtual bool canBeTargetedByPlayer() { return true; }
-    
-    virtual void collision(Collisionable* target);
-    virtual void takeDamage(float damageAmount, DamageInfo& info) { if (info.type != DT_Kinetic) destroy(); }
+    virtual void hitObject(P<SpaceObject> object);
 };
 
 #endif//HOMING_MISSLE_H

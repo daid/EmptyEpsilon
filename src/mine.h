@@ -8,7 +8,7 @@ class Mine : public SpaceObject, public Updatable
     const static float speed = -600.0f;
     const static float blastRange = 1000.0f;
     const static float trigger_range = 600.0f;
-    const static float ejectDelay = 2.0f;
+    const static float ejectDelay = 1.5f;
     const static float triggerDelay = 1.0f;
     const static float damageAtCenter = 160.0f;
     const static float damageAtEdge = 30.0f;
