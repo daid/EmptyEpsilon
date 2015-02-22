@@ -19,6 +19,6 @@ public:
     void commChannelMessage(int32_t message_id);
 };
 
-#include "playerSpaceship.h"
+#include "spaceObjects/playerSpaceship.h"
 
 #endif//COMMS_SCRIPT_INTERFACE_H

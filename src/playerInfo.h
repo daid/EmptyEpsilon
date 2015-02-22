@@ -2,7 +2,7 @@
 #define PLAYER_INFO_H
 
 #include "engine.h"
-#include "playerSpaceship.h"
+#include "spaceObjects/playerSpaceship.h"
 
 class PlayerInfo;
 extern P<PlayerInfo> my_player_info;

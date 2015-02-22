@@ -1,9 +1,9 @@
 #include <string.h>
-#include "gui.h"
-#include "mainMenus.h"
+#include "gui/gui.h"
+#include "gui/mainMenus.h"
 #include "mouseCalibrator.h"
 #include "factionInfo.h"
-#include "spaceObject.h"
+#include "spaceObjects/spaceObject.h"
 #include "packResourceProvider.h"
 #include "scienceDatabase.h"
 #include "main.h"

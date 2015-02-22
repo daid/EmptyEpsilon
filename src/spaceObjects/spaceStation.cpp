@@ -1,11 +1,11 @@
 #include <SFML/OpenGL.hpp>
-#include "spaceStation.h"
+#include "spaceObjects/spaceStation.h"
 #include "shipTemplate.h"
 #include "playerInfo.h"
 #include "factionInfo.h"
-#include "gui.h"
+#include "gui/gui.h"
 #include "mesh.h"
-#include "explosionEffect.h"
+#include "spaceObjects/explosionEffect.h"
 #include "main.h"
 #include "pathPlanner.h"
 

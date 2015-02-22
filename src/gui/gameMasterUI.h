@@ -1,9 +1,9 @@
 #ifndef GAME_MASTER_UI_H
 #define GAME_MASTER_UI_H
 
-#include "mainUIBase.h"
+#include "gui/mainUIBase.h"
 #include "playerInfo.h"
-#include "spaceship.h"
+#include "spaceObjects/spaceship.h"
 
 enum EMouseMode
 {

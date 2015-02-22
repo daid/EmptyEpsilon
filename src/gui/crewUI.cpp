@@ -2,8 +2,8 @@
 #include "playerInfo.h"
 #include "factionInfo.h"
 #include "repairCrew.h"
-#include "spaceStation.h"
-#include "warpJammer.h"
+#include "spaceObjects/spaceStation.h"
+#include "spaceObjects/warpJammer.h"
 
 CrewUI::CrewUI()
 {

@@ -2,11 +2,8 @@
 
 #include "gameMasterUI.h"
 #include "factionInfo.h"
-#include "cpuShip.h"
-#include "spaceStation.h"
-#include "blackHole.h"
-#include "nebula.h"
-#include "warpJammer.h"
+#include "spaceObjects/cpuShip.h"
+#include "spaceObjects/spaceStation.h"
 #include "gameGlobalInfo.h"
 
 GameMasterUI::GameMasterUI()

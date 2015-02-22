@@ -1,11 +1,6 @@
 #include "epsilonServer.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
-#include "spaceObject.h"
-#include "spaceStation.h"
-#include "cpuShip.h"
-#include "asteroid.h"
-#include "mine.h"
 #include "main.h"
 
 EpsilonServer::EpsilonServer()

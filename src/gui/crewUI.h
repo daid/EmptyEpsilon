@@ -1,9 +1,9 @@
 #ifndef CREW_UI_H
 #define CREW_UI_H
 
-#include "mainUIBase.h"
+#include "gui/mainUIBase.h"
 #include "playerInfo.h"
-#include "spaceship.h"
+#include "spaceObjects/spaceship.h"
 #include "repairCrew.h"
 
 class CrewUI : public MainUIBase

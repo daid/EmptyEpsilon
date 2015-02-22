@@ -6,9 +6,9 @@
 #include "epsilonServer.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
-#include "spaceship.h"
-#include "shipSelectionScreen.h"
-#include "serverCreationScreen.h"
+#include "spaceObjects/spaceship.h"
+#include "gui/shipSelectionScreen.h"
+#include "gui/serverCreationScreen.h"
 
 MainMenu::MainMenu()
 {

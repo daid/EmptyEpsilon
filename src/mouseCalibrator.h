@@ -1,7 +1,7 @@
 #ifndef MOUSE_CALIBRATOR_H
 #define MOUSE_CALIBRATOR_H
 
-#include "gui.h"
+#include "gui/gui.h"
 
 class MouseCalibrator : public GUI
 {

@@ -1,5 +1,5 @@
 #include "commsScriptInterface.h"
-#include "cpuShip.h"
+#include "spaceObjects/cpuShip.h"
 
 static CommsScriptInterface* comms_script_interface = NULL;
 

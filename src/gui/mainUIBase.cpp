@@ -9,7 +9,7 @@
 #include "shipSelectionScreen.h"
 #include "repairCrew.h"
 #include "gameGlobalInfo.h"
-#include "nebula.h"
+#include "spaceObjects/nebula.h"
 
 MainUIBase::MainUIBase()
 {

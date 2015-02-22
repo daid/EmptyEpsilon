@@ -1,5 +1,5 @@
-#include "crewCommsUI.h"
-#include "mine.h"
+#include "gui/crewCommsUI.h"
+#include "spaceObjects/mine.h"
 
 CrewCommsUI::CrewCommsUI()
 {

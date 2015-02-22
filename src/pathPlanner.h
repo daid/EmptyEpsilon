@@ -1,7 +1,7 @@
 #ifndef PATH_PLANNER_H
 #define PATH_PLANNER_H
 
-#include "spaceObject.h"
+#include "spaceObjects/spaceObject.h"
 
 class PathPlannerManager : public Updatable
 {

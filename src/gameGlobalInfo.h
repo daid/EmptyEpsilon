@@ -1,7 +1,7 @@
 #ifndef GAME_GLOBAL_INFO_H
 #define GAME_GLOBAL_INFO_H
 
-#include "playerSpaceship.h"
+#include "spaceObjects/playerSpaceship.h"
 
 class GameGlobalInfo;
 extern P<GameGlobalInfo> gameGlobalInfo;

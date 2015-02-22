@@ -2,7 +2,7 @@
 #define REPAIR_CREW_H
 
 #include "engine.h"
-#include "playerSpaceship.h"
+#include "spaceObjects/playerSpaceship.h"
 
 enum ERepairCrewAction
 {

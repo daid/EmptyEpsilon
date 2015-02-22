@@ -1,8 +1,8 @@
 #ifndef MAIN_UI_H
 #define MAIN_UI_H
 
-#include "gui.h"
-#include "spaceship.h"
+#include "gui/gui.h"
+#include "spaceObjects/spaceship.h"
 
 class ScanGhost
 {
