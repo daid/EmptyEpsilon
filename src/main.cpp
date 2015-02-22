@@ -85,7 +85,7 @@ int main(int argc, char** argv)
     {
         LOG(INFO) << "Enabling HTTP script access.";
         LOG(INFO) << "NOTE: This is potentially a risk!";
-        HttpServer* server = new HttpServer();
+        HttpServer* server = new HttpServer(startup_parameters["httpserver"].toInt());
         server->addHandler(new HttpRequestFileHandler("www"));
         server->addHandler(new HttpScriptHandler());
     }
