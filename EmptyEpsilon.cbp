@@ -16,7 +16,6 @@
 					<Add option="-g" />
 					<Add option="-DDEBUG" />
 					<Add directory="../SFML-2.2/include" />
-					<Add directory="src" />
 				</Compiler>
 				<Linker>
 					<Add library="sfml-window-d" />
@@ -117,6 +116,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add directory="../SeriousProton/src" />
+			<Add directory="src" />
 		</Compiler>
 		<Unit filename="../SeriousProton/src/Box2D/Box2D.h" />
 		<Unit filename="../SeriousProton/src/Box2D/Collision/Shapes/b2ChainShape.cpp" />
