@@ -1,7 +1,7 @@
 #include "scienceDatabase.h"
 #include "factionInfo.h"
 #include "shipTemplate.h"
-#include "spaceship.h"
+#include "spaceObjects/spaceship.h"
 
 #include "scriptInterface.h"
 REGISTER_SCRIPT_CLASS_NO_CREATE(ScienceDatabaseEntry)
