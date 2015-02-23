@@ -5,6 +5,8 @@
 #include "playerInfo.h"
 
 #include "scriptInterface.h"
+
+/// Nebulas block long range sensors in a 5km range.
 REGISTER_SCRIPT_SUBCLASS(Nebula, SpaceObject)
 {
 }

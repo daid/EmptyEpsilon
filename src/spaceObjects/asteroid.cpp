@@ -4,6 +4,8 @@
 #include "main.h"
 
 #include "scriptInterface.h"
+
+/// An asteroid in space. Nothing more, nothing less.
 REGISTER_SCRIPT_SUBCLASS(Asteroid, SpaceObject)
 {
 }

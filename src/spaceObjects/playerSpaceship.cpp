@@ -5,6 +5,8 @@
 #include "main.h"
 
 #include "scriptInterface.h"
+
+/// PlayerSpaceship are the ships that are controlled by the player.
 REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getWaypoint);

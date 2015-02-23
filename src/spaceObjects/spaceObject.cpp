@@ -4,14 +4,27 @@
 #include "gameGlobalInfo.h"
 
 #include "scriptInterface.h"
+/// The SpaceObject is the base for every object which can be seen in space.
+/// General properties can read and set for each object. Each object has a position, rotation and collision shape.
 REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
 {
+    /// Set the position of this object in 2D space, in meters
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setPosition);
+    /// Sets the absolute rotation of this object. In degrees.
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setRotation);
+    /// Gets the position of this object, returns x, y
+    /// Example: local x, y = obj:getPosition()
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getPosition);
+    /// Gets the rotation of this object. In degrees.
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getRotation);
+    
+    /// Sets the faction to which this object belongs. Requires a string as input.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setFaction);
+    /// Sets the faction to which this object belongs. Requires a index in the faction list.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setFactionId);
+    /// Gets the index in the faction list from this object.
+    /// Can be used in combination with setFactionId to make sure two objects have the same faction.
+    /// Example: other:setFactionId(obj:getFactionId())
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getFactionId);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setCommsScript);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isEnemy);

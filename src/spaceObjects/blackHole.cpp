@@ -2,6 +2,9 @@
 #include "pathPlanner.h"
 
 #include "scriptInterface.h"
+
+/// A blackhole has a 5km radius where it pulls in all near objects. At the center of the black hole everything gets a lot of damage.
+/// Which will lead to the eventual destruction of said object.
 REGISTER_SCRIPT_SUBCLASS(BlackHole, SpaceObject)
 {
 }

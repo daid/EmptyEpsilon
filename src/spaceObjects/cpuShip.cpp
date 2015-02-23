@@ -4,17 +4,31 @@
 #include "nebula.h"
 
 #include "scriptInterface.h"
+
+/// CpuShips are AI controlled ships.
+/// They can get different orders.
+/// Example: CpuShip():setShipTemplate("Fighter"):setPosition(random(-10000, 10000), random(0, 3000)):setFaction("Human Navy"):orderRoaming():setScanned(true)
 REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceShip)
 {
+    /// Order this ship to stand still and do nothing.
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderIdle);
+    /// Order this ship to roam around the world and attack targets
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderRoaming);
+    /// Order this ship to stand still, but still target and try to hit nearby enemies
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderStandGround);
+    /// Order this ship to defend a specific location. It will attack enemies near this target.
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderDefendLocation);
+    /// Order this ship to defend a specific object. It will attack enemies near this object.
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderDefendTarget);
+    /// Order this ship to fly in formation with another ship. It will attack nearby enemies.
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyFormation);
+    /// Order this ship to fly to a location, attacking everything alogn the way.
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyTowards);
+    /// Order this ship to fly to a location, without attacking anything
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyTowardsBlind);
+    /// Order this ship to attack a specific target. If the target is destroyed it will fall back to roaming orders.
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderAttack);
+    /// Order this ship to dock at a specific object (station or otherwise)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderDock);
 }
 

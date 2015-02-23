@@ -5,6 +5,8 @@
 #include "explosionEffect.h"
 
 #include "scriptInterface.h"
+
+/// A mine object. Simple, effective, deadly.
 REGISTER_SCRIPT_SUBCLASS(Mine, SpaceObject)
 {
 }
