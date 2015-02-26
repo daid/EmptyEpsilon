@@ -744,7 +744,7 @@ void SpaceShip::requestDock(P<SpaceObject> target)
 {
     if (!target || docking_state != DS_NotDocking || !target->canBeDockedBy(this))
         return;
-    if (sf::length(getPosition() - target->getPosition()) > 1000)
+    if (sf::length(getPosition() - target->getPosition()) > 1000 + target->getRadius())
         return;
     if (hasJumpdrive && jumpDelay > 0.0f)
         return;

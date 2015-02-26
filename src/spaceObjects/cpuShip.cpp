@@ -262,7 +262,7 @@ void CpuShip::update(float delta)
                 sf::Vector2f target_position = order_target->getPosition();
                 sf::Vector2f diff = getPosition() - target_position;
                 float dist = sf::length(diff);
-                if (dist < 600)
+                if (dist < 600 + order_target->getRadius())
                 {
                     requestDock(order_target);
                     pathPlanner.clear();
