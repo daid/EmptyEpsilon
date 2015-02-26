@@ -93,6 +93,7 @@ ShipTemplate::ShipTemplate()
     frontShields = 0;
     rearShields = 0.0;
     impulseSpeed = 500.0;
+    impulseAcceleration = 0.2;
     turnSpeed = 10.0;
     warpSpeed = 0.0;
     jumpDrive = false;

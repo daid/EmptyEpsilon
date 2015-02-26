@@ -9,6 +9,19 @@ function setCirclePos(obj, x, y, angle, distance)
 	return obj:setPosition(x + dx, y + dy)
 end
 
+function randomStationTemplate()
+	if random(0, 100) < 10 then
+		return 'Huge Station'
+	end
+	if random(0, 100) < 20 then
+		return 'Large Station'
+	end
+	if random(0, 100) < 50 then
+		return 'Medium Station'
+	end
+	return 'Small Station'
+end
+
 function init()
 	waveNumber = 0
 	spawnWaveDelay = nil
@@ -18,7 +31,7 @@ function init()
 	PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
 
 	for n=1, 2 do
-		table.insert(friendlyList, SpaceStation():setFaction("Human Navy"):setPosition(random(-5000, 5000), random(-5000, 5000)))
+		table.insert(friendlyList, SpaceStation():setTemplate(randomStationTemplate()):setFaction("Human Navy"):setPosition(random(-5000, 5000), random(-5000, 5000)))
 	end
 	friendlyList[1]:addReputationPoints(150.0)
 

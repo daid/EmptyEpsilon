@@ -11,12 +11,12 @@ item:setLongDescription([[Neblua are the birthing place of new stars. These gas 
 
 weapons = ScienceDatabase():setName('Weapons')
 item = weapons:addEntry('Homing missile')
-item:addKeyValue('Range', '6km')
-item:addKeyValue('Damage', '30')
+item:addKeyValue('Range', '5.4km')
+item:addKeyValue('Damage', '35')
 item:setLongDescription([[This target seeking missile is the work horse of many ships. It's compact enought to be fitted on frigates and packs enough punch to be used on larger ships, albeit with more than a single missile tube.]])
 
 item = weapons:addEntry('Nuke')
-item:addKeyValue('Range', '4.8km')
+item:addKeyValue('Range', '5.4km')
 item:addKeyValue('Blast radius', '1km')
 item:addKeyValue('Damage at center', '160')
 item:addKeyValue('Damage at edge', '30')
@@ -35,7 +35,7 @@ There are also old mine fields scattered around the universe from older wars.
 Some fearless captains have used mines as offensive weapons. But this is with great risk]])
 
 item = weapons:addEntry('EMP')
-item:addKeyValue('Range', '4.8km')
+item:addKeyValue('Range', '5.4km')
 item:addKeyValue('Blast radius', '1km')
 item:addKeyValue('Damage at center', '160')
 item:addKeyValue('Damage at edge', '30')

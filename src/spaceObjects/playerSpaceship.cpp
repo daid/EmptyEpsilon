@@ -511,9 +511,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t clientId, sf::Packet& packe
     case CMD_FIRE_TUBE:
         {
             int8_t tubeNr;
-            packet >> tubeNr;
+            float missile_target_angle;
+            packet >> tubeNr >> missile_target_angle;
 
-            fireTube(tubeNr);
+            fireTube(tubeNr, missile_target_angle);
         }
         break;
     case CMD_SET_SHIELDS:
@@ -820,10 +821,10 @@ void PlayerSpaceship::commandUnloadTube(int8_t tubeNumber)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandFireTube(int8_t tubeNumber)
+void PlayerSpaceship::commandFireTube(int8_t tubeNumber, float missile_target_angle)
 {
     sf::Packet packet;
-    packet << CMD_FIRE_TUBE << tubeNumber;
+    packet << CMD_FIRE_TUBE << tubeNumber << missile_target_angle;
     sendClientCommand(packet);
 }
 

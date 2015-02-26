@@ -83,7 +83,7 @@ public:
     void commandSetTarget(P<SpaceObject> target);
     void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
     void commandUnloadTube(int8_t tubeNumber);
-    void commandFireTube(int8_t tubeNumber);
+    void commandFireTube(int8_t tubeNumber, float missile_target_angle);
     void commandSetShields(bool enabled);
     void commandMainScreenSetting(EMainScreenSetting mainScreen);
     void commandScan(P<SpaceObject> object);

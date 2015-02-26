@@ -142,7 +142,7 @@ void CrewUI::dockingButton(sf::FloatRect rect, float text_size)
     }
 }
 
-void CrewUI::weaponTube(EMissileWeapons load_type, int n, sf::FloatRect load_rect, sf::FloatRect fire_rect, float text_size)
+void CrewUI::weaponTube(EMissileWeapons load_type, int n, float missile_target_angle, sf::FloatRect load_rect, sf::FloatRect fire_rect, float text_size)
 {
     switch(my_spaceship->weaponTube[n].state)
     {
@@ -155,7 +155,7 @@ void CrewUI::weaponTube(EMissileWeapons load_type, int n, sf::FloatRect load_rec
         if (button(load_rect, "Unload", text_size))
             my_spaceship->commandUnloadTube(n);
         if (button(fire_rect, getMissileWeaponName(my_spaceship->weaponTube[n].type_loaded), text_size))
-            my_spaceship->commandFireTube(n);
+            my_spaceship->commandFireTube(n, missile_target_angle);
         break;
     case WTS_Loading:
         progressBar(fire_rect, my_spaceship->weaponTube[n].delay, my_spaceship->tubeLoadTime, 0.0);

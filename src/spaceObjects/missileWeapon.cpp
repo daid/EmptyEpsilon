@@ -3,10 +3,11 @@
 #include "particleEffect.h"
 #include "explosionEffect.h"
 
-MissileWeapon::MissileWeapon(string multiplayerName, float speed, float turnrate, float lifetime, sf::Color color)
-: SpaceObject(10, multiplayerName), speed(speed), turnrate(turnrate), lifetime(lifetime), color(color)
+MissileWeapon::MissileWeapon(string multiplayerName, float homing_range, sf::Color color)
+: SpaceObject(10, multiplayerName), speed(200.0), turnrate(10.0), lifetime(27.0), color(color), homing_range(homing_range)
 {
     registerMemberReplication(&target_id);
+    registerMemberReplication(&target_angle);
     
     launch_sound_played = false;
 }
@@ -26,25 +27,7 @@ void MissileWeapon::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position,
 
 void MissileWeapon::update(float delta)
 {
-    P<SpaceObject> target;
-    if (game_server)
-        target = game_server->getObjectById(target_id);
-    else
-        target = game_client->getObjectById(target_id);
-    
-    if (target)
-    {
-        float angleDiff = sf::angleDifference(getRotation(), sf::vector2ToAngle(target->getPosition() - getPosition()));
-
-        if (angleDiff > 1.0)
-            setAngularVelocity(turnrate);
-        else if (angleDiff < -1.0)
-            setAngularVelocity(turnrate * -1.0f);
-        else
-            setAngularVelocity(angleDiff * turnrate);
-    }else{
-        setAngularVelocity(0);
-    }
+    updateMovement();
 
     if (!launch_sound_played)
     {
@@ -73,4 +56,30 @@ void MissileWeapon::collision(Collisionable* target)
     
     hitObject(object);
     destroy();
+}
+
+void MissileWeapon::updateMovement()
+{
+    if (homing_range > 0)
+    {
+        P<SpaceObject> target;
+        if (game_server)
+            target = game_server->getObjectById(target_id);
+        else
+            target = game_client->getObjectById(target_id);
+        
+        if (target && (target->getPosition() - getPosition()) < homing_range + target->getRadius())
+        {
+            target_angle = sf::vector2ToAngle(target->getPosition() - getPosition());
+        }
+    }
+    
+    float angleDiff = sf::angleDifference(getRotation(), target_angle);
+
+    if (angleDiff > 1.0)
+        setAngularVelocity(turnrate);
+    else if (angleDiff < -1.0)
+        setAngularVelocity(turnrate * -1.0f);
+    else
+        setAngularVelocity(angleDiff * turnrate);
 }

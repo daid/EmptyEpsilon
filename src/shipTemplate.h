@@ -89,6 +89,7 @@ public:
     float hull;
     float frontShields, rearShields;
     float impulseSpeed, turnSpeed, warpSpeed;
+    float impulseAcceleration;
     bool jumpDrive, cloaking;
     int weapon_storage[MW_Count];
     

@@ -56,6 +56,8 @@ private:
     P<SpaceObject> findBestTarget(sf::Vector2f position, float radius);
     float targetScore(P<SpaceObject> target);
     bool betterTarget(P<SpaceObject> new_target, P<SpaceObject> current_target);
+    
+    float calculateFiringSolution(P<SpaceObject> target);
 };
 string getAIOrderString(EAIOrder order);
 

@@ -95,6 +95,7 @@ public:
     float currentImpulse;
     float rotationSpeed;
     float impulseMaxSpeed;
+    float impulseAcceleration;
 
     bool hasWarpdrive;
     int8_t warpRequest;
@@ -152,7 +153,7 @@ public:
     virtual void collision(Collisionable* other);
 
     void loadTube(int tubeNr, EMissileWeapons type);
-    void fireTube(int tubeNr);
+    void fireTube(int tubeNr, float target_angle);
     void initJump(float distance);
     void requestDock(P<SpaceObject> target);
     void requestUndock();

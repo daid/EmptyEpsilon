@@ -5,7 +5,7 @@
 
 REGISTER_MULTIPLAYER_CLASS(EMPMissile, "EMPMissile");
 EMPMissile::EMPMissile()
-: MissileWeapon("EMPMissile", 400.0f, 50.0f, 12.0f, sf::Color(100, 32, 255))
+: MissileWeapon("EMPMissile", 0.0, sf::Color(100, 32, 255))
 {
 }
 

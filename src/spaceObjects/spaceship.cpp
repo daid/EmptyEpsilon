@@ -101,6 +101,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     beam_system_target = SYS_None;
     shield_frequency = irandom(0, max_frequency);
     docking_state = DS_NotDocking;
+    impulseAcceleration = 0.2;
 
     registerMemberReplication(&ship_callsign);
     registerMemberReplication(&targetRotation, 1.5);
@@ -116,6 +117,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&targetId);
     registerMemberReplication(&rotationSpeed);
     registerMemberReplication(&impulseMaxSpeed);
+    registerMemberReplication(&impulseAcceleration);
     registerMemberReplication(&warpSpeedPerWarpLevel);
     registerMemberReplication(&templateName);
     registerMemberReplication(&ship_type_name);
@@ -206,6 +208,7 @@ void SpaceShip::setShipTemplate(string templateName)
     front_shield_max = ship_template->frontShields;
     rear_shield_max = ship_template->rearShields;
     impulseMaxSpeed = ship_template->impulseSpeed;
+    impulseAcceleration = ship_template->impulseAcceleration;
     rotationSpeed = ship_template->turnSpeed;
     hasWarpdrive = ship_template->warpSpeed > 0.0;
     warpSpeedPerWarpLevel = ship_template->warpSpeed;
@@ -416,7 +419,7 @@ void SpaceShip::update(float delta)
     {
         if (currentImpulse > 0.0)
         {
-            currentImpulse -= delta;
+            currentImpulse -= delta * impulseAcceleration;
             if (currentImpulse < 0.0)
                 currentImpulse = 0.0;
         }
@@ -436,7 +439,7 @@ void SpaceShip::update(float delta)
     {
         if (currentImpulse < 1.0)
         {
-            currentImpulse += delta;
+            currentImpulse += delta * impulseAcceleration;
             if (currentImpulse > 1.0)
                 currentImpulse = 1.0;
         }else{
@@ -460,12 +463,12 @@ void SpaceShip::update(float delta)
             impulseRequest = -1.0;
         if (currentImpulse < impulseRequest)
         {
-            currentImpulse += delta;
+            currentImpulse += delta * impulseAcceleration;
             if (currentImpulse > impulseRequest)
                 currentImpulse = impulseRequest;
         }else if (currentImpulse > impulseRequest)
         {
-            currentImpulse -= delta;
+            currentImpulse -= delta * impulseAcceleration;
             if (currentImpulse < impulseRequest)
                 currentImpulse = impulseRequest;
         }
@@ -661,7 +664,7 @@ void SpaceShip::loadTube(int tubeNr, EMissileWeapons type)
     }
 }
 
-void SpaceShip::fireTube(int tubeNr)
+void SpaceShip::fireTube(int tubeNr, float target_angle)
 {
     if (scanned_by_player == SS_NotScanned)
     {
@@ -686,6 +689,7 @@ void SpaceShip::fireTube(int tubeNr)
             missile->target_id = targetId;
             missile->setPosition(fireLocation);
             missile->setRotation(getRotation());
+            missile->target_angle = target_angle;
         }
         break;
     case MW_Nuke:
@@ -696,6 +700,7 @@ void SpaceShip::fireTube(int tubeNr)
             missile->target_id = targetId;
             missile->setPosition(fireLocation);
             missile->setRotation(getRotation());
+            missile->target_angle = target_angle;
         }
         break;
     case MW_Mine:
@@ -715,6 +720,7 @@ void SpaceShip::fireTube(int tubeNr)
             missile->target_id = targetId;
             missile->setPosition(fireLocation);
             missile->setRotation(getRotation());
+            missile->target_angle = target_angle;
         }
         break;
     default:

@@ -1,3 +1,5 @@
+#include <limits>
+
 #include "cpuShip.h"
 #include "playerInfo.h"
 #include "pathPlanner.h"
@@ -168,13 +170,15 @@ void CpuShip::update(float delta)
             pathPlanner.plan(getPosition(), target->getPosition());
         }
 
-        if (distance < 4500 && has_missiles && fabs(sf::angleDifference(targetRotation, getRotation())) < 30.0)
+        if (distance < 4500 && has_missiles)
         {
             for(int n=0; n<weapon_tubes; n++)
             {
                 if (weaponTube[n].state == WTS_Loaded && missile_fire_delay <= 0.0)
                 {
-                    fireTube(n);
+                    float target_angle = calculateFiringSolution(target);
+                    if (target_angle != std::numeric_limits<float>::infinity())
+                        fireTube(n, target_angle);
                     missile_fire_delay = tubeLoadTime / weapon_tubes / 2.0;
                 }
             }
@@ -243,32 +247,6 @@ void CpuShip::update(float delta)
         case AI_FlyFormation:    //Fly [order_target_location] offset from [order_target]. Allows for nicely flying in formation.
             if (order_target)
             {
-                /*
-                sf::Vector2f target_position = order_target->getPosition() + sf::rotateVector(order_target_location, order_target->getRotation());
-
-                float r = getRadius() * 5.0;
-                targetRotation = sf::vector2ToAngle(target_position - getPosition());
-                float dist = sf::length(target_position - getPosition());
-                if (sf::length(target_position - getPosition()) > r)
-                {
-                    float angle_diff = sf::angleDifference(targetRotation, getRotation());
-                    if (angle_diff > 10.0)
-                        impulseRequest = 0.0;
-                    else if (angle_diff > 5.0)
-                        impulseRequest = (10.0 - angle_diff) / 5.0;
-                    else
-                        impulseRequest = 1.0;
-                }else{
-                    if (dist > r / 2.0)
-                    {
-                        targetRotation += sf::angleDifference(targetRotation, order_target->getRotation()) * (1.0 - dist / r);
-                        impulseRequest = dist / r;
-                    }else{
-                        targetRotation = order_target->getRotation();
-                        impulseRequest = 0.0;
-                    }
-                }
-                */
                 sf::Vector2f target_position = order_target->getPosition() + sf::rotateVector(order_target_location, order_target->getRotation());
                 pathPlanner.plan(getPosition(), target_position);
             }else{
@@ -306,47 +284,74 @@ void CpuShip::update(float delta)
     
         sf::Vector2f diff = pathPlanner.route[0] - getPosition();
         float distance = sf::length(diff);
-
-        targetRotation = sf::vector2ToAngle(diff);
-        float rotation_diff = fabs(sf::angleDifference(targetRotation, getRotation()));
         
-        if (hasWarpdrive && rotation_diff < 30.0 && distance > 2000)
+        if (pathPlanner.route.size() == 1 && orders == AI_FlyFormation && !target)
         {
-            warpRequest = 1.0;
-        }else{
-            warpRequest = 0.0;
-        }
-        if (distance > 10000 && hasJumpdrive && jumpDelay <= 0.0)
-        {
-            if (rotation_diff < 1.0)
+            //Formation flying code
+            float r = getRadius() * 5.0;
+            targetRotation = sf::vector2ToAngle(diff);
+            if (distance > r)
             {
-                float jump = distance;
-                if (pathPlanner.route.size() < 2)
+                float angle_diff = sf::angleDifference(targetRotation, getRotation());
+                if (angle_diff > 10.0)
+                    impulseRequest = 0.0;
+                else if (angle_diff > 5.0)
+                    impulseRequest = (10.0 - angle_diff) / 5.0;
+                else
+                    impulseRequest = 1.0;
+            }else{
+                if (distance > r / 2.0)
                 {
-                    jump -= 3000;
-                    if (has_missiles)
-                        jump -= 5000;
+                    targetRotation += sf::angleDifference(targetRotation, order_target->getRotation()) * (1.0 - distance / r);
+                    impulseRequest = distance / r;
+                }else{
+                    targetRotation = order_target->getRotation();
+                    impulseRequest = 0.0;
                 }
-                if (jump > 10000)
-                    jump = 10000;
-                jump += random(-1500, 1500);
-                initJump(jump / 1000);
             }
-        }
-        float keep_distance = attack_distance;
-        if (!target)
-            keep_distance = 100.0;
-        if (pathPlanner.route.size() > 1)
-            keep_distance = 0.0;
+        }else{
+            //Normal flying towards target code
+            targetRotation = sf::vector2ToAngle(diff);
+            float rotation_diff = fabs(sf::angleDifference(targetRotation, getRotation()));
+            
+            if (hasWarpdrive && rotation_diff < 30.0 && distance > 2000)
+            {
+                warpRequest = 1.0;
+            }else{
+                warpRequest = 0.0;
+            }
+            if (distance > 10000 && hasJumpdrive && jumpDelay <= 0.0)
+            {
+                if (rotation_diff < 1.0)
+                {
+                    float jump = distance;
+                    if (pathPlanner.route.size() < 2)
+                    {
+                        jump -= 3000;
+                        if (has_missiles)
+                            jump -= 5000;
+                    }
+                    if (jump > 10000)
+                        jump = 10000;
+                    jump += random(-1500, 1500);
+                    initJump(jump / 1000);
+                }
+            }
+            float keep_distance = attack_distance;
+            if (!target)
+                keep_distance = 100.0;
+            if (pathPlanner.route.size() > 1)
+                keep_distance = 0.0;
 
-        if (distance > keep_distance + impulseMaxSpeed)
-            impulseRequest = 1.0f;
-        else
-            impulseRequest = (distance - keep_distance) / impulseMaxSpeed;
-        if (rotation_diff > 90)
-            impulseRequest = -impulseRequest;
-        else if (rotation_diff < 45)
-            impulseRequest *= 1.0 - ((rotation_diff - 45.0f) / 45.0);
+            if (distance > keep_distance + impulseMaxSpeed)
+                impulseRequest = 1.0f;
+            else
+                impulseRequest = (distance - keep_distance) / impulseMaxSpeed;
+            if (rotation_diff > 90)
+                impulseRequest = -impulseRequest;
+            else if (rotation_diff < 45)
+                impulseRequest *= 1.0 - ((rotation_diff - 45.0f) / 45.0);
+        }
     }else{
         targetRotation = getRotation();
         warpRequest = 0.0;
@@ -416,6 +421,59 @@ bool CpuShip::betterTarget(P<SpaceObject> new_target, P<SpaceObject> current_tar
     if (new_score > current_score + 5000.0f)
         return true;
     return false;
+}
+
+float CpuShip::calculateFiringSolution(P<SpaceObject> target)
+{
+    sf::Vector2f target_position = target->getPosition();
+    sf::Vector2f target_velocity = target->getVelocity();
+    float target_velocity_length = sf::length(target_velocity);
+    float missile_angle = sf::vector2ToAngle(target->getPosition() - getPosition());
+    float missile_speed = 200.0f;
+    float missile_turn_rate = 10.0f;
+    float turn_radius = ((360.0f / missile_turn_rate) * missile_speed) / (2.0f * M_PI);
+    
+    for(int iterations=0; iterations<10; iterations++)
+    {
+        float angle_diff = sf::angleDifference(missile_angle, getRotation());
+        
+        float left_or_right = 90;
+        if (angle_diff > 0)
+            left_or_right = -90;
+        
+        sf::Vector2f turn_center = getPosition() + sf::vector2FromAngle(getRotation() + left_or_right) * turn_radius;
+        sf::Vector2f turn_exit = turn_center + sf::vector2FromAngle(missile_angle - left_or_right) * turn_radius;
+        if (target_velocity_length < 1.0f)
+        {
+            //If the target is almost standing still, just target the position directly instead of using the velocity of the target in the calculations.
+            float time_missile = sf::length(turn_exit - target_position) / missile_speed;
+            sf::Vector2f interception = turn_exit + sf::vector2FromAngle(missile_angle) * missile_speed * time_missile;
+            if ((interception - target_position) < target->getRadius() / 2)
+                return missile_angle;
+            missile_angle = sf::vector2ToAngle(target->getPosition() - turn_exit);
+        }
+        else
+        {
+            sf::Vector2f missile_velocity = sf::vector2FromAngle(missile_angle) * missile_speed;
+            //Calculate the position where missile and the target will cross each others path.
+            sf::Vector2f intersection = sf::lineLineIntersection(target_position, target_position + target_velocity, turn_exit, turn_exit + missile_velocity);
+            //Calculate the time it will take for the target and missile to reach the intersection
+            float turn_time = fabs(angle_diff) / missile_turn_rate;
+            float time_target = sf::length((target_position - intersection)) / target_velocity_length;
+            float time_missile = sf::length(turn_exit - intersection) / missile_speed + turn_time;
+            //Calculate the time in which the radius will be on the intersection, to know in which time range we need to hit.
+            float time_radius = (target->getRadius() / 2.0) / target_velocity_length;//TODO: This value could be improved, as it is allowed to be bigger when the angle between the missile and the ship is low
+            // When both the missile and the target are at the same position at the same time, we can take a shot!
+            if (fabsf(time_target - time_missile) < time_radius)
+                return missile_angle;
+            
+            //When we cannot hit the target with this setup yet. Calculate a new intersection target, and aim for that.
+            float guessed_impact_time = (time_target * target_velocity_length / (target_velocity_length + missile_speed)) + (time_missile * missile_speed / (target_velocity_length + missile_speed));
+            sf::Vector2f new_target_position = target->getPosition() + target_velocity * guessed_impact_time;
+            missile_angle = sf::vector2ToAngle(new_target_position - turn_exit);
+        }
+    }
+    return std::numeric_limits<float>::infinity();
 }
 
 void CpuShip::orderIdle()
