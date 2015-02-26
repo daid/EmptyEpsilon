@@ -31,8 +31,6 @@ SpaceStation::SpaceStation()
     shieldHitEffect = 0.0;
 
     comms_script_name = "comms_station.lua";
-    
-    PathPlannerManager::getInstance()->addAvoidObject(this, getRadius() * 1.5f);
 }
 
 void SpaceStation::draw3D()
@@ -152,4 +150,6 @@ void SpaceStation::setTemplate(string templateName)
     setRadius(ship_template->radius);
     if (ship_template->collision_box.x > 0 && ship_template->collision_box.y > 0)
         setCollisionBox(ship_template->collision_box);
+
+    PathPlannerManager::getInstance()->addAvoidObject(this, getRadius() * 1.5f);
 }
