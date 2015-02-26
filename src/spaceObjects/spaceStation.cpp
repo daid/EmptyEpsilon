@@ -32,8 +32,6 @@ SpaceStation::SpaceStation()
 
     comms_script_name = "comms_station.lua";
     
-    setTemplate("Small Station");
-    
     PathPlannerManager::getInstance()->addAvoidObject(this, getRadius() * 1.5f);
 }
 
