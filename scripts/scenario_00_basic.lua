@@ -101,6 +101,8 @@ function init()
 	d = random(10000, 45000)
 	x, y = vectorFromAngle(a, d)
 	BlackHole():setPosition(x, y)
+	
+	ScriptObject():run("util_random_transports.lua")
 end
 
 function update(delta)
