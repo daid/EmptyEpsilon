@@ -118,7 +118,7 @@ void CrewUI::dockingButton(sf::FloatRect rect, float text_size)
             foreach(Collisionable, obj, obj_list)
             {
                 dock_object = obj;
-                if (dock_object && dock_object->canBeDockedBy(my_spaceship) && sf::length(dock_object->getPosition() - my_spaceship->getPosition()) < 1000.0)
+                if (dock_object && dock_object->canBeDockedBy(my_spaceship) && (dock_object->getPosition() - my_spaceship->getPosition()) < 1000.0f + dock_object->getRadius())
                     break;
                 dock_object = NULL;
             }
