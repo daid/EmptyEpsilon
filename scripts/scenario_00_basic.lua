@@ -13,8 +13,11 @@ function init()
 	enemyList = {}
 	friendlyList = {}
 
+	n = 0
 	table.insert(friendlyList, setCirclePos(SpaceStation():setTemplate('Small Station'):setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
+	n = 1
 	table.insert(friendlyList, setCirclePos(SpaceStation():setTemplate('Medium Station'):setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
+	n = 2
 	table.insert(friendlyList, setCirclePos(SpaceStation():setTemplate('Large Station'):setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
 	friendlyList[1]:addReputationPoints(300.0)
 
