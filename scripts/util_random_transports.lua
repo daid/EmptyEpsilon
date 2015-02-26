@@ -46,7 +46,7 @@ function update(delta)
 		spawn_delay = spawn_delay - delta
 	end
 
-	if cnt < 3 then
+	if cnt < #stationList then
 		if spawn_delay < 0 then
 			spawn_delay = random(30, 50)
 			
