@@ -31,12 +31,10 @@ function update(delta)
 			table.remove(transportList, idx)
 			table.remove(targetList, idx)
 		else
-			if obj:isDocked(target) and spawn_delay < 0.0 then
+			if obj:isDocked(target) then
 				target = randomStation()
 				targetList[idx] = target
 				obj:orderDock(target)
-				
-				spawn_delay = random(10, 20)
 			end
 			cnt = cnt + 1
 		end
