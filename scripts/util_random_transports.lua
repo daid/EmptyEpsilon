@@ -1,6 +1,5 @@
 stationList = {}
 transportList = {}
-targetList = {}
 spawn_delay = 0
 
 function vectorFromAngle(angle, length)
@@ -25,16 +24,18 @@ end
 function update(delta)
 	cnt = 0
 	for idx, obj in ipairs(transportList) do
-		target = targetList[idx]
 		if not obj:isValid() then
 			--Transport destroyed, remove it from the list
 			table.remove(transportList, idx)
-			table.remove(targetList, idx)
 		else
-			if obj:isDocked(target) then
-				target = randomStation()
-				targetList[idx] = target
-				obj:orderDock(target)
+			if obj:isDocked(obj.target) then
+				if obj.undock_delay > 0 then
+					obj.undock_delay = obj.undock_delay - delta
+				else
+					obj.target = randomStation()
+					obj.undock_delay = random(5, 30)
+					obj:orderDock(obj.target)
+				end
 			end
 			cnt = cnt + 1
 		end
@@ -49,13 +50,13 @@ function update(delta)
 			spawn_delay = random(30, 50)
 			
 			obj = CpuShip():setShipTemplate('Tug'):setFaction('Independent')
-			target = randomStation()
-			obj:orderDock(target)
-			x, y = target:getPosition()
+			obj.target = randomStation()
+			obj.undock_delay = random(5, 30)
+			obj:orderDock(obj.target)
+			x, y = obj.target:getPosition()
 			xd, yd = vectorFromAngle(random(0, 360), random(25000, 40000))
 			obj:setPosition(x + xd, y + yd)
 			table.insert(transportList, obj)
-			table.insert(targetList, target)
 		end
 	end
 end
