@@ -102,7 +102,7 @@ function init()
 	x, y = vectorFromAngle(a, d)
 	BlackHole():setPosition(x, y)
 	
-	ScriptObject():run("util_random_transports.lua")
+	Script():run("util_random_transports.lua")
 end
 
 function update(delta)

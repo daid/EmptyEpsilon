@@ -168,20 +168,21 @@ int main(int argc, char** argv)
         billboardShader.loadFromStream(**vertexStream, **fragmentStream);
     }
 
-    P<ScriptObject> shipTemplatesScript = new ScriptObject("shipTemplates.lua");
-    if (shipTemplatesScript)
-        shipTemplatesScript->destroy();
-    
-    P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");
-    if (factionInfoScript)
-        factionInfoScript->destroy();
-    
-    fillDefaultDatabaseData();
-    
-    P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
-    if (scienceInfoScript)
-        scienceInfoScript->destroy();
-
+    {
+        P<ScriptObject> shipTemplatesScript = new ScriptObject("shipTemplates.lua");
+        if (shipTemplatesScript)
+            shipTemplatesScript->destroy();
+        
+        P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");
+        if (factionInfoScript)
+            factionInfoScript->destroy();
+        
+        fillDefaultDatabaseData();
+        
+        P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
+        if (scienceInfoScript)
+            scienceInfoScript->destroy();
+    }
     returnToMainMenu();
     
     engine->runMainLoop();

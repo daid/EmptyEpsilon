@@ -113,6 +113,20 @@ string GameGlobalInfo::getNextShipCallsign()
     return "SS" + string(callsign_counter);
 }
 
+void GameGlobalInfo::addScript(P<Script> script)
+{
+    script_list.update();
+    script_list.push_back(script);
+}
+
+void GameGlobalInfo::destroy()
+{
+    foreach(Script, s, script_list)
+    {
+        s->destroy();
+    }
+}
+
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
 {
     switch(player_warp_jump_drive)
