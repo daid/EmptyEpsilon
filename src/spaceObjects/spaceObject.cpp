@@ -58,6 +58,12 @@ void SpaceObject::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, f
 {
 }
 
+void SpaceObject::destroy()
+{
+    onDestroyed();
+    MultiplayerObject::destroy();
+}
+
 bool SpaceObject::isEnemy(P<SpaceObject> obj)
 {
     return factionInfo[faction_id]->states[obj->faction_id] == FVF_Enemy;
