@@ -449,6 +449,8 @@
 		<Unit filename="src/repairCrew.h" />
 		<Unit filename="src/scienceDatabase.cpp" />
 		<Unit filename="src/scienceDatabase.h" />
+		<Unit filename="src/script.cpp" />
+		<Unit filename="src/script.h" />
 		<Unit filename="src/shipTemplate.cpp" />
 		<Unit filename="src/shipTemplate.h" />
 		<Unit filename="src/spaceObjects/EMPMissile.cpp" />
