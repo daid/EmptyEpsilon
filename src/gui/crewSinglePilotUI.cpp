@@ -6,6 +6,7 @@ CrewSinglePilotUI::CrewSinglePilotUI()
 {
     tube_load_type = MW_None;
     jump_distance = 10.0;
+    cruise_control_setpoint = 0.0;
 }
 
 void CrewSinglePilotUI::onCrewUI()
@@ -13,6 +14,7 @@ void CrewSinglePilotUI::onCrewUI()
     float radarDistance = 5000;
     sf::Vector2f mouse = InputHandler::getMousePos();
     sf::Vector2f radar_center = getWindowSize() / 2.0f;
+
     radar_center.x /= 2.0f;
     float radar_size = radar_center.x - 20;
 
@@ -39,6 +41,103 @@ void CrewSinglePilotUI::onCrewUI()
                 my_spaceship->commandTargetRotation(sf::vector2ToAngle(diff));
         }
     }
+    if (sf::Joystick::isConnected(0))
+    {
+        std::cout << "joystick button pressed!" << std::endl;
+        
+        float joystickX = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+        float joystickY = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+        float joystickZ = sf::Joystick::getAxisPosition(0, sf::Joystick::Z);
+        if(joystickX < -95) {
+            my_spaceship->commandCombatManeuver(CM_StrafeLeft);
+        } 
+        if(joystickX > 95) {
+            my_spaceship->commandCombatManeuver(CM_StrafeRight);
+        } 
+        my_spaceship->commandTargetRotation(my_spaceship->getRotation()+joystickZ/100*2);
+        if(cruise_control_setpoint) {
+            my_spaceship->commandImpulse(cruise_control_setpoint);
+        } else {
+            my_spaceship->commandImpulse(-joystickY/100);
+        }
+
+        if (sf::Joystick::isButtonPressed(0,7)) {
+            // if loaded
+
+            my_spaceship->commandFireTube(0,my_spaceship->getRotation());
+            // else: load
+            my_spaceship->commandLoadTube(0,EMissileWeapons(0));//FIXME only loads Missles
+        }
+        if (sf::Joystick::isButtonPressed(0,9)) {
+            switch(my_spaceship->docking_state)
+            {
+            case DS_NotDocking:
+                {
+                    PVector<Collisionable> obj_list = CollisionManager::queryArea(my_spaceship->getPosition() - sf::Vector2f(1000, 1000), my_spaceship->getPosition() + sf::Vector2f(1000, 1000));
+                    P<SpaceObject> dock_object;
+                    foreach(Collisionable, obj, obj_list)
+                    {
+                        dock_object = obj;
+                        if (dock_object && dock_object->canBeDockedBy(my_spaceship) && (dock_object->getPosition() - my_spaceship->getPosition()) < 1000.0f + dock_object->getRadius())
+                            break;
+                        dock_object = NULL;
+                    }
+                    
+                    if (dock_object)
+                    {
+                        // if (button(rect, "Request Dock", text_size))
+                        my_spaceship->commandDock(dock_object);
+                    }else{
+                        // disabledButton(rect, "Request Dock", text_size);
+                    }
+                }
+                break;
+            case DS_Docking:
+                // disabledButton(rect, "Docking...", text_size);
+                break;
+            case DS_Docked:
+                my_spaceship->commandUndock();
+                break;
+            }        
+        }
+        if (sf::Joystick::isButtonPressed(0,5)) { // Toggle the weapon
+            // my_spaceship->commandLoadTube(0,EMissileWeapons(0));//FIXME just a guess
+        }
+        if (sf::Joystick::isButtonPressed(0,10))
+        {
+            cruise_control_setpoint = -joystickY/100;
+        }
+        if (sf::Joystick::isButtonPressed(0,4))// L1
+        {
+            PVector<Collisionable> obj_list = CollisionManager::queryArea(my_spaceship->getPosition() - sf::Vector2f(1000, 1000), my_spaceship->getPosition() + sf::Vector2f(1000, 1000));
+            P<SpaceObject> target;
+            foreach(Collisionable, obj, obj_list)
+            {
+                target = obj;
+                if (target && target->canBeDockedBy(my_spaceship) && (target->getPosition() - my_spaceship->getPosition()) < 1000.0f + target->getRadius())
+                    break;
+                target = NULL;
+            }
+            
+            if (target)
+            {
+                // if (button(rect, "Request Dock", text_size))
+                my_spaceship->commandSetTarget(target);
+            }else{
+                // disabledButton(rect, "Request Dock", text_size);
+            }
+        }
+
+        if (sf::Joystick::isButtonPressed(0,3))
+            my_spaceship->commandCombatManeuver(CM_Boost);
+        if (sf::Joystick::isButtonPressed(0,0)) {
+            my_spaceship->commandSetAutoRepair(true);
+        }
+        if (sf::Joystick::isButtonPressed(0,2)) // FIXME: needs debounce!!
+            my_spaceship->commandSetShields(!my_spaceship->shields_active);
+        if (sf::Joystick::isButtonPressed(0,1))
+            my_spaceship->commandCombatManeuver(CM_Turn);
+    }    
 
     drawRadar(radar_center, radar_size, radarDistance, false, my_spaceship->getTarget(), sf::FloatRect(0, 0, getWindowSize().x / 2.0f, 900));
 
