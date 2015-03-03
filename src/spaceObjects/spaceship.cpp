@@ -627,6 +627,7 @@ void SpaceShip::fireBeamWeapon(int index, P<SpaceObject> target)
 
 bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)
 {
+    // FIXME: should this return false if currently docked?
     if (isEnemy(obj) || !ship_template)
         return false;
     P<SpaceShip> ship = obj;
