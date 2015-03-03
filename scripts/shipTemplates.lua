@@ -93,6 +93,9 @@ template:setWeaponStorage("Nuke", 2)
 template:setWeaponStorage("Mine", 6)
 template:setWeaponStorage("EMP", 4)
 
+-- can be docked by fighter
+template:setSizeClass(8)
+
 template:addRoomSystem(1, 0, 2, 1, "Maneuver");
 template:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
 template:addRoom(2, 2, 2, 1);
@@ -244,6 +247,9 @@ template:setHull(40)
 template:setShields(50, 50)
 template:setSpeed(45, 3, 0.2)
 template:setWeaponStorage("Homing", 10)
+
+-- can be docked by fighter
+template:setSizeClass(8)
 
 -- The advanced gunship is a ship equiped with 2 homing missiles to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself.
 template = ShipTemplate():setName("Adv. Gunship"):setMesh("dark_fighter_6.model", "dark_fighter_6_color.png", "dark_fighter_6_specular.png", "dark_fighter_6_illumination.png"):setScale(7):setRadius(200)
