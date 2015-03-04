@@ -60,6 +60,13 @@ void MainUIBase::onGui()
 
     if (my_spaceship)
     {
+        float shield_hit = (std::max(my_spaceship->front_shield_hit_effect, my_spaceship->rear_shield_hit_effect) - 0.5) / 0.5;
+        if (shield_hit > 0)
+        {
+            sf::RectangleShape fullScreenOverlay(sf::Vector2f(getWindowSize().x, 900));
+            fullScreenOverlay.setFillColor(sf::Color(64, 64, 128, 32 * shield_hit));
+            getRenderTarget()->draw(fullScreenOverlay);
+        }
         if (my_spaceship->front_shield < my_spaceship->front_shield_max / 10.0 || my_spaceship->rear_shield < my_spaceship->rear_shield_max / 10.0)
         {
             sf::RectangleShape fullScreenOverlay(sf::Vector2f(getWindowSize().x, 900));
