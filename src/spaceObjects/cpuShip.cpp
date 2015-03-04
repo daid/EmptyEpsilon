@@ -396,19 +396,18 @@ float CpuShip::targetScore(P<SpaceObject> target)
         score -= 5000;
     if (distance < 5000 && has_missiles)
         score += 500;
-    /*
+    
     if (distance < beam_weapon_range)
     {
         for(int n=0; n<maxBeamWeapons; n++)
         {
             if (distance < beamWeapons[n].range)
             {
-                //if (sf::angleDifference(angle_difference, beamWeapons[n].direction) < beamWeapons[n].arc / 2.0f)
-                //    score += 1000;
+                if (fabs(sf::angleDifference(angle_difference, beamWeapons[n].direction)) < beamWeapons[n].arc / 2.0f)
+                    score += 1000;
             }
         }
     }
-    */
     return score;
 }
 

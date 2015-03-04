@@ -199,7 +199,7 @@ void GameMasterUI::onGui()
             sf::Vector2f pos = sf::Vector2f(800, 450) + (obj->getPosition() - view_position) / view_distance * 400.0f;
             text(sf::FloatRect(pos.x, pos.y - 20.0f, 0.0f, 0.0f), string(cpu->targetScore(obj)), AlignCenter, 20);
         }
-        */
+        //*/
     }
     sf::RectangleShape sidebackBackground(sf::Vector2f(300, 900));
     sidebackBackground.setFillColor(sf::Color(0, 0, 0, 128));
