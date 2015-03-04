@@ -90,7 +90,7 @@ void CpuShip::update(float delta)
 
     P<SpaceObject> target = getTarget();
     P<SpaceObject> new_target;
-    if (target && target->hideInNebula() && (target->getPosition() - getPosition()) > 5000.0f && Nebula::blockedByNebula(getPosition(), target->getPosition()))
+    if (target && target->canHideInNebula() && (target->getPosition() - getPosition()) > 5000.0f && Nebula::blockedByNebula(getPosition(), target->getPosition()))
     {
         if (orders == AI_Roaming)
             order_target_location = target->getPosition();
@@ -372,7 +372,7 @@ P<SpaceObject> CpuShip::findBestTarget(sf::Vector2f position, float radius)
         P<SpaceObject> space_object = obj;
         if (!space_object || !space_object->canBeTargeted() || !isEnemy(space_object) || space_object == target)
             continue;
-        if (space_object->hideInNebula() && (space_object->getPosition() - getPosition()) > 5000.0f && Nebula::blockedByNebula(getPosition(), space_object->getPosition()))
+        if (space_object->canHideInNebula() && (space_object->getPosition() - getPosition()) > 5000.0f && Nebula::blockedByNebula(getPosition(), space_object->getPosition()))
             continue;
         float score = targetScore(space_object);
         if (!target || score > target_score)

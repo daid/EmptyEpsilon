@@ -48,7 +48,7 @@ public:
     virtual bool canBeTargeted() { return false; }
     virtual bool canBeDockedBy(P<SpaceObject> obj) { return false; }
     virtual bool hasShield() { return false; }
-    virtual bool hideInNebula() { return true; }
+    virtual bool canHideInNebula() { return true; }
     virtual void takeDamage(float damageAmount, DamageInfo& info) {}
 
     static void damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, DamageInfo& info, float min_range);
