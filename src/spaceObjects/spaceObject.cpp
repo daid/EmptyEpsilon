@@ -17,6 +17,14 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getPosition);
     /// Gets the rotation of this object. In degrees.
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getRotation);
+    /// Gets the velocity of the object, in 2D space, in meters/second
+    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getVelocity);
+    /// Gets the rotational velocity of the object, in degree/second
+    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getAngularVelocity);
+    /// Sets the velocity of the object, in 2D space, in meters/second
+    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setVelocity);
+    /// Sets the rotational velocity of the object, in degree/second
+    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setAngularVelocity);
     
     /// Sets the faction to which this object belongs. Requires a string as input.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setFaction);
