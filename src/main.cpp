@@ -152,6 +152,9 @@ int main(int argc, char** argv)
     else
         soundManager.setMusicVolume(50);
 
+    if (startup_parameters["disable_shaders"].toInt())
+        PostProcessor::setEnable(false);
+
     P<ResourceStream> stream = getResourceStream("sansation.ttf");
     mainFont.loadFromStream(**stream);
 
@@ -197,6 +200,7 @@ int main(int argc, char** argv)
         startup_parameters["fsaa"] = windowManager->getFSAA();
         startup_parameters["fullscreen"] = windowManager->isFullscreen() ? 1 : 0;
         startup_parameters["music_volume"] = soundManager.getMusicVolume();
+        startup_parameters["disable_shaders"] = PostProcessor::isEnabled() ? 0 : 1;
         fprintf(f, "# Empty Epsilon Settings\n# This file will be overwritten by EE.\n\n");
         fprintf(f, "# Include the following line to enable an experimental http server:\n# httpserver=8080\n\n");
         for(std::map<string, string>::iterator i = startup_parameters.begin(); i != startup_parameters.end(); i++)

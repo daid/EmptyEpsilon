@@ -393,6 +393,10 @@
 		<Unit filename="../SeriousProton/src/vectorUtils.h" />
 		<Unit filename="../SeriousProton/src/windowManager.cpp" />
 		<Unit filename="../SeriousProton/src/windowManager.h" />
+		<Unit filename="src/ai/ai.cpp" />
+		<Unit filename="src/ai/ai.h" />
+		<Unit filename="src/ai/aiFactory.cpp" />
+		<Unit filename="src/ai/aiFactory.h" />
 		<Unit filename="src/commsScriptInterface.cpp" />
 		<Unit filename="src/commsScriptInterface.h" />
 		<Unit filename="src/epsilonServer.cpp" />

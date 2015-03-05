@@ -4,6 +4,7 @@
 #include "factionInfo.h"
 #include "spaceObjects/cpuShip.h"
 #include "spaceObjects/spaceStation.h"
+#include "ai/ai.h"
 #include "gameGlobalInfo.h"
 
 GameMasterUI::GameMasterUI()
@@ -182,12 +183,12 @@ void GameMasterUI::onGui()
                 a[0].color = a[1].color = sf::Color(255, 128, 128, 32);
                 window.draw(a);
             }
-            sf::VertexArray a(sf::LinesStrip, cpuShip->pathPlanner.route.size() + 1);
+            sf::VertexArray a(sf::LinesStrip, cpuShip->ai->pathPlanner.route.size() + 1);
             a[0].position = sf::Vector2f(800, 450) + (cpuShip->getPosition() - view_position) / view_distance * 400.0f;
             a[0].color = sf::Color(255, 255, 255, 32);
-            for(unsigned int n=0; n<cpuShip->pathPlanner.route.size(); n++)
+            for(unsigned int n=0; n<cpuShip->ai->pathPlanner.route.size(); n++)
             {
-                a[n+1].position = sf::Vector2f(800, 450) + (cpuShip->pathPlanner.route[n] - view_position) / view_distance * 400.0f;
+                a[n+1].position = sf::Vector2f(800, 450) + (cpuShip->ai->pathPlanner.route[n] - view_position) / view_distance * 400.0f;
                 a[n+1].color = sf::Color(255, 255, 255, 32);
             }
             window.draw(a);
