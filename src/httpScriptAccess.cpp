@@ -20,7 +20,7 @@ bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection
         script->destroy();
         return true;
     }
-    else if (request.path == "/get_data.lua")
+    else if ((request.path == "/get_data.lua") && (connection->permission >= PERM_R))
     {
         if (!gameGlobalInfo)
         {
@@ -53,12 +53,16 @@ bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection
 
         string output;
         if (!script->runCode(luaCode, output))
+        {
             connection->sendString("{\"ERROR\": \"Script error\"}");
+        }
         else
+        {
             connection->sendString(output);
+        }
         return true;
     }
-    else if (request.path == "/set_data.lua")
+    else if ((request.path == "/set_data.lua") && (connection->permission >= PERM_RW))
     {
         if (!gameGlobalInfo)
         {
