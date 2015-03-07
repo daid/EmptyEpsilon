@@ -16,7 +16,7 @@ function update(delta)
 			state = 1
 		end
 	elseif state == 1 then
-		if math.abs(x - position_x) < 1500 and math.abs(y - position_x) < 1500 then
+		if math.abs(x - position_x) < 1500 and math.abs(y - position_y) < 1500 then
 			my_ship:destroy()
 			destroyScript()
 			return

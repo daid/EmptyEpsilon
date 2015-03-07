@@ -2,6 +2,7 @@
 #define GAME_GLOBAL_INFO_H
 
 #include "spaceObjects/playerSpaceship.h"
+#include "script.h"
 
 class GameGlobalInfo;
 extern P<GameGlobalInfo> gameGlobalInfo;
@@ -31,6 +32,8 @@ private:
     int victory_faction;
     int32_t playerShipId[maxPlayerShips];
     int callsign_counter;
+    
+    PVector<Script> script_list;
 public:
     string global_message;
     float global_message_timeout;
@@ -55,7 +58,10 @@ public:
     void setVictory(string faction_name) { victory_faction = FactionInfo::findFactionId(faction_name); }
     int getVictoryFactionId() { return victory_faction; }
     
+    void addScript(P<Script> script);
+    
     virtual void update(float delta);
+    virtual void destroy();
     
     string getNextShipCallsign();
 };

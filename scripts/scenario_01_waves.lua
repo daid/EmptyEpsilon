@@ -58,7 +58,7 @@ function init()
 	for n=1, 6 do
 		setCirclePos(SpaceStation():setTemplate(randomStationTemplate()):setFaction("Independent"), 0, 0, random(0, 360), random(15000, 30000))
 	end
-	ScriptObject():run("util_random_transports.lua")
+	Script():run("util_random_transports.lua")
 end
 
 function randomSpawnPointInfo(distance)

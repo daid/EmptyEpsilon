@@ -22,7 +22,7 @@ public:
 
     virtual void draw3DTransparent();
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
-    virtual bool hideInNebula() { return false; }
+    virtual bool canHideInNebula() { return false; }
     
     static bool blockedByNebula(sf::Vector2f start, sf::Vector2f end);
     static sf::Vector2f getFirstBlockedPosition(sf::Vector2f start, sf::Vector2f end);

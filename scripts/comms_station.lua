@@ -17,10 +17,10 @@ function mainMenu()
 						if player:takeReputationPoints(100) then
 							local position_x, position_y = comms_target:getPosition()
 							local target_x, target_y = player:getWaypoint(n)
-							local script = ScriptObject()
-							script:setGlobal("position_x", position_x):setGlobal("position_y", position_y)
-							script:setGlobal("target_x", target_x):setGlobal("target_y", target_y)
-							script:setGlobal("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
+							local script = Script()
+							script:setVariable("position_x", position_x):setVariable("position_y", position_y)
+							script:setVariable("target_x", target_x):setVariable("target_y", target_y)
+							script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
 							setCommsMessage("We have dispatched a supply ship towards WP" .. n);
 						else
 							setCommsMessage("Not enough rep!");

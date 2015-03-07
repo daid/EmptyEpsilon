@@ -18,6 +18,7 @@ enum EAIOrder
     AI_Attack,          //Attack [order_target] very specificly.
 };
 
+class ShipAI;
 class CpuShip : public SpaceShip
 {
     static const float auto_system_repair_per_second = 0.005f;
@@ -25,13 +26,7 @@ class CpuShip : public SpaceShip
     EAIOrder orders;                    //Server only
     sf::Vector2f order_target_location; //Server only
     P<SpaceObject> order_target;        //Server only
-    float missile_fire_delay;
-
-    bool has_missiles;//Server only, updated every update
-    bool has_beams;//Server only, updated every update
-    float beam_weapon_range;//Server only, updated every update
-    
-    PathPlanner pathPlanner;
+    ShipAI* ai;
 public:
     CpuShip();
     
@@ -39,6 +34,7 @@ public:
     
     void orderIdle();
     void orderRoaming();
+    void orderRoamingAt(sf::Vector2f position);
     void orderStandGround();
     void orderDefendLocation(sf::Vector2f position);
     void orderDefendTarget(P<SpaceObject> object);
@@ -49,15 +45,10 @@ public:
     void orderDock(P<SpaceObject> object);
     
     EAIOrder getOrder() { return orders; }
+    sf::Vector2f getOrderTargetLocation() { return order_target_location; }
+    P<SpaceObject> getOrderTarget() { return order_target; }
     
     friend class GameMasterUI;
-
-private:
-    P<SpaceObject> findBestTarget(sf::Vector2f position, float radius);
-    float targetScore(P<SpaceObject> target);
-    bool betterTarget(P<SpaceObject> new_target, P<SpaceObject> current_target);
-    
-    float calculateFiringSolution(P<SpaceObject> target);
 };
 string getAIOrderString(EAIOrder order);
 

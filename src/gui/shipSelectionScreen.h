@@ -12,6 +12,8 @@ public:
     ShipSelectionScreen();
     
     virtual void onGui();
+    
+    bool canDoMainScreen() { return PostProcessor::isEnabled() && sf::Shader::isAvailable(); }
 };
 
 #endif//SHIP_SELECTION_SCREEN_H

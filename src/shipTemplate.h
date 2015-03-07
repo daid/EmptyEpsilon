@@ -68,6 +68,7 @@ public:
     EngineEmitorTemplate(sf::Vector3f position, sf::Vector3f color, float scale) : position(position), color(color), scale(scale) {}
 };
 
+class SpaceObject;
 class ShipTemplate : public PObject
 {
     static std::map<string, P<ShipTemplate> > templateMap;
@@ -125,6 +126,8 @@ public:
     
     sf::Vector2i interiorSize();
     ESystem getSystemAtRoom(sf::Vector2i position);
+    
+    void setCollisionData(P<SpaceObject> object);
 public:
     static P<ShipTemplate> getTemplate(string name);
     static std::vector<string> getTemplateNameList();

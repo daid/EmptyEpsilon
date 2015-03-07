@@ -14,7 +14,7 @@ public:
     virtual void draw3D();
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
     
-    virtual bool hideInNebula() { return false; }
+    virtual bool canHideInNebula() { return false; }
 
     virtual void collision(Collisionable* target);
 };

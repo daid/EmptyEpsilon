@@ -1,4 +1,5 @@
 #include "shipTemplate.h"
+#include "spaceObjects/spaceObject.h"
 #include "mesh.h"
 
 #include "scriptInterface.h"
@@ -167,11 +168,17 @@ ESystem ShipTemplate::getSystemAtRoom(sf::Vector2i position)
     return SYS_None;
 }
 
+void ShipTemplate::setCollisionData(P<SpaceObject> object)
+{
+    object->setRadius(radius);
+    if (collision_box.x > 0 && collision_box.y > 0)
+        object->setCollisionBox(collision_box);
+}
+
 P<ShipTemplate> ShipTemplate::getTemplate(string name)
 {
     if (templateMap.find(name) != templateMap.end())
         return templateMap[name];
-    LOG(ERROR) << "Ship template not found: " << name;
     return NULL;
 }
 

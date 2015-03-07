@@ -89,6 +89,14 @@ void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, 
 
 void SpaceStation::update(float delta)
 {
+    if (!ship_template || ship_template->name != templateName)
+    {
+        ship_template = ShipTemplate::getTemplate(templateName);
+        if (!ship_template)
+            return;
+        ship_template->setCollisionData(this);
+    }
+
     if (shields < shields_max)
     {
         shields += delta * shieldRechargeRate;
@@ -136,20 +144,19 @@ void SpaceStation::takeDamage(float damageAmount, DamageInfo& info)
 
 void SpaceStation::setTemplate(string templateName)
 {
-    this->templateName = templateName;
-    ship_template = ShipTemplate::getTemplate(templateName);
-    if (!ship_template)
+    P<ShipTemplate> new_ship_template = ShipTemplate::getTemplate(templateName);
+    if (!new_ship_template)
     {
         LOG(ERROR) << "Failed to find template for station: " << templateName;
         return;
     }
+    this->templateName = templateName;
+    ship_template = new_ship_template;
     
     hull_strength = hull_max = ship_template->hull;
     shields = shields_max = ship_template->frontShields;
 
-    setRadius(ship_template->radius);
-    if (ship_template->collision_box.x > 0 && ship_template->collision_box.y > 0)
-        setCollisionBox(ship_template->collision_box);
+    ship_template->setCollisionData(this);
 
     PathPlannerManager::getInstance()->addAvoidObject(this, getRadius() * 1.5f);
 }

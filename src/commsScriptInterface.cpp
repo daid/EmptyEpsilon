@@ -20,7 +20,12 @@ static int addCommsReply(lua_State* L)
     comms_script_interface->ship->addCommsReply(comms_script_interface->reply_id, luaL_checkstring(L, 1));
     if (!lua_isfunction(L, 2)) return luaL_argerror(L, 2, "2nd argument to addCommsReply should be a function");
     
-    lua_setglobal(L, ("__commsReply" + string(comms_script_interface->reply_id)).c_str());
+    lua_pushlightuserdata(L, *comms_script_interface->scriptObject);
+    lua_gettable(L, LUA_REGISTRYINDEX);
+    lua_pushstring(L, ("__commsReply" + string(comms_script_interface->reply_id)).c_str());
+    lua_pushvalue(L, 2);
+    lua_settable(L, -3);
+    lua_pop(L, 1);
     comms_script_interface->reply_id++;
     return 0;
 }

@@ -200,14 +200,16 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
 
 void SpaceShip::setShipTemplate(string templateName)
 {
-    this->templateName = templateName;
-    this->ship_type_name = templateName;
-    ship_template = ShipTemplate::getTemplate(templateName);
-    if (!ship_template)
+    P<ShipTemplate> new_ship_template = ShipTemplate::getTemplate(templateName);
+    if (!new_ship_template)
     {
         LOG(ERROR) << "Failed to find ship template: " << templateName;
         return;
     }
+
+    this->ship_template = new_ship_template;
+    this->templateName = templateName;
+    this->ship_type_name = templateName;
 
     for(int n=0; n<maxBeamWeapons; n++)
     {
@@ -234,9 +236,7 @@ void SpaceShip::setShipTemplate(string templateName)
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = weapon_storage_max[n] = ship_template->weapon_storage[n];
 
-    setRadius(ship_template->radius);
-    if (ship_template->collision_box.x > 0 && ship_template->collision_box.y > 0)
-        setCollisionBox(ship_template->collision_box);
+    ship_template->setCollisionData(this);
 }
 
 void SpaceShip::draw3D()
@@ -361,10 +361,12 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
 
 void SpaceShip::update(float delta)
 {
-    if (!ship_template)
+    if (!ship_template || ship_template->name != templateName)
     {
         ship_template = ShipTemplate::getTemplate(templateName);
-        setRadius(ship_template->radius);
+        if (!ship_template)
+            return;
+        ship_template->setCollisionData(this);
     }
 
     if (game_server)

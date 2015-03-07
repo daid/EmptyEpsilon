@@ -42,12 +42,13 @@ public:
     virtual void draw3D();
     virtual void draw3DTransparent() {}
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
+    virtual void destroy();
 
     virtual string getCallSign() { return "??? (" + string(getMultiplayerId()) + ")"; }
     virtual bool canBeTargeted() { return false; }
     virtual bool canBeDockedBy(P<SpaceObject> obj) { return false; }
     virtual bool hasShield() { return false; }
-    virtual bool hideInNebula() { return true; }
+    virtual bool canHideInNebula() { return true; }
     virtual void takeDamage(float damageAmount, DamageInfo& info) {}
 
     static void damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, DamageInfo& info, float min_range);
@@ -63,6 +64,8 @@ public:
     void setCommsScript(string script_name) { this->comms_script_name = script_name; }
     bool areEnemiesInRange(float range);
     PVector<SpaceObject> getObjectsInRange(float range);
+    
+    ScriptCallback onDestroyed;
 };
 
 #endif//SPACE_OBJECT_H

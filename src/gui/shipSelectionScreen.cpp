@@ -44,22 +44,25 @@ void ShipSelectionScreen::onGui()
         }
         if (my_spaceship)
         {
-            if (button(sf::FloatRect(800, 150, 300, 50), "Window"))
+            if (canDoMainScreen())
             {
-                destroy();
-                P<ShipWindowUI> ui = new ShipWindowUI();
-                ui->window_angle = window_angle;
-            }
-            window_angle += selector(sf::FloatRect(800, 200, 300, 50), "Window: " + string(window_angle) + "deg", 30) * 15;
-            if (window_angle < 0)
-                window_angle += 360;
-            if (window_angle >= 360)
-                window_angle -= 360;
-            
-            if (button(sf::FloatRect(800, 250, 300, 50), "Top down 3D"))
-            {
-                destroy();
-                new TopDownUI();
+                if (button(sf::FloatRect(800, 150, 300, 50), "Window"))
+                {
+                    destroy();
+                    P<ShipWindowUI> ui = new ShipWindowUI();
+                    ui->window_angle = window_angle;
+                }
+                window_angle += selector(sf::FloatRect(800, 200, 300, 50), "Window: " + string(window_angle) + "deg", 30) * 15;
+                if (window_angle < 0)
+                    window_angle += 360;
+                if (window_angle >= 360)
+                    window_angle -= 360;
+                
+                if (button(sf::FloatRect(800, 250, 300, 50), "Top down 3D"))
+                {
+                    destroy();
+                    new TopDownUI();
+                }
             }
         }else{
             text(sf::FloatRect(800, 150, 300, 50), "Select a ship", AlignCenter, 30);
@@ -80,10 +83,15 @@ void ShipSelectionScreen::onGui()
                     main_screen_control_cnt++;
             }
 
-            if (toggleButton(sf::FloatRect(800, 100, 300, 50), my_player_info->isMainScreen(), "Main screen", 30))
+            if (canDoMainScreen())
             {
-                for(int n=0; n<max_crew_positions; n++)
-                    my_player_info->setCrewPosition(ECrewPosition(n), false);
+                if (toggleButton(sf::FloatRect(800, 100, 300, 50), my_player_info->isMainScreen(), "Main screen", 30))
+                {
+                    for(int n=0; n<max_crew_positions; n++)
+                        my_player_info->setCrewPosition(ECrewPosition(n), false);
+                }
+            }else{
+                disabledButton(sf::FloatRect(800, 100, 300, 50), "Main screen", 30);
             }
             text(sf::FloatRect(800, 100, 280, 50), string(mainCnt), AlignRight, 30, sf::Color::Black);
 
