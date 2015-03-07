@@ -24,7 +24,6 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isDocked);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponStorage);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponStorageMax);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponStorage);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getHull);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getHullMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getFrontShield);
@@ -32,6 +31,23 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getRearShield);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getRearShieldMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getShieldsActive);
+
+    //REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setCallSign);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadius);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponStorage);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSpeed);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setHull);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setHullMax);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setFrontShield);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setFrontShieldMax);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRearShield);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRearShieldMax);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setShieldsActive);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWarpSpeed);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDrive);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setLoadTube);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setFireTube);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setInitJump);
 }
 
 /* Define script conversion function for the EMainScreenSetting enum. */
@@ -240,7 +256,7 @@ void SpaceShip::draw3D()
 void SpaceShip::draw3DTransparent()
 {
     if (!ship_template) return;
-    
+
     if (front_shield_hit_effect > 0 || rear_shield_hit_effect > 0)
     {
         basicShader.setParameter("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
@@ -259,7 +275,7 @@ void SpaceShip::draw3DTransparent()
         if (rear_shield_hit_effect > 0.0)
             m->render();
     }
-    
+
     if (hasJumpdrive && jumpDelay > 0.0f)
     {
         glScalef(ship_template->scale, ship_template->scale, ship_template->scale);
@@ -512,7 +528,7 @@ void SpaceShip::update(float delta)
                 sf::Vector2f diff = target->getPosition() - (getPosition() + sf::rotateVector(sf::Vector2f(ship_template->beamPosition[n].x, ship_template->beamPosition[n].y) * ship_template->scale, getRotation()));
                 float distance = sf::length(diff) - target->getRadius() / 2.0;
                 float angle = sf::vector2ToAngle(diff);
-                
+
                 if (distance < beamWeapons[n].range)
                 {
                     float angleDiff = sf::angleDifference(beamWeapons[n].direction + getRotation(), angle);
@@ -566,11 +582,11 @@ void SpaceShip::update(float delta)
                 ParticleEngine::spawn(pos3d, pos3d, color, color, scale, 0.0, 5.0);
             }
         }
-        
+
         if (hasJumpdrive && jumpDelay > 0.0f && ship_template)
         {
             Mesh* m = Mesh::getMesh(ship_template->model);
-            
+
             int cnt = (10.0f - jumpDelay);
             for(int n=0; n<cnt; n++)
             {
@@ -611,7 +627,7 @@ void SpaceShip::fireBeamWeapon(int index, P<SpaceObject> target)
         if (!ship || ship->scanned_by_player != SS_NotScanned)
             scanned_by_player = SS_FriendOrFoeIdentified;
     }
-    
+
     sf::Vector2f hitLocation = target->getPosition() - sf::normalize(target->getPosition() - getPosition()) * target->getRadius();
 
     beamWeapons[index].cooldown = beamWeapons[index].cycleTime;
@@ -799,7 +815,7 @@ void SpaceShip::hullDamage(float damage_amount, DamageInfo& info)
 {
     if (info.type == DT_EMP)
         return;
-    
+
     if (gameGlobalInfo->use_system_damage)
     {
         if (info.system_target != SYS_None)
@@ -821,7 +837,7 @@ void SpaceShip::hullDamage(float damage_amount, DamageInfo& info)
                 if (systems[random_system].health < -1.0)
                     systems[random_system].health = -1.0;
             }
-            
+
             if (info.type == DT_Energy)
                 damage_amount *= 0.02;
             else
@@ -932,7 +948,7 @@ float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency)
 {
     if (beam_frequency < 0 || shield_frequency < 0)
         return 1.0;
-    
+
     float diff = abs(beam_frequency - shield_frequency);
     float f1 = sinf(Tween<float>::linear(diff, 0, SpaceShip::max_frequency, 0, M_PI * (1.2 + shield_frequency * 0.05)) + M_PI / 2);
     f1 = f1 * Tween<float>::easeInCubic(diff, 0, SpaceShip::max_frequency, 1.0, 0.1);
