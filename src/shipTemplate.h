@@ -114,7 +114,7 @@ public:
     void setTubes(int amount, float load_time) { weapon_tubes = std::min(maxWeaponTubes, amount); tube_load_time = load_time; }
     void setHull(float amount) { hull = amount; }
     void setShields(float front, float rear) { frontShields = front; rearShields = rear; }
-    void setSpeed(float impulse, float turn) { impulseSpeed = impulse; turnSpeed = turn; }
+    void setSpeed(float impulse, float turn, float impulseAccel) { impulseSpeed = impulse; turnSpeed = turn; impulseAcceleration = impulseAccel; }
     void setWarpSpeed(float warp) { warpSpeed = warp; }
     void setJumpDrive(bool enabled) { jumpDrive = enabled; }
     void setCloaking(bool enabled) { cloaking = enabled; }

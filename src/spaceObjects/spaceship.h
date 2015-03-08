@@ -154,6 +154,8 @@ public:
 
     void loadTube(int tubeNr, EMissileWeapons type);
     void fireTube(int tubeNr, float target_angle);
+    void firePlasma();
+
     void initJump(float distance);
     void requestDock(P<SpaceObject> target);
     void requestUndock();
