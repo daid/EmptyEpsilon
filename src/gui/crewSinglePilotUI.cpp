@@ -7,6 +7,7 @@ CrewSinglePilotUI::CrewSinglePilotUI()
     tube_load_type = MW_None;
     jump_distance = 10.0;
     cruise_control_setpoint = 0.0;
+    plasmaBuildup = 0.0;
 }
 
 void CrewSinglePilotUI::onCrewUI()
@@ -61,13 +62,29 @@ void CrewSinglePilotUI::onCrewUI()
             my_spaceship->commandImpulse(-joystickY/100);
         }
 
-        if (sf::Joystick::isButtonPressed(0,7)) {
+        if (sf::Joystick::isButtonPressed(0,5)) {
             // if loaded
 
             my_spaceship->commandFireTube(0,my_spaceship->getRotation());
             // else: load
             my_spaceship->commandLoadTube(0,EMissileWeapons(0));//FIXME only loads Missles
         }
+        if (sf::Joystick::isButtonPressed(0,7)) {
+            plasmaBuildup = plasmaBuildup + 1;
+        } else { // release
+            if(plasmaBuildup != 0.0) {
+                if((my_spaceship->energy_level - 40) < plasmaBuildup) // only fire if some energy is left
+                {
+                    plasmaBuildup = my_spaceship->energy_level - 40;
+                }
+                if(plasmaBuildup > 0.0)
+                    my_spaceship->commandFirePlasma();
+                // my_spaceship->commandFirePlasma(plasmaBuildup);
+                plasmaBuildup = 0.0; //consume buildup
+            }
+        }
+
+
         if (sf::Joystick::isButtonPressed(0,9)) {
             switch(my_spaceship->docking_state)
             {

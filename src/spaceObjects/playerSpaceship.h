@@ -84,6 +84,7 @@ public:
     void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
     void commandUnloadTube(int8_t tubeNumber);
     void commandFireTube(int8_t tubeNumber, float missile_target_angle);
+    void commandFirePlasma();
     void commandSetShields(bool enabled);
     void commandMainScreenSetting(EMainScreenSetting mainScreen);
     void commandScan(P<SpaceObject> object);
@@ -113,6 +114,7 @@ public:
 
     virtual void executeJump(float distance);
     virtual void fireBeamWeapon(int index, P<SpaceObject> target);
+    virtual void firePlasma();
     virtual void hullDamage(float damageAmount, DamageInfo& info);
     void setSystemCoolant(ESystem system, float level);
 

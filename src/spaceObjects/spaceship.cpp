@@ -10,6 +10,7 @@
 #include "spaceObjects/explosionEffect.h"
 #include "spaceObjects/EMPMissile.h"
 #include "spaceObjects/homingMissile.h"
+#include "spaceObjects/plasmaBolt.h"
 #include "particleEffect.h"
 #include "spaceObjects/mine.h"
 #include "spaceObjects/nuke.h"
@@ -662,6 +663,30 @@ void SpaceShip::loadTube(int tubeNr, EMissileWeapons type)
             weapon_storage[type]--;
         }
     }
+}
+
+void SpaceShip::firePlasma()
+{
+    if (docking_state != DS_NotDocking) return;
+    if (currentWarp > 0.0) return;
+
+    sf::Vector2f fireLocationL = getPosition() + sf::rotateVector(sf::Vector2f(2, -10), getRotation()) * ship_template->scale;
+    P<PlasmaBolt> plasmaBoltL = new PlasmaBolt("Plasma", 100.0, sf::Color(255, 0, 0));
+    plasmaBoltL->owner = this;
+    plasmaBoltL->setFactionId(getFactionId());
+    plasmaBoltL->target_id = targetId;
+    plasmaBoltL->setPosition(fireLocationL);
+    plasmaBoltL->setRotation(getRotation());
+    plasmaBoltL->target_angle = 0.0;
+
+    sf::Vector2f fireLocationR = getPosition() + sf::rotateVector(sf::Vector2f(-2, 10), getRotation()) * ship_template->scale;
+    P<PlasmaBolt> plasmaBoltR = new PlasmaBolt("Plasma", 100.0, sf::Color(255, 0, 0));
+    plasmaBoltR->owner = this;
+    plasmaBoltR->setFactionId(getFactionId());
+    plasmaBoltR->target_id = targetId;
+    plasmaBoltR->setPosition(fireLocationR);
+    plasmaBoltR->setRotation(getRotation());
+    plasmaBoltR->target_angle = 0.0;
 }
 
 void SpaceShip::fireTube(int tubeNr, float target_angle)

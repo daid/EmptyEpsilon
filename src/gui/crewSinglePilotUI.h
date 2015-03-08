@@ -6,7 +6,7 @@
 class CrewSinglePilotUI : public CrewUI
 {
     float jump_distance;
-    float cruise_control_setpoint;
+    float cruise_control_setpoint, plasmaBuildup;
     EMissileWeapons tube_load_type;
     string comms_player_message;
 public:

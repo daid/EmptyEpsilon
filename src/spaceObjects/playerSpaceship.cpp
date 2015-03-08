@@ -20,6 +20,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandLoadTube);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandUnloadTube);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandFireTube);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandFirePlasma);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetShields);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMainScreenSetting);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandScan);
@@ -86,6 +87,7 @@ static const int16_t CMD_ACTIVATE_SELF_DESTRUCT = 0x001C;
 static const int16_t CMD_CANCEL_SELF_DESTRUCT = 0x001D;
 static const int16_t CMD_CONFIRM_SELF_DESTRUCT = 0x001E;
 static const int16_t CMD_COMBAT_MANEUVER = 0x001F;
+static const int16_t CMD_FIRE_PLASMA = 0x0020;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -387,6 +389,12 @@ void PlayerSpaceship::fireBeamWeapon(int idx, P<SpaceObject> target)
         SpaceShip::fireBeamWeapon(idx, target);
 }
 
+void PlayerSpaceship::firePlasma()
+{
+    if (useEnergy(40))
+        SpaceShip::firePlasma();
+}
+
 void PlayerSpaceship::hullDamage(float damageAmount, DamageInfo& info)
 {
     if (info.type != DT_EMP)
@@ -515,6 +523,11 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t clientId, sf::Packet& packe
             packet >> tubeNr >> missile_target_angle;
 
             fireTube(tubeNr, missile_target_angle);
+        }
+        break;
+    case CMD_FIRE_PLASMA:
+        {
+            firePlasma();
         }
         break;
     case CMD_SET_SHIELDS:
@@ -825,6 +838,13 @@ void PlayerSpaceship::commandFireTube(int8_t tubeNumber, float missile_target_an
 {
     sf::Packet packet;
     packet << CMD_FIRE_TUBE << tubeNumber << missile_target_angle;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandFirePlasma()
+{
+    sf::Packet packet;
+    packet << CMD_FIRE_PLASMA;
     sendClientCommand(packet);
 }
 
