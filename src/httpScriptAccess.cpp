@@ -3,7 +3,7 @@
 
 bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection* connection)
 {
-    if (request.path == "/exec.lua")
+    if ((request.path == "/exec.lua") && (connection->permission >= PERM_EXEC))
     {
         if (!gameGlobalInfo)
         {
@@ -20,7 +20,7 @@ bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection
         script->destroy();
         return true;
     }
-    else if ((request.path == "/get_data.lua") && (connection->permission >= PERM_R))
+    else if ((request.path == "/get.lua") && (connection->permission >= PERM_R))
     {
         if (!gameGlobalInfo)
         {
@@ -45,6 +45,12 @@ bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection
 
         for (i = request.parameters.begin(); i != request.parameters.end(); i++)
         {
+            if (i->second.substr(0, 3) == "set")
+            {
+                connection->sendString("{\"ERROR\": \"You have no permission\", \"COMMAND\": \"" + i->second + "\"}");
+                return true;
+            }
+
             luaCode += i->first + " = object:" + i->second + ", ";
         }   luaCode += "}";
 
@@ -62,7 +68,7 @@ bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection
         }
         return true;
     }
-    else if ((request.path == "/set_data.lua") && (connection->permission >= PERM_RW))
+    else if ((request.path == "/set.lua") && (connection->permission >= PERM_RW))
     {
         if (!gameGlobalInfo)
         {
