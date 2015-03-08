@@ -66,6 +66,7 @@ bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection
         {
             connection->sendString(output);
         }
+        script->destroy();
         return true;
     }
     else if ((request.path == "/set.lua") && (connection->permission >= PERM_RW))
@@ -106,6 +107,7 @@ bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection
             connection->sendString("{\"ERROR\": \"Script error\"}");
         else
             connection->sendString(output);
+        script->destroy();
         return true;
     }
 
