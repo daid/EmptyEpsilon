@@ -73,7 +73,7 @@ int main(int argc, char** argv)
         *value++ = '\0';
         startup_parameters[string(argv[n]).strip()] = string(value).strip();
     }
-    
+
     new Engine();
     new DirectoryResourceProvider("resources/");
     new DirectoryResourceProvider("scripts/");
@@ -83,12 +83,22 @@ int main(int argc, char** argv)
     textureManager.setDefaultRepeated(true);
     textureManager.setAutoSprite(false);
     textureManager.getTexture("Tokka_WalkingMan.png", sf::Vector2i(6, 1));
-    
+
     if (startup_parameters["httpserver"].toInt() != 0)
     {
         LOG(INFO) << "Enabling HTTP script access.";
         LOG(INFO) << "NOTE: This is potentially a risk!";
         HttpServer* server = new HttpServer(startup_parameters["httpserver"].toInt());
+        // Set default IP-filter to allow_all
+        server->allow_rw_from = std::vector<string> (4, "*");
+        // Get list of allowed IPs from config
+        if (startup_parameters.find("allow_http_r_from") != startup_parameters.end())
+            server->allow_r_from = startup_parameters["allow_http_r_from"].split(";");
+        if (startup_parameters.find("allow_http_rw_from") != startup_parameters.end())
+            server->allow_rw_from = startup_parameters["allow_http_rw_from"].split(";");
+        if (startup_parameters.find("allow_http_exec_from") != startup_parameters.end())
+            server->allow_exec_from = startup_parameters["allow_http_exec_from"].split(";");
+
         server->addHandler(new HttpRequestFileHandler("www"));
         server->addHandler(new HttpScriptHandler());
     }
@@ -146,7 +156,7 @@ int main(int argc, char** argv)
             fclose(f);
         }
     }
-    
+
     if (startup_parameters.find("music_volume") != startup_parameters.end())
         soundManager.setMusicVolume(startup_parameters["music_volume"].toFloat());
     else
@@ -178,19 +188,19 @@ int main(int argc, char** argv)
         P<ScriptObject> shipTemplatesScript = new ScriptObject("shipTemplates.lua");
         if (shipTemplatesScript)
             shipTemplatesScript->destroy();
-        
+
         P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");
         if (factionInfoScript)
             factionInfoScript->destroy();
-        
+
         fillDefaultDatabaseData();
-        
+
         P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
         if (scienceInfoScript)
             scienceInfoScript->destroy();
     }
     returnToMainMenu();
-    
+
     engine->runMainLoop();
 
     f = fopen("options.ini", "w");
@@ -209,9 +219,9 @@ int main(int argc, char** argv)
         }
         fclose(f);
     }
-    
+
     delete engine;
-    
+
     return 0;
 }
 
