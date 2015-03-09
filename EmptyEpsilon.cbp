@@ -475,6 +475,8 @@
 		<Unit filename="src/spaceObjects/nebula.h" />
 		<Unit filename="src/spaceObjects/nuke.cpp" />
 		<Unit filename="src/spaceObjects/nuke.h" />
+		<Unit filename="src/spaceObjects/plasmaBolt.cpp" />
+		<Unit filename="src/spaceObjects/plasmaBolt.h" />
 		<Unit filename="src/spaceObjects/playerSpaceship.cpp" />
 		<Unit filename="src/spaceObjects/playerSpaceship.h" />
 		<Unit filename="src/spaceObjects/spaceObject.cpp" />
