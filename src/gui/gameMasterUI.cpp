@@ -48,7 +48,7 @@ void GameMasterUI::onGui()
                 if (click_and_drag_state == CD_BoxSelect)
                 {
                     selection.clear();
-                    
+
                     if (mouse_down_pos == mouse)
                     {
                         P<SpaceObject> target;
@@ -234,7 +234,7 @@ void GameMasterUI::onGui()
         P<SpaceShip> ship = selection[0];
         if (ship && ship->ship_template)
         {
-            text(sf::FloatRect(20, y, 100, 20), factionInfo[ship->getFactionId()]->name + " " + ship->ship_type_name, AlignLeft, 20);
+            text(sf::FloatRect(20, y, 100, 20), factionInfo[ship->getFactionId()]->getName() + " " + ship->ship_type_name, AlignLeft, 20);
             y += 20;
             text(sf::FloatRect(20, y, 100, 20), "Hull: " + string(ship->hull_strength), AlignLeft, 20);
             y += 20;
@@ -244,7 +244,7 @@ void GameMasterUI::onGui()
         P<SpaceStation> station = selection[0];
         if (station)
         {
-            text(sf::FloatRect(20, y, 100, 20), factionInfo[station->getFactionId()]->name, AlignLeft, 20);
+            text(sf::FloatRect(20, y, 100, 20), factionInfo[station->getFactionId()]->getName(), AlignLeft, 20);
             y += 20;
             text(sf::FloatRect(20, y, 100, 20), "Hull: " + string(station->hull_strength), AlignLeft, 20);
             y += 20;
@@ -252,7 +252,7 @@ void GameMasterUI::onGui()
             y += 20;
         }
     }
-    
+
     P<CpuShip> cpuShip;
     foreach(SpaceObject, obj, selection)
     {
@@ -286,7 +286,7 @@ void GameMasterUI::onGui()
                     P<CpuShip>(obj)->orderDefendLocation(obj->getPosition());
         y += 30;
     }
-    
+
     if (selection.size() == 1)
     {
         P<SpaceShip> ship = selection[0];
@@ -318,11 +318,11 @@ void GameMasterUI::onGui()
             y += 30;
         }
     }
-    
+
     if (selection.size() > 0)
     {
         text(sf::FloatRect(20, 480, 250, 20), "Change faction:", AlignCenter, 20);
-        unsigned int new_id = selection[0]->getFactionId() + selector(sf::FloatRect(20, 500, 250, 50), factionInfo[selection[0]->getFactionId()]->name);
+        unsigned int new_id = selection[0]->getFactionId() + selector(sf::FloatRect(20, 500, 250, 50), factionInfo[selection[0]->getFactionId()]->getName());
         if (new_id != selection[0]->getFactionId() && new_id < factionInfo.size())
             foreach(SpaceObject, obj, selection)
                 obj->setFactionId(new_id);
@@ -330,7 +330,7 @@ void GameMasterUI::onGui()
 
     if (button(sf::FloatRect(20, 720, 250, 50), "Global Message", 25))
         new GameMasterGlobalMessageEntry();
-    
+
     if (toggleButton(sf::FloatRect(20, 770, 250, 50), mouse_mode == MM_Create, "Create...", 30))
     {
         mouse_mode = MM_Create;
@@ -434,7 +434,7 @@ void GameMasterShipRetrofit::onGui()
             ship->systems[n].health = std::min(1.0f, std::max(-1.0f, ship->systems[n].health + diff * 0.10f));
         }
     }
-    
+
     y += 10;
     if (button(sf::FloatRect(x, y, 300, 50), "Ok"))
         destroy();
@@ -447,7 +447,7 @@ void GameMasterGlobalMessageEntry::onGui()
     boxWithBackground(sf::FloatRect(x - 30, y - 30, 710, 460));
 
     message = textEntry(sf::FloatRect(x, y, 650, 30), message, 20);
-    
+
     y += 50;
     if (button(sf::FloatRect(x, y, 300, 50), "Send"))
     {
@@ -476,7 +476,7 @@ void GameMasterCreateObjectWindow::onGui()
 
     for(unsigned int f=0; f<factionInfo.size(); f++)
     {
-        if (toggleButton(sf::FloatRect(x, y, 250, 30), current_faction == f, factionInfo[f]->name, 20))
+        if (toggleButton(sf::FloatRect(x, y, 250, 30), current_faction == f, factionInfo[f]->getName(), 20))
             current_faction = f;
         y += 30;
     }
@@ -521,7 +521,7 @@ void GameMasterCreateObjectWindow::onGui()
         }
         y += 30;
     }
-    
+
     y += 10;
     if (button(sf::FloatRect(x, y, 300, 50), "Cancel"))
         destroy();
@@ -544,7 +544,7 @@ void GameMasterHailUI::onGui()
     float x = getWindowSize().x / 2 - 425;
     float y = 100;
     boxWithBackground(sf::FloatRect(x - 30, y - 30, 960, 840));
-    
+
     switch(player->comms_state)
     {
     case CS_Inactive:

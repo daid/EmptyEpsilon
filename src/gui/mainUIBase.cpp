@@ -117,10 +117,10 @@ void MainUIBase::onGui()
             sf::RectangleShape fullScreenOverlay(sf::Vector2f(getWindowSize().x, 900));
             fullScreenOverlay.setFillColor(sf::Color(0, 0, 0, 128));
             getRenderTarget()->draw(fullScreenOverlay);
-            
+
             if (my_spaceship)
                 onPauseHelpGui();
-            
+
             boxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 250, 600, 500, game_server ? 130 : 100));
             text(sf::FloatRect(0, 600, getWindowSize().x, 100), "Game Paused", AlignCenter, 70);
             if (game_server)
@@ -134,7 +134,7 @@ void MainUIBase::onGui()
                     text(sf::FloatRect(0, 600, getWindowSize().x, 100), "Victory!", AlignCenter, 70);
             }else{
                 text(sf::FloatRect(0, 600, getWindowSize().x, 100), "Game Finished", AlignCenter, 70);
-                text(sf::FloatRect(0, 680, getWindowSize().x, 100), factionInfo[gameGlobalInfo->getVictoryFactionId()]->name + " wins", AlignCenter, 70);
+                text(sf::FloatRect(0, 680, getWindowSize().x, 100), factionInfo[gameGlobalInfo->getVictoryFactionId()]->getName() + " wins", AlignCenter, 70);
             }
         }
     }
@@ -144,7 +144,7 @@ void MainUIBase::update(float delta)
 {
     if (!my_spaceship)
         return;
-    
+
     scan_angle += delta * 20.0f;
     if (scan_angle > 360)
         scan_angle -= 360;
@@ -224,7 +224,7 @@ void MainUIBase::selfDestructGUI()
         if (my_player_info->crew_active_position == my_spaceship->self_destruct_code_show_position[n])
             show_position = n;
     }
-    
+
     float y = 40;
     if (entry_position > -1)
     {
@@ -250,7 +250,7 @@ void MainUIBase::selfDestructGUI()
             y += 50;
             text(sf::FloatRect(x, y, 150, 25), "Enter code: " + string(char('A' + entry_position)), AlignCenter, 20);
             y += 25;
-            
+
             if (button(sf::FloatRect(x, y, 50, 50), "1", 30))
                 self_destruct_input += "1";
             if (button(sf::FloatRect(x+50, y, 50, 50), "2", 30))
@@ -433,7 +433,7 @@ void MainUIBase::drawWaypoints(sf::Vector2f view_position, sf::Vector2f position
         sf::Vector2f screen_position = position + (my_spaceship->waypoints[n] - view_position) * scale;
         if (sf::length(screen_position - position) > size)
             continue;
-        
+
         sf::Sprite object_sprite;
         textureManager.setTexture(object_sprite, "waypoint.png");
         object_sprite.setColor(sf::Color(128, 128, 255, 192));
@@ -447,7 +447,7 @@ void MainUIBase::drawWaypoints(sf::Vector2f view_position, sf::Vector2f position
 void MainUIBase::drawRadarSweep(sf::Vector2f position, float range, float size, float angle)
 {
     sf::RenderTarget& window = *getRenderTarget();
-    
+
     sf::VertexArray sweep(sf::Triangles, 3);
     for(int n=0; n<10; n++)
     {
@@ -648,7 +648,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
         soundManager.setListenerPosition(sf::Vector2f(camera_position.x, camera_position.y), camera_yaw);
     sf::RenderTarget& window = *getRenderTarget();
     window.pushGLStates();
-    
+
     billboardShader.setParameter("camera_position", camera_position);
 
     float camera_fov = 60.0f;
@@ -740,7 +740,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
     {
         float lightpos1[4] = {0, 0, 0, 1.0};
         glLightfv(GL_LIGHT1, GL_POSITION, lightpos1);
-        
+
         float lightpos0[4] = {20000, 20000, 20000, 1.0};
         glLightfv(GL_LIGHT0, GL_POSITION, lightpos0);
     }

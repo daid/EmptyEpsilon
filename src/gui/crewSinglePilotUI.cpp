@@ -112,7 +112,7 @@ void CrewSinglePilotUI::onCrewUI()
                     my_spaceship->commandScan(target);
             }
         }else{
-            text(sf::FloatRect(getWindowSize().x / 2.0 - 100, 110, 100, 20), factionInfo[target->getFactionId()]->name, AlignRight, 20);
+            text(sf::FloatRect(getWindowSize().x / 2.0 - 100, 110, 100, 20), factionInfo[target->getFactionId()]->getName(), AlignRight, 20);
             if (ship && ship->ship_template)
             {
                 text(sf::FloatRect(getWindowSize().x / 2.0 - 100, 130, 100, 20), ship->ship_type_name, AlignRight, 20);

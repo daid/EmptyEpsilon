@@ -88,7 +88,7 @@ Mesh* Mesh::getMesh(string filename)
     P<ResourceStream> stream = getResourceStream(filename);
     if (!stream)
         return NULL;
-    
+
     ret = new Mesh();
     if (filename.endswith(".obj"))
     {
@@ -96,7 +96,7 @@ Mesh* Mesh::getMesh(string filename)
         std::vector<sf::Vector3f> normals;
         std::vector<sf::Vector2f> texCoords;
         std::vector<IndexInfo> indices;
-        
+
         do
         {
             string line = stream->readLine();
@@ -121,7 +121,7 @@ Mesh* Mesh::getMesh(string filename)
                         std::vector<string> p0 = parts[1].split("/");
                         std::vector<string> p1 = parts[n].split("/");
                         std::vector<string> p2 = parts[n-1].split("/");
-                        
+
                         IndexInfo info;
                         info.v = p0[0].toInt() - 1;
                         info.t = p0[1].toInt() - 1;
@@ -139,7 +139,7 @@ Mesh* Mesh::getMesh(string filename)
                 }else{
                     //printf("%s\n", parts[0].c_str());
                 }
-            } 
+            }
         }while(stream->tell() < stream->getSize());
         ret->vertexCount = indices.size();
         ret->vertices = new MeshVertex[indices.size()];
@@ -162,7 +162,7 @@ Mesh* Mesh::getMesh(string filename)
     }else{
         LOG(ERROR) << "Unknown mesh format: " << filename;
     }
-    
+
     meshMap[filename] = ret;
     return ret;
 }

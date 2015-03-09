@@ -89,7 +89,7 @@ void CrewScienceUI::onCrewUI()
                         my_spaceship->commandScan(scienceTarget);
                     y += 50;
                 }else{
-                    keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Faction", factionInfo[scienceTarget->getFactionId()]->name, 20); y += 30;
+                    keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Faction", factionInfo[scienceTarget->getFactionId()]->getName(), 20); y += 30;
                     if (ship)
                     {
                         keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Type", ship->ship_type_name, 20); y += 30;
@@ -119,7 +119,7 @@ void CrewScienceUI::onCrewUI()
                                 }
                                 y += 100;
                             }
-                            
+
                             for(int n=0; n<SYS_COUNT; n++)
                             {
                                 keyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.75, getSystemName(ESystem(n)), string(int(ship->systems[n].health * 100.0f)) + "%", 20); y += 30;
