@@ -80,6 +80,15 @@ def compile(filename, system, for_target='Release'):
 	if system == "Windows" and platform.system() == "Windows":
 		CC = 'C:/codeblocks/mingw/bin/mingw32-' + CC
 		CXX = 'C:/codeblocks/mingw/bin/mingw32-' + CXX
+	if system == "Darwin":
+		mac_ver = platform.mac_ver()[0]
+		mac_ver_major = mac_ver.split('.')[0] + '.' + mac_ver.split('.')[1]
+		# system releases later than 10.5 might need this
+		if int(mac_ver.split('.')[1]) > 5:
+			FRAMEWORKS=' -framework CoreFoundation -framework sfml-graphics -framework sfml-window -framework sfml-system '
+			FRAMEWORKS= FRAMEWORKS + '-framework sfml-audio -framework sfml-network -framework OpenGL'
+			CXX='clang++ -stdlib=libstdc++ -lstdc++ '
+			LDFLAGS = LDFLAGS  + ' ' + FRAMEWORKS + ' '
 
 	if for_target == 'Release':
 		with open(".git/refs/heads/master", "r") as f:
