@@ -112,6 +112,25 @@
 					<Add library="sfml-network" />
 				</Linker>
 			</Target>
+			<Target title="MacOS Debug">
+				<Option output=".bin/Release/EmptyEpsilon" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DDEBUG" />
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-framework OpenGL" />
+					<Add option="-framework Foundation" />
+					<Add library="sfml-audio" />
+					<Add library="sfml-graphics" />
+					<Add library="sfml-system" />
+					<Add library="sfml-window" />
+					<Add library="sfml-network" />
+				</Linker>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
