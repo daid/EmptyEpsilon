@@ -26,7 +26,7 @@ void ShipSelectionScreen::onGui()
         returnToMainMenu();
         return;
     }
-    
+
     box(sf::FloatRect(780, 30, 340, 540));
     box(sf::FloatRect(780, 80, 340, 490));
     if (alternative_screen_selection)
@@ -57,7 +57,7 @@ void ShipSelectionScreen::onGui()
                     window_angle += 360;
                 if (window_angle >= 360)
                     window_angle -= 360;
-                
+
                 if (button(sf::FloatRect(800, 250, 300, 50), "Top down 3D"))
                 {
                     destroy();
@@ -132,7 +132,7 @@ void ShipSelectionScreen::onGui()
     }
 
     int shipCount = 0;
-    for(int n=0; n<GameGlobalInfo::maxPlayerShips; n++)
+    for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
     {
         P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
         if (ship && ship->ship_template)
@@ -193,7 +193,7 @@ void ShipSelectionScreen::onGui()
         for(int n=0; n<max_crew_positions; n++)
             my_player_info->setCrewPosition(ECrewPosition(n), false);
     }
-    
+
     if (game_server)
     {
         if (button(sf::FloatRect(50, 800, 300, 50), "Close server"))

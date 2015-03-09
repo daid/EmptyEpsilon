@@ -82,10 +82,10 @@ void OptionsMenu::onGui()
         windowManager->setFSAA(fsaa / 2);
     if (offset > 0 && fsaa < 8)
         windowManager->setFSAA(fsaa * 2);
-    
+
     text(sf::FloatRect(50, 220, 300, 50), "Music Volume", AlignCenter);
     soundManager.setMusicVolume(hslider(sf::FloatRect(50, 270, 300, 50), soundManager.getMusicVolume(), 0, 100, 50.0));
-    
+
     if (button(sf::FloatRect(50, 800, 300, 50), "Back") || InputHandler::keyboardIsPressed(sf::Keyboard::Escape))
     {
         destroy();
@@ -200,7 +200,7 @@ void AutoConnectScreen::onGui()
     {
         std::vector<ServerScanner::ServerInfo> serverList = scanner->getServerList();
         text(sf::FloatRect(0, 300, getWindowSize().x, 50), "Searching for server...", AlignCenter, 50);
-        
+
         if (serverList.size() > 0)
         {
             text(sf::FloatRect(0, 350, getWindowSize().x, 30), "Found server " + serverList[0].name, AlignCenter, 30);
@@ -234,7 +234,7 @@ void AutoConnectScreen::onGui()
                     text(sf::FloatRect(0, 300, getWindowSize().x, 50), "Waiting for ship...", AlignCenter, 50);
                     if (!my_spaceship)
                     {
-                        for(int n=0; n<GameGlobalInfo::maxPlayerShips; n++)
+                        for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
                         {
                             P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
                             if (ship && ship->ship_template)

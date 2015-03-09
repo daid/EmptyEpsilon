@@ -714,13 +714,13 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
 
     if (gameGlobalInfo)
     {
-        for(int n=0; n<GameGlobalInfo::maxNebula; n++)
+        for(int n=0; n<GameGlobalInfo::max_nebulas; n++)
         {
-            sf::Texture::bind(textureManager.getTexture(gameGlobalInfo->nebulaInfo[n].textureName), sf::Texture::Pixels);
+            sf::Texture::bind(textureManager.getTexture(gameGlobalInfo->nebula_info[n].textureName), sf::Texture::Pixels);
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE);
             glPushMatrix();
-            glRotatef(180, gameGlobalInfo->nebulaInfo[n].vector.x, gameGlobalInfo->nebulaInfo[n].vector.y, gameGlobalInfo->nebulaInfo[n].vector.z);
+            glRotatef(180, gameGlobalInfo->nebula_info[n].vector.x, gameGlobalInfo->nebula_info[n].vector.y, gameGlobalInfo->nebula_info[n].vector.z);
             glColor4f(1,1,1,0.1);
             glBegin(GL_TRIANGLE_STRIP);
             glTexCoord2f(1024,    0); glVertex3f( 100, 100, 100);

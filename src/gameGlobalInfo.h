@@ -26,27 +26,38 @@ enum EPlayerWarpJumpDrive
 class GameGlobalInfo : public MultiplayerObject, public Updatable
 {
 public:
-    static const int maxPlayerShips = 32;
-    static const int maxNebula = 32;
+    /*!
+     * \brief Maximum number of player ships.
+     */
+    static const int max_player_ships = 32;
+    /*!
+     * \brief Maximum number of nebulas ships.
+     */
+    static const int max_nebulas = 32;
 private:
     int victory_faction;
-    int32_t playerShipId[maxPlayerShips];
+    int32_t playerShipId[max_player_ships];
     int callsign_counter;
-    
+    /*!
+     * \brief List of known scripts
+     */
     PVector<Script> script_list;
 public:
     string global_message;
     float global_message_timeout;
 
     std::vector<float> reputation_points;
-    NebulaInfo nebulaInfo[maxNebula];
+    NebulaInfo nebula_info[max_nebulas];
     EPlayerWarpJumpDrive player_warp_jump_drive_setting;
+    /*!
+     * \brief Range of the science radar.
+     */
     float long_range_radar_range;
     bool use_beam_shield_frequencies;
     bool use_system_damage;
     bool allow_main_screen_tactical_radar;
     bool allow_main_screen_long_range_radar;
-    
+
     GameGlobalInfo();
 
     P<PlayerSpaceship> getPlayerShip(int index);
@@ -54,15 +65,22 @@ public:
 
     int findPlayerShip(P<PlayerSpaceship> ship);
     int insertPlayerShip(P<PlayerSpaceship> ship);
-    
+    /*!
+     * \brief Set a faction to victorious.
+     * \param string Name of the faction that won.
+     */
     void setVictory(string faction_name) { victory_faction = FactionInfo::findFactionId(faction_name); }
+    /*!
+     * \brief Get ID of faction that won.
+     * \param int
+     */
     int getVictoryFactionId() { return victory_faction; }
-    
+
     void addScript(P<Script> script);
-    
+
     virtual void update(float delta);
     virtual void destroy();
-    
+
     string getNextShipCallsign();
 };
 
