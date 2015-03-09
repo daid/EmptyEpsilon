@@ -151,7 +151,7 @@ void CrewScienceUI::onCrewUI()
         int idx = 0;
         foreach(ScienceDatabase, sd, ScienceDatabase::scienceDatabaseList)
         {
-            if (toggleButton(sf::FloatRect(20, y, 200, 50), science_database_selection == idx, sd->name, 30))
+            if (toggleButton(sf::FloatRect(20, y, 200, 50), science_database_selection == idx, sd->getName(), 30))
             {
                 science_database_selection = idx;
                 science_sub_selection = -1;
