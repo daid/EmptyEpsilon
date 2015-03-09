@@ -378,8 +378,8 @@ void GameMasterShipRetrofit::onGui()
     if (diff)
     {
         ship->hasWarpdrive = !ship->hasWarpdrive;
-        if (ship->warpSpeedPerWarpLevel < 100)
-            ship->warpSpeedPerWarpLevel = 1000;
+        if (ship->warp_speedPerWarpLevel < 100)
+            ship->warp_speedPerWarpLevel = 1000;
     }
     if (selector(sf::FloatRect(x, y, 300, 30), string("JumpDrive: ") + (ship->hasJumpdrive ? "Yes" : "No"), 20))
         ship->hasJumpdrive = !ship->hasJumpdrive;
@@ -406,8 +406,8 @@ void GameMasterShipRetrofit::onGui()
 
     ship->weapon_tubes += selector(sf::FloatRect(x, y, 300, 30), "Missile tubes: " + string(ship->weapon_tubes), 20);
     if (ship->weapon_tubes < 0)
-        ship->weapon_tubes = maxWeaponTubes;
-    if (ship->weapon_tubes > maxWeaponTubes)
+        ship->weapon_tubes = max_weapon_tubes;
+    if (ship->weapon_tubes > max_weapon_tubes)
         ship->weapon_tubes = 0;
     y += 30;
     for(int n=0; n<MW_Count; n++)
@@ -514,7 +514,7 @@ void GameMasterCreateObjectWindow::onGui()
     std::sort(template_names.begin(), template_names.end());
     for(unsigned int n=0; n<template_names.size(); n++)
     {
-        if (button(sf::FloatRect(x, y, 300, 30), template_names[n] + "(" + string(ShipTemplate::getTemplate(template_names[n])->frontShields) + ")", 20))
+        if (button(sf::FloatRect(x, y, 300, 30), template_names[n] + "(" + string(ShipTemplate::getTemplate(template_names[n])->front_shields) + ")", 20))
         {
             ui->create_object_script = "CpuShip():setRotation(random(0, 360)):setFactionId(" + string(current_faction) + "):setShipTemplate(\"" + template_names[n] + "\"):orderRoaming()";
             destroy();

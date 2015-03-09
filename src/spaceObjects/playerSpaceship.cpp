@@ -171,7 +171,7 @@ void PlayerSpaceship::update(float delta)
         hull_damage_indicator -= delta;
     if (warp_indicator > 0)
         warp_indicator -= delta;
-    
+
     if (shield_calibration_delay > 0)
     {
         shield_calibration_delay -= delta * (getSystemEffectiveness(SYS_FrontShield) + getSystemEffectiveness(SYS_RearShield)) / 2.0;
@@ -206,7 +206,7 @@ void PlayerSpaceship::update(float delta)
                     if (playerShip)
                     {
                         comms_open_delay = PlayerSpaceship::comms_channel_open_time;
-                        
+
                         if (playerShip->comms_state == CS_Inactive || playerShip->comms_state == CS_ChannelFailed || playerShip->comms_state == CS_ChannelBroken)
                         {
                             playerShip->comms_state = CS_BeingHailed;
@@ -230,7 +230,7 @@ void PlayerSpaceship::update(float delta)
 
         if (shields_active)
             useEnergy(delta * energy_shield_use_per_second);
-        
+
         energy_level += delta * getNetPowerUsage() * 0.04;
         for(int n=0; n<SYS_COUNT; n++)
         {
@@ -347,26 +347,26 @@ void PlayerSpaceship::update(float delta)
 void PlayerSpaceship::setShipTemplate(string templateName)
 {
     SpaceShip::setShipTemplate(templateName);
-    
+
     switch(gameGlobalInfo->player_warp_jump_drive_setting)
     {
     default:
         break;
     case PWJ_WarpDrive:
         hasWarpdrive = true;
-        if (warpSpeedPerWarpLevel < 100)
-            warpSpeedPerWarpLevel = 1000;
+        if (warp_speedPerWarpLevel < 100)
+            warp_speedPerWarpLevel = 1000;
         hasJumpdrive = false;
         break;
     case PWJ_JumpDrive:
         hasWarpdrive = false;
-        warpSpeedPerWarpLevel = 0;
+        warp_speedPerWarpLevel = 0;
         hasJumpdrive = true;
         break;
     case PWJ_WarpAndJumpDrive:
         hasWarpdrive = true;
-        if (warpSpeedPerWarpLevel < 100)
-            warpSpeedPerWarpLevel = 1000;
+        if (warp_speedPerWarpLevel < 100)
+            warp_speedPerWarpLevel = 1000;
         hasJumpdrive = true;
         break;
     }
@@ -501,10 +501,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t clientId, sf::Packet& packe
             int8_t tubeNr;
             packet >> tubeNr;
 
-            if (tubeNr >= 0 && tubeNr < maxWeaponTubes && weaponTube[tubeNr].state == WTS_Loaded)
+            if (tubeNr >= 0 && tubeNr < max_weapon_tubes && weaponTube[tubeNr].state == WTS_Loaded)
             {
                 weaponTube[tubeNr].state = WTS_Unloading;
-                weaponTube[tubeNr].delay = tubeLoadTime;
+                weaponTube[tubeNr].delay = tube_load_time;
             }
         }
         break;
@@ -605,14 +605,14 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t clientId, sf::Packet& packe
             bool anwser;
             packet >> anwser;
             P<PlayerSpaceship> playerShip = comms_target;
-            
+
             if (playerShip)
             {
                 if (anwser)
                 {
                     comms_state = CS_ChannelOpenPlayer;
                     playerShip->comms_state = CS_ChannelOpenPlayer;
-                    
+
                     comms_incomming_message = "Opened comms to " + playerShip->getCallSign();
                     playerShip->comms_incomming_message = "Opened comms to " + getCallSign();
                 }else{
@@ -625,11 +625,11 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t clientId, sf::Packet& packe
         {
             bool anwser;
             packet >> anwser;
-            
+
             if (anwser)
             {
                 comms_state = CS_ChannelOpenGM;
-                
+
                 comms_incomming_message = "Opened comms";
             }else{
                 comms_state = CS_Inactive;

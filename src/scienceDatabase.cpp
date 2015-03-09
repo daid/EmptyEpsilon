@@ -89,20 +89,20 @@ void fillDefaultDatabaseData()
         P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_names[n]);
 
         entry->addKeyValue("Size", string(int(ship_template->radius)));
-        entry->addKeyValue("Shield", string(int(ship_template->frontShields)) + "/" + string(int(ship_template->rearShields)));
+        entry->addKeyValue("Shield", string(int(ship_template->front_shields)) + "/" + string(int(ship_template->rear_shields)));
         entry->addKeyValue("Hull", string(int(ship_template->hull)));
-        entry->addKeyValue("Move speed", string(int(ship_template->impulseSpeed)));
-        entry->addKeyValue("Turn speed", string(int(ship_template->turnSpeed)));
-        if (ship_template->warpSpeed > 0.0)
+        entry->addKeyValue("Move speed", string(int(ship_template->impulse_speed)));
+        entry->addKeyValue("Turn speed", string(int(ship_template->turn_speed)));
+        if (ship_template->warp_speed > 0.0)
         {
             entry->addKeyValue("Has warp drive", "True");
-            entry->addKeyValue("Warp speed", string(int(ship_template->warpSpeed)));
+            entry->addKeyValue("Warp speed", string(int(ship_template->warp_speed)));
         }
-        if (ship_template->jumpDrive)
+        if (ship_template->has_jump_drive)
         {
             entry->addKeyValue("Has jump drive", "True");
         }
-        for(int n=0; n<maxBeamWeapons; n++)
+        for(int n=0; n<max_beam_weapons; n++)
         {
             if (ship_template->beams[n].range > 0)
             {
@@ -130,7 +130,7 @@ void fillDefaultDatabaseData()
                 entry->addKeyValue("Storage " + getMissileWeaponName(EMissileWeapons(n)), string(ship_template->weapon_storage[n]));
             }
         }
-        if (ship_template->description.length() > 0)
-            entry->setLongDescription(ship_template->description);
+        if (ship_template->getDescription().length() > 0)
+            entry->setLongDescription(ship_template->getDescription());
     }
 }

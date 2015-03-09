@@ -77,7 +77,7 @@ std::map<string, P<ShipTemplate> > ShipTemplate::templateMap;
 ShipTemplate::ShipTemplate()
 {
     scale = 1.0;
-    for(int n=0; n<maxBeamWeapons; n++)
+    for(int n=0; n<max_beam_weapons; n++)
     {
         beams[n].arc = 0.0;
         beams[n].direction = 0.0;
@@ -91,14 +91,14 @@ ShipTemplate::ShipTemplate()
     weapon_tubes = 0;
     tube_load_time = 8.0;
     hull = 70;
-    frontShields = 0;
-    rearShields = 0.0;
-    impulseSpeed = 500.0;
-    impulseAcceleration = 0.2;
-    turnSpeed = 10.0;
-    warpSpeed = 0.0;
-    jumpDrive = false;
-    cloaking = false;
+    front_shields = 0;
+    rear_shields = 0.0;
+    impulse_speed = 500.0;
+    impulse_acceleration = 0.2;
+    turn_speed = 10.0;
+    warp_speed = 0.0;
+    has_jump_drive = false;
+    has_cloaking = false;
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = 0;
 }
@@ -111,24 +111,24 @@ void ShipTemplate::setName(string name)
     this->name = name;
 }
 
-void ShipTemplate::setMesh(string model, string colorTexture, string specularTexture, string illuminationTexture)
+void ShipTemplate::setMesh(string model, string color_texture, string specular_texture, string illumination_texture)
 {
     this->model = model;
-    this->colorTexture = colorTexture;
-    this->specularTexture = specularTexture;
-    this->illuminationTexture = illuminationTexture;
+    this->color_texture = color_texture;
+    this->specular_texture = specular_texture;
+    this->illumination_texture = illumination_texture;
 }
 
 void ShipTemplate::setBeamPosition(int index, sf::Vector3f position)
 {
-    if (index < 0 || index > maxBeamWeapons)
+    if (index < 0 || index > max_beam_weapons)
         return;
     beamPosition[index] = position;
 }
 
 void ShipTemplate::setBeam(int index, float arc, float direction, float range, float cycle_time, float damage)
 {
-    if (index < 0 || index > maxBeamWeapons)
+    if (index < 0 || index > max_beam_weapons)
         return;
     while(direction < 0)
         direction += 360;
@@ -142,7 +142,7 @@ void ShipTemplate::setBeam(int index, float arc, float direction, float range, f
 
 void ShipTemplate::setTubePosition(int index, sf::Vector2f position)
 {
-    if (index < 0 || index > maxWeaponTubes)
+    if (index < 0 || index > max_weapon_tubes)
         return;
     tubePosition[index] = position;
 }

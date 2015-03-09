@@ -83,11 +83,11 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     hasJumpdrive = true;
     jumpDistance = 0.0;
     jumpDelay = 0.0;
-    tubeLoadTime = 8.0;
+    tube_load_time = 8.0;
     weapon_tubes = 0;
     rotationSpeed = 10.0;
     impulseMaxSpeed = 600.0;
-    warpSpeedPerWarpLevel = 1000.0;
+    warp_speedPerWarpLevel = 1000.0;
     combat_maneuver_delay = 0.0;
     combat_maneuver = CM_Boost;
     combat_maneuver_active = 0.0;
@@ -101,7 +101,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     beam_system_target = SYS_None;
     shield_frequency = irandom(0, max_frequency);
     docking_state = DS_NotDocking;
-    impulseAcceleration = 0.2;
+    impulse_acceleration = 0.2;
 
     registerMemberReplication(&ship_callsign);
     registerMemberReplication(&targetRotation, 1.5);
@@ -112,13 +112,13 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&currentWarp, 0.1);
     registerMemberReplication(&hasJumpdrive);
     registerMemberReplication(&jumpDelay, 0.5);
-    registerMemberReplication(&tubeLoadTime);
+    registerMemberReplication(&tube_load_time);
     registerMemberReplication(&weapon_tubes);
     registerMemberReplication(&targetId);
     registerMemberReplication(&rotationSpeed);
     registerMemberReplication(&impulseMaxSpeed);
-    registerMemberReplication(&impulseAcceleration);
-    registerMemberReplication(&warpSpeedPerWarpLevel);
+    registerMemberReplication(&impulse_acceleration);
+    registerMemberReplication(&warp_speedPerWarpLevel);
     registerMemberReplication(&templateName);
     registerMemberReplication(&ship_type_name);
     registerMemberReplication(&front_shield, 1.0);
@@ -145,7 +145,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         registerMemberReplication(&systems[n].health, 0.1);
     }
 
-    for(int n=0; n<maxBeamWeapons; n++)
+    for(int n=0; n<max_beam_weapons; n++)
     {
         beamWeapons[n].arc = 0;
         beamWeapons[n].direction = 0;
@@ -160,7 +160,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         registerMemberReplication(&beamWeapons[n].cycleTime);
         registerMemberReplication(&beamWeapons[n].cooldown, 0.5);
     }
-    for(int n=0; n<maxWeaponTubes; n++)
+    for(int n=0; n<max_weapon_tubes; n++)
     {
         weaponTube[n].type_loaded = MW_None;
         weaponTube[n].state = WTS_Empty;
@@ -195,7 +195,7 @@ void SpaceShip::setShipTemplate(string templateName)
     this->templateName = templateName;
     this->ship_type_name = templateName;
 
-    for(int n=0; n<maxBeamWeapons; n++)
+    for(int n=0; n<max_beam_weapons; n++)
     {
         beamWeapons[n].arc = ship_template->beams[n].arc;
         beamWeapons[n].direction = ship_template->beams[n].direction;
@@ -205,18 +205,18 @@ void SpaceShip::setShipTemplate(string templateName)
     }
     weapon_tubes = ship_template->weapon_tubes;
     hull_strength = hull_max = ship_template->hull;
-    front_shield = ship_template->frontShields;
-    rear_shield = ship_template->rearShields;
-    front_shield_max = ship_template->frontShields;
-    rear_shield_max = ship_template->rearShields;
-    impulseMaxSpeed = ship_template->impulseSpeed;
-    impulseAcceleration = ship_template->impulseAcceleration;
-    rotationSpeed = ship_template->turnSpeed;
-    hasWarpdrive = ship_template->warpSpeed > 0.0;
-    warpSpeedPerWarpLevel = ship_template->warpSpeed;
-    hasJumpdrive = ship_template->jumpDrive;
-    tubeLoadTime = ship_template->tube_load_time;
-    //shipTemplate->cloaking;
+    front_shield = ship_template->front_shields;
+    rear_shield = ship_template->rear_shields;
+    front_shield_max = ship_template->front_shields;
+    rear_shield_max = ship_template->rear_shields;
+    impulseMaxSpeed = ship_template->impulse_speed;
+    impulse_acceleration = ship_template->impulse_acceleration;
+    rotationSpeed = ship_template->turn_speed;
+    hasWarpdrive = ship_template->warp_speed > 0.0;
+    warp_speedPerWarpLevel = ship_template->warp_speed;
+    hasJumpdrive = ship_template->has_jump_drive;
+    tube_load_time = ship_template->tube_load_time;
+    //shipTemplate->has_cloaking;
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = weapon_storage_max[n] = ship_template->weapon_storage[n];
 
@@ -228,10 +228,10 @@ void SpaceShip::draw3D()
     if (!ship_template) return;
 
     glScalef(ship_template->scale, ship_template->scale, ship_template->scale);
-    glTranslatef(ship_template->renderOffset.x, ship_template->renderOffset.y, ship_template->renderOffset.z);
-    objectShader.setParameter("baseMap", *textureManager.getTexture(ship_template->colorTexture));
-    objectShader.setParameter("illuminationMap", *textureManager.getTexture(ship_template->illuminationTexture));
-    objectShader.setParameter("specularMap", *textureManager.getTexture(ship_template->specularTexture));
+    glTranslatef(ship_template->render_offset.x, ship_template->render_offset.y, ship_template->render_offset.z);
+    objectShader.setParameter("baseMap", *textureManager.getTexture(ship_template->color_texture));
+    objectShader.setParameter("illuminationMap", *textureManager.getTexture(ship_template->illumination_texture));
+    objectShader.setParameter("specularMap", *textureManager.getTexture(ship_template->specular_texture));
     sf::Shader::bind(&objectShader);
     Mesh* m = Mesh::getMesh(ship_template->model);
     m->render();
@@ -240,7 +240,7 @@ void SpaceShip::draw3D()
 void SpaceShip::draw3DTransparent()
 {
     if (!ship_template) return;
-    
+
     if (front_shield_hit_effect > 0 || rear_shield_hit_effect > 0)
     {
         basicShader.setParameter("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
@@ -259,7 +259,7 @@ void SpaceShip::draw3DTransparent()
         if (rear_shield_hit_effect > 0.0)
             m->render();
     }
-    
+
     if (hasJumpdrive && jumpDelay > 0.0f)
     {
         glScalef(ship_template->scale, ship_template->scale, ship_template->scale);
@@ -278,7 +278,7 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
 {
     if (!long_range && ((scanned_by_player == SS_FullScan) || !my_spaceship))
     {
-        for(int n=0; n<maxBeamWeapons; n++)
+        for(int n=0; n<max_beam_weapons; n++)
         {
             if (beamWeapons[n].range == 0.0) continue;
             sf::Color color = sf::Color::Red;
@@ -345,7 +345,7 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
 
 void SpaceShip::update(float delta)
 {
-    if (!ship_template || ship_template->name != templateName)
+    if (!ship_template || ship_template->getName() != templateName)
     {
         ship_template = ShipTemplate::getTemplate(templateName);
         if (!ship_template)
@@ -421,7 +421,7 @@ void SpaceShip::update(float delta)
     {
         if (currentImpulse > 0.0)
         {
-            currentImpulse -= delta * impulseAcceleration;
+            currentImpulse -= delta * impulse_acceleration;
             if (currentImpulse < 0.0)
                 currentImpulse = 0.0;
         }
@@ -441,7 +441,7 @@ void SpaceShip::update(float delta)
     {
         if (currentImpulse < 1.0)
         {
-            currentImpulse += delta * impulseAcceleration;
+            currentImpulse += delta * impulse_acceleration;
             if (currentImpulse > 1.0)
                 currentImpulse = 1.0;
         }else{
@@ -465,17 +465,17 @@ void SpaceShip::update(float delta)
             impulseRequest = -1.0;
         if (currentImpulse < impulseRequest)
         {
-            currentImpulse += delta * impulseAcceleration;
+            currentImpulse += delta * impulse_acceleration;
             if (currentImpulse > impulseRequest)
                 currentImpulse = impulseRequest;
         }else if (currentImpulse > impulseRequest)
         {
-            currentImpulse -= delta * impulseAcceleration;
+            currentImpulse -= delta * impulse_acceleration;
             if (currentImpulse < impulseRequest)
                 currentImpulse = impulseRequest;
         }
     }
-    setVelocity(sf::vector2FromAngle(getRotation()) * (currentImpulse * impulseMaxSpeed * getSystemEffectiveness(SYS_Impulse) + currentWarp * warpSpeedPerWarpLevel * getSystemEffectiveness(SYS_Warp)));
+    setVelocity(sf::vector2FromAngle(getRotation()) * (currentImpulse * impulseMaxSpeed * getSystemEffectiveness(SYS_Impulse) + currentWarp * warp_speedPerWarpLevel * getSystemEffectiveness(SYS_Warp)));
 
     if (combat_maneuver_active > 0)
     {
@@ -498,7 +498,7 @@ void SpaceShip::update(float delta)
     }else if (combat_maneuver_delay > 0)
         combat_maneuver_delay -= delta * getSystemEffectiveness(SYS_Maneuver);
 
-    for(int n=0; n<maxBeamWeapons; n++)
+    for(int n=0; n<max_beam_weapons; n++)
     {
         if (beamWeapons[n].cooldown > 0.0)
             beamWeapons[n].cooldown -= delta * getSystemEffectiveness(SYS_BeamWeapons);
@@ -507,14 +507,14 @@ void SpaceShip::update(float delta)
     P<SpaceObject> target = getTarget();
     if (game_server && target && delta > 0 && currentWarp == 0.0 && docking_state == DS_NotDocking) // Only fire beam weapons if we are on the server, have a target, and are not paused.
     {
-        for(int n=0; n<maxBeamWeapons; n++)
+        for(int n=0; n<max_beam_weapons; n++)
         {
             if (target && isEnemy(target) && beamWeapons[n].cooldown <= 0.0)
             {
                 sf::Vector2f diff = target->getPosition() - (getPosition() + sf::rotateVector(sf::Vector2f(ship_template->beamPosition[n].x, ship_template->beamPosition[n].y) * ship_template->scale, getRotation()));
                 float distance = sf::length(diff) - target->getRadius() / 2.0;
                 float angle = sf::vector2ToAngle(diff);
-                
+
                 if (distance < beamWeapons[n].range)
                 {
                     float angleDiff = sf::angleDifference(beamWeapons[n].direction + getRotation(), angle);
@@ -527,7 +527,7 @@ void SpaceShip::update(float delta)
         }
     }
 
-    for(int n=0; n<maxWeaponTubes; n++)
+    for(int n=0; n<max_weapon_tubes; n++)
     {
         if (weaponTube[n].delay > 0.0)
         {
@@ -568,11 +568,11 @@ void SpaceShip::update(float delta)
                 ParticleEngine::spawn(pos3d, pos3d, color, color, scale, 0.0, 5.0);
             }
         }
-        
+
         if (hasJumpdrive && jumpDelay > 0.0f && ship_template)
         {
             Mesh* m = Mesh::getMesh(ship_template->model);
-            
+
             int cnt = (10.0f - jumpDelay);
             for(int n=0; n<cnt; n++)
             {
@@ -613,7 +613,7 @@ void SpaceShip::fireBeamWeapon(int index, P<SpaceObject> target)
         if (!ship || ship->scanned_by_player != SS_NotScanned)
             scanned_by_player = SS_FriendOrFoeIdentified;
     }
-    
+
     sf::Vector2f hitLocation = target->getPosition() - sf::normalize(target->getPosition() - getPosition()) * target->getRadius();
 
     beamWeapons[index].cooldown = beamWeapons[index].cycleTime;
@@ -654,12 +654,12 @@ void SpaceShip::collision(Collisionable* other)
 
 void SpaceShip::loadTube(int tubeNr, EMissileWeapons type)
 {
-    if (tubeNr >= 0 && tubeNr < maxWeaponTubes && type > MW_None && type < MW_Count)
+    if (tubeNr >= 0 && tubeNr < max_weapon_tubes && type > MW_None && type < MW_Count)
     {
         if (weaponTube[tubeNr].state == WTS_Empty && weapon_storage[type] > 0)
         {
             weaponTube[tubeNr].state = WTS_Loading;
-            weaponTube[tubeNr].delay = tubeLoadTime;
+            weaponTube[tubeNr].delay = tube_load_time;
             weaponTube[tubeNr].type_loaded = type;
             weapon_storage[type]--;
         }
@@ -677,7 +677,7 @@ void SpaceShip::fireTube(int tubeNr, float target_angle)
 
     if (docking_state != DS_NotDocking) return;
     if (currentWarp > 0.0) return;
-    if (tubeNr < 0 || tubeNr >= maxWeaponTubes) return;
+    if (tubeNr < 0 || tubeNr >= max_weapon_tubes) return;
     if (weaponTube[tubeNr].state != WTS_Loaded) return;
 
     sf::Vector2f fireLocation = getPosition() + sf::rotateVector(ship_template->tubePosition[tubeNr], getRotation()) * ship_template->scale;
@@ -801,7 +801,7 @@ void SpaceShip::hullDamage(float damage_amount, DamageInfo& info)
 {
     if (info.type == DT_EMP)
         return;
-    
+
     if (gameGlobalInfo->use_system_damage)
     {
         if (info.system_target != SYS_None)
@@ -823,7 +823,7 @@ void SpaceShip::hullDamage(float damage_amount, DamageInfo& info)
                 if (systems[random_system].health < -1.0)
                     systems[random_system].health = -1.0;
             }
-            
+
             if (info.type == DT_Energy)
                 damage_amount *= 0.02;
             else
@@ -934,7 +934,7 @@ float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency)
 {
     if (beam_frequency < 0 || shield_frequency < 0)
         return 1.0;
-    
+
     float diff = abs(beam_frequency - shield_frequency);
     float f1 = sinf(Tween<float>::linear(diff, 0, SpaceShip::max_frequency, 0, M_PI * (1.2 + shield_frequency * 0.05)) + M_PI / 2);
     f1 = f1 * Tween<float>::easeInCubic(diff, 0, SpaceShip::max_frequency, 1.0, 0.1);

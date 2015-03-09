@@ -58,9 +58,9 @@ void ShipAI::updateWeaponState(float delta)
         if (owner->weaponTube[n].state == WTS_Loaded && owner->weaponTube[n].type_loaded == MW_Homing)
             has_missiles = true;
     }
-    
+
     beam_weapon_range = 0;
-    for(int n=0; n<maxBeamWeapons; n++)
+    for(int n=0; n<max_beam_weapons; n++)
     {
         if (owner->beamWeapons[n].range > 0)
         {
@@ -82,7 +82,7 @@ void ShipAI::updateTarget()
     EAIOrder orders = owner->getOrder();
     sf::Vector2f order_target_location = owner->getOrderTargetLocation();
     P<SpaceObject> order_target = owner->getOrderTarget();
-    
+
     //Check if we need to lose our target because it entered a nebula.
     if (target && target->canHideInNebula() && (target->getPosition() - position) > 5000.0f && Nebula::blockedByNebula(position, target->getPosition()))
     {
@@ -114,7 +114,7 @@ void ShipAI::updateTarget()
     }
     if (orders == AI_Attack)
         new_target = order_target;
-    
+
     //Check if we need to drop the current target
     if (target)
     {
@@ -262,7 +262,7 @@ void ShipAI::runAttack(P<SpaceObject> target)
                 float target_angle = calculateFiringSolution(target);
                 if (target_angle != std::numeric_limits<float>::infinity())
                     owner->fireTube(n, target_angle);
-                missile_fire_delay = owner->tubeLoadTime / owner->weapon_tubes / 2.0;
+                missile_fire_delay = owner->tube_load_time / owner->weapon_tubes / 2.0;
             }
         }
     }
@@ -278,19 +278,19 @@ void ShipAI::runAttack(P<SpaceObject> target)
 void ShipAI::flyTowards(sf::Vector2f target, float keep_distance)
 {
     pathPlanner.plan(owner->getPosition(), target);
-    
+
     if (pathPlanner.route.size() > 0)
     {
         if (owner->docking_state == DS_Docked)
             owner->requestUndock();
-    
+
         sf::Vector2f diff = pathPlanner.route[0] - owner->getPosition();
         float distance = sf::length(diff);
-        
+
         //Normal flying towards target code
         owner->targetRotation = sf::vector2ToAngle(diff);
         float rotation_diff = fabs(sf::angleDifference(owner->targetRotation, owner->getRotation()));
-        
+
         if (owner->hasWarpdrive && rotation_diff < 30.0 && distance > 2000)
         {
             owner->warpRequest = 1.0;
@@ -400,10 +400,10 @@ float ShipAI::targetScore(P<SpaceObject> target)
         score -= 5000;
     if (distance < 5000 && has_missiles)
         score += 500;
-    
+
     if (distance < beam_weapon_range)
     {
-        for(int n=0; n<maxBeamWeapons; n++)
+        for(int n=0; n<max_beam_weapons; n++)
         {
             if (distance < owner->beamWeapons[n].range)
             {
@@ -435,15 +435,15 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target)
     float missile_speed = 200.0f;
     float missile_turn_rate = 10.0f;
     float turn_radius = ((360.0f / missile_turn_rate) * missile_speed) / (2.0f * M_PI);
-    
+
     for(int iterations=0; iterations<10; iterations++)
     {
         float angle_diff = sf::angleDifference(missile_angle, owner->getRotation());
-        
+
         float left_or_right = 90;
         if (angle_diff > 0)
             left_or_right = -90;
-        
+
         sf::Vector2f turn_center = owner->getPosition() + sf::vector2FromAngle(owner->getRotation() + left_or_right) * turn_radius;
         sf::Vector2f turn_exit = turn_center + sf::vector2FromAngle(missile_angle - left_or_right) * turn_radius;
         if (target_velocity_length < 1.0f)
@@ -469,7 +469,7 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target)
             // When both the missile and the target are at the same position at the same time, we can take a shot!
             if (fabsf(time_target - time_missile) < time_radius)
                 return missile_angle;
-            
+
             //When we cannot hit the target with this setup yet. Calculate a new intersection target, and aim for that.
             float guessed_impact_time = (time_target * target_velocity_length / (target_velocity_length + missile_speed)) + (time_missile * missile_speed / (target_velocity_length + missile_speed));
             sf::Vector2f new_target_position = target->getPosition() + target_velocity * guessed_impact_time;

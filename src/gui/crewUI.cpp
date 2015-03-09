@@ -24,12 +24,12 @@ void CrewUI::onGui()
     }else{
         drawStatic();
     }
-        
+
     int cnt = 0;
     for(int n=0; n<max_crew_positions; n++)
         if (my_player_info->crew_position[n])
             cnt++;
-    
+
     if (cnt > 1)
     {
         int offset = 0;
@@ -122,7 +122,7 @@ void CrewUI::dockingButton(sf::FloatRect rect, float text_size)
                     break;
                 dock_object = NULL;
             }
-            
+
             if (dock_object)
             {
                 if (button(rect, "Request Dock", text_size))
@@ -158,12 +158,12 @@ void CrewUI::weaponTube(EMissileWeapons load_type, int n, float missile_target_a
             my_spaceship->commandFireTube(n, missile_target_angle);
         break;
     case WTS_Loading:
-        progressBar(fire_rect, my_spaceship->weaponTube[n].delay, my_spaceship->tubeLoadTime, 0.0);
+        progressBar(fire_rect, my_spaceship->weaponTube[n].delay, my_spaceship->tube_load_time, 0.0);
         text(fire_rect, getMissileWeaponName(my_spaceship->weaponTube[n].type_loaded), AlignCenter, text_size, sf::Color(128, 128, 128));
         disabledButton(load_rect, "Loading", text_size);
         break;
     case WTS_Unloading:
-        progressBar(fire_rect, my_spaceship->weaponTube[n].delay, 0.0, my_spaceship->tubeLoadTime);
+        progressBar(fire_rect, my_spaceship->weaponTube[n].delay, 0.0, my_spaceship->tube_load_time);
         text(fire_rect, getMissileWeaponName(my_spaceship->weaponTube[n].type_loaded), AlignCenter, text_size, sf::Color(128, 128, 128));
         disabledButton(load_rect, "Unloading", text_size * 0.8);
         break;
@@ -174,7 +174,7 @@ void CrewUI::weaponTube(EMissileWeapons load_type, int n, float missile_target_a
 int CrewUI::frequencyCurve(sf::FloatRect rect, bool frequency_is_beam, bool more_damage_is_positive, int frequency)
 {
     sf::RenderTarget& window = *getRenderTarget();
-    
+
     float w = rect.width / (SpaceShip::max_frequency + 1);
     for(int n=0; n<=SpaceShip::max_frequency; n++)
     {
@@ -194,7 +194,7 @@ int CrewUI::frequencyCurve(sf::FloatRect rect, bool frequency_is_beam, bool more
             bar.setFillColor(sf::Color(255 * f, 255 * (1.0 - f), 0));
         window.draw(bar);
     }
-    
+
     if (rect.contains(InputHandler::getMousePos()))
     {
         return int((InputHandler::getMousePos().x - rect.left) / w);
@@ -208,7 +208,7 @@ void CrewUI::damagePowerDisplay(sf::FloatRect rect, ESystem system, float text_s
         return;
     sf::Color color;
     string display_text;
-    
+
     float power = my_spaceship->systems[system].power_level;
     float health = my_spaceship->systems[system].health;
     int alpha = 128;
@@ -251,7 +251,7 @@ string CrewUI::onScreenKeyboard()
     float text_size = 40;
     float x = getWindowSize().x / 2.0 - size * 7.5;
     float y = 790;
-    
+
     string line = "1234567890-=";
     for(unsigned int n=0; n<line.size(); n++)
         if (button(sf::FloatRect(x + n * size, y - size * 5, size, size), line[n], text_size))
@@ -274,6 +274,6 @@ string CrewUI::onScreenKeyboard()
             ret += line[n];
     if (button(sf::FloatRect(x + size * 2.0, y - size, size * 9, size), "", text_size))
         ret += " ";
-    
+
     return ret;
 }

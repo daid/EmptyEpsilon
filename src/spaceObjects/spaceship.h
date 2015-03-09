@@ -95,12 +95,12 @@ public:
     float currentImpulse;
     float rotationSpeed;
     float impulseMaxSpeed;
-    float impulseAcceleration;
+    float impulse_acceleration;
 
     bool hasWarpdrive;
     int8_t warpRequest;
     float currentWarp;
-    float warpSpeedPerWarpLevel;
+    float warp_speedPerWarpLevel;
     float combat_maneuver_delay;
     ECombatManeuver combat_maneuver;
     float combat_maneuver_active;
@@ -112,13 +112,13 @@ public:
     int8_t weapon_storage[MW_Count];
     int8_t weapon_storage_max[MW_Count];
     int8_t weapon_tubes;
-    float tubeLoadTime;
+    float tube_load_time;
     float tubeRechargeFactor;
-    WeaponTube weaponTube[maxWeaponTubes];
+    WeaponTube weaponTube[max_weapon_tubes];
 
     int beam_frequency;
     ESystem beam_system_target;
-    BeamWeapon beamWeapons[maxBeamWeapons];
+    BeamWeapon beamWeapons[max_beam_weapons];
 
     float hull_strength, hull_max;
     bool shields_active;
