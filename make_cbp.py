@@ -66,6 +66,7 @@ def compile(filename, system, for_target='Release'):
 		shutil.copytree('/Library/Frameworks/sndfile.framework', frameworks_dir + '/sndfile.framework')
 		shutil.copytree('/Library/Frameworks/freetype.framework', frameworks_dir + '/freetype.framework')
 		shutil.copytree('resources', resources_dir + '/resources')
+		shutil.copytree('scripts', resources_dir + '/scripts')
 		shutil.copytree('packs', resources_dir + '/packs')
 	CC = 'gcc'
 	CXX = 'g++'
