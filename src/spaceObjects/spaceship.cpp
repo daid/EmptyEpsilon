@@ -101,7 +101,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     beam_system_target = SYS_None;
     shield_frequency = irandom(0, max_frequency);
     docking_state = DS_NotDocking;
-    impulse_acceleration = 100.0;
+    impulse_acceleration = 20.0;
 
     registerMemberReplication(&ship_callsign);
     registerMemberReplication(&targetRotation, 1.5);
@@ -421,7 +421,8 @@ void SpaceShip::update(float delta)
     {
         if (currentImpulse > 0.0)
         {
-            currentImpulse -= delta * (impulse_acceleration / impulseMaxSpeed);
+            if (impulseMaxSpeed > 0)
+                currentImpulse -= delta * (impulse_acceleration / impulseMaxSpeed);
             if (currentImpulse < 0.0)
                 currentImpulse = 0.0;
         }
@@ -441,7 +442,8 @@ void SpaceShip::update(float delta)
     {
         if (currentImpulse < 1.0)
         {
-            currentImpulse += delta * (impulse_acceleration / impulseMaxSpeed);
+            if (impulseMaxSpeed > 0)
+                currentImpulse += delta * (impulse_acceleration / impulseMaxSpeed);
             if (currentImpulse > 1.0)
                 currentImpulse = 1.0;
         }else{
@@ -465,12 +467,14 @@ void SpaceShip::update(float delta)
             impulseRequest = -1.0;
         if (currentImpulse < impulseRequest)
         {
-            currentImpulse += delta * (impulse_acceleration / impulseMaxSpeed);
+            if (impulseMaxSpeed > 0)
+                currentImpulse += delta * (impulse_acceleration / impulseMaxSpeed);
             if (currentImpulse > impulseRequest)
                 currentImpulse = impulseRequest;
         }else if (currentImpulse > impulseRequest)
         {
-            currentImpulse -= delta * (impulse_acceleration / impulseMaxSpeed);
+            if (impulseMaxSpeed > 0)
+                currentImpulse -= delta * (impulse_acceleration / impulseMaxSpeed);
             if (currentImpulse < impulseRequest)
                 currentImpulse = impulseRequest;
         }
