@@ -99,10 +99,10 @@ void MainUIBase::onGui()
         {
             warpPostProcessor->enabled = true;
             warpPostProcessor->setUniform("amount", my_spaceship->currentWarp * 0.01);
-        }else if (my_spaceship->jumpDelay > 0.0 && my_spaceship->jumpDelay < 2.0)
+        }else if (my_spaceship->jump_delay > 0.0 && my_spaceship->jump_delay < 2.0)
         {
             warpPostProcessor->enabled = true;
-            warpPostProcessor->setUniform("amount", (2.0 - my_spaceship->jumpDelay) * 0.1);
+            warpPostProcessor->setUniform("amount", (2.0 - my_spaceship->jump_delay) * 0.1);
         }else{
             warpPostProcessor->enabled = false;
         }

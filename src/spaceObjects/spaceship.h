@@ -90,24 +90,24 @@ public:
 
     ShipSystem systems[SYS_COUNT];
 
-    float targetRotation;
-    float impulseRequest;
-    float currentImpulse;
-    float rotationSpeed;
-    float impulseMaxSpeed;
-    float impulse_acceleration;
+    float targetRotation;   //[input] Ship will try to aim to this rotation. (degrees)
+    float impulseRequest;   //[input] Amount of impulse requested from the user (-1.0 to 1.0)
+    float currentImpulse;   //[output] Amount of actual impulse from the engines (-1.0 to 1.0)
+    float turn_speed;       //[config] Speed of rotation, in deg/second
+    float impulseMaxSpeed;  //[config] Max speed of the impulse engines, in m/s
+    float impulse_acceleration;//[config] Impulse engine acceleration, in (m/s)/s
 
-    bool hasWarpdrive;
-    int8_t warpRequest;
-    float currentWarp;
-    float warp_speedPerWarpLevel;
+    bool hasWarpdrive;      //[config] True if we have a warpdrive.
+    int8_t warpRequest;     //[input] Level of warp requested, from 0 to 4
+    float currentWarp;      //[output] Current active warp amount, from 0.0 to 4.0
+    float warp_speedPerWarpLevel;   //[config] Amount of speed per warp level, in m/s
     float combat_maneuver_delay;
     ECombatManeuver combat_maneuver;
     float combat_maneuver_active;
 
-    bool hasJumpdrive;
-    float jumpDistance;
-    float jumpDelay;
+    bool hasJumpdrive;      //[config]
+    float jump_distance;     //[output]
+    float jump_delay;        //[output]
 
     int8_t weapon_storage[MW_Count];
     int8_t weapon_storage_max[MW_Count];

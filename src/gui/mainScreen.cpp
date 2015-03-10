@@ -127,10 +127,10 @@ void MainScreenUI::onGui()
                     todo++;
             text(sf::FloatRect(getWindowSize().x / 2 - 400, 295, 800, 50), "Waiting for autorization input: "+string(todo)+" left", AlignCenter, 30);
         }
-        if (my_spaceship->jumpDelay > 0.0)
+        if (my_spaceship->jump_delay > 0.0)
         {
             boxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100));
-            text(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100), "Jump in: " + string(int(ceilf(my_spaceship->jumpDelay))), AlignCenter, 50);
+            text(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100), "Jump in: " + string(int(ceilf(my_spaceship->jump_delay))), AlignCenter, 50);
         }
         if (gameGlobalInfo->global_message_timeout > 0.0)
         {

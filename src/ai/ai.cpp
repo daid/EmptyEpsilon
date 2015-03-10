@@ -297,7 +297,7 @@ void ShipAI::flyTowards(sf::Vector2f target, float keep_distance)
         }else{
             owner->warpRequest = 0.0;
         }
-        if (distance > 10000 && owner->hasJumpdrive && owner->jumpDelay <= 0.0)
+        if (distance > 10000 && owner->hasJumpdrive && owner->jump_delay <= 0.0)
         {
             if (rotation_diff < 1.0)
             {
@@ -395,7 +395,7 @@ float ShipAI::targetScore(P<SpaceObject> target)
     //sf::Vector2f position_difference_normal = position_difference / distance;
     //float rel_velocity = dot(target->getVelocity(), position_difference_normal) - dot(getVelocity(), position_difference_normal);
     float angle_difference = sf::angleDifference(owner->getRotation(), sf::vector2ToAngle(position_difference));
-    float score = -distance - fabsf(angle_difference / owner->rotationSpeed * owner->impulseMaxSpeed) * 1.5f;
+    float score = -distance - fabsf(angle_difference / owner->turn_speed * owner->impulseMaxSpeed) * 1.5f;
     if (P<SpaceStation>(target))
         score -= 5000;
     if (distance < 5000 && has_missiles)

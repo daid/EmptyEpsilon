@@ -386,7 +386,7 @@ void GameMasterShipRetrofit::onGui()
     y += 30;
     ship->impulseMaxSpeed += selector(sf::FloatRect(x, y, 300, 30), "Max speed: " + string(ship->impulseMaxSpeed), 20);
     y += 30;
-    ship->rotationSpeed += selector(sf::FloatRect(x, y, 300, 30), "Rotation speed: " + string(ship->rotationSpeed), 20);
+    ship->turn_speed += selector(sf::FloatRect(x, y, 300, 30), "Rotation speed: " + string(ship->turn_speed), 20);
     y += 30;
     diff = selector(sf::FloatRect(x, y, 300, 30), "Hull: " + string(ship->hull_strength) + "/" + string(ship->hull_max), 20);
     ship->hull_strength = std::max(0.0f, ship->hull_strength + diff * 5);

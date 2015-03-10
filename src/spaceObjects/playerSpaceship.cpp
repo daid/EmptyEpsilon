@@ -280,7 +280,7 @@ void PlayerSpaceship::update(float delta)
             }
         }
 
-        if (hasWarpdrive && warpRequest > 0 && !(hasJumpdrive && jumpDelay > 0))
+        if (hasWarpdrive && warpRequest > 0 && !(hasJumpdrive && jump_delay > 0))
         {
             if (!useEnergy(energy_warp_per_second * delta * float(warpRequest * warpRequest) * (shields_active ? 1.5 : 1.0)))
                 warpRequest = 0;

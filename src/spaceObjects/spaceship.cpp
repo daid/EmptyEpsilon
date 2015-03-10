@@ -81,11 +81,11 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     warpRequest = 0.0;
     currentWarp = 0.0;
     hasJumpdrive = true;
-    jumpDistance = 0.0;
-    jumpDelay = 0.0;
+    jump_distance = 0.0;
+    jump_delay = 0.0;
     tube_load_time = 8.0;
     weapon_tubes = 0;
-    rotationSpeed = 10.0;
+    turn_speed = 10.0;
     impulseMaxSpeed = 600.0;
     warp_speedPerWarpLevel = 1000.0;
     combat_maneuver_delay = 0.0;
@@ -101,7 +101,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     beam_system_target = SYS_None;
     shield_frequency = irandom(0, max_frequency);
     docking_state = DS_NotDocking;
-    impulse_acceleration = 0.2;
+    impulse_acceleration = 100.0;
 
     registerMemberReplication(&ship_callsign);
     registerMemberReplication(&targetRotation, 1.5);
@@ -111,11 +111,11 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&warpRequest, 0.1);
     registerMemberReplication(&currentWarp, 0.1);
     registerMemberReplication(&hasJumpdrive);
-    registerMemberReplication(&jumpDelay, 0.5);
+    registerMemberReplication(&jump_delay, 0.5);
     registerMemberReplication(&tube_load_time);
     registerMemberReplication(&weapon_tubes);
     registerMemberReplication(&targetId);
-    registerMemberReplication(&rotationSpeed);
+    registerMemberReplication(&turn_speed);
     registerMemberReplication(&impulseMaxSpeed);
     registerMemberReplication(&impulse_acceleration);
     registerMemberReplication(&warp_speedPerWarpLevel);
@@ -211,7 +211,7 @@ void SpaceShip::setShipTemplate(string templateName)
     rear_shield_max = ship_template->rear_shields;
     impulseMaxSpeed = ship_template->impulse_speed;
     impulse_acceleration = ship_template->impulse_acceleration;
-    rotationSpeed = ship_template->turn_speed;
+    turn_speed = ship_template->turn_speed;
     hasWarpdrive = ship_template->warp_speed > 0.0;
     warp_speedPerWarpLevel = ship_template->warp_speed;
     hasJumpdrive = ship_template->has_jump_drive;
@@ -260,11 +260,11 @@ void SpaceShip::draw3DTransparent()
             m->render();
     }
 
-    if (hasJumpdrive && jumpDelay > 0.0f)
+    if (hasJumpdrive && jump_delay > 0.0f)
     {
         glScalef(ship_template->scale, ship_template->scale, ship_template->scale);
         glDepthFunc(GL_EQUAL);
-        float f = 1.0f - (jumpDelay / 10.0f);
+        float f = 1.0f - (jump_delay / 10.0f);
         glColor4f(f, f, f, 1);
         basicShader.setParameter("textureMap", *textureManager.getTexture("electric_sphere_texture.png"));
         sf::Shader::bind(&basicShader);
@@ -403,25 +403,25 @@ void SpaceShip::update(float delta)
     float rotationDiff = sf::angleDifference(getRotation(), targetRotation);
 
     if (rotationDiff > 1.0)
-        setAngularVelocity(rotationSpeed * getSystemEffectiveness(SYS_Maneuver));
+        setAngularVelocity(turn_speed * getSystemEffectiveness(SYS_Maneuver));
     else if (rotationDiff < -1.0)
-        setAngularVelocity(-rotationSpeed * getSystemEffectiveness(SYS_Maneuver));
+        setAngularVelocity(-turn_speed * getSystemEffectiveness(SYS_Maneuver));
     else
-        setAngularVelocity(rotationDiff * rotationSpeed * getSystemEffectiveness(SYS_Maneuver));
+        setAngularVelocity(rotationDiff * turn_speed * getSystemEffectiveness(SYS_Maneuver));
 
-    if ((hasJumpdrive && jumpDelay > 0) || (hasWarpdrive && warpRequest > 0))
+    if ((hasJumpdrive && jump_delay > 0) || (hasWarpdrive && warpRequest > 0))
     {
         if (WarpJammer::isWarpJammed(getPosition()))
         {
-            jumpDelay = 0;
+            jump_delay = 0;
             warpRequest = 0.0f;
         }
     }
-    if (hasJumpdrive && jumpDelay > 0)
+    if (hasJumpdrive && jump_delay > 0)
     {
         if (currentImpulse > 0.0)
         {
-            currentImpulse -= delta * impulse_acceleration;
+            currentImpulse -= delta * (impulse_acceleration / impulseMaxSpeed);
             if (currentImpulse < 0.0)
                 currentImpulse = 0.0;
         }
@@ -431,17 +431,17 @@ void SpaceShip::update(float delta)
             if (currentWarp < 0.0)
                 currentWarp = 0.0;
         }
-        jumpDelay -= delta * getSystemEffectiveness(SYS_JumpDrive);
-        if (jumpDelay <= 0.0)
+        jump_delay -= delta * getSystemEffectiveness(SYS_JumpDrive);
+        if (jump_delay <= 0.0)
         {
-            executeJump(jumpDistance);
-            jumpDelay = 0.0;
+            executeJump(jump_distance);
+            jump_delay = 0.0;
         }
     }else if (hasWarpdrive && (warpRequest > 0 || currentWarp > 0))
     {
         if (currentImpulse < 1.0)
         {
-            currentImpulse += delta * impulse_acceleration;
+            currentImpulse += delta * (impulse_acceleration / impulseMaxSpeed);
             if (currentImpulse > 1.0)
                 currentImpulse = 1.0;
         }else{
@@ -465,12 +465,12 @@ void SpaceShip::update(float delta)
             impulseRequest = -1.0;
         if (currentImpulse < impulseRequest)
         {
-            currentImpulse += delta * impulse_acceleration;
+            currentImpulse += delta * (impulse_acceleration / impulseMaxSpeed);
             if (currentImpulse > impulseRequest)
                 currentImpulse = impulseRequest;
         }else if (currentImpulse > impulseRequest)
         {
-            currentImpulse -= delta * impulse_acceleration;
+            currentImpulse -= delta * (impulse_acceleration / impulseMaxSpeed);
             if (currentImpulse < impulseRequest)
                 currentImpulse = impulseRequest;
         }
@@ -564,16 +564,16 @@ void SpaceShip::update(float delta)
                 sf::Vector3f color = ship_template->engine_emitors[n].color;
                 sf::Vector3f pos3d = sf::Vector3f(pos2d.x, pos2d.y, offset.z);
                 float scale = ship_template->scale * ship_template->engine_emitors[n].scale;
-                scale *= std::max(fabs(getAngularVelocity() / rotationSpeed), fabs(currentImpulse));
+                scale *= std::max(fabs(getAngularVelocity() / turn_speed), fabs(currentImpulse));
                 ParticleEngine::spawn(pos3d, pos3d, color, color, scale, 0.0, 5.0);
             }
         }
 
-        if (hasJumpdrive && jumpDelay > 0.0f && ship_template)
+        if (hasJumpdrive && jump_delay > 0.0f && ship_template)
         {
             Mesh* m = Mesh::getMesh(ship_template->model);
 
-            int cnt = (10.0f - jumpDelay);
+            int cnt = (10.0f - jump_delay);
             for(int n=0; n<cnt; n++)
             {
                 sf::Vector3f offset = m->randomPoint() * ship_template->scale;
@@ -735,10 +735,10 @@ void SpaceShip::fireTube(int tubeNr, float target_angle)
 void SpaceShip::initJump(float distance)
 {
     if (docking_state != DS_NotDocking) return;
-    if (jumpDelay <= 0.0)
+    if (jump_delay <= 0.0)
     {
-        jumpDistance = distance;
-        jumpDelay = 10.0;
+        jump_distance = distance;
+        jump_delay = 10.0;
     }
 }
 
@@ -748,7 +748,7 @@ void SpaceShip::requestDock(P<SpaceObject> target)
         return;
     if (sf::length(getPosition() - target->getPosition()) > 1000 + target->getRadius())
         return;
-    if (hasJumpdrive && jumpDelay > 0.0f)
+    if (hasJumpdrive && jump_delay > 0.0f)
         return;
 
     docking_state = DS_Docking;
@@ -881,7 +881,7 @@ bool SpaceShip::hasSystem(ESystem system)
     case SYS_BeamWeapons:
         return true;
     case SYS_Maneuver:
-        return rotationSpeed > 0.0;
+        return turn_speed > 0.0;
     case SYS_Impulse:
         return impulseMaxSpeed > 0.0;
     }
