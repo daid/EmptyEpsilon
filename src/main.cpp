@@ -90,14 +90,10 @@ int main(int argc, char** argv)
         LOG(INFO) << "NOTE: This is potentially a risk!";
         HttpServer* server = new HttpServer(startup_parameters["httpserver"].toInt());
         // Set default IP-filter to allow_all
-        server->allow_rw_from = std::vector<string> (4, "*");
+        server->allow_http_from = std::vector<string> (4, "*");
         // Get list of allowed IPs from config
-        if (startup_parameters.find("allow_http_r_from") != startup_parameters.end())
-            server->allow_r_from = startup_parameters["allow_http_r_from"].split(";");
-        if (startup_parameters.find("allow_http_rw_from") != startup_parameters.end())
-            server->allow_rw_from = startup_parameters["allow_http_rw_from"].split(";");
-        if (startup_parameters.find("allow_http_exec_from") != startup_parameters.end())
-            server->allow_exec_from = startup_parameters["allow_http_exec_from"].split(";");
+        if (startup_parameters.find("allow_http_from") != startup_parameters.end())
+            server->allow_http_from = startup_parameters["allow_http_from"].split(";");
 
         server->addHandler(new HttpRequestFileHandler("www"));
         server->addHandler(new HttpScriptHandler());

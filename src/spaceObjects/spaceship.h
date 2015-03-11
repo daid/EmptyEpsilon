@@ -186,13 +186,13 @@ public:
     void setRearShield(float amount) { rear_shield = amount; }
     void setRearShieldMax(float amount) { rear_shield_max = amount; }
     void setShieldsActive(bool enabled) { shields_active = enabled; }
-    void setSpeed(float impulse, float turn) { currentImpulse = impulse; rotationSpeed = turn; }
-    void setWarpSpeed(float warp) { currentWarp = warp; }
     void setJumpDrive(bool enabled) { hasJumpdrive = enabled; }
+    void setImpulseRequest(float impulse) {impulseRequest = impulse; }
+    void setWarpRequest(int warp) {warpRequest = warp; }
 
-    void setLoadTube(int tubeNr, EMissileWeapons type) { loadTube(tubeNr, type); }
-    void setFireTube(int tubeNr, float target_angle) {fireTube(tubeNr, target_angle); }
-    void setInitJump(float distance) { initJump(distance); }
+    void LoadTube(int tubeNr, EMissileWeapons type) { loadTube(tubeNr, type); }
+    void FireTube(int tubeNr, float target_angle) {fireTube(tubeNr, target_angle); }
+    void InitJump(float distance) { initJump(distance); }
 
     //virtual void takeDamage(float damageAmount, DamageInfo& info);
     //virtual void hullDamage(float damageAmount, DamageInfo& info);

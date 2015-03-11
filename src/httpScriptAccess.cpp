@@ -3,7 +3,7 @@
 
 bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection* connection)
 {
-    if ((request.path == "/exec.lua") && (connection->permission >= PERM_EXEC))
+    if (request.path == "/exec.lua")
     {
         if (!gameGlobalInfo)
         {
@@ -20,7 +20,7 @@ bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection
         script->destroy();
         return true;
     }
-    else if ((request.path == "/get.lua") && (connection->permission >= PERM_R))
+    else if (request.path == "/get.lua")
     {
         if (!gameGlobalInfo)
         {
@@ -69,7 +69,7 @@ bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection
         script->destroy();
         return true;
     }
-    else if ((request.path == "/set.lua") && (connection->permission >= PERM_RW))
+    else if (request.path == "/set.lua")
     {
         if (!gameGlobalInfo)
         {
@@ -93,7 +93,7 @@ bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection
 
         for (i = request.parameters.begin(); i != request.parameters.end(); i++)
         {
-            if (i->second == sFALSE)
+            if (i->second == "")
                 luaCode += "object:" + i->first + ";\n";
             else
                 luaCode += i->first + ":" + i->second + ";\n";

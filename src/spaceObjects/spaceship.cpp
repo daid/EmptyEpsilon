@@ -35,7 +35,6 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
     //REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setCallSign);
     //REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadius);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponStorage);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSpeed);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setHull);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setHullMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setFrontShield);
@@ -43,11 +42,12 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRearShield);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRearShieldMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setShieldsActive);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWarpSpeed);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setImpulseRequest);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWarpRequest);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDrive);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setLoadTube);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setFireTube);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setInitJump);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, LoadTube);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, FireTube);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, InitJump);
 }
 
 /* Define script conversion function for the EMainScreenSetting enum. */
