@@ -3,6 +3,8 @@
 
 #include "httpServer.h"
 
+#define sOBJECT "_OBJECT_"
+
 class HttpScriptHandler : public HttpRequestHandler
 {
 public:
