@@ -11,7 +11,7 @@ CrewEngineeringUI::CrewEngineeringUI()
 void CrewEngineeringUI::onCrewUI()
 {
     if (!my_spaceship->ship_template) return;
-    
+
     sf::RenderTarget& window = *getRenderTarget();
     sf::Vector2f mouse = InputHandler::getMousePos();
 
@@ -25,7 +25,7 @@ void CrewEngineeringUI::onCrewUI()
         my_spaceship->commandSetAutoRepair(!my_spaceship->auto_repair_enabled);
     }
     */
-    
+
     if (my_spaceship->activate_self_destruct)
     {
         box(sf::FloatRect(20, 220, 300, 140));
@@ -50,12 +50,34 @@ void CrewEngineeringUI::onCrewUI()
     }
 
     int y = 470;
+    bool press = false;
     for(int n=0; n<SYS_COUNT; n++)
     {
         if (!my_spaceship->hasSystem(ESystem(n))) continue;
         if (toggleButton(sf::FloatRect(20, y, 300, 50), ESystem(n) == selected_system, getSystemName(ESystem(n)), 30))
             selected_system = ESystem(n);
-        
+
+        if (InputHandler::keyboardIsPressed(sf::Keyboard::Numpad7) && !press)
+        {
+            press = true;
+            do {
+                selected_system = (ESystem) ((int) selected_system - 1); // Select system--
+                if (selected_system < 0)
+                    selected_system = ESystem(SYS_COUNT-1);      // Wrap around
+            } while (!my_spaceship->hasSystem(selected_system)); // System does not exist. Try again.
+
+        }
+        if (InputHandler::keyboardIsPressed(sf::Keyboard::Numpad1) && !press)
+        {
+            press = true;
+            do {
+                selected_system = (ESystem) ((int) selected_system + 1); // Select system++
+                if (selected_system == SYS_COUNT)
+                    selected_system = ESystem(0);                // Loop around
+            } while (!my_spaceship->hasSystem(selected_system)); // System does not exist. Try again.
+        }
+
+
         if (gameGlobalInfo->use_system_damage)
         {
             float health = my_spaceship->systems[n].health;
@@ -65,7 +87,7 @@ void CrewEngineeringUI::onCrewUI()
                 progressBar(sf::FloatRect(320, y, 100, 50), health, 0.0, 1.0, sf::Color(64, 128 * health, 64 * health));
             text(sf::FloatRect(320, y, 100, 50), string(int(health * 100)) + "%", AlignCenter, 20);
         }
-        
+
         float heat = my_spaceship->systems[n].heat_level;
         progressBar(sf::FloatRect(420, y, 50, 50), heat, 0.0, 1.0, sf::Color(128, 128 * (1.0 - heat), 0));
         float heating_diff = powf(1.7, my_spaceship->systems[n].power_level - 1.0) - (1.0 + my_spaceship->systems[n].coolant_level * 0.1);
@@ -87,22 +109,44 @@ void CrewEngineeringUI::onCrewUI()
         progressBar(sf::FloatRect(470, y, 50, 50), power, 0.0, 3.0, sf::Color(192, 192, 0));
         float coolant = my_spaceship->systems[n].coolant_level;
         progressBar(sf::FloatRect(520, y, 50, 50), coolant, 0.0, 10.0, sf::Color(0, 128, 128));
-        
+
         y += 50;
     }
-    
+
     box(sf::FloatRect(570, 470, 270, 400));
     if (my_spaceship->hasSystem(selected_system))
     {
         vtext(sf::FloatRect(600, 490, 30, 360), "Power", AlignLeft);
         float ret = vslider(sf::FloatRect(630, 490, 60, 360), my_spaceship->systems[selected_system].power_level, 3.0, 0.0, 1.0);
+
+        if (InputHandler::keyboardIsPressed(sf::Keyboard::Numpad8))
+            ret += 0.30;
+        if (InputHandler::keyboardIsPressed(sf::Keyboard::Numpad2))
+            ret -= 0.30;
+
         if (ret < 1.25 && ret > 0.75)
             ret = 1.0;
+        else if (ret > 3)
+            ret = 3;
+        else if (ret < 0)
+            ret = 0;
+
         if (my_spaceship->systems[selected_system].power_level != ret)
             my_spaceship->commandSetSystemPower(selected_system, ret);
 
         vtext(sf::FloatRect(700, 490, 30, 360), "Coolant", AlignLeft);
         ret = vslider(sf::FloatRect(730, 490, 60, 360), my_spaceship->systems[selected_system].coolant_level, 10.0, 0.0);
+
+        if (InputHandler::keyboardIsPressed(sf::Keyboard::Numpad9))
+            ret++;
+        if (InputHandler::keyboardIsPressed(sf::Keyboard::Numpad3))
+            ret--;
+
+        if (ret > 10)
+            ret = 10;
+        else if (ret < 0)
+            ret = 0;
+
         if (my_spaceship->systems[selected_system].coolant_level != ret)
             my_spaceship->commandSetSystemCoolant(selected_system, ret);
     }
@@ -114,7 +158,7 @@ void CrewEngineeringUI::onCrewUI()
         box(sf::FloatRect(x - 20, 470, 340, 400));
         text(sf::FloatRect(x, 470, 300, 50), "Shield Freq.", AlignCenter, 30);
         textbox(sf::FloatRect(x, 520, 300, 50), frequencyToString(my_spaceship->shield_frequency), AlignCenter, 30);
-        
+
         text(sf::FloatRect(x, 570, 300, 50), "Change Freq.", AlignCenter, 30);
         if (my_spaceship->shield_calibration_delay > 0.0)
         {
@@ -122,11 +166,16 @@ void CrewEngineeringUI::onCrewUI()
             progressBar(sf::FloatRect(x, 670, 300, 50), my_spaceship->shield_calibration_delay, PlayerSpaceship::shield_calibration_time, 0);
         }else{
             shield_new_frequency += selector(sf::FloatRect(x, 620, 300, 50), frequencyToString(shield_new_frequency), 30);
+            if (InputHandler::keyboardIsPressed(sf::Keyboard::Numpad4))
+                shield_new_frequency--;
+            if (InputHandler::keyboardIsPressed(sf::Keyboard::Numpad6))
+                shield_new_frequency++;
+
             if (shield_new_frequency < 0)
                 shield_new_frequency = 0;
             if (shield_new_frequency > SpaceShip::max_frequency)
                 shield_new_frequency = SpaceShip::max_frequency;
-            if (button(sf::FloatRect(x, 670, 300, 50), "Calibrate", 30))
+            if (button(sf::FloatRect(x, 670, 300, 50), "Calibrate", 30) || InputHandler::keyboardIsPressed(sf::Keyboard::Numpad0))
                 my_spaceship->commandSetShieldFrequency(shield_new_frequency);
         }
     }
