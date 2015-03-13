@@ -59,7 +59,7 @@ void CrewEngineeringUI::onCrewUI()
 
         if (InputHandler::keyboardIsPressed(sf::Keyboard::Numpad7) && !press)
         {
-            press = true;
+            press = true; // Prevent running around while in the for-loop
             do {
                 selected_system = (ESystem) ((int) selected_system - 1); // Select system--
                 if (selected_system < 0)
@@ -69,7 +69,7 @@ void CrewEngineeringUI::onCrewUI()
         }
         if (InputHandler::keyboardIsPressed(sf::Keyboard::Numpad1) && !press)
         {
-            press = true;
+            press = true; // Prevent running around while in the for-loop
             do {
                 selected_system = (ESystem) ((int) selected_system + 1); // Select system++
                 if (selected_system == SYS_COUNT)
