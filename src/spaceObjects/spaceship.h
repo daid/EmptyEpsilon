@@ -178,6 +178,24 @@ public:
     float getRearShield() { return rear_shield; }
     float getRearShieldMax() { return rear_shield_max; }
     bool getShieldsActive() { return shields_active; }
+
+    void setHull(float amount) { hull_strength = amount; }
+    void setHullMax(float amount) { hull_max = amount; }
+    void setFrontShield(float amount) { front_shield = amount; }
+    void setFrontShieldMax(float amount) { front_shield_max = amount; }
+    void setRearShield(float amount) { rear_shield = amount; }
+    void setRearShieldMax(float amount) { rear_shield_max = amount; }
+    void setShieldsActive(bool enabled) { shields_active = enabled; }
+    void setJumpDrive(bool enabled) { hasJumpdrive = enabled; }
+    void setImpulseRequest(float impulse) {impulseRequest = impulse; }
+    void setWarpRequest(int warp) {warpRequest = warp; }
+
+    void LoadTube(int tubeNr, EMissileWeapons type) { loadTube(tubeNr, type); }
+    void FireTube(int tubeNr, float target_angle) {fireTube(tubeNr, target_angle); }
+    void InitJump(float distance) { initJump(distance); }
+
+    //virtual void takeDamage(float damageAmount, DamageInfo& info);
+    //virtual void hullDamage(float damageAmount, DamageInfo& info);
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);
