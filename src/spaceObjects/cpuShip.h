@@ -27,10 +27,14 @@ class CpuShip : public SpaceShip
     sf::Vector2f order_target_location; //Server only
     P<SpaceObject> order_target;        //Server only
     ShipAI* ai;
+    
+    string new_ai_name;
 public:
     CpuShip();
+    virtual ~CpuShip();
     
     virtual void update(float delta);
+    virtual void setShipTemplate(string templateName);
     
     void orderIdle();
     void orderRoaming();

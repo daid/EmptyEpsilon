@@ -15,5 +15,5 @@ shipAIFactoryFunc_t ShipAIFactory::getAIFactory(string name)
         if (f->name == name)
             return f->func;
     LOG(ERROR) << "AI not found: " << name;
-    return shipAIFactoryList->func;
+    return NULL;
 }

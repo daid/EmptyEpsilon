@@ -52,6 +52,11 @@ CpuShip::CpuShip()
     ai = ShipAIFactory::getAIFactory("default")(this);
 }
 
+CpuShip::~CpuShip()
+{
+    delete ai;
+}
+
 void CpuShip::update(float delta)
 {
     SpaceShip::update(delta);
@@ -62,7 +67,21 @@ void CpuShip::update(float delta)
     for(int n=0; n<SYS_COUNT; n++)
         systems[n].health = std::min(1.0f, systems[n].health + delta * auto_system_repair_per_second);
 
+    if (new_ai_name.length() && ai->canSwitchAI())
+    {
+        shipAIFactoryFunc_t f = ShipAIFactory::getAIFactory(new_ai_name);
+        delete ai;
+        ai = f(this);
+        new_ai_name = "";
+    }
     ai->run(delta);
+}
+
+void CpuShip::setShipTemplate(string templateName)
+{
+    SpaceShip::setShipTemplate(templateName);
+    
+    new_ai_name = ship_template->default_ai_name;
 }
 
 void CpuShip::orderIdle()

@@ -10,7 +10,8 @@ class CpuShip;
 // ShipAI objects are only created on the server.
 class ShipAI : sf::NonCopyable
 {
-    float missile_fire_delay;
+protected:
+    float missile_fire_delay;   //Artificial delay between missile fires.
 
     bool has_missiles;
     bool has_beams;
