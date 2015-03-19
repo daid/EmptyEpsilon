@@ -736,7 +736,7 @@ void SpaceShip::fireTube(int tubeNr, float target_angle)
     weaponTube[tubeNr].type_loaded = MW_None;
 }
 
-void SpaceShip::initJump(float distance)
+void SpaceShip::initializeJump(float distance)
 {
     if (docking_state != DS_NotDocking) return;
     if (jump_delay <= 0.0)

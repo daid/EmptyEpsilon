@@ -227,17 +227,51 @@ public:
 
     virtual void collide(Collisionable* other);
 
-    void loadTube(int tubeNr, EMissileWeapons type);
-    void fireTube(int tubeNr, float target_angle);
-    void initJump(float distance);
+    /*!
+     * Load a missile tube.
+     * \param tube_number Index of the tube to be loaded.
+     * \param type Weapon type that is loaded.
+     */
+    void loadTube(int tube_number, EMissileWeapons type);
+
+    /*!
+     * Fire a missile tube.
+     * \param tube_number Index of the tube to be fired.
+     * \param target_angle Angle in degrees to where the missile needs to be shot.
+     */
+    void fireTube(int tube_number, float target_angle);
+
+    /*!
+     * Start the jumping procedure.
+     */
+    void initializeJump(float distance);
+
+    /*!
+     * Request to dock with target.
+     */
     void requestDock(P<SpaceObject> target);
+
+    /*!
+     * Request undock with current docked object
+     */
     void requestUndock();
     void setScanned(bool scanned) { scanned_by_player = scanned ? SS_FullScan : SS_NotScanned; }
+
+    /*!
+     * Activate a certain combat maneuver (and start 'reload' timer)
+     */
     void activateCombatManeuver(ECombatManeuver maneuver);
-
+    /*!
+     * Check if ship has certain system
+     */
     bool hasSystem(ESystem system);
-    float getSystemEffectiveness(ESystem system);
 
+    /*!
+     * Check effectiveness of system.
+     * If system has more / less power or is damages, this can influence the effectiveness.
+     * \return float 0. to 1.
+     */
+    float getSystemEffectiveness(ESystem system);
     virtual void setShipTemplate(string template_names);
 
     P<SpaceObject> getTarget();

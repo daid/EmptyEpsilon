@@ -479,7 +479,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         {
             float distance;
             packet >> distance;
-            initJump(distance);
+            initializeJump(distance);
         }
         break;
     case CMD_SET_TARGET:
