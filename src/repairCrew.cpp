@@ -11,6 +11,7 @@ RepairCrew::RepairCrew()
     ship_id = -1;
     position.x = -1;
     action = RC_Idle;
+    direction = RC_None;
 
     registerMemberReplication(&ship_id);
     registerMemberReplication(&position, 1.0);
