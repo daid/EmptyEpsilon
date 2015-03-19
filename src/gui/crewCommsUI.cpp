@@ -61,12 +61,12 @@ void CrewCommsUI::drawCommsRadar()
             }
         }
     }
-    
+
     if (!selection_object && selection_type == select_object)
         selection_type = select_none;
     if (selection_type == select_waypoint && selection_waypoint_index >= my_spaceship->waypoints.size())
         selection_type = select_none;
-    
+
     float x = 300;
     float w = getWindowSize().x - x;
     float radar_size = w / 2.0f;
@@ -80,11 +80,11 @@ void CrewCommsUI::drawCommsRadar()
         }
     }
     previous_mouse = mouse;
-    
+
     sf::RectangleShape background(getWindowSize());
     background.setFillColor(sf::Color::Black);
     window.draw(background);
-    
+
     float scale = (radar_size / radar_distance);
     sf::CircleShape circle(5000.0 * scale, 32);
     circle.setFillColor(sf::Color(20, 20, 20));
@@ -111,17 +111,17 @@ void CrewCommsUI::drawCommsRadar()
         position = radar_center + (position - radar_view_position) * scale;
         if (selection_type == select_waypoint)
             position.y -= 10;
-        
+
         sf::Sprite objectSprite;
         textureManager.setTexture(objectSprite, "redicule.png");
         objectSprite.setPosition(position);
         window.draw(objectSprite);
     }
-    
+
     sf::RectangleShape left_cover(sf::Vector2f(x, 900));
     left_cover.setFillColor(sf::Color::Black);
     window.draw(left_cover);
-    
+
     float y = 100;
     switch(mode)
     {
@@ -210,7 +210,7 @@ void CrewCommsUI::drawCommsRadar()
             mode = mode_default;
         }
         y += 50;
-        
+
         text(sf::FloatRect(x + 450, 100, 0, 50), "Place new waypoint", AlignCenter);
         if (InputHandler::mouseIsReleased(sf::Mouse::Left) && mouse.x > x)
         {
@@ -220,7 +220,7 @@ void CrewCommsUI::drawCommsRadar()
         }
         break;
     }
-    
+
     if (my_spaceship->comms_state == CS_BeingHailed || my_spaceship->comms_state == CS_BeingHailedByGM)
     {
         box(sf::FloatRect(0, 450, 300, 170));
@@ -266,7 +266,7 @@ void CrewCommsUI::drawCommsChannel()
                 y += 30;
             }
             y += 30;
-            
+
             if (my_spaceship->comms_reply_message.size() <= comms_reply_view_offset)
                 comms_reply_view_offset = 0;
             const int comm_reply_per_page = 8;
@@ -307,7 +307,7 @@ void CrewCommsUI::drawCommsChannel()
 
             if (!engine->getObject("mouseRenderer"))
             {
-                string keyboard_entry = onScreenKeyboard();
+                string keyboard_entry = drawOnScreenKeyboard();
                 if (keyboard_entry == "\n")
                 {
                     my_spaceship->commandSendCommPlayer(comms_player_message);

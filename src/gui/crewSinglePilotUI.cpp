@@ -50,19 +50,19 @@ void CrewSinglePilotUI::onCrewUI()
         if (toggleButton(sf::FloatRect(10, 90, 170, 25), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 20))
             my_spaceship->commandSetShields(!my_spaceship->shields_active);
     }
-    dockingButton(sf::FloatRect(10, 115, 170, 25), 20);
+    drawDockingButton(sf::FloatRect(10, 115, 170, 25), 20);
 
-    impulseSlider(sf::FloatRect(10, 650, 40, 200), 15);
+    drawImpulseSlider(sf::FloatRect(10, 650, 40, 200), 15);
     float x = 60;
     if (my_spaceship->hasWarpdrive)
     {
-        warpSlider(sf::FloatRect(x, 650, 40, 200), 15);
+        drawWarpSlider(sf::FloatRect(x, 650, 40, 200), 15);
         x += 50;
     }
     if (my_spaceship->hasJumpdrive)
     {
-        jumpSlider(jump_distance, sf::FloatRect(x, 650, 40, 200), 15);
-        jumpButton(jump_distance, sf::FloatRect(x, 865, 80, 30), 20);
+        drawJumpSlider(jump_distance, sf::FloatRect(x, 650, 40, 200), 15);
+        drawJumpButton(jump_distance, sf::FloatRect(x, 865, 80, 30), 20);
         x += 50;
     }
 
@@ -72,7 +72,7 @@ void CrewSinglePilotUI::onCrewUI()
         for(int n=0; n<my_spaceship->weapon_tubes; n++)
         {
             y -= 30;
-            weaponTube(tube_load_type, n, 0.0, sf::FloatRect(getWindowSize().x / 2.0 - 100, y, 100, 30), sf::FloatRect(getWindowSize().x / 2.0 - 300, y, 200, 30), 20);
+            drawWeaponTube(tube_load_type, n, 0.0, sf::FloatRect(getWindowSize().x / 2.0 - 100, y, 100, 30), sf::FloatRect(getWindowSize().x / 2.0 - 300, y, 200, 30), 20);
         }
 
         for(int n=0; n<MW_Count; n++)

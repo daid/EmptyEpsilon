@@ -59,7 +59,7 @@ void CrewUI::onCrewUI()
     text(sf::FloatRect(0, 500, 1600, 100), "???", AlignCenter, 100);
 }
 
-void CrewUI::impulseSlider(sf::FloatRect rect, float text_size)
+void CrewUI::drawImpulseSlider(sf::FloatRect rect, float text_size)
 {
     float res = vslider(rect, my_spaceship->impulseRequest, 1.0, -1.0);
     if (res > -0.15 && res < 0.15)
@@ -71,20 +71,20 @@ void CrewUI::impulseSlider(sf::FloatRect rect, float text_size)
     }
     text(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(int(my_spaceship->impulseRequest * 100)) + "%", AlignLeft, text_size);
     text(sf::FloatRect(rect.left, rect.top + rect.height + text_size, rect.width, text_size), string(int(my_spaceship->currentImpulse * 100)) + "%", AlignLeft, text_size);
-    damagePowerDisplay(rect, SYS_Impulse, text_size);
+    drawDamagePowerDisplay(rect, SYS_Impulse, text_size);
 }
 
-void CrewUI::warpSlider(sf::FloatRect rect, float text_size)
+void CrewUI::drawWarpSlider(sf::FloatRect rect, float text_size)
 {
     float res = vslider(rect, my_spaceship->warpRequest, 4.0, 0.0);
     if (res != my_spaceship->warpRequest)
         my_spaceship->commandWarp(res);
     text(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(int(my_spaceship->warpRequest)), AlignLeft, text_size);
     text(sf::FloatRect(rect.left, rect.top + rect.height + text_size, rect.width, text_size), string(int(my_spaceship->currentWarp * 100)) + "%", AlignLeft, text_size);
-    damagePowerDisplay(rect, SYS_Warp, text_size);
+    drawDamagePowerDisplay(rect, SYS_Warp, text_size);
 }
 
-void CrewUI::jumpSlider(float& jump_distance, sf::FloatRect rect, float text_size)
+void CrewUI::drawJumpSlider(float& jump_distance, sf::FloatRect rect, float text_size)
 {
     if (my_spaceship->jump_delay > 0.0)
     {
@@ -96,7 +96,7 @@ void CrewUI::jumpSlider(float& jump_distance, sf::FloatRect rect, float text_siz
     text(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(jump_distance, 1) + "km", AlignLeft, text_size);
 }
 
-void CrewUI::jumpButton(float jump_distance, sf::FloatRect rect, float text_size)
+void CrewUI::drawJumpButton(float jump_distance, sf::FloatRect rect, float text_size)
 {
     if (my_spaceship->jump_delay > 0.0)
     {
@@ -108,10 +108,10 @@ void CrewUI::jumpButton(float jump_distance, sf::FloatRect rect, float text_size
         if (button(rect, "Jump", text_size))
             my_spaceship->commandJump(jump_distance);
     }
-    damagePowerDisplay(rect, SYS_JumpDrive, text_size);
+    drawDamagePowerDisplay(rect, SYS_JumpDrive, text_size);
 }
 
-void CrewUI::dockingButton(sf::FloatRect rect, float text_size)
+void CrewUI::drawDockingButton(sf::FloatRect rect, float text_size)
 {
     switch(my_spaceship->docking_state)
     {
@@ -146,7 +146,7 @@ void CrewUI::dockingButton(sf::FloatRect rect, float text_size)
     }
 }
 
-void CrewUI::weaponTube(EMissileWeapons load_type, int n, float missile_target_angle, sf::FloatRect load_rect, sf::FloatRect fire_rect, float text_size)
+void CrewUI::drawWeaponTube(EMissileWeapons load_type, int n, float missile_target_angle, sf::FloatRect load_rect, sf::FloatRect fire_rect, float text_size)
 {
     switch(my_spaceship->weaponTube[n].state)
     {
@@ -172,10 +172,10 @@ void CrewUI::weaponTube(EMissileWeapons load_type, int n, float missile_target_a
         disabledButton(load_rect, "Unloading", text_size * 0.8);
         break;
     }
-    damagePowerDisplay(fire_rect, SYS_MissileSystem, text_size);
+    drawDamagePowerDisplay(fire_rect, SYS_MissileSystem, text_size);
 }
 
-int CrewUI::frequencyCurve(sf::FloatRect rect, bool frequency_is_beam, bool more_damage_is_positive, int frequency)
+int CrewUI::drawFrequencyCurve(sf::FloatRect rect, bool frequency_is_beam, bool more_damage_is_positive, int frequency)
 {
     sf::RenderTarget& window = *getRenderTarget();
 
@@ -206,7 +206,7 @@ int CrewUI::frequencyCurve(sf::FloatRect rect, bool frequency_is_beam, bool more
     return -1;
 }
 
-void CrewUI::damagePowerDisplay(sf::FloatRect rect, ESystem system, float text_size)
+void CrewUI::drawDamagePowerDisplay(sf::FloatRect rect, ESystem system, float text_size)
 {
     if (!my_spaceship->hasSystem(system))
         return;
@@ -248,7 +248,7 @@ void CrewUI::damagePowerDisplay(sf::FloatRect rect, ESystem system, float text_s
         text(rect, display_text, AlignCenter, text_size, color);
 }
 
-string CrewUI::onScreenKeyboard()
+string CrewUI::drawOnScreenKeyboard()
 {
     string ret = "";
     float size = 60;

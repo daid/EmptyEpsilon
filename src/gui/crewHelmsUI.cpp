@@ -75,7 +75,7 @@ void CrewHelmsUI::onCrewUI()
             text(sf::FloatRect(text_pos.x, text_pos.y, 0, 0), string(fmodf(sf::vector2ToAngle(diff) + 360.0 + 360.0 - 270.0, 360.0), 1), AlignCenter, 20);
         }
     }
-    damagePowerDisplay(sf::FloatRect(radar_center.x - 140, radar_center.y + 150, 280, 50), SYS_Maneuver, 20);
+    drawDamagePowerDisplay(sf::FloatRect(radar_center.x - 140, radar_center.y + 150, 280, 50), SYS_Maneuver, 20);
 
     keyValueDisplay(sf::FloatRect(20, 100, 240, 40), 0.45, "Energy", string(int(my_spaceship->energy_level)), 20);
     keyValueDisplay(sf::FloatRect(20, 140, 240, 40), 0.45, "Heading", string(fmodf(my_spaceship->getRotation() + 360.0 + 360.0 - 270.0, 360.0), 1), 20);
@@ -83,23 +83,23 @@ void CrewHelmsUI::onCrewUI()
     string velocity_text = string(velocity, 1);
     keyValueDisplay(sf::FloatRect(20, 180, 240, 40), 0.45, "Speed", velocity_text + "km/min", 20);
 
-    impulseSlider(sf::FloatRect(20, 400, 50, 300), 20);
+    drawImpulseSlider(sf::FloatRect(20, 400, 50, 300), 20);
 
     float x = 100;
     if (my_spaceship->hasWarpdrive)
     {
-        warpSlider(sf::FloatRect(x, 400, 50, 300), 20);
+        drawWarpSlider(sf::FloatRect(x, 400, 50, 300), 20);
         x += 80;
     }
     if (my_spaceship->hasJumpdrive)
     {
-        jumpSlider(jump_distance, sf::FloatRect(x, 400, 50, 300), 20);
+        drawJumpSlider(jump_distance, sf::FloatRect(x, 400, 50, 300), 20);
         x += 80;
-        jumpButton(jump_distance, sf::FloatRect(20, 750, 280, 50), 30);
+        drawJumpButton(jump_distance, sf::FloatRect(20, 750, 280, 50), 30);
     }
 
-    dockingButton(sf::FloatRect(20, 800, 280, 50), 30);
-    
+    drawDockingButton(sf::FloatRect(20, 800, 280, 50), 30);
+
     x = getWindowSize().x - 300;
     if (my_spaceship->combat_maneuver_delay > 0)
     {

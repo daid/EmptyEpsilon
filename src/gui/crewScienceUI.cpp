@@ -100,7 +100,7 @@ void CrewScienceUI::onCrewUI()
                             if (gameGlobalInfo->use_beam_shield_frequencies)
                             {
                                 box(sf::FloatRect(x, y, 250, 100));
-                                int freq = frequencyCurve(sf::FloatRect(x + 20, y + 30, 210, 60), false, true, ship->shield_frequency);
+                                int freq = drawFrequencyCurve(sf::FloatRect(x + 20, y + 30, 210, 60), false, true, ship->shield_frequency);
                                 if (freq > -1)
                                 {
                                     text(sf::FloatRect(x + 20, y, 210, 30), frequencyToString(freq) + " " + string(int(frequencyVsFrequencyDamageFactor(freq, ship->shield_frequency) * 100)) + "% dmg", AlignCenter, 20);
@@ -110,7 +110,7 @@ void CrewScienceUI::onCrewUI()
                                 y += 100;
 
                                 box(sf::FloatRect(x, y, 250, 100));
-                                freq = frequencyCurve(sf::FloatRect(x + 20, y + 30, 210, 60), true, false, ship->beam_frequency);
+                                freq = drawFrequencyCurve(sf::FloatRect(x + 20, y + 30, 210, 60), true, false, ship->beam_frequency);
                                 if (freq > -1)
                                 {
                                     text(sf::FloatRect(x + 20, y, 210, 30), frequencyToString(freq) + " " + string(int(frequencyVsFrequencyDamageFactor(ship->beam_frequency, freq) * 100)) + "% dmg", AlignCenter, 20);

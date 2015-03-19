@@ -35,17 +35,17 @@ void CrewWeaponsUI::onCrewUI()
                 missile_target_angle = sf::vector2ToAngle(diff);
         }
     }
-    
+
     {
         float angle_diff = sf::angleDifference(missile_target_angle, my_spaceship->getRotation());
         float turn_rate = 10.0f;
         float speed = 200.0f;
         float turn_radius = ((360.0f / turn_rate) * speed) / (2.0f * M_PI);
-        
+
         float left_or_right = 90;
         if (angle_diff > 0)
             left_or_right = -90;
-        
+
         sf::Vector2f turn_center = sf::vector2FromAngle(my_spaceship->getRotation() + left_or_right) * turn_radius;
         sf::Vector2f turn_exit = turn_center + sf::vector2FromAngle(missile_target_angle - left_or_right) * turn_radius;
 
@@ -58,7 +58,7 @@ void CrewWeaponsUI::onCrewUI()
         for(int cnt=0; cnt<13; cnt++)
             a[cnt].color = sf::Color(255, 255, 255, 128);
         getRenderTarget()->draw(a);
-        
+
         float offset = 10.0 * speed;
         float turn_distance = fabs(angle_diff) / 360.0 * (turn_radius * 2.0f * M_PI);
         for(int cnt=0; cnt<5; cnt++)
@@ -77,7 +77,7 @@ void CrewWeaponsUI::onCrewUI()
             a[0].position = radar_center + p - n * 10.0f;
             a[1].position = radar_center + p + n * 10.0f;
             getRenderTarget()->draw(a);
-        
+
             offset += 10.0 * speed;
         }
     }
@@ -111,7 +111,7 @@ void CrewWeaponsUI::onCrewUI()
         for(int n=0; n<my_spaceship->weapon_tubes; n++)
         {
             y -= 50;
-            weaponTube(tube_load_type, n, missile_target_angle, sf::FloatRect(20, y, 150, 50), sf::FloatRect(170, y, 350, 50), 35);
+            drawWeaponTube(tube_load_type, n, missile_target_angle, sf::FloatRect(20, y, 150, 50), sf::FloatRect(170, y, 350, 50), 35);
         }
 
         for(int n=0; n<MW_Count; n++)
@@ -137,7 +137,7 @@ void CrewWeaponsUI::onCrewUI()
             disabledButton(sf::FloatRect(x, 840, 270, 50), "Calibrating", 30);
         else if (toggleButton(sf::FloatRect(x, 840, 270, 50), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 30))
             my_spaceship->commandSetShields(!my_spaceship->shields_active);
-        damagePowerDisplay(sf::FloatRect(x, 840, 270, 50), SYS_FrontShield, 20);
+        drawDamagePowerDisplay(sf::FloatRect(x, 840, 270, 50), SYS_FrontShield, 20);
     }
 
     float y = 690;
@@ -170,9 +170,9 @@ void CrewWeaponsUI::onCrewUI()
             if (new_system != my_spaceship->beam_system_target)
                 my_spaceship->commandSetBeamSystemTarget(new_system);
         }
-        damagePowerDisplay(sf::FloatRect(x, y, 270, h), SYS_BeamWeapons, 20);
+        drawDamagePowerDisplay(sf::FloatRect(x, y, 270, h), SYS_BeamWeapons, 20);
     }else{
-        damagePowerDisplay(sf::FloatRect(radar_center.x - 140, radar_center.y + 150, 280, 50), SYS_BeamWeapons, 20);
+        drawDamagePowerDisplay(sf::FloatRect(radar_center.x - 140, radar_center.y + 150, 280, 50), SYS_BeamWeapons, 20);
     }
 }
 
