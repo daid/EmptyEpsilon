@@ -1,7 +1,6 @@
 #include "crewUI.h"
 #include "playerInfo.h"
 #include "factionInfo.h"
-#include "repairCrew.h"
 #include "spaceObjects/spaceStation.h"
 #include "spaceObjects/warpJammer.h"
 
