@@ -9,6 +9,7 @@ FighterAI::FighterAI(CpuShip* owner)
 : ShipAI(owner)
 {
     attack_state = dive;
+    timeout = 0.0;
 }
 
 void FighterAI::run(float delta)

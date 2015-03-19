@@ -23,12 +23,12 @@ SpaceStation::SpaceStation()
 
     shields = shields_max = 400;
     hull_strength = hull_max = 200;
+    shieldHitEffect = 0.0;
 
     registerMemberReplication(&template_name);
     registerMemberReplication(&shields, 1.0);
     registerMemberReplication(&shields_max);
     registerMemberReplication(&shieldHitEffect, 0.5);
-    shieldHitEffect = 0.0;
 
     comms_script_name = "comms_station.lua";
 }
