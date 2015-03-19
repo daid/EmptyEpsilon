@@ -4,6 +4,7 @@
 CrewWeaponsUI::CrewWeaponsUI()
 {
     tube_load_type = MW_None;
+    missile_target_angle = 0.0;
 }
 
 void CrewWeaponsUI::onCrewUI()
