@@ -102,6 +102,7 @@ PlayerSpaceship::PlayerSpaceship()
     shield_calibration_delay = 0.0;
     auto_repair_enabled = false;
     activate_self_destruct = false;
+    scanning_delay = 0.0;
 
     setFactionId(1);
 
