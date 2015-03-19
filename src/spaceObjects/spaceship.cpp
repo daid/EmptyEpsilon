@@ -577,8 +577,8 @@ void SpaceShip::update(float delta)
         {
             Mesh* m = Mesh::getMesh(ship_template->model);
 
-            int cnt = (10.0f - jump_delay);
-            for(int n=0; n<cnt; n++)
+            int count = (10.0f - jump_delay);
+            for(int n=0; n<count; n++)
             {
                 sf::Vector3f offset = m->randomPoint() * ship_template->scale;
                 sf::Vector2f pos2d = getPosition() + sf::rotateVector(sf::Vector2f(offset.x, offset.y), getRotation());

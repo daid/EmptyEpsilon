@@ -10,9 +10,13 @@ class ShipSelectionScreen : public GUI
     int window_angle;
 public:
     ShipSelectionScreen();
-    
+
     virtual void onGui();
-    
+
+    /**!
+     * \brief check if this console can be mainscreen.
+     * Being a main screen requires a bit more than the normal GUI, so we need to do some checks.
+     */
     bool canDoMainScreen() { return PostProcessor::isEnabled() && sf::Shader::isAvailable(); }
 };
 

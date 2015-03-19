@@ -73,14 +73,14 @@ void ShipSelectionScreen::onGui()
         {
             int32_t my_ship_id = my_spaceship->getMultiplayerId();
 
-            int main_screen_control_cnt = 0;
-            int mainCnt = 0;
+            int main_screen_control_count = 0;
+            int main_count = 0;
             foreach(PlayerInfo, i, playerInfoList)
             {
                 if (i->ship_id == my_ship_id && i->isMainScreen())
-                    mainCnt++;
+                    main_count++;
                 if (i->ship_id == my_ship_id && i->main_screen_control)
-                    main_screen_control_cnt++;
+                    main_screen_control_count++;
             }
 
             if (canDoMainScreen())
@@ -93,10 +93,10 @@ void ShipSelectionScreen::onGui()
             }else{
                 disabledButton(sf::FloatRect(800, 100, 300, 50), "Main screen", 30);
             }
-            text(sf::FloatRect(800, 100, 280, 50), string(mainCnt), AlignRight, 30, sf::Color::Black);
+            text(sf::FloatRect(800, 100, 280, 50), string(main_count), AlignRight, 30, sf::Color::Black);
 
             float y = 150;
-            for(int n=0; n<max_crew_positions; n++)
+            for(int n=0; n < max_crew_positions; n++)
             {
                 if (n == singlePilot) y += 25;
                 if (toggleButton(sf::FloatRect(800, y, 300, 50), my_player_info->crew_position[n], getCrewPositionName(ECrewPosition(n))))
@@ -119,7 +119,7 @@ void ShipSelectionScreen::onGui()
             }else{
                 disabledButton(sf::FloatRect(800, y, 300, 50), "Main screen ctrl");
             }
-            text(sf::FloatRect(800, y, 280, 50), string(main_screen_control_cnt), AlignRight, 30, sf::Color::Black);
+            text(sf::FloatRect(800, y, 280, 50), string(main_screen_control_count), AlignRight, 30, sf::Color::Black);
 
             if (button(sf::FloatRect(800, 600, 300, 50), "Ready"))
             {
