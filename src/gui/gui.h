@@ -189,6 +189,10 @@ public:
 
 private:
     static void draw9Cut(sf::FloatRect rect, string texture, sf::Color color=sf::Color::White, float width_factor = 1.0);
+
+    /*!
+     * Draw an arrow, used in drawSelector
+     */
     static bool drawArrow(sf::FloatRect rect, bool disabled=false, float rotation=0.0);
 };
 
