@@ -44,11 +44,11 @@ CpuShip::CpuShip()
     orders = AI_Idle;
 
     setRotation(random(0, 360));
-    targetRotation = getRotation();
+    target_rotation = getRotation();
     shields_active = true;
 
     comms_script_name = "comms_ship.lua";
-    
+
     ai = ShipAIFactory::getAIFactory("default")(this);
 }
 
@@ -63,7 +63,7 @@ void CpuShip::update(float delta)
 
     if (!game_server)
         return;
-    
+
     for(int n=0; n<SYS_COUNT; n++)
         systems[n].health = std::min(1.0f, systems[n].health + delta * auto_system_repair_per_second);
 
@@ -77,10 +77,10 @@ void CpuShip::update(float delta)
     ai->run(delta);
 }
 
-void CpuShip::setShipTemplate(string templateName)
+void CpuShip::setShipTemplate(string template_name)
 {
-    SpaceShip::setShipTemplate(templateName);
-    
+    SpaceShip::setShipTemplate(template_name);
+
     new_ai_name = ship_template->default_ai_name;
 }
 
@@ -91,20 +91,20 @@ void CpuShip::orderIdle()
 
 void CpuShip::orderRoaming()
 {
-    targetRotation = getRotation();
+    target_rotation = getRotation();
     orders = AI_Roaming;
 }
 
 void CpuShip::orderRoamingAt(sf::Vector2f position)
 {
-    targetRotation = getRotation();
+    target_rotation = getRotation();
     orders = AI_Roaming;
     order_target_location = position;
 }
 
 void CpuShip::orderStandGround()
 {
-    targetRotation = getRotation();
+    target_rotation = getRotation();
     orders = AI_StandGround;
 }
 

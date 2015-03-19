@@ -61,26 +61,26 @@ void CrewUI::onCrewUI()
 
 void CrewUI::drawImpulseSlider(sf::FloatRect rect, float text_size)
 {
-    float res = drawVerticalSlider(rect, my_spaceship->impulseRequest, 1.0, -1.0);
+    float res = drawVerticalSlider(rect, my_spaceship->impulse_request, 1.0, -1.0);
     if (res > -0.15 && res < 0.15)
         res = 0.0;
-    if (res != my_spaceship->impulseRequest)
+    if (res != my_spaceship->impulse_request)
     {
         my_spaceship->commandImpulse(res);
-        my_spaceship->impulseRequest = res; //Set the impulseRequest directly, so it looks smooth on the client.
+        my_spaceship->impulse_request = res; //Set the impulse_request directly, so it looks smooth on the client.
     }
-    drawText(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(int(my_spaceship->impulseRequest * 100)) + "%", AlignLeft, text_size);
-    drawText(sf::FloatRect(rect.left, rect.top + rect.height + text_size, rect.width, text_size), string(int(my_spaceship->currentImpulse * 100)) + "%", AlignLeft, text_size);
+    drawText(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(int(my_spaceship->impulse_request * 100)) + "%", AlignLeft, text_size);
+    drawText(sf::FloatRect(rect.left, rect.top + rect.height + text_size, rect.width, text_size), string(int(my_spaceship->current_impulse * 100)) + "%", AlignLeft, text_size);
     drawDamagePowerDisplay(rect, SYS_Impulse, text_size);
 }
 
 void CrewUI::drawWarpSlider(sf::FloatRect rect, float text_size)
 {
-    float res = drawVerticalSlider(rect, my_spaceship->warpRequest, 4.0, 0.0);
-    if (res != my_spaceship->warpRequest)
+    float res = drawVerticalSlider(rect, my_spaceship->warp_request, 4.0, 0.0);
+    if (res != my_spaceship->warp_request)
         my_spaceship->commandWarp(res);
-    drawText(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(int(my_spaceship->warpRequest)), AlignLeft, text_size);
-    drawText(sf::FloatRect(rect.left, rect.top + rect.height + text_size, rect.width, text_size), string(int(my_spaceship->currentWarp * 100)) + "%", AlignLeft, text_size);
+    drawText(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(int(my_spaceship->warp_request)), AlignLeft, text_size);
+    drawText(sf::FloatRect(rect.left, rect.top + rect.height + text_size, rect.width, text_size), string(int(my_spaceship->current_warp * 100)) + "%", AlignLeft, text_size);
     drawDamagePowerDisplay(rect, SYS_Warp, text_size);
 }
 

@@ -39,14 +39,14 @@ void FighterAI::runAttack(P<SpaceObject> target)
                 }
             }
         }
-        
+
         flyTowards(target->getPosition(), 0.0);
-        
+
         if (distance < 500 + target->getRadius())
         {
             attack_state = evade;
             timeout = 30.0;
-            
+
             float target_dir = sf::vector2ToAngle(position_diff);
             float a_diff = sf::angleDifference(target_dir, owner->getRotation());
             if (a_diff < 0)
@@ -64,8 +64,8 @@ void FighterAI::runAttack(P<SpaceObject> target)
         }
         else
         {
-            owner->targetRotation = evade_direction;
-            owner->impulseRequest = 1.0;
+            owner->target_rotation = evade_direction;
+            owner->impulse_request = 1.0;
         }
         break;
     case recharge:

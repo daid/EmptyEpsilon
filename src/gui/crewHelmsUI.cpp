@@ -86,12 +86,12 @@ void CrewHelmsUI::onCrewUI()
     drawImpulseSlider(sf::FloatRect(20, 400, 50, 300), 20);
 
     float x = 100;
-    if (my_spaceship->hasWarpdrive)
+    if (my_spaceship->has_warp_drive)
     {
         drawWarpSlider(sf::FloatRect(x, 400, 50, 300), 20);
         x += 80;
     }
-    if (my_spaceship->hasJumpdrive)
+    if (my_spaceship->has_jump_drive)
     {
         drawJumpSlider(jump_distance, sf::FloatRect(x, 400, 50, 300), 20);
         x += 80;
@@ -134,17 +134,17 @@ void CrewHelmsUI::onPauseHelpGui()
     line_x += 40;
     y += 80;
 
-    if (my_spaceship->hasWarpdrive)
+    if (my_spaceship->has_warp_drive)
     {
         drawTextBoxWithBackground(sf::FloatRect(x, y, 300, 80), "Use the warp drive to cover long distances (drains energy fast)", AlignTopLeft, 20);
         drawUILine(sf::Vector2f(140, 480), sf::Vector2f(x, y + 25), line_x);
         line_x += 40;
         y += 80;
     }
-    if (my_spaceship->hasJumpdrive)
+    if (my_spaceship->has_jump_drive)
     {
         drawTextBoxWithBackground(sf::FloatRect(x, y, 300, 80), "Use the jump drive to cover long distances (uses energy)", AlignTopLeft, 20);
-        drawUILine(sf::Vector2f(my_spaceship->hasWarpdrive ? 220 : 140, 520), sf::Vector2f(x, y + 25), line_x);
+        drawUILine(sf::Vector2f(my_spaceship->has_warp_drive ? 220 : 140, 520), sf::Vector2f(x, y + 25), line_x);
         line_x += 10;
         drawUILine(sf::Vector2f(280, 770), sf::Vector2f(x, y + 35), line_x);
         line_x += 40;

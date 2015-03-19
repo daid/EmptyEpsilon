@@ -95,10 +95,10 @@ void MainUIBase::onGui()
         }else{
             glitchPostProcessor->enabled = false;
         }
-        if (my_spaceship->currentWarp > 0.0)
+        if (my_spaceship->current_warp > 0.0)
         {
             warpPostProcessor->enabled = true;
-            warpPostProcessor->setUniform("amount", my_spaceship->currentWarp * 0.01);
+            warpPostProcessor->setUniform("amount", my_spaceship->current_warp * 0.01);
         }else if (my_spaceship->jump_delay > 0.0 && my_spaceship->jump_delay < 2.0)
         {
             warpPostProcessor->enabled = true;

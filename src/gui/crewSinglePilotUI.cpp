@@ -54,12 +54,12 @@ void CrewSinglePilotUI::onCrewUI()
 
     drawImpulseSlider(sf::FloatRect(10, 650, 40, 200), 15);
     float x = 60;
-    if (my_spaceship->hasWarpdrive)
+    if (my_spaceship->has_warp_drive)
     {
         drawWarpSlider(sf::FloatRect(x, 650, 40, 200), 15);
         x += 50;
     }
-    if (my_spaceship->hasJumpdrive)
+    if (my_spaceship->has_jump_drive)
     {
         drawJumpSlider(jump_distance, sf::FloatRect(x, 650, 40, 200), 15);
         drawJumpButton(jump_distance, sf::FloatRect(x, 865, 80, 30), 20);

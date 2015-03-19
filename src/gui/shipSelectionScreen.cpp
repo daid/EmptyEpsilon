@@ -180,7 +180,7 @@ void ShipSelectionScreen::onGui()
             {
                 my_spaceship->setShipTemplate(templates[ship_template_index]);
                 my_spaceship->setRotation(random(0, 360));
-                my_spaceship->targetRotation = my_spaceship->getRotation();
+                my_spaceship->target_rotation = my_spaceship->getRotation();
                 my_spaceship->setPosition(sf::Vector2f(random(-100, 100), random(-100, 100)));
                 my_player_info->setShipId(my_spaceship->getMultiplayerId());
             }

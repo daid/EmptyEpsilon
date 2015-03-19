@@ -109,11 +109,11 @@ public:
 
     virtual string getCallSign() { return "PL" + string(getMultiplayerId()); }
 
-    virtual void setShipTemplate(string templateName);
+    virtual void setShipTemplate(string template_name);
 
     virtual void executeJump(float distance);
     virtual void fireBeamWeapon(int index, P<SpaceObject> target);
-    virtual void hullDamage(float damageAmount, DamageInfo& info);
+    virtual void takeHullDamage(float damage_amount, DamageInfo& info);
     void setSystemCoolant(ESystem system, float level);
 
     virtual void update(float delta);

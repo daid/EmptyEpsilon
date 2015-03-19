@@ -40,11 +40,11 @@ void BlackHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
     window.draw(object_sprite);
 }
 
-void BlackHole::collision(Collisionable* target)
+void BlackHole::collide(Collisionable* target)
 {
     if (update_delta == 0.0)
         return;
-    
+
     sf::Vector2f diff = getPosition() - target->getPosition();
     float distance = sf::length(diff);
     float force = (getRadius() * getRadius() * 50.0f) / (distance * distance);

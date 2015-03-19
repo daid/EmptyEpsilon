@@ -105,7 +105,7 @@ PlayerSpaceship::PlayerSpaceship()
 
     setFactionId(1);
 
-    updateMemberReplicationUpdateDelay(&targetRotation, 0.1);
+    updateMemberReplicationUpdateDelay(&target_rotation, 0.1);
     registerMemberReplication(&hull_damage_indicator, 0.5);
     registerMemberReplication(&hull_strength, 0.5);
     registerMemberReplication(&hull_max);
@@ -280,10 +280,10 @@ void PlayerSpaceship::update(float delta)
             }
         }
 
-        if (hasWarpdrive && warpRequest > 0 && !(hasJumpdrive && jump_delay > 0))
+        if (has_warp_drive && warp_request > 0 && !(has_jump_drive && jump_delay > 0))
         {
-            if (!useEnergy(energy_warp_per_second * delta * float(warpRequest * warpRequest) * (shields_active ? 1.5 : 1.0)))
-                warpRequest = 0;
+            if (!useEnergy(energy_warp_per_second * delta * float(warp_request * warp_request) * (shields_active ? 1.5 : 1.0)))
+                warp_request = 0;
         }
         if (scanning_ship)
         {
@@ -344,30 +344,30 @@ void PlayerSpaceship::update(float delta)
         energy_level = 1000.0;
 }
 
-void PlayerSpaceship::setShipTemplate(string templateName)
+void PlayerSpaceship::setShipTemplate(string template_name)
 {
-    SpaceShip::setShipTemplate(templateName);
+    SpaceShip::setShipTemplate(template_name);
 
     switch(gameGlobalInfo->player_warp_jump_drive_setting)
     {
     default:
         break;
     case PWJ_WarpDrive:
-        hasWarpdrive = true;
-        if (warp_speedPerWarpLevel < 100)
-            warp_speedPerWarpLevel = 1000;
-        hasJumpdrive = false;
+        has_warp_drive = true;
+        if (warp_speed_per_warp_level < 100)
+            warp_speed_per_warp_level = 1000;
+        has_jump_drive = false;
         break;
     case PWJ_JumpDrive:
-        hasWarpdrive = false;
-        warp_speedPerWarpLevel = 0;
-        hasJumpdrive = true;
+        has_warp_drive = false;
+        warp_speed_per_warp_level = 0;
+        has_jump_drive = true;
         break;
     case PWJ_WarpAndJumpDrive:
-        hasWarpdrive = true;
-        if (warp_speedPerWarpLevel < 100)
-            warp_speedPerWarpLevel = 1000;
-        hasJumpdrive = true;
+        has_warp_drive = true;
+        if (warp_speed_per_warp_level < 100)
+            warp_speed_per_warp_level = 1000;
+        has_jump_drive = true;
         break;
     }
 }
@@ -387,13 +387,13 @@ void PlayerSpaceship::fireBeamWeapon(int idx, P<SpaceObject> target)
         SpaceShip::fireBeamWeapon(idx, target);
 }
 
-void PlayerSpaceship::hullDamage(float damageAmount, DamageInfo& info)
+void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
 {
     if (info.type != DT_EMP)
     {
         hull_damage_indicator = 1.5;
     }
-    SpaceShip::hullDamage(damageAmount, info);
+    SpaceShip::takeHullDamage(damage_amount, info);
 }
 
 void PlayerSpaceship::setSystemCoolant(ESystem system, float level)
@@ -467,13 +467,13 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     switch(command)
     {
     case CMD_TARGET_ROTATION:
-        packet >> targetRotation;
+        packet >> target_rotation;
         break;
     case CMD_IMPULSE:
-        packet >> impulseRequest;
+        packet >> impulse_request;
         break;
     case CMD_WARP:
-        packet >> warpRequest;
+        packet >> warp_request;
         break;
     case CMD_JUMP:
         {
@@ -484,7 +484,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         break;
     case CMD_SET_TARGET:
         {
-            packet >> targetId;
+            packet >> target_id;
         }
         break;
     case CMD_LOAD_TUBE:

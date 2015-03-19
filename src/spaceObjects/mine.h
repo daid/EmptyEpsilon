@@ -12,7 +12,7 @@ class Mine : public SpaceObject, public Updatable
     const static float triggerDelay = 1.0f;
     const static float damageAtCenter = 160.0f;
     const static float damageAtEdge = 30.0f;
-    
+
 public:
     bool triggered;       //Only valid on server.
     float triggerTimeout; //Only valid on server.
@@ -25,8 +25,8 @@ public:
     virtual void draw3DTransparent();
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
     virtual void update(float delta);
-    
-    virtual void collision(Collisionable* target);
+
+    virtual void collide(Collisionable* target);
     void eject();
     void explode();
 };

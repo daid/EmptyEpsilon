@@ -373,18 +373,18 @@ void GameMasterShipRetrofit::onGui()
 
     ship->ship_type_name = drawTextEntry(sf::FloatRect(x, y, 300, 30), ship->ship_type_name, 20);
     y += 30;
-    int diff = drawSelector(sf::FloatRect(x, y, 300, 30), string("WarpDrive: ") + (ship->hasWarpdrive ? "Yes" : "No"), 20);
+    int diff = drawSelector(sf::FloatRect(x, y, 300, 30), string("WarpDrive: ") + (ship->has_warp_drive ? "Yes" : "No"), 20);
     y += 30;
     if (diff)
     {
-        ship->hasWarpdrive = !ship->hasWarpdrive;
-        if (ship->warp_speedPerWarpLevel < 100)
-            ship->warp_speedPerWarpLevel = 1000;
+        ship->has_warp_drive = !ship->has_warp_drive;
+        if (ship->warp_speed_per_warp_level < 100)
+            ship->warp_speed_per_warp_level = 1000;
     }
-    if (drawSelector(sf::FloatRect(x, y, 300, 30), string("JumpDrive: ") + (ship->hasJumpdrive ? "Yes" : "No"), 20))
-        ship->hasJumpdrive = !ship->hasJumpdrive;
+    if (drawSelector(sf::FloatRect(x, y, 300, 30), string("JumpDrive: ") + (ship->has_jump_drive ? "Yes" : "No"), 20))
+        ship->has_jump_drive = !ship->has_jump_drive;
     y += 30;
-    ship->impulseMaxSpeed += drawSelector(sf::FloatRect(x, y, 300, 30), "Max speed: " + string(ship->impulseMaxSpeed), 20);
+    ship->impulse_max_speed += drawSelector(sf::FloatRect(x, y, 300, 30), "Max speed: " + string(ship->impulse_max_speed), 20);
     y += 30;
     ship->turn_speed += drawSelector(sf::FloatRect(x, y, 300, 30), "Rotation speed: " + string(ship->turn_speed), 20);
     y += 30;

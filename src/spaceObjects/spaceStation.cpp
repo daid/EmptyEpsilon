@@ -24,7 +24,7 @@ SpaceStation::SpaceStation()
     shields = shields_max = 400;
     hull_strength = hull_max = 200;
 
-    registerMemberReplication(&templateName);
+    registerMemberReplication(&template_name);
     registerMemberReplication(&shields, 1.0);
     registerMemberReplication(&shields_max);
     registerMemberReplication(&shieldHitEffect, 0.5);
@@ -89,9 +89,9 @@ void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, 
 
 void SpaceStation::update(float delta)
 {
-    if (!ship_template || ship_template->getName() != templateName)
+    if (!ship_template || ship_template->getName() != template_name)
     {
-        ship_template = ShipTemplate::getTemplate(templateName);
+        ship_template = ShipTemplate::getTemplate(template_name);
         if (!ship_template)
             return;
         ship_template->setCollisionData(this);
@@ -119,14 +119,14 @@ bool SpaceStation::canBeDockedBy(P<SpaceObject> obj)
     return true;
 }
 
-void SpaceStation::takeDamage(float damageAmount, DamageInfo& info)
+void SpaceStation::takeDamage(float damage_amount, DamageInfo& info)
 {
-    shields -= damageAmount;
+    shields -= damage_amount;
     if (shields < 0)
     {
         if (info.type != DT_EMP)
         {
-            hull_strength -= damageAmount;
+            hull_strength -= damage_amount;
             if (hull_strength <= 0.0)
             {
                 ExplosionEffect* e = new ExplosionEffect();
@@ -142,15 +142,15 @@ void SpaceStation::takeDamage(float damageAmount, DamageInfo& info)
     }
 }
 
-void SpaceStation::setTemplate(string templateName)
+void SpaceStation::setTemplate(string template_name)
 {
-    P<ShipTemplate> new_ship_template = ShipTemplate::getTemplate(templateName);
+    P<ShipTemplate> new_ship_template = ShipTemplate::getTemplate(template_name);
     if (!new_ship_template)
     {
-        LOG(ERROR) << "Failed to find template for station: " << templateName;
+        LOG(ERROR) << "Failed to find template for station: " << template_name;
         return;
     }
-    this->templateName = templateName;
+    this->template_name = template_name;
     ship_template = new_ship_template;
 
     hull_strength = hull_max = ship_template->hull;

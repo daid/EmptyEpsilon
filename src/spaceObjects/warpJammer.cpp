@@ -19,9 +19,9 @@ WarpJammer::WarpJammer()
 {
     range = 7000.0;
     hull = 50;
-    
+
     jammer_list.push_back(this);
-    
+
     registerMemberReplication(&range);
 }
 
@@ -51,7 +51,7 @@ void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, fl
     float size = 0.6;
     object_sprite.setScale(size, size);
     window.draw(object_sprite);
-    
+
     if (long_range)
     {
         sf::CircleShape range_circle(range * scale);
@@ -64,11 +64,11 @@ void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, fl
     }
 }
 
-void WarpJammer::takeDamage(float damageAmount, DamageInfo& info)
+void WarpJammer::takeDamage(float damage_amount, DamageInfo& info)
 {
     if (info.type == DT_EMP)
         return;
-    hull -= damageAmount;
+    hull -= damage_amount;
     if (hull <= 0)
     {
         P<ExplosionEffect> e = new ExplosionEffect();
@@ -113,7 +113,7 @@ sf::Vector2f WarpJammer::getFirstNoneJammedPosition(sf::Vector2f start, sf::Vect
     }
     if (!first_jammer)
         return end;
-    
+
     float d = sf::length(first_jammer_q - first_jammer->getPosition());
     return first_jammer_q + sf::normalize(start - end) * sqrtf(first_jammer->range * first_jammer->range - d * d);
 }

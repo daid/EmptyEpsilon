@@ -50,7 +50,7 @@ void SupplyDrop::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, fl
     window.draw(object_sprite);
 }
 
-void SupplyDrop::collision(Collisionable* target)
+void SupplyDrop::collide(Collisionable* target)
 {
     P<SpaceShip> ship = P<Collisionable>(target);
     if (ship && isFriendly(ship))
@@ -72,7 +72,7 @@ void SupplyDrop::collision(Collisionable* target)
                 picked_up = true;
             }
         }
-        
+
         if (picked_up)
             destroy();
     }
