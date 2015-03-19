@@ -173,7 +173,10 @@ public:
 
     int32_t target_id;
 
-    EScannedState scanned_by_player;//TODO; Needs to be fixed for multiplayer!
+    /*!
+     * TODO; Needs to be fixed for multiplayer!
+     */
+    EScannedState scanned_by_player;
 
     EDockingState docking_state;
     P<SpaceObject> docking_target; //Server only
@@ -183,12 +186,27 @@ public:
 
     virtual void draw3D();
     virtual void draw3DTransparent();
+
+    /*!
+     * Draw this ship on the radar.
+     */
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
 
     virtual void update(float delta);
 
+    /*!
+     * Get the call sign of this ship.
+     */
     virtual string getCallSign();
+
+    /*!
+     * Check if the ship can be targeted.
+     */
     virtual bool canBeTargeted() { return true; }
+
+    /*!
+     * Check if spaceship has a shield
+     */
     virtual bool hasShield() { return front_shield > (front_shield_max / 50.0) || rear_shield > (rear_shield_max / 50.0); }
 
     /*!
