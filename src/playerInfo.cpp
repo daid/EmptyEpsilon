@@ -19,6 +19,7 @@ REGISTER_MULTIPLAYER_CLASS(PlayerInfo, "PlayerInfo");
 PlayerInfo::PlayerInfo()
 : MultiplayerObject("PlayerInfo")
 {
+    ship_id = -1;
     client_id = -1;
     main_screen_control = false;
     registerMemberReplication(&client_id);
