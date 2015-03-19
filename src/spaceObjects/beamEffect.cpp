@@ -10,6 +10,9 @@ BeamEffect::BeamEffect()
 {
     setCollisionRadius(1.0);
     lifetime = 1.0;
+    sourceId = -1;
+    target_id = -1;
+    
     registerMemberReplication(&sourceId);
     registerMemberReplication(&target_id);
     registerMemberReplication(&sourceOffset);
