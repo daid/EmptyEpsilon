@@ -310,7 +310,7 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
         }
     }else{
         if (my_spaceship != this)
-            GUI::text(sf::FloatRect(position.x, position.y - 15, 0, 0), getCallSign(), AlignCenter, 12);
+            GUI::drawText(sf::FloatRect(position.x, position.y - 15, 0, 0), getCallSign(), AlignCenter, 12);
     }
 
     sf::Sprite objectSprite;

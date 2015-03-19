@@ -13,15 +13,15 @@ static const int16_t CMD_UPDATE_MAIN_SCREEN_CONTROL = 0x0003;
 
 P<PlayerInfo> my_player_info;
 P<PlayerSpaceship> my_spaceship;
-PVector<PlayerInfo> playerInfoList;
+PVector<PlayerInfo> player_info_list;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerInfo, "PlayerInfo");
 PlayerInfo::PlayerInfo()
 : MultiplayerObject("PlayerInfo")
 {
-    clientId = -1;
+    client_id = -1;
     main_screen_control = false;
-    registerMemberReplication(&clientId);
+    registerMemberReplication(&client_id);
 
     crew_active_position = helmsOfficer;
     for(int n=0; n<max_crew_positions; n++)
@@ -32,7 +32,7 @@ PlayerInfo::PlayerInfo()
     registerMemberReplication(&ship_id);
     registerMemberReplication(&main_screen_control);
 
-    playerInfoList.push_back(this);
+    player_info_list.push_back(this);
 }
 
 void PlayerInfo::setCrewPosition(ECrewPosition position, bool active)
@@ -56,9 +56,9 @@ void PlayerInfo::setMainScreenControl(bool control)
     sendClientCommand(packet);
 }
 
-void PlayerInfo::onReceiveClientCommand(int32_t clientId, sf::Packet& packet)
+void PlayerInfo::onReceiveClientCommand(int32_t client_id, sf::Packet& packet)
 {
-    if (clientId != this->clientId) return;
+    if (client_id != this->client_id) return;
     int16_t command;
     packet >> command;
     switch(command)

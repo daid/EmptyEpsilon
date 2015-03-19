@@ -460,7 +460,7 @@ void PlayerSpaceship::addCommsReply(int32_t id, string message)
     comms_reply_message.push_back(message);
 }
 
-void PlayerSpaceship::onReceiveClientCommand(int32_t clientId, sf::Packet& packet)
+void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& packet)
 {
     int16_t command;
     packet >> command;

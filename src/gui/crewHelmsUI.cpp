@@ -72,16 +72,16 @@ void CrewHelmsUI::onCrewUI()
                 text_pos.y -= 10.0;
             else
                 text_pos.y -= 30.0;
-            text(sf::FloatRect(text_pos.x, text_pos.y, 0, 0), string(fmodf(sf::vector2ToAngle(diff) + 360.0 + 360.0 - 270.0, 360.0), 1), AlignCenter, 20);
+            drawText(sf::FloatRect(text_pos.x, text_pos.y, 0, 0), string(fmodf(sf::vector2ToAngle(diff) + 360.0 + 360.0 - 270.0, 360.0), 1), AlignCenter, 20);
         }
     }
     drawDamagePowerDisplay(sf::FloatRect(radar_center.x - 140, radar_center.y + 150, 280, 50), SYS_Maneuver, 20);
 
-    keyValueDisplay(sf::FloatRect(20, 100, 240, 40), 0.45, "Energy", string(int(my_spaceship->energy_level)), 20);
-    keyValueDisplay(sf::FloatRect(20, 140, 240, 40), 0.45, "Heading", string(fmodf(my_spaceship->getRotation() + 360.0 + 360.0 - 270.0, 360.0), 1), 20);
+    drawKeyValueDisplay(sf::FloatRect(20, 100, 240, 40), 0.45, "Energy", string(int(my_spaceship->energy_level)), 20);
+    drawKeyValueDisplay(sf::FloatRect(20, 140, 240, 40), 0.45, "Heading", string(fmodf(my_spaceship->getRotation() + 360.0 + 360.0 - 270.0, 360.0), 1), 20);
     float velocity = sf::length(my_spaceship->getVelocity()) / 1000 * 60;
     string velocity_text = string(velocity, 1);
-    keyValueDisplay(sf::FloatRect(20, 180, 240, 40), 0.45, "Speed", velocity_text + "km/min", 20);
+    drawKeyValueDisplay(sf::FloatRect(20, 180, 240, 40), 0.45, "Speed", velocity_text + "km/min", 20);
 
     drawImpulseSlider(sf::FloatRect(20, 400, 50, 300), 20);
 
@@ -103,22 +103,22 @@ void CrewHelmsUI::onCrewUI()
     x = getWindowSize().x - 300;
     if (my_spaceship->combat_maneuver_delay > 0)
     {
-        disabledButton(sf::FloatRect(x+70, 650, 140, 50), "Boost");
-        disabledButton(sf::FloatRect(x, 700, 140, 50), "<<--");
-        disabledButton(sf::FloatRect(x+140, 700, 140, 50), "-->>");
-        disabledButton(sf::FloatRect(x, 750, 280, 50), "Turnaround");
-        progressBar(sf::FloatRect(x, 800, 280, 50), my_spaceship->combat_maneuver_delay, SpaceShip::max_combat_maneuver_delay, 0);
+        drawDisabledButton(sf::FloatRect(x+70, 650, 140, 50), "Boost");
+        drawDisabledButton(sf::FloatRect(x, 700, 140, 50), "<<--");
+        drawDisabledButton(sf::FloatRect(x+140, 700, 140, 50), "-->>");
+        drawDisabledButton(sf::FloatRect(x, 750, 280, 50), "Turnaround");
+        drawProgressBar(sf::FloatRect(x, 800, 280, 50), my_spaceship->combat_maneuver_delay, SpaceShip::max_combat_maneuver_delay, 0);
     }else{
-        if (button(sf::FloatRect(x+70, 650, 140, 50), "Boost"))
+        if (drawButton(sf::FloatRect(x+70, 650, 140, 50), "Boost"))
             my_spaceship->commandCombatManeuver(CM_Boost);
-        if (button(sf::FloatRect(x, 700, 140, 50), "<<--"))
+        if (drawButton(sf::FloatRect(x, 700, 140, 50), "<<--"))
             my_spaceship->commandCombatManeuver(CM_StrafeLeft);
-        if (button(sf::FloatRect(x+140, 700, 140, 50), "-->>"))
+        if (drawButton(sf::FloatRect(x+140, 700, 140, 50), "-->>"))
             my_spaceship->commandCombatManeuver(CM_StrafeRight);
-        if (button(sf::FloatRect(x, 750, 280, 50), "Turnaround"))
+        if (drawButton(sf::FloatRect(x, 750, 280, 50), "Turnaround"))
             my_spaceship->commandCombatManeuver(CM_Turn);
-        progressBar(sf::FloatRect(x, 800, 280, 50), 100, 0, 100);
-        text(sf::FloatRect(x, 800, 280, 50), "Combat maneuver ready", AlignCenter, 20, sf::Color::Black);
+        drawProgressBar(sf::FloatRect(x, 800, 280, 50), 100, 0, 100);
+        drawText(sf::FloatRect(x, 800, 280, 50), "Combat maneuver ready", AlignCenter, 20, sf::Color::Black);
     }
 }
 
@@ -127,7 +127,7 @@ void CrewHelmsUI::onPauseHelpGui()
     float x = getWindowSize().x - 300;
     float y = 50;
     float line_x = x - 200;
-    textboxWithBackground(sf::FloatRect(x, y, 300, 80), "Control your ship by setting a heading and speed", AlignTopLeft, 20);
+    drawTextBoxWithBackground(sf::FloatRect(x, y, 300, 80), "Control your ship by setting a heading and speed", AlignTopLeft, 20);
     drawUILine(sf::Vector2f(getWindowSize().x / 2.0f, 300), sf::Vector2f(x, y + 25), line_x);
     line_x += 10;
     drawUILine(sf::Vector2f(60, 420), sf::Vector2f(x, y + 35), line_x);
@@ -136,25 +136,25 @@ void CrewHelmsUI::onPauseHelpGui()
 
     if (my_spaceship->hasWarpdrive)
     {
-        textboxWithBackground(sf::FloatRect(x, y, 300, 80), "Use the warp drive to cover long distances (drains energy fast)", AlignTopLeft, 20);
+        drawTextBoxWithBackground(sf::FloatRect(x, y, 300, 80), "Use the warp drive to cover long distances (drains energy fast)", AlignTopLeft, 20);
         drawUILine(sf::Vector2f(140, 480), sf::Vector2f(x, y + 25), line_x);
         line_x += 40;
         y += 80;
     }
     if (my_spaceship->hasJumpdrive)
     {
-        textboxWithBackground(sf::FloatRect(x, y, 300, 80), "Use the jump drive to cover long distances (uses energy)", AlignTopLeft, 20);
+        drawTextBoxWithBackground(sf::FloatRect(x, y, 300, 80), "Use the jump drive to cover long distances (uses energy)", AlignTopLeft, 20);
         drawUILine(sf::Vector2f(my_spaceship->hasWarpdrive ? 220 : 140, 520), sf::Vector2f(x, y + 25), line_x);
         line_x += 10;
         drawUILine(sf::Vector2f(280, 770), sf::Vector2f(x, y + 35), line_x);
         line_x += 40;
         y += 80;
     }
-    textboxWithBackground(sf::FloatRect(x, y, 300, 80), "When near a station, dock for energy recharge.", AlignTopLeft, 20);
+    drawTextBoxWithBackground(sf::FloatRect(x, y, 300, 80), "When near a station, dock for energy recharge.", AlignTopLeft, 20);
     drawUILine(sf::Vector2f(280, 820), sf::Vector2f(x, y + 35), line_x);
     line_x += 40;
     y += 80;
-    textboxWithBackground(sf::FloatRect(x, y, 300, 100), "During combat, use maneuvers to gain an edge on enemies.", AlignTopLeft, 20);
+    drawTextBoxWithBackground(sf::FloatRect(x, y, 300, 100), "During combat, use maneuvers to gain an edge on enemies.", AlignTopLeft, 20);
     drawUILine(sf::Vector2f(x+80, 670), sf::Vector2f(x, y + 35), line_x);
     drawUILine(sf::Vector2f(x+10, 720), sf::Vector2f(x, y + 35), line_x);
     drawUILine(sf::Vector2f(x+10, 770), sf::Vector2f(x, y + 35), line_x);
@@ -162,10 +162,10 @@ void CrewHelmsUI::onPauseHelpGui()
     line_x += 40;
     y += 100;
 
-    textboxWithBackground(sf::FloatRect(x, y, 300, 80), "And always, listen to your captain!", AlignTopLeft, 20);
+    drawTextBoxWithBackground(sf::FloatRect(x, y, 300, 80), "And always, listen to your captain!", AlignTopLeft, 20);
 
     x = 20;
     y = 200;
-    textboxWithBackground(sf::FloatRect(x, y, 300, 100), "Tip: The arcs shown at your ship indicates what the beam weapons can hit.", AlignTopLeft, 20);
+    drawTextBoxWithBackground(sf::FloatRect(x, y, 300, 100), "Tip: The arcs shown at your ship indicates what the beam weapons can hit.", AlignTopLeft, 20);
     y += 100;
 }

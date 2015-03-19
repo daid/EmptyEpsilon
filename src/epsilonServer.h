@@ -7,9 +7,9 @@ class EpsilonServer : public GameServer
 {
 public:
     EpsilonServer();
-    
-    virtual void onNewClient(int32_t clientId);
-    virtual void onDisconnectClient(int32_t clientId);
+
+    virtual void onNewClient(int32_t client_id);
+    virtual void onDisconnectClient(int32_t client_id);
 };
 
 void disconnectFromServer();

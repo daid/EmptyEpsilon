@@ -8,7 +8,7 @@ EpsilonServer::EpsilonServer()
 {
     new GameGlobalInfo();
     PlayerInfo* info = new PlayerInfo();
-    info->clientId = 0;
+    info->client_id = 0;
     my_player_info = info;
     engine->setGameSpeed(0.0);
     for(unsigned int n=0; n<factionInfo.size(); n++)
@@ -17,20 +17,20 @@ EpsilonServer::EpsilonServer()
     soundManager.playMusic("music/Dream Raid Full Version (Mock Up).ogg");
 }
 
-void EpsilonServer::onNewClient(int32_t clientId)
+void EpsilonServer::onNewClient(int32_t client_id)
 {
-    LOG(INFO) << "New client: " << clientId;
+    LOG(INFO) << "New client: " << client_id;
     PlayerInfo* info = new PlayerInfo();
-    info->clientId = clientId;
+    info->client_id = client_id;
 }
 
-void EpsilonServer::onDisconnectClient(int32_t clientId)
+void EpsilonServer::onDisconnectClient(int32_t client_id)
 {
-    LOG(INFO) << "Client left: " << clientId;
-    foreach(PlayerInfo, i, playerInfoList)
-        if (i->clientId == clientId)
+    LOG(INFO) << "Client left: " << client_id;
+    foreach(PlayerInfo, i, player_info_list)
+        if (i->client_id == client_id)
             i->destroy();
-    playerInfoList.update();
+    player_info_list.update();
 }
 
 void disconnectFromServer()
@@ -43,7 +43,7 @@ void disconnectFromServer()
         game_server->destroy();
     if (gameGlobalInfo)
         gameGlobalInfo->destroy();
-    foreach(PlayerInfo, i, playerInfoList)
+    foreach(PlayerInfo, i, player_info_list)
         i->destroy();
     foreach(GameEntity, e, entityList)
         e->destroy();

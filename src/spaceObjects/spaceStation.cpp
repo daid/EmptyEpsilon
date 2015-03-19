@@ -71,7 +71,7 @@ void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, 
 
     if (long_range)
     {
-        GUI::text(sf::FloatRect(position.x, position.y - 15, 0, 0), getCallSign(), AlignCenter, 12);
+        GUI::drawText(sf::FloatRect(position.x, position.y - 15, 0, 0), getCallSign(), AlignCenter, 12);
         sprite_scale *= 0.7;
     }
     objectSprite.setScale(sprite_scale, sprite_scale);

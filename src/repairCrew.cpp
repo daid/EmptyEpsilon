@@ -178,7 +178,7 @@ void RepairCrew::update(float delta)
     }
 }
 
-void RepairCrew::onReceiveClientCommand(int32_t clientId, sf::Packet& packet)
+void RepairCrew::onReceiveClientCommand(int32_t client_id, sf::Packet& packet)
 {
     int16_t command;
     packet >> command;

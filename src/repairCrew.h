@@ -29,12 +29,12 @@ public:
     ERepairCrewDirection direction;
     float action_delay;
     int32_t ship_id;
-    
+
     RepairCrew();
-    
-    virtual void onReceiveClientCommand(int32_t clientId, sf::Packet& packet);
+
+    virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet);
     void commandSetTargetPosition(sf::Vector2i position);
-    
+
     virtual void update(float delta);
 };
 PVector<RepairCrew> getRepairCrewFor(P<PlayerSpaceship> ship);

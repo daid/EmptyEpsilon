@@ -36,7 +36,7 @@ void CrewUI::onGui()
         {
             if (my_player_info->crew_position[n])
             {
-                if (toggleButton(sf::FloatRect(200 * offset, 0, 200, 35), my_player_info->crew_active_position == ECrewPosition(n), getCrewPositionName(ECrewPosition(n)), 20))
+                if (drawToggleButton(sf::FloatRect(200 * offset, 0, 200, 35), my_player_info->crew_active_position == ECrewPosition(n), getCrewPositionName(ECrewPosition(n)), 20))
                 {
                     if (my_player_info->crew_active_position != ECrewPosition(n))
                     {
@@ -56,12 +56,12 @@ void CrewUI::onGui()
 void CrewUI::onCrewUI()
 {
     drawStatic();
-    text(sf::FloatRect(0, 500, 1600, 100), "???", AlignCenter, 100);
+    drawText(sf::FloatRect(0, 500, 1600, 100), "???", AlignCenter, 100);
 }
 
 void CrewUI::drawImpulseSlider(sf::FloatRect rect, float text_size)
 {
-    float res = vslider(rect, my_spaceship->impulseRequest, 1.0, -1.0);
+    float res = drawVerticalSlider(rect, my_spaceship->impulseRequest, 1.0, -1.0);
     if (res > -0.15 && res < 0.15)
         res = 0.0;
     if (res != my_spaceship->impulseRequest)
@@ -69,18 +69,18 @@ void CrewUI::drawImpulseSlider(sf::FloatRect rect, float text_size)
         my_spaceship->commandImpulse(res);
         my_spaceship->impulseRequest = res; //Set the impulseRequest directly, so it looks smooth on the client.
     }
-    text(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(int(my_spaceship->impulseRequest * 100)) + "%", AlignLeft, text_size);
-    text(sf::FloatRect(rect.left, rect.top + rect.height + text_size, rect.width, text_size), string(int(my_spaceship->currentImpulse * 100)) + "%", AlignLeft, text_size);
+    drawText(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(int(my_spaceship->impulseRequest * 100)) + "%", AlignLeft, text_size);
+    drawText(sf::FloatRect(rect.left, rect.top + rect.height + text_size, rect.width, text_size), string(int(my_spaceship->currentImpulse * 100)) + "%", AlignLeft, text_size);
     drawDamagePowerDisplay(rect, SYS_Impulse, text_size);
 }
 
 void CrewUI::drawWarpSlider(sf::FloatRect rect, float text_size)
 {
-    float res = vslider(rect, my_spaceship->warpRequest, 4.0, 0.0);
+    float res = drawVerticalSlider(rect, my_spaceship->warpRequest, 4.0, 0.0);
     if (res != my_spaceship->warpRequest)
         my_spaceship->commandWarp(res);
-    text(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(int(my_spaceship->warpRequest)), AlignLeft, text_size);
-    text(sf::FloatRect(rect.left, rect.top + rect.height + text_size, rect.width, text_size), string(int(my_spaceship->currentWarp * 100)) + "%", AlignLeft, text_size);
+    drawText(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(int(my_spaceship->warpRequest)), AlignLeft, text_size);
+    drawText(sf::FloatRect(rect.left, rect.top + rect.height + text_size, rect.width, text_size), string(int(my_spaceship->currentWarp * 100)) + "%", AlignLeft, text_size);
     drawDamagePowerDisplay(rect, SYS_Warp, text_size);
 }
 
@@ -88,12 +88,12 @@ void CrewUI::drawJumpSlider(float& jump_distance, sf::FloatRect rect, float text
 {
     if (my_spaceship->jump_delay > 0.0)
     {
-        vslider(rect, jump_distance, 40.0, 5.0, 10.0);
+        drawVerticalSlider(rect, jump_distance, 40.0, 5.0, 10.0);
     }else{
-        jump_distance = vslider(rect, jump_distance, 40.0, 5.0, 10.0);
+        jump_distance = drawVerticalSlider(rect, jump_distance, 40.0, 5.0, 10.0);
     }
     jump_distance = roundf(jump_distance * 10.0f) / 10.0f;
-    text(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(jump_distance, 1) + "km", AlignLeft, text_size);
+    drawText(sf::FloatRect(rect.left, rect.top + rect.height, rect.width, text_size), string(jump_distance, 1) + "km", AlignLeft, text_size);
 }
 
 void CrewUI::drawJumpButton(float jump_distance, sf::FloatRect rect, float text_size)
@@ -101,11 +101,11 @@ void CrewUI::drawJumpButton(float jump_distance, sf::FloatRect rect, float text_
     if (my_spaceship->jump_delay > 0.0)
     {
         if (rect.width < text_size * 5)
-            textbox(rect, string(int(ceilf(my_spaceship->jump_delay))), AlignCenter, text_size);
+            drawTextBox(rect, string(int(ceilf(my_spaceship->jump_delay))), AlignCenter, text_size);
         else
-            keyValueDisplay(rect, 0.5, "Jump in", string(int(ceilf(my_spaceship->jump_delay))), text_size);
+            drawKeyValueDisplay(rect, 0.5, "Jump in", string(int(ceilf(my_spaceship->jump_delay))), text_size);
     }else{
-        if (button(rect, "Jump", text_size))
+        if (drawButton(rect, "Jump", text_size))
             my_spaceship->commandJump(jump_distance);
     }
     drawDamagePowerDisplay(rect, SYS_JumpDrive, text_size);
@@ -129,18 +129,18 @@ void CrewUI::drawDockingButton(sf::FloatRect rect, float text_size)
 
             if (dock_object)
             {
-                if (button(rect, "Request Dock", text_size))
+                if (drawButton(rect, "Request Dock", text_size))
                     my_spaceship->commandDock(dock_object);
             }else{
-                disabledButton(rect, "Request Dock", text_size);
+                drawDisabledButton(rect, "Request Dock", text_size);
             }
         }
         break;
     case DS_Docking:
-        disabledButton(rect, "Docking...", text_size);
+        drawDisabledButton(rect, "Docking...", text_size);
         break;
     case DS_Docked:
-        if (button(rect, "Undock", text_size))
+        if (drawButton(rect, "Undock", text_size))
             my_spaceship->commandUndock();
         break;
     }
@@ -151,25 +151,25 @@ void CrewUI::drawWeaponTube(EMissileWeapons load_type, int n, float missile_targ
     switch(my_spaceship->weaponTube[n].state)
     {
     case WTS_Empty:
-        if (toggleButton(load_rect, load_type != MW_None && my_spaceship->weapon_storage[load_type] > 0, "Load", text_size) && load_type != MW_None)
+        if (drawToggleButton(load_rect, load_type != MW_None && my_spaceship->weapon_storage[load_type] > 0, "Load", text_size) && load_type != MW_None)
             my_spaceship->commandLoadTube(n, load_type);
-        disabledButton(fire_rect, "Empty", text_size);
+        drawDisabledButton(fire_rect, "Empty", text_size);
         break;
     case WTS_Loaded:
-        if (button(load_rect, "Unload", text_size))
+        if (drawButton(load_rect, "Unload", text_size))
             my_spaceship->commandUnloadTube(n);
-        if (button(fire_rect, getMissileWeaponName(my_spaceship->weaponTube[n].type_loaded), text_size))
+        if (drawButton(fire_rect, getMissileWeaponName(my_spaceship->weaponTube[n].type_loaded), text_size))
             my_spaceship->commandFireTube(n, missile_target_angle);
         break;
     case WTS_Loading:
-        progressBar(fire_rect, my_spaceship->weaponTube[n].delay, my_spaceship->tube_load_time, 0.0);
-        text(fire_rect, getMissileWeaponName(my_spaceship->weaponTube[n].type_loaded), AlignCenter, text_size, sf::Color(128, 128, 128));
-        disabledButton(load_rect, "Loading", text_size);
+        drawProgressBar(fire_rect, my_spaceship->weaponTube[n].delay, my_spaceship->tube_load_time, 0.0);
+        drawText(fire_rect, getMissileWeaponName(my_spaceship->weaponTube[n].type_loaded), AlignCenter, text_size, sf::Color(128, 128, 128));
+        drawDisabledButton(load_rect, "Loading", text_size);
         break;
     case WTS_Unloading:
-        progressBar(fire_rect, my_spaceship->weaponTube[n].delay, 0.0, my_spaceship->tube_load_time);
-        text(fire_rect, getMissileWeaponName(my_spaceship->weaponTube[n].type_loaded), AlignCenter, text_size, sf::Color(128, 128, 128));
-        disabledButton(load_rect, "Unloading", text_size * 0.8);
+        drawProgressBar(fire_rect, my_spaceship->weaponTube[n].delay, 0.0, my_spaceship->tube_load_time);
+        drawText(fire_rect, getMissileWeaponName(my_spaceship->weaponTube[n].type_loaded), AlignCenter, text_size, sf::Color(128, 128, 128));
+        drawDisabledButton(load_rect, "Unloading", text_size * 0.8);
         break;
     }
     drawDamagePowerDisplay(fire_rect, SYS_MissileSystem, text_size);
@@ -241,11 +241,11 @@ void CrewUI::drawDamagePowerDisplay(sf::FloatRect rect, ESystem system, float te
     }else{
         return;
     }
-    boxWithBackground(rect, color, sf::Color(0, 0, 0, alpha));
+    drawBoxWithBackground(rect, color, sf::Color(0, 0, 0, alpha));
     if (rect.height > rect.width)
-        vtext(rect, display_text, AlignCenter, text_size, color);
+        drawVerticalText(rect, display_text, AlignCenter, text_size, color);
     else
-        text(rect, display_text, AlignCenter, text_size, color);
+        drawText(rect, display_text, AlignCenter, text_size, color);
 }
 
 string CrewUI::drawOnScreenKeyboard()
@@ -258,25 +258,25 @@ string CrewUI::drawOnScreenKeyboard()
 
     string line = "1234567890-=";
     for(unsigned int n=0; n<line.size(); n++)
-        if (button(sf::FloatRect(x + n * size, y - size * 5, size, size), line[n], text_size))
+        if (drawButton(sf::FloatRect(x + n * size, y - size * 5, size, size), line[n], text_size))
             ret += line[n];
-    if (button(sf::FloatRect(x + 12 * size, y - size * 5, size * 2, size), "<-", text_size))
+    if (drawButton(sf::FloatRect(x + 12 * size, y - size * 5, size * 2, size), "<-", text_size))
         ret += "\b";
     line = "QWERTYUIOP()";
     for(unsigned int n=0; n<line.size(); n++)
-        if (button(sf::FloatRect(x + size * 0.5 + n * size, y - size * 4, size, size), line[n], text_size))
+        if (drawButton(sf::FloatRect(x + size * 0.5 + n * size, y - size * 4, size, size), line[n], text_size))
             ret += line[n];
     line = "ASDFGHJKL;'";
     for(unsigned int n=0; n<line.size(); n++)
-        if (button(sf::FloatRect(x + size * 1.0 + n * size, y - size * 3, size, size), line[n], text_size))
+        if (drawButton(sf::FloatRect(x + size * 1.0 + n * size, y - size * 3, size, size), line[n], text_size))
             ret += line[n];
-    if (button(sf::FloatRect(x + 12 * size, y - size * 3, size * 2, size), "Send", text_size))
+    if (drawButton(sf::FloatRect(x + 12 * size, y - size * 3, size * 2, size), "Send", text_size))
         ret += "\n";
     line = "ZXCVBNM,./";
     for(unsigned int n=0; n<line.size(); n++)
-        if (button(sf::FloatRect(x + size * 1.5 + n * size, y - size * 2, size, size), line[n], text_size))
+        if (drawButton(sf::FloatRect(x + size * 1.5 + n * size, y - size * 2, size, size), line[n], text_size))
             ret += line[n];
-    if (button(sf::FloatRect(x + size * 2.0, y - size, size * 9, size), "", text_size))
+    if (drawButton(sf::FloatRect(x + size * 2.0, y - size, size * 9, size), "", text_size))
         ret += " ";
 
     return ret;

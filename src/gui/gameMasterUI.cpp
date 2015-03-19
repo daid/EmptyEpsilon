@@ -198,7 +198,7 @@ void GameMasterUI::onGui()
         {
             P<CpuShip> cpu = selection[0];
             sf::Vector2f pos = sf::Vector2f(800, 450) + (obj->getPosition() - view_position) / view_distance * 400.0f;
-            text(sf::FloatRect(pos.x, pos.y - 20.0f, 0.0f, 0.0f), string(cpu->targetScore(obj)), AlignCenter, 20);
+            drawText(sf::FloatRect(pos.x, pos.y - 20.0f, 0.0f, 0.0f), string(cpu->targetScore(obj)), AlignCenter, 20);
         }
         //*/
     }
@@ -234,21 +234,21 @@ void GameMasterUI::onGui()
         P<SpaceShip> ship = selection[0];
         if (ship && ship->ship_template)
         {
-            text(sf::FloatRect(20, y, 100, 20), factionInfo[ship->getFactionId()]->getName() + " " + ship->ship_type_name, AlignLeft, 20);
+            drawText(sf::FloatRect(20, y, 100, 20), factionInfo[ship->getFactionId()]->getName() + " " + ship->ship_type_name, AlignLeft, 20);
             y += 20;
-            text(sf::FloatRect(20, y, 100, 20), "Hull: " + string(ship->hull_strength), AlignLeft, 20);
+            drawText(sf::FloatRect(20, y, 100, 20), "Hull: " + string(ship->hull_strength), AlignLeft, 20);
             y += 20;
-            text(sf::FloatRect(20, y, 100, 20), "Shields: " + string(ship->front_shield) + ", " + string(ship->rear_shield), AlignLeft, 20);
+            drawText(sf::FloatRect(20, y, 100, 20), "Shields: " + string(ship->front_shield) + ", " + string(ship->rear_shield), AlignLeft, 20);
             y += 20;
         }
         P<SpaceStation> station = selection[0];
         if (station)
         {
-            text(sf::FloatRect(20, y, 100, 20), factionInfo[station->getFactionId()]->getName(), AlignLeft, 20);
+            drawText(sf::FloatRect(20, y, 100, 20), factionInfo[station->getFactionId()]->getName(), AlignLeft, 20);
             y += 20;
-            text(sf::FloatRect(20, y, 100, 20), "Hull: " + string(station->hull_strength), AlignLeft, 20);
+            drawText(sf::FloatRect(20, y, 100, 20), "Hull: " + string(station->hull_strength), AlignLeft, 20);
             y += 20;
-            text(sf::FloatRect(20, y, 100, 20), "Shields: " + string(station->shields), AlignLeft, 20);
+            drawText(sf::FloatRect(20, y, 100, 20), "Shields: " + string(station->shields), AlignLeft, 20);
             y += 20;
         }
     }
@@ -262,25 +262,25 @@ void GameMasterUI::onGui()
     }
     if (cpuShip)
     {
-        text(sf::FloatRect(20, y, 100, 20), "Orders: " + getAIOrderString(cpuShip->getOrder()), AlignLeft, 20);
+        drawText(sf::FloatRect(20, y, 100, 20), "Orders: " + getAIOrderString(cpuShip->getOrder()), AlignLeft, 20);
         y += 20;
 
-        if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_Idle, "Idle", 20))
+        if (drawToggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_Idle, "Idle", 20))
             foreach(SpaceObject, obj, selection)
                 if (P<CpuShip>(obj))
                     P<CpuShip>(obj)->orderIdle();
         y += 30;
-        if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_Roaming, "Roaming", 20))
+        if (drawToggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_Roaming, "Roaming", 20))
             foreach(SpaceObject, obj, selection)
                 if (P<CpuShip>(obj))
                     P<CpuShip>(obj)->orderRoaming();
         y += 30;
-        if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_StandGround, "Stand Ground", 18))
+        if (drawToggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_StandGround, "Stand Ground", 18))
             foreach(SpaceObject, obj, selection)
                 if (P<CpuShip>(obj))
                     P<CpuShip>(obj)->orderStandGround();
         y += 30;
-        if (toggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_DefendLocation, "Defend location", 18))
+        if (drawToggleButton(sf::FloatRect(20, y, 250, 30), cpuShip->getOrder() == AI_DefendLocation, "Defend location", 18))
             foreach(SpaceObject, obj, selection)
                 if (P<CpuShip>(obj))
                     P<CpuShip>(obj)->orderDefendLocation(obj->getPosition());
@@ -296,13 +296,13 @@ void GameMasterUI::onGui()
             {
                 if (ship->weapon_storage_max[n] < 1)
                     continue;
-                text(sf::FloatRect(20, y, 130, 30), getMissileWeaponName(EMissileWeapons(n)) + ": " + string(ship->weapon_storage[n]) + "/" + string(ship->weapon_storage_max[n]), AlignLeft, 20);
-                if (button(sf::FloatRect(170, y, 100, 30), "Refill", 15))
+                drawText(sf::FloatRect(20, y, 130, 30), getMissileWeaponName(EMissileWeapons(n)) + ": " + string(ship->weapon_storage[n]) + "/" + string(ship->weapon_storage_max[n]), AlignLeft, 20);
+                if (drawButton(sf::FloatRect(170, y, 100, 30), "Refill", 15))
                     ship->weapon_storage[n] = ship->weapon_storage_max[n];
                 y += 30;
             }
             y += 10;
-            if (button(sf::FloatRect(20, y, 250, 30), "Retrofit ship", 20))
+            if (drawButton(sf::FloatRect(20, y, 250, 30), "Retrofit ship", 20))
             {
                 new GameMasterShipRetrofit(ship);
             }
@@ -311,7 +311,7 @@ void GameMasterUI::onGui()
         P<PlayerSpaceship> player = selection[0];
         if (player)
         {
-            if (button(sf::FloatRect(20, y, 250, 30), "Hail ship", 20))
+            if (drawButton(sf::FloatRect(20, y, 250, 30), "Hail ship", 20))
             {
                 new GameMasterHailUI(player);
             }
@@ -321,23 +321,23 @@ void GameMasterUI::onGui()
 
     if (selection.size() > 0)
     {
-        text(sf::FloatRect(20, 480, 250, 20), "Change faction:", AlignCenter, 20);
-        unsigned int new_id = selection[0]->getFactionId() + selector(sf::FloatRect(20, 500, 250, 50), factionInfo[selection[0]->getFactionId()]->getName());
+        drawText(sf::FloatRect(20, 480, 250, 20), "Change faction:", AlignCenter, 20);
+        unsigned int new_id = selection[0]->getFactionId() + drawSelector(sf::FloatRect(20, 500, 250, 50), factionInfo[selection[0]->getFactionId()]->getName());
         if (new_id != selection[0]->getFactionId() && new_id < factionInfo.size())
             foreach(SpaceObject, obj, selection)
                 obj->setFactionId(new_id);
     }
 
-    if (button(sf::FloatRect(20, 720, 250, 50), "Global Message", 25))
+    if (drawButton(sf::FloatRect(20, 720, 250, 50), "Global Message", 25))
         new GameMasterGlobalMessageEntry();
 
-    if (toggleButton(sf::FloatRect(20, 770, 250, 50), mouse_mode == MM_Create, "Create...", 30))
+    if (drawToggleButton(sf::FloatRect(20, 770, 250, 50), mouse_mode == MM_Create, "Create...", 30))
     {
         mouse_mode = MM_Create;
         new GameMasterCreateObjectWindow(this);
     }
 
-    if (toggleButton(sf::FloatRect(20, 820, 250, 50), mouse_mode == MM_Drag, "Drag Objects"))
+    if (drawToggleButton(sf::FloatRect(20, 820, 250, 50), mouse_mode == MM_Drag, "Drag Objects"))
     {
         if (mouse_mode == MM_Drag)
             mouse_mode = MM_None;
@@ -347,8 +347,8 @@ void GameMasterUI::onGui()
 
     if (gameGlobalInfo->global_message_timeout > 0.0)
     {
-        boxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 300, 100, 600, 80));
-        text(sf::FloatRect(getWindowSize().x / 2 - 300, 100, 600, 80), gameGlobalInfo->global_message, AlignCenter, 30);
+        drawBoxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 300, 100, 600, 80));
+        drawText(sf::FloatRect(getWindowSize().x / 2 - 300, 100, 600, 80), gameGlobalInfo->global_message, AlignCenter, 30);
     }
 
     MainUIBase::onGui();
@@ -369,11 +369,11 @@ void GameMasterShipRetrofit::onGui()
     }
     float x = getWindowSize().x / 2 - 500;
     float y = 200;
-    boxWithBackground(sf::FloatRect(x - 30, y - 30, 1060, 460));
+    drawBoxWithBackground(sf::FloatRect(x - 30, y - 30, 1060, 460));
 
-    ship->ship_type_name = textEntry(sf::FloatRect(x, y, 300, 30), ship->ship_type_name, 20);
+    ship->ship_type_name = drawTextEntry(sf::FloatRect(x, y, 300, 30), ship->ship_type_name, 20);
     y += 30;
-    int diff = selector(sf::FloatRect(x, y, 300, 30), string("WarpDrive: ") + (ship->hasWarpdrive ? "Yes" : "No"), 20);
+    int diff = drawSelector(sf::FloatRect(x, y, 300, 30), string("WarpDrive: ") + (ship->hasWarpdrive ? "Yes" : "No"), 20);
     y += 30;
     if (diff)
     {
@@ -381,22 +381,22 @@ void GameMasterShipRetrofit::onGui()
         if (ship->warp_speedPerWarpLevel < 100)
             ship->warp_speedPerWarpLevel = 1000;
     }
-    if (selector(sf::FloatRect(x, y, 300, 30), string("JumpDrive: ") + (ship->hasJumpdrive ? "Yes" : "No"), 20))
+    if (drawSelector(sf::FloatRect(x, y, 300, 30), string("JumpDrive: ") + (ship->hasJumpdrive ? "Yes" : "No"), 20))
         ship->hasJumpdrive = !ship->hasJumpdrive;
     y += 30;
-    ship->impulseMaxSpeed += selector(sf::FloatRect(x, y, 300, 30), "Max speed: " + string(ship->impulseMaxSpeed), 20);
+    ship->impulseMaxSpeed += drawSelector(sf::FloatRect(x, y, 300, 30), "Max speed: " + string(ship->impulseMaxSpeed), 20);
     y += 30;
-    ship->turn_speed += selector(sf::FloatRect(x, y, 300, 30), "Rotation speed: " + string(ship->turn_speed), 20);
+    ship->turn_speed += drawSelector(sf::FloatRect(x, y, 300, 30), "Rotation speed: " + string(ship->turn_speed), 20);
     y += 30;
-    diff = selector(sf::FloatRect(x, y, 300, 30), "Hull: " + string(ship->hull_strength) + "/" + string(ship->hull_max), 20);
+    diff = drawSelector(sf::FloatRect(x, y, 300, 30), "Hull: " + string(ship->hull_strength) + "/" + string(ship->hull_max), 20);
     ship->hull_strength = std::max(0.0f, ship->hull_strength + diff * 5);
     ship->hull_max = std::max(0.0f, ship->hull_max + diff * 5);
     y += 30;
-    diff = selector(sf::FloatRect(x, y, 300, 30), "Front shield: " + string(ship->front_shield) + "/" + string(ship->front_shield_max), 20);
+    diff = drawSelector(sf::FloatRect(x, y, 300, 30), "Front shield: " + string(ship->front_shield) + "/" + string(ship->front_shield_max), 20);
     ship->front_shield = std::max(0.0f, ship->front_shield + diff * 15);
     ship->front_shield_max = std::max(0.0f, ship->front_shield_max + diff * 15);
     y += 30;
-    diff = selector(sf::FloatRect(x, y, 300, 30), "Front shield: " + string(ship->rear_shield) + "/" + string(ship->rear_shield_max), 20);
+    diff = drawSelector(sf::FloatRect(x, y, 300, 30), "Front shield: " + string(ship->rear_shield) + "/" + string(ship->rear_shield_max), 20);
     ship->rear_shield = std::max(0.0f, ship->rear_shield + diff * 15);
     ship->rear_shield_max = std::max(0.0f, ship->rear_shield_max + diff * 15);
     y += 30;
@@ -404,7 +404,7 @@ void GameMasterShipRetrofit::onGui()
     x += 350;
     y = 200;
 
-    ship->weapon_tubes += selector(sf::FloatRect(x, y, 300, 30), "Missile tubes: " + string(ship->weapon_tubes), 20);
+    ship->weapon_tubes += drawSelector(sf::FloatRect(x, y, 300, 30), "Missile tubes: " + string(ship->weapon_tubes), 20);
     if (ship->weapon_tubes < 0)
         ship->weapon_tubes = max_weapon_tubes;
     if (ship->weapon_tubes > max_weapon_tubes)
@@ -412,7 +412,7 @@ void GameMasterShipRetrofit::onGui()
     y += 30;
     for(int n=0; n<MW_Count; n++)
     {
-        int diff = selector(sf::FloatRect(x, y, 300, 30), getMissileWeaponName(EMissileWeapons(n)) + ": " + string(ship->weapon_storage[n]) + "/" + string(ship->weapon_storage_max[n]), 20);
+        int diff = drawSelector(sf::FloatRect(x, y, 300, 30), getMissileWeaponName(EMissileWeapons(n)) + ": " + string(ship->weapon_storage[n]) + "/" + string(ship->weapon_storage_max[n]), 20);
         y += 30;
         ship->weapon_storage[n] += diff;
         ship->weapon_storage_max[n] += diff;
@@ -429,14 +429,14 @@ void GameMasterShipRetrofit::onGui()
         ESystem system = ESystem(n);
         if (ship->hasSystem(system))
         {
-            int diff = selector(sf::FloatRect(x, y, 300, 30), getSystemName(system) + ": " + string(ship->systems[n].health * 100) + "%", 20);
+            int diff = drawSelector(sf::FloatRect(x, y, 300, 30), getSystemName(system) + ": " + string(ship->systems[n].health * 100) + "%", 20);
             y += 30;
             ship->systems[n].health = std::min(1.0f, std::max(-1.0f, ship->systems[n].health + diff * 0.10f));
         }
     }
 
     y += 10;
-    if (button(sf::FloatRect(x, y, 300, 50), "Ok"))
+    if (drawButton(sf::FloatRect(x, y, 300, 50), "Ok"))
         destroy();
 }
 
@@ -444,12 +444,12 @@ void GameMasterGlobalMessageEntry::onGui()
 {
     float x = getWindowSize().x / 2 - 325;
     float y = 200;
-    boxWithBackground(sf::FloatRect(x - 30, y - 30, 710, 460));
+    drawBoxWithBackground(sf::FloatRect(x - 30, y - 30, 710, 460));
 
-    message = textEntry(sf::FloatRect(x, y, 650, 30), message, 20);
+    message = drawTextEntry(sf::FloatRect(x, y, 650, 30), message, 20);
 
     y += 50;
-    if (button(sf::FloatRect(x, y, 300, 50), "Send"))
+    if (drawButton(sf::FloatRect(x, y, 300, 50), "Send"))
     {
         gameGlobalInfo->global_message = message;
         gameGlobalInfo->global_message_timeout = 5.0;
@@ -457,7 +457,7 @@ void GameMasterGlobalMessageEntry::onGui()
     }
 
     x += 350;
-    if (button(sf::FloatRect(x, y, 300, 50), "Cancel"))
+    if (drawButton(sf::FloatRect(x, y, 300, 50), "Cancel"))
         destroy();
 }
 
@@ -472,35 +472,35 @@ void GameMasterCreateObjectWindow::onGui()
 {
     float x = getWindowSize().x / 2 - 325;
     float y = 200;
-    boxWithBackground(sf::FloatRect(x - 30, y - 30, 710, 460));
+    drawBoxWithBackground(sf::FloatRect(x - 30, y - 30, 710, 460));
 
     for(unsigned int f=0; f<factionInfo.size(); f++)
     {
-        if (toggleButton(sf::FloatRect(x, y, 250, 30), current_faction == f, factionInfo[f]->getName(), 20))
+        if (drawToggleButton(sf::FloatRect(x, y, 250, 30), current_faction == f, factionInfo[f]->getName(), 20))
             current_faction = f;
         y += 30;
     }
     y += 30;
 
-    if (button(sf::FloatRect(x, y, 300, 30), "Station", 20))
+    if (drawButton(sf::FloatRect(x, y, 300, 30), "Station", 20))
     {
         ui->create_object_script = "SpaceStation():setRotation(random(0, 360)):setFactionId(" + string(current_faction) + ")";
         destroy();
     }
     y += 30;
-    if (button(sf::FloatRect(x, y, 300, 30), "WarpJammer", 20))
+    if (drawButton(sf::FloatRect(x, y, 300, 30), "WarpJammer", 20))
     {
         ui->create_object_script = "WarpJammer():setRotation(random(0, 360)):setFactionId(" + string(current_faction) + ")";
         destroy();
     }
     y += 30;
-    if (button(sf::FloatRect(x, y, 300, 30), "BlackHole", 20))
+    if (drawButton(sf::FloatRect(x, y, 300, 30), "BlackHole", 20))
     {
         ui->create_object_script = "BlackHole()";
         destroy();
     }
     y += 30;
-    if (button(sf::FloatRect(x, y, 300, 30), "Nebula", 20))
+    if (drawButton(sf::FloatRect(x, y, 300, 30), "Nebula", 20))
     {
         ui->create_object_script = "Nebula()";
         destroy();
@@ -514,7 +514,7 @@ void GameMasterCreateObjectWindow::onGui()
     std::sort(template_names.begin(), template_names.end());
     for(unsigned int n=0; n<template_names.size(); n++)
     {
-        if (button(sf::FloatRect(x, y, 300, 30), template_names[n] + "(" + string(ShipTemplate::getTemplate(template_names[n])->front_shields) + ")", 20))
+        if (drawButton(sf::FloatRect(x, y, 300, 30), template_names[n] + "(" + string(ShipTemplate::getTemplate(template_names[n])->front_shields) + ")", 20))
         {
             ui->create_object_script = "CpuShip():setRotation(random(0, 360)):setFactionId(" + string(current_faction) + "):setShipTemplate(\"" + template_names[n] + "\"):orderRoaming()";
             destroy();
@@ -523,7 +523,7 @@ void GameMasterCreateObjectWindow::onGui()
     }
 
     y += 10;
-    if (button(sf::FloatRect(x, y, 300, 50), "Cancel"))
+    if (drawButton(sf::FloatRect(x, y, 300, 50), "Cancel"))
         destroy();
 }
 
@@ -543,17 +543,17 @@ void GameMasterHailUI::onGui()
 
     float x = getWindowSize().x / 2 - 425;
     float y = 100;
-    boxWithBackground(sf::FloatRect(x - 30, y - 30, 960, 840));
+    drawBoxWithBackground(sf::FloatRect(x - 30, y - 30, 960, 840));
 
     switch(player->comms_state)
     {
     case CS_Inactive:
     case CS_ChannelFailed:
     case CS_ChannelBroken:
-        text(sf::FloatRect(x, y, 300, 50), "Use name:", AlignRight);
-        hail_name = textEntry(sf::FloatRect(x + 300, y, 300, 50), hail_name, 25);
+        drawText(sf::FloatRect(x, y, 300, 50), "Use name:", AlignRight);
+        hail_name = drawTextEntry(sf::FloatRect(x + 300, y, 300, 50), hail_name, 25);
         y += 50;
-        if (button(sf::FloatRect(x, y, 300, 50), "Call"))
+        if (drawButton(sf::FloatRect(x, y, 300, 50), "Call"))
         {
             player->comms_state = CS_BeingHailedByGM;
             player->comms_incomming_message = "Hailed by " + hail_name;
@@ -563,27 +563,27 @@ void GameMasterHailUI::onGui()
     case CS_BeingHailed:
     case CS_ChannelOpen:
     case CS_ChannelOpenPlayer:
-        text(sf::FloatRect(x + 300, y, 300, 50), "Target still communicating with someone.");
+        drawText(sf::FloatRect(x + 300, y, 300, 50), "Target still communicating with someone.");
         y += 50;
-        if (button(sf::FloatRect(x, y, 300, 50), "Abort his call"))
+        if (drawButton(sf::FloatRect(x, y, 300, 50), "Abort his call"))
         {
             player->commandCloseTextComm();
         }
         break;
     case CS_BeingHailedByGM:
-        text(sf::FloatRect(x + 300, y, 300, 50), "Waiting for response.");
+        drawText(sf::FloatRect(x + 300, y, 300, 50), "Waiting for response.");
         break;
     case CS_ChannelOpenGM:
         std::vector<string> lines = player->comms_incomming_message.split("\n");
         static const unsigned int max_lines = 20;
         for(unsigned int n=lines.size() > max_lines ? lines.size() - max_lines : 0; n<lines.size(); n++)
         {
-            text(sf::FloatRect(x, y, 600, 30), lines[n]);
+            drawText(sf::FloatRect(x, y, 600, 30), lines[n]);
             y += 30;
         }
         y += 30;
-        comms_message = textEntry(sf::FloatRect(x, y, 600, 50), comms_message);
-        if (button(sf::FloatRect(x + 600, y, 300, 50), "Send") || InputHandler::keyboardIsPressed(sf::Keyboard::Return))
+        comms_message = drawTextEntry(sf::FloatRect(x, y, 600, 50), comms_message);
+        if (drawButton(sf::FloatRect(x + 600, y, 300, 50), "Send") || InputHandler::keyboardIsPressed(sf::Keyboard::Return))
         {
             player->comms_incomming_message = player->comms_incomming_message + "\n>" + comms_message;
             comms_message = "";
@@ -591,7 +591,7 @@ void GameMasterHailUI::onGui()
         break;
     }
 
-    if (button(sf::FloatRect(x, 825, 300, 50), "Cancel"))
+    if (drawButton(sf::FloatRect(x, 825, 300, 50), "Cancel"))
     {
         if (player->comms_state == CS_BeingHailedByGM)
             player->comms_state = CS_Inactive;

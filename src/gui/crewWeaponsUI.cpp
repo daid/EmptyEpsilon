@@ -102,8 +102,8 @@ void CrewWeaponsUI::onCrewUI()
     }
     drawRadar(radar_center, 400, radarDistance, false, my_spaceship->getTarget());
 
-    keyValueDisplay(sf::FloatRect(20, 100, 250, 40), 0.5, "Energy", string(int(my_spaceship->energy_level)), 25);
-    keyValueDisplay(sf::FloatRect(20, 140, 250, 40), 0.5, "Shields", string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "/" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)), 25);
+    drawKeyValueDisplay(sf::FloatRect(20, 100, 250, 40), 0.5, "Energy", string(int(my_spaceship->energy_level)), 25);
+    drawKeyValueDisplay(sf::FloatRect(20, 140, 250, 40), 0.5, "Shields", string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "/" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)), 25);
 
     if (my_spaceship->weapon_tubes > 0)
     {
@@ -119,7 +119,7 @@ void CrewWeaponsUI::onCrewUI()
             if (my_spaceship->weapon_storage_max[n] > 0)
             {
                 y -= 30;
-                if (toggleButton(sf::FloatRect(20, y, 200, 30), tube_load_type == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(my_spaceship->weapon_storage[n]), 25))
+                if (drawToggleButton(sf::FloatRect(20, y, 200, 30), tube_load_type == n, getMissileWeaponName(EMissileWeapons(n)) + " x" + string(my_spaceship->weapon_storage[n]), 25))
                 {
                     if (tube_load_type == n)
                         tube_load_type = MW_None;
@@ -134,8 +134,8 @@ void CrewWeaponsUI::onCrewUI()
     if (my_spaceship->front_shield_max > 0 || my_spaceship->rear_shield_max > 0)
     {
         if (my_spaceship->shield_calibration_delay > 0.0)
-            disabledButton(sf::FloatRect(x, 840, 270, 50), "Calibrating", 30);
-        else if (toggleButton(sf::FloatRect(x, 840, 270, 50), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 30))
+            drawDisabledButton(sf::FloatRect(x, 840, 270, 50), "Calibrating", 30);
+        else if (drawToggleButton(sf::FloatRect(x, 840, 270, 50), my_spaceship->shields_active, my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF", 30))
             my_spaceship->commandSetShields(!my_spaceship->shields_active);
         drawDamagePowerDisplay(sf::FloatRect(x, 840, 270, 50), SYS_FrontShield, 20);
     }
@@ -149,11 +149,11 @@ void CrewWeaponsUI::onCrewUI()
             h = 100;
             y += 50;
         }
-        box(sf::FloatRect(x, y, 270, h));
-        text(sf::FloatRect(x, y, 270, 50), "Beam Info", AlignCenter, 28);
+        drawBox(sf::FloatRect(x, y, 270, h));
+        drawText(sf::FloatRect(x, y, 270, 50), "Beam Info", AlignCenter, 28);
         if (gameGlobalInfo->use_beam_shield_frequencies)
         {
-            int frequency = my_spaceship->beam_frequency + selector(sf::FloatRect(x, y + 50, 270, 50), frequencyToString(my_spaceship->beam_frequency), 28);
+            int frequency = my_spaceship->beam_frequency + drawSelector(sf::FloatRect(x, y + 50, 270, 50), frequencyToString(my_spaceship->beam_frequency), 28);
             if (frequency != my_spaceship->beam_frequency)
                 my_spaceship->commandSetBeamFrequency(frequency);
         }
@@ -162,7 +162,7 @@ void CrewWeaponsUI::onCrewUI()
             string system_name = getSystemName(my_spaceship->beam_system_target);
             if (my_spaceship->beam_system_target == SYS_None)
                 system_name = "Hull";
-            ESystem new_system = ESystem(int(my_spaceship->beam_system_target) + selector(sf::FloatRect(x, y + h - 50, 270, 50), system_name, 28));
+            ESystem new_system = ESystem(int(my_spaceship->beam_system_target) + drawSelector(sf::FloatRect(x, y + h - 50, 270, 50), system_name, 28));
             if (new_system < SYS_None)
                 new_system = SYS_None;
             if (new_system > ESystem(int(SYS_COUNT) - 1))
@@ -184,41 +184,41 @@ void CrewWeaponsUI::onPauseHelpGui()
 
     if (my_spaceship->weapon_tubes > 0)
     {
-        textboxWithBackground(sf::FloatRect(x, y, 300, 60), "1) Load your weapons", AlignTopLeft, 20);
+        drawTextBoxWithBackground(sf::FloatRect(x, y, 300, 60), "1) Load your weapons", AlignTopLeft, 20);
         drawUILine(sf::Vector2f(210, 870 - my_spaceship->weapon_tubes * 50), sf::Vector2f(x, y + 25), line_x);
         line_x += 10;
         y += 60;
-        textboxWithBackground(sf::FloatRect(x, y, 300, 60), "2) Set a target", AlignTopLeft, 20);
+        drawTextBoxWithBackground(sf::FloatRect(x, y, 300, 60), "2) Set a target", AlignTopLeft, 20);
         drawUILine(sf::Vector2f(getWindowSize().x / 2.0f, 300), sf::Vector2f(x, y + 25), line_x);
         line_x += 10;
         y += 60;
-        textboxWithBackground(sf::FloatRect(x, y, 300, 60), "3) Fire the missile!", AlignTopLeft, 20);
+        drawTextBoxWithBackground(sf::FloatRect(x, y, 300, 60), "3) Fire the missile!", AlignTopLeft, 20);
         drawUILine(sf::Vector2f(500, 920 - my_spaceship->weapon_tubes * 50), sf::Vector2f(x, y + 25), line_x);
         line_x += 40;
         y += 60;
     }
-    textboxWithBackground(sf::FloatRect(x, y, 300, 100), "During combat, activate the shields to prevent hull damage. Drains energy.", AlignTopLeft, 20);
+    drawTextBoxWithBackground(sf::FloatRect(x, y, 300, 100), "During combat, activate the shields to prevent hull damage. Drains energy.", AlignTopLeft, 20);
     drawUILine(sf::Vector2f(x + 10, 860), sf::Vector2f(x, y + 25), line_x);
     line_x += 40;
     y += 100;
     if (gameGlobalInfo->use_beam_shield_frequencies)
     {
-        textboxWithBackground(sf::FloatRect(x, y, 300, 80), "Set beam frequency for optimal beam damage.", AlignTopLeft, 20);
+        drawTextBoxWithBackground(sf::FloatRect(x, y, 300, 80), "Set beam frequency for optimal beam damage.", AlignTopLeft, 20);
         drawUILine(sf::Vector2f(x + 10, 760), sf::Vector2f(x, y + 25), line_x);
         line_x += 40;
         y += 80;
     }
 
-    textboxWithBackground(sf::FloatRect(x, y, 300, 80), "And always, listen to your captain!", AlignTopLeft, 20);
+    drawTextBoxWithBackground(sf::FloatRect(x, y, 300, 80), "And always, listen to your captain!", AlignTopLeft, 20);
 
 
     x = 20;
     y = 200;
-    textboxWithBackground(sf::FloatRect(x, y, 300, 100), "Tip: The set target is also used for beam weapon targeting.", AlignTopLeft, 20);
+    drawTextBoxWithBackground(sf::FloatRect(x, y, 300, 100), "Tip: The set target is also used for beam weapon targeting.", AlignTopLeft, 20);
     y += 100;
     if (gameGlobalInfo->use_beam_shield_frequencies)
     {
-        textboxWithBackground(sf::FloatRect(x, y, 300, 100), "Tip: Communicate with science about beam frequencies.", AlignTopLeft, 20);
+        drawTextBoxWithBackground(sf::FloatRect(x, y, 300, 100), "Tip: Communicate with science about beam frequencies.", AlignTopLeft, 20);
         y += 100;
     }
 }
