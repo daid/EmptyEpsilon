@@ -311,7 +311,7 @@ void ShipAI::flyTowards(sf::Vector2f target, float keep_distance)
                 if (jump > 10000)
                     jump = 10000;
                 jump += random(-1500, 1500);
-                owner->initJump(jump / 1000);
+                owner->initializeJump(jump / 1000);
             }
         }
         if (pathPlanner.route.size() > 1)
