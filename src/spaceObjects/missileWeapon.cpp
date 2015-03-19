@@ -6,6 +6,8 @@
 MissileWeapon::MissileWeapon(string multiplayerName, float homing_range, sf::Color color)
 : SpaceObject(10, multiplayerName), speed(200.0), turnrate(10.0), lifetime(27.0), color(color), homing_range(homing_range)
 {
+    target_id = -1;
+    target_angle = 0;
     registerMemberReplication(&target_id);
     registerMemberReplication(&target_angle);
 
