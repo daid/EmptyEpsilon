@@ -35,6 +35,7 @@ public:
 
     virtual void update(float delta);
     virtual void setShipTemplate(string template_name);
+    void setAI(string new_ai);
 
     void orderIdle();
     void orderRoaming();

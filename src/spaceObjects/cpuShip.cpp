@@ -14,6 +14,9 @@
 /// Example: CpuShip():setShipTemplate("Fighter"):setPosition(random(-10000, 10000), random(0, 3000)):setFaction("Human Navy"):orderRoaming():setScanned(true)
 REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceShip)
 {
+    /// Switch the AI to a different type. AI can be set per ship, or left per default which will be taken from the shipTemplate then.
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, setAI);
+    
     /// Order this ship to stand still and do nothing.
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderIdle);
     /// Order this ship to roam around the world and attack targets
@@ -49,12 +52,16 @@ CpuShip::CpuShip()
 
     comms_script_name = "comms_ship.lua";
 
-    ai = ShipAIFactory::getAIFactory("default")(this);
+    if (game_server)
+        ai = ShipAIFactory::getAIFactory("default")(this);
+    else
+        ai = NULL;
 }
 
 CpuShip::~CpuShip()
 {
-    delete ai;
+    if (ai)
+        delete ai;
 }
 
 void CpuShip::update(float delta)
@@ -82,6 +89,11 @@ void CpuShip::setShipTemplate(string template_name)
     SpaceShip::setShipTemplate(template_name);
 
     new_ai_name = ship_template->default_ai_name;
+}
+
+void CpuShip::setAI(string new_ai)
+{
+    new_ai_name = new_ai;
 }
 
 void CpuShip::orderIdle()

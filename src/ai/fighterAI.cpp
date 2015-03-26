@@ -12,6 +12,16 @@ FighterAI::FighterAI(CpuShip* owner)
     timeout = 0.0;
 }
 
+bool FighterAI::canSwitchAI()
+{
+    if (owner->getTarget() && (has_missiles || has_beams))
+    {
+        if (attack_state == dive)
+            return false;
+    }
+    return true;
+}
+
 void FighterAI::run(float delta)
 {
     if (timeout > 0.0)
