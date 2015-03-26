@@ -23,6 +23,18 @@ function mainMenu()
 			comms_target:orderDefendTarget(player)
 			addCommsReply("Back", mainMenu)
 		end)
+		addCommsReply("What is your status?", function()
+			msg = "Front Shields: " .. math.floor(comms_target:getFrontShield() / comms_target:getFrontShieldMax() * 100) .. "%\n"
+			msg = msg .. "Rear Shields: " .. math.floor(comms_target:getRearShield() / comms_target:getRearShieldMax() * 100) .. "%\n"
+			msg = msg .. "Hull: " .. math.floor(comms_target:getHull() / comms_target:getHullMax() * 100) .. "%\n"
+			if comms_target:getWeaponStorageMax("Homing") > 0 then
+				msg = msg .. "Missiles: " .. comms_target:getWeaponStorage("Homing") .. "/" .. comms_target:getWeaponStorageMax("Homing") .. "\n"
+			end
+
+			setCommsMessage(msg);
+			comms_target:orderDefendTarget(player)
+			addCommsReply("Back", mainMenu)
+		end)
 		for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 			if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
 				addCommsReply("Dock at " .. obj:getCallSign(), function()
