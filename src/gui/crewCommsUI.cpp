@@ -61,12 +61,12 @@ void CrewCommsUI::drawCommsRadar()
             }
         }
     }
-    
+
     if (!selection_object && selection_type == select_object)
         selection_type = select_none;
     if (selection_type == select_waypoint && selection_waypoint_index >= my_spaceship->waypoints.size())
         selection_type = select_none;
-    
+
     float x = 300;
     float w = getWindowSize().x - x;
     float radar_size = w / 2.0f;
@@ -80,11 +80,11 @@ void CrewCommsUI::drawCommsRadar()
         }
     }
     previous_mouse = mouse;
-    
+
     sf::RectangleShape background(getWindowSize());
     background.setFillColor(sf::Color::Black);
     window.draw(background);
-    
+
     float scale = (radar_size / radar_distance);
     sf::CircleShape circle(5000.0 * scale, 32);
     circle.setFillColor(sf::Color(20, 20, 20));
@@ -111,24 +111,24 @@ void CrewCommsUI::drawCommsRadar()
         position = radar_center + (position - radar_view_position) * scale;
         if (selection_type == select_waypoint)
             position.y -= 10;
-        
+
         sf::Sprite objectSprite;
         textureManager.setTexture(objectSprite, "redicule.png");
         objectSprite.setPosition(position);
         window.draw(objectSprite);
     }
-    
+
     sf::RectangleShape left_cover(sf::Vector2f(x, 900));
     left_cover.setFillColor(sf::Color::Black);
     window.draw(left_cover);
-    
+
     float y = 100;
     switch(mode)
     {
     case mode_default:
-        keyValueDisplay(sf::FloatRect(x - 270, y, 250, 30), 0.5, "Rep: ", int(my_spaceship->getReputationPoints()), 20.0);
+        drawKeyValueDisplay(sf::FloatRect(x - 270, y, 250, 30), 0.5, "Rep: ", int(my_spaceship->getReputationPoints()), 20.0);
         y += 30;
-        if (button(sf::FloatRect(x - 270, y, 250, 50), "Add waypoint"))
+        if (drawButton(sf::FloatRect(x - 270, y, 250, 50), "Add waypoint"))
         {
             mode = mode_place_waypoint;
             selection_type = select_none;
@@ -181,14 +181,14 @@ void CrewCommsUI::drawCommsRadar()
                 P<Mine> mine = selection_object;
                 if (station || ship)
                 {
-                    if (button(sf::FloatRect(x - 270, y, 250, 50), "Open comms"))
+                    if (drawButton(sf::FloatRect(x - 270, y, 250, 50), "Open comms"))
                     {
                         my_spaceship->commandOpenTextComm(selection_object);
                     }
                 }
                 if (mine && mine->isFriendly(my_spaceship))
                 {
-                    if (button(sf::FloatRect(x - 270, y, 250, 50), "Detonate"))
+                    if (drawButton(sf::FloatRect(x - 270, y, 250, 50), "Detonate"))
                     {
                         mine->explode();
                     }
@@ -196,7 +196,7 @@ void CrewCommsUI::drawCommsRadar()
             }
             break;
         case select_waypoint:
-            if (button(sf::FloatRect(x - 270, y, 250, 50), "Delete Waypoint"))
+            if (drawButton(sf::FloatRect(x - 270, y, 250, 50), "Delete Waypoint"))
             {
                 my_spaceship->commandRemoveWaypoint(selection_waypoint_index);
                 selection_type = select_none;
@@ -205,13 +205,13 @@ void CrewCommsUI::drawCommsRadar()
         }
         break;
     case mode_place_waypoint:
-        if (button(sf::FloatRect(x - 270, y, 250, 50), "Cancel"))
+        if (drawButton(sf::FloatRect(x - 270, y, 250, 50), "Cancel"))
         {
             mode = mode_default;
         }
         y += 50;
-        
-        text(sf::FloatRect(x + 450, 100, 0, 50), "Place new waypoint", AlignCenter);
+
+        drawText(sf::FloatRect(x + 450, 100, 0, 50), "Place new waypoint", AlignCenter);
         if (InputHandler::mouseIsReleased(sf::Mouse::Left) && mouse.x > x)
         {
             sf::Vector2f point = radar_view_position + (mouse - radar_center) / radar_size * radar_distance;
@@ -220,19 +220,19 @@ void CrewCommsUI::drawCommsRadar()
         }
         break;
     }
-    
+
     if (my_spaceship->comms_state == CS_BeingHailed || my_spaceship->comms_state == CS_BeingHailedByGM)
     {
-        box(sf::FloatRect(0, 450, 300, 170));
-        text(sf::FloatRect(20, 470, 260, 30), my_spaceship->comms_incomming_message, AlignCenter, 20);
-        if (button(sf::FloatRect(20, 500, 260, 50), "Answer"))
+        drawBox(sf::FloatRect(0, 450, 300, 170));
+        drawText(sf::FloatRect(20, 470, 260, 30), my_spaceship->comms_incomming_message, AlignCenter, 20);
+        if (drawButton(sf::FloatRect(20, 500, 260, 50), "Answer"))
             my_spaceship->commandAnswerCommHail(true);
-        if (button(sf::FloatRect(20, 550, 260, 50), "Ignore"))
+        if (drawButton(sf::FloatRect(20, 550, 260, 50), "Ignore"))
             my_spaceship->commandAnswerCommHail(false);
     }
 
     int zoom_level = round(50000.0f / radar_distance);
-    zoom_level += selector(sf::FloatRect(x - 270, 820, 250, 50), "Zoom: " + string(zoom_level) + "x", 30);
+    zoom_level += drawSelector(sf::FloatRect(x - 270, 820, 250, 50), "Zoom: " + string(zoom_level) + "x", 30);
     zoom_level = std::min(std::max(zoom_level, 1), 10);
     radar_distance = 50000.0 / zoom_level;
 }
@@ -247,9 +247,9 @@ void CrewCommsUI::drawCommsChannel()
         //This is never reached, as drawCommsChannel should not be called with these stats.
         break;
     case CS_OpeningChannel:
-        text(sf::FloatRect(50, 100, 600, 50), "Opening communication channel...");
-        progressBar(sf::FloatRect(50, 150, 600, 50), my_spaceship->comms_open_delay, PlayerSpaceship::comms_channel_open_time, 0.0);
-        if (button(sf::FloatRect(50, 800, 300, 50), "Cancel call"))
+        drawText(sf::FloatRect(50, 100, 600, 50), "Opening communication channel...");
+        drawProgressBar(sf::FloatRect(50, 150, 600, 50), my_spaceship->comms_open_delay, PlayerSpaceship::comms_channel_open_time, 0.0);
+        if (drawButton(sf::FloatRect(50, 800, 300, 50), "Cancel call"))
         {
             my_spaceship->commandCloseTextComm();
         }
@@ -258,15 +258,15 @@ void CrewCommsUI::drawCommsChannel()
         {
             std::vector<string> lines = my_spaceship->comms_incomming_message.split("\n");
             float y = 100;
-            keyValueDisplay(sf::FloatRect(50, y, 300, 30), 0.5, "Rep: ", int(my_spaceship->getReputationPoints()), 20.0f);
+            drawKeyValueDisplay(sf::FloatRect(50, y, 300, 30), 0.5, "Rep: ", int(my_spaceship->getReputationPoints()), 20.0f);
             y += 50;
             for(unsigned int n=0; n<lines.size(); n++)
             {
-                text(sf::FloatRect(50, y, 600, 30), lines[n]);
+                drawText(sf::FloatRect(50, y, 600, 30), lines[n]);
                 y += 30;
             }
             y += 30;
-            
+
             if (my_spaceship->comms_reply_message.size() <= comms_reply_view_offset)
                 comms_reply_view_offset = 0;
             const int comm_reply_per_page = 8;
@@ -275,7 +275,7 @@ void CrewCommsUI::drawCommsChannel()
             {
                 if (n + comms_reply_view_offset < my_spaceship->comms_reply_message.size()) //Extra check, as the my_spaceship->commandSendComm can modify the comms_reply_message list when the relay station is ran on the server.
                 {
-                    if (button(sf::FloatRect(50, y, 600, 50), my_spaceship->comms_reply_message[n + comms_reply_view_offset]))
+                    if (drawButton(sf::FloatRect(50, y, 600, 50), my_spaceship->comms_reply_message[n + comms_reply_view_offset]))
                     {
                         my_spaceship->commandSendComm(n + comms_reply_view_offset);
                         comms_reply_view_offset = 0;
@@ -285,16 +285,16 @@ void CrewCommsUI::drawCommsChannel()
             }
             if (comms_reply_view_offset > 0)
             {
-                if (button(sf::FloatRect(50, y, 200, 50), "<-"))
+                if (drawButton(sf::FloatRect(50, y, 200, 50), "<-"))
                     comms_reply_view_offset -= comm_reply_per_page;
             }
             if (comms_reply_view_offset + comm_reply_per_page < my_spaceship->comms_reply_message.size())
             {
-                if (button(sf::FloatRect(450, y, 200, 50), "->"))
+                if (drawButton(sf::FloatRect(450, y, 200, 50), "->"))
                     comms_reply_view_offset += comm_reply_per_page;
             }
 
-            if (button(sf::FloatRect(50, 800, 300, 50), "Close channel"))
+            if (drawButton(sf::FloatRect(50, 800, 300, 50), "Close channel"))
                 my_spaceship->commandCloseTextComm();
         }
         break;
@@ -307,7 +307,7 @@ void CrewCommsUI::drawCommsChannel()
 
             if (!engine->getObject("mouseRenderer"))
             {
-                string keyboard_entry = onScreenKeyboard();
+                string keyboard_entry = drawOnScreenKeyboard();
                 if (keyboard_entry == "\n")
                 {
                     my_spaceship->commandSendCommPlayer(comms_player_message);
@@ -324,30 +324,30 @@ void CrewCommsUI::drawCommsChannel()
 
             for(unsigned int n=lines.size() > max_lines ? lines.size() - max_lines : 0; n<lines.size(); n++)
             {
-                text(sf::FloatRect(50, y, 600, 30), lines[n]);
+                drawText(sf::FloatRect(50, y, 600, 30), lines[n]);
                 y += 30;
             }
             y += 30;
-            comms_player_message = textEntry(sf::FloatRect(50, y, 600, 50), comms_player_message);
-            if (button(sf::FloatRect(650, y, 300, 50), "Send") || InputHandler::keyboardIsPressed(sf::Keyboard::Return))
+            comms_player_message = drawTextEntry(sf::FloatRect(50, y, 600, 50), comms_player_message);
+            if (drawButton(sf::FloatRect(650, y, 300, 50), "Send") || InputHandler::keyboardIsPressed(sf::Keyboard::Return))
             {
                 my_spaceship->commandSendCommPlayer(comms_player_message);
                 comms_player_message = "";
             }
 
-            if (button(sf::FloatRect(50, 800, 300, 50), "Close channel"))
+            if (drawButton(sf::FloatRect(50, 800, 300, 50), "Close channel"))
                 my_spaceship->commandCloseTextComm();
         }
         break;
     case CS_ChannelFailed:
-        text(sf::FloatRect(50, 100, 600, 50), "Failed to open communication channel.");
-        text(sf::FloatRect(50, 150, 600, 50), "No response.");
-        if (button(sf::FloatRect(50, 800, 300, 50), "Close channel"))
+        drawText(sf::FloatRect(50, 100, 600, 50), "Failed to open communication channel.");
+        drawText(sf::FloatRect(50, 150, 600, 50), "No response.");
+        if (drawButton(sf::FloatRect(50, 800, 300, 50), "Close channel"))
             my_spaceship->commandCloseTextComm();
         break;
     case CS_ChannelBroken:
-        text(sf::FloatRect(50, 100, 600, 50), "ERROR 5812 - Checksum failed.");
-        if (button(sf::FloatRect(50, 800, 300, 50), "Close channel"))
+        drawText(sf::FloatRect(50, 100, 600, 50), "ERROR 5812 - Checksum failed.");
+        if (drawButton(sf::FloatRect(50, 800, 300, 50), "Close channel"))
             my_spaceship->commandCloseTextComm();
         break;
     }

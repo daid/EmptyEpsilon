@@ -90,6 +90,7 @@ public:
      */
     int size_class;
     string model, color_texture, specular_texture, illumination_texture;
+    string default_ai_name;
     sf::Vector3f render_offset;
     sf::Vector3f beamPosition[max_beam_weapons];
     BeamTemplate beams[max_beam_weapons];
@@ -111,6 +112,7 @@ public:
 
     void setName(string name);
     void setDescription(string description) { this->description = description; }
+    void setDefaultAI(string default_ai_name) { this->default_ai_name = default_ai_name; }
     void setScale(float scale) { this->scale = scale; }
     void setRenderOffset(sf::Vector3f v) { this->render_offset = v; }
     void setRadius(float radius) { this->radius = radius; }

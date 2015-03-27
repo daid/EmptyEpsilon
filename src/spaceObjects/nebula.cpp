@@ -88,6 +88,16 @@ void Nebula::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float 
     }
 }
 
+bool Nebula::inNebula(sf::Vector2f position)
+{
+    foreach(Nebula, n, nebula_list)
+    {
+        if ((n->getPosition() - position) < n->getRadius())
+            return true;
+    }
+    return false;
+}
+
 bool Nebula::blockedByNebula(sf::Vector2f start, sf::Vector2f end)
 {
     sf::Vector2f startEndDiff = end - start;

@@ -15,7 +15,7 @@ public:
 
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
 
-    virtual void collision(Collisionable* target);
+    virtual void collide(Collisionable* target);
 };
 
 #endif//ASTEROID_H

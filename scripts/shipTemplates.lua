@@ -197,6 +197,7 @@ template:setBeam(0, 60, 0, 1000.0, 4.0, 4)
 template:setHull(30)
 template:setShields(30, 30)
 template:setSpeed(120, 30, 25)
+template:setDefaultAI('fighter')	-- set fighter AI, which dives at the enemy, and then flies off, doing attack runs instead of "hanging in your face".
 
 -- The cruiser is an average ship you can encounter, it has average shields, and average beams. It's pretty much average with nothing special.
 -- Karnack cruiser mark I

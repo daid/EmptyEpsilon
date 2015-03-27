@@ -22,16 +22,21 @@ class ShipAI;
 class CpuShip : public SpaceShip
 {
     static const float auto_system_repair_per_second = 0.005f;
-    
+
     EAIOrder orders;                    //Server only
     sf::Vector2f order_target_location; //Server only
     P<SpaceObject> order_target;        //Server only
     ShipAI* ai;
+
+    string new_ai_name;
 public:
     CpuShip();
-    
+    virtual ~CpuShip();
+
     virtual void update(float delta);
-    
+    virtual void setShipTemplate(string template_name);
+    void setAI(string new_ai);
+
     void orderIdle();
     void orderRoaming();
     void orderRoamingAt(sf::Vector2f position);
@@ -43,11 +48,11 @@ public:
     void orderFlyTowardsBlind(sf::Vector2f target);
     void orderAttack(P<SpaceObject> object);
     void orderDock(P<SpaceObject> object);
-    
+
     EAIOrder getOrder() { return orders; }
     sf::Vector2f getOrderTargetLocation() { return order_target_location; }
     P<SpaceObject> getOrderTarget() { return order_target; }
-    
+
     friend class GameMasterUI;
 };
 string getAIOrderString(EAIOrder order);

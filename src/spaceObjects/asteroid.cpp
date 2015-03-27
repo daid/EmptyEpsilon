@@ -17,7 +17,7 @@ Asteroid::Asteroid()
     setRotation(random(0, 360));
     rotation_speed = random(0.1, 0.8);
     z = random(-100, 100);
-    
+
     registerMemberReplication(&z);
 }
 
@@ -46,7 +46,7 @@ void Asteroid::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, floa
     window.draw(object_sprite);
 }
 
-void Asteroid::collision(Collisionable* target)
+void Asteroid::collide(Collisionable* target)
 {
     if (!isServer())
         return;

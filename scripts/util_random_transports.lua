@@ -47,16 +47,19 @@ function update(delta)
 
 	if cnt < #stationList then
 		if spawn_delay < 0 then
-			spawn_delay = random(30, 50)
-			
-			obj = CpuShip():setShipTemplate('Tug'):setFaction('Independent')
-			obj.target = randomStation()
-			obj.undock_delay = random(5, 30)
-			obj:orderDock(obj.target)
-			x, y = obj.target:getPosition()
-			xd, yd = vectorFromAngle(random(0, 360), random(25000, 40000))
-			obj:setPosition(x + xd, y + yd)
-			table.insert(transportList, obj)
+			target = randomStation()
+			if target:isValid() then
+				spawn_delay = random(30, 50)
+				
+				obj = CpuShip():setShipTemplate('Tug'):setFaction('Independent')
+				obj.target = randomStation()
+				obj.undock_delay = random(5, 30)
+				obj:orderDock(obj.target)
+				x, y = obj.target:getPosition()
+				xd, yd = vectorFromAngle(random(0, 360), random(25000, 40000))
+				obj:setPosition(x + xd, y + yd)
+				table.insert(transportList, obj)
+			end
 		end
 	end
 end
