@@ -1,4 +1,5 @@
 #include "mouseCalibrator.h"
+#include "main.h"
 
 MouseCalibrator::MouseCalibrator(string filename)
 : filename(filename)
@@ -42,6 +43,15 @@ void MouseCalibrator::onGui()
         }
         break;
     case 3:
+        if (InputHandler::getMousePos().x >= 0.0)
+        {
+            drawBox(sf::FloatRect(InputHandler::getMousePos().x - 25, InputHandler::getMousePos().y - 25, 50, 50));
+        }
+        if (drawButton(sf::FloatRect(getWindowSize().x / 2 - 150, 750, 300, 100), "Finished"))
+        {
+            destroy();
+            returnToMainMenu();
+        }
         break;
     }
 

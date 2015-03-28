@@ -7,6 +7,7 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/spaceship.h"
+#include "mouseCalibrator.h"
 #include "gui/shipSelectionScreen.h"
 #include "gui/serverCreationScreen.h"
 
@@ -39,6 +40,15 @@ void MainMenu::onGui()
     if (drawButton(sf::FloatRect(50, 800, 300, 50), "Quit") || InputHandler::keyboardIsPressed(sf::Keyboard::Escape))
     {
         engine->shutdown();
+    }
+    
+    if (InputHandler::touch_screen)
+    {
+        if (drawButton(sf::FloatRect(getWindowSize().x - 350, 750, 300, 100), "Calibrate\nTouchscreen"))
+        {
+            new MouseCalibrator("default.calib");
+            destroy();
+        }
     }
 
     float y = 100;
