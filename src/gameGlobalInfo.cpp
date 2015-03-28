@@ -125,6 +125,7 @@ void GameGlobalInfo::destroy()
     {
         s->destroy();
     }
+    MultiplayerObject::destroy();
 }
 
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
