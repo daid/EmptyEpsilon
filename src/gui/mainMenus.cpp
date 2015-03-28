@@ -121,8 +121,13 @@ void ServerBrowserMenu::onGui()
     for(unsigned int n=0; n<serverList.size(); n++)
     {
         if (drawToggleButton(sf::FloatRect(50, 50 + 35 * n, 700, 35), selectionIndex == n, serverList[n].name + " (" + serverList[n].address.toString() + ")"))
+        {
             selectionIndex = n;
+            manual_ip = serverList[selectionIndex].address.toString();
+        }
     }
+    if (manual_ip == sf::IpAddress::getLocalAddress().toString() && serverList.size() > 0)
+        manual_ip = serverList[0].address.toString();
 
     if (drawButton(sf::FloatRect(50, 800, 300, 50), "Back") || InputHandler::keyboardIsPressed(sf::Keyboard::Escape))
     {
