@@ -82,43 +82,87 @@ public:
     const static int max_frequency = 20;
     const static float max_combat_maneuver_delay = 14.0f;
 
-    string templateName;
+    string template_name;
     string ship_type_name;
     P<ShipTemplate> ship_template;
     string ship_callsign;
     float engine_emit_delay;
 
     ShipSystem systems[SYS_COUNT];
+    /*!
+     *[input] Ship will try to aim to this rotation. (degrees)
+     */
+    float target_rotation;
 
-    float targetRotation;
-    float impulseRequest;
-    float currentImpulse;
-    float rotationSpeed;
-    float impulseMaxSpeed;
-    float impulseAcceleration;
+    /*!
+     * [input] Amount of impulse requested from the user (-1.0 to 1.0)
+     */
+    float impulse_request;
 
-    bool hasWarpdrive;
-    int8_t warpRequest;
-    float currentWarp;
-    float warpSpeedPerWarpLevel;
+    /*!
+     * [output] Amount of actual impulse from the engines (-1.0 to 1.0)
+     */
+    float current_impulse;
+
+    /*!
+     * [config] Speed of rotation, in deg/second
+     */
+    float turn_speed;
+
+    /*!
+     * [config] Max speed of the impulse engines, in m/s
+     */
+    float impulse_max_speed;
+
+    /*!
+     * [config] Impulse engine acceleration, in (m/s)/s
+     */
+    float impulse_acceleration;
+
+    /*!
+     * [config] True if we have a warpdrive.
+     */
+    bool has_warp_drive;
+
+    /*!
+     * [input] Level of warp requested, from 0 to 4
+     */
+    int8_t warp_request;
+
+    /*!
+     * [output] Current active warp amount, from 0.0 to 4.0
+     */
+    float current_warp;
+
+    /*!
+     * [config] Amount of speed per warp level, in m/s
+     */
+    float warp_speed_per_warp_level;
+
+    /*!
+     * [output] Time in seconds until combat maneuver is active again
+     */
     float combat_maneuver_delay;
     ECombatManeuver combat_maneuver;
     float combat_maneuver_active;
 
-    bool hasJumpdrive;
-    float jumpDistance;
-    float jumpDelay;
+    bool has_jump_drive;      //[config]
+    float jump_distance;     //[output]
+    float jump_delay;        //[output]
 
     int8_t weapon_storage[MW_Count];
     int8_t weapon_storage_max[MW_Count];
     int8_t weapon_tubes;
-    float tubeLoadTime;
-    float tubeRechargeFactor;
-    WeaponTube weaponTube[maxWeaponTubes];
+    float tube_load_time;
+    float tube_recharge_factor;
+    WeaponTube weaponTube[max_weapon_tubes];
 
+    /*!
+     * [output] Frequency of beam weapons
+     */
     int beam_frequency;
     ESystem beam_system_target;
-    BeamWeapon beamWeapons[maxBeamWeapons];
+    BeamWeapon beam_weapons[max_beam_weapons];
 
     float hull_strength, hull_max;
     bool shields_active;
@@ -127,9 +171,12 @@ public:
     float front_shield_max, rear_shield_max;
     float front_shield_hit_effect, rear_shield_hit_effect;
 
-    int32_t targetId;
+    int32_t target_id;
 
-    EScannedState scanned_by_player; //Is this really smart with multiple players? No, does not really work well with multiple ships, and causes lots of problems with PvP.
+    /*!
+     * TODO; Needs to be fixed for multiplayer!
+     */
+    EScannedState scanned_by_player;
 
     EDockingState docking_state;
     P<SpaceObject> docking_target; //Server only
@@ -139,31 +186,111 @@ public:
 
     virtual void draw3D();
     virtual void draw3DTransparent();
+
+    /*!
+     * Draw this ship on the radar.
+     */
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
+
     virtual void update(float delta);
 
+    /*!
+     * Get the call sign of this ship.
+     */
     virtual string getCallSign();
-    virtual bool canBeTargeted() { return true; }
-    virtual bool hasShield() { return front_shield > (front_shield_max / 50.0) || rear_shield > (rear_shield_max / 50.0); }
-    virtual void takeDamage(float damageAmount, DamageInfo& info);
-    virtual void hullDamage(float damageAmount, DamageInfo& info);
-    virtual void executeJump(float distance);
-    virtual void fireBeamWeapon(int index, P<SpaceObject> target);
-    virtual bool canBeDockedBy(P<SpaceObject> obj);
-    virtual void collision(Collisionable* other);
 
-    void loadTube(int tubeNr, EMissileWeapons type);
-    void fireTube(int tubeNr, float target_angle);
-    void initJump(float distance);
+    /*!
+     * Check if the ship can be targeted.
+     */
+    virtual bool canBeTargeted() { return true; }
+
+    /*!
+     * Check if spaceship has a shield
+     */
+    virtual bool hasShield() { return front_shield > (front_shield_max / 50.0) || rear_shield > (rear_shield_max / 50.0); }
+
+    /*!
+     * Spaceship takes damage
+     * \param damage_amount Damage to be delt.
+     * \param info Information about damage type (usefull for damage reduction, etc)
+     */
+    virtual void takeDamage(float damage_amount, DamageInfo& info);
+
+    /*!
+     * Spaceship takes damage directly on hull.
+     * This is used when shields are down or by weapons that ignore shields.
+     * \param damage_amount Damage to be delt.
+     * \param info Information about damage type (usefull for damage reduction, etc)
+     */
+    virtual void takeHullDamage(float damage_amount, DamageInfo& info);
+
+    /*!
+     * Jump in current direction
+     * \param distance Distance to jump in meters)
+     */
+    virtual void executeJump(float distance);
+
+    /*!
+     * Fire beamweapon
+     * \param index Index of beam weapon to be fired
+     * \param target of the beam weapon.
+     */
+    virtual void fireBeamWeapon(int index, P<SpaceObject> target);
+
+    /*!
+     * Check if object can dock with this ship.
+     * \param object Object that wants to dock.
+     */
+    virtual bool canBeDockedBy(P<SpaceObject> obj);
+
+    virtual void collide(Collisionable* other);
+
+    /*!
+     * Load a missile tube.
+     * \param tube_number Index of the tube to be loaded.
+     * \param type Weapon type that is loaded.
+     */
+    void loadTube(int tube_number, EMissileWeapons type);
+
+    /*!
+     * Fire a missile tube.
+     * \param tube_number Index of the tube to be fired.
+     * \param target_angle Angle in degrees to where the missile needs to be shot.
+     */
+    void fireTube(int tube_number, float target_angle);
+
+    /*!
+     * Start the jumping procedure.
+     */
+    void initializeJump(float distance);
+
+    /*!
+     * Request to dock with target.
+     */
     void requestDock(P<SpaceObject> target);
+
+    /*!
+     * Request undock with current docked object
+     */
     void requestUndock();
     void setScanned(bool scanned) { scanned_by_player = scanned ? SS_FullScan : SS_NotScanned; }
+
+    /*!
+     * Activate a certain combat maneuver (and start 'reload' timer)
+     */
     void activateCombatManeuver(ECombatManeuver maneuver);
-
+    /*!
+     * Check if ship has certain system
+     */
     bool hasSystem(ESystem system);
-    float getSystemEffectiveness(ESystem system);
 
-    virtual void setShipTemplate(string templateName);
+    /*!
+     * Check effectiveness of system.
+     * If system has more / less power or is damages, this can influence the effectiveness.
+     * \return float 0. to 1.
+     */
+    float getSystemEffectiveness(ESystem system);
+    virtual void setShipTemplate(string template_names);
 
     P<SpaceObject> getTarget();
 

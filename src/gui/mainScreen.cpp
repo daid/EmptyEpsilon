@@ -75,7 +75,7 @@ void MainScreenUI::onGui()
             my_spaceship->commandMainScreenSetting(MSS_Tactical);
         if (InputHandler::keyboardIsReleased(sf::Keyboard::Q) && gameGlobalInfo->allow_main_screen_long_range_radar)
             my_spaceship->commandMainScreenSetting(MSS_LongRange);
-        
+
         float target_camera_yaw = my_spaceship->getRotation();
         switch(my_spaceship->main_screen_setting)
         {
@@ -119,23 +119,23 @@ void MainScreenUI::onGui()
         }
         if (my_spaceship->activate_self_destruct)
         {
-            boxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 150));
-            textbox(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100), "SELF DESTRUCT ACTIVATED", AlignCenter, 50);
+            drawBoxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 150));
+            drawTextBox(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100), "SELF DESTRUCT ACTIVATED", AlignCenter, 50);
             int todo = 0;
             for(int n=0; n<PlayerSpaceship::max_self_destruct_codes; n++)
                 if (!my_spaceship->self_destruct_code_confirmed[n])
                     todo++;
-            text(sf::FloatRect(getWindowSize().x / 2 - 400, 295, 800, 50), "Waiting for autorization input: "+string(todo)+" left", AlignCenter, 30);
+            drawText(sf::FloatRect(getWindowSize().x / 2 - 400, 295, 800, 50), "Waiting for autorization input: "+string(todo)+" left", AlignCenter, 30);
         }
-        if (my_spaceship->jumpDelay > 0.0)
+        if (my_spaceship->jump_delay > 0.0)
         {
-            boxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100));
-            text(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100), "Jump in: " + string(int(ceilf(my_spaceship->jumpDelay))), AlignCenter, 50);
+            drawBoxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100));
+            drawText(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100), "Jump in: " + string(int(ceilf(my_spaceship->jump_delay))), AlignCenter, 50);
         }
         if (gameGlobalInfo->global_message_timeout > 0.0)
         {
-            boxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 400, 300, 800, 100));
-            text(sf::FloatRect(getWindowSize().x / 2 - 400, 300, 800, 100), gameGlobalInfo->global_message, AlignCenter, 50);
+            drawBoxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 400, 300, 800, 100));
+            drawText(sf::FloatRect(getWindowSize().x / 2 - 400, 300, 800, 100), gameGlobalInfo->global_message, AlignCenter, 50);
         }
     }else{
         draw3Dworld();
@@ -167,10 +167,10 @@ void ShipWindowUI::onGui()
             window_angle -= 5;
         if (InputHandler::keyboardIsPressed(sf::Keyboard::Right))
             window_angle += 5;
-        
+
         camera_yaw = my_spaceship->getRotation() + window_angle;
         camera_pitch = 0.0f;
-        
+
         sf::Vector2f position = my_spaceship->getPosition() + sf::rotateVector(sf::Vector2f(my_spaceship->getRadius(), 0), camera_yaw);
 
         camera_position.x = position.x;
@@ -196,7 +196,7 @@ void TopDownUI::onGui()
     {
         camera_yaw = -90.0f;
         camera_pitch = 90.0f;
-        
+
         sf::Vector2f position = my_spaceship->getPosition();
 
         camera_position.x = position.x;

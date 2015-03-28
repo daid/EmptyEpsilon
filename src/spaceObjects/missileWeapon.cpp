@@ -6,9 +6,11 @@
 MissileWeapon::MissileWeapon(string multiplayerName, float homing_range, sf::Color color)
 : SpaceObject(10, multiplayerName), speed(200.0), turnrate(10.0), lifetime(27.0), color(color), homing_range(homing_range)
 {
+    target_id = -1;
+    target_angle = 0;
     registerMemberReplication(&target_id);
     registerMemberReplication(&target_angle);
-    
+
     launch_sound_played = false;
 }
 
@@ -46,14 +48,14 @@ void MissileWeapon::update(float delta)
         ParticleEngine::spawn(sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(1, 0.8, 0.8), sf::Vector3f(0, 0, 0), 5, 20, 5.0);
 }
 
-void MissileWeapon::collision(Collisionable* target)
+void MissileWeapon::collide(Collisionable* target)
 {
     if (!game_server)
         return;
     P<SpaceObject> object = P<Collisionable>(target);
     if (!object || object == owner || !object->canBeTargeted())
         return;
-    
+
     hitObject(object);
     destroy();
 }
@@ -67,13 +69,13 @@ void MissileWeapon::updateMovement()
             target = game_server->getObjectById(target_id);
         else
             target = game_client->getObjectById(target_id);
-        
+
         if (target && (target->getPosition() - getPosition()) < homing_range + target->getRadius())
         {
             target_angle = sf::vector2ToAngle(target->getPosition() - getPosition());
         }
     }
-    
+
     float angleDiff = sf::angleDifference(getRotation(), target_angle);
 
     if (angleDiff > 1.0)

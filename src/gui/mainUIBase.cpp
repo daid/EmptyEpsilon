@@ -53,13 +53,22 @@ void MainUIBase::onGui()
                 engine->setGameSpeed(0.0);
         }
 #ifdef DEBUG
-        text(sf::FloatRect(0, 0, getWindowSize().x - 5, 20), string(game_server->getSendDataRate() / 1000) + " kb per second", AlignRight, 15);
-        text(sf::FloatRect(0, 20, getWindowSize().x - 5, 20), string(game_server->getSendDataRatePerClient() / 1000) + " kb per client", AlignRight, 15);
+        drawText(sf::FloatRect(0, 0, getWindowSize().x - 5, 20), string(game_server->getSendDataRate() / 1000) + " kb per second", AlignRight, 15);
+        drawText(sf::FloatRect(0, 20, getWindowSize().x - 5, 20), string(game_server->getSendDataRatePerClient() / 1000) + " kb per client", AlignRight, 15);
 #endif
     }
 
     if (my_spaceship)
     {
+    /*
+        if (Nebula::inNebula(my_spaceship->getPosition()))
+        {
+            sf::Sprite nebula_overlay;
+            textureManager.setTexture(nebula_overlay, "Nebula1.png");
+            nebula_overlay.setPosition(getWindowSize() / 2.0);
+            getRenderTarget()->draw(nebula_overlay);
+        }
+    */
         float shield_hit = (std::max(my_spaceship->front_shield_hit_effect, my_spaceship->rear_shield_hit_effect) - 0.5) / 0.5;
         if (shield_hit > 0)
         {
@@ -95,14 +104,14 @@ void MainUIBase::onGui()
         }else{
             glitchPostProcessor->enabled = false;
         }
-        if (my_spaceship->currentWarp > 0.0)
+        if (my_spaceship->current_warp > 0.0)
         {
             warpPostProcessor->enabled = true;
-            warpPostProcessor->setUniform("amount", my_spaceship->currentWarp * 0.01);
-        }else if (my_spaceship->jumpDelay > 0.0 && my_spaceship->jumpDelay < 2.0)
+            warpPostProcessor->setUniform("amount", my_spaceship->current_warp * 0.01);
+        }else if (my_spaceship->jump_delay > 0.0 && my_spaceship->jump_delay < 2.0)
         {
             warpPostProcessor->enabled = true;
-            warpPostProcessor->setUniform("amount", (2.0 - my_spaceship->jumpDelay) * 0.1);
+            warpPostProcessor->setUniform("amount", (2.0 - my_spaceship->jump_delay) * 0.1);
         }else{
             warpPostProcessor->enabled = false;
         }
@@ -117,24 +126,24 @@ void MainUIBase::onGui()
             sf::RectangleShape fullScreenOverlay(sf::Vector2f(getWindowSize().x, 900));
             fullScreenOverlay.setFillColor(sf::Color(0, 0, 0, 128));
             getRenderTarget()->draw(fullScreenOverlay);
-            
+
             if (my_spaceship)
                 onPauseHelpGui();
-            
-            boxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 250, 600, 500, game_server ? 130 : 100));
-            text(sf::FloatRect(0, 600, getWindowSize().x, 100), "Game Paused", AlignCenter, 70);
+
+            drawBoxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 250, 600, 500, game_server ? 130 : 100));
+            drawText(sf::FloatRect(0, 600, getWindowSize().x, 100), "Game Paused", AlignCenter, 70);
             if (game_server)
-                text(sf::FloatRect(0, 680, getWindowSize().x, 30), "(Press [SPACE] to resume)", AlignCenter, 30);
+                drawText(sf::FloatRect(0, 680, getWindowSize().x, 30), "(Press [SPACE] to resume)", AlignCenter, 30);
         }else{
             if (my_spaceship)
             {
                 if (factionInfo[gameGlobalInfo->getVictoryFactionId()]->states[my_spaceship->getFactionId()] == FVF_Enemy)
-                    text(sf::FloatRect(0, 600, getWindowSize().x, 100), "Defeat!", AlignCenter, 70);
+                    drawText(sf::FloatRect(0, 600, getWindowSize().x, 100), "Defeat!", AlignCenter, 70);
                 else
-                    text(sf::FloatRect(0, 600, getWindowSize().x, 100), "Victory!", AlignCenter, 70);
+                    drawText(sf::FloatRect(0, 600, getWindowSize().x, 100), "Victory!", AlignCenter, 70);
             }else{
-                text(sf::FloatRect(0, 600, getWindowSize().x, 100), "Game Finished", AlignCenter, 70);
-                text(sf::FloatRect(0, 680, getWindowSize().x, 100), factionInfo[gameGlobalInfo->getVictoryFactionId()]->name + " wins", AlignCenter, 70);
+                drawText(sf::FloatRect(0, 600, getWindowSize().x, 100), "Game Finished", AlignCenter, 70);
+                drawText(sf::FloatRect(0, 680, getWindowSize().x, 100), factionInfo[gameGlobalInfo->getVictoryFactionId()]->getName() + " wins", AlignCenter, 70);
             }
         }
     }
@@ -144,7 +153,7 @@ void MainUIBase::update(float delta)
 {
     if (!my_spaceship)
         return;
-    
+
     scan_angle += delta * 20.0f;
     if (scan_angle > 360)
         scan_angle -= 360;
@@ -187,27 +196,27 @@ void MainUIBase::mainScreenSelectGUI()
 {
     float x = getWindowSize().x - 200;
     float y = 40;
-    if (button(sf::FloatRect(x, y, 200, 40), "Front", 28))
+    if (drawButton(sf::FloatRect(x, y, 200, 40), "Front", 28))
         my_spaceship->commandMainScreenSetting(MSS_Front);
     y += 40;
-    if (button(sf::FloatRect(x, y, 200, 40), "Back", 28))
+    if (drawButton(sf::FloatRect(x, y, 200, 40), "Back", 28))
         my_spaceship->commandMainScreenSetting(MSS_Back);
     y += 40;
-    if (button(sf::FloatRect(x, y, 200, 40), "Left", 28))
+    if (drawButton(sf::FloatRect(x, y, 200, 40), "Left", 28))
         my_spaceship->commandMainScreenSetting(MSS_Left);
     y += 40;
-    if (button(sf::FloatRect(x, y, 200, 40), "Right", 28))
+    if (drawButton(sf::FloatRect(x, y, 200, 40), "Right", 28))
         my_spaceship->commandMainScreenSetting(MSS_Right);
     y += 40;
     if (gameGlobalInfo->allow_main_screen_tactical_radar)
     {
-        if (button(sf::FloatRect(x, y, 200, 40), "Tactical", 28))
+        if (drawButton(sf::FloatRect(x, y, 200, 40), "Tactical", 28))
             my_spaceship->commandMainScreenSetting(MSS_Tactical);
         y += 40;
     }
     if (gameGlobalInfo->allow_main_screen_long_range_radar)
     {
-        if (button(sf::FloatRect(x, y, 200, 40), "Long-Range", 28))
+        if (drawButton(sf::FloatRect(x, y, 200, 40), "Long-Range", 28))
             my_spaceship->commandMainScreenSetting(MSS_LongRange);
         y += 40;
     }
@@ -224,59 +233,59 @@ void MainUIBase::selfDestructGUI()
         if (my_player_info->crew_active_position == my_spaceship->self_destruct_code_show_position[n])
             show_position = n;
     }
-    
+
     float y = 40;
     if (entry_position > -1)
     {
         if (my_spaceship->self_destruct_code_confirmed[entry_position])
         {
             float x = getWindowSize().x - 200;
-            boxWithBackground(sf::FloatRect(x, y, 200, 80));
+            drawBoxWithBackground(sf::FloatRect(x, y, 200, 80));
             y += 10;
-            text(sf::FloatRect(x, y, 200, 25), "SELF DESTRUCT", AlignCenter, 20);
+            drawText(sf::FloatRect(x, y, 200, 25), "SELF DESTRUCT", AlignCenter, 20);
             x += 25;
             y += 30;
-            text(sf::FloatRect(x, y, 150, 25), "Code: " + string(char('A' + entry_position)) + " confirmed", AlignCenter, 20);
+            drawText(sf::FloatRect(x, y, 150, 25), "Code: " + string(char('A' + entry_position)) + " confirmed", AlignCenter, 20);
             y += 20;
         }else{
             float x = getWindowSize().x - 200;
-            boxWithBackground(sf::FloatRect(x, y, 200, 340));
+            drawBoxWithBackground(sf::FloatRect(x, y, 200, 340));
             y += 10;
-            text(sf::FloatRect(x, y, 200, 25), "SELF DESTRUCT", AlignCenter, 20);
+            drawText(sf::FloatRect(x, y, 200, 25), "SELF DESTRUCT", AlignCenter, 20);
             y += 25;
-            box(sf::FloatRect(x, y, 200, 50));
+            drawBox(sf::FloatRect(x, y, 200, 50));
             x += 25;
-            text(sf::FloatRect(x, y, 150, 50), self_destruct_input + "_", AlignLeft, 20);
+            drawText(sf::FloatRect(x, y, 150, 50), self_destruct_input + "_", AlignLeft, 20);
             y += 50;
-            text(sf::FloatRect(x, y, 150, 25), "Enter code: " + string(char('A' + entry_position)), AlignCenter, 20);
+            drawText(sf::FloatRect(x, y, 150, 25), "Enter code: " + string(char('A' + entry_position)), AlignCenter, 20);
             y += 25;
-            
-            if (button(sf::FloatRect(x, y, 50, 50), "1", 30))
+
+            if (drawButton(sf::FloatRect(x, y, 50, 50), "1", 30))
                 self_destruct_input += "1";
-            if (button(sf::FloatRect(x+50, y, 50, 50), "2", 30))
+            if (drawButton(sf::FloatRect(x+50, y, 50, 50), "2", 30))
                 self_destruct_input += "2";
-            if (button(sf::FloatRect(x+100, y, 50, 50), "3", 30))
+            if (drawButton(sf::FloatRect(x+100, y, 50, 50), "3", 30))
                 self_destruct_input += "3";
             y += 50;
-            if (button(sf::FloatRect(x, y, 50, 50), "4", 30))
+            if (drawButton(sf::FloatRect(x, y, 50, 50), "4", 30))
                 self_destruct_input += "4";
-            if (button(sf::FloatRect(x+50, y, 50, 50), "5", 30))
+            if (drawButton(sf::FloatRect(x+50, y, 50, 50), "5", 30))
                 self_destruct_input += "5";
-            if (button(sf::FloatRect(x+100, y, 50, 50), "6", 30))
+            if (drawButton(sf::FloatRect(x+100, y, 50, 50), "6", 30))
                 self_destruct_input += "6";
             y += 50;
-            if (button(sf::FloatRect(x, y, 50, 50), "7", 30))
+            if (drawButton(sf::FloatRect(x, y, 50, 50), "7", 30))
                 self_destruct_input += "7";
-            if (button(sf::FloatRect(x+50, y, 50, 50), "8", 30))
+            if (drawButton(sf::FloatRect(x+50, y, 50, 50), "8", 30))
                 self_destruct_input += "8";
-            if (button(sf::FloatRect(x+100, y, 50, 50), "9", 30))
+            if (drawButton(sf::FloatRect(x+100, y, 50, 50), "9", 30))
                 self_destruct_input += "9";
             y += 50;
-            if (button(sf::FloatRect(x, y, 50, 50), "Clr", 20))
+            if (drawButton(sf::FloatRect(x, y, 50, 50), "Clr", 20))
                 self_destruct_input = "";
-            if (button(sf::FloatRect(x+50, y, 50, 50), "0", 30))
+            if (drawButton(sf::FloatRect(x+50, y, 50, 50), "0", 30))
                 self_destruct_input += "0";
-            if (button(sf::FloatRect(x+100, y, 50, 50), "OK", 20))
+            if (drawButton(sf::FloatRect(x+100, y, 50, 50), "OK", 20))
             {
                 my_spaceship->commandConfirmDestructCode(entry_position, self_destruct_input.toInt());
                 self_destruct_input = "";
@@ -288,12 +297,12 @@ void MainUIBase::selfDestructGUI()
     if (show_position > -1)
     {
         float x = getWindowSize().x - 200;
-        boxWithBackground(sf::FloatRect(x, y, 200, 80));
+        drawBoxWithBackground(sf::FloatRect(x, y, 200, 80));
         y += 10;
-        text(sf::FloatRect(x, y, 200, 25), "SELF DESTRUCT", AlignCenter, 20);
+        drawText(sf::FloatRect(x, y, 200, 25), "SELF DESTRUCT", AlignCenter, 20);
         x += 25;
         y += 30;
-        text(sf::FloatRect(x, y, 150, 25), "Code " + string(char('A' + show_position)) + ": " + string(my_spaceship->self_destruct_code[show_position]), AlignCenter, 20);
+        drawText(sf::FloatRect(x, y, 150, 25), "Code " + string(char('A' + show_position)) + ": " + string(my_spaceship->self_destruct_code[show_position]), AlignCenter, 20);
         y += 20;
     }
 }
@@ -334,7 +343,7 @@ void MainUIBase::drawRaderBackground(sf::Vector2f view_position, sf::Vector2f po
         for(int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
         {
             float y = position.y + ((sector_y * sector_size) - view_position.y) * scale;
-            text(sf::FloatRect(x, y, 30, 30), string(char('A' + (sector_y + 5))) + string(sector_x + 5), AlignLeft, 30, color);
+            drawText(sf::FloatRect(x, y, 30, 30), string(char('A' + (sector_y + 5))) + string(sector_x + 5), AlignLeft, 30, color);
         }
     }
     for(int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
@@ -377,13 +386,13 @@ void MainUIBase::drawHeadingCircle(sf::Vector2f position, float size, sf::FloatR
         tigs[n/20*2+1].position = position + sf::vector2FromAngle(float(n) - 90) * (size - 20);
     }
     window.draw(tigs);
-    sf::VertexArray smallTigs(sf::Lines, 360/5*2);
+    sf::VertexArray small_tigs(sf::Lines, 360/5*2);
     for(unsigned int n=0; n<360; n+=5)
     {
-        smallTigs[n/5*2].position = position + sf::vector2FromAngle(float(n) - 90) * size;
-        smallTigs[n/5*2+1].position = position + sf::vector2FromAngle(float(n) - 90) * (size - 10);
+        small_tigs[n/5*2].position = position + sf::vector2FromAngle(float(n) - 90) * size;
+        small_tigs[n/5*2+1].position = position + sf::vector2FromAngle(float(n) - 90) * (size - 10);
     }
-    window.draw(smallTigs);
+    window.draw(small_tigs);
     for(unsigned int n=0; n<360; n+=20)
     {
         sf::Text text(string(n), mainFont, 15);
@@ -433,21 +442,21 @@ void MainUIBase::drawWaypoints(sf::Vector2f view_position, sf::Vector2f position
         sf::Vector2f screen_position = position + (my_spaceship->waypoints[n] - view_position) * scale;
         if (sf::length(screen_position - position) > size)
             continue;
-        
+
         sf::Sprite object_sprite;
         textureManager.setTexture(object_sprite, "waypoint.png");
         object_sprite.setColor(sf::Color(128, 128, 255, 192));
         object_sprite.setPosition(screen_position - sf::Vector2f(0, 10));
         object_sprite.setScale(0.6, 0.6);
         window.draw(object_sprite);
-        text(sf::FloatRect(screen_position.x, screen_position.y - 26, 0, 0), "WP" + string(n + 1), AlignCenter, 14, sf::Color(128, 128, 255, 192));
+        drawText(sf::FloatRect(screen_position.x, screen_position.y - 26, 0, 0), "WP" + string(n + 1), AlignCenter, 14, sf::Color(128, 128, 255, 192));
     }
 }
 
 void MainUIBase::drawRadarSweep(sf::Vector2f position, float range, float size, float angle)
 {
     sf::RenderTarget& window = *getRenderTarget();
-    
+
     sf::VertexArray sweep(sf::Triangles, 3);
     for(int n=0; n<10; n++)
     {
@@ -488,7 +497,7 @@ void MainUIBase::drawRadar(sf::Vector2f position, float size, float range, bool 
             circle.setOutlineColor(sf::Color(255, 255, 255, 16));
             circle.setOutlineThickness(2.0);
             window.draw(circle);
-            text(sf::FloatRect(position.x, position.y - s - 20, 0, 0), string(int(circle_size / 1000.0f + 0.1f)) + "km", AlignCenter, 20, sf::Color(255, 255, 255, 32));
+            drawText(sf::FloatRect(position.x, position.y - s - 20, 0, 0), string(int(circle_size / 1000.0f + 0.1f)) + "km", AlignCenter, 20, sf::Color(255, 255, 255, 32));
         }
         drawRaderBackground(my_spaceship->getPosition(), position, size, range, rect);
         drawRadarSweep(position, range, size, scan_angle);
@@ -513,7 +522,7 @@ void MainUIBase::drawRadar(sf::Vector2f position, float size, float range, bool 
             circle.setOutlineColor(sf::Color(255, 255, 255, 16));
             circle.setOutlineThickness(2.0);
             window.draw(circle);
-            text(sf::FloatRect(position.x, position.y - s - 20, 0, 0), string(int(circle_size / 1000.0f + 0.1f)) + "km", AlignCenter, 20, sf::Color(255, 255, 255, 32));
+            drawText(sf::FloatRect(position.x, position.y - s - 20, 0, 0), string(int(circle_size / 1000.0f + 0.1f)) + "km", AlignCenter, 20, sf::Color(255, 255, 255, 32));
         }
         foreach(SpaceObject, obj, space_object_list)
         {
@@ -648,7 +657,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
         soundManager.setListenerPosition(sf::Vector2f(camera_position.x, camera_position.y), camera_yaw);
     sf::RenderTarget& window = *getRenderTarget();
     window.pushGLStates();
-    
+
     billboardShader.setParameter("camera_position", camera_position);
 
     float camera_fov = 60.0f;
@@ -714,13 +723,13 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
 
     if (gameGlobalInfo)
     {
-        for(int n=0; n<GameGlobalInfo::maxNebula; n++)
+        for(int n=0; n<GameGlobalInfo::max_nebulas; n++)
         {
-            sf::Texture::bind(textureManager.getTexture(gameGlobalInfo->nebulaInfo[n].textureName), sf::Texture::Pixels);
+            sf::Texture::bind(textureManager.getTexture(gameGlobalInfo->nebula_info[n].textureName), sf::Texture::Pixels);
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE);
             glPushMatrix();
-            glRotatef(180, gameGlobalInfo->nebulaInfo[n].vector.x, gameGlobalInfo->nebulaInfo[n].vector.y, gameGlobalInfo->nebulaInfo[n].vector.z);
+            glRotatef(180, gameGlobalInfo->nebula_info[n].vector.x, gameGlobalInfo->nebula_info[n].vector.y, gameGlobalInfo->nebula_info[n].vector.z);
             glColor4f(1,1,1,0.1);
             glBegin(GL_TRIANGLE_STRIP);
             glTexCoord2f(1024,    0); glVertex3f( 100, 100, 100);
@@ -740,7 +749,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
     {
         float lightpos1[4] = {0, 0, 0, 1.0};
         glLightfv(GL_LIGHT1, GL_POSITION, lightpos1);
-        
+
         float lightpos0[4] = {20000, 20000, 20000, 1.0};
         glLightfv(GL_LIGHT0, GL_POSITION, lightpos0);
     }

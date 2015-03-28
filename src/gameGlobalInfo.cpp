@@ -7,23 +7,23 @@ GameGlobalInfo::GameGlobalInfo()
 : MultiplayerObject("GameGlobalInfo")
 {
     assert(!gameGlobalInfo);
-    
+
     callsign_counter = 0;
     victory_faction = -1;
     gameGlobalInfo = this;
-    for(int n=0; n<maxPlayerShips; n++)
+    for(int n=0; n<max_player_ships; n++)
     {
         playerShipId[n] = -1;
         registerMemberReplication(&playerShipId[n]);
     }
-    for(int n=0; n<maxNebula; n++)
+    for(int n=0; n<max_nebulas; n++)
     {
-        nebulaInfo[n].vector = sf::Vector3f(random(-1, 1), random(-1, 1), random(-1, 1));
-        nebulaInfo[n].textureName = "Nebula" + string(irandom(1, 3));
-        registerMemberReplication(&nebulaInfo[n].vector);
-        registerMemberReplication(&nebulaInfo[n].textureName);
+        nebula_info[n].vector = sf::Vector3f(random(-1, 1), random(-1, 1), random(-1, 1));
+        nebula_info[n].textureName = "Nebula" + string(irandom(1, 3));
+        registerMemberReplication(&nebula_info[n].vector);
+        registerMemberReplication(&nebula_info[n].textureName);
     }
-    
+
     global_message_timeout = 0.0;
     player_warp_jump_drive_setting = PWJ_ShipDefault;
     long_range_radar_range = 25000;
@@ -40,7 +40,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&use_system_damage);
     registerMemberReplication(&allow_main_screen_tactical_radar);
     registerMemberReplication(&allow_main_screen_long_range_radar);
-    
+
     for(unsigned int n=0; n<factionInfo.size(); n++)
         reputation_points.push_back(0);
     registerMemberReplication(&reputation_points, 1.0);
@@ -48,7 +48,7 @@ GameGlobalInfo::GameGlobalInfo()
 
 P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)
 {
-    assert(index >= 0 && index < maxPlayerShips);
+    assert(index >= 0 && index < max_player_ships);
     if (game_server)
         return game_server->getObjectById(playerShipId[index]);
     return game_client->getObjectById(playerShipId[index]);
@@ -56,7 +56,7 @@ P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)
 
 void GameGlobalInfo::setPlayerShip(int index, P<PlayerSpaceship> ship)
 {
-    assert(index >= 0 && index < maxPlayerShips);
+    assert(index >= 0 && index < max_player_ships);
     assert(game_server);
 
     if (ship)
@@ -67,7 +67,7 @@ void GameGlobalInfo::setPlayerShip(int index, P<PlayerSpaceship> ship)
 
 int GameGlobalInfo::findPlayerShip(P<PlayerSpaceship> ship)
 {
-    for(int n=0; n<maxPlayerShips; n++)
+    for(int n=0; n<max_player_ships; n++)
         if (getPlayerShip(n) == ship)
             return n;
     return -1;
@@ -75,7 +75,7 @@ int GameGlobalInfo::findPlayerShip(P<PlayerSpaceship> ship)
 
 int GameGlobalInfo::insertPlayerShip(P<PlayerSpaceship> ship)
 {
-    for(int n=0; n<maxPlayerShips; n++)
+    for(int n=0; n<max_player_ships; n++)
     {
         if (!getPlayerShip(n))
         {
@@ -167,7 +167,7 @@ static int getPlayerShip(lua_State* L)
     int index = luaL_checkinteger(L, 1);
     if (index == -1)
     {
-        for(index = 0; index<GameGlobalInfo::maxPlayerShips; index++)
+        for(index = 0; index<GameGlobalInfo::max_player_ships; index++)
         {
             P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(index);
             if (ship)
@@ -175,7 +175,7 @@ static int getPlayerShip(lua_State* L)
         }
         return 0;
     }
-    if (index < 1 || index > GameGlobalInfo::maxPlayerShips)
+    if (index < 1 || index > GameGlobalInfo::max_player_ships)
         return 0;
     P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(index - 1);
     if (!ship)

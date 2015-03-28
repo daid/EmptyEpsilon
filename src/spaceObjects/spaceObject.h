@@ -19,7 +19,7 @@ public:
     sf::Vector2f location;
     int frequency;
     ESystem system_target;
-    
+
     DamageInfo(EDamageType type, sf::Vector2f location)
     : type(type), location(location), frequency(-1), system_target(SYS_None)
     {}
@@ -49,7 +49,7 @@ public:
     virtual bool canBeDockedBy(P<SpaceObject> obj) { return false; }
     virtual bool hasShield() { return false; }
     virtual bool canHideInNebula() { return true; }
-    virtual void takeDamage(float damageAmount, DamageInfo& info) {}
+    virtual void takeDamage(float damage_amount, DamageInfo& info) {}
 
     static void damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, DamageInfo& info, float min_range);
 
@@ -64,7 +64,7 @@ public:
     void setCommsScript(string script_name) { this->comms_script_name = script_name; }
     bool areEnemiesInRange(float range);
     PVector<SpaceObject> getObjectsInRange(float range);
-    
+
     ScriptCallback onDestroyed;
 };
 

@@ -35,7 +35,7 @@
 				<Option object_output=".obj/Release/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
-				<Option parameters="fullscreen=1 screen43=0 touchscreen=1" />
+				<Option parameters="fullscreen=1 screen43=0 touchscreen=0" />
 				<Compiler>
 					<Add option="-O2" />
 					<Add directory="../SFML-2.2/include" />
@@ -99,6 +99,25 @@
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-framework OpenGL" />
+					<Add option="-framework Foundation" />
+					<Add library="sfml-audio" />
+					<Add library="sfml-graphics" />
+					<Add library="sfml-system" />
+					<Add library="sfml-window" />
+					<Add library="sfml-network" />
+				</Linker>
+			</Target>
+			<Target title="MacOS Debug">
+				<Option output=".bin/Release/EmptyEpsilon" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DDEBUG" />
 					<Add option="-O2" />
 				</Compiler>
 				<Linker>
@@ -396,6 +415,8 @@
 		<Unit filename="src/ai/ai.h" />
 		<Unit filename="src/ai/aiFactory.cpp" />
 		<Unit filename="src/ai/aiFactory.h" />
+		<Unit filename="src/ai/fighterAI.cpp" />
+		<Unit filename="src/ai/fighterAI.h" />
 		<Unit filename="src/commsScriptInterface.cpp" />
 		<Unit filename="src/commsScriptInterface.h" />
 		<Unit filename="src/epsilonServer.cpp" />

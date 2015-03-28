@@ -66,6 +66,7 @@ def compile(filename, system, for_target='Release'):
 		shutil.copytree('/Library/Frameworks/sndfile.framework', frameworks_dir + '/sndfile.framework')
 		shutil.copytree('/Library/Frameworks/freetype.framework', frameworks_dir + '/freetype.framework')
 		shutil.copytree('resources', resources_dir + '/resources')
+		shutil.copytree('scripts', resources_dir + '/scripts')
 		shutil.copytree('packs', resources_dir + '/packs')
 	CC = 'gcc'
 	CXX = 'g++'
@@ -80,6 +81,15 @@ def compile(filename, system, for_target='Release'):
 	if system == "Windows" and platform.system() == "Windows":
 		CC = 'C:/codeblocks/mingw/bin/mingw32-' + CC
 		CXX = 'C:/codeblocks/mingw/bin/mingw32-' + CXX
+	if system == "Darwin":
+		mac_ver = platform.mac_ver()[0]
+		mac_ver_major = mac_ver.split('.')[0] + '.' + mac_ver.split('.')[1]
+		# system releases later than 10.5 might need this
+		if int(mac_ver.split('.')[1]) > 5:
+			FRAMEWORKS=' -framework CoreFoundation -framework sfml-graphics -framework sfml-window -framework sfml-system '
+			FRAMEWORKS= FRAMEWORKS + '-framework sfml-audio -framework sfml-network -framework OpenGL'
+			CXX='clang++ -stdlib=libstdc++ -lstdc++ '
+			LDFLAGS = LDFLAGS  + ' ' + FRAMEWORKS + ' '
 
 	if for_target == 'Release':
 		with open(".git/refs/heads/master", "r") as f:

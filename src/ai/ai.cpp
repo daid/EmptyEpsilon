@@ -26,9 +26,9 @@ bool ShipAI::canSwitchAI()
 
 void ShipAI::run(float delta)
 {
-    owner->targetRotation = owner->getRotation();
-    owner->warpRequest = 0.0;
-    owner->impulseRequest = 0.0f;
+    owner->target_rotation = owner->getRotation();
+    owner->warp_request = 0.0;
+    owner->impulse_request = 0.0f;
 
     updateWeaponState(delta);
     updateTarget();
@@ -58,15 +58,15 @@ void ShipAI::updateWeaponState(float delta)
         if (owner->weaponTube[n].state == WTS_Loaded && owner->weaponTube[n].type_loaded == MW_Homing)
             has_missiles = true;
     }
-    
+
     beam_weapon_range = 0;
-    for(int n=0; n<maxBeamWeapons; n++)
+    for(int n=0; n<max_beam_weapons; n++)
     {
-        if (owner->beamWeapons[n].range > 0)
+        if (owner->beam_weapons[n].range > 0)
         {
-            if (sf::angleDifference(owner->beamWeapons[n].direction, 0.0f) < owner->beamWeapons[n].arc / 2.0f)
+            if (sf::angleDifference(owner->beam_weapons[n].direction, 0.0f) < owner->beam_weapons[n].arc / 2.0f)
             {
-                beam_weapon_range = std::max(beam_weapon_range, owner->beamWeapons[n].range);
+                beam_weapon_range = std::max(beam_weapon_range, owner->beam_weapons[n].range);
             }
             has_beams = true;
             break;
@@ -82,7 +82,7 @@ void ShipAI::updateTarget()
     EAIOrder orders = owner->getOrder();
     sf::Vector2f order_target_location = owner->getOrderTargetLocation();
     P<SpaceObject> order_target = owner->getOrderTarget();
-    
+
     //Check if we need to lose our target because it entered a nebula.
     if (target && target->canHideInNebula() && (target->getPosition() - position) > 5000.0f && Nebula::blockedByNebula(position, target->getPosition()))
     {
@@ -114,7 +114,7 @@ void ShipAI::updateTarget()
     }
     if (orders == AI_Attack)
         new_target = order_target;
-    
+
     //Check if we need to drop the current target
     if (target)
     {
@@ -146,9 +146,9 @@ void ShipAI::updateTarget()
         }
     }
     if (!target)
-        owner->targetId = -1;
+        owner->target_id = -1;
     else
-        owner->targetId = target->getMultiplayerId();
+        owner->target_id = target->getMultiplayerId();
 }
 
 void ShipAI::runOrders()
@@ -168,7 +168,7 @@ void ShipAI::runOrders()
             P<SpaceObject> new_target = findBestTarget(owner->getPosition(), 50000);
             if (new_target)
             {
-                owner->targetId = new_target->getMultiplayerId();
+                owner->target_id = new_target->getMultiplayerId();
             }else{
                 sf::Vector2f diff = owner->getOrderTargetLocation() - owner->getPosition();
                 if (diff < 1000.0f)
@@ -262,14 +262,14 @@ void ShipAI::runAttack(P<SpaceObject> target)
                 float target_angle = calculateFiringSolution(target);
                 if (target_angle != std::numeric_limits<float>::infinity())
                     owner->fireTube(n, target_angle);
-                missile_fire_delay = owner->tubeLoadTime / owner->weapon_tubes / 2.0;
+                missile_fire_delay = owner->tube_load_time / owner->weapon_tubes / 2.0;
             }
         }
     }
 
     if (owner->getOrder() == AI_StandGround)
     {
-        owner->targetRotation = sf::vector2ToAngle(position_diff);
+        owner->target_rotation = sf::vector2ToAngle(position_diff);
     }else{
         flyTowards(target->getPosition(), attack_distance);
     }
@@ -278,26 +278,26 @@ void ShipAI::runAttack(P<SpaceObject> target)
 void ShipAI::flyTowards(sf::Vector2f target, float keep_distance)
 {
     pathPlanner.plan(owner->getPosition(), target);
-    
+
     if (pathPlanner.route.size() > 0)
     {
         if (owner->docking_state == DS_Docked)
             owner->requestUndock();
-    
+
         sf::Vector2f diff = pathPlanner.route[0] - owner->getPosition();
         float distance = sf::length(diff);
-        
+
         //Normal flying towards target code
-        owner->targetRotation = sf::vector2ToAngle(diff);
-        float rotation_diff = fabs(sf::angleDifference(owner->targetRotation, owner->getRotation()));
-        
-        if (owner->hasWarpdrive && rotation_diff < 30.0 && distance > 2000)
+        owner->target_rotation = sf::vector2ToAngle(diff);
+        float rotation_diff = fabs(sf::angleDifference(owner->target_rotation, owner->getRotation()));
+
+        if (owner->has_warp_drive && rotation_diff < 30.0 && distance > 2000)
         {
-            owner->warpRequest = 1.0;
+            owner->warp_request = 1.0;
         }else{
-            owner->warpRequest = 0.0;
+            owner->warp_request = 0.0;
         }
-        if (distance > 10000 && owner->hasJumpdrive && owner->jumpDelay <= 0.0)
+        if (distance > 10000 && owner->has_jump_drive && owner->jump_delay <= 0.0)
         {
             if (rotation_diff < 1.0)
             {
@@ -311,20 +311,20 @@ void ShipAI::flyTowards(sf::Vector2f target, float keep_distance)
                 if (jump > 10000)
                     jump = 10000;
                 jump += random(-1500, 1500);
-                owner->initJump(jump / 1000);
+                owner->initializeJump(jump / 1000);
             }
         }
         if (pathPlanner.route.size() > 1)
             keep_distance = 0.0;
 
-        if (distance > keep_distance + owner->impulseMaxSpeed)
-            owner->impulseRequest = 1.0f;
+        if (distance > keep_distance + owner->impulse_max_speed)
+            owner->impulse_request = 1.0f;
         else
-            owner->impulseRequest = (distance - keep_distance) / owner->impulseMaxSpeed;
+            owner->impulse_request = (distance - keep_distance) / owner->impulse_max_speed;
         if (rotation_diff > 90)
-            owner->impulseRequest = -owner->impulseRequest;
+            owner->impulse_request = -owner->impulse_request;
         else if (rotation_diff < 45)
-            owner->impulseRequest *= 1.0 - ((rotation_diff - 45.0f) / 45.0);
+            owner->impulse_request *= 1.0 - ((rotation_diff - 45.0f) / 45.0);
     }
 }
 
@@ -340,24 +340,24 @@ void ShipAI::flyFormation(P<SpaceObject> target, sf::Vector2f offset)
 
         //Formation flying code
         float r = owner->getRadius() * 5.0;
-        owner->targetRotation = sf::vector2ToAngle(diff);
+        owner->target_rotation = sf::vector2ToAngle(diff);
         if (distance > r)
         {
-            float angle_diff = sf::angleDifference(owner->targetRotation, owner->getRotation());
+            float angle_diff = sf::angleDifference(owner->target_rotation, owner->getRotation());
             if (angle_diff > 10.0)
-                owner->impulseRequest = 0.0;
+                owner->impulse_request = 0.0;
             else if (angle_diff > 5.0)
-                owner->impulseRequest = (10.0 - angle_diff) / 5.0;
+                owner->impulse_request = (10.0 - angle_diff) / 5.0;
             else
-                owner->impulseRequest = 1.0;
+                owner->impulse_request = 1.0;
         }else{
             if (distance > r / 2.0)
             {
-                owner->targetRotation += sf::angleDifference(owner->targetRotation, target->getRotation()) * (1.0 - distance / r);
-                owner->impulseRequest = distance / r;
+                owner->target_rotation += sf::angleDifference(owner->target_rotation, target->getRotation()) * (1.0 - distance / r);
+                owner->impulse_request = distance / r;
             }else{
-                owner->targetRotation = target->getRotation();
-                owner->impulseRequest = 0.0;
+                owner->target_rotation = target->getRotation();
+                owner->impulse_request = 0.0;
             }
         }
     }else{
@@ -395,19 +395,19 @@ float ShipAI::targetScore(P<SpaceObject> target)
     //sf::Vector2f position_difference_normal = position_difference / distance;
     //float rel_velocity = dot(target->getVelocity(), position_difference_normal) - dot(getVelocity(), position_difference_normal);
     float angle_difference = sf::angleDifference(owner->getRotation(), sf::vector2ToAngle(position_difference));
-    float score = -distance - fabsf(angle_difference / owner->rotationSpeed * owner->impulseMaxSpeed) * 1.5f;
+    float score = -distance - fabsf(angle_difference / owner->turn_speed * owner->impulse_max_speed) * 1.5f;
     if (P<SpaceStation>(target))
         score -= 5000;
     if (distance < 5000 && has_missiles)
         score += 500;
-    
+
     if (distance < beam_weapon_range)
     {
-        for(int n=0; n<maxBeamWeapons; n++)
+        for(int n=0; n<max_beam_weapons; n++)
         {
-            if (distance < owner->beamWeapons[n].range)
+            if (distance < owner->beam_weapons[n].range)
             {
-                if (fabs(sf::angleDifference(angle_difference, owner->beamWeapons[n].direction)) < owner->beamWeapons[n].arc / 2.0f)
+                if (fabs(sf::angleDifference(angle_difference, owner->beam_weapons[n].direction)) < owner->beam_weapons[n].arc / 2.0f)
                     score += 1000;
             }
         }
@@ -435,15 +435,15 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target)
     float missile_speed = 200.0f;
     float missile_turn_rate = 10.0f;
     float turn_radius = ((360.0f / missile_turn_rate) * missile_speed) / (2.0f * M_PI);
-    
+
     for(int iterations=0; iterations<10; iterations++)
     {
         float angle_diff = sf::angleDifference(missile_angle, owner->getRotation());
-        
+
         float left_or_right = 90;
         if (angle_diff > 0)
             left_or_right = -90;
-        
+
         sf::Vector2f turn_center = owner->getPosition() + sf::vector2FromAngle(owner->getRotation() + left_or_right) * turn_radius;
         sf::Vector2f turn_exit = turn_center + sf::vector2FromAngle(missile_angle - left_or_right) * turn_radius;
         if (target_velocity_length < 1.0f)
@@ -469,7 +469,7 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target)
             // When both the missile and the target are at the same position at the same time, we can take a shot!
             if (fabsf(time_target - time_missile) < time_radius)
                 return missile_angle;
-            
+
             //When we cannot hit the target with this setup yet. Calculate a new intersection target, and aim for that.
             float guessed_impact_time = (time_target * target_velocity_length / (target_velocity_length + missile_speed)) + (time_missile * missile_speed / (target_velocity_length + missile_speed));
             sf::Vector2f new_target_position = target->getPosition() + target_velocity * guessed_impact_time;

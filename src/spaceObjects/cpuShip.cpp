@@ -14,6 +14,9 @@
 /// Example: CpuShip():setShipTemplate("Fighter"):setPosition(random(-10000, 10000), random(0, 3000)):setFaction("Human Navy"):orderRoaming():setScanned(true)
 REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceShip)
 {
+    /// Switch the AI to a different type. AI can be set per ship, or left per default which will be taken from the shipTemplate then.
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, setAI);
+    
     /// Order this ship to stand still and do nothing.
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderIdle);
     /// Order this ship to roam around the world and attack targets
@@ -44,12 +47,21 @@ CpuShip::CpuShip()
     orders = AI_Idle;
 
     setRotation(random(0, 360));
-    targetRotation = getRotation();
+    target_rotation = getRotation();
     shields_active = true;
 
     comms_script_name = "comms_ship.lua";
-    
-    ai = ShipAIFactory::getAIFactory("default")(this);
+
+    if (game_server)
+        ai = ShipAIFactory::getAIFactory("default")(this);
+    else
+        ai = NULL;
+}
+
+CpuShip::~CpuShip()
+{
+    if (ai)
+        delete ai;
 }
 
 void CpuShip::update(float delta)
@@ -58,11 +70,30 @@ void CpuShip::update(float delta)
 
     if (!game_server)
         return;
-    
+
     for(int n=0; n<SYS_COUNT; n++)
         systems[n].health = std::min(1.0f, systems[n].health + delta * auto_system_repair_per_second);
 
+    if (new_ai_name.length() && ai->canSwitchAI())
+    {
+        shipAIFactoryFunc_t f = ShipAIFactory::getAIFactory(new_ai_name);
+        delete ai;
+        ai = f(this);
+        new_ai_name = "";
+    }
     ai->run(delta);
+}
+
+void CpuShip::setShipTemplate(string template_name)
+{
+    SpaceShip::setShipTemplate(template_name);
+
+    new_ai_name = ship_template->default_ai_name;
+}
+
+void CpuShip::setAI(string new_ai)
+{
+    new_ai_name = new_ai;
 }
 
 void CpuShip::orderIdle()
@@ -72,20 +103,20 @@ void CpuShip::orderIdle()
 
 void CpuShip::orderRoaming()
 {
-    targetRotation = getRotation();
+    target_rotation = getRotation();
     orders = AI_Roaming;
 }
 
 void CpuShip::orderRoamingAt(sf::Vector2f position)
 {
-    targetRotation = getRotation();
+    target_rotation = getRotation();
     orders = AI_Roaming;
     order_target_location = position;
 }
 
 void CpuShip::orderStandGround()
 {
-    targetRotation = getRotation();
+    target_rotation = getRotation();
     orders = AI_StandGround;
 }
 

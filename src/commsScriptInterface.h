@@ -3,9 +3,11 @@
 
 #include "engine.h"
 
+///Forward declarations
 class ScriptObject;
 class PlayerSpaceship;
 class SpaceObject;
+
 class CommsScriptInterface : public sf::NonCopyable
 {
 public:
@@ -19,6 +21,5 @@ public:
     void commChannelMessage(int32_t message_id);
 };
 
-#include "spaceObjects/playerSpaceship.h"
 
 #endif//COMMS_SCRIPT_INTERFACE_H

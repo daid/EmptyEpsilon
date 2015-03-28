@@ -10,10 +10,10 @@ If there is anyone willing to contribute, we're mostly looking for awesome model
 
 Contributing
 ===========
-Some general contributing rules.
-1. This project is a dictatorship. Yes it's open source, but we'd much rather spend time on building what we like then arguing with people. 
-2. Be precise in your issues; Why do you post the issue, what do you expect, what is happening, why is your feature worth time, what operating system, etc. Issues that are not clear will be subject to rule 1. with extreme prejudice.
-3. Despite the above two, input/ feedback / people playing this game is very much valued. If you have ideas/suggestings/ want to donate beer, drop a line.
+Some general contributing rules.<br>
+1. This project is a dictatorship. Yes it's open source, but we'd much rather spend time on building what we like then arguing with people. <br>
+2. Be precise in your issues; Why do you post the issue, what do you expect, what is happening, why is your feature worth time, what operating system, etc. Issues that are not clear will be subject to rule 1. with extreme prejudice.<br>
+3. Despite the above two, input/ feedback / people playing this game is very much valued. If you have ideas/suggestings/ want to donate beer, drop a line.<br>
 
 Contributing (Donation)
 ===========
@@ -21,10 +21,10 @@ If you don't have the skills to help coding / create models, but you do want to 
 
 Contributing (Coder)
 ============
-If you are a coder and want to contribute, there are a few things to take into account. 
-1. The code is a undocumented mess at this point. We're working on fixing that.
-2. We use the following convention; member values are seperated with underscores, classes are with HighCamelCase and functions with lowCamelCase. 
-3. Use a single pull request to change a single thing. Want to change multiple things? Multiple requests.
+If you are a coder and want to contribute, there are a few things to take into account. <br>
+1. The code is a undocumented mess at this point. We're working on fixing that.<br>
+2. We use the following convention; member values are seperated with underscores, classes are with HighCamelCase and functions with lowCamelCase.<br>
+3. Use a single pull request to change a single thing. Want to change multiple things? Multiple requests.<br>
 
 Contributing (Artist)
 ==============

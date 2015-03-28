@@ -90,24 +90,24 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     setCollisionPhysics(true, false);
 
     engine_emit_delay = 0.0;
-    targetRotation = getRotation();
-    impulseRequest = 0;
-    currentImpulse = 0;
-    hasWarpdrive = true;
-    warpRequest = 0.0;
-    currentWarp = 0.0;
-    hasJumpdrive = true;
-    jumpDistance = 0.0;
-    jumpDelay = 0.0;
-    tubeLoadTime = 8.0;
+    target_rotation = getRotation();
+    impulse_request = 0;
+    current_impulse = 0;
+    has_warp_drive = true;
+    warp_request = 0.0;
+    current_warp = 0.0;
+    has_jump_drive = true;
+    jump_distance = 0.0;
+    jump_delay = 0.0;
+    tube_load_time = 8.0;
     weapon_tubes = 0;
-    rotationSpeed = 10.0;
-    impulseMaxSpeed = 600.0;
-    warpSpeedPerWarpLevel = 1000.0;
+    turn_speed = 10.0;
+    impulse_max_speed = 600.0;
+    warp_speed_per_warp_level = 1000.0;
     combat_maneuver_delay = 0.0;
     combat_maneuver = CM_Boost;
     combat_maneuver_active = 0.0;
-    targetId = -1;
+    target_id = -1;
     hull_strength = hull_max = 70;
     shields_active = false;
     front_shield = rear_shield = front_shield_max = rear_shield_max = 50;
@@ -117,25 +117,25 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     beam_system_target = SYS_None;
     shield_frequency = irandom(0, max_frequency);
     docking_state = DS_NotDocking;
-    impulseAcceleration = 0.2;
+    impulse_acceleration = 20.0;
 
     registerMemberReplication(&ship_callsign);
-    registerMemberReplication(&targetRotation, 1.5);
-    registerMemberReplication(&impulseRequest, 0.1);
-    registerMemberReplication(&currentImpulse, 0.5);
-    registerMemberReplication(&hasWarpdrive);
-    registerMemberReplication(&warpRequest, 0.1);
-    registerMemberReplication(&currentWarp, 0.1);
-    registerMemberReplication(&hasJumpdrive);
-    registerMemberReplication(&jumpDelay, 0.5);
-    registerMemberReplication(&tubeLoadTime);
+    registerMemberReplication(&target_rotation, 1.5);
+    registerMemberReplication(&impulse_request, 0.1);
+    registerMemberReplication(&current_impulse, 0.5);
+    registerMemberReplication(&has_warp_drive);
+    registerMemberReplication(&warp_request, 0.1);
+    registerMemberReplication(&current_warp, 0.1);
+    registerMemberReplication(&has_jump_drive);
+    registerMemberReplication(&jump_delay, 0.5);
+    registerMemberReplication(&tube_load_time);
     registerMemberReplication(&weapon_tubes);
-    registerMemberReplication(&targetId);
-    registerMemberReplication(&rotationSpeed);
-    registerMemberReplication(&impulseMaxSpeed);
-    registerMemberReplication(&impulseAcceleration);
-    registerMemberReplication(&warpSpeedPerWarpLevel);
-    registerMemberReplication(&templateName);
+    registerMemberReplication(&target_id);
+    registerMemberReplication(&turn_speed);
+    registerMemberReplication(&impulse_max_speed);
+    registerMemberReplication(&impulse_acceleration);
+    registerMemberReplication(&warp_speed_per_warp_level);
+    registerMemberReplication(&template_name);
     registerMemberReplication(&ship_type_name);
     registerMemberReplication(&front_shield, 1.0);
     registerMemberReplication(&rear_shield, 1.0);
@@ -161,22 +161,22 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         registerMemberReplication(&systems[n].health, 0.1);
     }
 
-    for(int n=0; n<maxBeamWeapons; n++)
+    for(int n=0; n<max_beam_weapons; n++)
     {
-        beamWeapons[n].arc = 0;
-        beamWeapons[n].direction = 0;
-        beamWeapons[n].range = 0;
-        beamWeapons[n].cycleTime = 6.0;
-        beamWeapons[n].cooldown = 0.0;
-        beamWeapons[n].damage = 1.0;
+        beam_weapons[n].arc = 0;
+        beam_weapons[n].direction = 0;
+        beam_weapons[n].range = 0;
+        beam_weapons[n].cycleTime = 6.0;
+        beam_weapons[n].cooldown = 0.0;
+        beam_weapons[n].damage = 1.0;
 
-        registerMemberReplication(&beamWeapons[n].arc);
-        registerMemberReplication(&beamWeapons[n].direction);
-        registerMemberReplication(&beamWeapons[n].range);
-        registerMemberReplication(&beamWeapons[n].cycleTime);
-        registerMemberReplication(&beamWeapons[n].cooldown, 0.5);
+        registerMemberReplication(&beam_weapons[n].arc);
+        registerMemberReplication(&beam_weapons[n].direction);
+        registerMemberReplication(&beam_weapons[n].range);
+        registerMemberReplication(&beam_weapons[n].cycleTime);
+        registerMemberReplication(&beam_weapons[n].cooldown, 0.5);
     }
-    for(int n=0; n<maxWeaponTubes; n++)
+    for(int n=0; n<max_weapon_tubes; n++)
     {
         weaponTube[n].type_loaded = MW_None;
         weaponTube[n].state = WTS_Empty;
@@ -198,41 +198,41 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         ship_callsign = gameGlobalInfo->getNextShipCallsign();
 }
 
-void SpaceShip::setShipTemplate(string templateName)
+void SpaceShip::setShipTemplate(string template_name)
 {
-    P<ShipTemplate> new_ship_template = ShipTemplate::getTemplate(templateName);
+    P<ShipTemplate> new_ship_template = ShipTemplate::getTemplate(template_name);
     if (!new_ship_template)
     {
-        LOG(ERROR) << "Failed to find ship template: " << templateName;
+        LOG(ERROR) << "Failed to find ship template: " << template_name;
         return;
     }
 
     this->ship_template = new_ship_template;
-    this->templateName = templateName;
-    this->ship_type_name = templateName;
+    this->template_name = template_name;
+    this->ship_type_name = template_name;
 
-    for(int n=0; n<maxBeamWeapons; n++)
+    for(int n=0; n<max_beam_weapons; n++)
     {
-        beamWeapons[n].arc = ship_template->beams[n].arc;
-        beamWeapons[n].direction = ship_template->beams[n].direction;
-        beamWeapons[n].range = ship_template->beams[n].range;
-        beamWeapons[n].cycleTime = ship_template->beams[n].cycle_time;
-        beamWeapons[n].damage = ship_template->beams[n].damage;
+        beam_weapons[n].arc = ship_template->beams[n].arc;
+        beam_weapons[n].direction = ship_template->beams[n].direction;
+        beam_weapons[n].range = ship_template->beams[n].range;
+        beam_weapons[n].cycleTime = ship_template->beams[n].cycle_time;
+        beam_weapons[n].damage = ship_template->beams[n].damage;
     }
     weapon_tubes = ship_template->weapon_tubes;
     hull_strength = hull_max = ship_template->hull;
-    front_shield = ship_template->frontShields;
-    rear_shield = ship_template->rearShields;
-    front_shield_max = ship_template->frontShields;
-    rear_shield_max = ship_template->rearShields;
-    impulseMaxSpeed = ship_template->impulseSpeed;
-    impulseAcceleration = ship_template->impulseAcceleration;
-    rotationSpeed = ship_template->turnSpeed;
-    hasWarpdrive = ship_template->warpSpeed > 0.0;
-    warpSpeedPerWarpLevel = ship_template->warpSpeed;
-    hasJumpdrive = ship_template->jumpDrive;
-    tubeLoadTime = ship_template->tube_load_time;
-    //shipTemplate->cloaking;
+    front_shield = ship_template->front_shields;
+    rear_shield = ship_template->rear_shields;
+    front_shield_max = ship_template->front_shields;
+    rear_shield_max = ship_template->rear_shields;
+    impulse_max_speed = ship_template->impulse_speed;
+    impulse_acceleration = ship_template->impulse_acceleration;
+    turn_speed = ship_template->turn_speed;
+    has_warp_drive = ship_template->warp_speed > 0.0;
+    warp_speed_per_warp_level = ship_template->warp_speed;
+    has_jump_drive = ship_template->has_jump_drive;
+    tube_load_time = ship_template->tube_load_time;
+    //shipTemplate->has_cloaking;
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = weapon_storage_max[n] = ship_template->weapon_storage[n];
 
@@ -244,10 +244,10 @@ void SpaceShip::draw3D()
     if (!ship_template) return;
 
     glScalef(ship_template->scale, ship_template->scale, ship_template->scale);
-    glTranslatef(ship_template->renderOffset.x, ship_template->renderOffset.y, ship_template->renderOffset.z);
-    objectShader.setParameter("baseMap", *textureManager.getTexture(ship_template->colorTexture));
-    objectShader.setParameter("illuminationMap", *textureManager.getTexture(ship_template->illuminationTexture));
-    objectShader.setParameter("specularMap", *textureManager.getTexture(ship_template->specularTexture));
+    glTranslatef(ship_template->render_offset.x, ship_template->render_offset.y, ship_template->render_offset.z);
+    objectShader.setParameter("baseMap", *textureManager.getTexture(ship_template->color_texture));
+    objectShader.setParameter("illuminationMap", *textureManager.getTexture(ship_template->illumination_texture));
+    objectShader.setParameter("specularMap", *textureManager.getTexture(ship_template->specular_texture));
     sf::Shader::bind(&objectShader);
     Mesh* m = Mesh::getMesh(ship_template->model);
     m->render();
@@ -276,11 +276,11 @@ void SpaceShip::draw3DTransparent()
             m->render();
     }
 
-    if (hasJumpdrive && jumpDelay > 0.0f)
+    if (has_jump_drive && jump_delay > 0.0f)
     {
         glScalef(ship_template->scale, ship_template->scale, ship_template->scale);
         glDepthFunc(GL_EQUAL);
-        float f = 1.0f - (jumpDelay / 10.0f);
+        float f = 1.0f - (jump_delay / 10.0f);
         glColor4f(f, f, f, 1);
         basicShader.setParameter("textureMap", *textureManager.getTexture("electric_sphere_texture.png"));
         sf::Shader::bind(&basicShader);
@@ -294,12 +294,12 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
 {
     if (!long_range && ((scanned_by_player == SS_FullScan) || !my_spaceship))
     {
-        for(int n=0; n<maxBeamWeapons; n++)
+        for(int n=0; n<max_beam_weapons; n++)
         {
-            if (beamWeapons[n].range == 0.0) continue;
+            if (beam_weapons[n].range == 0.0) continue;
             sf::Color color = sf::Color::Red;
-            if (beamWeapons[n].cooldown > 0)
-                color = sf::Color(255, 255 * (beamWeapons[n].cooldown / beamWeapons[n].cycleTime), 0);
+            if (beam_weapons[n].cooldown > 0)
+                color = sf::Color(255, 255 * (beam_weapons[n].cooldown / beam_weapons[n].cycleTime), 0);
 
             sf::Vector2f beam_offset = sf::rotateVector(sf::Vector2f(ship_template->beamPosition[n].x, ship_template->beamPosition[n].y) * ship_template->scale * scale, getRotation());
             sf::VertexArray a(sf::LinesStrip, 3);
@@ -307,26 +307,26 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
             a[1].color = color;
             a[2].color = sf::Color(color.r, color.g, color.b, 0);
             a[0].position = beam_offset + position;
-            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction + beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale;
-            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction + beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale * 1.3f;
+            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_weapons[n].direction + beam_weapons[n].arc / 2.0f)) * beam_weapons[n].range * scale;
+            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_weapons[n].direction + beam_weapons[n].arc / 2.0f)) * beam_weapons[n].range * scale * 1.3f;
             window.draw(a);
-            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction - beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale;
-            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction - beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale * 1.3f;
+            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_weapons[n].direction - beam_weapons[n].arc / 2.0f)) * beam_weapons[n].range * scale;
+            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_weapons[n].direction - beam_weapons[n].arc / 2.0f)) * beam_weapons[n].range * scale * 1.3f;
             window.draw(a);
 
-            int arcPoints = int(beamWeapons[n].arc / 10) + 1;
+            int arcPoints = int(beam_weapons[n].arc / 10) + 1;
             sf::VertexArray arc(sf::LinesStrip, arcPoints);
             for(int i=0; i<arcPoints; i++)
             {
                 arc[i].color = color;
-                arc[i].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction - beamWeapons[n].arc / 2.0f + 10 * i)) * beamWeapons[n].range * scale;
+                arc[i].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_weapons[n].direction - beam_weapons[n].arc / 2.0f + 10 * i)) * beam_weapons[n].range * scale;
             }
-            arc[arcPoints-1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beamWeapons[n].direction + beamWeapons[n].arc / 2.0f)) * beamWeapons[n].range * scale;
+            arc[arcPoints-1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_weapons[n].direction + beam_weapons[n].arc / 2.0f)) * beam_weapons[n].range * scale;
             window.draw(arc);
         }
     }else{
         if (my_spaceship != this)
-            GUI::text(sf::FloatRect(position.x, position.y - 15, 0, 0), getCallSign(), AlignCenter, 12);
+            GUI::drawText(sf::FloatRect(position.x, position.y - 15, 0, 0), getCallSign(), AlignCenter, 12);
     }
 
     sf::Sprite objectSprite;
@@ -361,9 +361,9 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
 
 void SpaceShip::update(float delta)
 {
-    if (!ship_template || ship_template->name != templateName)
+    if (!ship_template || ship_template->getName() != template_name)
     {
-        ship_template = ShipTemplate::getTemplate(templateName);
+        ship_template = ShipTemplate::getTemplate(template_name);
         if (!ship_template)
             return;
         ship_template->setCollisionData(this);
@@ -376,11 +376,11 @@ void SpaceShip::update(float delta)
             if (!docking_target)
                 docking_state = DS_NotDocking;
             else
-                targetRotation = sf::vector2ToAngle(getPosition() - docking_target->getPosition());
-            if (fabs(sf::angleDifference(targetRotation, getRotation())) < 10.0)
-                impulseRequest = -1.0;
+                target_rotation = sf::vector2ToAngle(getPosition() - docking_target->getPosition());
+            if (fabs(sf::angleDifference(target_rotation, getRotation())) < 10.0)
+                impulse_request = -1.0;
             else
-                impulseRequest = 0.0;
+                impulse_request = 0.0;
         }
         if (docking_state == DS_Docked)
         {
@@ -389,9 +389,9 @@ void SpaceShip::update(float delta)
                 docking_state = DS_NotDocking;
             }else{
                 setPosition(docking_target->getPosition() + sf::rotateVector(docking_offset, docking_target->getRotation()));
-                targetRotation = sf::vector2ToAngle(getPosition() - docking_target->getPosition());
+                target_rotation = sf::vector2ToAngle(getPosition() - docking_target->getPosition());
             }
-            impulseRequest = 0.0;
+            impulse_request = 0.0;
         }
     }
 
@@ -416,82 +416,86 @@ void SpaceShip::update(float delta)
     if (rear_shield_hit_effect > 0)
         rear_shield_hit_effect -= delta;
 
-    float rotationDiff = sf::angleDifference(getRotation(), targetRotation);
+    float rotationDiff = sf::angleDifference(getRotation(), target_rotation);
 
     if (rotationDiff > 1.0)
-        setAngularVelocity(rotationSpeed * getSystemEffectiveness(SYS_Maneuver));
+        setAngularVelocity(turn_speed * getSystemEffectiveness(SYS_Maneuver));
     else if (rotationDiff < -1.0)
-        setAngularVelocity(-rotationSpeed * getSystemEffectiveness(SYS_Maneuver));
+        setAngularVelocity(-turn_speed * getSystemEffectiveness(SYS_Maneuver));
     else
-        setAngularVelocity(rotationDiff * rotationSpeed * getSystemEffectiveness(SYS_Maneuver));
+        setAngularVelocity(rotationDiff * turn_speed * getSystemEffectiveness(SYS_Maneuver));
 
-    if ((hasJumpdrive && jumpDelay > 0) || (hasWarpdrive && warpRequest > 0))
+    if ((has_jump_drive && jump_delay > 0) || (has_warp_drive && warp_request > 0))
     {
         if (WarpJammer::isWarpJammed(getPosition()))
         {
-            jumpDelay = 0;
-            warpRequest = 0.0f;
+            jump_delay = 0;
+            warp_request = 0.0f;
         }
     }
-    if (hasJumpdrive && jumpDelay > 0)
+    if (has_jump_drive && jump_delay > 0)
     {
-        if (currentImpulse > 0.0)
+        if (current_impulse > 0.0)
         {
-            currentImpulse -= delta * impulseAcceleration;
-            if (currentImpulse < 0.0)
-                currentImpulse = 0.0;
+            if (impulse_max_speed > 0)
+                current_impulse -= delta * (impulse_acceleration / impulse_max_speed);
+            if (current_impulse < 0.0)
+                current_impulse = 0.0;
         }
-        if (currentWarp > 0.0)
+        if (current_warp > 0.0)
         {
-            currentWarp -= delta;
-            if (currentWarp < 0.0)
-                currentWarp = 0.0;
+            current_warp -= delta;
+            if (current_warp < 0.0)
+                current_warp = 0.0;
         }
-        jumpDelay -= delta * getSystemEffectiveness(SYS_JumpDrive);
-        if (jumpDelay <= 0.0)
+        jump_delay -= delta * getSystemEffectiveness(SYS_JumpDrive);
+        if (jump_delay <= 0.0)
         {
-            executeJump(jumpDistance);
-            jumpDelay = 0.0;
+            executeJump(jump_distance);
+            jump_delay = 0.0;
         }
-    }else if (hasWarpdrive && (warpRequest > 0 || currentWarp > 0))
+    }else if (has_warp_drive && (warp_request > 0 || current_warp > 0))
     {
-        if (currentImpulse < 1.0)
+        if (current_impulse < 1.0)
         {
-            currentImpulse += delta * impulseAcceleration;
-            if (currentImpulse > 1.0)
-                currentImpulse = 1.0;
+            if (impulse_max_speed > 0)
+                current_impulse += delta * (impulse_acceleration / impulse_max_speed);
+            if (current_impulse > 1.0)
+                current_impulse = 1.0;
         }else{
-            if (currentWarp < warpRequest)
+            if (current_warp < warp_request)
             {
-                currentWarp += delta;
-                if (currentWarp > warpRequest)
-                    currentWarp = warpRequest;
-            }else if (currentWarp > warpRequest)
+                current_warp += delta;
+                if (current_warp > warp_request)
+                    current_warp = warp_request;
+            }else if (current_warp > warp_request)
             {
-                currentWarp -= delta;
-                if (currentWarp < warpRequest)
-                    currentWarp = warpRequest;
+                current_warp -= delta;
+                if (current_warp < warp_request)
+                    current_warp = warp_request;
             }
         }
     }else{
-        currentWarp = 0.0;
-        if (impulseRequest > 1.0)
-            impulseRequest = 1.0;
-        if (impulseRequest < -1.0)
-            impulseRequest = -1.0;
-        if (currentImpulse < impulseRequest)
+        current_warp = 0.0;
+        if (impulse_request > 1.0)
+            impulse_request = 1.0;
+        if (impulse_request < -1.0)
+            impulse_request = -1.0;
+        if (current_impulse < impulse_request)
         {
-            currentImpulse += delta * impulseAcceleration;
-            if (currentImpulse > impulseRequest)
-                currentImpulse = impulseRequest;
-        }else if (currentImpulse > impulseRequest)
+            if (impulse_max_speed > 0)
+                current_impulse += delta * (impulse_acceleration / impulse_max_speed);
+            if (current_impulse > impulse_request)
+                current_impulse = impulse_request;
+        }else if (current_impulse > impulse_request)
         {
-            currentImpulse -= delta * impulseAcceleration;
-            if (currentImpulse < impulseRequest)
-                currentImpulse = impulseRequest;
+            if (impulse_max_speed > 0)
+                current_impulse -= delta * (impulse_acceleration / impulse_max_speed);
+            if (current_impulse < impulse_request)
+                current_impulse = impulse_request;
         }
     }
-    setVelocity(sf::vector2FromAngle(getRotation()) * (currentImpulse * impulseMaxSpeed * getSystemEffectiveness(SYS_Impulse) + currentWarp * warpSpeedPerWarpLevel * getSystemEffectiveness(SYS_Warp)));
+    setVelocity(sf::vector2FromAngle(getRotation()) * (current_impulse * impulse_max_speed * getSystemEffectiveness(SYS_Impulse) + current_warp * warp_speed_per_warp_level * getSystemEffectiveness(SYS_Warp)));
 
     if (combat_maneuver_active > 0)
     {
@@ -499,13 +503,13 @@ void SpaceShip::update(float delta)
         switch(combat_maneuver)
         {
         case CM_Boost:
-            setVelocity(getVelocity() + sf::vector2FromAngle(getRotation()) * impulseMaxSpeed * getSystemEffectiveness(SYS_Impulse) * 10.0f);
+            setVelocity(getVelocity() + sf::vector2FromAngle(getRotation()) * impulse_max_speed * getSystemEffectiveness(SYS_Impulse) * 10.0f);
             break;
         case CM_StrafeLeft:
-            setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() - 90) * impulseMaxSpeed * getSystemEffectiveness(SYS_Impulse) * 5.0f);
+            setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() - 90) * impulse_max_speed * getSystemEffectiveness(SYS_Impulse) * 5.0f);
             break;
         case CM_StrafeRight:
-            setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() + 90) * impulseMaxSpeed * getSystemEffectiveness(SYS_Impulse) * 5.0f);
+            setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() + 90) * impulse_max_speed * getSystemEffectiveness(SYS_Impulse) * 5.0f);
             break;
         case CM_Turn:
             setAngularVelocity(180.0 / 3.0);
@@ -514,27 +518,27 @@ void SpaceShip::update(float delta)
     }else if (combat_maneuver_delay > 0)
         combat_maneuver_delay -= delta * getSystemEffectiveness(SYS_Maneuver);
 
-    for(int n=0; n<maxBeamWeapons; n++)
+    for(int n=0; n<max_beam_weapons; n++)
     {
-        if (beamWeapons[n].cooldown > 0.0)
-            beamWeapons[n].cooldown -= delta * getSystemEffectiveness(SYS_BeamWeapons);
+        if (beam_weapons[n].cooldown > 0.0)
+            beam_weapons[n].cooldown -= delta * getSystemEffectiveness(SYS_BeamWeapons);
     }
 
     P<SpaceObject> target = getTarget();
-    if (game_server && target && delta > 0 && currentWarp == 0.0 && docking_state == DS_NotDocking) // Only fire beam weapons if we are on the server, have a target, and are not paused.
+    if (game_server && target && delta > 0 && current_warp == 0.0 && docking_state == DS_NotDocking) // Only fire beam weapons if we are on the server, have a target, and are not paused.
     {
-        for(int n=0; n<maxBeamWeapons; n++)
+        for(int n=0; n<max_beam_weapons; n++)
         {
-            if (target && isEnemy(target) && beamWeapons[n].cooldown <= 0.0)
+            if (target && isEnemy(target) && beam_weapons[n].cooldown <= 0.0)
             {
                 sf::Vector2f diff = target->getPosition() - (getPosition() + sf::rotateVector(sf::Vector2f(ship_template->beamPosition[n].x, ship_template->beamPosition[n].y) * ship_template->scale, getRotation()));
                 float distance = sf::length(diff) - target->getRadius() / 2.0;
                 float angle = sf::vector2ToAngle(diff);
 
-                if (distance < beamWeapons[n].range)
+                if (distance < beam_weapons[n].range)
                 {
-                    float angleDiff = sf::angleDifference(beamWeapons[n].direction + getRotation(), angle);
-                    if (abs(angleDiff) < beamWeapons[n].arc / 2.0)
+                    float angleDiff = sf::angleDifference(beam_weapons[n].direction + getRotation(), angle);
+                    if (abs(angleDiff) < beam_weapons[n].arc / 2.0)
                     {
                         fireBeamWeapon(n, target);
                     }
@@ -543,7 +547,7 @@ void SpaceShip::update(float delta)
         }
     }
 
-    for(int n=0; n<maxWeaponTubes; n++)
+    for(int n=0; n<max_weapon_tubes; n++)
     {
         if (weaponTube[n].delay > 0.0)
         {
@@ -571,7 +575,7 @@ void SpaceShip::update(float delta)
         engine_emit_delay -= delta;
     }else{
         engine_emit_delay += 0.1;
-        if (currentImpulse != 0.0 || getAngularVelocity() != 0.0)
+        if (current_impulse != 0.0 || getAngularVelocity() != 0.0)
         {
             for(unsigned int n=0; n<ship_template->engine_emitors.size(); n++)
             {
@@ -580,17 +584,17 @@ void SpaceShip::update(float delta)
                 sf::Vector3f color = ship_template->engine_emitors[n].color;
                 sf::Vector3f pos3d = sf::Vector3f(pos2d.x, pos2d.y, offset.z);
                 float scale = ship_template->scale * ship_template->engine_emitors[n].scale;
-                scale *= std::max(fabs(getAngularVelocity() / rotationSpeed), fabs(currentImpulse));
+                scale *= std::max(fabs(getAngularVelocity() / turn_speed), fabs(current_impulse));
                 ParticleEngine::spawn(pos3d, pos3d, color, color, scale, 0.0, 5.0);
             }
         }
 
-        if (hasJumpdrive && jumpDelay > 0.0f && ship_template)
+        if (has_jump_drive && jump_delay > 0.0f && ship_template)
         {
             Mesh* m = Mesh::getMesh(ship_template->model);
 
-            int cnt = (10.0f - jumpDelay);
-            for(int n=0; n<cnt; n++)
+            int count = (10.0f - jump_delay);
+            for(int n=0; n<count; n++)
             {
                 sf::Vector3f offset = m->randomPoint() * ship_template->scale;
                 sf::Vector2f pos2d = getPosition() + sf::rotateVector(sf::Vector2f(offset.x, offset.y), getRotation());
@@ -605,8 +609,8 @@ void SpaceShip::update(float delta)
 P<SpaceObject> SpaceShip::getTarget()
 {
     if (game_server)
-        return game_server->getObjectById(targetId);
-    return game_client->getObjectById(targetId);
+        return game_server->getObjectById(target_id);
+    return game_client->getObjectById(target_id);
 }
 
 void SpaceShip::executeJump(float distance)
@@ -632,7 +636,7 @@ void SpaceShip::fireBeamWeapon(int index, P<SpaceObject> target)
 
     sf::Vector2f hitLocation = target->getPosition() - sf::normalize(target->getPosition() - getPosition()) * target->getRadius();
 
-    beamWeapons[index].cooldown = beamWeapons[index].cycleTime;
+    beam_weapons[index].cooldown = beam_weapons[index].cycleTime;
     P<BeamEffect> effect = new BeamEffect();
     effect->setSource(this, ship_template->beamPosition[index] * ship_template->scale);
     effect->setTarget(target, hitLocation);
@@ -640,7 +644,7 @@ void SpaceShip::fireBeamWeapon(int index, P<SpaceObject> target)
     DamageInfo info(DT_Energy, hitLocation);
     info.frequency = beam_frequency;
     info.system_target = beam_system_target;
-    target->takeDamage(beamWeapons[index].damage, info);
+    target->takeDamage(beam_weapons[index].damage, info);
 }
 
 bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)
@@ -653,7 +657,7 @@ bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)
     return ship_template->size_class > ship->ship_template->size_class;
 }
 
-void SpaceShip::collision(Collisionable* other)
+void SpaceShip::collide(Collisionable* other)
 {
     if (docking_state == DS_Docking)
     {
@@ -670,12 +674,12 @@ void SpaceShip::collision(Collisionable* other)
 
 void SpaceShip::loadTube(int tubeNr, EMissileWeapons type)
 {
-    if (tubeNr >= 0 && tubeNr < maxWeaponTubes && type > MW_None && type < MW_Count)
+    if (tubeNr >= 0 && tubeNr < max_weapon_tubes && type > MW_None && type < MW_Count)
     {
         if (weaponTube[tubeNr].state == WTS_Empty && weapon_storage[type] > 0)
         {
             weaponTube[tubeNr].state = WTS_Loading;
-            weaponTube[tubeNr].delay = tubeLoadTime;
+            weaponTube[tubeNr].delay = tube_load_time;
             weaponTube[tubeNr].type_loaded = type;
             weapon_storage[type]--;
         }
@@ -692,8 +696,8 @@ void SpaceShip::fireTube(int tubeNr, float target_angle)
     }
 
     if (docking_state != DS_NotDocking) return;
-    if (currentWarp > 0.0) return;
-    if (tubeNr < 0 || tubeNr >= maxWeaponTubes) return;
+    if (current_warp > 0.0) return;
+    if (tubeNr < 0 || tubeNr >= max_weapon_tubes) return;
     if (weaponTube[tubeNr].state != WTS_Loaded) return;
 
     sf::Vector2f fireLocation = getPosition() + sf::rotateVector(ship_template->tubePosition[tubeNr], getRotation()) * ship_template->scale;
@@ -704,7 +708,7 @@ void SpaceShip::fireTube(int tubeNr, float target_angle)
             P<HomingMissile> missile = new HomingMissile();
             missile->owner = this;
             missile->setFactionId(getFactionId());
-            missile->target_id = targetId;
+            missile->target_id = target_id;
             missile->setPosition(fireLocation);
             missile->setRotation(getRotation());
             missile->target_angle = target_angle;
@@ -715,7 +719,7 @@ void SpaceShip::fireTube(int tubeNr, float target_angle)
             P<Nuke> missile = new Nuke();
             missile->owner = this;
             missile->setFactionId(getFactionId());
-            missile->target_id = targetId;
+            missile->target_id = target_id;
             missile->setPosition(fireLocation);
             missile->setRotation(getRotation());
             missile->target_angle = target_angle;
@@ -735,7 +739,7 @@ void SpaceShip::fireTube(int tubeNr, float target_angle)
             P<EMPMissile> missile = new EMPMissile();
             missile->owner = this;
             missile->setFactionId(getFactionId());
-            missile->target_id = targetId;
+            missile->target_id = target_id;
             missile->setPosition(fireLocation);
             missile->setRotation(getRotation());
             missile->target_angle = target_angle;
@@ -748,13 +752,13 @@ void SpaceShip::fireTube(int tubeNr, float target_angle)
     weaponTube[tubeNr].type_loaded = MW_None;
 }
 
-void SpaceShip::initJump(float distance)
+void SpaceShip::initializeJump(float distance)
 {
     if (docking_state != DS_NotDocking) return;
-    if (jumpDelay <= 0.0)
+    if (jump_delay <= 0.0)
     {
-        jumpDistance = distance;
-        jumpDelay = 10.0;
+        jump_distance = distance;
+        jump_delay = 10.0;
     }
 }
 
@@ -764,7 +768,7 @@ void SpaceShip::requestDock(P<SpaceObject> target)
         return;
     if (sf::length(getPosition() - target->getPosition()) > 1000 + target->getRadius())
         return;
-    if (hasJumpdrive && jumpDelay > 0.0f)
+    if (has_jump_drive && jump_delay > 0.0f)
         return;
 
     docking_state = DS_Docking;
@@ -775,11 +779,11 @@ void SpaceShip::requestUndock()
     if (docking_state == DS_Docked)
     {
         docking_state = DS_NotDocking;
-        impulseRequest = 0.5;
+        impulse_request = 0.5;
     }
 }
 
-void SpaceShip::takeDamage(float damageAmount, DamageInfo& info)
+void SpaceShip::takeDamage(float damage_amount, DamageInfo& info)
 {
     if (shields_active)
     {
@@ -799,21 +803,21 @@ void SpaceShip::takeDamage(float damageAmount, DamageInfo& info)
         }
         float shield_damage_factor = 1.25 - getSystemEffectiveness(system) * 0.25;
 
-        *shield -= damageAmount * frequency_damage_factor * shield_damage_factor;
+        *shield -= damage_amount * frequency_damage_factor * shield_damage_factor;
 
         if (*shield < 0)
         {
-            hullDamage(-(*shield) / frequency_damage_factor, info);
+            takeHullDamage(-(*shield) / frequency_damage_factor, info);
             *shield = 0.0;
         }else{
             *shield_hit_effect = 1.0;
         }
     }else{
-        hullDamage(damageAmount, info);
+        takeHullDamage(damage_amount, info);
     }
 }
 
-void SpaceShip::hullDamage(float damage_amount, DamageInfo& info)
+void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
 {
     if (info.type == DT_EMP)
         return;
@@ -883,9 +887,9 @@ bool SpaceShip::hasSystem(ESystem system)
     case SYS_COUNT:
         return false;
     case SYS_Warp:
-        return hasWarpdrive;
+        return has_warp_drive;
     case SYS_JumpDrive:
-        return hasJumpdrive;
+        return has_jump_drive;
     case SYS_MissileSystem:
         return weapon_tubes > 0;
     case SYS_FrontShield:
@@ -897,9 +901,9 @@ bool SpaceShip::hasSystem(ESystem system)
     case SYS_BeamWeapons:
         return true;
     case SYS_Maneuver:
-        return rotationSpeed > 0.0;
+        return turn_speed > 0.0;
     case SYS_Impulse:
-        return impulseMaxSpeed > 0.0;
+        return impulse_max_speed > 0.0;
     }
     return true;
 }
@@ -919,7 +923,7 @@ void SpaceShip::activateCombatManeuver(ECombatManeuver maneuver)
     combat_maneuver = maneuver;
     combat_maneuver_active = 3.0;
     if (maneuver == CM_Turn)
-        targetRotation += 180;
+        target_rotation += 180;
 }
 
 string SpaceShip::getCallSign()

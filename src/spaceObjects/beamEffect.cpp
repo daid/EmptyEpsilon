@@ -10,8 +10,11 @@ BeamEffect::BeamEffect()
 {
     setCollisionRadius(1.0);
     lifetime = 1.0;
+    sourceId = -1;
+    target_id = -1;
+    
     registerMemberReplication(&sourceId);
-    registerMemberReplication(&targetId);
+    registerMemberReplication(&target_id);
     registerMemberReplication(&sourceOffset);
     registerMemberReplication(&targetOffset);
     registerMemberReplication(&targetLocation, 1.0);
@@ -76,10 +79,10 @@ void BeamEffect::update(float delta)
     if (game_server)
     {
         source = game_server->getObjectById(sourceId);
-        target = game_server->getObjectById(targetId);
+        target = game_server->getObjectById(target_id);
     }else{
         source = game_client->getObjectById(sourceId);
-        target = game_client->getObjectById(targetId);
+        target = game_client->getObjectById(target_id);
     }
     if (source)
         setPosition(source->getPosition() + rotateVector(sf::Vector2f(sourceOffset.x, sourceOffset.y), source->getRotation()));
@@ -102,7 +105,7 @@ void BeamEffect::setSource(P<SpaceObject> source, sf::Vector3f offset)
 
 void BeamEffect::setTarget(P<SpaceObject> target, sf::Vector2f hitLocation)
 {
-    targetId = target->getMultiplayerId();
+    target_id = target->getMultiplayerId();
     float r = target->getRadius();
     hitLocation -= target->getPosition();
     targetOffset = sf::Vector3f(hitLocation.x + random(-r/2.0, r/2.0), hitLocation.y + random(-r/2.0, r/2.0), random(-r/4.0, r/4.0));

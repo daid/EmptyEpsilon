@@ -1,6 +1,6 @@
 #include "commsScriptInterface.h"
 #include "spaceObjects/cpuShip.h"
-
+#include "spaceObjects/playerSpaceship.h"
 static CommsScriptInterface* comms_script_interface = NULL;
 
 static int setCommsMessage(lua_State* L)
@@ -16,10 +16,10 @@ static int addCommsReply(lua_State* L)
 {
     if (!comms_script_interface)
         return 0;
-    
+
     comms_script_interface->ship->addCommsReply(comms_script_interface->reply_id, luaL_checkstring(L, 1));
     if (!lua_isfunction(L, 2)) return luaL_argerror(L, 2, "2nd argument to addCommsReply should be a function");
-    
+
     lua_pushlightuserdata(L, *comms_script_interface->scriptObject);
     lua_gettable(L, LUA_REGISTRYINDEX);
     lua_pushstring(L, ("__commsReply" + string(comms_script_interface->reply_id)).c_str());
@@ -38,7 +38,7 @@ bool CommsScriptInterface::openCommChannel(P<PlayerSpaceship> ship, P<SpaceObjec
     reply_id = 0;
     this->ship = ship;
     this->target = target;
-    
+
     if (scriptObject)
         scriptObject->destroy();
     scriptObject = new ScriptObject();

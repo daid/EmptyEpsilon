@@ -46,7 +46,7 @@ void GUI::render(sf::RenderTarget& window)
         }
         renderTarget = NULL;
     }
-    
+
     init = false;
 }
 
@@ -55,9 +55,9 @@ bool GUI::isActive()
     return gui_stack.back() == this;
 }
 
-void GUI::text(sf::FloatRect rect, string text, EAlign align, float fontSize, sf::Color color)
+void GUI::drawText(sf::FloatRect rect, string text, EAlign align, float font_size, sf::Color color)
 {
-    sf::Text textElement(text, mainFont, fontSize);
+    sf::Text textElement(text, mainFont, font_size);
     float y = 0;
     float x = 0;
     switch(align)
@@ -65,7 +65,7 @@ void GUI::text(sf::FloatRect rect, string text, EAlign align, float fontSize, sf
     case AlignLeft:
     case AlignRight:
     case AlignCenter:
-        y = rect.top + rect.height / 2.0 - (textElement.getLocalBounds().height + textElement.getLocalBounds().top) / 2.0 - fontSize / 8.0;
+        y = rect.top + rect.height / 2.0 - (textElement.getLocalBounds().height + textElement.getLocalBounds().top) / 2.0 - font_size / 8.0;
         break;
     case AlignTopLeft:
     case AlignTopRight:
@@ -93,9 +93,9 @@ void GUI::text(sf::FloatRect rect, string text, EAlign align, float fontSize, sf
     renderTarget->draw(textElement);
 }
 
-void GUI::vtext(sf::FloatRect rect, string text, EAlign align, float fontSize, sf::Color color)
+void GUI::drawVerticalText(sf::FloatRect rect, string text, EAlign align, float font_size, sf::Color color)
 {
-    sf::Text textElement(text, mainFont, fontSize);
+    sf::Text textElement(text, mainFont, font_size);
     textElement.setRotation(-90);
     float x = 0;
     float y = 0;
@@ -120,10 +120,10 @@ void GUI::vtext(sf::FloatRect rect, string text, EAlign align, float fontSize, s
     renderTarget->draw(textElement);
 }
 
-void GUI::progressBar(sf::FloatRect rect, float value, float min_value, float max_value, sf::Color color)
+void GUI::drawProgressBar(sf::FloatRect rect, float value, float min_value, float max_value, sf::Color color)
 {
     float f = (value - min_value) / (max_value - min_value);
-    
+
     if (color != sf::Color::White)
         draw9Cut(rect, "button_background", color, f);
     draw9Cut(rect, "border_background");
@@ -131,7 +131,7 @@ void GUI::progressBar(sf::FloatRect rect, float value, float min_value, float ma
         draw9Cut(rect, "button_background", color, f);
 }
 
-void GUI::vprogressBar(sf::FloatRect rect, float value, float min_value, float max_value, sf::Color color)
+void GUI::drawVerticalProgressBar(sf::FloatRect rect, float value, float min_value, float max_value, sf::Color color)
 {
     rect.left += 4.0;
     rect.top += 4.0;
@@ -152,10 +152,10 @@ void GUI::vprogressBar(sf::FloatRect rect, float value, float min_value, float m
     renderTarget->draw(bar_fill);
 }
 
-bool GUI::button(sf::FloatRect rect, string textValue, float fontSize)
+bool GUI::drawButton(sf::FloatRect rect, string text_value, float font_size)
 {
     draw9Cut(rect, "button_background", rect.contains(mousePosition) ? sf::Color(128,128,128,255) : sf::Color::White);
-    text(rect, textValue, AlignCenter, fontSize, sf::Color::Black);
+    drawText(rect, text_value, AlignCenter, font_size, sf::Color::Black);
     if (mouseClick && rect.contains(mousePosition))
     {
         soundManager.playSound("button.wav");
@@ -164,14 +164,14 @@ bool GUI::button(sf::FloatRect rect, string textValue, float fontSize)
     return false;
 }
 
-void GUI::disabledButton(sf::FloatRect rect, string textValue, float textSize)
+void GUI::drawDisabledButton(sf::FloatRect rect, string text_value, float text_size)
 {
     draw9Cut(rect, "button_background", sf::Color(128,128,128, 255));
 
-    text(rect, textValue, AlignCenter, textSize, sf::Color::Black);
+    drawText(rect, text_value, AlignCenter, text_size, sf::Color::Black);
 }
 
-bool GUI::toggleButton(sf::FloatRect rect, bool active, string textValue, float fontSize)
+bool GUI::drawToggleButton(sf::FloatRect rect, bool active, string text_value, float font_size)
 {
     sf::Color buttonColor;
     if (rect.contains(mousePosition))
@@ -188,7 +188,7 @@ bool GUI::toggleButton(sf::FloatRect rect, bool active, string textValue, float 
     }
     draw9Cut(rect, "button_background", buttonColor);
 
-    text(rect, textValue, AlignCenter, fontSize, sf::Color::Black);
+    drawText(rect, text_value, AlignCenter, font_size, sf::Color::Black);
     if (mouseClick && rect.contains(mousePosition))
     {
         soundManager.playSound("button.wav");
@@ -197,18 +197,18 @@ bool GUI::toggleButton(sf::FloatRect rect, bool active, string textValue, float 
     return false;
 }
 
-float GUI::hslider(sf::FloatRect rect, float value, float minValue, float maxValue, float normalValue)
+float GUI::drawHorizontalSlider(sf::FloatRect rect, float value, float min_value, float max_value, float normal_value)
 {
     draw9Cut(rect, "button_background", sf::Color(64,64,64, 255));
 
     float x;
-    x = rect.left + (rect.width - rect.height) * (normalValue - minValue) / (maxValue - minValue);
+    x = rect.left + (rect.width - rect.height) * (normal_value - min_value) / (max_value - min_value);
     sf::RectangleShape backgroundZero(sf::Vector2f(8.0, rect.height));
     backgroundZero.setPosition(x + rect.height / 2.0 - 4.0, rect.top);
     backgroundZero.setFillColor(sf::Color(8,8,8,255));
     renderTarget->draw(backgroundZero);
-    
-    x = rect.left + (rect.width - rect.height) * (value - minValue) / (maxValue - minValue);
+
+    x = rect.left + (rect.width - rect.height) * (value - min_value) / (max_value - min_value);
     sf::Color color = sf::Color::White;
     if (rect.contains(mousePosition) && mousePosition.x >= x && mousePosition.x <= x + rect.height)
         color = sf::Color(255,255,255, 128);
@@ -217,36 +217,36 @@ float GUI::hslider(sf::FloatRect rect, float value, float minValue, float maxVal
     if (rect.contains(mousePosition) && mouseDown)
     {
         value = (mousePosition.x - rect.left - (rect.height / 2.0)) / (rect.width - rect.height);
-        value = minValue + (maxValue - minValue) * value;
-        if (minValue < maxValue)
+        value = min_value + (max_value - min_value) * value;
+        if (min_value < max_value)
         {
-            if (value < minValue)
-                value = minValue;
-            if (value > maxValue)
-                value = maxValue;
+            if (value < min_value)
+                value = min_value;
+            if (value > max_value)
+                value = max_value;
         }else{
-            if (value > minValue)
-                value = minValue;
-            if (value < maxValue)
-                value = maxValue;
+            if (value > min_value)
+                value = min_value;
+            if (value < max_value)
+                value = max_value;
         }
     }
 
     return value;
 }
 
-float GUI::vslider(sf::FloatRect rect, float value, float minValue, float maxValue, float normalValue)
+float GUI::drawVerticalSlider(sf::FloatRect rect, float value, float min_value, float max_value, float normal_value)
 {
     draw9Cut(rect, "button_background", sf::Color(64,64,64, 255));
 
     float y;
-    y = rect.top + (rect.height - rect.width) * (normalValue - minValue) / (maxValue - minValue);
+    y = rect.top + (rect.height - rect.width) * (normal_value - min_value) / (max_value - min_value);
     sf::RectangleShape backgroundZero(sf::Vector2f(rect.width, 8.0));
     backgroundZero.setPosition(rect.left, y + rect.width / 2.0 - 4.0);
     backgroundZero.setFillColor(sf::Color(8,8,8,255));
     renderTarget->draw(backgroundZero);
-    
-    y = rect.top + (rect.height - rect.width) * (value - minValue) / (maxValue - minValue);
+
+    y = rect.top + (rect.height - rect.width) * (value - min_value) / (max_value - min_value);
     sf::Color color = sf::Color::White;
     if (rect.contains(mousePosition) && mousePosition.y >= y && mousePosition.y <= y + rect.width)
         color = sf::Color(255,255,255, 128);
@@ -255,31 +255,31 @@ float GUI::vslider(sf::FloatRect rect, float value, float minValue, float maxVal
     if (rect.contains(mousePosition) && mouseDown)
     {
         value = (mousePosition.y - rect.top - (rect.width / 2.0)) / (rect.height - rect.width);
-        value = minValue + (maxValue - minValue) * value;
-        if (minValue < maxValue)
+        value = min_value + (max_value - min_value) * value;
+        if (min_value < max_value)
         {
-            if (value < minValue)
-                value = minValue;
-            if (value > maxValue)
-                value = maxValue;
+            if (value < min_value)
+                value = min_value;
+            if (value > max_value)
+                value = max_value;
         }else{
-            if (value > minValue)
-                value = minValue;
-            if (value < maxValue)
-                value = maxValue;
+            if (value > min_value)
+                value = min_value;
+            if (value < max_value)
+                value = max_value;
         }
     }
 
     return value;
 }
 
-int GUI::selector(sf::FloatRect rect, string textValue, float textSize)
+int GUI::drawSelector(sf::FloatRect rect, string text_value, float text_size)
 {
     int ret = 0;
-    
+
     draw9Cut(rect, "border_background", sf::Color::White);
-    text(rect, textValue, AlignCenter, textSize, sf::Color::White);
-    
+    drawText(rect, text_value, AlignCenter, text_size, sf::Color::White);
+
     if (drawArrow(sf::FloatRect(rect.left, rect.top, rect.height, rect.height), false, 0))
         ret = -1;
     if (drawArrow(sf::FloatRect(rect.left + rect.width - rect.height, rect.top, rect.height, rect.height), false, 180))
@@ -287,27 +287,27 @@ int GUI::selector(sf::FloatRect rect, string textValue, float textSize)
     return ret;
 }
 
-void GUI::disabledSelector(sf::FloatRect rect, string textValue, float textSize)
+void GUI::drawDisabledSelector(sf::FloatRect rect, string text_value, float text_size)
 {
     draw9Cut(rect, "border_background", sf::Color::White);
-    text(rect, textValue, AlignCenter, textSize, sf::Color(128, 128, 128));
-    
+    drawText(rect, text_value, AlignCenter, text_size, sf::Color(128, 128, 128));
+
     drawArrow(sf::FloatRect(rect.left, rect.top, rect.height, rect.height), true, 0);
     drawArrow(sf::FloatRect(rect.left + rect.width - rect.height, rect.top, rect.height, rect.height), true, 180);
 }
 
-void GUI::box(sf::FloatRect rect, sf::Color color)
+void GUI::drawBox(sf::FloatRect rect, sf::Color border_color)
 {
-    draw9Cut(rect, "border_background", color);
+    draw9Cut(rect, "border_background", border_color);
 }
 
-void GUI::boxWithBackground(sf::FloatRect rect, sf::Color color, sf::Color bg_color)
+void GUI::drawBoxWithBackground(sf::FloatRect rect, sf::Color border_color, sf::Color background_color)
 {
-    draw9Cut(rect, "button_background", bg_color);
-    draw9Cut(rect, "border_background", color);
+    draw9Cut(rect, "button_background", background_color);
+    draw9Cut(rect, "border_background", border_color);
 }
 
-void GUI::textbox(sf::FloatRect rect, string text, EAlign align, float textSize, sf::Color color)
+void GUI::drawTextBox(sf::FloatRect rect, string text, EAlign align, float text_size, sf::Color color)
 {
     {
         unsigned currentOffset = 0;
@@ -328,10 +328,10 @@ void GUI::textbox(sf::FloatRect rect, string text, EAlign align, float textSize,
                 firstWord = false;
             }
 
-            sf::Glyph glyph = mainFont.getGlyph(currentChar, textSize, false);
+            sf::Glyph glyph = mainFont.getGlyph(currentChar, text_size, false);
             currentOffset += glyph.advance;
 
-            if (!firstWord && currentOffset > rect.width - textSize * 2)
+            if (!firstWord && currentOffset > rect.width - text_size * 2)
             {
                 pos = wordBegining;
                 text[pos] = '\n';
@@ -341,17 +341,17 @@ void GUI::textbox(sf::FloatRect rect, string text, EAlign align, float textSize,
         }
     }
 
-    box(rect);
-    GUI::text(sf::FloatRect(rect.left + textSize, rect.top + textSize, rect.width - textSize * 2, rect.height - textSize * 2), text, align, textSize, color);
+    drawBox(rect);
+    GUI::drawText(sf::FloatRect(rect.left + text_size, rect.top + text_size, rect.width - text_size * 2, rect.height - text_size * 2), text, align, text_size, color);
 }
 
-void GUI::textboxWithBackground(sf::FloatRect rect, string text, EAlign align, float textSize, sf::Color color, sf::Color bg_color)
+void GUI::drawTextBoxWithBackground(sf::FloatRect rect, string text, EAlign align, float text_size, sf::Color color, sf::Color bg_color)
 {
     draw9Cut(rect, "button_background", bg_color);
-    textbox(rect, text, align, textSize, color);
+    drawTextBox(rect, text, align, text_size, color);
 }
 
-int GUI::scrolltextbox(sf::FloatRect rect, string text, int start_line_nr, EAlign align, float textSize, sf::Color color)
+int GUI::drawScrollableTextBox(sf::FloatRect rect, string text, int start_line_nr, EAlign align, float text_size, sf::Color color)
 {
     int line_count = 1;
     {
@@ -374,10 +374,10 @@ int GUI::scrolltextbox(sf::FloatRect rect, string text, int start_line_nr, EAlig
                 firstWord = false;
             }
 
-            sf::Glyph glyph = mainFont.getGlyph(currentChar, textSize, false);
+            sf::Glyph glyph = mainFont.getGlyph(currentChar, text_size, false);
             currentOffset += glyph.advance;
 
-            if (!firstWord && currentOffset > rect.width - textSize * 2 - 50)
+            if (!firstWord && currentOffset > rect.width - text_size * 2 - 50)
             {
                 pos = wordBegining;
                 text[pos] = '\n';
@@ -387,7 +387,7 @@ int GUI::scrolltextbox(sf::FloatRect rect, string text, int start_line_nr, EAlig
             }
         }
     }
-    
+
     int start_pos = 0;
     for(int n=0; n<start_line_nr; n++)
     {
@@ -397,7 +397,7 @@ int GUI::scrolltextbox(sf::FloatRect rect, string text, int start_line_nr, EAlig
     }
     if (start_pos > 0)
         text = text.substr(start_pos);
-    int max_lines = (rect.height - textSize * 2) / mainFont.getLineSpacing(textSize);
+    int max_lines = (rect.height - text_size * 2) / mainFont.getLineSpacing(text_size);
     if (line_count - start_line_nr > max_lines)
     {
         int end_pos = 0;
@@ -411,11 +411,11 @@ int GUI::scrolltextbox(sf::FloatRect rect, string text, int start_line_nr, EAlig
             text = text.substr(0, end_pos);
     }
 
-    box(rect);
-    GUI::text(sf::FloatRect(rect.left + textSize, rect.top + textSize, rect.width - textSize * 2 - 50, rect.height - textSize * 2), text, align, textSize, color);
+    drawBox(rect);
+    GUI::drawText(sf::FloatRect(rect.left + text_size, rect.top + text_size, rect.width - text_size * 2 - 50, rect.height - text_size * 2), text, align, text_size, color);
 
     //Side scrollbar
-    box(sf::FloatRect(rect.left + rect.width - 50, rect.top, 50, rect.height));
+    drawBox(sf::FloatRect(rect.left + rect.width - 50, rect.top, 50, rect.height));
     if (drawArrow(sf::FloatRect(rect.left + rect.width - 50, rect.top, 50, 50), false, 90))
         start_line_nr -= 1;
     if (drawArrow(sf::FloatRect(rect.left + rect.width - 50, rect.top + rect.height - 50, 50, 50), false, -90))
@@ -431,24 +431,24 @@ int GUI::scrolltextbox(sf::FloatRect rect, string text, int start_line_nr, EAlig
     return start_line_nr;
 }
 
-string GUI::textEntry(sf::FloatRect rect, string value, float fontSize)
+string GUI::drawTextEntry(sf::FloatRect rect, string value, float font_size)
 {
     draw9Cut(rect, "button_background", sf::Color(192,192,192,255));
-    text(sf::FloatRect(rect.left + 16, rect.top, rect.width, rect.height), value + "_", AlignLeft, fontSize, sf::Color::Black);
-    
+    drawText(sf::FloatRect(rect.left + 16, rect.top, rect.width, rect.height), value + "_", AlignLeft, font_size, sf::Color::Black);
+
     if (InputHandler::keyboardIsPressed(sf::Keyboard::BackSpace) && value.length() > 0)
         value = value.substr(0, -1);
-    value += InputHandler::getKeyboardTextEntry();
+    value += InputHandler::getKeyboarddrawTextEntry();
     return value;
 }
 
-void GUI::keyValueDisplay(sf::FloatRect rect, float div_distance, string key, string value, float textSize)
+void GUI::drawKeyValueDisplay(sf::FloatRect rect, float div_distance, string key, string value, float text_size)
 {
     const float div_size = 3.0;
     draw9Cut(rect, "border_background");
     draw9Cut(rect, "button_background", sf::Color::White, div_distance);
-    text(sf::FloatRect(rect.left, rect.top, rect.width * div_distance - div_size, rect.height), key, AlignRight, textSize, sf::Color::Black);
-    text(sf::FloatRect(rect.left + rect.width * div_distance + div_size, rect.top, rect.width * (1.0 - div_distance), rect.height), value, AlignLeft, textSize);
+    drawText(sf::FloatRect(rect.left, rect.top, rect.width * div_distance - div_size, rect.height), key, AlignRight, text_size, sf::Color::Black);
+    drawText(sf::FloatRect(rect.left + rect.width * div_distance + div_size, rect.top, rect.width * (1.0 - div_distance), rect.height), value, AlignLeft, text_size);
 }
 
 void GUI::draw9Cut(sf::FloatRect rect, string texture, sf::Color color, float width_factor)
@@ -471,14 +471,14 @@ void GUI::draw9Cut(sf::FloatRect rect, string texture, sf::Color color, float wi
         sprite.setScale(scale, scale);
         cornerSizeR *= scale;
     }
-    
+
     sprite.setColor(color);
     sprite.setOrigin(0, 0);
-    
+
     float w = 1.0;
     if (cornerSizeR > rect.width * width_factor)
         w = rect.width * width_factor / cornerSizeR;
-    
+
     //TopLeft
     sprite.setPosition(rect.left, rect.top);
     sprite.setTextureRect(sf::IntRect(0, 0, cornerSizeT * w, cornerSizeT));
@@ -531,7 +531,7 @@ void GUI::draw9Cut(sf::FloatRect rect, string texture, sf::Color color, float wi
         return;
     if (width_factor < 1.0)
         w = (width_factor - (rect.width - cornerSizeR) / rect.width) * (rect.width / cornerSizeR);
-    
+
     //TopRight
     sprite.setPosition(rect.left + rect.width - cornerSizeR, rect.top);
     sprite.setTextureRect(sf::IntRect(textureSize.width - cornerSizeT, 0, cornerSizeT * w, cornerSizeT));
@@ -581,7 +581,7 @@ void MouseRenderer::render(sf::RenderTarget& window)
     if (!visible) return;
 
     sf::Vector2f mouse = InputHandler::getMousePos();
-    
+
     sf::Sprite mouseSprite;
     textureManager.setTexture(mouseSprite, "mouse.png");
     mouseSprite.setPosition(mouse);

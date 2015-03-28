@@ -20,15 +20,15 @@ SpaceStation::SpaceStation()
 : SpaceObject(300, "SpaceStation")
 {
     setCollisionPhysics(true, true);
-    
+
     shields = shields_max = 400;
     hull_strength = hull_max = 200;
-    
-    registerMemberReplication(&templateName);
+    shieldHitEffect = 0.0;
+
+    registerMemberReplication(&template_name);
     registerMemberReplication(&shields, 1.0);
     registerMemberReplication(&shields_max);
     registerMemberReplication(&shieldHitEffect, 0.5);
-    shieldHitEffect = 0.0;
 
     comms_script_name = "comms_station.lua";
 }
@@ -38,10 +38,10 @@ void SpaceStation::draw3D()
     if (!ship_template) return;
 
     glScalef(ship_template->scale, ship_template->scale, ship_template->scale);
-    glTranslatef(ship_template->renderOffset.x, ship_template->renderOffset.y, ship_template->renderOffset.z);
-    objectShader.setParameter("baseMap", *textureManager.getTexture(ship_template->colorTexture));
-    objectShader.setParameter("illuminationMap", *textureManager.getTexture(ship_template->illuminationTexture));
-    objectShader.setParameter("specularMap", *textureManager.getTexture(ship_template->specularTexture));
+    glTranslatef(ship_template->render_offset.x, ship_template->render_offset.y, ship_template->render_offset.z);
+    objectShader.setParameter("baseMap", *textureManager.getTexture(ship_template->color_texture));
+    objectShader.setParameter("illuminationMap", *textureManager.getTexture(ship_template->illumination_texture));
+    objectShader.setParameter("specularMap", *textureManager.getTexture(ship_template->specular_texture));
     sf::Shader::bind(&objectShader);
     Mesh* m = Mesh::getMesh(ship_template->model);
     m->render();
@@ -71,7 +71,7 @@ void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, 
 
     if (long_range)
     {
-        GUI::text(sf::FloatRect(position.x, position.y - 15, 0, 0), getCallSign(), AlignCenter, 12);
+        GUI::drawText(sf::FloatRect(position.x, position.y - 15, 0, 0), getCallSign(), AlignCenter, 12);
         sprite_scale *= 0.7;
     }
     objectSprite.setScale(sprite_scale, sprite_scale);
@@ -89,9 +89,9 @@ void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, 
 
 void SpaceStation::update(float delta)
 {
-    if (!ship_template || ship_template->name != templateName)
+    if (!ship_template || ship_template->getName() != template_name)
     {
-        ship_template = ShipTemplate::getTemplate(templateName);
+        ship_template = ShipTemplate::getTemplate(template_name);
         if (!ship_template)
             return;
         ship_template->setCollisionData(this);
@@ -119,14 +119,14 @@ bool SpaceStation::canBeDockedBy(P<SpaceObject> obj)
     return true;
 }
 
-void SpaceStation::takeDamage(float damageAmount, DamageInfo& info)
+void SpaceStation::takeDamage(float damage_amount, DamageInfo& info)
 {
-    shields -= damageAmount;
+    shields -= damage_amount;
     if (shields < 0)
     {
         if (info.type != DT_EMP)
         {
-            hull_strength -= damageAmount;
+            hull_strength -= damage_amount;
             if (hull_strength <= 0.0)
             {
                 ExplosionEffect* e = new ExplosionEffect();
@@ -142,19 +142,19 @@ void SpaceStation::takeDamage(float damageAmount, DamageInfo& info)
     }
 }
 
-void SpaceStation::setTemplate(string templateName)
+void SpaceStation::setTemplate(string template_name)
 {
-    P<ShipTemplate> new_ship_template = ShipTemplate::getTemplate(templateName);
+    P<ShipTemplate> new_ship_template = ShipTemplate::getTemplate(template_name);
     if (!new_ship_template)
     {
-        LOG(ERROR) << "Failed to find template for station: " << templateName;
+        LOG(ERROR) << "Failed to find template for station: " << template_name;
         return;
     }
-    this->templateName = templateName;
+    this->template_name = template_name;
     ship_template = new_ship_template;
-    
+
     hull_strength = hull_max = ship_template->hull;
-    shields = shields_max = ship_template->frontShields;
+    shields = shields_max = ship_template->front_shields;
 
     ship_template->setCollisionData(this);
 

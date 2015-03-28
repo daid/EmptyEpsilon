@@ -55,7 +55,7 @@ public:
     float scanning_delay;
     float shield_calibration_delay;
     bool auto_repair_enabled;
-    
+
     ECommsState comms_state;
     float comms_open_delay;
     string comms_incomming_message;
@@ -66,7 +66,7 @@ public:
     std::vector<sf::Vector2f> waypoints;
 
     EMainScreenSetting main_screen_setting;
-    
+
     bool activate_self_destruct;
     uint32_t self_destruct_code[max_self_destruct_codes];
     bool self_destruct_code_confirmed[max_self_destruct_codes];
@@ -75,7 +75,7 @@ public:
 
     PlayerSpaceship();
 
-    void onReceiveClientCommand(int32_t clientId, sf::Packet& packet);
+    void onReceiveClientCommand(int32_t client_id, sf::Packet& packet);
     void commandTargetRotation(float target);
     void commandImpulse(float target);
     void commandWarp(int8_t target);
@@ -108,17 +108,17 @@ public:
     void commandCombatManeuver(ECombatManeuver maneuver);
 
     virtual string getCallSign() { return "PL" + string(getMultiplayerId()); }
-    
-    virtual void setShipTemplate(string templateName);
+
+    virtual void setShipTemplate(string template_name);
 
     virtual void executeJump(float distance);
     virtual void fireBeamWeapon(int index, P<SpaceObject> target);
-    virtual void hullDamage(float damageAmount, DamageInfo& info);
+    virtual void takeHullDamage(float damage_amount, DamageInfo& info);
     void setSystemCoolant(ESystem system, float level);
 
     virtual void update(float delta);
     bool useEnergy(float amount) { if (energy_level >= amount) { energy_level -= amount; return true; } return false; }
-    
+
     float getNetPowerUsage();
 
     void setCommsMessage(string message);
