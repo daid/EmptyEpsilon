@@ -149,8 +149,8 @@ void ServerBrowserMenu::onGui()
     manual_ip = drawTextEntry(sf::FloatRect(getWindowSize().x - 350, 740, 300, 50), manual_ip);
     if (drawButton(sf::FloatRect(getWindowSize().x - 350, 800, 300, 50), "Connect"))
     {
-            new JoinServerScreen(sf::IpAddress(manual_ip));
-            destroy();
+        new JoinServerScreen(sf::IpAddress(manual_ip));
+        destroy();
     }
 }
 
@@ -172,6 +172,7 @@ void JoinServerScreen::onGui()
         return;
     }
 
+    //We connect with a slight delay, as the connect call when joining a server will block and thus not update the screen.
     if (connect_delay > 0)
     {
         connect_delay--;

@@ -60,15 +60,17 @@ void MainUIBase::onGui()
 
     if (my_spaceship)
     {
-    /*
         if (Nebula::inNebula(my_spaceship->getPosition()))
         {
-            sf::Sprite nebula_overlay;
-            textureManager.setTexture(nebula_overlay, "Nebula1.png");
-            nebula_overlay.setPosition(getWindowSize() / 2.0);
-            getRenderTarget()->draw(nebula_overlay);
+            for(int n=0; n<16; n++)
+            {
+                sf::Sprite nebula_overlay;
+                textureManager.setTexture(nebula_overlay, "Nebula" + string((n % 3) + 1) + ".png");
+                nebula_overlay.setPosition(getWindowSize().x / 4.0f * (n % 4) + 0.125, getWindowSize().y / 4.0f * (n / 4) + 0.125);
+                nebula_overlay.setColor(sf::Color(255, 255, 255, 48));
+                getRenderTarget()->draw(nebula_overlay, sf::RenderStates(sf::BlendAdd));
+            }
         }
-    */
         float shield_hit = (std::max(my_spaceship->front_shield_hit_effect, my_spaceship->rear_shield_hit_effect) - 0.5) / 0.5;
         if (shield_hit > 0)
         {
