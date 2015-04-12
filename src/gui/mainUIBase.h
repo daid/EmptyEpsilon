@@ -13,6 +13,9 @@ public:
 
 class MainUIBase : public GUI, public Updatable
 {
+    double projection_matrix[16];
+    double model_matrix[16];
+    double viewport[4];
 public:
     float scan_angle;
     std::vector<ScanGhost> scan_ghost;
@@ -36,6 +39,9 @@ public:
     void drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESystem highlight_system);
     void drawUILine(sf::Vector2f start, sf::Vector2f end, float x_split);
     void draw3Dworld(sf::FloatRect rect = sf::FloatRect(0, 0, getWindowSize().x, 900));
+    void draw3Dheadings(float distance=2500.0f);
+    
+    sf::Vector3f worldToScreen(sf::Vector3f world);
 };
 
 #endif//MAIN_UI_H

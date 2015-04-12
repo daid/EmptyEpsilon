@@ -109,6 +109,7 @@ void MainScreenUI::onGui()
         case MSS_Left:
         case MSS_Right:
             draw3Dworld();
+            draw3Dheadings();
             break;
         case MSS_Tactical:
             renderTactical(*getRenderTarget());

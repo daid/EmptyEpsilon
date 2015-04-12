@@ -674,7 +674,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(camera_fov, rect.width/rect.height, 1.f, 16000.f);
+    gluPerspective(camera_fov, rect.width/rect.height, 1.f, 25000.f);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -683,6 +683,10 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
     glScalef(1,1,-1);
     glRotatef(-camera_pitch, 1, 0, 0);
     glRotatef(-camera_yaw - 90, 0, 0, 1);
+
+    glGetDoublev(GL_PROJECTION_MATRIX, projection_matrix);
+    glGetDoublev(GL_MODELVIEW_MATRIX, model_matrix);
+    glGetDoublev(GL_VIEWPORT, viewport);
 
     sf::Texture::bind(textureManager.getTexture("Stars"), sf::Texture::Pixels);
     glDepthMask(false);
@@ -856,4 +860,56 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
 #endif
 
     window.popGLStates();
+}
+
+void MainUIBase::draw3Dheadings(float distance)
+{
+    if (!my_spaceship)
+        return;
+    for(int angle = 0; angle < 360; angle += 30)
+    {
+        sf::Vector2f world_pos = my_spaceship->getPosition() + sf::vector2FromAngle(float(angle)) * distance;
+        sf::Vector3f screen_pos = worldToScreen(sf::Vector3f(world_pos.x, world_pos.y, 0.0f));
+        drawText(sf::FloatRect(screen_pos.x, screen_pos.y, 0, 0), string(angle), AlignCenter, 30, sf::Color(255, 255, 255, 128));
+    }
+}
+
+sf::Vector3f MainUIBase::worldToScreen(sf::Vector3f world)
+{
+    world -= camera_position;
+    
+    //Transformation vectors
+    float fTempo[8];
+    //Modelview transform
+    fTempo[0] = model_matrix[0]*world.x+model_matrix[4]*world.y+model_matrix[8]*world.z+model_matrix[12];  //w is always 1
+    fTempo[1] = model_matrix[1]*world.x+model_matrix[5]*world.y+model_matrix[9]*world.z+model_matrix[13];
+    fTempo[2] = model_matrix[2]*world.x+model_matrix[6]*world.y+model_matrix[10]*world.z+model_matrix[14];
+    fTempo[3] = model_matrix[3]*world.x+model_matrix[7]*world.y+model_matrix[11]*world.z+model_matrix[15];
+    //Projection transform, the final row of projection matrix is always [0 0 -1 0]
+    //so we optimize for that.
+    fTempo[4] = projection_matrix[0]*fTempo[0]+projection_matrix[4]*fTempo[1]+projection_matrix[8]*fTempo[2]+projection_matrix[12]*fTempo[3];
+    fTempo[5] = projection_matrix[1]*fTempo[0]+projection_matrix[5]*fTempo[1]+projection_matrix[9]*fTempo[2]+projection_matrix[13]*fTempo[3];
+    fTempo[6] = projection_matrix[2]*fTempo[0]+projection_matrix[6]*fTempo[1]+projection_matrix[10]*fTempo[2]+projection_matrix[14]*fTempo[3];
+    fTempo[7] = -fTempo[2];
+    //The result normalizes between -1 and 1
+    if(fTempo[7]==0.0)	//The w value
+        return sf::Vector3f(0, 0, -1);
+    fTempo[7] = 1.0/fTempo[7];
+    //Perspective division
+    fTempo[4] *= fTempo[7];
+    fTempo[5] *= fTempo[7];
+    fTempo[6] *= fTempo[7];
+    //Window coordinates
+    //Map x, y to range 0-1
+    sf::Vector3f ret;
+    ret.x = (fTempo[4]*0.5+0.5)*viewport[2]+viewport[0];
+    ret.y = (fTempo[5]*0.5+0.5)*viewport[3]+viewport[1];
+    //This is only correct when glDepthRange(0.0, 1.0)
+    ret.z = (1.0+fTempo[6])*0.5;	//Between 0 and 1
+    
+    ret.x = ret.x * getWindowSize().x / getRenderTarget()->getSize().x;
+    ret.y = ret.y * getWindowSize().y / getRenderTarget()->getSize().y;
+    ret.y = getWindowSize().y - ret.y;
+    
+    return ret;
 }
