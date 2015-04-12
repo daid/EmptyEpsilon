@@ -651,7 +651,7 @@ void MainUIBase::drawUILine(sf::Vector2f start, sf::Vector2f end, float x_split)
     getRenderTarget()->draw(ui_line);
 }
 
-void MainUIBase::draw3Dworld(sf::FloatRect rect)
+void MainUIBase::draw3Dworld(sf::FloatRect rect, bool show_callsigns)
 {
     if (my_spaceship)
         soundManager.setListenerPosition(my_spaceship->getPosition(), my_spaceship->getRotation());
@@ -860,6 +860,26 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect)
 #endif
 
     window.popGLStates();
+
+    if (show_callsigns)
+    {
+        foreach(SpaceObject, obj, renderList)
+        {
+            if (!obj->canBeTargeted())
+                continue;
+            string call_sign = obj->getCallSign();
+            if (call_sign == "")
+                continue;
+            
+            sf::Vector3f screen_position = worldToScreen(sf::Vector3f(obj->getPosition().x, obj->getPosition().y, obj->getRadius()));
+            if (screen_position.z < 0)
+                continue;
+            if (screen_position.z > 10000.0)
+                continue;
+            float distance_factor = (1.0f - (screen_position.z / 10000.0f));
+            drawText(sf::FloatRect(screen_position.x, screen_position.y, 0, 0), call_sign, AlignCenter, 20 * distance_factor, sf::Color(255, 255, 255, 128 * distance_factor));
+        }
+    }
 }
 
 void MainUIBase::draw3Dheadings(float distance)
@@ -870,7 +890,8 @@ void MainUIBase::draw3Dheadings(float distance)
     {
         sf::Vector2f world_pos = my_spaceship->getPosition() + sf::vector2FromAngle(float(angle)) * distance;
         sf::Vector3f screen_pos = worldToScreen(sf::Vector3f(world_pos.x, world_pos.y, 0.0f));
-        drawText(sf::FloatRect(screen_pos.x, screen_pos.y, 0, 0), string(angle), AlignCenter, 30, sf::Color(255, 255, 255, 128));
+        if (screen_pos.z > 0.0f)
+            drawText(sf::FloatRect(screen_pos.x, screen_pos.y, 0, 0), string(angle), AlignCenter, 30, sf::Color(255, 255, 255, 128));
     }
 }
 
@@ -905,11 +926,12 @@ sf::Vector3f MainUIBase::worldToScreen(sf::Vector3f world)
     ret.x = (fTempo[4]*0.5+0.5)*viewport[2]+viewport[0];
     ret.y = (fTempo[5]*0.5+0.5)*viewport[3]+viewport[1];
     //This is only correct when glDepthRange(0.0, 1.0)
-    ret.z = (1.0+fTempo[6])*0.5;	//Between 0 and 1
+    //ret.z = (1.0+fTempo[6])*0.5;	//Between 0 and 1
+    //Set Z to distance into the screen (negative is behind the screen)
+    ret.z = -fTempo[2];
     
     ret.x = ret.x * getWindowSize().x / getRenderTarget()->getSize().x;
     ret.y = ret.y * getWindowSize().y / getRenderTarget()->getSize().y;
     ret.y = getWindowSize().y - ret.y;
-    
     return ret;
 }
