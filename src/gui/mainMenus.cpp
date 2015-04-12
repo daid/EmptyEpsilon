@@ -71,6 +71,7 @@ void MainMenu::onGui()
     y += 10;
     drawText(sf::FloatRect(0, y, getWindowSize().x - 50, 20), "Special thanks:", AlignRight, 20); y+= 20;
     drawText(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "Marty Lewis (MadKat)", AlignRight, 18); y+= 18;
+    drawText(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "Serge Wroclawski", AlignRight, 18); y+= 18;
 }
 
 OptionsMenu::OptionsMenu()
