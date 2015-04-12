@@ -185,12 +185,41 @@ void CrewCommsUI::drawCommsRadar()
                     {
                         my_spaceship->commandOpenTextComm(selection_object);
                     }
+                    y += 50;
                 }
                 if (mine && mine->isFriendly(my_spaceship))
                 {
                     if (drawButton(sf::FloatRect(x - 270, y, 250, 50), "Detonate"))
                     {
                         mine->explode();
+                    }
+                    y += 50;
+                }
+                
+                sf::Vector2f position_diff = selection_object->getPosition() - my_spaceship->getPosition();
+                float distance = sf::length(position_diff);
+                float heading = sf::vector2ToAngle(position_diff) - 270;
+                while(heading < 0) heading += 360;
+                float rel_velocity = dot(selection_object->getVelocity(), position_diff / distance) - dot(my_spaceship->getVelocity(), position_diff / distance);
+                if (fabs(rel_velocity) < 0.01)
+                    rel_velocity = 0.0;
+
+                drawKeyValueDisplay(sf::FloatRect(x - 270, y, 250, 30), 0.4, "Callsign", selection_object->getCallSign(), 20); y += 30;
+                drawKeyValueDisplay(sf::FloatRect(x - 270, y, 250, 30), 0.4, "Distance", string(distance / 1000.0, 1) + "km", 20); y += 30;
+                drawKeyValueDisplay(sf::FloatRect(x - 270, y, 250, 30), 0.4, "Heading", string(int(heading)), 20); y += 30;
+                drawKeyValueDisplay(sf::FloatRect(x - 270, y, 250, 30), 0.4, "Rel.Speed", string(rel_velocity / 1000 * 60, 1) + "km/min", 20); y += 30;
+
+                if ((ship && ship->scanned_by_player != SS_NotScanned) || station)
+                {
+                    drawKeyValueDisplay(sf::FloatRect(x - 270, y, 250, 30), 0.4, "Faction", factionInfo[selection_object->getFactionId()]->getName(), 20); y += 30;
+                    if (ship && ship->scanned_by_player != SS_FriendOrFoeIdentified)
+                    {
+                        drawKeyValueDisplay(sf::FloatRect(x - 270, y, 250, 30), 0.4, "Type", ship->ship_type_name, 20); y += 30;
+                        drawKeyValueDisplay(sf::FloatRect(x - 270, y, 250, 30), 0.4, "Shields", string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), 20); y += 30;
+                    }
+                    if (station && my_spaceship->isFriendly(station))
+                    {
+                        drawKeyValueDisplay(sf::FloatRect(x - 270, y, 250, 30), 0.4, "Shields", string(int(station->shields)), 20); y += 30;
                     }
                 }
             }

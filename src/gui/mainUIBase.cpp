@@ -876,7 +876,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect, bool show_callsigns)
                 continue;
             if (screen_position.z > 10000.0)
                 continue;
-            float distance_factor = (1.0f - (screen_position.z / 10000.0f));
+            float distance_factor = 1.0f - (screen_position.z / 10000.0f);
             drawText(sf::FloatRect(screen_position.x, screen_position.y, 0, 0), call_sign, AlignCenter, 20 * distance_factor, sf::Color(255, 255, 255, 128 * distance_factor));
         }
     }
