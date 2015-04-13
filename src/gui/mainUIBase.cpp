@@ -865,7 +865,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect, bool show_callsigns)
     {
         foreach(SpaceObject, obj, renderList)
         {
-            if (!obj->canBeTargeted())
+            if (!obj->canBeTargeted() || obj == my_spaceship)
                 continue;
             string call_sign = obj->getCallSign();
             if (call_sign == "")
@@ -880,6 +880,70 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect, bool show_callsigns)
             drawText(sf::FloatRect(screen_position.x, screen_position.y, 0, 0), call_sign, AlignCenter, 20 * distance_factor, sf::Color(255, 255, 255, 128 * distance_factor));
         }
     }
+}
+
+void MainUIBase::drawSpinningModel(sf::FloatRect rect, P<ShipTemplate> model_template)
+{
+    if (rect.height <= 0) return;
+    if (rect.width <= 0) return;
+    
+    sf::RenderTarget& window = *getRenderTarget();
+    window.pushGLStates();
+
+    float camera_fov = 60.0f;
+    float sx = window.getSize().x * window.getView().getViewport().width / getWindowSize().x;
+    float sy = window.getSize().y * window.getView().getViewport().height / getWindowSize().y;
+    glViewport(rect.left * sx, (float(getWindowSize().y) - rect.height - rect.top) * sx, rect.width * sx, rect.height * sy);
+
+    glClearDepth(1.f);
+    glClear(GL_DEPTH_BUFFER_BIT);
+    glDepthMask(GL_TRUE);
+    glEnable(GL_CULL_FACE);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(camera_fov, rect.width/rect.height, 1.f, 25000.f);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glRotatef(90, 1, 0, 0);
+    glScalef(1,1,-1);
+
+    glColor4f(1,1,1,1);
+    glDisable(GL_BLEND);
+    sf::Texture::bind(NULL);
+    glDepthMask(true);
+    glEnable(GL_DEPTH_TEST);
+
+    {
+        float lightpos1[4] = {0, 0, 0, 1.0};
+        glLightfv(GL_LIGHT1, GL_POSITION, lightpos1);
+
+        float lightpos0[4] = {20000, 20000, 20000, 1.0};
+        glLightfv(GL_LIGHT0, GL_POSITION, lightpos0);
+    }
+
+    glTranslatef(0, -200, 0);
+    glRotatef(-30, 1, 0, 0);
+    glRotatef(engine->getElapsedTime() * 360.0 / 10.0, 0, 0, 1);
+    {
+        float scale = model_template->scale / model_template->radius;
+        scale *= 100;
+        glScalef(scale, scale, scale);
+        glTranslatef(model_template->render_offset.x, model_template->render_offset.y, model_template->render_offset.z);
+        objectShader.setParameter("baseMap", *textureManager.getTexture(model_template->color_texture));
+        objectShader.setParameter("illuminationMap", *textureManager.getTexture(model_template->illumination_texture));
+        objectShader.setParameter("specularMap", *textureManager.getTexture(model_template->specular_texture));
+        sf::Shader::bind(&objectShader);
+        Mesh* m = Mesh::getMesh(model_template->model);
+        m->render();
+    }
+    
+    sf::Shader::bind(NULL);
+    glDisable(GL_DEPTH_TEST);
+
+    window.popGLStates();
 }
 
 void MainUIBase::draw3Dheadings(float distance)

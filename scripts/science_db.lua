@@ -2,7 +2,7 @@
 	Everything in the science database files is just readable data for the science officer.
 	This data does not effect the game in any other way and just contributes to the lore.
 --]]
-space_objects = ScienceDatabase():setName('Natural occurences')
+space_objects = ScienceDatabase():setName('Natural')
 item = space_objects:addEntry('Asteroid')
 item:setLongDescription([[Asteroids are minor planets, usually smaller than a few kilometers. The larger variants are sometimes refered to as planetoids. ]])
 

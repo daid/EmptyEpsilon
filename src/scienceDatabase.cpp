@@ -87,6 +87,8 @@ void fillDefaultDatabaseData()
     {
         P<ScienceDatabaseEntry> entry = shipDatabase->addEntry(template_names[n]);
         P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_names[n]);
+        
+        entry->model_template = ship_template;
 
         entry->addKeyValue("Size", string(int(ship_template->radius)));
         entry->addKeyValue("Shield", string(int(ship_template->front_shields)) + "/" + string(int(ship_template->rear_shields)));

@@ -2,6 +2,7 @@
 #define SCIENCE_DATABASE_H
 
 #include "engine.h"
+#include "shipTemplate.h"
 /*!
  * \brief Simple key value pair for database.
  */
@@ -20,6 +21,7 @@ public:
     string name;
     std::vector<ScienceDatabaseKeyValue> keyValuePairs;
     string longDescription;
+    P<ShipTemplate> model_template;
 
     ScienceDatabaseEntry(string name);
     virtual ~ScienceDatabaseEntry();

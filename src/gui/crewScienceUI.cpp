@@ -183,6 +183,18 @@ void CrewScienceUI::onCrewUI()
                     drawKeyValueDisplay(sf::FloatRect(500, y, 400, 40), 0.7, entry->keyValuePairs[n].key, entry->keyValuePairs[n].value, 20);
                     y += 40;
                 }
+                if (entry->model_template)
+                {
+                    float width = getWindowSize().x - 500 - 400;
+                    if (width > 400)
+                        width = 400;
+                    float height = width;
+                    float margin_3d = 5;
+                    if (height + 100 > y)
+                        y = height + 100;
+                    drawSpinningModel(sf::FloatRect(500 + 400 + margin_3d, 100 + margin_3d, width - margin_3d * 2, height - margin_3d * 2), entry->model_template);
+                    drawBox(sf::FloatRect(500 + 400, 100, width, height));
+                }
                 if (entry->longDescription.length() > 0)
                 {
                     science_description_line_nr = drawScrollableTextBox(sf::FloatRect(500, y, 600, 800 - y), entry->longDescription, science_description_line_nr, AlignTopLeft, 20);
