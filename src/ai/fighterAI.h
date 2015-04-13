@@ -13,6 +13,7 @@ class FighterAI : public ShipAI
     } attack_state;
     float timeout;
     float evade_direction;
+    float aggression;
 public:
     FighterAI(CpuShip* owner);
 
@@ -23,6 +24,7 @@ public:
     virtual bool canSwitchAI();
 
     virtual void run(float delta);
+    virtual void runOrders();
     virtual void runAttack(P<SpaceObject> target);
 };
 

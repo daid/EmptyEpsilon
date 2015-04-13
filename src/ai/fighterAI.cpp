@@ -10,6 +10,7 @@ FighterAI::FighterAI(CpuShip* owner)
 {
     attack_state = dive;
     timeout = 0.0;
+    aggression = random(0.0, 0.25);
 }
 
 bool FighterAI::canSwitchAI()
@@ -27,6 +28,13 @@ void FighterAI::run(float delta)
     if (timeout > 0.0)
         timeout -= delta;
     ShipAI::run(delta);
+}
+
+void FighterAI::runOrders()
+{
+    if (aggression > 0.5)
+        aggression -= random(0.0, 0.25);
+    ShipAI::runOrders();
 }
 
 void FighterAI::runAttack(P<SpaceObject> target)
@@ -51,12 +59,14 @@ void FighterAI::runAttack(P<SpaceObject> target)
             }
         }
 
-        flyTowards(target->getPosition(), 0.0);
+        flyTowards(target->getPosition(), 500.0);
 
         if (distance < 500 + target->getRadius())
         {
+            aggression += random(0, 0.05);
+            
             attack_state = evade;
-            timeout = 30.0;
+            timeout = 30.0f - std::min(aggression, 1.0f) * 20.0f;
 
             float target_dir = sf::vector2ToAngle(position_diff);
             float a_diff = sf::angleDifference(target_dir, owner->getRotation());
@@ -65,8 +75,11 @@ void FighterAI::runAttack(P<SpaceObject> target)
             else
                 evade_direction = target_dir + random(80, 100);
         }
-        if (owner->front_shield < owner->front_shield_max / 2)
+        if (owner->front_shield < owner->front_shield_max * (1.0f - aggression))
+        {
             attack_state = recharge;
+            aggression += random(0.1, 0.25);
+        }
         break;
     case evade:
         if (distance > 2000 + target->getRadius() || timeout <= 0.0)
