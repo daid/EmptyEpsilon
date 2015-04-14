@@ -809,6 +809,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect, bool show_callsigns)
     glPushMatrix();
     glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
     ParticleEngine::render();
+    draw3DSpaceDust();
     glPopMatrix();
 
     if (my_spaceship && my_spaceship->getTarget())
@@ -956,6 +957,36 @@ void MainUIBase::draw3Dheadings(float distance)
         sf::Vector3f screen_pos = worldToScreen(sf::Vector3f(world_pos.x, world_pos.y, 0.0f));
         if (screen_pos.z > 0.0f)
             drawText(sf::FloatRect(screen_pos.x, screen_pos.y, 0, 0), string(angle), AlignCenter, 30, sf::Color(255, 255, 255, 128));
+    }
+}
+
+void MainUIBase::draw3DSpaceDust()
+{
+    static std::vector<sf::Vector3f> space_dust;
+
+    if (!my_spaceship)
+        return;
+    
+    while(space_dust.size() < 1000)
+        space_dust.push_back(sf::Vector3f());
+
+    sf::Vector2f dust_vector = my_spaceship->getVelocity() / 100.0f;
+    sf::Vector3f dust_center = sf::Vector3f(my_spaceship->getPosition().x, my_spaceship->getPosition().y, 0.0);
+    glColor4f(0.7, 0.5, 0.35, 0.07);
+    
+    for(unsigned int n=0; n<space_dust.size(); n++)
+    {
+        const float maxDustDist = 500.0f;
+        const float minDustDist = 100.0f;
+        glPushMatrix();
+        if ((space_dust[n] - dust_center) > maxDustDist || (space_dust[n] - dust_center) < minDustDist)
+            space_dust[n] = dust_center + sf::Vector3f(random(-maxDustDist, maxDustDist), random(-maxDustDist, maxDustDist), random(-maxDustDist, maxDustDist));
+        glTranslatef(space_dust[n].x, space_dust[n].y, space_dust[n].z);
+        glBegin(GL_LINES);
+        glVertex3f(-dust_vector.x, -dust_vector.y, 0);
+        glVertex3f( dust_vector.x,  dust_vector.y, 0);
+        glEnd();
+        glPopMatrix();
     }
 }
 
