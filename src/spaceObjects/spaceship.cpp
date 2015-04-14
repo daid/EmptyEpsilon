@@ -53,20 +53,6 @@ template<> void convert<EMainScreenSetting>::param(lua_State* L, int& idx, EMain
     else
         mss = MSS_Front;
 }
-template<> void convert<ECombatManeuver>::param(lua_State* L, int& idx, ECombatManeuver& cm)
-{
-    string str = string(luaL_checkstring(L, idx++)).lower();
-    if (str == "boost")
-        cm = CM_Boost;
-    else if (str == "turn")
-        cm = CM_Turn;
-    else if (str == "strafeleft")
-        cm = CM_StrafeLeft;
-    else if (str == "straferight")
-        cm = CM_StrafeRight;
-    else
-        cm = CM_Boost;
-}
 
 SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_range)
 : SpaceObject(50, multiplayerClassName, multiplayer_significant_range)
@@ -88,9 +74,11 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     turn_speed = 10.0;
     impulse_max_speed = 600.0;
     warp_speed_per_warp_level = 1000.0;
-    combat_maneuver_delay = 0.0;
-    combat_maneuver = CM_Boost;
-    combat_maneuver_active = 0.0;
+    combat_maneuver_charge = 1.0;
+    combat_maneuver_boost_request = 0.0;
+    combat_maneuver_boost_active = 0.0;
+    combat_maneuver_strafe_request = 0.0;
+    combat_maneuver_strafe_active = 0.0;
     target_id = -1;
     hull_strength = hull_max = 70;
     shields_active = false;
@@ -131,9 +119,11 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&scanned_by_player);
     registerMemberReplication(&docking_state);
     registerMemberReplication(&beam_frequency);
-    registerMemberReplication(&combat_maneuver_delay, 0.5);
-    registerMemberReplication(&combat_maneuver);
-    registerMemberReplication(&combat_maneuver_active, 0.5);
+    registerMemberReplication(&combat_maneuver_charge, 0.5);
+    registerMemberReplication(&combat_maneuver_boost_request);
+    registerMemberReplication(&combat_maneuver_boost_active, 0.2);
+    registerMemberReplication(&combat_maneuver_strafe_request);
+    registerMemberReplication(&combat_maneuver_strafe_active, 0.2);
 
     for(int n=0; n<SYS_COUNT; n++)
     {
@@ -479,28 +469,60 @@ void SpaceShip::update(float delta)
                 current_impulse = impulse_request;
         }
     }
-    setVelocity(sf::vector2FromAngle(getRotation()) * (current_impulse * impulse_max_speed * getSystemEffectiveness(SYS_Impulse) + current_warp * warp_speed_per_warp_level * getSystemEffectiveness(SYS_Warp)));
-
-    if (combat_maneuver_active > 0)
+    sf::Vector2f forward = sf::vector2FromAngle(getRotation());
+    setVelocity(forward * (current_impulse * impulse_max_speed * getSystemEffectiveness(SYS_Impulse) + current_warp * warp_speed_per_warp_level * getSystemEffectiveness(SYS_Warp)));
+    
+    if (combat_maneuver_boost_active > combat_maneuver_boost_request)
     {
-        combat_maneuver_active -= delta;
-        switch(combat_maneuver)
+        combat_maneuver_boost_active -= delta;
+        if (combat_maneuver_boost_active < combat_maneuver_boost_request)
+            combat_maneuver_boost_active = combat_maneuver_boost_request;
+    }
+    if (combat_maneuver_boost_active < combat_maneuver_boost_request)
+    {
+        combat_maneuver_boost_active += delta;
+        if (combat_maneuver_boost_active > combat_maneuver_boost_request)
+            combat_maneuver_boost_active = combat_maneuver_boost_request;
+    }
+    if (combat_maneuver_strafe_active > combat_maneuver_strafe_request)
+    {
+        combat_maneuver_strafe_active -= delta;
+        if (combat_maneuver_strafe_active < combat_maneuver_strafe_request)
+            combat_maneuver_strafe_active = combat_maneuver_strafe_request;
+    }
+    if (combat_maneuver_strafe_active < combat_maneuver_strafe_request)
+    {
+        combat_maneuver_strafe_active += delta;
+        if (combat_maneuver_strafe_active > combat_maneuver_strafe_request)
+            combat_maneuver_strafe_active = combat_maneuver_strafe_request;
+    }
+    
+    if (combat_maneuver_boost_active != 0.0)
+    {
+        combat_maneuver_charge -= combat_maneuver_boost_active * delta * 0.3;
+        if (combat_maneuver_charge <= 0.0)
         {
-        case CM_Boost:
-            setVelocity(getVelocity() + sf::vector2FromAngle(getRotation()) * impulse_max_speed * getSystemEffectiveness(SYS_Impulse) * 10.0f);
-            break;
-        case CM_StrafeLeft:
-            setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() - 90) * impulse_max_speed * getSystemEffectiveness(SYS_Impulse) * 5.0f);
-            break;
-        case CM_StrafeRight:
-            setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() + 90) * impulse_max_speed * getSystemEffectiveness(SYS_Impulse) * 5.0f);
-            break;
-        case CM_Turn:
-            setAngularVelocity(180.0 / 3.0);
-            break;
+            combat_maneuver_charge = 0.0;
+            combat_maneuver_boost_request = 0.0;
+        }else{
+            setVelocity(getVelocity() + forward * impulse_max_speed * 5.0f * combat_maneuver_boost_active);
         }
-    }else if (combat_maneuver_delay > 0)
-        combat_maneuver_delay -= delta * getSystemEffectiveness(SYS_Maneuver);
+    }else if (combat_maneuver_strafe_active != 0.0)
+    {
+        combat_maneuver_charge -= fabs(combat_maneuver_strafe_active) * delta * 0.3;
+        if (combat_maneuver_charge <= 0.0)
+        {
+            combat_maneuver_charge = 0.0;
+            combat_maneuver_strafe_request = 0.0;
+        }else{
+            setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() + 90) * impulse_max_speed * 3.0f * combat_maneuver_strafe_active);
+        }
+    }else if (combat_maneuver_charge < 1.0)
+    {
+        combat_maneuver_charge += (delta / combat_maneuver_charge_time) * getSystemEffectiveness(SYS_Maneuver);
+        if (combat_maneuver_charge > 1.0)
+            combat_maneuver_charge = 1.0;
+    }
 
     for(int n=0; n<max_beam_weapons; n++)
     {
@@ -897,17 +919,6 @@ float SpaceShip::getSystemEffectiveness(ESystem system)
     if (gameGlobalInfo->use_system_damage)
         return std::max(0.0f, systems[system].power_level * systems[system].health);
     return std::max(0.0f, systems[system].power_level * (1.0f - systems[system].heat_level));
-}
-
-void SpaceShip::activateCombatManeuver(ECombatManeuver maneuver)
-{
-    if (combat_maneuver_delay > 0)
-        return;
-    combat_maneuver_delay = max_combat_maneuver_delay;
-    combat_maneuver = maneuver;
-    combat_maneuver_active = 3.0;
-    if (maneuver == CM_Turn)
-        target_rotation += 180;
 }
 
 string SpaceShip::getCallSign()

@@ -41,7 +41,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandActivateSelfDestruct);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCancelSelfDestruct);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandConfirmDestructCode);
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCombatManeuver);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCombatManeuverBoost);
 }
 
 static float system_power_user_factor[] = {
@@ -85,7 +85,8 @@ static const int16_t CMD_REMOVE_WAYPOINT = 0x001B;
 static const int16_t CMD_ACTIVATE_SELF_DESTRUCT = 0x001C;
 static const int16_t CMD_CANCEL_SELF_DESTRUCT = 0x001D;
 static const int16_t CMD_CONFIRM_SELF_DESTRUCT = 0x001E;
-static const int16_t CMD_COMBAT_MANEUVER = 0x001F;
+static const int16_t CMD_COMBAT_MANEUVER_BOOST = 0x001F;
+static const int16_t CMD_COMBAT_MANEUVER_STRAFE = 0x0020;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -759,12 +760,20 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 self_destruct_code_confirmed[index] = true;
         }
         break;
-    case CMD_COMBAT_MANEUVER:
-        if (useEnergy(50))
+    case CMD_COMBAT_MANEUVER_BOOST:
         {
-            ECombatManeuver maneuver;
-            packet >> maneuver;
-            activateCombatManeuver(maneuver);
+            float request_amount;
+            packet >> request_amount;
+            if (request_amount >= 0.0 && request_amount <= 1.0)
+                combat_maneuver_boost_request = request_amount;
+        }
+        break;
+    case CMD_COMBAT_MANEUVER_STRAFE:
+        {
+            float request_amount;
+            packet >> request_amount;
+            if (request_amount >= -1.0 && request_amount <= 1.0)
+                combat_maneuver_strafe_request = request_amount;
         }
         break;
     }
@@ -980,9 +989,18 @@ void PlayerSpaceship::commandConfirmDestructCode(int8_t index, uint32_t code)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandCombatManeuver(ECombatManeuver maneuver)
+void PlayerSpaceship::commandCombatManeuverBoost(float amount)
 {
+    combat_maneuver_boost_request = amount;
     sf::Packet packet;
-    packet << CMD_COMBAT_MANEUVER << maneuver;
+    packet << CMD_COMBAT_MANEUVER_BOOST << amount;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandCombatManeuverStrafe(float amount)
+{
+    combat_maneuver_strafe_request = amount;
+    sf::Packet packet;
+    packet << CMD_COMBAT_MANEUVER_STRAFE << amount;
     sendClientCommand(packet);
 }

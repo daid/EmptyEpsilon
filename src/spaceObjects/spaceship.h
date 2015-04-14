@@ -37,14 +37,6 @@ enum EScannedState
     SS_SimpleScan,
     SS_FullScan
 };
-enum ECombatManeuver
-{
-    CM_Boost,
-    CM_StrafeLeft,
-    CM_StrafeRight,
-    CM_Turn
-};
-template<> void convert<ECombatManeuver>::param(lua_State* L, int& idx, ECombatManeuver& cm);
 
 class ShipSystem
 {
@@ -80,7 +72,7 @@ class SpaceShip : public SpaceObject, public Updatable
     const static float shield_recharge_rate = 0.2f;
 public:
     const static int max_frequency = 20;
-    const static float max_combat_maneuver_delay = 14.0f;
+    const static float combat_maneuver_charge_time = 14.0f;
 
     string template_name;
     string ship_type_name;
@@ -140,11 +132,17 @@ public:
     float warp_speed_per_warp_level;
 
     /*!
-     * [output] Time in seconds until combat maneuver is active again
+     * [output] How much charge there is in the combat maneuvering system (0.0-1.0)
      */
-    float combat_maneuver_delay;
-    ECombatManeuver combat_maneuver;
-    float combat_maneuver_active;
+    float combat_maneuver_charge;
+    /*!
+     * [input] How much boost we want at this moment (0.0-1.0)
+     */
+    float combat_maneuver_boost_request;
+    float combat_maneuver_boost_active;
+    
+    float combat_maneuver_strafe_request;
+    float combat_maneuver_strafe_active;
 
     bool has_jump_drive;      //[config]
     float jump_distance;     //[output]
@@ -276,10 +274,6 @@ public:
     void setScanned(bool scanned) { scanned_by_player = scanned ? SS_FullScan : SS_NotScanned; }
 
     /*!
-     * Activate a certain combat maneuver (and start 'reload' timer)
-     */
-    void activateCombatManeuver(ECombatManeuver maneuver);
-    /*!
      * Check if ship has certain system
      */
     bool hasSystem(ESystem system);
@@ -315,7 +309,6 @@ REGISTER_MULTIPLAYER_ENUM(EWeaponTubeState);
 REGISTER_MULTIPLAYER_ENUM(EMainScreenSetting);
 REGISTER_MULTIPLAYER_ENUM(EDockingState);
 REGISTER_MULTIPLAYER_ENUM(EScannedState);
-REGISTER_MULTIPLAYER_ENUM(ECombatManeuver);
 
 string frequencyToString(int frequency);
 

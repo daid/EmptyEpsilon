@@ -101,25 +101,20 @@ void CrewHelmsUI::onCrewUI()
     drawDockingButton(sf::FloatRect(20, 800, 280, 50), 30);
 
     x = getWindowSize().x - 300;
-    if (my_spaceship->combat_maneuver_delay > 0)
-    {
-        drawDisabledButton(sf::FloatRect(x+70, 650, 140, 50), "Boost");
-        drawDisabledButton(sf::FloatRect(x, 700, 140, 50), "<<--");
-        drawDisabledButton(sf::FloatRect(x+140, 700, 140, 50), "-->>");
-        drawDisabledButton(sf::FloatRect(x, 750, 280, 50), "Turnaround");
-        drawProgressBar(sf::FloatRect(x, 800, 280, 50), my_spaceship->combat_maneuver_delay, SpaceShip::max_combat_maneuver_delay, 0);
-    }else{
-        if (drawButton(sf::FloatRect(x+70, 650, 140, 50), "Boost"))
-            my_spaceship->commandCombatManeuver(CM_Boost);
-        if (drawButton(sf::FloatRect(x, 700, 140, 50), "<<--"))
-            my_spaceship->commandCombatManeuver(CM_StrafeLeft);
-        if (drawButton(sf::FloatRect(x+140, 700, 140, 50), "-->>"))
-            my_spaceship->commandCombatManeuver(CM_StrafeRight);
-        if (drawButton(sf::FloatRect(x, 750, 280, 50), "Turnaround"))
-            my_spaceship->commandCombatManeuver(CM_Turn);
-        drawProgressBar(sf::FloatRect(x, 800, 280, 50), 100, 0, 100);
-        drawText(sf::FloatRect(x, 800, 280, 50), "Combat maneuver ready", AlignCenter, 20, sf::Color::Black);
-    }
+
+
+    //TODO: Here a trick is used to draw the same control twice to get a "snap back to default" type of control.
+    float combat_boost_request = drawVerticalSlider(sf::FloatRect(x + 140 - 25, 750 - 165, 50, 165), 0.0, 1.0, 0.0, 0.0);
+    drawVerticalSlider(sf::FloatRect(x + 140 - 25, 750 - 165, 50, 165), combat_boost_request, 1.0, 0.0, 0.0);
+    if (combat_boost_request != my_spaceship->combat_maneuver_boost_request)
+        my_spaceship->commandCombatManeuverBoost(combat_boost_request);
+    float combat_strafe_request = drawHorizontalSlider(sf::FloatRect(x, 750, 280, 50), 0.0, -1.0, 1.0, 0.0);
+    drawHorizontalSlider(sf::FloatRect(x, 750, 280, 50), combat_strafe_request, -1.0, 1.0, 0.0);
+    if (combat_strafe_request != my_spaceship->combat_maneuver_strafe_request)
+        my_spaceship->commandCombatManeuverStrafe(combat_strafe_request);
+    
+    drawProgressBar(sf::FloatRect(x, 800, 280, 50), my_spaceship->combat_maneuver_charge, 0.0, 1.0);
+    drawText(sf::FloatRect(x, 800, 280, 50), "Combat maneuver", AlignCenter, 20, sf::Color::Black);
 }
 
 void CrewHelmsUI::onPauseHelpGui()

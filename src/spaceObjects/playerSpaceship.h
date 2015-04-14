@@ -105,7 +105,8 @@ public:
     void commandActivateSelfDestruct();
     void commandCancelSelfDestruct();
     void commandConfirmDestructCode(int8_t index, uint32_t code);
-    void commandCombatManeuver(ECombatManeuver maneuver);
+    void commandCombatManeuverBoost(float amount);
+    void commandCombatManeuverStrafe(float strafe);
 
     virtual string getCallSign() { return "PL" + string(getMultiplayerId()); }
 
