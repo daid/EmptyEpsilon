@@ -147,9 +147,16 @@ bool SpaceObject::takeReputationPoints(float amount)
     return true;
 }
 
+void SpaceObject::removeReputationPoints(float amount)
+{
+    addReputationPoints(-amount);
+}
+
 void SpaceObject::addReputationPoints(float amount)
 {
     if (gameGlobalInfo->reputation_points.size() < faction_id)
         return;
     gameGlobalInfo->reputation_points[faction_id] += amount;
+    if (gameGlobalInfo->reputation_points[faction_id] < 0.0)
+        gameGlobalInfo->reputation_points[faction_id] = 0.0;
 }

@@ -877,10 +877,12 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
         e->setSize(getRadius() * 1.5);
         e->setPosition(getPosition());
 
-        for(unsigned int n=0; n<factionInfo.size(); n++)
+        if (info.instigator)
         {
-            if (factionInfo[n]->states[getFactionId()] == FVF_Enemy)
-                gameGlobalInfo->reputation_points[n] += (hull_max + front_shield_max + rear_shield_max) * 0.1;
+            if (isEnemy(info.instigator))
+                info.instigator->addReputationPoints((hull_max + front_shield_max + rear_shield_max) * 0.1);
+            else
+                info.instigator->removeReputationPoints((hull_max + front_shield_max + rear_shield_max) * 0.1);
         }
         destroy();
     }

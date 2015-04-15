@@ -60,6 +60,7 @@ public:
     void setFactionId(unsigned int faction_id) { this->faction_id = faction_id; }
     int getReputationPoints();
     bool takeReputationPoints(float amount);
+    void removeReputationPoints(float amount);
     void addReputationPoints(float amount);
     unsigned int getFactionId() { return faction_id; }
     void setCommsScript(string script_name) { this->comms_script_name = script_name; }
