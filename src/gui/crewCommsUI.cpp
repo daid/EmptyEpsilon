@@ -1,3 +1,5 @@
+#include <set>
+
 #include "gui/crewCommsUI.h"
 #include "spaceObjects/mine.h"
 
@@ -34,7 +36,7 @@ void CrewCommsUI::drawCommsRadar()
     sf::RenderTarget& window = *getRenderTarget();
 
     PVector<SpaceObject> friendly_objects;
-    PVector<SpaceObject> visible_objects;
+    std::set<SpaceObject*> visible_objects;
     foreach(SpaceObject, obj, space_object_list)
     {
         if (obj->isFriendly(my_spaceship))
@@ -50,14 +52,16 @@ void CrewCommsUI::drawCommsRadar()
             }
         }
     }
-    foreach(SpaceObject, obj, space_object_list)
+    foreach(SpaceObject, friendly, friendly_objects)
     {
-        foreach(SpaceObject, friendly, friendly_objects)
+        sf::Vector2f position = friendly->getPosition();
+        PVector<Collisionable> obj_list = CollisionManager::queryArea(position - sf::Vector2f(5000, 5000), position + sf::Vector2f(5000, 5000));
+        foreach(Collisionable, c_obj, obj_list)
         {
-            if ((friendly->getPosition() - obj->getPosition()) < 5000.0f + obj->getRadius())
+            P<SpaceObject> obj = c_obj;
+            if (obj && (friendly->getPosition() - obj->getPosition()) < 5000.0f + obj->getRadius())
             {
-                visible_objects.push_back(obj);
-                break;
+                visible_objects.insert(*obj);
             }
         }
     }
@@ -95,8 +99,9 @@ void CrewCommsUI::drawCommsRadar()
         window.draw(circle);
     }
     drawRaderBackground(radar_view_position, radar_center, radar_size, radar_distance);
-    foreach(SpaceObject, obj, visible_objects)
+    for(std::set<SpaceObject*>::iterator i = visible_objects.begin(); i != visible_objects.end(); i++)
     {
+        SpaceObject* obj = *i;
         sf::Vector2f screen_position = radar_center + (obj->getPosition() - radar_view_position) * scale;
         obj->drawOnRadar(window, screen_position, scale, true);
     }
@@ -138,9 +143,10 @@ void CrewCommsUI::drawCommsRadar()
         {
             P<SpaceObject> target;
             float target_pixel_distance = 0.0;
-            foreach(SpaceObject, obj, visible_objects)
+            for(std::set<SpaceObject*>::iterator i = visible_objects.begin(); i != visible_objects.end(); i++)
             {
-                if(obj == my_spaceship)
+                SpaceObject* obj = *i;
+                if(obj == *my_spaceship)
                     continue;
                 sf::Vector2f screen_position = radar_center + (obj->getPosition() - radar_view_position) * scale;
                 float pixel_distance = sf::length(screen_position - mouse);
