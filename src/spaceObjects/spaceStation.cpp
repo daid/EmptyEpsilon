@@ -133,6 +133,14 @@ void SpaceStation::takeDamage(float damage_amount, DamageInfo& info)
                 e->setSize(getRadius());
                 e->setPosition(getPosition());
 
+                if (info.instigator)
+                {
+                    if (isEnemy(info.instigator))
+                        info.instigator->addReputationPoints((hull_max + shields_max) * 0.1);
+                    else
+                        info.instigator->removeReputationPoints((hull_max + shields_max) * 0.1);
+                }
+
                 destroy();
             }
         }
