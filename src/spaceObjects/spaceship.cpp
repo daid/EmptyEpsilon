@@ -647,7 +647,7 @@ void SpaceShip::fireBeamWeapon(int index, P<SpaceObject> target)
     effect->setSource(this, ship_template->beamPosition[index] * ship_template->scale);
     effect->setTarget(target, hitLocation);
 
-    DamageInfo info(DT_Energy, hitLocation);
+    DamageInfo info(this, DT_Energy, hitLocation);
     info.frequency = beam_frequency;
     info.system_target = beam_system_target;
     target->takeDamage(beam_weapons[index].damage, info);
@@ -734,6 +734,7 @@ void SpaceShip::fireTube(int tubeNr, float target_angle)
     case MW_Mine:
         {
             P<Mine> missile = new Mine();
+            missile->owner = this;
             missile->setFactionId(getFactionId());
             missile->setPosition(fireLocation);
             missile->setRotation(getRotation());

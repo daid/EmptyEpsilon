@@ -15,13 +15,14 @@ enum EDamageType
 class DamageInfo
 {
 public:
+    P<SpaceObject> instigator;
     EDamageType type;
     sf::Vector2f location;
     int frequency;
     ESystem system_target;
 
-    DamageInfo(EDamageType type, sf::Vector2f location)
-    : type(type), location(location), frequency(-1), system_target(SYS_None)
+    DamageInfo(P<SpaceObject> instigator, EDamageType type, sf::Vector2f location)
+    : instigator(instigator), type(type), location(location), frequency(-1), system_target(SYS_None)
     {}
 };
 

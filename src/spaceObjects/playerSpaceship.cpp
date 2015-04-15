@@ -261,7 +261,7 @@ void PlayerSpaceship::update(float delta)
             e->setSize(1000.0f);
             e->setPosition(getPosition());
 
-            DamageInfo info(DT_Kinetic, getPosition());
+            DamageInfo info(this, DT_Kinetic, getPosition());
             SpaceObject::damageArea(getPosition(), 500, 30, 60, info, 0.0);
 
             destroy();
@@ -325,7 +325,7 @@ void PlayerSpaceship::update(float delta)
                     e->setPosition(getPosition() + sf::rotateVector(sf::Vector2f(0, random(0, 500)), random(0, 360)));
                 }
 
-                DamageInfo info(DT_Kinetic, getPosition());
+                DamageInfo info(this, DT_Kinetic, getPosition());
                 SpaceObject::damageArea(getPosition(), 1500, 100, 200, info, 0.0);
 
                 destroy();

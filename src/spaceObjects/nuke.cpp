@@ -11,7 +11,7 @@ Nuke::Nuke()
 
 void Nuke::hitObject(P<SpaceObject> object)
 {
-    DamageInfo info(DT_Kinetic, getPosition());
+    DamageInfo info(owner, DT_Kinetic, getPosition());
     SpaceObject::damageArea(getPosition(), blastRange, damageAtEdge, damageAtCenter, info, getRadius());
 
     P<ExplosionEffect> e = new ExplosionEffect();

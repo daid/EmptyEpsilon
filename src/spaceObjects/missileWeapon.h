@@ -6,6 +6,7 @@
 /* Base class for all the missile weapons. Handles missile generic stuff like targeting, lifetime, etc... */
 class MissileWeapon : public SpaceObject, public Updatable
 {
+protected:
     float speed; //meter/sec
     float turnrate; //deg/sec
 
@@ -14,6 +15,7 @@ class MissileWeapon : public SpaceObject, public Updatable
     float homing_range;
 
     bool launch_sound_played;
+    
 public:
     P<SpaceObject> owner; //Only valid on server.
     int32_t target_id;

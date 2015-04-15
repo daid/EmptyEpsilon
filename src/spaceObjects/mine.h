@@ -14,6 +14,7 @@ class Mine : public SpaceObject, public Updatable
     const static float damageAtEdge = 30.0f;
 
 public:
+    P<SpaceObject> owner;
     bool triggered;       //Only valid on server.
     float triggerTimeout; //Only valid on server.
     float ejectTimeout;   //Only valid on server.

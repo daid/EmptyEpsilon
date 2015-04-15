@@ -11,7 +11,7 @@ EMPMissile::EMPMissile()
 
 void EMPMissile::hitObject(P<SpaceObject> object)
 {
-    DamageInfo info(DT_EMP, getPosition());
+    DamageInfo info(owner, DT_EMP, getPosition());
     SpaceObject::damageArea(getPosition(), blastRange, damageAtEdge, damageAtCenter, info, getRadius());
 
     P<ElectricExplosionEffect> e = new ElectricExplosionEffect();
