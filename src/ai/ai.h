@@ -21,6 +21,8 @@ protected:
     bool has_missiles;
     bool has_beams;
     float beam_weapon_range;
+    
+    float update_target_delay;
 
     PathPlanner pathPlanner;
 public:

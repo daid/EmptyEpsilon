@@ -13,6 +13,8 @@ ShipAI::ShipAI(CpuShip* owner)
     has_missiles = false;
     has_beams = false;
     beam_weapon_range = 0.0;
+    
+    update_target_delay = 0.0;
 }
 
 ShipAI::~ShipAI()
@@ -31,7 +33,13 @@ void ShipAI::run(float delta)
     owner->impulse_request = 0.0f;
 
     updateWeaponState(delta);
-    updateTarget();
+    if (update_target_delay > 0.0)
+    {
+        update_target_delay -= delta;
+    }else{
+        update_target_delay = random(0.25, 0.5);
+        updateTarget();
+    }
 
     //If we have a target and weapons, engage the target.
     if (owner->getTarget() && (has_missiles || has_beams))

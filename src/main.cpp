@@ -7,6 +7,7 @@
 #include "packResourceProvider.h"
 #include "scienceDatabase.h"
 #include "main.h"
+#include "epsilonServer.h"
 #include "httpScriptAccess.h"
 
 #ifdef __APPLE__
@@ -93,42 +94,45 @@ int main(int argc, char** argv)
         server->addHandler(new HttpScriptHandler());
     }
 
-    //Setup the rendering layers.
-    backgroundLayer = new RenderLayer();
-    objectLayer = new RenderLayer(backgroundLayer);
-    effectLayer = new RenderLayer(objectLayer);
-    hudLayer = new RenderLayer(effectLayer);
-    mouseLayer = new RenderLayer(hudLayer);
-    glitchPostProcessor = new PostProcessor("glitch", mouseLayer);
-    glitchPostProcessor->enabled = false;
-    warpPostProcessor = new PostProcessor("warp", glitchPostProcessor);
-    warpPostProcessor->enabled = false;
-    defaultRenderLayer = objectLayer;
-
-    int width = 1600;
-    int height = 900;
-    int fsaa = 0;
-    bool fullscreen = true;
-
-    if (startup_parameters.find("fullscreen") != startup_parameters.end())
-        fullscreen = startup_parameters["fullscreen"].toInt();
-
-    sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
-    if (desktop.height / 3 * 4 == desktop.width || startup_parameters["screen43"].toInt() != 0)
+    if (startup_parameters["headless"] == "")
     {
-        width = height / 3 * 4;
-    }else{
-        width = height * desktop.width / desktop.height;
-        if (width < height / 3 * 4)
+        //Setup the rendering layers.
+        backgroundLayer = new RenderLayer();
+        objectLayer = new RenderLayer(backgroundLayer);
+        effectLayer = new RenderLayer(objectLayer);
+        hudLayer = new RenderLayer(effectLayer);
+        mouseLayer = new RenderLayer(hudLayer);
+        glitchPostProcessor = new PostProcessor("glitch", mouseLayer);
+        glitchPostProcessor->enabled = false;
+        warpPostProcessor = new PostProcessor("warp", glitchPostProcessor);
+        warpPostProcessor->enabled = false;
+        defaultRenderLayer = objectLayer;
+
+        int width = 1600;
+        int height = 900;
+        int fsaa = 0;
+        bool fullscreen = true;
+
+        if (startup_parameters.find("fullscreen") != startup_parameters.end())
+            fullscreen = startup_parameters["fullscreen"].toInt();
+
+        sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+        if (desktop.height / 3 * 4 == desktop.width || startup_parameters["screen43"].toInt() != 0)
+        {
             width = height / 3 * 4;
+        }else{
+            width = height * desktop.width / desktop.height;
+            if (width < height / 3 * 4)
+                width = height / 3 * 4;
+        }
+        if (startup_parameters["fsaa"].toInt() > 0)
+        {
+            fsaa = startup_parameters["fsaa"].toInt();
+            if (fsaa < 2)
+                fsaa = 2;
+        }
+        engine->registerObject("windowManager", new WindowManager(width, height, fullscreen, warpPostProcessor, fsaa));
     }
-    if (startup_parameters["fsaa"].toInt() > 0)
-    {
-        fsaa = startup_parameters["fsaa"].toInt();
-        if (fsaa < 2)
-            fsaa = 2;
-    }
-    engine->registerObject("windowManager", new WindowManager(width, height, fullscreen, warpPostProcessor, fsaa));
     if (startup_parameters["touchscreen"].toInt())
     {
         InputHandler::touch_screen = true;
@@ -189,16 +193,19 @@ int main(int argc, char** argv)
         if (scienceInfoScript)
             scienceInfoScript->destroy();
     }
-    returnToMainMenu();
     
+    returnToMainMenu();
     engine->runMainLoop();
 
     f = fopen("options.ini", "w");
     if (f)
     {
         P<WindowManager> windowManager = engine->getObject("windowManager");
-        startup_parameters["fsaa"] = windowManager->getFSAA();
-        startup_parameters["fullscreen"] = windowManager->isFullscreen() ? 1 : 0;
+        if (windowManager)
+        {
+            startup_parameters["fsaa"] = windowManager->getFSAA();
+            startup_parameters["fullscreen"] = windowManager->isFullscreen() ? 1 : 0;
+        }
         startup_parameters["music_volume"] = soundManager.getMusicVolume();
         startup_parameters["disable_shaders"] = PostProcessor::isEnabled() ? 0 : 1;
         fprintf(f, "# Empty Epsilon Settings\n# This file will be overwritten by EE.\n\n");
@@ -217,13 +224,23 @@ int main(int argc, char** argv)
 
 void returnToMainMenu()
 {
-    if (startup_parameters["autoconnect"].toInt())
+    if (startup_parameters["headless"] != "")
+    {
+        new EpsilonServer();
+        
+        P<ScriptObject> script = new ScriptObject();
+        script->run(startup_parameters["headless"]);
+        engine->registerObject("scenario", script);
+        engine->setGameSpeed(1.0);
+    }
+    else if (startup_parameters["autoconnect"].toInt())
     {
         int crew_position = startup_parameters["autoconnect"].toInt() - 1;
         if (crew_position < 0) crew_position = 0;
         if (crew_position > max_crew_positions) crew_position = max_crew_positions;
         new AutoConnectScreen(ECrewPosition(crew_position), startup_parameters["autocontrolmainscreen"].toInt());
-    }else if (startup_parameters["touchcalib"].toInt())
+    }
+    else if (startup_parameters["touchcalib"].toInt())
     {
         new MouseCalibrator(startup_parameters["touchcalibfile"]);
     }else{

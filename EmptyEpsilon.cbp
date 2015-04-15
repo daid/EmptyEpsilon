@@ -131,6 +131,33 @@
 					<Add library="sfml-network" />
 				</Linker>
 			</Target>
+			<Target title="Profile">
+				<Option output=".bin/Profile/EmptyEpsilon" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".obj/Profile/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option parameters="fullscreen=1 screen43=0 touchscreen=0" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-pg" />
+					<Add option="-g" />
+					<Add directory="../SFML-2.2/include" />
+				</Compiler>
+				<Linker>
+					<Add option="-pg -lgmon" />
+					<Add library="sfml-audio" />
+					<Add library="sfml-graphics" />
+					<Add library="sfml-main" />
+					<Add library="sfml-system" />
+					<Add library="sfml-window" />
+					<Add library="sfml-network" />
+					<Add library="opengl32" />
+					<Add library="glu32" />
+					<Add library="iphlpapi" />
+					<Add library="wsock32" />
+					<Add directory="../SFML-2.2/lib" />
+				</Linker>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
