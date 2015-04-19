@@ -5,9 +5,9 @@
 
 class EMPMissile : public MissileWeapon
 {
-    const static float blastRange = 1000.0f;
-    const static float damageAtCenter = 160.0f;
-    const static float damageAtEdge = 30.0f;
+    constexpr static float blastRange = 1000.0f;
+    constexpr static float damageAtCenter = 160.0f;
+    constexpr static float damageAtEdge = 30.0f;
 public:
     EMPMissile();
     

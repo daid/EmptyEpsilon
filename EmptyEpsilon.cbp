@@ -134,9 +134,9 @@
 			<Target title="Profile">
 				<Option output=".bin/Profile/EmptyEpsilon" prefix_auto="1" extension_auto="1" />
 				<Option object_output=".obj/Profile/" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="fullscreen=1 screen43=0 touchscreen=0" />
+				<Option parameters="fullscreen=1 screen43=0 touchscreen=0 headless=scenario_06_battlefield.lua" />
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-pg" />
@@ -160,6 +160,7 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 			<Add directory="../SeriousProton/src" />
 			<Add directory="src" />

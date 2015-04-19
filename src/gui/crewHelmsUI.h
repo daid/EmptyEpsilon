@@ -6,7 +6,7 @@
 class HelmsGhostDot
 {
 public:
-    const static float total_lifetime = 60.0f;
+    constexpr static float total_lifetime = 60.0f;
     
     sf::Vector2f position;
     float lifetime;

@@ -7,7 +7,7 @@
 
 class SpaceStation : public SpaceObject, public Updatable
 {
-    static const float shieldRechargeRate = 0.2;
+    static constexpr float shieldRechargeRate = 0.2;
     float shieldHitEffect;
 
     string template_name;

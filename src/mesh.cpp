@@ -7,7 +7,7 @@ static inline int readInt(P<ResourceStream> stream)
 {
     int32_t ret = 0;
     stream->read(&ret, sizeof(int32_t));
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__ || defined(WIN32)
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__ || defined(_WIN32)
     return (ret & 0xFF) << 24 | (ret & 0xFF00) << 8 | (ret & 0xFF0000) >> 8 | (ret & 0xFF000000) >> 24;
 #endif
     return ret;

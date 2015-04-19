@@ -5,8 +5,8 @@
 
 class ElectricExplosionEffect : public SpaceObject, public Updatable
 {
-    const static float maxLifetime = 4.0;
-    const static int particleCount = 1000;
+    constexpr static float maxLifetime = 4.0;
+    constexpr static int particleCount = 1000;
     
     float lifetime;
     float size;
