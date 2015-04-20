@@ -8,6 +8,7 @@ class CrewWeaponsUI : public CrewUI
 public:
     EMissileWeapons tube_load_type;
     float missile_target_angle;
+    bool missile_targeting;
     
     CrewWeaponsUI();
     

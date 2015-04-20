@@ -5,6 +5,7 @@ CrewWeaponsUI::CrewWeaponsUI()
 {
     tube_load_type = MW_None;
     missile_target_angle = 0.0;
+    missile_targeting = false;
 }
 
 void CrewWeaponsUI::onCrewUI()
@@ -15,7 +16,7 @@ void CrewWeaponsUI::onCrewUI()
     sf::Vector2f diff = mouse - radar_center;
     sf::Vector2f mousePosition = my_spaceship->getPosition() + diff / 400.0f * radarDistance;
 
-    if (InputHandler::mouseIsReleased(sf::Mouse::Left))
+    if (InputHandler::mouseIsPressed(sf::Mouse::Left))
     {
         if (sf::length(diff) < 400 && (mouse.x > 520 || mouse.y < 890 - 50 * my_spaceship->weapon_tubes))
         {
@@ -31,10 +32,20 @@ void CrewWeaponsUI::onCrewUI()
                 }
             }
             if (target)
+            {
                 my_spaceship->commandSetTarget(target);
-            else
-                missile_target_angle = sf::vector2ToAngle(diff);
+            }else{
+                missile_targeting = true;
+            }
         }
+    }
+    if (InputHandler::mouseIsReleased(sf::Mouse::Left))
+    {
+        missile_targeting = false;
+    }
+    if (missile_targeting)
+    {
+        missile_target_angle = sf::vector2ToAngle(diff);
     }
 
     {
