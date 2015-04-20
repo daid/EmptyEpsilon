@@ -99,9 +99,8 @@ void CrewCommsUI::drawCommsRadar()
         window.draw(circle);
     }
     drawRaderBackground(radar_view_position, radar_center, radar_size, radar_distance);
-    for(std::set<SpaceObject*>::iterator i = visible_objects.begin(); i != visible_objects.end(); i++)
+    for(SpaceObject* obj : visible_objects)
     {
-        SpaceObject* obj = *i;
         sf::Vector2f screen_position = radar_center + (obj->getPosition() - radar_view_position) * scale;
         obj->drawOnRadar(window, screen_position, scale, true);
     }
@@ -143,9 +142,8 @@ void CrewCommsUI::drawCommsRadar()
         {
             P<SpaceObject> target;
             float target_pixel_distance = 0.0;
-            for(std::set<SpaceObject*>::iterator i = visible_objects.begin(); i != visible_objects.end(); i++)
+            for(SpaceObject* obj : visible_objects)
             {
-                SpaceObject* obj = *i;
                 if(obj == *my_spaceship)
                     continue;
                 sf::Vector2f screen_position = radar_center + (obj->getPosition() - radar_view_position) * scale;
