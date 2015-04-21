@@ -115,7 +115,7 @@ void CrewWeaponsUI::onCrewUI()
     drawRadar(radar_center, 400, radarDistance, false, my_spaceship->getTarget());
 
     drawKeyValueDisplay(sf::FloatRect(20, 100, 250, 40), 0.5, "Energy", string(int(my_spaceship->energy_level)), 25);
-    drawKeyValueDisplay(sf::FloatRect(20, 140, 250, 40), 0.5, "Shields", string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "/" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)), 25);
+    drawKeyValueDisplay(sf::FloatRect(20, 140, 250, 40), 0.5, "Shields", string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + ":" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)), 25);
 
     if (my_spaceship->weapon_tubes > 0)
     {
