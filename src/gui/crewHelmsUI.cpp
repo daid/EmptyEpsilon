@@ -113,6 +113,9 @@ void CrewHelmsUI::onCrewUI()
     if (combat_strafe_request != my_spaceship->combat_maneuver_strafe_request)
         my_spaceship->commandCombatManeuverStrafe(combat_strafe_request);
     
+    drawDamagePowerDisplay(sf::FloatRect(x + 140 - 25, 750 - 165, 50, 165), SYS_Impulse, 20);
+    drawDamagePowerDisplay(sf::FloatRect(x, 750, 280, 50), SYS_Maneuver, 20);
+    
     drawProgressBar(sf::FloatRect(x, 800, 280, 50), my_spaceship->combat_maneuver_charge, 0.0, 1.0);
     drawText(sf::FloatRect(x, 800, 280, 50), "Combat maneuver", AlignCenter, 20, sf::Color::Black);
 }

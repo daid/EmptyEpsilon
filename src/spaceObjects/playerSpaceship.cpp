@@ -339,6 +339,10 @@ void PlayerSpaceship::update(float delta)
         if (comms_open_delay > 0)
             comms_open_delay -= delta;
     }
+    
+    addHeat(SYS_Impulse, combat_maneuver_boost_active * delta * heat_per_combat_maneuver_boost);
+    addHeat(SYS_Maneuver, fabs(combat_maneuver_strafe_active) * delta * heat_per_combat_maneuver_strafe);
+    addHeat(SYS_Warp, current_warp * delta * heat_per_warp);
 
     SpaceShip::update(delta);
 
@@ -380,13 +384,17 @@ void PlayerSpaceship::executeJump(float distance)
     {
         warp_indicator = 2.0;
         SpaceShip::executeJump(distance);
+        addHeat(SYS_JumpDrive, heat_per_jump);
     }
 }
 
 void PlayerSpaceship::fireBeamWeapon(int idx, P<SpaceObject> target)
 {
     if (useEnergy(energy_per_beam_fire))
+    {
         SpaceShip::fireBeamWeapon(idx, target);
+        addHeat(SYS_BeamWeapons, heat_per_beam_fire);
+    }
 }
 
 void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
@@ -433,6 +441,12 @@ void PlayerSpaceship::setSystemCoolant(ESystem system, float level)
     }
 
     systems[system].coolant_level = level;
+}
+
+void PlayerSpaceship::addHeat(ESystem system, float amount)
+{
+    if (!hasSystem(system)) return;
+    systems[system].heat_level = std::min(1.0f, systems[system].heat_level + amount);
 }
 
 float PlayerSpaceship::getNetPowerUsage()

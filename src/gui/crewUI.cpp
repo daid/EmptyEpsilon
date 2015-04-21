@@ -215,11 +215,13 @@ void CrewUI::drawDamagePowerDisplay(sf::FloatRect rect, ESystem system, float te
 
     float power = my_spaceship->systems[system].power_level;
     float health = my_spaceship->systems[system].health;
+    float heat = my_spaceship->systems[system].heat_level;
     int alpha = 128;
     if (system == SYS_FrontShield)
     {
         power = std::max(power, my_spaceship->systems[SYS_RearShield].power_level);
         health = std::max(health, my_spaceship->systems[SYS_RearShield].health);
+        heat = std::max(heat, my_spaceship->systems[SYS_RearShield].heat_level);
     }
     if (health <= 0.0)
     {
@@ -238,6 +240,11 @@ void CrewUI::drawDamagePowerDisplay(sf::FloatRect rect, ESystem system, float te
         color = sf::Color(255, 128, 0);
         alpha = 64;
         display_text = "LOW POWER";
+    }else if (heat > 0.90)
+    {
+        color = sf::Color(255, 128, 0);
+        alpha = 64;
+        display_text = "OVERHEATING";
     }else{
         return;
     }

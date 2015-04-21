@@ -45,6 +45,11 @@ public:
     constexpr static float comms_channel_open_time = 2.0;
     constexpr static int max_comms_reply_count = 16;
     constexpr static int max_self_destruct_codes = 3;
+    constexpr static float heat_per_jump = 0.25;
+    constexpr static float heat_per_beam_fire = 0.02;
+    constexpr static float heat_per_combat_maneuver_boost = 0.2;
+    constexpr static float heat_per_combat_maneuver_strafe = 0.2;
+    constexpr static float heat_per_warp = 0.02;
 
     NetworkRecorder network_recorder;
     NetworkAudioStream network_audio_stream;
@@ -119,6 +124,7 @@ public:
 
     virtual void update(float delta);
     bool useEnergy(float amount) { if (energy_level >= amount) { energy_level -= amount; return true; } return false; }
+    void addHeat(ESystem system, float amount);
 
     float getNetPowerUsage();
 
