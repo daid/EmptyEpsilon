@@ -953,7 +953,7 @@ void MainUIBase::draw3Dheadings(float distance)
         return;
     for(int angle = 0; angle < 360; angle += 30)
     {
-        sf::Vector2f world_pos = my_spaceship->getPosition() + sf::vector2FromAngle(float(angle)) * distance;
+        sf::Vector2f world_pos = my_spaceship->getPosition() + sf::vector2FromAngle(float(angle - 90)) * distance;
         sf::Vector3f screen_pos = worldToScreen(sf::Vector3f(world_pos.x, world_pos.y, 0.0f));
         if (screen_pos.z > 0.0f)
             drawText(sf::FloatRect(screen_pos.x, screen_pos.y, 0, 0), string(angle), AlignCenter, 30, sf::Color(255, 255, 255, 128));
