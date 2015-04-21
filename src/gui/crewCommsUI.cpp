@@ -219,7 +219,7 @@ void CrewCommsUI::drawCommsRadar()
                     if (ship && ship->scanned_by_player != SS_FriendOrFoeIdentified)
                     {
                         drawKeyValueDisplay(sf::FloatRect(x - 270, y, 250, 30), 0.4, "Type", ship->ship_type_name, 20); y += 30;
-                        drawKeyValueDisplay(sf::FloatRect(x - 270, y, 250, 30), 0.4, "Shields", string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), 20); y += 30;
+                        drawKeyValueDisplay(sf::FloatRect(x - 270, y, 250, 30), 0.4, "Shields", string(int(ship->front_shield)) + ":" + string(int(ship->rear_shield)), 20); y += 30;
                     }
                     if (station && my_spaceship->isFriendly(station))
                     {

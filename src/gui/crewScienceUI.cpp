@@ -113,7 +113,7 @@ void CrewScienceUI::onRadarUI()
                 if (ship)
                 {
                     drawKeyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Type", ship->ship_type_name, 20); y += 30;
-                    drawKeyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Shields", string(int(ship->front_shield)) + "/" + string(int(ship->rear_shield)), 20); y += 30;
+                    drawKeyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.4, "Shields", string(int(ship->front_shield)) + ":" + string(int(ship->rear_shield)), 20); y += 30;
 
                     if (ship->scanned_by_player == SS_FullScan)
                     {
