@@ -359,21 +359,16 @@ void PlayerSpaceship::setShipTemplate(string template_name)
     default:
         break;
     case PWJ_WarpDrive:
-        has_warp_drive = true;
-        if (warp_speed_per_warp_level < 100)
-            warp_speed_per_warp_level = 1000;
-        has_jump_drive = false;
+        setWarpDrive(true);
+        setJumpDrive(false);
         break;
     case PWJ_JumpDrive:
-        has_warp_drive = false;
-        warp_speed_per_warp_level = 0;
-        has_jump_drive = true;
+        setWarpDrive(false);
+        setJumpDrive(true);
         break;
     case PWJ_WarpAndJumpDrive:
-        has_warp_drive = true;
-        if (warp_speed_per_warp_level < 100)
-            warp_speed_per_warp_level = 1000;
-        has_jump_drive = true;
+        setWarpDrive(true);
+        setJumpDrive(true);
         break;
     }
 }

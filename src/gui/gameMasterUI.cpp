@@ -373,16 +373,14 @@ void GameMasterShipRetrofit::onGui()
 
     ship->ship_type_name = drawTextEntry(sf::FloatRect(x, y, 300, 30), ship->ship_type_name, 20);
     y += 30;
-    int diff = drawSelector(sf::FloatRect(x, y, 300, 30), string("WarpDrive: ") + (ship->has_warp_drive ? "Yes" : "No"), 20);
+    int diff = drawSelector(sf::FloatRect(x, y, 300, 30), string("WarpDrive: ") + (ship->hasWarpDrive() ? "Yes" : "No"), 20);
     y += 30;
     if (diff)
     {
-        ship->has_warp_drive = !ship->has_warp_drive;
-        if (ship->warp_speed_per_warp_level < 100)
-            ship->warp_speed_per_warp_level = 1000;
+        ship->setWarpDrive(!ship->hasWarpDrive());
     }
-    if (drawSelector(sf::FloatRect(x, y, 300, 30), string("JumpDrive: ") + (ship->has_jump_drive ? "Yes" : "No"), 20))
-        ship->has_jump_drive = !ship->has_jump_drive;
+    if (drawSelector(sf::FloatRect(x, y, 300, 30), string("JumpDrive: ") + (ship->hasJumpDrive() ? "Yes" : "No"), 20))
+        ship->setJumpDrive(!ship->hasJumpDrive());
     y += 30;
     ship->impulse_max_speed += drawSelector(sf::FloatRect(x, y, 300, 30), "Max speed: " + string(ship->impulse_max_speed), 20);
     y += 30;

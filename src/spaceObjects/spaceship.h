@@ -294,11 +294,36 @@ public:
     void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage[weapon] = amount; }
     float getHull() { return hull_strength; }
     float getHullMax() { return hull_max; }
+    void setHull(float amount) { if (amount < 0) return; hull_strength = amount; }
+    void setHullMax(float amount) { if (amount < 0) return; hull_max = amount; }
     float getFrontShield() { return front_shield; }
     float getFrontShieldMax() { return front_shield_max; }
+    void setFrontShield(float amount) { if (amount < 0) return; front_shield = amount; }
+    void setFrontShieldMax(float amount) { if (amount < 0) return; front_shield_max = amount; }
     float getRearShield() { return rear_shield; }
     float getRearShieldMax() { return rear_shield_max; }
+    void setRearShield(float amount) { if (amount < 0) return; rear_shield = amount; }
+    void setRearShieldMax(float amount) { if (amount < 0) return; rear_shield_max = amount; }
     bool getShieldsActive() { return shields_active; }
+    void setShieldsActive(bool active) { shields_active = active; }
+    float getSystemHealth(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].health; }
+    void setSystemHealth(ESystem system, float health) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].health = std::min(1.0f, std::max(-1.0f, health)); }
+    
+    bool hasJumpDrive() { return has_jump_drive; }
+    void setJumpDrive(bool has_jump) { has_jump_drive = has_jump; }
+    bool hasWarpDrive() { return has_warp_drive; }
+    void setWarpDrive(bool has_warp)
+    {
+        has_warp_drive = has_warp;
+        if (has_warp_drive)
+        {
+            if (warp_speed_per_warp_level < 100)
+                warp_speed_per_warp_level = 1000;
+        }else{
+            warp_request = 0.0;
+            warp_speed_per_warp_level = 0;
+        }
+    }
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);

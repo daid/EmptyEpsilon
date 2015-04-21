@@ -27,11 +27,24 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponStorage);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getHull);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getHullMax);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setHull);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setHullMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getFrontShield);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getFrontShieldMax);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setFrontShield);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setFrontShieldMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getRearShield);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getRearShieldMax);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRearShield);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRearShieldMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getShieldsActive);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setShieldsActive);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHealth);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHealth);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasJumpDrive);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDrive);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasWarpDrive);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWarpDrive);
 }
 
 /* Define script conversion function for the EMainScreenSetting enum. */
