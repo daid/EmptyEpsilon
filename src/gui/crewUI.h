@@ -8,6 +8,8 @@
 
 class CrewUI : public MainUIBase
 {
+private:
+    float return_to_ship_selection_time;
 public:
     CrewUI();
 

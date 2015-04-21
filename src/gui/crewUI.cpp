@@ -3,9 +3,11 @@
 #include "factionInfo.h"
 #include "spaceObjects/spaceStation.h"
 #include "spaceObjects/warpJammer.h"
+#include "shipSelectionScreen.h"
 
 CrewUI::CrewUI()
 {
+    return_to_ship_selection_time = 0.0;
 }
 
 void CrewUI::onGui()
@@ -22,6 +24,19 @@ void CrewUI::onGui()
         }
     }else{
         drawStatic();
+        if (return_to_ship_selection_time == 0.0)
+        {
+            return_to_ship_selection_time = engine->getElapsedTime() + 20.0;
+        }
+        if (engine->getElapsedTime() > return_to_ship_selection_time)
+        {
+            destroy();
+            new ShipSelectionScreen();
+        }
+        if (engine->getElapsedTime() > return_to_ship_selection_time - 10.0)
+        {
+            drawProgressBar(sf::FloatRect(getWindowSize().x / 2 - 300, 600, 600, 100), return_to_ship_selection_time - engine->getElapsedTime(), 0, 10);
+        }
     }
 
     int cnt = 0;
