@@ -6,8 +6,12 @@
 
 class MainScreenBaseUI : public MainUIBase
 {
+private:
+    float return_to_ship_selection_time;
 public:
     MainScreenBaseUI();
+    
+    virtual void onGui();
     
     virtual void destroy();
 };
