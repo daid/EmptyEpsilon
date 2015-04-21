@@ -522,7 +522,10 @@ void GameMasterCreateObjectWindow::onGui()
 
     y += 10;
     if (drawButton(sf::FloatRect(x, y, 300, 50), "Cancel"))
+    {
+        ui->create_object_script = "";
         destroy();
+    }
 }
 
 GameMasterHailUI::GameMasterHailUI(P<PlayerSpaceship> player)
