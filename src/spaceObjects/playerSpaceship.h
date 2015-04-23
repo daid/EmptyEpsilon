@@ -38,9 +38,9 @@ public:
     constexpr static float energy_per_jump_km = 8.0f;
     constexpr static float energy_per_beam_fire = 3.0f;
     constexpr static float energy_warp_per_second = 1.0f;
-    constexpr static float system_heatup_per_second = 0.1f;
+    constexpr static float system_heatup_per_second = 0.05f;
     constexpr static float max_coolant = 10.0;
-    constexpr static float damage_per_second_on_overheat = 0.2;
+    constexpr static float damage_per_second_on_overheat = 0.05;
     constexpr static float shield_calibration_time = 10.0f;
     constexpr static float comms_channel_open_time = 2.0;
     constexpr static int max_comms_reply_count = 16;
