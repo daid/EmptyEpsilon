@@ -17,5 +17,6 @@ void Nuke::hitObject(P<SpaceObject> object)
     P<ExplosionEffect> e = new ExplosionEffect();
     e->setSize(blastRange);
     e->setPosition(getPosition());
+    e->setOnRadar(true);
     destroy();
 }

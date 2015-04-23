@@ -17,5 +17,6 @@ void EMPMissile::hitObject(P<SpaceObject> object)
     P<ElectricExplosionEffect> e = new ElectricExplosionEffect();
     e->setSize(blastRange);
     e->setPosition(getPosition());
+    e->setOnRadar(true);
     destroy();
 }

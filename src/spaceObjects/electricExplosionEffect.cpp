@@ -6,12 +6,16 @@ REGISTER_MULTIPLAYER_CLASS(ElectricExplosionEffect, "ElectricExplosionEffect");
 ElectricExplosionEffect::ElectricExplosionEffect()
 : SpaceObject(1000.0, "ElectricExplosionEffect")
 {
+    on_radar = false;
+    size = 1.0;
+    
     setCollisionRadius(1.0);
     lifetime = maxLifetime;
     for(int n=0; n<particleCount; n++)
         particleDirections[n] = sf::normalize(sf::Vector3f(random(-1, 1), random(-1, 1), random(-1, 1))) * random(0.8, 1.2);
     
     registerMemberReplication(&size);
+    registerMemberReplication(&on_radar);
 }
 
 void ElectricExplosionEffect::draw3DTransparent()
@@ -60,6 +64,20 @@ void ElectricExplosionEffect::draw3DTransparent()
         glVertex3f(v.x, v.y, v.z);
     }
     glEnd();
+}
+
+void ElectricExplosionEffect::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+{
+    if (!on_radar)
+        return;
+    if (long_range)
+        return;
+
+    sf::CircleShape circle(size * scale);
+    circle.setOrigin(size * scale, size * scale);
+    circle.setPosition(position);
+    circle.setFillColor(sf::Color(0, 0, 255, 64 * (lifetime / maxLifetime)));
+    window.draw(circle);
 }
 
 void ElectricExplosionEffect::update(float delta)

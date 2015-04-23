@@ -7,12 +7,14 @@ ExplosionEffect::ExplosionEffect()
 : SpaceObject(1000.0, "ExplosionEffect")
 {
     size = 1.0;
+    on_radar = false;
     setCollisionRadius(1.0);
     lifetime = maxLifetime;
     for(int n=0; n<particleCount; n++)
         particleDirections[n] = sf::normalize(sf::Vector3f(random(-1, 1), random(-1, 1), random(-1, 1))) * random(0.8, 1.2);
     
     registerMemberReplication(&size);
+    registerMemberReplication(&on_radar);
 }
 
 void ExplosionEffect::draw3DTransparent()
@@ -79,6 +81,20 @@ void ExplosionEffect::draw3DTransparent()
         glVertex3f(v.x, v.y, v.z);
     }
     glEnd();
+}
+
+void ExplosionEffect::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+{
+    if (!on_radar)
+        return;
+    if (long_range)
+        return;
+
+    sf::CircleShape circle(size * scale);
+    circle.setOrigin(size * scale, size * scale);
+    circle.setPosition(position);
+    circle.setFillColor(sf::Color(255, 0, 0, 64 * (lifetime / maxLifetime)));
+    window.draw(circle);
 }
 
 void ExplosionEffect::update(float delta)

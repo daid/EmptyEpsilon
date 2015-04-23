@@ -60,17 +60,7 @@ public:
      * \param max_value The value at which the bar is at 100%
      * \param color Color of the progress bar.
      */
-    static void drawProgressBar(sf::FloatRect rect, float value, float min_value = 0.0, float max_value = 1.0, sf::Color color=sf::Color(192, 192, 192));
-
-    /*!
-     * Draw a vertical progress bar.
-     * \param rect Area to draw in
-     * \param value Current value of the progress bar.
-     * \param min_value The value at which the bar is at 0%
-     * \param max_value The value at which the bar is at 100%
-     * \param color Color of the progress bar.
-     */
-    static void drawVerticalProgressBar(sf::FloatRect rect, float value, float min_value = 0.0, float max_value = 1.0, sf::Color color=sf::Color(192, 192, 192));
+    static void drawProgressBar(sf::FloatRect rect, float value, float min_value = 0.0, float max_value = 1.0, sf::Color color=sf::Color(192, 192, 192), sf::Color border_color=sf::Color::White);
 
     /*!
      * Draw a button and check the state.
