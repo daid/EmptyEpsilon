@@ -1,4 +1,3 @@
-#include <SFML/OpenGL.hpp>
 #include "spaceship.h"
 #include "mesh.h"
 #include "gui/gui.h"
@@ -72,7 +71,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
 {
     setCollisionPhysics(true, false);
 
-    engine_emit_delay = 0.0;
     target_rotation = getRotation();
     impulse_request = 0;
     current_impulse = 0;
@@ -224,56 +222,22 @@ void SpaceShip::setShipTemplate(string template_name)
         weapon_storage[n] = weapon_storage_max[n] = ship_template->weapon_storage[n];
 
     ship_template->setCollisionData(this);
-}
-
-void SpaceShip::draw3D()
-{
-    if (!ship_template) return;
-
-    glScalef(ship_template->scale, ship_template->scale, ship_template->scale);
-    glTranslatef(ship_template->render_offset.x, ship_template->render_offset.y, ship_template->render_offset.z);
-    objectShader.setParameter("baseMap", *textureManager.getTexture(ship_template->color_texture));
-    objectShader.setParameter("illuminationMap", *textureManager.getTexture(ship_template->illumination_texture));
-    objectShader.setParameter("specularMap", *textureManager.getTexture(ship_template->specular_texture));
-    sf::Shader::bind(&objectShader);
-    Mesh* m = Mesh::getMesh(ship_template->model);
-    m->render();
+    model_info.setData(ship_template->model_data);
 }
 
 void SpaceShip::draw3DTransparent()
 {
     if (!ship_template) return;
 
-    if (front_shield_hit_effect > 0 || rear_shield_hit_effect > 0)
-    {
-        basicShader.setParameter("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
-        sf::Shader::bind(&basicShader);
-        float f = (front_shield / front_shield_max) * front_shield_hit_effect;
-        glColor4f(f, f, f, 1);
-        glRotatef(engine->getElapsedTime() * 5, 1, 0, 0);
-        glScalef(getRadius() * 1.2, getRadius() * 1.2, getRadius() * 1.2);
-        Mesh* m = Mesh::getMesh("half_sphere.obj");
-        if (front_shield_hit_effect > 0.0)
-            m->render();
-
-        f = (rear_shield / rear_shield_max) * rear_shield_hit_effect;
-        glColor4f(f, f, f, 1);
-        glScalef(1, -1, 1);
-        if (rear_shield_hit_effect > 0.0)
-            m->render();
-    }
+    if (front_shield_hit_effect > 0)
+        model_info.renderFrontShield((front_shield / front_shield_max) * front_shield_hit_effect);
+    if (rear_shield_hit_effect > 0)
+        model_info.renderRearShield((rear_shield / rear_shield_max) * rear_shield_hit_effect);
 
     if (has_jump_drive && jump_delay > 0.0f)
     {
-        glScalef(ship_template->scale, ship_template->scale, ship_template->scale);
-        glDepthFunc(GL_EQUAL);
-        float f = 1.0f - (jump_delay / 10.0f);
-        glColor4f(f, f, f, 1);
-        basicShader.setParameter("textureMap", *textureManager.getTexture("electric_sphere_texture.png"));
-        sf::Shader::bind(&basicShader);
-        Mesh* m = Mesh::getMesh(ship_template->model);
-        m->render();
-        glDepthFunc(GL_LESS);
+        float alpha = 1.0f - (jump_delay / 10.0f);
+        model_info.renderOverlay(textureManager.getTexture("electric_sphere_texture.png"), alpha);
     }
 }
 
@@ -288,7 +252,7 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
             if (beam_weapons[n].cooldown > 0)
                 color = sf::Color(255, 255 * (beam_weapons[n].cooldown / beam_weapons[n].cycleTime), 0);
 
-            sf::Vector2f beam_offset = sf::rotateVector(sf::Vector2f(ship_template->beamPosition[n].x, ship_template->beamPosition[n].y) * ship_template->scale * scale, getRotation());
+            sf::Vector2f beam_offset = sf::rotateVector(ship_template->model_data->getBeamPosition2D(n) * scale, getRotation());
             sf::VertexArray a(sf::LinesStrip, 3);
             a[0].color = color;
             a[1].color = color;
@@ -354,6 +318,7 @@ void SpaceShip::update(float delta)
         if (!ship_template)
             return;
         ship_template->setCollisionData(this);
+        model_info.setData(ship_template->model_data);
     }
 
     if (game_server)
@@ -550,7 +515,7 @@ void SpaceShip::update(float delta)
         {
             if (target && isEnemy(target) && beam_weapons[n].cooldown <= 0.0)
             {
-                sf::Vector2f diff = target->getPosition() - (getPosition() + sf::rotateVector(sf::Vector2f(ship_template->beamPosition[n].x, ship_template->beamPosition[n].y) * ship_template->scale, getRotation()));
+                sf::Vector2f diff = target->getPosition() - (getPosition() + sf::rotateVector(ship_template->model_data->getBeamPosition2D(n), getRotation()));
                 float distance = sf::length(diff) - target->getRadius() / 2.0;
                 float angle = sf::vector2ToAngle(diff);
 
@@ -589,40 +554,11 @@ void SpaceShip::update(float delta)
         }
     }
 
-    if (engine_emit_delay > 0.0)
-    {
-        engine_emit_delay -= delta;
-    }else{
-        engine_emit_delay += 0.1;
-        if (current_impulse != 0.0 || getAngularVelocity() != 0.0)
-        {
-            for(unsigned int n=0; n<ship_template->engine_emitors.size(); n++)
-            {
-                sf::Vector3f offset = ship_template->engine_emitors[n].position * ship_template->scale;
-                sf::Vector2f pos2d = getPosition() + sf::rotateVector(sf::Vector2f(offset.x, offset.y), getRotation());
-                sf::Vector3f color = ship_template->engine_emitors[n].color;
-                sf::Vector3f pos3d = sf::Vector3f(pos2d.x, pos2d.y, offset.z);
-                float scale = ship_template->scale * ship_template->engine_emitors[n].scale;
-                scale *= std::max(fabs(getAngularVelocity() / turn_speed), fabs(current_impulse));
-                ParticleEngine::spawn(pos3d, pos3d, color, color, scale, 0.0, 5.0);
-            }
-        }
-
-        if (has_jump_drive && jump_delay > 0.0f && ship_template)
-        {
-            Mesh* m = Mesh::getMesh(ship_template->model);
-
-            int count = (10.0f - jump_delay);
-            for(int n=0; n<count; n++)
-            {
-                sf::Vector3f offset = m->randomPoint() * ship_template->scale;
-                sf::Vector2f pos2d = getPosition() + sf::rotateVector(sf::Vector2f(offset.x, offset.y), getRotation());
-                sf::Vector3f color = sf::Vector3f(0.6, 0.6, 1);
-                sf::Vector3f pos3d = sf::Vector3f(pos2d.x, pos2d.y, offset.z);
-                ParticleEngine::spawn(pos3d, pos3d, color, color, getRadius() / 15.0f, 0.0, 3.0);
-            }
-        }
-    }
+    model_info.engine_scale = std::min(1.0, std::max(fabs(getAngularVelocity() / turn_speed), fabs(current_impulse)));
+    if (has_jump_drive && jump_delay > 0.0f)
+        model_info.warp_scale = (10.0f - jump_delay) / 10.0f;
+    else
+        model_info.warp_scale = 0.0;
 }
 
 P<SpaceObject> SpaceShip::getTarget()
@@ -657,7 +593,7 @@ void SpaceShip::fireBeamWeapon(int index, P<SpaceObject> target)
 
     beam_weapons[index].cooldown = beam_weapons[index].cycleTime;
     P<BeamEffect> effect = new BeamEffect();
-    effect->setSource(this, ship_template->beamPosition[index] * ship_template->scale);
+    effect->setSource(this, ship_template->model_data->getBeamPosition(index));
     effect->setTarget(target, hitLocation);
 
     DamageInfo info(this, DT_Energy, hitLocation);
@@ -719,7 +655,7 @@ void SpaceShip::fireTube(int tubeNr, float target_angle)
     if (tubeNr < 0 || tubeNr >= max_weapon_tubes) return;
     if (weaponTube[tubeNr].state != WTS_Loaded) return;
 
-    sf::Vector2f fireLocation = getPosition() + sf::rotateVector(ship_template->tubePosition[tubeNr], getRotation()) * ship_template->scale;
+    sf::Vector2f fireLocation = getPosition() + sf::rotateVector(ship_template->model_data->getTubePosition2D(tubeNr), getRotation());
     switch(weaponTube[tubeNr].type_loaded)
     {
     case MW_Homing:

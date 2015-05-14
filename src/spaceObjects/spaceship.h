@@ -78,7 +78,6 @@ public:
     string ship_type_name;
     P<ShipTemplate> ship_template;
     string ship_callsign;
-    float engine_emit_delay;
 
     ShipSystem systems[SYS_COUNT];
     /*!
@@ -182,7 +181,6 @@ public:
 
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
 
-    virtual void draw3D();
     virtual void draw3DTransparent();
 
     /*!

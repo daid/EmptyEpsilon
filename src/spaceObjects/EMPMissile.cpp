@@ -1,4 +1,3 @@
-#include <SFML/OpenGL.hpp>
 #include "EMPMissile.h"
 #include "particleEffect.h"
 #include "electricExplosionEffect.h"

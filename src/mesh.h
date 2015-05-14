@@ -2,6 +2,7 @@
 #define MESH_H
 
 #include <SFML/System.hpp>
+#include "stringImproved.h"
 
 class MeshVertex
 {

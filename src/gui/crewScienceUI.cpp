@@ -215,7 +215,7 @@ void CrewScienceUI::onDatabaseUI()
                 float margin_3d = 5;
                 if (height + 100 > y)
                     y = height + 100;
-                drawSpinningModel(sf::FloatRect(500 + 400 + margin_3d, 100 + margin_3d, width - margin_3d * 2, height - margin_3d * 2), entry->model_template);
+                drawSpinningModel(sf::FloatRect(500 + 400 + margin_3d, 100 + margin_3d, width - margin_3d * 2, height - margin_3d * 2), entry->model_template->model_data);
                 drawBox(sf::FloatRect(500 + 400, 100, width, height));
             }
             if (entry->longDescription.length() > 0)

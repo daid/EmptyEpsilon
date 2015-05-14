@@ -883,10 +883,11 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect, bool show_callsigns)
     }
 }
 
-void MainUIBase::drawSpinningModel(sf::FloatRect rect, P<ShipTemplate> model_template)
+void MainUIBase::drawSpinningModel(sf::FloatRect rect, P<ModelData> model_data)
 {
     if (rect.height <= 0) return;
     if (rect.width <= 0) return;
+    if (!model_data) return;
     
     sf::RenderTarget& window = *getRenderTarget();
     window.pushGLStates();
@@ -927,18 +928,11 @@ void MainUIBase::drawSpinningModel(sf::FloatRect rect, P<ShipTemplate> model_tem
 
     glTranslatef(0, -200, 0);
     glRotatef(-30, 1, 0, 0);
-    glRotatef(engine->getElapsedTime() * 360.0 / 10.0, 0, 0, 1);
+    glRotatef(engine->getElapsedTime() * 360.0f / 10.0f, 0.0f, 0.0f, 1.0f);
     {
-        float scale = model_template->scale / model_template->radius;
-        scale *= 100;
+        float scale = 100.0f / model_data->getRadius();
         glScalef(scale, scale, scale);
-        glTranslatef(model_template->render_offset.x, model_template->render_offset.y, model_template->render_offset.z);
-        objectShader.setParameter("baseMap", *textureManager.getTexture(model_template->color_texture));
-        objectShader.setParameter("illuminationMap", *textureManager.getTexture(model_template->illumination_texture));
-        objectShader.setParameter("specularMap", *textureManager.getTexture(model_template->specular_texture));
-        sf::Shader::bind(&objectShader);
-        Mesh* m = Mesh::getMesh(model_template->model);
-        m->render();
+        model_data->render();
     }
     
     sf::Shader::bind(NULL);

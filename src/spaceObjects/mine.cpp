@@ -1,4 +1,3 @@
-#include <SFML/OpenGL.hpp>
 #include "mine.h"
 #include "playerInfo.h"
 #include "particleEffect.h"
@@ -24,11 +23,6 @@ Mine::Mine()
 
 void Mine::draw3D()
 {
-    sf::Shader::bind(NULL);
-    glColor3f(1, 1, 1);
-    glBegin(GL_POINTS);
-    glVertex3f(0, 0, 0);
-    glEnd();
 }
 
 void Mine::draw3DTransparent()

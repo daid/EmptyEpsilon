@@ -4,6 +4,8 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 
+#include "engine.h"
+
 class ParticleData
 {
 public:

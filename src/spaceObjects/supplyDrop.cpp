@@ -1,4 +1,3 @@
-#include <SFML/OpenGL.hpp>
 #include "supplyDrop.h"
 #include "spaceship.h"
 #include "playerInfo.h"
@@ -20,19 +19,7 @@ SupplyDrop::SupplyDrop()
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = 0;
     energy = 0.0;
-}
-
-void SupplyDrop::draw3D()
-{
-    float scale = 1.0;
-    glScalef(scale, scale, scale);
-    glRotatef(35, 1, 0, 0);
-    objectShader.setParameter("baseMap", *textureManager.getTexture("ammo_box.png"));
-    objectShader.setParameter("illuminationMap", *textureManager.getTexture("ammo_box_illumination.png"));
-    objectShader.setParameter("specularMap", *textureManager.getTexture("ammo_box_specular.png"));
-    sf::Shader::bind(&objectShader);
-    Mesh* m = Mesh::getMesh("ammo_box.obj");
-    m->render();
+    model_info.setData("ammo_box");
 }
 
 void SupplyDrop::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)

@@ -1,4 +1,3 @@
-#include <SFML/OpenGL.hpp>
 #include "warpJammer.h"
 #include "playerInfo.h"
 #include "explosionEffect.h"
@@ -23,19 +22,8 @@ WarpJammer::WarpJammer()
     jammer_list.push_back(this);
 
     registerMemberReplication(&range);
-}
-
-void WarpJammer::draw3D()
-{
-    float scale = 1.0;
-    glScalef(scale, scale, scale);
-    glRotatef(90, 1, 0, 0);
-    objectShader.setParameter("baseMap", *textureManager.getTexture("ammo_box.png"));
-    objectShader.setParameter("illuminationMap", *textureManager.getTexture("ammo_box_illumination.png"));
-    objectShader.setParameter("specularMap", *textureManager.getTexture("ammo_box_specular.png"));
-    sf::Shader::bind(&objectShader);
-    Mesh* m = Mesh::getMesh("ammo_box.obj");
-    m->render();
+    
+    model_info.setData("ammo_box");
 }
 
 void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)

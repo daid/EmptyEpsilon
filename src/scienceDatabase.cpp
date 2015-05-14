@@ -90,7 +90,7 @@ void fillDefaultDatabaseData()
         
         entry->model_template = ship_template;
 
-        entry->addKeyValue("Size", string(int(ship_template->radius)));
+        entry->addKeyValue("Size", string(int(ship_template->model_data->getRadius())));
         entry->addKeyValue("Shield", string(int(ship_template->front_shields)) + "/" + string(int(ship_template->rear_shields)));
         entry->addKeyValue("Hull", string(int(ship_template->hull)));
         entry->addKeyValue("Move speed", string(int(ship_template->impulse_speed)));

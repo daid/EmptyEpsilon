@@ -2,7 +2,7 @@
 #define SPACE_OBJECT_H
 
 #include "engine.h"
-#include "mesh.h"
+#include "modelInfo.h"
 #include "factionInfo.h"
 #include "shipTemplate.h"
 
@@ -68,6 +68,9 @@ public:
     PVector<SpaceObject> getObjectsInRange(float range);
 
     ScriptCallback onDestroyed;
+
+protected:
+    ModelInfo model_info;
 };
 
 #endif//SPACE_OBJECT_H

@@ -18,7 +18,6 @@ public:
 
     SpaceStation();
 
-    virtual void draw3D();
     virtual void draw3DTransparent();
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
     virtual void update(float delta);

@@ -1,4 +1,3 @@
-#include <SFML/OpenGL.hpp>
 #include "spaceObject.h"
 #include "factionInfo.h"
 #include "gameGlobalInfo.h"
@@ -60,6 +59,7 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
 
 void SpaceObject::draw3D()
 {
+    model_info.render(getPosition(), getRotation());
 }
 
 void SpaceObject::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange)

@@ -179,6 +179,10 @@ int main(int argc, char** argv)
     }
 
     {
+        P<ScriptObject> modelDataScript = new ScriptObject("model_data.lua");
+        if (modelDataScript)
+            modelDataScript->destroy();
+        
         P<ScriptObject> shipTemplatesScript = new ScriptObject("shipTemplates.lua");
         if (shipTemplatesScript)
             shipTemplatesScript->destroy();

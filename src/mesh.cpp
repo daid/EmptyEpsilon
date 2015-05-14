@@ -68,8 +68,23 @@ void Mesh::render()
 
 sf::Vector3f Mesh::randomPoint()
 {
-    int idx = irandom(0, vertexCount-1);
-    return sf::Vector3f(vertices[idx].position[0], vertices[idx].position[1], vertices[idx].position[2]);
+    //int idx = irandom(0, vertexCount-1);
+    //return sf::Vector3f(vertices[idx].position[0], vertices[idx].position[1], vertices[idx].position[2]);
+    int idx = irandom(0, vertexCount / 3) * 3;
+    sf::Vector3f v0 = sf::Vector3f(vertices[idx].position[0], vertices[idx].position[1], vertices[idx].position[2]);
+    sf::Vector3f v1 = sf::Vector3f(vertices[idx+1].position[0], vertices[idx+1].position[1], vertices[idx+1].position[2]);
+    sf::Vector3f v2 = sf::Vector3f(vertices[idx+2].position[0], vertices[idx+2].position[1], vertices[idx+2].position[2]);
+    
+    float f1 = random(0.0, 1.0);
+    float f2 = random(0.0, 1.0);
+    if (f1 + f2 > 1.0f)
+    {
+        f1 = 1.0f - f1;
+        f2 = 1.0f - f2;
+    }
+    sf::Vector3f v01 = (v0 * f1) + (v1 * (1.0f - f1));
+    sf::Vector3f ret = (v01 * f2) + (v2 * (1.0f - f2));
+    return ret;
 }
 
 struct IndexInfo

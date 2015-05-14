@@ -8,15 +8,9 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setName);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDescription);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDefaultAI);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setMesh);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setScale);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRenderOffset);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setModel);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSizeClass);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadius);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCollisionBox);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamPosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeam);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubePosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubes);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setHull);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShields);
@@ -28,7 +22,6 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoom);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoomSystem);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addDoor);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addEngineEmitor);
 }
 
 /* Define script conversion function for the EMissileWeapons enum. */
@@ -77,7 +70,6 @@ std::map<string, P<ShipTemplate> > ShipTemplate::templateMap;
 
 ShipTemplate::ShipTemplate()
 {
-    scale = 1.0;
     for(int n=0; n<max_beam_weapons; n++)
     {
         beams[n].arc = 0.0;
@@ -86,8 +78,6 @@ ShipTemplate::ShipTemplate()
         beams[n].damage = 0.0;
         beams[n].cycle_time = 0.0;
     }
-    radius = 50.0;
-    collision_box = sf::Vector2f(0, 0);
     size_class = 10;
     weapon_tubes = 0;
     tube_load_time = 8.0;
@@ -112,21 +102,6 @@ void ShipTemplate::setName(string name)
     this->name = name;
 }
 
-void ShipTemplate::setMesh(string model, string color_texture, string specular_texture, string illumination_texture)
-{
-    this->model = model;
-    this->color_texture = color_texture;
-    this->specular_texture = specular_texture;
-    this->illumination_texture = illumination_texture;
-}
-
-void ShipTemplate::setBeamPosition(int index, sf::Vector3f position)
-{
-    if (index < 0 || index > max_beam_weapons)
-        return;
-    beamPosition[index] = position;
-}
-
 void ShipTemplate::setBeam(int index, float arc, float direction, float range, float cycle_time, float damage)
 {
     if (index < 0 || index > max_beam_weapons)
@@ -138,14 +113,6 @@ void ShipTemplate::setBeam(int index, float arc, float direction, float range, f
     beams[index].range = range;
     beams[index].cycle_time = cycle_time;
     beams[index].damage = damage;
-}
-
-
-void ShipTemplate::setTubePosition(int index, sf::Vector2f position)
-{
-    if (index < 0 || index > max_weapon_tubes)
-        return;
-    tubePosition[index] = position;
 }
 
 sf::Vector2i ShipTemplate::interiorSize()
@@ -171,9 +138,7 @@ ESystem ShipTemplate::getSystemAtRoom(sf::Vector2i position)
 
 void ShipTemplate::setCollisionData(P<SpaceObject> object)
 {
-    object->setRadius(radius);
-    if (collision_box.x > 0 && collision_box.y > 0)
-        object->setCollisionBox(collision_box);
+    model_data->setCollisionData(object);
 }
 
 P<ShipTemplate> ShipTemplate::getTemplate(string name)

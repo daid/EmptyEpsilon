@@ -12,8 +12,6 @@ public:
 
     SupplyDrop();
 
-    virtual void draw3D();
-
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
 
     virtual void collide(Collisionable* target);
