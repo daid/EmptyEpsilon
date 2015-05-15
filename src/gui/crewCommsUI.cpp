@@ -2,6 +2,7 @@
 
 #include "gui/crewCommsUI.h"
 #include "spaceObjects/mine.h"
+#include "spaceObjects/scanProbe.h"
 
 CrewCommsUI::CrewCommsUI()
 {
@@ -46,9 +47,16 @@ void CrewCommsUI::drawCommsRadar()
             {
                 friendly_objects.push_back(obj);
             }else{
-                P<SpaceStation> station = obj;
-                if (station)
-                    friendly_objects.push_back(obj);
+                P<ScanProbe> probe = obj;
+                if (probe)
+                {
+                    if (probe->owner_id == my_spaceship->getMultiplayerId())
+                        friendly_objects.push_back(obj);  
+                }else{
+                    P<SpaceStation> station = obj;
+                    if (station)
+                        friendly_objects.push_back(obj);
+                }
             }
         }
     }
@@ -135,6 +143,12 @@ void CrewCommsUI::drawCommsRadar()
         if (drawButton(sf::FloatRect(x - 270, y, 250, 50), "Add waypoint"))
         {
             mode = mode_place_waypoint;
+            selection_type = select_none;
+        }
+        y += 50;
+        if (drawButton(sf::FloatRect(x - 270, y, 250, 50), "Probe [" + string(my_spaceship->scan_probe_stock) + "/" + string(PlayerSpaceship::max_scan_probes) + "]"))
+        {
+            mode = mode_launch_probe;
             selection_type = select_none;
         }
         y += 50;
@@ -249,6 +263,21 @@ void CrewCommsUI::drawCommsRadar()
         {
             sf::Vector2f point = radar_view_position + (mouse - radar_center) / radar_size * radar_distance;
             my_spaceship->commandAddWaypoint(point);
+            mode = mode_default;
+        }
+        break;
+    case mode_launch_probe:
+        if (drawButton(sf::FloatRect(x - 270, y, 250, 50), "Cancel"))
+        {
+            mode = mode_default;
+        }
+        y += 50;
+
+        drawText(sf::FloatRect(x + 450, 100, 0, 50), "Select probe target", AlignCenter);
+        if (InputHandler::mouseIsReleased(sf::Mouse::Left) && mouse.x > x)
+        {
+            sf::Vector2f point = radar_view_position + (mouse - radar_center) / radar_size * radar_distance;
+            my_spaceship->commandLaunchProbe(point);
             mode = mode_default;
         }
         break;

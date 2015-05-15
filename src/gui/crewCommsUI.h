@@ -6,7 +6,8 @@
 enum CommsStationMode
 {
     mode_default,
-    mode_place_waypoint
+    mode_place_waypoint,
+    mode_launch_probe
 };
 enum CommsSelectionType
 {

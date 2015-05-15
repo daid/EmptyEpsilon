@@ -50,6 +50,7 @@ public:
     constexpr static float heat_per_combat_maneuver_boost = 0.2;
     constexpr static float heat_per_combat_maneuver_strafe = 0.2;
     constexpr static float heat_per_warp = 0.02;
+    constexpr static int max_scan_probes = 10;
 
     NetworkRecorder network_recorder;
     NetworkAudioStream network_audio_stream;
@@ -69,6 +70,7 @@ public:
     std::vector<string> comms_reply_message;
     CommsScriptInterface comms_script_interface;  //Server only
     std::vector<sf::Vector2f> waypoints;
+    int scan_probe_stock;
 
     EMainScreenSetting main_screen_setting;
 
@@ -112,6 +114,7 @@ public:
     void commandConfirmDestructCode(int8_t index, uint32_t code);
     void commandCombatManeuverBoost(float amount);
     void commandCombatManeuverStrafe(float strafe);
+    void commandLaunchProbe(sf::Vector2f target_position);
 
     virtual string getCallSign() { return "PL" + string(getMultiplayerId()); }
 

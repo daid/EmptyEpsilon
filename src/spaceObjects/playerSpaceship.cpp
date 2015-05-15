@@ -1,4 +1,5 @@
 #include "playerSpaceship.h"
+#include "scanProbe.h"
 #include "repairCrew.h"
 #include "explosionEffect.h"
 #include "gameGlobalInfo.h"
@@ -87,6 +88,7 @@ static const int16_t CMD_CANCEL_SELF_DESTRUCT = 0x001D;
 static const int16_t CMD_CONFIRM_SELF_DESTRUCT = 0x001E;
 static const int16_t CMD_COMBAT_MANEUVER_BOOST = 0x001F;
 static const int16_t CMD_COMBAT_MANEUVER_STRAFE = 0x0020;
+static const int16_t CMD_LAUNCH_PROBE = 0x0021;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -104,6 +106,7 @@ PlayerSpaceship::PlayerSpaceship()
     auto_repair_enabled = false;
     activate_self_destruct = false;
     scanning_delay = 0.0;
+    scan_probe_stock = max_scan_probes;
 
     setFactionId(1);
 
@@ -124,6 +127,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&comms_reply_message);
     registerMemberReplication(&comms_incomming_message);
     registerMemberReplication(&waypoints);
+    registerMemberReplication(&scan_probe_stock);
     registerMemberReplication(&activate_self_destruct);
     for(int n=0; n<max_self_destruct_codes; n++)
     {
@@ -181,6 +185,7 @@ void PlayerSpaceship::update(float delta)
 
     if (docking_state == DS_Docked)
     {
+        scan_probe_stock = max_scan_probes;
         energy_level += delta * 10.0;
         if (hull_strength < hull_max)
         {
@@ -785,6 +790,18 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 combat_maneuver_strafe_request = request_amount;
         }
         break;
+    case CMD_LAUNCH_PROBE:
+        if (scan_probe_stock > 0)
+        {
+            sf::Vector2f target;
+            packet >> target;
+            P<ScanProbe> p = new ScanProbe();
+            p->setPosition(getPosition());
+            p->setTarget(target);
+            p->setOwner(this);
+            scan_probe_stock--;
+        }
+        break;
     }
 }
 
@@ -1011,5 +1028,12 @@ void PlayerSpaceship::commandCombatManeuverStrafe(float amount)
     combat_maneuver_strafe_request = amount;
     sf::Packet packet;
     packet << CMD_COMBAT_MANEUVER_STRAFE << amount;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandLaunchProbe(sf::Vector2f target_position)
+{
+    sf::Packet packet;
+    packet << CMD_LAUNCH_PROBE << target_position;
     sendClientCommand(packet);
 }
