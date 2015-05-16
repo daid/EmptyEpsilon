@@ -668,9 +668,10 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect, bool show_callsigns)
     glViewport(rect.left * sx, rect.top * sy, rect.width * sx, rect.height * sy);
 
     glClearDepth(1.f);
-    glClear(GL_DEPTH_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     glDepthMask(GL_TRUE);
     glEnable(GL_CULL_FACE);
+    glColor4f(1,1,1,1);
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -678,7 +679,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect, bool show_callsigns)
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-
+    
     glRotatef(90, 1, 0, 0);
     glScalef(1,1,-1);
     glRotatef(-camera_pitch, 1, 0, 0);
@@ -952,6 +953,34 @@ void MainUIBase::draw3Dheadings(float distance)
         if (screen_pos.z > 0.0f)
             drawText(sf::FloatRect(screen_pos.x, screen_pos.y, 0, 0), string(angle), AlignCenter, 30, sf::Color(255, 255, 255, 128));
     }
+}
+
+void MainUIBase::drawRadarOn3DView()
+{
+    sf::RenderTarget& window = *getRenderTarget();
+    
+    float radar_size = 100;
+    float radar_range = 5000;
+    sf::Vector2f radar_position = sf::Vector2f(getWindowSize().x - radar_size * 1.1, radar_size * 1.1);
+    
+    glEnable(GL_STENCIL_TEST);
+    glStencilFunc(GL_ALWAYS, 1, 1);
+    glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
+    sf::CircleShape circle(radar_size, 50);
+    circle.setOrigin(radar_size, radar_size);
+    circle.setPosition(radar_position);
+    circle.setFillColor(sf::Color::Black);
+    window.draw(circle);
+
+    glStencilFunc(GL_EQUAL, 1, 1);
+    glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+    foreach(SpaceObject, obj, space_object_list)
+    {
+        if (obj != my_spaceship && (obj->getPosition() - my_spaceship->getPosition()) < radar_range + obj->getRadius())
+            obj->drawOnRadar(window, radar_position + (obj->getPosition() - my_spaceship->getPosition()) / radar_range * radar_size, radar_size / radar_range, false);
+    }
+    my_spaceship->drawOnRadar(window, radar_position, radar_size / radar_range, false);
+    glDisable(GL_STENCIL_TEST);
 }
 
 void MainUIBase::draw3DSpaceDust()

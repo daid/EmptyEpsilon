@@ -130,8 +130,9 @@ void MainScreenUI::onGui()
         case MSS_Back:
         case MSS_Left:
         case MSS_Right:
-            draw3Dworld();
+            draw3Dworld(sf::FloatRect(0, 0, getWindowSize().x, getWindowSize().y), true);
             draw3Dheadings();
+            drawRadarOn3DView();
             break;
         case MSS_Tactical:
             renderTactical(*getRenderTarget());
@@ -161,7 +162,7 @@ void MainScreenUI::onGui()
             drawText(sf::FloatRect(getWindowSize().x / 2 - 400, 300, 800, 100), gameGlobalInfo->global_message, AlignCenter, 50);
         }
     }else{
-        draw3Dworld();
+        draw3Dworld(sf::FloatRect(0, 0, getWindowSize().x, getWindowSize().y), false);
     }
 
     MainScreenBaseUI::onGui();
@@ -208,7 +209,7 @@ void ShipWindowUI::onGui()
         }
 #endif
     }
-    draw3Dworld();
+    draw3Dworld(sf::FloatRect(0, 0, getWindowSize().x, getWindowSize().y), false);
 
     MainUIBase::onGui();
 }
@@ -226,7 +227,7 @@ void TopDownUI::onGui()
         camera_position.y = position.y;
         camera_position.z = 7000.0;
     }
-    draw3Dworld();
+    draw3Dworld(sf::FloatRect(0, 0, getWindowSize().x, getWindowSize().y), true);
 
     MainUIBase::onGui();
 }

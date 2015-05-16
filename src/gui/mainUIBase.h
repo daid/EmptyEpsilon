@@ -38,9 +38,10 @@ public:
     void drawRadar(sf::Vector2f position, float size, float range, bool long_range, P<SpaceObject> target, sf::FloatRect rect = sf::FloatRect(0, 0, getWindowSize().x, 900));
     void drawShipInternals(sf::Vector2f position, P<SpaceShip> ship, ESystem highlight_system);
     void drawUILine(sf::Vector2f start, sf::Vector2f end, float x_split);
-    void draw3Dworld(sf::FloatRect rect = sf::FloatRect(0, 0, getWindowSize().x, 900), bool show_callsigns=true);
+    void draw3Dworld(sf::FloatRect rect, bool show_callsigns);
     void drawSpinningModel(sf::FloatRect rect, P<ModelData> model_data);
     void draw3Dheadings(float distance=2500.0f);
+    void drawRadarOn3DView();
     void draw3DSpaceDust();
     
     sf::Vector3f worldToScreen(sf::Vector3f world);
