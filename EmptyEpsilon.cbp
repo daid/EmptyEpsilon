@@ -536,6 +536,8 @@
 		<Unit filename="src/spaceObjects/nuke.h" />
 		<Unit filename="src/spaceObjects/playerSpaceship.cpp" />
 		<Unit filename="src/spaceObjects/playerSpaceship.h" />
+		<Unit filename="src/spaceObjects/scanProbe.cpp" />
+		<Unit filename="src/spaceObjects/scanProbe.h" />
 		<Unit filename="src/spaceObjects/spaceObject.cpp" />
 		<Unit filename="src/spaceObjects/spaceObject.h" />
 		<Unit filename="src/spaceObjects/spaceStation.cpp" />

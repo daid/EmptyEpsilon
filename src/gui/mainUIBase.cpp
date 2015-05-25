@@ -970,6 +970,8 @@ void MainUIBase::drawRadarOn3DView()
     circle.setOrigin(radar_size, radar_size);
     circle.setPosition(radar_position);
     circle.setFillColor(sf::Color::Black);
+    circle.setOutlineColor(sf::Color(64, 64, 64, 255));
+    circle.setOutlineThickness(2.0);
     window.draw(circle);
 
     glStencilFunc(GL_EQUAL, 1, 1);
