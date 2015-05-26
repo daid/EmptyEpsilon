@@ -14,6 +14,8 @@ public:
     
     virtual void onCrewUI();
     virtual void onPauseHelpGui();
+    
+    float calculateFiringSolution(sf::Vector2f target_position);
 };
 
 #endif//CREW_WEAPONS_UI

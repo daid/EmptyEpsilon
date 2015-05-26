@@ -439,7 +439,7 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target)
     sf::Vector2f target_position = target->getPosition();
     sf::Vector2f target_velocity = target->getVelocity();
     float target_velocity_length = sf::length(target_velocity);
-    float missile_angle = sf::vector2ToAngle(target->getPosition() - owner->getPosition());
+    float missile_angle = sf::vector2ToAngle(target_position - owner->getPosition());
     float missile_speed = 200.0f;
     float missile_turn_rate = 10.0f;
     float turn_radius = ((360.0f / missile_turn_rate) * missile_speed) / (2.0f * M_PI);
@@ -461,7 +461,7 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target)
             sf::Vector2f interception = turn_exit + sf::vector2FromAngle(missile_angle) * missile_speed * time_missile;
             if ((interception - target_position) < target->getRadius() / 2)
                 return missile_angle;
-            missile_angle = sf::vector2ToAngle(target->getPosition() - turn_exit);
+            missile_angle = sf::vector2ToAngle(target_position - turn_exit);
         }
         else
         {
@@ -480,7 +480,7 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target)
 
             //When we cannot hit the target with this setup yet. Calculate a new intersection target, and aim for that.
             float guessed_impact_time = (time_target * target_velocity_length / (target_velocity_length + missile_speed)) + (time_missile * missile_speed / (target_velocity_length + missile_speed));
-            sf::Vector2f new_target_position = target->getPosition() + target_velocity * guessed_impact_time;
+            sf::Vector2f new_target_position = target_position + target_velocity * guessed_impact_time;
             missile_angle = sf::vector2ToAngle(new_target_position - turn_exit);
         }
     }

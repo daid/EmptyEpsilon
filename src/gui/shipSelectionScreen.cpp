@@ -10,7 +10,7 @@
 ShipSelectionScreen::ShipSelectionScreen()
 {
     ship_template_index = 0;
-    alternative_screen_selection = false;
+    screen_selection = SS_6players;
     window_angle = 0;
 }
 
@@ -29,9 +29,21 @@ void ShipSelectionScreen::onGui()
 
     drawBox(sf::FloatRect(780, 30, 340, 540));
     drawBox(sf::FloatRect(780, 80, 340, 490));
-    if (alternative_screen_selection)
+
+    string selection_title = "???";
+    
+    switch(screen_selection)
     {
-        drawText(sf::FloatRect(780, 30, 340, 50), "Alternative options", AlignCenter);
+    case SS_6players:
+        selection_title = "6 player crew";
+        selectCrewPosition(true, helmsOfficer, commsOfficer);
+        break;
+    case SS_1player:
+        selection_title = "1 playe crew";
+        selectCrewPosition(false, singlePilot, singlePilot);
+        break;
+    case SS_Other:
+        selection_title = "Alternative options";
         if (game_server)
         {
             if (drawButton(sf::FloatRect(800, 100, 300, 50), "Game Master"))
@@ -67,68 +79,21 @@ void ShipSelectionScreen::onGui()
         }else{
             drawText(sf::FloatRect(800, 150, 300, 50), "Select a ship", AlignCenter, 30);
         }
-    }else{
-        drawText(sf::FloatRect(780, 30, 340, 50), "Normal options", AlignCenter);
-        if (my_spaceship)
-        {
-            int32_t my_ship_id = my_spaceship->getMultiplayerId();
-
-            int main_screen_control_count = 0;
-            int main_count = 0;
-            foreach(PlayerInfo, i, player_info_list)
-            {
-                if (i->ship_id == my_ship_id && i->isMainScreen())
-                    main_count++;
-                if (i->ship_id == my_ship_id && i->main_screen_control)
-                    main_screen_control_count++;
-            }
-
-            if (canDoMainScreen())
-            {
-                if (drawToggleButton(sf::FloatRect(800, 100, 300, 50), my_player_info->isMainScreen(), "Main screen", 30))
-                {
-                    for(int n=0; n<max_crew_positions; n++)
-                        my_player_info->setCrewPosition(ECrewPosition(n), false);
-                }
-            }else{
-                drawDisabledButton(sf::FloatRect(800, 100, 300, 50), "Main screen", 30);
-            }
-            drawText(sf::FloatRect(800, 100, 280, 50), string(main_count), AlignRight, 30, sf::Color::Black);
-
-            float y = 150;
-            for(int n=0; n < max_crew_positions; n++)
-            {
-                if (n == singlePilot) y += 25;
-                if (drawToggleButton(sf::FloatRect(800, y, 300, 50), my_player_info->crew_position[n], getCrewPositionName(ECrewPosition(n))))
-                {
-                    bool active = !my_player_info->crew_position[n];
-                    my_player_info->setCrewPosition(ECrewPosition(n), active);
-                }
-                int cnt = 0;
-                foreach(PlayerInfo, i, player_info_list)
-                    if (i->ship_id == my_ship_id && i->crew_position[n])
-                        cnt++;
-                drawText(sf::FloatRect(800, y, 280, 50), string(cnt), AlignRight, 30, sf::Color::Black);
-                y += 50;
-            }
-            y += 25;
-            if (!my_player_info->isMainScreen())
-            {
-                if (drawToggleButton(sf::FloatRect(800, y, 300, 50), my_player_info->main_screen_control, "Main screen ctrl"))
-                    my_player_info->setMainScreenControl(!my_player_info->main_screen_control);
-            }else{
-                drawDisabledButton(sf::FloatRect(800, y, 300, 50), "Main screen ctrl");
-            }
-            drawText(sf::FloatRect(800, y, 280, 50), string(main_screen_control_count), AlignRight, 30, sf::Color::Black);
-
-            if (drawButton(sf::FloatRect(800, 600, 300, 50), "Ready"))
-            {
-                destroy();
-                my_player_info->spawnUI();
-            }
-        }else{
-            drawText(sf::FloatRect(800, 100, 300, 50), "Select a ship", AlignCenter, 30);
-        }
+        break;
+    default:
+        break;
+    }
+    
+    int delta = drawSelector(sf::FloatRect(780, 30, 340, 50), selection_title);
+    if (delta)
+    {
+        screen_selection = (EScreenSelection)(screen_selection + delta);
+        if (screen_selection == SS_MIN)
+            screen_selection = (EScreenSelection)(SS_MAX - 1);
+        if (screen_selection == SS_MAX)
+            screen_selection = (EScreenSelection)(SS_MIN + 1);
+        for(int n=0; n<max_crew_positions; n++)
+            my_player_info->setCrewPosition(ECrewPosition(n), false);
     }
 
     int shipCount = 0;
@@ -187,13 +152,6 @@ void ShipSelectionScreen::onGui()
         }
     }
 
-    if (drawButton(sf::FloatRect(500, 800, 300, 50), "Other options"))
-    {
-        alternative_screen_selection = !alternative_screen_selection;
-        for(int n=0; n<max_crew_positions; n++)
-            my_player_info->setCrewPosition(ECrewPosition(n), false);
-    }
-
     if (game_server)
     {
         if (drawButton(sf::FloatRect(50, 800, 300, 50), "Close server"))
@@ -209,5 +167,76 @@ void ShipSelectionScreen::onGui()
             disconnectFromServer();
             returnToMainMenu();
         }
+    }
+}
+
+void ShipSelectionScreen::selectCrewPosition(bool main_screen_option, int crew_pos_min, int crew_pos_max)
+{
+    
+    if (my_spaceship)
+    {
+        int32_t my_ship_id = my_spaceship->getMultiplayerId();
+
+        int main_screen_control_count = 0;
+        int main_count = 0;
+        foreach(PlayerInfo, i, player_info_list)
+        {
+            if (i->ship_id == my_ship_id && i->isMainScreen())
+                main_count++;
+            if (i->ship_id == my_ship_id && i->main_screen_control)
+                main_screen_control_count++;
+        }
+
+        float y = 100;
+        if (main_screen_option)
+        {
+            if (canDoMainScreen())
+            {
+                if (drawToggleButton(sf::FloatRect(800, y, 300, 50), my_player_info->isMainScreen(), "Main screen", 30))
+                {
+                    for(int n=0; n<max_crew_positions; n++)
+                        my_player_info->setCrewPosition(ECrewPosition(n), false);
+                }
+            }else{
+                drawDisabledButton(sf::FloatRect(800, y, 300, 50), "Main screen", 30);
+            }
+            drawText(sf::FloatRect(800, y, 280, 50), string(main_count), AlignRight, 30, sf::Color::Black);
+            y += 50;
+        }
+
+        for(int n=crew_pos_min; n<=crew_pos_max; n++)
+        {
+            if (drawToggleButton(sf::FloatRect(800, y, 300, 50), my_player_info->crew_position[n], getCrewPositionName(ECrewPosition(n))))
+            {
+                bool active = !my_player_info->crew_position[n];
+                my_player_info->setCrewPosition(ECrewPosition(n), active);
+            }
+            int cnt = 0;
+            foreach(PlayerInfo, i, player_info_list)
+                if (i->ship_id == my_ship_id && i->crew_position[n])
+                    cnt++;
+            drawText(sf::FloatRect(800, y, 280, 50), string(cnt), AlignRight, 30, sf::Color::Black);
+            y += 50;
+        }
+        y += 25;
+        if (!my_player_info->isMainScreen())
+        {
+            if (drawToggleButton(sf::FloatRect(800, y, 300, 50), my_player_info->main_screen_control, "Main screen ctrl"))
+                my_player_info->setMainScreenControl(!my_player_info->main_screen_control);
+        }else{
+            drawDisabledButton(sf::FloatRect(800, y, 300, 50), "Main screen ctrl");
+        }
+        drawText(sf::FloatRect(800, y, 280, 50), string(main_screen_control_count), AlignRight, 30, sf::Color::Black);
+
+        if (!my_player_info->isMainScreen() || (canDoMainScreen() && main_screen_option))
+        {
+            if (drawButton(sf::FloatRect(800, 600, 300, 50), "Ready"))
+            {
+                destroy();
+                my_player_info->spawnUI();
+            }
+        }
+    }else{
+        drawText(sf::FloatRect(800, 100, 300, 50), "Select a ship", AlignCenter, 30);
     }
 }

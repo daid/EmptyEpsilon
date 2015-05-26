@@ -6,6 +6,9 @@ CrewWeaponsUI::CrewWeaponsUI()
     tube_load_type = MW_None;
     missile_target_angle = 0.0;
     missile_targeting = false;
+    
+    if (my_spaceship)
+        missile_target_angle = my_spaceship->getRotation();
 }
 
 void CrewWeaponsUI::onCrewUI()
@@ -45,7 +48,10 @@ void CrewWeaponsUI::onCrewUI()
     }
     if (missile_targeting)
     {
-        missile_target_angle = sf::vector2ToAngle(diff);
+        //missile_target_angle = sf::vector2ToAngle(diff);
+        float angle = calculateFiringSolution(my_spaceship->getPosition() + diff / 400.0f * radarDistance);
+        if (angle != std::numeric_limits<float>::infinity())
+            missile_target_angle = angle;
     }
 
     {
@@ -233,4 +239,31 @@ void CrewWeaponsUI::onPauseHelpGui()
         drawTextBoxWithBackground(sf::FloatRect(x, y, 300, 100), "Tip: Communicate with science about beam frequencies.", AlignTopLeft, 20);
         y += 100;
     }
+}
+
+float CrewWeaponsUI::calculateFiringSolution(sf::Vector2f target_position)
+{
+    float missile_angle = sf::vector2ToAngle(target_position - my_spaceship->getPosition());
+    float missile_speed = 200.0f;
+    float missile_turn_rate = 10.0f;
+    float turn_radius = ((360.0f / missile_turn_rate) * missile_speed) / (2.0f * M_PI);
+
+    for(int iterations=0; iterations<10; iterations++)
+    {
+        float angle_diff = sf::angleDifference(missile_angle, my_spaceship->getRotation());
+
+        float left_or_right = 90;
+        if (angle_diff > 0)
+            left_or_right = -90;
+
+        sf::Vector2f turn_center = my_spaceship->getPosition() + sf::vector2FromAngle(my_spaceship->getRotation() + left_or_right) * turn_radius;
+        sf::Vector2f turn_exit = turn_center + sf::vector2FromAngle(missile_angle - left_or_right) * turn_radius;
+
+        float time_missile = sf::length(turn_exit - target_position) / missile_speed;
+        sf::Vector2f interception = turn_exit + sf::vector2FromAngle(missile_angle) * missile_speed * time_missile;
+        if ((interception - target_position) < 100.0f)
+            return missile_angle;
+        missile_angle = sf::vector2ToAngle(target_position - turn_exit);
+    }
+    return std::numeric_limits<float>::infinity();
 }

@@ -238,7 +238,7 @@ void PlayerSpaceship::update(float delta)
         if (shields_active)
             useEnergy(delta * energy_shield_use_per_second);
 
-        energy_level += delta * getNetPowerUsage() * 0.04;
+        energy_level += delta * getNetPowerUsage() * 0.2;
         for(int n=0; n<SYS_COUNT; n++)
         {
             if (!hasSystem(ESystem(n))) continue;
