@@ -458,6 +458,8 @@
 		<Unit filename="src/gui/crewCommsUI.h" />
 		<Unit filename="src/gui/crewEngineeringUI.cpp" />
 		<Unit filename="src/gui/crewEngineeringUI.h" />
+		<Unit filename="src/gui/crewEngineeringUI_adv.cpp" />
+		<Unit filename="src/gui/crewEngineeringUI_adv.h" />
 		<Unit filename="src/gui/crewHelmsUI.cpp" />
 		<Unit filename="src/gui/crewHelmsUI.h" />
 		<Unit filename="src/gui/crewScienceUI.cpp" />

@@ -14,6 +14,9 @@ enum ECrewPosition
     engineering,
     scienceOfficer,
     commsOfficer,
+    tacticalOfficer,    //helms+weapons-shields
+    engineeringAdvanced,//engineering+shields
+    operationsOfficer, //science+comms
     singlePilot,
     max_crew_positions
 };

@@ -75,6 +75,15 @@ public:
      * Draw on screen keyboard.
      */
     string drawOnScreenKeyboard();
+
+    /**!
+     * Calculate the firing angle to hit the chosen target position.
+     * Returns the absolute firing angle, or std::numeric_limits<float>::infinity() when no solution is found.
+     */
+    float calculateFiringSolution(sf::Vector2f target_position);
+    
+    void drawMissileTrajectory(sf::Vector2f radar_center, float radar_size, float radar_distance, float missile_target_angle);
+    void drawTargetTrajectory(sf::Vector2f radar_center, float radar_size, float radar_distance, P<SpaceObject> target);
 };
 
 #endif//CREW_UI_H

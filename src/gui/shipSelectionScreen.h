@@ -11,6 +11,7 @@ class ShipSelectionScreen : public GUI
     {
         SS_MIN = -1,
         SS_6players,
+        SS_4players,
         SS_1player,
         SS_Other,
         SS_MAX

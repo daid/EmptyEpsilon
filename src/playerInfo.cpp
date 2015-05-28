@@ -5,6 +5,11 @@
 #include "gui/crewEngineeringUI.h"
 #include "gui/crewScienceUI.h"
 #include "gui/crewCommsUI.h"
+
+#include "gui/crewTacticalUI.h"
+#include "gui/crewEngineeringUI_adv.h"
+#include "gui/crewOperationsUI.h"
+
 #include "gui/crewSinglePilotUI.h"
 
 static const int16_t CMD_UPDATE_CREW_POSITION = 0x0001;
@@ -126,9 +131,21 @@ void PlayerInfo::spawnUI()
         case commsOfficer:
             new CrewCommsUI();
             break;
+        
+        case tacticalOfficer:
+            new CrewTacticalUI();
+            break;
+        case engineeringAdvanced:
+            new CrewEngineeringUIAdvanced();
+            break;
+        case operationsOfficer:
+            new CrewOperationsUI();
+            break;
+
         case singlePilot:
             new CrewSinglePilotUI();
             break;
+        
         default:
             new CrewUI();
             break;
@@ -145,6 +162,9 @@ string getCrewPositionName(ECrewPosition position)
     case engineering: return "Engineering";
     case scienceOfficer: return "Science";
     case commsOfficer: return "Relay";
+    case tacticalOfficer: return "Tactical";
+    case engineeringAdvanced: return "Engineering+";
+    case operationsOfficer: return "Operations";
     case singlePilot: return "Single Pilot";
     default: return "ErrUnk: " + string(position);
     }

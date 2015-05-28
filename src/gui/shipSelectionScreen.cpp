@@ -35,11 +35,15 @@ void ShipSelectionScreen::onGui()
     switch(screen_selection)
     {
     case SS_6players:
-        selection_title = "6 player crew";
+        selection_title = "6/5 player crew";
         selectCrewPosition(true, helmsOfficer, commsOfficer);
         break;
+    case SS_4players:
+        selection_title = "4/3 player crew";
+        selectCrewPosition(true, tacticalOfficer, operationsOfficer);
+        break;
     case SS_1player:
-        selection_title = "1 playe crew";
+        selection_title = "1 player crew";
         selectCrewPosition(false, singlePilot, singlePilot);
         break;
     case SS_Other:

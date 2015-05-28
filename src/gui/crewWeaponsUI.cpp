@@ -48,76 +48,14 @@ void CrewWeaponsUI::onCrewUI()
     }
     if (missile_targeting)
     {
-        //missile_target_angle = sf::vector2ToAngle(diff);
         float angle = calculateFiringSolution(my_spaceship->getPosition() + diff / 400.0f * radarDistance);
         if (angle != std::numeric_limits<float>::infinity())
             missile_target_angle = angle;
     }
 
-    {
-        float angle_diff = sf::angleDifference(missile_target_angle, my_spaceship->getRotation());
-        float turn_rate = 10.0f;
-        float speed = 200.0f;
-        float turn_radius = ((360.0f / turn_rate) * speed) / (2.0f * M_PI);
+    drawMissileTrajectory(radar_center, 400.0f, radarDistance, missile_target_angle);
+    drawTargetTrajectory(radar_center, 400.0f, radarDistance, my_spaceship->getTarget());
 
-        float left_or_right = 90;
-        if (angle_diff > 0)
-            left_or_right = -90;
-
-        sf::Vector2f turn_center = sf::vector2FromAngle(my_spaceship->getRotation() + left_or_right) * turn_radius;
-        sf::Vector2f turn_exit = turn_center + sf::vector2FromAngle(missile_target_angle - left_or_right) * turn_radius;
-
-        sf::VertexArray a(sf::LinesStrip, 13);
-        a[0].position = radar_center;
-        for(int cnt=0; cnt<10; cnt++)
-            a[cnt + 1].position = radar_center + (turn_center + sf::vector2FromAngle(my_spaceship->getRotation() - angle_diff / 10.0f * cnt - left_or_right) * turn_radius) / radarDistance * 400.0f;
-        a[11].position = radar_center + turn_exit / radarDistance * 400.0f;
-        a[12].position = radar_center + (turn_exit + sf::vector2FromAngle(missile_target_angle) * radarDistance) / radarDistance * 400.0f;
-        for(int cnt=0; cnt<13; cnt++)
-            a[cnt].color = sf::Color(255, 255, 255, 128);
-        getRenderTarget()->draw(a);
-
-        float offset = 10.0 * speed;
-        float turn_distance = fabs(angle_diff) / 360.0 * (turn_radius * 2.0f * M_PI);
-        for(int cnt=0; cnt<5; cnt++)
-        {
-            sf::Vector2f p;
-            sf::Vector2f n;
-            if (offset < turn_distance)
-            {
-                n = sf::vector2FromAngle(my_spaceship->getRotation() - (angle_diff * offset / turn_distance) - left_or_right);
-                p = (turn_center + n * turn_radius) / radarDistance * 400.0f;
-            }else{
-                p = (turn_exit + sf::vector2FromAngle(missile_target_angle) * (offset - turn_distance)) / radarDistance * 400.0f;
-                n = sf::vector2FromAngle(missile_target_angle + 90.0f);
-            }
-            sf::VertexArray a(sf::Lines, 2);
-            a[0].position = radar_center + p - n * 10.0f;
-            a[1].position = radar_center + p + n * 10.0f;
-            getRenderTarget()->draw(a);
-
-            offset += 10.0 * speed;
-        }
-    }
-
-    P<SpaceObject> target = my_spaceship->getTarget();
-    if (target && target->getVelocity() > 1.0f)
-    {
-        sf::VertexArray a(sf::Lines, 12);
-        a[0].position = radar_center + (target->getPosition() - my_spaceship->getPosition()) / radarDistance * 400.0f;
-        a[0].color = sf::Color(255, 255, 255, 128);
-        a[1].position = a[0].position + (target->getVelocity() * 60.0f) / radarDistance * 400.0f;
-        a[1].color = sf::Color(255, 255, 255, 0);
-        sf::Vector2f n = sf::normalize(sf::Vector2f(-target->getVelocity().y, target->getVelocity().x));
-        for(int cnt=0; cnt<5; cnt++)
-        {
-            sf::Vector2f p = (target->getVelocity() * (10.0f + 10.0f * cnt)) / radarDistance * 400.0f;
-            a[2 + cnt * 2].position = a[0].position + p + n * 10.0f;
-            a[3 + cnt * 2].position = a[0].position + p - n * 10.0f;
-            a[2 + cnt * 2].color = a[3 + cnt * 2].color = sf::Color(255, 255, 255, 128 - cnt * 20);
-        }
-        getRenderTarget()->draw(a);
-    }
     drawRadar(radar_center, 400, radarDistance, false, my_spaceship->getTarget());
 
     drawKeyValueDisplay(sf::FloatRect(20, 100, 250, 40), 0.5, "Energy", string(int(my_spaceship->energy_level)), 25);
@@ -239,31 +177,4 @@ void CrewWeaponsUI::onPauseHelpGui()
         drawTextBoxWithBackground(sf::FloatRect(x, y, 300, 100), "Tip: Communicate with science about beam frequencies.", AlignTopLeft, 20);
         y += 100;
     }
-}
-
-float CrewWeaponsUI::calculateFiringSolution(sf::Vector2f target_position)
-{
-    float missile_angle = sf::vector2ToAngle(target_position - my_spaceship->getPosition());
-    float missile_speed = 200.0f;
-    float missile_turn_rate = 10.0f;
-    float turn_radius = ((360.0f / missile_turn_rate) * missile_speed) / (2.0f * M_PI);
-
-    for(int iterations=0; iterations<10; iterations++)
-    {
-        float angle_diff = sf::angleDifference(missile_angle, my_spaceship->getRotation());
-
-        float left_or_right = 90;
-        if (angle_diff > 0)
-            left_or_right = -90;
-
-        sf::Vector2f turn_center = my_spaceship->getPosition() + sf::vector2FromAngle(my_spaceship->getRotation() + left_or_right) * turn_radius;
-        sf::Vector2f turn_exit = turn_center + sf::vector2FromAngle(missile_angle - left_or_right) * turn_radius;
-
-        float time_missile = sf::length(turn_exit - target_position) / missile_speed;
-        sf::Vector2f interception = turn_exit + sf::vector2FromAngle(missile_angle) * missile_speed * time_missile;
-        if ((interception - target_position) < 100.0f)
-            return missile_angle;
-        missile_angle = sf::vector2ToAngle(target_position - turn_exit);
-    }
-    return std::numeric_limits<float>::infinity();
 }
