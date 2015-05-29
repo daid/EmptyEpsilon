@@ -70,6 +70,7 @@ void CrewOperationsUI::onRadarUI()
             case mode_default:
                 {
                     selection_type = select_none;
+                    selection_object = nullptr;
                     P<SpaceObject> target;
                     float target_pixel_distance = 0.0;
                     for(unsigned int n=0; n<scan_ghost.size(); n++)
@@ -125,7 +126,7 @@ void CrewOperationsUI::onRadarUI()
 
     drawRadar(radar_center, radar_size, radar_distance, true, selection_object);
     sf::Vector2f target_position;
-    if (selection_object)
+    if (selection_type == select_object && selection_object)
     {
         target_position = selection_object->getPosition();
         for(unsigned int n = 0; n < scan_ghost.size(); n++)

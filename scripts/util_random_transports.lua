@@ -52,7 +52,7 @@ function update(delta)
 				spawn_delay = random(30, 50)
 				
 				obj = CpuShip():setShipTemplate('Tug'):setFaction('Independent')
-				obj.target = randomStation()
+				obj.target = target
 				obj.undock_delay = random(5, 30)
 				obj:orderDock(obj.target)
 				x, y = obj.target:getPosition()
