@@ -462,10 +462,14 @@
 		<Unit filename="src/gui/crewEngineeringUI_adv.h" />
 		<Unit filename="src/gui/crewHelmsUI.cpp" />
 		<Unit filename="src/gui/crewHelmsUI.h" />
+		<Unit filename="src/gui/crewOperationsUI.cpp" />
+		<Unit filename="src/gui/crewOperationsUI.h" />
 		<Unit filename="src/gui/crewScienceUI.cpp" />
 		<Unit filename="src/gui/crewScienceUI.h" />
 		<Unit filename="src/gui/crewSinglePilotUI.cpp" />
 		<Unit filename="src/gui/crewSinglePilotUI.h" />
+		<Unit filename="src/gui/crewTacticalUI.cpp" />
+		<Unit filename="src/gui/crewTacticalUI.h" />
 		<Unit filename="src/gui/crewUI.cpp" />
 		<Unit filename="src/gui/crewUI.h" />
 		<Unit filename="src/gui/crewWeaponsUI.cpp" />
