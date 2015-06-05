@@ -12,6 +12,8 @@ ScanProbe::ScanProbe()
     lifetime = 60 * 10;
     
     registerMemberReplication(&owner_id);
+    registerMemberReplication(&target_position);
+    registerMemberReplication(&lifetime, 60.0);
 }
 
 void ScanProbe::update(float delta)
