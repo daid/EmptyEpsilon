@@ -1,27 +1,16 @@
 #ifndef SERVER_CREATION_SCREEN_H
 #define SERVER_CREATION_SCREEN_H
 
-#include "gui.h"
 #include "gui2.h"
 #include "playerInfo.h"
 
-class ScenarioInfo
+// ServerCreationScreen is only created when you are the server.
+class ServerCreationScreen : public GuiCanvas
 {
-public:
-    string filename;
-    string name;
-    string description;
-};
-
-class ServerCreationScreen : public GUI  //Server only
-{
-    std::vector<ScenarioInfo> scenarios;
-    unsigned int active_scenario_index;
+    string selected_scenario_filename;
 public:
     ServerCreationScreen();
     
-    virtual void onGui();
-
 private:
     void startScenario();   //Server only
 };

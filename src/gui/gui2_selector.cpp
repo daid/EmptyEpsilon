@@ -1,3 +1,4 @@
+#include "gui2_arrowbutton.h"
 #include "gui2_selector.h"
 
 GuiSelector::GuiSelector(GuiContainer* owner, string id, std::vector<string> options, int selected_index, func_t func)
@@ -7,6 +8,23 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, std::vector<string> opt
         selected_index = (int)options.size() - 1;
     if (selected_index < 0)
         selected_index = 0;
+    
+    (new GuiArrowButton(this, id + "_ARROW_LEFT", 0, [this](GuiButton*) {
+        if (this->options.size() < 1)
+            return;
+        soundManager.playSound("button.wav");
+        index = (index + this->options.size() - 1) % this->options.size();
+        if (this->func)
+            this->func(index);
+    }))->setPosition(0, 0, ATopLeft)->setSize(GuiSizeMatchHeight, GuiSizeMax);
+    (new GuiArrowButton(this, id + "_ARROW_RIGHT", 180, [this](GuiButton*) {
+        if (this->options.size() < 1)
+            return;
+        soundManager.playSound("button.wav");
+        index = (index + 1) % this->options.size();
+        if (this->func)
+            this->func(index);
+    }))->setPosition(0, 0, ATopRight)->setSize(GuiSizeMatchHeight, GuiSizeMax);
 }
 
 void GuiSelector::onDraw(sf::RenderTarget& window)
@@ -14,38 +32,8 @@ void GuiSelector::onDraw(sf::RenderTarget& window)
     sf::Color color = sf::Color::White;
     if (options.size() < 1 || !enabled)
         color = sf::Color(128, 128, 128, 255);
-        
+    
     draw9Cut(window, rect, "border_background", color);
     if (options.size() > 0)
         drawText(window, rect, options[index], ACenter, text_size, color);
-
-    drawArrow(window, sf::FloatRect(rect.left, rect.top, rect.height, rect.height), color, 0);
-    drawArrow(window, sf::FloatRect(rect.left + rect.width - rect.height, rect.top, rect.height, rect.height), color, 180);
-}
-
-GuiElement* GuiSelector::onMouseDown(sf::Vector2f position)
-{
-    return this;
-}
-
-void GuiSelector::onMouseUp(sf::Vector2f position)
-{
-    if (options.size() < 1)
-        return;
-
-    if (rect.contains(position) && position.x < rect.left + rect.height)
-    {
-        soundManager.playSound("button.wav");
-        index = (index + options.size() - 1) % options.size();
-        if (func)
-            func(index);
-    }
-    
-    if (rect.contains(position) && position.x > rect.left + rect.width - rect.height)
-    {
-        soundManager.playSound("button.wav");
-        index = (index + 1) % options.size();
-        if (func)
-            func(index);
-    }
 }

@@ -24,9 +24,9 @@ void GuiSlider::onDraw(sf::RenderTarget& window)
     draw9Cut(window, sf::FloatRect(x, rect.top, rect.height, rect.height), "button_background", color);
 }
 
-GuiElement* GuiSlider::onMouseDown(sf::Vector2f position)
+bool GuiSlider::onMouseDown(sf::Vector2f position)
 {
-    return this;
+    return true;
 }
 
 void GuiSlider::onMouseDrag(sf::Vector2f position)

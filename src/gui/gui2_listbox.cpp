@@ -9,25 +9,28 @@ GuiListbox::GuiListbox(GuiContainer* owner, string id, func_t func)
     scroll = new GuiScrollbar(this, id + "_SCROLL", 0, 0, 0, [this](int value) {
         updateButtons();
     });
-    scroll->setPosition(0, 0, ATopRight);
+    scroll->setPosition(0, 0, ATopRight)->hide();
 }
 
 void GuiListbox::onDraw(sf::RenderTarget& window)
 {
-    drawElements(rect, window);
+    if (last_rect != rect)
+        updateButtons();
 }
 
 void GuiListbox::updateButtons()
 {
-    int max_buttons = size.y / button_height;
-    float button_width = size.x - button_height;
+    last_rect = rect;
     
-    scroll->setSize(button_height, size.y);
+    int max_buttons = rect.height / button_height;
+    float button_width = rect.width - button_height;
+    
+    scroll->setSize(button_height, rect.height);
     scroll->setValueSize(max_buttons);
     scroll->setRange(0, entries.size());
     if ((int)entries.size() <= max_buttons)
     {
-        button_width = size.x;
+        button_width = rect.width;
         scroll->hide();
     }
     else
@@ -62,9 +65,9 @@ void GuiListbox::updateButtons()
     }
 }
 
-GuiElement* GuiListbox::onMouseDown(sf::Vector2f position)
+bool GuiListbox::onMouseDown(sf::Vector2f position)
 {
-    return getClickElement(position);
+    return false;
 }
 
 void GuiListbox::onMouseUp(sf::Vector2f position)

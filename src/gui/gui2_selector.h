@@ -16,8 +16,6 @@ public:
     GuiSelector(GuiContainer* owner, string id, std::vector<string> options, int selected_index, func_t func);
 
     virtual void onDraw(sf::RenderTarget& window);
-    virtual GuiElement* onMouseDown(sf::Vector2f position);
-    virtual void onMouseUp(sf::Vector2f position);
 };
 
 #endif//GUI2_SELECTOR_H

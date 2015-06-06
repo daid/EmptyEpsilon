@@ -18,9 +18,9 @@ void GuiButton::onDraw(sf::RenderTarget& window)
     drawText(window, rect, text, ACenter, text_size, sf::Color::Black);
 }
 
-GuiElement* GuiButton::onMouseDown(sf::Vector2f position)
+bool GuiButton::onMouseDown(sf::Vector2f position)
 {
-    return this;
+    return true;
 }
 
 void GuiButton::onMouseUp(sf::Vector2f position)

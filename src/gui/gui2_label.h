@@ -9,6 +9,7 @@ protected:
     string text;
     float text_size;
     EGuiAlign text_alignment;
+    bool box;
 public:
     GuiLabel(GuiContainer* owner, string id, string text, float text_size);
 
@@ -16,6 +17,7 @@ public:
     
     GuiLabel* setText(string text);
     GuiLabel* setAlignment(EGuiAlign alignment);
+    GuiLabel* addBox();
 };
 
 

@@ -26,20 +26,27 @@ void GuiContainer::drawElements(sf::FloatRect window_rect, sf::RenderTarget& win
     for(GuiElement* element : elements)
     {
         if (element->visible)
+        {
             element->onDraw(window);
+            element->drawElements(element->rect, window);
+        }
     }
 }
 
 GuiElement* GuiContainer::getClickElement(sf::Vector2f mouse_position)
 {
-    for(GuiElement* element : elements)
+    for(std::list<GuiElement*>::reverse_iterator it = elements.rbegin(); it != elements.rend(); it++)
     {
+        GuiElement* element = *it;
+        
         if (element->has_focus && element->visible && element->enabled)
         {
-            GuiElement* clicked = element->onMouseDown(mouse_position);
+            GuiElement* clicked = element->getClickElement(mouse_position);
             if (clicked)
-            {
                 return clicked;
+            if (element->onMouseDown(mouse_position))
+            {
+                return element;
             }
         }
     }
@@ -95,9 +102,9 @@ GuiElement::~GuiElement()
         owner->elements.remove(this);
 }
 
-GuiElement* GuiElement::onMouseDown(sf::Vector2f position)
+bool GuiElement::onMouseDown(sf::Vector2f position)
 {
-    return nullptr;
+    return false;
 }
 
 void GuiElement::onMouseDrag(sf::Vector2f position)
@@ -174,6 +181,15 @@ GuiElement* GuiElement::disable()
 
 void GuiElement::updateRect(sf::FloatRect window_rect)
 {
+    sf::Vector2f local_size = size;
+    if (local_size.x == GuiSizeMax)
+        local_size.x = window_rect.width;
+    if (local_size.y == GuiSizeMax)
+        local_size.y = window_rect.height;
+    if (local_size.x == GuiSizeMatchHeight)
+        local_size.x = local_size.y;
+    if (local_size.y == GuiSizeMatchWidth)
+        local_size.y = local_size.x;
     switch(position_alignment)
     {
     case ATopLeft:
@@ -184,12 +200,12 @@ void GuiElement::updateRect(sf::FloatRect window_rect)
     case ATopCenter:
     case ACenter:
     case ABottomCenter:
-        rect.left = window_rect.left + window_rect.width / 2.0 + position.x - size.x / 2.0;
+        rect.left = window_rect.left + window_rect.width / 2.0 + position.x - local_size.x / 2.0;
         break;
     case ATopRight:
     case ACenterRight:
     case ABottomRight:
-        rect.left = window_rect.left + window_rect.width + position.x - size.x;
+        rect.left = window_rect.left + window_rect.width + position.x - local_size.x;
         break;
     }
 
@@ -203,17 +219,17 @@ void GuiElement::updateRect(sf::FloatRect window_rect)
     case ACenterLeft:
     case ACenterRight:
     case ACenter:
-        rect.top = window_rect.top + window_rect.height / 2.0 + position.y - size.y / 2.0;
+        rect.top = window_rect.top + window_rect.height / 2.0 + position.y - local_size.y / 2.0;
         break;
     case ABottomLeft:
     case ABottomRight:
     case ABottomCenter:
-        rect.top = window_rect.top + window_rect.height + position.y - size.y;
+        rect.top = window_rect.top + window_rect.height + position.y - local_size.y;
         break;
     }
     
-    rect.width = size.x;
-    rect.height = size.y;
+    rect.width = local_size.x;
+    rect.height = local_size.y;
 }
 
 void GuiElement::drawText(sf::RenderTarget& window, sf::FloatRect rect, string text, EGuiAlign align, float font_size, sf::Color color)

@@ -18,7 +18,7 @@ public:
     GuiButton(GuiContainer* owner, string id, string text, func_t func);
 
     virtual void onDraw(sf::RenderTarget& window);
-    virtual GuiElement* onMouseDown(sf::Vector2f position);
+    virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
     
     GuiButton* setText(string text);

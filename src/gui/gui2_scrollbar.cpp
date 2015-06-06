@@ -6,15 +6,14 @@ GuiScrollbar::GuiScrollbar(GuiContainer* owner, string id, int min_value, int ma
 {
     (new GuiArrowButton(this, id + "_UP_ARROW", 90, [this](GuiButton*) {
         setValue(getValue() - 1);
-    }))->setPosition(0, 0, ATopRight)->setSize(50, 50);
+    }))->setPosition(0, 0, ATopRight)->setSize(GuiSizeMax, GuiSizeMatchWidth);
     (new GuiArrowButton(this, id + "_DOWN_ARROW", -90, [this](GuiButton*) {
         setValue(getValue() + 1);
-    }))->setPosition(0, 0, ABottomRight)->setSize(50, 50);
+    }))->setPosition(0, 0, ABottomRight)->setSize(GuiSizeMax, GuiSizeMatchWidth);
 }
 
 void GuiScrollbar::onDraw(sf::RenderTarget& window)
 {
-    drawElements(rect, window);
     draw9Cut(window, rect, "border_background", sf::Color::White);
     
     int range = (max_value - min_value);
@@ -25,12 +24,9 @@ void GuiScrollbar::onDraw(sf::RenderTarget& window)
     draw9Cut(window, sf::FloatRect(rect.left, rect.top + rect.width + move_height * value / range, rect.width, bar_size), "button_background", sf::Color::White);
 }
 
-GuiElement* GuiScrollbar::onMouseDown(sf::Vector2f position)
+bool GuiScrollbar::onMouseDown(sf::Vector2f position)
 {
-    GuiElement* element = getClickElement(position);
-    if (element)
-        return element;
-    return this;
+    return true;
 }
 
 void GuiScrollbar::onMouseDrag(sf::Vector2f position)

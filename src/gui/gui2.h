@@ -27,8 +27,9 @@ public:
     GuiContainer();
     virtual ~GuiContainer();
 
-    virtual void drawElements(sf::FloatRect window_rect, sf::RenderTarget& window);
-    virtual GuiElement* getClickElement(sf::Vector2f mouse_position);
+protected:
+    void drawElements(sf::FloatRect window_rect, sf::RenderTarget& window);
+    GuiElement* getClickElement(sf::Vector2f mouse_position);
     
     friend class GuiElement;
 };
@@ -44,12 +45,13 @@ public:
     virtual void render(sf::RenderTarget& window);
 };
 
-class GuiElement
+class GuiElement : protected GuiContainer
 {
-protected:
+private:
     sf::Vector2f position;
     sf::Vector2f size;
     EGuiAlign position_alignment;
+protected:
     GuiContainer* owner;
     sf::FloatRect rect;
     bool visible;
@@ -57,11 +59,15 @@ protected:
     bool has_focus;
     string id;
 public:
+    constexpr static float GuiSizeMatchHeight = -1.0;
+    constexpr static float GuiSizeMatchWidth = -1.0;
+    constexpr static float GuiSizeMax = -2.0;
+
     GuiElement(GuiContainer* owner, string id);
     virtual ~GuiElement();
 
     virtual void onDraw(sf::RenderTarget& window) = 0;
-    virtual GuiElement* onMouseDown(sf::Vector2f position);
+    virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
     

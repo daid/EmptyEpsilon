@@ -5,7 +5,7 @@
 #include "gui2_button.h"
 #include "gui2_scrollbar.h"
 
-class GuiListbox : public GuiElement, private GuiContainer
+class GuiListbox : public GuiElement
 {
 public:
     typedef std::function<void(int index, string value)> func_t;
@@ -30,11 +30,12 @@ protected:
     sf::Color unselected_color;
     func_t func;
     GuiScrollbar* scroll;
+    sf::FloatRect last_rect;
 public:
     GuiListbox(GuiContainer* owner, string id, func_t func);
 
     virtual void onDraw(sf::RenderTarget& window);
-    virtual GuiElement* onMouseDown(sf::Vector2f position);
+    virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
     
     int addEntry(string name, string value);

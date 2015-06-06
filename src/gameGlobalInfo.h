@@ -31,7 +31,7 @@ public:
      */
     static const int max_player_ships = 32;
     /*!
-     * \brief Maximum number of nebulas ships.
+     * \brief Maximum number of visual background nebulas.
      */
     static const int max_nebulas = 32;
 private:
