@@ -2,6 +2,7 @@
 #define SERVER_CREATION_SCREEN_H
 
 #include "gui.h"
+#include "gui2.h"
 #include "playerInfo.h"
 
 class ScenarioInfo

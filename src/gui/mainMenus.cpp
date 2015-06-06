@@ -11,104 +11,132 @@
 #include "gui/shipSelectionScreen.h"
 #include "gui/serverCreationScreen.h"
 
+#include "gui2_label.h"
+#include "gui2_button.h"
+#include "gui2_selector.h"
+#include "gui2_slider.h"
+
 MainMenu::MainMenu()
 {
-}
-
-void MainMenu::onGui()
-{
-    drawText(sf::FloatRect(0, 100, getWindowSize().x, 300), "Empty", AlignCenter, 180);
-    drawText(sf::FloatRect(0, 250, getWindowSize().x, 300), "Epsilon", AlignCenter, 200);
-    drawText(sf::FloatRect(0, 480, getWindowSize().x, 100), "Version: " + string(VERSION_NUMBER), AlignCenter, 20);
-
-    if (drawButton(sf::FloatRect(50, 620, 300, 50), "Start server"))
-    {
+    (new GuiLabel(this, "TITLE_A", "Empty", 180))->setPosition(0, 100, ATopCenter)->setSize(0, 300);
+    (new GuiLabel(this, "TITLE_B", "Epsilon", 200))->setPosition(0, 250, ATopCenter)->setSize(0, 300);
+    (new GuiLabel(this, "VERSION", "Version: " + string(VERSION_NUMBER), 20))->setPosition(0, 30, ACenter)->setSize(0, 100);
+    
+    (new GuiButton(this, "SERVER", "Start server", [this](GuiButton*) {
         new EpsilonServer();
         new ServerCreationScreen();
         destroy();
-    }
-    if (drawButton(sf::FloatRect(50, 680, 300, 50), "Start client"))
-    {
+    }))->setPosition(sf::Vector2f(50, -230), ABottomLeft)->setSize(300, 50);
+
+    (new GuiButton(this, "CLIENT", "Start client", [this](GuiButton*) {
         new ServerBrowserMenu();
         destroy();
-    }
-    if (drawButton(sf::FloatRect(50, 740, 300, 50), "Options"))
-    {
+    }))->setPosition(sf::Vector2f(50, -170), ABottomLeft)->setSize(300, 50);
+
+    (new GuiButton(this, "OPTIONS", "Options", [this](GuiButton*) {
         new OptionsMenu();
         destroy();
-    }
-    if (drawButton(sf::FloatRect(50, 800, 300, 50), "Quit") || InputHandler::keyboardIsPressed(sf::Keyboard::Escape))
-    {
+    }))->setPosition(sf::Vector2f(50, -110), ABottomLeft)->setSize(300, 50);
+
+    (new GuiButton(this, "QUIT", "Quit", [this](GuiButton*) {
         engine->shutdown();
-    }
-    
+    }))->setPosition(sf::Vector2f(50, -50), ABottomLeft)->setSize(300, 50);
+
     if (InputHandler::touch_screen)
     {
-        if (drawButton(sf::FloatRect(getWindowSize().x - 350, 750, 300, 100), "Calibrate\nTouchscreen"))
-        {
-            new MouseCalibrator("default.calib");
-            destroy();
-        }
+        (new GuiButton(this, "TOUCH_CALIB", "Calibrate\nTouchscreen", [this](GuiButton*) {
+            engine->shutdown();
+        }))->setPosition(sf::Vector2f(-50, -50), ABottomRight)->setSize(300, 100);
     }
 
     float y = 100;
-    drawText(sf::FloatRect(0, y, getWindowSize().x - 50, 25), "Credits", AlignRight, 25); y+= 25;
-    drawText(sf::FloatRect(0, y, getWindowSize().x - 50, 20), "Programming:", AlignRight, 20); y+= 20;
-    drawText(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "Daid (github.com/daid)", AlignRight, 18); y+= 18;
-    drawText(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "Nallath (github.com/nallath)", AlignRight, 18); y+= 18;
+    (new GuiLabel(this, "CREDITS", "Credits", 25))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 25); y += 25;
+    (new GuiLabel(this, "CREDITS1", "Programming:", 20))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 20); y += 20;
+    (new GuiLabel(this, "CREDITS2", "Daid (github.com/daid)", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS3", "Nallath (github.com/nallath)", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
     y += 10;
-    drawText(sf::FloatRect(0, y, getWindowSize().x - 50, 20), "Music:", AlignRight, 20); y+= 20;
-    drawText(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "Matthew Pablo (www.matthewpablo.com)", AlignRight, 18); y+= 18;
+    (new GuiLabel(this, "CREDITS4", "Music:", 20))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 20); y += 20;
+    (new GuiLabel(this, "CREDITS5", "Matthew Pablo (www.matthewpablo.com)", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
     y += 10;
-    drawText(sf::FloatRect(0, y, getWindowSize().x - 50, 20), "Models:", AlignRight, 20); y+= 20;
-    drawText(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "Angryfly (turbosquid.com)", AlignRight, 18); y+= 18;
+    (new GuiLabel(this, "CREDITS6", "Models:", 20))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 20); y += 20;
+    (new GuiLabel(this, "CREDITS7", "Angryfly (turbosquid.com)", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS8", "SolCommand (http://solcommand.blogspot.com/)", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
     y += 10;
-    drawText(sf::FloatRect(0, y, getWindowSize().x - 50, 20), "Models:", AlignRight, 20); y+= 20;
-    drawText(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "SolCommand (http://solcommand.blogspot.com/)", AlignRight, 18); y+= 18;
+    (new GuiLabel(this, "CREDITS9", "Crew sprites:", 20))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 20); y += 20;
+    (new GuiLabel(this, "CREDITS10", "Tokka (http://bekeen.de/)", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
     y += 10;
-    drawText(sf::FloatRect(0, y, getWindowSize().x - 50, 20), "Crew sprites:", AlignRight, 20); y+= 20;
-    drawText(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "Tokka (http://bekeen.de/)", AlignRight, 18); y+= 18;
-    y += 10;
-    drawText(sf::FloatRect(0, y, getWindowSize().x - 50, 20), "Special thanks:", AlignRight, 20); y+= 20;
-    drawText(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "Marty Lewis (MadKat)", AlignRight, 18); y+= 18;
-    drawText(sf::FloatRect(0, y, getWindowSize().x - 50, 18), "Serge Wroclawski", AlignRight, 18); y+= 18;
+    (new GuiLabel(this, "CREDITS11", "Special thanks:", 20))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 20); y += 20;
+    (new GuiLabel(this, "CREDITS12", "Marty Lewis (MadKat)", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS13", "Serge Wroclawski", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
 }
 
 OptionsMenu::OptionsMenu()
 {
-}
-
-void OptionsMenu::onGui()
-{
     P<WindowManager> windowManager = engine->getObject("windowManager");
-    if (drawButton(sf::FloatRect(50, 100, 300, 50), string("Fullscreen: ") + (windowManager->isFullscreen() ? "Yes" : "No")))
-    {
+    
+    (new GuiButton(this, "FULLSCREEN", "Fullscreen toggle", [](GuiButton* button) {
+        P<WindowManager> windowManager = engine->getObject("windowManager");
         windowManager->setFullscreen(!windowManager->isFullscreen());
-    }
-    int fsaa = windowManager->getFSAA();
-    if (fsaa < 1)
-        fsaa = 1;
-    int offset = drawSelector(sf::FloatRect(50, 160, 300, 50), "FSAA: " + string(fsaa) + "x");
-    if (offset < 0 && fsaa > 1)
-        windowManager->setFSAA(fsaa / 2);
-    if (offset > 0 && fsaa < 8)
-        windowManager->setFSAA(fsaa * 2);
+    }))->setPosition(50, 100, ATopLeft)->setSize(300, 50);
 
-    drawText(sf::FloatRect(50, 220, 300, 50), "Music Volume", AlignCenter);
-    soundManager.setMusicVolume(drawHorizontalSlider(sf::FloatRect(50, 270, 300, 50), soundManager.getMusicVolume(), 0, 100, 50.0));
-
-    if (drawButton(sf::FloatRect(50, 800, 300, 50), "Back") || InputHandler::keyboardIsPressed(sf::Keyboard::Escape))
+    int fsaa = std::max(1, windowManager->getFSAA());
+    int index = 0;
+    switch(fsaa)
     {
+    case 8: index = 3; break;
+    case 4: index = 2; break;
+    case 2: index = 1; break;
+    default: index = 0; break;
+    }
+    (new GuiSelector(this, "FSAA", {"FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x"}, index, [](int index) {
+        P<WindowManager> windowManager = engine->getObject("windowManager");
+        windowManager->setFSAA((int[]){0, 2, 4, 8}[index]);
+    }))->setPosition(50, 160, ATopLeft)->setSize(300, 50);
+
+    (new GuiLabel(this, "MUSIC_VOL_LABEL", "Music Volume", 30))->setPosition(50, 220, ATopLeft)->setSize(300, 50);
+    (new GuiSlider(this, "MUSIC_VOL", 0, 100, soundManager.getMusicVolume(), [](float volume){
+        soundManager.setMusicVolume(volume);
+    }))->setPosition(50, 270, ATopLeft)->setSize(300, 50);
+
+    (new GuiButton(this, "BACK", "Back", [this](GuiButton* button) {
         destroy();
         returnToMainMenu();
-    }
+    }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
 }
 
 ServerBrowserMenu::ServerBrowserMenu()
 {
     scanner = new ServerScanner(VERSION_NUMBER);
-    selectionIndex = 0;
-    manual_ip = sf::IpAddress::getLocalAddress().toString();
+
+    (new GuiButton(this, "BACK", "Back", [this](GuiButton*) {
+        destroy();
+        returnToMainMenu();
+    }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
+
+    connect_button = new GuiButton(this, "CONNECT", "Connect", [this](GuiButton*) {
+        new JoinServerScreen(sf::IpAddress(manual_ip->getText()));
+        destroy();
+    });
+    connect_button->setPosition(-50, -50, ABottomRight)->setSize(300, 50);
+    
+    manual_ip = new GuiTextEntry(this, "IP", "");
+    manual_ip->setPosition(-50, -120, ABottomRight)->setSize(300, 50);
+    
+    server_list = new GuiListbox(this, "SERVERS", [this](int index, string value) {
+        manual_ip->setText(value);
+    });
+    scanner->addCallbacks([this](sf::IpAddress address, string name) {
+        //New server found
+        server_list->addEntry(name + " (" + address.toString() + ")", address.toString());
+
+        if (manual_ip->getText() == "")
+            manual_ip->setText(address.toString());
+
+    }, [this](sf::IpAddress address) {
+        //Server removed from list
+        server_list->removeEntry(server_list->indexByValue(address.toString()));
+    });
+    server_list->setPosition(0, 50, ATopCenter)->setSize(700, 600);
 }
 
 ServerBrowserMenu::~ServerBrowserMenu()
@@ -116,63 +144,21 @@ ServerBrowserMenu::~ServerBrowserMenu()
     scanner->destroy();
 }
 
-void ServerBrowserMenu::onGui()
-{
-    std::vector<ServerScanner::ServerInfo> serverList = scanner->getServerList();
-    for(unsigned int n=0; n<serverList.size(); n++)
-    {
-        if (drawToggleButton(sf::FloatRect(50, 50 + 35 * n, 700, 35), selectionIndex == n, serverList[n].name + " (" + serverList[n].address.toString() + ")"))
-        {
-            selectionIndex = n;
-            manual_ip = serverList[selectionIndex].address.toString();
-        }
-    }
-    if (manual_ip == sf::IpAddress::getLocalAddress().toString() && serverList.size() > 0)
-        manual_ip = serverList[0].address.toString();
-
-    if (drawButton(sf::FloatRect(50, 800, 300, 50), "Back") || InputHandler::keyboardIsPressed(sf::Keyboard::Escape))
-    {
-        destroy();
-        returnToMainMenu();
-    }
-
-    if (selectionIndex < serverList.size())
-    {
-        if (drawButton(sf::FloatRect(450, 800, 300, 50), "Join"))
-        {
-            new JoinServerScreen(serverList[selectionIndex].address);
-            destroy();
-        }
-    }else{
-        drawDisabledButton(sf::FloatRect(450, 800, 300, 50), "Join");
-    }
-
-    manual_ip = drawTextEntry(sf::FloatRect(getWindowSize().x - 350, 740, 300, 50), manual_ip);
-    if (drawButton(sf::FloatRect(getWindowSize().x - 350, 800, 300, 50), "Connect"))
-    {
-        new JoinServerScreen(sf::IpAddress(manual_ip));
-        destroy();
-    }
-}
-
 JoinServerScreen::JoinServerScreen(sf::IpAddress ip)
 : ip(ip)
 {
-    connect_delay = 2;
-}
-
-void JoinServerScreen::onGui()
-{
-    drawText(sf::FloatRect(0, 300, getWindowSize().x, 50), "Connecting...", AlignCenter);
-
-    if (drawButton(sf::FloatRect(50, 800, 300, 50), "Cancel"))
-    {
+    (new GuiLabel(this, "STATUS", "Connecting...", 30))->setPosition(0, 300, ATopCenter)->setSize(0, 50);
+    (new GuiButton(this, "BTN_CANCEL", "Cancel", [this](GuiButton* button) {
         destroy();
         disconnectFromServer();
         new ServerBrowserMenu();
-        return;
-    }
+    }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
+    
+    connect_delay = 2;
+}
 
+void JoinServerScreen::update(float delta)
+{
     //We connect with a slight delay, as the connect call when joining a server will block and thus not update the screen.
     if (connect_delay > 0)
     {
@@ -203,6 +189,15 @@ AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_m
 : crew_position(crew_position), control_main_screen(control_main_screen)
 {
     scanner = new ServerScanner(VERSION_NUMBER);
+    
+    status_label = new GuiLabel(this, "STATUS", "Searching for server...", 50);
+    status_label->setPosition(0, 300, ATopCenter)->setSize(0, 50);
+
+    string position_name = "Main screen";
+    if (crew_position < max_crew_positions)
+        position_name = getCrewPositionName(crew_position);
+
+    (new GuiLabel(this, "POSITION", position_name, 50))->setPosition(0, 400, ATopCenter)->setSize(0, 30);
 }
 
 AutoConnectScreen::~AutoConnectScreen()
@@ -211,28 +206,25 @@ AutoConnectScreen::~AutoConnectScreen()
         scanner->destroy();
 }
 
-void AutoConnectScreen::onGui()
+void AutoConnectScreen::update(float delta)
 {
     if (scanner)
     {
         std::vector<ServerScanner::ServerInfo> serverList = scanner->getServerList();
-        drawText(sf::FloatRect(0, 300, getWindowSize().x, 50), "Searching for server...", AlignCenter, 50);
 
         if (serverList.size() > 0)
         {
-            drawText(sf::FloatRect(0, 350, getWindowSize().x, 30), "Found server " + serverList[0].name, AlignCenter, 30);
+            status_label->setText("Found server " + serverList[0].name);
             connect_to_address = serverList[0].address;
             connect_delay = 2;
             scanner->destroy();
+        }else{
+            status_label->setText("Searching for server...");
         }
-        string position_name = "Main screen";
-        if (crew_position < max_crew_positions)
-            position_name = getCrewPositionName(crew_position);
-        drawText(sf::FloatRect(0, 400, getWindowSize().x, 30), position_name, AlignCenter, 50);
     }else{
         if (connect_delay > 0)
         {
-            drawText(sf::FloatRect(0, 300, getWindowSize().x, 50), "Connecting...", AlignCenter, 50);
+            status_label->setText("Connecting: " + connect_to_address.toString());
             connect_delay--;
             if (!connect_delay)
                 new GameClient(connect_to_address);
@@ -248,7 +240,7 @@ void AutoConnectScreen::onGui()
                         my_player_info = i;
                 if (my_player_info && gameGlobalInfo)
                 {
-                    drawText(sf::FloatRect(0, 300, getWindowSize().x, 50), "Waiting for ship...", AlignCenter, 50);
+                    status_label->setText("Waiting for ship...");
                     if (!my_spaceship)
                     {
                         for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
@@ -280,7 +272,7 @@ void AutoConnectScreen::onGui()
                         }
                     }
                 }else{
-                    drawText(sf::FloatRect(0, 300, getWindowSize().x, 50), "Waiting for game state...", AlignCenter, 50);
+                    status_label->setText("Connected, waiting for game data...");
                 }
             }
         }

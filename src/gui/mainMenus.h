@@ -1,60 +1,61 @@
 #ifndef MAIN_MENUS_H
 #define MAIN_MENUS_H
 
-#include "gui.h"
+#include "gui2.h"
+#include "gui2_label.h"
+#include "gui2_button.h"
+#include "gui2_textentry.h"
+#include "gui2_listbox.h"
 #include "playerInfo.h"
 
-class MainMenu : public GUI
+class MainMenu : public GuiCanvas
 {
 public:
     MainMenu();
-    
-    virtual void onGui();
 };
 
-class OptionsMenu : public GUI
+class OptionsMenu : public GuiCanvas
 {
 public:
     OptionsMenu();
-    
-    virtual void onGui();
 };
 
-class ServerBrowserMenu : public GUI
+class ServerBrowserMenu : public GuiCanvas
 {
-    string manual_ip;
+    GuiTextEntry* manual_ip;
+    GuiButton* connect_button;
+    GuiListbox* server_list;
     
     P<ServerScanner> scanner;
-    unsigned int selectionIndex;
 public:
     ServerBrowserMenu();
     virtual ~ServerBrowserMenu();
-    
-    virtual void onGui();
 };
 
-class JoinServerScreen : public GUI
+class JoinServerScreen : public GuiCanvas, public Updatable
 {
     sf::IpAddress ip;
     int connect_delay;
 public:
     JoinServerScreen(sf::IpAddress ip);
 
-    virtual void onGui();
+    virtual void update(float delta);
 };
 
-class AutoConnectScreen : public GUI
+class AutoConnectScreen : public GuiCanvas, public Updatable
 {
     P<ServerScanner> scanner;
     sf::IpAddress connect_to_address;
     int connect_delay;
     ECrewPosition crew_position;
     bool control_main_screen;
+    
+    GuiLabel* status_label;
 public:
     AutoConnectScreen(ECrewPosition crew_position, bool control_main_screen);
     virtual ~AutoConnectScreen();
     
-    virtual void onGui();
+    virtual void update(float delta);
 };
 
 #endif//MAIN_MENUS_H
