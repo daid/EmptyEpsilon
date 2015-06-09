@@ -1,13 +1,13 @@
 #include "gui2_listbox.h"
 
 GuiListbox::GuiListbox(GuiContainer* owner, string id, func_t func)
-: GuiElement(owner, id), selection_index(-1), text_size(30), button_height(50), text_alignment(ACenter), func(func)
+: GuiEntryList(owner, id, func), text_size(30), button_height(50), text_alignment(ACenter)
 {
     selected_color = sf::Color::White;
     unselected_color = sf::Color(192, 192, 192, 255);
     
     scroll = new GuiScrollbar(this, id + "_SCROLL", 0, 0, 0, [this](int value) {
-        updateButtons();
+        entriesChanged();
     });
     scroll->setPosition(0, 0, ATopRight)->hide();
 }
@@ -15,10 +15,10 @@ GuiListbox::GuiListbox(GuiContainer* owner, string id, func_t func)
 void GuiListbox::onDraw(sf::RenderTarget& window)
 {
     if (last_rect != rect)
-        updateButtons();
+        entriesChanged();
 }
 
-void GuiListbox::updateButtons()
+void GuiListbox::entriesChanged()
 {
     last_rect = rect;
     
@@ -41,7 +41,7 @@ void GuiListbox::updateButtons()
     while(buttons.size() < entries.size() && (int)buttons.size() < max_buttons)
     {
         int offset = buttons.size();
-        GuiButton* button = new GuiButton(this, "", "", [this, offset](GuiButton*) {
+        GuiButton* button = new GuiButton(this, "", "", [this, offset]() {
             setSelectionIndex(offset + scroll->getValue());
         });
         button->setPosition(0, offset * button_height, ATopLeft);
@@ -72,44 +72,4 @@ bool GuiListbox::onMouseDown(sf::Vector2f position)
 
 void GuiListbox::onMouseUp(sf::Vector2f position)
 {
-}
-
-int GuiListbox::addEntry(string name, string value)
-{
-    entries.emplace_back(name, value);
-    updateButtons();
-    return entries.size() - 1;
-}
-
-int GuiListbox::indexByValue(string value)
-{
-    for(unsigned int n=0; n<entries.size(); n++)
-        if (entries[n].value == value)
-            return n;
-    return -1;
-}
-
-void GuiListbox::removeEntry(int index)
-{
-    if (index < 0 || index >= (int)entries.size())
-        return;
-    entries.erase(entries.begin() + index);
-    if (selection_index == index)
-        setSelectionIndex(-1);
-    if (selection_index > index)
-        setSelectionIndex(selection_index - 1);
-    updateButtons();
-}
-
-void GuiListbox::setSelectionIndex(int index)
-{
-    selection_index = index;
-    updateButtons();
-    if (func)
-    {
-        if (selection_index >= 0 && selection_index < (int)entries.size())
-            func(selection_index, entries[selection_index].value);
-        else
-            func(selection_index, "");
-    }
 }

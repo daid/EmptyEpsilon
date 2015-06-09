@@ -1,7 +1,7 @@
 #ifndef GUI2_LABEL_H
 #define GUI2_LABEL_H
 
-#include "gui2.h"
+#include "gui2_element.h"
 
 class GuiLabel : public GuiElement
 {

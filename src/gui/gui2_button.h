@@ -1,12 +1,12 @@
 #ifndef GUI2_BUTTON_H
 #define GUI2_BUTTON_H
 
-#include "gui2.h"
+#include "gui2_element.h"
 
 class GuiButton : public GuiElement
 {
 public:
-    typedef std::function<void(GuiButton*)> func_t;
+    typedef std::function<void()> func_t;
     
 protected:
     string text;

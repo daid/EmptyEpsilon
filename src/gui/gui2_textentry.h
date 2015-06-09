@@ -1,7 +1,7 @@
 #ifndef GUI2_TEXTENTRY_H
 #define GUI2_TEXTENTRY_H
 
-#include "gui2.h"
+#include "gui2_element.h"
 
 class GuiTextEntry : public GuiElement
 {

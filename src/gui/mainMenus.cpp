@@ -11,40 +11,35 @@
 #include "gui/shipSelectionScreen.h"
 #include "gui/serverCreationScreen.h"
 
-#include "gui2_label.h"
-#include "gui2_button.h"
-#include "gui2_selector.h"
-#include "gui2_slider.h"
-
 MainMenu::MainMenu()
 {
     (new GuiLabel(this, "TITLE_A", "Empty", 180))->setPosition(0, 100, ATopCenter)->setSize(0, 300);
     (new GuiLabel(this, "TITLE_B", "Epsilon", 200))->setPosition(0, 250, ATopCenter)->setSize(0, 300);
     (new GuiLabel(this, "VERSION", "Version: " + string(VERSION_NUMBER), 20))->setPosition(0, 30, ACenter)->setSize(0, 100);
     
-    (new GuiButton(this, "SERVER", "Start server", [this](GuiButton*) {
+    (new GuiButton(this, "SERVER", "Start server", [this]() {
         new EpsilonServer();
         new ServerCreationScreen();
         destroy();
     }))->setPosition(sf::Vector2f(50, -230), ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "CLIENT", "Start client", [this](GuiButton*) {
+    (new GuiButton(this, "CLIENT", "Start client", [this]() {
         new ServerBrowserMenu();
         destroy();
     }))->setPosition(sf::Vector2f(50, -170), ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "OPTIONS", "Options", [this](GuiButton*) {
+    (new GuiButton(this, "OPTIONS", "Options", [this]() {
         new OptionsMenu();
         destroy();
     }))->setPosition(sf::Vector2f(50, -110), ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "QUIT", "Quit", [this](GuiButton*) {
+    (new GuiButton(this, "QUIT", "Quit", [this]() {
         engine->shutdown();
     }))->setPosition(sf::Vector2f(50, -50), ABottomLeft)->setSize(300, 50);
 
     if (InputHandler::touch_screen)
     {
-        (new GuiButton(this, "TOUCH_CALIB", "Calibrate\nTouchscreen", [this](GuiButton*) {
+        (new GuiButton(this, "TOUCH_CALIB", "Calibrate\nTouchscreen", [this]() {
             engine->shutdown();
         }))->setPosition(sf::Vector2f(-50, -50), ABottomRight)->setSize(300, 100);
     }
@@ -74,7 +69,7 @@ OptionsMenu::OptionsMenu()
 {
     P<WindowManager> windowManager = engine->getObject("windowManager");
     
-    (new GuiButton(this, "FULLSCREEN", "Fullscreen toggle", [](GuiButton* button) {
+    (new GuiButton(this, "FULLSCREEN", "Fullscreen toggle", []() {
         P<WindowManager> windowManager = engine->getObject("windowManager");
         windowManager->setFullscreen(!windowManager->isFullscreen());
     }))->setPosition(50, 100, ATopLeft)->setSize(300, 50);
@@ -88,17 +83,17 @@ OptionsMenu::OptionsMenu()
     case 2: index = 1; break;
     default: index = 0; break;
     }
-    (new GuiSelector(this, "FSAA", {"FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x"}, index, [](int index) {
+    (new GuiSelector(this, "FSAA", [](int index, string value) {
         P<WindowManager> windowManager = engine->getObject("windowManager");
         windowManager->setFSAA((int[]){0, 2, 4, 8}[index]);
-    }))->setPosition(50, 160, ATopLeft)->setSize(300, 50);
+    }))->setOptions({"FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x"})->setSelectionIndex(index)->setPosition(50, 160, ATopLeft)->setSize(300, 50);
 
     (new GuiLabel(this, "MUSIC_VOL_LABEL", "Music Volume", 30))->setPosition(50, 220, ATopLeft)->setSize(300, 50);
     (new GuiSlider(this, "MUSIC_VOL", 0, 100, soundManager.getMusicVolume(), [](float volume){
         soundManager.setMusicVolume(volume);
     }))->setPosition(50, 270, ATopLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "BACK", "Back", [this](GuiButton* button) {
+    (new GuiButton(this, "BACK", "Back", [this]() {
         destroy();
         returnToMainMenu();
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
@@ -108,12 +103,12 @@ ServerBrowserMenu::ServerBrowserMenu()
 {
     scanner = new ServerScanner(VERSION_NUMBER);
 
-    (new GuiButton(this, "BACK", "Back", [this](GuiButton*) {
+    (new GuiButton(this, "BACK", "Back", [this]() {
         destroy();
         returnToMainMenu();
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
 
-    connect_button = new GuiButton(this, "CONNECT", "Connect", [this](GuiButton*) {
+    connect_button = new GuiButton(this, "CONNECT", "Connect", [this]() {
         new JoinServerScreen(sf::IpAddress(manual_ip->getText()));
         destroy();
     });
@@ -148,7 +143,7 @@ JoinServerScreen::JoinServerScreen(sf::IpAddress ip)
 : ip(ip)
 {
     (new GuiLabel(this, "STATUS", "Connecting...", 30))->setPosition(0, 300, ATopCenter)->setSize(0, 50);
-    (new GuiButton(this, "BTN_CANCEL", "Cancel", [this](GuiButton* button) {
+    (new GuiButton(this, "BTN_CANCEL", "Cancel", [this]() {
         destroy();
         disconnectFromServer();
         new ServerBrowserMenu();

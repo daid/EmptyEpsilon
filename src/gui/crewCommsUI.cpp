@@ -59,6 +59,8 @@ void CrewCommsUI::drawCommsRadar()
                 }
             }
         }
+        if (!obj->canHideInNebula())
+            visible_objects.insert(*obj);
     }
     foreach(SpaceObject, friendly, friendly_objects)
     {

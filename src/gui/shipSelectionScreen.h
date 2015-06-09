@@ -1,11 +1,18 @@
 #ifndef SHIP_SELECTION_SCREEN_H
 #define SHIP_SELECTION_SCREEN_H
 
-#include "gui.h"
+#include "spaceObjects/playerSpaceship.h"
+#include "gui2.h"
 
-class ShipSelectionScreen : public GUI
+class ShipSelectionScreen : public GuiCanvas, public Updatable
 {
-    int ship_template_index;                //Server only
+private:
+    GuiLabel* no_ships_label;
+    GuiListbox* player_ship_list;
+    GuiButton* ready_button;
+    
+    GuiToggleButton* main_screen_button;
+    GuiToggleButton* crew_position_button[max_crew_positions];
     
     enum EScreenSelection
     {
@@ -19,11 +26,11 @@ class ShipSelectionScreen : public GUI
     
     EScreenSelection screen_selection;
     int window_angle;
+    
 public:
     ShipSelectionScreen();
 
-    virtual void onGui();
-
+    virtual void update(float delta);
 private:
     /**!
      * \brief check if this console can be mainscreen.
@@ -31,7 +38,7 @@ private:
      */
     bool canDoMainScreen() { return PostProcessor::isEnabled() && sf::Shader::isAvailable(); }
     
-    void selectCrewPosition(bool main_screen_option, int crew_pos_min, int crew_pos_max);
+    void updateReadyButton();
 };
 
 #endif//SHIP_SELECTION_SCREEN_H

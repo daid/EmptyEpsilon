@@ -1,7 +1,7 @@
 #ifndef GUI2_SCROLLBAR_H
 #define GUI2_SCROLLBAR_H
 
-#include "gui2.h"
+#include "gui2_element.h"
 
 class GuiScrollbar : public GuiElement
 {

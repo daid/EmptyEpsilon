@@ -1,3 +1,4 @@
+#include "soundManager.h"
 #include "gui2_button.h"
 
 GuiButton::GuiButton(GuiContainer* owner, string id, string text, func_t func)
@@ -27,7 +28,7 @@ void GuiButton::onMouseUp(sf::Vector2f position)
 {
     soundManager.playSound("button.wav");
     if (func)
-        func(this);
+        func();
 }
 
 string GuiButton::getText()

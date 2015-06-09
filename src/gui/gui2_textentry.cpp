@@ -1,4 +1,5 @@
 #include "gui2_textentry.h"
+#include "input.h"
 
 GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
 : GuiElement(owner, id), text(text), text_size(30)

@@ -1,7 +1,7 @@
 #ifndef GUI2_SLIDER_H
 #define GUI2_SLIDER_H
 
-#include "gui2.h"
+#include "gui2_element.h"
 
 class GuiSlider : public GuiElement
 {

@@ -46,6 +46,8 @@ void PlayerInfo::setCrewPosition(ECrewPosition position, bool active)
     sf::Packet packet;
     packet << CMD_UPDATE_CREW_POSITION << int32_t(position) << active;
     sendClientCommand(packet);
+    
+    crew_position[position] = active;
 }
 
 void PlayerInfo::setShipId(int32_t id)
@@ -60,6 +62,8 @@ void PlayerInfo::setMainScreenControl(bool control)
     sf::Packet packet;
     packet << CMD_UPDATE_MAIN_SCREEN_CONTROL << control;
     sendClientCommand(packet);
+    
+    main_screen_control = control;
 }
 
 void PlayerInfo::onReceiveClientCommand(int32_t client_id, sf::Packet& packet)

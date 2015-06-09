@@ -4,10 +4,10 @@
 GuiScrollbar::GuiScrollbar(GuiContainer* owner, string id, int min_value, int max_value, int start_value, func_t func)
 : GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), value_size(1), func(func)
 {
-    (new GuiArrowButton(this, id + "_UP_ARROW", 90, [this](GuiButton*) {
+    (new GuiArrowButton(this, id + "_UP_ARROW", 90, [this]() {
         setValue(getValue() - 1);
     }))->setPosition(0, 0, ATopRight)->setSize(GuiSizeMax, GuiSizeMatchWidth);
-    (new GuiArrowButton(this, id + "_DOWN_ARROW", -90, [this](GuiButton*) {
+    (new GuiArrowButton(this, id + "_DOWN_ARROW", -90, [this]() {
         setValue(getValue() + 1);
     }))->setPosition(0, 0, ABottomRight)->setSize(GuiSizeMax, GuiSizeMatchWidth);
 }
