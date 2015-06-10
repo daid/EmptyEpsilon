@@ -10,22 +10,14 @@ private:
     GuiLabel* no_ships_label;
     GuiListbox* player_ship_list;
     GuiButton* ready_button;
+    GuiSelector* crew_type_selector;
     
     GuiToggleButton* main_screen_button;
     GuiToggleButton* crew_position_button[max_crew_positions];
-    
-    enum EScreenSelection
-    {
-        SS_MIN = -1,
-        SS_6players,
-        SS_4players,
-        SS_1player,
-        SS_Other,
-        SS_MAX
-    };
-    
-    EScreenSelection screen_selection;
-    int window_angle;
+    GuiToggleButton* game_master_button;
+    GuiToggleButton* window_button;
+    GuiSelector* window_angle;
+    GuiToggleButton* topdown_button;
     
 public:
     ShipSelectionScreen();
@@ -38,7 +30,11 @@ private:
      */
     bool canDoMainScreen() { return PostProcessor::isEnabled() && sf::Shader::isAvailable(); }
     
+    void updateButtonStatus(GuiToggleButton* toggled);
+    
     void updateReadyButton();
+    
+    void onReadyClick();
 };
 
 #endif//SHIP_SELECTION_SCREEN_H
