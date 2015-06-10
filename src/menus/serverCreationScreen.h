@@ -1,7 +1,7 @@
 #ifndef SERVER_CREATION_SCREEN_H
 #define SERVER_CREATION_SCREEN_H
 
-#include "gui2.h"
+#include "gui/gui2.h"
 #include "playerInfo.h"
 
 // ServerCreationScreen is only created when you are the server.

@@ -1,5 +1,5 @@
 #include "mainScreen.h"
-#include "shipSelectionScreen.h"
+#include "menus/shipSelectionScreen.h"
 #include "main.h"
 #include "mouseRenderer.h"
 #include "gameGlobalInfo.h"

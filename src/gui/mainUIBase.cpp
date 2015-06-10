@@ -1,15 +1,15 @@
 #include <SFML/OpenGL.hpp>
 #include <limits>
 #include "mainUIBase.h"
-#include "mainMenus.h"
 #include "epsilonServer.h"
 #include "main.h"
 #include "particleEffect.h"
 #include "factionInfo.h"
-#include "shipSelectionScreen.h"
 #include "repairCrew.h"
 #include "gameGlobalInfo.h"
+#include "playerInfo.h"
 #include "spaceObjects/nebula.h"
+#include "menus/shipSelectionScreen.h"
 
 MainUIBase::MainUIBase()
 {

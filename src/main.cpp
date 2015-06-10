@@ -1,6 +1,6 @@
 #include <string.h>
 #include "gui/mouseRenderer.h"
-#include "gui/mainMenus.h"
+#include "menus/mainMenus.h"
 #include "mouseCalibrator.h"
 #include "factionInfo.h"
 #include "spaceObjects/spaceObject.h"

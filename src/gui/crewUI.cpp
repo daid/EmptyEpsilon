@@ -3,7 +3,7 @@
 #include "factionInfo.h"
 #include "spaceObjects/spaceStation.h"
 #include "spaceObjects/warpJammer.h"
-#include "shipSelectionScreen.h"
+#include "menus/shipSelectionScreen.h"
 
 CrewUI::CrewUI()
 {

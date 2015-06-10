@@ -3,9 +3,9 @@
 #include "main.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
-#include "mainScreen.h"
-#include "crewUI.h"
-#include "gameMasterUI.h"
+#include "gui/mainScreen.h"
+#include "gui/crewUI.h"
+#include "gui/gameMasterUI.h"
 
 ShipSelectionScreen::ShipSelectionScreen()
 {

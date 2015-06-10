@@ -1,11 +1,7 @@
 #ifndef MAIN_MENUS_H
 #define MAIN_MENUS_H
 
-#include "gui2.h"
-#include "gui2_label.h"
-#include "gui2_button.h"
-#include "gui2_textentry.h"
-#include "gui2_listbox.h"
+#include "gui/gui2.h"
 #include "playerInfo.h"
 
 class MainMenu : public GuiCanvas

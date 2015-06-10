@@ -12,6 +12,7 @@ enum EDamageType
     DT_Kinetic,
     DT_EMP
 };
+
 class DamageInfo
 {
 public:
@@ -45,7 +46,7 @@ public:
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
     virtual void destroy();
 
-    virtual string getCallSign() { return "??? (" + string(getMultiplayerId()) + ")"; }
+    virtual string getCallSign() { return ""; }
     virtual bool canBeTargeted() { return false; }
     virtual bool canBeDockedBy(P<SpaceObject> obj) { return false; }
     virtual bool hasShield() { return false; }

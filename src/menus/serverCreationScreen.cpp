@@ -1,6 +1,6 @@
 #include "serverCreationScreen.h"
 #include "shipSelectionScreen.h"
-#include "gameMasterUI.h"
+#include "gui/gameMasterUI.h"
 #include "gameGlobalInfo.h"
 #include "epsilonServer.h"
 #include "main.h"

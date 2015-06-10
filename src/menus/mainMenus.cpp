@@ -1,15 +1,15 @@
 #include "engine.h"
 #include "mainMenus.h"
 #include "main.h"
-#include "crewUI.h"
-#include "mainScreen.h"
+#include "gui/crewUI.h"
+#include "gui/mainScreen.h"
 #include "epsilonServer.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/spaceship.h"
 #include "mouseCalibrator.h"
-#include "gui/shipSelectionScreen.h"
-#include "gui/serverCreationScreen.h"
+#include "menus/shipSelectionScreen.h"
+#include "menus/serverCreationScreen.h"
 
 MainMenu::MainMenu()
 {
