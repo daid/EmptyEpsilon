@@ -516,6 +516,8 @@
 		<Unit filename="src/gui/mainScreen.h" />
 		<Unit filename="src/gui/mainUIBase.cpp" />
 		<Unit filename="src/gui/mainUIBase.h" />
+		<Unit filename="src/gui/mouseRenderer.cpp" />
+		<Unit filename="src/gui/mouseRenderer.h" />
 		<Unit filename="src/gui/serverCreationScreen.cpp" />
 		<Unit filename="src/gui/serverCreationScreen.h" />
 		<Unit filename="src/gui/shipSelectionScreen.cpp" />

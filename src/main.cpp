@@ -1,5 +1,5 @@
 #include <string.h>
-#include "gui/gui.h"
+#include "gui/mouseRenderer.h"
 #include "gui/mainMenus.h"
 #include "mouseCalibrator.h"
 #include "factionInfo.h"

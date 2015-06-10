@@ -186,14 +186,4 @@ private:
     static bool drawArrow(sf::FloatRect rect, bool disabled=false, float rotation=0.0);
 };
 
-class MouseRenderer : public Renderable
-{
-public:
-    bool visible;
-
-    MouseRenderer();
-
-    virtual void render(sf::RenderTarget& window);
-};
-
 #endif//GUI_H
