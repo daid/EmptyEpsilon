@@ -105,6 +105,11 @@ bool GuiElement::isEnabled()
     return enabled;
 }
 
+sf::Vector2f GuiElement::getCenterPoint()
+{
+    return sf::Vector2f(rect.left + rect.width / 2.0, rect.top + rect.height / 2.0);
+}
+
 void GuiElement::updateRect(sf::FloatRect window_rect)
 {
     sf::Vector2f local_size = size;

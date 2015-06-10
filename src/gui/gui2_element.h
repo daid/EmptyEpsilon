@@ -57,6 +57,8 @@ public:
     GuiElement* disable();
     bool isEnabled();
     
+    sf::Vector2f getCenterPoint();
+    
     friend class GuiContainer;
 private:
     void updateRect(sf::FloatRect window_rect);

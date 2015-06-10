@@ -37,10 +37,11 @@ MainMenu::MainMenu()
         engine->shutdown();
     }))->setPosition(sf::Vector2f(50, -50), ABottomLeft)->setSize(300, 50);
 
-    if (InputHandler::touch_screen)
+    if (InputHandler::touch_screen || true)
     {
         (new GuiButton(this, "TOUCH_CALIB", "Calibrate\nTouchscreen", [this]() {
-            engine->shutdown();
+            destroy();
+            new MouseCalibrator("");
         }))->setPosition(sf::Vector2f(-50, -50), ABottomRight)->setSize(300, 100);
     }
 

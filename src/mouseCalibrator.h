@@ -1,25 +1,26 @@
 #ifndef MOUSE_CALIBRATOR_H
 #define MOUSE_CALIBRATOR_H
 
-#include "gui/gui.h"
+#include "gui/gui2.h"
 /*!
  * \brief Calibrator used for touch screens.
  * It's possible to use empty epsilon with touch screens, which may or may not be correclty calibrated.
  * This simply sits in between the mouse events and translates them according to its calibration.
  */
-class MouseCalibrator : public GUI
+class MouseCalibrator : public GuiCanvas, public Updatable
 {
 private:
     string filename;
     int state;
-    sf::Vector2f screen_point[3];
+    GuiBox* screen_box[3];
+    GuiBox* test_box;
+    GuiButton* ready_button;
     sf::Vector2f mouse_point[3];
 public:
     MouseCalibrator(string filename);
-    /*!
-     * \brief Draw a gui to calibrate.
-     */
-    virtual void onGui();
+
+    virtual void update(float delta);
+
     /*!
      * \brief Calculate the transformation matrix
      */

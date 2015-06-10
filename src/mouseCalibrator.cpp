@@ -6,63 +6,66 @@ MouseCalibrator::MouseCalibrator(string filename)
 {
     state = 0;
     InputHandler::mouse_transform = sf::Transform();
+    
+    (new GuiLabel(this, "MAIN_LABEL", "Touch Calibration", 50))->setPosition(0, 100, ATopCenter)->setSize(0, 300);
+    screen_box[0] = new GuiBox(this, "BOX_0");
+    screen_box[0]->setPosition(50, 50, ATopLeft)->setSize(50, 50);
+    screen_box[1] = new GuiBox(this, "BOX_1");
+    screen_box[1]->setPosition(-50, 50, ATopRight)->setSize(50, 50);
+    screen_box[2] = new GuiBox(this, "BOX_2");
+    screen_box[2]->setPosition(-50, -50, ABottomRight)->setSize(50, 50);
+    ready_button = new GuiButton(this, "READY_BUTTON", "Finished", [this]() {
+        destroy();
+        returnToMainMenu();
+    });
+    ready_button->setPosition(0, -100, ABottomCenter)->setSize(300, 100)->hide();
+
+    test_box = new GuiBox(this, "TEST");
+    test_box->setPosition(0, 0, ATopLeft)->setSize(50, 50);
+    
+    screen_box[1]->hide();
+    screen_box[2]->hide();
+    test_box->hide();
 }
 
-void MouseCalibrator::onGui()
+void MouseCalibrator::update(float delta)
 {
-    drawText(sf::FloatRect(0, 100, getWindowSize().x, 300), "Touch Calibration", AlignCenter, 50);
-
-    switch(state)
+    if (InputHandler::mouseIsReleased(sf::Mouse::Left))
     {
-    case 0:
-        drawBox(sf::FloatRect(50, 50, 50, 50));
-        if (InputHandler::mouseIsReleased(sf::Mouse::Left))
+        if (state < 3)
         {
-            screen_point[0] = sf::Vector2f(75, 75);
-            mouse_point[0] = InputHandler::getMousePos();
-            state = 1;
+            mouse_point[state] = InputHandler::getMousePos();
+            screen_box[state]->hide();
+            state ++;
+            if (state < 3)
+            {
+                screen_box[state]->show();
+            }else{
+                ready_button->show();
+                calculateMatrix();
+            }
         }
-        break;
-    case 1:
-        drawBox(sf::FloatRect(getWindowSize().x - 100, 50, 50, 50));
-        if (InputHandler::mouseIsReleased(sf::Mouse::Left))
-        {
-            screen_point[1] = sf::Vector2f(getWindowSize().x - 75, 75);
-            mouse_point[1] = InputHandler::getMousePos();
-            state = 2;
-        }
-        break;
-    case 2:
-        drawBox(sf::FloatRect(50, getWindowSize().y - 100, 50, 50));
-        if (InputHandler::mouseIsReleased(sf::Mouse::Left))
-        {
-            screen_point[2] = sf::Vector2f(75, getWindowSize().y - 75);
-            mouse_point[2] = InputHandler::getMousePos();
-            state = 3;
-            calculateMatrix();
-        }
-        break;
-    case 3:
+    }
+    if (state > 2)
+    {
         if (InputHandler::getMousePos().x >= 0.0)
         {
-            drawBox(sf::FloatRect(InputHandler::getMousePos().x - 25, InputHandler::getMousePos().y - 25, 50, 50));
+            test_box->setPosition(InputHandler::getMousePos() - sf::Vector2f(25, 25));
+            test_box->show();
+        }else{
+            test_box->hide();
         }
-        if (drawButton(sf::FloatRect(getWindowSize().x / 2 - 150, 750, 300, 100), "Finished"))
-        {
-            destroy();
-            returnToMainMenu();
-        }
-        break;
-    }
-
-    {
-        sf::Vector2f pos = InputHandler::getMousePos();
-        drawText(sf::FloatRect(0, 300, getWindowSize().x, 300), string(pos.x) + " " + string(pos.y), AlignCenter, 50);
     }
 }
 
 void MouseCalibrator::calculateMatrix()
 {
+    sf::Vector2f screen_point[3];
+    for(int n=0; n<3; n++)
+    {
+        screen_point[n] = screen_box[n]->getCenterPoint();
+    }
+    
     float Q = ((mouse_point[0].x - mouse_point[2].x) * (mouse_point[1].y - mouse_point[2].y)) - ((mouse_point[1].x - mouse_point[2].x) * (mouse_point[0].y - mouse_point[2].y));
 
     if( Q == 0.0 )
@@ -75,7 +78,11 @@ void MouseCalibrator::calculateMatrix()
     float F = (mouse_point[2].x * screen_point[1].y - mouse_point[1].x * screen_point[2].y) * mouse_point[0].y + (mouse_point[0].x * screen_point[2].y - mouse_point[2].x * screen_point[0].y) * mouse_point[1].y + (mouse_point[1].x * screen_point[0].y - mouse_point[0].x * screen_point[1].y) * mouse_point[2].y;
 
     InputHandler::mouse_transform = sf::Transform(A/Q, B/Q, C/Q, D/Q, E/Q, F/Q, 0, 0, 1);
+    
     FILE* f = fopen(filename.c_str(), "w");
-    fprintf(f, "%f %f %f %f %f %f\n", A/Q, B/Q, C/Q, D/Q, E/Q, F/Q);
-    fclose(f);
+    if (f)
+    {
+        fprintf(f, "%f %f %f %f %f %f\n", A/Q, B/Q, C/Q, D/Q, E/Q, F/Q);
+        fclose(f);
+    }
 }
