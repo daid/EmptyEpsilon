@@ -2,38 +2,29 @@
 #include "gameGlobalInfo.h"
 #include "mainScreen.h"
 #include "main.h"
+#include "menus/shipSelectionScreen.h"
 
 #include "screenComponents/indicatorOverlays.h"
+#include "screenComponents/selfDestructIndicator.h"
+#include "screenComponents/globalMessage.h"
+#include "screenComponents/jumpIndicator.h"
 
 ScreenMainScreen::ScreenMainScreen()
 {
     viewport = new GuiViewport3D(this, "VIEWPORT");
     viewport->showCallsigns()->showHeadings()->showSpacedust();
     viewport->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    // TODO: Small corner radar
     
+    new GuiJumpIndicator(this);
+    new GuiSelfDestructIndicator(this);
+    new GuiGlobalMessage(this);
     new GuiIndicatorOverlays(this);
-        /*
-        if (my_spaceship->activate_self_destruct)
-        {
-            drawBoxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 150));
-            drawTextBox(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100), "SELF DESTRUCT ACTIVATED", AlignCenter, 50);
-            int todo = 0;
-            for(int n=0; n<PlayerSpaceship::max_self_destruct_codes; n++)
-                if (!my_spaceship->self_destruct_code_confirmed[n])
-                    todo++;
-            drawText(sf::FloatRect(getWindowSize().x / 2 - 400, 295, 800, 50), "Waiting for autorization input: "+string(todo)+" left", AlignCenter, 30);
-        }
-        if (my_spaceship->jump_delay > 0.0)
-        {
-            drawBoxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100));
-            drawText(sf::FloatRect(getWindowSize().x / 2 - 400, 200, 800, 100), "Jump in: " + string(int(ceilf(my_spaceship->jump_delay))), AlignCenter, 50);
-        }
-        if (gameGlobalInfo->global_message_timeout > 0.0)
-        {
-            drawBoxWithBackground(sf::FloatRect(getWindowSize().x / 2 - 400, 300, 800, 100));
-            drawText(sf::FloatRect(getWindowSize().x / 2 - 400, 300, 800, 100), gameGlobalInfo->global_message, AlignCenter, 50);
-        }
+}
 
+void ScreenMainScreen::update(float delta)
+{
+    /*
     if (game_client && !game_client->isConnected())
     {
         destroy();
@@ -41,41 +32,10 @@ ScreenMainScreen::ScreenMainScreen()
         returnToMainMenu();
         return;
     }
-
-    if (game_server)
-    {
-        if (InputHandler::keyboardIsPressed(sf::Keyboard::P))
-            engine->setGameSpeed(0.0);
-    }
-
-    if (isActive())
-    {
-        if (InputHandler::keyboardIsPressed(sf::Keyboard::Escape) || InputHandler::keyboardIsPressed(sf::Keyboard::Home))
-        {
-            destroy();
-            new ShipSelectionScreen();
-        }
-    }
     */
-}
 
-void ScreenMainScreen::update(float delta)
-{
     if (my_spaceship)
     {
-        if (InputHandler::keyboardIsReleased(sf::Keyboard::Up))
-            my_spaceship->commandMainScreenSetting(MSS_Front);
-        if (InputHandler::keyboardIsReleased(sf::Keyboard::Left))
-            my_spaceship->commandMainScreenSetting(MSS_Left);
-        if (InputHandler::keyboardIsReleased(sf::Keyboard::Right))
-            my_spaceship->commandMainScreenSetting(MSS_Right);
-        if (InputHandler::keyboardIsReleased(sf::Keyboard::Down))
-            my_spaceship->commandMainScreenSetting(MSS_Back);
-        if (InputHandler::keyboardIsReleased(sf::Keyboard::Tab) && gameGlobalInfo->allow_main_screen_tactical_radar)
-            my_spaceship->commandMainScreenSetting(MSS_Tactical);
-        if (InputHandler::keyboardIsReleased(sf::Keyboard::Q) && gameGlobalInfo->allow_main_screen_long_range_radar)
-            my_spaceship->commandMainScreenSetting(MSS_LongRange);
-
         float target_camera_yaw = my_spaceship->getRotation();
         switch(my_spaceship->main_screen_setting)
         {
@@ -124,6 +84,9 @@ void ScreenMainScreen::update(float delta)
 
 void ScreenMainScreen::onClick(sf::Vector2f mouse_position)
 {
+    if (!my_spaceship)
+        return;
+    
     if (InputHandler::mouseIsPressed(sf::Mouse::Left))
     {
         switch(my_spaceship->main_screen_setting)
@@ -165,5 +128,51 @@ void ScreenMainScreen::onClick(sf::Vector2f mouse_position)
                 my_spaceship->commandMainScreenSetting(MSS_Tactical);
             break;
         }
+    }
+}
+
+void ScreenMainScreen::onKey(sf::Keyboard::Key key, int unicode)
+{
+    if (!my_spaceship)
+        return;
+
+    switch(key)
+    {
+    case sf::Keyboard::Up:
+        if (my_spaceship)
+            my_spaceship->commandMainScreenSetting(MSS_Front);
+        break;
+    case sf::Keyboard::Left:
+        if (my_spaceship)
+            my_spaceship->commandMainScreenSetting(MSS_Left);
+        break;
+    case sf::Keyboard::Right:
+        if (my_spaceship)
+            my_spaceship->commandMainScreenSetting(MSS_Right);
+        break;
+    case sf::Keyboard::Down:
+        if (my_spaceship)
+            my_spaceship->commandMainScreenSetting(MSS_Back);
+        break;
+    case sf::Keyboard::Tab:
+        if (my_spaceship && gameGlobalInfo->allow_main_screen_tactical_radar)
+            my_spaceship->commandMainScreenSetting(MSS_Tactical);
+        break;
+    case sf::Keyboard::Q:
+        if (my_spaceship && gameGlobalInfo->allow_main_screen_long_range_radar)
+            my_spaceship->commandMainScreenSetting(MSS_LongRange);
+        break;
+    
+    case sf::Keyboard::Escape:
+    case sf::Keyboard::Home:
+        destroy();
+        new ShipSelectionScreen();
+        break;
+    case sf::Keyboard::P:
+        if (game_server)
+            engine->setGameSpeed(0.0);
+        break;
+    default:
+        break;
     }
 }

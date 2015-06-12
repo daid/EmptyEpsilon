@@ -15,6 +15,7 @@ public:
     virtual void update(float delta);
     
     virtual void onClick(sf::Vector2f mouse_position);
+    virtual void onKey(sf::Keyboard::Key key, int unicode);
 };
 
 #endif//MAIN_SCREEN_H
