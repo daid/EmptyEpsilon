@@ -189,19 +189,18 @@ void ShipSelectionScreen::updateButtonStatus(GuiToggleButton* toggled)
 
 void ShipSelectionScreen::updateReadyButton()
 {
-    if (my_spaceship)
+    if (my_player_info->isMainScreen())
     {
-        if (my_player_info->isMainScreen())
-        {
-            if (main_screen_button->isVisible() && main_screen_button->getValue())
-                ready_button->enable();
-            else
-                ready_button->disable();
-        }else{
+        if (my_spaceship && main_screen_button->isVisible() && main_screen_button->getValue())
             ready_button->enable();
-        }
+        else if (game_master_button->getValue() || topdown_button->getValue())
+            ready_button->enable();
+        else if (my_spaceship && window_button->getValue())
+            ready_button->enable();
+        else
+            ready_button->disable();
     }else{
-        if (game_master_button->getValue() || window_button->getValue() || topdown_button->getValue())
+        if (my_spaceship)
             ready_button->enable();
         else
             ready_button->disable();
