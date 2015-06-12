@@ -13,5 +13,6 @@
 #include "gui2_box.h"
 #include "gui2_textentry.h"
 #include "gui2_overlay.h"
+#include "gui2_progressbar.h"
 
 #endif//GUI2_H

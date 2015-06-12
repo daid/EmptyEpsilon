@@ -7,7 +7,7 @@ GuiSelfDestructIndicator::GuiSelfDestructIndicator(GuiContainer* owner)
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     box = new GuiBox(owner, "SELF_DESTRUCT_INDICATOR_BOX");
-    box->setSize(800, 150)->setPosition(0, 150, ATopCenter);
+    box->fill()->setSize(800, 150)->setPosition(0, 150, ATopCenter);
     (new GuiLabel(box, "SELF_DESTRUCT_INDICATOR_LABEL", "SELF DESTRUCT ACTIVATED", 50))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, -25, ACenter);
     label = new GuiLabel(box, "SELF_DESTRUCT_INDICATOR_LABEL2", "", 30);
     label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 30, ACenter);

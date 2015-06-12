@@ -7,7 +7,7 @@ GuiGlobalMessage::GuiGlobalMessage(GuiContainer* owner)
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     box = new GuiBox(owner, "GLOBAL_MESSAGE_BOX");
-    box->setSize(800, 100)->setPosition(0, 250, ATopCenter);
+    box->fill()->setSize(800, 100)->setPosition(0, 250, ATopCenter);
     label = new GuiLabel(box, "GLOBAL_MESSAGE_LABEL", "...", 40);
     label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenter);
 }

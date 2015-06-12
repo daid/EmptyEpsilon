@@ -3,8 +3,8 @@
 #include "main.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
+#include "screens/windowScreen.h"
 #include "gui/mainScreen.h"
-#include "gui/crewUI.h"
 #include "gui/gameMasterUI.h"
 
 ShipSelectionScreen::ShipSelectionScreen()
@@ -218,8 +218,7 @@ void ShipSelectionScreen::onReadyClick()
     }else if (window_button->getValue())
     {
         destroy();
-        P<ShipWindowUI> ui = new ShipWindowUI();
-        ui->window_angle = window_angle->getSelectionValue().toInt();
+        new WindowScreen(window_angle->getSelectionValue().toInt());
     }else if(topdown_button->getValue())
     {
         destroy();

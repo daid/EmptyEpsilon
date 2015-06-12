@@ -9,12 +9,16 @@
 #include "screenComponents/globalMessage.h"
 #include "screenComponents/jumpIndicator.h"
 
+#include "screenComponents/shipDestroyedPopup.h"
+
 ScreenMainScreen::ScreenMainScreen()
 {
     viewport = new GuiViewport3D(this, "VIEWPORT");
     viewport->showCallsigns()->showHeadings()->showSpacedust();
     viewport->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     // TODO: Small corner radar
+
+    new GuiShipDestroyedPopup(this);
     
     new GuiJumpIndicator(this);
     new GuiSelfDestructIndicator(this);
@@ -133,9 +137,6 @@ void ScreenMainScreen::onClick(sf::Vector2f mouse_position)
 
 void ScreenMainScreen::onKey(sf::Keyboard::Key key, int unicode)
 {
-    if (!my_spaceship)
-        return;
-
     switch(key)
     {
     case sf::Keyboard::Up:
@@ -163,6 +164,7 @@ void ScreenMainScreen::onKey(sf::Keyboard::Key key, int unicode)
             my_spaceship->commandMainScreenSetting(MSS_LongRange);
         break;
     
+    //TODO: This is more generic code and is duplicated.
     case sf::Keyboard::Escape:
     case sf::Keyboard::Home:
         destroy();
