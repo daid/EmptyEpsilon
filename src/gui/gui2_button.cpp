@@ -13,7 +13,7 @@ void GuiButton::onDraw(sf::RenderTarget& window)
     sf::Color color = button_color;
     if (!enabled)
         color = color * sf::Color(96, 96, 96, 255);
-    else if (has_focus)
+    else if (hover)
         color = color * sf::Color(128, 128, 128, 255);
     draw9Cut(window, rect, "button_background", color);
     drawText(window, rect, text, ACenter, text_size, sf::Color::Black);

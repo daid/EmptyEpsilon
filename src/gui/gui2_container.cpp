@@ -21,7 +21,7 @@ void GuiContainer::drawElements(sf::FloatRect window_rect, sf::RenderTarget& win
     for(GuiElement* element : elements)
     {
         element->updateRect(window_rect);
-        element->has_focus = element->rect.contains(mouse_position);
+        element->hover = element->rect.contains(mouse_position);
     }
     
     for(GuiElement* element : elements)
@@ -40,7 +40,7 @@ GuiElement* GuiContainer::getClickElement(sf::Vector2f mouse_position)
     {
         GuiElement* element = *it;
         
-        if (element->has_focus && element->visible && element->enabled)
+        if (element->hover && element->visible && element->enabled)
         {
             GuiElement* clicked = element->getClickElement(mouse_position);
             if (clicked)

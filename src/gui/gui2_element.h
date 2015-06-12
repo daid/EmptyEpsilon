@@ -28,7 +28,8 @@ protected:
     sf::FloatRect rect;
     bool visible;
     bool enabled;
-    bool has_focus;
+    bool hover;
+    bool focus;
     string id;
 public:
     constexpr static float GuiSizeMatchHeight = -1.0;
@@ -42,6 +43,7 @@ public:
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
+    virtual bool onKey(sf::Keyboard::Key key, int unicode);
     
     GuiElement* setSize(sf::Vector2f size);
     GuiElement* setSize(float x, float y);
@@ -60,6 +62,7 @@ public:
     sf::Vector2f getCenterPoint();
     
     friend class GuiContainer;
+    friend class GuiCanvas;
 private:
     void updateRect(sf::FloatRect window_rect);
 protected:

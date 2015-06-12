@@ -417,7 +417,7 @@ string GUI::drawTextEntry(sf::FloatRect rect, string value, float font_size)
 
     if (InputHandler::keyboardIsPressed(sf::Keyboard::BackSpace) && value.length() > 0)
         value = value.substr(0, -1);
-    value += InputHandler::getKeyboarddrawTextEntry();
+    //value += InputHandler::getKeyboarddrawTextEntry();
     return value;
 }
 

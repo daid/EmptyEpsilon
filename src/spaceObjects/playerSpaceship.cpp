@@ -98,7 +98,7 @@ PlayerSpaceship::PlayerSpaceship()
     energy_level = 1000;
     main_screen_setting = MSS_Front;
     hull_damage_indicator = 0.0;
-    warp_indicator = 0.0;
+    jump_indicator = 0.0;
     scanned_by_player = SS_FullScan;
     comms_state = CS_Inactive;
     comms_open_delay = 0.0;
@@ -114,7 +114,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&hull_damage_indicator, 0.5);
     registerMemberReplication(&hull_strength, 0.5);
     registerMemberReplication(&hull_max);
-    registerMemberReplication(&warp_indicator, 0.5);
+    registerMemberReplication(&jump_indicator, 0.5);
     registerMemberReplication(&energy_level);
     registerMemberReplication(&main_screen_setting);
     registerMemberReplication(&scanning_delay, 0.5);
@@ -175,8 +175,8 @@ void PlayerSpaceship::update(float delta)
 {
     if (hull_damage_indicator > 0)
         hull_damage_indicator -= delta;
-    if (warp_indicator > 0)
-        warp_indicator -= delta;
+    if (jump_indicator > 0)
+        jump_indicator -= delta;
 
     if (shield_calibration_delay > 0)
     {
@@ -382,7 +382,7 @@ void PlayerSpaceship::executeJump(float distance)
 {
     if (useEnergy(distance * energy_per_jump_km) && systems[SYS_JumpDrive].health > 0.0)
     {
-        warp_indicator = 2.0;
+        jump_indicator = 2.0;
         SpaceShip::executeJump(distance);
         addHeat(SYS_JumpDrive, heat_per_jump);
     }

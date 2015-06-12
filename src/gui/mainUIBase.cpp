@@ -92,16 +92,16 @@ void MainUIBase::onGui()
             getRenderTarget()->draw(fullScreenOverlay);
         }
 
-        if (my_spaceship->warp_indicator > 0.0)
+        if (my_spaceship->jump_indicator > 0.0)
         {
-            if (my_spaceship->warp_indicator > 1.0)
+            if (my_spaceship->jump_indicator > 1.0)
             {
                 sf::RectangleShape fullScreenOverlay(sf::Vector2f(getWindowSize().x, 900));
-                fullScreenOverlay.setFillColor(sf::Color(0, 0, 0, 255 * (my_spaceship->warp_indicator - 1.0)));
+                fullScreenOverlay.setFillColor(sf::Color(0, 0, 0, 255 * (my_spaceship->jump_indicator - 1.0)));
                 getRenderTarget()->draw(fullScreenOverlay);
             }
             glitchPostProcessor->enabled = true;
-            glitchPostProcessor->setUniform("magtitude", my_spaceship->warp_indicator * 10.0);
+            glitchPostProcessor->setUniform("magtitude", my_spaceship->jump_indicator * 10.0);
             glitchPostProcessor->setUniform("delta", random(0, 360));
         }else{
             glitchPostProcessor->enabled = false;
@@ -118,6 +118,7 @@ void MainUIBase::onGui()
             warpPostProcessor->enabled = false;
         }
     }else{
+        warpPostProcessor->enabled = false;
         glitchPostProcessor->enabled = false;
     }
 

@@ -500,6 +500,8 @@
 		<Unit filename="src/gui/gui2_label.h" />
 		<Unit filename="src/gui/gui2_listbox.cpp" />
 		<Unit filename="src/gui/gui2_listbox.h" />
+		<Unit filename="src/gui/gui2_overlay.cpp" />
+		<Unit filename="src/gui/gui2_overlay.h" />
 		<Unit filename="src/gui/gui2_scrollbar.cpp" />
 		<Unit filename="src/gui/gui2_scrollbar.h" />
 		<Unit filename="src/gui/gui2_selector.cpp" />
@@ -546,6 +548,12 @@
 		<Unit filename="src/repairCrew.h" />
 		<Unit filename="src/scienceDatabase.cpp" />
 		<Unit filename="src/scienceDatabase.h" />
+		<Unit filename="src/screenComponents/indicatorOverlays.cpp" />
+		<Unit filename="src/screenComponents/indicatorOverlays.h" />
+		<Unit filename="src/screenComponents/viewport3d.cpp" />
+		<Unit filename="src/screenComponents/viewport3d.h" />
+		<Unit filename="src/screens/mainScreen.cpp" />
+		<Unit filename="src/screens/mainScreen.h" />
 		<Unit filename="src/script.cpp" />
 		<Unit filename="src/script.h" />
 		<Unit filename="src/shipTemplate.cpp" />

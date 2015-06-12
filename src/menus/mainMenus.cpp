@@ -37,7 +37,7 @@ MainMenu::MainMenu()
         engine->shutdown();
     }))->setPosition(sf::Vector2f(50, -50), ABottomLeft)->setSize(300, 50);
 
-    if (InputHandler::touch_screen || true)
+    if (InputHandler::touch_screen)
     {
         (new GuiButton(this, "TOUCH_CALIB", "Calibrate\nTouchscreen", [this]() {
             destroy();

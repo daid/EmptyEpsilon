@@ -1,5 +1,5 @@
 #include "playerInfo.h"
-#include "gui/mainScreen.h"
+#include "screens/mainScreen.h"
 #include "gui/crewHelmsUI.h"
 #include "gui/crewWeaponsUI.h"
 #include "gui/crewEngineeringUI.h"
@@ -105,7 +105,7 @@ void PlayerInfo::spawnUI()
 {
     if (my_player_info->isMainScreen())
     {
-        new MainScreenUI();
+        new ScreenMainScreen();
     }else{
         if (!crew_position[crew_active_position])
         {

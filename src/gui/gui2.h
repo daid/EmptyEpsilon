@@ -12,5 +12,6 @@
 #include "gui2_autolayout.h"
 #include "gui2_box.h"
 #include "gui2_textentry.h"
+#include "gui2_overlay.h"
 
 #endif//GUI2_H

@@ -19,7 +19,7 @@ void GuiSlider::onDraw(sf::RenderTarget& window)
 */
     x = rect.left + (rect.width - rect.height) * (value - min_value) / (max_value - min_value);
     sf::Color color = sf::Color::White;
-    if (has_focus)
+    if (hover)
         color = sf::Color(255,255,255, 128);
     draw9Cut(window, sf::FloatRect(x, rect.top, rect.height, rect.height), "button_background", color);
 }

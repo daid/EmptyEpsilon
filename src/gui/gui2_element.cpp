@@ -2,7 +2,7 @@
 #include "main.h"
 
 GuiElement::GuiElement(GuiContainer* owner, string id)
-: position_alignment(ATopLeft), owner(owner), rect(0, 0, 0, 0), visible(true), enabled(true), has_focus(false), id(id)
+: position_alignment(ATopLeft), owner(owner), rect(0, 0, 0, 0), visible(true), enabled(true), hover(false), focus(false), id(id)
 {
     owner->elements.push_back(this);
 }
@@ -24,6 +24,11 @@ void GuiElement::onMouseDrag(sf::Vector2f position)
 
 void GuiElement::onMouseUp(sf::Vector2f position)
 {
+}
+
+bool GuiElement::onKey(sf::Keyboard::Key key, int unicode)
+{
+    return false;
 }
 
 GuiElement* GuiElement::setSize(sf::Vector2f size)
