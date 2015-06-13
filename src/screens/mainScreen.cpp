@@ -16,7 +16,9 @@ ScreenMainScreen::ScreenMainScreen()
     viewport = new GuiViewport3D(this, "VIEWPORT");
     viewport->showCallsigns()->showHeadings()->showSpacedust();
     viewport->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    // TODO: Small corner radar
+    
+    (new GuiRadarView(viewport, "VIEWPORT_RADAR", 5000.0f))->setStyle(GuiRadarView::CircularMasked)->setSize(200, 200)->setPosition(-20, 20, ATopRight);
+    
     tactical_radar = new GuiRadarView(this, "TACTICAL", 5000.0f);
     tactical_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     tactical_radar->setRangeIndicatorStepSize(1000.0f)->shortRange()->enableCallsigns()->hide();
@@ -79,6 +81,8 @@ void ScreenMainScreen::update(float delta)
         case MSS_Left:
         case MSS_Right:
             viewport->show();
+            tactical_radar->hide();
+            long_range_radar->hide();
             break;
         case MSS_Tactical:
             viewport->hide();

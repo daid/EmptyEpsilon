@@ -1,8 +1,10 @@
+#include <SFML/OpenGL.hpp>
+
 #include "playerInfo.h"
 #include "radarView.h"
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance)
-: GuiElement(owner, id), distance(distance), long_range(false), show_callsigns(true), range_indicator_step_size(0.0f)
+: GuiElement(owner, id), distance(distance), long_range(false), show_callsigns(true), range_indicator_step_size(0.0f), style(Circular)
 {
 }
 
@@ -15,15 +17,54 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     drawSectorGrid(window);
     drawRangeIndicators(window);
     drawObjects(window);
-    drawRadarCutoff(window);
+    switch(style)
+    {
+    case Rectangular:
+        break;
+    case Circular:
+        drawRadarCutoff(window);
+        break;
+    case CircularMasked:
+        glDisable(GL_STENCIL_TEST);
+        break;
+    }
 }
 
 void GuiRadarView::drawBackground(sf::RenderTarget& window)
 {
-    sf::RectangleShape background(sf::Vector2f(rect.width, rect.height));
-    background.setPosition(rect.left, rect.top);
-    background.setFillColor(sf::Color(20, 20, 20, 255));
-    window.draw(background);
+    switch(style)
+    {
+    case Rectangular:
+    case Circular:
+        {
+            sf::RectangleShape background(sf::Vector2f(rect.width, rect.height));
+            background.setPosition(rect.left, rect.top);
+            background.setFillColor(sf::Color(20, 20, 20, 255));
+            window.draw(background);
+        }
+        break;
+    case CircularMasked:
+        {
+            sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
+            float r = std::min(rect.width, rect.height) / 2.0f;
+            
+            glEnable(GL_STENCIL_TEST);
+            glStencilFunc(GL_ALWAYS, 1, 1);
+            glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
+
+            sf::CircleShape circle(r, 50);
+            circle.setOrigin(r, r);
+            circle.setPosition(radar_screen_center);
+            circle.setFillColor(sf::Color(20, 20, 20, 255));
+            circle.setOutlineColor(sf::Color(64, 64, 64, 255));
+            circle.setOutlineThickness(2.0);
+            window.draw(circle);
+
+            glStencilFunc(GL_EQUAL, 1, 1);
+            glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+        }
+        break;
+    }
 }
 
 void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
@@ -90,8 +131,7 @@ void GuiRadarView::drawRangeIndicators(sf::RenderTarget& window)
         return;
     
     sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
-    float screen_size = std::min(rect.width, rect.height) / 2.0f;
-    float scale = screen_size / distance;
+    float scale = std::min(rect.width, rect.height) / 2.0f / distance;
     
     for(float circle_size=range_indicator_step_size; circle_size < distance; circle_size+=range_indicator_step_size)
     {
@@ -110,13 +150,12 @@ void GuiRadarView::drawRangeIndicators(sf::RenderTarget& window)
 void GuiRadarView::drawObjects(sf::RenderTarget& window)
 {
     sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
-    float screen_size = std::min(rect.width, rect.height) / 2.0f;
-    float scale = screen_size / distance;
+    float scale = std::min(rect.width, rect.height) / 2.0f / distance;
     
     foreach(SpaceObject, obj, space_object_list)
     {
         sf::Vector2f object_position_on_screen = radar_screen_center + (obj->getPosition() - view_position) * scale;
-        float r = obj->getRadius();
+        float r = obj->getRadius() * scale;
         sf::FloatRect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
         if (obj != my_spaceship && rect.intersects(object_rect))
         {

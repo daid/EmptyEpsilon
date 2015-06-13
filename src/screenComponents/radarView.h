@@ -5,12 +5,20 @@
 
 class GuiRadarView : public GuiElement
 {
+public:
+    enum ERadarStyle
+    {
+        Rectangular,
+        Circular,
+        CircularMasked
+    };
 private:
     float distance;
     sf::Vector2f view_position;
     bool long_range;
     bool show_callsigns;
     float range_indicator_step_size;
+    ERadarStyle style;
 public:
     GuiRadarView(GuiContainer* owner, string id, float distance);
 
@@ -22,6 +30,7 @@ public:
     GuiRadarView* shortRange() { long_range = false; return this; }
     GuiRadarView* enableCallsigns() { show_callsigns = true; return this; }
     GuiRadarView* disableCallsigns() { show_callsigns = false; return this; }
+    GuiRadarView* setStyle(ERadarStyle style) { this->style = style; return this; }
 private:
     void drawBackground(sf::RenderTarget& window);
     void drawSectorGrid(sf::RenderTarget& window);
