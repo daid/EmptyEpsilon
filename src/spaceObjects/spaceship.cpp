@@ -275,9 +275,6 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
             arc[arcPoints-1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_weapons[n].direction + beam_weapons[n].arc / 2.0f)) * beam_weapons[n].range * scale;
             window.draw(arc);
         }
-    }else{
-        if (my_spaceship != this)
-            GUI::drawText(sf::FloatRect(position.x, position.y - 15, 0, 0), getCallSign(), AlignCenter, 12);
     }
 
     sf::Sprite objectSprite;

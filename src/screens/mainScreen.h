@@ -4,11 +4,14 @@
 #include "engine.h"
 #include "gui/gui2.h"
 #include "screenComponents/viewport3d.h"
+#include "screenComponents/radarView.h"
 
 class ScreenMainScreen : public GuiCanvas, public Updatable
 {
 private:
     GuiViewport3D* viewport;
+    GuiRadarView* tactical_radar;
+    GuiRadarView* long_range_radar;
 public:
     ScreenMainScreen();
     

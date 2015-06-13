@@ -17,6 +17,12 @@ ScreenMainScreen::ScreenMainScreen()
     viewport->showCallsigns()->showHeadings()->showSpacedust();
     viewport->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     // TODO: Small corner radar
+    tactical_radar = new GuiRadarView(this, "TACTICAL", 5000.0f);
+    tactical_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    tactical_radar->setRangeIndicatorStepSize(1000.0f)->shortRange()->enableCallsigns()->hide();
+    long_range_radar = new GuiRadarView(this, "TACTICAL", gameGlobalInfo->long_range_radar_range);
+    long_range_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->enableCallsigns()->hide();
 
     new GuiShipDestroyedPopup(this);
     
@@ -75,12 +81,14 @@ void ScreenMainScreen::update(float delta)
             viewport->show();
             break;
         case MSS_Tactical:
-            //renderTactical(*getRenderTarget());
             viewport->hide();
+            tactical_radar->show();
+            long_range_radar->hide();
             break;
         case MSS_LongRange:
-            //renderLongRange(*getRenderTarget());
             viewport->hide();
+            tactical_radar->hide();
+            long_range_radar->show();
             break;
         }
     }
