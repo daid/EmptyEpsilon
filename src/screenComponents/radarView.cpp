@@ -4,7 +4,7 @@
 #include "radarView.h"
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance)
-: GuiElement(owner, id), distance(distance), long_range(false), show_callsigns(true), range_indicator_step_size(0.0f), style(Circular)
+: GuiElement(owner, id), distance(distance), long_range(false), show_callsigns(false), range_indicator_step_size(0.0f), style(Circular)
 {
 }
 
