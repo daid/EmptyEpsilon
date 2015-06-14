@@ -37,6 +37,7 @@ ScreenMainScreen::ScreenMainScreen()
 void ScreenMainScreen::update(float delta)
 {
     /*
+    TODO
     if (game_client && !game_client->isConnected())
     {
         destroy();

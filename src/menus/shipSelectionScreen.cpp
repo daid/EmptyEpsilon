@@ -4,7 +4,7 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "screens/windowScreen.h"
-#include "gui/mainScreen.h"
+#include "screens/topDownScreen.h"
 #include "gui/gameMasterUI.h"
 
 ShipSelectionScreen::ShipSelectionScreen()
@@ -221,8 +221,10 @@ void ShipSelectionScreen::onReadyClick()
         new WindowScreen(window_angle->getSelectionValue().toInt());
     }else if(topdown_button->getValue())
     {
+        my_spaceship = NULL;
+        my_player_info->setShipId(-1);
         destroy();
-        new TopDownUI();
+        new TopDownScreen();
     }else{
         destroy();
         my_player_info->spawnUI();
