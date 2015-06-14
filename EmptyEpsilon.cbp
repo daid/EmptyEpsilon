@@ -474,6 +474,8 @@
 		<Unit filename="src/gui/crewUI.h" />
 		<Unit filename="src/gui/crewWeaponsUI.cpp" />
 		<Unit filename="src/gui/crewWeaponsUI.h" />
+		<Unit filename="src/gui/debugRenderer.cpp" />
+		<Unit filename="src/gui/debugRenderer.h" />
 		<Unit filename="src/gui/gameMasterUI.cpp" />
 		<Unit filename="src/gui/gameMasterUI.h" />
 		<Unit filename="src/gui/gui.cpp" />

@@ -1,5 +1,6 @@
 #include <string.h>
 #include "gui/mouseRenderer.h"
+#include "gui/debugRenderer.h"
 #include "menus/mainMenus.h"
 #include "mouseCalibrator.h"
 #include "factionInfo.h"
@@ -139,6 +140,9 @@ int main(int argc, char** argv)
     }else{
         engine->registerObject("mouseRenderer", new MouseRenderer());
     }
+#ifdef DEBUG
+    new DebugRenderer();
+#endif
     if (startup_parameters["touchcalibfile"] != "")
     {
         FILE* f = fopen(startup_parameters["touchcalibfile"].c_str(), "r");
