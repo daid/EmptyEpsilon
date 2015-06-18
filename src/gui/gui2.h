@@ -14,5 +14,6 @@
 #include "gui2_textentry.h"
 #include "gui2_overlay.h"
 #include "gui2_progressbar.h"
+#include "gui2_keyvaluedisplay.h"
 
 #endif//GUI2_H

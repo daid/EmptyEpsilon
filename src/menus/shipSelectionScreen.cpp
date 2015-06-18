@@ -5,7 +5,7 @@
 #include "gameGlobalInfo.h"
 #include "screens/windowScreen.h"
 #include "screens/topDownScreen.h"
-#include "gui/gameMasterUI.h"
+#include "screens/gameMasterScreen.h"
 
 ShipSelectionScreen::ShipSelectionScreen()
 {
@@ -60,42 +60,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     topdown_button->setSize(GuiElement::GuiSizeMax, 50);
     
     crew_type_selector = new GuiSelector(this, "CREW_TYPE_SELECTION", [this](int index, string value) {
-        game_master_button->hide();
-        window_button->hide();
-        window_angle->hide();
-        topdown_button->hide();
-        main_screen_button->setVisible(canDoMainScreen());
-        main_screen_button->setValue(false);
-        game_master_button->setValue(false);
-        window_button->setValue(false);
-        topdown_button->setValue(false);
-        for(int n=0; n<max_crew_positions; n++)
-        {
-            crew_position_button[n]->setValue(false)->hide();
-            my_player_info->setCrewPosition(ECrewPosition(n), false);
-        }
-        switch(index)
-        {
-        case 0:
-            for(int n=helmsOfficer; n<=commsOfficer; n++)
-                crew_position_button[n]->show();
-            break;
-        case 1:
-            for(int n=tacticalOfficer; n<=operationsOfficer; n++)
-                crew_position_button[n]->show();
-            break;
-        case 2:
-            crew_position_button[singlePilot]->show();
-            break;
-        case 3:
-            main_screen_button->hide();
-            game_master_button->setVisible(game_server);
-            window_button->setVisible(canDoMainScreen());
-            window_angle->setVisible(canDoMainScreen());
-            topdown_button->setVisible(canDoMainScreen());
-            break;
-        }
-        updateReadyButton();
+        updateCrewTypeOptions();
     });
     crew_type_selector->setOptions({"6/5 player crew", "4/3 player crew", "1 player crew", "Alternative options"})->setPosition(-50, 560, ATopRight)->setSize(460, 50);
     
@@ -146,6 +111,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     
     crew_type_selector->setSelectionIndex(0);
     updateReadyButton();
+    updateCrewTypeOptions();
 }
 
 void ShipSelectionScreen::update(float delta)
@@ -207,6 +173,46 @@ void ShipSelectionScreen::updateReadyButton()
     }
 }
 
+void ShipSelectionScreen::updateCrewTypeOptions()
+{
+    game_master_button->hide();
+    window_button->hide();
+    window_angle->hide();
+    topdown_button->hide();
+    main_screen_button->setVisible(canDoMainScreen());
+    main_screen_button->setValue(false);
+    game_master_button->setValue(false);
+    window_button->setValue(false);
+    topdown_button->setValue(false);
+    for(int n=0; n<max_crew_positions; n++)
+    {
+        crew_position_button[n]->setValue(false)->hide();
+        my_player_info->setCrewPosition(ECrewPosition(n), false);
+    }
+    switch(crew_type_selector->getSelectionIndex())
+    {
+    case 0:
+        for(int n=helmsOfficer; n<=commsOfficer; n++)
+            crew_position_button[n]->show();
+        break;
+    case 1:
+        for(int n=tacticalOfficer; n<=operationsOfficer; n++)
+            crew_position_button[n]->show();
+        break;
+    case 2:
+        crew_position_button[singlePilot]->show();
+        break;
+    case 3:
+        main_screen_button->hide();
+        game_master_button->setVisible(game_server);
+        window_button->setVisible(canDoMainScreen());
+        window_angle->setVisible(canDoMainScreen());
+        topdown_button->setVisible(canDoMainScreen());
+        break;
+    }
+    updateReadyButton();
+}
+
 void ShipSelectionScreen::onReadyClick()
 {
     if (game_master_button->getValue())
@@ -214,7 +220,7 @@ void ShipSelectionScreen::onReadyClick()
         my_spaceship = NULL;
         my_player_info->setShipId(-1);
         destroy();
-        new GameMasterUI();
+        new GameMasterScreen();
     }else if (window_button->getValue())
     {
         destroy();

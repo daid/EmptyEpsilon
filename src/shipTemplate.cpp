@@ -66,7 +66,7 @@ template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es)
         es = SYS_None;
 }
 
-std::map<string, P<ShipTemplate> > ShipTemplate::templateMap;
+std::unordered_map<string, P<ShipTemplate> > ShipTemplate::templateMap;
 
 ShipTemplate::ShipTemplate()
 {
@@ -151,7 +151,7 @@ P<ShipTemplate> ShipTemplate::getTemplate(string name)
 std::vector<string> ShipTemplate::getTemplateNameList()
 {
     std::vector<string> ret;
-    for(std::map<string, P<ShipTemplate> >::iterator i = templateMap.begin(); i != templateMap.end(); i++)
+    for(std::unordered_map<string, P<ShipTemplate> >::iterator i = templateMap.begin(); i != templateMap.end(); i++)
         if (!i->first.endswith("Station") && !i->first.startswith("Player"))
             ret.push_back(i->first);
     return ret;
@@ -160,8 +160,17 @@ std::vector<string> ShipTemplate::getTemplateNameList()
 std::vector<string> ShipTemplate::getPlayerTemplateNameList()
 {
     std::vector<string> ret;
-    for(std::map<string, P<ShipTemplate> >::iterator i = templateMap.begin(); i != templateMap.end(); i++)
+    for(std::unordered_map<string, P<ShipTemplate> >::iterator i = templateMap.begin(); i != templateMap.end(); i++)
         if (!i->first.endswith("Station") && i->first.startswith("Player"))
+            ret.push_back(i->first);
+    return ret;
+}
+
+std::vector<string> ShipTemplate::getStationTemplateNameList()
+{
+    std::vector<string> ret;
+    for(std::unordered_map<string, P<ShipTemplate> >::iterator i = templateMap.begin(); i != templateMap.end(); i++)
+        if (i->first.endswith("Station") && !i->first.startswith("Player"))
             ret.push_back(i->first);
     return ret;
 }

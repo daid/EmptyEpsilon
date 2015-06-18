@@ -15,7 +15,7 @@ struct PackResourceInfo
 class PackResourceProvider : public ResourceProvider
 {
     string filename;
-    std::map<string, PackResourceInfo> files;
+    std::unordered_map<string, PackResourceInfo> files;
 public:
     PackResourceProvider(string filename);
 

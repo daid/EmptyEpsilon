@@ -11,6 +11,7 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
             setSelectionIndex(entries.size() - 1);
         else
             setSelectionIndex(getSelectionIndex() - 1);
+        callback();
     }))->setPosition(0, 0, ATopLeft)->setSize(GuiSizeMatchHeight, GuiSizeMax);
     (new GuiArrowButton(this, id + "_ARROW_RIGHT", 180, [this]() {
         soundManager.playSound("button.wav");
@@ -18,6 +19,7 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
             setSelectionIndex(0);
         else
             setSelectionIndex(getSelectionIndex() + 1);
+        callback();
     }))->setPosition(0, 0, ATopRight)->setSize(GuiSizeMatchHeight, GuiSizeMax);
 }
 

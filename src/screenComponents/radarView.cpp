@@ -4,7 +4,7 @@
 #include "radarView.h"
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance)
-: GuiElement(owner, id), distance(distance), long_range(false), show_callsigns(false), range_indicator_step_size(0.0f), style(Circular)
+: GuiElement(owner, id), distance(distance), long_range(false), show_callsigns(false), show_game_master_data(false), range_indicator_step_size(0.0f), style(Circular), mouse_down_func(nullptr), mouse_drag_func(nullptr), mouse_up_func(nullptr)
 {
 }
 
@@ -17,6 +17,9 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     drawSectorGrid(window);
     drawRangeIndicators(window);
     drawObjects(window);
+    if (show_game_master_data)
+        drawObjectsGM(window);
+    drawTargets(window);
     switch(style)
     {
     case Rectangular:
@@ -171,6 +174,43 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window)
     }
 }
 
+void GuiRadarView::drawObjectsGM(sf::RenderTarget& window)
+{
+    sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
+    float scale = std::min(rect.width, rect.height) / 2.0f / distance;
+    
+    foreach(SpaceObject, obj, space_object_list)
+    {
+        sf::Vector2f object_position_on_screen = radar_screen_center + (obj->getPosition() - view_position) * scale;
+        float r = obj->getRadius() * scale;
+        sf::FloatRect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
+        if (rect.intersects(object_rect))
+        {
+            obj->drawOnGMRadar(window, object_position_on_screen, scale, long_range);
+        }
+    }
+}
+
+void GuiRadarView::drawTargets(sf::RenderTarget& window)
+{
+    sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
+    float scale = std::min(rect.width, rect.height) / 2.0f / distance;
+    
+    foreach(SpaceObject, obj, targets)
+    {
+        sf::Vector2f object_position_on_screen = radar_screen_center + (obj->getPosition() - view_position) * scale;
+        float r = obj->getRadius() * scale;
+        sf::FloatRect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
+        if (obj != my_spaceship && rect.intersects(object_rect))
+        {
+            sf::Sprite target_sprite;
+            textureManager.setTexture(target_sprite, "redicule.png");
+            target_sprite.setPosition(object_position_on_screen);
+            window.draw(target_sprite);
+        }
+    }
+}
+
 void GuiRadarView::drawRadarCutoff(sf::RenderTarget& window)
 {
     sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
@@ -199,4 +239,63 @@ void GuiRadarView::drawRadarCutoff(sf::RenderTarget& window)
     rectRight.setFillColor(sf::Color::Black);
     rectRight.setPosition(radar_screen_center.x + screen_size, rect.top);
     window.draw(rectRight);
+}
+
+GuiRadarView* GuiRadarView::setTarget(P<SpaceObject> obj)
+{
+    if (obj)
+    {
+        if (targets.size() > 0)
+        {
+            targets[0] = obj;
+            if (targets.size() > 1)
+                targets.resize(1);
+        }else{
+            targets.push_back(obj);
+        }
+    }
+    else
+    {
+        clearTargets();
+    }
+    return this; 
+}
+
+GuiRadarView* GuiRadarView::setTargets(PVector<SpaceObject> objs)
+{
+    targets = objs;
+    return this;
+}
+
+sf::Vector2f GuiRadarView::worldToScreen(sf::Vector2f world_position)
+{
+    sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
+    float scale = std::min(rect.width, rect.height) / 2.0f / distance;
+    return radar_screen_center + (world_position - view_position) * scale;
+}
+
+sf::Vector2f GuiRadarView::screenToWorld(sf::Vector2f screen_position)
+{
+    sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
+    float scale = std::min(rect.width, rect.height) / 2.0f / distance;
+    return view_position + (screen_position - radar_screen_center) / scale;
+}
+
+bool GuiRadarView::onMouseDown(sf::Vector2f position)
+{
+    if (mouse_down_func)
+        mouse_down_func(screenToWorld(position));
+    return true;
+}
+
+void GuiRadarView::onMouseDrag(sf::Vector2f position)
+{
+    if (mouse_drag_func)
+        mouse_drag_func(screenToWorld(position));
+}
+
+void GuiRadarView::onMouseUp(sf::Vector2f position)
+{
+    if (mouse_up_func)
+        mouse_up_func(screenToWorld(position));
 }

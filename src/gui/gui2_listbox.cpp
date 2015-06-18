@@ -43,6 +43,7 @@ void GuiListbox::entriesChanged()
         int offset = buttons.size();
         GuiButton* button = new GuiButton(this, "", "", [this, offset]() {
             setSelectionIndex(offset + scroll->getValue());
+            callback();
         });
         button->setPosition(0, offset * button_height, ATopLeft);
         button->setColor(unselected_color);

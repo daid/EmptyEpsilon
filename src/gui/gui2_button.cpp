@@ -47,3 +47,9 @@ GuiButton* GuiButton::setColor(sf::Color color)
     button_color = color;
     return this;
 }
+
+GuiButton* GuiButton::setTextSize(float size)
+{
+    text_size = size;
+    return this;
+}

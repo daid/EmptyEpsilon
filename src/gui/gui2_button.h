@@ -23,6 +23,7 @@ public:
     
     GuiButton* setText(string text);
     GuiButton* setColor(sf::Color color);
+    GuiButton* setTextSize(float size);
     string getText();
 };
 

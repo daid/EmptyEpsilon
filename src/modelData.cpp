@@ -25,7 +25,7 @@ REGISTER_SCRIPT_CLASS(ModelData)
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, addEngineEmitor);
 }
 
-std::map<string, P<ModelData> > ModelData::data_map;
+std::unordered_map<string, P<ModelData> > ModelData::data_map;
 
 ModelData::ModelData()
 : loaded(false), mesh(NULL), texture(NULL), specular_texture(NULL), illumination_texture(NULL), shader(NULL), scale(1.0), radius(1.0)

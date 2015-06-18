@@ -2,7 +2,7 @@
 #define MODEL_DATA_H
 
 #include <SFML/System.hpp>
-#include <map>
+#include <unordered_map>
 
 #include "engine.h"
 
@@ -23,7 +23,7 @@ public:
 class ModelData : public PObject
 {
 private:
-    static std::map<string, P<ModelData> > data_map;
+    static std::unordered_map<string, P<ModelData> > data_map;
 public:
     static P<ModelData> getModel(string name) { return data_map[name]; }
 

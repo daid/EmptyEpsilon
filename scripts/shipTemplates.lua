@@ -27,10 +27,10 @@ template:setSpeed(90, 10, 20)
 template:setWarpSpeed(0)
 template:setJumpDrive(true)
 template:setCloaking(false)
-template:setWeaponStorage("Homing", 8)
-template:setWeaponStorage("Nuke", 2)
-template:setWeaponStorage("Mine", 6)
-template:setWeaponStorage("EMP", 4)
+template:setWeaponStorage("Homing", 12)
+template:setWeaponStorage("Nuke", 4)
+template:setWeaponStorage("Mine", 8)
+template:setWeaponStorage("EMP", 6)
 
 template:addRoomSystem(1, 0, 2, 1, "Maneuver");
 template:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
@@ -71,10 +71,10 @@ template:setSpeed(60, 8, 15)
 template:setWarpSpeed(800)
 template:setJumpDrive(false)
 template:setCloaking(false)
-template:setWeaponStorage("Homing", 20)
-template:setWeaponStorage("Nuke", 2)
-template:setWeaponStorage("Mine", 6)
-template:setWeaponStorage("EMP", 4)
+template:setWeaponStorage("Homing", 30)
+template:setWeaponStorage("Nuke", 8)
+template:setWeaponStorage("Mine", 12)
+template:setWeaponStorage("EMP", 10)
 
 template:addRoomSystem(1, 0, 2, 1, "Maneuver");
 template:addRoomSystem(1, 1, 2, 1, "BeamWeapons");

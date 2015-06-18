@@ -307,6 +307,27 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
     window.draw(objectSprite);
 }
 
+void SpaceShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+{
+    if (!long_range)
+    {
+        sf::RectangleShape bar(sf::Vector2f(60, 10));
+        
+        bar.setPosition(position.x - 30, position.y - 40);
+        bar.setSize(sf::Vector2f(60 * front_shield / front_shield_max, 5));
+        bar.setFillColor(sf::Color(128, 128, 255, 128));
+        window.draw(bar);
+        bar.setPosition(position.x - 30, position.y - 35);
+        bar.setSize(sf::Vector2f(60 * rear_shield / rear_shield_max, 5));
+        bar.setFillColor(sf::Color(128, 128, 255, 128));
+        window.draw(bar);
+        bar.setPosition(position.x - 30, position.y - 30);
+        bar.setSize(sf::Vector2f(60 * hull_strength / hull_max, 5));
+        bar.setFillColor(sf::Color(128, 255, 128, 128));
+        window.draw(bar);
+    }
+}
+
 void SpaceShip::update(float delta)
 {
     if (!ship_template || ship_template->getName() != template_name)
@@ -873,6 +894,16 @@ float SpaceShip::getSystemEffectiveness(ESystem system)
 string SpaceShip::getCallSign()
 {
     return ship_callsign;
+}
+
+std::unordered_map<string, string> SpaceShip::getGMInfo()
+{
+    std::unordered_map<string, string> ret;
+    ret["Type"] = ship_type_name;
+    ret["Hull"] = string(hull_strength) + "/" + string(hull_max);
+    ret["FrontShield"] = string(front_shield) + "/" + string(front_shield_max);
+    ret["RearShield"] = string(rear_shield) + "/" + string(rear_shield_max);
+    return ret;
 }
 
 string getMissileWeaponName(EMissileWeapons missile)

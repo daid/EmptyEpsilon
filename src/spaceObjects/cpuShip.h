@@ -52,6 +52,8 @@ public:
     EAIOrder getOrder() { return orders; }
     sf::Vector2f getOrderTargetLocation() { return order_target_location; }
     P<SpaceObject> getOrderTarget() { return order_target; }
+    
+    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
 
     friend class GameMasterUI;
 };

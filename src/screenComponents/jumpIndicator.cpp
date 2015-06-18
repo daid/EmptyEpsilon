@@ -8,7 +8,8 @@ GuiJumpIndicator::GuiJumpIndicator(GuiContainer* owner)
 
     box = new GuiBox(owner, "JUMP_BOX");
     box->fill()->setSize(800, 100)->setPosition(0, 200, ATopCenter);
-    (new GuiLabel(box, "JUMP_LABEL", "Jump in: ", 50))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenter);
+    label = new GuiLabel(box, "JUMP_LABEL", "Jump in: ", 50);
+    label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenter);
 }
 
 void GuiJumpIndicator::onDraw(sf::RenderTarget& window)

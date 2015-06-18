@@ -1,3 +1,4 @@
+#include "main.h"
 #include "mine.h"
 #include "playerInfo.h"
 #include "particleEffect.h"
@@ -37,20 +38,20 @@ void Mine::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float sc
     objectSprite.setPosition(position);
     objectSprite.setScale(0.3, 0.3);
     window.draw(objectSprite);
+}
 
-    if (!my_spaceship && game_server)
-    {
-        sf::CircleShape hitRadius(trigger_range * scale);
-        hitRadius.setOrigin(trigger_range * scale, trigger_range * scale);
-        hitRadius.setPosition(position);
-        hitRadius.setFillColor(sf::Color::Transparent);
-        if (triggered)
-            hitRadius.setOutlineColor(sf::Color(255, 0, 0, 128));
-        else
-            hitRadius.setOutlineColor(sf::Color(255, 255, 255, 128));
-        hitRadius.setOutlineThickness(3.0);
-        window.draw(hitRadius);
-    }
+void Mine::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+{
+    sf::CircleShape hitRadius(trigger_range * scale);
+    hitRadius.setOrigin(trigger_range * scale, trigger_range * scale);
+    hitRadius.setPosition(position);
+    hitRadius.setFillColor(sf::Color::Transparent);
+    if (triggered)
+        hitRadius.setOutlineColor(sf::Color(255, 0, 0, 128));
+    else
+        hitRadius.setOutlineColor(sf::Color(255, 255, 255, 128));
+    hitRadius.setOutlineThickness(3.0);
+    window.draw(hitRadius);
 }
 
 void Mine::update(float delta)

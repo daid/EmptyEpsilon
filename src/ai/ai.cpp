@@ -26,6 +26,30 @@ bool ShipAI::canSwitchAI()
     return true;
 }
 
+void ShipAI::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f draw_position, float scale)
+{
+    sf::Vector2f world_position = owner->getPosition();
+    P<SpaceObject> target = owner->getTarget();
+    if (target)
+    {
+        sf::VertexArray a(sf::Lines, 2);
+        a[0].position = draw_position;
+        a[1].position = draw_position + (target->getPosition() - world_position) * scale;
+        a[0].color = a[1].color = sf::Color(255, 128, 128, 64);
+        window.draw(a);
+    }
+    
+    sf::VertexArray a(sf::LinesStrip, pathPlanner.route.size() + 1);
+    a[0].position = draw_position;
+    a[0].color = sf::Color(255, 255, 255, 32);
+    for(unsigned int n=0; n<pathPlanner.route.size(); n++)
+    {
+        a[n+1].position = draw_position + (pathPlanner.route[n] - world_position) * scale;
+        a[n+1].color = sf::Color(255, 255, 255, 64);
+    }
+    window.draw(a);
+}
+
 void ShipAI::run(float delta)
 {
     owner->target_rotation = owner->getRotation();

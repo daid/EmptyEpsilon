@@ -187,6 +187,7 @@ public:
      * Draw this ship on the radar.
      */
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
+    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
 
     virtual void update(float delta);
 
@@ -285,6 +286,8 @@ public:
     virtual void setShipTemplate(string template_names);
 
     P<SpaceObject> getTarget();
+    
+    virtual std::unordered_map<string, string> getGMInfo();
 
     bool isDocked(P<SpaceObject> target) { return docking_state == DS_Docked && docking_target == target; }
     int getWeaponStorage(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage[weapon]; }

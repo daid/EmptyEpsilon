@@ -66,6 +66,10 @@ void SpaceObject::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, f
 {
 }
 
+void SpaceObject::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange)
+{
+}
+
 void SpaceObject::destroy()
 {
     onDestroyed();

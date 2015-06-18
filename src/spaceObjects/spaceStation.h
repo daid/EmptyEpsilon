@@ -22,6 +22,7 @@ public:
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
     virtual void update(float delta);
 
+    virtual std::unordered_map<string, string> getGMInfo();
     virtual string getCallSign() { return "DS" + string(getMultiplayerId()); }
     virtual bool canBeTargeted() { return true; }
     virtual bool canBeDockedBy(P<SpaceObject> obj);

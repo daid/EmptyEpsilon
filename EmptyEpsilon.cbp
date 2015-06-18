@@ -498,6 +498,8 @@
 		<Unit filename="src/gui/gui2_element.h" />
 		<Unit filename="src/gui/gui2_entrylist.cpp" />
 		<Unit filename="src/gui/gui2_entrylist.h" />
+		<Unit filename="src/gui/gui2_keyvaluedisplay.cpp" />
+		<Unit filename="src/gui/gui2_keyvaluedisplay.h" />
 		<Unit filename="src/gui/gui2_label.cpp" />
 		<Unit filename="src/gui/gui2_label.h" />
 		<Unit filename="src/gui/gui2_listbox.cpp" />
@@ -564,6 +566,8 @@
 		<Unit filename="src/screenComponents/shipDestroyedPopup.h" />
 		<Unit filename="src/screenComponents/viewport3d.cpp" />
 		<Unit filename="src/screenComponents/viewport3d.h" />
+		<Unit filename="src/screens/gameMasterScreen.cpp" />
+		<Unit filename="src/screens/gameMasterScreen.h" />
 		<Unit filename="src/screens/mainScreen.cpp" />
 		<Unit filename="src/screens/mainScreen.h" />
 		<Unit filename="src/screens/topDownScreen.cpp" />

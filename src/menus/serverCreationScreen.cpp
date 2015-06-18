@@ -1,6 +1,5 @@
 #include "serverCreationScreen.h"
 #include "shipSelectionScreen.h"
-#include "gui/gameMasterUI.h"
 #include "gameGlobalInfo.h"
 #include "epsilonServer.h"
 #include "main.h"
@@ -106,6 +105,7 @@ ServerCreationScreen::ServerCreationScreen()
         scenario_list->addEntry(name, filename);
     }
     scenario_list->setSelectionIndex(0);
+    selected_scenario_filename = scenario_list->getSelectionValue();
 }
 
 void ServerCreationScreen::startScenario()

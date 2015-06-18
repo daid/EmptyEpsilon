@@ -68,13 +68,6 @@ GuiEntryList* GuiEntryList::setSelectionIndex(int index)
 {
     selection_index = index;
     entriesChanged();
-    if (func)
-    {
-        if (selection_index >= 0 && selection_index < (int)entries.size())
-            func(selection_index, entries[selection_index].value);
-        else
-            func(selection_index, "");
-    }
     return this;
 }
 
@@ -87,4 +80,15 @@ string GuiEntryList::getSelectionValue()
 
 void GuiEntryList::entriesChanged()
 {
+}
+
+void GuiEntryList::callback()
+{
+    if (func)
+    {
+        if (selection_index >= 0 && selection_index < (int)entries.size())
+            func(selection_index, entries[selection_index].value);
+        else
+            func(selection_index, "");
+    }
 }

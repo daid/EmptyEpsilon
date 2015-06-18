@@ -147,3 +147,12 @@ void SpaceStation::setTemplate(string template_name)
 
     PathPlannerManager::getInstance()->addAvoidObject(this, getRadius() * 1.5f);
 }
+
+std::unordered_map<string, string> SpaceStation::getGMInfo()
+{
+    std::unordered_map<string, string> ret;
+    ret["Type"] = template_name;
+    ret["Hull"] = string(hull_strength) + "/" + string(hull_max);
+    ret["Shield"] = string(shields) + "/" + string(shields_max);
+    return ret;
+}

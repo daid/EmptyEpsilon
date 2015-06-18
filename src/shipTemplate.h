@@ -1,7 +1,7 @@
 #ifndef SHIP_TEMPLATE_H
 #define SHIP_TEMPLATE_H
 
-#include <map>
+#include <unordered_map>
 #include "engine.h"
 #include "modelData.h"
 
@@ -63,7 +63,7 @@ public:
 class SpaceObject;
 class ShipTemplate : public PObject
 {
-    static std::map<string, P<ShipTemplate> > templateMap;
+    static std::unordered_map<string, P<ShipTemplate> > templateMap;
     string name;
     string description;
 public:
@@ -118,6 +118,7 @@ public:
     static P<ShipTemplate> getTemplate(string name);
     static std::vector<string> getTemplateNameList();
     static std::vector<string> getPlayerTemplateNameList();
+    static std::vector<string> getStationTemplateNameList();
 };
 string getSystemName(ESystem system);
 REGISTER_MULTIPLAYER_ENUM(ESystem);

@@ -75,17 +75,17 @@ void Nebula::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float 
     object_sprite.setScale(size, size);
     object_sprite.setColor(sf::Color(255, 255, 255));
     window.draw(object_sprite, sf::RenderStates(sf::BlendAdd));
+}
 
-    if (!my_spaceship)  //GM display.
-    {
-        sf::CircleShape range_circle(getRadius() * scale);
-        range_circle.setOrigin(getRadius() * scale, getRadius() * scale);
-        range_circle.setPosition(position);
-        range_circle.setFillColor(sf::Color::Transparent);
-        range_circle.setOutlineColor(sf::Color(255, 255, 255, 32));
-        range_circle.setOutlineThickness(2.0);
-        window.draw(range_circle);
-    }
+void Nebula::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+{
+    sf::CircleShape range_circle(getRadius() * scale);
+    range_circle.setOrigin(getRadius() * scale, getRadius() * scale);
+    range_circle.setPosition(position);
+    range_circle.setFillColor(sf::Color::Transparent);
+    range_circle.setOutlineColor(sf::Color(255, 255, 255, 32));
+    range_circle.setOutlineThickness(2.0);
+    window.draw(range_circle);
 }
 
 bool Nebula::inNebula(sf::Vector2f position)

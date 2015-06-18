@@ -2,6 +2,7 @@
 
 #include "ai/aiFactory.h"
 #include "ai/ai.h"
+#include "main.h"
 #include "cpuShip.h"
 #include "playerInfo.h"
 #include "pathPlanner.h"
@@ -161,6 +162,12 @@ void CpuShip::orderDock(P<SpaceObject> object)
 {
     orders = AI_Dock;
     order_target = object;
+}
+
+void CpuShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+{
+    SpaceShip::drawOnGMRadar(window, position, scale, long_range);
+    ai->drawOnGMRadar(window, position, scale);
 }
 
 string getAIOrderString(EAIOrder order)

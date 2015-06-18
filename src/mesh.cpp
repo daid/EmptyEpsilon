@@ -1,5 +1,5 @@
 #include <GL/glew.h>
-#include <map>
+#include <unordered_map>
 #include "engine.h"
 #include "mesh.h"
 
@@ -15,7 +15,7 @@ static inline int readInt(P<ResourceStream> stream)
 
 const unsigned int NO_BUFFER = 0;
 
-static std::map<string, Mesh*> meshMap;
+static std::unordered_map<string, Mesh*> meshMap;
 
 Mesh::Mesh()
 {

@@ -44,6 +44,7 @@ public:
     virtual void draw3D();
     virtual void draw3DTransparent() {}
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
+    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
     virtual void destroy();
 
     virtual string getCallSign() { return ""; }
@@ -52,6 +53,7 @@ public:
     virtual bool hasShield() { return false; }
     virtual bool canHideInNebula() { return true; }
     virtual void takeDamage(float damage_amount, DamageInfo& info) {}
+    virtual std::unordered_map<string, string> getGMInfo() { return std::unordered_map<string, string>(); }
 
     static void damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, DamageInfo& info, float min_range);
 

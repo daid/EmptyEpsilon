@@ -31,7 +31,7 @@ RenderLayer* mouseLayer;
 PostProcessor* glitchPostProcessor;
 PostProcessor* warpPostProcessor;
 
-static std::map<string, string> startup_parameters;
+static std::unordered_map<string, string> startup_parameters;
 
 int main(int argc, char** argv)
 {
@@ -218,7 +218,7 @@ int main(int argc, char** argv)
         startup_parameters["disable_shaders"] = PostProcessor::isEnabled() ? 0 : 1;
         fprintf(f, "# Empty Epsilon Settings\n# This file will be overwritten by EE.\n\n");
         fprintf(f, "# Include the following line to enable an experimental http server:\n# httpserver=8080\n\n");
-        for(std::map<string, string>::iterator i = startup_parameters.begin(); i != startup_parameters.end(); i++)
+        for(std::unordered_map<string, string>::iterator i = startup_parameters.begin(); i != startup_parameters.end(); i++)
         {
             fprintf(f, "%s=%s\n", i->first.c_str(), i->second.c_str());
         }

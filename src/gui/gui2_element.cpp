@@ -166,6 +166,16 @@ void GuiElement::updateRect(sf::FloatRect window_rect)
     
     rect.width = local_size.x;
     rect.height = local_size.y;
+    if (rect.width < 0)
+    {
+        rect.left += rect.width;
+        rect.width = -rect.width;
+    }
+    if (rect.height < 0)
+    {
+        rect.top += rect.height;
+        rect.height = -rect.height;
+    }
 }
 
 void GuiElement::drawText(sf::RenderTarget& window, sf::FloatRect rect, string text, EGuiAlign align, float font_size, sf::Color color)
