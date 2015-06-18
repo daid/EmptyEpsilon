@@ -1,6 +1,7 @@
 #ifndef GUI2_ELEMENT_H
 #define GUI2_ELEMENT_H
 
+#include <functional>
 #include "stringImproved.h"
 #include "gui2_container.h"
 
