@@ -9,6 +9,7 @@ class GuiCanvas : public Renderable, public GuiContainer, public InputEventHandl
 private:
     GuiElement* click_element;
     GuiElement* focus_element;
+    sf::Vector2f previous_mouse_position;
 public:
     GuiCanvas();
     virtual ~GuiCanvas();

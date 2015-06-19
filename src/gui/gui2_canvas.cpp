@@ -32,8 +32,9 @@ void GuiCanvas::render(sf::RenderTarget& window)
     }
     if (InputHandler::mouseIsDown(sf::Mouse::Left) || InputHandler::mouseIsDown(sf::Mouse::Right) || InputHandler::mouseIsDown(sf::Mouse::Middle))
     {
-        if (click_element)
-            click_element->onMouseDrag(mouse_position);
+        if (previous_mouse_position != mouse_position)
+            if (click_element)
+                click_element->onMouseDrag(mouse_position);
     }
     if (InputHandler::mouseIsReleased(sf::Mouse::Left) || InputHandler::mouseIsReleased(sf::Mouse::Right) || InputHandler::mouseIsReleased(sf::Mouse::Middle))
     {
@@ -43,6 +44,8 @@ void GuiCanvas::render(sf::RenderTarget& window)
             click_element = nullptr;
         }
     }
+    
+    previous_mouse_position = mouse_position;
 }
 
 void GuiCanvas::handleKeyPress(sf::Keyboard::Key key, int unicode)

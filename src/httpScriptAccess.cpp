@@ -48,7 +48,7 @@ bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection
 
         string luaCode;
         string objectId = "getPlayerShip(-1)";
-        std::map<string, string>::iterator i;
+        std::unordered_map<string, string>::iterator i;
         P<ScriptObject> script;
         string output;
 
@@ -120,7 +120,7 @@ bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection
 
         string luaCode;
         string objectId = "getPlayerShip(-1)";
-        std::map<string, string>::iterator i;
+        std::unordered_map<string, string>::iterator i;
         P<ScriptObject> script;
         string output;;
 

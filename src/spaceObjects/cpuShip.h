@@ -54,6 +54,7 @@ public:
     P<SpaceObject> getOrderTarget() { return order_target; }
     
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
+    virtual std::unordered_map<string, string> getGMInfo();
 
     friend class GameMasterUI;
 };

@@ -170,6 +170,13 @@ void CpuShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, flo
     ai->drawOnGMRadar(window, position, scale);
 }
 
+std::unordered_map<string, string> CpuShip::getGMInfo()
+{
+    std::unordered_map<string, string> ret = SpaceShip::getGMInfo();
+    ret["Orders"] = getAIOrderString(orders);
+    return ret;
+}
+
 string getAIOrderString(EAIOrder order)
 {
     switch(order)

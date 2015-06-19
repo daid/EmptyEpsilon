@@ -900,9 +900,9 @@ std::unordered_map<string, string> SpaceShip::getGMInfo()
 {
     std::unordered_map<string, string> ret;
     ret["Type"] = ship_type_name;
-    ret["Hull"] = string(hull_strength) + "/" + string(hull_max);
-    ret["FrontShield"] = string(front_shield) + "/" + string(front_shield_max);
-    ret["RearShield"] = string(rear_shield) + "/" + string(rear_shield_max);
+    ret["Hull"] = string(int(hull_strength)) + "/" + string(int(hull_max));
+    ret["FrontShield"] = string(int(front_shield)) + "/" + string(int(front_shield_max));
+    ret["RearShield"] = string(int(rear_shield)) + "/" + string(int(rear_shield_max));
     return ret;
 }
 

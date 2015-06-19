@@ -189,6 +189,7 @@ void ShipAI::runOrders()
     switch(owner->getOrder())
     {
     case AI_Idle:            //Don't do anything, don't even attack.
+        pathPlanner.clear();
         break;
     case AI_Roaming:         //Fly around and engage at will, without a clear target
         //Could mean 3 things
@@ -209,9 +210,11 @@ void ShipAI::runOrders()
             }
         }else{
             //TODO: Find someething which can re-stock our weapons.
+            pathPlanner.clear();
         }
         break;
     case AI_StandGround:     //Keep current position, do not fly away, but attack nearby targets.
+        pathPlanner.clear();
         break;
     case AI_FlyTowards:      //Fly towards [order_target_location], attacking enemies that get too close, but disengage and continue when enemy is too far.
     case AI_FlyTowardsBlind: //Fly towards [order_target_location], not attacking anything

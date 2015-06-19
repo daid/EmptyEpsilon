@@ -5,7 +5,7 @@
 #include "spaceObjects/cpuShip.h"
 #include "spaceObjects/spaceStation.h"
 
-//TODO: ship retrofitting, idle/stand-ground/roaming/defend orders, GM to ship comms
+//TODO: ship retrofitting, GM to ship comms
 GameMasterScreen::GameMasterScreen()
 : click_and_drag_state(CD_None)
 {
@@ -53,6 +53,31 @@ GameMasterScreen::GameMasterScreen()
     
     info_layout = new GuiAutoLayout(this, "INFO_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     info_layout->setPosition(-20, 20, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+    
+    order_layout = new GuiAutoLayout(this, "ORDER_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    order_layout->setPosition(20, 160, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
+
+    (new GuiLabel(order_layout, "ORDERS_LABEL", "Orders:", 20))->addBox()->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiButton(order_layout, "ORDER_IDLE", "Idle", [this]() {
+        for(P<SpaceObject> obj : main_radar->getTargets())
+            if (P<CpuShip>(obj))
+                P<CpuShip>(obj)->orderIdle();
+    }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiButton(order_layout, "ORDER_ROAMING", "Roaming", [this]() {
+        for(P<SpaceObject> obj : main_radar->getTargets())
+            if (P<CpuShip>(obj))
+                P<CpuShip>(obj)->orderRoaming();
+    }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiButton(order_layout, "ORDER_STAND_GROUND", "Stand Ground", [this]() {
+        for(P<SpaceObject> obj : main_radar->getTargets())
+            if (P<CpuShip>(obj))
+                P<CpuShip>(obj)->orderStandGround();
+    }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", "Defend location", [this]() {
+        for(P<SpaceObject> obj : main_radar->getTargets())
+            if (P<CpuShip>(obj))
+                P<CpuShip>(obj)->orderDefendLocation(obj->getPosition());
+    }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
 
     global_message_entry = new GuiGlobalMessageEntry(this);
     global_message_entry->hide();
@@ -76,6 +101,17 @@ void GameMasterScreen::update(float delta)
         else
             main_radar->longRange();
     }
+    
+    bool has_cpu_ship = false;
+    for(P<SpaceObject> obj : main_radar->getTargets())
+    {
+        if (P<CpuShip>(obj))
+        {
+            has_cpu_ship = true;
+            break;
+        }
+    }
+    order_layout->setVisible(has_cpu_ship);
     
     std::unordered_map<string, string> selection_info;
     for(P<SpaceObject> obj : main_radar->getTargets())
@@ -121,7 +157,7 @@ void GameMasterScreen::onMouseDown(sf::Vector2f position)
         return;
     if (InputHandler::mouseIsDown(sf::Mouse::Right))
     {
-        click_and_drag_state = CD_DragView;
+        click_and_drag_state = CD_DragViewOrOrder;
     }
     else
     {
@@ -151,7 +187,9 @@ void GameMasterScreen::onMouseDrag(sf::Vector2f position)
 {
     switch(click_and_drag_state)
     {
+    case CD_DragViewOrOrder:
     case CD_DragView:
+        click_and_drag_state = CD_DragView;
         main_radar->setViewPosition(main_radar->getViewPosition() - (position - drag_previous_position));
         position -= (position - drag_previous_position);
         break;
@@ -177,8 +215,7 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
 {
     switch(click_and_drag_state)
     {
-    case CD_DragView:
-        if (position - drag_start_position < 1.0f)
+    case CD_DragViewOrOrder:
         {
             //Right click
             bool shift_down = InputHandler::keyboardIsDown(sf::Keyboard::LShift) || InputHandler::keyboardIsDown(sf::Keyboard::RShift);

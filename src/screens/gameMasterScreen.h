@@ -17,10 +17,12 @@ private:
     GuiObjectCreationScreen* object_creation_screen;
     GuiAutoLayout* info_layout;
     std::vector<GuiKeyValueDisplay*> info_items;
+    GuiAutoLayout* order_layout;
     
     enum EClickAndDragState
     {
         CD_None,
+        CD_DragViewOrOrder,
         CD_DragView,
         CD_BoxSelect,
         CD_DragObjects
