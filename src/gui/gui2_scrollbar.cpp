@@ -68,3 +68,13 @@ int GuiScrollbar::getValue()
 {
     return value;
 }
+
+int GuiScrollbar::getMax()
+{
+    return max_value;
+}
+
+int GuiScrollbar::getMin()
+{
+    return min_value;
+}

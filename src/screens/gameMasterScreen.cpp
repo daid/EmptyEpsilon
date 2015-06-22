@@ -45,17 +45,26 @@ GameMasterScreen::GameMasterScreen()
     (new GuiButton(this, "CREATE_OBJECT_BUTTON", "Create...", [this]() {
         object_creation_screen->show();
         cancel_create_button->show();
-    }))->setPosition(20, -90, ABottomLeft)->setSize(250, 50);
+    }))->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
     cancel_create_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
         cancel_create_button->hide();
     });
-    cancel_create_button->setPosition(20, -90, ABottomLeft)->setSize(250, 50)->hide();
+    cancel_create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
+    
+    player_comms_hail = new GuiButton(this, "HAIL_PLAYER", "Hail ship", [this]() {
+        for(P<SpaceObject> obj : main_radar->getTargets())
+            if (P<PlayerSpaceship>(obj))
+                hail_player_dialog->player = obj;
+        if (hail_player_dialog->player)
+            hail_player_dialog->show();
+    });
+    player_comms_hail->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->hide();
     
     info_layout = new GuiAutoLayout(this, "INFO_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     info_layout->setPosition(-20, 20, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
     
     order_layout = new GuiAutoLayout(this, "ORDER_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    order_layout->setPosition(20, 160, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
+    order_layout->setPosition(20, 130, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
 
     (new GuiLabel(order_layout, "ORDERS_LABEL", "Orders:", 20))->addBox()->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_IDLE", "Idle", [this]() {
@@ -79,9 +88,16 @@ GameMasterScreen::GameMasterScreen()
                 P<CpuShip>(obj)->orderDefendLocation(obj->getPosition());
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
 
+    hail_player_dialog = new GuiHailPlayerShip(this);
+    hail_player_dialog->hide();
+    hailing_player_dialog = new GuiHailingPlayerShip(this);
+    hailing_player_dialog->hide();
+    player_chat = new GuiPlayerChat(this);
+    player_chat->hide();
+
     global_message_entry = new GuiGlobalMessageEntry(this);
     global_message_entry->hide();
-    object_creation_screen = new GuiObjectCreationScreen(this, this);
+    object_creation_screen = new GuiObjectCreationScreen(this);
     object_creation_screen->hide();
 }
 
@@ -103,15 +119,16 @@ void GameMasterScreen::update(float delta)
     }
     
     bool has_cpu_ship = false;
+    bool has_player_ship = false;
     for(P<SpaceObject> obj : main_radar->getTargets())
     {
         if (P<CpuShip>(obj))
-        {
             has_cpu_ship = true;
-            break;
-        }
+        if (P<PlayerSpaceship>(obj))
+            has_player_ship = true;
     }
     order_layout->setVisible(has_cpu_ship);
+    player_comms_hail->setVisible(has_player_ship);
     
     std::unordered_map<string, string> selection_info;
     for(P<SpaceObject> obj : main_radar->getTargets())
@@ -351,8 +368,8 @@ bool GuiGlobalMessageEntry::onMouseDown(sf::Vector2f position)
     return true;
 }
 
-GuiObjectCreationScreen::GuiObjectCreationScreen(GuiContainer* owner, GameMasterScreen* gm_screen)
-: GuiOverlay(owner, "OBJECT_CREATE_SCREEN", sf::Color(0, 0, 0, 128))
+GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
+: GuiOverlay(gm_screen, "OBJECT_CREATE_SCREEN", sf::Color(0, 0, 0, 128))
 {
     GuiBox* box = new GuiBox(this, "FRAME");
     box->fill()->setPosition(0, 0, ACenter)->setSize(1000, 500);
@@ -428,4 +445,127 @@ void GuiObjectCreationScreen::createObject(sf::Vector2f position)
     P<ScriptObject> so = new ScriptObject();
     so->runCode(create_script + ":setPosition("+string(position.x)+","+string(position.y)+")");
     so->destroy();
+}
+
+GuiHailPlayerShip::GuiHailPlayerShip(GameMasterScreen* owner)
+: GuiBox(owner, "HAIL_PLAYER_SHIP_DIALOG")
+{
+    setPosition(0, -100, ABottomCenter);
+    setSize(600, 150);
+    fill();
+
+    caller_entry = new GuiTextEntry(this, "MESSAGE_ENTRY", "Main Command");
+    caller_entry->setPosition(0, 20, ATopCenter)->setSize(500, 50);
+    
+    (new GuiButton(this, "CLOSE_BUTTON", "Cancel", [this]() {
+        this->hide();
+    }))->setPosition(20, -20, ABottomLeft)->setSize(250, 50);
+
+    (new GuiButton(this, "SEND_BUTTON", "Call", [this, owner]() {
+        if (player)
+        {
+            if (player->comms_state == CS_Inactive || player->comms_state == CS_ChannelFailed || player->comms_state == CS_ChannelBroken)
+            {
+                player->comms_state = CS_BeingHailedByGM;
+                player->comms_incomming_message = "Hailed by " + caller_entry->getText();
+                owner->hailing_player_dialog->player = player;
+                owner->hailing_player_dialog->show();
+            }
+        }
+        this->hide();
+    }))->setPosition(-20, -20, ABottomRight)->setSize(250, 50);
+}
+
+bool GuiHailPlayerShip::onMouseDown(sf::Vector2f position)
+{   //Catch clicks.
+    return true;
+}
+
+GuiHailingPlayerShip::GuiHailingPlayerShip(GameMasterScreen* owner)
+: GuiBox(owner, "HAILING_PLAYER_SHIP_DIALOG"), owner(owner)
+{
+    setPosition(0, -100, ABottomCenter);
+    setSize(600, 90);
+    fill();
+
+    (new GuiLabel(this, "HAILING_LABEL", "Hailing ship...", 30))->setPosition(0, 0, ACenter)->setSize(500, 50);
+}
+
+bool GuiHailingPlayerShip::onMouseDown(sf::Vector2f position)
+{   //Catch clicks.
+    return true;
+}
+
+void GuiHailingPlayerShip::onDraw(sf::RenderTarget& window)
+{
+    if (!player)
+    {
+        hide();
+        return;
+    }
+    switch(player->comms_state)
+    {
+    case CS_Inactive:
+    case CS_ChannelFailed:
+    case CS_ChannelBroken:
+    case CS_OpeningChannel:
+    case CS_BeingHailed:
+    case CS_ChannelOpen:
+    case CS_ChannelOpenPlayer:
+        hide();
+        break;
+    case CS_BeingHailedByGM:
+        break;
+    case CS_ChannelOpenGM:
+        owner->player_chat->player = player;
+        owner->player_chat->show();
+        hide();
+        break;
+    }
+    GuiBox::onDraw(window);
+}
+
+GuiPlayerChat::GuiPlayerChat(GameMasterScreen* owner)
+: GuiBox(owner, "PLAYER_CHAT_DIALOG")
+{
+    setPosition(0, -100, ABottomCenter);
+    setSize(800, 600);
+    fill();
+
+    message_entry = new GuiTextEntry(this, "MESSAGE_ENTRY", "");
+    message_entry->setPosition(20, -20, ABottomLeft)->setSize(640, 50);
+    
+    chat_text = new GuiScrollText(this, "CHAT_TEXT", "");
+    chat_text->enableAutoScrollDown()->setPosition(20, 30, ATopLeft)->setSize(760, 500);
+    
+    (new GuiButton(this, "SEND_BUTTON", "Send", [this]() {
+        if (player)
+        {
+            player->comms_incomming_message = player->comms_incomming_message + "\n>" + message_entry->getText();
+        }
+        message_entry->setText("");
+    }))->setPosition(-20, -20, ABottomRight)->setSize(120, 50);
+
+    (new GuiButton(this, "CLOSE_BUTTON", "Close", [this]() {
+        hide();
+        if (player)
+            player->comms_state = CS_Inactive;
+    }))->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
+}
+
+bool GuiPlayerChat::onMouseDown(sf::Vector2f position)
+{
+    return true;
+}
+
+void GuiPlayerChat::onDraw(sf::RenderTarget& window)
+{
+    if (!player || player->comms_state != CS_ChannelOpenGM)
+    {
+        hide();
+        return;
+    }
+    chat_text->setText(player->comms_incomming_message);
+    
+    GuiBox::onDraw(window);
 }

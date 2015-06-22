@@ -25,6 +25,9 @@ public:
     
     void setValue(int value);
     int getValue();
+    
+    int getMax();
+    int getMin();
 };
 
 #endif//GUI2_SLIDER_H
