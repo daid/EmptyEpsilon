@@ -5,7 +5,7 @@
 #include "spaceObjects/cpuShip.h"
 #include "spaceObjects/spaceStation.h"
 
-//TODO: ship retrofitting, GM to ship comms
+//TODO: ship retrofitting
 GameMasterScreen::GameMasterScreen()
 : click_and_drag_state(CD_None)
 {

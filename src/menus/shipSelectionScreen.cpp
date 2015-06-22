@@ -85,7 +85,9 @@ ShipSelectionScreen::ShipSelectionScreen()
     {
         (new GuiBox(this, "CREATE_SHIP_BOX"))->setPosition(50, 50, ATopLeft)->setSize(550, 700);
         GuiSelector* ship_template_selector = new GuiSelector(this, "CREATE_SHIP_SELECTOR", nullptr);
-        ship_template_selector->setOptions(ShipTemplate::getPlayerTemplateNameList())->setSelectionIndex(0);
+        std::vector<string> template_names = ShipTemplate::getPlayerTemplateNameList();
+        std::sort(template_names.begin(), template_names.end());
+        ship_template_selector->setOptions(template_names)->setSelectionIndex(0);
         ship_template_selector->setPosition(80, 630, ATopLeft)->setSize(490, 50);
         
         (new GuiButton(this, "CREATE_SHIP_BUTTON", "Spawn player ship", [ship_template_selector]() {
