@@ -12,6 +12,8 @@ public:
     GuiSelector(GuiContainer* owner, string id, func_t func);
 
     virtual void onDraw(sf::RenderTarget& window);
+    
+    GuiSelector* setTextSize(float size);
 };
 
 #endif//GUI2_SELECTOR_H

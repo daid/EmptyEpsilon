@@ -10,19 +10,24 @@ class GuiObjectCreationScreen;
 class GuiHailPlayerShip;
 class GuiHailingPlayerShip;
 class GuiPlayerChat;
+class GuiShipRetrofit;
 class GameMasterScreen : public GuiCanvas, public Updatable
 {
 private:
     GuiRadarView* main_radar;
     GuiOverlay* box_selection_overlay;
     GuiSelector* faction_selector;
+    
     GuiGlobalMessageEntry* global_message_entry;
     GuiObjectCreationScreen* object_creation_screen;
     GuiHailPlayerShip* hail_player_dialog;
+    GuiShipRetrofit* ship_retrofit_dialog;
+    
     GuiAutoLayout* info_layout;
     std::vector<GuiKeyValueDisplay*> info_items;
     GuiAutoLayout* order_layout;
     GuiButton* player_comms_hail;
+    GuiButton* ship_retrofit_button;
     
     enum EClickAndDragState
     {
@@ -110,6 +115,22 @@ public:
     
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onDraw(sf::RenderTarget& window);
+};
+
+class GuiShipRetrofit : public GuiBox
+{
+private:
+    P<SpaceShip> target;
+
+    GuiTextEntry* type_name;
+    GuiSelector* warp_selector;
+    GuiSelector* jump_selector;
+public:
+    GuiShipRetrofit(GuiContainer* owner);
+    
+    void open(P<SpaceShip> target);
+
+    virtual bool onMouseDown(sf::Vector2f position);
 };
 
 #endif//GAME_MASTER_SCREEN_H

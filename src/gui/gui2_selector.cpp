@@ -33,3 +33,9 @@ void GuiSelector::onDraw(sf::RenderTarget& window)
     if (selection_index >= 0 && selection_index < (int)entries.size())
         drawText(window, rect, entries[selection_index].name, ACenter, text_size, color);
 }
+
+GuiSelector* GuiSelector::setTextSize(float size)
+{
+    text_size = size;
+    return this;
+}

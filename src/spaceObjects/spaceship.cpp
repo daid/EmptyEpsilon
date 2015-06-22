@@ -1,7 +1,5 @@
 #include "spaceship.h"
 #include "mesh.h"
-#include "gui/gui.h"
-#include "main.h"
 #include "shipTemplate.h"
 #include "playerInfo.h"
 #include "spaceObjects/beamEffect.h"

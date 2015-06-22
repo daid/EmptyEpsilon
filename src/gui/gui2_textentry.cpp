@@ -2,7 +2,7 @@
 #include "input.h"
 
 GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
-: GuiElement(owner, id), text(text), text_size(30)
+: GuiElement(owner, id), text(text), text_size(30), func(nullptr)
 {
 }
 
@@ -20,9 +20,17 @@ bool GuiTextEntry::onMouseDown(sf::Vector2f position)
 bool GuiTextEntry::onKey(sf::Keyboard::Key key, int unicode)
 {
     if (key == sf::Keyboard::BackSpace && text.length() > 0)
+    {
         text = text.substr(0, -1);
+        if (func)
+            func(text);
+    }
     if (unicode > 31 && unicode < 128)
+    {
         text += string(char(unicode));
+        if (func)
+            func(text);
+    }
     return true;
 }
 
@@ -34,5 +42,17 @@ string GuiTextEntry::getText()
 GuiTextEntry* GuiTextEntry::setText(string text)
 {
     this->text = text;
+    return this;
+}
+
+GuiTextEntry* GuiTextEntry::setTextSize(float size)
+{
+    this->text_size = size;
+    return this;
+}
+
+GuiTextEntry* GuiTextEntry::callback(func_t func)
+{
+    this->func = func;
     return this;
 }

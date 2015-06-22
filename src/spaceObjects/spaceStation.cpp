@@ -2,7 +2,6 @@
 #include "shipTemplate.h"
 #include "playerInfo.h"
 #include "factionInfo.h"
-#include "gui/gui.h"
 #include "mesh.h"
 #include "spaceObjects/explosionEffect.h"
 #include "main.h"

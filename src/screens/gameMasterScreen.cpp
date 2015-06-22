@@ -5,7 +5,6 @@
 #include "spaceObjects/cpuShip.h"
 #include "spaceObjects/spaceStation.h"
 
-//TODO: ship retrofitting
 GameMasterScreen::GameMasterScreen()
 : click_and_drag_state(CD_None)
 {
@@ -50,7 +49,18 @@ GameMasterScreen::GameMasterScreen()
         cancel_create_button->hide();
     });
     cancel_create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
-    
+
+    ship_retrofit_button = new GuiButton(this, "RETROFIT_SHIP", "Retrofit", [this]() {
+        for(P<SpaceObject> obj : main_radar->getTargets())
+        {
+            if (P<SpaceShip>(obj))
+            {
+                ship_retrofit_dialog->open(obj);
+                break;
+            }
+        }
+    });
+    ship_retrofit_button->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->hide();
     player_comms_hail = new GuiButton(this, "HAIL_PLAYER", "Hail ship", [this]() {
         for(P<SpaceObject> obj : main_radar->getTargets())
             if (P<PlayerSpaceship>(obj))
@@ -58,7 +68,7 @@ GameMasterScreen::GameMasterScreen()
         if (hail_player_dialog->player)
             hail_player_dialog->show();
     });
-    player_comms_hail->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->hide();
+    player_comms_hail->setPosition(20, -170, ABottomLeft)->setSize(250, 50)->hide();
     
     info_layout = new GuiAutoLayout(this, "INFO_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     info_layout->setPosition(-20, 20, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
@@ -94,6 +104,8 @@ GameMasterScreen::GameMasterScreen()
     hailing_player_dialog->hide();
     player_chat = new GuiPlayerChat(this);
     player_chat->hide();
+    ship_retrofit_dialog = new GuiShipRetrofit(this);
+    ship_retrofit_dialog->hide();
 
     global_message_entry = new GuiGlobalMessageEntry(this);
     global_message_entry->hide();
@@ -118,15 +130,21 @@ void GameMasterScreen::update(float delta)
             main_radar->longRange();
     }
     
+    bool has_ship = false;
     bool has_cpu_ship = false;
     bool has_player_ship = false;
     for(P<SpaceObject> obj : main_radar->getTargets())
     {
-        if (P<CpuShip>(obj))
-            has_cpu_ship = true;
-        if (P<PlayerSpaceship>(obj))
-            has_player_ship = true;
+        if (P<SpaceShip>(obj))
+        {
+            has_ship = true;
+            if (P<CpuShip>(obj))
+                has_cpu_ship = true;
+            else if (P<PlayerSpaceship>(obj))
+                has_player_ship = true;
+        }
     }
+    ship_retrofit_button->setVisible(has_ship);
     order_layout->setVisible(has_cpu_ship);
     player_comms_hail->setVisible(has_player_ship);
     
@@ -568,4 +586,104 @@ void GuiPlayerChat::onDraw(sf::RenderTarget& window)
     chat_text->setText(player->comms_incomming_message);
     
     GuiBox::onDraw(window);
+}
+
+GuiShipRetrofit::GuiShipRetrofit(GuiContainer* owner)
+: GuiBox(owner, "SHIP_RETROFIT_DIALOG")
+{
+    setPosition(0, -100, ABottomCenter);
+    setSize(800, 600);
+    fill();
+    
+    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    left_col->setPosition(20, 20, ATopLeft)->setSize(300, 600);
+    
+    type_name = new GuiTextEntry(left_col, "TYPE_NAME", "???");
+    type_name->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
+    type_name->callback([this](string text) {
+        target->ship_type_name = text;
+    });
+    
+    warp_selector = new GuiSelector(left_col, "WARP", [this](int index, string value) {
+        target->setWarpDrive(index != 0);
+    });
+    warp_selector->setTextSize(20)->setOptions({"WarpDrive: No", "WarpDrive: Yes"})->setSize(GuiElement::GuiSizeMax, 30);
+    jump_selector = new GuiSelector(left_col, "JUMP", [this](int index, string value) {
+        target->setJumpDrive(index != 0);
+    });
+    jump_selector->setTextSize(20)->setOptions({"JumpDrive: No", "JumpDrive: Yes"})->setSize(GuiElement::GuiSizeMax, 30);
+    
+    /*
+    y += 30;
+    ship->impulse_max_speed += drawSelector(sf::FloatRect(x, y, 300, 30), "Max speed: " + string(ship->impulse_max_speed), 20);
+    y += 30;
+    ship->turn_speed += drawSelector(sf::FloatRect(x, y, 300, 30), "Rotation speed: " + string(ship->turn_speed), 20);
+    y += 30;
+    diff = drawSelector(sf::FloatRect(x, y, 300, 30), "Hull: " + string(ship->hull_strength) + "/" + string(ship->hull_max), 20);
+    ship->hull_strength = std::max(0.0f, ship->hull_strength + diff * 5);
+    ship->hull_max = std::max(0.0f, ship->hull_max + diff * 5);
+    y += 30;
+    diff = drawSelector(sf::FloatRect(x, y, 300, 30), "Front shield: " + string(ship->front_shield) + "/" + string(ship->front_shield_max), 20);
+    ship->front_shield = std::max(0.0f, ship->front_shield + diff * 15);
+    ship->front_shield_max = std::max(0.0f, ship->front_shield_max + diff * 15);
+    y += 30;
+    diff = drawSelector(sf::FloatRect(x, y, 300, 30), "Front shield: " + string(ship->rear_shield) + "/" + string(ship->rear_shield_max), 20);
+    ship->rear_shield = std::max(0.0f, ship->rear_shield + diff * 15);
+    ship->rear_shield_max = std::max(0.0f, ship->rear_shield_max + diff * 15);
+    y += 30;
+
+    x += 350;
+    y = 200;
+
+    ship->weapon_tubes += drawSelector(sf::FloatRect(x, y, 300, 30), "Missile tubes: " + string(ship->weapon_tubes), 20);
+    if (ship->weapon_tubes < 0)
+        ship->weapon_tubes = max_weapon_tubes;
+    if (ship->weapon_tubes > max_weapon_tubes)
+        ship->weapon_tubes = 0;
+    y += 30;
+    for(int n=0; n<MW_Count; n++)
+    {
+        int diff = drawSelector(sf::FloatRect(x, y, 300, 30), getMissileWeaponName(EMissileWeapons(n)) + ": " + string(ship->weapon_storage[n]) + "/" + string(ship->weapon_storage_max[n]), 20);
+        y += 30;
+        ship->weapon_storage[n] += diff;
+        ship->weapon_storage_max[n] += diff;
+        if (ship->weapon_storage_max[n] < 0)
+            ship->weapon_storage_max[n] = 0;
+        if (ship->weapon_storage[n] < 0)
+            ship->weapon_storage[n] = 0;
+    }
+
+    x += 350;
+    y = 200;
+    for(int n=0; n<SYS_COUNT; n++)
+    {
+        ESystem system = ESystem(n);
+        if (ship->hasSystem(system))
+        {
+            int diff = drawSelector(sf::FloatRect(x, y, 300, 30), getSystemName(system) + ": " + string(ship->systems[n].health * 100) + "%", 20);
+            y += 30;
+            ship->systems[n].health = std::min(1.0f, std::max(-1.0f, ship->systems[n].health + diff * 0.10f));
+        }
+    }
+*/
+
+    (new GuiButton(this, "CLOSE_BUTTON", "Close", [this]() {
+        hide();
+    }))->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
+}
+
+bool GuiShipRetrofit::onMouseDown(sf::Vector2f position)
+{
+    return true;
+}
+
+void GuiShipRetrofit::open(P<SpaceShip> target)
+{
+    this->target = target;
+    
+    type_name->setText(target->ship_type_name);
+    warp_selector->setSelectionIndex(target->has_warp_drive ? 1 : 0);
+    jump_selector->setSelectionIndex(target->hasJumpDrive() ? 1 : 0);
+    
+    show();
 }
