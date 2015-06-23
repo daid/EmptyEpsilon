@@ -110,6 +110,24 @@ bool GuiElement::isEnabled()
     return enabled;
 }
 
+void GuiElement::moveToFront()
+{
+    if (owner)
+    {
+        owner->elements.remove(this);
+        owner->elements.push_back(this);
+    }
+}
+
+void GuiElement::moveToBack()
+{
+    if (owner)
+    {
+        owner->elements.remove(this);
+        owner->elements.push_front(this);
+    }
+}
+
 sf::Vector2f GuiElement::getCenterPoint()
 {
     return sf::Vector2f(rect.left + rect.width / 2.0, rect.top + rect.height / 2.0);

@@ -8,6 +8,7 @@ class GuiLabel : public GuiElement
 protected:
     string text;
     float text_size;
+    sf::Color text_color;
     EGuiAlign text_alignment;
     bool box;
 public:
@@ -17,6 +18,7 @@ public:
     
     GuiLabel* setText(string text);
     GuiLabel* setAlignment(EGuiAlign alignment);
+    GuiLabel* setTextColor(sf::Color color);
     GuiLabel* addBox();
 };
 

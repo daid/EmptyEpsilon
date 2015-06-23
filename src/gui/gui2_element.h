@@ -60,6 +60,9 @@ public:
     GuiElement* disable();
     bool isEnabled();
     
+    void moveToFront();
+    void moveToBack();
+    
     sf::Vector2f getCenterPoint();
     
     friend class GuiContainer;

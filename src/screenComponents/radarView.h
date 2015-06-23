@@ -22,6 +22,7 @@ private:
     sf::Vector2f view_position;
     bool long_range;
     bool show_callsigns;
+    bool show_heading_indicators;
     bool show_game_master_data;
     float range_indicator_step_size;
     ERadarStyle style;
@@ -40,6 +41,8 @@ public:
     GuiRadarView* shortRange() { long_range = false; return this; }
     GuiRadarView* enableCallsigns() { show_callsigns = true; return this; }
     GuiRadarView* disableCallsigns() { show_callsigns = false; return this; }
+    GuiRadarView* enableHeadingIndicators() { show_heading_indicators = true; return this; }
+    GuiRadarView* disableHeadingIndicators() { show_heading_indicators = false; return this; }
     GuiRadarView* gameMaster() { show_game_master_data = true; return this; }
     GuiRadarView* setStyle(ERadarStyle style) { this->style = style; return this; }
     GuiRadarView* setCallbacks(func_t mouse_down_func, func_t mouse_drag_func, func_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
@@ -64,6 +67,7 @@ private:
     void drawObjects(sf::RenderTarget& window);
     void drawObjectsGM(sf::RenderTarget& window);
     void drawTargets(sf::RenderTarget& window);
+    void drawHeadingIndicators(sf::RenderTarget& window);
     void drawRadarCutoff(sf::RenderTarget& window);
 };
 

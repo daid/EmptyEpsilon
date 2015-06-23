@@ -14,7 +14,7 @@ class PlayerInfo : public MultiplayerObject
 public:
     int32_t client_id;
 
-    ECrewPosition crew_active_position;
+    ECrewPosition crew_active_position;//TODO: Remove
     bool crew_position[max_crew_positions];
     bool main_screen_control;
     int32_t ship_id;

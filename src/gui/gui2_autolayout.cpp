@@ -17,19 +17,19 @@ void GuiAutoLayout::drawElements(sf::FloatRect window_rect, sf::RenderTarget& wi
     switch(mode)
     {
     case LayoutHorizontalLeftToRight:
-        alignment = ATopLeft;
+        alignment = ACenterLeft;
         scale.x = 1.0;
         break;
     case LayoutHorizontalRightToLeft:
-        alignment = ATopRight;
+        alignment = ACenterRight;
         scale.x = -1.0;
         break;
     case LayoutVerticalTopToBottom:
-        alignment = ATopLeft;
+        alignment = ATopCenter;
         scale.y = 1.0;
         break;
     case LayoutVerticalBottomToTop:
-        alignment = ABottomLeft;
+        alignment = ABottomCenter;
         scale.y = -1.0;
         break;
     }

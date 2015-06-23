@@ -5,6 +5,7 @@
 
 class GuiSlider : public GuiElement
 {
+public:
     typedef std::function<void(float value)> func_t;
 protected:
     float min_value;
