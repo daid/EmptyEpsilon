@@ -19,6 +19,9 @@ public:
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
+    
+    GuiSlider* setValue(float value);
+    float getValue();
 };
 
 #endif//GUI2_SLIDER_H

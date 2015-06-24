@@ -137,9 +137,9 @@ void GuiElement::updateRect(sf::FloatRect window_rect)
 {
     sf::Vector2f local_size = size;
     if (local_size.x == GuiSizeMax)
-        local_size.x = window_rect.width;
+        local_size.x = window_rect.width - fabs(position.x);
     if (local_size.y == GuiSizeMax)
-        local_size.y = window_rect.height;
+        local_size.y = window_rect.height - fabs(position.y);
     if (local_size.x == GuiSizeMatchHeight)
         local_size.x = local_size.y;
     if (local_size.y == GuiSizeMatchWidth)

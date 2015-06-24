@@ -9,6 +9,11 @@ void GuiSlider::onDraw(sf::RenderTarget& window)
 {
     draw9Cut(window, rect, "button_background", sf::Color(64,64,64, 255));
 
+    sf::Color color = sf::Color::White;
+    if (!enabled)
+        color = color * sf::Color(96, 96, 96, 255);
+    else if (hover)
+        color = sf::Color(255,255,255, 128);
     if (rect.width > rect.height)
     {
         float x;
@@ -20,9 +25,6 @@ void GuiSlider::onDraw(sf::RenderTarget& window)
         renderTarget->draw(backgroundZero);
     */
         x = rect.left + (rect.width - rect.height) * (value - min_value) / (max_value - min_value);
-        sf::Color color = sf::Color::White;
-        if (hover)
-            color = sf::Color(255,255,255, 128);
         draw9Cut(window, sf::FloatRect(x, rect.top, rect.height, rect.height), "button_background", color);
     }else{
         float y;
@@ -34,9 +36,6 @@ void GuiSlider::onDraw(sf::RenderTarget& window)
         renderTarget->draw(backgroundZero);
     */
         y = rect.top + (rect.height - rect.width) * (value - min_value) / (max_value - min_value);
-        sf::Color color = sf::Color::White;
-        if (hover)
-            color = sf::Color(255,255,255, 128);
         draw9Cut(window, sf::FloatRect(rect.left, y, rect.width, rect.width), "button_background", color);
     }
 }
@@ -77,4 +76,27 @@ void GuiSlider::onMouseDrag(sf::Vector2f position)
 
 void GuiSlider::onMouseUp(sf::Vector2f position)
 {
+}
+
+GuiSlider* GuiSlider::setValue(float value)
+{
+    if (min_value < max_value)
+    {
+        if (value < min_value)
+            value = min_value;
+        if (value > max_value)
+            value = max_value;
+    }else{
+        if (value > min_value)
+            value = min_value;
+        if (value < max_value)
+            value = max_value;
+    }
+    this->value = value;
+    return this;
+}
+
+float GuiSlider::getValue()
+{
+    return value;
 }

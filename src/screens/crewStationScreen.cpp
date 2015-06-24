@@ -45,6 +45,8 @@ void CrewStationScreen::finishCreation()
     button_strip->moveToFront();
     new GuiIndicatorOverlays(this);
     new GuiShipDestroyedPopup(this);
+    if (tabs.size() < 2)
+        button_strip->hide();
 }
 
 void CrewStationScreen::onKey(sf::Keyboard::Key key, int unicode)
