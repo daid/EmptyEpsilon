@@ -508,6 +508,8 @@
 		<Unit filename="src/gui/gui2_overlay.h" />
 		<Unit filename="src/gui/gui2_progressbar.cpp" />
 		<Unit filename="src/gui/gui2_progressbar.h" />
+		<Unit filename="src/gui/gui2_rotationdial.cpp" />
+		<Unit filename="src/gui/gui2_rotationdial.h" />
 		<Unit filename="src/gui/gui2_scrollbar.cpp" />
 		<Unit filename="src/gui/gui2_scrollbar.h" />
 		<Unit filename="src/gui/gui2_scrolltext.cpp" />
@@ -576,6 +578,8 @@
 		<Unit filename="src/screenComponents/radarView.h" />
 		<Unit filename="src/screenComponents/selfDestructIndicator.cpp" />
 		<Unit filename="src/screenComponents/selfDestructIndicator.h" />
+		<Unit filename="src/screenComponents/shieldsEnableButton.cpp" />
+		<Unit filename="src/screenComponents/shieldsEnableButton.h" />
 		<Unit filename="src/screenComponents/shipDestroyedPopup.cpp" />
 		<Unit filename="src/screenComponents/shipDestroyedPopup.h" />
 		<Unit filename="src/screenComponents/snapSlider.cpp" />

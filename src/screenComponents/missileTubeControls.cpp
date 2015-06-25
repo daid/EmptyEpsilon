@@ -1,5 +1,6 @@
 #include "playerInfo.h"
 #include "missileTubeControls.h"
+#include "powerDamageIndicator.h"
 
 GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
 : GuiAutoLayout(owner, id, LayoutVerticalBottomToTop), load_type(MW_None), missile_target_angle(0)
@@ -27,6 +28,7 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
                 my_spaceship->commandFireTube(n, missile_target_angle);
         });
         row.fire_button->setSize(350, 50);
+        (new GuiPowerDamageIndicator(row.fire_button, id + "_" + string(n) + "_PDI", SYS_MissileSystem))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         row.loading_bar = new GuiProgressbar(row.layout, id + "_" + string(n) + "_PROGRESS", 0, 1.0, 0);
         row.loading_bar->setColor(sf::Color(128, 128, 128))->setSize(350, 50);
         row.loading_label = new GuiLabel(row.loading_bar, id + "_" + string(n) + "_PROGRESS_LABEL", "Loading", 35);

@@ -13,6 +13,7 @@ private:
     GuiRadarView* radar;
     GuiMissileTubeControls* tube_controls;
     GuiRotationDial* missile_aim;
+    GuiToggleButton* lock_aim;
 public:
     WeaponsScreen(GuiContainer* owner);
     

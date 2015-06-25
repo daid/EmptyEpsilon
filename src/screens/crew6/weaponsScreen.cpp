@@ -41,6 +41,10 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     });
     missile_aim->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 850);
     
+    lock_aim = new GuiToggleButton(this, "LOCK_AIM", "Lock", nullptr);
+    lock_aim->setPosition(300, 50, ATopCenter)->setSize(130, 50);
+    lock_aim->setValue(true);
+    
     //beam frequency selection, beam subtarget target selection
 
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
@@ -61,7 +65,7 @@ void WeaponsScreen::onDraw(sf::RenderTarget& window)
         shields_display->setValue(string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + ":" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)));
         radar->setTarget(my_spaceship->getTarget());
         
-        if (!missile_aim->isVisible())
+        if (lock_aim->getValue())
         {
             missile_aim->setValue(my_spaceship->getRotation());
             tube_controls->setMissileTargetAngle(missile_aim->getValue());
