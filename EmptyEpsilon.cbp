@@ -556,6 +556,10 @@
 		<Unit filename="src/repairCrew.h" />
 		<Unit filename="src/scienceDatabase.cpp" />
 		<Unit filename="src/scienceDatabase.h" />
+		<Unit filename="src/screenComponents/beamFrequencySelector.cpp" />
+		<Unit filename="src/screenComponents/beamFrequencySelector.h" />
+		<Unit filename="src/screenComponents/beamTargetSelector.cpp" />
+		<Unit filename="src/screenComponents/beamTargetSelector.h" />
 		<Unit filename="src/screenComponents/combatManeuver.cpp" />
 		<Unit filename="src/screenComponents/combatManeuver.h" />
 		<Unit filename="src/screenComponents/dockingButton.cpp" />
