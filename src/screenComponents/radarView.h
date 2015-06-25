@@ -21,10 +21,12 @@ private:
     float distance;
     sf::Vector2f view_position;
     bool long_range;
+    bool show_target_projection;
     bool show_callsigns;
     bool show_heading_indicators;
     bool show_game_master_data;
     float range_indicator_step_size;
+    float missile_target_angle;
     ERadarStyle style;
     func_t mouse_down_func;
     func_t mouse_drag_func;
@@ -39,6 +41,8 @@ public:
     GuiRadarView* setRangeIndicatorStepSize(float step) { range_indicator_step_size = step; return this; }
     GuiRadarView* longRange() { long_range = true; return this; }
     GuiRadarView* shortRange() { long_range = false; return this; }
+    GuiRadarView* enableTargetProjections() { show_target_projection = true; return this; }
+    GuiRadarView* disableTargetProjections() { show_target_projection = false; return this; }
     GuiRadarView* enableCallsigns() { show_callsigns = true; return this; }
     GuiRadarView* disableCallsigns() { show_callsigns = false; return this; }
     GuiRadarView* enableHeadingIndicators() { show_heading_indicators = true; return this; }
@@ -53,6 +57,7 @@ public:
     GuiRadarView* setTarget(P<SpaceObject> obj);
     GuiRadarView* setTargets(PVector<SpaceObject> objs);
     PVector<SpaceObject> getTargets() { return targets; }
+    void setMissileTargetAngle(float angle) { missile_target_angle = angle; }
     
     sf::Vector2f worldToScreen(sf::Vector2f world_position);
     sf::Vector2f screenToWorld(sf::Vector2f screen_position);
@@ -64,6 +69,7 @@ private:
     void drawBackground(sf::RenderTarget& window);
     void drawSectorGrid(sf::RenderTarget& window);
     void drawRangeIndicators(sf::RenderTarget& window);
+    void drawTargetProjections(sf::RenderTarget& window);
     void drawObjects(sf::RenderTarget& window);
     void drawObjectsGM(sf::RenderTarget& window);
     void drawTargets(sf::RenderTarget& window);

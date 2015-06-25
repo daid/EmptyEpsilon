@@ -31,7 +31,7 @@ void GuiShieldsEnableButton::onDraw(sf::RenderTarget& window)
         {
             button->show();
             bar->hide();
-            button->setText(my_spaceship->shields_active ? "Shields:ON" : "Shields:OFF");
+            button->setText(my_spaceship->shields_active ? "Shields: ON" : "Shields: OFF");
         }
     }
 }

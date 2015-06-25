@@ -111,61 +111,63 @@ void PlayerInfo::spawnUI()
     {
         new ScreenMainScreen();
     }else{
-        CrewStationScreen* screen = new CrewStationScreen();
-        if (crew_position[helmsOfficer])
-            screen->addStationTab(new HelmsScreen(screen), getCrewPositionName(helmsOfficer));
-        if (crew_position[weaponsOfficer])
-            screen->addStationTab(new WeaponsScreen(screen), getCrewPositionName(weaponsOfficer));
-        screen->finishCreation();
-        /*
-        if (!crew_position[crew_active_position])
+        if (crew_position[helmsOfficer] || crew_position[weaponsOfficer])
         {
-            for(int n=0; n<max_crew_positions; n++)
+            CrewStationScreen* screen = new CrewStationScreen();
+            if (crew_position[helmsOfficer])
+                screen->addStationTab(new HelmsScreen(screen), getCrewPositionName(helmsOfficer));
+            if (crew_position[weaponsOfficer])
+                screen->addStationTab(new WeaponsScreen(screen), getCrewPositionName(weaponsOfficer));
+            screen->finishCreation();
+        }else{
+            if (!crew_position[crew_active_position])
             {
-                if (crew_position[n])
+                for(int n=0; n<max_crew_positions; n++)
                 {
-                    crew_active_position = ECrewPosition(n);
-                    break;
+                    if (crew_position[n])
+                    {
+                        crew_active_position = ECrewPosition(n);
+                        break;
+                    }
                 }
             }
-        }
-        switch(crew_active_position)
-        {
-        case helmsOfficer:
-            new CrewHelmsUI();
-            break;
-        case weaponsOfficer:
-            new CrewWeaponsUI();
-            break;
-        case engineering:
-            new CrewEngineeringUI();
-            break;
-        case scienceOfficer:
-            new CrewScienceUI();
-            break;
-        case commsOfficer:
-            new CrewCommsUI();
-            break;
-        
-        case tacticalOfficer:
-            new CrewTacticalUI();
-            break;
-        case engineeringAdvanced:
-            new CrewEngineeringUIAdvanced();
-            break;
-        case operationsOfficer:
-            new CrewOperationsUI();
-            break;
+            switch(crew_active_position)
+            {
+            case helmsOfficer:
+                new CrewHelmsUI();
+                break;
+            case weaponsOfficer:
+                new CrewWeaponsUI();
+                break;
+            case engineering:
+                new CrewEngineeringUI();
+                break;
+            case scienceOfficer:
+                new CrewScienceUI();
+                break;
+            case commsOfficer:
+                new CrewCommsUI();
+                break;
+            
+            case tacticalOfficer:
+                new CrewTacticalUI();
+                break;
+            case engineeringAdvanced:
+                new CrewEngineeringUIAdvanced();
+                break;
+            case operationsOfficer:
+                new CrewOperationsUI();
+                break;
 
-        case singlePilot:
-            new CrewSinglePilotUI();
-            break;
-        
-        default:
-            new CrewUI();
-            break;
+            case singlePilot:
+                new CrewSinglePilotUI();
+                break;
+            
+            default:
+                new CrewUI();
+                break;
+            }
         }
-        */
     }
 }
 

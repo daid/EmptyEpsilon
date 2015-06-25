@@ -5,7 +5,7 @@
 #include "radarView.h"
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance)
-: GuiElement(owner, id), distance(distance), long_range(false), show_callsigns(false), show_heading_indicators(false), show_game_master_data(false), range_indicator_step_size(0.0f), style(Circular), mouse_down_func(nullptr), mouse_drag_func(nullptr), mouse_up_func(nullptr)
+: GuiElement(owner, id), distance(distance), long_range(false), show_target_projection(false), show_callsigns(false), show_heading_indicators(false), show_game_master_data(false), range_indicator_step_size(0.0f), missile_target_angle(0.0f), style(Circular), mouse_down_func(nullptr), mouse_drag_func(nullptr), mouse_up_func(nullptr)
 {
 }
 
@@ -17,6 +17,8 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     drawBackground(window);
     drawSectorGrid(window);
     drawRangeIndicators(window);
+    if (show_target_projection)
+        drawTargetProjections(window);
     drawObjects(window);
     if (show_game_master_data)
         drawObjectsGM(window);
@@ -157,6 +159,81 @@ void GuiRadarView::drawRangeIndicators(sf::RenderTarget& window)
         circle.setOutlineThickness(2.0);
         window.draw(circle);
         drawText(window, sf::FloatRect(radar_screen_center.x, radar_screen_center.y - s - 20, 0, 0), string(int(circle_size / 1000.0f + 0.1f)) + "km", ACenter, 20, sf::Color(255, 255, 255, 32));
+    }
+}
+
+void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
+{
+    sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
+    float scale = std::min(rect.width, rect.height) / 2.0f / distance;
+    
+    if (my_spaceship)
+    {
+        sf::Vector2f spaceship_position = radar_screen_center + (view_position - my_spaceship->getPosition()) * scale;
+        float angle_diff = sf::angleDifference(missile_target_angle, my_spaceship->getRotation());
+        float turn_rate = 10.0f;
+        float speed = 200.0f;
+        float turn_radius = ((360.0f / turn_rate) * speed) / (2.0f * M_PI);
+
+        float left_or_right = 90;
+        if (angle_diff > 0)
+            left_or_right = -90;
+
+        sf::Vector2f turn_center = sf::vector2FromAngle(my_spaceship->getRotation() + left_or_right) * turn_radius;
+        sf::Vector2f turn_exit = turn_center + sf::vector2FromAngle(missile_target_angle - left_or_right) * turn_radius;
+
+        sf::VertexArray a(sf::LinesStrip, 13);
+        a[0].position = spaceship_position;
+        for(int cnt=0; cnt<10; cnt++)
+            a[cnt + 1].position = spaceship_position + (turn_center + sf::vector2FromAngle(my_spaceship->getRotation() - angle_diff / 10.0f * cnt - left_or_right) * turn_radius) * scale;
+        a[11].position = spaceship_position + turn_exit * scale;
+        a[12].position = spaceship_position + (turn_exit + sf::vector2FromAngle(missile_target_angle) * distance) * scale;
+        for(int cnt=0; cnt<13; cnt++)
+            a[cnt].color = sf::Color(255, 255, 255, 128);
+        window.draw(a);
+
+        float offset = 10.0 * speed;
+        float turn_distance = fabs(angle_diff) / 360.0 * (turn_radius * 2.0f * M_PI);
+        for(int cnt=0; cnt<5; cnt++)
+        {
+            sf::Vector2f p;
+            sf::Vector2f n;
+            if (offset < turn_distance)
+            {
+                n = sf::vector2FromAngle(my_spaceship->getRotation() - (angle_diff * offset / turn_distance) - left_or_right);
+                p = (turn_center + n * turn_radius) * scale;
+            }else{
+                p = (turn_exit + sf::vector2FromAngle(missile_target_angle) * (offset - turn_distance)) * scale;
+                n = sf::vector2FromAngle(missile_target_angle + 90.0f);
+            }
+            sf::VertexArray a(sf::Lines, 2);
+            a[0].position = spaceship_position + p - n * 10.0f;
+            a[1].position = spaceship_position + p + n * 10.0f;
+            window.draw(a);
+
+            offset += 10.0 * speed;
+        }
+    }
+    
+    foreach(SpaceObject, obj, targets)
+    {
+        if (obj->getVelocity() < 1.0f)
+            continue;
+            
+        sf::VertexArray a(sf::Lines, 12);
+        a[0].position = radar_screen_center + (obj->getPosition() - view_position) * scale;
+        a[0].color = sf::Color(255, 255, 255, 128);
+        a[1].position = a[0].position + (obj->getVelocity() * 60.0f) * scale;
+        a[1].color = sf::Color(255, 255, 255, 0);
+        sf::Vector2f n = sf::normalize(sf::Vector2f(-obj->getVelocity().y, obj->getVelocity().x));
+        for(int cnt=0; cnt<5; cnt++)
+        {
+            sf::Vector2f p = (obj->getVelocity() * (10.0f + 10.0f * cnt)) * scale;
+            a[2 + cnt * 2].position = a[0].position + p + n * 10.0f;
+            a[3 + cnt * 2].position = a[0].position + p - n * 10.0f;
+            a[2 + cnt * 2].color = a[3 + cnt * 2].color = sf::Color(255, 255, 255, 128 - cnt * 20);
+        }
+        window.draw(a);
     }
 }
 

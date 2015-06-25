@@ -4,12 +4,15 @@
 #include "gui/gui2.h"
 #include "screenComponents/radarView.h"
 
+class GuiMissileTubeControls;
 class WeaponsScreen : public GuiOverlay
 {
 private:
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* shields_display;
     GuiRadarView* radar;
+    GuiMissileTubeControls* tube_controls;
+    GuiRotationDial* missile_aim;
 public:
     WeaponsScreen(GuiContainer* owner);
     

@@ -9,11 +9,11 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
 {
     radar = new GuiRadarView(this, "HELMS_RADAR", 5000.0);
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
-    radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
+    radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableTargetProjections()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
         [this](sf::Vector2f position) {
             P<SpaceObject> target;
-            PVector<Collisionable> list = CollisionManager::queryArea(position - sf::Vector2f(50, 50), position + sf::Vector2f(50, 50));
+            PVector<Collisionable> list = CollisionManager::queryArea(position - sf::Vector2f(250, 250), position + sf::Vector2f(250, 250));
             foreach(Collisionable, obj, list)
             {
                 P<SpaceObject> spaceObject = obj;
@@ -26,8 +26,6 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
             if (target && my_spaceship)
             {
                 my_spaceship->commandSetTarget(target);
-            }else{
-                //missile_targeting = true;
             }
         },
         [this](sf::Vector2f position) {
@@ -37,14 +35,20 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
             
         }
     );
-    //Missile targeting, missile target projection, beam frequency selection, beam subtarget target selection
+    missile_aim = new GuiRotationDial(this, "MISSILE_AIM", -90, 360 - 90, 0, [this](float value){
+        tube_controls->setMissileTargetAngle(value);
+        radar->setMissileTargetAngle(value);
+    });
+    missile_aim->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 850);
+    
+    //beam frequency selection, beam subtarget target selection
 
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
     energy_display->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
     shields_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, "Shields", "");
     shields_display->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
     
-    new GuiMissileTubeControls(this, "MISSILE_TUBES");
+    tube_controls = new GuiMissileTubeControls(this, "MISSILE_TUBES");
     
     (new GuiShieldsEnableButton(this, "SHIELDS_ENABLE"))->setPosition(-20, -20, ABottomRight)->setSize(280, 50);
 }
@@ -56,6 +60,13 @@ void WeaponsScreen::onDraw(sf::RenderTarget& window)
         energy_display->setValue(string(int(my_spaceship->energy_level)));
         shields_display->setValue(string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + ":" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)));
         radar->setTarget(my_spaceship->getTarget());
+        
+        if (!missile_aim->isVisible())
+        {
+            missile_aim->setValue(my_spaceship->getRotation());
+            tube_controls->setMissileTargetAngle(missile_aim->getValue());
+            radar->setMissileTargetAngle(missile_aim->getValue());
+        }
     }
     GuiOverlay::onDraw(window);
 }

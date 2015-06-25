@@ -8,6 +8,7 @@
 #include "gui2_listbox.h"
 #include "gui2_selector.h"
 #include "gui2_slider.h"
+#include "gui2_rotationdial.h"
 #include "gui2_togglebutton.h"
 #include "gui2_autolayout.h"
 #include "gui2_box.h"
