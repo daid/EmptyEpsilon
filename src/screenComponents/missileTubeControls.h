@@ -16,10 +16,13 @@ private:
     std::vector<TubeRow> rows;
     GuiToggleButton* load_type_buttons[MW_Count];
     EMissileWeapons load_type;
+    float missile_target_angle;
 public:
     GuiMissileTubeControls(GuiContainer* owner, string id);
     
     virtual void onDraw(sf::RenderTarget& window);
+    
+    void setMissileTargetAngle(float angle);
 };
 
 #endif//GUI_MISSILE_TUBE_CONTROLS_H

@@ -5,7 +5,7 @@
 #include "radarView.h"
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance)
-: GuiElement(owner, id), distance(distance), long_range(false), show_callsigns(false), show_game_master_data(false), range_indicator_step_size(0.0f), style(Circular), mouse_down_func(nullptr), mouse_drag_func(nullptr), mouse_up_func(nullptr)
+: GuiElement(owner, id), distance(distance), long_range(false), show_callsigns(false), show_heading_indicators(false), show_game_master_data(false), range_indicator_step_size(0.0f), style(Circular), mouse_down_func(nullptr), mouse_drag_func(nullptr), mouse_up_func(nullptr)
 {
 }
 
