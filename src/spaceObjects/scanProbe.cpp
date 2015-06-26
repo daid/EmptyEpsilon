@@ -31,7 +31,7 @@ void ScanProbe::update(float delta)
 void ScanProbe::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
     sf::Sprite object_sprite;
-    textureManager.setTexture(object_sprite, "RadarBlip.png");
+    textureManager.setTexture(object_sprite, "ProbeBlip.png");
     object_sprite.setPosition(position);
     object_sprite.setColor(sf::Color(96, 192, 128));
     float size = 0.3;
