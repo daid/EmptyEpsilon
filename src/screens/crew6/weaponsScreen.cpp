@@ -72,7 +72,7 @@ void WeaponsScreen::onDraw(sf::RenderTarget& window)
     if (my_spaceship)
     {
         energy_display->setValue(string(int(my_spaceship->energy_level)));
-        shields_display->setValue(string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + ":" + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)));
+        shields_display->setValue(string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "% " + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)) + "%");
         radar->setTarget(my_spaceship->getTarget());
         
         if (lock_aim->getValue())

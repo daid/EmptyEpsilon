@@ -40,7 +40,7 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
     for(int n=MW_Count-1; n>=0; n--)
     {
         GuiAutoLayout* row = new GuiAutoLayout(this, id + "_ROW_" + string(n), LayoutHorizontalLeftToRight);
-        row->setSize(GuiElement::GuiSizeMax, 30);
+        row->setSize(GuiElement::GuiSizeMax, 40);
         
         load_type_buttons[n] = new GuiToggleButton(row, id + "_MW_" + string(n), getMissileWeaponName(EMissileWeapons(n)), [this, n](bool value) {
             if (value)
@@ -50,7 +50,7 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
             for(int idx=0; idx<MW_Count; idx++)
                 load_type_buttons[idx]->setValue(idx == load_type);
         });
-        load_type_buttons[n]->setTextSize(25)->setSize(200, 30);
+        load_type_buttons[n]->setTextSize(28)->setSize(220, 40);
     }
 }
 

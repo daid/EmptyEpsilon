@@ -7,7 +7,7 @@ GuiKeyValueDisplay::GuiKeyValueDisplay(GuiContainer* owner, string id, float div
 
 void GuiKeyValueDisplay::onDraw(sf::RenderTarget& window)
 {
-    float div_size = 3.0;
+    float div_size = 5.0;
     
     draw9Cut(window, rect, "border_background", sf::Color::White);
     draw9Cut(window, rect, "button_background", sf::Color::White, div_distance);
