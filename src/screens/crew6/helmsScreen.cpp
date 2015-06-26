@@ -13,7 +13,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
 {
     GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", 5000.0);
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
-    radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
+    radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
         [this](sf::Vector2f position) {
             if (my_spaceship)

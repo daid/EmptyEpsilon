@@ -5,7 +5,7 @@
 #include "radarView.h"
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance)
-: GuiElement(owner, id), next_ghost_dot_update(0.0), distance(distance), long_range(false), show_ghost_dots(false), show_target_projection(false), show_callsigns(false), show_heading_indicators(false), show_game_master_data(false), range_indicator_step_size(0.0f), missile_target_angle(0.0f), style(Circular), mouse_down_func(nullptr), mouse_drag_func(nullptr), mouse_up_func(nullptr)
+: GuiElement(owner, id), next_ghost_dot_update(0.0), distance(distance), long_range(false), show_ghost_dots(false), show_waypoints(false), show_target_projection(false), show_callsigns(false), show_heading_indicators(false), show_game_master_data(false), range_indicator_step_size(0.0f), missile_target_angle(0.0f), style(Circular), mouse_down_func(nullptr), mouse_drag_func(nullptr), mouse_up_func(nullptr)
 {
 }
 
@@ -16,14 +16,16 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     
     drawBackground(window);
     drawSectorGrid(window);
+    drawRangeIndicators(window);
+    if (show_target_projection)
+        drawTargetProjections(window);
     if (show_ghost_dots)
     {
         updateGhostDots();
         drawGhostDots(window);
     }
-    drawRangeIndicators(window);
-    if (show_target_projection)
-        drawTargetProjections(window);
+    if (show_waypoints)
+        drawWaypoints(window);
     drawObjects(window);
     if (show_game_master_data)
         drawObjectsGM(window);
@@ -182,6 +184,30 @@ void GuiRadarView::drawGhostDots(sf::RenderTarget& window)
         ghost_points[n].color = sf::Color(255, 255, 255, 255 * ((ghost_dots[n].end_of_life - engine->getElapsedTime()) / GhostDot::total_lifetime));
     }
     window.draw(ghost_points);
+}
+
+void GuiRadarView::drawWaypoints(sf::RenderTarget& window)
+{
+    if (!my_spaceship)
+        return;
+    
+    sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
+    float scale = std::min(rect.width, rect.height) / 2.0f / distance;
+
+    for(unsigned int n=0; n<my_spaceship->waypoints.size(); n++)
+    {
+        sf::Vector2f screen_position = radar_screen_center + (my_spaceship->waypoints[n] - view_position) * scale;
+        if (sf::length(screen_position - radar_screen_center) > distance)
+            continue;
+
+        sf::Sprite object_sprite;
+        textureManager.setTexture(object_sprite, "waypoint.png");
+        object_sprite.setColor(sf::Color(128, 128, 255, 192));
+        object_sprite.setPosition(screen_position - sf::Vector2f(0, 10));
+        object_sprite.setScale(0.6, 0.6);
+        window.draw(object_sprite);
+        drawText(window, sf::FloatRect(screen_position.x, screen_position.y - 26, 0, 0), "WP" + string(n + 1), ACenter, 14, sf::Color(128, 128, 255, 192));
+    }
 }
 
 void GuiRadarView::drawRangeIndicators(sf::RenderTarget& window)

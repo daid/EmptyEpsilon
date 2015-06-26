@@ -35,6 +35,7 @@ private:
     sf::Vector2f view_position;
     bool long_range;
     bool show_ghost_dots;
+    bool show_waypoints;
     bool show_target_projection;
     bool show_callsigns;
     bool show_heading_indicators;
@@ -57,6 +58,8 @@ public:
     GuiRadarView* shortRange() { long_range = false; return this; }
     GuiRadarView* enableGhostDots() { show_ghost_dots = true; return this; }
     GuiRadarView* disableGhostDots() { show_ghost_dots = false; return this; }
+    GuiRadarView* enableWaypoints() { show_waypoints = true; return this; }
+    GuiRadarView* disableWaypoints() { show_waypoints = false; return this; }
     GuiRadarView* enableTargetProjections() { show_target_projection = true; return this; }
     GuiRadarView* disableTargetProjections() { show_target_projection = false; return this; }
     GuiRadarView* enableCallsigns() { show_callsigns = true; return this; }
@@ -87,6 +90,7 @@ private:
     void drawBackground(sf::RenderTarget& window);
     void drawSectorGrid(sf::RenderTarget& window);
     void drawGhostDots(sf::RenderTarget& window);
+    void drawWaypoints(sf::RenderTarget& window);
     void drawRangeIndicators(sf::RenderTarget& window);
     void drawTargetProjections(sf::RenderTarget& window);
     void drawObjects(sf::RenderTarget& window);
