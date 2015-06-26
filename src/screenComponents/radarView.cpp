@@ -5,7 +5,7 @@
 #include "radarView.h"
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance)
-: GuiElement(owner, id), distance(distance), long_range(false), show_target_projection(false), show_callsigns(false), show_heading_indicators(false), show_game_master_data(false), range_indicator_step_size(0.0f), missile_target_angle(0.0f), style(Circular), mouse_down_func(nullptr), mouse_drag_func(nullptr), mouse_up_func(nullptr)
+: GuiElement(owner, id), next_ghost_dot_update(0.0), distance(distance), long_range(false), show_ghost_dots(false), show_target_projection(false), show_callsigns(false), show_heading_indicators(false), show_game_master_data(false), range_indicator_step_size(0.0f), missile_target_angle(0.0f), style(Circular), mouse_down_func(nullptr), mouse_drag_func(nullptr), mouse_up_func(nullptr)
 {
 }
 
@@ -16,6 +16,11 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     
     drawBackground(window);
     drawSectorGrid(window);
+    if (show_ghost_dots)
+    {
+        updateGhostDots();
+        drawGhostDots(window);
+    }
     drawRangeIndicators(window);
     if (show_target_projection)
         drawTargetProjections(window);
@@ -36,6 +41,31 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
         break;
     }
     glDisable(GL_STENCIL_TEST);
+}
+
+void GuiRadarView::updateGhostDots()
+{
+    if (next_ghost_dot_update < engine->getElapsedTime())
+    {
+        next_ghost_dot_update = engine->getElapsedTime() + 5.0;
+        foreach(SpaceObject, obj, space_object_list)
+        {
+            P<SpaceShip> ship = obj;
+            if (ship && sf::length(obj->getPosition() - view_position) < distance)
+            {
+                ghost_dots.push_back(GhostDot(obj->getPosition()));
+            }
+        }
+
+        for(unsigned int n=0; n < ghost_dots.size(); n++)
+        {
+            if (ghost_dots[n].end_of_life <= engine->getElapsedTime())
+            {
+                ghost_dots.erase(ghost_dots.begin() + n);
+                n--;
+            }
+        }
+    }
 }
 
 void GuiRadarView::drawBackground(sf::RenderTarget& window)
@@ -138,6 +168,20 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
         }
     }
     window.draw(points);
+}
+
+void GuiRadarView::drawGhostDots(sf::RenderTarget& window)
+{
+    sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
+    float scale = std::min(rect.width, rect.height) / 2.0f / distance;
+    
+    sf::VertexArray ghost_points(sf::Points, ghost_dots.size());
+    for(unsigned int n=0; n<ghost_dots.size(); n++)
+    {
+        ghost_points[n].position = radar_screen_center + (ghost_dots[n].position - view_position) * scale;
+        ghost_points[n].color = sf::Color(255, 255, 255, 255 * ((ghost_dots[n].end_of_life - engine->getElapsedTime()) / GhostDot::total_lifetime));
+    }
+    window.draw(ghost_points);
 }
 
 void GuiRadarView::drawRangeIndicators(sf::RenderTarget& window)

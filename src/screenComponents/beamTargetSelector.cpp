@@ -1,4 +1,5 @@
 #include "playerInfo.h"
+#include "gameGlobalInfo.h"
 #include "beamTargetSelector.h"
 
 GuiBeamTargetSelector::GuiBeamTargetSelector(GuiContainer* owner, string id)
@@ -9,4 +10,6 @@ GuiBeamTargetSelector::GuiBeamTargetSelector(GuiContainer* owner, string id)
         addEntry(getSystemName(ESystem(n)), string(n));
     if (my_spaceship)
         setSelectionIndex(my_spaceship->beam_system_target - SYS_None);
+    if (!gameGlobalInfo->use_system_damage)
+        hide();
 }

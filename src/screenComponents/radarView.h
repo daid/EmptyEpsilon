@@ -16,11 +16,25 @@ public:
     
     typedef std::function<void(sf::Vector2f position)> func_t;
 private:
+    class GhostDot
+    {
+    public:
+        constexpr static float total_lifetime = 60.0f;
+        
+        sf::Vector2f position;
+        float end_of_life;
+        
+        GhostDot(sf::Vector2f pos) : position(pos), end_of_life(engine->getElapsedTime() + total_lifetime) {}
+    };
+    std::vector<GhostDot> ghost_dots;
+    float next_ghost_dot_update;
+    
     PVector<SpaceObject> targets;
 
     float distance;
     sf::Vector2f view_position;
     bool long_range;
+    bool show_ghost_dots;
     bool show_target_projection;
     bool show_callsigns;
     bool show_heading_indicators;
@@ -41,6 +55,8 @@ public:
     GuiRadarView* setRangeIndicatorStepSize(float step) { range_indicator_step_size = step; return this; }
     GuiRadarView* longRange() { long_range = true; return this; }
     GuiRadarView* shortRange() { long_range = false; return this; }
+    GuiRadarView* enableGhostDots() { show_ghost_dots = true; return this; }
+    GuiRadarView* disableGhostDots() { show_ghost_dots = false; return this; }
     GuiRadarView* enableTargetProjections() { show_target_projection = true; return this; }
     GuiRadarView* disableTargetProjections() { show_target_projection = false; return this; }
     GuiRadarView* enableCallsigns() { show_callsigns = true; return this; }
@@ -66,8 +82,11 @@ public:
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
 private:
+    void updateGhostDots();
+    
     void drawBackground(sf::RenderTarget& window);
     void drawSectorGrid(sf::RenderTarget& window);
+    void drawGhostDots(sf::RenderTarget& window);
     void drawRangeIndicators(sf::RenderTarget& window);
     void drawTargetProjections(sf::RenderTarget& window);
     void drawObjects(sf::RenderTarget& window);

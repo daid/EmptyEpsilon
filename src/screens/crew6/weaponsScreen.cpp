@@ -1,4 +1,5 @@
 #include "playerInfo.h"
+#include "gameGlobalInfo.h"
 #include "weaponsScreen.h"
 
 #include "screenComponents/missileTubeControls.h"
@@ -47,12 +48,14 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     lock_aim->setPosition(300, 50, ATopCenter)->setSize(130, 50);
     lock_aim->setValue(true);
     
-    //beam frequency selection, beam subtarget target selection
-    GuiBox* beam_info_box = new GuiBox(this, "BEAM_INFO_BOX");
-    beam_info_box->setPosition(-20, -70, ABottomRight)->setSize(270, 140);
-    (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", "Beam info", 30))->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(0, -50, ABottomRight)->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, 0, ABottomRight)->setSize(GuiElement::GuiSizeMax, 50);
+    if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
+    {
+        GuiBox* beam_info_box = new GuiBox(this, "BEAM_INFO_BOX");
+        beam_info_box->setPosition(-20, -70, ABottomRight)->setSize(270, 140);
+        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", "Beam info", 30))->setSize(GuiElement::GuiSizeMax, 50);
+        (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(0, -50, ABottomRight)->setSize(GuiElement::GuiSizeMax, 50);
+        (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, 0, ABottomRight)->setSize(GuiElement::GuiSizeMax, 50);
+    }
 
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
     energy_display->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);

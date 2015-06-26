@@ -1,4 +1,5 @@
 #include "playerInfo.h"
+#include "gameGlobalInfo.h"
 #include "beamFrequencySelector.h"
 
 GuiBeamFrequencySelector::GuiBeamFrequencySelector(GuiContainer* owner, string id)
@@ -8,4 +9,6 @@ GuiBeamFrequencySelector::GuiBeamFrequencySelector(GuiContainer* owner, string i
         addEntry(frequencyToString(n), frequencyToString(n));
     if (my_spaceship)
         setSelectionIndex(my_spaceship->beam_frequency);
+    if (!gameGlobalInfo->use_beam_shield_frequencies)
+        hide();
 }
