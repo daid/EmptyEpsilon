@@ -11,6 +11,8 @@ protected:
     float min_value;
     float max_value;
     float value;
+    float snap_value;
+    float snap_range;
     func_t func;
 public:
     GuiSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func);
@@ -20,6 +22,7 @@ public:
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
     
+    GuiSlider* setSnapValue(float value, float range);
     GuiSlider* setValue(float value);
     float getValue();
 };

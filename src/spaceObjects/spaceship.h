@@ -72,7 +72,7 @@ class SpaceShip : public SpaceObject, public Updatable
     constexpr static float shield_recharge_rate = 0.2f;
 public:
     constexpr static int max_frequency = 20;
-    constexpr static float combat_maneuver_charge_time = 14.0f;
+    constexpr static float combat_maneuver_charge_time = 20.0f;
 
     string template_name;
     string ship_type_name;
