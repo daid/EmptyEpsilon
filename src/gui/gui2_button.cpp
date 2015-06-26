@@ -26,9 +26,12 @@ bool GuiButton::onMouseDown(sf::Vector2f position)
 
 void GuiButton::onMouseUp(sf::Vector2f position)
 {
-    soundManager.playSound("button.wav");
-    if (func)
-        func();
+    if (rect.contains(position))
+    {
+        soundManager.playSound("button.wav");
+        if (func)
+            func();
+    }
 }
 
 string GuiButton::getText()
