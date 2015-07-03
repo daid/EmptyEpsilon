@@ -37,6 +37,11 @@ void GuiPowerDamageIndicator::onDraw(sf::RenderTarget& window)
     {
         color = sf::Color::Red;
         display_text = "NO POWER";
+    }else if (my_spaceship->energy_level < 10)
+    {
+        color = sf::Color(255, 128, 0);
+        alpha = 64;
+        display_text = "LOW ENERGY";
     }else if (power < 0.3)
     {
         color = sf::Color(255, 128, 0);

@@ -90,7 +90,7 @@ void CrewEngineeringUI::onCrewUI()
 
         float heat = my_spaceship->systems[n].heat_level;
         drawProgressBar(sf::FloatRect(420, y, 50, 50), heat, 0.0, 1.0, sf::Color(128, 128 * (1.0 - heat), 0));
-        float heating_diff = powf(1.7, my_spaceship->systems[n].power_level - 1.0) - (1.0 + my_spaceship->systems[n].coolant_level * 0.1);
+        float heating_diff = my_spaceship->systems[n].getHeatingDelta();
         if (my_spaceship->systems[n].heat_level > 0.0 && fabs(heating_diff) > 0.0)
         {
             sf::Sprite arrow;

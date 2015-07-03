@@ -45,6 +45,11 @@ public:
     float power_level; //0.0-3.0, default 1.0
     float heat_level; //0.0-1.0, system will damage at 1.0
     float coolant_level; //0.0-10.0
+    
+    float getHeatingDelta()
+    {
+        return powf(1.7, power_level - 1.0) - (1.01 + coolant_level * 0.1);
+    }
 };
 
 class BeamWeapon : public sf::NonCopyable
@@ -79,6 +84,7 @@ public:
     P<ShipTemplate> ship_template;
     string ship_callsign;
 
+    float energy_level;
     ShipSystem systems[SYS_COUNT];
     /*!
      *[input] Ship will try to aim to this rotation. (degrees)

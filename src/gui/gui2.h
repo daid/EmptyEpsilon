@@ -12,6 +12,7 @@
 #include "gui2_togglebutton.h"
 #include "gui2_autolayout.h"
 #include "gui2_box.h"
+#include "gui2_arrow.h"
 #include "gui2_textentry.h"
 #include "gui2_overlay.h"
 #include "gui2_progressbar.h"

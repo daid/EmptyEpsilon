@@ -11,7 +11,9 @@ RepairCrew::RepairCrew()
     ship_id = -1;
     position.x = -1;
     action = RC_Idle;
-    direction = RC_None;
+    direction = ERepairCrewDirection(irandom(RC_Up, RC_Right + 1));
+    
+    selected = false;
 
     registerMemberReplication(&ship_id);
     registerMemberReplication(&position, 1.0);

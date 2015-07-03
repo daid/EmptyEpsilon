@@ -3,6 +3,7 @@
 #include "screens/crewStationScreen.h"
 #include "screens/crew6/helmsScreen.h"
 #include "screens/crew6/weaponsScreen.h"
+#include "screens/crew6/engineeringScreen.h"
 
 #include "gui/crewHelmsUI.h"
 #include "gui/crewWeaponsUI.h"
@@ -111,13 +112,15 @@ void PlayerInfo::spawnUI()
     {
         new ScreenMainScreen();
     }else{
-        if (crew_position[helmsOfficer] || crew_position[weaponsOfficer])
+        if (crew_position[helmsOfficer] || crew_position[weaponsOfficer] || crew_position[engineering])
         {
             CrewStationScreen* screen = new CrewStationScreen();
             if (crew_position[helmsOfficer])
                 screen->addStationTab(new HelmsScreen(screen), getCrewPositionName(helmsOfficer));
             if (crew_position[weaponsOfficer])
                 screen->addStationTab(new WeaponsScreen(screen), getCrewPositionName(weaponsOfficer));
+            if (crew_position[engineering])
+                screen->addStationTab(new EngineeringScreen(screen), getCrewPositionName(engineering));
             screen->finishCreation();
         }else{
             if (!crew_position[crew_active_position])

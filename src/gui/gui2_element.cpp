@@ -64,6 +64,11 @@ GuiElement* GuiElement::setPosition(sf::Vector2f position, EGuiAlign alignment)
     return this;
 }
 
+sf::Vector2f GuiElement::getPositionOffset()
+{
+    return position;
+}
+
 GuiElement* GuiElement::setVisible(bool visible)
 {
     this->visible = visible;

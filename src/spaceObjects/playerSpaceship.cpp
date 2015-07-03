@@ -243,8 +243,7 @@ void PlayerSpaceship::update(float delta)
         {
             if (!hasSystem(ESystem(n))) continue;
 
-            systems[n].heat_level += delta * powf(1.7, systems[n].power_level - 1.0) * system_heatup_per_second;
-            systems[n].heat_level -= delta * (1.0 + systems[n].coolant_level * 0.1) * system_heatup_per_second;
+            systems[n].heat_level += delta * systems[n].getHeatingDelta() * system_heatup_per_second;
             if (systems[n].heat_level > 1.0)
             {
                 systems[n].heat_level = 1.0;
@@ -279,12 +278,6 @@ void PlayerSpaceship::update(float delta)
         {
             //Out of energy, we do not care how much power you put into systems, everything is bad now.
             shields_active = false;
-            for(int n=0; n<SYS_COUNT; n++)
-            {
-                if (!hasSystem(ESystem(n))) continue;
-                if (n == SYS_Reactor) continue;
-                systems[n].power_level = 0.1;
-            }
         }
 
         if (has_warp_drive && warp_request > 0 && !(has_jump_drive && jump_delay > 0))

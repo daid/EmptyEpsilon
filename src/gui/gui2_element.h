@@ -40,7 +40,7 @@ public:
     GuiElement(GuiContainer* owner, string id);
     virtual ~GuiElement();
 
-    virtual void onDraw(sf::RenderTarget& window) = 0;
+    virtual void onDraw(sf::RenderTarget& window) {}
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
@@ -51,6 +51,7 @@ public:
     sf::Vector2f getSize();
     GuiElement* setPosition(float x, float y, EGuiAlign alignment = ATopLeft);
     GuiElement* setPosition(sf::Vector2f position, EGuiAlign alignment = ATopLeft);
+    sf::Vector2f getPositionOffset();
     GuiElement* setVisible(bool visible);
     GuiElement* hide();
     GuiElement* show();

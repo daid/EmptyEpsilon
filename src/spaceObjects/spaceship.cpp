@@ -99,6 +99,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     shield_frequency = irandom(0, max_frequency);
     docking_state = DS_NotDocking;
     impulse_acceleration = 20.0;
+    energy_level = 1000;
 
     registerMemberReplication(&ship_callsign);
     registerMemberReplication(&target_rotation, 1.5);
@@ -884,9 +885,12 @@ bool SpaceShip::hasSystem(ESystem system)
 
 float SpaceShip::getSystemEffectiveness(ESystem system)
 {
+    float power = systems[system].power_level;
+    if (energy_level < 10.0)
+        power = std::max(0.1f, power);
     if (gameGlobalInfo->use_system_damage)
-        return std::max(0.0f, systems[system].power_level * systems[system].health);
-    return std::max(0.0f, systems[system].power_level * (1.0f - systems[system].heat_level));
+        return std::max(0.0f, power * systems[system].health);
+    return std::max(0.0f, power * (1.0f - systems[system].heat_level));
 }
 
 string SpaceShip::getCallSign()

@@ -44,7 +44,7 @@ public:
     constexpr static float system_heatup_per_second = 0.05f;
     constexpr static float max_coolant = 10.0;
     constexpr static float damage_per_second_on_overheat = 0.05;
-    constexpr static float shield_calibration_time = 10.0f;
+    constexpr static float shield_calibration_time = 20.0f;
     constexpr static float comms_channel_open_time = 2.0;
     constexpr static int max_comms_reply_count = 16;
     constexpr static int max_self_destruct_codes = 3;
@@ -57,7 +57,6 @@ public:
 
     NetworkRecorder network_recorder;
     NetworkAudioStream network_audio_stream;
-    float energy_level;
     float hull_damage_indicator;
     float jump_indicator;
     P<SpaceShip> scanning_ship; //Server only

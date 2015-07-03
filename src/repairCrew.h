@@ -29,6 +29,8 @@ public:
     ERepairCrewDirection direction;
     float action_delay;
     int32_t ship_id;
+    
+    bool selected; //TODO: This should not be tracked here but in the GUI.
 
     RepairCrew();
 
