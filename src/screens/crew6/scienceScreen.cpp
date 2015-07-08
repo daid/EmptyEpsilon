@@ -34,8 +34,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     );
     
     GuiAutoLayout* sidebar = new GuiAutoLayout(this, "SIDE_BAR", GuiAutoLayout::LayoutVerticalTopToBottom);
-    sidebar->setPosition(-20, 200, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
-    (new GuiScanTargetButton(sidebar, "SCAN_BUTTON", &targets))->setPosition(-20, 200, ATopRight)->setSize(GuiElement::GuiSizeMax, 50);
+    sidebar->setPosition(-20, 150, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiScanTargetButton(sidebar, "SCAN_BUTTON", &targets))->setSize(GuiElement::GuiSizeMax, 50);
     
     info_callsign = new GuiKeyValueDisplay(sidebar, "SCIENCE_CALLSIGN", 0.4, "Callsign", "");
     info_callsign->setSize(GuiElement::GuiSizeMax, 30);
@@ -63,12 +63,12 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
         info_shield_frequency->hide();
         info_beam_frequency->hide();
     }
-    /*
-                        for(int n=0; n<SYS_COUNT; n++)
-                        {
-                            drawKeyValueDisplay(sf::FloatRect(x, y, 250, 30), 0.75, getSystemName(ESystem(n)), string(int(ship->systems[n].health * 100.0f)) + "%", 20); y += 30;
-                        }
-    */
+    
+    for(int n=0; n<SYS_COUNT; n++)
+    {
+        info_system[n] = new GuiKeyValueDisplay(sidebar, "SCIENCE_SYSTEM_" + string(n), 0.75, getSystemName(ESystem(n)), "-");
+        info_system[n]->setSize(GuiElement::GuiSizeMax, 30);
+    }
 }
 
 void ScienceScreen::onDraw(sf::RenderTarget& window)
@@ -79,6 +79,15 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     targets.entries.update();
     if (targets.entries.size() > 0 && Nebula::blockedByNebula(my_spaceship->getPosition(), targets.entries[0]->getPosition()))
         targets.clear();
+
+    info_faction->setValue("-");
+    info_type->setValue("-");
+    info_shields->setValue("-");
+    info_shield_frequency->setFrequency(-1);
+    info_beam_frequency->setFrequency(-1);
+
+    for(int n=0; n<SYS_COUNT; n++)
+        info_system[n]->setValue("-");
     
     if (targets.entries.size() > 0)
     {
@@ -98,11 +107,6 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         info_heading->setValue(string(int(heading)));
         info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + "km/min");
 
-        info_faction->setValue("-");
-        info_type->setValue("-");
-        info_shields->setValue("-");
-        info_shield_frequency->setFrequency(-1);
-        info_beam_frequency->setFrequency(-1);
         if (ship)
         {
             if (ship->scanned_by_player >= SS_SimpleScan)
@@ -115,6 +119,8 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             {
                 info_shield_frequency->setFrequency(ship->shield_frequency);
                 info_beam_frequency->setFrequency(ship->beam_frequency);
+                for(int n=0; n<SYS_COUNT; n++)
+                    info_system[n]->setValue(string(int(ship->systems[n].health * 100.0f)) + "%");
             }
         }else{
             info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
@@ -129,9 +135,5 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         info_distance->setValue("-");
         info_heading->setValue("-");
         info_relspeed->setValue("-");
-        
-        info_faction->setValue("-");
-        info_type->setValue("-");
-        info_shields->setValue("-");
     }
 }

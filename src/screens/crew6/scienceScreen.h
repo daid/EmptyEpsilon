@@ -23,6 +23,7 @@ private:
     GuiKeyValueDisplay* info_shields;
     GuiFrequencyCurve* info_shield_frequency;
     GuiFrequencyCurve* info_beam_frequency;
+    GuiKeyValueDisplay* info_system[SYS_COUNT];
 public:
     ScienceScreen(GuiContainer* owner);
     
