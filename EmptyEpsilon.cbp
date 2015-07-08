@@ -566,6 +566,8 @@
 		<Unit filename="src/screenComponents/combatManeuver.h" />
 		<Unit filename="src/screenComponents/dockingButton.cpp" />
 		<Unit filename="src/screenComponents/dockingButton.h" />
+		<Unit filename="src/screenComponents/frequencyCurve.cpp" />
+		<Unit filename="src/screenComponents/frequencyCurve.h" />
 		<Unit filename="src/screenComponents/globalMessage.cpp" />
 		<Unit filename="src/screenComponents/globalMessage.h" />
 		<Unit filename="src/screenComponents/impulseControls.cpp" />
@@ -582,6 +584,8 @@
 		<Unit filename="src/screenComponents/powerDamageIndicator.h" />
 		<Unit filename="src/screenComponents/radarView.cpp" />
 		<Unit filename="src/screenComponents/radarView.h" />
+		<Unit filename="src/screenComponents/scanTargetButton.cpp" />
+		<Unit filename="src/screenComponents/scanTargetButton.h" />
 		<Unit filename="src/screenComponents/selfDestructIndicator.cpp" />
 		<Unit filename="src/screenComponents/selfDestructIndicator.h" />
 		<Unit filename="src/screenComponents/shieldFreqencySelect.cpp" />
@@ -594,6 +598,8 @@
 		<Unit filename="src/screenComponents/shipInternalView.h" />
 		<Unit filename="src/screenComponents/snapSlider.cpp" />
 		<Unit filename="src/screenComponents/snapSlider.h" />
+		<Unit filename="src/screenComponents/targetsContainer.cpp" />
+		<Unit filename="src/screenComponents/targetsContainer.h" />
 		<Unit filename="src/screenComponents/viewport3d.cpp" />
 		<Unit filename="src/screenComponents/viewport3d.h" />
 		<Unit filename="src/screenComponents/warpControls.cpp" />
@@ -602,6 +608,8 @@
 		<Unit filename="src/screens/crew6/engineeringScreen.h" />
 		<Unit filename="src/screens/crew6/helmsScreen.cpp" />
 		<Unit filename="src/screens/crew6/helmsScreen.h" />
+		<Unit filename="src/screens/crew6/scienceScreen.cpp" />
+		<Unit filename="src/screens/crew6/scienceScreen.h" />
 		<Unit filename="src/screens/crew6/weaponsScreen.cpp" />
 		<Unit filename="src/screens/crew6/weaponsScreen.h" />
 		<Unit filename="src/screens/crewStationScreen.cpp" />

@@ -106,7 +106,7 @@ void CrewSinglePilotUI::onCrewUI()
         {
             if (my_spaceship->scanning_delay > 0.0)
             {
-                drawProgressBar(sf::FloatRect(getWindowSize().x / 2.0 - 100, 110, 100, 20), my_spaceship->scanning_delay, 6.0, 0.0);
+                drawProgressBar(sf::FloatRect(getWindowSize().x / 2.0 - 100, 110, 100, 20), my_spaceship->scanning_delay, PlayerSpaceship::max_scanning_delay, 0.0);
             }else{
                 if (drawButton(sf::FloatRect(getWindowSize().x / 2.0 - 100, 110, 100, 30), "Scan", 20))
                     my_spaceship->commandScan(target);
@@ -121,7 +121,7 @@ void CrewSinglePilotUI::onCrewUI()
                 {
                     if (my_spaceship->scanning_delay > 0.0)
                     {
-                        drawProgressBar(sf::FloatRect(getWindowSize().x / 2.0 - 100, 170, 100, 20), my_spaceship->scanning_delay, 6.0, 0.0);
+                        drawProgressBar(sf::FloatRect(getWindowSize().x / 2.0 - 100, 170, 100, 20), my_spaceship->scanning_delay, PlayerSpaceship::max_scanning_delay, 0.0);
                     }else{
                         if (drawButton(sf::FloatRect(getWindowSize().x / 2.0 - 100, 170, 100, 30), "Scan", 20))
                             my_spaceship->commandScan(target);

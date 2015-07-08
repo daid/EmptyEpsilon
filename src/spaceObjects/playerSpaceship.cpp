@@ -552,7 +552,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             if (ship)
             {
                 scanning_ship = ship;
-                scanning_delay = 6.0;
+                scanning_delay = max_scanning_delay;
             }
         }
         break;

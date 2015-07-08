@@ -10,9 +10,10 @@ class SpaceStation : public SpaceObject, public Updatable
     static constexpr float shieldRechargeRate = 0.2;
     float shieldHitEffect;
 
+public:
     string template_name;
     P<ShipTemplate> ship_template;   //Space stations use a shipTemplate to get hull/shield and graphical information.
-public:
+
     float shields, shields_max;
     float hull_strength, hull_max;
 

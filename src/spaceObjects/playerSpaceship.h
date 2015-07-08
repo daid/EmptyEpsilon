@@ -54,6 +54,7 @@ public:
     constexpr static float heat_per_combat_maneuver_strafe = 0.2;
     constexpr static float heat_per_warp = 0.02;
     constexpr static int max_scan_probes = 10;
+    constexpr static float max_scanning_delay = 6.0;
 
     NetworkRecorder network_recorder;
     NetworkAudioStream network_audio_stream;

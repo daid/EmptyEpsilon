@@ -14,6 +14,7 @@ class GuiShipRetrofit;
 class GameMasterScreen : public GuiCanvas, public Updatable
 {
 private:
+    TargetsContainer targets;
     GuiRadarView* main_radar;
     GuiOverlay* box_selection_overlay;
     GuiSelector* faction_selector;

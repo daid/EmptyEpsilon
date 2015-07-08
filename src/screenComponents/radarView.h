@@ -1,7 +1,7 @@
 #ifndef GUI_RADAR_VIEW_H
 #define GUI_RADAR_VIEW_H
 
-#include "spaceObjects/spaceObject.h"
+#include "targetsContainer.h"
 #include "gui/gui2.h"
 
 class GuiRadarView : public GuiElement
@@ -29,8 +29,8 @@ private:
     std::vector<GhostDot> ghost_dots;
     float next_ghost_dot_update;
     
-    PVector<SpaceObject> targets;
-
+    TargetsContainer* targets;
+    
     float distance;
     sf::Vector2f view_position;
     bool long_range;
@@ -47,7 +47,7 @@ private:
     func_t mouse_drag_func;
     func_t mouse_up_func;
 public:
-    GuiRadarView(GuiContainer* owner, string id, float distance);
+    GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets);
 
     virtual void onDraw(sf::RenderTarget& window);
 
@@ -71,11 +71,6 @@ public:
     GuiRadarView* setCallbacks(func_t mouse_down_func, func_t mouse_drag_func, func_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
     GuiRadarView* setViewPosition(sf::Vector2f view_position) { this->view_position = view_position; return this; }
     sf::Vector2f getViewPosition() { return view_position; }
-    GuiRadarView* clearTargets() { targets.clear(); return this; }
-    GuiRadarView* addTarget(P<SpaceObject> obj) { if (obj) targets.push_back(obj); return this; }
-    GuiRadarView* setTarget(P<SpaceObject> obj);
-    GuiRadarView* setTargets(PVector<SpaceObject> objs);
-    PVector<SpaceObject> getTargets() { return targets; }
     void setMissileTargetAngle(float angle) { missile_target_angle = angle; }
     
     sf::Vector2f worldToScreen(sf::Vector2f world_position);
@@ -89,6 +84,7 @@ private:
     
     void drawBackground(sf::RenderTarget& window);
     void drawSectorGrid(sf::RenderTarget& window);
+    void drawNebulaBlockedAreas(sf::RenderTarget& window);
     void drawGhostDots(sf::RenderTarget& window);
     void drawWaypoints(sf::RenderTarget& window);
     void drawRangeIndicators(sf::RenderTarget& window);

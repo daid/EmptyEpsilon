@@ -186,7 +186,7 @@ void MainUIBase::update(float delta)
     }
     for(std::vector<ScanGhost>::iterator i = scan_ghost.begin(); i != scan_ghost.end();)
     {
-        if (i->object && (!i->object->canHideInNebula() || (i->object->getPosition() - my_spaceship->getPosition()) < 5000.0f || !Nebula::blockedByNebula(my_spaceship->getPosition(), i->object->getPosition())))
+        if (i->object && (!i->object->canHideInNebula() || !Nebula::blockedByNebula(my_spaceship->getPosition(), i->object->getPosition())))
         {
             i++;
             continue;

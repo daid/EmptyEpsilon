@@ -8,6 +8,7 @@ class GuiMissileTubeControls;
 class WeaponsScreen : public GuiOverlay
 {
 private:
+    TargetsContainer targets;
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* shields_display;
     GuiRadarView* radar;

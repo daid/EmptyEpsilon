@@ -1,11 +1,12 @@
 #include <SFML/OpenGL.hpp>
 
 #include "main.h"
+#include "spaceObjects/nebula.h"
 #include "playerInfo.h"
 #include "radarView.h"
 
-GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance)
-: GuiElement(owner, id), next_ghost_dot_update(0.0), distance(distance), long_range(false), show_ghost_dots(false), show_waypoints(false), show_target_projection(false), show_callsigns(false), show_heading_indicators(false), show_game_master_data(false), range_indicator_step_size(0.0f), missile_target_angle(0.0f), style(Circular), mouse_down_func(nullptr), mouse_drag_func(nullptr), mouse_up_func(nullptr)
+GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets)
+: GuiElement(owner, id), next_ghost_dot_update(0.0), targets(targets), distance(distance), long_range(false), show_ghost_dots(false), show_waypoints(false), show_target_projection(false), show_callsigns(false), show_heading_indicators(false), show_game_master_data(false), range_indicator_step_size(0.0f), missile_target_angle(0.0f), style(Circular), mouse_down_func(nullptr), mouse_drag_func(nullptr), mouse_up_func(nullptr)
 {
 }
 
@@ -16,6 +17,8 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     
     drawBackground(window);
     drawSectorGrid(window);
+    if (long_range)
+        drawNebulaBlockedAreas(window);
     drawRangeIndicators(window);
     if (show_target_projection)
         drawTargetProjections(window);
@@ -72,6 +75,7 @@ void GuiRadarView::updateGhostDots()
 
 void GuiRadarView::drawBackground(sf::RenderTarget& window)
 {
+    glClear(GL_STENCIL_BUFFER_BIT);
     switch(style)
     {
     case Rectangular:
@@ -170,6 +174,85 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
         }
     }
     window.draw(points);
+}
+
+void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
+{
+    if (!my_spaceship)
+        return;
+    sf::Vector2f scan_center = my_spaceship->getPosition();
+    sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
+    float scale = std::min(rect.width, rect.height) / 2.0f / distance;
+
+    {
+        glStencilFunc(GL_GEQUAL, 1, 3);
+        glStencilOp(GL_KEEP, GL_INCR, GL_INCR);
+
+        float r = 5000.0f * scale;
+        sf::CircleShape circle(r, 32);
+        circle.setOrigin(r, r);
+        circle.setPosition(radar_screen_center + (scan_center - view_position) * scale);
+        circle.setFillColor(sf::Color::Transparent);
+        window.draw(circle);
+        
+        glStencilFunc(GL_EQUAL, 1, 3);
+        glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+    }
+    
+    PVector<Nebula> nebulas = Nebula::getNebulas();
+    foreach(Nebula, n, nebulas)
+    {
+        sf::Vector2f diff = n->getPosition() - scan_center;
+        float diff_len = sf::length(diff);
+        if (diff_len < n->getRadius())
+        {
+            sf::RectangleShape background(sf::Vector2f(rect.width, rect.height));
+            background.setPosition(rect.left, rect.top);
+            background.setFillColor(sf::Color::Black);
+            window.draw(background);
+        }else{
+            float r = n->getRadius() * scale;
+            sf::CircleShape circle(r, 32);
+            circle.setOrigin(r, r);
+            circle.setPosition(radar_screen_center + (n->getPosition() - view_position) * scale);
+            circle.setFillColor(sf::Color::Black);
+            window.draw(circle);
+            
+            float diff_angle = sf::vector2ToAngle(diff);
+            float angle = acosf(n->getRadius() / diff_len) / M_PI * 180.0f;
+            
+            sf::Vector2f pos_a = n->getPosition() - sf::vector2FromAngle(diff_angle + angle) * n->getRadius();
+            sf::Vector2f pos_b = n->getPosition() - sf::vector2FromAngle(diff_angle - angle) * n->getRadius();
+            sf::Vector2f pos_c = scan_center + sf::normalize(pos_a - scan_center) * distance * 3.0f;
+            sf::Vector2f pos_d = scan_center + sf::normalize(pos_b - scan_center) * distance * 3.0f;
+            sf::Vector2f pos_e = scan_center + diff / diff_len * distance * 3.0f;
+            
+            sf::VertexArray a(sf::TrianglesStrip, 5);
+            a[0].position = radar_screen_center + (pos_a - view_position) * scale;
+            a[1].position = radar_screen_center + (pos_b - view_position) * scale;
+            a[2].position = radar_screen_center + (pos_c - view_position) * scale;
+            a[3].position = radar_screen_center + (pos_d - view_position) * scale;
+            a[4].position = radar_screen_center + (pos_e - view_position) * scale;
+            for(int n=0; n<5;n++)
+                a[n].color = sf::Color::Black;
+            window.draw(a);
+        }
+    }
+
+    {
+        glStencilFunc(GL_GEQUAL, 2, 3);
+        glStencilOp(GL_KEEP, GL_DECR, GL_DECR);
+
+        float r = 5000.0f * scale;
+        sf::CircleShape circle(r, 32);
+        circle.setOrigin(r, r);
+        circle.setPosition(radar_screen_center + (scan_center - view_position) * scale);
+        circle.setFillColor(sf::Color::Transparent);
+        window.draw(circle);
+        
+        glStencilFunc(GL_EQUAL, 1, 1);
+        glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+    }
 }
 
 void GuiRadarView::drawGhostDots(sf::RenderTarget& window)
@@ -285,25 +368,28 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
         }
     }
     
-    foreach(SpaceObject, obj, targets)
+    if (targets)
     {
-        if (obj->getVelocity() < 1.0f)
-            continue;
-            
-        sf::VertexArray a(sf::Lines, 12);
-        a[0].position = radar_screen_center + (obj->getPosition() - view_position) * scale;
-        a[0].color = sf::Color(255, 255, 255, 128);
-        a[1].position = a[0].position + (obj->getVelocity() * 60.0f) * scale;
-        a[1].color = sf::Color(255, 255, 255, 0);
-        sf::Vector2f n = sf::normalize(sf::Vector2f(-obj->getVelocity().y, obj->getVelocity().x));
-        for(int cnt=0; cnt<5; cnt++)
+        foreach(SpaceObject, obj, targets->entries)
         {
-            sf::Vector2f p = (obj->getVelocity() * (10.0f + 10.0f * cnt)) * scale;
-            a[2 + cnt * 2].position = a[0].position + p + n * 10.0f;
-            a[3 + cnt * 2].position = a[0].position + p - n * 10.0f;
-            a[2 + cnt * 2].color = a[3 + cnt * 2].color = sf::Color(255, 255, 255, 128 - cnt * 20);
+            if (obj->getVelocity() < 1.0f)
+                continue;
+                
+            sf::VertexArray a(sf::Lines, 12);
+            a[0].position = radar_screen_center + (obj->getPosition() - view_position) * scale;
+            a[0].color = sf::Color(255, 255, 255, 128);
+            a[1].position = a[0].position + (obj->getVelocity() * 60.0f) * scale;
+            a[1].color = sf::Color(255, 255, 255, 0);
+            sf::Vector2f n = sf::normalize(sf::Vector2f(-obj->getVelocity().y, obj->getVelocity().x));
+            for(int cnt=0; cnt<5; cnt++)
+            {
+                sf::Vector2f p = (obj->getVelocity() * (10.0f + 10.0f * cnt)) * scale;
+                a[2 + cnt * 2].position = a[0].position + p + n * 10.0f;
+                a[3 + cnt * 2].position = a[0].position + p - n * 10.0f;
+                a[2 + cnt * 2].color = a[3 + cnt * 2].color = sf::Color(255, 255, 255, 128 - cnt * 20);
+            }
+            window.draw(a);
         }
-        window.draw(a);
     }
 }
 
@@ -319,9 +405,12 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window)
         sf::FloatRect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
         if (obj != my_spaceship && rect.intersects(object_rect))
         {
-            obj->drawOnRadar(window, object_position_on_screen, scale, long_range);
-            if (show_callsigns && obj->getCallSign() != "")
-                drawText(window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 12);
+            if (!long_range || !obj->canHideInNebula() || !my_spaceship || !Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition()))
+            {
+                obj->drawOnRadar(window, object_position_on_screen, scale, long_range);
+                if (show_callsigns && obj->getCallSign() != "")
+                    drawText(window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 12);
+            }
         }
     }
     if (my_spaceship)
@@ -350,10 +439,13 @@ void GuiRadarView::drawObjectsGM(sf::RenderTarget& window)
 
 void GuiRadarView::drawTargets(sf::RenderTarget& window)
 {
+    if (!targets)
+        return;
+    
     sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
     float scale = std::min(rect.width, rect.height) / 2.0f / distance;
     
-    foreach(SpaceObject, obj, targets)
+    foreach(SpaceObject, obj, targets->entries)
     {
         sf::Vector2f object_position_on_screen = radar_screen_center + (obj->getPosition() - view_position) * scale;
         float r = obj->getRadius() * scale;
@@ -425,32 +517,6 @@ void GuiRadarView::drawRadarCutoff(sf::RenderTarget& window)
     rectRight.setFillColor(sf::Color::Black);
     rectRight.setPosition(radar_screen_center.x + screen_size, rect.top);
     window.draw(rectRight);
-}
-
-GuiRadarView* GuiRadarView::setTarget(P<SpaceObject> obj)
-{
-    if (obj)
-    {
-        if (targets.size() > 0)
-        {
-            targets[0] = obj;
-            if (targets.size() > 1)
-                targets.resize(1);
-        }else{
-            targets.push_back(obj);
-        }
-    }
-    else
-    {
-        clearTargets();
-    }
-    return this; 
-}
-
-GuiRadarView* GuiRadarView::setTargets(PVector<SpaceObject> objs)
-{
-    targets = objs;
-    return this;
 }
 
 sf::Vector2f GuiRadarView::worldToScreen(sf::Vector2f world_position)

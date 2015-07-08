@@ -8,7 +8,7 @@
 GameMasterScreen::GameMasterScreen()
 : click_and_drag_state(CD_None)
 {
-    main_radar = new GuiRadarView(this, "MAIN_RADAR", 50000.0f);
+    main_radar = new GuiRadarView(this, "MAIN_RADAR", 50000.0f, &targets);
     main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections();
     main_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     main_radar->setCallbacks(
@@ -27,7 +27,7 @@ GameMasterScreen::GameMasterScreen()
     }))->setPosition(20, 20, ATopLeft)->setSize(250, 50);
     
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR", [this](int index, string value) {
-        for(P<SpaceObject> obj : main_radar->getTargets())
+        for(P<SpaceObject> obj : targets.entries)
         {
             if (obj)
                 obj->setFactionId(index);
@@ -51,7 +51,7 @@ GameMasterScreen::GameMasterScreen()
     cancel_create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
 
     ship_retrofit_button = new GuiButton(this, "RETROFIT_SHIP", "Retrofit", [this]() {
-        for(P<SpaceObject> obj : main_radar->getTargets())
+        for(P<SpaceObject> obj : targets.entries)
         {
             if (P<SpaceShip>(obj))
             {
@@ -62,7 +62,7 @@ GameMasterScreen::GameMasterScreen()
     });
     ship_retrofit_button->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->hide();
     player_comms_hail = new GuiButton(this, "HAIL_PLAYER", "Hail ship", [this]() {
-        for(P<SpaceObject> obj : main_radar->getTargets())
+        for(P<SpaceObject> obj : targets.entries)
             if (P<PlayerSpaceship>(obj))
                 hail_player_dialog->player = obj;
         if (hail_player_dialog->player)
@@ -78,22 +78,22 @@ GameMasterScreen::GameMasterScreen()
 
     (new GuiLabel(order_layout, "ORDERS_LABEL", "Orders:", 20))->addBox()->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_IDLE", "Idle", [this]() {
-        for(P<SpaceObject> obj : main_radar->getTargets())
+        for(P<SpaceObject> obj : targets.entries)
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderIdle();
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_ROAMING", "Roaming", [this]() {
-        for(P<SpaceObject> obj : main_radar->getTargets())
+        for(P<SpaceObject> obj : targets.entries)
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderRoaming();
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_STAND_GROUND", "Stand Ground", [this]() {
-        for(P<SpaceObject> obj : main_radar->getTargets())
+        for(P<SpaceObject> obj : targets.entries)
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderStandGround();
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", "Defend location", [this]() {
-        for(P<SpaceObject> obj : main_radar->getTargets())
+        for(P<SpaceObject> obj : targets.entries)
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderDefendLocation(obj->getPosition());
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
@@ -133,7 +133,7 @@ void GameMasterScreen::update(float delta)
     bool has_ship = false;
     bool has_cpu_ship = false;
     bool has_player_ship = false;
-    for(P<SpaceObject> obj : main_radar->getTargets())
+    for(P<SpaceObject> obj : targets.entries)
     {
         if (P<SpaceShip>(obj))
         {
@@ -149,7 +149,7 @@ void GameMasterScreen::update(float delta)
     player_comms_hail->setVisible(has_player_ship);
     
     std::unordered_map<string, string> selection_info;
-    for(P<SpaceObject> obj : main_radar->getTargets())
+    for(P<SpaceObject> obj : targets.entries)
     {
         if (!obj)
             continue;
@@ -204,7 +204,7 @@ void GameMasterScreen::onMouseDown(sf::Vector2f position)
             
             float min_drag_distance = main_radar->getDistance() / 450 * 10;
             
-            for(P<SpaceObject> obj : main_radar->getTargets())
+            for(P<SpaceObject> obj : targets.entries)
             {
                 if (obj)
                 {
@@ -229,7 +229,7 @@ void GameMasterScreen::onMouseDrag(sf::Vector2f position)
         position -= (position - drag_previous_position);
         break;
     case CD_DragObjects:
-        for(P<SpaceObject> obj : main_radar->getTargets())
+        for(P<SpaceObject> obj : targets.entries)
         {
             if (obj)
                 obj->setPosition(obj->getPosition() + (position - drag_previous_position));
@@ -268,7 +268,7 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
 
             sf::Vector2f upper_bound(-std::numeric_limits<float>::max(), -std::numeric_limits<float>::max());
             sf::Vector2f lower_bound(std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
-            for(P<SpaceObject> obj : main_radar->getTargets())
+            for(P<SpaceObject> obj : targets.entries)
             {
                 P<CpuShip> cpu_ship = obj;
                 if (!cpu_ship)
@@ -281,7 +281,7 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
             }
             sf::Vector2f objects_center = (upper_bound + lower_bound) / 2.0f;
 
-            for(P<SpaceObject> obj : main_radar->getTargets())
+            for(P<SpaceObject> obj : targets.entries)
             {
                 P<CpuShip> cpu_ship = obj;
                 if (!cpu_ship)
@@ -315,8 +315,7 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
             {
                 space_objects.push_back(c);
             }
-            main_radar->clearTargets();
-            main_radar->setTargets(space_objects);
+            targets.set(space_objects);
             if (space_objects.size() > 0)
                 faction_selector->setSelectionIndex(space_objects[0]->getFactionId());
         }
@@ -333,7 +332,7 @@ void GameMasterScreen::onKey(sf::Keyboard::Key key, int unicode)
     switch(key)
     {
     case sf::Keyboard::Delete:
-        for(P<SpaceObject> obj : main_radar->getTargets())
+        for(P<SpaceObject> obj : targets.entries)
         {
             if (!obj)
                 continue;

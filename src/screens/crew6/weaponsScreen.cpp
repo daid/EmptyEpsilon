@@ -10,7 +10,7 @@
 WeaponsScreen::WeaponsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "WEAPONS_SCREEN", sf::Color::Black)
 {
-    radar = new GuiRadarView(this, "HELMS_RADAR", 5000.0);
+    radar = new GuiRadarView(this, "HELMS_RADAR", 5000.0, &targets);
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableTargetProjections()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
@@ -30,13 +30,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
             {
                 my_spaceship->commandSetTarget(target);
             }
-        },
-        [this](sf::Vector2f position) {
-            
-        },
-        [this](sf::Vector2f position) {
-            
-        }
+        }, nullptr, nullptr
     );
     missile_aim = new GuiRotationDial(this, "MISSILE_AIM", -90, 360 - 90, 0, [this](float value){
         tube_controls->setMissileTargetAngle(value);
@@ -73,7 +67,7 @@ void WeaponsScreen::onDraw(sf::RenderTarget& window)
     {
         energy_display->setValue(string(int(my_spaceship->energy_level)));
         shields_display->setValue(string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "% " + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)) + "%");
-        radar->setTarget(my_spaceship->getTarget());
+        targets.set(my_spaceship->getTarget());
         
         if (lock_aim->getValue())
         {

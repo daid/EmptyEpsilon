@@ -83,7 +83,7 @@ void CrewScienceUI::onRadarUI()
         float x = getWindowSize().x - 270;
         float y = 200;
         drawTextBox(sf::FloatRect(x, y, 250, 30), "Scanning", AlignCenter, 20); y += 30;
-        drawProgressBar(sf::FloatRect(x, y, 250, 50), my_spaceship->scanning_delay, 6.0, 0.0); y += 50;
+        drawProgressBar(sf::FloatRect(x, y, 250, 50), my_spaceship->scanning_delay, PlayerSpaceship::max_scanning_delay, 0.0); y += 50;
     } else {
         if (scienceTarget)
         {

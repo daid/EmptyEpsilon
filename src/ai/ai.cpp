@@ -116,7 +116,7 @@ void ShipAI::updateTarget()
     P<SpaceObject> order_target = owner->getOrderTarget();
 
     //Check if we need to lose our target because it entered a nebula.
-    if (target && target->canHideInNebula() && (target->getPosition() - position) > 5000.0f && Nebula::blockedByNebula(position, target->getPosition()))
+    if (target && target->canHideInNebula() && Nebula::blockedByNebula(position, target->getPosition()))
     {
         //When we are roaming, and we lost our target in a nebula, set the "fly to" position to the last known position of the enemy ship.
         if (orders == AI_Roaming)
@@ -411,7 +411,7 @@ P<SpaceObject> ShipAI::findBestTarget(sf::Vector2f position, float radius)
         P<SpaceObject> space_object = obj;
         if (!space_object || !space_object->canBeTargeted() || !owner->isEnemy(space_object) || space_object == target)
             continue;
-        if (space_object->canHideInNebula() && (space_object->getPosition() - owner_position) > 5000.0f && Nebula::blockedByNebula(owner_position, space_object->getPosition()))
+        if (space_object->canHideInNebula() && Nebula::blockedByNebula(owner_position, space_object->getPosition()))
             continue;
         float score = targetScore(space_object);
         if (!target || score > target_score)

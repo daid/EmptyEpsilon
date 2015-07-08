@@ -102,6 +102,8 @@ bool Nebula::blockedByNebula(sf::Vector2f start, sf::Vector2f end)
 {
     sf::Vector2f startEndDiff = end - start;
     float startEndLength = sf::length(startEndDiff);
+    if (startEndLength < 5000.0f)
+        return false;
     
     foreach(Nebula, n, nebula_list)
     {
@@ -148,4 +150,9 @@ sf::Vector2f Nebula::getFirstBlockedPosition(sf::Vector2f start, sf::Vector2f en
     
     float d = sf::length(first_nebula_q - first_nebula->getPosition());
     return first_nebula_q + sf::normalize(start - end) * sqrtf(first_nebula->getRadius() * first_nebula->getRadius() - d * d);
+}
+
+PVector<Nebula> Nebula::getNebulas()
+{
+    return nebula_list;
 }
