@@ -16,7 +16,8 @@ public:
     
     GuiScrollText* enableAutoScrollDown() { auto_scroll_down = true; return this; }
 
-    void setText(string text);
+    GuiScrollText* setText(string text);
+    GuiScrollText* setTextSize(float text_size) { this->text_size = text_size; return this; }
 
     virtual void onDraw(sf::RenderTarget& window);
 };

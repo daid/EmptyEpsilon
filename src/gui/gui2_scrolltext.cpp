@@ -8,9 +8,10 @@ GuiScrollText::GuiScrollText(GuiContainer* owner, string id, string text)
     scrollbar->setPosition(0, 0, ATopRight)->setSize(50, GuiElement::GuiSizeMax);
 }
 
-void GuiScrollText::setText(string text)
+GuiScrollText* GuiScrollText::setText(string text)
 {
     this->text = text;
+    return this; 
 }
 
 void GuiScrollText::onDraw(sf::RenderTarget& window)

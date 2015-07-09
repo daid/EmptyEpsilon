@@ -94,6 +94,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
         {
             (new GuiKeyValueDisplay(layout, "DATABASE_ENTRY_" + string(n), 0.7, entry->keyValuePairs[n].key, entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
         }
+        (new GuiScrollText(layout, "DATABASE_LONG_DESCRIPTION", entry->longDescription))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     });
     category_list = new GuiListbox(database_view, "DATABASE_CAT_LIST", [this](int index, string value) {
         item_list->setOptions({});
