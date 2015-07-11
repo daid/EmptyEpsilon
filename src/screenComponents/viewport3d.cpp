@@ -28,7 +28,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     float camera_fov = 60.0f;
     float sx = window.getSize().x * window.getView().getViewport().width / window.getView().getSize().x;
     float sy = window.getSize().y * window.getView().getViewport().height / window.getView().getSize().y;
-    glViewport(rect.left * sx, rect.top * sy, rect.width * sx, rect.height * sy);
+    glViewport(rect.left * sx, (float(window.getView().getSize().y) - rect.height - rect.top) * sx, rect.width * sx, rect.height * sy);
 
     glClearDepth(1.f);
     glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);

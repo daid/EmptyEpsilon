@@ -7,6 +7,7 @@
 #include "screenComponents/radarView.h"
 #include "screenComponents/scanTargetButton.h"
 #include "screenComponents/frequencyCurve.h"
+#include "screenComponents/rotatingModelView.h"
 
 ScienceScreen::ScienceScreen(GuiContainer* owner)
 : GuiOverlay(owner, "SCIENCE_SCREEN", sf::Color::Black)
@@ -94,7 +95,14 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
         {
             (new GuiKeyValueDisplay(layout, "DATABASE_ENTRY_" + string(n), 0.7, entry->keyValuePairs[n].key, entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
         }
-        (new GuiScrollText(layout, "DATABASE_LONG_DESCRIPTION", entry->longDescription))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        if (entry->longDescription.length() > 0)
+        {
+            (new GuiScrollText(layout, "DATABASE_LONG_DESCRIPTION", entry->longDescription))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        }
+        if (entry->model_template)
+        {
+            (new GuiRotatingModelView(database_entry, "DATABASE_MODEL_VIEW", entry->model_template->model_data))->setPosition(400, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMatchWidth);
+        }
     });
     category_list = new GuiListbox(database_view, "DATABASE_CAT_LIST", [this](int index, string value) {
         item_list->setOptions({});

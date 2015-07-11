@@ -584,6 +584,8 @@
 		<Unit filename="src/screenComponents/powerDamageIndicator.h" />
 		<Unit filename="src/screenComponents/radarView.cpp" />
 		<Unit filename="src/screenComponents/radarView.h" />
+		<Unit filename="src/screenComponents/rotatingModelView.cpp" />
+		<Unit filename="src/screenComponents/rotatingModelView.h" />
 		<Unit filename="src/screenComponents/scanTargetButton.cpp" />
 		<Unit filename="src/screenComponents/scanTargetButton.h" />
 		<Unit filename="src/screenComponents/selfDestructIndicator.cpp" />
