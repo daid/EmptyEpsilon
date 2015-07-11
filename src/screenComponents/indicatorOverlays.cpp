@@ -76,3 +76,10 @@ void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
         victory_overlay->hide();
     }
 }
+
+bool GuiIndicatorOverlays::onMouseDown(sf::Vector2f position)
+{
+    if (pause_overlay->isVisible() || victory_overlay->isVisible())
+        return true;
+    return false;
+}
