@@ -13,6 +13,10 @@ private:
     GuiLabel* hailed_label;
 
     GuiBox* no_response_box;
+    
+    GuiBox* chat_comms_box;
+    GuiTextEntry* chat_comms_message_entry;
+    GuiScrollText* chat_comms_text;
 public:
     GuiCommsOverlay(GuiContainer* owner);
     
