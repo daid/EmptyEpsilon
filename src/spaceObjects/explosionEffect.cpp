@@ -19,6 +19,7 @@ ExplosionEffect::ExplosionEffect()
 
 void ExplosionEffect::draw3DTransparent()
 {
+#ifndef __ANDROID__
     float f = (1.0f - (lifetime / maxLifetime));
     float scale;
     float alpha = 0.5;
@@ -81,6 +82,7 @@ void ExplosionEffect::draw3DTransparent()
         glVertex3f(v.x, v.y, v.z);
     }
     glEnd();
+#endif//!__ANDROID__
 }
 
 void ExplosionEffect::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)

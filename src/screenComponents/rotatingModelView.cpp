@@ -9,6 +9,7 @@ GuiRotatingModelView::GuiRotatingModelView(GuiContainer* owner, string id, P<Mod
 
 void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
 {
+#ifndef __ANDROID__
     if (rect.height <= 0) return;
     if (rect.width <= 0) return;
     if (!model) return;
@@ -62,4 +63,5 @@ void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
     glDisable(GL_DEPTH_TEST);
 
     window.popGLStates();
+#endif//!__ANDROID__
 }

@@ -35,6 +35,7 @@ Mesh::~Mesh()
 
 void Mesh::render()
 {
+#ifndef __ANDROID__
     if (glGenBuffers)
     {
         if (vbo == NO_BUFFER)
@@ -64,6 +65,7 @@ void Mesh::render()
         glTexCoordPointer(2, GL_FLOAT, sizeof(float) * (3 * 2 + 2), &vertices[0].uv[0]);
         glDrawArrays(GL_TRIANGLES, 0, vertexCount);
     }
+#endif//!__ANDROID__
 }
 
 sf::Vector3f Mesh::randomPoint()

@@ -35,6 +35,7 @@ Nebula::Nebula()
 
 void Nebula::draw3DTransparent()
 {
+#ifndef __ANDROID__
     glRotatef(getRotation(), 0, 0, -1);
     glTranslatef(-getPosition().x, -getPosition().y, 0);
     for(int n=0; n<cloud_count; n++)
@@ -63,6 +64,7 @@ void Nebula::draw3DTransparent()
         glVertex3f(position.x, position.y, position.z);
         glEnd();
     }
+#endif//!__ANDROID__
 }
 
 void Nebula::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)

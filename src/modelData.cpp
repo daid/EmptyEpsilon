@@ -99,6 +99,7 @@ void ModelData::load()
 
 void ModelData::render()
 {
+#ifndef __ANDROID__
     load();
     
     glPushMatrix();
@@ -114,4 +115,5 @@ void ModelData::render()
     mesh->render();
     
     glPopMatrix();
+#endif//!__ANDROID__
 }

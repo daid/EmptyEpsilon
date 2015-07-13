@@ -17,6 +17,7 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
 
 void GuiViewport3D::onDraw(sf::RenderTarget& window)
 {
+#ifndef __ANDROID__
     if (my_spaceship)
         soundManager.setListenerPosition(my_spaceship->getPosition(), my_spaceship->getRotation());
     else
@@ -285,6 +286,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
                 drawText(window, sf::FloatRect(screen_pos.x, screen_pos.y, 0, 0), string(angle), ACenter, 30, sf::Color(255, 255, 255, 128));
         }
     }
+#endif//!__ANDROID__
 }
 
 sf::Vector3f GuiViewport3D::worldToScreen(sf::RenderTarget& window, sf::Vector3f world)

@@ -1,3 +1,5 @@
+#include <math.h>
+
 #include "gui2_slider.h"
 
 GuiSlider::GuiSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
