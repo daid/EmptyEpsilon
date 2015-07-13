@@ -13,6 +13,12 @@ public:
         Circular,
         CircularMasked
     };
+    enum EFogOfWarStyle
+    {
+        NoFogOfWar,
+        NebulaFogOfWar,
+        FriendlysShortRangeFogOfWar
+    };
     
     typedef std::function<void(sf::Vector2f position)> func_t;
 private:
@@ -43,6 +49,7 @@ private:
     float range_indicator_step_size;
     float missile_target_angle;
     ERadarStyle style;
+    EFogOfWarStyle fog_style;
     func_t mouse_down_func;
     func_t mouse_drag_func;
     func_t mouse_up_func;
@@ -68,6 +75,7 @@ public:
     GuiRadarView* disableHeadingIndicators() { show_heading_indicators = false; return this; }
     GuiRadarView* gameMaster() { show_game_master_data = true; return this; }
     GuiRadarView* setStyle(ERadarStyle style) { this->style = style; return this; }
+    GuiRadarView* setFogOfWarStyle(EFogOfWarStyle style) { this->fog_style = style; return this; }
     GuiRadarView* setCallbacks(func_t mouse_down_func, func_t mouse_drag_func, func_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
     GuiRadarView* setViewPosition(sf::Vector2f view_position) { this->view_position = view_position; return this; }
     sf::Vector2f getViewPosition() { return view_position; }
@@ -85,6 +93,7 @@ private:
     void drawBackground(sf::RenderTarget& window);
     void drawSectorGrid(sf::RenderTarget& window);
     void drawNebulaBlockedAreas(sf::RenderTarget& window);
+    void drawFriendlyNotVisibleAreas(sf::RenderTarget& window);
     void drawGhostDots(sf::RenderTarget& window);
     void drawWaypoints(sf::RenderTarget& window);
     void drawRangeIndicators(sf::RenderTarget& window);

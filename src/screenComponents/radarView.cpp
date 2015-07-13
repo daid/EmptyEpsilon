@@ -2,22 +2,25 @@
 
 #include "main.h"
 #include "spaceObjects/nebula.h"
+#include "spaceObjects/scanProbe.h"
 #include "playerInfo.h"
 #include "radarView.h"
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets)
-: GuiElement(owner, id), next_ghost_dot_update(0.0), targets(targets), distance(distance), long_range(false), show_ghost_dots(false), show_waypoints(false), show_target_projection(false), show_callsigns(false), show_heading_indicators(false), show_game_master_data(false), range_indicator_step_size(0.0f), missile_target_angle(0.0f), style(Circular), mouse_down_func(nullptr), mouse_drag_func(nullptr), mouse_up_func(nullptr)
+: GuiElement(owner, id), next_ghost_dot_update(0.0), targets(targets), distance(distance), long_range(false), show_ghost_dots(false)
+, show_waypoints(false), show_target_projection(false), show_callsigns(false), show_heading_indicators(false), show_game_master_data(false)
+, range_indicator_step_size(0.0f), missile_target_angle(0.0f), style(Circular), fog_style(NoFogOfWar), mouse_down_func(nullptr), mouse_drag_func(nullptr), mouse_up_func(nullptr)
 {
 }
 
 void GuiRadarView::onDraw(sf::RenderTarget& window)
 {
-    if (my_spaceship)
+    if (fog_style != FriendlysShortRangeFogOfWar && my_spaceship)
         view_position = my_spaceship->getPosition();
     
     drawBackground(window);
     drawSectorGrid(window);
-    if (long_range)
+    if (fog_style == NebulaFogOfWar)
         drawNebulaBlockedAreas(window);
     drawRangeIndicators(window);
     if (show_target_projection)
@@ -87,11 +90,40 @@ void GuiRadarView::drawBackground(sf::RenderTarget& window)
 
             sf::RectangleShape background(sf::Vector2f(rect.width, rect.height));
             background.setPosition(rect.left, rect.top);
-            background.setFillColor(sf::Color(20, 20, 20, 255));
+            if (fog_style == FriendlysShortRangeFogOfWar)
+                background.setFillColor(sf::Color::Transparent);
+            else
+                background.setFillColor(sf::Color(20, 20, 20, 255));
             window.draw(background);
 
             glStencilFunc(GL_EQUAL, 1, 1);
             glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+
+            if (fog_style == FriendlysShortRangeFogOfWar && my_spaceship)
+            {
+                sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
+                float scale = std::min(rect.width, rect.height) / 2.0f / distance;
+
+                float r = 5000.0 * scale;
+                sf::CircleShape circle(r, 50);
+                circle.setOrigin(r, r);
+                circle.setFillColor(sf::Color(20, 20, 20, 255));
+                
+                foreach(SpaceObject, obj, space_object_list)
+                {
+                    if ((P<SpaceShip>(obj) || P<SpaceStation>(obj)) && obj->isFriendly(my_spaceship))
+                    {
+                        circle.setPosition(radar_screen_center + (obj->getPosition() - view_position) * scale);
+                        window.draw(circle);
+                    }
+                    P<ScanProbe> sp = obj;
+                    if (sp && sp->owner_id == my_spaceship->getMultiplayerId())
+                    {
+                        circle.setPosition(radar_screen_center + (obj->getPosition() - view_position) * scale);
+                        window.draw(circle);
+                    }
+                }
+            }
         }
         break;
     case CircularMasked:
@@ -280,8 +312,6 @@ void GuiRadarView::drawWaypoints(sf::RenderTarget& window)
     for(unsigned int n=0; n<my_spaceship->waypoints.size(); n++)
     {
         sf::Vector2f screen_position = radar_screen_center + (my_spaceship->waypoints[n] - view_position) * scale;
-        if (sf::length(screen_position - radar_screen_center) > distance)
-            continue;
 
         sf::Sprite object_sprite;
         textureManager.setTexture(object_sprite, "waypoint.png");
@@ -370,7 +400,7 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
     
     if (targets)
     {
-        foreach(SpaceObject, obj, targets->entries)
+        for(P<SpaceObject> obj : targets->getTargets())
         {
             if (obj->getVelocity() < 1.0f)
                 continue;
@@ -397,20 +427,63 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window)
 {
     sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
     float scale = std::min(rect.width, rect.height) / 2.0f / distance;
+
+    std::set<SpaceObject*> visible_objects;
+    switch(fog_style)
+    {
+    case NoFogOfWar:
+        foreach(SpaceObject, obj, space_object_list)
+        {
+            visible_objects.insert(*obj);
+        }
+        break;
+    case FriendlysShortRangeFogOfWar:
+        foreach(SpaceObject, obj, space_object_list)
+        {
+            if (!obj->canHideInNebula())
+                visible_objects.insert(*obj);
+            
+            if ((!P<SpaceShip>(obj) && !P<SpaceStation>(obj)) || !obj->isFriendly(my_spaceship))
+            {
+                P<ScanProbe> sp = obj;
+                if (!sp || sp->owner_id != my_spaceship->getMultiplayerId())
+                {
+                    continue;
+                }
+            }
+
+            sf::Vector2f position = obj->getPosition();
+            PVector<Collisionable> obj_list = CollisionManager::queryArea(position - sf::Vector2f(5000, 5000), position + sf::Vector2f(5000, 5000));
+            foreach(Collisionable, c_obj, obj_list)
+            {
+                P<SpaceObject> obj2 = c_obj;
+                if (obj2 && (obj->getPosition() - obj2->getPosition()) < 5000.0f + obj2->getRadius())
+                {
+                    visible_objects.insert(*obj2);
+                }
+            }
+        }
+        break;
+    case NebulaFogOfWar:
+        foreach(SpaceObject, obj, space_object_list)
+        {
+            if (obj->canHideInNebula() && my_spaceship && Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition()))
+                continue;
+            visible_objects.insert(*obj);
+        }
+        break;
+    }
     
-    foreach(SpaceObject, obj, space_object_list)
+    for(SpaceObject* obj : visible_objects)
     {
         sf::Vector2f object_position_on_screen = radar_screen_center + (obj->getPosition() - view_position) * scale;
         float r = obj->getRadius() * scale;
         sf::FloatRect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
-        if (obj != my_spaceship && rect.intersects(object_rect))
+        if (obj != *my_spaceship && rect.intersects(object_rect))
         {
-            if (!long_range || !obj->canHideInNebula() || !my_spaceship || !Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition()))
-            {
-                obj->drawOnRadar(window, object_position_on_screen, scale, long_range);
-                if (show_callsigns && obj->getCallSign() != "")
-                    drawText(window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 12);
-            }
+            obj->drawOnRadar(window, object_position_on_screen, scale, long_range);
+            if (show_callsigns && obj->getCallSign() != "")
+                drawText(window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 12);
         }
     }
     if (my_spaceship)
@@ -445,7 +518,7 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
     sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
     float scale = std::min(rect.width, rect.height) / 2.0f / distance;
     
-    foreach(SpaceObject, obj, targets->entries)
+    for(P<SpaceObject> obj : targets->getTargets())
     {
         sf::Vector2f object_position_on_screen = radar_screen_center + (obj->getPosition() - view_position) * scale;
         float r = obj->getRadius() * scale;

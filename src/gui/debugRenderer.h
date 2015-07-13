@@ -9,6 +9,9 @@ private:
     sf::Clock fps_timer;
     float fps;
     int fps_counter;
+    
+    bool show_fps;
+    bool show_datarate;
 public:
     DebugRenderer();
 

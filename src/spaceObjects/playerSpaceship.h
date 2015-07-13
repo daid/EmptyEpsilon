@@ -13,7 +13,7 @@ enum ECrewPosition
     weaponsOfficer,
     engineering,
     scienceOfficer,
-    commsOfficer,
+    relayOfficer,
     tacticalOfficer,    //helms+weapons-shields
     engineeringAdvanced,//engineering+shields
     operationsOfficer, //science+comms

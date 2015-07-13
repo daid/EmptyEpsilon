@@ -19,24 +19,13 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
 
     radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", gameGlobalInfo->long_range_radar_range, &targets);
     radar->setPosition(20, 0, ACenterLeft)->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
-    radar->setRangeIndicatorStepSize(5000.0)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
+    radar->setRangeIndicatorStepSize(5000.0)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
     radar->setCallbacks(
         [this](sf::Vector2f position) {
             if (!my_spaceship || my_spaceship->scanning_delay > 0.0)
                 return;
             
-            P<SpaceObject> target;
-            PVector<Collisionable> list = CollisionManager::queryArea(position - sf::Vector2f(1000, 1000), position + sf::Vector2f(1000, 1000));
-            foreach(Collisionable, obj, list)
-            {
-                P<SpaceObject> spaceObject = obj;
-                if (spaceObject && spaceObject->canBeTargeted() && spaceObject != my_spaceship)
-                {
-                    if (!target || sf::length(position - spaceObject->getPosition()) < sf::length(position - target->getPosition()))
-                        target = spaceObject;
-                }
-            }
-            targets.set(target);
+            targets.setToClosestTo(position, 1000);
         }, nullptr, nullptr
     );
     
@@ -135,8 +124,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     GuiOverlay::onDraw(window);
     if (!my_spaceship)
         return;
-    targets.entries.update();
-    if (targets.entries.size() > 0 && Nebula::blockedByNebula(my_spaceship->getPosition(), targets.entries[0]->getPosition()))
+    if (targets.get() && Nebula::blockedByNebula(my_spaceship->getPosition(), targets.get()->getPosition()))
         targets.clear();
 
     info_faction->setValue("-");
@@ -148,9 +136,9 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     for(int n=0; n<SYS_COUNT; n++)
         info_system[n]->setValue("-");
     
-    if (targets.entries.size() > 0)
+    if (targets.get())
     {
-        P<SpaceObject> obj = targets.entries[0];
+        P<SpaceObject> obj = targets.get();
         P<SpaceShip> ship = obj;
         P<SpaceStation> station = obj;
         sf::Vector2f position_diff = obj->getPosition() - my_spaceship->getPosition();

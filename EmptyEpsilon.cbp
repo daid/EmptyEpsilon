@@ -564,6 +564,8 @@
 		<Unit filename="src/screenComponents/beamTargetSelector.h" />
 		<Unit filename="src/screenComponents/combatManeuver.cpp" />
 		<Unit filename="src/screenComponents/combatManeuver.h" />
+		<Unit filename="src/screenComponents/commsOverlay.cpp" />
+		<Unit filename="src/screenComponents/commsOverlay.h" />
 		<Unit filename="src/screenComponents/dockingButton.cpp" />
 		<Unit filename="src/screenComponents/dockingButton.h" />
 		<Unit filename="src/screenComponents/frequencyCurve.cpp" />
@@ -580,6 +582,8 @@
 		<Unit filename="src/screenComponents/jumpIndicator.h" />
 		<Unit filename="src/screenComponents/missileTubeControls.cpp" />
 		<Unit filename="src/screenComponents/missileTubeControls.h" />
+		<Unit filename="src/screenComponents/openCommsButton.cpp" />
+		<Unit filename="src/screenComponents/openCommsButton.h" />
 		<Unit filename="src/screenComponents/powerDamageIndicator.cpp" />
 		<Unit filename="src/screenComponents/powerDamageIndicator.h" />
 		<Unit filename="src/screenComponents/radarView.cpp" />
@@ -610,6 +614,8 @@
 		<Unit filename="src/screens/crew6/engineeringScreen.h" />
 		<Unit filename="src/screens/crew6/helmsScreen.cpp" />
 		<Unit filename="src/screens/crew6/helmsScreen.h" />
+		<Unit filename="src/screens/crew6/relayScreen.cpp" />
+		<Unit filename="src/screens/crew6/relayScreen.h" />
 		<Unit filename="src/screens/crew6/scienceScreen.cpp" />
 		<Unit filename="src/screens/crew6/scienceScreen.h" />
 		<Unit filename="src/screens/crew6/weaponsScreen.cpp" />

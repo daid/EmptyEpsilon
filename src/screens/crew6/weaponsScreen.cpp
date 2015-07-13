@@ -15,21 +15,9 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableTargetProjections()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
         [this](sf::Vector2f position) {
-            P<SpaceObject> target;
-            PVector<Collisionable> list = CollisionManager::queryArea(position - sf::Vector2f(250, 250), position + sf::Vector2f(250, 250));
-            foreach(Collisionable, obj, list)
-            {
-                P<SpaceObject> spaceObject = obj;
-                if (spaceObject && spaceObject->canBeTargeted() && spaceObject != my_spaceship)
-                {
-                    if (!target || sf::length(position - spaceObject->getPosition()) < sf::length(position - target->getPosition()))
-                        target = spaceObject;
-                }
-            }
-            if (target && my_spaceship)
-            {
-                my_spaceship->commandSetTarget(target);
-            }
+            targets.setToClosestTo(position, 250);
+            if (my_spaceship && targets.get())
+                my_spaceship->commandSetTarget(targets.get());
         }, nullptr, nullptr
     );
     missile_aim = new GuiRotationDial(this, "MISSILE_AIM", -90, 360 - 90, 0, [this](float value){

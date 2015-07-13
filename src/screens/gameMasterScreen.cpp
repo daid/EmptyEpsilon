@@ -27,10 +27,9 @@ GameMasterScreen::GameMasterScreen()
     }))->setPosition(20, 20, ATopLeft)->setSize(250, 50);
     
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR", [this](int index, string value) {
-        for(P<SpaceObject> obj : targets.entries)
+        for(P<SpaceObject> obj : targets.getTargets())
         {
-            if (obj)
-                obj->setFactionId(index);
+            obj->setFactionId(index);
         }
     });
     for(P<FactionInfo> info : factionInfo)
@@ -51,7 +50,7 @@ GameMasterScreen::GameMasterScreen()
     cancel_create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
 
     ship_retrofit_button = new GuiButton(this, "RETROFIT_SHIP", "Retrofit", [this]() {
-        for(P<SpaceObject> obj : targets.entries)
+        for(P<SpaceObject> obj : targets.getTargets())
         {
             if (P<SpaceShip>(obj))
             {
@@ -62,7 +61,7 @@ GameMasterScreen::GameMasterScreen()
     });
     ship_retrofit_button->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->hide();
     player_comms_hail = new GuiButton(this, "HAIL_PLAYER", "Hail ship", [this]() {
-        for(P<SpaceObject> obj : targets.entries)
+        for(P<SpaceObject> obj : targets.getTargets())
             if (P<PlayerSpaceship>(obj))
                 hail_player_dialog->player = obj;
         if (hail_player_dialog->player)
@@ -78,22 +77,22 @@ GameMasterScreen::GameMasterScreen()
 
     (new GuiLabel(order_layout, "ORDERS_LABEL", "Orders:", 20))->addBox()->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_IDLE", "Idle", [this]() {
-        for(P<SpaceObject> obj : targets.entries)
+        for(P<SpaceObject> obj : targets.getTargets())
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderIdle();
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_ROAMING", "Roaming", [this]() {
-        for(P<SpaceObject> obj : targets.entries)
+        for(P<SpaceObject> obj : targets.getTargets())
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderRoaming();
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_STAND_GROUND", "Stand Ground", [this]() {
-        for(P<SpaceObject> obj : targets.entries)
+        for(P<SpaceObject> obj : targets.getTargets())
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderStandGround();
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", "Defend location", [this]() {
-        for(P<SpaceObject> obj : targets.entries)
+        for(P<SpaceObject> obj : targets.getTargets())
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderDefendLocation(obj->getPosition());
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
@@ -133,7 +132,7 @@ void GameMasterScreen::update(float delta)
     bool has_ship = false;
     bool has_cpu_ship = false;
     bool has_player_ship = false;
-    for(P<SpaceObject> obj : targets.entries)
+    for(P<SpaceObject> obj : targets.getTargets())
     {
         if (P<SpaceShip>(obj))
         {
@@ -149,10 +148,8 @@ void GameMasterScreen::update(float delta)
     player_comms_hail->setVisible(has_player_ship);
     
     std::unordered_map<string, string> selection_info;
-    for(P<SpaceObject> obj : targets.entries)
+    for(P<SpaceObject> obj : targets.getTargets())
     {
-        if (!obj)
-            continue;
         std::unordered_map<string, string> info = obj->getGMInfo();
         for(std::unordered_map<string, string>::iterator i = info.begin(); i != info.end(); i++)
         {
@@ -204,13 +201,10 @@ void GameMasterScreen::onMouseDown(sf::Vector2f position)
             
             float min_drag_distance = main_radar->getDistance() / 450 * 10;
             
-            for(P<SpaceObject> obj : targets.entries)
+            for(P<SpaceObject> obj : targets.getTargets())
             {
-                if (obj)
-                {
-                    if ((obj->getPosition() - position) < std::max(min_drag_distance, obj->getRadius()))
-                        click_and_drag_state = CD_DragObjects;
-                }
+                if ((obj->getPosition() - position) < std::max(min_drag_distance, obj->getRadius()))
+                    click_and_drag_state = CD_DragObjects;
             }
         }
     }
@@ -229,10 +223,9 @@ void GameMasterScreen::onMouseDrag(sf::Vector2f position)
         position -= (position - drag_previous_position);
         break;
     case CD_DragObjects:
-        for(P<SpaceObject> obj : targets.entries)
+        for(P<SpaceObject> obj : targets.getTargets())
         {
-            if (obj)
-                obj->setPosition(obj->getPosition() + (position - drag_previous_position));
+            obj->setPosition(obj->getPosition() + (position - drag_previous_position));
         }
         break;
     case CD_BoxSelect:
@@ -268,7 +261,7 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
 
             sf::Vector2f upper_bound(-std::numeric_limits<float>::max(), -std::numeric_limits<float>::max());
             sf::Vector2f lower_bound(std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
-            for(P<SpaceObject> obj : targets.entries)
+            for(P<SpaceObject> obj : targets.getTargets())
             {
                 P<CpuShip> cpu_ship = obj;
                 if (!cpu_ship)
@@ -281,7 +274,7 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
             }
             sf::Vector2f objects_center = (upper_bound + lower_bound) / 2.0f;
 
-            for(P<SpaceObject> obj : targets.entries)
+            for(P<SpaceObject> obj : targets.getTargets())
             {
                 P<CpuShip> cpu_ship = obj;
                 if (!cpu_ship)
@@ -332,11 +325,8 @@ void GameMasterScreen::onKey(sf::Keyboard::Key key, int unicode)
     switch(key)
     {
     case sf::Keyboard::Delete:
-        for(P<SpaceObject> obj : targets.entries)
+        for(P<SpaceObject> obj : targets.getTargets())
         {
-            if (!obj)
-                continue;
-            
             obj->destroy();
         }
         break;

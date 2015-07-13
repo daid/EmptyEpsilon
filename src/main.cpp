@@ -140,9 +140,9 @@ int main(int argc, char** argv)
     }else{
         engine->registerObject("mouseRenderer", new MouseRenderer());
     }
-#ifdef DEBUG
+
     new DebugRenderer();
-#endif
+
     if (startup_parameters["touchcalibfile"] != "")
     {
         FILE* f = fopen(startup_parameters["touchcalibfile"].c_str(), "r");

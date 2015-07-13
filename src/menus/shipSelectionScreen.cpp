@@ -194,7 +194,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
     switch(crew_type_selector->getSelectionIndex())
     {
     case 0:
-        for(int n=helmsOfficer; n<=commsOfficer; n++)
+        for(int n=helmsOfficer; n<=relayOfficer; n++)
             crew_position_button[n]->show();
         break;
     case 1:

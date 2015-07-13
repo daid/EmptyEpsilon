@@ -5,6 +5,7 @@
 #include "screens/crew6/weaponsScreen.h"
 #include "screens/crew6/engineeringScreen.h"
 #include "screens/crew6/scienceScreen.h"
+#include "screens/crew6/relayScreen.h"
 
 #include "gui/crewHelmsUI.h"
 #include "gui/crewWeaponsUI.h"
@@ -113,7 +114,7 @@ void PlayerInfo::spawnUI()
     {
         new ScreenMainScreen();
     }else{
-        if (crew_position[helmsOfficer] || crew_position[weaponsOfficer] || crew_position[engineering] || crew_position[scienceOfficer])
+        if (crew_position[helmsOfficer] || crew_position[weaponsOfficer] || crew_position[engineering] || crew_position[scienceOfficer] || crew_position[relayOfficer])
         {
             CrewStationScreen* screen = new CrewStationScreen();
             if (crew_position[helmsOfficer])
@@ -124,6 +125,8 @@ void PlayerInfo::spawnUI()
                 screen->addStationTab(new EngineeringScreen(screen), getCrewPositionName(engineering));
             if (crew_position[scienceOfficer])
                 screen->addStationTab(new ScienceScreen(screen), getCrewPositionName(scienceOfficer));
+            if (crew_position[relayOfficer])
+                screen->addStationTab(new RelayScreen(screen), getCrewPositionName(relayOfficer));
             screen->finishCreation();
         }else{
             if (!crew_position[crew_active_position])
@@ -151,7 +154,7 @@ void PlayerInfo::spawnUI()
             case scienceOfficer:
                 new CrewScienceUI();
                 break;
-            case commsOfficer:
+            case relayOfficer:
                 new CrewCommsUI();
                 break;
             
@@ -185,7 +188,7 @@ string getCrewPositionName(ECrewPosition position)
     case weaponsOfficer: return "Weapons";
     case engineering: return "Engineering";
     case scienceOfficer: return "Science";
-    case commsOfficer: return "Relay";
+    case relayOfficer: return "Relay";
     case tacticalOfficer: return "Tactical";
     case engineeringAdvanced: return "Engineering+";
     case operationsOfficer: return "Operations";

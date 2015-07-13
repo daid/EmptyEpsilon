@@ -5,8 +5,8 @@ GuiScanTargetButton::GuiScanTargetButton(GuiContainer* owner, string id, Targets
 : GuiElement(owner, id), targets(targets)
 {
     button = new GuiButton(this, id + "_BUTTON", "Scan", [this]() {
-        if (my_spaceship && this->targets && this->targets->entries.size() > 0)
-            my_spaceship->commandScan(this->targets->entries[0]);
+        if (my_spaceship && this->targets && this->targets->get())
+            my_spaceship->commandScan(this->targets->get());
     });
     button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     progress = new GuiProgressbar(this, id + "_PROGRESS", 0, PlayerSpaceship::max_scanning_delay, 0.0);
@@ -27,8 +27,8 @@ void GuiScanTargetButton::onDraw(sf::RenderTarget& window)
     else
     {
         P<SpaceShip> ship;
-        if (targets && targets->entries.size() > 0)
-            ship = targets->entries[0];
+        if (targets)
+            ship = targets->get();
         
         if (ship && ship->scanned_by_player < SS_FullScan)
             button->show();
