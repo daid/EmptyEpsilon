@@ -32,10 +32,10 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
             my_spaceship->commandCloseTextComm();
     }))->setSize(150, 50)->setPosition(-20, -10, ABottomRight);
     
-    chat_comms_box = new GuiBox(owner, "COMMS_GM_BOX");
+    chat_comms_box = new GuiBox(owner, "COMMS_CHAT_BOX");
     chat_comms_box->fill()->hide()->setSize(800, 600)->setPosition(0, -100, ABottomCenter);
 
-    chat_comms_message_entry = new GuiTextEntry(chat_comms_box, "MESSAGE_ENTRY", "");
+    chat_comms_message_entry = new GuiTextEntry(chat_comms_box, "COMMS_CHAT_MESSAGE_ENTRY", "");
     chat_comms_message_entry->setPosition(20, -20, ABottomLeft)->setSize(640, 50);
     chat_comms_message_entry->enterCallback([this](string text){
         if (my_spaceship)
@@ -43,7 +43,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         chat_comms_message_entry->setText("");
     });
     
-    chat_comms_text = new GuiScrollText(chat_comms_box, "CHAT_TEXT", "");
+    chat_comms_text = new GuiScrollText(chat_comms_box, "COMMS_CHAT_TEXT", "");
     chat_comms_text->enableAutoScrollDown()->setPosition(20, 30, ATopLeft)->setSize(760, 500);
     
     (new GuiButton(chat_comms_box, "SEND_BUTTON", "Send", [this]() {
@@ -56,6 +56,25 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         if (my_spaceship)
             my_spaceship->commandCloseTextComm();
     }))->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
+
+
+    script_comms_box = new GuiBox(owner, "COMMS_SCRIPT_BOX");
+    script_comms_box->fill()->hide()->setSize(800, 600)->setPosition(0, -100, ABottomCenter);
+
+    script_comms_text = new GuiScrollText(script_comms_box, "COMMS_SCRIPT_TEXT", "");
+    script_comms_text->enableAutoScrollDown()->setPosition(20, 30, ATopLeft)->setSize(760, 500);
+    
+    script_comms_options = new GuiListbox(script_comms_box, "SCRIPT_COMMS_LIST", [this](int index, string value) {
+        script_comms_options->setOptions({});
+        my_spaceship->comms_reply_message.clear();
+        my_spaceship->commandSendComm(index);
+    });
+    script_comms_options->setPosition(20, -20, ABottomLeft)->setSize(700, 400);
+    
+    (new GuiButton(script_comms_box, "CLOSE_BUTTON", "Close", [this]() {
+        if (my_spaceship)
+            my_spaceship->commandCloseTextComm();
+    }))->setTextSize(20)->setPosition(-20, -20, ABottomRight)->setSize(150, 50);
 }
 
 void GuiCommsOverlay::onDraw(sf::RenderTarget& window)
@@ -72,5 +91,15 @@ void GuiCommsOverlay::onDraw(sf::RenderTarget& window)
         
         chat_comms_box->setVisible(my_spaceship->comms_state == CS_ChannelOpenPlayer || my_spaceship->comms_state == CS_ChannelOpenGM);
         chat_comms_text->setText(my_spaceship->comms_incomming_message);
+        
+        script_comms_box->setVisible(my_spaceship->comms_state == CS_ChannelOpen);
+        script_comms_text->setText(my_spaceship->comms_incomming_message);
+        
+        if (script_comms_options->entryCount() != int(my_spaceship->comms_reply_message.size()))
+        {
+            script_comms_options->setOptions({});
+            for(string message : my_spaceship->comms_reply_message)
+                script_comms_options->addEntry(message, message);
+        }
     }
 }

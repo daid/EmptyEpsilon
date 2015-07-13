@@ -17,6 +17,10 @@ private:
     GuiBox* chat_comms_box;
     GuiTextEntry* chat_comms_message_entry;
     GuiScrollText* chat_comms_text;
+
+    GuiBox* script_comms_box;
+    GuiScrollText* script_comms_text;
+    GuiListbox* script_comms_options;
 public:
     GuiCommsOverlay(GuiContainer* owner);
     

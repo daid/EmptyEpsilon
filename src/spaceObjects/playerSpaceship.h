@@ -46,7 +46,6 @@ public:
     constexpr static float damage_per_second_on_overheat = 0.05;
     constexpr static float shield_calibration_time = 20.0f;
     constexpr static float comms_channel_open_time = 2.0;
-    constexpr static int max_comms_reply_count = 16;
     constexpr static int max_self_destruct_codes = 3;
     constexpr static float heat_per_jump = 0.25;
     constexpr static float heat_per_beam_fire = 0.02;
