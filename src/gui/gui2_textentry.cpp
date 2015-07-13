@@ -25,6 +25,11 @@ bool GuiTextEntry::onKey(sf::Keyboard::Key key, int unicode)
         if (func)
             func(text);
     }
+    if (key == sf::Keyboard::Return)
+    {
+        if (enter_func)
+            enter_func(text);
+    }
     if (unicode > 31 && unicode < 128)
     {
         text += string(char(unicode));
@@ -54,5 +59,11 @@ GuiTextEntry* GuiTextEntry::setTextSize(float size)
 GuiTextEntry* GuiTextEntry::callback(func_t func)
 {
     this->func = func;
+    return this;
+}
+
+GuiTextEntry* GuiTextEntry::enterCallback(func_t func)
+{
+    this->enter_func = func;
     return this;
 }

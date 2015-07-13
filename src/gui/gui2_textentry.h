@@ -12,6 +12,7 @@ protected:
     string text;
     float text_size;
     func_t func;
+    func_t enter_func;
 public:
     GuiTextEntry(GuiContainer* owner, string id, string text);
 
@@ -23,6 +24,7 @@ public:
     GuiTextEntry* setText(string text);
     GuiTextEntry* setTextSize(float size);
     GuiTextEntry* callback(func_t func);
+    GuiTextEntry* enterCallback(func_t func);
 };
 
 #endif//GUI2_TEXTENTRY_H

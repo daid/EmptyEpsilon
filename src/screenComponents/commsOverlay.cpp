@@ -37,6 +37,11 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
 
     chat_comms_message_entry = new GuiTextEntry(chat_comms_box, "MESSAGE_ENTRY", "");
     chat_comms_message_entry->setPosition(20, -20, ABottomLeft)->setSize(640, 50);
+    chat_comms_message_entry->enterCallback([this](string text){
+        if (my_spaceship)
+            my_spaceship->commandSendCommPlayer(chat_comms_message_entry->getText());
+        chat_comms_message_entry->setText("");
+    });
     
     chat_comms_text = new GuiScrollText(chat_comms_box, "CHAT_TEXT", "");
     chat_comms_text->enableAutoScrollDown()->setPosition(20, 30, ATopLeft)->setSize(760, 500);

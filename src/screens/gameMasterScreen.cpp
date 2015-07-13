@@ -541,6 +541,13 @@ GuiPlayerChat::GuiPlayerChat(GameMasterScreen* owner)
 
     message_entry = new GuiTextEntry(this, "MESSAGE_ENTRY", "");
     message_entry->setPosition(20, -20, ABottomLeft)->setSize(640, 50);
+    message_entry->enterCallback([this](string text){
+        if (player)
+        {
+            player->comms_incomming_message = player->comms_incomming_message + "\n>" + message_entry->getText();
+        }
+        message_entry->setText("");
+    });
     
     chat_text = new GuiScrollText(this, "CHAT_TEXT", "");
     chat_text->enableAutoScrollDown()->setPosition(20, 30, ATopLeft)->setSize(760, 500);
