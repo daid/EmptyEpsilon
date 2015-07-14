@@ -96,6 +96,16 @@ OptionsMenu::OptionsMenu()
         destroy();
         returnToMainMenu();
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
+    
+    GuiListbox* music_list = new GuiListbox(this, "MUSIC_PLAY", [this](int index, string value) {
+        soundManager.playMusic(value);
+    });
+    music_list->setPosition(-50, 50, ATopRight)->setSize(600, 800);
+
+    std::vector<string> music_filenames = findResources("music/*.ogg");
+    std::sort(music_filenames.begin(), music_filenames.end());
+    for(string filename : music_filenames)
+        music_list->addEntry(filename.substr(filename.rfind("/") + 1, filename.rfind(".")), filename);
 }
 
 ServerBrowserMenu::ServerBrowserMenu()
