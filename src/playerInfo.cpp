@@ -12,6 +12,8 @@
 #include "screens/crew4/engineeringAdvancedScreen.h"
 #include "screens/crew4/operationsScreen.h"
 
+#include "screenComponents/selfDestructEntry.h"
+
 static const int16_t CMD_UPDATE_CREW_POSITION = 0x0001;
 static const int16_t CMD_UPDATE_SHIP_ID = 0x0002;
 static const int16_t CMD_UPDATE_MAIN_SCREEN_CONTROL = 0x0003;
@@ -130,6 +132,10 @@ void PlayerInfo::spawnUI()
         if (crew_position[operationsOfficer])
             screen->addStationTab(new OperationScreen(screen), getCrewPositionName(operationsOfficer));
         
+        GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(screen, "SELF_DESTRUCT_ENTRY");
+        for(int n=0; n<max_crew_positions; n++)
+            if (crew_position[n])
+                sde->enablePosition(ECrewPosition(n));
         screen->finishCreation();
     }
 }

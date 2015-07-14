@@ -21,6 +21,11 @@ GuiLabel* GuiLabel::setText(string text)
     return this;
 }
 
+string GuiLabel::getText()
+{
+    return text;
+}
+
 GuiLabel* GuiLabel::setAlignment(EGuiAlign alignment)
 {
     text_alignment = alignment;

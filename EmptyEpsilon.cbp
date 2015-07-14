@@ -569,6 +569,8 @@
 		<Unit filename="src/screenComponents/scanTargetButton.h" />
 		<Unit filename="src/screenComponents/selfDestructButton.cpp" />
 		<Unit filename="src/screenComponents/selfDestructButton.h" />
+		<Unit filename="src/screenComponents/selfDestructEntry.cpp" />
+		<Unit filename="src/screenComponents/selfDestructEntry.h" />
 		<Unit filename="src/screenComponents/selfDestructIndicator.cpp" />
 		<Unit filename="src/screenComponents/selfDestructIndicator.h" />
 		<Unit filename="src/screenComponents/shieldFreqencySelect.cpp" />
