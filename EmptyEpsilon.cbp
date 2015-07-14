@@ -457,8 +457,6 @@
 		<Unit filename="src/gameGlobalInfo.h" />
 		<Unit filename="src/gui/debugRenderer.cpp" />
 		<Unit filename="src/gui/debugRenderer.h" />
-		<Unit filename="src/gui/gui.cpp" />
-		<Unit filename="src/gui/gui.h" />
 		<Unit filename="src/gui/gui2.cpp" />
 		<Unit filename="src/gui/gui2.h" />
 		<Unit filename="src/gui/gui2_arrow.cpp" />
