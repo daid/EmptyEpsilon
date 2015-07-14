@@ -1,11 +1,14 @@
 #include "playerInfo.h"
 #include "screens/mainScreen.h"
 #include "screens/crewStationScreen.h"
+
 #include "screens/crew6/helmsScreen.h"
 #include "screens/crew6/weaponsScreen.h"
 #include "screens/crew6/engineeringScreen.h"
 #include "screens/crew6/scienceScreen.h"
 #include "screens/crew6/relayScreen.h"
+
+#include "screens/crew4/tacticalScreen.h"
 
 #include "gui/crewTacticalUI.h"
 #include "gui/crewEngineeringUI_adv.h"
@@ -108,53 +111,26 @@ void PlayerInfo::spawnUI()
     {
         new ScreenMainScreen();
     }else{
-        if (crew_position[helmsOfficer] || crew_position[weaponsOfficer] || crew_position[engineering] || crew_position[scienceOfficer] || crew_position[relayOfficer])
-        {
-            CrewStationScreen* screen = new CrewStationScreen();
-            if (crew_position[helmsOfficer])
-                screen->addStationTab(new HelmsScreen(screen), getCrewPositionName(helmsOfficer));
-            if (crew_position[weaponsOfficer])
-                screen->addStationTab(new WeaponsScreen(screen), getCrewPositionName(weaponsOfficer));
-            if (crew_position[engineering])
-                screen->addStationTab(new EngineeringScreen(screen), getCrewPositionName(engineering));
-            if (crew_position[scienceOfficer])
-                screen->addStationTab(new ScienceScreen(screen), getCrewPositionName(scienceOfficer));
-            if (crew_position[relayOfficer])
-                screen->addStationTab(new RelayScreen(screen), getCrewPositionName(relayOfficer));
-            screen->finishCreation();
-        }else{
-            if (!crew_position[crew_active_position])
-            {
-                for(int n=0; n<max_crew_positions; n++)
-                {
-                    if (crew_position[n])
-                    {
-                        crew_active_position = ECrewPosition(n);
-                        break;
-                    }
-                }
-            }
-            switch(crew_active_position)
-            {
-            case tacticalOfficer:
-                new CrewTacticalUI();
-                break;
-            case engineeringAdvanced:
-                new CrewEngineeringUIAdvanced();
-                break;
-            case operationsOfficer:
-                new CrewOperationsUI();
-                break;
 
-            case singlePilot:
-                new CrewSinglePilotUI();
-                break;
-            
-            default:
-                new CrewUI();
-                break;
-            }
-        }
+        CrewStationScreen* screen = new CrewStationScreen();
+        
+        //Crew 6/5
+        if (crew_position[helmsOfficer])
+            screen->addStationTab(new HelmsScreen(screen), getCrewPositionName(helmsOfficer));
+        if (crew_position[weaponsOfficer])
+            screen->addStationTab(new WeaponsScreen(screen), getCrewPositionName(weaponsOfficer));
+        if (crew_position[engineering])
+            screen->addStationTab(new EngineeringScreen(screen), getCrewPositionName(engineering));
+        if (crew_position[scienceOfficer])
+            screen->addStationTab(new ScienceScreen(screen), getCrewPositionName(scienceOfficer));
+        if (crew_position[relayOfficer])
+            screen->addStationTab(new RelayScreen(screen), getCrewPositionName(relayOfficer));
+        
+        //Crew 4/3
+        if (crew_position[tacticalOfficer])
+            screen->addStationTab(new TacticalScreen(screen), getCrewPositionName(tacticalOfficer));
+        
+        screen->finishCreation();
     }
 }
 
