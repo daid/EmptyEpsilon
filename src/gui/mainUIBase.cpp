@@ -652,15 +652,15 @@ void MainUIBase::drawUILine(sf::Vector2f start, sf::Vector2f end, float x_split)
     getRenderTarget()->draw(ui_line);
 }
 
-static void _glPerspective( GLdouble fovY, GLdouble aspect, GLdouble zNear, GLdouble zFar )
+static void _glPerspective(double fovY, double aspect, double zNear, double zFar )
 {
-    const GLdouble pi = 3.1415926535897932384626433832795;
-    GLdouble fW, fH;
+    const double pi = 3.1415926535897932384626433832795;
+    double fW, fH;
 
-    fH = tan( fovY / 360 * pi ) * zNear;
+    fH = tan(fovY / 360 * pi) * zNear;
     fW = fH * aspect;
 
-    glFrustum( -fW, fW, -fH, fH, zNear, zFar );
+    glFrustum(-fW, fW, -fH, fH, zNear, zFar);
 }
 
 void MainUIBase::draw3Dworld(sf::FloatRect rect, bool show_callsigns)
