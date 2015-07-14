@@ -31,6 +31,8 @@ private:
     GuiKeyValueDisplay* info_type;
     GuiKeyValueDisplay* info_shields;
     
+    GuiAutoLayout* option_buttons;
+    
     sf::Vector2f mouse_down_position;
 public:
     RelayScreen(GuiContainer* owner);

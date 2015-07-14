@@ -21,7 +21,7 @@ public:
     void setTarget(sf::Vector2f target) { target_position = target; }
     void setOwner(P<SpaceObject> owner);
     
-    virtual string getCallSign() { return "Probe"; }
+    virtual string getCallSign() { return ""; }
 };
 
 #endif//SCAN_PROBE_H

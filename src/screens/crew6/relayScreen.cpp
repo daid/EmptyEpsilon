@@ -28,10 +28,14 @@ RelayScreen::RelayScreen(GuiContainer* owner)
             case WaypointPlacement:
                 if (my_spaceship)
                     my_spaceship->commandAddWaypoint(position);
+                mode = TargetSelection;
+                option_buttons->show();
                 break;
             case LaunchProbe:
                 if (my_spaceship)
                     my_spaceship->commandLaunchProbe(position);
+                mode = TargetSelection;
+                option_buttons->show();
                 break;
             }
         }
@@ -64,7 +68,18 @@ RelayScreen::RelayScreen(GuiContainer* owner)
         radar->setDistance(50000.0f / zoom_amount);
     }))->setOptions({"Zoom: 1x", "Zoom: 2x", "Zoom: 4x", "Zoom: 8x"})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(250, 50);
     
-    (new GuiOpenCommsButton(this, "OPEN_COMMS_BUTTON", &targets))->setPosition(20, 20, ATopLeft)->setSize(250, 50);
+    option_buttons = new GuiAutoLayout(this, "BUTTONS", GuiAutoLayout::LayoutVerticalTopToBottom);
+    option_buttons->setPosition(20, 20, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", &targets))->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", "Place Waypoint", [this]() {
+        mode = WaypointPlacement;
+        option_buttons->hide();
+    }))->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", "Launch Probe", [this]() {
+        mode = LaunchProbe;
+        option_buttons->hide();
+    }))->setSize(GuiElement::GuiSizeMax, 50);
+
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
