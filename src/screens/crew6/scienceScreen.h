@@ -10,7 +10,7 @@ class GuiFrequencyCurve;
 
 class ScienceScreen : public GuiOverlay
 {
-private:
+protected:
     GuiElement* radar_view;
     GuiElement* database_view;
 
