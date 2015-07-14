@@ -57,26 +57,15 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     lock_aim->setValue(true);
 
     GuiAutoLayout* engine_layout = new GuiAutoLayout(this, "ENGINE_LAYOUT", GuiAutoLayout::LayoutHorizontalRightToLeft);
-    engine_layout->setPosition(-20, -120, ABottomRight)->setSize(GuiElement::GuiSizeMax, 300);
+    engine_layout->setPosition(-20, -70, ABottomRight)->setSize(GuiElement::GuiSizeMax, 300);
     (new GuiImpulseControls(engine_layout, "IMPULSE"))->setSize(100, GuiElement::GuiSizeMax);
     warp_controls = (new GuiWarpControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
     jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
 
     (new GuiDockingButton(this, "DOCKING"))->setPosition(-20, -70, ABottomRight)->setSize(280, 50);
-    (new GuiShieldsEnableButton(this, "SHIELDS_ENABLE"))->setPosition(-20, -20, ABottomRight)->setSize(280, 50);
 
     //TODO: Fit this somewhere on the already full and chaotic tactical UI...
     //(new GuiCombatManeuver(this, "COMBAT_MANEUVER"))->setPosition(-50, -50, ABottomRight)->setSize(280, 265);
-    /*
-    if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
-    {
-        GuiBox* beam_info_box = new GuiBox(this, "BEAM_INFO_BOX");
-        beam_info_box->setPosition(-20, -70, ABottomRight)->setSize(270, 140);
-        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", "Beam info", 30))->setSize(GuiElement::GuiSizeMax, 50);
-        (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(0, -50, ABottomRight)->setSize(GuiElement::GuiSizeMax, 50);
-        (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, 0, ABottomRight)->setSize(GuiElement::GuiSizeMax, 50);
-    }
-    */
 }
 
 void TacticalScreen::onDraw(sf::RenderTarget& window)
