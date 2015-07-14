@@ -18,6 +18,7 @@ public:
 protected:
     virtual void drawElements(sf::FloatRect window_rect, sf::RenderTarget& window);
     GuiElement* getClickElement(sf::Vector2f mouse_position);
+    bool forwardKeypressToElements(sf::Keyboard::Key key, int unicode);
     
     friend class GuiElement;
 };

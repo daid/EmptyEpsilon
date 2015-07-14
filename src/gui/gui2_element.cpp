@@ -31,6 +31,11 @@ bool GuiElement::onKey(sf::Keyboard::Key key, int unicode)
     return false;
 }
 
+bool GuiElement::onHotkey(sf::Keyboard::Key key, int unicode)
+{
+    return false;
+}
+
 GuiElement* GuiElement::setSize(sf::Vector2f size)
 {
     this->size = size;

@@ -53,6 +53,8 @@ void GuiCanvas::handleKeyPress(sf::Keyboard::Key key, int unicode)
     if (focus_element)
         if (focus_element->onKey(key, unicode))
             return;
+    if (forwardKeypressToElements(key, unicode))
+        return;
     onKey(key, unicode);
 }
 

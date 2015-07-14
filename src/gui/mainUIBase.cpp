@@ -652,6 +652,17 @@ void MainUIBase::drawUILine(sf::Vector2f start, sf::Vector2f end, float x_split)
     getRenderTarget()->draw(ui_line);
 }
 
+static void _glPerspective( GLdouble fovY, GLdouble aspect, GLdouble zNear, GLdouble zFar )
+{
+    const GLdouble pi = 3.1415926535897932384626433832795;
+    GLdouble fW, fH;
+
+    fH = tan( fovY / 360 * pi ) * zNear;
+    fW = fH * aspect;
+
+    glFrustum( -fW, fW, -fH, fH, zNear, zFar );
+}
+
 void MainUIBase::draw3Dworld(sf::FloatRect rect, bool show_callsigns)
 {
 #ifndef __ANDROID__
@@ -677,7 +688,7 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect, bool show_callsigns)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(camera_fov, rect.width/rect.height, 1.f, 25000.f);
+    _glPerspective(camera_fov, rect.width/rect.height, 1.f, 25000.f);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -909,7 +920,7 @@ void MainUIBase::drawSpinningModel(sf::FloatRect rect, P<ModelData> model_data)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(camera_fov, rect.width/rect.height, 1.f, 25000.f);
+    _glPerspective(camera_fov, rect.width/rect.height, 1.f, 25000.f);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
