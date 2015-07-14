@@ -62,7 +62,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     warp_controls = (new GuiWarpControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
     jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
 
-    (new GuiDockingButton(this, "DOCKING"))->setPosition(-20, -70, ABottomRight)->setSize(280, 50);
+    (new GuiDockingButton(this, "DOCKING"))->setPosition(-20, -20, ABottomRight)->setSize(280, 50);
 
     //TODO: Fit this somewhere on the already full and chaotic tactical UI...
     //(new GuiCombatManeuver(this, "COMBAT_MANEUVER"))->setPosition(-50, -50, ABottomRight)->setSize(280, 265);
