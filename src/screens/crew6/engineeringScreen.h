@@ -2,6 +2,7 @@
 #define ENGINEERING_SCREEN_H
 
 #include "gui/gui2.h"
+#include "shipTemplate.h"
 
 class EngineeringScreen : public GuiOverlay
 {
