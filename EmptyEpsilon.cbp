@@ -585,6 +585,8 @@
 		<Unit filename="src/screenComponents/viewport3d.h" />
 		<Unit filename="src/screenComponents/warpControls.cpp" />
 		<Unit filename="src/screenComponents/warpControls.h" />
+		<Unit filename="src/screens/crew4/operationsScreen.cpp" />
+		<Unit filename="src/screens/crew4/operationsScreen.h" />
 		<Unit filename="src/screens/crew4/tacticalScreen.cpp" />
 		<Unit filename="src/screens/crew4/tacticalScreen.h" />
 		<Unit filename="src/screens/crew6/engineeringScreen.cpp" />

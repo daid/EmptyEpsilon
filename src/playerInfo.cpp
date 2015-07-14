@@ -9,12 +9,7 @@
 #include "screens/crew6/relayScreen.h"
 
 #include "screens/crew4/tacticalScreen.h"
-
-#include "gui/crewTacticalUI.h"
-#include "gui/crewEngineeringUI_adv.h"
-#include "gui/crewOperationsUI.h"
-
-#include "gui/crewSinglePilotUI.h"
+#include "screens/crew4/operationsScreen.h"
 
 static const int16_t CMD_UPDATE_CREW_POSITION = 0x0001;
 static const int16_t CMD_UPDATE_SHIP_ID = 0x0002;
@@ -129,6 +124,8 @@ void PlayerInfo::spawnUI()
         //Crew 4/3
         if (crew_position[tacticalOfficer])
             screen->addStationTab(new TacticalScreen(screen), getCrewPositionName(tacticalOfficer));
+        if (crew_position[operationsOfficer])
+            screen->addStationTab(new OperationScreen(screen), getCrewPositionName(operationsOfficer));
         
         screen->finishCreation();
     }
