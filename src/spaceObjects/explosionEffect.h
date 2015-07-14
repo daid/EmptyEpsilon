@@ -15,8 +15,10 @@ class ExplosionEffect : public SpaceObject, public Updatable
 public:
     ExplosionEffect();
 
-    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
+#if FEATURE_3D_RENDERING
     virtual void draw3DTransparent();
+#endif
+    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
     virtual void update(float delta);
     
     void setSize(float size) { this->size = size; }

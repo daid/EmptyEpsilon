@@ -197,7 +197,9 @@ void CrewSinglePilotUI::onCrewUI()
     #endif
             camera_position = camera_position * 0.9f + targetCameraPosition * 0.1f;
             camera_yaw = camera_yaw * 0.9f + target_camera_yaw * 0.1f;
+#if FEATURE_3D_RENDERING
             draw3Dworld(sf::FloatRect(getWindowSize().x / 2.0f, 0, getWindowSize().x / 2.0f, 900), false);
+#endif//FEATURE_3D_RENDERING
             break;
         }
     }

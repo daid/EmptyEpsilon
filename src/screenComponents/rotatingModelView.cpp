@@ -1,7 +1,9 @@
 #include <SFML/OpenGL.hpp>
 
+#include "featureDefs.h"
 #include "rotatingModelView.h"
 
+#if FEATURE_3D_RENDERING
 static void _glPerspective(double fovY, double aspect, double zNear, double zFar )
 {
     const double pi = 3.1415926535897932384626433832795;
@@ -12,6 +14,7 @@ static void _glPerspective(double fovY, double aspect, double zNear, double zFar
 
     glFrustum(-fW, fW, -fH, fH, zNear, zFar);
 }
+#endif//FEATURE_3D_RENDERING
 
 GuiRotatingModelView::GuiRotatingModelView(GuiContainer* owner, string id, P<ModelData> model)
 : GuiElement(owner, id), model(model)
@@ -20,7 +23,7 @@ GuiRotatingModelView::GuiRotatingModelView(GuiContainer* owner, string id, P<Mod
 
 void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
 {
-#ifndef __ANDROID__
+#if FEATURE_3D_RENDERING
     if (rect.height <= 0) return;
     if (rect.width <= 0) return;
     if (!model) return;
@@ -74,5 +77,5 @@ void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
     glDisable(GL_DEPTH_TEST);
 
     window.popGLStates();
-#endif//!__ANDROID__
+#endif//FEATURE_3D_RENDERING
 }

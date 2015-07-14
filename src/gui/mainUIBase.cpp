@@ -652,6 +652,7 @@ void MainUIBase::drawUILine(sf::Vector2f start, sf::Vector2f end, float x_split)
     getRenderTarget()->draw(ui_line);
 }
 
+#if FEATURE_3D_RENDERING
 static void _glPerspective(double fovY, double aspect, double zNear, double zFar )
 {
     const double pi = 3.1415926535897932384626433832795;
@@ -665,7 +666,6 @@ static void _glPerspective(double fovY, double aspect, double zNear, double zFar
 
 void MainUIBase::draw3Dworld(sf::FloatRect rect, bool show_callsigns)
 {
-#ifndef __ANDROID__
     if (my_spaceship)
         soundManager.setListenerPosition(my_spaceship->getPosition(), my_spaceship->getRotation());
     else
@@ -895,12 +895,12 @@ void MainUIBase::draw3Dworld(sf::FloatRect rect, bool show_callsigns)
             drawText(sf::FloatRect(screen_position.x, screen_position.y, 0, 0), call_sign, AlignCenter, 20 * distance_factor, sf::Color(255, 255, 255, 128 * distance_factor));
         }
     }
-#endif//!__ANDROID__
 }
+#endif//FEATURE_3D_RENDERING
 
 void MainUIBase::drawSpinningModel(sf::FloatRect rect, P<ModelData> model_data)
 {
-#ifndef __ANDROID__
+#ifndef FEATURE_3D_RENDERING
     if (rect.height <= 0) return;
     if (rect.width <= 0) return;
     if (!model_data) return;
@@ -955,7 +955,7 @@ void MainUIBase::drawSpinningModel(sf::FloatRect rect, P<ModelData> model_data)
     glDisable(GL_DEPTH_TEST);
 
     window.popGLStates();
-#endif//!__ANDROID__
+#endif//FEATURE_3D_RENDERING
 }
 
 void MainUIBase::draw3Dheadings(float distance)
@@ -1001,9 +1001,9 @@ void MainUIBase::drawRadarOn3DView()
     glDisable(GL_STENCIL_TEST);
 }
 
+#if FEATURE_3D_RENDERING
 void MainUIBase::draw3DSpaceDust()
 {
-#ifndef __ANDROID__
     static std::vector<sf::Vector3f> space_dust;
 
     if (!my_spaceship)
@@ -1030,8 +1030,8 @@ void MainUIBase::draw3DSpaceDust()
         glEnd();
         glPopMatrix();
     }
-#endif//!__ANDROID__
 }
+#endif//FEATURE_3D_RENDERING
 
 sf::Vector3f MainUIBase::worldToScreen(sf::Vector3f world)
 {

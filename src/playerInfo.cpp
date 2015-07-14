@@ -7,12 +7,6 @@
 #include "screens/crew6/scienceScreen.h"
 #include "screens/crew6/relayScreen.h"
 
-#include "gui/crewHelmsUI.h"
-#include "gui/crewWeaponsUI.h"
-#include "gui/crewEngineeringUI.h"
-#include "gui/crewScienceUI.h"
-#include "gui/crewCommsUI.h"
-
 #include "gui/crewTacticalUI.h"
 #include "gui/crewEngineeringUI_adv.h"
 #include "gui/crewOperationsUI.h"
@@ -142,22 +136,6 @@ void PlayerInfo::spawnUI()
             }
             switch(crew_active_position)
             {
-            case helmsOfficer:
-                new CrewHelmsUI();
-                break;
-            case weaponsOfficer:
-                new CrewWeaponsUI();
-                break;
-            case engineering:
-                new CrewEngineeringUI();
-                break;
-            case scienceOfficer:
-                new CrewScienceUI();
-                break;
-            case relayOfficer:
-                new CrewCommsUI();
-                break;
-            
             case tacticalOfficer:
                 new CrewTacticalUI();
                 break;

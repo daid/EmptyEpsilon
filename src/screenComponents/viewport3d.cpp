@@ -7,6 +7,7 @@
 
 #include "particleEffect.h"
 
+#if FEATURE_3D_RENDERING
 static void _glPerspective(double fovY, double aspect, double zNear, double zFar )
 {
     const double pi = 3.1415926535897932384626433832795;
@@ -17,6 +18,7 @@ static void _glPerspective(double fovY, double aspect, double zNear, double zFar
 
     glFrustum(-fW, fW, -fH, fH, zNear, zFar);
 }
+#endif//FEATURE_3D_RENDERING
 
 GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
 : GuiElement(owner, id)
@@ -28,7 +30,7 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
 
 void GuiViewport3D::onDraw(sf::RenderTarget& window)
 {
-#ifndef __ANDROID__
+#if FEATURE_3D_RENDERING
     if (my_spaceship)
         soundManager.setListenerPosition(my_spaceship->getPosition(), my_spaceship->getRotation());
     else
@@ -297,7 +299,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
                 drawText(window, sf::FloatRect(screen_pos.x, screen_pos.y, 0, 0), string(angle), ACenter, 30, sf::Color(255, 255, 255, 128));
         }
     }
-#endif//!__ANDROID__
+#endif//FEATURE_3D_RENDERING
 }
 
 sf::Vector3f GuiViewport3D::worldToScreen(sf::RenderTarget& window, sf::Vector3f world)

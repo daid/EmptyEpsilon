@@ -2,6 +2,7 @@
 #define SPACE_OBJECT_H
 
 #include "engine.h"
+#include "featureDefs.h"
 #include "modelInfo.h"
 #include "factionInfo.h"
 #include "shipTemplate.h"
@@ -41,8 +42,10 @@ public:
     float getRadius() { return object_radius; }
     void setRadius(float radius) { object_radius = radius; setCollisionRadius(radius); }
 
+#if FEATURE_3D_RENDERING
     virtual void draw3D();
     virtual void draw3DTransparent() {}
+#endif//FEATURE_3D_RENDERING
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
     virtual void destroy();

@@ -23,7 +23,7 @@ Asteroid::Asteroid()
 
 void Asteroid::draw3D()
 {
-#ifndef __ANDROID__
+#if FEATURE_3D_RENDERING
     glTranslatef(0, 0, z);
     glRotatef(engine->getElapsedTime() * rotation_speed, 0, 0, 1);
     glScalef(getRadius(), getRadius(), getRadius());
@@ -31,7 +31,7 @@ void Asteroid::draw3D()
     sf::Shader::bind(&simpleObjectShader);
     Mesh* m = Mesh::getMesh("asteroid.obj");
     m->render();
-#endif//!__ANDROID__
+#endif//FEATURE_3D_RENDERING
 }
 
 void Asteroid::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)

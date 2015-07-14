@@ -7,7 +7,7 @@ std::vector<Particle> ParticleEngine::particles;
 
 void ParticleEngine::render()
 {
-#ifndef __ANDROID__
+#if FEATURE_3D_RENDERING
     billboardShader.setParameter("textureMap", *textureManager.getTexture("particle.png"));
     sf::Shader::bind(&billboardShader);
     glBegin(GL_QUADS);
@@ -33,7 +33,7 @@ void ParticleEngine::render()
     }
     glEnd();
     sf::Shader::bind(NULL);
-#endif//__ANDROID__
+#endif//FEATURE_3D_RENDERING
 }
 
 void ParticleEngine::update(float delta)
@@ -48,7 +48,7 @@ void ParticleEngine::update(float delta)
 
 void ParticleEngine::spawn(sf::Vector3f position, sf::Vector3f end_position, sf::Vector3f color, sf::Vector3f end_color, float size, float end_size, float life_time)
 {
-#ifdef __ANDROID__
+#if FEATURE_3D_RENDERING == 0
     return;
 #endif
     if (!particleEngine) particleEngine = new ParticleEngine();

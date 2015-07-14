@@ -15,7 +15,9 @@ class BeamEffect : public SpaceObject, public Updatable
 public:
     BeamEffect();
 
+#if FEATURE_3D_RENDERING
     virtual void draw3DTransparent();
+#endif
     virtual void update(float delta);
 
     void setSource(P<SpaceObject> source, sf::Vector3f offset);

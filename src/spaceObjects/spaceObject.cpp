@@ -57,10 +57,12 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     registerCollisionableReplication(multiplayer_significant_range);
 }
 
+#if FEATURE_3D_RENDERING
 void SpaceObject::draw3D()
 {
     model_info.render(getPosition(), getRotation());
 }
+#endif//FEATURE_3D_RENDERING
 
 void SpaceObject::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange)
 {

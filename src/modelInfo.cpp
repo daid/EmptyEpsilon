@@ -62,7 +62,7 @@ void ModelInfo::render(sf::Vector2f position, float rotation)
 
 void ModelInfo::renderOverlay(sf::Texture* texture, float alpha)
 {
-#ifndef __ANDROID__
+#if FEATURE_3D_RENDERING
     if (!data)
         return;
     
@@ -78,12 +78,12 @@ void ModelInfo::renderOverlay(sf::Texture* texture, float alpha)
     glDepthFunc(GL_LESS);
     
     glPopMatrix();
-#endif//!__ANDROID__
+#endif//FEATURE_3D_RENDERING
 }
 
 void ModelInfo::renderShield(float alpha)
 {
-#ifndef __ANDROID__
+#if FEATURE_3D_RENDERING
     basicShader.setParameter("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
     sf::Shader::bind(&basicShader);
     
@@ -94,12 +94,12 @@ void ModelInfo::renderShield(float alpha)
     Mesh* m = Mesh::getMesh("sphere.obj");
     m->render();
     glPopMatrix();
-#endif//!__ANDROID__
+#endif//FEATURE_3D_RENDERING
 }
 
 void ModelInfo::renderFrontShield(float alpha)
 {
-#ifndef __ANDROID__
+#if FEATURE_3D_RENDERING
     if (!data) return;
     
     basicShader.setParameter("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
@@ -112,12 +112,12 @@ void ModelInfo::renderFrontShield(float alpha)
     Mesh* m = Mesh::getMesh("half_sphere.obj");
     m->render();
     glPopMatrix();
-#endif//!__ANDROID__
+#endif//FEATURE_3D_RENDERING
 }
 
 void ModelInfo::renderRearShield(float alpha)
 {
-#ifndef __ANDROID__
+#if FEATURE_3D_RENDERING
     if (!data) return;
     
     basicShader.setParameter("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
@@ -131,5 +131,5 @@ void ModelInfo::renderRearShield(float alpha)
     Mesh* m = Mesh::getMesh("half_sphere.obj");
     m->render();
     glPopMatrix();
-#endif//!__ANDROID__
+#endif//FEATURE_3D_RENDERING
 }
