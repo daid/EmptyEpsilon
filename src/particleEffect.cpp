@@ -1,5 +1,6 @@
 #include <SFML/OpenGL.hpp>
 #include "main.h"
+#include "featureDefs.h"
 #include "particleEffect.h"
 
 ParticleEngine* ParticleEngine::particleEngine;

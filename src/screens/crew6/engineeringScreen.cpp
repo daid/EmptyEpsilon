@@ -4,6 +4,7 @@
 
 #include "screenComponents/shieldFreqencySelect.h"
 #include "screenComponents/shipInternalView.h"
+#include "screenComponents/selfDestructButton.h"
 
 EngineeringScreen::EngineeringScreen(GuiContainer* owner)
 : GuiOverlay(owner, "ENGINEERING_SCREEN", sf::Color::Black), selected_system(SYS_Reactor)
@@ -14,6 +15,8 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
     hull_display->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
     shields_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, "Shields", "");
     shields_display->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
+    
+    (new GuiSelfDestructButton(this, "SELF_DESTRUCT"))->setPosition(20, 220, ATopLeft)->setSize(240, 100);
     
     GuiAutoLayout* system_row_layouts = new GuiAutoLayout(this, "SYSTEM_ROWS", GuiAutoLayout::LayoutVerticalBottomToTop);
     system_row_layouts->setPosition(20, -20, ABottomLeft);

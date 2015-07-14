@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include "engine.h"
 #include "mesh.h"
+#include "featureDefs.h"
 
 static inline int readInt(P<ResourceStream> stream)
 {

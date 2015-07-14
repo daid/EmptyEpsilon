@@ -2,6 +2,7 @@
 
 #include "particleEffect.h"
 #include "modelInfo.h"
+#include "featureDefs.h"
 #include "main.h"
 
 ModelInfo::ModelInfo()
