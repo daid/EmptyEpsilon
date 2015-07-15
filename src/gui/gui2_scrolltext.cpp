@@ -39,7 +39,7 @@ void GuiScrollText::onDraw(sf::RenderTarget& window)
                 firstWord = false;
             }
 
-            sf::Glyph glyph = mainFont.getGlyph(currentChar, text_size, false);
+            sf::Glyph glyph = mainFont->getGlyph(currentChar, text_size, false);
             currentOffset += glyph.advance;
 
             if (!firstWord && currentOffset > rect.width - 50)
@@ -62,7 +62,7 @@ void GuiScrollText::onDraw(sf::RenderTarget& window)
     }
     if (start_pos > 0)
         text = text.substr(start_pos);
-    int max_lines = rect.height / mainFont.getLineSpacing(text_size);
+    int max_lines = rect.height / mainFont->getLineSpacing(text_size);
     if (line_count - scrollbar->getValue() > max_lines)
     {
         int end_pos = 0;

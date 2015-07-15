@@ -554,7 +554,7 @@ void GuiRadarView::drawHeadingIndicators(sf::RenderTarget& window)
     window.draw(small_tigs);
     for(unsigned int n=0; n<360; n+=20)
     {
-        sf::Text text(string(n), mainFont, 15);
+        sf::Text text(string(n), *mainFont, 15);
         text.setPosition(radar_screen_center + sf::vector2FromAngle(float(n) - 90) * (scale - 45));
         text.setOrigin(text.getLocalBounds().width / 2.0, text.getLocalBounds().height / 2.0);
         text.setRotation(n);

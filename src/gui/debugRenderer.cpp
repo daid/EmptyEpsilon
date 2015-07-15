@@ -35,7 +35,7 @@ void DebugRenderer::render(sf::RenderTarget& window)
         text = text + string(game_server->getSendDataRatePerClient() / 1000, 1) + " kb per client\n";
     }
 
-    sf::Text textElement(text, mainFont, 18);
+    sf::Text textElement(text, *mainFont, 18);
     textElement.setPosition(0, 0);
     window.draw(textElement);
 }

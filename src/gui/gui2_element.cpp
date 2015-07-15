@@ -208,7 +208,7 @@ void GuiElement::updateRect(sf::FloatRect window_rect)
 
 void GuiElement::drawText(sf::RenderTarget& window, sf::FloatRect rect, string text, EGuiAlign align, float font_size, sf::Color color)
 {
-    sf::Text textElement(text, mainFont, font_size);
+    sf::Text textElement(text, *mainFont, font_size);
     float y = 0;
     float x = 0;
     switch(align)
@@ -254,7 +254,7 @@ void GuiElement::drawText(sf::RenderTarget& window, sf::FloatRect rect, string t
 
 void GuiElement::drawVerticalText(sf::RenderTarget& window, sf::FloatRect rect, string text, EGuiAlign align, float font_size, sf::Color color)
 {
-    sf::Text textElement(text, mainFont, font_size);
+    sf::Text textElement(text, *mainFont, font_size);
     textElement.setRotation(-90);
     float x = 0;
     float y = 0;

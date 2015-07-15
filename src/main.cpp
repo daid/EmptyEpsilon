@@ -18,11 +18,11 @@
 sf::Vector3f camera_position;
 float camera_yaw;
 float camera_pitch;
-sf::Shader objectShader;
-sf::Shader simpleObjectShader;
-sf::Shader basicShader;
-sf::Shader billboardShader;
-sf::Font mainFont;
+sf::Shader* objectShader;
+sf::Shader* simpleObjectShader;
+sf::Shader* basicShader;
+sf::Shader* billboardShader;
+sf::Font* mainFont;
 RenderLayer* backgroundLayer;
 RenderLayer* objectLayer;
 RenderLayer* effectLayer;
@@ -164,22 +164,28 @@ int main(int argc, char** argv)
         PostProcessor::setEnable(false);
 
     P<ResourceStream> stream = getResourceStream("sansation.ttf");
-    mainFont.loadFromStream(**stream);
+    mainFont = new sf::Font();
+    mainFont->loadFromStream(**stream);
 
     if (sf::Shader::isAvailable())
     {
+        objectShader = new sf::Shader();
+        simpleObjectShader = new sf::Shader();
+        basicShader = new sf::Shader();
+        billboardShader = new sf::Shader();
+        
         P<ResourceStream> vertexStream = getResourceStream("objectShader.vert");
         P<ResourceStream> fragmentStream = getResourceStream("objectShader.frag");
-        objectShader.loadFromStream(**vertexStream, **fragmentStream);
+        objectShader->loadFromStream(**vertexStream, **fragmentStream);
         vertexStream = getResourceStream("simpleObjectShader.vert");
         fragmentStream = getResourceStream("simpleObjectShader.frag");
-        simpleObjectShader.loadFromStream(**vertexStream, **fragmentStream);
+        simpleObjectShader->loadFromStream(**vertexStream, **fragmentStream);
         vertexStream = getResourceStream("basicShader.vert");
         fragmentStream = getResourceStream("basicShader.frag");
-        basicShader.loadFromStream(**vertexStream, **fragmentStream);
+        basicShader->loadFromStream(**vertexStream, **fragmentStream);
         vertexStream = getResourceStream("billboardShader.vert");
         fragmentStream = getResourceStream("billboardShader.frag");
-        billboardShader.loadFromStream(**vertexStream, **fragmentStream);
+        billboardShader->loadFromStream(**vertexStream, **fragmentStream);
     }
 
     {

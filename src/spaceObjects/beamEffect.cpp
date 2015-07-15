@@ -29,8 +29,8 @@ void BeamEffect::draw3DTransparent()
     sf::Vector3f endPoint(targetLocation.x, targetLocation.y, targetOffset.z);
     sf::Vector3f eyeNormal = sf::normalize(sf::cross(camera_position - startPoint, endPoint - startPoint));
 
-    basicShader.setParameter("textureMap", *textureManager.getTexture("beam_texture.png"));
-    sf::Shader::bind(&basicShader);
+    basicShader->setParameter("textureMap", *textureManager.getTexture("beam_texture.png"));
+    sf::Shader::bind(basicShader);
     glColor3f(lifetime, lifetime, lifetime);
     {
         sf::Vector3f v0 = startPoint + eyeNormal * 4.0f;
@@ -60,8 +60,8 @@ void BeamEffect::draw3DTransparent()
     sf::Vector3f v3 = v0 - side * ring_size - up * ring_size;
     sf::Vector3f v4 = v0 + side * ring_size - up * ring_size;
 
-    basicShader.setParameter("textureMap", *textureManager.getTexture("fire_ring.png"));
-    sf::Shader::bind(&basicShader);
+    basicShader->setParameter("textureMap", *textureManager.getTexture("fire_ring.png"));
+    sf::Shader::bind(basicShader);
     glBegin(GL_QUADS);
     glTexCoord2f(0, 0);
     glVertex3f(v1.x, v1.y, v1.z);
