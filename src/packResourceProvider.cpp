@@ -14,6 +14,9 @@ PackResourceProvider::PackResourceProvider(string filename)
 : filename(filename)
 {
     FILE* f = fopen(filename.c_str(), "rb");
+    if (!f)
+        return;
+    
     int version = readInt(f);
     if (version == 0)
     {
