@@ -32,9 +32,9 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 {
 #if FEATURE_3D_RENDERING
     if (my_spaceship)
-        soundManager.setListenerPosition(my_spaceship->getPosition(), my_spaceship->getRotation());
+        soundManager->setListenerPosition(my_spaceship->getPosition(), my_spaceship->getRotation());
     else
-        soundManager.setListenerPosition(sf::Vector2f(camera_position.x, camera_position.y), camera_yaw);
+        soundManager->setListenerPosition(sf::Vector2f(camera_position.x, camera_position.y), camera_yaw);
     window.pushGLStates();
 
     billboardShader.setParameter("camera_position", camera_position);

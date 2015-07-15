@@ -10,7 +10,7 @@
 ShipSelectionScreen::ShipSelectionScreen()
 {
     //Easiest place to ensure that positional sound is disabled on console views. As soon as a 3D view is rendered positional sound is enabled again.
-    soundManager.disablePositionalSound();
+    soundManager->disablePositionalSound();
 
     (new GuiLabel(this, "CREW_POSITION_SELECT_LABEL", "Select your station", 30))->addBox()->setPosition(-50, 50, ATopRight)->setSize(460, 50);
     (new GuiBox(this, "CREW_POSITION_SELECT_BOX"))->setPosition(-50, 50, ATopRight)->setSize(460, 560);

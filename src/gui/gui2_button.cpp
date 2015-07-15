@@ -28,7 +28,7 @@ void GuiButton::onMouseUp(sf::Vector2f position)
 {
     if (rect.contains(position))
     {
-        soundManager.playSound("button.wav");
+        soundManager->playSound("button.wav");
         if (func)
             func();
     }

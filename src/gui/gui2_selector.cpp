@@ -6,7 +6,7 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
 : GuiEntryList(owner, id, func), text_size(30)
 {
     (new GuiArrowButton(this, id + "_ARROW_LEFT", 0, [this]() {
-        soundManager.playSound("button.wav");
+        soundManager->playSound("button.wav");
         if (getSelectionIndex() <= 0)
             setSelectionIndex(entries.size() - 1);
         else
@@ -14,7 +14,7 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
         callback();
     }))->setPosition(0, 0, ATopLeft)->setSize(GuiSizeMatchHeight, GuiSizeMax);
     (new GuiArrowButton(this, id + "_ARROW_RIGHT", 180, [this]() {
-        soundManager.playSound("button.wav");
+        soundManager->playSound("button.wav");
         if (getSelectionIndex() >= (int)entries.size() - 1)
             setSelectionIndex(0);
         else

@@ -534,9 +534,9 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             {
                 shields_active = active;
                 if (active)
-                    soundManager.playSound("shield_up.wav");
+                    soundManager->playSound("shield_up.wav");
                 else
-                    soundManager.playSound("shield_down.wav");
+                    soundManager->playSound("shield_down.wav");
             }
         }
         break;

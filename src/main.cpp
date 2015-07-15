@@ -156,9 +156,9 @@ int main(int argc, char** argv)
     }
     
     if (startup_parameters.find("music_volume") != startup_parameters.end())
-        soundManager.setMusicVolume(startup_parameters["music_volume"].toFloat());
+        soundManager->setMusicVolume(startup_parameters["music_volume"].toFloat());
     else
-        soundManager.setMusicVolume(50);
+        soundManager->setMusicVolume(50);
 
     if (startup_parameters["disable_shaders"].toInt())
         PostProcessor::setEnable(false);
@@ -214,7 +214,7 @@ int main(int argc, char** argv)
             startup_parameters["fsaa"] = windowManager->getFSAA();
             startup_parameters["fullscreen"] = windowManager->isFullscreen() ? 1 : 0;
         }
-        startup_parameters["music_volume"] = soundManager.getMusicVolume();
+        startup_parameters["music_volume"] = soundManager->getMusicVolume();
         startup_parameters["disable_shaders"] = PostProcessor::isEnabled() ? 0 : 1;
         fprintf(f, "# Empty Epsilon Settings\n# This file will be overwritten by EE.\n\n");
         fprintf(f, "# Include the following line to enable an experimental http server:\n# httpserver=8080\n\n");

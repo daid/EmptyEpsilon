@@ -88,8 +88,8 @@ OptionsMenu::OptionsMenu()
     }))->setOptions({"FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x"})->setSelectionIndex(index)->setPosition(50, 160, ATopLeft)->setSize(300, 50);
 
     (new GuiLabel(this, "MUSIC_VOL_LABEL", "Music Volume", 30))->setPosition(50, 220, ATopLeft)->setSize(300, 50);
-    (new GuiSlider(this, "MUSIC_VOL", 0, 100, soundManager.getMusicVolume(), [](float volume){
-        soundManager.setMusicVolume(volume);
+    (new GuiSlider(this, "MUSIC_VOL", 0, 100, soundManager->getMusicVolume(), [](float volume){
+        soundManager->setMusicVolume(volume);
     }))->setPosition(50, 270, ATopLeft)->setSize(300, 50);
 
     (new GuiButton(this, "BACK", "Back", [this]() {
@@ -98,7 +98,7 @@ OptionsMenu::OptionsMenu()
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
     
     GuiListbox* music_list = new GuiListbox(this, "MUSIC_PLAY", [this](int index, string value) {
-        soundManager.playMusic(value);
+        soundManager->playMusic(value);
     });
     music_list->setPosition(-50, 50, ATopRight)->setSize(600, 800);
 
