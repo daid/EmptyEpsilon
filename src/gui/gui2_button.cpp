@@ -2,7 +2,7 @@
 #include "gui2_button.h"
 
 GuiButton::GuiButton(GuiContainer* owner, string id, string text, func_t func)
-: GuiElement(owner, id), text(text), func(func)
+: GuiElement(owner, id), text(text), func(func), hotkey(sf::Keyboard::Unknown)
 {
     text_size = 30;
     button_color = sf::Color::White;
@@ -34,6 +34,17 @@ void GuiButton::onMouseUp(sf::Vector2f position)
     }
 }
 
+bool GuiButton::onHotkey(sf::Keyboard::Key key, int unicode)
+{
+    if (key == hotkey)
+    {
+        if (func)
+            func();
+        return true;
+    }
+    return false;
+}
+
 string GuiButton::getText()
 {
     return text;
@@ -48,6 +59,12 @@ GuiButton* GuiButton::setText(string text)
 GuiButton* GuiButton::setColor(sf::Color color)
 {
     button_color = color;
+    return this;
+}
+
+GuiButton* GuiButton::setHotkey(sf::Keyboard::Key key)
+{
+    hotkey = key;
     return this;
 }
 
