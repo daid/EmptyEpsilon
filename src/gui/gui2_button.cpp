@@ -2,7 +2,7 @@
 #include "gui2_button.h"
 
 GuiButton::GuiButton(GuiContainer* owner, string id, string text, func_t func)
-: GuiElement(owner, id), text(text), func(func), hotkey(sf::Keyboard::Unknown)
+: GuiElement(owner, id), text(text), func(func), hotkey(sf::Keyboard::KeyCount)
 {
     text_size = 30;
     button_color = sf::Color::White;
