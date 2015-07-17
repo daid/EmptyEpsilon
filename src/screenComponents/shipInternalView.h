@@ -5,13 +5,14 @@
 #include "spaceObjects/spaceship.h"
 
 class RepairCrew;
+class GuiShipRoomContainer;
 
 class GuiShipInternalView : public GuiElement
 {
 private:
     P<SpaceShip> viewing_ship;
     float room_size;
-    GuiElement* room_container;
+    GuiShipRoomContainer* room_container;
     P<RepairCrew> selected_crew_member;
 public:
     GuiShipInternalView(GuiContainer* owner, string id, float room_size);
@@ -19,6 +20,20 @@ public:
     GuiShipInternalView* setShip(P<SpaceShip> ship);
     
     virtual void onDraw(sf::RenderTarget& window);
+};
+
+class GuiShipRoomContainer : public GuiElement
+{
+public:
+    typedef std::function<void(sf::Vector2i room_position)> func_t;
+private:
+    float room_size;
+    func_t func;
+public:
+    GuiShipRoomContainer(GuiContainer* owner, string id, float room_size, func_t func);
+    
+    virtual bool onMouseDown(sf::Vector2f position);
+    virtual void onMouseUp(sf::Vector2f position);
 };
 
 class GuiShipRoom : public GuiElement

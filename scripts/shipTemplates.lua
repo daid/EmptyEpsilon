@@ -62,6 +62,10 @@ template:addDoor(6, 4, false);
 template:addDoor(8, 3, false);
 template:addDoor(8, 4, false);
 
+--Airlock doors
+--template:addDoor(2, 2, false);
+--template:addDoor(2, 5, false);
+
 template = ShipTemplate():setName("Player Missile Cr."):setModel("space_cruiser_4")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setTubes(4, 8.0)

@@ -12,29 +12,29 @@ GuiShipInternalView* GuiShipInternalView::setShip(P<SpaceShip> ship)
     if (viewing_ship == ship)
         return this;
     viewing_ship = ship;
+    if (room_container)
+    {
+        delete room_container;
+        room_container = nullptr;
+    }
     if (!ship)
         return this;
     
     P<ShipTemplate> st = ship->ship_template;
     
-    room_container = new GuiElement(this, id + "_ROOM_CONTAINER");
+    room_container = new GuiShipRoomContainer(this, id + "_ROOM_CONTAINER", room_size, [this](sf::Vector2i position) {
+        if (selected_crew_member)
+            selected_crew_member->commandSetTargetPosition(position);
+    });
     room_container->setPosition(0, 0, ACenter);
-    sf::Vector2i max_size(0, 0);
+    sf::Vector2i max_size = st->interiorSize();
     
     for(unsigned int n=0; n<st->rooms.size(); n++)
     {
         ShipRoomTemplate& rt = st->rooms[n];
-        GuiShipRoom* room = new GuiShipRoom(room_container, id + "_ROOM_" + string(n), room_size, rt.size, [this](sf::Vector2i position) {
-            if (selected_crew_member)
-                selected_crew_member->commandSetTargetPosition(position);
-        });
+        GuiShipRoom* room = new GuiShipRoom(room_container, id + "_ROOM_" + string(n), room_size, rt.size, nullptr);
         room->setPosition(sf::Vector2f(rt.position) * room_size, ATopLeft);
         room->setSystem(ship, rt.system);
-        
-        if (rt.position.x + rt.size.x > max_size.x)
-            max_size.x = rt.position.x + rt.size.x;
-        if (rt.position.y + rt.size.y > max_size.y)
-            max_size.y = rt.position.y + rt.size.y;
     }
     
     for(unsigned int n=0; n<st->doors.size(); n++)
@@ -75,6 +75,24 @@ void GuiShipInternalView::onDraw(sf::RenderTarget& window)
     {
         delete room_container;
         room_container = nullptr;
+    }
+}
+
+GuiShipRoomContainer::GuiShipRoomContainer(GuiContainer* owner, string id, float room_size, func_t func)
+: GuiElement(owner, id), room_size(room_size), func(func)
+{
+}
+
+bool GuiShipRoomContainer::onMouseDown(sf::Vector2f position)
+{
+    return true;
+}
+
+void GuiShipRoomContainer::onMouseUp(sf::Vector2f position)
+{
+    if (rect.contains(position) && func)
+    {
+        func(sf::Vector2i((position - sf::Vector2f(rect.left, rect.top)) / room_size));
     }
 }
 
@@ -132,7 +150,9 @@ void GuiShipRoom::onDraw(sf::RenderTarget& window)
 
 bool GuiShipRoom::onMouseDown(sf::Vector2f position)
 {
-    return true;
+    if (func)
+        return true;
+    return false;
 }
 
 void GuiShipRoom::onMouseUp(sf::Vector2f position)

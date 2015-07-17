@@ -33,19 +33,28 @@ ERepairCrewDirection pathFind(sf::Vector2i start_pos, sf::Vector2i target_pos, P
     sf::Vector2i size = t->interiorSize();
     PathNode node[size.x][size.y];
     memset(node, 0, sizeof(PathNode) * size.x * size.y);
+    for(int x=0; x<size.x; x++)
+    {
+        for(int y=0; y<size.y; y++)
+        {
+            if (y < size.y - 1)
+                node[x][y].down = true;
+            if (x < size.x - 1)
+                node[x][y].right = true;
+        }
+    }
     for(unsigned int n=0; n<t->rooms.size(); n++)
     {
-        for(int x=0; x<t->rooms[n].size.x-1; x++)
+        for(int x=0; x<t->rooms[n].size.x; x++)
         {
-            node[t->rooms[n].position.x + x][t->rooms[n].position.y + t->rooms[n].size.y - 1].right = true;
-            for(int y=0; y<t->rooms[n].size.y-1; y++)
-            {
-                node[t->rooms[n].position.x + x][t->rooms[n].position.y + y].right = true;
-                node[t->rooms[n].position.x + x][t->rooms[n].position.y + y].down = true;
-            }
+            node[t->rooms[n].position.x + x][t->rooms[n].position.y - 1].down = false;
+            node[t->rooms[n].position.x + x][t->rooms[n].position.y + t->rooms[n].size.y - 1].down = false;
         }
-        for(int y=0; y<t->rooms[n].size.y-1; y++)
-            node[t->rooms[n].position.x + t->rooms[n].size.x - 1][t->rooms[n].position.y + y].down = true;
+        for(int y=0; y<t->rooms[n].size.y; y++)
+        {
+            node[t->rooms[n].position.x - 1][t->rooms[n].position.y + y].right = false;
+            node[t->rooms[n].position.x + t->rooms[n].size.x - 1][t->rooms[n].position.y + y].right = false;
+        }
     }
     for(unsigned int n=0; n<t->doors.size(); n++)
     {
@@ -119,6 +128,7 @@ void RepairCrew::update(float delta)
 
     if (position.x < -0.5)
     {
+        ship->ship_template->interiorSize();
         int n=irandom(0, ship->ship_template->rooms.size() - 1);
         position = sf::Vector2f(ship->ship_template->rooms[n].position + sf::Vector2i(irandom(0, ship->ship_template->rooms[n].size.x - 1), irandom(0, ship->ship_template->rooms[n].size.y - 1)));
         target_position = sf::Vector2i(position);
