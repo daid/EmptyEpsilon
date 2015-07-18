@@ -15,18 +15,18 @@ MainMenu::MainMenu()
     (new GuiLabel(this, "TITLE_B", "Epsilon", 200))->setPosition(0, 250, ATopCenter)->setSize(0, 300);
     (new GuiLabel(this, "VERSION", "Version: " + string(VERSION_NUMBER), 20))->setPosition(0, 30, ACenter)->setSize(0, 100);
     
-    (new GuiButton(this, "SERVER", "Start server", [this]() {
+    (new GuiButton(this, "START_SERVER", "Start server", [this]() {
         new EpsilonServer();
         new ServerCreationScreen();
         destroy();
     }))->setPosition(sf::Vector2f(50, -230), ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "CLIENT", "Start client", [this]() {
+    (new GuiButton(this, "START_CLIENT", "Start client", [this]() {
         new ServerBrowserMenu();
         destroy();
     }))->setPosition(sf::Vector2f(50, -170), ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "OPTIONS", "Options", [this]() {
+    (new GuiButton(this, "OPEN_OPTIONS", "Options", [this]() {
         new OptionsMenu();
         destroy();
     }))->setPosition(sf::Vector2f(50, -110), ABottomLeft)->setSize(300, 50);

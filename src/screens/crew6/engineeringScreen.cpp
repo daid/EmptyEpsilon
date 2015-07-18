@@ -23,11 +23,12 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
     system_row_layouts->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     for(int n=0; n<SYS_COUNT; n++)
     {
+        string id = "SYSTEM_ROW_" + getSystemName(ESystem(n));
         SystemRow info;
-        info.layout = new GuiAutoLayout(system_row_layouts, "SYSTEM_ROW_" + string(n), GuiAutoLayout::LayoutHorizontalLeftToRight);
+        info.layout = new GuiAutoLayout(system_row_layouts, id, GuiAutoLayout::LayoutHorizontalLeftToRight);
         info.layout->setSize(GuiElement::GuiSizeMax, 50);
         
-        info.button = new GuiToggleButton(info.layout, "SYSTEM_ROW_" + string(n) + "_BUTTON", getSystemName(ESystem(n)), [this, n](bool value){
+        info.button = new GuiToggleButton(info.layout, id + "_SELECT", getSystemName(ESystem(n)), [this, n](bool value){
             for(int idx=0; idx<SYS_COUNT; idx++)
             {
                 system_rows[idx].button->setValue(idx == n);
@@ -40,19 +41,19 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
             }
         });
         info.button->setSize(300, GuiElement::GuiSizeMax);
-        info.damage_bar = new GuiProgressbar(info.layout, "SYSTEM_ROW_" + string(n) + "_DAMAGE", 0.0, 1.0, 0.0);
+        info.damage_bar = new GuiProgressbar(info.layout, id + "_DAMAGE", 0.0, 1.0, 0.0);
         info.damage_bar->setSize(100, GuiElement::GuiSizeMax);
         if (!gameGlobalInfo->use_system_damage)
             info.damage_bar->hide();
-        info.damage_label = new GuiLabel(info.damage_bar, "SYSTEM_ROW_" + string(n) + "_DAMAGE_LABEL", "...", 20);
+        info.damage_label = new GuiLabel(info.damage_bar, id + "_DAMAGE_LABEL", "...", 20);
         info.damage_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-        info.heat_bar = new GuiProgressbar(info.layout, "SYSTEM_ROW_" + string(n) + "_HEAT", 0.0, 1.0, 0.0);
+        info.heat_bar = new GuiProgressbar(info.layout, id + "_HEAT", 0.0, 1.0, 0.0);
         info.heat_bar->setSize(50, GuiElement::GuiSizeMax);
-        info.heat_arrow = new GuiArrow(info.heat_bar, "SYSTEM_ROW_" + string(n) + "_HEAT_ARROW", 0);
+        info.heat_arrow = new GuiArrow(info.heat_bar, id + "_HEAT_ARROW", 0);
         info.heat_arrow->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-        info.power_bar = new GuiProgressbar(info.layout, "SYSTEM_ROW_" + string(n) + "_POWER", 0.0, 3.0, 0.0);
+        info.power_bar = new GuiProgressbar(info.layout, id + "_POWER", 0.0, 3.0, 0.0);
         info.power_bar->setColor(sf::Color(192, 192, 0))->setSize(50, GuiElement::GuiSizeMax);
-        info.coolant_bar = new GuiProgressbar(info.layout, "SYSTEM_ROW_" + string(n) + "_COOLANT", 0.0, 10.0, 0.0);
+        info.coolant_bar = new GuiProgressbar(info.layout, id + "_COOLANT", 0.0, 10.0, 0.0);
         info.coolant_bar->setColor(sf::Color(0, 128, 128))->setSize(50, GuiElement::GuiSizeMax);
         
         info.layout->moveToBack();

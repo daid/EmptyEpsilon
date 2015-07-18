@@ -1,11 +1,15 @@
 #include "soundManager.h"
 #include "gui2_button.h"
+#include "preferenceManager.h"
 
 GuiButton::GuiButton(GuiContainer* owner, string id, string text, func_t func)
 : GuiElement(owner, id), text(text), func(func), hotkey(sf::Keyboard::KeyCount)
 {
     text_size = 30;
     button_color = sf::Color::White;
+    
+    if (id != "")
+        hotkey = PreferencesManager::getKey(id + "_BUTTON_HOTKEY");
 }
 
 void GuiButton::onDraw(sf::RenderTarget& window)

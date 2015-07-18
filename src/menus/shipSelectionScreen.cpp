@@ -28,7 +28,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     main_screen_button->setSize(GuiElement::GuiSizeMax, 50);
     for(int n=0; n<max_crew_positions; n++)
     {
-        crew_position_button[n] = new GuiToggleButton(stations_layout, "CREW_" + string(n) + "_BUTTON", getCrewPositionName(ECrewPosition(n)), [this, n](bool value){
+        crew_position_button[n] = new GuiToggleButton(stations_layout, "CREW_" + getCrewPositionName(ECrewPosition(n)) + "_BUTTON", getCrewPositionName(ECrewPosition(n)), [this, n](bool value){
             main_screen_button->setValue(false);
             my_player_info->setCrewPosition(ECrewPosition(n), value);
             updateReadyButton();

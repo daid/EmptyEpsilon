@@ -1,10 +1,16 @@
 #include <math.h>
 
 #include "gui2_slider.h"
+#include "preferenceManager.h"
 
 GuiSlider::GuiSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
 : GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), snap_value(std::numeric_limits<float>::infinity()), func(func), up_hotkey(sf::Keyboard::KeyCount), down_hotkey(sf::Keyboard::KeyCount)
 {
+    if (id != "")
+    {
+        up_hotkey = PreferencesManager::getKey(id + "_UP_HOTKEY");
+        down_hotkey = PreferencesManager::getKey(id + "_DOWN_HOTKEY");
+    }
 }
 
 void GuiSlider::onDraw(sf::RenderTarget& window)

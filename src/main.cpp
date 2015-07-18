@@ -117,12 +117,14 @@ int main(int argc, char** argv)
         }
         engine->registerObject("windowManager", new WindowManager(width, height, fullscreen, warpPostProcessor, fsaa));
     }
+#ifndef __ANDROID__
     if (PreferencesManager::get("touchscreen").toInt())
     {
         InputHandler::touch_screen = true;
     }else{
         engine->registerObject("mouseRenderer", new MouseRenderer());
     }
+#endif
 
     new DebugRenderer();
 
