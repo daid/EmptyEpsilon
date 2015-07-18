@@ -4,12 +4,19 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE    := emptyepsilon
 
-LOCAL_SRC_FILES := $(wildcard $(abspath $(LOCAL_PATH)/../../src/**/*.cpp))
-LOCAL_SRC_FILES += $(wildcard $(abspath $(LOCAL_PATH)/../../../SeriousProton/src/**/*.cpp))
-LOCAL_SRC_FILES += $(wildcard $(abspath $(LOCAL_PATH)/../../../SeriousProton/src/**/*.c))
+LOCAL_SRC_FILES :=
 LOCAL_SRC_FILES += $(wildcard $(abspath $(LOCAL_PATH)/../../src/*.cpp))
 LOCAL_SRC_FILES += $(wildcard $(abspath $(LOCAL_PATH)/../../../SeriousProton/src/*.cpp))
 LOCAL_SRC_FILES += $(wildcard $(abspath $(LOCAL_PATH)/../../../SeriousProton/src/*.c))
+LOCAL_SRC_FILES += $(wildcard $(abspath $(LOCAL_PATH)/../../src/*/*.cpp))
+LOCAL_SRC_FILES += $(wildcard $(abspath $(LOCAL_PATH)/../../../SeriousProton/src/*/*.cpp))
+LOCAL_SRC_FILES += $(wildcard $(abspath $(LOCAL_PATH)/../../../SeriousProton/src/*/*.c))
+LOCAL_SRC_FILES += $(wildcard $(abspath $(LOCAL_PATH)/../../src/*/*/*.cpp))
+LOCAL_SRC_FILES += $(wildcard $(abspath $(LOCAL_PATH)/../../../SeriousProton/src/*/*/*.cpp))
+LOCAL_SRC_FILES += $(wildcard $(abspath $(LOCAL_PATH)/../../../SeriousProton/src/*/*/*.c))
+LOCAL_SRC_FILES += $(wildcard $(abspath $(LOCAL_PATH)/../../src/*/*/*/*.cpp))
+LOCAL_SRC_FILES += $(wildcard $(abspath $(LOCAL_PATH)/../../../SeriousProton/src/*/*/*/*.cpp))
+LOCAL_SRC_FILES += $(wildcard $(abspath $(LOCAL_PATH)/../../../SeriousProton/src/*/*/*/*.c))
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../src $(LOCAL_PATH)/../../../SeriousProton/src
 
