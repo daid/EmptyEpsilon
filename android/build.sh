@@ -5,7 +5,7 @@ export PATH=$PATH:$HOME/android/android-sdk-linux/tools:$HOME/android/android-sd
 set -e
 rm -rf assets/*
 cp ../resources assets/ -a
-cp ../scripts assets/
+cp ../scripts assets/ -a
 
 #remove all music to save space
 rm -rf assets/resources/music
