@@ -95,27 +95,20 @@ int main(int argc, char** argv)
         warpPostProcessor->enabled = false;
         defaultRenderLayer = objectLayer;
 
-        int width = 1600;
+        int width = 1200;
         int height = 900;
         int fsaa = 0;
         bool fullscreen = PreferencesManager::get("fullscreen", "1").toInt();
 
-        sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
-        if (desktop.height / 3 * 4 == desktop.width || PreferencesManager::get("screen43").toInt() != 0)
-        {
-            width = height / 3 * 4;
-        }else{
-            width = height * desktop.width / desktop.height;
-            if (width < height / 3 * 4)
-                width = height / 3 * 4;
-        }
         if (PreferencesManager::get("fsaa").toInt() > 0)
         {
             fsaa = PreferencesManager::get("fsaa").toInt();
             if (fsaa < 2)
                 fsaa = 2;
         }
-        engine->registerObject("windowManager", new WindowManager(width, height, fullscreen, warpPostProcessor, fsaa));
+        P<WindowManager> window_manager = new WindowManager(width, height, fullscreen, warpPostProcessor, fsaa);
+        window_manager->setAllowVirtualResize(true);
+        engine->registerObject("windowManager", window_manager);
     }
     if (PreferencesManager::get("touchscreen").toInt())
     {
