@@ -10,6 +10,7 @@
 #include "main.h"
 #include "epsilonServer.h"
 #include "httpScriptAccess.h"
+#include "preferenceManager.h"
 
 #ifdef __APPLE__
 #include <CoreFoundation/CoreFoundation.h>
@@ -31,8 +32,6 @@ RenderLayer* mouseLayer;
 PostProcessor* glitchPostProcessor;
 PostProcessor* warpPostProcessor;
 
-static std::unordered_map<string, string> startup_parameters;
-
 int main(int argc, char** argv)
 {
 #ifdef __APPLE__
@@ -46,34 +45,18 @@ int main(int argc, char** argv)
         CFRelease(url);
     }
 #endif
+
 #ifdef DEBUG
     Logging::setLogLevel(LOGLEVEL_DEBUG);
 #endif
-    FILE* f = fopen("options.ini", "r");
-    if (f)
-    {
-        char buffer[1024];
-        while(fgets(buffer, sizeof(buffer), f))
-        {
-            string line = string(buffer).strip();
-            if (line.find("=") > -1)
-            {
-                if(line.find("#") != 0) {
-                    string key = line.substr(0, line.find("="));
-                    string value = line.substr(line.find("=") + 1);
-                    startup_parameters[key] = value;
-                }
-
-            }
-        }
-        fclose(f);
-    }
+    PreferencesManager::load("options.ini");
+    
     for(int n=1; n<argc; n++)
     {
         char* value = strchr(argv[n], '=');
         if (!value) continue;
         *value++ = '\0';
-        startup_parameters[string(argv[n]).strip()] = string(value).strip();
+        PreferencesManager::set(string(argv[n]).strip(), string(value).strip());
     }
     
     new Engine();
@@ -86,16 +69,19 @@ int main(int argc, char** argv)
     textureManager.setAutoSprite(false);
     textureManager.getTexture("Tokka_WalkingMan.png", sf::Vector2i(6, 1));
     
-    if (startup_parameters["httpserver"].toInt() != 0)
+    if (PreferencesManager::get("httpserver").toInt() != 0)
     {
-        LOG(INFO) << "Enabling HTTP script access.";
+        int port_nr = PreferencesManager::get("httpserver").toInt();
+        if (port_nr < 10)
+            port_nr = 80;
+        LOG(INFO) << "Enabling HTTP script access on port: " << port_nr;
         LOG(INFO) << "NOTE: This is potentially a risk!";
-        HttpServer* server = new HttpServer(startup_parameters["httpserver"].toInt());
+        HttpServer* server = new HttpServer(port_nr);
         server->addHandler(new HttpRequestFileHandler("www"));
         server->addHandler(new HttpScriptHandler());
     }
 
-    if (startup_parameters["headless"] == "")
+    if (PreferencesManager::get("headless") == "")
     {
         //Setup the rendering layers.
         backgroundLayer = new RenderLayer();
@@ -112,13 +98,10 @@ int main(int argc, char** argv)
         int width = 1600;
         int height = 900;
         int fsaa = 0;
-        bool fullscreen = true;
-
-        if (startup_parameters.find("fullscreen") != startup_parameters.end())
-            fullscreen = startup_parameters["fullscreen"].toInt();
+        bool fullscreen = PreferencesManager::get("fullscreen", "1").toInt();
 
         sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
-        if (desktop.height / 3 * 4 == desktop.width || startup_parameters["screen43"].toInt() != 0)
+        if (desktop.height / 3 * 4 == desktop.width || PreferencesManager::get("screen43").toInt() != 0)
         {
             width = height / 3 * 4;
         }else{
@@ -126,26 +109,28 @@ int main(int argc, char** argv)
             if (width < height / 3 * 4)
                 width = height / 3 * 4;
         }
-        if (startup_parameters["fsaa"].toInt() > 0)
+        if (PreferencesManager::get("fsaa").toInt() > 0)
         {
-            fsaa = startup_parameters["fsaa"].toInt();
+            fsaa = PreferencesManager::get("fsaa").toInt();
             if (fsaa < 2)
                 fsaa = 2;
         }
         engine->registerObject("windowManager", new WindowManager(width, height, fullscreen, warpPostProcessor, fsaa));
     }
-    if (startup_parameters["touchscreen"].toInt())
+    if (PreferencesManager::get("touchscreen").toInt())
     {
         InputHandler::touch_screen = true;
-    }else{
+    }
+    if (!InputHandler::touch_screen)
+    {
         engine->registerObject("mouseRenderer", new MouseRenderer());
     }
 
     new DebugRenderer();
 
-    if (startup_parameters["touchcalibfile"] != "")
+    if (PreferencesManager::get("touchcalibfile") != "")
     {
-        FILE* f = fopen(startup_parameters["touchcalibfile"].c_str(), "r");
+        FILE* f = fopen(PreferencesManager::get("touchcalibfile").c_str(), "r");
         if (f)
         {
             float m[6];
@@ -155,12 +140,9 @@ int main(int argc, char** argv)
         }
     }
     
-    if (startup_parameters.find("music_volume") != startup_parameters.end())
-        soundManager->setMusicVolume(startup_parameters["music_volume"].toFloat());
-    else
-        soundManager->setMusicVolume(50);
+    soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
 
-    if (startup_parameters["disable_shaders"].toInt())
+    if (PreferencesManager::get("disable_shaders").toInt())
         PostProcessor::setEnable(false);
 
     P<ResourceStream> stream = getResourceStream("sansation.ttf");
@@ -211,25 +193,16 @@ int main(int argc, char** argv)
     returnToMainMenu();
     engine->runMainLoop();
 
-    f = fopen("options.ini", "w");
-    if (f)
+    P<WindowManager> windowManager = engine->getObject("windowManager");
+    if (windowManager)
     {
-        P<WindowManager> windowManager = engine->getObject("windowManager");
-        if (windowManager)
-        {
-            startup_parameters["fsaa"] = windowManager->getFSAA();
-            startup_parameters["fullscreen"] = windowManager->isFullscreen() ? 1 : 0;
-        }
-        startup_parameters["music_volume"] = soundManager->getMusicVolume();
-        startup_parameters["disable_shaders"] = PostProcessor::isEnabled() ? 0 : 1;
-        fprintf(f, "# Empty Epsilon Settings\n# This file will be overwritten by EE.\n\n");
-        fprintf(f, "# Include the following line to enable an experimental http server:\n# httpserver=8080\n\n");
-        for(std::unordered_map<string, string>::iterator i = startup_parameters.begin(); i != startup_parameters.end(); i++)
-        {
-            fprintf(f, "%s=%s\n", i->first.c_str(), i->second.c_str());
-        }
-        fclose(f);
+        PreferencesManager::set("fsaa", windowManager->getFSAA());
+        PreferencesManager::set("fullscreen", windowManager->isFullscreen() ? 1 : 0);
     }
+    PreferencesManager::set("music_volume", soundManager->getMusicVolume());
+    PreferencesManager::set("disable_shaders", PostProcessor::isEnabled() ? 0 : 1);
+
+    PreferencesManager::save("options.ini");
     
     delete engine;
     
@@ -238,25 +211,25 @@ int main(int argc, char** argv)
 
 void returnToMainMenu()
 {
-    if (startup_parameters["headless"] != "")
+    if (PreferencesManager::get("headless") != "")
     {
         new EpsilonServer();
         
         P<ScriptObject> script = new ScriptObject();
-        script->run(startup_parameters["headless"]);
+        script->run(PreferencesManager::get("headless"));
         engine->registerObject("scenario", script);
         engine->setGameSpeed(1.0);
     }
-    else if (startup_parameters["autoconnect"].toInt())
+    else if (PreferencesManager::get("autoconnect").toInt())
     {
-        int crew_position = startup_parameters["autoconnect"].toInt() - 1;
+        int crew_position = PreferencesManager::get("autoconnect").toInt() - 1;
         if (crew_position < 0) crew_position = 0;
         if (crew_position > max_crew_positions) crew_position = max_crew_positions;
-        new AutoConnectScreen(ECrewPosition(crew_position), startup_parameters["autocontrolmainscreen"].toInt());
+        new AutoConnectScreen(ECrewPosition(crew_position), PreferencesManager::get("autocontrolmainscreen").toInt());
     }
-    else if (startup_parameters["touchcalib"].toInt())
+    else if (PreferencesManager::get("touchcalib").toInt())
     {
-        new MouseCalibrator(startup_parameters["touchcalibfile"]);
+        new MouseCalibrator(PreferencesManager::get("touchcalibfile"));
     }else{
         new MainMenu();
     }

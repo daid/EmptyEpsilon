@@ -2,10 +2,16 @@
 #include "vectorUtils.h"
 #include "logging.h"
 #include "gui2_rotationdial.h"
+#include "preferenceManager.h"
 
 GuiRotationDial::GuiRotationDial(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
-: GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func)
+: GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func), up_hotkey(sf::Keyboard::KeyCount), down_hotkey(sf::Keyboard::KeyCount)
 {
+    if (id != "")
+    {
+        up_hotkey = PreferencesManager::getKey(id + "_UP_HOTKEY");
+        down_hotkey = PreferencesManager::getKey(id + "_DOWN_HOTKEY");
+    }
 }
 
 void GuiRotationDial::onDraw(sf::RenderTarget& window)
@@ -73,6 +79,36 @@ void GuiRotationDial::onMouseDrag(sf::Vector2f position)
 
 void GuiRotationDial::onMouseUp(sf::Vector2f position)
 {
+}
+
+bool GuiRotationDial::onHotkey(sf::Keyboard::Key key, int unicode)
+{
+    if (key == up_hotkey || key == down_hotkey)
+    {
+        float new_value = value + (max_value - min_value) * 0.1;
+        if (key == down_hotkey)
+            new_value = value - (max_value - min_value) * 0.1;
+        if (min_value < max_value)
+        {
+            while (new_value < min_value)
+                new_value += max_value - min_value;
+            while (new_value > max_value)
+                new_value -= max_value - min_value;
+        }else{
+            while (new_value > min_value)
+                new_value += max_value - min_value;
+            while (new_value < max_value)
+                new_value -= max_value - min_value;
+        }
+        if (value != new_value)
+        {
+            value = new_value;
+            if (func)
+                func(value);
+        }
+        return true;
+    }
+    return false;
 }
 
 GuiRotationDial* GuiRotationDial::setValue(float value)

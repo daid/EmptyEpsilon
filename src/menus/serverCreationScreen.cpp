@@ -71,12 +71,12 @@ ServerCreationScreen::ServerCreationScreen()
     (new GuiLabel(this, "GAME_SYS_DAMAGE_LABEL", "System damage:", 30))->setAlignment(ACenterRight)->setPosition(50, y, ATopLeft)->setSize(250, 50);
     (new GuiBox(this, "GAME_SYS_DAMAGE_BOX"))->setPosition(50, y, ATopLeft)->setSize(550, 50);
 
-    (new GuiButton(this, "CLOSE", "Close server", [this]() {
+    (new GuiButton(this, "CLOSE_SERVER", "Close server", [this]() {
         destroy();
         disconnectFromServer();
         returnToMainMenu();
     }))->setPosition(150, -50, ABottomLeft)->setSize(300, 50);
-    (new GuiButton(this, "START", "Start", [this]() {
+    (new GuiButton(this, "START_SERVER", "Start", [this]() {
         startScenario();
     }))->setPosition(-150, -50, ABottomRight)->setSize(300, 50);
 

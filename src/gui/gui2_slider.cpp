@@ -1,10 +1,16 @@
 #include <math.h>
 
 #include "gui2_slider.h"
+#include "preferenceManager.h"
 
 GuiSlider::GuiSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
-: GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), snap_value(std::numeric_limits<float>::infinity()), func(func)
+: GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), snap_value(std::numeric_limits<float>::infinity()), func(func), up_hotkey(sf::Keyboard::KeyCount), down_hotkey(sf::Keyboard::KeyCount)
 {
+    if (id != "")
+    {
+        up_hotkey = PreferencesManager::getKey(id + "_UP_HOTKEY");
+        down_hotkey = PreferencesManager::getKey(id + "_DOWN_HOTKEY");
+    }
 }
 
 void GuiSlider::onDraw(sf::RenderTarget& window)
@@ -19,7 +25,7 @@ void GuiSlider::onDraw(sf::RenderTarget& window)
     if (rect.width > rect.height)
     {
         float x;
-    
+
         if (snap_value != std::numeric_limits<float>::infinity())
         {
             x = rect.left + (rect.width - rect.height) * (snap_value - min_value) / (max_value - min_value);
@@ -83,6 +89,36 @@ void GuiSlider::onMouseDrag(sf::Vector2f position)
 
 void GuiSlider::onMouseUp(sf::Vector2f position)
 {
+}
+
+bool GuiSlider::onHotkey(sf::Keyboard::Key key, int unicode)
+{
+    if (key == up_hotkey || key == down_hotkey)
+    {
+        float new_value = value + (max_value - min_value) * 0.1;
+        if (key == down_hotkey)
+            new_value = value - (max_value - min_value) * 0.1;
+        if (min_value < max_value)
+        {
+            if (new_value < min_value)
+                new_value = min_value;
+            if (new_value > max_value)
+                new_value = max_value;
+        }else{
+            if (new_value > min_value)
+                new_value = min_value;
+            if (new_value < max_value)
+                new_value = max_value;
+        }
+        if (value != new_value)
+        {
+            value = new_value;
+            if (func)
+                func(value);
+        }
+        return true;
+    }
+    return false;
 }
 
 GuiSlider* GuiSlider::setSnapValue(float value, float range)

@@ -74,7 +74,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
             delete database_entry;
         
         database_entry = new GuiElement(database_view, "DATABASE_ENTRY");
-        database_entry->setPosition(500, 20, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        database_entry->setPosition(500, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         
         GuiAutoLayout* layout = new GuiAutoLayout(database_entry, "DATABASE_ENTRY_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
         layout->setPosition(0, 0, ATopLeft)->setSize(400, GuiElement::GuiSizeMax);
@@ -105,8 +105,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
             delete database_entry;
         database_entry = nullptr;
     });
-    category_list->setPosition(20, 20, ATopLeft)->setSize(200, GuiElement::GuiSizeMax);
-    item_list->setPosition(240, 20, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
+    category_list->setPosition(20, 50, ATopLeft)->setSize(200, GuiElement::GuiSizeMax);
+    item_list->setPosition(240, 50, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
     foreach(ScienceDatabase, sd, ScienceDatabase::scienceDatabaseList)
     {
         category_list->addEntry(sd->getName(), sd->getName());
