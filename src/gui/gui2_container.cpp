@@ -34,6 +34,34 @@ void GuiContainer::drawElements(sf::FloatRect window_rect, sf::RenderTarget& win
     }
 }
 
+void GuiContainer::drawDebugElements(sf::FloatRect window_rect, sf::RenderTarget& window)
+{
+    sf::Vector2f mouse_position = InputHandler::getMousePos();
+    for(GuiElement* element : elements)
+    {
+        if (element->visible)
+        {
+            sf::RectangleShape draw_rect(sf::Vector2f(element->rect.width, element->rect.height));
+            draw_rect.setPosition(element->rect.left, element->rect.top);
+            draw_rect.setFillColor(sf::Color(255, 255, 255, 5));
+            draw_rect.setOutlineColor(sf::Color::Magenta);
+            draw_rect.setOutlineThickness(2.0);
+            window.draw(draw_rect);
+            
+            element->drawDebugElements(element->rect, window);
+        }
+    }
+            
+    for(GuiElement* element : elements)
+    {
+        if (element->visible)
+        {
+            if (element->rect.contains(mouse_position))
+                element->drawText(window, sf::FloatRect(element->rect.left, element->rect.top - 20, element->rect.width, 20), element->id, ATopLeft, 20, sf::Color::Red);
+        }
+    }
+}
+
 GuiElement* GuiContainer::getClickElement(sf::Vector2f mouse_position)
 {
     for(std::list<GuiElement*>::reverse_iterator it = elements.rbegin(); it != elements.rend(); it++)

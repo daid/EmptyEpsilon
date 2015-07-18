@@ -10,6 +10,7 @@ private:
     GuiElement* click_element;
     GuiElement* focus_element;
     sf::Vector2f previous_mouse_position;
+    bool enable_debug_rendering;
 public:
     GuiCanvas();
     virtual ~GuiCanvas();

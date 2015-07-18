@@ -4,6 +4,7 @@
 GuiCanvas::GuiCanvas()
 : click_element(nullptr), focus_element(nullptr)
 {
+    enable_debug_rendering = false;
 }
 
 GuiCanvas::~GuiCanvas()
@@ -18,6 +19,11 @@ void GuiCanvas::render(sf::RenderTarget& window)
     sf::Vector2f mouse_position = InputHandler::getMousePos();
     
     drawElements(window_rect, window);
+    
+    if (enable_debug_rendering)
+    {
+        drawDebugElements(window_rect, window);
+    }
 
     if (InputHandler::mouseIsPressed(sf::Mouse::Left) || InputHandler::mouseIsPressed(sf::Mouse::Right) || InputHandler::mouseIsPressed(sf::Mouse::Middle))
     {
