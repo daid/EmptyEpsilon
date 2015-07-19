@@ -34,8 +34,6 @@ void ThreatLevelEstimate::update(float delta)
         if (threat_low_func)
             threat_low_func();
     }
-    
-    LOG(INFO) << "Threat: " << max_threat << ", " << smoothed_threat_level;
 }
 
 float ThreatLevelEstimate::getThreatFor(P<SpaceShip> ship)
