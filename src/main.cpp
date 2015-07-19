@@ -12,6 +12,8 @@
 #include "httpScriptAccess.h"
 #include "preferenceManager.h"
 
+#include "hardware/hardwareController.h"
+
 #ifdef __APPLE__
 #include <CoreFoundation/CoreFoundation.h>
 #endif
@@ -182,6 +184,11 @@ int main(int argc, char** argv)
         if (scienceInfoScript)
             scienceInfoScript->destroy();
     }
+    
+    P<HardwareController> hardware_controller = new HardwareController();
+    LOG(INFO) << "Reading hardware.ini";
+    hardware_controller->loadConfiguration("hardware.ini");
+    LOG(INFO) << "Done reading hardware.ini";
     
     returnToMainMenu();
     engine->runMainLoop();
