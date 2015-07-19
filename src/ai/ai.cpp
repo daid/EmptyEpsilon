@@ -209,7 +209,7 @@ void ShipAI::runOrders()
                 flyTowards(owner->getOrderTargetLocation());
             }
         }else{
-            //TODO: Find someething which can re-stock our weapons.
+            //TODO: Find a station which can re-stock our weapons.
             pathPlanner.clear();
         }
         break;

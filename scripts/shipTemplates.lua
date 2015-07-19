@@ -21,7 +21,7 @@ template = ShipTemplate():setName("Player Cruiser"):setModel("battleship_destroy
 template:setBeam(0, 90, -15, 1000.0, 6.0, 10)
 template:setBeam(1, 90,  15, 1000.0, 6.0, 10)
 template:setTubes(2, 8.0) -- Amount of torpedo tubes, and loading time of the tubes.
-template:setHull(100)
+template:setHull(200)
 template:setShields(80, 80)
 template:setSpeed(90, 10, 20)
 template:setWarpSpeed(0)
@@ -69,7 +69,7 @@ template:addDoor(8, 4, false);
 template = ShipTemplate():setName("Player Missile Cr."):setModel("space_cruiser_4")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setTubes(4, 8.0)
-template:setHull(100)
+template:setHull(200)
 template:setShields(110, 70)
 template:setSpeed(60, 8, 15)
 template:setWarpSpeed(800)
@@ -115,7 +115,7 @@ template = ShipTemplate():setName("Player Fighter"):setModel("small_fighter_1")
 template:setBeam(0, 40, -10, 1000.0, 6.0, 8)
 template:setBeam(1, 40,  10, 1000.0, 6.0, 8)
 template:setTubes(1, 10.0) -- Amount of torpedo tubes, loading time
-template:setHull(40)
+template:setHull(60)
 template:setShields(40, 40)
 template:setSpeed(110, 20, 40)
 template:setWarpSpeed(0)

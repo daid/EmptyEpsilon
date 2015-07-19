@@ -14,8 +14,19 @@ EpsilonServer::EpsilonServer()
     for(unsigned int n=0; n<factionInfo.size(); n++)
         factionInfo[n]->reset();
 
-    //soundManager->playMusicSet({"music/Dream Raid Full Version (Mock Up).ogg", "music/Thrust Sequence.ogg", "music/Recall of the Shadows_0.ogg", "music/Imminent Threat.ogg", "music/neocrey - Last Cyber Dance.ogg"});
+    threat_estimate = new ThreatLevelEstimate();
+    threat_estimate->setCallbacks([](){
+        soundManager->playMusicSet({"music/Nebulous_0.ogg", "music/OutThere.ogg", "music/GalacticTemple.ogg", "music/Please, answer me my friend.ogg", "music/spacelifeNo14_0.ogg"});
+    }, []() {
+        soundManager->playMusicSet({"music/Dream Raid Full Version (Mock Up).ogg", "music/Thrust Sequence.ogg", "music/Recall of the Shadows_0.ogg", "music/Imminent Threat.ogg", "music/neocrey - Last Cyber Dance.ogg"});
+    });
     soundManager->playMusicSet({"music/Nebulous_0.ogg", "music/OutThere.ogg", "music/GalacticTemple.ogg", "music/Please, answer me my friend.ogg", "music/spacelifeNo14_0.ogg"});
+}
+
+EpsilonServer::~EpsilonServer()
+{
+    if (threat_estimate)
+        threat_estimate->destroy();
 }
 
 void EpsilonServer::onNewClient(int32_t client_id)
