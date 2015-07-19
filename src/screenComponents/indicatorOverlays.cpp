@@ -1,6 +1,7 @@
 #include "indicatorOverlays.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
+#include "main.h"
 
 GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
 : GuiElement(owner, "INDICATOR_OVERLAYS")
@@ -29,6 +30,8 @@ GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
 
 GuiIndicatorOverlays::~GuiIndicatorOverlays()
 {
+    warpPostProcessor->enabled = false;
+    glitchPostProcessor->enabled = false;
 }
 
 void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
@@ -50,6 +53,32 @@ void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
         shield_hit_overlay->setAlpha(0);
         shield_low_warning_overlay->setAlpha(0);
         hull_hit_overlay->setAlpha(0);
+    }
+
+    if (my_spaceship)
+    {
+        if (my_spaceship->jump_indicator > 0.0)
+        {
+            glitchPostProcessor->enabled = true;
+            glitchPostProcessor->setUniform("magtitude", my_spaceship->jump_indicator * 10.0);
+            glitchPostProcessor->setUniform("delta", random(0, 360));
+        }else{
+            glitchPostProcessor->enabled = false;
+        }
+        if (my_spaceship->current_warp > 0.0)
+        {
+            warpPostProcessor->enabled = true;
+            warpPostProcessor->setUniform("amount", my_spaceship->current_warp * 0.01);
+        }else if (my_spaceship->jump_delay > 0.0 && my_spaceship->jump_delay < 2.0)
+        {
+            warpPostProcessor->enabled = true;
+            warpPostProcessor->setUniform("amount", (2.0 - my_spaceship->jump_delay) * 0.1);
+        }else{
+            warpPostProcessor->enabled = false;
+        }
+    }else{
+        warpPostProcessor->enabled = false;
+        glitchPostProcessor->enabled = false;
     }
     
     if (engine->getGameSpeed() == 0.0)
