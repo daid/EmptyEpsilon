@@ -2,6 +2,7 @@
 #include "menus/shipSelectionScreen.h"
 
 #include "screenComponents/indicatorOverlays.h"
+#include "screenComponents/noiseOverlay.h"
 #include "screenComponents/shipDestroyedPopup.h"
 
 CrewStationScreen::CrewStationScreen()
@@ -44,6 +45,7 @@ void CrewStationScreen::finishCreation()
 {
     button_strip->moveToFront();
     new GuiIndicatorOverlays(this);
+    new GuiNoiseOverlay(this);
     new GuiShipDestroyedPopup(this);
     if (tabs.size() < 2)
         button_strip->hide();

@@ -334,12 +334,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../SeriousProton/src/lua/lgc.h" />
-		<Unit filename="../SeriousProton/src/lua/linit.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../SeriousProton/src/lua/liolib.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="../SeriousProton/src/lua/llex.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -363,9 +357,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../SeriousProton/src/lua/lopcodes.h" />
-		<Unit filename="../SeriousProton/src/lua/loslib.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="../SeriousProton/src/lua/lparser.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -559,6 +550,8 @@
 		<Unit filename="src/screenComponents/jumpIndicator.h" />
 		<Unit filename="src/screenComponents/missileTubeControls.cpp" />
 		<Unit filename="src/screenComponents/missileTubeControls.h" />
+		<Unit filename="src/screenComponents/noiseOverlay.cpp" />
+		<Unit filename="src/screenComponents/noiseOverlay.h" />
 		<Unit filename="src/screenComponents/openCommsButton.cpp" />
 		<Unit filename="src/screenComponents/openCommsButton.h" />
 		<Unit filename="src/screenComponents/powerDamageIndicator.cpp" />
