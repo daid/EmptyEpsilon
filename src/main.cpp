@@ -186,9 +186,7 @@ int main(int argc, char** argv)
     }
     
     P<HardwareController> hardware_controller = new HardwareController();
-    LOG(INFO) << "Reading hardware.ini";
     hardware_controller->loadConfiguration("hardware.ini");
-    LOG(INFO) << "Done reading hardware.ini";
     
     returnToMainMenu();
     engine->runMainLoop();

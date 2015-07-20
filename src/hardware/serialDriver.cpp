@@ -295,7 +295,6 @@ void SerialPort::sendBreak()
 {
 #ifdef __WIN32__
     SetCommBreak(handle);
-    Sleep(1);
     ClearCommBreak(handle);
 #endif
 #ifdef __gnu_linux__

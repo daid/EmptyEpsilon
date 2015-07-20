@@ -62,9 +62,6 @@ int DMX512SerialDevice::getChannelCount()
 
 void DMX512SerialDevice::updateLoop()
 {
-    //Configure the port for straight DMX-512 protocol.
-    port->configure(250000, 8, SerialPort::NoParity, SerialPort::TwoStopbits);
-    
     //On the Open DMX USB controller, the RTS line is used to enable the RS485 transmitter.
     port->clearRTS();
     
@@ -72,13 +69,22 @@ void DMX512SerialDevice::updateLoop()
     while(run_thread)
     {
         //Send a break to initiate transfer
-        port->sendBreak();
-        //Send the start code, which is used to simulate the MAB.
+        //port->sendBreak(); //Does not seem to work? (Windows with Arduino running: https://github.com/mathertel/DMXSerial )
+        
+        //Configure the serial port for fake break.
+        port->configure(100000, 8, SerialPort::EvenParity, SerialPort::TwoStopbits);
+        //Send the fake break. 8 bits of 0, 1 parity bit which is 0. Which gives 9 bits at 10uSec. Which is 90uSec, more then the required 88uSec
+        port->send(start_code, sizeof(start_code));
+        
+        //Configure the port for straight DMX-512 protocol.
+        port->configure(250000, 8, SerialPort::NoParity, SerialPort::TwoStopbits);
+
+        //Send the start code.
         port->send(start_code, sizeof(start_code));
         //Send the channel data.
         port->send(channel_data, channel_count);
         
         //Delay a bit before sending again.
-        sf::sleep(sf::milliseconds(100));
+        sf::sleep(sf::milliseconds(25));
     }
 }
