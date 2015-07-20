@@ -29,7 +29,11 @@ static int addCommsReply(lua_State* L)
     comms_script_interface->reply_id++;
     return 0;
 }
+/// setCommsMessage(message)
+/// Sets the message/reply shown to the comms officer.
 REGISTER_SCRIPT_FUNCTION(setCommsMessage);
+/// addCommsReply(message, function)
+/// Add an reply option for communications.
 REGISTER_SCRIPT_FUNCTION(addCommsReply);
 
 bool CommsScriptInterface::openCommChannel(P<PlayerSpaceship> ship, P<SpaceObject> target, string script_name)

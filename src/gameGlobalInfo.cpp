@@ -153,6 +153,8 @@ static int victory(lua_State* L)
     engine->setGameSpeed(0.0);
     return 0;
 }
+/// victory(string)
+/// Called with a faction name as parameter, sets a certain faction as victor and ends the game.
 REGISTER_SCRIPT_FUNCTION(victory);
 
 static int globalMessage(lua_State* L)
@@ -161,6 +163,8 @@ static int globalMessage(lua_State* L)
     gameGlobalInfo->global_message_timeout = 5.0;
     return 0;
 }
+/// globalMessage(string)
+/// Show a global message on the main screens of all active player ships.
 REGISTER_SCRIPT_FUNCTION(globalMessage);
 
 static int getPlayerShip(lua_State* L)
@@ -183,4 +187,6 @@ static int getPlayerShip(lua_State* L)
         return 0;
     return convert<P<PlayerSpaceship> >::returnType(L, ship);
 }
+/// getPlayerShip(index)
+/// Return the player's ship, use -1 to get the first active player ship.
 REGISTER_SCRIPT_FUNCTION(getPlayerShip);
