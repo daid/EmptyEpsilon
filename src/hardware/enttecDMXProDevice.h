@@ -15,6 +15,7 @@ private:
     sf::Thread update_thread;
     
     bool run_thread;
+    int channel_count;
     uint8_t channel_data[512];
 public:
     EnttecDMXProDevice();

@@ -30,6 +30,7 @@ private:
     std::vector<HardwareOutputDevice*> devices;
     std::unordered_map<string, int> channel_mapping;
     std::vector<HardwareMappingState> states;
+    std::vector<float> channels;
 public:
     HardwareController();
     ~HardwareController();

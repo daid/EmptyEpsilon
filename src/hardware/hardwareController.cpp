@@ -91,6 +91,7 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
                 LOG(ERROR) << "Failed to configure device: " << settings["device"];
                 delete device;
             }else{
+                LOG(INFO) << "New hardware device: " << settings["device"] << " with: " << device->getChannelCount() << " channels";
                 devices.push_back(device);
             }
         }
@@ -149,7 +150,7 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
             {
                 if (state.effect->configure(settings))
                 {
-                    LOG(DEBUG) << "New hardware state: " << state.channel_nr << ":" << state.variable << " " << state.compare_operator << " " << state.compare_value;
+                    LOG(DEBUG) << "New hardware state: " << state.channel_nr << ":" << state.variable << " " << state.compare_operator << " " << state.compare_value << " " << effect;
                     states.push_back(state);
                 }else{
                     delete state.effect;
@@ -159,10 +160,19 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
     }else{
         LOG(ERROR) << "Unknown section in hardware.ini: " << section;
     }
+    
+    channels.resize(0);
+    for(HardwareOutputDevice* device : devices)
+    {
+        channels.resize(channels.size() + device->getChannelCount(), 0.0f);
+    }
+    LOG(INFO) << "Hardware subsystem initialized with: " << channels.size() << " channels";
 }
 
 void HardwareController::update(float delta)
 {
+    if (channels.size() < 1)
+        return;
     for(HardwareMappingState& state : states)
     {
         float variable = getVariableValue(state.variable);
@@ -175,16 +185,19 @@ void HardwareController::update(float delta)
         case HardwareMappingState::NotEqual: active = variable != state.compare_value; break;
         }
         
-        if (active)
+        if (active && state.channel_nr < int(channels.size()))
         {
-            float value = state.effect->onActive();
-            for(HardwareOutputDevice* device : devices)
-            {
-                device->setChannelData(state.channel_nr, value);
-            }
+            channels[state.channel_nr] = state.effect->onActive();
         }else{
             state.effect->onInactive();
         }
+    }
+
+    int idx = 0;
+    for(HardwareOutputDevice* device : devices)
+    {
+        for(int n=0; n<device->getChannelCount(); n++)
+            device->setChannelData(n, channels[idx++]);
     }
 }
 
@@ -197,6 +210,7 @@ float HardwareController::getVariableValue(string variable_name)
     
     if (variable_name == "Always")
         return 1.0;
+    SHIP_VARIABLE("HasShip", 1.0f);
     SHIP_VARIABLE("Hull", 100.0f * ship->hull_strength / ship->hull_max);
     SHIP_VARIABLE("FrontShield", 100.0f * ship->front_shield / ship->front_shield_max);
     SHIP_VARIABLE("RearShield", 100.0f * ship->rear_shield / ship->rear_shield_max);
@@ -217,6 +231,6 @@ float HardwareController::getVariableValue(string variable_name)
         SHIP_VARIABLE("TubeUnloading" + string(n), ship->weaponTube[n].state == WTS_Unloading ? 1.0f : 0.0f);
     }
     
-    LOG(WARNING) << "Unknown effect variable: " << variable_name;
+    LOG(WARNING) << "Unknown variable: " << variable_name;
     return 0.0;
 }
