@@ -19,8 +19,8 @@ HardwareController::~HardwareController()
 {
     for(HardwareOutputDevice* device : devices)
         delete device;
-    for(HardwareMappingEvent& event : events)
-        delete event.effect;
+    for(HardwareMappingState& state : states)
+        delete state.effect;
 }
 
 void HardwareController::loadConfiguration(string filename)
@@ -100,58 +100,59 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
             LOG(ERROR) << "Incorrect properties in [channel] section";
         else
             channel_mapping[settings["name"]] = settings["channel"].toInt();
-    }else if(section == "[event]")
+    }else if(section == "[state]")
     {
         string condition = settings["condition"];
         string effect = settings["effect"].lower();
         if (effect == "")
             effect = "static";
         
-        HardwareMappingEvent event;
-        event.variable = condition;
-        event.compare_operator = HardwareMappingEvent::Greater;
-        event.compare_value = 0.0;
-        event.effect = nullptr;
-        event.channel_nr = -1;
+        HardwareMappingState state;
+        state.variable = condition;
+        state.compare_operator = HardwareMappingState::Greater;
+        state.compare_value = 0.0;
+        state.effect = nullptr;
+        state.channel_nr = -1;
         if (channel_mapping.find(settings["target"]) != channel_mapping.end())
-            event.channel_nr = channel_mapping[settings["target"]];
+            state.channel_nr = channel_mapping[settings["target"]];
         
-        for(HardwareMappingEvent::EOperator compare_operator : {HardwareMappingEvent::Less, HardwareMappingEvent::Greater, HardwareMappingEvent::Equal, HardwareMappingEvent::NotEqual})
+        for(HardwareMappingState::EOperator compare_operator : {HardwareMappingState::Less, HardwareMappingState::Greater, HardwareMappingState::Equal, HardwareMappingState::NotEqual})
         {
             string compare_string = "<";
             switch(compare_operator)
             {
-            case HardwareMappingEvent::Less: compare_string = "<"; break;
-            case HardwareMappingEvent::Greater: compare_string = ">"; break;
-            case HardwareMappingEvent::Equal: compare_string = "=="; break;
-            case HardwareMappingEvent::NotEqual: compare_string = "!="; break;
+            case HardwareMappingState::Less: compare_string = "<"; break;
+            case HardwareMappingState::Greater: compare_string = ">"; break;
+            case HardwareMappingState::Equal: compare_string = "=="; break;
+            case HardwareMappingState::NotEqual: compare_string = "!="; break;
             }
             if (condition.find(compare_string) > -1)
             {
-                event.variable = condition.substr(0, condition.find(compare_string)).strip();
-                event.compare_operator = compare_operator;
-                event.compare_value = condition.substr(condition.find(compare_string) + 1).strip().toFloat();
+                state.variable = condition.substr(0, condition.find(compare_string)).strip();
+                state.compare_operator = compare_operator;
+                state.compare_value = condition.substr(condition.find(compare_string) + 1).strip().toFloat();
             }
         }
         
-        if (event.channel_nr < 0)
+        if (state.channel_nr < 0)
         {
+            LOG(ERROR) << "Unknown target channel in hardware.ini: " << settings["target"];
         }else{
             if (effect == "static")
-                event.effect = new HardwareMappingEffectStatic();
+                state.effect = new HardwareMappingEffectStatic();
             else if (effect == "glow")
-                event.effect = new HardwareMappingEffectGlow();
+                state.effect = new HardwareMappingEffectGlow();
             else if (effect == "blink")
-                event.effect = new HardwareMappingEffectBlink();
+                state.effect = new HardwareMappingEffectBlink();
             
-            if (event.effect)
+            if (state.effect)
             {
-                if (event.effect->configure(settings))
+                if (state.effect->configure(settings))
                 {
-                    LOG(DEBUG) << "New hardware event: " << event.channel_nr << ":" << event.variable << " " << event.compare_operator << " " << event.compare_value;
-                    events.push_back(event);
+                    LOG(DEBUG) << "New hardware state: " << state.channel_nr << ":" << state.variable << " " << state.compare_operator << " " << state.compare_value;
+                    states.push_back(state);
                 }else{
-                    delete event.effect;
+                    delete state.effect;
                 }
             }
         }
@@ -162,27 +163,27 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
 
 void HardwareController::update(float delta)
 {
-    for(HardwareMappingEvent& event : events)
+    for(HardwareMappingState& state : states)
     {
-        float variable = getVariableValue(event.variable);
+        float variable = getVariableValue(state.variable);
         bool active = false;
-        switch(event.compare_operator)
+        switch(state.compare_operator)
         {
-        case HardwareMappingEvent::Less: active = variable < event.compare_value; break;
-        case HardwareMappingEvent::Greater: active = variable > event.compare_value; break;
-        case HardwareMappingEvent::Equal: active = variable == event.compare_value; break;
-        case HardwareMappingEvent::NotEqual: active = variable != event.compare_value; break;
+        case HardwareMappingState::Less: active = variable < state.compare_value; break;
+        case HardwareMappingState::Greater: active = variable > state.compare_value; break;
+        case HardwareMappingState::Equal: active = variable == state.compare_value; break;
+        case HardwareMappingState::NotEqual: active = variable != state.compare_value; break;
         }
         
         if (active)
         {
-            float value = event.effect->onActive();
+            float value = state.effect->onActive();
             for(HardwareOutputDevice* device : devices)
             {
-                device->setChannelData(event.channel_nr, value);
+                device->setChannelData(state.channel_nr, value);
             }
         }else{
-            event.effect->onInactive();
+            state.effect->onInactive();
         }
     }
 }

@@ -6,7 +6,7 @@
 
 class HardwareOutputDevice;
 class HardwareMappingEffect;
-class HardwareMappingEvent
+class HardwareMappingState
 {
 public:
     enum EOperator
@@ -29,7 +29,7 @@ class HardwareController : public Updatable
 private:
     std::vector<HardwareOutputDevice*> devices;
     std::unordered_map<string, int> channel_mapping;
-    std::vector<HardwareMappingEvent> events;
+    std::vector<HardwareMappingState> states;
 public:
     HardwareController();
     ~HardwareController();
