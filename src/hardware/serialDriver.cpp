@@ -201,7 +201,8 @@ void SerialPort::send(void* data, int data_size)
     if (!isOpen())
         return;
 #ifdef __WIN32__
-    if (!WriteFile(handle, data, data_size, NULL, NULL))
+    DWORD written = 0;
+    if (!WriteFile(handle, data, data_size, &written, NULL))
     {
         COMSTAT comStat;
         DWORD   dwErrors;

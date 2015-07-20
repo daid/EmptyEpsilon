@@ -28,7 +28,7 @@ void HardwareController::loadConfiguration(string filename)
     FILE* f = fopen(filename.c_str(), "r");
     if (!f)
     {
-        LOG(INFO) << "No hardware.ini file. Not controlling external hardware.";
+        LOG(INFO) << filename << " not found. Not controlling external hardware.";
         return;
     }
 

@@ -129,7 +129,6 @@ sf::Vector2i ShipTemplate::interiorSize()
     if (min_pos != sf::Vector2i(1, 1))
     {
         sf::Vector2i offset = sf::Vector2i(1, 1) - min_pos;
-        LOG(INFO) << min_pos << offset;
         for(unsigned int n=0; n<rooms.size(); n++)
             rooms[n].position += offset;
         for(unsigned int n=0; n<doors.size(); n++)
