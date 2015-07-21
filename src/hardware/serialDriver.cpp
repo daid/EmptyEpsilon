@@ -351,7 +351,7 @@ string SerialPort::getPseudoDriverName(string port)
                 //Replace numbers by underscores so matching drivers is easier. As these device names are numbered.
                 for(unsigned int n=0; n<value_size; n++)
                     if(value[n] >= '0' && value[n] <= '9')
-                        value[n] = '_';
+                        value[n] = '@';
                 
                 ret = string(value);
             }

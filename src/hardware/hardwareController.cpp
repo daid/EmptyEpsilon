@@ -59,6 +59,13 @@ void HardwareController::loadConfiguration(string filename)
         handleConfig(section, settings);
     
     fclose(f);
+
+    channels.resize(0);
+    for(HardwareOutputDevice* device : devices)
+    {
+        channels.resize(channels.size() + device->getChannelCount(), 0.0f);
+    }
+    LOG(INFO) << "Hardware subsystem initialized with: " << channels.size() << " channels";
     
     if (devices.size() < 1)
     {
@@ -101,6 +108,12 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
             LOG(ERROR) << "Incorrect properties in [channel] section";
         else
             channel_mapping[settings["name"]] = settings["channel"].toInt();
+    }else if(section == "[channels]")
+    {
+        for(std::pair<string, string> item : settings)
+        {
+            channel_mapping[item.first] = item.second.toInt();
+        }
     }else if(section == "[state]")
     {
         string condition = settings["condition"];
@@ -160,13 +173,6 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
     }else{
         LOG(ERROR) << "Unknown section in hardware.ini: " << section;
     }
-    
-    channels.resize(0);
-    for(HardwareOutputDevice* device : devices)
-    {
-        channels.resize(channels.size() + device->getChannelCount(), 0.0f);
-    }
-    LOG(INFO) << "Hardware subsystem initialized with: " << channels.size() << " channels";
 }
 
 void HardwareController::update(float delta)
