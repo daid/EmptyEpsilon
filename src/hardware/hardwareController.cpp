@@ -117,15 +117,11 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
     }else if(section == "[state]")
     {
         string condition = settings["condition"];
-        string effect = settings["effect"].lower();
-        if (effect == "")
-            effect = "static";
         
         HardwareMappingState state;
         state.variable = condition;
         state.compare_operator = HardwareMappingState::Greater;
         state.compare_value = 0.0;
-        state.effect = nullptr;
         state.channel_nr = -1;
         if (channel_mapping.find(settings["target"]) != channel_mapping.end())
             state.channel_nr = channel_mapping[settings["target"]];
@@ -152,22 +148,38 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
         {
             LOG(ERROR) << "Unknown target channel in hardware.ini: " << settings["target"];
         }else{
-            if (effect == "static")
-                state.effect = new HardwareMappingEffectStatic();
-            else if (effect == "glow")
-                state.effect = new HardwareMappingEffectGlow();
-            else if (effect == "blink")
-                state.effect = new HardwareMappingEffectBlink();
+            state.effect = createEffect(settings);
             
             if (state.effect)
             {
-                if (state.effect->configure(settings))
-                {
-                    LOG(DEBUG) << "New hardware state: " << state.channel_nr << ":" << state.variable << " " << state.compare_operator << " " << state.compare_value << " " << effect;
-                    states.push_back(state);
-                }else{
-                    delete state.effect;
-                }
+                LOG(DEBUG) << "New hardware state: " << state.channel_nr << ":" << state.variable << " " << state.compare_operator << " " << state.compare_value;
+                states.push_back(state);
+            }
+        }
+    }else if(section == "[event]")
+    {
+        string trigger = settings["trigger"];
+        
+        HardwareMappingEvent event;
+        event.trigger_variable = trigger;
+        event.compare_operator = HardwareMappingEvent::Change;
+        event.channel_nr = -1;
+        event.runtime = settings["runtime"].toFloat();
+        event.triggered = false;
+        event.previous_value = 0.0;
+        
+        if (channel_mapping.find(settings["target"]) != channel_mapping.end())
+            event.channel_nr = channel_mapping[settings["target"]];
+        
+        if (event.channel_nr < 0)
+        {
+            LOG(ERROR) << "Unknown target channel in hardware.ini: " << settings["target"];
+        }else{
+            event.effect = createEffect(settings);
+            if (event.effect)
+            {
+                LOG(DEBUG) << "New hardware event: " << event.channel_nr << ":" << event.trigger_variable << " " << event.compare_operator;
+                events.push_back(event);
             }
         }
     }else{
@@ -179,6 +191,8 @@ void HardwareController::update(float delta)
 {
     if (channels.size() < 1)
         return;
+    for(float& value : channels)
+        value = 0.0;
     for(HardwareMappingState& state : states)
     {
         float variable = getVariableValue(state.variable);
@@ -198,6 +212,40 @@ void HardwareController::update(float delta)
             state.effect->onInactive();
         }
     }
+    for(HardwareMappingEvent& event : events)
+    {
+        float variable = getVariableValue(event.trigger_variable);
+        bool trigger = false;
+        switch(event.compare_operator)
+        {
+        case HardwareMappingEvent::Change:
+            if (fabs(event.previous_value - variable) > 0.1)
+                trigger = true;
+            break;
+        case HardwareMappingEvent::Increase:
+            if (variable > event.previous_value)
+                trigger = true;
+            break;
+        case HardwareMappingEvent::Decrease:
+            if (variable < event.previous_value)
+                trigger = true;
+            break;
+        }
+        event.previous_value = variable;
+        if (trigger)
+        {
+            event.triggered = true;
+            event.start_time.restart();
+        }
+        if (event.triggered && event.channel_nr < int(channels.size()))
+        {
+            channels[event.channel_nr] = event.effect->onActive();
+            if (event.start_time.getElapsedTime().asSeconds() > event.runtime)
+                event.triggered = false;
+        }else{
+            event.effect->onInactive();
+        }
+    }
 
     int idx = 0;
     for(HardwareOutputDevice* device : devices)
@@ -205,6 +253,23 @@ void HardwareController::update(float delta)
         for(int n=0; n<device->getChannelCount(); n++)
             device->setChannelData(n, channels[idx++]);
     }
+}
+
+HardwareMappingEffect* HardwareController::createEffect(std::unordered_map<string, string>& settings)
+{
+    HardwareMappingEffect* effect = nullptr;
+    string effect_name = settings["effect"].lower();
+    if (effect_name == "static" || effect_name == "")
+        effect = new HardwareMappingEffectStatic();
+    else if (effect_name == "glow")
+        effect = new HardwareMappingEffectGlow();
+    else if (effect_name == "blink")
+        effect = new HardwareMappingEffectBlink();
+    
+    if (effect->configure(settings))
+        return effect;
+    delete effect;
+    return nullptr;
 }
 
 #define SHIP_VARIABLE(name, formula) if (variable_name == name) { if (ship) { return formula; } return 0.0f; }
