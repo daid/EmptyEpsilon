@@ -697,11 +697,11 @@ void GuiShipRetrofit::open(P<SpaceShip> target)
     turn_speed_slider->setValue(target->turn_speed);
     turn_speed_slider->setSnapValue(target->ship_template->turn_speed, 1.0f);
     hull_slider->setValue(target->hull_max);
-    hull_slider->setSnapValue(target->ship_template->hull, 1.0f);
+    hull_slider->setSnapValue(target->ship_template->hull, 5.0f);
     front_shield_slider->setValue(target->front_shield_max);
-    front_shield_slider->setSnapValue(target->ship_template->front_shields, 1.0f);
+    front_shield_slider->setSnapValue(target->ship_template->front_shields, 5.0f);
     rear_shield_slider->setValue(target->rear_shield_max);
-    rear_shield_slider->setSnapValue(target->ship_template->rear_shields, 1.0f);
+    rear_shield_slider->setSnapValue(target->ship_template->rear_shields, 5.0f);
     missile_tube_amount_selector->setSelectionIndex(target->weapon_tubes);
     for(int n=0; n<MW_Count; n++)
         missile_storage_amount_selector[n]->setSelectionIndex(target->weapon_storage_max[n]);

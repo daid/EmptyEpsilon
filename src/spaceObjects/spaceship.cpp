@@ -530,6 +530,8 @@ void SpaceShip::update(float delta)
     {
         for(int n=0; n<max_beam_weapons; n++)
         {
+            if (beam_weapons[n].range <= 0.0)
+                continue;
             if (target && isEnemy(target) && beam_weapons[n].cooldown <= 0.0)
             {
                 sf::Vector2f diff = target->getPosition() - (getPosition() + sf::rotateVector(ship_template->model_data->getBeamPosition2D(n), getRotation()));
