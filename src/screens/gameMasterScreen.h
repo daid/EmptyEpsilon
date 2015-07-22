@@ -131,6 +131,8 @@ private:
     GuiSlider* hull_slider;
     GuiSlider* front_shield_slider;
     GuiSlider* rear_shield_slider;
+    GuiSelector* missile_tube_amount_selector;
+    GuiSelector* missile_storage_amount_selector[MW_Count];
 public:
     GuiShipRetrofit(GuiContainer* owner);
     

@@ -641,28 +641,26 @@ GuiShipRetrofit::GuiShipRetrofit(GuiContainer* owner)
         target->rear_shield = std::min(target->rear_shield, target->rear_shield_max);
     });
     rear_shield_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
-    /*
-    x += 350;
-    y = 200;
-
-    ship->weapon_tubes += drawSelector(sf::FloatRect(x, y, 300, 30), "Missile tubes: " + string(ship->weapon_tubes), 20);
-    if (ship->weapon_tubes < 0)
-        ship->weapon_tubes = max_weapon_tubes;
-    if (ship->weapon_tubes > max_weapon_tubes)
-        ship->weapon_tubes = 0;
-    y += 30;
+    
+    missile_tube_amount_selector = new GuiSelector(left_col, "", [this](int index, string value) {
+        target->weapon_tubes = index;
+    });
+    for(int n=0; n<max_weapon_tubes; n++)
+        missile_tube_amount_selector->addEntry("Missile tubes: " + string(n), "");
+    missile_tube_amount_selector->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
+    
     for(int n=0; n<MW_Count; n++)
     {
-        int diff = drawSelector(sf::FloatRect(x, y, 300, 30), getMissileWeaponName(EMissileWeapons(n)) + ": " + string(ship->weapon_storage[n]) + "/" + string(ship->weapon_storage_max[n]), 20);
-        y += 30;
-        ship->weapon_storage[n] += diff;
-        ship->weapon_storage_max[n] += diff;
-        if (ship->weapon_storage_max[n] < 0)
-            ship->weapon_storage_max[n] = 0;
-        if (ship->weapon_storage[n] < 0)
-            ship->weapon_storage[n] = 0;
+        missile_storage_amount_selector[n] = new GuiSelector(left_col, "", [this, n](int index, string value) {
+            int diff = target->weapon_storage_max[n] - index;
+            target->weapon_storage_max[n] += diff;
+            target->weapon_storage[n] = std::max(0, target->weapon_storage[n] + diff);
+        });
+        for(int m=0; m<50; m++)
+            missile_storage_amount_selector[n]->addEntry(getMissileWeaponName(EMissileWeapons(n)) + ": " + string(m), "");
+        missile_storage_amount_selector[n]->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     }
-
+/*
     x += 350;
     y = 200;
     for(int n=0; n<SYS_COUNT; n++)
@@ -704,6 +702,9 @@ void GuiShipRetrofit::open(P<SpaceShip> target)
     front_shield_slider->setSnapValue(target->ship_template->front_shields, 1.0f);
     rear_shield_slider->setValue(target->rear_shield_max);
     rear_shield_slider->setSnapValue(target->ship_template->rear_shields, 1.0f);
+    missile_tube_amount_selector->setSelectionIndex(target->weapon_tubes);
+    for(int n=0; n<MW_Count; n++)
+        missile_storage_amount_selector[n]->setSelectionIndex(target->weapon_storage_max[n]);
     
     show();
 }
