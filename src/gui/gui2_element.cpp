@@ -295,8 +295,7 @@ void GuiElement::draw9Cut(sf::RenderTarget& window, sf::FloatRect rect, string t
         scale = float(rect.height / 2) / cornerSizeR;
         sprite.setScale(scale, scale);
         cornerSizeR *= scale;
-    }
-    if (cornerSizeT > rect.width / 2)
+    }else if (cornerSizeT > rect.width / 2)
     {
         scale = float(rect.width / 2) / cornerSizeR;
         sprite.setScale(scale, scale);

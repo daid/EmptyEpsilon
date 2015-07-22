@@ -2,6 +2,7 @@
 #define GUI2_SLIDER_H
 
 #include "gui2_element.h"
+#include "gui2_label.h"
 
 class GuiSlider : public GuiElement
 {
@@ -15,6 +16,7 @@ protected:
     float snap_range;
     func_t func;
     sf::Keyboard::Key up_hotkey, down_hotkey;
+    GuiLabel* overlay_label;
 public:
     GuiSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func);
 
@@ -26,6 +28,7 @@ public:
     
     GuiSlider* setSnapValue(float value, float range);
     GuiSlider* setValue(float value);
+    GuiSlider* addOverlay();
     float getValue();
 };
 

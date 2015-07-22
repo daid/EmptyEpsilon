@@ -6,6 +6,7 @@
 GuiSlider::GuiSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
 : GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), snap_value(std::numeric_limits<float>::infinity()), func(func), up_hotkey(sf::Keyboard::KeyCount), down_hotkey(sf::Keyboard::KeyCount)
 {
+    overlay_label = nullptr;
     if (id != "")
     {
         up_hotkey = PreferencesManager::getKey(id + "_UP_HOTKEY");
@@ -48,6 +49,11 @@ void GuiSlider::onDraw(sf::RenderTarget& window)
         }
         y = rect.top + (rect.height - rect.width) * (value - min_value) / (max_value - min_value);
         draw9Cut(window, sf::FloatRect(rect.left, y, rect.width, rect.width), "button_background", color);
+    }
+    
+    if (overlay_label)
+    {
+        overlay_label->setText(string(value, 0));
     }
 }
 
@@ -143,6 +149,16 @@ GuiSlider* GuiSlider::setValue(float value)
             value = max_value;
     }
     this->value = value;
+    return this;
+}
+
+GuiSlider* GuiSlider::addOverlay()
+{
+    if (!overlay_label)
+    {
+        overlay_label = new GuiLabel(this, "", "", 30);
+        overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    }
     return this;
 }
 

@@ -126,6 +126,11 @@ private:
     GuiTextEntry* type_name;
     GuiSelector* warp_selector;
     GuiSelector* jump_selector;
+    GuiSlider* impulse_speed_slider;
+    GuiSlider* turn_speed_slider;
+    GuiSlider* hull_slider;
+    GuiSlider* front_shield_slider;
+    GuiSlider* rear_shield_slider;
 public:
     GuiShipRetrofit(GuiContainer* owner);
     

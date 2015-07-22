@@ -600,34 +600,48 @@ GuiShipRetrofit::GuiShipRetrofit(GuiContainer* owner)
         target->ship_type_name = text;
     });
     
-    warp_selector = new GuiSelector(left_col, "WARP", [this](int index, string value) {
+    warp_selector = new GuiSelector(left_col, "", [this](int index, string value) {
         target->setWarpDrive(index != 0);
     });
     warp_selector->setTextSize(20)->setOptions({"WarpDrive: No", "WarpDrive: Yes"})->setSize(GuiElement::GuiSizeMax, 30);
-    jump_selector = new GuiSelector(left_col, "JUMP", [this](int index, string value) {
+    jump_selector = new GuiSelector(left_col, "", [this](int index, string value) {
         target->setJumpDrive(index != 0);
     });
     jump_selector->setTextSize(20)->setOptions({"JumpDrive: No", "JumpDrive: Yes"})->setSize(GuiElement::GuiSizeMax, 30);
     
-    /*
-    y += 30;
-    ship->impulse_max_speed += drawSelector(sf::FloatRect(x, y, 300, 30), "Max speed: " + string(ship->impulse_max_speed), 20);
-    y += 30;
-    ship->turn_speed += drawSelector(sf::FloatRect(x, y, 300, 30), "Rotation speed: " + string(ship->turn_speed), 20);
-    y += 30;
-    diff = drawSelector(sf::FloatRect(x, y, 300, 30), "Hull: " + string(ship->hull_strength) + "/" + string(ship->hull_max), 20);
-    ship->hull_strength = std::max(0.0f, ship->hull_strength + diff * 5);
-    ship->hull_max = std::max(0.0f, ship->hull_max + diff * 5);
-    y += 30;
-    diff = drawSelector(sf::FloatRect(x, y, 300, 30), "Front shield: " + string(ship->front_shield) + "/" + string(ship->front_shield_max), 20);
-    ship->front_shield = std::max(0.0f, ship->front_shield + diff * 15);
-    ship->front_shield_max = std::max(0.0f, ship->front_shield_max + diff * 15);
-    y += 30;
-    diff = drawSelector(sf::FloatRect(x, y, 300, 30), "Front shield: " + string(ship->rear_shield) + "/" + string(ship->rear_shield_max), 20);
-    ship->rear_shield = std::max(0.0f, ship->rear_shield + diff * 15);
-    ship->rear_shield_max = std::max(0.0f, ship->rear_shield_max + diff * 15);
-    y += 30;
+    (new GuiLabel(left_col, "", "Impulse speed:", 30))->setSize(GuiElement::GuiSizeMax, 30);
+    impulse_speed_slider = new GuiSlider(left_col, "", 0.0, 250, 0.0, [this](float value) {
+        target->impulse_max_speed = value;
+    });
+    impulse_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
+    
+    (new GuiLabel(left_col, "", "Turn speed:", 30))->setSize(GuiElement::GuiSizeMax, 30);
+    turn_speed_slider = new GuiSlider(left_col, "", 0.0, 25, 0.0, [this](float value) {
+        target->turn_speed = value;
+    });
+    turn_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
+    
+    (new GuiLabel(left_col, "", "Hull:", 30))->setSize(GuiElement::GuiSizeMax, 30);
+    hull_slider = new GuiSlider(left_col, "", 0.0, 500, 0.0, [this](float value) {
+        target->hull_max = value;
+        target->hull_strength = std::min(target->hull_strength, target->hull_max);
+    });
+    hull_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
+    (new GuiLabel(left_col, "", "Front shield:", 30))->setSize(GuiElement::GuiSizeMax, 30);
+    front_shield_slider = new GuiSlider(left_col, "", 0.0, 500, 0.0, [this](float value) {
+        target->front_shield_max = value;
+        target->front_shield = std::min(target->front_shield, target->front_shield_max);
+    });
+    front_shield_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
+
+    (new GuiLabel(left_col, "", "Rear shield:", 30))->setSize(GuiElement::GuiSizeMax, 30);
+    rear_shield_slider = new GuiSlider(left_col, "", 0.0, 500, 0.0, [this](float value) {
+        target->rear_shield_max = value;
+        target->rear_shield = std::min(target->rear_shield, target->rear_shield_max);
+    });
+    rear_shield_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
+    /*
     x += 350;
     y = 200;
 
@@ -680,6 +694,16 @@ void GuiShipRetrofit::open(P<SpaceShip> target)
     type_name->setText(target->ship_type_name);
     warp_selector->setSelectionIndex(target->has_warp_drive ? 1 : 0);
     jump_selector->setSelectionIndex(target->hasJumpDrive() ? 1 : 0);
+    impulse_speed_slider->setValue(target->impulse_max_speed);
+    impulse_speed_slider->setSnapValue(target->ship_template->impulse_speed, 5.0f);
+    turn_speed_slider->setValue(target->turn_speed);
+    turn_speed_slider->setSnapValue(target->ship_template->turn_speed, 1.0f);
+    hull_slider->setValue(target->hull_max);
+    hull_slider->setSnapValue(target->ship_template->hull, 1.0f);
+    front_shield_slider->setValue(target->front_shield_max);
+    front_shield_slider->setSnapValue(target->ship_template->front_shields, 1.0f);
+    rear_shield_slider->setValue(target->rear_shield_max);
+    rear_shield_slider->setSnapValue(target->ship_template->rear_shields, 1.0f);
     
     show();
 }
