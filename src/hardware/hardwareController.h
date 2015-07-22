@@ -40,6 +40,7 @@ public:
     sf::Clock start_time;
 
     EOperator compare_operator;
+    bool previous_valid;
     float previous_value;
     int channel_nr;
     
@@ -64,7 +65,7 @@ private:
     void handleConfig(string section, std::unordered_map<string, string> settings);
     HardwareMappingEffect* createEffect(std::unordered_map<string, string>& settings);
     
-    float getVariableValue(string variable_name);
+    bool getVariableValue(string variable_name, float& value);
 };
 
 #endif//HARDWARE_CONTROLLER_H

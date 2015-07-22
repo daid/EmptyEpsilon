@@ -161,8 +161,18 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
         string trigger = settings["trigger"];
         
         HardwareMappingEvent event;
-        event.trigger_variable = trigger;
         event.compare_operator = HardwareMappingEvent::Change;
+        if (trigger.startswith("<"))
+        {
+            event.compare_operator = HardwareMappingEvent::Decrease;
+            trigger = trigger.substr(1).strip();
+        }
+        if (trigger.startswith(">"))
+        {
+            event.compare_operator = HardwareMappingEvent::Increase;
+            trigger = trigger.substr(1).strip();
+        }
+        event.trigger_variable = trigger;
         event.channel_nr = -1;
         event.runtime = settings["runtime"].toFloat();
         event.triggered = false;
@@ -195,14 +205,17 @@ void HardwareController::update(float delta)
         value = 0.0;
     for(HardwareMappingState& state : states)
     {
-        float variable = getVariableValue(state.variable);
+        float value;
         bool active = false;
-        switch(state.compare_operator)
+        if (getVariableValue(state.variable, value))
         {
-        case HardwareMappingState::Less: active = variable < state.compare_value; break;
-        case HardwareMappingState::Greater: active = variable > state.compare_value; break;
-        case HardwareMappingState::Equal: active = variable == state.compare_value; break;
-        case HardwareMappingState::NotEqual: active = variable != state.compare_value; break;
+            switch(state.compare_operator)
+            {
+            case HardwareMappingState::Less: active = value < state.compare_value; break;
+            case HardwareMappingState::Greater: active = value > state.compare_value; break;
+            case HardwareMappingState::Equal: active = value == state.compare_value; break;
+            case HardwareMappingState::NotEqual: active = value != state.compare_value; break;
+            }
         }
         
         if (active && state.channel_nr < int(channels.size()))
@@ -214,24 +227,33 @@ void HardwareController::update(float delta)
     }
     for(HardwareMappingEvent& event : events)
     {
-        float variable = getVariableValue(event.trigger_variable);
+        float value;
         bool trigger = false;
-        switch(event.compare_operator)
+        if (getVariableValue(event.trigger_variable, value))
         {
-        case HardwareMappingEvent::Change:
-            if (fabs(event.previous_value - variable) > 0.1)
-                trigger = true;
-            break;
-        case HardwareMappingEvent::Increase:
-            if (variable > event.previous_value)
-                trigger = true;
-            break;
-        case HardwareMappingEvent::Decrease:
-            if (variable < event.previous_value)
-                trigger = true;
-            break;
+            if (event.previous_valid)
+            {
+                switch(event.compare_operator)
+                {
+                case HardwareMappingEvent::Change:
+                    if (fabs(event.previous_value - value) > 0.1)
+                        trigger = true;
+                    break;
+                case HardwareMappingEvent::Increase:
+                    if (value > event.previous_value + 0.1)
+                        trigger = true;
+                    break;
+                case HardwareMappingEvent::Decrease:
+                    if (value < event.previous_value - 0.1)
+                        trigger = true;
+                    break;
+                }
+            }
+            event.previous_value = value;
+            event.previous_valid = true;
+        }else{
+            event.previous_valid = false;
         }
-        event.previous_value = variable;
         if (trigger)
         {
             event.triggered = true;
@@ -272,16 +294,23 @@ HardwareMappingEffect* HardwareController::createEffect(std::unordered_map<strin
     return nullptr;
 }
 
-#define SHIP_VARIABLE(name, formula) if (variable_name == name) { if (ship) { return formula; } return 0.0f; }
-float HardwareController::getVariableValue(string variable_name)
+#define SHIP_VARIABLE(name, formula) if (variable_name == name) { if (ship) { value = (formula); return true; } return false; }
+bool HardwareController::getVariableValue(string variable_name, float& value)
 {
     P<PlayerSpaceship> ship = my_spaceship;
     if (!ship && gameGlobalInfo)
         ship = gameGlobalInfo->getPlayerShip(0);
     
     if (variable_name == "Always")
-        return 1.0;
-    SHIP_VARIABLE("HasShip", 1.0f);
+    {
+        value = 1.0;
+        return true;
+    }
+    if (variable_name == "HasShip")
+    {
+        value = bool(ship) ? 1.0f : 0.0f;
+        return true;
+    }
     SHIP_VARIABLE("Hull", 100.0f * ship->hull_strength / ship->hull_max);
     SHIP_VARIABLE("FrontShield", 100.0f * ship->front_shield / ship->front_shield_max);
     SHIP_VARIABLE("RearShield", 100.0f * ship->rear_shield / ship->rear_shield_max);
@@ -303,5 +332,6 @@ float HardwareController::getVariableValue(string variable_name)
     }
     
     LOG(WARNING) << "Unknown variable: " << variable_name;
-    return 0.0;
+    value = 0.0;
+    return false;
 }
