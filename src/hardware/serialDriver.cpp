@@ -6,8 +6,10 @@
 //Including ioctl or termios conflicts with asm/termios.h which we need for TCGETS2. So locally define the ioctl and tcsendbreak functions. Yes, it's dirty, but it works.
 //#include <sys/ioctl.h>
 //#include <termios.h>
+extern "C" {
 extern int ioctl (int __fd, unsigned long int __request, ...) __THROW;
 extern int tcsendbreak (int __fd, int __duration) __THROW;
+}
 #include <asm/termios.h>
 #include <fcntl.h>
 #include <unistd.h>
