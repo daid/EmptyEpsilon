@@ -277,6 +277,9 @@ public:
      */
     void requestUndock();
     void setScanned(bool scanned) { scanned_by_player = scanned ? SS_FullScan : SS_NotScanned; }
+    bool isFriendOrFoeIdentified() { return scanned_by_player >= SS_FriendOrFoeIdentified; }
+    bool isScanned() { return scanned_by_player >= SS_SimpleScan; }
+    bool isFullyScanned() { return scanned_by_player >= SS_FullScan; }
 
     /*!
      * Check if ship has certain system
