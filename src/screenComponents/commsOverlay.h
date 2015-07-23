@@ -13,6 +13,7 @@ private:
     GuiLabel* hailed_label;
 
     GuiBox* no_response_box;
+    GuiBox* broken_box;
     
     GuiBox* chat_comms_box;
     GuiTextEntry* chat_comms_message_entry;

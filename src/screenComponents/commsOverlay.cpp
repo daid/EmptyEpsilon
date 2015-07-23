@@ -31,6 +31,14 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         if (my_spaceship)
             my_spaceship->commandCloseTextComm();
     }))->setSize(150, 50)->setPosition(-20, -10, ABottomRight);
+
+    broken_box = new GuiBox(owner, "COMMS_BROKEN_BOX");
+    broken_box->fill()->hide()->setSize(800, 70)->setPosition(0, -250, ABottomCenter);
+    (new GuiLabel(no_response_box, "COMMS_BROKEN_LABEL", "Communications where suddenly cut", 40))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopLeft);
+    (new GuiButton(no_response_box, "COMMS_BROKEN_OK", "Ok", []() {
+        if (my_spaceship)
+            my_spaceship->commandCloseTextComm();
+    }))->setSize(150, 50)->setPosition(-20, -10, ABottomRight);
     
     chat_comms_box = new GuiBox(owner, "COMMS_CHAT_BOX");
     chat_comms_box->fill()->hide()->setSize(800, 600)->setPosition(0, -100, ABottomCenter);
@@ -88,6 +96,8 @@ void GuiCommsOverlay::onDraw(sf::RenderTarget& window)
         hailed_label->setText(my_spaceship->comms_incomming_message);
         
         no_response_box->setVisible(my_spaceship->comms_state == CS_ChannelFailed);
+
+        broken_box->setVisible(my_spaceship->comms_state == CS_ChannelBroken);
         
         chat_comms_box->setVisible(my_spaceship->comms_state == CS_ChannelOpenPlayer || my_spaceship->comms_state == CS_ChannelOpenGM);
         chat_comms_text->setText(my_spaceship->comms_incomming_message);
