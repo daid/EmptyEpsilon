@@ -63,12 +63,13 @@ public:
     bool isEnemy(P<SpaceObject> obj);
     bool isFriendly(P<SpaceObject> obj);
     void setFaction(string faction_name) { this->faction_id = FactionInfo::findFactionId(faction_name); }
+    string getFaction() { return factionInfo[this->faction_id]->getName(); }
     void setFactionId(unsigned int faction_id) { this->faction_id = faction_id; }
+    unsigned int getFactionId() { return faction_id; }
     int getReputationPoints();
     bool takeReputationPoints(float amount);
     void removeReputationPoints(float amount);
     void addReputationPoints(float amount);
-    unsigned int getFactionId() { return faction_id; }
     void setCommsScript(string script_name) { this->comms_script_name = script_name; }
     bool areEnemiesInRange(float range);
     PVector<SpaceObject> getObjectsInRange(float range);

@@ -27,6 +27,8 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     
     /// Sets the faction to which this object belongs. Requires a string as input.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setFaction);
+    /// Gets the faction name to which this object belongs.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getFaction);
     /// Sets the faction to which this object belongs. Requires a index in the faction list.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setFactionId);
     /// Gets the index in the faction list from this object.
