@@ -1,4 +1,9 @@
 function mainMenu()
+	if comms_target.comms_data == nil then
+		comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
+	end
+	comms_data = comms_target.comms_data
+	
 	if player:isEnemy(comms_target) then
 		return false
 	end

@@ -17,7 +17,7 @@ function mainMenu()
 end
 
 function friendlyComms(comms_data)
-	if comms_data.friendlyness < 0.2 then
+	if comms_data.friendlyness < 20 then
 		setCommsMessage("What the fuck do you want?");
 	else
 		setCommsMessage("Sir, how can we assist?");
@@ -68,7 +68,7 @@ function friendlyComms(comms_data)
 end
 
 function enemyComms(comms_data)
-	if comms_data.friendlyness > 0.5 then
+	if comms_data.friendlyness > 50 then
 		faction = comms_target:getFaction()
 		taunt_option = "We will see to your destruction!"
 		taunt_success_reply = "Your bloodline will end here!"
@@ -87,7 +87,7 @@ function enemyComms(comms_data)
 		else
 			setCommsMessage("Mind your own buisness!");
 		end
-		comms_data.friendlyness = comms_data.friendlyness - random(0, 0.1)
+		comms_data.friendlyness = comms_data.friendlyness - random(0, 10)
 		addCommsReply(taunt_option, function()
 			if random(0, 100) < 30 then
 				comms_target:orderAttack(player)
@@ -102,7 +102,7 @@ function enemyComms(comms_data)
 end
 
 function neutralComms(comms_data)
-	if comms_data.friendlyness > 0.5 then
+	if comms_data.friendlyness > 50 then
 		setCommsMessage("Sorry, no time to chat with you.\nWe are on an important mission.");
 	else
 		setCommsMessage("We have nothing for you.\nGood day.");
