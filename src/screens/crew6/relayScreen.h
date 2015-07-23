@@ -31,6 +31,7 @@ private:
     GuiKeyValueDisplay* info_type;
     GuiKeyValueDisplay* info_shields;
     
+    GuiKeyValueDisplay* info_reputation;
     GuiAutoLayout* option_buttons;
     
     sf::Vector2f mouse_down_position;

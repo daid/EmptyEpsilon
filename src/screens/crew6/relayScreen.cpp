@@ -79,6 +79,9 @@ RelayScreen::RelayScreen(GuiContainer* owner)
         mode = LaunchProbe;
         option_buttons->hide();
     }))->setSize(GuiElement::GuiSizeMax, 50);
+    
+    info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.7, "Reputation:", "");
+    info_reputation->setSize(GuiElement::GuiSizeMax, 40);
 
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
@@ -91,7 +94,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
     info_type->setValue("-");
     info_shields->setValue("-");
 
-    if (targets.get())
+    if (targets.get() && my_spaceship)
     {
         P<SpaceObject> target = targets.get();
         bool near_friendly = false;
@@ -155,4 +158,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
         info_heading->setValue("-");
         info_relspeed->setValue("-");
     }
+    
+    if (my_spaceship)
+        info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0));
 }
