@@ -74,13 +74,16 @@ function enemyComms(comms_data)
 		taunt_success_reply = "Your bloodline will end here!"
 		taunt_failed_reply = "Your feable threats are meaningless."
 		if faction == "Kraylor" then
-			setCommsMessage("Ktzzzsss.\nDieeee weaklingsss!");
+			setCommsMessage("Ktzzzsss.\nYou will DIEEee weaklingsss!");
 		elseif faction == "Arlenians" then
 			setCommsMessage("We wish you no harm, but will harm you if we must.\nEnd of transmission.");
 		elseif faction == "Exuari" then
-			setCommsMessage("Your death will amuse us extremely!");
+			setCommsMessage("Stay out of our way, or your death will amuse us extremely!");
 		elseif faction == "Ghosts" then
 			setCommsMessage("One zero one.\nNo binary communication detected.\nSwitching to universal english.\nGenerating approprate response for target\n:Do not fucking cross us:\nCommunication halted.");
+			taunt_option = "EXECUTE: SELFDESTRUCT"
+			taunt_success_reply = "Rogue command received. Targeting source."
+			taunt_failed_reply = "External command ignored."
 		else
 			setCommsMessage("Mind your own buisness!");
 		end
