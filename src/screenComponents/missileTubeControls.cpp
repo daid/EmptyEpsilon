@@ -58,6 +58,8 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window)
 {
     if (!my_spaceship)
         return;
+    for(int n=0; n<MW_Count; n++)
+        load_type_buttons[n]->setText(getMissileWeaponName(EMissileWeapons(n)) + " [" + string(my_spaceship->weapon_storage[n]) + "/" + string(my_spaceship->weapon_storage_max[n]) + "]");
     
     for(int n=0; n<my_spaceship->weapon_tubes; n++)
     {

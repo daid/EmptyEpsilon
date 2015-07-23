@@ -16,5 +16,4 @@ void HomingMissile::hitObject(P<SpaceObject> object)
     e->setSize(30);
     e->setPosition(getPosition());
     e->setOnRadar(true);
-    destroy();
 }
