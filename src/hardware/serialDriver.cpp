@@ -3,8 +3,16 @@
 #include <Windows.h>
 #endif
 #ifdef __gnu_linux__
+//Including ioctl or termios conflicts with asm/termios.h which we need for TCGETS2. So locally define the ioctl and tcsendbreak functions. Yes, it's dirty, but it works.
+//#include <sys/ioctl.h>
+//#include <termios.h>
+extern "C" {
+extern int ioctl (int __fd, unsigned long int __request, ...) __THROW;
+extern int tcsendbreak (int __fd, int __duration) __THROW;
+}
 #include <asm/termios.h>
 #include <fcntl.h>
+#include <unistd.h>
 #endif
 
 #include "serialDriver.h"
@@ -33,7 +41,8 @@ SerialPort::SerialPort(string name)
             LOG(WARNING) << "SetCommTimeouts failed!";
         }
     }
-#else
+#endif
+#ifdef __gnu_linux__
     handle = open(("/dev/" + name).c_str(), O_RDWR | O_NOCTTY | O_NDELAY);
 #endif
     if (!isOpen())
@@ -48,7 +57,8 @@ SerialPort::~SerialPort()
 #ifdef __WIN32__
     CloseHandle(handle);
     handle = INVALID_HANDLE_VALUE;
-#else
+#endif
+#ifdef __gnu_linux__
     close(handle);
     handle = 0;
 #endif
@@ -131,7 +141,7 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
 #endif
 #ifdef __gnu_linux__
     struct termios2 tio;
-    ioctl(fd, TCGETS2, &tio);
+    ioctl(handle, TCGETS2, &tio);
 
 	// Clear handshake, parity, stopbits and size
     tio.c_cflag |= CLOCAL;
@@ -149,7 +159,7 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
 	// Enable the receiver
 	tio.c_cflag |= CREAD;
 
-    switch (config->databits)
+    switch (databits)
 	{
 	case 5:
 		tio.c_cflag |= CS5;
@@ -171,13 +181,13 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
     case NoParity:
         break;
     case OddParity:
-        options.c_cflag |= PARENB | PARODD;
+        tio.c_cflag |= PARENB | PARODD;
         break;
     case EvenParity:
-        options.c_cflag |= PARENB;
+        tio.c_cflag |= PARENB;
         break;
     case MarkParity:
-        options.c_cflag |= PARENB | PARODD | CMSPAR;
+        tio.c_cflag |= PARENB | PARODD | CMSPAR;
         break;
     }
     switch(stopbits)
@@ -188,11 +198,11 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
         LOG(WARNING) << "OneAndAHalfStopBit not supported on linux!";
         break;
     case TwoStopbits:
-        options.c_cflag |= CSTOPB;
+        tio.c_cflag |= CSTOPB;
         break;
     }
     
-    ioctl(fd, TCSETS2, &tio);
+    ioctl(handle, TCSETS2, &tio);
 #endif
 }
 
@@ -366,12 +376,13 @@ string SerialPort::getPseudoDriverName(string port)
     return ret;
 #endif
 #ifdef __gnu_linux__
-    FILE* f = fopen("/sys/class/tty/" + port + "/device/modalias", "rt");
+    FILE* f = fopen(("/sys/class/tty/" + port + "/device/modalias").c_str(), "rt");
     if (!f)
         return "";
     char buffer[128];
     buffer[127] = '\0';
-    fgets(buffer, 127, f);
+    if (!fgets(buffer, 127, f))
+	buffer[0] = '\0';
     fclose(f);
     return string(buffer);
 #endif
