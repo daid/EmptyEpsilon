@@ -36,9 +36,10 @@
 				<Option object_output=".obj/Release/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
-				<Option parameters="fullscreen=1 screen43=0 touchscreen=0" />
+				<Option parameters="fullscreen=0 screen43=0 touchscreen=0" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-g" />
 					<Add directory="../SFML-2.3.1/include" />
 				</Compiler>
 				<Linker>

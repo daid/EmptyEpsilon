@@ -86,7 +86,15 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
     if (my_spaceship)
     {
         energy_display->setValue(string(int(my_spaceship->energy_level)) + " (" + string(my_spaceship->getNetPowerUsage()) + ")");
+        if (my_spaceship->energy_level < 100)
+            energy_display->setColor(sf::Color::Red);
+        else
+            energy_display->setColor(sf::Color::White);
         hull_display->setValue(string(int(100 * my_spaceship->hull_strength / my_spaceship->hull_max)) + "%");
+        if (my_spaceship->hull_strength < my_spaceship->hull_max / 4.0f)
+            hull_display->setColor(sf::Color::Red);
+        else
+            hull_display->setColor(sf::Color::White);
         shields_display->setValue(string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "% " + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)) + "%");
         
         for(int n=0; n<SYS_COUNT; n++)
