@@ -31,7 +31,6 @@ PlayerInfo::PlayerInfo()
     main_screen_control = false;
     registerMemberReplication(&client_id);
 
-    crew_active_position = helmsOfficer;
     for(int n=0; n<max_crew_positions; n++)
     {
         crew_position[n] = false;
