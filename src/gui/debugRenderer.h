@@ -12,6 +12,9 @@ private:
     
     bool show_fps;
     bool show_datarate;
+    bool show_timing_graph;
+    
+    std::vector<Engine::EngineTiming> timing_graph_points;
 public:
     DebugRenderer();
 
