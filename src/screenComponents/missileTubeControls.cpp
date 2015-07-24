@@ -37,6 +37,10 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
         rows.push_back(row);
     }
     
+    
+    
+    
+    
     for(int n=MW_Count-1; n>=0; n--)
     {
         GuiAutoLayout* row = new GuiAutoLayout(this, id + "_ROW_" + string(n), LayoutHorizontalLeftToRight);

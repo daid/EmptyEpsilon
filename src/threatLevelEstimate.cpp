@@ -11,8 +11,15 @@ ThreatLevelEstimate::ThreatLevelEstimate()
     threat_low_func = nullptr;
 }
 
+ThreatLevelEstimate::~ThreatLevelEstimate()
+{
+}
+
 void ThreatLevelEstimate::update(float delta)
 {
+    if (!gameGlobalInfo)
+        return;
+    
     float max_threat = 0.0;
     for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
     {
