@@ -46,13 +46,13 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
 }
 
 static float system_power_user_factor[] = {
-    /*SYS_Reactor*/ -30.0,
+    /*SYS_Reactor*/ -25.0,
     /*SYS_BeamWeapons*/ 3.0,
     /*SYS_MissileSystem*/ 1.0,
     /*SYS_Maneuver*/ 2.0,
     /*SYS_Impulse*/ 4.0,
-    /*SYS_Warp*/ 6.0,
-    /*SYS_JumpDrive*/ 6.0,
+    /*SYS_Warp*/ 5.0,
+    /*SYS_JumpDrive*/ 5.0,
     /*SYS_FrontShield*/ 5.0,
     /*SYS_RearShield*/ 5.0,
 };
@@ -238,7 +238,7 @@ void PlayerSpaceship::update(float delta)
         if (shields_active)
             useEnergy(delta * energy_shield_use_per_second);
 
-        energy_level += delta * getNetPowerUsage() * 0.2;
+        energy_level += delta * getNetPowerUsage() * 0.05;
         for(int n=0; n<SYS_COUNT; n++)
         {
             if (!hasSystem(ESystem(n))) continue;
@@ -373,7 +373,7 @@ void PlayerSpaceship::setShipTemplate(string template_name)
 
 void PlayerSpaceship::executeJump(float distance)
 {
-    if (useEnergy(distance * energy_per_jump_km) && systems[SYS_JumpDrive].health > 0.0)
+    if (useEnergy(distance * energy_per_jump_km * (shields_active ? 3.0 : 1.0)) && systems[SYS_JumpDrive].health > 0.0)
     {
         jump_indicator = 2.0;
         SpaceShip::executeJump(distance);
