@@ -18,4 +18,15 @@ public:
     virtual void collide(Collisionable* target);
 };
 
+class VisualAsteroid : public SpaceObject
+{
+public:
+    float rotation_speed;
+    float z;
+
+    VisualAsteroid();
+
+    virtual void draw3D();
+};
+
 #endif//ASTEROID_H

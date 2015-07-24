@@ -5,7 +5,7 @@
 
 #include "scriptInterface.h"
 
-/// An asteroid in space. Nothing more, nothing less.
+/// An asteroid in space. Which you can fly into and hit. Will do damage.
 REGISTER_SCRIPT_SUBCLASS(Asteroid, SpaceObject)
 {
 }
@@ -16,7 +16,7 @@ Asteroid::Asteroid()
 {
     setRotation(random(0, 360));
     rotation_speed = random(0.1, 0.8);
-    z = random(-100, 100);
+    z = random(-50, 50);
 
     registerMemberReplication(&z);
 }
@@ -63,4 +63,35 @@ void Asteroid::collide(Collisionable* target)
     e->setSize(getRadius());
     e->setPosition(getPosition());
     destroy();
+}
+
+/// An asteroid in space. Outside of hit range, just for visuals.
+REGISTER_SCRIPT_SUBCLASS(VisualAsteroid, SpaceObject)
+{
+}
+
+REGISTER_MULTIPLAYER_CLASS(VisualAsteroid, "VisualAsteroid");
+VisualAsteroid::VisualAsteroid()
+: SpaceObject(120, "VisualAsteroid")
+{
+    setRotation(random(0, 360));
+    rotation_speed = random(0.1, 0.8);
+    z = random(300, 800);
+    if (random(0, 100) < 50)
+        z = -z;
+
+    registerMemberReplication(&z);
+}
+
+void VisualAsteroid::draw3D()
+{
+#if FEATURE_3D_RENDERING
+    glTranslatef(0, 0, z);
+    glRotatef(engine->getElapsedTime() * rotation_speed, 0, 0, 1);
+    glScalef(getRadius(), getRadius(), getRadius());
+    simpleObjectShader->setParameter("baseMap", *textureManager.getTexture("asteroid.png"));
+    sf::Shader::bind(simpleObjectShader);
+    Mesh* m = Mesh::getMesh("asteroid.obj");
+    m->render();
+#endif//FEATURE_3D_RENDERING
 }

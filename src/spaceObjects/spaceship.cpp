@@ -41,6 +41,8 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setShieldsActive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHealth);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHealth);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHeat);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHeat);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasWarpDrive);

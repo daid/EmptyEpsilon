@@ -51,6 +51,11 @@ function init()
 			dx2, dy2 = vectorFromAngle(a2 + 90, random(-10000, 10000))
 			Asteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2)
 		end
+		for acnt=1,50 do
+			dx1, dy1 = vectorFromAngle(a2, random(-1500, 1500))
+			dx2, dy2 = vectorFromAngle(a2 + 90, random(-10000, 10000))
+			VisualAsteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2)
+		end
 	end
 	
 	spawnWave()
