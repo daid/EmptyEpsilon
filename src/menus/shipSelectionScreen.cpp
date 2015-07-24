@@ -189,7 +189,6 @@ void ShipSelectionScreen::updateCrewTypeOptions()
     for(int n=0; n<max_crew_positions; n++)
     {
         crew_position_button[n]->setValue(false)->hide();
-        my_player_info->setCrewPosition(ECrewPosition(n), false);
     }
     switch(crew_type_selector->getSelectionIndex())
     {
@@ -211,6 +210,13 @@ void ShipSelectionScreen::updateCrewTypeOptions()
         window_angle->setVisible(canDoMainScreen());
         topdown_button->setVisible(canDoMainScreen());
         break;
+    }
+    for(int n=0; n<max_crew_positions; n++)
+    {
+        if (!crew_position_button[n]->isVisible())
+            my_player_info->setCrewPosition(ECrewPosition(n), false);
+        else
+            crew_position_button[n]->setValue(my_player_info->crew_position[n]);
     }
     updateReadyButton();
 }
