@@ -17,17 +17,28 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     radar->setCallbacks(
         [this](sf::Vector2f position) {
             if (my_spaceship)
-                my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
+            {
+                float angle = sf::vector2ToAngle(position - my_spaceship->getPosition());
+                heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(InputHandler::getMousePos() - sf::Vector2f(0, 50))->show();
+                my_spaceship->commandTargetRotation(angle);
+            }
+        },
+        [this](sf::Vector2f position) {
+            if (my_spaceship)
+            {
+                float angle = sf::vector2ToAngle(position - my_spaceship->getPosition());
+                heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(InputHandler::getMousePos() - sf::Vector2f(0, 50))->show();
+                my_spaceship->commandTargetRotation(angle);
+            }
         },
         [this](sf::Vector2f position) {
             if (my_spaceship)
                 my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
-        },
-        [this](sf::Vector2f position) {
-            if (my_spaceship)
-                my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
+            heading_hint->hide();
         }
     );
+    heading_hint = new GuiLabel(this, "HEADING_HINT", "", 30);
+    heading_hint->setAlignment(ACenter)->setSize(0, 0);
 
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
     energy_display->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);

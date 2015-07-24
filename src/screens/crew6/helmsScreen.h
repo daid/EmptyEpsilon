@@ -11,6 +11,7 @@ private:
     GuiKeyValueDisplay* velocity_display;
     GuiElement* warp_controls;
     GuiElement* jump_controls;
+    GuiLabel* heading_hint;
 public:
     HelmsScreen(GuiContainer* owner);
     
