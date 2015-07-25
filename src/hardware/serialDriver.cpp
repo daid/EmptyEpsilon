@@ -1,6 +1,6 @@
 #include "logging.h"
 #ifdef __WIN32__
-#include <Windows.h>
+#include <windows.h>
 #endif
 #ifdef __gnu_linux__
 //Including ioctl or termios conflicts with asm/termios.h which we need for TCGETS2. So locally define the ioctl and tcsendbreak functions. Yes, it's dirty, but it works.

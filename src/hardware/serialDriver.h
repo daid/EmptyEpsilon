@@ -2,7 +2,7 @@
 #define SERIAL_DRIVER_H
 
 #ifdef __WIN32__
-#include <Windows.h>
+#include <windows.h>
 #endif
 #include "stringImproved.h"
 
