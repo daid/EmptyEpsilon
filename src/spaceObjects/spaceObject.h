@@ -73,6 +73,7 @@ public:
     void setCommsScript(string script_name) { this->comms_script_name = script_name; }
     bool areEnemiesInRange(float range);
     PVector<SpaceObject> getObjectsInRange(float range);
+    string getSectorName();
 
     ScriptCallback onDestroyed;
 

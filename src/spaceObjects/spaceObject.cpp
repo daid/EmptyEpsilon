@@ -44,6 +44,7 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getReputationPoints);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, takeReputationPoints);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, addReputationPoints);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getSectorName);
 }
 
 PVector<SpaceObject> space_object_list;
@@ -167,4 +168,9 @@ void SpaceObject::addReputationPoints(float amount)
     gameGlobalInfo->reputation_points[faction_id] += amount;
     if (gameGlobalInfo->reputation_points[faction_id] < 0.0)
         gameGlobalInfo->reputation_points[faction_id] = 0.0;
+}
+
+string SpaceObject::getSectorName()
+{
+    return ::getSectorName(getPosition());
 }
