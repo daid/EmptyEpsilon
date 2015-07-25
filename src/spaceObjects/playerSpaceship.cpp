@@ -449,9 +449,16 @@ float PlayerSpaceship::getNetPowerUsage()
     {
         if (!hasSystem(ESystem(n))) continue;
         if (system_power_user_factor[n] < 0) //When we generate power, use the health of this system in the equation
-            net_power -= system_power_user_factor[n] * getSystemEffectiveness(ESystem(n));
+        {
+            float f = getSystemEffectiveness(ESystem(n));
+            if (f > 1.0f)
+                f = (1.0f + f) / 2.0f;
+            net_power -= system_power_user_factor[n] * f;
+        }
         else
+        {
             net_power -= system_power_user_factor[n] * systems[n].power_level;
+        }
     }
     return net_power;
 }
