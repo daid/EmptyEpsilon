@@ -145,6 +145,24 @@ string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
     }
 }
 
+string getSectorName(sf::Vector2f position)
+{
+    constexpr float sector_size = 20000;
+    int sector_x = floorf(position.x / sector_size) + 5;
+    int sector_y = floorf(position.y / sector_size) + 5;
+    string y;
+    string x;
+    if (sector_y >= 0)
+        y = string(char('A' + (sector_y)));
+    else
+        y = string(char('z' + 1 + sector_y)) + string(char('z' + 1 + sector_y));
+    if (sector_x >= 0)
+        x = string(sector_x);
+    else
+        x = string(100 + sector_x);
+    return y + x;
+}
+
 static int victory(lua_State* L)
 {
     gameGlobalInfo->setVictory(luaL_checkstring(L, 1));

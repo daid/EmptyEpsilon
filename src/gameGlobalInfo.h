@@ -85,5 +85,6 @@ public:
 };
 
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive);
+string getSectorName(sf::Vector2f position);
 
 #endif//GAME_GLOBAL_INFO_H

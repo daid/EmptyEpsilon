@@ -1,6 +1,7 @@
 #include <SFML/OpenGL.hpp>
 
 #include "main.h"
+#include "gameGlobalInfo.h"
 #include "spaceObjects/nebula.h"
 #include "spaceObjects/scanProbe.h"
 #include "playerInfo.h"
@@ -154,7 +155,7 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
 {
     sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
     
-    const float sector_size = 20000;
+    constexpr float sector_size = 20000;
     const float sub_sector_size = sector_size / 8;
 
     float scale = std::min(rect.width, rect.height) / 2.0 / distance;
@@ -175,7 +176,7 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
         for(int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
         {
             float y = radar_screen_center.y + ((sector_y * sector_size) - view_position.y) * scale;
-            drawText(window, sf::FloatRect(x, y, 30, 30), string(char('A' + (sector_y + 5))) + string(sector_x + 5), ATopLeft, 30, color);
+            drawText(window, sf::FloatRect(x, y, 30, 30), getSectorName(sf::Vector2f(sector_x * sector_size + sub_sector_size, sector_y * sector_size + sub_sector_size)), ATopLeft, 30, color);
         }
     }
     for(int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
