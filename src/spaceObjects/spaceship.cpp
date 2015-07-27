@@ -18,6 +18,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setShipTemplate);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanned);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setCallSign);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentified);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isScanned);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScanned);

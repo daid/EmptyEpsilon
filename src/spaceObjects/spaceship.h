@@ -298,6 +298,7 @@ public:
     
     virtual std::unordered_map<string, string> getGMInfo();
 
+    void setCallSign(string new_callsign) { ship_callsign = new_callsign; }
     bool isDocked(P<SpaceObject> target) { return docking_state == DS_Docked && docking_target == target; }
     int getWeaponStorage(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage[weapon]; }
     int getWeaponStorageMax(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage_max[weapon]; }
