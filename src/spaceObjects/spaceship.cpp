@@ -909,6 +909,7 @@ string SpaceShip::getCallSign()
 std::unordered_map<string, string> SpaceShip::getGMInfo()
 {
     std::unordered_map<string, string> ret;
+    ret["CallSign"] = ship_callsign;
     ret["Type"] = ship_type_name;
     ret["Hull"] = string(int(hull_strength)) + "/" + string(int(hull_max));
     ret["FrontShield"] = string(int(front_shield)) + "/" + string(int(front_shield_max));

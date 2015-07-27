@@ -11,6 +11,7 @@
 REGISTER_SCRIPT_SUBCLASS(SpaceStation, SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, setTemplate);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, setCallSign);
 }
 
 REGISTER_MULTIPLAYER_CLASS(SpaceStation, "SpaceStation");
@@ -29,6 +30,8 @@ SpaceStation::SpaceStation()
     registerMemberReplication(&shieldHitEffect, 0.5);
 
     comms_script_name = "comms_station.lua";
+    
+    callsign = "DS" + string(getMultiplayerId());
 }
 
 void SpaceStation::draw3DTransparent()
@@ -150,6 +153,7 @@ void SpaceStation::setTemplate(string template_name)
 std::unordered_map<string, string> SpaceStation::getGMInfo()
 {
     std::unordered_map<string, string> ret;
+    ret["CallSign"] = callsign;
     ret["Type"] = template_name;
     ret["Hull"] = string(hull_strength) + "/" + string(hull_max);
     ret["Shield"] = string(shields) + "/" + string(shields_max);
