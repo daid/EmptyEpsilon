@@ -208,3 +208,26 @@ static int getPlayerShip(lua_State* L)
 /// getPlayerShip(index)
 /// Return the player's ship, use -1 to get the first active player ship.
 REGISTER_SCRIPT_FUNCTION(getPlayerShip);
+
+static int getObjectsInRadius(lua_State* L)
+{
+    float x = luaL_checknumber(L, 1);
+    float y = luaL_checknumber(L, 2);
+    float r = luaL_checknumber(L, 3);
+    
+    sf::Vector2f position(x, y);
+    
+    PVector<SpaceObject> objects;
+    PVector<Collisionable> objectList = CollisionManager::queryArea(position - sf::Vector2f(r, r), position + sf::Vector2f(r, r));
+    foreach(Collisionable, obj, objectList)
+    {
+        P<SpaceObject> sobj = obj;
+        if (sobj && (sobj->getPosition() - position) < r)
+            objects.push_back(sobj);
+    }
+    
+    return convert<PVector<SpaceObject> >::returnType(L, objects);
+}
+/// getObjectsInRadius(x, y, radius)
+/// Return the player's ship, use -1 to get the first active player ship.
+REGISTER_SCRIPT_FUNCTION(getObjectsInRadius);
