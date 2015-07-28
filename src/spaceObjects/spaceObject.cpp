@@ -53,6 +53,11 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Warning/ToFix: If the player refuses the hail, no feedback is given to the script in any way.
     /// Return true when the hail is enabled with succes. Returns false when the target player cannot be hailed right now (because it's already communicating with something else)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, openCommsTo);
+    /// Hail a player ship from this object. The ship will get a notification and can accept or deny the hail.
+    /// Warning/ToFix: If the player refuses the hail, no feedback is given to the script in any way.
+    /// Return true when the hail is enabled with succes. Returns false when the target player cannot be hailed right now (because it's already communicating with something else)
+    /// This function will display the message given as parameter when the hail is answered.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, sendCommsMessage);
 }
 
 PVector<SpaceObject> space_object_list;
@@ -185,6 +190,11 @@ string SpaceObject::getSectorName()
 
 bool SpaceObject::openCommsTo(P<PlayerSpaceship> target)
 {
+    return sendCommsMessage(target, "");
+}
+
+bool SpaceObject::sendCommsMessage(P<PlayerSpaceship> target, string message)
+{
     if (!target)
         return false;
     switch(target->comms_state)
@@ -205,7 +215,8 @@ bool SpaceObject::openCommsTo(P<PlayerSpaceship> target)
         break;
     }
     target->comms_target = this;
+    target->comms_target_name = getCallSign();
     target->comms_state = CS_BeingHailed;
-    target->comms_incomming_message = getCallSign();
+    target->comms_incomming_message = message;
     return true;
 }

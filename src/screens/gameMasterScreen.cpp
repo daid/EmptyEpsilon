@@ -474,7 +474,7 @@ GuiHailPlayerShip::GuiHailPlayerShip(GameMasterScreen* owner)
             if (player->comms_state == CS_Inactive || player->comms_state == CS_ChannelFailed || player->comms_state == CS_ChannelBroken)
             {
                 player->comms_state = CS_BeingHailedByGM;
-                player->comms_incomming_message = "Hailed by " + caller_entry->getText();
+                player->comms_target_name = caller_entry->getText();
                 owner->hailing_player_dialog->player = player;
                 owner->hailing_player_dialog->show();
             }

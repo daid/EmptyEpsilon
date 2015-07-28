@@ -93,7 +93,7 @@ void GuiCommsOverlay::onDraw(sf::RenderTarget& window)
         opening_progress->setValue(my_spaceship->comms_open_delay);
         
         hailed_box->setVisible(my_spaceship->comms_state == CS_BeingHailed || my_spaceship->comms_state == CS_BeingHailedByGM);
-        hailed_label->setText(my_spaceship->comms_incomming_message);
+        hailed_label->setText("Hailed by " + my_spaceship->comms_target_name);
         
         no_response_box->setVisible(my_spaceship->comms_state == CS_ChannelFailed);
 

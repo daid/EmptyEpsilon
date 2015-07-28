@@ -66,6 +66,7 @@ public:
 
     ECommsState comms_state;
     float comms_open_delay;
+    string comms_target_name;
     string comms_incomming_message;
     P<SpaceObject> comms_target;    //Server only
     std::vector<int> comms_reply_id;

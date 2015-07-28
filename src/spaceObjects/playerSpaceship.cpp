@@ -125,6 +125,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&comms_state);
     registerMemberReplication(&comms_open_delay, 1.0);
     registerMemberReplication(&comms_reply_message);
+    registerMemberReplication(&comms_target_name);
     registerMemberReplication(&comms_incomming_message);
     registerMemberReplication(&waypoints);
     registerMemberReplication(&scan_probe_stock);
@@ -218,7 +219,7 @@ void PlayerSpaceship::update(float delta)
                         {
                             playerShip->comms_state = CS_BeingHailed;
                             playerShip->comms_target = this;
-                            playerShip->comms_incomming_message = "Hailed by " + getCallSign();
+                            playerShip->comms_target_name = getCallSign();
                         }
                     }else{
                         if (comms_script_interface.openCommChannel(this, comms_target, comms_target->comms_script_name))
@@ -636,16 +637,26 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                     playerShip->comms_state = CS_ChannelFailed;
                 }
             }else{
-                if (!comms_target)
+                if (anwser)
                 {
-                    comms_state = CS_ChannelBroken;
+                    if (!comms_target)
+                    {
+                        comms_state = CS_ChannelBroken;
+                    }else{
+                        comms_reply_id.clear();
+                        comms_reply_message.clear();
+                        if (comms_incomming_message == "")
+                        {
+                            if (comms_script_interface.openCommChannel(this, comms_target, comms_target->comms_script_name))
+                                comms_state = CS_ChannelOpen;
+                            else
+                                comms_state = CS_ChannelFailed;
+                        }else{
+                            comms_state = CS_ChannelOpen;
+                        }
+                    }
                 }else{
-                    comms_reply_id.clear();
-                    comms_reply_message.clear();
-                    if (comms_script_interface.openCommChannel(this, comms_target, comms_target->comms_script_name))
-                        comms_state = CS_ChannelOpen;
-                    else
-                        comms_state = CS_ChannelFailed;
+                    comms_state = CS_Inactive;
                 }
             }
         }

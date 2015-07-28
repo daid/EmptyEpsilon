@@ -75,6 +75,7 @@ public:
     PVector<SpaceObject> getObjectsInRange(float range);
     string getSectorName();
     bool openCommsTo(P<PlayerSpaceship> target);
+    bool sendCommsMessage(P<PlayerSpaceship> target, string message);
 
     ScriptCallback onDestroyed;
 
