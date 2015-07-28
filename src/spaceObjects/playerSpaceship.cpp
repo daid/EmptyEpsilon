@@ -635,6 +635,18 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                     comms_state = CS_Inactive;
                     playerShip->comms_state = CS_ChannelFailed;
                 }
+            }else{
+                if (!comms_target)
+                {
+                    comms_state = CS_ChannelBroken;
+                }else{
+                    comms_reply_id.clear();
+                    comms_reply_message.clear();
+                    if (comms_script_interface.openCommChannel(this, comms_target, comms_target->comms_script_name))
+                        comms_state = CS_ChannelOpen;
+                    else
+                        comms_state = CS_ChannelFailed;
+                }
             }
         }
         if (comms_state == CS_BeingHailedByGM)
