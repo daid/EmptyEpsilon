@@ -74,6 +74,7 @@ public:
     bool areEnemiesInRange(float range);
     PVector<SpaceObject> getObjectsInRange(float range);
     string getSectorName();
+    bool openCommsTo(P<PlayerSpaceship> target);
 
     ScriptCallback onDestroyed;
 

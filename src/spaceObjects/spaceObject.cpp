@@ -41,10 +41,18 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getCallSign);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, areEnemiesInRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getObjectsInRange);
+    /// Return the current amount of reputation points.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getReputationPoints);
+    /// Take a certain amount of reputation points, returns true when there are enough points to take. Returns false when there are not enough points and does not lower the points.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, takeReputationPoints);
+    /// Add a certain amount of reputation points.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, addReputationPoints);
+    /// Get the name of the sector this object is in (A4 for example)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getSectorName);
+    /// Hail a player ship from this object. The ship will get a notification and can accept or deny the hail.
+    /// Warning/ToFix: If the player refuses the hail, no feedback is given to the script in any way.
+    /// Return true when the hail is enabled with succes. Returns false when the target player cannot be hailed right now (because it's already communicating with something else)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, openCommsTo);
 }
 
 PVector<SpaceObject> space_object_list;
@@ -173,4 +181,31 @@ void SpaceObject::addReputationPoints(float amount)
 string SpaceObject::getSectorName()
 {
     return ::getSectorName(getPosition());
+}
+
+bool SpaceObject::openCommsTo(P<PlayerSpaceship> target)
+{
+    if (!target)
+        return false;
+    switch(target->comms_state)
+    {
+    case CS_OpeningChannel:
+    case CS_BeingHailed:
+        if (target->comms_target != this)
+            return false;
+        break;
+    case CS_BeingHailedByGM:
+    case CS_ChannelOpen:
+    case CS_ChannelOpenPlayer:
+    case CS_ChannelOpenGM:
+        return false;
+    case CS_Inactive:
+    case CS_ChannelFailed:
+    case CS_ChannelBroken:
+        break;
+    }
+    target->comms_target = this;
+    target->comms_state = CS_BeingHailed;
+    target->comms_incomming_message = getCallSign();
+    return true;
 }
