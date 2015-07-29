@@ -53,7 +53,7 @@ void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, 
     {
         sprite_scale *= 0.7;
     }
-    sprite_scale = std::max(0.15, sprite_scale);
+    sprite_scale = std::max(0.15f, sprite_scale);
     objectSprite.setScale(sprite_scale, sprite_scale);
     if (my_spaceship)
     {
