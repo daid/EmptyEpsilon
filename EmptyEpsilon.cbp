@@ -415,6 +415,7 @@
 		<Unit filename="../SeriousProton/src/networkRecorder.h" />
 		<Unit filename="../SeriousProton/src/postProcessManager.cpp" />
 		<Unit filename="../SeriousProton/src/postProcessManager.h" />
+		<Unit filename="../SeriousProton/src/random.cpp" />
 		<Unit filename="../SeriousProton/src/random.h" />
 		<Unit filename="../SeriousProton/src/resources.cpp" />
 		<Unit filename="../SeriousProton/src/resources.h" />
