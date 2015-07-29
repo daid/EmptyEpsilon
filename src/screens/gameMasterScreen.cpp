@@ -163,6 +163,11 @@ void GameMasterScreen::update(float delta)
             }
         }
     }
+    if (targets.getTargets().size() == 1)
+    {
+        selection_info["Position"] = string(targets.getTargets()[0]->getPosition().x, 0) + "," + string(targets.getTargets()[0]->getPosition().y, 0);
+    }
+    
     unsigned int cnt = 0;
     for(std::unordered_map<string, string>::iterator i = selection_info.begin(); i != selection_info.end(); i++)
     {

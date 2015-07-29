@@ -170,6 +170,8 @@ PlayerSpaceship::PlayerSpaceship()
             destroy();
         }
     }
+    
+    ship_callsign =  "PL" + string(getMultiplayerId());
 }
 
 void PlayerSpaceship::update(float delta)

@@ -119,8 +119,6 @@ public:
     void commandCombatManeuverStrafe(float strafe);
     void commandLaunchProbe(sf::Vector2f target_position);
 
-    virtual string getCallSign() { return "PL" + string(getMultiplayerId()); }
-
     virtual void setShipTemplate(string template_name);
 
     virtual void executeJump(float distance);
