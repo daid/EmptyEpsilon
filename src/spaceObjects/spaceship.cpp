@@ -245,7 +245,9 @@ void SpaceShip::draw3DTransparent()
     if ((has_jump_drive && jump_delay > 0.0f) ||
         (wormhole_alpha > 0.0f))
     {
-        float delay = jump_delay ? jump_delay : wormhole_alpha;
+        float delay = jump_delay;
+        if (wormhole_alpha > 0.0f)
+            delay = wormhole_alpha;
         float alpha = 1.0f - (delay / 10.0f);
         model_info.renderOverlay(textureManager.getTexture("electric_sphere_texture.png"), alpha);
     }
