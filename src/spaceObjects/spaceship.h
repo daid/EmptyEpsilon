@@ -152,6 +152,7 @@ public:
     bool has_jump_drive;      //[config]
     float jump_distance;     //[output]
     float jump_delay;        //[output]
+    float wormhole_alpha;    //Used for displaying the Warp-postprocessor
 
     int8_t weapon_storage[MW_Count];
     int8_t weapon_storage_max[MW_Count];
