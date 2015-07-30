@@ -668,6 +668,8 @@
 		<Unit filename="src/spaceObjects/supplyDrop.h" />
 		<Unit filename="src/spaceObjects/warpJammer.cpp" />
 		<Unit filename="src/spaceObjects/warpJammer.h" />
+		<Unit filename="src/spaceObjects/wormHole.cpp" />
+		<Unit filename="src/spaceObjects/wormHole.h" />
 		<Unit filename="src/threatLevelEstimate.cpp" />
 		<Unit filename="src/threatLevelEstimate.h" />
 		<Extensions>
