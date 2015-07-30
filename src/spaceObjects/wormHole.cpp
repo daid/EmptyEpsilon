@@ -15,6 +15,8 @@
 /// A Wormhole object. Drags you in like a black hole and teleports when you're at the center.
 REGISTER_SCRIPT_SUBCLASS(WormHole, SpaceObject)
 {
+    /// Set the target of this wormhole
+    REGISTER_SCRIPT_CLASS_FUNCTION(WormHole, setTargetPosition);
 }
 
 REGISTER_MULTIPLAYER_CLASS(WormHole, "WormHole");
