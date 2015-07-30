@@ -15,6 +15,7 @@
 		<li><a href="#tabs-media">Media</a></li>
 		<li><a href="#tabs-running">Running a game</a></li>
 		<li><a href="#tabs-stations">Stations</a></li>
+		<li><a href="#tabs-scripting">Mission scripting</a></li>
 		<li><a href="#tabs-download">Download</a></li>
 	</ul>
 	<div id="tabs-info">
@@ -194,6 +195,302 @@
 			</div>
 		</div>
 	</div>
+	<div id="tabs-scripting">
+		<div id="scripting-tabs">
+			<ul>
+				<li><a href="#scripting-tabs-0">0) Tools&amp;basics</a></li>
+				<li><a href="#scripting-tabs-1">1) Building a world</a></li>
+				<li><a href="#scripting-tabs-2">2) Death &amp; destruction</a></li>
+				<li><a href="#scripting-tabs-3">3) ...</a></li>
+			</ul>
+			<div id="scripting-tabs-0">
+				<h2>About this series</h2>
+				<p>This series of scripting documentation will document the steps taken to develop the EmptyEpsilon mission <b>Beacon of light</b></p>
+				<p>The world scenario and mission are used freely troughout this series. EmptyEpsilon has scripted scenarios, which can be less or more complex. We will be focusing here on building a mission.</p>
+				<p>This mission will start out with a fixed set of instructions for the player to follow. And will provide them with challanges to overcome.</p>
+				<p>The scenario scripting system can be used for more complex setups. But this won't be done in this series. Look at the "Waves" scenario for a different setup.</p>
+				<p>These series will start of easy, with very little to no programming knowledge required. But will go into more advanced topics later on.</p>
+				<h2>Tools</h2>
+				<p>For scenario/mission development you need a basic text editor. While windows notepad can work, I highly recommend something more advanced.</p>
+				<p>There are various options:</p>
+				<ul>
+					<li><a href="http://www.pnotepad.org/">Programmers notepad</a> (windows)</li>
+					<li><a href="http://www.sublimetext.com/">Sublime text</a> (windows, mac, linux)</li>
+					<li><a href="https://notepad-plus-plus.org/">Nodepad++</a> (windows)</li>
+				</ul>
+				<p>And there are many more. I personally use Programmers notepad. But any of these editors will do.</p>
+				<p>Download and install the editor of your choice.</p>
+				<h2>Setting up the file</h2>
+				<p>We'll start out with an empty scenario, as a template to setup our initial game in step 1.</p>
+				<p>Open the editor of your choise, and enter the following code:</p>
+				<p class="code">-- Name: Beacon of light series
+-- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
+
+-- Init is run when the scenario is started. Create your initial
+function init()
+    -- Create the main ship for the players.
+    PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
+end
+
+function update(delta)
+end</p>
+				<p>Save this as a file named <b>scenario_99_tutorial.lua</b> in the folder <b>EmptyEpsilon/scripts</b></p>
+				<p>Open EmptyEpsilon and start a new server. Your scenario should be at the bottom of the list. Start it, and you will notice that there is a ship for the players created per default.</p>
+				<h2>Tip&amp;tricks</h2>
+				<p>The file needs to start with <b>scenario_</b> to be picked up as a scenario.</p>
+				<p>The number in the scenario filename is for the order in which EmptyEpsilon shows the scenarios.</p>
+				<p>The final part of the filename is only for reference. The actual name shown is in the first line of the script file.</p>
+				<p>Lines starting with a double dash -- are comment lines in the scenario script. They do not do anything while playing, but are for your own reference so you know what the code does.</p>
+				<p>To quickly view how the scenario looks, you can use the GameMaster screen, this allows you to view the whole game world with ease.</p>
+				<p>EmptyEpsilon scenarios are build in lua scripting. For a full reference of the lua language see <a href="http://www.lua.org/">http://www.lua.org/</a>.</p>
+			</div>
+			<div id="scripting-tabs-1">
+				<h2>Building a world?</h2>
+				<p>Now that you have setup a basic script and know how to save and run it. Let us populate the world a bit more.</p>
+				<p>We'll first fill it with some stations, and then add some nebulae and asteroids.</p>
+				<h2>Building a world - Stations</h2>
+				<p>Right now the only thing in the world is the ship for the players. Which does not make for an intresting world.</p>
+				<p>So let's add some stations. Add the following code after the creation of the player ship:</p>
+				<p class="code">    SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(23500, 16100)
+    SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(-25200, 32200)
+    SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setPosition(-45600, -15800)
+    SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setPosition(9100,-35400)
+</p>
+				<p>This places a friendly small station at 23k,16k. Which is in sector F6. Another friendly station in sector G3. A large enemy Kralor station in sector E2. And a small neutral station at sector D5.</p>
+				<p>Each sector is 20x20km. And sector F5 starts at 0,0. <a href="info_images/sector_positions.png">Look at this image for more details.</a></p>
+				<p>Now, we want the player to start a bit closer to the small friendly station. So we set the player position near the small station.</p>
+				<p class="code">    PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser"):setPosition(22400, 16200)</p>
+				<h2>Building more world - Nebulae</h2>
+				<p>Nebulae are intresting to add to the game world. As they block of a 5km range of the long range radar. And add more mistery to the whole world.</p>
+				<p>They provide an intresting tactical difference to the game. As computer controlled ships are also blocked by Nebulae.</p>
+				<p>So we surround the enemy station by some nebula, so it's shielded from direct sight.</p>
+				<p class="code">    --Nebula that hide the enemy station.
+    Nebula():setPosition(-43300,  2200)
+    Nebula():setPosition(-34000,  -700)
+    Nebula():setPosition(-32000,-10000)
+    Nebula():setPosition(-24000,-14300)
+    Nebula():setPosition(-28600,-21900)
+</p>
+				<p>But a cloud of nebulae like that clearly hides something, so add a few random nebulae as well.</p>
+				<p class="code">    --Random nebulae in the system
+    Nebula():setPosition( -8000,-38300)
+    Nebula():setPosition( 24000,-30700)
+    Nebula():setPosition( 42300,  3100)
+    Nebula():setPosition( 49200, 10700)
+    Nebula():setPosition(  3750, 31250)
+    Nebula():setPosition(-39500, 18700)
+</p>
+				<h2>Building more world - Asteroids</h2>
+				<p>Asteroids can be placed in the same way as Nebula and stations.</p>
+				<p class="code">Astroid():setPosition(-1000, -1000)</p>
+				<p>However, because you usually want 50 or even 100 asteroids. Placing the position by hand will be a hell do to.</p>
+				<p>So we can use more lua programming functions to do this.</p>
+				<p class="code">--Place a single random asteroid in sector E5:
+Asteroid():setPosition(random(0, 20000), random(-20000, 0))</p>
+				<p>So that is a single astroid. Which does not really feel like an astroid field.</p>
+				<p class="code">--Create 100 Asteroids
+for asteroid_counter=1,100 do
+    Asteroid():setPosition(random(0, 20000), random(-20000, 0))
+end</p>
+				<p>Surrounding it in a simple for loop however, will generate a 100 random Asteroids.</p>
+				<p>Which... results in a pretty square asteroid field. Not that pretty.</p>
+				<p>So right now, we just tweak the parameters to have an field from sector E4 to G4 in a straight line.</p>
+				<p class="code">	--Create 50 Asteroids
+	for asteroid_counter=1,50 do
+		Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
+	end
+</p>
+				<p>Already a whole lot better. But when you look at it in the 3D view now, it does look very flat. To fix that we add some VisualAsteroids as well. These asteroids are above or below the ship flying plane and cannot be hit. They are just there for visuals.</p>
+				<p class="code">	--Create 100 Asteroids
+	for asteroid_counter=1,50 do
+		Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
+		VisualAsteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
+	end
+</p>
+				<h2>Spice it up a bit</h2>
+				<p>Right now the stations are just called DS-7, and other DS-? numbers. But we can change this.</p>
+				<p>By calling the setCallSign function on the stations, we can set a different name for them. Be sure to keep this short.</p>
+				<p class="code">    SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(23500, 16100):setCallSign("Research-1")
+    SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(-25200, 32200):setCallSign("Orion-5")
+    SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setPosition(-45600, -15800):setCallSign("Omega")
+    SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setPosition(9100,-35400):setCallSign("Refugee-X")</p>
+				<p>We call the small station a research station, which gives it a bit more character. The enemy station is called Omega, as it's big. And the neutral station is called Refugee-X, which makes it sound like it could be housing refugees.</p>
+				<p>A few simple names can give the whole world more character.</p>
+				<p>Finally we call the player ship <b>TheEpsilon</b></p>
+				<p class="code">PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser"):setPosition(22400, 18200):setCallSign("TheEpsilon")</p>
+				<h2>Building even more world?</h2>
+				<p>Next to asteroids, stations and nebulae there are a few more options to populate your world.</p>
+				<p>While we do not use anything else at this point in time. The following objects can also be created:</p>
+				<p class="code">BlackHole() -- Create a black hole, a 5km radius black hole which destroys anything that comes into the center.
+Mine() -- A simple mine. Explodes with a 1km radius when a ship comes too close.
+WarpJammer():setFaction("Kraylor") -- A warp jammer, jams warp and jump drives in a 5km radius. Can be destroyed.
+SupplyDrop():setFaction("Human Navy") -- A supply drop, can be picked up by flying over it, empty per default, can be filled with energy and missile weapons.</p>
+				<h2>Final script for today.</h2>
+				<p>We end off with the complete script for reference.</p>
+				<p class="code">-- Name: Beacon of light - Day 1
+-- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
+
+-- Init is run when the scenario is started. Create your initial
+function init()
+    -- Create the main ship for the players.
+    PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser"):setPosition(22400, 18200):setCallSign("TheEpsilon")
+
+    SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(23500, 16100):setCallSign("Research-1")
+    SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(-25200, 32200):setCallSign("Orion-5")
+    SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setPosition(-45600, -15800):setCallSign("Omega")
+    SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setPosition(9100,-35400):setCallSign("Refugee-X")
+    
+	--Nebula that hide the enemy station.
+    Nebula():setPosition(-43300,  2200)
+    Nebula():setPosition(-34000,  -700)
+    Nebula():setPosition(-32000,-10000)
+    Nebula():setPosition(-24000,-14300)
+    Nebula():setPosition(-28600,-21900)
+    
+	--Random nebulae in the system
+    Nebula():setPosition( -8000,-38300)
+    Nebula():setPosition( 24000,-30700)
+    Nebula():setPosition( 42300,  3100)
+    Nebula():setPosition( 49200, 10700)
+    Nebula():setPosition(  3750, 31250)
+    Nebula():setPosition(-39500, 18700)
+
+    --Create 50 Asteroids
+    for asteroid_counter=1,50 do
+        Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
+        VisualAsteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
+    end
+end
+
+function update(delta)
+end
+</p>
+			</div>
+			<div id="scripting-tabs-2">
+				<h2>Well, that is boring...</h2>
+				<p>Congradulations on building the most boring scenario so far.</p>
+				<p>Now we're going to add some things that really spice things up. Other ships.</p>
+				<h2>About other ships</h2>
+				<p>What you need to remember when working with other ships are a few basic things.</p>
+				<p><b>Factions:</b> First off, the faction of a ship defines it's relation to other ships. For example Kraylor ships attack any other ship or station except when they belong to the Independent faction.</p>
+				<p><b>Orders:</b> Every ship has orders. The orders define how the ship behaves, if it stays still, or attacks for example, or seeks out targets on it's own.</p>
+				<p><b>Templates:</b> Finally every ship has a template, the template defines how it looks, what weapons it starts out with.</p>
+				<h2>Your first enemy</h2>
+				<p>So, let's create an enemy.</p>
+				<p class="code">CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(1000, 1000)</p>
+				<p>Fight it! I'm sure you will win.</p>
+				<p>Well, that was easy right? Most likely you are already reading this before you tried. But if you did try. You will notice it did not do anything. This is because the default orders for a CpuShip are to stay idle and do nothing.</p>
+				<p>Damn it, still boring. So let's give it simple orders.</p>
+				<p class="code">CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(1000, 1000):orderRoaming()</p>
+				<p>Roaming is one of the most basic orders that can be given to a ship. It orders the ship to fly around the world and seek a target to destroy.</p>
+				<p>Ping! Suddently you have an enemy to fight. Great!</p>
+				<p>Let us set this up as 2 cruisers that start at the lower nebula, they will fly out and seek out the player quite well on their own.</p>
+				<p class="code">    --Small Kraylor strike team, starting in the nebula at G5
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3550, 31250):orderRoaming()
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3950, 31250):orderRoaming()
+</p>
+				<h2>Defending the station</h2>
+				<p>The Kraylors have an large station in this area. So let us set up some defence.</p>
+				<p>We'll create 2 Cruisers and a Dreadnought in direct defence of the station. This means we need a reference to the station.</p>
+				<p class="code">    -- Grab a reference to the Kraylor station
+    enemy_station = SpaceStation():setTemplate("Large Station"):setFaction("Kraylor")
+    enemy_station:setPosition(-45600, -15800):setCallSign("Omega")</p>
+				<p>With that reference, we can setup ships to defend the station</p>
+				<p class="code">    -- Create the defense for the station
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-45000, -14000):orderDefendTarget(enemy_station)
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-46000, -14000):orderDefendTarget(enemy_station)
+    CpuShip():setShipTemplate("Dreadnought"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_station)</p>
+				<p>With the defend target orders, the ship will circle around the target and attack enemies in range. You can defend any object, including another ship.</p>
+				<p>For example, we can setup two extra fighters which defend the Dreadnought.</p>
+				<p class="code">    enemy_dreadnought = CpuShip():setShipTemplate("Dreadnought"):setFaction("Kraylor")
+    enemy_dreadnought:setPosition(-46000, -18000):orderDefendTarget(enemy_station)
+    CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
+    CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)</p>
+				<h2>You lose! (Or, you should be able to)</h2>
+				<p>Right now, when you are killed, or kill all enemies. Nothing happens. So let us fix this. First off, we want to end the game with defeat if we lose the player ship.</p>
+				<p>Because of this, we need a reference to the player ship that we created.</p>
+				<p class="code">    player = PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
+    player:setPosition(22400, 18200):setCallSign("TheEpsilon")</p>
+				<p>Next, we'll ve finally using the <b>update</b> function that has been empty so far. The code in the update function is run every game tick, so about 60 times per second.</p>
+				<p>So in there we want to check if the player is destroyed, and if the ship is, end the game.</p>
+				<p class="code">function update(delta)
+    --When the player ship is destroyed, call it a victory for the Kraylor
+    if not player:isValid() then
+        victory("Kraylor")
+    end
+end</p>
+				<p>Pretty simple right? And naturally, you can setup victory for the player the same way, but then with the destruction of the enemy station.</p>
+				<p class="code">    --When the kraylor station is destroyed, call it a victory for the Kraylor
+    if not enemy_station:isValid() then
+        victory("Human Navy")
+    end</p>
+				<h2>Final script for today.</h2>
+				<p>We end off with the complete script for reference.</p>
+				<p class="code">-- Name: Beacon of light - Day 2
+-- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
+
+-- Init is run when the scenario is started. Create your initial
+function init()
+    -- Create the main ship for the players.
+    player = PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
+    player:setPosition(22400, 18200):setCallSign("TheEpsilon")
+
+    SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(23500, 16100):setCallSign("Research-1")
+    SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(-25200, 32200):setCallSign("Orion-5")
+    -- Grab a reference to the Kraylor station
+    enemy_station = SpaceStation():setTemplate("Large Station"):setFaction("Kraylor")
+    enemy_station:setPosition(-45600, -15800):setCallSign("Omega")
+    SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setPosition(9100,-35400):setCallSign("Refugee-X")
+    
+    --Nebula that hide the enemy station.
+    Nebula():setPosition(-43300,  2200)
+    Nebula():setPosition(-34000,  -700)
+    Nebula():setPosition(-32000,-10000)
+    Nebula():setPosition(-24000,-14300)
+    Nebula():setPosition(-28600,-21900)
+    
+    --Random nebulae in the system
+    Nebula():setPosition( -8000,-38300)
+    Nebula():setPosition( 24000,-30700)
+    Nebula():setPosition( 42300,  3100)
+    Nebula():setPosition( 49200, 10700)
+    Nebula():setPosition(  3750, 31250)
+    Nebula():setPosition(-39500, 18700)
+
+    --Create 50 Asteroids
+    for asteroid_counter=1,50 do
+        Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
+        VisualAsteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
+    end
+	
+    -- Create the defense for the station
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-44000, -14000):orderDefendTarget(enemy_station)
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-47000, -14000):orderDefendTarget(enemy_station)
+    enemy_dreadnought = CpuShip():setShipTemplate("Dreadnought"):setFaction("Kraylor")
+    enemy_dreadnought:setPosition(-46000, -18000):orderDefendTarget(enemy_station)
+    CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
+    CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
+	
+    --Small Kraylor strike team, starting in the nebula at G5
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3550, 31250):orderRoaming()
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3950, 31250):orderRoaming()
+end
+
+function update(delta)
+    --When the player ship is destroyed, call it a victory for the Kraylor
+    if not player:isValid() then
+        victory("Kraylor")
+    end
+    --When the kraylor station is destroyed, call it a victory for the Kraylor
+    if not enemy_station:isValid() then
+        victory("Human Navy")
+    end
+end</p>
+			</div>
+			<div id="scripting-tabs-3">
+			</div>
+		</div>
+	</div>
 	<div id="tabs-download">
 		<h2>Download</h2>
 		<p id="downloads-info">Downloads for Windows and Android are available at: <a href="http://software.ultimaker.com/EmptyEpsilon/">[download list]</a></p>
@@ -209,10 +506,44 @@
 <script src="jquery.min.js"></script>
 <script src="jquery-ui.min.js"></script>
 <script>
+function mapHash()
+{
+	var parts = location.hash.substr(1).split(',');
+	var data = {}
+	parts.forEach(function(part)
+	{
+		var info = part.split("=");
+		if (info.length > 1)
+			data[info[0]] = info[1];
+	});
+	return data;
+}
+
+function updateHashFromTab(event, ui)
+{
+	var target_id = event.target.id;
+	var target_index = $(event.target).tabs("option", "active");
+	
+	var data = mapHash();
+	data[target_id] = target_index;
+	var hash = [];
+	for(var key in data)
+	{
+		hash.push(key + "=" + data[key])
+	}
+	location.hash = hash.join(",");
+}
+
 $(function() {
-	$("#tabs").tabs();
-	$("#station-tabs").tabs();
-	$("#running-tabs").tabs();
+	$("#tabs").tabs({activate: updateHashFromTab});
+	$("#station-tabs").tabs({activate: updateHashFromTab});
+	$("#running-tabs").tabs({activate: updateHashFromTab});
+	
+	$("#scripting-tabs").tabs({activate: updateHashFromTab}).addClass("ui-tabs-vertical ui-helper-clearfix");
+	$("#scripting-tabs ul").removeClass("ui-widget-header");
+	$("#scripting-tabs li" ).removeClass("ui-corner-top").addClass("ui-corner-left");
+	$("#scripting-tabs div" ).removeClass("ui-corner-bottom");
+	
 	$.each($("img"), function(idx, element)
 	{
 		element = $(element)
@@ -232,6 +563,12 @@ $(function() {
 		element.wrap(wrapper);
 		element.after(button);
 	});
+	
+	var hashData = mapHash()
+	for(var key in hashData)
+	{
+		$("#" + key).tabs("option", "active", hashData[key]);
+	}
 	
 	$.get("http://software.ultimaker.com/ee_files.php", function(data) {
 		var files = {}

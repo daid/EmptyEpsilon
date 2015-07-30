@@ -36,3 +36,26 @@ a {
 select {
 	width: 200px;
 }
+
+.code {
+	font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+    font-size: 95%;
+    line-height: 140%;
+    white-space: pre;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -o-pre-wrap;
+	color: #000000;
+    background: #EEEEEE;
+	
+	display: block;
+    padding: 0.5em 1em;
+    border: 1px solid #bebab0;
+}
+
+.ui-tabs-vertical { width: 87em; }
+.ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 14em; }
+.ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+.ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { margin-bottom: 0.2em; padding-bottom: 0; border-right-width: 1px; }
+.ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 70em; border-left-width: 1px; height: 100%; }
