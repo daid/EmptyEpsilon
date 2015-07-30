@@ -236,7 +236,7 @@ function update(delta)
 end</p>
 				<p>Save this as a file named <b>scenario_99_tutorial.lua</b> in the folder <b>EmptyEpsilon/scripts</b></p>
 				<p>Open EmptyEpsilon and start a new server. Your scenario should be at the bottom of the list. Start it, and you will notice that there is a ship for the players created per default.</p>
-				<h2>Tip&amp;tricks</h2>
+				<h2>Tips&amp;tricks</h2>
 				<p>The file needs to start with <b>scenario_</b> to be picked up as a scenario.</p>
 				<p>The number in the scenario filename is for the order in which EmptyEpsilon shows the scenarios.</p>
 				<p>The final part of the filename is only for reference. The actual name shown is in the first line of the script file.</p>
@@ -318,7 +318,7 @@ end</p>
 				<p>A few simple names can give the whole world more character.</p>
 				<p>Finally we call the player ship <b>TheEpsilon</b></p>
 				<p class="code">PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser"):setPosition(22400, 18200):setCallSign("TheEpsilon")</p>
-				<h2>Building even more world?</h2>
+				<h2>Tips&amp;tricks - Building even more world?</h2>
 				<p>Next to asteroids, stations and nebulae there are a few more options to populate your world.</p>
 				<p>While we do not use anything else at this point in time. The following objects can also be created:</p>
 				<p class="code">BlackHole() -- Create a black hole, a 5km radius black hole which destroys anything that comes into the center.
@@ -392,17 +392,21 @@ end
 				<h2>Defending the station</h2>
 				<p>The Kraylors have an large station in this area. So let us set up some defence.</p>
 				<p>We'll create 2 Cruisers and a Dreadnought in direct defence of the station. This means we need a reference to the station.</p>
-				<p class="code">    -- Grab a reference to the Kraylor station
+				<p class="code">
+    -- Grab a reference to the Kraylor station
     enemy_station = SpaceStation():setTemplate("Large Station"):setFaction("Kraylor")
-    enemy_station:setPosition(-45600, -15800):setCallSign("Omega")</p>
+    enemy_station:setPosition(-45600, -15800):setCallSign("Omega")
+				</p>
 				<p>With that reference, we can setup ships to defend the station</p>
-				<p class="code">    -- Create the defense for the station
+				<p class="code">
+    -- Create the defense for the station
     CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-45000, -14000):orderDefendTarget(enemy_station)
     CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-46000, -14000):orderDefendTarget(enemy_station)
     CpuShip():setShipTemplate("Dreadnought"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_station)</p>
 				<p>With the defend target orders, the ship will circle around the target and attack enemies in range. You can defend any object, including another ship.</p>
 				<p>For example, we can setup two extra fighters which defend the Dreadnought.</p>
-				<p class="code">    enemy_dreadnought = CpuShip():setShipTemplate("Dreadnought"):setFaction("Kraylor")
+				<p class="code">
+    enemy_dreadnought = CpuShip():setShipTemplate("Dreadnought"):setFaction("Kraylor")
     enemy_dreadnought:setPosition(-46000, -18000):orderDefendTarget(enemy_station)
     CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
     CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)</p>
@@ -413,17 +417,34 @@ end
     player:setPosition(22400, 18200):setCallSign("TheEpsilon")</p>
 				<p>Next, we'll ve finally using the <b>update</b> function that has been empty so far. The code in the update function is run every game tick, so about 60 times per second.</p>
 				<p>So in there we want to check if the player is destroyed, and if the ship is, end the game.</p>
-				<p class="code">function update(delta)
+				<p class="code">
+function update(delta)
     --When the player ship is destroyed, call it a victory for the Kraylor
     if not player:isValid() then
         victory("Kraylor")
     end
-end</p>
+end
+				</p>
 				<p>Pretty simple right? And naturally, you can setup victory for the player the same way, but then with the destruction of the enemy station.</p>
-				<p class="code">    --When the kraylor station is destroyed, call it a victory for the Kraylor
+				<p class="code">
+    --When the kraylor station is destroyed, call it a victory for the Kraylor
     if not enemy_station:isValid() then
         victory("Human Navy")
-    end</p>
+    end
+				</p>
+				<h2>Tips&amp;tricks - More about ships.</h2>
+				<p>For a full list of possible ship templates, you can check the shipTemplates.lua file. This file contains all the definitions for all the possible ship types.</p>
+				<p>Next to orderRoaming and orderDefendTarget, there is also:</p>
+				<ul>
+					<li><b>orderIdle()</b> Default state, do nothing, do not move or attack.</li>
+					<li><b>orderStandGround()</b> Ship does not fly away, but does try to hit you when you are in range. Will fire missiles as well as beam weapons.</li>
+					<li><b>orderDefendLocation(x, y)</b> Fly towards the given position, and defend it from attacks.</li>
+					<li><b>orderFlyFormation(target, offset_x, offset_y)</b> Fly in formation with the target. Stay at a certain offset. When enemies are near your target, engage them. Gives fleet behaviour.</li>
+					<li><b>orderFlyTowards(x, y)</b> Fly towards a target position, but do attack enemies when they come too close.</li>
+					<li><b>orderFlyTowardsBlind(x, y)</b> Fly towards a target position, and ignore everything else.</li>
+					<li><b>orderAttack(target)</b> Attack a specific target.</li>
+					<li><b>orderDock(target)</b> Dock with an target. Can be used to make computer controlled ships dock with stations.</li>
+				</ul>
 				<h2>Final script for today.</h2>
 				<p>We end off with the complete script for reference.</p>
 				<p class="code">-- Name: Beacon of light - Day 2
@@ -485,7 +506,8 @@ function update(delta)
     if not enemy_station:isValid() then
         victory("Human Navy")
     end
-end</p>
+end
+</p>
 			</div>
 			<div id="scripting-tabs-3">
 			</div>
@@ -563,6 +585,25 @@ $(function() {
 		element.wrap(wrapper);
 		element.after(button);
 	});
+	$.each($(".code"), function(idx, element)
+	{
+		element = $(element);
+		var lines = element.html().split("\n");
+		var output = [];
+		lines.forEach(function(line) {
+			if (line.indexOf("--") > -1)
+			{
+				n = line.indexOf("--");
+				line = line.substr(0, n) + "<span style='color: green'>" + line.substr(n) + "</span>";
+			}
+			output.push(line);
+		});
+		while(output.length > 0 && output[0].trim() == "")
+			output.shift()
+		while(output.length > 0 && output[output.length - 1].trim() == "")
+			output.pop()
+		element.html(output.join("\n"));
+	})
 	
 	var hashData = mapHash()
 	for(var key in hashData)
