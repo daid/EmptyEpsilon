@@ -201,7 +201,7 @@
 				<li><a href="#scripting-tabs-0">0) Tools&amp;basics</a></li>
 				<li><a href="#scripting-tabs-1">1) Building a world</a></li>
 				<li><a href="#scripting-tabs-2">2) Death &amp; destruction</a></li>
-				<li><a href="#scripting-tabs-3">3) ...</a></li>
+				<li><a href="#scripting-tabs-3">3) We are on a mission!</a></li>
 			</ul>
 			<div id="scripting-tabs-0">
 				<h2>About this series</h2>
@@ -223,7 +223,8 @@
 				<h2>Setting up the file</h2>
 				<p>We'll start out with an empty scenario, as a template to setup our initial game in step 1.</p>
 				<p>Open the editor of your choise, and enter the following code:</p>
-				<p class="code">-- Name: Beacon of light series
+				<p class="code">
+-- Name: Beacon of light series
 -- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
 
 -- Init is run when the scenario is started. Create your initial
@@ -233,7 +234,8 @@ function init()
 end
 
 function update(delta)
-end</p>
+end
+</p>
 				<p>Save this as a file named <b>scenario_99_tutorial.lua</b> in the folder <b>EmptyEpsilon/scripts</b></p>
 				<p>Open EmptyEpsilon and start a new server. Your scenario should be at the bottom of the list. Start it, and you will notice that there is a ship for the players created per default.</p>
 				<h2>Tips&amp;tricks</h2>
@@ -251,7 +253,8 @@ end</p>
 				<h2>Building a world - Stations</h2>
 				<p>Right now the only thing in the world is the ship for the players. Which does not make for an intresting world.</p>
 				<p>So let's add some stations. Add the following code after the creation of the player ship:</p>
-				<p class="code">    SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(23500, 16100)
+				<p class="code">
+    SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(23500, 16100)
     SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(-25200, 32200)
     SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setPosition(-45600, -15800)
     SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setPosition(9100,-35400)
@@ -264,7 +267,8 @@ end</p>
 				<p>Nebulae are intresting to add to the game world. As they block of a 5km range of the long range radar. And add more mistery to the whole world.</p>
 				<p>They provide an intresting tactical difference to the game. As computer controlled ships are also blocked by Nebulae.</p>
 				<p>So we surround the enemy station by some nebula, so it's shielded from direct sight.</p>
-				<p class="code">    --Nebula that hide the enemy station.
+				<p class="code">
+    --Nebula that hide the enemy station.
     Nebula():setPosition(-43300,  2200)
     Nebula():setPosition(-34000,  -700)
     Nebula():setPosition(-32000,-10000)
@@ -272,7 +276,8 @@ end</p>
     Nebula():setPosition(-28600,-21900)
 </p>
 				<p>But a cloud of nebulae like that clearly hides something, so add a few random nebulae as well.</p>
-				<p class="code">    --Random nebulae in the system
+				<p class="code">
+    --Random nebulae in the system
     Nebula():setPosition( -8000,-38300)
     Nebula():setPosition( 24000,-30700)
     Nebula():setPosition( 42300,  3100)
@@ -285,23 +290,29 @@ end</p>
 				<p class="code">Astroid():setPosition(-1000, -1000)</p>
 				<p>However, because you usually want 50 or even 100 asteroids. Placing the position by hand will be a hell do to.</p>
 				<p>So we can use more lua programming functions to do this.</p>
-				<p class="code">--Place a single random asteroid in sector E5:
-Asteroid():setPosition(random(0, 20000), random(-20000, 0))</p>
+				<p class="code">
+				--Place a single random asteroid in sector E5:
+Asteroid():setPosition(random(0, 20000), random(-20000, 0))
+</p>
 				<p>So that is a single astroid. Which does not really feel like an astroid field.</p>
-				<p class="code">--Create 100 Asteroids
+				<p class="code">
+				--Create 100 Asteroids
 for asteroid_counter=1,100 do
     Asteroid():setPosition(random(0, 20000), random(-20000, 0))
-end</p>
+end
+</p>
 				<p>Surrounding it in a simple for loop however, will generate a 100 random Asteroids.</p>
 				<p>Which... results in a pretty square asteroid field. Not that pretty.</p>
 				<p>So right now, we just tweak the parameters to have an field from sector E4 to G4 in a straight line.</p>
-				<p class="code">	--Create 50 Asteroids
+				<p class="code">
+	--Create 50 Asteroids
 	for asteroid_counter=1,50 do
 		Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
 	end
 </p>
 				<p>Already a whole lot better. But when you look at it in the 3D view now, it does look very flat. To fix that we add some VisualAsteroids as well. These asteroids are above or below the ship flying plane and cannot be hit. They are just there for visuals.</p>
-				<p class="code">	--Create 100 Asteroids
+				<p class="code">
+	--Create 100 Asteroids
 	for asteroid_counter=1,50 do
 		Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
 		VisualAsteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
@@ -310,10 +321,12 @@ end</p>
 				<h2>Spice it up a bit</h2>
 				<p>Right now the stations are just called DS-7, and other DS-? numbers. But we can change this.</p>
 				<p>By calling the setCallSign function on the stations, we can set a different name for them. Be sure to keep this short.</p>
-				<p class="code">    SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(23500, 16100):setCallSign("Research-1")
+				<p class="code">
+    SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(23500, 16100):setCallSign("Research-1")
     SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(-25200, 32200):setCallSign("Orion-5")
     SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setPosition(-45600, -15800):setCallSign("Omega")
-    SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setPosition(9100,-35400):setCallSign("Refugee-X")</p>
+    SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setPosition(9100,-35400):setCallSign("Refugee-X")
+				</p>
 				<p>We call the small station a research station, which gives it a bit more character. The enemy station is called Omega, as it's big. And the neutral station is called Refugee-X, which makes it sound like it could be housing refugees.</p>
 				<p>A few simple names can give the whole world more character.</p>
 				<p>Finally we call the player ship <b>TheEpsilon</b></p>
@@ -321,7 +334,8 @@ end</p>
 				<h2>Tips&amp;tricks - Building even more world?</h2>
 				<p>Next to asteroids, stations and nebulae there are a few more options to populate your world.</p>
 				<p>While we do not use anything else at this point in time. The following objects can also be created:</p>
-				<p class="code">BlackHole() -- Create a black hole, a 5km radius black hole which destroys anything that comes into the center.
+				<p class="code">
+BlackHole() -- Create a black hole, a 5km radius black hole which destroys anything that comes into the center.
 Mine() -- A simple mine. Explodes with a 1km radius when a ship comes too close.
 WarpJammer():setFaction("Kraylor") -- A warp jammer, jams warp and jump drives in a 5km radius. Can be destroyed.
 SupplyDrop():setFaction("Human Navy") -- A supply drop, can be picked up by flying over it, empty per default, can be filled with energy and missile weapons.</p>
@@ -447,7 +461,8 @@ end
 				</ul>
 				<h2>Final script for today.</h2>
 				<p>We end off with the complete script for reference.</p>
-				<p class="code">-- Name: Beacon of light - Day 2
+				<p class="code">
+-- Name: Beacon of light - Day 2
 -- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
 
 -- Init is run when the scenario is started. Create your initial
@@ -510,6 +525,229 @@ end
 </p>
 			</div>
 			<div id="scripting-tabs-3">
+				<h2>Ready for your orders?</h2>
+				<p>So, now that we know how to create a basic world, and fill it with some bad guys. Let us start creating a mission.</p>
+				<p>To kick off this mission, we will start by sending out a transmission from <b>Research-1</b> towards the player, indicating that a transport ship carring a diplomat got lost on route from the Research station to Orion-X.</p>
+                <p>This will involve more actual code, and will be explained in less details then the previous steps.</p>
+                <h2>Your first order!</h2>
+				<p>So let us start by making references to the rest of the stations, as we will need the rest later on.</p>
+				<p class="code">
+    research_station = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy")
+    research_station:setPosition(23500, 16100):setCallSign("Research-1")
+    main_station = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy")
+    main_station:setPosition(-25200, 32200):setCallSign("Orion-5")
+    enemy_station = SpaceStation():setTemplate("Large Station"):setFaction("Kraylor")
+    enemy_station:setPosition(-45600, -15800):setCallSign("Omega")
+    neutral_station = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
+    neutral_station:setPosition(9100,-35400):setCallSign("Refugee-X")
+				</p>
+				<p>Now, at the end of the init function, we will send out a transmission to the player</p>
+				<p class="code">
+    --Start off the mission by sending a transmission to the player
+    research_station:sendCommsMessage(player, [[TheEpsilon, please come in?
+
+We lost contact with our transport RT-4, who was transporting a diplomat from our research station to Orion-X.
+
+Last contact was before RT-4 entered the nebula at G5.
+
+Please investigate and recover the diplomat if possible!.]])
+				</p>
+                <h2>Improving the enemy strike team to a real objective</h2>
+				<p>Now, we still have the Kraylor strike team setup in the nebula at G5. However, they are on roaming orders, and thus will fly out of the nebula and engage. Instead we want the strike team to hide in the nebula. We also need a transport TR-4 in the nebula.</p>
+				<p class="code">
+    --Small Kraylor strike team, guarding TR-4 in the nebula at G5.
+    kraylor_TR4_guard1 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3550, 31250):orderIdle()
+    kraylor_TR4_guard2 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3950, 31250):orderIdle()
+    transport_TR4 = CpuShip():setShipTemplate("Tug"):setFaction("Human Navy"):setPosition(3750, 31250)
+    transport_TR4:orderIdle():setCallSign("TR-4")
+    transport_TR4:setHull(1):setFrontShieldMax(1):setRearShieldMax(1)
+				</p>
+				<p>As we want the Kraylor ships to destroy the transport in front of the players eyes, we put all orders on Idle so they will not move till ordered to do differently. We also set the hull and shields to 1 for the transport, so it can be destroyed in a single shot.</p>
+                <p>So we need to do some actual mission scripting. First, in the init function, at the end, we will set the initial mission state. This is a variable which tracks the current state the mission is in. We will increase it every time we come to a new thing that can happen in the mission.</p>
+                <p class="code">
+    --Set the initial mission state
+    mission_state = 1
+                </p>
+                <p>Next, we will change the update function. We will keep the defeat condition in tact, as we want the mission to end when the player is destroyed. But we will remove the other victory condition for now. We add a bunch of more code, first, the mission state needs to be 1. Then, when the player gets within 5k of the TR-5 ship, order the Kraylor ships to roam around. This will cause them to target TR-4 and destroy it, and target the player after that. Finally, we also add an utility function to measure distance between two objects.</p>
+                <p class="code">
+function update(delta)
+    --When the player ship, or the research station is destroyed, call it a victory for the Kraylor
+    if not player:isValid() or not research_station:isValid() then
+        victory("Kraylor")
+    end
+    
+    if mission_state == 1 then
+        if distance(player, transport_TR4) &lt; 5000 then
+            kraylor_TR4_guard1:orderRoaming()
+            kraylor_TR4_guard2:orderRoaming()
+            mission_state = 2
+        end
+    end
+end
+
+function distance(obj1, obj2)
+    x1, y1 = obj1:getPosition()
+    x2, y2 = obj2:getPosition()
+    xd, yd = (x1 - x2), (y1 - y2)
+    return math.sqrt(xd * xd + yd * yd)
+end
+                </p>
+                <h2>Get the Kraylor scum! Oh, and save the diplomat.</h2>
+                <p>Now, we can quite safe assume the RT-4 will be destroyed. So in mission_state 2 we will wait till the ship is destroyed, and when it is we will spawn an empty supply drop as escape pod. We will also message the ship to indicate what to do.</p>
+                <p class="code">
+    if mission_state == 2 then
+        if not transport_TR4:isValid() then
+            -- TR-4 destroyed, send a transmission to the player, create a supply drop to indicate an escape pod.
+            mission_state = 3
+            transport_TR4_drop = SupplyDrop():setFaction("Human Navy"):setPosition(3750, 31250)
+            research_station:sendCommsMessage(player, [[RT-4 has been destroyed! But an escape pod is ejected from the ship.
+
+Lifesigns detected in the pod, please pick up the pod to see if the diplomat made it.
+
+And destroy those Kraylor scum while you are at it!]])
+        end
+    end
+                </p>
+                <p>Once again, we increase the mission state, so we can check for the next event to happen. We also create the supply drop and keep a reference to it. And send a message pressing the player on what to do next.</p>
+                <p>Now, we want the escape pod to be picked up, but we also want the Kraylor ships to be destroyed before we continue. After we pickup the escape pod, we want to deliver it to the station, and finish the mission.</p>
+                <p class="code">
+    if mission_state == 3 then
+        if not transport_TR4_drop:isValid() and not kraylor_TR4_guard1:isValid() and not kraylor_TR4_guard2:isValid() then
+            -- Escape pod picked up, all kraylor ships destroyed.
+            mission_state = 4
+            research_station:sendCommsMessage(player, [[The diplomat is safely picked up! Thanks for that.
+
+Please deliver the diplomat to Omega-X in sector G3, do this by docking with the station.]])
+        end
+    end
+    if mission_state == 4 then
+        if player:isDocked(main_station) then
+            -- Docked and delivered the diplomat.
+            victory("Human Navy")
+        end
+    end
+                </p>
+                <h2>Tips&amp;ticks</h2>
+                <p>There is a LOT you can do from mission scripting. Even with the limited tools at your disposal. By no means the mission progression has to be linear. You could create forks or different conditions. For example, you could set it up that saving the diplomat before destroying the Kraylor ships yields more rewards or a different mission path.</p>
+                <p>If you want to try some things for yourself, but not sure where to go from here. You could setup the next step of the mission to be retaliation from the Kraylor. Spawn some ships near the edge of the nebulae at the enemy station, and have them attack the player. You can also send a transmission from the new enemy ships to the player to let him know why he is attacked.</p>
+                <h2>Final script for today.</h2>
+                <p class="code">
+-- Name: Beacon of light series
+-- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
+
+-- Init is run when the scenario is started. Create your initial
+function init()
+    -- Create the main ship for the players.
+    player = PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
+	player:setPosition(22400, 18200):setCallSign("TheEpsilon")
+
+    research_station = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy")
+    research_station:setPosition(23500, 16100):setCallSign("Research-1")
+    main_station = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy")
+    main_station:setPosition(-25200, 32200):setCallSign("Orion-5")
+    enemy_station = SpaceStation():setTemplate("Large Station"):setFaction("Kraylor")
+    enemy_station:setPosition(-45600, -15800):setCallSign("Omega")
+    neutral_station = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
+    neutral_station:setPosition(9100,-35400):setCallSign("Refugee-X")
+    
+    --Nebula that hide the enemy station.
+    Nebula():setPosition(-43300,  2200)
+    Nebula():setPosition(-34000,  -700)
+    Nebula():setPosition(-32000,-10000)
+    Nebula():setPosition(-24000,-14300)
+    Nebula():setPosition(-28600,-21900)
+
+    --Random nebulae in the system
+    Nebula():setPosition( -8000,-38300)
+    Nebula():setPosition( 24000,-30700)
+    Nebula():setPosition( 42300,  3100)
+    Nebula():setPosition( 49200, 10700)
+    Nebula():setPosition(  3750, 31250)
+    Nebula():setPosition(-39500, 18700)
+
+    --Create 50 Asteroids
+    for asteroid_counter=1,50 do
+        Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
+        VisualAsteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
+    end
+	
+    -- Create the defense for the station
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-44000, -14000):orderDefendTarget(enemy_station)
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-47000, -14000):orderDefendTarget(enemy_station)
+    enemy_dreadnought = CpuShip():setShipTemplate("Dreadnought"):setFaction("Kraylor")
+    enemy_dreadnought:setPosition(-46000, -18000):orderDefendTarget(enemy_station)
+    CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
+    CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
+	
+    --Small Kraylor strike team, guarding TR-4 in the nebula at G5.
+    kraylor_TR4_guard1 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3550, 31250):orderIdle()
+    kraylor_TR4_guard2 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3950, 31250):orderIdle()
+    transport_TR4 = CpuShip():setShipTemplate("Tug"):setFaction("Human Navy"):setPosition(3750, 31250)
+    transport_TR4:orderIdle():setCallSign("TR-4")
+    transport_TR4:setHull(1):setFrontShieldMax(1):setRearShieldMax(1)
+    
+    --Start off the mission by sending a transmission to the player
+    research_station:sendCommsMessage(player, [[TheEpsilon, please come in?
+
+We lost contact with our transport RT-4, who was transporting a diplomat from our research station to Orion-X.
+
+Last contact was before RT-4 entered the nebula at G5.
+
+Please investigate and recover the diplomat if possible!.]])
+    --Set the initial mission state
+    mission_state = 1
+end
+
+function update(delta)
+    --When the player ship, or the research station is destroyed, call it a victory for the Kraylor
+    if not player:isValid() or not research_station:isValid() then
+        victory("Kraylor")
+    end
+    
+    if mission_state == 1 then
+        if distance(player, transport_TR4) &lt; 5000 then
+            kraylor_TR4_guard1:orderRoaming()
+            kraylor_TR4_guard2:orderRoaming()
+            mission_state = 2
+        end
+    end
+    if mission_state == 2 then
+        if not transport_TR4:isValid() then
+            -- TR-4 destroyed, send a transmission to the player, create a supply drop to indicate an escape pod.
+            mission_state = 3
+            transport_TR4_drop = SupplyDrop():setFaction("Human Navy"):setPosition(3750, 31250)
+            research_station:sendCommsMessage(player, [[RT-4 has been destroyed! But an escape pod is ejected from the ship.
+
+Lifesigns detected in the pod, please pick up the pod to see if the diplomat made it.
+
+And destroy those Kraylor scum while you are at it!]])
+        end
+    end
+    if mission_state == 3 then
+        if not transport_TR4_drop:isValid() and not kraylor_TR4_guard1:isValid() and not kraylor_TR4_guard2:isValid() then
+            -- Escape pod picked up, all kraylor ships destroyed.
+            mission_state = 4
+            research_station:sendCommsMessage(player, [[The diplomat is safely picked up! Thanks for that.
+
+Please deliver the diplomat to Omega-X in sector G3, do this by docking with the station.]])
+        end
+    end
+    if mission_state == 4 then
+        if player:isDocked(main_station) then
+            -- Docked and delivered the diplomat.
+            victory("Human Navy")
+        end
+    end
+    
+end
+
+function distance(obj1, obj2)
+    x1, y1 = obj1:getPosition()
+    x2, y2 = obj2:getPosition()
+    xd, yd = (x1 - x2), (y1 - y2)
+    return math.sqrt(xd * xd + yd * yd)
+end
+                </p>
 			</div>
 		</div>
 	</div>
@@ -596,13 +834,16 @@ $(function() {
 				n = line.indexOf("--");
 				line = line.substr(0, n) + "<span style='color: green'>" + line.substr(n) + "</span>";
 			}
+            line = line.replace(/"([^"]*)"/g, "<span style='color: blue'>\"$1\"</span>");
 			output.push(line);
 		});
 		while(output.length > 0 && output[0].trim() == "")
 			output.shift()
 		while(output.length > 0 && output[output.length - 1].trim() == "")
 			output.pop()
-		element.html(output.join("\n"));
+        output = output.join("\n");
+        output = output.replace(/\[\[([^(\]\])]*)\]\]/gm, "<span style='color: blue'>[[$1]]</span>");
+		element.html(output);
 	})
 	
 	var hashData = mapHash()
