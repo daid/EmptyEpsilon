@@ -310,11 +310,11 @@ public:
     float getFrontShield() { return front_shield; }
     float getFrontShieldMax() { return front_shield_max; }
     void setFrontShield(float amount) { if (amount < 0) return; front_shield = amount; }
-    void setFrontShieldMax(float amount) { if (amount < 0) return; front_shield_max = amount; }
+    void setFrontShieldMax(float amount) { if (amount < 0) return; front_shield_max = amount; front_shield = std::min(front_shield, front_shield_max); }
     float getRearShield() { return rear_shield; }
     float getRearShieldMax() { return rear_shield_max; }
     void setRearShield(float amount) { if (amount < 0) return; rear_shield = amount; }
-    void setRearShieldMax(float amount) { if (amount < 0) return; rear_shield_max = amount; }
+    void setRearShieldMax(float amount) { if (amount < 0) return; rear_shield_max = amount; rear_shield = std::min(rear_shield, rear_shield_max); }
     bool getShieldsActive() { return shields_active; }
     void setShieldsActive(bool active) { shields_active = active; }
     float getSystemHealth(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].health; }
