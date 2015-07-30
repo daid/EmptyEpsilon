@@ -4,6 +4,7 @@
 #include "menus/shipSelectionScreen.h"
 #include "spaceObjects/cpuShip.h"
 #include "spaceObjects/spaceStation.h"
+#include "spaceObjects/wormHole.h"
 
 GameMasterScreen::GameMasterScreen()
 : click_and_drag_state(CD_None)
@@ -282,26 +283,33 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
             for(P<SpaceObject> obj : targets.getTargets())
             {
                 P<CpuShip> cpu_ship = obj;
-                if (!cpu_ship)
-                    continue;
-                
-                if (target && target != obj && target->canBeTargeted())
+                P<WormHole> wormhole = obj;
+                if (cpu_ship)
                 {
-                    if (obj->isEnemy(target))
+                    if (target && target != obj && target->canBeTargeted())
                     {
-                        cpu_ship->orderAttack(target);
+                        if (obj->isEnemy(target))
+                        {
+                            cpu_ship->orderAttack(target);
+                        }else{
+                            if (!shift_down && target->canBeDockedBy(cpu_ship))
+                                cpu_ship->orderDock(target);
+                            else
+                                cpu_ship->orderDefendTarget(target);
+                        }
                     }else{
-                        if (!shift_down && target->canBeDockedBy(cpu_ship))
-                            cpu_ship->orderDock(target);
+                        if (shift_down)
+                            cpu_ship->orderFlyTowardsBlind(position + (obj->getPosition() - objects_center));
                         else
-                            cpu_ship->orderDefendTarget(target);
+                            cpu_ship->orderFlyTowards(position + (obj->getPosition() - objects_center));
                     }
-                }else{
-                    if (shift_down)
-                        cpu_ship->orderFlyTowardsBlind(position + (obj->getPosition() - objects_center));
-                    else
-                        cpu_ship->orderFlyTowards(position + (obj->getPosition() - objects_center));
                 }
+                else if (wormhole)
+                {
+                    wormhole->setTargetPosition(position);
+                }
+                
+                
             }
         }
         break;
@@ -424,7 +432,11 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
         this->hide();
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
-    
+    (new GuiButton(box, "CREATE_WORMHOLE", "Worm Hole", [this]() {
+    create_script = "WormHole()";
+    this->hide();
+    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
+    y += 30;
     y = 20;
     template_names = ShipTemplate::getTemplateNameList();
     std::sort(template_names.begin(), template_names.end());
