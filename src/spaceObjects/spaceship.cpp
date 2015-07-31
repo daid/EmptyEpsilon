@@ -85,6 +85,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     has_jump_drive = true;
     jump_distance = 0.0;
     jump_delay = 0.0;
+    wormhole_alpha = 0.0;
     tube_load_time = 8.0;
     weapon_tubes = 0;
     turn_speed = 10.0;
@@ -117,6 +118,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&current_warp, 0.1);
     registerMemberReplication(&has_jump_drive);
     registerMemberReplication(&jump_delay, 0.5);
+    registerMemberReplication(&wormhole_alpha, 0.5);
     registerMemberReplication(&tube_load_time);
     registerMemberReplication(&weapon_tubes);
     registerMemberReplication(&target_id);
@@ -240,9 +242,13 @@ void SpaceShip::draw3DTransparent()
     if (rear_shield_hit_effect > 0)
         model_info.renderRearShield((rear_shield / rear_shield_max) * rear_shield_hit_effect);
 
-    if (has_jump_drive && jump_delay > 0.0f)
+    if ((has_jump_drive && jump_delay > 0.0f) ||
+        (wormhole_alpha > 0.0f))
     {
-        float alpha = 1.0f - (jump_delay / 10.0f);
+        float delay = jump_delay;
+        if (wormhole_alpha > 0.0f)
+            delay = wormhole_alpha;
+        float alpha = 1.0f - (delay / 10.0f);
         model_info.renderOverlay(textureManager.getTexture("electric_sphere_texture.png"), alpha);
     }
 }
