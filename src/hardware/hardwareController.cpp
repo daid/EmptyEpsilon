@@ -106,13 +106,16 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
     {
         if (settings["channel"] == "" || settings["name"] == "")
             LOG(ERROR) << "Incorrect properties in [channel] section";
-        else
-            channel_mapping[settings["name"]] = settings["channel"].toInt() - 1;
+        else{
+            channel_mapping[settings["name"]] = settings["channel"].toInt();
+            LOG(INFO) << "Channel #" << settings["channel"] << ": " << settings["name"];
+        }
     }else if(section == "[channels]")
     {
         for(std::pair<string, string> item : settings)
         {
-            channel_mapping[item.first] = item.second.toInt() - 1;
+            channel_mapping[item.first] = item.second.toInt();
+            LOG(INFO) << "Channel #" << item.second << ": " << item.first;
         }
     }else if(section == "[state]")
     {
