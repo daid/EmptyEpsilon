@@ -123,7 +123,7 @@ public:
 
     virtual void executeJump(float distance);
     virtual void fireBeamWeapon(int index, P<SpaceObject> target);
-    virtual void takeHullDamage(float damage_amount, DamageInfo& info);
+    virtual void takeHullDamage(float damage_amount, DamageInfo info);
     void setSystemCoolant(ESystem system, float level);
 
     virtual void update(float delta);

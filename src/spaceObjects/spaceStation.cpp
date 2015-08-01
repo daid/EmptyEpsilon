@@ -100,7 +100,7 @@ bool SpaceStation::canBeDockedBy(P<SpaceObject> obj)
     return true;
 }
 
-void SpaceStation::takeDamage(float damage_amount, DamageInfo& info)
+void SpaceStation::takeDamage(float damage_amount, DamageInfo info)
 {
     shields -= damage_amount;
     if (shields < 0)

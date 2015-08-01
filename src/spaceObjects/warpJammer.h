@@ -17,7 +17,7 @@ public:
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
 
     virtual bool canBeTargeted() { return true; }
-    virtual void takeDamage(float damage_amount, DamageInfo& info);
+    virtual void takeDamage(float damage_amount, DamageInfo info);
 
     static bool isWarpJammed(sf::Vector2f position);
     static sf::Vector2f getFirstNoneJammedPosition(sf::Vector2f start, sf::Vector2f end);

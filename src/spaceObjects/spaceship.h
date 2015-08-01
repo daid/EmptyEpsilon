@@ -218,7 +218,7 @@ public:
      * \param damage_amount Damage to be delt.
      * \param info Information about damage type (usefull for damage reduction, etc)
      */
-    virtual void takeDamage(float damage_amount, DamageInfo& info);
+    virtual void takeDamage(float damage_amount, DamageInfo info);
 
     /*!
      * Spaceship takes damage directly on hull.
@@ -226,7 +226,7 @@ public:
      * \param damage_amount Damage to be delt.
      * \param info Information about damage type (usefull for damage reduction, etc)
      */
-    virtual void takeHullDamage(float damage_amount, DamageInfo& info);
+    virtual void takeHullDamage(float damage_amount, DamageInfo info);
 
     /*!
      * Jump in current direction

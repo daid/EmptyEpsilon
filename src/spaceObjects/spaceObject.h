@@ -22,6 +22,10 @@ public:
     sf::Vector2f location;
     int frequency;
     ESystem system_target;
+    
+    DamageInfo()
+    : instigator(instigator), type(DT_Energy), location(0, 0), frequency(-1), system_target(SYS_None)
+    {}
 
     DamageInfo(P<SpaceObject> instigator, EDamageType type, sf::Vector2f location)
     : instigator(instigator), type(type), location(location), frequency(-1), system_target(SYS_None)
@@ -55,10 +59,10 @@ public:
     virtual bool canBeDockedBy(P<SpaceObject> obj) { return false; }
     virtual bool hasShield() { return false; }
     virtual bool canHideInNebula() { return true; }
-    virtual void takeDamage(float damage_amount, DamageInfo& info) {}
+    virtual void takeDamage(float damage_amount, DamageInfo info) {}
     virtual std::unordered_map<string, string> getGMInfo() { return std::unordered_map<string, string>(); }
 
-    static void damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, DamageInfo& info, float min_range);
+    static void damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, DamageInfo info, float min_range);
 
     bool isEnemy(P<SpaceObject> obj);
     bool isFriendly(P<SpaceObject> obj);
@@ -82,5 +86,8 @@ public:
 protected:
     ModelInfo model_info;
 };
+
+/* Define script conversion function for the DamageInfo structure. */
+template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& di);
 
 #endif//SPACE_OBJECT_H

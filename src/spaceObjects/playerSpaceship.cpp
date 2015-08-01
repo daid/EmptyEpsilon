@@ -393,7 +393,7 @@ void PlayerSpaceship::fireBeamWeapon(int idx, P<SpaceObject> target)
     }
 }
 
-void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
+void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo info)
 {
     if (info.type != DT_EMP)
     {

@@ -27,7 +27,7 @@ public:
     virtual void update(float delta);
 
     virtual void collide(Collisionable* target);
-    virtual void takeDamage(float damage_amount, DamageInfo& info) { if (info.type != DT_Kinetic) destroy(); }
+    virtual void takeDamage(float damage_amount, DamageInfo info) { if (info.type != DT_Kinetic) destroy(); }
 
     //Called when the missile hits something (could be the target, or something else). Missile is destroyed afterwards.
     virtual void hitObject(P<SpaceObject> object) = 0;

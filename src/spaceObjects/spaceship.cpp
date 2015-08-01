@@ -771,7 +771,7 @@ void SpaceShip::requestUndock()
     }
 }
 
-void SpaceShip::takeDamage(float damage_amount, DamageInfo& info)
+void SpaceShip::takeDamage(float damage_amount, DamageInfo info)
 {
     if (shields_active)
     {
@@ -805,7 +805,7 @@ void SpaceShip::takeDamage(float damage_amount, DamageInfo& info)
     }
 }
 
-void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
+void SpaceShip::takeHullDamage(float damage_amount, DamageInfo info)
 {
     if (info.type == DT_EMP)
         return;

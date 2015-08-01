@@ -28,7 +28,7 @@ public:
     virtual bool canBeTargeted() { return true; }
     virtual bool canBeDockedBy(P<SpaceObject> obj);
     virtual bool hasShield() { return shields > (shields_max / 50.0); }
-    virtual void takeDamage(float damage_amount, DamageInfo& info);
+    virtual void takeDamage(float damage_amount, DamageInfo info);
 
     void setTemplate(string template_name);
     void setCallSign(string new_callsign) { callsign = new_callsign; }

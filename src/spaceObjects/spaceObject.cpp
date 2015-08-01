@@ -58,6 +58,8 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Return true when the hail is enabled with succes. Returns false when the target player cannot be hailed right now (because it's already communicating with something else)
     /// This function will display the message given as parameter when the hail is answered.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, sendCommsMessage);
+    /// Let this object take damage, the DamageInfo parameter can be empty, or a string which indicates if it's energy, kinetic or emp damage.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, takeDamage);
 }
 
 PVector<SpaceObject> space_object_list;
@@ -104,7 +106,7 @@ bool SpaceObject::isFriendly(P<SpaceObject> obj)
     return factionInfo[faction_id]->states[obj->faction_id] == FVF_Friendly;
 }
 
-void SpaceObject::damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, DamageInfo& info, float min_range)
+void SpaceObject::damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, DamageInfo info, float min_range)
 {
     PVector<Collisionable> hitList = CollisionManager::queryArea(position - sf::Vector2f(blast_range, blast_range), position + sf::Vector2f(blast_range, blast_range));
     foreach(Collisionable, c, hitList)
@@ -219,4 +221,17 @@ bool SpaceObject::sendCommsMessage(P<PlayerSpaceship> target, string message)
     target->comms_state = CS_BeingHailed;
     target->comms_incomming_message = message;
     return true;
+}
+
+template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& di)
+{
+    if (!lua_isstring(L, idx))
+        return;
+    string str = string(luaL_checkstring(L, idx++)).lower();
+    if (str == "energy")
+        di.type = DT_Energy;
+    else if (str == "kinetic")
+        di.type = DT_Kinetic;
+    else if (str == "emp")
+        di.type = DT_EMP;
 }
