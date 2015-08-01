@@ -11,6 +11,7 @@ class GuiHailPlayerShip;
 class GuiHailingPlayerShip;
 class GuiPlayerChat;
 class GuiShipRetrofit;
+class GuiShipTweak;
 class GameMasterScreen : public GuiCanvas, public Updatable
 {
 private:
@@ -23,12 +24,14 @@ private:
     GuiObjectCreationScreen* object_creation_screen;
     GuiHailPlayerShip* hail_player_dialog;
     GuiShipRetrofit* ship_retrofit_dialog;
+    GuiShipTweak* ship_tweak_dialog;
     
     GuiAutoLayout* info_layout;
     std::vector<GuiKeyValueDisplay*> info_items;
     GuiAutoLayout* order_layout;
     GuiButton* player_comms_hail;
     GuiButton* ship_retrofit_button;
+    GuiButton* ship_tweak_button;
     
     enum EClickAndDragState
     {
@@ -137,6 +140,22 @@ public:
     GuiShipRetrofit(GuiContainer* owner);
     
     void open(P<SpaceShip> target);
+
+    virtual bool onMouseDown(sf::Vector2f position);
+};
+
+class GuiShipTweak : public GuiBox
+{
+private:
+    P<SpaceShip> target;
+
+    GuiSlider* system_damage[SYS_COUNT];
+    GuiSlider* system_heat[SYS_COUNT];
+public:
+    GuiShipTweak(GuiContainer* owner);
+    
+    void open(P<SpaceShip> target);
+    virtual void onDraw(sf::RenderTarget& window);
 
     virtual bool onMouseDown(sf::Vector2f position);
 };

@@ -61,6 +61,17 @@ GameMasterScreen::GameMasterScreen()
         }
     });
     ship_retrofit_button->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->hide();
+    ship_tweak_button = new GuiButton(this, "TWEAK_SHIP", "Tweak", [this]() {
+        for(P<SpaceObject> obj : targets.getTargets())
+        {
+            if (P<SpaceShip>(obj))
+            {
+                ship_tweak_dialog->open(obj);
+                break;
+            }
+        }
+    });
+    ship_tweak_button->setPosition(20, -170, ABottomLeft)->setSize(250, 50)->hide();
     player_comms_hail = new GuiButton(this, "HAIL_PLAYER", "Hail ship", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
             if (P<PlayerSpaceship>(obj))
@@ -68,7 +79,7 @@ GameMasterScreen::GameMasterScreen()
         if (hail_player_dialog->player)
             hail_player_dialog->show();
     });
-    player_comms_hail->setPosition(20, -170, ABottomLeft)->setSize(250, 50)->hide();
+    player_comms_hail->setPosition(20, -220, ABottomLeft)->setSize(250, 50)->hide();
     
     info_layout = new GuiAutoLayout(this, "INFO_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     info_layout->setPosition(-20, 20, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
@@ -106,6 +117,8 @@ GameMasterScreen::GameMasterScreen()
     player_chat->hide();
     ship_retrofit_dialog = new GuiShipRetrofit(this);
     ship_retrofit_dialog->hide();
+    ship_tweak_dialog = new GuiShipTweak(this);
+    ship_tweak_dialog->hide();
 
     global_message_entry = new GuiGlobalMessageEntry(this);
     global_message_entry->hide();
@@ -145,6 +158,7 @@ void GameMasterScreen::update(float delta)
         }
     }
     ship_retrofit_button->setVisible(has_ship);
+    ship_tweak_button->setVisible(has_ship);
     order_layout->setVisible(has_cpu_ship);
     player_comms_hail->setVisible(has_player_ship);
     
@@ -677,20 +691,6 @@ GuiShipRetrofit::GuiShipRetrofit(GuiContainer* owner)
             missile_storage_amount_selector[n]->addEntry(getMissileWeaponName(EMissileWeapons(n)) + ": " + string(m), "");
         missile_storage_amount_selector[n]->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     }
-/*
-    x += 350;
-    y = 200;
-    for(int n=0; n<SYS_COUNT; n++)
-    {
-        ESystem system = ESystem(n);
-        if (ship->hasSystem(system))
-        {
-            int diff = drawSelector(sf::FloatRect(x, y, 300, 30), getSystemName(system) + ": " + string(ship->systems[n].health * 100) + "%", 20);
-            y += 30;
-            ship->systems[n].health = std::min(1.0f, std::max(-1.0f, ship->systems[n].health + diff * 0.10f));
-        }
-    }
-*/
 
     (new GuiButton(this, "CLOSE_BUTTON", "Close", [this]() {
         hide();
@@ -723,5 +723,59 @@ void GuiShipRetrofit::open(P<SpaceShip> target)
     for(int n=0; n<MW_Count; n++)
         missile_storage_amount_selector[n]->setSelectionIndex(target->weapon_storage_max[n]);
     
+    show();
+}
+
+GuiShipTweak::GuiShipTweak(GuiContainer* owner)
+: GuiBox(owner, "SHIP_RETROFIT_DIALOG")
+{
+    setPosition(0, -100, ABottomCenter);
+    setSize(800, 600);
+    fill();
+    
+    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    left_col->setPosition(20, 20, ATopLeft)->setSize(300, 600);
+    GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    right_col->setPosition(-20, 20, ATopRight)->setSize(300, 600);
+    
+    for(int n=0; n<SYS_COUNT; n++)
+    {
+        ESystem system = ESystem(n);
+        (new GuiLabel(left_col, "", getSystemName(system) + " health", 20))->setSize(GuiElement::GuiSizeMax, 30);
+        system_damage[n] = new GuiSlider(left_col, "", -1.0, 1.0, 0.0, [this, n](float value) {
+            target->systems[n].health = value;
+        });
+        system_damage[n]->setSize(GuiElement::GuiSizeMax, 30);
+
+        (new GuiLabel(right_col, "", getSystemName(system) + " heat", 20))->setSize(GuiElement::GuiSizeMax, 30);
+        system_heat[n] = new GuiSlider(right_col, "", 0.0, 1.0, 0.0, [this, n](float value) {
+            target->systems[n].heat_level = value;
+        });
+        system_heat[n]->setSize(GuiElement::GuiSizeMax, 30);
+    }
+
+    (new GuiButton(this, "CLOSE_BUTTON", "Close", [this]() {
+        hide();
+    }))->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
+}
+
+bool GuiShipTweak::onMouseDown(sf::Vector2f position)
+{
+    return true;
+}
+
+void GuiShipTweak::onDraw(sf::RenderTarget& window)
+{
+    GuiBox::onDraw(window);
+    for(int n=0; n<SYS_COUNT; n++)
+    {
+        system_damage[n]->setValue(target->systems[n].health);
+        system_heat[n]->setValue(target->systems[n].heat_level);
+    }
+}
+
+void GuiShipTweak::open(P<SpaceShip> target)
+{
+    this->target = target;
     show();
 }
