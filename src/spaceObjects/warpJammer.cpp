@@ -23,7 +23,7 @@ WarpJammer::WarpJammer()
 
     registerMemberReplication(&range);
     
-    model_info.setData("ammo_box");
+    model_info.setData("shield_generator");
 }
 
 void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
