@@ -197,6 +197,8 @@ class Event:
                     self.warning('Ignore', node)
                     #raise UnknownArtemisTagError(node)
                 self._body.append('end')
+            elif node.tag == 'set_fleet_property':
+                self.warning('Ignore', node)
             elif node.tag == 'set_timer':
                 self._body.append('timers["%s"] = %f' % (convertName(node.get('name')), float(node.get('seconds'))))
             elif node.tag == 'set_variable':
@@ -205,7 +207,7 @@ class Event:
                 elif node.get('randomFloatHigh') is not None:
                     self._body.append('variable_%s = random(%d, %d)' % (convertName(node.get('name')), float(node.get('randomFloatLow')), int(node.get('randomFloatHigh'))))
                 else:
-                    self._body.append('variable_%s = %f' % (convertName(node.get('name')), float(node.get('value'))))
+                    self._body.append('variable_%s = %s' % (convertName(node.get('name')), convertFloat(node.get('value'))))
             elif node.tag == 'set_ship_text':
                 self.warning('Ignore', node)
             elif node.tag == 'set_relative_position':
@@ -330,6 +332,12 @@ class Event:
             name = convertName(node.get('name', 'temp_blackhole_name'))
             x, y = convertPosition(node.get('x'), node.get('z'))
             self._body.append('%s = BlackHole():setPosition(%s, %s)' % (name, x, y))
+        elif create_type == 'whale':
+            self.warning('Ignore', node)
+        elif create_type == 'monster':
+            self.warning('Ignore', node)
+        elif create_type == 'genericMesh':
+            self.warning('Ignore', node)
         elif create_type == 'anomaly':
             # Using a supply drop instead of an anomaly
             output = ""
@@ -344,29 +352,31 @@ class Event:
         elif create_type == 'mines':
             self.parseCreateCount('Mine()', node)
         elif create_type == 'nebulas':
-            node.set('count', (int(node.get('count')) + 24) / 25)
-            node.set('randomRange', float(node.get('randomRange', 0)) - 2500.0)
+            node.set('count', '(%s + 24) / 25' % convertFloat(node.get('count')))
+            if node.get('randomRange') is not None:
+                node.set('randomRange', '%s - 2500' % convertFloat(node.get('randomRange')))
             self.parseCreateCount('Nebula()', node)
         else:
             raise UnknownArtemisTagError(node)
     
     def parseCreateCount(self, object_create_script, node):
         count = convertFloat(node.get('count'))
-        radius = float(node.get('radius', 0))
         x, y = convertPosition(node.get('startX', 0), node.get('startZ', 0))
-        self._body.append('for tmp_count=1,%s do' % (count))
-        if radius > 0:
+        self._body.append('tmp_count = %s' % (count))
+        self._body.append('for tmp_counter=1,tmp_count do')
+        if node.get('radius') is not None:
+            radius = convertFloat(node.get('radius'))
             start_angle = float(node.get('startAngle', 0)) - 90
             end_angle = float(node.get('endAngle', 360)) - 90
-            self._body.append('    tmp_x, tmp_y = vectorFromAngle(%s + (%s - %s) * (tmp_count - 1) / %s, %f)' % (start_angle, end_angle, start_angle, count, radius))
+            self._body.append('    tmp_x, tmp_y = vectorFromAngle(%s + (%s - %s) * (tmp_counter - 1) / tmp_count, %s)' % (start_angle, end_angle, start_angle, radius))
             self._body.append('    tmp_x, tmp_y = tmp_x + %s, tmp_y + %s' % (x, y))
         else:
             x2, y2 = convertPosition(node.get('endX'), node.get('endZ'))
-            self._body.append('    tmp_x = %s + (%s - %s) * (tmp_count - 1) / %s' % (x, x2, x, count))
-            self._body.append('    tmp_y = %s + (%s - %s) * (tmp_count - 1) / %s' % (y, y2, y, count))
-        random_range = float(node.get('randomRange', 0))
-        if random_range > 0:
-            self._body.append('    tmp_x2, tmp_y2 = vectorFromAngle(random(0, 360), random(0, %f))' % (random_range))
+            self._body.append('    tmp_x = %s + (%s - %s) * (tmp_counter - 1) / tmp_count' % (x, x2, x))
+            self._body.append('    tmp_y = %s + (%s - %s) * (tmp_counter - 1) / tmp_count' % (y, y2, y))
+        if node.get('randomRange') is not None:
+            random_range = convertFloat(node.get('randomRange', 0))
+            self._body.append('    tmp_x2, tmp_y2 = vectorFromAngle(random(0, 360), random(0, %s))' % (random_range))
             self._body.append('    tmp_x, tmp_y = tmp_x + tmp_x2, tmp_y + tmp_y2')
         self._body.append('    %s:setPosition(tmp_x, tmp_y)' % (object_create_script))
         self._body.append('end')
