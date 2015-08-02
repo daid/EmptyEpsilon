@@ -632,6 +632,8 @@
 		<Unit filename="src/shipTemplate.h" />
 		<Unit filename="src/spaceObjects/EMPMissile.cpp" />
 		<Unit filename="src/spaceObjects/EMPMissile.h" />
+		<Unit filename="src/spaceObjects/artifact.cpp" />
+		<Unit filename="src/spaceObjects/artifact.h" />
 		<Unit filename="src/spaceObjects/asteroid.cpp" />
 		<Unit filename="src/spaceObjects/asteroid.h" />
 		<Unit filename="src/spaceObjects/beamEffect.cpp" />
