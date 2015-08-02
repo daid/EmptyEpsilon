@@ -288,24 +288,13 @@ void PlayerSpaceship::update(float delta)
             if (!useEnergy(energy_warp_per_second * delta * float(warp_request * warp_request) * (shields_active ? 1.5 : 1.0)))
                 warp_request = 0;
         }
-        if (scanning_ship)
+        if (scanning_target)
         {
             scanning_delay -= delta;
             if (scanning_delay < 0)
             {
-                switch(scanning_ship->scanned_by_player)
-                {
-                case SS_NotScanned:
-                case SS_FriendOrFoeIdentified:
-                    scanning_ship->scanned_by_player = SS_SimpleScan;
-                    break;
-                case SS_SimpleScan:
-                    scanning_ship->scanned_by_player = SS_FullScan;
-                    break;
-                case SS_FullScan:
-                    break;
-                }
-                scanning_ship = NULL;
+                scanning_target->scanned();
+                scanning_target = NULL;
             }
         }else{
             scanning_delay = 0.0;
@@ -558,10 +547,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             int32_t id;
             packet >> id;
 
-            P<SpaceShip> ship = game_server->getObjectById(id);
-            if (ship)
+            P<SpaceObject> obj = game_server->getObjectById(id);
+            if (obj)
             {
-                scanning_ship = ship;
+                scanning_target = obj;
                 scanning_delay = max_scanning_delay;
             }
         }

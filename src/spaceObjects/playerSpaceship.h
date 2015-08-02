@@ -59,7 +59,7 @@ public:
     NetworkAudioStream network_audio_stream;
     float hull_damage_indicator;
     float jump_indicator;
-    P<SpaceShip> scanning_ship; //Server only
+    P<SpaceObject> scanning_target; //Server only
     float scanning_delay;
     float shield_calibration_delay;
     bool auto_repair_enabled;

@@ -26,11 +26,11 @@ void GuiScanTargetButton::onDraw(sf::RenderTarget& window)
     }
     else
     {
-        P<SpaceShip> ship;
+        P<SpaceObject> obj;
         if (targets)
-            ship = targets->get();
+            obj = targets->get();
         
-        if (ship && ship->scanned_by_player < SS_FullScan)
+        if (obj && obj->canBeScanned())
             button->show();
         else
             button->hide();

@@ -59,6 +59,8 @@ public:
     virtual bool canBeDockedBy(P<SpaceObject> obj) { return false; }
     virtual bool hasShield() { return false; }
     virtual bool canHideInNebula() { return true; }
+    virtual bool canBeScanned() { return false; }
+    virtual void scanned() { }
     virtual void takeDamage(float damage_amount, DamageInfo info) {}
     virtual std::unordered_map<string, string> getGMInfo() { return std::unordered_map<string, string>(); }
 
