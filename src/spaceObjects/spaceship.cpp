@@ -16,7 +16,9 @@
 #include "scriptInterface.h"
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
 {
+    /// Set the ship type, check shipTemplates.lua for the options.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setShipTemplate);
+    /// Set if this ship is scanned by the player or not.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanned);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setCallSign);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentified);
@@ -49,6 +51,12 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasWarpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWarpDrive);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponArc);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponDirection);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponCycleTime);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponDamage);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeapon);
 }
 
 /* Define script conversion function for the EMainScreenSetting enum. */

@@ -341,6 +341,23 @@ public:
             warp_speed_per_warp_level = 0;
         }
     }
+    
+    float getBeamWeaponArc(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].arc; }
+    float getBeamWeaponDirection(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].direction; }
+    float getBeamWeaponRange(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].range; }
+    float getBeamWeaponCycleTime(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].cycleTime; }
+    float getBeamWeaponDamage(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].damage; }
+    
+    void setBeamWeapon(int index, float arc, float direction, float range, float cycleTime, float damage)
+    {
+        if (index < 0 || index >= max_beam_weapons)
+            return;
+        beam_weapons[index].arc = arc;
+        beam_weapons[index].direction = direction;
+        beam_weapons[index].range = range;
+        beam_weapons[index].cycleTime = cycleTime;
+        beam_weapons[index].damage = damage;
+    }
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);
