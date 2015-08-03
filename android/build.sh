@@ -7,17 +7,22 @@ rm -rf assets/*
 cp ../resources assets/ -a
 cp ../scripts assets/ -a
 
-#remove all music to save space
+#remove all music and 3d models to save space
 rm -rf assets/resources/music
+rm -rf assets/resources/*.obj
+rm -rf assets/resources/ammo_box*
+rm -rf assets/resources/*_texture*
+rm -rf assets/resources/fire_ring.png
+rm -rf assets/resources/shield_hit_effect.png
 
-android update project --name EmptyEpsilon --target "android-10" --path .
+android update project --name EmptyEpsilon --target "android-16" --path .
 ndk-build -j 2
 
-# Check if we have a key generated with: keytool -genkey -v -keystore $HOME/android_ee_key.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
+# Check if we have a key generated with: keytool -genkey -v -keystore $HOME/android_ee_key.keystore -alias EmptyEpsilon -keyalg RSA -keysize 2048 -validity 10000
 if [ -f "$HOME/android_ee_key.keystore" ]; then
     ant release
     jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/android_ee_key.keystore ./bin/EmptyEpsilon-release-unsigned.apk EmptyEpsilon
-    zipalign -v 4 ./bin/EmptyEpsilon-release-unsigned.apk ./bin/EmptyEpsilon-release.apk
+    zipalign -f -v 4 ./bin/EmptyEpsilon-release-unsigned.apk ./bin/EmptyEpsilon-release.apk
 else
     ant debug
 fi
