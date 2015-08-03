@@ -151,6 +151,8 @@ def compile(filename, system, for_target='Release'):
 		else:
 			cc = CXX
 		cmd = '%s %s -o %s/%s -c %s' % (cc, CFLAGS, BUILD_DIR, obj_filename, filename)
+		if cmd.startswith(CC):
+			cmd = cmd.replace('-std=c++11', '')
 		print '[%d%%] %s' % (filenames.index(filename) * 100 / len(filenames), cmd)
 		if os.path.isfile('%s/%s' % (BUILD_DIR, obj_filename)) and for_target != 'Release':
 			source_modify_time = DependencyFinder(filename, include_search_paths).getModifyTime()
