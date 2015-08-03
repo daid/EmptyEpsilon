@@ -2,6 +2,7 @@
 #include "shipSelectionScreen.h"
 #include "gameGlobalInfo.h"
 #include "epsilonServer.h"
+#include "gui/scriptError.h"
 #include "main.h"
 
 ServerCreationScreen::ServerCreationScreen()
@@ -116,4 +117,5 @@ void ServerCreationScreen::startScenario()
 
     destroy();
     new ShipSelectionScreen();
+    new ScriptErrorRenderer();
 }

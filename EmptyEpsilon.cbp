@@ -498,6 +498,8 @@
 		<Unit filename="src/gui/gui2_togglebutton.h" />
 		<Unit filename="src/gui/mouseRenderer.cpp" />
 		<Unit filename="src/gui/mouseRenderer.h" />
+		<Unit filename="src/gui/scriptError.cpp" />
+		<Unit filename="src/gui/scriptError.h" />
 		<Unit filename="src/hardware/dmx512SerialDevice.cpp" />
 		<Unit filename="src/hardware/dmx512SerialDevice.h" />
 		<Unit filename="src/hardware/enttecDMXProDevice.cpp" />
