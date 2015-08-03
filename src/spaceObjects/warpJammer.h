@@ -21,6 +21,8 @@ public:
 
     static bool isWarpJammed(sf::Vector2f position);
     static sf::Vector2f getFirstNoneJammedPosition(sf::Vector2f start, sf::Vector2f end);
+    
+    virtual string getExportLine() { return "WarpJammer():setFaction(\"" + getFaction() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 };
 
 #endif//ASTEROID_H

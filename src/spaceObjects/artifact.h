@@ -23,6 +23,8 @@ public:
     void setModel(string name);
     void explode();
     void allowPickup(bool allow);
+    
+    virtual string getExportLine();
 };
 
 #endif//ARTIFACT_H

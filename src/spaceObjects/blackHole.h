@@ -17,6 +17,8 @@ public:
     virtual bool canHideInNebula() { return false; }
 
     virtual void collide(Collisionable* target);
+    
+    virtual string getExportLine() { return "BlackHole():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 };
 
 #endif//BLACK_HOLE_H

@@ -357,6 +357,9 @@ void GameMasterScreen::onKey(sf::Keyboard::Key key, int unicode)
             obj->destroy();
         }
         break;
+    case sf::Keyboard::F5:
+        Clipboard::setClipboard(getScriptExport());
+        break;
 
     //TODO: This is more generic code and is duplicated.
     case sf::Keyboard::Escape:
@@ -371,6 +374,19 @@ void GameMasterScreen::onKey(sf::Keyboard::Key key, int unicode)
     default:
         break;
     }
+}
+
+string GameMasterScreen::getScriptExport()
+{
+    string output;
+    foreach(SpaceObject, obj, space_object_list)
+    {
+        string line = obj->getExportLine();
+        if (line == "")
+            continue;
+        output += "    " + line + "\n";
+    }
+    return output;
 }
 
 GuiGlobalMessageEntry::GuiGlobalMessageEntry(GuiContainer* owner)

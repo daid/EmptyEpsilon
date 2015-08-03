@@ -55,6 +55,8 @@ public:
     
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
     virtual std::unordered_map<string, string> getGMInfo();
+    
+    virtual string getExportLine();
 
     friend class GameMasterUI;
 };

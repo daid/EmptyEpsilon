@@ -57,6 +57,8 @@ public:
     void onMouseUp(sf::Vector2f position);
 
     virtual void onKey(sf::Keyboard::Key key, int unicode);
+    
+    string getScriptExport();
 };
 
 class GuiGlobalMessageEntry : public GuiOverlay

@@ -32,6 +32,8 @@ public:
 
     void setTemplate(string template_name);
     void setCallSign(string new_callsign) { callsign = new_callsign; }
+    
+    virtual string getExportLine();
 };
 
 #endif//SPACE_SHIP_H

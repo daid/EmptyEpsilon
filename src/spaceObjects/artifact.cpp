@@ -86,3 +86,12 @@ void Artifact::allowPickup(bool allow)
 {
     allow_pickup = allow;
 }
+
+string Artifact::getExportLine()
+{
+    string ret = "Artifact():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
+    ret += ":setModel(\"" + model_data_name + "\")";
+    if (allow_pickup)
+        ret += ":allowPickup(true)";
+    return ret;
+}

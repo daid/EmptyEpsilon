@@ -1051,3 +1051,8 @@ void PlayerSpaceship::commandLaunchProbe(sf::Vector2f target_position)
     packet << CMD_LAUNCH_PROBE << target_position;
     sendClientCommand(packet);
 }
+
+string PlayerSpaceship::getExportLine()
+{
+    return "PlayerSpaceship()setShipTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
+}

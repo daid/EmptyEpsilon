@@ -160,3 +160,8 @@ std::unordered_map<string, string> SpaceStation::getGMInfo()
     ret["Shield"] = string(shields) + "/" + string(shields_max);
     return ret;
 }
+
+string SpaceStation::getExportLine()
+{
+    return "SpaceStation():setTemplate(\"" + template_name + "\"):setFaction(\"" + getFaction() + "\"):setCallSign(\"" + getCallSign() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
+}

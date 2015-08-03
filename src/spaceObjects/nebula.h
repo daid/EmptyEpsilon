@@ -31,6 +31,8 @@ public:
     static bool blockedByNebula(sf::Vector2f start, sf::Vector2f end);
     static sf::Vector2f getFirstBlockedPosition(sf::Vector2f start, sf::Vector2f end);
     static PVector<Nebula> getNebulas();
+    
+    virtual string getExportLine() { return "Nebula():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 };
 
 #endif//NEBULA_H

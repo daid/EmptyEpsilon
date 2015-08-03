@@ -177,6 +177,25 @@ std::unordered_map<string, string> CpuShip::getGMInfo()
     return ret;
 }
 
+string CpuShip::getExportLine()
+{
+    string ret = "CpuShip():setFaction(\"" + getFaction() + "\"):setShipTemplate(\"" + template_name + "\"):setCallSign(\"" + getCallSign() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
+    switch(orders)
+    {
+    case AI_Idle: break;
+    case AI_Roaming: ret += ":orderRoaming()"; break;
+    case AI_StandGround: ret += ":orderStandGround()"; break;
+    case AI_DefendLocation: ret += ":orderDefendLocation(" + string(order_target_location.x, 0) + ", " + string(order_target_location.y, 0) + ")"; break;
+    case AI_DefendTarget: ret += ":orderDefendTarget(?)"; break;
+    case AI_FlyFormation: ret += ":orderFlyFormation(?, " + string(order_target_location.x, 0) + ", " + string(order_target_location.y, 0) + ")"; break;
+    case AI_FlyTowards: ret += ":orderFlyTowards(" + string(order_target_location.x, 0) + ", " + string(order_target_location.y, 0) + ")"; break;
+    case AI_FlyTowardsBlind: ret += ":orderFlyTowardsBlind(" + string(order_target_location.x, 0) + ", " + string(order_target_location.y, 0) + ")"; break;
+    case AI_Attack: ret += ":orderAttack(?)"; break;
+    case AI_Dock: ret += ":orderDock(?)"; break;
+    }
+    return ret;
+}
+
 string getAIOrderString(EAIOrder order)
 {
     switch(order)

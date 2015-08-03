@@ -136,6 +136,8 @@ public:
     void addCommsReply(int32_t id, string message);
     int getWaypointCount() { return waypoints.size(); }
     sf::Vector2f getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1]; return sf::Vector2f(0, 0); }
+    
+    virtual string getExportLine();
 };
 REGISTER_MULTIPLAYER_ENUM(ECommsState);
 REGISTER_MULTIPLAYER_ENUM(ECrewPosition);
