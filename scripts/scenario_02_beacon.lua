@@ -45,7 +45,7 @@ function init()
 
     --Small Exuari strike team, guarding RT-4 in the nebula at G5.
     transport_RT4 = CpuShip():setShipTemplate("Tug"):setFaction("Human Navy"):setPosition(3750, 31250)
-    transport_RT4:orderIdle():setCallSign("RT-4")
+    transport_RT4:orderIdle():setCallSign("RT-4"):setCommsScript("")
     transport_RT4:setHull(1):setFrontShieldMax(1):setRearShieldMax(1)
     
     --Start off the mission by sending a transmission to the player
@@ -107,7 +107,7 @@ function missionRT4PickedUp(delta)
 He tells you about his mission. He just came back from a mission from the Refugee-X station. Which is a neutral station in the area, known to house anyone no matter their history.
 Lately Refugee-X has been under attack by Exuari ships, and some criminals living there have offered to give themselves up in exchange for better protection of the station.
 
-The officers at Orion-5 will gladly make this trade. And they ask you to retrieve the criminals for them.
+The officers at Orion-5 will gladly make this trade. And they ask you to retrieve the criminals for them at Refugee-X in sector D5.
 To make sure Refugee-X is aware of your peaceful intentions, we have stripped you of Nukes and EMPs. You will get them back once you deliver the criminals.]])
         player.old_nuke_max = player:getWeaponStorageMax("Nuke")
         player.old_emp_max = player:getWeaponStorageMax("EMP")
@@ -176,8 +176,8 @@ We also refitted your nukes and EMPs. Awesome job on taking out the Exuari witho
             main_station:sendCommsMessage(player, message)
             
             x, y = neutral_station:getPosition()
-            CpuShip():setShipTemplate("Cruiser"):setFaction("Human Navy"):setPosition(x - 1000, y - 1000):orderDefendTarget(neutral_station)
-            CpuShip():setShipTemplate("Cruiser"):setFaction("Human Navy"):setPosition(x + 1000, y + 1000):orderDefendTarget(neutral_station)
+            CpuShip():setShipTemplate("Cruiser"):setFaction("Human Navy"):setPosition(x - 1000, y - 1000):orderDefendTarget(neutral_station):setCommsScript("")
+            CpuShip():setShipTemplate("Cruiser"):setFaction("Human Navy"):setPosition(x + 1000, y + 1000):orderDefendTarget(neutral_station):setCommsScript("")
             
             transports = {}
             for n=1,5 do
@@ -224,7 +224,7 @@ function missionStopTransport(delta)
         mission_timer = 40
         
         transport_recovery_team = CpuShip():setShipTemplate("Tug"):setFaction("Human Navy"):setPosition(-22000, 30000)
-        transport_recovery_team:orderFlyTowardsBlind(transport_target:getPosition())
+        transport_recovery_team:orderFlyTowardsBlind(transport_target:getPosition()):setCommsScript("")
     end
 end
 function missionTransportWaitForRecovery(delta)

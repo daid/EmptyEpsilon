@@ -45,12 +45,17 @@ bool CommsScriptInterface::openCommChannel(P<PlayerSpaceship> ship, P<SpaceObjec
 
     if (scriptObject)
         scriptObject->destroy();
+    if (script_name == "")
+    {
+        scriptObject = nullptr;
+        return false;
+    }
     scriptObject = new ScriptObject();
     scriptObject->registerObject(ship, "player");
     scriptObject->registerObject(target, "comms_target");
     has_message = false;
     scriptObject->run(script_name);
-    comms_script_interface = NULL;
+    comms_script_interface = nullptr;
     reply_id = 0;
     return has_message;
 }

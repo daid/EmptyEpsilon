@@ -34,8 +34,8 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
 
     broken_box = new GuiBox(owner, "COMMS_BROKEN_BOX");
     broken_box->fill()->hide()->setSize(800, 70)->setPosition(0, -250, ABottomCenter);
-    (new GuiLabel(no_response_box, "COMMS_BROKEN_LABEL", "Communications where suddenly cut", 40))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopLeft);
-    (new GuiButton(no_response_box, "COMMS_BROKEN_OK", "Ok", []() {
+    (new GuiLabel(broken_box, "COMMS_BROKEN_LABEL", "Communications where suddenly cut", 40))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopLeft);
+    (new GuiButton(broken_box, "COMMS_BROKEN_OK", "Ok", []() {
         if (my_spaceship)
             my_spaceship->commandCloseTextComm();
     }))->setSize(150, 50)->setPosition(-20, -10, ABottomRight);
