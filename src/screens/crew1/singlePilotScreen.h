@@ -1,14 +1,17 @@
-#ifndef TACTICAL_SCREEN_H
-#define TACTICAL_SCREEN_H
+#ifndef SINGLE_PILOR_SCREEN_H
+#define SINGLE_PILOR_SCREEN_H
 
 #include "gui/gui2.h"
 #include "screenComponents/targetsContainer.h"
 
+class GuiViewport3D;
 class GuiMissileTubeControls;
 class GuiRadarView;
-class TacticalScreen : public GuiOverlay
+class SinglePilotScreen : public GuiOverlay
 {
 private:
+    GuiViewport3D* viewport;
+
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* heading_display;
     GuiKeyValueDisplay* velocity_display;
@@ -22,9 +25,10 @@ private:
     GuiMissileTubeControls* tube_controls;
     GuiToggleButton* lock_aim;
 public:
-    TacticalScreen(GuiContainer* owner);
+    SinglePilotScreen(GuiContainer* owner);
     
     virtual void onDraw(sf::RenderTarget& window);
 };
 
-#endif//TACTICAL_SCREEN_H
+#endif//ENGINEERING_ADVANCED_SCREEN_H
+

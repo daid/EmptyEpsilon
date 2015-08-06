@@ -16,7 +16,7 @@
 TacticalScreen::TacticalScreen(GuiContainer* owner)
 : GuiOverlay(owner, "TACTICAL_SCREEN", sf::Color::Black)
 {
-    radar = new GuiRadarView(this, "TACTICAL_RADAR", 5000.0, nullptr);
+    radar = new GuiRadarView(this, "TACTICAL_RADAR", 5000.0, &targets);
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 750);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableTargetProjections()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
