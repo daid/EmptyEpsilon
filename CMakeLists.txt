@@ -31,6 +31,11 @@ foreach(SP_SOURCE src/soundManager.cpp src/clipboard.cpp src/postProcessManager.
   list(APPEND SOURCES ${SERIOUS_PROTON_DIR}${SP_SOURCE})
 endforeach()
 add_definitions(-DVERSION_NUMBER=${CPACK_PACKAGE_VERSION_MAJOR}${CPACK_PACKAGE_VERSION_MINOR}${CPACK_PACKAGE_VERSION_PATCH})
+
+if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework OpenGL -framework Foundation")
+endif()
+
 add_executable(${EXECUTABLE_NAME} ${SOURCES})
 
 include_directories(${CMAKE_SOURCE_DIR}/src ${SERIOUS_PROTON_DIR}/src)
@@ -50,7 +55,7 @@ if(WIN32)
 endif()
 
 
-INCLUDE(InstallRequiredSystemLibraries)
+include(InstallRequiredSystemLibraries)
 
 if(WIN32)
   install(FILES ${MING_DLL_PATH}/libstdc++-6.dll DESTINATION .)
