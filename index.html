@@ -553,13 +553,13 @@ Last contact was before RT-4 entered the nebula at G5.
 Please investigate and recover the diplomat if possible!.]])
 				</p>
                 <h2>Improving the enemy strike team to a real objective</h2>
-				<p>Now, we still have the Kraylor strike team setup in the nebula at G5. However, they are on roaming orders, and thus will fly out of the nebula and engage. Instead we want the strike team to hide in the nebula. We also need a transport TR-4 in the nebula.</p>
+				<p>Now, we still have the Kraylor strike team setup in the nebula at G5. However, they are on roaming orders, and thus will fly out of the nebula and engage. Instead we want the strike team to hide in the nebula. We also need a transport TR-4 in the nebula. We setup the comms script of RT-4 to nothing, so we cannot give it orders.</p>
 				<p class="code">
     --Small Kraylor strike team, guarding TR-4 in the nebula at G5.
     kraylor_TR4_guard1 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3550, 31250):orderIdle()
     kraylor_TR4_guard2 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3950, 31250):orderIdle()
     transport_TR4 = CpuShip():setShipTemplate("Tug"):setFaction("Human Navy"):setPosition(3750, 31250)
-    transport_TR4:orderIdle():setCallSign("TR-4")
+    transport_TR4:orderIdle():setCallSign("TR-4"):setCommsScript("")
     transport_TR4:setHull(1):setFrontShieldMax(1):setRearShieldMax(1)
 				</p>
 				<p>As we want the Kraylor ships to destroy the transport in front of the players eyes, we put all orders on Idle so they will not move till ordered to do differently. We also set the hull and shields to 1 for the transport, so it can be destroyed in a single shot.</p>
@@ -683,7 +683,7 @@ function init()
     kraylor_TR4_guard1 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3550, 31250):orderIdle()
     kraylor_TR4_guard2 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3950, 31250):orderIdle()
     transport_TR4 = CpuShip():setShipTemplate("Tug"):setFaction("Human Navy"):setPosition(3750, 31250)
-    transport_TR4:orderIdle():setCallSign("TR-4")
+    transport_TR4:orderIdle():setCallSign("TR-4"):setCommsScript("")
     transport_TR4:setHull(1):setFrontShieldMax(1):setRearShieldMax(1)
     
     --Start off the mission by sending a transmission to the player
