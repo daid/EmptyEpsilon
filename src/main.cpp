@@ -237,7 +237,7 @@ int main(int argc, char** argv)
 
     if (getenv("HOME"))
     {
-#ifdef WIN32
+#ifdef __WIN32__
         mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str());
 #else
         mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
