@@ -24,7 +24,7 @@ public:
     ESystem system_target;
     
     DamageInfo()
-    : instigator(instigator), type(DT_Energy), location(0, 0), frequency(-1), system_target(SYS_None)
+    : instigator(), type(DT_Energy), location(0, 0), frequency(-1), system_target(SYS_None)
     {}
 
     DamageInfo(P<SpaceObject> instigator, EDamageType type, sf::Vector2f location)

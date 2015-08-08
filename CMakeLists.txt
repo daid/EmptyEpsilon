@@ -32,7 +32,7 @@ foreach(SP_SOURCE src/soundManager.cpp src/clipboard.cpp src/postProcessManager.
   list(APPEND SOURCES ${SERIOUS_PROTON_DIR}${SP_SOURCE})
 endforeach()
 add_definitions(-DVERSION_NUMBER=${CPACK_PACKAGE_VERSION_MAJOR}${CPACK_PACKAGE_VERSION_MINOR}${CPACK_PACKAGE_VERSION_PATCH})
-add_definitions(-DINSTALL_PREFIX=${CMAKE_INSTALL_PREFIX})
+add_definitions(-DINSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}")
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework OpenGL -framework Foundation")

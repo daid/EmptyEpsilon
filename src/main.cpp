@@ -1,5 +1,7 @@
 #include <string.h>
 #include <unistd.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include "gui/mouseRenderer.h"
 #include "gui/debugRenderer.h"
 #include "menus/mainMenus.h"
@@ -235,7 +237,11 @@ int main(int argc, char** argv)
 
     if (getenv("HOME"))
     {
+#ifdef WIN32
         mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str());
+#else
+        mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+#endif
         PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
     }else{
         PreferencesManager::save("options.ini");
