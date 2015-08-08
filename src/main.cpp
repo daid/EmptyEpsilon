@@ -1,4 +1,5 @@
 #include <string.h>
+#include <unistd.h>
 #include "gui/mouseRenderer.h"
 #include "gui/debugRenderer.h"
 #include "menus/mainMenus.h"
@@ -16,6 +17,13 @@
 
 #ifdef __APPLE__
 #include <CoreFoundation/CoreFoundation.h>
+#endif
+
+#ifdef __linux__
+#ifndef INSTALL_PREFIX
+#define INSTALL_PREFIX "/usr/local"
+#endif
+#define RESOURCE_BASE_DIR INSTALL_PREFIX "/share/emptyepsilon/"
 #endif
 
 sf::Vector3f camera_position;
@@ -51,7 +59,13 @@ int main(int argc, char** argv)
 #ifdef DEBUG
     Logging::setLogLevel(LOGLEVEL_DEBUG);
 #endif
-    PreferencesManager::load("options.ini");
+#ifdef RESOURCE_BASE_DIR
+    PreferencesManager::load(RESOURCE_BASE_DIR "options.ini");
+#endif
+    if (getenv("HOME"))
+        PreferencesManager::load(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
+    else
+        PreferencesManager::load("options.ini");
     
     for(int n=1; n<argc; n++)
     {
@@ -62,6 +76,19 @@ int main(int argc, char** argv)
     }
     
     new Engine();
+#ifdef RESOURCE_BASE_DIR
+    new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/");
+    new DirectoryResourceProvider(RESOURCE_BASE_DIR "scripts/");
+    new DirectoryResourceProvider(RESOURCE_BASE_DIR "packs/SolCommand/");
+    new PackResourceProvider(RESOURCE_BASE_DIR "packs/Angryfly.pack");
+#endif
+    if (getenv("HOME"))
+    {
+        new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/");
+        new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/scripts/");
+        new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/packs/SolCommand/");
+        new PackResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/packs/SolCommand/");
+    }
     new DirectoryResourceProvider("resources/");
     new DirectoryResourceProvider("scripts/");
     new DirectoryResourceProvider("packs/SolCommand/");
@@ -69,7 +96,7 @@ int main(int argc, char** argv)
     textureManager.setDefaultSmooth(true);
     textureManager.setDefaultRepeated(true);
     textureManager.setAutoSprite(false);
-    textureManager.getTexture("Tokka_WalkingMan.png", sf::Vector2i(6, 1));
+    textureManager.getTexture("Tokka_WalkingMan.png", sf::Vector2i(6, 1)); //Setup the sprite mapping.
     
     if (PreferencesManager::get("httpserver").toInt() != 0)
     {
@@ -186,7 +213,13 @@ int main(int argc, char** argv)
     }
     
     P<HardwareController> hardware_controller = new HardwareController();
-    hardware_controller->loadConfiguration("hardware.ini");
+#ifdef RESOURCE_BASE_DIR
+    hardware_controller->loadConfiguration(RESOURCE_BASE_DIR "hardware.ini");
+#endif
+    if (getenv("HOME"))
+        hardware_controller->loadConfiguration(string(getenv("HOME")) + "/.emptyepsilon/hardware.ini");
+    else
+        hardware_controller->loadConfiguration("hardware.ini");
     
     returnToMainMenu();
     engine->runMainLoop();
@@ -200,7 +233,13 @@ int main(int argc, char** argv)
     PreferencesManager::set("music_volume", soundManager->getMusicVolume());
     PreferencesManager::set("disable_shaders", PostProcessor::isEnabled() ? 0 : 1);
 
-    PreferencesManager::save("options.ini");
+    if (getenv("HOME"))
+    {
+        mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str());
+        PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
+    }else{
+        PreferencesManager::save("options.ini");
+    }
     
     delete engine;
     
