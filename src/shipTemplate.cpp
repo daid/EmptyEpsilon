@@ -3,6 +3,9 @@
 #include "mesh.h"
 
 #include "scriptInterface.h"
+
+/// ShipTemplates are created when EmptyEpsilon is started.
+/// And used to fill the ship starting statistics, and other information.
 REGISTER_SCRIPT_CLASS(ShipTemplate)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setName);
