@@ -61,6 +61,8 @@ public:
     float jump_indicator;
     P<SpaceObject> scanning_target; //Server only
     float scanning_delay;
+    int scanning_complexity;
+    int scanning_depth;
     float shield_calibration_delay;
     bool auto_repair_enabled;
 
@@ -118,6 +120,8 @@ public:
     void commandCombatManeuverBoost(float amount);
     void commandCombatManeuverStrafe(float strafe);
     void commandLaunchProbe(sf::Vector2f target_position);
+    void commandScanDone();
+    void commandScanCancel();
 
     virtual void setShipTemplate(string template_name);
 

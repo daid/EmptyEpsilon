@@ -68,27 +68,29 @@ static const int16_t CMD_FIRE_TUBE = 0x0008;
 static const int16_t CMD_SET_SHIELDS = 0x0009;
 static const int16_t CMD_SET_MAIN_SCREEN_SETTING = 0x000A;
 static const int16_t CMD_SCAN_OBJECT = 0x000B;
-static const int16_t CMD_SET_SYSTEM_POWER = 0x000C;
-static const int16_t CMD_SET_SYSTEM_COOLANT = 0x000D;
-static const int16_t CMD_DOCK = 0x000E;
-static const int16_t CMD_UNDOCK = 0x000F;
-static const int16_t CMD_OPEN_TEXT_COMM = 0x0010; //TEXT communication
-static const int16_t CMD_CLOSE_TEXT_COMM = 0x0011;
-static const int16_t CMD_SEND_TEXT_COMM = 0x0012;
-static const int16_t CMD_SEND_TEXT_COMM_PLAYER = 0x0013;
-static const int16_t CMD_ANSWER_COMM_HAIL = 0x0014;
-static const int16_t CMD_SET_AUTO_REPAIR = 0x0016;
-static const int16_t CMD_SET_BEAM_FREQUENCY = 0x0017;
-static const int16_t CMD_SET_BEAM_SYSTEM_TARGET = 0x0018;
-static const int16_t CMD_SET_SHIELD_FREQUENCY = 0x0019;
-static const int16_t CMD_ADD_WAYPOINT = 0x001A;
-static const int16_t CMD_REMOVE_WAYPOINT = 0x001B;
-static const int16_t CMD_ACTIVATE_SELF_DESTRUCT = 0x001C;
-static const int16_t CMD_CANCEL_SELF_DESTRUCT = 0x001D;
-static const int16_t CMD_CONFIRM_SELF_DESTRUCT = 0x001E;
-static const int16_t CMD_COMBAT_MANEUVER_BOOST = 0x001F;
-static const int16_t CMD_COMBAT_MANEUVER_STRAFE = 0x0020;
-static const int16_t CMD_LAUNCH_PROBE = 0x0021;
+static const int16_t CMD_SCAN_DONE = 0x000C;
+static const int16_t CMD_SCAN_CANCEL = 0x000D;
+static const int16_t CMD_SET_SYSTEM_POWER = 0x000E;
+static const int16_t CMD_SET_SYSTEM_COOLANT = 0x000F;
+static const int16_t CMD_DOCK = 0x0010;
+static const int16_t CMD_UNDOCK = 0x0011;
+static const int16_t CMD_OPEN_TEXT_COMM = 0x0012; //TEXT communication
+static const int16_t CMD_CLOSE_TEXT_COMM = 0x0013;
+static const int16_t CMD_SEND_TEXT_COMM = 0x0014;
+static const int16_t CMD_SEND_TEXT_COMM_PLAYER = 0x0015;
+static const int16_t CMD_ANSWER_COMM_HAIL = 0x0016;
+static const int16_t CMD_SET_AUTO_REPAIR = 0x0017;
+static const int16_t CMD_SET_BEAM_FREQUENCY = 0x0018;
+static const int16_t CMD_SET_BEAM_SYSTEM_TARGET = 0x0019;
+static const int16_t CMD_SET_SHIELD_FREQUENCY = 0x001A;
+static const int16_t CMD_ADD_WAYPOINT = 0x001B;
+static const int16_t CMD_REMOVE_WAYPOINT = 0x001C;
+static const int16_t CMD_ACTIVATE_SELF_DESTRUCT = 0x001D;
+static const int16_t CMD_CANCEL_SELF_DESTRUCT = 0x001E;
+static const int16_t CMD_CONFIRM_SELF_DESTRUCT = 0x001F;
+static const int16_t CMD_COMBAT_MANEUVER_BOOST = 0x0020;
+static const int16_t CMD_COMBAT_MANEUVER_STRAFE = 0x0021;
+static const int16_t CMD_LAUNCH_PROBE = 0x0022;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -106,6 +108,8 @@ PlayerSpaceship::PlayerSpaceship()
     auto_repair_enabled = false;
     activate_self_destruct = false;
     scanning_delay = 0.0;
+    scanning_complexity = 0;
+    scanning_depth = 0;
     scan_probe_stock = max_scan_probes;
 
     setFactionId(1);
@@ -118,6 +122,8 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&energy_level);
     registerMemberReplication(&main_screen_setting);
     registerMemberReplication(&scanning_delay, 0.5);
+    registerMemberReplication(&scanning_complexity);
+    registerMemberReplication(&scanning_depth);
     registerMemberReplication(&shields_active);
     registerMemberReplication(&shield_calibration_delay, 0.5);
     registerMemberReplication(&auto_repair_enabled);
@@ -290,11 +296,14 @@ void PlayerSpaceship::update(float delta)
         }
         if (scanning_target)
         {
-            scanning_delay -= delta;
-            if (scanning_delay < 0)
+            if (scanning_complexity < 1)
             {
-                scanning_target->scanned();
-                scanning_target = NULL;
+                scanning_delay -= delta;
+                if (scanning_delay < 0)
+                {
+                    scanning_target->scanned();
+                    scanning_target = NULL;
+                }
             }
         }else{
             scanning_delay = 0.0;
@@ -324,8 +333,11 @@ void PlayerSpaceship::update(float delta)
         }
     }else{
         //Client side
-        if (scanning_delay > 0.0)
-            scanning_delay -= delta;
+        if (scanning_complexity < 1)
+        {
+            if (scanning_delay > 0.0)
+                scanning_delay -= delta;
+        }
         if (comms_open_delay > 0)
             comms_open_delay -= delta;
     }
@@ -551,8 +563,23 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             if (obj)
             {
                 scanning_target = obj;
+                scanning_complexity = obj->scanningComplexity();
+                scanning_depth = obj->scanningChannelDepth();
                 scanning_delay = max_scanning_delay;
             }
+        }
+        break;
+    case CMD_SCAN_DONE:
+        if (scanning_target && scanning_complexity > 0)
+        {
+            scanning_target->scanned();
+            scanning_target = nullptr;
+        }
+        break;
+    case CMD_SCAN_CANCEL:
+        if (scanning_target && scanning_complexity > 0)
+        {
+            scanning_target = nullptr;
         }
         break;
     case CMD_SET_SYSTEM_POWER:
@@ -1049,6 +1076,20 @@ void PlayerSpaceship::commandLaunchProbe(sf::Vector2f target_position)
 {
     sf::Packet packet;
     packet << CMD_LAUNCH_PROBE << target_position;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandScanDone()
+{
+    sf::Packet packet;
+    packet << CMD_SCAN_DONE;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandScanCancel()
+{
+    sf::Packet packet;
+    packet << CMD_SCAN_CANCEL;
     sendClientCommand(packet);
 }
 

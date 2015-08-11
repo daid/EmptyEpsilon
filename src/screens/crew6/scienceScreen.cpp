@@ -8,6 +8,7 @@
 #include "screenComponents/scanTargetButton.h"
 #include "screenComponents/frequencyCurve.h"
 #include "screenComponents/rotatingModelView.h"
+#include "screenComponents/scanningDialog.h"
 
 ScienceScreen::ScienceScreen(GuiContainer* owner)
 : GuiOverlay(owner, "SCIENCE_SCREEN", sf::Color::Black)
@@ -117,6 +118,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
         radar_view->setVisible(index == 0);
         database_view->setVisible(index == 1);
     }))->setOptions({"Radar", "Database"})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(200, 100);
+    
+    new GuiScanningDialog(this, "SCANNING_DIALOG");
 }
 
 void ScienceScreen::onDraw(sf::RenderTarget& window)
