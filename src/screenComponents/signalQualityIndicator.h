@@ -1,6 +1,8 @@
 #ifndef GUI_SIGNAL_QUALITY_INDICATOR_H
 #define GUI_SIGNAL_QUALITY_INDICATOR_H
 
+#include <math.h>
+
 #include "gui/gui2_element.h"
 
 class GuiSignalQualityIndicator : public GuiElement
