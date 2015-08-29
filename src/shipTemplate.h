@@ -85,6 +85,7 @@ public:
     float impulse_acceleration;
     bool has_jump_drive, has_cloaking;
     int weapon_storage[MW_Count];
+    float weapon_damage_modifier[MW_Count] = {1.0}; // Damage of tube-launched weapons
 
     std::vector<ShipRoomTemplate> rooms;
     std::vector<ShipDoorTemplate> doors;
@@ -105,7 +106,8 @@ public:
     void setWarpSpeed(float warp) { warp_speed = warp; }
     void setJumpDrive(bool enabled) { has_jump_drive = enabled; }
     void setCloaking(bool enabled) { has_cloaking = enabled; }
-    void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon != MW_None) weapon_storage[weapon] = amount; }
+    void setWeaponStorage(EMissileWeapons weapon, int amount)  { if (weapon != MW_None) weapon_storage[weapon] = amount; }
+    void setWeaponDamageModifier( EMissileWeapons weapon, float damage){ if (weapon != MW_None) weapon_damage_modifier[weapon] = damage; }
     void addRoom(sf::Vector2i position, sf::Vector2i size) { rooms.push_back(ShipRoomTemplate(position, size, SYS_None)); }
     void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system) { rooms.push_back(ShipRoomTemplate(position, size, system)); }
     void addDoor(sf::Vector2i position, bool horizontal) { doors.push_back(ShipDoorTemplate(position, horizontal)); }

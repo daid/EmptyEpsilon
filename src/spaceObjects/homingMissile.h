@@ -5,6 +5,7 @@
 
 class HomingMissile : public MissileWeapon
 {
+    constexpr static float damage = 35;
 public:
     HomingMissile();
     

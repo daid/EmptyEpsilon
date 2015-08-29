@@ -221,6 +221,11 @@ void SpaceShip::setShipTemplate(string template_name)
         beam_weapons[n].cycleTime = ship_template->beams[n].cycle_time;
         beam_weapons[n].damage = ship_template->beams[n].damage;
     }
+    
+    for (int n=0; n < MW_Count; n++)
+    {
+        weapon_damage_modifier[n] = ship_template->weapon_damage_modifier[n];
+    }
     weapon_tubes = ship_template->weapon_tubes;
     hull_strength = hull_max = ship_template->hull;
     front_shield = ship_template->front_shields;

@@ -1,6 +1,7 @@
 #include "EMPMissile.h"
 #include "particleEffect.h"
 #include "electricExplosionEffect.h"
+#include "spaceship.h"
 
 REGISTER_MULTIPLAYER_CLASS(EMPMissile, "EMPMissile");
 EMPMissile::EMPMissile()
@@ -10,8 +11,18 @@ EMPMissile::EMPMissile()
 
 void EMPMissile::hitObject(P<SpaceObject> object)
 {
+    float damageAtEdge_modified = damageAtEdge;
+    float damageAtCenter_modified = damageAtCenter;
+    
     DamageInfo info(owner, DT_EMP, getPosition());
-    SpaceObject::damageArea(getPosition(), blastRange, damageAtEdge, damageAtCenter, info, getRadius());
+    
+    if (P<SpaceShip>(owner))
+    {
+        damageAtEdge_modified *=   (P<SpaceShip>(owner))->weapon_damage_modifier[MW_EMP];
+        damageAtCenter_modified *= (P<SpaceShip>(owner))->weapon_damage_modifier[MW_EMP];
+    }
+    
+    SpaceObject::damageArea(getPosition(), blastRange, damageAtEdge_modified, damageAtCenter_modified, info, getRadius());
 
     P<ElectricExplosionEffect> e = new ElectricExplosionEffect();
     e->setSize(blastRange);
