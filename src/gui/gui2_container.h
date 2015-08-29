@@ -20,6 +20,7 @@ protected:
     virtual void drawDebugElements(sf::FloatRect window_rect, sf::RenderTarget& window);
     GuiElement* getClickElement(sf::Vector2f mouse_position);
     bool forwardKeypressToElements(sf::Keyboard::Key key, int unicode);
+    bool forwardJoystickXYMoveToElements(sf::Vector2f position);
     
     friend class GuiElement;
 };

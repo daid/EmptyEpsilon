@@ -17,6 +17,7 @@ void GuiCanvas::render(sf::RenderTarget& window)
     sf::FloatRect window_rect(0, 0, window_size.x, window_size.y);
     
     sf::Vector2f mouse_position = InputHandler::getMousePos();
+    sf::Vector2f joystick_xy_position = InputHandler::getJoysticXYPos();
     
     drawElements(window_rect, window);
     
@@ -51,6 +52,10 @@ void GuiCanvas::render(sf::RenderTarget& window)
         }
     }
     
+    if (joystick_xy_position != previous_joystick_xy_position)
+        forwardJoystickXYMoveToElements(joystick_xy_position);
+    
+    previous_joystick_xy_position = joystick_xy_position;
     previous_mouse_position = mouse_position;
 }
 

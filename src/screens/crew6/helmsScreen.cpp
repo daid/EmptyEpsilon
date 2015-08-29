@@ -37,6 +37,28 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
             heading_hint->hide();
         }
     );
+    
+    radar->setJoystickCallbacks(
+        [this](float x_position) {
+            if (my_spaceship)
+            {
+                float angle = my_spaceship->getRotation() + x_position;
+                //heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(InputHandler::getMousePos() - sf::Vector2f(0, 50))->show();
+                my_spaceship->commandTargetRotation(angle);
+            }
+        },
+        [this](float y_position) {
+            if (my_spaceship)
+            {
+                //float angle = my_spaceship->getRotation() + y_position;
+                //heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(InputHandler::getMousePos() - sf::Vector2f(0, 50))->show();
+                //my_spaceship->commandTargetRotation(angle);
+            }
+        },
+        [this](float z_position) {
+            if (my_spaceship)
+                my_spaceship->commandImpulse(-(z_position / 100));
+        });
     heading_hint = new GuiLabel(this, "HEADING_HINT", "", 30);
     heading_hint->setAlignment(ACenter)->setSize(0, 0);
 

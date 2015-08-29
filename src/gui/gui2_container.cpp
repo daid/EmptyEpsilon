@@ -97,3 +97,19 @@ bool GuiContainer::forwardKeypressToElements(sf::Keyboard::Key key, int unicode)
     }
     return false;
 }
+
+bool GuiContainer::forwardJoystickXYMoveToElements(sf::Vector2f position)
+{
+    for(GuiElement* element : elements)
+    {
+        if (element->isVisible())
+        {
+            if (element->isEnabled())
+                if (element->onJoystickXYMove(position))
+                    return true;
+            if (element->forwardJoystickXYMoveToElements(position))
+                return true;
+        }
+    }
+    return false;
+}

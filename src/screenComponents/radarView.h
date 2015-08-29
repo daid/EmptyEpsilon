@@ -21,6 +21,7 @@ public:
     };
     
     typedef std::function<void(sf::Vector2f position)> func_t;
+    typedef std::function<void(float position)>        func_f;
 private:
     class GhostDot
     {
@@ -53,6 +54,9 @@ private:
     func_t mouse_down_func;
     func_t mouse_drag_func;
     func_t mouse_up_func;
+    func_f joystick_x_func;
+    func_f joystick_y_func;
+    func_f joystick_z_func;
 public:
     GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets);
 
@@ -77,6 +81,7 @@ public:
     GuiRadarView* setStyle(ERadarStyle style) { this->style = style; return this; }
     GuiRadarView* setFogOfWarStyle(EFogOfWarStyle style) { this->fog_style = style; return this; }
     GuiRadarView* setCallbacks(func_t mouse_down_func, func_t mouse_drag_func, func_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
+    GuiRadarView* setJoystickCallbacks(func_f joystick_x_func, func_f joystick_y_func, func_f joystick_z_func) { this->joystick_x_func = joystick_x_func; this->joystick_y_func = joystick_y_func; this->joystick_z_func = joystick_z_func; return this; }
     GuiRadarView* setViewPosition(sf::Vector2f view_position) { this->view_position = view_position; return this; }
     sf::Vector2f getViewPosition() { return view_position; }
     void setMissileTargetAngle(float angle) { missile_target_angle = angle; }
@@ -87,6 +92,7 @@ public:
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
+    virtual bool onJoystickXYMove(sf::Vector2f position);
 private:
     void updateGhostDots();
     

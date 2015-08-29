@@ -10,6 +10,7 @@ private:
     GuiElement* click_element;
     GuiElement* focus_element;
     sf::Vector2f previous_mouse_position;
+    sf::Vector2f previous_joystick_xy_position;
     bool enable_debug_rendering;
 public:
     GuiCanvas();
@@ -17,6 +18,7 @@ public:
 
     virtual void render(sf::RenderTarget& window);
     virtual void handleKeyPress(sf::Keyboard::Key key, int unicode);
+    virtual void handleJoystickXYMovePress(sf::Vector2f position);
     
     virtual void onClick(sf::Vector2f mouse_position);
     virtual void onKey(sf::Keyboard::Key key, int unicode);

@@ -46,6 +46,7 @@ public:
     virtual void onMouseUp(sf::Vector2f position);
     virtual bool onKey(sf::Keyboard::Key key, int unicode);
     virtual bool onHotkey(sf::Keyboard::Key key, int unicode);
+    virtual bool onJoystickXYMove(sf::Vector2f position);
     
     GuiElement* setSize(sf::Vector2f size);
     GuiElement* setSize(float x, float y);

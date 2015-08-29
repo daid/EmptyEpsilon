@@ -36,6 +36,11 @@ bool GuiElement::onHotkey(sf::Keyboard::Key key, int unicode)
     return false;
 }
 
+bool GuiElement::onJoystickXYMove(sf::Vector2f position)
+{
+    return false;
+}
+
 GuiElement* GuiElement::setSize(sf::Vector2f size)
 {
     this->size = size;
