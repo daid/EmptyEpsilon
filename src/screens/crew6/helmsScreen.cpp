@@ -50,10 +50,22 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
             }
         },
         [this](float y_position) {
-            if (my_spaceship)
+            if (my_spaceship && (fabs(y_position) > 20))
             {
-                my_spaceship->commandCombatManeuverBoost(y_position/100);
-                combat_maneuver->setBoostValue(fabs(y_position/100));
+                // Add some more hysteresis, since y-axis can be hard to keep at 0
+                float value;
+                if (y_position > 0)
+                    value = (y_position-20)*1.25/100;
+                else
+                    value = (y_position+20)*1.25/100;
+                
+                my_spaceship->commandCombatManeuverBoost(value);
+                combat_maneuver->setBoostValue(fabs(value));
+            }
+            else if (my_spaceship)
+            {
+                my_spaceship->commandCombatManeuverBoost(0.0);
+                combat_maneuver->setBoostValue(0.0);
             }
         },
         [this](float z_position) {
