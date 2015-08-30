@@ -632,6 +632,14 @@ bool GuiRadarView::onJoystickXYMove(sf::Vector2f position)
         joystick_x_func(position.x);
     if (joystick_y_func)
         joystick_y_func(position.y);
+    return true;
+}
+
+bool GuiRadarView::onJoystickZMove(float position)
+{
+    if (joystick_z_func)
+        joystick_z_func(position);
+    return true;
 }
     
     

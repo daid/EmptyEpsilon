@@ -93,6 +93,7 @@ public:
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
     virtual bool onJoystickXYMove(sf::Vector2f position);
+    virtual bool onJoystickZMove(float position);
 private:
     void updateGhostDots();
     

@@ -113,3 +113,19 @@ bool GuiContainer::forwardJoystickXYMoveToElements(sf::Vector2f position)
     }
     return false;
 }
+
+bool GuiContainer::forwardJoystickZMoveToElements(float position)
+{
+    for(GuiElement* element : elements)
+    {
+        if (element->isVisible())
+        {
+            if (element->isEnabled())
+                if (element->onJoystickZMove(position))
+                    return true;
+            if (element->forwardJoystickZMoveToElements(position))
+                return true;
+        }
+    }
+    return false;
+}

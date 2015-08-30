@@ -21,6 +21,7 @@ protected:
     GuiElement* getClickElement(sf::Vector2f mouse_position);
     bool forwardKeypressToElements(sf::Keyboard::Key key, int unicode);
     bool forwardJoystickXYMoveToElements(sf::Vector2f position);
+    bool forwardJoystickZMoveToElements(float position);
     
     friend class GuiElement;
 };
