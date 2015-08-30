@@ -1,7 +1,6 @@
 #include "playerInfo.h"
 #include "helmsScreen.h"
 
-#include "screenComponents/combatManeuver.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/impulseControls.h"
 #include "screenComponents/warpControls.h"
@@ -12,6 +11,10 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "HELMS_SCREEN", sf::Color::Black)
 {
     GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", 5000.0, nullptr);
+    
+    combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
+    combat_maneuver->setPosition(-50, -50, ABottomRight)->setSize(280, 265);
+    
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
@@ -47,21 +50,22 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
             }
         },
         [this](float y_position) {
-            if (my_spaceship && (abs(y_position) > 80) ) // add some more hysteresis preventing continuous discharge
-                my_spaceship->commandCombatManeuverBoost(-(( (y_position-20) * 1.2) / 100) );
-            else if (my_spaceship)
-                my_spaceship->commandCombatManeuverBoost(0.0);
-            
+            if (my_spaceship)
+            {
+                my_spaceship->commandCombatManeuverBoost(y_position/100);
+                combat_maneuver->setBoostValue(fabs(y_position/100));
+            }
         },
         [this](float z_position) {
             if (my_spaceship)
                 my_spaceship->commandImpulse(-(z_position / 100));
         },
         [this](float r_position) {
-            if (my_spaceship && (abs(r_position) > 80) ) // add some more hysteresis preventing continuous discharge
-                my_spaceship->commandCombatManeuverStrafe( -( ( (r_position-20) * 1.2) / 100) );
-            else if (my_spaceship)
-                my_spaceship->commandCombatManeuverStrafe(0.0);
+            if (my_spaceship)
+            {
+                my_spaceship->commandCombatManeuverStrafe(r_position/100);
+                combat_maneuver->setStrafeValue(r_position/100);
+            }
         });
     heading_hint = new GuiLabel(this, "HEADING_HINT", "", 30);
     heading_hint->setAlignment(ACenter)->setSize(0, 0);
@@ -72,8 +76,6 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     heading_display->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
     velocity_display = new GuiKeyValueDisplay(this, "VELOCITY_DISPLAY", 0.45, "Speed", "");
     velocity_display->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
-    
-    (new GuiCombatManeuver(this, "COMBAT_MANEUVER"))->setPosition(-50, -50, ABottomRight)->setSize(280, 265);
     
     GuiAutoLayout* engine_layout = new GuiAutoLayout(this, "ENGINE_LAYOUT", GuiAutoLayout::LayoutHorizontalLeftToRight);
     engine_layout->setPosition(20, -100, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 300);

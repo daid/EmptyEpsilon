@@ -2,6 +2,7 @@
 #define HELMS_SCREEN_H
 
 #include "gui/gui2.h"
+#include "screenComponents/combatManeuver.h"
 
 class HelmsScreen : public GuiOverlay
 {
@@ -12,6 +13,7 @@ private:
     GuiElement* warp_controls;
     GuiElement* jump_controls;
     GuiLabel* heading_hint;
+    GuiCombatManeuver* combat_maneuver;
 public:
     HelmsScreen(GuiContainer* owner);
     
