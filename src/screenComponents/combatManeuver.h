@@ -15,7 +15,7 @@ public:
     GuiCombatManeuver(GuiContainer* owner, string id);
     
     virtual void onDraw(sf::RenderTarget& window);
-    void setBoostValue(float value) { boost_slider->setValue(value); LOG(DEBUG) << value;}
+    void setBoostValue(float value) { boost_slider->setValue(value); }
     void setStrafeValue(float value) { strafe_slider->setValue(value); }
 };
 
