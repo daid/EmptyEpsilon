@@ -22,6 +22,7 @@ protected:
     bool forwardKeypressToElements(sf::Keyboard::Key key, int unicode);
     bool forwardJoystickXYMoveToElements(sf::Vector2f position);
     bool forwardJoystickZMoveToElements(float position);
+    bool forwardJoystickRMoveToElements(float position);
     
     friend class GuiElement;
 };

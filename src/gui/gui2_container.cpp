@@ -129,3 +129,19 @@ bool GuiContainer::forwardJoystickZMoveToElements(float position)
     }
     return false;
 }
+
+bool GuiContainer::forwardJoystickRMoveToElements(float position)
+{
+    for(GuiElement* element : elements)
+    {
+        if (element->isVisible())
+        {
+            if (element->isEnabled())
+                if (element->onJoystickRMove(position))
+                    return true;
+            if (element->forwardJoystickRMoveToElements(position))
+                return true;
+        }
+    }
+    return false;
+}

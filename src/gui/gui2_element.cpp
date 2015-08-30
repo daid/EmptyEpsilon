@@ -46,6 +46,11 @@ bool GuiElement::onJoystickZMove(float position)
     return false;
 }
 
+bool GuiElement::onJoystickRMove(float position)
+{
+    return false;
+}
+
 GuiElement* GuiElement::setSize(sf::Vector2f size)
 {
     this->size = size;

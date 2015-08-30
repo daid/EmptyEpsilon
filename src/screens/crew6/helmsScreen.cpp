@@ -43,21 +43,25 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
             if (my_spaceship)
             {
                 float angle = my_spaceship->getRotation() + x_position;
-                //heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(InputHandler::getMousePos() - sf::Vector2f(0, 50))->show();
                 my_spaceship->commandTargetRotation(angle);
             }
         },
         [this](float y_position) {
-            if (my_spaceship)
-            {
-                //float angle = my_spaceship->getRotation() + y_position;
-                //heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(InputHandler::getMousePos() - sf::Vector2f(0, 50))->show();
-                //my_spaceship->commandTargetRotation(angle);
-            }
+            if (my_spaceship && (abs(y_position) > 80) ) // add some more hysteresis preventing continuous discharge
+                my_spaceship->commandCombatManeuverBoost(-(( (y_position-20) * 1.2) / 100) );
+            else if (my_spaceship)
+                my_spaceship->commandCombatManeuverBoost(0.0);
+            
         },
         [this](float z_position) {
             if (my_spaceship)
                 my_spaceship->commandImpulse(-(z_position / 100));
+        },
+        [this](float r_position) {
+            if (my_spaceship && (abs(r_position) > 80) ) // add some more hysteresis preventing continuous discharge
+                my_spaceship->commandCombatManeuverStrafe( -( ( (r_position-20) * 1.2) / 100) );
+            else if (my_spaceship)
+                my_spaceship->commandCombatManeuverStrafe(0.0);
         });
     heading_hint = new GuiLabel(this, "HEADING_HINT", "", 30);
     heading_hint->setAlignment(ACenter)->setSize(0, 0);
