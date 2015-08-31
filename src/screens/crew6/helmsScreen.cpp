@@ -59,7 +59,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
                 else
                     value = (y_position+20)*1.25/100;
                 
-                my_spaceship->commandCombatManeuverBoost(value);
+                my_spaceship->commandCombatManeuverBoost(-value);
                 combat_maneuver->setBoostValue(fabs(value));
             }
             else if (my_spaceship)
