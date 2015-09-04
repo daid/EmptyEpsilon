@@ -10,6 +10,9 @@ private:
     GuiElement* click_element;
     GuiElement* focus_element;
     sf::Vector2f previous_mouse_position;
+    sf::Vector2f previous_joystick_xy_position;
+    float previous_joystick_z_position;
+    float previous_joystick_r_position;
     bool enable_debug_rendering;
 public:
     GuiCanvas();
