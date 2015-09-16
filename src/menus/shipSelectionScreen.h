@@ -14,6 +14,7 @@ private:
     
     GuiToggleButton* main_screen_button;
     GuiToggleButton* crew_position_button[max_crew_positions];
+    GuiToggleButton* main_screen_controls_button;
     GuiToggleButton* game_master_button;
     GuiToggleButton* window_button;
     GuiSelector* window_angle;

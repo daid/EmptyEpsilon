@@ -35,6 +35,12 @@ ShipSelectionScreen::ShipSelectionScreen()
         });
         crew_position_button[n]->setSize(GuiElement::GuiSizeMax, 50);
     }
+
+    main_screen_controls_button = new GuiToggleButton(stations_layout, "MAIN_SCREEN_CONTROLS_ENABLE", "Main screen controls", [](bool value) {
+        my_player_info->setMainScreenControl(value);
+    });
+    main_screen_controls_button->setValue(my_player_info->main_screen_control)->setSize(GuiElement::GuiSizeMax, 50);
+    
     game_master_button = new GuiToggleButton(stations_layout, "GAME_MASTER_BUTTON", "Game master", [this](bool value) {
         window_button->setValue(false);
         topdown_button->setValue(false);

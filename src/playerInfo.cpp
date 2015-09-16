@@ -14,6 +14,7 @@
 
 #include "screens/crew1/singlePilotScreen.h"
 
+#include "screenComponents/mainScreenControls.h"
 #include "screenComponents/selfDestructEntry.h"
 
 static const int16_t CMD_UPDATE_CREW_POSITION = 0x0001;
@@ -141,6 +142,10 @@ void PlayerInfo::spawnUI()
         for(int n=0; n<max_crew_positions; n++)
             if (crew_position[n])
                 sde->enablePosition(ECrewPosition(n));
+
+        if (main_screen_control)
+            new GuiMainScreenControls(screen);
+
         screen->finishCreation();
     }
 }
