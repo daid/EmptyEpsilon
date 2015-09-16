@@ -28,6 +28,7 @@ SpaceStation::SpaceStation()
     registerMemberReplication(&shields, 1.0);
     registerMemberReplication(&shields_max);
     registerMemberReplication(&shieldHitEffect, 0.5);
+    registerMemberReplication(&callsign);
 
     comms_script_name = "comms_station.lua";
     
