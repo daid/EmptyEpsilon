@@ -49,3 +49,20 @@ The first of these occurences were met with fear and rigourous data purging scri
 
 ]])
 GITM:setEnemy(human)
+
+Hive = FactionInfo():setName("Ktlitans")
+Hive:setGMColor(128, 255, 0)
+Hive:setDescription([[The Ktlitans are inteligent eight legged creatures that resemble earths arachnids. However, unlike most of earth arachnids, the Ktlitans do not fight alogn themselves. Their common goal is surivial of the spiecies and nothing else.
+
+While they do live in a hiarchy structure which mostly resembles a hive. The lower casts will continue their tasks and will take on new tasks on their own when no orders from higher up are given. However, when higher casts are present, their orders will be followed without question.
+
+The strict hiarchy of the Ktlitans starts with a Queen and goes all the way down to the work force. Called drones by the humans. Not a lot about the detailed hiarchy is known, as the Ktlitans refuse most communication.
+
+This is because they where once driven from their homeworld when they showed friendlyness towards another specie. Which slowly took over their homeworld in the spawn of 200 years and drained it of resources. Forcing the Ktlitans in exile. The Ktlitans have been searching for a new homeworld ever since, and usually attack other pieces on sight without warning.
+
+Their fighting capabilities should not be underestimated. While the main ships in their force are quite weak. They can quickly overwhelm their target due to sheer numbers. And have no problem in applying suicide tactics when required for the survival of the queen.
+Most of their ships do not use shield systems, making EMPs largly ineffective.
+]])
+Hive:setEnemy(human)
+Hive:setEnemy(exuari)
+Hive:setEnemy(kraylor)
