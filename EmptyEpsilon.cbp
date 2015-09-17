@@ -568,6 +568,8 @@
 		<Unit filename="src/screenComponents/jumpControls.h" />
 		<Unit filename="src/screenComponents/jumpIndicator.cpp" />
 		<Unit filename="src/screenComponents/jumpIndicator.h" />
+		<Unit filename="src/screenComponents/mainScreenControls.cpp" />
+		<Unit filename="src/screenComponents/mainScreenControls.h" />
 		<Unit filename="src/screenComponents/missileTubeControls.cpp" />
 		<Unit filename="src/screenComponents/missileTubeControls.h" />
 		<Unit filename="src/screenComponents/noiseOverlay.cpp" />
