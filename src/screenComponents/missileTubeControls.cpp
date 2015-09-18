@@ -22,7 +22,7 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
         });
         row.load_button->setSize(150, 50);
         row.fire_button = new GuiButton(row.layout, id + "_" + string(n) + "_FIRE_BUTTON", "Fire", [this, n]() {
-            if (!my_spaceship || load_type == MW_None)
+            if (!my_spaceship)
                 return;
             if (my_spaceship->weaponTube[n].state == WTS_Loaded)
                 my_spaceship->commandFireTube(n, missile_target_angle);
