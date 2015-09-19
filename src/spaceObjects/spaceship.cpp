@@ -60,6 +60,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponCycleTime);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponDamage);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeapon);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeCount);
 }
 
 /* Define script conversion function for the EMainScreenSetting enum. */
@@ -917,6 +918,21 @@ float SpaceShip::getSystemEffectiveness(ESystem system)
     if (gameGlobalInfo->use_system_damage)
         return std::max(0.0f, power * systems[system].health);
     return std::max(0.0f, power * (1.0f - systems[system].heat_level));
+}
+
+void SpaceShip::setWeaponTubeCount(int amount)
+{
+    weapon_tubes = std::max(0, std::min(amount, max_weapon_tubes));
+    for(int n=weapon_tubes; n<max_weapon_tubes; n++)
+    {
+        if (weaponTube[n].state != WTS_Empty && weaponTube[n].type_loaded != MW_None)
+        {
+            weaponTube[n].state = WTS_Empty;
+            if (weapon_storage[weaponTube[n].type_loaded] < weapon_storage_max[weaponTube[n].type_loaded])
+                weapon_storage[weaponTube[n].type_loaded] ++;
+            weaponTube[n].type_loaded = MW_None;
+        }
+    }
 }
 
 string SpaceShip::getCallSign()

@@ -362,6 +362,8 @@ public:
         beam_weapons[index].cycleTime = cycleTime;
         beam_weapons[index].damage = damage;
     }
+    
+    void setWeaponTubeCount(int amount);
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);
