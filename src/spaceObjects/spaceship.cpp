@@ -21,6 +21,8 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
     /// Set if this ship is scanned by the player or not.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanned);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setCallSign);
+    /// Set the class name of this ship. Normally the class name is copied from the template name (Ex "Cruiser") but you can override it with this function.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setTypeName);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentified);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isScanned);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScanned);

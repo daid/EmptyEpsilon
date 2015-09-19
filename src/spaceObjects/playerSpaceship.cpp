@@ -1095,5 +1095,5 @@ void PlayerSpaceship::commandScanCancel()
 
 string PlayerSpaceship::getExportLine()
 {
-    return "PlayerSpaceship()setShipTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
+    return "PlayerSpaceship():setShipTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
 }
