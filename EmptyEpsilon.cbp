@@ -441,6 +441,8 @@
 		<Unit filename="src/ai/aiFactory.h" />
 		<Unit filename="src/ai/fighterAI.cpp" />
 		<Unit filename="src/ai/fighterAI.h" />
+		<Unit filename="src/ai/missileVolleyAI.cpp" />
+		<Unit filename="src/ai/missileVolleyAI.h" />
 		<Unit filename="src/commsScriptInterface.cpp" />
 		<Unit filename="src/commsScriptInterface.h" />
 		<Unit filename="src/epsilonServer.cpp" />

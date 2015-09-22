@@ -1,0 +1,98 @@
+#include "spaceObjects/cpuShip.h"
+#include "ai/missileVolleyAI.h"
+#include "ai/aiFactory.h"
+
+REGISTER_SHIP_AI(MissileVolleyAI, "missilevolley");
+
+MissileVolleyAI::MissileVolleyAI(CpuShip* owner)
+: ShipAI(owner)
+{
+    flank_position = Unknown;
+}
+
+bool MissileVolleyAI::canSwitchAI()
+{
+    return true;
+}
+
+void MissileVolleyAI::run(float delta)
+{
+    ShipAI::run(delta);
+}
+
+void MissileVolleyAI::runOrders()
+{
+    flank_position = Unknown;
+    ShipAI::runOrders();
+}
+
+void MissileVolleyAI::runAttack(P<SpaceObject> target)
+{
+    if (!has_missiles)
+    {
+        ShipAI::runAttack(target);
+        return;
+    }
+
+    sf::Vector2f position_diff = target->getPosition() - owner->getPosition();
+    float target_angle = sf::vector2ToAngle(position_diff);
+    float distance = sf::length(position_diff);
+    
+    if (flank_position == Unknown)
+    {
+        //No flanking position. Do we want to go left or right of the target?
+        sf::Vector2f left_point = target->getPosition() + sf::vector2FromAngle(target_angle - 120) * 3500.0f;
+        sf::Vector2f right_point = target->getPosition() + sf::vector2FromAngle(target_angle + 120) * 3500.0f;
+        if (sf::angleDifference(sf::vector2ToAngle(left_point - owner->getPosition()), owner->getRotation()) < sf::angleDifference(sf::vector2ToAngle(right_point - owner->getPosition()), owner->getRotation()))
+        {
+            flank_position = Left;
+        }else{
+            flank_position = Right;
+        }
+    }
+
+    if (distance < 4500 && has_missiles)
+    {
+        bool all_loaded = true;
+        for(int n=0; n<owner->weapon_tubes; n++)
+        {
+            if (owner->weaponTube[n].state != WTS_Loaded)
+            {
+                all_loaded = false;
+                break;
+            }
+        }
+        
+        if (all_loaded)
+        {
+            float target_angle = calculateFiringSolution(target);
+            if (target_angle != std::numeric_limits<float>::infinity())
+            {
+                for(int n=0; n<owner->weapon_tubes; n++)
+                {
+                    if (n == 0)
+                        owner->fireTube(n, target_angle);
+                    else if ((n % 2) == 0)
+                        owner->fireTube(n, target_angle + 20.0f * (n / 2));
+                    else
+                        owner->fireTube(n, target_angle - 20.0f * ((n + 1) / 2));
+                }
+            }
+        }
+    }
+
+    sf::Vector2f target_position;
+    if (flank_position == Left)
+    {
+        target_position = target->getPosition() + sf::vector2FromAngle(target_angle - 100) * 3500.0f;
+    }else{
+        target_position = target->getPosition() + sf::vector2FromAngle(target_angle + 120) * 3500.0f;
+    }
+    
+    if (owner->getOrder() == AI_StandGround)
+    {
+        owner->target_rotation = sf::vector2ToAngle(target_position - owner->getPosition());
+    }else{
+        flyTowards(target_position, 0.0f);
+    }
+}
