@@ -71,14 +71,15 @@ void FighterAI::runAttack(P<SpaceObject> target)
             float target_dir = sf::vector2ToAngle(position_diff);
             float a_diff = sf::angleDifference(target_dir, owner->getRotation());
             if (a_diff < 0)
-                evade_direction = target_dir - random(80, 100);
+                evade_direction = target_dir - random(25, 40);
             else
-                evade_direction = target_dir + random(80, 100);
+                evade_direction = target_dir + random(25, 40);
         }
         if (owner->front_shield < owner->front_shield_max * (1.0f - aggression))
         {
             attack_state = recharge;
             aggression += random(0.1, 0.25);
+            timeout = 60.0f - std::min(aggression, 1.0f) * 20.0f;
         }
         break;
     case evade:
@@ -93,7 +94,7 @@ void FighterAI::runAttack(P<SpaceObject> target)
         }
         break;
     case recharge:
-        if (owner->front_shield > owner->front_shield_max * 0.9)
+        if (owner->front_shield > owner->front_shield_max * 0.9 || timeout <= 0.0)
         {
             attack_state = dive;
         }else{
