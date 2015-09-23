@@ -224,8 +224,6 @@ int main(int argc, char** argv)
     else
         hardware_controller->loadConfiguration("hardware.ini");
     
-    new NetworkRecorder();
-    
     returnToMainMenu();
     engine->runMainLoop();
 
