@@ -1,12 +1,36 @@
 #include "pathPlanner.h"
 
+const double small_object_grid_size = 5000.0f;
+const double small_object_max_size = 1000.0f;
+
+static uint32_t hashSector(uint32_t x, uint32_t y)
+{
+    return (x) ^ (y << 16);
+}
+
+static uint32_t positionToSector(float f)
+{
+    return uint32_t(f / small_object_grid_size);
+}
+
+static uint32_t hashPosition(sf::Vector2f position)
+{
+    return hashSector(positionToSector(position.x), positionToSector(position.y));
+}
+
 P<PathPlannerManager> PathPlannerManager::instance;
 
 void PathPlannerManager::addAvoidObject(P<SpaceObject> source, float size)
 {
-    //TODO: Make a classification for small objects which fit in a grid, so the checkToAvoid function does not has to iterate on all objects.
-    //      Until then, astroids and mines should not generate avoidAreas to prevent performance issues.
-    big_objects.push_back(PathPlannerAvoidObject(source, size));
+    // Make a classification for small objects which fit in a grid, so the checkToAvoid function does not has to iterate on all objects.
+    // Until then, astroids and mines should not generate avoidAreas to prevent performance issues.
+    if (size < small_object_max_size)
+    {
+        uint32_t hash = hashPosition(source->getPosition());
+        small_objects[hash].push_back(PathPlannerAvoidObject(source, size));
+    }else{
+        big_objects.push_back(PathPlannerAvoidObject(source, size));
+    }
 }
 
 void PathPlannerManager::update(float delta)
@@ -18,6 +42,24 @@ void PathPlannerManager::update(float delta)
             i++;
         }else{
             i = big_objects.erase(i);
+        }
+    }
+    
+    for(auto h_it = small_objects.begin(); h_it != small_objects.end(); h_it++)
+    {
+        for(auto it = h_it->second.begin(); it != h_it->second.end();)
+        {
+            if (it->source && hashPosition(it->source->getPosition()) == h_it->first)
+            {
+                it++;
+            }else{
+                if (it->source)
+                {
+                    small_objects[hashPosition(it->source->getPosition())].push_back(PathPlannerAvoidObject(it->source, it->size));
+                }
+
+                it = big_objects.erase(it);
+            }
         }
     }
 }
@@ -138,6 +180,80 @@ bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2
             i = manager->big_objects.erase(i);
         }
     }
+    
+    {
+        // Bresenham's line algorithm to 
+        int x1 = positionToSector(start.x);
+        int y1 = positionToSector(start.y);
+        int x2 = positionToSector(end.x);
+        int y2 = positionToSector(end.y);
+
+        const bool steep = abs(y2 - y1) > abs(x2 - x1);
+        if(steep)
+        {
+            std::swap(x1, y1);
+            std::swap(x2, y2);
+        }
+
+        if(x1 > x2)
+        {
+            std::swap(x1, x2);
+            std::swap(y1, y2);
+        }
+
+        const int dx = x2 - x1;
+        const int dy = abs(y2 - y1);
+
+        int error = dx / 2;
+        const int ystep = (y1 < y2) ? 1 : -1;
+        int y = y1;
+
+        for(int x=x1; x<=x2; x++)
+        {
+            uint32_t hash;
+            if(steep)
+            {
+                hash = hashSector(y, x);
+            }
+            else
+            {
+                hash = hashSector(x, y);
+            }
+            
+            for(std::list<PathPlannerManager::PathPlannerAvoidObject>::iterator i = manager->small_objects[hash].begin(); i != manager->small_objects[hash].end(); )
+            {
+                if (i->source)
+                {
+                    sf::Vector2f position = i->source->getPosition();
+                    float f = sf::dot(startEndDiff, position - start) / startEndLength;
+                    if (f > 0 && f < startEndLength - i->size)
+                    {
+                        sf::Vector2f q = start + startEndDiff / startEndLength * f;
+                        if ((q - position) < i->size)
+                        {
+                            if (f < firstAvoidF)
+                            {
+                                avoidObject = *i;
+                                firstAvoidF = f;
+                                firstAvoidQ = q;
+                            }
+                        }
+                    }
+                    i++;
+                }else{
+                    i = manager->small_objects[hash].erase(i);
+                }
+            }
+
+            error -= dy;
+            if(error < 0)
+            {
+                y += ystep;
+                error += dx;
+            }
+        }
+    }
+    
     if (firstAvoidF < startEndLength)
     {
         sf::Vector2f position = avoidObject.source->getPosition();

@@ -3,6 +3,7 @@
 #include "playerInfo.h"
 #include "particleEffect.h"
 #include "explosionEffect.h"
+#include "pathPlanner.h"
 
 #include "scriptInterface.h"
 
@@ -20,6 +21,8 @@ Mine::Mine()
     triggerTimeout = triggerDelay;
     ejectTimeout = 0.0;
     particleTimeout = 0.0;
+
+    PathPlannerManager::getInstance()->addAvoidObject(this, trigger_range * 1.2f);
 }
 
 void Mine::draw3D()

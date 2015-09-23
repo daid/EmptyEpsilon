@@ -2,6 +2,7 @@
 #include "asteroid.h"
 #include "explosionEffect.h"
 #include "main.h"
+#include "pathPlanner.h"
 
 #include "scriptInterface.h"
 
@@ -19,6 +20,8 @@ Asteroid::Asteroid()
     z = random(-50, 50);
 
     registerMemberReplication(&z);
+    
+    PathPlannerManager::getInstance()->addAvoidObject(this, 300);
 }
 
 void Asteroid::draw3D()

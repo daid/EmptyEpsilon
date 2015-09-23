@@ -14,6 +14,7 @@
 #include "epsilonServer.h"
 #include "httpScriptAccess.h"
 #include "preferenceManager.h"
+#include "networkRecorder.h"
 
 #include "hardware/hardwareController.h"
 
@@ -222,6 +223,8 @@ int main(int argc, char** argv)
         hardware_controller->loadConfiguration(string(getenv("HOME")) + "/.emptyepsilon/hardware.ini");
     else
         hardware_controller->loadConfiguration("hardware.ini");
+    
+    new NetworkRecorder();
     
     returnToMainMenu();
     engine->runMainLoop();

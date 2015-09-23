@@ -52,12 +52,33 @@ void DebugRenderer::render(sf::RenderTarget& window)
             render_points[n].position.y = window.getView().getSize().y - (timing_graph_points[n].render + timing_graph_points[n].update + timing_graph_points[n].collision) * 10000;
             
             update_points[n].color = sf::Color::Red;
-            collision_points[n].color = sf::Color::Blue;
+            collision_points[n].color = sf::Color::Cyan;
             render_points[n].color = sf::Color::Green;
         }
         window.draw(update_points);
         window.draw(collision_points);
         window.draw(render_points);
+        
+        sf::Text text_update("Update: " + string(timing_graph_points.back().update * 1000) + "ms", *mainFont, 18);
+        sf::Text text_collision("Collision: " + string(timing_graph_points.back().collision * 1000) + "ms", *mainFont, 18);
+        sf::Text text_render("Render: " + string(timing_graph_points.back().render * 1000) + "ms", *mainFont, 18);
+
+        sf::VertexArray fps60_line(sf::LinesStrip, 2);
+        fps60_line[0].position = sf::Vector2f(0, window.getView().getSize().y - 166);
+        fps60_line[1].position = sf::Vector2f(window.getView().getSize().x, window.getView().getSize().y - 166);
+        fps60_line[0].color = sf::Color(255, 255, 255, 128);
+        fps60_line[1].color = sf::Color(255, 255, 255, 128);
+        window.draw(fps60_line);
+        
+        text_update.setPosition(0, window.getView().getSize().y - 18 * 3 - 170);
+        text_collision.setPosition(0, window.getView().getSize().y - 18 * 2 - 170);
+        text_render.setPosition(0, window.getView().getSize().y - 18 - 170);
+        text_update.setColor(sf::Color::Red);
+        text_collision.setColor(sf::Color::Cyan);
+        text_render.setColor(sf::Color::Green);
+        window.draw(text_update);
+        window.draw(text_collision);
+        window.draw(text_render);
     }
 
     sf::Text textElement(text, *mainFont, 18);

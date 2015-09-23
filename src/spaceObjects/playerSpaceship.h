@@ -3,8 +3,6 @@
 
 #include "spaceship.h"
 #include "commsScriptInterface.h"
-#include "networkRecorder.h"
-#include "networkAudioStream.h"
 #include <iostream>
 
 enum ECrewPosition
@@ -55,8 +53,6 @@ public:
     constexpr static int max_scan_probes = 10;
     constexpr static float max_scanning_delay = 6.0;
 
-    NetworkRecorder network_recorder;
-    NetworkAudioStream network_audio_stream;
     float hull_damage_indicator;
     float jump_indicator;
     P<SpaceObject> scanning_target; //Server only

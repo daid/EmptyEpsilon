@@ -16,6 +16,7 @@ class PathPlannerManager : public Updatable
         PathPlannerAvoidObject(P<SpaceObject> source, float size) : source(source), size(size) {}
     };
     std::list<PathPlannerAvoidObject> big_objects;
+    std::unordered_map<uint32_t, std::list<PathPlannerAvoidObject> > small_objects;
     
 public:
     virtual void update(float delta);
