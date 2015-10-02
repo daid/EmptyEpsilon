@@ -12,6 +12,9 @@ protected:
     int value;
     int value_size;
     func_t func;
+    
+    bool drag_scrollbar;
+    float drag_select_offset;
 public:
     GuiScrollbar(GuiContainer* owner, string id, int min_value, int max_value, int start_value, func_t func);
 

@@ -26,11 +26,39 @@ void GuiScrollbar::onDraw(sf::RenderTarget& window)
 
 bool GuiScrollbar::onMouseDown(sf::Vector2f position)
 {
+    int range = (max_value - min_value);
+    float move_height = (rect.height - rect.width * 2);
+    float bar_size = move_height * value_size / range;
+    if (bar_size > move_height)
+        bar_size = move_height;
+    float bar_y = rect.top + rect.width + move_height * value / range;
+    if (position.y >= bar_y && position.y <= bar_y + bar_size)
+    {
+        drag_scrollbar = true;
+        drag_select_offset = position.y - bar_y;
+    }else{
+        drag_scrollbar = false;
+    }
     return true;
 }
 
 void GuiScrollbar::onMouseDrag(sf::Vector2f position)
 {
+    if (drag_scrollbar)
+    {
+        int range = (max_value - min_value);
+        float move_height = (rect.height - rect.width * 2);
+        float bar_size = move_height * value_size / range;
+        if (bar_size > move_height)
+            bar_size = move_height;
+        
+        float target_y_offset = position.y - (rect.top + rect.width);
+        target_y_offset = std::max(target_y_offset, 0.0f);
+        target_y_offset = std::min(target_y_offset, move_height - bar_size);
+        
+        if (bar_size < move_height)
+            setValue(int(target_y_offset / move_height * range + 0.5f));
+    }
 }
 
 void GuiScrollbar::onMouseUp(sf::Vector2f position)
