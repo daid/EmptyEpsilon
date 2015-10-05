@@ -31,7 +31,6 @@ public:
 class JoinServerScreen : public GuiCanvas, public Updatable
 {
     sf::IpAddress ip;
-    int connect_delay;
 public:
     JoinServerScreen(sf::IpAddress ip);
 
@@ -42,7 +41,6 @@ class AutoConnectScreen : public GuiCanvas, public Updatable
 {
     P<ServerScanner> scanner;
     sf::IpAddress connect_to_address;
-    int connect_delay;
     ECrewPosition crew_position;
     bool control_main_screen;
     

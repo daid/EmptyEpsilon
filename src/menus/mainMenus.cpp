@@ -166,17 +166,14 @@ JoinServerScreen::JoinServerScreen(sf::IpAddress ip)
         new ServerBrowserMenu();
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
     
-    connect_delay = 2;
+    new GameClient(ip);
 }
 
 void JoinServerScreen::update(float delta)
 {
-    //We connect with a slight delay, as the connect call when joining a server will block and thus not update the screen.
-    if (connect_delay > 0)
+    if (game_client->isConnecting())
     {
-        connect_delay--;
-        if (!connect_delay)
-            new GameClient(ip);
+        //If we are still trying to connect, do nothing.
     }else{
         if (!game_client->isConnected())
         {
@@ -228,18 +225,15 @@ void AutoConnectScreen::update(float delta)
         {
             status_label->setText("Found server " + serverList[0].name);
             connect_to_address = serverList[0].address;
-            connect_delay = 2;
+            new GameClient(serverList[0].address);
             scanner->destroy();
         }else{
             status_label->setText("Searching for server...");
         }
     }else{
-        if (connect_delay > 0)
+        if (game_client->isConnecting())
         {
             status_label->setText("Connecting: " + connect_to_address.toString());
-            connect_delay--;
-            if (!connect_delay)
-                new GameClient(connect_to_address);
         }else{
             if (!game_client->isConnected())
             {
