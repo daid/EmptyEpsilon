@@ -12,6 +12,18 @@ GuiListbox::GuiListbox(GuiContainer* owner, string id, func_t func)
     scroll->setPosition(0, 0, ATopRight)->hide();
 }
 
+GuiListbox* GuiListbox::setTextSize(float size)
+{
+    text_size = size;
+    return this;
+}
+
+GuiListbox* GuiListbox::setButtonHeight(float height)
+{
+    button_height = height;
+    return this;
+}
+
 void GuiListbox::onDraw(sf::RenderTarget& window)
 {
     if (last_rect != rect)

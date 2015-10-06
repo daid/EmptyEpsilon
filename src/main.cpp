@@ -226,7 +226,7 @@ int main(int argc, char** argv)
     
     returnToMainMenu();
     engine->runMainLoop();
-
+    
     P<WindowManager> windowManager = engine->getObject("windowManager");
     if (windowManager)
     {
