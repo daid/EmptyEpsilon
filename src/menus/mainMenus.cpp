@@ -166,21 +166,24 @@ JoinServerScreen::JoinServerScreen(sf::IpAddress ip)
         new ServerBrowserMenu();
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
     
-    new GameClient(ip);
+    new GameClient(VERSION_NUMBER, ip);
 }
 
 void JoinServerScreen::update(float delta)
 {
-    if (game_client->isConnecting())
+    switch(game_client->getStatus())
     {
+    case GameClient::Connecting:
+    case GameClient::Authenticating:
         //If we are still trying to connect, do nothing.
-    }else{
-        if (!game_client->isConnected())
-        {
-            destroy();
-            disconnectFromServer();
-            new ServerBrowserMenu();
-        }else if (game_client->getClientId() > 0)
+        break;
+    case GameClient::Disconnected:
+        destroy();
+        disconnectFromServer();
+        new ServerBrowserMenu();
+        break;
+    case GameClient::Connected:
+        if (game_client->getClientId() > 0)
         {
             foreach(PlayerInfo, i, player_info_list)
                 if (i->client_id == game_client->getClientId())
@@ -191,6 +194,7 @@ void JoinServerScreen::update(float delta)
                 destroy();
             }
         }
+        break;
     }
 }
 
@@ -225,21 +229,24 @@ void AutoConnectScreen::update(float delta)
         {
             status_label->setText("Found server " + serverList[0].name);
             connect_to_address = serverList[0].address;
-            new GameClient(serverList[0].address);
+            new GameClient(VERSION_NUMBER, serverList[0].address);
             scanner->destroy();
         }else{
             status_label->setText("Searching for server...");
         }
     }else{
-        if (game_client->isConnecting())
+        switch(game_client->getStatus())
         {
+        case GameClient::Connecting:
+        case GameClient::Authenticating:
             status_label->setText("Connecting: " + connect_to_address.toString());
-        }else{
-            if (!game_client->isConnected())
-            {
-                disconnectFromServer();
-                scanner = new ServerScanner(VERSION_NUMBER);
-            }else if (game_client->getClientId() > 0)
+            break;
+        case GameClient::Disconnected:
+            disconnectFromServer();
+            scanner = new ServerScanner(VERSION_NUMBER);
+            break;
+        case GameClient::Connected:
+            if (game_client->getClientId() > 0)
             {
                 foreach(PlayerInfo, i, player_info_list)
                     if (i->client_id == game_client->getClientId())
@@ -281,6 +288,7 @@ void AutoConnectScreen::update(float delta)
                     status_label->setText("Connected, waiting for game data...");
                 }
             }
+            break;
         }
     }
 }

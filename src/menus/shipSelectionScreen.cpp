@@ -124,7 +124,7 @@ ShipSelectionScreen::ShipSelectionScreen()
 
 void ShipSelectionScreen::update(float delta)
 {
-    if (game_client && !game_client->isConnected())
+    if (game_client && game_client->getStatus() == GameClient::Disconnected)
     {
         destroy();
         disconnectFromServer();
