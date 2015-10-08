@@ -10,11 +10,29 @@ ServerCreationScreen::ServerCreationScreen()
     assert(game_server);
     
     (new GuiLabel(this, "SCENARIO_LABEL", "Scenario", 30))->addBox()->setPosition(-50, 50, ATopRight)->setSize(460, 50);
-    (new GuiBox(this, "SCENARIO_BOX"))->setPosition(-50, 50, ATopRight)->setSize(460, 560);
+    (new GuiBox(this, "SCENARIO_BOX"))->setPosition(-50, 50, ATopRight)->setSize(460, 460);
     GuiListbox* scenario_list = new GuiListbox(this, "SCENARIO_LIST", [this](int index, string value) {
         selected_scenario_filename = value;
+        
+        scenario_description->setText("");
+        
+        P<ResourceStream> stream = getResourceStream(selected_scenario_filename);
+        if (!stream) return;
+
+        for(int i=0; i<10; i++)
+        {
+            string line = stream->readLine().strip();
+            if (!line.startswith("--"))
+                continue;
+            line = line.substr(2).strip();
+            if (line.startswith("Description:"))
+                scenario_description->setText(line.substr(12).strip());
+        }
     });
-    scenario_list->setPosition(-80, 100, ATopRight)->setSize(400, 500);
+    scenario_list->setPosition(-80, 100, ATopRight)->setSize(400, 400);
+    (new GuiBox(this, "SCENARIO_DESCRIPTION_BOX"))->setPosition(-50, 50 + 460, ATopRight)->setSize(460, 280);
+    scenario_description = new GuiScrollText(this, "SCENARIO_DESCRIPTION", "");
+    scenario_description->setTextSize(20)->setPosition(-80, 60 + 460, ATopRight)->setSize(400, 260);
     
     float y = 50;
     (new GuiLabel(this, "GENERAL_LABEL", "General", 30))->addBox()->setPosition(50, y, ATopLeft)->setSize(550, 50);

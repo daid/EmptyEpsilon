@@ -8,6 +8,7 @@
 class ServerCreationScreen : public GuiCanvas
 {
     string selected_scenario_filename;
+    GuiScrollText* scenario_description;
 public:
     ServerCreationScreen();
     
