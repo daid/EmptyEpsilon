@@ -23,7 +23,7 @@ public:
     virtual ~ThreatLevelEstimate();
     
     float getThreat() { return smoothed_threat_level; }
-    void setCallbacks(func_t low, func_t high) { threat_low_func = low; threat_high_func = high; }
+    void setCallbacks(func_t low, func_t high);
     
     virtual void update(float delta);
 private:

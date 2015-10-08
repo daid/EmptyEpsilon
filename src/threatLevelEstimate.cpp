@@ -79,3 +79,18 @@ float ThreatLevelEstimate::getThreatFor(P<SpaceShip> ship)
     
     return threat;
 }
+
+void ThreatLevelEstimate::setCallbacks(func_t low, func_t high)
+{
+    threat_low_func = low;
+    threat_high_func = high; 
+    
+    if (threat_high)
+    {
+        if (threat_high_func)
+            threat_high_func();
+    }else{
+        if (threat_low_func)
+            threat_low_func();
+    }
+}
