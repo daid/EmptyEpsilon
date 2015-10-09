@@ -15,6 +15,7 @@ private:
     {
         TargetSelection,
         WaypointPlacement,
+        WaypointDelete,
         LaunchProbe
     };
     

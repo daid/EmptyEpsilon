@@ -31,6 +31,21 @@ RelayScreen::RelayScreen(GuiContainer* owner)
                 mode = TargetSelection;
                 option_buttons->show();
                 break;
+            case WaypointDelete:
+                if (my_spaceship)
+                {
+                    for(int n=0; n<my_spaceship->waypoints.size(); n++)
+                    {
+                        if ((my_spaceship->waypoints[n] - position) < 1000.0f)
+                        {
+                            my_spaceship->commandRemoveWaypoint(n);
+                            break;
+                        }
+                    }
+                }
+                mode = TargetSelection;
+                option_buttons->show();
+                break;
             case LaunchProbe:
                 if (my_spaceship)
                     my_spaceship->commandLaunchProbe(position);
@@ -73,6 +88,10 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", &targets))->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", "Place Waypoint", [this]() {
         mode = WaypointPlacement;
+        option_buttons->hide();
+    }))->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", "Delete Waypoint", [this]() {
+        mode = WaypointDelete;
         option_buttons->hide();
     }))->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", "Launch Probe", [this]() {
