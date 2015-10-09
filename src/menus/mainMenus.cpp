@@ -119,6 +119,7 @@ OptionsMenu::OptionsMenu()
 ServerBrowserMenu::ServerBrowserMenu()
 {
     scanner = new ServerScanner(VERSION_NUMBER);
+    scanner->scanLocalNetwork();
 
     (new GuiButton(this, "BACK", "Back", [this]() {
         destroy();
@@ -218,6 +219,7 @@ AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_m
 : crew_position(crew_position), control_main_screen(control_main_screen)
 {
     scanner = new ServerScanner(VERSION_NUMBER);
+    scanner->scanLocalNetwork();
     
     status_label = new GuiLabel(this, "STATUS", "Searching for server...", 50);
     status_label->setPosition(0, 300, ATopCenter)->setSize(0, 50);
@@ -261,6 +263,7 @@ void AutoConnectScreen::update(float delta)
         case GameClient::Disconnected:
             disconnectFromServer();
             scanner = new ServerScanner(VERSION_NUMBER);
+            scanner->scanLocalNetwork();
             break;
         case GameClient::Connected:
             if (game_client->getClientId() > 0)
