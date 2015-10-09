@@ -88,6 +88,19 @@ RelayScreen::RelayScreen(GuiContainer* owner)
 
 void RelayScreen::onDraw(sf::RenderTarget& window)
 {
+    ///Handle mouse wheel
+    float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
+    if (mouse_wheel_delta != 0.0)
+    {
+        float view_distance = radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
+        if (view_distance > 50000.0f)
+            view_distance = 50000.0f;
+        if (view_distance < 5000.0f)
+            view_distance = 5000.0f;
+        radar->setDistance(view_distance);
+    }
+    ///!
+
     GuiOverlay::onDraw(window);
 
     info_faction->setValue("-");
