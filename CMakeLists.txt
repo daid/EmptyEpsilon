@@ -17,7 +17,7 @@ endif()
 set(EXECUTABLE_NAME "EmptyEpsilon")
 set(SOURCES
     src/main.cpp src/threatLevelEstimate.cpp src/preferenceManager.cpp src/pathPlanner.cpp src/epsilonServer.cpp src/particleEffect.cpp src/mouseCalibrator.cpp src/httpScriptAccess.cpp src/modelInfo.cpp src/packResourceProvider.cpp src/scienceDatabase.cpp src/commsScriptInterface.cpp src/modelData.cpp src/gameGlobalInfo.cpp src/script.cpp src/playerInfo.cpp src/shipTemplate.cpp src/factionInfo.cpp src/mesh.cpp src/repairCrew.cpp
-    src/menus/serverCreationScreen.cpp src/menus/shipSelectionScreen.cpp src/menus/mainMenus.cpp
+    src/menus/joinServerMenu.cpp src/menus/serverBrowseMenu.cpp src/menus/mainMenus.cpp src/menus/serverCreationScreen.cpp src/menus/optionsMenu.cpp src/menus/shipSelectionScreen.cpp src/menus/autoConnectScreen.cpp
     src/screens/crewStationScreen.cpp src/screens/topDownScreen.cpp src/screens/gameMasterScreen.cpp src/screens/windowScreen.cpp src/screens/mainScreen.cpp
     src/screens/crew4/operationsScreen.cpp src/screens/crew4/engineeringAdvancedScreen.cpp src/screens/crew4/tacticalScreen.cpp
     src/screens/crew6/engineeringScreen.cpp src/screens/crew6/scienceScreen.cpp src/screens/crew6/relayScreen.cpp src/screens/crew6/weaponsScreen.cpp src/screens/crew6/helmsScreen.cpp

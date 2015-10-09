@@ -22,6 +22,8 @@ EpsilonServer::EpsilonServer()
         LOG(INFO) << "Switching to combat music";
         soundManager->playMusicSet({"music/Dream Raid Full Version (Mock Up).ogg", "music/Thrust Sequence.ogg", "music/Recall of the Shadows_0.ogg", "music/Imminent Threat.ogg", "music/neocrey - Last Cyber Dance.ogg"});
     });
+    
+    //registerOnMasterServer("http://daid.eu/ee/register.php");
 }
 
 EpsilonServer::~EpsilonServer()

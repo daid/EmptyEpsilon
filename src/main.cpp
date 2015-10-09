@@ -5,6 +5,7 @@
 #include "gui/mouseRenderer.h"
 #include "gui/debugRenderer.h"
 #include "menus/mainMenus.h"
+#include "menus/autoConnectScreen.h"
 #include "mouseCalibrator.h"
 #include "factionInfo.h"
 #include "spaceObjects/spaceObject.h"

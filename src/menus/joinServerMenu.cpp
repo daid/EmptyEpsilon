@@ -1,0 +1,65 @@
+#include "main.h"
+#include "epsilonServer.h"
+#include "menus/joinServerMenu.h"
+#include "menus/serverBrowseMenu.h"
+#include "menus/shipSelectionScreen.h"
+#include "playerInfo.h"
+#include "gameGlobalInfo.h"
+
+JoinServerScreen::JoinServerScreen(sf::IpAddress ip)
+: ip(ip)
+{
+    status_label = new GuiLabel(this, "STATUS", "Connecting...", 30);
+    status_label->setPosition(0, 300, ATopCenter)->setSize(0, 50);
+    (new GuiButton(this, "BTN_CANCEL", "Cancel", [this]() {
+        destroy();
+        disconnectFromServer();
+        new ServerBrowserMenu(ServerBrowserMenu::Local);
+    }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
+    
+    password_entry_box = new GuiBox(this, "PASSWORD_ENTRY_BOX");
+    password_entry_box->setPosition(0, 350, ATopCenter)->setSize(600, 100);
+    password_entry_box->hide();
+    password_entry = new GuiTextEntry(password_entry_box, "PASSWORD_ENTRY", "");
+    password_entry->setPosition(20, 0, ACenterLeft)->setSize(400, 50);
+    (new GuiButton(password_entry_box, "PASSWORD_ENTRY_OK", "Ok", [this]()
+    {
+        password_entry_box->hide();
+        game_client->sendPassword(password_entry->getText());
+    }))->setPosition(420, 0, ACenterLeft)->setSize(160, 50);
+    
+    new GameClient(VERSION_NUMBER, ip);
+}
+
+void JoinServerScreen::update(float delta)
+{
+    switch(game_client->getStatus())
+    {
+    case GameClient::Connecting:
+    case GameClient::Authenticating:
+        //If we are still trying to connect, do nothing.
+        break;
+    case GameClient::WaitingForPassword:
+        status_label->setText("Please enter the server password:");
+        password_entry_box->show();
+        break;
+    case GameClient::Disconnected:
+        destroy();
+        disconnectFromServer();
+        new ServerBrowserMenu(ServerBrowserMenu::Local);
+        break;
+    case GameClient::Connected:
+        if (game_client->getClientId() > 0)
+        {
+            foreach(PlayerInfo, i, player_info_list)
+                if (i->client_id == game_client->getClientId())
+                    my_player_info = i;
+            if (my_player_info && gameGlobalInfo)
+            {
+                new ShipSelectionScreen();
+                destroy();
+            }
+        }
+        break;
+    }
+}
