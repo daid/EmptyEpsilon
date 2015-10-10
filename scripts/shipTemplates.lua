@@ -1,22 +1,23 @@
 --[[ Stations --]]
-template = ShipTemplate():setName("Small Station"):setModel("space_station_4")
+template = ShipTemplate():setName("Small Station"):setModel("space_station_4"):setType("station")
 template:setHull(150)
 template:setShields(300, 0)
 
-template = ShipTemplate():setName("Medium Station"):setModel("space_station_3")
+template = ShipTemplate():setName("Medium Station"):setModel("space_station_3"):setType("station")
+template:setType("station")
 template:setHull(400)
 template:setShields(800, 0)
 
-template = ShipTemplate():setName("Large Station"):setModel("space_station_2")
+template = ShipTemplate():setName("Large Station"):setModel("space_station_2"):setType("station")
 template:setHull(500)
 template:setShields(1000, 0)
 
-template = ShipTemplate():setName("Huge Station"):setModel("space_station_1")
+template = ShipTemplate():setName("Huge Station"):setModel("space_station_1"):setType("station")
 template:setHull(800)
 template:setShields(1200, 0)
 
 --[[ Player ships --]]
-template = ShipTemplate():setName("Player Cruiser"):setModel("battleship_destroyer_5_upgraded")
+template = ShipTemplate():setName("Player Cruiser"):setModel("battleship_destroyer_5_upgraded"):setType("playership")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 90, -15, 1000.0, 6.0, 10)
 template:setBeam(1, 90,  15, 1000.0, 6.0, 10)
@@ -66,7 +67,7 @@ template:addDoor(8, 4, false);
 --template:addDoor(2, 2, false);
 --template:addDoor(2, 5, false);
 
-template = ShipTemplate():setName("Player Missile Cr."):setModel("space_cruiser_4")
+template = ShipTemplate():setName("Player Missile Cr."):setModel("space_cruiser_4"):setType("playership")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setTubes(4, 8.0)
 template:setHull(200)
@@ -110,7 +111,7 @@ template:addDoor(6, 4, false);
 template:addDoor(8, 3, false);
 template:addDoor(8, 4, false);
 
-template = ShipTemplate():setName("Player Fighter"):setModel("small_fighter_1")
+template = ShipTemplate():setName("Player Fighter"):setModel("small_fighter_1"):setType("playership")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 40, -10, 1000.0, 6.0, 8)
 template:setBeam(1, 40,  10, 1000.0, 6.0, 8)

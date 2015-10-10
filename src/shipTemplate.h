@@ -63,12 +63,23 @@ public:
 class SpaceObject;
 class ShipTemplate : public PObject
 {
+public:
+    enum TemplateType
+    {
+        Ship,
+        PlayerShip,
+        Station
+    };
+private:
     static std::unordered_map<string, P<ShipTemplate> > templateMap;
     string name;
     string description;
+    TemplateType type;
 public:
     string getName() {return this->name;}
     string getDescription() {return this->description;}
+    void setType(TemplateType type) { this->type = type; }
+    TemplateType getType() { return type; }
 
     P<ModelData> model_data;
     /*!
@@ -122,5 +133,8 @@ public:
 };
 string getSystemName(ESystem system);
 REGISTER_MULTIPLAYER_ENUM(ESystem);
+
+/* Define script conversion function for the ShipTemplate::TemplateType enum. */
+template<> void convert<ShipTemplate::TemplateType>::param(lua_State* L, int& idx, ShipTemplate::TemplateType& tt);
 
 #endif//SHIP_TEMPLATE_H

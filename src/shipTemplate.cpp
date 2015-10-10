@@ -10,6 +10,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setName);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDescription);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setType);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDefaultAI);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setModel);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSizeClass);
@@ -69,6 +70,20 @@ template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es)
         es = SYS_None;
 }
 
+/* Define script conversion function for the ShipTemplate::TemplateType enum. */
+template<> void convert<ShipTemplate::TemplateType>::param(lua_State* L, int& idx, ShipTemplate::TemplateType& tt)
+{
+    string str = string(luaL_checkstring(L, idx++)).lower();
+    if (str == "ship")
+        tt = ShipTemplate::Ship;
+    else if (str == "playership")
+        tt = ShipTemplate::PlayerShip;
+    else if (str == "station")
+        tt = ShipTemplate::Station;
+    else
+        tt = ShipTemplate::Ship;
+}
+
 std::unordered_map<string, P<ShipTemplate> > ShipTemplate::templateMap;
 
 ShipTemplate::ShipTemplate()
@@ -81,6 +96,7 @@ ShipTemplate::ShipTemplate()
         beams[n].damage = 0.0;
         beams[n].cycle_time = 0.0;
     }
+    type = Ship;
     size_class = 10;
     weapon_tubes = 0;
     tube_load_time = 8.0;
@@ -168,7 +184,7 @@ std::vector<string> ShipTemplate::getTemplateNameList()
 {
     std::vector<string> ret;
     for(std::unordered_map<string, P<ShipTemplate> >::iterator i = templateMap.begin(); i != templateMap.end(); i++)
-        if (!i->first.endswith("Station") && !i->first.startswith("Player"))
+        if (i->second->getType() == Ship)
             ret.push_back(i->first);
     return ret;
 }
@@ -177,7 +193,7 @@ std::vector<string> ShipTemplate::getPlayerTemplateNameList()
 {
     std::vector<string> ret;
     for(std::unordered_map<string, P<ShipTemplate> >::iterator i = templateMap.begin(); i != templateMap.end(); i++)
-        if (!i->first.endswith("Station") && i->first.startswith("Player"))
+        if (i->second->getType() == PlayerShip)
             ret.push_back(i->first);
     return ret;
 }
@@ -186,7 +202,7 @@ std::vector<string> ShipTemplate::getStationTemplateNameList()
 {
     std::vector<string> ret;
     for(std::unordered_map<string, P<ShipTemplate> >::iterator i = templateMap.begin(); i != templateMap.end(); i++)
-        if (i->first.endswith("Station") && !i->first.startswith("Player"))
+        if (i->second->getType() == Station)
             ret.push_back(i->first);
     return ret;
 }
