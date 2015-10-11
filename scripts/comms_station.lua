@@ -16,39 +16,47 @@ function mainMenu()
 		if not player:isDocked(comms_target) then
 			setCommsMessage("Good day officer,\nIf you need supplies please dock with us first.");
 			addCommsReply("Can you send a supply drop? (100rep)", function()
-				setCommsMessage("Where do we need to drop off your supplies?");
-				for n=1,player:getWaypointCount() do
-					addCommsReply("WP" .. n, function()
-						if player:takeReputationPoints(100) then
-							local position_x, position_y = comms_target:getPosition()
-							local target_x, target_y = player:getWaypoint(n)
-							local script = Script()
-							script:setVariable("position_x", position_x):setVariable("position_y", position_y)
-							script:setVariable("target_x", target_x):setVariable("target_y", target_y)
-							script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-							setCommsMessage("We have dispatched a supply ship towards WP" .. n);
-						else
-							setCommsMessage("Not enough rep!");
-						end
-						addCommsReply("Back", mainMenu)
-					end)
-				end
+                if getWaypointCount() < 1 then
+                    setCommsMessage("You need to set a waypoint before you can request backup.");
+                else
+                    setCommsMessage("Where do we need to drop off your supplies?");
+                    for n=1,player:getWaypointCount() do
+                        addCommsReply("WP" .. n, function()
+                            if player:takeReputationPoints(100) then
+                                local position_x, position_y = comms_target:getPosition()
+                                local target_x, target_y = player:getWaypoint(n)
+                                local script = Script()
+                                script:setVariable("position_x", position_x):setVariable("position_y", position_y)
+                                script:setVariable("target_x", target_x):setVariable("target_y", target_y)
+                                script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
+                                setCommsMessage("We have dispatched a supply ship towards WP" .. n);
+                            else
+                                setCommsMessage("Not enough rep!");
+                            end
+                            addCommsReply("Back", mainMenu)
+                        end)
+                    end
+                end
 				addCommsReply("Back", mainMenu)
 			end)
 			addCommsReply("Please send backup! (150rep)", function()
-				setCommsMessage("Where does the backup needs to go?");
-				for n=1,player:getWaypointCount() do
-					addCommsReply("WP" .. n, function()
-						if player:takeReputationPoints(150) then
-							ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setShipTemplate("Fighter"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
-							setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n);
-						else
-							setCommsMessage("Not enough rep!");
-						end
-						addCommsReply("Back", mainMenu)
-					end)
-				end
-				addCommsReply("Back", mainMenu)
+                if getWaypointCount() < 1 then
+                    setCommsMessage("You need to set a waypoint before you can request backup.");
+                else
+                    setCommsMessage("Where does the backup needs to go?");
+                    for n=1,player:getWaypointCount() do
+                        addCommsReply("WP" .. n, function()
+                            if player:takeReputationPoints(150) then
+                                ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setShipTemplate("Fighter"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
+                                setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n);
+                            else
+                                setCommsMessage("Not enough rep!");
+                            end
+                            addCommsReply("Back", mainMenu)
+                        end)
+                    end
+                end
+                addCommsReply("Back", mainMenu)
 			end)
 			return true
 		end
