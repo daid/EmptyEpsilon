@@ -80,7 +80,7 @@ void TacticalScreen::onDraw(sf::RenderTarget& window)
         warp_controls->setVisible(my_spaceship->has_warp_drive);
         jump_controls->setVisible(my_spaceship->has_jump_drive);
 
-        shields_display->setValue(string(int(100 * my_spaceship->front_shield / my_spaceship->front_shield_max)) + "% " + string(int(100 * my_spaceship->rear_shield / my_spaceship->rear_shield_max)) + "%");
+        shields_display->setValue(string(my_spaceship->getFrontShieldPercentage()) + "% " + string(my_spaceship->getRearShieldPercentage()) + "%");
         targets.set(my_spaceship->getTarget());
         
         if (lock_aim->getValue())

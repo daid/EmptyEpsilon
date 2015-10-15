@@ -520,8 +520,16 @@
 		<Unit filename="src/httpScriptAccess.h" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/main.h" />
+		<Unit filename="src/menus/autoConnectScreen.cpp" />
+		<Unit filename="src/menus/autoConnectScreen.h" />
+		<Unit filename="src/menus/joinServerMenu.cpp" />
+		<Unit filename="src/menus/joinServerMenu.h" />
 		<Unit filename="src/menus/mainMenus.cpp" />
 		<Unit filename="src/menus/mainMenus.h" />
+		<Unit filename="src/menus/optionsMenu.cpp" />
+		<Unit filename="src/menus/optionsMenu.h" />
+		<Unit filename="src/menus/serverBrowseMenu.cpp" />
+		<Unit filename="src/menus/serverBrowseMenu.h" />
 		<Unit filename="src/menus/serverCreationScreen.cpp" />
 		<Unit filename="src/menus/serverCreationScreen.h" />
 		<Unit filename="src/menus/shipSelectionScreen.cpp" />

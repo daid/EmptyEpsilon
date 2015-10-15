@@ -337,14 +337,20 @@ void SpaceShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, f
     {
         sf::RectangleShape bar(sf::Vector2f(60, 10));
         
-        bar.setPosition(position.x - 30, position.y - 40);
-        bar.setSize(sf::Vector2f(60 * front_shield / front_shield_max, 5));
-        bar.setFillColor(sf::Color(128, 128, 255, 128));
-        window.draw(bar);
-        bar.setPosition(position.x - 30, position.y - 35);
-        bar.setSize(sf::Vector2f(60 * rear_shield / rear_shield_max, 5));
-        bar.setFillColor(sf::Color(128, 128, 255, 128));
-        window.draw(bar);
+        if (front_shield_max > 0.0)
+        {
+            bar.setPosition(position.x - 30, position.y - 40);
+            bar.setSize(sf::Vector2f(60 * front_shield / front_shield_max, 5));
+            bar.setFillColor(sf::Color(128, 128, 255, 128));
+            window.draw(bar);
+        }
+        if (rear_shield_max > 0.0)
+        {
+            bar.setPosition(position.x - 30, position.y - 35);
+            bar.setSize(sf::Vector2f(60 * rear_shield / rear_shield_max, 5));
+            bar.setFillColor(sf::Color(128, 128, 255, 128));
+            window.draw(bar);
+        }
         bar.setPosition(position.x - 30, position.y - 30);
         bar.setSize(sf::Vector2f(60 * hull_strength / hull_max, 5));
         bar.setFillColor(sf::Color(128, 255, 128, 128));

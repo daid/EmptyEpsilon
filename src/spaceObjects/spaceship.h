@@ -317,10 +317,12 @@ public:
     void setHullMax(float amount) { if (amount < 0) return; hull_max = amount; }
     float getFrontShield() { return front_shield; }
     float getFrontShieldMax() { return front_shield_max; }
+    int getFrontShieldPercentage() { if (front_shield_max <= 0.0) return 0; return int(100 * front_shield / front_shield_max); }
     void setFrontShield(float amount) { if (amount < 0) return; front_shield = amount; }
     void setFrontShieldMax(float amount) { if (amount < 0) return; front_shield_max = amount; front_shield = std::min(front_shield, front_shield_max); }
     float getRearShield() { return rear_shield; }
     float getRearShieldMax() { return rear_shield_max; }
+    int getRearShieldPercentage() { if (rear_shield_max <= 0.0) return 0; return int(100 * rear_shield / rear_shield_max); }
     void setRearShield(float amount) { if (amount < 0) return; rear_shield = amount; }
     void setRearShieldMax(float amount) { if (amount < 0) return; rear_shield_max = amount; rear_shield = std::min(rear_shield, rear_shield_max); }
     bool getShieldsActive() { return shields_active; }
