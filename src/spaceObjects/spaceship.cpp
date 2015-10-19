@@ -456,21 +456,21 @@ void SpaceShip::update(float delta)
         }
     }else if (has_warp_drive && (warp_request > 0 || current_warp > 0))
     {
-        if (current_impulse < 1.0)
+        if (current_impulse > 0.0)
         {
             if (impulse_max_speed > 0)
-                current_impulse += delta * (impulse_acceleration / impulse_max_speed);
-            if (current_impulse > 1.0)
-                current_impulse = 1.0;
+                current_impulse -= delta * (impulse_acceleration / impulse_max_speed);
+            if (current_impulse < 0.0)
+                current_impulse = 0.0;
         }else{
             if (current_warp < warp_request)
             {
-                current_warp += delta;
+                current_warp += delta / warp_charge_time;
                 if (current_warp > warp_request)
                     current_warp = warp_request;
             }else if (current_warp > warp_request)
             {
-                current_warp -= delta;
+                current_warp -= delta / warp_decharge_time;
                 if (current_warp < warp_request)
                     current_warp = warp_request;
             }

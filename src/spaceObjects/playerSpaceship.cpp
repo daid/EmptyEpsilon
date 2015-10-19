@@ -291,7 +291,7 @@ void PlayerSpaceship::update(float delta)
 
         if (has_warp_drive && warp_request > 0 && !(has_jump_drive && jump_delay > 0))
         {
-            if (!useEnergy(energy_warp_per_second * delta * float(warp_request * warp_request) * (shields_active ? 1.5 : 1.0)))
+            if (!useEnergy(energy_warp_per_second * delta * powf(warp_request, 1.2f) * (shields_active ? 1.5 : 1.0)))
                 warp_request = 0;
         }
         if (scanning_target)
