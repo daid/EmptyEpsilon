@@ -22,6 +22,13 @@ enum EPlayerWarpJumpDrive
     PWJ_WarpAndJumpDrive,
     PWJ_MAX,
 };
+enum EScanningComplexity
+{
+    SC_None,
+    SC_Simple,
+    SC_Normal,
+    SC_Advanced
+};
 
 class GameGlobalInfo : public MultiplayerObject, public Updatable
 {
@@ -49,6 +56,7 @@ public:
     std::vector<float> reputation_points;
     NebulaInfo nebula_info[max_nebulas];
     EPlayerWarpJumpDrive player_warp_jump_drive_setting;
+    EScanningComplexity scanning_complexity;
     /*!
      * \brief Range of the science radar.
      */
@@ -86,5 +94,7 @@ public:
 
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive);
 string getSectorName(sf::Vector2f position);
+
+REGISTER_MULTIPLAYER_ENUM(EScanningComplexity);
 
 #endif//GAME_GLOBAL_INFO_H

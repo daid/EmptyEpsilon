@@ -89,6 +89,12 @@ ServerCreationScreen::ServerCreationScreen()
     }))->setOptions({"No", "Yes"})->setSelectionIndex(gameGlobalInfo->use_system_damage ? 1 : 0)->setPosition(300, y, ATopLeft)->setSize(300, 50);
     (new GuiLabel(this, "GAME_SYS_DAMAGE_LABEL", "System damage:", 30))->setAlignment(ACenterRight)->setPosition(50, y, ATopLeft)->setSize(250, 50);
     (new GuiBox(this, "GAME_SYS_DAMAGE_BOX"))->setPosition(50, y, ATopLeft)->setSize(550, 50);
+    y += 50;
+    (new GuiLabel(this, "GAME_SCANNING_COMPLEXITY_LABEL", "Science scanning:", 30))->setAlignment(ACenterRight)->setPosition(50, y, ATopLeft)->setSize(250, 50);
+    (new GuiBox(this, "GAME_SCANNING_COMPLEXITY_BOX"))->setPosition(50, y, ATopLeft)->setSize(550, 50);
+    (new GuiSelector(this, "GAME_SCANNING_COMPLEXITY", [](int index, string value) {
+        gameGlobalInfo->scanning_complexity = EScanningComplexity(index);
+    }))->setOptions({"None (delay)", "Simple", "Normal", "Advanced"})->setSelectionIndex((int)gameGlobalInfo->scanning_complexity)->setPosition(300, y, ATopLeft)->setSize(300, 50);
 
     (new GuiButton(this, "CLOSE_SERVER", "Close server", [this]() {
         destroy();

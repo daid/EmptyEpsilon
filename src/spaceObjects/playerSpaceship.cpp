@@ -577,6 +577,23 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 scanning_complexity = obj->scanningComplexity();
                 scanning_depth = obj->scanningChannelDepth();
                 scanning_delay = max_scanning_delay;
+                
+                switch(gameGlobalInfo->scanning_complexity)
+                {
+                case SC_None:
+                    scanning_complexity = 0;
+                    scanning_depth = 0;
+                    break;
+                case SC_Simple:
+                    scanning_complexity = (scanning_complexity + 1) / 2;
+                    scanning_depth = (scanning_depth + 1) / 2;
+                    break;
+                case SC_Normal:
+                    break;
+                case SC_Advanced:
+                    scanning_complexity = std::min(4, scanning_complexity + 1);
+                    break;
+                }
             }
         }
         break;

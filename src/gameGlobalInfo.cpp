@@ -26,12 +26,14 @@ GameGlobalInfo::GameGlobalInfo()
 
     global_message_timeout = 0.0;
     player_warp_jump_drive_setting = PWJ_ShipDefault;
+    scanning_complexity = SC_Normal;
     long_range_radar_range = 30000;
     use_beam_shield_frequencies = true;
     use_system_damage = true;
     allow_main_screen_tactical_radar = true;
     allow_main_screen_long_range_radar = true;
 
+    registerMemberReplication(&scanning_complexity);
     registerMemberReplication(&global_message);
     registerMemberReplication(&global_message_timeout, 1.0);
     registerMemberReplication(&victory_faction);
