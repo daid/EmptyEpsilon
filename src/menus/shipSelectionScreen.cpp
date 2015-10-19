@@ -96,7 +96,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         ship_template_selector->setOptions(template_names)->setSelectionIndex(0);
         ship_template_selector->setPosition(80, 630, ATopLeft)->setSize(490, 50);
         
-        (new GuiButton(this, "CREATE_SHIP_BUTTON", "Spawn player ship", [ship_template_selector]() {
+        (new GuiButton(this, "CREATE_SHIP_BUTTON", "Spawn player ship", [this, ship_template_selector]() {
             my_spaceship = new PlayerSpaceship();
             if (my_spaceship)
             {
@@ -106,6 +106,7 @@ ShipSelectionScreen::ShipSelectionScreen()
                 my_spaceship->setPosition(sf::Vector2f(random(-100, 100), random(-100, 100)));
                 my_player_info->setShipId(my_spaceship->getMultiplayerId());
             }
+            updateReadyButton();
         }))->setPosition(80, 680, ATopLeft)->setSize(490, 50);
     }
     

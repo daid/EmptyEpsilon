@@ -39,12 +39,16 @@ class SpaceObject : public Collisionable, public MultiplayerObject
 {
     float object_radius;
     uint8_t faction_id;
+    string object_description;
 public:
     string comms_script_name;
     SpaceObject(float collisionRange, string multiplayerName, float multiplayer_significant_range=-1);
 
     float getRadius() { return object_radius; }
     void setRadius(float radius) { object_radius = radius; setCollisionRadius(radius); }
+    
+    string getDescription() { return object_description; }
+    void setDescription(string description) { object_description = description; }
 
 #if FEATURE_3D_RENDERING
     virtual void draw3D();

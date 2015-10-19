@@ -60,6 +60,9 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, sendCommsMessage);
     /// Let this object take damage, the DamageInfo parameter can be empty, or a string which indicates if it's energy, kinetic or emp damage.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, takeDamage);
+    /// Set the description of this object, description is visible at the science station.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setDescription);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getDescription);
 }
 
 PVector<SpaceObject> space_object_list;

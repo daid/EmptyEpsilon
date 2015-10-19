@@ -14,7 +14,7 @@ public:
     
     virtual void onDraw(sf::RenderTarget& window);
     
-    void setFrequency(int frequency) { this->frequency = frequency; }
+    GuiFrequencyCurve* setFrequency(int frequency) { this->frequency = frequency; return this; }
 };
 
 #endif//GUI_FREQUENCY_CURVE_H

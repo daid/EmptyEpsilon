@@ -24,6 +24,7 @@ protected:
     GuiKeyValueDisplay* info_faction;
     GuiKeyValueDisplay* info_type;
     GuiKeyValueDisplay* info_shields;
+    GuiScrollText* info_description;
     GuiFrequencyCurve* info_shield_frequency;
     GuiFrequencyCurve* info_beam_frequency;
     GuiKeyValueDisplay* info_system[SYS_COUNT];
