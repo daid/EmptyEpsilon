@@ -34,7 +34,7 @@ RelayScreen::RelayScreen(GuiContainer* owner)
             case WaypointDelete:
                 if (my_spaceship)
                 {
-                    for(int n=0; n<my_spaceship->waypoints.size(); n++)
+                    for(unsigned int n=0; n<my_spaceship->waypoints.size(); n++)
                     {
                         if ((my_spaceship->waypoints[n] - position) < 1000.0f)
                         {

@@ -17,10 +17,10 @@ EpsilonServer::EpsilonServer()
     threat_estimate = new ThreatLevelEstimate();
     threat_estimate->setCallbacks([](){
         LOG(INFO) << "Switching to ambient music";
-        soundManager->playMusicSet({"music/Nebulous_0.ogg", "music/OutThere.ogg", "music/GalacticTemple.ogg", "music/Please, answer me my friend.ogg", "music/spacelifeNo14_0.ogg"});
+        soundManager->playMusicSet(findResources("music/ambient/*.ogg"));
     }, []() {
         LOG(INFO) << "Switching to combat music";
-        soundManager->playMusicSet({"music/Dream Raid Full Version (Mock Up).ogg", "music/Thrust Sequence.ogg", "music/Recall of the Shadows_0.ogg", "music/Imminent Threat.ogg", "music/neocrey - Last Cyber Dance.ogg"});
+        soundManager->playMusicSet(findResources("music/combat/*.ogg"));
     });
     
     //registerOnMasterServer("http://daid.eu/ee/register.php");
