@@ -13,7 +13,7 @@ class UnknownArtemisTagError(Exception):
         super().__init__('%s: %s' % (node.tag, node.attrib))
 
 def convertString(s):
-    return s.replace('\n', '\\n').replace('\'', '\\\'').replace('"', '\\"').strip()
+    return s.replace('\n', '\\n').replace('\'', '\\\'').replace('"', '\\"').replace('^', '\\n').strip()
 
 def convertFloat(f):
     try:
@@ -39,7 +39,7 @@ def convertPosition(x, z):
     return convertFloat('20000-(%s)' % (x)), convertFloat('(%s)-100000' % (z))
 
 def convertName(name):
-    return '%s' % (name.replace(' ', '_').replace('-', '_').replace('*', 'X'))
+    return '%s' % (name.replace(' ', '_').replace('-', '_').replace('*', 'X').replace('.', '__'))
 
 def convertRaceKeys(node, default=None):
     keys = node.get('raceKeys', default)
@@ -110,7 +110,6 @@ class Event:
                 self._body.append('globalMessage("%s");' % (message));
             elif node.tag == 'incoming_comms_text':
                 self._body.append('temp_transmission_object:setCallSign("%s"):sendCommsMessage(getPlayerShip(-1), "%s")' % (convertString(node.get('from')), convertString(node.text)));
-                self._body.append('print("Transmission: %s: %s")' % (convertString(node.get('from')), convertString(node.text)));
             elif node.tag == 'warning_popup_message':
                 self.warning('Ignore', node)
             elif node.tag == 'start_getting_keypresses_from':
