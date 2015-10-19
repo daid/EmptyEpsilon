@@ -107,6 +107,7 @@ PlayerSpaceship::PlayerSpaceship()
     shield_calibration_delay = 0.0;
     auto_repair_enabled = false;
     activate_self_destruct = false;
+    self_destruct_countdown = 0.0;
     scanning_delay = 0.0;
     scanning_complexity = 0;
     scanning_depth = 0;
@@ -136,6 +137,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&waypoints);
     registerMemberReplication(&scan_probe_stock);
     registerMemberReplication(&activate_self_destruct);
+    registerMemberReplication(&self_destruct_countdown, 0.2);
     for(int n=0; n<max_self_destruct_codes; n++)
     {
         self_destruct_code[n] = 0;
@@ -311,24 +313,33 @@ void PlayerSpaceship::update(float delta)
 
         if (activate_self_destruct)
         {
-            bool do_self_destruct = true;
-            for(int n=0; n<max_self_destruct_codes; n++)
-                if (!self_destruct_code_confirmed[n])
-                    do_self_destruct = false;
-            if (do_self_destruct)
+            if (self_destruct_countdown <= 0.0)
             {
-                for(int n=0; n<5; n++)
+                bool do_self_destruct = true;
+                for(int n=0; n<max_self_destruct_codes; n++)
+                    if (!self_destruct_code_confirmed[n])
+                        do_self_destruct = false;
+                if (do_self_destruct)
                 {
-                    ExplosionEffect* e = new ExplosionEffect();
-                    e->setSize(1000.0f);
-                    e->setPosition(getPosition() + sf::rotateVector(sf::Vector2f(0, random(0, 500)), random(0, 360)));
+                    self_destruct_countdown = 10.0f;
                 }
+            }else{
+                self_destruct_countdown -= delta;
+                if (self_destruct_countdown <= 0.0)
+                {
+                    for(int n=0; n<5; n++)
+                    {
+                        ExplosionEffect* e = new ExplosionEffect();
+                        e->setSize(1000.0f);
+                        e->setPosition(getPosition() + sf::rotateVector(sf::Vector2f(0, random(0, 500)), random(0, 360)));
+                    }
 
-                DamageInfo info(this, DT_Kinetic, getPosition());
-                SpaceObject::damageArea(getPosition(), 1500, 100, 200, info, 0.0);
+                    DamageInfo info(this, DT_Kinetic, getPosition());
+                    SpaceObject::damageArea(getPosition(), 1500, 100, 200, info, 0.0);
 
-                destroy();
-                return;
+                    destroy();
+                    return;
+                }
             }
         }
     }else{
@@ -804,7 +815,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         }
         break;
     case CMD_CANCEL_SELF_DESTRUCT:
-        activate_self_destruct = false;
+        if (self_destruct_countdown <= 0.0f)
+        {
+            activate_self_destruct = false;
+        }
         break;
     case CMD_CONFIRM_SELF_DESTRUCT:
         {

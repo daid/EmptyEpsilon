@@ -19,11 +19,19 @@ void GuiSelfDestructIndicator::onDraw(sf::RenderTarget& window)
     {
         box->show();
 
-        int todo = 0;
-        for(int n=0; n<PlayerSpaceship::max_self_destruct_codes; n++)
-            if (!my_spaceship->self_destruct_code_confirmed[n])
-                todo++;
-        label->setText("Waiting for autorization input: " + string(todo) + " left");
+        if (my_spaceship->self_destruct_countdown <= 0.0f)
+        {
+            int todo = 0;
+            for(int n=0; n<PlayerSpaceship::max_self_destruct_codes; n++)
+                if (!my_spaceship->self_destruct_code_confirmed[n])
+                    todo++;
+            label->setText("Waiting for autorization input: " + string(todo) + " left");
+        }else{
+            if (my_spaceship->self_destruct_countdown <= 3.0f)
+                label->setText("Have a nice day.");
+            else
+                label->setText("This ship will self-destruct in exactly 10 seconds.");
+        }
     }else{
         box->hide();
     }
