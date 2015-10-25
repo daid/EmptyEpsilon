@@ -16,7 +16,7 @@ function mainMenu()
 		if not player:isDocked(comms_target) then
 			setCommsMessage("Good day officer,\nIf you need supplies please dock with us first.");
 			addCommsReply("Can you send a supply drop? (100rep)", function()
-                if getWaypointCount() < 1 then
+                if player:getWaypointCount() < 1 then
                     setCommsMessage("You need to set a waypoint before you can request backup.");
                 else
                     setCommsMessage("Where do we need to drop off your supplies?");
@@ -40,7 +40,7 @@ function mainMenu()
 				addCommsReply("Back", mainMenu)
 			end)
 			addCommsReply("Please send backup! (150rep)", function()
-                if getWaypointCount() < 1 then
+                if player:getWaypointCount() < 1 then
                     setCommsMessage("You need to set a waypoint before you can request backup.");
                 else
                     setCommsMessage("Where does the backup needs to go?");

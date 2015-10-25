@@ -75,6 +75,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
 
     (new GuiDockingButton(left_panel, "DOCKING"))->setPosition(20, 20, ATopLeft)->setSize(280, 50);
+    (new GuiShieldsEnableButton(left_panel, "SHIELDS_ENABLE"))->setPosition(300, 20, ATopLeft)->setSize(280, 50);
 
     (new GuiOpenCommsButton(left_panel, "OPEN_COMMS_BUTTON", &targets))->setPosition(-20, 20, ATopRight)->setSize(250, 50);
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
