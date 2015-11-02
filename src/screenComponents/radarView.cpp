@@ -648,5 +648,3 @@ bool GuiRadarView::onJoystickRMove(float position)
         joystick_r_func(position);
     return true;
 }
-    
-    

@@ -4,6 +4,8 @@
 GuiCanvas::GuiCanvas()
 : click_element(nullptr), focus_element(nullptr)
 {
+    previous_joystick_z_position = 0;
+    previous_joystick_r_position = 0;
     enable_debug_rendering = false;
 }
 
