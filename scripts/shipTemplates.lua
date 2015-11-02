@@ -349,3 +349,11 @@ template:setDefaultAI('missilevolley')
 template = ShipTemplate():setName("Ktlitan Queen"):setModel("sci_fi_alien_ship_8")
 template:setHull(350)
 template:setShields(100, 100)
+
+for type=1,5 do
+    for cnt=1,5 do
+        template = ShipTemplate():setName("Transport" .. type .. "x" .. cnt):setModel("transport_" .. type .. "_" .. cnt)
+        template:setHull(100)
+        template:setShields(50, 50)
+    end
+end

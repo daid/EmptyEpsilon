@@ -338,3 +338,16 @@ ModelData():setName("artifact5"):setScale(3):setMesh("Artifact5.obj"):setTexture
 ModelData():setName("artifact6"):setScale(3):setMesh("Artifact6.obj"):setTexture("electric_sphere_texture.png")
 ModelData():setName("artifact7"):setScale(3):setMesh("Artifact7.obj"):setTexture("electric_sphere_texture.png")
 ModelData():setName("artifact8"):setScale(3):setMesh("Artifact8.obj"):setTexture("electric_sphere_texture.png")
+
+for type=1,5 do
+    for cnt=1,5 do
+        model = ModelData():setName("transport_" .. type .. "_" .. cnt)
+        model:setScale(0.5)
+        model:setRadius(100 + cnt * 50)
+        model:setCollisionBox(200 + cnt * 100, 200)
+        model:setMesh("transport_space_ship_" .. type .. "/transport_space_ship_" .. type .. "_cargo_" .. cnt .. ".model")
+        model:setTexture("transport_space_ship_" .. type .. "/transport_space_ship_" .. type .. "_color.png")
+        model:setSpecular("transport_space_ship_" .. type .. "/transport_space_ship_" .. type .. "_specular.png")
+        model:setIllumination("transport_space_ship_" .. type .. "/transport_space_ship_" .. type .. "_illumination.png")
+    end
+end
