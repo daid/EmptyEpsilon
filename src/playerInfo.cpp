@@ -142,6 +142,20 @@ void PlayerInfo::spawnUI()
         for(int n=0; n<max_crew_positions; n++)
             if (crew_position[n])
                 sde->enablePosition(ECrewPosition(n));
+        if (crew_position[tacticalOfficer])
+        {
+            sde->enablePosition(weaponsOfficer);
+            sde->enablePosition(helmsOfficer);
+        }
+        if (crew_position[engineeringAdvanced])
+        {
+            sde->enablePosition(engineering);
+        }
+        if (crew_position[operationsOfficer])
+        {
+            sde->enablePosition(scienceOfficer);
+            sde->enablePosition(relayOfficer);
+        }
 
         if (main_screen_control)
             new GuiMainScreenControls(screen);
