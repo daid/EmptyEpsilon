@@ -8,6 +8,7 @@ class GuiCommsOverlay : public GuiElement
 private:
     GuiBox* opening_box;
     GuiProgressbar* opening_progress;
+    GuiButton* opening_cancel;
     
     GuiBox* hailed_box;
     GuiLabel* hailed_label;

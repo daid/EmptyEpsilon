@@ -660,6 +660,17 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             P<PlayerSpaceship> playerShip = comms_target;
             playerShip->comms_state = CS_Inactive;
         }
+        if (comms_state == CS_OpeningChannel && comms_target)
+        {
+            P<PlayerSpaceship> playerShip = comms_target;
+            if (playerShip)
+            {
+                if (playerShip->comms_state == CS_BeingHailed && playerShip->comms_target == this)
+                {
+                    playerShip->comms_state = CS_Inactive;
+                }
+            }
+        }
         comms_state = CS_Inactive;
         break;
     case CMD_ANSWER_COMM_HAIL:

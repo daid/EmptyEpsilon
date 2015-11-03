@@ -8,7 +8,13 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     opening_box->fill()->hide()->setSize(800, 100)->setPosition(0, -250, ABottomCenter);
     (new GuiLabel(opening_box, "COMMS_OPENING_LABEL", "Opening communications...", 40))->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 0, ATopCenter);
     opening_progress = new GuiProgressbar(opening_box, "COMMS_OPENING_PROGRESS", PlayerSpaceship::comms_channel_open_time, 0.0, 0.0);
-    opening_progress->setSize(700, 40)->setPosition(0, -10, ABottomCenter);
+    opening_progress->setSize(500, 40)->setPosition(50, -10, ABottomLeft);
+    opening_cancel = new GuiButton(opening_box, "COMMS_OPENING_CANCEL", "Cancel", []()
+    {
+        if (my_spaceship)
+            my_spaceship->commandCloseTextComm();
+    });
+    opening_cancel->setSize(200, 40)->setPosition(-50, -10, ABottomRight);
 
     hailed_box = new GuiBox(owner, "COMMS_BEING_HAILED_BOX");
     hailed_box->fill()->hide()->setSize(800, 140)->setPosition(0, -250, ABottomCenter);
