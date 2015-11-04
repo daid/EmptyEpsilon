@@ -68,7 +68,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     crew_type_selector = new GuiSelector(this, "CREW_TYPE_SELECTION", [this](int index, string value) {
         updateCrewTypeOptions();
     });
-    crew_type_selector->setOptions({"6/5 player crew", "4/3 player crew", "1 player crew", "Alternative options"})->setPosition(-50, 560, ATopRight)->setSize(460, 50);
+    crew_type_selector->setOptions({"6/5 player crew", "4/3 player crew", "1 player crew/extras", "Alternative options"})->setPosition(-50, 560, ATopRight)->setSize(460, 50);
     
     (new GuiLabel(this, "SHIP_SELECTION_LABEL", "Select ship:", 30))->addBox()->setPosition(50, 50, ATopLeft)->setSize(550, 50);
     no_ships_label = new GuiLabel(this, "SHIP_SELECTION_NO_SHIPS_LABEL", "Waiting for server to spawn a ship", 30);
@@ -209,6 +209,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
         break;
     case 2:
         crew_position_button[singlePilot]->show();
+        crew_position_button[damageControl]->show();
         break;
     case 3:
         main_screen_button->hide();

@@ -144,6 +144,7 @@ void GuiShipRoom::onDraw(sf::RenderTarget& window)
             break;
         }
         sprite.setPosition(getCenterPoint());
+        sprite.setScale(room_size / 48.0f, room_size / 48.0f);
         window.draw(sprite);
     }
 }
@@ -237,6 +238,7 @@ void GuiShipCrew::onDraw(sf::RenderTarget& window)
         sf::Sprite select_sprite;
         textureManager.setTexture(select_sprite, "redicule.png");
         select_sprite.setPosition(getCenterPoint());
+        select_sprite.setScale(f, f);
         window.draw(select_sprite);
     }
 }
