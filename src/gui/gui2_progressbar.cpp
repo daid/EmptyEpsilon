@@ -10,10 +10,20 @@ void GuiProgressbar::onDraw(sf::RenderTarget& window)
     float f = (value - min) / (max - min);
 
     if (color != border_color)
-        draw9Cut(window, rect, "button_background", color, f);
+    {
+        if (rect.width >= rect.height)
+            draw9Cut(window, rect, "button_background", color, f);
+        else
+            draw9CutV(window, rect, "button_background", color, f);
+    }
     draw9Cut(window, rect, "border_background", border_color);
     if (color == border_color)
-        draw9Cut(window, rect, "button_background", color, f);
+    {
+        if (rect.width >= rect.height)
+            draw9Cut(window, rect, "button_background", color, f);
+        else
+            draw9CutV(window, rect, "button_background", color, f);
+    }
 }
 
 GuiProgressbar* GuiProgressbar::setValue(float value)

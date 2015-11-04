@@ -396,6 +396,107 @@ void GuiElement::draw9Cut(sf::RenderTarget& window, sf::FloatRect rect, string t
     }
 }
 
+void GuiElement::draw9CutV(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color, float height_factor)
+{
+    sf::Sprite sprite;
+    textureManager.setTexture(sprite, texture);
+    sf::IntRect textureSize = sprite.getTextureRect();
+    int cornerSizeT = textureSize.height / 3;
+    float cornerSizeR = cornerSizeT;
+    float scale = 1.0;
+    if (cornerSizeT > rect.height / 2)
+    {
+        scale = float(rect.height / 2) / cornerSizeR;
+        sprite.setScale(scale, scale);
+        cornerSizeR *= scale;
+    }else if (cornerSizeT > rect.width / 2)
+    {
+        scale = float(rect.width / 2) / cornerSizeR;
+        sprite.setScale(scale, scale);
+        cornerSizeR *= scale;
+    }
+
+    sprite.setColor(color);
+    sprite.setOrigin(0, 0);
+
+    float h = 1.0;
+    if (cornerSizeR > rect.height * height_factor)
+        h = rect.height * height_factor / cornerSizeR;
+
+    //BottomLeft
+    sprite.setPosition(rect.left, rect.top + rect.height - cornerSizeR * h);
+    sprite.setTextureRect(sf::IntRect(0, textureSize.height - cornerSizeT * h, cornerSizeT, cornerSizeT * h));
+    window.draw(sprite);
+    //BottomRight
+    sprite.setPosition(rect.left + rect.width - cornerSizeR, rect.top + rect.height - cornerSizeR * h);
+    sprite.setTextureRect(sf::IntRect(textureSize.width - cornerSizeT, textureSize.height - cornerSizeT * h, cornerSizeT, cornerSizeT * h));
+    window.draw(sprite);
+    
+    if (rect.width > cornerSizeR * 2)
+    {
+        //Bottom
+        sprite.setPosition(rect.left + cornerSizeR, rect.top + rect.height - cornerSizeR * h);
+        sprite.setTextureRect(sf::IntRect(cornerSizeT, textureSize.height - cornerSizeT * h, textureSize.width - cornerSizeT * 2, cornerSizeT * h));
+        sprite.setScale((rect.width - cornerSizeR*2) / float(textureSize.width - cornerSizeT * 2), scale);
+        window.draw(sprite);
+        sprite.setScale(scale, scale);
+    }
+    
+    if (h < 1.0)
+        return;
+
+    if (rect.height - cornerSizeR > rect.height * height_factor)
+        h = (height_factor - cornerSizeR / rect.height) * (rect.height / (rect.height - cornerSizeR * 2));
+
+    if (rect.height > cornerSizeR * 2)
+    {
+        //left
+        sprite.setPosition(rect.left, rect.top + cornerSizeR + (rect.height - cornerSizeR * 2) * (1.0f - h));
+        sprite.setTextureRect(sf::IntRect(0, cornerSizeT, cornerSizeT, 1));
+        sprite.setScale(scale, (rect.height - cornerSizeR*2) * h);
+        window.draw(sprite);
+        sprite.setScale(scale, scale);
+        //Right
+        sprite.setPosition(rect.left + rect.width - cornerSizeR, rect.top + cornerSizeR + (rect.height - cornerSizeR * 2) * (1.0f - h));
+        sprite.setTextureRect(sf::IntRect(textureSize.width - cornerSizeT, cornerSizeT, cornerSizeT, 1));
+        sprite.setScale(scale, (rect.height - cornerSizeR*2) * h);
+        window.draw(sprite);
+    }
+
+    if (rect.width > cornerSizeR * 2 && rect.height > cornerSizeR * 2)
+    {
+        //Center
+        sprite.setPosition(rect.left + cornerSizeR, rect.top + cornerSizeR + (rect.height - cornerSizeR * 2) * (1.0f - h));
+        sprite.setTextureRect(sf::IntRect(cornerSizeT, cornerSizeT, 1, 1));
+        sprite.setScale(rect.width - cornerSizeR*2, (rect.height - cornerSizeR*2) * h);
+        window.draw(sprite);
+        sprite.setScale(scale, scale);
+    }
+    
+    if (h < 1.0)
+        return;
+    if (height_factor < 1.0)
+        h = (height_factor - (rect.height - cornerSizeR) / rect.height) * (rect.height / cornerSizeR);
+
+    //TopLeft
+    sprite.setPosition(rect.left, rect.top + cornerSizeR * (1.0 - h));
+    sprite.setTextureRect(sf::IntRect(0, cornerSizeT * (1.0 - h), cornerSizeT, cornerSizeT * h));
+    window.draw(sprite);
+    //TopRight
+    sprite.setPosition(rect.left + rect.width - cornerSizeR, rect.top + cornerSizeR * (1.0 - h));
+    sprite.setTextureRect(sf::IntRect(textureSize.width - cornerSizeT, cornerSizeT * (1.0 - h), cornerSizeT, cornerSizeT * h));
+    window.draw(sprite);
+
+    if (rect.height > cornerSizeR * 2)
+    {
+        //Top
+        sprite.setPosition(rect.left + cornerSizeR, rect.top + cornerSizeR * (1.0 - h));
+        sprite.setTextureRect(sf::IntRect(cornerSizeT, cornerSizeT * (1.0 - h), 1, cornerSizeT * h));
+        sprite.setScale(rect.width - cornerSizeR*2, scale);
+        window.draw(sprite);
+    }
+}
+
 void GuiElement::drawArrow(sf::RenderTarget& window, sf::FloatRect rect, sf::Color color, float rotation)
 {
     sf::Sprite arrow;
