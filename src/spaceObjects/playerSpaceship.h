@@ -21,6 +21,7 @@ enum ECrewPosition
     singlePilot,
     //extras
     damageControl,
+    powerManagement,
     
     max_crew_positions
 };
