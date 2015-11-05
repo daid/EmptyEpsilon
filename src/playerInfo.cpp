@@ -16,6 +16,7 @@
 
 #include "screens/extra/damcon.h"
 #include "screens/extra/powerManagement.h"
+#include "screens/extra/databaseScreen.h"
 
 #include "screenComponents/mainScreenControls.h"
 #include "screenComponents/selfDestructEntry.h"
@@ -145,6 +146,8 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new DamageControlScreen(screen), getCrewPositionName(damageControl));
         if (crew_position[powerManagement])
             screen->addStationTab(new PowerManagementScreen(screen), getCrewPositionName(powerManagement));
+        if (crew_position[databaseView])
+            screen->addStationTab(new DatabaseScreen(screen), getCrewPositionName(databaseView));
         
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(screen, "SELF_DESTRUCT_ENTRY");
         for(int n=0; n<max_crew_positions; n++)
@@ -187,6 +190,7 @@ string getCrewPositionName(ECrewPosition position)
     case singlePilot: return "Single Pilot";
     case damageControl: return "Damage Control";
     case powerManagement: return "Power Management";
+    case databaseView: return "Database";
     default: return "ErrUnk: " + string(position);
     }
 }

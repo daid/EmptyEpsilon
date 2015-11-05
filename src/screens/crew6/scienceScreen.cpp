@@ -1,20 +1,17 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "scienceScreen.h"
-#include "scienceDatabase.h"
 #include "spaceObjects/nebula.h"
 
 #include "screenComponents/radarView.h"
 #include "screenComponents/scanTargetButton.h"
 #include "screenComponents/frequencyCurve.h"
-#include "screenComponents/rotatingModelView.h"
 #include "screenComponents/scanningDialog.h"
+#include "screenComponents/databaseView.h"
 
 ScienceScreen::ScienceScreen(GuiContainer* owner)
 : GuiOverlay(owner, "SCIENCE_SCREEN", sf::Color::Black)
 {
-    database_entry = nullptr;
-    
     radar_view = new GuiElement(this, "RADAR_VIEW");
     radar_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
@@ -71,52 +68,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     info_description = new GuiScrollText(sidebar, "SCIENCE_DESC", "");
     info_description->setTextSize(20)->hide()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     
-    database_view = new GuiElement(this, "DATABASE_VIEW");
+    database_view = new DatabaseViewComponent(this);
     database_view->hide()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
-    item_list = new GuiListbox(database_view, "DATABASE_ITEM_LIST", [this](int index, string value) {
-        if (database_entry)
-            delete database_entry;
-        
-        database_entry = new GuiElement(database_view, "DATABASE_ENTRY");
-        database_entry->setPosition(500, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-        
-        GuiAutoLayout* layout = new GuiAutoLayout(database_entry, "DATABASE_ENTRY_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-        layout->setPosition(0, 0, ATopLeft)->setSize(400, GuiElement::GuiSizeMax);
-        
-        P<ScienceDatabaseEntry> entry = ScienceDatabase::scienceDatabaseList[category_list->getSelectionIndex()]->items[index];
-        for(unsigned int n=0; n<entry->keyValuePairs.size(); n++)
-        {
-            (new GuiKeyValueDisplay(layout, "DATABASE_ENTRY_" + string(n), 0.7, entry->keyValuePairs[n].key, entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
-        }
-        if (entry->longDescription.length() > 0)
-        {
-            (new GuiScrollText(layout, "DATABASE_LONG_DESCRIPTION", entry->longDescription))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-        }
-        if (entry->model_template)
-        {
-            (new GuiRotatingModelView(database_entry, "DATABASE_MODEL_VIEW", entry->model_template->model_data))->setPosition(400, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMatchWidth);
-        }
-    });
-    category_list = new GuiListbox(database_view, "DATABASE_CAT_LIST", [this](int index, string value) {
-        item_list->setOptions({});
-        foreach(ScienceDatabaseEntry, entry, ScienceDatabase::scienceDatabaseList[index]->items)
-        {
-            item_list->addEntry(entry->name, entry->name);
-        }
-        item_list->setSelectionIndex(-1);
-
-        if (database_entry)
-            delete database_entry;
-        database_entry = nullptr;
-    });
-    category_list->setPosition(20, 50, ATopLeft)->setSize(200, GuiElement::GuiSizeMax);
-    item_list->setPosition(240, 50, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
-    foreach(ScienceDatabase, sd, ScienceDatabase::scienceDatabaseList)
-    {
-        category_list->addEntry(sd->getName(), sd->getName());
-    }
-
     
     (new GuiListbox(this, "VIEW_SELECTION", [this](int index, string value) {
         radar_view->setVisible(index == 0);

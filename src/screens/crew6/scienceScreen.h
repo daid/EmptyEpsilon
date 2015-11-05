@@ -28,10 +28,6 @@ protected:
     GuiFrequencyCurve* info_shield_frequency;
     GuiFrequencyCurve* info_beam_frequency;
     GuiKeyValueDisplay* info_system[SYS_COUNT];
-    
-    GuiListbox* item_list;
-    GuiListbox* category_list;
-    GuiElement* database_entry;
 public:
     ScienceScreen(GuiContainer* owner);
     
