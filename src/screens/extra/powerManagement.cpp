@@ -20,21 +20,22 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
         systems[n].box = box;
         box->setSize(290, 400);
         
-        (new GuiLabel(box, "", "Power", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(20, 20, ATopLeft)->setSize(30, 360);
-        (new GuiLabel(box, "", "Coolant", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(100, 20, ATopLeft)->setSize(30, 360);
-        (new GuiLabel(box, "", "Heat", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(180, 20, ATopLeft)->setSize(30, 360);
+        (new GuiLabel(box, "", getSystemName(ESystem(n)), 30))->addBox()->setAlignment(ACenter)->setPosition(0, 0, ATopLeft)->setSize(290, 50);
+        (new GuiLabel(box, "", "Power", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(20, 50, ATopLeft)->setSize(30, 340);
+        (new GuiLabel(box, "", "Coolant", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(100, 50, ATopLeft)->setSize(30, 340);
+        (new GuiLabel(box, "", "Heat", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(180, 50, ATopLeft)->setSize(30, 340);
         systems[n].power_slider = new GuiSlider(box, "", 3.0, 0.0, 1.0, [n](float value) {
             if (my_spaceship)
                 my_spaceship->commandSetSystemPower(ESystem(n), value);
         });
-        systems[n].power_slider->setSnapValue(1.0, 0.1)->setPosition(50, 20, ATopLeft)->setSize(55, 360);
+        systems[n].power_slider->setSnapValue(1.0, 0.1)->setPosition(50, 50, ATopLeft)->setSize(55, 340);
         systems[n].coolant_slider = new GuiSlider(box, "", 10.0, 0.0, 0.0, [n](float value) {
             if (my_spaceship)
                 my_spaceship->commandSetSystemCoolant(ESystem(n), value);
         });
-        systems[n].coolant_slider->setPosition(130, 20, ATopLeft)->setSize(55, 360);
+        systems[n].coolant_slider->setPosition(130, 50, ATopLeft)->setSize(55, 340);
         systems[n].heat_bar = new GuiProgressbar(box, "", 0.0, 1.0, 0.0);
-        systems[n].heat_bar->setPosition(210, 20, ATopLeft)->setSize(50, 360);
+        systems[n].heat_bar->setPosition(210, 50, ATopLeft)->setSize(50, 340);
     }
 }
 

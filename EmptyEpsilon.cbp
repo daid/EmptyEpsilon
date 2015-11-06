@@ -564,6 +564,8 @@
 		<Unit filename="src/screenComponents/combatManeuver.h" />
 		<Unit filename="src/screenComponents/commsOverlay.cpp" />
 		<Unit filename="src/screenComponents/commsOverlay.h" />
+		<Unit filename="src/screenComponents/databaseView.cpp" />
+		<Unit filename="src/screenComponents/databaseView.h" />
 		<Unit filename="src/screenComponents/dockingButton.cpp" />
 		<Unit filename="src/screenComponents/dockingButton.h" />
 		<Unit filename="src/screenComponents/frequencyCurve.cpp" />
@@ -640,6 +642,12 @@
 		<Unit filename="src/screens/crew6/weaponsScreen.h" />
 		<Unit filename="src/screens/crewStationScreen.cpp" />
 		<Unit filename="src/screens/crewStationScreen.h" />
+		<Unit filename="src/screens/extra/damcon.cpp" />
+		<Unit filename="src/screens/extra/damcon.h" />
+		<Unit filename="src/screens/extra/databaseScreen.cpp" />
+		<Unit filename="src/screens/extra/databaseScreen.h" />
+		<Unit filename="src/screens/extra/powerManagement.cpp" />
+		<Unit filename="src/screens/extra/powerManagement.h" />
 		<Unit filename="src/screens/gameMasterScreen.cpp" />
 		<Unit filename="src/screens/gameMasterScreen.h" />
 		<Unit filename="src/screens/mainScreen.cpp" />
