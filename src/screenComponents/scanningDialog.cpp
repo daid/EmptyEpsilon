@@ -4,6 +4,10 @@
 GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
+    locked = false;
+    lock_start_time = 0;
+    scan_depth = 0;
+
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     
     box = new GuiBox(this, id + "_BOX");
@@ -73,6 +77,9 @@ void GuiScanningDialog::onDraw(sf::RenderTarget& window)
 
 void GuiScanningDialog::setupParameters()
 {
+    if (!my_spaceship)
+        return;
+    
     for(int n=0; n<max_sliders; n++)
     {
         if (n < my_spaceship->scanning_complexity)
