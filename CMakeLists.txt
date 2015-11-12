@@ -1,6 +1,8 @@
 project(EmptyEpsilon)
 cmake_minimum_required(VERSION 2.8.12)
 
+option(ENABLE_CRASH_LOGGER "Enable the drmingw crash logging facilities" OFF)
+
 string(TIMESTAMP CPACK_PACKAGE_VERSION_MAJOR "%Y")
 string(TIMESTAMP CPACK_PACKAGE_VERSION_MINOR "%m")
 string(TIMESTAMP CPACK_PACKAGE_VERSION_PATCH "%d")
@@ -32,7 +34,9 @@ foreach(SP_SOURCE src/soundManager.cpp src/clipboard.cpp src/postProcessManager.
   list(APPEND SOURCES ${SERIOUS_PROTON_DIR}${SP_SOURCE})
 endforeach()
 add_definitions(-DVERSION_NUMBER=${CPACK_PACKAGE_VERSION_MAJOR}${CPACK_PACKAGE_VERSION_MINOR}${CPACK_PACKAGE_VERSION_PATCH})
-add_definitions(-DINSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}")
+if(ENABLE_CRASH_LOGGER)
+  add_definitions(-DENABLE_CRASH_LOGGER)
+endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework OpenGL -framework Foundation")
@@ -54,8 +58,12 @@ target_link_libraries(${EXECUTABLE_NAME} ${OPENGL_LIBRARIES})
 
 if(WIN32)
   target_link_libraries(${EXECUTABLE_NAME} wsock32 iphlpapi)
+  if(ENABLE_CRASH_LOGGER)
+    link_directories(${DRMINGW_ROOT}/lib/)
+    include_directories(${DRMINGW_ROOT}/include/)
+    target_link_libraries(${EXECUTABLE_NAME} exchndl)
+  endif()
 endif()
-
 
 include(InstallRequiredSystemLibraries)
 
@@ -69,6 +77,13 @@ if(WIN32)
   install(FILES ${SFML_ROOT}/bin/sfml-network-2.dll DESTINATION .)
   install(FILES ${SFML_ROOT}/bin/sfml-system-2.dll DESTINATION .)
   install(FILES ${SFML_ROOT}/bin/sfml-window-2.dll DESTINATION .)
+  if(ENABLE_CRASH_LOGGER)
+    install(FILES ${DRMINGW_ROOT}/bin/dbghelp.dll DESTINATION .)
+    install(FILES ${DRMINGW_ROOT}/bin/exchndl.dll DESTINATION .)
+    install(FILES ${DRMINGW_ROOT}/bin/mgwhelp.dll DESTINATION .)
+    install(FILES ${DRMINGW_ROOT}/bin/symsrv.dll DESTINATION .)
+    install(FILES ${DRMINGW_ROOT}/bin/symsrv.yes DESTINATION .)
+  endif()
 
   install(DIRECTORY resources DESTINATION .)
   install(DIRECTORY scripts DESTINATION .)
