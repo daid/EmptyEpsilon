@@ -166,6 +166,7 @@
 		<Compiler>
 			<Add option="-std=c++11" />
 			<Add option="-Wall" />
+			<Add option="-DENABLE_CRASH_LOGGER" />
 			<Add directory="../SeriousProton/src" />
 			<Add directory="src" />
 		</Compiler>

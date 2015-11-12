@@ -151,7 +151,7 @@ template:addDoor(5, 2, false);
 template = ShipTemplate():setName("Tug"):setModel("space_tug")
 template:setHull(50)
 template:setShields(20, 20)
-template:setSpeed(90, 6, 10)
+template:setSpeed(100, 10, 15)
 template:setWeaponStorage("Homing", 5)
 template:setWeaponStorage("Nuke", 1)
 template:setWeaponStorage("Mine", 3)
@@ -355,5 +355,6 @@ for type=1,5 do
         template = ShipTemplate():setName("Transport" .. type .. "x" .. cnt):setModel("transport_" .. type .. "_" .. cnt)
         template:setHull(100)
         template:setShields(50, 50)
+        template:setSpeed(60 - 5 * cnt, 6, 10)
     end
 end
