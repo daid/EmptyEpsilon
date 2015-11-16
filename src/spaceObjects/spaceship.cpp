@@ -921,7 +921,7 @@ float SpaceShip::getSystemEffectiveness(ESystem system)
     float power = systems[system].power_level;
     if (energy_level < 10.0)
         power = std::max(0.1f, power);
-    if (gameGlobalInfo->use_system_damage)
+    if (gameGlobalInfo && gameGlobalInfo->use_system_damage)
         return std::max(0.0f, power * systems[system].health);
     return std::max(0.0f, power * (1.0f - systems[system].heat_level));
 }
