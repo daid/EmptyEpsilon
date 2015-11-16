@@ -1,4 +1,6 @@
 #include "crewStationScreen.h"
+#include "epsilonServer.h"
+#include "main.h"
 #include "menus/shipSelectionScreen.h"
 
 #include "screenComponents/indicatorOverlays.h"
@@ -49,6 +51,17 @@ void CrewStationScreen::finishCreation()
     new GuiShipDestroyedPopup(this);
     if (tabs.size() < 2)
         button_strip->hide();
+}
+
+void CrewStationScreen::update(float delta)
+{
+    if (game_client && game_client->getStatus() == GameClient::Disconnected)
+    {
+        destroy();
+        disconnectFromServer();
+        returnToMainMenu();
+        return;
+    }
 }
 
 void CrewStationScreen::onKey(sf::Keyboard::Key key, int unicode)

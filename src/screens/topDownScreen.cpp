@@ -1,6 +1,7 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "topDownScreen.h"
+#include "epsilonServer.h"
 #include "main.h"
 #include "menus/shipSelectionScreen.h"
 
@@ -17,6 +18,14 @@ TopDownScreen::TopDownScreen()
 
 void TopDownScreen::update(float delta)
 {
+    if (game_client && game_client->getStatus() == GameClient::Disconnected)
+    {
+        destroy();
+        disconnectFromServer();
+        returnToMainMenu();
+        return;
+    }
+
     camera_yaw = -90.0f;
     camera_pitch = 90.0f;
 

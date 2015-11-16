@@ -2,6 +2,7 @@
 #include "gameGlobalInfo.h"
 #include "mainScreen.h"
 #include "main.h"
+#include "epsilonServer.h"
 #include "menus/shipSelectionScreen.h"
 
 #include "screenComponents/indicatorOverlays.h"
@@ -37,16 +38,13 @@ ScreenMainScreen::ScreenMainScreen()
 
 void ScreenMainScreen::update(float delta)
 {
-    /*
-    TODO
-    if (game_client && !game_client->isConnected())
+    if (game_client && game_client->getStatus() == GameClient::Disconnected)
     {
         destroy();
         disconnectFromServer();
         returnToMainMenu();
         return;
     }
-    */
 
     if (my_spaceship)
     {

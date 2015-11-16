@@ -5,7 +5,7 @@
 #include "gui/gui2.h"
 #include "screenComponents/viewport3d.h"
 
-class CrewStationScreen : public GuiCanvas
+class CrewStationScreen : public GuiCanvas, public Updatable
 {
 private:
     GuiAutoLayout* button_strip;
@@ -20,6 +20,7 @@ public:
     void addStationTab(GuiElement* element, string name);
     void finishCreation();
     
+    virtual void update(float delta);
     virtual void onKey(sf::Keyboard::Key key, int unicode);
 };
 

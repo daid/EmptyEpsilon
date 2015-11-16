@@ -1,6 +1,7 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "windowScreen.h"
+#include "epsilonServer.h"
 #include "main.h"
 #include "menus/shipSelectionScreen.h"
 
@@ -21,6 +22,14 @@ WindowScreen::WindowScreen(float angle)
 
 void WindowScreen::update(float delta)
 {
+    if (game_client && game_client->getStatus() == GameClient::Disconnected)
+    {
+        destroy();
+        disconnectFromServer();
+        returnToMainMenu();
+        return;
+    }
+
     if (my_spaceship)
     {
         camera_yaw = my_spaceship->getRotation() + angle;
