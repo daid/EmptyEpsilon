@@ -131,13 +131,13 @@ ServerCreationScreen::ServerCreationScreen()
     }
     scenario_list->setSelectionIndex(0);
     selected_scenario_filename = scenario_list->getSelectionValue();
+
+    gameGlobalInfo->reset();
 }
 
 void ServerCreationScreen::startScenario()
 {
-    P<ScriptObject> script = new ScriptObject();
-    script->run(selected_scenario_filename);
-    engine->registerObject("scenario", script);
+    gameGlobalInfo->startScenario(selected_scenario_filename);
 
     destroy();
     new ShipSelectionScreen();

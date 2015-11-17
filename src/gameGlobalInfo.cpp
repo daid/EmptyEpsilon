@@ -121,12 +121,37 @@ void GameGlobalInfo::addScript(P<Script> script)
     script_list.push_back(script);
 }
 
-void GameGlobalInfo::destroy()
+void GameGlobalInfo::reset()
 {
+    foreach(GameEntity, e, entityList)
+        e->destroy();
+    foreach(SpaceObject, o, space_object_list)
+        o->destroy();
+    if (engine->getObject("scenario"))
+        engine->getObject("scenario")->destroy();
+
     foreach(Script, s, script_list)
     {
         s->destroy();
     }
+    for(unsigned int n=0; n<reputation_points.size(); n++)
+        reputation_points[n] = 0;
+    callsign_counter = 0;
+    victory_faction = -1;
+}
+
+void GameGlobalInfo::startScenario(string filename)
+{
+    reset();
+    
+    P<ScriptObject> script = new ScriptObject();
+    script->run(filename);
+    engine->registerObject("scenario", script);
+}
+
+void GameGlobalInfo::destroy()
+{
+    reset();
     MultiplayerObject::destroy();
 }
 

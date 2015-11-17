@@ -85,6 +85,9 @@ public:
     int getVictoryFactionId() { return victory_faction; }
 
     void addScript(P<Script> script);
+    //Reset the global game state (called when we want to load a new scenario, and clear out this one)
+    void reset();
+    void startScenario(string filename);
 
     virtual void update(float delta);
     virtual void destroy();

@@ -8,6 +8,7 @@
 #include "menus/autoConnectScreen.h"
 #include "mouseCalibrator.h"
 #include "factionInfo.h"
+#include "gameGlobalInfo.h"
 #include "spaceObjects/spaceObject.h"
 #include "packResourceProvider.h"
 #include "scienceDatabase.h"
@@ -259,10 +260,7 @@ void returnToMainMenu()
     if (PreferencesManager::get("headless") != "")
     {
         new EpsilonServer();
-        
-        P<ScriptObject> script = new ScriptObject();
-        script->run(PreferencesManager::get("headless"));
-        engine->registerObject("scenario", script);
+        gameGlobalInfo->startScenario(PreferencesManager::get("headless"));
         engine->setGameSpeed(1.0);
     }
     else if (PreferencesManager::get("autoconnect").toInt())

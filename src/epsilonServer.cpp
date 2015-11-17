@@ -60,12 +60,6 @@ void disconnectFromServer()
         gameGlobalInfo->destroy();
     foreach(PlayerInfo, i, player_info_list)
         i->destroy();
-    foreach(GameEntity, e, entityList)
-        e->destroy();
-    foreach(SpaceObject, o, space_object_list)
-        o->destroy();
     if (my_player_info)
         my_player_info->destroy();
-    if (engine->getObject("scenario"))
-        engine->getObject("scenario")->destroy();
 }
