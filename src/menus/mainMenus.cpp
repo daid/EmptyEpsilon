@@ -19,8 +19,11 @@ MainMenu::MainMenu()
     
     (new GuiButton(this, "START_SERVER", "Start server", [this]() {
         new EpsilonServer();
-        new ServerCreationScreen();
-        destroy();
+        if (game_server)
+        {
+            new ServerCreationScreen();
+            destroy();
+        }
     }))->setPosition(sf::Vector2f(50, -230), ABottomLeft)->setSize(300, 50);
 
     (new GuiButton(this, "START_CLIENT", "Start client", [this]() {
