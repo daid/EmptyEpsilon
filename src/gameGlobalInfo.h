@@ -3,6 +3,7 @@
 
 #include "spaceObjects/playerSpaceship.h"
 #include "script.h"
+#include "GMScriptCallback.h"
 
 class GameGlobalInfo;
 extern P<GameGlobalInfo> gameGlobalInfo;
@@ -65,6 +66,9 @@ public:
     bool use_system_damage;
     bool allow_main_screen_tactical_radar;
     bool allow_main_screen_long_range_radar;
+
+    //List of script functions that can be called from the GM interface
+    std::list<GMScriptCallback> gm_callback_functions;
 
     GameGlobalInfo();
 

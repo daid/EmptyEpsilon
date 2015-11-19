@@ -28,6 +28,7 @@ private:
     
     GuiAutoLayout* info_layout;
     std::vector<GuiKeyValueDisplay*> info_items;
+    GuiListbox* gm_script_options;
     GuiAutoLayout* order_layout;
     GuiButton* player_comms_hail;
     GuiButton* ship_retrofit_button;

@@ -84,6 +84,22 @@ GameMasterScreen::GameMasterScreen()
     info_layout = new GuiAutoLayout(this, "INFO_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     info_layout->setPosition(-20, 20, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
     
+    gm_script_options = new GuiListbox(this, "GM_SCRIPT_OPTIONS", [](int index, string value)
+    {
+        int n = 0;
+        for(GMScriptCallback& callback : gameGlobalInfo->gm_callback_functions)
+        {
+            if (n == index)
+                callback();
+            n++;
+        }
+    });
+    gm_script_options->setPosition(20, 130, ATopLeft)->setSize(250, 500);
+    for(GMScriptCallback& callback : gameGlobalInfo->gm_callback_functions)
+    {
+        gm_script_options->addEntry(callback.name, callback.name);
+    }
+    
     order_layout = new GuiAutoLayout(this, "ORDER_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     order_layout->setPosition(20, 130, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
 

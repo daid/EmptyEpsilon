@@ -439,6 +439,8 @@
 		<Unit filename="../SeriousProton/src/vectorUtils.h" />
 		<Unit filename="../SeriousProton/src/windowManager.cpp" />
 		<Unit filename="../SeriousProton/src/windowManager.h" />
+		<Unit filename="src/GMScriptCallback.cpp" />
+		<Unit filename="src/GMScriptCallback.h" />
 		<Unit filename="src/ai/ai.cpp" />
 		<Unit filename="src/ai/ai.h" />
 		<Unit filename="src/ai/aiFactory.cpp" />
