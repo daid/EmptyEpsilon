@@ -16,40 +16,103 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
 
 void GuiRadarView::onDraw(sf::RenderTarget& window)
 {
+    //We need 3 textures:
+    // * background
+    // * forground
+    // * mask
+    // Depending on what type of radar we are rendering we can use the mask to mask out the forground and/or background textures before rendering them
+    // to the screen.
+
+    //New rendering method. Render to texture first, so we do not need the stencil buffer, as this causes issues with the post processing effects.
+    // Render background to screen
+    // Render sectors to screen
+    // Render range indicators to screen
+    // Clear texture with 0% alpha
+    // Render objects to texture
+    // Render fog to texture with 0% alpha
+    //      make fog result transparent, clearing anything that is in the fog.
+    //      We can use different blendmodes to get the effect we want, as we can mask out alphas with that.
+    // Render objects that are not effected by fog to texture
+    // Render texture to screen
+
+    //Hacky, when not relay and we have a ship, center on it.
     if (fog_style != FriendlysShortRangeFogOfWar && my_spaceship)
         view_position = my_spaceship->getPosition();
-    
-    drawBackground(window);
-    drawSectorGrid(window);
+
+    //Setup our textures for rendering
+    adjustRenderTexture(background_texture);
+    adjustRenderTexture(forground_texture);
+    adjustRenderTexture(mask_texture);
+
+    ///Draw the mask texture, which will be black vs white for masking.
+    // White areas will be visible, black areas will be masked away.
     if (fog_style == NebulaFogOfWar)
-        drawNebulaBlockedAreas(window);
-    drawRangeIndicators(window);
+        drawNebulaBlockedAreas(mask_texture);
+    if (fog_style == FriendlysShortRangeFogOfWar)
+        drawNoneFriendlyBlockedAreas(mask_texture);
+
+    ///Draw the background texture
+    drawBackground(background_texture);
+    if (fog_style == NebulaFogOfWar || fog_style == FriendlysShortRangeFogOfWar)    //Mask the background color with the nebula blocked areas, but show the rest.
+        drawRenderTexture(mask_texture, background_texture, sf::Color::White, sf::BlendMultiply);
+    drawSectorGrid(background_texture);
+    drawRangeIndicators(background_texture);
     if (show_target_projection)
-        drawTargetProjections(window);
+        drawTargetProjections(background_texture);
+    
+    ///Start drawing of forground
+    forground_texture.clear(sf::Color::Transparent);
+    //Draw things that are masked out by fog-of-war
     if (show_ghost_dots)
     {
         updateGhostDots();
-        drawGhostDots(window);
+        drawGhostDots(forground_texture);
     }
-    if (show_waypoints)
-        drawWaypoints(window);
-    drawObjects(window);
+    drawObjects(forground_texture, background_texture);
     if (show_game_master_data)
-        drawObjectsGM(window);
-    if (show_heading_indicators)
-        drawHeadingIndicators(window);
-    drawTargets(window);
-    switch(style)
+        drawObjectsGM(forground_texture);
+    
+    //Draw the mask on the drawn objects
+    if (fog_style == NebulaFogOfWar || fog_style == FriendlysShortRangeFogOfWar)
     {
-    case Rectangular:
-        break;
-    case Circular:
-        drawRadarCutoff(window);
-        break;
-    case CircularMasked:
-        break;
+        drawRenderTexture(mask_texture, forground_texture, sf::Color::White, sf::BlendMode(
+            sf::BlendMode::Zero, sf::BlendMode::SrcColor, sf::BlendMode::Add,
+            sf::BlendMode::Zero, sf::BlendMode::SrcColor, sf::BlendMode::Add
+        ));
     }
-    glDisable(GL_STENCIL_TEST);
+    //Post masking
+    if (show_waypoints)
+        drawWaypoints(forground_texture);
+    if (show_heading_indicators)
+        drawHeadingIndicators(forground_texture);
+    drawTargets(forground_texture);
+    
+    if (style == CircularMasked)
+    {
+        //When we have a circular masked radar, use the mask_texture to clear out everything that is not part of the circle.
+        mask_texture.clear(sf::Color(0, 0, 0, 0));
+        float r = std::min(rect.width, rect.height) / 2.0f - 2.0f;
+        sf::CircleShape circle(r, 50);
+        circle.setOrigin(r, r);
+        circle.setPosition(getCenterPoint());
+        circle.setFillColor(sf::Color::Black);
+        circle.setOutlineColor(sf::Color(64, 64, 64));
+        circle.setOutlineThickness(2.0);
+        mask_texture.draw(circle);
+        
+        sf::BlendMode blend_mode(
+            sf::BlendMode::One, sf::BlendMode::SrcAlpha, sf::BlendMode::Add,
+            sf::BlendMode::Zero, sf::BlendMode::SrcAlpha, sf::BlendMode::Add
+        );
+        drawRenderTexture(mask_texture, background_texture, sf::Color::White, blend_mode);
+        drawRenderTexture(mask_texture, forground_texture, sf::Color::White, blend_mode);
+    }
+    
+    //Render the final radar
+    drawRenderTexture(background_texture, window);
+    drawRenderTexture(forground_texture, window);
+    if (style == Circular)
+        drawRadarCutoff(window);
 }
 
 void GuiRadarView::updateGhostDots()
@@ -79,75 +142,36 @@ void GuiRadarView::updateGhostDots()
 
 void GuiRadarView::drawBackground(sf::RenderTarget& window)
 {
-    glClear(GL_STENCIL_BUFFER_BIT);
-    switch(style)
+    window.clear(sf::Color(20, 20, 20, 255));
+}
+
+void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
+{
+    window.clear(sf::Color(0, 0, 0, 0));
+    if (my_spaceship)
     {
-    case Rectangular:
-    case Circular:
+        sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
+        float scale = std::min(rect.width, rect.height) / 2.0f / distance;
+
+        float r = 5000.0 * scale;
+        sf::CircleShape circle(r, 50);
+        circle.setOrigin(r, r);
+        circle.setFillColor(sf::Color(255, 255, 255, 255));
+        
+        foreach(SpaceObject, obj, space_object_list)
         {
-            glEnable(GL_STENCIL_TEST);
-            glStencilFunc(GL_ALWAYS, 1, 1);
-            glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
-
-            sf::RectangleShape background(sf::Vector2f(rect.width, rect.height));
-            background.setPosition(rect.left, rect.top);
-            if (fog_style == FriendlysShortRangeFogOfWar)
-                background.setFillColor(sf::Color::Transparent);
-            else
-                background.setFillColor(sf::Color(20, 20, 20, 255));
-            window.draw(background);
-
-            glStencilFunc(GL_EQUAL, 1, 1);
-            glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-
-            if (fog_style == FriendlysShortRangeFogOfWar && my_spaceship)
+            if ((P<SpaceShip>(obj) || P<SpaceStation>(obj)) && obj->isFriendly(my_spaceship))
             {
-                sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
-                float scale = std::min(rect.width, rect.height) / 2.0f / distance;
-
-                float r = 5000.0 * scale;
-                sf::CircleShape circle(r, 50);
-                circle.setOrigin(r, r);
-                circle.setFillColor(sf::Color(20, 20, 20, 255));
-                
-                foreach(SpaceObject, obj, space_object_list)
-                {
-                    if ((P<SpaceShip>(obj) || P<SpaceStation>(obj)) && obj->isFriendly(my_spaceship))
-                    {
-                        circle.setPosition(radar_screen_center + (obj->getPosition() - view_position) * scale);
-                        window.draw(circle);
-                    }
-                    P<ScanProbe> sp = obj;
-                    if (sp && sp->owner_id == my_spaceship->getMultiplayerId())
-                    {
-                        circle.setPosition(radar_screen_center + (obj->getPosition() - view_position) * scale);
-                        window.draw(circle);
-                    }
-                }
+                circle.setPosition(radar_screen_center + (obj->getPosition() - view_position) * scale);
+                window.draw(circle);
+            }
+            P<ScanProbe> sp = obj;
+            if (sp && sp->owner_id == my_spaceship->getMultiplayerId())
+            {
+                circle.setPosition(radar_screen_center + (obj->getPosition() - view_position) * scale);
+                window.draw(circle);
             }
         }
-        break;
-    case CircularMasked:
-        {
-            sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
-            float r = std::min(rect.width, rect.height) / 2.0f;
-            
-            glEnable(GL_STENCIL_TEST);
-            glStencilFunc(GL_ALWAYS, 1, 1);
-            glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
-
-            sf::CircleShape circle(r, 50);
-            circle.setOrigin(r, r);
-            circle.setPosition(radar_screen_center);
-            circle.setFillColor(sf::Color(20, 20, 20, 255));
-            circle.setOutlineColor(sf::Color(64, 64, 64, 255));
-            circle.setOutlineThickness(2.0);
-            window.draw(circle);
-
-            glStencilFunc(GL_EQUAL, 1, 1);
-            glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-        }
-        break;
     }
 }
 
@@ -211,27 +235,17 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
 
 void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
 {
+    sf::BlendMode blend(
+        sf::BlendMode::One, sf::BlendMode::Zero, sf::BlendMode::Add,
+        sf::BlendMode::One, sf::BlendMode::Zero, sf::BlendMode::Add
+    );
+    window.clear(sf::Color(255, 255, 255, 255));
     if (!my_spaceship)
         return;
     sf::Vector2f scan_center = my_spaceship->getPosition();
     sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
     float scale = std::min(rect.width, rect.height) / 2.0f / distance;
 
-    {
-        glStencilFunc(GL_GEQUAL, 1, 3);
-        glStencilOp(GL_KEEP, GL_INCR, GL_INCR);
-
-        float r = 5000.0f * scale;
-        sf::CircleShape circle(r, 32);
-        circle.setOrigin(r, r);
-        circle.setPosition(radar_screen_center + (scan_center - view_position) * scale);
-        circle.setFillColor(sf::Color::Transparent);
-        window.draw(circle);
-        
-        glStencilFunc(GL_EQUAL, 1, 3);
-        glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-    }
-    
     PVector<Nebula> nebulas = Nebula::getNebulas();
     foreach(Nebula, n, nebulas)
     {
@@ -241,15 +255,15 @@ void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
         {
             sf::RectangleShape background(sf::Vector2f(rect.width, rect.height));
             background.setPosition(rect.left, rect.top);
-            background.setFillColor(sf::Color::Black);
-            window.draw(background);
+            background.setFillColor(sf::Color(0, 0, 0, 0));
+            window.draw(background, blend);
         }else{
             float r = n->getRadius() * scale;
             sf::CircleShape circle(r, 32);
             circle.setOrigin(r, r);
             circle.setPosition(radar_screen_center + (n->getPosition() - view_position) * scale);
-            circle.setFillColor(sf::Color::Black);
-            window.draw(circle);
+            circle.setFillColor(sf::Color(0, 0, 0, 0));
+            window.draw(circle, blend);
             
             float diff_angle = sf::vector2ToAngle(diff);
             float angle = acosf(n->getRadius() / diff_len) / M_PI * 180.0f;
@@ -267,24 +281,18 @@ void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
             a[3].position = radar_screen_center + (pos_d - view_position) * scale;
             a[4].position = radar_screen_center + (pos_e - view_position) * scale;
             for(int n=0; n<5;n++)
-                a[n].color = sf::Color::Black;
-            window.draw(a);
+                a[n].color = sf::Color(0, 0, 0, 0);
+            window.draw(a, blend);
         }
     }
 
     {
-        glStencilFunc(GL_GEQUAL, 2, 3);
-        glStencilOp(GL_KEEP, GL_DECR, GL_DECR);
-
         float r = 5000.0f * scale;
         sf::CircleShape circle(r, 32);
         circle.setOrigin(r, r);
         circle.setPosition(radar_screen_center + (scan_center - view_position) * scale);
-        circle.setFillColor(sf::Color::Transparent);
-        window.draw(circle);
-        
-        glStencilFunc(GL_EQUAL, 1, 1);
-        glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+        circle.setFillColor(sf::Color(255, 255, 255,255));
+        window.draw(circle, blend);
     }
 }
 
@@ -424,7 +432,7 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
     }
 }
 
-void GuiRadarView::drawObjects(sf::RenderTarget& window)
+void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget& window_alpha)
 {
     sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
     float scale = std::min(rect.width, rect.height) / 2.0f / distance;
@@ -482,15 +490,18 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window)
         sf::FloatRect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
         if (obj != *my_spaceship && rect.intersects(object_rect))
         {
-            obj->drawOnRadar(window, object_position_on_screen, scale, long_range);
+            sf::RenderTarget* window = &window_normal;
+            if (!obj->canHideInNebula())
+                window = &window_alpha;
+            obj->drawOnRadar(*window, object_position_on_screen, scale, long_range);
             if (show_callsigns && obj->getCallSign() != "")
-                drawText(window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 12);
+                drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 12);
         }
     }
     if (my_spaceship)
     {
         sf::Vector2f object_position_on_screen = radar_screen_center + (my_spaceship->getPosition() - view_position) * scale;
-        my_spaceship->drawOnRadar(window, object_position_on_screen, scale, long_range);
+        my_spaceship->drawOnRadar(window_normal, object_position_on_screen, scale, long_range);
     }
 }
 

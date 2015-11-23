@@ -76,7 +76,7 @@ void Nebula::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float 
     float size = getRadius() * scale / object_sprite.getTextureRect().width * 3.0;
     object_sprite.setScale(size, size);
     object_sprite.setColor(sf::Color(255, 255, 255));
-    window.draw(object_sprite, sf::RenderStates(sf::BlendAdd));
+    window.draw(object_sprite, sf::BlendAdd);
 }
 
 void Nebula::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
@@ -85,7 +85,7 @@ void Nebula::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, floa
     range_circle.setOrigin(getRadius() * scale, getRadius() * scale);
     range_circle.setPosition(position);
     range_circle.setFillColor(sf::Color::Transparent);
-    range_circle.setOutlineColor(sf::Color(255, 255, 255, 32));
+    range_circle.setOutlineColor(sf::Color(255, 255, 255, 64));
     range_circle.setOutlineThickness(2.0);
     window.draw(range_circle);
 }

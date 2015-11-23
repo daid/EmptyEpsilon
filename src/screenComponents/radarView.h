@@ -23,6 +23,10 @@ public:
     typedef std::function<void(sf::Vector2f position)> func_t;
     typedef std::function<void(float position)>        ffunc_t;
 private:
+    sf::RenderTexture background_texture;
+    sf::RenderTexture forground_texture;
+    sf::RenderTexture mask_texture;
+
     class GhostDot
     {
     public:
@@ -103,12 +107,13 @@ private:
     void drawBackground(sf::RenderTarget& window);
     void drawSectorGrid(sf::RenderTarget& window);
     void drawNebulaBlockedAreas(sf::RenderTarget& window);
+    void drawNoneFriendlyBlockedAreas(sf::RenderTarget& window);
     void drawFriendlyNotVisibleAreas(sf::RenderTarget& window);
     void drawGhostDots(sf::RenderTarget& window);
     void drawWaypoints(sf::RenderTarget& window);
     void drawRangeIndicators(sf::RenderTarget& window);
     void drawTargetProjections(sf::RenderTarget& window);
-    void drawObjects(sf::RenderTarget& window);
+    void drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget& window_alpha);
     void drawObjectsGM(sf::RenderTarget& window);
     void drawTargets(sf::RenderTarget& window);
     void drawHeadingIndicators(sf::RenderTarget& window);

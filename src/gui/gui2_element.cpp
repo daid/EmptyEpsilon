@@ -221,6 +221,37 @@ void GuiElement::updateRect(sf::FloatRect window_rect)
     }
 }
 
+void GuiElement::adjustRenderTexture(sf::RenderTexture& texture)
+{
+    P<WindowManager> window_manager = engine->getObject("windowManager");
+    //Hack the rectangle for this element so it sits perfectly on pixel boundaries.
+    sf::Vector2f half_pixel = window_manager->mapPixelToCoords(sf::Vector2i(1, 1)) / 2.0f;
+    sf::Vector2f top_left = window_manager->mapPixelToCoords(window_manager->mapCoordsToPixel(sf::Vector2f(rect.left, rect.top) + half_pixel));
+    sf::Vector2f bottom_right = window_manager->mapPixelToCoords(window_manager->mapCoordsToPixel(sf::Vector2f(rect.left + rect.width, rect.top + rect.height) + half_pixel));
+    rect.left = top_left.x;
+    rect.top = top_left.y;
+    rect.width = bottom_right.x - top_left.x;
+    rect.height = bottom_right.y - top_left.y;
+
+    sf::Vector2i texture_size = window_manager->mapCoordsToPixel(sf::Vector2f(rect.width, rect.height) + half_pixel);
+    if (texture.getSize().x != texture_size.x && texture.getSize().y != texture_size.y)
+    {
+        texture.create(texture_size.x, texture_size.y, false);
+    }
+    //Set the view so it covers this elements normal rect. So we can draw exactly the same on this texture as no the normal screen.
+    texture.setView(sf::View(rect));
+}
+
+void GuiElement::drawRenderTexture(sf::RenderTexture& texture, sf::RenderTarget& window, sf::Color color, const sf::RenderStates& states)
+{
+    texture.display();
+    sf::Sprite sprite(texture.getTexture());
+    sprite.setColor(color);
+    sprite.setPosition(rect.left, rect.top);
+    sprite.setScale(rect.width / float(texture.getSize().x), rect.height / float(texture.getSize().y));
+    window.draw(sprite, states);
+}
+
 void GuiElement::drawText(sf::RenderTarget& window, sf::FloatRect rect, string text, EGuiAlign align, float font_size, sf::Color color)
 {
     sf::Text textElement(text, *mainFont, font_size);

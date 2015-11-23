@@ -75,6 +75,9 @@ public:
 private:
     void updateRect(sf::FloatRect window_rect);
 protected:
+    void adjustRenderTexture(sf::RenderTexture& texture);
+    void drawRenderTexture(sf::RenderTexture& texture, sf::RenderTarget& window, sf::Color color = sf::Color::White, const sf::RenderStates& states = sf::RenderStates::Default);
+
     /*!
      * Draw a certain text on the screen with horizontal orientation.
      * \param rect Area to draw in
