@@ -221,6 +221,18 @@ void GuiElement::updateRect(sf::FloatRect window_rect)
     }
 }
 
+static int powerOfTwo(int v)
+{
+    v--;
+    v |= v >> 1;
+    v |= v >> 2;
+    v |= v >> 4;
+    v |= v >> 8;
+    v |= v >> 16;
+    v++;
+    return v;
+}
+
 void GuiElement::adjustRenderTexture(sf::RenderTexture& texture)
 {
     P<WindowManager> window_manager = engine->getObject("windowManager");
@@ -234,21 +246,27 @@ void GuiElement::adjustRenderTexture(sf::RenderTexture& texture)
     rect.height = bottom_right.y - top_left.y;
 
     sf::Vector2i texture_size = window_manager->mapCoordsToPixel(sf::Vector2f(rect.width, rect.height) + half_pixel);
-    if (texture.getSize().x != texture_size.x && texture.getSize().y != texture_size.y)
+    unsigned int sx = powerOfTwo(texture_size.x);
+    unsigned int sy = powerOfTwo(texture_size.y);
+    if (texture.getSize().x != sx && texture.getSize().y != sy)
     {
-        texture.create(texture_size.x, texture_size.y, false);
+        texture.create(sx, sy, false);
     }
     //Set the view so it covers this elements normal rect. So we can draw exactly the same on this texture as no the normal screen.
-    texture.setView(sf::View(rect));
+    sf::View view(rect);
+    view.setViewport(sf::FloatRect(0, 0, float(texture_size.x) / float(sx), float(texture_size.y) / float(sy)));
+    texture.setView(view);
 }
 
 void GuiElement::drawRenderTexture(sf::RenderTexture& texture, sf::RenderTarget& window, sf::Color color, const sf::RenderStates& states)
 {
     texture.display();
+    
     sf::Sprite sprite(texture.getTexture());
+    sprite.setTextureRect(sf::IntRect(0, 0, texture.getSize().x * texture.getView().getViewport().width, texture.getSize().y * texture.getView().getViewport().height));
     sprite.setColor(color);
     sprite.setPosition(rect.left, rect.top);
-    sprite.setScale(rect.width / float(texture.getSize().x), rect.height / float(texture.getSize().y));
+    sprite.setScale(rect.width / float(texture.getSize().x * texture.getView().getViewport().width), rect.height / float(texture.getSize().y * texture.getView().getViewport().height));
     window.draw(sprite, states);
 }
 
