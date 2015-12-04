@@ -14,7 +14,7 @@ public:
 
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
 
-    virtual void collide(Collisionable* target);
+    virtual void collide(Collisionable* target, float force) override;
 
     void setEnergy(float amount) { energy = amount; }
     void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon != MW_None) weapon_storage[weapon] = amount; }

@@ -15,7 +15,7 @@ public:
 
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
 
-    virtual void collide(Collisionable* target);
+    virtual void collide(Collisionable* target, float force) override;
     
     virtual string getExportLine() { return "Asteroid():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 };

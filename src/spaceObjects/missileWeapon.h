@@ -26,7 +26,7 @@ public:
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
     virtual void update(float delta);
 
-    virtual void collide(Collisionable* target);
+    virtual void collide(Collisionable* target, float force) override;
     virtual void takeDamage(float damage_amount, DamageInfo info) { if (info.type != DT_Kinetic) destroy(); }
 
     //Called when the missile hits something (could be the target, or something else). Missile is destroyed afterwards.

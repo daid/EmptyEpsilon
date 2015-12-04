@@ -51,7 +51,7 @@ void Asteroid::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, floa
     window.draw(object_sprite);
 }
 
-void Asteroid::collide(Collisionable* target)
+void Asteroid::collide(Collisionable* target, float force)
 {
     if (!isServer())
         return;

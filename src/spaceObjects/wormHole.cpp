@@ -110,7 +110,7 @@ void WormHole::update(float delta)
     update_delta = delta;
 }
 
-void WormHole::collide(Collisionable* target)
+void WormHole::collide(Collisionable* target, float collision_force)
 {
     if (update_delta == 0.0)
         return;

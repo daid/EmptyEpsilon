@@ -16,7 +16,7 @@ public:
 
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
 
-    virtual void collide(Collisionable* target);
+    virtual void collide(Collisionable* target, float force) override;
     
     virtual bool canBeTargeted() { return true; }
     

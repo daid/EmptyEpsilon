@@ -47,7 +47,7 @@ void MissileWeapon::update(float delta)
         ParticleEngine::spawn(sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(1, 0.8, 0.8), sf::Vector3f(0, 0, 0), 5, 20, 5.0);
 }
 
-void MissileWeapon::collide(Collisionable* target)
+void MissileWeapon::collide(Collisionable* target, float force)
 {
     if (!game_server)
         return;

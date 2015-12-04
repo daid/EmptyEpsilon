@@ -58,7 +58,7 @@ void Artifact::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, floa
     window.draw(object_sprite);
 }
 
-void Artifact::collide(Collisionable* target)
+void Artifact::collide(Collisionable* target, float force)
 {
     if (!isServer() || !allow_pickup)
         return;

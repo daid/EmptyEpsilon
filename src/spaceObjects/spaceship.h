@@ -249,7 +249,7 @@ public:
      */
     virtual bool canBeDockedBy(P<SpaceObject> obj);
 
-    virtual void collide(Collisionable* other);
+    virtual void collide(Collisionable* other, float force) override;
 
     /*!
      * Load a missile tube.
