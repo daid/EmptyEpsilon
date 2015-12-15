@@ -84,7 +84,7 @@ void Mine::update(float delta)
     }
 }
 
-void Mine::collide(Collisionable* target)
+void Mine::collide(Collisionable* target, float force)
 {
     if (!game_server || triggered || ejectTimeout > 0.0)
         return;

@@ -28,7 +28,7 @@ public:
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
     virtual void update(float delta);
 
-    virtual void collide(Collisionable* target);
+    virtual void collide(Collisionable* target, float force);
     void eject();
     void explode();
     
