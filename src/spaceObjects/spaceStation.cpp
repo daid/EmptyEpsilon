@@ -12,6 +12,14 @@ REGISTER_SCRIPT_SUBCLASS(SpaceStation, SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, setTemplate);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, setCallSign);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, getHull);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, getHullMax);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, setHull);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, setHullMax);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, getShield);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, getShieldMax);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, setShield);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, setShieldMax);
 }
 
 REGISTER_MULTIPLAYER_CLASS(SpaceStation, "SpaceStation");

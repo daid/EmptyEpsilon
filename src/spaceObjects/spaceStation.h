@@ -32,6 +32,15 @@ public:
 
     void setTemplate(string template_name);
     void setCallSign(string new_callsign) { callsign = new_callsign; }
+
+    float getHull() { return hull_strength; }
+    float getHullMax() { return hull_max; }
+    void setHull(float amount) { if (amount < 0) return; hull_strength = amount; }
+    void setHullMax(float amount) { if (amount < 0) return; hull_max = amount; hull_strength = std::max(hull_strength, hull_max); }
+    float getShield() { return shields; }
+    float getShieldMax() { return shields_max; }
+    void setShield(float amount) { if (amount < 0) return; shields = amount; }
+    void setShieldMax(float amount) { if (amount < 0) return; shields_max = amount; shields = std::max(shields, shields_max); }
     
     virtual string getExportLine();
 };
