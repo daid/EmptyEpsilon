@@ -237,7 +237,7 @@ void GuiElement::adjustRenderTexture(sf::RenderTexture& texture)
 {
     P<WindowManager> window_manager = engine->getObject("windowManager");
     //Hack the rectangle for this element so it sits perfectly on pixel boundaries.
-    sf::Vector2f half_pixel = window_manager->mapPixelToCoords(sf::Vector2i(1, 1)) / 2.0f;
+    sf::Vector2f half_pixel = (window_manager->mapPixelToCoords(sf::Vector2i(1, 1)) - window_manager->mapPixelToCoords(sf::Vector2i(0, 0))) / 2.0f;
     sf::Vector2f top_left = window_manager->mapPixelToCoords(window_manager->mapCoordsToPixel(sf::Vector2f(rect.left, rect.top) + half_pixel));
     sf::Vector2f bottom_right = window_manager->mapPixelToCoords(window_manager->mapCoordsToPixel(sf::Vector2f(rect.left + rect.width, rect.top + rect.height) + half_pixel));
     rect.left = top_left.x;
