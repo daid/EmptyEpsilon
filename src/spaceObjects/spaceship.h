@@ -368,6 +368,7 @@ public:
     }
     
     void setWeaponTubeCount(int amount);
+    int getWeaponTubeCount();
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);

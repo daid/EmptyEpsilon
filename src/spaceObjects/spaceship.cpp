@@ -61,6 +61,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponDamage);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeapon);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeCount);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponTubeCount);
 }
 
 /* Define script conversion function for the EMainScreenSetting enum. */
@@ -939,6 +940,11 @@ void SpaceShip::setWeaponTubeCount(int amount)
             weaponTube[n].type_loaded = MW_None;
         }
     }
+}
+
+int SpaceShip::getWeaponTubeCount()
+{
+    return weapon_tubes;
 }
 
 string SpaceShip::getCallSign()
