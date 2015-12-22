@@ -59,6 +59,12 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Set the description of this object, description is visible at the science station.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setDescription);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getDescription);
+    ///Get the scanning complexity of this object (amount of bars in the minigame)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, scanningComplexity);
+    ///Get the scanning depth of this object (number of minigames to complete)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, scanningChannelDepth);
+    ///Set the scanning complexity and depth for this object.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setScanningParameters);
 }
 
 PVector<SpaceObject> space_object_list;
@@ -69,6 +75,9 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     object_radius = collision_range;
     space_object_list.push_back(this);
     faction_id = 0;
+
+    scanning_complexity_value = 0;
+    scanning_depth_value = 0;
 
     registerMemberReplication(&faction_id);
     registerCollisionableReplication(multiplayer_significant_range);

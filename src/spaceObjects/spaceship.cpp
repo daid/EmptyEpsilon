@@ -200,6 +200,9 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         registerMemberReplication(&weapon_storage_max[n]);
     }
 
+    scanning_complexity_value = -1;
+    scanning_depth_value = -1;
+
     if (game_server)
         ship_callsign = gameGlobalInfo->getNextShipCallsign();
 }
@@ -781,6 +784,7 @@ void SpaceShip::requestDock(P<SpaceObject> target)
     docking_state = DS_Docking;
     docking_target = target;
 }
+
 void SpaceShip::requestUndock()
 {
     if (docking_state == DS_Docked)
@@ -788,6 +792,46 @@ void SpaceShip::requestUndock()
         docking_state = DS_NotDocking;
         impulse_request = 0.5;
     }
+}
+
+int SpaceShip::scanningComplexity()
+{
+    if (scanning_complexity_value > -1)
+        return scanning_complexity_value;
+    switch(gameGlobalInfo->scanning_complexity)
+    {
+    case SC_None:
+        return 0;
+    case SC_Simple:
+        return 1;
+    case SC_Normal:
+        if (scanned_by_player == SS_SimpleScan)
+            return 2;
+        return 1;
+    case SC_Advanced:
+        if (scanned_by_player == SS_SimpleScan)
+            return 3;
+        return 2;
+    }
+    return 0;
+}
+
+int SpaceShip::scanningChannelDepth()
+{
+    if (scanning_depth_value > -1)
+        return scanning_depth_value;
+    switch(gameGlobalInfo->scanning_complexity)
+    {
+    case SC_None:
+        return 0;
+    case SC_Simple:
+        return 1;
+    case SC_Normal:
+        return 2;
+    case SC_Advanced:
+        return 2;
+    }
+    return 0;
 }
 
 void SpaceShip::takeDamage(float damage_amount, DamageInfo info)

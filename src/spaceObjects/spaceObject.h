@@ -42,6 +42,9 @@ class SpaceObject : public Collisionable, public MultiplayerObject
     string object_description;
 public:
     string comms_script_name;
+    int scanning_complexity_value;
+    int scanning_depth_value;
+    
     SpaceObject(float collisionRange, string multiplayerName, float multiplayer_significant_range=-1);
 
     float getRadius() { return object_radius; }
@@ -64,8 +67,9 @@ public:
     virtual bool hasShield() { return false; }
     virtual bool canHideInNebula() { return true; }
     virtual bool canBeScanned() { return false; }
-    virtual int scanningComplexity() { return 0; }
-    virtual int scanningChannelDepth() { return 0; }
+    virtual int scanningComplexity() { return scanning_complexity_value; }
+    virtual int scanningChannelDepth() { return scanning_depth_value; }
+    void setScanningParameters(int complexity, int depth) { scanning_complexity_value = std::min(4, std::max(0, complexity)); scanning_depth_value = std::max(0, depth); }
     virtual void scanned() { }
     virtual void takeDamage(float damage_amount, DamageInfo info) {}
     virtual std::unordered_map<string, string> getGMInfo() { return std::unordered_map<string, string>(); }

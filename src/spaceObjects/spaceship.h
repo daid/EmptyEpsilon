@@ -281,8 +281,8 @@ public:
     void requestUndock();
     
     virtual bool canBeScanned() { return scanned_by_player != SS_FullScan; }
-    virtual int scanningComplexity() { if (scanned_by_player == SS_SimpleScan) return 2; else return 1; }
-    virtual int scanningChannelDepth() { return 2; }
+    virtual int scanningComplexity();
+    virtual int scanningChannelDepth();
     virtual void scanned() { if (scanned_by_player == SS_SimpleScan) scanned_by_player = SS_FullScan; else scanned_by_player = SS_SimpleScan; }
     void setScanned(bool scanned) { scanned_by_player = scanned ? SS_FullScan : SS_NotScanned; }
     bool isFriendOrFoeIdentified() { return scanned_by_player >= SS_FriendOrFoeIdentified; }
