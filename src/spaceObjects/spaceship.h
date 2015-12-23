@@ -45,7 +45,7 @@ public:
     float power_level; //0.0-3.0, default 1.0
     float heat_level; //0.0-1.0, system will damage at 1.0
     float coolant_level; //0.0-10.0
-    
+
     float getHeatingDelta()
     {
         return powf(1.7, power_level - 1.0) - (1.01 + coolant_level * 0.1);
@@ -147,7 +147,7 @@ public:
      */
     float combat_maneuver_boost_request;
     float combat_maneuver_boost_active;
-    
+
     float combat_maneuver_strafe_request;
     float combat_maneuver_strafe_active;
 
@@ -279,7 +279,7 @@ public:
      * Request undock with current docked object
      */
     void requestUndock();
-    
+
     virtual bool canBeScanned() { return scanned_by_player != SS_FullScan; }
     virtual int scanningComplexity();
     virtual int scanningChannelDepth();
@@ -303,7 +303,7 @@ public:
     virtual void setShipTemplate(string template_names);
 
     P<SpaceObject> getTarget();
-    
+
     virtual std::unordered_map<string, string> getGMInfo();
 
     void setCallSign(string new_callsign) { ship_callsign = new_callsign; }
@@ -333,7 +333,7 @@ public:
     void setSystemHealth(ESystem system, float health) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].health = std::min(1.0f, std::max(-1.0f, health)); }
     float getSystemHeat(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].heat_level; }
     void setSystemHeat(ESystem system, float heat) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].heat_level = std::min(1.0f, std::max(0.0f, heat)); }
-    
+
     bool hasJumpDrive() { return has_jump_drive; }
     void setJumpDrive(bool has_jump) { has_jump_drive = has_jump; }
     bool hasWarpDrive() { return has_warp_drive; }
@@ -349,13 +349,15 @@ public:
             warp_speed_per_warp_level = 0;
         }
     }
-    
+
     float getBeamWeaponArc(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].arc; }
     float getBeamWeaponDirection(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].direction; }
     float getBeamWeaponRange(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].range; }
     float getBeamWeaponCycleTime(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].cycleTime; }
     float getBeamWeaponDamage(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].damage; }
-    
+
+    int getShieldsFrequency(void){ return shield_frequency; }
+
     void setBeamWeapon(int index, float arc, float direction, float range, float cycleTime, float damage)
     {
         if (index < 0 || index >= max_beam_weapons)
@@ -366,7 +368,7 @@ public:
         beam_weapons[index].cycleTime = cycleTime;
         beam_weapons[index].damage = damage;
     }
-    
+
     void setWeaponTubeCount(int amount);
     int getWeaponTubeCount();
 };

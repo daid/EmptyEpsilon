@@ -45,6 +45,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRearShield);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRearShieldMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getShieldsActive);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getShieldsFrequency);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setShieldsActive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHealth);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHealth);
@@ -340,7 +341,7 @@ void SpaceShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, f
     if (!long_range)
     {
         sf::RectangleShape bar(sf::Vector2f(60, 10));
-        
+
         if (front_shield_max > 0.0)
         {
             bar.setPosition(position.x - 30, position.y - 40);
@@ -501,7 +502,7 @@ void SpaceShip::update(float delta)
     }
     sf::Vector2f forward = sf::vector2FromAngle(getRotation());
     setVelocity(forward * (current_impulse * impulse_max_speed * getSystemEffectiveness(SYS_Impulse) + current_warp * warp_speed_per_warp_level * getSystemEffectiveness(SYS_Warp)));
-    
+
     if (combat_maneuver_boost_active > combat_maneuver_boost_request)
     {
         combat_maneuver_boost_active -= delta;
@@ -526,7 +527,7 @@ void SpaceShip::update(float delta)
         if (combat_maneuver_strafe_active > combat_maneuver_strafe_request)
             combat_maneuver_strafe_active = combat_maneuver_strafe_request;
     }
-    
+
     if (combat_maneuver_boost_active != 0.0)
     {
         combat_maneuver_charge -= combat_maneuver_boost_active * delta * 0.3;
