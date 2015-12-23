@@ -356,7 +356,7 @@ public:
     float getBeamWeaponCycleTime(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].cycleTime; }
     float getBeamWeaponDamage(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].damage; }
 
-    int getShieldsFrequency(void){return shield_frequency}
+    int getShieldsFrequency(void){ return shield_frequency; }
 
     void setBeamWeapon(int index, float arc, float direction, float range, float cycleTime, float damage)
     {
