@@ -245,7 +245,7 @@ void GuiElement::adjustRenderTexture(sf::RenderTexture& texture)
     rect.width = bottom_right.x - top_left.x;
     rect.height = bottom_right.y - top_left.y;
 
-    sf::Vector2i texture_size = window_manager->mapCoordsToPixel(sf::Vector2f(rect.width, rect.height) + half_pixel);
+    sf::Vector2i texture_size = window_manager->mapCoordsToPixel(sf::Vector2f(rect.width, rect.height) + half_pixel) - window_manager->mapCoordsToPixel(sf::Vector2f(0, 0));
     unsigned int sx = powerOfTwo(texture_size.x);
     unsigned int sy = powerOfTwo(texture_size.y);
     if (texture.getSize().x != sx && texture.getSize().y != sy)
