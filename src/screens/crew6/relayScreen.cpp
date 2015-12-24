@@ -112,7 +112,7 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     alert_level_button->setValue(false);
     alert_level_button->setSize(GuiElement::GuiSizeMax, 50);
 
-    for(int level=AL_RedAlert; level < AL_MAX; level++)
+    for(int level=AL_Normal; level < AL_MAX; level++)
     {
         GuiButton* alert_button = new GuiButton(layout, "", alertLevelToString(EAlertLevel(level)), [this, level]()
         {
