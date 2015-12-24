@@ -11,7 +11,6 @@ GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
     shield_hit_overlay = new GuiOverlay(this, "SHIELD_HIT", sf::Color(64, 64, 128, 0));
     hull_hit_overlay = new GuiOverlay(this, "HULL_HIT", sf::Color(255, 0, 0, 0));
     shield_low_warning_overlay = new GuiOverlay(this, "SHIELD_LOW", sf::Color(255, 0, 0, 0));
-    jumping_overlay = new GuiOverlay(this, "JUMPING", sf::Color(0, 0, 0, 0));
     pause_overlay = new GuiOverlay(this, "PAUSE", sf::Color(0, 0, 0, 128));
     (new GuiBox(pause_overlay, "PAUSE_BOX"))->fill()->setPosition(0, 0, ACenter)->setSize(500, 100);
     (new GuiLabel(pause_overlay, "PAUSE_LABEL", "Game Paused", 70))->setPosition(0, 0, ACenter)->setSize(500, 100);
@@ -34,16 +33,23 @@ GuiIndicatorOverlays::~GuiIndicatorOverlays()
     glitchPostProcessor->enabled = false;
 }
 
+static float glow(float min, float max, float time)
+{
+    return min + (max - min) * fabsf(fmodf(engine->getElapsedTime() / time, 2.0) - 1.0);
+}
+
 void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
 {
     if (my_spaceship)
     {
+        drawAlertLevel(window);
+    
         float shield_hit = (std::max(my_spaceship->front_shield_hit_effect, my_spaceship->rear_shield_hit_effect) - 0.5) / 0.5;
         shield_hit_overlay->setAlpha(32 * shield_hit);
         
         if (my_spaceship->front_shield < my_spaceship->front_shield_max / 10.0 || my_spaceship->rear_shield < my_spaceship->rear_shield_max / 10.0)
         {
-            shield_low_warning_overlay->setAlpha(16 + 32 * fabsf(fmodf(engine->getElapsedTime() * 2.0, 2.0) - 1.0));
+            shield_low_warning_overlay->setAlpha(glow(16, 48, 0.5));
         }else{
             shield_low_warning_overlay->setAlpha(0);
         }
@@ -111,4 +117,47 @@ bool GuiIndicatorOverlays::onMouseDown(sf::Vector2f position)
     if (pause_overlay->isVisible() || victory_overlay->isVisible())
         return true;
     return false;
+}
+
+void GuiIndicatorOverlays::drawAlertLevel(sf::RenderTarget& window)
+{
+    sf::Color color;
+    sf::Color multiply_color = sf::Color::White;
+    string text;
+    float text_size;
+    
+    switch(my_spaceship->alert_level)
+    {
+    case AL_RedAlert:
+        color = sf::Color(255, 0, 0, glow(32, 64, 3.0));
+        multiply_color = sf::Color(255, 192, 192, 255);
+        text = "RED ALERT";
+        text_size = 70;
+        break;
+    case AL_YellowAlert:
+        color = sf::Color(255, 255, 0, glow(32, 64, 3.0));
+        multiply_color = sf::Color(255, 255, 192, 255);
+        text = "YELLOW ALERT";
+        text_size = 60;
+        break;
+    case AL_Normal:
+    default:
+        return;
+    }
+
+    sf::RectangleShape overlay(sf::Vector2f(rect.width, rect.height));
+    overlay.setPosition(rect.left, rect.top);
+    overlay.setFillColor(multiply_color);
+    window.draw(overlay, sf::BlendMultiply);
+
+    sf::Sprite alert;
+    textureManager.setTexture(alert, "alert_overlay.png");
+    alert.setColor(color);
+    alert.setPosition(window.getView().getSize() / 2.0f);
+    window.draw(alert);
+    sf::Text alert_text(text, *mainFont, text_size);
+    alert_text.setColor(color);
+    alert_text.setOrigin(sf::Vector2f(alert_text.getLocalBounds().width / 2.0f, alert_text.getLocalBounds().height / 2.0f + alert_text.getLocalBounds().top));
+    alert_text.setPosition(window.getView().getSize() / 2.0f - sf::Vector2f(0, 300));
+    window.draw(alert_text);
 }

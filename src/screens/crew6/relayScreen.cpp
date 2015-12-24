@@ -101,6 +101,31 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     
     info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.7, "Reputation:", "");
     info_reputation->setSize(GuiElement::GuiSizeMax, 40);
+    
+    GuiAutoLayout* layout = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutVerticalBottomToTop);
+    layout->setPosition(-20, -20, ABottomRight)->setSize(300, GuiElement::GuiSizeMax);
+    alert_level_button = new GuiToggleButton(layout, "", "Alert level", [this](bool value)
+    {
+        for(GuiButton* button : alert_level_buttons)
+            button->setVisible(value);
+    });
+    alert_level_button->setValue(false);
+    alert_level_button->setSize(GuiElement::GuiSizeMax, 50);
+
+    for(int level=AL_RedAlert; level < AL_MAX; level++)
+    {
+        GuiButton* alert_button = new GuiButton(layout, "", alertLevelToString(EAlertLevel(level)), [this, level]()
+        {
+            if (my_spaceship)
+                my_spaceship->commandSetAlertLevel(EAlertLevel(level));
+            for(GuiButton* button : alert_level_buttons)
+                button->setVisible(false);
+            alert_level_button->setValue(false);
+        });
+        alert_button->setVisible(false);
+        alert_button->setSize(GuiElement::GuiSizeMax, 50);
+        alert_level_buttons.push_back(alert_button);
+    }
 
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }

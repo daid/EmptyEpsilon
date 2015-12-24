@@ -40,6 +40,14 @@ enum ECommsState
     CS_ChannelBroken
 };
 
+enum EAlertLevel
+{
+    AL_Normal,
+    AL_YellowAlert,
+    AL_RedAlert,
+    AL_MAX
+};
+
 class PlayerSpaceship : public SpaceShip
 {
 public:
@@ -89,6 +97,8 @@ public:
     ECrewPosition self_destruct_code_entry_position[max_self_destruct_codes];
     ECrewPosition self_destruct_code_show_position[max_self_destruct_codes];
     float self_destruct_countdown;
+    
+    EAlertLevel alert_level;
 
     PlayerSpaceship();
 
@@ -127,6 +137,7 @@ public:
     void commandLaunchProbe(sf::Vector2f target_position);
     void commandScanDone();
     void commandScanCancel();
+    void commandSetAlertLevel(EAlertLevel level);
 
     virtual void setShipTemplate(string template_name);
 
@@ -145,10 +156,15 @@ public:
     void addCommsReply(int32_t id, string message);
     int getWaypointCount() { return waypoints.size(); }
     sf::Vector2f getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1]; return sf::Vector2f(0, 0); }
+    EAlertLevel getAlertLevel() { return alert_level; }
     
     virtual string getExportLine();
 };
 REGISTER_MULTIPLAYER_ENUM(ECommsState);
 REGISTER_MULTIPLAYER_ENUM(ECrewPosition);
+template<> int convert<EAlertLevel>::returnType(lua_State* L, EAlertLevel l);
+REGISTER_MULTIPLAYER_ENUM(EAlertLevel);
+
+string alertLevelToString(EAlertLevel level);
 
 #endif//PLAYER_SPACESHIP_H

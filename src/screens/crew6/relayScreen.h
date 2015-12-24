@@ -35,6 +35,9 @@ private:
     GuiKeyValueDisplay* info_reputation;
     GuiAutoLayout* option_buttons;
     
+    GuiToggleButton* alert_level_button;
+    std::vector<GuiButton*> alert_level_buttons;
+    
     sf::Vector2f mouse_down_position;
 public:
     RelayScreen(GuiContainer* owner);

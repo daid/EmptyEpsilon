@@ -12,6 +12,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getWaypoint);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getWaypointCount);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getAlertLevel);
 
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandTargetRotation);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandImpulse);
@@ -91,6 +92,25 @@ static const int16_t CMD_CONFIRM_SELF_DESTRUCT = 0x001F;
 static const int16_t CMD_COMBAT_MANEUVER_BOOST = 0x0020;
 static const int16_t CMD_COMBAT_MANEUVER_STRAFE = 0x0021;
 static const int16_t CMD_LAUNCH_PROBE = 0x0022;
+static const int16_t CMD_SET_ALERT_LEVEL = 0x0023;
+
+template<> int convert<EAlertLevel>::returnType(lua_State* L, EAlertLevel l)
+{
+    lua_pushstring(L, alertLevelToString(l).c_str());
+    return 1;
+}
+
+string alertLevelToString(EAlertLevel level)
+{
+    switch(level)
+    {
+    case AL_RedAlert: return "RED ALERT";
+    case AL_YellowAlert: return "YELLOW ALERT";
+    case AL_Normal: return "Normal";
+    default:
+        return "???";
+    }
+}
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 
@@ -112,6 +132,7 @@ PlayerSpaceship::PlayerSpaceship()
     scanning_complexity = 0;
     scanning_depth = 0;
     scan_probe_stock = max_scan_probes;
+    alert_level = AL_Normal;
 
     setFactionId(1);
 
@@ -138,6 +159,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&scan_probe_stock);
     registerMemberReplication(&activate_self_destruct);
     registerMemberReplication(&self_destruct_countdown, 0.2);
+    registerMemberReplication(&alert_level);
     for(int n=0; n<max_self_destruct_codes; n++)
     {
         self_destruct_code[n] = 0;
@@ -868,6 +890,11 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             scan_probe_stock--;
         }
         break;
+    case CMD_SET_ALERT_LEVEL:
+        {
+            packet >> alert_level;
+        }
+        break;
     }
 }
 
@@ -1115,6 +1142,14 @@ void PlayerSpaceship::commandScanCancel()
 {
     sf::Packet packet;
     packet << CMD_SCAN_CANCEL;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetAlertLevel(EAlertLevel level)
+{
+    sf::Packet packet;
+    packet << CMD_SET_ALERT_LEVEL;
+    packet << level;
     sendClientCommand(packet);
 }
 

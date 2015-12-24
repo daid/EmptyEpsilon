@@ -17,7 +17,6 @@ private:
     GuiOverlay* shield_hit_overlay;
     GuiOverlay* hull_hit_overlay;
     GuiOverlay* shield_low_warning_overlay;
-    GuiOverlay* jumping_overlay;
     GuiOverlay* pause_overlay;
     GuiOverlay* victory_overlay;
     GuiLabel* victory_label;
@@ -28,6 +27,8 @@ public:
     virtual void onDraw(sf::RenderTarget& window);
     
     virtual bool onMouseDown(sf::Vector2f position);
+private:
+    void drawAlertLevel(sf::RenderTarget& window);
 };
 
 #endif//GUI_INDICATOR_OVERLAYS_H
