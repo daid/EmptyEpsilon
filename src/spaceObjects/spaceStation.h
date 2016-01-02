@@ -12,6 +12,7 @@ class SpaceStation : public SpaceObject, public Updatable
     string callsign;
 public:
     string template_name;
+    string radar_trace;
     P<ShipTemplate> ship_template;   //Space stations use a shipTemplate to get hull/shield and graphical information.
 
     float shields, shields_max;
@@ -41,7 +42,7 @@ public:
     float getShieldMax() { return shields_max; }
     void setShield(float amount) { if (amount < 0) return; shields = amount; }
     void setShieldMax(float amount) { if (amount < 0) return; shields_max = amount; shields = std::max(shields, shields_max); }
-    
+
     virtual string getExportLine();
 };
 
