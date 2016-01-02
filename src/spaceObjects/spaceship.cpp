@@ -230,6 +230,7 @@ void SpaceShip::setShipTemplate(string template_name)
         beam_weapons[n].damage = ship_template->beams[n].damage;
     }
     weapon_tubes = ship_template->weapon_tubes;
+    radar_trace = ship_template-> radar_trace;
     hull_strength = hull_max = ship_template->hull;
     front_shield = ship_template->front_shields;
     rear_shield = ship_template->rear_shields;
@@ -307,7 +308,15 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
     }
 
     sf::Sprite objectSprite;
+
+    //if the ship is scanned, set the custom radar
+    if (scanned_by_player != SS_NotScanned){
+    textureManager.setTexture(objectSprite, radar_trace);
+    }
+    else{
     textureManager.setTexture(objectSprite, "RadarArrow.png");
+    }
+
     objectSprite.setRotation(getRotation());
     objectSprite.setPosition(position);
     if (long_range)
