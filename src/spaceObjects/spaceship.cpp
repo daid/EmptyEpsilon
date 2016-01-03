@@ -230,7 +230,16 @@ void SpaceShip::setShipTemplate(string template_name)
         beam_weapons[n].damage = ship_template->beams[n].damage;
     }
     weapon_tubes = ship_template->weapon_tubes;
-    radar_trace = ship_template-> radar_trace;
+
+    if (ship_template->custom_trace)
+    {
+    radar_trace = ship_template->radar_trace;
+    }
+    else
+    {
+    radar_trace = "RadarArrow.png";
+    }
+
     hull_strength = hull_max = ship_template->hull;
     front_shield = ship_template->front_shields;
     rear_shield = ship_template->rear_shields;

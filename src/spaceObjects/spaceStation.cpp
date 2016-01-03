@@ -153,7 +153,15 @@ void SpaceStation::setTemplate(string template_name)
 
     hull_strength = hull_max = ship_template->hull;
     shields = shields_max = ship_template->front_shields;
-    radar_trace = ship_template-> radar_trace;
+
+    if (ship_template->custom_trace)
+    {
+    radar_trace = ship_template->radar_trace;
+    }
+    else
+    {
+    radar_trace = "RadarBlip.png";
+    }
 
     ship_template->setCollisionData(this);
     model_info.setData(ship_template->model_data);
