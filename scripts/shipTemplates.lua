@@ -62,6 +62,7 @@ template:addDoor(6, 3, false);
 template:addDoor(6, 4, false);
 template:addDoor(8, 3, false);
 template:addDoor(8, 4, false);
+ 
 
 --Airlock doors
 --template:addDoor(2, 2, false);
@@ -158,7 +159,6 @@ template:setWeaponStorage("Mine", 3)
 template:setWeaponStorage("EMP", 2)
 template:setDescription([[The tugboat is a reliable, but small and un-armed transport ship. Due to it's low cost, it is a favourite ship to teach the ropes to fledgeling captains, without risking friendly fire.]])
 
-
 --List of possible fighters --
 -- Intercepter (anti fighter) -> High speed, low visibility, front beam weapons
 -- Bomber (anti capital) -> Low speed, high visibility, high armor (for a fighter), high shields (for a fighter), multiple missiles
@@ -166,8 +166,6 @@ template:setDescription([[The tugboat is a reliable, but small and un-armed tran
 
 -- Mine ship -- 
 	-- deploys some mines (the ones that don't explode with a km blast radius) and use long range beam weapons to fight
-
-
 
 --[[ Enemy ship types --]]
 -- Fighters are quick agile ships that do not do a lot of damage, but usually come in larger groups. They are easy to take out, but should not be underestimated.

@@ -85,6 +85,7 @@ public:
     string ship_type_name;
     P<ShipTemplate> ship_template;
     string ship_callsign;
+    string radar_trace;
 
     float energy_level;
     ShipSystem systems[SYS_COUNT];
