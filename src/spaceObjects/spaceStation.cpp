@@ -10,16 +10,29 @@
 #include "scriptInterface.h"
 REGISTER_SCRIPT_SUBCLASS(SpaceStation, SpaceObject)
 {
+    /// Set the ship template to be used for this station. Stations use ship-templates to define hull/shields/looks
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, setTemplate);
+    /// Set a custom callsign for this station. Stations get assigned random callsigns at creation, but you can overrule this from scenario scripts.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, setCallSign);
+    /// Get the current amount of hull
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, getHull);
+    /// Get the maximum hull value
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, getHullMax);
+    /// Set the current hull value, note that setting this to 0 does not destroy the station.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, setHull);
+    /// Set the maximum amount of hull for this station. Stations never repair hull damage, so this only effects the percentage displays
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, setHullMax);
+    /// Get the current shield level, stations only have a single shield, unlike ships that have a front&back shield
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, getShield);
+    /// Get the maxium shield level.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, getShieldMax);
+    /// Set the current amount of shield.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, setShield);
+    /// Set the maximum shield level. Note that this does low the current shield level when the max becomes lower, but it does not increase the shield level.
+    /// A seperate call to setShield is needed for that.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, setShieldMax);
+    /// Set the icon to be used for this station on the radar.
+    /// For example, station:setRadarTrace("RadarArrow.png") will show an arrow instead of a dot for this station.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, setRadarTrace);
 }
 

@@ -63,6 +63,9 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeapon);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponTubeCount);
+    /// Set the icon to be used for this ship on the radar.
+    /// For example, ship:setRadarTrace("RadarBlip.png") will show a dot instead of an arrow for this ship.
+    /// Note: Icon is only shown after scanning, before the ship is scanned it is always shown as an arrow.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadarTrace);
 }
 
