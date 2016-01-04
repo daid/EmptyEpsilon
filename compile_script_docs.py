@@ -4,6 +4,7 @@
 # This script should run in both python2 and python3
 import re
 import os
+import sys
 try:
 	from xml.etree import cElementTree as ElementTree
 except:
@@ -47,13 +48,13 @@ class ScriptClass(object):
 			ret += ':%s' % (func)
 		return '{%s}' % (ret)
 	
-	def outputClassTree(self):
-		print('<li><a href="#class_%s">%s</a>' % (self.name, self.name))
+	def outputClassTree(self, stream):
+		stream.write('<li><a href="#class_%s">%s</a>\n' % (self.name, self.name))
 		if len(self.children) > 0:
-			print('<ul>')
+			stream.write('<ul>')
 			for c in self.children:
-				c.outputClassTree()
-			print('</ul>')
+				c.outputClassTree(stream)
+			stream.write('</ul>')
 
 class DocumentationGenerator(object):
     def __init__(self):
@@ -183,59 +184,59 @@ class DocumentationGenerator(object):
                     f.parameters = ''
                     f.description = 'Removes this object from the game.'
 
-    def generateDocs(self):
-        print('<!doctype html><html lang="us"><head><meta charset="utf-8"><title>EmptyEpsilon - Scripting documentation</title>')
-        print('<link href="http://daid.github.io/EmptyEpsilon/jquery-ui.min.css" rel="stylesheet">')
-        print('<link href="http://daid.github.io/EmptyEpsilon/main.css" rel="stylesheet">')
-        print('</head>')
-        print('<body>')
+    def generateDocs(self, stream):
+        stream.write('<!doctype html><html lang="us"><head><meta charset="utf-8"><title>EmptyEpsilon - Scripting documentation</title>')
+        stream.write('<link href="http://daid.github.io/EmptyEpsilon/jquery-ui.min.css" rel="stylesheet">')
+        stream.write('<link href="http://daid.github.io/EmptyEpsilon/main.css" rel="stylesheet">')
+        stream.write('</head>')
+        stream.write('<body>')
 
-        print('<div class="ui-widget ui-widget-content ui-corner-all">')
-        print('<h1>Info</h1>')
-        print('This is the EmptyEpsilon script reference for this version of EmptyEpsilon. By no means this is a guide to help you scripting, you should check <a href="http://emptyepsilon.org/">emptyepsilon.org</a> for the guide on scripting.')
-        print('As well as check the already existing scenario and ship data files on how to get started.')
-        print('</div>')
+        stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
+        stream.write('<h1>Info</h1>')
+        stream.write('This is the EmptyEpsilon script reference for this version of EmptyEpsilon. By no means this is a guide to help you scripting, you should check <a href="http://emptyepsilon.org/">emptyepsilon.org</a> for the guide on scripting.')
+        stream.write('As well as check the already existing scenario and ship data files on how to get started.')
+        stream.write('</div>')
 
-        print('<div class="ui-widget ui-widget-content ui-corner-all">')
-        print('<h2>Objects</h2>')
-        print('<ul>')
+        stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
+        stream.write('<h2>Objects</h2>')
+        stream.write('<ul>')
         for d in self._definitions:
             if isinstance(d, ScriptClass) and d.parent is None:
-                d.outputClassTree()
-        print('</ul>')
-        print('</div>')
+                d.outputClassTree(stream)
+        stream.write('</ul>')
+        stream.write('</div>')
 
-        print('<div class="ui-widget ui-widget-content ui-corner-all">')
-        print('<h2>Functions</h2>')
-        print('<ul>')
+        stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
+        stream.write('<h2>Functions</h2>')
+        stream.write('<ul>')
         for d in self._definitions:
             if isinstance(d, ScriptFunction):
-                print('<li>%s' % (d.name))
-                print('<dd>%s</dd>' % (d.description.replace('<', '&lt;')))
-        print('</ul>')
-        print('</div>')
+                stream.write('<li>%s' % (d.name))
+                stream.write('<dd>%s</dd>' % (d.description.replace('<', '&lt;')))
+        stream.write('</ul>')
+        stream.write('</div>')
 
         for d in self._definitions:
             if isinstance(d, ScriptClass):
-                print('<div class="ui-widget ui-widget-content ui-corner-all">')
-                print('<h2><a name="class_%s">%s</a></h2>' % (d.name, d.name))
-                print('<div>%s</div>' % (d.description.replace('<', '&lt;')))
+                stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
+                stream.write('<h2><a name="class_%s">%s</a></h2>' % (d.name, d.name))
+                stream.write('<div>%s</div>' % (d.description.replace('<', '&lt;')))
                 if d.parent is not None:
-                    print('Subclass of: <a href="#class_%s">%s</a>' % (d.parent.name, d.parent.name))
-                print('<dl>')
+                    stream.write('Subclass of: <a href="#class_%s">%s</a>' % (d.parent.name, d.parent.name))
+                stream.write('<dl>')
                 for func in d.functions:
                     if func.parameters is None:
-                        print('<dt>%s:%s [ERROR]</dt>' % (d.name, func.name))
+                        stream.write('<dt>%s:%s [ERROR]</dt>' % (d.name, func.name))
                     else:
-                        print('<dt>%s:%s(%s)</dt>' % (d.name, func.name, func.parameters.replace('<', '&lt;')))
-                    print('<dd>%s</dd>' % (func.description.replace('<', '&lt;')))
-                print('</dl>')
-                print('</div>')
+                        stream.write('<dt>%s:%s(%s)</dt>' % (d.name, func.name, func.parameters.replace('<', '&lt;')))
+                    stream.write('<dd>%s</dd>' % (func.description.replace('<', '&lt;')))
+                stream.write('</dl>')
+                stream.write('</div>')
 
-        print('<script src="http://daid.github.io/EmptyEpsilon/jquery.min.js"></script>')
-        print('<script src="http://daid.github.io/EmptyEpsilon/jquery-ui.min.js"></script>')
-        print('</body>')
-        print('</html>')
+        stream.write('<script src="http://daid.github.io/EmptyEpsilon/jquery.min.js"></script>')
+        stream.write('<script src="http://daid.github.io/EmptyEpsilon/jquery-ui.min.js"></script>')
+        stream.write('</body>')
+        stream.write('</html>')
 
 if __name__ == "__main__":
     dg = DocumentationGenerator()
@@ -244,4 +245,7 @@ if __name__ == "__main__":
     dg.readScriptDefinitions()
     dg.linkFunctions()
     dg.linkParents()
-    dg.generateDocs()
+    if len(sys.argv) > 1:
+        dg.generateDocs(open(sys.argv[1], "wt"))
+    else:
+        dg.generateDocs(sys.stdout)
