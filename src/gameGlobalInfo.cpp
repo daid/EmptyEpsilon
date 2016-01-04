@@ -258,5 +258,5 @@ static int getObjectsInRadius(lua_State* L)
     return convert<PVector<SpaceObject> >::returnType(L, objects);
 }
 /// getObjectsInRadius(x, y, radius)
-/// Return the player's ship, use -1 to get the first active player ship.
+/// Return a list of all space objects at the x,y location within a certain radius.
 REGISTER_SCRIPT_FUNCTION(getObjectsInRadius);

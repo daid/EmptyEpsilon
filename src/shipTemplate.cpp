@@ -9,17 +9,30 @@
 REGISTER_SCRIPT_CLASS(ShipTemplate)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setName);
+    /// Set the description shown for this ship in the science database.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDescription);
+    /// Sets the type of template. Defaults to normal ships, so then it does not need to be set.
+    /// Example: template:setType("ship"), template:setType("playership"), template:setType("station")
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setType);
+    /// Set the default AI behaviour. EE has 3 types of AI coded into the game right now: "default", "fighter", "missilevolley"
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDefaultAI);
+    /// Set the 3D model to be used for this template. The model referers to data set in the model_data.lua file.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setModel);
+    /// Set the size class for this ship. Ships of a smaller size-class can dock on ships of a larger size class. NOTE: This behaviour might change in the future.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSizeClass);
+    /// Setup a beam weapon.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeam);
+    /// Set the amount of missile tubes, limited to a maximum of 16.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubes);
+    /// Set the amount of starting hull
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setHull);
+    /// Set the front and back shield values. 0 means no shields. For stations only the front shield value is used.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShields);
+    /// Set the impulse speed, rotation speed and impulse acceleration for this ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSpeed);
+    /// Set the warp speed for warp level 1 for this ship. Setting this will indicate that this ship has a warpdrive. (normal value is 1000)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWarpSpeed);
+    /// Set if this ship has a jump drive. Example: template:setJumpDrive(true)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCloaking);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWeaponStorage);
@@ -112,6 +125,15 @@ ShipTemplate::ShipTemplate()
     has_cloaking = false;
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = 0;
+    radar_trace = "RadarArrow.png";
+}
+
+void ShipTemplate::setType(TemplateType type)
+{
+    if (radar_trace == "RadarArrow.png" && type == Station)
+    {
+        radar_trace = "RadarBlip.png";
+    }
 }
 
 void ShipTemplate::setName(string name)

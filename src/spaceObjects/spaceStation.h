@@ -42,6 +42,7 @@ public:
     float getShieldMax() { return shields_max; }
     void setShield(float amount) { if (amount < 0) return; shields = amount; }
     void setShieldMax(float amount) { if (amount < 0) return; shields_max = amount; shields = std::max(shields, shields_max); }
+    void setRadarTrace(string trace) { radar_trace = trace; }
 
     virtual string getExportLine();
 };

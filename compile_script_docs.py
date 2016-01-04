@@ -1,3 +1,7 @@
+# Python script that generates the documentation for script functions.
+# This parses the codeblocks for to find all the source files, then parses all the source files for script macros.
+# Finally it outputs all the documentation to stdout so it can be stored on disk.
+# This script should run in both python2 and python3
 import re
 import os
 try:
@@ -185,6 +189,12 @@ class DocumentationGenerator(object):
         print('<link href="http://daid.github.io/EmptyEpsilon/main.css" rel="stylesheet">')
         print('</head>')
         print('<body>')
+
+        print('<div class="ui-widget ui-widget-content ui-corner-all">')
+        print('<h1>Info</h1>')
+        print('This is the EmptyEpsilon script reference for this version of EmptyEpsilon. By no means this is a guide to help you scripting, you should check <a href="http://emptyepsilon.org/">emptyepsilon.org</a> for the guide on scripting.')
+        print('As well as check the already existing scenario and ship data files on how to get started.')
+        print('</div>')
 
         print('<div class="ui-widget ui-widget-content ui-corner-all">')
         print('<h2>Objects</h2>')

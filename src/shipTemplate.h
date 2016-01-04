@@ -78,7 +78,7 @@ private:
 public:
     string getName() {return this->name;}
     string getDescription() {return this->description;}
-    void setType(TemplateType type) { this->type = type; }
+    void setType(TemplateType type);
     TemplateType getType() { return type; }
 
     P<ModelData> model_data;
@@ -98,7 +98,6 @@ public:
     int weapon_storage[MW_Count];
 
     string radar_trace;
-    bool custom_trace = 0;
 
     std::vector<ShipRoomTemplate> rooms;
     std::vector<ShipDoorTemplate> doors;
@@ -123,7 +122,7 @@ public:
     void addRoom(sf::Vector2i position, sf::Vector2i size) { rooms.push_back(ShipRoomTemplate(position, size, SYS_None)); }
     void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system) { rooms.push_back(ShipRoomTemplate(position, size, system)); }
     void addDoor(sf::Vector2i position, bool horizontal) { doors.push_back(ShipDoorTemplate(position, horizontal)); }
-    void setRadarTrace(string trace){radar_trace=trace; custom_trace = 1;}
+    void setRadarTrace(string trace) { radar_trace=trace; }
 
     sf::Vector2i interiorSize();
     ESystem getSystemAtRoom(sf::Vector2i position);
