@@ -63,6 +63,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeapon);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponTubeCount);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadarTrace);
 }
 
 /* Define script conversion function for the EMainScreenSetting enum. */
@@ -157,6 +158,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&combat_maneuver_boost_active, 0.2);
     registerMemberReplication(&combat_maneuver_strafe_request);
     registerMemberReplication(&combat_maneuver_strafe_active, 0.2);
+    registerMemberReplication(&radar_trace);
 
     for(int n=0; n<SYS_COUNT; n++)
     {
@@ -231,14 +233,7 @@ void SpaceShip::setShipTemplate(string template_name)
     }
     weapon_tubes = ship_template->weapon_tubes;
 
-    if (ship_template->custom_trace)
-    {
     radar_trace = ship_template->radar_trace;
-    }
-    else
-    {
-    radar_trace = "RadarArrow.png";
-    }
 
     hull_strength = hull_max = ship_template->hull;
     front_shield = ship_template->front_shields;
@@ -318,12 +313,14 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
 
     sf::Sprite objectSprite;
 
-    //if the ship is scanned, set the custom radar
-    if (scanned_by_player != SS_NotScanned){
-    textureManager.setTexture(objectSprite, radar_trace);
+    //if the ship is not scanned, set the default icon, else the ship specific
+    if (scanned_by_player == SS_NotScanned || scanned_by_player == SS_FriendOrFoeIdentified)
+    {
+        textureManager.setTexture(objectSprite, "RadarArrow.png");
     }
-    else{
-    textureManager.setTexture(objectSprite, "RadarArrow.png");
+    else
+    {
+        textureManager.setTexture(objectSprite, radar_trace);
     }
 
     objectSprite.setRotation(getRotation());

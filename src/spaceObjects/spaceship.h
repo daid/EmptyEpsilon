@@ -372,6 +372,8 @@ public:
 
     void setWeaponTubeCount(int amount);
     int getWeaponTubeCount();
+    
+    void setRadarTrace(string trace) { radar_trace = trace; }
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);

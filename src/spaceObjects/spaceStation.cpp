@@ -20,6 +20,7 @@ REGISTER_SCRIPT_SUBCLASS(SpaceStation, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, getShieldMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, setShield);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, setShieldMax);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, setRadarTrace);
 }
 
 REGISTER_MULTIPLAYER_CLASS(SpaceStation, "SpaceStation");
@@ -37,6 +38,7 @@ SpaceStation::SpaceStation()
     registerMemberReplication(&shields_max);
     registerMemberReplication(&shieldHitEffect, 0.5);
     registerMemberReplication(&callsign);
+    registerMemberReplication(&radar_trace);
 
     comms_script_name = "comms_station.lua";
 
@@ -154,14 +156,7 @@ void SpaceStation::setTemplate(string template_name)
     hull_strength = hull_max = ship_template->hull;
     shields = shields_max = ship_template->front_shields;
 
-    if (ship_template->custom_trace)
-    {
     radar_trace = ship_template->radar_trace;
-    }
-    else
-    {
-    radar_trace = "RadarBlip.png";
-    }
 
     ship_template->setCollisionData(this);
     model_info.setData(ship_template->model_data);

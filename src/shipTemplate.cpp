@@ -112,6 +112,15 @@ ShipTemplate::ShipTemplate()
     has_cloaking = false;
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = 0;
+    radar_trace = "RadarArrow.png";
+}
+
+void ShipTemplate::setType(TemplateType type)
+{
+    if (radar_trace == "RadarArrow.png" && type == Station)
+    {
+        radar_trace = "RadarBlip.png";
+    }
 }
 
 void ShipTemplate::setName(string name)
