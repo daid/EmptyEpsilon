@@ -61,6 +61,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponCycleTime);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponDamage);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeapon);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponColor);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponTubeCount);
     /// Set the icon to be used for this ship on the radar.
@@ -233,6 +234,7 @@ void SpaceShip::setShipTemplate(string template_name)
         beam_weapons[n].range = ship_template->beams[n].range;
         beam_weapons[n].cycleTime = ship_template->beams[n].cycle_time;
         beam_weapons[n].damage = ship_template->beams[n].damage;
+        beam_weapons[n].beam_color = ship_template->beams[n].beam_color;
     }
     weapon_tubes = ship_template->weapon_tubes;
 
@@ -668,6 +670,7 @@ void SpaceShip::fireBeamWeapon(int index, P<SpaceObject> target)
     P<BeamEffect> effect = new BeamEffect();
     effect->setSource(this, ship_template->model_data->getBeamPosition(index));
     effect->setTarget(target, hitLocation);
+    effect->beam_color = beam_weapons[index].beam_color;
 
     DamageInfo info(this, DT_Energy, hitLocation);
     info.frequency = beam_frequency;

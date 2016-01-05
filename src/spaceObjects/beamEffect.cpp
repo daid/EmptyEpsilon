@@ -12,13 +12,14 @@ BeamEffect::BeamEffect()
     lifetime = 1.0;
     sourceId = -1;
     target_id = -1;
-    
+
     registerMemberReplication(&sourceId);
     registerMemberReplication(&target_id);
     registerMemberReplication(&sourceOffset);
     registerMemberReplication(&targetOffset);
     registerMemberReplication(&targetLocation, 1.0);
     registerMemberReplication(&hitNormal);
+    registerMemberReplication(&beam_color);
 }
 
 #if FEATURE_3D_RENDERING
@@ -29,7 +30,7 @@ void BeamEffect::draw3DTransparent()
     sf::Vector3f endPoint(targetLocation.x, targetLocation.y, targetOffset.z);
     sf::Vector3f eyeNormal = sf::normalize(sf::cross(camera_position - startPoint, endPoint - startPoint));
 
-    basicShader->setParameter("textureMap", *textureManager.getTexture("beam_texture.png"));
+    basicShader->setParameter("textureMap", *textureManager.getTexture(beam_color));
     sf::Shader::bind(basicShader);
     glColor3f(lifetime, lifetime, lifetime);
     {
