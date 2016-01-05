@@ -717,7 +717,7 @@ GuiShipRetrofit::GuiShipRetrofit(GuiContainer* owner)
     for(int n=0; n<MW_Count; n++)
     {
         missile_storage_amount_selector[n] = new GuiSelector(left_col, "", [this, n](int index, string value) {
-            int diff = target->weapon_storage_max[n] - index;
+            int diff = index - target->weapon_storage_max[n];
             target->weapon_storage_max[n] += diff;
             target->weapon_storage[n] = std::max(0, target->weapon_storage[n] + diff);
         });
