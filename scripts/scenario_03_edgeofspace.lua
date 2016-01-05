@@ -547,10 +547,16 @@ function update(delta)
 		if Player:isDocked(EOS_Station) then
             -- Reconfigure the player ship into a Wartime Technician, which has more weapon capabilities then the Technical cruiser.
 			Player:setTypeName("Wartime Technician")
+<<<<<<< HEAD
             --             # Arc, Dir, Range, CycleTime, Dmg
             Player:setBeam(0, 100, -20, 1000.0, 6.0, 10)
             Player:setBeam(1, 100,  20, 1000.0, 6.0, 10)
             Player:setBeam(2,  90, 180, 1000.0, 6.0, 10)
+=======
+            Player:setBeamWeapon(0, 100, -20, 1000.0, 6.0, 10)
+            Player:setBeamWeapon(1, 100,  20, 1000.0, 6.0, 10)
+            Player:setBeamWeapon(2,  90, 180, 1000.0, 6.0, 10)
+>>>>>>> refs/remotes/daid/master
             Player:setWeaponTubeCount(2)
             Player:setWeaponStorageMax("Homing", 12)
             Player:setWeaponStorageMax("Nuke", 4)
