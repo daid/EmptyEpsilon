@@ -134,6 +134,7 @@ void ShipTemplate::setType(TemplateType type)
     {
         radar_trace = "RadarBlip.png";
     }
+     this->type = type;
 }
 
 void ShipTemplate::setName(string name)
