@@ -41,7 +41,7 @@ class BeamTemplate : public sf::NonCopyable
 {
 public:
     float arc, direction, range, cycle_time, damage;
-    string beam_color;
+    string texture;
 };
 class ShipRoomTemplate
 {
@@ -112,7 +112,7 @@ public:
     void setSizeClass(int size_class) { this->size_class = size_class; }
     void setMesh(string model, string color_texture, string specular_texture, string illumination_texture);
     void setBeam(int index, float arc, float direction, float range, float cycle_time, float damage);
-    void setBeamColor(int index, string beam_color) { beams[index].beam_color = beam_color; }
+    void setBeamTexture(int index, string texture) { beams[index].texture = texture; }
     void setTubes(int amount, float load_time) { weapon_tubes = std::min(max_weapon_tubes, amount); tube_load_time = load_time; }
     void setHull(float amount) { hull = amount; }
     void setShields(float front, float rear) { front_shields = front; rear_shields = rear; }
