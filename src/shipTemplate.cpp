@@ -111,7 +111,7 @@ ShipTemplate::ShipTemplate()
         beams[n].range = 0.0;
         beams[n].damage = 0.0;
         beams[n].cycle_time = 0.0;
-        beams[n].beam_color = "beam_orange.png";
+        beams[n].beam_texture = "beam_orange.png";
     }
     type = Ship;
     size_class = 10;

@@ -13,7 +13,7 @@ class BeamEffect : public SpaceObject, public Updatable
     sf::Vector2f targetLocation;
     sf::Vector3f hitNormal;
 public:
-    string texture;
+    string beam_texture;
     BeamEffect();
 
 #if FEATURE_3D_RENDERING

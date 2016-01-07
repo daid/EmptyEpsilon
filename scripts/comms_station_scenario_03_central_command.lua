@@ -23,7 +23,7 @@ function mainMenu()
 			end
 			
 			if comms_target.mission_state == 3 then
-				setCommsMessage("The Arlenian science station Galileo is in sector C5. Deliver the E.O.S Scope data there.")
+				setCommsMessage("The Arlenian science station Galileo is in sector C5. Lay in a course bearing 356 from Central Command and deliver the E.O.S Scope data there.")
 				return true
 			end
 			
