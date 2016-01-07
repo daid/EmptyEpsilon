@@ -22,6 +22,8 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSizeClass);
     /// Setup a beam weapon.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeam);
+    // Setup a beam weapon texture
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamTexture);
     /// Set the amount of missile tubes, limited to a maximum of 16.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubes);
     /// Set the amount of starting hull
@@ -109,6 +111,7 @@ ShipTemplate::ShipTemplate()
         beams[n].range = 0.0;
         beams[n].damage = 0.0;
         beams[n].cycle_time = 0.0;
+        beams[n].beam_texture = "beam_orange.png";
     }
     type = Ship;
     size_class = 10;

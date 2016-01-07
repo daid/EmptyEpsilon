@@ -63,6 +63,7 @@ public:
     float damage;//Server side only
     //Beam runtime state
     float cooldown;
+    string beam_texture;
 };
 class WeaponTube : public sf::NonCopyable
 {
@@ -370,9 +371,16 @@ public:
         beam_weapons[index].damage = damage;
     }
 
+    void setBeamWeaponTexture(int index, string texture)
+    {
+        if (index < 0 || index >= max_beam_weapons)
+            return;
+        beam_weapons[index].beam_texture = texture;
+    }
+
     void setWeaponTubeCount(int amount);
     int getWeaponTubeCount();
-    
+
     void setRadarTrace(string trace) { radar_trace = trace; }
 };
 

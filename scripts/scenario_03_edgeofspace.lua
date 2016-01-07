@@ -16,10 +16,10 @@ function init()
     Player:setWeaponStorageMax("Nuke", 0)
     Player:setWeaponStorageMax("Mine", 0)
 
-    --Create a "Technical Officer" entity hidden in sector Z81 to talk to Relay and prompt the Captain to give the order to return to Central Command. The position of this ship in relation to the Station Nirvana also serves as a sort of timer for the inspection job.
+    --Create a "Technical Officer" entity hidden in sector Z81 to talk to Relay and prompt the Captain to give the order to return to Central Command. The position of this ship in relation to the Station Nirvana was intended to serve as a sort of timer for the inspection job.
     Technical_Officer = CpuShip():setFaction("Human Navy"):setShipTemplate("Tug"):setCallSign("Technical Officer"):setPosition(1530000,411000):orderIdle()
     Technical_Officer:setCommsScript("") -- Disable the comms script for the Technical Officer station (though really, they should never find it all the way out in sector Z81).
-	--Create a station called "Nirvana" for "Technical Officer" to approach 
+	--Create a station called "Nirvana" for "Technical Officer" to approach. Surplus to requirements now but a good example of the crazy stuff a newbie might try.
 	Nirvana = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(1530000,412000):setCallSign("Nirvana")
 
     EOS_Station = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(60500, 42100):setCallSign("E.O.S Scope")
@@ -191,10 +191,14 @@ function init()
 	Reopen communications if you have any questions.]])
 	
 	Central_Command.mission_state = 1
+	kraylor_threat = 0
 	kraylor_warning = 0
 	command_warning = 0
 	inspection_init = 0
+	inspection_progress = 0
 	inspection_complete = 0
+	tech_databanks = 0
+	tech_stranded = 0
 	
 end
 
@@ -248,47 +252,87 @@ function update(delta)
 		
 		--K-Endline warns the crew to behave themselves as the ship approaches EOS_Station (moved as I wanted to use docking event to trigger the Technical_Officer comms)
 		if distance(Player, EOS_Station) < 5000 then
-			Kraylor_Eline:sendCommsMessage(Player, [[Attention Human Naval vessel:
+			if command_warning == 1 then
+				if kraylor_threat == 0 then
+			Kraylor_Eline:sendCommsMessage(Player, [[Attention Human Naval Vessel:
 			
 			We have noted your expansion toward Kraylor Endline Territory. Know that even the slightest act of aggression will be met with a forceful purging of all Human ships and stations from our sector of space. 
 			
 			Do what maintanence you must while you are here, but know also that we consider your telescopic station to be a potential threat.]])
 			
 			Central_Command.mission_state = 2
+			kraylor_threat = 1
+				end
+			end
 		end
 	end
+
+inspection_progress = inspection_progress + delta
+--print(inspection_progress)  -- for Debugging
 
 	--When the Apollo is docked with EOS_Station a message is received from the Technical Officer advising that his team is beginning their inspection
 	if Central_Command.mission_state == 2 then
 		if Player:isDocked(EOS_Station) and inspection_init == 0 then
 	globalMessage("Away Team in transit.")
-	Technical_Officer:sendCommsMessage(Player, [[We're beginning an inspection of the EOS Scope facility now. 
+	Technical_Officer:sendCommsMessage(Player, [[	We're beginning an inspection of the EOS Scope facility now. 
 
 	This shouldn't take long.]])
-	
-	--Technical_Officer ship starts trying to dock with Nirvana station, and when this has been achieved will send message stating inspection complete. There is likely a simpler way to do this explicitly naming Nirvana but I couldn't get it to work so I made use of the comms_ship.lua script.
-	for _, obj in ipairs(Technical_Officer:getObjectsInRange(5000)) do
-			if obj.typeName == "SpaceStation" and not Technical_Officer:isEnemy(obj) then
-				Technical_Officer:orderDock(obj)
+			inspection_init = 1 --inspection has begun (Timer event is pretty fool-proof but better to have a flag preventing "Job Done" somehow triggering before inspection starts)
+			inspection_progress = 0
+		end
+	end
+
+
+	if Central_Command.mission_state == 2 then 
+		if Player:isDocked(EOS_Station) and inspection_init == 1 then
+			if inspection_progress > 30 then
+				if tech_databanks == 0 then
+					Technical_Officer:sendCommsMessage(Player,[[It looks like the databanks are still in good working order.
+
+	We'll retrieve what we can.]])
+					tech_databanks = 1
+				end 
 			end
 		end
+	end
 
-		inspection_init = 1 --inspection has begun (Docking event is pretty fool-proof but better to have a flag preventing "Job Done" somehow triggering before inspection starts)
+	--Tech Officer complains about being left behind if the Apollo is not Docked since inspection began.
+	if Central_Command.mission_state == 2 then
+		if inspection_init ==1 then
+			if inspection_complete == 0 then
+				if inspection_progress > 50 then
+					if not Player:isDocked(EOS_Station) then
+						if tech_stranded == 0 then -- Without this the Technical Officer will always be harrassing the Apollo for pick-up once this event has triggered
+							Technical_Officer:sendCommsMessage(Player, [[Is something wrong Apollo? 
+
+We're still in the facility. 
+
+Please dock so we can come aboard.]])
+							tech_stranded = 1
+						end
+					end
+				end
+			end
 		end
 	end
 
 	--"Job Done" message to prompt the Captain to give the order to Undock and head back to Central Command after a pseudo-random time period.
 	if Central_Command.mission_state == 2 then
-		--if Player:isDocked(EOS_Station) --Removed initial dependency on being docked with EOS_Station. If Helm has already Undocked the Captain may still need a hint
-		if Technical_Officer:isDocked(Nirvana) and inspection_init == 1 and inspection_complete == 0 then --It's a bit of an ugly hack to use the ship docking to trigger this, though I like to think it has a perverse kind of beauty to it. As I understand there's not a straightforward way to sleep/wait. May want to consider a longer wait for them to complete their work, which would just mean a further offset between Technical_Officer & Nirvana during init.
+		if Player:isDocked(EOS_Station) then --If the ship is not docked, the Tech Officer will complain.
+			if inspection_init == 1 and inspection_complete == 0 then 
+				if inspection_progress > 50 then
 	globalMessage("Away Team have returned.")
 	Technical_Officer:sendCommsMessage(Player, [[Our inspection of the scope facility is complete. We were able to retrieve much of the data recorded over the past few days, though proper analysis will require an expert.
 
 	We should hurry back to Central Command with    this so they can begin work.]])
 			
 			inspection_complete = 1 -- flag preventing continuous triggering of "Job Done" comms
+				end
+			end
 		end
 	end
+
+
 
 	--Report back to Central Command
 	if Central_Command.mission_state == 2 then
