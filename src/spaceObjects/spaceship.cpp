@@ -234,7 +234,7 @@ void SpaceShip::setShipTemplate(string template_name)
         beam_weapons[n].range = ship_template->beams[n].range;
         beam_weapons[n].cycleTime = ship_template->beams[n].cycle_time;
         beam_weapons[n].damage = ship_template->beams[n].damage;
-        beam_weapons[n].texture = ship_template->beams[n].texture;
+        beam_weapons[n].beam_texture = ship_template->beams[n].beam_texture;
     }
     weapon_tubes = ship_template->weapon_tubes;
 
@@ -670,7 +670,7 @@ void SpaceShip::fireBeamWeapon(int index, P<SpaceObject> target)
     P<BeamEffect> effect = new BeamEffect();
     effect->setSource(this, ship_template->model_data->getBeamPosition(index));
     effect->setTarget(target, hitLocation);
-    effect->texture = beam_weapons[index].texture;
+    effect->beam_texture = beam_weapons[index].beam_texture;
 
     DamageInfo info(this, DT_Energy, hitLocation);
     info.frequency = beam_frequency;
