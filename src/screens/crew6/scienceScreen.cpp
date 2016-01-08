@@ -23,7 +23,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
             if (!my_spaceship || my_spaceship->scanning_delay > 0.0)
                 return;
 
-            targets.setToClosestTo(position, 1000);
+            targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
         }, nullptr, nullptr
     );
 
