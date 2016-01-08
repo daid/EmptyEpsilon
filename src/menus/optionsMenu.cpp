@@ -35,10 +35,11 @@ OptionsMenu::OptionsMenu()
         returnToMainMenu();
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
     
+    (new GuiLabel(this, "MUSIC_SELECT_LABEL", "Select Soundtrack", 30))->setPosition(-375, 50, ATopRight)->setSize(300, 50);
     GuiListbox* music_list = new GuiListbox(this, "MUSIC_PLAY", [this](int index, string value) {
         soundManager->playMusic(value);
     });
-    music_list->setPosition(-50, 50, ATopRight)->setSize(600, 800);
+    music_list->setPosition(-50, 100, ATopRight)->setSize(600, 800);
 
     std::vector<string> music_filenames = findResources("music/*.ogg");
     std::sort(music_filenames.begin(), music_filenames.end());
