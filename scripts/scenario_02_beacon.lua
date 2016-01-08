@@ -46,7 +46,7 @@ function init()
     --Small Exuari strike team, guarding RT-4 in the nebula at G5.
     transport_RT4 = CpuShip():setTemplate("Transport1x1"):setFaction("Human Navy"):setPosition(3750, 31250)
     transport_RT4:orderIdle():setCallSign("RT-4"):setCommsScript("")
-    transport_RT4:setHull(1):setFrontShieldMax(1):setRearShieldMax(1)
+    transport_RT4:setHull(1):setShieldsMax(1, 1)
     
     --Start off the mission by sending a transmission to the player
     research_station:sendCommsMessage(player, [[TheEpsilon, please come in?
