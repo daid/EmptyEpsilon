@@ -1,9 +1,7 @@
 #ifndef SPACE_SHIP_H
 #define SPACE_SHIP_H
 
-#include "engine.h"
-#include "spaceObject.h"
-#include "shipTemplate.h"
+#include "shipTemplateBasedObject.h"
 #include "spaceStation.h"
 
 enum EWeaponTubeState
@@ -73,20 +71,13 @@ public:
     float delay;
 };
 
-class SpaceShip : public SpaceObject, public Updatable
+class SpaceShip : public ShipTemplateBasedObject
 {
-    constexpr static float shield_recharge_rate = 0.2f;
 public:
     constexpr static int max_frequency = 20;
     constexpr static float combat_maneuver_charge_time = 20.0f;
     constexpr static float warp_charge_time = 4.0f;
     constexpr static float warp_decharge_time = 2.0f;
-
-    string template_name;
-    string ship_type_name;
-    P<ShipTemplate> ship_template;
-    string ship_callsign;
-    string radar_trace;
 
     float energy_level;
     ShipSystem systems[SYS_COUNT];
@@ -172,13 +163,12 @@ public:
     ESystem beam_system_target;
     BeamWeapon beam_weapons[max_beam_weapons];
 
-    float hull_strength, hull_max;
-    bool shields_active;
+    /**
+     * Frequency setting of the shields.
+     */
     int shield_frequency;
-    float front_shield, rear_shield;
-    float front_shield_max, rear_shield_max;
-    float front_shield_hit_effect, rear_shield_hit_effect;
 
+    /// MultiplayerObjectID of the targeted object, or -1 when no target is selected.
     int32_t target_id;
 
     /*!
@@ -201,11 +191,8 @@ public:
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
 
     virtual void update(float delta);
-
-    /*!
-     * Get the call sign of this ship.
-     */
-    virtual string getCallSign();
+    virtual float getShieldRechargeRate(int shield_index) override;
+    virtual float getShieldDamageFactor(DamageInfo& info, int shield_index) override;
 
     /*!
      * Check if the ship can be targeted.
@@ -213,24 +200,18 @@ public:
     virtual bool canBeTargeted() { return true; }
 
     /*!
-     * Check if spaceship has a shield
-     */
-    virtual bool hasShield() { return front_shield > (front_shield_max / 50.0) || rear_shield > (rear_shield_max / 50.0); }
-
-    /*!
-     * Spaceship takes damage
-     * \param damage_amount Damage to be delt.
-     * \param info Information about damage type (usefull for damage reduction, etc)
-     */
-    virtual void takeDamage(float damage_amount, DamageInfo info);
-
-    /*!
      * Spaceship takes damage directly on hull.
      * This is used when shields are down or by weapons that ignore shields.
      * \param damage_amount Damage to be delt.
      * \param info Information about damage type (usefull for damage reduction, etc)
      */
-    virtual void takeHullDamage(float damage_amount, DamageInfo info);
+    virtual void takeHullDamage(float damage_amount, DamageInfo& info) override;
+
+    /*!
+     * Spaceship is destroyed by damage.
+     * \param info Information about damage type
+     */
+    virtual void destroyedByDamage(DamageInfo& info);
 
     /*!
      * Jump in current direction
@@ -302,35 +283,18 @@ public:
      * \return float 0. to 1.
      */
     float getSystemEffectiveness(ESystem system);
-    virtual void setShipTemplate(string template_names);
+    
+    virtual void applyTemplateValues();
 
     P<SpaceObject> getTarget();
 
     virtual std::unordered_map<string, string> getGMInfo();
 
-    void setCallSign(string new_callsign) { ship_callsign = new_callsign; }
-    void setTypeName(string new_typename) { ship_type_name = new_typename; }
     bool isDocked(P<SpaceObject> target) { return docking_state == DS_Docked && docking_target == target; }
     int getWeaponStorage(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage[weapon]; }
     int getWeaponStorageMax(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage_max[weapon]; }
     void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage[weapon] = amount; }
     void setWeaponStorageMax(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage_max[weapon] = amount; weapon_storage[weapon] = std::min(int(weapon_storage[weapon]), amount); }
-    float getHull() { return hull_strength; }
-    float getHullMax() { return hull_max; }
-    void setHull(float amount) { if (amount < 0) return; hull_strength = amount; }
-    void setHullMax(float amount) { if (amount < 0) return; hull_max = amount; }
-    float getFrontShield() { return front_shield; }
-    float getFrontShieldMax() { return front_shield_max; }
-    int getFrontShieldPercentage() { if (front_shield_max <= 0.0) return 0; return int(100 * front_shield / front_shield_max); }
-    void setFrontShield(float amount) { if (amount < 0) return; front_shield = amount; }
-    void setFrontShieldMax(float amount) { if (amount < 0) return; front_shield_max = amount; front_shield = std::min(front_shield, front_shield_max); }
-    float getRearShield() { return rear_shield; }
-    float getRearShieldMax() { return rear_shield_max; }
-    int getRearShieldPercentage() { if (rear_shield_max <= 0.0) return 0; return int(100 * rear_shield / rear_shield_max); }
-    void setRearShield(float amount) { if (amount < 0) return; rear_shield = amount; }
-    void setRearShieldMax(float amount) { if (amount < 0) return; rear_shield_max = amount; rear_shield = std::min(rear_shield, rear_shield_max); }
-    bool getShieldsActive() { return shields_active; }
-    void setShieldsActive(bool active) { shields_active = active; }
     float getSystemHealth(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].health; }
     void setSystemHealth(ESystem system, float health) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].health = std::min(1.0f, std::max(-1.0f, health)); }
     float getSystemHeat(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].heat_level; }

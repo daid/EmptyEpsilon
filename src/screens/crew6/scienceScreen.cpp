@@ -124,8 +124,8 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             if (ship->scanned_by_player >= SS_SimpleScan)
             {
                 info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
-                info_type->setValue(ship->ship_type_name);
-                info_shields->setValue(string(int(ship->front_shield)) + ":" + string(int(ship->rear_shield)));
+                info_type->setValue(ship->getTypeName());
+                info_shields->setValue(ship->getShieldDataString());
             }
             if (ship->scanned_by_player >= SS_FullScan)
             {
@@ -145,7 +145,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             if (station)
             {
                 info_type->setValue(station->template_name);
-                info_shields->setValue(string(int(station->shields)));
+                info_shields->setValue(station->getShieldDataString());
             }
         }
         string description = obj->getDescription();

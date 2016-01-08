@@ -5,8 +5,9 @@
 #include "engine.h"
 #include "modelData.h"
 
-const static int max_beam_weapons = 16;
-const static int max_weapon_tubes = 16;
+constexpr static int max_beam_weapons = 16;
+constexpr static int max_weapon_tubes = 16;
+constexpr static int max_shield_count = 8;
 
 enum EMissileWeapons
 {
@@ -92,7 +93,8 @@ public:
     int weapon_tubes;
     float tube_load_time;
     float hull;
-    float front_shields, rear_shields;
+    int shield_count;
+    float shield_level[max_shield_count];
     float impulse_speed, turn_speed, warp_speed;
     float impulse_acceleration;
     bool has_jump_drive, has_cloaking;
@@ -115,7 +117,7 @@ public:
     void setBeamTexture(int index, string texture) { if (index >= 0 && index < max_beam_weapons) beams[index].beam_texture = texture; }
     void setTubes(int amount, float load_time) { weapon_tubes = std::min(max_weapon_tubes, amount); tube_load_time = load_time; }
     void setHull(float amount) { hull = amount; }
-    void setShields(float front, float rear) { front_shields = front; rear_shields = rear; }
+    void setShields(std::vector<float> values);
     void setSpeed(float impulse, float turn, float acceleration) { impulse_speed = impulse; turn_speed = turn; impulse_acceleration = acceleration; }
     void setWarpSpeed(float warp) { warp_speed = warp; }
     void setJumpDrive(bool enabled) { has_jump_drive = enabled; }

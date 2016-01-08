@@ -12,7 +12,7 @@
 
 /// CpuShips are AI controlled ships.
 /// They can get different orders.
-/// Example: CpuShip():setShipTemplate("Fighter"):setPosition(random(-10000, 10000), random(0, 3000)):setFaction("Human Navy"):orderRoaming():setScanned(true)
+/// Example: CpuShip():setTemplate("Fighter"):setPosition(random(-10000, 10000), random(0, 3000)):setFaction("Human Navy"):orderRoaming():setScanned(true)
 REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceShip)
 {
     /// Switch the AI to a different type. AI can be set per ship, or left per default which will be taken from the shipTemplate then.
@@ -49,7 +49,6 @@ CpuShip::CpuShip()
 
     setRotation(random(0, 360));
     target_rotation = getRotation();
-    shields_active = true;
 
     comms_script_name = "comms_ship.lua";
 
@@ -85,9 +84,9 @@ void CpuShip::update(float delta)
     ai->run(delta);
 }
 
-void CpuShip::setShipTemplate(string template_name)
+void CpuShip::applyTemplateValues()
 {
-    SpaceShip::setShipTemplate(template_name);
+    SpaceShip::applyTemplateValues();
 
     new_ai_name = ship_template->default_ai_name;
 }
@@ -179,7 +178,7 @@ std::unordered_map<string, string> CpuShip::getGMInfo()
 
 string CpuShip::getExportLine()
 {
-    string ret = "CpuShip():setFaction(\"" + getFaction() + "\"):setShipTemplate(\"" + template_name + "\"):setCallSign(\"" + getCallSign() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
+    string ret = "CpuShip():setFaction(\"" + getFaction() + "\"):setTemplate(\"" + template_name + "\"):setCallSign(\"" + getCallSign() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
     switch(orders)
     {
     case AI_Idle: break;

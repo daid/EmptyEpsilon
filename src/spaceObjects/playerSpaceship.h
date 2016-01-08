@@ -77,6 +77,7 @@ public:
     int scanning_depth;
     float shield_calibration_delay;
     bool auto_repair_enabled;
+    bool shields_active;
 
     ECommsState comms_state;
     float comms_open_delay;
@@ -139,18 +140,21 @@ public:
     void commandScanCancel();
     void commandSetAlertLevel(EAlertLevel level);
 
-    virtual void setShipTemplate(string template_name);
+    virtual void applyTemplateValues() override;
 
-    virtual void executeJump(float distance);
-    virtual void fireBeamWeapon(int index, P<SpaceObject> target);
-    virtual void takeHullDamage(float damage_amount, DamageInfo info);
+    virtual void executeJump(float distance) override;
+    virtual void fireBeamWeapon(int index, P<SpaceObject> target) override;
+    virtual void takeHullDamage(float damage_amount, DamageInfo& info) override;
     void setSystemCoolant(ESystem system, float level);
 
-    virtual void update(float delta);
+    virtual void update(float delta) override;
     bool useEnergy(float amount) { if (energy_level >= amount) { energy_level -= amount; return true; } return false; }
     void addHeat(ESystem system, float amount);
 
     float getNetPowerUsage();
+    
+    virtual bool getShieldsActive() { return shields_active; }
+    void setShieldsActive(bool active) { shields_active = active; }
 
     void setCommsMessage(string message);
     void addCommsReply(int32_t id, string message);

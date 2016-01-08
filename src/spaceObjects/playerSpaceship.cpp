@@ -13,6 +13,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getWaypoint);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getWaypointCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getAlertLevel);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setShieldsActive);
 
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandTargetRotation);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandImpulse);
@@ -133,6 +134,7 @@ PlayerSpaceship::PlayerSpaceship()
     scanning_depth = 0;
     scan_probe_stock = max_scan_probes;
     alert_level = AL_Normal;
+    shields_active = false;
 
     setFactionId(1);
 
@@ -201,7 +203,7 @@ PlayerSpaceship::PlayerSpaceship()
         }
     }
     
-    ship_callsign =  "PL" + string(getMultiplayerId());
+    setCallSign("PL" + string(getMultiplayerId()));
 }
 
 void PlayerSpaceship::update(float delta)
@@ -385,9 +387,9 @@ void PlayerSpaceship::update(float delta)
         energy_level = 1000.0;
 }
 
-void PlayerSpaceship::setShipTemplate(string template_name)
+void PlayerSpaceship::applyTemplateValues()
 {
-    SpaceShip::setShipTemplate(template_name);
+    SpaceShip::applyTemplateValues();
 
     switch(gameGlobalInfo->player_warp_jump_drive_setting)
     {
@@ -427,7 +429,7 @@ void PlayerSpaceship::fireBeamWeapon(int idx, P<SpaceObject> target)
     }
 }
 
-void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo info)
+void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
 {
     if (info.type != DT_EMP)
     {
@@ -1155,5 +1157,5 @@ void PlayerSpaceship::commandSetAlertLevel(EAlertLevel level)
 
 string PlayerSpaceship::getExportLine()
 {
-    return "PlayerSpaceship():setShipTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
+    return "PlayerSpaceship():setTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
 }
