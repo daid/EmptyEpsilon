@@ -22,15 +22,15 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
         [this](sf::Vector2f position) {
             if (!my_spaceship || my_spaceship->scanning_delay > 0.0)
                 return;
-            
+
             targets.setToClosestTo(position, 1000);
         }, nullptr, nullptr
     );
-    
+
     GuiAutoLayout* sidebar = new GuiAutoLayout(radar_view, "SIDE_BAR", GuiAutoLayout::LayoutVerticalTopToBottom);
     sidebar->setPosition(-20, 50, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiScanTargetButton(sidebar, "SCAN_BUTTON", &targets))->setSize(GuiElement::GuiSizeMax, 50);
-    
+
     info_callsign = new GuiKeyValueDisplay(sidebar, "SCIENCE_CALLSIGN", 0.4, "Callsign", "");
     info_callsign->setSize(GuiElement::GuiSizeMax, 30);
     info_distance = new GuiKeyValueDisplay(sidebar, "SCIENCE_DISTANCE", 0.4, "Distance", "");
@@ -39,7 +39,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     info_heading->setSize(GuiElement::GuiSizeMax, 30);
     info_relspeed = new GuiKeyValueDisplay(sidebar, "SCIENCE_REL_SPEED", 0.4, "Rel.Speed", "");
     info_relspeed->setSize(GuiElement::GuiSizeMax, 30);
-    
+
     info_faction = new GuiKeyValueDisplay(sidebar, "SCIENCE_FACTION", 0.4, "Faction", "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
     info_type = new GuiKeyValueDisplay(sidebar, "SCIENCE_TYPE", 0.4, "Type", "");
@@ -51,31 +51,36 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     info_shield_frequency->setSize(GuiElement::GuiSizeMax, 100);
     info_beam_frequency = new GuiFrequencyCurve(sidebar, "SCIENCE_SHIELD_FREQUENCY", true, false);
     info_beam_frequency->setSize(GuiElement::GuiSizeMax, 100);
-    
+
+    (new GuiSelector(radar_view, "ZOOM_SELECT", [this](int index, string value) {
+        float zoom_amount = 1 + 0.5 * index ;
+        radar->setDistance(gameGlobalInfo->long_range_radar_range / zoom_amount);
+    }))->setOptions({"Zoom: 1x", "Zoom: 1.5x", "Zoom: 2x", "Zoom: 2.5x", "Zoom: 3x"})->setSelectionIndex(0)->setPosition(-20, -20, ABottomRight)->setSize(250, 50);
+
     if (!gameGlobalInfo->use_beam_shield_frequencies)
     {
         info_shield_frequency->hide();
         info_beam_frequency->hide();
     }
-    
+
     for(int n=0; n<SYS_COUNT; n++)
     {
         info_system[n] = new GuiKeyValueDisplay(sidebar, "SCIENCE_SYSTEM_" + string(n), 0.75, getSystemName(ESystem(n)), "-");
         info_system[n]->setSize(GuiElement::GuiSizeMax, 30);
         info_system[n]->hide();
     }
-    
+
     info_description = new GuiScrollText(sidebar, "SCIENCE_DESC", "");
     info_description->setTextSize(20)->hide()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
+
     database_view = new DatabaseViewComponent(this);
     database_view->hide()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
+
     (new GuiListbox(this, "VIEW_SELECTION", [this](int index, string value) {
         radar_view->setVisible(index == 0);
         database_view->setVisible(index == 1);
     }))->setOptions({"Radar", "Database"})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(200, 100);
-    
+
     new GuiScanningDialog(this, "SCANNING_DIALOG");
 }
 
@@ -95,7 +100,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
 
     for(int n=0; n<SYS_COUNT; n++)
         info_system[n]->setValue("-")->hide();
-    
+
     if (targets.get())
     {
         P<SpaceObject> obj = targets.get();
@@ -108,7 +113,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         float rel_velocity = dot(obj->getVelocity(), position_diff / distance) - dot(my_spaceship->getVelocity(), position_diff / distance);
         if (fabs(rel_velocity) < 0.01)
             rel_velocity = 0.0;
-        
+
         info_callsign->setValue(obj->getCallSign());
         info_distance->setValue(string(distance / 1000.0f, 1) + "km");
         info_heading->setValue(string(int(heading)));
