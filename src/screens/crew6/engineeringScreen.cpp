@@ -95,7 +95,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
             hull_display->setColor(sf::Color::Red);
         else
             hull_display->setColor(sf::Color::White);
-        shields_display->setValue(string(my_spaceship->getFrontShieldPercentage()) + "% " + string(my_spaceship->getRearShieldPercentage()) + "%");
+        shields_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "% " + string(my_spaceship->getShieldPercentage(1)) + "%");
         
         for(int n=0; n<SYS_COUNT; n++)
         {

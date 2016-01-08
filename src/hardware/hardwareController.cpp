@@ -315,8 +315,16 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
         return true;
     }
     SHIP_VARIABLE("Hull", 100.0f * ship->hull_strength / ship->hull_max);
-    SHIP_VARIABLE("FrontShield", ship->getFrontShieldPercentage());
-    SHIP_VARIABLE("RearShield", ship->getRearShieldPercentage());
+    SHIP_VARIABLE("FrontShield", ship->getShieldPercentage(0));
+    SHIP_VARIABLE("RearShield", ship->getShieldPercentage(1));
+    SHIP_VARIABLE("Shield0", ship->getShieldPercentage(0));
+    SHIP_VARIABLE("Shield1", ship->getShieldPercentage(1));
+    SHIP_VARIABLE("Shield2", ship->getShieldPercentage(2));
+    SHIP_VARIABLE("Shield3", ship->getShieldPercentage(3));
+    SHIP_VARIABLE("Shield4", ship->getShieldPercentage(4));
+    SHIP_VARIABLE("Shield5", ship->getShieldPercentage(5));
+    SHIP_VARIABLE("Shield6", ship->getShieldPercentage(6));
+    SHIP_VARIABLE("Shield7", ship->getShieldPercentage(7));
     SHIP_VARIABLE("Energy", ship->energy_level);
     SHIP_VARIABLE("ShieldsUp", ship->shields_active ? 1.0f : 0.0f);
     SHIP_VARIABLE("Impulse", ship->current_impulse);

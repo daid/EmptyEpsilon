@@ -21,14 +21,14 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     /// Set the maximum amount of hull for this station. Stations never repair hull damage, so this only effects the percentage displays
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setHullMax);
     /// Get the current shield level, stations only have a single shield, unlike ships that have a front&back shield
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShield);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldLevel);
     /// Get the maxium shield level.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldMax);
-    /// Set the current amount of shield.
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShield);
+    /// Set the current amount of shields.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShields);
     /// Set the maximum shield level. Note that this does low the current shield level when the max becomes lower, but it does not increase the shield level.
     /// A seperate call to setShield is needed for that.
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShieldMax);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShieldsMax);
     /// Set the icon to be used for this station on the radar.
     /// For example, station:setRadarTrace("RadarArrow.png") will show an arrow instead of a dot for this station.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRadarTrace);
@@ -278,6 +278,23 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
 
     //Call the virtual applyTemplateValues function so subclasses can get extra values from the ship templates.
     applyTemplateValues();
+}
+
+void ShipTemplateBasedObject::setShields(std::vector<float> amounts)
+{
+    for(int n=0; n<std::min(int(amounts.size()), shield_count); n++)
+    {
+        shield_level[n] = amounts[n];
+    }
+}
+
+void ShipTemplateBasedObject::setShieldsMax(std::vector<float> amounts)
+{
+    shield_count = std::min(max_shield_count, int(amounts.size()));
+    for(int n=0; n<shield_count; n++)
+    {
+        shield_level[n] = amounts[n];
+    }
 }
 
 string ShipTemplateBasedObject::getShieldDataString()

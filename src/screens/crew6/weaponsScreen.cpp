@@ -54,7 +54,7 @@ void WeaponsScreen::onDraw(sf::RenderTarget& window)
     if (my_spaceship)
     {
         energy_display->setValue(string(int(my_spaceship->energy_level)));
-        shields_display->setValue(string(my_spaceship->getFrontShieldPercentage()) + "% " + string(my_spaceship->getRearShieldPercentage()) + "%");
+        shields_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "% " + string(my_spaceship->getShieldPercentage(1)) + "%");
         targets.set(my_spaceship->getTarget());
         
         if (lock_aim->getValue())
