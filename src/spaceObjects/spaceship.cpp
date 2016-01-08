@@ -14,15 +14,10 @@
 #include "gameGlobalInfo.h"
 
 #include "scriptInterface.h"
-REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
+REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
 {
-    /// Set the ship type, check shipTemplates.lua for the options.
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setShipTemplate);
     /// Set if this ship is scanned by the player or not.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanned);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setCallSign);
-    /// Set the class name of this ship. Normally the class name is copied from the template name (Ex "Cruiser") but you can override it with this function.
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setTypeName);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentified);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isScanned);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScanned);
@@ -32,21 +27,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponStorageMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponStorage);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponStorageMax);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getHull);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getHullMax);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setHull);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setHullMax);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getFrontShield);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getFrontShieldMax);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setFrontShield);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setFrontShieldMax);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getRearShield);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getRearShieldMax);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRearShield);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRearShieldMax);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getShieldsActive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getShieldsFrequency);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setShieldsActive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHealth);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHealth);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHeat);
@@ -91,7 +72,7 @@ template<> void convert<EMainScreenSetting>::param(lua_State* L, int& idx, EMain
 }
 
 SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_range)
-: SpaceObject(50, multiplayerClassName, multiplayer_significant_range)
+: ShipTemplateBasedObject(50, multiplayerClassName, multiplayer_significant_range)
 {
     setCollisionPhysics(true, false);
 
@@ -116,10 +97,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     combat_maneuver_strafe_request = 0.0;
     combat_maneuver_strafe_active = 0.0;
     target_id = -1;
-    hull_strength = hull_max = 70;
-    shields_active = false;
-    front_shield = rear_shield = front_shield_max = rear_shield_max = 50;
-    front_shield_hit_effect = rear_shield_hit_effect = 0;
     scanned_by_player = SS_NotScanned;
     beam_frequency = irandom(0, max_frequency);
     beam_system_target = SYS_None;
@@ -128,7 +105,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     impulse_acceleration = 20.0;
     energy_level = 1000;
 
-    registerMemberReplication(&ship_callsign);
     registerMemberReplication(&target_rotation, 1.5);
     registerMemberReplication(&impulse_request, 0.1);
     registerMemberReplication(&current_impulse, 0.5);
@@ -145,15 +121,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&impulse_max_speed);
     registerMemberReplication(&impulse_acceleration);
     registerMemberReplication(&warp_speed_per_warp_level);
-    registerMemberReplication(&template_name);
-    registerMemberReplication(&ship_type_name);
-    registerMemberReplication(&front_shield, 1.0);
-    registerMemberReplication(&rear_shield, 1.0);
-    registerMemberReplication(&front_shield_max);
-    registerMemberReplication(&rear_shield_max);
     registerMemberReplication(&shield_frequency);
-    registerMemberReplication(&front_shield_hit_effect, 0.5);
-    registerMemberReplication(&rear_shield_hit_effect, 0.5);
     registerMemberReplication(&scanned_by_player);
     registerMemberReplication(&docking_state);
     registerMemberReplication(&beam_frequency);
@@ -211,22 +179,11 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     scanning_depth_value = -1;
 
     if (game_server)
-        ship_callsign = gameGlobalInfo->getNextShipCallsign();
+        setCallSign(gameGlobalInfo->getNextShipCallsign());
 }
 
-void SpaceShip::setShipTemplate(string template_name)
+void SpaceShip::applyTemplateValues()
 {
-    P<ShipTemplate> new_ship_template = ShipTemplate::getTemplate(template_name);
-    if (!new_ship_template)
-    {
-        LOG(ERROR) << "Failed to find ship template: " << template_name;
-        return;
-    }
-
-    this->ship_template = new_ship_template;
-    this->template_name = template_name;
-    this->ship_type_name = template_name;
-
     for(int n=0; n<max_beam_weapons; n++)
     {
         beam_weapons[n].arc = ship_template->beams[n].arc;
@@ -238,13 +195,6 @@ void SpaceShip::setShipTemplate(string template_name)
     }
     weapon_tubes = ship_template->weapon_tubes;
 
-    radar_trace = ship_template->radar_trace;
-
-    hull_strength = hull_max = ship_template->hull;
-    front_shield = ship_template->front_shields;
-    rear_shield = ship_template->rear_shields;
-    front_shield_max = ship_template->front_shields;
-    rear_shield_max = ship_template->rear_shields;
     impulse_max_speed = ship_template->impulse_speed;
     impulse_acceleration = ship_template->impulse_acceleration;
     turn_speed = ship_template->turn_speed;
@@ -263,11 +213,7 @@ void SpaceShip::setShipTemplate(string template_name)
 void SpaceShip::draw3DTransparent()
 {
     if (!ship_template) return;
-
-    if (front_shield_hit_effect > 0)
-        model_info.renderFrontShield((front_shield / front_shield_max) * front_shield_hit_effect);
-    if (rear_shield_hit_effect > 0)
-        model_info.renderRearShield((rear_shield / rear_shield_max) * rear_shield_hit_effect);
+    ShipTemplateBasedObject::draw3DTransparent();
 
     if ((has_jump_drive && jump_delay > 0.0f) ||
         (wormhole_alpha > 0.0f))
@@ -313,6 +259,15 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
             }
             arc[arcPoints-1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_weapons[n].direction + beam_weapons[n].arc / 2.0f)) * beam_weapons[n].range * scale;
             window.draw(arc);
+        }
+    }
+    if (!long_range)
+    {
+        if (scanned_by_player >= SS_SimpleScan || !my_spaceship)
+        {
+            drawShieldsOnRadar(window, position, scale, 1.0, true);
+        } else {
+            drawShieldsOnRadar(window, position, scale, 1.0, false);
         }
     }
 
@@ -361,7 +316,7 @@ void SpaceShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, f
     if (!long_range)
     {
         sf::RectangleShape bar(sf::Vector2f(60, 10));
-
+/*TOFIX?
         if (front_shield_max > 0.0)
         {
             bar.setPosition(position.x - 30, position.y - 40);
@@ -376,6 +331,7 @@ void SpaceShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, f
             bar.setFillColor(sf::Color(128, 128, 255, 128));
             window.draw(bar);
         }
+*/
         bar.setPosition(position.x - 30, position.y - 30);
         bar.setSize(sf::Vector2f(60 * hull_strength / hull_max, 5));
         bar.setFillColor(sf::Color(128, 255, 128, 128));
@@ -419,27 +375,6 @@ void SpaceShip::update(float delta)
             impulse_request = 0.0;
         }
     }
-
-    if (front_shield < front_shield_max)
-    {
-        front_shield += delta * shield_recharge_rate * getSystemEffectiveness(SYS_FrontShield);
-        if (docking_state == DS_Docked)
-            front_shield += delta * shield_recharge_rate * getSystemEffectiveness(SYS_FrontShield) * 5.0;
-        if (front_shield > front_shield_max)
-            front_shield = front_shield_max;
-    }
-    if (rear_shield < front_shield_max)
-    {
-        rear_shield += delta * shield_recharge_rate * getSystemEffectiveness(SYS_RearShield);
-        if (docking_state == DS_Docked)
-            rear_shield += delta * shield_recharge_rate * getSystemEffectiveness(SYS_RearShield) * 5.0;
-        if (rear_shield > rear_shield_max)
-            rear_shield = rear_shield_max;
-    }
-    if (front_shield_hit_effect > 0)
-        front_shield_hit_effect -= delta;
-    if (rear_shield_hit_effect > 0)
-        rear_shield_hit_effect -= delta;
 
     float rotationDiff = sf::angleDifference(getRotation(), target_rotation);
 
@@ -634,6 +569,18 @@ void SpaceShip::update(float delta)
         model_info.warp_scale = (10.0f - jump_delay) / 10.0f;
     else
         model_info.warp_scale = 0.0;
+}
+
+float SpaceShip::getShieldRechargeRate(int shield_index)
+{
+    float rate = 0.2f;
+    if (shield_index == 0)
+        rate *= getSystemEffectiveness(SYS_FrontShield);
+    else
+        rate *= getSystemEffectiveness(SYS_RearShield);
+    if (docking_state == DS_Docked)
+        rate *= 5.0;
+    return rate;
 }
 
 P<SpaceObject> SpaceShip::getTarget()
@@ -856,45 +803,22 @@ int SpaceShip::scanningChannelDepth()
     return 0;
 }
 
-void SpaceShip::takeDamage(float damage_amount, DamageInfo info)
+float SpaceShip::getShieldDamageFactor(DamageInfo& info, int shield_index)
 {
-    if (shields_active)
+    float frequency_damage_factor = 1.0;
+    if (info.type == DT_Energy && gameGlobalInfo->use_beam_shield_frequencies)
     {
-        float frequency_damage_factor = 1.0;
-        if (info.type == DT_Energy && gameGlobalInfo->use_beam_shield_frequencies)
-            frequency_damage_factor = frequencyVsFrequencyDamageFactor(info.frequency, shield_frequency);
-        float angle = sf::angleDifference(getRotation(), sf::vector2ToAngle(getPosition() - info.location));
-        ESystem system = SYS_FrontShield;
-        bool front_hit = !(angle > -90 && angle < 90);
-        float* shield = &front_shield;
-        float* shield_hit_effect = &front_shield_hit_effect;
-        if (!front_hit)
-        {
-            shield = &rear_shield;
-            shield_hit_effect = &rear_shield_hit_effect;
-            system = SYS_RearShield;
-        }
-        float shield_damage_factor = 1.25 - getSystemEffectiveness(system) * 0.25;
-
-        *shield -= damage_amount * frequency_damage_factor * shield_damage_factor;
-
-        if (*shield < 0)
-        {
-            takeHullDamage(-(*shield) / frequency_damage_factor, info);
-            *shield = 0.0;
-        }else{
-            *shield_hit_effect = 1.0;
-        }
-    }else{
-        takeHullDamage(damage_amount, info);
+        frequency_damage_factor = frequencyVsFrequencyDamageFactor(info.frequency, shield_frequency);
     }
+    ESystem system = SYS_FrontShield;
+    if (shield_index > 0)
+        system = SYS_RearShield;
+    float shield_damage_factor = 1.25 - getSystemEffectiveness(system) * 0.25;
+    return shield_damage_factor * frequency_damage_factor;
 }
 
-void SpaceShip::takeHullDamage(float damage_amount, DamageInfo info)
+void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
 {
-    if (info.type == DT_EMP)
-        return;
-
     if (gameGlobalInfo->use_system_damage)
     {
         if (info.system_target != SYS_None)
@@ -935,22 +859,25 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo info)
             }
         }
     }
+    
+    ShipTemplateBasedObject::takeHullDamage(damage_amount, info);
+}
 
-    hull_strength -= damage_amount;
-    if (hull_strength <= 0.0)
+void SpaceShip::destroyedByDamage(DamageInfo& info)
+{
+    ExplosionEffect* e = new ExplosionEffect();
+    e->setSize(getRadius() * 1.5);
+    e->setPosition(getPosition());
+
+    if (info.instigator)
     {
-        ExplosionEffect* e = new ExplosionEffect();
-        e->setSize(getRadius() * 1.5);
-        e->setPosition(getPosition());
-
-        if (info.instigator)
-        {
-            if (isEnemy(info.instigator))
-                info.instigator->addReputationPoints((hull_max + front_shield_max + rear_shield_max) * 0.1);
-            else
-                info.instigator->removeReputationPoints((hull_max + front_shield_max + rear_shield_max) * 0.1);
-        }
-        destroy();
+        float points = hull_max * 0.1f;
+        for(int n=0; n<shield_count; n++)
+            points += shield_max[n] * 0.1f;
+        if (isEnemy(info.instigator))
+            info.instigator->addReputationPoints(points);
+        else
+            info.instigator->removeReputationPoints(points);
     }
 }
 
@@ -968,9 +895,9 @@ bool SpaceShip::hasSystem(ESystem system)
     case SYS_MissileSystem:
         return weapon_tubes > 0;
     case SYS_FrontShield:
-        return front_shield_max > 0;
+        return shield_count > 0;
     case SYS_RearShield:
-        return rear_shield_max > 0;
+        return shield_count > 1;
     case SYS_Reactor:
         return true;
     case SYS_BeamWeapons:
@@ -1013,19 +940,10 @@ int SpaceShip::getWeaponTubeCount()
     return weapon_tubes;
 }
 
-string SpaceShip::getCallSign()
-{
-    return ship_callsign;
-}
-
 std::unordered_map<string, string> SpaceShip::getGMInfo()
 {
     std::unordered_map<string, string> ret;
-    ret["CallSign"] = ship_callsign;
-    ret["Type"] = ship_type_name;
-    ret["Hull"] = string(int(hull_strength)) + "/" + string(int(hull_max));
-    ret["FrontShield"] = string(int(front_shield)) + "/" + string(int(front_shield_max));
-    ret["RearShield"] = string(int(rear_shield)) + "/" + string(int(rear_shield_max));
+    ret = ShipTemplateBasedObject::getGMInfo();
     return ret;
 }
 

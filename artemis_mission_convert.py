@@ -310,16 +310,16 @@ class Event:
         if create_type == 'player':
             name = convertName(node.get('name'))
             x, y = convertPosition(node.get('x'), node.get('z'))
-            self._body.append('%s = PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser"):setCallSign("%s"):setPosition(%s, %s)' % (name, node.get('name'), x, y))
+            self._body.append('%s = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Player Cruiser"):setCallSign("%s"):setPosition(%s, %s)' % (name, node.get('name'), x, y))
         elif create_type == 'neutral':
             name = convertName(node.get('name'))
             x, y = convertPosition(node.get('x'), node.get('z'))
-            self._body.append('%s = CpuShip():setShipTemplate("Tug"):setCallSign("%s"):setFaction("%s"):setPosition(%s, %s):orderRoaming()' % (name, node.get('name'), convertRaceKeys(node, 'neutral'), x, y))
+            self._body.append('%s = CpuShip():setTemplate("Tug"):setCallSign("%s"):setFaction("%s"):setPosition(%s, %s):orderRoaming()' % (name, node.get('name'), convertRaceKeys(node, 'neutral'), x, y))
             self.addToFleet(name, node)
         elif create_type == 'enemy':
             name = convertName(node.get('name', 'temp_enemy_name'))
             x, y = convertPosition(node.get('x'), node.get('z'))
-            self._body.append('%s = CpuShip():setShipTemplate("Cruiser"):setCallSign("%s"):setFaction("%s"):setPosition(%s, %s):orderRoaming()' % (name, node.get('name'), convertRaceKeys(node, 'enemy'), x, y))
+            self._body.append('%s = CpuShip():setTemplate("Cruiser"):setCallSign("%s"):setFaction("%s"):setPosition(%s, %s):orderRoaming()' % (name, node.get('name'), convertRaceKeys(node, 'enemy'), x, y))
             self.addToFleet(name, node)
             
             self.addToFleet(name, node, 0) # Add every enemy ship to fleet 0

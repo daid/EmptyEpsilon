@@ -14,8 +14,12 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Gets the position of this object, returns x, y
     /// Example: local x, y = obj:getPosition()
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getPosition);
-    /// Gets the rotation of this object. In degrees.
+    /// Gets the rotation of this object. In degrees. 0 degrees is pointing to the right of the world. So this does not match the heading of a ship.
+    /// The value returned here can also go below 0 degrees or higher then 360 degrees, there is no limiting on the rotation.
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getRotation);
+    /// Get the heading of this object, in the range of 0 to 360. The heading is 90 degrees off from the rotation.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getHeading);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setHeading);
     /// Gets the velocity of the object, in 2D space, in meters/second
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getVelocity);
     /// Gets the rotational velocity of the object, in degree/second

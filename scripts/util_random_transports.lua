@@ -51,7 +51,7 @@ function update(delta)
 			if target:isValid() then
 				spawn_delay = random(30, 50)
 				
-				obj = CpuShip():setShipTemplate("Transport"..irandom(1, 5).."x"..irandom(1, 5)):setFaction('Independent')
+				obj = CpuShip():setTemplate("Transport"..irandom(1, 5).."x"..irandom(1, 5)):setFaction('Independent')
 				obj.target = target
 				obj.undock_delay = random(5, 30)
 				obj:orderDock(obj.target)

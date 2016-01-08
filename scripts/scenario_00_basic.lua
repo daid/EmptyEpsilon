@@ -14,11 +14,11 @@ function init()
 	friendlyList = {}
 
 	n = 0
-	table.insert(friendlyList, setCirclePos(SpaceStation():setTemplate('Small Station'):setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
+	table.insert(friendlyList, setCirclePos(SpaceStation():setTemplate('Small Station'):setRotation(random(0, 360)):setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
 	n = 1
-	table.insert(friendlyList, setCirclePos(SpaceStation():setTemplate('Medium Station'):setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
+	table.insert(friendlyList, setCirclePos(SpaceStation():setTemplate('Medium Station'):setRotation(random(0, 360)):setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
 	n = 2
-	table.insert(friendlyList, setCirclePos(SpaceStation():setTemplate('Large Station'):setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
+	table.insert(friendlyList, setCirclePos(SpaceStation():setTemplate('Large Station'):setRotation(random(0, 360)):setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
 	friendlyList[1]:addReputationPoints(300.0)
 
 	local x, y = friendlyList[1]:getPosition()
@@ -34,38 +34,38 @@ function init()
 		d = random(35000, 55000)
 		type = random(0, 10)
 		if type < 1.0 then
-			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Strikeship'):setRotation(a + 180):orderRoaming(), 0, 0, a, d))
+			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Strikeship'):setRotation(a + 180):orderRoaming(), 0, 0, a, d))
 		elseif type < 2.0 then
-			leader = setCirclePos(CpuShip():setShipTemplate('Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-1, 1), d + random(-100, 100))
+			leader = setCirclePos(CpuShip():setTemplate('Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-1, 1), d + random(-100, 100))
 			table.insert(enemyList, leader)
-			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Fighter'):setRotation(a + 180):orderFlyFormation(leader,-400, 0), 0, 0, a + random(-1, 1), d + random(-100, 100)))
-			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Fighter'):setRotation(a + 180):orderFlyFormation(leader, 400, 0), 0, 0, a + random(-1, 1), d + random(-100, 100)))
-			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Fighter'):setRotation(a + 180):orderFlyFormation(leader,-400, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
-			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Fighter'):setRotation(a + 180):orderFlyFormation(leader, 400, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
+			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Fighter'):setRotation(a + 180):orderFlyFormation(leader,-400, 0), 0, 0, a + random(-1, 1), d + random(-100, 100)))
+			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Fighter'):setRotation(a + 180):orderFlyFormation(leader, 400, 0), 0, 0, a + random(-1, 1), d + random(-100, 100)))
+			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Fighter'):setRotation(a + 180):orderFlyFormation(leader,-400, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
+			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Fighter'):setRotation(a + 180):orderFlyFormation(leader, 400, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
 		elseif type < 3.0 then
-			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Adv. Gunship'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Adv. Gunship'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Adv. Gunship'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Adv. Gunship'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 		elseif type < 4.0 then
-			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 		elseif type < 5.0 then
-			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Dreadnought'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Dreadnought'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 		elseif type < 6.0 then
-			leader = setCirclePos(CpuShip():setShipTemplate('Missile Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100))
+			leader = setCirclePos(CpuShip():setTemplate('Missile Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100))
 			table.insert(enemyList, leader)
-			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Fighter'):setRotation(a + 180):orderFlyFormation(leader,-1500, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
-			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Fighter'):setRotation(a + 180):orderFlyFormation(leader, 1500, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
+			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Fighter'):setRotation(a + 180):orderFlyFormation(leader,-1500, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
+			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Fighter'):setRotation(a + 180):orderFlyFormation(leader, 1500, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
 		elseif type < 7.0 then
-			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 		elseif type < 8.0 then
-			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Cruiser'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 		elseif type < 9.0 then
-			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Fighter'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Fighter'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 		else
-			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Adv. Striker'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-			table.insert(enemyList, setCirclePos(CpuShip():setShipTemplate('Adv. Striker'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Adv. Striker'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Adv. Striker'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 		end
 	end
 	

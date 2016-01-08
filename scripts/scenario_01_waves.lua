@@ -28,7 +28,7 @@ function init()
 	enemyList = {}
 	friendlyList = {}
 	
-	PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
+	PlayerSpaceship():setFaction("Human Navy"):setTemplate("Player Cruiser")
 
 	for n=1, 2 do
 		table.insert(friendlyList, SpaceStation():setTemplate(randomStationTemplate()):setFaction("Human Navy"):setPosition(random(-5000, 5000), random(-5000, 5000)))
@@ -113,22 +113,22 @@ function spawnWave()
 		type = random(0, 10)
 		score = 9999
 		if type < 2 then
-			ship:setShipTemplate("Fighter");
+			ship:setTemplate("Fighter");
 			score = 5
 		elseif type < 6 then
-			ship:setShipTemplate("Cruiser");
+			ship:setTemplate("Cruiser");
 			score = 15
 		elseif type < 7 then
-			ship:setShipTemplate("Adv. Gunship");
+			ship:setTemplate("Adv. Gunship");
 			score = 25
 		elseif type < 8 then
-			ship:setShipTemplate("Strikeship");
+			ship:setTemplate("Strikeship");
 			score = 25
 		elseif type < 9 then
-			ship:setShipTemplate("Dreadnought");
+			ship:setTemplate("Dreadnought");
 			score = 50
 		else
-			ship:setShipTemplate("Battlestation");
+			ship:setTemplate("Battlestation");
 			score = 250
 		end
 		
