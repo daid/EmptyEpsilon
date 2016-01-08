@@ -3,6 +3,11 @@ cmake_minimum_required(VERSION 2.8.12)
 
 option(ENABLE_CRASH_LOGGER "Enable the drmingw crash logging facilities" OFF)
 
+# Check if serious proton dir is set.
+if(NOT DEFINED SERIOUS_PROTON_DIR)
+ message(FATAL_ERROR "SERIOUS_PROTON_DIR was not set. Unable to continue")
+endif(NOT DEFINED SERIOUS_PROTON_DIR)
+
 string(TIMESTAMP CPACK_PACKAGE_VERSION_MAJOR "%Y")
 string(TIMESTAMP CPACK_PACKAGE_VERSION_MINOR "%m")
 string(TIMESTAMP CPACK_PACKAGE_VERSION_PATCH "%d")
@@ -47,7 +52,8 @@ endif()
 
 add_executable(${EXECUTABLE_NAME} ${SOURCES})
 
-include_directories(${CMAKE_SOURCE_DIR}/src ${SERIOUS_PROTON_DIR}/src)
+include_directories(${CMAKE_SOURCE_DIR}/src)
+include_directories(${SERIOUS_PROTON_DIR}/src)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
