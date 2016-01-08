@@ -1,20 +1,20 @@
 --[[ Stations --]]
 template = ShipTemplate():setName("Small Station"):setModel("space_station_4"):setType("station")
 template:setHull(150)
-template:setShields(300, 0)
+template:setShields(300)
 
 template = ShipTemplate():setName("Medium Station"):setModel("space_station_3"):setType("station")
 template:setType("station")
 template:setHull(400)
-template:setShields(800, 0)
+template:setShields(800)
 
 template = ShipTemplate():setName("Large Station"):setModel("space_station_2"):setType("station")
 template:setHull(500)
-template:setShields(1000, 0)
+template:setShields(1000, 1000, 1000)
 
 template = ShipTemplate():setName("Huge Station"):setModel("space_station_1"):setType("station")
 template:setHull(800)
-template:setShields(1200, 0)
+template:setShields(1200, 1200, 1200, 1200)
 
 --[[ Player ships --]]
 template = ShipTemplate():setName("Player Cruiser"):setModel("battleship_destroyer_5_upgraded"):setType("playership")
@@ -118,7 +118,7 @@ template:setBeam(0, 40, -10, 1000.0, 6.0, 8)
 template:setBeam(1, 40,  10, 1000.0, 6.0, 8)
 template:setTubes(1, 10.0) -- Amount of torpedo tubes, loading time
 template:setHull(60)
-template:setShields(40, 40)
+template:setShields(40)
 template:setSpeed(110, 20, 40)
 template:setWarpSpeed(0)
 template:setJumpDrive(false)
@@ -151,7 +151,7 @@ template:addDoor(5, 2, false);
 --Tug, used for transport of small goods (like weapons)
 template = ShipTemplate():setName("Tug"):setModel("space_tug")
 template:setHull(50)
-template:setShields(20, 20)
+template:setShields(20)
 template:setSpeed(100, 10, 15)
 template:setWeaponStorage("Homing", 5)
 template:setWeaponStorage("Nuke", 1)
@@ -173,7 +173,7 @@ template = ShipTemplate():setName("Fighter"):setModel("small_fighter_1")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 60, 0, 1000.0, 4.0, 4)
 template:setHull(30)
-template:setShields(30, 30)
+template:setShields(30)
 template:setSpeed(120, 30, 25)
 template:setDefaultAI('fighter')	-- set fighter AI, which dives at the enemy, and then flies off, doing attack runs instead of "hanging in your face".
 
@@ -214,7 +214,7 @@ template:setBeam(0, 50,-15, 1000.0, 6.0, 8)
 template:setBeam(1, 50, 15, 1000.0, 6.0, 8)
 template:setTubes(2, 8.0) -- Amount of torpedo tubes
 template:setHull(100)
-template:setShields(100, 80)
+template:setShields(100, 80, 80)
 template:setSpeed(60, 5, 10)
 template:setWeaponStorage("Homing", 4)
 
@@ -224,7 +224,7 @@ template = ShipTemplate():setName("Strikeship"):setModel("dark_fighter_6")
 template:setBeam(0, 40,-5, 1000.0, 6.0, 6)
 template:setBeam(1, 40, 5, 1000.0, 6.0, 6)
 template:setHull(100)
-template:setShields(80, 30)
+template:setShields(80, 30, 30, 30)
 template:setSpeed(70, 12, 12)
 template:setWarpSpeed(1000)
 
@@ -248,7 +248,7 @@ template:setBeam(3,100,  60, 1000.0, 6.0, 8)
 template:setBeam(4, 30,   0, 2000.0, 6.0, 8)
 template:setBeam(5,100, 180, 1200.0, 6.0, 8)
 template:setHull(70)
-template:setShields(300, 300)
+template:setShields(300, 300, 300, 300, 300)
 template:setSpeed(30, 1.5, 5)
 
 -- The battle station is a huge ship with many defensive features. It can be docked by smaller ships.
@@ -268,7 +268,7 @@ template:setBeam(9, 120, -90, 2500.0, 6.0, 4)
 template:setBeam(10, 120,  90, 2500.0, 6.1, 4)
 template:setBeam(11, 120,  90, 2500.0, 6.0, 4)
 template:setHull(100)
-template:setShields(1500, 1500)
+template:setShields(2500)
 template:setSpeed(20, 1.5, 3)
 template:setJumpDrive(true)
 
@@ -282,7 +282,7 @@ template:setBeam(3, 30, 180, 4000.0, 1.5, 20)
 template:setBeam(4, 30, 240, 4000.0, 1.5, 20)
 template:setBeam(5, 30, 300, 4000.0, 1.5, 20)
 template:setHull(70)
-template:setShields(120, 120)
+template:setShields(120, 120, 120, 120, 120, 120)
 template:setSpeed(0, 0.5, 0)
 
 -- Blockade runner is a reasonably fast, high shield, slow on weapons ship designed to break trough defence lines and deliver goods.
@@ -338,7 +338,7 @@ template = ShipTemplate():setName("Ktlitan Destroyer"):setModel("sci_fi_alien_sh
 template:setBeam(0, 90, -15, 1000.0, 6.0, 10)
 template:setBeam(1, 90,  15, 1000.0, 6.0, 10)
 template:setHull(300)
-template:setShields(50, 50)
+template:setShields(50, 50, 50)
 template:setTubes(3, 15.0) -- Amount of torpedo tubes
 template:setSpeed(70, 5, 10)
 template:setWeaponStorage("Homing", 25)
@@ -346,7 +346,7 @@ template:setDefaultAI('missilevolley')
 
 template = ShipTemplate():setName("Ktlitan Queen"):setModel("sci_fi_alien_ship_8")
 template:setHull(350)
-template:setShields(100, 100)
+template:setShields(100, 100, 100)
 
 for type=1,5 do
     for cnt=1,5 do

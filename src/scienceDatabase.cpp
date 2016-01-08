@@ -91,7 +91,14 @@ void fillDefaultDatabaseData()
         entry->model_template = ship_template;
 
         entry->addKeyValue("Size", string(int(ship_template->model_data->getRadius())));
-        entry->addKeyValue("Shield", string(int(ship_template->front_shields)) + "/" + string(int(ship_template->rear_shields)));
+        string shield_info = "";
+        for(int n=0; n<ship_template->shield_count; n++)
+        {
+            if (n > 0)
+                shield_info += "/";
+            shield_info += string(int(ship_template->shield_level[n]));
+        }
+        entry->addKeyValue("Shield", shield_info);
         entry->addKeyValue("Hull", string(int(ship_template->hull)));
         entry->addKeyValue("Move speed", string(int(ship_template->impulse_speed)));
         entry->addKeyValue("Turn speed", string(int(ship_template->turn_speed)));

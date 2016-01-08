@@ -22,13 +22,14 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSizeClass);
     /// Setup a beam weapon.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeam);
-    // Setup a beam weapon texture
+    /// Setup a beam weapon texture
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamTexture);
     /// Set the amount of missile tubes, limited to a maximum of 16.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubes);
     /// Set the amount of starting hull
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setHull);
-    /// Set the front and back shield values. 0 means no shields. For stations only the front shield value is used.
+    /// Set the shield levels, amount of parameters defines the amount of shields. (Up to a maximum of 8 shields)
+    /// Example: setShieldData(400) setShieldData(100, 80) setShieldData(100, 50, 50)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShields);
     /// Set the impulse speed, rotation speed and impulse acceleration for this ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSpeed);
@@ -118,8 +119,9 @@ ShipTemplate::ShipTemplate()
     weapon_tubes = 0;
     tube_load_time = 8.0;
     hull = 70;
-    front_shields = 0;
-    rear_shields = 0.0;
+    shield_count = 0;
+    for(int n=0; n<max_shield_count; n++)
+        shield_level[n] = 0.0;
     impulse_speed = 500.0;
     impulse_acceleration = 20.0;
     turn_speed = 10.0;
@@ -199,6 +201,16 @@ void ShipTemplate::setCollisionData(P<SpaceObject> object)
 {
     model_data->setCollisionData(object);
 }
+
+void ShipTemplate::setShields(std::vector<float> values)
+{
+    shield_count = std::min(max_shield_count, int(values.size()));
+    for(int n=0; n<shield_count; n++)
+    {
+        shield_level[n] = values[n];
+    }
+}
+
 
 P<ShipTemplate> ShipTemplate::getTemplate(string name)
 {

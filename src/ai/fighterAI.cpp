@@ -75,7 +75,7 @@ void FighterAI::runAttack(P<SpaceObject> target)
             else
                 evade_direction = target_dir + random(25, 40);
         }
-        if (owner->front_shield < owner->front_shield_max * (1.0f - aggression))
+        if (owner->shield_level[0] < owner->shield_max[0] * (1.0f - aggression))
         {
             attack_state = recharge;
             aggression += random(0.1, 0.25);
@@ -94,7 +94,7 @@ void FighterAI::runAttack(P<SpaceObject> target)
         }
         break;
     case recharge:
-        if (owner->front_shield > owner->front_shield_max * 0.9 || timeout <= 0.0)
+        if (owner->shield_level[0] > owner->shield_max[0] * 0.9 || timeout <= 0.0)
         {
             attack_state = dive;
         }else{

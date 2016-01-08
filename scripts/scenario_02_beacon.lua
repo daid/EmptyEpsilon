@@ -4,7 +4,7 @@
 -- Init is run when the scenario is started. Create your initial
 function init()
     -- Create the main ship for the players.
-    player = PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
+    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Player Cruiser")
 	player:setPosition(22400, 18200):setCallSign("TheEpsilon")
 
     research_station = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy")
@@ -36,15 +36,15 @@ function init()
     placeRandom(VisualAsteroid, 50, -7500, -10000, -12500, 30000, 2000)
 	
     -- Create the defense for the station
-    CpuShip():setShipTemplate("Cruiser"):setFaction("Exuari"):setPosition(-44000, -14000):orderDefendTarget(enemy_station)
-    CpuShip():setShipTemplate("Cruiser"):setFaction("Exuari"):setPosition(-47000, -14000):orderDefendTarget(enemy_station)
-    enemy_dreadnought = CpuShip():setShipTemplate("Dreadnought"):setFaction("Exuari")
+    CpuShip():setTemplate("Cruiser"):setFaction("Exuari"):setPosition(-44000, -14000):orderDefendTarget(enemy_station)
+    CpuShip():setTemplate("Cruiser"):setFaction("Exuari"):setPosition(-47000, -14000):orderDefendTarget(enemy_station)
+    enemy_dreadnought = CpuShip():setTemplate("Dreadnought"):setFaction("Exuari")
     enemy_dreadnought:setPosition(-46000, -18000):orderDefendTarget(enemy_station)
-    CpuShip():setShipTemplate("Fighter"):setFaction("Exuari"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
-    CpuShip():setShipTemplate("Fighter"):setFaction("Exuari"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
+    CpuShip():setTemplate("Fighter"):setFaction("Exuari"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
+    CpuShip():setTemplate("Fighter"):setFaction("Exuari"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
 
     --Small Exuari strike team, guarding RT-4 in the nebula at G5.
-    transport_RT4 = CpuShip():setShipTemplate("Transport1x1"):setFaction("Human Navy"):setPosition(3750, 31250)
+    transport_RT4 = CpuShip():setTemplate("Transport1x1"):setFaction("Human Navy"):setPosition(3750, 31250)
     transport_RT4:orderIdle():setCallSign("RT-4"):setCommsScript("")
     transport_RT4:setHull(1):setFrontShieldMax(1):setRearShieldMax(1)
     
@@ -60,8 +60,8 @@ end
 
 function missionStartState(delta)
     if distance(player, transport_RT4) < 5000 then
-        exuari_RT4_guard1 = CpuShip():setShipTemplate("Cruiser"):setFaction("Exuari"):setPosition(3550, 31250):setRotation(0)
-        exuari_RT4_guard2 = CpuShip():setShipTemplate("Cruiser"):setFaction("Exuari"):setPosition(3950, 31250):setRotation(180)
+        exuari_RT4_guard1 = CpuShip():setTemplate("Cruiser"):setFaction("Exuari"):setPosition(3550, 31250):setRotation(0)
+        exuari_RT4_guard2 = CpuShip():setTemplate("Cruiser"):setFaction("Exuari"):setPosition(3950, 31250):setRotation(180)
         exuari_RT4_guard1:orderRoaming()
         exuari_RT4_guard2:orderRoaming()
         mission_state = missionRT4UnderAttack
@@ -142,9 +142,9 @@ function missionWaitForAmbush(delta)
         --We can jump to the Orion-5 station in 1 jump. So ambush the player!
         x, y = player:getPosition()
         WarpJammer():setFaction("Exuari"):setPosition(x - 2308, y + 3011)
-        ambush_main = CpuShip():setFaction("Exuari"):setShipTemplate("Dreadnought"):setScanned(true):setPosition(x - 1667, y + 2611):setRotation(-80):orderAttack(player)
-        ambush_side1 = CpuShip():setFaction("Exuari"):setShipTemplate("Cruiser"):setScanned(true):setPosition(x - 736, y + 2875):setRotation(-80):orderAttack(player)
-        ambush_side2 = CpuShip():setFaction("Exuari"):setShipTemplate("Cruiser"):setScanned(true):setPosition(x - 2542, y + 2208):setRotation(-80):orderAttack(player)
+        ambush_main = CpuShip():setFaction("Exuari"):setTemplate("Dreadnought"):setScanned(true):setPosition(x - 1667, y + 2611):setRotation(-80):orderAttack(player)
+        ambush_side1 = CpuShip():setFaction("Exuari"):setTemplate("Cruiser"):setScanned(true):setPosition(x - 736, y + 2875):setRotation(-80):orderAttack(player)
+        ambush_side2 = CpuShip():setFaction("Exuari"):setTemplate("Cruiser"):setScanned(true):setPosition(x - 2542, y + 2208):setRotation(-80):orderAttack(player)
         mission_state = missionAmbushed
         
         ambush_main:sendCommsMessage(player, [[Sllaaami graa kully fartsy!
@@ -176,14 +176,14 @@ We also refitted your nukes and EMPs. Awesome job on taking out the Exuari witho
             main_station:sendCommsMessage(player, message)
             
             x, y = neutral_station:getPosition()
-            CpuShip():setShipTemplate("Cruiser"):setFaction("Human Navy"):setPosition(x - 1000, y - 1000):orderDefendTarget(neutral_station):setCommsScript("")
-            CpuShip():setShipTemplate("Cruiser"):setFaction("Human Navy"):setPosition(x + 1000, y + 1000):orderDefendTarget(neutral_station):setCommsScript("")
+            CpuShip():setTemplate("Cruiser"):setFaction("Human Navy"):setPosition(x - 1000, y - 1000):orderDefendTarget(neutral_station):setCommsScript("")
+            CpuShip():setTemplate("Cruiser"):setFaction("Human Navy"):setPosition(x + 1000, y + 1000):orderDefendTarget(neutral_station):setCommsScript("")
             
             transports = {}
             for n=1,5 do
-                table.insert(transports, CpuShip():setShipTemplate("Transport"..irandom(1, 5).."x2"):setFaction("Independent"):setPosition(50000 + random(-10000, 10000), -30000 + random(-10000, 10000)))
+                table.insert(transports, CpuShip():setTemplate("Transport"..irandom(1, 5).."x2"):setFaction("Independent"):setPosition(50000 + random(-10000, 10000), -30000 + random(-10000, 10000)))
             end
-            transport_target = CpuShip():setShipTemplate("Transport"..irandom(1, 5).."x2"):setFaction("Exuari"):setPosition(50000 + random(-10000, 10000), -30000 + random(-10000, 10000))
+            transport_target = CpuShip():setTemplate("Transport"..irandom(1, 5).."x2"):setFaction("Exuari"):setPosition(50000 + random(-10000, 10000), -30000 + random(-10000, 10000))
             
             mission_state = missionGotoTransport
         end
@@ -223,7 +223,7 @@ function missionStopTransport(delta)
         mission_state = missionTransportWaitForRecovery
         mission_timer = 40
         
-        transport_recovery_team = CpuShip():setShipTemplate("Tug"):setFaction("Human Navy"):setPosition(-22000, 30000)
+        transport_recovery_team = CpuShip():setTemplate("Tug"):setFaction("Human Navy"):setPosition(-22000, 30000)
         transport_recovery_team:orderFlyTowardsBlind(transport_target:getPosition()):setCommsScript("")
     end
 end
@@ -241,7 +241,7 @@ function missionTransportWaitForRecovery(delta)
         local r = random(0, 360)
         x = x + math.cos(r / 180 * math.pi) * distance
         y = y + math.sin(r / 180 * math.pi) * distance
-        CpuShip():setShipTemplate("Fighter"):setFaction("Exuari"):setPosition(x, y):orderAttack(player)
+        CpuShip():setTemplate("Fighter"):setFaction("Exuari"):setPosition(x, y):orderAttack(player)
     end
     if distance(transport_recovery_team, transport_target) < 1000 then
         transport_target:orderDock(main_station)
@@ -260,10 +260,10 @@ function missionTransportDone(delta)
 
 Lead the assault on the Exuari base in sector E2, expect heavy resistance.]])
 
-        CpuShip():setShipTemplate("Adv. Gunship"):setFaction("Exuari"):setPosition(-44000, -14000):orderDefendTarget(enemy_station)
-        CpuShip():setShipTemplate("Adv. Gunship"):setFaction("Exuari"):setPosition(-47000, -14000):orderDefendTarget(enemy_station)
-        CpuShip():setShipTemplate("Missile Cruiser"):setFaction("Exuari"):setPosition(-44500, -15000):orderDefendTarget(enemy_station)
-        CpuShip():setShipTemplate("Strikeship"):setFaction("Exuari"):setPosition(-43000, -9000):orderAttack(player)
+        CpuShip():setTemplate("Adv. Gunship"):setFaction("Exuari"):setPosition(-44000, -14000):orderDefendTarget(enemy_station)
+        CpuShip():setTemplate("Adv. Gunship"):setFaction("Exuari"):setPosition(-47000, -14000):orderDefendTarget(enemy_station)
+        CpuShip():setTemplate("Missile Cruiser"):setFaction("Exuari"):setPosition(-44500, -15000):orderDefendTarget(enemy_station)
+        CpuShip():setTemplate("Strikeship"):setFaction("Exuari"):setPosition(-43000, -9000):orderAttack(player)
         mission_state = nil
     end
 end

@@ -100,7 +100,7 @@ ShipSelectionScreen::ShipSelectionScreen()
             my_spaceship = new PlayerSpaceship();
             if (my_spaceship)
             {
-                my_spaceship->setShipTemplate(ship_template_selector->getSelectionValue());
+                my_spaceship->setTemplate(ship_template_selector->getSelectionValue());
                 my_spaceship->setRotation(random(0, 360));
                 my_spaceship->target_rotation = my_spaceship->getRotation();
                 my_spaceship->setPosition(sf::Vector2f(random(-100, 100), random(-100, 100)));
@@ -140,7 +140,7 @@ void ShipSelectionScreen::update(float delta)
         {
             if (player_ship_list->indexByValue(string(n)) == -1)
             {
-                int index = player_ship_list->addEntry(ship->ship_type_name + " " + ship->getCallSign(), string(n));
+                int index = player_ship_list->addEntry(ship->getTypeName() + " " + ship->getCallSign(), string(n));
                 if (my_spaceship == ship)
                     player_ship_list->setSelectionIndex(index);
             }

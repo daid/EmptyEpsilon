@@ -102,7 +102,7 @@ function mainMenu()
                     for n=1,player:getWaypointCount() do
                         addCommsReply("WP" .. n, function()
                             if player:takeReputationPoints(150) then
-                                ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setShipTemplate("Fighter"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
+                                ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Fighter"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
                                 setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n);
                             else
                                 setCommsMessage("Not enough rep!");

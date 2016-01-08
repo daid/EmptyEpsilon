@@ -53,6 +53,8 @@ public:
     string getDescription() { return object_description; }
     void setDescription(string description) { object_description = description; }
 
+    float getHeading() { float ret = getRotation() - 270; while(ret < 0) ret += 360.0f; while(ret > 360.0f) ret -= 360.0f; return ret; }
+
 #if FEATURE_3D_RENDERING
     virtual void draw3D();
     virtual void draw3DTransparent() {}

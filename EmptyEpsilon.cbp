@@ -435,6 +435,7 @@
 		<Unit filename="../SeriousProton/src/stringImproved.h" />
 		<Unit filename="../SeriousProton/src/textureManager.cpp" />
 		<Unit filename="../SeriousProton/src/textureManager.h" />
+		<Unit filename="../SeriousProton/src/tween.cpp" />
 		<Unit filename="../SeriousProton/src/tween.h" />
 		<Unit filename="../SeriousProton/src/vectorUtils.h" />
 		<Unit filename="../SeriousProton/src/windowManager.cpp" />
@@ -696,6 +697,8 @@
 		<Unit filename="src/spaceObjects/playerSpaceship.h" />
 		<Unit filename="src/spaceObjects/scanProbe.cpp" />
 		<Unit filename="src/spaceObjects/scanProbe.h" />
+		<Unit filename="src/spaceObjects/shipTemplateBasedObject.cpp" />
+		<Unit filename="src/spaceObjects/shipTemplateBasedObject.h" />
 		<Unit filename="src/spaceObjects/spaceObject.cpp" />
 		<Unit filename="src/spaceObjects/spaceObject.h" />
 		<Unit filename="src/spaceObjects/spaceStation.cpp" />

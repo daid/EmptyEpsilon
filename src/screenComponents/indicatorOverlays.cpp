@@ -44,10 +44,18 @@ void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
     {
         drawAlertLevel(window);
     
-        float shield_hit = (std::max(my_spaceship->front_shield_hit_effect, my_spaceship->rear_shield_hit_effect) - 0.5) / 0.5;
+        float shield_hit = 0.0;
+        bool low_shields = false;
+        for(int n=0; n<my_spaceship->shield_count; n++)
+        {
+            shield_hit = std::max(shield_hit, my_spaceship->shield_hit_effect[n]);
+            if (my_spaceship->shield_level[n] < my_spaceship->shield_max[n] / 10.0f)
+                low_shields = true;
+        }
+        shield_hit = (shield_hit - 0.5) / 0.5;
         shield_hit_overlay->setAlpha(32 * shield_hit);
         
-        if (my_spaceship->front_shield < my_spaceship->front_shield_max / 10.0 || my_spaceship->rear_shield < my_spaceship->rear_shield_max / 10.0)
+        if (low_shields)
         {
             shield_low_warning_overlay->setAlpha(glow(16, 48, 0.5));
         }else{

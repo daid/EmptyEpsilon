@@ -488,7 +488,7 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
     std::sort(template_names.begin(), template_names.end());
     GuiListbox* listbox = new GuiListbox(box, "CREATE_SHIPS", [this](int index, string value)
     {
-        create_script = "CpuShip():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setShipTemplate(\"" + value + "\"):orderRoaming()";
+        create_script = "CpuShip():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + value + "\"):orderRoaming()";
         this->hide();
     });
     listbox->setTextSize(20)->setButtonHeight(30)->setPosition(-20, 20, ATopRight)->setSize(300, 460);
@@ -662,7 +662,7 @@ GuiShipRetrofit::GuiShipRetrofit(GuiContainer* owner)
     type_name = new GuiTextEntry(left_col, "TYPE_NAME", "???");
     type_name->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     type_name->callback([this](string text) {
-        target->ship_type_name = text;
+        target->setTypeName(text);
     });
     
     warp_selector = new GuiSelector(left_col, "", [this](int index, string value) {
@@ -695,15 +695,15 @@ GuiShipRetrofit::GuiShipRetrofit(GuiContainer* owner)
 
     (new GuiLabel(left_col, "", "Front shield:", 30))->setSize(GuiElement::GuiSizeMax, 30);
     front_shield_slider = new GuiSlider(left_col, "", 0.0, 500, 0.0, [this](float value) {
-        target->front_shield_max = value;
-        target->front_shield = std::min(target->front_shield, target->front_shield_max);
+        target->shield_max[0] = value;
+        target->shield_level[0] = std::min(target->shield_level[0], target->shield_max[0]);
     });
     front_shield_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(left_col, "", "Rear shield:", 30))->setSize(GuiElement::GuiSizeMax, 30);
     rear_shield_slider = new GuiSlider(left_col, "", 0.0, 500, 0.0, [this](float value) {
-        target->rear_shield_max = value;
-        target->rear_shield = std::min(target->rear_shield, target->rear_shield_max);
+        target->shield_max[1] = value;
+        target->shield_level[1] = std::min(target->shield_level[1], target->shield_max[1]);
     });
     rear_shield_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
     
@@ -740,7 +740,7 @@ void GuiShipRetrofit::open(P<SpaceShip> target)
 {
     this->target = target;
     
-    type_name->setText(target->ship_type_name);
+    type_name->setText(target->getTypeName());
     warp_selector->setSelectionIndex(target->has_warp_drive ? 1 : 0);
     jump_selector->setSelectionIndex(target->hasJumpDrive() ? 1 : 0);
     impulse_speed_slider->setValue(target->impulse_max_speed);
@@ -749,10 +749,10 @@ void GuiShipRetrofit::open(P<SpaceShip> target)
     turn_speed_slider->setSnapValue(target->ship_template->turn_speed, 1.0f);
     hull_slider->setValue(target->hull_max);
     hull_slider->setSnapValue(target->ship_template->hull, 5.0f);
-    front_shield_slider->setValue(target->front_shield_max);
-    front_shield_slider->setSnapValue(target->ship_template->front_shields, 5.0f);
-    rear_shield_slider->setValue(target->rear_shield_max);
-    rear_shield_slider->setSnapValue(target->ship_template->rear_shields, 5.0f);
+    front_shield_slider->setValue(target->shield_max[0]);
+    front_shield_slider->setSnapValue(target->ship_template->shield_level[0], 5.0f);    ///TOFIX: Handle different amounts of shields
+    rear_shield_slider->setValue(target->shield_max[1]);
+    rear_shield_slider->setSnapValue(target->ship_template->shield_level[1], 5.0f);
     missile_tube_amount_selector->setSelectionIndex(target->weapon_tubes);
     for(int n=0; n<MW_Count; n++)
         missile_storage_amount_selector[n]->setSelectionIndex(target->weapon_storage_max[n]);

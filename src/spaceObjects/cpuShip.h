@@ -33,8 +33,8 @@ public:
     CpuShip();
     virtual ~CpuShip();
 
-    virtual void update(float delta);
-    virtual void setShipTemplate(string template_name);
+    virtual void update(float delta) override;
+    virtual void applyTemplateValues() override;
     void setAI(string new_ai);
 
     void orderIdle();
@@ -53,10 +53,10 @@ public:
     sf::Vector2f getOrderTargetLocation() { return order_target_location; }
     P<SpaceObject> getOrderTarget() { return order_target; }
     
-    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
-    virtual std::unordered_map<string, string> getGMInfo();
+    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
+    virtual std::unordered_map<string, string> getGMInfo() override;
     
-    virtual string getExportLine();
+    virtual string getExportLine() override;
 
     friend class GameMasterUI;
 };
