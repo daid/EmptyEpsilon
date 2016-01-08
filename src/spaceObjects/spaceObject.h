@@ -54,6 +54,7 @@ public:
     void setDescription(string description) { object_description = description; }
 
     float getHeading() { float ret = getRotation() - 270; while(ret < 0) ret += 360.0f; while(ret > 360.0f) ret -= 360.0f; return ret; }
+    void setHeading(float heading) { setRotation(heading - 90); }
 
 #if FEATURE_3D_RENDERING
     virtual void draw3D();

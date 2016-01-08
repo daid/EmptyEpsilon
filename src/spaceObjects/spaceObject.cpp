@@ -19,6 +19,7 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getRotation);
     /// Get the heading of this object, in the range of 0 to 360. The heading is 90 degrees off from the rotation.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getHeading);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setHeading);
     /// Gets the velocity of the object, in 2D space, in meters/second
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getVelocity);
     /// Gets the rotational velocity of the object, in degree/second
