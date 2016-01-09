@@ -3,6 +3,7 @@
 
 #include "shipTemplateBasedObject.h"
 #include "spaceStation.h"
+#include "beamWeapon.h"
 
 enum EWeaponTubeState
 {
@@ -50,19 +51,6 @@ public:
     }
 };
 
-class BeamWeapon : public sf::NonCopyable
-{
-public:
-    //Beam configuration
-    float arc;
-    float direction;
-    float range;
-    float cycleTime;
-    float damage;//Server side only
-    //Beam runtime state
-    float cooldown;
-    string beam_texture;
-};
 class WeaponTube : public sf::NonCopyable
 {
 public:

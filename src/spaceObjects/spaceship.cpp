@@ -11,6 +11,7 @@
 #include "spaceObjects/mine.h"
 #include "spaceObjects/nuke.h"
 #include "spaceObjects/warpJammer.h"
+#include "spaceObjects/beamWeapon.h"
 #include "gameGlobalInfo.h"
 
 #include "scriptInterface.h"
