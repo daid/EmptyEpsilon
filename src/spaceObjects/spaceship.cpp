@@ -210,6 +210,7 @@ void SpaceShip::applyTemplateValues()
     model_info.setData(ship_template->model_data);
 }
 
+#if FEATURE_3D_RENDERING
 void SpaceShip::draw3DTransparent()
 {
     if (!ship_template) return;
@@ -225,6 +226,7 @@ void SpaceShip::draw3DTransparent()
         model_info.renderOverlay(textureManager.getTexture("electric_sphere_texture.png"), alpha);
     }
 }
+#endif//FEATURE_3D_RENDERING
 
 void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
