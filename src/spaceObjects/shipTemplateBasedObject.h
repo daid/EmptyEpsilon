@@ -29,7 +29,9 @@ public:
 public:
     ShipTemplateBasedObject(float collision_range, string multiplayer_name, float multiplayer_significant_range=-1);
 
+#if FEATURE_3D_RENDERING
     virtual void draw3DTransparent() override;
+#endif
     virtual void drawShieldsOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float sprite_scale, bool show_levels);
     virtual void update(float delta) override;
 

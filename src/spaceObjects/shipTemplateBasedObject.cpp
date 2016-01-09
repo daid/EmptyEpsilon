@@ -143,6 +143,7 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::V
     }
 }
 
+#if FEATURE_3D_RENDERING
 void ShipTemplateBasedObject::draw3DTransparent()
 {
     for(int n = 0; n<shield_count; n++)
@@ -154,6 +155,7 @@ void ShipTemplateBasedObject::draw3DTransparent()
         }
     }
 }
+#endif//FEATURE_3D_RENDERING
 
 void ShipTemplateBasedObject::update(float delta)
 {
