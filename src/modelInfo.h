@@ -18,8 +18,7 @@ public:
     void render(sf::Vector2f position, float rotation);
     void renderOverlay(sf::Texture* texture, float alpha);
     void renderShield(float alpha);
-    void renderFrontShield(float alpha);
-    void renderRearShield(float alpha);
+    void renderShield(float alpha, float angle);
     
     void setData(P<ModelData> data) { this->data = data; }
     void setData(string name);

@@ -210,6 +210,7 @@ void SpaceShip::applyTemplateValues()
     model_info.setData(ship_template->model_data);
 }
 
+#if FEATURE_3D_RENDERING
 void SpaceShip::draw3DTransparent()
 {
     if (!ship_template) return;
@@ -225,6 +226,7 @@ void SpaceShip::draw3DTransparent()
         model_info.renderOverlay(textureManager.getTexture("electric_sphere_texture.png"), alpha);
     }
 }
+#endif//FEATURE_3D_RENDERING
 
 void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
@@ -316,22 +318,6 @@ void SpaceShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, f
     if (!long_range)
     {
         sf::RectangleShape bar(sf::Vector2f(60, 10));
-/*TOFIX?
-        if (front_shield_max > 0.0)
-        {
-            bar.setPosition(position.x - 30, position.y - 40);
-            bar.setSize(sf::Vector2f(60 * front_shield / front_shield_max, 5));
-            bar.setFillColor(sf::Color(128, 128, 255, 128));
-            window.draw(bar);
-        }
-        if (rear_shield_max > 0.0)
-        {
-            bar.setPosition(position.x - 30, position.y - 35);
-            bar.setSize(sf::Vector2f(60 * rear_shield / rear_shield_max, 5));
-            bar.setFillColor(sf::Color(128, 128, 255, 128));
-            window.draw(bar);
-        }
-*/
         bar.setPosition(position.x - 30, position.y - 30);
         bar.setSize(sf::Vector2f(60 * hull_strength / hull_max, 5));
         bar.setFillColor(sf::Color(128, 255, 128, 128));
@@ -341,14 +327,7 @@ void SpaceShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, f
 
 void SpaceShip::update(float delta)
 {
-    if (!ship_template || ship_template->getName() != template_name)
-    {
-        ship_template = ShipTemplate::getTemplate(template_name);
-        if (!ship_template)
-            return;
-        ship_template->setCollisionData(this);
-        model_info.setData(ship_template->model_data);
-    }
+    ShipTemplateBasedObject::update(delta);
 
     if (game_server)
     {

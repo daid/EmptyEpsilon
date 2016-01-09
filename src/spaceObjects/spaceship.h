@@ -182,8 +182,9 @@ public:
 
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
 
-    virtual void draw3DTransparent();
-
+#if FEATURE_3D_RENDERING
+    virtual void draw3DTransparent() override;
+#endif
     /*!
      * Draw this ship on the radar.
      */
