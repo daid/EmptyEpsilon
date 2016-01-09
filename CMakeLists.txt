@@ -42,6 +42,7 @@ set(SOURCES
 	src/script.cpp
 	src/playerInfo.cpp
 	src/shipTemplate.cpp
+	src/beamTemplate.cpp
 	src/factionInfo.cpp
 	src/mesh.cpp
 	src/repairCrew.cpp

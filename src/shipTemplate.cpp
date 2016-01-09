@@ -105,15 +105,6 @@ std::unordered_map<string, P<ShipTemplate> > ShipTemplate::templateMap;
 
 ShipTemplate::ShipTemplate()
 {
-    for(int n=0; n<max_beam_weapons; n++)
-    {
-        beams[n].arc = 0.0;
-        beams[n].direction = 0.0;
-        beams[n].range = 0.0;
-        beams[n].damage = 0.0;
-        beams[n].cycle_time = 0.0;
-        beams[n].beam_texture = "beam_orange.png";
-    }
     type = Ship;
     size_class = 10;
     weapon_tubes = 0;
