@@ -42,6 +42,7 @@ set(SOURCES
 	src/script.cpp
 	src/playerInfo.cpp
 	src/shipTemplate.cpp
+	src/beamTemplate.cpp
 	src/factionInfo.cpp
 	src/mesh.cpp
 	src/repairCrew.cpp
@@ -130,6 +131,7 @@ set(SOURCES
 	src/gui/gui2_overlay.cpp
 	src/spaceObjects/spaceStation.cpp
 	src/spaceObjects/spaceship.cpp
+	src/spaceObjects/beamWeapon.cpp
 	src/spaceObjects/wormHole.cpp
 	src/spaceObjects/spaceObject.cpp
 	src/spaceObjects/nebula.cpp

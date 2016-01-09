@@ -22,6 +22,8 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setHullMax);
     /// Get the current shield level, stations only have a single shield, unlike ships that have a front&back shield
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldLevel);
+    /// Get the amount of shields fit on this object.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldCount);
     /// Get the maxium shield level.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldMax);
     /// Set the current amount of shields.
@@ -143,17 +145,29 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::V
     }
 }
 
+#if FEATURE_3D_RENDERING
 void ShipTemplateBasedObject::draw3DTransparent()
 {
+    if (shield_count < 1)
+        return;
+    
+    float angle = 0.0;
+    float arc = 360.0f / shield_count;
     for(int n = 0; n<shield_count; n++)
     {
         if (shield_hit_effect[n] > 0)
         {
-            ///TOFIX: Render proper shield piece
-            model_info.renderShield((shield_level[n] / shield_max[n]) * shield_hit_effect[n]);
+            if (shield_count > 1)
+            {
+                model_info.renderShield((shield_level[n] / shield_max[n]) * shield_hit_effect[n], angle);
+            }else{
+                model_info.renderShield((shield_level[n] / shield_max[n]) * shield_hit_effect[n]);
+            }
         }
+        angle += arc;
     }
 }
+#endif//FEATURE_3D_RENDERING
 
 void ShipTemplateBasedObject::update(float delta)
 {

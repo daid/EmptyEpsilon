@@ -105,15 +105,6 @@ std::unordered_map<string, P<ShipTemplate> > ShipTemplate::templateMap;
 
 ShipTemplate::ShipTemplate()
 {
-    for(int n=0; n<max_beam_weapons; n++)
-    {
-        beams[n].arc = 0.0;
-        beams[n].direction = 0.0;
-        beams[n].range = 0.0;
-        beams[n].damage = 0.0;
-        beams[n].cycle_time = 0.0;
-        beams[n].beam_texture = "beam_orange.png";
-    }
     type = Ship;
     size_class = 10;
     weapon_tubes = 0;
@@ -131,6 +122,15 @@ ShipTemplate::ShipTemplate()
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = 0;
     radar_trace = "RadarArrow.png";
+}
+
+void ShipTemplate::setBeamTexture(int index, string texture)
+
+{
+    if (index >= 0 && index < max_beam_weapons)
+    {
+        beams[index].setBeamTexture(texture);
+    }
 }
 
 void ShipTemplate::setType(TemplateType type)
@@ -154,13 +154,11 @@ void ShipTemplate::setBeam(int index, float arc, float direction, float range, f
 {
     if (index < 0 || index > max_beam_weapons)
         return;
-    while(direction < 0)
-        direction += 360;
-    beams[index].arc = arc;
-    beams[index].direction = direction;
-    beams[index].range = range;
-    beams[index].cycle_time = cycle_time;
-    beams[index].damage = damage;
+    beams[index].setDirection(direction);
+    beams[index].setArc(arc);
+    beams[index].setRange(range);
+    beams[index].setCycleTime(cycle_time);
+    beams[index].setDamage(damage);
 }
 
 sf::Vector2i ShipTemplate::interiorSize()

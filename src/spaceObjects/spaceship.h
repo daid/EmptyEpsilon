@@ -3,6 +3,7 @@
 
 #include "shipTemplateBasedObject.h"
 #include "spaceStation.h"
+#include "beamWeapon.h"
 
 enum EWeaponTubeState
 {
@@ -50,19 +51,6 @@ public:
     }
 };
 
-class BeamWeapon : public sf::NonCopyable
-{
-public:
-    //Beam configuration
-    float arc;
-    float direction;
-    float range;
-    float cycleTime;
-    float damage;//Server side only
-    //Beam runtime state
-    float cooldown;
-    string beam_texture;
-};
 class WeaponTube : public sf::NonCopyable
 {
 public:
@@ -182,8 +170,9 @@ public:
 
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
 
-    virtual void draw3DTransparent();
-
+#if FEATURE_3D_RENDERING
+    virtual void draw3DTransparent() override;
+#endif
     /*!
      * Draw this ship on the radar.
      */
