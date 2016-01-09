@@ -3,6 +3,8 @@
 
 #include "SFML/System/NonCopyable.hpp"
 #include "stringImproved.h"
+#include "spaceObject.h"
+class SpaceShip;
 
 class BeamWeapon : public sf::NonCopyable
 {
@@ -17,6 +19,17 @@ public:
     //Beam runtime state
     float cooldown;
     string beam_texture;
+
+
+    void fire(P<SpaceObject> target, ESystem system_target);
+
+    void setParent(SpaceShip* parent);
+
+    void setPosition(sf::Vector3f position);
+
+protected:
+    sf::Vector3f position;
+    SpaceShip* parent; //The ship that this beam weapon is attached to.
 };
 
 #endif //BEAM_WEAPON_H

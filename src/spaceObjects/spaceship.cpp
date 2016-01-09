@@ -11,7 +11,6 @@
 #include "spaceObjects/mine.h"
 #include "spaceObjects/nuke.h"
 #include "spaceObjects/warpJammer.h"
-#include "spaceObjects/beamWeapon.h
 #include "gameGlobalInfo.h"
 
 #include "scriptInterface.h"
@@ -143,8 +142,10 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         registerMemberReplication(&systems[n].health, 0.1);
     }
 
-    for(int n=0; n<max_beam_weapons; n++)
+    for(int n = 0; n < max_beam_weapons; n++)
     {
+        beam_weapons[n].setParent(this);
+        beam_weapons[n].setPosition(ship_template->model_data->getBeamPosition(n));
         registerMemberReplication(&beam_weapons[n].arc);
         registerMemberReplication(&beam_weapons[n].direction);
         registerMemberReplication(&beam_weapons[n].range);
@@ -584,7 +585,8 @@ void SpaceShip::fireBeamWeapon(int index, P<SpaceObject> target)
             scanned_by_player = SS_FriendOrFoeIdentified;
     }
 
-    sf::Vector2f hitLocation = target->getPosition() - sf::normalize(target->getPosition() - getPosition()) * target->getRadius();
+    beam_weapons[index].fire(target, beam_system_target);
+    /*sf::Vector2f hitLocation = target->getPosition() - sf::normalize(target->getPosition() - getPosition()) * target->getRadius();
 
     beam_weapons[index].cooldown = beam_weapons[index].cycleTime;
     P<BeamEffect> effect = new BeamEffect();
@@ -595,7 +597,7 @@ void SpaceShip::fireBeamWeapon(int index, P<SpaceObject> target)
     DamageInfo info(this, DT_Energy, hitLocation);
     info.frequency = beam_frequency;
     info.system_target = beam_system_target;
-    target->takeDamage(beam_weapons[index].damage, info);
+    target->takeDamage(beam_weapons[index].damage, info);*/
 }
 
 bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)
