@@ -98,7 +98,7 @@ void ModelInfo::renderShield(float alpha)
 #endif//FEATURE_3D_RENDERING
 }
 
-void ModelInfo::renderFrontShield(float alpha)
+void ModelInfo::renderShield(float alpha, float angle)
 {
 #if FEATURE_3D_RENDERING
     if (!data) return;
@@ -108,27 +108,9 @@ void ModelInfo::renderFrontShield(float alpha)
     
     glPushMatrix();
     glColor4f(alpha, alpha, alpha, 1);
+    glRotatef(angle, 0, 0, 1);
     glRotatef(engine->getElapsedTime() * 5, 1, 0, 0);
     glScalef(data->radius * 1.2, data->radius * 1.2, data->radius * 1.2);
-    Mesh* m = Mesh::getMesh("half_sphere.obj");
-    m->render();
-    glPopMatrix();
-#endif//FEATURE_3D_RENDERING
-}
-
-void ModelInfo::renderRearShield(float alpha)
-{
-#if FEATURE_3D_RENDERING
-    if (!data) return;
-    
-    basicShader->setParameter("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
-    sf::Shader::bind(basicShader);
-    
-    glPushMatrix();
-    glColor4f(alpha, alpha, alpha, 1);
-    glRotatef(engine->getElapsedTime() * 5, 1, 0, 0);
-    glScalef(data->radius * 1.2, data->radius * 1.2, data->radius * 1.2);
-    glScalef(1, -1, 1);
     Mesh* m = Mesh::getMesh("half_sphere.obj");
     m->render();
     glPopMatrix();

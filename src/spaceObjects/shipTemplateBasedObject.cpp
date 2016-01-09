@@ -148,13 +148,23 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::V
 #if FEATURE_3D_RENDERING
 void ShipTemplateBasedObject::draw3DTransparent()
 {
+    if (shield_count < 1)
+        return;
+    
+    float angle = 0.0;
+    float arc = 360.0f / shield_count;
     for(int n = 0; n<shield_count; n++)
     {
         if (shield_hit_effect[n] > 0)
         {
-            ///TOFIX: Render proper shield piece
-            model_info.renderShield((shield_level[n] / shield_max[n]) * shield_hit_effect[n]);
+            if (shield_count > 1)
+            {
+                model_info.renderShield((shield_level[n] / shield_max[n]) * shield_hit_effect[n], angle);
+            }else{
+                model_info.renderShield((shield_level[n] / shield_max[n]) * shield_hit_effect[n]);
+            }
         }
+        angle += arc;
     }
 }
 #endif//FEATURE_3D_RENDERING
