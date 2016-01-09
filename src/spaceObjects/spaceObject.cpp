@@ -19,6 +19,7 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getRotation);
     /// Get the heading of this object, in the range of 0 to 360. The heading is 90 degrees off from the rotation.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getHeading);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setHeading);
     /// Gets the velocity of the object, in 2D space, in meters/second
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getVelocity);
     /// Gets the rotational velocity of the object, in degree/second
@@ -105,6 +106,31 @@ void SpaceObject::destroy()
 {
     onDestroyed();
     MultiplayerObject::destroy();
+}
+
+bool SpaceObject::canBeTargeted()
+{
+    return false;
+}
+
+bool SpaceObject::canBeSelected()
+{
+    if (object_description.length() > 0)
+        return true;
+    if (canBeScanned())
+        return true;
+    if (canBeTargeted())
+        return true;
+    return false;
+}
+
+bool SpaceObject::canBeScanned()
+{
+    if (scanning_complexity_value > 0)
+        return true;
+    if (scanning_depth_value > 0)
+        return true;
+    return false;
 }
 
 bool SpaceObject::isEnemy(P<SpaceObject> obj)

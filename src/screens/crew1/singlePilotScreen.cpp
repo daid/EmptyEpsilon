@@ -33,7 +33,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableTargetProjections()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
         [this](sf::Vector2f position) {
-            targets.setToClosestTo(position, 250);
+            targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
             if (my_spaceship && targets.get())
                 my_spaceship->commandSetTarget(targets.get());
             else if (my_spaceship)
@@ -96,7 +96,7 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
         warp_controls->setVisible(my_spaceship->has_warp_drive);
         jump_controls->setVisible(my_spaceship->has_jump_drive);
 
-        shields_display->setValue(string(my_spaceship->getFrontShieldPercentage()) + "% " + string(my_spaceship->getRearShieldPercentage()) + "%");
+        shields_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "% " + string(my_spaceship->getShieldPercentage(1)) + "%");
         targets.set(my_spaceship->getTarget());
         
         if (lock_aim->getValue())

@@ -57,19 +57,21 @@ public:
     void setHullMax(float amount) { if (amount < 0) return; hull_max = amount; hull_strength = std::max(hull_strength, hull_max); }
     virtual bool getShieldsActive() { return true; }
 
-    ///TOFIX: shield script binding functions
-    float getShield() { return shield_level[0]; }
-    float getShieldMax() { return shield_max[0]; }
-    void setShield(float amount) { if (amount < 0) return; shield_level[0] = amount; }
-    void setShieldMax(float amount) { if (amount < 0) return; shield_max[0] = amount; shield_level[0] = std::max(shield_level[0], shield_max[0]); }
+    ///Shield script binding functions
+    float getShieldLevel(int index) { if (index < 0 || index >= max_shield_count) return 0; return shield_level[index]; }
+    float getShieldMax(int index) { if (index < 0 || index >= max_shield_count) return 0; return shield_level[index]; }
+    void setShields(std::vector<float> amounts);
+    void setShieldsMax(std::vector<float> amounts);
+
+    int getShieldPercentage(int index) { if (index < 0 || index >= max_shield_count || shield_max[index] <= 0.0) return 0; return int(100 * shield_level[index] / shield_max[index]); }
+
+    ///Depricated old script functions for shields
     float getFrontShield() { return shield_level[0]; }
     float getFrontShieldMax() { return shield_max[0]; }
-    int getFrontShieldPercentage() { if (shield_max[0] <= 0.0) return 0; return int(100 * shield_level[0] / shield_max[0]); }
     void setFrontShield(float amount) { if (amount < 0) return; shield_level[0] = amount; }
     void setFrontShieldMax(float amount) { if (amount < 0) return; shield_level[0] = amount; shield_level[0] = std::min(shield_level[0], shield_max[0]); }
     float getRearShield() { return shield_level[1]; }
     float getRearShieldMax() { return shield_max[1]; }
-    int getRearShieldPercentage() { if (shield_max[1] <= 0.0) return 0; return int(100 * shield_level[1] / shield_max[1]); }
     void setRearShield(float amount) { if (amount < 0) return; shield_level[1] = amount; }
     void setRearShieldMax(float amount) { if (amount < 0) return; shield_max[1] = amount; shield_level[1] = std::min(shield_level[1], shield_max[1]); }
 

@@ -8,6 +8,11 @@ class TargetsContainer
 private:
     PVector<SpaceObject> entries;
 public:
+    enum ESelectionType
+    {
+        Targetable,
+        Selectable
+    };
 
     void clear() { entries.clear(); }
     void add(P<SpaceObject> obj) { if (obj) entries.push_back(obj); }
@@ -16,7 +21,7 @@ public:
     PVector<SpaceObject> getTargets() { entries.update(); return entries; }
     P<SpaceObject> get() { entries.update(); if (entries.size() > 0) return entries[0]; return nullptr; }
     
-    void setToClosestTo(sf::Vector2f position, float max_range);
+    void setToClosestTo(sf::Vector2f position, float max_range, ESelectionType selection_type);
 };
 
 #endif//TARGETS_CONTAINER_H

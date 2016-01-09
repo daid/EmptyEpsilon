@@ -54,6 +54,7 @@ public:
     void setDescription(string description) { object_description = description; }
 
     float getHeading() { float ret = getRotation() - 270; while(ret < 0) ret += 360.0f; while(ret > 360.0f) ret -= 360.0f; return ret; }
+    void setHeading(float heading) { setRotation(heading - 90); }
 
 #if FEATURE_3D_RENDERING
     virtual void draw3D();
@@ -64,11 +65,12 @@ public:
     virtual void destroy();
 
     virtual string getCallSign() { return ""; }
-    virtual bool canBeTargeted() { return false; }
     virtual bool canBeDockedBy(P<SpaceObject> obj) { return false; }
     virtual bool hasShield() { return false; }
     virtual bool canHideInNebula() { return true; }
-    virtual bool canBeScanned() { return false; }
+    virtual bool canBeTargeted();
+    virtual bool canBeSelected();
+    virtual bool canBeScanned();
     virtual int scanningComplexity() { return scanning_complexity_value; }
     virtual int scanningChannelDepth() { return scanning_depth_value; }
     void setScanningParameters(int complexity, int depth) { scanning_complexity_value = std::min(4, std::max(0, complexity)); scanning_depth_value = std::max(0, depth); }

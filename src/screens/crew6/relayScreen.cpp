@@ -23,7 +23,7 @@ RelayScreen::RelayScreen(GuiContainer* owner)
             switch(mode)
             {
             case TargetSelection:
-                targets.setToClosestTo(position, 1000);
+                targets.setToClosestTo(position, 1000, TargetsContainer::Targetable);
                 break;
             case WaypointPlacement:
                 if (my_spaceship)
