@@ -5,7 +5,7 @@
 #include "engine.h"
 #include "modelData.h"
 
-#include "beamTemplate.h" 
+#include "beamTemplate.h"
 constexpr static int max_beam_weapons = 16;
 constexpr static int max_weapon_tubes = 16;
 constexpr static int max_shield_count = 8;
@@ -109,15 +109,15 @@ public:
     void setDefaultAI(string default_ai_name) { this->default_ai_name = default_ai_name; }
     void setSizeClass(int size_class) { this->size_class = size_class; }
     void setMesh(string model, string color_texture, string specular_texture, string illumination_texture);
+
+    
     void setBeam(int index, float arc, float direction, float range, float cycle_time, float damage);
 
-    void setBeamTexture(int index, string texture)
-    {
-        if (index >= 0 && index < max_beam_weapons)
-        {
-            beams[index].beam_texture = texture;
-        }
-    }
+    /**
+     * Convenience function to set the texture of a beam by index.
+     */
+    void setBeamTexture(int index, string texture);
+
     void setTubes(int amount, float load_time) { weapon_tubes = std::min(max_weapon_tubes, amount); tube_load_time = load_time; }
     void setHull(float amount) { hull = amount; }
     void setShields(std::vector<float> values);

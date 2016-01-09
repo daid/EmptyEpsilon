@@ -124,6 +124,15 @@ ShipTemplate::ShipTemplate()
     radar_trace = "RadarArrow.png";
 }
 
+void ShipTemplate::setBeamTexture(int index, string texture)
+
+{
+    if (index >= 0 && index < max_beam_weapons)
+    {
+        beams[index].setBeamTexture(texture);
+    }
+}
+
 void ShipTemplate::setType(TemplateType type)
 {
     if (radar_trace == "RadarArrow.png" && type == Station)
@@ -145,13 +154,11 @@ void ShipTemplate::setBeam(int index, float arc, float direction, float range, f
 {
     if (index < 0 || index > max_beam_weapons)
         return;
-    while(direction < 0)
-        direction += 360;
-    beams[index].arc = arc;
-    beams[index].direction = direction;
-    beams[index].range = range;
-    beams[index].cycle_time = cycle_time;
-    beams[index].damage = damage;
+    beams[index].setDirection(direction);
+    beams[index].setArc(arc);
+    beams[index].setRange(range);
+    beams[index].setCycleTime(cycle_time);
+    beams[index].setDamage(damage);
 }
 
 sf::Vector2i ShipTemplate::interiorSize()

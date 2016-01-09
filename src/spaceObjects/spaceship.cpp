@@ -186,12 +186,12 @@ void SpaceShip::applyTemplateValues()
 {
     for(int n=0; n<max_beam_weapons; n++)
     {
-        beam_weapons[n].arc = ship_template->beams[n].arc;
-        beam_weapons[n].direction = ship_template->beams[n].direction;
-        beam_weapons[n].range = ship_template->beams[n].range;
-        beam_weapons[n].cycleTime = ship_template->beams[n].cycle_time;
-        beam_weapons[n].damage = ship_template->beams[n].damage;
-        beam_weapons[n].beam_texture = ship_template->beams[n].beam_texture;
+        beam_weapons[n].arc = ship_template->beams[n].getArc();
+        beam_weapons[n].direction = ship_template->beams[n].getDirection();
+        beam_weapons[n].range = ship_template->beams[n].getRange();
+        beam_weapons[n].cycleTime = ship_template->beams[n].getCycleTime();
+        beam_weapons[n].damage = ship_template->beams[n].getDamage();
+        beam_weapons[n].beam_texture = ship_template->beams[n].getBeamTexture();
     }
     weapon_tubes = ship_template->weapon_tubes;
 
