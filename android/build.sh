@@ -16,7 +16,7 @@ rm -rf assets/resources/fire_ring.png
 rm -rf assets/resources/shield_hit_effect.png
 
 android update project --name EmptyEpsilon --target "android-16" --path .
-ndk-build -j 2
+ndk-build -j 2 -B
 
 # Check if we have a key generated with: keytool -genkey -v -keystore $HOME/android_ee_key.keystore -alias EmptyEpsilon -keyalg RSA -keysize 2048 -validity 10000
 if [ -f "$HOME/android_ee_key.keystore" ]; then
