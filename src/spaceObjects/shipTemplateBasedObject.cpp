@@ -22,6 +22,8 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setHullMax);
     /// Get the current shield level, stations only have a single shield, unlike ships that have a front&back shield
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldLevel);
+    /// Get the amount of shields fit on this object.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldCount);
     /// Get the maxium shield level.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldMax);
     /// Set the current amount of shields.
