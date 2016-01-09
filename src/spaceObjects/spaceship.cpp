@@ -11,7 +11,7 @@
 #include "spaceObjects/mine.h"
 #include "spaceObjects/nuke.h"
 #include "spaceObjects/warpJammer.h"
-#include "spaceObjects/beamWeapon.h"
+#include "spaceObjects/beamWeapon.h
 #include "gameGlobalInfo.h"
 
 #include "scriptInterface.h"
@@ -145,13 +145,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
 
     for(int n=0; n<max_beam_weapons; n++)
     {
-        beam_weapons[n].arc = 0;
-        beam_weapons[n].direction = 0;
-        beam_weapons[n].range = 0;
-        beam_weapons[n].cycleTime = 6.0;
-        beam_weapons[n].cooldown = 0.0;
-        beam_weapons[n].damage = 1.0;
-
         registerMemberReplication(&beam_weapons[n].arc);
         registerMemberReplication(&beam_weapons[n].direction);
         registerMemberReplication(&beam_weapons[n].range);
@@ -839,7 +832,7 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
             }
         }
     }
-    
+
     ShipTemplateBasedObject::takeHullDamage(damage_amount, info);
 }
 
