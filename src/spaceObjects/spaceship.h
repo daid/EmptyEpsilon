@@ -66,6 +66,13 @@ public:
     constexpr static float combat_maneuver_charge_time = 20.0f;
     constexpr static float warp_charge_time = 4.0f;
     constexpr static float warp_decharge_time = 2.0f;
+    constexpr static float jump_drive_charge_time_per_km = 2.0;
+    constexpr static float jump_drive_min_distance = 5.0;
+    constexpr static float jump_drive_max_distance = 50.0;
+
+    int engineering_crew_max;
+    int engineering_crew;
+    int engineering_crew_injuried;
 
     float energy_level;
     ShipSystem systems[SYS_COUNT];
@@ -133,6 +140,7 @@ public:
     float combat_maneuver_strafe_active;
 
     bool has_jump_drive;      //[config]
+    float jump_drive_charge; //[output]
     float jump_distance;     //[output]
     float jump_delay;        //[output]
     float wormhole_alpha;    //Used for displaying the Warp-postprocessor
@@ -272,7 +280,7 @@ public:
      * \return float 0. to 1.
      */
     float getSystemEffectiveness(ESystem system);
-    
+
     virtual void applyTemplateValues();
 
     P<SpaceObject> getTarget();
@@ -335,6 +343,8 @@ public:
     int getWeaponTubeCount();
 
     void setRadarTrace(string trace) { radar_trace = trace; }
+
+    void setEngineeringCrew(int number) { engineering_crew = number; }
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);

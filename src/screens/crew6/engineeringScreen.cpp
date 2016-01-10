@@ -15,9 +15,11 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
     hull_display->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
     shields_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, "Shields", "");
     shields_display->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
-    
-    (new GuiSelfDestructButton(this, "SELF_DESTRUCT"))->setPosition(20, 220, ATopLeft)->setSize(240, 100);
-    
+    crew_display = new GuiKeyValueDisplay(this, "ENGINEERING_CREW", 0.4, "Crew", "");
+    crew_display->setTextSize(20)->setPosition(20, 220, ATopLeft)->setSize(240, 40);
+
+    (new GuiSelfDestructButton(this, "SELF_DESTRUCT"))->setPosition(20, 260, ATopLeft)->setSize(240, 100);
+
     GuiAutoLayout* system_row_layouts = new GuiAutoLayout(this, "SYSTEM_ROWS", GuiAutoLayout::LayoutVerticalBottomToTop);
     system_row_layouts->setPosition(20, -20, ABottomLeft);
     system_row_layouts->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -27,7 +29,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
         SystemRow info;
         info.layout = new GuiAutoLayout(system_row_layouts, id, GuiAutoLayout::LayoutHorizontalLeftToRight);
         info.layout->setSize(GuiElement::GuiSizeMax, 50);
-        
+
         info.button = new GuiToggleButton(info.layout, id + "_SELECT", getSystemName(ESystem(n)), [this, n](bool value){
             for(int idx=0; idx<SYS_COUNT; idx++)
             {
@@ -55,16 +57,16 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
         info.power_bar->setColor(sf::Color(192, 192, 0))->setSize(50, GuiElement::GuiSizeMax);
         info.coolant_bar = new GuiProgressbar(info.layout, id + "_COOLANT", 0.0, 10.0, 0.0);
         info.coolant_bar->setColor(sf::Color(0, 128, 128))->setSize(50, GuiElement::GuiSizeMax);
-        
+
         info.layout->moveToBack();
         system_rows.push_back(info);
     }
-    
+
     GuiBox* box = new GuiBox(this, "POWER_COOLANT_BOX");
     box->setPosition(110, -20, ABottomCenter)->setSize(270, 400);
     (new GuiLabel(box, "POWER_LABEL", "Power", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(20, 20, ATopLeft)->setSize(30, 360);
     (new GuiLabel(box, "COOLANT_LABEL", "Coolant", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(110, 20, ATopLeft)->setSize(30, 360);
-    
+
     power_slider = new GuiSlider(box, "POWER_SLIDER", 3.0, 0.0, 1.0, [this](float value) {
         if (my_spaceship)
             my_spaceship->commandSetSystemPower(selected_system, value);
@@ -77,7 +79,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
     coolant_slider->setPosition(140, 20, ATopLeft)->setSize(60, 360);
 
     (new GuiShieldFrequencySelect(this, "SHIELD_FREQ"))->setPosition(-20, -20, ABottomRight)->setSize(320, 400);
-    
+
     (new GuiShipInternalView(system_row_layouts, "SHIP_INTERNAL_VIEW", 48.0f))->setShip(my_spaceship)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
@@ -96,19 +98,19 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
         else
             hull_display->setColor(sf::Color::White);
         shields_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "% " + string(my_spaceship->getShieldPercentage(1)) + "%");
-        
+
         for(int n=0; n<SYS_COUNT; n++)
         {
             SystemRow info = system_rows[n];
             info.layout->setVisible(my_spaceship->hasSystem(ESystem(n)));
-            
+
             float health = my_spaceship->systems[n].health;
             if (health < 0.0)
                 info.damage_bar->setValue(-health)->setColor(sf::Color(128, 32, 32));
             else
                 info.damage_bar->setValue(health)->setColor(sf::Color(64, 128 * health, 64 * health));
             info.damage_label->setText(string(int(health * 100)) + "%");
-            
+
             float heat = my_spaceship->systems[n].heat_level;
             info.heat_bar->setValue(heat)->setColor(sf::Color(128, 128 * (1.0 - heat), 0));
             float heating_diff = my_spaceship->systems[n].getHeatingDelta();
@@ -118,10 +120,12 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
                 info.heat_arrow->setAngle(-90);
             info.heat_arrow->setVisible(heat > 0);
             info.heat_arrow->setColor(sf::Color(255, 255, 255, std::min(255, int(255 * fabs(heating_diff)))));
-            
+
             info.power_bar->setValue(my_spaceship->systems[n].power_level);
             info.coolant_bar->setValue(my_spaceship->systems[n].coolant_level);
         }
+
+        crew_display->setValue(string(my_spaceship->engineering_crew - my_spaceship->engineering_crew_injuried) + "/" + string(my_spaceship->engineering_crew));
     }
     GuiOverlay::onDraw(window);
 }
