@@ -450,6 +450,8 @@
 		<Unit filename="src/ai/fighterAI.h" />
 		<Unit filename="src/ai/missileVolleyAI.cpp" />
 		<Unit filename="src/ai/missileVolleyAI.h" />
+		<Unit filename="src/beamTemplate.cpp" />
+		<Unit filename="src/beamTemplate.h" />
 		<Unit filename="src/commsScriptInterface.cpp" />
 		<Unit filename="src/commsScriptInterface.h" />
 		<Unit filename="src/epsilonServer.cpp" />
@@ -675,6 +677,8 @@
 		<Unit filename="src/spaceObjects/asteroid.h" />
 		<Unit filename="src/spaceObjects/beamEffect.cpp" />
 		<Unit filename="src/spaceObjects/beamEffect.h" />
+		<Unit filename="src/spaceObjects/beamWeapon.cpp" />
+		<Unit filename="src/spaceObjects/beamWeapon.h" />
 		<Unit filename="src/spaceObjects/blackHole.cpp" />
 		<Unit filename="src/spaceObjects/blackHole.h" />
 		<Unit filename="src/spaceObjects/cpuShip.cpp" />
