@@ -20,8 +20,10 @@ Asteroid::Asteroid()
     setRotation(random(0, 360));
     rotation_speed = random(0.1, 0.8);
     z = random(-50, 50);
+    size = getRadius();
 
     registerMemberReplication(&z);
+    registerMemberReplication(&size);
     
     PathPlannerManager::getInstance()->addAvoidObject(this, 300);
 }
@@ -29,6 +31,9 @@ Asteroid::Asteroid()
 void Asteroid::draw3D()
 {
 #if FEATURE_3D_RENDERING
+    if (size != getRadius())
+        setRadius(size);
+
     glTranslatef(0, 0, z);
     glRotatef(engine->getElapsedTime() * rotation_speed, 0, 0, 1);
     glScalef(getRadius(), getRadius(), getRadius());
@@ -41,6 +46,9 @@ void Asteroid::draw3D()
 
 void Asteroid::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
+    if (size != getRadius())
+        setRadius(size);
+
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "RadarBlip.png");
     object_sprite.setRotation(getRotation());
@@ -92,12 +100,18 @@ VisualAsteroid::VisualAsteroid()
     if (random(0, 100) < 50)
         z = -z;
 
+    size = getRadius();
+
     registerMemberReplication(&z);
+    registerMemberReplication(&size);
 }
 
 void VisualAsteroid::draw3D()
 {
 #if FEATURE_3D_RENDERING
+    if (size != getRadius())
+        setRadius(size);
+
     glTranslatef(0, 0, z);
     glRotatef(engine->getElapsedTime() * rotation_speed, 0, 0, 1);
     glScalef(getRadius(), getRadius(), getRadius());

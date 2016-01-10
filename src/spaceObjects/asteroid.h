@@ -8,6 +8,7 @@ class Asteroid : public SpaceObject
 public:
     float rotation_speed;
     float z;
+    float size;
 
     Asteroid();
 
@@ -27,6 +28,7 @@ class VisualAsteroid : public SpaceObject
 public:
     float rotation_speed;
     float z;
+    float size;
 
     VisualAsteroid();
 
