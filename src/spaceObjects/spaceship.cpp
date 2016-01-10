@@ -83,6 +83,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     warp_request = 0.0;
     current_warp = 0.0;
     has_jump_drive = true;
+    jump_drive_charge = jump_drive_max_distance;
     jump_distance = 0.0;
     jump_delay = 0.0;
     wormhole_alpha = 0.0;
@@ -112,6 +113,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&warp_request, 0.1);
     registerMemberReplication(&current_warp, 0.1);
     registerMemberReplication(&has_jump_drive);
+    registerMemberReplication(&jump_drive_charge, 0.5);
     registerMemberReplication(&jump_delay, 0.5);
     registerMemberReplication(&wormhole_alpha, 0.5);
     registerMemberReplication(&tube_load_time);
@@ -145,7 +147,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     for(int n = 0; n < max_beam_weapons; n++)
     {
         beam_weapons[n].setParent(this);
-        beam_weapons[n].setPosition(ship_template->model_data->getBeamPosition(n));
         registerMemberReplication(&beam_weapons[n].arc);
         registerMemberReplication(&beam_weapons[n].direction);
         registerMemberReplication(&beam_weapons[n].range);
@@ -181,6 +182,7 @@ void SpaceShip::applyTemplateValues()
 {
     for(int n=0; n<max_beam_weapons; n++)
     {
+        beam_weapons[n].setPosition(ship_template->model_data->getBeamPosition(n));
         beam_weapons[n].arc = ship_template->beams[n].getArc();
         beam_weapons[n].direction = ship_template->beams[n].getDirection();
         beam_weapons[n].range = ship_template->beams[n].getRange();
@@ -410,6 +412,15 @@ void SpaceShip::update(float delta)
             }
         }
     }else{
+        if (has_jump_drive)
+        {
+            if (jump_drive_charge < jump_drive_max_distance)
+            {
+                jump_drive_charge += (delta / jump_drive_charge_time_per_km) * getSystemEffectiveness(SYS_JumpDrive);
+                if (jump_drive_charge >= jump_drive_max_distance)
+                    jump_drive_charge = jump_drive_max_distance;
+            }
+        }
         current_warp = 0.0;
         if (impulse_request > 1.0)
             impulse_request = 1.0;
@@ -708,11 +719,15 @@ void SpaceShip::fireTube(int tubeNr, float target_angle)
 
 void SpaceShip::initializeJump(float distance)
 {
-    if (docking_state != DS_NotDocking) return;
+    if (docking_state != DS_NotDocking)
+        return;
+    if (jump_drive_charge < jump_drive_max_distance) // You can only jump when the drive is fully charged
+        return;
     if (jump_delay <= 0.0)
     {
         jump_distance = distance;
         jump_delay = 10.0;
+        jump_drive_charge -= distance;
     }
 }
 

@@ -9,6 +9,7 @@ private:
     GuiLabel* label;
     GuiSlider* slider;
     GuiButton* button;
+    GuiProgressbar* charge_bar;
 public:
     GuiJumpControls(GuiContainer* owner, string id);
     
