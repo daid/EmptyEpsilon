@@ -18,6 +18,7 @@ template:setShields(1200, 1200, 1200, 1200)
 
 --[[ Player ships --]]
 template = ShipTemplate():setName("Player Cruiser"):setModel("battleship_destroyer_5_upgraded"):setType("playership")
+template:setSizeClass(10)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 90, -15, 1000.0, 6.0, 10)
 template:setBeam(1, 90,  15, 1000.0, 6.0, 10)
@@ -69,6 +70,7 @@ template:addDoor(8, 4, false);
 --template:addDoor(2, 5, false);
 
 template = ShipTemplate():setName("Player Missile Cr."):setModel("space_cruiser_4"):setType("playership")
+template:setSizeClass(10)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setTubes(4, 8.0)
 template:setHull(200)
@@ -113,6 +115,7 @@ template:addDoor(8, 3, false);
 template:addDoor(8, 4, false);
 
 template = ShipTemplate():setName("Player Fighter"):setModel("small_fighter_1"):setType("playership")
+template:setSizeClass(6)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 40, -10, 1000.0, 6.0, 8)
 template:setBeam(1, 40,  10, 1000.0, 6.0, 8)
@@ -150,6 +153,7 @@ template:addDoor(5, 2, false);
 --[[ Neutral or special ship types --]]
 --Tug, used for transport of small goods (like weapons)
 template = ShipTemplate():setName("Tug"):setModel("space_tug")
+template:setSizeClass(7)
 template:setHull(50)
 template:setShields(20)
 template:setSpeed(100, 10, 15)
