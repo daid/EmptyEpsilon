@@ -593,18 +593,6 @@ void SpaceShip::fireBeamWeapon(int index, P<SpaceObject> target)
     }
 
     beam_weapons[index].fire(target, beam_system_target);
-    /*sf::Vector2f hitLocation = target->getPosition() - sf::normalize(target->getPosition() - getPosition()) * target->getRadius();
-
-    beam_weapons[index].cooldown = beam_weapons[index].cycleTime;
-    P<BeamEffect> effect = new BeamEffect();
-    effect->setSource(this, ship_template->model_data->getBeamPosition(index));
-    effect->setTarget(target, hitLocation);
-    effect->beam_texture = beam_weapons[index].beam_texture;
-
-    DamageInfo info(this, DT_Energy, hitLocation);
-    info.frequency = beam_frequency;
-    info.system_target = beam_system_target;
-    target->takeDamage(beam_weapons[index].damage, info);*/
 }
 
 bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)
