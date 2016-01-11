@@ -12,7 +12,8 @@ private:
     GuiKeyValueDisplay* shields_display;
     GuiSlider* power_slider;
     GuiSlider* coolant_slider;
-    
+    GuiKeyValueDisplay* crew_display;
+
     class SystemRow
     {
     public:
@@ -29,7 +30,7 @@ private:
     ESystem selected_system;
 public:
     EngineeringScreen(GuiContainer* owner);
-    
+
     virtual void onDraw(sf::RenderTarget& window);
 };
 

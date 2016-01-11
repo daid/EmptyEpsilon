@@ -49,6 +49,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// For example, ship:setRadarTrace("RadarBlip.png") will show a dot instead of an arrow for this ship.
     /// Note: Icon is only shown after scanning, before the ship is scanned it is always shown as an arrow.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadarTrace);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setEngineeringCrew);
 }
 
 /* Define script conversion function for the EMainScreenSetting enum. */
@@ -133,6 +134,9 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&combat_maneuver_strafe_request);
     registerMemberReplication(&combat_maneuver_strafe_active, 0.2);
     registerMemberReplication(&radar_trace);
+    registerMemberReplication(&engineering_crew_max);
+    registerMemberReplication(&engineering_crew);
+    registerMemberReplication(&engineering_crew_injuried);
 
     for(int n=0; n<SYS_COUNT; n++)
     {
@@ -196,6 +200,10 @@ void SpaceShip::applyTemplateValues()
 
     ship_template->setCollisionData(this);
     model_info.setData(ship_template->model_data);
+
+    engineering_crew_max = ship_template->engineering_crew_max;
+    engineering_crew_injuried = 0;
+    engineering_crew = engineering_crew_max ;
 }
 
 #if FEATURE_3D_RENDERING

@@ -95,7 +95,7 @@ public:
     float impulse_acceleration;
     bool has_jump_drive, has_cloaking;
     int weapon_storage[MW_Count];
-
+    float engineering_crew_max;
     string radar_trace;
 
     std::vector<ShipRoomTemplate> rooms;
@@ -110,7 +110,7 @@ public:
     void setSizeClass(int size_class) { this->size_class = size_class; }
     void setMesh(string model, string color_texture, string specular_texture, string illumination_texture);
 
-    
+
     void setBeam(int index, float arc, float direction, float range, float cycle_time, float damage);
 
     /**
@@ -130,6 +130,7 @@ public:
     void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system) { rooms.push_back(ShipRoomTemplate(position, size, system)); }
     void addDoor(sf::Vector2i position, bool horizontal) { doors.push_back(ShipDoorTemplate(position, horizontal)); }
     void setRadarTrace(string trace) { radar_trace=trace; }
+    void setEngineeringCrewMax(int total) { engineering_crew_max = total; }
 
     sf::Vector2i interiorSize();
     ESystem getSystemAtRoom(sf::Vector2i position);
