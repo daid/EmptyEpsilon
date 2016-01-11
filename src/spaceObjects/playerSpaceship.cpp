@@ -412,12 +412,8 @@ void PlayerSpaceship::applyTemplateValues()
 
 void PlayerSpaceship::executeJump(float distance)
 {
-    if (useEnergy(distance * energy_per_jump_km * (shields_active ? 3.0 : 1.0)) && systems[SYS_JumpDrive].health > 0.0)
-    {
-        jump_indicator = 2.0;
-        SpaceShip::executeJump(distance);
-        addHeat(SYS_JumpDrive, heat_per_jump);
-    }
+    jump_indicator = 2.0;
+    SpaceShip::executeJump(distance);
 }
 
 void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)

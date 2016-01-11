@@ -55,6 +55,8 @@ public:
     constexpr static float jump_drive_charge_time_per_km = 2.0;
     constexpr static float jump_drive_min_distance = 5.0;
     constexpr static float jump_drive_max_distance = 50.0;
+    constexpr static float jump_drive_energy_per_km_charge = 6.0f;
+    constexpr static float jump_drive_heat_per_jump = 0.35;
 
     float energy_level;
     ShipSystem systems[SYS_COUNT];
@@ -235,7 +237,10 @@ public:
      */
     void requestUndock();
 
+    /// Dummy virtual function to use energy. Only player ships currently model energy use.
     virtual bool useEnergy(float amount) { return true; }
+    
+    /// Dummy virtual function to add heat on a system. The player ship class has an actual implementation of this as only player ships model heat right now.
     virtual void addHeat(ESystem system, float amount) {}
 
     virtual bool canBeScanned() { return scanned_by_player != SS_FullScan; }

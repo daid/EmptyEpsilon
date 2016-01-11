@@ -409,11 +409,23 @@ void SpaceShip::update(float delta)
     }else{
         if (has_jump_drive)
         {
-            if (jump_drive_charge < jump_drive_max_distance)
+            float f = Tween<float>::linear(getSystemEffectiveness(SYS_JumpDrive), 0.0, 1.0, -0.25, 1.0);
+            if (f > 0)
             {
-                jump_drive_charge += (delta / jump_drive_charge_time_per_km) * getSystemEffectiveness(SYS_JumpDrive);
-                if (jump_drive_charge >= jump_drive_max_distance)
-                    jump_drive_charge = jump_drive_max_distance;
+                if (jump_drive_charge < jump_drive_max_distance)
+                {
+                    float extra_charge = (delta / jump_drive_charge_time_per_km) * f;
+                    if (useEnergy(extra_charge * jump_drive_energy_per_km_charge))
+                    {
+                        jump_drive_charge += extra_charge;
+                        if (jump_drive_charge >= jump_drive_max_distance)
+                            jump_drive_charge = jump_drive_max_distance;
+                    }
+                }
+            }else{
+                jump_drive_charge += (delta / jump_drive_charge_time_per_km) * f;
+                if (jump_drive_charge < 0.0f)
+                    jump_drive_charge = 0.0f;
             }
         }
         current_warp = 0.0;
@@ -549,11 +561,13 @@ void SpaceShip::executeJump(float distance)
     float f = systems[SYS_JumpDrive].health;
     if (f <= 0.0)
         return;
+
     distance = (distance * f) + (distance * (1.0 - f) * random(0.5, 1.5));
     sf::Vector2f target_position = getPosition() + sf::vector2FromAngle(getRotation()) * distance * 1000.0f;
     if (WarpJammer::isWarpJammed(target_position))
         target_position = WarpJammer::getFirstNoneJammedPosition(getPosition(), target_position);
     setPosition(target_position);
+    addHeat(SYS_JumpDrive, jump_drive_heat_per_jump);
 }
 
 bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)
