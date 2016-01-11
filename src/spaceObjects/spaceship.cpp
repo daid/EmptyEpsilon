@@ -148,13 +148,13 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     {
         beam_weapons[n].setParent(this);
     }
-    for(int n=0; n<max_weapon_tubes; n++)
+    for(int n = 0; n < max_weapon_tubes; n++)
     {
         registerMemberReplication(&weaponTube[n].type_loaded);
         registerMemberReplication(&weaponTube[n].state);
         registerMemberReplication(&weaponTube[n].delay, 0.5);
     }
-    for(int n=0; n<MW_Count; n++)
+    for(int n = 0; n < MW_Count; n++)
     {
         weapon_storage[n] = 0;
         weapon_storage_max[n] = 0;
@@ -490,7 +490,7 @@ void SpaceShip::update(float delta)
             combat_maneuver_charge = 1.0;
     }
 
-    for(int n=0; n<max_beam_weapons; n++)
+    for(int n = 0; n < max_beam_weapons; n++)
     {
         beam_weapons[n].update(delta);
     }
