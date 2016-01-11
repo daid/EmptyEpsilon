@@ -77,7 +77,7 @@ function init()
 		for acnt=1,50 do
 			dx1, dy1 = vectorFromAngle(a2, random(-1000, 1000))
 			dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
-			Asteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2)
+			Asteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2):setSize(random(100, 500))
 		end
 		for acnt=1,100 do
 			dx1, dy1 = vectorFromAngle(a2, random(-1500, 1500))

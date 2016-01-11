@@ -108,6 +108,31 @@ void SpaceObject::destroy()
     MultiplayerObject::destroy();
 }
 
+bool SpaceObject::canBeTargeted()
+{
+    return false;
+}
+
+bool SpaceObject::canBeSelected()
+{
+    if (object_description.length() > 0)
+        return true;
+    if (canBeScanned())
+        return true;
+    if (canBeTargeted())
+        return true;
+    return false;
+}
+
+bool SpaceObject::canBeScanned()
+{
+    if (scanning_complexity_value > 0)
+        return true;
+    if (scanning_depth_value > 0)
+        return true;
+    return false;
+}
+
 bool SpaceObject::isEnemy(P<SpaceObject> obj)
 {
     return factionInfo[faction_id]->states[obj->faction_id] == FVF_Enemy;

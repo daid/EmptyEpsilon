@@ -5,8 +5,12 @@
 GuiJumpControls::GuiJumpControls(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
-    slider = new GuiSlider(this, id + "_SLIDER", 40.0, 5.0, 10.0, nullptr);
+    slider = new GuiSlider(this, id + "_SLIDER", SpaceShip::jump_drive_max_distance, SpaceShip::jump_drive_min_distance, 10.0, nullptr);
     slider->setPosition(0, -50, ABottomLeft)->setSize(50, GuiElement::GuiSizeMax);
+    
+    charge_bar = new GuiProgressbar(this, id + "_CHARGE", SpaceShip::jump_drive_min_distance, SpaceShip::jump_drive_max_distance, SpaceShip::jump_drive_min_distance);
+    charge_bar->setPosition(0, -50, ABottomLeft)->setSize(50, GuiElement::GuiSizeMax);
+    charge_bar->hide();
     
     label = new GuiLabel(this, id + "_LABEL", "Distance: 10.0", 30);
     label->setVertical()->setPosition(50, -50, ABottomLeft)->setSize(40, GuiElement::GuiSizeMax);
@@ -30,10 +34,18 @@ void GuiJumpControls::onDraw(sf::RenderTarget& window)
             label->setText("Jump in: " + string(int(ceilf(my_spaceship->jump_delay))));
             slider->disable();
             button->disable();
+            charge_bar->hide();
+        }else if (my_spaceship->jump_drive_charge < SpaceShip::jump_drive_max_distance)
+        {
+            label->setText("Charging...");
+            slider->hide();
+            button->disable();
+            charge_bar->setValue(my_spaceship->jump_drive_charge)->show();
         }else{
             label->setText("Distance: " + string(slider->getValue(), 1) + "km");
-            slider->enable();
+            slider->enable()->show();
             button->enable();
+            charge_bar->hide();
         }
     }
 }

@@ -153,7 +153,7 @@ public:
 
     float getNetPowerUsage();
     
-    virtual bool getShieldsActive() { return shields_active; }
+    virtual bool getShieldsActive() override { return shields_active; }
     void setShieldsActive(bool active) { shields_active = active; }
 
     void setCommsMessage(string message);

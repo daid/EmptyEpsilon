@@ -113,18 +113,18 @@ void fillDefaultDatabaseData()
         }
         for(int n=0; n<max_beam_weapons; n++)
         {
-            if (ship_template->beams[n].range > 0)
+            if (ship_template->beams[n].getRange() > 0)
             {
                 string name = "?";
-                if (ship_template->beams[n].direction < 45 || ship_template->beams[n].direction > 315)
+                if (ship_template->beams[n].getDirection() < 45 || ship_template->beams[n].getDirection() > 315)
                     name = "Front";
-                else if (ship_template->beams[n].direction > 45 && ship_template->beams[n].direction < 135)
+                else if (ship_template->beams[n].getDirection() > 45 && ship_template->beams[n].getDirection() < 135)
                     name = "Right";
-                else if (ship_template->beams[n].direction > 135 && ship_template->beams[n].direction < 225)
+                else if (ship_template->beams[n].getDirection() > 135 && ship_template->beams[n].getDirection() < 225)
                     name = "Rear";
-                else if (ship_template->beams[n].direction > 225 && ship_template->beams[n].direction < 315)
+                else if (ship_template->beams[n].getDirection() > 225 && ship_template->beams[n].getDirection() < 315)
                     name = "Left";
-                entry->addKeyValue(name + " beam weapon", string(ship_template->beams[n].damage / ship_template->beams[n].cycle_time, 2) + " DPS");
+                entry->addKeyValue(name + " beam weapon", string(ship_template->beams[n].getDamage() / ship_template->beams[n].getCycleTime(), 2) + " DPS");
             }
         }
         if (ship_template->weapon_tubes > 0)

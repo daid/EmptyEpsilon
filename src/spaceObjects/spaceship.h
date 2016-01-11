@@ -3,6 +3,7 @@
 
 #include "shipTemplateBasedObject.h"
 #include "spaceStation.h"
+#include "beamWeapon.h"
 
 enum EWeaponTubeState
 {
@@ -50,19 +51,6 @@ public:
     }
 };
 
-class BeamWeapon : public sf::NonCopyable
-{
-public:
-    //Beam configuration
-    float arc;
-    float direction;
-    float range;
-    float cycleTime;
-    float damage;//Server side only
-    //Beam runtime state
-    float cooldown;
-    string beam_texture;
-};
 class WeaponTube : public sf::NonCopyable
 {
 public:
@@ -78,6 +66,9 @@ public:
     constexpr static float combat_maneuver_charge_time = 20.0f;
     constexpr static float warp_charge_time = 4.0f;
     constexpr static float warp_decharge_time = 2.0f;
+    constexpr static float jump_drive_charge_time_per_km = 2.0;
+    constexpr static float jump_drive_min_distance = 5.0;
+    constexpr static float jump_drive_max_distance = 50.0;
 
     float energy_level;
     ShipSystem systems[SYS_COUNT];
@@ -145,6 +136,7 @@ public:
     float combat_maneuver_strafe_active;
 
     bool has_jump_drive;      //[config]
+    float jump_drive_charge; //[output]
     float jump_distance;     //[output]
     float jump_delay;        //[output]
     float wormhole_alpha;    //Used for displaying the Warp-postprocessor
@@ -182,8 +174,9 @@ public:
 
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
 
-    virtual void draw3DTransparent();
-
+#if FEATURE_3D_RENDERING
+    virtual void draw3DTransparent() override;
+#endif
     /*!
      * Draw this ship on the radar.
      */
