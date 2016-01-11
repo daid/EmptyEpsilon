@@ -70,6 +70,10 @@ public:
     constexpr static float jump_drive_min_distance = 5.0;
     constexpr static float jump_drive_max_distance = 50.0;
 
+    int engineering_crew_max;
+    int engineering_crew;
+    int engineering_crew_injuried;
+
     float energy_level;
     ShipSystem systems[SYS_COUNT];
     /*!
@@ -276,7 +280,7 @@ public:
      * \return float 0. to 1.
      */
     float getSystemEffectiveness(ESystem system);
-    
+
     virtual void applyTemplateValues();
 
     P<SpaceObject> getTarget();
@@ -339,6 +343,8 @@ public:
     int getWeaponTubeCount();
 
     void setRadarTrace(string trace) { radar_trace = trace; }
+
+    void setEngineeringCrew(int number) { engineering_crew = number; }
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);

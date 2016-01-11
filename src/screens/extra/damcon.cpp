@@ -7,12 +7,14 @@ DamageControlScreen::DamageControlScreen(GuiContainer* owner)
 : GuiOverlay(owner, "DAMCON_SCREEN", sf::Color::Black)
 {
     (new GuiShipInternalView(this, "SHIP_INTERNAL_VIEW", 48.0f * 1.5f))->setShip(my_spaceship)->setPosition(300, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
+
     GuiAutoLayout* system_health_layout = new GuiAutoLayout(this, "DAMCON_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     system_health_layout->setPosition(0, 0, ACenterLeft)->setSize(300, 600);
 
     hull_display = new GuiKeyValueDisplay(system_health_layout, "HULL", 0.8, "Hull", "0%");
     hull_display->setSize(GuiElement::GuiSizeMax, 40);
+    crew_display = new GuiKeyValueDisplay(system_health_layout, "CREW", 0.4, "Crew", "");
+    crew_display->setSize(GuiElement::GuiSizeMax, 40);
 
     for(unsigned int n=0; n<SYS_COUNT; n++)
     {
@@ -24,7 +26,7 @@ DamageControlScreen::DamageControlScreen(GuiContainer* owner)
 void DamageControlScreen::onDraw(sf::RenderTarget& window)
 {
     GuiOverlay::onDraw(window);
-    
+
     if (my_spaceship)
     {
         hull_display->setValue(string(int(100 * my_spaceship->hull_strength / my_spaceship->hull_max)) + "%");
@@ -32,6 +34,8 @@ void DamageControlScreen::onDraw(sf::RenderTarget& window)
             hull_display->setColor(sf::Color::Red);
         else
             hull_display->setColor(sf::Color::White);
+
+        crew_display->setValue(string(my_spaceship->engineering_crew - my_spaceship->engineering_crew_injuried) + "/" + string(my_spaceship->engineering_crew));
 
         for(unsigned int n=0; n<SYS_COUNT; n++)
         {
