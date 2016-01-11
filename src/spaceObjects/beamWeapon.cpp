@@ -2,6 +2,7 @@
 #include "spaceship.h"
 #include "beamEffect.h"
 #include "spaceObjects/spaceObject.h"
+#include "shipTemplate.h" //For SYS_BeamWeapons
 
 BeamWeapon::BeamWeapon()
 {
@@ -18,7 +19,6 @@ void BeamWeapon::setParent(SpaceShip* parent)
 {
     this->parent = parent;
 }
-
 
 void BeamWeapon::setPosition(sf::Vector3f position)
 {
@@ -39,6 +39,14 @@ void BeamWeapon::fire(P<SpaceObject> target, ESystem system_target)
     info.frequency = parent->beam_frequency; // Beam weapons now always use frequency of the ship.
     info.system_target = system_target;
     target->takeDamage(damage, info);
-
 }
+
+void BeamWeapon::update(float delta)
+{
+    if(cooldown > 0.0)
+    {
+        cooldown -= delta * parent->getSystemEffectiveness(SYS_BeamWeapons);
+    }
+}
+
 

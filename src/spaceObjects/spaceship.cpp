@@ -491,10 +491,9 @@ void SpaceShip::update(float delta)
             combat_maneuver_charge = 1.0;
     }
 
-    for(int n=0; n<max_beam_weapons; n++)
+    for(int n = 0; n < max_beam_weapons; n++)
     {
-        if (beam_weapons[n].cooldown > 0.0)
-            beam_weapons[n].cooldown -= delta * getSystemEffectiveness(SYS_BeamWeapons);
+        beam_weapons[n].update(delta);
     }
 
     P<SpaceObject> target = getTarget();
