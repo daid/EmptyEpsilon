@@ -4,14 +4,8 @@
 #include "shipTemplateBasedObject.h"
 #include "spaceStation.h"
 #include "beamWeapon.h"
+#include "weaponTube.h"
 
-enum EWeaponTubeState
-{
-    WTS_Empty,
-    WTS_Loading,
-    WTS_Loaded,
-    WTS_Unloading
-};
 enum EMainScreenSetting
 {
     MSS_Front = 0,
@@ -49,14 +43,6 @@ public:
     {
         return powf(1.7, power_level - 1.0) - (1.01 + coolant_level * 0.1);
     }
-};
-
-class WeaponTube : public sf::NonCopyable
-{
-public:
-    EMissileWeapons type_loaded;
-    EWeaponTubeState state;
-    float delay;
 };
 
 class SpaceShip : public ShipTemplateBasedObject
