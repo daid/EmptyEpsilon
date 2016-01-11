@@ -3,15 +3,9 @@
 
 #include "shipTemplateBasedObject.h"
 #include "spaceStation.h"
-#include "beamWeapon.h"
+#include "spaceshipParts/beamWeapon.h"
+#include "spaceshipParts/weaponTube.h"
 
-enum EWeaponTubeState
-{
-    WTS_Empty,
-    WTS_Loading,
-    WTS_Loaded,
-    WTS_Unloading
-};
 enum EMainScreenSetting
 {
     MSS_Front = 0,
@@ -49,14 +43,6 @@ public:
     {
         return powf(1.7, power_level - 1.0) - (1.01 + coolant_level * 0.1);
     }
-};
-
-class WeaponTube : public sf::NonCopyable
-{
-public:
-    EMissileWeapons type_loaded;
-    EWeaponTubeState state;
-    float delay;
 };
 
 class SpaceShip : public ShipTemplateBasedObject
@@ -213,13 +199,6 @@ public:
     virtual void executeJump(float distance);
 
     /*!
-     * Fire beamweapon
-     * \param index Index of beam weapon to be fired
-     * \param target of the beam weapon.
-     */
-    virtual void fireBeamWeapon(int index, P<SpaceObject> target);
-
-    /*!
      * Check if object can dock with this ship.
      * \param object Object that wants to dock.
      */
@@ -255,6 +234,9 @@ public:
      * Request undock with current docked object
      */
     void requestUndock();
+
+    virtual bool useEnergy(float amount) { return true; }
+    virtual void addHeat(ESystem system, float amount) {}
 
     virtual bool canBeScanned() { return scanned_by_player != SS_FullScan; }
     virtual int scanningComplexity();
@@ -309,30 +291,30 @@ public:
         }
     }
 
-    float getBeamWeaponArc(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].arc; }
-    float getBeamWeaponDirection(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].direction; }
-    float getBeamWeaponRange(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].range; }
-    float getBeamWeaponCycleTime(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].cycleTime; }
-    float getBeamWeaponDamage(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].damage; }
+    float getBeamWeaponArc(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getArc(); }
+    float getBeamWeaponDirection(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getDirection(); }
+    float getBeamWeaponRange(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getRange(); }
+    float getBeamWeaponCycleTime(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getCycleTime(); }
+    float getBeamWeaponDamage(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getDamage(); }
 
     int getShieldsFrequency(void){ return shield_frequency; }
 
-    void setBeamWeapon(int index, float arc, float direction, float range, float cycleTime, float damage)
+    void setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage)
     {
         if (index < 0 || index >= max_beam_weapons)
             return;
-        beam_weapons[index].arc = arc;
-        beam_weapons[index].direction = direction;
-        beam_weapons[index].range = range;
-        beam_weapons[index].cycleTime = cycleTime;
-        beam_weapons[index].damage = damage;
+        beam_weapons[index].setArc(arc);
+        beam_weapons[index].setDirection(direction);
+        beam_weapons[index].setRange(range);
+        beam_weapons[index].setCycleTime(cycle_time);
+        beam_weapons[index].setDamage(damage);
     }
 
     void setBeamWeaponTexture(int index, string texture)
     {
         if (index < 0 || index >= max_beam_weapons)
             return;
-        beam_weapons[index].beam_texture = texture;
+        beam_weapons[index].setBeamTexture(texture);
     }
 
     void setWeaponTubeCount(int amount);

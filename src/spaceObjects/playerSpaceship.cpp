@@ -420,15 +420,6 @@ void PlayerSpaceship::executeJump(float distance)
     }
 }
 
-void PlayerSpaceship::fireBeamWeapon(int idx, P<SpaceObject> target)
-{
-    if (useEnergy(energy_per_beam_fire))
-    {
-        SpaceShip::fireBeamWeapon(idx, target);
-        addHeat(SYS_BeamWeapons, heat_per_beam_fire);
-    }
-}
-
 void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
 {
     if (info.type != DT_EMP)
@@ -473,6 +464,16 @@ void PlayerSpaceship::setSystemCoolant(ESystem system, float level)
     }
 
     systems[system].coolant_level = level;
+}
+
+bool PlayerSpaceship::useEnergy(float amount)
+{
+    if (energy_level >= amount)
+    {
+        energy_level -= amount;
+        return true;
+    }
+    return false;
 }
 
 void PlayerSpaceship::addHeat(ESystem system, float amount)
