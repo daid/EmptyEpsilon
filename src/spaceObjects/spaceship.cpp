@@ -153,17 +153,13 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         registerMemberReplication(&beam_weapons[n].cycleTime);
         registerMemberReplication(&beam_weapons[n].cooldown, 0.5);
     }
-    for(int n=0; n<max_weapon_tubes; n++)
+    for(int n = 0; n < max_weapon_tubes; n++)
     {
-        weaponTube[n].type_loaded = MW_None;
-        weaponTube[n].state = WTS_Empty;
-        weaponTube[n].delay = 0.0;
-
         registerMemberReplication(&weaponTube[n].type_loaded);
         registerMemberReplication(&weaponTube[n].state);
         registerMemberReplication(&weaponTube[n].delay, 0.5);
     }
-    for(int n=0; n<MW_Count; n++)
+    for(int n = 0; n < MW_Count; n++)
     {
         weapon_storage[n] = 0;
         weapon_storage_max[n] = 0;

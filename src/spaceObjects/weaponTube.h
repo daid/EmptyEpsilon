@@ -1,8 +1,8 @@
 #ifndef WEAPON_TUBE_H
 #define WEAPON_TUBE_H
 
+#include "shipTemplate.h" //For EWeaponTubeState
 #include "SFML/System/NonCopyable.hpp"
-#include "spaceship.h"
 enum EWeaponTubeState
 {
     WTS_Empty,
@@ -11,12 +11,15 @@ enum EWeaponTubeState
     WTS_Unloading
 };
 
+
 class WeaponTube : public sf::NonCopyable
 {
 public:
+    WeaponTube();
     EMissileWeapons type_loaded;
     EWeaponTubeState state;
     float delay;
+
 };
 
 #endif //WEAPON_TUBE_H
