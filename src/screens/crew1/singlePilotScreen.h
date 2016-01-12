@@ -11,6 +11,7 @@ class SinglePilotScreen : public GuiOverlay
 {
 private:
     GuiViewport3D* viewport;
+    GuiElement* left_panel;
 
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* heading_display;
