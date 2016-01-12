@@ -25,7 +25,7 @@ enum EPlayerWarpJumpDrive
 };
 enum EScanningComplexity
 {
-    SC_None,
+    SC_None = 0,
     SC_Simple,
     SC_Normal,
     SC_Advanced

@@ -131,7 +131,6 @@ set(SOURCES
 	src/gui/gui2_overlay.cpp
 	src/spaceObjects/spaceStation.cpp
 	src/spaceObjects/spaceship.cpp
-	src/spaceObjects/beamWeapon.cpp
 	src/spaceObjects/wormHole.cpp
 	src/spaceObjects/spaceObject.cpp
 	src/spaceObjects/nebula.cpp
@@ -152,6 +151,8 @@ set(SOURCES
 	src/spaceObjects/nuke.cpp
 	src/spaceObjects/artifact.cpp
 	src/spaceObjects/shipTemplateBasedObject.cpp
+	src/spaceObjects/spaceshipParts/beamWeapon.cpp
+	src/spaceObjects/spaceshipParts/weaponTube.cpp
 	src/ai/fighterAI.cpp
 	src/ai/ai.cpp
 	src/ai/aiFactory.cpp

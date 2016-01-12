@@ -94,11 +94,11 @@ void ShipAI::updateWeaponState(float delta)
     beam_weapon_range = 0;
     for(int n=0; n<max_beam_weapons; n++)
     {
-        if (owner->beam_weapons[n].range > 0)
+        if (owner->beam_weapons[n].getRange() > 0)
         {
-            if (sf::angleDifference(owner->beam_weapons[n].direction, 0.0f) < owner->beam_weapons[n].arc / 2.0f)
+            if (sf::angleDifference(owner->beam_weapons[n].getDirection(), 0.0f) < owner->beam_weapons[n].getArc() / 2.0f)
             {
-                beam_weapon_range = std::max(beam_weapon_range, owner->beam_weapons[n].range);
+                beam_weapon_range = std::max(beam_weapon_range, owner->beam_weapons[n].getRange());
             }
             has_beams = true;
             break;
@@ -440,9 +440,9 @@ float ShipAI::targetScore(P<SpaceObject> target)
     {
         for(int n=0; n<max_beam_weapons; n++)
         {
-            if (distance < owner->beam_weapons[n].range)
+            if (distance < owner->beam_weapons[n].getRange())
             {
-                if (fabs(sf::angleDifference(angle_difference, owner->beam_weapons[n].direction)) < owner->beam_weapons[n].arc / 2.0f)
+                if (fabs(sf::angleDifference(angle_difference, owner->beam_weapons[n].getDirection())) < owner->beam_weapons[n].getArc() / 2.0f)
                     score += 1000;
             }
         }

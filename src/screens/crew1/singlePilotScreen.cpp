@@ -25,7 +25,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     viewport = new GuiViewport3D(this, "3D_VIEW");
     viewport->setPosition(1000, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     
-    GuiElement* left_panel = new GuiElement(this, "LEFT_PANEL");
+    left_panel = new GuiElement(this, "LEFT_PANEL");
     left_panel->setPosition(0, 0, ATopLeft)->setSize(1000, GuiElement::GuiSizeMax);
 
     radar = new GuiRadarView(left_panel, "TACTICAL_RADAR", 5000.0, &targets);
@@ -107,6 +107,17 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
         }
     }
     GuiOverlay::onDraw(window);
+    
+    if (viewport->getRect().width < viewport->getRect().height / 3.0f)
+    {
+        viewport->hide();
+        left_panel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    }
+    else
+    {
+        viewport->show();
+        left_panel->setSize(1000, GuiElement::GuiSizeMax);
+    }
 
     if (my_spaceship)
     {

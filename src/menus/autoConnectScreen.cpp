@@ -4,8 +4,8 @@
 #include "gameGlobalInfo.h"
 #include "playerInfo.h"
 
-AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_main_screen)
-: crew_position(crew_position), control_main_screen(control_main_screen)
+AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_main_screen, int ship_index)
+: crew_position(crew_position), control_main_screen(control_main_screen), ship_index(ship_index)
 {
     scanner = new ServerScanner(VERSION_NUMBER);
     scanner->scanLocalNetwork();
@@ -66,25 +66,13 @@ void AutoConnectScreen::update(float delta)
                     status_label->setText("Waiting for ship...");
                     if (!my_spaceship)
                     {
-                        for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
+                        if (ship_index >= 0 && ship_index < GameGlobalInfo::max_player_ships)
                         {
-                            P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
-                            if (ship && ship->ship_template)
+                            checkForPlayerShip(ship_index);
+                        }else{
+                            for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
                             {
-                                int cnt = 0;
-                                foreach(PlayerInfo, i, player_info_list)
-                                    if (i->ship_id == ship->getMultiplayerId() && i->crew_position[n])
-                                        cnt++;
-                                if (cnt == 0)
-                                {
-                                    if (crew_position != max_crew_positions)
-                                    {
-                                        my_player_info->setCrewPosition(crew_position, true);
-                                        my_player_info->setMainScreenControl(control_main_screen);
-                                    }
-                                    my_player_info->setShipId(ship->getMultiplayerId());
-                                    my_spaceship = ship;
-                                }
+                                checkForPlayerShip(n);
                             }
                         }
                     }else{
@@ -99,6 +87,33 @@ void AutoConnectScreen::update(float delta)
                 }
             }
             break;
+        }
+    }
+}
+
+void AutoConnectScreen::checkForPlayerShip(int index)
+{
+    P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(index);
+    if (ship && ship->ship_template)
+    {
+        int cnt = 0;
+        foreach(PlayerInfo, i, player_info_list)
+        {
+            if (i->ship_id == ship->getMultiplayerId())
+            {
+                if (crew_position != max_crew_positions && i->crew_position[crew_position])
+                    cnt++;
+            }
+        }
+        if (cnt == 0)
+        {
+            if (crew_position != max_crew_positions)
+            {
+                my_player_info->setCrewPosition(crew_position, true);
+                my_player_info->setMainScreenControl(control_main_screen);
+            }
+            my_player_info->setShipId(ship->getMultiplayerId());
+            my_spaceship = ship;
         }
     }
 }

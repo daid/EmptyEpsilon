@@ -1,3 +1,4 @@
+#include "preferenceManager.h"
 #include "serverCreationScreen.h"
 #include "shipSelectionScreen.h"
 #include "gameGlobalInfo.h"
@@ -8,6 +9,14 @@
 ServerCreationScreen::ServerCreationScreen()
 {
     assert(game_server);
+    
+    gameGlobalInfo->player_warp_jump_drive_setting = EPlayerWarpJumpDrive(PreferencesManager::get("server_config_warp_jump_drive_setting", "0").toInt());
+    gameGlobalInfo->long_range_radar_range = PreferencesManager::get("server_config_long_range_radar_range", "30000").toInt();
+    gameGlobalInfo->scanning_complexity = EScanningComplexity(PreferencesManager::get("server_config_scanning_complexity", "2").toInt());
+    gameGlobalInfo->use_beam_shield_frequencies = PreferencesManager::get("server_config_use_beam_shield_frequencies", "1").toInt();
+    gameGlobalInfo->use_system_damage = PreferencesManager::get("server_config_use_system_damage", "1").toInt();
+    gameGlobalInfo->allow_main_screen_tactical_radar = PreferencesManager::get("server_config_allow_main_screen_tactical_radar", "1").toInt();
+    gameGlobalInfo->allow_main_screen_long_range_radar = PreferencesManager::get("server_config_allow_main_screen_long_range_radar", "1").toInt();
     
     (new GuiLabel(this, "SCENARIO_LABEL", "Scenario", 30))->addBox()->setPosition(-50, 50, ATopRight)->setSize(460, 50);
     (new GuiBox(this, "SCENARIO_BOX"))->setPosition(-50, 50, ATopRight)->setSize(460, 460);
@@ -123,8 +132,6 @@ ServerCreationScreen::ServerCreationScreen()
             line = line.substr(2).strip();
             if (line.startswith("Name:"))
                 name = line.substr(5).strip();
-            //if (line.startswith("Description:"))
-            //    info.description = line.substr(12).strip();
         }
 
         scenario_list->addEntry(name, filename);
@@ -137,6 +144,14 @@ ServerCreationScreen::ServerCreationScreen()
 
 void ServerCreationScreen::startScenario()
 {
+    PreferencesManager::set("server_config_warp_jump_drive_setting", string(int(gameGlobalInfo->player_warp_jump_drive_setting)));
+    PreferencesManager::set("server_config_long_range_radar_range", string(gameGlobalInfo->long_range_radar_range, 0));
+    PreferencesManager::set("server_config_scanning_complexity", string(int(gameGlobalInfo->scanning_complexity)));
+    PreferencesManager::set("server_config_use_beam_shield_frequencies", string(int(gameGlobalInfo->use_beam_shield_frequencies)));
+    PreferencesManager::set("server_config_use_system_damage", string(int(gameGlobalInfo->use_system_damage)));
+    PreferencesManager::set("server_config_allow_main_screen_tactical_radar", string(int(gameGlobalInfo->allow_main_screen_tactical_radar)));
+    PreferencesManager::set("server_config_allow_main_screen_long_range_radar", string(int(gameGlobalInfo->allow_main_screen_long_range_radar)));
+
     gameGlobalInfo->startScenario(selected_scenario_filename);
 
     destroy();

@@ -52,8 +52,6 @@ class PlayerSpaceship : public SpaceShip
 {
 public:
     constexpr static float energy_shield_use_per_second = 2.5f;
-    constexpr static float energy_per_jump_km = 8.0f;
-    constexpr static float energy_per_beam_fire = 3.0f;
     constexpr static float energy_warp_per_second = 1.0f;
     constexpr static float system_heatup_per_second = 0.05f;
     constexpr static float max_coolant = 10.0;
@@ -61,8 +59,6 @@ public:
     constexpr static float shield_calibration_time = 25.0f;
     constexpr static float comms_channel_open_time = 2.0;
     constexpr static int max_self_destruct_codes = 3;
-    constexpr static float heat_per_jump = 0.35;
-    constexpr static float heat_per_beam_fire = 0.02;
     constexpr static float heat_per_combat_maneuver_boost = 0.2;
     constexpr static float heat_per_combat_maneuver_strafe = 0.2;
     constexpr static float heat_per_warp = 0.02;
@@ -143,13 +139,12 @@ public:
     virtual void applyTemplateValues() override;
 
     virtual void executeJump(float distance) override;
-    virtual void fireBeamWeapon(int index, P<SpaceObject> target) override;
     virtual void takeHullDamage(float damage_amount, DamageInfo& info) override;
     void setSystemCoolant(ESystem system, float level);
 
     virtual void update(float delta) override;
-    bool useEnergy(float amount) { if (energy_level >= amount) { energy_level -= amount; return true; } return false; }
-    void addHeat(ESystem system, float amount);
+    virtual bool useEnergy(float amount) override;
+    virtual void addHeat(ESystem system, float amount) override;
 
     float getNetPowerUsage();
     

@@ -63,6 +63,7 @@ public:
     GuiElement* setEnable(bool enable);
     GuiElement* enable();
     GuiElement* disable();
+    sf::FloatRect getRect() const { return rect; }
     bool isEnabled();
     
     void moveToFront();

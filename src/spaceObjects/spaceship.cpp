@@ -147,23 +147,14 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     for(int n = 0; n < max_beam_weapons; n++)
     {
         beam_weapons[n].setParent(this);
-        registerMemberReplication(&beam_weapons[n].arc);
-        registerMemberReplication(&beam_weapons[n].direction);
-        registerMemberReplication(&beam_weapons[n].range);
-        registerMemberReplication(&beam_weapons[n].cycleTime);
-        registerMemberReplication(&beam_weapons[n].cooldown, 0.5);
     }
-    for(int n=0; n<max_weapon_tubes; n++)
+    for(int n = 0; n < max_weapon_tubes; n++)
     {
-        weaponTube[n].type_loaded = MW_None;
-        weaponTube[n].state = WTS_Empty;
-        weaponTube[n].delay = 0.0;
-
         registerMemberReplication(&weaponTube[n].type_loaded);
         registerMemberReplication(&weaponTube[n].state);
         registerMemberReplication(&weaponTube[n].delay, 0.5);
     }
-    for(int n=0; n<MW_Count; n++)
+    for(int n = 0; n < MW_Count; n++)
     {
         weapon_storage[n] = 0;
         weapon_storage_max[n] = 0;
@@ -183,12 +174,12 @@ void SpaceShip::applyTemplateValues()
     for(int n=0; n<max_beam_weapons; n++)
     {
         beam_weapons[n].setPosition(ship_template->model_data->getBeamPosition(n));
-        beam_weapons[n].arc = ship_template->beams[n].getArc();
-        beam_weapons[n].direction = ship_template->beams[n].getDirection();
-        beam_weapons[n].range = ship_template->beams[n].getRange();
-        beam_weapons[n].cycleTime = ship_template->beams[n].getCycleTime();
-        beam_weapons[n].damage = ship_template->beams[n].getDamage();
-        beam_weapons[n].beam_texture = ship_template->beams[n].getBeamTexture();
+        beam_weapons[n].setArc(ship_template->beams[n].getArc());
+        beam_weapons[n].setDirection(ship_template->beams[n].getDirection());
+        beam_weapons[n].setRange(ship_template->beams[n].getRange());
+        beam_weapons[n].setCycleTime(ship_template->beams[n].getCycleTime());
+        beam_weapons[n].setDamage(ship_template->beams[n].getDamage());
+        beam_weapons[n].setBeamTexture(ship_template->beams[n].getBeamTexture());
     }
     weapon_tubes = ship_template->weapon_tubes;
 
@@ -231,33 +222,37 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
     {
         for(int n=0; n<max_beam_weapons; n++)
         {
-            if (beam_weapons[n].range == 0.0) continue;
+            if (beam_weapons[n].getRange() == 0.0) continue;
             sf::Color color = sf::Color::Red;
-            if (beam_weapons[n].cooldown > 0)
-                color = sf::Color(255, 255 * (beam_weapons[n].cooldown / beam_weapons[n].cycleTime), 0);
+            if (beam_weapons[n].getCooldown() > 0)
+                color = sf::Color(255, 255 * (beam_weapons[n].getCooldown() / beam_weapons[n].getCycleTime()), 0);
 
+            float direction = beam_weapons[n].getDirection();
+            float arc = beam_weapons[n].getArc();
+            float range = beam_weapons[n].getRange();
+            
             sf::Vector2f beam_offset = sf::rotateVector(ship_template->model_data->getBeamPosition2D(n) * scale, getRotation());
             sf::VertexArray a(sf::LinesStrip, 3);
             a[0].color = color;
             a[1].color = color;
             a[2].color = sf::Color(color.r, color.g, color.b, 0);
             a[0].position = beam_offset + position;
-            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_weapons[n].direction + beam_weapons[n].arc / 2.0f)) * beam_weapons[n].range * scale;
-            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_weapons[n].direction + beam_weapons[n].arc / 2.0f)) * beam_weapons[n].range * scale * 1.3f;
+            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (direction + arc / 2.0f)) * range * scale;
+            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (direction + arc / 2.0f)) * range * scale * 1.3f;
             window.draw(a);
-            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_weapons[n].direction - beam_weapons[n].arc / 2.0f)) * beam_weapons[n].range * scale;
-            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_weapons[n].direction - beam_weapons[n].arc / 2.0f)) * beam_weapons[n].range * scale * 1.3f;
+            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (direction - arc / 2.0f)) * range * scale;
+            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (direction - arc / 2.0f)) * range * scale * 1.3f;
             window.draw(a);
 
-            int arcPoints = int(beam_weapons[n].arc / 10) + 1;
-            sf::VertexArray arc(sf::LinesStrip, arcPoints);
+            int arcPoints = int(arc / 10) + 1;
+            sf::VertexArray arc_line(sf::LinesStrip, arcPoints);
             for(int i=0; i<arcPoints; i++)
             {
-                arc[i].color = color;
-                arc[i].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_weapons[n].direction - beam_weapons[n].arc / 2.0f + 10 * i)) * beam_weapons[n].range * scale;
+                arc_line[i].color = color;
+                arc_line[i].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (direction - arc / 2.0f + 10 * i)) * range * scale;
             }
-            arc[arcPoints-1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_weapons[n].direction + beam_weapons[n].arc / 2.0f)) * beam_weapons[n].range * scale;
-            window.draw(arc);
+            arc_line[arcPoints-1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (direction + arc / 2.0f)) * range * scale;
+            window.draw(arc_line);
         }
     }
     if (!long_range)
@@ -414,11 +409,23 @@ void SpaceShip::update(float delta)
     }else{
         if (has_jump_drive)
         {
-            if (jump_drive_charge < jump_drive_max_distance)
+            float f = Tween<float>::linear(getSystemEffectiveness(SYS_JumpDrive), 0.0, 1.0, -0.25, 1.0);
+            if (f > 0)
             {
-                jump_drive_charge += (delta / jump_drive_charge_time_per_km) * getSystemEffectiveness(SYS_JumpDrive);
-                if (jump_drive_charge >= jump_drive_max_distance)
-                    jump_drive_charge = jump_drive_max_distance;
+                if (jump_drive_charge < jump_drive_max_distance)
+                {
+                    float extra_charge = (delta / jump_drive_charge_time_per_km) * f;
+                    if (useEnergy(extra_charge * jump_drive_energy_per_km_charge))
+                    {
+                        jump_drive_charge += extra_charge;
+                        if (jump_drive_charge >= jump_drive_max_distance)
+                            jump_drive_charge = jump_drive_max_distance;
+                    }
+                }
+            }else{
+                jump_drive_charge += (delta / jump_drive_charge_time_per_km) * f;
+                if (jump_drive_charge < 0.0f)
+                    jump_drive_charge = 0.0f;
             }
         }
         current_warp = 0.0;
@@ -495,35 +502,9 @@ void SpaceShip::update(float delta)
             combat_maneuver_charge = 1.0;
     }
 
-    for(int n=0; n<max_beam_weapons; n++)
+    for(int n = 0; n < max_beam_weapons; n++)
     {
-        if (beam_weapons[n].cooldown > 0.0)
-            beam_weapons[n].cooldown -= delta * getSystemEffectiveness(SYS_BeamWeapons);
-    }
-
-    P<SpaceObject> target = getTarget();
-    if (game_server && target && delta > 0 && current_warp == 0.0 && docking_state == DS_NotDocking) // Only fire beam weapons if we are on the server, have a target, and are not paused.
-    {
-        for(int n=0; n<max_beam_weapons; n++)
-        {
-            if (beam_weapons[n].range <= 0.0)
-                continue;
-            if (target && isEnemy(target) && beam_weapons[n].cooldown <= 0.0)
-            {
-                sf::Vector2f diff = target->getPosition() - (getPosition() + sf::rotateVector(ship_template->model_data->getBeamPosition2D(n), getRotation()));
-                float distance = sf::length(diff) - target->getRadius() / 2.0;
-                float angle = sf::vector2ToAngle(diff);
-
-                if (distance < beam_weapons[n].range)
-                {
-                    float angleDiff = sf::angleDifference(beam_weapons[n].direction + getRotation(), angle);
-                    if (abs(angleDiff) < beam_weapons[n].arc / 2.0)
-                    {
-                        fireBeamWeapon(n, target);
-                    }
-                }
-            }
-        }
+        beam_weapons[n].update(delta);
     }
 
     for(int n=0; n<max_weapon_tubes; n++)
@@ -580,35 +561,13 @@ void SpaceShip::executeJump(float distance)
     float f = systems[SYS_JumpDrive].health;
     if (f <= 0.0)
         return;
+
     distance = (distance * f) + (distance * (1.0 - f) * random(0.5, 1.5));
     sf::Vector2f target_position = getPosition() + sf::vector2FromAngle(getRotation()) * distance * 1000.0f;
     if (WarpJammer::isWarpJammed(target_position))
         target_position = WarpJammer::getFirstNoneJammedPosition(getPosition(), target_position);
     setPosition(target_position);
-}
-
-void SpaceShip::fireBeamWeapon(int index, P<SpaceObject> target)
-{
-    if (scanned_by_player == SS_NotScanned)
-    {
-        P<SpaceShip> ship = target;
-        if (!ship || ship->scanned_by_player != SS_NotScanned)
-            scanned_by_player = SS_FriendOrFoeIdentified;
-    }
-
-    beam_weapons[index].fire(target, beam_system_target);
-    /*sf::Vector2f hitLocation = target->getPosition() - sf::normalize(target->getPosition() - getPosition()) * target->getRadius();
-
-    beam_weapons[index].cooldown = beam_weapons[index].cycleTime;
-    P<BeamEffect> effect = new BeamEffect();
-    effect->setSource(this, ship_template->model_data->getBeamPosition(index));
-    effect->setTarget(target, hitLocation);
-    effect->beam_texture = beam_weapons[index].beam_texture;
-
-    DamageInfo info(this, DT_Energy, hitLocation);
-    info.frequency = beam_frequency;
-    info.system_target = beam_system_target;
-    target->takeDamage(beam_weapons[index].damage, info);*/
+    addHeat(SYS_JumpDrive, jump_drive_heat_per_jump);
 }
 
 bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)

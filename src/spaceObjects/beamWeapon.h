@@ -27,6 +27,8 @@ public:
 
     void setPosition(sf::Vector3f position);
 
+    void update(float delta);
+
 protected:
     sf::Vector3f position;
     SpaceShip* parent; //The ship that this beam weapon is attached to.
