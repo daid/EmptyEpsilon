@@ -71,6 +71,7 @@ set(SOURCES
 	src/screens/extra/damcon.cpp
 	src/screens/extra/powerManagement.cpp
 	src/screens/extra/databaseScreen.cpp
+	src/screens/extra/shipLogScreen.cpp
 	src/screenComponents/missileTubeControls.cpp
 	src/screenComponents/selfDestructIndicator.cpp
 	src/screenComponents/viewport3d.cpp

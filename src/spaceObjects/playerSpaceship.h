@@ -75,6 +75,7 @@ public:
     bool auto_repair_enabled;
     bool shields_active;
 
+private:
     ECommsState comms_state;
     float comms_open_delay;
     string comms_target_name;
@@ -83,6 +84,9 @@ public:
     std::vector<int> comms_reply_id;
     std::vector<string> comms_reply_message;
     CommsScriptInterface comms_script_interface;  //Server only
+    std::vector<string> ships_log;
+
+public:
     std::vector<sf::Vector2f> waypoints;
     int scan_probe_stock;
 
@@ -98,6 +102,28 @@ public:
     EAlertLevel alert_level;
 
     PlayerSpaceship();
+    
+    bool isCommsInactive() const { return comms_state == CS_Inactive; }
+    bool isCommsOpening() const { return comms_state == CS_OpeningChannel; }
+    bool isCommsBeingHailed() const { return comms_state == CS_BeingHailed || comms_state == CS_BeingHailedByGM; }
+    bool isCommsBeingHailedByGM() const { return comms_state == CS_BeingHailedByGM; }
+    bool isCommsFailed() const { return comms_state == CS_ChannelFailed; }
+    bool isCommsBroken() const { return comms_state == CS_ChannelBroken; }
+    bool isCommsChatOpen() const { return comms_state == CS_ChannelOpenPlayer || comms_state == CS_ChannelOpenGM; }
+    bool isCommsChatOpenToGM() const { return comms_state == CS_ChannelOpenGM; }
+    bool isCommsChatOpenToPlayer() const { return comms_state == CS_ChannelOpenPlayer; }
+    bool isCommsScriptOpen() const { return comms_state == CS_ChannelOpen; }
+    float getCommsOpeningDelay() const { return comms_open_delay; }
+    const std::vector<string>& getCommsReplyOptions() const { return comms_reply_message; }
+    const string& getCommsTargetName() { return comms_target_name; }
+    const string& getCommsIncommingMessage() { return comms_incomming_message; }
+    bool hailCommsByGM(string target_name);
+    bool hailByObject(P<SpaceObject> object, string opening_message);
+    void setCommsMessage(string message);
+    void addCommsIncommingMessage(string message);
+    void addCommsOutgoingMessage(string message);
+    void addCommsReply(int32_t id, string message);
+    void closeComms();
 
     void onReceiveClientCommand(int32_t client_id, sf::Packet& packet);
     void commandTargetRotation(float target);
@@ -148,13 +174,15 @@ public:
 
     float getNetPowerUsage();
     
+    void addToShipLog(string message);
+    const std::vector<string>& getShipsLog() const;
+    
     virtual bool getShieldsActive() override { return shields_active; }
     void setShieldsActive(bool active) { shields_active = active; }
 
-    void setCommsMessage(string message);
-    void addCommsReply(int32_t id, string message);
     int getWaypointCount() { return waypoints.size(); }
     sf::Vector2f getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1]; return sf::Vector2f(0, 0); }
+
     EAlertLevel getAlertLevel() { return alert_level; }
     
     virtual string getExportLine();

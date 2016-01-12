@@ -204,6 +204,8 @@ PlayerSpaceship::PlayerSpaceship()
     }
     
     setCallSign("PL" + string(getMultiplayerId()));
+    
+    addToShipLog("Start of log");
 }
 
 void PlayerSpaceship::update(float delta)
@@ -499,9 +501,38 @@ float PlayerSpaceship::getNetPowerUsage()
     return net_power;
 }
 
+void PlayerSpaceship::addToShipLog(string message)
+{
+    if (ships_log.size() > 100)
+        ships_log.erase(ships_log.begin());
+    message = string(engine->getElapsedTime(), 1) + string(": ") + message;
+    ships_log.push_back(message);
+}
+
+const std::vector<string>& PlayerSpaceship::getShipsLog() const
+{
+    return ships_log;
+}
+
 void PlayerSpaceship::setCommsMessage(string message)
 {
+    for(string line : message.split("\n"))
+        addToShipLog("> " + line);
     comms_incomming_message = message;
+}
+
+void PlayerSpaceship::addCommsIncommingMessage(string message)
+{
+    for(string line : message.split("\n"))
+        addToShipLog("> " + line);
+    comms_incomming_message = comms_incomming_message + "\n> " + message;
+}
+
+void PlayerSpaceship::addCommsOutgoingMessage(string message)
+{
+    for(string line : message.split("\n"))
+        addToShipLog("< " + line);
+    comms_incomming_message = comms_incomming_message + "\n< " + message;
 }
 
 void PlayerSpaceship::addCommsReply(int32_t id, string message)
@@ -510,6 +541,68 @@ void PlayerSpaceship::addCommsReply(int32_t id, string message)
         return;
     comms_reply_id.push_back(id);
     comms_reply_message.push_back(message);
+}
+
+bool PlayerSpaceship::hailCommsByGM(string target_name)
+{
+    if (!isCommsInactive() && !isCommsFailed() && !isCommsBroken())
+        return false;
+
+    addToShipLog("Hailed by " + target_name);
+    comms_state = CS_BeingHailedByGM;
+    comms_target_name = target_name;
+    comms_target = nullptr;
+    return true;
+}
+
+bool PlayerSpaceship::hailByObject(P<SpaceObject> object, string opening_message)
+{
+    if (isCommsOpening() || isCommsBeingHailed())
+    {
+        if (comms_target != object)
+            return false;
+    }
+    if (isCommsBeingHailedByGM())
+    {
+        return false;
+    }
+    if (isCommsChatOpen() || isCommsScriptOpen())
+    {
+        return false;
+    }
+
+    comms_target = object;
+    comms_target_name = object->getCallSign();
+    comms_state = CS_BeingHailed;
+    comms_incomming_message = opening_message;
+    return true;
+}
+
+void PlayerSpaceship::closeComms()
+{
+    if (comms_state != CS_Inactive)
+    {
+        if (comms_state == CS_ChannelOpenPlayer && comms_target)
+        {
+            P<PlayerSpaceship> player_ship = comms_target;
+            player_ship->comms_state = CS_Inactive;
+            player_ship->addToShipLog("Communication channel closed");
+        }
+        if (comms_state == CS_OpeningChannel && comms_target)
+        {
+            P<PlayerSpaceship> player_ship = comms_target;
+            if (player_ship)
+            {
+                if (player_ship->comms_state == CS_BeingHailed && player_ship->comms_target == this)
+                {
+                    player_ship->comms_state = CS_Inactive;
+                    player_ship->addToShipLog("Hailing from " + getCallSign() + " stopped");
+                }
+            }
+        }
+        addToShipLog("Communication channel closed");
+        comms_state = CS_Inactive;
+    }
 }
 
 void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& packet)
@@ -653,29 +746,14 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 P<PlayerSpaceship> player = comms_target;
                 comms_state = CS_OpeningChannel;
                 comms_open_delay = comms_channel_open_time;
+                addToShipLog("Hailing: " + comms_target->getCallSign());
             }else{
                 comms_state = CS_Inactive;
             }
         }
         break;
     case CMD_CLOSE_TEXT_COMM:
-        if (comms_state == CS_ChannelOpenPlayer && comms_target)
-        {
-            P<PlayerSpaceship> playerShip = comms_target;
-            playerShip->comms_state = CS_Inactive;
-        }
-        if (comms_state == CS_OpeningChannel && comms_target)
-        {
-            P<PlayerSpaceship> playerShip = comms_target;
-            if (playerShip)
-            {
-                if (playerShip->comms_state == CS_BeingHailed && playerShip->comms_target == this)
-                {
-                    playerShip->comms_state = CS_Inactive;
-                }
-            }
-        }
-        comms_state = CS_Inactive;
+        closeComms();
         break;
     case CMD_ANSWER_COMM_HAIL:
         if (comms_state == CS_BeingHailed)
@@ -693,7 +771,11 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
 
                     comms_incomming_message = "Opened comms to " + playerShip->getCallSign();
                     playerShip->comms_incomming_message = "Opened comms to " + getCallSign();
+                    addToShipLog("Opened communication channel to " + playerShip->getCallSign());
+                    playerShip->addToShipLog("Opened communication channel to " + getCallSign());
                 }else{
+                    addToShipLog("Refused communications from " + playerShip->getCallSign());
+                    playerShip->addToShipLog("Refused communications to " + getCallSign());
                     comms_state = CS_Inactive;
                     playerShip->comms_state = CS_ChannelFailed;
                 }
@@ -702,8 +784,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 {
                     if (!comms_target)
                     {
+                        addToShipLog("Hail suddenly went dead.");
                         comms_state = CS_ChannelBroken;
                     }else{
+                        addToShipLog("Accepted hail from " + comms_target->getCallSign());
                         comms_reply_id.clear();
                         comms_reply_message.clear();
                         if (comms_incomming_message == "")
@@ -717,6 +801,8 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                         }
                     }
                 }else{
+                    if (comms_target)
+                        addToShipLog("Refused hail from " + comms_target->getCallSign());
                     comms_state = CS_Inactive;
                 }
             }
@@ -730,8 +816,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             {
                 comms_state = CS_ChannelOpenGM;
 
+                addToShipLog("Opened communication channel to " + comms_target_name);
                 comms_incomming_message = "Opened comms";
             }else{
+                addToShipLog("Refused hail from " + comms_target_name);
                 comms_state = CS_Inactive;
             }
         }
@@ -743,6 +831,8 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             packet >> index;
             if (index < comms_reply_id.size())
             {
+                addToShipLog("< " + comms_reply_message[index]);
+                
                 comms_incomming_message = "?";
                 int id = comms_reply_id[index];
                 comms_reply_id.clear();
@@ -756,10 +846,11 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         {
             string message;
             packet >> message;
-            comms_incomming_message = comms_incomming_message + "\n<" + message;
+            
+            addCommsOutgoingMessage(message);
             P<PlayerSpaceship> playership = comms_target;
             if (comms_state == CS_ChannelOpenPlayer && playership)
-                playership->comms_incomming_message = playership->comms_incomming_message + "\n>" + message;
+                playership->addCommsIncommingMessage(message);
         }
         break;
     case CMD_SET_AUTO_REPAIR:

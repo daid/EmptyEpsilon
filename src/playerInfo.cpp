@@ -18,6 +18,8 @@
 #include "screens/extra/powerManagement.h"
 #include "screens/extra/databaseScreen.h"
 
+#include "screens/extra/shipLogScreen.h"
+
 #include "screenComponents/mainScreenControls.h"
 #include "screenComponents/selfDestructEntry.h"
 
@@ -148,6 +150,10 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new PowerManagementScreen(screen), getCrewPositionName(powerManagement));
         if (crew_position[databaseView])
             screen->addStationTab(new DatabaseScreen(screen), getCrewPositionName(databaseView));
+        
+        //Ship log screen, if you have comms, you have ships log.
+        if (crew_position[relayOfficer] || crew_position[operationsOfficer] || crew_position[singlePilot])
+            screen->addStationTab(new ShipLogScreen(screen), "Ships log");
         
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(screen, "SELF_DESTRUCT_ENTRY");
         for(int n=0; n<max_crew_positions; n++)

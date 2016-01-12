@@ -12,7 +12,7 @@ GuiOpenCommsButton::GuiOpenCommsButton(GuiContainer* owner, string id, TargetsCo
 void GuiOpenCommsButton::onDraw(sf::RenderTarget& window)
 {
     disable();
-    if (targets->get() && my_spaceship && my_spaceship->comms_state == CS_Inactive)
+    if (targets->get() && my_spaceship && my_spaceship->isCommsInactive())
     {
         if (P<SpaceShip>(targets->get()) || P<SpaceStation>(targets->get()))
             enable();

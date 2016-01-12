@@ -536,10 +536,8 @@ GuiHailPlayerShip::GuiHailPlayerShip(GameMasterScreen* owner)
     (new GuiButton(this, "SEND_BUTTON", "Call", [this, owner]() {
         if (player)
         {
-            if (player->comms_state == CS_Inactive || player->comms_state == CS_ChannelFailed || player->comms_state == CS_ChannelBroken)
+            if (player->hailCommsByGM(caller_entry->getText()))
             {
-                player->comms_state = CS_BeingHailedByGM;
-                player->comms_target_name = caller_entry->getText();
                 owner->hailing_player_dialog->player = player;
                 owner->hailing_player_dialog->show();
             }
@@ -575,24 +573,17 @@ void GuiHailingPlayerShip::onDraw(sf::RenderTarget& window)
         hide();
         return;
     }
-    switch(player->comms_state)
+    
+    if (player->isCommsBeingHailedByGM())
     {
-    case CS_Inactive:
-    case CS_ChannelFailed:
-    case CS_ChannelBroken:
-    case CS_OpeningChannel:
-    case CS_BeingHailed:
-    case CS_ChannelOpen:
-    case CS_ChannelOpenPlayer:
-        hide();
-        break;
-    case CS_BeingHailedByGM:
-        break;
-    case CS_ChannelOpenGM:
+        //Do nothing while hailing.
+    }else if (player->isCommsChatOpenToGM())
+    {
         owner->player_chat->player = player;
         owner->player_chat->show();
         hide();
-        break;
+    }else{
+        hide();
     }
     GuiBox::onDraw(window);
 }
@@ -609,7 +600,7 @@ GuiPlayerChat::GuiPlayerChat(GameMasterScreen* owner)
     message_entry->enterCallback([this](string text){
         if (player)
         {
-            player->comms_incomming_message = player->comms_incomming_message + "\n>" + message_entry->getText();
+            player->addCommsIncommingMessage(message_entry->getText());
         }
         message_entry->setText("");
     });
@@ -620,7 +611,7 @@ GuiPlayerChat::GuiPlayerChat(GameMasterScreen* owner)
     (new GuiButton(this, "SEND_BUTTON", "Send", [this]() {
         if (player)
         {
-            player->comms_incomming_message = player->comms_incomming_message + "\n>" + message_entry->getText();
+            player->addCommsIncommingMessage(message_entry->getText());
         }
         message_entry->setText("");
     }))->setPosition(-20, -20, ABottomRight)->setSize(120, 50);
@@ -628,7 +619,7 @@ GuiPlayerChat::GuiPlayerChat(GameMasterScreen* owner)
     (new GuiButton(this, "CLOSE_BUTTON", "Close", [this]() {
         hide();
         if (player)
-            player->comms_state = CS_Inactive;
+            player->closeComms();
     }))->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
 }
 
@@ -639,12 +630,12 @@ bool GuiPlayerChat::onMouseDown(sf::Vector2f position)
 
 void GuiPlayerChat::onDraw(sf::RenderTarget& window)
 {
-    if (!player || player->comms_state != CS_ChannelOpenGM)
+    if (!player || !player->isCommsChatOpenToGM())
     {
         hide();
         return;
     }
-    chat_text->setText(player->comms_incomming_message);
+    chat_text->setText(player->getCommsIncommingMessage());
     
     GuiBox::onDraw(window);
 }
