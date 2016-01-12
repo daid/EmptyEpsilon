@@ -83,7 +83,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         my_spaceship->comms_reply_message.clear();
         my_spaceship->commandSendComm(index);
     });
-    script_comms_options->setPosition(20, -20, ABottomLeft)->setSize(700, 400);
+    script_comms_options->setPosition(20, -70, ABottomLeft)->setSize(700, 400);
     
     (new GuiButton(script_comms_box, "CLOSE_BUTTON", "Close", [this]() {
         if (my_spaceship)
@@ -116,6 +116,9 @@ void GuiCommsOverlay::onDraw(sf::RenderTarget& window)
             script_comms_options->setOptions({});
             for(string message : my_spaceship->comms_reply_message)
                 script_comms_options->addEntry(message, message);
+            int display_options_count = std::min(5, script_comms_options->entryCount());
+            script_comms_options->setSize(760, display_options_count * 50);
+            script_comms_text->setSize(760, 500 - display_options_count * 50);
         }
     }
 }
