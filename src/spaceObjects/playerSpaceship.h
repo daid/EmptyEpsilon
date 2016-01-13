@@ -65,6 +65,20 @@ public:
     constexpr static int max_scan_probes = 10;
     constexpr static float max_scanning_delay = 6.0;
 
+    class ShipLogEntry
+    {
+    public:
+        string prefix;
+        string text;
+        sf::Color color;
+
+        ShipLogEntry() {}
+        ShipLogEntry(string prefix, string text, sf::Color color)
+        : prefix(prefix), text(text), color(color) {}
+        
+        bool operator!=(const ShipLogEntry& e) { return prefix != e.prefix || text != e.text || color != e.color; }
+    };
+
     float hull_damage_indicator;
     float jump_indicator;
     P<SpaceObject> scanning_target; //Server only
@@ -84,7 +98,8 @@ private:
     std::vector<int> comms_reply_id;
     std::vector<string> comms_reply_message;
     CommsScriptInterface comms_script_interface;  //Server only
-    std::vector<string> ships_log;
+
+    std::vector<ShipLogEntry> ships_log;
 
 public:
     std::vector<sf::Vector2f> waypoints;
@@ -175,7 +190,7 @@ public:
     float getNetPowerUsage();
     
     void addToShipLog(string message);
-    const std::vector<string>& getShipsLog() const;
+    const std::vector<ShipLogEntry>& getShipsLog() const;
     
     virtual bool getShieldsActive() override { return shields_active; }
     void setShieldsActive(bool active) { shields_active = active; }

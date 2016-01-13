@@ -557,3 +557,45 @@ void GuiElement::drawArrow(sf::RenderTarget& window, sf::FloatRect rect, sf::Col
     arrow.setColor(color);
     window.draw(arrow);
 }
+
+GuiElement::LineWrapResult GuiElement::doLineWrap(string text, float font_size, float width)
+{
+    LineWrapResult result;
+    result.text = text;
+    result.line_count = 1;
+    {
+        float currentOffset = 0;
+        bool first_word = true;
+        std::size_t wordBegining = 0;
+
+        for (std::size_t pos(0); pos < result.text.length(); ++pos)
+        {
+            char currentChar = result.text[pos];
+            if (currentChar == '\n')
+            {
+                currentOffset = 0;
+                first_word = true;
+                result.line_count += 1;
+                continue;
+            }
+            else if (currentChar == ' ')
+            {
+                wordBegining = pos;
+                first_word = false;
+            }
+
+            sf::Glyph glyph = mainFont->getGlyph(currentChar, font_size, false);
+            currentOffset += glyph.advance;
+
+            if (!first_word && currentOffset > width)
+            {
+                pos = wordBegining;
+                result.text[pos] = '\n';
+                first_word = true;
+                currentOffset = 0;
+                result.line_count += 1;
+            }
+        }
+    }
+    return result;
+}

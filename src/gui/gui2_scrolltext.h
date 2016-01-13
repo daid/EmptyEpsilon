@@ -15,6 +15,7 @@ public:
     GuiScrollText(GuiContainer* owner, string id, string text);
     
     GuiScrollText* enableAutoScrollDown() { auto_scroll_down = true; return this; }
+    GuiScrollText* disableAutoScrollDown() { auto_scroll_down = false; return this; }
 
     GuiScrollText* setText(string text);
     GuiScrollText* setTextSize(float text_size) { this->text_size = text_size; return this; }

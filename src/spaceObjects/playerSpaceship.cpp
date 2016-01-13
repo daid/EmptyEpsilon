@@ -113,8 +113,10 @@ string alertLevelToString(EAlertLevel level)
     }
 }
 
-REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
+static inline sf::Packet& operator << (sf::Packet& packet, const PlayerSpaceship::ShipLogEntry& e) { return packet << e.prefix << e.text << e.color.r << e.color.g << e.color.b << e.color.a; }
+static inline sf::Packet& operator >> (sf::Packet& packet, PlayerSpaceship::ShipLogEntry& e) { packet >> e.prefix >> e.text >> e.color.r >> e.color.g >> e.color.b >> e.color.a; return packet; }
 
+REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 PlayerSpaceship::PlayerSpaceship()
 : SpaceShip("PlayerSpaceship", 5000)
 {
@@ -157,6 +159,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&comms_reply_message);
     registerMemberReplication(&comms_target_name);
     registerMemberReplication(&comms_incomming_message);
+    registerMemberReplication(&ships_log);
     registerMemberReplication(&waypoints);
     registerMemberReplication(&scan_probe_stock);
     registerMemberReplication(&activate_self_destruct);
@@ -505,11 +508,10 @@ void PlayerSpaceship::addToShipLog(string message)
 {
     if (ships_log.size() > 100)
         ships_log.erase(ships_log.begin());
-    message = string(engine->getElapsedTime(), 1) + string(": ") + message;
-    ships_log.push_back(message);
+    ships_log.emplace_back(string(engine->getElapsedTime(), 1) + string(": "), message, sf::Color::White);
 }
 
-const std::vector<string>& PlayerSpaceship::getShipsLog() const
+const std::vector<PlayerSpaceship::ShipLogEntry>& PlayerSpaceship::getShipsLog() const
 {
     return ships_log;
 }

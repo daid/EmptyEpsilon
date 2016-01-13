@@ -465,6 +465,8 @@
 		<Unit filename="src/gui/debugRenderer.h" />
 		<Unit filename="src/gui/gui2.cpp" />
 		<Unit filename="src/gui/gui2.h" />
+		<Unit filename="src/gui/gui2_advancedscrolltext.cpp" />
+		<Unit filename="src/gui/gui2_advancedscrolltext.h" />
 		<Unit filename="src/gui/gui2_arrow.cpp" />
 		<Unit filename="src/gui/gui2_arrow.h" />
 		<Unit filename="src/gui/gui2_arrowbutton.cpp" />
@@ -657,6 +659,8 @@
 		<Unit filename="src/screens/extra/databaseScreen.h" />
 		<Unit filename="src/screens/extra/powerManagement.cpp" />
 		<Unit filename="src/screens/extra/powerManagement.h" />
+		<Unit filename="src/screens/extra/shipLogScreen.cpp" />
+		<Unit filename="src/screens/extra/shipLogScreen.h" />
 		<Unit filename="src/screens/gameMasterScreen.cpp" />
 		<Unit filename="src/screens/gameMasterScreen.h" />
 		<Unit filename="src/screens/mainScreen.cpp" />
@@ -677,8 +681,6 @@
 		<Unit filename="src/spaceObjects/asteroid.h" />
 		<Unit filename="src/spaceObjects/beamEffect.cpp" />
 		<Unit filename="src/spaceObjects/beamEffect.h" />
-		<Unit filename="src/spaceObjects/beamWeapon.cpp" />
-		<Unit filename="src/spaceObjects/beamWeapon.h" />
 		<Unit filename="src/spaceObjects/blackHole.cpp" />
 		<Unit filename="src/spaceObjects/blackHole.h" />
 		<Unit filename="src/spaceObjects/cpuShip.cpp" />
@@ -709,6 +711,10 @@
 		<Unit filename="src/spaceObjects/spaceStation.h" />
 		<Unit filename="src/spaceObjects/spaceship.cpp" />
 		<Unit filename="src/spaceObjects/spaceship.h" />
+		<Unit filename="src/spaceObjects/spaceshipParts/beamWeapon.cpp" />
+		<Unit filename="src/spaceObjects/spaceshipParts/beamWeapon.h" />
+		<Unit filename="src/spaceObjects/spaceshipParts/weaponTube.cpp" />
+		<Unit filename="src/spaceObjects/spaceshipParts/weaponTube.h" />
 		<Unit filename="src/spaceObjects/supplyDrop.cpp" />
 		<Unit filename="src/spaceObjects/supplyDrop.h" />
 		<Unit filename="src/spaceObjects/warpJammer.cpp" />
