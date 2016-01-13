@@ -189,7 +189,7 @@ public:
 
     float getNetPowerUsage();
     
-    void addToShipLog(string message);
+    void addToShipLog(string message, sf::Color color);
     const std::vector<ShipLogEntry>& getShipsLog() const;
     
     virtual bool getShieldsActive() override { return shields_active; }
