@@ -236,28 +236,8 @@ bool SpaceObject::sendCommsMessage(P<PlayerSpaceship> target, string message)
 {
     if (!target)
         return false;
-    switch(target->comms_state)
-    {
-    case CS_OpeningChannel:
-    case CS_BeingHailed:
-        if (target->comms_target != this)
-            return false;
-        break;
-    case CS_BeingHailedByGM:
-    case CS_ChannelOpen:
-    case CS_ChannelOpenPlayer:
-    case CS_ChannelOpenGM:
-        return false;
-    case CS_Inactive:
-    case CS_ChannelFailed:
-    case CS_ChannelBroken:
-        break;
-    }
-    target->comms_target = this;
-    target->comms_target_name = getCallSign();
-    target->comms_state = CS_BeingHailed;
-    target->comms_incomming_message = message;
-    return true;
+    
+    return target->hailByObject(this, message);
 }
 
 template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& di)

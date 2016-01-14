@@ -101,6 +101,14 @@ protected:
     void draw9CutV(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White, float height_factor = 1.0);
     
     void drawArrow(sf::RenderTarget& window, sf::FloatRect rect, sf::Color=sf::Color::White, float rotation=0);
+    
+    class LineWrapResult
+    {
+    public:
+        string text;
+        int line_count;
+    };
+    LineWrapResult doLineWrap(string text, float font_size, float width);
 };
 
 #endif//GUI2_ELEMENT_H

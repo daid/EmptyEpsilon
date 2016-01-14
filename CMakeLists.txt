@@ -71,6 +71,7 @@ set(SOURCES
 	src/screens/extra/damcon.cpp
 	src/screens/extra/powerManagement.cpp
 	src/screens/extra/databaseScreen.cpp
+	src/screens/extra/shipLogScreen.cpp
 	src/screenComponents/missileTubeControls.cpp
 	src/screenComponents/selfDestructIndicator.cpp
 	src/screenComponents/viewport3d.cpp
@@ -119,6 +120,7 @@ set(SOURCES
 	src/gui/gui2_entrylist.cpp
 	src/gui/gui2_progressbar.cpp
 	src/gui/gui2_scrolltext.cpp
+	src/gui/gui2_advancedscrolltext.cpp
 	src/gui/gui2_button.cpp
 	src/gui/debugRenderer.cpp
 	src/gui/gui2_element.cpp

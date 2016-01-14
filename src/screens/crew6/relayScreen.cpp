@@ -94,10 +94,11 @@ RelayScreen::RelayScreen(GuiContainer* owner)
         mode = WaypointDelete;
         option_buttons->hide();
     }))->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", "Launch Probe", [this]() {
+    launch_probe_button = new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", "Launch Probe", [this]() {
         mode = LaunchProbe;
         option_buttons->hide();
-    }))->setSize(GuiElement::GuiSizeMax, 50);
+    });
+    launch_probe_button->setSize(GuiElement::GuiSizeMax, 50);
     
     info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.7, "Reputation:", "");
     info_reputation->setSize(GuiElement::GuiSizeMax, 40);
@@ -217,5 +218,8 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
     }
     
     if (my_spaceship)
+    {
         info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0));
+        launch_probe_button->setText("Launch probe (" + string(my_spaceship->scan_probe_stock) + ")");
+    }
 }

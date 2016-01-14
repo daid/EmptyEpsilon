@@ -80,7 +80,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     
     script_comms_options = new GuiListbox(script_comms_box, "SCRIPT_COMMS_LIST", [this](int index, string value) {
         script_comms_options->setOptions({});
-        my_spaceship->comms_reply_message.clear();
+        //TOFIX: my_spaceship->comms_reply_message.clear();
         my_spaceship->commandSendComm(index);
     });
     script_comms_options->setPosition(20, -70, ABottomLeft)->setSize(700, 400);
@@ -95,26 +95,26 @@ void GuiCommsOverlay::onDraw(sf::RenderTarget& window)
 {
     if (my_spaceship)
     {
-        opening_box->setVisible(my_spaceship->comms_state == CS_OpeningChannel);
-        opening_progress->setValue(my_spaceship->comms_open_delay);
+        opening_box->setVisible(my_spaceship->isCommsOpening());
+        opening_progress->setValue(my_spaceship->getCommsOpeningDelay());
         
-        hailed_box->setVisible(my_spaceship->comms_state == CS_BeingHailed || my_spaceship->comms_state == CS_BeingHailedByGM);
-        hailed_label->setText("Hailed by " + my_spaceship->comms_target_name);
+        hailed_box->setVisible(my_spaceship->isCommsBeingHailed());
+        hailed_label->setText("Hailed by " + my_spaceship->getCommsTargetName());
         
-        no_response_box->setVisible(my_spaceship->comms_state == CS_ChannelFailed);
+        no_response_box->setVisible(my_spaceship->isCommsFailed());
 
-        broken_box->setVisible(my_spaceship->comms_state == CS_ChannelBroken);
+        broken_box->setVisible(my_spaceship->isCommsBroken());
         
-        chat_comms_box->setVisible(my_spaceship->comms_state == CS_ChannelOpenPlayer || my_spaceship->comms_state == CS_ChannelOpenGM);
-        chat_comms_text->setText(my_spaceship->comms_incomming_message);
+        chat_comms_box->setVisible(my_spaceship->isCommsChatOpen());
+        chat_comms_text->setText(my_spaceship->getCommsIncommingMessage());
         
-        script_comms_box->setVisible(my_spaceship->comms_state == CS_ChannelOpen);
-        script_comms_text->setText(my_spaceship->comms_incomming_message);
+        script_comms_box->setVisible(my_spaceship->isCommsScriptOpen());
+        script_comms_text->setText(my_spaceship->getCommsIncommingMessage());
         
-        if (script_comms_options->entryCount() != int(my_spaceship->comms_reply_message.size()))
+        if (script_comms_options->entryCount() != int(my_spaceship->getCommsReplyOptions().size()))
         {
             script_comms_options->setOptions({});
-            for(string message : my_spaceship->comms_reply_message)
+            for(string message : my_spaceship->getCommsReplyOptions())
                 script_comms_options->addEntry(message, message);
             int display_options_count = std::min(5, script_comms_options->entryCount());
             script_comms_options->setSize(760, display_options_count * 50);
