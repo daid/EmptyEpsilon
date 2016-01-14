@@ -60,26 +60,10 @@ void GuiAdvancedScrollText::onDraw(sf::RenderTarget& window)
         max_prefix_width = std::max(max_prefix_width, width);
     }
     
-    //Calculate how many lines we have to display in total.
-    int line_count = 0;
-    for(Entry& e: entries)
-    {
-        LineWrapResult wrap = doLineWrap(e.text, text_size, rect.width - 50 - max_prefix_width);
-        line_count += wrap.line_count;
-    }
     //Calculate how many lines we can display properly
     int max_lines = rect.height / line_spacing;
     
-    //Check if we need to update the scroll bar.
-    if (scrollbar->getMax() != line_count)
-    {
-        int diff = line_count - scrollbar->getMax();
-        scrollbar->setRange(0, line_count);
-        scrollbar->setValueSize(max_lines);
-        if (auto_scroll_down)
-            scrollbar->setValue(scrollbar->getValue() + diff);
-    }
-    
+    //Draw the visible entries
     int draw_offset = -scrollbar->getValue();
     for(Entry& e : entries)
     {
@@ -96,5 +80,18 @@ void GuiAdvancedScrollText::onDraw(sf::RenderTarget& window)
             }
             draw_offset += 1;
         }
+    }
+
+    //Calculate how many lines we have to display in total.
+    int line_count = draw_offset + scrollbar->getValue();
+
+    //Check if we need to update the scroll bar.
+    if (scrollbar->getMax() != line_count)
+    {
+        int diff = line_count - scrollbar->getMax();
+        scrollbar->setRange(0, line_count);
+        scrollbar->setValueSize(max_lines);
+        if (auto_scroll_down)
+            scrollbar->setValue(scrollbar->getValue() + diff);
     }
 }
