@@ -34,6 +34,7 @@ private:
     
     GuiKeyValueDisplay* info_reputation;
     GuiAutoLayout* option_buttons;
+    GuiButton* launch_probe_button;
     
     GuiToggleButton* alert_level_button;
     std::vector<GuiButton*> alert_level_buttons;
