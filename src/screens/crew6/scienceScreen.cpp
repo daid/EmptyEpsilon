@@ -89,6 +89,19 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
 void ScienceScreen::onDraw(sf::RenderTarget& window)
 {
     GuiOverlay::onDraw(window);
+    
+    ///Handle mouse wheel
+    float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
+    if (mouse_wheel_delta != 0.0)
+    {
+        float view_distance = radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
+        if (view_distance > gameGlobalInfo->long_range_radar_range)
+            view_distance = gameGlobalInfo->long_range_radar_range;
+        if (view_distance < 5000.0f)
+            view_distance = 5000.0f;
+        radar->setDistance(view_distance);
+    }
+    
     if (!my_spaceship)
         return;
     if (targets.get() && Nebula::blockedByNebula(my_spaceship->getPosition(), targets.get()->getPosition()))
