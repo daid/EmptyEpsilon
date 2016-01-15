@@ -76,7 +76,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     script_comms_box->fill()->hide()->setSize(800, 600)->setPosition(0, -100, ABottomCenter);
 
     script_comms_text = new GuiScrollText(script_comms_box, "COMMS_SCRIPT_TEXT", "");
-    script_comms_text->enableAutoScrollDown()->setPosition(20, 30, ATopLeft)->setSize(760, 500);
+    script_comms_text->setPosition(20, 30, ATopLeft)->setSize(760, 500);
     
     script_comms_options = new GuiListbox(script_comms_box, "SCRIPT_COMMS_LIST", [this](int index, string value) {
         script_comms_options->setOptions({});
