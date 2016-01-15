@@ -31,7 +31,7 @@ void GuiDockingButton::onDraw(sf::RenderTarget& window)
         {
         case DS_NotDocking:
             setText("Request Dock");
-            if (findDockingTarget())
+            if (my_spaceship->canStartDocking() && findDockingTarget())
             {
                 enable();
             }else{

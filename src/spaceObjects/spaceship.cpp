@@ -696,11 +696,12 @@ void SpaceShip::requestDock(P<SpaceObject> target)
         return;
     if (sf::length(getPosition() - target->getPosition()) > 1000 + target->getRadius())
         return;
-    if (has_jump_drive && jump_delay > 0.0f)
+    if (!canStartDocking())
         return;
 
     docking_state = DS_Docking;
     docking_target = target;
+    warp_request = 0.0;
 }
 
 void SpaceShip::requestUndock()

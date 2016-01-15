@@ -271,6 +271,7 @@ public:
     virtual std::unordered_map<string, string> getGMInfo();
 
     bool isDocked(P<SpaceObject> target) { return docking_state == DS_Docked && docking_target == target; }
+    bool canStartDocking() { return current_warp <= 0.0 && (!has_jump_drive || jump_delay <= 0.0); }
     int getWeaponStorage(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage[weapon]; }
     int getWeaponStorageMax(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage_max[weapon]; }
     void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage[weapon] = amount; }
