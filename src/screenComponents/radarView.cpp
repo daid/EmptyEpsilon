@@ -529,6 +529,9 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
     
     sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
     float scale = std::min(rect.width, rect.height) / 2.0f / distance;
+
+    sf::Sprite target_sprite;
+    textureManager.setTexture(target_sprite, "redicule.png");
     
     for(P<SpaceObject> obj : targets->getTargets())
     {
@@ -537,11 +540,17 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
         sf::FloatRect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
         if (obj != my_spaceship && rect.intersects(object_rect))
         {
-            sf::Sprite target_sprite;
-            textureManager.setTexture(target_sprite, "redicule.png");
             target_sprite.setPosition(object_position_on_screen);
             window.draw(target_sprite);
         }
+    }
+    
+    if (my_spaceship && targets->getWaypointIndex() > -1 && targets->getWaypointIndex() < my_spaceship->getWaypointCount())
+    {
+        sf::Vector2f object_position_on_screen = radar_screen_center + (my_spaceship->waypoints[targets->getWaypointIndex()] - view_position) * scale;
+
+        target_sprite.setPosition(object_position_on_screen - sf::Vector2f(0, 10));
+        window.draw(target_sprite);
     }
 }
 

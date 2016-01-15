@@ -12,6 +12,8 @@
 ScienceScreen::ScienceScreen(GuiContainer* owner)
 : GuiOverlay(owner, "SCIENCE_SCREEN", sf::Color::Black)
 {
+    targets.setAllowWaypointSelection();
+    
     radar_view = new GuiElement(this, "RADAR_VIEW");
     radar_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
@@ -92,6 +94,10 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     if (targets.get() && Nebula::blockedByNebula(my_spaceship->getPosition(), targets.get()->getPosition()))
         targets.clear();
 
+    info_callsign->setValue("-");
+    info_distance->setValue("-");
+    info_heading->setValue("-");
+    info_relspeed->setValue("-");
     info_faction->setValue("-");
     info_type->setValue("-");
     info_shields->setValue("-");
@@ -155,10 +161,18 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         }else{
             info_description->hide();
         }
-    }else{
-        info_callsign->setValue("-");
-        info_distance->setValue("-");
-        info_heading->setValue("-");
-        info_relspeed->setValue("-");
+    }else if (targets.getWaypointIndex() >= 0)
+    {
+        sf::Vector2f position_diff = my_spaceship->waypoints[targets.getWaypointIndex()] - my_spaceship->getPosition();
+        float distance = sf::length(position_diff);
+        float heading = sf::vector2ToAngle(position_diff) - 270;
+        while(heading < 0) heading += 360;
+        float rel_velocity = -dot(my_spaceship->getVelocity(), position_diff / distance);
+        if (fabs(rel_velocity) < 0.01)
+            rel_velocity = 0.0;
+
+        info_distance->setValue(string(distance / 1000.0f, 1) + "km");
+        info_heading->setValue(string(int(heading)));
+        info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + "km/min");
     }
 }

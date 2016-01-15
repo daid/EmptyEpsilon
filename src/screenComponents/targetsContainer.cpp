@@ -1,6 +1,24 @@
 #include "playerInfo.h"
 #include "targetsContainer.h"
 
+TargetsContainer::TargetsContainer()
+{
+    waypoint_selection_index = -1;
+    allow_waypoint_selection = false;
+}
+
+void TargetsContainer::clear()
+{
+    waypoint_selection_index = -1;
+    entries.clear();
+}
+
+void TargetsContainer::add(P<SpaceObject> obj)
+{
+    if (obj)
+        entries.push_back(obj);
+}
+
 void TargetsContainer::set(P<SpaceObject> obj)
 {
     if (obj)
@@ -22,6 +40,7 @@ void TargetsContainer::set(P<SpaceObject> obj)
 
 void TargetsContainer::set(PVector<SpaceObject> objs)
 {
+    waypoint_selection_index = -1;
     entries = objs;
 }
 
@@ -49,5 +68,34 @@ void TargetsContainer::setToClosestTo(sf::Vector2f position, float max_range, ES
                 target = spaceObject;
         }
     }
+    
+    
+    if (my_spaceship && allow_waypoint_selection)
+    {
+        for(int n=0; n<my_spaceship->getWaypointCount(); n++)
+        {
+            if ((my_spaceship->waypoints[n] - position) < max_range)
+            {
+                if (!target || sf::length(position - my_spaceship->waypoints[n]) < sf::length(position - target->getPosition()))
+                {
+                    clear();
+                    waypoint_selection_index = n;
+                    waypoint_selection_position = my_spaceship->waypoints[n];
+                    return;
+                }
+            }
+        }
+    }
     set(target);
+}
+
+int TargetsContainer::getWaypointIndex()
+{
+    if (!my_spaceship || waypoint_selection_index < 0)
+        waypoint_selection_index = -1;
+    else if (waypoint_selection_index >= my_spaceship->getWaypointCount())
+        waypoint_selection_index = -1;
+    else if (my_spaceship->waypoints[waypoint_selection_index] != waypoint_selection_position)
+        waypoint_selection_index = -1;
+    return waypoint_selection_index;
 }

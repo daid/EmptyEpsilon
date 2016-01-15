@@ -9,6 +9,7 @@
 RelayScreen::RelayScreen(GuiContainer* owner)
 : GuiOverlay(owner, "RELAY_SCREEN", sf::Color::Black), mode(TargetSelection)
 {   
+    targets.setAllowWaypointSelection();
     radar = new GuiRadarView(this, "RELAY_RADAR", 50000.0f, &targets);
     radar->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
     radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -28,21 +29,6 @@ RelayScreen::RelayScreen(GuiContainer* owner)
             case WaypointPlacement:
                 if (my_spaceship)
                     my_spaceship->commandAddWaypoint(position);
-                mode = TargetSelection;
-                option_buttons->show();
-                break;
-            case WaypointDelete:
-                if (my_spaceship)
-                {
-                    for(unsigned int n=0; n<my_spaceship->waypoints.size(); n++)
-                    {
-                        if ((my_spaceship->waypoints[n] - position) < 1000.0f)
-                        {
-                            my_spaceship->commandRemoveWaypoint(n);
-                            break;
-                        }
-                    }
-                }
                 mode = TargetSelection;
                 option_buttons->show();
                 break;
@@ -90,10 +76,13 @@ RelayScreen::RelayScreen(GuiContainer* owner)
         mode = WaypointPlacement;
         option_buttons->hide();
     }))->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", "Delete Waypoint", [this]() {
-        mode = WaypointDelete;
-        option_buttons->hide();
-    }))->setSize(GuiElement::GuiSizeMax, 50);
+    delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", "Delete Waypoint", [this]() {
+        if (my_spaceship && targets.getWaypointIndex() >= 0)
+        {
+            my_spaceship->commandRemoveWaypoint(targets.getWaypointIndex());
+        }
+    });
+    delete_waypoint_button->setSize(GuiElement::GuiSizeMax, 50);
     launch_probe_button = new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", "Launch Probe", [this]() {
         mode = LaunchProbe;
         option_buttons->hide();
@@ -222,4 +211,9 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
         info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0));
         launch_probe_button->setText("Launch probe (" + string(my_spaceship->scan_probe_stock) + ")");
     }
+
+    if (targets.getWaypointIndex() >= 0)
+        delete_waypoint_button->enable();
+    else
+        delete_waypoint_button->disable();
 }

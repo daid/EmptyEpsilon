@@ -15,7 +15,6 @@ private:
     {
         TargetSelection,
         WaypointPlacement,
-        WaypointDelete,
         LaunchProbe
     };
     
@@ -34,6 +33,7 @@ private:
     
     GuiKeyValueDisplay* info_reputation;
     GuiAutoLayout* option_buttons;
+    GuiButton* delete_waypoint_button;
     GuiButton* launch_probe_button;
     
     GuiToggleButton* alert_level_button;
