@@ -55,7 +55,7 @@ public:
     constexpr static float jump_drive_charge_time_per_km = 2.0;
     constexpr static float jump_drive_min_distance = 5.0;
     constexpr static float jump_drive_max_distance = 50.0;
-    constexpr static float jump_drive_energy_per_km_charge = 6.0f;
+    constexpr static float jump_drive_energy_per_km_charge = 4.0f;
     constexpr static float jump_drive_heat_per_jump = 0.35;
 
     float energy_level;
