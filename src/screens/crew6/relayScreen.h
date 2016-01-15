@@ -23,13 +23,7 @@ private:
     GuiRadarView* radar;
 
     GuiKeyValueDisplay* info_callsign;
-    GuiKeyValueDisplay* info_distance;
-    GuiKeyValueDisplay* info_heading;
-    GuiKeyValueDisplay* info_relspeed;
-
     GuiKeyValueDisplay* info_faction;
-    GuiKeyValueDisplay* info_type;
-    GuiKeyValueDisplay* info_shields;
     
     GuiKeyValueDisplay* info_reputation;
     GuiAutoLayout* option_buttons;
