@@ -309,7 +309,8 @@ void ShipTemplateBasedObject::setShieldsMax(std::vector<float> amounts)
     shield_count = std::min(max_shield_count, int(amounts.size()));
     for(int n=0; n<shield_count; n++)
     {
-        shield_level[n] = amounts[n];
+        shield_max[n] = amounts[n];
+        shield_level[n] = std::min(shield_level[n], shield_max[n]);
     }
 }
 
