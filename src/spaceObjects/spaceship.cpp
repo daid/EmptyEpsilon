@@ -19,7 +19,6 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Set if this ship is scanned by the player or not.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanned);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentified);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isScanned);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScanned);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isDocked);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getTarget);
@@ -696,11 +695,12 @@ void SpaceShip::requestDock(P<SpaceObject> target)
         return;
     if (sf::length(getPosition() - target->getPosition()) > 1000 + target->getRadius())
         return;
-    if (has_jump_drive && jump_delay > 0.0f)
+    if (!canStartDocking())
         return;
 
     docking_state = DS_Docking;
     docking_target = target;
+    warp_request = 0.0;
 }
 
 void SpaceShip::requestUndock()
@@ -799,9 +799,9 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
             {
                 ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
                 //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
-                float system_damage = (damage_amount / hull_max) * 1.0;
+                float system_damage = (damage_amount / hull_max) * 0.8;
                 if (info.type == DT_Energy)
-                    system_damage *= 3.0;   //Beam weapons do more system damage, as they penetrate the hull easier.
+                    system_damage *= 2.5;   //Beam weapons do more system damage, as they penetrate the hull easier.
                 systems[random_system].health -= system_damage;
                 if (systems[random_system].health < -1.0)
                     systems[random_system].health = -1.0;

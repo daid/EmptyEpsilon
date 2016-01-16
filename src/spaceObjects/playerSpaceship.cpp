@@ -136,6 +136,7 @@ PlayerSpaceship::PlayerSpaceship()
     scanning_complexity = 0;
     scanning_depth = 0;
     scan_probe_stock = max_scan_probes;
+    scan_probe_recharge = 0.0;
     alert_level = AL_Normal;
     shields_active = false;
 
@@ -226,7 +227,15 @@ void PlayerSpaceship::update(float delta)
 
     if (docking_state == DS_Docked)
     {
-        scan_probe_stock = max_scan_probes;
+        if (scan_probe_stock < max_scan_probes)
+        {
+            scan_probe_recharge += delta;
+            if (scan_probe_recharge > scan_probe_charge_time)
+            {
+                scan_probe_stock += 1;
+                scan_probe_recharge = 0.0;
+            }
+        }
         energy_level += delta * 10.0;
         if (hull_strength < hull_max)
         {
@@ -234,6 +243,8 @@ void PlayerSpaceship::update(float delta)
             if (hull_strength > hull_max)
                 hull_strength = hull_max;
         }
+    }else{
+        scan_probe_recharge = 0.0;
     }
 
     if (game_server)

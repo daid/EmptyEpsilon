@@ -51,7 +51,7 @@ enum EAlertLevel
 class PlayerSpaceship : public SpaceShip
 {
 public:
-    constexpr static float energy_shield_use_per_second = 2.5f;
+    constexpr static float energy_shield_use_per_second = 1.5f;
     constexpr static float energy_warp_per_second = 1.0f;
     constexpr static float system_heatup_per_second = 0.05f;
     constexpr static float max_coolant = 10.0;
@@ -62,7 +62,8 @@ public:
     constexpr static float heat_per_combat_maneuver_boost = 0.2;
     constexpr static float heat_per_combat_maneuver_strafe = 0.2;
     constexpr static float heat_per_warp = 0.02;
-    constexpr static int max_scan_probes = 10;
+    constexpr static int max_scan_probes = 8;
+    constexpr static float scan_probe_charge_time = 10.0f;
     constexpr static float max_scanning_delay = 6.0;
 
     class ShipLogEntry
@@ -104,6 +105,7 @@ private:
 public:
     std::vector<sf::Vector2f> waypoints;
     int scan_probe_stock;
+    float scan_probe_recharge;
 
     EMainScreenSetting main_screen_setting;
 

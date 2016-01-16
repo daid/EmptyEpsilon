@@ -15,7 +15,6 @@ private:
     {
         TargetSelection,
         WaypointPlacement,
-        WaypointDelete,
         LaunchProbe
     };
     
@@ -24,16 +23,11 @@ private:
     GuiRadarView* radar;
 
     GuiKeyValueDisplay* info_callsign;
-    GuiKeyValueDisplay* info_distance;
-    GuiKeyValueDisplay* info_heading;
-    GuiKeyValueDisplay* info_relspeed;
-
     GuiKeyValueDisplay* info_faction;
-    GuiKeyValueDisplay* info_type;
-    GuiKeyValueDisplay* info_shields;
     
     GuiKeyValueDisplay* info_reputation;
     GuiAutoLayout* option_buttons;
+    GuiButton* delete_waypoint_button;
     GuiButton* launch_probe_button;
     
     GuiToggleButton* alert_level_button;

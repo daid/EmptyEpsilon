@@ -9,6 +9,7 @@
 RelayScreen::RelayScreen(GuiContainer* owner)
 : GuiOverlay(owner, "RELAY_SCREEN", sf::Color::Black), mode(TargetSelection)
 {   
+    targets.setAllowWaypointSelection();
     radar = new GuiRadarView(this, "RELAY_RADAR", 50000.0f, &targets);
     radar->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
     radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -31,21 +32,6 @@ RelayScreen::RelayScreen(GuiContainer* owner)
                 mode = TargetSelection;
                 option_buttons->show();
                 break;
-            case WaypointDelete:
-                if (my_spaceship)
-                {
-                    for(unsigned int n=0; n<my_spaceship->waypoints.size(); n++)
-                    {
-                        if ((my_spaceship->waypoints[n] - position) < 1000.0f)
-                        {
-                            my_spaceship->commandRemoveWaypoint(n);
-                            break;
-                        }
-                    }
-                }
-                mode = TargetSelection;
-                option_buttons->show();
-                break;
             case LaunchProbe:
                 if (my_spaceship)
                     my_spaceship->commandLaunchProbe(position);
@@ -64,19 +50,9 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     
     info_callsign = new GuiKeyValueDisplay(sidebar, "SCIENCE_CALLSIGN", 0.4, "Callsign", "");
     info_callsign->setSize(GuiElement::GuiSizeMax, 30);
-    info_distance = new GuiKeyValueDisplay(sidebar, "SCIENCE_DISTANCE", 0.4, "Distance", "");
-    info_distance->setSize(GuiElement::GuiSizeMax, 30);
-    info_heading = new GuiKeyValueDisplay(sidebar, "SCIENCE_DISTANCE", 0.4, "Heading", "");
-    info_heading->setSize(GuiElement::GuiSizeMax, 30);
-    info_relspeed = new GuiKeyValueDisplay(sidebar, "SCIENCE_REL_SPEED", 0.4, "Rel.Speed", "");
-    info_relspeed->setSize(GuiElement::GuiSizeMax, 30);
     
     info_faction = new GuiKeyValueDisplay(sidebar, "SCIENCE_FACTION", 0.4, "Faction", "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
-    info_type = new GuiKeyValueDisplay(sidebar, "SCIENCE_TYPE", 0.4, "Type", "");
-    info_type->setSize(GuiElement::GuiSizeMax, 30);
-    info_shields = new GuiKeyValueDisplay(sidebar, "SCIENCE_SHIELDS", 0.4, "Shields", "");
-    info_shields->setSize(GuiElement::GuiSizeMax, 30);
     
     (new GuiSelector(this, "ZOOM_SELECT", [this](int index, string value) {
         float zoom_amount = powf(2.0f, index);
@@ -90,10 +66,13 @@ RelayScreen::RelayScreen(GuiContainer* owner)
         mode = WaypointPlacement;
         option_buttons->hide();
     }))->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", "Delete Waypoint", [this]() {
-        mode = WaypointDelete;
-        option_buttons->hide();
-    }))->setSize(GuiElement::GuiSizeMax, 50);
+    delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", "Delete Waypoint", [this]() {
+        if (my_spaceship && targets.getWaypointIndex() >= 0)
+        {
+            my_spaceship->commandRemoveWaypoint(targets.getWaypointIndex());
+        }
+    });
+    delete_waypoint_button->setSize(GuiElement::GuiSizeMax, 50);
     launch_probe_button = new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", "Launch Probe", [this]() {
         mode = LaunchProbe;
         option_buttons->hide();
@@ -149,8 +128,6 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
     GuiOverlay::onDraw(window);
 
     info_faction->setValue("-");
-    info_type->setValue("-");
-    info_shields->setValue("-");
 
     if (targets.get() && my_spaceship)
     {
@@ -181,40 +158,20 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
         P<SpaceObject> obj = targets.get();
         P<SpaceShip> ship = obj;
         P<SpaceStation> station = obj;
-        sf::Vector2f position_diff = obj->getPosition() - my_spaceship->getPosition();
-        float distance = sf::length(position_diff);
-        float heading = sf::vector2ToAngle(position_diff) - 270;
-        while(heading < 0) heading += 360;
-        float rel_velocity = dot(obj->getVelocity(), position_diff / distance) - dot(my_spaceship->getVelocity(), position_diff / distance);
-        if (fabs(rel_velocity) < 0.01)
-            rel_velocity = 0.0;
         
         info_callsign->setValue(obj->getCallSign());
-        info_distance->setValue(string(distance / 1000.0f, 1) + "km");
-        info_heading->setValue(string(int(heading)));
-        info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + "km/min");
 
         if (ship)
         {
             if (ship->scanned_by_player >= SS_SimpleScan)
             {
                 info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
-                info_type->setValue(ship->getTypeName());
-                info_shields->setValue(ship->getShieldDataString());
             }
         }else{
             info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
-            if (station)
-            {
-                info_type->setValue(station->template_name);
-                info_shields->setValue(station->getShieldDataString());
-            }
         }
     }else{
         info_callsign->setValue("-");
-        info_distance->setValue("-");
-        info_heading->setValue("-");
-        info_relspeed->setValue("-");
     }
     
     if (my_spaceship)
@@ -222,4 +179,9 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
         info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0));
         launch_probe_button->setText("Launch probe (" + string(my_spaceship->scan_probe_stock) + ")");
     }
+
+    if (targets.getWaypointIndex() >= 0)
+        delete_waypoint_button->enable();
+    else
+        delete_waypoint_button->disable();
 }

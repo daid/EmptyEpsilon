@@ -44,6 +44,7 @@
 					<Add option="-O2" />
 					<Add option="-g" />
 					<Add directory="../SFML-2.3.1/include" />
+					<Add directory="../drmingw-0.7.6-win32/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -57,7 +58,9 @@
 					<Add library="glu32" />
 					<Add library="iphlpapi" />
 					<Add library="wsock32" />
+					<Add library="exchndl" />
 					<Add directory="../SFML-2.3.1/lib" />
+					<Add directory="../drmingw-0.7.6-win32/lib" />
 				</Linker>
 			</Target>
 			<Target title="Linux Debug">

@@ -55,7 +55,7 @@ public:
     constexpr static float jump_drive_charge_time_per_km = 2.0;
     constexpr static float jump_drive_min_distance = 5.0;
     constexpr static float jump_drive_max_distance = 50.0;
-    constexpr static float jump_drive_energy_per_km_charge = 6.0f;
+    constexpr static float jump_drive_energy_per_km_charge = 4.0f;
     constexpr static float jump_drive_heat_per_jump = 0.35;
 
     float energy_level;
@@ -243,13 +243,13 @@ public:
     /// Dummy virtual function to add heat on a system. The player ship class has an actual implementation of this as only player ships model heat right now.
     virtual void addHeat(ESystem system, float amount) {}
 
-    virtual bool canBeScanned() { return scanned_by_player != SS_FullScan; }
-    virtual int scanningComplexity();
-    virtual int scanningChannelDepth();
+    virtual bool canBeScanned() override { return scanned_by_player != SS_FullScan; }
+    virtual int scanningComplexity() override;
+    virtual int scanningChannelDepth() override;
     virtual void scanned() { if (scanned_by_player == SS_SimpleScan) scanned_by_player = SS_FullScan; else scanned_by_player = SS_SimpleScan; }
     void setScanned(bool scanned) { scanned_by_player = scanned ? SS_FullScan : SS_NotScanned; }
     bool isFriendOrFoeIdentified() { return scanned_by_player >= SS_FriendOrFoeIdentified; }
-    bool isScanned() { return scanned_by_player >= SS_SimpleScan; }
+    virtual bool isScanned() override { return scanned_by_player >= SS_SimpleScan; }
     bool isFullyScanned() { return scanned_by_player >= SS_FullScan; }
 
     /*!
@@ -271,6 +271,7 @@ public:
     virtual std::unordered_map<string, string> getGMInfo();
 
     bool isDocked(P<SpaceObject> target) { return docking_state == DS_Docked && docking_target == target; }
+    bool canStartDocking() { return current_warp <= 0.0 && (!has_jump_drive || jump_delay <= 0.0); }
     int getWeaponStorage(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage[weapon]; }
     int getWeaponStorageMax(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage_max[weapon]; }
     void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage[weapon] = amount; }
