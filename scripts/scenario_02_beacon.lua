@@ -1,7 +1,7 @@
 -- Name: Beacon of light series
 -- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
 
--- Init is run when the scenario is started. Create your initial
+-- Init is run when the scenario is started. Create your initial world
 function init()
     -- Create the main ship for the players.
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Player Cruiser")

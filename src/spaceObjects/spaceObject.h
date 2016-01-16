@@ -40,6 +40,8 @@ class SpaceObject : public Collisionable, public MultiplayerObject
     float object_radius;
     uint8_t faction_id;
     string object_description;
+    
+    bool is_scanned;
 public:
     string comms_script_name;
     int scanning_complexity_value;
@@ -71,10 +73,11 @@ public:
     virtual bool canBeTargeted();
     virtual bool canBeSelected();
     virtual bool canBeScanned();
+    virtual bool isScanned() { return is_scanned; }
     virtual int scanningComplexity() { return scanning_complexity_value; }
     virtual int scanningChannelDepth() { return scanning_depth_value; }
-    void setScanningParameters(int complexity, int depth) { scanning_complexity_value = std::min(4, std::max(0, complexity)); scanning_depth_value = std::max(0, depth); }
-    virtual void scanned() { }
+    void setScanningParameters(int complexity, int depth);
+    virtual void scanned() { is_scanned = true; }
     virtual void takeDamage(float damage_amount, DamageInfo info) {}
     virtual std::unordered_map<string, string> getGMInfo() { return std::unordered_map<string, string>(); }
     virtual string getExportLine() { return ""; }

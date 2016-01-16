@@ -243,13 +243,13 @@ public:
     /// Dummy virtual function to add heat on a system. The player ship class has an actual implementation of this as only player ships model heat right now.
     virtual void addHeat(ESystem system, float amount) {}
 
-    virtual bool canBeScanned() { return scanned_by_player != SS_FullScan; }
-    virtual int scanningComplexity();
-    virtual int scanningChannelDepth();
+    virtual bool canBeScanned() override { return scanned_by_player != SS_FullScan; }
+    virtual int scanningComplexity() override;
+    virtual int scanningChannelDepth() override;
     virtual void scanned() { if (scanned_by_player == SS_SimpleScan) scanned_by_player = SS_FullScan; else scanned_by_player = SS_SimpleScan; }
     void setScanned(bool scanned) { scanned_by_player = scanned ? SS_FullScan : SS_NotScanned; }
     bool isFriendOrFoeIdentified() { return scanned_by_player >= SS_FriendOrFoeIdentified; }
-    bool isScanned() { return scanned_by_player >= SS_SimpleScan; }
+    virtual bool isScanned() override { return scanned_by_player >= SS_SimpleScan; }
     bool isFullyScanned() { return scanned_by_player >= SS_FullScan; }
 
     /*!
