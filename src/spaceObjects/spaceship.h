@@ -281,6 +281,11 @@ public:
     float getSystemHeat(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].heat_level; }
     void setSystemHeat(ESystem system, float heat) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].heat_level = std::min(1.0f, std::max(0.0f, heat)); }
 
+    float getImpulseMaxSpeed() { return impulse_max_speed; }
+    void setImpulseMaxSpeed(float speed) { impulse_max_speed = speed; }
+    float getRotationMaxSpeed() { return turn_speed; }
+    void setRotationMaxSpeed(float speed) { turn_speed = speed; }
+
     bool hasJumpDrive() { return has_jump_drive; }
     void setJumpDrive(bool has_jump) { has_jump_drive = has_jump; }
     bool hasWarpDrive() { return has_warp_drive; }
