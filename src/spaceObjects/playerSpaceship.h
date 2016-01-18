@@ -2,6 +2,7 @@
 #define PLAYER_SPACESHIP_H
 
 #include "spaceship.h"
+#include "scanProbe.h"
 #include "commsScriptInterface.h"
 #include <iostream>
 
@@ -23,7 +24,7 @@ enum ECrewPosition
     damageControl,
     powerManagement,
     databaseView,
-    
+
     max_crew_positions
 };
 
@@ -76,7 +77,7 @@ public:
         ShipLogEntry() {}
         ShipLogEntry(string prefix, string text, sf::Color color)
         : prefix(prefix), text(text), color(color) {}
-        
+
         bool operator!=(const ShipLogEntry& e) { return prefix != e.prefix || text != e.text || color != e.color; }
     };
 
@@ -115,11 +116,14 @@ public:
     ECrewPosition self_destruct_code_entry_position[max_self_destruct_codes];
     ECrewPosition self_destruct_code_show_position[max_self_destruct_codes];
     float self_destruct_countdown;
-    
+
     EAlertLevel alert_level;
 
+    P<ScanProbe> linked_object;
+    bool science_link = 0;
+
     PlayerSpaceship();
-    
+
     bool isCommsInactive() const { return comms_state == CS_Inactive; }
     bool isCommsOpening() const { return comms_state == CS_OpeningChannel; }
     bool isCommsBeingHailed() const { return comms_state == CS_BeingHailed || comms_state == CS_BeingHailedByGM; }
@@ -190,10 +194,10 @@ public:
     virtual void addHeat(ESystem system, float amount) override;
 
     float getNetPowerUsage();
-    
+
     void addToShipLog(string message, sf::Color color);
     const std::vector<ShipLogEntry>& getShipsLog() const;
-    
+
     virtual bool getShieldsActive() override { return shields_active; }
     void setShieldsActive(bool active) { shields_active = active; }
 
@@ -201,7 +205,7 @@ public:
     sf::Vector2f getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1]; return sf::Vector2f(0, 0); }
 
     EAlertLevel getAlertLevel() { return alert_level; }
-    
+
     virtual string getExportLine();
 };
 REGISTER_MULTIPLAYER_ENUM(ECommsState);
