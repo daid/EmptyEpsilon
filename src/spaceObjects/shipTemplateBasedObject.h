@@ -61,7 +61,7 @@ public:
 
     ///Shield script binding functions
     float getShieldLevel(int index) { if (index < 0 || index >= shield_count) return 0; return shield_level[index]; }
-    float getShieldMax(int index) { if (index < 0 || index >= shield_count) return 0; return shield_level[index]; }
+    float getShieldMax(int index) { if (index < 0 || index >= shield_count) return 0; return shield_max[index]; }
     int getShieldCount() { return shield_count; }
     void setShields(std::vector<float> amounts);
     void setShieldsMax(std::vector<float> amounts);
