@@ -176,9 +176,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
             info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
         }
 
-        if (probe && probe->owner_id == my_spaceship->getMultiplayerId()){
-            info_callsign->setValue("Probe");
-            info_faction->setValue("Player");
+        if (probe && probe->owner_id == my_spaceship->getMultiplayerId() && (probe->getTarget() - probe->getPosition()) < probe->getRadius()){
             link_to_science_button->enable();
         }
         else{

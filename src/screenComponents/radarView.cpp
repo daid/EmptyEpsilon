@@ -36,7 +36,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     // Render texture to screen
 
     //Hacky, when not relay and we have a ship, center on it.
-    if ((fog_style != FriendlysShortRangeFogOfWar || local) && my_spaceship)
+    if (fog_style != FriendlysShortRangeFogOfWar && my_spaceship && !inhibit_centering)
         view_position = my_spaceship->getPosition();
 
     //Setup our textures for rendering
