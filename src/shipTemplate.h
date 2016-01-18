@@ -21,6 +21,7 @@ enum EMissileWeapons
 };
 /* Define script conversion function for the EMissileWeapons enum. */
 template<> void convert<EMissileWeapons>::param(lua_State* L, int& idx, EMissileWeapons& es);
+template<> int convert<EMissileWeapons>::returnType(lua_State* L, EMissileWeapons es);
 
 enum ESystem
 {

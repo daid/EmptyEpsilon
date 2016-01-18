@@ -330,6 +330,7 @@ public:
 
     void setWeaponTubeCount(int amount);
     int getWeaponTubeCount();
+    EMissileWeapons getWeaponTubeLoadType(int index);
 
     void setRadarTrace(string trace) { radar_trace = trace; }
 };
