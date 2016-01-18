@@ -726,6 +726,8 @@
 		<Unit filename="src/spaceObjects/wormHole.h" />
 		<Unit filename="src/threatLevelEstimate.cpp" />
 		<Unit filename="src/threatLevelEstimate.h" />
+		<Unit filename="src/tutorialGame.cpp" />
+		<Unit filename="src/tutorialGame.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
