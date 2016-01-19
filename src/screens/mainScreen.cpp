@@ -14,6 +14,8 @@
 
 ScreenMainScreen::ScreenMainScreen()
 {
+    new GuiOverlay(this, "", sf::Color::Black);
+
     viewport = new GuiViewport3D(this, "VIEWPORT");
     viewport->showCallsigns()->showHeadings()->showSpacedust();
     viewport->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);

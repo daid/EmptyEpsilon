@@ -47,6 +47,7 @@ set(SOURCES
 	src/mesh.cpp
 	src/repairCrew.cpp
 	src/GMScriptCallback.cpp
+	src/tutorialGame.cpp
 	src/menus/joinServerMenu.cpp
 	src/menus/serverBrowseMenu.cpp
 	src/menus/mainMenus.cpp

@@ -61,6 +61,27 @@ template<> void convert<EMissileWeapons>::param(lua_State* L, int& idx, EMissile
         es = MW_None;
 }
 
+template<> int convert<EMissileWeapons>::returnType(lua_State* L, EMissileWeapons es)
+{
+    switch(es)
+    {
+    case MW_Homing:
+        lua_pushstring(L, "homing");
+        return 1;
+    case MW_Nuke:
+        lua_pushstring(L, "nuke");
+        return 1;
+    case MW_Mine:
+        lua_pushstring(L, "mine");
+        return 1;
+    case MW_EMP:
+        lua_pushstring(L, "emp");
+        return 1;
+    default:
+        return 0;
+    }
+}
+
 /* Define script conversion function for the EMissileWeapons enum. */
 template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es)
 {

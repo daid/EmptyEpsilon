@@ -31,6 +31,10 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHealth);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHeat);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHeat);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getImpulseMaxSpeed);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setImpulseMaxSpeed);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getRotationMaxSpeed);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRotationMaxSpeed);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasWarpDrive);
@@ -44,6 +48,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponTexture);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponTubeCount);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponTubeLoadType);
     /// Set the icon to be used for this ship on the radar.
     /// For example, ship:setRadarTrace("RadarBlip.png") will show a dot instead of an arrow for this ship.
     /// Note: Icon is only shown after scanning, before the ship is scanned it is always shown as an arrow.
@@ -887,6 +892,15 @@ void SpaceShip::setWeaponTubeCount(int amount)
 int SpaceShip::getWeaponTubeCount()
 {
     return weapon_tubes;
+}
+
+EMissileWeapons SpaceShip::getWeaponTubeLoadType(int index)
+{
+    if (index < 0 || index >= weapon_tubes)
+        return MW_None;
+    if (weaponTube[index].state != WTS_Loaded)
+        return MW_None;
+    return weaponTube[index].type_loaded;
 }
 
 std::unordered_map<string, string> SpaceShip::getGMInfo()
