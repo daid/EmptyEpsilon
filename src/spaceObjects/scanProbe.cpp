@@ -10,7 +10,7 @@ ScanProbe::ScanProbe()
 : SpaceObject(100, "ScanProbe")
 {
     lifetime = 60 * 10;
-    
+
     registerMemberReplication(&owner_id);
     registerMemberReplication(&target_position);
     registerMemberReplication(&lifetime, 60.0);
@@ -42,7 +42,7 @@ void ScanProbe::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
 void ScanProbe::setOwner(P<SpaceObject> owner)
 {
     if (!owner) return;
-    
-    setFactionId(owner->getFactionId());
+
+    setFaction("Independant");
     owner_id = owner->getMultiplayerId();
 }

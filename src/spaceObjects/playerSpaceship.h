@@ -2,6 +2,7 @@
 #define PLAYER_SPACESHIP_H
 
 #include "spaceship.h"
+#include "scanProbe.h"
 #include "commsScriptInterface.h"
 #include <iostream>
 
@@ -23,7 +24,7 @@ enum ECrewPosition
     damageControl,
     powerManagement,
     databaseView,
-    
+
     max_crew_positions
 };
 
@@ -51,7 +52,7 @@ enum EAlertLevel
 class PlayerSpaceship : public SpaceShip
 {
 public:
-    constexpr static float energy_shield_use_per_second = 2.5f;
+    constexpr static float energy_shield_use_per_second = 1.5f;
     constexpr static float energy_warp_per_second = 1.0f;
     constexpr static float system_heatup_per_second = 0.05f;
     constexpr static float max_coolant = 10.0;
@@ -62,8 +63,23 @@ public:
     constexpr static float heat_per_combat_maneuver_boost = 0.2;
     constexpr static float heat_per_combat_maneuver_strafe = 0.2;
     constexpr static float heat_per_warp = 0.02;
-    constexpr static int max_scan_probes = 10;
+    constexpr static int max_scan_probes = 8;
+    constexpr static float scan_probe_charge_time = 10.0f;
     constexpr static float max_scanning_delay = 6.0;
+
+    class ShipLogEntry
+    {
+    public:
+        string prefix;
+        string text;
+        sf::Color color;
+
+        ShipLogEntry() {}
+        ShipLogEntry(string prefix, string text, sf::Color color)
+        : prefix(prefix), text(text), color(color) {}
+
+        bool operator!=(const ShipLogEntry& e) { return prefix != e.prefix || text != e.text || color != e.color; }
+    };
 
     float hull_damage_indicator;
     float jump_indicator;
@@ -84,11 +100,13 @@ private:
     std::vector<int> comms_reply_id;
     std::vector<string> comms_reply_message;
     CommsScriptInterface comms_script_interface;  //Server only
-    std::vector<string> ships_log;
+
+    std::vector<ShipLogEntry> ships_log;
 
 public:
     std::vector<sf::Vector2f> waypoints;
     int scan_probe_stock;
+    float scan_probe_recharge;
 
     EMainScreenSetting main_screen_setting;
 
@@ -98,11 +116,14 @@ public:
     ECrewPosition self_destruct_code_entry_position[max_self_destruct_codes];
     ECrewPosition self_destruct_code_show_position[max_self_destruct_codes];
     float self_destruct_countdown;
-    
+
     EAlertLevel alert_level;
 
+    int32_t linked_object;
+    bool science_link = false;
+
     PlayerSpaceship();
-    
+
     bool isCommsInactive() const { return comms_state == CS_Inactive; }
     bool isCommsOpening() const { return comms_state == CS_OpeningChannel; }
     bool isCommsBeingHailed() const { return comms_state == CS_BeingHailed || comms_state == CS_BeingHailedByGM; }
@@ -173,10 +194,10 @@ public:
     virtual void addHeat(ESystem system, float amount) override;
 
     float getNetPowerUsage();
-    
-    void addToShipLog(string message);
-    const std::vector<string>& getShipsLog() const;
-    
+
+    void addToShipLog(string message, sf::Color color);
+    const std::vector<ShipLogEntry>& getShipsLog() const;
+
     virtual bool getShieldsActive() override { return shields_active; }
     void setShieldsActive(bool active) { shields_active = active; }
 
@@ -184,7 +205,7 @@ public:
     sf::Vector2f getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1]; return sf::Vector2f(0, 0); }
 
     EAlertLevel getAlertLevel() { return alert_level; }
-    
+
     virtual string getExportLine();
 };
 REGISTER_MULTIPLAYER_ENUM(ECommsState);

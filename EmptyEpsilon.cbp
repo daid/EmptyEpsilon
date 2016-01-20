@@ -44,6 +44,7 @@
 					<Add option="-O2" />
 					<Add option="-g" />
 					<Add directory="../SFML-2.3.1/include" />
+					<Add directory="../drmingw-0.7.6-win32/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -57,7 +58,9 @@
 					<Add library="glu32" />
 					<Add library="iphlpapi" />
 					<Add library="wsock32" />
+					<Add library="exchndl" />
 					<Add directory="../SFML-2.3.1/lib" />
+					<Add directory="../drmingw-0.7.6-win32/lib" />
 				</Linker>
 			</Target>
 			<Target title="Linux Debug">
@@ -465,6 +468,8 @@
 		<Unit filename="src/gui/debugRenderer.h" />
 		<Unit filename="src/gui/gui2.cpp" />
 		<Unit filename="src/gui/gui2.h" />
+		<Unit filename="src/gui/gui2_advancedscrolltext.cpp" />
+		<Unit filename="src/gui/gui2_advancedscrolltext.h" />
 		<Unit filename="src/gui/gui2_arrow.cpp" />
 		<Unit filename="src/gui/gui2_arrow.h" />
 		<Unit filename="src/gui/gui2_arrowbutton.cpp" />
@@ -657,6 +662,8 @@
 		<Unit filename="src/screens/extra/databaseScreen.h" />
 		<Unit filename="src/screens/extra/powerManagement.cpp" />
 		<Unit filename="src/screens/extra/powerManagement.h" />
+		<Unit filename="src/screens/extra/shipLogScreen.cpp" />
+		<Unit filename="src/screens/extra/shipLogScreen.h" />
 		<Unit filename="src/screens/gameMasterScreen.cpp" />
 		<Unit filename="src/screens/gameMasterScreen.h" />
 		<Unit filename="src/screens/mainScreen.cpp" />
@@ -677,8 +684,6 @@
 		<Unit filename="src/spaceObjects/asteroid.h" />
 		<Unit filename="src/spaceObjects/beamEffect.cpp" />
 		<Unit filename="src/spaceObjects/beamEffect.h" />
-		<Unit filename="src/spaceObjects/beamWeapon.cpp" />
-		<Unit filename="src/spaceObjects/beamWeapon.h" />
 		<Unit filename="src/spaceObjects/blackHole.cpp" />
 		<Unit filename="src/spaceObjects/blackHole.h" />
 		<Unit filename="src/spaceObjects/cpuShip.cpp" />
@@ -709,6 +714,10 @@
 		<Unit filename="src/spaceObjects/spaceStation.h" />
 		<Unit filename="src/spaceObjects/spaceship.cpp" />
 		<Unit filename="src/spaceObjects/spaceship.h" />
+		<Unit filename="src/spaceObjects/spaceshipParts/beamWeapon.cpp" />
+		<Unit filename="src/spaceObjects/spaceshipParts/beamWeapon.h" />
+		<Unit filename="src/spaceObjects/spaceshipParts/weaponTube.cpp" />
+		<Unit filename="src/spaceObjects/spaceshipParts/weaponTube.h" />
 		<Unit filename="src/spaceObjects/supplyDrop.cpp" />
 		<Unit filename="src/spaceObjects/supplyDrop.h" />
 		<Unit filename="src/spaceObjects/warpJammer.cpp" />

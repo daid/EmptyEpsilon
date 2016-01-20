@@ -85,6 +85,8 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
 
 void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float sprite_scale, bool show_levels)
 {
+    if (!getShieldsActive())
+        return;
     if (shield_count == 1)
     {
         sf::Sprite objectSprite;
@@ -307,7 +309,8 @@ void ShipTemplateBasedObject::setShieldsMax(std::vector<float> amounts)
     shield_count = std::min(max_shield_count, int(amounts.size()));
     for(int n=0; n<shield_count; n++)
     {
-        shield_level[n] = amounts[n];
+        shield_max[n] = amounts[n];
+        shield_level[n] = std::min(shield_level[n], shield_max[n]);
     }
 }
 

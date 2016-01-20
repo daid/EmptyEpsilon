@@ -3,6 +3,7 @@
 
 #include "screenComponents/targetsContainer.h"
 #include "gui/gui2.h"
+#include "spaceObjects/scanprobe.h"
 
 class GuiRadarView;
 class GuiKeyValueDisplay;
@@ -28,9 +29,12 @@ protected:
     GuiFrequencyCurve* info_shield_frequency;
     GuiFrequencyCurve* info_beam_frequency;
     GuiKeyValueDisplay* info_system[SYS_COUNT];
+
+    GuiButton* probe_view_button;
+    P<ScanProbe> observation_point;
 public:
     ScienceScreen(GuiContainer* owner);
-    
+
     virtual void onDraw(sf::RenderTarget& window);
 };
 

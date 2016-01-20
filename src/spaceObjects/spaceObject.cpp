@@ -69,6 +69,8 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, scanningChannelDepth);
     ///Set the scanning complexity and depth for this object.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setScanningParameters);
+    ///Check if this object is scanned already.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isScanned);
 }
 
 PVector<SpaceObject> space_object_list;
@@ -82,6 +84,7 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
 
     scanning_complexity_value = 0;
     scanning_depth_value = 0;
+    is_scanned = false;
 
     registerMemberReplication(&faction_id);
     registerCollisionableReplication(multiplayer_significant_range);
@@ -126,11 +129,20 @@ bool SpaceObject::canBeSelected()
 
 bool SpaceObject::canBeScanned()
 {
+    if (isScanned())
+        return false;
     if (scanning_complexity_value > 0)
         return true;
     if (scanning_depth_value > 0)
         return true;
     return false;
+}
+
+void SpaceObject::setScanningParameters(int complexity, int depth)
+{
+    scanning_complexity_value = std::min(4, std::max(0, complexity));
+    scanning_depth_value = std::max(0, depth);
+    is_scanned = false;
 }
 
 bool SpaceObject::isEnemy(P<SpaceObject> obj)
