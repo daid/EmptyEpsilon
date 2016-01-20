@@ -64,7 +64,7 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     option_buttons->setPosition(20, 50, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", &targets))->setSize(GuiElement::GuiSizeMax, 50);
     link_to_science_button = new GuiButton(option_buttons, "LINK_TO_SCIENCE", "Link to Science", [this](){
-        my_spaceship->linked_object=targets.get()->getMultiplayerId();
+        my_spaceship->commandSetScienceLink(targets.get()->getMultiplayerId());
     });
     link_to_science_button->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", "Place Waypoint", [this]() {

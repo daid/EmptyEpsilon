@@ -46,6 +46,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCancelSelfDestruct);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandConfirmDestructCode);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCombatManeuverBoost);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetScienceLink);
 }
 
 static float system_power_user_factor[] = {
@@ -95,6 +96,7 @@ static const int16_t CMD_COMBAT_MANEUVER_BOOST = 0x0020;
 static const int16_t CMD_COMBAT_MANEUVER_STRAFE = 0x0021;
 static const int16_t CMD_LAUNCH_PROBE = 0x0022;
 static const int16_t CMD_SET_ALERT_LEVEL = 0x0023;
+static const int16_t CMD_SET_SCIENCE_LINK = 0x0024;
 
 template<> int convert<EAlertLevel>::returnType(lua_State* L, EAlertLevel l)
 {
@@ -1003,6 +1005,11 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             packet >> alert_level;
         }
         break;
+    case CMD_SET_SCIENCE_LINK:
+        {
+            packet >> linked_object;
+        }
+        break;
     }
 }
 
@@ -1258,6 +1265,12 @@ void PlayerSpaceship::commandSetAlertLevel(EAlertLevel level)
     sf::Packet packet;
     packet << CMD_SET_ALERT_LEVEL;
     packet << level;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetScienceLink(int32_t id){
+    sf::Packet packet;
+    packet << CMD_SET_SCIENCE_LINK << id;
     sendClientCommand(packet);
 }
 

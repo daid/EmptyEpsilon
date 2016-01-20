@@ -43,6 +43,6 @@ void ScanProbe::setOwner(P<SpaceObject> owner)
 {
     if (!owner) return;
 
-    setFaction("Independant");
+    setFaction("Independent");
     owner_id = owner->getMultiplayerId();
 }
