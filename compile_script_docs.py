@@ -95,7 +95,7 @@ class DocumentationGenerator(object):
                     res = re.search('([a-zA-Z0-9]+)::([a-zA-Z0-9]+)\(([^\)]*)\)', line)
                     if res != None:
                         self._function_info.append((res.group(1), res.group(2), res.group(3)))
-                    res = re.search('^ *class ([a-zA-Z0-9]+)', line)
+                    res = re.search('^class ([a-zA-Z0-9]+)', line)
                     if res != None:
                         current_class = res.group(1)
                     if current_class is not None:
