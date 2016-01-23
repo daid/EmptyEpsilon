@@ -16,7 +16,6 @@ Press next to continue...]], true)
         tutorial:switchViewToMainScreen()
         tutorial:showMessage([[What you see now is the main screen. Here you see your own ship and the world around you.
 There is no direction interaction available on this screen. But it allows for visual identification of objects.]], true)
-        --onNext = startRadarTutorial
         startSequence(radarTutorial)
     end
 end
@@ -133,7 +132,7 @@ addToSequence(helmsTutorial, function() player:setImpulseMaxSpeed(90) end)
 addToSequence(helmsTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(0, -1500) end)
 addToSequence(helmsTutorial, [[Excelent!
 
-Next up. Docking. Docking is important, as being docked with a station will recharge your energy, and allows the relay officer to request weapon refills. It can also be important for other mission related events.
+Next up. Docking. Docking is important, as being docked with a station will recharge your energy, repairs your hull and allows the relay officer to request weapon refills. It can also be important for other mission related events.
 To dock, get within 1km of a station, and press the "Request Dock" button. Docking is fully automated after that.
 Dock with the nearby station now.]], function() return player:isDocked(prev_object) end)
 addToSequence(helmsTutorial, [[Now that you are docked, movement is locked. As helms officer there is nothing else you can do.
@@ -303,8 +302,8 @@ If a system overheats, it will get damage. But let us focus on power first.
 Increase the power of the front shield system to max.]], function() return player:getSystemPower("frontshield") > 2.5 end)
 addToSequence(engineeringTutorial, [[As you will notice, the added power in the shield system will increase the amount of heat in the system.
 
-Now wait till the system is overheating.]], function() return player:getSystemHealth("frontshield") < 0.5 end)
-addToSequence(engineeringTutorial, function() player:commandSetSystemPower("frontshield", 0.0) end)
+Now wait till the system is overheating.]], function() return player:getSystemHealth("beamweapons") < 0.5 end)
+addToSequence(engineeringTutorial, function() player:commandSetSystemPower("beamweapons", 0.0) end)
 addToSequence(engineeringTutorial, [[Note that because of the overheating system, your system took damage. Because the system is damage, it will function less effectively.
 
 Systems can also be damaged because your ship gets hit while the shields are down.]])
@@ -312,4 +311,33 @@ addToSequence(engineeringTutorial, function() tutorial:setMessageToBottomPositio
 addToSequence(engineeringTutorial, [[In this top area you see your damage control teams in your ship.]])
 addToSequence(engineeringTutorial, [[The front shield system is damaged, indicated by the color of this room.
 
-Select a damage control team, and send it to that room to initiate repairs.]], function() return player:getSystemHealth("frontshield") > 0.9 end)
+Select a damage control team, and send it to that room to initiate repairs.]], function() return player:getSystemHealth("beamweapons") > 0.9 end)
+addToSequence(engineeringTutorial, function() tutorial:setMessageToTopPosition() end)
+addToSequence(engineeringTutorial, [[Good. Now you know your most important tasks. Next we'll go over each system in detail.
+Remember, each system will function better with more power in it, but less well when it is damaged. Your task is keeping vital systems running as good as you can.]])
+addToSequence(engineeringTutorial, [[Reactor:
+
+The reactor generates energy. More power in the reactor will increase your energy generation.]])
+addToSequence(engineeringTutorial, [[Beam Weapons:
+
+Increasing beam power will increase the fire rate of the beam weapons. Which in effect will cause you to do more damage.
+Note that every beam fire will put some extra heat into the system that needs to be cooled down.]])
+addToSequence(engineeringTutorial, [[Missile System:
+
+Increase missile weapon power will lower the reload time of missile tubes.]])
+addToSequence(engineeringTutorial, [[Maneuvering:
+
+Increasing power in the maneuvering system will allow the ship to turn faster. It will also increase the speed of which the combat maneuvering charge reloads.]])
+addToSequence(engineeringTutorial, [[Impulse Engines:
+
+More power in the impulse engines will increase your flight speed on impulse engines.]])
+addToSequence(engineeringTutorial, [[Warp drive:
+
+Increased warp drive power will increase your warp drive flight speed.]])
+addToSequence(engineeringTutorial, [[Jump drive:
+
+The jump drive will charge faster, and will have less delay before jumping when there is more power in the jump drive.]])
+addToSequence(engineeringTutorial, [[Shields:
+
+More power in the shield system will increase the recharge rate of shields, and also decrease the amount of shield damage sustained.]])
+addToSequence(engineeringTutorial, [[This concludes the basis of the engineering station. Be sure to keep your ship running in top condition!]])
