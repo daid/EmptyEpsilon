@@ -29,7 +29,7 @@ function startSequence(sequence)
 end
 
 function runNextSequenceStep()
-    data = current_sequence[current_index]
+    local data = current_sequence[current_index]
     current_index = current_index + 1
     if data["message"] ~= nil then
         tutorial:showMessage(data["message"], data["finish_check_function"] == nil)
@@ -45,10 +45,10 @@ function runNextSequenceStep()
             onNext = nil
         end
     elseif data["run_function"] ~= nil then
-        my_sequence = current_sequence
+        local has_next_step = current_index <= #current_sequence
         data["run_function"]()
-        if my_sequence == current_sequence then
-            -- Only run the next step if the sequence did not chance. Else a new sequence is started.
+        if has_next_step then
+            print("Run next after function")
             runNextSequenceStep()
         end
     end
@@ -262,6 +262,8 @@ addToSequence(engineeringTutorial, function()
     tutorial:switchViewToScreen(2)
     player:setJumpDrive(true)
     player:setWarpDrive(true)
+    player:setImpulseMaxSpeed(1)
+    player:setRotationMaxSpeed(1)
     player:setSystemHealth("reactor", 1.0)
     player:setSystemHealth("beamweapons", 1.0)
     player:setSystemHealth("missilesystem", 1.0)
