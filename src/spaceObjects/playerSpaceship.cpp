@@ -46,6 +46,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCancelSelfDestruct);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandConfirmDestructCode);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCombatManeuverBoost);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetScienceLink);
 }
 
 static float system_power_user_factor[] = {
@@ -95,6 +96,7 @@ static const int16_t CMD_COMBAT_MANEUVER_BOOST = 0x0020;
 static const int16_t CMD_COMBAT_MANEUVER_STRAFE = 0x0021;
 static const int16_t CMD_LAUNCH_PROBE = 0x0022;
 static const int16_t CMD_SET_ALERT_LEVEL = 0x0023;
+static const int16_t CMD_SET_SCIENCE_LINK = 0x0024;
 
 template<> int convert<EAlertLevel>::returnType(lua_State* L, EAlertLevel l)
 {
@@ -167,6 +169,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&activate_self_destruct);
     registerMemberReplication(&self_destruct_countdown, 0.2);
     registerMemberReplication(&alert_level);
+    registerMemberReplication(&linked_object);
     for(int n=0; n<max_self_destruct_codes; n++)
     {
         self_destruct_code[n] = 0;
@@ -207,9 +210,9 @@ PlayerSpaceship::PlayerSpaceship()
             destroy();
         }
     }
-    
+
     setCallSign("PL" + string(getMultiplayerId()));
-    
+
     addToShipLog("Start of log", sf::Color::White);
 }
 
@@ -393,7 +396,7 @@ void PlayerSpaceship::update(float delta)
         if (comms_open_delay > 0)
             comms_open_delay -= delta;
     }
-    
+
     addHeat(SYS_Impulse, combat_maneuver_boost_active * delta * heat_per_combat_maneuver_boost);
     addHeat(SYS_Maneuver, fabs(combat_maneuver_strafe_active) * delta * heat_per_combat_maneuver_strafe);
     addHeat(SYS_Warp, current_warp * delta * heat_per_warp);
@@ -849,7 +852,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             if (index < comms_reply_id.size())
             {
                 addToShipLog(comms_reply_message[index], sf::Color(192, 255, 192));
-                
+
                 comms_incomming_message = "?";
                 int id = comms_reply_id[index];
                 comms_reply_id.clear();
@@ -863,7 +866,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         {
             string message;
             packet >> message;
-            
+
             addCommsOutgoingMessage(message);
             P<PlayerSpaceship> playership = comms_target;
             if (comms_state == CS_ChannelOpenPlayer && playership)
@@ -1000,6 +1003,11 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     case CMD_SET_ALERT_LEVEL:
         {
             packet >> alert_level;
+        }
+        break;
+    case CMD_SET_SCIENCE_LINK:
+        {
+            packet >> linked_object;
         }
         break;
     }
@@ -1257,6 +1265,12 @@ void PlayerSpaceship::commandSetAlertLevel(EAlertLevel level)
     sf::Packet packet;
     packet << CMD_SET_ALERT_LEVEL;
     packet << level;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetScienceLink(int32_t id){
+    sf::Packet packet;
+    packet << CMD_SET_SCIENCE_LINK << id;
     sendClientCommand(packet);
 }
 

@@ -98,7 +98,7 @@ function update(delta)
 	
 	-- Stakhanov must survive
 	if not stakhanov:isValid() then
-	victory("Ktlitan")
+	victory("Ghosts")
 	end
 	
 	-- If player dies, fail

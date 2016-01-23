@@ -19,7 +19,7 @@ public:
         NebulaFogOfWar,
         FriendlysShortRangeFogOfWar
     };
-    
+
     typedef std::function<void(sf::Vector2f position)> func_t;
     typedef std::function<void(float position)>        ffunc_t;
 private:
@@ -31,17 +31,17 @@ private:
     {
     public:
         constexpr static float total_lifetime = 60.0f;
-        
+
         sf::Vector2f position;
         float end_of_life;
-        
+
         GhostDot(sf::Vector2f pos) : position(pos), end_of_life(engine->getElapsedTime() + total_lifetime) {}
     };
     std::vector<GhostDot> ghost_dots;
     float next_ghost_dot_update;
-    
+
     TargetsContainer* targets;
-    
+
     float distance;
     sf::Vector2f view_position;
     bool long_range;
@@ -51,6 +51,7 @@ private:
     bool show_callsigns;
     bool show_heading_indicators;
     bool show_game_master_data;
+    bool inhibit_centering=0;
     float range_indicator_step_size;
     float missile_target_angle;
     ERadarStyle style;
@@ -85,13 +86,15 @@ public:
     GuiRadarView* gameMaster() { show_game_master_data = true; return this; }
     GuiRadarView* setStyle(ERadarStyle style) { this->style = style; return this; }
     GuiRadarView* setFogOfWarStyle(EFogOfWarStyle style) { this->fog_style = style; return this; }
+    bool getCenteringInhibition() {return inhibit_centering; }
+    GuiRadarView* setCenteringInhibition(bool value) { this->inhibit_centering = value; return this; }
     GuiRadarView* setCallbacks(func_t mouse_down_func, func_t mouse_drag_func, func_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
-    GuiRadarView* setJoystickCallbacks(ffunc_t joystick_x_func, ffunc_t joystick_y_func, ffunc_t joystick_z_func, ffunc_t joystick_r_func) 
+    GuiRadarView* setJoystickCallbacks(ffunc_t joystick_x_func, ffunc_t joystick_y_func, ffunc_t joystick_z_func, ffunc_t joystick_r_func)
                   { this->joystick_x_func = joystick_x_func; this->joystick_y_func = joystick_y_func; this->joystick_z_func = joystick_z_func; this->joystick_r_func = joystick_r_func; return this; }
     GuiRadarView* setViewPosition(sf::Vector2f view_position) { this->view_position = view_position; return this; }
     sf::Vector2f getViewPosition() { return view_position; }
     void setMissileTargetAngle(float angle) { missile_target_angle = angle; }
-    
+
     sf::Vector2f worldToScreen(sf::Vector2f world_position);
     sf::Vector2f screenToWorld(sf::Vector2f screen_position);
 
@@ -103,7 +106,7 @@ public:
     virtual bool onJoystickRMove(float position);
 private:
     void updateGhostDots();
-    
+
     void drawBackground(sf::RenderTarget& window);
     void drawSectorGrid(sf::RenderTarget& window);
     void drawNebulaBlockedAreas(sf::RenderTarget& window);

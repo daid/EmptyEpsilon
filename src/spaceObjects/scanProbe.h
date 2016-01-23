@@ -11,16 +11,19 @@ private:
     sf::Vector2f target_position;
 public:
     int owner_id;
-    
+
     ScanProbe();
 
     virtual void update(float delta);
 
+    virtual bool canBeTargeted() { return true; }
+
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
-    
+
     void setTarget(sf::Vector2f target) { target_position = target; }
+    sf::Vector2f getTarget() { return target_position; }
     void setOwner(P<SpaceObject> owner);
-    
+
     virtual string getCallSign() { return ""; }
 };
 
