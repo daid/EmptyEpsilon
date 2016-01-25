@@ -56,13 +56,7 @@ void WeaponTube::startUnload()
 
 void WeaponTube::fire(float target_angle)
 {
-    //TOFIX: This does not really belong here.
-    if (parent->scanned_by_player == SS_NotScanned)
-    {
-        P<SpaceShip> ship = parent->getTarget();
-        if (parent->getTarget() && (!ship || ship->scanned_by_player != SS_NotScanned))
-            parent->scanned_by_player = SS_FriendOrFoeIdentified;
-    }
+    parent->didAnOffensiveAction();
 
     if (parent->docking_state != DS_NotDocking) return;
     if (parent->current_warp > 0.0) return;

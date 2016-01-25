@@ -179,6 +179,12 @@ public:
      * Check if the ship can be targeted.
      */
     virtual bool canBeTargeted() { return true; }
+    
+    /*!
+     * didAnOffensiveAction is called whenever this ship does something offesive towards an other object
+     * this can identify the ship as friend or foe.
+     */
+    void didAnOffensiveAction();
 
     /*!
      * Spaceship takes damage directly on hull.

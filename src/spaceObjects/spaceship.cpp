@@ -668,6 +668,16 @@ float SpaceShip::getShieldDamageFactor(DamageInfo& info, int shield_index)
     return shield_damage_factor * frequency_damage_factor;
 }
 
+void SpaceShip::didAnOffensiveAction()
+{
+    if (scanned_by_player == SS_NotScanned)
+    {
+        P<SpaceShip> ship = getTarget();
+        if (getTarget() && (!ship || ship->scanned_by_player != SS_NotScanned))
+            scanned_by_player = SS_FriendOrFoeIdentified;
+    }
+}
+
 void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
 {
     if (gameGlobalInfo->use_system_damage)

@@ -137,12 +137,7 @@ void BeamWeapon::fire(P<SpaceObject> target, ESystem system_target)
 {
     //When we fire a beam, and we hit an enemy, check if we are not scanned yet, if we are not, and we hit something that we know is an enemy or friendly,
     //  we now know if this ship is an enemy or friend.
-    if (parent->scanned_by_player == SS_NotScanned)
-    {
-        P<SpaceShip> ship = target;
-        if (!ship || ship->scanned_by_player != SS_NotScanned)
-            parent->scanned_by_player = SS_FriendOrFoeIdentified;
-    }
+    parent->didAnOffensiveAction();
 
     cooldown = cycle_time; // Reset time of weapon
 
