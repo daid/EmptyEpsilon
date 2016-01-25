@@ -5,11 +5,7 @@
 #include "spaceObjects/beamEffect.h"
 #include "factionInfo.h"
 #include "spaceObjects/explosionEffect.h"
-#include "spaceObjects/EMPMissile.h"
-#include "spaceObjects/homingMissile.h"
 #include "particleEffect.h"
-#include "spaceObjects/mine.h"
-#include "spaceObjects/nuke.h"
 #include "spaceObjects/warpJammer.h"
 #include "gameGlobalInfo.h"
 
@@ -155,9 +151,8 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     }
     for(int n = 0; n < max_weapon_tubes; n++)
     {
-        registerMemberReplication(&weaponTube[n].type_loaded);
-        registerMemberReplication(&weaponTube[n].state);
-        registerMemberReplication(&weaponTube[n].delay, 0.5);
+        weapon_tube[n].setParent(this);
+        weapon_tube[n].setIndex(n);
     }
     for(int n = 0; n < MW_Count; n++)
     {
@@ -514,25 +509,7 @@ void SpaceShip::update(float delta)
 
     for(int n=0; n<max_weapon_tubes; n++)
     {
-        if (weaponTube[n].delay > 0.0)
-        {
-            weaponTube[n].delay -= delta * getSystemEffectiveness(SYS_MissileSystem);
-        }else{
-            switch(weaponTube[n].state)
-            {
-            case WTS_Loading:
-                weaponTube[n].state = WTS_Loaded;
-                break;
-            case WTS_Unloading:
-                weaponTube[n].state = WTS_Empty;
-                if (weapon_storage[weaponTube[n].type_loaded] < weapon_storage_max[weaponTube[n].type_loaded])
-                    weapon_storage[weaponTube[n].type_loaded] ++;
-                weaponTube[n].type_loaded = MW_None;
-                break;
-            default:
-                break;
-            }
-        }
+        weapon_tube[n].update(delta);
     }
 
     model_info.engine_scale = std::min(1.0, std::max(fabs(getAngularVelocity() / turn_speed), fabs(current_impulse)));
@@ -598,87 +575,6 @@ void SpaceShip::collide(Collisionable* other, float force)
             docking_offset = docking_offset / length * (length + 2.0f);
         }
     }
-}
-
-void SpaceShip::loadTube(int tubeNr, EMissileWeapons type)
-{
-    if (tubeNr >= 0 && tubeNr < max_weapon_tubes && type > MW_None && type < MW_Count)
-    {
-        if (weaponTube[tubeNr].state == WTS_Empty && weapon_storage[type] > 0)
-        {
-            weaponTube[tubeNr].state = WTS_Loading;
-            weaponTube[tubeNr].delay = tube_load_time;
-            weaponTube[tubeNr].type_loaded = type;
-            weapon_storage[type]--;
-        }
-    }
-}
-
-void SpaceShip::fireTube(int tubeNr, float target_angle)
-{
-    if (scanned_by_player == SS_NotScanned)
-    {
-        P<SpaceShip> ship = getTarget();
-        if (getTarget() && (!ship || ship->scanned_by_player != SS_NotScanned))
-            scanned_by_player = SS_FriendOrFoeIdentified;
-    }
-
-    if (docking_state != DS_NotDocking) return;
-    if (current_warp > 0.0) return;
-    if (tubeNr < 0 || tubeNr >= max_weapon_tubes) return;
-    if (weaponTube[tubeNr].state != WTS_Loaded) return;
-
-    sf::Vector2f fireLocation = getPosition() + sf::rotateVector(ship_template->model_data->getTubePosition2D(tubeNr), getRotation());
-    switch(weaponTube[tubeNr].type_loaded)
-    {
-    case MW_Homing:
-        {
-            P<HomingMissile> missile = new HomingMissile();
-            missile->owner = this;
-            missile->setFactionId(getFactionId());
-            missile->target_id = target_id;
-            missile->setPosition(fireLocation);
-            missile->setRotation(getRotation());
-            missile->target_angle = target_angle;
-        }
-        break;
-    case MW_Nuke:
-        {
-            P<Nuke> missile = new Nuke();
-            missile->owner = this;
-            missile->setFactionId(getFactionId());
-            missile->target_id = target_id;
-            missile->setPosition(fireLocation);
-            missile->setRotation(getRotation());
-            missile->target_angle = target_angle;
-        }
-        break;
-    case MW_Mine:
-        {
-            P<Mine> missile = new Mine();
-            missile->owner = this;
-            missile->setFactionId(getFactionId());
-            missile->setPosition(fireLocation);
-            missile->setRotation(getRotation());
-            missile->eject();
-        }
-        break;
-    case MW_EMP:
-        {
-            P<EMPMissile> missile = new EMPMissile();
-            missile->owner = this;
-            missile->setFactionId(getFactionId());
-            missile->target_id = target_id;
-            missile->setPosition(fireLocation);
-            missile->setRotation(getRotation());
-            missile->target_angle = target_angle;
-        }
-        break;
-    default:
-        break;
-    }
-    weaponTube[tubeNr].state = WTS_Empty;
-    weaponTube[tubeNr].type_loaded = MW_None;
 }
 
 void SpaceShip::initializeJump(float distance)
@@ -880,13 +776,7 @@ void SpaceShip::setWeaponTubeCount(int amount)
     weapon_tubes = std::max(0, std::min(amount, max_weapon_tubes));
     for(int n=weapon_tubes; n<max_weapon_tubes; n++)
     {
-        if (weaponTube[n].state != WTS_Empty && weaponTube[n].type_loaded != MW_None)
-        {
-            weaponTube[n].state = WTS_Empty;
-            if (weapon_storage[weaponTube[n].type_loaded] < weapon_storage_max[weaponTube[n].type_loaded])
-                weapon_storage[weaponTube[n].type_loaded] ++;
-            weaponTube[n].type_loaded = MW_None;
-        }
+        weapon_tube[n].forceUnload();
     }
 }
 
@@ -899,9 +789,9 @@ EMissileWeapons SpaceShip::getWeaponTubeLoadType(int index)
 {
     if (index < 0 || index >= weapon_tubes)
         return MW_None;
-    if (weaponTube[index].state != WTS_Loaded)
+    if (!weapon_tube[index].isLoaded())
         return MW_None;
-    return weaponTube[index].type_loaded;
+    return weapon_tube[index].getLoadType();
 }
 
 std::unordered_map<string, string> SpaceShip::getGMInfo()
