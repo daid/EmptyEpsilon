@@ -177,10 +177,12 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
             info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
         }
 
-        if (probe && probe->owner_id == my_spaceship->getMultiplayerId() && (probe->getTarget() - probe->getPosition()) < probe->getRadius()){
+        if (probe && probe->owner_id == my_spaceship->getMultiplayerId() && probe->canBeTargeted())
+        {
             link_to_science_button->enable();
         }
-        else{
+        else
+        {
             link_to_science_button->disable();
         }
     }else{

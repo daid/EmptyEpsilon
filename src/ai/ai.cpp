@@ -1,5 +1,6 @@
 #include "spaceObjects/nebula.h"
 #include "spaceObjects/cpuShip.h"
+#include "spaceObjects/scanProbe.h"
 #include "ai/ai.h"
 #include "ai/aiFactory.h"
 
@@ -414,6 +415,8 @@ P<SpaceObject> ShipAI::findBestTarget(sf::Vector2f position, float radius)
         if (space_object->canHideInNebula() && Nebula::blockedByNebula(owner_position, space_object->getPosition()))
             continue;
         float score = targetScore(space_object);
+        if (score == std::numeric_limits<float>::min())
+            continue;
         if (!target || score > target_score)
         {
             target = space_object;
@@ -432,7 +435,15 @@ float ShipAI::targetScore(P<SpaceObject> target)
     float angle_difference = sf::angleDifference(owner->getRotation(), sf::vector2ToAngle(position_difference));
     float score = -distance - fabsf(angle_difference / owner->turn_speed * owner->impulse_max_speed) * 1.5f;
     if (P<SpaceStation>(target))
+    {
         score -= 5000;
+    }
+    if (P<ScanProbe>(target))
+    {
+        score -= 10000;
+        if (distance > 5000)
+            return std::numeric_limits<float>::min();
+    }
     if (distance < 5000 && has_missiles)
         score += 500;
 
@@ -454,6 +465,10 @@ bool ShipAI::betterTarget(P<SpaceObject> new_target, P<SpaceObject> current_targ
 {
     float new_score = targetScore(new_target);
     float current_score = targetScore(current_target);
+    if (new_score == std::numeric_limits<float>::min())
+        return false;
+    if (current_score == std::numeric_limits<float>::min())
+        return true;
     if (new_score > current_score * 1.5f)
         return true;
     if (new_score > current_score + 5000.0f)

@@ -28,6 +28,16 @@ void ScanProbe::update(float delta)
     }
 }
 
+bool ScanProbe::canBeTargeted()
+{
+    return (getTarget() - getPosition()) < getRadius();
+}
+
+void ScanProbe::takeDamage(float damage_amount, DamageInfo info)
+{
+    destroy();
+}
+
 void ScanProbe::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
     sf::Sprite object_sprite;
@@ -43,6 +53,6 @@ void ScanProbe::setOwner(P<SpaceObject> owner)
 {
     if (!owner) return;
 
-    setFaction("Independent");
+    setFactionId(owner->getFactionId());
     owner_id = owner->getMultiplayerId();
 }
