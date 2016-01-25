@@ -3,7 +3,7 @@
 
 #include "screenComponents/targetsContainer.h"
 #include "gui/gui2.h"
-#include "spaceObjects/scanprobe.h"
+#include "spaceObjects/scanProbe.h"
 
 class GuiRadarView;
 class GuiKeyValueDisplay;

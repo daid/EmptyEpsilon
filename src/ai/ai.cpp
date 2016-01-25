@@ -1,5 +1,6 @@
 #include "spaceObjects/nebula.h"
 #include "spaceObjects/cpuShip.h"
+#include "spaceObjects/scanProbe.h"
 #include "ai/ai.h"
 #include "ai/aiFactory.h"
 
@@ -85,9 +86,9 @@ void ShipAI::updateWeaponState(float delta)
     //If we have weapon tubes, load them with torpedoes
     for(int n=0; n<owner->weapon_tubes; n++)
     {
-        if (owner->weaponTube[n].state == WTS_Empty && owner->weapon_storage[MW_Homing] > 0)
-            owner->loadTube(n, MW_Homing);
-        if (owner->weaponTube[n].state == WTS_Loaded && owner->weaponTube[n].type_loaded == MW_Homing)
+        if (owner->weapon_tube[n].isEmpty() && owner->weapon_storage[MW_Homing] > 0)
+            owner->weapon_tube[n].startLoad(MW_Homing);
+        if (owner->weapon_tube[n].isLoaded() && owner->weapon_tube[n].getLoadType() == MW_Homing)
             has_missiles = true;
     }
 
@@ -292,11 +293,11 @@ void ShipAI::runAttack(P<SpaceObject> target)
     {
         for(int n=0; n<owner->weapon_tubes; n++)
         {
-            if (owner->weaponTube[n].state == WTS_Loaded && missile_fire_delay <= 0.0)
+            if (owner->weapon_tube[n].isLoaded() && missile_fire_delay <= 0.0)
             {
                 float target_angle = calculateFiringSolution(target);
                 if (target_angle != std::numeric_limits<float>::infinity())
-                    owner->fireTube(n, target_angle);
+                    owner->weapon_tube[n].fire(target_angle);
                 missile_fire_delay = owner->tube_load_time / owner->weapon_tubes / 2.0;
             }
         }
@@ -414,6 +415,8 @@ P<SpaceObject> ShipAI::findBestTarget(sf::Vector2f position, float radius)
         if (space_object->canHideInNebula() && Nebula::blockedByNebula(owner_position, space_object->getPosition()))
             continue;
         float score = targetScore(space_object);
+        if (score == std::numeric_limits<float>::min())
+            continue;
         if (!target || score > target_score)
         {
             target = space_object;
@@ -432,7 +435,15 @@ float ShipAI::targetScore(P<SpaceObject> target)
     float angle_difference = sf::angleDifference(owner->getRotation(), sf::vector2ToAngle(position_difference));
     float score = -distance - fabsf(angle_difference / owner->turn_speed * owner->impulse_max_speed) * 1.5f;
     if (P<SpaceStation>(target))
+    {
         score -= 5000;
+    }
+    if (P<ScanProbe>(target))
+    {
+        score -= 10000;
+        if (distance > 5000)
+            return std::numeric_limits<float>::min();
+    }
     if (distance < 5000 && has_missiles)
         score += 500;
 
@@ -454,6 +465,10 @@ bool ShipAI::betterTarget(P<SpaceObject> new_target, P<SpaceObject> current_targ
 {
     float new_score = targetScore(new_target);
     float current_score = targetScore(current_target);
+    if (new_score == std::numeric_limits<float>::min())
+        return false;
+    if (current_score == std::numeric_limits<float>::min())
+        return true;
     if (new_score > current_score * 1.5f)
         return true;
     if (new_score > current_score + 5000.0f)

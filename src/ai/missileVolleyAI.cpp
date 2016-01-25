@@ -56,7 +56,7 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
         bool all_loaded = true;
         for(int n=0; n<owner->weapon_tubes; n++)
         {
-            if (owner->weaponTube[n].state != WTS_Loaded)
+            if (owner->weapon_tube[n].isLoaded())
             {
                 all_loaded = false;
                 break;
@@ -71,11 +71,11 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
                 for(int n=0; n<owner->weapon_tubes; n++)
                 {
                     if (n == 0)
-                        owner->fireTube(n, target_angle);
+                        owner->weapon_tube[n].fire(target_angle);
                     else if ((n % 2) == 0)
-                        owner->fireTube(n, target_angle + 20.0f * (n / 2));
+                        owner->weapon_tube[n].fire(target_angle + 20.0f * (n / 2));
                     else
-                        owner->fireTube(n, target_angle - 20.0f * ((n + 1) / 2));
+                        owner->weapon_tube[n].fire(target_angle - 20.0f * ((n + 1) / 2));
                 }
             }
         }

@@ -134,7 +134,7 @@ public:
     int8_t weapon_tubes;
     float tube_load_time;
     float tube_recharge_factor;
-    WeaponTube weaponTube[max_weapon_tubes];
+    WeaponTube weapon_tube[max_weapon_tubes];
 
     /*!
      * [output] Frequency of beam weapons
@@ -179,6 +179,12 @@ public:
      * Check if the ship can be targeted.
      */
     virtual bool canBeTargeted() { return true; }
+    
+    /*!
+     * didAnOffensiveAction is called whenever this ship does something offesive towards an other object
+     * this can identify the ship as friend or foe.
+     */
+    void didAnOffensiveAction();
 
     /*!
      * Spaceship takes damage directly on hull.
@@ -207,20 +213,6 @@ public:
     virtual bool canBeDockedBy(P<SpaceObject> obj);
 
     virtual void collide(Collisionable* other, float force) override;
-
-    /*!
-     * Load a missile tube.
-     * \param tube_number Index of the tube to be loaded.
-     * \param type Weapon type that is loaded.
-     */
-    void loadTube(int tube_number, EMissileWeapons type);
-
-    /*!
-     * Fire a missile tube.
-     * \param tube_number Index of the tube to be fired.
-     * \param target_angle Angle in degrees to where the missile needs to be shot.
-     */
-    void fireTube(int tube_number, float target_angle);
 
     /*!
      * Start the jumping procedure.
@@ -280,6 +272,7 @@ public:
     void setSystemHealth(ESystem system, float health) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].health = std::min(1.0f, std::max(-1.0f, health)); }
     float getSystemHeat(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].heat_level; }
     void setSystemHeat(ESystem system, float heat) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].heat_level = std::min(1.0f, std::max(0.0f, heat)); }
+    float getSystemPower(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].power_level; }
 
     float getImpulseMaxSpeed() { return impulse_max_speed; }
     void setImpulseMaxSpeed(float speed) { impulse_max_speed = speed; }
@@ -330,6 +323,7 @@ public:
 
     void setWeaponTubeCount(int amount);
     int getWeaponTubeCount();
+    EMissileWeapons getWeaponTubeLoadType(int index);
 
     void setRadarTrace(string trace) { radar_trace = trace; }
 };
