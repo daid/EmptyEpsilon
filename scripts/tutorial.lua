@@ -7,17 +7,17 @@ function init()
     --Create the player ship
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Player Cruiser")
     tutorial:setPlayerShip(player)
-    tutorial:onNext(function() onNext() end)
     
     tutorial:showMessage([[Welcome to the EmptyEpsilon tutorial.
+Note that this tutorial is designed to give you a quick overview of the basic options for the game, but does not cover every single aspect.
 
 Press next to continue...]], true)
-    onNext = function()
+    tutorial:onNext(function()
         tutorial:switchViewToMainScreen()
         tutorial:showMessage([[What you see now is the main screen. Here you see your own ship and the world around you.
 There is no direction interaction available on this screen. But it allows for visual identification of objects.]], true)
         startSequence(radarTutorial)
-    end
+    end)
 end
 
 --[[ Assist function in creating tutorial sequences --]]
@@ -34,20 +34,19 @@ function runNextSequenceStep()
         tutorial:showMessage(data["message"], data["finish_check_function"] == nil)
         if data["finish_check_function"] == nil then
             update = nil
-            onNext = runNextSequenceStep
+            tutorial:onNext(runNextSequenceStep)
         else
             update = function(delta)
                 if data["finish_check_function"]() then
                     runNextSequenceStep()
                 end
             end
-            onNext = nil
+            tutorial:onNext(nil)
         end
     elseif data["run_function"] ~= nil then
         local has_next_step = current_index <= #current_sequence
         data["run_function"]()
         if has_next_step then
-            print("Run next after function")
             runNextSequenceStep()
         end
     end
@@ -344,7 +343,7 @@ addToSequence(engineeringTutorial, [[This concludes the basis of the engineering
 addToSequence(weaponsTutorial, function() startSequence(scienceTutorial) end)
 
 scienceTutorial = createSequence()
-addToSequence(scienceTutorial, function() 
+addToSequence(scienceTutorial, function()
     tutorial:switchViewToScreen(3)
     tutorial:setMessageToBottomPosition()
     resetPlayerShip()
@@ -367,3 +366,29 @@ Until you scan it, you do not know.]])
 addToSequence(scienceTutorial, [[Also note that you have less information on this ship then on the friendly ship. To get all the information, you need to do a deep scan of this ship.
 A deep scan takes more effort, and requires you to line up two frequency bands at the same time.
 Deep scan the enemy now.]], function() return prev_object:isFullyScanned() end)
+addToSequence(scienceTutorial, [[Excelent. Notice that this took you a lot more time then the simple scan.
+
+So plan carefully to only deep scan what is really needed. Or you could be running low on time.]])
+addToSequence(scienceTutorial, function() prev_object:destroy() end)
+addToSequence(scienceTutorial, function() prev_object2:destroy() end)
+addToSequence(scienceTutorial, function() tutorial:setMessageToTopPosition() end)
+addToSequence(scienceTutorial, [[Next to the long range radar, the science station also has access to the science database.
+
+In this database you can lookup details on ship types, as well as other information.]])
+addToSequence(scienceTutorial, [[Remember, your job is to supply information. Knowning which ships are where and what their status is, is of vital importance for your captain.
+
+Without your info, the crew is mostly blind.]])
+addToSequence(scienceTutorial, function() startSequence(relayTutorial) end)
+
+relayTutorial = createSequence()
+addToSequence(relayTutorial, function()
+    tutorial:switchViewToScreen(4)
+    tutorial:setMessageToBottomPosition()
+    resetPlayerShip()
+end)
+addToSequence(relayTutorial, [[Welcome to relay!
+
+It is your job to handle all communications with other ships as well as stations. Next to that, you have short range radars around any friendly ship or station, place waypoints. And can send out scanning probes.]])
+addToSequence(relayTutorial, [[Your first task is communications.
+
+You can target any station or ship and attempt to communicate with it. And at times, ships can even contact you.]])
