@@ -69,6 +69,29 @@ function addToSequence(sequence, data, data2)
     end
 end
 
+function resetPlayerShip()
+    player:setJumpDrive(false)
+    player:setWarpDrive(false)
+    player:setImpulseMaxSpeed(1)
+    player:setRotationMaxSpeed(1)
+    for _, system in ipairs({"reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield"}) do
+        player:setSystemHealth(system, 1.0)
+        player:setSystemHeat(system, 0.0)
+        player:commandSetSystemPower(system, 1.0)
+        player:commandSetSystemCoolant(system, 0.0)
+    end
+    player:setPosition(0, 0)
+    player:setRotation(0)
+    player:commandImpulse(0)
+    player:commandWarp(0)
+    player:commandTargetRotation(0)
+    player:commandSetShields(false)
+    player:setWeaponStorageMax("homing", 0)
+    player:setWeaponStorageMax("nuke", 0)
+    player:setWeaponStorageMax("mine", 0)
+    player:setWeaponStorageMax("emp", 0)
+end
+
 --[[ Radar explination tutorial ]]
 
 radarTutorial = createSequence()
@@ -110,6 +133,8 @@ addToSequence(radarTutorial, function() startSequence(helmsTutorial) end)
 helmsTutorial = createSequence()
 addToSequence(helmsTutorial, function()
     tutorial:switchViewToScreen(0)
+    tutorial:setMessageToTopPosition()
+    resetPlayerShip()
     player:setJumpDrive(false)
     player:setWarpDrive(false)
     player:setImpulseMaxSpeed(0);
@@ -166,17 +191,12 @@ addToSequence(helmsTutorial, function() startSequence(weaponsTutorial) end)
 weaponsTutorial = createSequence()
 addToSequence(weaponsTutorial, function() 
     tutorial:switchViewToScreen(1)
-    player:setPosition(0, 0)
+    tutorial:setMessageToTopPosition()
+    resetPlayerShip()
     player:setJumpDrive(false)
     player:setWarpDrive(false)
     player:setImpulseMaxSpeed(0)
     player:setRotationMaxSpeed(0)
-    player:setRotation(0)
-    player:commandTargetRotation(0)
-    player:setWeaponStorageMax("homing", 0)
-    player:setWeaponStorageMax("nuke", 0)
-    player:setWeaponStorageMax("mine", 0)
-    player:setWeaponStorageMax("emp", 0)
 end)
 
 addToSequence(weaponsTutorial, [[This is the weapons screen.
@@ -259,28 +279,8 @@ addToSequence(weaponsTutorial, function() startSequence(engineeringTutorial) end
 engineeringTutorial = createSequence()
 addToSequence(engineeringTutorial, function() 
     tutorial:switchViewToScreen(2)
-    player:setJumpDrive(true)
-    player:setWarpDrive(true)
-    player:setImpulseMaxSpeed(1)
-    player:setRotationMaxSpeed(1)
-    player:setSystemHealth("reactor", 1.0)
-    player:setSystemHealth("beamweapons", 1.0)
-    player:setSystemHealth("missilesystem", 1.0)
-    player:setSystemHealth("maneuver", 1.0)
-    player:setSystemHealth("impulse", 1.0)
-    player:setSystemHealth("warp", 1.0)
-    player:setSystemHealth("jumpdrive", 1.0)
-    player:setSystemHealth("frontshield", 1.0)
-    player:setSystemHealth("rearshield", 1.0)
-    player:setSystemHeat("reactor", 0.0)
-    player:setSystemHeat("beamweapons", 0.0)
-    player:setSystemHeat("missilesystem", 0.0)
-    player:setSystemHeat("maneuver", 0.0)
-    player:setSystemHeat("impulse", 0.0)
-    player:setSystemHeat("warp", 0.0)
-    player:setSystemHeat("jumpdrive", 0.0)
-    player:setSystemHeat("frontshield", 0.0)
-    player:setSystemHeat("rearshield", 0.0)
+    tutorial:setMessageToTopPosition()
+    resetPlayerShip()
 end)
 addToSequence(engineeringTutorial, [[Welcome to engineering.
 Engineering is split into two parts. The top part shows the interior of your ship, and has damage control teams walking around.
@@ -341,3 +341,29 @@ addToSequence(engineeringTutorial, [[Shields:
 
 More power in the shield system will increase the recharge rate of shields, and also decrease the amount of shield damage sustained.]])
 addToSequence(engineeringTutorial, [[This concludes the basis of the engineering station. Be sure to keep your ship running in top condition!]])
+addToSequence(weaponsTutorial, function() startSequence(scienceTutorial) end)
+
+scienceTutorial = createSequence()
+addToSequence(scienceTutorial, function() 
+    tutorial:switchViewToScreen(3)
+    tutorial:setMessageToBottomPosition()
+    resetPlayerShip()
+end)
+addToSequence(scienceTutorial, [[Welcome science officer.
+
+You are the eyes of the ship. Your job is to supply the captain with information. As you can see, you can see up to 30km with this radar.]])
+addToSequence(scienceTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(3000, -15000) end)
+addToSequence(scienceTutorial, function() prev_object2 = CpuShip():setFaction("Human Navy"):setTemplate("Cruiser"):setPosition(5000, -17000):orderIdle():setScanned(true) end)
+addToSequence(scienceTutorial, [[On this radar, you can select objects to get information about them.
+I've added a friendly ship, and a station for you to look at. Select them and notice how much information you have about these.
+Especially heading and distance are of great importance, as without these, the helms officer will be jumping in the dark.]])
+addToSequence(scienceTutorial, function() prev_object:destroy() end)
+addToSequence(scienceTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Cruiser"):setPosition(3000, -15000):orderIdle() end)
+addToSequence(scienceTutorial, [[I've replaced the friendly station with an unknown ship. As you select it, you will notice that you do not know anything about this ship.
+To learn about it, you need to scan it. Scanning requires you to match up frequency bands of your scanner with your target.
+Scan this ship now.]], function() return prev_object:isScanned() end)
+addToSequence(scienceTutorial, [[Good. Notice that you now know this ship is an enemy. But it could have been a friendly or neutral ship as well.
+Until you scan it, you do not know.]])
+addToSequence(scienceTutorial, [[Also note that you have less information on this ship then on the friendly ship. To get all the information, you need to do a deep scan of this ship.
+A deep scan takes more effort, and requires you to line up two frequency bands at the same time.
+Deep scan the enemy now.]], function() return prev_object:isFullyScanned() end)
