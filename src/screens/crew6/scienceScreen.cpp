@@ -151,6 +151,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     info_shields->setValue("-");
     info_shield_frequency->setFrequency(-1)->hide();
     info_beam_frequency->setFrequency(-1)->hide();
+    info_description->hide();
 
     for(int n=0; n<SYS_COUNT; n++)
         info_system[n]->setValue("-")->hide();
@@ -224,8 +225,6 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         if (description.size() > 0)
         {
             info_description->setText(description)->show();
-        }else{
-            info_description->hide();
         }
     }else if (targets.getWaypointIndex() >= 0)
     {
