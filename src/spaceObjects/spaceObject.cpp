@@ -36,6 +36,7 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Example: other:setFactionId(obj:getFactionId())
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getFactionId);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setCommsScript);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setCommsFunction);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isEnemy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isFriendly);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getCallSign);

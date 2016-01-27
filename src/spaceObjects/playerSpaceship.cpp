@@ -276,7 +276,7 @@ void PlayerSpaceship::update(float delta)
                             playerShip->comms_target_name = getCallSign();
                         }
                     }else{
-                        if (comms_script_interface.openCommChannel(this, comms_target, comms_target->comms_script_name))
+                        if (comms_script_interface.openCommChannel(this, comms_target))
                             comms_state = CS_ChannelOpen;
                         else
                             comms_state = CS_ChannelFailed;
@@ -810,7 +810,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                         comms_reply_message.clear();
                         if (comms_incomming_message == "")
                         {
-                            if (comms_script_interface.openCommChannel(this, comms_target, comms_target->comms_script_name))
+                            if (comms_script_interface.openCommChannel(this, comms_target))
                                 comms_state = CS_ChannelOpen;
                             else
                                 comms_state = CS_ChannelFailed;
