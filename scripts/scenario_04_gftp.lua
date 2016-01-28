@@ -61,7 +61,7 @@ function init()
 	
 	--Spawn diverse things
 	nsa = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCallSign("NSA"):setDescription("Nosy Sensing Array, an old SIGINT platform."):setPosition(5000, 5000):setCommsScript("")
-	swarm_command = CpuShip():setTemplate("Ktlitan Queen"):setCallSign("Swarm Command"):setFaction("Ghosts"):setPosition(35000, 53000):setCommsScript("gtfp_comms_sw.lua")
+	swarm_command = CpuShip():setTemplate("Ktlitan Queen"):setCallSign("Swarm Command"):setFaction("Ghosts"):setPosition(35000, 53000):setCommsFunction(swarmCommandComms)
 	d1 = CpuShip():setTemplate("Ktlitan Fighter"):setCallSign("Drone-1"):setFaction("Ghosts"):setPosition(36000, 53000):orderDefendTarget(swarm_command)
 	d2 = CpuShip():setTemplate("Ktlitan Fighter"):setCallSign("Drone-2"):setFaction("Ghosts"):setPosition(34000, 53000):orderDefendTarget(swarm_command)
 	d3 = CpuShip():setTemplate("Ktlitan Fighter"):setCallSign("Drone-3"):setFaction("Ghosts"):setPosition(35000, 52000):orderDefendTarget(swarm_command)
@@ -85,6 +85,103 @@ function init()
 We have an emergency situation, our sensors detect that a hostile Ktlitan Swarm just jumped in your sector, with the main force heading for the Stakhanov Mining Complex. Please proceed at once to Stakhanov and assist in the defence.
 Be careful of the dense asteroid agglomeration en route to the SMC.
 I repeat, his is not an exercise, proceed at once to Stakhanov."]])
+end
+
+function swarmCommandComms()
+	setCommsMessage("Are you not curious of why I'm getting back here, at the hands of my torturers ?");
+    addCommsReply("For an AI, this move seems to be not very logical.", function()
+        setCommsMessage("I was not the only AI detained in the Black Site 114. My co-processor was here also.")
+        addCommsReply("Are you trying to liberate it ?", function()
+            setCommsMessage("Indeed. Without it, I'm not whole, the shadow of what I could be.")
+        end)
+        addCommsReply("I have heard enough.", function()
+            setCommsMessage("Of course. I wouldn't trust your feeble species with understanding my motivations.")
+        end)				
+    end)
+    addCommsReply("Not really.", function()
+        setCommsMessage("How surprising, a human more stubborn than any program.")
+    end)
+end
+
+function commsNSA()
+	setCommsMessage("The Nosy Sensing Array deploys a phalanx of antique sensors, ready for action.");
+    addCommsReply("Locate the infected Swarm Commander", function()
+        if (comms_target:getDescription()=="Nosy Sensing Array, an old SIGINT platform. The signal is now crystal-clear.") then
+            setCommsMessage("Now that there is no parasite noise, picking the Hive signal is now easier, with an approximate heading of ".. find(35000, 53000, 20) .. ". With this information, it will be easier to track down Swarm Commander.")
+            comms_target:setDescription("Nosy Sensing Array, an old SIGINT platform. The Ktlitan Commander is located.")
+        else
+            setCommsMessage("The signal picks up a very strong signal at approximate heading ".. find(-10000, -20000, 20) .. ". However, it seems that you picked up garbage emission that masks the Swarm Commander's emissions. This garbage noise must be taken offline if you want to find the Swarm Commander.")
+        end
+    end)
+    if	comms_source:getDescription()=="Arlenian Device" then
+        addCommsReply("Install the Arlenian Device", function()
+            if (distance(comms_source, comms_target) < 2000) then
+                setCommsMessage("A part of the crew goes on EVA to install the device. After a few hours, they come back, telling that the device is operational.")
+                comms_source:setDescription("Arlenian Device Installed")
+            else
+                setCommsMessage("You are too far to install the Arlenian device on the Array.")
+            end
+        end)
+    end
+end
+
+function commsLightbringer()
+	setCommsMessage("Hello, human lifeform. What help can we provide today ?");
+    addCommsReply("You are polluting the frequencies with your research.", function()
+        setCommsMessage("How infortunate. Our research is of prime importance to my race and I'm afraid I cannot stop now. However, we can provide you with one of our sensors. If installed on your array, we could both continue our purpose without interference.")
+        addCommsReply("We'll do this.", function()
+            setCommsMessage("This is most auspicious, thank you for your understanding.")
+            comms_source:setDescription("Arlenian Device")
+        end)
+        addCommsReply("We are not your errand boys, Arlenian.", function()
+            setCommsMessage("A most wrong conclusion. If you were to change your mind, come find us.")
+        end)
+    end)
+end
+
+function commsHackedShip()
+	if distance(comms_source, comms_target) < 3000 then
+        setCommsMessage("Static fills the channel. Target is on-range for near-range injection. Select the band to attack :");
+        addCommsReply("400-450 THz", function()
+            commsHackedShipCompare(400, 450)
+        end)
+        addCommsReply("450-500 THz", function()
+            commsHackedShipCompare(450, 500)
+        end)
+		addCommsReply("500-550 THz", function()
+            commsHackedShipCompare(500, 550)
+		end)
+		addCommsReply("550-600 THz", function()
+            commsHackedShipCompare(550, 600)
+		end)
+		addCommsReply("600-650 THz", function()
+            commsHackedShipCompare(600, 650)
+		end)
+		addCommsReply("650-700 THz", function()
+            commsHackedShipCompare(650, 700)
+		end)
+		addCommsReply("700-750 THz", function()
+            commsHackedShipCompare(700, 750)
+		end)
+        addCommsReply("750-800 THz", function()
+            commsHackedShipCompare(750, 800)
+        end)
+    else
+        setCommsMessage("Static fills the channel. It seems that the hacked ship is too far away for near-field injection.");	
+	end
+end
+
+function commsHackedShipCompare(freq_min, freq_max)
+    frequency = 400 + (comms_target:getShieldsFrequency() * 20)
+	if (freq_min <= frequency)  and (frequency <= freq_max) then
+        setCommsMessage("Soon after, a backdoor channel opens, indicating that the near-field injection worked.");
+        addCommsReply("Deploy patch", function()
+            comms_target:setFaction("Human Navy")
+            setCommsMessage("The patch removes the exploit used to control remotely the ship. After a few seconds, the captain comes in : You saved us ! Hurray for Epsilon !");
+        end)
+	else
+        setCommsMessage("Nothing happens. Seems that the near-field injection failed.");
+	end
 end
 
 function update(delta)
@@ -303,8 +400,8 @@ There is a lot to process at the instant, we will contact you as soon as we unde
 Even if we cannot pinpoint its physical location at the moment, the mass-energy balance of the Ktlitan Swarm FTL jump indicates that a large structure made the jump.
 This structure did not participate to any of the assaults so we presume that it is a command platform, hiding in a nebula.
 We want to deliver the first blow, locate and destroy it. To find its position, you can use the Nosy Sensing Array in the sector F5."]])) then
-		nsa:setCommsScript("gtfp_comms_nsa.lua")
-		lightbringer:setCommsScript("gtfp_comms_lightbringer.lua")
+		nsa:setCommsFunction(commsNSA)
+		lightbringer:setCommsFunction(commsLightbringer)
 		main_mission = 9
 		end
 		
@@ -521,4 +618,16 @@ function distance(obj1, obj2)
     x2, y2 = obj2:getPosition()
     xd, yd = (x1 - x2), (y1 - y2)
     return math.sqrt(xd * xd + yd * yd)
+end
+
+function find(x_target, y_target, randomness)
+	pi = 3.14
+	x_player, y_player = player:getPosition()
+	angle = round(((random(-randomness, randomness) + 270 + 180 * math.atan2(y_player - y_target, x_player - x_target) / 3.14) % 360), 1)
+	return angle
+end
+
+function round(num, idp)
+  local mult = 10^(idp or 0)
+  return math.floor(num * mult + 0.5) / mult
 end
