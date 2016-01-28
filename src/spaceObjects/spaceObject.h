@@ -44,6 +44,8 @@ class SpaceObject : public Collisionable, public MultiplayerObject
     bool is_scanned;
 public:
     string comms_script_name;
+    ScriptSimpleCallback comms_script_callback;
+    
     int scanning_complexity_value;
     int scanning_depth_value;
     
@@ -94,7 +96,8 @@ public:
     bool takeReputationPoints(float amount);
     void removeReputationPoints(float amount);
     void addReputationPoints(float amount);
-    void setCommsScript(string script_name) { this->comms_script_name = script_name; }
+    void setCommsScript(string script_name) { this->comms_script_name = script_name; this->comms_script_callback.clear(); }
+    void setCommsFunction(ScriptSimpleCallback callback) { this->comms_script_name = ""; this->comms_script_callback = callback; }
     bool areEnemiesInRange(float range);
     PVector<SpaceObject> getObjectsInRange(float range);
     string getSectorName();

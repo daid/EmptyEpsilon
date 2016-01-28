@@ -90,7 +90,7 @@ GameMasterScreen::GameMasterScreen()
         for(GMScriptCallback& callback : gameGlobalInfo->gm_callback_functions)
         {
             if (n == index)
-                callback();
+                callback.callback.call();
             n++;
         }
     });

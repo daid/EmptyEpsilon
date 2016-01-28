@@ -3,10 +3,11 @@
 
 #include "engine.h"
 
-class GMScriptCallback : public ScriptCallback
+class GMScriptCallback
 {
 public:
     string name;
+    ScriptSimpleCallback callback;
     
     GMScriptCallback(string name);
 };
