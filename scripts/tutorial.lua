@@ -393,3 +393,20 @@ It is your job to handle all communications with other ships as well as stations
 addToSequence(relayTutorial, [[Your first task is communications.
 
 You can target any station or ship and attempt to communicate with it. And at times, ships can even contact you.]])
+addToSequence(relayTutorial, function()
+    prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(3000, -15000)
+    prev_object:setCommsFunction(function()
+        setCommsMessage("You succesfully opened communications. Congradulations.");
+        addCommsReply("Tell me more!", function()
+            setCommsMessage("Sorry, there not much more to tell you.")
+        end)
+        addCommsReply("Continue with the tutorial.", function()
+            setCommsMessage("The tutorial will continue when you close the communications with this station.")
+        end)
+    end)
+end)
+addToSequence(relayTutorial, [[Open communications with the station near you to continue the tutorial.]], function() return player:isCommsScriptOpen() end)
+addToSequence(relayTutorial, function() tutorial:setMessageToTopPosition() end)
+addToSequence(relayTutorial, [[Now finish your talk with the station.]], function() return not player:isCommsScriptOpen() end)
+
+addToSequence(relayTutorial, [[Bleh bleh bleh]], function() return false end)

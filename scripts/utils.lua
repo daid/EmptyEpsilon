@@ -3,8 +3,7 @@
 
 --[[ These functions should be as generic as possible, so they are highly usable. --]]
 
-
---Distance function. Can be used 3 ways:
+--Distance function. Can be used 4 ways:
 --distance(obj1, obj2)
 --distance(obj, x, y)
 --distance(x, y, obj)
