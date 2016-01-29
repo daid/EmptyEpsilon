@@ -62,18 +62,19 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
         else
             probe = game_client->getObjectById(my_spaceship->linked_object);
 
-
-        if(probe && !my_spaceship->science_link){
+        if(probe && !my_spaceship->science_link)
+        {
             sf::Vector2f probe_position = probe->getPosition();
             my_spaceship->science_link = true;
-            radar->setCenteringInhibition(true);
+            radar->setAutoCentering(false);
             radar->setViewPosition(probe_position);
             radar->setDistance(5000);
             radar->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
             probe_view_button->setText("Back to ship");
-        }else if(my_spaceship->science_link){
+        }else if(my_spaceship->science_link)
+        {
             my_spaceship->science_link = false;
-            radar->setCenteringInhibition(false);
+            radar->setAutoCentering(true);
             radar->setDistance(gameGlobalInfo->long_range_radar_range);
             probe_view_button->setText("Probe View");
             radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
@@ -156,16 +157,19 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     for(int n=0; n<SYS_COUNT; n++)
         info_system[n]->setValue("-")->hide();
 
-    if (probe){
+    if (probe)
+    {
         probe_view_button->enable();
     }
-    else{
+    else
+    {
         probe_view_button->disable();
 
         //if the probe is not valid and the view is still on the probe, return to normal view
-        if (my_spaceship->science_link && !observation_point){
+        if (my_spaceship->science_link && !observation_point)
+        {
             my_spaceship->science_link = false;
-            radar->setCenteringInhibition(false);
+            radar->setAutoCentering(true);
             radar->setDistance(gameGlobalInfo->long_range_radar_range);
             probe_view_button->setText("Probe View");
             radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
