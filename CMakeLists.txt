@@ -15,6 +15,10 @@ string(TIMESTAMP CPACK_PACKAGE_VERSION_PATCH "%d")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 
+# install resources, scripts, and packs to app bundle instead of system dir.
+if(APPLE)
+set(CMAKE_INSTALL_PREFIX "./")
+endif()
 
 ## ensure c++11 is used
 if(NOT ${CMAKE_VERSION} VERSION_LESS 3.1)
@@ -169,7 +173,7 @@ set(SOURCES
 	src/hardware/virtualOutputDevice.cpp
 )
 
-foreach(SP_SOURCE 
+foreach(SP_SOURCE
 	src/soundManager.cpp
 	src/clipboard.cpp
 	src/postProcessManager.cpp
@@ -290,7 +294,7 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework OpenGL -framework Foundation")
 endif()
 
-add_executable(${EXECUTABLE_NAME} ${SOURCES})
+add_executable(${EXECUTABLE_NAME} MACOSX_BUNDLE ${SOURCES})
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
 include_directories(${SERIOUS_PROTON_DIR}/src)
@@ -314,7 +318,11 @@ if(WIN32)
     include_directories(${DRMINGW_ROOT}/include/)
     target_link_libraries(${EXECUTABLE_NAME} exchndl)
   endif()
+elseif(APPLE)
+  set_target_properties(${EXECUTABLE_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/MacOSXBundleInfo.plist.in)
+  set_target_properties(${EXECUTABLE_NAME} PROPERTIES MACOSX_BUNDLE_ICON_FILE "${EXECUTABLE_NAME}.icns")
 endif()
+
 
 include(InstallRequiredSystemLibraries)
 
@@ -340,6 +348,12 @@ if(WIN32)
   install(DIRECTORY scripts DESTINATION .)
   install(DIRECTORY packs DESTINATION .)
   install(TARGETS ${EXECUTABLE_NAME} RUNTIME DESTINATION .)
+elseif(APPLE)
+  install(FILES logo.icns DESTINATION "EmptyEpsilon.app/Contents/Resources" RENAME "${EXECUTABLE_NAME}.icns")
+
+  install(DIRECTORY resources DESTINATION "EmptyEpsilon.app/Contents/Resources")
+  install(DIRECTORY scripts DESTINATION "EmptyEpsilon.app/Contents/Resources")
+  install(DIRECTORY packs DESTINATION "EmptyEpsilon.app/Contents/Resources")
 else()
   include(GNUInstallDirs)
   install(DIRECTORY resources DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/emptyepsilon/")
