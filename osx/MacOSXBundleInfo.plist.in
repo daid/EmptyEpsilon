@@ -33,6 +33,6 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>${MACOSX_BUNDLE_COPYRIGHT}</string>
 	<key>NSHighResolutionCapable</key>
-	<true/>
+	<false/>
 </dict>
 </plist>
