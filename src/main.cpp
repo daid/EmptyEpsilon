@@ -52,6 +52,8 @@ PostProcessor* warpPostProcessor;
 int main(int argc, char** argv)
 {
 #ifdef __APPLE__
+    // TODO: Find a proper solution.
+    // Seems to be non-NULL even outside of a proper bundle.
     CFBundleRef bundle = CFBundleGetMainBundle();
     if (bundle)
     {
@@ -88,11 +90,6 @@ int main(int argc, char** argv)
 
         free(exe_realpath);
         free(exe_dir);
-
-        printf("rp: %s\n", exe_realpath);
-        printf("ed: %s\n", exe_dir);
-        printf("bp: %s\n", bundle_path);
-
     }
 #endif
 
