@@ -124,17 +124,17 @@ public:
 
     PlayerSpaceship();
 
-    bool isCommsInactive() const { return comms_state == CS_Inactive; }
-    bool isCommsOpening() const { return comms_state == CS_OpeningChannel; }
-    bool isCommsBeingHailed() const { return comms_state == CS_BeingHailed || comms_state == CS_BeingHailedByGM; }
-    bool isCommsBeingHailedByGM() const { return comms_state == CS_BeingHailedByGM; }
-    bool isCommsFailed() const { return comms_state == CS_ChannelFailed; }
-    bool isCommsBroken() const { return comms_state == CS_ChannelBroken; }
-    bool isCommsChatOpen() const { return comms_state == CS_ChannelOpenPlayer || comms_state == CS_ChannelOpenGM; }
-    bool isCommsChatOpenToGM() const { return comms_state == CS_ChannelOpenGM; }
-    bool isCommsChatOpenToPlayer() const { return comms_state == CS_ChannelOpenPlayer; }
-    bool isCommsScriptOpen() const { return comms_state == CS_ChannelOpen; }
-    float getCommsOpeningDelay() const { return comms_open_delay; }
+    bool isCommsInactive() { return comms_state == CS_Inactive; }
+    bool isCommsOpening() { return comms_state == CS_OpeningChannel; }
+    bool isCommsBeingHailed() { return comms_state == CS_BeingHailed || comms_state == CS_BeingHailedByGM; }
+    bool isCommsBeingHailedByGM() { return comms_state == CS_BeingHailedByGM; }
+    bool isCommsFailed() { return comms_state == CS_ChannelFailed; }
+    bool isCommsBroken() { return comms_state == CS_ChannelBroken; }
+    bool isCommsChatOpen() { return comms_state == CS_ChannelOpenPlayer || comms_state == CS_ChannelOpenGM; }
+    bool isCommsChatOpenToGM() { return comms_state == CS_ChannelOpenGM; }
+    bool isCommsChatOpenToPlayer() { return comms_state == CS_ChannelOpenPlayer; }
+    bool isCommsScriptOpen() { return comms_state == CS_ChannelOpen; }
+    float getCommsOpeningDelay() { return comms_open_delay; }
     const std::vector<string>& getCommsReplyOptions() const { return comms_reply_message; }
     const string& getCommsTargetName() { return comms_target_name; }
     const string& getCommsIncommingMessage() { return comms_incomming_message; }
