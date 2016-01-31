@@ -22,6 +22,8 @@
 
 #ifdef __APPLE__
 #include <CoreFoundation/CoreFoundation.h>
+#include <mach-o/dyld.h>
+#include <libgen.h>
 #endif
 
 #ifdef __linux__
@@ -50,14 +52,44 @@ PostProcessor* warpPostProcessor;
 int main(int argc, char** argv)
 {
 #ifdef __APPLE__
+    // TODO: Find a proper solution.
+    // Seems to be non-NULL even outside of a proper bundle.
     CFBundleRef bundle = CFBundleGetMainBundle();
     if (bundle)
     {
-        CFURLRef url = CFBundleCopyResourcesDirectoryURL(bundle);
-        char path[PATH_MAX];
-        CFURLGetFileSystemRepresentation(url, true, (unsigned char*)path, PATH_MAX);
-        chdir(path);
-        CFRelease(url);
+        char bundle_path[PATH_MAX], exe_path[PATH_MAX];
+
+        CFURLRef bundleURL = CFBundleCopyBundleURL(bundle);
+        CFURLGetFileSystemRepresentation(bundleURL, true, (unsigned char*)bundle_path, PATH_MAX);
+        CFRelease(bundleURL);
+
+        uint32_t size = sizeof(exe_path);
+        if (_NSGetExecutablePath(exe_path, &size) != 0)
+        {
+          fprintf(stderr, "Failed to get executable path.\n");
+          return 1;
+        }
+
+        char *exe_realpath = realpath(exe_path, NULL);
+        char *exe_dir      = dirname(exe_realpath);
+
+        if (strcmp(exe_dir, bundle_path))
+        {
+          char resources_path[PATH_MAX];
+
+          CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(bundle);
+          CFURLGetFileSystemRepresentation(resourcesURL, true, (unsigned char*)resources_path, PATH_MAX);
+          CFRelease(resourcesURL);
+
+          chdir(resources_path);
+        }
+        else
+        {
+          chdir(exe_dir);
+        }
+
+        free(exe_realpath);
+        free(exe_dir);
     }
 #endif
 
@@ -71,7 +103,7 @@ int main(int argc, char** argv)
         PreferencesManager::load(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
     else
         PreferencesManager::load("options.ini");
-    
+
     for(int n=1; n<argc; n++)
     {
         char* value = strchr(argv[n], '=');
@@ -79,7 +111,7 @@ int main(int argc, char** argv)
         *value++ = '\0';
         PreferencesManager::set(string(argv[n]).strip(), string(value).strip());
     }
-    
+
     new Engine();
 #ifdef RESOURCE_BASE_DIR
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/");
@@ -102,7 +134,7 @@ int main(int argc, char** argv)
     textureManager.setDefaultRepeated(true);
     textureManager.setAutoSprite(false);
     textureManager.getTexture("Tokka_WalkingMan.png", sf::Vector2i(6, 1)); //Setup the sprite mapping.
-    
+
     if (PreferencesManager::get("httpserver").toInt() != 0)
     {
         int port_nr = PreferencesManager::get("httpserver").toInt();
@@ -166,7 +198,7 @@ int main(int argc, char** argv)
             fclose(f);
         }
     }
-    
+
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
 
     if (PreferencesManager::get("disable_shaders").toInt())
@@ -182,7 +214,7 @@ int main(int argc, char** argv)
         simpleObjectShader = new sf::Shader();
         basicShader = new sf::Shader();
         billboardShader = new sf::Shader();
-        
+
         P<ResourceStream> vertexStream = getResourceStream("objectShader.vert");
         P<ResourceStream> fragmentStream = getResourceStream("objectShader.frag");
         objectShader->loadFromStream(**vertexStream, **fragmentStream);
@@ -201,22 +233,22 @@ int main(int argc, char** argv)
         P<ScriptObject> modelDataScript = new ScriptObject("model_data.lua");
         if (modelDataScript)
             modelDataScript->destroy();
-        
+
         P<ScriptObject> shipTemplatesScript = new ScriptObject("shipTemplates.lua");
         if (shipTemplatesScript)
             shipTemplatesScript->destroy();
-        
+
         P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");
         if (factionInfoScript)
             factionInfoScript->destroy();
-        
+
         fillDefaultDatabaseData();
-        
+
         P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
         if (scienceInfoScript)
             scienceInfoScript->destroy();
     }
-    
+
     P<HardwareController> hardware_controller = new HardwareController();
 #ifdef RESOURCE_BASE_DIR
     hardware_controller->loadConfiguration(RESOURCE_BASE_DIR "hardware.ini");
@@ -225,10 +257,10 @@ int main(int argc, char** argv)
         hardware_controller->loadConfiguration(string(getenv("HOME")) + "/.emptyepsilon/hardware.ini");
     else
         hardware_controller->loadConfiguration("hardware.ini");
-    
+
     returnToMainMenu();
     engine->runMainLoop();
-    
+
     P<WindowManager> windowManager = engine->getObject("windowManager");
     if (windowManager)
     {
@@ -249,9 +281,9 @@ int main(int argc, char** argv)
     }else{
         PreferencesManager::save("options.ini");
     }
-    
+
     delete engine;
-    
+
     return 0;
 }
 
