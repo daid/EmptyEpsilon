@@ -49,11 +49,11 @@ void FighterAI::runAttack(P<SpaceObject> target)
         {
             for(int n=0; n<owner->weapon_tubes; n++)
             {
-                if (owner->weaponTube[n].state == WTS_Loaded && missile_fire_delay <= 0.0)
+                if (owner->weapon_tube[n].isLoaded() && missile_fire_delay <= 0.0)
                 {
                     float target_angle = calculateFiringSolution(target);
                     if (target_angle != std::numeric_limits<float>::infinity())
-                        owner->fireTube(n, target_angle);
+                        owner->weapon_tube[n].fire(target_angle);
                     missile_fire_delay = owner->tube_load_time / owner->weapon_tubes / 2.0;
                 }
             }

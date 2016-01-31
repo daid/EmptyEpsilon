@@ -59,6 +59,20 @@ int GuiEntryList::entryCount()
     return entries.size();
 }
 
+string GuiEntryList::getEntryName(int index)
+{
+    if (index < 0 || index >= int(entries.size()))
+        return "";
+    return entries[index].name;
+}
+
+string GuiEntryList::getEntryValue(int index)
+{
+    if (index < 0 || index >= int(entries.size()))
+        return "";
+    return entries[index].value;
+}
+
 int GuiEntryList::getSelectionIndex()
 {
     return selection_index;

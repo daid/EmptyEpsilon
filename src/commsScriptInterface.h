@@ -11,14 +11,17 @@ class SpaceObject;
 class CommsScriptInterface : public sf::NonCopyable
 {
 public:
+    bool openCommChannel(P<PlayerSpaceship> ship, P<SpaceObject> target);
+    void commChannelMessage(int32_t message_id);
+    
+    void setCommsMessage(string message);
+    void addCommsReply(string message, ScriptSimpleCallback callback);
+private:
     bool has_message;
-    int reply_id;
+    std::vector<ScriptSimpleCallback> reply_callbacks;
     P<ScriptObject> scriptObject;
     P<PlayerSpaceship> ship;
     P<SpaceObject> target;
-
-    bool openCommChannel(P<PlayerSpaceship> ship, P<SpaceObject> target, string script_name);
-    void commChannelMessage(int32_t message_id);
 };
 
 

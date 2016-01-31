@@ -12,6 +12,7 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
 , show_waypoints(false), show_target_projection(false), show_callsigns(false), show_heading_indicators(false), show_game_master_data(false)
 , range_indicator_step_size(0.0f), missile_target_angle(0.0f), style(Circular), fog_style(NoFogOfWar), mouse_down_func(nullptr), mouse_drag_func(nullptr), mouse_up_func(nullptr)
 {
+    auto_center_on_my_ship = true;
 }
 
 void GuiRadarView::onDraw(sf::RenderTarget& window)
@@ -36,7 +37,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     // Render texture to screen
 
     //Hacky, when not relay and we have a ship, center on it.
-    if (fog_style != FriendlysShortRangeFogOfWar && my_spaceship && !inhibit_centering)
+    if (my_spaceship && auto_center_on_my_ship)
         view_position = my_spaceship->getPosition();
 
     //Setup our textures for rendering

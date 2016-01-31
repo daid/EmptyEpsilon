@@ -16,6 +16,17 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setShieldsActive);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addToShipLog);
 
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsInactive);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsOpening);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsBeingHailed);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsBeingHailedByGM);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsFailed);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsBroken);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsChatOpen);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsChatOpenToGM);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsChatOpenToPlayer);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsScriptOpen);
+
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandTargetRotation);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandImpulse);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandWarp);
@@ -276,7 +287,7 @@ void PlayerSpaceship::update(float delta)
                             playerShip->comms_target_name = getCallSign();
                         }
                     }else{
-                        if (comms_script_interface.openCommChannel(this, comms_target, comms_target->comms_script_name))
+                        if (comms_script_interface.openCommChannel(this, comms_target))
                             comms_state = CS_ChannelOpen;
                         else
                             comms_state = CS_ChannelFailed;
@@ -651,32 +662,33 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         break;
     case CMD_LOAD_TUBE:
         {
-            int8_t tubeNr;
+            int8_t tube_nr;
             EMissileWeapons type;
-            packet >> tubeNr >> type;
+            packet >> tube_nr >> type;
 
-            loadTube(tubeNr, type);
+            if (tube_nr >= 0 && tube_nr < max_weapon_tubes)
+                weapon_tube[tube_nr].startLoad(type);
         }
         break;
     case CMD_UNLOAD_TUBE:
         {
-            int8_t tubeNr;
-            packet >> tubeNr;
+            int8_t tube_nr;
+            packet >> tube_nr;
 
-            if (tubeNr >= 0 && tubeNr < max_weapon_tubes && weaponTube[tubeNr].state == WTS_Loaded)
+            if (tube_nr >= 0 && tube_nr < max_weapon_tubes)
             {
-                weaponTube[tubeNr].state = WTS_Unloading;
-                weaponTube[tubeNr].delay = tube_load_time;
+                weapon_tube[tube_nr].startUnload();
             }
         }
         break;
     case CMD_FIRE_TUBE:
         {
-            int8_t tubeNr;
+            int8_t tube_nr;
             float missile_target_angle;
-            packet >> tubeNr >> missile_target_angle;
+            packet >> tube_nr >> missile_target_angle;
 
-            fireTube(tubeNr, missile_target_angle);
+            if (tube_nr >= 0 && tube_nr < max_weapon_tubes)
+                weapon_tube[tube_nr].fire(missile_target_angle);
         }
         break;
     case CMD_SET_SHIELDS:
@@ -809,7 +821,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                         comms_reply_message.clear();
                         if (comms_incomming_message == "")
                         {
-                            if (comms_script_interface.openCommChannel(this, comms_target, comms_target->comms_script_name))
+                            if (comms_script_interface.openCommChannel(this, comms_target))
                                 comms_state = CS_ChannelOpen;
                             else
                                 comms_state = CS_ChannelFailed;

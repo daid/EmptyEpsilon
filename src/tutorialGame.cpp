@@ -27,7 +27,7 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(TutorialGame)
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, showMessage);
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, setMessageToTopPosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, setMessageToBottomPosition);
-    REGISTER_SCRIPT_CLASS_CALLBACK(TutorialGame, onNext);
+    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, onNext);
 }
 
 TutorialGame::TutorialGame()
@@ -70,7 +70,7 @@ void TutorialGame::createScreens()
     text = new GuiScrollText(frame, "", "");
     text->setTextSize(20)->setPosition(20, 20, ATopLeft)->setSize(900 - 40, 200 - 40);
     next_button = new GuiButton(frame, "", "Next", [this]() {
-        onNext();
+        _onNext.call();
     });
     next_button->setTextSize(30)->setPosition(-20, -20, ABottomRight)->setSize(300, 30);
     

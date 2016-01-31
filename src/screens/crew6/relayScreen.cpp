@@ -13,6 +13,7 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     targets.setAllowWaypointSelection();
     radar = new GuiRadarView(this, "RELAY_RADAR", 50000.0f, &targets);
     radar->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
+    radar->setAutoCentering(false);
     radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     radar->setCallbacks(
         [this](sf::Vector2f position) {
@@ -177,10 +178,12 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
             info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
         }
 
-        if (probe && probe->owner_id == my_spaceship->getMultiplayerId() && (probe->getTarget() - probe->getPosition()) < probe->getRadius()){
+        if (probe && probe->owner_id == my_spaceship->getMultiplayerId() && probe->canBeTargeted())
+        {
             link_to_science_button->enable();
         }
-        else{
+        else
+        {
             link_to_science_button->disable();
         }
     }else{

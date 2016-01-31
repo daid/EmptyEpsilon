@@ -16,7 +16,9 @@ public:
 
     virtual void update(float delta);
 
-    virtual bool canBeTargeted() { return true; }
+    virtual bool canBeTargeted();
+    
+    virtual void takeDamage(float damage_amount, DamageInfo info);
 
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
 

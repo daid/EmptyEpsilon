@@ -33,6 +33,8 @@ public:
     int indexByValue(string value);
     void removeEntry(int index);
     int entryCount();
+    string getEntryName(int index);
+    string getEntryValue(int index);
     
     int getSelectionIndex();
     GuiEntryList* setSelectionIndex(int index);

@@ -80,12 +80,12 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     
     script_comms_options = new GuiListbox(script_comms_box, "SCRIPT_COMMS_LIST", [this](int index, string value) {
         script_comms_options->setOptions({});
-        //TOFIX: my_spaceship->comms_reply_message.clear();
         my_spaceship->commandSendComm(index);
     });
     script_comms_options->setPosition(20, -70, ABottomLeft)->setSize(700, 400);
     
     (new GuiButton(script_comms_box, "CLOSE_BUTTON", "Close", [this]() {
+        script_comms_options->setOptions({});
         if (my_spaceship)
             my_spaceship->commandCloseTextComm();
     }))->setTextSize(20)->setPosition(-20, -20, ABottomRight)->setSize(150, 50);
@@ -111,7 +111,10 @@ void GuiCommsOverlay::onDraw(sf::RenderTarget& window)
         script_comms_box->setVisible(my_spaceship->isCommsScriptOpen());
         script_comms_text->setText(my_spaceship->getCommsIncommingMessage());
         
-        if (script_comms_options->entryCount() != int(my_spaceship->getCommsReplyOptions().size()))
+        bool changed = script_comms_options->entryCount() != int(my_spaceship->getCommsReplyOptions().size());
+        if (!changed && my_spaceship->getCommsReplyOptions().size() > 0)
+            changed = my_spaceship->getCommsReplyOptions()[0] != script_comms_options->getEntryName(0);
+        if (changed)
         {
             script_comms_options->setOptions({});
             for(string message : my_spaceship->getCommsReplyOptions())

@@ -19,7 +19,7 @@ class TutorialGame : public EpsilonServer, public GuiCanvas
     GuiScrollText* text;
     GuiButton* next_button;
 public:
-    ScriptCallback onNext;
+    ScriptSimpleCallback _onNext;
     
     TutorialGame();
     
@@ -35,6 +35,8 @@ public:
     void switchViewToScreen(int n);
     void setMessageToTopPosition();
     void setMessageToBottomPosition();
+    
+    void onNext(ScriptSimpleCallback callback) { _onNext = callback; }
 private:
     void hideAllScreens();
     void createScreens();

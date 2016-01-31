@@ -23,3 +23,7 @@
 # Code::Blocks runtime files
 *.depend
 *.layout
+
+# OS temp files
+thumbs.db
+.DS_Store
