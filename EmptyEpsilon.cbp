@@ -167,12 +167,17 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-std=c++11" />
 			<Add option="-Wall" />
+			<Add option="-std=c++11" />
 			<Add option="-DENABLE_CRASH_LOGGER" />
 			<Add directory="../SeriousProton/src" />
 			<Add directory="src" />
+			<Add directory="../libintl/include" />
 		</Compiler>
+		<Linker>
+			<Add library="libintl" />
+			<Add directory="../libintl/lib" />
+		</Linker>
 		<Unit filename="../SeriousProton/src/Box2D/Box2D.h" />
 		<Unit filename="../SeriousProton/src/Box2D/Collision/Shapes/b2ChainShape.cpp" />
 		<Unit filename="../SeriousProton/src/Box2D/Collision/Shapes/b2ChainShape.h" />
@@ -532,6 +537,8 @@
 		<Unit filename="src/hardware/virtualOutputDevice.h" />
 		<Unit filename="src/httpScriptAccess.cpp" />
 		<Unit filename="src/httpScriptAccess.h" />
+		<Unit filename="src/language.cpp" />
+		<Unit filename="src/language.h" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/main.h" />
 		<Unit filename="src/menus/autoConnectScreen.cpp" />

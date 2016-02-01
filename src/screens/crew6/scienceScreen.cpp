@@ -1,3 +1,5 @@
+#include <libintl.h>
+
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "scienceScreen.h"
@@ -33,20 +35,20 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     sidebar->setPosition(-20, 50, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiScanTargetButton(sidebar, "SCAN_BUTTON", &targets))->setSize(GuiElement::GuiSizeMax, 50);
 
-    info_callsign = new GuiKeyValueDisplay(sidebar, "SCIENCE_CALLSIGN", 0.4, "Callsign", "");
+    info_callsign = new GuiKeyValueDisplay(sidebar, "SCIENCE_CALLSIGN", 0.4, gettext("Callsign"), "");
     info_callsign->setSize(GuiElement::GuiSizeMax, 30);
-    info_distance = new GuiKeyValueDisplay(sidebar, "SCIENCE_DISTANCE", 0.4, "Distance", "");
+    info_distance = new GuiKeyValueDisplay(sidebar, "SCIENCE_DISTANCE", 0.4, gettext("Distance"), "");
     info_distance->setSize(GuiElement::GuiSizeMax, 30);
-    info_heading = new GuiKeyValueDisplay(sidebar, "SCIENCE_DISTANCE", 0.4, "Heading", "");
+    info_heading = new GuiKeyValueDisplay(sidebar, "SCIENCE_DISTANCE", 0.4, gettext("Heading"), "");
     info_heading->setSize(GuiElement::GuiSizeMax, 30);
-    info_relspeed = new GuiKeyValueDisplay(sidebar, "SCIENCE_REL_SPEED", 0.4, "Rel.Speed", "");
+    info_relspeed = new GuiKeyValueDisplay(sidebar, "SCIENCE_REL_SPEED", 0.4, gettext("Rel.Speed"), "");
     info_relspeed->setSize(GuiElement::GuiSizeMax, 30);
 
-    info_faction = new GuiKeyValueDisplay(sidebar, "SCIENCE_FACTION", 0.4, "Faction", "");
+    info_faction = new GuiKeyValueDisplay(sidebar, "SCIENCE_FACTION", 0.4, gettext("Faction"), "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
-    info_type = new GuiKeyValueDisplay(sidebar, "SCIENCE_TYPE", 0.4, "Type", "");
+    info_type = new GuiKeyValueDisplay(sidebar, "SCIENCE_TYPE", 0.4, gettext("Type"), "");
     info_type->setSize(GuiElement::GuiSizeMax, 30);
-    info_shields = new GuiKeyValueDisplay(sidebar, "SCIENCE_SHIELDS", 0.4, "Shields", "");
+    info_shields = new GuiKeyValueDisplay(sidebar, "SCIENCE_SHIELDS", 0.4, gettext("Shields"), "");
     info_shields->setSize(GuiElement::GuiSizeMax, 30);
 
     info_shield_frequency = new GuiFrequencyCurve(sidebar, "SCIENCE_SHIELD_FREQUENCY", false, true);
@@ -54,7 +56,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     info_beam_frequency = new GuiFrequencyCurve(sidebar, "SCIENCE_SHIELD_FREQUENCY", true, false);
     info_beam_frequency->setSize(GuiElement::GuiSizeMax, 100);
 
-    probe_view_button = new GuiButton(radar_view, "LINK_TO_SCIENCE", "Probe View", [this](){
+    probe_view_button = new GuiButton(radar_view, "LINK_TO_SCIENCE", gettext("Probe View"), [this](){
         P<ScanProbe> probe;
 
         if (game_server)
@@ -70,13 +72,13 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
             radar->setViewPosition(probe_position);
             radar->setDistance(5000);
             radar->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
-            probe_view_button->setText("Back to ship");
+            probe_view_button->setText(gettext("Back to ship"));
         }else if(my_spaceship->science_link)
         {
             my_spaceship->science_link = false;
             radar->setAutoCentering(true);
             radar->setDistance(gameGlobalInfo->long_range_radar_range);
-            probe_view_button->setText("Probe View");
+            probe_view_button->setText(gettext("Probe View"));
             radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
         }
 
@@ -111,7 +113,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     (new GuiListbox(this, "VIEW_SELECTION", [this](int index, string value) {
         radar_view->setVisible(index == 0);
         database_view->setVisible(index == 1);
-    }))->setOptions({"Radar", "Database"})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(200, 100);
+    }))->setOptions({gettext("Radar"), gettext("Database")})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(200, 100);
 
     new GuiScanningDialog(this, "SCANNING_DIALOG");
 }
@@ -171,10 +173,9 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             my_spaceship->science_link = false;
             radar->setAutoCentering(true);
             radar->setDistance(gameGlobalInfo->long_range_radar_range);
-            probe_view_button->setText("Probe View");
+            probe_view_button->setText(gettext("Probe View"));
             radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
         }
-
     }
 
     if (targets.get())

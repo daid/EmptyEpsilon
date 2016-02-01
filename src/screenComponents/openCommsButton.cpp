@@ -1,8 +1,10 @@
+#include <libintl.h>
+
 #include "playerInfo.h"
 #include "openCommsButton.h"
 
 GuiOpenCommsButton::GuiOpenCommsButton(GuiContainer* owner, string id, TargetsContainer* targets)
-: GuiButton(owner, id, "Open comms", [this]() {
+: GuiButton(owner, id, gettext("Open comms"), [this]() {
     if (my_spaceship && this->targets->get())
         my_spaceship->commandOpenTextComm(this->targets->get());
 }), targets(targets)

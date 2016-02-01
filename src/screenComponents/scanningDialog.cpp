@@ -1,3 +1,5 @@
+#include <libintl.h>
+
 #include "scanningDialog.h"
 #include "playerInfo.h"
 
@@ -9,19 +11,19 @@ GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
     scan_depth = 0;
 
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
+
     box = new GuiBox(this, id + "_BOX");
     box->fill()->setSize(500, 545)->setPosition(0, 0, ACenter);
-    
-    signal_label = new GuiLabel(box, id + "_LABEL", "Electric signature", 30);
+
+    signal_label = new GuiLabel(box, id + "_LABEL", gettext("Electric signature"), 30);
     signal_label->addBox()->setPosition(0, 20, ATopCenter)->setSize(450, 50);
-    
+
     signal_quality = new GuiSignalQualityIndicator(box, id + "_SIGNAL");
     signal_quality->setPosition(0, 80, ATopCenter)->setSize(450, 100);
-    
-    locked_label = new GuiLabel(signal_quality, id + "_LOCK_LABEL", "LOCKED", 50);
+
+    locked_label = new GuiLabel(signal_quality, id + "_LOCK_LABEL", gettext("LOCKED"), 50);
     locked_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
+
     for(int n=0; n<max_sliders; n++)
     {
         sliders[n] = new GuiSlider(box, id + "_SLIDER_" + string(n), 0.0, 1.0, 0.0, nullptr);
@@ -39,7 +41,7 @@ GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
 void GuiScanningDialog::onDraw(sf::RenderTarget& window)
 {
     updateSignal();
-    
+
     if (my_spaceship)
     {
         if (my_spaceship->scanning_delay > 0.0 && my_spaceship->scanning_complexity > 0)
@@ -50,7 +52,7 @@ void GuiScanningDialog::onDraw(sf::RenderTarget& window)
                 scan_depth = 0;
                 setupParameters();
             }
-            
+
             if (locked && engine->getElapsedTime() - lock_start_time > lock_delay)
             {
                 scan_depth += 1;
@@ -62,7 +64,7 @@ void GuiScanningDialog::onDraw(sf::RenderTarget& window)
                     setupParameters();
                 }
             }
-            
+
             if (locked && engine->getElapsedTime() - lock_start_time > lock_delay / 2.0f)
             {
                 locked_label->show();
@@ -79,7 +81,7 @@ void GuiScanningDialog::setupParameters()
 {
     if (!my_spaceship)
         return;
-    
+
     for(int n=0; n<max_sliders; n++)
     {
         if (n < my_spaceship->scanning_complexity)
@@ -97,22 +99,22 @@ void GuiScanningDialog::setupParameters()
             sliders[n]->setValue(random(0.0, 1.0));
     }
     updateSignal();
-    
+
     string label = "[" + string(scan_depth + 1) + "/" + string(my_spaceship->scanning_depth) + "] ";
     switch(irandom(0, 10))
     {
     default:
-    case 0: label += "Electric signature"; break;
-    case 1: label += "Biomass frequency"; break;
-    case 2: label += "Gravity well signature"; break;
-    case 3: label += "Radiation halftime"; break;
-    case 4: label += "Radio profile"; break;
-    case 5: label += "Ionic phase shift"; break;
-    case 6: label += "Infra-red color shift"; break;
-    case 7: label += "Doppler stability"; break;
-    case 8: label += "Raspberry jam prevention"; break;
-    case 9: label += "Infinity impropability"; break;
-    case 10: label += "Zerospace audio frequency"; break;
+    case 0: label += gettext("Electric signature"); break;
+    case 1: label += gettext("Biomass frequency"); break;
+    case 2: label += gettext("Gravity well signature"); break;
+    case 3: label += gettext("Radiation halftime"); break;
+    case 4: label += gettext("Radio profile"); break;
+    case 5: label += gettext("Ionic phase shift"); break;
+    case 6: label += gettext("Infra-red color shift"); break;
+    case 7: label += gettext("Doppler stability"); break;
+    case 8: label += gettext("Raspberry jam prevention"); break;
+    case 9: label += gettext("Infinity impropability"); break;
+    case 10: label += gettext("Zerospace audio frequency"); break;
     }
     signal_label->setText(label);
 }
@@ -151,7 +153,7 @@ void GuiScanningDialog::updateSignal()
     }else{
         locked = false;
     }
-    
+
     signal_quality->setNoiseError(noise);
     signal_quality->setPeriodError(period);
     signal_quality->setPhaseError(phase);

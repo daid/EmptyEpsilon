@@ -1,3 +1,5 @@
+#include <libintl.h>
+
 #include "main.h"
 #include "autoConnectScreen.h"
 #include "epsilonServer.h"
@@ -9,8 +11,8 @@ AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_m
 {
     scanner = new ServerScanner(VERSION_NUMBER);
     scanner->scanLocalNetwork();
-    
-    status_label = new GuiLabel(this, "STATUS", "Searching for server...", 50);
+
+    status_label = new GuiLabel(this, "STATUS", gettext("Searching for server..."), 50);
     status_label->setPosition(0, 300, ATopCenter)->setSize(0, 50);
 
     string position_name = "Main screen";
@@ -34,12 +36,12 @@ void AutoConnectScreen::update(float delta)
 
         if (serverList.size() > 0)
         {
-            status_label->setText("Found server " + serverList[0].name);
+            status_label->setText(gettext("Found server ") + serverList[0].name);
             connect_to_address = serverList[0].address;
             new GameClient(VERSION_NUMBER, serverList[0].address);
             scanner->destroy();
         }else{
-            status_label->setText("Searching for server...");
+            status_label->setText(gettext("Searching for server..."));
         }
     }else{
         switch(game_client->getStatus())
@@ -47,7 +49,7 @@ void AutoConnectScreen::update(float delta)
         case GameClient::ReadyToConnect:
         case GameClient::Connecting:
         case GameClient::Authenticating:
-            status_label->setText("Connecting: " + connect_to_address.toString());
+            status_label->setText(gettext("Connecting: ") + connect_to_address.toString());
             break;
         case GameClient::WaitingForPassword: //For now, just disconnect when we found a password protected server.
         case GameClient::Disconnected:
@@ -63,7 +65,7 @@ void AutoConnectScreen::update(float delta)
                         my_player_info = i;
                 if (my_player_info && gameGlobalInfo)
                 {
-                    status_label->setText("Waiting for ship...");
+                    status_label->setText(gettext("Waiting for ship..."));
                     if (!my_spaceship)
                     {
                         if (ship_index >= 0 && ship_index < GameGlobalInfo::max_player_ships)
@@ -83,7 +85,7 @@ void AutoConnectScreen::update(float delta)
                         }
                     }
                 }else{
-                    status_label->setText("Connected, waiting for game data...");
+                    status_label->setText(gettext("Connected, waiting for game data..."));
                 }
             }
             break;

@@ -1,3 +1,5 @@
+#include <libintl.h>
+
 #include "main.h"
 #include "epsilonServer.h"
 #include "menus/joinServerMenu.h"
@@ -9,14 +11,14 @@
 JoinServerScreen::JoinServerScreen(sf::IpAddress ip)
 : ip(ip)
 {
-    status_label = new GuiLabel(this, "STATUS", "Connecting...", 30);
+    status_label = new GuiLabel(this, "STATUS", gettext("Connecting..."), 30);
     status_label->setPosition(0, 300, ATopCenter)->setSize(0, 50);
-    (new GuiButton(this, "BTN_CANCEL", "Cancel", [this]() {
+    (new GuiButton(this, "BTN_CANCEL", gettext("Cancel"), [this]() {
         destroy();
         disconnectFromServer();
         new ServerBrowserMenu(ServerBrowserMenu::Local);
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
-    
+
     password_entry_box = new GuiBox(this, "PASSWORD_ENTRY_BOX");
     password_entry_box->setPosition(0, 350, ATopCenter)->setSize(600, 100);
     password_entry_box->hide();
@@ -27,7 +29,7 @@ JoinServerScreen::JoinServerScreen(sf::IpAddress ip)
         password_entry_box->hide();
         game_client->sendPassword(password_entry->getText());
     }))->setPosition(420, 0, ACenterLeft)->setSize(160, 50);
-    
+
     new GameClient(VERSION_NUMBER, ip);
 }
 
@@ -41,7 +43,7 @@ void JoinServerScreen::update(float delta)
         //If we are still trying to connect, do nothing.
         break;
     case GameClient::WaitingForPassword:
-        status_label->setText("Please enter the server password:");
+        status_label->setText(gettext("Please enter the server password:"));
         password_entry_box->show();
         break;
     case GameClient::Disconnected:

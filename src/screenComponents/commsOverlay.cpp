@@ -1,3 +1,5 @@
+#include <libintl.h>
+
 #include "playerInfo.h"
 #include "commsOverlay.h"
 
@@ -6,10 +8,10 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
 {
     opening_box = new GuiBox(owner, "COMMS_OPENING_BOX");
     opening_box->fill()->hide()->setSize(800, 100)->setPosition(0, -250, ABottomCenter);
-    (new GuiLabel(opening_box, "COMMS_OPENING_LABEL", "Opening communications...", 40))->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 0, ATopCenter);
+    (new GuiLabel(opening_box, "COMMS_OPENING_LABEL", gettext("Opening communications..."), 40))->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 0, ATopCenter);
     opening_progress = new GuiProgressbar(opening_box, "COMMS_OPENING_PROGRESS", PlayerSpaceship::comms_channel_open_time, 0.0, 0.0);
     opening_progress->setSize(500, 40)->setPosition(50, -10, ABottomLeft);
-    opening_cancel = new GuiButton(opening_box, "COMMS_OPENING_CANCEL", "Cancel", []()
+    opening_cancel = new GuiButton(opening_box, "COMMS_OPENING_CANCEL", gettext("Cancel"), []()
     {
         if (my_spaceship)
             my_spaceship->commandCloseTextComm();
@@ -20,32 +22,32 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     hailed_box->fill()->hide()->setSize(800, 140)->setPosition(0, -250, ABottomCenter);
     hailed_label = new GuiLabel(hailed_box, "COMMS_BEING_HAILED_BOX", "..", 40);
     hailed_label->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 20, ATopCenter);
-    (new GuiButton(hailed_box, "COMMS_BEING_HAILED_ANSWER", "Answer", []() {
+    (new GuiButton(hailed_box, "COMMS_BEING_HAILED_ANSWER", gettext("Answer"), []() {
         if (my_spaceship)
             my_spaceship->commandAnswerCommHail(true);
     }))->setSize(300, 50)->setPosition(20, -20, ABottomLeft);
 
-    (new GuiButton(hailed_box, "COMMS_BEING_HAILED_ANSWER", "Ignore", []() {
+    (new GuiButton(hailed_box, "COMMS_BEING_HAILED_ANSWER", gettext("Ignore"), []() {
         if (my_spaceship)
             my_spaceship->commandAnswerCommHail(false);
     }))->setSize(300, 50)->setPosition(-20, -20, ABottomRight);
-    
+
     no_response_box = new GuiBox(owner, "COMMS_OPENING_BOX");
     no_response_box->fill()->hide()->setSize(800, 70)->setPosition(0, -250, ABottomCenter);
-    (new GuiLabel(no_response_box, "COMMS_NO_REPONSE_LABEL", "No reply...", 40))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopLeft);
-    (new GuiButton(no_response_box, "COMMS_NO_REPLY_OK", "Ok", []() {
+    (new GuiLabel(no_response_box, "COMMS_NO_REPONSE_LABEL", gettext("No reply..."), 40))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopLeft);
+    (new GuiButton(no_response_box, "COMMS_NO_REPLY_OK", gettext("Ok"), []() {
         if (my_spaceship)
             my_spaceship->commandCloseTextComm();
     }))->setSize(150, 50)->setPosition(-20, -10, ABottomRight);
 
     broken_box = new GuiBox(owner, "COMMS_BROKEN_BOX");
     broken_box->fill()->hide()->setSize(800, 70)->setPosition(0, -250, ABottomCenter);
-    (new GuiLabel(broken_box, "COMMS_BROKEN_LABEL", "Communications where suddenly cut", 40))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopLeft);
-    (new GuiButton(broken_box, "COMMS_BROKEN_OK", "Ok", []() {
+    (new GuiLabel(broken_box, "COMMS_BROKEN_LABEL", gettext("Communications where suddenly cut"), 40))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopLeft);
+    (new GuiButton(broken_box, "COMMS_BROKEN_OK", gettext("Ok"), []() {
         if (my_spaceship)
             my_spaceship->commandCloseTextComm();
     }))->setSize(150, 50)->setPosition(-20, -10, ABottomRight);
-    
+
     chat_comms_box = new GuiBox(owner, "COMMS_CHAT_BOX");
     chat_comms_box->fill()->hide()->setSize(800, 600)->setPosition(0, -100, ABottomCenter);
 
@@ -56,17 +58,17 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
             my_spaceship->commandSendCommPlayer(chat_comms_message_entry->getText());
         chat_comms_message_entry->setText("");
     });
-    
+
     chat_comms_text = new GuiScrollText(chat_comms_box, "COMMS_CHAT_TEXT", "");
     chat_comms_text->enableAutoScrollDown()->setPosition(20, 30, ATopLeft)->setSize(760, 500);
-    
-    (new GuiButton(chat_comms_box, "SEND_BUTTON", "Send", [this]() {
+
+    (new GuiButton(chat_comms_box, "SEND_BUTTON", gettext("Send"), [this]() {
         if (my_spaceship)
             my_spaceship->commandSendCommPlayer(chat_comms_message_entry->getText());
         chat_comms_message_entry->setText("");
     }))->setPosition(-20, -20, ABottomRight)->setSize(120, 50);
 
-    (new GuiButton(chat_comms_box, "CLOSE_BUTTON", "Close", [this]() {
+    (new GuiButton(chat_comms_box, "CLOSE_BUTTON", gettext("Close"), [this]() {
         if (my_spaceship)
             my_spaceship->commandCloseTextComm();
     }))->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
@@ -77,14 +79,14 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
 
     script_comms_text = new GuiScrollText(script_comms_box, "COMMS_SCRIPT_TEXT", "");
     script_comms_text->setPosition(20, 30, ATopLeft)->setSize(760, 500);
-    
+
     script_comms_options = new GuiListbox(script_comms_box, "SCRIPT_COMMS_LIST", [this](int index, string value) {
         script_comms_options->setOptions({});
         my_spaceship->commandSendComm(index);
     });
     script_comms_options->setPosition(20, -70, ABottomLeft)->setSize(700, 400);
-    
-    (new GuiButton(script_comms_box, "CLOSE_BUTTON", "Close", [this]() {
+
+    (new GuiButton(script_comms_box, "CLOSE_BUTTON", gettext("Close"), [this]() {
         script_comms_options->setOptions({});
         if (my_spaceship)
             my_spaceship->commandCloseTextComm();
@@ -97,20 +99,20 @@ void GuiCommsOverlay::onDraw(sf::RenderTarget& window)
     {
         opening_box->setVisible(my_spaceship->isCommsOpening());
         opening_progress->setValue(my_spaceship->getCommsOpeningDelay());
-        
+
         hailed_box->setVisible(my_spaceship->isCommsBeingHailed());
-        hailed_label->setText("Hailed by " + my_spaceship->getCommsTargetName());
-        
+        hailed_label->setText(gettext("Hailed by ") + my_spaceship->getCommsTargetName());
+
         no_response_box->setVisible(my_spaceship->isCommsFailed());
 
         broken_box->setVisible(my_spaceship->isCommsBroken());
-        
+
         chat_comms_box->setVisible(my_spaceship->isCommsChatOpen());
         chat_comms_text->setText(my_spaceship->getCommsIncommingMessage());
-        
+
         script_comms_box->setVisible(my_spaceship->isCommsScriptOpen());
         script_comms_text->setText(my_spaceship->getCommsIncommingMessage());
-        
+
         bool changed = script_comms_options->entryCount() != int(my_spaceship->getCommsReplyOptions().size());
         if (!changed && my_spaceship->getCommsReplyOptions().size() > 0)
             changed = my_spaceship->getCommsReplyOptions()[0] != script_comms_options->getEntryName(0);

@@ -1,14 +1,17 @@
+#include <libintl.h>
+
 #include "mainScreenControls.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
+#include "language.h"
 
 GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
 : GuiAutoLayout(owner, "MAIN_SCREEN_CONTROLS", GuiAutoLayout::LayoutVerticalTopToBottom)
 {
     setSize(300, GuiElement::GuiSizeMax);
     setPosition(0, 0, ATopRight);
-    
-    open_button = new GuiToggleButton(this, "MAIN_SCREEN_CONTROLS_SHOW", "Main screen", [this](bool value)
+
+    open_button = new GuiToggleButton(this, "MAIN_SCREEN_CONTROLS_SHOW", gettext("Main screen"), [this](bool value)
     {
         for(GuiButton* button : buttons)
             button->setVisible(value);
@@ -19,8 +22,8 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     });
     open_button->setValue(false);
     open_button->setSize(GuiElement::GuiSizeMax, 50);
-    
-    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_FRONT_BUTTON", "Front", [this]()
+
+    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_FRONT_BUTTON", gettext("Front"), [this]()
     {
         if (my_spaceship)
         {
@@ -30,7 +33,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         for(GuiButton* button : buttons)
             button->setVisible(false);
     }));
-    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_BACK_BUTTON", "Back", [this]()
+    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_BACK_BUTTON", pgettext("Back of the ship", "Back"), [this]()
     {
         if (my_spaceship)
         {
@@ -40,7 +43,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         for(GuiButton* button : buttons)
             button->setVisible(false);
     }));
-    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_LEFT_BUTTON", "Left", [this]()
+    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_LEFT_BUTTON", gettext("Left"), [this]()
     {
         if (my_spaceship)
         {
@@ -50,7 +53,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         for(GuiButton* button : buttons)
             button->setVisible(false);
     }));
-    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_RIGHT_BUTTON", "Right", [this]()
+    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_RIGHT_BUTTON", gettext("Right"), [this]()
     {
         if (my_spaceship)
         {
@@ -60,7 +63,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         for(GuiButton* button : buttons)
             button->setVisible(false);
     }));
-    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_TACTICAL_BUTTON", "Tactical", [this]()
+    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_TACTICAL_BUTTON", gettext("Tactical"), [this]()
     {
         if (my_spaceship)
         {
@@ -71,7 +74,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
             button->setVisible(false);
     }));
     tactical_button = buttons.back();
-    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_LONG_RANGE_BUTTON", "LongRange", [this]()
+    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_LONG_RANGE_BUTTON", gettext("Long Range"), [this]()
     {
         if (my_spaceship)
         {
@@ -82,7 +85,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
             button->setVisible(false);
     }));
     long_range_button = buttons.back();
-    
+
     for(GuiButton* button : buttons)
         button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(false);
 }

@@ -1,3 +1,5 @@
+#include <libintl.h>
+
 #include "spaceship.h"
 #include "mesh.h"
 #include "shipTemplate.h"
@@ -230,7 +232,7 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
             float direction = beam_weapons[n].getDirection();
             float arc = beam_weapons[n].getArc();
             float range = beam_weapons[n].getRange();
-            
+
             sf::Vector2f beam_offset = sf::rotateVector(ship_template->model_data->getBeamPosition2D(n) * scale, getRotation());
             sf::VertexArray a(sf::LinesStrip, 3);
             a[0].color = color;
@@ -818,13 +820,13 @@ string getMissileWeaponName(EMissileWeapons missile)
     case MW_None:
         return "-";
     case MW_Homing:
-        return "Homing";
+        return gettext("Homing");
     case MW_Nuke:
-        return "Nuke";
+        return gettext("Nuke");
     case MW_Mine:
-        return "Mine";
+        return gettext("Mine");
     case MW_EMP:
-        return "EMP";
+        return gettext("EMP");
     default:
         return "UNK: " + string(int(missile));
     }

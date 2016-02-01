@@ -1,3 +1,5 @@
+#include <libintl.h>
+
 #include "playerInfo.h"
 #include "tacticalScreen.h"
 
@@ -37,22 +39,22 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
         }
     );
 
-    energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
+    energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, gettext("Energy"), "");
     energy_display->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
-    heading_display = new GuiKeyValueDisplay(this, "HEADING_DISPLAY", 0.45, "Heading", "");
+    heading_display = new GuiKeyValueDisplay(this, "HEADING_DISPLAY", 0.45, gettext("Heading"), "");
     heading_display->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
-    velocity_display = new GuiKeyValueDisplay(this, "VELOCITY_DISPLAY", 0.45, "Speed", "");
+    velocity_display = new GuiKeyValueDisplay(this, "VELOCITY_DISPLAY", 0.45, gettext("Speed"), "");
     velocity_display->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
-    shields_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, "Shields", "");
+    shields_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, gettext("Shields"), "");
     shields_display->setTextSize(20)->setPosition(20, 220, ATopLeft)->setSize(240, 40);
-    
+
     missile_aim = new GuiRotationDial(this, "MISSILE_AIM", -90, 360 - 90, 0, [this](float value){
         tube_controls->setMissileTargetAngle(value);
         radar->setMissileTargetAngle(value);
     });
     missile_aim->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     tube_controls = new GuiMissileTubeControls(this, "MISSILE_TUBES");
-    lock_aim = new GuiToggleButton(this, "LOCK_AIM", "Lock", nullptr);
+    lock_aim = new GuiToggleButton(this, "LOCK_AIM", gettext("Lock"), nullptr);
     lock_aim->setPosition(300, 50, ATopCenter)->setSize(130, 50);
     lock_aim->setValue(true);
 
@@ -76,13 +78,13 @@ void TacticalScreen::onDraw(sf::RenderTarget& window)
         heading_display->setValue(string(fmodf(my_spaceship->getRotation() + 360.0 + 360.0 - 270.0, 360.0), 1));
         float velocity = sf::length(my_spaceship->getVelocity()) / 1000 * 60;
         velocity_display->setValue(string(velocity, 1) + "km/min");
-        
+
         warp_controls->setVisible(my_spaceship->has_warp_drive);
         jump_controls->setVisible(my_spaceship->has_jump_drive);
 
         shields_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "% " + string(my_spaceship->getShieldPercentage(1)) + "%");
         targets.set(my_spaceship->getTarget());
-        
+
         if (lock_aim->getValue())
         {
             missile_aim->setValue(my_spaceship->getRotation());

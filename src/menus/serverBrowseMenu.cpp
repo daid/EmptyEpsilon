@@ -1,3 +1,5 @@
+#include <libintl.h>
+
 #include "main.h"
 #include "serverBrowseMenu.h"
 #include "joinServerMenu.h"
@@ -10,20 +12,20 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source)
     else
         scanner->scanMasterServer("http://daid.eu/ee/list.php");
 
-    (new GuiButton(this, "BACK", "Back", [this]() {
+    (new GuiButton(this, "BACK", gettext("Back"), [this]() {
         destroy();
         returnToMainMenu();
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
 
-    connect_button = new GuiButton(this, "CONNECT", "Connect", [this]() {
+    connect_button = new GuiButton(this, "CONNECT", gettext("Connect"), [this]() {
         new JoinServerScreen(sf::IpAddress(manual_ip->getText()));
         destroy();
     });
     connect_button->setPosition(-50, -50, ABottomRight)->setSize(300, 50);
-    
+
     manual_ip = new GuiTextEntry(this, "IP", "");
     manual_ip->setPosition(-50, -120, ABottomRight)->setSize(300, 50);
-    
+
     server_list = new GuiListbox(this, "SERVERS", [this](int index, string value) {
         manual_ip->setText(value);
     });

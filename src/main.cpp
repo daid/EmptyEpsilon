@@ -2,6 +2,8 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <libintl.h>
+
 #include "gui/mouseRenderer.h"
 #include "gui/debugRenderer.h"
 #include "menus/mainMenus.h"
@@ -17,6 +19,7 @@
 #include "httpScriptAccess.h"
 #include "preferenceManager.h"
 #include "networkRecorder.h"
+#include "language.h"
 
 #include "hardware/hardwareController.h"
 
@@ -104,6 +107,14 @@ int main(int argc, char** argv)
     else
         PreferencesManager::load("options.ini");
 
+    textdomain("emptyepsilon");
+    bindtextdomain("emptyepsilon", "./lang");
+
+    if (PreferencesManager::get("inhibit_locale", string("1")).toInt()) inhibit_locale = true;
+    else inhibit_locale = false;
+
+    if (inhibit_locale) textdomain("emptyepsilon_inhib");
+
     for(int n=1; n<argc; n++)
     {
         char* value = strchr(argv[n], '=');
@@ -172,6 +183,7 @@ int main(int argc, char** argv)
             if (fsaa < 2)
                 fsaa = 2;
         }
+
         P<WindowManager> window_manager = new WindowManager(width, height, fullscreen, warpPostProcessor, fsaa);
         window_manager->setAllowVirtualResize(true);
         engine->registerObject("windowManager", window_manager);
@@ -269,6 +281,7 @@ int main(int argc, char** argv)
     }
     PreferencesManager::set("music_volume", soundManager->getMusicVolume());
     PreferencesManager::set("disable_shaders", PostProcessor::isEnabled() ? 0 : 1);
+    PreferencesManager::set("inhibit_locale", inhibit_locale);
 
     if (getenv("HOME"))
     {

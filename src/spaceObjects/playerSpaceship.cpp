@@ -1,3 +1,5 @@
+#include <libintl.h>
+
 #include "playerSpaceship.h"
 #include "scanProbe.h"
 #include "repairCrew.h"
@@ -119,9 +121,9 @@ string alertLevelToString(EAlertLevel level)
 {
     switch(level)
     {
-    case AL_RedAlert: return "RED ALERT";
-    case AL_YellowAlert: return "YELLOW ALERT";
-    case AL_Normal: return "Normal";
+    case AL_RedAlert: return gettext("RED ALERT");
+    case AL_YellowAlert: return gettext("YELLOW ALERT");
+    case AL_Normal: return gettext("Normal");
     default:
         return "???";
     }

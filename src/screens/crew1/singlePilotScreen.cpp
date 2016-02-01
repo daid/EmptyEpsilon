@@ -1,3 +1,5 @@
+#include <libintl.h>
+
 #include "main.h"
 #include "playerInfo.h"
 #include "singlePilotScreen.h"
@@ -24,7 +26,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
 {
     viewport = new GuiViewport3D(this, "3D_VIEW");
     viewport->setPosition(1000, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
+
     left_panel = new GuiElement(this, "LEFT_PANEL");
     left_panel->setPosition(0, 0, ATopLeft)->setSize(1000, GuiElement::GuiSizeMax);
 
@@ -49,22 +51,22 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
         }
     );
 
-    energy_display = new GuiKeyValueDisplay(left_panel, "ENERGY_DISPLAY", 0.45, "Energy", "");
+    energy_display = new GuiKeyValueDisplay(left_panel, "ENERGY_DISPLAY", 0.45, gettext("Energy"), "");
     energy_display->setTextSize(20)->setPosition(-20, -140, ABottomRight)->setSize(240, 40);
-    heading_display = new GuiKeyValueDisplay(left_panel, "HEADING_DISPLAY", 0.45, "Heading", "");
+    heading_display = new GuiKeyValueDisplay(left_panel, "HEADING_DISPLAY", 0.45, gettext("Heading"), "");
     heading_display->setTextSize(20)->setPosition(-20, -100, ABottomRight)->setSize(240, 40);
-    velocity_display = new GuiKeyValueDisplay(left_panel, "VELOCITY_DISPLAY", 0.45, "Speed", "");
+    velocity_display = new GuiKeyValueDisplay(left_panel, "VELOCITY_DISPLAY", 0.45, gettext("Speed"), "");
     velocity_display->setTextSize(20)->setPosition(-20, -60, ABottomRight)->setSize(240, 40);
-    shields_display = new GuiKeyValueDisplay(left_panel, "SHIELDS_DISPLAY", 0.45, "Shields", "");
+    shields_display = new GuiKeyValueDisplay(left_panel, "SHIELDS_DISPLAY", 0.45, gettext("Shields"), "");
     shields_display->setTextSize(20)->setPosition(-20, -20, ABottomRight)->setSize(240, 40);
-    
+
     missile_aim = new GuiRotationDial(left_panel, "MISSILE_AIM", -90, 360 - 90, 0, [this](float value){
         tube_controls->setMissileTargetAngle(value);
         radar->setMissileTargetAngle(value);
     });
     missile_aim->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 700);
     tube_controls = new GuiMissileTubeControls(left_panel, "MISSILE_TUBES");
-    lock_aim = new GuiToggleButton(left_panel, "LOCK_AIM", "Lock", nullptr);
+    lock_aim = new GuiToggleButton(left_panel, "LOCK_AIM", gettext("Lock"), nullptr);
     lock_aim->setPosition(300, 130, ATopCenter)->setSize(130, 50);
     lock_aim->setValue(true);
 
@@ -92,13 +94,13 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
         heading_display->setValue(string(fmodf(my_spaceship->getRotation() + 360.0 + 360.0 - 270.0, 360.0), 1));
         float velocity = sf::length(my_spaceship->getVelocity()) / 1000 * 60;
         velocity_display->setValue(string(velocity, 1) + "km/min");
-        
+
         warp_controls->setVisible(my_spaceship->has_warp_drive);
         jump_controls->setVisible(my_spaceship->has_jump_drive);
 
         shields_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "% " + string(my_spaceship->getShieldPercentage(1)) + "%");
         targets.set(my_spaceship->getTarget());
-        
+
         if (lock_aim->getValue())
         {
             missile_aim->setValue(my_spaceship->getRotation());
@@ -107,7 +109,7 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
         }
     }
     GuiOverlay::onDraw(window);
-    
+
     if (viewport->getRect().width < viewport->getRect().height / 3.0f)
     {
         viewport->hide();

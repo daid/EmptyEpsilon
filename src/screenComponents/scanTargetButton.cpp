@@ -1,10 +1,12 @@
+#include <libintl.h>
+
 #include "playerInfo.h"
 #include "scanTargetButton.h"
 
 GuiScanTargetButton::GuiScanTargetButton(GuiContainer* owner, string id, TargetsContainer* targets)
 : GuiElement(owner, id), targets(targets)
 {
-    button = new GuiButton(this, id + "_BUTTON", "Scan", [this]() {
+    button = new GuiButton(this, id + "_BUTTON", gettext("Scan"), [this]() {
         if (my_spaceship && this->targets && this->targets->get())
             my_spaceship->commandScan(this->targets->get());
     });
@@ -12,7 +14,7 @@ GuiScanTargetButton::GuiScanTargetButton(GuiContainer* owner, string id, Targets
     progress = new GuiProgressbar(this, id + "_PROGRESS", 0, PlayerSpaceship::max_scanning_delay, 0.0);
     progress->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
-    
+
 void GuiScanTargetButton::onDraw(sf::RenderTarget& window)
 {
     if (!my_spaceship)
@@ -29,7 +31,7 @@ void GuiScanTargetButton::onDraw(sf::RenderTarget& window)
         P<SpaceObject> obj;
         if (targets)
             obj = targets->get();
-        
+
         if (obj && obj->canBeScanned())
             button->show();
         else
