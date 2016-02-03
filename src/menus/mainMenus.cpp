@@ -1,3 +1,5 @@
+#include <libintl.h>
+
 #include "engine.h"
 #include "mainMenus.h"
 #include "main.h"
@@ -17,8 +19,8 @@ MainMenu::MainMenu()
     (new GuiLabel(this, "TITLE_A", "Empty", 180))->setPosition(0, 100, ATopCenter)->setSize(0, 300);
     (new GuiLabel(this, "TITLE_B", "Epsilon", 200))->setPosition(0, 250, ATopCenter)->setSize(0, 300);
     (new GuiLabel(this, "VERSION", "Version: " + string(VERSION_NUMBER), 20))->setPosition(0, 30, ACenter)->setSize(0, 100);
-    
-    (new GuiButton(this, "START_SERVER", "Start server", [this]() {
+
+    (new GuiButton(this, "START_SERVER", gettext("Start server"), [this]() {
         new EpsilonServer();
         if (game_server)
         {
@@ -27,17 +29,17 @@ MainMenu::MainMenu()
         }
     }))->setPosition(sf::Vector2f(50, -230), ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "START_CLIENT", "Start client", [this]() {
+    (new GuiButton(this, "START_CLIENT", gettext("Start client"), [this]() {
         new ServerBrowserMenu(ServerBrowserMenu::Local);
         destroy();
     }))->setPosition(sf::Vector2f(50, -170), ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "OPEN_OPTIONS", "Options", [this]() {
+    (new GuiButton(this, "OPEN_OPTIONS", gettext("Options"), [this]() {
         new OptionsMenu();
         destroy();
     }))->setPosition(sf::Vector2f(50, -110), ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "QUIT", "Quit", [this]() {
+    (new GuiButton(this, "QUIT", gettext("Quit"), [this]() {
         engine->shutdown();
     }))->setPosition(sf::Vector2f(50, -50), ABottomLeft)->setSize(300, 50);
 
@@ -50,7 +52,7 @@ MainMenu::MainMenu()
 
     if (InputHandler::touch_screen)
     {
-        (new GuiButton(this, "TOUCH_CALIB", "Calibrate\nTouchscreen", [this]() {
+        (new GuiButton(this, "TOUCH_CALIB", gettext("Calibrate\nTouchscreen"), [this]() {
             destroy();
             new MouseCalibrator("");
         }))->setPosition(sf::Vector2f(-50, -50), ABottomRight)->setSize(300, 100);

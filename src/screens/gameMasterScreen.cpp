@@ -1,3 +1,5 @@
+#include <libintl.h>
+
 #include "main.h"
 #include "gameGlobalInfo.h"
 #include "gameMasterScreen.h"
@@ -19,14 +21,14 @@ GameMasterScreen::GameMasterScreen()
     );
     box_selection_overlay = new GuiOverlay(main_radar, "BOX_SELECTION", sf::Color(255, 255, 255, 32));
     box_selection_overlay->hide();
-    
-    (new GuiToggleButton(this, "PAUSE_BUTTON", "Pause", [this](bool value) {
+
+    (new GuiToggleButton(this, "PAUSE_BUTTON", gettext("Pause"), [this](bool value) {
         if (value)
             engine->setGameSpeed(1.0f);
         else
             engine->setGameSpeed(0.0f);
     }))->setPosition(20, 20, ATopLeft)->setSize(250, 50);
-    
+
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR", [this](int index, string value) {
         for(P<SpaceObject> obj : targets.getTargets())
         {
@@ -36,21 +38,21 @@ GameMasterScreen::GameMasterScreen()
     for(P<FactionInfo> info : factionInfo)
         faction_selector->addEntry(info->getName(), info->getName());
     faction_selector->setPosition(20, 70, ATopLeft)->setSize(250, 50);
-    
-    (new GuiButton(this, "GLOBAL_MESSAGE_BUTTON", "Global message", [this]() {
+
+    (new GuiButton(this, "GLOBAL_MESSAGE_BUTTON", gettext("Global message"), [this]() {
         global_message_entry->show();
     }))->setPosition(20, -20, ABottomLeft)->setSize(250, 50);
 
-    (new GuiButton(this, "CREATE_OBJECT_BUTTON", "Create...", [this]() {
+    (new GuiButton(this, "CREATE_OBJECT_BUTTON", gettext("Create..."), [this]() {
         object_creation_screen->show();
         cancel_create_button->show();
     }))->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
-    cancel_create_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
+    cancel_create_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", gettext("Cancel"), [this]() {
         cancel_create_button->hide();
     });
     cancel_create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
 
-    ship_retrofit_button = new GuiButton(this, "RETROFIT_SHIP", "Retrofit", [this]() {
+    ship_retrofit_button = new GuiButton(this, "RETROFIT_SHIP", gettext("Retrofit"), [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
         {
             if (P<SpaceShip>(obj))
@@ -61,7 +63,7 @@ GameMasterScreen::GameMasterScreen()
         }
     });
     ship_retrofit_button->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->hide();
-    ship_tweak_button = new GuiButton(this, "TWEAK_SHIP", "Tweak", [this]() {
+    ship_tweak_button = new GuiButton(this, "TWEAK_SHIP", gettext("Tweak"), [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
         {
             if (P<SpaceShip>(obj))
@@ -72,7 +74,7 @@ GameMasterScreen::GameMasterScreen()
         }
     });
     ship_tweak_button->setPosition(20, -170, ABottomLeft)->setSize(250, 50)->hide();
-    player_comms_hail = new GuiButton(this, "HAIL_PLAYER", "Hail ship", [this]() {
+    player_comms_hail = new GuiButton(this, "HAIL_PLAYER", gettext("Hail ship"), [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
             if (P<PlayerSpaceship>(obj))
                 hail_player_dialog->player = obj;
@@ -80,10 +82,10 @@ GameMasterScreen::GameMasterScreen()
             hail_player_dialog->show();
     });
     player_comms_hail->setPosition(20, -220, ABottomLeft)->setSize(250, 50)->hide();
-    
+
     info_layout = new GuiAutoLayout(this, "INFO_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     info_layout->setPosition(-20, 20, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
-    
+
     gm_script_options = new GuiListbox(this, "GM_SCRIPT_OPTIONS", [](int index, string value)
     {
         int n = 0;
@@ -99,27 +101,27 @@ GameMasterScreen::GameMasterScreen()
     {
         gm_script_options->addEntry(callback.name, callback.name);
     }
-    
+
     order_layout = new GuiAutoLayout(this, "ORDER_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     order_layout->setPosition(20, 130, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
 
-    (new GuiLabel(order_layout, "ORDERS_LABEL", "Orders:", 20))->addBox()->setSize(GuiElement::GuiSizeMax, 30);
-    (new GuiButton(order_layout, "ORDER_IDLE", "Idle", [this]() {
+    (new GuiLabel(order_layout, "ORDERS_LABEL", gettext("Orders:"), 20))->addBox()->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiButton(order_layout, "ORDER_IDLE", gettext("Idle"), [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderIdle();
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    (new GuiButton(order_layout, "ORDER_ROAMING", "Roaming", [this]() {
+    (new GuiButton(order_layout, "ORDER_ROAMING", gettext("Roaming"), [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderRoaming();
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    (new GuiButton(order_layout, "ORDER_STAND_GROUND", "Stand Ground", [this]() {
+    (new GuiButton(order_layout, "ORDER_STAND_GROUND", gettext("Stand Ground"), [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderStandGround();
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    (new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", "Defend location", [this]() {
+    (new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", gettext("Defend location"), [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderDefendLocation(obj->getPosition());
@@ -158,7 +160,7 @@ void GameMasterScreen::update(float delta)
         else
             main_radar->longRange();
     }
-    
+
     bool has_ship = false;
     bool has_cpu_ship = false;
     bool has_player_ship = false;
@@ -177,7 +179,7 @@ void GameMasterScreen::update(float delta)
     ship_tweak_button->setVisible(has_ship);
     order_layout->setVisible(has_cpu_ship);
     player_comms_hail->setVisible(has_player_ship);
-    
+
     std::unordered_map<string, string> selection_info;
     for(P<SpaceObject> obj : targets.getTargets())
     {
@@ -190,7 +192,7 @@ void GameMasterScreen::update(float delta)
             }
             else if (selection_info[i->first] != i->second)
             {
-                selection_info[i->first] = "*mixed*";
+                selection_info[i->first] = gettext("*mixed*");
             }
         }
     }
@@ -198,7 +200,7 @@ void GameMasterScreen::update(float delta)
     {
         selection_info["Position"] = string(targets.getTargets()[0]->getPosition().x, 0) + "," + string(targets.getTargets()[0]->getPosition().y, 0);
     }
-    
+
     unsigned int cnt = 0;
     for(std::unordered_map<string, string>::iterator i = selection_info.begin(); i != selection_info.end(); i++)
     {
@@ -234,9 +236,9 @@ void GameMasterScreen::onMouseDown(sf::Vector2f position)
             object_creation_screen->createObject(position);
         }else{
             click_and_drag_state = CD_BoxSelect;
-            
+
             float min_drag_distance = main_radar->getDistance() / 450 * 10;
-            
+
             for(P<SpaceObject> obj : targets.getTargets())
             {
                 if ((obj->getPosition() - position) < std::max(min_drag_distance, obj->getRadius()))
@@ -302,7 +304,7 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
                 P<CpuShip> cpu_ship = obj;
                 if (!cpu_ship)
                     continue;
-                
+
                 lower_bound.x = std::min(lower_bound.x, obj->getPosition().x);
                 lower_bound.y = std::min(lower_bound.y, obj->getPosition().y);
                 upper_bound.x = std::max(upper_bound.x, obj->getPosition().x);
@@ -338,8 +340,8 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
                 {
                     wormhole->setTargetPosition(position);
                 }
-                
-                
+
+
             }
         }
         break;
@@ -410,15 +412,15 @@ GuiGlobalMessageEntry::GuiGlobalMessageEntry(GuiContainer* owner)
 {
     GuiBox* box = new GuiBox(this, "FRAME");
     box->fill()->setPosition(0, 0, ACenter)->setSize(800, 150);
-    
+
     message_entry = new GuiTextEntry(box, "MESSAGE_ENTRY", "");
     message_entry->setPosition(0, 20, ATopCenter)->setSize(700, 50);
-    
-    (new GuiButton(box, "CLOSE_BUTTON", "Cancel", [this]() {
+
+    (new GuiButton(box, "CLOSE_BUTTON", gettext("Cancel"), [this]() {
         this->hide();
     }))->setPosition(20, -20, ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(box, "SEND_BUTTON", "Send", [this]() {
+    (new GuiButton(box, "SEND_BUTTON", gettext("Send"), [this]() {
         string message = message_entry->getText();
         if (message.length() > 0)
         {
@@ -445,7 +447,7 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
         faction_selector->addEntry(info->getName(), info->getName());
     faction_selector->setSelectionIndex(0);
     faction_selector->setPosition(20, 20, ATopLeft)->setSize(300, 50);
-    
+
     float y = 20;
     std::vector<string> template_names = ShipTemplate::getStationTemplateNameList();
     std::sort(template_names.begin(), template_names.end());
@@ -457,28 +459,28 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
         }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
         y += 30;
     }
-    
-    (new GuiButton(box, "CREATE_WARP_JAMMER", "Warp Jammer", [this]() {
+
+    (new GuiButton(box, "CREATE_WARP_JAMMER", gettext("Warp Jammer"), [this]() {
         create_script = "WarpJammer():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + ")";
         this->hide();
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
-    (new GuiButton(box, "CREATE_MINE", "Mine", [this]() {
+    (new GuiButton(box, "CREATE_MINE", gettext("Mine"), [this]() {
         create_script = "Mine():setFactionId(" + string(faction_selector->getSelectionIndex()) + ")";
         this->hide();
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
-    (new GuiButton(box, "CREATE_BLACKHOLE", "BlackHole", [this]() {
+    (new GuiButton(box, "CREATE_BLACKHOLE", gettext("Black Hole"), [this]() {
         create_script = "BlackHole()";
         this->hide();
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
-    (new GuiButton(box, "CREATE_NEBULA", "Nebula", [this]() {
+    (new GuiButton(box, "CREATE_NEBULA", gettext("Nebula"), [this]() {
         create_script = "Nebula()";
         this->hide();
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
-    (new GuiButton(box, "CREATE_WORMHOLE", "Worm Hole", [this]() {
+    (new GuiButton(box, "CREATE_WORMHOLE", gettext("Worm Hole"), [this]() {
     create_script = "WormHole()";
     this->hide();
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
@@ -496,8 +498,8 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
     {
         listbox->addEntry(template_name, template_name);
     }
-    
-    (new GuiButton(box, "CLOSE_BUTTON", "Cancel", [this, gm_screen]() {
+
+    (new GuiButton(box, "CLOSE_BUTTON", gettext("Cancel"), [this, gm_screen]() {
         create_script = "";
         gm_screen->cancel_create_button->hide();
         this->hide();
@@ -513,7 +515,7 @@ void GuiObjectCreationScreen::createObject(sf::Vector2f position)
 {
     if (create_script == "")
         return;
-    
+
     P<ScriptObject> so = new ScriptObject();
     so->runCode(create_script + ":setPosition("+string(position.x)+","+string(position.y)+")");
     so->destroy();
@@ -526,9 +528,9 @@ GuiHailPlayerShip::GuiHailPlayerShip(GameMasterScreen* owner)
     setSize(600, 150);
     fill();
 
-    caller_entry = new GuiTextEntry(this, "MESSAGE_ENTRY", "Main Command");
+    caller_entry = new GuiTextEntry(this, "MESSAGE_ENTRY", gettext("Main Command"));
     caller_entry->setPosition(0, 20, ATopCenter)->setSize(500, 50);
-    
+
     (new GuiButton(this, "CLOSE_BUTTON", "Cancel", [this]() {
         this->hide();
     }))->setPosition(20, -20, ABottomLeft)->setSize(250, 50);
@@ -558,7 +560,7 @@ GuiHailingPlayerShip::GuiHailingPlayerShip(GameMasterScreen* owner)
     setSize(600, 90);
     fill();
 
-    (new GuiLabel(this, "HAILING_LABEL", "Hailing ship...", 30))->setPosition(0, 0, ACenter)->setSize(500, 50);
+    (new GuiLabel(this, "HAILING_LABEL", gettext("Hailing ship..."), 30))->setPosition(0, 0, ACenter)->setSize(500, 50);
 }
 
 bool GuiHailingPlayerShip::onMouseDown(sf::Vector2f position)
@@ -573,7 +575,7 @@ void GuiHailingPlayerShip::onDraw(sf::RenderTarget& window)
         hide();
         return;
     }
-    
+
     if (player->isCommsBeingHailedByGM())
     {
         //Do nothing while hailing.
@@ -604,11 +606,11 @@ GuiPlayerChat::GuiPlayerChat(GameMasterScreen* owner)
         }
         message_entry->setText("");
     });
-    
+
     chat_text = new GuiScrollText(this, "CHAT_TEXT", "");
     chat_text->enableAutoScrollDown()->setPosition(20, 30, ATopLeft)->setSize(760, 500);
-    
-    (new GuiButton(this, "SEND_BUTTON", "Send", [this]() {
+
+    (new GuiButton(this, "SEND_BUTTON", gettext("Send"), [this]() {
         if (player)
         {
             player->addCommsIncommingMessage(message_entry->getText());
@@ -616,7 +618,7 @@ GuiPlayerChat::GuiPlayerChat(GameMasterScreen* owner)
         message_entry->setText("");
     }))->setPosition(-20, -20, ABottomRight)->setSize(120, 50);
 
-    (new GuiButton(this, "CLOSE_BUTTON", "Close", [this]() {
+    (new GuiButton(this, "CLOSE_BUTTON", gettext("Close"), [this]() {
         hide();
         if (player)
             player->closeComms();
@@ -636,7 +638,7 @@ void GuiPlayerChat::onDraw(sf::RenderTarget& window)
         return;
     }
     chat_text->setText(player->getCommsIncommingMessage());
-    
+
     GuiBox::onDraw(window);
 }
 
@@ -646,65 +648,65 @@ GuiShipRetrofit::GuiShipRetrofit(GuiContainer* owner)
     setPosition(0, -100, ABottomCenter);
     setSize(800, 600);
     fill();
-    
+
     GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     left_col->setPosition(20, 20, ATopLeft)->setSize(300, 600);
-    
+
     type_name = new GuiTextEntry(left_col, "TYPE_NAME", "???");
     type_name->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     type_name->callback([this](string text) {
         target->setTypeName(text);
     });
-    
+
     warp_selector = new GuiSelector(left_col, "", [this](int index, string value) {
         target->setWarpDrive(index != 0);
     });
-    warp_selector->setTextSize(20)->setOptions({"WarpDrive: No", "WarpDrive: Yes"})->setSize(GuiElement::GuiSizeMax, 30);
+    warp_selector->setTextSize(20)->setOptions({gettext("WarpDrive: No"), gettext("WarpDrive: Yes")})->setSize(GuiElement::GuiSizeMax, 30);
     jump_selector = new GuiSelector(left_col, "", [this](int index, string value) {
         target->setJumpDrive(index != 0);
     });
-    jump_selector->setTextSize(20)->setOptions({"JumpDrive: No", "JumpDrive: Yes"})->setSize(GuiElement::GuiSizeMax, 30);
-    
-    (new GuiLabel(left_col, "", "Impulse speed:", 30))->setSize(GuiElement::GuiSizeMax, 30);
+    jump_selector->setTextSize(20)->setOptions({gettext("JumpDrive: No"), gettext("JumpDrive: Yes")})->setSize(GuiElement::GuiSizeMax, 30);
+
+    (new GuiLabel(left_col, "", gettext("Impulse speed:"), 30))->setSize(GuiElement::GuiSizeMax, 30);
     impulse_speed_slider = new GuiSlider(left_col, "", 0.0, 250, 0.0, [this](float value) {
         target->impulse_max_speed = value;
     });
     impulse_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
-    
-    (new GuiLabel(left_col, "", "Turn speed:", 30))->setSize(GuiElement::GuiSizeMax, 30);
+
+    (new GuiLabel(left_col, "", gettext("Turn speed:"), 30))->setSize(GuiElement::GuiSizeMax, 30);
     turn_speed_slider = new GuiSlider(left_col, "", 0.0, 25, 0.0, [this](float value) {
         target->turn_speed = value;
     });
     turn_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
-    
-    (new GuiLabel(left_col, "", "Hull:", 30))->setSize(GuiElement::GuiSizeMax, 30);
+
+    (new GuiLabel(left_col, "", gettext("Hull:"), 30))->setSize(GuiElement::GuiSizeMax, 30);
     hull_slider = new GuiSlider(left_col, "", 0.0, 500, 0.0, [this](float value) {
         target->hull_max = value;
         target->hull_strength = std::min(target->hull_strength, target->hull_max);
     });
     hull_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
-    (new GuiLabel(left_col, "", "Front shield:", 30))->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(left_col, "", gettext("Front shield:"), 30))->setSize(GuiElement::GuiSizeMax, 30);
     front_shield_slider = new GuiSlider(left_col, "", 0.0, 500, 0.0, [this](float value) {
         target->shield_max[0] = value;
         target->shield_level[0] = std::min(target->shield_level[0], target->shield_max[0]);
     });
     front_shield_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
-    (new GuiLabel(left_col, "", "Rear shield:", 30))->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(left_col, "", gettext("Rear shield:"), 30))->setSize(GuiElement::GuiSizeMax, 30);
     rear_shield_slider = new GuiSlider(left_col, "", 0.0, 500, 0.0, [this](float value) {
         target->shield_max[1] = value;
         target->shield_level[1] = std::min(target->shield_level[1], target->shield_max[1]);
     });
     rear_shield_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
-    
+
     missile_tube_amount_selector = new GuiSelector(left_col, "", [this](int index, string value) {
         target->weapon_tubes = index;
     });
     for(int n=0; n<max_weapon_tubes; n++)
-        missile_tube_amount_selector->addEntry("Missile tubes: " + string(n), "");
+        missile_tube_amount_selector->addEntry(gettext("Missile tubes: ") + string(n), "");
     missile_tube_amount_selector->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    
+
     for(int n=0; n<MW_Count; n++)
     {
         missile_storage_amount_selector[n] = new GuiSelector(left_col, "", [this, n](int index, string value) {
@@ -717,7 +719,7 @@ GuiShipRetrofit::GuiShipRetrofit(GuiContainer* owner)
         missile_storage_amount_selector[n]->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     }
 
-    (new GuiButton(this, "CLOSE_BUTTON", "Close", [this]() {
+    (new GuiButton(this, "CLOSE_BUTTON", gettext("Close"), [this]() {
         hide();
     }))->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
 }
@@ -730,7 +732,7 @@ bool GuiShipRetrofit::onMouseDown(sf::Vector2f position)
 void GuiShipRetrofit::open(P<SpaceShip> target)
 {
     this->target = target;
-    
+
     type_name->setText(target->getTypeName());
     warp_selector->setSelectionIndex(target->has_warp_drive ? 1 : 0);
     jump_selector->setSelectionIndex(target->hasJumpDrive() ? 1 : 0);
@@ -747,7 +749,7 @@ void GuiShipRetrofit::open(P<SpaceShip> target)
     missile_tube_amount_selector->setSelectionIndex(target->weapon_tubes);
     for(int n=0; n<MW_Count; n++)
         missile_storage_amount_selector[n]->setSelectionIndex(target->weapon_storage_max[n]);
-    
+
     show();
 }
 
@@ -757,29 +759,29 @@ GuiShipTweak::GuiShipTweak(GuiContainer* owner)
     setPosition(0, -100, ABottomCenter);
     setSize(800, 600);
     fill();
-    
+
     GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     left_col->setPosition(20, 20, ATopLeft)->setSize(300, 600);
     GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     right_col->setPosition(-20, 20, ATopRight)->setSize(300, 600);
-    
+
     for(int n=0; n<SYS_COUNT; n++)
     {
         ESystem system = ESystem(n);
-        (new GuiLabel(left_col, "", getSystemName(system) + " health", 20))->setSize(GuiElement::GuiSizeMax, 30);
+        (new GuiLabel(left_col, "", getSystemName(system) + gettext(" health"), 20))->setSize(GuiElement::GuiSizeMax, 30);
         system_damage[n] = new GuiSlider(left_col, "", -1.0, 1.0, 0.0, [this, n](float value) {
             target->systems[n].health = value;
         });
         system_damage[n]->setSize(GuiElement::GuiSizeMax, 30);
 
-        (new GuiLabel(right_col, "", getSystemName(system) + " heat", 20))->setSize(GuiElement::GuiSizeMax, 30);
+        (new GuiLabel(right_col, "", getSystemName(system) + gettext(" heat"), 20))->setSize(GuiElement::GuiSizeMax, 30);
         system_heat[n] = new GuiSlider(right_col, "", 0.0, 1.0, 0.0, [this, n](float value) {
             target->systems[n].heat_level = value;
         });
         system_heat[n]->setSize(GuiElement::GuiSizeMax, 30);
     }
 
-    (new GuiButton(this, "CLOSE_BUTTON", "Close", [this]() {
+    (new GuiButton(this, "CLOSE_BUTTON", gettext("Close"), [this]() {
         hide();
     }))->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
 }

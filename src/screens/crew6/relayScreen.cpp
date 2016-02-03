@@ -1,3 +1,5 @@
+#include <libintl.h>
+
 #include "relayScreen.h"
 #include "playerInfo.h"
 #include "spaceObjects/scanProbe.h"
@@ -50,10 +52,10 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     GuiAutoLayout* sidebar = new GuiAutoLayout(this, "SIDE_BAR", GuiAutoLayout::LayoutVerticalTopToBottom);
     sidebar->setPosition(-20, 150, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 
-    info_callsign = new GuiKeyValueDisplay(sidebar, "SCIENCE_CALLSIGN", 0.4, "Callsign", "");
+    info_callsign = new GuiKeyValueDisplay(sidebar, "SCIENCE_CALLSIGN", 0.4, gettext("Callsign"), "");
     info_callsign->setSize(GuiElement::GuiSizeMax, 30);
 
-    info_faction = new GuiKeyValueDisplay(sidebar, "SCIENCE_FACTION", 0.4, "Faction", "");
+    info_faction = new GuiKeyValueDisplay(sidebar, "SCIENCE_FACTION", 0.4, gettext("Faction"), "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiSelector(this, "ZOOM_SELECT", [this](int index, string value) {
@@ -64,33 +66,33 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     option_buttons = new GuiAutoLayout(this, "BUTTONS", GuiAutoLayout::LayoutVerticalTopToBottom);
     option_buttons->setPosition(20, 50, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", &targets))->setSize(GuiElement::GuiSizeMax, 50);
-    link_to_science_button = new GuiButton(option_buttons, "LINK_TO_SCIENCE", "Link to Science", [this](){
+    link_to_science_button = new GuiButton(option_buttons, "LINK_TO_SCIENCE", gettext("Link to Science"), [this](){
         my_spaceship->commandSetScienceLink(targets.get()->getMultiplayerId());
     });
     link_to_science_button->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", "Place Waypoint", [this]() {
+    (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", gettext("Place Waypoint"), [this]() {
         mode = WaypointPlacement;
         option_buttons->hide();
     }))->setSize(GuiElement::GuiSizeMax, 50);
-    delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", "Delete Waypoint", [this]() {
+    delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", gettext("Delete Waypoint"), [this]() {
         if (my_spaceship && targets.getWaypointIndex() >= 0)
         {
             my_spaceship->commandRemoveWaypoint(targets.getWaypointIndex());
         }
     });
     delete_waypoint_button->setSize(GuiElement::GuiSizeMax, 50);
-    launch_probe_button = new GuiButton(option_buttons, "LAUNCH_PROBE_BUTTON", "Launch Probe", [this]() {
+    launch_probe_button = new GuiButton(option_buttons, "LAUNCH_PROBE_BUTTON", gettext("Launch Probe"), [this]() {
         mode = LaunchProbe;
         option_buttons->hide();
     });
     launch_probe_button->setSize(GuiElement::GuiSizeMax, 50);
 
-    info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.7, "Reputation:", "");
+    info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.7, gettext("Reputation:"), "");
     info_reputation->setSize(GuiElement::GuiSizeMax, 40);
 
     GuiAutoLayout* layout = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutVerticalBottomToTop);
     layout->setPosition(-20, -20, ABottomRight)->setSize(300, GuiElement::GuiSizeMax);
-    alert_level_button = new GuiToggleButton(layout, "", "Alert level", [this](bool value)
+    alert_level_button = new GuiToggleButton(layout, "", gettext("Alert level"), [this](bool value)
     {
         for(GuiButton* button : alert_level_buttons)
             button->setVisible(value);
@@ -193,7 +195,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
     if (my_spaceship)
     {
         info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0));
-        launch_probe_button->setText("Launch probe (" + string(my_spaceship->scan_probe_stock) + ")");
+        launch_probe_button->setText(gettext("Launch probe (") + string(my_spaceship->scan_probe_stock) + ")");
     }
 
     if (targets.getWaypointIndex() >= 0)
