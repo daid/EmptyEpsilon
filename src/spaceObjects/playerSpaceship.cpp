@@ -134,7 +134,6 @@ REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 PlayerSpaceship::PlayerSpaceship()
 : SpaceShip("PlayerSpaceship", 5000)
 {
-    energy_level = 1000;
     main_screen_setting = MSS_Front;
     hull_damage_indicator = 0.0;
     jump_indicator = 0.0;
@@ -160,7 +159,8 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&hull_strength, 0.5);
     registerMemberReplication(&hull_max);
     registerMemberReplication(&jump_indicator, 0.5);
-    registerMemberReplication(&energy_level);
+    registerMemberReplication(&energy_level, 0.1);
+    registerMemberReplication(&max_energy_level);
     registerMemberReplication(&main_screen_setting);
     registerMemberReplication(&scanning_delay, 0.5);
     registerMemberReplication(&scanning_complexity);
@@ -250,7 +250,9 @@ void PlayerSpaceship::update(float delta)
                 scan_probe_recharge = 0.0;
             }
         }
-        energy_level += delta * 10.0;
+        P<SpaceShip> docked_with_ship = docking_target;
+        if (!docked_with_ship || docked_with_ship->useEnergy(delta * 10.0))
+            energy_level += delta * 10.0;
         if (hull_strength < hull_max)
         {
             hull_strength += delta;
@@ -414,8 +416,8 @@ void PlayerSpaceship::update(float delta)
 
     SpaceShip::update(delta);
 
-    if (energy_level > 1000.0)
-        energy_level = 1000.0;
+    if (energy_level > max_energy_level)
+        energy_level = max_energy_level;
 }
 
 void PlayerSpaceship::applyTemplateValues()

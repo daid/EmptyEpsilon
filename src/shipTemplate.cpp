@@ -20,6 +20,8 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setModel);
     /// Set the size class for this ship. Ships of a smaller size-class can dock on ships of a larger size class. NOTE: This behaviour might change in the future.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSizeClass);
+    /// Set the amount of energy available for this ship. Note that only player ships use energy. So setting this for anything else is useless.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setEnergyStorage);
     /// Setup a beam weapon.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeam);
     /// Setup a beam weapon texture
@@ -128,6 +130,7 @@ ShipTemplate::ShipTemplate()
 {
     type = Ship;
     size_class = 10;
+    energy_storage_amount = 1000;
     weapon_tubes = 0;
     tube_load_time = 8.0;
     hull = 70;
