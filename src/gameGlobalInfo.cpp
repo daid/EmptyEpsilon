@@ -124,7 +124,7 @@ void GameGlobalInfo::addScript(P<Script> script)
 void GameGlobalInfo::reset()
 {
     gm_callback_functions.clear();
-    
+
     foreach(GameEntity, e, entityList)
         e->destroy();
     foreach(SpaceObject, o, space_object_list)
@@ -145,7 +145,7 @@ void GameGlobalInfo::reset()
 void GameGlobalInfo::startScenario(string filename)
 {
     reset();
-    
+
     P<ScriptObject> script = new ScriptObject();
     script->run(filename);
     engine->registerObject("scenario", script);
@@ -243,9 +243,9 @@ static int getObjectsInRadius(lua_State* L)
     float x = luaL_checknumber(L, 1);
     float y = luaL_checknumber(L, 2);
     float r = luaL_checknumber(L, 3);
-    
+
     sf::Vector2f position(x, y);
-    
+
     PVector<SpaceObject> objects;
     PVector<Collisionable> objectList = CollisionManager::queryArea(position - sf::Vector2f(r, r), position + sf::Vector2f(r, r));
     foreach(Collisionable, obj, objectList)
@@ -254,9 +254,18 @@ static int getObjectsInRadius(lua_State* L)
         if (sobj && (sobj->getPosition() - position) < r)
             objects.push_back(sobj);
     }
-    
+
     return convert<PVector<SpaceObject> >::returnType(L, objects);
 }
 /// getObjectsInRadius(x, y, radius)
 /// Return a list of all space objects at the x,y location within a certain radius.
 REGISTER_SCRIPT_FUNCTION(getObjectsInRadius);
+
+static int getScenarioVariation(lua_State* L)
+{
+    lua_pushstring(L, gameGlobalInfo->variation.c_str());
+    return 1;
+}
+/// getScenarioVariation()
+/// Returns the currently used scenario variation.
+REGISTER_SCRIPT_FUNCTION(getScenarioVariation);
