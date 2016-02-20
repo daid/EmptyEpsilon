@@ -88,7 +88,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
         drawHeadingIndicators(forground_texture);
     drawTargets(forground_texture);
     
-    if (style == Rectangular)
+    if (style == Rectangular && my_spaceship)
     {
         sf::Vector2f ship_offset = (my_spaceship->getPosition() - view_position) / distance * std::min(rect.width, rect.height) / 2.0f;
         if (ship_offset.x < -rect.width / 2.0f || ship_offset.x > rect.width / 2.0f || ship_offset.y < -rect.height / 2.0f || ship_offset.y > rect.height / 2.0f)
