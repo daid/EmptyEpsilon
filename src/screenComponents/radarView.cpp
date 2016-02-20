@@ -87,15 +87,15 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     if (show_heading_indicators)
         drawHeadingIndicators(forground_texture);
     drawTargets(forground_texture);
-
-    if (my_spaceship && style == Rectangular)
+    
+    if (style == Rectangular && my_spaceship)
     {
         sf::Vector2f ship_offset = (my_spaceship->getPosition() - view_position) / distance * std::min(rect.width, rect.height) / 2.0f;
         if (ship_offset.x < -rect.width / 2.0f || ship_offset.x > rect.width / 2.0f || ship_offset.y < -rect.height / 2.0f || ship_offset.y > rect.height / 2.0f)
         {
             sf::Vector2f position(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0);
             position += ship_offset / sf::length(ship_offset) * std::min(rect.width, rect.height) * 0.4f;
-
+            
             sf::Sprite arrow_sprite;
             textureManager.setTexture(arrow_sprite, "waypoint.png");
             arrow_sprite.setPosition(position);
