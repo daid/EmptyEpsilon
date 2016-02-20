@@ -72,11 +72,11 @@ ServerCreationScreen::ServerCreationScreen()
     y += 70;
     (new GuiLabel(this, "MAIN_SCREEN_LABEL", "Main screen", 30))->addBox()->setPosition(50, y, ATopLeft)->setSize(550, 50);
     y += 50;
-    (new GuiSelector(this, "MAIN_TACTICLE_SELECT", [](int index, string value) {
+    (new GuiSelector(this, "MAIN_TACTICAL_SELECT", [](int index, string value) {
         gameGlobalInfo->allow_main_screen_tactical_radar = index == 1;
     }))->setOptions({"No", "Yes"})->setSelectionIndex(gameGlobalInfo->allow_main_screen_tactical_radar ? 1 : 0)->setPosition(300, y, ATopLeft)->setSize(300, 50);
-    (new GuiLabel(this, "MAIN_TACTICLE_LABEL", "Tacticle radar:", 30))->setAlignment(ACenterRight)->setPosition(50, y, ATopLeft)->setSize(250, 50);
-    (new GuiBox(this, "MAIN_TACTICLE_BOX"))->setPosition(50, y, ATopLeft)->setSize(550, 50);
+    (new GuiLabel(this, "MAIN_TACTICAL_LABEL", "Tactical radar:", 30))->setAlignment(ACenterRight)->setPosition(50, y, ATopLeft)->setSize(250, 50);
+    (new GuiBox(this, "MAIN_TACTICAL_BOX"))->setPosition(50, y, ATopLeft)->setSize(550, 50);
     y += 50;
     (new GuiSelector(this, "MAIN_LONG_RANGE_SELECT", [](int index, string value) {
         gameGlobalInfo->allow_main_screen_long_range_radar = index == 1;

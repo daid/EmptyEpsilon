@@ -106,6 +106,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     docking_state = DS_NotDocking;
     impulse_acceleration = 20.0;
     energy_level = 1000;
+    max_energy_level = 1000;
 
     registerMemberReplication(&target_rotation, 1.5);
     registerMemberReplication(&impulse_request, 0.1);
@@ -182,6 +183,7 @@ void SpaceShip::applyTemplateValues()
         beam_weapons[n].setBeamTexture(ship_template->beams[n].getBeamTexture());
     }
     weapon_tubes = ship_template->weapon_tubes;
+    energy_level = max_energy_level = ship_template->energy_storage_amount;
 
     impulse_max_speed = ship_template->impulse_speed;
     impulse_acceleration = ship_template->impulse_acceleration;

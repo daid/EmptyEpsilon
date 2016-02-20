@@ -113,6 +113,18 @@ int main(int argc, char** argv)
     }
 
     new Engine();
+    
+    if (PreferencesManager::get("mod") != "")
+    {
+        string mod = PreferencesManager::get("mod");
+#ifdef RESOURCE_BASE_DIR
+        new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/mods/" + mod);
+#endif
+        if (getenv("HOME"))
+            new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod);
+        new DirectoryResourceProvider("resources/mods/" + mod);
+    }
+    
 #ifdef RESOURCE_BASE_DIR
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/");
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "scripts/");

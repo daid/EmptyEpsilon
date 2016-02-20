@@ -59,6 +59,7 @@ public:
     constexpr static float jump_drive_heat_per_jump = 0.35;
 
     float energy_level;
+    float max_energy_level;
     ShipSystem systems[SYS_COUNT];
     /*!
      *[input] Ship will try to aim to this rotation. (degrees)

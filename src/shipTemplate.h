@@ -85,6 +85,7 @@ public:
      * Size class is used to check if one ship can dock with another (eg; other ship needs to be way bigger)
      */
     int size_class;
+    float energy_storage_amount;
     string default_ai_name;
     BeamTemplate beams[max_beam_weapons];
     int weapon_tubes;
@@ -110,7 +111,7 @@ public:
     void setDefaultAI(string default_ai_name) { this->default_ai_name = default_ai_name; }
     void setSizeClass(int size_class) { this->size_class = size_class; }
     void setMesh(string model, string color_texture, string specular_texture, string illumination_texture);
-
+    void setEnergyStorage(float energy_amount) { this->energy_storage_amount = energy_amount; } 
     
     void setBeam(int index, float arc, float direction, float range, float cycle_time, float damage);
 
