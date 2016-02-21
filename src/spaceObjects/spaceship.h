@@ -143,6 +143,11 @@ public:
     int beam_frequency;
     ESystem beam_system_target;
     BeamWeapon beam_weapons[max_beam_weapons];
+    
+    /*!
+     * [output] Damage of tube-launched weapons
+     */
+    float weapon_damage_modifier[MW_Count] = {1.0};
 
     /**
      * Frequency setting of the shields.

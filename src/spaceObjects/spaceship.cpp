@@ -182,6 +182,11 @@ void SpaceShip::applyTemplateValues()
         beam_weapons[n].setDamage(ship_template->beams[n].getDamage());
         beam_weapons[n].setBeamTexture(ship_template->beams[n].getBeamTexture());
     }
+    
+    for (int n=0; n < MW_Count; n++)
+    {
+        weapon_damage_modifier[n] = ship_template->weapon_damage_modifier[n];
+    }
     weapon_tubes = ship_template->weapon_tubes;
     energy_level = max_energy_level = ship_template->energy_storage_amount;
 
