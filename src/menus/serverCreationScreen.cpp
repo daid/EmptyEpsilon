@@ -9,7 +9,7 @@
 ServerCreationScreen::ServerCreationScreen()
 {
     assert(game_server);
-    
+
     gameGlobalInfo->player_warp_jump_drive_setting = EPlayerWarpJumpDrive(PreferencesManager::get("server_config_warp_jump_drive_setting", "0").toInt());
     gameGlobalInfo->long_range_radar_range = PreferencesManager::get("server_config_long_range_radar_range", "30000").toInt();
     gameGlobalInfo->scanning_complexity = EScanningComplexity(PreferencesManager::get("server_config_scanning_complexity", "2").toInt());
@@ -17,14 +17,20 @@ ServerCreationScreen::ServerCreationScreen()
     gameGlobalInfo->use_system_damage = PreferencesManager::get("server_config_use_system_damage", "1").toInt();
     gameGlobalInfo->allow_main_screen_tactical_radar = PreferencesManager::get("server_config_allow_main_screen_tactical_radar", "1").toInt();
     gameGlobalInfo->allow_main_screen_long_range_radar = PreferencesManager::get("server_config_allow_main_screen_long_range_radar", "1").toInt();
-    
+
     (new GuiLabel(this, "SCENARIO_LABEL", "Scenario", 30))->addBox()->setPosition(-50, 50, ATopRight)->setSize(460, 50);
-    (new GuiBox(this, "SCENARIO_BOX"))->setPosition(-50, 50, ATopRight)->setSize(460, 460);
+    (new GuiBox(this, "SCENARIO_BOX"))->setPosition(-50, 50, ATopRight)->setSize(460, 360);
     GuiListbox* scenario_list = new GuiListbox(this, "SCENARIO_LIST", [this](int index, string value) {
         selected_scenario_filename = value;
-        
+
         scenario_description->setText("");
-        
+
+        variation_selection->setSelectionIndex(0);
+        variation_names_list = {"None"};
+
+        variation_descriptions_list = {"No variation."};
+        variation_description->setText("No variation.");
+
         P<ResourceStream> stream = getResourceStream(selected_scenario_filename);
         if (!stream) return;
 
@@ -36,13 +42,42 @@ ServerCreationScreen::ServerCreationScreen()
             line = line.substr(2).strip();
             if (line.startswith("Description:"))
                 scenario_description->setText(line.substr(12).strip());
+            if (line.startswith("Variation["))
+            {
+                line = line.substr(10).strip();
+                string variation_name = line.substr(0, line.find("]"));
+
+                variation_names_list.push_back(variation_name);
+                variation_descriptions_list.push_back(line.substr(line.find("]")+2).strip());
+            }
+
+            variation_selection->setOptions(variation_names_list);
+
         }
     });
-    scenario_list->setPosition(-80, 100, ATopRight)->setSize(400, 400);
-    (new GuiBox(this, "SCENARIO_DESCRIPTION_BOX"))->setPosition(-50, 50 + 460, ATopRight)->setSize(460, 280);
+    scenario_list->setPosition(-80, 100, ATopRight)->setSize(400, 300);
+    (new GuiBox(this, "SCENARIO_DESCRIPTION_BOX"))->setPosition(-50, 50 + 360, ATopRight)->setSize(460, 200);
     scenario_description = new GuiScrollText(this, "SCENARIO_DESCRIPTION", "");
-    scenario_description->setTextSize(20)->setPosition(-80, 60 + 460, ATopRight)->setSize(400, 260);
-    
+    scenario_description->setTextSize(20)->setPosition(-80, 60 + 360, ATopRight)->setSize(400, 180);
+
+    variation_selection = new GuiSelector(this, "VARIATION_SELECT", [this](int index, string value) {
+        gameGlobalInfo->variation = variation_names_list.at(index);
+        variation_description->setText(variation_descriptions_list.at(index));
+    });
+    variation_selection->setPosition(-50, 380 + 230, ATopRight)->setSize(300, 50);
+    (new GuiLabel(this, "VARIATION_LABEL", "Variation:", 30))->setAlignment(ACenterRight)->setPosition(-350, 380 + 230, ATopRight)->setSize(250, 50);
+
+    (new GuiBox(this, "VARIATION_DESCRIPTION_BOX"))->setPosition(-50, 380 + 230 + 50, ATopRight)->setSize(460, 120);
+    variation_description = new GuiScrollText(this, "VARIATION_DESCRIPTION", "");
+    variation_description->setTextSize(20)->setPosition(-80, 60 + 380 + 230, ATopRight)->setSize(400, 100);
+
+    variation_names_list = {"None"};
+    variation_selection->setOptions({"None"});
+    variation_selection->setSelectionIndex(0);
+
+    variation_descriptions_list = {"No variation."};
+    variation_description->setText("No variation.");
+
     float y = 50;
     (new GuiLabel(this, "GENERAL_LABEL", "General", 30))->addBox()->setPosition(50, y, ATopLeft)->setSize(550, 50);
     y += 50;
@@ -53,7 +88,7 @@ ServerCreationScreen::ServerCreationScreen()
     (new GuiLabel(this, "IP", sf::IpAddress::getLocalAddress().toString(), 30))->addBox()->setPosition(300, y, ATopLeft)->setSize(300, 50);
     (new GuiLabel(this, "IP_LABEL", "Server IP:", 30))->setAlignment(ACenterRight)->setPosition(50, y, ATopLeft)->setSize(250, 50);
     (new GuiBox(this, "IP_BOX"))->setPosition(50, y, ATopLeft)->setSize(550, 50);
-    
+
     y += 70;
     (new GuiLabel(this, "PLAYER_SHIP_LABEL", "Player ships", 30))->addBox()->setPosition(50, y, ATopLeft)->setSize(550, 50);
     y += 50;
