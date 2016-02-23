@@ -9,6 +9,8 @@ WeaponTube::WeaponTube()
 {
     parent = nullptr;
     
+    load_time = 8.0;
+    type_allowed_mask = (1 << MW_Count) - 1;
     type_loaded = MW_None;
     state = WTS_Empty;
     delay = 0.0;
@@ -20,9 +22,21 @@ void WeaponTube::setParent(SpaceShip* parent)
     assert(!this->parent);
     this->parent = parent;
 
+    parent->registerMemberReplication(&load_time);
+    parent->registerMemberReplication(&type_allowed_mask);
     parent->registerMemberReplication(&type_loaded);
     parent->registerMemberReplication(&state);
     parent->registerMemberReplication(&delay, 0.5);
+}
+
+float WeaponTube::getLoadTimeConfig()
+{
+    return load_time;
+}
+
+void WeaponTube::setLoadTimeConfig(float load_time)
+{
+    this->load_time = load_time;
 }
 
 void WeaponTube::setIndex(int index)
@@ -32,7 +46,7 @@ void WeaponTube::setIndex(int index)
 
 void WeaponTube::startLoad(EMissileWeapons type)
 {
-    if (type <= MW_None || type >= MW_Count)
+    if (!canLoad(type))
         return;
     if (state != WTS_Empty)
         return;
@@ -40,7 +54,7 @@ void WeaponTube::startLoad(EMissileWeapons type)
         return;
         
     state = WTS_Loading;
-    delay = parent->tube_load_time;
+    delay = load_time;
     type_loaded = type;
     parent->weapon_storage[type]--;
 }
@@ -50,7 +64,7 @@ void WeaponTube::startUnload()
     if (state == WTS_Loaded)
     {
         state = WTS_Unloading;
-        delay = parent->tube_load_time;
+        delay = load_time;
     }
 }
 
@@ -115,6 +129,25 @@ void WeaponTube::fire(float target_angle)
     type_loaded = MW_None;
 }
 
+bool WeaponTube::canLoad(EMissileWeapons type)
+{
+    if (type <= MW_None || type >= MW_Count)
+        return false;
+    if (type_allowed_mask & (1 << type))
+        return true;
+    return false;
+}
+
+void WeaponTube::allowLoadOf(EMissileWeapons type)
+{
+    type_allowed_mask |= (1 << type);
+}
+
+void WeaponTube::disallowLoadOf(EMissileWeapons type)
+{
+    type_allowed_mask &=~(1 << type);
+}
+
 void WeaponTube::forceUnload()
 {
     if (state != WTS_Empty && type_loaded != MW_None)
@@ -171,12 +204,12 @@ bool WeaponTube::isUnloading()
 
 float WeaponTube::getLoadProgress()
 {
-    return 1.0 - delay / parent->tube_load_time;
+    return 1.0 - delay / load_time;
 }
 
 float WeaponTube::getUnloadProgress()
 {
-    return delay / parent->tube_load_time;
+    return delay / load_time;
 }
 
 EMissileWeapons WeaponTube::getLoadType()

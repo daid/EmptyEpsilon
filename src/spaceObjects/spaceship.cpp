@@ -46,6 +46,9 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponTubeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponTubeLoadType);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, weaponTubeAllowMissle);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, weaponTubeDisallowMissle);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeExclusiveFor);
     /// Set the icon to be used for this ship on the radar.
     /// For example, ship:setRadarTrace("RadarBlip.png") will show a dot instead of an arrow for this ship.
     /// Note: Icon is only shown after scanning, before the ship is scanned it is always shown as an arrow.
@@ -88,8 +91,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     jump_distance = 0.0;
     jump_delay = 0.0;
     wormhole_alpha = 0.0;
-    tube_load_time = 8.0;
-    weapon_tubes = 0;
+    weapon_tube_count = 0;
     turn_speed = 10.0;
     impulse_max_speed = 600.0;
     warp_speed_per_warp_level = 1000.0;
@@ -118,8 +120,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&jump_drive_charge, 0.5);
     registerMemberReplication(&jump_delay, 0.5);
     registerMemberReplication(&wormhole_alpha, 0.5);
-    registerMemberReplication(&tube_load_time);
-    registerMemberReplication(&weapon_tubes);
+    registerMemberReplication(&weapon_tube_count);
     registerMemberReplication(&target_id);
     registerMemberReplication(&turn_speed);
     registerMemberReplication(&impulse_max_speed);
@@ -182,7 +183,7 @@ void SpaceShip::applyTemplateValues()
         beam_weapons[n].setDamage(ship_template->beams[n].getDamage());
         beam_weapons[n].setBeamTexture(ship_template->beams[n].getBeamTexture());
     }
-    weapon_tubes = ship_template->weapon_tubes;
+    weapon_tube_count = ship_template->weapon_tube_count;
     energy_level = max_energy_level = ship_template->energy_storage_amount;
 
     impulse_max_speed = ship_template->impulse_speed;
@@ -191,7 +192,17 @@ void SpaceShip::applyTemplateValues()
     has_warp_drive = ship_template->warp_speed > 0.0;
     warp_speed_per_warp_level = ship_template->warp_speed;
     has_jump_drive = ship_template->has_jump_drive;
-    tube_load_time = ship_template->tube_load_time;
+    for(int n=0; n<max_weapon_tubes; n++)
+    {
+        weapon_tube[n].setLoadTimeConfig(ship_template->weapon_tube[n].load_time);
+        for(int m=0; m<MW_Count; m++)
+        {
+            if (ship_template->weapon_tube[n].type_allowed_mask & (1 << m))
+                weapon_tube[n].allowLoadOf(EMissileWeapons(m));
+            else
+                weapon_tube[n].disallowLoadOf(EMissileWeapons(m));
+        }
+    }
     //shipTemplate->has_cloaking;
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = weapon_storage_max[n] = ship_template->weapon_storage[n];
@@ -756,7 +767,7 @@ bool SpaceShip::hasSystem(ESystem system)
     case SYS_JumpDrive:
         return has_jump_drive;
     case SYS_MissileSystem:
-        return weapon_tubes > 0;
+        return weapon_tube_count > 0;
     case SYS_FrontShield:
         return shield_count > 0;
     case SYS_RearShield:
@@ -785,8 +796,8 @@ float SpaceShip::getSystemEffectiveness(ESystem system)
 
 void SpaceShip::setWeaponTubeCount(int amount)
 {
-    weapon_tubes = std::max(0, std::min(amount, max_weapon_tubes));
-    for(int n=weapon_tubes; n<max_weapon_tubes; n++)
+    weapon_tube_count = std::max(0, std::min(amount, max_weapon_tubes));
+    for(int n=weapon_tube_count; n<max_weapon_tubes; n++)
     {
         weapon_tube[n].forceUnload();
     }
@@ -794,16 +805,39 @@ void SpaceShip::setWeaponTubeCount(int amount)
 
 int SpaceShip::getWeaponTubeCount()
 {
-    return weapon_tubes;
+    return weapon_tube_count;
 }
 
 EMissileWeapons SpaceShip::getWeaponTubeLoadType(int index)
 {
-    if (index < 0 || index >= weapon_tubes)
+    if (index < 0 || index >= weapon_tube_count)
         return MW_None;
     if (!weapon_tube[index].isLoaded())
         return MW_None;
     return weapon_tube[index].getLoadType();
+}
+
+void SpaceShip::weaponTubeAllowMissle(int index, EMissileWeapons type)
+{
+    if (index < 0 || index >= weapon_tube_count)
+        return;
+    weapon_tube[index].allowLoadOf(type);
+}
+
+void SpaceShip::weaponTubeDisallowMissle(int index, EMissileWeapons type)
+{
+    if (index < 0 || index >= weapon_tube_count)
+        return;
+    weapon_tube[index].disallowLoadOf(type);
+}
+
+void SpaceShip::setWeaponTubeExclusiveFor(int index, EMissileWeapons type)
+{
+    if (index < 0 || index >= weapon_tube_count)
+        return;
+    for(int n=0; n<MW_Count; n++)
+        weapon_tube[index].disallowLoadOf(EMissileWeapons(n));
+    weapon_tube[index].allowLoadOf(type);
 }
 
 std::unordered_map<string, string> SpaceShip::getGMInfo()

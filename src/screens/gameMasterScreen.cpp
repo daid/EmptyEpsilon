@@ -699,7 +699,7 @@ GuiShipRetrofit::GuiShipRetrofit(GuiContainer* owner)
     rear_shield_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
     
     missile_tube_amount_selector = new GuiSelector(left_col, "", [this](int index, string value) {
-        target->weapon_tubes = index;
+        target->weapon_tube_count = index;
     });
     for(int n=0; n<max_weapon_tubes; n++)
         missile_tube_amount_selector->addEntry("Missile tubes: " + string(n), "");
@@ -744,7 +744,7 @@ void GuiShipRetrofit::open(P<SpaceShip> target)
     front_shield_slider->setSnapValue(target->ship_template->shield_level[0], 5.0f);    ///TOFIX: Handle different amounts of shields
     rear_shield_slider->setValue(target->shield_max[1]);
     rear_shield_slider->setSnapValue(target->ship_template->shield_level[1], 5.0f);
-    missile_tube_amount_selector->setSelectionIndex(target->weapon_tubes);
+    missile_tube_amount_selector->setSelectionIndex(target->weapon_tube_count);
     for(int n=0; n<MW_Count; n++)
         missile_storage_amount_selector[n]->setSelectionIndex(target->weapon_storage_max[n]);
     

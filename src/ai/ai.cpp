@@ -81,10 +81,10 @@ void ShipAI::updateWeaponState(float delta)
         missile_fire_delay -= delta;
 
     //Check the weapon state,
-    has_missiles = owner->weapon_tubes > 0 && owner->weapon_storage[MW_Homing] > 0;
+    has_missiles = owner->weapon_tube_count > 0 && owner->weapon_storage[MW_Homing] > 0;
     has_beams = false;
     //If we have weapon tubes, load them with torpedoes
-    for(int n=0; n<owner->weapon_tubes; n++)
+    for(int n=0; n<owner->weapon_tube_count; n++)
     {
         if (owner->weapon_tube[n].isEmpty() && owner->weapon_storage[MW_Homing] > 0)
             owner->weapon_tube[n].startLoad(MW_Homing);
@@ -291,14 +291,14 @@ void ShipAI::runAttack(P<SpaceObject> target)
 
     if (distance < 4500 && has_missiles)
     {
-        for(int n=0; n<owner->weapon_tubes; n++)
+        for(int n=0; n<owner->weapon_tube_count; n++)
         {
             if (owner->weapon_tube[n].isLoaded() && missile_fire_delay <= 0.0)
             {
                 float target_angle = calculateFiringSolution(target);
                 if (target_angle != std::numeric_limits<float>::infinity())
                     owner->weapon_tube[n].fire(target_angle);
-                missile_fire_delay = owner->tube_load_time / owner->weapon_tubes / 2.0;
+                missile_fire_delay = owner->weapon_tube[n].getLoadTimeConfig() / owner->weapon_tube_count / 2.0;
             }
         }
     }

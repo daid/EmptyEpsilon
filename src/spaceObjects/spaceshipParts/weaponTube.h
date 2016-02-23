@@ -21,6 +21,9 @@ public:
 
     void setParent(SpaceShip* parent);
     void setIndex(int index);
+
+    float getLoadTimeConfig();
+    void setLoadTimeConfig(float load_time);
     
     /*!
      * Load a missile tube.
@@ -33,6 +36,10 @@ public:
      * \param target_angle Angle in degrees to where the missile needs to be shot.
      */
     void fire(float target_angle);
+
+    bool canLoad(EMissileWeapons type);
+    void allowLoadOf(EMissileWeapons type);
+    void disallowLoadOf(EMissileWeapons type);
     
     void forceUnload();
     
@@ -52,6 +59,8 @@ private:
     SpaceShip* parent;
     int tube_index;
 
+    float load_time;
+    uint32_t type_allowed_mask;
     EMissileWeapons type_loaded;
     EWeaponTubeState state;
     float delay;

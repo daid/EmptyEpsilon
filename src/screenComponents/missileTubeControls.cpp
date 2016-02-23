@@ -63,14 +63,17 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window)
     if (!my_spaceship)
         return;
     for(int n=0; n<MW_Count; n++)
+    {
         load_type_buttons[n]->setText(getMissileWeaponName(EMissileWeapons(n)) + " [" + string(my_spaceship->weapon_storage[n]) + "/" + string(my_spaceship->weapon_storage_max[n]) + "]");
+        load_type_buttons[n]->setVisible(my_spaceship->weapon_storage_max[n] > 0);
+    }
     
-    for(int n=0; n<my_spaceship->weapon_tubes; n++)
+    for(int n=0; n<my_spaceship->weapon_tube_count; n++)
     {
         rows[n].layout->show();
         if(my_spaceship->weapon_tube[n].isEmpty())
         {
-            rows[n].load_button->enable();
+            rows[n].load_button->setEnable(my_spaceship->weapon_tube[n].canLoad(load_type));
             rows[n].load_button->setText("Load");
             rows[n].fire_button->disable()->show();
             rows[n].fire_button->setText("Empty");
@@ -102,7 +105,7 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window)
             rows[n].loading_label->setText("Unloading");
         }
     }
-    for(int n=my_spaceship->weapon_tubes; n<max_weapon_tubes; n++)
+    for(int n=my_spaceship->weapon_tube_count; n<max_weapon_tubes; n++)
         rows[n].layout->hide();
     GuiAutoLayout::onDraw(window);
 }

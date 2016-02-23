@@ -68,6 +68,12 @@ public:
         PlayerShip,
         Station
     };
+    class TubeTemplate
+    {
+    public:
+        float load_time;
+        uint32_t type_allowed_mask;
+    };
 private:
     static std::unordered_map<string, P<ShipTemplate> > templateMap;
     string name;
@@ -88,8 +94,8 @@ public:
     float energy_storage_amount;
     string default_ai_name;
     BeamTemplate beams[max_beam_weapons];
-    int weapon_tubes;
-    float tube_load_time;
+    int weapon_tube_count;
+    TubeTemplate weapon_tube[max_weapon_tubes];
     float hull;
     int shield_count;
     float shield_level[max_shield_count];
@@ -120,7 +126,11 @@ public:
      */
     void setBeamTexture(int index, string texture);
 
-    void setTubes(int amount, float load_time) { weapon_tubes = std::min(max_weapon_tubes, amount); tube_load_time = load_time; }
+    void setTubes(int amount, float load_time);
+    void setTubeLoadTime(int index, float load_time);
+    void weaponTubeAllowMissle(int index, EMissileWeapons type);
+    void weaponTubeDisallowMissle(int index, EMissileWeapons type);
+    void setWeaponTubeExclusiveFor(int index, EMissileWeapons type);
     void setHull(float amount) { hull = amount; }
     void setShields(std::vector<float> values);
     void setSpeed(float impulse, float turn, float acceleration) { impulse_speed = impulse; turn_speed = turn; impulse_acceleration = acceleration; }

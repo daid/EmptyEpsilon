@@ -127,10 +127,10 @@ void fillDefaultDatabaseData()
                 entry->addKeyValue(name + " beam weapon", string(ship_template->beams[n].getDamage() / ship_template->beams[n].getCycleTime(), 2) + " DPS");
             }
         }
-        if (ship_template->weapon_tubes > 0)
+        if (ship_template->weapon_tube_count > 0)
         {
-            entry->addKeyValue("Missile tubes", string(ship_template->weapon_tubes));
-            entry->addKeyValue("Missile load time", string(int(ship_template->tube_load_time)));
+            entry->addKeyValue("Missile tubes", string(ship_template->weapon_tube_count));
+            entry->addKeyValue("Missile load time", string(int(ship_template->weapon_tube[0].load_time)));
         }
         for(int n=0; n < MW_Count; n++)
         {
