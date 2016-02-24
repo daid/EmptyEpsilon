@@ -14,7 +14,12 @@ private:
         GuiLabel* loading_label;
     };
     std::vector<TubeRow> rows;
-    GuiToggleButton* load_type_buttons[MW_Count];
+    class TypeRow {
+    public:
+        GuiAutoLayout* layout;
+        GuiToggleButton* button;
+    };
+    TypeRow load_type_rows[MW_Count];
     EMissileWeapons load_type;
     float missile_target_angle;
 public:
