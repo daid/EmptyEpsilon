@@ -31,6 +31,7 @@ function distance(a, b, c, d)
         x2, y2 = c, d
     else
         -- Not a valid usage of the distance function, throw an error.
+        print(type(a), type(b), type(c), type(d))
         error("distance function incorrectly used", 2)
     end
     local xd, yd = (x1 - x2), (y1 - y2)

@@ -241,23 +241,26 @@ void PlayerSpaceship::update(float delta)
 
     if (docking_state == DS_Docked)
     {
-        if (scan_probe_stock < max_scan_probes)
-        {
-            scan_probe_recharge += delta;
-            if (scan_probe_recharge > scan_probe_charge_time)
-            {
-                scan_probe_stock += 1;
-                scan_probe_recharge = 0.0;
-            }
-        }
         P<SpaceShip> docked_with_ship = docking_target;
         if (!docked_with_ship || docked_with_ship->useEnergy(delta * 10.0))
             energy_level += delta * 10.0;
-        if (hull_strength < hull_max)
+        if (!docked_with_ship)  //Only recharge probes and hull when we are not docked to a ship (and thus a station). Bit hackish for now.
         {
-            hull_strength += delta;
-            if (hull_strength > hull_max)
-                hull_strength = hull_max;
+            if (scan_probe_stock < max_scan_probes)
+            {
+                scan_probe_recharge += delta;
+                if (scan_probe_recharge > scan_probe_charge_time)
+                {
+                    scan_probe_stock += 1;
+                    scan_probe_recharge = 0.0;
+                }
+            }
+            if (hull_strength < hull_max)
+            {
+                hull_strength += delta;
+                if (hull_strength > hull_max)
+                    hull_strength = hull_max;
+            }
         }
     }else{
         scan_probe_recharge = 0.0;

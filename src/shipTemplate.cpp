@@ -136,7 +136,7 @@ ShipTemplate::ShipTemplate()
     size_class = 10;
     energy_storage_amount = 1000;
     weapon_tube_count = 0;
-    for(int n; n<max_weapon_tubes; n++)
+    for(int n=0; n<max_weapon_tubes; n++)
     {
         weapon_tube[n].load_time = 8.0;
         weapon_tube[n].type_allowed_mask = (1 << MW_Count) - 1;
