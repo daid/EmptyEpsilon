@@ -77,6 +77,8 @@ template = ShipTemplate():setName("Player Missile Cr."):setModel("space_cruiser_
 template:setRadarTrace("radar_missile_cruiser.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setTubes(4, 8.0)
+template:setWeaponTubeExclusiveFor(2, "Homing") --Set tube 3 and 4 exclusive for homing missiles.
+template:setWeaponTubeExclusiveFor(3, "Homing")
 template:setHull(200)
 template:setShields(110, 70)
 template:setSpeed(60, 8, 15)
