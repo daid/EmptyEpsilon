@@ -125,14 +125,15 @@ template:setRadarTrace("radar_fighter.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 40, -10, 1000.0, 6.0, 8)
 template:setBeam(1, 40,  10, 1000.0, 6.0, 8)
-template:setTubes(1, 10.0) -- Amount of torpedo tubes, loading time
 template:setHull(60)
 template:setShields(40)
 template:setSpeed(110, 20, 40)
 template:setWarpSpeed(0)
 template:setJumpDrive(false)
 template:setCloaking(false)
-template:setWeaponStorage("Homing", 4)
+template:setEnergyStorage(400)
+template:setTubes(1, 10.0) -- Amount of torpedo tubes, loading time
+template:setWeaponStorage("HVLI", 4)
 
 template:addRoomSystem(3, 0, 1, 1, "Maneuver");
 template:addRoomSystem(1, 0, 2, 1, "BeamWeapons");

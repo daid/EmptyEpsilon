@@ -861,6 +861,8 @@ string getMissileWeaponName(EMissileWeapons missile)
         return "Mine";
     case MW_EMP:
         return "EMP";
+    case MW_HVLI:
+        return "HVLI";
     default:
         return "UNK: " + string(int(missile));
     }

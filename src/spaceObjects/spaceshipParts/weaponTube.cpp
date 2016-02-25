@@ -3,6 +3,7 @@
 #include "spaceObjects/homingMissile.h"
 #include "spaceObjects/mine.h"
 #include "spaceObjects/nuke.h"
+#include "spaceObjects/hvli.h"
 #include "spaceObjects/spaceship.h"
 
 WeaponTube::WeaponTube()
@@ -111,6 +112,14 @@ void WeaponTube::fire(float target_angle)
             missile->eject();
         }
         break;
+    case MW_HVLI:
+        {
+            fire_count = 5;
+            state = WTS_Firing;
+            delay = 0.0;
+            return;
+        }
+        break;
     case MW_EMP:
         {
             P<EMPMissile> missile = new EMPMissile();
@@ -176,6 +185,29 @@ void WeaponTube::update(float delta)
                 parent->weapon_storage[type_loaded] ++;
             type_loaded = MW_None;
             break;
+        case WTS_Firing:
+            {
+                sf::Vector2f fireLocation = parent->getPosition() + sf::rotateVector(parent->ship_template->model_data->getTubePosition2D(tube_index), parent->getRotation());
+
+                P<HVLI> missile = new HVLI();
+                missile->owner = parent;
+                missile->setFactionId(parent->getFactionId());
+                missile->setPosition(fireLocation);
+                missile->setRotation(parent->getRotation());
+                missile->target_angle = parent->getRotation();
+                
+                fire_count -= 1;
+                if (fire_count > 0)
+                {
+                    delay = 0.5;
+                }
+                else
+                {
+                    state = WTS_Empty;
+                    type_loaded = MW_None;
+                }
+            }
+            break;
         default:
             break;
         }
@@ -200,6 +232,11 @@ bool WeaponTube::isLoading()
 bool WeaponTube::isUnloading()
 {
     return state == WTS_Unloading;
+}
+
+bool WeaponTube::isFiring()
+{
+    return state == WTS_Firing;
 }
 
 float WeaponTube::getLoadProgress()

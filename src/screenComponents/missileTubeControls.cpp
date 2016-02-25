@@ -100,6 +100,14 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window)
             rows[n].loading_bar->show();
             rows[n].loading_bar->setValue(my_spaceship->weapon_tube[n].getUnloadProgress());
             rows[n].loading_label->setText("Unloading");
+        }else if(my_spaceship->weapon_tube[n].isFiring())
+        {
+            rows[n].load_button->disable();
+            rows[n].load_button->setText("Load");
+            rows[n].fire_button->disable()->show();
+            rows[n].fire_button->setText("Firing");
+            rows[n].loading_bar->hide();
+            rows[n].loading_label->setText("Unloading");
         }
     }
     for(int n=my_spaceship->weapon_tube_count; n<max_weapon_tubes; n++)

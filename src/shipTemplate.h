@@ -17,6 +17,7 @@ enum EMissileWeapons
     MW_Nuke,
     MW_Mine,
     MW_EMP,
+    MW_HVLI,
     MW_Count
 };
 /* Define script conversion function for the EMissileWeapons enum. */

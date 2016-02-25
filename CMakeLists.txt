@@ -151,6 +151,7 @@ set(SOURCES
 	src/spaceObjects/playerSpaceship.cpp
 	src/spaceObjects/beamEffect.cpp
 	src/spaceObjects/homingMissile.cpp
+	src/spaceObjects/hvli.cpp
 	src/spaceObjects/electricExplosionEffect.cpp
 	src/spaceObjects/supplyDrop.cpp
 	src/spaceObjects/warpJammer.cpp

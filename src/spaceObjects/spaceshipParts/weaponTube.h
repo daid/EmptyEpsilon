@@ -11,7 +11,8 @@ enum EWeaponTubeState
     WTS_Empty,
     WTS_Loading,
     WTS_Loaded,
-    WTS_Unloading
+    WTS_Unloading,
+    WTS_Firing
 };
 
 class WeaponTube : public sf::NonCopyable
@@ -49,6 +50,7 @@ public:
     bool isLoaded();
     bool isLoading();
     bool isUnloading();
+    bool isFiring();
     
     float getLoadProgress();
     float getUnloadProgress();
@@ -64,6 +66,7 @@ private:
     EMissileWeapons type_loaded;
     EWeaponTubeState state;
     float delay;
+    int fire_count;
 };
 
 #endif//WEAPON_TUBE_H
