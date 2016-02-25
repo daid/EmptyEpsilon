@@ -32,6 +32,8 @@ public:
     static sf::Vector2f getFirstBlockedPosition(sf::Vector2f start, sf::Vector2f end);
     static PVector<Nebula> getNebulas();
     
+    virtual RawRadarSignatureInfo getRadarSignatureInfo() { return RawRadarSignatureInfo(0.0, 0.8, -1.0); }
+    
     virtual string getExportLine() { return "Nebula():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 };
 

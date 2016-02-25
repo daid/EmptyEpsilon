@@ -162,6 +162,8 @@ public:
 
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
 
+    virtual RawRadarSignatureInfo getRadarSignatureInfo() { return RawRadarSignatureInfo(0.05, 0.3, 0.3); }
+
 #if FEATURE_3D_RENDERING
     virtual void draw3DTransparent() override;
 #endif

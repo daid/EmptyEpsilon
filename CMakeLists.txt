@@ -94,6 +94,7 @@ set(SOURCES
 	src/screenComponents/shipInternalView.cpp
 	src/screenComponents/beamFrequencySelector.cpp
 	src/screenComponents/radarView.cpp
+	src/screenComponents/rawScannerDataRadarOverlay.cpp
 	src/screenComponents/scanTargetButton.cpp
 	src/screenComponents/snapSlider.cpp
 	src/screenComponents/indicatorOverlays.cpp
