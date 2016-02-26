@@ -12,7 +12,7 @@ ShipAI::ShipAI(CpuShip* owner)
     missile_fire_delay = 0.0;
 
     has_missiles = false;
-    has_beams = false;
+    beam_info = NoBeams;
     beam_weapon_range = 0.0;
     
     update_target_delay = 0.0;
@@ -67,7 +67,7 @@ void ShipAI::run(float delta)
     }
 
     //If we have a target and weapons, engage the target.
-    if (owner->getTarget() && (has_missiles || has_beams))
+    if (owner->getTarget() && (has_missiles || beam_info != NoBeams))
     {
         runAttack(owner->getTarget());
     }else{
@@ -81,14 +81,16 @@ void ShipAI::updateWeaponState(float delta)
         missile_fire_delay -= delta;
 
     //Check the weapon state,
-    has_missiles = owner->weapon_tube_count > 0 && owner->weapon_storage[MW_Homing] > 0;
-    has_beams = false;
+    has_missiles = owner->weapon_tube_count > 0 && (owner->weapon_storage[MW_Homing] > 0 || owner->weapon_storage[MW_HVLI] > 0);
+    beam_info = NoBeams;
     //If we have weapon tubes, load them with torpedoes
     for(int n=0; n<owner->weapon_tube_count; n++)
     {
         if (owner->weapon_tube[n].isEmpty() && owner->weapon_storage[MW_Homing] > 0)
             owner->weapon_tube[n].startLoad(MW_Homing);
-        if (owner->weapon_tube[n].isLoaded() && owner->weapon_tube[n].getLoadType() == MW_Homing)
+        else if (owner->weapon_tube[n].isEmpty() && owner->weapon_storage[MW_HVLI] > 0)
+            owner->weapon_tube[n].startLoad(MW_HVLI);
+        if (owner->weapon_tube[n].isLoaded())
             has_missiles = true;
     }
 
@@ -99,10 +101,28 @@ void ShipAI::updateWeaponState(float delta)
         {
             if (sf::angleDifference(owner->beam_weapons[n].getDirection(), 0.0f) < owner->beam_weapons[n].getArc() / 2.0f)
             {
-                beam_weapon_range = std::max(beam_weapon_range, owner->beam_weapons[n].getRange());
+                if (beam_info == NoBeams || beam_info == FrontBeams || beam_weapon_range * 2.0 < owner->beam_weapons[n].getRange())
+                {
+                    beam_weapon_range = std::max(beam_weapon_range, owner->beam_weapons[n].getRange());
+                    beam_info = FrontBeams;
+                }
             }
-            has_beams = true;
-            break;
+            else if (sf::angleDifference(owner->beam_weapons[n].getDirection(), 90.0f) < owner->beam_weapons[n].getArc() / 2.0f || sf::angleDifference(owner->beam_weapons[n].getDirection(), -90.0f) < owner->beam_weapons[n].getArc() / 2.0f)
+            {
+                if (beam_info == NoBeams || beam_info == SideBeams || beam_weapon_range * 2.0 < owner->beam_weapons[n].getRange())
+                {
+                    beam_weapon_range = std::max(beam_weapon_range, owner->beam_weapons[n].getRange());
+                    beam_info = SideBeams;
+                }
+            }
+            else if (sf::angleDifference(owner->beam_weapons[n].getDirection(), 180.0f) < owner->beam_weapons[n].getArc() / 2.0f)
+            {
+                if (beam_info == NoBeams || beam_info == RearBeams || beam_weapon_range * 2.0 < owner->beam_weapons[n].getRange())
+                {
+                    beam_weapon_range = std::max(beam_weapon_range, owner->beam_weapons[n].getRange());
+                    beam_info = RearBeams;
+                }
+            }
         }
     }
 }
@@ -197,7 +217,7 @@ void ShipAI::runOrders()
         // 1) we are looking for a target
         // 2) we ran out of missiles
         // 3) we have no weapons
-        if (has_missiles || has_beams)
+        if (has_missiles || beam_info != NoBeams)
         {
             P<SpaceObject> new_target = findBestTarget(owner->getPosition(), 50000);
             if (new_target)
@@ -283,7 +303,7 @@ void ShipAI::runOrders()
 void ShipAI::runAttack(P<SpaceObject> target)
 {
     float attack_distance = 4000.0;
-    if (has_beams)
+    if (beam_info != NoBeams)
         attack_distance = beam_weapon_range * 0.7;
 
     sf::Vector2f position_diff = target->getPosition() - owner->getPosition();
@@ -295,7 +315,7 @@ void ShipAI::runAttack(P<SpaceObject> target)
         {
             if (owner->weapon_tube[n].isLoaded() && missile_fire_delay <= 0.0)
             {
-                float target_angle = calculateFiringSolution(target);
+                float target_angle = calculateFiringSolution(target, owner->weapon_tube[n].getLoadType());
                 if (target_angle != std::numeric_limits<float>::infinity())
                     owner->weapon_tube[n].fire(target_angle);
                 missile_fire_delay = owner->weapon_tube[n].getLoadTimeConfig() / owner->weapon_tube_count / 2.0;
@@ -307,7 +327,21 @@ void ShipAI::runAttack(P<SpaceObject> target)
     {
         owner->target_rotation = sf::vector2ToAngle(position_diff);
     }else{
-        flyTowards(target->getPosition(), attack_distance);
+        if (beam_info == SideBeams)
+        {
+            //We have side beams, find out where we want to attack from.
+            sf::Vector2f target_position = target->getPosition();
+            sf::Vector2f diff = target_position - owner->getPosition();
+            float angle = sf::vector2ToAngle(diff);
+            if (sf::angleDifference(angle, owner->getRotation()) > 0)
+                angle += 160;
+            else
+                angle -= 160;
+            target_position += sf::vector2FromAngle(angle) * (attack_distance + target->getRadius());
+            flyTowards(target_position, 0);
+        }else{
+            flyTowards(target->getPosition(), attack_distance);
+        }
     }
 }
 
@@ -476,7 +510,7 @@ bool ShipAI::betterTarget(P<SpaceObject> new_target, P<SpaceObject> current_targ
     return false;
 }
 
-float ShipAI::calculateFiringSolution(P<SpaceObject> target)
+float ShipAI::calculateFiringSolution(P<SpaceObject> target, EMissileWeapons type)
 {
     sf::Vector2f target_position = target->getPosition();
     sf::Vector2f target_velocity = target->getVelocity();
@@ -485,6 +519,25 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target)
     float missile_speed = 200.0f;
     float missile_turn_rate = 10.0f;
     float turn_radius = ((360.0f / missile_turn_rate) * missile_speed) / (2.0f * M_PI);
+    
+    if (type == MW_HVLI)
+    {
+        missile_speed *= 2.0f;
+        
+        float distance = sf::length(target_position - owner->getPosition());
+        //HVLI missiles do not home or turn. So use a different targeting mechanism.
+        float angle_diff = sf::angleDifference(missile_angle, owner->getRotation());
+
+        //Target is moving. Estimate where he will be when the missile hits.
+        float fly_time = distance / missile_speed;
+        target_position += target->getVelocity() * fly_time;
+
+        //If our "error" of hitting is less then twice the radius of the target, fire.
+        if (distance * tanf(angle_diff / 180.0f * M_PI) < target->getRadius() * 2.0)
+            return owner->getRotation();
+        
+        return std::numeric_limits<float>::infinity();
+    }
 
     for(int iterations=0; iterations<10; iterations++)
     {

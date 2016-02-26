@@ -330,12 +330,15 @@ template:setRadarTrace("radar_ktlitan_breaker.png")
 template:setBeam(0, 40, 0, 800.0, 4.0, 6)
 template:setBeam(1, 35,-15, 800.0, 4.0, 6)
 template:setBeam(2, 35, 15, 800.0, 4.0, 6)
+--template:setTubes(1, 10.0) -- Amount of torpedo tubes, loading time
+--template:setWeaponStorage("HVLI", 5) --Only give this ship HVLI's
 template:setHull(120)
 template:setSpeed(100, 5, 25)
 
 template = ShipTemplate():setName("Ktlitan Worker"):setModel("sci_fi_alien_ship_3")
 template:setRadarTrace("radar_ktlitan_worker.png")
-template:setBeam(0, 40, 0, 600.0, 4.0, 6)
+template:setBeam(0, 40, -90, 600.0, 4.0, 6)
+template:setBeam(1, 40, 90, 600.0, 4.0, 6)
 template:setHull(50)
 template:setSpeed(100, 35, 25)
 

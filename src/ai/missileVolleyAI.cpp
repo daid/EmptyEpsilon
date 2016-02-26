@@ -65,7 +65,7 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
         
         if (all_loaded)
         {
-            float target_angle = calculateFiringSolution(target);
+            float target_angle = calculateFiringSolution(target, owner->weapon_tube[0].getLoadType());
             if (target_angle != std::numeric_limits<float>::infinity())
             {
                 for(int n=0; n<owner->weapon_tube_count; n++)
