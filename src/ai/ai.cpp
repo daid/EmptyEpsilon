@@ -533,7 +533,7 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, EMissileWeapons typ
         target_position += target->getVelocity() * fly_time;
 
         //If our "error" of hitting is less then twice the radius of the target, fire.
-        if (distance * tanf(angle_diff / 180.0f * M_PI) < target->getRadius() * 2.0)
+        if (distance * tanf(fabs(angle_diff / 180.0f * M_PI)) < target->getRadius() * 2.0)
             return owner->getRotation();
         
         return std::numeric_limits<float>::infinity();

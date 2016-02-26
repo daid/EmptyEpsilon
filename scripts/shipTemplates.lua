@@ -330,8 +330,8 @@ template:setRadarTrace("radar_ktlitan_breaker.png")
 template:setBeam(0, 40, 0, 800.0, 4.0, 6)
 template:setBeam(1, 35,-15, 800.0, 4.0, 6)
 template:setBeam(2, 35, 15, 800.0, 4.0, 6)
---template:setTubes(1, 10.0) -- Amount of torpedo tubes, loading time
---template:setWeaponStorage("HVLI", 5) --Only give this ship HVLI's
+template:setTubes(1, 10.0) -- Amount of torpedo tubes, loading time
+template:setWeaponStorage("HVLI", 5) --Only give this ship HVLI's
 template:setHull(120)
 template:setSpeed(100, 5, 25)
 
