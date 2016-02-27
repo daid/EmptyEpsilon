@@ -41,12 +41,10 @@ MainMenu::MainMenu()
         engine->shutdown();
     }))->setPosition(sf::Vector2f(50, -50), ABottomLeft)->setSize(300, 50);
 
-#ifdef DEBUG
     (new GuiButton(this, "START_TUTORIAL", "Tutorial", [this]() {
         destroy();
         new TutorialGame();
     }))->setPosition(sf::Vector2f(370, -50), ABottomLeft)->setSize(300, 50);
-#endif
 
     if (InputHandler::touch_screen)
     {
