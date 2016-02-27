@@ -28,6 +28,10 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamTexture);
     /// Set the amount of missile tubes, limited to a maximum of 16.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubes);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubeLoadTime);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, weaponTubeAllowMissle);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, weaponTubeDisallowMissle);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWeaponTubeExclusiveFor);
     /// Set the amount of starting hull
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setHull);
     /// Set the shield levels, amount of parameters defines the amount of shields. (Up to a maximum of 8 shields)
@@ -59,6 +63,8 @@ template<> void convert<EMissileWeapons>::param(lua_State* L, int& idx, EMissile
         es = MW_Mine;
     else if (str == "emp")
         es = MW_EMP;
+    else if (str == "hvli")
+        es = MW_HVLI;
     else
         es = MW_None;
 }
@@ -78,6 +84,9 @@ template<> int convert<EMissileWeapons>::returnType(lua_State* L, EMissileWeapon
         return 1;
     case MW_EMP:
         lua_pushstring(L, "emp");
+        return 1;
+    case MW_HVLI:
+        lua_pushstring(L, "hvli");
         return 1;
     default:
         return 0;
@@ -131,8 +140,12 @@ ShipTemplate::ShipTemplate()
     type = Ship;
     size_class = 10;
     energy_storage_amount = 1000;
-    weapon_tubes = 0;
-    tube_load_time = 8.0;
+    weapon_tube_count = 0;
+    for(int n=0; n<max_weapon_tubes; n++)
+    {
+        weapon_tube[n].load_time = 8.0;
+        weapon_tube[n].type_allowed_mask = (1 << MW_Count) - 1;
+    }
     hull = 70;
     shield_count = 0;
     for(int n=0; n<max_shield_count; n++)
@@ -155,6 +168,41 @@ void ShipTemplate::setBeamTexture(int index, string texture)
     {
         beams[index].setBeamTexture(texture);
     }
+}
+
+void ShipTemplate::setTubes(int amount, float load_time)
+{
+    weapon_tube_count = std::min(max_weapon_tubes, amount);
+    for(int n=0; n<max_weapon_tubes; n++)
+        weapon_tube[n].load_time = load_time;
+}
+
+void ShipTemplate::setTubeLoadTime(int index, float load_time)
+{
+    if (index < 0 || index >= max_weapon_tubes)
+        return;
+    weapon_tube[index].load_time = load_time;
+}
+
+void ShipTemplate::weaponTubeAllowMissle(int index, EMissileWeapons type)
+{
+    if (index < 0 || index >= max_weapon_tubes)
+        return;
+    weapon_tube[index].type_allowed_mask |= (1 << type);
+}
+
+void ShipTemplate::weaponTubeDisallowMissle(int index, EMissileWeapons type)
+{
+    if (index < 0 || index >= max_weapon_tubes)
+        return;
+    weapon_tube[index].type_allowed_mask &=~(1 << type);
+}
+
+void ShipTemplate::setWeaponTubeExclusiveFor(int index, EMissileWeapons type)
+{
+    if (index < 0 || index >= max_weapon_tubes)
+        return;
+    weapon_tube[index].type_allowed_mask = (1 << type);
 }
 
 void ShipTemplate::setType(TemplateType type)

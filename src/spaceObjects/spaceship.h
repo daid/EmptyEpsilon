@@ -132,8 +132,7 @@ public:
 
     int8_t weapon_storage[MW_Count];
     int8_t weapon_storage_max[MW_Count];
-    int8_t weapon_tubes;
-    float tube_load_time;
+    int8_t weapon_tube_count;
     float tube_recharge_factor;
     WeaponTube weapon_tube[max_weapon_tubes];
 
@@ -162,6 +161,8 @@ public:
     sf::Vector2f docking_offset; //Server only
 
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
+
+    virtual RawRadarSignatureInfo getRadarSignatureInfo() { return RawRadarSignatureInfo(0.05, 0.3, 0.3); }
 
 #if FEATURE_3D_RENDERING
     virtual void draw3DTransparent() override;
@@ -325,6 +326,9 @@ public:
     void setWeaponTubeCount(int amount);
     int getWeaponTubeCount();
     EMissileWeapons getWeaponTubeLoadType(int index);
+    void weaponTubeAllowMissle(int index, EMissileWeapons type);
+    void weaponTubeDisallowMissle(int index, EMissileWeapons type);
+    void setWeaponTubeExclusiveFor(int index, EMissileWeapons type);
 
     void setRadarTrace(string trace) { radar_trace = trace; }
 };

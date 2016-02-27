@@ -4,6 +4,7 @@
 #include "spaceObjects/nebula.h"
 
 #include "screenComponents/radarView.h"
+#include "screenComponents/rawScannerDataRadarOverlay.h"
 #include "screenComponents/scanTargetButton.h"
 #include "screenComponents/frequencyCurve.h"
 #include "screenComponents/scanningDialog.h"
@@ -28,6 +29,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
         }, nullptr, nullptr
     );
+    raw_scanner_data_overlay = new RawScannerDataRadarOverlay(radar, "", gameGlobalInfo->long_range_radar_range);
+    raw_scanner_data_overlay->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
 
     GuiAutoLayout* sidebar = new GuiAutoLayout(radar_view, "SIDE_BAR", GuiAutoLayout::LayoutVerticalTopToBottom);
     sidebar->setPosition(-20, 50, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
@@ -69,13 +72,15 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
             radar->setAutoCentering(false);
             radar->setViewPosition(probe_position);
             radar->setDistance(5000);
-            radar->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
+            radar->setFogOfWarStyle(GuiRadarView::NoFogOfWar);
+            raw_scanner_data_overlay->hide();
             probe_view_button->setText("Back to ship");
         }else if(my_spaceship->science_link)
         {
             my_spaceship->science_link = false;
             radar->setAutoCentering(true);
             radar->setDistance(gameGlobalInfo->long_range_radar_range);
+            raw_scanner_data_overlay->show();
             probe_view_button->setText("Probe View");
             radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
         }

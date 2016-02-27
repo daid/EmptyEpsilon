@@ -4,6 +4,9 @@
 #include "main.h"
 
 #include "scriptInterface.h"
+REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ScanProbe, SpaceObject)
+{
+}
 
 REGISTER_MULTIPLAYER_CLASS(ScanProbe, "ScanProbe");
 ScanProbe::ScanProbe()

@@ -19,7 +19,14 @@ protected:
      */
     float missile_fire_delay;
     bool has_missiles;
-    bool has_beams;
+    enum EBeamInfo
+    {
+        NoBeams,
+        FrontBeams,
+        SideBeams,
+        RearBeams
+    };
+    EBeamInfo beam_info;
     float beam_weapon_range;
     
     float update_target_delay;
@@ -66,7 +73,7 @@ protected:
     /**!
      * Used for missiles, as they require some intelligence to fire.
      */
-    float calculateFiringSolution(P<SpaceObject> target);
+    float calculateFiringSolution(P<SpaceObject> target, EMissileWeapons type);
 
     /// Because the GameMasterUI needs to be touching privates. Hmm.
     friend class GameMasterUI;

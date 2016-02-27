@@ -11,6 +11,8 @@ public:
     float size;
 
     Asteroid();
+    
+    virtual RawRadarSignatureInfo getRadarSignatureInfo() { return RawRadarSignatureInfo(0.05, 0.0, 0.0); }
 
     virtual void draw3D();
 

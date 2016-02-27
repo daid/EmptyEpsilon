@@ -15,7 +15,7 @@ FighterAI::FighterAI(CpuShip* owner)
 
 bool FighterAI::canSwitchAI()
 {
-    if (owner->getTarget() && (has_missiles || has_beams))
+    if (owner->getTarget() && (has_missiles || beam_info != NoBeams))
     {
         if (attack_state == dive)
             return false;
@@ -47,14 +47,14 @@ void FighterAI::runAttack(P<SpaceObject> target)
     case dive:
         if (distance < 2500 + target->getRadius() && has_missiles)
         {
-            for(int n=0; n<owner->weapon_tubes; n++)
+            for(int n=0; n<owner->weapon_tube_count; n++)
             {
                 if (owner->weapon_tube[n].isLoaded() && missile_fire_delay <= 0.0)
                 {
-                    float target_angle = calculateFiringSolution(target);
+                    float target_angle = calculateFiringSolution(target, owner->weapon_tube[n].getLoadType());
                     if (target_angle != std::numeric_limits<float>::infinity())
                         owner->weapon_tube[n].fire(target_angle);
-                    missile_fire_delay = owner->tube_load_time / owner->weapon_tubes / 2.0;
+                    missile_fire_delay = owner->weapon_tube[n].getLoadTimeConfig() / owner->weapon_tube_count / 2.0;
                 }
             }
         }

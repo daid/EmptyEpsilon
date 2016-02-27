@@ -19,6 +19,8 @@ public:
 
     WormHole();
 
+    virtual RawRadarSignatureInfo getRadarSignatureInfo() { return RawRadarSignatureInfo(0.9, 0.0, 0.0); }
+
 #if FEATURE_3D_RENDERING
     virtual void draw3DTransparent();
 #endif//FEATURE_3D_RENDERING

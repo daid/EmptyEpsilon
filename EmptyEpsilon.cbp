@@ -606,6 +606,8 @@
 		<Unit filename="src/screenComponents/powerDamageIndicator.h" />
 		<Unit filename="src/screenComponents/radarView.cpp" />
 		<Unit filename="src/screenComponents/radarView.h" />
+		<Unit filename="src/screenComponents/rawScannerDataRadarOverlay.cpp" />
+		<Unit filename="src/screenComponents/rawScannerDataRadarOverlay.h" />
 		<Unit filename="src/screenComponents/rotatingModelView.cpp" />
 		<Unit filename="src/screenComponents/rotatingModelView.h" />
 		<Unit filename="src/screenComponents/scanTargetButton.cpp" />
@@ -694,6 +696,8 @@
 		<Unit filename="src/spaceObjects/explosionEffect.h" />
 		<Unit filename="src/spaceObjects/homingMissile.cpp" />
 		<Unit filename="src/spaceObjects/homingMissile.h" />
+		<Unit filename="src/spaceObjects/hvli.cpp" />
+		<Unit filename="src/spaceObjects/hvli.h" />
 		<Unit filename="src/spaceObjects/mine.cpp" />
 		<Unit filename="src/spaceObjects/mine.h" />
 		<Unit filename="src/spaceObjects/missileWeapon.cpp" />

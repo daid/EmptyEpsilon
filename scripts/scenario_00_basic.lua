@@ -1,5 +1,8 @@
 -- Name: Basic
--- Description: Basic scenario. A few random stations, with random stuff around them, are under attack by enemies.
+-- Description: Basic scenario. A few random stations, with random stuff around them, are under attack by enemies. Kill all enemies to win.
+-- Variation[Easy]: Places less enemies. Recommended for new crews.
+-- Variation[Hard]: Places more enemies. Recommended if you have more then 1 player controlled ship.
+-- Variation[Extreme]: Places many enemies. You're pretty surely overwhelmed.
 
 function vectorFromAngle(angle, length)
 	return math.cos(angle / 180 * math.pi) * length, math.sin(angle / 180 * math.pi) * length
@@ -28,10 +31,18 @@ function init()
 		setCirclePos(Nebula(), 0, 0, random(0, 360), random(20000, 45000))
 	end
 	
-	enemy_group_count = 5
+	if getScenarioVariation() == "Extreme" then
+		enemy_group_count = 20
+	elseif getScenarioVariation() == "Hard" then
+		enemy_group_count = 8
+	elseif getScenarioVariation() == "Easy" then
+		enemy_group_count = 3
+	else
+		enemy_group_count = 5
+	end
 	for cnt=1,enemy_group_count do
 		a = cnt * 360/enemy_group_count + random(-60, 60)
-		d = random(35000, 55000)
+		d = random(35000, 40000 + enemy_group_count * 3000)
 		type = random(0, 10)
 		if type < 1.0 then
 			table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Strikeship'):setRotation(a + 180):orderRoaming(), 0, 0, a, d))

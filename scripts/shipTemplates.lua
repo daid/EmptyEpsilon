@@ -77,6 +77,8 @@ template = ShipTemplate():setName("Player Missile Cr."):setModel("space_cruiser_
 template:setRadarTrace("radar_missile_cruiser.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setTubes(4, 8.0)
+template:setWeaponTubeExclusiveFor(2, "Homing") --Set tube 3 and 4 exclusive for homing missiles.
+template:setWeaponTubeExclusiveFor(3, "Homing")
 template:setHull(200)
 template:setShields(110, 70)
 template:setSpeed(60, 8, 15)
@@ -123,14 +125,15 @@ template:setRadarTrace("radar_fighter.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 40, -10, 1000.0, 6.0, 8)
 template:setBeam(1, 40,  10, 1000.0, 6.0, 8)
-template:setTubes(1, 10.0) -- Amount of torpedo tubes, loading time
 template:setHull(60)
 template:setShields(40)
 template:setSpeed(110, 20, 40)
 template:setWarpSpeed(0)
 template:setJumpDrive(false)
 template:setCloaking(false)
-template:setWeaponStorage("Homing", 4)
+template:setEnergyStorage(400)
+template:setTubes(1, 10.0) -- Amount of torpedo tubes, loading time
+template:setWeaponStorage("HVLI", 4)
 
 template:addRoomSystem(3, 0, 1, 1, "Maneuver");
 template:addRoomSystem(1, 0, 2, 1, "BeamWeapons");
@@ -196,7 +199,7 @@ template:setDefaultAI('fighter')	-- set fighter AI, which dives at the enemy, an
 	-- Fabricated by: Repulse shipyards
 	-- The sucessor to the widly sucesfull mark I cruiser. This ship has several notable improvements over the original ship, including better armor, slightly improved weaponry and customization by the shipyards. The latter improvement was the most requested feature by several factions once they realized that their old surplus mark I ships were used for less savoury purposes.
 
-template = ShipTemplate():setName("Cruiser"):setModel("space_frigate_6")
+template = ShipTemplate():setName("Cruiser"):setModel("small_frigate_4")
 template:setRadarTrace("radar_cruiser.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 90, -15, 1000.0, 6.0, 6)
@@ -231,7 +234,7 @@ template:setSpeed(60, 5, 10)
 template:setWeaponStorage("Homing", 4)
 
 -- The Strikeship is a warp-drive equiped figher build for quick strikes, it's fast, it's aggile, but does not do an extreme amount of damage, and lacks in rear shields.
-template = ShipTemplate():setName("Strikeship"):setModel("dark_fighter_6")
+template = ShipTemplate():setName("Strikeship"):setModel("small_frigate_3")
 template:setRadarTrace("radar_striker.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 40,-5, 1000.0, 6.0, 6)
@@ -327,12 +330,15 @@ template:setRadarTrace("radar_ktlitan_breaker.png")
 template:setBeam(0, 40, 0, 800.0, 4.0, 6)
 template:setBeam(1, 35,-15, 800.0, 4.0, 6)
 template:setBeam(2, 35, 15, 800.0, 4.0, 6)
+template:setTubes(1, 10.0) -- Amount of torpedo tubes, loading time
+template:setWeaponStorage("HVLI", 5) --Only give this ship HVLI's
 template:setHull(120)
 template:setSpeed(100, 5, 25)
 
 template = ShipTemplate():setName("Ktlitan Worker"):setModel("sci_fi_alien_ship_3")
 template:setRadarTrace("radar_ktlitan_worker.png")
-template:setBeam(0, 40, 0, 600.0, 4.0, 6)
+template:setBeam(0, 40, -90, 600.0, 4.0, 6)
+template:setBeam(1, 40, 90, 600.0, 4.0, 6)
 template:setHull(50)
 template:setSpeed(100, 35, 25)
 

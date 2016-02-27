@@ -28,10 +28,12 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(TutorialGame)
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, setMessageToTopPosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, setMessageToBottomPosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, onNext);
+    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, finish);
 }
 
 TutorialGame::TutorialGame()
 {
+    new LocalOnlyGame();
     new GuiOverlay(this, "", sf::Color::Black);
     
     viewport = nullptr;
@@ -185,6 +187,15 @@ void TutorialGame::setMessageToBottomPosition()
     frame->setPosition(0, -50, ABottomCenter);
 }
 
+void TutorialGame::finish()
+{
+    script->destroy();
+    destroy();
+    
+    disconnectFromServer();
+    returnToMainMenu();
+}
+
 void TutorialGame::hideAllScreens()
 {
     if (viewport == nullptr)
@@ -198,4 +209,12 @@ void TutorialGame::hideAllScreens()
     {
         station_screen[n]->hide();
     }
+}
+
+LocalOnlyGame::LocalOnlyGame()
+{
+}
+
+void LocalOnlyGame::update(float delta)
+{
 }

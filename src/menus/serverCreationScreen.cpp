@@ -21,62 +21,25 @@ ServerCreationScreen::ServerCreationScreen()
     (new GuiLabel(this, "SCENARIO_LABEL", "Scenario", 30))->addBox()->setPosition(-50, 50, ATopRight)->setSize(460, 50);
     (new GuiBox(this, "SCENARIO_BOX"))->setPosition(-50, 50, ATopRight)->setSize(460, 360);
     GuiListbox* scenario_list = new GuiListbox(this, "SCENARIO_LIST", [this](int index, string value) {
-        selected_scenario_filename = value;
-
-        scenario_description->setText("");
-
-        variation_selection->setSelectionIndex(0);
-        variation_names_list = {"None"};
-
-        variation_descriptions_list = {"No variation."};
-        variation_description->setText("No variation.");
-
-        P<ResourceStream> stream = getResourceStream(selected_scenario_filename);
-        if (!stream) return;
-
-        for(int i=0; i<10; i++)
-        {
-            string line = stream->readLine().strip();
-            if (!line.startswith("--"))
-                continue;
-            line = line.substr(2).strip();
-            if (line.startswith("Description:"))
-                scenario_description->setText(line.substr(12).strip());
-            if (line.startswith("Variation["))
-            {
-                line = line.substr(10).strip();
-                string variation_name = line.substr(0, line.find("]"));
-
-                variation_names_list.push_back(variation_name);
-                variation_descriptions_list.push_back(line.substr(line.find("]")+2).strip());
-            }
-
-            variation_selection->setOptions(variation_names_list);
-
-        }
+        selectScenario(value);
     });
     scenario_list->setPosition(-80, 100, ATopRight)->setSize(400, 300);
     (new GuiBox(this, "SCENARIO_DESCRIPTION_BOX"))->setPosition(-50, 50 + 360, ATopRight)->setSize(460, 200);
     scenario_description = new GuiScrollText(this, "SCENARIO_DESCRIPTION", "");
     scenario_description->setTextSize(20)->setPosition(-80, 60 + 360, ATopRight)->setSize(400, 180);
 
-    variation_selection = new GuiSelector(this, "VARIATION_SELECT", [this](int index, string value) {
+    variation_container = new GuiElement(this, "VARIATION_CONTAINER");
+    variation_container->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    variation_selection = new GuiSelector(variation_container, "VARIATION_SELECT", [this](int index, string value) {
         gameGlobalInfo->variation = variation_names_list.at(index);
         variation_description->setText(variation_descriptions_list.at(index));
     });
     variation_selection->setPosition(-50, 380 + 230, ATopRight)->setSize(300, 50);
-    (new GuiLabel(this, "VARIATION_LABEL", "Variation:", 30))->setAlignment(ACenterRight)->setPosition(-350, 380 + 230, ATopRight)->setSize(250, 50);
+    (new GuiLabel(variation_container, "VARIATION_LABEL", "Variation:", 30))->setAlignment(ACenterRight)->setPosition(-350, 380 + 230, ATopRight)->setSize(250, 50);
 
-    (new GuiBox(this, "VARIATION_DESCRIPTION_BOX"))->setPosition(-50, 380 + 230 + 50, ATopRight)->setSize(460, 120);
-    variation_description = new GuiScrollText(this, "VARIATION_DESCRIPTION", "");
+    (new GuiBox(variation_container, "VARIATION_DESCRIPTION_BOX"))->setPosition(-50, 380 + 230 + 50, ATopRight)->setSize(460, 120);
+    variation_description = new GuiScrollText(variation_container, "VARIATION_DESCRIPTION", "");
     variation_description->setTextSize(20)->setPosition(-80, 60 + 380 + 230, ATopRight)->setSize(400, 100);
-
-    variation_names_list = {"None"};
-    variation_selection->setOptions({"None"});
-    variation_selection->setSelectionIndex(0);
-
-    variation_descriptions_list = {"No variation."};
-    variation_description->setText("No variation.");
 
     float y = 50;
     (new GuiLabel(this, "GENERAL_LABEL", "General", 30))->addBox()->setPosition(50, y, ATopLeft)->setSize(550, 50);
@@ -172,9 +135,47 @@ ServerCreationScreen::ServerCreationScreen()
         scenario_list->addEntry(name, filename);
     }
     scenario_list->setSelectionIndex(0);
-    selected_scenario_filename = scenario_list->getSelectionValue();
+    selectScenario(scenario_list->getSelectionValue());
 
     gameGlobalInfo->reset();
+}
+
+void ServerCreationScreen::selectScenario(string filename)
+{
+    selected_scenario_filename = filename;
+
+    scenario_description->setText("");
+
+    variation_selection->setSelectionIndex(0);
+    variation_names_list = {"None"};
+    gameGlobalInfo->variation = variation_names_list[0];
+
+    variation_descriptions_list = {"No variation."};
+    variation_description->setText("No variation selected. Play the scenario as intended.");
+
+    P<ResourceStream> stream = getResourceStream(selected_scenario_filename);
+    if (!stream) return;
+
+    for(int i=0; i<30; i++)
+    {
+        string line = stream->readLine().strip();
+        if (!line.startswith("--"))
+            continue;
+        line = line.substr(2).strip();
+        if (line.startswith("Description:"))
+            scenario_description->setText(line.substr(12).strip());
+        if (line.startswith("Variation["))
+        {
+            line = line.substr(10).strip();
+            string variation_name = line.substr(0, line.find("]"));
+
+            variation_names_list.push_back(variation_name);
+            variation_descriptions_list.push_back(line.substr(line.find("]")+2).strip());
+        }
+    }
+    
+    variation_selection->setOptions(variation_names_list);
+    variation_container->setVisible(variation_names_list.size() > 1);
 }
 
 void ServerCreationScreen::startScenario()

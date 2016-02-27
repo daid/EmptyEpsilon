@@ -32,6 +32,33 @@ public:
     {}
 };
 
+class RawRadarSignatureInfo
+{
+public:
+    float gravity;
+    float electrical;
+    float biological;
+
+    RawRadarSignatureInfo()
+    : gravity(0), electrical(0), biological(0) {}
+
+    RawRadarSignatureInfo(float gravity, float electrical, float biological)
+    : gravity(gravity), electrical(electrical), biological(biological) {}
+    
+    RawRadarSignatureInfo& operator+=(const RawRadarSignatureInfo& o)
+    {
+        gravity += o.gravity;
+        electrical += o.electrical;
+        biological += o.biological;
+        return *this;
+    }
+
+    RawRadarSignatureInfo operator*(const float f) const
+    {
+        return RawRadarSignatureInfo(gravity * f, electrical * f, biological * f);
+    }
+};
+
 class SpaceObject;
 class PlayerSpaceship;
 extern PVector<SpaceObject> space_object_list;
@@ -59,6 +86,8 @@ public:
 
     float getHeading() { float ret = getRotation() - 270; while(ret < 0) ret += 360.0f; while(ret > 360.0f) ret -= 360.0f; return ret; }
     void setHeading(float heading) { setRotation(heading - 90); }
+    
+    virtual RawRadarSignatureInfo getRadarSignatureInfo() { return RawRadarSignatureInfo(0, 0, 0); }
 
 #if FEATURE_3D_RENDERING
     virtual void draw3D();
