@@ -1,5 +1,7 @@
 -- Name: Battlefield
--- Description: The Humans are fighting off the Exuari who are on all out war on a neutral station.
+-- Description: The Humans are fighting off the Exuari who are on all out war on a neutral station. (This scenario is mostly for performance testing)
+-- Variation[Large]: Larger battle, normally it's about 30 vs 30 ships. This increases this to 100 vs 100 ships.
+-- Variation[Huge]: Huge battle, normally it's about 30 vs 30 ships. This increases this to 500 vs 500 ships.
 
 function setCirclePos(obj, x, y, angle, distance)
 	obj:setPosition(x + math.sin(angle / 180 * math.pi) * distance, y + -math.cos(angle / 180 * math.pi) * distance)
@@ -16,24 +18,37 @@ function init()
     for n=1,5 do
         setCirclePos(CpuShip():setTemplate("Tug"):setFaction("Independent"):setScanned(true), 0, -15000, random(0, 360), random(1000, 5000))
     end
-	
-	for n=1,20 do
-		CpuShip():setTemplate("Fighter"):setPosition(random(-10000, 10000), random(0, 3000)):setFaction("Human Navy"):orderRoaming():setScanned(true)
+
+	if getScenarioVariation() == "Large" then
+		battle_scale = 3.3;
+		location_scale = 1.5;
+	elseif getScenarioVariation() == "Huge" then
+		battle_scale = 16.6;
+		location_scale = 3;
+	else
+		battle_scale = 1;
+		location_scale = 1;
 	end
-	for n=1,10 do
-		CpuShip():setTemplate("Cruiser"):setPosition(random(-10000, 10000), random(0, 2000)):setFaction("Human Navy"):orderRoaming():setScanned(true)
+	
+	for n=1,20*battle_scale do
+		CpuShip():setTemplate("Fighter"):setPosition(random(-10000 * location_scale, 10000 * location_scale), random(0, 3000)):setRotation(90):setFaction("Human Navy"):orderRoaming():setScanned(true)
+	end
+	for n=1,10*battle_scale do
+		CpuShip():setTemplate("Cruiser"):setPosition(random(-10000 * location_scale, 10000 * location_scale), random(0, 2000)):setRotation(90):setFaction("Human Navy"):orderRoaming():setScanned(true)
 	end
 
-	for n=1,20 do
-		CpuShip():setTemplate("Fighter"):setPosition(random(-13000, 13000), random(5000, 8000)):setFaction("Exuari"):orderRoaming():setScanned(true)
+	for n=1,20*battle_scale do
+		CpuShip():setTemplate("Fighter"):setPosition(random(-13000 * location_scale, 13000 * location_scale), random(5000, 8000)):setRotation(-90):setFaction("Exuari"):orderRoaming():setScanned(true)
 	end
-	for n=1,10 do
-		CpuShip():setTemplate("Cruiser"):setPosition(random(-13000, 13000), random(5000, 8000)):setFaction("Exuari"):orderRoaming()
+	for n=1,10*battle_scale do
+		CpuShip():setTemplate("Cruiser"):setPosition(random(-13000 * location_scale, 13000 * location_scale), random(5000, 8000)):setRotation(-90):setFaction("Exuari"):orderRoaming()
 	end
-	for n=1,3 do
-		CpuShip():setTemplate("Adv. Gunship"):setPosition(random(-13000, 13000), 5000):setFaction("Exuari"):orderRoaming()
+	for n=1,3*battle_scale do
+		CpuShip():setTemplate("Adv. Gunship"):setPosition(random(-13000 * location_scale, 13000 * location_scale), 5000):setRotation(-90):setFaction("Exuari"):orderRoaming()
 	end
-	CpuShip():setTemplate("Dreadnought"):setPosition(0, 7000):setFaction("Exuari"):orderRoaming():setRotation(0)
+	for n=1,1*battle_scale do
+		CpuShip():setTemplate("Dreadnought"):setPosition(random(-3000 * location_scale, 3000 * location_scale), 7000):setRotation(-90):setFaction("Exuari"):orderRoaming()
+	end
 end
 
 function update(delta)
