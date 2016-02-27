@@ -199,7 +199,7 @@ template:setDefaultAI('fighter')	-- set fighter AI, which dives at the enemy, an
 	-- Fabricated by: Repulse shipyards
 	-- The sucessor to the widly sucesfull mark I cruiser. This ship has several notable improvements over the original ship, including better armor, slightly improved weaponry and customization by the shipyards. The latter improvement was the most requested feature by several factions once they realized that their old surplus mark I ships were used for less savoury purposes.
 
-template = ShipTemplate():setName("Cruiser"):setModel("space_frigate_6")
+template = ShipTemplate():setName("Cruiser"):setModel("small_frigate_4")
 template:setRadarTrace("radar_cruiser.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 90, -15, 1000.0, 6.0, 6)
@@ -234,7 +234,7 @@ template:setSpeed(60, 5, 10)
 template:setWeaponStorage("Homing", 4)
 
 -- The Strikeship is a warp-drive equiped figher build for quick strikes, it's fast, it's aggile, but does not do an extreme amount of damage, and lacks in rear shields.
-template = ShipTemplate():setName("Strikeship"):setModel("dark_fighter_6")
+template = ShipTemplate():setName("Strikeship"):setModel("small_frigate_3")
 template:setRadarTrace("radar_striker.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 40,-5, 1000.0, 6.0, 6)
