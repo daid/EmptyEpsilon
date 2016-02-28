@@ -50,7 +50,7 @@ class HardwareController : public Updatable
 {
 private:
     std::vector<HardwareOutputDevice*> devices;
-    std::unordered_map<string, int> channel_mapping;
+    std::unordered_map<string, std::vector<int> > channel_mapping;
     std::vector<HardwareMappingState> states;
     std::vector<HardwareMappingEvent> events;
     std::vector<float> channels;
@@ -62,7 +62,9 @@ public:
     
     virtual void update(float delta);
 private:
-    void handleConfig(string section, std::unordered_map<string, string> settings);
+    void handleConfig(string section, std::unordered_map<string, string>& settings);
+    void createNewHardwareMappingState(int channel_number, std::unordered_map<string, string>& settings);
+    void createNewHardwareMappingEvent(int channel_number, std::unordered_map<string, string>& settings);
     HardwareMappingEffect* createEffect(std::unordered_map<string, string>& settings);
     
     bool getVariableValue(string variable_name, float& value);
