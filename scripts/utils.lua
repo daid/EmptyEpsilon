@@ -37,3 +37,16 @@ function distance(a, b, c, d)
     local xd, yd = (x1 - x2), (y1 - y2)
     return math.sqrt(xd * xd + yd * yd)
 end
+
+
+--Function to merge data from table B into table A. Every key that is not set in table A is filled by the data from table B.
+-- this function can be used to fill in incomplete configuration data. See the comms_station script as example.
+function mergeTables(table_a, table_b)
+    for key, value in pairs(table_b) do
+        if table_a[key] == nil then
+            table_a[key] = value
+        elseif type(table_a[key]) == "table" and type(value) then
+            mergeTables(table_a[key], value)
+        end
+    end
+end

@@ -9,6 +9,7 @@ end
 
 function init()
     neutral_station = SpaceStation():setTemplate("Large Station"):setPosition(0, -15000):setRotation(random(0, 360)):setFaction("Independent")
+    neutral_station.comms_data = {supplydrop = "neutral", weapons = {Mine = "friend" } } -- Setup the neutral station to supply supplydrops to anyone, but mines only to friendlies (which rules out the player)
 	friendly_station = SpaceStation():setTemplate("Large Station"):setPosition(-10000, -25000):setRotation(random(0, 360)):setFaction("Human Navy")
     --Put some mines around the friendly station.
     for n=1,30 do
