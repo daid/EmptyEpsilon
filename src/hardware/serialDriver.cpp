@@ -14,6 +14,12 @@ extern int tcsendbreak (int __fd, int __duration) __THROW;
 #include <fcntl.h>
 #include <unistd.h>
 #endif
+#if defined(__APPLE__) && defined(__MACH__)
+    #include <IOKit/serial/ioss.h>
+    #include <sys/ioctl.h>
+    #include <fcntl.h>
+    #include <termios.h>
+#endif
 
 #include "serialDriver.h"
 
@@ -45,6 +51,10 @@ SerialPort::SerialPort(string name)
 #ifdef __gnu_linux__
     handle = open(("/dev/" + name).c_str(), O_RDWR | O_NOCTTY | O_NDELAY);
 #endif
+#if defined(__APPLE__) && defined(__MACH__)
+    handle = open(("/dev/" + name).c_str(), O_RDWR | O_NOCTTY | O_NDELAY);
+#endif
+
     if (!isOpen())
         LOG(WARNING) << "Failed to open: " << name;
 }
@@ -53,12 +63,16 @@ SerialPort::~SerialPort()
 {
     if (!isOpen())
         return;
-    
+
 #ifdef __WIN32__
     CloseHandle(handle);
     handle = INVALID_HANDLE_VALUE;
 #endif
 #ifdef __gnu_linux__
+    close(handle);
+    handle = 0;
+#endif
+#if defined(__APPLE__) && defined(__MACH__)
     close(handle);
     handle = 0;
 #endif
@@ -70,6 +84,9 @@ bool SerialPort::isOpen()
     return handle != INVALID_HANDLE_VALUE;
 #endif
 #ifdef __gnu_linux__
+    return handle;
+#endif
+#if defined(__APPLE__) && defined(__MACH__)
     return handle;
 #endif
     return false;
@@ -116,16 +133,16 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
         dcb.StopBits = TWOSTOPBITS;
         break;
     }
-    
+
     //Do not handle parity errors.
     dcb.fParity = false;
-    
+
     //Do not discard null chars.
     dcb.fNull = false;
-    
+
     //Abort on error. Need to call ClearCommError when an error is returned.
     dcb.fAbortOnError = true;
-    
+
     //Disable all flow control settings, so we can control the DTR and RTS lines manually.
     dcb.fOutxCtsFlow = false;
     dcb.fOutxDsrFlow = false;
@@ -133,7 +150,7 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
     dcb.fRtsControl = RTS_CONTROL_DISABLE;
     dcb.fDtrControl = DTR_CONTROL_DISABLE;
     dcb.fTXContinueOnXoff = false;
-    
+
     if(!SetCommState(handle, &dcb))
     {
         LOG(ERROR) << "SetCommState failed!";
@@ -201,8 +218,76 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
         tio.c_cflag |= CSTOPB;
         break;
     }
-    
+
     ioctl(handle, TCSETS2, &tio);
+#endif
+#if defined(__APPLE__) && defined(__MACH__)
+    struct termios tio;
+    tcgetattr(handle, &tio);
+
+	// Clear handshake, parity, stopbits and size
+    tio.c_cflag |= CLOCAL;
+	tio.c_cflag &= ~CRTSCTS;
+	tio.c_cflag &= ~PARENB;
+	tio.c_cflag &= ~CSTOPB;
+	tio.c_cflag &= ~CSIZE;
+
+	// Enable the receiver
+	tio.c_cflag |= CREAD;
+
+    switch (databits)
+	{
+	case 5:
+		tio.c_cflag |= CS5;
+		break;
+	case 6:
+		tio.c_cflag |= CS6;
+		break;
+	case 7:
+		tio.c_cflag |= CS7;
+		break;
+	default:
+	case 8:
+		tio.c_cflag |= CS8;
+		break;
+	}
+
+    switch(parity)
+    {
+    case NoParity:
+        tio.c_cflag &= (tcflag_t) ~(PARENB | PARODD);
+        break;
+    case OddParity:
+        tio.c_cflag |= PARENB | PARODD;
+        break;
+    case EvenParity:
+        tio.c_cflag |= PARENB;
+        break;
+    case MarkParity:
+        tio.c_cflag |= PARENB | PARODD | PARMRK;
+        break;
+    }
+
+    switch(stopbits)
+    {
+    case OneStopBit:
+        break;
+    case OneAndAHalfStopBit:
+        LOG(WARNING) << "OneAndAHalfStopBit not supported on posix!";
+        break;
+    case TwoStopbits:
+        tio.c_cflag |= CSTOPB;
+        break;
+    }
+
+    tcsetattr(handle, TCSANOW, &tio);
+
+    // setting nonstandard baud rate
+    speed_t speed = baudrate;
+    if (ioctl (handle, IOSSIOSPEED, &speed, 1) < 0) {
+        LOG(ERROR) << "setting baud rate failed. errno:" << errno;
+    }
+
 #endif
 }
 
@@ -220,6 +305,9 @@ void SerialPort::send(void* data, int data_size)
     }
 #endif
 #ifdef __gnu_linux__
+    write(handle, data, data_size);
+#endif
+#if defined(__APPLE__) && defined(__MACH__)
     write(handle, data, data_size);
 #endif
 }
@@ -246,6 +334,12 @@ int SerialPort::recv(void* data, int data_size)
         return bytes_read;
     return 0;
 #endif
+#if defined(__APPLE__) && defined(__MACH__)
+    int bytes_read = read(handle, data, data_size);
+    if (bytes_read > 0)
+        return bytes_read;
+    return 0;
+#endif
     return 0;
 }
 
@@ -260,6 +354,9 @@ void SerialPort::setDTR()
     int bit = TIOCM_DTR;
     ioctl(handle, TIOCMBIS, &bit);
 #endif
+#if defined(__APPLE__) && defined(__MACH__)
+    ioctl(handle, TIOCSDTR);
+#endif
 }
 
 void SerialPort::clearDTR()
@@ -272,6 +369,9 @@ void SerialPort::clearDTR()
 #ifdef __gnu_linux__
     int bit = TIOCM_DTR;
     ioctl(handle, TIOCMBIC, &bit);
+#endif
+#if defined(__APPLE__) && defined(__MACH__)
+    ioctl(handle, TIOCCDTR);
 #endif
 }
 
@@ -286,6 +386,9 @@ void SerialPort::setRTS()
     int bit = TIOCM_RTS;
     ioctl(handle, TIOCMBIS, &bit);
 #endif
+#if defined(__APPLE__) && defined(__MACH__)
+    ioctl(handle, TIOCM_RTS);
+#endif
 }
 
 void SerialPort::clearRTS()
@@ -299,6 +402,9 @@ void SerialPort::clearRTS()
     int bit = TIOCM_RTS;
     ioctl(handle, TIOCMBIC, &bit);
 #endif
+#if defined(__APPLE__) && defined(__MACH__)
+    ioctl(handle, TIOCM_RTS);
+#endif
 }
 
 void SerialPort::sendBreak()
@@ -308,6 +414,9 @@ void SerialPort::sendBreak()
     ClearCommBreak(handle);
 #endif
 #ifdef __gnu_linux__
+    tcsendbreak(handle, 0);
+#endif
+#if defined(__APPLE__) && defined(__MACH__)
     tcsendbreak(handle, 0);
 #endif
 }
@@ -324,11 +433,11 @@ std::vector<string> SerialPort::getAvailablePorts()
         unsigned char data[2048];
         unsigned long data_size = sizeof(data);
         int index = 0;
-        
+
         while(RegEnumValue(key, index, value, &value_size, NULL, NULL, data, &data_size) == ERROR_SUCCESS)
         {
             names.push_back(string((char*)data));
-            
+
             index++;
             value_size = sizeof(value);
             data_size = sizeof(value);
@@ -353,7 +462,7 @@ string SerialPort::getPseudoDriverName(string port)
         unsigned char data[2048];
         unsigned long data_size = sizeof(data);
         int index = 0;
-        
+
         while(RegEnumValue(key, index, value, &value_size, NULL, NULL, data, &data_size) == ERROR_SUCCESS)
         {
             if (string((char*)data) == port)
@@ -362,7 +471,7 @@ string SerialPort::getPseudoDriverName(string port)
                 for(unsigned int n=0; n<value_size; n++)
                     if(value[n] >= '0' && value[n] <= '9')
                         value[n] = '@';
-                
+
                 ret = string(value);
             }
             index++;
@@ -377,6 +486,17 @@ string SerialPort::getPseudoDriverName(string port)
 #endif
 #ifdef __gnu_linux__
     FILE* f = fopen(("/sys/class/tty/" + port + "/device/modalias").c_str(), "rt");
+    if (!f)
+        return "";
+    char buffer[128];
+    buffer[127] = '\0';
+    if (!fgets(buffer, 127, f))
+	buffer[0] = '\0';
+    fclose(f);
+    return string(buffer);
+#endif
+#if defined(__APPLE__) && defined(__MACH__)
+    FILE* f = fopen(("/dev/tty." + port).c_str(), "rt");
     if (!f)
         return "";
     char buffer[128];
