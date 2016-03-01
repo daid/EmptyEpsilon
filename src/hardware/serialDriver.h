@@ -17,7 +17,11 @@ private:
 #ifdef __gnu_linux__
     int handle;
 #endif
-    
+#if defined(__APPLE__) && defined(__MACH__)
+    int handle;
+    #define IOSSIOSPEED _IOW('T', 2, speed_t)
+#endif
+
 public:
     enum EParity
     {

@@ -72,7 +72,12 @@ void DMX512SerialDevice::updateLoop()
         //port->sendBreak(); //Does not seem to work? (Windows with Arduino running: https://github.com/mathertel/DMXSerial )
         
         //Configure the serial port for fake break.
-        port->configure(100000, 8, SerialPort::EvenParity, SerialPort::TwoStopbits);
+        #if defined(__APPLE__) && defined(__MACH__)
+            // Didin't work with even parity in os x.
+            port->configure(100000, 8, SerialPort::NoParity, SerialPort::TwoStopbits);
+        #else
+            port->configure(100000, 8, SerialPort::EvenParity, SerialPort::TwoStopbits);
+        #endif
         //Send the fake break. 8 bits of 0, 1 parity bit which is 0. Which gives 9 bits at 10uSec. Which is 90uSec, more then the required 88uSec
         port->send(start_code, sizeof(start_code));
         
