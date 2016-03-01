@@ -1,24 +1,29 @@
 #include "logging.h"
 #ifdef __WIN32__
-#include <windows.h>
+    #include <windows.h>
 #endif
 #ifdef __gnu_linux__
-//Including ioctl or termios conflicts with asm/termios.h which we need for TCGETS2. So locally define the ioctl and tcsendbreak functions. Yes, it's dirty, but it works.
-//#include <sys/ioctl.h>
-//#include <termios.h>
-extern "C" {
-extern int ioctl (int __fd, unsigned long int __request, ...) __THROW;
-extern int tcsendbreak (int __fd, int __duration) __THROW;
-}
-#include <asm/termios.h>
-#include <fcntl.h>
-#include <unistd.h>
+    //Including ioctl or termios conflicts with asm/termios.h which we need for TCGETS2. So locally define the ioctl and tcsendbreak functions. Yes, it's dirty, but it works.
+    //#include <sys/ioctl.h>
+    //#include <termios.h>
+    extern "C" {
+    extern int ioctl (int __fd, unsigned long int __request, ...) __THROW;
+    extern int tcsendbreak (int __fd, int __duration) __THROW;
+    }
+    #include <asm/termios.h>
+    #include <fcntl.h>
+    #include <unistd.h>
 #endif
 #if defined(__APPLE__) && defined(__MACH__)
     #include <IOKit/serial/ioss.h>
     #include <sys/ioctl.h>
     #include <fcntl.h>
     #include <termios.h>
+
+    //Define the IOCTL for OSX that allows you to set a custom serial speed, if it's not defined by one of the includes.
+    #ifndef IOSSIOSPEED
+    #define IOSSIOSPEED _IOW('T', 2, speed_t)
+    #endif
 #endif
 
 #include "serialDriver.h"
@@ -48,10 +53,7 @@ SerialPort::SerialPort(string name)
         }
     }
 #endif
-#ifdef __gnu_linux__
-    handle = open(("/dev/" + name).c_str(), O_RDWR | O_NOCTTY | O_NDELAY);
-#endif
-#if defined(__APPLE__) && defined(__MACH__)
+#if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
     handle = open(("/dev/" + name).c_str(), O_RDWR | O_NOCTTY | O_NDELAY);
 #endif
 
@@ -68,11 +70,7 @@ SerialPort::~SerialPort()
     CloseHandle(handle);
     handle = INVALID_HANDLE_VALUE;
 #endif
-#ifdef __gnu_linux__
-    close(handle);
-    handle = 0;
-#endif
-#if defined(__APPLE__) && defined(__MACH__)
+#if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
     close(handle);
     handle = 0;
 #endif
@@ -83,10 +81,7 @@ bool SerialPort::isOpen()
 #ifdef __WIN32__
     return handle != INVALID_HANDLE_VALUE;
 #endif
-#ifdef __gnu_linux__
-    return handle;
-#endif
-#if defined(__APPLE__) && defined(__MACH__)
+#if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
     return handle;
 #endif
     return false;
@@ -304,10 +299,7 @@ void SerialPort::send(void* data, int data_size)
         ClearCommError(handle, &dwErrors, &comStat);
     }
 #endif
-#ifdef __gnu_linux__
-    write(handle, data, data_size);
-#endif
-#if defined(__APPLE__) && defined(__MACH__)
+#if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
     write(handle, data, data_size);
 #endif
 }
@@ -328,13 +320,7 @@ int SerialPort::recv(void* data, int data_size)
     }
     return read_size;
 #endif
-#ifdef __gnu_linux__
-    int bytes_read = read(handle, data, data_size);
-    if (bytes_read > 0)
-        return bytes_read;
-    return 0;
-#endif
-#if defined(__APPLE__) && defined(__MACH__)
+#if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
     int bytes_read = read(handle, data, data_size);
     if (bytes_read > 0)
         return bytes_read;
@@ -413,10 +399,7 @@ void SerialPort::sendBreak()
     SetCommBreak(handle);
     ClearCommBreak(handle);
 #endif
-#ifdef __gnu_linux__
-    tcsendbreak(handle, 0);
-#endif
-#if defined(__APPLE__) && defined(__MACH__)
+#if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
     tcsendbreak(handle, 0);
 #endif
 }
