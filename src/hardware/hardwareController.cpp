@@ -113,7 +113,7 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
         else
         {
             channel_mapping[settings["name"]].clear();
-            channel_mapping[settings["name"]].push_back(settings["channel"].toInt());
+            channel_mapping[settings["name"]].push_back((settings["channel"].toInt() - 1));
             LOG(INFO) << "Channel #" << settings["channel"] << ": " << settings["name"];
         }
     }else if(section == "[channels]")
@@ -123,7 +123,7 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
             channel_mapping[item.first].clear();
             for(string number : item.second.split(","))
             {
-                channel_mapping[item.first].push_back(number.strip().toInt());
+                channel_mapping[item.first].push_back((number.strip().toInt() - 1));
                 LOG(INFO) << "Channel #" << item.second << ": " << number;
             }
         }
