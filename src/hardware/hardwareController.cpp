@@ -21,6 +21,8 @@ HardwareController::~HardwareController()
         delete device;
     for(HardwareMappingState& state : states)
         delete state.effect;
+    for(HardwareMappingEvent& event : events)
+        delete event.effect;
 }
 
 void HardwareController::loadConfiguration(string filename)
