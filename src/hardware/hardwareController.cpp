@@ -9,7 +9,7 @@
 #include "dmx512SerialDevice.h"
 #include "enttecDMXProDevice.h"
 #include "virtualOutputDevice.h"
-#include "acnDMXDevice.h"
+#include "sACNDMXDevice.h"
 #include "hardwareMappingEffects.h"
 
 HardwareController::HardwareController()
