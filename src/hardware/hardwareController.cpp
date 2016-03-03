@@ -9,6 +9,7 @@
 #include "dmx512SerialDevice.h"
 #include "enttecDMXProDevice.h"
 #include "virtualOutputDevice.h"
+#include "acnDMXDevice.h"
 #include "hardwareMappingEffects.h"
 
 HardwareController::HardwareController()
@@ -93,6 +94,8 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
             device = new EnttecDMXProDevice();
         else if (settings["device"] == "VirtualOutputDevice")
             device = new VirtualOutputDevice();
+        else if (settings["device"] == "sACN")
+            device = new StreamingAcnDMXDevice();
         if (device)
         {
             if (!device->configure(settings))

@@ -168,6 +168,7 @@ set(SOURCES
 	src/ai/missileVolleyAI.cpp
 	src/hardware/dmx512SerialDevice.cpp
 	src/hardware/enttecDMXProDevice.cpp
+	src/hardware/sACNDMXDevice.cpp
 	src/hardware/hardwareController.cpp
 	src/hardware/hardwareMappingEffects.cpp
 	src/hardware/hardwareOutputDevice.cpp
