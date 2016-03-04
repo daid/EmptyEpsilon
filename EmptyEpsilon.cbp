@@ -526,6 +526,8 @@
 		<Unit filename="src/hardware/hardwareMappingEffects.h" />
 		<Unit filename="src/hardware/hardwareOutputDevice.cpp" />
 		<Unit filename="src/hardware/hardwareOutputDevice.h" />
+		<Unit filename="src/hardware/sACNDMXDevice.cpp" />
+		<Unit filename="src/hardware/sACNDMXDevice.h" />
 		<Unit filename="src/hardware/serialDriver.cpp" />
 		<Unit filename="src/hardware/serialDriver.h" />
 		<Unit filename="src/hardware/virtualOutputDevice.cpp" />

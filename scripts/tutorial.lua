@@ -264,7 +264,7 @@ end)
 addToSequence(weaponsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Tug"):setPosition(-1550, -1900):setRotation(0):orderIdle():setScanned(true):setHull(1):setShieldsMax(1) end)
 addToSequence(weaponsTutorial, [[Perfect aim!
 
-The next ship is behind you. You need to target it first, because homing missiles will home in on your selected target.
+The next ship is behind you. You need to select it as your target it first. So click on it. This because homing missiles will home in on your selected target.
 While not extremely helpful on a stationary target. It can make all the difference on a moving target.]], function()
     if player:getWeaponStorage("homing") < 1 then
         player:setWeaponStorage("homing", 1)

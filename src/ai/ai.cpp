@@ -81,15 +81,20 @@ void ShipAI::updateWeaponState(float delta)
         missile_fire_delay -= delta;
 
     //Check the weapon state,
-    has_missiles = owner->weapon_tube_count > 0 && (owner->weapon_storage[MW_Homing] > 0 || owner->weapon_storage[MW_HVLI] > 0);
+    has_missiles = owner->weapon_tube_count > 0 && (owner->weapon_storage[MW_Homing] > 0 || owner->weapon_storage[MW_Nuke] > 0 || owner->weapon_storage[MW_EMP] > 0 || owner->weapon_storage[MW_HVLI] > 0);
     beam_info = NoBeams;
     //If we have weapon tubes, load them with torpedoes
     for(int n=0; n<owner->weapon_tube_count; n++)
     {
-        if (owner->weapon_tube[n].isEmpty() && owner->weapon_storage[MW_Homing] > 0)
+        if (owner->weapon_tube[n].isEmpty() && owner->weapon_storage[MW_EMP] > 0 && owner->weapon_tube[n].canLoad(MW_EMP))
+            owner->weapon_tube[n].startLoad(MW_EMP);
+        else if (owner->weapon_tube[n].isEmpty() && owner->weapon_storage[MW_Nuke] > 0 && owner->weapon_tube[n].canLoad(MW_Nuke))
+            owner->weapon_tube[n].startLoad(MW_Nuke);
+        else if (owner->weapon_tube[n].isEmpty() && owner->weapon_storage[MW_Homing] > 0 && owner->weapon_tube[n].canLoad(MW_Homing))
             owner->weapon_tube[n].startLoad(MW_Homing);
-        else if (owner->weapon_tube[n].isEmpty() && owner->weapon_storage[MW_HVLI] > 0)
+        else if (owner->weapon_tube[n].isEmpty() && owner->weapon_storage[MW_HVLI] > 0 && owner->weapon_tube[n].canLoad(MW_HVLI))
             owner->weapon_tube[n].startLoad(MW_HVLI);
+
         if (owner->weapon_tube[n].isLoaded())
             has_missiles = true;
     }
@@ -537,6 +542,26 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, EMissileWeapons typ
             return owner->getRotation();
         
         return std::numeric_limits<float>::infinity();
+    }
+    
+    if (type == MW_Nuke || type == MW_EMP)
+    {
+        //Check if we can sort of safely fire an Nuke/EMP. The target needs to be clear of friendly/neutrals.
+        float safety_radius = 1100;
+        if (sf::length(target_position - owner->getPosition()) < safety_radius)
+            return std::numeric_limits<float>::infinity();
+        PVector<Collisionable> object_list = CollisionManager::queryArea(target->getPosition() - sf::Vector2f(safety_radius, safety_radius), target->getPosition() + sf::Vector2f(safety_radius, safety_radius));
+        foreach(Collisionable, c, object_list)
+        {
+            P<SpaceObject> obj = c;
+            if (obj && !obj->isEnemy(owner) && (P<SpaceShip>(obj) || P<SpaceStation>(obj)))
+            {
+                if (sf::length(obj->getPosition() - owner->getPosition()) < safety_radius - obj->getRadius())
+                {
+                    return std::numeric_limits<float>::infinity();
+                }
+            }
+        }
     }
 
     for(int iterations=0; iterations<10; iterations++)

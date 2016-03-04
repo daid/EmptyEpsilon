@@ -330,7 +330,7 @@ template:setRadarTrace("radar_ktlitan_breaker.png")
 template:setBeam(0, 40, 0, 800.0, 4.0, 6)
 template:setBeam(1, 35,-15, 800.0, 4.0, 6)
 template:setBeam(2, 35, 15, 800.0, 4.0, 6)
-template:setTubes(1, 10.0) -- Amount of torpedo tubes, loading time
+template:setTubes(1, 13.0) -- Amount of torpedo tubes, loading time
 template:setWeaponStorage("HVLI", 5) --Only give this ship HVLI's
 template:setHull(120)
 template:setSpeed(100, 5, 25)
@@ -379,6 +379,10 @@ template = ShipTemplate():setName("Ktlitan Queen"):setModel("sci_fi_alien_ship_8
 template:setRadarTrace("radar_ktlitan_queen.png")
 template:setHull(350)
 template:setShields(100, 100, 100)
+template:setTubes(2, 15.0) -- Amount of torpedo tubes
+template:setWeaponStorage("Nuke", 5)
+template:setWeaponStorage("EMP", 5)
+template:setWeaponStorage("Homing", 5)
 
 for type=1,5 do
     for cnt=1,5 do

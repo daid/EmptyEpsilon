@@ -9,6 +9,7 @@
 #include "dmx512SerialDevice.h"
 #include "enttecDMXProDevice.h"
 #include "virtualOutputDevice.h"
+#include "sACNDMXDevice.h"
 #include "hardwareMappingEffects.h"
 
 HardwareController::HardwareController()
@@ -21,6 +22,8 @@ HardwareController::~HardwareController()
         delete device;
     for(HardwareMappingState& state : states)
         delete state.effect;
+    for(HardwareMappingEvent& event : events)
+        delete event.effect;
 }
 
 void HardwareController::loadConfiguration(string filename)
@@ -77,7 +80,7 @@ void HardwareController::loadConfiguration(string filename)
     }
 }
 
-void HardwareController::handleConfig(string section, std::unordered_map<string, string> settings)
+void HardwareController::handleConfig(string section, std::unordered_map<string, string>& settings)
 {
     if (section == "[hardware]")
     {
@@ -91,6 +94,8 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
             device = new EnttecDMXProDevice();
         else if (settings["device"] == "VirtualOutputDevice")
             device = new VirtualOutputDevice();
+        else if (settings["device"] == "sACNDevice")
+            device = new StreamingAcnDMXDevice();
         if (device)
         {
             if (!device->configure(settings))
@@ -105,94 +110,66 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
     }else if(section == "[channel]")
     {
         if (settings["channel"] == "" || settings["name"] == "")
+        {
             LOG(ERROR) << "Incorrect properties in [channel] section";
-        else{
-            channel_mapping[settings["name"]] = settings["channel"].toInt();
+        }
+        else
+        {
+            channel_mapping[settings["name"]].clear();
+            channel_mapping[settings["name"]].push_back((settings["channel"].toInt() - 1));
             LOG(INFO) << "Channel #" << settings["channel"] << ": " << settings["name"];
         }
     }else if(section == "[channels]")
     {
         for(std::pair<string, string> item : settings)
         {
-            channel_mapping[item.first] = item.second.toInt();
-            LOG(INFO) << "Channel #" << item.second << ": " << item.first;
+            channel_mapping[item.first].clear();
+            for(string number : item.second.split(","))
+            {
+                channel_mapping[item.first].push_back((number.strip().toInt() - 1));
+                LOG(INFO) << "Channel #" << item.second << ": " << number;
+            }
         }
     }else if(section == "[state]")
     {
-        string condition = settings["condition"];
-        
-        HardwareMappingState state;
-        state.variable = condition;
-        state.compare_operator = HardwareMappingState::Greater;
-        state.compare_value = 0.0;
-        state.channel_nr = -1;
-        if (channel_mapping.find(settings["target"]) != channel_mapping.end())
-            state.channel_nr = channel_mapping[settings["target"]];
-        
-        for(HardwareMappingState::EOperator compare_operator : {HardwareMappingState::Less, HardwareMappingState::Greater, HardwareMappingState::Equal, HardwareMappingState::NotEqual})
-        {
-            string compare_string = "<";
-            switch(compare_operator)
-            {
-            case HardwareMappingState::Less: compare_string = "<"; break;
-            case HardwareMappingState::Greater: compare_string = ">"; break;
-            case HardwareMappingState::Equal: compare_string = "=="; break;
-            case HardwareMappingState::NotEqual: compare_string = "!="; break;
-            }
-            if (condition.find(compare_string) > -1)
-            {
-                state.variable = condition.substr(0, condition.find(compare_string)).strip();
-                state.compare_operator = compare_operator;
-                state.compare_value = condition.substr(condition.find(compare_string) + 1).strip().toFloat();
-            }
-        }
-        
-        if (state.channel_nr < 0)
+        if (channel_mapping.find(settings["target"]) == channel_mapping.end())
         {
             LOG(ERROR) << "Unknown target channel in hardware.ini: " << settings["target"];
         }else{
-            state.effect = createEffect(settings);
-            
-            if (state.effect)
+            std::vector<int> channel_numbers = channel_mapping[settings["target"]];
+            for(unsigned int idx=0; idx<channel_numbers.size(); idx++)
             {
-                LOG(DEBUG) << "New hardware state: " << state.channel_nr << ":" << state.variable << " " << state.compare_operator << " " << state.compare_value;
-                states.push_back(state);
+                std::unordered_map<string, string> per_channel_settings;
+                for(std::pair<string, string> item : settings)
+                {
+                    std::vector<string> values = item.second.split(",");
+                    if (values.size() > idx)
+                        per_channel_settings[item.first] = values[idx].strip();
+                    else
+                        per_channel_settings[item.first] = values[values.size() - 1].strip();
+                }
+                createNewHardwareMappingState(channel_numbers[idx], per_channel_settings);
             }
         }
     }else if(section == "[event]")
     {
-        string trigger = settings["trigger"];
-        
-        HardwareMappingEvent event;
-        event.compare_operator = HardwareMappingEvent::Change;
-        if (trigger.startswith("<"))
-        {
-            event.compare_operator = HardwareMappingEvent::Decrease;
-            trigger = trigger.substr(1).strip();
-        }
-        if (trigger.startswith(">"))
-        {
-            event.compare_operator = HardwareMappingEvent::Increase;
-            trigger = trigger.substr(1).strip();
-        }
-        event.trigger_variable = trigger;
-        event.channel_nr = -1;
-        event.runtime = settings["runtime"].toFloat();
-        event.triggered = false;
-        event.previous_value = 0.0;
-        
-        if (channel_mapping.find(settings["target"]) != channel_mapping.end())
-            event.channel_nr = channel_mapping[settings["target"]];
-        
-        if (event.channel_nr < 0)
+        if (channel_mapping.find(settings["target"]) == channel_mapping.end())
         {
             LOG(ERROR) << "Unknown target channel in hardware.ini: " << settings["target"];
         }else{
-            event.effect = createEffect(settings);
-            if (event.effect)
+            std::vector<int> channel_numbers = channel_mapping[settings["target"]];
+            for(unsigned int idx=0; idx<channel_numbers.size(); idx++)
             {
-                LOG(DEBUG) << "New hardware event: " << event.channel_nr << ":" << event.trigger_variable << " " << event.compare_operator;
-                events.push_back(event);
+                std::unordered_map<string, string> per_channel_settings;
+                for(std::pair<string, string> item : settings)
+                {
+                    std::vector<string> values = item.second.split(",");
+                    if (values.size() > idx)
+                        per_channel_settings[item.first] = values[idx];
+                    else
+                        per_channel_settings[item.first] = values[values.size() - 1];
+                }
+                createNewHardwareMappingEvent(channel_numbers[idx], per_channel_settings);
             }
         }
     }else{
@@ -280,6 +257,73 @@ void HardwareController::update(float delta)
     }
 }
 
+void HardwareController::createNewHardwareMappingState(int channel_number, std::unordered_map<string, string>& settings)
+{
+    string condition = settings["condition"];
+    
+    HardwareMappingState state;
+    state.variable = condition;
+    state.compare_operator = HardwareMappingState::Greater;
+    state.compare_value = 0.0;
+    state.channel_nr = channel_number;
+    
+    for(HardwareMappingState::EOperator compare_operator : {HardwareMappingState::Less, HardwareMappingState::Greater, HardwareMappingState::Equal, HardwareMappingState::NotEqual})
+    {
+        string compare_string = "<";
+        switch(compare_operator)
+        {
+        case HardwareMappingState::Less: compare_string = "<"; break;
+        case HardwareMappingState::Greater: compare_string = ">"; break;
+        case HardwareMappingState::Equal: compare_string = "=="; break;
+        case HardwareMappingState::NotEqual: compare_string = "!="; break;
+        }
+        if (condition.find(compare_string) > -1)
+        {
+            state.variable = condition.substr(0, condition.find(compare_string)).strip();
+            state.compare_operator = compare_operator;
+            state.compare_value = condition.substr(condition.find(compare_string) + 1).strip().toFloat();
+        }
+    }
+    
+    state.effect = createEffect(settings);
+    
+    if (state.effect)
+    {
+        LOG(DEBUG) << "New hardware state: " << state.channel_nr << ":" << state.variable << " " << state.compare_operator << " " << state.compare_value;
+        states.push_back(state);
+    }
+}
+
+void HardwareController::createNewHardwareMappingEvent(int channel_number, std::unordered_map<string, string>& settings)
+{
+    string trigger = settings["trigger"];
+    
+    HardwareMappingEvent event;
+    event.compare_operator = HardwareMappingEvent::Change;
+    if (trigger.startswith("<"))
+    {
+        event.compare_operator = HardwareMappingEvent::Decrease;
+        trigger = trigger.substr(1).strip();
+    }
+    if (trigger.startswith(">"))
+    {
+        event.compare_operator = HardwareMappingEvent::Increase;
+        trigger = trigger.substr(1).strip();
+    }
+    event.trigger_variable = trigger;
+    event.channel_nr = channel_number;
+    event.runtime = settings["runtime"].toFloat();
+    event.triggered = false;
+    event.previous_value = 0.0;
+    
+    event.effect = createEffect(settings);
+    if (event.effect)
+    {
+        LOG(DEBUG) << "New hardware event: " << event.channel_nr << ":" << event.trigger_variable << " " << event.compare_operator;
+        events.push_back(event);
+    }
+}
+
 HardwareMappingEffect* HardwareController::createEffect(std::unordered_map<string, string>& settings)
 {
     HardwareMappingEffect* effect = nullptr;
@@ -290,6 +334,10 @@ HardwareMappingEffect* HardwareController::createEffect(std::unordered_map<strin
         effect = new HardwareMappingEffectGlow();
     else if (effect_name == "blink")
         effect = new HardwareMappingEffectBlink();
+    else if (effect_name == "variable")
+        effect = new HardwareMappingEffectVariable(this);
+    else if (effect_name == "noise")
+        effect = new HardwareMappingEffectNoise();
     
     if (effect->configure(settings))
         return effect;
@@ -325,7 +373,7 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     SHIP_VARIABLE("Shield5", ship->getShieldPercentage(5));
     SHIP_VARIABLE("Shield6", ship->getShieldPercentage(6));
     SHIP_VARIABLE("Shield7", ship->getShieldPercentage(7));
-    SHIP_VARIABLE("Energy", ship->energy_level);
+    SHIP_VARIABLE("Energy", ship->energy_level * 100 / ship->max_energy_level);
     SHIP_VARIABLE("ShieldsUp", ship->shields_active ? 1.0f : 0.0f);
     SHIP_VARIABLE("Impulse", ship->current_impulse);
     SHIP_VARIABLE("Warp", ship->current_warp);
@@ -335,6 +383,9 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     SHIP_VARIABLE("IsJammed", WarpJammer::isWarpJammed(ship->getPosition()) ? 1.0f : 0.0f);
     SHIP_VARIABLE("Jumping", ship->jump_delay > 0.0f ? 1.0f : 0.0f);
     SHIP_VARIABLE("Jumped", ship->jump_indicator > 0.0f ? 1.0f : 0.0f);
+    SHIP_VARIABLE("Alert", ship->getAlertLevel() != AL_Normal ? 1.0f : 0.0f);
+    SHIP_VARIABLE("YellowAlert", ship->getAlertLevel() == AL_YellowAlert ? 1.0f : 0.0f);
+    SHIP_VARIABLE("RedAlert", ship->getAlertLevel() == AL_RedAlert ? 1.0f : 0.0f);
     for(int n=0; n<max_weapon_tubes; n++)
     {
         SHIP_VARIABLE("TubeLoaded" + string(n), ship->weapon_tube[n].isLoaded() ? 1.0f : 0.0f);

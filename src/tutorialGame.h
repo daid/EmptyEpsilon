@@ -24,6 +24,7 @@ public:
     TutorialGame();
     
     virtual void update(float delta) override;
+    virtual void onKey(sf::Keyboard::Key key, int unicode) override;
     
     void setPlayerShip(P<PlayerSpaceship> ship);
     

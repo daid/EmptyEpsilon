@@ -105,6 +105,19 @@ void TutorialGame::update(float delta)
     }
 }
 
+void TutorialGame::onKey(sf::Keyboard::Key key, int unicode)
+{
+    switch(key)
+    {
+    case sf::Keyboard::Escape:
+    case sf::Keyboard::Home:
+        finish();
+        break;
+    default:
+        break;
+    }
+}
+
 void TutorialGame::setPlayerShip(P<PlayerSpaceship> ship)
 {
     my_spaceship = ship;
