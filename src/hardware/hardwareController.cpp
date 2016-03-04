@@ -94,7 +94,7 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
             device = new EnttecDMXProDevice();
         else if (settings["device"] == "VirtualOutputDevice")
             device = new VirtualOutputDevice();
-        else if (settings["device"] == "sACN")
+        else if (settings["device"] == "sACNDevice")
             device = new StreamingAcnDMXDevice();
         if (device)
         {
