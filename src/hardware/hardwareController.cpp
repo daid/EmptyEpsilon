@@ -379,6 +379,9 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     SHIP_VARIABLE("IsJammed", WarpJammer::isWarpJammed(ship->getPosition()) ? 1.0f : 0.0f);
     SHIP_VARIABLE("Jumping", ship->jump_delay > 0.0f ? 1.0f : 0.0f);
     SHIP_VARIABLE("Jumped", ship->jump_indicator > 0.0f ? 1.0f : 0.0f);
+    SHIP_VARIABLE("Alert", ship->getAlertLevel() != AL_Normal ? 1.0f : 0.0f);
+    SHIP_VARIABLE("YellowAlert", ship->getAlertLevel() == AL_YellowAlert ? 1.0f : 0.0f);
+    SHIP_VARIABLE("RedAlert", ship->getAlertLevel() == AL_RedAlert ? 1.0f : 0.0f);
     for(int n=0; n<max_weapon_tubes; n++)
     {
         SHIP_VARIABLE("TubeLoaded" + string(n), ship->weapon_tube[n].isLoaded() ? 1.0f : 0.0f);
