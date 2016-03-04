@@ -61,13 +61,13 @@ public:
     void loadConfiguration(string filename);
     
     virtual void update(float delta);
+
+    bool getVariableValue(string variable_name, float& value);
 private:
     void handleConfig(string section, std::unordered_map<string, string>& settings);
     void createNewHardwareMappingState(int channel_number, std::unordered_map<string, string>& settings);
     void createNewHardwareMappingEvent(int channel_number, std::unordered_map<string, string>& settings);
     HardwareMappingEffect* createEffect(std::unordered_map<string, string>& settings);
-    
-    bool getVariableValue(string variable_name, float& value);
 };
 
 #endif//HARDWARE_CONTROLLER_H

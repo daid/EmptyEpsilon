@@ -111,7 +111,7 @@ void VirtualOutputDevice::render(sf::RenderTarget& window)
         }
     
         sf::RectangleShape rect(sf::Vector2f(32, 32));
-        rect.setPosition((location % 35) * 32, (location / 35) * 32);
+        rect.setPosition((location % 32) * 32 + 64, (location / 32) * 32 + 64);
         rect.setFillColor(color);
         window.draw(rect, sf::BlendAdd);
     }

@@ -144,9 +144,9 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
                 {
                     std::vector<string> values = item.second.split(",");
                     if (values.size() > idx)
-                        per_channel_settings[item.first] = values[idx];
+                        per_channel_settings[item.first] = values[idx].strip();
                     else
-                        per_channel_settings[item.first] = values[values.size() - 1];
+                        per_channel_settings[item.first] = values[values.size() - 1].strip();
                 }
                 createNewHardwareMappingState(channel_numbers[idx], per_channel_settings);
             }
@@ -334,6 +334,10 @@ HardwareMappingEffect* HardwareController::createEffect(std::unordered_map<strin
         effect = new HardwareMappingEffectGlow();
     else if (effect_name == "blink")
         effect = new HardwareMappingEffectBlink();
+    else if (effect_name == "variable")
+        effect = new HardwareMappingEffectVariable(this);
+    else if (effect_name == "noise")
+        effect = new HardwareMappingEffectNoise();
     
     if (effect->configure(settings))
         return effect;
