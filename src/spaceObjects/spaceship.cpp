@@ -12,10 +12,14 @@
 #include "scriptInterface.h"
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
 {
-    /// Set if this ship is scanned by the player or not.
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanned);
+    //[DEPRICATED]
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentified);
+    //[DEPRICATED]
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScanned);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentifiedBy);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScannedBy);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentifiedByFaction);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScannedByFaction);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isDocked);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getTarget);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponStorage);
@@ -101,7 +105,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     combat_maneuver_strafe_request = 0.0;
     combat_maneuver_strafe_active = 0.0;
     target_id = -1;
-    scanned_by_player = SS_NotScanned;
     beam_frequency = irandom(0, max_frequency);
     beam_system_target = SYS_None;
     shield_frequency = irandom(0, max_frequency);
@@ -127,7 +130,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&impulse_acceleration);
     registerMemberReplication(&warp_speed_per_warp_level);
     registerMemberReplication(&shield_frequency);
-    registerMemberReplication(&scanned_by_player);
     registerMemberReplication(&docking_state);
     registerMemberReplication(&beam_frequency);
     registerMemberReplication(&combat_maneuver_charge, 0.5);
@@ -231,7 +233,7 @@ void SpaceShip::draw3DTransparent()
 
 void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
-    if (!long_range && ((scanned_by_player == SS_FullScan) || !my_spaceship))
+    if (!long_range && (!my_spaceship || (getScannedStateFor(my_spaceship) == SS_FullScan)))
     {
         for(int n=0; n<max_beam_weapons; n++)
         {
@@ -270,7 +272,7 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
     }
     if (!long_range)
     {
-        if (scanned_by_player >= SS_SimpleScan || !my_spaceship)
+        if (!my_spaceship || getScannedStateFor(my_spaceship) >= SS_SimpleScan)
         {
             drawShieldsOnRadar(window, position, scale, 1.0, true);
         } else {
@@ -281,7 +283,7 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
     sf::Sprite objectSprite;
 
     //if the ship is not scanned, set the default icon, else the ship specific
-    if (scanned_by_player == SS_NotScanned || scanned_by_player == SS_FriendOrFoeIdentified)
+    if (my_spaceship && (getScannedStateFor(my_spaceship) == SS_NotScanned || getScannedStateFor(my_spaceship) == SS_FriendOrFoeIdentified))
     {
         textureManager.setTexture(objectSprite, "RadarArrow.png");
     }
@@ -301,7 +303,7 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
         objectSprite.setColor(sf::Color(192, 192, 255));
     }else if (my_spaceship)
     {
-        if (scanned_by_player != SS_NotScanned)
+        if (getScannedStateFor(my_spaceship) != SS_NotScanned)
         {
             if (isEnemy(my_spaceship))
                 objectSprite.setColor(sf::Color::Red);
@@ -627,7 +629,7 @@ void SpaceShip::requestUndock()
     }
 }
 
-int SpaceShip::scanningComplexity()
+int SpaceShip::scanningComplexity(P<SpaceObject> other)
 {
     if (scanning_complexity_value > -1)
         return scanning_complexity_value;
@@ -638,18 +640,18 @@ int SpaceShip::scanningComplexity()
     case SC_Simple:
         return 1;
     case SC_Normal:
-        if (scanned_by_player == SS_SimpleScan)
+        if (getScannedStateFor(other) == SS_SimpleScan)
             return 2;
         return 1;
     case SC_Advanced:
-        if (scanned_by_player == SS_SimpleScan)
+        if (getScannedStateFor(other) == SS_SimpleScan)
             return 3;
         return 2;
     }
     return 0;
 }
 
-int SpaceShip::scanningChannelDepth()
+int SpaceShip::scanningChannelDepth(P<SpaceObject> other)
 {
     if (scanning_depth_value > -1)
         return scanning_depth_value;
@@ -665,6 +667,64 @@ int SpaceShip::scanningChannelDepth()
         return 2;
     }
     return 0;
+}
+
+void SpaceShip::scannedBy(P<SpaceObject> other)
+{
+    switch(getScannedStateFor(other))
+    {
+    case SS_NotScanned:
+    case SS_FriendOrFoeIdentified:
+        setScannedStateFor(other, SS_SimpleScan);
+        break;
+    case SS_SimpleScan:
+        setScannedStateFor(other, SS_FullScan);
+        break;
+    case SS_FullScan:
+        break;
+    }
+}
+
+bool SpaceShip::isFriendOrFoeIdentified()
+{
+    LOG(WARNING) << "Depricated \"isFriendOrFoeIdentified\" function called, use isFriendOrFoeIdentifiedBy or isFriendOrFoeIdentifiedByFaction.";
+    for(unsigned int faction_id = 0; faction_id < factionInfo.size(); faction_id++)
+    {
+        if (getScannedStateForFaction(faction_id) > SS_NotScanned)
+            return true;
+    }
+    return false;
+}
+
+bool SpaceShip::isFullyScanned()
+{
+    LOG(WARNING) << "Depricated \"isFullyScanned\" function called, use isFullyScannedBy or isFullyScannedByFaction.";
+    for(unsigned int faction_id = 0; faction_id < factionInfo.size(); faction_id++)
+    {
+        if (getScannedStateForFaction(faction_id) >= SS_FullScan)
+            return true;
+    }
+    return false;
+}
+
+bool SpaceShip::isFriendOrFoeIdentifiedBy(P<SpaceObject> other)
+{
+    return getScannedStateFor(other) >= SS_FriendOrFoeIdentified;
+}
+
+bool SpaceShip::isFullyScannedBy(P<SpaceObject> other)
+{
+    return getScannedStateFor(other) >= SS_FullScan;
+}
+
+bool SpaceShip::isFriendOrFoeIdentifiedByFaction(int faction_id)
+{
+    return getScannedStateForFaction(faction_id) >= SS_FriendOrFoeIdentified;
+}
+
+bool SpaceShip::isFullyScannedByFaction(int faction_id)
+{
+    return getScannedStateForFaction(faction_id) >= SS_FullScan;
 }
 
 float SpaceShip::getShieldDamageFactor(DamageInfo& info, int shield_index)
@@ -683,11 +743,15 @@ float SpaceShip::getShieldDamageFactor(DamageInfo& info, int shield_index)
 
 void SpaceShip::didAnOffensiveAction()
 {
-    if (scanned_by_player == SS_NotScanned)
+    //We did an offensive action towards our target.
+    // Check for each faction. If this faction knows if the target is an enemy or a friendly, it now knows if this object is an enemy or a friendly.
+    for(unsigned int faction_id=0; faction_id<factionInfo.size(); faction_id++)
     {
-        P<SpaceShip> ship = getTarget();
-        if (getTarget() && (!ship || ship->scanned_by_player != SS_NotScanned))
-            scanned_by_player = SS_FriendOrFoeIdentified;
+        if (getScannedStateForFaction(faction_id) == SS_NotScanned)
+        {
+            if (getTarget() && getTarget()->getScannedStateForFaction(faction_id) != SS_NotScanned)
+                setScannedStateForFaction(faction_id, SS_FriendOrFoeIdentified);
+        }
     }
 }
 

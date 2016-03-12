@@ -316,7 +316,7 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
                 P<WormHole> wormhole = obj;
                 if (cpu_ship)
                 {
-                    if (target && target != obj && target->canBeTargeted())
+                    if (target && target != obj && target->canBeTargetedBy(obj))
                     {
                         if (obj->isEnemy(target))
                         {

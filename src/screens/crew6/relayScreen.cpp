@@ -170,7 +170,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
 
         if (ship)
         {
-            if (ship->scanned_by_player >= SS_SimpleScan)
+            if (ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
             {
                 info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
             }
@@ -178,7 +178,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
             info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
         }
 
-        if (probe && probe->owner_id == my_spaceship->getMultiplayerId() && probe->canBeTargeted())
+        if (probe && probe->owner_id == my_spaceship->getMultiplayerId() && probe->canBeTargetedBy(my_spaceship))
         {
             link_to_science_button->enable();
         }

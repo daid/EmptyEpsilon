@@ -203,13 +203,13 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
 
         if (ship)
         {
-            if (ship->scanned_by_player >= SS_SimpleScan)
+            if (ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
             {
                 info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
                 info_type->setValue(ship->getTypeName());
                 info_shields->setValue(ship->getShieldDataString());
             }
-            if (ship->scanned_by_player >= SS_FullScan)
+            if (ship->getScannedStateFor(my_spaceship) >= SS_FullScan)
             {
                 if (gameGlobalInfo->use_beam_shield_frequencies)
                 {

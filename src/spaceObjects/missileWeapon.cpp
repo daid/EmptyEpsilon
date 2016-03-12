@@ -52,7 +52,7 @@ void MissileWeapon::collide(Collisionable* target, float force)
     if (!game_server)
         return;
     P<SpaceObject> object = P<Collisionable>(target);
-    if (!object || object == owner || !object->canBeTargeted())
+    if (!object || object == owner || !object->canBeTargetedBy(owner))
         return;
 
     hitObject(object);

@@ -31,7 +31,7 @@ void ScanProbe::update(float delta)
     }
 }
 
-bool ScanProbe::canBeTargeted()
+bool ScanProbe::canBeTargetedBy(P<SpaceObject> other)
 {
     return (getTarget() - getPosition()) < getRadius();
 }

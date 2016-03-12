@@ -271,7 +271,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     {
         foreach(SpaceObject, obj, renderList)
         {
-            if (!obj->canBeTargeted() || obj == my_spaceship)
+            if (!obj->canBeTargetedBy(my_spaceship) || obj == my_spaceship)
                 continue;
             string call_sign = obj->getCallSign();
             if (call_sign == "")
