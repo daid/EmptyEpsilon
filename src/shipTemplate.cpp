@@ -333,3 +333,93 @@ string getSystemName(ESystem system)
         return "UNKNOWN";
     }
 }
+
+void ShipTemplate::setDescription(string description)
+{
+    this->description = description;
+}
+
+void ShipTemplate::setModel(string model_name)
+{
+    this->model_data = ModelData::getModel(model_name);
+}
+
+void ShipTemplate::setDefaultAI(string default_ai_name)
+{
+    this->default_ai_name = default_ai_name;
+}
+
+void ShipTemplate::setSizeClass(int size_class)
+{
+    this->size_class = size_class;
+}
+
+void ShipTemplate::setSpeed(float impulse, float turn, float acceleration)
+{
+    impulse_speed = impulse;
+    turn_speed = turn;
+    impulse_acceleration = acceleration;
+}
+
+void ShipTemplate::setWarpSpeed(float warp)
+{
+    warp_speed = warp;
+}
+
+void ShipTemplate::setJumpDrive(bool enabled)
+{
+    has_jump_drive = enabled;
+}
+
+void ShipTemplate::setCloaking(bool enabled)
+{
+    has_cloaking = enabled;
+}
+
+void ShipTemplate::setWeaponStorage(EMissileWeapons weapon, int amount)
+{
+    if (weapon != MW_None)
+    {
+        weapon_storage[weapon] = amount;
+    }
+}
+
+void ShipTemplate::addRoom(sf::Vector2i position, sf::Vector2i size)
+{
+    rooms.push_back(ShipRoomTemplate(position, size, SYS_None));
+}
+
+void ShipTemplate::addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system)
+{
+    rooms.push_back(ShipRoomTemplate(position, size, system));
+}
+
+void ShipTemplate::addDoor(sf::Vector2i position, bool horizontal)
+{
+    doors.push_back(ShipDoorTemplate(position, horizontal));
+}
+
+void ShipTemplate::setRadarTrace(string trace)
+{
+    radar_trace = trace;
+}
+
+void ShipTemplate::setEnergyStorage(float energy_amount)
+{
+    this->energy_storage_amount = energy_amount;
+}
+
+string ShipTemplate::getName()
+{
+    return this->name;
+}
+
+string ShipTemplate::getDescription()
+{
+    return this->description;
+}
+
+ShipTemplate::TemplateType ShipTemplate::getType()
+{
+    return type;
+}
