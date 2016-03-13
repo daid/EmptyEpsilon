@@ -10,14 +10,14 @@
 
 class SpaceObject;
 
-class EngineEmitorData
+class EngineEmitterData
 {
 public:
     sf::Vector3f position;
     sf::Vector3f color;
     float scale;
 
-    EngineEmitorData(sf::Vector3f position, sf::Vector3f color, float scale) : position(position), color(color), scale(scale) {}
+    EngineEmitterData(sf::Vector3f position, sf::Vector3f color, float scale) : position(position), color(color), scale(scale) {}
 };
 
 class ModelData : public PObject
@@ -25,7 +25,7 @@ class ModelData : public PObject
 private:
     static std::unordered_map<string, P<ModelData> > data_map;
 public:
-    static P<ModelData> getModel(string name) { return data_map[name]; }
+    static P<ModelData> getModel(string name) { return data_map[name];}
 
 private:
     string mesh_name;
@@ -34,7 +34,7 @@ private:
     string illumination_texture_name;
 
     bool loaded;
-    
+
     Mesh* mesh;
     sf::Vector3f mesh_offset;
     sf::Texture* texture;
@@ -42,17 +42,17 @@ private:
     sf::Texture* illumination_texture;
     sf::Shader* shader;
     float scale;
-    
+
     float radius;
     /*!
      * \brief 2D colission box of the ship.
      * As the game is only 2D, we only need a width & height that indicates the collission object.
      */
     sf::Vector2f collision_box;
-    
+
     std::vector<sf::Vector3f> beam_position;
     std::vector<sf::Vector3f> tube_position;
-    std::vector<EngineEmitorData> engine_emitors;
+    std::vector<EngineEmitterData> engine_emitters;
 public:
     ModelData();
 
@@ -65,12 +65,12 @@ public:
     void setScale(float scale) { this->scale = scale; }
     void setRadius(float radius) { this->radius = radius; }
     void setCollisionBox(sf::Vector2f collision_box) { this->collision_box = collision_box; }
-    
+
     void addBeamPosition(sf::Vector3f position) { beam_position.push_back(position); }
     void addTubePosition(sf::Vector3f position) { tube_position.push_back(position); }
-    void addEngineEmitor(sf::Vector3f position, sf::Vector3f color, float scale) { engine_emitors.push_back(EngineEmitorData(position, color, scale)); }
-    
-    
+    void addEngineEmitor(sf::Vector3f position, sf::Vector3f color, float scale) { engine_emitters.push_back(EngineEmitterData(position, color, scale)); }
+
+
     sf::Vector3f getBeamPosition(int index);
     sf::Vector2f getBeamPosition2D(int index);
     sf::Vector3f getTubePosition(int index);
@@ -80,7 +80,7 @@ public:
 
     void load();
     void render();
-    
+
     friend class ModelInfo;
 };
 
