@@ -155,6 +155,11 @@ void ModelData::load()
     }
 }
 
+P<ModelData> ModelData::getModel(string name)
+{
+    return data_map[name];
+}
+
 void ModelData::render()
 {
 #if FEATURE_3D_RENDERING

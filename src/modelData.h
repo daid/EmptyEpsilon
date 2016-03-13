@@ -25,7 +25,7 @@ class ModelData : public PObject
 private:
     static std::unordered_map<string, P<ModelData> > data_map;
 public:
-    static P<ModelData> getModel(string name) { return data_map[name];}
+    static P<ModelData> getModel(string name);
 
 private:
     string mesh_name;
