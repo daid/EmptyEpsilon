@@ -23,6 +23,7 @@ REGISTER_SCRIPT_CLASS(ModelData)
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, addBeamPosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, addTubePosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, addEngineEmitor);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, addEngineEmitter);
 }
 
 std::unordered_map<string, P<ModelData> > ModelData::data_map;
@@ -86,9 +87,15 @@ void ModelData::addTubePosition(sf::Vector3f position)
     tube_position.push_back(position);
 }
 
-void ModelData::addEngineEmitor(sf::Vector3f position, sf::Vector3f color, float scale)
+void ModelData::addEngineEmitter(sf::Vector3f position, sf::Vector3f color, float scale)
 {
     engine_emitters.push_back(EngineEmitterData(position, color, scale));
+}
+
+void ModelData::addEngineEmitor(sf::Vector3f position, sf::Vector3f color, float scale)
+{
+    LOG(WARNING) << "Depricated function addEngineEmitor called. Use addEngineEmitter instead.";
+    addEngineEmitter(position, color, scale);
 }
 
 float ModelData::getRadius()

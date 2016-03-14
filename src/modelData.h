@@ -105,6 +105,8 @@ public:
     /*!
      * Add a particle emitter
      */
+    void addEngineEmitter(sf::Vector3f position, sf::Vector3f color, float scale);
+    //Depricated
     void addEngineEmitor(sf::Vector3f position, sf::Vector3f color, float scale);
 
     sf::Vector3f getBeamPosition(int index);
