@@ -735,15 +735,15 @@ void GuiShipRetrofit::open(P<SpaceShip> target)
     warp_selector->setSelectionIndex(target->has_warp_drive ? 1 : 0);
     jump_selector->setSelectionIndex(target->hasJumpDrive() ? 1 : 0);
     impulse_speed_slider->setValue(target->impulse_max_speed);
-    impulse_speed_slider->setSnapValue(target->ship_template->impulse_speed, 5.0f);
+    impulse_speed_slider->clearSnapValues()->addSnapValue(target->ship_template->impulse_speed, 5.0f);
     turn_speed_slider->setValue(target->turn_speed);
-    turn_speed_slider->setSnapValue(target->ship_template->turn_speed, 1.0f);
+    turn_speed_slider->clearSnapValues()->addSnapValue(target->ship_template->turn_speed, 1.0f);
     hull_slider->setValue(target->hull_max);
-    hull_slider->setSnapValue(target->ship_template->hull, 5.0f);
+    hull_slider->clearSnapValues()->addSnapValue(target->ship_template->hull, 5.0f);
     front_shield_slider->setValue(target->shield_max[0]);
-    front_shield_slider->setSnapValue(target->ship_template->shield_level[0], 5.0f);    ///TOFIX: Handle different amounts of shields
+    front_shield_slider->clearSnapValues()->addSnapValue(target->ship_template->shield_level[0], 5.0f);    ///TOFIX: Handle different amounts of shields
     rear_shield_slider->setValue(target->shield_max[1]);
-    rear_shield_slider->setSnapValue(target->ship_template->shield_level[1], 5.0f);
+    rear_shield_slider->clearSnapValues()->addSnapValue(target->ship_template->shield_level[1], 5.0f);
     missile_tube_amount_selector->setSelectionIndex(target->weapon_tube_count);
     for(int n=0; n<MW_Count; n++)
         missile_storage_amount_selector[n]->setSelectionIndex(target->weapon_storage_max[n]);

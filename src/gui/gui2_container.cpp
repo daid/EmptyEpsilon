@@ -57,7 +57,7 @@ void GuiContainer::drawDebugElements(sf::FloatRect window_rect, sf::RenderTarget
         if (element->visible)
         {
             if (element->rect.contains(mouse_position))
-                element->drawText(window, sf::FloatRect(element->rect.left, element->rect.top - 20, element->rect.width, 20), element->id, ATopLeft, 20, sf::Color::Red);
+                element->drawText(window, sf::FloatRect(element->rect.left, element->rect.top - 20, element->rect.width, 20), element->id, ATopLeft, 20, main_font, sf::Color::Red);
         }
     }
 }

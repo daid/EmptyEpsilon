@@ -7,10 +7,6 @@ GuiArrowButton::GuiArrowButton(GuiContainer* owner, string id, float angle, func
 
 void GuiArrowButton::onDraw(sf::RenderTarget& window)
 {
-    sf::Color color = button_color;
-    if (!enabled)
-        color = color * sf::Color(96, 96, 96, 255);
-    else if (hover)
-        color = color * sf::Color(128, 128, 128, 255);
+    sf::Color color = selectColor(colorConfig.button.forground);
     drawArrow(window, rect, color, angle);
 }

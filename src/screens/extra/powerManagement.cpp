@@ -3,7 +3,7 @@
 #include "playerInfo.h"
 
 PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
-: GuiOverlay(owner, "POWER_MANAGEMENT_SCREEN", sf::Color::Black)
+: GuiOverlay(owner, "POWER_MANAGEMENT_SCREEN", colorConfig.background)
 {
     GuiAutoLayout* layout = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     layout->setPosition(20, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, 400);
@@ -28,7 +28,7 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
             if (my_spaceship)
                 my_spaceship->commandSetSystemPower(ESystem(n), value);
         });
-        systems[n].power_slider->setSnapValue(1.0, 0.1)->setPosition(50, 50, ATopLeft)->setSize(55, 340);
+        systems[n].power_slider->addSnapValue(1.0, 0.1)->setPosition(50, 50, ATopLeft)->setSize(55, 340);
         systems[n].coolant_slider = new GuiSlider(box, "", 10.0, 0.0, 0.0, [n](float value) {
             if (my_spaceship)
                 my_spaceship->commandSetSystemCoolant(ESystem(n), value);

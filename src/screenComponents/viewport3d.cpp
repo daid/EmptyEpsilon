@@ -283,7 +283,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
             if (screen_position.z > 10000.0)
                 continue;
             float distance_factor = 1.0f - (screen_position.z / 10000.0f);
-            drawText(window, sf::FloatRect(screen_position.x, screen_position.y, 0, 0), call_sign, ACenter, 20 * distance_factor, sf::Color(255, 255, 255, 128 * distance_factor));
+            drawText(window, sf::FloatRect(screen_position.x, screen_position.y, 0, 0), call_sign, ACenter, 20 * distance_factor, bold_font, sf::Color(255, 255, 255, 128 * distance_factor));
         }
     }
     
@@ -296,7 +296,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
             sf::Vector2f world_pos = my_spaceship->getPosition() + sf::vector2FromAngle(float(angle - 90)) * distance;
             sf::Vector3f screen_pos = worldToScreen(window, sf::Vector3f(world_pos.x, world_pos.y, 0.0f));
             if (screen_pos.z > 0.0f)
-                drawText(window, sf::FloatRect(screen_pos.x, screen_pos.y, 0, 0), string(angle), ACenter, 30, sf::Color(255, 255, 255, 128));
+                drawText(window, sf::FloatRect(screen_pos.x, screen_pos.y, 0, 0), string(angle), ACenter, 30, bold_font, sf::Color(255, 255, 255, 128));
         }
     }
 #endif//FEATURE_3D_RENDERING

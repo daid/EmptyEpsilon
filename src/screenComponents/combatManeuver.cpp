@@ -8,7 +8,7 @@ GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
     charge_bar = new GuiProgressbar(this, id + "_CHARGE", 0.0, 1.0, 0.0);
     charge_bar->setColor(sf::Color(192, 192, 192));
     charge_bar->setPosition(0, 0, ABottomCenter)->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiLabel(charge_bar, "CHARGE_LABEL", "Combat maneuver", 20))->setTextColor(sf::Color::Black)->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiLabel(charge_bar, "CHARGE_LABEL", "Combat maneuver", 20))->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     strafe_slider = new GuiSnapSlider(this, id + "_STRAFE", -1.0, 1.0, 0.0, [](float value) {
         if (my_spaceship)

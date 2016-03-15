@@ -20,7 +20,6 @@ public:
     GuiLabel* setText(string text);
     string getText();
     GuiLabel* setAlignment(EGuiAlign alignment);
-    GuiLabel* setTextColor(sf::Color color);
     GuiLabel* addBox();
     GuiLabel* setVertical();
 };

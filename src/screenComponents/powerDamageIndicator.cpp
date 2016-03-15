@@ -59,7 +59,7 @@ void GuiPowerDamageIndicator::onDraw(sf::RenderTarget& window)
     draw9Cut(window, rect, "border_background", color);
     
     if (rect.height > rect.width)
-        drawVerticalText(window, rect, display_text, ACenter, text_size, color);
+        drawVerticalText(window, rect, display_text, ACenter, text_size, main_font, color);
     else
-        drawText(window, rect, display_text, ACenter, text_size, color);
+        drawText(window, rect, display_text, ACenter, text_size, main_font, color);
 }

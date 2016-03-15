@@ -9,11 +9,15 @@ class GuiSlider : public GuiElement
 public:
     typedef std::function<void(float value)> func_t;
 protected:
+    struct TSnapPoint
+    {
+        float value;
+        float range;
+    };
     float min_value;
     float max_value;
     float value;
-    float snap_value;
-    float snap_range;
+    std::vector<TSnapPoint> snap_points;
     func_t func;
     sf::Keyboard::Key up_hotkey, down_hotkey;
     GuiLabel* overlay_label;
@@ -26,7 +30,8 @@ public:
     virtual void onMouseUp(sf::Vector2f position);
     virtual bool onHotkey(sf::Keyboard::Key key, int unicode);
     
-    GuiSlider* setSnapValue(float value, float range);
+    GuiSlider* clearSnapValues();
+    GuiSlider* addSnapValue(float value, float range);
     GuiSlider* setValue(float value);
     GuiSlider* addOverlay();
     float getValue();

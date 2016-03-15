@@ -7,8 +7,9 @@
 #include "screenComponents/selfDestructButton.h"
 
 EngineeringScreen::EngineeringScreen(GuiContainer* owner)
-: GuiOverlay(owner, "ENGINEERING_SCREEN", sf::Color::Black), selected_system(SYS_Reactor)
+: GuiOverlay(owner, "ENGINEERING_SCREEN", colorConfig.background), selected_system(SYS_Reactor)
 {
+
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
     energy_display->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
     hull_display = new GuiKeyValueDisplay(this, "HULL_DISPLAY", 0.45, "Hull", "");
@@ -69,7 +70,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
         if (my_spaceship)
             my_spaceship->commandSetSystemPower(selected_system, value);
     });
-    power_slider->setSnapValue(1.0, 0.1)->setPosition(50, 20, ATopLeft)->setSize(60, 360);
+    power_slider->addSnapValue(1.0, 0.1)->setPosition(50, 20, ATopLeft)->setSize(60, 360);
     coolant_slider = new GuiSlider(box, "COOLANT_SLIDER", 10.0, 0.0, 0.0, [this](float value) {
         if (my_spaceship)
             my_spaceship->commandSetSystemCoolant(selected_system, value);

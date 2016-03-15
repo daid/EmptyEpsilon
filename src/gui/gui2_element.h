@@ -3,7 +3,9 @@
 
 #include <functional>
 #include "stringImproved.h"
+#include "colorConfig.h"
 #include "gui2_container.h"
+#include "main.h"
 
 enum EGuiAlign
 {
@@ -31,6 +33,7 @@ protected:
     bool enabled;
     bool hover;
     bool focus;
+    bool active;
     string id;
 public:
     constexpr static float GuiSizeMatchHeight = -1.0;
@@ -63,6 +66,7 @@ public:
     GuiElement* setEnable(bool enable);
     GuiElement* enable();
     GuiElement* disable();
+    GuiElement* setActive(bool active);
     sf::FloatRect getRect() const { return rect; }
     bool isEnabled();
     
@@ -86,7 +90,7 @@ protected:
      * \param text_size Size of the text
      * \param color Color of text
      */
-    void drawText(sf::RenderTarget& window, sf::FloatRect rect, string text, EGuiAlign align = ATopLeft, float text_size = 30, sf::Color color=sf::Color::White);
+    void drawText(sf::RenderTarget& window, sf::FloatRect rect, string text, EGuiAlign align = ATopLeft, float text_size = 30, sf::Font* font = main_font, sf::Color color=sf::Color::White);
 
     /*!
      * Draw a certain text on the screen with vertical orientation
@@ -95,12 +99,16 @@ protected:
      * \param text_size Size of the text
      * \param color Color of text
      */
-    void drawVerticalText(sf::RenderTarget& window, sf::FloatRect rect, string text, EGuiAlign align = ATopLeft, float text_size = 30, sf::Color color=sf::Color::White);
+    void drawVerticalText(sf::RenderTarget& window, sf::FloatRect rect, string text, EGuiAlign align = ATopLeft, float text_size = 30, sf::Font* font = main_font, sf::Color color=sf::Color::White);
 
     void draw9Cut(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White, float width_factor = 1.0);
     void draw9CutV(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White, float height_factor = 1.0);
     
+    void drawStretched(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White);
+    
     void drawArrow(sf::RenderTarget& window, sf::FloatRect rect, sf::Color=sf::Color::White, float rotation=0);
+    
+    sf::Color selectColor(ColorSet& color_set);
     
     class LineWrapResult
     {

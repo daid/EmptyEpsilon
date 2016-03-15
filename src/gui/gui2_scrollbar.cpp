@@ -14,14 +14,14 @@ GuiScrollbar::GuiScrollbar(GuiContainer* owner, string id, int min_value, int ma
 
 void GuiScrollbar::onDraw(sf::RenderTarget& window)
 {
-    draw9Cut(window, rect, "border_background", sf::Color::White);
+    drawStretched(window, rect, "gui/ScrollbarBackground");
     
     int range = (max_value - min_value);
     float move_height = (rect.height - rect.width * 2);
     float bar_size = move_height * value_size / range;
     if (bar_size > move_height)
         bar_size = move_height;
-    draw9Cut(window, sf::FloatRect(rect.left, rect.top + rect.width + move_height * value / range, rect.width, bar_size), "button_background", sf::Color::White);
+    drawStretched(window, sf::FloatRect(rect.left, rect.top + rect.width + move_height * value / range, rect.width, bar_size), "gui/ScrollbarSelection", sf::Color::White);
 }
 
 bool GuiScrollbar::onMouseDown(sf::Vector2f position)

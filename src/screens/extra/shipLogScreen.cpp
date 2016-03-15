@@ -2,7 +2,7 @@
 #include "playerInfo.h"
 
 ShipLogScreen::ShipLogScreen(GuiContainer* owner)
-: GuiOverlay(owner, "SHIP_LOG_SCREEN", sf::Color::Black)
+: GuiOverlay(owner, "SHIP_LOG_SCREEN", colorConfig.background)
 {
     log_text = new GuiAdvancedScrollText(this, "SHIP_LOG");
     log_text->enableAutoScrollDown();

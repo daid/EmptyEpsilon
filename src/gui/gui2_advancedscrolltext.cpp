@@ -45,7 +45,7 @@ GuiAdvancedScrollText* GuiAdvancedScrollText::clearEntries()
 
 void GuiAdvancedScrollText::onDraw(sf::RenderTarget& window)
 {
-    float line_spacing = mainFont->getLineSpacing(text_size);
+    float line_spacing = main_font->getLineSpacing(text_size);
 
     //For all the entries, fix the maximum prefix width, so we know how much space we have for the text.
     float max_prefix_width = 0.0f;
@@ -54,7 +54,7 @@ void GuiAdvancedScrollText::onDraw(sf::RenderTarget& window)
         float width = 0.0f;
         for(char c : e.prefix)
         {
-            sf::Glyph glyph = mainFont->getGlyph(c, text_size, false);
+            sf::Glyph glyph = main_font->getGlyph(c, text_size, false);
             width += glyph.advance;
         }
         max_prefix_width = std::max(max_prefix_width, width);
@@ -70,13 +70,13 @@ void GuiAdvancedScrollText::onDraw(sf::RenderTarget& window)
         LineWrapResult wrap = doLineWrap(e.text, text_size, rect.width - 50 - max_prefix_width);
         if (draw_offset >= 0 && draw_offset < max_lines)
         {
-            drawText(window, sf::FloatRect(rect.left, rect.top + line_spacing * draw_offset, rect.width - 50, rect.height), e.prefix, ATopLeft, text_size, sf::Color::White);
+            drawText(window, sf::FloatRect(rect.left, rect.top + line_spacing * draw_offset, rect.width - 50, rect.height), e.prefix, ATopLeft, text_size);
         }
         for(string line : wrap.text.split("\n"))
         {
             if (draw_offset >= 0 && draw_offset < max_lines)
             {
-                drawText(window, sf::FloatRect(rect.left + max_prefix_width, rect.top + line_spacing * draw_offset, rect.width - 50 - max_prefix_width, rect.height), line, ATopLeft, text_size, e.color);
+                drawText(window, sf::FloatRect(rect.left + max_prefix_width, rect.top + line_spacing * draw_offset, rect.width - 50 - max_prefix_width, rect.height), line, ATopLeft, text_size, main_font, e.color);
             }
             draw_offset += 1;
         }

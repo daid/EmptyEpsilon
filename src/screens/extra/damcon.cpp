@@ -4,7 +4,7 @@
 #include "screenComponents/shipInternalView.h"
 
 DamageControlScreen::DamageControlScreen(GuiContainer* owner)
-: GuiOverlay(owner, "DAMCON_SCREEN", sf::Color::Black)
+: GuiOverlay(owner, "DAMCON_SCREEN", colorConfig.background)
 {
     (new GuiShipInternalView(this, "SHIP_INTERNAL_VIEW", 48.0f * 1.5f))->setShip(my_spaceship)->setPosition(300, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     

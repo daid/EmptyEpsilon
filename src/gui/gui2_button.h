@@ -12,9 +12,10 @@ protected:
     string text;
     float text_size;
     EGuiAlign text_alignment;
-    sf::Color button_color;
     func_t func;
     sf::Keyboard::Key hotkey;
+    string icon_name;
+    EGuiAlign icon_alignment;
 public:
     GuiButton(GuiContainer* owner, string id, string text, func_t func);
 
@@ -24,8 +25,8 @@ public:
     virtual bool onHotkey(sf::Keyboard::Key key, int unicode);
     
     GuiButton* setText(string text);
-    GuiButton* setColor(sf::Color color);
     GuiButton* setTextSize(float size);
+    GuiButton* setIcon(string icon_name, EGuiAlign icon_alignment = ACenterLeft);
     GuiButton* setHotkey(sf::Keyboard::Key key);
     string getText();
 };

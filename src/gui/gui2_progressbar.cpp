@@ -9,21 +9,19 @@ void GuiProgressbar::onDraw(sf::RenderTarget& window)
 {
     float f = (value - min) / (max - min);
 
-    if (color != border_color)
+    sf::FloatRect fill_rect = rect;
+    if (rect.width >= rect.height)
     {
-        if (rect.width >= rect.height)
-            draw9Cut(window, rect, "button_background", color, f);
-        else
-            draw9CutV(window, rect, "button_background", color, f);
+        fill_rect.width *= f;
     }
-    draw9Cut(window, rect, "border_background", border_color);
-    if (color == border_color)
+    else
     {
-        if (rect.width >= rect.height)
-            draw9Cut(window, rect, "button_background", color, f);
-        else
-            draw9CutV(window, rect, "button_background", color, f);
+        fill_rect.height *= f;
+        fill_rect.top = rect.top + rect.height - fill_rect.height;
     }
+
+    drawStretched(window, rect, "gui/ProgressbarBackground");
+    drawStretched(window, fill_rect, "gui/ProgressbarFill", color);
 }
 
 GuiProgressbar* GuiProgressbar::setValue(float value)

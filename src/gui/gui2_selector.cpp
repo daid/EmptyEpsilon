@@ -29,9 +29,9 @@ void GuiSelector::onDraw(sf::RenderTarget& window)
     if (entries.size() < 1 || !enabled)
         color = sf::Color(128, 128, 128, 255);
     
-    draw9Cut(window, rect, "border_background", color);
+    drawStretched(window, rect, "gui/SelectorBackground", color);
     if (selection_index >= 0 && selection_index < (int)entries.size())
-        drawText(window, rect, entries[selection_index].name, ACenter, text_size, color);
+        drawText(window, rect, entries[selection_index].name, ACenter, text_size, main_font, color);
 }
 
 GuiSelector* GuiSelector::setTextSize(float size)

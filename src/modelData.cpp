@@ -164,6 +164,11 @@ void ModelData::load()
 
 P<ModelData> ModelData::getModel(string name)
 {
+    if (data_map.find(name) == data_map.end())
+    {
+        LOG(ERROR) << "Failed to find model data: " << name;
+        return nullptr;
+    }
     return data_map[name];
 }
 

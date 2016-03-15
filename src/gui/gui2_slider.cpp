@@ -4,7 +4,7 @@
 #include "preferenceManager.h"
 
 GuiSlider::GuiSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
-: GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), snap_value(std::numeric_limits<float>::infinity()), func(func), up_hotkey(sf::Keyboard::KeyCount), down_hotkey(sf::Keyboard::KeyCount)
+: GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func), up_hotkey(sf::Keyboard::KeyCount), down_hotkey(sf::Keyboard::KeyCount)
 {
     overlay_label = nullptr;
     if (id != "")
@@ -16,39 +16,58 @@ GuiSlider::GuiSlider(GuiContainer* owner, string id, float min_value, float max_
 
 void GuiSlider::onDraw(sf::RenderTarget& window)
 {
-    draw9Cut(window, rect, "button_background", sf::Color(64,64,64, 255));
+    drawStretched(window, rect, "gui/SliderBackground", selectColor(colorConfig.slider.background));
 
-    sf::Color color = sf::Color::White;
-    if (!enabled)
-        color = color * sf::Color(96, 96, 96, 255);
-    else if (hover)
-        color = sf::Color(255,255,255, 128);
+    sf::Color color = selectColor(colorConfig.slider.forground);
+
     if (rect.width > rect.height)
     {
         float x;
 
-        if (snap_value != std::numeric_limits<float>::infinity())
+        for(TSnapPoint& point : snap_points)
         {
-            x = rect.left + (rect.width - rect.height) * (snap_value - min_value) / (max_value - min_value);
-            sf::RectangleShape backgroundZero(sf::Vector2f(8.0, rect.height));
-            backgroundZero.setPosition(x + rect.height / 2.0 - 4.0, rect.top);
-            backgroundZero.setFillColor(sf::Color(8,8,8,255));
-            window.draw(backgroundZero);
+            x = rect.left + (rect.width - rect.height) * (point.value - min_value) / (max_value - min_value);
+
+            sf::Sprite snap_sprite;
+            textureManager.setTexture(snap_sprite, "gui/SliderTick");
+            snap_sprite.setRotation(90);
+            snap_sprite.setPosition(x + rect.height / 2, rect.top + rect.height / 2);
+            snap_sprite.setScale(rect.height / snap_sprite.getTextureRect().width, rect.height / snap_sprite.getTextureRect().width);
+            snap_sprite.setColor(selectColor(colorConfig.slider.background));
+            window.draw(snap_sprite);
         }
         x = rect.left + (rect.width - rect.height) * (value - min_value) / (max_value - min_value);
-        draw9Cut(window, sf::FloatRect(x, rect.top, rect.height, rect.height), "button_background", color);
+
+        sf::Sprite sprite;
+        textureManager.setTexture(sprite, "gui/SliderKnob");
+        sprite.setOrigin(0, 0);
+        sprite.setPosition(x, rect.top);
+        sprite.setScale(rect.height / sprite.getTextureRect().width, rect.height / sprite.getTextureRect().width);
+        sprite.setColor(color);
+        window.draw(sprite);
     }else{
         float y;
-        if (snap_value != std::numeric_limits<float>::infinity())
+        for(TSnapPoint& point : snap_points)
         {
-            y = rect.top + (rect.height - rect.width) * (snap_value - min_value) / (max_value - min_value);
-            sf::RectangleShape backgroundZero(sf::Vector2f(rect.width, 8.0));
-            backgroundZero.setPosition(rect.left, y + rect.width / 2.0 - 4.0);
-            backgroundZero.setFillColor(sf::Color(8,8,8,255));
-            window.draw(backgroundZero);
+            y = rect.top + (rect.height - rect.width) * (point.value - min_value) / (max_value - min_value);
+
+            sf::Sprite snap_sprite;
+            textureManager.setTexture(snap_sprite, "gui/SliderTick");
+            snap_sprite.setOrigin(0, 0);
+            snap_sprite.setPosition(rect.left, y);
+            snap_sprite.setScale(rect.width / snap_sprite.getTextureRect().width, rect.width / snap_sprite.getTextureRect().width);
+            snap_sprite.setColor(selectColor(colorConfig.slider.background));
+            window.draw(snap_sprite);
         }
         y = rect.top + (rect.height - rect.width) * (value - min_value) / (max_value - min_value);
-        draw9Cut(window, sf::FloatRect(rect.left, y, rect.width, rect.width), "button_background", color);
+
+        sf::Sprite sprite;
+        textureManager.setTexture(sprite, "gui/SliderKnob");
+        sprite.setOrigin(0, 0);
+        sprite.setPosition(rect.left, y);
+        sprite.setScale(rect.width / sprite.getTextureRect().width, rect.width / sprite.getTextureRect().width);
+        sprite.setColor(color);
+        window.draw(sprite);
     }
     
     if (overlay_label)
@@ -71,8 +90,11 @@ void GuiSlider::onMouseDrag(sf::Vector2f position)
     else
         new_value = (position.y - rect.top - (rect.width / 2.0)) / (rect.height - rect.width);
     new_value = min_value + (max_value - min_value) * new_value;
-    if (fabs(new_value - snap_value) < snap_range)
-        new_value = snap_value;
+    for(TSnapPoint& point : snap_points)
+    {
+        if (fabs(new_value - point.value) < point.range)
+            new_value = point.value;
+    }
     if (min_value < max_value)
     {
         if (new_value < min_value)
@@ -127,10 +149,17 @@ bool GuiSlider::onHotkey(sf::Keyboard::Key key, int unicode)
     return false;
 }
 
-GuiSlider* GuiSlider::setSnapValue(float value, float range)
+GuiSlider* GuiSlider::clearSnapValues()
 {
-    snap_value = value;
-    snap_range = range;
+    snap_points.clear();
+    return this;
+}
+
+GuiSlider* GuiSlider::addSnapValue(float value, float range)
+{
+    snap_points.emplace_back();
+    snap_points.back().value = value;
+    snap_points.back().range = range;
     return this;
 }
 

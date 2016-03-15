@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include "gui/mouseRenderer.h"
 #include "gui/debugRenderer.h"
+#include "gui/colorConfig.h"
 #include "menus/mainMenus.h"
 #include "menus/autoConnectScreen.h"
 #include "mouseCalibrator.h"
@@ -40,7 +41,8 @@ sf::Shader* objectShader;
 sf::Shader* simpleObjectShader;
 sf::Shader* basicShader;
 sf::Shader* billboardShader;
-sf::Font* mainFont;
+sf::Font* main_font;
+sf::Font* bold_font;
 RenderLayer* backgroundLayer;
 RenderLayer* objectLayer;
 RenderLayer* effectLayer;
@@ -158,6 +160,8 @@ int main(int argc, char** argv)
         server->addHandler(new HttpRequestFileHandler("www"));
         server->addHandler(new HttpScriptHandler());
     }
+    
+    colorConfig.load();
 
     if (PreferencesManager::get("headless") == "")
     {
@@ -216,9 +220,13 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("disable_shaders").toInt())
         PostProcessor::setEnable(false);
 
-    P<ResourceStream> stream = getResourceStream("sansation.ttf");
-    mainFont = new sf::Font();
-    mainFont->loadFromStream(**stream);
+    P<ResourceStream> main_font_stream = getResourceStream("gui/fonts/BebasNeue Regular.otf");
+    main_font = new sf::Font();
+    main_font->loadFromStream(**main_font_stream);
+    
+    P<ResourceStream> bold_font_stream = getResourceStream("gui/fonts/BebasNeue Bold.otf");
+    bold_font = new sf::Font();
+    bold_font->loadFromStream(**bold_font_stream);
 
     if (sf::Shader::isAvailable())
     {

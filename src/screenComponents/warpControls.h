@@ -6,7 +6,7 @@
 class GuiWarpControls : public GuiElement
 {
 private:
-    GuiLabel* label;
+    GuiKeyValueDisplay* label;
     GuiSlider* slider;
 public:
     GuiWarpControls(GuiContainer* owner, string id);

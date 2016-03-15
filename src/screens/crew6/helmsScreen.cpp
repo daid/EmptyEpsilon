@@ -8,8 +8,11 @@
 #include "screenComponents/dockingButton.h"
 
 HelmsScreen::HelmsScreen(GuiContainer* owner)
-: GuiOverlay(owner, "HELMS_SCREEN", sf::Color::Black)
+: GuiOverlay(owner, "HELMS_SCREEN", colorConfig.background)
 {
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureCenter("gui/BackgroundGradient");
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+
     GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", 5000.0, nullptr);
     
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
@@ -83,11 +86,11 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     heading_hint->setAlignment(ACenter)->setSize(0, 0);
 
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
-    energy_display->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
+    energy_display->setIcon("gui/Icon_Energy")->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
     heading_display = new GuiKeyValueDisplay(this, "HEADING_DISPLAY", 0.45, "Heading", "");
-    heading_display->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
+    heading_display->setIcon("gui/Icon_Heading")->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
     velocity_display = new GuiKeyValueDisplay(this, "VELOCITY_DISPLAY", 0.45, "Speed", "");
-    velocity_display->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
+    velocity_display->setIcon("gui/Icon_Speed")->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
     
     GuiAutoLayout* engine_layout = new GuiAutoLayout(this, "ENGINE_LAYOUT", GuiAutoLayout::LayoutHorizontalLeftToRight);
     engine_layout->setPosition(20, -100, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 300);

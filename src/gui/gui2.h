@@ -1,6 +1,7 @@
 #ifndef GUI2_H
 #define GUI2_H
 
+#include "colorConfig.h"
 #include "gui2_element.h"
 #include "gui2_container.h"
 #include "gui2_canvas.h"

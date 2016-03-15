@@ -14,7 +14,7 @@
 #include "screenComponents/beamTargetSelector.h"
 
 TacticalScreen::TacticalScreen(GuiContainer* owner)
-: GuiOverlay(owner, "TACTICAL_SCREEN", sf::Color::Black)
+: GuiOverlay(owner, "TACTICAL_SCREEN", colorConfig.background)
 {
     radar = new GuiRadarView(this, "TACTICAL_RADAR", 5000.0, &targets);
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 750);

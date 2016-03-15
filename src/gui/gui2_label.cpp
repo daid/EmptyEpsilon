@@ -8,11 +8,12 @@ GuiLabel::GuiLabel(GuiContainer* owner, string id, string text, float text_size)
 void GuiLabel::onDraw(sf::RenderTarget& window)
 {
     if (box)
-        draw9Cut(window, rect, "border_background", sf::Color::White);
+        drawStretched(window, rect, "gui/LabelBackground", selectColor(colorConfig.label.background));
+    sf::Color color = selectColor(colorConfig.label.forground);
     if (vertical)
-        drawVerticalText(window, rect, text, text_alignment, text_size, text_color);
+        drawVerticalText(window, rect, text, text_alignment, text_size, main_font, color);
     else
-        drawText(window, rect, text, text_alignment, text_size, text_color);
+        drawText(window, rect, text, text_alignment, text_size, main_font, color);
 }
 
 GuiLabel* GuiLabel::setText(string text)
@@ -29,12 +30,6 @@ string GuiLabel::getText()
 GuiLabel* GuiLabel::setAlignment(EGuiAlign alignment)
 {
     text_alignment = alignment;
-    return this;
-}
-
-GuiLabel* GuiLabel::setTextColor(sf::Color color)
-{
-    text_color = color;
     return this;
 }
 

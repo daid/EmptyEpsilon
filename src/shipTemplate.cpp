@@ -284,9 +284,12 @@ void ShipTemplate::setShields(std::vector<float> values)
 
 P<ShipTemplate> ShipTemplate::getTemplate(string name)
 {
-    if (templateMap.find(name) != templateMap.end())
-        return templateMap[name];
-    return NULL;
+    if (templateMap.find(name) == templateMap.end())
+    {
+        LOG(ERROR) << "Failed to find ship template: " << name;
+        return nullptr;
+    }
+    return templateMap[name];
 }
 
 std::vector<string> ShipTemplate::getTemplateNameList()

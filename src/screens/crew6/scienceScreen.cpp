@@ -11,7 +11,7 @@
 #include "screenComponents/databaseView.h"
 
 ScienceScreen::ScienceScreen(GuiContainer* owner)
-: GuiOverlay(owner, "SCIENCE_SCREEN", sf::Color::Black)
+: GuiOverlay(owner, "SCIENCE_SCREEN", colorConfig.background)
 {
     targets.setAllowWaypointSelection();
 

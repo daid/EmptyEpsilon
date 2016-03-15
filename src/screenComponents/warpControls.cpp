@@ -12,11 +12,14 @@ GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id)
         slider->setValue(warp_level);
     });
     slider->setPosition(0, 0, ATopLeft)->setSize(50, GuiElement::GuiSizeMax);
+    slider->addSnapValue(0.0, 0.5);
+    slider->addSnapValue(1.0, 0.5);
+    slider->addSnapValue(2.0, 0.5);
+    slider->addSnapValue(3.0, 0.5);
+    slider->addSnapValue(4.0, 0.5);
     
-    label = new GuiLabel(this, id + "_LABEL", "Warp: 0.0", 30);
-    label->setVertical()->setPosition(50, 0, ATopLeft)->setSize(40, GuiElement::GuiSizeMax);
-    
-    (new GuiBox(this, id + "_BOX"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    label = new GuiKeyValueDisplay(this, id + "_LABEL", 0.5, "Warp", "0.0");
+    label->setTextSize(30)->setPosition(50, 0, ATopLeft)->setSize(40, GuiElement::GuiSizeMax);
     
     (new GuiPowerDamageIndicator(this, id + "_DPI", SYS_Warp))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
@@ -24,5 +27,5 @@ GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id)
 void GuiWarpControls::onDraw(sf::RenderTarget& window)
 {
     if (my_spaceship)
-        label->setText("Warp: " + string(my_spaceship->current_warp, 1));
+        label->setValue(string(my_spaceship->current_warp, 1));
 }

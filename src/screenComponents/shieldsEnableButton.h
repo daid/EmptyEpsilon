@@ -6,7 +6,7 @@
 class GuiShieldsEnableButton : public GuiElement
 {
 private:
-    GuiButton* button;
+    GuiToggleButton* button;
     GuiProgressbar* bar;
 public:
     GuiShieldsEnableButton(GuiContainer* owner, string id);

@@ -8,7 +8,7 @@
 #include "screenComponents/commsOverlay.h"
 
 RelayScreen::RelayScreen(GuiContainer* owner)
-: GuiOverlay(owner, "RELAY_SCREEN", sf::Color::Black), mode(TargetSelection)
+: GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background), mode(TargetSelection)
 {
     targets.setAllowWaypointSelection();
     radar = new GuiRadarView(this, "RELAY_RADAR", 50000.0f, &targets);
