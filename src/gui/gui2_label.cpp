@@ -1,13 +1,13 @@
 #include "gui2_label.h"
 
 GuiLabel::GuiLabel(GuiContainer* owner, string id, string text, float text_size)
-: GuiElement(owner, id), text(text), text_size(text_size), text_color(sf::Color::White), text_alignment(ACenter), box(false), vertical(false)
+: GuiElement(owner, id), text(text), text_size(text_size), text_color(sf::Color::White), text_alignment(ACenter), background(false), vertical(false)
 {
 }
 
 void GuiLabel::onDraw(sf::RenderTarget& window)
 {
-    if (box)
+    if (background)
         drawStretched(window, rect, "gui/LabelBackground", selectColor(colorConfig.label.background));
     sf::Color color = selectColor(colorConfig.label.forground);
     if (vertical)
@@ -33,9 +33,9 @@ GuiLabel* GuiLabel::setAlignment(EGuiAlign alignment)
     return this;
 }
 
-GuiLabel* GuiLabel::addBox()
+GuiLabel* GuiLabel::addBackground()
 {
-    box = true;
+    background = true;
     return this;
 }
 

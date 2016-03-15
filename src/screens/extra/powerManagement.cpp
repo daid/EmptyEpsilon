@@ -20,7 +20,7 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
         systems[n].box = box;
         box->setSize(290, 400);
         
-        (new GuiLabel(box, "", getSystemName(ESystem(n)), 30))->addBox()->setAlignment(ACenter)->setPosition(0, 0, ATopLeft)->setSize(290, 50);
+        (new GuiLabel(box, "", getSystemName(ESystem(n)), 30))->addBackground()->setAlignment(ACenter)->setPosition(0, 0, ATopLeft)->setSize(290, 50);
         (new GuiLabel(box, "", "Power", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(20, 50, ATopLeft)->setSize(30, 340);
         (new GuiLabel(box, "", "Coolant", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(100, 50, ATopLeft)->setSize(30, 340);
         (new GuiLabel(box, "", "Heat", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(180, 50, ATopLeft)->setSize(30, 340);

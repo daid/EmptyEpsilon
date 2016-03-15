@@ -6,7 +6,7 @@ GuiShieldFrequencySelect::GuiShieldFrequencySelect(GuiContainer* owner, string i
 {
     (new GuiLabel(this, id + "_CURRENT_LABEL", "Active Shield Freq.", 30))->setPosition(0, 20, ATopLeft)->setSize(GuiElement::GuiSizeMax, 30);
     current_frequency = new GuiLabel(this, id + "_CURRENT", "xxxThz", 30);
-    current_frequency->addBox()->setPosition(0, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, 50);
+    current_frequency->addBackground()->setPosition(0, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiLabel(this, id + "_CHANGE_LABEL", "Change Shield Freq.", 30))->setPosition(0, 120, ATopLeft)->setSize(GuiElement::GuiSizeMax, 30);
     new_frequency = new GuiSelector(this, id + "_CHANGE_SELECT", nullptr);
     for(int n=0; n<=SpaceShip::max_frequency; n++)

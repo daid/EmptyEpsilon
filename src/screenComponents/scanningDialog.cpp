@@ -14,7 +14,7 @@ GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
     box->fill()->setSize(500, 545)->setPosition(0, 0, ACenter);
     
     signal_label = new GuiLabel(box, id + "_LABEL", "Electric signature", 30);
-    signal_label->addBox()->setPosition(0, 20, ATopCenter)->setSize(450, 50);
+    signal_label->addBackground()->setPosition(0, 20, ATopCenter)->setSize(450, 50);
     
     signal_quality = new GuiSignalQualityIndicator(box, id + "_SIGNAL");
     signal_quality->setPosition(0, 80, ATopCenter)->setSize(450, 100);

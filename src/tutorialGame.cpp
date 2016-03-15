@@ -34,7 +34,9 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(TutorialGame)
 TutorialGame::TutorialGame()
 {
     new LocalOnlyGame();
-    new GuiOverlay(this, "", sf::Color::Black);
+
+    new GuiOverlay(this, "", colorConfig.background);
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
     
     viewport = nullptr;
 

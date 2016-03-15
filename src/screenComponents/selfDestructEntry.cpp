@@ -15,15 +15,15 @@ GuiSelfDestructEntry::GuiSelfDestructEntry(GuiContainer* owner, string id)
     layout->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     (new GuiLabel(layout, id + "_LABEL", "Self destruct activated!", 50))->setSize(GuiElement::GuiSizeMax, 80);
     code_label = new GuiLabel(layout, id + "_CODE_LABEL", "", 30);
-    code_label->addBox()->setSize(GuiElement::GuiSizeMax, 50);
+    code_label->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
     
     code_entry = new GuiElement(layout, id + "_ENTRY_ELEMENT");
     code_entry->setSize(250, 320);
     
     code_entry_code_label = new GuiLabel(code_entry, id + "_ENTRY_LABEL", "Enter [A]", 30);
-    code_entry_code_label->addBox()->setSize(GuiElement::GuiSizeMax, 50);
+    code_entry_code_label->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
     code_entry_label = new GuiLabel(code_entry, id + "_ENTRY_LABEL", "", 30);
-    code_entry_label->addBox()->setPosition(0, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, 50);
+    code_entry_label->addBackground()->setPosition(0, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiButton(code_entry, id + "_BUTTON_7", "7", [this]() {code_entry_label->setText(code_entry_label->getText() + "7");}))->setSize(50, 50)->setPosition(50, 100, ATopLeft);
     (new GuiButton(code_entry, id + "_BUTTON_8", "8", [this]() {code_entry_label->setText(code_entry_label->getText() + "8");}))->setSize(50, 50)->setPosition(100, 100, ATopLeft);
     (new GuiButton(code_entry, id + "_BUTTON_9", "9", [this]() {code_entry_label->setText(code_entry_label->getText() + "9");}))->setSize(50, 50)->setPosition(150, 100, ATopLeft);

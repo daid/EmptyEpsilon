@@ -15,7 +15,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     //Easiest place to ensure that positional sound is disabled on console views. As soon as a 3D view is rendered positional sound is enabled again.
     soundManager->disablePositionalSound();
 
-    (new GuiLabel(this, "CREW_POSITION_SELECT_LABEL", "Select your station", 30))->addBox()->setPosition(-50, 50, ATopRight)->setSize(460, 50);
+    (new GuiLabel(this, "CREW_POSITION_SELECT_LABEL", "Select your station", 30))->addBackground()->setPosition(-50, 50, ATopRight)->setSize(460, 50);
     (new GuiBox(this, "CREW_POSITION_SELECT_BOX"))->setPosition(-50, 50, ATopRight)->setSize(460, 560);
     
     GuiAutoLayout* stations_layout = new GuiAutoLayout(this, "CREW_POSITION_BUTTON_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
@@ -73,7 +73,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     });
     crew_type_selector->setOptions({"6/5 player crew", "4/3 player crew", "1 player crew/extras", "Alternative options"})->setPosition(-50, 560, ATopRight)->setSize(460, 50);
     
-    (new GuiLabel(this, "SHIP_SELECTION_LABEL", "Select ship:", 30))->addBox()->setPosition(50, 50, ATopLeft)->setSize(550, 50);
+    (new GuiLabel(this, "SHIP_SELECTION_LABEL", "Select ship:", 30))->addBackground()->setPosition(50, 50, ATopLeft)->setSize(550, 50);
     no_ships_label = new GuiLabel(this, "SHIP_SELECTION_NO_SHIPS_LABEL", "Waiting for server to spawn a ship", 30);
     no_ships_label->setPosition(80, 100, ATopLeft)->setSize(460, 50);
     (new GuiBox(this, "SHIP_SELECTION_BOX"))->setPosition(50, 50, ATopLeft)->setSize(550, 560);
