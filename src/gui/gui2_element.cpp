@@ -554,47 +554,72 @@ void GuiElement::draw9CutV(sf::RenderTarget& window, sf::FloatRect rect, string 
 
 void GuiElement::drawStretched(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color)
 {
+    if (rect.width >= rect.height)
+    {
+        drawStretchedH(window, rect, texture, color);
+    }else{
+        drawStretchedV(window, rect, texture, color);
+    }
+}
+
+void GuiElement::drawStretchedH(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color)
+{
     sf::Texture* texture_ptr = textureManager.getTexture(texture);
     sf::VertexArray a(sf::TrianglesStrip, 8);
     
-    if (rect.width >= rect.height)
-    {
-        a[0].position = sf::Vector2f(rect.left, rect.top);
-        a[1].position = sf::Vector2f(rect.left, rect.top + rect.height);
-        a[2].position = sf::Vector2f(rect.left + rect.height / 2, rect.top);
-        a[3].position = sf::Vector2f(rect.left + rect.height / 2, rect.top + rect.height);
-        a[4].position = sf::Vector2f(rect.left + rect.width - rect.height / 2, rect.top);
-        a[5].position = sf::Vector2f(rect.left + rect.width - rect.height / 2, rect.top + rect.height);
-        a[6].position = sf::Vector2f(rect.left + rect.width, rect.top);
-        a[7].position = sf::Vector2f(rect.left + rect.width, rect.top + rect.height);
-        
-        a[0].texCoords = sf::Vector2f(0, 0);
-        a[1].texCoords = sf::Vector2f(0, texture_ptr->getSize().y);
-        a[2].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, 0);
-        a[3].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, texture_ptr->getSize().y);
-        a[4].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, 0);
-        a[5].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, texture_ptr->getSize().y);
-        a[6].texCoords = sf::Vector2f(texture_ptr->getSize().x, 0);
-        a[7].texCoords = sf::Vector2f(texture_ptr->getSize().x, texture_ptr->getSize().y);
-    }else{
-        a[0].position = sf::Vector2f(rect.left, rect.top);
-        a[1].position = sf::Vector2f(rect.left + rect.width, rect.top);
-        a[2].position = sf::Vector2f(rect.left, rect.top + rect.width / 2);
-        a[3].position = sf::Vector2f(rect.left + rect.width, rect.top + rect.width / 2);
-        a[4].position = sf::Vector2f(rect.left, rect.top + rect.height - rect.width / 2);
-        a[5].position = sf::Vector2f(rect.left + rect.width, rect.top + rect.height - rect.width / 2);
-        a[6].position = sf::Vector2f(rect.left, rect.top + rect.height);
-        a[7].position = sf::Vector2f(rect.left + rect.width, rect.top + rect.height);
-        
-        a[0].texCoords = sf::Vector2f(0, 0);
-        a[1].texCoords = sf::Vector2f(0, texture_ptr->getSize().y);
-        a[2].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, 0);
-        a[3].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, texture_ptr->getSize().y);
-        a[4].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, 0);
-        a[5].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, texture_ptr->getSize().y);
-        a[6].texCoords = sf::Vector2f(texture_ptr->getSize().x, 0);
-        a[7].texCoords = sf::Vector2f(texture_ptr->getSize().x, texture_ptr->getSize().y);
-    }
+    float w = rect.height / 2.0f;
+    if (w * 2 > rect.width)
+        w = rect.width / 2.0f;
+    a[0].position = sf::Vector2f(rect.left, rect.top);
+    a[1].position = sf::Vector2f(rect.left, rect.top + rect.height);
+    a[2].position = sf::Vector2f(rect.left + w, rect.top);
+    a[3].position = sf::Vector2f(rect.left + w, rect.top + rect.height);
+    a[4].position = sf::Vector2f(rect.left + rect.width - w, rect.top);
+    a[5].position = sf::Vector2f(rect.left + rect.width - w, rect.top + rect.height);
+    a[6].position = sf::Vector2f(rect.left + rect.width, rect.top);
+    a[7].position = sf::Vector2f(rect.left + rect.width, rect.top + rect.height);
+    
+    a[0].texCoords = sf::Vector2f(0, 0);
+    a[1].texCoords = sf::Vector2f(0, texture_ptr->getSize().y);
+    a[2].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, 0);
+    a[3].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, texture_ptr->getSize().y);
+    a[4].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, 0);
+    a[5].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, texture_ptr->getSize().y);
+    a[6].texCoords = sf::Vector2f(texture_ptr->getSize().x, 0);
+    a[7].texCoords = sf::Vector2f(texture_ptr->getSize().x, texture_ptr->getSize().y);
+
+    for(int n=0; n<8; n++)
+        a[n].color = color;
+    
+    window.draw(a, texture_ptr);
+}
+
+void GuiElement::drawStretchedV(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color)
+{
+    sf::Texture* texture_ptr = textureManager.getTexture(texture);
+    sf::VertexArray a(sf::TrianglesStrip, 8);
+    
+    float h = rect.width / 2.0;
+    if (h * 2 > rect.height)
+        h = rect.height / 2.0f;
+    a[0].position = sf::Vector2f(rect.left, rect.top);
+    a[1].position = sf::Vector2f(rect.left + rect.width, rect.top);
+    a[2].position = sf::Vector2f(rect.left, rect.top + h);
+    a[3].position = sf::Vector2f(rect.left + rect.width, rect.top + h);
+    a[4].position = sf::Vector2f(rect.left, rect.top + rect.height - h);
+    a[5].position = sf::Vector2f(rect.left + rect.width, rect.top + rect.height - h);
+    a[6].position = sf::Vector2f(rect.left, rect.top + rect.height);
+    a[7].position = sf::Vector2f(rect.left + rect.width, rect.top + rect.height);
+    
+    a[0].texCoords = sf::Vector2f(0, 0);
+    a[1].texCoords = sf::Vector2f(0, texture_ptr->getSize().y);
+    a[2].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, 0);
+    a[3].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, texture_ptr->getSize().y);
+    a[4].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, 0);
+    a[5].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, texture_ptr->getSize().y);
+    a[6].texCoords = sf::Vector2f(texture_ptr->getSize().x, 0);
+    a[7].texCoords = sf::Vector2f(texture_ptr->getSize().x, texture_ptr->getSize().y);
+
     for(int n=0; n<8; n++)
         a[n].color = color;
     

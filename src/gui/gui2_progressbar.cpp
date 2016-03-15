@@ -9,19 +9,20 @@ void GuiProgressbar::onDraw(sf::RenderTarget& window)
 {
     float f = (value - min) / (max - min);
 
+    drawStretched(window, rect, "gui/ProgressbarBackground");
+
     sf::FloatRect fill_rect = rect;
     if (rect.width >= rect.height)
     {
         fill_rect.width *= f;
+        drawStretchedH(window, fill_rect, "gui/ProgressbarFill", color);
     }
     else
     {
         fill_rect.height *= f;
         fill_rect.top = rect.top + rect.height - fill_rect.height;
+        drawStretchedV(window, fill_rect, "gui/ProgressbarFill", color);
     }
-
-    drawStretched(window, rect, "gui/ProgressbarBackground");
-    drawStretched(window, fill_rect, "gui/ProgressbarFill", color);
 }
 
 GuiProgressbar* GuiProgressbar::setValue(float value)
