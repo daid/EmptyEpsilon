@@ -290,16 +290,19 @@ int main(int argc, char** argv)
     PreferencesManager::set("music_volume", soundManager->getMusicVolume());
     PreferencesManager::set("disable_shaders", PostProcessor::isEnabled() ? 0 : 1);
 
-    if (getenv("HOME"))
+    if (PreferencesManager::get("headless") == "")
     {
+        if (getenv("HOME"))
+        {
 #ifdef __WIN32__
-        mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str());
+            mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str());
 #else
-        mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+            mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 #endif
-        PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
-    }else{
-        PreferencesManager::save("options.ini");
+            PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
+        }else{
+            PreferencesManager::save("options.ini");
+        }
     }
 
     delete engine;
