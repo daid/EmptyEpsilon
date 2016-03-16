@@ -408,8 +408,8 @@ string GameMasterScreen::getScriptExport()
 GuiGlobalMessageEntry::GuiGlobalMessageEntry(GuiContainer* owner)
 : GuiOverlay(owner, "GLOBAL_MESSAGE_ENTRY", sf::Color(0, 0, 0, 128))
 {
-    GuiBox* box = new GuiBox(this, "FRAME");
-    box->fill()->setPosition(0, 0, ACenter)->setSize(800, 150);
+    GuiPanel* box = new GuiPanel(this, "FRAME");
+    box->setPosition(0, 0, ACenter)->setSize(800, 150);
     
     message_entry = new GuiTextEntry(box, "MESSAGE_ENTRY", "");
     message_entry->setPosition(0, 20, ATopCenter)->setSize(700, 50);
@@ -437,8 +437,8 @@ bool GuiGlobalMessageEntry::onMouseDown(sf::Vector2f position)
 GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
 : GuiOverlay(gm_screen, "OBJECT_CREATE_SCREEN", sf::Color(0, 0, 0, 128))
 {
-    GuiBox* box = new GuiBox(this, "FRAME");
-    box->fill()->setPosition(0, 0, ACenter)->setSize(1000, 500);
+    GuiPanel* box = new GuiPanel(this, "FRAME");
+    box->setPosition(0, 0, ACenter)->setSize(1000, 500);
 
     faction_selector = new GuiSelector(box, "FACTION_SELECTOR", nullptr);
     for(P<FactionInfo> info : factionInfo)

@@ -12,7 +12,7 @@ GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
     hull_hit_overlay = new GuiOverlay(this, "HULL_HIT", sf::Color(255, 0, 0, 0));
     shield_low_warning_overlay = new GuiOverlay(this, "SHIELD_LOW", sf::Color(255, 0, 0, 0));
     pause_overlay = new GuiOverlay(this, "PAUSE", sf::Color(0, 0, 0, 128));
-    (new GuiBox(pause_overlay, "PAUSE_BOX"))->fill()->setPosition(0, 0, ACenter)->setSize(500, 100);
+    (new GuiPanel(pause_overlay, "PAUSE_BOX"))->setPosition(0, 0, ACenter)->setSize(500, 100);
     (new GuiLabel(pause_overlay, "PAUSE_LABEL", "Game Paused", 70))->setPosition(0, 0, ACenter)->setSize(500, 100);
     if (game_server)
     {
@@ -22,7 +22,7 @@ GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
     }
     
     victory_overlay = new GuiOverlay(this, "VICTORY", sf::Color(0, 0, 0, 128));
-    (new GuiBox(victory_overlay, "VICTORY_BOX"))->setPosition(0, 0, ACenter)->setSize(500, 100);
+    (new GuiPanel(victory_overlay, "VICTORY_BOX"))->setPosition(0, 0, ACenter)->setSize(500, 100);
     victory_label = new GuiLabel(victory_overlay, "VICTORY_LABEL", "...", 70);
     victory_label->setPosition(0, 0, ACenter)->setSize(500, 100);
 }
