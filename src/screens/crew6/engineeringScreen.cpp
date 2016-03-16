@@ -9,13 +9,14 @@
 EngineeringScreen::EngineeringScreen(GuiContainer* owner)
 : GuiOverlay(owner, "ENGINEERING_SCREEN", colorConfig.background), selected_system(SYS_Reactor)
 {
-
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
-    energy_display->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
+    energy_display->setIcon("gui/Icon_Energy")->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
     hull_display = new GuiKeyValueDisplay(this, "HULL_DISPLAY", 0.45, "Hull", "");
-    hull_display->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
-    shields_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, "Shields", "");
-    shields_display->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
+    hull_display->setIcon("gui/Icon_Hull")->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
+    front_shield_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, "Front", "");
+    front_shield_display->setIcon("gui/Icon_Shield")->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
+    rear_shield_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, "Rear", "");
+    rear_shield_display->setIcon("gui/Icon_Shield")->setTextSize(20)->setPosition(20, 220, ATopLeft)->setSize(240, 40);
     
     (new GuiSelfDestructButton(this, "SELF_DESTRUCT"))->setPosition(20, 220, ATopLeft)->setSize(240, 100);
     
@@ -96,7 +97,8 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
             hull_display->setColor(sf::Color::Red);
         else
             hull_display->setColor(sf::Color::White);
-        shields_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "% " + string(my_spaceship->getShieldPercentage(1)) + "%");
+        front_shield_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "%");
+        rear_shield_display->setValue(string(my_spaceship->getShieldPercentage(1)) + "%");
         
         for(int n=0; n<SYS_COUNT; n++)
         {
