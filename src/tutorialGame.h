@@ -15,7 +15,7 @@ class TutorialGame : public Updatable, public GuiCanvas
     GuiElement* station_screen[5];
  
     P<ScriptObject> script;
-    GuiBox* frame;
+    GuiPanel* frame;
     GuiScrollText* text;
     GuiButton* next_button;
 public:

@@ -68,8 +68,8 @@ void TutorialGame::createScreens()
 
     new GuiIndicatorOverlays(this);
     
-    frame = new GuiBox(this, "");
-    frame->fill()->setPosition(0, 0, ATopCenter)->setSize(900, 230)->hide();
+    frame = new GuiPanel(this, "");
+    frame->setPosition(0, 0, ATopCenter)->setSize(900, 230)->hide();
     
     text = new GuiScrollText(frame, "", "");
     text->setTextSize(20)->setPosition(20, 20, ATopLeft)->setSize(900 - 40, 200 - 40);

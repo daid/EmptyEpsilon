@@ -107,6 +107,7 @@ protected:
     void drawStretched(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White);
     void drawStretchedH(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White);
     void drawStretchedV(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White);
+    void drawStretchedHV(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White);
     
     void drawArrow(sf::RenderTarget& window, sf::FloatRect rect, sf::Color=sf::Color::White, float rotation=0);
     

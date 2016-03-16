@@ -565,6 +565,7 @@ void GuiElement::drawStretched(sf::RenderTarget& window, sf::FloatRect rect, str
 void GuiElement::drawStretchedH(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color)
 {
     sf::Texture* texture_ptr = textureManager.getTexture(texture);
+    sf::Vector2f texture_size = sf::Vector2f(texture_ptr->getSize());
     sf::VertexArray a(sf::TrianglesStrip, 8);
     
     float w = rect.height / 2.0f;
@@ -580,13 +581,13 @@ void GuiElement::drawStretchedH(sf::RenderTarget& window, sf::FloatRect rect, st
     a[7].position = sf::Vector2f(rect.left + rect.width, rect.top + rect.height);
     
     a[0].texCoords = sf::Vector2f(0, 0);
-    a[1].texCoords = sf::Vector2f(0, texture_ptr->getSize().y);
-    a[2].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, 0);
-    a[3].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, texture_ptr->getSize().y);
-    a[4].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, 0);
-    a[5].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, texture_ptr->getSize().y);
-    a[6].texCoords = sf::Vector2f(texture_ptr->getSize().x, 0);
-    a[7].texCoords = sf::Vector2f(texture_ptr->getSize().x, texture_ptr->getSize().y);
+    a[1].texCoords = sf::Vector2f(0, texture_size.y);
+    a[2].texCoords = sf::Vector2f(texture_size.x / 2, 0);
+    a[3].texCoords = sf::Vector2f(texture_size.x / 2, texture_size.y);
+    a[4].texCoords = sf::Vector2f(texture_size.x / 2, 0);
+    a[5].texCoords = sf::Vector2f(texture_size.x / 2, texture_size.y);
+    a[6].texCoords = sf::Vector2f(texture_size.x, 0);
+    a[7].texCoords = sf::Vector2f(texture_size.x, texture_size.y);
 
     for(int n=0; n<8; n++)
         a[n].color = color;
@@ -597,6 +598,7 @@ void GuiElement::drawStretchedH(sf::RenderTarget& window, sf::FloatRect rect, st
 void GuiElement::drawStretchedV(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color)
 {
     sf::Texture* texture_ptr = textureManager.getTexture(texture);
+    sf::Vector2f texture_size = sf::Vector2f(texture_ptr->getSize());
     sf::VertexArray a(sf::TrianglesStrip, 8);
     
     float h = rect.width / 2.0;
@@ -612,16 +614,72 @@ void GuiElement::drawStretchedV(sf::RenderTarget& window, sf::FloatRect rect, st
     a[7].position = sf::Vector2f(rect.left + rect.width, rect.top + rect.height);
     
     a[0].texCoords = sf::Vector2f(0, 0);
-    a[1].texCoords = sf::Vector2f(0, texture_ptr->getSize().y);
-    a[2].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, 0);
-    a[3].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, texture_ptr->getSize().y);
-    a[4].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, 0);
-    a[5].texCoords = sf::Vector2f(texture_ptr->getSize().x / 2, texture_ptr->getSize().y);
-    a[6].texCoords = sf::Vector2f(texture_ptr->getSize().x, 0);
-    a[7].texCoords = sf::Vector2f(texture_ptr->getSize().x, texture_ptr->getSize().y);
+    a[1].texCoords = sf::Vector2f(0, texture_size.y);
+    a[2].texCoords = sf::Vector2f(texture_size.x / 2, 0);
+    a[3].texCoords = sf::Vector2f(texture_size.x / 2, texture_size.y);
+    a[4].texCoords = sf::Vector2f(texture_size.x / 2, 0);
+    a[5].texCoords = sf::Vector2f(texture_size.x / 2, texture_size.y);
+    a[6].texCoords = sf::Vector2f(texture_size.x, 0);
+    a[7].texCoords = sf::Vector2f(texture_size.x, texture_size.y);
 
     for(int n=0; n<8; n++)
         a[n].color = color;
+    
+    window.draw(a, texture_ptr);
+}
+
+void GuiElement::drawStretchedHV(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color)
+{
+    sf::Texture* texture_ptr = textureManager.getTexture(texture);
+    sf::Vector2f texture_size = sf::Vector2f(texture_ptr->getSize());
+    sf::VertexArray a(sf::TrianglesStrip, 8);
+
+    for(int n=0; n<8; n++)
+        a[n].color = color;
+    
+    float corner_size = texture_size.x / 2.0f;
+
+    a[0].position = sf::Vector2f(rect.left, rect.top);
+    a[1].position = sf::Vector2f(rect.left, rect.top + corner_size);
+    a[2].position = sf::Vector2f(rect.left + corner_size, rect.top);
+    a[3].position = sf::Vector2f(rect.left + corner_size, rect.top + corner_size);
+    a[4].position = sf::Vector2f(rect.left + rect.width - corner_size, rect.top);
+    a[5].position = sf::Vector2f(rect.left + rect.width - corner_size, rect.top + corner_size);
+    a[6].position = sf::Vector2f(rect.left + rect.width, rect.top);
+    a[7].position = sf::Vector2f(rect.left + rect.width, rect.top + corner_size);
+    
+    a[0].texCoords = sf::Vector2f(0, 0);
+    a[1].texCoords = sf::Vector2f(0, texture_size.y / 2.0);
+    a[2].texCoords = sf::Vector2f(texture_size.x / 2, 0);
+    a[3].texCoords = sf::Vector2f(texture_size.x / 2, texture_size.y / 2.0);
+    a[4].texCoords = sf::Vector2f(texture_size.x / 2, 0);
+    a[5].texCoords = sf::Vector2f(texture_size.x / 2, texture_size.y / 2.0);
+    a[6].texCoords = sf::Vector2f(texture_size.x, 0);
+    a[7].texCoords = sf::Vector2f(texture_size.x, texture_size.y / 2.0);
+
+    window.draw(a, texture_ptr);
+
+    a[0].position.y = rect.top + rect.height - corner_size;
+    a[2].position.y = rect.top + rect.height - corner_size;
+    a[4].position.y = rect.top + rect.height - corner_size;
+    a[6].position.y = rect.top + rect.height - corner_size;
+    
+    a[0].texCoords.y = texture_size.y / 2.0;
+    a[2].texCoords.y = texture_size.y / 2.0;
+    a[4].texCoords.y = texture_size.y / 2.0;
+    a[6].texCoords.y = texture_size.y / 2.0;
+    
+    window.draw(a, texture_ptr);
+
+    a[1].position.y = rect.top + rect.height;
+    a[3].position.y = rect.top + rect.height;
+    a[5].position.y = rect.top + rect.height;
+    a[7].position.y = rect.top + rect.height;
+    
+    a[1].texCoords.y = texture_size.y;
+    a[3].texCoords.y = texture_size.y;
+    a[5].texCoords.y = texture_size.y;
+    a[7].texCoords.y = texture_size.y;
     
     window.draw(a, texture_ptr);
 }

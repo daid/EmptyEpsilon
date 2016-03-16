@@ -137,6 +137,7 @@ set(SOURCES
 	src/gui/gui2_scrollbar.cpp
 	src/gui/gui2_container.cpp
 	src/gui/gui2_box.cpp
+	src/gui/gui2_panel.cpp
 	src/gui/gui2_overlay.cpp
 	src/spaceObjects/spaceStation.cpp
 	src/spaceObjects/spaceship.cpp

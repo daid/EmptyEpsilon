@@ -15,11 +15,15 @@ ShipSelectionScreen::ShipSelectionScreen()
     //Easiest place to ensure that positional sound is disabled on console views. As soon as a 3D view is rendered positional sound is enabled again.
     soundManager->disablePositionalSound();
 
-    (new GuiLabel(this, "CREW_POSITION_SELECT_LABEL", "Select your station", 30))->addBackground()->setPosition(-50, 50, ATopRight)->setSize(460, 50);
-    (new GuiBox(this, "CREW_POSITION_SELECT_BOX"))->setPosition(-50, 50, ATopRight)->setSize(460, 560);
-    
     GuiAutoLayout* stations_layout = new GuiAutoLayout(this, "CREW_POSITION_BUTTON_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    stations_layout->setPosition(-80, 100, ATopRight)->setSize(400, 500);
+    (new GuiLabel(stations_layout, "CREW_POSITION_SELECT_LABEL", "Select your station", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+
+    crew_type_selector = new GuiSelector(stations_layout, "CREW_TYPE_SELECTION", [this](int index, string value) {
+        updateCrewTypeOptions();
+    });
+    crew_type_selector->setOptions({"6/5 player crew", "4/3 player crew", "1 player crew/extras", "Alternative options"})->setSize(GuiElement::GuiSizeMax, 50);
+
+    stations_layout->setPosition(-80, 50, ATopRight)->setSize(400, 500);
     main_screen_button = new GuiToggleButton(stations_layout, "MAIN_SCREEN_BUTTON", "Main screen", [this](bool value) {
         for(int n=0; n<max_crew_positions; n++)
         {
@@ -67,11 +71,6 @@ ShipSelectionScreen::ShipSelectionScreen()
         updateReadyButton();
     });
     topdown_button->setSize(GuiElement::GuiSizeMax, 50);
-    
-    crew_type_selector = new GuiSelector(this, "CREW_TYPE_SELECTION", [this](int index, string value) {
-        updateCrewTypeOptions();
-    });
-    crew_type_selector->setOptions({"6/5 player crew", "4/3 player crew", "1 player crew/extras", "Alternative options"})->setPosition(-50, 560, ATopRight)->setSize(460, 50);
     
     (new GuiLabel(this, "SHIP_SELECTION_LABEL", "Select ship:", 30))->addBackground()->setPosition(50, 50, ATopLeft)->setSize(550, 50);
     no_ships_label = new GuiLabel(this, "SHIP_SELECTION_NO_SHIPS_LABEL", "Waiting for server to spawn a ship", 30);

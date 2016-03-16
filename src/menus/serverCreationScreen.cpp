@@ -22,11 +22,10 @@ ServerCreationScreen::ServerCreationScreen()
     gameGlobalInfo->allow_main_screen_long_range_radar = PreferencesManager::get("server_config_allow_main_screen_long_range_radar", "1").toInt();
 
     (new GuiLabel(this, "SCENARIO_LABEL", "Scenario", 30))->addBackground()->setPosition(-50, 50, ATopRight)->setSize(460, 50);
-    (new GuiBox(this, "SCENARIO_BOX"))->setPosition(-50, 50, ATopRight)->setSize(460, 360);
     GuiListbox* scenario_list = new GuiListbox(this, "SCENARIO_LIST", [this](int index, string value) {
         selectScenario(value);
     });
-    scenario_list->setPosition(-80, 100, ATopRight)->setSize(400, 300);
+    scenario_list->setPosition(-50, 100, ATopRight)->setSize(460, 300);
     (new GuiBox(this, "SCENARIO_DESCRIPTION_BOX"))->setPosition(-50, 50 + 360, ATopRight)->setSize(460, 200);
     scenario_description = new GuiScrollText(this, "SCENARIO_DESCRIPTION", "");
     scenario_description->setTextSize(20)->setPosition(-80, 60 + 360, ATopRight)->setSize(400, 180);
