@@ -35,9 +35,9 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     
     if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
     {
-        GuiBox* beam_info_box = new GuiBox(this, "BEAM_INFO_BOX");
-        beam_info_box->setPosition(-20, -70, ABottomRight)->setSize(270, 140);
-        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", "Beam info", 30))->setSize(GuiElement::GuiSizeMax, 50);
+        GuiElement* beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
+        beam_info_box->setPosition(-20, -70, ABottomRight)->setSize(270, 150);
+        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", "Beam info", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
         (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(0, -50, ABottomRight)->setSize(GuiElement::GuiSizeMax, 50);
         (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, 0, ABottomRight)->setSize(GuiElement::GuiSizeMax, 50);
     }

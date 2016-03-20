@@ -44,26 +44,26 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
         });
         info.button->setSize(300, GuiElement::GuiSizeMax);
         info.damage_bar = new GuiProgressbar(info.layout, id + "_DAMAGE", 0.0, 1.0, 0.0);
-        info.damage_bar->setSize(100, GuiElement::GuiSizeMax);
+        info.damage_bar->setSize(150, GuiElement::GuiSizeMax);
         if (!gameGlobalInfo->use_system_damage)
             info.damage_bar->hide();
         info.damage_label = new GuiLabel(info.damage_bar, id + "_DAMAGE_LABEL", "...", 20);
         info.damage_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         info.heat_bar = new GuiProgressbar(info.layout, id + "_HEAT", 0.0, 1.0, 0.0);
-        info.heat_bar->setSize(50, GuiElement::GuiSizeMax);
+        info.heat_bar->setSize(100, GuiElement::GuiSizeMax);
         info.heat_arrow = new GuiArrow(info.heat_bar, id + "_HEAT_ARROW", 0);
         info.heat_arrow->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         info.power_bar = new GuiProgressbar(info.layout, id + "_POWER", 0.0, 3.0, 0.0);
-        info.power_bar->setColor(sf::Color(192, 192, 0))->setSize(50, GuiElement::GuiSizeMax);
+        info.power_bar->setColor(sf::Color(192, 192, 0))->setSize(100, GuiElement::GuiSizeMax);
         info.coolant_bar = new GuiProgressbar(info.layout, id + "_COOLANT", 0.0, 10.0, 0.0);
-        info.coolant_bar->setColor(sf::Color(0, 128, 128))->setSize(50, GuiElement::GuiSizeMax);
+        info.coolant_bar->setColor(sf::Color(0, 128, 128))->setSize(100, GuiElement::GuiSizeMax);
         
         info.layout->moveToBack();
         system_rows.push_back(info);
     }
     
     GuiBox* box = new GuiBox(this, "POWER_COOLANT_BOX");
-    box->setPosition(110, -20, ABottomCenter)->setSize(270, 400);
+    box->setPosition(-20, -20, ABottomRight)->setSize(270, 400);
     (new GuiLabel(box, "POWER_LABEL", "Power", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(20, 20, ATopLeft)->setSize(30, 360);
     (new GuiLabel(box, "COOLANT_LABEL", "Coolant", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(110, 20, ATopLeft)->setSize(30, 360);
     
@@ -78,7 +78,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
     });
     coolant_slider->setPosition(140, 20, ATopLeft)->setSize(60, 360);
 
-    (new GuiShieldFrequencySelect(this, "SHIELD_FREQ"))->setPosition(-20, -20, ABottomRight)->setSize(320, 400);
+    (new GuiShieldFrequencySelect(this, "SHIELD_FREQ"))->setPosition(-20, -470, ABottomRight)->setSize(320, 100);
     
     (new GuiShipInternalView(system_row_layouts, "SHIP_INTERNAL_VIEW", 48.0f))->setShip(my_spaceship)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
