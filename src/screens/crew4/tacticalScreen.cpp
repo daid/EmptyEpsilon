@@ -36,6 +36,44 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
                 my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
         }
     );
+    radar->setJoystickCallbacks(
+        [this](float x_position) {
+            if (my_spaceship)
+            {
+                float angle = my_spaceship->getRotation() + x_position;
+                my_spaceship->commandTargetRotation(angle);
+            }
+        },
+        [this](float y_position) {
+            if (my_spaceship && (fabs(y_position) > 20))
+            {
+                // Add some more hysteresis, since y-axis can be hard to keep at 0
+                float value;
+                if (y_position > 0)
+                    value = (y_position-20)*1.25/100;
+                else
+                    value = (y_position+20)*1.25/100;
+                
+                my_spaceship->commandCombatManeuverBoost(-value);
+                //combat_maneuver->setBoostValue(fabs(value));
+            }
+            else if (my_spaceship)
+            {
+                my_spaceship->commandCombatManeuverBoost(0.0);
+                //combat_maneuver->setBoostValue(0.0);
+            }
+        },
+        [this](float z_position) {
+            if (my_spaceship)
+                my_spaceship->commandImpulse(-(z_position / 100));
+        },
+        [this](float r_position) {
+            if (my_spaceship)
+            {
+                my_spaceship->commandCombatManeuverStrafe(r_position/100);
+                //combat_maneuver->setStrafeValue(r_position/100);
+            }
+        });
 
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
     energy_display->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
