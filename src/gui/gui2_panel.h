@@ -9,6 +9,7 @@ public:
     GuiPanel(GuiContainer* owner, string id);
 
     virtual void onDraw(sf::RenderTarget& window);
+    bool onMouseDown(sf::Vector2f position);
 };
 
 #endif//GUI2_BOX_H

@@ -3,11 +3,15 @@
 
 #include "gui2_entrylist.h"
 
+class GuiArrowButton;
+
 class GuiSelector : public GuiEntryList
 {
 protected:
     float text_size;
     EGuiAlign text_alignment;
+    GuiArrowButton* left;
+    GuiArrowButton* right;
 public:
     GuiSelector(GuiContainer* owner, string id, func_t func);
 

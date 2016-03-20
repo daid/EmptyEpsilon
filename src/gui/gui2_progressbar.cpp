@@ -1,7 +1,7 @@
 #include "gui2_progressbar.h"
 
 GuiProgressbar::GuiProgressbar(GuiContainer* owner, string id, float min, float max, float value)
-: GuiElement(owner, id), min(min), max(max), value(value), color(sf::Color::White), border_color(sf::Color::White)
+: GuiElement(owner, id), min(min), max(max), value(value), color(sf::Color::White)
 {
 }
 
@@ -23,11 +23,18 @@ void GuiProgressbar::onDraw(sf::RenderTarget& window)
         fill_rect.top = rect.top + rect.height - fill_rect.height;
         drawStretchedV(window, fill_rect, "gui/ProgressbarFill", color);
     }
+    drawText(window, rect, text, ACenter);
 }
 
 GuiProgressbar* GuiProgressbar::setValue(float value)
 {
     this->value = value;
+    return this;
+}
+
+GuiProgressbar* GuiProgressbar::setText(string text)
+{
+    this->text = text;
     return this;
 }
 

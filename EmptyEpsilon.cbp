@@ -464,6 +464,8 @@
 		<Unit filename="src/featureDefs.h" />
 		<Unit filename="src/gameGlobalInfo.cpp" />
 		<Unit filename="src/gameGlobalInfo.h" />
+		<Unit filename="src/gui/colorConfig.cpp" />
+		<Unit filename="src/gui/colorConfig.h" />
 		<Unit filename="src/gui/debugRenderer.cpp" />
 		<Unit filename="src/gui/debugRenderer.h" />
 		<Unit filename="src/gui/gui2.cpp" />
@@ -496,6 +498,8 @@
 		<Unit filename="src/gui/gui2_listbox.h" />
 		<Unit filename="src/gui/gui2_overlay.cpp" />
 		<Unit filename="src/gui/gui2_overlay.h" />
+		<Unit filename="src/gui/gui2_panel.cpp" />
+		<Unit filename="src/gui/gui2_panel.h" />
 		<Unit filename="src/gui/gui2_progressbar.cpp" />
 		<Unit filename="src/gui/gui2_progressbar.h" />
 		<Unit filename="src/gui/gui2_rotationdial.cpp" />

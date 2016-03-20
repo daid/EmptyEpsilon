@@ -5,26 +5,31 @@
 GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
 : GuiEntryList(owner, id, func), text_size(30)
 {
-    (new GuiArrowButton(this, id + "_ARROW_LEFT", 0, [this]() {
+    left = new GuiArrowButton(this, id + "_ARROW_LEFT", 0, [this]() {
         soundManager->playSound("button.wav");
         if (getSelectionIndex() <= 0)
             setSelectionIndex(entries.size() - 1);
         else
             setSelectionIndex(getSelectionIndex() - 1);
         callback();
-    }))->setPosition(0, 0, ATopLeft)->setSize(GuiSizeMatchHeight, GuiSizeMax);
-    (new GuiArrowButton(this, id + "_ARROW_RIGHT", 180, [this]() {
+    });
+    left->setPosition(0, 0, ATopLeft)->setSize(GuiSizeMatchHeight, GuiSizeMax);
+    right = new GuiArrowButton(this, id + "_ARROW_RIGHT", 180, [this]() {
         soundManager->playSound("button.wav");
         if (getSelectionIndex() >= (int)entries.size() - 1)
             setSelectionIndex(0);
         else
             setSelectionIndex(getSelectionIndex() + 1);
         callback();
-    }))->setPosition(0, 0, ATopRight)->setSize(GuiSizeMatchHeight, GuiSizeMax);
+    });
+    right->setPosition(0, 0, ATopRight)->setSize(GuiSizeMatchHeight, GuiSizeMax);
 }
 
 void GuiSelector::onDraw(sf::RenderTarget& window)
 {
+    left->setEnable(enabled);
+    right->setEnable(enabled);
+    
     sf::Color color = sf::Color::White;
     if (entries.size() < 1 || !enabled)
         color = sf::Color(128, 128, 128, 255);
