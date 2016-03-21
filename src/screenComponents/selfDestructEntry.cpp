@@ -9,8 +9,8 @@ GuiSelfDestructEntry::GuiSelfDestructEntry(GuiContainer* owner, string id)
 
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     
-    box = new GuiBox(this, id + "_BOX");
-    box->fill()->setPosition(0, 0, ACenter);
+    box = new GuiPanel(this, id + "_BOX");
+    box->setPosition(0, 0, ACenter);
     GuiAutoLayout* layout = new GuiAutoLayout(box, id + "_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     layout->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     (new GuiLabel(layout, id + "_LABEL", "Self destruct activated!", 50))->setSize(GuiElement::GuiSizeMax, 80);
@@ -75,8 +75,10 @@ void GuiSelfDestructEntry::onDraw(sf::RenderTarget& window)
             
             if (code_entry->isVisible())
                 box->setSize(600, code_entry->getPositionOffset().y + code_entry->getSize().y);
-            else
+            else if (code_label->isVisible())
                 box->setSize(600, code_label->getPositionOffset().y + code_label->getSize().y);
+            else
+                box->setSize(600, 80);
         }else{
             box->hide();
         }

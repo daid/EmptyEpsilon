@@ -15,6 +15,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
 {
     targets.setAllowWaypointSelection();
 
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureCenter("gui/BackgroundGradient");
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+
     radar_view = new GuiElement(this, "RADAR_VIEW");
     radar_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 

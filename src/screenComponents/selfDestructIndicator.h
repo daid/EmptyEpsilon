@@ -6,7 +6,7 @@
 class GuiSelfDestructIndicator : public GuiElement
 {
 private:
-    GuiBox* box;
+    GuiPanel* box;
     GuiLabel* label;
 public:
     GuiSelfDestructIndicator(GuiContainer* owner);

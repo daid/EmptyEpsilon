@@ -16,7 +16,7 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
             layout->setPosition(20, 450, ATopLeft)->setSize(GuiElement::GuiSizeMax, 400);
         }
         
-        GuiBox* box = new GuiBox(layout, "");
+        GuiPanel* box = new GuiPanel(layout, "");
         systems[n].box = box;
         box->setSize(290, 400);
         

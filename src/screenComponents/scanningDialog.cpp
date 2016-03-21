@@ -10,8 +10,8 @@ GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
 
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     
-    box = new GuiBox(this, id + "_BOX");
-    box->fill()->setSize(500, 545)->setPosition(0, 0, ACenter);
+    box = new GuiPanel(this, id + "_BOX");
+    box->setSize(500, 545)->setPosition(0, 0, ACenter);
     
     signal_label = new GuiLabel(box, id + "_LABEL", "Electric signature", 30);
     signal_label->addBackground()->setPosition(0, 20, ATopCenter)->setSize(450, 50);

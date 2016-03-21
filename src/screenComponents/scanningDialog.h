@@ -10,7 +10,7 @@ private:
     static constexpr int max_sliders = 4;
     static constexpr float lock_delay = 2.0f;
 
-    GuiBox* box;
+    GuiPanel* box;
     GuiLabel* signal_label;
     GuiLabel* locked_label;
     GuiSignalQualityIndicator* signal_quality;

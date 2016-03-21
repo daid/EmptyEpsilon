@@ -7,7 +7,7 @@
 class GuiSelfDestructEntry : public GuiElement
 {
 private:
-    GuiBox* box;
+    GuiPanel* box;
     GuiLabel* code_label;
     GuiElement* code_entry;
     GuiLabel* code_entry_code_label;

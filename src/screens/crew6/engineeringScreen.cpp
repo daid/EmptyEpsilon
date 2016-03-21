@@ -9,6 +9,8 @@
 EngineeringScreen::EngineeringScreen(GuiContainer* owner)
 : GuiOverlay(owner, "ENGINEERING_SCREEN", colorConfig.background), selected_system(SYS_Reactor)
 {
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
     energy_display->setIcon("gui/Icon_Energy")->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
     hull_display = new GuiKeyValueDisplay(this, "HULL_DISPLAY", 0.45, "Hull", "");
@@ -36,6 +38,8 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
                 system_rows[idx].button->setValue(idx == n);
             }
             selected_system = ESystem(n);
+            power_slider->enable();
+            coolant_slider->enable();
             if (my_spaceship)
             {
                 power_slider->setValue(my_spaceship->systems[n].power_level);
@@ -62,7 +66,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
         system_rows.push_back(info);
     }
     
-    GuiBox* box = new GuiBox(this, "POWER_COOLANT_BOX");
+    GuiPanel* box = new GuiPanel(this, "POWER_COOLANT_BOX");
     box->setPosition(-20, -20, ABottomRight)->setSize(270, 400);
     (new GuiLabel(box, "POWER_LABEL", "Power", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(20, 20, ATopLeft)->setSize(30, 360);
     (new GuiLabel(box, "COOLANT_LABEL", "Coolant", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(110, 20, ATopLeft)->setSize(30, 360);
@@ -72,11 +76,13 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
             my_spaceship->commandSetSystemPower(selected_system, value);
     });
     power_slider->addSnapValue(1.0, 0.1)->setPosition(50, 20, ATopLeft)->setSize(60, 360);
+    power_slider->disable();
     coolant_slider = new GuiSlider(box, "COOLANT_SLIDER", 10.0, 0.0, 0.0, [this](float value) {
         if (my_spaceship)
             my_spaceship->commandSetSystemCoolant(selected_system, value);
     });
     coolant_slider->setPosition(140, 20, ATopLeft)->setSize(60, 360);
+    coolant_slider->disable();
 
     (new GuiShieldFrequencySelect(this, "SHIELD_FREQ"))->setPosition(-20, -470, ABottomRight)->setSize(320, 100);
     
