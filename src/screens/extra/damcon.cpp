@@ -1,6 +1,7 @@
 #include "damcon.h"
 
 #include "playerInfo.h"
+#include "screenComponents/shieldFreqencySelect.h"
 #include "screenComponents/shipInternalView.h"
 
 DamageControlScreen::DamageControlScreen(GuiContainer* owner)
