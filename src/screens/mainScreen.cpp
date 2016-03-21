@@ -36,6 +36,8 @@ ScreenMainScreen::ScreenMainScreen()
     new GuiSelfDestructIndicator(this);
     new GuiGlobalMessage(this);
     new GuiIndicatorOverlays(this);
+    
+    first_person = false;
 }
 
 void ScreenMainScreen::update(float delta)
@@ -60,8 +62,14 @@ void ScreenMainScreen::update(float delta)
         }
         camera_pitch = 30.0f;
 
-        const float camera_ship_distance = 420.0f;
-        const float camera_ship_height = 420.0f;
+        float camera_ship_distance = 420.0f;
+        float camera_ship_height = 420.0f;
+        if (first_person)
+        {
+            camera_ship_distance = -my_spaceship->getRadius();
+            camera_ship_height = my_spaceship->getRadius() / 10.f;
+            camera_pitch = 0;
+        }
         sf::Vector2f cameraPosition2D = my_spaceship->getPosition() + sf::vector2FromAngle(target_camera_yaw) * -camera_ship_distance;
         sf::Vector3f targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
 #ifdef DEBUG
@@ -176,6 +184,9 @@ void ScreenMainScreen::onKey(sf::Keyboard::Key key, int unicode)
     case sf::Keyboard::Q:
         if (my_spaceship && gameGlobalInfo->allow_main_screen_long_range_radar)
             my_spaceship->commandMainScreenSetting(MSS_LongRange);
+        break;
+    case sf::Keyboard::F:
+        first_person = !first_person;
         break;
     
     //TODO: This is more generic code and is duplicated.
