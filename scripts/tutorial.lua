@@ -17,7 +17,7 @@ Press next to continue...]], true)
         tutorial:switchViewToMainScreen()
         tutorial:showMessage([[What you see now is the main screen. Here you see your own ship and the world around you.
 There is no direction interaction available on this screen. But it allows for visual identification of objects.]], true)
-        startSequence(radarTutorial)
+        tutorial:onNext(function() startSequence(radarTutorial) end)
     end)
 end
 
