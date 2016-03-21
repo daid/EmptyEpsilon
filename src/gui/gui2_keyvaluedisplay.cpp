@@ -19,7 +19,8 @@ void GuiKeyValueDisplay::onDraw(sf::RenderTarget& window)
         {
             sf::Sprite icon;
             textureManager.setTexture(icon, icon_texture);
-            icon.setScale(rect.height / icon.getTextureRect().height, rect.height / icon.getTextureRect().height);
+            float scale = rect.height / icon.getTextureRect().height * 0.8;
+            icon.setScale(scale, scale);
             icon.setPosition(rect.left + rect.height / 2, rect.top + rect.height / 2);
             window.draw(icon);
         }

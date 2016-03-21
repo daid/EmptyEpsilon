@@ -28,7 +28,8 @@ void GuiButton::onDraw(sf::RenderTarget& window)
         sf::Sprite icon;
         EGuiAlign text_align = ACenterLeft;
         textureManager.setTexture(icon, icon_name);
-        icon.setScale(rect.height / icon.getTextureRect().height, rect.height / icon.getTextureRect().height);
+        float scale = rect.height / icon.getTextureRect().height * 0.8;
+        icon.setScale(scale, scale);
         switch(icon_alignment)
         {
         case ACenterLeft:

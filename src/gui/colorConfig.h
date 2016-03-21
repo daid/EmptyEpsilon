@@ -29,6 +29,13 @@ public:
     WidgetColorSet label;
     WidgetColorSet text_entry;
     WidgetColorSet slider;
+
+    sf::Color overlay_damaged;
+    sf::Color overlay_jammed;
+    sf::Color overlay_no_power;
+    sf::Color overlay_low_energy;
+    sf::Color overlay_low_power;
+    sf::Color overlay_overheating;
     
     void load();
 };

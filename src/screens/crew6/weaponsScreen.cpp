@@ -43,11 +43,11 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     }
 
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
-    energy_display->setIcon("gui/Icon_Energy")->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
+    energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
     front_shield_display = new GuiKeyValueDisplay(this, "FRONT_SHIELD_DISPLAY", 0.45, "Front", "");
-    front_shield_display->setIcon("gui/Icon_Shield")->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
+    front_shield_display->setIcon("gui/icons/shields")->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
     rear_shield_display = new GuiKeyValueDisplay(this, "REAR_SHIELD_DISPLAY", 0.45, "Rear", "");
-    rear_shield_display->setIcon("gui/Icon_Shield")->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
+    rear_shield_display->setIcon("gui/icons/shields")->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
     
     tube_controls = new GuiMissileTubeControls(this, "MISSILE_TUBES");
     

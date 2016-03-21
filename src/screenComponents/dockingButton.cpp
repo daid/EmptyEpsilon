@@ -4,7 +4,7 @@
 GuiDockingButton::GuiDockingButton(GuiContainer* owner, string id)
 : GuiButton(owner, id, "", [this]() { click(); })
 {
-    setIcon("gui/Icon_Dock");
+    setIcon("gui/icons/docking");
 }
 
 void GuiDockingButton::click()

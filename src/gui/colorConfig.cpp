@@ -40,6 +40,12 @@ void ColorConfig::load()
     DEF_WIDGETCOLORSET(label);
     DEF_WIDGETCOLORSET(text_entry);
     DEF_WIDGETCOLORSET(slider);
+    DEF_COLOR(overlay_damaged);
+    DEF_COLOR(overlay_jammed);
+    DEF_COLOR(overlay_no_power);
+    DEF_COLOR(overlay_low_energy);
+    DEF_COLOR(overlay_low_power);
+    DEF_COLOR(overlay_overheating);
 
     P<ResourceStream> stream = getResourceStream("gui/colors.ini");
     if(!stream)
