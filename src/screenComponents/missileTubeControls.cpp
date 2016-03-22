@@ -53,6 +53,10 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
         });
         load_type_rows[n].button->setTextSize(28)->setSize(220, 40);
     }
+    load_type_rows[MW_Homing].button->setIcon("gui/icons/weapon-homing.png");
+    load_type_rows[MW_Mine].button->setIcon("gui/icons/weapon-mine.png");
+    load_type_rows[MW_EMP].button->setIcon("gui/icons/weapon-emp.png");
+    load_type_rows[MW_Nuke].button->setIcon("gui/icons/weapon-nuke.png");
 }
 
 void GuiMissileTubeControls::onDraw(sf::RenderTarget& window)

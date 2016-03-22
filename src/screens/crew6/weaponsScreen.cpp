@@ -31,7 +31,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     
     lock_aim = new GuiToggleButton(this, "LOCK_AIM", "Lock", nullptr);
     lock_aim->setPosition(300, 50, ATopCenter)->setSize(130, 50);
-    lock_aim->setValue(true);
+    lock_aim->setValue(true)->setIcon("gui/icons/lock");
     
     if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
     {
