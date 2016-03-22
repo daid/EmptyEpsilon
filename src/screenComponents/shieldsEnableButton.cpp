@@ -14,7 +14,7 @@ GuiShieldsEnableButton::GuiShieldsEnableButton(GuiContainer* owner, string id)
     bar->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     (new GuiLabel(bar, id + "_CALIBRATING_LABEL", "Calibrating", 30))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    (new GuiPowerDamageIndicator(this, id + "_PDI", SYS_FrontShield))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiPowerDamageIndicator(this, id + "_PDI", SYS_FrontShield, ACenterLeft))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
 void GuiShieldsEnableButton::onDraw(sf::RenderTarget& window)

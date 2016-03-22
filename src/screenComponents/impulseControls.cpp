@@ -14,7 +14,7 @@ GuiImpulseControls::GuiImpulseControls(GuiContainer* owner, string id)
     label = new GuiKeyValueDisplay(this, id, 0.5, "Impulse", "0%");
     label->setTextSize(30)->setPosition(50, 0, ATopLeft)->setSize(40, GuiElement::GuiSizeMax);
     
-    (new GuiPowerDamageIndicator(this, id + "_DPI", SYS_Impulse))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiPowerDamageIndicator(this, id + "_DPI", SYS_Impulse, ATopCenter))->setSize(50, GuiElement::GuiSizeMax);
 }
 
 void GuiImpulseControls::onDraw(sf::RenderTarget& window)

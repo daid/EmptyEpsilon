@@ -22,8 +22,8 @@ GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
     });
     boost_slider->setPosition(0, -100, ABottomCenter)->setSize(50, 165);
     
-    (new GuiPowerDamageIndicator(this, id + "_STRAFE_INDICATOR", SYS_Maneuver))->setPosition(0, -50, ABottomCenter)->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiPowerDamageIndicator(this, id + "_BOOST_INDICATOR", SYS_Impulse))->setPosition(0, -100, ABottomCenter)->setSize(50, 165);
+    (new GuiPowerDamageIndicator(this, id + "_STRAFE_INDICATOR", SYS_Maneuver, ACenterLeft))->setPosition(0, -50, ABottomCenter)->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiPowerDamageIndicator(this, id + "_BOOST_INDICATOR", SYS_Impulse, ABottomLeft))->setPosition(0, -100, ABottomCenter)->setSize(50, 165);
 }
 
 void GuiCombatManeuver::onDraw(sf::RenderTarget& window)

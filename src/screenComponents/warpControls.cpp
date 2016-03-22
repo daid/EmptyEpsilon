@@ -21,7 +21,7 @@ GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id)
     label = new GuiKeyValueDisplay(this, id + "_LABEL", 0.5, "Warp", "0.0");
     label->setTextSize(30)->setPosition(50, 0, ATopLeft)->setSize(40, GuiElement::GuiSizeMax);
     
-    (new GuiPowerDamageIndicator(this, id + "_DPI", SYS_Warp))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiPowerDamageIndicator(this, id + "_DPI", SYS_Warp, ATopCenter))->setSize(50, GuiElement::GuiSizeMax);
 }
 
 void GuiWarpControls::onDraw(sf::RenderTarget& window)

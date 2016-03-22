@@ -20,7 +20,7 @@ GuiJumpControls::GuiJumpControls(GuiContainer* owner, string id)
     });
     button->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
     
-    (new GuiPowerDamageIndicator(this, id + "_DPI", SYS_JumpDrive))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiPowerDamageIndicator(this, id + "_DPI", SYS_JumpDrive, ATopCenter))->setPosition(0, -50, ABottomLeft)->setSize(50, GuiElement::GuiSizeMax);
 }
 
 void GuiJumpControls::onDraw(sf::RenderTarget& window)
