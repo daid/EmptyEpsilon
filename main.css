@@ -112,6 +112,7 @@ select {
 	position: absolute;
 	left: 0;
 	bottom: 0;
+	z-index: 100;
 }
 
 .ui-tabs .ui-tabs-nav li::after {
@@ -123,6 +124,7 @@ select {
 	position: absolute;
 	right: 0;
 	bottom: 0;
+	z-index: 100;
 }
 
 .ui-tabs-anchor::before {
@@ -134,6 +136,7 @@ select {
 	position: absolute;
 	left: 0;
 	top: -1px;
+	z-index: 100;
 }
 
 .ui-tabs-anchor::after {
@@ -145,6 +148,7 @@ select {
 	position: absolute;
 	right: 0;
 	top: -1px;
+	z-index: 100;
 }
 
 .ui-tabs-anchor:hover {
