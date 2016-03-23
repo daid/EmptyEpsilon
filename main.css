@@ -20,16 +20,6 @@ h2 {
 	font: 28px bebas_neuebold, Impact, sans-serif;
 	font-weight: normal;
 }
-#tabs {
-	margin: 0 auto;
-	width: 1200px;
-}
-.ui-tabs-nav {
-	border-top-style: none;
-	border-left-style: none;
-	border-right-style: none;
-	border-radius: 0px;
-}
 a {
 	outline: none;
 }
@@ -76,12 +66,117 @@ select {
 .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { margin-bottom: 0.2em; padding-bottom: 0; border-right-width: 1px; }
 .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 70em; border-left-width: 1px; height: 100%; }
 
+.ui-widget-content {
+	background: rgba(16,19,23,0.8);
+	background: -moz-radial-gradient(center, ellipse cover, rgba(16,19,23,0.8) 0%, rgba(31,37,45,0.8) 100%);
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(16,19,23,0.8)), color-stop(100%, rgba(31,37,45,0.8)));
+	background: -webkit-radial-gradient(center, ellipse cover, rgba(16,19,23,0.8) 0%, rgba(31,37,45,0.8) 100%);
+	background: -o-radial-gradient(center, ellipse cover, rgba(16,19,23,0.8) 0%, rgba(31,37,45,0.8) 100%);
+	background: -ms-radial-gradient(center, ellipse cover, rgba(16,19,23,0.8) 0%, rgba(31,37,45,0.8) 100%);
+	background: radial-gradient(ellipse at center, rgba(16,19,23,0.8) 0%, rgba(31,37,45,0.8) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#101317', endColorstr='#1f252d', GradientType=1 );
+	border: none!important;
+	border-radius: 0px!important;
+	padding: 10px 20px 0;
+}
+
+.ui-widget-header {
+	background: none!important;
+	border: none!important;
+}
+
 .ui-widget {
 	font-family: 'Montserrat', sans-serif;
 }
 
 .ui-tabs-anchor {
+	font-family: 'bebas_neuebook', 'Arial Narrow', sans-serif;
+	font-size: 30px;
+  padding: 0 20px!important;
+  line-height: 40px;
+  height: 40px;
+  background: rgba(0,0,0,0.25);
+  color: #fff!important;
+  transition: all 0.2s;
+  position: relative;
+  border-top: 1px solid rgba(255,255,255,0.5);
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+}
+
+.ui-tabs .ui-tabs-nav li::before {
+	content: "";
+	display: block;
+	width: 2px;
+	height: 2px;
+	background: #fff;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+.ui-tabs .ui-tabs-nav li::after {
+	content: "";
+	display: block;
+	width: 2px;
+	height: 2px;
+	background: #fff;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+
+.ui-tabs-anchor::before {
+	content: "";
+	display: block;
+	width: 2px;
+	height: 2px;
+	background: #fff;
+	position: absolute;
+	left: 0;
+	top: -1px;
+}
+
+.ui-tabs-anchor::after {
+	content: "";
+	display: block;
+	width: 2px;
+	height: 2px;
+	background: #fff;
+	position: absolute;
+	right: 0;
+	top: -1px;
+}
+
+.ui-tabs-anchor:hover {
+	background: rgba(0,0,0,0.65);
+}
+
+.ui-tabs .ui-tabs-nav li {
+	margin: 10px 4px 0;
+	border: none!important;
+	background: none!important;
+	float: none!important;
+	display: inline-block;
+}
+
+.ui-state-active a, .ui-state-active a:link, 
+.ui-state-active a:visited {
+	background: rgba(0,0,0,0.65);
 	font-family: 'bebas_neue_regularregular', 'Arial Narrow', sans-serif;
-	font-size: 24px;
-  padding: 3px 10px!important;
+}
+
+#tabs {
+	margin: 0 auto;
+	width: 1200px;
+	box-sizing: border-box;
+}
+
+.ui-tabs-nav {
+	border-top-style: none;
+	border-left-style: none;
+	border-right-style: none;
+	border-radius: 0px;
+	padding: 0;
+	margin: 0;
+	text-align: center;
 }
