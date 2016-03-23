@@ -5,10 +5,11 @@
 	<title>EmptyEpsilon - Multiplayer Space Bridge Simulator</title>
 	<link href="jquery-ui.min.css" rel="stylesheet">
 	<link href="main.css" rel="stylesheet">
+	<link rel="shortcut icon" href="favicon.ico">
 </head>
 <body>
 
-<h1>EmptyEpsilon</h1>
+<h1 class="logo">EmptyEpsilon</h1>
 <div id="tabs">
 	<ul>
 		<li><a href="#tabs-info">Info</a></li>
@@ -32,7 +33,7 @@
 		<h2>Contact</h2>
 		<p>The best place to talk about bridge simulation and EmptyEpsilon is the <a href="http://bridgesim.net/">The Starship Bridge Simulation Network</a>. We regulary check this and post updates / battle logs of our space adventures.</p>
 		<p>Main developers of EmptyEpsilon go by the names of <a href="https://github.com/daid/">Daid</a> and <a href="https://github.com/nallath/">Nallath</a></p>
-		
+
 		<h2>Donations</h2>
 		<p>EmptyEpsilon is a 100% free game. We made this because we wanted to play the game we envisioned for ourselves. But we are not artists, so we need to buy the 3D models used in this game.</p>
 		<p>Currently we are raising money to buy <a href="http://www.turbosquid.com/Search/Artists/Angryfly">Note sure yet (we still have cash reserve)</a></p>
@@ -82,7 +83,7 @@
 					The last computer is for the main screen. This screen does not need any input and should be visible for all players.
 				</p>
 				<p>
-					Designate a single player as Captain. 
+					Designate a single player as Captain.
 					His computer can be used as main screen, and his only job is to talk with the other players and tell them what they should do.
 				</p>
 				<p>
@@ -174,7 +175,7 @@
 				<p><img src="screenshots/weapons.png"></p>
 				<p> <b>Targeting</b> In order to fire, an enemy ship needs to be targeted. This is done by clicking the desired ship. </p>
 				<p> <b>Missiles</b> Missiles are one of the most destructive weapons of a space ship. Before they can be fired, they need to be loaded in a missile tube. Loadeding missiles wil take time. Unloading missiles can be done by pressing the unload button next to a loaded missile tube. Firing a missile can be done by pressing a loaded missile tube. Take care to have an enemy selected! If there is no enemy, the missile wil be dumb fired (flying in a straight line). </p>
-				<p> <b> Beam weapons</b> The location &amp; range of beam weapons are indicated by the red firing arcs. Once a target is selected, the beam weapons will auto fire.  The frequency can be set on the right of the screen. Some frequencies will deal more damage to certain shield frequencies. Rely on your science officer to provide you with such data. Note that changing the frequencies does not take time. 
+				<p> <b> Beam weapons</b> The location &amp; range of beam weapons are indicated by the red firing arcs. Once a target is selected, the beam weapons will auto fire.  The frequency can be set on the right of the screen. Some frequencies will deal more damage to certain shield frequencies. Rely on your science officer to provide you with such data. Note that changing the frequencies does not take time.
 					Beam weapons can also target selective subsystems. If you simply wish to destroy an enemy, it's best left on hull.</p>
 				<p> <b> Shields </b> Shields can be activated (and deactivated) by pressing the shield button. It might seem tempting to keep the shields up at all time, but they drain significantly more power when they are active. </p>
 			</div>
@@ -359,14 +360,14 @@ function init()
     SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(-25200, 32200):setCallSign("Orion-5")
     SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setPosition(-45600, -15800):setCallSign("Omega")
     SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setPosition(9100,-35400):setCallSign("Refugee-X")
-    
+
 	--Nebula that hide the enemy station.
     Nebula():setPosition(-43300,  2200)
     Nebula():setPosition(-34000,  -700)
     Nebula():setPosition(-32000,-10000)
     Nebula():setPosition(-24000,-14300)
     Nebula():setPosition(-28600,-21900)
-    
+
 	--Random nebulae in the system
     Nebula():setPosition( -8000,-38300)
     Nebula():setPosition( 24000,-30700)
@@ -483,14 +484,14 @@ function init()
     enemy_station = SpaceStation():setTemplate("Large Station"):setFaction("Kraylor")
     enemy_station:setPosition(-45600, -15800):setCallSign("Omega")
     SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setPosition(9100,-35400):setCallSign("Refugee-X")
-    
+
     --Nebula that hide the enemy station.
     Nebula():setPosition(-43300,  2200)
     Nebula():setPosition(-34000,  -700)
     Nebula():setPosition(-32000,-10000)
     Nebula():setPosition(-24000,-14300)
     Nebula():setPosition(-28600,-21900)
-    
+
     --Random nebulae in the system
     Nebula():setPosition( -8000,-38300)
     Nebula():setPosition( 24000,-30700)
@@ -504,7 +505,7 @@ function init()
         Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
         VisualAsteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
     end
-	
+
     -- Create the defense for the station
     CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-44000, -14000):orderDefendTarget(enemy_station)
     CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-47000, -14000):orderDefendTarget(enemy_station)
@@ -512,7 +513,7 @@ function init()
     enemy_dreadnought:setPosition(-46000, -18000):orderDefendTarget(enemy_station)
     CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
     CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
-	
+
     --Small Kraylor strike team, starting in the nebula at G5
     CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3550, 31250):orderRoaming()
     CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3950, 31250):orderRoaming()
@@ -581,7 +582,7 @@ function update(delta)
     if not player:isValid() or not research_station:isValid() then
         victory("Kraylor")
     end
-    
+
     if mission_state == 1 then
         if distance(player, transport_TR4) &lt; 5000 then
             kraylor_TR4_guard1:orderRoaming()
@@ -655,7 +656,7 @@ function init()
     enemy_station:setPosition(-45600, -15800):setCallSign("Omega")
     neutral_station = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
     neutral_station:setPosition(9100,-35400):setCallSign("Refugee-X")
-    
+
     --Nebula that hide the enemy station.
     Nebula():setPosition(-43300,  2200)
     Nebula():setPosition(-34000,  -700)
@@ -676,7 +677,7 @@ function init()
         Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
         VisualAsteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
     end
-	
+
     -- Create the defense for the station
     CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-44000, -14000):orderDefendTarget(enemy_station)
     CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-47000, -14000):orderDefendTarget(enemy_station)
@@ -684,14 +685,14 @@ function init()
     enemy_dreadnought:setPosition(-46000, -18000):orderDefendTarget(enemy_station)
     CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
     CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
-	
+
     --Small Kraylor strike team, guarding TR-4 in the nebula at G5.
     kraylor_TR4_guard1 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3550, 31250):orderIdle()
     kraylor_TR4_guard2 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3950, 31250):orderIdle()
     transport_TR4 = CpuShip():setShipTemplate("Tug"):setFaction("Human Navy"):setPosition(3750, 31250)
     transport_TR4:orderIdle():setCallSign("TR-4"):setCommsScript("")
     transport_TR4:setHull(1):setFrontShieldMax(1):setRearShieldMax(1)
-    
+
     --Start off the mission by sending a transmission to the player
     research_station:sendCommsMessage(player, [[TheEpsilon, please come in?
 
@@ -709,7 +710,7 @@ function update(delta)
     if not player:isValid() or not research_station:isValid() then
         victory("Kraylor")
     end
-    
+
     if mission_state == 1 then
         if distance(player, transport_TR4) &lt; 5000 then
             kraylor_TR4_guard1:orderRoaming()
@@ -744,7 +745,7 @@ Please deliver the diplomat to Omega-X in sector G3, do this by docking with the
             victory("Human Navy")
         end
     end
-    
+
 end
 
 function distance(obj1, obj2)
@@ -789,7 +790,7 @@ function updateHashFromTab(event, ui)
 {
 	var target_id = event.target.id;
 	var target_index = $(event.target).tabs("option", "active");
-	
+
 	var data = mapHash();
 	data[target_id] = target_index;
 	var hash = [];
@@ -804,12 +805,12 @@ $(function() {
 	$("#tabs").tabs({activate: updateHashFromTab});
 	$("#station-tabs").tabs({activate: updateHashFromTab});
 	$("#running-tabs").tabs({activate: updateHashFromTab});
-	
+
 	$("#scripting-tabs").tabs({activate: updateHashFromTab}).addClass("ui-tabs-vertical ui-helper-clearfix");
 	$("#scripting-tabs ul").removeClass("ui-widget-header");
 	$("#scripting-tabs li" ).removeClass("ui-corner-top").addClass("ui-corner-left");
 	$("#scripting-tabs div" ).removeClass("ui-corner-bottom");
-	
+
 	$.each($("img"), function(idx, element)
 	{
 		element = $(element)
@@ -851,13 +852,13 @@ $(function() {
         output = output.replace(/\[\[([^(\]\])]*)\]\]/gm, "<span style='color: blue'>[[$1]]</span>");
 		element.html(output);
 	})
-	
+
 	var hashData = mapHash()
 	for(var key in hashData)
 	{
 		$("#" + key).tabs("option", "active", hashData[key]);
 	}
-	
+
 	$.get("http://software.ultimaker.com/ee_files.php", function(data) {
 		var files = {}
 		for(var idx in data)
@@ -874,7 +875,7 @@ $(function() {
 					os = "android";
 				if (f.toLowerCase().indexOf("osx") > -1 || f.toLowerCase().indexOf("macos") > -1)
 					os = "osx";
-				
+
 				if (os != "")
 				{
 					if (files[version] == undefined)
@@ -883,7 +884,7 @@ $(function() {
 				}
 			}
 		}
-		
+
 		var html = '<table><tr><th>OS<th>File<th>version';
 		var part2 = '<tr><th>OS<th>File<th>version'
         var first = true;
@@ -902,7 +903,7 @@ $(function() {
 				oses.push(os);
 			oses.sort();
 			oses.reverse();
-			
+
 			for(var idx in oses)
 			{
                 var os = oses[idx];
