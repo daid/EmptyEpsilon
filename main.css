@@ -1,5 +1,7 @@
+@import "bebasneue.css";
+
 body{
-	font: 62.5% "Trebuchet MS", sans-serif;
+	font: 62.5% 'Montserrat', sans-serif;
 	color: #ffffff;
 	margin: 50px;
 	background: url(images/bg.png) center center no-repeat fixed #000000;
@@ -13,6 +15,14 @@ h1.logo {
 	height: 150px;
 	background: url(images/logo.png) center top no-repeat;
 	background-size: cover;
+}
+h2 {
+	font: 28px bebas_neuebold, Impact, sans-serif;
+	font-weight: normal;
+}
+#tabs {
+	margin: 0 auto;
+	width: 1200px;
 }
 .ui-tabs-nav {
 	border-top-style: none;
@@ -65,3 +75,13 @@ select {
 .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
 .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { margin-bottom: 0.2em; padding-bottom: 0; border-right-width: 1px; }
 .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 70em; border-left-width: 1px; height: 100%; }
+
+.ui-widget {
+	font-family: 'Montserrat', sans-serif;
+}
+
+.ui-tabs-anchor {
+	font-family: 'bebas_neue_regularregular', 'Arial Narrow', sans-serif;
+	font-size: 24px;
+  padding: 3px 10px!important;
+}
