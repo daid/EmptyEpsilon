@@ -222,10 +222,10 @@
 	<div id="tabs-scripting">
 		<div id="scripting-tabs">
 			<ul>
-				<li><a href="#scripting-tabs-0">0) Tools &amp; basics</a></li>
-				<li><a href="#scripting-tabs-1">1) Building a world</a></li>
-				<li><a href="#scripting-tabs-2">2) Death &amp; destruction</a></li>
-				<li><a href="#scripting-tabs-3">3) We are on a mission!</a></li>
+				<li><a href="#scripting-tabs-0">0: Tools &amp; basics</a></li>
+				<li><a href="#scripting-tabs-1">1: Building a world</a></li>
+				<li><a href="#scripting-tabs-2">2: Death &amp; destruction</a></li>
+				<li><a href="#scripting-tabs-3">3: We are on a mission!</a></li>
 			</ul>
 			<div id="scripting-tabs-0">
 				<h2>About this series</h2>
@@ -248,21 +248,21 @@
 				<p>We'll start out with an empty scenario, as a template to setup our initial game in step 1.</p>
 				<p>Open the editor of your choise, and enter the following code:</p>
 				<p class="code">
--- Name: Beacon of light series
--- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
+				-- Name: Beacon of light series
+				-- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
 
--- Init is run when the scenario is started. Create your initial
-function init()
-    -- Create the main ship for the players.
-    PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
-end
+				-- Init is run when the scenario is started. Create your initial
+				function init()
+				    -- Create the main ship for the players.
+				    PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
+				end
 
-function update(delta)
-end
-</p>
+				function update(delta)
+				end
+				</p>
 				<p>Save this as a file named <b>scenario_99_tutorial.lua</b> in the folder <b>EmptyEpsilon/scripts</b></p>
 				<p>Open EmptyEpsilon and start a new server. Your scenario should be at the bottom of the list. Start it, and you will notice that there is a ship for the players created per default.</p>
-				<h2>Tips&amp;tricks</h2>
+				<h2>Tips &amp; Tricks</h2>
 				<p>The file needs to start with <b>scenario_</b> to be picked up as a scenario.</p>
 				<p>The number in the scenario filename is for the order in which EmptyEpsilon shows the scenarios.</p>
 				<p>The final part of the filename is only for reference. The actual name shown is in the first line of the script file.</p>
@@ -355,7 +355,7 @@ end
 				<p>A few simple names can give the whole world more character.</p>
 				<p>Finally we call the player ship <b>TheEpsilon</b></p>
 				<p class="code">PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser"):setPosition(22400, 18200):setCallSign("TheEpsilon")</p>
-				<h2>Tips&amp;tricks - Building even more world?</h2>
+				<h2>Tips &amp; Tricks - Building even more world?</h2>
 				<p>Next to asteroids, stations and nebulae there are a few more options to populate your world.</p>
 				<p>While we do not use anything else at this point in time. The following objects can also be created:</p>
 				<p class="code">
@@ -470,7 +470,7 @@ end
         victory("Human Navy")
     end
 				</p>
-				<h2>Tips&amp;tricks - More about ships.</h2>
+				<h2>Tips &amp; Tricks - More about ships.</h2>
 				<p>For a full list of possible ship templates, you can check the shipTemplates.lua file. This file contains all the definitions for all the possible ship types.</p>
 				<p>Next to orderRoaming and orderDefendTarget, there is also:</p>
 				<ul>
