@@ -122,6 +122,7 @@ set(SOURCES
 	src/gui/gui2_rotationdial.cpp
 	src/gui/gui2_textentry.cpp
 	src/gui/gui2_label.cpp
+	src/gui/gui2_image.cpp
 	src/gui/gui2_autolayout.cpp
 	src/gui/gui2_arrowbutton.cpp
 	src/gui/gui2_entrylist.cpp
@@ -177,6 +178,9 @@ set(SOURCES
 	src/hardware/serialDriver.cpp
 	src/hardware/virtualOutputDevice.cpp
 )
+if(WIN32)
+    list(APPEND SOURCES EmptyEpsilon.rc)
+endif()
 
 foreach(SP_SOURCE
 	src/soundManager.cpp

@@ -14,12 +14,16 @@
 
 MainMenu::MainMenu()
 {
+    constexpr float logo_size = 256;
+    constexpr float title_y = 160;
+
     new GuiOverlay(this, "", colorConfig.background);
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
 
-    (new GuiLabel(this, "TITLE_A", "Empty", 180))->setPosition(0, 100, ATopCenter)->setSize(0, 300);
-    (new GuiLabel(this, "TITLE_B", "Epsilon", 200))->setPosition(0, 250, ATopCenter)->setSize(0, 300);
-    (new GuiLabel(this, "VERSION", "Version: " + string(VERSION_NUMBER), 20))->setPosition(0, 30, ACenter)->setSize(0, 100);
+    (new GuiLabel(this, "TITLE_A", "Empty", 100))->setBold()->setAlignment(ACenterRight)->setPosition(-logo_size/2, title_y, ATopCenter)->setSize(0, 300);
+    (new GuiLabel(this, "TITLE_B", "Epsilon", 100))->setAlignment(ACenterLeft)->setPosition(logo_size/2, title_y, ATopCenter)->setSize(0, 300);
+    (new GuiImage(this, "LOGO", "logo_white"))->setPosition(0, title_y, ATopCenter)->setSize(logo_size, logo_size);
+    (new GuiLabel(this, "VERSION", "Version: " + string(VERSION_NUMBER), 20))->setPosition(0, title_y + logo_size, ATopCenter)->setSize(0, 20);
     
     (new GuiButton(this, "START_SERVER", "Start server", [this]() {
         new EpsilonServer();
@@ -60,8 +64,11 @@ MainMenu::MainMenu()
     float y = 100;
     (new GuiLabel(this, "CREDITS", "Credits", 25))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 25); y += 25;
     (new GuiLabel(this, "CREDITS1", "Programming:", 20))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 20); y += 20;
-    (new GuiLabel(this, "CREDITS2", "Daid (github.com/daid)", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS3", "Nallath (github.com/nallath)", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS2", "Daid", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS3", "Nallath", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
+    y += 10;
+    (new GuiLabel(this, "CREDITS1", "Graphics:", 20))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 20); y += 20;
+    (new GuiLabel(this, "CREDITS3", "Interesting John", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
     y += 10;
     (new GuiLabel(this, "CREDITS4", "Music:", 20))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 20); y += 20;
     (new GuiLabel(this, "CREDITS5", "Matthew Pablo", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;

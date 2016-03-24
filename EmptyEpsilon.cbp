@@ -443,6 +443,9 @@
 		<Unit filename="../SeriousProton/src/vectorUtils.h" />
 		<Unit filename="../SeriousProton/src/windowManager.cpp" />
 		<Unit filename="../SeriousProton/src/windowManager.h" />
+		<Unit filename="EmptyEpsilon.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
 		<Unit filename="src/GMScriptCallback.cpp" />
 		<Unit filename="src/GMScriptCallback.h" />
 		<Unit filename="src/ai/ai.cpp" />
@@ -490,6 +493,8 @@
 		<Unit filename="src/gui/gui2_element.h" />
 		<Unit filename="src/gui/gui2_entrylist.cpp" />
 		<Unit filename="src/gui/gui2_entrylist.h" />
+		<Unit filename="src/gui/gui2_image.cpp" />
+		<Unit filename="src/gui/gui2_image.h" />
 		<Unit filename="src/gui/gui2_keyvaluedisplay.cpp" />
 		<Unit filename="src/gui/gui2_keyvaluedisplay.h" />
 		<Unit filename="src/gui/gui2_label.cpp" />
