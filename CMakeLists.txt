@@ -178,6 +178,9 @@ set(SOURCES
 	src/hardware/serialDriver.cpp
 	src/hardware/virtualOutputDevice.cpp
 )
+if(WIN32)
+    list(APPEND SOURCES EmptyEpsilon.rc)
+endif()
 
 foreach(SP_SOURCE
 	src/soundManager.cpp
@@ -324,7 +327,6 @@ if(WIN32)
     include_directories(${DRMINGW_ROOT}/include/)
     target_link_libraries(${EXECUTABLE_NAME} exchndl)
   endif()
-  set(SOURCES ${SOURCES} EmptyEpsilon.rc)
 elseif(APPLE)
   set_target_properties(${EXECUTABLE_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/osx/MacOSXBundleInfo.plist.in)
   set_target_properties(${EXECUTABLE_NAME} PROPERTIES MACOSX_BUNDLE_ICON_FILE "${EXECUTABLE_NAME}.icns")
