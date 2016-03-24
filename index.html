@@ -8,6 +8,7 @@
 	<link rel="shortcut icon" href="favicon.ico">
 	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 	<link href="https://file.myfontastic.com/mVfeXmXgbKVhLxnHWexUtb/icons.css" rel="stylesheet">
+	<link href="magnific-popup.css" rel="stylesheet">
 </head>
 <body>
 
@@ -52,18 +53,32 @@
 		<p>Thanks to contributions of MadKat and Daid we managed to buy: <a href="http://www.turbosquid.com/3d-models/4-space-station-max/679444">larger 3D station models</a></p>
 	</div>
 	<div id="tabs-media">
-		<p><img src="screenshots/mainscreen.png"></p>
-		<p>Main screen view from a cruiser near a station being attacked by two enemy cruisers.</p>
-		<p><img src="screenshots/helms.png"></p>
-		<p>View on the helms officers screen. Controls the movement of the ship.</p>
-		<p><img src="screenshots/weapons.png"></p>
-		<p>View on the helms weapons screen. Controls the weapons and shields of the ship.</p>
-		<p><img src="screenshots/engineering.png"></p>
-		<p>View on the engineering screen. Can boost different subsystems and repair systems.</p>
-		<p><img src="screenshots/science.png"></p>
-		<p>View on the science officers screen. Has long range scanners and a large database of information</p>
-		<p><img src="screenshots/relay.png"></p>
-		<p>View on the relay officers screen. Can see friendly ships and what's in the short range radar range of friendly ships. Can call ships and stations for different requests.</p>
+		<div class="gallery">
+			<div class="gallery-image">
+				<a class="image-link" href="screenshots/mainscreen.png"><img src="screenshots/mainscreen.png"></a>
+				<p>Main screen view from a cruiser near a station being attacked by two enemy cruisers.</p>
+			</div>
+			<div class="gallery-image">
+				<a class="image-link" href="screenshots/helms.png"><img src="screenshots/helms.png"></a>
+				<p>View on the helms officers screen. Controls the movement of the ship.</p>
+			</div>
+			<div class="gallery-image">
+				<a class="image-link" href="screenshots/weapons.png"><img src="screenshots/weapons.png"></a>
+				<p>View on the helms weapons screen. Controls the weapons and shields of the ship.</p>
+			</div>
+			<div class="gallery-image">
+				<a class="image-link" href="screenshots/engineering.png"><img src="screenshots/engineering.png"></a>
+				<p>View on the engineering screen. Can boost different subsystems and repair systems.</p>
+			</div>
+			<div class="gallery-image">
+				<a class="image-link" href="screenshots/science.png"><img src="screenshots/science.png"></a>
+				<p>View on the science officers screen. Has long range scanners and a large database of information</p>
+			</div>
+			<div class="gallery-image">
+				<a class="image-link" href="screenshots/relay.png"><img src="screenshots/relay.png"></a>
+				<p>View on the relay officers screen. Can see friendly ships and what's in the short range radar range of friendly ships. Can call ships and stations for different requests.</p>
+			</div>
+		</div>
 	</div>
 	<div id="tabs-running">
 		<div id="running-tabs">
@@ -133,7 +148,7 @@
 				<li><a href="#station-tabs-relay" class="relay icon"><span></span>Relay</a></li>
 			</ul>
 			<div id="station-tabs-main">
-				<p><img src="screenshots/mainscreen.png"></p>
+				<p><a class="image-link float-right" href="screenshots/mainscreen.png"><img src="screenshots/mainscreen.png"></a></p>
 				<p>
 					The captain has zero direct control of the ship. However, he is tasked with keeping the whole crew together and making tactical decisions.
 					The main screen should be setup on a large monitor or beamer so it is visible for all the players.
@@ -168,13 +183,13 @@
 				</p>
 			</div>
 			<div id="station-tabs-helm">
-				<p><img src="screenshots/helms.png"></p>
+				<p><a class="image-link float-right" href="screenshots/helms.png"><img src="screenshots/helms.png"></a></p>
 				<p> In the left upper corner you can see the energy (max is 1000), the current heading in degrees and the current speed. Below this data are two sliders; The leftmost slider sets the impulse power from -100% to 100%. The slider next to it sets the jump distance. </p>
 				<p> <b>Jumping</b> The jump button allowes the ship to jump the set distance in it's current heading. Note that the further you jump, the higher the energy cost. Depending on how much power the system has (and how damaged it is) the time to power the jump might increase/decrease. </p>
 				<p> <b>Docking</b> Docking can be done when the ship is within 1 km of a friendly station by pressing the dock button. </p>
 			</div>
 			<div id="station-tabs-weapons">
-				<p><img src="screenshots/weapons.png"></p>
+				<p><a class="image-link float-right" href="screenshots/weapons.png"><img src="screenshots/weapons.png"></a></p>
 				<p> <b>Targeting</b> In order to fire, an enemy ship needs to be targeted. This is done by clicking the desired ship. </p>
 				<p> <b>Missiles</b> Missiles are one of the most destructive weapons of a space ship. Before they can be fired, they need to be loaded in a missile tube. Loadeding missiles wil take time. Unloading missiles can be done by pressing the unload button next to a loaded missile tube. Firing a missile can be done by pressing a loaded missile tube. Take care to have an enemy selected! If there is no enemy, the missile wil be dumb fired (flying in a straight line). </p>
 				<p> <b> Beam weapons</b> The location &amp; range of beam weapons are indicated by the red firing arcs. Once a target is selected, the beam weapons will auto fire.  The frequency can be set on the right of the screen. Some frequencies will deal more damage to certain shield frequencies. Rely on your science officer to provide you with such data. Note that changing the frequencies does not take time.
@@ -182,14 +197,14 @@
 				<p> <b> Shields </b> Shields can be activated (and deactivated) by pressing the shield button. It might seem tempting to keep the shields up at all time, but they drain significantly more power when they are active. </p>
 			</div>
 			<div id="station-tabs-engineering">
-				<p><img src="screenshots/engineering.png"></p>
+				<p><a class="image-link float-right" href="screenshots/engineering.png"><img src="screenshots/engineering.png"></a></p>
 				<p> <b> Power management </b> The engineer can re-route power from one system to another. This can be done by selecting the system and moving the power slider. Giving a system more power will increase it's output (Generator; More energy per second, Shield; more damage reduction / reload, Impulse; faster movement, etc). </p>
 				<p> <b>Coolant </b> Increasing the energy that is sent to systems will heat up the systems. By giving a system more coolant, more heat can be transported from the system. There is a finite amount of coolant. The trend of the temperature is shown with a white arrow. The brighter it is, the larger the trend (either up or down, as indicated by the direction of the arrow). </p>
 				<p> <b> Repair </b> It can happen that certain systems get damaged, either by being shot or due to overheating. Systems have a state of -100% to 100%. Once a system is at or below 0% it will no longer function. Systems below 100% will function sub optimal (in much the same way if they are under powered). Systems can be repaired by sending a repair crew to it. Repair crews automatically repair all systems in the room they are in. </p>
 				<p> <b> Calibration </b> Engineering can also calibrate shields. This is done by selecting a frequency and pressing the calibrate button. Note that this takes time, during which the shields are offline. They will not automatically turn on once the shields are recalibrated.</p>
 			</div>
 			<div id="station-tabs-science">
-				<p><img src="screenshots/science.png"></p>
+				<p><a class="image-link float-right" href="screenshots/science.png"><img src="screenshots/science.png"></a></p>
 				<p> <b>Long range radar</b> The science station has a long range radar, which is vital to spot ships comming in from a distance. Reporting how the current sector looks and how it changes is your most important task.</p>
 				<p> <b>Scanning</b> You can scan ships to get more information about them. Most ships will be unknown (gray) at the start. And need to be scanned to know if they are friend or foe.</p>
 				<p> <b>More scanning</b> Scanning a target twice yields more information. You can see what shield and beam frequencies should be used to engrage this target. A second scan will also provide the helms and weapons screen with information about beamweapons, allowing you to avoid being shot by their beams.</p>
@@ -197,7 +212,7 @@
 				<p> <b>Database</b> The science station is equiped with a database of all known ships, as well as weapon and other information. Use this information to your advantage.</p>
 			</div>
 			<div id="station-tabs-relay">
-				<p><img src="screenshots/relay.png"></p>
+				<p><a class="image-link float-right" href="screenshots/relay.png"><img src="screenshots/relay.png"></a></p>
 				<p> <b>Communications</b> the relay station can open communications to stations and other ships. This can be used for varius tasks, including asking for backup, sending orders to friendly ships. Or asking for re-supplies when docked.</p>
 				<p> <b>Short range sensors</b> you can see what the short range sensors (5km) see around your ship. But also around other friendly ships. Giving you the ability to spot things before the science station does. You however, cannot scan ships.</p>
 				<p> <b>Probes</b> you can send out up to 10 probes. These probes will fly towards a location and stay there for 10 minutes. Every probe will give you a 5km addition sensor area. Probes will work inside nebulas and thus are a powerful tool when faced with an area blocked by nebula.</p>
@@ -207,7 +222,7 @@
 	<div id="tabs-scripting">
 		<div id="scripting-tabs">
 			<ul>
-				<li><a href="#scripting-tabs-0">0) Tools&amp;basics</a></li>
+				<li><a href="#scripting-tabs-0">0) Tools &amp; basics</a></li>
 				<li><a href="#scripting-tabs-1">1) Building a world</a></li>
 				<li><a href="#scripting-tabs-2">2) Death &amp; destruction</a></li>
 				<li><a href="#scripting-tabs-3">3) We are on a mission!</a></li>
@@ -813,25 +828,25 @@ $(function() {
 	$("#scripting-tabs li" ).removeClass("ui-corner-top").addClass("ui-corner-left");
 	$("#scripting-tabs div" ).removeClass("ui-corner-bottom");
 
-	$.each($("img"), function(idx, element)
-	{
-		element = $(element)
-		if (element.attr('src').indexOf('screenshots/') != 0)
-			return true;
-		element.css('width', '200px');
-		var wrapper = $("<span style='position: relative'>");
-		var button = $("<span class='ui-icon ui-icon-circle-zoomin' style='position: absolute; bottom: 6px; right: 4px;'></span>");
-		scale_function = function() {
-			if (element.css('width') == '200px')
-				element.animate({'width': element[0].naturalWidth + 'px'}, 500);
-			else
-				element.animate({'width': '200px'}, 500);
-		}
-		element.click(scale_function);
-		button.click(scale_function);
-		element.wrap(wrapper);
-		element.after(button);
-	});
+	// $.each($("img"), function(idx, element)
+	// {
+	// 	element = $(element)
+	// 	if (element.attr('src').indexOf('screenshots/') != 0)
+	// 		return true;
+	// 	element.css('width', '200px');
+	// 	var wrapper = $("<span style='position: relative'>");
+	// 	var button = $("<span class='ui-icon ui-icon-circle-zoomin' style='position: absolute; bottom: 6px; right: 4px;'></span>");
+	// 	scale_function = function() {
+	// 		if (element.css('width') == '200px')
+	// 			element.animate({'width': element[0].naturalWidth + 'px'}, 500);
+	// 		else
+	// 			element.animate({'width': '200px'}, 500);
+	// 	}
+	// 	element.click(scale_function);
+	// 	button.click(scale_function);
+	// 	element.wrap(wrapper);
+	// 	element.after(button);
+	// });
 	$.each($(".code"), function(idx, element)
 	{
 		element = $(element);
@@ -924,6 +939,32 @@ $(function() {
 		$('#downloads-info').html(html);
 	}, "json");
 });
+</script>
+<script src="jquery.magnific-popup.min.js"></script>
+<script type="text/javascript">
+	$('.image-link').magnificPopup({
+	  type: 'image',
+		closeOnContentClick: 'true',
+		showCloseBtn: 'false',
+	  mainClass: 'mfp-with-zoom', // this class is for CSS animation below
+
+	  zoom: {
+	    enabled: true, // By default it's false, so don't forget to enable it
+
+	    duration: 300, // duration of the effect, in milliseconds
+	    easing: 'ease-in-out', // CSS transition easing function
+
+	    // The "opener" function should return the element from which popup will be zoomed in
+	    // and to which popup will be scaled down
+	    // By defailt it looks for an image tag:
+	    opener: function(openerElement) {
+	      // openerElement is the element on which popup was initialized, in this case its <a> tag
+	      // you don't need to add "opener" option if this code matches your needs, it's defailt one.
+	      return openerElement.is('img') ? openerElement : openerElement.find('img');
+	    }
+	  }
+
+	});
 </script>
 </body>
 </html>

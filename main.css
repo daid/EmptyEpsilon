@@ -184,6 +184,10 @@ select {
 	border-right: 1px solid rgba(255,255,255,0.5)!important;
 }
 
+#tabs .ui-tabs.ui-widget-content .ui-tabs-panel {
+	min-height: 300px;
+}
+
 .ui-tabs-nav {
 	border-top-style: none;
 	border-left-style: none;
@@ -320,4 +324,29 @@ a.science span::before {
 
 a.relay span::before {
 	content: "j";
+}
+
+a.image-link img {
+	width: 400px;
+	height: auto;
+}
+
+a.image-link.float-right {
+	float: right;
+	margin: 0 0 20px 20px;
+}
+
+.gallery {
+	text-align: center;
+}
+
+.gallery-image {
+	display: inline-block;
+	width: 300px;
+	margin: 20px 10px 0;
+	vertical-align: top;
+}
+
+.gallery-image a img {
+	width: 300px;
 }
