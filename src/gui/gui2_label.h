@@ -11,6 +11,7 @@ protected:
     sf::Color text_color;
     EGuiAlign text_alignment;
     bool background;
+    bool bold;
     bool vertical;
 public:
     GuiLabel(GuiContainer* owner, string id, string text, float text_size);
@@ -22,6 +23,7 @@ public:
     GuiLabel* setAlignment(EGuiAlign alignment);
     GuiLabel* addBackground();
     GuiLabel* setVertical();
+    GuiLabel* setBold(bool bold=true);
 };
 
 

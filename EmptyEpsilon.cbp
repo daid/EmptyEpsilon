@@ -493,6 +493,8 @@
 		<Unit filename="src/gui/gui2_element.h" />
 		<Unit filename="src/gui/gui2_entrylist.cpp" />
 		<Unit filename="src/gui/gui2_entrylist.h" />
+		<Unit filename="src/gui/gui2_image.cpp" />
+		<Unit filename="src/gui/gui2_image.h" />
 		<Unit filename="src/gui/gui2_keyvaluedisplay.cpp" />
 		<Unit filename="src/gui/gui2_keyvaluedisplay.h" />
 		<Unit filename="src/gui/gui2_label.cpp" />

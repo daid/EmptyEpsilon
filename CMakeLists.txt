@@ -122,6 +122,7 @@ set(SOURCES
 	src/gui/gui2_rotationdial.cpp
 	src/gui/gui2_textentry.cpp
 	src/gui/gui2_label.cpp
+	src/gui/gui2_image.cpp
 	src/gui/gui2_autolayout.cpp
 	src/gui/gui2_arrowbutton.cpp
 	src/gui/gui2_entrylist.cpp
