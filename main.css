@@ -3,7 +3,7 @@
 body{
 	font: 62.5% 'Montserrat', sans-serif;
 	color: #ffffff;
-	margin: 50px;
+	margin: 50px 0;
 	background: url(images/bg.png) center center no-repeat fixed #000000;
 	background-size: cover;
 }
@@ -173,6 +173,15 @@ select {
 	margin: 0 auto;
 	width: 1200px;
 	box-sizing: border-box;
+	border-top: 1px solid rgba(255,255,255,0.5)!important;
+	border-bottom: 1px solid rgba(255,255,255,0.5)!important;
+	position: relative;
+}
+
+#tabs .ui-tabs.ui-widget-content {
+	background: rgba(0,0,0,0.4)!important;
+	border-left: 1px solid rgba(255,255,255,0.5)!important;
+	border-right: 1px solid rgba(255,255,255,0.5)!important;
 }
 
 .ui-tabs-nav {
@@ -183,4 +192,132 @@ select {
 	padding: 0;
 	margin: 0;
 	text-align: center;
+}
+
+.ui-tabs .ui-tabs-nav {
+	padding: 0;
+}
+
+.ui-tabs-nav::before {
+	content: "";
+	display: block;
+	width: 2px;
+	height: 2px;
+	background: #fff;
+	position: absolute;
+	left: 0;
+	top: -1px;
+	z-index: 100;
+}
+
+#tabs .ui-tabs.ui-widget-content .ui-tabs-nav::before {
+	top: 0px;
+	left: -1px;
+}
+
+.ui-tabs-nav::after {
+	content: "";
+	display: block;
+	width: 2px;
+	height: 2px;
+	background: #fff;
+	position: absolute;
+	right: 0;
+	top: -1px;
+	z-index: 100;
+}
+
+#tabs .ui-tabs.ui-widget-content .ui-tabs-nav::after {
+	top: 0px;
+	right: -1px;
+}
+
+#tabs::before {
+	content: "";
+	display: block;
+	width: 2px;
+	height: 2px;
+	background: #fff;
+	position: absolute;
+	left: 0;
+	bottom: -1px;
+	z-index: 100;
+}
+
+#tabs .ui-tabs.ui-widget-content::before {
+	content: "";
+	display: block;
+	width: 2px;
+	height: 2px;
+	background: #fff;
+	position: absolute;
+	left: -1px;
+	bottom: 0px;
+	z-index: 100;
+}
+
+#tabs::after {
+	content: "";
+	display: block;
+	width: 2px;
+	height: 2px;
+	background: #fff;
+	position: absolute;
+	right: 0;
+	bottom: -1px;
+	z-index: 100;
+}
+
+#tabs .ui-tabs.ui-widget-content::after {
+	content: "";
+	display: block;
+	width: 2px;
+	height: 2px;
+	background: #fff;
+	position: absolute;
+	right: -1px;
+	bottom: 0px;
+	z-index: 100;
+}
+
+.ui-tabs .ui-tabs-panel {
+	padding: 20px 20px 40px;
+}
+
+a.icon {
+	position: relative;
+	padding-left: 50px!important;
+}
+
+a.icon span::before {
+	font-family: "empty-epsilon";
+	font-weight: normal;
+	width: 40px;
+	height: 40px;
+	margin: 0 0 0 10px;
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	content: "";
+}
+
+a.helms span::before {
+	content: "i";
+}
+
+a.weapons span::before {
+	content: "l";
+}
+
+a.engineering span::before {
+	content: "h";
+}
+
+a.science span::before {
+	content: "k";
+}
+
+a.relay span::before {
+	content: "j";
 }
