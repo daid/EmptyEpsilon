@@ -40,6 +40,13 @@ a {
 	outline: none;
 }
 
+#tabs-info input[type="image"] {
+	width: 92px;
+	height: 26px;
+	overflow: hidden;
+	border-radius: 4px;
+}
+
 #icons {
 	margin: 0;
 	padding: 0;
