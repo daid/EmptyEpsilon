@@ -24,6 +24,15 @@ h2 {
 }
 
 h1, h2, h3, h4, h5, h6 {
+	
+}
+
+h1:first-of-type, 
+h2:first-of-type, 
+h3:first-of-type, 
+h4:first-of-type, 
+h5:first-of-type, 
+h6:first-of-type {
 	margin-top: 0;
 }
 
