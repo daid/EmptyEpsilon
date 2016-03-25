@@ -47,6 +47,48 @@ a {
 	border-radius: 4px;
 }
 
+table.downloads {
+	
+}
+
+table.downloads tr td {
+	padding: 5px 10px 5px 0;
+}
+
+table.downloads tr th {
+	padding: 25px 10px 5px 0;
+}
+
+a.download {
+	display: block;
+	padding: 0 10px;
+	height: 30px;
+	line-height: 28px;
+	width: 100%;
+	box-sizing: border-box;
+	text-align: center;
+	background: rgba(0,0,0,0.4);
+	border: 1px solid #fff;
+	border-radius: 15px;
+	text-decoration: none;
+	transition: all 0.2s;
+}
+
+a.download.windows {
+	color: #00ADEF;
+	border-color: #00ADEF;
+}
+
+a.download.android {
+	color: #A4C639;
+	border-color: #A4C639;
+}
+
+a.download:hover {
+	border-color: #fff;
+	color: #fff;
+}
+
 #icons {
 	margin: 0;
 	padding: 0;
