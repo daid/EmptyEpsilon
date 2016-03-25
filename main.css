@@ -57,6 +57,7 @@ table.downloads tr td {
 
 table.downloads tr th {
 	padding: 25px 10px 5px 0;
+	font: 26px bebas_neuebold, Impact, sans-serif;
 }
 
 a.download {
