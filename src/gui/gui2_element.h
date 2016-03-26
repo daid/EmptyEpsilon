@@ -67,6 +67,7 @@ public:
     GuiElement* enable();
     GuiElement* disable();
     GuiElement* setActive(bool active);
+    bool isActive();
     sf::FloatRect getRect() const { return rect; }
     bool isEnabled();
     
@@ -74,6 +75,8 @@ public:
     void moveToBack();
     
     sf::Vector2f getCenterPoint();
+    
+    GuiContainer* getOwner();
     
     friend class GuiContainer;
     friend class GuiCanvas;

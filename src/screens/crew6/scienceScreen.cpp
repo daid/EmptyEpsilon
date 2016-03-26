@@ -141,13 +141,14 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         radar->setDistance(view_distance);
     }
 
-    if (game_server)
-            probe = game_server->getObjectById(my_spaceship->linked_object);
-        else
-            probe = game_client->getObjectById(my_spaceship->linked_object);
-
     if (!my_spaceship)
         return;
+
+    if (game_server)
+        probe = game_server->getObjectById(my_spaceship->linked_object);
+    else
+        probe = game_client->getObjectById(my_spaceship->linked_object);
+
     if (targets.get() && Nebula::blockedByNebula(my_spaceship->getPosition(), targets.get()->getPosition()) && !my_spaceship->science_link)
         targets.clear();
 

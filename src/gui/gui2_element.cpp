@@ -130,15 +130,20 @@ GuiElement* GuiElement::disable()
     return this;
 }
 
+bool GuiElement::isEnabled()
+{
+    return enabled;
+}
+
 GuiElement* GuiElement::setActive(bool active)
 {
     this->active = active;
     return this;
 }
 
-bool GuiElement::isEnabled()
+bool GuiElement::isActive()
 {
-    return enabled;
+    return active;
 }
 
 void GuiElement::moveToFront()
@@ -162,6 +167,11 @@ void GuiElement::moveToBack()
 sf::Vector2f GuiElement::getCenterPoint()
 {
     return sf::Vector2f(rect.left + rect.width / 2.0, rect.top + rect.height / 2.0);
+}
+
+GuiContainer* GuiElement::getOwner()
+{
+    return owner;
 }
 
 void GuiElement::updateRect(sf::FloatRect window_rect)
