@@ -1,11 +1,22 @@
 #include "hardwareMappingEffects.h"
 #include "logging.h"
+#include "tween.h"
+#include "hardwareController.h"
 
 #define REQ_SETTING(key, variable, effect_name) \
     if (settings.find(key) == settings.end()) { LOG(ERROR) << "[" << key << "] not set for " << effect_name << " effect"; return false; } \
-    variable = settings[key].toFloat();
+    variable = convertOutput(settings[key]);
 #define OPT_SETTING(key, variable, effect_name, default) \
-    if (settings.find(key) == settings.end()) { variable = default; } else { variable = settings[key].toFloat(); }
+    if (settings.find(key) == settings.end()) { variable = default; } else { variable = convertOutput(settings[key]); }
+
+float HardwareMappingEffect::convertOutput(string number)
+{
+    if (number.startswith("$"))
+        return float(number.substr(1).toInt(16)) / 255;
+    if (number.startswith("[") && number.endswith("]"))
+        return float(number.substr(1, -1).toInt()) / 255;
+    return number.toFloat();
+}
 
 bool HardwareMappingEffectStatic::configure(std::unordered_map<string, string> settings)
 {
@@ -64,6 +75,84 @@ float HardwareMappingEffectBlink::onActive()
 }
 
 void HardwareMappingEffectBlink::onInactive()
+{
+    clock.restart();
+}
+
+HardwareMappingEffectVariable::HardwareMappingEffectVariable(HardwareController* controller)
+: controller(controller)
+{
+}
+
+bool HardwareMappingEffectVariable::configure(std::unordered_map<string, string> settings)
+{
+    if (settings.find("condition") != settings.end())
+    {
+        variable_name = settings["condition"];
+        if (variable_name.find("<") >= 0) variable_name = variable_name.substr(0, variable_name.find("<")).strip();
+        if (variable_name.find(">") >= 0) variable_name = variable_name.substr(0, variable_name.find(">")).strip();
+        if (variable_name.find("==") >= 0) variable_name = variable_name.substr(0, variable_name.find("==")).strip();
+        if (variable_name.find("!=") >= 0) variable_name = variable_name.substr(0, variable_name.find("!=")).strip();
+    }
+    if (settings.find("trigger") != settings.end())
+    {
+        variable_name = settings["trigger"];
+        if (variable_name.startswith("<"))
+        {
+            variable_name = variable_name.substr(1).strip();
+        }
+        if (variable_name.startswith(">"))
+        {
+            variable_name = variable_name.substr(1).strip();
+        }
+    }
+    if (settings.find("input") != settings.end())
+    {
+        variable_name = settings["input"];
+    }
+    OPT_SETTING("min_input", min_input, "value", 0.0);
+    OPT_SETTING("max_input", max_input, "value", 1.0);
+    OPT_SETTING("min_output", min_output, "value", 0.0);
+    OPT_SETTING("max_output", max_output, "value", 1.0);
+    return variable_name != "";
+}
+
+float HardwareMappingEffectVariable::onActive()
+{
+    float input = 0.0;
+    controller->getVariableValue(variable_name, input);
+    input = std::min(max_input, std::max(min_input, input));
+    return Tween<float>::linear(input, min_input, max_input, min_output, max_output);
+}
+
+bool HardwareMappingEffectNoise::configure(std::unordered_map<string, string> settings)
+{
+    OPT_SETTING("min_value", min_value, "noise", 0.0);
+    OPT_SETTING("max_value", max_value, "noise", 1.0);
+    OPT_SETTING("smoothness", smoothness, "noise", 0.0);
+    start_value = random(0.0, 1.0);
+    target_value = random(0.0, 1.0);
+    return true;
+}
+
+float HardwareMappingEffectNoise::onActive()
+{
+    float f = clock.getElapsedTime().asSeconds();
+    if (f > smoothness)
+    {
+        clock.restart();
+        start_value = target_value;
+        target_value = random(0, 1);
+        f = 0;
+    }
+    if (smoothness > 0)
+        f = Tween<float>::linear(f, 0, smoothness, start_value, target_value);
+    else
+        f = start_value;
+    return Tween<float>::linear(f, 0, 1, min_value, max_value);
+}
+
+void HardwareMappingEffectNoise::onInactive()
 {
     clock.restart();
 }

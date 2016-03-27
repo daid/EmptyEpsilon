@@ -12,10 +12,14 @@
 #include "scriptInterface.h"
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
 {
-    /// Set if this ship is scanned by the player or not.
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanned);
+    //[DEPRICATED]
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentified);
+    //[DEPRICATED]
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScanned);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentifiedBy);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScannedBy);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentifiedByFaction);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScannedByFaction);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isDocked);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getTarget);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponStorage);
@@ -46,6 +50,9 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponTubeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponTubeLoadType);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, weaponTubeAllowMissle);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, weaponTubeDisallowMissle);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeExclusiveFor);
     /// Set the icon to be used for this ship on the radar.
     /// For example, ship:setRadarTrace("RadarBlip.png") will show a dot instead of an arrow for this ship.
     /// Note: Icon is only shown after scanning, before the ship is scanned it is always shown as an arrow.
@@ -88,8 +95,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     jump_distance = 0.0;
     jump_delay = 0.0;
     wormhole_alpha = 0.0;
-    tube_load_time = 8.0;
-    weapon_tubes = 0;
+    weapon_tube_count = 0;
     turn_speed = 10.0;
     impulse_max_speed = 600.0;
     warp_speed_per_warp_level = 1000.0;
@@ -99,7 +105,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     combat_maneuver_strafe_request = 0.0;
     combat_maneuver_strafe_active = 0.0;
     target_id = -1;
-    scanned_by_player = SS_NotScanned;
     beam_frequency = irandom(0, max_frequency);
     beam_system_target = SYS_None;
     shield_frequency = irandom(0, max_frequency);
@@ -118,15 +123,13 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&jump_drive_charge, 0.5);
     registerMemberReplication(&jump_delay, 0.5);
     registerMemberReplication(&wormhole_alpha, 0.5);
-    registerMemberReplication(&tube_load_time);
-    registerMemberReplication(&weapon_tubes);
+    registerMemberReplication(&weapon_tube_count);
     registerMemberReplication(&target_id);
     registerMemberReplication(&turn_speed);
     registerMemberReplication(&impulse_max_speed);
     registerMemberReplication(&impulse_acceleration);
     registerMemberReplication(&warp_speed_per_warp_level);
     registerMemberReplication(&shield_frequency);
-    registerMemberReplication(&scanned_by_player);
     registerMemberReplication(&docking_state);
     registerMemberReplication(&beam_frequency);
     registerMemberReplication(&combat_maneuver_charge, 0.5);
@@ -182,7 +185,7 @@ void SpaceShip::applyTemplateValues()
         beam_weapons[n].setDamage(ship_template->beams[n].getDamage());
         beam_weapons[n].setBeamTexture(ship_template->beams[n].getBeamTexture());
     }
-    weapon_tubes = ship_template->weapon_tubes;
+    weapon_tube_count = ship_template->weapon_tube_count;
     energy_level = max_energy_level = ship_template->energy_storage_amount;
 
     impulse_max_speed = ship_template->impulse_speed;
@@ -191,7 +194,17 @@ void SpaceShip::applyTemplateValues()
     has_warp_drive = ship_template->warp_speed > 0.0;
     warp_speed_per_warp_level = ship_template->warp_speed;
     has_jump_drive = ship_template->has_jump_drive;
-    tube_load_time = ship_template->tube_load_time;
+    for(int n=0; n<max_weapon_tubes; n++)
+    {
+        weapon_tube[n].setLoadTimeConfig(ship_template->weapon_tube[n].load_time);
+        for(int m=0; m<MW_Count; m++)
+        {
+            if (ship_template->weapon_tube[n].type_allowed_mask & (1 << m))
+                weapon_tube[n].allowLoadOf(EMissileWeapons(m));
+            else
+                weapon_tube[n].disallowLoadOf(EMissileWeapons(m));
+        }
+    }
     //shipTemplate->has_cloaking;
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = weapon_storage_max[n] = ship_template->weapon_storage[n];
@@ -220,7 +233,7 @@ void SpaceShip::draw3DTransparent()
 
 void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
-    if (!long_range && ((scanned_by_player == SS_FullScan) || !my_spaceship))
+    if (!long_range && (!my_spaceship || (getScannedStateFor(my_spaceship) == SS_FullScan)))
     {
         for(int n=0; n<max_beam_weapons; n++)
         {
@@ -259,7 +272,7 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
     }
     if (!long_range)
     {
-        if (scanned_by_player >= SS_SimpleScan || !my_spaceship)
+        if (!my_spaceship || getScannedStateFor(my_spaceship) >= SS_SimpleScan)
         {
             drawShieldsOnRadar(window, position, scale, 1.0, true);
         } else {
@@ -270,7 +283,7 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
     sf::Sprite objectSprite;
 
     //if the ship is not scanned, set the default icon, else the ship specific
-    if (scanned_by_player == SS_NotScanned || scanned_by_player == SS_FriendOrFoeIdentified)
+    if (my_spaceship && (getScannedStateFor(my_spaceship) == SS_NotScanned || getScannedStateFor(my_spaceship) == SS_FriendOrFoeIdentified))
     {
         textureManager.setTexture(objectSprite, "RadarArrow.png");
     }
@@ -290,7 +303,7 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
         objectSprite.setColor(sf::Color(192, 192, 255));
     }else if (my_spaceship)
     {
-        if (scanned_by_player != SS_NotScanned)
+        if (getScannedStateFor(my_spaceship) != SS_NotScanned)
         {
             if (isEnemy(my_spaceship))
                 objectSprite.setColor(sf::Color::Red);
@@ -616,7 +629,7 @@ void SpaceShip::requestUndock()
     }
 }
 
-int SpaceShip::scanningComplexity()
+int SpaceShip::scanningComplexity(P<SpaceObject> other)
 {
     if (scanning_complexity_value > -1)
         return scanning_complexity_value;
@@ -627,18 +640,18 @@ int SpaceShip::scanningComplexity()
     case SC_Simple:
         return 1;
     case SC_Normal:
-        if (scanned_by_player == SS_SimpleScan)
+        if (getScannedStateFor(other) == SS_SimpleScan)
             return 2;
         return 1;
     case SC_Advanced:
-        if (scanned_by_player == SS_SimpleScan)
+        if (getScannedStateFor(other) == SS_SimpleScan)
             return 3;
         return 2;
     }
     return 0;
 }
 
-int SpaceShip::scanningChannelDepth()
+int SpaceShip::scanningChannelDepth(P<SpaceObject> other)
 {
     if (scanning_depth_value > -1)
         return scanning_depth_value;
@@ -654,6 +667,64 @@ int SpaceShip::scanningChannelDepth()
         return 2;
     }
     return 0;
+}
+
+void SpaceShip::scannedBy(P<SpaceObject> other)
+{
+    switch(getScannedStateFor(other))
+    {
+    case SS_NotScanned:
+    case SS_FriendOrFoeIdentified:
+        setScannedStateFor(other, SS_SimpleScan);
+        break;
+    case SS_SimpleScan:
+        setScannedStateFor(other, SS_FullScan);
+        break;
+    case SS_FullScan:
+        break;
+    }
+}
+
+bool SpaceShip::isFriendOrFoeIdentified()
+{
+    LOG(WARNING) << "Depricated \"isFriendOrFoeIdentified\" function called, use isFriendOrFoeIdentifiedBy or isFriendOrFoeIdentifiedByFaction.";
+    for(unsigned int faction_id = 0; faction_id < factionInfo.size(); faction_id++)
+    {
+        if (getScannedStateForFaction(faction_id) > SS_NotScanned)
+            return true;
+    }
+    return false;
+}
+
+bool SpaceShip::isFullyScanned()
+{
+    LOG(WARNING) << "Depricated \"isFullyScanned\" function called, use isFullyScannedBy or isFullyScannedByFaction.";
+    for(unsigned int faction_id = 0; faction_id < factionInfo.size(); faction_id++)
+    {
+        if (getScannedStateForFaction(faction_id) >= SS_FullScan)
+            return true;
+    }
+    return false;
+}
+
+bool SpaceShip::isFriendOrFoeIdentifiedBy(P<SpaceObject> other)
+{
+    return getScannedStateFor(other) >= SS_FriendOrFoeIdentified;
+}
+
+bool SpaceShip::isFullyScannedBy(P<SpaceObject> other)
+{
+    return getScannedStateFor(other) >= SS_FullScan;
+}
+
+bool SpaceShip::isFriendOrFoeIdentifiedByFaction(int faction_id)
+{
+    return getScannedStateForFaction(faction_id) >= SS_FriendOrFoeIdentified;
+}
+
+bool SpaceShip::isFullyScannedByFaction(int faction_id)
+{
+    return getScannedStateForFaction(faction_id) >= SS_FullScan;
 }
 
 float SpaceShip::getShieldDamageFactor(DamageInfo& info, int shield_index)
@@ -672,11 +743,15 @@ float SpaceShip::getShieldDamageFactor(DamageInfo& info, int shield_index)
 
 void SpaceShip::didAnOffensiveAction()
 {
-    if (scanned_by_player == SS_NotScanned)
+    //We did an offensive action towards our target.
+    // Check for each faction. If this faction knows if the target is an enemy or a friendly, it now knows if this object is an enemy or a friendly.
+    for(unsigned int faction_id=0; faction_id<factionInfo.size(); faction_id++)
     {
-        P<SpaceShip> ship = getTarget();
-        if (getTarget() && (!ship || ship->scanned_by_player != SS_NotScanned))
-            scanned_by_player = SS_FriendOrFoeIdentified;
+        if (getScannedStateForFaction(faction_id) == SS_NotScanned)
+        {
+            if (getTarget() && getTarget()->getScannedStateForFaction(faction_id) != SS_NotScanned)
+                setScannedStateForFaction(faction_id, SS_FriendOrFoeIdentified);
+        }
     }
 }
 
@@ -756,7 +831,7 @@ bool SpaceShip::hasSystem(ESystem system)
     case SYS_JumpDrive:
         return has_jump_drive;
     case SYS_MissileSystem:
-        return weapon_tubes > 0;
+        return weapon_tube_count > 0;
     case SYS_FrontShield:
         return shield_count > 0;
     case SYS_RearShield:
@@ -785,8 +860,8 @@ float SpaceShip::getSystemEffectiveness(ESystem system)
 
 void SpaceShip::setWeaponTubeCount(int amount)
 {
-    weapon_tubes = std::max(0, std::min(amount, max_weapon_tubes));
-    for(int n=weapon_tubes; n<max_weapon_tubes; n++)
+    weapon_tube_count = std::max(0, std::min(amount, max_weapon_tubes));
+    for(int n=weapon_tube_count; n<max_weapon_tubes; n++)
     {
         weapon_tube[n].forceUnload();
     }
@@ -794,16 +869,39 @@ void SpaceShip::setWeaponTubeCount(int amount)
 
 int SpaceShip::getWeaponTubeCount()
 {
-    return weapon_tubes;
+    return weapon_tube_count;
 }
 
 EMissileWeapons SpaceShip::getWeaponTubeLoadType(int index)
 {
-    if (index < 0 || index >= weapon_tubes)
+    if (index < 0 || index >= weapon_tube_count)
         return MW_None;
     if (!weapon_tube[index].isLoaded())
         return MW_None;
     return weapon_tube[index].getLoadType();
+}
+
+void SpaceShip::weaponTubeAllowMissle(int index, EMissileWeapons type)
+{
+    if (index < 0 || index >= weapon_tube_count)
+        return;
+    weapon_tube[index].allowLoadOf(type);
+}
+
+void SpaceShip::weaponTubeDisallowMissle(int index, EMissileWeapons type)
+{
+    if (index < 0 || index >= weapon_tube_count)
+        return;
+    weapon_tube[index].disallowLoadOf(type);
+}
+
+void SpaceShip::setWeaponTubeExclusiveFor(int index, EMissileWeapons type)
+{
+    if (index < 0 || index >= weapon_tube_count)
+        return;
+    for(int n=0; n<MW_Count; n++)
+        weapon_tube[index].disallowLoadOf(EMissileWeapons(n));
+    weapon_tube[index].allowLoadOf(type);
 }
 
 std::unordered_map<string, string> SpaceShip::getGMInfo()
@@ -827,6 +925,8 @@ string getMissileWeaponName(EMissileWeapons missile)
         return "Mine";
     case MW_EMP:
         return "EMP";
+    case MW_HVLI:
+        return "HVLI";
     default:
         return "UNK: " + string(int(missile));
     }

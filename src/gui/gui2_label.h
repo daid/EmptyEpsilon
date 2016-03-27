@@ -10,7 +10,8 @@ protected:
     float text_size;
     sf::Color text_color;
     EGuiAlign text_alignment;
-    bool box;
+    bool background;
+    bool bold;
     bool vertical;
 public:
     GuiLabel(GuiContainer* owner, string id, string text, float text_size);
@@ -20,9 +21,9 @@ public:
     GuiLabel* setText(string text);
     string getText();
     GuiLabel* setAlignment(EGuiAlign alignment);
-    GuiLabel* setTextColor(sf::Color color);
-    GuiLabel* addBox();
+    GuiLabel* addBackground();
     GuiLabel* setVertical();
+    GuiLabel* setBold(bool bold=true);
 };
 
 

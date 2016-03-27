@@ -1,18 +1,22 @@
 #include "gui2_label.h"
 
 GuiLabel::GuiLabel(GuiContainer* owner, string id, string text, float text_size)
-: GuiElement(owner, id), text(text), text_size(text_size), text_color(sf::Color::White), text_alignment(ACenter), box(false), vertical(false)
+: GuiElement(owner, id), text(text), text_size(text_size), text_color(sf::Color::White), text_alignment(ACenter), background(false), bold(false), vertical(false)
 {
 }
 
 void GuiLabel::onDraw(sf::RenderTarget& window)
 {
-    if (box)
-        draw9Cut(window, rect, "border_background", sf::Color::White);
+    if (background)
+        drawStretched(window, rect, "gui/LabelBackground", selectColor(colorConfig.label.background));
+    sf::Color color = selectColor(colorConfig.label.forground);
+    sf::Font* font = main_font;
+    if (bold)
+        font = bold_font;
     if (vertical)
-        drawVerticalText(window, rect, text, text_alignment, text_size, text_color);
+        drawVerticalText(window, rect, text, text_alignment, text_size, font, color);
     else
-        drawText(window, rect, text, text_alignment, text_size, text_color);
+        drawText(window, rect, text, text_alignment, text_size, font, color);
 }
 
 GuiLabel* GuiLabel::setText(string text)
@@ -32,20 +36,20 @@ GuiLabel* GuiLabel::setAlignment(EGuiAlign alignment)
     return this;
 }
 
-GuiLabel* GuiLabel::setTextColor(sf::Color color)
+GuiLabel* GuiLabel::addBackground()
 {
-    text_color = color;
-    return this;
-}
-
-GuiLabel* GuiLabel::addBox()
-{
-    box = true;
+    background = true;
     return this;
 }
 
 GuiLabel* GuiLabel::setVertical()
 {
     vertical = true;
+    return this;
+}
+
+GuiLabel* GuiLabel::setBold(bool bold)
+{
+    this->bold = bold;
     return this;
 }

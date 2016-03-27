@@ -17,6 +17,8 @@ public:
     virtual bool canHideInNebula() { return false; }
 
     virtual void collide(Collisionable* target, float force) override;
+
+    virtual RawRadarSignatureInfo getRadarSignatureInfo() { return RawRadarSignatureInfo(0.9, 0, 0); }
     
     virtual string getExportLine() { return "BlackHole():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 };

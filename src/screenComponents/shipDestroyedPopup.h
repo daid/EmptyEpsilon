@@ -6,7 +6,7 @@
 class GuiShipDestroyedPopup : public GuiElement
 {
 private:
-    GuiBox* frame;
+    GuiPanel* frame;
     GuiCanvas* owner;
     float show_timeout;
 public:

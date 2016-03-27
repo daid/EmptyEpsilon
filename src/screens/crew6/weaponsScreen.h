@@ -10,7 +10,8 @@ class WeaponsScreen : public GuiOverlay
 private:
     TargetsContainer targets;
     GuiKeyValueDisplay* energy_display;
-    GuiKeyValueDisplay* shields_display;
+    GuiKeyValueDisplay* front_shield_display;
+    GuiKeyValueDisplay* rear_shield_display;
     GuiRadarView* radar;
     GuiMissileTubeControls* tube_controls;
     GuiRotationDial* missile_aim;

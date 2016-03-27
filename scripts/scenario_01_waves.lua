@@ -1,5 +1,7 @@
 -- Name: Waves
 -- Description: Waves of increasing difficult enemies.
+-- Variation[Hard]: Effectively starts at difficulty of wave 5, and increases by 1.5 every defeated wave. (Players are quicker overwhelmed, leading to shorter games)
+-- Variation[Easy]: Decreases the amount of ships in each progressing wave, making for easier progress and easier waves. (Takes longer for the players to be overwhelmed, good for new players)
 
 function vectorFromAngle(angle, length)
 	return math.cos(angle / 180 * math.pi) * length, math.sin(angle / 180 * math.pi) * length
@@ -94,7 +96,13 @@ function spawnWave()
 	friendlyList[1]:addReputationPoints(150 + waveNumber * 15)
 	
 	enemyList = {}
-	totalScoreRequirement = math.pow(waveNumber, 1.3) * 10;
+	if getScenarioVariation() == "Hard" then
+		totalScoreRequirement = math.pow(waveNumber * 1.5 + 4, 1.3) * 10;
+	elseif getScenarioVariation() == "Easy" then
+		totalScoreRequirement = math.pow(waveNumber * 0.8, 1.3) * 9;
+	else
+		totalScoreRequirement = math.pow(waveNumber, 1.3) * 10;
+	end
 	
 	scoreInSpawnPoint = 0
 	spawnDistance = 20000

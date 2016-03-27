@@ -15,6 +15,7 @@ private:
     
     bool run_thread;
     int channel_count;
+    int resend_delay;
     uint8_t channel_data[512];
 public:
     DMX512SerialDevice();

@@ -17,7 +17,7 @@ JoinServerScreen::JoinServerScreen(sf::IpAddress ip)
         new ServerBrowserMenu(ServerBrowserMenu::Local);
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
     
-    password_entry_box = new GuiBox(this, "PASSWORD_ENTRY_BOX");
+    password_entry_box = new GuiPanel(this, "PASSWORD_ENTRY_BOX");
     password_entry_box->setPosition(0, 350, ATopCenter)->setSize(600, 100);
     password_entry_box->hide();
     password_entry = new GuiTextEntry(password_entry_box, "PASSWORD_ENTRY", "");

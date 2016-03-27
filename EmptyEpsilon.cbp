@@ -443,6 +443,9 @@
 		<Unit filename="../SeriousProton/src/vectorUtils.h" />
 		<Unit filename="../SeriousProton/src/windowManager.cpp" />
 		<Unit filename="../SeriousProton/src/windowManager.h" />
+		<Unit filename="EmptyEpsilon.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
 		<Unit filename="src/GMScriptCallback.cpp" />
 		<Unit filename="src/GMScriptCallback.h" />
 		<Unit filename="src/ai/ai.cpp" />
@@ -464,6 +467,8 @@
 		<Unit filename="src/featureDefs.h" />
 		<Unit filename="src/gameGlobalInfo.cpp" />
 		<Unit filename="src/gameGlobalInfo.h" />
+		<Unit filename="src/gui/colorConfig.cpp" />
+		<Unit filename="src/gui/colorConfig.h" />
 		<Unit filename="src/gui/debugRenderer.cpp" />
 		<Unit filename="src/gui/debugRenderer.h" />
 		<Unit filename="src/gui/gui2.cpp" />
@@ -488,6 +493,8 @@
 		<Unit filename="src/gui/gui2_element.h" />
 		<Unit filename="src/gui/gui2_entrylist.cpp" />
 		<Unit filename="src/gui/gui2_entrylist.h" />
+		<Unit filename="src/gui/gui2_image.cpp" />
+		<Unit filename="src/gui/gui2_image.h" />
 		<Unit filename="src/gui/gui2_keyvaluedisplay.cpp" />
 		<Unit filename="src/gui/gui2_keyvaluedisplay.h" />
 		<Unit filename="src/gui/gui2_label.cpp" />
@@ -496,6 +503,8 @@
 		<Unit filename="src/gui/gui2_listbox.h" />
 		<Unit filename="src/gui/gui2_overlay.cpp" />
 		<Unit filename="src/gui/gui2_overlay.h" />
+		<Unit filename="src/gui/gui2_panel.cpp" />
+		<Unit filename="src/gui/gui2_panel.h" />
 		<Unit filename="src/gui/gui2_progressbar.cpp" />
 		<Unit filename="src/gui/gui2_progressbar.h" />
 		<Unit filename="src/gui/gui2_rotationdial.cpp" />
@@ -526,6 +535,8 @@
 		<Unit filename="src/hardware/hardwareMappingEffects.h" />
 		<Unit filename="src/hardware/hardwareOutputDevice.cpp" />
 		<Unit filename="src/hardware/hardwareOutputDevice.h" />
+		<Unit filename="src/hardware/sACNDMXDevice.cpp" />
+		<Unit filename="src/hardware/sACNDMXDevice.h" />
 		<Unit filename="src/hardware/serialDriver.cpp" />
 		<Unit filename="src/hardware/serialDriver.h" />
 		<Unit filename="src/hardware/virtualOutputDevice.cpp" />
@@ -606,6 +617,8 @@
 		<Unit filename="src/screenComponents/powerDamageIndicator.h" />
 		<Unit filename="src/screenComponents/radarView.cpp" />
 		<Unit filename="src/screenComponents/radarView.h" />
+		<Unit filename="src/screenComponents/rawScannerDataRadarOverlay.cpp" />
+		<Unit filename="src/screenComponents/rawScannerDataRadarOverlay.h" />
 		<Unit filename="src/screenComponents/rotatingModelView.cpp" />
 		<Unit filename="src/screenComponents/rotatingModelView.h" />
 		<Unit filename="src/screenComponents/scanTargetButton.cpp" />
@@ -694,6 +707,8 @@
 		<Unit filename="src/spaceObjects/explosionEffect.h" />
 		<Unit filename="src/spaceObjects/homingMissile.cpp" />
 		<Unit filename="src/spaceObjects/homingMissile.h" />
+		<Unit filename="src/spaceObjects/hvli.cpp" />
+		<Unit filename="src/spaceObjects/hvli.h" />
 		<Unit filename="src/spaceObjects/mine.cpp" />
 		<Unit filename="src/spaceObjects/mine.h" />
 		<Unit filename="src/spaceObjects/missileWeapon.cpp" />

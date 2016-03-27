@@ -10,7 +10,7 @@ function mainMenu()
 	if player:isFriendly(comms_target) then
 		return friendlyComms(comms_data)
 	end
-	if player:isEnemy(comms_target) and comms_target:isFriendOrFoeIdentified() then
+	if player:isEnemy(comms_target) and comms_target:isFriendOrFoeIdentifiedBy(player) then
 		return enemyComms(comms_data)
 	end
 	return neutralComms(comms_data)

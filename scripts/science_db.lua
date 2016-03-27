@@ -42,3 +42,12 @@ item:addKeyValue('Damage at edge', '30')
 item:setLongDescription([[The EMP is a shield-only damaging weapon It matches the heavy nuke in damage but does no hull damage.
 The EMP missile is smaller and easier to storage then the heavy nuke.
 And thus many captains preferer it's use over nukes.]])
+
+item = weapons:addEntry('HVLI')
+item:addKeyValue('Range', '5.4km')
+item:addKeyValue('Damage', '7 each, 35 total')
+item:addKeyValue('Burst', '5')
+item:setLongDescription([[HVLI: High Velocity Lead Impactor.
+A simple large piece of lead fired at a high velocity. This weapon is usually found in simpler ships, as this weapon does not require any guidance computers.
+This also means it only flies straight ahead and does not home in towards your target. After all, it is just a chunk of lead.
+This weapon is fired in bursts of 5 shots. To increase the hit chance.]])

@@ -9,6 +9,7 @@ DMX512SerialDevice::DMX512SerialDevice()
     for(int n=0; n<512; n++)
         channel_data[n] = 0;
     channel_count = 512;
+    resend_delay = 25;
 }
 
 DMX512SerialDevice::~DMX512SerialDevice()
@@ -37,6 +38,10 @@ bool DMX512SerialDevice::configure(std::unordered_map<string, string> settings)
     if (settings.find("channels") != settings.end())
     {
         channel_count = std::max(1, std::min(512, settings["channels"].toInt()));
+    }
+    if (settings.find("resend_delay") != settings.end())
+    {
+        resend_delay = settings["resend_delay"].toInt();
     }
     if (port)
     {
@@ -72,7 +77,12 @@ void DMX512SerialDevice::updateLoop()
         //port->sendBreak(); //Does not seem to work? (Windows with Arduino running: https://github.com/mathertel/DMXSerial )
         
         //Configure the serial port for fake break.
-        port->configure(100000, 8, SerialPort::EvenParity, SerialPort::TwoStopbits);
+        #if defined(__APPLE__) && defined(__MACH__)
+            // Didin't work with even parity in os x.
+            port->configure(100000, 8, SerialPort::NoParity, SerialPort::TwoStopbits);
+        #else
+            port->configure(100000, 8, SerialPort::EvenParity, SerialPort::TwoStopbits);
+        #endif
         //Send the fake break. 8 bits of 0, 1 parity bit which is 0. Which gives 9 bits at 10uSec. Which is 90uSec, more then the required 88uSec
         port->send(start_code, sizeof(start_code));
         
@@ -85,6 +95,6 @@ void DMX512SerialDevice::updateLoop()
         port->send(channel_data, channel_count);
         
         //Delay a bit before sending again.
-        sf::sleep(sf::milliseconds(25));
+        sf::sleep(sf::milliseconds(resend_delay));
     }
 }

@@ -10,7 +10,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     /// Set the class name of this object. Normally the class name is copied from the template name (Ex "Cruiser") but you can override it with this function.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setTypeName);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getTypeName);
-    /// Set a custom callsign for this station. Stations get assigned random callsigns at creation, but you can overrule this from scenario scripts.
+    /// Set a custom callsign for this object. Objects get assigned random callsigns at creation, but you can overrule this from scenario scripts.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setCallSign);
     /// Get the current amount of hull
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getHull);
@@ -273,11 +273,6 @@ float ShipTemplateBasedObject::getShieldRechargeRate(int shield_index)
 void ShipTemplateBasedObject::setTemplate(string template_name)
 {
     P<ShipTemplate> new_ship_template = ShipTemplate::getTemplate(template_name);
-    if (!new_ship_template)
-    {
-        LOG(ERROR) << "Failed to find template: " << template_name;
-        return;
-    }
     this->template_name = template_name;
     ship_template = new_ship_template;
     type_name = template_name;

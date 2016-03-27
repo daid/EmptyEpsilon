@@ -6,7 +6,7 @@
 class GuiJumpIndicator : public GuiElement
 {
 private:
-    GuiBox* box;
+    GuiPanel* box;
     GuiLabel* label;
 public:
     GuiJumpIndicator(GuiContainer* owner);

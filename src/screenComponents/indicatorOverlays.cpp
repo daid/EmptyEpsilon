@@ -12,7 +12,7 @@ GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
     hull_hit_overlay = new GuiOverlay(this, "HULL_HIT", sf::Color(255, 0, 0, 0));
     shield_low_warning_overlay = new GuiOverlay(this, "SHIELD_LOW", sf::Color(255, 0, 0, 0));
     pause_overlay = new GuiOverlay(this, "PAUSE", sf::Color(0, 0, 0, 128));
-    (new GuiBox(pause_overlay, "PAUSE_BOX"))->fill()->setPosition(0, 0, ACenter)->setSize(500, 100);
+    (new GuiPanel(pause_overlay, "PAUSE_BOX"))->setPosition(0, 0, ACenter)->setSize(500, 100);
     (new GuiLabel(pause_overlay, "PAUSE_LABEL", "Game Paused", 70))->setPosition(0, 0, ACenter)->setSize(500, 100);
     if (game_server)
     {
@@ -22,7 +22,7 @@ GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
     }
     
     victory_overlay = new GuiOverlay(this, "VICTORY", sf::Color(0, 0, 0, 128));
-    (new GuiBox(victory_overlay, "VICTORY_BOX"))->setPosition(0, 0, ACenter)->setSize(500, 100);
+    (new GuiPanel(victory_overlay, "VICTORY_BOX"))->setPosition(0, 0, ACenter)->setSize(500, 100);
     victory_label = new GuiLabel(victory_overlay, "VICTORY_LABEL", "...", 70);
     victory_label->setPosition(0, 0, ACenter)->setSize(500, 100);
 }
@@ -163,7 +163,7 @@ void GuiIndicatorOverlays::drawAlertLevel(sf::RenderTarget& window)
     alert.setColor(color);
     alert.setPosition(window.getView().getSize() / 2.0f);
     window.draw(alert);
-    sf::Text alert_text(text, *mainFont, text_size);
+    sf::Text alert_text(text, *main_font, text_size);
     alert_text.setColor(color);
     alert_text.setOrigin(sf::Vector2f(alert_text.getLocalBounds().width / 2.0f, alert_text.getLocalBounds().height / 2.0f + alert_text.getLocalBounds().top));
     alert_text.setPosition(window.getView().getSize() / 2.0f - sf::Vector2f(0, 300));

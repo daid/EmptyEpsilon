@@ -7,7 +7,7 @@ class JoinServerScreen : public GuiCanvas, public Updatable
 {
     sf::IpAddress ip;
     GuiLabel* status_label;
-    GuiBox* password_entry_box;
+    GuiPanel* password_entry_box;
     GuiTextEntry* password_entry;
 public:
     JoinServerScreen(sf::IpAddress ip);

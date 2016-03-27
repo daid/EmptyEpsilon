@@ -94,6 +94,7 @@ set(SOURCES
 	src/screenComponents/shipInternalView.cpp
 	src/screenComponents/beamFrequencySelector.cpp
 	src/screenComponents/radarView.cpp
+	src/screenComponents/rawScannerDataRadarOverlay.cpp
 	src/screenComponents/scanTargetButton.cpp
 	src/screenComponents/snapSlider.cpp
 	src/screenComponents/indicatorOverlays.cpp
@@ -110,6 +111,7 @@ set(SOURCES
 	src/screenComponents/signalQualityIndicator.cpp
 	src/screenComponents/mainScreenControls.cpp
 	src/screenComponents/databaseView.cpp
+	src/gui/colorConfig.cpp
 	src/gui/mouseRenderer.cpp
 	src/gui/scriptError.cpp
 	src/gui/gui2_slider.cpp
@@ -120,6 +122,7 @@ set(SOURCES
 	src/gui/gui2_rotationdial.cpp
 	src/gui/gui2_textentry.cpp
 	src/gui/gui2_label.cpp
+	src/gui/gui2_image.cpp
 	src/gui/gui2_autolayout.cpp
 	src/gui/gui2_arrowbutton.cpp
 	src/gui/gui2_entrylist.cpp
@@ -135,6 +138,7 @@ set(SOURCES
 	src/gui/gui2_scrollbar.cpp
 	src/gui/gui2_container.cpp
 	src/gui/gui2_box.cpp
+	src/gui/gui2_panel.cpp
 	src/gui/gui2_overlay.cpp
 	src/spaceObjects/spaceStation.cpp
 	src/spaceObjects/spaceship.cpp
@@ -151,6 +155,7 @@ set(SOURCES
 	src/spaceObjects/playerSpaceship.cpp
 	src/spaceObjects/beamEffect.cpp
 	src/spaceObjects/homingMissile.cpp
+	src/spaceObjects/hvli.cpp
 	src/spaceObjects/electricExplosionEffect.cpp
 	src/spaceObjects/supplyDrop.cpp
 	src/spaceObjects/warpJammer.cpp
@@ -166,12 +171,16 @@ set(SOURCES
 	src/ai/missileVolleyAI.cpp
 	src/hardware/dmx512SerialDevice.cpp
 	src/hardware/enttecDMXProDevice.cpp
+	src/hardware/sACNDMXDevice.cpp
 	src/hardware/hardwareController.cpp
 	src/hardware/hardwareMappingEffects.cpp
 	src/hardware/hardwareOutputDevice.cpp
 	src/hardware/serialDriver.cpp
 	src/hardware/virtualOutputDevice.cpp
 )
+if(WIN32)
+    list(APPEND SOURCES EmptyEpsilon.rc)
+endif()
 
 foreach(SP_SOURCE
 	src/soundManager.cpp

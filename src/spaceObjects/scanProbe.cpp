@@ -4,6 +4,9 @@
 #include "main.h"
 
 #include "scriptInterface.h"
+REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ScanProbe, SpaceObject)
+{
+}
 
 REGISTER_MULTIPLAYER_CLASS(ScanProbe, "ScanProbe");
 ScanProbe::ScanProbe()
@@ -28,7 +31,7 @@ void ScanProbe::update(float delta)
     }
 }
 
-bool ScanProbe::canBeTargeted()
+bool ScanProbe::canBeTargetedBy(P<SpaceObject> other)
 {
     return (getTarget() - getPosition()) < getRadius();
 }

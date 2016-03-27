@@ -12,8 +12,8 @@ class MouseCalibrator : public GuiCanvas, public Updatable
 private:
     string filename;
     int state;
-    GuiBox* screen_box[3];
-    GuiBox* test_box;
+    GuiPanel* screen_box[3];
+    GuiPanel* test_box;
     GuiButton* ready_button;
     sf::Vector2f mouse_point[3];
 public:

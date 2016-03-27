@@ -10,7 +10,7 @@ private:
     class SystemRow
     {
     public:
-        GuiBox* box;
+        GuiPanel* box;
         GuiSlider* power_slider;
         GuiSlider* coolant_slider;
         GuiProgressbar* heat_bar;

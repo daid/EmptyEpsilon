@@ -11,6 +11,7 @@ protected:
     string value;
     float text_size;
     sf::Color color;
+    string icon_texture;
 public:
     GuiKeyValueDisplay(GuiContainer* owner, string id, float div_distance, string key, string value);
 
@@ -20,6 +21,7 @@ public:
     GuiKeyValueDisplay* setValue(string value);
     GuiKeyValueDisplay* setTextSize(float text_size);
     GuiKeyValueDisplay* setColor(sf::Color color);
+    GuiKeyValueDisplay* setIcon(string icon_texture);
 };
 
 #endif//GUI_KEY_VALUE_DISPLAY_H

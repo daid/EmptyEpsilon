@@ -30,7 +30,7 @@ void GuiScanTargetButton::onDraw(sf::RenderTarget& window)
         if (targets)
             obj = targets->get();
         
-        if (obj && obj->canBeScanned())
+        if (obj && obj->canBeScannedBy(my_spaceship))
             button->show();
         else
             button->hide();

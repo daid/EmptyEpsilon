@@ -23,13 +23,6 @@ enum EDockingState
     DS_Docking,
     DS_Docked
 };
-enum EScannedState
-{
-    SS_NotScanned,
-    SS_FriendOrFoeIdentified,
-    SS_SimpleScan,
-    SS_FullScan
-};
 
 class ShipSystem
 {
@@ -132,8 +125,7 @@ public:
 
     int8_t weapon_storage[MW_Count];
     int8_t weapon_storage_max[MW_Count];
-    int8_t weapon_tubes;
-    float tube_load_time;
+    int8_t weapon_tube_count;
     float tube_recharge_factor;
     WeaponTube weapon_tube[max_weapon_tubes];
 
@@ -152,16 +144,13 @@ public:
     /// MultiplayerObjectID of the targeted object, or -1 when no target is selected.
     int32_t target_id;
 
-    /*!
-     * TODO; Needs to be fixed for multiplayer!
-     */
-    EScannedState scanned_by_player;
-
     EDockingState docking_state;
     P<SpaceObject> docking_target; //Server only
     sf::Vector2f docking_offset; //Server only
 
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
+
+    virtual RawRadarSignatureInfo getRadarSignatureInfo() { return RawRadarSignatureInfo(0.05, 0.3, 0.3); }
 
 #if FEATURE_3D_RENDERING
     virtual void draw3DTransparent() override;
@@ -179,7 +168,7 @@ public:
     /*!
      * Check if the ship can be targeted.
      */
-    virtual bool canBeTargeted() { return true; }
+    virtual bool canBeTargetedBy(P<SpaceObject> other) override { return true; }
     
     /*!
      * didAnOffensiveAction is called whenever this ship does something offesive towards an other object
@@ -236,14 +225,17 @@ public:
     /// Dummy virtual function to add heat on a system. The player ship class has an actual implementation of this as only player ships model heat right now.
     virtual void addHeat(ESystem system, float amount) {}
 
-    virtual bool canBeScanned() override { return scanned_by_player != SS_FullScan; }
-    virtual int scanningComplexity() override;
-    virtual int scanningChannelDepth() override;
-    virtual void scanned() { if (scanned_by_player == SS_SimpleScan) scanned_by_player = SS_FullScan; else scanned_by_player = SS_SimpleScan; }
-    void setScanned(bool scanned) { scanned_by_player = scanned ? SS_FullScan : SS_NotScanned; }
-    bool isFriendOrFoeIdentified() { return scanned_by_player >= SS_FriendOrFoeIdentified; }
-    virtual bool isScanned() override { return scanned_by_player >= SS_SimpleScan; }
-    bool isFullyScanned() { return scanned_by_player >= SS_FullScan; }
+    virtual bool canBeScannedBy(P<SpaceObject> other) override { return getScannedStateFor(other) != SS_FullScan; }
+    virtual int scanningComplexity(P<SpaceObject> other) override;
+    virtual int scanningChannelDepth(P<SpaceObject> other) override;
+    virtual void scannedBy(P<SpaceObject> other) override;
+
+    bool isFriendOrFoeIdentified();//[DEPRICATED]
+    bool isFullyScanned();//[DEPRICATED]
+    bool isFriendOrFoeIdentifiedBy(P<SpaceObject> other);
+    bool isFullyScannedBy(P<SpaceObject> other);
+    bool isFriendOrFoeIdentifiedByFaction(int faction_id);
+    bool isFullyScannedByFaction(int faction_id);
 
     /*!
      * Check if ship has certain system
@@ -325,6 +317,9 @@ public:
     void setWeaponTubeCount(int amount);
     int getWeaponTubeCount();
     EMissileWeapons getWeaponTubeLoadType(int index);
+    void weaponTubeAllowMissle(int index, EMissileWeapons type);
+    void weaponTubeDisallowMissle(int index, EMissileWeapons type);
+    void setWeaponTubeExclusiveFor(int index, EMissileWeapons type);
 
     void setRadarTrace(string trace) { radar_trace = trace; }
 };

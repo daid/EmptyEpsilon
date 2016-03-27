@@ -8,8 +8,11 @@
 #include "screenComponents/beamTargetSelector.h"
 
 WeaponsScreen::WeaponsScreen(GuiContainer* owner)
-: GuiOverlay(owner, "WEAPONS_SCREEN", sf::Color::Black)
+: GuiOverlay(owner, "WEAPONS_SCREEN", colorConfig.background)
 {
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureCenter("gui/BackgroundGradient");
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+
     radar = new GuiRadarView(this, "HELMS_RADAR", 5000.0, &targets);
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableTargetProjections()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
@@ -28,21 +31,23 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     
     lock_aim = new GuiToggleButton(this, "LOCK_AIM", "Lock", nullptr);
     lock_aim->setPosition(300, 50, ATopCenter)->setSize(130, 50);
-    lock_aim->setValue(true);
+    lock_aim->setValue(true)->setIcon("gui/icons/lock");
     
     if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
     {
-        GuiBox* beam_info_box = new GuiBox(this, "BEAM_INFO_BOX");
-        beam_info_box->setPosition(-20, -70, ABottomRight)->setSize(270, 140);
-        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", "Beam info", 30))->setSize(GuiElement::GuiSizeMax, 50);
+        GuiElement* beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
+        beam_info_box->setPosition(-20, -70, ABottomRight)->setSize(270, 150);
+        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", "Beam info", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
         (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(0, -50, ABottomRight)->setSize(GuiElement::GuiSizeMax, 50);
         (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, 0, ABottomRight)->setSize(GuiElement::GuiSizeMax, 50);
     }
 
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
-    energy_display->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
-    shields_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, "Shields", "");
-    shields_display->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
+    energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
+    front_shield_display = new GuiKeyValueDisplay(this, "FRONT_SHIELD_DISPLAY", 0.45, "Front", "");
+    front_shield_display->setIcon("gui/icons/shields")->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
+    rear_shield_display = new GuiKeyValueDisplay(this, "REAR_SHIELD_DISPLAY", 0.45, "Rear", "");
+    rear_shield_display->setIcon("gui/icons/shields")->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
     
     tube_controls = new GuiMissileTubeControls(this, "MISSILE_TUBES");
     
@@ -54,7 +59,8 @@ void WeaponsScreen::onDraw(sf::RenderTarget& window)
     if (my_spaceship)
     {
         energy_display->setValue(string(int(my_spaceship->energy_level)));
-        shields_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "% " + string(my_spaceship->getShieldPercentage(1)) + "%");
+        front_shield_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "%");
+        rear_shield_display->setValue(string(my_spaceship->getShieldPercentage(1)) + "%");
         targets.set(my_spaceship->getTarget());
         
         if (lock_aim->getValue())

@@ -6,7 +6,7 @@
 class GuiImpulseControls : public GuiElement
 {
 private:
-    GuiLabel* label;
+    GuiKeyValueDisplay* label;
     GuiSlider* slider;
 public:
     GuiImpulseControls(GuiContainer* owner, string id);

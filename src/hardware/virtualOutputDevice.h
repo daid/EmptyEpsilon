@@ -2,6 +2,7 @@
 #define VIRTUAL_OUTPUT_DEVICE_H
 
 #include <SFML/System.hpp>
+#include <SFML/Graphics.hpp>
 #include <stdint.h>
 #include "hardwareOutputDevice.h"
 
@@ -10,10 +11,25 @@ class VirtualOutputRenderer;
 class VirtualOutputDevice : public HardwareOutputDevice
 {
 private:
+    enum EOutputType
+    {
+        White,
+        Red,
+        Green,
+        Blue
+    };
+    struct ChannelData
+    {
+        float value;
+        EOutputType type;
+        int composition;
+    };
+
     VirtualOutputRenderer* renderer;
+
+    int channel_count;
+    ChannelData channel_data[512];
 public:
-    float channel_data[512];
-    
     VirtualOutputDevice();
     virtual ~VirtualOutputDevice();
     
@@ -25,6 +41,8 @@ public:
     
     //Return the number of output channels supported by this device.
     virtual int getChannelCount();
+    
+    void render(sf::RenderTarget& window);
 };
 
 

@@ -6,6 +6,9 @@ OptionsMenu::OptionsMenu()
 {
     P<WindowManager> windowManager = engine->getObject("windowManager");
 
+    new GuiOverlay(this, "", colorConfig.background);
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+
     (new GuiButton(this, "FULLSCREEN", "Fullscreen toggle", []()
     {
         P<WindowManager> windowManager = engine->getObject("windowManager");
@@ -29,7 +32,7 @@ OptionsMenu::OptionsMenu()
     }))->setOptions({"FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x"})->setSelectionIndex(index)->setPosition(50, 160, ATopLeft)->setSize(300, 50);
 
     // Add music selection
-    (new GuiLabel(this, "MUSIC_VOL_LABEL", "Music Volume", 30))->setPosition(50, 220, ATopLeft)->setSize(300, 50);
+    (new GuiLabel(this, "MUSIC_VOL_LABEL", "Music Volume", 30))->addBackground()->setPosition(50, 220, ATopLeft)->setSize(300, 50);
     (new GuiSlider(this, "MUSIC_VOL", 0, 100, soundManager->getMusicVolume(), [](float volume)
     {
         soundManager->setMusicVolume(volume);
@@ -41,7 +44,7 @@ OptionsMenu::OptionsMenu()
         returnToMainMenu();
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
     
-    (new GuiLabel(this, "MUSIC_SELECT_LABEL", "Select Soundtrack", 30))->setPosition(-375, 50, ATopRight)->setSize(300, 50);
+    (new GuiLabel(this, "MUSIC_SELECT_LABEL", "Select Soundtrack", 30))->addBackground()->setPosition(-50, 50, ATopRight)->setSize(600, 50);
     GuiListbox* music_list = new GuiListbox(this, "MUSIC_PLAY", [this](int index, string value)
     {
         soundManager->playMusic(value);

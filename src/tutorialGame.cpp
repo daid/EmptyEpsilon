@@ -28,11 +28,15 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(TutorialGame)
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, setMessageToTopPosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, setMessageToBottomPosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, onNext);
+    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, finish);
 }
 
 TutorialGame::TutorialGame()
 {
-    new GuiOverlay(this, "", sf::Color::Black);
+    new LocalOnlyGame();
+
+    new GuiOverlay(this, "", colorConfig.background);
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
     
     viewport = nullptr;
 
@@ -64,8 +68,8 @@ void TutorialGame::createScreens()
 
     new GuiIndicatorOverlays(this);
     
-    frame = new GuiBox(this, "");
-    frame->fill()->setPosition(0, 0, ATopCenter)->setSize(900, 230)->hide();
+    frame = new GuiPanel(this, "");
+    frame->setPosition(0, 0, ATopCenter)->setSize(900, 230)->hide();
     
     text = new GuiScrollText(frame, "", "");
     text->setTextSize(20)->setPosition(20, 20, ATopLeft)->setSize(900 - 40, 200 - 40);
@@ -100,6 +104,19 @@ void TutorialGame::update(float delta)
 
         camera_position = camera_position * 0.9f + targetCameraPosition * 0.1f;
         camera_yaw += sf::angleDifference(camera_yaw, target_camera_yaw) * 0.1f;
+    }
+}
+
+void TutorialGame::onKey(sf::Keyboard::Key key, int unicode)
+{
+    switch(key)
+    {
+    case sf::Keyboard::Escape:
+    case sf::Keyboard::Home:
+        finish();
+        break;
+    default:
+        break;
     }
 }
 
@@ -185,6 +202,15 @@ void TutorialGame::setMessageToBottomPosition()
     frame->setPosition(0, -50, ABottomCenter);
 }
 
+void TutorialGame::finish()
+{
+    script->destroy();
+    destroy();
+    
+    disconnectFromServer();
+    returnToMainMenu();
+}
+
 void TutorialGame::hideAllScreens()
 {
     if (viewport == nullptr)
@@ -198,4 +224,12 @@ void TutorialGame::hideAllScreens()
     {
         station_screen[n]->hide();
     }
+}
+
+LocalOnlyGame::LocalOnlyGame()
+{
+}
+
+void LocalOnlyGame::update(float delta)
+{
 }

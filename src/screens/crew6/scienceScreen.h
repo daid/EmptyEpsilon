@@ -8,11 +8,13 @@
 class GuiRadarView;
 class GuiKeyValueDisplay;
 class GuiFrequencyCurve;
+class RawScannerDataRadarOverlay;
 
 class ScienceScreen : public GuiOverlay
 {
 protected:
     GuiElement* radar_view;
+    RawScannerDataRadarOverlay* raw_scanner_data_overlay;
     GuiElement* database_view;
 
     TargetsContainer targets;

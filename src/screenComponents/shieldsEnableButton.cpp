@@ -5,7 +5,7 @@
 GuiShieldsEnableButton::GuiShieldsEnableButton(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
-    button = new GuiButton(this, id + "_BUTTON", "Shields: ON", []() {
+    button = new GuiToggleButton(this, id + "_BUTTON", "Shields: ON", [](bool value) {
         if (my_spaceship)
             my_spaceship->commandSetShields(!my_spaceship->shields_active);
     });
@@ -14,7 +14,7 @@ GuiShieldsEnableButton::GuiShieldsEnableButton(GuiContainer* owner, string id)
     bar->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     (new GuiLabel(bar, id + "_CALIBRATING_LABEL", "Calibrating", 30))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    (new GuiPowerDamageIndicator(this, id + "_PDI", SYS_FrontShield))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiPowerDamageIndicator(this, id + "_PDI", SYS_FrontShield, ACenterLeft))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
 void GuiShieldsEnableButton::onDraw(sf::RenderTarget& window)
@@ -30,6 +30,7 @@ void GuiShieldsEnableButton::onDraw(sf::RenderTarget& window)
         else
         {
             button->show();
+            button->setValue(my_spaceship->shields_active);
             bar->hide();
             button->setText(my_spaceship->shields_active ? "Shields: ON" : "Shields: OFF");
         }

@@ -1,10 +1,11 @@
 #include "damcon.h"
 
 #include "playerInfo.h"
+#include "screenComponents/shieldFreqencySelect.h"
 #include "screenComponents/shipInternalView.h"
 
 DamageControlScreen::DamageControlScreen(GuiContainer* owner)
-: GuiOverlay(owner, "DAMCON_SCREEN", sf::Color::Black)
+: GuiOverlay(owner, "DAMCON_SCREEN", colorConfig.background)
 {
     (new GuiShipInternalView(this, "SHIP_INTERNAL_VIEW", 48.0f * 1.5f))->setShip(my_spaceship)->setPosition(300, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     
@@ -19,6 +20,8 @@ DamageControlScreen::DamageControlScreen(GuiContainer* owner)
         system_health[n] = new GuiKeyValueDisplay(system_health_layout, "DAMCON_HEALTH_" + string(n), 0.8, getSystemName(ESystem(n)), "0%");
         system_health[n]->setSize(GuiElement::GuiSizeMax, 40);
     }
+    
+    (new GuiShieldFrequencySelect(this, "SHIELD_FREQ"))->setPosition(-20, -20, ABottomRight)->setSize(320, 100);
 }
 
 void DamageControlScreen::onDraw(sf::RenderTarget& window)

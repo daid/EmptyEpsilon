@@ -17,6 +17,7 @@ enum EMissileWeapons
     MW_Nuke,
     MW_Mine,
     MW_EMP,
+    MW_HVLI,
     MW_Count
 };
 /* Define script conversion function for the EMissileWeapons enum. */
@@ -68,16 +69,22 @@ public:
         PlayerShip,
         Station
     };
+    class TubeTemplate
+    {
+    public:
+        float load_time;
+        uint32_t type_allowed_mask;
+    };
 private:
     static std::unordered_map<string, P<ShipTemplate> > templateMap;
     string name;
     string description;
     TemplateType type;
 public:
-    string getName() {return this->name;}
-    string getDescription() {return this->description;}
+    string getName();
+    string getDescription();
     void setType(TemplateType type);
-    TemplateType getType() { return type; }
+    TemplateType getType();
 
     P<ModelData> model_data;
 
@@ -88,8 +95,8 @@ public:
     float energy_storage_amount;
     string default_ai_name;
     BeamTemplate beams[max_beam_weapons];
-    int weapon_tubes;
-    float tube_load_time;
+    int weapon_tube_count;
+    TubeTemplate weapon_tube[max_weapon_tubes];
     float hull;
     int shield_count;
     float shield_level[max_shield_count];
@@ -106,13 +113,13 @@ public:
     ShipTemplate();
 
     void setName(string name);
-    void setDescription(string description) { this->description = description; }
-    void setModel(string model_name) { this->model_data = ModelData::getModel(model_name); }
-    void setDefaultAI(string default_ai_name) { this->default_ai_name = default_ai_name; }
-    void setSizeClass(int size_class) { this->size_class = size_class; }
+    void setDescription(string description);
+    void setModel(string model_name);
+    void setDefaultAI(string default_ai_name);
+    void setSizeClass(int size_class);
     void setMesh(string model, string color_texture, string specular_texture, string illumination_texture);
-    void setEnergyStorage(float energy_amount) { this->energy_storage_amount = energy_amount; } 
-    
+    void setEnergyStorage(float energy_amount);
+
     void setBeam(int index, float arc, float direction, float range, float cycle_time, float damage);
 
     /**
@@ -120,18 +127,22 @@ public:
      */
     void setBeamTexture(int index, string texture);
 
-    void setTubes(int amount, float load_time) { weapon_tubes = std::min(max_weapon_tubes, amount); tube_load_time = load_time; }
+    void setTubes(int amount, float load_time);
+    void setTubeLoadTime(int index, float load_time);
+    void weaponTubeAllowMissle(int index, EMissileWeapons type);
+    void weaponTubeDisallowMissle(int index, EMissileWeapons type);
+    void setWeaponTubeExclusiveFor(int index, EMissileWeapons type);
     void setHull(float amount) { hull = amount; }
     void setShields(std::vector<float> values);
-    void setSpeed(float impulse, float turn, float acceleration) { impulse_speed = impulse; turn_speed = turn; impulse_acceleration = acceleration; }
-    void setWarpSpeed(float warp) { warp_speed = warp; }
-    void setJumpDrive(bool enabled) { has_jump_drive = enabled; }
-    void setCloaking(bool enabled) { has_cloaking = enabled; }
-    void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon != MW_None) weapon_storage[weapon] = amount; }
-    void addRoom(sf::Vector2i position, sf::Vector2i size) { rooms.push_back(ShipRoomTemplate(position, size, SYS_None)); }
-    void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system) { rooms.push_back(ShipRoomTemplate(position, size, system)); }
-    void addDoor(sf::Vector2i position, bool horizontal) { doors.push_back(ShipDoorTemplate(position, horizontal)); }
-    void setRadarTrace(string trace) { radar_trace=trace; }
+    void setSpeed(float impulse, float turn, float acceleration);
+    void setWarpSpeed(float warp);
+    void setJumpDrive(bool enabled);
+    void setCloaking(bool enabled);
+    void setWeaponStorage(EMissileWeapons weapon, int amount);
+    void addRoom(sf::Vector2i position, sf::Vector2i size);
+    void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system);
+    void addDoor(sf::Vector2i position, bool horizontal);
+    void setRadarTrace(string trace);
 
     sf::Vector2i interiorSize();
     ESystem getSystemAtRoom(sf::Vector2i position);
