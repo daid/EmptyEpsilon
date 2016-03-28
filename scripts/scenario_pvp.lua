@@ -14,16 +14,16 @@ function init()
 	shangri_la = SpaceStation():setPosition(10000, 10000):setTemplate('Large Station'):setFaction("Independent"):setRotation(random(0, 360)):setCallSign("Shangri-La"):setCommsFunction(shangrilaComms)
 	
 	human_shipyard = SpaceStation():setPosition(-7500, 15000):setTemplate('Small Station'):setFaction("Human Navy"):setRotation(random(0, 360)):setCallSign("Mobile Shipyard"):setCommsFunction(stationComms)
-	CpuShip():setTemplate('Cruiser'):setFaction("Human Navy"):setPosition(-8000, 16500):orderDefendTarget(human_shipyard)
-	CpuShip():setTemplate('Cruiser'):setFaction("Human Navy"):setPosition(-6000, 13500):orderDefendTarget(human_shipyard)
-	CpuShip():setTemplate('Cruiser'):setFaction("Human Navy"):setPosition(-7000, 14000):orderDefendTarget(human_shipyard)
-	CpuShip():setTemplate('Adv. Gunship'):setFaction("Human Navy"):setPosition(-8000, 14000):orderDefendTarget(human_shipyard)
+	CpuShip():setTemplate('Cruiser'):setFaction("Human Navy"):setPosition(-8000, 16500):orderDefendTarget(human_shipyard):setScannedByFaction("Human Navy", true)
+	CpuShip():setTemplate('Cruiser'):setFaction("Human Navy"):setPosition(-6000, 13500):orderDefendTarget(human_shipyard):setScannedByFaction("Human Navy", true)
+	CpuShip():setTemplate('Cruiser'):setFaction("Human Navy"):setPosition(-7000, 14000):orderDefendTarget(human_shipyard):setScannedByFaction("Human Navy", true)
+	CpuShip():setTemplate('Adv. Gunship'):setFaction("Human Navy"):setPosition(-8000, 14000):orderDefendTarget(human_shipyard):setScannedByFaction("Human Navy", true)
 	
 	kraylor_shipyard = SpaceStation():setPosition(27500, 5000):setTemplate('Small Station'):setFaction("Kraylor"):setRotation(random(0, 360)):setCallSign("Forward Command"):setCommsFunction(stationComms)
-	CpuShip():setTemplate('Cruiser'):setFaction("Kraylor"):setPosition(29000, 5000):orderDefendTarget(kraylor_shipyard)
-	CpuShip():setTemplate('Cruiser'):setFaction("Kraylor"):setPosition(25000, 5000):orderDefendTarget(kraylor_shipyard)
-	CpuShip():setTemplate('Cruiser'):setFaction("Kraylor"):setPosition(27500, 6000):orderDefendTarget(kraylor_shipyard)
-	CpuShip():setTemplate('Adv. Gunship'):setFaction("Kraylor"):setPosition(27000, 5000):orderDefendTarget(kraylor_shipyard)
+	CpuShip():setTemplate('Cruiser'):setFaction("Kraylor"):setPosition(29000, 5000):orderDefendTarget(kraylor_shipyard):setScannedByFaction("Kraylor", true)
+	CpuShip():setTemplate('Cruiser'):setFaction("Kraylor"):setPosition(25000, 5000):orderDefendTarget(kraylor_shipyard):setScannedByFaction("Kraylor", true)
+	CpuShip():setTemplate('Cruiser'):setFaction("Kraylor"):setPosition(27500, 6000):orderDefendTarget(kraylor_shipyard):setScannedByFaction("Kraylor", true)
+	CpuShip():setTemplate('Adv. Gunship'):setFaction("Kraylor"):setPosition(27000, 5000):orderDefendTarget(kraylor_shipyard):setScannedByFaction("Kraylor", true)
 	
 	
 	--spawn players
@@ -49,13 +49,13 @@ function init()
 	create(Mine, 10, 5000, 10000, 10000, 10000)
 	
 	--spawn first wave
-	table.insert(humanTroops, CpuShip():setTemplate('Troop Transport'):setFaction("Human Navy"):setPosition(-7000, 15000):orderDock(shangri_la))
-	CpuShip():setTemplate('Fighter'):setFaction("Human Navy"):setPosition(-7000, 15500):orderFlyTowards(shangri_la:getPosition())
-	CpuShip():setTemplate('Fighter'):setFaction("Human Navy"):setPosition(-7000, 14500):orderFlyTowards(shangri_la:getPosition())
+	table.insert(humanTroops, CpuShip():setTemplate('Troop Transport'):setFaction("Human Navy"):setPosition(-7000, 15000):orderDock(shangri_la):setScannedByFaction("Human Navy", true))
+	CpuShip():setTemplate('Fighter'):setFaction("Human Navy"):setPosition(-7000, 15500):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Human Navy", true)
+	CpuShip():setTemplate('Fighter'):setFaction("Human Navy"):setPosition(-7000, 14500):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Human Navy", true)
 	
-	table.insert(kraylorTroops, CpuShip():setTemplate('Troop Transport'):setFaction("Kraylor"):setPosition(26500, 5000):orderDock(shangri_la))
-	CpuShip():setTemplate('Fighter'):setFaction("Kraylor"):setPosition(26500, 5500):orderFlyTowards(shangri_la:getPosition())
-	CpuShip():setTemplate('Fighter'):setFaction("Kraylor"):setPosition(26500, 4500):orderFlyTowards(shangri_la:getPosition())
+	table.insert(kraylorTroops, CpuShip():setTemplate('Troop Transport'):setFaction("Kraylor"):setPosition(26500, 5000):orderDock(shangri_la):setScannedByFaction("Kraylor", true))
+	CpuShip():setTemplate('Fighter'):setFaction("Kraylor"):setPosition(26500, 5500):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Kraylor", true)
+	CpuShip():setTemplate('Fighter'):setFaction("Kraylor"):setPosition(26500, 4500):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Kraylor", true)
 end
 
 function shangrilaComms()
@@ -79,16 +79,16 @@ function stationComms()
 		addCommsReply("Send in more troops. (100 reputation)", function()
 			if not comms_source:takeReputationPoints(100) then setCommsMessage("Not enough reputation."); return end
 			setCommsMessage("We sent a squad to support the assault on the base.")
-			table.insert(kraylorTroops, CpuShip():setFaction(getFaction(comms_target)):setFaction("Kraylor"):setPosition(getPosition(comms_target)):orderDock(shangri_la))
-			CpuShip():setTemplate('Fighter'):setFaction(getFaction(comms_target)):setPosition(getPosition(comms_target)):orderFlyTowards(shangri_la:getPosition())
-			CpuShip():setTemplate('Fighter'):setFaction(getFaction(comms_target)):setPosition(getPosition(comms_target)):orderFlyTowards(shangri_la:getPosition())
+			table.insert(kraylorTroops, CpuShip():setFaction(getFaction(comms_target)):setFaction("Kraylor"):setPosition(getPosition(comms_target)):orderDock(shangri_la):setScannedByFaction(comms_source:getFaction(), true))
+			CpuShip():setTemplate('Fighter'):setFaction(getFaction(comms_target)):setPosition(getPosition(comms_target)):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction(comms_source:getFaction(), true)
+			CpuShip():setTemplate('Fighter'):setFaction(getFaction(comms_target)):setPosition(getPosition(comms_target)):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction(comms_source:getFaction(), true)
 		end)
 		addCommsReply("We need some space-based firepower. (150 reputation)", function()
 			if not comms_source:takeReputationPoints(150) then setCommsMessage("Not enough reputation."); return end
 			setCommsMessage("Okay, we dispatched a strike wing to support you.")
-			CpuShip():setTemplate('Fighter'):setFaction(getFaction(comms_target)):setPosition(getPosition(comms_target)):orderFlyTowards(shangri_la:getPosition())
-			CpuShip():setTemplate('Adv. Gunship'):setFaction(getFaction(comms_target)):setPosition(getPosition(comms_target)):orderFlyTowards(shangri_la:getPosition())
-			CpuShip():setTemplate('Fighter'):setFaction(getFaction(comms_target)):setPosition(getPosition(comms_target)):orderFlyTowards(shangri_la:getPosition())
+			CpuShip():setTemplate('Fighter'):setFaction(getFaction(comms_target)):setPosition(getPosition(comms_target)):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction(comms_source:getFaction(), true)
+			CpuShip():setTemplate('Adv. Gunship'):setFaction(getFaction(comms_target)):setPosition(getPosition(comms_target)):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction(comms_source:getFaction(), true)
+			CpuShip():setTemplate('Fighter'):setFaction(getFaction(comms_target)):setPosition(getPosition(comms_target)):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction(comms_source:getFaction(), true)
 		end)
 			if comms_source:isDocked(comms_target) then
 				addCommsReply("We need supplies.", supplyDialogue)
@@ -176,12 +176,12 @@ function update(delta)
 	gallipoli:addReputationPoints(delta * 0.3)
 	crusader:addReputationPoints(delta * 0.3)
 	
-	-- if a side has no station or flagship, it loses. victory in 40 points
-	if ((not gallipoli:isValid()) and (not human_shipyard:isValid())) or kraylor_points > 40 then
+	-- if a side has no station or flagship, it loses. victory in 50 points
+	if ((not gallipoli:isValid()) and (not human_shipyard:isValid())) or kraylor_points > 50 then
 		victory("Kraylor")
 	end
 	
-	if ((not crusader:isValid()) and (not kraylor_shipyard:isValid())) or human_points > 40 then
+	if ((not crusader:isValid()) and (not kraylor_shipyard:isValid())) or human_points > 50 then
 		victory("Human Navy")
 	end	
 	
@@ -204,14 +204,14 @@ function update(delta)
 	if wave_timer > 150 and (human_shipyard:isValid()) then
 		
 		line = random(0, 20) * 500
-		table.insert(humanTroops, CpuShip():setTemplate('Troop Transport'):setFaction("Human Navy"):setPosition(-7000, 5000 + line):orderDock(shangri_la))
-		CpuShip():setTemplate('Fighter'):setFaction("Human Navy"):setPosition(-7000, 5500 + line):orderFlyTowards(shangri_la:getPosition())
-		CpuShip():setTemplate('Fighter'):setFaction("Human Navy"):setPosition(-7000, 4500 + line):orderFlyTowards(shangri_la:getPosition())
+		table.insert(humanTroops, CpuShip():setTemplate('Troop Transport'):setFaction("Human Navy"):setPosition(-7000, 5000 + line):orderDock(shangri_la):setScannedByFaction("Human Navy", true))
+		CpuShip():setTemplate('Fighter'):setFaction("Human Navy"):setPosition(-7000, 5500 + line):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Human Navy", true)
+		CpuShip():setTemplate('Fighter'):setFaction("Human Navy"):setPosition(-7000, 4500 + line):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Human Navy", true)
 	
 		line = random(0, 20) * 500
-		table.insert(kraylorTroops, CpuShip():setTemplate('Troop Transport'):setFaction("Kraylor"):setPosition(27000, -5000 + line):orderDock(shangri_la))
-		CpuShip():setTemplate('Fighter'):setFaction("Kraylor"):setPosition(27000, -5500 + line):orderFlyTowards(shangri_la:getPosition())
-		CpuShip():setTemplate('Fighter'):setFaction("Kraylor"):setPosition(27000, -4500 + line):orderFlyTowards(shangri_la:getPosition())
+		table.insert(kraylorTroops, CpuShip():setTemplate('Troop Transport'):setFaction("Kraylor"):setPosition(27000, -5000 + line):orderDock(shangri_la):setScannedByFaction("Kraylor", true))
+		CpuShip():setTemplate('Fighter'):setFaction("Kraylor"):setPosition(27000, -5500 + line):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Kraylor", true)
+		CpuShip():setTemplate('Fighter'):setFaction("Kraylor"):setPosition(27000, -4500 + line):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Kraylor", true)
 		
 		wave_timer = 0
 	end

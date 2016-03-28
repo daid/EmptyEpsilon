@@ -22,7 +22,7 @@ public:
     sf::Vector2f location;
     int frequency;
     ESystem system_target;
-    
+
     DamageInfo()
     : instigator(), type(DT_Energy), location(0, 0), frequency(-1), system_target(SYS_None)
     {}
@@ -44,7 +44,7 @@ public:
 
     RawRadarSignatureInfo(float gravity, float electrical, float biological)
     : gravity(gravity), electrical(electrical), biological(biological) {}
-    
+
     RawRadarSignatureInfo& operator+=(const RawRadarSignatureInfo& o)
     {
         gravity += o.gravity;
@@ -75,7 +75,7 @@ class SpaceObject : public Collisionable, public MultiplayerObject
     float object_radius;
     uint8_t faction_id;
     string object_description;
-    
+
     /*!
      * Scan state per faction. Implementation wise, this vector is resized when a scan is done.
      * Index in the vector is the faction ID.
@@ -86,21 +86,21 @@ class SpaceObject : public Collisionable, public MultiplayerObject
 public:
     string comms_script_name;
     ScriptSimpleCallback comms_script_callback;
-    
+
     int scanning_complexity_value;
     int scanning_depth_value;
-    
+
     SpaceObject(float collisionRange, string multiplayerName, float multiplayer_significant_range=-1);
 
     float getRadius() { return object_radius; }
     void setRadius(float radius) { object_radius = radius; setCollisionRadius(radius); }
-    
+
     string getDescription() { return object_description; }
     void setDescription(string description) { object_description = description; }
 
     float getHeading() { float ret = getRotation() - 270; while(ret < 0) ret += 360.0f; while(ret > 360.0f) ret -= 360.0f; return ret; }
     void setHeading(float heading) { setRotation(heading - 90); }
-    
+
     virtual RawRadarSignatureInfo getRadarSignatureInfo() { return RawRadarSignatureInfo(0, 0, 0); }
 
 #if FEATURE_3D_RENDERING
@@ -129,6 +129,7 @@ public:
     bool isScannedBy(P<SpaceObject> obj);
     bool isScannedByFaction(string faction);
     void setScanned(bool scanned);
+    void setScannedByFaction(string faction_name, bool scanned);
     virtual void scannedBy(P<SpaceObject> other);
     virtual void takeDamage(float damage_amount, DamageInfo info) {}
     virtual std::unordered_map<string, string> getGMInfo() { return std::unordered_map<string, string>(); }
