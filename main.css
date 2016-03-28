@@ -406,7 +406,7 @@ a.icon span::before {
 }
 
 a.helms span::before {
-	content: "i";
+	content: "r";
 }
 
 a.weapons span::before {
@@ -414,7 +414,7 @@ a.weapons span::before {
 }
 
 a.engineering span::before {
-	content: "h";
+	content: "q";
 }
 
 a.science span::before {
@@ -448,6 +448,61 @@ a.image-link.float-right {
 
 .gallery-image a img {
 	width: 300px;
+}
+
+h2.station {
+	position: relative;
+	font-size: 40px;
+	line-height: 40px;
+}
+
+h2.station::before, 
+h2.station::after {
+	font-family: empty-epsilon;
+}
+
+h2.station::before {
+	line-height: 40px;
+	font-size: 40px;
+	margin: 0 5px 0 0;
+	position: relative;
+	bottom: -5px;
+}
+
+h2.station::after {
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	font-size: 300px;
+	text-align: center;
+	line-height: 250px;
+	opacity: 0.1;
+}
+
+h2.helms::before, 
+h2.helms::after {
+	content: "r";
+}
+
+h2.weapons::before, 
+h2.weapons::after {
+	content: "l";
+}
+
+h2.engineering::before, 
+h2.engineering::after {
+	content: "q";
+}
+
+h2.science::before, 
+h2.science::after {
+	content: "k";
+}
+
+h2.relay::before, 
+h2.relay::after {
+	content: "j";
 }
 
 @media only screen and (max-width: 1200px) {
