@@ -25,10 +25,9 @@ function init()
 	CpuShip():setTemplate('Cruiser'):setFaction("Kraylor"):setPosition(27500, 6000):orderDefendTarget(kraylor_shipyard):setScannedByFaction("Kraylor", true)
 	CpuShip():setTemplate('Adv. Gunship'):setFaction("Kraylor"):setPosition(27000, 5000):orderDefendTarget(kraylor_shipyard):setScannedByFaction("Kraylor", true)
 	
-	
 	--spawn players
-	gallipoli = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Player Cruiser"):setPosition(-8500, 15000):setCallSign("HNS Gallipoli")
-	crusader = PlayerSpaceship():setFaction("Kraylor"):setTemplate("Player Cruiser"):setPosition(26500, 5000):setCallSign("Crusader Naa'Tvek")
+	gallipoli = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Player Cruiser"):setPosition(-8500, 15000):setCallSign("HNS Gallipoli"):setScannedByFaction("Kraylor", false)
+	crusader = PlayerSpaceship():setFaction("Kraylor"):setTemplate("Player Cruiser"):setPosition(26500, 5000):setCallSign("Crusader Naa'Tvek"):setScannedByFaction("Human Navy", false)
 	
 	-- timers
 	time = 0
@@ -40,8 +39,12 @@ function init()
 	human_points = 0
 	kraylor_points = 0
 	
-	human_shipyard:sendCommsMessage(gallipoli, [[Captain, it seems that the Kraylor are making their move to take the Shangri-La station in the F5 sector. Provide a spatial cover for while our troop transports board the station to reclaim it.]])
-	kraylor_shipyard:sendCommsMessage(crusader, [[Greetings, Crusader. Your mission is to securize the Shangri-La station in the F5 sector, as the feeble humans think it's theirs for the taking. Support our glorious soldiers by preventing the heretics from harming our transports and cleansing all enemy opposition !]])
+	human_shipyard:sendCommsMessage(gallipoli, [[Captain, it seems that the Kraylor are making their move to take the Shangri-La station in the F5 sector!
+Provide a spatial cover for while our troop transports board the station to reclaim it.
+Good luck, and stay safe.]])
+	kraylor_shipyard:sendCommsMessage(crusader, [[Greetings, Crusader.
+Your mission is to securize the Shangri-La station in the F5 sector, as the feeble humans think it's theirs for the taking.
+Support our glorious soldiers by preventing the heretics from harming our transports and cleansing all enemy opposition !]])
 	
 	--create terrain
 	create(Asteroid, 20, 5000, 10000, 10000, 10000)
@@ -158,7 +161,7 @@ function update(delta)
 	
 	if (not gallipoli:isValid()) then
 		if human_respawn > 20 then
-			gallipoli = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Player Cruiser"):setPosition(-8500, 15000):setCallSign("HNS Heinlein")
+			gallipoli = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Player Cruiser"):setPosition(-8500, 15000):setCallSign("HNS Heinlein"):setScannedByFaction("Kraylor", false)
 		else
 			human_respawn = human_respawn + delta
 		end
@@ -166,7 +169,7 @@ function update(delta)
 	
 	if (not crusader:isValid()) then
 		if kraylor_respawn > 20 then
-			crusader = PlayerSpaceship():setFaction("Kraylor"):setTemplate("Player Cruiser"):setPosition(19000, -14500):setCallSign("Crusader Elak'raan")
+			crusader = PlayerSpaceship():setFaction("Kraylor"):setTemplate("Player Cruiser"):setPosition(19000, -14500):setCallSign("Crusader Elak'raan"):setScannedByFaction("Human Navy", false)
 		else
 			kraylor_respawn = kraylor_respawn + delta
 		end
@@ -187,14 +190,16 @@ function update(delta)
 	
 	-- if either of the flagship is sunk, the other side gains a reputation bonus
 	if (not gallipoli:isValid()) then
-		kraylor_shipyard:sendCommsMessage(crusader, [[Well done, Crusader ! The pathetic Human flagship has been disabled, go for the victory !]])
+		kraylor_shipyard:sendCommsMessage(crusader, [[Well done, Crusader !
+The pathetic Human flagship has been disabled, go for the victory !]])
 		crusader:addReputationPoints(50)
 		kraylor_points = kraylor_points + 5
 		human_respawn = 0
 	end
 	
 	if (not crusader:isValid()) then
-		human_shipyard:sendCommsMessage(gallipoli, [[Good job, Captain ! With the Kraylor flagship out of the way, we can land the final blow !]])
+		human_shipyard:sendCommsMessage(gallipoli, [[Good job, Captain !
+With the Kraylor flagship out of the way, we can land the final blow !]])
 		gallipoli:addReputationPoints(50)
 		human_points = human_points + 5
 		krayor_respawn =  0
