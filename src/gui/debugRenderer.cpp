@@ -59,9 +59,9 @@ void DebugRenderer::render(sf::RenderTarget& window)
         window.draw(collision_points);
         window.draw(render_points);
         
-        sf::Text text_update("Update: " + string(timing_graph_points.back().update * 1000) + "ms", *mainFont, 18);
-        sf::Text text_collision("Collision: " + string(timing_graph_points.back().collision * 1000) + "ms", *mainFont, 18);
-        sf::Text text_render("Render: " + string(timing_graph_points.back().render * 1000) + "ms", *mainFont, 18);
+        sf::Text text_update("Update: " + string(timing_graph_points.back().update * 1000) + "ms", *main_font, 18);
+        sf::Text text_collision("Collision: " + string(timing_graph_points.back().collision * 1000) + "ms", *main_font, 18);
+        sf::Text text_render("Render: " + string(timing_graph_points.back().render * 1000) + "ms", *main_font, 18);
 
         sf::VertexArray fps60_line(sf::LinesStrip, 2);
         fps60_line[0].position = sf::Vector2f(0, window.getView().getSize().y - 166);
@@ -81,7 +81,7 @@ void DebugRenderer::render(sf::RenderTarget& window)
         window.draw(text_render);
     }
 
-    sf::Text textElement(text, *mainFont, 18);
+    sf::Text textElement(text, *main_font, 18);
     textElement.setPosition(0, 0);
     window.draw(textElement);
 }

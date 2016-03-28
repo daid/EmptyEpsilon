@@ -449,7 +449,7 @@ P<SpaceObject> ShipAI::findBestTarget(sf::Vector2f position, float radius)
     foreach(Collisionable, obj, objectList)
     {
         P<SpaceObject> space_object = obj;
-        if (!space_object || !space_object->canBeTargeted() || !owner->isEnemy(space_object) || space_object == target)
+        if (!space_object || !space_object->canBeTargetedBy(owner) || !owner->isEnemy(space_object) || space_object == target)
             continue;
         if (space_object->canHideInNebula() && Nebula::blockedByNebula(owner_position, space_object->getPosition()))
             continue;

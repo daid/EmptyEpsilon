@@ -6,8 +6,8 @@ GuiShipDestroyedPopup::GuiShipDestroyedPopup(GuiCanvas* owner)
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     
-    frame = new GuiBox(this, "SHIP_DESTROYED_FRAME");
-    frame->fill()->setPosition(0, 0, ACenter)->setSize(700, 200);
+    frame = new GuiPanel(this, "SHIP_DESTROYED_FRAME");
+    frame->setPosition(0, 0, ACenter)->setSize(700, 200);
     
     (new GuiLabel(frame, "SHIP_DESTROYED_TEXT", "SHIP DESTROYED!", 70))->setPosition(0, -25, ACenter)->setSize(0, 0);
     (new GuiButton(frame, "SHIP_DESTROYED_BUTTON", "Return", [this]() {

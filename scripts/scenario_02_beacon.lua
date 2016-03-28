@@ -208,7 +208,7 @@ function missionIdentifyTransport(delta)
     if not transport_target:isValid() then
         main_station:sendCommsMessage(player, [[What the hell? I told you NOT to destroy the transport.]])
         victory("Exuari")-- TODO: What to do now?
-    elseif transport_target:isFriendOrFoeIdentified() then
+    elseif transport_target:isFriendOrFoeIdentifiedBy(player) then
         main_station:sendCommsMessage(player, [[Transport identified, take down their impulse engines so we can capture it.]])
         mission_state = missionStopTransport
     end

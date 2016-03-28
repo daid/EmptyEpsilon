@@ -6,7 +6,7 @@
 class GuiJumpControls : public GuiElement
 {
 private:
-    GuiLabel* label;
+    GuiKeyValueDisplay* label;
     GuiSlider* slider;
     GuiButton* button;
     GuiProgressbar* charge_bar;

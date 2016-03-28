@@ -8,8 +8,8 @@ GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
 
 void GuiTextEntry::onDraw(sf::RenderTarget& window)
 {
-    draw9Cut(window, rect, "button_background", sf::Color(192,192,192,255));
-    drawText(window, sf::FloatRect(rect.left + 16, rect.top, rect.width, rect.height), text + (focus ? "_" : ""), ACenterLeft, text_size, sf::Color::Black);
+    drawStretched(window, rect, "gui/TextEntryBackground", selectColor(colorConfig.text_entry.background));
+    drawText(window, sf::FloatRect(rect.left + 16, rect.top, rect.width, rect.height), text + (focus ? "_" : ""), ACenterLeft, text_size, main_font, selectColor(colorConfig.text_entry.forground));
 }
 
 bool GuiTextEntry::onMouseDown(sf::Vector2f position)

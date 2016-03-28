@@ -3,10 +3,10 @@
 
 #include "gui/gui2.h"
 
-class GuiShieldFrequencySelect : public GuiBox
+class GuiShieldFrequencySelect : public GuiElement
 {
 private:
-    GuiLabel* current_frequency;
+    GuiKeyValueDisplay* current_frequency;
     GuiSelector* new_frequency;
     GuiButton* calibrate_button;
     GuiProgressbar* calibrate_progressbar;

@@ -17,6 +17,9 @@ public:
     
     virtual float onActive() = 0;
     virtual void onInactive() {}
+
+protected:
+    static float convertOutput(string number);
 };
 
 class HardwareMappingEffectStatic : public HardwareMappingEffect

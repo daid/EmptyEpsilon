@@ -9,7 +9,8 @@ class EngineeringScreen : public GuiOverlay
 private:
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* hull_display;
-    GuiKeyValueDisplay* shields_display;
+    GuiKeyValueDisplay* front_shield_display;
+    GuiKeyValueDisplay* rear_shield_display;
     GuiSlider* power_slider;
     GuiSlider* coolant_slider;
     

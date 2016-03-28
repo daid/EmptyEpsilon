@@ -11,9 +11,12 @@
 #include "screenComponents/databaseView.h"
 
 ScienceScreen::ScienceScreen(GuiContainer* owner)
-: GuiOverlay(owner, "SCIENCE_SCREEN", sf::Color::Black)
+: GuiOverlay(owner, "SCIENCE_SCREEN", colorConfig.background)
 {
     targets.setAllowWaypointSelection();
+
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureCenter("gui/BackgroundGradient");
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
 
     radar_view = new GuiElement(this, "RADAR_VIEW");
     radar_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -138,13 +141,14 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         radar->setDistance(view_distance);
     }
 
-    if (game_server)
-            probe = game_server->getObjectById(my_spaceship->linked_object);
-        else
-            probe = game_client->getObjectById(my_spaceship->linked_object);
-
     if (!my_spaceship)
         return;
+
+    if (game_server)
+        probe = game_server->getObjectById(my_spaceship->linked_object);
+    else
+        probe = game_client->getObjectById(my_spaceship->linked_object);
+
     if (targets.get() && Nebula::blockedByNebula(my_spaceship->getPosition(), targets.get()->getPosition()) && !my_spaceship->science_link)
         targets.clear();
 
@@ -203,13 +207,13 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
 
         if (ship)
         {
-            if (ship->scanned_by_player >= SS_SimpleScan)
+            if (ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
             {
                 info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
                 info_type->setValue(ship->getTypeName());
                 info_shields->setValue(ship->getShieldDataString());
             }
-            if (ship->scanned_by_player >= SS_FullScan)
+            if (ship->getScannedStateFor(my_spaceship) >= SS_FullScan)
             {
                 if (gameGlobalInfo->use_beam_shield_frequencies)
                 {

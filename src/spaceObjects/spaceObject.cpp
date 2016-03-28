@@ -70,8 +70,14 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, scanningChannelDepth);
     ///Set the scanning complexity and depth for this object.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setScanningParameters);
-    ///Check if this object is scanned already.
+    ///[DEPRICATED] Check if this object is scanned already.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isScanned);
+    /// Check if this object is scanned by the faction of another object
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isScannedBy);
+    /// Check if this object is scanned by another faction
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isScannedByFaction);
+    /// Set if this object is scanned or not by every faction.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setScanned);
 }
 
 PVector<SpaceObject> space_object_list;
@@ -85,9 +91,9 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
 
     scanning_complexity_value = 0;
     scanning_depth_value = 0;
-    is_scanned = false;
 
     registerMemberReplication(&faction_id);
+    registerMemberReplication(&scanned_by_faction);
     registerCollisionableReplication(multiplayer_significant_range);
 }
 
@@ -112,25 +118,25 @@ void SpaceObject::destroy()
     MultiplayerObject::destroy();
 }
 
-bool SpaceObject::canBeTargeted()
+bool SpaceObject::canBeTargetedBy(P<SpaceObject> other)
 {
     return false;
 }
 
-bool SpaceObject::canBeSelected()
+bool SpaceObject::canBeSelectedBy(P<SpaceObject> other)
 {
     if (object_description.length() > 0)
         return true;
-    if (canBeScanned())
+    if (canBeScannedBy(other))
         return true;
-    if (canBeTargeted())
+    if (canBeTargetedBy(other))
         return true;
     return false;
 }
 
-bool SpaceObject::canBeScanned()
+bool SpaceObject::canBeScannedBy(P<SpaceObject> other)
 {
-    if (isScanned())
+    if (getScannedStateFor(other) == SS_FullScan)
         return false;
     if (scanning_complexity_value > 0)
         return true;
@@ -139,11 +145,83 @@ bool SpaceObject::canBeScanned()
     return false;
 }
 
+EScannedState SpaceObject::getScannedStateFor(P<SpaceObject> other)
+{
+    if (!other)
+    {
+        return SS_NotScanned;
+    }
+    return getScannedStateForFaction(other->getFactionId());
+}
+
+void SpaceObject::setScannedStateFor(P<SpaceObject> other, EScannedState state)
+{
+    if (!other)
+    {
+        LOG(ERROR) << "setScannedStateFor called with no other";
+        return;
+    }
+    setScannedStateForFaction(other->getFactionId(), state);
+}
+
+EScannedState SpaceObject::getScannedStateForFaction(int faction_id)
+{
+    if (int(scanned_by_faction.size()) <= faction_id)
+        return SS_NotScanned;
+    return scanned_by_faction[faction_id];
+}
+
+void SpaceObject::setScannedStateForFaction(int faction_id, EScannedState state)
+{
+    while (int(scanned_by_faction.size()) <= faction_id)
+        scanned_by_faction.push_back(SS_NotScanned);
+    scanned_by_faction[faction_id] = state;
+}
+
+bool SpaceObject::isScanned()
+{
+    LOG(WARNING) << "Depricated \"isScanned\" function called, use isScannedBy or isScannedByFaction.";
+    for(unsigned int faction_id = 0; faction_id < scanned_by_faction.size(); faction_id++)
+    {
+        if (scanned_by_faction[faction_id] > SS_FriendOrFoeIdentified)
+            return true;
+    }
+    return false;
+}
+
+void SpaceObject::setScanned(bool scanned)
+{
+    for(unsigned int faction_id = 0; faction_id < factionInfo.size(); faction_id++)
+    {
+        if (!scanned)
+            setScannedStateForFaction(faction_id, SS_NotScanned);
+        else
+            setScannedStateForFaction(faction_id, SS_FullScan);
+    }
+}
+
+bool SpaceObject::isScannedBy(P<SpaceObject> obj)
+{
+    return getScannedStateFor(obj) > SS_FriendOrFoeIdentified;
+}
+
+bool SpaceObject::isScannedByFaction(string faction)
+{
+    int faction_id = FactionInfo::findFactionId(faction);
+    return getScannedStateForFaction(faction_id) > SS_FriendOrFoeIdentified;
+}
+
+void SpaceObject::scannedBy(P<SpaceObject> other)
+{
+    setScannedStateFor(other, SS_FullScan);
+}
+
 void SpaceObject::setScanningParameters(int complexity, int depth)
 {
     scanning_complexity_value = std::min(4, std::max(0, complexity));
     scanning_depth_value = std::max(0, depth);
-    is_scanned = false;
+    
+    scanned_by_faction.clear();
 }
 
 bool SpaceObject::isEnemy(P<SpaceObject> obj)

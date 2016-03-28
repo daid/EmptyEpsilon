@@ -10,6 +10,9 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source)
     else
         scanner->scanMasterServer("http://daid.eu/ee/list.php");
 
+    new GuiOverlay(this, "", colorConfig.background);
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+
     (new GuiButton(this, "BACK", "Back", [this]() {
         destroy();
         returnToMainMenu();

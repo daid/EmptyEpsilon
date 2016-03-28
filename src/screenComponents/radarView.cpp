@@ -104,7 +104,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
         }
     }
 
-    if (style == CircularMasked)
+    if (style == CircularMasked || style == Circular)
     {
         //When we have a circular masked radar, use the mask_texture to clear out everything that is not part of the circle.
         mask_texture.clear(sf::Color(0, 0, 0, 0));
@@ -113,7 +113,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
         circle.setOrigin(r, r);
         circle.setPosition(getCenterPoint());
         circle.setFillColor(sf::Color::Black);
-        circle.setOutlineColor(sf::Color(64, 64, 64));
+        circle.setOutlineColor(colorConfig.radar_outline);
         circle.setOutlineThickness(2.0);
         mask_texture.draw(circle);
 
@@ -128,8 +128,8 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     //Render the final radar
     drawRenderTexture(background_texture, window);
     drawRenderTexture(forground_texture, window);
-    if (style == Circular)
-        drawRadarCutoff(window);
+    //if (style == Circular)
+    //    drawRadarCutoff(window);
 }
 
 void GuiRadarView::updateGhostDots()
@@ -164,7 +164,7 @@ void GuiRadarView::drawBackground(sf::RenderTarget& window)
 
 void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
 {
-    window.clear(sf::Color(0, 0, 0, 0));
+    window.clear(sf::Color(0, 0, 0, 255));
     if (my_spaceship)
     {
         sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
@@ -217,7 +217,7 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
         for(int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
         {
             float y = radar_screen_center.y + ((sector_y * sector_size) - view_position.y) * scale;
-            drawText(window, sf::FloatRect(x, y, 30, 30), getSectorName(sf::Vector2f(sector_x * sector_size + sub_sector_size, sector_y * sector_size + sub_sector_size)), ATopLeft, 30, color);
+            drawText(window, sf::FloatRect(x, y, 30, 30), getSectorName(sf::Vector2f(sector_x * sector_size + sub_sector_size, sector_y * sector_size + sub_sector_size)), ATopLeft, 30, bold_font, color);
         }
     }
     for(int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
@@ -272,14 +272,14 @@ void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
         {
             sf::RectangleShape background(sf::Vector2f(rect.width, rect.height));
             background.setPosition(rect.left, rect.top);
-            background.setFillColor(sf::Color(0, 0, 0, 0));
+            background.setFillColor(sf::Color(0, 0, 0, 255));
             window.draw(background, blend);
         }else{
             float r = n->getRadius() * scale;
             sf::CircleShape circle(r, 32);
             circle.setOrigin(r, r);
             circle.setPosition(radar_screen_center + (n->getPosition() - view_position) * scale);
-            circle.setFillColor(sf::Color(0, 0, 0, 0));
+            circle.setFillColor(sf::Color(0, 0, 0, 255));
             window.draw(circle, blend);
 
             float diff_angle = sf::vector2ToAngle(diff);
@@ -298,7 +298,7 @@ void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
             a[3].position = radar_screen_center + (pos_d - view_position) * scale;
             a[4].position = radar_screen_center + (pos_e - view_position) * scale;
             for(int n=0; n<5;n++)
-                a[n].color = sf::Color(0, 0, 0, 0);
+                a[n].color = sf::Color(0, 0, 0, 255);
             window.draw(a, blend);
         }
     }
@@ -345,7 +345,7 @@ void GuiRadarView::drawWaypoints(sf::RenderTarget& window)
         object_sprite.setPosition(screen_position - sf::Vector2f(0, 10));
         object_sprite.setScale(0.6, 0.6);
         window.draw(object_sprite);
-        drawText(window, sf::FloatRect(screen_position.x, screen_position.y - 26, 0, 0), "WP" + string(n + 1), ACenter, 14, sf::Color(128, 128, 255, 192));
+        drawText(window, sf::FloatRect(screen_position.x, screen_position.y - 26, 0, 0), "WP" + string(n + 1), ACenter, 14, bold_font, sf::Color(128, 128, 255, 192));
     }
 }
 
@@ -367,7 +367,7 @@ void GuiRadarView::drawRangeIndicators(sf::RenderTarget& window)
         circle.setOutlineColor(sf::Color(255, 255, 255, 16));
         circle.setOutlineThickness(2.0);
         window.draw(circle);
-        drawText(window, sf::FloatRect(radar_screen_center.x, radar_screen_center.y - s - 20, 0, 0), string(int(circle_size / 1000.0f + 0.1f)) + "km", ACenter, 20, sf::Color(255, 255, 255, 32));
+        drawText(window, sf::FloatRect(radar_screen_center.x, radar_screen_center.y - s - 20, 0, 0), string(int(circle_size / 1000.0f + 0.1f)) + "km", ACenter, 20, bold_font, sf::Color(255, 255, 255, 32));
     }
 }
 
@@ -464,6 +464,8 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
         }
         break;
     case FriendlysShortRangeFogOfWar:
+        if (!my_spaceship)
+            return;
         foreach(SpaceObject, obj, space_object_list)
         {
             if (!obj->canHideInNebula())
@@ -512,7 +514,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                 window = &window_alpha;
             obj->drawOnRadar(*window, object_position_on_screen, scale, long_range);
             if (show_callsigns && obj->getCallSign() != "")
-                drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 12);
+                drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
         }
     }
     if (my_spaceship)
@@ -592,7 +594,7 @@ void GuiRadarView::drawHeadingIndicators(sf::RenderTarget& window)
     window.draw(small_tigs);
     for(unsigned int n=0; n<360; n+=20)
     {
-        sf::Text text(string(n), *mainFont, 15);
+        sf::Text text(string(n), *main_font, 15);
         text.setPosition(radar_screen_center + sf::vector2FromAngle(float(n) - 90) * (scale - 45));
         text.setOrigin(text.getLocalBounds().width / 2.0, text.getLocalBounds().height / 2.0);
         text.setRotation(n);

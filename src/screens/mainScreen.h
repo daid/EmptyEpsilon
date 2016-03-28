@@ -12,6 +12,7 @@ private:
     GuiViewport3D* viewport;
     GuiRadarView* tactical_radar;
     GuiRadarView* long_range_radar;
+    bool first_person;
 public:
     ScreenMainScreen();
     

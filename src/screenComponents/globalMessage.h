@@ -6,7 +6,7 @@
 class GuiGlobalMessage : public GuiElement
 {
 private:
-    GuiBox* box;
+    GuiPanel* box;
     GuiLabel* label;
 public:
     GuiGlobalMessage(GuiContainer* owner);

@@ -2,8 +2,10 @@
 #include "playerInfo.h"
 
 ShipLogScreen::ShipLogScreen(GuiContainer* owner)
-: GuiOverlay(owner, "SHIP_LOG_SCREEN", sf::Color::Black)
+: GuiOverlay(owner, "SHIP_LOG_SCREEN", colorConfig.background)
 {
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+
     log_text = new GuiAdvancedScrollText(this, "SHIP_LOG");
     log_text->enableAutoScrollDown();
     log_text->setPosition(50, 50)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);

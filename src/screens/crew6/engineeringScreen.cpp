@@ -7,14 +7,18 @@
 #include "screenComponents/selfDestructButton.h"
 
 EngineeringScreen::EngineeringScreen(GuiContainer* owner)
-: GuiOverlay(owner, "ENGINEERING_SCREEN", sf::Color::Black), selected_system(SYS_Reactor)
+: GuiOverlay(owner, "ENGINEERING_SCREEN", colorConfig.background), selected_system(SYS_Reactor)
 {
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
-    energy_display->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
+    energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
     hull_display = new GuiKeyValueDisplay(this, "HULL_DISPLAY", 0.45, "Hull", "");
-    hull_display->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
-    shields_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, "Shields", "");
-    shields_display->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
+    hull_display->setIcon("gui/icons/hull")->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
+    front_shield_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, "Front", "");
+    front_shield_display->setIcon("gui/icons/shields")->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
+    rear_shield_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, "Rear", "");
+    rear_shield_display->setIcon("gui/icons/shields")->setTextSize(20)->setPosition(20, 220, ATopLeft)->setSize(240, 40);
     
     (new GuiSelfDestructButton(this, "SELF_DESTRUCT"))->setPosition(20, 220, ATopLeft)->setSize(240, 100);
     
@@ -34,6 +38,8 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
                 system_rows[idx].button->setValue(idx == n);
             }
             selected_system = ESystem(n);
+            power_slider->enable();
+            coolant_slider->enable();
             if (my_spaceship)
             {
                 power_slider->setValue(my_spaceship->systems[n].power_level);
@@ -42,26 +48,26 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
         });
         info.button->setSize(300, GuiElement::GuiSizeMax);
         info.damage_bar = new GuiProgressbar(info.layout, id + "_DAMAGE", 0.0, 1.0, 0.0);
-        info.damage_bar->setSize(100, GuiElement::GuiSizeMax);
+        info.damage_bar->setSize(150, GuiElement::GuiSizeMax);
         if (!gameGlobalInfo->use_system_damage)
             info.damage_bar->hide();
         info.damage_label = new GuiLabel(info.damage_bar, id + "_DAMAGE_LABEL", "...", 20);
         info.damage_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         info.heat_bar = new GuiProgressbar(info.layout, id + "_HEAT", 0.0, 1.0, 0.0);
-        info.heat_bar->setSize(50, GuiElement::GuiSizeMax);
+        info.heat_bar->setSize(100, GuiElement::GuiSizeMax);
         info.heat_arrow = new GuiArrow(info.heat_bar, id + "_HEAT_ARROW", 0);
         info.heat_arrow->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         info.power_bar = new GuiProgressbar(info.layout, id + "_POWER", 0.0, 3.0, 0.0);
-        info.power_bar->setColor(sf::Color(192, 192, 0))->setSize(50, GuiElement::GuiSizeMax);
+        info.power_bar->setColor(sf::Color(192, 192, 0))->setSize(100, GuiElement::GuiSizeMax);
         info.coolant_bar = new GuiProgressbar(info.layout, id + "_COOLANT", 0.0, 10.0, 0.0);
-        info.coolant_bar->setColor(sf::Color(0, 128, 128))->setSize(50, GuiElement::GuiSizeMax);
+        info.coolant_bar->setColor(sf::Color(0, 128, 128))->setSize(100, GuiElement::GuiSizeMax);
         
         info.layout->moveToBack();
         system_rows.push_back(info);
     }
     
-    GuiBox* box = new GuiBox(this, "POWER_COOLANT_BOX");
-    box->setPosition(110, -20, ABottomCenter)->setSize(270, 400);
+    GuiPanel* box = new GuiPanel(this, "POWER_COOLANT_BOX");
+    box->setPosition(-20, -20, ABottomRight)->setSize(270, 400);
     (new GuiLabel(box, "POWER_LABEL", "Power", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(20, 20, ATopLeft)->setSize(30, 360);
     (new GuiLabel(box, "COOLANT_LABEL", "Coolant", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(110, 20, ATopLeft)->setSize(30, 360);
     
@@ -69,14 +75,16 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
         if (my_spaceship)
             my_spaceship->commandSetSystemPower(selected_system, value);
     });
-    power_slider->setSnapValue(1.0, 0.1)->setPosition(50, 20, ATopLeft)->setSize(60, 360);
+    power_slider->addSnapValue(1.0, 0.1)->setPosition(50, 20, ATopLeft)->setSize(60, 360);
+    power_slider->disable();
     coolant_slider = new GuiSlider(box, "COOLANT_SLIDER", 10.0, 0.0, 0.0, [this](float value) {
         if (my_spaceship)
             my_spaceship->commandSetSystemCoolant(selected_system, value);
     });
     coolant_slider->setPosition(140, 20, ATopLeft)->setSize(60, 360);
+    coolant_slider->disable();
 
-    (new GuiShieldFrequencySelect(this, "SHIELD_FREQ"))->setPosition(-20, -20, ABottomRight)->setSize(320, 400);
+    (new GuiShieldFrequencySelect(this, "SHIELD_FREQ"))->setPosition(-20, -470, ABottomRight)->setSize(320, 100);
     
     (new GuiShipInternalView(system_row_layouts, "SHIP_INTERNAL_VIEW", 48.0f))->setShip(my_spaceship)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
@@ -95,7 +103,8 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
             hull_display->setColor(sf::Color::Red);
         else
             hull_display->setColor(sf::Color::White);
-        shields_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "% " + string(my_spaceship->getShieldPercentage(1)) + "%");
+        front_shield_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "%");
+        rear_shield_display->setValue(string(my_spaceship->getShieldPercentage(1)) + "%");
         
         for(int n=0; n<SYS_COUNT; n++)
         {

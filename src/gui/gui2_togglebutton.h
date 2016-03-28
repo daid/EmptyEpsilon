@@ -10,9 +10,7 @@ public:
 private:
     bool value;
     func_t toggle_func;
-    sf::Color selected_color;
-    sf::Color unselected_color;
-    
+
 public:
     GuiToggleButton(GuiContainer* owner, string id, string text, func_t func);
     

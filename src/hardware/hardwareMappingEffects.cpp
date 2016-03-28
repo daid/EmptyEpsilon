@@ -5,9 +5,18 @@
 
 #define REQ_SETTING(key, variable, effect_name) \
     if (settings.find(key) == settings.end()) { LOG(ERROR) << "[" << key << "] not set for " << effect_name << " effect"; return false; } \
-    variable = settings[key].toFloat();
+    variable = convertOutput(settings[key]);
 #define OPT_SETTING(key, variable, effect_name, default) \
-    if (settings.find(key) == settings.end()) { variable = default; } else { variable = settings[key].toFloat(); }
+    if (settings.find(key) == settings.end()) { variable = default; } else { variable = convertOutput(settings[key]); }
+
+float HardwareMappingEffect::convertOutput(string number)
+{
+    if (number.startswith("$"))
+        return float(number.substr(1).toInt(16)) / 255;
+    if (number.startswith("[") && number.endswith("]"))
+        return float(number.substr(1, -1).toInt()) / 255;
+    return number.toFloat();
+}
 
 bool HardwareMappingEffectStatic::configure(std::unordered_map<string, string> settings)
 {

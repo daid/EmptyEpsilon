@@ -137,7 +137,6 @@ PlayerSpaceship::PlayerSpaceship()
     main_screen_setting = MSS_Front;
     hull_damage_indicator = 0.0;
     jump_indicator = 0.0;
-    scanned_by_player = SS_FullScan;
     comms_state = CS_Inactive;
     comms_open_delay = 0.0;
     shield_calibration_delay = 0.0;
@@ -153,6 +152,10 @@ PlayerSpaceship::PlayerSpaceship()
     shields_active = false;
 
     setFactionId(1);
+
+    //For now, set players to always been known to all other factions.
+    for(unsigned int faction_id=0; faction_id<factionInfo.size(); faction_id++)
+        setScannedStateForFaction(faction_id, SS_FullScan);
 
     updateMemberReplicationUpdateDelay(&target_rotation, 0.1);
     registerMemberReplication(&hull_damage_indicator, 0.5);
@@ -363,7 +366,7 @@ void PlayerSpaceship::update(float delta)
                 scanning_delay -= delta;
                 if (scanning_delay < 0)
                 {
-                    scanning_target->scanned();
+                    scanning_target->scannedBy(this);
                     scanning_target = NULL;
                 }
             }
@@ -722,8 +725,8 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             if (obj)
             {
                 scanning_target = obj;
-                scanning_complexity = obj->scanningComplexity();
-                scanning_depth = obj->scanningChannelDepth();
+                scanning_complexity = obj->scanningComplexity(this);
+                scanning_depth = obj->scanningChannelDepth(this);
                 scanning_delay = max_scanning_delay;
             }
         }
@@ -731,7 +734,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     case CMD_SCAN_DONE:
         if (scanning_target && scanning_complexity > 0)
         {
-            scanning_target->scanned();
+            scanning_target->scannedBy(this);
             scanning_target = nullptr;
         }
         break;

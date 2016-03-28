@@ -27,7 +27,7 @@ void GuiScrollText::onDraw(sf::RenderTarget& window)
     }
     if (start_pos > 0)
         wrap.text = wrap.text.substr(start_pos);
-    int max_lines = rect.height / mainFont->getLineSpacing(text_size);
+    int max_lines = rect.height / main_font->getLineSpacing(text_size);
     if (wrap.line_count - scrollbar->getValue() > max_lines)
     {
         int end_pos = 0;
@@ -50,5 +50,5 @@ void GuiScrollText::onDraw(sf::RenderTarget& window)
             scrollbar->setValue(scrollbar->getValue() + diff);
     }
 
-    drawText(window, sf::FloatRect(rect.left, rect.top, rect.width - 50, rect.height), wrap.text, ATopLeft, text_size, sf::Color::White);
+    drawText(window, sf::FloatRect(rect.left, rect.top, rect.width - 50, rect.height), wrap.text, ATopLeft, text_size, main_font, sf::Color::White);
 }

@@ -111,6 +111,7 @@ set(SOURCES
 	src/screenComponents/signalQualityIndicator.cpp
 	src/screenComponents/mainScreenControls.cpp
 	src/screenComponents/databaseView.cpp
+	src/gui/colorConfig.cpp
 	src/gui/mouseRenderer.cpp
 	src/gui/scriptError.cpp
 	src/gui/gui2_slider.cpp
@@ -121,6 +122,7 @@ set(SOURCES
 	src/gui/gui2_rotationdial.cpp
 	src/gui/gui2_textentry.cpp
 	src/gui/gui2_label.cpp
+	src/gui/gui2_image.cpp
 	src/gui/gui2_autolayout.cpp
 	src/gui/gui2_arrowbutton.cpp
 	src/gui/gui2_entrylist.cpp
@@ -136,6 +138,7 @@ set(SOURCES
 	src/gui/gui2_scrollbar.cpp
 	src/gui/gui2_container.cpp
 	src/gui/gui2_box.cpp
+	src/gui/gui2_panel.cpp
 	src/gui/gui2_overlay.cpp
 	src/spaceObjects/spaceStation.cpp
 	src/spaceObjects/spaceship.cpp
@@ -175,6 +178,9 @@ set(SOURCES
 	src/hardware/serialDriver.cpp
 	src/hardware/virtualOutputDevice.cpp
 )
+if(WIN32)
+    list(APPEND SOURCES EmptyEpsilon.rc)
+endif()
 
 foreach(SP_SOURCE
 	src/soundManager.cpp

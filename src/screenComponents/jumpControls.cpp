@@ -12,17 +12,15 @@ GuiJumpControls::GuiJumpControls(GuiContainer* owner, string id)
     charge_bar->setPosition(0, -50, ABottomLeft)->setSize(50, GuiElement::GuiSizeMax);
     charge_bar->hide();
     
-    label = new GuiLabel(this, id + "_LABEL", "Distance: 10.0", 30);
-    label->setVertical()->setPosition(50, -50, ABottomLeft)->setSize(40, GuiElement::GuiSizeMax);
+    label = new GuiKeyValueDisplay(this, id + "_LABEL", 0.5, "Distance", "10.0");
+    label->setTextSize(30)->setPosition(50, -50, ABottomLeft)->setSize(40, GuiElement::GuiSizeMax);
     
     button = new GuiButton(this, id + "_BUTTON", "Jump", [this]() {
         my_spaceship->commandJump(slider->getValue());
     });
     button->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
     
-    (new GuiBox(this, id + "_BOX"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
-    (new GuiPowerDamageIndicator(this, id + "_DPI", SYS_JumpDrive))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiPowerDamageIndicator(this, id + "_DPI", SYS_JumpDrive, ATopCenter))->setPosition(0, -50, ABottomLeft)->setSize(50, GuiElement::GuiSizeMax);
 }
 
 void GuiJumpControls::onDraw(sf::RenderTarget& window)
@@ -31,18 +29,21 @@ void GuiJumpControls::onDraw(sf::RenderTarget& window)
     {
         if (my_spaceship->jump_delay > 0.0)
         {
-            label->setText("Jump in: " + string(int(ceilf(my_spaceship->jump_delay))));
+            label->setKey("Jump in");
+            label->setValue(string(int(ceilf(my_spaceship->jump_delay))));
             slider->disable();
             button->disable();
             charge_bar->hide();
         }else if (my_spaceship->jump_drive_charge < SpaceShip::jump_drive_max_distance)
         {
-            label->setText("Charging...");
+            label->setKey("Charging");
+            label->setValue("...");
             slider->hide();
             button->disable();
             charge_bar->setValue(my_spaceship->jump_drive_charge)->show();
         }else{
-            label->setText("Distance: " + string(slider->getValue(), 1) + "km");
+            label->setKey("Distance");
+            label->setValue(string(slider->getValue(), 1) + "km");
             slider->enable()->show();
             button->enable();
             charge_bar->hide();

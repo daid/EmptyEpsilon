@@ -17,7 +17,7 @@ Press next to continue...]], true)
         tutorial:switchViewToMainScreen()
         tutorial:showMessage([[What you see now is the main screen. Here you see your own ship and the world around you.
 There is no direction interaction available on this screen. But it allows for visual identification of objects.]], true)
-        startSequence(radarTutorial)
+        tutorial:onNext(function() startSequence(radarTutorial) end)
     end)
 end
 
@@ -363,12 +363,12 @@ addToSequence(scienceTutorial, function() prev_object:destroy() end)
 addToSequence(scienceTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Cruiser"):setPosition(3000, -15000):orderIdle() end)
 addToSequence(scienceTutorial, [[I've replaced the friendly station with an unknown ship. As you select it, you will notice that you do not know anything about this ship.
 To learn about it, you need to scan it. Scanning requires you to match up frequency bands of your scanner with your target.
-Scan this ship now.]], function() return prev_object:isScanned() end)
+Scan this ship now.]], function() return prev_object:isScannedBy(player) end)
 addToSequence(scienceTutorial, [[Good. Notice that you now know this ship is an enemy. But it could have been a friendly or neutral ship as well.
 Until you scan it, you do not know.]])
 addToSequence(scienceTutorial, [[Also note that you have less information on this ship then on the friendly ship. To get all the information, you need to do a deep scan of this ship.
 A deep scan takes more effort, and requires you to line up two frequency bands at the same time.
-Deep scan the enemy now.]], function() return prev_object:isFullyScanned() end)
+Deep scan the enemy now.]], function() return prev_object:isFullyScannedBy(player) end)
 addToSequence(scienceTutorial, [[Excelent. Notice that this took you a lot more time then the simple scan.
 
 So plan carefully to only deep scan what is really needed. Or you could be running low on time.]])

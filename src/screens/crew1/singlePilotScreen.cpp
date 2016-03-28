@@ -20,7 +20,7 @@
 #include "screenComponents/commsOverlay.h"
 
 SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
-: GuiOverlay(owner, "SINGLEPILOT_SCREEN", sf::Color::Black)
+: GuiOverlay(owner, "SINGLEPILOT_SCREEN", colorConfig.background)
 {
     viewport = new GuiViewport3D(this, "3D_VIEW");
     viewport->setPosition(1000, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);

@@ -103,7 +103,7 @@ GameMasterScreen::GameMasterScreen()
     order_layout = new GuiAutoLayout(this, "ORDER_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     order_layout->setPosition(20, 130, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
 
-    (new GuiLabel(order_layout, "ORDERS_LABEL", "Orders:", 20))->addBox()->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(order_layout, "ORDERS_LABEL", "Orders:", 20))->addBackground()->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_IDLE", "Idle", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
             if (P<CpuShip>(obj))
@@ -316,7 +316,7 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
                 P<WormHole> wormhole = obj;
                 if (cpu_ship)
                 {
-                    if (target && target != obj && target->canBeTargeted())
+                    if (target && target != obj && target->canBeTargetedBy(obj))
                     {
                         if (obj->isEnemy(target))
                         {
@@ -408,8 +408,8 @@ string GameMasterScreen::getScriptExport()
 GuiGlobalMessageEntry::GuiGlobalMessageEntry(GuiContainer* owner)
 : GuiOverlay(owner, "GLOBAL_MESSAGE_ENTRY", sf::Color(0, 0, 0, 128))
 {
-    GuiBox* box = new GuiBox(this, "FRAME");
-    box->fill()->setPosition(0, 0, ACenter)->setSize(800, 150);
+    GuiPanel* box = new GuiPanel(this, "FRAME");
+    box->setPosition(0, 0, ACenter)->setSize(800, 150);
     
     message_entry = new GuiTextEntry(box, "MESSAGE_ENTRY", "");
     message_entry->setPosition(0, 20, ATopCenter)->setSize(700, 50);
@@ -437,8 +437,8 @@ bool GuiGlobalMessageEntry::onMouseDown(sf::Vector2f position)
 GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
 : GuiOverlay(gm_screen, "OBJECT_CREATE_SCREEN", sf::Color(0, 0, 0, 128))
 {
-    GuiBox* box = new GuiBox(this, "FRAME");
-    box->fill()->setPosition(0, 0, ACenter)->setSize(1000, 500);
+    GuiPanel* box = new GuiPanel(this, "FRAME");
+    box->setPosition(0, 0, ACenter)->setSize(1000, 500);
 
     faction_selector = new GuiSelector(box, "FACTION_SELECTOR", nullptr);
     for(P<FactionInfo> info : factionInfo)
@@ -735,15 +735,15 @@ void GuiShipRetrofit::open(P<SpaceShip> target)
     warp_selector->setSelectionIndex(target->has_warp_drive ? 1 : 0);
     jump_selector->setSelectionIndex(target->hasJumpDrive() ? 1 : 0);
     impulse_speed_slider->setValue(target->impulse_max_speed);
-    impulse_speed_slider->setSnapValue(target->ship_template->impulse_speed, 5.0f);
+    impulse_speed_slider->clearSnapValues()->addSnapValue(target->ship_template->impulse_speed, 5.0f);
     turn_speed_slider->setValue(target->turn_speed);
-    turn_speed_slider->setSnapValue(target->ship_template->turn_speed, 1.0f);
+    turn_speed_slider->clearSnapValues()->addSnapValue(target->ship_template->turn_speed, 1.0f);
     hull_slider->setValue(target->hull_max);
-    hull_slider->setSnapValue(target->ship_template->hull, 5.0f);
+    hull_slider->clearSnapValues()->addSnapValue(target->ship_template->hull, 5.0f);
     front_shield_slider->setValue(target->shield_max[0]);
-    front_shield_slider->setSnapValue(target->ship_template->shield_level[0], 5.0f);    ///TOFIX: Handle different amounts of shields
+    front_shield_slider->clearSnapValues()->addSnapValue(target->ship_template->shield_level[0], 5.0f);    ///TOFIX: Handle different amounts of shields
     rear_shield_slider->setValue(target->shield_max[1]);
-    rear_shield_slider->setSnapValue(target->ship_template->shield_level[1], 5.0f);
+    rear_shield_slider->clearSnapValues()->addSnapValue(target->ship_template->shield_level[1], 5.0f);
     missile_tube_amount_selector->setSelectionIndex(target->weapon_tube_count);
     for(int n=0; n<MW_Count; n++)
         missile_storage_amount_selector[n]->setSelectionIndex(target->weapon_storage_max[n]);

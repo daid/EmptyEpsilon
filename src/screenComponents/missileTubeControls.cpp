@@ -28,7 +28,7 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
                 my_spaceship->commandFireTube(n, missile_target_angle);
         });
         row.fire_button->setSize(350, 50);
-        (new GuiPowerDamageIndicator(row.fire_button, id + "_" + string(n) + "_PDI", SYS_MissileSystem))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        (new GuiPowerDamageIndicator(row.fire_button, id + "_" + string(n) + "_PDI", SYS_MissileSystem, ACenterRight))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         row.loading_bar = new GuiProgressbar(row.layout, id + "_" + string(n) + "_PROGRESS", 0, 1.0, 0);
         row.loading_bar->setColor(sf::Color(128, 128, 128))->setSize(350, 50);
         row.loading_label = new GuiLabel(row.loading_bar, id + "_" + string(n) + "_PROGRESS_LABEL", "Loading", 35);
@@ -53,6 +53,10 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
         });
         load_type_rows[n].button->setTextSize(28)->setSize(220, 40);
     }
+    load_type_rows[MW_Homing].button->setIcon("gui/icons/weapon-homing.png");
+    load_type_rows[MW_Mine].button->setIcon("gui/icons/weapon-mine.png");
+    load_type_rows[MW_EMP].button->setIcon("gui/icons/weapon-emp.png");
+    load_type_rows[MW_Nuke].button->setIcon("gui/icons/weapon-nuke.png");
 }
 
 void GuiMissileTubeControls::onDraw(sf::RenderTarget& window)

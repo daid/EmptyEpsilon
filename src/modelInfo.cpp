@@ -23,20 +23,20 @@ void ModelInfo::render(sf::Vector2f position, float rotation)
 {
     if (!data)
         return;
-    
+
     data->render();
 
     if (engine_scale > 0.0f)
     {
         if (engine->getElapsedTime() - last_engine_particle_time > 0.1)
         {
-            for (unsigned int n=0; n<data->engine_emitors.size(); n++)
+            for (unsigned int n=0; n<data->engine_emitters.size(); n++)
             {
-                sf::Vector3f offset = data->engine_emitors[n].position * data->scale;
+                sf::Vector3f offset = data->engine_emitters[n].position * data->scale;
                 sf::Vector2f pos2d = position + sf::rotateVector(sf::Vector2f(offset.x, offset.y), rotation);
-                sf::Vector3f color = data->engine_emitors[n].color;
+                sf::Vector3f color = data->engine_emitters[n].color;
                 sf::Vector3f pos3d = sf::Vector3f(pos2d.x, pos2d.y, offset.z);
-                float scale = data->scale * data->engine_emitors[n].scale * engine_scale;
+                float scale = data->scale * data->engine_emitters[n].scale * engine_scale;
                 ParticleEngine::spawn(pos3d, pos3d, color, color, scale, 0.0, 5.0);
             }
             last_engine_particle_time = engine->getElapsedTime();
@@ -66,9 +66,9 @@ void ModelInfo::renderOverlay(sf::Texture* texture, float alpha)
 #if FEATURE_3D_RENDERING
     if (!data)
         return;
-    
+
     glPushMatrix();
-    
+
     glScalef(data->scale, data->scale, data->scale);
     glTranslatef(data->mesh_offset.x, data->mesh_offset.y, data->mesh_offset.z);
     glDepthFunc(GL_EQUAL);
@@ -77,7 +77,7 @@ void ModelInfo::renderOverlay(sf::Texture* texture, float alpha)
     sf::Shader::bind(basicShader);
     data->mesh->render();
     glDepthFunc(GL_LESS);
-    
+
     glPopMatrix();
 #endif//FEATURE_3D_RENDERING
 }
@@ -87,7 +87,7 @@ void ModelInfo::renderShield(float alpha)
 #if FEATURE_3D_RENDERING
     basicShader->setParameter("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
     sf::Shader::bind(basicShader);
-    
+
     glPushMatrix();
     glColor4f(alpha, alpha, alpha, 1);
     glRotatef(engine->getElapsedTime() * 5, 0, 0, 1);
@@ -102,10 +102,10 @@ void ModelInfo::renderShield(float alpha, float angle)
 {
 #if FEATURE_3D_RENDERING
     if (!data) return;
-    
+
     basicShader->setParameter("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
     sf::Shader::bind(basicShader);
-    
+
     glPushMatrix();
     glColor4f(alpha, alpha, alpha, 1);
     glRotatef(angle, 0, 0, 1);
