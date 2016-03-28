@@ -24,7 +24,7 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getVelocity);
     /// Gets the rotational velocity of the object, in degree/second
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getAngularVelocity);
-    
+
     /// Sets the faction to which this object belongs. Requires a string as input.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setFaction);
     /// Gets the faction name to which this object belongs.
@@ -78,6 +78,8 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isScannedByFaction);
     /// Set if this object is scanned or not by every faction.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setScanned);
+    /// Set if this object is scanned or not by a particular faction.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setScannedByFaction);
 }
 
 PVector<SpaceObject> space_object_list;
@@ -200,6 +202,14 @@ void SpaceObject::setScanned(bool scanned)
     }
 }
 
+void SpaceObject::setScannedByFaction(string faction_name, bool scanned)
+{
+    if (!scanned)
+        setScannedStateForFaction(FactionInfo::findFactionId(faction_name), SS_NotScanned);
+    else
+        setScannedStateForFaction(FactionInfo::findFactionId(faction_name), SS_FullScan);
+}
+
 bool SpaceObject::isScannedBy(P<SpaceObject> obj)
 {
     return getScannedStateFor(obj) > SS_FriendOrFoeIdentified;
@@ -220,7 +230,7 @@ void SpaceObject::setScanningParameters(int complexity, int depth)
 {
     scanning_complexity_value = std::min(4, std::max(0, complexity));
     scanning_depth_value = std::max(0, depth);
-    
+
     scanned_by_faction.clear();
 }
 
@@ -327,7 +337,7 @@ bool SpaceObject::sendCommsMessage(P<PlayerSpaceship> target, string message)
 {
     if (!target)
         return false;
-    
+
     return target->hailByObject(this, message);
 }
 

@@ -464,6 +464,8 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
         }
         break;
     case FriendlysShortRangeFogOfWar:
+        if (!my_spaceship)
+            return;
         foreach(SpaceObject, obj, space_object_list)
         {
             if (!obj->canHideInNebula())
