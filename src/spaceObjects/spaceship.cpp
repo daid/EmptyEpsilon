@@ -360,6 +360,8 @@ void SpaceShip::update(float delta)
             }
             impulse_request = 0.0;
         }
+        if ((docking_state == DS_Docked) || (docking_state == DS_Docking))
+            warp_request= 0.0;
     }
 
     float rotationDiff = sf::angleDifference(getRotation(), target_rotation);
