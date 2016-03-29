@@ -17,6 +17,7 @@ void GuiDockingButton::click()
         my_spaceship->commandDock(findDockingTarget());
         break;
     case DS_Docking:
+        my_spaceship->commandAbortDock();
         break;
     case DS_Docked:
         my_spaceship->commandUndock();
@@ -40,8 +41,8 @@ void GuiDockingButton::onDraw(sf::RenderTarget& window)
             }
             break;
         case DS_Docking:
-            setText("Docking...");
-            disable();
+            setText("Cancel Docking");
+            enable();
             break;
         case DS_Docked:
             setText("Undock");

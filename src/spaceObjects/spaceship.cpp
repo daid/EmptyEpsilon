@@ -245,7 +245,7 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
             float direction = beam_weapons[n].getDirection();
             float arc = beam_weapons[n].getArc();
             float range = beam_weapons[n].getRange();
-            
+
             sf::Vector2f beam_offset = sf::rotateVector(ship_template->model_data->getBeamPosition2D(n) * scale, getRotation());
             sf::VertexArray a(sf::LinesStrip, 3);
             a[0].color = color;
@@ -626,6 +626,17 @@ void SpaceShip::requestUndock()
     {
         docking_state = DS_NotDocking;
         impulse_request = 0.5;
+    }
+}
+
+void SpaceShip::abortDock()
+{
+    if (docking_state == DS_Docking)
+    {
+        docking_state = DS_NotDocking;
+        impulse_request = 0.0;
+        warp_request = 0.0;
+        target_rotation = getRotation();
     }
 }
 
