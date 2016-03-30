@@ -163,6 +163,7 @@ public:
     void commandSetSystemCoolant(ESystem system, float coolant_level);
     void commandDock(P<SpaceObject> station);
     void commandUndock();
+    void commandAbortDock();
     void commandOpenTextComm(P<SpaceObject> obj);
     void commandCloseTextComm();
     void commandAnswerCommHail(bool awnser);

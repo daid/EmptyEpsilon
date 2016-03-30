@@ -42,6 +42,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetSystemCoolant);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandDock);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandUndock);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandAbortDock);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandOpenTextComm);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCloseTextComm);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandAnswerCommHail);
@@ -108,6 +109,7 @@ static const int16_t CMD_COMBAT_MANEUVER_STRAFE = 0x0021;
 static const int16_t CMD_LAUNCH_PROBE = 0x0022;
 static const int16_t CMD_SET_ALERT_LEVEL = 0x0023;
 static const int16_t CMD_SET_SCIENCE_LINK = 0x0024;
+static const int16_t CMD_ABORT_DOCK = 0x0025;
 
 template<> int convert<EAlertLevel>::returnType(lua_State* L, EAlertLevel l)
 {
@@ -772,6 +774,9 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     case CMD_UNDOCK:
         requestUndock();
         break;
+    case CMD_ABORT_DOCK:
+        abortDock();
+        break;
     case CMD_OPEN_TEXT_COMM:
         if (comms_state == CS_Inactive || comms_state == CS_BeingHailed || comms_state == CS_BeingHailedByGM)
         {
@@ -1141,6 +1146,13 @@ void PlayerSpaceship::commandUndock()
 {
     sf::Packet packet;
     packet << CMD_UNDOCK;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandAbortDock()
+{
+    sf::Packet packet;
+    packet << CMD_ABORT_DOCK;
     sendClientCommand(packet);
 }
 
