@@ -64,15 +64,16 @@ a.download {
 	display: block;
 	padding: 0 10px;
 	height: 30px;
-	line-height: 28px;
+	line-height: 26px;
 	width: 100%;
 	box-sizing: border-box;
 	text-align: center;
 	background: rgba(0,0,0,0.4);
-	border: 1px solid #fff;
+	border: 2px solid #fff;
 	border-radius: 15px;
 	text-decoration: none;
 	transition: all 0.2s;
+	box-sizing: border-box;
 }
 
 a.download.windows {
@@ -189,21 +190,37 @@ select {
 }
 
 .ui-tabs-anchor {
-	font-family: 'bebas_neuebook', 'Arial Narrow', sans-serif;
+	font-family: 'bebas_neue_regularregular', 'Arial Narrow', sans-serif;
 	font-size: 30px;
   padding: 0 20px!important;
-  line-height: 40px;
+  line-height: 36px;
   height: 40px;
+  border-radius: 20px;
   background: rgba(0,0,0,0.25);
   color: #fff!important;
   transition: all 0.2s;
   position: relative;
-  border-top: 1px solid rgba(255,255,255,0.5);
-  border-bottom: 1px solid rgba(255,255,255,0.5);
+  box-sizing: border-box;
+  z-index: 100;
+  border-top: 2px solid rgba(255,255,255,0.5);
+  border-bottom: 2px solid rgba(255,255,255,0.5);
+  border-left: 2px solid rgba(255,255,255,0.5);
+  border-right: 2px solid rgba(255,255,255,0.5);
+}
+
+li.ui-state-active .ui-tabs-anchor {
+	border-top: 2px solid rgba(255,255,255,1);
+	border-bottom: 2px solid rgba(255,255,255,1);
+	border-left: 2px solid rgba(255,255,255,1);
+	border-right: 2px solid rgba(255,255,255,1);
+}
+
+.ui-state-active .ui-tabs-anchor {
+	color: #000!important;
 }
 
 .ui-tabs .ui-tabs-nav li::before {
-	content: "";
+	/*content: "";
 	display: block;
 	width: 2px;
 	height: 2px;
@@ -211,11 +228,11 @@ select {
 	position: absolute;
 	left: 0;
 	bottom: 0;
-	z-index: 100;
+	z-index: 100;*/
 }
 
 .ui-tabs .ui-tabs-nav li::after {
-	content: "";
+	/*content: "";
 	display: block;
 	width: 2px;
 	height: 2px;
@@ -223,7 +240,7 @@ select {
 	position: absolute;
 	right: 0;
 	bottom: 0;
-	z-index: 100;
+	z-index: 100;*/
 }
 
 .ui-tabs-anchor::before {
@@ -233,9 +250,10 @@ select {
 	height: 2px;
 	background: #fff;
 	position: absolute;
-	left: 0;
-	top: -1px;
+	left: -2px;
+	top: 17px;
 	z-index: 100;
+	transition: border 0.1s ease-in-out;
 }
 
 .ui-tabs-anchor::after {
@@ -245,13 +263,57 @@ select {
 	height: 2px;
 	background: #fff;
 	position: absolute;
-	right: 0;
-	top: -1px;
+	right: -2px;
+	top: 17px;
 	z-index: 100;
+	transition: border 0.1s ease-in-out;
+}
+
+.ui-tabs-anchor:hover::before {
+	width: 40px;
+	height: 40px;
+	background: none;
+	left: -2px;
+	top: -2px;
+	z-index: 100;
+	border-left: 2px solid rgba(255,255,255,1);
+	border-radius: 20px;
+}
+
+.ui-tabs-anchor:hover::after {
+	width: 40px;
+	height: 40px;
+	background: none;
+	right: -2px;
+	top: -2px;
+	z-index: 100;
+	border-right: 2px solid rgba(255,255,255,1);
+	border-radius: 20px;
+}
+
+li.ui-state-active .ui-tabs-anchor::after {
+	content: "";
+	display: block;
+	background: #fff;
+	position: absolute;
+	width: auto!important;
+	height: auto!important;
+	top: 2px;
+	right: 2px;
+	left: 2px;
+	bottom: 2px;
+	z-index: 50;
+	border-radius: 20px;
+}
+
+li.ui-state-active .ui-tabs-anchor span.button-text {
+	z-index: 100;
+	position: relative;
 }
 
 .ui-tabs-anchor:hover {
-	background: rgba(0,0,0,0.65);
+/*	border-left: 2px solid rgba(255,255,255,1);
+	border-right: 2px solid rgba(255,255,255,1);*/
 }
 
 .ui-tabs .ui-tabs-nav li {
@@ -265,7 +327,6 @@ select {
 .ui-state-active a, .ui-state-active a:link, 
 .ui-state-active a:visited {
 	background: rgba(0,0,0,0.65);
-	font-family: 'bebas_neue_regularregular', 'Arial Narrow', sans-serif;
 }
 
 #tabs {
@@ -392,7 +453,7 @@ a.icon {
 	padding-left: 50px!important;
 }
 
-a.icon span::before {
+a.icon span.icon::before {
 	font-family: "empty-epsilon";
 	font-weight: normal;
 	width: 40px;
@@ -403,25 +464,26 @@ a.icon span::before {
 	left: 0;
 	top: 0;
 	content: "";
+	z-index: 100;
 }
 
-a.helms span::before {
+a.helms span.icon::before {
 	content: "r";
 }
 
-a.weapons span::before {
+a.weapons span.icon::before {
 	content: "l";
 }
 
-a.engineering span::before {
+a.engineering span.icon::before {
 	content: "q";
 }
 
-a.science span::before {
+a.science span.icon::before {
 	content: "k";
 }
 
-a.relay span::before {
+a.relay span.icon::before {
 	content: "j";
 }
 
@@ -627,7 +689,7 @@ h2.relay::after {
 		font-size: 21px;
 	}
 	
-	a.icon span::before {
+	a.icon span.icon::before {
 		margin: 0;
 	}
 	
