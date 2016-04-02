@@ -57,6 +57,8 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// For example, ship:setRadarTrace("RadarBlip.png") will show a dot instead of an arrow for this ship.
     /// Note: Icon is only shown after scanning, before the ship is scanned it is always shown as an arrow.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadarTrace);
+
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, addFactionBroadcast);
 }
 
 /* Define script conversion function for the EMainScreenSetting enum. */
@@ -915,6 +917,26 @@ void SpaceShip::setWeaponTubeExclusiveFor(int index, EMissileWeapons type)
     for(int n=0; n<MW_Count; n++)
         weapon_tube[index].disallowLoadOf(EMissileWeapons(n));
     weapon_tube[index].allowLoadOf(type);
+}
+
+void SpaceShip::addFactionBroadcast(string message)
+{
+    sf::Color color;
+
+    for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
+    {
+        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
+        if ((ship) && !(factionInfo[this->getFactionId()]->states[ship->getFactionId()] == FVF_Enemy))
+        {
+            if(this->getFaction() == ship->getFaction())
+                color = sf::Color(153,255,153); //same faction
+            else if (factionInfo[this->getFactionId()]->states[ship->getFactionId()] == FVF_Friendly)
+                color = sf::Color(102,178,255); //ally
+            else
+                color = sf::Color(128,128,128); //neutral
+            ship->addToShipLog(message, color);
+        }
+    }
 }
 
 std::unordered_map<string, string> SpaceShip::getGMInfo()

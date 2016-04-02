@@ -327,6 +327,8 @@ public:
     void setWeaponTubeExclusiveFor(int index, EMissileWeapons type);
 
     void setRadarTrace(string trace) { radar_trace = trace; }
+
+    void addFactionBroadcast(string message);
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);
