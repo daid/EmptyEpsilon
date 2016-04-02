@@ -2,21 +2,26 @@
 <html lang="us">
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>EmptyEpsilon - Multiplayer Space Bridge Simulator</title>
 	<link href="jquery-ui.min.css" rel="stylesheet">
 	<link href="main.css" rel="stylesheet">
+	<link rel="shortcut icon" href="favicon.ico">
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<link href="https://file.myfontastic.com/mVfeXmXgbKVhLxnHWexUtb/icons.css" rel="stylesheet">
+	<link href="magnific-popup.css" rel="stylesheet">
 </head>
 <body>
 
-<h1>EmptyEpsilon</h1>
+<h1 class="logo">EmptyEpsilon</h1>
 <div id="tabs">
 	<ul>
-		<li><a href="#tabs-info">Info</a></li>
-		<li><a href="#tabs-media">Media</a></li>
-		<li><a href="#tabs-running">Running a game</a></li>
-		<li><a href="#tabs-stations">Stations</a></li>
-		<li><a href="#tabs-scripting">Mission scripting</a></li>
-		<li><a href="#tabs-download">Download</a></li>
+		<li><a href="#tabs-info"><span class="button-text">Info</span></a></li>
+		<li><a href="#tabs-media"><span class="button-text">Media</span></a></li>
+		<li><a href="#tabs-running"><span class="button-text">Running a game</span></a></li>
+		<li><a href="#tabs-stations"><span class="button-text">Stations</span></a></li>
+		<li><a href="#tabs-scripting"><span class="button-text">Mission scripting</span></a></li>
+		<li><a href="#tabs-download"><span class="button-text">Download</span></a></li>
 	</ul>
 	<div id="tabs-info">
 		<h2>What is it?</h2>
@@ -32,41 +37,57 @@
 		<h2>Contact</h2>
 		<p>The best place to talk about bridge simulation and EmptyEpsilon is the <a href="http://bridgesim.net/">The Starship Bridge Simulation Network</a>. We regulary check this and post updates / battle logs of our space adventures.</p>
 		<p>Main developers of EmptyEpsilon go by the names of <a href="https://github.com/daid/">Daid</a> and <a href="https://github.com/nallath/">Nallath</a></p>
-		
+
 		<h2>Donations</h2>
 		<p>EmptyEpsilon is a 100% free game. We made this because we wanted to play the game we envisioned for ourselves. But we are not artists, so we need to buy the 3D models used in this game.</p>
-		<p>Currently we are raising money to buy <a href="http://www.turbosquid.com/3d-models/maya-5-small-frigates/828573">more frigates models</a></p>
+		<p>Currently we are raising money to buy <a href="http://www.turbosquid.com/Search/Artists/Angryfly">Note sure yet (we still have cash reserve)</a></p>
 		<p><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 		<input type="hidden" name="cmd" value="_s-xclick">
 		<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----">
-		<input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+		<input type="image" src="https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_92x26.png" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
 		<img alt="" border="0" src="https://www.paypalobjects.com/nl_NL/i/scr/pixel.gif" width="1" height="1">
 		</form></p>
 		<h2>Previous contributions</h2>
+        <!-- Outstanding cash from: Troy Hall and Kevin Primm -->
+        <p>Thanks to contributions of Daniel Ginat we managed to buy: <a href="http://www.turbosquid.com/3d-models/maya-5-small-frigates/828573">more frigate models</a></p>
 		<p>Thanks to generous contribution of Serge Wroclawski we managed to buy: <a href="http://www.turbosquid.com/3d-models/max-5-battleship-destroyers-upgraded/707660">more battleship models</a></p>
 		<p>Thanks to contributions of MadKat and Daid we managed to buy: <a href="http://www.turbosquid.com/3d-models/4-space-station-max/679444">larger 3D station models</a></p>
 	</div>
 	<div id="tabs-media">
-		<p><img src="screenshots/mainscreen.png"></p>
-		<p>Main screen view from a cruiser near a station being attacked by two enemy cruisers.</p>
-		<p><img src="screenshots/helms.png"></p>
-		<p>View on the helms officers screen. Controls the movement of the ship.</p>
-		<p><img src="screenshots/weapons.png"></p>
-		<p>View on the helms weapons screen. Controls the weapons and shields of the ship.</p>
-		<p><img src="screenshots/engineering.png"></p>
-		<p>View on the engineering screen. Can boost different subsystems and repair systems.</p>
-		<p><img src="screenshots/science.png"></p>
-		<p>View on the science officers screen. Has long range scanners and a large database of information</p>
-		<p><img src="screenshots/relay.png"></p>
-		<p>View on the relay officers screen. Can see friendly ships and what's in the short range radar range of friendly ships. Can call ships and stations for different requests.</p>
+		<div class="gallery">
+			<div class="gallery-image">
+				<a class="image-link" href="screenshots/mainscreen.png"><img src="screenshots/mainscreen.png"></a>
+				<p>Main screen view from a cruiser near a station being attacked by two enemy cruisers.</p>
+			</div>
+			<div class="gallery-image">
+				<a class="image-link" href="screenshots/helms.png"><img src="screenshots/helms.png"></a>
+				<p>View on the helms officers screen. Controls the movement of the ship.</p>
+			</div>
+			<div class="gallery-image">
+				<a class="image-link" href="screenshots/weapons.png"><img src="screenshots/weapons.png"></a>
+				<p>View on the helms weapons screen. Controls the weapons and shields of the ship.</p>
+			</div>
+			<div class="gallery-image">
+				<a class="image-link" href="screenshots/engineering.png"><img src="screenshots/engineering.png"></a>
+				<p>View on the engineering screen. Can boost different subsystems and repair systems.</p>
+			</div>
+			<div class="gallery-image">
+				<a class="image-link" href="screenshots/science.png"><img src="screenshots/science.png"></a>
+				<p>View on the science officers screen. Has long range scanners and a large database of information</p>
+			</div>
+			<div class="gallery-image">
+				<a class="image-link" href="screenshots/relay.png"><img src="screenshots/relay.png"></a>
+				<p>View on the relay officers screen. Can see friendly ships and what's in the short range radar range of friendly ships. Can call ships and stations for different requests.</p>
+			</div>
+		</div>
 	</div>
 	<div id="tabs-running">
 		<div id="running-tabs">
 			<ul>
-				<li><a href="#running-tabs-standard">Standard setup</a></li>
-				<li><a href="#running-tabs-limited">Limited setup</a></li>
-				<li><a href="#running-tabs-auto">Automated setup</a></li>
-				<li><a href="#running-tabs-gm">Game Master</a></li>
+				<li><a href="#running-tabs-standard"><span class="button-text">Standard setup</span></a></li>
+				<li><a href="#running-tabs-limited"><span class="button-text">Limited setup</span></a></li>
+				<li><a href="#running-tabs-auto"><span class="button-text">Automated setup</span></a></li>
+				<li><a href="#running-tabs-gm"><span class="button-text">Game Master</span></a></li>
 			</ul>
 			<div id="running-tabs-standard">
 				<p>
@@ -80,7 +101,7 @@
 					The last computer is for the main screen. This screen does not need any input and should be visible for all players.
 				</p>
 				<p>
-					Designate a single player as Captain. 
+					Designate a single player as Captain.
 					His computer can be used as main screen, and his only job is to talk with the other players and tell them what they should do.
 				</p>
 				<p>
@@ -94,7 +115,7 @@
 				</p>
 				<h2>Internet play</h2>
 				<p>
-					People have been experimenting with playing EmptyEpsilon on internet connections. This means the server needs to be accessible from the internet. The server run on port <b>32666</b>, which needs to be open in your firewall and forwarded to your server if you are behind a router.
+					People have been experimenting with playing EmptyEpsilon on internet connections. This means the server needs to be accessible from the internet. The server run on port <b>35666</b>, which needs to be open in your firewall and forwarded to your server if you are behind a router.
 				</p>
 			</div>
 			<div id="running-tabs-limited">
@@ -120,15 +141,15 @@
 	<div id="tabs-stations">
 		<div id="station-tabs">
 			<ul>
-				<li><a href="#station-tabs-main">Main screen/Captain</a></li>
-				<li><a href="#station-tabs-helm">Helms</a></li>
-				<li><a href="#station-tabs-weapons">Weapons</a></li>
-				<li><a href="#station-tabs-engineering">Engineering</a></li>
-				<li><a href="#station-tabs-science">Science</a></li>
-				<li><a href="#station-tabs-relay">Relay</a></li>
+				<li><a href="#station-tabs-main" class="captain"><span class="button-text">Main screen/Captain</span></a></li>
+				<li><a href="#station-tabs-helm" class="helms icon"><span class="icon"></span><span class="button-text">Helms</span></a></li>
+				<li><a href="#station-tabs-weapons" class="weapons icon"><span class="icon"></span><span class="button-text">Weapons</span></a></li>
+				<li><a href="#station-tabs-engineering" class="engineering icon"><span class="icon"></span><span class="button-text">Engineering</span></a></li>
+				<li><a href="#station-tabs-science" class="science icon"><span class="icon"></span><span class="button-text">Science</span></a></li>
+				<li><a href="#station-tabs-relay" class="relay icon"><span class="icon"></span><span class="button-text">Relay</span></a></li>
 			</ul>
 			<div id="station-tabs-main">
-				<p><img src="screenshots/mainscreen.png"></p>
+				<p><a class="image-link float-right" href="screenshots/mainscreen.png"><img src="screenshots/mainscreen.png"></a></p>
 				<p>
 					The captain has zero direct control of the ship. However, he is tasked with keeping the whole crew together and making tactical decisions.
 					The main screen should be setup on a large monitor or beamer so it is visible for all the players.
@@ -163,28 +184,32 @@
 				</p>
 			</div>
 			<div id="station-tabs-helm">
-				<p><img src="screenshots/helms.png"></p>
+				<p><a class="image-link float-right" href="screenshots/helms.png"><img src="screenshots/helms.png"></a></p>
+				<h2 class="station helms">Helms</h2>
 				<p> In the left upper corner you can see the energy (max is 1000), the current heading in degrees and the current speed. Below this data are two sliders; The leftmost slider sets the impulse power from -100% to 100%. The slider next to it sets the jump distance. </p>
 				<p> <b>Jumping</b> The jump button allowes the ship to jump the set distance in it's current heading. Note that the further you jump, the higher the energy cost. Depending on how much power the system has (and how damaged it is) the time to power the jump might increase/decrease. </p>
 				<p> <b>Docking</b> Docking can be done when the ship is within 1 km of a friendly station by pressing the dock button. </p>
 			</div>
 			<div id="station-tabs-weapons">
-				<p><img src="screenshots/weapons.png"></p>
+				<p><a class="image-link float-right" href="screenshots/weapons.png"><img src="screenshots/weapons.png"></a></p>
+				<h2 class="station weapons">Weapons</h2>
 				<p> <b>Targeting</b> In order to fire, an enemy ship needs to be targeted. This is done by clicking the desired ship. </p>
 				<p> <b>Missiles</b> Missiles are one of the most destructive weapons of a space ship. Before they can be fired, they need to be loaded in a missile tube. Loadeding missiles wil take time. Unloading missiles can be done by pressing the unload button next to a loaded missile tube. Firing a missile can be done by pressing a loaded missile tube. Take care to have an enemy selected! If there is no enemy, the missile wil be dumb fired (flying in a straight line). </p>
-				<p> <b> Beam weapons</b> The location &amp; range of beam weapons are indicated by the red firing arcs. Once a target is selected, the beam weapons will auto fire.  The frequency can be set on the right of the screen. Some frequencies will deal more damage to certain shield frequencies. Rely on your science officer to provide you with such data. Note that changing the frequencies does not take time. 
+				<p> <b> Beam weapons</b> The location &amp; range of beam weapons are indicated by the red firing arcs. Once a target is selected, the beam weapons will auto fire.  The frequency can be set on the right of the screen. Some frequencies will deal more damage to certain shield frequencies. Rely on your science officer to provide you with such data. Note that changing the frequencies does not take time.
 					Beam weapons can also target selective subsystems. If you simply wish to destroy an enemy, it's best left on hull.</p>
 				<p> <b> Shields </b> Shields can be activated (and deactivated) by pressing the shield button. It might seem tempting to keep the shields up at all time, but they drain significantly more power when they are active. </p>
 			</div>
 			<div id="station-tabs-engineering">
-				<p><img src="screenshots/engineering.png"></p>
+				<p><a class="image-link float-right" href="screenshots/engineering.png"><img src="screenshots/engineering.png"></a></p>
+				<h2 class="station engineering">Engineering</h2>
 				<p> <b> Power management </b> The engineer can re-route power from one system to another. This can be done by selecting the system and moving the power slider. Giving a system more power will increase it's output (Generator; More energy per second, Shield; more damage reduction / reload, Impulse; faster movement, etc). </p>
 				<p> <b>Coolant </b> Increasing the energy that is sent to systems will heat up the systems. By giving a system more coolant, more heat can be transported from the system. There is a finite amount of coolant. The trend of the temperature is shown with a white arrow. The brighter it is, the larger the trend (either up or down, as indicated by the direction of the arrow). </p>
 				<p> <b> Repair </b> It can happen that certain systems get damaged, either by being shot or due to overheating. Systems have a state of -100% to 100%. Once a system is at or below 0% it will no longer function. Systems below 100% will function sub optimal (in much the same way if they are under powered). Systems can be repaired by sending a repair crew to it. Repair crews automatically repair all systems in the room they are in. </p>
 				<p> <b> Calibration </b> Engineering can also calibrate shields. This is done by selecting a frequency and pressing the calibrate button. Note that this takes time, during which the shields are offline. They will not automatically turn on once the shields are recalibrated.</p>
 			</div>
 			<div id="station-tabs-science">
-				<p><img src="screenshots/science.png"></p>
+				<p><a class="image-link float-right" href="screenshots/science.png"><img src="screenshots/science.png"></a></p>
+				<h2 class="station science">Science</h2>
 				<p> <b>Long range radar</b> The science station has a long range radar, which is vital to spot ships comming in from a distance. Reporting how the current sector looks and how it changes is your most important task.</p>
 				<p> <b>Scanning</b> You can scan ships to get more information about them. Most ships will be unknown (gray) at the start. And need to be scanned to know if they are friend or foe.</p>
 				<p> <b>More scanning</b> Scanning a target twice yields more information. You can see what shield and beam frequencies should be used to engrage this target. A second scan will also provide the helms and weapons screen with information about beamweapons, allowing you to avoid being shot by their beams.</p>
@@ -192,7 +217,8 @@
 				<p> <b>Database</b> The science station is equiped with a database of all known ships, as well as weapon and other information. Use this information to your advantage.</p>
 			</div>
 			<div id="station-tabs-relay">
-				<p><img src="screenshots/relay.png"></p>
+				<p><a class="image-link float-right" href="screenshots/relay.png"><img src="screenshots/relay.png"></a></p>
+				<h2 class="station relay">Relay</h2>
 				<p> <b>Communications</b> the relay station can open communications to stations and other ships. This can be used for varius tasks, including asking for backup, sending orders to friendly ships. Or asking for re-supplies when docked.</p>
 				<p> <b>Short range sensors</b> you can see what the short range sensors (5km) see around your ship. But also around other friendly ships. Giving you the ability to spot things before the science station does. You however, cannot scan ships.</p>
 				<p> <b>Probes</b> you can send out up to 10 probes. These probes will fly towards a location and stay there for 10 minutes. Every probe will give you a 5km addition sensor area. Probes will work inside nebulas and thus are a powerful tool when faced with an area blocked by nebula.</p>
@@ -202,10 +228,10 @@
 	<div id="tabs-scripting">
 		<div id="scripting-tabs">
 			<ul>
-				<li><a href="#scripting-tabs-0">0) Tools&amp;basics</a></li>
-				<li><a href="#scripting-tabs-1">1) Building a world</a></li>
-				<li><a href="#scripting-tabs-2">2) Death &amp; destruction</a></li>
-				<li><a href="#scripting-tabs-3">3) We are on a mission!</a></li>
+				<li><a href="#scripting-tabs-0"><span class="button-text">0: Tools &amp; basics</span></a></li>
+				<li><a href="#scripting-tabs-1"><span class="button-text">1: Building a world</span></a></li>
+				<li><a href="#scripting-tabs-2"><span class="button-text">2: Death &amp; destruction</span></a></li>
+				<li><a href="#scripting-tabs-3"><span class="button-text">3: We are on a mission!</span></a></li>
 			</ul>
 			<div id="scripting-tabs-0">
 				<h2>About this series</h2>
@@ -228,21 +254,21 @@
 				<p>We'll start out with an empty scenario, as a template to setup our initial game in step 1.</p>
 				<p>Open the editor of your choise, and enter the following code:</p>
 				<p class="code">
--- Name: Beacon of light series
--- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
+				-- Name: Beacon of light series
+				-- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
 
--- Init is run when the scenario is started. Create your initial
-function init()
-    -- Create the main ship for the players.
-    PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
-end
+				-- Init is run when the scenario is started. Create your initial
+				function init()
+				    -- Create the main ship for the players.
+				    PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
+				end
 
-function update(delta)
-end
-</p>
+				function update(delta)
+				end
+				</p>
 				<p>Save this as a file named <b>scenario_99_tutorial.lua</b> in the folder <b>EmptyEpsilon/scripts</b></p>
 				<p>Open EmptyEpsilon and start a new server. Your scenario should be at the bottom of the list. Start it, and you will notice that there is a ship for the players created per default.</p>
-				<h2>Tips&amp;tricks</h2>
+				<h2>Tips &amp; Tricks</h2>
 				<p>The file needs to start with <b>scenario_</b> to be picked up as a scenario.</p>
 				<p>The number in the scenario filename is for the order in which EmptyEpsilon shows the scenarios.</p>
 				<p>The final part of the filename is only for reference. The actual name shown is in the first line of the script file.</p>
@@ -335,7 +361,7 @@ end
 				<p>A few simple names can give the whole world more character.</p>
 				<p>Finally we call the player ship <b>TheEpsilon</b></p>
 				<p class="code">PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser"):setPosition(22400, 18200):setCallSign("TheEpsilon")</p>
-				<h2>Tips&amp;tricks - Building even more world?</h2>
+				<h2>Tips &amp; Tricks - Building even more world?</h2>
 				<p>Next to asteroids, stations and nebulae there are a few more options to populate your world.</p>
 				<p>While we do not use anything else at this point in time. The following objects can also be created:</p>
 				<p class="code">
@@ -357,14 +383,14 @@ function init()
     SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(-25200, 32200):setCallSign("Orion-5")
     SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setPosition(-45600, -15800):setCallSign("Omega")
     SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setPosition(9100,-35400):setCallSign("Refugee-X")
-    
+
 	--Nebula that hide the enemy station.
     Nebula():setPosition(-43300,  2200)
     Nebula():setPosition(-34000,  -700)
     Nebula():setPosition(-32000,-10000)
     Nebula():setPosition(-24000,-14300)
     Nebula():setPosition(-28600,-21900)
-    
+
 	--Random nebulae in the system
     Nebula():setPosition( -8000,-38300)
     Nebula():setPosition( 24000,-30700)
@@ -450,7 +476,7 @@ end
         victory("Human Navy")
     end
 				</p>
-				<h2>Tips&amp;tricks - More about ships.</h2>
+				<h2>Tips &amp; Tricks - More about ships.</h2>
 				<p>For a full list of possible ship templates, you can check the shipTemplates.lua file. This file contains all the definitions for all the possible ship types.</p>
 				<p>Next to orderRoaming and orderDefendTarget, there is also:</p>
 				<ul>
@@ -481,14 +507,14 @@ function init()
     enemy_station = SpaceStation():setTemplate("Large Station"):setFaction("Kraylor")
     enemy_station:setPosition(-45600, -15800):setCallSign("Omega")
     SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setPosition(9100,-35400):setCallSign("Refugee-X")
-    
+
     --Nebula that hide the enemy station.
     Nebula():setPosition(-43300,  2200)
     Nebula():setPosition(-34000,  -700)
     Nebula():setPosition(-32000,-10000)
     Nebula():setPosition(-24000,-14300)
     Nebula():setPosition(-28600,-21900)
-    
+
     --Random nebulae in the system
     Nebula():setPosition( -8000,-38300)
     Nebula():setPosition( 24000,-30700)
@@ -502,7 +528,7 @@ function init()
         Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
         VisualAsteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
     end
-	
+
     -- Create the defense for the station
     CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-44000, -14000):orderDefendTarget(enemy_station)
     CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-47000, -14000):orderDefendTarget(enemy_station)
@@ -510,7 +536,7 @@ function init()
     enemy_dreadnought:setPosition(-46000, -18000):orderDefendTarget(enemy_station)
     CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
     CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
-	
+
     --Small Kraylor strike team, starting in the nebula at G5
     CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3550, 31250):orderRoaming()
     CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3950, 31250):orderRoaming()
@@ -579,7 +605,7 @@ function update(delta)
     if not player:isValid() or not research_station:isValid() then
         victory("Kraylor")
     end
-    
+
     if mission_state == 1 then
         if distance(player, transport_TR4) &lt; 5000 then
             kraylor_TR4_guard1:orderRoaming()
@@ -653,7 +679,7 @@ function init()
     enemy_station:setPosition(-45600, -15800):setCallSign("Omega")
     neutral_station = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
     neutral_station:setPosition(9100,-35400):setCallSign("Refugee-X")
-    
+
     --Nebula that hide the enemy station.
     Nebula():setPosition(-43300,  2200)
     Nebula():setPosition(-34000,  -700)
@@ -674,7 +700,7 @@ function init()
         Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
         VisualAsteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
     end
-	
+
     -- Create the defense for the station
     CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-44000, -14000):orderDefendTarget(enemy_station)
     CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-47000, -14000):orderDefendTarget(enemy_station)
@@ -682,14 +708,14 @@ function init()
     enemy_dreadnought:setPosition(-46000, -18000):orderDefendTarget(enemy_station)
     CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
     CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
-	
+
     --Small Kraylor strike team, guarding TR-4 in the nebula at G5.
     kraylor_TR4_guard1 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3550, 31250):orderIdle()
     kraylor_TR4_guard2 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3950, 31250):orderIdle()
     transport_TR4 = CpuShip():setShipTemplate("Tug"):setFaction("Human Navy"):setPosition(3750, 31250)
     transport_TR4:orderIdle():setCallSign("TR-4"):setCommsScript("")
     transport_TR4:setHull(1):setFrontShieldMax(1):setRearShieldMax(1)
-    
+
     --Start off the mission by sending a transmission to the player
     research_station:sendCommsMessage(player, [[TheEpsilon, please come in?
 
@@ -707,7 +733,7 @@ function update(delta)
     if not player:isValid() or not research_station:isValid() then
         victory("Kraylor")
     end
-    
+
     if mission_state == 1 then
         if distance(player, transport_TR4) &lt; 5000 then
             kraylor_TR4_guard1:orderRoaming()
@@ -742,7 +768,7 @@ Please deliver the diplomat to Omega-X in sector G3, do this by docking with the
             victory("Human Navy")
         end
     end
-    
+
 end
 
 function distance(obj1, obj2)
@@ -787,7 +813,7 @@ function updateHashFromTab(event, ui)
 {
 	var target_id = event.target.id;
 	var target_index = $(event.target).tabs("option", "active");
-	
+
 	var data = mapHash();
 	data[target_id] = target_index;
 	var hash = [];
@@ -802,31 +828,31 @@ $(function() {
 	$("#tabs").tabs({activate: updateHashFromTab});
 	$("#station-tabs").tabs({activate: updateHashFromTab});
 	$("#running-tabs").tabs({activate: updateHashFromTab});
-	
+
 	$("#scripting-tabs").tabs({activate: updateHashFromTab}).addClass("ui-tabs-vertical ui-helper-clearfix");
 	$("#scripting-tabs ul").removeClass("ui-widget-header");
 	$("#scripting-tabs li" ).removeClass("ui-corner-top").addClass("ui-corner-left");
 	$("#scripting-tabs div" ).removeClass("ui-corner-bottom");
-	
-	$.each($("img"), function(idx, element)
-	{
-		element = $(element)
-		if (element.attr('src').indexOf('screenshots/') != 0)
-			return true;
-		element.css('width', '200px');
-		var wrapper = $("<span style='position: relative'>");
-		var button = $("<span class='ui-icon ui-icon-circle-zoomin' style='position: absolute; bottom: 6px; right: 4px;'></span>");
-		scale_function = function() {
-			if (element.css('width') == '200px')
-				element.animate({'width': element[0].naturalWidth + 'px'}, 500);
-			else
-				element.animate({'width': '200px'}, 500);
-		}
-		element.click(scale_function);
-		button.click(scale_function);
-		element.wrap(wrapper);
-		element.after(button);
-	});
+
+	// $.each($("img"), function(idx, element)
+	// {
+	// 	element = $(element)
+	// 	if (element.attr('src').indexOf('screenshots/') != 0)
+	// 		return true;
+	// 	element.css('width', '200px');
+	// 	var wrapper = $("<span style='position: relative'>");
+	// 	var button = $("<span class='ui-icon ui-icon-circle-zoomin' style='position: absolute; bottom: 6px; right: 4px;'></span>");
+	// 	scale_function = function() {
+	// 		if (element.css('width') == '200px')
+	// 			element.animate({'width': element[0].naturalWidth + 'px'}, 500);
+	// 		else
+	// 			element.animate({'width': '200px'}, 500);
+	// 	}
+	// 	element.click(scale_function);
+	// 	button.click(scale_function);
+	// 	element.wrap(wrapper);
+	// 	element.after(button);
+	// });
 	$.each($(".code"), function(idx, element)
 	{
 		element = $(element);
@@ -849,13 +875,13 @@ $(function() {
         output = output.replace(/\[\[([^(\]\])]*)\]\]/gm, "<span style='color: blue'>[[$1]]</span>");
 		element.html(output);
 	})
-	
+
 	var hashData = mapHash()
 	for(var key in hashData)
 	{
 		$("#" + key).tabs("option", "active", hashData[key]);
 	}
-	
+
 	$.get("http://software.ultimaker.com/ee_files.php", function(data) {
 		var files = {}
 		for(var idx in data)
@@ -872,7 +898,7 @@ $(function() {
 					os = "android";
 				if (f.toLowerCase().indexOf("osx") > -1 || f.toLowerCase().indexOf("macos") > -1)
 					os = "osx";
-				
+
 				if (os != "")
 				{
 					if (files[version] == undefined)
@@ -881,8 +907,8 @@ $(function() {
 				}
 			}
 		}
-		
-		var html = '<table><tr><th>OS<th>File<th>version';
+
+		var html = '<table class="downloads"><tr><th>OS<th>File<th>version';
 		var part2 = '<tr><th>OS<th>File<th>version'
         var first = true;
         var versions = [];
@@ -900,13 +926,13 @@ $(function() {
 				oses.push(os);
 			oses.sort();
 			oses.reverse();
-			
+
 			for(var idx in oses)
 			{
                 var os = oses[idx];
 				var vers = version.substr(0, 4) + "-" + version.substr(4, 2) + "-" + version.substr(6, 2);
 				var url = 'http://software.ultimaker.com/EmptyEpsilon/' + files[version][os];
-				row = '<tr><td><a href="' + url + '"><img src="images/os_' + os + '.svg" width="24"></a><td><a href="' + url + '">' + files[version][os] + '</a><td>' + vers;
+				row = '<tr class="' + os + '"><td><a href="' + url + '"><img src="images/os_' + os + '.svg" width="24"></a><td><a href="' + url + '" class="download ' + os + '">' + files[version][os] + '</a><td>' + vers;
 				if (first)
 					html += row;
 				else
@@ -919,6 +945,32 @@ $(function() {
 		$('#downloads-info').html(html);
 	}, "json");
 });
+</script>
+<script src="jquery.magnific-popup.min.js"></script>
+<script type="text/javascript">
+	$('.image-link').magnificPopup({
+	  type: 'image',
+		closeOnContentClick: 'true',
+		showCloseBtn: 'false',
+	  mainClass: 'mfp-with-zoom', // this class is for CSS animation below
+
+	  zoom: {
+	    enabled: true, // By default it's false, so don't forget to enable it
+
+	    duration: 300, // duration of the effect, in milliseconds
+	    easing: 'ease-in-out', // CSS transition easing function
+
+	    // The "opener" function should return the element from which popup will be zoomed in
+	    // and to which popup will be scaled down
+	    // By defailt it looks for an image tag:
+	    opener: function(openerElement) {
+	      // openerElement is the element on which popup was initialized, in this case its <a> tag
+	      // you don't need to add "opener" option if this code matches your needs, it's defailt one.
+	      return openerElement.is('img') ? openerElement : openerElement.find('img');
+	    }
+	  }
+
+	});
 </script>
 </body>
 </html>
