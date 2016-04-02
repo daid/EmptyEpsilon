@@ -20,7 +20,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
     rear_shield_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, "Rear", "");
     rear_shield_display->setIcon("gui/icons/shields")->setTextSize(20)->setPosition(20, 220, ATopLeft)->setSize(240, 40);
     
-    (new GuiSelfDestructButton(this, "SELF_DESTRUCT"))->setPosition(20, 220, ATopLeft)->setSize(240, 100);
+    (new GuiSelfDestructButton(this, "SELF_DESTRUCT"))->setPosition(20, 260, ATopLeft)->setSize(240, 100);
     
     GuiAutoLayout* system_row_layouts = new GuiAutoLayout(this, "SYSTEM_ROWS", GuiAutoLayout::LayoutVerticalBottomToTop);
     system_row_layouts->setPosition(20, -20, ABottomLeft);

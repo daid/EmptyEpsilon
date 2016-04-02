@@ -67,7 +67,7 @@ void ColorConfig::load()
             if (value.length() == 6)
                 color = sf::Color((value.toInt(16) << 8) | 0xFF);
             else if (value.length() == 8)
-                color = sf::Color(value.toInt(16));
+                color = sf::Color(value.substr(0, 4).toInt(16) << 16 | value.substr(4).toInt(16));  //toInt(16) fails with 8 bytes, so split the convertion in 2 sections.
             else
                 LOG(WARNING) << "Failed to parse color: " << key << " " << value;
 

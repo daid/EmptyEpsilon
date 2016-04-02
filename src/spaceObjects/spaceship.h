@@ -169,7 +169,7 @@ public:
      * Check if the ship can be targeted.
      */
     virtual bool canBeTargetedBy(P<SpaceObject> other) override { return true; }
-    
+
     /*!
      * didAnOffensiveAction is called whenever this ship does something offesive towards an other object
      * this can identify the ship as friend or foe.
@@ -219,9 +219,14 @@ public:
      */
     void requestUndock();
 
+    /*!
+     * Abort the current dock request
+     */
+    void abortDock();
+
     /// Dummy virtual function to use energy. Only player ships currently model energy use.
     virtual bool useEnergy(float amount) { return true; }
-    
+
     /// Dummy virtual function to add heat on a system. The player ship class has an actual implementation of this as only player ships model heat right now.
     virtual void addHeat(ESystem system, float amount) {}
 
@@ -248,7 +253,7 @@ public:
      * \return float 0. to 1.
      */
     float getSystemEffectiveness(ESystem system);
-    
+
     virtual void applyTemplateValues();
 
     P<SpaceObject> getTarget();
