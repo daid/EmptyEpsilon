@@ -177,12 +177,12 @@ addToSequence(helmsTutorial, function() player:setWarpDrive(true) end)
 addToSequence(helmsTutorial, [[First, let us try the warp drive.
 
 It works almost the same as the impulse drive, but can only move forwards. However, much faster at a greater energy use.
-Use the warp drive to move at least 30km away from your starting point.]], function() return distance(player, 0, 0) > 30000 end)
+Use the warp drive to move more than 30km away from this starting point.]], function() return distance(player, 0, 0) > 30000 end)
 addToSequence(helmsTutorial, function() player:setWarpDrive(false):setJumpDrive(true):setPosition(0, 0) end)
 addToSequence(helmsTutorial, [[Now. That was the warp drive. Next up, the jump drive.
 
 The jump drive you need to configure a distance you want to jump. And then you need to initiate it. You jump into the direction where your ship is pointing at the time of which the jump actually happens.
-Use the jump drive to jump at least 30km from your start point, in any direction.]], function() return distance(player, 0, 0) > 30000 end)
+Use the jump drive to jump more than 30km from this starting point, in any direction.]], function() return distance(player, 0, 0) > 30000 end)
 addToSequence(helmsTutorial, [[Notice how your jump drive needs to re-charge after use.
 
 This covers the basics of the helms officer.]])
