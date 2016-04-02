@@ -4,13 +4,14 @@
 GuiSelfDestructButton::GuiSelfDestructButton(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
+    setIcon("gui/icons/self-destruct");
     activate_button = new GuiButton(this, id + "_ACTIVATE", "Self destruct", [this](){
         activate_button->hide();
         confirm_button->show();
         cancel_button->show();
     });
     activate_button->setSize(GuiElement::GuiSizeMax, 50);
-    
+
     confirm_button = new GuiButton(this, id + "_CONFIRM", "Confirm!", [this](){
         confirm_button->hide();
         if (my_spaceship)
