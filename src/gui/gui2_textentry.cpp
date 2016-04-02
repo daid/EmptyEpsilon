@@ -8,7 +8,10 @@ GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
 
 void GuiTextEntry::onDraw(sf::RenderTarget& window)
 {
-    drawStretched(window, rect, "gui/TextEntryBackground", selectColor(colorConfig.text_entry.background));
+    if (focus)
+        drawStretched(window, rect, "gui/TextEntryBackground.focused", selectColor(colorConfig.text_entry.background));
+    else
+        drawStretched(window, rect, "gui/TextEntryBackground", selectColor(colorConfig.text_entry.background));
     drawText(window, sf::FloatRect(rect.left + 16, rect.top, rect.width, rect.height), text + (focus ? "_" : ""), ACenterLeft, text_size, main_font, selectColor(colorConfig.text_entry.forground));
 }
 
