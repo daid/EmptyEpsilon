@@ -1,6 +1,7 @@
 #include "gui2_arrowbutton.h"
 #include "gui2_selector.h"
 #include "gui2_label.h"
+#include "gui2_panel.h"
 #include "soundManager.h"
 
 GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
@@ -28,7 +29,7 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
     GuiContainer* top_level = owner;
     while(dynamic_cast<GuiElement*>(top_level) != nullptr)
         top_level = dynamic_cast<GuiElement*>(top_level)->getOwner();
-    popup = new GuiElement(top_level, "");
+    popup = new GuiPanel(top_level, "");
     popup->hide();
 }
 

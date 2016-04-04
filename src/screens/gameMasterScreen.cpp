@@ -21,11 +21,11 @@ GameMasterScreen::GameMasterScreen()
     box_selection_overlay->hide();
     
     (new GuiToggleButton(this, "PAUSE_BUTTON", "Pause", [this](bool value) {
-        if (value)
+        if (!value)
             engine->setGameSpeed(1.0f);
         else
             engine->setGameSpeed(0.0f);
-    }))->setPosition(20, 20, ATopLeft)->setSize(250, 50);
+    }))->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, ATopLeft)->setSize(250, 50);
     
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR", [this](int index, string value) {
         for(P<SpaceObject> obj : targets.getTargets())

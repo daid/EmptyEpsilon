@@ -242,7 +242,7 @@ void ShipSelectionScreen::onReadyClick()
 {
     if (game_master_button->getValue())
     {
-        my_spaceship = NULL;
+        my_spaceship = nullptr;
         my_player_info->setShipId(-1);
         destroy();
         new GameMasterScreen();

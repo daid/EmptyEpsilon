@@ -638,7 +638,7 @@ void GuiElement::drawStretchedV(sf::RenderTarget& window, sf::FloatRect rect, st
     window.draw(a, texture_ptr);
 }
 
-void GuiElement::drawStretchedHV(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color)
+void GuiElement::drawStretchedHV(sf::RenderTarget& window, sf::FloatRect rect, float corner_size, string texture, sf::Color color)
 {
     sf::Texture* texture_ptr = textureManager.getTexture(texture);
     sf::Vector2f texture_size = sf::Vector2f(texture_ptr->getSize());
@@ -647,8 +647,6 @@ void GuiElement::drawStretchedHV(sf::RenderTarget& window, sf::FloatRect rect, s
     for(int n=0; n<8; n++)
         a[n].color = color;
     
-    float corner_size = texture_size.x / 2.0f;
-
     a[0].position = sf::Vector2f(rect.left, rect.top);
     a[1].position = sf::Vector2f(rect.left, rect.top + corner_size);
     a[2].position = sf::Vector2f(rect.left + corner_size, rect.top);
