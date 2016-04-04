@@ -22,6 +22,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsBeingHailedByGM);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsFailed);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsBroken);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsClosed);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsChatOpen);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsChatOpenToGM);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsChatOpenToPlayer);
@@ -290,7 +291,7 @@ void PlayerSpaceship::update(float delta)
                     {
                         comms_open_delay = PlayerSpaceship::comms_channel_open_time;
 
-                        if (playerShip->comms_state == CS_Inactive || playerShip->comms_state == CS_ChannelFailed || playerShip->comms_state == CS_ChannelBroken)
+                        if (playerShip->comms_state == CS_Inactive || playerShip->comms_state == CS_ChannelFailed || playerShip->comms_state == CS_ChannelBroken || playerShip->comms_state == CS_ChannelClosed)
                         {
                             playerShip->comms_state = CS_BeingHailed;
                             playerShip->comms_target = this;
@@ -583,7 +584,7 @@ void PlayerSpaceship::addCommsReply(int32_t id, string message)
 
 bool PlayerSpaceship::hailCommsByGM(string target_name)
 {
-    if (!isCommsInactive() && !isCommsFailed() && !isCommsBroken())
+    if (!isCommsInactive() && !isCommsFailed() && !isCommsBroken() && !isCommsClosed())
         return false;
 
     addToShipLog("Hailed by " + target_name, sf::Color::White);
@@ -623,8 +624,8 @@ void PlayerSpaceship::closeComms()
         if (comms_state == CS_ChannelOpenPlayer && comms_target)
         {
             P<PlayerSpaceship> player_ship = comms_target;
-            player_ship->comms_state = CS_Inactive;
-            player_ship->addToShipLog("Communication channel closed", sf::Color::White);
+            player_ship->comms_state = CS_ChannelClosed;
+            player_ship->addToShipLog("Communication channel closed by other side", sf::Color::White);
         }
         if (comms_state == CS_OpeningChannel && comms_target)
         {
@@ -639,7 +640,10 @@ void PlayerSpaceship::closeComms()
             }
         }
         addToShipLog("Communication channel closed", sf::Color::White);
-        comms_state = CS_Inactive;
+        if (comms_state == CS_ChannelOpenGM)
+            comms_state = CS_ChannelClosed;
+        else
+            comms_state = CS_Inactive;
     }
 }
 
@@ -778,7 +782,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         abortDock();
         break;
     case CMD_OPEN_TEXT_COMM:
-        if (comms_state == CS_Inactive || comms_state == CS_BeingHailed || comms_state == CS_BeingHailedByGM)
+        if (comms_state == CS_Inactive || comms_state == CS_BeingHailed || comms_state == CS_BeingHailedByGM || comms_state == CS_ChannelClosed)
         {
             int32_t id;
             packet >> id;

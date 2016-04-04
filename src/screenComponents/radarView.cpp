@@ -648,6 +648,12 @@ sf::Vector2f GuiRadarView::screenToWorld(sf::Vector2f screen_position)
 
 bool GuiRadarView::onMouseDown(sf::Vector2f position)
 {
+    if (style == Circular || style == CircularMasked)
+    {
+        float radius = std::min(rect.width, rect.height) / 2.0f;
+        if (position - getCenterPoint() > radius)
+            return false;
+    }
     if (mouse_down_func)
         mouse_down_func(screenToWorld(position));
     return true;

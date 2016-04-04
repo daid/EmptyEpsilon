@@ -41,11 +41,12 @@ GameMasterScreen::GameMasterScreen()
         global_message_entry->show();
     }))->setPosition(20, -20, ABottomLeft)->setSize(250, 50);
 
-    (new GuiButton(this, "CREATE_OBJECT_BUTTON", "Create...", [this]() {
+    create_button = new GuiButton(this, "CREATE_OBJECT_BUTTON", "Create...", [this]() {
         object_creation_screen->show();
-        cancel_create_button->show();
-    }))->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
+    });
+    create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
     cancel_create_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
+        create_button->show();
         cancel_create_button->hide();
     });
     cancel_create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
@@ -437,6 +438,8 @@ bool GuiGlobalMessageEntry::onMouseDown(sf::Vector2f position)
 GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
 : GuiOverlay(gm_screen, "OBJECT_CREATE_SCREEN", sf::Color(0, 0, 0, 128))
 {
+    this->gm_screen = gm_screen;
+    
     GuiPanel* box = new GuiPanel(this, "FRAME");
     box->setPosition(0, 0, ACenter)->setSize(1000, 500);
 
@@ -452,35 +455,29 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
     for(string template_name : template_names)
     {
         (new GuiButton(box, "CREATE_STATION_" + template_name, template_name, [this, template_name]() {
-            create_script = "SpaceStation():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + template_name + "\")";
-            this->hide();
+            setCreateScript("SpaceStation():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + template_name + "\")");
         }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
         y += 30;
     }
     
     (new GuiButton(box, "CREATE_WARP_JAMMER", "Warp Jammer", [this]() {
-        create_script = "WarpJammer():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + ")";
-        this->hide();
+        setCreateScript("WarpJammer():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + ")");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
     (new GuiButton(box, "CREATE_MINE", "Mine", [this]() {
-        create_script = "Mine():setFactionId(" + string(faction_selector->getSelectionIndex()) + ")";
-        this->hide();
+        setCreateScript("Mine():setFactionId(" + string(faction_selector->getSelectionIndex()) + ")");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
     (new GuiButton(box, "CREATE_BLACKHOLE", "BlackHole", [this]() {
-        create_script = "BlackHole()";
-        this->hide();
+        setCreateScript("BlackHole()");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
     (new GuiButton(box, "CREATE_NEBULA", "Nebula", [this]() {
-        create_script = "Nebula()";
-        this->hide();
+        setCreateScript("Nebula()");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
     (new GuiButton(box, "CREATE_WORMHOLE", "Worm Hole", [this]() {
-    create_script = "WormHole()";
-    this->hide();
+        setCreateScript("WormHole()");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
     y = 20;
@@ -488,8 +485,7 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
     std::sort(template_names.begin(), template_names.end());
     GuiListbox* listbox = new GuiListbox(box, "CREATE_SHIPS", [this](int index, string value)
     {
-        create_script = "CpuShip():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + value + "\"):orderRoaming()";
-        this->hide();
+        setCreateScript("CpuShip():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + value + "\"):orderRoaming()");
     });
     listbox->setTextSize(20)->setButtonHeight(30)->setPosition(-20, 20, ATopRight)->setSize(300, 460);
     for(string template_name : template_names)
@@ -497,9 +493,8 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
         listbox->addEntry(template_name, template_name);
     }
     
-    (new GuiButton(box, "CLOSE_BUTTON", "Cancel", [this, gm_screen]() {
+    (new GuiButton(box, "CLOSE_BUTTON", "Cancel", [this]() {
         create_script = "";
-        gm_screen->cancel_create_button->hide();
         this->hide();
     }))->setPosition(20, -20, ABottomLeft)->setSize(300, 50);
 }
@@ -507,6 +502,14 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
 bool GuiObjectCreationScreen::onMouseDown(sf::Vector2f position)
 {   //Catch clicks.
     return true;
+}
+
+void GuiObjectCreationScreen::setCreateScript(string script)
+{
+    create_script = script;
+    gm_screen->create_button->hide();
+    gm_screen->cancel_create_button->show();
+    hide();
 }
 
 void GuiObjectCreationScreen::createObject(sf::Vector2f position)
