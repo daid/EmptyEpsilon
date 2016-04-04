@@ -26,7 +26,7 @@ ServerCreationScreen::ServerCreationScreen()
         selectScenario(value);
     });
     scenario_list->setPosition(-50, 100, ATopRight)->setSize(460, 300);
-    (new GuiBox(this, "SCENARIO_DESCRIPTION_BOX"))->setPosition(-50, 50 + 360, ATopRight)->setSize(460, 200);
+    (new GuiPanel(this, "SCENARIO_DESCRIPTION_BOX"))->setPosition(-50, 50 + 360, ATopRight)->setSize(460, 200);
     scenario_description = new GuiScrollText(this, "SCENARIO_DESCRIPTION", "");
     scenario_description->setTextSize(20)->setPosition(-80, 60 + 360, ATopRight)->setSize(400, 180);
 
@@ -39,7 +39,7 @@ ServerCreationScreen::ServerCreationScreen()
     variation_selection->setPosition(-50, 380 + 230, ATopRight)->setSize(300, 50);
     (new GuiLabel(variation_container, "VARIATION_LABEL", "Variation:", 30))->setAlignment(ACenterRight)->setPosition(-350, 380 + 230, ATopRight)->setSize(250, 50);
 
-    (new GuiBox(variation_container, "VARIATION_DESCRIPTION_BOX"))->setPosition(-50, 380 + 230 + 50, ATopRight)->setSize(460, 120);
+    (new GuiPanel(variation_container, "VARIATION_DESCRIPTION_BOX"))->setPosition(-50, 380 + 230 + 50, ATopRight)->setSize(460, 120);
     variation_description = new GuiScrollText(variation_container, "VARIATION_DESCRIPTION", "");
     variation_description->setTextSize(20)->setPosition(-80, 60 + 380 + 230, ATopRight)->setSize(400, 100);
 
