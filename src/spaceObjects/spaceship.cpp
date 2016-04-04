@@ -58,7 +58,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Note: Icon is only shown after scanning, before the ship is scanned it is always shown as an arrow.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadarTrace);
 
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, addFactionBroadcast);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, addBroadcast);
 }
 
 /* Define script conversion function for the EMainScreenSetting enum. */
@@ -919,22 +919,42 @@ void SpaceShip::setWeaponTubeExclusiveFor(int index, EMissileWeapons type)
     weapon_tube[index].allowLoadOf(type);
 }
 
-void SpaceShip::addFactionBroadcast(string message)
+void SpaceShip::addBroadcast(int threshold, string message)
 {
-    sf::Color color;
+    if ((threshold < 0) || (threshold > 2))     //if an invalid threshold is defined, alert and default to ally only
+    {
+        LOG(ERROR) << "Invalid threshold: " << threshold;
+        threshold = 0;
+    }
+
+    sf::Color color = sf::Color(255, 204, 51); //default : yellow, should never be seen
+    bool addtolog = 0;
 
     for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
     {
         P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
-        if ((ship) && !(factionInfo[this->getFactionId()]->states[ship->getFactionId()] == FVF_Enemy))
+        if (ship)
         {
-            if(this->getFaction() == ship->getFaction())
-                color = sf::Color(153,255,153); //same faction
-            else if (factionInfo[this->getFactionId()]->states[ship->getFactionId()] == FVF_Friendly)
-                color = sf::Color(102,178,255); //ally
-            else
-                color = sf::Color(128,128,128); //neutral
-            ship->addToShipLog(message, color);
+            if (factionInfo[this->getFactionId()]->states[ship->getFactionId()] == FVF_Friendly)
+            {
+                color = sf::Color(154,255,154); //ally = light green
+                addtolog = 1;
+            }
+            else if ((factionInfo[this->getFactionId()]->states[ship->getFactionId()] == FVF_Neutral) && ((threshold >= FVF_Neutral)))
+            {
+                color = sf::Color(128,128,128); //neutral = grey
+                addtolog = 1;
+            }
+            else if ((factionInfo[this->getFactionId()]->states[ship->getFactionId()] == FVF_Enemy) && (threshold == FVF_Enemy))
+            {
+                color = sf::Color(255,102,102); //enemy = light red
+                addtolog = 1;
+            }
+
+            if (addtolog)
+            {
+                ship->addToShipLog(message, color);
+            }
         }
     }
 }

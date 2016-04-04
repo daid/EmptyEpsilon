@@ -328,7 +328,7 @@ public:
 
     void setRadarTrace(string trace) { radar_trace = trace; }
 
-    void addFactionBroadcast(string message);
+    void addBroadcast(int threshold, string message);
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);
