@@ -15,6 +15,7 @@ private:
 
     GuiPanel* no_response_box;
     GuiPanel* broken_box;
+    GuiPanel* closed_box;
     
     GuiPanel* chat_comms_box;
     GuiTextEntry* chat_comms_message_entry;

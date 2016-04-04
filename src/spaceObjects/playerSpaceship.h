@@ -38,7 +38,8 @@ enum ECommsState
     CS_ChannelOpenPlayer,
     CS_ChannelOpenGM,
     CS_ChannelFailed,
-    CS_ChannelBroken
+    CS_ChannelBroken,
+    CS_ChannelClosed
 };
 
 enum EAlertLevel
@@ -130,6 +131,7 @@ public:
     bool isCommsBeingHailedByGM() { return comms_state == CS_BeingHailedByGM; }
     bool isCommsFailed() { return comms_state == CS_ChannelFailed; }
     bool isCommsBroken() { return comms_state == CS_ChannelBroken; }
+    bool isCommsClosed() { return comms_state == CS_ChannelClosed; }
     bool isCommsChatOpen() { return comms_state == CS_ChannelOpenPlayer || comms_state == CS_ChannelOpenGM; }
     bool isCommsChatOpenToGM() { return comms_state == CS_ChannelOpenGM; }
     bool isCommsChatOpenToPlayer() { return comms_state == CS_ChannelOpenPlayer; }
