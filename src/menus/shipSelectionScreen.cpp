@@ -5,7 +5,7 @@
 #include "gameGlobalInfo.h"
 #include "screens/windowScreen.h"
 #include "screens/topDownScreen.h"
-#include "screens/gameMasterScreen.h"
+#include "screens/gm/gameMasterScreen.h"
 
 ShipSelectionScreen::ShipSelectionScreen()
 {

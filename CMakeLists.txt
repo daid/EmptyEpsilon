@@ -61,7 +61,6 @@ set(SOURCES
 	src/menus/autoConnectScreen.cpp
 	src/screens/crewStationScreen.cpp
 	src/screens/topDownScreen.cpp
-	src/screens/gameMasterScreen.cpp
 	src/screens/windowScreen.cpp
 	src/screens/mainScreen.cpp
 	src/screens/crew4/operationsScreen.cpp
@@ -77,6 +76,7 @@ set(SOURCES
 	src/screens/extra/powerManagement.cpp
 	src/screens/extra/databaseScreen.cpp
 	src/screens/extra/shipLogScreen.cpp
+	src/screens/gm/gameMasterScreen.cpp
 	src/screenComponents/missileTubeControls.cpp
 	src/screenComponents/selfDestructIndicator.cpp
 	src/screenComponents/viewport3d.cpp

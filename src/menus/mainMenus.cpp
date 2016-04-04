@@ -11,7 +11,7 @@
 #include "menus/serverCreationScreen.h"
 #include "menus/optionsMenu.h"
 #include "menus/serverBrowseMenu.h"
-#include "screens/gameMasterScreen.h"
+#include "screens/gm/gameMasterScreen.h"
 
 MainMenu::MainMenu()
 {
