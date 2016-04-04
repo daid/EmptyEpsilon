@@ -45,6 +45,7 @@ private:
     sf::Vector2f drag_start_position;
     sf::Vector2f drag_previous_position;
 public:
+    GuiButton* create_button;
     GuiButton* cancel_create_button;
     GuiHailingPlayerShip* hailing_player_dialog;
     GuiPlayerChat* player_chat;
@@ -77,10 +78,13 @@ class GuiObjectCreationScreen : public GuiOverlay
 private:
     string create_script;
     GuiSelector* faction_selector;
+    GameMasterScreen* gm_screen;
 public:
     GuiObjectCreationScreen(GameMasterScreen* gm_screen);
     
     virtual bool onMouseDown(sf::Vector2f position);
+    
+    void setCreateScript(string script);
     
     void createObject(sf::Vector2f position);
 };
