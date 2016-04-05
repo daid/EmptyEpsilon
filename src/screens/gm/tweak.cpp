@@ -21,6 +21,8 @@ GuiShipTweak::GuiShipTweak(GuiContainer* owner)
     list->addEntry("Shields", "");
     pages.push_back(new GuiShipTweakMissileWeapons(this));
     list->addEntry("Missiles", "");
+    pages.push_back(new GuiShipTweakBeamweapons(this));
+    list->addEntry("Beams", "");
     pages.push_back(new GuiShipTweakSystems(this));
     list->addEntry("Systems", "");
 
@@ -228,6 +230,72 @@ void GuiShipTweakShields::open(P<SpaceShip> target)
         shield_max_slider[n]->setValue(target->shield_max[n]);
         shield_max_slider[n]->clearSnapValues()->addSnapValue(target->ship_template->shield_level[n], 5.0f);
     }
+}
+
+GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
+: GuiTweakPage(owner)
+{
+    beam_index = 0;
+
+    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    left_col->setPosition(20, 20, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+    GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    right_col->setPosition(-20, 20, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+    
+    GuiSelector* index_selector = new GuiSelector(left_col, "", [this](int index, string value)
+    {
+        beam_index = index;
+    });
+    index_selector->setSize(GuiElement::GuiSizeMax, 40);
+    for(int n=0; n<max_beam_weapons; n++)
+        index_selector->addEntry("Beam: " + string(n + 1), "");
+    index_selector->setSelectionIndex(0);
+
+    (new GuiLabel(right_col, "", "Arc:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    arc_slider = new GuiSlider(right_col, "", 0.0, 360, 0.0, [this](float value) {
+        target->beam_weapons[beam_index].setArc(roundf(value));
+    });
+    arc_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(right_col, "", "Direction:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    direction_slider = new GuiSlider(right_col, "", -180.0, 180, 0.0, [this](float value) {
+        target->beam_weapons[beam_index].setDirection(roundf(value));
+    });
+    direction_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(right_col, "", "Range:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    range_slider = new GuiSlider(right_col, "", 0.0, 5000.0, 0.0, [this](float value) {
+        target->beam_weapons[beam_index].setRange(value);
+    });
+    range_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(right_col, "", "Cycle time:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    cycle_time_slider = new GuiSlider(right_col, "", 0.1, 20.0, 0.0, [this](float value) {
+        target->beam_weapons[beam_index].setCycleTime(value);
+    });
+    cycle_time_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(right_col, "", "Cycle time:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    damage_slider = new GuiSlider(right_col, "", 0.1, 50.0, 0.0, [this](float value) {
+        target->beam_weapons[beam_index].setDamage(value);
+    });
+    damage_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+}
+
+void GuiShipTweakBeamweapons::onDraw(sf::RenderTarget& window)
+{
+    target->drawOnRadar(window, sf::Vector2f(rect.left + rect.width / 2.0f, rect.top + rect.height * 0.8), 300.0f / 5000.0f, false);
+
+    arc_slider->setValue(target->beam_weapons[beam_index].getArc());
+    direction_slider->setValue(sf::angleDifference(0.0f, target->beam_weapons[beam_index].getDirection()));
+    range_slider->setValue(target->beam_weapons[beam_index].getRange());
+    cycle_time_slider->setValue(target->beam_weapons[beam_index].getCycleTime());
+    damage_slider->setValue(target->beam_weapons[beam_index].getDamage());
+}
+
+void GuiShipTweakBeamweapons::open(P<SpaceShip> target)
+{
+    this->target = target;
 }
 
 GuiShipTweakSystems::GuiShipTweakSystems(GuiContainer* owner)

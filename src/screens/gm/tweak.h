@@ -76,6 +76,25 @@ public:
     virtual void open(P<SpaceShip> target) override;
 };
 
+class GuiShipTweakBeamweapons : public GuiTweakPage
+{
+private:
+    P<SpaceShip> target;
+
+    int beam_index;
+    GuiSlider* arc_slider;
+    GuiSlider* direction_slider;
+    GuiSlider* range_slider;
+    GuiSlider* cycle_time_slider;
+    GuiSlider* damage_slider;
+public:
+    GuiShipTweakBeamweapons(GuiContainer* owner);
+
+    virtual void open(P<SpaceShip> target) override;
+
+    virtual void onDraw(sf::RenderTarget& window) override;
+};
+
 class GuiShipTweakSystems : public GuiTweakPage
 {
 private:
