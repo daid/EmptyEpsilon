@@ -202,7 +202,7 @@ string CpuShip::getExportLine()
     case AI_Attack: ret += ":orderAttack(?)"; break;
     case AI_Dock: ret += ":orderDock(?)"; break;
     }
-    return ret;
+    return ret + getScriptExportModificationsOnTemplate();
 }
 
 string getAIOrderString(EAIOrder order)
