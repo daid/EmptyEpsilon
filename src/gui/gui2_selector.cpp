@@ -26,10 +26,7 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
     });
     right->setPosition(0, 0, ATopRight)->setSize(GuiSizeMatchHeight, GuiSizeMax);
     
-    GuiContainer* top_level = owner;
-    while(dynamic_cast<GuiElement*>(top_level) != nullptr)
-        top_level = dynamic_cast<GuiElement*>(top_level)->getOwner();
-    popup = new GuiPanel(top_level, "");
+    popup = new GuiPanel(getTopLevelContainer(), "");
     popup->hide();
 }
 

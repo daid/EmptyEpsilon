@@ -77,6 +77,7 @@ public:
     sf::Vector2f getCenterPoint();
     
     GuiContainer* getOwner();
+    GuiContainer* getTopLevelContainer();
     
     friend class GuiContainer;
     friend class GuiCanvas;

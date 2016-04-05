@@ -1,4 +1,5 @@
 #include "gui2_element.h"
+#include "gui2_canvas.h"
 #include "main.h"
 
 GuiElement::GuiElement(GuiContainer* owner, string id)
@@ -10,7 +11,15 @@ GuiElement::GuiElement(GuiContainer* owner, string id)
 GuiElement::~GuiElement()
 {
     if (owner)
+    {
         owner->elements.remove(this);
+        //Find the owning cancas, as we need to remove ourselves if we are the focus or click element.
+        GuiCanvas* canvas = dynamic_cast<GuiCanvas*>(getTopLevelContainer());
+        if (canvas)
+        {
+            canvas->unfocusElement(this);
+        }
+    }
 }
 
 bool GuiElement::onMouseDown(sf::Vector2f position)
@@ -172,6 +181,14 @@ sf::Vector2f GuiElement::getCenterPoint()
 GuiContainer* GuiElement::getOwner()
 {
     return owner;
+}
+
+GuiContainer* GuiElement::getTopLevelContainer()
+{
+    GuiContainer* top_level = owner;
+    while(dynamic_cast<GuiElement*>(top_level) != nullptr)
+        top_level = dynamic_cast<GuiElement*>(top_level)->getOwner();
+    return top_level;
 }
 
 void GuiElement::updateRect(sf::FloatRect window_rect)

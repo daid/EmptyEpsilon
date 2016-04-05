@@ -23,6 +23,9 @@ public:
     
     virtual void onClick(sf::Vector2f mouse_position);
     virtual void onKey(sf::Keyboard::Key key, int unicode);
+    
+    //Called when an element is destroyed in this tree.
+    void unfocusElement(GuiElement* element);
 };
 
 #endif//GUI2_CANVAS_H
