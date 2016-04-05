@@ -77,6 +77,7 @@ set(SOURCES
 	src/screens/extra/databaseScreen.cpp
 	src/screens/extra/shipLogScreen.cpp
 	src/screens/gm/gameMasterScreen.cpp
+	src/screens/gm/tweak.cpp
 	src/screenComponents/missileTubeControls.cpp
 	src/screenComponents/selfDestructIndicator.cpp
 	src/screenComponents/viewport3d.cpp

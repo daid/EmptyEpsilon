@@ -1,6 +1,7 @@
 #include "main.h"
 #include "gameGlobalInfo.h"
 #include "gameMasterScreen.h"
+#include "tweak.h"
 #include "menus/shipSelectionScreen.h"
 #include "spaceObjects/cpuShip.h"
 #include "spaceObjects/spaceStation.h"
@@ -51,17 +52,6 @@ GameMasterScreen::GameMasterScreen()
     });
     cancel_create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
 
-    ship_retrofit_button = new GuiButton(this, "RETROFIT_SHIP", "Retrofit", [this]() {
-        for(P<SpaceObject> obj : targets.getTargets())
-        {
-            if (P<SpaceShip>(obj))
-            {
-                ship_retrofit_dialog->open(obj);
-                break;
-            }
-        }
-    });
-    ship_retrofit_button->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->hide();
     ship_tweak_button = new GuiButton(this, "TWEAK_SHIP", "Tweak", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
         {
@@ -72,7 +62,7 @@ GameMasterScreen::GameMasterScreen()
             }
         }
     });
-    ship_tweak_button->setPosition(20, -170, ABottomLeft)->setSize(250, 50)->hide();
+    ship_tweak_button->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->hide();
     player_comms_hail = new GuiButton(this, "HAIL_PLAYER", "Hail ship", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
             if (P<PlayerSpaceship>(obj))
@@ -80,7 +70,7 @@ GameMasterScreen::GameMasterScreen()
         if (hail_player_dialog->player)
             hail_player_dialog->show();
     });
-    player_comms_hail->setPosition(20, -220, ABottomLeft)->setSize(250, 50)->hide();
+    player_comms_hail->setPosition(20, -170, ABottomLeft)->setSize(250, 50)->hide();
     
     info_layout = new GuiAutoLayout(this, "INFO_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     info_layout->setPosition(-20, 20, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
@@ -132,8 +122,6 @@ GameMasterScreen::GameMasterScreen()
     hailing_player_dialog->hide();
     player_chat = new GuiPlayerChat(this);
     player_chat->hide();
-    ship_retrofit_dialog = new GuiShipRetrofit(this);
-    ship_retrofit_dialog->hide();
     ship_tweak_dialog = new GuiShipTweak(this);
     ship_tweak_dialog->hide();
 
@@ -174,7 +162,6 @@ void GameMasterScreen::update(float delta)
                 has_player_ship = true;
         }
     }
-    ship_retrofit_button->setVisible(has_ship);
     ship_tweak_button->setVisible(has_ship);
     order_layout->setVisible(has_cpu_ship);
     player_comms_hail->setVisible(has_player_ship);
@@ -641,169 +628,4 @@ void GuiPlayerChat::onDraw(sf::RenderTarget& window)
     chat_text->setText(player->getCommsIncommingMessage());
     
     GuiBox::onDraw(window);
-}
-
-GuiShipRetrofit::GuiShipRetrofit(GuiContainer* owner)
-: GuiBox(owner, "SHIP_RETROFIT_DIALOG")
-{
-    setPosition(0, -100, ABottomCenter);
-    setSize(800, 600);
-    fill();
-    
-    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_col->setPosition(20, 20, ATopLeft)->setSize(300, 600);
-    
-    type_name = new GuiTextEntry(left_col, "TYPE_NAME", "???");
-    type_name->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    type_name->callback([this](string text) {
-        target->setTypeName(text);
-    });
-    
-    warp_selector = new GuiSelector(left_col, "", [this](int index, string value) {
-        target->setWarpDrive(index != 0);
-    });
-    warp_selector->setTextSize(20)->setOptions({"WarpDrive: No", "WarpDrive: Yes"})->setSize(GuiElement::GuiSizeMax, 30);
-    jump_selector = new GuiSelector(left_col, "", [this](int index, string value) {
-        target->setJumpDrive(index != 0);
-    });
-    jump_selector->setTextSize(20)->setOptions({"JumpDrive: No", "JumpDrive: Yes"})->setSize(GuiElement::GuiSizeMax, 30);
-    
-    (new GuiLabel(left_col, "", "Impulse speed:", 30))->setSize(GuiElement::GuiSizeMax, 30);
-    impulse_speed_slider = new GuiSlider(left_col, "", 0.0, 250, 0.0, [this](float value) {
-        target->impulse_max_speed = value;
-    });
-    impulse_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
-    
-    (new GuiLabel(left_col, "", "Turn speed:", 30))->setSize(GuiElement::GuiSizeMax, 30);
-    turn_speed_slider = new GuiSlider(left_col, "", 0.0, 25, 0.0, [this](float value) {
-        target->turn_speed = value;
-    });
-    turn_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
-    
-    (new GuiLabel(left_col, "", "Hull:", 30))->setSize(GuiElement::GuiSizeMax, 30);
-    hull_slider = new GuiSlider(left_col, "", 0.0, 500, 0.0, [this](float value) {
-        target->hull_max = value;
-        target->hull_strength = std::min(target->hull_strength, target->hull_max);
-    });
-    hull_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
-
-    (new GuiLabel(left_col, "", "Front shield:", 30))->setSize(GuiElement::GuiSizeMax, 30);
-    front_shield_slider = new GuiSlider(left_col, "", 0.0, 500, 0.0, [this](float value) {
-        target->shield_max[0] = value;
-        target->shield_level[0] = std::min(target->shield_level[0], target->shield_max[0]);
-    });
-    front_shield_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
-
-    (new GuiLabel(left_col, "", "Rear shield:", 30))->setSize(GuiElement::GuiSizeMax, 30);
-    rear_shield_slider = new GuiSlider(left_col, "", 0.0, 500, 0.0, [this](float value) {
-        target->shield_max[1] = value;
-        target->shield_level[1] = std::min(target->shield_level[1], target->shield_max[1]);
-    });
-    rear_shield_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
-    
-    missile_tube_amount_selector = new GuiSelector(left_col, "", [this](int index, string value) {
-        target->weapon_tube_count = index;
-    });
-    for(int n=0; n<max_weapon_tubes; n++)
-        missile_tube_amount_selector->addEntry("Missile tubes: " + string(n), "");
-    missile_tube_amount_selector->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    
-    for(int n=0; n<MW_Count; n++)
-    {
-        missile_storage_amount_selector[n] = new GuiSelector(left_col, "", [this, n](int index, string value) {
-            int diff = index - target->weapon_storage_max[n];
-            target->weapon_storage_max[n] += diff;
-            target->weapon_storage[n] = std::max(0, target->weapon_storage[n] + diff);
-        });
-        for(int m=0; m<50; m++)
-            missile_storage_amount_selector[n]->addEntry(getMissileWeaponName(EMissileWeapons(n)) + ": " + string(m), "");
-        missile_storage_amount_selector[n]->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    }
-
-    (new GuiButton(this, "CLOSE_BUTTON", "Close", [this]() {
-        hide();
-    }))->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
-}
-
-bool GuiShipRetrofit::onMouseDown(sf::Vector2f position)
-{
-    return true;
-}
-
-void GuiShipRetrofit::open(P<SpaceShip> target)
-{
-    this->target = target;
-    
-    type_name->setText(target->getTypeName());
-    warp_selector->setSelectionIndex(target->has_warp_drive ? 1 : 0);
-    jump_selector->setSelectionIndex(target->hasJumpDrive() ? 1 : 0);
-    impulse_speed_slider->setValue(target->impulse_max_speed);
-    impulse_speed_slider->clearSnapValues()->addSnapValue(target->ship_template->impulse_speed, 5.0f);
-    turn_speed_slider->setValue(target->turn_speed);
-    turn_speed_slider->clearSnapValues()->addSnapValue(target->ship_template->turn_speed, 1.0f);
-    hull_slider->setValue(target->hull_max);
-    hull_slider->clearSnapValues()->addSnapValue(target->ship_template->hull, 5.0f);
-    front_shield_slider->setValue(target->shield_max[0]);
-    front_shield_slider->clearSnapValues()->addSnapValue(target->ship_template->shield_level[0], 5.0f);    ///TOFIX: Handle different amounts of shields
-    rear_shield_slider->setValue(target->shield_max[1]);
-    rear_shield_slider->clearSnapValues()->addSnapValue(target->ship_template->shield_level[1], 5.0f);
-    missile_tube_amount_selector->setSelectionIndex(target->weapon_tube_count);
-    for(int n=0; n<MW_Count; n++)
-        missile_storage_amount_selector[n]->setSelectionIndex(target->weapon_storage_max[n]);
-    
-    show();
-}
-
-GuiShipTweak::GuiShipTweak(GuiContainer* owner)
-: GuiBox(owner, "SHIP_RETROFIT_DIALOG")
-{
-    setPosition(0, -100, ABottomCenter);
-    setSize(800, 600);
-    fill();
-    
-    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_col->setPosition(20, 20, ATopLeft)->setSize(300, 600);
-    GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right_col->setPosition(-20, 20, ATopRight)->setSize(300, 600);
-    
-    for(int n=0; n<SYS_COUNT; n++)
-    {
-        ESystem system = ESystem(n);
-        (new GuiLabel(left_col, "", getSystemName(system) + " health", 20))->setSize(GuiElement::GuiSizeMax, 30);
-        system_damage[n] = new GuiSlider(left_col, "", -1.0, 1.0, 0.0, [this, n](float value) {
-            target->systems[n].health = value;
-        });
-        system_damage[n]->setSize(GuiElement::GuiSizeMax, 30);
-
-        (new GuiLabel(right_col, "", getSystemName(system) + " heat", 20))->setSize(GuiElement::GuiSizeMax, 30);
-        system_heat[n] = new GuiSlider(right_col, "", 0.0, 1.0, 0.0, [this, n](float value) {
-            target->systems[n].heat_level = value;
-        });
-        system_heat[n]->setSize(GuiElement::GuiSizeMax, 30);
-    }
-
-    (new GuiButton(this, "CLOSE_BUTTON", "Close", [this]() {
-        hide();
-    }))->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
-}
-
-bool GuiShipTweak::onMouseDown(sf::Vector2f position)
-{
-    return true;
-}
-
-void GuiShipTweak::onDraw(sf::RenderTarget& window)
-{
-    GuiBox::onDraw(window);
-    for(int n=0; n<SYS_COUNT; n++)
-    {
-        system_damage[n]->setValue(target->systems[n].health);
-        system_heat[n]->setValue(target->systems[n].heat_level);
-    }
-}
-
-void GuiShipTweak::open(P<SpaceShip> target)
-{
-    this->target = target;
-    show();
 }

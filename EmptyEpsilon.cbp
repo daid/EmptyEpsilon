@@ -679,6 +679,8 @@
 		<Unit filename="src/screens/extra/shipLogScreen.h" />
 		<Unit filename="src/screens/gm/gameMasterScreen.cpp" />
 		<Unit filename="src/screens/gm/gameMasterScreen.h" />
+		<Unit filename="src/screens/gm/tweak.cpp" />
+		<Unit filename="src/screens/gm/tweak.h" />
 		<Unit filename="src/screens/mainScreen.cpp" />
 		<Unit filename="src/screens/mainScreen.h" />
 		<Unit filename="src/screens/topDownScreen.cpp" />
