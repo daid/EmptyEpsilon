@@ -265,7 +265,7 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
 
     (new GuiLabel(right_col, "", "Range:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     range_slider = new GuiSlider(right_col, "", 0.0, 5000.0, 0.0, [this](float value) {
-        target->beam_weapons[beam_index].setRange(value);
+        target->beam_weapons[beam_index].setRange(roundf(value / 100) * 100);
     });
     range_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
