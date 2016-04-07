@@ -16,16 +16,16 @@
 MainMenu::MainMenu()
 {
     constexpr float logo_size = 256;
+    constexpr float logo_size_y = 256;
+    constexpr float logo_size_x = 1024;
     constexpr float title_y = 160;
 
     new GuiOverlay(this, "", colorConfig.background);
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
 
-    (new GuiLabel(this, "TITLE_A", "Empty", 100))->setBold()->setAlignment(ACenterRight)->setPosition(-logo_size/2, title_y, ATopCenter)->setSize(0, 300);
-    (new GuiLabel(this, "TITLE_B", "Epsilon", 100))->setAlignment(ACenterLeft)->setPosition(logo_size/2, title_y, ATopCenter)->setSize(0, 300);
-    (new GuiImage(this, "LOGO", "logo_white"))->setPosition(0, title_y, ATopCenter)->setSize(logo_size, logo_size);
+    (new GuiImage(this, "LOGO", "logo_full"))->setPosition(0, title_y, ATopCenter)->setSize(logo_size_x, logo_size_y);
     (new GuiLabel(this, "VERSION", "Version: " + string(VERSION_NUMBER), 20))->setPosition(0, title_y + logo_size, ATopCenter)->setSize(0, 20);
-    
+
     (new GuiButton(this, "START_SERVER", "Start server", [this]() {
         new EpsilonServer();
         if (game_server)
