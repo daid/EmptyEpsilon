@@ -234,7 +234,7 @@ function missionTransportWaitForRecovery(delta)
     end
     mission_timer = mission_timer - delta
     if mission_timer < 0 then
-        mission_timer = 40
+        mission_timer = 70
         
         local x, y = transport_target:getPosition()
         local distance = random(8000, 12000)
