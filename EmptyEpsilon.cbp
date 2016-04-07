@@ -481,8 +481,6 @@
 		<Unit filename="src/gui/gui2_arrowbutton.h" />
 		<Unit filename="src/gui/gui2_autolayout.cpp" />
 		<Unit filename="src/gui/gui2_autolayout.h" />
-		<Unit filename="src/gui/gui2_box.cpp" />
-		<Unit filename="src/gui/gui2_box.h" />
 		<Unit filename="src/gui/gui2_button.cpp" />
 		<Unit filename="src/gui/gui2_button.h" />
 		<Unit filename="src/gui/gui2_canvas.cpp" />
