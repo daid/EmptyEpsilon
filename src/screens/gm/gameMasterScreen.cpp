@@ -69,12 +69,9 @@ GameMasterScreen::GameMasterScreen()
         {
             if (P<PlayerSpaceship>(obj))
             {
-                (new GameMasterChatDialog(this, obj))->setSize(300, 300);
-                //hail_player_dialog->player = obj;
+                (new GameMasterChatDialog(chat_layer, obj))->setPosition(main_radar->worldToScreen(obj->getPosition()))->setSize(300, 300);
             }
         }
-        //if (hail_player_dialog->player)
-        //    hail_player_dialog->show();
     });
     player_comms_hail->setPosition(20, -170, ABottomLeft)->setSize(250, 50)->hide();
     
@@ -121,6 +118,9 @@ GameMasterScreen::GameMasterScreen()
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderDefendLocation(obj->getPosition());
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
+
+    chat_layer = new GuiElement(this, "");
+    chat_layer->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     ship_tweak_dialog = new GuiShipTweak(this);
     ship_tweak_dialog->hide();

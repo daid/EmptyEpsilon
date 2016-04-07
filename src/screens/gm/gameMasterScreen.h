@@ -16,6 +16,7 @@ private:
     GuiOverlay* box_selection_overlay;
     GuiSelector* faction_selector;
     
+    GuiElement* chat_layer;
     GuiGlobalMessageEntry* global_message_entry;
     GuiObjectCreationScreen* object_creation_screen;
     GuiShipTweak* ship_tweak_dialog;

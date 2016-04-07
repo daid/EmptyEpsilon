@@ -2,7 +2,7 @@
 #include "spaceObjects/playerSpaceship.h"
 
 GameMasterChatDialog::GameMasterChatDialog(GuiContainer* owner, P<PlayerSpaceship> player)
-: GuiResizableDialog(owner, "", "CHAT!")
+: GuiResizableDialog(owner, "", "")
 {
     this->player = player;
     
