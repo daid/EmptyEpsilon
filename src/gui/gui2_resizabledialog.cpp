@@ -51,6 +51,15 @@ void GuiResizableDialog::onDraw(sf::RenderTarget& window)
     title_bar->setSize(rect.width - 25 - 50, title_bar_height);
     contents->setSize(rect.width - resize_icon_size, rect.height - title_bar_height - resize_icon_size / 2.0f);
     
+    if (rect.left < -50)
+        setPosition(-50, getPositionOffset().y);
+    if (rect.top < -(title_bar_height / 2.0f))
+        setPosition(getPositionOffset().x, -(title_bar_height / 2.0f));
+    if (rect.left > window.getView().getSize().x - 50)
+        setPosition(window.getView().getSize().x - 50, getPositionOffset().y);
+    if (rect.top > window.getView().getSize().y - title_bar_height)
+        setPosition(getPositionOffset().x, window.getView().getSize().y - title_bar_height);
+    
     if (minimized)
         return;
     
