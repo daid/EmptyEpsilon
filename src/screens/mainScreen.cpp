@@ -84,7 +84,7 @@ void ScreenMainScreen::update(float delta)
         if (first_person)
         {
             camera_position = targetCameraPosition;
-            camera_yaw += target_camera_yaw;
+            camera_yaw = target_camera_yaw;
         }
         else
         {
