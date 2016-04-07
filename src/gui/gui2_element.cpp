@@ -308,24 +308,29 @@ void GuiElement::drawText(sf::RenderTarget& window, sf::FloatRect rect, string t
     sf::Text textElement(text, *font, font_size);
     float y = 0;
     float x = 0;
+    
+    //The "base line" of the text draw is the "Y position where the text is drawn" + font_size.
+    //The height of normal text is 70% of the font_size.
+    //So use those properties to align the text. Depending on the localbounds does not work.
     switch(align)
     {
     case ATopLeft:
     case ATopRight:
     case ATopCenter:
-        y = rect.top - textElement.getLocalBounds().top;
+        y = rect.top - 0.3 * font_size;
         break;
     case ABottomLeft:
     case ABottomRight:
     case ABottomCenter:
-        y = rect.top + rect.height - (textElement.getLocalBounds().height + textElement.getLocalBounds().top);
+        y = rect.top + rect.height - font_size;
         break;
     case ACenterLeft:
     case ACenterRight:
     case ACenter:
-        y = rect.top + rect.height / 2.0 - (textElement.getLocalBounds().height + textElement.getLocalBounds().top) / 2.0 - font_size / 8.0;
+        y = rect.top + rect.height / 2.0 - font_size + font_size * 0.35;
         break;
     }
+    
     switch(align)
     {
     case ATopLeft:
