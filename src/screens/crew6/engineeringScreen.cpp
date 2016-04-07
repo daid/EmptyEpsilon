@@ -65,6 +65,17 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
         info.layout->moveToBack();
         system_rows.push_back(info);
     }
+    
+    system_rows[SYS_Reactor].button->setIcon("icon_generator");
+    system_rows[SYS_BeamWeapons].button->setIcon("icon_beam");
+    system_rows[SYS_MissileSystem].button->setIcon("icon_missile");
+    system_rows[SYS_Maneuver].button->setIcon("icon_maneuver");
+    system_rows[SYS_Impulse].button->setIcon("icon_impulse");
+    system_rows[SYS_Warp].button->setIcon("icon_warp");
+    system_rows[SYS_JumpDrive].button->setIcon("icon_warp");
+    system_rows[SYS_FrontShield].button->setIcon("icon_front_shield");
+    system_rows[SYS_RearShield].button->setIcon("icon_rear_shield");
+
 
     GuiPanel* box = new GuiPanel(this, "POWER_COOLANT_BOX");
     box->setPosition(-20, -20, ABottomRight)->setSize(270, 400);
