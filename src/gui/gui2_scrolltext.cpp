@@ -15,6 +15,11 @@ GuiScrollText* GuiScrollText::setText(string text)
     return this;
 }
 
+string GuiScrollText::getText()
+{
+    return text;
+}
+
 GuiScrollText* GuiScrollText::setScrollbarWidth(float width)
 {
     scrollbar->setSize(width, GuiElement::GuiSizeMax);

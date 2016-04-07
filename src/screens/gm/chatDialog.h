@@ -15,6 +15,8 @@ public:
 private:
     P<PlayerSpaceship> player;
 
+    bool notification;
+
     GuiTextEntry* text_entry;
     GuiScrollText* chat_text;
     

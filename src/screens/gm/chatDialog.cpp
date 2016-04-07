@@ -24,6 +24,8 @@ GameMasterChatDialog::GameMasterChatDialog(GuiContainer* owner, P<PlayerSpaceshi
     chat_text->enableAutoScrollDown()->setScrollbarWidth(30);
 
     min_size.y += 100;
+    
+    notification = false;
 }
 
 void GameMasterChatDialog::onDraw(sf::RenderTarget& window)
@@ -35,6 +37,9 @@ void GameMasterChatDialog::onDraw(sf::RenderTarget& window)
         disableComms("Target - Destroyed");
         return;
     }
+    
+    if (!isMinimized())
+        notification = false;
     
     switch(player->getCommsState())
     {
@@ -57,16 +62,25 @@ void GameMasterChatDialog::onDraw(sf::RenderTarget& window)
         disableComms(player->getCallSign() + " - Communicating with " + player->getCommsTargetName());
         break;
     case CS_ChannelOpenGM:
-        setTitle(player->getCallSign() + " - Communicating as " + player->getCommsTargetName());
+        if (notification)
+            setTitle("**" + player->getCallSign() + " - Communicating as " + player->getCommsTargetName() + "**");
+        else
+            setTitle(player->getCallSign() + " - Communicating as " + player->getCommsTargetName());
         chat_text->enable();
         text_entry->enable();
-        chat_text->setText(player->getCommsIncommingMessage());
+        if (chat_text->getText() != player->getCommsIncommingMessage())
+        {
+            chat_text->setText(player->getCommsIncommingMessage());
+            notification = true;
+        }
         break;
     }
 }
 
 void GameMasterChatDialog::disableComms(string title)
 {
+    if (notification)
+        title = "**" + title + "**";
     setTitle(title);
     chat_text->disable();
     text_entry->enable();

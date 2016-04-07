@@ -39,6 +39,11 @@ void GuiResizableDialog::minimize(bool minimize)
     minimized = minimize;
 }
 
+bool GuiResizableDialog::isMinimized()
+{
+    return minimized;
+}
+
 void GuiResizableDialog::setTitle(string title)
 {
     title_bar->setText(title);
