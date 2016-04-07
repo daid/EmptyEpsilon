@@ -224,6 +224,7 @@ function missionStopTransport(delta)
         mission_timer = 40
         
         transport_recovery_team = CpuShip():setTemplate("Tug"):setFaction("Human Navy"):setPosition(-22000, 30000)
+        transport_recovery_team:setCallSign("RTRV"):setScanned(true)
         transport_recovery_team:orderFlyTowardsBlind(transport_target:getPosition()):setCommsScript("")
     end
 end
