@@ -507,6 +507,8 @@
 		<Unit filename="src/gui/gui2_panel.h" />
 		<Unit filename="src/gui/gui2_progressbar.cpp" />
 		<Unit filename="src/gui/gui2_progressbar.h" />
+		<Unit filename="src/gui/gui2_resizabledialog.cpp" />
+		<Unit filename="src/gui/gui2_resizabledialog.h" />
 		<Unit filename="src/gui/gui2_rotationdial.cpp" />
 		<Unit filename="src/gui/gui2_rotationdial.h" />
 		<Unit filename="src/gui/gui2_scrollbar.cpp" />
@@ -677,6 +679,8 @@
 		<Unit filename="src/screens/extra/powerManagement.h" />
 		<Unit filename="src/screens/extra/shipLogScreen.cpp" />
 		<Unit filename="src/screens/extra/shipLogScreen.h" />
+		<Unit filename="src/screens/gm/chatDialog.cpp" />
+		<Unit filename="src/screens/gm/chatDialog.h" />
 		<Unit filename="src/screens/gm/gameMasterScreen.cpp" />
 		<Unit filename="src/screens/gm/gameMasterScreen.h" />
 		<Unit filename="src/screens/gm/tweak.cpp" />

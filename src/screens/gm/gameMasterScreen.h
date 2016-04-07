@@ -7,9 +7,6 @@
 
 class GuiGlobalMessageEntry;
 class GuiObjectCreationScreen;
-class GuiHailPlayerShip;
-class GuiHailingPlayerShip;
-class GuiPlayerChat;
 class GuiShipTweak;
 class GameMasterScreen : public GuiCanvas, public Updatable
 {
@@ -21,7 +18,6 @@ private:
     
     GuiGlobalMessageEntry* global_message_entry;
     GuiObjectCreationScreen* object_creation_screen;
-    GuiHailPlayerShip* hail_player_dialog;
     GuiShipTweak* ship_tweak_dialog;
     
     GuiAutoLayout* info_layout;
@@ -44,8 +40,6 @@ private:
 public:
     GuiButton* create_button;
     GuiButton* cancel_create_button;
-    GuiHailingPlayerShip* hailing_player_dialog;
-    GuiPlayerChat* player_chat;
 
     GameMasterScreen();
     
@@ -84,45 +78,6 @@ public:
     void setCreateScript(string script);
     
     void createObject(sf::Vector2f position);
-};
-
-class GuiHailPlayerShip : public GuiBox
-{
-private:
-    GuiTextEntry* caller_entry;
-public:
-    P<PlayerSpaceship> player;
-
-    GuiHailPlayerShip(GameMasterScreen* owner);
-    
-    virtual bool onMouseDown(sf::Vector2f position);
-};
-
-class GuiHailingPlayerShip : public GuiBox
-{
-private:
-    GameMasterScreen* owner;
-public:
-    P<PlayerSpaceship> player;
-    
-    GuiHailingPlayerShip(GameMasterScreen* owner);
-    
-    virtual bool onMouseDown(sf::Vector2f position);
-    virtual void onDraw(sf::RenderTarget& window);
-};
-
-class GuiPlayerChat : public GuiBox
-{
-private:
-    GuiTextEntry* message_entry;
-    GuiScrollText* chat_text;
-public:
-    P<PlayerSpaceship> player;
-    
-    GuiPlayerChat(GameMasterScreen* owner);
-    
-    virtual bool onMouseDown(sf::Vector2f position);
-    virtual void onDraw(sf::RenderTarget& window);
 };
 
 #endif//GAME_MASTER_SCREEN_H

@@ -664,6 +664,9 @@ void GuiElement::drawStretchedHV(sf::RenderTarget& window, sf::FloatRect rect, f
     for(int n=0; n<8; n++)
         a[n].color = color;
     
+    corner_size = std::min(corner_size, rect.height / 2.0f);
+    corner_size = std::min(corner_size, rect.width / 2.0f);
+    
     a[0].position = sf::Vector2f(rect.left, rect.top);
     a[1].position = sf::Vector2f(rect.left, rect.top + corner_size);
     a[2].position = sf::Vector2f(rect.left + corner_size, rect.top);

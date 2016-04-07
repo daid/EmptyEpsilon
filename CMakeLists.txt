@@ -77,6 +77,7 @@ set(SOURCES
 	src/screens/extra/databaseScreen.cpp
 	src/screens/extra/shipLogScreen.cpp
 	src/screens/gm/gameMasterScreen.cpp
+	src/screens/gm/chatDialog.cpp
 	src/screens/gm/tweak.cpp
 	src/screenComponents/missileTubeControls.cpp
 	src/screenComponents/selfDestructIndicator.cpp
@@ -131,6 +132,7 @@ set(SOURCES
 	src/gui/gui2_scrolltext.cpp
 	src/gui/gui2_advancedscrolltext.cpp
 	src/gui/gui2_button.cpp
+	src/gui/gui2_resizabledialog.cpp
 	src/gui/debugRenderer.cpp
 	src/gui/gui2_element.cpp
 	src/gui/gui2.cpp

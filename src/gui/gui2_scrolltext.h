@@ -19,6 +19,8 @@ public:
 
     GuiScrollText* setText(string text);
     GuiScrollText* setTextSize(float text_size) { this->text_size = text_size; return this; }
+    
+    GuiScrollText* setScrollbarWidth(float width);
 
     virtual void onDraw(sf::RenderTarget& window);
 };
