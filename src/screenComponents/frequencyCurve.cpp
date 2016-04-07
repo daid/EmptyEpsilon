@@ -2,14 +2,14 @@
 #include "spaceObjects/spaceship.h"
 
 GuiFrequencyCurve::GuiFrequencyCurve(GuiContainer* owner, string id, bool frequency_is_beam, bool more_damage_is_positive)
-: GuiBox(owner, id), frequency_is_beam(frequency_is_beam), more_damage_is_positive(more_damage_is_positive)
+: GuiPanel(owner, id), frequency_is_beam(frequency_is_beam), more_damage_is_positive(more_damage_is_positive)
 {
     frequency = -1;
 }
 
 void GuiFrequencyCurve::onDraw(sf::RenderTarget& window)
 {
-    GuiBox::onDraw(window);
+    GuiPanel::onDraw(window);
 
     if (frequency >= 0 && frequency <= SpaceShip::max_frequency)
     {
