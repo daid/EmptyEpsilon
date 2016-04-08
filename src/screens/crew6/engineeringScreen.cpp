@@ -66,15 +66,15 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
         system_rows.push_back(info);
     }
     
-    system_rows[SYS_Reactor].button->setIcon("gui/icons/icon_generator");
-    system_rows[SYS_BeamWeapons].button->setIcon("gui/icons/icon_beam");
+    system_rows[SYS_Reactor].button->setIcon("gui/icons/system_reactor");
+    system_rows[SYS_BeamWeapons].button->setIcon("gui/icons/system_beam");
     system_rows[SYS_MissileSystem].button->setIcon("gui/icons/icon_missile");
     system_rows[SYS_Maneuver].button->setIcon("gui/icons/icon_maneuver");
-    system_rows[SYS_Impulse].button->setIcon("gui/icons/icon_impulse");
-    system_rows[SYS_Warp].button->setIcon("gui/icons/icon_warp");
-    system_rows[SYS_JumpDrive].button->setIcon("gui/icons/icon_warp");
-    system_rows[SYS_FrontShield].button->setIcon("gui/icons/icon_front_shield");
-    system_rows[SYS_RearShield].button->setIcon("gui/icons/icon_rear_shield");
+    system_rows[SYS_Impulse].button->setIcon("gui/icons/system_impulse");
+    system_rows[SYS_Warp].button->setIcon("gui/icons/system_warpdrive");
+    system_rows[SYS_JumpDrive].button->setIcon("gui/icons/system_warpdrive");
+    system_rows[SYS_FrontShield].button->setIcon("gui/icons/shields-fore");
+    system_rows[SYS_RearShield].button->setIcon("gui/icons/shields-aft");
 
 
     GuiPanel* box = new GuiPanel(this, "POWER_COOLANT_BOX");
