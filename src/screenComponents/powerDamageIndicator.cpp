@@ -101,27 +101,27 @@ void GuiPowerDamageIndicator::onDraw(sf::RenderTarget& window)
 
     if (health <= 0.0)
     {
-        drawIcon(window, "gui/icons/damaged", colorConfig.overlay_damaged);
+        drawIcon(window, "gui/icons/status_damaged", colorConfig.overlay_damaged);
     }
     if ((system == SYS_Warp || system == SYS_JumpDrive) && WarpJammer::isWarpJammed(my_spaceship->getPosition()))
     {
-        drawIcon(window, "gui/icons/jammed", colorConfig.overlay_jammed);
+        drawIcon(window, "gui/icons/status_jammed", colorConfig.overlay_jammed);
     }
     if (power == 0.0)
     {
-        drawIcon(window, "gui/icons/no_power", colorConfig.overlay_no_power);
+        drawIcon(window, "gui/icons/status_no_power", colorConfig.overlay_no_power);
     }
     else if (power < 0.3)
     {
-        drawIcon(window, "gui/icons/low_power", colorConfig.overlay_low_power);
+        drawIcon(window, "gui/icons/status_low_power", colorConfig.overlay_low_power);
     }
     if (my_spaceship->energy_level < 10)
     {
-        drawIcon(window, "gui/icons/low_energy", colorConfig.overlay_low_energy);
+        drawIcon(window, "gui/icons/status_low_energy", colorConfig.overlay_low_energy);
     }
     if (heat > 0.90)
     {
-        drawIcon(window, "gui/icons/overheat", colorConfig.overlay_overheating);
+        drawIcon(window, "gui/icons/status_overheat", colorConfig.overlay_overheating);
     }
 }
 
