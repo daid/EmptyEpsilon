@@ -65,7 +65,12 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
         info.layout->moveToBack();
         system_rows.push_back(info);
     }
-    
+
+    (new GuiImage(this, "SYSTEM_HEALTH_ICON", "gui/icons/system_health"))->setPosition(375, SYS_COUNT * 50 - 10)->setSize(48,48);
+    (new GuiImage(this, "HEAT_ICON", "gui/icons/overheat"))->setPosition(500, SYS_COUNT * 50 - 10)->setSize(48,48);
+    (new GuiImage(this, "POWER_ICON", "gui/icons/energy"))->setPosition(600, SYS_COUNT * 50 - 10)->setSize(48,48);
+    (new GuiImage(this, "COOLANT_ICON", "gui/icons/coolant"))->setPosition(700, SYS_COUNT * 50 - 10)->setSize(48,48);
+
     system_rows[SYS_Reactor].button->setIcon("gui/icons/system_reactor");
     system_rows[SYS_BeamWeapons].button->setIcon("gui/icons/system_beam");
     system_rows[SYS_MissileSystem].button->setIcon("gui/icons/system_missile");
