@@ -121,10 +121,10 @@ void GuiShipRoom::onDraw(sf::RenderTarget& window)
             textureManager.setTexture(sprite, "gui/icons/system_beam");
             break;
         case SYS_MissileSystem:
-            textureManager.setTexture(sprite, "gui/icons/icon_missile");
+            textureManager.setTexture(sprite, "gui/icons/system_missile");
             break;
         case SYS_Maneuver:
-            textureManager.setTexture(sprite, "gui/icons/icon_maneuver");
+            textureManager.setTexture(sprite, "gui/icons/system_maneuver");
             break;
         case SYS_Impulse:
             textureManager.setTexture(sprite, "gui/icons/system_impulse");

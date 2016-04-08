@@ -68,8 +68,8 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
     
     system_rows[SYS_Reactor].button->setIcon("gui/icons/system_reactor");
     system_rows[SYS_BeamWeapons].button->setIcon("gui/icons/system_beam");
-    system_rows[SYS_MissileSystem].button->setIcon("gui/icons/icon_missile");
-    system_rows[SYS_Maneuver].button->setIcon("gui/icons/icon_maneuver");
+    system_rows[SYS_MissileSystem].button->setIcon("gui/icons/system_missile");
+    system_rows[SYS_Maneuver].button->setIcon("gui/icons/system_maneuver");
     system_rows[SYS_Impulse].button->setIcon("gui/icons/system_impulse");
     system_rows[SYS_Warp].button->setIcon("gui/icons/system_warpdrive");
     system_rows[SYS_JumpDrive].button->setIcon("gui/icons/system_warpdrive");
