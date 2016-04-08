@@ -26,8 +26,10 @@ private:
     static std::unordered_map<string, P<ModelData> > data_map;
 public:
     static P<ModelData> getModel(string name);
+    static std::vector<string> getModelDataNames();
 
 private:
+    string name;
     string mesh_name;
     string texture_name;
     string specular_texture_name;
@@ -58,6 +60,7 @@ public:
     ModelData();
 
     void setName(string name);
+    string getName();
     void setMesh(string mesh_name);
 
     /*!

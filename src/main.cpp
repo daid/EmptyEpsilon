@@ -132,6 +132,7 @@ int main(int argc, char** argv)
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "scripts/");
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "packs/SolCommand/");
     new PackResourceProvider(RESOURCE_BASE_DIR "packs/Angryfly.pack");
+    new PackResourceProvider(RESOURCE_BASE_DIR "packs/msgamedev.pack");
 #endif
     if (getenv("HOME"))
     {
@@ -144,6 +145,7 @@ int main(int argc, char** argv)
     new DirectoryResourceProvider("scripts/");
     new DirectoryResourceProvider("packs/SolCommand/");
     new PackResourceProvider("packs/Angryfly.pack");
+    new PackResourceProvider("packs/msgamedev.pack");
     textureManager.setDefaultSmooth(true);
     textureManager.setDefaultRepeated(true);
     textureManager.setAutoSprite(false);
@@ -267,6 +269,20 @@ int main(int argc, char** argv)
         P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
         if (scienceInfoScript)
             scienceInfoScript->destroy();
+        
+        //Find out which model data isn't used by ship templates and output that to log.
+        std::set<string> used_model_data;
+        for(string template_name : ShipTemplate::getTemplateNameList())
+        {
+            used_model_data.insert(ShipTemplate::getTemplate(template_name)->model_data->getName());
+        }
+        for(string name : ModelData::getModelDataNames())
+        {
+            if (used_model_data.find(name) == used_model_data.end())
+            {
+                LOG(INFO) << "Model data: " << name << " is not used by any ship template";
+            }
+        }
     }
 
     P<HardwareController> hardware_controller = new HardwareController();
