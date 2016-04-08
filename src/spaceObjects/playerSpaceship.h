@@ -136,6 +136,7 @@ public:
     bool isCommsChatOpenToGM() { return comms_state == CS_ChannelOpenGM; }
     bool isCommsChatOpenToPlayer() { return comms_state == CS_ChannelOpenPlayer; }
     bool isCommsScriptOpen() { return comms_state == CS_ChannelOpen; }
+    ECommsState getCommsState() { return comms_state; }
     float getCommsOpeningDelay() { return comms_open_delay; }
     const std::vector<string>& getCommsReplyOptions() const { return comms_reply_message; }
     const string& getCommsTargetName() { return comms_target_name; }

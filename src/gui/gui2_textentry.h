@@ -13,6 +13,7 @@ protected:
     float text_size;
     func_t func;
     func_t enter_func;
+    sf::Clock blink_clock;
 public:
     GuiTextEntry(GuiContainer* owner, string id, string text);
 

@@ -1,4 +1,5 @@
 #include "gui2_element.h"
+#include "gui2_canvas.h"
 #include "main.h"
 
 GuiElement::GuiElement(GuiContainer* owner, string id)
@@ -10,7 +11,15 @@ GuiElement::GuiElement(GuiContainer* owner, string id)
 GuiElement::~GuiElement()
 {
     if (owner)
+    {
         owner->elements.remove(this);
+        //Find the owning cancas, as we need to remove ourselves if we are the focus or click element.
+        GuiCanvas* canvas = dynamic_cast<GuiCanvas*>(getTopLevelContainer());
+        if (canvas)
+        {
+            canvas->unfocusElement(this);
+        }
+    }
 }
 
 bool GuiElement::onMouseDown(sf::Vector2f position)
@@ -174,6 +183,14 @@ GuiContainer* GuiElement::getOwner()
     return owner;
 }
 
+GuiContainer* GuiElement::getTopLevelContainer()
+{
+    GuiContainer* top_level = owner;
+    while(dynamic_cast<GuiElement*>(top_level) != nullptr)
+        top_level = dynamic_cast<GuiElement*>(top_level)->getOwner();
+    return top_level;
+}
+
 void GuiElement::updateRect(sf::FloatRect window_rect)
 {
     sf::Vector2f local_size = size;
@@ -291,24 +308,29 @@ void GuiElement::drawText(sf::RenderTarget& window, sf::FloatRect rect, string t
     sf::Text textElement(text, *font, font_size);
     float y = 0;
     float x = 0;
+    
+    //The "base line" of the text draw is the "Y position where the text is drawn" + font_size.
+    //The height of normal text is 70% of the font_size.
+    //So use those properties to align the text. Depending on the localbounds does not work.
     switch(align)
     {
     case ATopLeft:
     case ATopRight:
     case ATopCenter:
-        y = rect.top - textElement.getLocalBounds().top;
+        y = rect.top - 0.3 * font_size;
         break;
     case ABottomLeft:
     case ABottomRight:
     case ABottomCenter:
-        y = rect.top + rect.height - (textElement.getLocalBounds().height + textElement.getLocalBounds().top);
+        y = rect.top + rect.height - font_size;
         break;
     case ACenterLeft:
     case ACenterRight:
     case ACenter:
-        y = rect.top + rect.height / 2.0 - (textElement.getLocalBounds().height + textElement.getLocalBounds().top) / 2.0 - font_size / 8.0;
+        y = rect.top + rect.height / 2.0 - font_size + font_size * 0.35;
         break;
     }
+    
     switch(align)
     {
     case ATopLeft:
@@ -638,7 +660,7 @@ void GuiElement::drawStretchedV(sf::RenderTarget& window, sf::FloatRect rect, st
     window.draw(a, texture_ptr);
 }
 
-void GuiElement::drawStretchedHV(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color)
+void GuiElement::drawStretchedHV(sf::RenderTarget& window, sf::FloatRect rect, float corner_size, string texture, sf::Color color)
 {
     sf::Texture* texture_ptr = textureManager.getTexture(texture);
     sf::Vector2f texture_size = sf::Vector2f(texture_ptr->getSize());
@@ -647,8 +669,9 @@ void GuiElement::drawStretchedHV(sf::RenderTarget& window, sf::FloatRect rect, s
     for(int n=0; n<8; n++)
         a[n].color = color;
     
-    float corner_size = texture_size.x / 2.0f;
-
+    corner_size = std::min(corner_size, rect.height / 2.0f);
+    corner_size = std::min(corner_size, rect.width / 2.0f);
+    
     a[0].position = sf::Vector2f(rect.left, rect.top);
     a[1].position = sf::Vector2f(rect.left, rect.top + corner_size);
     a[2].position = sf::Vector2f(rect.left + corner_size, rect.top);

@@ -320,19 +320,7 @@ void PlayerSpaceship::update(float delta)
         {
             if (!hasSystem(ESystem(n))) continue;
 
-            systems[n].heat_level += delta * systems[n].getHeatingDelta() * system_heatup_per_second;
-            if (systems[n].heat_level > 1.0)
-            {
-                systems[n].heat_level = 1.0;
-                if (gameGlobalInfo->use_system_damage)
-                {
-                    systems[n].health -= delta * damage_per_second_on_overheat;
-                    if (systems[n].health < -1.0)
-                        systems[n].health = -1.0;
-                }
-            }
-            if (systems[n].heat_level < 0.0)
-                systems[n].heat_level = 0.0;
+            addHeat(ESystem(n), delta * systems[n].getHeatingDelta() * system_heatup_per_second);
         }
 
         if (systems[SYS_Reactor].health < -0.9 && systems[SYS_Reactor].heat_level == 1.0)
@@ -517,7 +505,23 @@ bool PlayerSpaceship::useEnergy(float amount)
 void PlayerSpaceship::addHeat(ESystem system, float amount)
 {
     if (!hasSystem(system)) return;
-    systems[system].heat_level = std::min(1.0f, systems[system].heat_level + amount);
+
+    systems[system].heat_level += amount;
+    if (systems[system].heat_level > 1.0)
+    {
+        float overheat = systems[system].heat_level - 1.0;
+        systems[system].heat_level = 1.0;
+        if (gameGlobalInfo->use_system_damage)
+        {
+            // As heat damage is specified as damage per second on overheating, we need to calculate the amount of overheat back to a time
+            // and use that to calculate the actual damage.
+            systems[system].health -= overheat / system_heatup_per_second * damage_per_second_on_overheat;
+            if (systems[system].health < -1.0)
+                systems[system].health = -1.0;
+        }
+    }
+    if (systems[system].heat_level < 0.0)
+        systems[system].heat_level = 0.0;
 }
 
 float PlayerSpaceship::getNetPowerUsage()
@@ -1312,5 +1316,5 @@ void PlayerSpaceship::commandSetScienceLink(int32_t id){
 
 string PlayerSpaceship::getExportLine()
 {
-    return "PlayerSpaceship():setTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
+    return "PlayerSpaceship():setTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" + getScriptExportModificationsOnTemplate();;
 }
