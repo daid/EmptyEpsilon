@@ -115,29 +115,29 @@ void GuiShipRoom::onDraw(sf::RenderTarget& window)
         switch(system)
         {
         case SYS_Reactor:
-            textureManager.setTexture(sprite, "icon_generator.png");
+            textureManager.setTexture(sprite, "gui/icons/icon_generator");
             break;
         case SYS_BeamWeapons:
-            textureManager.setTexture(sprite, "icon_beam.png");
+            textureManager.setTexture(sprite, "gui/icons/icon_beam.png");
             break;
         case SYS_MissileSystem:
-            textureManager.setTexture(sprite, "icon_missile.png");
+            textureManager.setTexture(sprite, "gui/icons/icon_missile.png");
             break;
         case SYS_Maneuver:
-            textureManager.setTexture(sprite, "icon_maneuver.png");
+            textureManager.setTexture(sprite, "gui/icons/icon_maneuver.png");
             break;
         case SYS_Impulse:
-            textureManager.setTexture(sprite, "icon_impulse.png");
+            textureManager.setTexture(sprite, "gui/icons/icon_impulse.png");
             break;
         case SYS_Warp:
         case SYS_JumpDrive:
-            textureManager.setTexture(sprite, "icon_warp.png");
+            textureManager.setTexture(sprite, "gui/icons/icon_warp.png");
             break;
         case SYS_FrontShield:
-            textureManager.setTexture(sprite, "icon_front_shield.png");
+            textureManager.setTexture(sprite, "gui/icons/icon_front_shield.png");
             break;
         case SYS_RearShield:
-            textureManager.setTexture(sprite, "icon_rear_shield.png");
+            textureManager.setTexture(sprite, "gui/icons/icon_rear_shield.png");
             break;
         default:
             textureManager.setTexture(sprite, "particle.png");
