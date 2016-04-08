@@ -38,3 +38,4 @@ public:
 };
 
 #endif//GUI2_SLIDER_H
+

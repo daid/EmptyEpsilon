@@ -3,7 +3,7 @@
 
 #include "gui/gui2.h"
 
-class GuiFrequencyCurve : public GuiBox
+class GuiFrequencyCurve : public GuiPanel
 {
     bool frequency_is_beam;
     bool more_damage_is_positive;

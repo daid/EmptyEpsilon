@@ -12,7 +12,6 @@
 #include "gui2_rotationdial.h"
 #include "gui2_togglebutton.h"
 #include "gui2_autolayout.h"
-#include "gui2_box.h"
 #include "gui2_panel.h"
 #include "gui2_arrow.h"
 #include "gui2_image.h"

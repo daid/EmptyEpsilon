@@ -115,36 +115,36 @@ void GuiShipRoom::onDraw(sf::RenderTarget& window)
         switch(system)
         {
         case SYS_Reactor:
-            textureManager.setTexture(sprite, "icon_generator.png");
+            textureManager.setTexture(sprite, "gui/icons/system_reactor");
             break;
         case SYS_BeamWeapons:
-            textureManager.setTexture(sprite, "icon_beam.png");
+            textureManager.setTexture(sprite, "gui/icons/system_beam");
             break;
         case SYS_MissileSystem:
-            textureManager.setTexture(sprite, "icon_missile.png");
+            textureManager.setTexture(sprite, "gui/icons/system_missile");
             break;
         case SYS_Maneuver:
-            textureManager.setTexture(sprite, "icon_maneuver.png");
+            textureManager.setTexture(sprite, "gui/icons/system_maneuver");
             break;
         case SYS_Impulse:
-            textureManager.setTexture(sprite, "icon_impulse.png");
+            textureManager.setTexture(sprite, "gui/icons/system_impulse");
             break;
         case SYS_Warp:
         case SYS_JumpDrive:
-            textureManager.setTexture(sprite, "icon_warp.png");
+            textureManager.setTexture(sprite, "gui/icons/system_warpdrive");
             break;
         case SYS_FrontShield:
-            textureManager.setTexture(sprite, "icon_front_shield.png");
+            textureManager.setTexture(sprite, "gui/icons/shields-fore");
             break;
         case SYS_RearShield:
-            textureManager.setTexture(sprite, "icon_rear_shield.png");
+            textureManager.setTexture(sprite, "gui/icons/shields-aft");
             break;
         default:
             textureManager.setTexture(sprite, "particle.png");
             break;
         }
         sprite.setPosition(getCenterPoint());
-        sprite.setScale(room_size / 48.0f, room_size / 48.0f);
+        sprite.setScale(room_size / sprite.getTextureRect().height, room_size / sprite.getTextureRect().height);
         window.draw(sprite);
     }
 }

@@ -66,6 +66,22 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
         system_rows.push_back(info);
     }
 
+    (new GuiImage(this, "SYSTEM_HEALTH_ICON", "gui/icons/system_health"))->setPosition(375, SYS_COUNT * 50 - 10)->setSize(48,48);
+    (new GuiImage(this, "HEAT_ICON", "gui/icons/overheat"))->setPosition(500, SYS_COUNT * 50 - 10)->setSize(48,48);
+    (new GuiImage(this, "POWER_ICON", "gui/icons/energy"))->setPosition(600, SYS_COUNT * 50 - 10)->setSize(48,48);
+    (new GuiImage(this, "COOLANT_ICON", "gui/icons/coolant"))->setPosition(700, SYS_COUNT * 50 - 10)->setSize(48,48);
+
+    system_rows[SYS_Reactor].button->setIcon("gui/icons/system_reactor");
+    system_rows[SYS_BeamWeapons].button->setIcon("gui/icons/system_beam");
+    system_rows[SYS_MissileSystem].button->setIcon("gui/icons/system_missile");
+    system_rows[SYS_Maneuver].button->setIcon("gui/icons/system_maneuver");
+    system_rows[SYS_Impulse].button->setIcon("gui/icons/system_impulse");
+    system_rows[SYS_Warp].button->setIcon("gui/icons/system_warpdrive");
+    system_rows[SYS_JumpDrive].button->setIcon("gui/icons/system_warpdrive");
+    system_rows[SYS_FrontShield].button->setIcon("gui/icons/shields-fore");
+    system_rows[SYS_RearShield].button->setIcon("gui/icons/shields-aft");
+
+
     GuiPanel* box = new GuiPanel(this, "POWER_COOLANT_BOX");
     box->setPosition(-20, -20, ABottomRight)->setSize(270, 400);
     (new GuiLabel(box, "POWER_LABEL", "Power", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(20, 20, ATopLeft)->setSize(30, 360);
@@ -75,13 +91,17 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
         if (my_spaceship)
             my_spaceship->commandSetSystemPower(selected_system, value);
     });
-    power_slider->addSnapValue(1.0, 0.1)->setPosition(50, 20, ATopLeft)->setSize(60, 360);
+    power_slider->setPosition(50, 20, ATopLeft)->setSize(60, 360);
+    for(float snap_point = 0.0; snap_point <= 3.0; snap_point += 0.5)
+        power_slider->addSnapValue(snap_point, snap_point == 1.0 ? 0.1 : 0.01);
     power_slider->disable();
     coolant_slider = new GuiSlider(box, "COOLANT_SLIDER", 10.0, 0.0, 0.0, [this](float value) {
         if (my_spaceship)
             my_spaceship->commandSetSystemCoolant(selected_system, value);
     });
     coolant_slider->setPosition(140, 20, ATopLeft)->setSize(60, 360);
+    for(float snap_point = 0.0; snap_point <= 10.0; snap_point += 2.5)
+        coolant_slider->addSnapValue(snap_point, 0.1);
     coolant_slider->disable();
 
     (new GuiShieldFrequencySelect(this, "SHIELD_FREQ"))->setPosition(-20, -470, ABottomRight)->setSize(320, 100);

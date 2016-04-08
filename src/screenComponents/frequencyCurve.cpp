@@ -1,15 +1,16 @@
 #include "frequencyCurve.h"
 #include "spaceObjects/spaceship.h"
+#include "playerInfo.h"
 
 GuiFrequencyCurve::GuiFrequencyCurve(GuiContainer* owner, string id, bool frequency_is_beam, bool more_damage_is_positive)
-: GuiBox(owner, id), frequency_is_beam(frequency_is_beam), more_damage_is_positive(more_damage_is_positive)
+: GuiPanel(owner, id), frequency_is_beam(frequency_is_beam), more_damage_is_positive(more_damage_is_positive)
 {
     frequency = -1;
 }
 
 void GuiFrequencyCurve::onDraw(sf::RenderTarget& window)
 {
-    GuiBox::onDraw(window);
+    GuiPanel::onDraw(window);
 
     if (frequency >= 0 && frequency <= SpaceShip::max_frequency)
     {
@@ -31,6 +32,16 @@ void GuiFrequencyCurve::onDraw(sf::RenderTarget& window)
             else
                 bar.setFillColor(sf::Color(255 * f, 255 * (1.0 - f), 0));
             window.draw(bar);
+            
+            if (my_spaceship && ((frequency_is_beam && n == my_spaceship->getShieldsFrequency()) || (!frequency_is_beam && n == my_spaceship->beam_frequency)))
+            {
+                sf::Sprite image;
+                textureManager.setTexture(image, "gui/SelectorArrow");
+                image.setPosition(x + w / 2.0, rect.top + rect.height - 20 - h);
+                image.setRotation(-90);
+                image.setScale(0.2, 0.2);
+                window.draw(image);
+            }
         }
         
         int mouse_freq_nr = int((InputHandler::getMousePos().x - rect.left - 20) / w);

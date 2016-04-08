@@ -1,6 +1,8 @@
 #include "main.h"
 #include "gameGlobalInfo.h"
 #include "gameMasterScreen.h"
+#include "tweak.h"
+#include "chatDialog.h"
 #include "menus/shipSelectionScreen.h"
 #include "spaceObjects/cpuShip.h"
 #include "spaceObjects/spaceStation.h"
@@ -21,11 +23,11 @@ GameMasterScreen::GameMasterScreen()
     box_selection_overlay->hide();
     
     (new GuiToggleButton(this, "PAUSE_BUTTON", "Pause", [this](bool value) {
-        if (value)
+        if (!value)
             engine->setGameSpeed(1.0f);
         else
             engine->setGameSpeed(0.0f);
-    }))->setPosition(20, 20, ATopLeft)->setSize(250, 50);
+    }))->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, ATopLeft)->setSize(250, 50);
     
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR", [this](int index, string value) {
         for(P<SpaceObject> obj : targets.getTargets())
@@ -41,26 +43,16 @@ GameMasterScreen::GameMasterScreen()
         global_message_entry->show();
     }))->setPosition(20, -20, ABottomLeft)->setSize(250, 50);
 
-    (new GuiButton(this, "CREATE_OBJECT_BUTTON", "Create...", [this]() {
+    create_button = new GuiButton(this, "CREATE_OBJECT_BUTTON", "Create...", [this]() {
         object_creation_screen->show();
-        cancel_create_button->show();
-    }))->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
+    });
+    create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
     cancel_create_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
+        create_button->show();
         cancel_create_button->hide();
     });
     cancel_create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
 
-    ship_retrofit_button = new GuiButton(this, "RETROFIT_SHIP", "Retrofit", [this]() {
-        for(P<SpaceObject> obj : targets.getTargets())
-        {
-            if (P<SpaceShip>(obj))
-            {
-                ship_retrofit_dialog->open(obj);
-                break;
-            }
-        }
-    });
-    ship_retrofit_button->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->hide();
     ship_tweak_button = new GuiButton(this, "TWEAK_SHIP", "Tweak", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
         {
@@ -71,15 +63,17 @@ GameMasterScreen::GameMasterScreen()
             }
         }
     });
-    ship_tweak_button->setPosition(20, -170, ABottomLeft)->setSize(250, 50)->hide();
+    ship_tweak_button->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->hide();
     player_comms_hail = new GuiButton(this, "HAIL_PLAYER", "Hail ship", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
+        {
             if (P<PlayerSpaceship>(obj))
-                hail_player_dialog->player = obj;
-        if (hail_player_dialog->player)
-            hail_player_dialog->show();
+            {
+                (new GameMasterChatDialog(chat_layer, obj))->setPosition(main_radar->worldToScreen(obj->getPosition()))->setSize(300, 300);
+            }
+        }
     });
-    player_comms_hail->setPosition(20, -220, ABottomLeft)->setSize(250, 50)->hide();
+    player_comms_hail->setPosition(20, -170, ABottomLeft)->setSize(250, 50)->hide();
     
     info_layout = new GuiAutoLayout(this, "INFO_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     info_layout->setPosition(-20, 20, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
@@ -125,14 +119,9 @@ GameMasterScreen::GameMasterScreen()
                 P<CpuShip>(obj)->orderDefendLocation(obj->getPosition());
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
 
-    hail_player_dialog = new GuiHailPlayerShip(this);
-    hail_player_dialog->hide();
-    hailing_player_dialog = new GuiHailingPlayerShip(this);
-    hailing_player_dialog->hide();
-    player_chat = new GuiPlayerChat(this);
-    player_chat->hide();
-    ship_retrofit_dialog = new GuiShipRetrofit(this);
-    ship_retrofit_dialog->hide();
+    chat_layer = new GuiElement(this, "");
+    chat_layer->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
     ship_tweak_dialog = new GuiShipTweak(this);
     ship_tweak_dialog->hide();
 
@@ -173,7 +162,6 @@ void GameMasterScreen::update(float delta)
                 has_player_ship = true;
         }
     }
-    ship_retrofit_button->setVisible(has_ship);
     ship_tweak_button->setVisible(has_ship);
     order_layout->setVisible(has_cpu_ship);
     player_comms_hail->setVisible(has_player_ship);
@@ -437,6 +425,8 @@ bool GuiGlobalMessageEntry::onMouseDown(sf::Vector2f position)
 GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
 : GuiOverlay(gm_screen, "OBJECT_CREATE_SCREEN", sf::Color(0, 0, 0, 128))
 {
+    this->gm_screen = gm_screen;
+    
     GuiPanel* box = new GuiPanel(this, "FRAME");
     box->setPosition(0, 0, ACenter)->setSize(1000, 500);
 
@@ -452,35 +442,29 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
     for(string template_name : template_names)
     {
         (new GuiButton(box, "CREATE_STATION_" + template_name, template_name, [this, template_name]() {
-            create_script = "SpaceStation():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + template_name + "\")";
-            this->hide();
+            setCreateScript("SpaceStation():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + template_name + "\")");
         }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
         y += 30;
     }
     
     (new GuiButton(box, "CREATE_WARP_JAMMER", "Warp Jammer", [this]() {
-        create_script = "WarpJammer():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + ")";
-        this->hide();
+        setCreateScript("WarpJammer():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + ")");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
     (new GuiButton(box, "CREATE_MINE", "Mine", [this]() {
-        create_script = "Mine():setFactionId(" + string(faction_selector->getSelectionIndex()) + ")";
-        this->hide();
+        setCreateScript("Mine():setFactionId(" + string(faction_selector->getSelectionIndex()) + ")");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
     (new GuiButton(box, "CREATE_BLACKHOLE", "BlackHole", [this]() {
-        create_script = "BlackHole()";
-        this->hide();
+        setCreateScript("BlackHole()");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
     (new GuiButton(box, "CREATE_NEBULA", "Nebula", [this]() {
-        create_script = "Nebula()";
-        this->hide();
+        setCreateScript("Nebula()");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
     (new GuiButton(box, "CREATE_WORMHOLE", "Worm Hole", [this]() {
-    create_script = "WormHole()";
-    this->hide();
+        setCreateScript("WormHole()");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
     y = 20;
@@ -488,8 +472,7 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
     std::sort(template_names.begin(), template_names.end());
     GuiListbox* listbox = new GuiListbox(box, "CREATE_SHIPS", [this](int index, string value)
     {
-        create_script = "CpuShip():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + value + "\"):orderRoaming()";
-        this->hide();
+        setCreateScript("CpuShip():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + value + "\"):orderRoaming()");
     });
     listbox->setTextSize(20)->setButtonHeight(30)->setPosition(-20, 20, ATopRight)->setSize(300, 460);
     for(string template_name : template_names)
@@ -497,9 +480,8 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
         listbox->addEntry(template_name, template_name);
     }
     
-    (new GuiButton(box, "CLOSE_BUTTON", "Cancel", [this, gm_screen]() {
+    (new GuiButton(box, "CLOSE_BUTTON", "Cancel", [this]() {
         create_script = "";
-        gm_screen->cancel_create_button->hide();
         this->hide();
     }))->setPosition(20, -20, ABottomLeft)->setSize(300, 50);
 }
@@ -507,6 +489,14 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
 bool GuiObjectCreationScreen::onMouseDown(sf::Vector2f position)
 {   //Catch clicks.
     return true;
+}
+
+void GuiObjectCreationScreen::setCreateScript(string script)
+{
+    create_script = script;
+    gm_screen->create_button->hide();
+    gm_screen->cancel_create_button->show();
+    hide();
 }
 
 void GuiObjectCreationScreen::createObject(sf::Vector2f position)
@@ -517,290 +507,4 @@ void GuiObjectCreationScreen::createObject(sf::Vector2f position)
     P<ScriptObject> so = new ScriptObject();
     so->runCode(create_script + ":setPosition("+string(position.x)+","+string(position.y)+")");
     so->destroy();
-}
-
-GuiHailPlayerShip::GuiHailPlayerShip(GameMasterScreen* owner)
-: GuiBox(owner, "HAIL_PLAYER_SHIP_DIALOG")
-{
-    setPosition(0, -100, ABottomCenter);
-    setSize(600, 150);
-    fill();
-
-    caller_entry = new GuiTextEntry(this, "MESSAGE_ENTRY", "Main Command");
-    caller_entry->setPosition(0, 20, ATopCenter)->setSize(500, 50);
-    
-    (new GuiButton(this, "CLOSE_BUTTON", "Cancel", [this]() {
-        this->hide();
-    }))->setPosition(20, -20, ABottomLeft)->setSize(250, 50);
-
-    (new GuiButton(this, "SEND_BUTTON", "Call", [this, owner]() {
-        if (player)
-        {
-            if (player->hailCommsByGM(caller_entry->getText()))
-            {
-                owner->hailing_player_dialog->player = player;
-                owner->hailing_player_dialog->show();
-            }
-        }
-        this->hide();
-    }))->setPosition(-20, -20, ABottomRight)->setSize(250, 50);
-}
-
-bool GuiHailPlayerShip::onMouseDown(sf::Vector2f position)
-{   //Catch clicks.
-    return true;
-}
-
-GuiHailingPlayerShip::GuiHailingPlayerShip(GameMasterScreen* owner)
-: GuiBox(owner, "HAILING_PLAYER_SHIP_DIALOG"), owner(owner)
-{
-    setPosition(0, -100, ABottomCenter);
-    setSize(600, 90);
-    fill();
-
-    (new GuiLabel(this, "HAILING_LABEL", "Hailing ship...", 30))->setPosition(0, 0, ACenter)->setSize(500, 50);
-}
-
-bool GuiHailingPlayerShip::onMouseDown(sf::Vector2f position)
-{   //Catch clicks.
-    return true;
-}
-
-void GuiHailingPlayerShip::onDraw(sf::RenderTarget& window)
-{
-    if (!player)
-    {
-        hide();
-        return;
-    }
-    
-    if (player->isCommsBeingHailedByGM())
-    {
-        //Do nothing while hailing.
-    }else if (player->isCommsChatOpenToGM())
-    {
-        owner->player_chat->player = player;
-        owner->player_chat->show();
-        hide();
-    }else{
-        hide();
-    }
-    GuiBox::onDraw(window);
-}
-
-GuiPlayerChat::GuiPlayerChat(GameMasterScreen* owner)
-: GuiBox(owner, "PLAYER_CHAT_DIALOG")
-{
-    setPosition(0, -100, ABottomCenter);
-    setSize(800, 600);
-    fill();
-
-    message_entry = new GuiTextEntry(this, "MESSAGE_ENTRY", "");
-    message_entry->setPosition(20, -20, ABottomLeft)->setSize(640, 50);
-    message_entry->enterCallback([this](string text){
-        if (player)
-        {
-            player->addCommsIncommingMessage(message_entry->getText());
-        }
-        message_entry->setText("");
-    });
-    
-    chat_text = new GuiScrollText(this, "CHAT_TEXT", "");
-    chat_text->enableAutoScrollDown()->setPosition(20, 30, ATopLeft)->setSize(760, 500);
-    
-    (new GuiButton(this, "SEND_BUTTON", "Send", [this]() {
-        if (player)
-        {
-            player->addCommsIncommingMessage(message_entry->getText());
-        }
-        message_entry->setText("");
-    }))->setPosition(-20, -20, ABottomRight)->setSize(120, 50);
-
-    (new GuiButton(this, "CLOSE_BUTTON", "Close", [this]() {
-        hide();
-        if (player)
-            player->closeComms();
-    }))->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
-}
-
-bool GuiPlayerChat::onMouseDown(sf::Vector2f position)
-{
-    return true;
-}
-
-void GuiPlayerChat::onDraw(sf::RenderTarget& window)
-{
-    if (!player || !player->isCommsChatOpenToGM())
-    {
-        hide();
-        return;
-    }
-    chat_text->setText(player->getCommsIncommingMessage());
-    
-    GuiBox::onDraw(window);
-}
-
-GuiShipRetrofit::GuiShipRetrofit(GuiContainer* owner)
-: GuiBox(owner, "SHIP_RETROFIT_DIALOG")
-{
-    setPosition(0, -100, ABottomCenter);
-    setSize(800, 600);
-    fill();
-    
-    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_col->setPosition(20, 20, ATopLeft)->setSize(300, 600);
-    
-    type_name = new GuiTextEntry(left_col, "TYPE_NAME", "???");
-    type_name->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    type_name->callback([this](string text) {
-        target->setTypeName(text);
-    });
-    
-    warp_selector = new GuiSelector(left_col, "", [this](int index, string value) {
-        target->setWarpDrive(index != 0);
-    });
-    warp_selector->setTextSize(20)->setOptions({"WarpDrive: No", "WarpDrive: Yes"})->setSize(GuiElement::GuiSizeMax, 30);
-    jump_selector = new GuiSelector(left_col, "", [this](int index, string value) {
-        target->setJumpDrive(index != 0);
-    });
-    jump_selector->setTextSize(20)->setOptions({"JumpDrive: No", "JumpDrive: Yes"})->setSize(GuiElement::GuiSizeMax, 30);
-    
-    (new GuiLabel(left_col, "", "Impulse speed:", 30))->setSize(GuiElement::GuiSizeMax, 30);
-    impulse_speed_slider = new GuiSlider(left_col, "", 0.0, 250, 0.0, [this](float value) {
-        target->impulse_max_speed = value;
-    });
-    impulse_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
-    
-    (new GuiLabel(left_col, "", "Turn speed:", 30))->setSize(GuiElement::GuiSizeMax, 30);
-    turn_speed_slider = new GuiSlider(left_col, "", 0.0, 25, 0.0, [this](float value) {
-        target->turn_speed = value;
-    });
-    turn_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
-    
-    (new GuiLabel(left_col, "", "Hull:", 30))->setSize(GuiElement::GuiSizeMax, 30);
-    hull_slider = new GuiSlider(left_col, "", 0.0, 500, 0.0, [this](float value) {
-        target->hull_max = value;
-        target->hull_strength = std::min(target->hull_strength, target->hull_max);
-    });
-    hull_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
-
-    (new GuiLabel(left_col, "", "Front shield:", 30))->setSize(GuiElement::GuiSizeMax, 30);
-    front_shield_slider = new GuiSlider(left_col, "", 0.0, 500, 0.0, [this](float value) {
-        target->shield_max[0] = value;
-        target->shield_level[0] = std::min(target->shield_level[0], target->shield_max[0]);
-    });
-    front_shield_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
-
-    (new GuiLabel(left_col, "", "Rear shield:", 30))->setSize(GuiElement::GuiSizeMax, 30);
-    rear_shield_slider = new GuiSlider(left_col, "", 0.0, 500, 0.0, [this](float value) {
-        target->shield_max[1] = value;
-        target->shield_level[1] = std::min(target->shield_level[1], target->shield_max[1]);
-    });
-    rear_shield_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
-    
-    missile_tube_amount_selector = new GuiSelector(left_col, "", [this](int index, string value) {
-        target->weapon_tube_count = index;
-    });
-    for(int n=0; n<max_weapon_tubes; n++)
-        missile_tube_amount_selector->addEntry("Missile tubes: " + string(n), "");
-    missile_tube_amount_selector->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    
-    for(int n=0; n<MW_Count; n++)
-    {
-        missile_storage_amount_selector[n] = new GuiSelector(left_col, "", [this, n](int index, string value) {
-            int diff = index - target->weapon_storage_max[n];
-            target->weapon_storage_max[n] += diff;
-            target->weapon_storage[n] = std::max(0, target->weapon_storage[n] + diff);
-        });
-        for(int m=0; m<50; m++)
-            missile_storage_amount_selector[n]->addEntry(getMissileWeaponName(EMissileWeapons(n)) + ": " + string(m), "");
-        missile_storage_amount_selector[n]->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    }
-
-    (new GuiButton(this, "CLOSE_BUTTON", "Close", [this]() {
-        hide();
-    }))->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
-}
-
-bool GuiShipRetrofit::onMouseDown(sf::Vector2f position)
-{
-    return true;
-}
-
-void GuiShipRetrofit::open(P<SpaceShip> target)
-{
-    this->target = target;
-    
-    type_name->setText(target->getTypeName());
-    warp_selector->setSelectionIndex(target->has_warp_drive ? 1 : 0);
-    jump_selector->setSelectionIndex(target->hasJumpDrive() ? 1 : 0);
-    impulse_speed_slider->setValue(target->impulse_max_speed);
-    impulse_speed_slider->clearSnapValues()->addSnapValue(target->ship_template->impulse_speed, 5.0f);
-    turn_speed_slider->setValue(target->turn_speed);
-    turn_speed_slider->clearSnapValues()->addSnapValue(target->ship_template->turn_speed, 1.0f);
-    hull_slider->setValue(target->hull_max);
-    hull_slider->clearSnapValues()->addSnapValue(target->ship_template->hull, 5.0f);
-    front_shield_slider->setValue(target->shield_max[0]);
-    front_shield_slider->clearSnapValues()->addSnapValue(target->ship_template->shield_level[0], 5.0f);    ///TOFIX: Handle different amounts of shields
-    rear_shield_slider->setValue(target->shield_max[1]);
-    rear_shield_slider->clearSnapValues()->addSnapValue(target->ship_template->shield_level[1], 5.0f);
-    missile_tube_amount_selector->setSelectionIndex(target->weapon_tube_count);
-    for(int n=0; n<MW_Count; n++)
-        missile_storage_amount_selector[n]->setSelectionIndex(target->weapon_storage_max[n]);
-    
-    show();
-}
-
-GuiShipTweak::GuiShipTweak(GuiContainer* owner)
-: GuiBox(owner, "SHIP_RETROFIT_DIALOG")
-{
-    setPosition(0, -100, ABottomCenter);
-    setSize(800, 600);
-    fill();
-    
-    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_col->setPosition(20, 20, ATopLeft)->setSize(300, 600);
-    GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right_col->setPosition(-20, 20, ATopRight)->setSize(300, 600);
-    
-    for(int n=0; n<SYS_COUNT; n++)
-    {
-        ESystem system = ESystem(n);
-        (new GuiLabel(left_col, "", getSystemName(system) + " health", 20))->setSize(GuiElement::GuiSizeMax, 30);
-        system_damage[n] = new GuiSlider(left_col, "", -1.0, 1.0, 0.0, [this, n](float value) {
-            target->systems[n].health = value;
-        });
-        system_damage[n]->setSize(GuiElement::GuiSizeMax, 30);
-
-        (new GuiLabel(right_col, "", getSystemName(system) + " heat", 20))->setSize(GuiElement::GuiSizeMax, 30);
-        system_heat[n] = new GuiSlider(right_col, "", 0.0, 1.0, 0.0, [this, n](float value) {
-            target->systems[n].heat_level = value;
-        });
-        system_heat[n]->setSize(GuiElement::GuiSizeMax, 30);
-    }
-
-    (new GuiButton(this, "CLOSE_BUTTON", "Close", [this]() {
-        hide();
-    }))->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
-}
-
-bool GuiShipTweak::onMouseDown(sf::Vector2f position)
-{
-    return true;
-}
-
-void GuiShipTweak::onDraw(sf::RenderTarget& window)
-{
-    GuiBox::onDraw(window);
-    for(int n=0; n<SYS_COUNT; n++)
-    {
-        system_damage[n]->setValue(target->systems[n].health);
-        system_heat[n]->setValue(target->systems[n].heat_level);
-    }
-}
-
-void GuiShipTweak::open(P<SpaceShip> target)
-{
-    this->target = target;
-    show();
 }

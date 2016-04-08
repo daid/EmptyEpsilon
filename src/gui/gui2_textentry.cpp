@@ -12,7 +12,13 @@ void GuiTextEntry::onDraw(sf::RenderTarget& window)
         drawStretched(window, rect, "gui/TextEntryBackground.focused", selectColor(colorConfig.text_entry.background));
     else
         drawStretched(window, rect, "gui/TextEntryBackground", selectColor(colorConfig.text_entry.background));
-    drawText(window, sf::FloatRect(rect.left + 16, rect.top, rect.width, rect.height), text + (focus ? "_" : ""), ACenterLeft, text_size, main_font, selectColor(colorConfig.text_entry.forground));
+    bool typing_indicator = focus;
+    const float blink_rate = 0.530;
+    if (blink_clock.getElapsedTime().asSeconds() < blink_rate)
+        typing_indicator = false;
+    if (blink_clock.getElapsedTime().asSeconds() > blink_rate * 2.0f)
+        blink_clock.restart();
+    drawText(window, sf::FloatRect(rect.left + 16, rect.top, rect.width, rect.height), text + (typing_indicator ? "_" : ""), ACenterLeft, text_size, main_font, selectColor(colorConfig.text_entry.forground));
 }
 
 bool GuiTextEntry::onMouseDown(sf::Vector2f position)

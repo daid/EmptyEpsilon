@@ -327,6 +327,12 @@ public:
     void setWeaponTubeExclusiveFor(int index, EMissileWeapons type);
 
     void setRadarTrace(string trace) { radar_trace = trace; }
+
+    void addBroadcast(int threshold, string message);
+    
+    //Return a string that can be appended to an object create function in the lua scripting.
+    // This function is used in getScriptExport calls to adjust for tweaks done in the GM screen.
+    string getScriptExportModificationsOnTemplate();
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);

@@ -8,8 +8,8 @@ extern PVector<FactionInfo> factionInfo;
 
 enum EFactionVsFactionState
 {
-    FVF_Neutral,
     FVF_Friendly,
+    FVF_Neutral,
     FVF_Enemy
 };
 
