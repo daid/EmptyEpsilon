@@ -16,7 +16,8 @@ Press next to continue...]], true)
     tutorial:onNext(function()
         tutorial:switchViewToMainScreen()
         tutorial:showMessage([[What you see now is the main screen. Here you see your own ship and the world around you.
-There is no direction interaction available on this screen. But it allows for visual identification of objects.]], true)
+
+There is no direct interaction with your ship or other entities available on this screen. But it allows for visual identification of objects.]], true)
         tutorial:onNext(function() startSequence(radarTutorial) end)
     end)
 end
@@ -96,21 +97,23 @@ end
 
 radarTutorial = createSequence()
 addToSequence(radarTutorial, function() tutorial:switchViewToLongRange() end)
-addToSequence(radarTutorial, [[Welcome to the long range radar. This radar can see up to 30km from your ship.
+addToSequence(radarTutorial, [[Welcome to the long range radar. By default this radar can see up to 30km from your ship.
 At the center you see your own ship. This radar quickly allows you to identify different objects.]])
 addToSequence(radarTutorial, function() prev_object = Asteroid():setPosition(5000, 0) end)
 addToSequence(radarTutorial, [[Right of your own ship, you see a brown dot. This is an asteroid.
 Asteroids should be avoided, as they damage your ship if you fly into them.]])
 addToSequence(radarTutorial, function() prev_object:destroy() end)
 addToSequence(radarTutorial, function() prev_object = Mine():setPosition(5000, 0) end)
-addToSequence(radarTutorial, [[The white dot is a mine. Mines trigger when you are close, and then explode with a 1km blast radius. They do a lot of damage. Flying into one without shields will surely kill you.]])
+addToSequence(radarTutorial, [[The white dot is a mine. Mines trigger when you are close, and then explode with a 1km blast radius. They do a lot of damage. Flying into one without shields active will surely kill you.]])
 addToSequence(radarTutorial, function() prev_object:destroy() end)
 addToSequence(radarTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(5000, 0) end)
-addToSequence(radarTutorial, function() prev_object2 = SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setPosition(5000, 5000) end)
-addToSequence(radarTutorial, function() prev_object3 = SpaceStation():setTemplate("Huge Station"):setFaction("Kraylor"):setPosition(5000, -5000) end)
-addToSequence(radarTutorial, [[This large dot is a station. Stations come in different size and can belong to different factions. The color indicates if the station is friendly (green), neutral (light blue) or enemy (red)]])
+addToSequence(radarTutorial, function() prev_object2 = SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setPosition(5000, 5000):setScanned(true) end) --Still not showing up light blue, not sure what to do here.
+addToSequence(radarTutorial, function() prev_object4 = SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setPosition(5000, -5000):setScanned(false) end)
+addToSequence(radarTutorial, function() prev_object3 = SpaceStation():setTemplate("Huge Station"):setFaction("Kraylor"):setPosition(5000, -10000) end)
+addToSequence(radarTutorial, [[This larger object represents a station. Stations come in different size and can belong to different factions. The color indicates if the station is friendly (green), neutral (light blue), unknown (grey) or enemy (red)]])
 addToSequence(radarTutorial, function() prev_object:destroy() end)
 addToSequence(radarTutorial, function() prev_object2:destroy() end)
+addToSequence(radarTutorial, function() prev_object4:destroy() end)
 addToSequence(radarTutorial, function() prev_object3:destroy() end)
 addToSequence(radarTutorial, function() prev_object = Nebula():setPosition(8000, 0) end)
 addToSequence(radarTutorial, [[The rainbow colored cloud is a nebula. Nebulea block long range sensors. So you cannot see inside of them when you are more then 5km away from them, and you cannot see behind it.]])
@@ -127,7 +130,7 @@ addToSequence(radarTutorial, function() prev_object4:destroy() end)
 addToSequence(radarTutorial, [[Next we will look at the short range radar.]])
 addToSequence(radarTutorial, function() tutorial:switchViewToTactical() end)
 addToSequence(radarTutorial, [[The short range radar will see up to 5km. You also see the range of your own beam weapons.
-Your current ship has 2 beam weapons aimed to the front. Different ships will have different beam weapon layouts, with different ranges and locations.]])
+Your current ship has 2 beam weapons aimed to the front with some overlap. Different ships will have different beam weapon layouts, with different ranges and locations.]])
 addToSequence(radarTutorial, function() startSequence(helmsTutorial) end)
 
 helmsTutorial = createSequence()
@@ -150,40 +153,53 @@ Raise your impulse level to 100% to fly forwards right now.]], function() return
 addToSequence(helmsTutorial, function() player:setImpulseMaxSpeed(0):commandImpulse(0):setRotationMaxSpeed(10) end)
 addToSequence(helmsTutorial, [[Good. You now know how to move forwards.
 
-I've disabled your impulse engine for now. Next we look at rotating your ship.
-Rotating the ship is easy, just press anywhere on the radar screen to rotate to that heading.
+I've disabled your impulse engine for now. Next we will look at rotating your ship.
+Rotating the ship is easy, just press or click anywhere on the radar screen to rotate to that heading.
+
 Try rotating to heading 200 right now.]], function() return math.abs(player:getHeading() - 200) < 1.0 end)
 addToSequence(helmsTutorial, function() player:setImpulseMaxSpeed(90) end)
 addToSequence(helmsTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(0, -1500) end)
 addToSequence(helmsTutorial, [[Excelent!
 
-Next up. Docking. Docking is important, as being docked with a station will recharge your energy, repairs your hull and allows the relay officer to request weapon refills. It can also be important for other mission related events.
+Next up. Docking. 
+
+Docking is important, as being docked with a station allows you to recharge your energy and repair your hull. It also allows the relay officer to request weapon refills. It can also be important for other mission related events.
 To dock, get within 1km of a station, and press the "Request Dock" button. Docking is fully automated after that.
 Dock with the nearby station now.]], function() return player:isDocked(prev_object) end)
-addToSequence(helmsTutorial, [[Now that you are docked, movement is locked. As helms officer there is nothing else you can do.
-So undock now.]], function() return not player:isDocked(prev_object) end)
+addToSequence(helmsTutorial, [[Now that you are docked, movement is locked. 
+
+As helms officer there is nothing else you can do if we stay here, so undock now.]], function() return not player:isDocked(prev_object) end)
 addToSequence(helmsTutorial, function() prev_object:destroy() end)
 addToSequence(helmsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Tug"):setPosition(-1500, 1500):orderIdle():setScanned(true) end)
 addToSequence(helmsTutorial, function() player:commandSetTarget(prev_object) end)
 addToSequence(helmsTutorial, [[Ok, just a few extra things that you need to know.
 Remember those beam weapons? As helms officer is it your task to keep those beams on your target.
-I've setup an stationary enemy ship as target. Destroy it with your beam weapons.]], function() return not prev_object:isValid() end)
-addToSequence(helmsTutorial, [[Aggression is not always the solution. But boy it is fun.
 
-On to the next task. Moving long distances.
+I've setup a stationary enemy ship as a target. Get it in your sights so the beams can fire and destroy it.]], function() return not prev_object:isValid() end)
+addToSequence(helmsTutorial, [[Aggression is not always the solution. But boy it is fun!
+
+On to the next task; moving long distances.
 To move long distances there are two methods. Depending on your ship you can have a warp drive, or a jump drive.
-The warp drive moves your ship at high speed. The jump drive instantly teleports your ship a great distance.]])
+
+The warp drive moves your ship at high speed. 
+
+The jump drive instantly teleports your ship a great distance.]])
 addToSequence(helmsTutorial, function() player:setWarpDrive(true) end)
 addToSequence(helmsTutorial, [[First, let us try the warp drive.
 
-It works almost the same as the impulse drive, but can only move forwards. However, much faster at a greater energy use.
-Use the warp drive to move more than 30km away from this starting point.]], function() return distance(player, 0, 0) > 30000 end)
+It works almost the same as the impulse drive, but can only move forwards. However, it is much faster and uses energy at a greater rate.
+Use the warp drive to move more than 30km away from this starting point.
+
+You may have noticed that a sector on the map is exactly 20km from top to bottom or left to right.]], function() return distance(player, 0, 0) > 30000 end)
 addToSequence(helmsTutorial, function() player:setWarpDrive(false):setJumpDrive(true):setPosition(0, 0) end)
 addToSequence(helmsTutorial, [[Now. That was the warp drive. Next up, the jump drive.
 
-The jump drive you need to configure a distance you want to jump. And then you need to initiate it. You jump into the direction where your ship is pointing at the time of which the jump actually happens.
+You need to configure a distance you want to jump, and then you need to initiate the countdown to the jump. 
+
+You jump into the direction where your ship is pointing at the time of which the jump actually happens.
+
 Use the jump drive to jump more than 30km from this starting point, in any direction.]], function() return distance(player, 0, 0) > 30000 end)
-addToSequence(helmsTutorial, [[Notice how your jump drive needs to re-charge after use.
+addToSequence(helmsTutorial, [[Notice how your jump drive needs to re-charge after each use.
 
 This covers the basics of the helms officer.]])
 addToSequence(helmsTutorial, function() startSequence(weaponsTutorial) end)
