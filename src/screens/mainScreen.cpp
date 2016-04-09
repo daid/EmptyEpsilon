@@ -81,8 +81,16 @@ void ScreenMainScreen::update(float delta)
             camera_pitch = 90.0f;
         }
 #endif
-        camera_position = camera_position * 0.9f + targetCameraPosition * 0.1f;
-        camera_yaw += sf::angleDifference(camera_yaw, target_camera_yaw) * 0.1f;
+        if (first_person)
+        {
+            camera_position = targetCameraPosition;
+            camera_yaw = target_camera_yaw;
+        }
+        else
+        {
+            camera_position = camera_position * 0.9f + targetCameraPosition * 0.1f;
+            camera_yaw += sf::angleDifference(camera_yaw, target_camera_yaw) * 0.1f;
+        }
 
         switch(my_spaceship->main_screen_setting)
         {

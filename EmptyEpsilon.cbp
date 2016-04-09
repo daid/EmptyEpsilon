@@ -481,8 +481,6 @@
 		<Unit filename="src/gui/gui2_arrowbutton.h" />
 		<Unit filename="src/gui/gui2_autolayout.cpp" />
 		<Unit filename="src/gui/gui2_autolayout.h" />
-		<Unit filename="src/gui/gui2_box.cpp" />
-		<Unit filename="src/gui/gui2_box.h" />
 		<Unit filename="src/gui/gui2_button.cpp" />
 		<Unit filename="src/gui/gui2_button.h" />
 		<Unit filename="src/gui/gui2_canvas.cpp" />
@@ -507,6 +505,8 @@
 		<Unit filename="src/gui/gui2_panel.h" />
 		<Unit filename="src/gui/gui2_progressbar.cpp" />
 		<Unit filename="src/gui/gui2_progressbar.h" />
+		<Unit filename="src/gui/gui2_resizabledialog.cpp" />
+		<Unit filename="src/gui/gui2_resizabledialog.h" />
 		<Unit filename="src/gui/gui2_rotationdial.cpp" />
 		<Unit filename="src/gui/gui2_rotationdial.h" />
 		<Unit filename="src/gui/gui2_scrollbar.cpp" />
@@ -677,8 +677,12 @@
 		<Unit filename="src/screens/extra/powerManagement.h" />
 		<Unit filename="src/screens/extra/shipLogScreen.cpp" />
 		<Unit filename="src/screens/extra/shipLogScreen.h" />
-		<Unit filename="src/screens/gameMasterScreen.cpp" />
-		<Unit filename="src/screens/gameMasterScreen.h" />
+		<Unit filename="src/screens/gm/chatDialog.cpp" />
+		<Unit filename="src/screens/gm/chatDialog.h" />
+		<Unit filename="src/screens/gm/gameMasterScreen.cpp" />
+		<Unit filename="src/screens/gm/gameMasterScreen.h" />
+		<Unit filename="src/screens/gm/tweak.cpp" />
+		<Unit filename="src/screens/gm/tweak.h" />
 		<Unit filename="src/screens/mainScreen.cpp" />
 		<Unit filename="src/screens/mainScreen.h" />
 		<Unit filename="src/screens/topDownScreen.cpp" />

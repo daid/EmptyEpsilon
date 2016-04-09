@@ -35,11 +35,18 @@ ModelData::ModelData()
 
 void ModelData::setName(string name)
 {
+    this->name = name;
+
     if (data_map.find(name) != data_map.end())
     {
         LOG(WARNING) << "Duplicate modeldata definition: " << name;
     }
     data_map[name] = this;
+}
+
+string ModelData::getName()
+{
+    return name;
 }
 
 void ModelData::setMesh(string mesh_name)
@@ -170,6 +177,17 @@ P<ModelData> ModelData::getModel(string name)
         return nullptr;
     }
     return data_map[name];
+}
+
+std::vector<string> ModelData::getModelDataNames()
+{
+    std::vector<string> ret;
+    for(auto it : data_map)
+    {
+        ret.push_back(it.first);
+    }
+    std::sort(ret.begin(), ret.end());
+    return ret;
 }
 
 void ModelData::render()

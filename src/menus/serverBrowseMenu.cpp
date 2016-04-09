@@ -18,8 +18,8 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source)
         returnToMainMenu();
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
 
-    connect_button = new GuiButton(this, "CONNECT", "Connect", [this]() {
-        new JoinServerScreen(sf::IpAddress(manual_ip->getText()));
+    connect_button = new GuiButton(this, "CONNECT", "Connect", [this, source]() {
+        new JoinServerScreen(source, sf::IpAddress(manual_ip->getText()));
         destroy();
     });
     connect_button->setPosition(-50, -50, ABottomRight)->setSize(300, 50);

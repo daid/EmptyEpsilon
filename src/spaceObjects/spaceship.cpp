@@ -57,6 +57,8 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// For example, ship:setRadarTrace("RadarBlip.png") will show a dot instead of an arrow for this ship.
     /// Note: Icon is only shown after scanning, before the ship is scanned it is always shown as an arrow.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadarTrace);
+
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, addBroadcast);
 }
 
 /* Define script conversion function for the EMainScreenSetting enum. */
@@ -917,10 +919,130 @@ void SpaceShip::setWeaponTubeExclusiveFor(int index, EMissileWeapons type)
     weapon_tube[index].allowLoadOf(type);
 }
 
+void SpaceShip::addBroadcast(int threshold, string message)
+{
+    if ((threshold < 0) || (threshold > 2))     //if an invalid threshold is defined, alert and default to ally only
+    {
+        LOG(ERROR) << "Invalid threshold: " << threshold;
+        threshold = 0;
+    }
+
+    sf::Color color = sf::Color(255, 204, 51); //default : yellow, should never be seen
+    bool addtolog = 0;
+
+    for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
+    {
+        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
+        if (ship)
+        {
+            if (factionInfo[this->getFactionId()]->states[ship->getFactionId()] == FVF_Friendly)
+            {
+                color = sf::Color(154,255,154); //ally = light green
+                addtolog = 1;
+            }
+            else if ((factionInfo[this->getFactionId()]->states[ship->getFactionId()] == FVF_Neutral) && ((threshold >= FVF_Neutral)))
+            {
+                color = sf::Color(128,128,128); //neutral = grey
+                addtolog = 1;
+            }
+            else if ((factionInfo[this->getFactionId()]->states[ship->getFactionId()] == FVF_Enemy) && (threshold == FVF_Enemy))
+            {
+                color = sf::Color(255,102,102); //enemy = light red
+                addtolog = 1;
+            }
+
+            if (addtolog)
+            {
+                ship->addToShipLog(message, color);
+            }
+        }
+    }
+}
+
 std::unordered_map<string, string> SpaceShip::getGMInfo()
 {
     std::unordered_map<string, string> ret;
     ret = ShipTemplateBasedObject::getGMInfo();
+    return ret;
+}
+
+string SpaceShip::getScriptExportModificationsOnTemplate()
+{
+    string ret = "";
+    if (getTypeName() != ship_template->getName())
+        ret += ":setTypeName(" + getTypeName() + ")";
+    if (hull_max != ship_template->hull)
+        ret += ":setHullMax(" + string(hull_max, 0) + ")";
+    if (hull_strength != ship_template->hull)
+        ret += ":setHull(" + string(hull_strength, 0) + ")";
+    if (impulse_max_speed != ship_template->impulse_speed)
+        ret += ":setImpulseMaxSpeed(" + string(impulse_max_speed, 1) + ")";
+    if (turn_speed != ship_template->turn_speed)
+        ret += ":setRotationMaxSpeed(" + string(turn_speed, 1) + ")";
+    if (has_jump_drive != ship_template->has_jump_drive)
+        ret += ":setJumpDrive(" + string(has_jump_drive ? "true" : "false") + ")";
+    if (has_warp_drive != (ship_template->warp_speed > 0))
+        ret += ":setWarpDrive(" + string(has_warp_drive ? "true" : "false") + ")";
+    
+    /// shield data
+    bool add_shields_max_line = getShieldCount() != ship_template->shield_count;
+    bool add_shields_line = getShieldCount() != ship_template->shield_count;
+    for(int n=0; n<getShieldCount(); n++)
+    {
+        if (getShieldMax(n) != ship_template->shield_level[n])
+            add_shields_max_line = true;
+        if (getShieldLevel(n) != ship_template->shield_level[n])
+            add_shields_line = true;
+    }
+    if (add_shields_max_line)
+    {
+        ret += ":setShieldsMax(";
+        for(int n=0; n<getShieldCount(); n++)
+        {
+            if (n > 0)
+                ret += ", ";
+            ret += getShieldMax(n);
+        }
+        ret += ")";
+    }
+    if (add_shields_line)
+    {
+        ret += ":setShields(";
+        for(int n=0; n<getShieldCount(); n++)
+        {
+            if (n > 0)
+                ret += ", ";
+            ret += getShieldLevel(n);
+        }
+        ret += ")";
+    }
+    
+    ///Missile weapon data
+    if (weapon_tube_count != ship_template->weapon_tube_count)
+        ret += ":setWeaponTubeCount(" + string(weapon_tube_count) + ")";
+    //TODO: Weapon tube "type_allowed_mask"
+    //TODO: Weapon tube "load_time"
+    for(int n=0; n<MW_Count; n++)
+    {
+        if (weapon_storage_max[n] != ship_template->weapon_storage[n])
+            ret += ":setWeaponStorageMax(\"" + getMissileWeaponName(EMissileWeapons(n)) + "\", " + string(weapon_storage_max[n]) + ")";
+        if (weapon_storage[n] != ship_template->weapon_storage[n])
+            ret += ":setWeaponStorage(\"" + getMissileWeaponName(EMissileWeapons(n)) + "\", " + string(weapon_storage[n]) + ")";
+    }
+    
+    ///Beam weapon data
+    for(int n=0; n<max_beam_weapons; n++)
+    {
+        if (beam_weapons[n].getArc() != ship_template->beams[n].getArc()
+         || beam_weapons[n].getDirection() != ship_template->beams[n].getDirection()
+         || beam_weapons[n].getRange() != ship_template->beams[n].getRange()
+         || beam_weapons[n].getCycleTime() != ship_template->beams[n].getCycleTime()
+         || beam_weapons[n].getDamage() != ship_template->beams[n].getDamage())
+        {
+            ret += ":setBeamWeapon(" + string(n) + ", " + string(beam_weapons[n].getArc(), 0) + ", " + string(beam_weapons[n].getDirection(), 0) + ", " + string(beam_weapons[n].getRange(), 0) + ", " + string(beam_weapons[n].getCycleTime(), 1) + ", " + string(beam_weapons[n].getDamage(), 1) + ")";
+        }
+    }
+    
     return ret;
 }
 

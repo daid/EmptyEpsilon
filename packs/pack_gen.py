@@ -38,7 +38,7 @@ def convertObj(filename):
 
 def buildPack(name):
 	os.chdir(name)
-	filenames = glob.glob('*') + glob.glob('*/*')
+	filenames = glob.glob('*') + glob.glob('*/*') + glob.glob('*/*/*')
 	files = {}
 	for filename in filenames:
 		filename = filename.encode('ascii')
@@ -74,6 +74,7 @@ def buildPack(name):
 def main():
 	for dir in os.listdir("."):
 		if os.path.isdir(dir):
-			buildPack(dir)
+			if not dir.startswith("SolCommand"):
+				buildPack(dir)
 
 main()

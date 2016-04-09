@@ -6,15 +6,17 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 
-JoinServerScreen::JoinServerScreen(sf::IpAddress ip)
+JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source, sf::IpAddress ip)
 : ip(ip)
 {
+    this->source = source;
+    
     status_label = new GuiLabel(this, "STATUS", "Connecting...", 30);
     status_label->setPosition(0, 300, ATopCenter)->setSize(0, 50);
     (new GuiButton(this, "BTN_CANCEL", "Cancel", [this]() {
         destroy();
         disconnectFromServer();
-        new ServerBrowserMenu(ServerBrowserMenu::Local);
+        new ServerBrowserMenu(this->source);
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
     
     password_entry_box = new GuiPanel(this, "PASSWORD_ENTRY_BOX");
@@ -47,7 +49,7 @@ void JoinServerScreen::update(float delta)
     case GameClient::Disconnected:
         destroy();
         disconnectFromServer();
-        new ServerBrowserMenu(ServerBrowserMenu::Local);
+        new ServerBrowserMenu(this->source);
         break;
     case GameClient::Connected:
         if (game_client->getClientId() > 0)

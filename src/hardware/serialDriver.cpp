@@ -18,6 +18,7 @@
     #include <IOKit/serial/ioss.h>
     #include <sys/ioctl.h>
     #include <fcntl.h>
+    #include <unistd.h>
     #include <termios.h>
 
     //Define the IOCTL for OSX that allows you to set a custom serial speed, if it's not defined by one of the includes.

@@ -2,6 +2,7 @@
 #define JOIN_SERVER_MENU_H
 
 #include "gui/gui2.h"
+#include "serverBrowseMenu.h"
 
 class JoinServerScreen : public GuiCanvas, public Updatable
 {
@@ -9,8 +10,10 @@ class JoinServerScreen : public GuiCanvas, public Updatable
     GuiLabel* status_label;
     GuiPanel* password_entry_box;
     GuiTextEntry* password_entry;
+    
+    ServerBrowserMenu::SearchSource source;
 public:
-    JoinServerScreen(sf::IpAddress ip);
+    JoinServerScreen(ServerBrowserMenu::SearchSource source, sf::IpAddress ip);
 
     virtual void update(float delta);
 };

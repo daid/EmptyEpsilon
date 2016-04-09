@@ -5,7 +5,7 @@
 #include "gameGlobalInfo.h"
 #include "screens/windowScreen.h"
 #include "screens/topDownScreen.h"
-#include "screens/gameMasterScreen.h"
+#include "screens/gm/gameMasterScreen.h"
 
 ShipSelectionScreen::ShipSelectionScreen()
 {
@@ -77,10 +77,14 @@ ShipSelectionScreen::ShipSelectionScreen()
     });
     topdown_button->setSize(GuiElement::GuiSizeMax, 50);
     
+    if (game_server)
+    {
+        (new GuiPanel(this, "CREATE_SHIP_BOX"))->setPosition(50, 50, ATopLeft)->setSize(550, 700);
+    }
+    (new GuiPanel(this, "SHIP_SELECTION_BOX"))->setPosition(50, 50, ATopLeft)->setSize(550, 560);
     (new GuiLabel(this, "SHIP_SELECTION_LABEL", "Select ship:", 30))->addBackground()->setPosition(50, 50, ATopLeft)->setSize(550, 50);
     no_ships_label = new GuiLabel(this, "SHIP_SELECTION_NO_SHIPS_LABEL", "Waiting for server to spawn a ship", 30);
     no_ships_label->setPosition(80, 100, ATopLeft)->setSize(460, 50);
-    (new GuiBox(this, "SHIP_SELECTION_BOX"))->setPosition(50, 50, ATopLeft)->setSize(550, 560);
     player_ship_list = new GuiListbox(this, "PLAYER_SHIP_LIST", [this](int index, string value) {
         my_spaceship = gameGlobalInfo->getPlayerShip(value.toInt());
         if (my_spaceship)
@@ -96,7 +100,6 @@ ShipSelectionScreen::ShipSelectionScreen()
 
     if (game_server)
     {
-        (new GuiBox(this, "CREATE_SHIP_BOX"))->setPosition(50, 50, ATopLeft)->setSize(550, 700);
         GuiSelector* ship_template_selector = new GuiSelector(this, "CREATE_SHIP_SELECTOR", nullptr);
         std::vector<string> template_names = ShipTemplate::getPlayerTemplateNameList();
         std::sort(template_names.begin(), template_names.end());
@@ -242,7 +245,7 @@ void ShipSelectionScreen::onReadyClick()
 {
     if (game_master_button->getValue())
     {
-        my_spaceship = NULL;
+        my_spaceship = nullptr;
         my_player_info->setShipId(-1);
         destroy();
         new GameMasterScreen();

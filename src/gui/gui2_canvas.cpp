@@ -88,3 +88,11 @@ void GuiCanvas::onClick(sf::Vector2f mouse_position)
 void GuiCanvas::onKey(sf::Keyboard::Key key, int unicode)
 {
 }
+
+void GuiCanvas::unfocusElement(GuiElement* element)
+{
+    if (focus_element == element)
+        focus_element = nullptr;
+    if (click_element == element)
+        click_element = nullptr;
+}

@@ -61,7 +61,6 @@ set(SOURCES
 	src/menus/autoConnectScreen.cpp
 	src/screens/crewStationScreen.cpp
 	src/screens/topDownScreen.cpp
-	src/screens/gameMasterScreen.cpp
 	src/screens/windowScreen.cpp
 	src/screens/mainScreen.cpp
 	src/screens/crew4/operationsScreen.cpp
@@ -77,6 +76,9 @@ set(SOURCES
 	src/screens/extra/powerManagement.cpp
 	src/screens/extra/databaseScreen.cpp
 	src/screens/extra/shipLogScreen.cpp
+	src/screens/gm/gameMasterScreen.cpp
+	src/screens/gm/chatDialog.cpp
+	src/screens/gm/tweak.cpp
 	src/screenComponents/missileTubeControls.cpp
 	src/screenComponents/selfDestructIndicator.cpp
 	src/screenComponents/viewport3d.cpp
@@ -130,6 +132,7 @@ set(SOURCES
 	src/gui/gui2_scrolltext.cpp
 	src/gui/gui2_advancedscrolltext.cpp
 	src/gui/gui2_button.cpp
+	src/gui/gui2_resizabledialog.cpp
 	src/gui/debugRenderer.cpp
 	src/gui/gui2_element.cpp
 	src/gui/gui2.cpp
@@ -137,7 +140,6 @@ set(SOURCES
 	src/gui/gui2_listbox.cpp
 	src/gui/gui2_scrollbar.cpp
 	src/gui/gui2_container.cpp
-	src/gui/gui2_box.cpp
 	src/gui/gui2_panel.cpp
 	src/gui/gui2_overlay.cpp
 	src/spaceObjects/spaceStation.cpp

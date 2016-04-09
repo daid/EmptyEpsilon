@@ -12,7 +12,7 @@ GuiSignalQualityIndicator::GuiSignalQualityIndicator(GuiContainer* owner, string
 
 void GuiSignalQualityIndicator::onDraw(sf::RenderTarget& window)
 {
-    draw9Cut(window, rect, "border_background", sf::Color::White);
+    drawStretchedHV(window, rect, 25.0f, "gui/PanelBackground");
     
     sf::VertexArray r(sf::LinesStrip, rect.width / 4 - 1);
     sf::VertexArray g(sf::LinesStrip, rect.width / 4 - 1);

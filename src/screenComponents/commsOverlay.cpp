@@ -45,6 +45,14 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         if (my_spaceship)
             my_spaceship->commandCloseTextComm();
     }))->setSize(150, 50)->setPosition(-20, -10, ABottomRight);
+
+    closed_box = new GuiPanel(owner, "COMMS_CLOSED_BOX");
+    closed_box->hide()->setSize(800, 70)->setPosition(0, -250, ABottomCenter);
+    (new GuiLabel(closed_box, "COMMS_BROKEN_LABEL", "Other party closed communications", 40))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopLeft);
+    (new GuiButton(closed_box, "COMMS_BROKEN_OK", "Ok", []() {
+        if (my_spaceship)
+            my_spaceship->commandCloseTextComm();
+    }))->setSize(150, 50)->setPosition(-20, -10, ABottomRight);
     
     chat_comms_box = new GuiPanel(owner, "COMMS_CHAT_BOX");
     chat_comms_box->hide()->setSize(800, 600)->setPosition(0, -100, ABottomCenter);
@@ -103,6 +111,7 @@ void GuiCommsOverlay::onDraw(sf::RenderTarget& window)
         no_response_box->setVisible(my_spaceship->isCommsFailed());
 
         broken_box->setVisible(my_spaceship->isCommsBroken());
+        closed_box->setVisible(my_spaceship->isCommsClosed());
         
         chat_comms_box->setVisible(my_spaceship->isCommsChatOpen());
         chat_comms_text->setText(my_spaceship->getCommsIncommingMessage());
