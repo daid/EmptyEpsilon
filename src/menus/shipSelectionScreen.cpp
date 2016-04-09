@@ -1,4 +1,5 @@
 #include "shipSelectionScreen.h"
+#include "serverCreationScreen.h"
 #include "epsilonServer.h"
 #include "main.h"
 #include "playerInfo.h"
@@ -118,13 +119,18 @@ ShipSelectionScreen::ShipSelectionScreen()
             }
             updateReadyButton();
         }))->setPosition(80, 680, ATopLeft)->setSize(490, 50);
+
+        (new GuiButton(this, "DISCONNECT", "Scenario selection", [this]() {
+            destroy();
+            new ServerCreationScreen();
+        }))->setPosition(150, -50, ABottomLeft)->setSize(300, 50);
+    }else{
+        (new GuiButton(this, "DISCONNECT", "Disconnect", [this]() {
+            destroy();
+            disconnectFromServer();
+            returnToMainMenu();
+        }))->setPosition(150, -50, ABottomLeft)->setSize(300, 50);
     }
-    
-    (new GuiButton(this, "DISCONNECT", game_server ? "Close server" : "Disconnect", [this]() {
-        destroy();
-        disconnectFromServer();
-        returnToMainMenu();
-    }))->setPosition(150, -50, ABottomLeft)->setSize(300, 50);
     ready_button = new GuiButton(this, "READY_BUTTON", "Ready", [this]() {this->onReadyClick();});
     ready_button->setPosition(-150, -50, ABottomRight)->setSize(300, 50);
     
