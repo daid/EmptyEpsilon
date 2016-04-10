@@ -15,6 +15,7 @@ private:
     GuiTextEntry* manual_ip;
     GuiButton* connect_button;
     GuiListbox* server_list;
+    GuiSelector* lan_internet_selector;
     
     P<ServerScanner> scanner;
 public:

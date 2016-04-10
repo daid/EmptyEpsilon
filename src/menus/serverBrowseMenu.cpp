@@ -18,8 +18,16 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source)
         returnToMainMenu();
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
 
-    connect_button = new GuiButton(this, "CONNECT", "Connect", [this, source]() {
-        new JoinServerScreen(source, sf::IpAddress(manual_ip->getText()));
+    lan_internet_selector = new GuiSelector(this, "LAN_INTERNET_SELECT", [this](int index, string value) {
+        if (index == 0)
+            scanner->scanLocalNetwork();
+        else
+            scanner->scanMasterServer("http://daid.eu/ee/list.php");
+    });
+    lan_internet_selector->setOptions({"LAN", "Internet"})->setSelectionIndex(source == Local ? 0 : 1)->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
+
+    connect_button = new GuiButton(this, "CONNECT", "Connect", [this]() {
+        new JoinServerScreen(lan_internet_selector->getSelectionIndex() == 0 ? Local : Internet, sf::IpAddress(manual_ip->getText()));
         destroy();
     });
     connect_button->setPosition(-50, -50, ABottomRight)->setSize(300, 50);

@@ -31,6 +31,7 @@ ServerCreationScreen::ServerCreationScreen()
     GuiElement* right_panel = new GuiAutoLayout(right_container, "", GuiAutoLayout::LayoutVerticalTopToBottom);
     right_panel->setPosition(0, 20, ATopCenter)->setSize(550, GuiElement::GuiSizeMax);
 
+    /*************************************************************/
     (new GuiLabel(left_panel, "GENERAL_LABEL", "General", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
     GuiElement* row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
@@ -39,8 +40,23 @@ ServerCreationScreen::ServerCreationScreen()
 
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(row, "PASSWORD_LABEL", "Server password:", 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiTextEntry(row, "SERVER_PASSWORD", ""))->callback([](string text){game_server->setPassword(text);})->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
+    row->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiLabel(row, "IP_LABEL", "Server IP:", 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiLabel(row, "IP", sf::IpAddress::getLocalAddress().toString(), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
+    row->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(row, "LAN_INTERNET_LABEL", "LAN/Internet:", 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiSelector(row, "LAN_INTERNET_SELECT", [](int index, string value) {
+        if (index == 1)
+            game_server->registerOnMasterServer("http://daid.eu/ee/register.php");
+        else
+            game_server->stopMasterServerRegistry();
+    }))->setOptions({"LAN", "Internet"})->setSelectionIndex(0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     (new GuiLabel(left_panel, "PLAYER_SHIP_LABEL", "Player ships", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
 
