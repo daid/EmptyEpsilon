@@ -130,8 +130,10 @@ void GuiShipRoom::onDraw(sf::RenderTarget& window)
             textureManager.setTexture(sprite, "gui/icons/system_impulse");
             break;
         case SYS_Warp:
-        case SYS_JumpDrive:
             textureManager.setTexture(sprite, "gui/icons/system_warpdrive");
+            break;
+        case SYS_JumpDrive:
+            textureManager.setTexture(sprite, "gui/icons/system_jumpdrive");
             break;
         case SYS_FrontShield:
             textureManager.setTexture(sprite, "gui/icons/shields-fore");

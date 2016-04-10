@@ -82,7 +82,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
     system_rows[SYS_Maneuver].button->setIcon("gui/icons/system_maneuver");
     system_rows[SYS_Impulse].button->setIcon("gui/icons/system_impulse");
     system_rows[SYS_Warp].button->setIcon("gui/icons/system_warpdrive");
-    system_rows[SYS_JumpDrive].button->setIcon("gui/icons/system_warpdrive");
+    system_rows[SYS_JumpDrive].button->setIcon("gui/icons/system_jumpdrive");
     system_rows[SYS_FrontShield].button->setIcon("gui/icons/shields-fore");
     system_rows[SYS_RearShield].button->setIcon("gui/icons/shields-aft");
 
