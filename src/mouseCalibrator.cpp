@@ -20,7 +20,7 @@ MouseCalibrator::MouseCalibrator(string filename)
     });
     ready_button->setPosition(0, -100, ABottomCenter)->setSize(300, 100)->hide();
 
-    test_box = new GuiPanel(this, "TEST");
+    test_box = new GuiImage(this, "TEST", "gui/PanelBackground");
     test_box->setPosition(0, 0, ATopLeft)->setSize(50, 50);
     
     screen_box[1]->hide();

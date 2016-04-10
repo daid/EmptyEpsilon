@@ -98,7 +98,7 @@ MainMenu::MainMenu()
     (new GuiLabel(this, "CREDITS25", "Mickael Houet", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
 
 #ifdef DEBUG
-    (new GuiButton(this, "START_TUTORIAL", "TO DA GM!", [this]() {
+    (new GuiButton(this, "", "TO DA GM!", [this]() {
         new EpsilonServer();
         if (game_server)
         {
