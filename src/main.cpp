@@ -97,6 +97,11 @@ int main(int argc, char** argv)
 
 #ifdef DEBUG
     Logging::setLogLevel(LOGLEVEL_DEBUG);
+#else
+    Logging::setLogLevel(LOGLEVEL_INFO);
+#endif
+#if defined(__WIN32__) && !defined(DEBUG)
+    Logging::setLogFile("EmptyEpsilon.log");
 #endif
 #ifdef RESOURCE_BASE_DIR
     PreferencesManager::load(RESOURCE_BASE_DIR "options.ini");
@@ -139,7 +144,6 @@ int main(int argc, char** argv)
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/");
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/scripts/");
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/packs/SolCommand/");
-        new PackResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/packs/SolCommand/");
     }
     new DirectoryResourceProvider("resources/");
     new DirectoryResourceProvider("scripts/");

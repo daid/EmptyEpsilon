@@ -269,3 +269,38 @@ static int getScenarioVariation(lua_State* L)
 /// getScenarioVariation()
 /// Returns the currently used scenario variation.
 REGISTER_SCRIPT_FUNCTION(getScenarioVariation);
+
+/** Short lived object to do a scenario change on the update loop. See "setScenario" for details */
+class ScenarioChanger : public Updatable
+{
+public:
+    ScenarioChanger(string script_name, string variation)
+    : script_name(script_name), variation(variation)
+    {
+    }
+    
+    virtual void update(float delta)
+    {
+        gameGlobalInfo->variation = variation;
+        gameGlobalInfo->startScenario(script_name);
+        destroy();
+    }
+private:
+    string script_name;
+    string variation;
+};
+
+static int setScenario(lua_State* L)
+{
+    string script_name = luaL_checkstring(L, 1);
+    string variation = luaL_optstring(L, 2, "");
+    //This could be called from a currently active scenario script.
+    // Calling GameGlobalInfo::startScenario is unsafe at this point,
+    // as this will destroy the lua state that this function is running in.
+    //So use the ScenarioChanger object which will do the change in the update loop. Which is safe.
+    new ScenarioChanger(script_name, variation);
+    return 0;
+}
+/// setScenario(script_name, variation_name)
+/// Change the current scenario to a different one.
+REGISTER_SCRIPT_FUNCTION(setScenario);
