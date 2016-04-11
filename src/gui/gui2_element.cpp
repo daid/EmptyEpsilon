@@ -78,6 +78,28 @@ sf::Vector2f GuiElement::getSize()
     return size;
 }
 
+GuiElement* GuiElement::setMargins(float n)
+{
+    margins.left = margins.top = margins.width = margins.height = n;
+    return this;
+}
+
+GuiElement* GuiElement::setMargins(float x, float y)
+{
+    margins.left = margins.width = x;
+    margins.top = margins.height = y;
+    return this;
+}
+
+GuiElement* GuiElement::setMargins(float left, float top, float right, float bottom)
+{
+    margins.left = left;
+    margins.top = top;
+    margins.width = right;
+    margins.height = bottom;
+    return this;
+}
+
 GuiElement* GuiElement::setPosition(float x, float y, EGuiAlign alignment)
 {
     this->position.x = x;
@@ -191,13 +213,13 @@ GuiContainer* GuiElement::getTopLevelContainer()
     return top_level;
 }
 
-void GuiElement::updateRect(sf::FloatRect window_rect)
+void GuiElement::updateRect(sf::FloatRect parent_rect)
 {
     sf::Vector2f local_size = size;
     if (local_size.x == GuiSizeMax)
-        local_size.x = window_rect.width - fabs(position.x);
+        local_size.x = parent_rect.width - fabs(position.x) - margins.left - margins.width;
     if (local_size.y == GuiSizeMax)
-        local_size.y = window_rect.height - fabs(position.y);
+        local_size.y = parent_rect.height - fabs(position.y) - margins.top - margins.height;
     if (local_size.x == GuiSizeMatchHeight)
         local_size.x = local_size.y;
     if (local_size.y == GuiSizeMatchWidth)
@@ -207,17 +229,17 @@ void GuiElement::updateRect(sf::FloatRect window_rect)
     case ATopLeft:
     case ACenterLeft:
     case ABottomLeft:
-        rect.left = window_rect.left + position.x;
+        rect.left = parent_rect.left + position.x + margins.left;
         break;
     case ATopCenter:
     case ACenter:
     case ABottomCenter:
-        rect.left = window_rect.left + window_rect.width / 2.0 + position.x - local_size.x / 2.0;
+        rect.left = parent_rect.left + parent_rect.width / 2.0 + position.x - local_size.x / 2.0;
         break;
     case ATopRight:
     case ACenterRight:
     case ABottomRight:
-        rect.left = window_rect.left + window_rect.width + position.x - local_size.x;
+        rect.left = parent_rect.left + parent_rect.width + position.x - local_size.x - margins.width;
         break;
     }
 
@@ -226,17 +248,17 @@ void GuiElement::updateRect(sf::FloatRect window_rect)
     case ATopLeft:
     case ATopRight:
     case ATopCenter:
-        rect.top = window_rect.top + position.y;
+        rect.top = parent_rect.top + position.y + margins.top;
         break;
     case ACenterLeft:
     case ACenterRight:
     case ACenter:
-        rect.top = window_rect.top + window_rect.height / 2.0 + position.y - local_size.y / 2.0;
+        rect.top = parent_rect.top + parent_rect.height / 2.0 + position.y - local_size.y / 2.0;
         break;
     case ABottomLeft:
     case ABottomRight:
     case ABottomCenter:
-        rect.top = window_rect.top + window_rect.height + position.y - local_size.y;
+        rect.top = parent_rect.top + parent_rect.height + position.y - local_size.y - margins.height;
         break;
     }
     

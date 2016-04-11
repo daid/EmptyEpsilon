@@ -20,7 +20,7 @@ public:
     
     virtual void onDraw(sf::RenderTarget& window);
 protected:
-    virtual void drawElements(sf::FloatRect window_rect, sf::RenderTarget& window);
+    virtual void drawElements(sf::FloatRect parent_rect, sf::RenderTarget& window);
 };
 
 #endif//GUI2_AUTO_LAYOUT_H

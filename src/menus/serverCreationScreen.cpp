@@ -122,9 +122,9 @@ ServerCreationScreen::ServerCreationScreen()
     GuiPanel* panel = new GuiPanel(right_panel, "SCENARIO_DESCRIPTION_BOX");
     panel->setSize(GuiElement::GuiSizeMax, 200);
     scenario_description = new GuiScrollText(panel, "SCENARIO_DESCRIPTION", "");
-    scenario_description->setTextSize(20)->setPosition(10, 10, ATopLeft)->setSize(530, 180);
+    scenario_description->setTextSize(20)->setMargins(15)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    variation_container = new GuiElement(right_panel, "VARIATION_CONTAINER");
+    variation_container = new GuiAutoLayout(right_panel, "VARIATION_CONTAINER", GuiAutoLayout::LayoutVerticalTopToBottom);
     variation_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     row = new GuiAutoLayout(variation_container, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
@@ -137,9 +137,9 @@ ServerCreationScreen::ServerCreationScreen()
     variation_selection->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     panel = new GuiPanel(variation_container, "VARIATION_DESCRIPTION_BOX");
-    panel->setPosition(0, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, 120);
+    panel->setSize(GuiElement::GuiSizeMax, 150);
     variation_description = new GuiScrollText(panel, "VARIATION_DESCRIPTION", "");
-    variation_description->setTextSize(20)->setPosition(10, 10, ATopLeft)->setSize(530, 100);
+    variation_description->setTextSize(20)->setMargins(15)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     /*************************************************************/
 

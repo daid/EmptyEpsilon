@@ -15,12 +15,12 @@ GuiContainer::~GuiContainer()
     }
 }
 
-void GuiContainer::drawElements(sf::FloatRect window_rect, sf::RenderTarget& window)
+void GuiContainer::drawElements(sf::FloatRect parent_rect, sf::RenderTarget& window)
 {
     sf::Vector2f mouse_position = InputHandler::getMousePos();
     for(GuiElement* element : elements)
     {
-        element->updateRect(window_rect);
+        element->updateRect(parent_rect);
         element->hover = element->rect.contains(mouse_position);
     }
     
@@ -34,7 +34,7 @@ void GuiContainer::drawElements(sf::FloatRect window_rect, sf::RenderTarget& win
     }
 }
 
-void GuiContainer::drawDebugElements(sf::FloatRect window_rect, sf::RenderTarget& window)
+void GuiContainer::drawDebugElements(sf::FloatRect parent_rect, sf::RenderTarget& window)
 {
     sf::Vector2f mouse_position = InputHandler::getMousePos();
     for(GuiElement* element : elements)

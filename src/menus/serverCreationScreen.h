@@ -10,7 +10,7 @@ class ServerCreationScreen : public GuiCanvas
     string selected_scenario_filename;
     GuiScrollText* scenario_description;
     
-    GuiElement* variation_container;
+    GuiAutoLayout* variation_container;
     std::vector<string> variation_names_list;
     std::vector<string> variation_descriptions_list;
     GuiSelector* variation_selection;

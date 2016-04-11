@@ -9,11 +9,11 @@ void GuiAutoLayout::onDraw(sf::RenderTarget& window)
 {
 }
 
-void GuiAutoLayout::drawElements(sf::FloatRect window_rect, sf::RenderTarget& window)
+void GuiAutoLayout::drawElements(sf::FloatRect parent_rect, sf::RenderTarget& window)
 {
     sf::Vector2f offset(0, 0);
     sf::Vector2f scale(0, 0);
-    EGuiAlign alignment;
+    EGuiAlign alignment = ACenterLeft;
     switch(mode)
     {
     case LayoutHorizontalLeftToRight:
@@ -42,5 +42,5 @@ void GuiAutoLayout::drawElements(sf::FloatRect window_rect, sf::RenderTarget& wi
             offset.y += element->getSize().y * scale.y;
         }
     }
-    GuiContainer::drawElements(window_rect, window);
+    GuiContainer::drawElements(parent_rect, window);
 }
