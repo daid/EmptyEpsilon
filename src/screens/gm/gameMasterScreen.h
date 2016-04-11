@@ -52,6 +52,8 @@ public:
 
     virtual void onKey(sf::Keyboard::Key key, int unicode);
     
+    PVector<SpaceObject> getSelection();
+    
     string getScriptExport();
 };
 

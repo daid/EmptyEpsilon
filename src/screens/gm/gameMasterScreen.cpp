@@ -78,7 +78,7 @@ GameMasterScreen::GameMasterScreen()
     info_layout = new GuiAutoLayout(this, "INFO_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     info_layout->setPosition(-20, 20, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
     
-    gm_script_options = new GuiListbox(this, "GM_SCRIPT_OPTIONS", [](int index, string value)
+    gm_script_options = new GuiListbox(this, "GM_SCRIPT_OPTIONS", [this](int index, string value)
     {
         int n = 0;
         for(GMScriptCallback& callback : gameGlobalInfo->gm_callback_functions)
@@ -87,6 +87,7 @@ GameMasterScreen::GameMasterScreen()
                 callback.callback.call();
             n++;
         }
+        gm_script_options->setSelectionIndex(-1);
     });
     gm_script_options->setPosition(20, 130, ATopLeft)->setSize(250, 500);
     for(GMScriptCallback& callback : gameGlobalInfo->gm_callback_functions)
@@ -378,6 +379,11 @@ void GameMasterScreen::onKey(sf::Keyboard::Key key, int unicode)
     default:
         break;
     }
+}
+
+PVector<SpaceObject> GameMasterScreen::getSelection()
+{
+    return targets.getTargets();
 }
 
 string GameMasterScreen::getScriptExport()
