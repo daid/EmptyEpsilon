@@ -16,7 +16,13 @@ ShipSelectionScreen::ShipSelectionScreen()
     //Easiest place to ensure that positional sound is disabled on console views. As soon as a 3D view is rendered positional sound is enabled again.
     soundManager->disablePositionalSound();
 
-    GuiAutoLayout* stations_layout = new GuiAutoLayout(this, "CREW_POSITION_BUTTON_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    GuiElement* container = new GuiAutoLayout(this, "", GuiAutoLayout::ELayoutMode::LayoutVerticalColumns);
+    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    GuiElement* left_container = new GuiElement(container, "");
+    GuiElement* right_container = new GuiElement(container, "");
+
+    GuiAutoLayout* stations_layout = new GuiAutoLayout(right_container, "CREW_POSITION_BUTTON_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    stations_layout->setPosition(0, 50, ATopCenter)->setSize(400, 500);
     (new GuiLabel(stations_layout, "CREW_POSITION_SELECT_LABEL", "Select your station", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
 
     crew_type_selector = new GuiSelector(stations_layout, "CREW_TYPE_SELECTION", [this](int index, string value) {
@@ -24,7 +30,6 @@ ShipSelectionScreen::ShipSelectionScreen()
     });
     crew_type_selector->setOptions({"6/5 player crew", "4/3 player crew", "1 player crew/extras", "Alternative options"})->setSize(GuiElement::GuiSizeMax, 50);
 
-    stations_layout->setPosition(-80, 50, ATopRight)->setSize(400, 500);
     main_screen_button = new GuiToggleButton(stations_layout, "MAIN_SCREEN_BUTTON", "Main screen", [this](bool value) {
         for(int n=0; n<max_crew_positions; n++)
         {
@@ -80,13 +85,13 @@ ShipSelectionScreen::ShipSelectionScreen()
     
     if (game_server)
     {
-        (new GuiPanel(this, "CREATE_SHIP_BOX"))->setPosition(50, 50, ATopLeft)->setSize(550, 700);
+        (new GuiPanel(left_container, "CREATE_SHIP_BOX"))->setPosition(0, 50, ATopCenter)->setSize(550, 700);
     }
-    (new GuiPanel(this, "SHIP_SELECTION_BOX"))->setPosition(50, 50, ATopLeft)->setSize(550, 560);
-    (new GuiLabel(this, "SHIP_SELECTION_LABEL", "Select ship:", 30))->addBackground()->setPosition(50, 50, ATopLeft)->setSize(550, 50);
-    no_ships_label = new GuiLabel(this, "SHIP_SELECTION_NO_SHIPS_LABEL", "Waiting for server to spawn a ship", 30);
-    no_ships_label->setPosition(80, 100, ATopLeft)->setSize(460, 50);
-    player_ship_list = new GuiListbox(this, "PLAYER_SHIP_LIST", [this](int index, string value) {
+    (new GuiPanel(left_container, "SHIP_SELECTION_BOX"))->setPosition(0, 50, ATopCenter)->setSize(550, 560);
+    (new GuiLabel(left_container, "SHIP_SELECTION_LABEL", "Select ship:", 30))->addBackground()->setPosition(0, 50, ATopCenter)->setSize(510, 50);
+    no_ships_label = new GuiLabel(left_container, "SHIP_SELECTION_NO_SHIPS_LABEL", "Waiting for server to spawn a ship", 30);
+    no_ships_label->setPosition(0, 100, ATopCenter)->setSize(460, 50);
+    player_ship_list = new GuiListbox(left_container, "PLAYER_SHIP_LIST", [this](int index, string value) {
         my_spaceship = gameGlobalInfo->getPlayerShip(value.toInt());
         if (my_spaceship)
         {
@@ -96,18 +101,18 @@ ShipSelectionScreen::ShipSelectionScreen()
         }
         updateReadyButton();
     });
-    player_ship_list->setPosition(80, 100, ATopLeft)->setSize(490, 500);
+    player_ship_list->setPosition(0, 100, ATopCenter)->setSize(490, 500);
 
 
     if (game_server)
     {
-        GuiSelector* ship_template_selector = new GuiSelector(this, "CREATE_SHIP_SELECTOR", nullptr);
+        GuiSelector* ship_template_selector = new GuiSelector(left_container, "CREATE_SHIP_SELECTOR", nullptr);
         std::vector<string> template_names = ShipTemplate::getPlayerTemplateNameList();
         std::sort(template_names.begin(), template_names.end());
         ship_template_selector->setOptions(template_names)->setSelectionIndex(0);
-        ship_template_selector->setPosition(80, 630, ATopLeft)->setSize(490, 50);
+        ship_template_selector->setPosition(0, 630, ATopCenter)->setSize(490, 50);
         
-        (new GuiButton(this, "CREATE_SHIP_BUTTON", "Spawn player ship", [this, ship_template_selector]() {
+        (new GuiButton(left_container, "CREATE_SHIP_BUTTON", "Spawn player ship", [this, ship_template_selector]() {
             my_spaceship = new PlayerSpaceship();
             if (my_spaceship)
             {
@@ -118,21 +123,21 @@ ShipSelectionScreen::ShipSelectionScreen()
                 my_player_info->setShipId(my_spaceship->getMultiplayerId());
             }
             updateReadyButton();
-        }))->setPosition(80, 680, ATopLeft)->setSize(490, 50);
+        }))->setPosition(0, 680, ATopCenter)->setSize(490, 50);
 
-        (new GuiButton(this, "DISCONNECT", "Scenario selection", [this]() {
+        (new GuiButton(left_container, "DISCONNECT", "Scenario selection", [this]() {
             destroy();
             new ServerCreationScreen();
-        }))->setPosition(150, -50, ABottomLeft)->setSize(300, 50);
+        }))->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
     }else{
-        (new GuiButton(this, "DISCONNECT", "Disconnect", [this]() {
+        (new GuiButton(left_container, "DISCONNECT", "Disconnect", [this]() {
             destroy();
             disconnectFromServer();
             returnToMainMenu();
-        }))->setPosition(150, -50, ABottomLeft)->setSize(300, 50);
+        }))->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
     }
-    ready_button = new GuiButton(this, "READY_BUTTON", "Ready", [this]() {this->onReadyClick();});
-    ready_button->setPosition(-150, -50, ABottomRight)->setSize(300, 50);
+    ready_button = new GuiButton(right_container, "READY_BUTTON", "Ready", [this]() {this->onReadyClick();});
+    ready_button->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
     
     crew_type_selector->setSelectionIndex(0);
     updateReadyButton();
