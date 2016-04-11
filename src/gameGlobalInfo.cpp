@@ -304,3 +304,12 @@ static int setScenario(lua_State* L)
 /// setScenario(script_name, variation_name)
 /// Change the current scenario to a different one.
 REGISTER_SCRIPT_FUNCTION(setScenario);
+
+static int shutdownGame(lua_State* L)
+{
+    engine->shutdown();
+    return 0;
+}
+/// Shutdown the game.
+/// Calling this function will close the game. Mainly usefull for a headless server setup.
+REGISTER_SCRIPT_FUNCTION(shutdownGame);
