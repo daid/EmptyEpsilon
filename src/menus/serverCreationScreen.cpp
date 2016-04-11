@@ -21,13 +21,12 @@ ServerCreationScreen::ServerCreationScreen()
     gameGlobalInfo->allow_main_screen_tactical_radar = PreferencesManager::get("server_config_allow_main_screen_tactical_radar", "1").toInt();
     gameGlobalInfo->allow_main_screen_long_range_radar = PreferencesManager::get("server_config_allow_main_screen_long_range_radar", "1").toInt();
 
-    GuiElement* left_container = new GuiElement(this, "");
-    left_container->setPosition(-600, 0, ATopRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    GuiElement* container = new GuiAutoLayout(this, "", GuiAutoLayout::ELayoutMode::LayoutVerticalColumns);
+    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    GuiElement* left_container = new GuiElement(container, "");
+    GuiElement* right_container = new GuiElement(container, "");
     GuiElement* left_panel = new GuiAutoLayout(left_container, "", GuiAutoLayout::LayoutVerticalTopToBottom);
     left_panel->setPosition(0, 20, ATopCenter)->setSize(550, GuiElement::GuiSizeMax);
-
-    GuiElement* right_container = new GuiElement(this, "");
-    right_container->setPosition(600, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     GuiElement* right_panel = new GuiAutoLayout(right_container, "", GuiAutoLayout::LayoutVerticalTopToBottom);
     right_panel->setPosition(0, 20, ATopCenter)->setSize(550, GuiElement::GuiSizeMax);
 
@@ -143,14 +142,14 @@ ServerCreationScreen::ServerCreationScreen()
 
     /*************************************************************/
 
-    (new GuiButton(this, "CLOSE_SERVER", "Close server", [this]() {
+    (new GuiButton(left_container, "CLOSE_SERVER", "Close server", [this]() {
         destroy();
         disconnectFromServer();
         returnToMainMenu();
-    }))->setPosition(150, -50, ABottomLeft)->setSize(300, 50);
-    (new GuiButton(this, "START_SERVER", "Start", [this]() {
+    }))->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
+    (new GuiButton(right_container, "START_SERVER", "Start", [this]() {
         startScenario();
-    }))->setPosition(-150, -50, ABottomRight)->setSize(300, 50);
+    }))->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
 
     std::vector<string> scenario_filenames = findResources("scenario_*.lua");
     std::sort(scenario_filenames.begin(), scenario_filenames.end());
