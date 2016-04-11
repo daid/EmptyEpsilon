@@ -55,7 +55,9 @@ SerialPort::SerialPort(string name)
     }
 #endif
 #if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
-    handle = open(("/dev/" + name).c_str(), O_RDWR | O_NOCTTY | O_NDELAY);
+    if (!name.startswith("/dev/"))
+        name = "/dev/" + name;
+    handle = open(name.c_str(), O_RDWR | O_NOCTTY | O_NDELAY);
 #endif
 
     if (!isOpen())
