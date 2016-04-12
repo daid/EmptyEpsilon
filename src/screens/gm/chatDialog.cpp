@@ -85,3 +85,12 @@ void GameMasterChatDialog::disableComms(string title)
     chat_text->disable();
     text_entry->enable();
 }
+
+void GameMasterChatDialog::onClose()
+{
+    if (player && (player->isCommsChatOpenToGM() || player->isCommsBeingHailedByGM()))
+    {
+        player->closeComms();
+    }
+    destroy();
+}

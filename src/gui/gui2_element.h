@@ -27,6 +27,7 @@ private:
     sf::Vector2f size;
     sf::FloatRect margins;
     EGuiAlign position_alignment;
+    bool destroyed;
 protected:
     GuiContainer* owner;
     sf::FloatRect rect;
@@ -82,6 +83,9 @@ public:
     
     GuiContainer* getOwner();
     GuiContainer* getTopLevelContainer();
+    
+    //Have this GuiElement destroyed, but at a safe point&time in the code. (handled by the container)
+    void destroy();
     
     friend class GuiContainer;
     friend class GuiCanvas;

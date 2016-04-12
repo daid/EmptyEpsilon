@@ -63,7 +63,7 @@ void GuiListbox::entriesChanged()
     }
     while(buttons.size() > entries.size())
     {
-        delete buttons.back();
+        buttons.back()->destroy();
         buttons.erase(buttons.begin() + buttons.size() - 1);
     }
     

@@ -1,4 +1,5 @@
 #include "gui2_resizabledialog.h"
+#include "gui2_autolayout.h"
 
 #include "gui2_label.h"
 #include "gui2_togglebutton.h"
@@ -6,14 +7,22 @@
 GuiResizableDialog::GuiResizableDialog(GuiContainer* owner, string id, string title)
 : GuiPanel(owner, id)
 {
-    title_bar = new GuiLabel(this, "", title, 20);
-    title_bar->addBackground()->setAlignment(ACenterLeft)->setPosition(25, 0, ATopLeft)->setSize(100, title_bar_height);
-    
-    minimize_button = new GuiToggleButton(this, "", "_", [this](bool value)
+    GuiAutoLayout* title_bar_layout = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutHorizontalRightToLeft);
+    title_bar_layout->setMargins(25, 0)->setSize(GuiElement::GuiSizeMax, title_bar_height);
+
+    close_button = new GuiButton(title_bar_layout, "", "x", [this](){
+        onClose();
+    });
+    close_button->setSize(50, GuiElement::GuiSizeMax);
+
+    minimize_button = new GuiToggleButton(title_bar_layout, "", "_", [this](bool value)
     {
         minimize(value);
     });
-    minimize_button->setPosition(0, 0, ATopRight)->setSize(50, title_bar_height);
+    minimize_button->setSize(50, GuiElement::GuiSizeMax);
+    
+    title_bar = new GuiLabel(title_bar_layout, "", title, 20);
+    title_bar->addBackground()->setAlignment(ACenterLeft)->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     
     contents = new GuiElement(this, "");
     contents->setPosition(resize_icon_size / 2.0, title_bar_height, ATopLeft);
@@ -53,7 +62,6 @@ void GuiResizableDialog::onDraw(sf::RenderTarget& window)
 {
     GuiPanel::onDraw(window);
     
-    title_bar->setSize(rect.width - 25 - 50, title_bar_height);
     contents->setSize(rect.width - resize_icon_size, rect.height - title_bar_height - resize_icon_size / 2.0f);
     
     if (rect.left < -50)
@@ -73,6 +81,7 @@ void GuiResizableDialog::onDraw(sf::RenderTarget& window)
     image.setPosition(rect.left + rect.width - resize_icon_size / 2.0, rect.top + rect.height - resize_icon_size / 2.0);
     float f = resize_icon_size / float(image.getTextureRect().height);
     image.setScale(f, f);
+    image.setColor(sf::Color::White);
     window.draw(image);
 }
 
@@ -107,4 +116,8 @@ void GuiResizableDialog::onMouseDrag(sf::Vector2f position)
             setSize(getSize().x, min_size.y);
         break;
     }
+}
+
+void GuiResizableDialog::onClose()
+{
 }

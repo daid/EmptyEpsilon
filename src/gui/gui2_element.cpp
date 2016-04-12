@@ -1,24 +1,18 @@
 #include "gui2_element.h"
-#include "gui2_canvas.h"
 #include "main.h"
 
 GuiElement::GuiElement(GuiContainer* owner, string id)
 : position_alignment(ATopLeft), owner(owner), rect(0, 0, 0, 0), visible(true), enabled(true), hover(false), focus(false), active(false), id(id)
 {
     owner->elements.push_back(this);
+    destroyed = false;
 }
 
 GuiElement::~GuiElement()
 {
     if (owner)
     {
-        owner->elements.remove(this);
-        //Find the owning cancas, as we need to remove ourselves if we are the focus or click element.
-        GuiCanvas* canvas = dynamic_cast<GuiCanvas*>(getTopLevelContainer());
-        if (canvas)
-        {
-            canvas->unfocusElement(this);
-        }
+        LOG(ERROR) << "GuiElement waa destroyed while it still had an owner...";
     }
 }
 
@@ -211,6 +205,11 @@ GuiContainer* GuiElement::getTopLevelContainer()
     while(dynamic_cast<GuiElement*>(top_level) != nullptr)
         top_level = dynamic_cast<GuiElement*>(top_level)->getOwner();
     return top_level;
+}
+
+void GuiElement::destroy()
+{
+    destroyed = true;
 }
 
 void GuiElement::updateRect(sf::FloatRect parent_rect)

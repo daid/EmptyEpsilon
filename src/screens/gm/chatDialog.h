@@ -21,6 +21,8 @@ private:
     GuiScrollText* chat_text;
     
     void disableComms(string title);
+    
+    void onClose();
 };
 
 #endif//GAME_MASTER_CHAT_DIALOG_H

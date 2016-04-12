@@ -1,5 +1,6 @@
 #include "gui2_container.h"
 #include "gui2_element.h"
+#include "gui2_canvas.h"
 #include "input.h"
 
 GuiContainer::GuiContainer()
@@ -18,10 +19,28 @@ GuiContainer::~GuiContainer()
 void GuiContainer::drawElements(sf::FloatRect parent_rect, sf::RenderTarget& window)
 {
     sf::Vector2f mouse_position = InputHandler::getMousePos();
-    for(GuiElement* element : elements)
+    for(auto it = elements.begin(); it != elements.end(); )
     {
-        element->updateRect(parent_rect);
-        element->hover = element->rect.contains(mouse_position);
+        GuiElement* element = *it;
+        if (element->destroyed)
+        {
+            //Find the owning cancas, as we need to remove ourselves if we are the focus or click element.
+            GuiCanvas* canvas = dynamic_cast<GuiCanvas*>(element->getTopLevelContainer());
+            if (canvas)
+                canvas->unfocusElement(element);
+
+            //Delete it from our list.
+            it = elements.erase(it);
+            
+            // Free up the memory used by the element.
+            element->owner = nullptr;
+            delete element;
+        }else{
+            element->updateRect(parent_rect);
+            element->hover = element->rect.contains(mouse_position);
+            
+            it++;
+        }
     }
     
     for(GuiElement* element : elements)

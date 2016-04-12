@@ -14,7 +14,7 @@ GuiShipInternalView* GuiShipInternalView::setShip(P<SpaceShip> ship)
     viewing_ship = ship;
     if (room_container)
     {
-        delete room_container;
+        room_container->destroy();
         room_container = nullptr;
     }
     if (!ship)
@@ -73,7 +73,7 @@ void GuiShipInternalView::onDraw(sf::RenderTarget& window)
 {
     if (!viewing_ship && room_container)
     {
-        delete room_container;
+        room_container->destroy();
         room_container = nullptr;
     }
 }
