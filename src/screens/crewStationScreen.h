@@ -8,7 +8,8 @@
 class CrewStationScreen : public GuiCanvas, public Updatable
 {
 private:
-    GuiAutoLayout* button_strip;
+    GuiButton* select_station_button;
+    GuiPanel* button_strip;
     struct CrewTabInfo {
         string name;
         GuiToggleButton* button;
@@ -17,7 +18,7 @@ private:
     std::vector<CrewTabInfo> tabs;
 public:
     CrewStationScreen();
-    void addStationTab(GuiElement* element, string name);
+    void addStationTab(GuiElement* element, string name, string icon);
     void finishCreation();
     
     virtual void update(float delta);

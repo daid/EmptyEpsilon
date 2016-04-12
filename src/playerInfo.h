@@ -30,5 +30,6 @@ public:
 };
 
 string getCrewPositionName(ECrewPosition position);
+string getCrewPositionIcon(ECrewPosition position);
 
 #endif//PLAYER_INFO_H

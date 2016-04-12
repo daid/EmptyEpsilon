@@ -47,12 +47,8 @@ ShipSelectionScreen::ShipSelectionScreen()
             updateReadyButton();
         });
         crew_position_button[n]->setSize(GuiElement::GuiSizeMax, 50);
+        crew_position_button[n]->setIcon(getCrewPositionIcon(ECrewPosition(n)));
     }
-    crew_position_button[helmsOfficer]->setIcon("gui/icons/station-helm");
-    crew_position_button[weaponsOfficer]->setIcon("gui/icons/station-weapons");
-    crew_position_button[engineering]->setIcon("gui/icons/station-engineering");
-    crew_position_button[scienceOfficer]->setIcon("gui/icons/station-science");
-    crew_position_button[relayOfficer]->setIcon("gui/icons/station-relay");
 
     main_screen_controls_button = new GuiToggleButton(stations_layout, "MAIN_SCREEN_CONTROLS_ENABLE", "Main screen controls", [](bool value) {
         my_player_info->setMainScreenControl(value);

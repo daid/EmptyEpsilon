@@ -29,6 +29,7 @@ public:
     GuiButton* setIcon(string icon_name, EGuiAlign icon_alignment = ACenterLeft);
     GuiButton* setHotkey(sf::Keyboard::Key key);
     string getText();
+    string getIcon();
 };
 
 #endif//GUI2_BUTTON_H
