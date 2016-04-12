@@ -35,7 +35,7 @@ ServerCreationScreen::ServerCreationScreen()
     GuiElement* row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiLabel(row, "NAME_LABEL", "Server name:", 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
-    (new GuiTextEntry(row, "SERVER_NAME", game_server->getServerName()))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiTextEntry(row, "SERVER_NAME", game_server->getServerName()))->callback([](string text){game_server->setServerName(text);})->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
