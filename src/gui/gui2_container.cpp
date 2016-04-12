@@ -27,7 +27,7 @@ void GuiContainer::drawElements(sf::FloatRect parent_rect, sf::RenderTarget& win
             //Find the owning cancas, as we need to remove ourselves if we are the focus or click element.
             GuiCanvas* canvas = dynamic_cast<GuiCanvas*>(element->getTopLevelContainer());
             if (canvas)
-                canvas->unfocusElement(element);
+                canvas->unfocusElementTree(element);
 
             //Delete it from our list.
             it = elements.erase(it);
