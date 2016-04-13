@@ -124,20 +124,20 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("mod") != "")
     {
         string mod = PreferencesManager::get("mod");
-#ifdef RESOURCE_BASE_DIR
-        new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/mods/" + mod);
-#endif
         if (getenv("HOME"))
+        {
             new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod);
+            PackResourceProvider::addPackResourcesForDirectory(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod);
+        }
         new DirectoryResourceProvider("resources/mods/" + mod);
+        PackResourceProvider::addPackResourcesForDirectory("resources/mods/" + mod);
     }
     
 #ifdef RESOURCE_BASE_DIR
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/");
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "scripts/");
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "packs/SolCommand/");
-    new PackResourceProvider(RESOURCE_BASE_DIR "packs/Angryfly.pack");
-    new PackResourceProvider(RESOURCE_BASE_DIR "packs/msgamedev.pack");
+    PackResourceProvider::addPackResourcesForDirectory(RESOURCE_BASE_DIR "packs");
 #endif
     if (getenv("HOME"))
     {
@@ -148,8 +148,7 @@ int main(int argc, char** argv)
     new DirectoryResourceProvider("resources/");
     new DirectoryResourceProvider("scripts/");
     new DirectoryResourceProvider("packs/SolCommand/");
-    new PackResourceProvider("packs/Angryfly.pack");
-    new PackResourceProvider("packs/msgamedev.pack");
+    PackResourceProvider::addPackResourcesForDirectory("packs");
     textureManager.setDefaultSmooth(true);
     textureManager.setDefaultRepeated(true);
     textureManager.setAutoSprite(false);

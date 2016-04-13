@@ -1,5 +1,8 @@
 #include "packResourceProvider.h"
 
+#include <dirent.h>
+#include <stdio.h>
+
 static inline int readInt(FILE* f)
 {
     int32_t ret = 0;
@@ -49,6 +52,26 @@ std::vector<string> PackResourceProvider::findResources(const string searchPatte
 {
     std::vector<string> ret;
     return ret;
+}
+
+void PackResourceProvider::addPackResourcesForDirectory(const string directory)
+{
+    DIR* dir = opendir(directory.c_str());
+    if (!dir)
+        return;
+    
+    struct dirent *entry;
+    while ((entry = readdir(dir)) != nullptr)
+    {
+        if (entry->d_name[0] == '.')
+            continue;
+        string name = directory + "/" + string(entry->d_name);
+        if (name.lower().endswith(".pack"))
+        {
+            new PackResourceProvider(name);
+        }
+    }
+    closedir(dir);
 }
 
 PackResourceStream::PackResourceStream(string filename, PackResourceInfo info)
