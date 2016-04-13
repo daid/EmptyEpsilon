@@ -57,6 +57,10 @@ public:
 
     EMissileWeapons getLoadType();
 
+    //Calculate a possible firing solution towards the target for this missile tube.
+    //Will return the angle that the missile needs to turn to to possibly hit this target.
+    //Will return infinity when no solution is found.
+    float calculateFiringSolution(P<SpaceObject> target);
 private:
     SpaceShip* parent;
     int tube_index;

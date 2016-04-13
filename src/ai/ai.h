@@ -73,7 +73,7 @@ protected:
     /**!
      * Used for missiles, as they require some intelligence to fire.
      */
-    float calculateFiringSolution(P<SpaceObject> target, EMissileWeapons type);
+    float calculateFiringSolution(P<SpaceObject> target, int tube_index);
 
     /// Because the GameMasterUI needs to be touching privates. Hmm.
     friend class GameMasterUI;

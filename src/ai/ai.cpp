@@ -320,7 +320,7 @@ void ShipAI::runAttack(P<SpaceObject> target)
         {
             if (owner->weapon_tube[n].isLoaded() && missile_fire_delay <= 0.0)
             {
-                float target_angle = calculateFiringSolution(target, owner->weapon_tube[n].getLoadType());
+                float target_angle = calculateFiringSolution(target, n);
                 if (target_angle != std::numeric_limits<float>::infinity())
                     owner->weapon_tube[n].fire(target_angle);
                 missile_fire_delay = owner->weapon_tube[n].getLoadTimeConfig() / owner->weapon_tube_count / 2.0;
@@ -515,15 +515,13 @@ bool ShipAI::betterTarget(P<SpaceObject> new_target, P<SpaceObject> current_targ
     return false;
 }
 
-float ShipAI::calculateFiringSolution(P<SpaceObject> target, EMissileWeapons type)
+float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
 {
+    EMissileWeapons type = owner->weapon_tube[tube_index].getLoadType();
+
     sf::Vector2f target_position = target->getPosition();
-    sf::Vector2f target_velocity = target->getVelocity();
-    float target_velocity_length = sf::length(target_velocity);
     float missile_angle = sf::vector2ToAngle(target_position - owner->getPosition());
     float missile_speed = 200.0f;
-    float missile_turn_rate = 10.0f;
-    float turn_radius = ((360.0f / missile_turn_rate) * missile_speed) / (2.0f * M_PI);
     
     if (type == MW_HVLI)
     {
@@ -564,45 +562,6 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, EMissileWeapons typ
         }
     }
 
-    for(int iterations=0; iterations<10; iterations++)
-    {
-        float angle_diff = sf::angleDifference(missile_angle, owner->getRotation());
-
-        float left_or_right = 90;
-        if (angle_diff > 0)
-            left_or_right = -90;
-
-        sf::Vector2f turn_center = owner->getPosition() + sf::vector2FromAngle(owner->getRotation() + left_or_right) * turn_radius;
-        sf::Vector2f turn_exit = turn_center + sf::vector2FromAngle(missile_angle - left_or_right) * turn_radius;
-        if (target_velocity_length < 1.0f)
-        {
-            //If the target is almost standing still, just target the position directly instead of using the velocity of the target in the calculations.
-            float time_missile = sf::length(turn_exit - target_position) / missile_speed;
-            sf::Vector2f interception = turn_exit + sf::vector2FromAngle(missile_angle) * missile_speed * time_missile;
-            if ((interception - target_position) < target->getRadius() / 2)
-                return missile_angle;
-            missile_angle = sf::vector2ToAngle(target_position - turn_exit);
-        }
-        else
-        {
-            sf::Vector2f missile_velocity = sf::vector2FromAngle(missile_angle) * missile_speed;
-            //Calculate the position where missile and the target will cross each others path.
-            sf::Vector2f intersection = sf::lineLineIntersection(target_position, target_position + target_velocity, turn_exit, turn_exit + missile_velocity);
-            //Calculate the time it will take for the target and missile to reach the intersection
-            float turn_time = fabs(angle_diff) / missile_turn_rate;
-            float time_target = sf::length((target_position - intersection)) / target_velocity_length;
-            float time_missile = sf::length(turn_exit - intersection) / missile_speed + turn_time;
-            //Calculate the time in which the radius will be on the intersection, to know in which time range we need to hit.
-            float time_radius = (target->getRadius() / 2.0) / target_velocity_length;//TODO: This value could be improved, as it is allowed to be bigger when the angle between the missile and the ship is low
-            // When both the missile and the target are at the same position at the same time, we can take a shot!
-            if (fabsf(time_target - time_missile) < time_radius)
-                return missile_angle;
-
-            //When we cannot hit the target with this setup yet. Calculate a new intersection target, and aim for that.
-            float guessed_impact_time = (time_target * target_velocity_length / (target_velocity_length + missile_speed)) + (time_missile * missile_speed / (target_velocity_length + missile_speed));
-            sf::Vector2f new_target_position = target_position + target_velocity * guessed_impact_time;
-            missile_angle = sf::vector2ToAngle(new_target_position - turn_exit);
-        }
-    }
-    return std::numeric_limits<float>::infinity();
+    //Use the general weapon tube targeting to get the final firing solution.
+    return owner->weapon_tube[tube_index].calculateFiringSolution(target);
 }
