@@ -9,6 +9,7 @@
 #include "screenComponents/dockingButton.h"
 
 #include "screenComponents/missileTubeControls.h"
+#include "screenComponents/aimLock.h"
 #include "screenComponents/shieldsEnableButton.h"
 #include "screenComponents/beamFrequencySelector.h"
 #include "screenComponents/beamTargetSelector.h"
@@ -18,7 +19,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
 {
     radar = new GuiRadarView(this, "TACTICAL_RADAR", 5000.0, &targets);
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 750);
-    radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableTargetProjections()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
+    radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
         [this](sf::Vector2f position) {
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
@@ -86,13 +87,12 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
 
     missile_aim = new GuiRotationDial(this, "MISSILE_AIM", -90, 360 - 90, 0, [this](float value){
         tube_controls->setMissileTargetAngle(value);
-        radar->setMissileTargetAngle(value);
     });
     missile_aim->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     tube_controls = new GuiMissileTubeControls(this, "MISSILE_TUBES");
-    lock_aim = new GuiToggleButton(this, "LOCK_AIM", "Lock", nullptr);
+    radar->enableTargetProjections(tube_controls);
+    lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim->setPosition(300, 50, ATopCenter)->setSize(130, 50);
-    lock_aim->setValue(true)->setIcon("gui/icons/lock");
 
     GuiAutoLayout* engine_layout = new GuiAutoLayout(this, "ENGINE_LAYOUT", GuiAutoLayout::LayoutHorizontalRightToLeft);
     engine_layout->setPosition(-20, -70, ABottomRight)->setSize(GuiElement::GuiSizeMax, 300);
@@ -120,13 +120,6 @@ void TacticalScreen::onDraw(sf::RenderTarget& window)
 
         shields_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "% " + string(my_spaceship->getShieldPercentage(1)) + "%");
         targets.set(my_spaceship->getTarget());
-
-        if (lock_aim->getValue())
-        {
-            missile_aim->setValue(my_spaceship->getRotation());
-            tube_controls->setMissileTargetAngle(missile_aim->getValue());
-            radar->setMissileTargetAngle(missile_aim->getValue());
-        }
     }
     GuiOverlay::onDraw(window);
 }

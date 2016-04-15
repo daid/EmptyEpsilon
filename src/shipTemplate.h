@@ -74,6 +74,7 @@ public:
     public:
         float load_time;
         uint32_t type_allowed_mask;
+        float direction;
     };
 private:
     static std::unordered_map<string, P<ShipTemplate> > templateMap;
@@ -132,6 +133,7 @@ public:
     void weaponTubeAllowMissle(int index, EMissileWeapons type);
     void weaponTubeDisallowMissle(int index, EMissileWeapons type);
     void setWeaponTubeExclusiveFor(int index, EMissileWeapons type);
+    void setTubeDirection(int index, float direction);
     void setHull(float amount) { hull = amount; }
     void setShields(std::vector<float> values);
     void setSpeed(float impulse, float turn, float acceleration);

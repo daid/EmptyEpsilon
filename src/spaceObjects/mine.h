@@ -5,10 +5,10 @@
 
 class Mine : public SpaceObject, public Updatable
 {
-    constexpr static float speed = -600.0f;
+    constexpr static float speed = 100.0f;
     constexpr static float blastRange = 1000.0f;
     constexpr static float trigger_range = 600.0f;
-    constexpr static float ejectDelay = 1.5f;
+    constexpr static float ejectDelay = 10.0f;
     constexpr static float triggerDelay = 1.0f;
     constexpr static float damageAtCenter = 160.0f;
     constexpr static float damageAtEdge = 30.0f;

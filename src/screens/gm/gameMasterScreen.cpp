@@ -12,7 +12,7 @@ GameMasterScreen::GameMasterScreen()
 : click_and_drag_state(CD_None)
 {
     main_radar = new GuiRadarView(this, "MAIN_RADAR", 50000.0f, &targets);
-    main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections()->setAutoCentering(false);
+    main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections(nullptr)->setAutoCentering(false);
     main_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     main_radar->setCallbacks(
         [this](sf::Vector2f position) { this->onMouseDown(position); },

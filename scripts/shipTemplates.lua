@@ -26,7 +26,11 @@ template:setRadarTrace("radar_cruiser.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 90, -15, 1000.0, 6.0, 10)
 template:setBeam(1, 90,  15, 1000.0, 6.0, 10)
-template:setTubes(2, 8.0) -- Amount of torpedo tubes, and loading time of the tubes.
+-- Setup 3 missile tubes. 2 forward at a slight angle, and 1 in the rear exclusive for mines.
+template:setTubes(3, 8.0) -- Amount of torpedo tubes, and loading time of the tubes.
+template:setTubeDirection(0, -5):weaponTubeDisallowMissle(0, "Mine")
+template:setTubeDirection(1, 5):weaponTubeDisallowMissle(1, "Mine")
+template:setTubeDirection(2, 180):setWeaponTubeExclusiveFor(2, "Mine")
 template:setHull(200)
 template:setShields(80, 80)
 template:setSpeed(90, 10, 20)
@@ -76,9 +80,15 @@ template:addDoor(8, 4, false);
 template = ShipTemplate():setName("Player Missile Cr."):setModel("space_cruiser_4"):setType("playership")
 template:setRadarTrace("radar_missile_cruiser.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setTubes(4, 8.0)
-template:setWeaponTubeExclusiveFor(2, "Homing") --Set tube 3 and 4 exclusive for homing missiles.
-template:setWeaponTubeExclusiveFor(3, "Homing")
+--Setup 7 tubes. 2 forward for any type of missile, and 2 on each side of the ship and 1 in the rear. The side tubes are exclusive for homing missiles. The rear is exclusive for mines.
+template:setTubes(7, 8.0)
+template:setTubeDirection(0,  0):weaponTubeDisallowMissle(0, "Mine")
+template:setTubeDirection(1,  0):weaponTubeDisallowMissle(1, "Mine")
+template:setTubeDirection(2, 90):setWeaponTubeExclusiveFor(2, "Homing")
+template:setTubeDirection(3, 90):setWeaponTubeExclusiveFor(3, "Homing")
+template:setTubeDirection(4,-90):setWeaponTubeExclusiveFor(4, "Homing")
+template:setTubeDirection(5,-90):setWeaponTubeExclusiveFor(5, "Homing")
+template:setTubeDirection(6,180):setWeaponTubeExclusiveFor(6, "Mine")
 template:setHull(200)
 template:setShields(110, 70)
 template:setSpeed(60, 8, 15)

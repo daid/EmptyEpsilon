@@ -325,6 +325,7 @@ public:
     void weaponTubeAllowMissle(int index, EMissileWeapons type);
     void weaponTubeDisallowMissle(int index, EMissileWeapons type);
     void setWeaponTubeExclusiveFor(int index, EMissileWeapons type);
+    void setWeaponTubeDirection(int index, float direction);
 
     void setRadarTrace(string trace) { radar_trace = trace; }
 

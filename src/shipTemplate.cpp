@@ -32,6 +32,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, weaponTubeAllowMissle);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, weaponTubeDisallowMissle);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWeaponTubeExclusiveFor);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubeDirection);
     /// Set the amount of starting hull
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setHull);
     /// Set the shield levels, amount of parameters defines the amount of shields. (Up to a maximum of 8 shields)
@@ -145,6 +146,7 @@ ShipTemplate::ShipTemplate()
     {
         weapon_tube[n].load_time = 8.0;
         weapon_tube[n].type_allowed_mask = (1 << MW_Count) - 1;
+        weapon_tube[n].direction = 0;
     }
     hull = 70;
     shield_count = 0;
@@ -203,6 +205,13 @@ void ShipTemplate::setWeaponTubeExclusiveFor(int index, EMissileWeapons type)
     if (index < 0 || index >= max_weapon_tubes)
         return;
     weapon_tube[index].type_allowed_mask = (1 << type);
+}
+
+void ShipTemplate::setTubeDirection(int index, float direction)
+{
+    if (index < 0 || index >= max_weapon_tubes)
+        return;
+    weapon_tube[index].direction = direction;
 }
 
 void ShipTemplate::setType(TemplateType type)

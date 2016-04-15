@@ -53,6 +53,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, weaponTubeAllowMissle);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, weaponTubeDisallowMissle);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeExclusiveFor);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeDirection);
     /// Set the icon to be used for this ship on the radar.
     /// For example, ship:setRadarTrace("RadarBlip.png") will show a dot instead of an arrow for this ship.
     /// Note: Icon is only shown after scanning, before the ship is scanned it is always shown as an arrow.
@@ -199,6 +200,7 @@ void SpaceShip::applyTemplateValues()
     for(int n=0; n<max_weapon_tubes; n++)
     {
         weapon_tube[n].setLoadTimeConfig(ship_template->weapon_tube[n].load_time);
+        weapon_tube[n].setDirection(ship_template->weapon_tube[n].direction);
         for(int m=0; m<MW_Count; m++)
         {
             if (ship_template->weapon_tube[n].type_allowed_mask & (1 << m))
@@ -917,6 +919,13 @@ void SpaceShip::setWeaponTubeExclusiveFor(int index, EMissileWeapons type)
     for(int n=0; n<MW_Count; n++)
         weapon_tube[index].disallowLoadOf(EMissileWeapons(n));
     weapon_tube[index].allowLoadOf(type);
+}
+
+void SpaceShip::setWeaponTubeDirection(int index, float direction)
+{
+    if (index < 0 || index >= weapon_tube_count)
+        return;
+    weapon_tube[index].setDirection(direction);
 }
 
 void SpaceShip::addBroadcast(int threshold, string message)

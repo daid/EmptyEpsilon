@@ -11,6 +11,7 @@ WeaponTube::WeaponTube()
     parent = nullptr;
     
     load_time = 8.0;
+    direction = 0;
     type_allowed_mask = (1 << MW_Count) - 1;
     type_loaded = MW_None;
     state = WTS_Empty;
@@ -25,6 +26,8 @@ void WeaponTube::setParent(SpaceShip* parent)
 
     parent->registerMemberReplication(&load_time);
     parent->registerMemberReplication(&type_allowed_mask);
+    parent->registerMemberReplication(&direction);
+    
     parent->registerMemberReplication(&type_loaded);
     parent->registerMemberReplication(&state);
     parent->registerMemberReplication(&delay, 0.5);
@@ -43,6 +46,16 @@ void WeaponTube::setLoadTimeConfig(float load_time)
 void WeaponTube::setIndex(int index)
 {
     tube_index = index;
+}
+
+void WeaponTube::setDirection(float direction)
+{
+    this->direction = direction;
+}
+
+float WeaponTube::getDirection()
+{
+    return direction;
 }
 
 void WeaponTube::startLoad(EMissileWeapons type)
@@ -87,7 +100,7 @@ void WeaponTube::fire(float target_angle)
             missile->setFactionId(parent->getFactionId());
             missile->target_id = parent->target_id;
             missile->setPosition(fireLocation);
-            missile->setRotation(parent->getRotation());
+            missile->setRotation(parent->getRotation() + direction);
             missile->target_angle = target_angle;
         }
         break;
@@ -98,7 +111,7 @@ void WeaponTube::fire(float target_angle)
             missile->setFactionId(parent->getFactionId());
             missile->target_id = parent->target_id;
             missile->setPosition(fireLocation);
-            missile->setRotation(parent->getRotation());
+            missile->setRotation(parent->getRotation() + direction);
             missile->target_angle = target_angle;
         }
         break;
@@ -108,7 +121,7 @@ void WeaponTube::fire(float target_angle)
             missile->owner = parent;
             missile->setFactionId(parent->getFactionId());
             missile->setPosition(fireLocation);
-            missile->setRotation(parent->getRotation());
+            missile->setRotation(parent->getRotation() + direction);
             missile->eject();
         }
         break;
@@ -127,7 +140,7 @@ void WeaponTube::fire(float target_angle)
             missile->setFactionId(parent->getFactionId());
             missile->target_id = parent->target_id;
             missile->setPosition(fireLocation);
-            missile->setRotation(parent->getRotation());
+            missile->setRotation(parent->getRotation() + direction);
             missile->target_angle = target_angle;
         }
         break;
@@ -193,8 +206,8 @@ void WeaponTube::update(float delta)
                 missile->owner = parent;
                 missile->setFactionId(parent->getFactionId());
                 missile->setPosition(fireLocation);
-                missile->setRotation(parent->getRotation());
-                missile->target_angle = parent->getRotation();
+                missile->setRotation(parent->getRotation() + direction);
+                missile->target_angle = parent->getRotation() + direction;
                 
                 fire_count -= 1;
                 if (fire_count > 0)
@@ -256,8 +269,10 @@ EMissileWeapons WeaponTube::getLoadType()
 
 float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
 {
-    if (type_loaded == MW_HVLI)
-        return parent->getRotation();
+    if (!target)
+        return std::numeric_limits<float>::infinity();
+    if (type_loaded == MW_Mine || type_loaded == MW_HVLI)
+        return std::numeric_limits<float>::infinity();
     
     sf::Vector2f target_position = target->getPosition();
     sf::Vector2f target_velocity = target->getVelocity();
@@ -266,16 +281,17 @@ float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
     float missile_speed = 200.0f;
     float missile_turn_rate = 10.0f;
     float turn_radius = ((360.0f / missile_turn_rate) * missile_speed) / (2.0f * M_PI);
-
+    float missile_exit_angle = parent->getRotation() + direction;
+    
     for(int iterations=0; iterations<10; iterations++)
     {
-        float angle_diff = sf::angleDifference(missile_angle, parent->getRotation());
+        float angle_diff = sf::angleDifference(missile_angle, missile_exit_angle);
 
         float left_or_right = 90;
         if (angle_diff > 0)
             left_or_right = -90;
 
-        sf::Vector2f turn_center = parent->getPosition() + sf::vector2FromAngle(parent->getRotation() + left_or_right) * turn_radius;
+        sf::Vector2f turn_center = parent->getPosition() + sf::vector2FromAngle(missile_exit_angle + left_or_right) * turn_radius;
         sf::Vector2f turn_exit = turn_center + sf::vector2FromAngle(missile_angle - left_or_right) * turn_radius;
         if (target_velocity_length < 1.0f)
         {

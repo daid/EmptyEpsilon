@@ -25,6 +25,9 @@ public:
 
     float getLoadTimeConfig();
     void setLoadTimeConfig(float load_time);
+
+    void setDirection(float direction);
+    float getDirection();
     
     /*!
      * Load a missile tube.
@@ -64,9 +67,13 @@ public:
 private:
     SpaceShip* parent;
     int tube_index;
-
+    
+    //Configuration
     float load_time;
     uint32_t type_allowed_mask;
+    float direction;
+
+    //Runtime state
     EMissileWeapons type_loaded;
     EWeaponTubeState state;
     float delay;
