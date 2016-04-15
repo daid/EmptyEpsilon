@@ -519,31 +519,33 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
 {
     EMissileWeapons type = owner->weapon_tube[tube_index].getLoadType();
 
-    sf::Vector2f target_position = target->getPosition();
-    float missile_angle = sf::vector2ToAngle(target_position - owner->getPosition());
-    float missile_speed = 200.0f;
-    
-    if (type == MW_HVLI)
+    if (type == MW_HVLI)    //Custom HVLI targeting for AI, as the calculate firing solution
     {
-        missile_speed *= 2.0f;
+        const MissileWeaponData& data = MissileWeaponData::getDataFor(type);
+
+        sf::Vector2f target_position = target->getPosition();
+        float target_angle = sf::vector2ToAngle(target_position - owner->getPosition());
+        float fire_angle = owner->getRotation() + owner->weapon_tube[tube_index].getDirection();
         
         float distance = sf::length(target_position - owner->getPosition());
         //HVLI missiles do not home or turn. So use a different targeting mechanism.
-        float angle_diff = sf::angleDifference(missile_angle, owner->getRotation());
+        float angle_diff = sf::angleDifference(target_angle, fire_angle);
 
         //Target is moving. Estimate where he will be when the missile hits.
-        float fly_time = distance / missile_speed;
+        float fly_time = distance / data.speed;
         target_position += target->getVelocity() * fly_time;
 
         //If our "error" of hitting is less then twice the radius of the target, fire.
         if (distance * tanf(fabs(angle_diff / 180.0f * M_PI)) < target->getRadius() * 2.0)
-            return owner->getRotation();
+            return fire_angle;
         
         return std::numeric_limits<float>::infinity();
     }
     
     if (type == MW_Nuke || type == MW_EMP)
     {
+        sf::Vector2f target_position = target->getPosition();
+        
         //Check if we can sort of safely fire an Nuke/EMP. The target needs to be clear of friendly/neutrals.
         float safety_radius = 1100;
         if (sf::length(target_position - owner->getPosition()) < safety_radius)

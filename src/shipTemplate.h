@@ -6,23 +6,10 @@
 #include "modelData.h"
 
 #include "beamTemplate.h"
+#include "missileWeaponData.h"
 constexpr static int max_beam_weapons = 16;
 constexpr static int max_weapon_tubes = 16;
 constexpr static int max_shield_count = 8;
-
-enum EMissileWeapons
-{
-    MW_None = -1,
-    MW_Homing = 0,
-    MW_Nuke,
-    MW_Mine,
-    MW_EMP,
-    MW_HVLI,
-    MW_Count
-};
-/* Define script conversion function for the EMissileWeapons enum. */
-template<> void convert<EMissileWeapons>::param(lua_State* L, int& idx, EMissileWeapons& es);
-template<> int convert<EMissileWeapons>::returnType(lua_State* L, EMissileWeapons es);
 
 enum ESystem
 {

@@ -47,6 +47,7 @@ set(SOURCES
 	src/playerInfo.cpp
 	src/shipTemplate.cpp
 	src/beamTemplate.cpp
+	src/missileWeaponData.cpp
 	src/factionInfo.cpp
 	src/mesh.cpp
 	src/repairCrew.cpp

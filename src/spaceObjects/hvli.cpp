@@ -4,11 +4,8 @@
 
 REGISTER_MULTIPLAYER_CLASS(HVLI, "HVLI");
 HVLI::HVLI()
-: MissileWeapon("HVLI", 0.0, sf::Color(200, 200, 200))
+: MissileWeapon("HVLI", MissileWeaponData::getDataFor(MW_HVLI))
 {
-    speed = speed * 2.0f;
-    lifetime = lifetime / 2.0f;
-    turnrate = 0;
 }
 
 void HVLI::hitObject(P<SpaceObject> object)

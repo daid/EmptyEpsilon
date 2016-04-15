@@ -7,21 +7,17 @@
 class MissileWeapon : public SpaceObject, public Updatable
 {
 protected:
-    float speed; //meter/sec
-    float turnrate; //deg/sec
+    const MissileWeaponData& data;
 
     float lifetime; //sec
-    sf::Color color;
-    float homing_range;
 
-    bool launch_sound_played;
-    
+    bool launch_sound_played;    
 public:
     P<SpaceObject> owner; //Only valid on server.
     int32_t target_id;
     float target_angle;
 
-    MissileWeapon(string multiplayerName, float homing_range, sf::Color color);
+    MissileWeapon(string multiplayerName, const MissileWeaponData& data);
 
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
     virtual void update(float delta);
