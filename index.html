@@ -22,7 +22,7 @@
 		<li><a href="#tabs-stations"><span class="button-text">Stations</span></a></li>
 		<li><a href="#tabs-scripting"><span class="button-text">Mission scripting</span></a></li>
 		<li><a href="#tabs-download"><span class="button-text">Download</span></a></li>
-		<li><a href="http://bridgesim.net/categories/emptyepsilon"><span class="button-text">Forums</span></a></li>
+		<li><a href="#tabs-forums"><span class="button-text">Forums</span></a></li>
 	</ul>
 	<div id="tabs-info">
 		<h2>What is it?</h2>
@@ -792,6 +792,9 @@ end
 		<p><a href="https://github.com/daid/EmptyEpsilon">https://github.com/daid/EmptyEpsilon</a> (Game source code)</p>
 		<p><a href="https://github.com/daid/SeriousProton">https://github.com/daid/SeriousProton</a> (Engine source code)</p>
 	</div>
+    <div id="tabs-forums">
+        <p>The forums where we communicate about the game can be found at: <a href="http://bridgesim.net/categories/emptyepsilon">bridgesim.net</a></p>
+    </div>
 </div>
 
 <script src="jquery.min.js"></script>
@@ -814,6 +817,11 @@ function updateHashFromTab(event, ui)
 {
 	var target_id = event.target.id;
 	var target_index = $(event.target).tabs("option", "active");
+    
+    if (target_id == "tabs" && target_index == 6)
+    {
+        window.location.href = "http://bridgesim.net/categories/emptyepsilon";
+    }
 
 	var data = mapHash();
 	data[target_id] = target_index;
