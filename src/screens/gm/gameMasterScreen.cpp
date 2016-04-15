@@ -165,6 +165,7 @@ void GameMasterScreen::update(float delta)
     }
     ship_tweak_button->setVisible(has_ship);
     order_layout->setVisible(has_cpu_ship);
+    gm_script_options->setVisible(!has_cpu_ship);
     player_comms_hail->setVisible(has_player_ship);
     
     std::unordered_map<string, string> selection_info;
