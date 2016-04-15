@@ -38,6 +38,12 @@ public:
     float getDamage();
     void setDamage(float damage);
 
+    float getEnergyPerFire();
+    void setEnergyPerFire(float energy);
+
+    float getHeatPerFire();
+    void setHeatPerFire(float heat);
+
 protected:
     string beam_texture;
     float direction; //Value between 0 and 360 (degrees)
@@ -45,6 +51,8 @@ protected:
     float range; // value greater than 0
     float cycle_time; // Value greater than 0
     float damage;
+    float energy_per_beam_fire;
+    float heat_per_beam_fire;
 };
 
 #endif //BEAM_TEMPLATE_H
