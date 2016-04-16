@@ -4,6 +4,7 @@
 #include "gui2_panel.h"
 
 class GuiLabel;
+class GuiButton;
 class GuiToggleButton;
 
 class GuiResizableDialog : public GuiPanel
@@ -25,6 +26,7 @@ private:
 
     GuiLabel* title_bar;
     GuiToggleButton* minimize_button;
+    GuiButton* close_button;
     bool minimized;
     float original_height;
     
@@ -36,6 +38,8 @@ private:
     };
     sf::Vector2f click_offset;
     ClickState click_state;
+    
+    virtual void onClose();
 protected:
     sf::Vector2f min_size;
     GuiElement* contents;

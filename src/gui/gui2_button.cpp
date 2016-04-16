@@ -110,3 +110,8 @@ GuiButton* GuiButton::setIcon(string icon_name, EGuiAlign icon_alignment)
     this->icon_alignment = icon_alignment;
     return this;
 }
+
+string GuiButton::getIcon()
+{
+    return icon_name;
+}

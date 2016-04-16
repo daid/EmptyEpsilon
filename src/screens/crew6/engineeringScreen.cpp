@@ -22,8 +22,10 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
 
     (new GuiSelfDestructButton(this, "SELF_DESTRUCT"))->setPosition(20, 260, ATopLeft)->setSize(240, 100);
 
-    GuiAutoLayout* system_row_layouts = new GuiAutoLayout(this, "SYSTEM_ROWS", GuiAutoLayout::LayoutVerticalBottomToTop);
-    system_row_layouts->setPosition(20, -20, ABottomLeft);
+    GuiElement* system_config_container = new GuiElement(this, "");
+    system_config_container->setPosition(0, -20, ABottomCenter)->setSize(750 + 300, GuiElement::GuiSizeMax);
+    GuiAutoLayout* system_row_layouts = new GuiAutoLayout(system_config_container, "SYSTEM_ROWS", GuiAutoLayout::LayoutVerticalBottomToTop);
+    system_row_layouts->setPosition(0, 0, ABottomLeft);
     system_row_layouts->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     for(int n=0; n<SYS_COUNT; n++)
     {
@@ -66,10 +68,13 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
         system_rows.push_back(info);
     }
 
-    (new GuiImage(this, "SYSTEM_HEALTH_ICON", "gui/icons/system_health"))->setPosition(375, SYS_COUNT * 50 - 10)->setSize(48,48);
-    (new GuiImage(this, "HEAT_ICON", "gui/icons/overheat"))->setPosition(500, SYS_COUNT * 50 - 10)->setSize(48,48);
-    (new GuiImage(this, "POWER_ICON", "gui/icons/energy"))->setPosition(600, SYS_COUNT * 50 - 10)->setSize(48,48);
-    (new GuiImage(this, "COOLANT_ICON", "gui/icons/coolant"))->setPosition(700, SYS_COUNT * 50 - 10)->setSize(48,48);
+    GuiAutoLayout* icon_layout = new GuiAutoLayout(system_row_layouts, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
+    icon_layout->setSize(GuiElement::GuiSizeMax, 48);
+    (new GuiElement(icon_layout, "FILLER"))->setSize(300, GuiElement::GuiSizeMax);
+    (new GuiImage(icon_layout, "SYSTEM_HEALTH_ICON", "gui/icons/system_health"))->setSize(150, GuiElement::GuiSizeMax);
+    (new GuiImage(icon_layout, "HEAT_ICON", "gui/icons/status_overheat"))->setSize(100, GuiElement::GuiSizeMax);
+    (new GuiImage(icon_layout, "POWER_ICON", "gui/icons/energy"))->setSize(100, GuiElement::GuiSizeMax);
+    (new GuiImage(icon_layout, "COOLANT_ICON", "gui/icons/coolant"))->setSize(100, GuiElement::GuiSizeMax);
 
     system_rows[SYS_Reactor].button->setIcon("gui/icons/system_reactor");
     system_rows[SYS_BeamWeapons].button->setIcon("gui/icons/system_beam");
@@ -77,13 +82,12 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
     system_rows[SYS_Maneuver].button->setIcon("gui/icons/system_maneuver");
     system_rows[SYS_Impulse].button->setIcon("gui/icons/system_impulse");
     system_rows[SYS_Warp].button->setIcon("gui/icons/system_warpdrive");
-    system_rows[SYS_JumpDrive].button->setIcon("gui/icons/system_warpdrive");
+    system_rows[SYS_JumpDrive].button->setIcon("gui/icons/system_jumpdrive");
     system_rows[SYS_FrontShield].button->setIcon("gui/icons/shields-fore");
     system_rows[SYS_RearShield].button->setIcon("gui/icons/shields-aft");
 
-
-    GuiPanel* box = new GuiPanel(this, "POWER_COOLANT_BOX");
-    box->setPosition(-20, -20, ABottomRight)->setSize(270, 400);
+    GuiPanel* box = new GuiPanel(system_config_container, "POWER_COOLANT_BOX");
+    box->setPosition(0, 0, ABottomRight)->setSize(270, 400);
     (new GuiLabel(box, "POWER_LABEL", "Power", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(20, 20, ATopLeft)->setSize(30, 360);
     (new GuiLabel(box, "COOLANT_LABEL", "Coolant", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(110, 20, ATopLeft)->setSize(30, 360);
 

@@ -10,7 +10,7 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
 
     item_list = new GuiListbox(this, "DATABASE_ITEM_LIST", [this](int index, string value) {
         if (database_entry)
-            delete database_entry;
+            database_entry->destroy();
         
         database_entry = new GuiElement(this, "DATABASE_ENTRY");
         database_entry->setPosition(500, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -41,7 +41,7 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
         item_list->setSelectionIndex(-1);
 
         if (database_entry)
-            delete database_entry;
+            database_entry->destroy();
         database_entry = nullptr;
     });
     category_list->setPosition(20, 50, ATopLeft)->setSize(200, GuiElement::GuiSizeMax);

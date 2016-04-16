@@ -45,14 +45,19 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponCycleTime);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponDamage);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponEnergyPerFire);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponHeatPerFire);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeapon);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponTexture);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponEnergyPerFire);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponHeatPerFire);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponTubeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponTubeLoadType);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, weaponTubeAllowMissle);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, weaponTubeDisallowMissle);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeExclusiveFor);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeDirection);
     /// Set the icon to be used for this ship on the radar.
     /// For example, ship:setRadarTrace("RadarBlip.png") will show a dot instead of an arrow for this ship.
     /// Note: Icon is only shown after scanning, before the ship is scanned it is always shown as an arrow.
@@ -186,6 +191,8 @@ void SpaceShip::applyTemplateValues()
         beam_weapons[n].setCycleTime(ship_template->beams[n].getCycleTime());
         beam_weapons[n].setDamage(ship_template->beams[n].getDamage());
         beam_weapons[n].setBeamTexture(ship_template->beams[n].getBeamTexture());
+        beam_weapons[n].setEnergyPerFire(ship_template->beams[n].getEnergyPerFire());
+        beam_weapons[n].setHeatPerFire(ship_template->beams[n].getHeatPerFire());
     }
     weapon_tube_count = ship_template->weapon_tube_count;
     energy_level = max_energy_level = ship_template->energy_storage_amount;
@@ -199,6 +206,7 @@ void SpaceShip::applyTemplateValues()
     for(int n=0; n<max_weapon_tubes; n++)
     {
         weapon_tube[n].setLoadTimeConfig(ship_template->weapon_tube[n].load_time);
+        weapon_tube[n].setDirection(ship_template->weapon_tube[n].direction);
         for(int m=0; m<MW_Count; m++)
         {
             if (ship_template->weapon_tube[n].type_allowed_mask & (1 << m))
@@ -917,6 +925,13 @@ void SpaceShip::setWeaponTubeExclusiveFor(int index, EMissileWeapons type)
     for(int n=0; n<MW_Count; n++)
         weapon_tube[index].disallowLoadOf(EMissileWeapons(n));
     weapon_tube[index].allowLoadOf(type);
+}
+
+void SpaceShip::setWeaponTubeDirection(int index, float direction)
+{
+    if (index < 0 || index >= weapon_tube_count)
+        return;
+    weapon_tube[index].setDirection(direction);
 }
 
 void SpaceShip::addBroadcast(int threshold, string message)

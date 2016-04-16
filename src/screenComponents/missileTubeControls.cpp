@@ -3,7 +3,7 @@
 #include "powerDamageIndicator.h"
 
 GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
-: GuiAutoLayout(owner, id, LayoutVerticalBottomToTop), load_type(MW_None), missile_target_angle(0)
+: GuiAutoLayout(owner, id, LayoutVerticalBottomToTop), load_type(MW_None), manual_aim(false), missile_target_angle(0)
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     
@@ -13,19 +13,35 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
         row.layout = new GuiAutoLayout(this, id + "_ROW_" + string(n), LayoutHorizontalLeftToRight);
         row.layout->setSize(GuiElement::GuiSizeMax, 50);
         row.load_button = new GuiButton(row.layout, id + "_" + string(n) + "_LOAD_BUTTON", "Load", [this, n]() {
-            if (!my_spaceship || load_type == MW_None)
+            if (!my_spaceship)
                 return;
             if (my_spaceship->weapon_tube[n].isEmpty())
-                my_spaceship->commandLoadTube(n, load_type);
+            {
+                if (load_type != MW_None)
+                {
+                    my_spaceship->commandLoadTube(n, load_type);
+                }
+            }
             else
+            {
                 my_spaceship->commandUnloadTube(n);
+            }
         });
         row.load_button->setSize(150, 50);
         row.fire_button = new GuiButton(row.layout, id + "_" + string(n) + "_FIRE_BUTTON", "Fire", [this, n]() {
             if (!my_spaceship)
                 return;
             if (my_spaceship->weapon_tube[n].isLoaded())
-                my_spaceship->commandFireTube(n, missile_target_angle);
+            {
+                float target_angle = missile_target_angle;
+                if (!manual_aim)
+                {
+                    target_angle = my_spaceship->weapon_tube[n].calculateFiringSolution(my_spaceship->getTarget());
+                    if (target_angle == std::numeric_limits<float>::infinity())
+                        target_angle = my_spaceship->getRotation() + my_spaceship->weapon_tube[n].getDirection();
+                }
+                my_spaceship->commandFireTube(n, target_angle);
+            }
         });
         row.fire_button->setSize(350, 50);
         (new GuiPowerDamageIndicator(row.fire_button, id + "_" + string(n) + "_PDI", SYS_MissileSystem, ACenterRight))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -111,7 +127,6 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window)
             rows[n].fire_button->disable()->show();
             rows[n].fire_button->setText("Firing");
             rows[n].loading_bar->hide();
-            rows[n].loading_label->setText("Unloading");
         }
     }
     for(int n=my_spaceship->weapon_tube_count; n<max_weapon_tubes; n++)
@@ -122,4 +137,19 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window)
 void GuiMissileTubeControls::setMissileTargetAngle(float angle)
 {
     missile_target_angle = angle;
+}
+
+float GuiMissileTubeControls::getMissileTargetAngle()
+{
+    return missile_target_angle;
+}
+
+void GuiMissileTubeControls::setManualAim(bool manual)
+{
+    manual_aim = manual;
+}
+
+bool GuiMissileTubeControls::getManualAim()
+{
+    return manual_aim;
 }

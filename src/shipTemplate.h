@@ -6,23 +6,10 @@
 #include "modelData.h"
 
 #include "beamTemplate.h"
+#include "missileWeaponData.h"
 constexpr static int max_beam_weapons = 16;
 constexpr static int max_weapon_tubes = 16;
 constexpr static int max_shield_count = 8;
-
-enum EMissileWeapons
-{
-    MW_None = -1,
-    MW_Homing = 0,
-    MW_Nuke,
-    MW_Mine,
-    MW_EMP,
-    MW_HVLI,
-    MW_Count
-};
-/* Define script conversion function for the EMissileWeapons enum. */
-template<> void convert<EMissileWeapons>::param(lua_State* L, int& idx, EMissileWeapons& es);
-template<> int convert<EMissileWeapons>::returnType(lua_State* L, EMissileWeapons es);
 
 enum ESystem
 {
@@ -74,6 +61,7 @@ public:
     public:
         float load_time;
         uint32_t type_allowed_mask;
+        float direction;
     };
 private:
     static std::unordered_map<string, P<ShipTemplate> > templateMap;
@@ -126,12 +114,15 @@ public:
      * Convenience function to set the texture of a beam by index.
      */
     void setBeamTexture(int index, string texture);
+    void setBeamWeaponEnergyPerFire(int index, float energy) { if (index < 0 || index >= max_beam_weapons) return; return beams[index].setEnergyPerFire(energy); }
+    void setBeamWeaponHeatPerFire(int index, float heat) { if (index < 0 || index >= max_beam_weapons) return; return beams[index].setHeatPerFire(heat); }
 
     void setTubes(int amount, float load_time);
     void setTubeLoadTime(int index, float load_time);
     void weaponTubeAllowMissle(int index, EMissileWeapons type);
     void weaponTubeDisallowMissle(int index, EMissileWeapons type);
     void setWeaponTubeExclusiveFor(int index, EMissileWeapons type);
+    void setTubeDirection(int index, float direction);
     void setHull(float amount) { hull = amount; }
     void setShields(std::vector<float> values);
     void setSpeed(float impulse, float turn, float acceleration);

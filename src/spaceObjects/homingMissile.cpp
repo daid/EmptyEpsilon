@@ -4,7 +4,7 @@
 
 REGISTER_MULTIPLAYER_CLASS(HomingMissile, "HomingMissile");
 HomingMissile::HomingMissile()
-: MissileWeapon("HomingMissile", 1200.0, sf::Color(255, 200, 0))
+: MissileWeapon("HomingMissile", MissileWeaponData::getDataFor(MW_Homing))
 {
 }
 

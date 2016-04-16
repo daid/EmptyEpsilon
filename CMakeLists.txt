@@ -47,6 +47,7 @@ set(SOURCES
 	src/playerInfo.cpp
 	src/shipTemplate.cpp
 	src/beamTemplate.cpp
+	src/missileWeaponData.cpp
 	src/factionInfo.cpp
 	src/mesh.cpp
 	src/repairCrew.cpp
@@ -79,6 +80,7 @@ set(SOURCES
 	src/screens/gm/gameMasterScreen.cpp
 	src/screens/gm/chatDialog.cpp
 	src/screens/gm/tweak.cpp
+	src/screenComponents/aimLock.cpp
 	src/screenComponents/missileTubeControls.cpp
 	src/screenComponents/selfDestructIndicator.cpp
 	src/screenComponents/viewport3d.cpp

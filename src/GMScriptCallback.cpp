@@ -1,4 +1,5 @@
 #include "GMScriptCallback.h"
+#include "screens/gm/gameMasterScreen.h"
 #include "gameGlobalInfo.h"
 
 GMScriptCallback::GMScriptCallback(string name)
@@ -21,4 +22,24 @@ static int addGMFunction(lua_State* L)
 
     return 0;
 }
+/// addGMFunction(name, function)
+/// Add a function that can be called from the GM console. This can be used to create helper scripts for the GM.
+/// Or to give the GM console certain control over the scenario.
 REGISTER_SCRIPT_FUNCTION(addGMFunction);
+
+static int getGMSelection(lua_State* L)
+{
+    PVector<SpaceObject> objects;
+    foreach(Updatable, u, updatableList)
+    {
+        P<GameMasterScreen> game_master_screen = u;
+        if (game_master_screen)
+        {
+            objects = game_master_screen->getSelection();
+        }
+    }
+    return convert<PVector<SpaceObject> >::returnType(L, objects);
+}
+/// getGMSelection()
+/// Returns an list of objects that the GM currently has selected.
+REGISTER_SCRIPT_FUNCTION(getGMSelection);

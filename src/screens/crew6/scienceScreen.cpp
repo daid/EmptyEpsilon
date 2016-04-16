@@ -22,7 +22,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     radar_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", gameGlobalInfo->long_range_radar_range, &targets);
-    radar->setPosition(20, 0, ACenterLeft)->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
+    radar->setPosition(-270, 0, ACenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     radar->setRangeIndicatorStepSize(5000.0)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
     radar->setCallbacks(
         [this](sf::Vector2f position) {
@@ -33,7 +33,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
         }, nullptr, nullptr
     );
     raw_scanner_data_overlay = new RawScannerDataRadarOverlay(radar, "", gameGlobalInfo->long_range_radar_range);
-    raw_scanner_data_overlay->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
+    raw_scanner_data_overlay->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     GuiAutoLayout* sidebar = new GuiAutoLayout(radar_view, "SIDE_BAR", GuiAutoLayout::LayoutVerticalTopToBottom);
     sidebar->setPosition(-20, 50, ATopRight)->setSize(250, GuiElement::GuiSizeMax);

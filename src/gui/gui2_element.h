@@ -25,7 +25,9 @@ class GuiElement : public GuiContainer
 private:
     sf::Vector2f position;
     sf::Vector2f size;
+    sf::FloatRect margins;
     EGuiAlign position_alignment;
+    bool destroyed;
 protected:
     GuiContainer* owner;
     sf::FloatRect rect;
@@ -56,6 +58,9 @@ public:
     GuiElement* setSize(sf::Vector2f size);
     GuiElement* setSize(float x, float y);
     sf::Vector2f getSize();
+    GuiElement* setMargins(float n);
+    GuiElement* setMargins(float x, float y);
+    GuiElement* setMargins(float left, float top, float right, float bottom);
     GuiElement* setPosition(float x, float y, EGuiAlign alignment = ATopLeft);
     GuiElement* setPosition(sf::Vector2f position, EGuiAlign alignment = ATopLeft);
     sf::Vector2f getPositionOffset();
@@ -79,10 +84,13 @@ public:
     GuiContainer* getOwner();
     GuiContainer* getTopLevelContainer();
     
+    //Have this GuiElement destroyed, but at a safe point&time in the code. (handled by the container)
+    void destroy();
+    
     friend class GuiContainer;
     friend class GuiCanvas;
 private:
-    void updateRect(sf::FloatRect window_rect);
+    void updateRect(sf::FloatRect parent_rect);
 protected:
     void adjustRenderTexture(sf::RenderTexture& texture);
     void drawRenderTexture(sf::RenderTexture& texture, sf::RenderTarget& window, sf::Color color = sf::Color::White, const sf::RenderStates& states = sf::RenderStates::Default);

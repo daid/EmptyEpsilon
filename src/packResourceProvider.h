@@ -21,6 +21,8 @@ public:
 
     virtual P<ResourceStream> getResourceStream(const string filename);
     virtual std::vector<string> findResources(const string searchPattern);
+    
+    static void addPackResourcesForDirectory(const string directory);
 };
 
 class PackResourceStream : public ResourceStream

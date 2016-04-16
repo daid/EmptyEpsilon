@@ -561,6 +561,8 @@
 		<Unit filename="src/menus/shipSelectionScreen.h" />
 		<Unit filename="src/mesh.cpp" />
 		<Unit filename="src/mesh.h" />
+		<Unit filename="src/missileWeaponData.cpp" />
+		<Unit filename="src/missileWeaponData.h" />
 		<Unit filename="src/modelData.cpp" />
 		<Unit filename="src/modelData.h" />
 		<Unit filename="src/modelInfo.cpp" />
@@ -581,6 +583,8 @@
 		<Unit filename="src/repairCrew.h" />
 		<Unit filename="src/scienceDatabase.cpp" />
 		<Unit filename="src/scienceDatabase.h" />
+		<Unit filename="src/screenComponents/aimLock.cpp" />
+		<Unit filename="src/screenComponents/aimLock.h" />
 		<Unit filename="src/screenComponents/beamFrequencySelector.cpp" />
 		<Unit filename="src/screenComponents/beamFrequencySelector.h" />
 		<Unit filename="src/screenComponents/beamTargetSelector.cpp" />

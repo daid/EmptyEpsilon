@@ -9,11 +9,11 @@ void GuiAutoLayout::onDraw(sf::RenderTarget& window)
 {
 }
 
-void GuiAutoLayout::drawElements(sf::FloatRect window_rect, sf::RenderTarget& window)
+void GuiAutoLayout::drawElements(sf::FloatRect parent_rect, sf::RenderTarget& window)
 {
     sf::Vector2f offset(0, 0);
     sf::Vector2f scale(0, 0);
-    EGuiAlign alignment;
+    EGuiAlign alignment = ACenterLeft;
     switch(mode)
     {
     case LayoutHorizontalLeftToRight:
@@ -32,6 +32,46 @@ void GuiAutoLayout::drawElements(sf::FloatRect window_rect, sf::RenderTarget& wi
         alignment = ABottomCenter;
         scale.y = -1.0;
         break;
+    case LayoutHorizontalRows:
+        {
+            int count = 0;
+            for(GuiElement* element : elements)
+            {
+                if (element->isVisible())
+                    count += 1;
+            }
+            for(GuiElement* element : elements)
+            {
+                if (element->isVisible())
+                {
+                    element->setSize(GuiElement::GuiSizeMax, parent_rect.height / count);
+                    element->setPosition(offset.x, offset.y);
+                    offset.y += parent_rect.height / count;
+                }
+            }
+        }
+        GuiContainer::drawElements(parent_rect, window);
+        return;
+    case LayoutVerticalColumns:
+        {
+            int count = 0;
+            for(GuiElement* element : elements)
+            {
+                if (element->isVisible())
+                    count += 1;
+            }
+            for(GuiElement* element : elements)
+            {
+                if (element->isVisible())
+                {
+                    element->setSize(parent_rect.width / count, GuiElement::GuiSizeMax);
+                    element->setPosition(offset.x, offset.y);
+                    offset.x += parent_rect.width / count;
+                }
+            }
+        }
+        GuiContainer::drawElements(parent_rect, window);
+        return;
     }
     for(GuiElement* element : elements)
     {
@@ -42,5 +82,5 @@ void GuiAutoLayout::drawElements(sf::FloatRect window_rect, sf::RenderTarget& wi
             offset.y += element->getSize().y * scale.y;
         }
     }
-    GuiContainer::drawElements(window_rect, window);
+    GuiContainer::drawElements(parent_rect, window);
 }

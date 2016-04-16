@@ -9,11 +9,17 @@
 
 CrewStationScreen::CrewStationScreen()
 {
-    button_strip = new GuiAutoLayout(this, "BUTTON_STRIP", GuiAutoLayout::LayoutHorizontalLeftToRight);
-    button_strip->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, 35);
+    select_station_button = new GuiButton(this, "", "", [this]()
+    {
+        button_strip->show();
+    });
+    select_station_button->setPosition(-20, 20, ATopRight)->setSize(250, 50);
+    button_strip = new GuiPanel(this, "");
+    button_strip->setPosition(-20, 20, ATopRight)->setSize(250, 50);
+    button_strip->hide();
 }
 
-void CrewStationScreen::addStationTab(GuiElement* element, string name)
+void CrewStationScreen::addStationTab(GuiElement* element, string name, string icon)
 {
     CrewTabInfo info;
     element->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -25,17 +31,23 @@ void CrewStationScreen::addStationTab(GuiElement* element, string name)
             {
                 info.element->show();
                 info.button->setValue(true);
+                select_station_button->setText(info.button->getText());
+                select_station_button->setIcon(info.button->getIcon());
             }else{
                 info.element->hide();
                 info.button->setValue(false);
             }
         }
+        button_strip->hide();
     });
-    info.button->setTextSize(20)->setSize(200, 35);
+    info.button->setIcon(icon);
+    info.button->setPosition(0, tabs.size() * 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, 50);
     if (tabs.size() == 0)
     {
         element->show();
         info.button->setValue(true);
+        select_station_button->setText(name);
+        select_station_button->setIcon(icon);
     }else{
         element->hide();
         info.button->setValue(false);
@@ -45,12 +57,14 @@ void CrewStationScreen::addStationTab(GuiElement* element, string name)
 
 void CrewStationScreen::finishCreation()
 {
+    select_station_button->moveToFront();
     button_strip->moveToFront();
+    button_strip->setSize(button_strip->getSize().x, 50 * tabs.size());
     new GuiIndicatorOverlays(this);
     new GuiNoiseOverlay(this);
     new GuiShipDestroyedPopup(this);
     if (tabs.size() < 2)
-        button_strip->hide();
+        select_station_button->hide();
 }
 
 void CrewStationScreen::update(float delta)

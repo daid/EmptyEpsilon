@@ -7,6 +7,9 @@ BeamTemplate::BeamTemplate()
     cycle_time = 0;
     damage = 0;
     beam_texture = "beam_orange.png";
+
+    energy_per_beam_fire = 3.0;
+    heat_per_beam_fire = 0.02;
 }
 
 string BeamTemplate::getBeamTexture()
@@ -88,11 +91,22 @@ void BeamTemplate::setDamage(float damage)
         this->damage = damage;
 }
 
+float BeamTemplate::getEnergyPerFire()
+{
+    return energy_per_beam_fire;
+}
 
+void BeamTemplate::setEnergyPerFire(float energy)
+{
+    energy_per_beam_fire = energy;
+}
 
+float BeamTemplate::getHeatPerFire()
+{
+    return heat_per_beam_fire;
+}
 
-
-
-
-
-
+void BeamTemplate::setHeatPerFire(float heat)
+{
+    heat_per_beam_fire = heat;
+}

@@ -13,7 +13,7 @@ private:
     string filename;
     int state;
     GuiPanel* screen_box[3];
-    GuiPanel* test_box;
+    GuiImage* test_box;
     GuiButton* ready_button;
     sf::Vector2f mouse_point[3];
 public:

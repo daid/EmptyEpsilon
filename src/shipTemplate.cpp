@@ -26,12 +26,15 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeam);
     /// Setup a beam weapon texture
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamTexture);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponEnergyPerFire);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponHeatPerFire);
     /// Set the amount of missile tubes, limited to a maximum of 16.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubes);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubeLoadTime);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, weaponTubeAllowMissle);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, weaponTubeDisallowMissle);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWeaponTubeExclusiveFor);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubeDirection);
     /// Set the amount of starting hull
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setHull);
     /// Set the shield levels, amount of parameters defines the amount of shields. (Up to a maximum of 8 shields)
@@ -51,49 +54,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadarTrace);
 }
 
-/* Define script conversion function for the EMissileWeapons enum. */
-template<> void convert<EMissileWeapons>::param(lua_State* L, int& idx, EMissileWeapons& es)
-{
-    string str = string(luaL_checkstring(L, idx++)).lower();
-    if (str == "homing")
-        es = MW_Homing;
-    else if (str == "nuke")
-        es = MW_Nuke;
-    else if (str == "mine")
-        es = MW_Mine;
-    else if (str == "emp")
-        es = MW_EMP;
-    else if (str == "hvli")
-        es = MW_HVLI;
-    else
-        es = MW_None;
-}
-
-template<> int convert<EMissileWeapons>::returnType(lua_State* L, EMissileWeapons es)
-{
-    switch(es)
-    {
-    case MW_Homing:
-        lua_pushstring(L, "homing");
-        return 1;
-    case MW_Nuke:
-        lua_pushstring(L, "nuke");
-        return 1;
-    case MW_Mine:
-        lua_pushstring(L, "mine");
-        return 1;
-    case MW_EMP:
-        lua_pushstring(L, "emp");
-        return 1;
-    case MW_HVLI:
-        lua_pushstring(L, "hvli");
-        return 1;
-    default:
-        return 0;
-    }
-}
-
-/* Define script conversion function for the EMissileWeapons enum. */
+/* Define script conversion function for the ESystem enum. */
 template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es)
 {
     string str = string(luaL_checkstring(L, idx++)).lower();
@@ -145,6 +106,7 @@ ShipTemplate::ShipTemplate()
     {
         weapon_tube[n].load_time = 8.0;
         weapon_tube[n].type_allowed_mask = (1 << MW_Count) - 1;
+        weapon_tube[n].direction = 0;
     }
     hull = 70;
     shield_count = 0;
@@ -203,6 +165,13 @@ void ShipTemplate::setWeaponTubeExclusiveFor(int index, EMissileWeapons type)
     if (index < 0 || index >= max_weapon_tubes)
         return;
     weapon_tube[index].type_allowed_mask = (1 << type);
+}
+
+void ShipTemplate::setTubeDirection(int index, float direction)
+{
+    if (index < 0 || index >= max_weapon_tubes)
+        return;
+    weapon_tube[index].direction = direction;
 }
 
 void ShipTemplate::setType(TemplateType type)

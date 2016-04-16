@@ -30,12 +30,18 @@ public:
     void setDamage(float damage);
     float getDamage();
 
+    float getEnergyPerFire();
+    void setEnergyPerFire(float energy);
+
+    float getHeatPerFire();
+    void setHeatPerFire(float heat);
+
     void setPosition(sf::Vector3f position);
     sf::Vector3f getPosition();
     
     void setBeamTexture(string beam_texture);
     string getBeamTexture();
-    
+
     float getCooldown();
     
     void update(float delta);
@@ -50,7 +56,7 @@ protected:
     float cycle_time;
     float damage;//Server side only
     float energy_per_beam_fire;//Server side only
-    float heat_per_beam_fire;
+    float heat_per_beam_fire;//Server side only
     //Beam runtime state
     float cooldown;
     string beam_texture;

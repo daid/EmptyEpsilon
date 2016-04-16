@@ -14,7 +14,7 @@ GuiShipInternalView* GuiShipInternalView::setShip(P<SpaceShip> ship)
     viewing_ship = ship;
     if (room_container)
     {
-        delete room_container;
+        room_container->destroy();
         room_container = nullptr;
     }
     if (!ship)
@@ -73,7 +73,7 @@ void GuiShipInternalView::onDraw(sf::RenderTarget& window)
 {
     if (!viewing_ship && room_container)
     {
-        delete room_container;
+        room_container->destroy();
         room_container = nullptr;
     }
 }
@@ -130,8 +130,10 @@ void GuiShipRoom::onDraw(sf::RenderTarget& window)
             textureManager.setTexture(sprite, "gui/icons/system_impulse");
             break;
         case SYS_Warp:
-        case SYS_JumpDrive:
             textureManager.setTexture(sprite, "gui/icons/system_warpdrive");
+            break;
+        case SYS_JumpDrive:
+            textureManager.setTexture(sprite, "gui/icons/system_jumpdrive");
             break;
         case SYS_FrontShield:
             textureManager.setTexture(sprite, "gui/icons/shields-fore");

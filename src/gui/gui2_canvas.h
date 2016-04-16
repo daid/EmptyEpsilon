@@ -24,8 +24,8 @@ public:
     virtual void onClick(sf::Vector2f mouse_position);
     virtual void onKey(sf::Keyboard::Key key, int unicode);
     
-    //Called when an element is destroyed in this tree.
-    void unfocusElement(GuiElement* element);
+    //Called when an element is destroyed in this tree. Recursive tests if the given element or any of it's children currently has focus, and unsets that focus.
+    void unfocusElementTree(GuiElement* element);
 };
 
 #endif//GUI2_CANVAS_H

@@ -2,6 +2,7 @@
 #define GUI_MISSILE_TUBE_CONTROLS_H
 
 #include "gui/gui2.h"
+#include "shipTemplate.h"
 
 class GuiMissileTubeControls : public GuiAutoLayout
 {
@@ -21,6 +22,7 @@ private:
     };
     TypeRow load_type_rows[MW_Count];
     EMissileWeapons load_type;
+    bool manual_aim;
     float missile_target_angle;
 public:
     GuiMissileTubeControls(GuiContainer* owner, string id);
@@ -28,6 +30,10 @@ public:
     virtual void onDraw(sf::RenderTarget& window);
     
     void setMissileTargetAngle(float angle);
+    float getMissileTargetAngle();
+    
+    void setManualAim(bool manual);
+    bool getManualAim();
 };
 
 #endif//GUI_MISSILE_TUBE_CONTROLS_H

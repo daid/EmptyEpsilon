@@ -132,6 +132,8 @@ void CpuShip::orderDefendLocation(sf::Vector2f position)
 
 void CpuShip::orderDefendTarget(P<SpaceObject> object)
 {
+    if (!object)
+        return;
     orders = AI_DefendTarget;
     order_target = object;
     this->addBroadcast(FVF_Friendly, this->getCallSign() + " : Defending " + object->getCallSign() + ".");
@@ -139,6 +141,8 @@ void CpuShip::orderDefendTarget(P<SpaceObject> object)
 
 void CpuShip::orderFlyFormation(P<SpaceObject> object, sf::Vector2f offset)
 {
+    if (!object)
+        return;
     orders = AI_FlyFormation;
     order_target = object;
     order_target_location = offset;
@@ -161,6 +165,8 @@ void CpuShip::orderFlyTowardsBlind(sf::Vector2f target)
 
 void CpuShip::orderAttack(P<SpaceObject> object)
 {
+    if (!object)
+        return;
     orders = AI_Attack;
     order_target = object;
     this->addBroadcast(FVF_Friendly, this->getCallSign() + " : Moving to attack " + object->getCallSign() + "!");
@@ -168,6 +174,8 @@ void CpuShip::orderAttack(P<SpaceObject> object)
 
 void CpuShip::orderDock(P<SpaceObject> object)
 {
+    if (!object)
+        return;
     orders = AI_Dock;
     order_target = object;
     this->addBroadcast(FVF_Friendly, this->getCallSign() + " : Docking to " + object->getCallSign() + ".");

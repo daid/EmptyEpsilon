@@ -78,6 +78,26 @@ float BeamWeapon::getDamage()
     return damage;
 }
 
+float BeamWeapon::getEnergyPerFire()
+{
+    return energy_per_beam_fire;
+}
+
+void BeamWeapon::setEnergyPerFire(float energy)
+{
+    energy_per_beam_fire = energy;
+}
+
+float BeamWeapon::getHeatPerFire()
+{
+    return heat_per_beam_fire;
+}
+
+void BeamWeapon::setHeatPerFire(float heat)
+{
+    heat_per_beam_fire = heat;
+}
+
 void BeamWeapon::setPosition(sf::Vector3f position)
 {
     this->position = position;

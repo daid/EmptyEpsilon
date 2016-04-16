@@ -39,6 +39,16 @@ bool GuiTextEntry::onKey(sf::Keyboard::Key key, int unicode)
         if (enter_func)
             enter_func(text);
     }
+    if (key == sf::Keyboard::V && (InputHandler::keyboardIsDown(sf::Keyboard::LControl) || InputHandler::keyboardIsDown(sf::Keyboard::RControl)))
+    {
+        for(int unicode : Clipboard::readClipboard())
+        {
+            if (unicode > 31 && unicode < 128)
+                text += string(char(unicode));
+        }
+        if (func)
+            func(text);
+    }
     if (unicode > 31 && unicode < 128)
     {
         text += string(char(unicode));

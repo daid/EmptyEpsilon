@@ -22,8 +22,6 @@ EpsilonServer::EpsilonServer()
         LOG(INFO) << "Switching to combat music";
         soundManager->playMusicSet(findResources("music/combat/*.ogg"));
     });
-    
-    //registerOnMasterServer("http://daid.eu/ee/register.php");
 }
 
 EpsilonServer::~EpsilonServer()

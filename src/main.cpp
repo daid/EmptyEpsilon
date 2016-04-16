@@ -97,6 +97,11 @@ int main(int argc, char** argv)
 
 #ifdef DEBUG
     Logging::setLogLevel(LOGLEVEL_DEBUG);
+#else
+    Logging::setLogLevel(LOGLEVEL_INFO);
+#endif
+#if defined(__WIN32__) && !defined(DEBUG)
+    Logging::setLogFile("EmptyEpsilon.log");
 #endif
 #ifdef RESOURCE_BASE_DIR
     PreferencesManager::load(RESOURCE_BASE_DIR "options.ini");
@@ -119,31 +124,31 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("mod") != "")
     {
         string mod = PreferencesManager::get("mod");
-#ifdef RESOURCE_BASE_DIR
-        new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/mods/" + mod);
-#endif
         if (getenv("HOME"))
+        {
             new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod);
+            PackResourceProvider::addPackResourcesForDirectory(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod);
+        }
         new DirectoryResourceProvider("resources/mods/" + mod);
+        PackResourceProvider::addPackResourcesForDirectory("resources/mods/" + mod);
     }
     
 #ifdef RESOURCE_BASE_DIR
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/");
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "scripts/");
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "packs/SolCommand/");
-    new PackResourceProvider(RESOURCE_BASE_DIR "packs/Angryfly.pack");
+    PackResourceProvider::addPackResourcesForDirectory(RESOURCE_BASE_DIR "packs");
 #endif
     if (getenv("HOME"))
     {
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/");
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/scripts/");
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/packs/SolCommand/");
-        new PackResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/packs/SolCommand/");
     }
     new DirectoryResourceProvider("resources/");
     new DirectoryResourceProvider("scripts/");
     new DirectoryResourceProvider("packs/SolCommand/");
-    new PackResourceProvider("packs/Angryfly.pack");
+    PackResourceProvider::addPackResourcesForDirectory("packs");
     textureManager.setDefaultSmooth(true);
     textureManager.setDefaultRepeated(true);
     textureManager.setAutoSprite(false);
@@ -267,6 +272,20 @@ int main(int argc, char** argv)
         P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
         if (scienceInfoScript)
             scienceInfoScript->destroy();
+        
+        //Find out which model data isn't used by ship templates and output that to log.
+        std::set<string> used_model_data;
+        for(string template_name : ShipTemplate::getTemplateNameList())
+        {
+            used_model_data.insert(ShipTemplate::getTemplate(template_name)->model_data->getName());
+        }
+        for(string name : ModelData::getModelDataNames())
+        {
+            if (used_model_data.find(name) == used_model_data.end())
+            {
+                LOG(INFO) << "Model data: " << name << " is not used by any ship template";
+            }
+        }
     }
 
     P<HardwareController> hardware_controller = new HardwareController();

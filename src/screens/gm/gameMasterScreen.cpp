@@ -12,7 +12,7 @@ GameMasterScreen::GameMasterScreen()
 : click_and_drag_state(CD_None)
 {
     main_radar = new GuiRadarView(this, "MAIN_RADAR", 50000.0f, &targets);
-    main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections()->setAutoCentering(false);
+    main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections(nullptr)->setAutoCentering(false);
     main_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     main_radar->setCallbacks(
         [this](sf::Vector2f position) { this->onMouseDown(position); },
@@ -78,7 +78,7 @@ GameMasterScreen::GameMasterScreen()
     info_layout = new GuiAutoLayout(this, "INFO_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     info_layout->setPosition(-20, 20, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
     
-    gm_script_options = new GuiListbox(this, "GM_SCRIPT_OPTIONS", [](int index, string value)
+    gm_script_options = new GuiListbox(this, "GM_SCRIPT_OPTIONS", [this](int index, string value)
     {
         int n = 0;
         for(GMScriptCallback& callback : gameGlobalInfo->gm_callback_functions)
@@ -87,6 +87,7 @@ GameMasterScreen::GameMasterScreen()
                 callback.callback.call();
             n++;
         }
+        gm_script_options->setSelectionIndex(-1);
     });
     gm_script_options->setPosition(20, 130, ATopLeft)->setSize(250, 500);
     for(GMScriptCallback& callback : gameGlobalInfo->gm_callback_functions)
@@ -164,6 +165,7 @@ void GameMasterScreen::update(float delta)
     }
     ship_tweak_button->setVisible(has_ship);
     order_layout->setVisible(has_cpu_ship);
+    gm_script_options->setVisible(!has_cpu_ship);
     player_comms_hail->setVisible(has_player_ship);
     
     std::unordered_map<string, string> selection_info;
@@ -378,6 +380,11 @@ void GameMasterScreen::onKey(sf::Keyboard::Key key, int unicode)
     default:
         break;
     }
+}
+
+PVector<SpaceObject> GameMasterScreen::getSelection()
+{
+    return targets.getTargets();
 }
 
 string GameMasterScreen::getScriptExport()
