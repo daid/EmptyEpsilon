@@ -120,8 +120,7 @@ public:
 
     EAlertLevel alert_level;
 
-    int32_t linked_object;
-    bool science_link = false;
+    int32_t linked_science_probe_id;
 
     PlayerSpaceship();
 

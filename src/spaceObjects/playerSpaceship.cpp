@@ -191,7 +191,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&activate_self_destruct);
     registerMemberReplication(&self_destruct_countdown, 0.2);
     registerMemberReplication(&alert_level);
-    registerMemberReplication(&linked_object);
+    registerMemberReplication(&linked_science_probe_id);
     for(int n=0; n<max_self_destruct_codes; n++)
     {
         self_destruct_code[n] = 0;
@@ -1037,7 +1037,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         break;
     case CMD_SET_SCIENCE_LINK:
         {
-            packet >> linked_object;
+            packet >> linked_science_probe_id;
         }
         break;
     }
