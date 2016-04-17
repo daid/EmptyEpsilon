@@ -60,6 +60,11 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandConfirmDestructCode);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCombatManeuverBoost);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetScienceLink);
+    ///Return the amount of crew members available in the engineering repair screen
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getRepairCrewCount);
+    ///Set the amount of crew members available in the engineering repair screen.
+    ///This adds new crew at random locations when new crew members need to be created.
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setRepairCrewCount);
 }
 
 static float system_power_user_factor[] = {
@@ -209,15 +214,6 @@ PlayerSpaceship::PlayerSpaceship()
         registerMemberReplication(&systems[n].power_level);
         registerMemberReplication(&systems[n].coolant_level);
         registerMemberReplication(&systems[n].heat_level, 1.0);
-    }
-
-    if (game_server && gameGlobalInfo->use_system_damage)
-    {
-        for(int n=0; n<3; n++)
-        {
-            P<RepairCrew> rc = new RepairCrew();
-            rc->ship_id = getMultiplayerId();
-        }
     }
 
     if (game_server)
@@ -438,6 +434,7 @@ void PlayerSpaceship::applyTemplateValues()
         setJumpDrive(true);
         break;
     }
+    setRepairCrewCount(ship_template->repair_crew_count);
 }
 
 void PlayerSpaceship::executeJump(float distance)
@@ -1312,6 +1309,31 @@ void PlayerSpaceship::commandSetScienceLink(int32_t id){
     sf::Packet packet;
     packet << CMD_SET_SCIENCE_LINK << id;
     sendClientCommand(packet);
+}
+
+int PlayerSpaceship::getRepairCrewCount()
+{
+    return getRepairCrewFor(this).size();
+}
+
+void PlayerSpaceship::setRepairCrewCount(int amount)
+{
+    if (!game_server || !gameGlobalInfo->use_system_damage)
+        return;
+    
+    amount = std::max(0, amount);
+    
+    PVector<RepairCrew> crew = getRepairCrewFor(this);
+    while(int(crew.size()) > amount)
+    {
+        crew[0]->destroy();
+        crew.update();
+    }
+    for(int create_amount = amount - crew.size(); create_amount > 0; create_amount--)
+    {
+        P<RepairCrew> rc = new RepairCrew();
+        rc->ship_id = getMultiplayerId();
+    }
 }
 
 string PlayerSpaceship::getExportLine()

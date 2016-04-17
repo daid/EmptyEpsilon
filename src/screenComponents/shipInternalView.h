@@ -6,6 +6,7 @@
 
 class RepairCrew;
 class GuiShipRoomContainer;
+class GuiShipCrew;
 
 class GuiShipInternalView : public GuiElement
 {
@@ -14,6 +15,7 @@ private:
     float room_size;
     GuiShipRoomContainer* room_container;
     P<RepairCrew> selected_crew_member;
+    std::vector<GuiShipCrew*> crew_list;
 public:
     GuiShipInternalView(GuiContainer* owner, string id, float room_size);
     
