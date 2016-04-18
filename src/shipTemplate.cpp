@@ -42,6 +42,8 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShields);
     /// Set the impulse speed, rotation speed and impulse acceleration for this ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSpeed);
+    /// Sets the combat maneuver power of this ship.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCombatManeuver);
     /// Set the warp speed for warp level 1 for this ship. Setting this will indicate that this ship has a warpdrive. (normal value is 1000)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWarpSpeed);
     /// Set if this ship has a jump drive. Example: template:setJumpDrive(true)
@@ -116,6 +118,8 @@ ShipTemplate::ShipTemplate()
     impulse_speed = 500.0;
     impulse_acceleration = 20.0;
     turn_speed = 10.0;
+    combat_maneuver_boost_speed = 0.0f;
+    combat_maneuver_strafe_speed = 0.0f;
     warp_speed = 0.0;
     has_jump_drive = false;
     has_cloaking = false;
@@ -332,6 +336,12 @@ void ShipTemplate::setSpeed(float impulse, float turn, float acceleration)
     impulse_speed = impulse;
     turn_speed = turn;
     impulse_acceleration = acceleration;
+}
+
+void ShipTemplate::setCombatManeuver(float boost, float strafe)
+{
+    combat_maneuver_boost_speed = boost;
+    combat_maneuver_strafe_speed = strafe;
 }
 
 void ShipTemplate::setWarpSpeed(float warp)

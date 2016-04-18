@@ -111,6 +111,8 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     combat_maneuver_boost_active = 0.0;
     combat_maneuver_strafe_request = 0.0;
     combat_maneuver_strafe_active = 0.0;
+    combat_maneuver_boost_speed = 0.0f;
+    combat_maneuver_strafe_speed = 0.0f;
     target_id = -1;
     beam_frequency = irandom(0, max_frequency);
     beam_system_target = SYS_None;
@@ -144,6 +146,8 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&combat_maneuver_boost_active, 0.2);
     registerMemberReplication(&combat_maneuver_strafe_request);
     registerMemberReplication(&combat_maneuver_strafe_active, 0.2);
+    registerMemberReplication(&combat_maneuver_boost_speed);
+    registerMemberReplication(&combat_maneuver_strafe_speed);
     registerMemberReplication(&radar_trace);
 
     for(int n=0; n<SYS_COUNT; n++)
@@ -200,6 +204,8 @@ void SpaceShip::applyTemplateValues()
     impulse_max_speed = ship_template->impulse_speed;
     impulse_acceleration = ship_template->impulse_acceleration;
     turn_speed = ship_template->turn_speed;
+    combat_maneuver_boost_speed = ship_template->combat_maneuver_boost_speed;
+    combat_maneuver_strafe_speed = ship_template->combat_maneuver_strafe_speed;
     has_warp_drive = ship_template->warp_speed > 0.0;
     warp_speed_per_warp_level = ship_template->warp_speed;
     has_jump_drive = ship_template->has_jump_drive;
@@ -511,7 +517,7 @@ void SpaceShip::update(float delta)
             combat_maneuver_charge = 0.0;
             combat_maneuver_boost_request = 0.0;
         }else{
-            setVelocity(getVelocity() + forward * impulse_max_speed * combat_maneuver_boost_multiplier * combat_maneuver_boost_active);
+            setVelocity(getVelocity() + forward * combat_maneuver_boost_speed * combat_maneuver_boost_active);
         }
     }else if (combat_maneuver_strafe_active != 0.0)
     {
@@ -521,7 +527,7 @@ void SpaceShip::update(float delta)
             combat_maneuver_charge = 0.0;
             combat_maneuver_strafe_request = 0.0;
         }else{
-            setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() + 90) * impulse_max_speed * combat_maneuver_strafe_multiplier * combat_maneuver_strafe_active);
+            setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() + 90) * combat_maneuver_strafe_speed * combat_maneuver_strafe_active);
         }
     }else if (combat_maneuver_charge < 1.0)
     {

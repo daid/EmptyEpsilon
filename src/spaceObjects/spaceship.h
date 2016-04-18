@@ -45,8 +45,6 @@ public:
     constexpr static float combat_maneuver_charge_time = 20.0f; /*< Amount of time it takes to fully charge the combat meneuver system */
     constexpr static float combat_maneuver_boost_max_time = 3.0f; /*< Amount of time we can boost with a fully charged combat maneuver system */
     constexpr static float combat_maneuver_strafe_max_time = 3.0f; /*< Amount of time we can strafe with a fully charged combat maneuver system */
-    constexpr static float combat_maneuver_boost_multiplier = 5.0f; /*< Speed multiplier to indicate how fast we will fly forwards compared to 100% impulse with a full boost */
-    constexpr static float combat_maneuver_strafe_multiplier = 3.0f; /*< Speed multiplier to indicate how fast we will fly sideways compared to 100% impulse with a full strafe */
     constexpr static float warp_charge_time = 4.0f;
     constexpr static float warp_decharge_time = 2.0f;
     constexpr static float jump_drive_charge_time_per_km = 2.0;
@@ -123,6 +121,9 @@ public:
 
     float combat_maneuver_strafe_request;
     float combat_maneuver_strafe_active;
+
+    float combat_maneuver_boost_speed; /*< [config] Speed to indicate how fast we will fly forwards with a full boost */
+    float combat_maneuver_strafe_speed; /*< [config] Speed to indicate how fast we will fly sideways with a full strafe */
 
     bool has_jump_drive;      //[config]
     float jump_drive_charge; //[output]
