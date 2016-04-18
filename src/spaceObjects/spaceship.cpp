@@ -474,6 +474,7 @@ void SpaceShip::update(float delta)
                 current_impulse = impulse_request;
         }
     }
+    addHeat(SYS_Warp, current_warp * delta * heat_per_warp);
     sf::Vector2f forward = sf::vector2FromAngle(getRotation());
     setVelocity(forward * (current_impulse * impulse_max_speed * getSystemEffectiveness(SYS_Impulse) + current_warp * warp_speed_per_warp_level * getSystemEffectiveness(SYS_Warp)));
 
@@ -504,23 +505,23 @@ void SpaceShip::update(float delta)
 
     if (combat_maneuver_boost_active != 0.0)
     {
-        combat_maneuver_charge -= combat_maneuver_boost_active * delta * 0.3;
+        combat_maneuver_charge -= combat_maneuver_boost_active * delta / combat_maneuver_boost_max_time;
         if (combat_maneuver_charge <= 0.0)
         {
             combat_maneuver_charge = 0.0;
             combat_maneuver_boost_request = 0.0;
         }else{
-            setVelocity(getVelocity() + forward * impulse_max_speed * 5.0f * combat_maneuver_boost_active);
+            setVelocity(getVelocity() + forward * impulse_max_speed * combat_maneuver_boost_multiplier * combat_maneuver_boost_active);
         }
     }else if (combat_maneuver_strafe_active != 0.0)
     {
-        combat_maneuver_charge -= fabs(combat_maneuver_strafe_active) * delta * 0.3;
+        combat_maneuver_charge -= fabs(combat_maneuver_strafe_active) * delta / combat_maneuver_strafe_max_time;
         if (combat_maneuver_charge <= 0.0)
         {
             combat_maneuver_charge = 0.0;
             combat_maneuver_strafe_request = 0.0;
         }else{
-            setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() + 90) * impulse_max_speed * 3.0f * combat_maneuver_strafe_active);
+            setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() + 90) * impulse_max_speed * combat_maneuver_strafe_multiplier * combat_maneuver_strafe_active);
         }
     }else if (combat_maneuver_charge < 1.0)
     {
@@ -528,6 +529,8 @@ void SpaceShip::update(float delta)
         if (combat_maneuver_charge > 1.0)
             combat_maneuver_charge = 1.0;
     }
+    addHeat(SYS_Impulse, combat_maneuver_boost_active * delta * heat_per_combat_maneuver_boost);
+    addHeat(SYS_Maneuver, fabs(combat_maneuver_strafe_active) * delta * heat_per_combat_maneuver_strafe);
 
     for(int n = 0; n < max_beam_weapons; n++)
     {

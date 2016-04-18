@@ -61,9 +61,6 @@ public:
     constexpr static float shield_calibration_time = 25.0f;
     constexpr static float comms_channel_open_time = 2.0;
     constexpr static int max_self_destruct_codes = 3;
-    constexpr static float heat_per_combat_maneuver_boost = 0.2;
-    constexpr static float heat_per_combat_maneuver_strafe = 0.2;
-    constexpr static float heat_per_warp = 0.02;
     constexpr static int max_scan_probes = 8;
     constexpr static float scan_probe_charge_time = 10.0f;
     constexpr static float max_scanning_delay = 6.0;

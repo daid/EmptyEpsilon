@@ -403,10 +403,6 @@ void PlayerSpaceship::update(float delta)
             comms_open_delay -= delta;
     }
 
-    addHeat(SYS_Impulse, combat_maneuver_boost_active * delta * heat_per_combat_maneuver_boost);
-    addHeat(SYS_Maneuver, fabs(combat_maneuver_strafe_active) * delta * heat_per_combat_maneuver_strafe);
-    addHeat(SYS_Warp, current_warp * delta * heat_per_warp);
-
     SpaceShip::update(delta);
 
     if (energy_level > max_energy_level)

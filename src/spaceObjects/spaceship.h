@@ -42,7 +42,11 @@ class SpaceShip : public ShipTemplateBasedObject
 {
 public:
     constexpr static int max_frequency = 20;
-    constexpr static float combat_maneuver_charge_time = 20.0f;
+    constexpr static float combat_maneuver_charge_time = 20.0f; /*< Amount of time it takes to fully charge the combat meneuver system */
+    constexpr static float combat_maneuver_boost_max_time = 3.0f; /*< Amount of time we can boost with a fully charged combat maneuver system */
+    constexpr static float combat_maneuver_strafe_max_time = 3.0f; /*< Amount of time we can strafe with a fully charged combat maneuver system */
+    constexpr static float combat_maneuver_boost_multiplier = 5.0f; /*< Speed multiplier to indicate how fast we will fly forwards compared to 100% impulse with a full boost */
+    constexpr static float combat_maneuver_strafe_multiplier = 3.0f; /*< Speed multiplier to indicate how fast we will fly sideways compared to 100% impulse with a full strafe */
     constexpr static float warp_charge_time = 4.0f;
     constexpr static float warp_decharge_time = 2.0f;
     constexpr static float jump_drive_charge_time_per_km = 2.0;
@@ -50,6 +54,9 @@ public:
     constexpr static float jump_drive_max_distance = 50.0;
     constexpr static float jump_drive_energy_per_km_charge = 4.0f;
     constexpr static float jump_drive_heat_per_jump = 0.35;
+    constexpr static float heat_per_combat_maneuver_boost = 0.2;
+    constexpr static float heat_per_combat_maneuver_strafe = 0.2;
+    constexpr static float heat_per_warp = 0.02;
 
     float energy_level;
     float max_energy_level;
