@@ -150,7 +150,9 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     {
         systems[n].health = 1.0;
         systems[n].power_level = 1.0;
+        systems[n].power_request = 1.0;
         systems[n].coolant_level = 0.0;
+        systems[n].coolant_request = 0.0;
         systems[n].heat_level = 0.0;
 
         registerMemberReplication(&systems[n].health, 0.1);
@@ -998,7 +1000,7 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
         ret += ":setJumpDrive(" + string(has_jump_drive ? "true" : "false") + ")";
     if (has_warp_drive != (ship_template->warp_speed > 0))
         ret += ":setWarpDrive(" + string(has_warp_drive ? "true" : "false") + ")";
-    
+
     /// shield data
     bool add_shields_max_line = getShieldCount() != ship_template->shield_count;
     bool add_shields_line = getShieldCount() != ship_template->shield_count;
@@ -1031,7 +1033,7 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
         }
         ret += ")";
     }
-    
+
     ///Missile weapon data
     if (weapon_tube_count != ship_template->weapon_tube_count)
         ret += ":setWeaponTubeCount(" + string(weapon_tube_count) + ")";
@@ -1044,7 +1046,7 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
         if (weapon_storage[n] != ship_template->weapon_storage[n])
             ret += ":setWeaponStorage(\"" + getMissileWeaponName(EMissileWeapons(n)) + "\", " + string(weapon_storage[n]) + ")";
     }
-    
+
     ///Beam weapon data
     for(int n=0; n<max_beam_weapons; n++)
     {
@@ -1057,7 +1059,7 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
             ret += ":setBeamWeapon(" + string(n) + ", " + string(beam_weapons[n].getArc(), 0) + ", " + string(beam_weapons[n].getDirection(), 0) + ", " + string(beam_weapons[n].getRange(), 0) + ", " + string(beam_weapons[n].getCycleTime(), 1) + ", " + string(beam_weapons[n].getDamage(), 1) + ")";
         }
     }
-    
+
     return ret;
 }
 

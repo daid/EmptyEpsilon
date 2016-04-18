@@ -29,8 +29,10 @@ class ShipSystem
 public:
     float health; //1.0-0.0, where 0.0 is fully broken.
     float power_level; //0.0-3.0, default 1.0
+    float power_request;
     float heat_level; //0.0-1.0, system will damage at 1.0
     float coolant_level; //0.0-10.0
+    float coolant_request;
 
     float getHeatingDelta()
     {
@@ -335,7 +337,7 @@ public:
     void setRadarTrace(string trace) { radar_trace = trace; }
 
     void addBroadcast(int threshold, string message);
-    
+
     //Return a string that can be appended to an object create function in the lua scripting.
     // This function is used in getScriptExport calls to adjust for tweaks done in the GM screen.
     string getScriptExportModificationsOnTemplate();

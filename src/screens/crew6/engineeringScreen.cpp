@@ -93,7 +93,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
 
     power_slider = new GuiSlider(box, "POWER_SLIDER", 3.0, 0.0, 1.0, [this](float value) {
         if (my_spaceship)
-            my_spaceship->commandSetSystemPower(selected_system, value);
+            my_spaceship->commandSetSystemPowerRequest(selected_system, value);
     });
     power_slider->setPosition(50, 20, ATopLeft)->setSize(60, 360);
     for(float snap_point = 0.0; snap_point <= 3.0; snap_point += 0.5)
@@ -101,7 +101,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
     power_slider->disable();
     coolant_slider = new GuiSlider(box, "COOLANT_SLIDER", 10.0, 0.0, 0.0, [this](float value) {
         if (my_spaceship)
-            my_spaceship->commandSetSystemCoolant(selected_system, value);
+            my_spaceship->commandSetSystemCoolantRequest(selected_system, value);
     });
     coolant_slider->setPosition(140, 20, ATopLeft)->setSize(60, 360);
     for(float snap_point = 0.0; snap_point <= 10.0; snap_point += 2.5)

@@ -116,6 +116,8 @@ static const int16_t CMD_LAUNCH_PROBE = 0x0022;
 static const int16_t CMD_SET_ALERT_LEVEL = 0x0023;
 static const int16_t CMD_SET_SCIENCE_LINK = 0x0024;
 static const int16_t CMD_ABORT_DOCK = 0x0025;
+static const int16_t CMD_SET_SYSTEM_POWER_REQUEST = 0x0026;
+static const int16_t CMD_SET_SYSTEM_COOLANT_REQUEST = 0x0027;
 
 template<> int convert<EAlertLevel>::returnType(lua_State* L, EAlertLevel l)
 {
@@ -208,11 +210,15 @@ PlayerSpaceship::PlayerSpaceship()
     {
         systems[n].health = 1.0;
         systems[n].power_level = 1.0;
+        systems[n].power_request = 1.0;
+        systems[n].coolant_level = 0.0;
         systems[n].coolant_level = 0.0;
         systems[n].heat_level = 0.0;
 
         registerMemberReplication(&systems[n].power_level);
+        registerMemberReplication(&systems[n].power_request);
         registerMemberReplication(&systems[n].coolant_level);
+        registerMemberReplication(&systems[n].coolant_request);
         registerMemberReplication(&systems[n].heat_level, 1.0);
     }
 
@@ -315,6 +321,32 @@ void PlayerSpaceship::update(float delta)
         for(int n=0; n<SYS_COUNT; n++)
         {
             if (!hasSystem(ESystem(n))) continue;
+
+            if (systems[n].power_request > systems[n].power_level)
+            {
+                systems[n].power_level += delta * 0.1;
+                if (systems[n].power_level > systems[n].power_request)
+                systems[n].power_level = systems[n].power_request;
+            }
+            else if (systems[n].power_request < systems[n].power_level)
+            {
+                systems[n].power_level -= delta * 0.1;
+                if (systems[n].power_level < systems[n].power_request)
+                systems[n].power_level = systems[n].power_request;
+            }
+
+            if (systems[n].coolant_request > systems[n].coolant_level)
+            {
+                systems[n].coolant_level += delta * 0.3;
+                if (systems[n].coolant_level > systems[n].coolant_request)
+                systems[n].coolant_level = systems[n].coolant_request;
+            }
+            else if (systems[n].coolant_request < systems[n].coolant_level)
+            {
+                systems[n].coolant_level -= delta * 0.3;
+                if (systems[n].coolant_level < systems[n].coolant_request)
+                systems[n].coolant_level = systems[n].coolant_request;
+            }
 
             addHeat(ESystem(n), delta * systems[n].getHeatingDelta() * system_heatup_per_second);
         }
@@ -487,6 +519,43 @@ void PlayerSpaceship::setSystemCoolant(ESystem system, float level)
     }
 
     systems[system].coolant_level = level;
+}
+
+void PlayerSpaceship::setSystemCoolantRequest(ESystem system, float request)
+{
+    float total_coolant = 0;
+    int cnt = 0;
+    for(int n=0; n<SYS_COUNT; n++)
+    {
+        if (!hasSystem(ESystem(n))) continue;
+        if (n == system) continue;
+
+        total_coolant += systems[n].coolant_request;
+        cnt++;
+    }
+    if (total_coolant > max_coolant - request)
+    {
+        for(int n=0; n<SYS_COUNT; n++)
+        {
+            if (!hasSystem(ESystem(n))) continue;
+            if (n == system) continue;
+
+            systems[n].coolant_request *= (max_coolant - request) / total_coolant;
+        }
+    }else{
+        if (total_coolant > 0)
+        {
+            for(int n=0; n<SYS_COUNT; n++)
+            {
+                if (!hasSystem(ESystem(n))) continue;
+                if (n == system) continue;
+
+                systems[n].coolant_request *= (max_coolant - request) / total_coolant;
+            }
+        }
+    }
+
+    systems[system].coolant_request = request;
 }
 
 bool PlayerSpaceship::useEnergy(float amount)
@@ -760,6 +829,15 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 systems[system].power_level = level;
         }
         break;
+    case CMD_SET_SYSTEM_POWER_REQUEST:
+        {
+            ESystem system;
+            float request;
+            packet >> system >> request;
+            if (system < SYS_COUNT && request >= 0.0 && request <= 3.0)
+                systems[system].power_request = request;
+        }
+        break;
     case CMD_SET_SYSTEM_COOLANT:
         {
             ESystem system;
@@ -767,6 +845,15 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             packet >> system >> level;
             if (system < SYS_COUNT && level >= 0.0 && level <= 10.0)
                 setSystemCoolant(system, level);
+        }
+        break;
+    case CMD_SET_SYSTEM_COOLANT_REQUEST:
+        {
+            ESystem system;
+            float request;
+            packet >> system >> request;
+            if (system < SYS_COUNT && request >= 0.0 && request <= 10.0)
+                setSystemCoolantRequest(system, request);
         }
         break;
     case CMD_DOCK:
@@ -1139,6 +1226,22 @@ void PlayerSpaceship::commandSetSystemCoolant(ESystem system, float coolant_leve
     sendClientCommand(packet);
 }
 
+void PlayerSpaceship::commandSetSystemPowerRequest(ESystem system, float power_request)
+{
+    sf::Packet packet;
+    systems[system].power_request = power_request;
+    packet << CMD_SET_SYSTEM_POWER_REQUEST << system << power_request;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetSystemCoolantRequest(ESystem system, float coolant_request)
+{
+    sf::Packet packet;
+    systems[system].coolant_request = coolant_request;
+    packet << CMD_SET_SYSTEM_COOLANT_REQUEST << system << coolant_request;
+    sendClientCommand(packet);
+}
+
 void PlayerSpaceship::commandDock(P<SpaceObject> object)
 {
     if (!object) return;
@@ -1320,9 +1423,9 @@ void PlayerSpaceship::setRepairCrewCount(int amount)
 {
     if (!game_server || !gameGlobalInfo->use_system_damage)
         return;
-    
+
     amount = std::max(0, amount);
-    
+
     PVector<RepairCrew> crew = getRepairCrewFor(this);
     while(int(crew.size()) > amount)
     {
