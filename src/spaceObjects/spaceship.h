@@ -284,6 +284,7 @@ public:
     void setImpulseMaxSpeed(float speed) { impulse_max_speed = speed; }
     float getRotationMaxSpeed() { return turn_speed; }
     void setRotationMaxSpeed(float speed) { turn_speed = speed; }
+    void setCombatManeuver(float boost, float strafe) { combat_maneuver_boost_speed = boost; combat_maneuver_strafe_speed = strafe; }
 
     bool hasJumpDrive() { return has_jump_drive; }
     void setJumpDrive(bool has_jump) { has_jump_drive = has_jump; }
