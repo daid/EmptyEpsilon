@@ -4,53 +4,47 @@
 #include "spaceObjects/spaceship.h"
 
 #include "scriptInterface.h"
-REGISTER_SCRIPT_CLASS_NO_CREATE(ScienceDatabaseEntry)
-{
-    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabaseEntry, addKeyValue);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabaseEntry, setLongDescription);
-}
 
 REGISTER_SCRIPT_CLASS(ScienceDatabase)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setName);
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, addEntry);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, addKeyValue);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setLongDescription);
 }
 
 
-PVector<ScienceDatabase> ScienceDatabase::scienceDatabaseList;
+PVector<ScienceDatabase> ScienceDatabase::science_databases;
 
 ScienceDatabase::ScienceDatabase()
 {
-    scienceDatabaseList.push_back(this);
+    science_databases.push_back(this);
     name = "???";
+}
+
+ScienceDatabase::ScienceDatabase(P<ScienceDatabase> parent, string name)
+{
+    this->parent = parent;
+    this->name = name;
 }
 
 ScienceDatabase::~ScienceDatabase()
 {
 }
 
-P<ScienceDatabaseEntry> ScienceDatabase::addEntry(string name)
+P<ScienceDatabase> ScienceDatabase::addEntry(string name)
 {
-    P<ScienceDatabaseEntry> e = new ScienceDatabaseEntry(name);
+    P<ScienceDatabase> e = new ScienceDatabase(this, name);
     items.push_back(e);
     return e;
 }
 
-ScienceDatabaseEntry::ScienceDatabaseEntry(string name)
-: name(name)
-{
-}
-
-ScienceDatabaseEntry::~ScienceDatabaseEntry()
-{
-}
-
-void ScienceDatabaseEntry::addKeyValue(string key, string value)
+void ScienceDatabase::addKeyValue(string key, string value)
 {
     keyValuePairs.push_back(ScienceDatabaseKeyValue(key, value));
 }
 
-void ScienceDatabaseEntry::setLongDescription(string text)
+void ScienceDatabase::setLongDescription(string text)
 {
     longDescription = text;
 }
@@ -61,7 +55,7 @@ void fillDefaultDatabaseData()
     factionDatabase->setName("Factions");
     for(unsigned int n=0; n<factionInfo.size(); n++)
     {
-        P<ScienceDatabaseEntry> entry = factionDatabase->addEntry(factionInfo[n]->getName());
+        P<ScienceDatabase> entry = factionDatabase->addEntry(factionInfo[n]->getName());
         for(unsigned int m=0; m<factionInfo.size(); m++)
         {
             if (n == m) continue;
@@ -85,7 +79,7 @@ void fillDefaultDatabaseData()
     std::sort(template_names.begin(), template_names.end());
     for(unsigned int n=0; n<template_names.size(); n++)
     {
-        P<ScienceDatabaseEntry> entry = shipDatabase->addEntry(template_names[n]);
+        P<ScienceDatabase> entry = shipDatabase->addEntry(template_names[n]);
         P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_names[n]);
         
         entry->model_template = ship_template;

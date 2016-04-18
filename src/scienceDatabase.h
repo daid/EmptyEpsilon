@@ -14,40 +14,34 @@ public:
 };
 /*!
  * \brief An entry for the science database that is formed by a number of key value pairs.
+ *  The database is build up in a tree structure, where every node can have key/value pairs and a long description.
+ *  As well as a 3D model assigned to it.
  */
-class ScienceDatabaseEntry : public virtual PObject
+class ScienceDatabase : public virtual PObject
 {
 public:
+    PVector<ScienceDatabase> items;
+    P<ScienceDatabase> parent;
+
     string name;
     std::vector<ScienceDatabaseKeyValue> keyValuePairs;
     string longDescription;
     P<ShipTemplate> model_template;
 
-    ScienceDatabaseEntry(string name);
-    virtual ~ScienceDatabaseEntry();
+    ScienceDatabase();
+    ScienceDatabase(P<ScienceDatabase> parent, string name);
+    virtual ~ScienceDatabase();
 
     void addKeyValue(string key, string value);
     void setLongDescription(string text);
-};
-/*!
- * \brief The database for science, that is formed of database entries.
- */
-class ScienceDatabase : public virtual PObject
-{
-public:
-    PVector<ScienceDatabaseEntry> items;
-
-    ScienceDatabase();
-    virtual ~ScienceDatabase();
 
     void setName(string name) { this->name = name; }
-    P<ScienceDatabaseEntry> addEntry(string name);
+    P<ScienceDatabase> addEntry(string name);
     string getName() {return this->name;}
-public:
-    static PVector<ScienceDatabase> scienceDatabaseList;
-
 private:
-    string name;
+
+public: /* static members */
+    static PVector<ScienceDatabase> science_databases;
 };
 
 //Called during startup to fill the database with faction and ship data.
