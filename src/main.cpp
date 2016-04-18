@@ -276,9 +276,11 @@ int main(int argc, char** argv)
         //Find out which model data isn't used by ship templates and output that to log.
         std::set<string> used_model_data;
         for(string template_name : ShipTemplate::getTemplateNameList())
-        {
             used_model_data.insert(ShipTemplate::getTemplate(template_name)->model_data->getName());
-        }
+        for(string template_name : ShipTemplate::getPlayerTemplateNameList())
+            used_model_data.insert(ShipTemplate::getTemplate(template_name)->model_data->getName());
+        for(string template_name : ShipTemplate::getStationTemplateNameList())
+            used_model_data.insert(ShipTemplate::getTemplate(template_name)->model_data->getName());
         for(string name : ModelData::getModelDataNames())
         {
             if (used_model_data.find(name) == used_model_data.end())
