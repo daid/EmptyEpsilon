@@ -21,10 +21,10 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     radar_view = new GuiElement(this, "RADAR_VIEW");
     radar_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", gameGlobalInfo->long_range_radar_range, &targets);
-    radar->setPosition(-270, 0, ACenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    radar->setRangeIndicatorStepSize(5000.0)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
-    radar->setCallbacks(
+    science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", gameGlobalInfo->long_range_radar_range, &targets);
+    science_radar->setPosition(-270, 0, ACenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    science_radar->setRangeIndicatorStepSize(5000.0)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
+    science_radar->setCallbacks(
         [this](sf::Vector2f position) {
             if (!my_spaceship || my_spaceship->scanning_delay > 0.0)
                 return;
@@ -32,11 +32,24 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
         }, nullptr, nullptr
     );
-    raw_scanner_data_overlay = new RawScannerDataRadarOverlay(radar, "", gameGlobalInfo->long_range_radar_range);
+    raw_scanner_data_overlay = new RawScannerDataRadarOverlay(science_radar, "", gameGlobalInfo->long_range_radar_range);
     raw_scanner_data_overlay->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
+    probe_radar = new GuiRadarView(radar_view, "PROBE_RADAR", 5000, &targets);
+    probe_radar->setPosition(-270, 0, ACenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
+    probe_radar->setAutoCentering(false)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NoFogOfWar);
+    probe_radar->setCallbacks(
+        [this](sf::Vector2f position) {
+            if (!my_spaceship || my_spaceship->scanning_delay > 0.0)
+                return;
+
+            targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
+        }, nullptr, nullptr
+    );
+
+
     GuiAutoLayout* sidebar = new GuiAutoLayout(radar_view, "SIDE_BAR", GuiAutoLayout::LayoutVerticalTopToBottom);
-    sidebar->setPosition(-20, 50, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    sidebar->setPosition(-20, 100, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiScanTargetButton(sidebar, "SCAN_BUTTON", &targets))->setSize(GuiElement::GuiSizeMax, 50);
 
     info_callsign = new GuiKeyValueDisplay(sidebar, "SCIENCE_CALLSIGN", 0.4, "Callsign", "");
@@ -60,41 +73,31 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     info_beam_frequency = new GuiFrequencyCurve(sidebar, "SCIENCE_SHIELD_FREQUENCY", true, false);
     info_beam_frequency->setSize(GuiElement::GuiSizeMax, 100);
 
-    probe_view_button = new GuiButton(radar_view, "LINK_TO_SCIENCE", "Probe View", [this](){
+    probe_view_button = new GuiToggleButton(radar_view, "PROBE_VIEW", "Probe View", [this](bool value){
         P<ScanProbe> probe;
 
         if (game_server)
-            probe = game_server->getObjectById(my_spaceship->linked_object);
+            probe = game_server->getObjectById(my_spaceship->linked_science_probe_id);
         else
-            probe = game_client->getObjectById(my_spaceship->linked_object);
-
-        if(probe && !my_spaceship->science_link)
+            probe = game_client->getObjectById(my_spaceship->linked_science_probe_id);
+        
+        if (value && probe)
         {
             sf::Vector2f probe_position = probe->getPosition();
-            my_spaceship->science_link = true;
-            radar->setAutoCentering(false);
-            radar->setViewPosition(probe_position);
-            radar->setDistance(5000);
-            radar->setFogOfWarStyle(GuiRadarView::NoFogOfWar);
-            raw_scanner_data_overlay->hide();
-            probe_view_button->setText("Back to ship");
-        }else if(my_spaceship->science_link)
-        {
-            my_spaceship->science_link = false;
-            radar->setAutoCentering(true);
-            radar->setDistance(gameGlobalInfo->long_range_radar_range);
-            raw_scanner_data_overlay->show();
-            probe_view_button->setText("Probe View");
-            radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
+            science_radar->hide();
+            probe_radar->show();
+            probe_radar->setViewPosition(probe_position)->show();
+        }else{
+            probe_view_button->setValue(false);
+            science_radar->show();
+            probe_radar->hide();
         }
-
     });
-    probe_view_button->setPosition(-20, -70, ABottomRight)->setSize(250, 50)->disable();
+    probe_view_button->setPosition(20, -120, ABottomLeft)->setSize(200, 50)->disable();
 
     (new GuiSelector(radar_view, "ZOOM_SELECT", [this](int index, string value) {
-        float zoom_amount = 1 + 0.5 * index ;
-        if(!my_spaceship->science_link)
-        radar->setDistance(gameGlobalInfo->long_range_radar_range / zoom_amount);
+        float zoom_amount = 1 + 0.5 * index;
+        science_radar->setDistance(gameGlobalInfo->long_range_radar_range / zoom_amount);
     }))->setOptions({"Zoom: 1x", "Zoom: 1.5x", "Zoom: 2x", "Zoom: 2.5x", "Zoom: 3x"})->setSelectionIndex(0)->setPosition(-20, -20, ABottomRight)->setSize(250, 50);
 
     if (!gameGlobalInfo->use_beam_shield_frequencies)
@@ -131,26 +134,32 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
 
     ///Handle mouse wheel
     float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
-    if (mouse_wheel_delta != 0.0 && !my_spaceship->science_link)
+    if (mouse_wheel_delta != 0.0)
     {
-        float view_distance = radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
+        float view_distance = science_radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
         if (view_distance > gameGlobalInfo->long_range_radar_range)
             view_distance = gameGlobalInfo->long_range_radar_range;
         if (view_distance < 5000.0f)
             view_distance = 5000.0f;
-        radar->setDistance(view_distance);
+        science_radar->setDistance(view_distance);
     }
 
     if (!my_spaceship)
         return;
 
     if (game_server)
-        probe = game_server->getObjectById(my_spaceship->linked_object);
+        probe = game_server->getObjectById(my_spaceship->linked_science_probe_id);
     else
-        probe = game_client->getObjectById(my_spaceship->linked_object);
+        probe = game_client->getObjectById(my_spaceship->linked_science_probe_id);
 
-    if (targets.get() && Nebula::blockedByNebula(my_spaceship->getPosition(), targets.get()->getPosition()) && !my_spaceship->science_link)
-        targets.clear();
+    if (probe_view_button->getValue() && probe)
+    {
+        if (targets.get() && (probe->getPosition() - targets.get()->getPosition()) < 5000.0f)
+            targets.clear();
+    }else{
+        if (targets.get() && Nebula::blockedByNebula(my_spaceship->getPosition(), targets.get()->getPosition()))
+            targets.clear();
+    }
 
     info_callsign->setValue("-");
     info_distance->setValue("-");
@@ -169,21 +178,14 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     if (probe)
     {
         probe_view_button->enable();
+        probe_radar->setViewPosition(probe->getPosition());
     }
     else
     {
         probe_view_button->disable();
-
-        //if the probe is not valid and the view is still on the probe, return to normal view
-        if (my_spaceship->science_link && !observation_point)
-        {
-            my_spaceship->science_link = false;
-            radar->setAutoCentering(true);
-            radar->setDistance(gameGlobalInfo->long_range_radar_range);
-            probe_view_button->setText("Probe View");
-            radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
-        }
-
+        probe_view_button->setValue(false);
+        science_radar->show();
+        probe_radar->hide();
     }
 
     if (targets.get())

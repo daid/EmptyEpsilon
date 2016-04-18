@@ -101,6 +101,7 @@ ShipTemplate::ShipTemplate()
     type = Ship;
     size_class = 10;
     energy_storage_amount = 1000;
+    repair_crew_count = 3;
     weapon_tube_count = 0;
     for(int n=0; n<max_weapon_tubes; n++)
     {
@@ -379,6 +380,11 @@ void ShipTemplate::setRadarTrace(string trace)
 void ShipTemplate::setEnergyStorage(float energy_amount)
 {
     this->energy_storage_amount = energy_amount;
+}
+
+void ShipTemplate::setRepairCrewCount(int amount)
+{
+    this->repair_crew_count = amount;
 }
 
 string ShipTemplate::getName()

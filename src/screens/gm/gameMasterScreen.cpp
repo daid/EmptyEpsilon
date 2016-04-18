@@ -90,10 +90,6 @@ GameMasterScreen::GameMasterScreen()
         gm_script_options->setSelectionIndex(-1);
     });
     gm_script_options->setPosition(20, 130, ATopLeft)->setSize(250, 500);
-    for(GMScriptCallback& callback : gameGlobalInfo->gm_callback_functions)
-    {
-        gm_script_options->addEntry(callback.name, callback.name);
-    }
     
     order_layout = new GuiAutoLayout(this, "ORDER_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     order_layout->setPosition(20, 130, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
@@ -206,6 +202,23 @@ void GameMasterScreen::update(float delta)
     {
         info_items[cnt]->hide();
         cnt++;
+    }
+
+    bool gm_functions_changed = gm_script_options->entryCount() != int(gameGlobalInfo->gm_callback_functions.size());
+    auto it = gameGlobalInfo->gm_callback_functions.begin();
+    for(int n=0; !gm_functions_changed && n<gm_script_options->entryCount(); n++)
+    {
+        if (gm_script_options->getEntryName(n) != it->name)
+            gm_functions_changed = true;
+        it++;
+    }
+    if (gm_functions_changed)
+    {
+        gm_script_options->setOptions({});
+        for(const GMScriptCallback& callback : gameGlobalInfo->gm_callback_functions)
+        {
+            gm_script_options->addEntry(callback.name, callback.name);
+        }
     }
 }
 

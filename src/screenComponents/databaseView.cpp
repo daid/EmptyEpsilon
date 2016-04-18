@@ -13,12 +13,27 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
             database_entry->destroy();
         
         database_entry = new GuiElement(this, "DATABASE_ENTRY");
-        database_entry->setPosition(500, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        database_entry->setPosition(350, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         
         GuiAutoLayout* layout = new GuiAutoLayout(database_entry, "DATABASE_ENTRY_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
         layout->setPosition(0, 0, ATopLeft)->setSize(400, GuiElement::GuiSizeMax);
         
-        P<ScienceDatabaseEntry> entry = ScienceDatabase::scienceDatabaseList[category_list->getSelectionIndex()]->items[index];
+        P<ScienceDatabase> entry;
+        if (selected_entry)
+        {
+            if (index == 0)
+            {
+                selected_entry = selected_entry->parent;
+                fillListBox();
+                return;
+            }else{
+                entry = selected_entry->items[index - 1];
+            }
+        }
+        else
+        {
+            entry = ScienceDatabase::science_databases[index];
+        }
         for(unsigned int n=0; n<entry->keyValuePairs.size(); n++)
         {
             (new GuiKeyValueDisplay(layout, "DATABASE_ENTRY_" + string(n), 0.7, entry->keyValuePairs[n].key, entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
@@ -31,23 +46,31 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
         {
             (new GuiRotatingModelView(database_entry, "DATABASE_MODEL_VIEW", entry->model_template->model_data))->setPosition(400, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMatchWidth);
         }
-    });
-    category_list = new GuiListbox(this, "DATABASE_CAT_LIST", [this](int index, string value) {
-        item_list->setOptions({});
-        foreach(ScienceDatabaseEntry, entry, ScienceDatabase::scienceDatabaseList[index]->items)
+        if (entry->items.size() > 0)
         {
-            item_list->addEntry(entry->name, entry->name);
+            selected_entry = entry;
+            fillListBox();
         }
-        item_list->setSelectionIndex(-1);
-
-        if (database_entry)
-            database_entry->destroy();
-        database_entry = nullptr;
     });
-    category_list->setPosition(20, 50, ATopLeft)->setSize(200, GuiElement::GuiSizeMax);
-    item_list->setPosition(240, 50, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
-    foreach(ScienceDatabase, sd, ScienceDatabase::scienceDatabaseList)
+    item_list->setPosition(0, 0, ATopLeft)->setMargins(50)->setSize(350, GuiElement::GuiSizeMax);
+    fillListBox();
+}
+
+void DatabaseViewComponent::fillListBox()
+{
+    item_list->setOptions({});
+    item_list->setSelectionIndex(-1);
+    if (!selected_entry)
     {
-        category_list->addEntry(sd->getName(), sd->getName());
+        foreach(ScienceDatabase, sd, ScienceDatabase::science_databases)
+        {
+            item_list->addEntry(sd->getName(), sd->getName());
+        }
+    }else{
+        item_list->addEntry("Back", "");
+        foreach(ScienceDatabase, sd, selected_entry->items)
+        {
+            item_list->addEntry(sd->getName(), sd->getName());
+        }
     }
 }

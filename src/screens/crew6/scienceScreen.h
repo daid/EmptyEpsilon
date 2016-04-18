@@ -18,7 +18,8 @@ protected:
     GuiElement* database_view;
 
     TargetsContainer targets;
-    GuiRadarView* radar;
+    GuiRadarView* science_radar;
+    GuiRadarView* probe_radar;
     GuiKeyValueDisplay* info_callsign;
     GuiKeyValueDisplay* info_distance;
     GuiKeyValueDisplay* info_heading;
@@ -32,7 +33,7 @@ protected:
     GuiFrequencyCurve* info_beam_frequency;
     GuiKeyValueDisplay* info_system[SYS_COUNT];
 
-    GuiButton* probe_view_button;
+    GuiToggleButton* probe_view_button;
     P<ScanProbe> observation_point;
 public:
     ScienceScreen(GuiContainer* owner);

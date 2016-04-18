@@ -81,6 +81,7 @@ public:
      */
     int size_class;
     float energy_storage_amount;
+    int repair_crew_count;
     string default_ai_name;
     BeamTemplate beams[max_beam_weapons];
     int weapon_tube_count;
@@ -107,6 +108,7 @@ public:
     void setSizeClass(int size_class);
     void setMesh(string model, string color_texture, string specular_texture, string illumination_texture);
     void setEnergyStorage(float energy_amount);
+    void setRepairCrewCount(int amount);
 
     void setBeam(int index, float arc, float direction, float range, float cycle_time, float damage);
 

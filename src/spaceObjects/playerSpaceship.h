@@ -120,8 +120,7 @@ public:
 
     EAlertLevel alert_level;
 
-    int32_t linked_object;
-    bool science_link = false;
+    int32_t linked_science_probe_id;
 
     PlayerSpaceship();
 
@@ -208,6 +207,9 @@ public:
 
     int getWaypointCount() { return waypoints.size(); }
     sf::Vector2f getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1]; return sf::Vector2f(0, 0); }
+    
+    int getRepairCrewCount();
+    void setRepairCrewCount(int amount);
 
     EAlertLevel getAlertLevel() { return alert_level; }
 

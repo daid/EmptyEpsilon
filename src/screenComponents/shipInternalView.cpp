@@ -53,19 +53,6 @@ GuiShipInternalView* GuiShipInternalView::setShip(P<SpaceShip> ship)
     }
     room_container->setSize(sf::Vector2f(max_size) * room_size);
     
-    PVector<RepairCrew> crew = getRepairCrewFor(ship);
-    foreach(RepairCrew, rc, crew)
-    {
-        int id = rc->getMultiplayerId();
-        (new GuiShipCrew(room_container, id + "_CREW", rc, [this](P<RepairCrew> crew_member){
-            if (selected_crew_member)
-                selected_crew_member->selected = false;
-            selected_crew_member = crew_member;
-            if (selected_crew_member)
-                selected_crew_member->selected = true;
-        }))->setSize(room_size, room_size);
-    }
-    
     return this;
 }
 
@@ -75,6 +62,27 @@ void GuiShipInternalView::onDraw(sf::RenderTarget& window)
     {
         room_container->destroy();
         room_container = nullptr;
+    }else{
+        PVector<RepairCrew> crew = getRepairCrewFor(viewing_ship);
+        if (crew.size() != crew_list.size())
+        {
+            for(GuiShipCrew* c : crew_list)
+                c->destroy();
+            crew_list.clear();
+
+            foreach(RepairCrew, rc, crew)
+            {
+                int id = rc->getMultiplayerId();
+                crew_list.push_back(new GuiShipCrew(room_container, id + "_CREW", rc, [this](P<RepairCrew> crew_member){
+                    if (selected_crew_member)
+                        selected_crew_member->selected = false;
+                    selected_crew_member = crew_member;
+                    if (selected_crew_member)
+                        selected_crew_member->selected = true;
+                }));
+                crew_list.back()->setSize(room_size, room_size);
+            }
+        }
     }
 }
 
