@@ -27,6 +27,27 @@ static int addGMFunction(lua_State* L)
 /// Or to give the GM console certain control over the scenario.
 REGISTER_SCRIPT_FUNCTION(addGMFunction);
 
+static int removeGMFunction(lua_State* L)
+{
+    string name = luaL_checkstring(L, 1);
+
+    gameGlobalInfo->gm_callback_functions.erase(std::remove_if(gameGlobalInfo->gm_callback_functions.begin(), gameGlobalInfo->gm_callback_functions.end(), [name](const GMScriptCallback& f) { return f.name == name; }), gameGlobalInfo->gm_callback_functions.end());
+
+    return 0;
+}
+/// removeGMFunction(name)
+/// Remove a function from the GM console
+REGISTER_SCRIPT_FUNCTION(removeGMFunction);
+
+static int clearGMFunctions(lua_State* L)
+{
+    gameGlobalInfo->gm_callback_functions.clear();
+    return 0;
+}
+/// clearGMFunctions()
+/// Remove all the GM functions from the GM console.
+REGISTER_SCRIPT_FUNCTION(clearGMFunctions);
+
 static int getGMSelection(lua_State* L)
 {
     PVector<SpaceObject> objects;
