@@ -36,7 +36,7 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
         }
         for(unsigned int n=0; n<entry->keyValuePairs.size(); n++)
         {
-            (new GuiKeyValueDisplay(layout, "DATABASE_ENTRY_" + string(n), 0.7, entry->keyValuePairs[n].key, entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
+            (new GuiKeyValueDisplay(layout, "", 0.7, entry->keyValuePairs[n].key, entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
         }
         if (entry->longDescription.length() > 0)
         {
@@ -44,7 +44,10 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
         }
         if (entry->model_data)
         {
-            (new GuiRotatingModelView(database_entry, "DATABASE_MODEL_VIEW", entry->model_data))->setPosition(400, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMatchWidth);
+            float x = 400;
+            if (entry->keyValuePairs.size() == 0 && entry->longDescription.length() == 0)
+                x = 0;
+            (new GuiRotatingModelView(database_entry, "DATABASE_MODEL_VIEW", entry->model_data))->setPosition(x, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMatchWidth);
         }
         if (entry->items.size() > 0)
         {
@@ -52,7 +55,7 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
             fillListBox();
         }
     });
-    item_list->setPosition(0, 0, ATopLeft)->setMargins(50)->setSize(350, GuiElement::GuiSizeMax);
+    item_list->setPosition(0, 0, ATopLeft)->setMargins(50, 50, 50, 150)->setSize(350, GuiElement::GuiSizeMax);
     fillListBox();
 }
 
