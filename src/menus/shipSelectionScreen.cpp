@@ -103,7 +103,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     if (game_server)
     {
         GuiSelector* ship_template_selector = new GuiSelector(left_container, "CREATE_SHIP_SELECTOR", nullptr);
-        std::vector<string> template_names = ShipTemplate::getPlayerTemplateNameList();
+        std::vector<string> template_names = ShipTemplate::getTemplateNameList(ShipTemplate::PlayerShip);
         std::sort(template_names.begin(), template_names.end());
         ship_template_selector->setOptions(template_names)->setSelectionIndex(0);
         ship_template_selector->setPosition(0, 630, ATopCenter)->setSize(490, 50);

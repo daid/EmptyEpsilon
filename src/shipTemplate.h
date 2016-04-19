@@ -146,9 +146,8 @@ public:
     void setCollisionData(P<SpaceObject> object);
 public:
     static P<ShipTemplate> getTemplate(string name);
-    static std::vector<string> getTemplateNameList();
-    static std::vector<string> getPlayerTemplateNameList();
-    static std::vector<string> getStationTemplateNameList();
+    static std::vector<string> getAllTemplateNames();
+    static std::vector<string> getTemplateNameList(TemplateType type);
 };
 string getSystemName(ESystem system);
 REGISTER_MULTIPLAYER_ENUM(ESystem);

@@ -26,7 +26,7 @@ public:
     string name;
     std::vector<ScienceDatabaseKeyValue> keyValuePairs;
     string longDescription;
-    P<ShipTemplate> model_template;
+    P<ModelData> model_data;
 
     ScienceDatabase();
     ScienceDatabase(P<ScienceDatabase> parent, string name);

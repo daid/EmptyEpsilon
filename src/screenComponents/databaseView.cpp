@@ -42,9 +42,9 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
         {
             (new GuiScrollText(layout, "DATABASE_LONG_DESCRIPTION", entry->longDescription))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         }
-        if (entry->model_template)
+        if (entry->model_data)
         {
-            (new GuiRotatingModelView(database_entry, "DATABASE_MODEL_VIEW", entry->model_template->model_data))->setPosition(400, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMatchWidth);
+            (new GuiRotatingModelView(database_entry, "DATABASE_MODEL_VIEW", entry->model_data))->setPosition(400, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMatchWidth);
         }
         if (entry->items.size() > 0)
         {

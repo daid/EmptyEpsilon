@@ -266,29 +266,19 @@ P<ShipTemplate> ShipTemplate::getTemplate(string name)
     return templateMap[name];
 }
 
-std::vector<string> ShipTemplate::getTemplateNameList()
+std::vector<string> ShipTemplate::getAllTemplateNames()
 {
     std::vector<string> ret;
     for(std::unordered_map<string, P<ShipTemplate> >::iterator i = templateMap.begin(); i != templateMap.end(); i++)
-        if (i->second->getType() == Ship)
-            ret.push_back(i->first);
+        ret.push_back(i->first);
     return ret;
 }
 
-std::vector<string> ShipTemplate::getPlayerTemplateNameList()
+std::vector<string> ShipTemplate::getTemplateNameList(TemplateType type)
 {
     std::vector<string> ret;
     for(std::unordered_map<string, P<ShipTemplate> >::iterator i = templateMap.begin(); i != templateMap.end(); i++)
-        if (i->second->getType() == PlayerShip)
-            ret.push_back(i->first);
-    return ret;
-}
-
-std::vector<string> ShipTemplate::getStationTemplateNameList()
-{
-    std::vector<string> ret;
-    for(std::unordered_map<string, P<ShipTemplate> >::iterator i = templateMap.begin(); i != templateMap.end(); i++)
-        if (i->second->getType() == Station)
+        if (i->second->getType() == type)
             ret.push_back(i->first);
     return ret;
 }

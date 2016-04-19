@@ -75,14 +75,14 @@ void fillDefaultDatabaseData()
     P<ScienceDatabase> shipDatabase = new ScienceDatabase();
     shipDatabase->setName("Ships");
 
-    std::vector<string> template_names = ShipTemplate::getTemplateNameList();
+    std::vector<string> template_names = ShipTemplate::getTemplateNameList(ShipTemplate::Ship);
     std::sort(template_names.begin(), template_names.end());
     for(unsigned int n=0; n<template_names.size(); n++)
     {
         P<ScienceDatabase> entry = shipDatabase->addEntry(template_names[n]);
         P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_names[n]);
         
-        entry->model_template = ship_template;
+        entry->model_data = ship_template->model_data;
 
         entry->addKeyValue("Size", string(int(ship_template->model_data->getRadius())));
         string shield_info = "";
@@ -136,4 +136,13 @@ void fillDefaultDatabaseData()
         if (ship_template->getDescription().length() > 0)
             entry->setLongDescription(ship_template->getDescription());
     }
+#ifdef DEBUG
+    P<ScienceDatabase> models_database = new ScienceDatabase();
+    models_database->setName("Models (debug)");
+    for(string name : ModelData::getModelDataNames())
+    {
+        P<ScienceDatabase> entry = models_database->addEntry(name);
+        entry->model_data = ModelData::getModel(name);
+    }
+#endif
 }
