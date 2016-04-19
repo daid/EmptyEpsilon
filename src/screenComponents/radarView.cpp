@@ -380,12 +380,12 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
 
     if (my_spaceship && missile_tube_controls)
     {
-        sf::Vector2f spaceship_position = radar_screen_center + (view_position - my_spaceship->getPosition()) * scale;
-        
         for(int n=0; n<my_spaceship->weapon_tube_count; n++)
         {
             if (!my_spaceship->weapon_tube[n].isLoaded())
                 continue;
+            sf::Vector2f fire_position = my_spaceship->getPosition() + sf::rotateVector(my_spaceship->ship_template->model_data->getTubePosition2D(n), my_spaceship->getRotation());
+            sf::Vector2f fire_draw_position = radar_screen_center + (view_position - fire_position) * scale;
 
             const MissileWeaponData& data = MissileWeaponData::getDataFor(my_spaceship->weapon_tube[n].getLoadType());
             float fire_angle = my_spaceship->getRotation() + my_spaceship->weapon_tube[n].getDirection();
@@ -419,11 +419,11 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
             float length_after_turn = data.speed * lifetime_after_turn;
 
             sf::VertexArray a(sf::LinesStrip, 13);
-            a[0].position = spaceship_position;
+            a[0].position = fire_draw_position;
             for(int cnt=0; cnt<10; cnt++)
-                a[cnt + 1].position = spaceship_position + (turn_center + sf::vector2FromAngle(fire_angle - angle_diff / 10.0f * cnt - left_or_right) * turn_radius) * scale;
-            a[11].position = spaceship_position + turn_exit * scale;
-            a[12].position = spaceship_position + (turn_exit + sf::vector2FromAngle(missile_target_angle) * length_after_turn) * scale;
+                a[cnt + 1].position = fire_draw_position + (turn_center + sf::vector2FromAngle(fire_angle - angle_diff / 10.0f * cnt - left_or_right) * turn_radius) * scale;
+            a[11].position = fire_draw_position + turn_exit * scale;
+            a[12].position = fire_draw_position + (turn_exit + sf::vector2FromAngle(missile_target_angle) * length_after_turn) * scale;
             for(int cnt=0; cnt<13; cnt++)
                 a[cnt].color = sf::Color(255, 255, 255, 128);
             window.draw(a);
@@ -442,8 +442,8 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
                     n = sf::vector2FromAngle(missile_target_angle + 90.0f);
                 }
                 sf::VertexArray a(sf::Lines, 2);
-                a[0].position = spaceship_position + p - n * 10.0f;
-                a[1].position = spaceship_position + p + n * 10.0f;
+                a[0].position = fire_draw_position + p - n * 10.0f;
+                a[1].position = fire_draw_position + p + n * 10.0f;
                 window.draw(a);
 
                 offset += seconds_per_distance_tick * data.speed;

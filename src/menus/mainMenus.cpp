@@ -19,6 +19,9 @@ class DebugAllModelView : public GuiCanvas
 public:
     DebugAllModelView()
     {
+        new GuiOverlay(this, "", colorConfig.background);
+        (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+
         std::vector<string> names = ModelData::getModelDataNames();
         names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.startswith("transport_"); }), names.end());
         names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.startswith("artifact"); }), names.end());
