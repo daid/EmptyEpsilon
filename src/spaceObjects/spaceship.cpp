@@ -944,16 +944,19 @@ void SpaceShip::addBroadcast(int threshold, string message)
         threshold = 0;
     }
 
+    message = this->getCallSign() + " : " + message; //append the callsign at the start of broadcast
+
     sf::Color color = sf::Color(255, 204, 51); //default : yellow, should never be seen
-    bool addtolog = 0;
 
     for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
     {
+        bool addtolog = 0;
         P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
         if (ship)
         {
             if (factionInfo[this->getFactionId()]->states[ship->getFactionId()] == FVF_Friendly)
             {
+                message = this->getFaction() + ship->getFaction();
                 color = sf::Color(154,255,154); //ally = light green
                 addtolog = 1;
             }
