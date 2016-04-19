@@ -326,6 +326,7 @@ model:setIllumination("ammo_box_illumination.png")
 
 model = ModelData()
 model:setName("shield_generator")
+model:setRadius(150)
 model:setScale(3)
 model:setMesh("Shield bubble generator.obj")
 model:setTexture("Shield bubble generator.jpg")
