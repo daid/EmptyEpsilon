@@ -161,9 +161,7 @@ public:
     void commandSetShields(bool enabled);
     void commandMainScreenSetting(EMainScreenSetting mainScreen);
     void commandScan(P<SpaceObject> object);
-    void commandSetSystemPower(ESystem system, float power_level);
     void commandSetSystemPowerRequest(ESystem system, float power_level);
-    void commandSetSystemCoolant(ESystem system, float coolant_level);
     void commandSetSystemCoolantRequest(ESystem system, float coolant_level);
     void commandDock(P<SpaceObject> station);
     void commandUndock();

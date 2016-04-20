@@ -39,8 +39,8 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetShields);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMainScreenSetting);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandScan);
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetSystemPower);
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetSystemCoolant);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetSystemPowerRequest);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetSystemCoolantRequest);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandDock);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandUndock);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandAbortDock);
@@ -92,8 +92,8 @@ static const int16_t CMD_SET_MAIN_SCREEN_SETTING = 0x000A;
 static const int16_t CMD_SCAN_OBJECT = 0x000B;
 static const int16_t CMD_SCAN_DONE = 0x000C;
 static const int16_t CMD_SCAN_CANCEL = 0x000D;
-static const int16_t CMD_SET_SYSTEM_POWER = 0x000E;
-static const int16_t CMD_SET_SYSTEM_COOLANT = 0x000F;
+static const int16_t CMD_SET_SYSTEM_POWER_REQUEST = 0x000E;
+static const int16_t CMD_SET_SYSTEM_COOLANT_REQUEST = 0x000F;
 static const int16_t CMD_DOCK = 0x0010;
 static const int16_t CMD_UNDOCK = 0x0011;
 static const int16_t CMD_OPEN_TEXT_COMM = 0x0012; //TEXT communication
@@ -116,8 +116,6 @@ static const int16_t CMD_LAUNCH_PROBE = 0x0022;
 static const int16_t CMD_SET_ALERT_LEVEL = 0x0023;
 static const int16_t CMD_SET_SCIENCE_LINK = 0x0024;
 static const int16_t CMD_ABORT_DOCK = 0x0025;
-static const int16_t CMD_SET_SYSTEM_POWER_REQUEST = 0x0026;
-static const int16_t CMD_SET_SYSTEM_COOLANT_REQUEST = 0x0027;
 
 template<> int convert<EAlertLevel>::returnType(lua_State* L, EAlertLevel l)
 {
@@ -820,15 +818,6 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             scanning_target = nullptr;
         }
         break;
-    case CMD_SET_SYSTEM_POWER:
-        {
-            ESystem system;
-            float level;
-            packet >> system >> level;
-            if (system < SYS_COUNT && level >= 0.0 && level <= 3.0)
-                systems[system].power_level = level;
-        }
-        break;
     case CMD_SET_SYSTEM_POWER_REQUEST:
         {
             ESystem system;
@@ -836,15 +825,6 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             packet >> system >> request;
             if (system < SYS_COUNT && request >= 0.0 && request <= 3.0)
                 systems[system].power_request = request;
-        }
-        break;
-    case CMD_SET_SYSTEM_COOLANT:
-        {
-            ESystem system;
-            float level;
-            packet >> system >> level;
-            if (system < SYS_COUNT && level >= 0.0 && level <= 10.0)
-                setSystemCoolant(system, level);
         }
         break;
     case CMD_SET_SYSTEM_COOLANT_REQUEST:
@@ -1207,22 +1187,6 @@ void PlayerSpaceship::commandScan(P<SpaceObject> object)
 {
     sf::Packet packet;
     packet << CMD_SCAN_OBJECT << object->getMultiplayerId();
-    sendClientCommand(packet);
-}
-
-void PlayerSpaceship::commandSetSystemPower(ESystem system, float power_level)
-{
-    sf::Packet packet;
-    systems[system].power_level = power_level;
-    packet << CMD_SET_SYSTEM_POWER << system << power_level;
-    sendClientCommand(packet);
-}
-
-void PlayerSpaceship::commandSetSystemCoolant(ESystem system, float coolant_level)
-{
-    sf::Packet packet;
-    systems[system].coolant_level = coolant_level;
-    packet << CMD_SET_SYSTEM_COOLANT << system << coolant_level;
     sendClientCommand(packet);
 }
 
