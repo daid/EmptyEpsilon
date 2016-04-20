@@ -216,17 +216,17 @@ void GuiElement::updateRect(sf::FloatRect parent_rect)
 {
     sf::Vector2f local_size = size;
     if (local_size.x == GuiSizeMax)
-        local_size.x = parent_rect.width - fabs(position.x) - margins.left;
+        local_size.x = parent_rect.width - fabs(position.x);
     if (local_size.y == GuiSizeMax)
-        local_size.y = parent_rect.height - fabs(position.y) - margins.top;
+        local_size.y = parent_rect.height - fabs(position.y);
     
     if (local_size.x == GuiSizeMatchHeight)
         local_size.x = local_size.y;
     if (local_size.y == GuiSizeMatchWidth)
         local_size.y = local_size.x;
     
-    local_size.x -= margins.width;
-    local_size.y -= margins.height;
+    local_size.x -= margins.width - margins.left;
+    local_size.y -= margins.height - margins.top;
     
     switch(position_alignment)
     {

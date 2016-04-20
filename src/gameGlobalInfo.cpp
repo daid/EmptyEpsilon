@@ -313,3 +313,11 @@ static int shutdownGame(lua_State* L)
 /// Shutdown the game.
 /// Calling this function will close the game. Mainly usefull for a headless server setup.
 REGISTER_SCRIPT_FUNCTION(shutdownGame);
+
+static int getLongRangeRadarRange(lua_State* L)
+{
+    lua_pushnumber(L, gameGlobalInfo->long_range_radar_range);
+    return 1;
+}
+/// Return the long range radar range, normally 30km, but can be configured per game.
+REGISTER_SCRIPT_FUNCTION(getLongRangeRadarRange);
