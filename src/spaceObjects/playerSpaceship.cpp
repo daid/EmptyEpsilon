@@ -482,43 +482,6 @@ void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
     SpaceShip::takeHullDamage(damage_amount, info);
 }
 
-void PlayerSpaceship::setSystemCoolant(ESystem system, float level)
-{
-    float total_coolant = 0;
-    int cnt = 0;
-    for(int n=0; n<SYS_COUNT; n++)
-    {
-        if (!hasSystem(ESystem(n))) continue;
-        if (n == system) continue;
-
-        total_coolant += systems[n].coolant_level;
-        cnt++;
-    }
-    if (total_coolant > max_coolant - level)
-    {
-        for(int n=0; n<SYS_COUNT; n++)
-        {
-            if (!hasSystem(ESystem(n))) continue;
-            if (n == system) continue;
-
-            systems[n].coolant_level *= (max_coolant - level) / total_coolant;
-        }
-    }else{
-        if (total_coolant > 0)
-        {
-            for(int n=0; n<SYS_COUNT; n++)
-            {
-                if (!hasSystem(ESystem(n))) continue;
-                if (n == system) continue;
-
-                systems[n].coolant_level *= (max_coolant - level) / total_coolant;
-            }
-        }
-    }
-
-    systems[system].coolant_level = level;
-}
-
 void PlayerSpaceship::setSystemCoolantRequest(ESystem system, float request)
 {
     float total_coolant = 0;

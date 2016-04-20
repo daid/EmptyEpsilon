@@ -191,7 +191,6 @@ public:
 
     virtual void executeJump(float distance) override;
     virtual void takeHullDamage(float damage_amount, DamageInfo& info) override;
-    void setSystemCoolant(ESystem system, float level);
     void setSystemCoolantRequest(ESystem system, float request);
 
     virtual void update(float delta) override;
