@@ -13,7 +13,7 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
             database_entry->destroy();
         
         database_entry = new GuiElement(this, "DATABASE_ENTRY");
-        database_entry->setPosition(350, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        database_entry->setPosition(400, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         
         GuiAutoLayout* layout = new GuiAutoLayout(database_entry, "DATABASE_ENTRY_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
         layout->setPosition(0, 0, ATopLeft)->setSize(400, GuiElement::GuiSizeMax);

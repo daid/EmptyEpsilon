@@ -275,7 +275,7 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
     });
     cycle_time_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
-    (new GuiLabel(right_col, "", "Cycle time:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(right_col, "", "Damage:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     damage_slider = new GuiSlider(right_col, "", 0.1, 50.0, 0.0, [this](float value) {
         target->beam_weapons[beam_index].setDamage(value);
     });
