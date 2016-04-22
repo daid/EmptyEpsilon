@@ -24,6 +24,8 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setEnergyStorage);
     /// Setup a beam weapon.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeam);
+    /// Setup a beam weapon.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeapon);
     /// Setup a beam weapon texture
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamTexture);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponEnergyPerFire);
@@ -197,6 +199,11 @@ void ShipTemplate::setName(string name)
 }
 
 void ShipTemplate::setBeam(int index, float arc, float direction, float range, float cycle_time, float damage)
+{
+    setBeamWeapon(index, arc, direction, range, cycle_time, damage);
+}
+
+void ShipTemplate::setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage)
 {
     if (index < 0 || index > max_beam_weapons)
         return;
