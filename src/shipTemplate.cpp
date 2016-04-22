@@ -9,6 +9,8 @@
 REGISTER_SCRIPT_CLASS(ShipTemplate)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setName);
+    /// Set the class name, and subclass name for the ship. Used to divide ships into different classes.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setClass);
     /// Set the description shown for this ship in the science database.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDescription);
     /// Sets the type of template. Defaults to normal ships, so then it does not need to be set.
@@ -196,6 +198,11 @@ void ShipTemplate::setName(string name)
     if (name.startswith("Player "))
         name = name.substr(7);
     this->name = name;
+}
+
+void ShipTemplate::setClass(string class_name, string sub_class_name)
+{
+    //Currently unused, for future use.
 }
 
 void ShipTemplate::setBeam(int index, float arc, float direction, float range, float cycle_time, float damage)

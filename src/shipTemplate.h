@@ -104,6 +104,7 @@ public:
     ShipTemplate();
 
     void setName(string name);
+    void setClass(string class_name, string sub_class_name);
     void setDescription(string description);
     void setModel(string model_name);
     void setDefaultAI(string default_ai_name);
