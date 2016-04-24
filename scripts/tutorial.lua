@@ -77,8 +77,8 @@ function resetPlayerShip()
     for _, system in ipairs({"reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield"}) do
         player:setSystemHealth(system, 1.0)
         player:setSystemHeat(system, 0.0)
-        player:commandSetSystemPower(system, 1.0)
-        player:commandSetSystemCoolant(system, 0.0)
+        player:setSystemPower(system, 1.0)
+        player:setSystemCoolant(system, 0.0)
     end
     player:setPosition(0, 0)
     player:setRotation(0)
@@ -155,7 +155,7 @@ Rotating the ship is easy, just press anywhere on the radar screen to rotate to 
 Try rotating to heading 200 right now.]], function() return math.abs(player:getHeading() - 200) < 1.0 end)
 addToSequence(helmsTutorial, function() player:setImpulseMaxSpeed(90) end)
 addToSequence(helmsTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(0, -1500) end)
-addToSequence(helmsTutorial, [[Excelent!
+addToSequence(helmsTutorial, [[Excellent!
 
 Next up. Docking. Docking is important, as being docked with a station will recharge your energy, repairs your hull and allows the relay officer to request weapon refills. It can also be important for other mission related events.
 To dock, get within 1km of a station, and press the "Request Dock" button. Docking is fully automated after that.
@@ -304,7 +304,7 @@ Increase the power of the front shield system to max.]], function() return playe
 addToSequence(engineeringTutorial, [[As you will notice, the added power in the shield system will increase the amount of heat in the system.
 
 Now wait till the system is overheating.]], function() return player:getSystemHealth("frontshield") < 0.5 end)
-addToSequence(engineeringTutorial, function() player:commandSetSystemPower("frontshield", 0.0) end)
+addToSequence(engineeringTutorial, function() player:setSystemPower("frontshield", 0.0) end)
 addToSequence(engineeringTutorial, [[Note that because of the overheating system, your system took damage. Because the system is damage, it will function less effectively.
 
 Systems can also be damaged because your ship gets hit while the shields are down.]])

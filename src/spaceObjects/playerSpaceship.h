@@ -158,8 +158,8 @@ public:
     void commandSetShields(bool enabled);
     void commandMainScreenSetting(EMainScreenSetting mainScreen);
     void commandScan(P<SpaceObject> object);
-    void commandSetSystemPower(ESystem system, float power_level);
-    void commandSetSystemCoolant(ESystem system, float coolant_level);
+    void commandSetSystemPowerRequest(ESystem system, float power_level);
+    void commandSetSystemCoolantRequest(ESystem system, float coolant_level);
     void commandDock(P<SpaceObject> station);
     void commandUndock();
     void commandAbortDock();
@@ -188,7 +188,7 @@ public:
 
     virtual void executeJump(float distance) override;
     virtual void takeHullDamage(float damage_amount, DamageInfo& info) override;
-    void setSystemCoolant(ESystem system, float level);
+    void setSystemCoolantRequest(ESystem system, float request);
 
     virtual void update(float delta) override;
     virtual bool useEnergy(float amount) override;
@@ -204,7 +204,7 @@ public:
 
     int getWaypointCount() { return waypoints.size(); }
     sf::Vector2f getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1]; return sf::Vector2f(0, 0); }
-    
+
     int getRepairCrewCount();
     void setRepairCrewCount(int amount);
 

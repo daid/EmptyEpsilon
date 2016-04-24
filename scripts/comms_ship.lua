@@ -61,7 +61,6 @@ function friendlyComms(comms_data)
 		end
 
 		setCommsMessage(msg);
-		comms_target:orderDefendTarget(player)
 		addCommsReply("Back", mainMenu)
 	end)
 	for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do

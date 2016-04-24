@@ -105,7 +105,7 @@ void CpuShip::orderRoaming()
 {
     target_rotation = getRotation();
     orders = AI_Roaming;
-    this->addBroadcast(FVF_Friendly, this->getCallSign() + " : Searching for targets.");
+    this->addBroadcast(FVF_Friendly,"Searching for targets.");
 }
 
 void CpuShip::orderRoamingAt(sf::Vector2f position)
@@ -113,21 +113,21 @@ void CpuShip::orderRoamingAt(sf::Vector2f position)
     target_rotation = getRotation();
     orders = AI_Roaming;
     order_target_location = position;
-    this->addBroadcast(FVF_Friendly, this->getCallSign() + " : Searching for targets around " + string(position.x) + "," + string(position.y) + ".");
+    this->addBroadcast(FVF_Friendly, "Searching for hostiles around " + string(position.x) + "," + string(position.y) + ".");
 }
 
 void CpuShip::orderStandGround()
 {
     target_rotation = getRotation();
     orders = AI_StandGround;
-    this->addBroadcast(FVF_Friendly, this->getCallSign() + " : Standing ground for now.");
+    this->addBroadcast(FVF_Friendly, "Standing ground for now.");
 }
 
 void CpuShip::orderDefendLocation(sf::Vector2f position)
 {
     orders = AI_DefendLocation;
     order_target_location = position;
-    this->addBroadcast(FVF_Friendly, this->getCallSign() + " : Defending " + string(position.x) + "," + string(position.y) + ".");
+    this->addBroadcast(FVF_Friendly, "Defending " + string(position.x) + "," + string(position.y) + ".");
 }
 
 void CpuShip::orderDefendTarget(P<SpaceObject> object)
@@ -136,7 +136,7 @@ void CpuShip::orderDefendTarget(P<SpaceObject> object)
         return;
     orders = AI_DefendTarget;
     order_target = object;
-    this->addBroadcast(FVF_Friendly, this->getCallSign() + " : Defending " + object->getCallSign() + ".");
+    this->addBroadcast(FVF_Friendly, "Defending " + object->getCallSign() + ".");
 }
 
 void CpuShip::orderFlyFormation(P<SpaceObject> object, sf::Vector2f offset)
@@ -146,21 +146,21 @@ void CpuShip::orderFlyFormation(P<SpaceObject> object, sf::Vector2f offset)
     orders = AI_FlyFormation;
     order_target = object;
     order_target_location = offset;
-    this->addBroadcast(FVF_Friendly, this->getCallSign() + " : Following " + object->getCallSign() + ".");
+    this->addBroadcast(FVF_Friendly, "Following " + object->getCallSign() + ".");
 }
 
 void CpuShip::orderFlyTowards(sf::Vector2f target)
 {
     orders = AI_FlyTowards;
     order_target_location = target;
-    this->addBroadcast(FVF_Friendly, this->getCallSign() + " : Moving to " + string(target.x) + "," + string(target.y) + ".");
+    this->addBroadcast(FVF_Friendly, "Moving to " + string(target.x) + "," + string(target.y) + ".");
 }
 
 void CpuShip::orderFlyTowardsBlind(sf::Vector2f target)
 {
     orders = AI_FlyTowardsBlind;
     order_target_location = target;
-    this->addBroadcast(FVF_Friendly, this->getCallSign() + " : Moving to " + string(target.x) + "," + string(target.y) + ".");
+    this->addBroadcast(FVF_Friendly,"Moving to " + string(target.x) + "," + string(target.y) + ".");
 }
 
 void CpuShip::orderAttack(P<SpaceObject> object)
@@ -169,7 +169,7 @@ void CpuShip::orderAttack(P<SpaceObject> object)
         return;
     orders = AI_Attack;
     order_target = object;
-    this->addBroadcast(FVF_Friendly, this->getCallSign() + " : Moving to attack " + object->getCallSign() + "!");
+    this->addBroadcast(FVF_Friendly, "Moving to attack " + object->getCallSign() + "!");
 }
 
 void CpuShip::orderDock(P<SpaceObject> object)
@@ -178,7 +178,7 @@ void CpuShip::orderDock(P<SpaceObject> object)
         return;
     orders = AI_Dock;
     order_target = object;
-    this->addBroadcast(FVF_Friendly, this->getCallSign() + " : Docking to " + object->getCallSign() + ".");
+    this->addBroadcast(FVF_Friendly, "Docking to " + object->getCallSign() + ".");
 }
 
 void CpuShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
