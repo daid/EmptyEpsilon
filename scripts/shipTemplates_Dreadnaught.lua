@@ -1,5 +1,5 @@
 --[[                  Dreadnaught
-Dreadnaughts are the latest ships.
+Dreadnaughts are the largest ships.
 They are so large and uncommon that every type is pretty much their own subclass.
 They usually come with 6 or more shield sections, require a crew of 250+ to operate.
 

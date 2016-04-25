@@ -1,4 +1,4 @@
---[[                  Stations
+--[[                  OLD ship templates
 These are older ship templates, going to be replaced soon.
 ----------------------------------------------------------]]
 
