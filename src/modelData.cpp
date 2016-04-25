@@ -174,7 +174,9 @@ P<ModelData> ModelData::getModel(string name)
     if (data_map.find(name) == data_map.end())
     {
         LOG(ERROR) << "Failed to find model data: " << name;
-        return nullptr;
+        if (data_map.find("NULL") == data_map.end())
+            data_map[name] = new ModelData();
+        return data_map["NULL"];
     }
     return data_map[name];
 }
