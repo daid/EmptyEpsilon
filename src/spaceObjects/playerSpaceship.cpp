@@ -325,26 +325,26 @@ void PlayerSpaceship::update(float delta)
             {
                 systems[n].power_level += delta * system_power_level_change_per_second;
                 if (systems[n].power_level > systems[n].power_request)
-                systems[n].power_level = systems[n].power_request;
+                    systems[n].power_level = systems[n].power_request;
             }
             else if (systems[n].power_request < systems[n].power_level)
             {
                 systems[n].power_level -= delta * system_power_level_change_per_second;
                 if (systems[n].power_level < systems[n].power_request)
-                systems[n].power_level = systems[n].power_request;
+                    systems[n].power_level = systems[n].power_request;
             }
 
             if (systems[n].coolant_request > systems[n].coolant_level)
             {
                 systems[n].coolant_level += delta * system_coolant_level_change_per_second;
                 if (systems[n].coolant_level > systems[n].coolant_request)
-                systems[n].coolant_level = systems[n].coolant_request;
+                    systems[n].coolant_level = systems[n].coolant_request;
             }
             else if (systems[n].coolant_request < systems[n].coolant_level)
             {
-                systems[n].coolant_level -= delta * system_power_level_change_per_second;
+                systems[n].coolant_level -= delta * system_coolant_level_change_per_second;
                 if (systems[n].coolant_level < systems[n].coolant_request)
-                systems[n].coolant_level = systems[n].coolant_request;
+                    systems[n].coolant_level = systems[n].coolant_request;
             }
 
             addHeat(ESystem(n), delta * systems[n].getHeatingDelta() * system_heatup_per_second);
