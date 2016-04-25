@@ -323,26 +323,26 @@ void PlayerSpaceship::update(float delta)
 
             if (systems[n].power_request > systems[n].power_level)
             {
-                systems[n].power_level += delta * 0.1;
+                systems[n].power_level += delta * system_power_level_change_per_second;
                 if (systems[n].power_level > systems[n].power_request)
                 systems[n].power_level = systems[n].power_request;
             }
             else if (systems[n].power_request < systems[n].power_level)
             {
-                systems[n].power_level -= delta * 0.1;
+                systems[n].power_level -= delta * system_power_level_change_per_second;
                 if (systems[n].power_level < systems[n].power_request)
                 systems[n].power_level = systems[n].power_request;
             }
 
             if (systems[n].coolant_request > systems[n].coolant_level)
             {
-                systems[n].coolant_level += delta * 0.3;
+                systems[n].coolant_level += delta * system_coolant_level_change_per_second;
                 if (systems[n].coolant_level > systems[n].coolant_request)
                 systems[n].coolant_level = systems[n].coolant_request;
             }
             else if (systems[n].coolant_request < systems[n].coolant_level)
             {
-                systems[n].coolant_level -= delta * 0.3;
+                systems[n].coolant_level -= delta * system_power_level_change_per_second;
                 if (systems[n].coolant_level < systems[n].coolant_request)
                 systems[n].coolant_level = systems[n].coolant_request;
             }

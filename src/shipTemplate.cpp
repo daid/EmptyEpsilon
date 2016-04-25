@@ -104,6 +104,8 @@ std::unordered_map<string, P<ShipTemplate> > ShipTemplate::templateMap;
 
 ShipTemplate::ShipTemplate()
 {
+    if (game_server) { LOG(ERROR) << "ShipTemplate objects can not be created during a scenario."; destroy(); return; }
+    
     type = Ship;
     size_class = 10;
     energy_storage_amount = 1000;

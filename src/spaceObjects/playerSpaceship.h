@@ -56,6 +56,8 @@ public:
     constexpr static float energy_shield_use_per_second = 1.5f;
     constexpr static float energy_warp_per_second = 1.0f;
     constexpr static float system_heatup_per_second = 0.05f;
+    constexpr static float system_power_level_change_per_second = 0.3;
+    constexpr static float system_coolant_level_change_per_second = 1.2;
     constexpr static float max_coolant = 10.0;
     constexpr static float damage_per_second_on_overheat = 0.08f;
     constexpr static float shield_calibration_time = 25.0f;

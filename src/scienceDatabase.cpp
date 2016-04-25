@@ -18,6 +18,7 @@ PVector<ScienceDatabase> ScienceDatabase::science_databases;
 
 ScienceDatabase::ScienceDatabase()
 {
+    if (game_server) { LOG(ERROR) << "ScienceDatabase objects can not be created during a scenario right now."; destroy(); return; }
     science_databases.push_back(this);
     name = "???";
 }
