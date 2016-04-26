@@ -29,7 +29,7 @@ variation:setWeaponStorage("Mine", 6)
 variation:weaponTubeDisallowMissle(0, "Mine"):weaponTubeDisallowMissle(1, "Mine")
 variation:setTubeDirection(2,  180):setWeaponTubeExclusiveFor(2, "Mine")
 
-template = ShipTemplate():setName("Nirvana R5"):setClass("Frigate", "Cruiser: Anti Starfighter"):setModel("?")
+template = ShipTemplate():setName("Nirvana R5"):setClass("Frigate", "Cruiser: Anti Starfighter"):setModel("small_frigate_5")
 template:setDescription([[Anti fighter cruiser. Has a large amount of fast firing, low damage lasers to quickly take out starfighter class ships.]])
 template:setBeamWeapon(0, 90, -15, 1200, 3, 1)
 template:setBeamWeapon(1, 90,  15, 1200, 3, 1)
@@ -47,7 +47,7 @@ variation:setBeamWeapon(2, 90,  50, 1200, 2.9, 1)
 variation:setBeamWeapon(3, 90, -50, 1200, 2.9, 1)
 variation:setSpeed(70, 15, 10)
 
-template = ShipTemplate():setName("Piranha F12"):setClass("Frigate", "Cruiser: Light Artillery"):setModel("?")
+template = ShipTemplate():setName("Piranha F12"):setClass("Frigate", "Cruiser: Light Artillery"):setModel("small_frigate_5") -- Could use a better 3D model.
 template:setDescription([[Light artillery cruiser, smallest ship that is an exclusive broadside.]])
 template:setHull(70)
 template:setShields(30, 30)

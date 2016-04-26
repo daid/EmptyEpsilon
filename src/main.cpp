@@ -260,7 +260,7 @@ int main(int argc, char** argv)
         modelDataScript->destroy();
 
         P<ScriptObject> shipTemplatesScript = new ScriptObject("shipTemplates.lua");
-        if (modelDataScript->getError() != "") exit(1);
+        if (shipTemplatesScript->getError() != "") exit(1);
         shipTemplatesScript->destroy();
 
         P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");

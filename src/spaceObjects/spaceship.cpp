@@ -563,13 +563,13 @@ void SpaceShip::update(float delta)
 
 float SpaceShip::getShieldRechargeRate(int shield_index)
 {
-    float rate = 0.2f;
+    float rate = 0.3f;
     if (shield_index == 0)
         rate *= getSystemEffectiveness(SYS_FrontShield);
     else
         rate *= getSystemEffectiveness(SYS_RearShield);
     if (docking_state == DS_Docked)
-        rate *= 5.0;
+        rate *= 4.0;
     return rate;
 }
 

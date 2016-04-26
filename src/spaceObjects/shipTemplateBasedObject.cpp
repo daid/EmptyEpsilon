@@ -267,7 +267,7 @@ float ShipTemplateBasedObject::getShieldDamageFactor(DamageInfo& info, int shiel
 
 float ShipTemplateBasedObject::getShieldRechargeRate(int shield_index)
 {
-    return 0.2;
+    return 0.3;
 }
 
 void ShipTemplateBasedObject::setTemplate(string template_name)
