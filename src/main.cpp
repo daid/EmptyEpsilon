@@ -256,17 +256,21 @@ int main(int argc, char** argv)
 
     {
         P<ScriptObject> modelDataScript = new ScriptObject("model_data.lua");
+        if (modelDataScript->getError() != "") exit(1);
         modelDataScript->destroy();
 
         P<ScriptObject> shipTemplatesScript = new ScriptObject("shipTemplates.lua");
+        if (modelDataScript->getError() != "") exit(1);
         shipTemplatesScript->destroy();
 
         P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");
+        if (factionInfoScript->getError() != "") exit(1);
         factionInfoScript->destroy();
 
         fillDefaultDatabaseData();
 
         P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
+        if (scienceInfoScript->getError() != "") exit(1);
         scienceInfoScript->destroy();
         
         //Find out which model data isn't used by ship templates and output that to log.

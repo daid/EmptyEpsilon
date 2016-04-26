@@ -8,3 +8,4 @@ They come in 3 different subclasses:
 * Freighter: Large scale transport ships. Most common here are the jump freighters, using specialized jumpdrives to cross large distances with large amounts of cargo.
 * Support: Large scale support roles. Drone carriers fall in this category. As well as mobile repair centers.
 ----------------------------------------------------------]]
+

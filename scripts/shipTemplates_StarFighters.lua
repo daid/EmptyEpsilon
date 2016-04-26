@@ -42,7 +42,7 @@ template:setBeam(2, 70, -35, 1000, 5.0, 2.0)
 template:setTubes(1, 15.0)
 template:setWeaponStorage("HVLI", 10)
 
-variation = template:copy("Adder MK4"):
+variation = template:copy("Adder MK4")
 variation:setModel("AdlerLongRangeScoutBlue")
 variation:setDescription([[The mark 4 Adder is a rare sight these days. Due to the high success of the mark 5 Adder, the mark 4 is often replaced.
 In general, the mark 4 is seen as the retarded version of a mark 5. And sometimes mark 4 ships are being sold as mark 5 to the careless buyer.]])
