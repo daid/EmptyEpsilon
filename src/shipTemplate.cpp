@@ -58,6 +58,9 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoomSystem);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addDoor);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadarTrace);
+    /// Return a new template with the given name, which is an exact copy of this template.
+    /// Used to make easy variations of templates.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, copy);
 }
 
 /* Define script conversion function for the ESystem enum. */
@@ -107,6 +110,8 @@ ShipTemplate::ShipTemplate()
     if (game_server) { LOG(ERROR) << "ShipTemplate objects can not be created during a scenario."; destroy(); return; }
     
     type = Ship;
+    class_name = "No class";
+    class_name = "No sub-class";
     size_class = 10;
     energy_storage_amount = 1000;
     repair_crew_count = 3;
@@ -209,7 +214,8 @@ void ShipTemplate::setName(string name)
 
 void ShipTemplate::setClass(string class_name, string sub_class_name)
 {
-    //Currently unused, for future use.
+    this->class_name = class_name;
+    this->sub_class_name = sub_class_name;
 }
 
 void ShipTemplate::setBeam(int index, float arc, float direction, float range, float cycle_time, float damage)
@@ -398,6 +404,48 @@ void ShipTemplate::setRadarTrace(string trace)
     radar_trace = trace;
 }
 
+P<ShipTemplate> ShipTemplate::copy(string new_name)
+{
+    P<ShipTemplate> result = new ShipTemplate();
+    result->setName(new_name);
+
+    result->description = description;
+    result->class_name = class_name;
+    result->sub_class_name = sub_class_name;
+    result->type = type;
+    result->model_data = model_data;
+
+    result->size_class = size_class;
+    result->energy_storage_amount = energy_storage_amount;
+    result->repair_crew_count = repair_crew_count;
+    result->default_ai_name = default_ai_name;
+    for(int n=0; n<max_beam_weapons; n++)
+        result->beams[n] = beams[n];
+    result->weapon_tube_count = weapon_tube_count;
+    for(int n=0; n<max_beam_weapons; n++)
+        result->weapon_tube[n] = weapon_tube[n];
+    result->hull = hull;
+    result->shield_count = shield_count;
+    for(int n=0; n<max_shield_count; n++)
+        result->shield_level[n] = shield_level[n];
+    result->impulse_speed = impulse_speed;
+    result->turn_speed = turn_speed;
+    result->warp_speed = warp_speed;
+    result->impulse_acceleration;
+    result->combat_maneuver_boost_speed;
+    result->combat_maneuver_strafe_speed;
+    result->has_jump_drive = has_jump_drive;
+    result->has_cloaking = has_cloaking;
+    for(int n=0; n<MW_Count; n++)
+        result->weapon_storage[n] = weapon_storage[n];
+    result->radar_trace = radar_trace;
+
+    result->rooms = rooms;
+    result->doors = doors;
+    
+    return result;
+}
+
 void ShipTemplate::setEnergyStorage(float energy_amount)
 {
     this->energy_storage_amount = energy_amount;
@@ -416,6 +464,16 @@ string ShipTemplate::getName()
 string ShipTemplate::getDescription()
 {
     return this->description;
+}
+
+string ShipTemplate::getClass()
+{
+    return this->class_name;
+}
+
+string ShipTemplate::getSubClass()
+{
+    return this->sub_class_name;
 }
 
 ShipTemplate::TemplateType ShipTemplate::getType()

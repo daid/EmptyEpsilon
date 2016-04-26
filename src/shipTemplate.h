@@ -67,10 +67,14 @@ private:
     static std::unordered_map<string, P<ShipTemplate> > templateMap;
     string name;
     string description;
+    string class_name;
+    string sub_class_name;
     TemplateType type;
 public:
     string getName();
     string getDescription();
+    string getClass();
+    string getSubClass();
     void setType(TemplateType type);
     TemplateType getType();
 
@@ -141,6 +145,8 @@ public:
     void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system);
     void addDoor(sf::Vector2i position, bool horizontal);
     void setRadarTrace(string trace);
+
+    P<ShipTemplate> copy(string new_name);
 
     sf::Vector2i interiorSize();
     ESystem getSystemAtRoom(sf::Vector2i position);

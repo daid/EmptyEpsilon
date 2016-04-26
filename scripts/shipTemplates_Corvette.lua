@@ -1,5 +1,5 @@
---[[                  Covette
-Covettes are the common large ships. Larger then a frigate, smaller then a dreadnaught.
+--[[                  Corvette
+Corvettes are the common large ships. Larger then a frigate, smaller then a dreadnaught.
 They generally have 4 or more shield sections. Run with a crew of 20 to 250.
 This class generally has jumpdrives or warpdrives. But lack the manouverbility that is seen in frigates.
 

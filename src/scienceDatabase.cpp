@@ -78,13 +78,38 @@ void fillDefaultDatabaseData()
 
     std::vector<string> template_names = ShipTemplate::getTemplateNameList(ShipTemplate::Ship);
     std::sort(template_names.begin(), template_names.end());
-    for(unsigned int n=0; n<template_names.size(); n++)
+
+    std::vector<string> class_list;
+    std::set<string> class_set;
+    for(string& template_name : template_names)
     {
-        P<ScienceDatabase> entry = shipDatabase->addEntry(template_names[n]);
-        P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_names[n]);
+        P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
+        string class_name = ship_template->getClass();
+        string subclass_name = ship_template->getSubClass();
+        if (class_set.find(class_name) == class_set.end())
+        {
+            class_list.push_back(class_name);
+            class_set.insert(class_name);
+        }
+    }
+    
+    std::sort(class_list.begin(), class_list.end());
+    
+    std::map<string, P<ScienceDatabase> > class_database_entries;
+    for(string& class_name : class_list)
+    {
+        class_database_entries[class_name] = shipDatabase->addEntry(class_name);
+    }
+
+    for(string& template_name : template_names)
+    {
+        P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
+        P<ScienceDatabase> entry = class_database_entries[ship_template->getClass()]->addEntry(template_name);
         
         entry->model_data = ship_template->model_data;
 
+        entry->addKeyValue("Class", ship_template->getClass());
+        entry->addKeyValue("Sub-class", ship_template->getSubClass());
         entry->addKeyValue("Size", string(int(ship_template->model_data->getRadius())));
         string shield_info = "";
         for(int n=0; n<ship_template->shield_count; n++)

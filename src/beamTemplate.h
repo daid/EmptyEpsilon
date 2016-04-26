@@ -43,6 +43,8 @@ public:
 
     float getHeatPerFire();
     void setHeatPerFire(float heat);
+    
+    BeamTemplate& operator=(const BeamTemplate& other);
 
 protected:
     string beam_texture;
