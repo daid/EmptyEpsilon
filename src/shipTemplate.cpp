@@ -196,6 +196,11 @@ void ShipTemplate::setType(TemplateType type)
 
 void ShipTemplate::setName(string name)
 {
+    if (templateMap.find(name) != templateMap.end())
+    {
+        LOG(ERROR) << "Duplicate ship template definition: " << name;
+    }
+
     templateMap[name] = this;
     if (name.startswith("Player "))
         name = name.substr(7);
