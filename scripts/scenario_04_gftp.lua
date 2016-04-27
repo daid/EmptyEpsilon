@@ -3,18 +3,6 @@
 -- Author: Fouindor
 
 function init()
-    template = ShipTemplate():setName("Hacker"):setModel("transport_1_1")
-    template:setHull(100)
-    template:setShields(50, 50)
-    template:setSpeed(120, 10, 10)
-	
-	template = ShipTemplate():setName("Nuker"):setModel("battleship_destroyer_4_upgraded")
-	template:setHull(100)
-	template:setShields(100, 80)
-	template:setSpeed(80, 5, 10)
-	template:setTubes(2, 8.0)
-	template:setWeaponStorage("Nuke", 10)
-		
 	--Spawn Marco Polo, its defenders and a Ktilitian strike team
 	marco_polo = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCallSign("Marco Polo"):setDescription("A merchant and entertainement hub."):setPosition(-21200, 45250)
 	parangon = CpuShip():setTemplate("Cruiser"):setFaction("Human Navy"):setCallSign("HNS Parangon"):orderDefendTarget(marco_polo):setPosition(-21500, 44500):setScanned(true)
@@ -254,7 +242,7 @@ KTLITAN ATTACK IS A DISTRACTION -STOP- STAKHANOV IS NOT THE TRUE TARGET -STOP- D
 	
 "It seems that the enemy is changing its tactics. Our long-range scanners show that a unknown high-velocity ship, escorted by fighters, overrode our internal security. They will try to dock with us, you must intercept it at once !"]])) then
 	
-	ghost_hacker = CpuShip():setTemplate("Hacker"):setCallSign("???"):setFaction("Ghosts"):setPosition(-60000, -14000):orderFlyTowardsBlind(-45000, -14800)
+	ghost_hacker = spawnHacker():setCallSign("???"):setFaction("Ghosts"):setPosition(-60000, -14000):orderFlyTowardsBlind(-45000, -14800)
 	s1 = CpuShip():setTemplate("Ktlitan Fighter"):setCallSign("Slan-1"):setFaction("Ktlitans"):setPosition(-61000, -13000):orderFlyTowards(-45000, -14800)
 	s2 = CpuShip():setTemplate("Ktlitan Fighter"):setCallSign("Slan-2"):setFaction("Ktlitans"):setPosition(-61000, -14000):orderFlyTowards(-45000, -14800)
 	s3 = CpuShip():setTemplate("Ktlitan Fighter"):setCallSign("Slan-3"):setFaction("Ktlitans"):setPosition(-61000, -15000):orderFlyTowards(-45000, -14800)
@@ -484,13 +472,13 @@ We are both ready to continue our purpose, it seems."]])) then
 			parangon:orderFlyTowards(37000, 43000)
 			end
 		
-		scout = CpuShip():setTemplate("Hacker"):setFaction("Human Navy"):setCallSign("Recovery Team"):setPosition(35500, 43000):setScanned(true)
+		scout = spawnHacker():setFaction("Human Navy"):setCallSign("Recovery Team"):setPosition(35500, 43000):setScanned(true)
 		main_mission = 11
 		end	
 		
 		--if the assault on NSA is repelled
 		if (hacked==1) and (not gfighter1:isValid()) and (not gfighter2:isValid()) and (not gfighter3:isValid()) and (not gfighter4:isValid()) then
-		shiva = CpuShip():setTemplate("Nuker"):setCallSign("HNS Shiva"):setFaction("Human Navy"):setPosition(2000, 2000):orderFlyTowards(-44600, -13800):setScanned(true)
+		shiva = spawnNuker():setCallSign("HNS Shiva"):setFaction("Human Navy"):setPosition(2000, 2000):orderFlyTowards(-44600, -13800):setScanned(true)
 		shiva:sendCommsMessage(player, [[Come in, this is HNS Shiva, here to clean this mess. Your mission for now is to escort us to the compromised site. Let's roll !]])
 		CpuShip():setTemplate("Fighter"):setFaction("Human Navy"):setCallSign("S-1"):setPosition(3000, 3000):orderDefendTarget(shiva):setScanned(true)
 		CpuShip():setTemplate("Fighter"):setFaction("Human Navy"):setCallSign("S-2"):setPosition(1000, 1000):orderDefendTarget(shiva):setScanned(true)
@@ -599,7 +587,26 @@ We are both ready to continue our purpose, it seems."]])) then
 	end
 end
 
+function spawnHacker()
+    ship = CpuShip():setTemplate("Transport1x1")
+    ship:setHullMax(100):setHull(100)
+    ship:setShieldsMax(50, 50):setShields(50, 50)
+    ship:setImpulseMaxSpeed(120):setRotationMaxSpeed(10)
+    return ship
+end
 
+function spawnNuker()
+    ship = CpuShip():setTemplate("Adv. Gunship")
+    ship:setHullMax(100):setHull(100)
+    ship:setShieldsMax(100, 100):setShields(100, 100)
+    ship:setImpulseMaxSpeed(80):setRotationMaxSpeed(5)
+    ship:setBeamWeapon(0, 0, 0, 0, 0, 0)
+    ship:setBeamWeapon(1, 0, 0, 0, 0, 0)
+	ship:setWeaponStorageMax("Homing", 0)
+	ship:setWeaponStorageMax("Nuke", 10)
+    ship:setWeaponStorage("Nuke", 10)
+    return ship
+end
 
 -- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0)
 function create(object_type, amount, dist_min, dist_max, x0, y0)
