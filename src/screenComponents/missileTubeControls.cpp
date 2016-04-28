@@ -1,6 +1,12 @@
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "missileTubeControls.h"
 #include "powerDamageIndicator.h"
+
+#include "gui/gui2_button.h"
+#include "gui/gui2_progressbar.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_togglebutton.h"
 
 GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
 : GuiAutoLayout(owner, id, LayoutVerticalBottomToTop), load_type(MW_None), manual_aim(false), missile_target_angle(0)

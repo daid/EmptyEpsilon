@@ -1,5 +1,6 @@
 #include "warpJammer.h"
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "explosionEffect.h"
 #include "main.h"
 

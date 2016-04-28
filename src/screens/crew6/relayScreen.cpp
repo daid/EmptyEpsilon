@@ -1,5 +1,6 @@
 #include "relayScreen.h"
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/scanProbe.h"
 #include "scriptInterface.h"
 

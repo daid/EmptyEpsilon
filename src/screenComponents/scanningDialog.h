@@ -1,8 +1,13 @@
 #ifndef GUI_SCANNING_DIALOG_H
 #define GUI_SCANNING_DIALOG_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
 #include "signalQualityIndicator.h"
+
+class GuiPanel;
+class GuiLabel;
+class GuiSlider;
+class GuiButton;
 
 class GuiScanningDialog : public GuiElement
 {

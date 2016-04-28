@@ -1,5 +1,6 @@
-#include "playerInfo.h"
 #include "shieldsEnableButton.h"
+#include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "powerDamageIndicator.h"
 
 GuiShieldsEnableButton::GuiShieldsEnableButton(GuiContainer* owner, string id)

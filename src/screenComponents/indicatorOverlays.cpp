@@ -3,6 +3,11 @@
 #include "gameGlobalInfo.h"
 #include "main.h"
 
+#include "gui/gui2_overlay.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_panel.h"
+#include "gui/gui2_button.h"
+
 GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
 : GuiElement(owner, "INDICATOR_OVERLAYS")
 {

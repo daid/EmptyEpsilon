@@ -7,6 +7,7 @@
 #include "playerInfo.h"
 #include "radarView.h"
 #include "missileTubeControls.h"
+#include "targetsContainer.h"
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets)
 : GuiElement(owner, id), next_ghost_dot_update(0.0), targets(targets), missile_tube_controls(nullptr), distance(distance), long_range(false), show_ghost_dots(false)

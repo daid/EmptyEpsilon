@@ -1,5 +1,6 @@
-#include "playerInfo.h"
 #include "warpControls.h"
+#include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "powerDamageIndicator.h"
 
 GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id)

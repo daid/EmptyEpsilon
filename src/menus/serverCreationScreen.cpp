@@ -4,6 +4,14 @@
 #include "gameGlobalInfo.h"
 #include "epsilonServer.h"
 #include "gui/scriptError.h"
+#include "gui/gui2_overlay.h"
+#include "gui/gui2_autolayout.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_selector.h"
+#include "gui/gui2_textentry.h"
+#include "gui/gui2_listbox.h"
+#include "gui/gui2_panel.h"
+#include "gui/gui2_scrolltext.h"
 #include "main.h"
 
 ServerCreationScreen::ServerCreationScreen()

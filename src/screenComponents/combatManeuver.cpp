@@ -1,6 +1,8 @@
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "combatManeuver.h"
 #include "powerDamageIndicator.h"
+#include "snapSlider.h"
 
 GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
 : GuiElement(owner, id)
@@ -43,3 +45,12 @@ void GuiCombatManeuver::onDraw(sf::RenderTarget& window)
     }
 }
 
+void GuiCombatManeuver::setBoostValue(float value)
+{
+    boost_slider->setValue(value);
+}
+
+void GuiCombatManeuver::setStrafeValue(float value)
+{
+    strafe_slider->setValue(value);
+}

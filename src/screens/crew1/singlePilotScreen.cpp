@@ -1,5 +1,6 @@
 #include "main.h"
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "singlePilotScreen.h"
 
 #include "screenComponents/viewport3d.h"

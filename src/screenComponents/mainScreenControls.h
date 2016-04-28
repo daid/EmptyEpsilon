@@ -1,7 +1,10 @@
 #ifndef MAIN_SCREEN_CONTROLS_H
 #define MAIN_SCREEN_CONTROLS_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_autolayout.h"
+
+class GuiToggleButton;
+class GuiButton;
 
 class GuiMainScreenControls : public GuiAutoLayout
 {

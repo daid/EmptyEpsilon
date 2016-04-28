@@ -1,6 +1,11 @@
 #include "databaseView.h"
 #include "scienceDatabase.h"
 
+#include "gui/gui2_listbox.h"
+#include "gui/gui2_autolayout.h"
+#include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_scrolltext.h"
+
 #include "screenComponents/rotatingModelView.h"
 
 DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)

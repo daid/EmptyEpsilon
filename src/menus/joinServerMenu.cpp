@@ -5,6 +5,10 @@
 #include "menus/shipSelectionScreen.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_panel.h"
+#include "gui/gui2_textentry.h"
+#include "gui/gui2_button.h"
 
 JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source, sf::IpAddress ip)
 : ip(ip)

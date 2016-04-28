@@ -1,7 +1,10 @@
 #ifndef GUI_JUMP_INDICATOR_H
 #define GUI_JUMP_INDICATOR_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
+
+class GuiPanel;
+class GuiLabel;
 
 class GuiJumpIndicator : public GuiElement
 {

@@ -1,7 +1,7 @@
 #ifndef GUI_POWER_DAMAGE_INDICATOR_H
 #define GUI_POWER_DAMAGE_INDICATOR_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
 #include "shipTemplate.h"
 
 class GuiPowerDamageIndicator : public GuiElement

@@ -1,7 +1,12 @@
 #ifndef GUI_JUMP_CONTROLS_H
 #define GUI_JUMP_CONTROLS_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
+
+class GuiKeyValueDisplay;
+class GuiSlider;
+class GuiButton;
+class GuiProgressbar;
 
 class GuiJumpControls : public GuiElement
 {

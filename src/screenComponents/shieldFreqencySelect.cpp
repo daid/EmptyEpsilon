@@ -1,5 +1,10 @@
-#include "playerInfo.h"
 #include "shieldFreqencySelect.h"
+#include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
+
+#include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_selector.h"
+#include "gui/gui2_progressbar.h"
 
 GuiShieldFrequencySelect::GuiShieldFrequencySelect(GuiContainer* owner, string id)
 : GuiElement(owner, id)

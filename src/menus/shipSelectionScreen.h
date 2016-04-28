@@ -1,8 +1,14 @@
 #ifndef SHIP_SELECTION_SCREEN_H
 #define SHIP_SELECTION_SCREEN_H
 
-#include "spaceObjects/playerSpaceship.h"
-#include "gui/gui2.h"
+#include "playerInfo.h"
+#include "gui/gui2_canvas.h"
+
+class GuiLabel;
+class GuiListbox;
+class GuiSelector;
+class GuiButton;
+class GuiToggleButton;
 
 class ShipSelectionScreen : public GuiCanvas, public Updatable
 {

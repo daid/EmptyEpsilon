@@ -1,8 +1,11 @@
 #ifndef GUI_SELF_DESTRUCT_ENTRY_H
 #define GUI_SELF_DESTRUCT_ENTRY_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
 #include "spaceObjects/playerSpaceship.h"
+
+class GuiPanel;
+class GuiLabel;
 
 class GuiSelfDestructEntry : public GuiElement
 {

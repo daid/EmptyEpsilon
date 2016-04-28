@@ -1,7 +1,7 @@
 #ifndef GUI_NOISE_OVERLAY_H
 #define GUI_NOISE_OVERLAY_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
 
 class GuiNoiseOverlay : public GuiElement
 {

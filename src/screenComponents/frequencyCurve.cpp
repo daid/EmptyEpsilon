@@ -1,5 +1,6 @@
 #include "frequencyCurve.h"
 #include "spaceObjects/spaceship.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "playerInfo.h"
 
 GuiFrequencyCurve::GuiFrequencyCurve(GuiContainer* owner, string id, bool frequency_is_beam, bool more_damage_is_positive)

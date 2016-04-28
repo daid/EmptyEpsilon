@@ -1,7 +1,12 @@
 #ifndef GUI_SHIELD_FREQUENCY_SELECT_H
 #define GUI_SHIELD_FREQUENCY_SELECT_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
+
+class GuiKeyValueDisplay;
+class GuiSelector;
+class GuiButton;
+class GuiProgressbar;
 
 class GuiShieldFrequencySelect : public GuiElement
 {

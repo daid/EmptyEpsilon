@@ -1,8 +1,12 @@
 #ifndef JOIN_SERVER_MENU_H
 #define JOIN_SERVER_MENU_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_canvas.h"
 #include "serverBrowseMenu.h"
+
+class GuiLabel;
+class GuiPanel;
+class GuiTextEntry;
 
 class JoinServerScreen : public GuiCanvas, public Updatable
 {

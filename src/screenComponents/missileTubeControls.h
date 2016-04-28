@@ -1,8 +1,13 @@
 #ifndef GUI_MISSILE_TUBE_CONTROLS_H
 #define GUI_MISSILE_TUBE_CONTROLS_H
 
-#include "gui/gui2.h"
-#include "shipTemplate.h"
+#include "gui/gui2_autolayout.h"
+#include "missileWeaponData.h"
+
+class GuiButton;
+class GuiProgressbar;
+class GuiLabel;
+class GuiToggleButton;
 
 class GuiMissileTubeControls : public GuiAutoLayout
 {

@@ -1,7 +1,10 @@
 #include "aimLock.h"
 
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "missileTubeControls.h"
+
+#include "gui/gui2_rotationdial.h"
 
 AimLockButton::AimLockButton(GuiContainer* owner, string id, GuiMissileTubeControls* tube_controls, GuiRotationDial* missile_aim)
 : GuiToggleButton(owner, id, "Lock", [this](bool value)

@@ -1,7 +1,15 @@
 #ifndef GUI_COMMS_OVERLAY_H
 #define GUI_COMMS_OVERLAY_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
+
+class GuiPanel;
+class GuiProgressbar;
+class GuiButton;
+class GuiLabel;
+class GuiScrollText;
+class GuiListbox;
+class GuiTextEntry;
 
 class GuiCommsOverlay : public GuiElement
 {

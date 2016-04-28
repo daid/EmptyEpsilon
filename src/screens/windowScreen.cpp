@@ -5,6 +5,7 @@
 #include "main.h"
 #include "menus/shipSelectionScreen.h"
 
+#include "screenComponents/viewport3d.h"
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/shipDestroyedPopup.h"
 

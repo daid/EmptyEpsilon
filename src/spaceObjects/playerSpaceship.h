@@ -2,31 +2,9 @@
 #define PLAYER_SPACESHIP_H
 
 #include "spaceship.h"
-#include "scanProbe.h"
 #include "commsScriptInterface.h"
+#include "playerInfo.h"
 #include <iostream>
-
-enum ECrewPosition
-{
-    //6/5 player crew
-    helmsOfficer,
-    weaponsOfficer,
-    engineering,
-    scienceOfficer,
-    relayOfficer,
-    //4/3 player crew
-    tacticalOfficer,    //helms+weapons-shields
-    engineeringAdvanced,//engineering+shields
-    operationsOfficer, //science+comms
-    //1 player crew
-    singlePilot,
-    //extras
-    damageControl,
-    powerManagement,
-    databaseView,
-
-    max_crew_positions
-};
 
 enum ECommsState
 {
@@ -215,7 +193,6 @@ public:
     virtual string getExportLine();
 };
 REGISTER_MULTIPLAYER_ENUM(ECommsState);
-REGISTER_MULTIPLAYER_ENUM(ECrewPosition);
 template<> int convert<EAlertLevel>::returnType(lua_State* L, EAlertLevel l);
 REGISTER_MULTIPLAYER_ENUM(EAlertLevel);
 

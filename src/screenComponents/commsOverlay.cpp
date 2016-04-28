@@ -1,5 +1,13 @@
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "commsOverlay.h"
+#include "gui/gui2_panel.h"
+#include "gui/gui2_progressbar.h"
+#include "gui/gui2_button.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_listbox.h"
+#include "gui/gui2_textentry.h"
 
 GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
 : GuiElement(owner, "COMMS_OVERLAY")

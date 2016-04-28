@@ -1,5 +1,6 @@
-#include "playerInfo.h"
 #include "shipDestroyedPopup.h"
+#include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 
 GuiShipDestroyedPopup::GuiShipDestroyedPopup(GuiCanvas* owner)
 : GuiElement(owner, "SHIP_DESTROYED_POPUP"), owner(owner)

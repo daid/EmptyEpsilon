@@ -1,9 +1,10 @@
 #ifndef DATABASE_VIEW_COMPONENT_H
 #define DATABASE_VIEW_COMPONENT_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
 
 class ScienceDatabase;
+class GuiListbox;
 
 class DatabaseViewComponent : public GuiElement
 {

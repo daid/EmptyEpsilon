@@ -1,5 +1,6 @@
-#include "playerInfo.h"
 #include "targetsContainer.h"
+#include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 
 TargetsContainer::TargetsContainer()
 {

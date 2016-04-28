@@ -1,5 +1,9 @@
 #include "mouseCalibrator.h"
 #include "main.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_image.h"
+#include "gui/gui2_panel.h"
+#include "gui/gui2_button.h"
 
 MouseCalibrator::MouseCalibrator(string filename)
 : filename(filename)

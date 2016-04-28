@@ -137,7 +137,6 @@ set(SOURCES
 	src/gui/gui2_resizabledialog.cpp
 	src/gui/debugRenderer.cpp
 	src/gui/gui2_element.cpp
-	src/gui/gui2.cpp
 	src/gui/gui2_keyvaluedisplay.cpp
 	src/gui/gui2_listbox.cpp
 	src/gui/gui2_scrollbar.cpp

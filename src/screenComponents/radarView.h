@@ -1,10 +1,10 @@
 #ifndef GUI_RADAR_VIEW_H
 #define GUI_RADAR_VIEW_H
 
-#include "targetsContainer.h"
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
 
 class GuiMissileTubeControls;
+class TargetsContainer;
 
 class GuiRadarView : public GuiElement
 {

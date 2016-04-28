@@ -1,8 +1,9 @@
 #ifndef GUI_DOCKING_BUTTON_H
 #define GUI_DOCKING_BUTTON_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_button.h"
 
+class SpaceObject;
 class GuiDockingButton : public GuiButton
 {
 public:

@@ -1,5 +1,9 @@
-#include "playerInfo.h"
 #include "selfDestructIndicator.h"
+#include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
+
+#include "gui/gui2_panel.h"
+#include "gui/gui2_label.h"
 
 GuiSelfDestructIndicator::GuiSelfDestructIndicator(GuiContainer* owner)
 : GuiElement(owner, "SELF_DESTRUCT_INDICATOR")

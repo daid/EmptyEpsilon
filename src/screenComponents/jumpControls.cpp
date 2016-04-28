@@ -1,6 +1,12 @@
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "jumpControls.h"
 #include "powerDamageIndicator.h"
+
+#include "gui/gui2_slider.h"
+#include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_progressbar.h"
+#include "gui/gui2_button.h"
 
 GuiJumpControls::GuiJumpControls(GuiContainer* owner, string id)
 : GuiElement(owner, id)

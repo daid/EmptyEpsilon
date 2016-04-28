@@ -1,5 +1,6 @@
 #include "shipLogScreen.h"
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 
 ShipLogScreen::ShipLogScreen(GuiContainer* owner)
 : GuiOverlay(owner, "SHIP_LOG_SCREEN", colorConfig.background)

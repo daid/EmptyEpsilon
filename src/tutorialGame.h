@@ -2,10 +2,13 @@
 #define TUTORIAL_GAME_H
 
 #include "epsilonServer.h"
-#include "gui/gui2.h"
+#include "gui/gui2_canvas.h"
 
 class PlayerSpaceship;
 class GuiRadarView;
+class GuiPanel;
+class GuiButton;
+class GuiScrollText;
 
 class TutorialGame : public Updatable, public GuiCanvas
 {
