@@ -43,6 +43,7 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
                 my_spaceship->commandFireTube(n, target_angle);
             }
         });
+        row.fire_button->setIcon("gui/icons/missile");
         row.fire_button->setSize(350, 50);
         (new GuiPowerDamageIndicator(row.fire_button, id + "_" + string(n) + "_PDI", SYS_MissileSystem, ACenterRight))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         row.loading_bar = new GuiProgressbar(row.layout, id + "_" + string(n) + "_PROGRESS", 0, 1.0, 0);
@@ -87,40 +88,42 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window)
     
     for(int n=0; n<my_spaceship->weapon_tube_count; n++)
     {
+        WeaponTube& tube = my_spaceship->weapon_tube[n];
         rows[n].layout->show();
-        if(my_spaceship->weapon_tube[n].isEmpty())
+        rows[n].fire_button->setIcon("gui/icons/missile", ACenterLeft, tube.getDirection());
+        if(tube.isEmpty())
         {
-            rows[n].load_button->setEnable(my_spaceship->weapon_tube[n].canLoad(load_type));
+            rows[n].load_button->setEnable(tube.canLoad(load_type));
             rows[n].load_button->setText("Load");
             rows[n].fire_button->disable()->show();
             rows[n].fire_button->setText("Empty");
             rows[n].loading_bar->hide();
-        }else if(my_spaceship->weapon_tube[n].isLoaded())
+        }else if(tube.isLoaded())
         {
             rows[n].load_button->enable();
             rows[n].load_button->setText("Unload");
             rows[n].fire_button->enable()->show();
-            rows[n].fire_button->setText(getMissileWeaponName(my_spaceship->weapon_tube[n].getLoadType()));
+            rows[n].fire_button->setText(getMissileWeaponName(tube.getLoadType()));
             rows[n].loading_bar->hide();
-        }else if(my_spaceship->weapon_tube[n].isLoading())
+        }else if(tube.isLoading())
         {
             rows[n].load_button->disable();
             rows[n].load_button->setText("Load");
             rows[n].fire_button->hide();
-            rows[n].fire_button->setText(getMissileWeaponName(my_spaceship->weapon_tube[n].getLoadType()));
+            rows[n].fire_button->setText(getMissileWeaponName(tube.getLoadType()));
             rows[n].loading_bar->show();
-            rows[n].loading_bar->setValue(my_spaceship->weapon_tube[n].getLoadProgress());
+            rows[n].loading_bar->setValue(tube.getLoadProgress());
             rows[n].loading_label->setText("Loading");
-        }else if(my_spaceship->weapon_tube[n].isUnloading())
+        }else if(tube.isUnloading())
         {
             rows[n].load_button->disable();
             rows[n].load_button->setText("Unload");
             rows[n].fire_button->hide();
-            rows[n].fire_button->setText(getMissileWeaponName(my_spaceship->weapon_tube[n].getLoadType()));
+            rows[n].fire_button->setText(getMissileWeaponName(tube.getLoadType()));
             rows[n].loading_bar->show();
-            rows[n].loading_bar->setValue(my_spaceship->weapon_tube[n].getUnloadProgress());
+            rows[n].loading_bar->setValue(tube.getUnloadProgress());
             rows[n].loading_label->setText("Unloading");
-        }else if(my_spaceship->weapon_tube[n].isFiring())
+        }else if(tube.isFiring())
         {
             rows[n].load_button->disable();
             rows[n].load_button->setText("Load");

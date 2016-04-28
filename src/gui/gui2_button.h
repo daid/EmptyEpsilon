@@ -16,6 +16,7 @@ protected:
     sf::Keyboard::Key hotkey;
     string icon_name;
     EGuiAlign icon_alignment;
+    float icon_rotation;
 public:
     GuiButton(GuiContainer* owner, string id, string text, func_t func);
 
@@ -26,7 +27,7 @@ public:
     
     GuiButton* setText(string text);
     GuiButton* setTextSize(float size);
-    GuiButton* setIcon(string icon_name, EGuiAlign icon_alignment = ACenterLeft);
+    GuiButton* setIcon(string icon_name, EGuiAlign icon_alignment = ACenterLeft, float rotation=0);
     GuiButton* setHotkey(sf::Keyboard::Key key);
     string getText();
     string getIcon();
