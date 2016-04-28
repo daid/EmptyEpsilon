@@ -42,6 +42,7 @@ public:
     void fire(float target_angle);
 
     bool canLoad(EMissileWeapons type);
+    bool canOnlyLoad(EMissileWeapons type);
     void allowLoadOf(EMissileWeapons type);
     void disallowLoadOf(EMissileWeapons type);
     

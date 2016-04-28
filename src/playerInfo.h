@@ -5,6 +5,7 @@
 #include "spaceObjects/playerSpaceship.h"
 
 class PlayerInfo;
+class PlayerSpaceship;
 extern P<PlayerInfo> my_player_info;
 extern P<PlayerSpaceship> my_spaceship;
 extern PVector<PlayerInfo> player_info_list;

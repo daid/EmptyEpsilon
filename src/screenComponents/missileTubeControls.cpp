@@ -43,7 +43,6 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
                 my_spaceship->commandFireTube(n, target_angle);
             }
         });
-        row.fire_button->setIcon("gui/icons/missile");
         row.fire_button->setSize(350, 50);
         (new GuiPowerDamageIndicator(row.fire_button, id + "_" + string(n) + "_PDI", SYS_MissileSystem, ACenterRight))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         row.loading_bar = new GuiProgressbar(row.layout, id + "_" + string(n) + "_PROGRESS", 0, 1.0, 0);
@@ -90,7 +89,10 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window)
     {
         WeaponTube& tube = my_spaceship->weapon_tube[n];
         rows[n].layout->show();
-        rows[n].fire_button->setIcon("gui/icons/missile", ACenterLeft, tube.getDirection());
+        if (tube.canOnlyLoad(MW_Mine))
+            rows[n].fire_button->setIcon("gui/icons/weapon-mine", ACenterLeft);
+        else
+            rows[n].fire_button->setIcon("gui/icons/missile", ACenterLeft, tube.getDirection());
         if(tube.isEmpty())
         {
             rows[n].load_button->setEnable(tube.canLoad(load_type));
