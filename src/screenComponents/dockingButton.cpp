@@ -1,4 +1,5 @@
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "dockingButton.h"
 
 GuiDockingButton::GuiDockingButton(GuiContainer* owner, string id)

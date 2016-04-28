@@ -2,6 +2,8 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 
+#include "gui/gui2_togglebutton.h"
+
 GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
 : GuiAutoLayout(owner, "MAIN_SCREEN_CONTROLS", GuiAutoLayout::LayoutVerticalTopToBottom)
 {

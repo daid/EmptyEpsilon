@@ -67,10 +67,14 @@ private:
     static std::unordered_map<string, P<ShipTemplate> > templateMap;
     string name;
     string description;
+    string class_name;
+    string sub_class_name;
     TemplateType type;
 public:
     string getName();
     string getDescription();
+    string getClass();
+    string getSubClass();
     void setType(TemplateType type);
     TemplateType getType();
 
@@ -91,6 +95,8 @@ public:
     float shield_level[max_shield_count];
     float impulse_speed, turn_speed, warp_speed;
     float impulse_acceleration;
+    float combat_maneuver_boost_speed;
+    float combat_maneuver_strafe_speed;
     bool has_jump_drive, has_cloaking;
     int weapon_storage[MW_Count];
 
@@ -102,6 +108,7 @@ public:
     ShipTemplate();
 
     void setName(string name);
+    void setClass(string class_name, string sub_class_name);
     void setDescription(string description);
     void setModel(string model_name);
     void setDefaultAI(string default_ai_name);
@@ -111,6 +118,7 @@ public:
     void setRepairCrewCount(int amount);
 
     void setBeam(int index, float arc, float direction, float range, float cycle_time, float damage);
+    void setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage);
 
     /**
      * Convenience function to set the texture of a beam by index.
@@ -128,6 +136,7 @@ public:
     void setHull(float amount) { hull = amount; }
     void setShields(std::vector<float> values);
     void setSpeed(float impulse, float turn, float acceleration);
+    void setCombatManeuver(float boost, float strafe);
     void setWarpSpeed(float warp);
     void setJumpDrive(bool enabled);
     void setCloaking(bool enabled);
@@ -137,15 +146,16 @@ public:
     void addDoor(sf::Vector2i position, bool horizontal);
     void setRadarTrace(string trace);
 
+    P<ShipTemplate> copy(string new_name);
+
     sf::Vector2i interiorSize();
     ESystem getSystemAtRoom(sf::Vector2i position);
 
     void setCollisionData(P<SpaceObject> object);
 public:
     static P<ShipTemplate> getTemplate(string name);
-    static std::vector<string> getTemplateNameList();
-    static std::vector<string> getPlayerTemplateNameList();
-    static std::vector<string> getStationTemplateNameList();
+    static std::vector<string> getAllTemplateNames();
+    static std::vector<string> getTemplateNameList(TemplateType type);
 };
 string getSystemName(ESystem system);
 REGISTER_MULTIPLAYER_ENUM(ESystem);

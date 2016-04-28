@@ -248,8 +248,9 @@ void PlayerSpaceship::update(float delta)
     if (docking_state == DS_Docked)
     {
         P<SpaceShip> docked_with_ship = docking_target;
-        if (!docked_with_ship || docked_with_ship->useEnergy(delta * 10.0))
-            energy_level += delta * 10.0;
+        float energy_request = std::min(delta * 10.0f, max_energy_level - energy_level);
+        if (!docked_with_ship || docked_with_ship->useEnergy(energy_request))
+            energy_level += energy_request;
         if (!docked_with_ship)  //Only recharge probes and hull when we are not docked to a ship (and thus a station). Bit hackish for now.
         {
             if (scan_probe_stock < max_scan_probes)
@@ -315,35 +316,35 @@ void PlayerSpaceship::update(float delta)
         if (shields_active)
             useEnergy(delta * energy_shield_use_per_second);
 
-        energy_level += delta * getNetPowerUsage() * 0.05;
+        energy_level += delta * getNetPowerUsage() * 0.08;
         for(int n=0; n<SYS_COUNT; n++)
         {
             if (!hasSystem(ESystem(n))) continue;
 
             if (systems[n].power_request > systems[n].power_level)
             {
-                systems[n].power_level += delta * 0.1;
+                systems[n].power_level += delta * system_power_level_change_per_second;
                 if (systems[n].power_level > systems[n].power_request)
-                systems[n].power_level = systems[n].power_request;
+                    systems[n].power_level = systems[n].power_request;
             }
             else if (systems[n].power_request < systems[n].power_level)
             {
-                systems[n].power_level -= delta * 0.1;
+                systems[n].power_level -= delta * system_power_level_change_per_second;
                 if (systems[n].power_level < systems[n].power_request)
-                systems[n].power_level = systems[n].power_request;
+                    systems[n].power_level = systems[n].power_request;
             }
 
             if (systems[n].coolant_request > systems[n].coolant_level)
             {
-                systems[n].coolant_level += delta * 0.3;
+                systems[n].coolant_level += delta * system_coolant_level_change_per_second;
                 if (systems[n].coolant_level > systems[n].coolant_request)
-                systems[n].coolant_level = systems[n].coolant_request;
+                    systems[n].coolant_level = systems[n].coolant_request;
             }
             else if (systems[n].coolant_request < systems[n].coolant_level)
             {
-                systems[n].coolant_level -= delta * 0.3;
+                systems[n].coolant_level -= delta * system_coolant_level_change_per_second;
                 if (systems[n].coolant_level < systems[n].coolant_request)
-                systems[n].coolant_level = systems[n].coolant_request;
+                    systems[n].coolant_level = systems[n].coolant_request;
             }
 
             addHeat(ESystem(n), delta * systems[n].getHeatingDelta() * system_heatup_per_second);
@@ -432,10 +433,6 @@ void PlayerSpaceship::update(float delta)
         if (comms_open_delay > 0)
             comms_open_delay -= delta;
     }
-
-    addHeat(SYS_Impulse, combat_maneuver_boost_active * delta * heat_per_combat_maneuver_boost);
-    addHeat(SYS_Maneuver, fabs(combat_maneuver_strafe_active) * delta * heat_per_combat_maneuver_strafe);
-    addHeat(SYS_Warp, current_warp * delta * heat_per_warp);
 
     SpaceShip::update(delta);
 

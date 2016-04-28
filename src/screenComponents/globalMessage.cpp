@@ -1,6 +1,9 @@
 #include "gameGlobalInfo.h"
 #include "globalMessage.h"
 
+#include "gui/gui2_panel.h"
+#include "gui/gui2_label.h"
+
 GuiGlobalMessage::GuiGlobalMessage(GuiContainer* owner)
 : GuiElement(owner, "GLOBAL_MESSAGE")
 {

@@ -1,8 +1,10 @@
 #ifndef GUI_COMBAT_MANEUVER_H
 #define GUI_COMBAT_MANEUVER_H
 
-#include "gui/gui2.h"
-#include "snapSlider.h"
+#include "gui/gui2_element.h"
+
+class GuiSnapSlider;
+class GuiProgressbar;
 
 class GuiCombatManeuver : public GuiElement
 {
@@ -15,8 +17,8 @@ public:
     GuiCombatManeuver(GuiContainer* owner, string id);
     
     virtual void onDraw(sf::RenderTarget& window);
-    void setBoostValue(float value) { boost_slider->setValue(value); }
-    void setStrafeValue(float value) { strafe_slider->setValue(value); }
+    void setBoostValue(float value);
+    void setStrafeValue(float value);
 };
 
 #endif//GUI_COMBAT_MANEUVER_H

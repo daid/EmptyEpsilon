@@ -457,7 +457,7 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
     faction_selector->setPosition(20, 20, ATopLeft)->setSize(300, 50);
     
     float y = 20;
-    std::vector<string> template_names = ShipTemplate::getStationTemplateNameList();
+    std::vector<string> template_names = ShipTemplate::getTemplateNameList(ShipTemplate::Station);
     std::sort(template_names.begin(), template_names.end());
     for(string template_name : template_names)
     {
@@ -488,7 +488,7 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
     y = 20;
-    template_names = ShipTemplate::getTemplateNameList();
+    template_names = ShipTemplate::getTemplateNameList(ShipTemplate::Ship);
     std::sort(template_names.begin(), template_names.end());
     GuiListbox* listbox = new GuiListbox(box, "CREATE_SHIPS", [this](int index, string value)
     {

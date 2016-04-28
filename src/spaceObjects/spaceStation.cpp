@@ -1,5 +1,7 @@
 #include "spaceObjects/explosionEffect.h"
 #include "spaceObjects/spaceStation.h"
+#include "spaceObjects/spaceship.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "shipTemplate.h"
 #include "playerInfo.h"
 #include "factionInfo.h"

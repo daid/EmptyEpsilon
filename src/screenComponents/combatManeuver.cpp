@@ -1,6 +1,8 @@
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "combatManeuver.h"
 #include "powerDamageIndicator.h"
+#include "snapSlider.h"
 
 GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
 : GuiElement(owner, id)
@@ -22,13 +24,33 @@ GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
     });
     boost_slider->setPosition(0, -100, ABottomCenter)->setSize(50, 165);
     
-    (new GuiPowerDamageIndicator(this, id + "_STRAFE_INDICATOR", SYS_Maneuver, ACenterLeft))->setPosition(0, -50, ABottomCenter)->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiPowerDamageIndicator(this, id + "_BOOST_INDICATOR", SYS_Impulse, ABottomLeft))->setPosition(0, -100, ABottomCenter)->setSize(50, 165);
+    (new GuiPowerDamageIndicator(strafe_slider, id + "_STRAFE_INDICATOR", SYS_Maneuver, ACenterLeft))->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiPowerDamageIndicator(boost_slider, id + "_BOOST_INDICATOR", SYS_Impulse, ABottomLeft))->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
 void GuiCombatManeuver::onDraw(sf::RenderTarget& window)
 {
     if (my_spaceship)
-        charge_bar->setValue(my_spaceship->combat_maneuver_charge);
+    {
+        if (my_spaceship->combat_maneuver_boost_speed <= 0.0 && my_spaceship->combat_maneuver_strafe_speed <= 0.0)
+        {
+            charge_bar->hide();
+            strafe_slider->hide();
+            boost_slider->hide();
+        }else{
+            charge_bar->setValue(my_spaceship->combat_maneuver_charge)->show();
+            strafe_slider->setVisible(my_spaceship->combat_maneuver_strafe_speed > 0.0f);
+            boost_slider->setVisible(my_spaceship->combat_maneuver_boost_speed > 0.0f);
+        }
+    }
 }
 
+void GuiCombatManeuver::setBoostValue(float value)
+{
+    boost_slider->setValue(value);
+}
+
+void GuiCombatManeuver::setStrafeValue(float value)
+{
+    strafe_slider->setValue(value);
+}

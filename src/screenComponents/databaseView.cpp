@@ -1,6 +1,11 @@
 #include "databaseView.h"
 #include "scienceDatabase.h"
 
+#include "gui/gui2_listbox.h"
+#include "gui/gui2_autolayout.h"
+#include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_scrolltext.h"
+
 #include "screenComponents/rotatingModelView.h"
 
 DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
@@ -13,7 +18,7 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
             database_entry->destroy();
         
         database_entry = new GuiElement(this, "DATABASE_ENTRY");
-        database_entry->setPosition(350, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        database_entry->setPosition(400, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         
         GuiAutoLayout* layout = new GuiAutoLayout(database_entry, "DATABASE_ENTRY_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
         layout->setPosition(0, 0, ATopLeft)->setSize(400, GuiElement::GuiSizeMax);
@@ -36,15 +41,18 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
         }
         for(unsigned int n=0; n<entry->keyValuePairs.size(); n++)
         {
-            (new GuiKeyValueDisplay(layout, "DATABASE_ENTRY_" + string(n), 0.7, entry->keyValuePairs[n].key, entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
+            (new GuiKeyValueDisplay(layout, "", 0.7, entry->keyValuePairs[n].key, entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
         }
         if (entry->longDescription.length() > 0)
         {
             (new GuiScrollText(layout, "DATABASE_LONG_DESCRIPTION", entry->longDescription))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         }
-        if (entry->model_template)
+        if (entry->model_data)
         {
-            (new GuiRotatingModelView(database_entry, "DATABASE_MODEL_VIEW", entry->model_template->model_data))->setPosition(400, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMatchWidth);
+            float x = 400;
+            if (entry->keyValuePairs.size() == 0 && entry->longDescription.length() == 0)
+                x = 0;
+            (new GuiRotatingModelView(database_entry, "DATABASE_MODEL_VIEW", entry->model_data))->setPosition(x, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMatchWidth);
         }
         if (entry->items.size() > 0)
         {
@@ -52,7 +60,7 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
             fillListBox();
         }
     });
-    item_list->setPosition(0, 0, ATopLeft)->setMargins(50)->setSize(350, GuiElement::GuiSizeMax);
+    item_list->setPosition(0, 0, ATopLeft)->setMargins(50, 50, 50, 150)->setSize(350, GuiElement::GuiSizeMax);
     fillListBox();
 }
 

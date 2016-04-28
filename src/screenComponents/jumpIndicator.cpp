@@ -1,5 +1,9 @@
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "jumpIndicator.h"
+
+#include "gui/gui2_panel.h"
+#include "gui/gui2_label.h"
 
 GuiJumpIndicator::GuiJumpIndicator(GuiContainer* owner)
 : GuiElement(owner, "JUMP_INDICATOR")

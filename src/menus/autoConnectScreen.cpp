@@ -4,6 +4,8 @@
 #include "gameGlobalInfo.h"
 #include "playerInfo.h"
 
+#include "gui/gui2_label.h"
+
 AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_main_screen, int ship_index)
 : crew_position(crew_position), control_main_screen(control_main_screen), ship_index(ship_index)
 {

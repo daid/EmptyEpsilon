@@ -110,3 +110,16 @@ void BeamTemplate::setHeatPerFire(float heat)
 {
     heat_per_beam_fire = heat;
 }
+
+BeamTemplate& BeamTemplate::operator=(const BeamTemplate& other)
+{
+    beam_texture = other.beam_texture;
+    direction = other.direction;
+    arc = other.arc;
+    range = other.range;
+    cycle_time = other.cycle_time;
+    damage = other.damage;
+    energy_per_beam_fire = other.energy_per_beam_fire;
+    heat_per_beam_fire = other.heat_per_beam_fire;
+    return *this;
+}

@@ -1,7 +1,7 @@
 #ifndef GUI_BEAM_FREQUENCY_SELECTOR_H
 #define GUI_BEAM_FREQUENCY_SELECTOR_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_selector.h"
 
 class GuiBeamFrequencySelector : public GuiSelector
 {

@@ -1,4 +1,5 @@
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "powerDamageIndicator.h"
 #include "spaceObjects/warpJammer.h"
 

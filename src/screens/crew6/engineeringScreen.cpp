@@ -7,7 +7,7 @@
 #include "screenComponents/selfDestructButton.h"
 
 EngineeringScreen::EngineeringScreen(GuiContainer* owner)
-: GuiOverlay(owner, "ENGINEERING_SCREEN", colorConfig.background), selected_system(SYS_Reactor)
+: GuiOverlay(owner, "ENGINEERING_SCREEN", colorConfig.background), selected_system(SYS_None)
 {
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
 
@@ -44,8 +44,8 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
             coolant_slider->enable();
             if (my_spaceship)
             {
-                power_slider->setValue(my_spaceship->systems[n].power_level);
-                coolant_slider->setValue(my_spaceship->systems[n].coolant_level);
+                power_slider->setValue(my_spaceship->systems[n].power_request);
+                coolant_slider->setValue(my_spaceship->systems[n].coolant_request);
             }
         });
         info.button->setSize(300, GuiElement::GuiSizeMax);
@@ -88,11 +88,13 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
 
     GuiPanel* box = new GuiPanel(system_config_container, "POWER_COOLANT_BOX");
     box->setPosition(0, 0, ABottomRight)->setSize(270, 400);
-    (new GuiLabel(box, "POWER_LABEL", "Power", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(20, 20, ATopLeft)->setSize(30, 360);
-    (new GuiLabel(box, "COOLANT_LABEL", "Coolant", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(110, 20, ATopLeft)->setSize(30, 360);
+    power_label = new GuiLabel(box, "POWER_LABEL", "Power", 30);
+    power_label->setVertical()->setAlignment(ACenterLeft)->setPosition(20, 20, ATopLeft)->setSize(30, 360);
+    coolant_label = new GuiLabel(box, "COOLANT_LABEL", "Coolant", 30);
+    coolant_label->setVertical()->setAlignment(ACenterLeft)->setPosition(110, 20, ATopLeft)->setSize(30, 360);
 
     power_slider = new GuiSlider(box, "POWER_SLIDER", 3.0, 0.0, 1.0, [this](float value) {
-        if (my_spaceship)
+        if (my_spaceship && selected_system != SYS_None)
             my_spaceship->commandSetSystemPowerRequest(selected_system, value);
     });
     power_slider->setPosition(50, 20, ATopLeft)->setSize(60, 360);
@@ -100,7 +102,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
         power_slider->addSnapValue(snap_point, snap_point == 1.0 ? 0.1 : 0.01);
     power_slider->disable();
     coolant_slider = new GuiSlider(box, "COOLANT_SLIDER", 10.0, 0.0, 0.0, [this](float value) {
-        if (my_spaceship)
+        if (my_spaceship && selected_system != SYS_None)
             my_spaceship->commandSetSystemCoolantRequest(selected_system, value);
     });
     coolant_slider->setPosition(140, 20, ATopLeft)->setSize(60, 360);
@@ -154,6 +156,12 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
 
             info.power_bar->setValue(my_spaceship->systems[n].power_level);
             info.coolant_bar->setValue(my_spaceship->systems[n].coolant_level);
+        }
+        if (selected_system != SYS_None)
+        {
+            ShipSystem& system = my_spaceship->systems[selected_system];
+            power_label->setText("Power: " + string(int(system.power_level * 100)) + "%/" + string(int(system.power_request * 100)) + "%");
+            coolant_label->setText("Coolant: " + string(int(system.coolant_level / PlayerSpaceship::max_coolant * 100)) + "%/" + string(int(system.coolant_request / PlayerSpaceship::max_coolant * 100)) + "%");
         }
     }
     GuiOverlay::onDraw(window);

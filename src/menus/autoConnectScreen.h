@@ -1,8 +1,10 @@
 #ifndef AUTO_CONNECT_SCREEN_H
 #define AUTO_CONNECT_SCREEN_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_canvas.h"
 #include "playerInfo.h"
+
+class GuiLabel;
 
 class AutoConnectScreen : public GuiCanvas, public Updatable
 {

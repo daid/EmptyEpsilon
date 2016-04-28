@@ -39,7 +39,7 @@ void ModelData::setName(string name)
 
     if (data_map.find(name) != data_map.end())
     {
-        LOG(WARNING) << "Duplicate modeldata definition: " << name;
+        LOG(ERROR) << "Duplicate modeldata definition: " << name;
     }
     data_map[name] = this;
 }
@@ -174,7 +174,7 @@ P<ModelData> ModelData::getModel(string name)
     if (data_map.find(name) == data_map.end())
     {
         LOG(ERROR) << "Failed to find model data: " << name;
-        return nullptr;
+        data_map[name] = new ModelData();
     }
     return data_map[name];
 }
@@ -194,6 +194,8 @@ void ModelData::render()
 {
 #if FEATURE_3D_RENDERING
     load();
+    if (!mesh)
+        return;
 
     glPushMatrix();
 

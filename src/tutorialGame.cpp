@@ -1,6 +1,7 @@
 #include "tutorialGame.h"
 #include "scriptInterface.h"
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "main.h"
 
 #include "screenComponents/viewport3d.h"

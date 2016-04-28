@@ -256,29 +256,27 @@ int main(int argc, char** argv)
 
     {
         P<ScriptObject> modelDataScript = new ScriptObject("model_data.lua");
-        if (modelDataScript)
-            modelDataScript->destroy();
+        if (modelDataScript->getError() != "") exit(1);
+        modelDataScript->destroy();
 
         P<ScriptObject> shipTemplatesScript = new ScriptObject("shipTemplates.lua");
-        if (shipTemplatesScript)
-            shipTemplatesScript->destroy();
+        if (shipTemplatesScript->getError() != "") exit(1);
+        shipTemplatesScript->destroy();
 
         P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");
-        if (factionInfoScript)
-            factionInfoScript->destroy();
+        if (factionInfoScript->getError() != "") exit(1);
+        factionInfoScript->destroy();
 
         fillDefaultDatabaseData();
 
         P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
-        if (scienceInfoScript)
-            scienceInfoScript->destroy();
+        if (scienceInfoScript->getError() != "") exit(1);
+        scienceInfoScript->destroy();
         
         //Find out which model data isn't used by ship templates and output that to log.
         std::set<string> used_model_data;
-        for(string template_name : ShipTemplate::getTemplateNameList())
-        {
+        for(string template_name : ShipTemplate::getAllTemplateNames())
             used_model_data.insert(ShipTemplate::getTemplate(template_name)->model_data->getName());
-        }
         for(string name : ModelData::getModelDataNames())
         {
             if (used_model_data.find(name) == used_model_data.end())

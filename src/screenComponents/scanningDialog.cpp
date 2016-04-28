@@ -1,5 +1,10 @@
 #include "scanningDialog.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "playerInfo.h"
+#include "gui/gui2_panel.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_slider.h"
+#include "gui/gui2_button.h"
 
 GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
 : GuiElement(owner, id)

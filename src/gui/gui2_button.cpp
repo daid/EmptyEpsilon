@@ -34,6 +34,7 @@ void GuiButton::onDraw(sf::RenderTarget& window)
         textureManager.setTexture(icon, icon_name);
         float scale = rect.height / icon.getTextureRect().height * 0.8;
         icon.setScale(scale, scale);
+        icon.setRotation(icon_rotation);
         switch(icon_alignment)
         {
         case ACenterLeft:
@@ -104,10 +105,11 @@ GuiButton* GuiButton::setTextSize(float size)
     return this;
 }
 
-GuiButton* GuiButton::setIcon(string icon_name, EGuiAlign icon_alignment)
+GuiButton* GuiButton::setIcon(string icon_name, EGuiAlign icon_alignment, float rotation)
 {
     this->icon_name = icon_name;
     this->icon_alignment = icon_alignment;
+    this->icon_rotation = rotation;
     return this;
 }
 

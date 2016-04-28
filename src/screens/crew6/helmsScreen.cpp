@@ -1,4 +1,5 @@
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "helmsScreen.h"
 
 #include "screenComponents/radarView.h"

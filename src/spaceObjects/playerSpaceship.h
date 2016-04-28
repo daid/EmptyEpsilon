@@ -2,31 +2,9 @@
 #define PLAYER_SPACESHIP_H
 
 #include "spaceship.h"
-#include "scanProbe.h"
 #include "commsScriptInterface.h"
+#include "playerInfo.h"
 #include <iostream>
-
-enum ECrewPosition
-{
-    //6/5 player crew
-    helmsOfficer,
-    weaponsOfficer,
-    engineering,
-    scienceOfficer,
-    relayOfficer,
-    //4/3 player crew
-    tacticalOfficer,    //helms+weapons-shields
-    engineeringAdvanced,//engineering+shields
-    operationsOfficer, //science+comms
-    //1 player crew
-    singlePilot,
-    //extras
-    damageControl,
-    powerManagement,
-    databaseView,
-
-    max_crew_positions
-};
 
 enum ECommsState
 {
@@ -56,14 +34,13 @@ public:
     constexpr static float energy_shield_use_per_second = 1.5f;
     constexpr static float energy_warp_per_second = 1.0f;
     constexpr static float system_heatup_per_second = 0.05f;
+    constexpr static float system_power_level_change_per_second = 0.3;
+    constexpr static float system_coolant_level_change_per_second = 1.2;
     constexpr static float max_coolant = 10.0;
     constexpr static float damage_per_second_on_overheat = 0.08f;
     constexpr static float shield_calibration_time = 25.0f;
     constexpr static float comms_channel_open_time = 2.0;
     constexpr static int max_self_destruct_codes = 3;
-    constexpr static float heat_per_combat_maneuver_boost = 0.2;
-    constexpr static float heat_per_combat_maneuver_strafe = 0.2;
-    constexpr static float heat_per_warp = 0.02;
     constexpr static int max_scan_probes = 8;
     constexpr static float scan_probe_charge_time = 10.0f;
     constexpr static float max_scanning_delay = 6.0;
@@ -216,7 +193,6 @@ public:
     virtual string getExportLine();
 };
 REGISTER_MULTIPLAYER_ENUM(ECommsState);
-REGISTER_MULTIPLAYER_ENUM(ECrewPosition);
 template<> int convert<EAlertLevel>::returnType(lua_State* L, EAlertLevel l);
 REGISTER_MULTIPLAYER_ENUM(EAlertLevel);
 

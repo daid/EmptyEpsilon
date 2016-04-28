@@ -1,4 +1,5 @@
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "tacticalScreen.h"
 
 #include "screenComponents/combatManeuver.h"

@@ -1,5 +1,8 @@
-#include "playerInfo.h"
 #include "selfDestructButton.h"
+#include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
+
+#include "gui/gui2_button.h"
 
 GuiSelfDestructButton::GuiSelfDestructButton(GuiContainer* owner, string id)
 : GuiElement(owner, id)

@@ -1,7 +1,9 @@
 #ifndef GUI_SELF_DESTRUCT_BUTTON_H
 #define GUI_SELF_DESTRUCT_BUTTON_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
+
+class GuiButton;
 
 class GuiSelfDestructButton : public GuiElement
 {

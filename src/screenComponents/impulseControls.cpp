@@ -1,6 +1,9 @@
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "impulseControls.h"
 #include "powerDamageIndicator.h"
+#include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_slider.h"
 
 GuiImpulseControls::GuiImpulseControls(GuiContainer* owner, string id)
 : GuiElement(owner, id)

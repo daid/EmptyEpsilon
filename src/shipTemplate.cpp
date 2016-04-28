@@ -9,6 +9,8 @@
 REGISTER_SCRIPT_CLASS(ShipTemplate)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setName);
+    /// Set the class name, and subclass name for the ship. Used to divide ships into different classes.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setClass);
     /// Set the description shown for this ship in the science database.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDescription);
     /// Sets the type of template. Defaults to normal ships, so then it does not need to be set.
@@ -24,6 +26,8 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setEnergyStorage);
     /// Setup a beam weapon.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeam);
+    /// Setup a beam weapon.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeapon);
     /// Setup a beam weapon texture
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamTexture);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponEnergyPerFire);
@@ -42,6 +46,8 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShields);
     /// Set the impulse speed, rotation speed and impulse acceleration for this ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSpeed);
+    /// Sets the combat maneuver power of this ship.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCombatManeuver);
     /// Set the warp speed for warp level 1 for this ship. Setting this will indicate that this ship has a warpdrive. (normal value is 1000)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWarpSpeed);
     /// Set if this ship has a jump drive. Example: template:setJumpDrive(true)
@@ -52,6 +58,9 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoomSystem);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addDoor);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadarTrace);
+    /// Return a new template with the given name, which is an exact copy of this template.
+    /// Used to make easy variations of templates.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, copy);
 }
 
 /* Define script conversion function for the ESystem enum. */
@@ -98,7 +107,11 @@ std::unordered_map<string, P<ShipTemplate> > ShipTemplate::templateMap;
 
 ShipTemplate::ShipTemplate()
 {
+    if (game_server) { LOG(ERROR) << "ShipTemplate objects can not be created during a scenario."; destroy(); return; }
+    
     type = Ship;
+    class_name = "No class";
+    class_name = "No sub-class";
     size_class = 10;
     energy_storage_amount = 1000;
     repair_crew_count = 3;
@@ -116,6 +129,8 @@ ShipTemplate::ShipTemplate()
     impulse_speed = 500.0;
     impulse_acceleration = 20.0;
     turn_speed = 10.0;
+    combat_maneuver_boost_speed = 0.0f;
+    combat_maneuver_strafe_speed = 0.0f;
     warp_speed = 0.0;
     has_jump_drive = false;
     has_cloaking = false;
@@ -186,13 +201,29 @@ void ShipTemplate::setType(TemplateType type)
 
 void ShipTemplate::setName(string name)
 {
+    if (templateMap.find(name) != templateMap.end())
+    {
+        LOG(ERROR) << "Duplicate ship template definition: " << name;
+    }
+
     templateMap[name] = this;
     if (name.startswith("Player "))
         name = name.substr(7);
     this->name = name;
 }
 
+void ShipTemplate::setClass(string class_name, string sub_class_name)
+{
+    this->class_name = class_name;
+    this->sub_class_name = sub_class_name;
+}
+
 void ShipTemplate::setBeam(int index, float arc, float direction, float range, float cycle_time, float damage)
+{
+    setBeamWeapon(index, arc, direction, range, cycle_time, damage);
+}
+
+void ShipTemplate::setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage)
 {
     if (index < 0 || index > max_beam_weapons)
         return;
@@ -262,29 +293,19 @@ P<ShipTemplate> ShipTemplate::getTemplate(string name)
     return templateMap[name];
 }
 
-std::vector<string> ShipTemplate::getTemplateNameList()
+std::vector<string> ShipTemplate::getAllTemplateNames()
 {
     std::vector<string> ret;
     for(std::unordered_map<string, P<ShipTemplate> >::iterator i = templateMap.begin(); i != templateMap.end(); i++)
-        if (i->second->getType() == Ship)
-            ret.push_back(i->first);
+        ret.push_back(i->first);
     return ret;
 }
 
-std::vector<string> ShipTemplate::getPlayerTemplateNameList()
+std::vector<string> ShipTemplate::getTemplateNameList(TemplateType type)
 {
     std::vector<string> ret;
     for(std::unordered_map<string, P<ShipTemplate> >::iterator i = templateMap.begin(); i != templateMap.end(); i++)
-        if (i->second->getType() == PlayerShip)
-            ret.push_back(i->first);
-    return ret;
-}
-
-std::vector<string> ShipTemplate::getStationTemplateNameList()
-{
-    std::vector<string> ret;
-    for(std::unordered_map<string, P<ShipTemplate> >::iterator i = templateMap.begin(); i != templateMap.end(); i++)
-        if (i->second->getType() == Station)
+        if (i->second->getType() == type)
             ret.push_back(i->first);
     return ret;
 }
@@ -334,6 +355,12 @@ void ShipTemplate::setSpeed(float impulse, float turn, float acceleration)
     impulse_acceleration = acceleration;
 }
 
+void ShipTemplate::setCombatManeuver(float boost, float strafe)
+{
+    combat_maneuver_boost_speed = boost;
+    combat_maneuver_strafe_speed = strafe;
+}
+
 void ShipTemplate::setWarpSpeed(float warp)
 {
     warp_speed = warp;
@@ -377,6 +404,48 @@ void ShipTemplate::setRadarTrace(string trace)
     radar_trace = trace;
 }
 
+P<ShipTemplate> ShipTemplate::copy(string new_name)
+{
+    P<ShipTemplate> result = new ShipTemplate();
+    result->setName(new_name);
+
+    result->description = description;
+    result->class_name = class_name;
+    result->sub_class_name = sub_class_name;
+    result->type = type;
+    result->model_data = model_data;
+
+    result->size_class = size_class;
+    result->energy_storage_amount = energy_storage_amount;
+    result->repair_crew_count = repair_crew_count;
+    result->default_ai_name = default_ai_name;
+    for(int n=0; n<max_beam_weapons; n++)
+        result->beams[n] = beams[n];
+    result->weapon_tube_count = weapon_tube_count;
+    for(int n=0; n<max_beam_weapons; n++)
+        result->weapon_tube[n] = weapon_tube[n];
+    result->hull = hull;
+    result->shield_count = shield_count;
+    for(int n=0; n<max_shield_count; n++)
+        result->shield_level[n] = shield_level[n];
+    result->impulse_speed = impulse_speed;
+    result->turn_speed = turn_speed;
+    result->warp_speed = warp_speed;
+    result->impulse_acceleration;
+    result->combat_maneuver_boost_speed;
+    result->combat_maneuver_strafe_speed;
+    result->has_jump_drive = has_jump_drive;
+    result->has_cloaking = has_cloaking;
+    for(int n=0; n<MW_Count; n++)
+        result->weapon_storage[n] = weapon_storage[n];
+    result->radar_trace = radar_trace;
+
+    result->rooms = rooms;
+    result->doors = doors;
+    
+    return result;
+}
+
 void ShipTemplate::setEnergyStorage(float energy_amount)
 {
     this->energy_storage_amount = energy_amount;
@@ -395,6 +464,16 @@ string ShipTemplate::getName()
 string ShipTemplate::getDescription()
 {
     return this->description;
+}
+
+string ShipTemplate::getClass()
+{
+    return this->class_name;
+}
+
+string ShipTemplate::getSubClass()
+{
+    return this->sub_class_name;
 }
 
 ShipTemplate::TemplateType ShipTemplate::getType()

@@ -56,6 +56,7 @@ private:
     std::vector<sf::Vector3f> beam_position;
     std::vector<sf::Vector3f> tube_position;
     std::vector<EngineEmitterData> engine_emitters;
+
 public:
     ModelData();
 
@@ -123,6 +124,7 @@ public:
     void render();
 
     friend class ModelInfo;
+    friend class GuiRotatingModelView;
 };
 
 #endif//MODEL_DATA_H

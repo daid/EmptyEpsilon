@@ -2,6 +2,12 @@
 #include "serverBrowseMenu.h"
 #include "joinServerMenu.h"
 
+#include "gui/gui2_overlay.h"
+#include "gui/gui2_button.h"
+#include "gui/gui2_selector.h"
+#include "gui/gui2_textentry.h"
+#include "gui/gui2_listbox.h"
+
 ServerBrowserMenu::ServerBrowserMenu(SearchSource source)
 {
     scanner = new ServerScanner(VERSION_NUMBER);

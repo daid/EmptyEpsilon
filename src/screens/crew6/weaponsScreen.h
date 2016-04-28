@@ -1,10 +1,15 @@
 #ifndef WEAPONS_SCREEN_H
 #define WEAPONS_SCREEN_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_overlay.h"
 #include "screenComponents/radarView.h"
+#include "screenComponents/targetsContainer.h"
 
 class GuiMissileTubeControls;
+class GuiKeyValueDisplay;
+class GuiToggleButton;
+class GuiRotationDial;
+
 class WeaponsScreen : public GuiOverlay
 {
 private:

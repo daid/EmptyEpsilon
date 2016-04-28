@@ -1,7 +1,12 @@
 #ifndef MOUSE_CALIBRATOR_H
 #define MOUSE_CALIBRATOR_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_canvas.h"
+
+class GuiPanel;
+class GuiImage;
+class GuiButton;
+
 /*!
  * \brief Calibrator used for touch screens.
  * It's possible to use empty epsilon with touch screens, which may or may not be correclty calibrated.

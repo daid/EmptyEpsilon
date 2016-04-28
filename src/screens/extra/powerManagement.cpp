@@ -1,6 +1,7 @@
 #include "powerManagement.h"
 
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 
 PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
 : GuiOverlay(owner, "POWER_MANAGEMENT_SCREEN", colorConfig.background)

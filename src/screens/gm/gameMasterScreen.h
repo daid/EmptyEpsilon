@@ -4,6 +4,7 @@
 #include "engine.h"
 #include "gui/gui2.h"
 #include "screenComponents/radarView.h"
+#include "screenComponents/targetsContainer.h"
 
 class GuiGlobalMessageEntry;
 class GuiObjectCreationScreen;

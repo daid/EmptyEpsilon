@@ -2,6 +2,13 @@
 #include "optionsMenu.h"
 #include "main.h"
 
+#include "gui/gui2_overlay.h"
+#include "gui/gui2_button.h"
+#include "gui/gui2_selector.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_slider.h"
+#include "gui/gui2_listbox.h"
+
 OptionsMenu::OptionsMenu()
 {
     P<WindowManager> windowManager = engine->getObject("windowManager");

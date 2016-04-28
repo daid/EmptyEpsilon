@@ -1,6 +1,11 @@
 #include "playerInfo.h"
 #include "selfDestructEntry.h"
 
+#include "gui/gui2_panel.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_button.h"
+#include "gui/gui2_autolayout.h"
+
 GuiSelfDestructEntry::GuiSelfDestructEntry(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {

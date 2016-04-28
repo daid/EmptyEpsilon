@@ -1,7 +1,7 @@
 #ifndef GUI_FREQUENCY_CURVE_H
 #define GUI_FREQUENCY_CURVE_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_panel.h"
 
 class GuiFrequencyCurve : public GuiPanel
 {
