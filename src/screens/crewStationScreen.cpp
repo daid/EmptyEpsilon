@@ -13,9 +13,9 @@ CrewStationScreen::CrewStationScreen()
     {
         button_strip->show();
     });
-    select_station_button->setPosition(-20, 20, ATopRight)->setSize(250, 50);
+    select_station_button->setPosition(0, 0, ATopLeft)->setSize(250, 50);
     button_strip = new GuiPanel(this, "");
-    button_strip->setPosition(-20, 20, ATopRight)->setSize(250, 50);
+    button_strip->setPosition(0, 0, ATopLeft)->setSize(250, 50);
     button_strip->hide();
 }
 
