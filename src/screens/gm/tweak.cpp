@@ -1,4 +1,12 @@
 #include "tweak.h"
+#include "spaceObjects/spaceship.h"
+
+#include "gui/gui2_listbox.h"
+#include "gui/gui2_autolayout.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_textentry.h"
+#include "gui/gui2_selector.h"
+#include "gui/gui2_slider.h"
 
 GuiShipTweak::GuiShipTweak(GuiContainer* owner)
 : GuiPanel(owner, "GM_TWEAK_DIALOG")

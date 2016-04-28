@@ -5,6 +5,9 @@
 #include "screenComponents/shieldFreqencySelect.h"
 #include "screenComponents/shipInternalView.h"
 
+#include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_autolayout.h"
+
 DamageControlScreen::DamageControlScreen(GuiContainer* owner)
 : GuiOverlay(owner, "DAMCON_SCREEN", colorConfig.background)
 {

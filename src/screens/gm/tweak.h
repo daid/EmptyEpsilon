@@ -1,8 +1,14 @@
 #ifndef GAME_MASTER_TWEAK_H
 #define GAME_MASTER_TWEAK_H
 
-#include "gui/gui2.h"
-#include "spaceObjects/spaceship.h"
+#include "gui/gui2_panel.h"
+#include "missileWeaponData.h"
+#include "shipTemplate.h"
+
+class SpaceShip;
+class GuiTextEntry;
+class GuiSlider;
+class GuiSelector;
 
 class GuiTweakPage : public GuiElement
 {

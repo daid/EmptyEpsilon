@@ -3,6 +3,9 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "powerDamageIndicator.h"
 
+#include "gui/gui2_slider.h"
+#include "gui/gui2_keyvaluedisplay.h"
+
 GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {

@@ -21,6 +21,9 @@
 #include "screenComponents/openCommsButton.h"
 #include "screenComponents/commsOverlay.h"
 
+#include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_rotationdial.h"
+
 SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
 : GuiOverlay(owner, "SINGLEPILOT_SCREEN", colorConfig.background)
 {

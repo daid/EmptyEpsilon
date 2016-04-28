@@ -15,6 +15,10 @@
 
 #include "screenComponents/indicatorOverlays.h"
 
+#include "gui/gui2_panel.h"
+#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_button.h"
+
 ///The TutorialGame object is normally never created.
 /// And it only used to setup the special tutorial level.
 /// It contains functions to assist in explaining the game, but do not work outside of the tutorial.

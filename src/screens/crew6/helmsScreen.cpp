@@ -8,6 +8,11 @@
 #include "screenComponents/jumpControls.h"
 #include "screenComponents/dockingButton.h"
 
+#include "gui/gui2_label.h"
+#include "gui/gui2_togglebutton.h"
+#include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_autolayout.h"
+
 HelmsScreen::HelmsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "HELMS_SCREEN", colorConfig.background)
 {

@@ -15,6 +15,9 @@
 #include "screenComponents/beamFrequencySelector.h"
 #include "screenComponents/beamTargetSelector.h"
 
+#include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_rotationdial.h"
+
 TacticalScreen::TacticalScreen(GuiContainer* owner)
 : GuiOverlay(owner, "TACTICAL_SCREEN", colorConfig.background)
 {

@@ -3,6 +3,12 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 
+#include "gui/gui2_autolayout.h"
+#include "gui/gui2_panel.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_slider.h"
+#include "gui/gui2_progressbar.h"
+
 PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
 : GuiOverlay(owner, "POWER_MANAGEMENT_SCREEN", colorConfig.background)
 {

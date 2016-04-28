@@ -8,6 +8,11 @@
 #include "screenComponents/openCommsButton.h"
 #include "screenComponents/commsOverlay.h"
 
+#include "gui/gui2_autolayout.h"
+#include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_selector.h"
+#include "gui/gui2_togglebutton.h"
+
 RelayScreen::RelayScreen(GuiContainer* owner)
 : GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background), mode(TargetSelection)
 {

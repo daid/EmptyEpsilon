@@ -9,6 +9,10 @@
 #include "screenComponents/beamTargetSelector.h"
 #include "screenComponents/powerDamageIndicator.h"
 
+#include "gui/gui2_rotationdial.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_keyvaluedisplay.h"
+
 WeaponsScreen::WeaponsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "WEAPONS_SCREEN", colorConfig.background)
 {

@@ -2,9 +2,13 @@
 #define RELAY_SCREEN_H
 
 #include "screenComponents/targetsContainer.h"
-#include "gui/gui2.h"
+#include "gui/gui2_overlay.h"
 
 class GuiRadarView;
+class GuiKeyValueDisplay;
+class GuiAutoLayout;
+class GuiButton;
+class GuiToggleButton;
 
 class RelayScreen : public GuiOverlay
 {

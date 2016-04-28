@@ -6,6 +6,15 @@
 #include "screenComponents/shipInternalView.h"
 #include "screenComponents/selfDestructButton.h"
 
+#include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_autolayout.h"
+#include "gui/gui2_togglebutton.h"
+#include "gui/gui2_slider.h"
+#include "gui/gui2_progressbar.h"
+#include "gui/gui2_arrow.h"
+#include "gui/gui2_image.h"
+#include "gui/gui2_panel.h"
+
 EngineeringScreen::EngineeringScreen(GuiContainer* owner)
 : GuiOverlay(owner, "ENGINEERING_SCREEN", colorConfig.background), selected_system(SYS_None)
 {

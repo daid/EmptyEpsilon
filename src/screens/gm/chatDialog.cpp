@@ -1,6 +1,9 @@
 #include "chatDialog.h"
 #include "spaceObjects/playerSpaceship.h"
 
+#include "gui/gui2_textentry.h"
+#include "gui/gui2_scrolltext.h"
+
 GameMasterChatDialog::GameMasterChatDialog(GuiContainer* owner, P<PlayerSpaceship> player)
 : GuiResizableDialog(owner, "", "")
 {

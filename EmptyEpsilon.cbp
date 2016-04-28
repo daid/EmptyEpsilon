@@ -471,7 +471,6 @@
 		<Unit filename="src/gui/colorConfig.h" />
 		<Unit filename="src/gui/debugRenderer.cpp" />
 		<Unit filename="src/gui/debugRenderer.h" />
-		<Unit filename="src/gui/gui2.h" />
 		<Unit filename="src/gui/gui2_advancedscrolltext.cpp" />
 		<Unit filename="src/gui/gui2_advancedscrolltext.h" />
 		<Unit filename="src/gui/gui2_arrow.cpp" />

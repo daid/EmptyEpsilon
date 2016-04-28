@@ -1,12 +1,16 @@
 #ifndef SINGLE_PILOR_SCREEN_H
 #define SINGLE_PILOR_SCREEN_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_overlay.h"
 #include "screenComponents/targetsContainer.h"
 
 class GuiViewport3D;
 class GuiMissileTubeControls;
 class GuiRadarView;
+class GuiKeyValueDisplay;
+class GuiToggleButton;
+class GuiRotationDial;
+
 class SinglePilotScreen : public GuiOverlay
 {
 private:

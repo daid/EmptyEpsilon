@@ -1,8 +1,10 @@
 #ifndef DAMCON_SCREEN_H
 #define DAMCON_SCREEN_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_overlay.h"
 #include "shipTemplate.h"
+
+class GuiKeyValueDisplay;
 
 class DamageControlScreen : public GuiOverlay
 {

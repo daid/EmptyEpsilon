@@ -2,13 +2,22 @@
 #define GAME_MASTER_SCREEN_H
 
 #include "engine.h"
-#include "gui/gui2.h"
-#include "screenComponents/radarView.h"
+#include "gui/gui2_canvas.h"
+#include "gui/gui2_overlay.h"
 #include "screenComponents/targetsContainer.h"
 
 class GuiGlobalMessageEntry;
 class GuiObjectCreationScreen;
 class GuiShipTweak;
+class GuiRadarView;
+class GuiOverlay;
+class GuiSelector;
+class GuiAutoLayout;
+class GuiKeyValueDisplay;
+class GuiListbox;
+class GuiButton;
+class GuiTextEntry;
+
 class GameMasterScreen : public GuiCanvas, public Updatable
 {
 private:

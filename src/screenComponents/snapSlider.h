@@ -1,7 +1,7 @@
 #ifndef SNAP_SLIDER_H
 #define SNAP_SLIDER_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_slider.h"
 
 class GuiSnapSlider : public GuiSlider
 {

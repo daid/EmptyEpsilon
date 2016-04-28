@@ -1,7 +1,7 @@
 #ifndef GUI_SHIP_INTERNAL_VIEW_H
 #define GUI_SHIP_INTERNAL_VIEW_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
 #include "spaceObjects/spaceship.h"
 
 class RepairCrew;

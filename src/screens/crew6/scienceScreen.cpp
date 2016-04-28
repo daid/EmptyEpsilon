@@ -10,6 +10,13 @@
 #include "screenComponents/scanningDialog.h"
 #include "screenComponents/databaseView.h"
 
+#include "gui/gui2_autolayout.h"
+#include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_togglebutton.h"
+#include "gui/gui2_selector.h"
+#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_listbox.h"
+
 ScienceScreen::ScienceScreen(GuiContainer* owner)
 : GuiOverlay(owner, "SCIENCE_SCREEN", colorConfig.background)
 {

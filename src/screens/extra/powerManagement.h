@@ -1,8 +1,12 @@
 #ifndef POWER_MANAGEMENT_SCREEN_H
 #define POWER_MANAGEMENT_SCREEN_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_overlay.h"
 #include "shipTemplate.h"
+
+class GuiPanel;
+class GuiSlider;
+class GuiProgressbar;
 
 class PowerManagementScreen : public GuiOverlay
 {

@@ -3,6 +3,10 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "powerDamageIndicator.h"
 
+#include "gui/gui2_togglebutton.h"
+#include "gui/gui2_progressbar.h"
+#include "gui/gui2_label.h"
+
 GuiShieldsEnableButton::GuiShieldsEnableButton(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
