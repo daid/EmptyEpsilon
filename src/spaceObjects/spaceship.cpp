@@ -969,7 +969,6 @@ void SpaceShip::addBroadcast(int threshold, string message)
         {
             if (factionInfo[this->getFactionId()]->states[ship->getFactionId()] == FVF_Friendly)
             {
-                message = this->getFaction() + ship->getFaction();
                 color = sf::Color(154,255,154); //ally = light green
                 addtolog = 1;
             }
