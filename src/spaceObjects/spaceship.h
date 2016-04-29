@@ -133,8 +133,8 @@ public:
     float jump_delay;        //[output]
     float wormhole_alpha;    //Used for displaying the Warp-postprocessor
 
-    int8_t weapon_storage[MW_Count];
-    int8_t weapon_storage_max[MW_Count];
+    int weapon_storage[MW_Count];
+    int weapon_storage_max[MW_Count];
     int8_t weapon_tube_count;
     float tube_recharge_factor;
     WeaponTube weapon_tube[max_weapon_tubes];
