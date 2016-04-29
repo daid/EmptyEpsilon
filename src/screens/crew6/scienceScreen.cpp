@@ -161,7 +161,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
 
     if (probe_view_button->getValue() && probe)
     {
-        if (targets.get() && (probe->getPosition() - targets.get()->getPosition()) < 5000.0f)
+        if (targets.get() && (probe->getPosition() - targets.get()->getPosition()) > 5000.0f)
             targets.clear();
     }else{
         if (targets.get() && Nebula::blockedByNebula(my_spaceship->getPosition(), targets.get()->getPosition()))
