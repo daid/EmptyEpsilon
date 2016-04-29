@@ -176,7 +176,7 @@ bool WeaponTube::canLoad(EMissileWeapons type)
 
 bool WeaponTube::canOnlyLoad(EMissileWeapons type)
 {
-    if (type_allowed_mask == (1 << type))
+    if (type_allowed_mask == (1U << type))
         return true;
     return false;
 }
