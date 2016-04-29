@@ -114,7 +114,7 @@ void HelmsScreen::onDraw(sf::RenderTarget& window)
         energy_display->setValue(string(int(my_spaceship->energy_level)));
         heading_display->setValue(string(my_spaceship->getHeading(), 1));
         float velocity = sf::length(my_spaceship->getVelocity()) / 1000 * 60;
-        velocity_display->setValue(string(velocity, 1) + "km/min");
+        velocity_display->setValue(string(velocity, 1) + DISTANCE_UNIT_1K + "/min");
         
         warp_controls->setVisible(my_spaceship->has_warp_drive);
         jump_controls->setVisible(my_spaceship->has_jump_drive);

@@ -210,9 +210,9 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             rel_velocity = 0.0;
 
         info_callsign->setValue(obj->getCallSign());
-        info_distance->setValue(string(distance / 1000.0f, 1) + "km");
+        info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
         info_heading->setValue(string(int(heading)));
-        info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + "km/min");
+        info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
 
         if (ship)
         {
@@ -258,8 +258,8 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         if (fabs(rel_velocity) < 0.01)
             rel_velocity = 0.0;
 
-        info_distance->setValue(string(distance / 1000.0f, 1) + "km");
+        info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
         info_heading->setValue(string(int(heading)));
-        info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + "km/min");
+        info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
     }
 }

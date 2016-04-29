@@ -96,14 +96,14 @@ end
 
 radarTutorial = createSequence()
 addToSequence(radarTutorial, function() tutorial:switchViewToLongRange() end)
-addToSequence(radarTutorial, [[Welcome to the long range radar. This radar can see up to 30km from your ship.
+addToSequence(radarTutorial, [[Welcome to the long range radar. This radar can see up to 30u from your ship.
 At the center you see your own ship. This radar quickly allows you to identify different objects.]])
 addToSequence(radarTutorial, function() prev_object = Asteroid():setPosition(5000, 0) end)
 addToSequence(radarTutorial, [[Right of your own ship, you see a brown dot. This is an asteroid.
 Asteroids should be avoided, as they damage your ship if you fly into them.]])
 addToSequence(radarTutorial, function() prev_object:destroy() end)
 addToSequence(radarTutorial, function() prev_object = Mine():setPosition(5000, 0) end)
-addToSequence(radarTutorial, [[The white dot is a mine. Mines trigger when you are close, and then explode with a 1km blast radius. They do a lot of damage. Flying into one without shields will surely kill you.]])
+addToSequence(radarTutorial, [[The white dot is a mine. Mines trigger when you are close, and then explode with a 1u blast radius. They do a lot of damage. Flying into one without shields will surely kill you.]])
 addToSequence(radarTutorial, function() prev_object:destroy() end)
 addToSequence(radarTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(5000, 0) end)
 addToSequence(radarTutorial, function() prev_object2 = SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setPosition(5000, 5000) end)
@@ -113,7 +113,7 @@ addToSequence(radarTutorial, function() prev_object:destroy() end)
 addToSequence(radarTutorial, function() prev_object2:destroy() end)
 addToSequence(radarTutorial, function() prev_object3:destroy() end)
 addToSequence(radarTutorial, function() prev_object = Nebula():setPosition(8000, 0) end)
-addToSequence(radarTutorial, [[The rainbow colored cloud is a nebula. Nebulea block long range sensors. So you cannot see inside of them when you are more then 5km away from them, and you cannot see behind it.]])
+addToSequence(radarTutorial, [[The rainbow colored cloud is a nebula. Nebulea block long range sensors. So you cannot see inside of them when you are more then 5u away from them, and you cannot see behind it.]])
 addToSequence(radarTutorial, function() prev_object:destroy() end)
 addToSequence(radarTutorial, function() prev_object = CpuShip():setFaction("Human Navy"):setTemplate("Cruiser"):setPosition(5000, -2500):orderIdle():setScanned(true) end)
 addToSequence(radarTutorial, function() prev_object2 = CpuShip():setFaction("Independent"):setTemplate("Cruiser"):setPosition(5000, 2500):orderIdle():setScanned(true) end)
@@ -126,7 +126,7 @@ addToSequence(radarTutorial, function() prev_object3:destroy() end)
 addToSequence(radarTutorial, function() prev_object4:destroy() end)
 addToSequence(radarTutorial, [[Next we will look at the short range radar.]])
 addToSequence(radarTutorial, function() tutorial:switchViewToTactical() end)
-addToSequence(radarTutorial, [[The short range radar will see up to 5km. You also see the range of your own beam weapons.
+addToSequence(radarTutorial, [[The short range radar will see up to 5u. You also see the range of your own beam weapons.
 Your current ship has 2 beam weapons aimed to the front. Different ships will have different beam weapon layouts, with different ranges and locations.]])
 addToSequence(radarTutorial, function() startSequence(helmsTutorial) end)
 
@@ -158,7 +158,7 @@ addToSequence(helmsTutorial, function() prev_object = SpaceStation():setTemplate
 addToSequence(helmsTutorial, [[Excellent!
 
 Next up. Docking. Docking is important, as being docked with a station will recharge your energy, repairs your hull and allows the relay officer to request weapon refills. It can also be important for other mission related events.
-To dock, get within 1km of a station, and press the "Request Dock" button. Docking is fully automated after that.
+To dock, get within 1u of a station, and press the "Request Dock" button. Docking is fully automated after that.
 Dock with the nearby station now.]], function() return player:isDocked(prev_object) end)
 addToSequence(helmsTutorial, [[Now that you are docked, movement is locked. As helms officer there is nothing else you can do.
 So undock now.]], function() return not player:isDocked(prev_object) end)
@@ -177,12 +177,12 @@ addToSequence(helmsTutorial, function() player:setWarpDrive(true) end)
 addToSequence(helmsTutorial, [[First, let us try the warp drive.
 
 It works almost the same as the impulse drive, but can only move forwards. However, much faster at a greater energy use.
-Use the warp drive to move more than 30km away from this starting point.]], function() return distance(player, 0, 0) > 30000 end)
+Use the warp drive to move more than 30u away from this starting point.]], function() return distance(player, 0, 0) > 30000 end)
 addToSequence(helmsTutorial, function() player:setWarpDrive(false):setJumpDrive(true):setPosition(0, 0) end)
 addToSequence(helmsTutorial, [[Now. That was the warp drive. Next up, the jump drive.
 
 The jump drive you need to configure a distance you want to jump. And then you need to initiate it. You jump into the direction where your ship is pointing at the time of which the jump actually happens.
-Use the jump drive to jump more than 30km from this starting point, in any direction.]], function() return distance(player, 0, 0) > 30000 end)
+Use the jump drive to jump more than 30u from this starting point, in any direction.]], function() return distance(player, 0, 0) > 30000 end)
 addToSequence(helmsTutorial, [[Notice how your jump drive needs to re-charge after use.
 
 This covers the basics of the helms officer.]])
@@ -273,7 +273,7 @@ While not extremely helpful on a stationary target. It can make all the differen
 end)
 addToSequence(weaponsTutorial, function() player:setWeaponStorage("homing", 0):setWeaponStorageMax("homing", 0) end)
 addToSequence(weaponsTutorial, function() tutorial:setMessageToTopPosition() end)
-addToSequence(weaponsTutorial, [[Next to homing missiles, you have Nukes, EMPs and Mines. Nukes and EMPs fire the same as homing missiles. But have a 1km blast radius, and do a lot of damage. EMPs only damage shields, and thus are great to initial damage enemies with lots of shielding.]])
+addToSequence(weaponsTutorial, [[Next to homing missiles, you have Nukes, EMPs and Mines. Nukes and EMPs fire the same as homing missiles. But have a 1u blast radius, and do a lot of damage. EMPs only damage shields, and thus are great to initial damage enemies with lots of shielding.]])
 addToSequence(weaponsTutorial, function() startSequence(engineeringTutorial) end)
 
 engineeringTutorial = createSequence()
@@ -353,7 +353,7 @@ addToSequence(scienceTutorial, function()
 end)
 addToSequence(scienceTutorial, [[Welcome science officer.
 
-You are the eyes of the ship. Your job is to supply the captain with information. As you can see, you can see up to 30km with this radar.]])
+You are the eyes of the ship. Your job is to supply the captain with information. As you can see, you can see up to 30u with this radar.]])
 addToSequence(scienceTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(3000, -15000) end)
 addToSequence(scienceTutorial, function() prev_object2 = CpuShip():setFaction("Human Navy"):setTemplate("Cruiser"):setPosition(5000, -17000):orderIdle():setScanned(true) end)
 addToSequence(scienceTutorial, [[On this radar, you can select objects to get information about them.
@@ -420,7 +420,7 @@ addToSequence(relayTutorial, function() prev_object3 = CpuShip():setFaction("Hum
 addToSequence(relayTutorial, function() prev_object4 = CpuShip():setFaction("Human Navy"):setTemplate("Cruiser"):setPosition(5400, 7500):orderIdle():setScanned(false) end)
 addToSequence(relayTutorial, [[You also have this radar map that you are looking at now.
 
-On this radar you will see 5km around all allied ships. Everything else is invisible for you. This does however, give you a different view then the science officer. As you do have the option to look into nebulea.]])
+On this radar you will see 5u around all allied ships. Everything else is invisible for you. This does however, give you a different view then the science officer. As you do have the option to look into nebulea.]])
 addToSequence(relayTutorial, [[Finally, you have probes. Probes can be used to expand your radar view. Launch a probe to the top right, towards the ship called DMY-01]], function()
     for _, obj in ipairs(getObjectsInRadius(20000, -20000, 5000)) do
         if obj.typeName == "ScanProbe" then

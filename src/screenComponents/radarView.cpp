@@ -369,7 +369,7 @@ void GuiRadarView::drawRangeIndicators(sf::RenderTarget& window)
         circle.setOutlineColor(sf::Color(255, 255, 255, 16));
         circle.setOutlineThickness(2.0);
         window.draw(circle);
-        drawText(window, sf::FloatRect(radar_screen_center.x, radar_screen_center.y - s - 20, 0, 0), string(int(circle_size / 1000.0f + 0.1f)) + "km", ACenter, 20, bold_font, sf::Color(255, 255, 255, 32));
+        drawText(window, sf::FloatRect(radar_screen_center.x, radar_screen_center.y - s - 20, 0, 0), string(int(circle_size / 1000.0f + 0.1f)) + DISTANCE_UNIT_1K, ACenter, 20, bold_font, sf::Color(255, 255, 255, 32));
     }
 }
 

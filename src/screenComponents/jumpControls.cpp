@@ -49,7 +49,7 @@ void GuiJumpControls::onDraw(sf::RenderTarget& window)
             charge_bar->setValue(my_spaceship->jump_drive_charge)->show();
         }else{
             label->setKey("Distance");
-            label->setValue(string(slider->getValue(), 1) + "km");
+            label->setValue(string(slider->getValue(), 1) + DISTANCE_UNIT_1K);
             slider->enable()->show();
             button->enable();
             charge_bar->hide();
