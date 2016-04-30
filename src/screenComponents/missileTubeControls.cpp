@@ -13,7 +13,8 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     
-    for(int n=0; n<max_weapon_tubes; n++)
+    rows.resize(max_weapon_tubes);
+    for(int n=max_weapon_tubes-1; n>=0; n--)
     {
         TubeRow row;
         row.layout = new GuiAutoLayout(this, id + "_ROW_" + string(n), LayoutHorizontalLeftToRight);
@@ -56,7 +57,7 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
         row.loading_label = new GuiLabel(row.loading_bar, id + "_" + string(n) + "_PROGRESS_LABEL", "Loading", 35);
         row.loading_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         
-        rows.push_back(row);
+        rows[n] = row;
     }
     
     
