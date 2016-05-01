@@ -23,6 +23,8 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
             if (my_spaceship && targets.get())
                 my_spaceship->commandSetTarget(targets.get());
+            else if (my_spaceship)
+                my_spaceship->commandSetTarget(NULL);
         }, nullptr, nullptr
     );
     missile_aim = new GuiRotationDial(this, "MISSILE_AIM", -90, 360 - 90, 0, [this](float value){
