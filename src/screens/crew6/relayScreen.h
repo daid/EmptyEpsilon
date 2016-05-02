@@ -29,7 +29,7 @@ private:
 
     GuiKeyValueDisplay* info_reputation;
     GuiAutoLayout* option_buttons;
-    GuiButton* link_to_science_button;
+    GuiToggleButton* link_to_science_button;
     GuiButton* delete_waypoint_button;
     GuiButton* launch_probe_button;
 

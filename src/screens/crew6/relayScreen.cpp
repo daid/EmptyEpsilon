@@ -70,8 +70,11 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     option_buttons = new GuiAutoLayout(this, "BUTTONS", GuiAutoLayout::LayoutVerticalTopToBottom);
     option_buttons->setPosition(20, 50, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", &targets))->setSize(GuiElement::GuiSizeMax, 50);
-    link_to_science_button = new GuiButton(option_buttons, "LINK_TO_SCIENCE", "Link to Science", [this](){
-        my_spaceship->commandSetScienceLink(targets.get()->getMultiplayerId());
+    link_to_science_button = new GuiToggleButton(option_buttons, "LINK_TO_SCIENCE", "Link to Science", [this](bool value){
+        if (value)
+            my_spaceship->commandSetScienceLink(targets.get()->getMultiplayerId());
+        else
+            my_spaceship->commandSetScienceLink(-1);
     });
     link_to_science_button->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", "Place Waypoint", [this]() {
@@ -186,14 +189,17 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
 
         if (probe && probe->owner_id == my_spaceship->getMultiplayerId() && probe->canBeTargetedBy(my_spaceship))
         {
+            link_to_science_button->setValue(my_spaceship->linked_science_probe_id == probe->getMultiplayerId());
             link_to_science_button->enable();
         }
         else
         {
+            link_to_science_button->setValue(false);
             link_to_science_button->disable();
         }
     }else{
         link_to_science_button->disable();
+        link_to_science_button->setValue(false);
         info_callsign->setValue("-");
     }
     if (my_spaceship)
