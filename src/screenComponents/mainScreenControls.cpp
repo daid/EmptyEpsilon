@@ -7,8 +7,8 @@
 GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
 : GuiAutoLayout(owner, "MAIN_SCREEN_CONTROLS", GuiAutoLayout::LayoutVerticalTopToBottom)
 {
-    setSize(300, GuiElement::GuiSizeMax);
-    setPosition(0, 0, ATopRight);
+    setSize(250, GuiElement::GuiSizeMax);
+    setPosition(-20, 70, ATopRight);
     
     open_button = new GuiToggleButton(this, "MAIN_SCREEN_CONTROLS_SHOW", "Main screen", [this](bool value)
     {

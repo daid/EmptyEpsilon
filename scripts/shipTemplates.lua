@@ -12,7 +12,7 @@ These are:
 Player ships are in general large frigates to small corvette class
 --]]
 require("shipTemplates_Stations.lua")
---[[Until these are ready, they are disabled
+---[[Until these are ready, they are disabled
 require("shipTemplates_StarFighters.lua")
 require("shipTemplates_Frigates.lua")
 require("shipTemplates_Corvette.lua")
