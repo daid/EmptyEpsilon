@@ -78,3 +78,65 @@ variation:addDoor(8, 4, false);
 --Airlock doors
 --variation:addDoor(2, 2, false);
 --variation:addDoor(2, 5, false);
+
+for cnt=1,5 do
+    template = ShipTemplate():setName("Personel Freighter " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_1_" .. cnt)
+    template:setDescription([[Transport freighter designed for troop and personel transport.]])
+    template:setHull(100)
+    template:setShields(50, 50)
+    template:setSpeed(60 - 5 * cnt, 6, 10)
+    template:setRadarTrace("radar_transport.png")
+    
+    if cnt > 2 then
+        variation = template:copy("Personel Jump Freighter " .. cnt)
+        variation:setJumpDrive(true)
+    end
+
+    template = ShipTemplate():setName("Goods Freighter " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_2_" .. cnt)
+    template:setDescription([[Transport freighter designed for transport of bulk goods.]])
+    template:setHull(100)
+    template:setShields(50, 50)
+    template:setSpeed(60 - 5 * cnt, 6, 10)
+    template:setRadarTrace("radar_transport.png")
+    
+    if cnt > 2 then
+        variation = template:copy("Goods Jump Freighter " .. cnt)
+        variation:setJumpDrive(true)
+    end
+    
+    template = ShipTemplate():setName("Garbage Freighter " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_3_" .. cnt)
+    template:setDescription([[Transport freighter designed for transport of garbage.]])
+    template:setHull(100)
+    template:setShields(50, 50)
+    template:setSpeed(60 - 5 * cnt, 6, 10)
+    template:setRadarTrace("radar_transport.png")
+    
+    if cnt > 2 then
+        variation = template:copy("Garbage Jump Freighter " .. cnt)
+        variation:setJumpDrive(true)
+    end
+
+    template = ShipTemplate():setName("Equipment Freighter " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_4_" .. cnt)
+    template:setDescription([[Transport freighter designed for transport of equipment.]])
+    template:setHull(100)
+    template:setShields(50, 50)
+    template:setSpeed(60 - 5 * cnt, 6, 10)
+    template:setRadarTrace("radar_transport.png")
+    
+    if cnt > 2 then
+        variation = template:copy("Equipment Jump Freighter " .. cnt)
+        variation:setJumpDrive(true)
+    end
+
+    template = ShipTemplate():setName("Fuel Freighter " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_5_" .. cnt)
+    template:setDescription([[Transport freighter designed for transport of fuels.]])
+    template:setHull(100)
+    template:setShields(50, 50)
+    template:setSpeed(60 - 5 * cnt, 6, 10)
+    template:setRadarTrace("radar_transport.png")
+    
+    if cnt > 2 then
+        variation = template:copy("Fuel Jump Freighter " .. cnt)
+        variation:setJumpDrive(true)
+    end
+end
