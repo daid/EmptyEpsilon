@@ -20,8 +20,8 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDefaultAI);
     /// Set the 3D model to be used for this template. The model referers to data set in the model_data.lua file.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setModel);
-    /// Set the size class for this ship. Ships of a smaller size-class can dock on ships of a larger size class. NOTE: This behaviour might change in the future.
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSizeClass);
+    /// Supply a list of ship classes that can be docked to this ship. setDockClasses("Starfighter") will allow all small starfighter type ships to dock with this ship.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDockClasses);
     /// Set the amount of energy available for this ship. Note that only player ships use energy. So setting this for anything else is useless.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setEnergyStorage);
     /// Setup a beam weapon.
@@ -112,7 +112,6 @@ ShipTemplate::ShipTemplate()
     type = Ship;
     class_name = "No class";
     class_name = "No sub-class";
-    size_class = 10;
     energy_storage_amount = 1000;
     repair_crew_count = 3;
     weapon_tube_count = 0;
@@ -343,9 +342,9 @@ void ShipTemplate::setDefaultAI(string default_ai_name)
     this->default_ai_name = default_ai_name;
 }
 
-void ShipTemplate::setSizeClass(int size_class)
+void ShipTemplate::setDockClasses(std::vector<string> classes)
 {
-    this->size_class = size_class;
+    can_be_docked_by_class = std::unordered_set<string>(classes.begin(), classes.end());
 }
 
 void ShipTemplate::setSpeed(float impulse, float turn, float acceleration)
@@ -415,7 +414,7 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->type = type;
     result->model_data = model_data;
 
-    result->size_class = size_class;
+    result->can_be_docked_by_class = can_be_docked_by_class;
     result->energy_storage_amount = energy_storage_amount;
     result->repair_crew_count = repair_crew_count;
     result->default_ai_name = default_ai_name;

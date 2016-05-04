@@ -601,7 +601,7 @@ bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)
     P<SpaceShip> ship = obj;
     if (!ship || !ship->ship_template)
         return false;
-    return ship_template->size_class > ship->ship_template->size_class;
+    return ship_template->can_be_docked_by_class.count(ship->ship_template->getClass()) > 0;
 }
 
 void SpaceShip::collide(Collisionable* other, float force)

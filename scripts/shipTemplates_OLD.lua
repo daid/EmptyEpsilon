@@ -266,7 +266,6 @@ template:setSpeed(30, 1.5, 5)
 -- The battle station is a huge ship with many defensive features. It can be docked by smaller ships.
 template = ShipTemplate():setName("Battlestation"):setModel("Ender Battlecruiser")
 template:setRadarTrace("radar_battleship.png")
-template:setSizeClass(11)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 120, -90, 2500.0, 6.1, 4)
 template:setBeam(1, 120, -90, 2500.0, 6.0, 4)
