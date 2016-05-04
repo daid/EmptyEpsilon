@@ -8,6 +8,7 @@
 #include "screenComponents/beamFrequencySelector.h"
 #include "screenComponents/beamTargetSelector.h"
 #include "screenComponents/powerDamageIndicator.h"
+#include "screenComponents/alertOverlay.h"
 
 #include "gui/gui2_rotationdial.h"
 #include "gui/gui2_label.h"
@@ -18,6 +19,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
 {
     (new GuiOverlay(this, "", sf::Color::White))->setTextureCenter("gui/BackgroundGradient");
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+    (new AlertLevelOverlay(this));
 
     radar = new GuiRadarView(this, "HELMS_RADAR", 5000.0, &targets);
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);

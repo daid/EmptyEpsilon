@@ -9,6 +9,7 @@
 #include "screenComponents/frequencyCurve.h"
 #include "screenComponents/scanningDialog.h"
 #include "screenComponents/databaseView.h"
+#include "screenComponents/alertOverlay.h"
 
 #include "gui/gui2_autolayout.h"
 #include "gui/gui2_keyvaluedisplay.h"
@@ -24,6 +25,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
 
     (new GuiOverlay(this, "", sf::Color::White))->setTextureCenter("gui/BackgroundGradient");
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+    (new AlertLevelOverlay(this));
 
     radar_view = new GuiElement(this, "RADAR_VIEW");
     radar_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);

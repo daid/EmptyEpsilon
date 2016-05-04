@@ -7,6 +7,7 @@
 #include "screenComponents/warpControls.h"
 #include "screenComponents/jumpControls.h"
 #include "screenComponents/dockingButton.h"
+#include "screenComponents/alertOverlay.h"
 
 #include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"
@@ -18,6 +19,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
 {
     (new GuiOverlay(this, "", sf::Color::White))->setTextureCenter("gui/BackgroundGradient");
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+    (new AlertLevelOverlay(this));
 
     GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", 5000.0, nullptr);
     
