@@ -1,7 +1,7 @@
 #include "gui2_progressbar.h"
 
 GuiProgressbar::GuiProgressbar(GuiContainer* owner, string id, float min, float max, float value)
-: GuiElement(owner, id), min(min), max(max), value(value), color(sf::Color::White)
+: GuiElement(owner, id), min(min), max(max), value(value), color(sf::Color::White), drawBackground(true)
 {
 }
 
@@ -9,7 +9,8 @@ void GuiProgressbar::onDraw(sf::RenderTarget& window)
 {
     float f = (value - min) / (max - min);
 
-    drawStretched(window, rect, "gui/ProgressbarBackground");
+    if (drawBackground)
+        drawStretched(window, rect, "gui/ProgressbarBackground");
 
     sf::FloatRect fill_rect = rect;
     if (rect.width >= rect.height)
@@ -41,5 +42,11 @@ GuiProgressbar* GuiProgressbar::setText(string text)
 GuiProgressbar* GuiProgressbar::setColor(sf::Color color)
 {
     this->color = color;
+    return this;
+}
+
+GuiProgressbar* GuiProgressbar::setDrawBackground(bool drawBackground)
+{
+    this->drawBackground = drawBackground;
     return this;
 }

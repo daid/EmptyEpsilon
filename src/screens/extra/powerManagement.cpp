@@ -31,18 +31,29 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
         (new GuiLabel(box, "", "Power", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(20, 50, ATopLeft)->setSize(30, 340);
         (new GuiLabel(box, "", "Coolant", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(100, 50, ATopLeft)->setSize(30, 340);
         (new GuiLabel(box, "", "Heat", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(180, 50, ATopLeft)->setSize(30, 340);
+
+        systems[n].power_bar = new GuiProgressbar(box, "", 0.0, 3.0, 1.0);
+        systems[n].power_bar->setDrawBackground(false)->setPosition(52.5, 60, ATopLeft)->setSize(50, 320);
+
         systems[n].power_slider = new GuiSlider(box, "", 3.0, 0.0, 1.0, [n](float value) {
             if (my_spaceship)
                 my_spaceship->commandSetSystemPowerRequest(ESystem(n), value);
         });
         systems[n].power_slider->addSnapValue(1.0, 0.1)->setPosition(50, 50, ATopLeft)->setSize(55, 340);
+
+        systems[n].coolant_bar = new GuiProgressbar(box, "", 0.0, 10.0, 0.0);
+        systems[n].coolant_bar->setDrawBackground(false)->setPosition(132.5, 60, ATopLeft)->setSize(50, 320);
+
         systems[n].coolant_slider = new GuiSlider(box, "", 10.0, 0.0, 0.0, [n](float value) {
             if (my_spaceship)
                 my_spaceship->commandSetSystemCoolantRequest(ESystem(n), value);
         });
         systems[n].coolant_slider->setPosition(130, 50, ATopLeft)->setSize(55, 340);
+
         systems[n].heat_bar = new GuiProgressbar(box, "", 0.0, 1.0, 0.0);
-        systems[n].heat_bar->setPosition(210, 50, ATopLeft)->setSize(50, 340);
+        systems[n].heat_bar->setPosition(210, 60, ATopLeft)->setSize(50, 320);
+
+
     }
 }
 
@@ -54,11 +65,15 @@ void PowerManagementScreen::onDraw(sf::RenderTarget& window)
         for(int n=0; n<SYS_COUNT; n++)
         {
             systems[n].box->setVisible(my_spaceship->hasSystem(ESystem(n)));
-            systems[n].power_slider->setValue(my_spaceship->systems[n].power_level);
-            systems[n].coolant_slider->setValue(my_spaceship->systems[n].coolant_level);
+            systems[n].power_slider->setValue(my_spaceship->systems[n].power_request);
+            systems[n].coolant_slider->setValue(my_spaceship->systems[n].coolant_request);
 
             float heat = my_spaceship->systems[n].heat_level;
+            float power = my_spaceship->systems[n].power_level;
+            float coolant = my_spaceship->systems[n].coolant_level;
             systems[n].heat_bar->setValue(heat)->setColor(sf::Color(128, 128 * (1.0 - heat), 0));
+            systems[n].power_bar->setValue(power)->setColor(sf::Color(255, 255, 0));
+            systems[n].coolant_bar->setValue(coolant)->setColor(sf::Color(0,128,255));
         }
     }
 }
