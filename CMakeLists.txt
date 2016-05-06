@@ -176,6 +176,7 @@ set(SOURCES
 	src/hardware/dmx512SerialDevice.cpp
 	src/hardware/enttecDMXProDevice.cpp
 	src/hardware/sACNDMXDevice.cpp
+	src/hardware/uDMXDevice.cpp
 	src/hardware/hardwareController.cpp
 	src/hardware/hardwareMappingEffects.cpp
 	src/hardware/hardwareOutputDevice.cpp
