@@ -29,7 +29,7 @@ variation:setWeaponStorage("Mine", 6)
 variation:weaponTubeDisallowMissle(0, "Mine"):weaponTubeDisallowMissle(1, "Mine")
 variation:setTubeDirection(2,  180):setWeaponTubeExclusiveFor(2, "Mine")
 
-template = ShipTemplate():setName("Nirvana R5"):setClass("Frigate", "Cruiser: Anti Starfighter"):setModel("small_frigate_5")
+template = ShipTemplate():setName("Nirvana R5"):setClass("Frigate", "Cruiser: Anti Starfighter"):setModel("small_frigate_5") -- TODO: Better 3D model selection
 template:setDescription([[Anti fighter cruiser. Has a large amount of fast firing, low damage lasers to quickly take out starfighter class ships.]])
 template:setBeamWeapon(0, 90, -15, 1200, 3, 1)
 template:setBeamWeapon(1, 90,  15, 1200, 3, 1)
@@ -47,7 +47,7 @@ variation:setBeamWeapon(2, 90,  50, 1200, 2.9, 1)
 variation:setBeamWeapon(3, 90, -50, 1200, 2.9, 1)
 variation:setSpeed(70, 15, 10)
 
-template = ShipTemplate():setName("Piranha F12"):setClass("Frigate", "Cruiser: Light Artillery"):setModel("small_frigate_5") -- Could use a better 3D model.
+template = ShipTemplate():setName("Piranha F12"):setClass("Frigate", "Cruiser: Light Artillery"):setModel("small_frigate_5") -- TODO: Better 3D model selection
 template:setDescription([[Light artillery cruiser, smallest ship that is an exclusive broadside.]])
 template:setHull(70)
 template:setShields(30, 30)
@@ -64,7 +64,7 @@ template:setTubeDirection(5,  90):setWeaponTubeExclusiveFor(5, "HVLI")
 
 variation = template:copy("Piranha F12.M")
 variation:setDescription([[Modified F12 Piranha. In all aspects the same, except that it has made special modifications to fire Nukes next to the normal loadout. This does lower the overal missile storage.]])
-variation:setWeaponStorage("HVLI", 14)
+variation:setWeaponStorage("HVLI", 10)
 variation:setWeaponStorage("Homing", 4)
 variation:setWeaponStorage("Nuke", 2)
 
@@ -76,6 +76,16 @@ variation:setWeaponStorage("Homing", 5)
 variation:setTubeDirection(0,   0)
 variation:setTubeDirection(1, -90)
 variation:setTubeDirection(2,  90)
+
+template = ShipTemplate():setName("Ranus U"):setClass("Frigate", "Cruiser: Sniper"):setModel("dark_fighter_6") -- TODO: Better 3D model selection
+template:setDescription([[The sniper is intended to fly in, deal a quick large amount of damage from a distance, and head off again. It's the only basic frigate that carries nukes. Of all frigates, this is the smalles one.]])
+template:setHull(30)
+template:setShields(30, 5, 5)
+template:setSpeed(50, 6, 20)
+template:setTubes(3, 25.0)
+template:weaponTubeDisallowMissle(1, "Nuke"):weaponTubeDisallowMissle(2, "Nuke")
+template:setWeaponStorage("Homing", 6)
+template:setWeaponStorage("Nuke", 2)
 
 --Cruiser: stike craft (fast in/out)
 --Cruiser: tackler
