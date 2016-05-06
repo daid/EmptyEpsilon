@@ -18,6 +18,8 @@ private:
         GuiSlider* power_slider;
         GuiSlider* coolant_slider;
         GuiProgressbar* heat_bar;
+        GuiProgressbar* power_bar;
+        GuiProgressbar* coolant_bar;
     };
     SystemRow systems[SYS_COUNT];
 public:
