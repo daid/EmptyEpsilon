@@ -48,6 +48,9 @@ void ColorConfig::load()
     DEF_COLOR(overlay_low_power);
     DEF_COLOR(overlay_overheating);
 
+    DEF_COLOR(ship_waypoint_background);
+    DEF_COLOR(ship_waypoint_text);
+
     P<ResourceStream> stream = getResourceStream("gui/colors.ini");
     if(!stream)
         return;

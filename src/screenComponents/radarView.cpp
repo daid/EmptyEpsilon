@@ -343,11 +343,23 @@ void GuiRadarView::drawWaypoints(sf::RenderTarget& window)
 
         sf::Sprite object_sprite;
         textureManager.setTexture(object_sprite, "waypoint");
-        object_sprite.setColor(sf::Color(128, 128, 255, 192));
+        object_sprite.setColor(colorConfig.ship_waypoint_background);
         object_sprite.setPosition(screen_position - sf::Vector2f(0, 10));
         object_sprite.setScale(0.8, 0.8);
         window.draw(object_sprite);
-        drawText(window, sf::FloatRect(screen_position.x, screen_position.y - 10, 0, 0), string(n + 1), ACenter, 18, bold_font, sf::Color(0, 0, 0, 192));
+        drawText(window, sf::FloatRect(screen_position.x, screen_position.y - 10, 0, 0), string(n + 1), ACenter, 18, bold_font, colorConfig.ship_waypoint_text);
+        
+        if (style != Rectangular && sf::length(screen_position - radar_screen_center) > std::min(rect.width, rect.height) * 0.5f)
+        {
+            sf::Vector2f offset = my_spaceship->waypoints[n] - view_position;
+            screen_position = radar_screen_center + (offset / sf::length(offset) * std::min(rect.width, rect.height) * 0.4f);
+            
+            object_sprite.setPosition(screen_position);
+            object_sprite.setRotation(sf::vector2ToAngle(offset) - 90);
+            window.draw(object_sprite);
+
+            drawText(window, sf::FloatRect(screen_position.x, screen_position.y, 0, 0), string(n + 1), ACenter, 18, bold_font, colorConfig.ship_waypoint_text);
+        }
     }
 }
 
