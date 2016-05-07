@@ -2,7 +2,7 @@
 #include "logging.h"
 
 #ifdef __WIN32__
-    #include <Windows.h>
+    #include <windows.h>
 
     HMODULE UDMX_dll;
 
