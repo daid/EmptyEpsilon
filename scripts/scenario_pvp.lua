@@ -5,11 +5,6 @@ function init()
 	humanTroops = {}
 	kraylorTroops = {}
 	
-	template = ShipTemplate():setName("Troop Transport"):setModel("transport_2_1")
-    template:setHull(100)
-    template:setShields(50, 50)
-    template:setSpeed(100, 10, 10)
-	
 	-- stations
 	shangri_la = SpaceStation():setPosition(10000, 10000):setTemplate('Large Station'):setFaction("Independent"):setRotation(random(0, 360)):setCallSign("Shangri-La"):setCommsFunction(shangrilaComms)
 	
@@ -52,11 +47,11 @@ Support our glorious soldiers by preventing the heretics from harming our transp
 	create(Mine, 10, 5000, 10000, 10000, 10000)
 	
 	--spawn first wave
-	table.insert(humanTroops, CpuShip():setTemplate('Troop Transport'):setFaction("Human Navy"):setPosition(-7000, 15000):orderDock(shangri_la):setScannedByFaction("Human Navy", true))
+	table.insert(humanTroops, spawnTransport():setFaction("Human Navy"):setPosition(-7000, 15000):orderDock(shangri_la):setScannedByFaction("Human Navy", true))
 	CpuShip():setTemplate('Fighter'):setFaction("Human Navy"):setPosition(-7000, 15500):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Human Navy", true)
 	CpuShip():setTemplate('Fighter'):setFaction("Human Navy"):setPosition(-7000, 14500):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Human Navy", true)
 	
-	table.insert(kraylorTroops, CpuShip():setTemplate('Troop Transport'):setFaction("Kraylor"):setPosition(26500, 5000):orderDock(shangri_la):setScannedByFaction("Kraylor", true))
+	table.insert(kraylorTroops, spawnTransport():setFaction("Kraylor"):setPosition(26500, 5000):orderDock(shangri_la):setScannedByFaction("Kraylor", true))
 	CpuShip():setTemplate('Fighter'):setFaction("Kraylor"):setPosition(26500, 5500):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Kraylor", true)
 	CpuShip():setTemplate('Fighter'):setFaction("Kraylor"):setPosition(26500, 4500):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Kraylor", true)
 end
@@ -209,12 +204,12 @@ With the Kraylor flagship out of the way, we can land the final blow !]])
 	if wave_timer > 150 and (human_shipyard:isValid()) then
 		
 		line = random(0, 20) * 500
-		table.insert(humanTroops, CpuShip():setTemplate('Troop Transport'):setFaction("Human Navy"):setPosition(-7000, 5000 + line):orderDock(shangri_la):setScannedByFaction("Human Navy", true))
+		table.insert(humanTroops, spawnTransport():setFaction("Human Navy"):setPosition(-7000, 5000 + line):orderDock(shangri_la):setScannedByFaction("Human Navy", true))
 		CpuShip():setTemplate('Fighter'):setFaction("Human Navy"):setPosition(-7000, 5500 + line):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Human Navy", true)
 		CpuShip():setTemplate('Fighter'):setFaction("Human Navy"):setPosition(-7000, 4500 + line):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Human Navy", true)
 	
 		line = random(0, 20) * 500
-		table.insert(kraylorTroops, CpuShip():setTemplate('Troop Transport'):setFaction("Kraylor"):setPosition(27000, -5000 + line):orderDock(shangri_la):setScannedByFaction("Kraylor", true))
+		table.insert(kraylorTroops, spawnTransport():setFaction("Kraylor"):setPosition(27000, -5000 + line):orderDock(shangri_la):setScannedByFaction("Kraylor", true))
 		CpuShip():setTemplate('Fighter'):setFaction("Kraylor"):setPosition(27000, -5500 + line):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Kraylor", true)
 		CpuShip():setTemplate('Fighter'):setFaction("Kraylor"):setPosition(27000, -4500 + line):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Kraylor", true)
 		
@@ -242,6 +237,14 @@ With the Kraylor flagship out of the way, we can land the final blow !]])
 	if (not shangri_la:isValid()) then
 		--TODO
 	end
+end
+
+function spawnTransport()
+    ship = CpuShip():setTemplate("Transport1x1")
+    ship:setHullMax(100):setHull(100)
+    ship:setShieldsMax(50, 50):setShields(50, 50)
+    ship:setImpulseMaxSpeed(100):setRotationMaxSpeed(10)
+    return ship
 end
 
 -- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0)
