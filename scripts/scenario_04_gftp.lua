@@ -329,27 +329,27 @@ Whatever that means, it cannot be good.]])
 To summarize, get near the infected ships, find a backdoor using the frequency LEAST absorbed by their shields and deploy our patches. Godspeed Epsilon."]])
 
 			if korolev:isValid() then
-			korolev:setFaction("Ghosts"):setScanned(false):setCommsScript("gtfp_comms_hacked_ship.lua")
+			korolev:setFaction("Ghosts"):setScanned(false):setCommsFunction(commsHackedShip)
 			end
 			
 			if k1:isValid() then
-			k1:setFaction("Ghosts"):setScanned(false):setCommsScript("gtfp_comms_hacked_ship.lua")
+			k1:setFaction("Ghosts"):setScanned(false):setCommsFunction(commsHackedShip)
 			end
 			
 			if k2:isValid() then
-			k2:setFaction("Ghosts"):setScanned(false):setCommsScript("gtfp_comms_hacked_ship.lua")
+			k2:setFaction("Ghosts"):setScanned(false):setCommsFunction(commsHackedShip)
 			end
 			
 			if k3:isValid() then
-			k3:setFaction("Ghosts"):setScanned(false):setCommsScript("gtfp_comms_hacked_ship.lua")
+			k3:setFaction("Ghosts"):setScanned(false):setCommsFunction(commsHackedShip)
 			end
 			
 			if k4:isValid() then
-			k4:setFaction("Ghosts"):setScanned(false):setCommsScript("gtfp_comms_hacked_ship.lua")
+			k4:setFaction("Ghosts"):setScanned(false):setCommsFunction(commsHackedShip)
 			end
 			
 			if k5:isValid() then
-			k5:setFaction("Ghosts"):setScanned(false):setCommsScript("gtfp_comms_hacked_ship.lua")
+			k5:setFaction("Ghosts"):setScanned(false):setCommsFunction(commsHackedShip)
 			end
 		
 		main_mission = 7
