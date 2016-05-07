@@ -11,7 +11,6 @@
     bool __stdcall (*UDMX_Connected)();
     bool __stdcall (*UDMX_ChannelSet)(long Channel, long Value);
     bool __stdcall (*UDMX_ChannelsSet)(long ChannelCnt, long Channel, long* Value);
-    bool __stdcall (*UDMX_Info)();
     }
 #endif
 
@@ -55,12 +54,6 @@ bool UDMXDevice::configure(std::unordered_map<string, string> settings)
     if (UDMX_ChannelsSet == NULL)
     {
         LOG(ERROR) << "Failed to find ChannelsSet function in uDMX.dll";
-        return false;
-    }
-    UDMX_Info = (bool __stdcall (*)())GetProcAddress(UDMX_dll, "Info");
-    if (UDMX_Info == NULL)
-    {
-        LOG(ERROR) << "Failed to find Info function in uDMX.dll";
         return false;
     }
     
