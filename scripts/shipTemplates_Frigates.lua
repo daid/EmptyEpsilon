@@ -47,7 +47,7 @@ variation:setBeamWeapon(2, 90,  50, 1200, 2.9, 1)
 variation:setBeamWeapon(3, 90, -50, 1200, 2.9, 1)
 variation:setSpeed(70, 15, 10)
 
-template = ShipTemplate():setName("Piranha F12"):setClass("Frigate", "Cruiser: Light Artillery"):setModel("small_frigate_5") -- TODO: Better 3D model selection
+template = ShipTemplate():setName("Piranha F12"):setClass("Frigate", "Cruiser: Light Artillery"):setModel("HeavyCorvetteRed")
 template:setDescription([[Light artillery cruiser, smallest ship that is an exclusive broadside.]])
 template:setHull(70)
 template:setShields(30, 30)
@@ -77,7 +77,7 @@ variation:setTubeDirection(0,   0)
 variation:setTubeDirection(1, -90)
 variation:setTubeDirection(2,  90)
 
-template = ShipTemplate():setName("Ranus U"):setClass("Frigate", "Cruiser: Sniper"):setModel("dark_fighter_6") -- TODO: Better 3D model selection
+template = ShipTemplate():setName("Ranus U"):setClass("Frigate", "Cruiser: Sniper"):setModel("MissileCorvetteGreen")
 template:setDescription([[The sniper is intended to fly in, deal a quick large amount of damage from a distance, and head off again. It's the only basic frigate that carries nukes. Of all frigates, this is the smalles one.]])
 template:setHull(30)
 template:setShields(30, 5, 5)
@@ -89,9 +89,13 @@ template:setWeaponStorage("Nuke", 2)
 
 --Cruiser: stike craft (fast in/out)
 --Cruiser: tackler
---Cruiser: sniper
---Light transport: troop transport
---Light transport: 
+
+template = ShipTemplate():setName("Flavia"):setClass("Frigate", "Light transport"):setModel("LightCorvetteGrey")
+template:setDescription([[Small good or person transport. Cheaper then a freighter, usually used when high value or small amounts of cargo needs to be transported]])
+template:setHull(50)
+template:setShields(50, 50)
+template:setSpeed(30, 8, 10)
+
 --Support: mine layer
 --Support: mine sweeper
 --Support: science vessel
