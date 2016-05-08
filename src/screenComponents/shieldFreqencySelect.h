@@ -11,10 +11,8 @@ class GuiProgressbar;
 class GuiShieldFrequencySelect : public GuiElement
 {
 private:
-    GuiKeyValueDisplay* current_frequency;
     GuiSelector* new_frequency;
     GuiButton* calibrate_button;
-    GuiProgressbar* calibrate_progressbar;
 public:
     GuiShieldFrequencySelect(GuiContainer* owner, string id);
     

@@ -2,7 +2,6 @@
 #include "gameGlobalInfo.h"
 #include "engineeringScreen.h"
 
-#include "screenComponents/shieldFreqencySelect.h"
 #include "screenComponents/shipInternalView.h"
 #include "screenComponents/selfDestructButton.h"
 #include "screenComponents/alertOverlay.h"
@@ -120,8 +119,6 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
     for(float snap_point = 0.0; snap_point <= 10.0; snap_point += 2.5)
         coolant_slider->addSnapValue(snap_point, 0.1);
     coolant_slider->disable();
-
-    (new GuiShieldFrequencySelect(this, "SHIELD_FREQ"))->setPosition(-20, -470, ABottomRight)->setSize(320, 100);
 
     (new GuiShipInternalView(system_row_layouts, "SHIP_INTERNAL_VIEW", 48.0f))->setShip(my_spaceship)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }

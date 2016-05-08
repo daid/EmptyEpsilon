@@ -5,9 +5,11 @@ This class generally has jumpdrives or warpdrives. But lack the manouverbility t
 
 They come in 3 different subclasses:
 * Destroyer: Combat oriented ships. No science, no transport. Just death in a large package.
-* Freighter: Large scale transport ships. Most common here are the jump freighters, using specialized jumpdrives to cross large distances with large amounts of cargo.
 * Support: Large scale support roles. Drone carriers fall in this category. As well as mobile repair centers.
+* Freighter: Large scale transport ships. Most common here are the jump freighters, using specialized jumpdrives to cross large distances with large amounts of cargo.
 ----------------------------------------------------------]]
+
+--[[----------------------Destroyers----------------------]]
 
 template = ShipTemplate():setName("Atlantis X23"):setClass("Corvette", "Destroyer"):setModel("battleship_destroyer_1_upgraded")
 template:setDescription("Weakest of the destroyer class ships.")
@@ -78,6 +80,10 @@ variation:addDoor(8, 4, false);
 --Airlock doors
 --variation:addDoor(2, 2, false);
 --variation:addDoor(2, 5, false);
+
+--[[-----------------------Support-----------------------]]
+
+--[[----------------------Freighters----------------------]]
 
 for cnt=1,5 do
     template = ShipTemplate():setName("Personel Freighter " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_1_" .. cnt)

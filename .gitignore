@@ -27,3 +27,11 @@
 # OS temp files
 thumbs.db
 .DS_Store
+
+# output directory
+.bin
+
+# vim
+*.swp
+
+options.ini

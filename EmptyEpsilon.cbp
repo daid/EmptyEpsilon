@@ -537,6 +537,8 @@
 		<Unit filename="src/hardware/sACNDMXDevice.h" />
 		<Unit filename="src/hardware/serialDriver.cpp" />
 		<Unit filename="src/hardware/serialDriver.h" />
+		<Unit filename="src/hardware/uDMXDevice.cpp" />
+		<Unit filename="src/hardware/uDMXDevice.h" />
 		<Unit filename="src/hardware/virtualOutputDevice.cpp" />
 		<Unit filename="src/hardware/virtualOutputDevice.h" />
 		<Unit filename="src/httpScriptAccess.cpp" />
