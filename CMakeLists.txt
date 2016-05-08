@@ -20,6 +20,12 @@ if(APPLE)
 set(CMAKE_INSTALL_PREFIX "./")
 endif()
 
+# set INSTALL_PREFIX for linux so that the built binary is able to find resources
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D INSTALL_PREFIX=\\\"${CMAKE_INSTALL_PREFIX}\\\"")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D INSTALL_PREFIX=\\\"${CMAKE_INSTALL_PREFIX}\\\"")
+endif()
+
 ## ensure c++11 is used
 if(NOT ${CMAKE_VERSION} VERSION_LESS 3.1)
     set(CMAKE_CXX_STANDARD 11)
@@ -176,6 +182,7 @@ set(SOURCES
 	src/hardware/dmx512SerialDevice.cpp
 	src/hardware/enttecDMXProDevice.cpp
 	src/hardware/sACNDMXDevice.cpp
+	src/hardware/uDMXDevice.cpp
 	src/hardware/hardwareController.cpp
 	src/hardware/hardwareMappingEffects.cpp
 	src/hardware/hardwareOutputDevice.cpp
