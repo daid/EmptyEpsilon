@@ -164,4 +164,9 @@ REGISTER_MULTIPLAYER_ENUM(ESystem);
 /* Define script conversion function for the ShipTemplate::TemplateType enum. */
 template<> void convert<ShipTemplate::TemplateType>::param(lua_State* L, int& idx, ShipTemplate::TemplateType& tt);
 
+#ifdef _MSC_VER
+// MFC: GCC does proper external template instantiation, VC++ doesn't.
+#include "shipTemplate.hpp"
+#endif /* _MSC_VER */
+
 #endif//SHIP_TEMPLATE_H

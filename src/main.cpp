@@ -1,6 +1,8 @@
 #include <string.h>
+#ifndef _MSC_VER
 #include <unistd.h>
 #include <sys/stat.h>
+#endif
 #include <sys/types.h>
 #include "gui/mouseRenderer.h"
 #include "gui/debugRenderer.h"
@@ -309,6 +311,8 @@ int main(int argc, char** argv)
 
     if (PreferencesManager::get("headless") == "")
     {
+#ifndef _MSC_VER
+		// MFC TODO: Fix me -- save prefs to user prefs dir on Windows.
         if (getenv("HOME"))
         {
 #ifdef __WIN32__
@@ -317,7 +321,9 @@ int main(int argc, char** argv)
             mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 #endif
             PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
-        }else{
+        }else
+#endif
+		{
             PreferencesManager::save("options.ini");
         }
     }
