@@ -60,7 +60,8 @@ bool UDMXDevice::configure(std::unordered_map<string, string> settings)
     if (!UDMX_Connected())
     {
         LOG(ERROR) << "uDMX.dll reported device is not connected.";
-        return false;
+        LOG(ERROR) << "But resuming to use it anyhow.";
+        //return false;
     }
     
     return true;
