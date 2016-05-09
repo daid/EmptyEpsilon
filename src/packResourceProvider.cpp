@@ -2,6 +2,11 @@
 
 #include <dirent.h>
 #include <stdio.h>
+#ifdef __WIN32__
+#include <malloc.h>
+#else
+#include <alloca.h>
+#endif
 
 static inline int readInt(FILE* f)
 {
