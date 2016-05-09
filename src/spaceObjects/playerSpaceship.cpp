@@ -55,6 +55,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetShieldFrequency);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandAddWaypoint);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandRemoveWaypoint);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMoveWaypoint);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandActivateSelfDestruct);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCancelSelfDestruct);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandConfirmDestructCode);
@@ -107,15 +108,16 @@ static const int16_t CMD_SET_BEAM_SYSTEM_TARGET = 0x0019;
 static const int16_t CMD_SET_SHIELD_FREQUENCY = 0x001A;
 static const int16_t CMD_ADD_WAYPOINT = 0x001B;
 static const int16_t CMD_REMOVE_WAYPOINT = 0x001C;
-static const int16_t CMD_ACTIVATE_SELF_DESTRUCT = 0x001D;
-static const int16_t CMD_CANCEL_SELF_DESTRUCT = 0x001E;
-static const int16_t CMD_CONFIRM_SELF_DESTRUCT = 0x001F;
-static const int16_t CMD_COMBAT_MANEUVER_BOOST = 0x0020;
-static const int16_t CMD_COMBAT_MANEUVER_STRAFE = 0x0021;
-static const int16_t CMD_LAUNCH_PROBE = 0x0022;
-static const int16_t CMD_SET_ALERT_LEVEL = 0x0023;
-static const int16_t CMD_SET_SCIENCE_LINK = 0x0024;
-static const int16_t CMD_ABORT_DOCK = 0x0025;
+static const int16_t CMD_MOVE_WAYPOINT = 0x001D;
+static const int16_t CMD_ACTIVATE_SELF_DESTRUCT = 0x001E;
+static const int16_t CMD_CANCEL_SELF_DESTRUCT = 0x001F;
+static const int16_t CMD_CONFIRM_SELF_DESTRUCT = 0x0020;
+static const int16_t CMD_COMBAT_MANEUVER_BOOST = 0x0021;
+static const int16_t CMD_COMBAT_MANEUVER_STRAFE = 0x0022;
+static const int16_t CMD_LAUNCH_PROBE = 0x0023;
+static const int16_t CMD_SET_ALERT_LEVEL = 0x0024;
+static const int16_t CMD_SET_SCIENCE_LINK = 0x0025;
+static const int16_t CMD_ABORT_DOCK = 0x0026;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -970,7 +972,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         {
             sf::Vector2f position;
             packet >> position;
-            if (waypoints.size() < 32)
+            if (waypoints.size() < 9)
                 waypoints.push_back(position);
         }
         break;
@@ -980,6 +982,15 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             packet >> index;
             if (index >= 0 && index < int(waypoints.size()))
                 waypoints.erase(waypoints.begin() + index);
+        }
+        break;
+    case CMD_MOVE_WAYPOINT:
+        {
+            int32_t index;
+            sf::Vector2f position;
+            packet >> index >> position;
+            if (index >= 0 && index < int(waypoints.size()))
+                waypoints[index] = position;
         }
         break;
     case CMD_ACTIVATE_SELF_DESTRUCT:
@@ -1257,6 +1268,13 @@ void PlayerSpaceship::commandRemoveWaypoint(int32_t index)
 {
     sf::Packet packet;
     packet << CMD_REMOVE_WAYPOINT << index;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandMoveWaypoint(int32_t index, sf::Vector2f position)
+{
+    sf::Packet packet;
+    packet << CMD_MOVE_WAYPOINT << index << position;
     sendClientCommand(packet);
 }
 

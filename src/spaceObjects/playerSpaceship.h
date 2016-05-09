@@ -154,6 +154,7 @@ public:
     void commandSetShieldFrequency(int32_t frequency);
     void commandAddWaypoint(sf::Vector2f position);
     void commandRemoveWaypoint(int32_t index);
+    void commandMoveWaypoint(int32_t index, sf::Vector2f position);
     void commandActivateSelfDestruct();
     void commandCancelSelfDestruct();
     void commandConfirmDestructCode(int8_t index, uint32_t code);

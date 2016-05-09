@@ -28,6 +28,7 @@ public:
     PVector<SpaceObject> getTargets() { entries.update(); return entries; }
     P<SpaceObject> get() { entries.update(); if (entries.size() > 0) return entries[0]; return nullptr; }
     int getWaypointIndex();
+    void setWaypointIndex(int index);
     
     void setToClosestTo(sf::Vector2f position, float max_range, ESelectionType selection_type);
 };
