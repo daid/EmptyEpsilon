@@ -322,8 +322,10 @@ void ShipAI::runAttack(P<SpaceObject> target)
             {
                 float target_angle = calculateFiringSolution(target, n);
                 if (target_angle != std::numeric_limits<float>::infinity())
+                {
                     owner->weapon_tube[n].fire(target_angle);
-                missile_fire_delay = owner->weapon_tube[n].getLoadTimeConfig() / owner->weapon_tube_count / 2.0;
+                    missile_fire_delay = owner->weapon_tube[n].getLoadTimeConfig() / owner->weapon_tube_count / 2.0;
+                }
             }
         }
     }
