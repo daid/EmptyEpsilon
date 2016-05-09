@@ -83,6 +83,22 @@ variation:addDoor(8, 4, false);
 
 --[[-----------------------Support-----------------------]]
 
+-- The weapons-platform is a stationary platform with beam-weapons. It's extremely slow to turn, but it's beam weapons do a huge amount of damage.
+-- Smaller ships can dock to this platform to re-supply.
+template = ShipTemplate():setName("Defense platform"):setClass("Corvette", "Support"):setModel("space_station_4")
+template:setRadarTrace("radartrace_smallstation.png")
+template:setHull(150)
+template:setShields(120, 120, 120, 120, 120, 120)
+template:setSpeed(0, 0.5, 0)
+template:setDockClasses("Starfighter", "Frigate")
+--                  Arc, Dir, Range, CycleTime, Dmg
+template:setBeam(0, 30,   0, 4000.0, 1.5, 20)
+template:setBeam(1, 30,  60, 4000.0, 1.5, 20)
+template:setBeam(2, 30, 120, 4000.0, 1.5, 20)
+template:setBeam(3, 30, 180, 4000.0, 1.5, 20)
+template:setBeam(4, 30, 240, 4000.0, 1.5, 20)
+template:setBeam(5, 30, 300, 4000.0, 1.5, 20)
+
 --[[----------------------Freighters----------------------]]
 
 for cnt=1,5 do
