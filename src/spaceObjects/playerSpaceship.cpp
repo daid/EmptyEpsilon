@@ -117,12 +117,6 @@ static const int16_t CMD_SET_ALERT_LEVEL = 0x0023;
 static const int16_t CMD_SET_SCIENCE_LINK = 0x0024;
 static const int16_t CMD_ABORT_DOCK = 0x0025;
 
-template<> int convert<EAlertLevel>::returnType(lua_State* L, EAlertLevel l)
-{
-    lua_pushstring(L, alertLevelToString(l).c_str());
-    return 1;
-}
-
 string alertLevelToString(EAlertLevel level)
 {
     switch(level)
@@ -1367,3 +1361,7 @@ string PlayerSpaceship::getExportLine()
 {
     return "PlayerSpaceship():setTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" + getScriptExportModificationsOnTemplate();;
 }
+
+#ifndef _MSC_VER
+#include "playerSpaceship.hpp"
+#endif /* _MSC_VER */

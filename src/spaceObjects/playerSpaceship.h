@@ -198,4 +198,8 @@ REGISTER_MULTIPLAYER_ENUM(EAlertLevel);
 
 string alertLevelToString(EAlertLevel level);
 
+#ifdef _MSC_VER
+#include "playerSpaceship.hpp"
+#endif /* _MSC_VER */
+
 #endif//PLAYER_SPACESHIP_H
