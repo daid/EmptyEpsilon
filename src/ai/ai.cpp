@@ -372,7 +372,7 @@ void ShipAI::flyTowards(sf::Vector2f target, float keep_distance)
         }else{
             owner->warp_request = 0.0;
         }
-        if (distance > 10000 && owner->has_jump_drive && owner->jump_delay <= 0.0)
+        if (distance > 10000 && owner->has_jump_drive && owner->jump_delay <= 0.0 && owner->jump_drive_charge >= owner->jump_drive_max_distance)
         {
             if (rotation_diff < 1.0)
             {
@@ -383,8 +383,8 @@ void ShipAI::flyTowards(sf::Vector2f target, float keep_distance)
                     if (has_missiles)
                         jump -= 5000;
                 }
-                if (jump > 10000)
-                    jump = 10000;
+                if (jump > 15000)
+                    jump = 15000;
                 jump += random(-1500, 1500);
                 owner->initializeJump(jump / 1000);
             }

@@ -1,8 +1,15 @@
 #ifndef GAME_MASTER_TWEAK_H
 #define GAME_MASTER_TWEAK_H
 
-#include "gui/gui2.h"
-#include "spaceObjects/spaceship.h"
+#include "gui/gui2_panel.h"
+#include "missileWeaponData.h"
+#include "shipTemplate.h"
+
+class SpaceShip;
+class GuiTextEntry;
+class GuiSlider;
+class GuiSelector;
+class GuiToggleButton;
 
 class GuiTweakPage : public GuiElement
 {
@@ -31,6 +38,7 @@ private:
     P<SpaceShip> target;
 
     GuiTextEntry* type_name;
+    GuiTextEntry* callsign;
     GuiSelector* warp_selector;
     GuiSelector* jump_selector;
     GuiSlider* impulse_speed_slider;
@@ -50,11 +58,29 @@ class GuiShipTweakMissileWeapons : public GuiTweakPage
 private:
     P<SpaceShip> target;
 
-    GuiSelector* missile_tube_amount_selector;
     GuiSelector* missile_storage_amount_selector[MW_Count];
     GuiSelector* missile_current_amount_selector[MW_Count];
 public:
     GuiShipTweakMissileWeapons(GuiContainer* owner);
+
+    virtual void onDraw(sf::RenderTarget& window) override;
+    
+    virtual void open(P<SpaceShip> target) override;
+};
+
+class GuiShipTweakMissileTubes : public GuiTweakPage
+{
+private:
+    P<SpaceShip> target;
+
+    int tube_index;
+    GuiSelector* index_selector;
+    GuiSelector* missile_tube_amount_selector;
+    GuiSlider* direction_slider;
+    GuiSlider* load_time_slider;
+    GuiToggleButton* allowed_use[MW_Count];
+public:
+    GuiShipTweakMissileTubes(GuiContainer* owner);
 
     virtual void onDraw(sf::RenderTarget& window) override;
     

@@ -134,24 +134,15 @@ bool GuiIndicatorOverlays::onMouseDown(sf::Vector2f position)
 
 void GuiIndicatorOverlays::drawAlertLevel(sf::RenderTarget& window)
 {
-    sf::Color color;
     sf::Color multiply_color = sf::Color::White;
-    string text;
-    float text_size;
     
     switch(my_spaceship->alert_level)
     {
     case AL_RedAlert:
-        color = sf::Color(255, 0, 0, glow(32, 64, 3.0));
         multiply_color = sf::Color(255, 192, 192, 255);
-        text = "RED ALERT";
-        text_size = 70;
         break;
     case AL_YellowAlert:
-        color = sf::Color(255, 255, 0, glow(32, 64, 3.0));
         multiply_color = sf::Color(255, 255, 192, 255);
-        text = "YELLOW ALERT";
-        text_size = 60;
         break;
     case AL_Normal:
     default:
@@ -162,15 +153,4 @@ void GuiIndicatorOverlays::drawAlertLevel(sf::RenderTarget& window)
     overlay.setPosition(rect.left, rect.top);
     overlay.setFillColor(multiply_color);
     window.draw(overlay, sf::BlendMultiply);
-
-    sf::Sprite alert;
-    textureManager.setTexture(alert, "alert_overlay.png");
-    alert.setColor(color);
-    alert.setPosition(window.getView().getSize() / 2.0f);
-    window.draw(alert);
-    sf::Text alert_text(text, *main_font, text_size);
-    alert_text.setColor(color);
-    alert_text.setOrigin(sf::Vector2f(alert_text.getLocalBounds().width / 2.0f, alert_text.getLocalBounds().height / 2.0f + alert_text.getLocalBounds().top));
-    alert_text.setPosition(window.getView().getSize() / 2.0f - sf::Vector2f(0, 300));
-    window.draw(alert_text);
 }

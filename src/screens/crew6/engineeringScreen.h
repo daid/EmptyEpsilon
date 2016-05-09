@@ -1,8 +1,16 @@
 #ifndef ENGINEERING_SCREEN_H
 #define ENGINEERING_SCREEN_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_overlay.h"
 #include "shipTemplate.h"
+
+class GuiKeyValueDisplay;
+class GuiLabel;
+class GuiSlider;
+class GuiAutoLayout;
+class GuiArrow;
+class GuiToggleButton;
+class GuiProgressbar;
 
 class EngineeringScreen : public GuiOverlay
 {

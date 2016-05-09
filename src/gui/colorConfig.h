@@ -38,6 +38,9 @@ public:
     sf::Color overlay_low_power;
     sf::Color overlay_overheating;
     
+    sf::Color ship_waypoint_background;
+    sf::Color ship_waypoint_text;
+    
     void load();
 };
 extern ColorConfig colorConfig;

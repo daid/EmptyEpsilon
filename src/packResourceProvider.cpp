@@ -2,6 +2,11 @@
 
 #include <dirent.h>
 #include <stdio.h>
+#ifdef __WIN32__
+#include <malloc.h>
+#else
+#include <alloca.h>
+#endif
 
 static inline int readInt(FILE* f)
 {
@@ -11,6 +16,17 @@ static inline int readInt(FILE* f)
     return (ret & 0xFF) << 24 | (ret & 0xFF00) << 8 | (ret & 0xFF0000) >> 8 | (ret & 0xFF000000) >> 24;
 #endif
     return ret;
+}
+
+static inline string readString(FILE *f)
+{
+    int8_t len = 0;
+    fread(&len, sizeof(int8_t), 1, f);
+    // MFC - MSVC doesn't support non-const [] initializers
+    char *buffer = (char*)alloca(len + 1);
+    fread(buffer, len, 1, f);
+    buffer[len] = '\0';
+    return string(buffer);
 }
 
 PackResourceProvider::PackResourceProvider(string filename)
@@ -27,15 +43,10 @@ PackResourceProvider::PackResourceProvider(string filename)
         LOG(INFO) << "Loaded: " << filename << " with " << file_count << " files";
         for(int n=0; n<file_count; n++)
         {
-            int8_t filename_size = 0;
-            fread(&filename_size, sizeof(int8_t), 1, f);
-            char buffer[filename_size + 1];
-            fread(&buffer, filename_size, 1, f);
-            buffer[filename_size] = '\0';
+            string fileName = readString(f);
             int position = readInt(f);
             int size = readInt(f);
-            
-            files[string(buffer)] = PackResourceInfo(position, size);
+            files[fileName] = PackResourceInfo(position, size);
         }
     }
     fclose(f);

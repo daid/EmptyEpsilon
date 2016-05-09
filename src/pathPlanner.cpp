@@ -58,7 +58,7 @@ void PathPlannerManager::update(float delta)
                     small_objects[hashPosition(it->source->getPosition())].push_back(PathPlannerAvoidObject(it->source, it->size));
                 }
 
-                it = big_objects.erase(it);
+                it = h_it->second.erase(it);
             }
         }
     }

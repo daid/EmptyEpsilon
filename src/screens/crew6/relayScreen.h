@@ -2,9 +2,13 @@
 #define RELAY_SCREEN_H
 
 #include "screenComponents/targetsContainer.h"
-#include "gui/gui2.h"
+#include "gui/gui2_overlay.h"
 
 class GuiRadarView;
+class GuiKeyValueDisplay;
+class GuiAutoLayout;
+class GuiButton;
+class GuiToggleButton;
 
 class RelayScreen : public GuiOverlay
 {
@@ -13,11 +17,13 @@ private:
     {
         TargetSelection,
         WaypointPlacement,
-        LaunchProbe
+        LaunchProbe,
+        MoveWaypoint
     };
 
     EMode mode;
     TargetsContainer targets;
+    int drag_waypoint_index;
     GuiRadarView* radar;
 
     GuiKeyValueDisplay* info_callsign;
@@ -25,7 +31,7 @@ private:
 
     GuiKeyValueDisplay* info_reputation;
     GuiAutoLayout* option_buttons;
-    GuiButton* link_to_science_button;
+    GuiToggleButton* link_to_science_button;
     GuiButton* delete_waypoint_button;
     GuiButton* launch_probe_button;
 

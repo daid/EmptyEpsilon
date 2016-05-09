@@ -5,9 +5,11 @@ This class generally has jumpdrives or warpdrives. But lack the manouverbility t
 
 They come in 3 different subclasses:
 * Destroyer: Combat oriented ships. No science, no transport. Just death in a large package.
-* Freighter: Large scale transport ships. Most common here are the jump freighters, using specialized jumpdrives to cross large distances with large amounts of cargo.
 * Support: Large scale support roles. Drone carriers fall in this category. As well as mobile repair centers.
+* Freighter: Large scale transport ships. Most common here are the jump freighters, using specialized jumpdrives to cross large distances with large amounts of cargo.
 ----------------------------------------------------------]]
+
+--[[----------------------Destroyers----------------------]]
 
 template = ShipTemplate():setName("Atlantis X23"):setClass("Corvette", "Destroyer"):setModel("battleship_destroyer_1_upgraded")
 template:setDescription("Weakest of the destroyer class ships.")
@@ -78,3 +80,85 @@ variation:addDoor(8, 4, false);
 --Airlock doors
 --variation:addDoor(2, 2, false);
 --variation:addDoor(2, 5, false);
+
+--[[-----------------------Support-----------------------]]
+
+-- The weapons-platform is a stationary platform with beam-weapons. It's extremely slow to turn, but it's beam weapons do a huge amount of damage.
+-- Smaller ships can dock to this platform to re-supply.
+template = ShipTemplate():setName("Defense platform"):setClass("Corvette", "Support"):setModel("space_station_4")
+template:setRadarTrace("radartrace_smallstation.png")
+template:setHull(150)
+template:setShields(120, 120, 120, 120, 120, 120)
+template:setSpeed(0, 0.5, 0)
+template:setDockClasses("Starfighter", "Frigate")
+--                  Arc, Dir, Range, CycleTime, Dmg
+template:setBeam(0, 30,   0, 4000.0, 1.5, 20)
+template:setBeam(1, 30,  60, 4000.0, 1.5, 20)
+template:setBeam(2, 30, 120, 4000.0, 1.5, 20)
+template:setBeam(3, 30, 180, 4000.0, 1.5, 20)
+template:setBeam(4, 30, 240, 4000.0, 1.5, 20)
+template:setBeam(5, 30, 300, 4000.0, 1.5, 20)
+
+--[[----------------------Freighters----------------------]]
+
+for cnt=1,5 do
+    template = ShipTemplate():setName("Personel Freighter " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_1_" .. cnt)
+    template:setDescription([[Transport freighter designed for troop and personel transport.]])
+    template:setHull(100)
+    template:setShields(50, 50)
+    template:setSpeed(60 - 5 * cnt, 6, 10)
+    template:setRadarTrace("radar_transport.png")
+    
+    if cnt > 2 then
+        variation = template:copy("Personel Jump Freighter " .. cnt)
+        variation:setJumpDrive(true)
+    end
+
+    template = ShipTemplate():setName("Goods Freighter " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_2_" .. cnt)
+    template:setDescription([[Transport freighter designed for transport of bulk goods.]])
+    template:setHull(100)
+    template:setShields(50, 50)
+    template:setSpeed(60 - 5 * cnt, 6, 10)
+    template:setRadarTrace("radar_transport.png")
+    
+    if cnt > 2 then
+        variation = template:copy("Goods Jump Freighter " .. cnt)
+        variation:setJumpDrive(true)
+    end
+    
+    template = ShipTemplate():setName("Garbage Freighter " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_3_" .. cnt)
+    template:setDescription([[Transport freighter designed for transport of garbage.]])
+    template:setHull(100)
+    template:setShields(50, 50)
+    template:setSpeed(60 - 5 * cnt, 6, 10)
+    template:setRadarTrace("radar_transport.png")
+    
+    if cnt > 2 then
+        variation = template:copy("Garbage Jump Freighter " .. cnt)
+        variation:setJumpDrive(true)
+    end
+
+    template = ShipTemplate():setName("Equipment Freighter " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_4_" .. cnt)
+    template:setDescription([[Transport freighter designed for transport of equipment.]])
+    template:setHull(100)
+    template:setShields(50, 50)
+    template:setSpeed(60 - 5 * cnt, 6, 10)
+    template:setRadarTrace("radar_transport.png")
+    
+    if cnt > 2 then
+        variation = template:copy("Equipment Jump Freighter " .. cnt)
+        variation:setJumpDrive(true)
+    end
+
+    template = ShipTemplate():setName("Fuel Freighter " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_5_" .. cnt)
+    template:setDescription([[Transport freighter designed for transport of fuels.]])
+    template:setHull(100)
+    template:setShields(50, 50)
+    template:setSpeed(60 - 5 * cnt, 6, 10)
+    template:setRadarTrace("radar_transport.png")
+    
+    if cnt > 2 then
+        variation = template:copy("Fuel Jump Freighter " .. cnt)
+        variation:setJumpDrive(true)
+    end
+end

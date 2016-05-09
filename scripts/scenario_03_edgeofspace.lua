@@ -241,7 +241,7 @@ function update(delta)
 			kraylor_warning = 1
 		end
 		
-		--When the players get within 40km of K-Endline they receive a message from Central Command telling them to be careful not to start a war.
+		--When the players get within 40u of K-Endline they receive a message from Central Command telling them to be careful not to start a war.
 		if distance(Player, Kraylor_Eline) < 40000 and command_warning == 0 then
 			Central_Command:sendCommsMessage(Player, [[Kraylor have their Endline station near our E.O.S Scope.
 			

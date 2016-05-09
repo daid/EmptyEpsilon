@@ -4,6 +4,8 @@
 #include "powerDamageIndicator.h"
 #include "snapSlider.h"
 
+#include "gui/gui2_progressbar.h"
+
 GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {

@@ -2,14 +2,24 @@
 #include "gameGlobalInfo.h"
 #include "engineeringScreen.h"
 
-#include "screenComponents/shieldFreqencySelect.h"
 #include "screenComponents/shipInternalView.h"
 #include "screenComponents/selfDestructButton.h"
+#include "screenComponents/alertOverlay.h"
+
+#include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_autolayout.h"
+#include "gui/gui2_togglebutton.h"
+#include "gui/gui2_slider.h"
+#include "gui/gui2_progressbar.h"
+#include "gui/gui2_arrow.h"
+#include "gui/gui2_image.h"
+#include "gui/gui2_panel.h"
 
 EngineeringScreen::EngineeringScreen(GuiContainer* owner)
 : GuiOverlay(owner, "ENGINEERING_SCREEN", colorConfig.background), selected_system(SYS_None)
 {
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+    (new AlertLevelOverlay(this));
 
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
@@ -109,8 +119,6 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
     for(float snap_point = 0.0; snap_point <= 10.0; snap_point += 2.5)
         coolant_slider->addSnapValue(snap_point, 0.1);
     coolant_slider->disable();
-
-    (new GuiShieldFrequencySelect(this, "SHIELD_FREQ"))->setPosition(-20, -470, ABottomRight)->setSize(320, 100);
 
     (new GuiShipInternalView(system_row_layouts, "SHIP_INTERNAL_VIEW", 48.0f))->setShip(my_spaceship)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }

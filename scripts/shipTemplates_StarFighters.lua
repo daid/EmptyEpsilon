@@ -30,6 +30,36 @@ variation:setShields(22)
 variation:setSpeed(125, 32, 25)
 variation:setBeam(0, 30, 0, 1100.0, 4.0, 2.5)
 
+variation = variation:copy("MP52 Hornet"):setType("playership")
+variation:setDescription([[Upgraded version of the upgraded MU52 Hornet. Specially for players.]])
+variation:setSpeed(125, 32, 40)
+variation:setCombatManeuver(600, 0)
+variation:setBeam(0, 30, 5, 1100.0, 4.0, 2.5)
+variation:setBeam(1, 30,-5, 1100.0, 4.0, 2.5)
+variation:setEnergyStorage(400)
+
+variation:addRoomSystem(3, 0, 1, 1, "Maneuver");
+variation:addRoomSystem(1, 0, 2, 1, "BeamWeapons");
+
+variation:addRoomSystem(0, 1, 1, 2, "RearShield");
+variation:addRoomSystem(1, 1, 2, 2, "Reactor");
+variation:addRoomSystem(3, 1, 2, 1, "Warp");
+variation:addRoomSystem(3, 2, 2, 1, "JumpDrive");
+variation:addRoomSystem(5, 1, 1, 2, "FrontShield");
+
+variation:addRoomSystem(1, 3, 2, 1, "MissileSystem");
+variation:addRoomSystem(3, 3, 1, 1, "Impulse");
+
+variation:addDoor(2, 1, true);
+variation:addDoor(3, 1, true);
+variation:addDoor(1, 1, false);
+variation:addDoor(3, 1, false);
+variation:addDoor(3, 2, false);
+variation:addDoor(3, 3, true);
+variation:addDoor(2, 3, true);
+variation:addDoor(5, 1, false);
+variation:addDoor(5, 2, false);
+
 template = ShipTemplate():setName("Adder MK5"):setClass("Starfighter", "Gunship"):setModel("AdlerLongRangeScoutYellow")
 template:setDescription([[The fifth iteration of the Adder proved to be a large success with pirates and law officers.
 It is cheap, easy to maintain, packs a decent punch, fast.]])

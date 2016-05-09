@@ -11,4 +11,6 @@
 
 #endif
 
+#define DISTANCE_UNIT_1K "u"
+
 #endif//FEATURES_H

@@ -20,8 +20,8 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDefaultAI);
     /// Set the 3D model to be used for this template. The model referers to data set in the model_data.lua file.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setModel);
-    /// Set the size class for this ship. Ships of a smaller size-class can dock on ships of a larger size class. NOTE: This behaviour might change in the future.
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSizeClass);
+    /// Supply a list of ship classes that can be docked to this ship. setDockClasses("Starfighter") will allow all small starfighter type ships to dock with this ship.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDockClasses);
     /// Set the amount of energy available for this ship. Note that only player ships use energy. So setting this for anything else is useless.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setEnergyStorage);
     /// Setup a beam weapon.
@@ -63,46 +63,6 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, copy);
 }
 
-/* Define script conversion function for the ESystem enum. */
-template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es)
-{
-    string str = string(luaL_checkstring(L, idx++)).lower();
-    if (str == "reactor")
-        es = SYS_Reactor;
-    else if (str == "beamweapons")
-        es = SYS_BeamWeapons;
-    else if (str == "missilesystem")
-        es = SYS_MissileSystem;
-    else if (str == "maneuver")
-        es = SYS_Maneuver;
-    else if (str == "impulse")
-        es = SYS_Impulse;
-    else if (str == "warp")
-        es = SYS_Warp;
-    else if (str == "jumpdrive")
-        es = SYS_JumpDrive;
-    else if (str == "frontshield")
-        es = SYS_FrontShield;
-    else if (str == "rearshield")
-        es = SYS_RearShield;
-    else
-        es = SYS_None;
-}
-
-/* Define script conversion function for the ShipTemplate::TemplateType enum. */
-template<> void convert<ShipTemplate::TemplateType>::param(lua_State* L, int& idx, ShipTemplate::TemplateType& tt)
-{
-    string str = string(luaL_checkstring(L, idx++)).lower();
-    if (str == "ship")
-        tt = ShipTemplate::Ship;
-    else if (str == "playership")
-        tt = ShipTemplate::PlayerShip;
-    else if (str == "station")
-        tt = ShipTemplate::Station;
-    else
-        tt = ShipTemplate::Ship;
-}
-
 std::unordered_map<string, P<ShipTemplate> > ShipTemplate::templateMap;
 
 ShipTemplate::ShipTemplate()
@@ -112,7 +72,6 @@ ShipTemplate::ShipTemplate()
     type = Ship;
     class_name = "No class";
     class_name = "No sub-class";
-    size_class = 10;
     energy_storage_amount = 1000;
     repair_crew_count = 3;
     weapon_tube_count = 0;
@@ -343,9 +302,9 @@ void ShipTemplate::setDefaultAI(string default_ai_name)
     this->default_ai_name = default_ai_name;
 }
 
-void ShipTemplate::setSizeClass(int size_class)
+void ShipTemplate::setDockClasses(std::vector<string> classes)
 {
-    this->size_class = size_class;
+    can_be_docked_by_class = std::unordered_set<string>(classes.begin(), classes.end());
 }
 
 void ShipTemplate::setSpeed(float impulse, float turn, float acceleration)
@@ -415,7 +374,7 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->type = type;
     result->model_data = model_data;
 
-    result->size_class = size_class;
+    result->can_be_docked_by_class = can_be_docked_by_class;
     result->energy_storage_amount = energy_storage_amount;
     result->repair_crew_count = repair_crew_count;
     result->default_ai_name = default_ai_name;
@@ -480,3 +439,7 @@ ShipTemplate::TemplateType ShipTemplate::getType()
 {
     return type;
 }
+
+#ifndef _MSC_VER
+#include "shipTemplate.hpp"
+#endif /* _MSC_VER */

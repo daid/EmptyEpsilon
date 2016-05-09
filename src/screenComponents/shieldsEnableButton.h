@@ -1,7 +1,10 @@
 #ifndef GUI_SHIELDS_ENABLE_H
 #define GUI_SHIELDS_ENABLE_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
+
+class GuiToggleButton;
+class GuiProgressbar;
 
 class GuiShieldsEnableButton : public GuiElement
 {

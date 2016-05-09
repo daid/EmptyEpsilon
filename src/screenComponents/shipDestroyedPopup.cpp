@@ -2,6 +2,11 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 
+#include "gui/gui2_canvas.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_button.h"
+#include "gui/gui2_panel.h"
+
 GuiShipDestroyedPopup::GuiShipDestroyedPopup(GuiCanvas* owner)
 : GuiElement(owner, "SHIP_DESTROYED_POPUP"), owner(owner)
 {

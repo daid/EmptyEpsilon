@@ -3,6 +3,10 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "powerDamageIndicator.h"
 
+#include "gui/gui2_togglebutton.h"
+#include "gui/gui2_progressbar.h"
+#include "gui/gui2_label.h"
+
 GuiShieldsEnableButton::GuiShieldsEnableButton(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
@@ -33,7 +37,7 @@ void GuiShieldsEnableButton::onDraw(sf::RenderTarget& window)
             button->show();
             button->setValue(my_spaceship->shields_active);
             bar->hide();
-            button->setText(my_spaceship->shields_active ? "Shields: ON" : "Shields: OFF");
+            button->setText(frequencyToString(my_spaceship->shield_frequency) + (my_spaceship->shields_active ? " Shields: ON" : " Shields: OFF"));
         }
     }
 }

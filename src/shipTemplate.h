@@ -2,6 +2,7 @@
 #define SHIP_TEMPLATE_H
 
 #include <unordered_map>
+#include <unordered_set>
 #include "engine.h"
 #include "modelData.h"
 
@@ -81,9 +82,9 @@ public:
     P<ModelData> model_data;
 
     /*!
-     * Size class is used to check if one ship can dock with another (eg; other ship needs to be way bigger)
+     * List of ship classes that can dock with this ship. (only used for ship2ship docking)
      */
-    int size_class;
+    std::unordered_set<string> can_be_docked_by_class;
     float energy_storage_amount;
     int repair_crew_count;
     string default_ai_name;
@@ -112,7 +113,7 @@ public:
     void setDescription(string description);
     void setModel(string model_name);
     void setDefaultAI(string default_ai_name);
-    void setSizeClass(int size_class);
+    void setDockClasses(std::vector<string> classes);
     void setMesh(string model, string color_texture, string specular_texture, string illumination_texture);
     void setEnergyStorage(float energy_amount);
     void setRepairCrewCount(int amount);
@@ -162,5 +163,10 @@ REGISTER_MULTIPLAYER_ENUM(ESystem);
 
 /* Define script conversion function for the ShipTemplate::TemplateType enum. */
 template<> void convert<ShipTemplate::TemplateType>::param(lua_State* L, int& idx, ShipTemplate::TemplateType& tt);
+
+#ifdef _MSC_VER
+// MFC: GCC does proper external template instantiation, VC++ doesn't.
+#include "shipTemplate.hpp"
+#endif /* _MSC_VER */
 
 #endif//SHIP_TEMPLATE_H

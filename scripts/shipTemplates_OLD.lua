@@ -170,7 +170,7 @@ template:setDescription([[The tugboat is a reliable, but small and un-armed tran
 	-- Bomber mine
 
 -- Mine ship -- 
-	-- deploys some mines (the ones that don't explode with a km blast radius) and use long range beam weapons to fight
+	-- deploys some mines (the ones that don't explode with a 1u blast radius) and use long range beam weapons to fight
 
 --[[ Enemy ship types --]]
 -- Fighters are quick agile ships that do not do a lot of damage, but usually come in larger groups. They are easy to take out, but should not be underestimated.
@@ -266,7 +266,6 @@ template:setSpeed(30, 1.5, 5)
 -- The battle station is a huge ship with many defensive features. It can be docked by smaller ships.
 template = ShipTemplate():setName("Battlestation"):setModel("Ender Battlecruiser")
 template:setRadarTrace("radar_battleship.png")
-template:setSizeClass(11)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 120, -90, 2500.0, 6.1, 4)
 template:setBeam(1, 120, -90, 2500.0, 6.0, 4)

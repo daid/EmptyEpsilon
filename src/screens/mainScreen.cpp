@@ -9,8 +9,11 @@
 #include "screenComponents/selfDestructIndicator.h"
 #include "screenComponents/globalMessage.h"
 #include "screenComponents/jumpIndicator.h"
-
+#include "screenComponents/viewport3d.h"
+#include "screenComponents/radarView.h"
 #include "screenComponents/shipDestroyedPopup.h"
+
+#include "gui/gui2_overlay.h"
 
 ScreenMainScreen::ScreenMainScreen()
 {

@@ -8,6 +8,13 @@
 #include "screens/topDownScreen.h"
 #include "screens/gm/gameMasterScreen.h"
 
+#include "gui/gui2_autolayout.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_selector.h"
+#include "gui/gui2_togglebutton.h"
+#include "gui/gui2_panel.h"
+#include "gui/gui2_listbox.h"
+
 ShipSelectionScreen::ShipSelectionScreen()
 {
     new GuiOverlay(this, "", colorConfig.background);

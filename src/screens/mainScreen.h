@@ -2,9 +2,10 @@
 #define MAIN_SCREEN_H
 
 #include "engine.h"
-#include "gui/gui2.h"
-#include "screenComponents/viewport3d.h"
-#include "screenComponents/radarView.h"
+#include "gui/gui2_canvas.h"
+
+class GuiViewport3D;
+class GuiRadarView;
 
 class ScreenMainScreen : public GuiCanvas, public Updatable
 {

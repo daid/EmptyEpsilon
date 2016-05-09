@@ -2,6 +2,8 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 
+#include "gui/gui2_advancedscrolltext.h"
+
 ShipLogScreen::ShipLogScreen(GuiContainer* owner)
 : GuiOverlay(owner, "SHIP_LOG_SCREEN", colorConfig.background)
 {

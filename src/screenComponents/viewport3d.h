@@ -1,7 +1,7 @@
 #ifndef GUI_VIEWPORT_3D_H
 #define GUI_VIEWPORT_3D_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
 
 class GuiViewport3D : public GuiElement
 {

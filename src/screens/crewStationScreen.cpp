@@ -7,6 +7,9 @@
 #include "screenComponents/noiseOverlay.h"
 #include "screenComponents/shipDestroyedPopup.h"
 
+#include "gui/gui2_togglebutton.h"
+#include "gui/gui2_panel.h"
+
 CrewStationScreen::CrewStationScreen()
 {
     select_station_button = new GuiButton(this, "", "", [this]()

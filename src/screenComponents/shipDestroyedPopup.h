@@ -1,7 +1,10 @@
 #ifndef GUI_SHIP_DESTROYED_RETURN_TIMEOUT_H
 #define GUI_SHIP_DESTROYED_RETURN_TIMEOUT_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
+
+class GuiPanel;
+class GuiCanvas;
 
 class GuiShipDestroyedPopup : public GuiElement
 {

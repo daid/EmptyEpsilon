@@ -70,26 +70,6 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, addBroadcast);
 }
 
-/* Define script conversion function for the EMainScreenSetting enum. */
-template<> void convert<EMainScreenSetting>::param(lua_State* L, int& idx, EMainScreenSetting& mss)
-{
-    string str = string(luaL_checkstring(L, idx++)).lower();
-    if (str == "front")
-        mss = MSS_Front;
-    else if (str == "back")
-        mss = MSS_Back;
-    else if (str == "left")
-        mss = MSS_Left;
-    else if (str == "right")
-        mss = MSS_Right;
-    else if (str == "tactical")
-        mss = MSS_Tactical;
-    else if (str == "longrange")
-        mss = MSS_LongRange;
-    else
-        mss = MSS_Front;
-}
-
 SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_range)
 : ShipTemplateBasedObject(50, multiplayerClassName, multiplayer_significant_range)
 {
@@ -554,7 +534,7 @@ void SpaceShip::update(float delta)
         weapon_tube[n].update(delta);
     }
 
-    model_info.engine_scale = std::min(1.0, std::max(fabs(getAngularVelocity() / turn_speed), fabs(current_impulse)));
+    model_info.engine_scale = std::min(1.0f, (float) std::max(fabs(getAngularVelocity() / turn_speed), fabs(current_impulse)));
     if (has_jump_drive && jump_delay > 0.0f)
         model_info.warp_scale = (10.0f - jump_delay) / 10.0f;
     else
@@ -601,7 +581,7 @@ bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)
     P<SpaceShip> ship = obj;
     if (!ship || !ship->ship_template)
         return false;
-    return ship_template->size_class > ship->ship_template->size_class;
+    return ship_template->can_be_docked_by_class.count(ship->ship_template->getClass()) > 0;
 }
 
 void SpaceShip::collide(Collisionable* other, float force)
@@ -1115,3 +1095,7 @@ string frequencyToString(int frequency)
 {
     return string(400 + (frequency * 20)) + "THz";
 }
+
+#ifndef _MSC_VER
+#include "spaceship.hpp"
+#endif

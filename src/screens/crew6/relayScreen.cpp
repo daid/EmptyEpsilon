@@ -8,6 +8,11 @@
 #include "screenComponents/openCommsButton.h"
 #include "screenComponents/commsOverlay.h"
 
+#include "gui/gui2_autolayout.h"
+#include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_selector.h"
+#include "gui/gui2_togglebutton.h"
+
 RelayScreen::RelayScreen(GuiContainer* owner)
 : GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background), mode(TargetSelection)
 {
@@ -17,13 +22,24 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     radar->setAutoCentering(false);
     radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     radar->setCallbacks(
-        [this](sf::Vector2f position) {
+        [this](sf::Vector2f position) { //down
+            if (mode == TargetSelection && targets.getWaypointIndex() > -1 && my_spaceship)
+            {
+                if (sf::length(my_spaceship->waypoints[targets.getWaypointIndex()] - position) < 1000.0)
+                {
+                    mode = MoveWaypoint;
+                    drag_waypoint_index = targets.getWaypointIndex();
+                }
+            }
             mouse_down_position = position;
         },
-        [this](sf::Vector2f position) {
-            radar->setViewPosition(radar->getViewPosition() - (position - mouse_down_position));
+        [this](sf::Vector2f position) { //drag
+            if (mode == TargetSelection)
+                radar->setViewPosition(radar->getViewPosition() - (position - mouse_down_position));
+            if (mode == MoveWaypoint && my_spaceship)
+                my_spaceship->commandMoveWaypoint(drag_waypoint_index, position);
         },
-        [this](sf::Vector2f position) {
+        [this](sf::Vector2f position) { //up
             switch(mode)
             {
             case TargetSelection:
@@ -34,6 +50,10 @@ RelayScreen::RelayScreen(GuiContainer* owner)
                     my_spaceship->commandAddWaypoint(position);
                 mode = TargetSelection;
                 option_buttons->show();
+                break;
+            case MoveWaypoint:
+                mode = TargetSelection;
+                targets.setWaypointIndex(drag_waypoint_index);
                 break;
             case LaunchProbe:
                 if (my_spaceship)
@@ -65,8 +85,11 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     option_buttons = new GuiAutoLayout(this, "BUTTONS", GuiAutoLayout::LayoutVerticalTopToBottom);
     option_buttons->setPosition(20, 50, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", &targets))->setSize(GuiElement::GuiSizeMax, 50);
-    link_to_science_button = new GuiButton(option_buttons, "LINK_TO_SCIENCE", "Link to Science", [this](){
-        my_spaceship->commandSetScienceLink(targets.get()->getMultiplayerId());
+    link_to_science_button = new GuiToggleButton(option_buttons, "LINK_TO_SCIENCE", "Link to Science", [this](bool value){
+        if (value)
+            my_spaceship->commandSetScienceLink(targets.get()->getMultiplayerId());
+        else
+            my_spaceship->commandSetScienceLink(-1);
     });
     link_to_science_button->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", "Place Waypoint", [this]() {
@@ -181,14 +204,17 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
 
         if (probe && probe->owner_id == my_spaceship->getMultiplayerId() && probe->canBeTargetedBy(my_spaceship))
         {
+            link_to_science_button->setValue(my_spaceship->linked_science_probe_id == probe->getMultiplayerId());
             link_to_science_button->enable();
         }
         else
         {
+            link_to_science_button->setValue(false);
             link_to_science_button->disable();
         }
     }else{
         link_to_science_button->disable();
+        link_to_science_button->setValue(false);
         info_callsign->setValue("-");
     }
     if (my_spaceship)

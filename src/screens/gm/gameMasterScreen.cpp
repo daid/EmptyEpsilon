@@ -8,6 +8,16 @@
 #include "spaceObjects/spaceStation.h"
 #include "spaceObjects/wormHole.h"
 
+#include "screenComponents/radarView.h"
+
+#include "gui/gui2_togglebutton.h"
+#include "gui/gui2_selector.h"
+#include "gui/gui2_autolayout.h"
+#include "gui/gui2_listbox.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_textentry.h"
+
 GameMasterScreen::GameMasterScreen()
 : click_and_drag_state(CD_None)
 {

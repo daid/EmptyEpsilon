@@ -12,8 +12,12 @@
 #include "menus/optionsMenu.h"
 #include "menus/serverBrowseMenu.h"
 #include "screens/gm/gameMasterScreen.h"
-
 #include "screenComponents/rotatingModelView.h"
+
+#include "gui/gui2_image.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_button.h"
+
 class DebugAllModelView : public GuiCanvas
 {
 public:

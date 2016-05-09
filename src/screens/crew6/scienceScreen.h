@@ -2,12 +2,14 @@
 #define SCIENCE_SCREEN_H
 
 #include "screenComponents/targetsContainer.h"
-#include "gui/gui2.h"
+#include "gui/gui2_overlay.h"
 #include "spaceObjects/scanProbe.h"
 
 class GuiRadarView;
 class GuiKeyValueDisplay;
 class GuiFrequencyCurve;
+class GuiScrollText;
+class GuiToggleButton;
 class RawScannerDataRadarOverlay;
 
 class ScienceScreen : public GuiOverlay

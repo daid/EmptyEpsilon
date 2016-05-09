@@ -10,6 +10,7 @@
 #include "enttecDMXProDevice.h"
 #include "virtualOutputDevice.h"
 #include "sACNDMXDevice.h"
+#include "uDMXDevice.h"
 #include "hardwareMappingEffects.h"
 
 HardwareController::HardwareController()
@@ -96,6 +97,8 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
             device = new VirtualOutputDevice();
         else if (settings["device"] == "sACNDevice")
             device = new StreamingAcnDMXDevice();
+        else if (settings["device"] == "uDMXDevice")
+            device = new UDMXDevice();
         if (device)
         {
             if (!device->configure(settings))

@@ -35,7 +35,8 @@ OptionsMenu::OptionsMenu()
     (new GuiSelector(this, "FSAA", [](int index, string value)
     {
         P<WindowManager> windowManager = engine->getObject("windowManager");
-        windowManager->setFSAA((int[]){0, 2, 4, 8}[index]);
+		static const int fsaa[] = { 0, 2, 4, 8 };
+        windowManager->setFSAA(fsaa[index]);
     }))->setOptions({"FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x"})->setSelectionIndex(index)->setPosition(50, 160, ATopLeft)->setSize(300, 50);
 
     // Add music selection

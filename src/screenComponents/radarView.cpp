@@ -99,7 +99,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
             position += ship_offset / sf::length(ship_offset) * std::min(rect.width, rect.height) * 0.4f;
             
             sf::Sprite arrow_sprite;
-            textureManager.setTexture(arrow_sprite, "waypoint.png");
+            textureManager.setTexture(arrow_sprite, "waypoint");
             arrow_sprite.setPosition(position);
             arrow_sprite.setRotation(sf::vector2ToAngle(ship_offset) - 90);
             forground_texture.draw(arrow_sprite);
@@ -342,12 +342,24 @@ void GuiRadarView::drawWaypoints(sf::RenderTarget& window)
         sf::Vector2f screen_position = radar_screen_center + (my_spaceship->waypoints[n] - view_position) * scale;
 
         sf::Sprite object_sprite;
-        textureManager.setTexture(object_sprite, "waypoint.png");
-        object_sprite.setColor(sf::Color(128, 128, 255, 192));
+        textureManager.setTexture(object_sprite, "waypoint");
+        object_sprite.setColor(colorConfig.ship_waypoint_background);
         object_sprite.setPosition(screen_position - sf::Vector2f(0, 10));
-        object_sprite.setScale(0.6, 0.6);
+        object_sprite.setScale(0.8, 0.8);
         window.draw(object_sprite);
-        drawText(window, sf::FloatRect(screen_position.x, screen_position.y - 26, 0, 0), "WP" + string(n + 1), ACenter, 14, bold_font, sf::Color(128, 128, 255, 192));
+        drawText(window, sf::FloatRect(screen_position.x, screen_position.y - 10, 0, 0), string(n + 1), ACenter, 18, bold_font, colorConfig.ship_waypoint_text);
+        
+        if (style != Rectangular && sf::length(screen_position - radar_screen_center) > std::min(rect.width, rect.height) * 0.5f)
+        {
+            sf::Vector2f offset = my_spaceship->waypoints[n] - view_position;
+            screen_position = radar_screen_center + (offset / sf::length(offset) * std::min(rect.width, rect.height) * 0.4f);
+            
+            object_sprite.setPosition(screen_position);
+            object_sprite.setRotation(sf::vector2ToAngle(offset) - 90);
+            window.draw(object_sprite);
+
+            drawText(window, sf::FloatRect(screen_position.x, screen_position.y, 0, 0), string(n + 1), ACenter, 18, bold_font, colorConfig.ship_waypoint_text);
+        }
     }
 }
 
@@ -369,7 +381,7 @@ void GuiRadarView::drawRangeIndicators(sf::RenderTarget& window)
         circle.setOutlineColor(sf::Color(255, 255, 255, 16));
         circle.setOutlineThickness(2.0);
         window.draw(circle);
-        drawText(window, sf::FloatRect(radar_screen_center.x, radar_screen_center.y - s - 20, 0, 0), string(int(circle_size / 1000.0f + 0.1f)) + "km", ACenter, 20, bold_font, sf::Color(255, 255, 255, 32));
+        drawText(window, sf::FloatRect(radar_screen_center.x, radar_screen_center.y - s - 20, 0, 0), string(int(circle_size / 1000.0f + 0.1f)) + DISTANCE_UNIT_1K, ACenter, 20, bold_font, sf::Color(255, 255, 255, 32));
     }
 }
 

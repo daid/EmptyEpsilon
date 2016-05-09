@@ -9,6 +9,14 @@
 #include "screenComponents/frequencyCurve.h"
 #include "screenComponents/scanningDialog.h"
 #include "screenComponents/databaseView.h"
+#include "screenComponents/alertOverlay.h"
+
+#include "gui/gui2_autolayout.h"
+#include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_togglebutton.h"
+#include "gui/gui2_selector.h"
+#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_listbox.h"
 
 ScienceScreen::ScienceScreen(GuiContainer* owner)
 : GuiOverlay(owner, "SCIENCE_SCREEN", colorConfig.background)
@@ -17,6 +25,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
 
     (new GuiOverlay(this, "", sf::Color::White))->setTextureCenter("gui/BackgroundGradient");
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+    (new AlertLevelOverlay(this));
 
     radar_view = new GuiElement(this, "RADAR_VIEW");
     radar_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -154,7 +163,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
 
     if (probe_view_button->getValue() && probe)
     {
-        if (targets.get() && (probe->getPosition() - targets.get()->getPosition()) < 5000.0f)
+        if (targets.get() && (probe->getPosition() - targets.get()->getPosition()) > 5000.0f)
             targets.clear();
     }else{
         if (targets.get() && Nebula::blockedByNebula(my_spaceship->getPosition(), targets.get()->getPosition()))
@@ -203,9 +212,9 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             rel_velocity = 0.0;
 
         info_callsign->setValue(obj->getCallSign());
-        info_distance->setValue(string(distance / 1000.0f, 1) + "km");
+        info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
         info_heading->setValue(string(int(heading)));
-        info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + "km/min");
+        info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
 
         if (ship)
         {
@@ -251,8 +260,8 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         if (fabs(rel_velocity) < 0.01)
             rel_velocity = 0.0;
 
-        info_distance->setValue(string(distance / 1000.0f, 1) + "km");
+        info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
         info_heading->setValue(string(int(heading)));
-        info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + "km/min");
+        info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
     }
 }

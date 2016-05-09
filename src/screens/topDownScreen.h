@@ -2,7 +2,7 @@
 #define TOP_DOWN_SCREEN_H
 
 #include "engine.h"
-#include "gui/gui2.h"
+#include "gui/gui2_canvas.h"
 #include "screenComponents/viewport3d.h"
 #include "screenComponents/radarView.h"
 

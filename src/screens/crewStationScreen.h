@@ -2,8 +2,12 @@
 #define CREW_STATION_SCREEN_H
 
 #include "engine.h"
-#include "gui/gui2.h"
+#include "gui/gui2_canvas.h"
 #include "screenComponents/viewport3d.h"
+
+class GuiButton;
+class GuiToggleButton;
+class GuiPanel;
 
 class CrewStationScreen : public GuiCanvas, public Updatable
 {

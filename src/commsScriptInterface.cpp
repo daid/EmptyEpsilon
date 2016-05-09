@@ -67,6 +67,11 @@ void CommsScriptInterface::commChannelMessage(int32_t message_id)
     if (message_id >= 0 && message_id < int(reply_callbacks.size()))
     {
         ScriptSimpleCallback callback = reply_callbacks[message_id];
+        if (!scriptObject)
+        {
+            target->comms_script_callback.getScriptObject()->registerObject(ship, "comms_source");
+            target->comms_script_callback.getScriptObject()->registerObject(target, "comms_target");
+        }
         reply_callbacks.clear();
         callback.call();
     }
