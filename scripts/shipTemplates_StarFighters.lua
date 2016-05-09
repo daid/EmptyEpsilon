@@ -38,6 +38,7 @@ variation:setBeam(0, 30, 5, 1100.0, 4.0, 2.5)
 variation:setBeam(1, 30,-5, 1100.0, 4.0, 2.5)
 variation:setEnergyStorage(400)
 
+variation:setRepairCrewCount(1)
 variation:addRoomSystem(3, 0, 1, 1, "Maneuver");
 variation:addRoomSystem(1, 0, 2, 1, "BeamWeapons");
 
