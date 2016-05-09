@@ -122,7 +122,7 @@ int main(int argc, char** argv)
     }
 
     new Engine();
-    
+
     if (PreferencesManager::get("mod") != "")
     {
         string mod = PreferencesManager::get("mod");
@@ -134,7 +134,7 @@ int main(int argc, char** argv)
         new DirectoryResourceProvider("resources/mods/" + mod);
         PackResourceProvider::addPackResourcesForDirectory("resources/mods/" + mod);
     }
-    
+
 #ifdef RESOURCE_BASE_DIR
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/");
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "scripts/");
@@ -167,7 +167,7 @@ int main(int argc, char** argv)
         server->addHandler(new HttpRequestFileHandler("www"));
         server->addHandler(new HttpScriptHandler());
     }
-    
+
     colorConfig.load();
 
     if (PreferencesManager::get("headless") == "")
@@ -230,7 +230,7 @@ int main(int argc, char** argv)
     P<ResourceStream> main_font_stream = getResourceStream("gui/fonts/BebasNeue Regular.otf");
     main_font = new sf::Font();
     main_font->loadFromStream(**main_font_stream);
-    
+
     P<ResourceStream> bold_font_stream = getResourceStream("gui/fonts/BebasNeue Bold.otf");
     bold_font = new sf::Font();
     bold_font->loadFromStream(**bold_font_stream);
@@ -274,7 +274,7 @@ int main(int argc, char** argv)
         P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
         if (scienceInfoScript->getError() != "") exit(1);
         scienceInfoScript->destroy();
-        
+
         //Find out which model data isn't used by ship templates and output that to log.
         std::set<string> used_model_data;
         for(string template_name : ShipTemplate::getAllTemplateNames())
@@ -338,7 +338,11 @@ void returnToMainMenu()
     if (PreferencesManager::get("headless") != "")
     {
         new EpsilonServer();
+        if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
+        if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password"));
+        if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer("http://daid.eu/ee/register.php");
         gameGlobalInfo->startScenario(PreferencesManager::get("headless"));
+
         engine->setGameSpeed(1.0);
     }
     else if (PreferencesManager::get("autoconnect").toInt())
