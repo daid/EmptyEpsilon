@@ -78,6 +78,14 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
     type_name->callback([this](string text) {
         target->setTypeName(text);
     });
+
+    (new GuiLabel(left_col, "", "Callsign:", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    
+    callsign = new GuiTextEntry(left_col, "", "");
+    callsign->setSize(GuiElement::GuiSizeMax, 50);
+    callsign->callback([this](string text) {
+        target->callsign = text;
+    });
     
     warp_selector = new GuiSelector(left_col, "", [this](int index, string value) {
         target->setWarpDrive(index != 0);
@@ -123,6 +131,7 @@ void GuiShipTweakBase::open(P<SpaceShip> target)
     this->target = target;
     
     type_name->setText(target->getTypeName());
+    callsign->setText(target->callsign);
     warp_selector->setSelectionIndex(target->has_warp_drive ? 1 : 0);
     jump_selector->setSelectionIndex(target->hasJumpDrive() ? 1 : 0);
     impulse_speed_slider->setValue(target->impulse_max_speed);

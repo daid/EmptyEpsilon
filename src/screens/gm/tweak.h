@@ -37,6 +37,7 @@ private:
     P<SpaceShip> target;
 
     GuiTextEntry* type_name;
+    GuiTextEntry* callsign;
     GuiSelector* warp_selector;
     GuiSelector* jump_selector;
     GuiSlider* impulse_speed_slider;
