@@ -100,3 +100,10 @@ int TargetsContainer::getWaypointIndex()
         waypoint_selection_index = -1;
     return waypoint_selection_index;
 }
+
+void TargetsContainer::setWaypointIndex(int index)
+{
+    waypoint_selection_index = index;
+    if (my_spaceship && index >= 0 && index < (int)my_spaceship->waypoints.size())
+        waypoint_selection_position = my_spaceship->waypoints[index];
+}

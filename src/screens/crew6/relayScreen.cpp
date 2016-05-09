@@ -22,13 +22,24 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     radar->setAutoCentering(false);
     radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     radar->setCallbacks(
-        [this](sf::Vector2f position) {
+        [this](sf::Vector2f position) { //down
+            if (mode == TargetSelection && targets.getWaypointIndex() > -1 && my_spaceship)
+            {
+                if (sf::length(my_spaceship->waypoints[targets.getWaypointIndex()] - position) < 1000.0)
+                {
+                    mode = MoveWaypoint;
+                    drag_waypoint_index = targets.getWaypointIndex();
+                }
+            }
             mouse_down_position = position;
         },
-        [this](sf::Vector2f position) {
-            radar->setViewPosition(radar->getViewPosition() - (position - mouse_down_position));
+        [this](sf::Vector2f position) { //drag
+            if (mode == TargetSelection)
+                radar->setViewPosition(radar->getViewPosition() - (position - mouse_down_position));
+            if (mode == MoveWaypoint && my_spaceship)
+                my_spaceship->commandMoveWaypoint(drag_waypoint_index, position);
         },
-        [this](sf::Vector2f position) {
+        [this](sf::Vector2f position) { //up
             switch(mode)
             {
             case TargetSelection:
@@ -39,6 +50,10 @@ RelayScreen::RelayScreen(GuiContainer* owner)
                     my_spaceship->commandAddWaypoint(position);
                 mode = TargetSelection;
                 option_buttons->show();
+                break;
+            case MoveWaypoint:
+                mode = TargetSelection;
+                targets.setWaypointIndex(drag_waypoint_index);
                 break;
             case LaunchProbe:
                 if (my_spaceship)

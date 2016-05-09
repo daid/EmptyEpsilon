@@ -17,11 +17,13 @@ private:
     {
         TargetSelection,
         WaypointPlacement,
-        LaunchProbe
+        LaunchProbe,
+        MoveWaypoint
     };
 
     EMode mode;
     TargetsContainer targets;
+    int drag_waypoint_index;
     GuiRadarView* radar;
 
     GuiKeyValueDisplay* info_callsign;

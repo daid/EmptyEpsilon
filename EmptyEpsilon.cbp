@@ -563,6 +563,7 @@
 		<Unit filename="src/mesh.h" />
 		<Unit filename="src/missileWeaponData.cpp" />
 		<Unit filename="src/missileWeaponData.h" />
+		<Unit filename="src/missileWeaponData.hpp" />
 		<Unit filename="src/modelData.cpp" />
 		<Unit filename="src/modelData.h" />
 		<Unit filename="src/modelInfo.cpp" />
@@ -699,6 +700,7 @@
 		<Unit filename="src/script.h" />
 		<Unit filename="src/shipTemplate.cpp" />
 		<Unit filename="src/shipTemplate.h" />
+		<Unit filename="src/shipTemplate.hpp" />
 		<Unit filename="src/spaceObjects/EMPMissile.cpp" />
 		<Unit filename="src/spaceObjects/EMPMissile.h" />
 		<Unit filename="src/spaceObjects/artifact.cpp" />
@@ -729,6 +731,7 @@
 		<Unit filename="src/spaceObjects/nuke.h" />
 		<Unit filename="src/spaceObjects/playerSpaceship.cpp" />
 		<Unit filename="src/spaceObjects/playerSpaceship.h" />
+		<Unit filename="src/spaceObjects/playerSpaceship.hpp" />
 		<Unit filename="src/spaceObjects/scanProbe.cpp" />
 		<Unit filename="src/spaceObjects/scanProbe.h" />
 		<Unit filename="src/spaceObjects/shipTemplateBasedObject.cpp" />
@@ -739,6 +742,7 @@
 		<Unit filename="src/spaceObjects/spaceStation.h" />
 		<Unit filename="src/spaceObjects/spaceship.cpp" />
 		<Unit filename="src/spaceObjects/spaceship.h" />
+		<Unit filename="src/spaceObjects/spaceship.hpp" />
 		<Unit filename="src/spaceObjects/spaceshipParts/beamWeapon.cpp" />
 		<Unit filename="src/spaceObjects/spaceshipParts/beamWeapon.h" />
 		<Unit filename="src/spaceObjects/spaceshipParts/weaponTube.cpp" />

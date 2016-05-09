@@ -77,6 +77,21 @@ variation:setTubeDirection(0,   0)
 variation:setTubeDirection(1, -90)
 variation:setTubeDirection(2,  90)
 
+--Cruiser: stike craft (fast in/out)
+template = ShipTemplate():setName("Stalker Q7"):setClass("Frigate", "Cruiser: Strike ship"):setModel("small_frigate_3")
+template:setDescription([[A strike ship, fast in, fast out. Quick damage and be gone again. The Q7 model is fit with a warpdrive.]])
+template:setHull(50)
+template:setShields(80, 30, 30, 30)
+template:setSpeed(70, 12, 12)
+template:setWarpSpeed(700)
+template:setBeam(0, 40,-5, 1000.0, 6.0, 6)
+template:setBeam(1, 40, 5, 1000.0, 6.0, 6)
+
+variation = template:copy("Stalker R7")
+variation:setDescription([[A strike ship, fast in, fast out. Quick damage and be gone again. The R7 model is fit with a jumpdrive.]])
+variation:setWarpSpeed(0)
+variation:setJumpDrive(true)
+
 template = ShipTemplate():setName("Ranus U"):setClass("Frigate", "Cruiser: Sniper"):setModel("MissileCorvetteGreen")
 template:setDescription([[The sniper is intended to fly in, deal a quick large amount of damage from a distance, and head off again. It's the only basic frigate that carries nukes. Of all frigates, this is the smalles one.]])
 template:setHull(30)
@@ -87,7 +102,6 @@ template:weaponTubeDisallowMissle(1, "Nuke"):weaponTubeDisallowMissle(2, "Nuke")
 template:setWeaponStorage("Homing", 6)
 template:setWeaponStorage("Nuke", 2)
 
---Cruiser: stike craft (fast in/out)
 --Cruiser: tackler
 
 template = ShipTemplate():setName("Flavia"):setClass("Frigate", "Light transport"):setModel("LightCorvetteGrey")

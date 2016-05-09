@@ -7,6 +7,7 @@
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_slider.h"
+#include "gui/gui2_togglebutton.h"
 
 GuiShipTweak::GuiShipTweak(GuiContainer* owner)
 : GuiPanel(owner, "GM_TWEAK_DIALOG")
@@ -27,6 +28,8 @@ GuiShipTweak::GuiShipTweak(GuiContainer* owner)
     list->addEntry("Base", "");
     pages.push_back(new GuiShipTweakShields(this));
     list->addEntry("Shields", "");
+    pages.push_back(new GuiShipTweakMissileTubes(this));
+    list->addEntry("Tubes", "");
     pages.push_back(new GuiShipTweakMissileWeapons(this));
     list->addEntry("Missiles", "");
     pages.push_back(new GuiShipTweakBeamweapons(this));
@@ -78,6 +81,14 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
     type_name->callback([this](string text) {
         target->setTypeName(text);
     });
+
+    (new GuiLabel(left_col, "", "Callsign:", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    
+    callsign = new GuiTextEntry(left_col, "", "");
+    callsign->setSize(GuiElement::GuiSizeMax, 50);
+    callsign->callback([this](string text) {
+        target->callsign = text;
+    });
     
     warp_selector = new GuiSelector(left_col, "", [this](int index, string value) {
         target->setWarpDrive(index != 0);
@@ -123,6 +134,7 @@ void GuiShipTweakBase::open(P<SpaceShip> target)
     this->target = target;
     
     type_name->setText(target->getTypeName());
+    callsign->setText(target->callsign);
     warp_selector->setSelectionIndex(target->has_warp_drive ? 1 : 0);
     jump_selector->setSelectionIndex(target->hasJumpDrive() ? 1 : 0);
     impulse_speed_slider->setValue(target->impulse_max_speed);
@@ -154,14 +166,6 @@ GuiShipTweakMissileWeapons::GuiShipTweakMissileWeapons(GuiContainer* owner)
         missile_storage_amount_selector[n]->setSize(GuiElement::GuiSizeMax, 50);
     }
 
-    (new GuiLabel(left_col, "", "Tube count:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-    missile_tube_amount_selector = new GuiSelector(left_col, "", [this](int index, string value) {
-        target->weapon_tube_count = index;
-    });
-    for(int n=0; n<max_weapon_tubes; n++)
-        missile_tube_amount_selector->addEntry(string(n), "");
-    missile_tube_amount_selector->setSize(GuiElement::GuiSizeMax, 50);
-
     (new GuiLabel(right_col, "", "Stored amount:", 30))->setSize(GuiElement::GuiSizeMax, 50);
     for(int n=0; n<MW_Count; n++)
     {
@@ -185,9 +189,85 @@ void GuiShipTweakMissileWeapons::onDraw(sf::RenderTarget& window)
 
 void GuiShipTweakMissileWeapons::open(P<SpaceShip> target)
 {
-    missile_tube_amount_selector->setSelectionIndex(target->weapon_tube_count);
     for(int n=0; n<MW_Count; n++)
         missile_storage_amount_selector[n]->setSelectionIndex(target->weapon_storage_max[n]);
+
+    this->target = target;
+}
+
+GuiShipTweakMissileTubes::GuiShipTweakMissileTubes(GuiContainer* owner)
+: GuiTweakPage(owner)
+{
+    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    left_col->setPosition(20, 20, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+
+    GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    right_col->setPosition(-20, 20, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+
+    (new GuiLabel(left_col, "", "Tube count:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    missile_tube_amount_selector = new GuiSelector(left_col, "", [this](int index, string value) {
+        target->weapon_tube_count = index;
+    });
+    for(int n=0; n<max_weapon_tubes; n++)
+        missile_tube_amount_selector->addEntry(string(n), "");
+    missile_tube_amount_selector->setSize(GuiElement::GuiSizeMax, 50);
+
+    tube_index = 0;
+    index_selector = new GuiSelector(right_col, "", [this](int index, string value)
+    {
+        if (index >= target->weapon_tube_count)
+        {
+            if (index == max_weapon_tubes - 1)
+                index = std::max(0, target->weapon_tube_count - 1);
+            else
+                index = 0;
+            index_selector->setSelectionIndex(index);
+        }
+        tube_index = index;
+    });
+    index_selector->setSize(GuiElement::GuiSizeMax, 40);
+    for(int n=0; n<max_weapon_tubes; n++)
+        index_selector->addEntry("Tube: " + string(n + 1), "");
+    index_selector->setSelectionIndex(0);
+
+    (new GuiLabel(right_col, "", "Direction:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    direction_slider = new GuiSlider(right_col, "", -180.0, 180, 0.0, [this](float value) {
+        target->weapon_tube[tube_index].setDirection(roundf(value));
+    });
+    direction_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(right_col, "", "Load time:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    load_time_slider = new GuiSlider(right_col, "", 0.0, 60.0, 0.0, [this](float value) {
+        target->weapon_tube[tube_index].setLoadTimeConfig(roundf(value * 10) / 10);
+    });
+    load_time_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(left_col, "", "Allowed use:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    for(int n=0; n<MW_Count; n++)
+    {
+        allowed_use[n] = new GuiToggleButton(right_col, "", getMissileWeaponName(EMissileWeapons(n)), [this, n](bool value) {
+            if (value)
+                target->weapon_tube[tube_index].allowLoadOf(EMissileWeapons(n));
+            else
+                target->weapon_tube[tube_index].disallowLoadOf(EMissileWeapons(n));
+        });
+        allowed_use[n]->setSize(GuiElement::GuiSizeMax, 40);
+    }
+}
+
+void GuiShipTweakMissileTubes::onDraw(sf::RenderTarget& window)
+{
+    direction_slider->setValue(sf::angleDifference(0.0f, target->weapon_tube[tube_index].getDirection()));
+    load_time_slider->setValue(target->weapon_tube[tube_index].getLoadTimeConfig());
+    for(int n=0; n<MW_Count; n++)
+    {
+        allowed_use[n]->setValue(target->weapon_tube[tube_index].canLoad(EMissileWeapons(n)));
+    }
+}
+
+void GuiShipTweakMissileTubes::open(P<SpaceShip> target)
+{
+    missile_tube_amount_selector->setSelectionIndex(target->weapon_tube_count);
 
     this->target = target;
 }
