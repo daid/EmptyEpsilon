@@ -25,9 +25,11 @@ Nebula::Nebula()
     
     for(int n=0; n<cloud_count; n++)
     {
-        clouds[n].size = random(1024, 1024 * 4);
+        clouds[n].size = random(512, 1024 * 2);
         clouds[n].texture = irandom(1, 3);
-        clouds[n].offset = sf::vector2FromAngle(float(n * 360 / cloud_count)) * random(clouds[n].size / 2.0f, getRadius() - clouds[n].size);
+        float dist_min = clouds[n].size / 2.0f;
+        float dist_max = getRadius() - clouds[n].size;
+        clouds[n].offset = sf::vector2FromAngle(float(n * 360 / cloud_count)) * random(dist_min, dist_max);
     }
     
     nebula_list.push_back(this);

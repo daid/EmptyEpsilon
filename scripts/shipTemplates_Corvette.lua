@@ -19,9 +19,9 @@ template:setShields(200, 200, 200, 200)
 template:setSpeed(30, 3.5, 5)
 template:setJumpDrive(true)
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0,100, -20, 1000.0, 6.0, 8)
-template:setBeam(1,100,  20, 1000.0, 6.0, 8)
-template:setBeam(2,100, 180, 1000.0, 6.0, 8)
+template:setBeam(0,100, -20, 1500.0, 6.0, 8)
+template:setBeam(1,100,  20, 1500.0, 6.0, 8)
+template:setBeam(2,100, 180, 1500.0, 6.0, 8)
 template:setTubes(4, 10.0)
 template:setWeaponStorage("HVLI", 20)
 template:setWeaponStorage("Homing", 4)
@@ -80,6 +80,24 @@ variation:addDoor(8, 4, false);
 --Airlock doors
 --variation:addDoor(2, 2, false);
 --variation:addDoor(2, 5, false);
+
+template = ShipTemplate():setName("Starhammer II"):setClass("Corvette", "Destroyer"):setModel("battleship_destroyer_4_upgraded")
+template:setDescription("Strong destroyer for frontal assault, aimed to destroy stations or slow ships.")
+template:setRadarTrace("radar_dread.png")
+template:setHull(200)
+template:setShields(350, 350, 350, 350, 350)
+template:setSpeed(35, 6, 10)
+template:setJumpDrive(true)
+--                  Arc, Dir, Range, CycleTime, Dmg
+template:setBeam(0, 60, -10, 2000.0, 8.0, 11)
+template:setBeam(1, 60,  10, 2000.0, 8.0, 11)
+template:setBeam(2, 60, -20, 1500.0, 8.0, 11)
+template:setBeam(3, 60,  20, 1500.0, 8.0, 11)
+template:setTubes(2, 10.0)
+template:setWeaponStorage("HVLI", 20)
+template:setWeaponStorage("Homing", 4)
+template:setWeaponStorage("EMP", 2)
+template:weaponTubeDisallowMissle(1, "EMP")
 
 --[[-----------------------Support-----------------------]]
 
