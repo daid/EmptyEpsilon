@@ -62,6 +62,7 @@ variation:addDoor(5, 1, false);
 variation:addDoor(5, 2, false);
 
 template = ShipTemplate():setName("Adder MK5"):setClass("Starfighter", "Gunship"):setModel("AdlerLongRangeScoutYellow")
+template:setRadarTrace("radar_cruiser.png")
 template:setDescription([[The fifth iteration of the Adder proved to be a large success with pirates and law officers.
 It is cheap, easy to maintain, packs a decent punch, fast.]])
 template:setHull(50)
@@ -91,6 +92,7 @@ variation:setBeam(3, 35,180, 600, 6.0, 2.0)
 variation:setWeaponStorage("HVLI", 12)
 
 template = ShipTemplate():setName("WX-Lindworm"):setClass("Starfighter", "Bomber"):setModel("LindwurmFighterYellow")
+template:setRadarTrace("radar_fighter.png")
 template:setDescription([[Not your typical lindworm.
 A bomber class starfighter. While one of the least shielded starfighters in active duty, the WX-Lindworm, or Worm as it is often called, can pack quite a punch.
 It's goal is, fly in, destroy or be destroyed, and fly out.]])

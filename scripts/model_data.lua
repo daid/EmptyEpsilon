@@ -336,6 +336,11 @@ model:setIllumination("small_frigate_1/small_frigate_1_illumination.png")
 model:setScale(1)
 model:setRadius(100)
 
+model:addEngineEmitter(-85, 33, 2,  0.2, 0.2, 1.0, 8.0)
+model:addEngineEmitter(-85, 33, 14,  0.2, 0.2, 1.0, 8.0)
+model:addEngineEmitter(-85,-33, 2,  0.2, 0.2, 1.0, 8.0)
+model:addEngineEmitter(-85,-33, 14,  0.2, 0.2, 1.0, 8.0)
+
 model = ModelData()
 model:setName("small_frigate_2")
 model:setMesh("small_frigate_2/small_frigate_2.model")
@@ -344,6 +349,9 @@ model:setSpecular("small_frigate_2/small_frigate_2_specular.png")
 model:setIllumination("small_frigate_2/small_frigate_2_illumination.png")
 model:setScale(1)
 model:setRadius(80)
+
+model:addEngineEmitter(-75, 53,-27,  0.2, 0.2, 1.0, 8.0)
+model:addEngineEmitter(-75,-53,-27,  0.2, 0.2, 1.0, 8.0)
 
 model = ModelData()
 model:setName("small_frigate_3")
@@ -354,6 +362,11 @@ model:setIllumination("small_frigate_3/small_frigate_3_illumination.png")
 model:setScale(0.8)
 model:setRadius(80)
 
+model:addEngineEmitter(-91, 32,-4,  0.2, 0.2, 1.0, 8.0)
+model:addEngineEmitter(-95, 32,-17,  0.2, 0.2, 1.0, 8.0)
+model:addEngineEmitter(-91,-32,-4,  0.2, 0.2, 1.0, 8.0)
+model:addEngineEmitter(-95,-32,-17,  0.2, 0.2, 1.0, 8.0)
+
 model = ModelData()
 model:setName("small_frigate_4")
 model:setMesh("small_frigate_4/small_frigate_4.model")
@@ -363,6 +376,10 @@ model:setIllumination("small_frigate_4/small_frigate_4_illumination.png")
 model:setScale(1)
 model:setRadius(100)
 
+model:addEngineEmitter(-81, 10,-4,  0.2, 0.2, 1.0, 8.0)
+model:addEngineEmitter(-81,  0,-4,  0.2, 0.2, 1.0, 8.0)
+model:addEngineEmitter(-81,-10,-4,  0.2, 0.2, 1.0, 8.0)
+
 model = ModelData()
 model:setName("small_frigate_5")
 model:setMesh("small_frigate_5/small_frigate_5.model")
@@ -371,6 +388,13 @@ model:setSpecular("small_frigate_5/small_frigate_5_specular.png")
 model:setIllumination("small_frigate_5/small_frigate_5_illumination.png")
 model:setScale(1)
 model:setRadius(80)
+
+model:addEngineEmitter(-95, 30, 8,  0.2, 0.2, 1.0, 5.0)
+model:addEngineEmitter(-95, 30, 0,  0.2, 0.2, 1.0, 5.0)
+model:addEngineEmitter(-95, 30,-8,  0.2, 0.2, 1.0, 5.0)
+model:addEngineEmitter(-95,-30, 8,  0.2, 0.2, 1.0, 5.0)
+model:addEngineEmitter(-95,-30, 0,  0.2, 0.2, 1.0, 5.0)
+model:addEngineEmitter(-95,-30,-8,  0.2, 0.2, 1.0, 5.0)
 
 for _, color in ipairs({"Blue", "Green", "Grey", "Red", "White", "Yellow"}) do
     model = ModelData()
