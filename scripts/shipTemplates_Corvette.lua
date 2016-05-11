@@ -85,7 +85,7 @@ template = ShipTemplate():setName("Starhammer II"):setClass("Corvette", "Destroy
 template:setDescription("Strong destroyer for frontal assault, aimed to destroy stations or slow ships.")
 template:setRadarTrace("radar_dread.png")
 template:setHull(200)
-template:setShields(350, 350, 350, 350, 350)
+template:setShields(450, 350, 150, 150, 350)
 template:setSpeed(35, 6, 10)
 template:setJumpDrive(true)
 --                  Arc, Dir, Range, CycleTime, Dmg

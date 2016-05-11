@@ -148,8 +148,7 @@ MainMenu::MainMenu()
         {
             gameGlobalInfo->startScenario("scenario_10_empty.lua");
 
-            my_spaceship = nullptr;
-            my_player_info->setShipId(-1);
+            my_player_info->commandSetShipId(-1);
             destroy();
             new GameMasterScreen();
         }

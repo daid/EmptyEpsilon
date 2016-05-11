@@ -179,6 +179,8 @@ public:
 
     void addToShipLog(string message, sf::Color color);
     const std::vector<ShipLogEntry>& getShipsLog() const;
+    
+    void transferPlayersToShip(P<PlayerSpaceship> other_ship);
 
     virtual bool getShieldsActive() override { return shields_active; }
     void setShieldsActive(bool active) { shields_active = active; }

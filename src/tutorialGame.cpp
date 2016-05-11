@@ -127,8 +127,7 @@ void TutorialGame::onKey(sf::Keyboard::Key key, int unicode)
 
 void TutorialGame::setPlayerShip(P<PlayerSpaceship> ship)
 {
-    my_spaceship = ship;
-    my_player_info->setShipId(ship->getMultiplayerId());
+    my_player_info->commandSetShipId(ship->getMultiplayerId());
     
     if (viewport == nullptr)
         createScreens();
