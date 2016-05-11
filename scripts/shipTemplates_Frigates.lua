@@ -173,7 +173,7 @@ variation:setBeam(0, 40, 170, 1200.0, 6.0, 6)
 variation:setBeam(1, 40, 190, 1200.0, 6.0, 6)
 
 variation = variation:copy("Flavia P.Falcon"):setType("playership")
-variation:setDescription([[Flavia Falcon for player usage. Can be used in scenarios where the players have to transport stuff.]])
+variation:setDescription([[Flavia Falcon for player usage. Can be used in scenarios where the players have to transport stuff, has more advanced rear facing defences then the normal Flavia Falcon]])
 variation:setSpeed(60, 10, 10)
 variation:setWarpSpeed(500)
 variation:setCombatManeuver(250, 150)

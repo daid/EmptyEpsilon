@@ -471,6 +471,10 @@ for _, color in ipairs({"Blue", "Green", "Grey", "Red", "White", "Yellow"}) do
     model:setScale(50)
     model:setRadius(80)
 
+    model:addEngineEmitter(-1.4, 0.4, 0.0,  0.5, 0.5, 1.0, 0.6)
+    model:addEngineEmitter(-1.4, 0.0, 0.0,  0.5, 0.5, 1.0, 0.6)
+    model:addEngineEmitter(-1.4,-0.4, 0.0,  0.5, 0.5, 1.0, 0.6)
+
     model = ModelData()
     model:setName("LaserCorvette" .. color)
     model:setMesh("LaserCorvette/LaserCorvette.model")
@@ -479,6 +483,9 @@ for _, color in ipairs({"Blue", "Green", "Grey", "Red", "White", "Yellow"}) do
     model:setIllumination("LaserCorvette/LaserCorvetteIllumination.png")
     model:setScale(50)
     model:setRadius(80)
+
+    model:addEngineEmitter(-1.67, 0.1, 0.0,  0.5, 0.5, 1.0, 0.2)
+    model:addEngineEmitter(-1.67,-0.1, 0.0,  0.5, 0.5, 1.0, 0.2)
 
     model = ModelData()
     model:setName("LightCorvette" .. color)
@@ -489,6 +496,10 @@ for _, color in ipairs({"Blue", "Green", "Grey", "Red", "White", "Yellow"}) do
     model:setScale(50)
     model:setRadius(80)
 
+    model:addEngineEmitter(-1.3, 0.22, 0.15,  0.5, 0.5, 1.0, 0.3)
+    model:addEngineEmitter(-1.3, 0.00, 0.15,  0.5, 0.5, 1.0, 0.3)
+    model:addEngineEmitter(-1.3,-0.22, 0.15,  0.5, 0.5, 1.0, 0.3)
+
     model = ModelData()
     model:setName("MineLayerCorvette" .. color)
     model:setMesh("MineLayerCorvette/MineLayerCorvette.model")
@@ -497,6 +508,9 @@ for _, color in ipairs({"Blue", "Green", "Grey", "Red", "White", "Yellow"}) do
     model:setIllumination("MineLayerCorvette/MineLayerCorvetteIllumination.png")
     model:setScale(50)
     model:setRadius(80)
+
+    model:addEngineEmitter(-0.65, 0.70, 0.0,  0.5, 0.5, 1.0, 0.2)
+    model:addEngineEmitter(-0.65,-0.70, 0.0,  0.5, 0.5, 1.0, 0.2)
 
     model = ModelData()
     model:setName("MissileCorvette" .. color)
@@ -507,6 +521,10 @@ for _, color in ipairs({"Blue", "Green", "Grey", "Red", "White", "Yellow"}) do
     model:setScale(50)
     model:setRadius(80)
 
+    model:addEngineEmitter(-0.75, 0.24,-0.1,  0.5, 0.5, 1.0, 0.2)
+    model:addEngineEmitter(-0.75, 0.00,-0.1,  0.5, 0.5, 1.0, 0.2)
+    model:addEngineEmitter(-0.75,-0.24,-0.1,  0.5, 0.5, 1.0, 0.2)
+
     model = ModelData()
     model:setName("MultiGunCorvette" .. color)
     model:setMesh("MultiGunCorvette/MultiGunCorvette.model")
@@ -515,6 +533,10 @@ for _, color in ipairs({"Blue", "Green", "Grey", "Red", "White", "Yellow"}) do
     model:setIllumination("MultiGunCorvette/MultiGunCorvetteIllumination.png")
     model:setScale(50)
     model:setRadius(80)
+
+    model:addEngineEmitter(-0.75, 0.2,-0.03,  0.5, 0.5, 1.0, 0.2)
+    model:addEngineEmitter(-0.75, 0.0,-0.03,  0.5, 0.5, 1.0, 0.2)
+    model:addEngineEmitter(-0.75,-0.2,-0.03,  0.5, 0.5, 1.0, 0.2)
 end
 
 model = ModelData()
