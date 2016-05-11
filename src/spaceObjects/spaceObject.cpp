@@ -96,6 +96,7 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
 
     registerMemberReplication(&faction_id);
     registerMemberReplication(&scanned_by_faction);
+    registerMemberReplication(&object_description);
     registerCollisionableReplication(multiplayer_significant_range);
 }
 
