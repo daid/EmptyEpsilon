@@ -96,7 +96,6 @@ void GameGlobalInfo::update(float delta)
     }
     if (my_player_info)
     {
-        LOG(DEBUG) << my_player_info->ship_id;
         //Set the my_spaceship variable based on the my_player_info->ship_id
         if ((my_spaceship && my_spaceship->getMultiplayerId() != my_player_info->ship_id) || (my_spaceship && my_player_info->ship_id == -1) || (!my_spaceship && my_player_info->ship_id != -1))
         {
