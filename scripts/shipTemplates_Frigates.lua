@@ -160,10 +160,59 @@ template:setWeaponStorage("Nuke", 2)
 --Cruiser: tackler
 
 template = ShipTemplate():setName("Flavia"):setClass("Frigate", "Light transport"):setModel("LightCorvetteGrey")
-template:setDescription([[Small good or person transport. Cheaper then a freighter, usually used when high value or small amounts of cargo needs to be transported]])
+template:setRadarTrace("radar_tug.png")
+template:setDescription([[Small goods or person transport. Cheaper then a freighter, usually used when high value or small amounts of cargo needs to be transported]])
 template:setHull(50)
 template:setShields(50, 50)
 template:setSpeed(30, 8, 10)
+
+variation = template:copy("Flavia Falcon")
+variation:setDescription([[The Flavia Falcon is a modified Flavia transport, this transport contains modifications for faster flight and rear mounted lasers to keep enemies off it's back.]])
+variation:setSpeed(50, 8, 10)
+variation:setBeam(0, 40, 170, 1200.0, 6.0, 6)
+variation:setBeam(1, 40, 190, 1200.0, 6.0, 6)
+
+variation = variation:copy("Flavia P.Falcon"):setType("playership")
+variation:setDescription([[Flavia Falcon for player usage. Can be used in scenarios where the players have to transport stuff.]])
+variation:setSpeed(60, 10, 10)
+variation:setWarpSpeed(500)
+variation:setCombatManeuver(250, 150)
+variation:setTubes(1, 20.0)
+variation:setTubeDirection(0, 180)
+variation:setWeaponStorage("HVLI", 5)
+variation:setWeaponStorage("Homing", 3)
+variation:setWeaponStorage("Mine", 1)
+variation:setWeaponStorage("Nuke", 1)
+
+variation:setRepairCrewCount(8)
+
+variation:addRoom(1, 0, 6, 1)
+variation:addRoom(1, 5, 6, 1)
+variation:addRoomSystem(0, 1, 2, 2, "RearShield")
+variation:addRoomSystem(0, 3, 2, 2, "MissileSystem")
+variation:addRoomSystem(2, 1, 2, 2, "Beamweapons")
+variation:addRoomSystem(2, 3, 2, 2, "Reactor")
+variation:addRoomSystem(4, 1, 2, 2, "Warp")
+variation:addRoomSystem(4, 3, 2, 2, "JumpDrive")
+variation:addRoomSystem(6, 1, 2, 2, "Impulse")
+variation:addRoomSystem(6, 3, 2, 2, "Maneuver")
+variation:addRoomSystem(8, 2, 2, 2, "FrontShield")
+
+variation:addDoor(1, 1, true)
+variation:addDoor(3, 1, true)
+variation:addDoor(4, 1, true)
+variation:addDoor(6, 1, true)
+
+variation:addDoor(4, 3, true)
+variation:addDoor(5, 3, true)
+
+variation:addDoor(8, 2, false)
+variation:addDoor(8, 3, false)
+
+variation:addDoor(1, 5, true)
+variation:addDoor(2, 5, true)
+variation:addDoor(5, 5, true)
+variation:addDoor(6, 5, true)
 
 --Support: mine layer
 --Support: mine sweeper
