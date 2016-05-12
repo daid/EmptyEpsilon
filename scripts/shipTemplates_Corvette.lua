@@ -34,7 +34,8 @@ variation = template:copy("Atlantis"):setType("playership")
 variation:setDescription([[Refitted Atlantis for more general tasks. The large shiels system has been replaced by more advanced manouvering and impulse engines.
 Advanced combat maneuver systems have been added. Missile load out has been enhanced to include more variations.
 Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake.]])
-variation:setShields(100, 100)
+variation:setShields(200, 200)
+variation:setHull(150)
 variation:setSpeed(90, 10, 20)
 variation:setCombatManeuver(400, 250)
 variation:setBeam(2, 0, 0, 0, 0, 0)

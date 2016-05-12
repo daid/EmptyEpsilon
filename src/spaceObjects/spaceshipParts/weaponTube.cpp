@@ -226,7 +226,7 @@ void WeaponTube::update(float delta)
                 fire_count -= 1;
                 if (fire_count > 0)
                 {
-                    delay = 0.5;
+                    delay = 1.5;
                 }
                 else
                 {

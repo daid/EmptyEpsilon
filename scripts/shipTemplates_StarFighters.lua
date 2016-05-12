@@ -32,6 +32,8 @@ variation:setBeam(0, 30, 0, 900.0, 4.0, 2.5)
 
 variation = variation:copy("MP52 Hornet"):setType("playership")
 variation:setDescription([[Upgraded version of the upgraded MU52 Hornet. Specially for players.]])
+template:setHull(70)
+template:setShields(60)
 variation:setSpeed(125, 32, 40)
 variation:setCombatManeuver(600, 0)
 variation:setBeam(0, 30, 5, 900.0, 4.0, 2.5)

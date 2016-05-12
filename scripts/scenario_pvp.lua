@@ -9,20 +9,20 @@ function init()
 	shangri_la = SpaceStation():setPosition(10000, 10000):setTemplate('Large Station'):setFaction("Independent"):setRotation(random(0, 360)):setCallSign("Shangri-La"):setCommsFunction(shangrilaComms)
 	
 	human_shipyard = SpaceStation():setPosition(-7500, 15000):setTemplate('Small Station'):setFaction("Human Navy"):setRotation(random(0, 360)):setCallSign("Mobile Shipyard"):setCommsFunction(stationComms)
-	CpuShip():setTemplate('Cruiser'):setFaction("Human Navy"):setPosition(-8000, 16500):orderDefendTarget(human_shipyard):setScannedByFaction("Human Navy", true)
-	CpuShip():setTemplate('Cruiser'):setFaction("Human Navy"):setPosition(-6000, 13500):orderDefendTarget(human_shipyard):setScannedByFaction("Human Navy", true)
-	CpuShip():setTemplate('Cruiser'):setFaction("Human Navy"):setPosition(-7000, 14000):orderDefendTarget(human_shipyard):setScannedByFaction("Human Navy", true)
-	CpuShip():setTemplate('Adv. Gunship'):setFaction("Human Navy"):setPosition(-8000, 14000):orderDefendTarget(human_shipyard):setScannedByFaction("Human Navy", true)
+	CpuShip():setTemplate('Phobos T3'):setFaction("Human Navy"):setPosition(-8000, 16500):orderDefendTarget(human_shipyard):setScannedByFaction("Human Navy", true)
+	CpuShip():setTemplate('Phobos T3'):setFaction("Human Navy"):setPosition(-6000, 13500):orderDefendTarget(human_shipyard):setScannedByFaction("Human Navy", true)
+	CpuShip():setTemplate('Phobos T3'):setFaction("Human Navy"):setPosition(-7000, 14000):orderDefendTarget(human_shipyard):setScannedByFaction("Human Navy", true)
+	CpuShip():setTemplate('Nirvana R5'):setFaction("Human Navy"):setPosition(-8000, 14000):orderDefendTarget(human_shipyard):setScannedByFaction("Human Navy", true)
 	
 	kraylor_shipyard = SpaceStation():setPosition(27500, 5000):setTemplate('Small Station'):setFaction("Kraylor"):setRotation(random(0, 360)):setCallSign("Forward Command"):setCommsFunction(stationComms)
-	CpuShip():setTemplate('Cruiser'):setFaction("Kraylor"):setPosition(29000, 5000):orderDefendTarget(kraylor_shipyard):setScannedByFaction("Kraylor", true)
-	CpuShip():setTemplate('Cruiser'):setFaction("Kraylor"):setPosition(25000, 5000):orderDefendTarget(kraylor_shipyard):setScannedByFaction("Kraylor", true)
-	CpuShip():setTemplate('Cruiser'):setFaction("Kraylor"):setPosition(27500, 6000):orderDefendTarget(kraylor_shipyard):setScannedByFaction("Kraylor", true)
-	CpuShip():setTemplate('Adv. Gunship'):setFaction("Kraylor"):setPosition(27000, 5000):orderDefendTarget(kraylor_shipyard):setScannedByFaction("Kraylor", true)
+	CpuShip():setTemplate('Phobos T3'):setFaction("Kraylor"):setPosition(29000, 5000):orderDefendTarget(kraylor_shipyard):setScannedByFaction("Kraylor", true)
+	CpuShip():setTemplate('Phobos T3'):setFaction("Kraylor"):setPosition(25000, 5000):orderDefendTarget(kraylor_shipyard):setScannedByFaction("Kraylor", true)
+	CpuShip():setTemplate('Phobos T3'):setFaction("Kraylor"):setPosition(27500, 6000):orderDefendTarget(kraylor_shipyard):setScannedByFaction("Kraylor", true)
+	CpuShip():setTemplate('Nirvana R5'):setFaction("Kraylor"):setPosition(27000, 5000):orderDefendTarget(kraylor_shipyard):setScannedByFaction("Kraylor", true)
 	
 	--spawn players
-	gallipoli = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Player Cruiser"):setPosition(-8500, 15000):setCallSign("HNS Gallipoli"):setScannedByFaction("Kraylor", false)
-	crusader = PlayerSpaceship():setFaction("Kraylor"):setTemplate("Player Cruiser"):setPosition(26500, 5000):setCallSign("Crusader Naa'Tvek"):setScannedByFaction("Human Navy", false)
+	gallipoli = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setPosition(-8500, 15000):setCallSign("HNS Gallipoli"):setScannedByFaction("Kraylor", false)
+	crusader = PlayerSpaceship():setFaction("Kraylor"):setTemplate("Atlantis"):setPosition(26500, 5000):setCallSign("Crusader Naa'Tvek"):setScannedByFaction("Human Navy", false)
 	
 	-- timers
 	time = 0
@@ -48,12 +48,12 @@ Support our glorious soldiers by preventing the heretics from harming our transp
 	
 	--spawn first wave
 	table.insert(humanTroops, spawnTransport():setFaction("Human Navy"):setPosition(-7000, 15000):orderDock(shangri_la):setScannedByFaction("Human Navy", true))
-	CpuShip():setTemplate('Fighter'):setFaction("Human Navy"):setPosition(-7000, 15500):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Human Navy", true)
-	CpuShip():setTemplate('Fighter'):setFaction("Human Navy"):setPosition(-7000, 14500):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Human Navy", true)
+	CpuShip():setTemplate('MT52 Hornet'):setFaction("Human Navy"):setPosition(-7000, 15500):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Human Navy", true)
+	CpuShip():setTemplate('MT52 Hornet'):setFaction("Human Navy"):setPosition(-7000, 14500):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Human Navy", true)
 	
 	table.insert(kraylorTroops, spawnTransport():setFaction("Kraylor"):setPosition(26500, 5000):orderDock(shangri_la):setScannedByFaction("Kraylor", true))
-	CpuShip():setTemplate('Fighter'):setFaction("Kraylor"):setPosition(26500, 5500):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Kraylor", true)
-	CpuShip():setTemplate('Fighter'):setFaction("Kraylor"):setPosition(26500, 4500):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Kraylor", true)
+	CpuShip():setTemplate('MT52 Hornet'):setFaction("Kraylor"):setPosition(26500, 5500):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Kraylor", true)
+	CpuShip():setTemplate('MT52 Hornet'):setFaction("Kraylor"):setPosition(26500, 4500):orderFlyTowards(shangri_la:getPosition()):setScannedByFaction("Kraylor", true)
 end
 
 function shangrilaComms()
