@@ -51,7 +51,26 @@ function update(delta)
 			if target:isValid() then
 				spawn_delay = random(30, 50)
 				
-				obj = CpuShip():setTemplate("Transport"..irandom(1, 5).."x"..irandom(1, 5)):setFaction('Independent')
+                rnd = irandom(1, 5)
+                if rnd == 1 then
+                    name = "Personel"
+                elseif rnd == 2 then
+                    name = "Goods"
+                elseif rnd == 2 then
+                    name = "Garbage"
+                elseif rnd == 2 then
+                    name = "Equipment"
+                else
+                    name = "Fuel"
+                end
+                
+                if irandom(1, 100) < 15 then
+                    name = name .. " Jump Freighter " .. irandom(3, 5)
+                else
+                    name = name .. " Freighter " .. irandom(1, 5)
+                end
+                
+				obj = CpuShip():setTemplate(name):setFaction('Independent')
 				obj.target = target
 				obj.undock_delay = random(5, 30)
 				obj:orderDock(obj.target)

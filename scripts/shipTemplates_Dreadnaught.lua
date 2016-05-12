@@ -7,6 +7,7 @@ Think: Stardestroyer.
 ----------------------------------------------------------]]
 
 template = ShipTemplate():setName("Odin"):setClass("Dreadnaught", "Odin"):setModel("space_station_2")
+template:setRadarTrace("radartrace_largestation.png")
 template:setDescription([[The Odin. A class of it's own really.
 It is an idea so insane, that it had to work. Atleast that much have the people behind it been thinking.
 
