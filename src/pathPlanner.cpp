@@ -45,6 +45,7 @@ void PathPlannerManager::update(float delta)
         }
     }
     
+    std::vector<PathPlannerAvoidObject> add_list;
     for(auto h_it = small_objects.begin(); h_it != small_objects.end(); h_it++)
     {
         for(auto it = h_it->second.begin(); it != h_it->second.end();)
@@ -55,12 +56,17 @@ void PathPlannerManager::update(float delta)
             }else{
                 if (it->source)
                 {
-                    small_objects[hashPosition(it->source->getPosition())].push_back(PathPlannerAvoidObject(it->source, it->size));
+                    add_list.emplace_back(it->source, it->size);
                 }
 
                 it = h_it->second.erase(it);
             }
         }
+    }
+    for(PathPlannerAvoidObject& obj : add_list)
+    {
+        if (obj.source)
+            small_objects[hashPosition(obj.source->getPosition())].emplace_back(obj.source, obj.size);
     }
 }
 
