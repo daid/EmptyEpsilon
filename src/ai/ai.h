@@ -19,15 +19,15 @@ protected:
      */
     float missile_fire_delay;
     bool has_missiles;
-    enum EBeamInfo
-    {
-        NoBeams,
-        FrontBeams,
-        SideBeams,
-        RearBeams
-    };
-    EBeamInfo beam_info;
+    bool has_beams;
     float beam_weapon_range;
+    enum class EWeaponDirection
+    {
+        Front,
+        Side,
+        Rear
+    };
+    EWeaponDirection weapon_direction;
     
     float update_target_delay;
 

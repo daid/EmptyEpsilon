@@ -12,8 +12,9 @@ ShipAI::ShipAI(CpuShip* owner)
     missile_fire_delay = 0.0;
 
     has_missiles = false;
-    beam_info = NoBeams;
+    has_beams = false;
     beam_weapon_range = 0.0;
+    weapon_direction = EWeaponDirection::Front;
     
     update_target_delay = 0.0;
 }
@@ -67,7 +68,7 @@ void ShipAI::run(float delta)
     }
 
     //If we have a target and weapons, engage the target.
-    if (owner->getTarget() && (has_missiles || beam_info != NoBeams))
+    if (owner->getTarget() && (has_missiles || has_beams))
     {
         runAttack(owner->getTarget());
     }else{
@@ -75,60 +76,130 @@ void ShipAI::run(float delta)
     }
 }
 
+static int getDirectionIndex(float direction, float arc)
+{
+    if (sf::angleDifference(direction, 0.0f) < arc / 2.0f)
+        return 0;
+    if (sf::angleDifference(direction, 90.0f) < arc / 2.0f)
+        return 1;
+    if (sf::angleDifference(direction, 180.0f) < arc / 2.0f)
+        return 2;
+    if (sf::angleDifference(direction, 270.0f) < arc / 2.0f)
+        return 3;
+    return -1;
+}
+
 void ShipAI::updateWeaponState(float delta)
 {
     if (missile_fire_delay > 0.0)
         missile_fire_delay -= delta;
 
-    //Check the weapon state,
-    has_missiles = owner->weapon_tube_count > 0 && (owner->weapon_storage[MW_Homing] > 0 || owner->weapon_storage[MW_Nuke] > 0 || owner->weapon_storage[MW_EMP] > 0 || owner->weapon_storage[MW_HVLI] > 0);
-    beam_info = NoBeams;
+    //Update the weapon state, figure out which direction is our main attack vector. If we have missile and/or beam weapons, and what we should preferer.
+    has_missiles = false;
+    has_beams = false;
+    beam_weapon_range = 0;
+    
+    float tube_strength_per_direction[4] = {0, 0, 0, 0};
+    float beam_strength_per_direction[4] = {0, 0, 0, 0};
+    
     //If we have weapon tubes, load them with torpedoes
     for(int n=0; n<owner->weapon_tube_count; n++)
     {
-        if (owner->weapon_tube[n].isEmpty() && owner->weapon_storage[MW_EMP] > 0 && owner->weapon_tube[n].canLoad(MW_EMP))
-            owner->weapon_tube[n].startLoad(MW_EMP);
-        else if (owner->weapon_tube[n].isEmpty() && owner->weapon_storage[MW_Nuke] > 0 && owner->weapon_tube[n].canLoad(MW_Nuke))
-            owner->weapon_tube[n].startLoad(MW_Nuke);
-        else if (owner->weapon_tube[n].isEmpty() && owner->weapon_storage[MW_Homing] > 0 && owner->weapon_tube[n].canLoad(MW_Homing))
-            owner->weapon_tube[n].startLoad(MW_Homing);
-        else if (owner->weapon_tube[n].isEmpty() && owner->weapon_storage[MW_HVLI] > 0 && owner->weapon_tube[n].canLoad(MW_HVLI))
-            owner->weapon_tube[n].startLoad(MW_HVLI);
+        WeaponTube& tube = owner->weapon_tube[n];
+        if (tube.isEmpty() && owner->weapon_storage[MW_EMP] > 0 && tube.canLoad(MW_EMP))
+            tube.startLoad(MW_EMP);
+        else if (tube.isEmpty() && owner->weapon_storage[MW_Nuke] > 0 && tube.canLoad(MW_Nuke))
+            tube.startLoad(MW_Nuke);
+        else if (tube.isEmpty() && owner->weapon_storage[MW_Homing] > 0 && tube.canLoad(MW_Homing))
+            tube.startLoad(MW_Homing);
+        else if (tube.isEmpty() && owner->weapon_storage[MW_HVLI] > 0 && tube.canLoad(MW_HVLI))
+            tube.startLoad(MW_HVLI);
 
-        if (owner->weapon_tube[n].isLoaded())
-            has_missiles = true;
+        //When the tube is loading or loaded, add the relative strenght of this tube to the direction of this tube.
+        if (tube.isLoading() || tube.isLoaded())
+        {
+            int index = getDirectionIndex(tube.getDirection(), 90);
+            if (index > 0)
+            {
+                float missile_strength = 35;
+                if (tube.getLoadType() == MW_EMP)
+                    missile_strength = 150;
+                if (tube.getLoadType() == MW_Nuke)
+                    missile_strength = 250;
+                if (tube.getLoadType() == MW_HVLI)
+                    missile_strength = 15;
+                tube_strength_per_direction[index] += missile_strength / tube.getLoadTimeConfig();
+            }
+        }
     }
 
-    beam_weapon_range = 0;
     for(int n=0; n<max_beam_weapons; n++)
     {
-        if (owner->beam_weapons[n].getRange() > 0)
+        BeamWeapon& beam = owner->beam_weapons[n];
+        if (beam.getRange() > 0)
         {
-            if (sf::angleDifference(owner->beam_weapons[n].getDirection(), 0.0f) < owner->beam_weapons[n].getArc() / 2.0f)
+            int index = getDirectionIndex(beam.getDirection(), beam.getArc());
+            if (index > 0)
             {
-                if (beam_info == NoBeams || beam_info == FrontBeams || beam_weapon_range * 2.0 < owner->beam_weapons[n].getRange())
-                {
-                    beam_weapon_range = std::max(beam_weapon_range, owner->beam_weapons[n].getRange());
-                    beam_info = FrontBeams;
-                }
+                beam_strength_per_direction[index] += beam.getDamage() / beam.getCycleTime();
             }
-            else if (sf::angleDifference(owner->beam_weapons[n].getDirection(), 90.0f) < owner->beam_weapons[n].getArc() / 2.0f || sf::angleDifference(owner->beam_weapons[n].getDirection(), -90.0f) < owner->beam_weapons[n].getArc() / 2.0f)
+        }
+    }
+    
+    int best_tube_index = -1;
+    float best_tube_strenght = 0.0;
+    int best_beam_index = -1;
+    float best_beam_strenght = 0.0;
+    for(int n=0; n<4; n++)
+    {
+        if (best_tube_strenght < tube_strength_per_direction[n])
+        {
+            best_tube_index = n;
+            best_tube_strenght = tube_strength_per_direction[n];
+        }
+        if (best_beam_strenght < beam_strength_per_direction[n])
+        {
+            best_beam_index = n;
+            best_beam_strenght = beam_strength_per_direction[n];
+        }
+    }
+    
+    has_beams = best_beam_index > -1;
+    has_missiles = best_tube_index > -1;
+    
+    if (has_beams)
+    {
+        //Figure out our beam weapon range.
+        for(int n=0; n<max_beam_weapons; n++)
+        {
+            BeamWeapon& beam = owner->beam_weapons[n];
+            if (beam.getRange() > 0)
             {
-                if (beam_info == NoBeams || beam_info == SideBeams || beam_weapon_range * 2.0 < owner->beam_weapons[n].getRange())
+                int index = getDirectionIndex(beam.getDirection(), beam.getArc());
+                if (index == best_beam_index)
                 {
-                    beam_weapon_range = std::max(beam_weapon_range, owner->beam_weapons[n].getRange());
-                    beam_info = SideBeams;
-                }
-            }
-            else if (sf::angleDifference(owner->beam_weapons[n].getDirection(), 180.0f) < owner->beam_weapons[n].getArc() / 2.0f)
-            {
-                if (beam_info == NoBeams || beam_info == RearBeams || beam_weapon_range * 2.0 < owner->beam_weapons[n].getRange())
-                {
-                    beam_weapon_range = std::max(beam_weapon_range, owner->beam_weapons[n].getRange());
-                    beam_info = RearBeams;
+                    beam_weapon_range += beam.getRange() * (beam.getDamage() / beam.getCycleTime()) / beam_strength_per_direction[index];
                 }
             }
         }
+    }
+    
+    int direction_index = best_tube_index;
+    if (best_beam_strenght > best_tube_strenght)
+        direction_index = best_beam_index;
+    switch(direction_index)
+    {
+    case -1:
+    case 0:
+        weapon_direction = EWeaponDirection::Front;
+        break;
+    case 2:
+    case 4:
+        weapon_direction = EWeaponDirection::Side;
+        break;
+    case 3:
+        weapon_direction = EWeaponDirection::Rear;
+        break;
     }
 }
 
@@ -222,7 +293,7 @@ void ShipAI::runOrders()
         // 1) we are looking for a target
         // 2) we ran out of missiles
         // 3) we have no weapons
-        if (has_missiles || beam_info != NoBeams)
+        if (has_missiles || has_beams)
         {
             P<SpaceObject> new_target = findBestTarget(owner->getPosition(), 50000);
             if (new_target)
@@ -308,7 +379,7 @@ void ShipAI::runOrders()
 void ShipAI::runAttack(P<SpaceObject> target)
 {
     float attack_distance = 4000.0;
-    if (beam_info != NoBeams)
+    if (has_beams)
         attack_distance = beam_weapon_range * 0.7;
 
     sf::Vector2f position_diff = target->getPosition() - owner->getPosition();
@@ -334,7 +405,7 @@ void ShipAI::runAttack(P<SpaceObject> target)
     {
         owner->target_rotation = sf::vector2ToAngle(position_diff);
     }else{
-        if (beam_info == SideBeams)
+        if (weapon_direction == EWeaponDirection::Side)
         {
             //We have side beams, find out where we want to attack from.
             sf::Vector2f target_position = target->getPosition();
@@ -526,10 +597,10 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
         const MissileWeaponData& data = MissileWeaponData::getDataFor(type);
 
         sf::Vector2f target_position = target->getPosition();
-        float target_angle = sf::vector2ToAngle(target_position - owner->getPosition());
+        float target_angle = sf::vector2ToAngle(owner->getPosition() - target_position);
         float fire_angle = owner->getRotation() + owner->weapon_tube[tube_index].getDirection();
         
-        float distance = sf::length(target_position - owner->getPosition());
+        float distance = sf::length(owner->getPosition() - target_position);
         //HVLI missiles do not home or turn. So use a different targeting mechanism.
         float angle_diff = sf::angleDifference(target_angle, fire_angle);
 
@@ -537,8 +608,8 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
         float fly_time = distance / data.speed;
         target_position += target->getVelocity() * fly_time;
 
-        //If our "error" of hitting is less then twice the radius of the target, fire.
-        if (distance * tanf(fabs(angle_diff / 180.0f * M_PI)) < target->getRadius() * 2.0)
+        //If our "error" of hitting is less then half the radius of the target, fire.
+        if (angle_diff < 80.0 && distance * tanf(fabs(angle_diff) / 180.0f * M_PI) < target->getRadius() * 0.5)
             return fire_angle;
         
         return std::numeric_limits<float>::infinity();

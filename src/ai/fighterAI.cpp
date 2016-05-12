@@ -15,7 +15,7 @@ FighterAI::FighterAI(CpuShip* owner)
 
 bool FighterAI::canSwitchAI()
 {
-    if (owner->getTarget() && (has_missiles || beam_info != NoBeams))
+    if (owner->getTarget() && (has_missiles || has_beams))
     {
         if (attack_state == dive)
             return false;
