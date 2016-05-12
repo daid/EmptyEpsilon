@@ -73,7 +73,7 @@ variation:setDescription([[First version of the Piranha that was sold. Not popul
 variation:setTubes(3, 12.0)
 variation:setWeaponStorage("HVLI", 10)
 variation:setWeaponStorage("Homing", 5)
-variation:setTubeDirection(0,   0)
+variation:setTubeDirection(0,   0):setWeaponTubeExclusiveFor(0, "HVLI")
 variation:setTubeDirection(1, -90)
 variation:setTubeDirection(2,  90)
 
