@@ -37,7 +37,6 @@ private:
      */
     bool canDoMainScreen() { return PostProcessor::isEnabled() && sf::Shader::isAvailable(); }
     
-    void updateButtonStatus(GuiToggleButton* toggled);
     void updateReadyButton();
     void updateCrewTypeOptions();
     
