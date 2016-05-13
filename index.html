@@ -30,7 +30,7 @@
 
 		<h2>What does this mean?</h2>
 		<p>EmptyEpsilon places you in the roles of a spaceship's bridge officers, like those seen in <a href="http://en.wikipedia.org/wiki/Star_Trek">Star Trek</a>. While you can play EmptyEpsilon alone or with friends, the best experience involves 6 players working together on each ship.</p>
-		<p>Each officer fills a unique role: Captain, Helms, Weapons, Relay, Science, and Engineering. Except for the Captain, each officer operates their part of the ship through a specialized screen. The Captain relies on their trusty crew to report information and follow orders.</p>
+		<p>Each officer fills a unique role: Captain, Helms, Weapons, Relay, Science, and Engineering. Except for the Captain, each officer operates part of the ship through a specialized screen. The Captain relies on their trusty crew to report information and follow orders.</p>
 
 		<h2>Like Artemis Spaceship Bridge Simulator?</h2>
 		<p><a href="http://artemis.eochu.com/">Artemis Spaceship Bridge Simulator</a> was the inspiration for EmptyEpsilon. It's pretty good as a bridge simulator, but we had some issues with it that we wanted to fix. Since Artemis isn't open source, our only solution was to start over by ourselves.</p>
@@ -38,7 +38,7 @@
 		<p>All in all, Artemis is a nice game. We wrote our own to be able to implement new features and extensibility.</p>
 
 		<h2>Contact</h2>
-		<p>The best place to talk about bridge simulation and EmptyEpsilon is the <a href="http://bridgesim.net/">Starship Bridge Simulation Network</a>. We regulary check this forum, and post updates and battle logs of our space adventures.</p>
+		<p>The best place to talk about bridge simulation and EmptyEpsilon is the <a href="http://bridgesim.net/">Starship Bridge Simulation Network</a>. We regularly check this forum, and post updates and battle logs of our space adventures.</p>
 		<p>The main developers of EmptyEpsilon go by the names of <a href="https://github.com/daid/">Daid</a> and <a href="https://github.com/nallath/">Nallath</a>.</p>
 
 		<h2>Donations</h2>
@@ -52,7 +52,7 @@
 		</form></p>
 
 		<h2>Previous contributions</h2>
-        <!-- Outstanding cash from: Troy Hall and Kevin Primm -->
+		<!-- Outstanding cash from: Troy Hall and Kevin Primm -->
 		<p>Thanks to the contributions of Daniel Ginat, we managed to buy: <a href="http://www.turbosquid.com/3d-models/maya-5-small-frigates/828573">more frigate models</a>.</p>
 		<p>Thanks to the generous contribution of Serge Wroclawski, we managed to buy: <a href="http://www.turbosquid.com/3d-models/max-5-battleship-destroyers-upgraded/707660">more battleship models</a>.</p>
 		<p>Thanks to the contributions of MadKat and Daid, we managed to buy: <a href="http://www.turbosquid.com/3d-models/4-space-station-max/679444">larger 3D station models</a>.</p>
@@ -109,8 +109,8 @@
 				<p>The other officers each operate one of the ship's stations, which are described in the <a href="#tabs-stations">Stations tab</a>.</p>
 
 				<h2>Running the game</h2>
-				<p>After starting the game on the computer serving as the main screen, it can also serve as the game server. The other stations can then connect to the game server as clients.</p>
-				<p>After starting the server, select a scenario (we recommend the "Waves" or "Basic" scenarios for first games), then should spawn a player ship for everyone to join.</p>
+				<p>After starting the game on the computer serving as the main screen, you can also configure it as the game server. The other stations can then connect to the game server as clients.</p>
+				<p>After starting the server, select a scenario (we recommend the "Waves" or "Basic" scenarios for first games), then spawn a player ship for everyone to join.</p>
 				<p>Everyone should select the same ship and choose their designated station. That's it! You're now in command of a fully functional spaceship.</p>
 
 				<h2>Internet play</h2>
@@ -127,12 +127,12 @@
 				</ul>
 				<p>These 3 stations can also be combined with the 5 standard stations.</p>
 			</div>
-<!--
+			<!--
 			<div id="running-tabs-auto">
 				<p>TODO (You can make EmptyEpsilon auto connect to any available server on the network, and selecting a station instantly. Lowering setup time)
 				</p>
 			</div>
--->
+			-->
 			<div id="running-tabs-gm">
 				<p>A Game Master can modify scenarios on the fly by adding and removing AI-operated ships and stations, changing their configurations, placing space hazards, and communicating with player ships, all making for a more interesting and customized experience for players.</p>
 				<p>Scenarios can also add special GM functions that trigger scripted events. This lets Game Masters build complex stories and intricate, dynamic situations that they can manipulate at will during gameplay. Scripting commands are covered in depth on the <a href="#tabs-scripting">Mission Scripting tab</a>.</p>
@@ -153,6 +153,7 @@
 			<div id="station-tabs-main">
 				<p><a class="image-link float-right" href="screenshots/mainscreen.png"><img src="screenshots/mainscreen.png"></a></p>
 				<p>Without direct control of the ship, the Captain keeps the crew focused on their goal and makes tactical decisions in combat. The ship's main screen should be set up on a large monitor or projector so that all players can track their ship's status.</p>
+
 				<h2>The Captain's tasks include:</h2>
 				<ul>
 					<li>Planning the next actions</li>
@@ -173,6 +174,7 @@
 					<li>Right key: Set main screen to right view</li>
 					<li>Tab key: Set main screen to short-range radar view</li>
 					<li>Q key: Set main screen to long-range radar view</li>
+					<li>F key: Set main screen to first-person view</li>
 				</ul>
 				<p>Note that these controls are optional and are not necessary to play the game, but could be used in custom hardware setups. These controls are only for the main screen.</p>
 				<p>A "custom" hardware setup for the Captain could be as simple as taping a 3-button mouse to an armchair.</p>
@@ -182,7 +184,7 @@
 				<p><a class="image-link float-right" href="screenshots/helms.png"><img src="screenshots/helms.png"></a></p>
 				<h2 class="station helms">Helms</h2>
 				<p><b>Data:</b> In the upper-left corner, the Helms officer's screen displays the ship's energy (max is 1,000), current heading in degrees, and current speed in Units/minute. Below this data are two sliders.</p>
-				<p><b>Engines:</b> The left slider controls the impulse engines, from -100% (full reverse) to 0% (full stop) to 100% (full ahead). The right slider control's the ship's high-speed warp or instantly teleporting jump drives, if the ship is equipped with either.</p>
+				<p><b>Engines:</b> The left slider controls the impulse engines, from -100% (full reverse) to 0% (full stop) to 100% (full ahead). The right slider controls the ship's high-speed warp or instantly teleporting jump drives, if the ship is equipped with either.</p>
 				<p><b>Setting a Heading:</b> The Helms officer has a short-range radar. Pressing inside this radar sets the ship's heading in that direction. If the ship has beam weapons, the radar view includes those weapons' firing arcs to help the Helms officer keep targets in the Weapons officer's sights.</p>
 				<p><b>Jumping:</b> A jump drive teleports the ship across the specified distance along its current heading. The ship's impulse engines shut down, and after a countdown the ship disappears from its position and instantly reappears at its destination. Each jump consumes energy, with longer jumps consuming more energy. A standard jump takes 10 seconds to initiate, but depending on how much power is allocated to the drive (and how damaged it is), the time to power the jump might vary.</p>
 				<p><b>Warping:</b> A warp drive propels the ship straight ahead several times faster than impulse engines, but drain energy at a much faster rate. A warping ship can still collide with hazards like asteroids and mines, but a ship can enter warp very quickly for rapid escapes and advanced tactical maneuvers.</p>
@@ -203,11 +205,11 @@
 					<li><b>Homing:</b> A simple, high-speed missile with a small warhead.</li>
 					<li><b>Nuke:</b> A powerful homing missile that deal tremendous damage to all ships within 1U of its detonation.</li>
 					<li><b>Electromagentic Pulse (EMP):</b> A homing missile that deal powerful damage to the shields of all ships within 1U of detonation, but don't damage physical systems or hulls.</li>
-					<li><b>High-velocity lead impactor (HVLI):</b> A group of 5 simple lead slugs fired in a single burst at extremely high velocity. These bolts don't home in on an enemy target.</li>
+					<li><b>High-velocity Lead Impactor (HVLI):</b> A group of 5 simple lead slugs fired in a single burst at extremely high velocity. These bolts don't home in on an enemy target.</li>
 					<li><b>Mine:</b> A powerful, stationary explosive that detonates when a ship moves to within 1U of it. The explosion damages all objects within a 1U radius.</li>
 				</ul>
 				<p><b>Beam Weapons:</b> The location and range of beam weapons are indicated by red firing arcs originating from the players' ship. After the Weapons officer selects a target, the ship's beam weapons will automatically fire at that target when it is inside a beam's firing arc. The officer can use the frequency selectors at the bottom right, along with data about a target's shield frequencies provided by the <a href="#tabs-science">Science officer</a>, to remodulate beams to a frequency that deals more damage. Note that you can change the beam frequency instantaneously.</p>
-				<p>Beam weapons default to fire at a target's hull, but the Weapons officer can also target specific subsystems to disable an enemy. If you simply wish to destroy an enemy, however, it's best left on hull.</p>
+				<p>Beam weapons fire at a target's hull by default, but the Weapons officer can also target specific subsystems to disable an enemy. If you simply wish to destroy an enemy, however, it's best left on hull.</p>
 				<p><b>Shields:</b> The Weapons officer is responsible for activating the ship's shields and modulating their frequency. It might be tempting to keep the shields up at all times, but they drain significantly more power when active. Certain shield frequencies are especially resistant to certain beam frequencies, which can also be detected in targets by the Science officer. Unlike beam weapons, however, remodulating the shields' frequency brings them offline for several seconds and leaves the ship temporarily defenseless.</p>
 			</div>
 
@@ -227,7 +229,7 @@
 				<p><b>Deep Scans:</b> A second, more difficult scan yields more information about the ship, including its shield and beam frequencies. The Science officer must align both the frequency and modulation of each scan type to complete a deep scan. The helms and weapons screen can also see the firing arcs of deep-scanned ships, which help them guide your ship from being shot by their beams.</p>
 				<p><b>Nebulae:</b> Nebulae block the ship's long-range scanner. The Science officer cannot see what's inside or behind them, and while in a nebula the ship's radars cannot detect what's outside of it. These traits make nebulae ideal places to hide for repairs or stage an ambush. To avoid surprises around nebulae, relay information about where you can and cannot see objects to both the Captain and the Relay officer.</p>
 				<p><b>Probe View:</b> The Relay officer can launch probes and link one to the Science station. The Science officer can view the probe's short-range sensor data to scan ships within its range, even if the probe is far from the ship's long-range scanners or in a nebula.</p>
-				<p><b>Database:</b> The Science officer can access the ship's database of all known ships, as well as data about weapons and space hazards. This can be vital when trying to assess a ship's capabilities when a deep scan isn't an option, or for help navigating a black hole, wormhole, or other anomaly.</p>
+				<p><b>Database:</b> The Science officer can access the ship's database of all known ships, as well as data about weapons and space hazards. This can be vital when assessing a ship's capabilities without a deep scan, or for help navigating a black hole, wormhole, or other anomaly.</p>
 			</div>
 
 			<div id="station-tabs-relay">
@@ -236,7 +238,7 @@
 				<p><b>Sector Map:</b> The Relay station can view a map of the sector, including space hazards and ships within short-range scanner range (5U). It can also see the short-range sensor data around other friendly ships and stations, potentially spotting distant ships before the science station does. The Relay officer cannot scan ships, however.</p>
 				<p><b>Probes:</b> The Relay officer can launch up to 8 high-speed probes to any point in the sector. These probes fly toward a location and transmit short-range sensor data to the ship for 10 minutes. Probes work inside nebulae, and thus are powerful tools when faced with an area blocked by nebula. The Relay officer can also link a probe's sensors to the Science station, which lets the Science officer scan ships within the probe's sensor range even if the probe is beyond the ship's long-range scanners. Probes cannot be retrieved and can be destroyed by enemies; your ship's stock of probes can be replenished only by docking at a station.</p>
 				<p><b>Waypoints:</b> The Relay officer can set waypoints around the sector. These waypoints appear on the Helms officer's short-range scanner and can guide the ship toward a destination or on a specific route through space. Waypoints are also necessary when requesting aid from friendly stations.</p>
-				<p><b>Communications:</b> The Relay officer can open communications with stations and other ships. Friendly ships hailed by the Relay officer can take orders, and friendly stations can dispatch backup and supply ships. While your ship is docked at a station, the Relay officer can request rearmament of the ship's missiles and mines. Some of these requests can cost some of your ship's reputation, which is also tracked by the Relay station.</p>
+				<p><b>Communications:</b> The Relay officer can open communications with stations and other ships. Friendly ships hailed by the Relay officer can take orders, and friendly stations can dispatch backup and supply ships. While your ship is docked at a station, the Relay officer can request rearmament of the ship's missiles and mines. Some of these requests can cost some of your crew's reputation, which is also tracked by the Relay station.</p>
 			</div>
 		</div>
 	</div>
@@ -832,7 +834,7 @@ function updateHashFromTab(event, ui)
 {
 	var target_id = event.target.id;
 	var target_index = $(event.target).tabs("option", "active");
-    
+
     if (target_id == "tabs" && target_index == 6)
     {
         window.location.href = "http://bridgesim.net/categories/emptyepsilon";
