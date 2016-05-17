@@ -43,9 +43,9 @@ public:
     PlayerInfo();
 
     bool isMainScreen();
-    void setCrewPosition(ECrewPosition position, bool active);
-    void setShipId(int32_t id);
-    void setMainScreenControl(bool control);
+    void commandSetCrewPosition(ECrewPosition position, bool active);
+    void commandSetShipId(int32_t id);
+    void commandSetMainScreenControl(bool control);
     virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet);
 
     void spawnUI();

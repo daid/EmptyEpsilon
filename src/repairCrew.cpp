@@ -34,7 +34,7 @@ class PathMap {
 	public:
 		ERepairCrewDirection arrive_direction;
 		bool right, down;
-		static PathNode empty;
+        PathNode() : arrive_direction(RC_None), right(false), down(false) { };
 	};
 private:
 	std::vector<PathNode> pathMap;
@@ -52,9 +52,9 @@ public:
 		}
 	}
 
-	PathNode& Node(int x, int y) {
-		assert(x >= 0 && x < width && y >= 0 && y < width);
-		return pathMap[x*width + y];
+	inline PathNode& Node(int x, int y) {
+		assert(x >= 0 && x < width && y >= 0 && y < height);
+		return pathMap[y*width + x];
 	}
 };
 

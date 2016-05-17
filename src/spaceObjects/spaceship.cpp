@@ -1032,8 +1032,14 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
     ///Missile weapon data
     if (weapon_tube_count != ship_template->weapon_tube_count)
         ret += ":setWeaponTubeCount(" + string(weapon_tube_count) + ")";
-    //TODO: Weapon tube "type_allowed_mask"
-    //TODO: Weapon tube "load_time"
+    for(int n=0; n<weapon_tube_count; n++)
+    {
+        WeaponTube& tube = weapon_tube[n];
+        if (tube.getDirection() != ship_template->weapon_tube[n].direction)
+            ret += ":setWeaponTubeDirection(" + string(n) + ", " + string(tube.getDirection(), 0) + ")";
+        //TODO: Weapon tube "type_allowed_mask"
+        //TODO: Weapon tube "load_time"
+    }
     for(int n=0; n<MW_Count; n++)
     {
         if (weapon_storage_max[n] != ship_template->weapon_storage[n])

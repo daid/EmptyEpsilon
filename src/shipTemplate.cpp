@@ -24,6 +24,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDockClasses);
     /// Set the amount of energy available for this ship. Note that only player ships use energy. So setting this for anything else is useless.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setEnergyStorage);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRepairCrewCount);
     /// Setup a beam weapon.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeam);
     /// Setup a beam weapon.

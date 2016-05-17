@@ -1,13 +1,21 @@
 -- Name: Empty space
--- Description: Empty scenario, no enemies, no friendlies, only a lonely station. Can be used by a GM player to setup a scenario in the GM screen.
+-- Description: Empty scenario, no enemies, no friendlies. Can be used by a GM player to setup a scenario in the GM screen. The F5 key can be used to copy the current layout to the clipboard for use in scenario scripts.
 
 function init()
 	--SpaceStation():setPosition(1000, 1000):setTemplate('Small Station'):setFaction("Human Navy"):setRotation(random(0, 360))
 	--SpaceStation():setPosition(-1000, 1000):setTemplate('Medium Station'):setFaction("Human Navy"):setRotation(random(0, 360))
 	--SpaceStation():setPosition(1000, -1000):setTemplate('Large Station'):setFaction("Human Navy"):setRotation(random(0, 360))
 	--SpaceStation():setPosition(-1000, -1000):setTemplate('Huge Station'):setFaction("Human Navy"):setRotation(random(0, 360))
-	PlayerSpaceship():setFaction("Human Navy"):setTemplate("Player Cruiser"):setRotation(200)
-	Nebula():setPosition(-5000, 0)
+	--player1 = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Player Cruiser"):setRotation(200)
+    --player2 = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setRotation(0)
+	--Nebula():setPosition(-5000, 0)
+    --Artifact():setPosition(1000, 9000):setModel("small_frigate_1"):setDescription("An old space derelict.")
+    --Artifact():setPosition(9000, 2000):setModel("small_frigate_1"):setDescription("A wrecked ship.")
+    --Artifact():setPosition(3000, 4000):setModel("small_frigate_1"):setDescription("Tons of rotting plasteel.")
+    --addGMFunction("move 1 to 2", function() player1:transferPlayersToShip(player2) end)
+    --addGMFunction("move 2 to 1", function() player2:transferPlayersToShip(player1) end)
+    --CpuShip():setTemplate("Adder MK5"):setPosition(0, 0):setRotation(0):setFaction("Human Navy")
+    --CpuShip():setTemplate("Piranha F12"):setPosition(2000, 0):setRotation(-90):setFaction("Kraylor")
     
     addGMFunction("Random asteroid field", function()
         cleanup()

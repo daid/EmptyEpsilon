@@ -41,37 +41,33 @@ ShipSelectionScreen::ShipSelectionScreen()
         for(int n=0; n<max_crew_positions; n++)
         {
             crew_position_button[n]->setValue(false);
-            my_player_info->setCrewPosition(ECrewPosition(n), crew_position_button[n]->getValue());
+            my_player_info->commandSetCrewPosition(ECrewPosition(n), crew_position_button[n]->getValue());
         }
-        updateReadyButton();
     });
     main_screen_button->setSize(GuiElement::GuiSizeMax, 50);
     for(int n=0; n<max_crew_positions; n++)
     {
         crew_position_button[n] = new GuiToggleButton(stations_layout, "CREW_" + getCrewPositionName(ECrewPosition(n)) + "_BUTTON", getCrewPositionName(ECrewPosition(n)), [this, n](bool value){
             main_screen_button->setValue(false);
-            my_player_info->setCrewPosition(ECrewPosition(n), value);
-            updateReadyButton();
+            my_player_info->commandSetCrewPosition(ECrewPosition(n), value);
         });
         crew_position_button[n]->setSize(GuiElement::GuiSizeMax, 50);
         crew_position_button[n]->setIcon(getCrewPositionIcon(ECrewPosition(n)));
     }
 
     main_screen_controls_button = new GuiToggleButton(stations_layout, "MAIN_SCREEN_CONTROLS_ENABLE", "Main screen controls", [](bool value) {
-        my_player_info->setMainScreenControl(value);
+        my_player_info->commandSetMainScreenControl(value);
     });
     main_screen_controls_button->setValue(my_player_info->main_screen_control)->setSize(GuiElement::GuiSizeMax, 50);
     
     game_master_button = new GuiToggleButton(stations_layout, "GAME_MASTER_BUTTON", "Game master", [this](bool value) {
         window_button->setValue(false);
         topdown_button->setValue(false);
-        updateReadyButton();
     });
     game_master_button->setSize(GuiElement::GuiSizeMax, 50);
     window_button = new GuiToggleButton(stations_layout, "WINDOW_BUTTON", "Ship window", [this](bool value) {
         game_master_button->setValue(false);
         topdown_button->setValue(false);
-        updateReadyButton();
     });
     window_button->setSize(GuiElement::GuiSizeMax, 50);
     window_angle = new GuiSelector(stations_layout, "WINDOW_ANGLE", nullptr);
@@ -82,7 +78,6 @@ ShipSelectionScreen::ShipSelectionScreen()
     topdown_button = new GuiToggleButton(stations_layout, "TOP_DOWN_3D_BUTTON", "Top down 3D", [this](bool value) {
         game_master_button->setValue(false);
         window_button->setValue(false);
-        updateReadyButton();
     });
     topdown_button->setSize(GuiElement::GuiSizeMax, 50);
     
@@ -95,14 +90,13 @@ ShipSelectionScreen::ShipSelectionScreen()
     no_ships_label = new GuiLabel(left_container, "SHIP_SELECTION_NO_SHIPS_LABEL", "Waiting for server to spawn a ship", 30);
     no_ships_label->setPosition(0, 100, ATopCenter)->setSize(460, 50);
     player_ship_list = new GuiListbox(left_container, "PLAYER_SHIP_LIST", [this](int index, string value) {
-        my_spaceship = gameGlobalInfo->getPlayerShip(value.toInt());
-        if (my_spaceship)
+        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(value.toInt());
+        if (ship)
         {
-            my_player_info->setShipId(my_spaceship->getMultiplayerId());
+            my_player_info->commandSetShipId(ship->getMultiplayerId());
         }else{
-            my_player_info->setShipId(-1);
+            my_player_info->commandSetShipId(-1);
         }
-        updateReadyButton();
     });
     player_ship_list->setPosition(0, 100, ATopCenter)->setSize(490, 500);
 
@@ -112,20 +106,24 @@ ShipSelectionScreen::ShipSelectionScreen()
         GuiSelector* ship_template_selector = new GuiSelector(left_container, "CREATE_SHIP_SELECTOR", nullptr);
         std::vector<string> template_names = ShipTemplate::getTemplateNameList(ShipTemplate::PlayerShip);
         std::sort(template_names.begin(), template_names.end());
-        ship_template_selector->setOptions(template_names)->setSelectionIndex(0);
+        for(string& template_name : template_names)
+        {
+            P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
+            ship_template_selector->addEntry(template_name + " (" + ship_template->getClass() + ":" + ship_template->getSubClass() + ")", template_name);
+        }
+        ship_template_selector->setSelectionIndex(0);
         ship_template_selector->setPosition(0, 630, ATopCenter)->setSize(490, 50);
         
         (new GuiButton(left_container, "CREATE_SHIP_BUTTON", "Spawn player ship", [this, ship_template_selector]() {
-            my_spaceship = new PlayerSpaceship();
-            if (my_spaceship)
+            P<PlayerSpaceship> ship = new PlayerSpaceship();
+            if (ship)
             {
-                my_spaceship->setTemplate(ship_template_selector->getSelectionValue());
-                my_spaceship->setRotation(random(0, 360));
-                my_spaceship->target_rotation = my_spaceship->getRotation();
-                my_spaceship->setPosition(sf::Vector2f(random(-100, 100), random(-100, 100)));
-                my_player_info->setShipId(my_spaceship->getMultiplayerId());
+                ship->setTemplate(ship_template_selector->getSelectionValue());
+                ship->setRotation(random(0, 360));
+                ship->target_rotation = ship->getRotation();
+                ship->setPosition(sf::Vector2f(random(-100, 100), random(-100, 100)));
+                my_player_info->commandSetShipId(ship->getMultiplayerId());
             }
-            updateReadyButton();
         }))->setPosition(0, 680, ATopCenter)->setSize(490, 50);
 
         (new GuiButton(left_container, "DISCONNECT", "Scenario selection", [this]() {
@@ -143,7 +141,6 @@ ShipSelectionScreen::ShipSelectionScreen()
     ready_button->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
     
     crew_type_selector->setSelectionIndex(0);
-    updateReadyButton();
     updateCrewTypeOptions();
 }
 
@@ -179,10 +176,7 @@ void ShipSelectionScreen::update(float delta)
     }else{
         no_ships_label->show();
     }
-}
-
-void ShipSelectionScreen::updateButtonStatus(GuiToggleButton* toggled)
-{
+    
     updateReadyButton();
 }
 
@@ -248,7 +242,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
     for(int n=0; n<max_crew_positions; n++)
     {
         if (!crew_position_button[n]->isVisible())
-            my_player_info->setCrewPosition(ECrewPosition(n), false);
+            my_player_info->commandSetCrewPosition(ECrewPosition(n), false);
         else
             crew_position_button[n]->setValue(my_player_info->crew_position[n]);
     }
@@ -259,8 +253,7 @@ void ShipSelectionScreen::onReadyClick()
 {
     if (game_master_button->getValue())
     {
-        my_spaceship = nullptr;
-        my_player_info->setShipId(-1);
+        my_player_info->commandSetShipId(-1);
         destroy();
         new GameMasterScreen();
     }else if (window_button->getValue())
@@ -269,8 +262,7 @@ void ShipSelectionScreen::onReadyClick()
         new WindowScreen(window_angle->getSelectionValue().toInt());
     }else if(topdown_button->getValue())
     {
-        my_spaceship = NULL;
-        my_player_info->setShipId(-1);
+        my_player_info->commandSetShipId(-1);
         destroy();
         new TopDownScreen();
     }else{

@@ -18,6 +18,7 @@ enum EAIOrder
     AI_Attack,          //Attack [order_target] very specificly.
 };
 
+
 class ShipAI;
 class CpuShip : public SpaceShip
 {

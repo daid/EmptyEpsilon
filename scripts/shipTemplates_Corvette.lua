@@ -12,16 +12,16 @@ They come in 3 different subclasses:
 --[[----------------------Destroyers----------------------]]
 
 template = ShipTemplate():setName("Atlantis X23"):setClass("Corvette", "Destroyer"):setModel("battleship_destroyer_1_upgraded")
-template:setDescription("Weakest of the destroyer class ships.")
+template:setDescription("The Atlantis is the smallest ship to be still called a Destroyer. It's in between status makes it an excellent escort ship to defend larger ships against multiple smaller enemies. Because the atlantis is fitted with a Jump drive, it also serves as a inter system patrol craft.")
 template:setRadarTrace("radar_dread.png")
 template:setHull(100)
 template:setShields(200, 200, 200, 200)
 template:setSpeed(30, 3.5, 5)
 template:setJumpDrive(true)
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0,100, -20, 1000.0, 6.0, 8)
-template:setBeam(1,100,  20, 1000.0, 6.0, 8)
-template:setBeam(2,100, 180, 1000.0, 6.0, 8)
+template:setBeam(0,100, -20, 1500.0, 6.0, 8)
+template:setBeam(1,100,  20, 1500.0, 6.0, 8)
+template:setBeam(2,100, 180, 1500.0, 6.0, 8)
 template:setTubes(4, 10.0)
 template:setWeaponStorage("HVLI", 20)
 template:setWeaponStorage("Homing", 4)
@@ -31,10 +31,11 @@ template:setTubeDirection(2,  90)
 template:setTubeDirection(3,  90)
 
 variation = template:copy("Atlantis"):setType("playership")
-variation:setDescription([[Refitted Atlantis for more general tasks. The large shiels system has been replaced by more advanced manouvering and impulse engines.
+variation:setDescription([[Refitted Atlantis for more general tasks. The large shield system has been replaced by more advanced manouvering and impulse engines.
 Advanced combat maneuver systems have been added. Missile load out has been enhanced to include more variations.
 Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake.]])
-variation:setShields(100, 100)
+variation:setShields(200, 200)
+variation:setHull(150)
 variation:setSpeed(90, 10, 20)
 variation:setCombatManeuver(400, 250)
 variation:setBeam(2, 0, 0, 0, 0, 0)
@@ -81,11 +82,30 @@ variation:addDoor(8, 4, false);
 --variation:addDoor(2, 2, false);
 --variation:addDoor(2, 5, false);
 
+template = ShipTemplate():setName("Starhammer II"):setClass("Corvette", "Destroyer"):setModel("battleship_destroyer_4_upgraded")
+template:setDescription("Contrary to it's predecessor, the Starhammer II does live up to it's name. The power and heat management issues with the original starhammer have been resolved, resulting in a fenominal frontal assault ship. It's low speed makes it difficult to position the Starhammer, but once it's in position even the strongest shields will not hold out for long.")
+template:setRadarTrace("radar_dread.png")
+template:setHull(200)
+template:setShields(450, 350, 150, 150, 350)
+template:setSpeed(35, 6, 10)
+template:setJumpDrive(true)
+--                  Arc, Dir, Range, CycleTime, Dmg
+template:setBeam(0, 60, -10, 2000.0, 8.0, 11)
+template:setBeam(1, 60,  10, 2000.0, 8.0, 11)
+template:setBeam(2, 60, -20, 1500.0, 8.0, 11)
+template:setBeam(3, 60,  20, 1500.0, 8.0, 11)
+template:setTubes(2, 10.0)
+template:setWeaponStorage("HVLI", 20)
+template:setWeaponStorage("Homing", 4)
+template:setWeaponStorage("EMP", 2)
+template:weaponTubeDisallowMissle(1, "EMP")
+
 --[[-----------------------Support-----------------------]]
 
 -- The weapons-platform is a stationary platform with beam-weapons. It's extremely slow to turn, but it's beam weapons do a huge amount of damage.
 -- Smaller ships can dock to this platform to re-supply.
 template = ShipTemplate():setName("Defense platform"):setClass("Corvette", "Support"):setModel("space_station_4")
+template:setDescription("The weapons-platform is a stationary platform with beam-weapons. It's extremely slow to turn, but it's beam weapons do a huge amount of damage. Smaller ships can dock to this platform to re-supply. Larger systems often use these weapon platforms to resupply their patrol ships.")
 template:setRadarTrace("radartrace_smallstation.png")
 template:setHull(150)
 template:setShields(120, 120, 120, 120, 120, 120)
@@ -127,7 +147,7 @@ for cnt=1,5 do
     end
     
     template = ShipTemplate():setName("Garbage Freighter " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_3_" .. cnt)
-    template:setDescription([[Transport freighter designed for transport of garbage.]])
+    template:setDescription("A transport freighter specially designed to haul garbage. It is fitted with a trash compacter and fewer stabilsation systems than the standard goods freighters.")
     template:setHull(100)
     template:setShields(50, 50)
     template:setSpeed(60 - 5 * cnt, 6, 10)

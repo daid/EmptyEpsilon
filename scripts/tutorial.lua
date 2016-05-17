@@ -78,7 +78,9 @@ function resetPlayerShip()
         player:setSystemHealth(system, 1.0)
         player:setSystemHeat(system, 0.0)
         player:setSystemPower(system, 1.0)
+        player:commandSetSystemPowerRequest(system, 1.0)
         player:setSystemCoolant(system, 0.0)
+        player:commandSetSystemCoolantRequest(system, 0.0)
     end
     player:setPosition(0, 0)
     player:setRotation(0)
@@ -299,6 +301,7 @@ addToSequence(engineeringTutorial, [[The added power increases the amount of hea
 
 Overpower the system until it overheats.]], function() return player:getSystemHealth("frontshield") < 0.5 end)
 addToSequence(engineeringTutorial, function() player:setSystemPower("frontshield", 0.0) end)
+addToSequence(engineeringTutorial, function() player:commandSetSystemPowerRequest("frontshield", 0.0) end)
 addToSequence(engineeringTutorial, [[Note that as the system overheats, it takes damage. Because the system is damaged, it functions less effectively.
 
 Systems can also take damage when your ship is hit while the shields are down.]])

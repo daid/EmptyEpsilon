@@ -111,11 +111,10 @@ void AutoConnectScreen::checkForPlayerShip(int index)
         {
             if (crew_position != max_crew_positions)
             {
-                my_player_info->setCrewPosition(crew_position, true);
-                my_player_info->setMainScreenControl(control_main_screen);
+                my_player_info->commandSetCrewPosition(crew_position, true);
+                my_player_info->commandSetMainScreenControl(control_main_screen);
             }
-            my_player_info->setShipId(ship->getMultiplayerId());
-            my_spaceship = ship;
+            my_player_info->commandSetShipId(ship->getMultiplayerId());
         }
     }
 }
