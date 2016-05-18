@@ -5,7 +5,7 @@
 #include "spaceObjects/spaceObject.h"
 #include "spaceObjects/asteroid.h"
 #include "spaceObjects/mine.h"
-#include "spaceObjects/blackhole.h"
+#include "spaceObjects/blackHole.h"
 #include "spaceObjects/nebula.h"
 #include "spaceObjects/spaceship.h"
 
