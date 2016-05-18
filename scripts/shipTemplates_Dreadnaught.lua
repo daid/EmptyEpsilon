@@ -8,13 +8,14 @@ Think: Stardestroyer.
 
 template = ShipTemplate():setName("Odin"):setClass("Dreadnaught", "Odin"):setModel("space_station_2")
 template:setRadarTrace("radartrace_largestation.png")
-template:setDescription([[The Odin. A class of it's own really.
-It is an idea so insane, that it had to work. Atleast that much have the people behind it been thinking.
+template:setDescription([[The Odin, a "ship" so large and different that it's almost a class of it's own.
 
-What it is, it's a large scale space station, with as many guns and missiles strapped to it as possible. And, at it's core a jump drive. Never before has a jumpdrive at this scale been made. And most likely it never will be made again.
-It requires 150 personel just to keep the jumpdrive running without going super critical. Powering it up requires 5 days. And a single jump costs enough resources to buy a small moon.
+The ship is often nicknamed the "all-father", a name that aptly describes the many roles this ship can fulfil. It's both a supply station and an extremely heavily armored and shielded weapon statation that is able to anihalate small fleets. 
+The core of this ship is the largest jump drive ever created. About 150 support crew are needed to operate the jump drive alone and powering it requires 5 days of continuous operation. 
 
-The whole tactic of this machine (as that's the only way to properly describe it) is to jump into an unsuspecting enemy, and destroy everything before they know what hit them. It's effective, destructive, and expensive.]])
+Due to the enormous cost of this dreadnaught, only the richest star systems are able to build and continue to maintain ships like the odin. 
+
+The whole tactic of this machine (as that's the only way to properly describe it) is to jump into an unsuspecting enemy and destroy everything before they know what hit them. It's effective, destructive and extremely expensive.]])
 template:setJumpDrive(true)
 template:setTubes(16, 3.0)
 template:setWeaponStorage("Homing", 1000)
