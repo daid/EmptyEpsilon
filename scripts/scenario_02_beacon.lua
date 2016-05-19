@@ -196,9 +196,9 @@ We also refitted your nukes and EMPs. Awesome job on taking out the Exuari witho
             
             transports = {}
             for n=1,5 do
-                table.insert(transports, CpuShip():setTemplate("Personel Freighter 2"):setFaction("Independent"):setPosition(50000 + random(-10000, 10000), -30000 + random(-10000, 10000)))
+                table.insert(transports, CpuShip():setTemplate("Personnel Freighter 2"):setFaction("Independent"):setPosition(50000 + random(-10000, 10000), -30000 + random(-10000, 10000)))
             end
-            transport_target = CpuShip():setTemplate("Personel Freighter 2"):setFaction("Exuari"):setPosition(50000 + random(-10000, 10000), -30000 + random(-10000, 10000))
+            transport_target = CpuShip():setTemplate("Personnel Freighter 2"):setFaction("Exuari"):setPosition(50000 + random(-10000, 10000), -30000 + random(-10000, 10000))
             
             mission_state = missionGotoTransport
         end
