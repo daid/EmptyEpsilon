@@ -136,14 +136,15 @@ void fillDefaultDatabaseData()
             if (ship_template->beams[n].getRange() > 0)
             {
                 string name = "?";
-                if (ship_template->beams[n].getDirection() < 45 || ship_template->beams[n].getDirection() > 315)
+                if (std::abs(sf::angleDifference(0.0f, ship_template->beams[n].getDirection())) <= 45)
                     name = "Front";
-                else if (ship_template->beams[n].getDirection() > 45 && ship_template->beams[n].getDirection() < 135)
+                if (std::abs(sf::angleDifference(90.0f, ship_template->beams[n].getDirection())) < 45)
                     name = "Right";
-                else if (ship_template->beams[n].getDirection() > 135 && ship_template->beams[n].getDirection() < 225)
-                    name = "Rear";
-                else if (ship_template->beams[n].getDirection() > 225 && ship_template->beams[n].getDirection() < 315)
+                if (std::abs(sf::angleDifference(-90.0f, ship_template->beams[n].getDirection())) < 45)
                     name = "Left";
+                if (std::abs(sf::angleDifference(180.0f, ship_template->beams[n].getDirection())) <= 45)
+                    name = "Rear";
+
                 entry->addKeyValue(name + " beam weapon", string(ship_template->beams[n].getDamage() / ship_template->beams[n].getCycleTime(), 2) + " DPS");
             }
         }
