@@ -136,11 +136,11 @@ void fillDefaultDatabaseData()
             if (ship_template->beams[n].getRange() > 0)
             {
                 string name = "?";
-                if (ship_template->beams[n].getDirection() < 45 || ship_template->beams[n].getDirection() > 315)
+                if (ship_template->beams[n].getDirection() <= 45 || ship_template->beams[n].getDirection() >= 315)
                     name = "Front";
                 else if (ship_template->beams[n].getDirection() > 45 && ship_template->beams[n].getDirection() < 135)
                     name = "Right";
-                else if (ship_template->beams[n].getDirection() > 135 && ship_template->beams[n].getDirection() < 225)
+                else if (ship_template->beams[n].getDirection() >= 135 && ship_template->beams[n].getDirection() <= 225)
                     name = "Rear";
                 else if (ship_template->beams[n].getDirection() > 225 && ship_template->beams[n].getDirection() < 315)
                     name = "Left";
