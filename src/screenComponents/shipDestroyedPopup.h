@@ -11,7 +11,7 @@ class GuiShipDestroyedPopup : public GuiElement
 private:
     GuiPanel* frame;
     GuiCanvas* owner;
-    float show_timeout;
+    sf::Clock show_timeout;
 public:
     GuiShipDestroyedPopup(GuiCanvas* owner);
 
