@@ -53,7 +53,7 @@ function update(delta)
 				
                 rnd = irandom(1, 5)
                 if rnd == 1 then
-                    name = "Personel"
+                    name = "Personnel"
                 elseif rnd == 2 then
                     name = "Goods"
                 elseif rnd == 2 then
