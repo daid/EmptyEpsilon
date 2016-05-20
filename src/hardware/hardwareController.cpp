@@ -380,7 +380,7 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     SHIP_VARIABLE("ShieldsUp", ship->shields_active ? 1.0f : 0.0f);
     SHIP_VARIABLE("Impulse", ship->current_impulse);
     SHIP_VARIABLE("Warp", ship->current_warp);
-    SHIP_VARIABLE("Docking", ship->docking_state != DS_NotDocking ? 1.0f : 0.0f);
+    SHIP_VARIABLE("Docking", ship->docking_state == DS_Docking ? 1.0f : 0.0f);
     SHIP_VARIABLE("Docked", ship->docking_state == DS_Docked ? 1.0f : 0.0f);
     SHIP_VARIABLE("InNebula", Nebula::inNebula(ship->getPosition()) ? 1.0f : 0.0f);
     SHIP_VARIABLE("IsJammed", WarpJammer::isWarpJammed(ship->getPosition()) ? 1.0f : 0.0f);
