@@ -60,6 +60,8 @@ public:
     float getUnloadProgress();
 
     EMissileWeapons getLoadType();
+    
+    string getTubeName(); //Get the tube name based on the direction of the tube.
 
     //Calculate a possible firing solution towards the target for this missile tube.
     //Will return the angle that the missile needs to turn to to possibly hit this target.

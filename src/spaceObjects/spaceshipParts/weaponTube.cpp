@@ -281,6 +281,19 @@ EMissileWeapons WeaponTube::getLoadType()
     return type_loaded;
 }
 
+string WeaponTube::getTubeName()
+{
+    if (std::abs(sf::angleDifference(0.0f, direction)) < 45)
+        return "Front";
+    if (std::abs(sf::angleDifference(90.0f, direction)) < 45)
+        return "Right";
+    if (std::abs(sf::angleDifference(-90.0f, direction)) < 45)
+        return "Left";
+    if (std::abs(sf::angleDifference(180.0f, direction)) < 45)
+        return "Rear";
+    return "?" + string(direction);
+}
+
 float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
 {
     if (!target)
