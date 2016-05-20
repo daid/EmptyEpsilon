@@ -1,28 +1,36 @@
 --[[
 	Everything in the science database files is just readable data for the science officer.
-	This data does not effect the game in any other way and just contributes to the lore.
+	This data does not affect the game in any other way and just contributes to the lore.
 --]]
 space_objects = ScienceDatabase():setName('Natural')
 item = space_objects:addEntry('Asteroid')
-item:setLongDescription([[Asteroids are minor planets, usually smaller than a few kilometers. The larger variants are sometimes refered to as planetoids. ]])
+item:setLongDescription([[Asteroids are minor planets, usually smaller than a few kilometers. Larger variants are sometimes refered to as planetoids.]])
 
 item = space_objects:addEntry('Neblua')
-item:setLongDescription([[Neblua are the birthing place of new stars. These gas fields, usually created by the death of an old star, slowly from new stars due to the gravitational pull of the gas molecules. Due to the ever changing nature of gas nebulaes, most radar and scanning technolgy is unable to detect objects that lie within. Science officers are therefore advised to rely on visual observations.]])
+item:setLongDescription([[Nebulae are the birthing places of new stars. These gas fields, usually created by the death of an old star, slowly form new stars due to the gravitational pull of its gas molecules. Due to the ever-changing nature of gas nebulae, most radar and scanning technolgy is unable to penetrate them. Science officers are therefore advised to rely on probes and visual observations.]])
+
+item = space_objects:addEntry('Black hole')
+item:setLongDescription([[A black hole is a point of supercondensed mass that a gravitational pull so powerful that not even light can escape it. They have no locally detectable features and appear only on sensors. An object that crosses a black hole is quickly ripped apart by its gravitational forces.]])
+
+item = space_objects:addEntry('Wormhole')
+item:setLongDescription([[A wormhole, also known as an Einstein-Rosen bridge, is a phenomena that connects two points of spacetime. Jump drives operate in a similar fashion, but instead of being created at will, a wormhole occupies a specific location in space. Objects that enter a wormhole instantaneously emerge from the other end, which might be anywhere from a few feet to thousands of light years away. 
+
+Wormholes are rare, and most can move objects in only one direction. Traversable wormholes, which are stable and allow for movement in both directions, are even rarer. All wormholes generate tremendous sensor activity, which an astute science officer can detect even through disruptions such as nebulae.]])
 
 weapons = ScienceDatabase():setName('Weapons')
 item = weapons:addEntry('Homing missile')
 item:addKeyValue('Range', '5.4u')
 item:addKeyValue('Damage', '35')
-item:setLongDescription([[This target seeking missile is the work horse of many ships. It's compact enought to be fitted on frigates and packs enough punch to be used on larger ships, albeit with more than a single missile tube.]])
+item:setLongDescription([[This target-seeking missile is the workhorse of many space combat arsenals. It's compact enough to be fitted on frigates, and packs enough punch to be used on larger ships, though usually in more than a single missile tube.]])
 
 item = weapons:addEntry('Nuke')
 item:addKeyValue('Range', '5.4u')
 item:addKeyValue('Blast radius', '1u')
 item:addKeyValue('Damage at center', '160')
 item:addKeyValue('Damage at edge', '30')
-item:setLongDescription([[The nuclear missile is the same as the homing missile, but with a greatly increased (nuklear) payload. It is capable of taking out multiple ships in a single shot.
-Some captains question the use of these weapons as they have lead to 'fragging' or un-intentional friendly fire. 
-The shielding of ships should protect the crew from any harmfull radiation, but seeing that these weapons are often used in the thick of battle, there is no way of knowing if the hull plating or shield will provide enough protection.]])
+item:setLongDescription([[A nuclear missile is similar to a homing missile in that it can seek a target, but it moves and turns more slowly and explodes a greatly increased payload. Its nuclear explosion spans 1U of space and can take out multiple ships in a single shot.
+
+Some captains oppose the use of nuclear weapons because their large explosions can lead to 'fragging', or unintentional friendly fire. Shields should protect crews from harmful radiation, but because these weapons are often used in the thick of battle, there's no way of knowing if hull plating or shields can provide enough protection.]])
 
 item = weapons:addEntry('Mine')
 item:addKeyValue('Drop distance', '1.2u')
@@ -30,24 +38,21 @@ item:addKeyValue('Trigger distance', '0.6u')
 item:addKeyValue('Blast radius', '1u')
 item:addKeyValue('Damage at center', '160')
 item:addKeyValue('Damage at edge', '30')
-item:setLongDescription([[Mines are often placed in a defensive perimeter around stations.
-There are also old mine fields scattered around the universe from older wars.
-Some fearless captains have used mines as offensive weapons. But this is with great risk]])
+item:setLongDescription([[Mines are often placed in defensive perimeters around stations. There are also old minefields scattered around the galaxy from older wars.
+
+Some fearless captains use mines as offensive weapons, but their delayed detonation and blast radius make this use risky at best.]])
 
 item = weapons:addEntry('EMP')
 item:addKeyValue('Range', '5.4u')
 item:addKeyValue('Blast radius', '1u')
 item:addKeyValue('Damage at center', '160')
 item:addKeyValue('Damage at edge', '30')
-item:setLongDescription([[The EMP is a shield-only damaging weapon It matches the heavy nuke in damage but does no hull damage.
-The EMP missile is smaller and easier to storage then the heavy nuke.
-And thus many captains preferer it's use over nukes.]])
+item:setLongDescription([[The electromagnetic pulse missile (EMP) reproduces the disruptive effects of a nuclear explosion, but without the destructive properties. This causes it to only affect shields within its blast radius, leaving their hulls intact. The EMP missile is also smaller and easier to store than heavy nukes. Many captains (and pirates) prefer EMPs over nukes for these reasons, and use them to knock out targets' shields before closing to disable them with focused beam fire.]])
 
 item = weapons:addEntry('HVLI')
 item:addKeyValue('Range', '5.4u')
 item:addKeyValue('Damage', '7 each, 35 total')
 item:addKeyValue('Burst', '5')
-item:setLongDescription([[HVLI: High Velocity Lead Impactor.
-A simple large piece of lead fired at a high velocity. This weapon is usually found in simpler ships, as this weapon does not require any guidance computers.
-This also means it only flies straight ahead and does not home in towards your target. After all, it is just a chunk of lead.
-This weapon is fired in bursts of 5 shots. To increase the hit chance.]])
+item:setLongDescription([[A high-velocity lead impactor (HVLI) fires a simple slug of lead at a high velocity. This weapon is usually found in simpler ships since it does not require guidance computers. This also means its projectiles fly in a straight line from its tube and can't pursue a target.
+
+Each shot from an HVLI fires a burst of 5 projectiles, which increases the chance to hit but requires precision aiming to be effective.]])
