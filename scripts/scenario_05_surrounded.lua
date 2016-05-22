@@ -9,28 +9,28 @@ function init()
     SpaceStation():setTemplate("Small Station"):setPosition(0, -500):setRotation(random(0, 360)):setFaction("Independent")
     
     for n=1,5 do
-        ship = CpuShip():setTemplate("Cruiser"):orderRoaming()
+        ship = CpuShip():setTemplate("Phobos T3"):orderRoaming()
 		setCirclePos(ship, random(0, 360), random(7000, 10000))
 	end
     for n=1,2 do
-        ship = CpuShip():setTemplate("Missile Cruiser"):orderRoaming()
+        ship = CpuShip():setTemplate("Piranha F12"):orderRoaming()
 		setCirclePos(ship, random(0, 360), random(7000, 10000))
 	end
 	
 	a = random(0, 360)
 	d = 9000
-	ship = CpuShip():setTemplate("Dreadnought"):setRotation(a + 180):orderRoaming()
+	ship = CpuShip():setTemplate("Atlantis X23"):setRotation(a + 180):orderRoaming()
 	setCirclePos(ship, a, d)
 
-    wingman = CpuShip():setTemplate("Fighter"):setRotation(a + 180)
+    wingman = CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180)
 	setCirclePos(wingman, a - 5, d + 100)
 	wingman:orderFlyFormation(ship, 500, 100)
 
-    wingman = CpuShip():setTemplate("Fighter"):setRotation(a + 180)
+    wingman = CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180)
 	setCirclePos(wingman, a + 5, d + 100)
 	wingman:orderFlyFormation(ship, -500, 100)
 
-    wingman = CpuShip():setTemplate("Fighter"):setRotation(a + 180)
+    wingman = CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180)
 	setCirclePos(wingman, a + random(-5, 5), d - 500)
 	wingman:orderFlyFormation(ship, 0, 600)
 	
