@@ -49,7 +49,8 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
             if (entry->keyValuePairs.size() == 0 && entry->longDescription.length() == 0) {
                 x = 0;
             }
-            (new GuiRotatingModelView(database_entry, "DATABASE_MODEL_VIEW", entry->model_data))->setPosition(x, -50, ATopLeft)->setSize(GuiElement::GuiSizeMax, std::min(GuiElement::GuiSizeMatchWidth, 370.0f));
+            //TODO: std::min(GuiElement::GuiSizeMatchWidth, 370.0f)
+            (new GuiRotatingModelView(database_entry, "DATABASE_MODEL_VIEW", entry->model_data))->setPosition(x, -50, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMatchWidth);
 
             if (entry->longDescription.length() > 0)
             {

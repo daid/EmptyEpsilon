@@ -92,6 +92,7 @@ function resetPlayerShip()
     player:setWeaponStorageMax("nuke", 0)
     player:setWeaponStorageMax("mine", 0)
     player:setWeaponStorageMax("emp", 0)
+    player:setWeaponStorageMax("hvli", 0)
 end
 
 --[[ Radar explanation tutorial ]]
