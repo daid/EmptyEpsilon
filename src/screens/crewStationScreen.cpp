@@ -1,6 +1,7 @@
 #include "crewStationScreen.h"
 #include "epsilonServer.h"
 #include "main.h"
+#include "preferenceManager.h"
 #include "menus/shipSelectionScreen.h"
 
 #include "screenComponents/indicatorOverlays.h"
@@ -20,6 +21,20 @@ CrewStationScreen::CrewStationScreen()
     button_strip = new GuiPanel(this, "");
     button_strip->setPosition(-20, 20, ATopRight)->setSize(250, 50);
     button_strip->hide();
+
+#ifndef __ANDROID__
+    if (PreferencesManager::get("music_enabled") == "1")
+    {
+        threat_estimate = new ThreatLevelEstimate();
+        threat_estimate->setCallbacks([](){
+            LOG(INFO) << "Switching to ambient music";
+            soundManager->playMusicSet(findResources("music/ambient/*.ogg"));
+        }, []() {
+            LOG(INFO) << "Switching to combat music";
+            soundManager->playMusicSet(findResources("music/combat/*.ogg"));
+        });
+    }
+#endif
 }
 
 void CrewStationScreen::addStationTab(GuiElement* element, string name, string icon)
@@ -75,6 +90,7 @@ void CrewStationScreen::update(float delta)
     if (game_client && game_client->getStatus() == GameClient::Disconnected)
     {
         destroy();
+        soundManager->stopMusic();
         disconnectFromServer();
         returnToMainMenu();
         return;
@@ -89,6 +105,7 @@ void CrewStationScreen::onKey(sf::Keyboard::Key key, int unicode)
     case sf::Keyboard::Escape:
     case sf::Keyboard::Home:
         destroy();
+        soundManager->stopMusic();
         new ShipSelectionScreen();
         break;
     case sf::Keyboard::P:

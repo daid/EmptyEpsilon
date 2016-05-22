@@ -3,12 +3,14 @@
 
 #include "engine.h"
 #include "gui/gui2_canvas.h"
+#include "threatLevelEstimate.h"
 
 class GuiViewport3D;
 class GuiRadarView;
 
 class ScreenMainScreen : public GuiCanvas, public Updatable
 {
+    P<ThreatLevelEstimate> threat_estimate;
 private:
     GuiViewport3D* viewport;
     GuiRadarView* tactical_radar;
