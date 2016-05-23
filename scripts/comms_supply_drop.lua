@@ -1,9 +1,9 @@
 -- Name: Supply ship comms
--- Description: Striped comms that do not allow any interaction. Used for transport ships.
+-- Description: Stripped comms that do not allow any interaction. Used for transport ships.
 
 function mainMenu()
 	if player:isFriendly(comms_target) then
-		setCommsMessage("Currently transporting goods.");
+		setCommsMessage("Transporting goods.");
 		return true
 	end
 	if player:isEnemy(comms_target) then
