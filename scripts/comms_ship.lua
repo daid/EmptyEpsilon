@@ -56,8 +56,12 @@ function friendlyComms(comms_data)
 				msg = msg .. "Shield " .. n .. ": " .. math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100) .. "%\n"
 			end
 		end
-		if comms_target:getWeaponStorageMax("Homing") > 0 then
-			msg = msg .. "Missiles: " .. comms_target:getWeaponStorage("Homing") .. "/" .. comms_target:getWeaponStorageMax("Homing") .. "\n"
+
+		missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+		for i, missile_type in ipairs(missile_types) do
+			if comms_target:getWeaponStorageMax(missile_type) > 0 then
+					msg = msg .. missile_type .. " Missiles: " .. comms_target:getWeaponStorage(missile_type) .. "/" .. comms_target:getWeaponStorageMax(missile_type) .. "\n"
+			end
 		end
 
 		setCommsMessage(msg);
