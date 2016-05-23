@@ -2,13 +2,11 @@
 #define REDONCULUS_SERVER_H
 
 #include "engine.h"
-#include "threatLevelEstimate.h"
 
 class GameStateLogger;
 
 class EpsilonServer : public GameServer
 {
-    P<ThreatLevelEstimate> threat_estimate;
     P<GameStateLogger> state_logger;
 public:
     EpsilonServer();

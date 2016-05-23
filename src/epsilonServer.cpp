@@ -15,23 +15,12 @@ EpsilonServer::EpsilonServer()
     for(unsigned int n=0; n<factionInfo.size(); n++)
         factionInfo[n]->reset();
 
-    threat_estimate = new ThreatLevelEstimate();
-    threat_estimate->setCallbacks([](){
-        LOG(INFO) << "Switching to ambient music";
-        soundManager->playMusicSet(findResources("music/ambient/*.ogg"));
-    }, []() {
-        LOG(INFO) << "Switching to combat music";
-        soundManager->playMusicSet(findResources("music/combat/*.ogg"));
-    });
-    
     state_logger = new GameStateLogger();
     state_logger->start();
 }
 
 EpsilonServer::~EpsilonServer()
 {
-    if (threat_estimate)
-        threat_estimate->destroy();
     if (state_logger)
         state_logger->destroy();
 }
