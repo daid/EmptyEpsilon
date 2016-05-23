@@ -45,17 +45,17 @@ function friendlyComms(comms_data)
 	end
 	addCommsReply("What is your status?", function()
 		msg = "Hull: " .. math.floor(comms_target:getHull() / comms_target:getHullMax() * 100) .. "%\n"
-        shields = comms_target:getShieldCount()
-        if shields == 1 then
-            msg = msg .. "Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
-        elseif shields == 2 then
-            msg = msg .. "Front Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
-            msg = msg .. "Rear Shield: " .. math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100) .. "%\n"
-        else
-            for n=0,shields-1 do
-                msg = msg .. "Shield " .. n .. ": " .. math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100) .. "%\n"
-            end
-        end
+		shields = comms_target:getShieldCount()
+		if shields == 1 then
+			msg = msg .. "Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
+		elseif shields == 2 then
+			msg = msg .. "Front Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
+			msg = msg .. "Rear Shield: " .. math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100) .. "%\n"
+		else
+			for n=0,shields-1 do
+				msg = msg .. "Shield " .. n .. ": " .. math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100) .. "%\n"
+			end
+		end
 		if comms_target:getWeaponStorageMax("Homing") > 0 then
 			msg = msg .. "Missiles: " .. comms_target:getWeaponStorage("Homing") .. "/" .. comms_target:getWeaponStorageMax("Homing") .. "\n"
 		end
