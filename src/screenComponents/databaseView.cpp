@@ -41,7 +41,7 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
         }
         for(unsigned int n=0; n<entry->keyValuePairs.size(); n++)
         {
-            (new GuiKeyValueDisplay(layout, "", 0.6, entry->keyValuePairs[n].key, entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
+            (new GuiKeyValueDisplay(layout, "", 0.37, entry->keyValuePairs[n].key, entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
         }
         if (entry->model_data)
         {
