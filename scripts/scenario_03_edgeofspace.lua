@@ -5,7 +5,7 @@
 -- Init is run when the scenario is started. Create your initial world
 function init()
     -- Create the main ship for the players.
-    Player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Player Cruiser"):setPosition(12400, 18200):setCallSign("Apollo"):addReputationPoints(250.0)
+    Player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setPosition(12400, 18200):setCallSign("Apollo"):addReputationPoints(250.0)
     
     -- Modify the default cruiser into a technical cruiser, which has less weapon power then the normal player cruiser.
     Player:setTypeName("Technician Cruiser")
@@ -17,7 +17,7 @@ function init()
     Player:setWeaponStorageMax("Mine", 0)
 
     --Create a "Technical Officer" entity hidden in sector Z81 to talk to Relay and prompt the Captain to give the order to return to Central Command. The position of this ship in relation to the Station Nirvana was intended to serve as a sort of timer for the inspection job.
-    Technical_Officer = CpuShip():setFaction("Human Navy"):setTemplate("Tug"):setCallSign("Technical Officer"):setPosition(1530000,411000):orderIdle()
+    Technical_Officer = CpuShip():setFaction("Human Navy"):setTemplate("Flavia"):setCallSign("Technical Officer"):setPosition(1530000,411000):orderIdle()
     Technical_Officer:setCommsScript("") -- Disable the comms script for the Technical Officer station (though really, they should never find it all the way out in sector Z81).
 	--Create a station called "Nirvana" for "Technical Officer" to approach. Surplus to requirements now but a good example of the crazy stuff a newbie might try.
 	Nirvana = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(1530000,412000):setCallSign("Nirvana")
@@ -41,9 +41,9 @@ function init()
 	SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("DS2"):setPosition(-27987, 41095)
 	---------------------------------------------------------------------------
 	
-	Human_m1 = CpuShip():setFaction("Human Navy"):setTemplate("Fighter"):setCallSign("HM1"):setScanned(true):setPosition(31875, 38653):orderDefendLocation(31875, 38653)
-    Human_m2 = CpuShip():setFaction("Human Navy"):setTemplate("Fighter"):setCallSign("HM2"):setScanned(true):setPosition(37493, 37185):orderDefendLocation(37493, 37185)
-    Human_m3 = CpuShip():setFaction("Human Navy"):setTemplate("Fighter"):setCallSign("HM3"):setScanned(true):setPosition(35519, 42854):orderDefendLocation(35519, 42854)
+	Human_m1 = CpuShip():setFaction("Human Navy"):setTemplate("MT52 Hornet"):setCallSign("HM1"):setScanned(true):setPosition(31875, 38653):orderDefendLocation(31875, 38653)
+    Human_m2 = CpuShip():setFaction("Human Navy"):setTemplate("MT52 Hornet"):setCallSign("HM2"):setScanned(true):setPosition(37493, 37185):orderDefendLocation(37493, 37185)
+    Human_m3 = CpuShip():setFaction("Human Navy"):setTemplate("MT52 Hornet"):setCallSign("HM3"):setScanned(true):setPosition(35519, 42854):orderDefendLocation(35519, 42854)
     
 	--Nebula that hide the enemy station.
     Nebula():setPosition( 52300, 42200)
@@ -77,21 +77,21 @@ function init()
     end
 	
 	--Kraylor Endline ships protecting Eline until something happens
-	kraylor_e1 = CpuShip():setFaction("Kraylor"):setTemplate("Cruiser"):setPosition(80200, 39900):setCallSign("K-EC1"):orderStandGround()
-	kraylor_e2 = CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setPosition(78200, 38000):setCallSign("K-EC2"):orderStandGround()
-	kraylor_e3 = CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setPosition(78000, 37100):setCallSign("K-EF1"):orderStandGround()
-	kraylor_e4 = CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setPosition(80200, 37900):setCallSign("K-EF2"):orderStandGround()
+	kraylor_e1 = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setPosition(80200, 39900):setCallSign("K-EC1"):orderStandGround()
+	kraylor_e2 = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setPosition(78200, 38000):setCallSign("K-EC2"):orderStandGround()
+	kraylor_e3 = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setPosition(78000, 37100):setCallSign("K-EF1"):orderStandGround()
+	kraylor_e4 = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setPosition(80200, 37900):setCallSign("K-EF2"):orderStandGround()
 	
 	--Kraylor ships primed to attack Galileo
-	kraylor_g1 = CpuShip():setFaction("Kraylor"):setTemplate("Cruiser"):setScanned(true):setCallSign("K-Strike1"):setPosition(6273, -55399):orderIdle()
-    kraylor_g2 = CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setScanned(true):setCallSign("K-Fi2"):setPosition(10922, -51749):orderIdle()
-    kraylor_g3 = CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setScanned(true):setCallSign("K-Fi3"):setPosition(13948, -52838):orderIdle()
+	kraylor_g1 = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setScanned(true):setCallSign("K-Strike1"):setPosition(6273, -55399):orderIdle()
+    kraylor_g2 = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setScanned(true):setCallSign("K-Fi2"):setPosition(10922, -51749):orderIdle()
+    kraylor_g3 = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setScanned(true):setCallSign("K-Fi3"):setPosition(13948, -52838):orderIdle()
 	
 	--Kraylor Midline ships protecting Mline
-	kraylor_m1 = CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setCallSign("K-MF1"):setPosition(103710, 31493):orderStandGround()
-    kraylor_m2 = CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setCallSign("K-MF2"):setPosition(97993, 22149):orderStandGround()
-    kraylor_m3 = CpuShip():setFaction("Kraylor"):setTemplate("Dreadnought"):setCallSign("K-MDFD"):setPosition(106363, 25218):orderStandGround()
-    kraylor_m4 = CpuShip():setFaction("Kraylor"):setTemplate("Cruiser"):setCallSign("K-MC001"):setPosition(104829, 21454):orderStandGround()
+	kraylor_m1 = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setCallSign("K-MF1"):setPosition(103710, 31493):orderStandGround()
+    kraylor_m2 = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setCallSign("K-MF2"):setPosition(97993, 22149):orderStandGround()
+    kraylor_m3 = CpuShip():setFaction("Kraylor"):setTemplate("Atlantis X23"):setCallSign("K-MDFD"):setPosition(106363, 25218):orderStandGround()
+    kraylor_m4 = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setCallSign("K-MC001"):setPosition(104829, 21454):orderStandGround()
 	
 	------------------------------------------------------------------------------------
 	--Kraylor Nebula, that crazy maze with bad guys in it
@@ -169,11 +169,11 @@ function init()
     Mine():setPosition(82218, -51242)
     Mine():setPosition(91704, -56874)
     Mine():setPosition(102374, -58356)
-    CpuShip():setFaction("Kraylor"):setTemplate("Cruiser"):setCallSign("K-SCN1"):setPosition(90940, -32988):orderDefendLocation(90940, -32988)
-    CpuShip():setFaction("Kraylor"):setTemplate("Cruiser"):setCallSign("K-SCN2"):setPosition(95243, -29693):orderDefendLocation(95243, -29693)
-    CpuShip():setFaction("Kraylor"):setTemplate("Dreadnought"):setCallSign("K-GDN1"):setPosition(105057, -46060):orderDefendLocation(105057, -46060)
-    CpuShip():setFaction("Kraylor"):setTemplate("Dreadnought"):setCallSign("K-GDN2"):setPosition(102474, -42231):orderDefendLocation(102474, -42231)
-    CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setCallSign("K-EGF1"):setPosition(87826, -3182):orderDefendLocation(87826, -3182)
+    CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setCallSign("K-SCN1"):setPosition(90940, -32988):orderDefendLocation(90940, -32988)
+    CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setCallSign("K-SCN2"):setPosition(95243, -29693):orderDefendLocation(95243, -29693)
+    CpuShip():setFaction("Kraylor"):setTemplate("Atlantis X23"):setCallSign("K-GDN1"):setPosition(105057, -46060):orderDefendLocation(105057, -46060)
+    CpuShip():setFaction("Kraylor"):setTemplate("Atlantis X23"):setCallSign("K-GDN2"):setPosition(102474, -42231):orderDefendLocation(102474, -42231)
+    CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setCallSign("K-EGF1"):setPosition(87826, -3182):orderDefendLocation(87826, -3182)
 	Kraylor_hole = WormHole():setPosition(109190, -39762):setTargetPosition(-61730, 29490)
 	---------------------------------------------------------------------------
 	---------------------------------------------------------------------------
@@ -624,31 +624,31 @@ Please dock so we can come aboard.]])
 			
 			--------------------------------------------------------------------------------------
 			--Let's get crazy up in here
-			k01 = CpuShip():setFaction("Kraylor"):setTemplate("Cruiser"):setCallSign("BR21"):setPosition(-50654, 32238):orderRoaming()
-			k02 = CpuShip():setFaction("Kraylor"):setTemplate("Cruiser"):setCallSign("UT64"):setPosition(-48368, 27476):orderRoaming()
-			k03 = CpuShip():setFaction("Kraylor"):setTemplate("Cruiser"):setCallSign("NC13"):setPosition(-34082, 40047):orderRoaming()
-			k04 = CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setCallSign("CV45"):setPosition(-59606, 18904):orderRoaming()
-			k05 = CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setCallSign("TI25"):setPosition(-43796, 43857):orderRoaming()
-			k06 = CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setCallSign("IN16"):setPosition(-43796, 52428):orderRoaming()
-			k07 = CpuShip():setFaction("Kraylor"):setTemplate("Missile Cruiser"):setCallSign("VA27"):setPosition(-58082, 31285):orderRoaming()
-			k08 = CpuShip():setFaction("Kraylor"):setTemplate("Missile Cruiser"):setCallSign("CN78"):setPosition(-26082, 22333):orderRoaming()
-			k09 = CpuShip():setFaction("Kraylor"):setTemplate("Dreadnought"):setCallSign("AL92"):setPosition(-42273, 12238):orderRoaming()
-			k10 = CpuShip():setFaction("Kraylor"):setTemplate("Dreadnought"):setCallSign("OH30"):setPosition(-26844, 48809):orderRoaming()
-			k11 = CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setCallSign("SS11"):setPosition(-45320, 9381):orderRoaming()
-			k12 = CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setCallSign("CS61"):setPosition(-40558, 8809):orderRoaming()
-			k13 = CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setCallSign("JL33"):setPosition(-27796, 52428):orderRoaming()
-			k14 = CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setCallSign("SQ50"):setPosition(-24368, 46143):orderRoaming()
-			CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("Fighter"):setCallSign("BN53"):setPosition(-40654, 47095):orderRoaming()
-			CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("Fighter"):setCallSign("VK68"):setPosition(-37796, 56619):orderRoaming()
-			CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("Fighter"):setCallSign("XD37"):setPosition(-29987, 55476):orderRoaming()
-			CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("Fighter"):setCallSign("CC31"):setPosition(-45796, 26143):orderRoaming()
-			CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("Fighter"):setCallSign("CM29"):setPosition(-51892, 24047):orderRoaming()
-			CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("Fighter"):setCallSign("SO40"):setPosition(-2939, 40619):orderRoaming()
-			CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("Fighter"):setCallSign("VS41"):setPosition(2966, 45000):orderRoaming()
-			--CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("Fighter"):setCallSign("BR42"):setPosition(-12796, 16809):orderRoaming()
-			--CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("Fighter"):setCallSign("UTI43"):setPosition(-10463, 7476):orderRoaming()
-			CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("Cruiser"):setCallSign("CI44"):setPosition(-10368, 13571):orderRoaming()
-			CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("Cruiser"):setCallSign("NI15"):setPosition(-10368, 50143):orderRoaming()
+			k01 = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setCallSign("BR21"):setPosition(-50654, 32238):orderRoaming()
+			k02 = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setCallSign("UT64"):setPosition(-48368, 27476):orderRoaming()
+			k03 = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setCallSign("NC13"):setPosition(-34082, 40047):orderRoaming()
+			k04 = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setCallSign("CV45"):setPosition(-59606, 18904):orderRoaming()
+			k05 = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setCallSign("TI25"):setPosition(-43796, 43857):orderRoaming()
+			k06 = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setCallSign("IN16"):setPosition(-43796, 52428):orderRoaming()
+			k07 = CpuShip():setFaction("Kraylor"):setTemplate("Piranha F12"):setCallSign("VA27"):setPosition(-58082, 31285):orderRoaming()
+			k08 = CpuShip():setFaction("Kraylor"):setTemplate("Piranha F12"):setCallSign("CN78"):setPosition(-26082, 22333):orderRoaming()
+			k09 = CpuShip():setFaction("Kraylor"):setTemplate("Atlantis X23"):setCallSign("AL92"):setPosition(-42273, 12238):orderRoaming()
+			k10 = CpuShip():setFaction("Kraylor"):setTemplate("Starhammer II"):setCallSign("OH30"):setPosition(-26844, 48809):orderRoaming()
+			k11 = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setCallSign("SS11"):setPosition(-45320, 9381):orderRoaming()
+			k12 = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setCallSign("CS61"):setPosition(-40558, 8809):orderRoaming()
+			k13 = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setCallSign("JL33"):setPosition(-27796, 52428):orderRoaming()
+			k14 = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setCallSign("SQ50"):setPosition(-24368, 46143):orderRoaming()
+			CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("MT52 Hornet"):setCallSign("BN53"):setPosition(-40654, 47095):orderRoaming()
+			CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("MT52 Hornet"):setCallSign("VK68"):setPosition(-37796, 56619):orderRoaming()
+			CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("MT52 Hornet"):setCallSign("XD37"):setPosition(-29987, 55476):orderRoaming()
+			CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("MT52 Hornet"):setCallSign("CC31"):setPosition(-45796, 26143):orderRoaming()
+			CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("MT52 Hornet"):setCallSign("CM29"):setPosition(-51892, 24047):orderRoaming()
+			CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("MT52 Hornet"):setCallSign("SO40"):setPosition(-2939, 40619):orderRoaming()
+			CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("MT52 Hornet"):setCallSign("VS41"):setPosition(2966, 45000):orderRoaming()
+			--CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("MT52 Hornet"):setCallSign("BR42"):setPosition(-12796, 16809):orderRoaming()
+			--CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("MT52 Hornet"):setCallSign("UTI43"):setPosition(-10463, 7476):orderRoaming()
+			CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("Phobos T3"):setCallSign("CI44"):setPosition(-10368, 13571):orderRoaming()
+			CpuShip():setFaction("Human Navy"):setScanned(true):setTemplate("Phobos T3"):setCallSign("NI15"):setPosition(-10368, 50143):orderRoaming()
 			
 			Human_m1:orderRoaming()
 			Human_m2:orderRoaming()

@@ -156,7 +156,7 @@ function update(delta)
 	
 	if (not gallipoli:isValid()) then
 		if human_respawn > 20 then
-			gallipoli = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Player Cruiser"):setPosition(-8500, 15000):setCallSign("HNS Heinlein"):setScannedByFaction("Kraylor", false)
+			gallipoli = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setPosition(-8500, 15000):setCallSign("HNS Heinlein"):setScannedByFaction("Kraylor", false)
 		else
 			human_respawn = human_respawn + delta
 		end
@@ -164,7 +164,7 @@ function update(delta)
 	
 	if (not crusader:isValid()) then
 		if kraylor_respawn > 20 then
-			crusader = PlayerSpaceship():setFaction("Kraylor"):setTemplate("Player Cruiser"):setPosition(19000, -14500):setCallSign("Crusader Elak'raan"):setScannedByFaction("Human Navy", false)
+			crusader = PlayerSpaceship():setFaction("Kraylor"):setTemplate("Atlantis"):setPosition(19000, -14500):setCallSign("Crusader Elak'raan"):setScannedByFaction("Human Navy", false)
 		else
 			kraylor_respawn = kraylor_respawn + delta
 		end

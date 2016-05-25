@@ -37,17 +37,22 @@ function init()
 	
     -- Create the defense for the station
     CpuShip():setTemplate("Starhammer II"):setFaction("Exuari"):setPosition(-44000, -14000):orderDefendTarget(enemy_station)
-    CpuShip():setTemplate("Cruiser"):setFaction("Exuari"):setPosition(-47000, -14000):orderDefendTarget(enemy_station)
+    CpuShip():setTemplate("Phobos T3"):setFaction("Exuari"):setPosition(-47000, -14000):orderDefendTarget(enemy_station)
     enemy_dreadnought = CpuShip():setTemplate("Atlantis X23"):setFaction("Exuari")
     enemy_dreadnought:setPosition(-46000, -18000):orderDefendTarget(enemy_station)
     CpuShip():setTemplate("MT52 Hornet"):setFaction("Exuari"):setPosition(-46000, -18100):orderDefendTarget(enemy_dreadnought)
     CpuShip():setTemplate("MT52 Hornet"):setFaction("Exuari"):setPosition(-46000, -18200):orderDefendTarget(enemy_dreadnought)
     CpuShip():setTemplate("MT52 Hornet"):setFaction("Exuari"):setPosition(-46000, -18300):orderDefendTarget(enemy_dreadnought)
 
-    --Small Exuari strike team, guarding RT-4 in the nebula at G5.
     transport_RT4 = CpuShip():setTemplate("Flavia"):setFaction("Human Navy"):setPosition(3750, 31250)
     transport_RT4:orderIdle():setCallSign("RT-4"):setCommsScript("")
     transport_RT4:setHull(1):setShieldsMax(1, 1)
+
+    --Small Exuari strike team, guarding RT-4 in the nebula at G5.
+    exuari_RT4_guard1 = CpuShip():setTemplate("Adder MK5"):setFaction("Exuari"):setPosition(3550, 31250):setRotation(0)
+    exuari_RT4_guard2 = CpuShip():setTemplate("Adder MK5"):setFaction("Exuari"):setPosition(3950, 31250):setRotation(180)
+    exuari_RT4_guard1:orderIdle()
+    exuari_RT4_guard2:orderIdle()
     
     --Start off the mission by sending a transmission to the player
     research_station:sendCommsMessage(player, [[Epsilon, please come in?
@@ -61,8 +66,6 @@ end
 
 function missionStartState(delta)
     if distance(player, transport_RT4) < 5000 then
-        exuari_RT4_guard1 = CpuShip():setTemplate("Adder MK6"):setFaction("Exuari"):setPosition(3550, 31250):setRotation(0)
-        exuari_RT4_guard2 = CpuShip():setTemplate("Adder MK5"):setFaction("Exuari"):setPosition(3950, 31250):setRotation(180)
         exuari_RT4_guard1:orderRoaming()
         exuari_RT4_guard2:orderRoaming()
         mission_state = missionRT4UnderAttack
@@ -79,6 +82,16 @@ function missionRT4UnderAttack(delta)
 Lifesigns detected in the pod, please pick up the pod to see if J.J.Johnson made it. His death would be a great blow to the peace negotiations in the region.
 
 And destroy those Exuari scum while you are at it!]])
+    end
+    if not exuari_RT4_guard1:isValid() and not exuari_RT4_guard2:isValid() then
+        -- Not sure how you did it, but you managed to destroy the two Exauri's before they detroy RT4...
+        transport_RT4:destroy()
+        mission_state = missionRT4EscapeDropped
+        transport_RT4_drop = SupplyDrop():setFaction("Human Navy"):setPosition(3750, 31250)
+        transport_RT4_drop_time = 0.0
+        research_station:sendCommsMessage(player, [[RT-4 has been destroyed! But an escape pod is ejected from the ship.
+
+Lifesigns detected in the pod, please pick up the pod to see if J.J.Johnson made it. His death would be a great blow to the peace negotiations in the region.]])
     end
 end
 function missionRT4EscapeDropped(delta)
@@ -156,7 +169,7 @@ function missionWaitForAmbush(delta)
     if distance(player, main_station) < 50000 then
         --We can jump to the Orion-5 station in 1 jump. So ambush the player!
         x, y = player:getPosition()
-        WarpJammer():setFaction("Exuari"):setPosition(x - 2308, y + 3011)
+        WarpJammer():setFaction("Exuari"):setPosition(x - 2008, y + 2711)
         ambush_main = CpuShip():setFaction("Exuari"):setTemplate("Starhammer II"):setScanned(true):setPosition(x - 1667, y + 2611):setRotation(-80):orderAttack(player)
         ambush_side1 = CpuShip():setFaction("Exuari"):setTemplate("Nirvana R5"):setScanned(true):setPosition(x - 736, y + 2875):setRotation(-80):orderAttack(player)
         ambush_side2 = CpuShip():setFaction("Exuari"):setTemplate("Nirvana R5"):setScanned(true):setPosition(x - 2542, y + 2208):setRotation(-80):orderAttack(player)
@@ -196,9 +209,9 @@ We also refitted your nukes and EMPs. Awesome job on taking out the Exuari witho
             
             transports = {}
             for n=1,5 do
-                table.insert(transports, CpuShip():setTemplate("Personel Freighter 2"):setFaction("Independent"):setPosition(50000 + random(-10000, 10000), -30000 + random(-10000, 10000)))
+                table.insert(transports, CpuShip():setTemplate("Personnel Freighter 2"):setFaction("Independent"):setPosition(50000 + random(-10000, 10000), -30000 + random(-10000, 10000)))
             end
-            transport_target = CpuShip():setTemplate("Personel Freighter 2"):setFaction("Exuari"):setPosition(50000 + random(-10000, 10000), -30000 + random(-10000, 10000))
+            transport_target = CpuShip():setTemplate("Personnel Freighter 2"):setFaction("Exuari"):setPosition(50000 + random(-10000, 10000), -30000 + random(-10000, 10000))
             
             mission_state = missionGotoTransport
         end
@@ -235,6 +248,7 @@ function missionStopTransport(delta)
     elseif transport_target:getSystemHealth("impulse") <= 0.0 then
         main_station:sendCommsMessage(player, [[Ok, transport disabled. We'll be sending a recovery team. Defend the transport, the Exuari will most likely rather destroy it then let it fall in our hands.]])
         transport_target:setFaction("Independent"):orderIdle():setCallSign(transport_target:getCallSign() .. "-CAP")
+        transport_target:setImpulseMaxSpeed(70):setJumpDrive(true)
         mission_state = missionTransportWaitForRecovery
         mission_timer = 40
         

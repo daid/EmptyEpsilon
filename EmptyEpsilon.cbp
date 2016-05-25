@@ -467,6 +467,8 @@
 		<Unit filename="src/featureDefs.h" />
 		<Unit filename="src/gameGlobalInfo.cpp" />
 		<Unit filename="src/gameGlobalInfo.h" />
+		<Unit filename="src/gameStateLogger.cpp" />
+		<Unit filename="src/gameStateLogger.h" />
 		<Unit filename="src/gui/colorConfig.cpp" />
 		<Unit filename="src/gui/colorConfig.h" />
 		<Unit filename="src/gui/debugRenderer.cpp" />

@@ -51,6 +51,7 @@ set(SOURCES
 	src/gameGlobalInfo.cpp
 	src/script.cpp
 	src/playerInfo.cpp
+	src/gameStateLogger.cpp
 	src/shipTemplate.cpp
 	src/beamTemplate.cpp
 	src/missileWeaponData.cpp

@@ -632,6 +632,9 @@ bool ShipAI::betterTarget(P<SpaceObject> new_target, P<SpaceObject> current_targ
 
 float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
 {
+    if (P<ScanProbe>(target))   //Never fire missiles on scan probes
+        return std::numeric_limits<float>::infinity();
+    
     EMissileWeapons type = owner->weapon_tube[tube_index].getLoadType();
 
     if (type == MW_HVLI)    //Custom HVLI targeting for AI, as the calculate firing solution

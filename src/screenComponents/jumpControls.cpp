@@ -14,7 +14,7 @@ GuiJumpControls::GuiJumpControls(GuiContainer* owner, string id)
     slider = new GuiSlider(this, id + "_SLIDER", SpaceShip::jump_drive_max_distance, SpaceShip::jump_drive_min_distance, 10.0, nullptr);
     slider->setPosition(0, -50, ABottomLeft)->setSize(50, GuiElement::GuiSizeMax);
     
-    charge_bar = new GuiProgressbar(this, id + "_CHARGE", SpaceShip::jump_drive_min_distance, SpaceShip::jump_drive_max_distance, SpaceShip::jump_drive_min_distance);
+    charge_bar = new GuiProgressbar(this, id + "_CHARGE", 0, SpaceShip::jump_drive_max_distance, SpaceShip::jump_drive_min_distance);
     charge_bar->setPosition(0, -50, ABottomLeft)->setSize(50, GuiElement::GuiSizeMax);
     charge_bar->hide();
     

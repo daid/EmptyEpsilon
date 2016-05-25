@@ -300,13 +300,22 @@ int main(int argc, char** argv)
     returnToMainMenu();
     engine->runMainLoop();
 
+    // Set FSAA and fullscreen defaults from windowManager.
     P<WindowManager> windowManager = engine->getObject("windowManager");
     if (windowManager)
     {
         PreferencesManager::set("fsaa", windowManager->getFSAA());
         PreferencesManager::set("fullscreen", windowManager->isFullscreen() ? 1 : 0);
     }
+
+    // Set the default music_volume option to the current volume.
     PreferencesManager::set("music_volume", soundManager->getMusicVolume());
+
+    // Enable music on the main screen only by default.
+    if (PreferencesManager::get("music_enabled").empty())
+        PreferencesManager::set("music_enabled", "2");
+
+    // Set shaders to default.
     PreferencesManager::set("disable_shaders", PostProcessor::isEnabled() ? 0 : 1);
 
     if (PreferencesManager::get("headless") == "")

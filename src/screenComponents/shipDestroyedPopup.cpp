@@ -20,7 +20,7 @@ GuiShipDestroyedPopup::GuiShipDestroyedPopup(GuiCanvas* owner)
         this->owner->onKey(sf::Keyboard::Home, -1);
     }))->setPosition(0, 50, ACenter)->setSize(300, 50);
     
-    show_timeout = engine->getElapsedTime() + 5.0;
+    show_timeout.restart();
 }
 
 void GuiShipDestroyedPopup::onDraw(sf::RenderTarget& window)
@@ -28,9 +28,9 @@ void GuiShipDestroyedPopup::onDraw(sf::RenderTarget& window)
     if (my_spaceship)
     {
         frame->hide();
-        show_timeout = engine->getElapsedTime() + 5.0;
+        show_timeout.restart();
     }else{
-        if (show_timeout < engine->getElapsedTime())
+        if (show_timeout.getElapsedTime().asSeconds() > 5.0)
             frame->show();
     }
 }
