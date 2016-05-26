@@ -44,7 +44,7 @@ OptionsMenu::OptionsMenu()
     // Add music selection
     (new GuiLabel(this, "MUSIC_ENABLED_LABEL", "Music", 30))->addBackground()->setPosition(50, 220, ATopLeft)->setSize(300, 50);
 
-    int music_enabled_index = std::stoi(PreferencesManager::get("music_enabled", "2"));
+    int music_enabled_index = PreferencesManager::get("music_enabled", "2").toInt();
     (new GuiSelector(this, "MUSIC_ENABLED", [](int index, string value)
     {
         // 0: Always off
@@ -65,7 +65,7 @@ OptionsMenu::OptionsMenu()
         destroy();
         returnToMainMenu();
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
-    
+
     (new GuiLabel(this, "MUSIC_SELECT_LABEL", "Select Soundtrack", 30))->addBackground()->setPosition(-50, 50, ATopRight)->setSize(600, 50);
     GuiListbox* music_list = new GuiListbox(this, "MUSIC_PLAY", [this](int index, string value)
     {
