@@ -89,7 +89,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     if (show_heading_indicators)
         drawHeadingIndicators(forground_texture);
     drawTargets(forground_texture);
-    
+
     if (style == Rectangular && my_spaceship)
     {
         sf::Vector2f ship_offset = (my_spaceship->getPosition() - view_position) / distance * std::min(rect.width, rect.height) / 2.0f;
@@ -97,7 +97,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
         {
             sf::Vector2f position(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0);
             position += ship_offset / sf::length(ship_offset) * std::min(rect.width, rect.height) * 0.4f;
-            
+
             sf::Sprite arrow_sprite;
             textureManager.setTexture(arrow_sprite, "waypoint");
             arrow_sprite.setPosition(position);
@@ -270,38 +270,42 @@ void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
     {
         sf::Vector2f diff = n->getPosition() - scan_center;
         float diff_len = sf::length(diff);
-        if (diff_len < n->getRadius())
+
+        if (diff_len < n->getRadius() + distance)
         {
-            sf::RectangleShape background(sf::Vector2f(rect.width, rect.height));
-            background.setPosition(rect.left, rect.top);
-            background.setFillColor(sf::Color(0, 0, 0, 255));
-            window.draw(background, blend);
-        }else{
-            float r = n->getRadius() * scale;
-            sf::CircleShape circle(r, 32);
-            circle.setOrigin(r, r);
-            circle.setPosition(radar_screen_center + (n->getPosition() - view_position) * scale);
-            circle.setFillColor(sf::Color(0, 0, 0, 255));
-            window.draw(circle, blend);
+            if (diff_len < n->getRadius())
+            {
+                sf::RectangleShape background(sf::Vector2f(rect.width, rect.height));
+                background.setPosition(rect.left, rect.top);
+                background.setFillColor(sf::Color(0, 0, 0, 255));
+                window.draw(background, blend);
+            }else{
+                float r = n->getRadius() * scale;
+                sf::CircleShape circle(r, 32);
+                circle.setOrigin(r, r);
+                circle.setPosition(radar_screen_center + (n->getPosition() - view_position) * scale);
+                circle.setFillColor(sf::Color(0, 0, 0, 255));
+                window.draw(circle, blend);
 
-            float diff_angle = sf::vector2ToAngle(diff);
-            float angle = acosf(n->getRadius() / diff_len) / M_PI * 180.0f;
+                float diff_angle = sf::vector2ToAngle(diff);
+                float angle = acosf(n->getRadius() / diff_len) / M_PI * 180.0f;
 
-            sf::Vector2f pos_a = n->getPosition() - sf::vector2FromAngle(diff_angle + angle) * n->getRadius();
-            sf::Vector2f pos_b = n->getPosition() - sf::vector2FromAngle(diff_angle - angle) * n->getRadius();
-            sf::Vector2f pos_c = scan_center + sf::normalize(pos_a - scan_center) * distance * 3.0f;
-            sf::Vector2f pos_d = scan_center + sf::normalize(pos_b - scan_center) * distance * 3.0f;
-            sf::Vector2f pos_e = scan_center + diff / diff_len * distance * 3.0f;
+                sf::Vector2f pos_a = n->getPosition() - sf::vector2FromAngle(diff_angle + angle) * n->getRadius();
+                sf::Vector2f pos_b = n->getPosition() - sf::vector2FromAngle(diff_angle - angle) * n->getRadius();
+                sf::Vector2f pos_c = scan_center + sf::normalize(pos_a - scan_center) * distance * 3.0f;
+                sf::Vector2f pos_d = scan_center + sf::normalize(pos_b - scan_center) * distance * 3.0f;
+                sf::Vector2f pos_e = scan_center + diff / diff_len * distance * 3.0f;
 
-            sf::VertexArray a(sf::TrianglesStrip, 5);
-            a[0].position = radar_screen_center + (pos_a - view_position) * scale;
-            a[1].position = radar_screen_center + (pos_b - view_position) * scale;
-            a[2].position = radar_screen_center + (pos_c - view_position) * scale;
-            a[3].position = radar_screen_center + (pos_d - view_position) * scale;
-            a[4].position = radar_screen_center + (pos_e - view_position) * scale;
-            for(int n=0; n<5;n++)
-                a[n].color = sf::Color(0, 0, 0, 255);
-            window.draw(a, blend);
+                sf::VertexArray a(sf::TrianglesStrip, 5);
+                a[0].position = radar_screen_center + (pos_a - view_position) * scale;
+                a[1].position = radar_screen_center + (pos_b - view_position) * scale;
+                a[2].position = radar_screen_center + (pos_c - view_position) * scale;
+                a[3].position = radar_screen_center + (pos_d - view_position) * scale;
+                a[4].position = radar_screen_center + (pos_e - view_position) * scale;
+                for(int n=0; n<5;n++)
+                    a[n].color = sf::Color(0, 0, 0, 255);
+                window.draw(a, blend);
+            }
         }
     }
 
@@ -348,12 +352,12 @@ void GuiRadarView::drawWaypoints(sf::RenderTarget& window)
         object_sprite.setScale(0.8, 0.8);
         window.draw(object_sprite);
         drawText(window, sf::FloatRect(screen_position.x, screen_position.y - 10, 0, 0), string(n + 1), ACenter, 18, bold_font, colorConfig.ship_waypoint_text);
-        
+
         if (style != Rectangular && sf::length(screen_position - radar_screen_center) > std::min(rect.width, rect.height) * 0.5f)
         {
             sf::Vector2f offset = my_spaceship->waypoints[n] - view_position;
             screen_position = radar_screen_center + (offset / sf::length(offset) * std::min(rect.width, rect.height) * 0.4f);
-            
+
             object_sprite.setPosition(screen_position);
             object_sprite.setRotation(sf::vector2ToAngle(offset) - 90);
             window.draw(object_sprite);
@@ -414,12 +418,12 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
                         missile_target_angle = firing_solution;
                 }
             }
-            
+
             float angle_diff = sf::angleDifference(missile_target_angle, fire_angle);
             float turn_radius = ((360.0f / data.turnrate) * data.speed) / (2.0f * M_PI);
             if (data.turnrate == 0.0f)
                 turn_radius = 0.0f;
-            
+
             float left_or_right = 90;
             if (angle_diff > 0)
                 left_or_right = -90;

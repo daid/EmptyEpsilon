@@ -170,6 +170,7 @@
 			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 			<Add option="-DENABLE_CRASH_LOGGER" />
+			<Add option='-DWINDOW_TITLE=\&quot;EmptyEpsilon\&quot;' />
 			<Add directory="../SeriousProton/src" />
 			<Add directory="src" />
 		</Compiler>
