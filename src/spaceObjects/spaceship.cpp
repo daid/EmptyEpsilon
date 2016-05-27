@@ -495,24 +495,17 @@ void SpaceShip::update(float delta)
             combat_maneuver_strafe_active = combat_maneuver_strafe_request;
     }
 
-    if (combat_maneuver_boost_active != 0.0)
+    if (combat_maneuver_boost_active != 0.0 || combat_maneuver_strafe_active != 0.0)
     {
         combat_maneuver_charge -= combat_maneuver_boost_active * delta / combat_maneuver_boost_max_time;
-        if (combat_maneuver_charge <= 0.0)
-        {
-            combat_maneuver_charge = 0.0;
-            combat_maneuver_boost_request = 0.0;
-        }else{
-            setVelocity(getVelocity() + forward * combat_maneuver_boost_speed * combat_maneuver_boost_active);
-        }
-    }else if (combat_maneuver_strafe_active != 0.0)
-    {
         combat_maneuver_charge -= fabs(combat_maneuver_strafe_active) * delta / combat_maneuver_strafe_max_time;
         if (combat_maneuver_charge <= 0.0)
         {
             combat_maneuver_charge = 0.0;
+            combat_maneuver_boost_request = 0.0;
             combat_maneuver_strafe_request = 0.0;
         }else{
+            setVelocity(getVelocity() + forward * combat_maneuver_boost_speed * combat_maneuver_boost_active);
             setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() + 90) * combat_maneuver_strafe_speed * combat_maneuver_strafe_active);
         }
     }else if (combat_maneuver_charge < 1.0)

@@ -2,6 +2,7 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "powerDamageIndicator.h"
+#include "gameGlobalInfo.h"
 
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_progressbar.h"
@@ -37,7 +38,10 @@ void GuiShieldsEnableButton::onDraw(sf::RenderTarget& window)
             button->show();
             button->setValue(my_spaceship->shields_active);
             bar->hide();
-            button->setText(frequencyToString(my_spaceship->shield_frequency) + (my_spaceship->shields_active ? " Shields: ON" : " Shields: OFF"));
+            if (gameGlobalInfo->use_beam_shield_frequencies)
+                button->setText(frequencyToString(my_spaceship->shield_frequency) + (my_spaceship->shields_active ? " Shields: ON" : " Shields: OFF"));
+            else
+                button->setText(my_spaceship->shields_active ? " Shields: ON" : " Shields: OFF");
         }
     }
 }
