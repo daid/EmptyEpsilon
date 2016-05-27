@@ -544,12 +544,13 @@ void SpaceShip::update(float delta)
 float SpaceShip::getShieldRechargeRate(int shield_index)
 {
     float rate = 0.3f;
-    if (shield_index == 0)
-        rate *= getSystemEffectiveness(SYS_FrontShield);
-    else
-        rate *= getSystemEffectiveness(SYS_RearShield);
+    rate *= getSystemEffectiveness(getShieldSystemForShieldIndex(shield_index));
     if (docking_state == DS_Docked)
-        rate *= 4.0;
+    {
+        P<SpaceShip> docked_with_ship = docking_target;
+        if (!docked_with_ship)
+            rate *= 4.0;
+    }
     return rate;
 }
 
@@ -752,10 +753,14 @@ float SpaceShip::getShieldDamageFactor(DamageInfo& info, int shield_index)
     {
         frequency_damage_factor = frequencyVsFrequencyDamageFactor(info.frequency, shield_frequency);
     }
-    ESystem system = SYS_FrontShield;
-    if (shield_index > 0)
-        system = SYS_RearShield;
-    float shield_damage_factor = 1.25 - getSystemEffectiveness(system) * 0.25;
+    ESystem system = getShieldSystemForShieldIndex(shield_index);
+
+    //Shield damage reduction curve. Damage reduction gets slightly exponetial effective with power.
+    // This also greatly reduces the ineffectiveness at low power situations.
+    float shield_damage_exponent = 1.6;
+    float shield_damage_divider = 7.0;
+    float shield_damage_factor = 1.0 + powf(1.0, shield_damage_exponent) / shield_damage_divider-powf(getSystemEffectiveness(system), shield_damage_exponent) / shield_damage_divider;
+    
     return shield_damage_factor * frequency_damage_factor;
 }
 
