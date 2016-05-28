@@ -778,7 +778,7 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
         if (info.system_target != SYS_None)
         {
             //Target specific system
-            float system_damage = (damage_amount / hull_max) * 1.0;
+            float system_damage = (damage_amount / hull_max) * 2.0;
             if (info.type == DT_Energy)
                 system_damage *= 3.0;   //Beam weapons do more system damage, as they penetrate the hull easier.
             systems[info.system_target].health -= system_damage;
@@ -800,17 +800,14 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
             else
                 damage_amount *= 0.5;
         }else{
-            for(int n=0; n<5; n++)
-            {
-                ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
-                //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
-                float system_damage = (damage_amount / hull_max) * 0.8;
-                if (info.type == DT_Energy)
-                    system_damage *= 2.5;   //Beam weapons do more system damage, as they penetrate the hull easier.
-                systems[random_system].health -= system_damage;
-                if (systems[random_system].health < -1.0)
-                    systems[random_system].health = -1.0;
-            }
+            ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
+            //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
+            float system_damage = (damage_amount / hull_max) * 3.0;
+            if (info.type == DT_Energy)
+                system_damage *= 2.5;   //Beam weapons do more system damage, as they penetrate the hull easier.
+            systems[random_system].health -= system_damage;
+            if (systems[random_system].health < -1.0)
+                systems[random_system].health = -1.0;
         }
     }
 
