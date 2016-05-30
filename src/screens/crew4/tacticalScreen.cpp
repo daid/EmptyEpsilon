@@ -96,7 +96,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     missile_aim = new GuiRotationDial(this, "MISSILE_AIM", -90, 360 - 90, 0, [this](float value){
         tube_controls->setMissileTargetAngle(value);
     });
-    missile_aim->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
+    missile_aim->hide()->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     tube_controls = new GuiMissileTubeControls(this, "MISSILE_TUBES");
     radar->enableTargetProjections(tube_controls);
     lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);

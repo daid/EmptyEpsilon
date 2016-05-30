@@ -8,6 +8,7 @@
 #include "screenComponents/beamTargetSelector.h"
 #include "screenComponents/powerDamageIndicator.h"
 #include "screenComponents/shieldFreqencySelect.h"
+#include "screenComponents/shieldsEnableButton.h"
 #include "screenComponents/alertOverlay.h"
 
 #include "gui/gui2_rotationdial.h"
@@ -52,6 +53,12 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
         (new GuiPowerDamageIndicator(beam_info_box, "", SYS_BeamWeapons, ACenterLeft))->setSize(GuiElement::GuiSizeMax, 50);
         (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(0, 0, ABottomRight)->setSize(GuiElement::GuiSizeMax, 50);
         (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, -50, ABottomRight)->setSize(GuiElement::GuiSizeMax, 50);
+
+        if (!gameGlobalInfo->use_beam_shield_frequencies)
+        {   //If we do have system damage, but no shield frequencies, we can partially overlap this with the shield button.
+            //So move the beam configuration a bit down.
+            beam_info_box->setPosition(-20, -50, ABottomRight);
+        }
     }
 
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
@@ -61,7 +68,13 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     rear_shield_display = new GuiKeyValueDisplay(this, "REAR_SHIELD_DISPLAY", 0.45, "Rear", "");
     rear_shield_display->setIcon("gui/icons/shields-aft")->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
 
-    (new GuiShieldFrequencySelect(this, "SHIELD_FREQ"))->setPosition(-20, -20, ABottomRight)->setSize(280, 100);
+    if (gameGlobalInfo->use_beam_shield_frequencies)
+    {
+        //The shield frequency selection includes a shield enable button.
+        (new GuiShieldFrequencySelect(this, "SHIELD_FREQ"))->setPosition(-20, -20, ABottomRight)->setSize(280, 100);
+    }else{
+        (new GuiShieldsEnableButton(this, "SHIELDS_ENABLE"))->setPosition(-20, -20, ABottomRight)->setSize(280, 50);
+    }
 }
 
 void WeaponsScreen::onDraw(sf::RenderTarget& window)

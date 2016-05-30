@@ -495,24 +495,17 @@ void SpaceShip::update(float delta)
             combat_maneuver_strafe_active = combat_maneuver_strafe_request;
     }
 
-    if (combat_maneuver_boost_active != 0.0)
+    if (combat_maneuver_boost_active != 0.0 || combat_maneuver_strafe_active != 0.0)
     {
         combat_maneuver_charge -= combat_maneuver_boost_active * delta / combat_maneuver_boost_max_time;
-        if (combat_maneuver_charge <= 0.0)
-        {
-            combat_maneuver_charge = 0.0;
-            combat_maneuver_boost_request = 0.0;
-        }else{
-            setVelocity(getVelocity() + forward * combat_maneuver_boost_speed * combat_maneuver_boost_active);
-        }
-    }else if (combat_maneuver_strafe_active != 0.0)
-    {
         combat_maneuver_charge -= fabs(combat_maneuver_strafe_active) * delta / combat_maneuver_strafe_max_time;
         if (combat_maneuver_charge <= 0.0)
         {
             combat_maneuver_charge = 0.0;
+            combat_maneuver_boost_request = 0.0;
             combat_maneuver_strafe_request = 0.0;
         }else{
+            setVelocity(getVelocity() + forward * combat_maneuver_boost_speed * combat_maneuver_boost_active);
             setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() + 90) * combat_maneuver_strafe_speed * combat_maneuver_strafe_active);
         }
     }else if (combat_maneuver_charge < 1.0)
@@ -544,12 +537,13 @@ void SpaceShip::update(float delta)
 float SpaceShip::getShieldRechargeRate(int shield_index)
 {
     float rate = 0.3f;
-    if (shield_index == 0)
-        rate *= getSystemEffectiveness(SYS_FrontShield);
-    else
-        rate *= getSystemEffectiveness(SYS_RearShield);
+    rate *= getSystemEffectiveness(getShieldSystemForShieldIndex(shield_index));
     if (docking_state == DS_Docked)
-        rate *= 4.0;
+    {
+        P<SpaceShip> docked_with_ship = docking_target;
+        if (!docked_with_ship)
+            rate *= 4.0;
+    }
     return rate;
 }
 
@@ -752,10 +746,14 @@ float SpaceShip::getShieldDamageFactor(DamageInfo& info, int shield_index)
     {
         frequency_damage_factor = frequencyVsFrequencyDamageFactor(info.frequency, shield_frequency);
     }
-    ESystem system = SYS_FrontShield;
-    if (shield_index > 0)
-        system = SYS_RearShield;
-    float shield_damage_factor = 1.25 - getSystemEffectiveness(system) * 0.25;
+    ESystem system = getShieldSystemForShieldIndex(shield_index);
+
+    //Shield damage reduction curve. Damage reduction gets slightly exponetial effective with power.
+    // This also greatly reduces the ineffectiveness at low power situations.
+    float shield_damage_exponent = 1.6;
+    float shield_damage_divider = 7.0;
+    float shield_damage_factor = 1.0 + powf(1.0, shield_damage_exponent) / shield_damage_divider-powf(getSystemEffectiveness(system), shield_damage_exponent) / shield_damage_divider;
+    
     return shield_damage_factor * frequency_damage_factor;
 }
 
@@ -780,7 +778,7 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
         if (info.system_target != SYS_None)
         {
             //Target specific system
-            float system_damage = (damage_amount / hull_max) * 1.0;
+            float system_damage = (damage_amount / hull_max) * 2.0;
             if (info.type == DT_Energy)
                 system_damage *= 3.0;   //Beam weapons do more system damage, as they penetrate the hull easier.
             systems[info.system_target].health -= system_damage;
@@ -802,17 +800,14 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
             else
                 damage_amount *= 0.5;
         }else{
-            for(int n=0; n<5; n++)
-            {
-                ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
-                //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
-                float system_damage = (damage_amount / hull_max) * 0.8;
-                if (info.type == DT_Energy)
-                    system_damage *= 2.5;   //Beam weapons do more system damage, as they penetrate the hull easier.
-                systems[random_system].health -= system_damage;
-                if (systems[random_system].health < -1.0)
-                    systems[random_system].health = -1.0;
-            }
+            ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
+            //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
+            float system_damage = (damage_amount / hull_max) * 3.0;
+            if (info.type == DT_Energy)
+                system_damage *= 2.5;   //Beam weapons do more system damage, as they penetrate the hull easier.
+            systems[random_system].health -= system_damage;
+            if (systems[random_system].health < -1.0)
+                systems[random_system].health = -1.0;
         }
     }
 

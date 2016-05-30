@@ -15,12 +15,12 @@ public:
     JSONGenerator(FILE* f)
     : f(f), first(true)
     {
+        fprintf(f, "{");
     }
     
     ~JSONGenerator()
     {
-        if (!first)
-            fprintf(f, "}");
+        fprintf(f, "}");
     }
     
     template<typename T> void write(const char* key, const T& value)
@@ -28,7 +28,7 @@ public:
         if (!first)
             fprintf(f, ",\"%s\":", key);
         else
-            fprintf(f, "{\"%s\":", key);
+            fprintf(f, "\"%s\":", key);
         first = false;
         writeValue(value);
     }
@@ -37,7 +37,7 @@ public:
         if (!first)
             fprintf(f, ",\"%s\":", key);
         else
-            fprintf(f, "{\"%s\":", key);
+            fprintf(f, "\"%s\":", key);
         first = false;
         return JSONGenerator(f);
     }
@@ -46,7 +46,7 @@ public:
         if (!first)
             fprintf(f, ",\"%s\":[", key);
         else
-            fprintf(f, "{\"%s\":[", key);
+            fprintf(f, "\"%s\":[", key);
         first = false;
         array_first = true;
     }
@@ -223,7 +223,7 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
     bool has_beam_weapons = false;
     
     json.write("callsign", ship->getCallSign());
-    json.write("type", ship->type_name);
+    json.write("ship_type", ship->type_name);
     json.write("energy_level", ship->energy_level);
     json.write("hull", ship->hull_strength);
     if (ship->target_id > -1)

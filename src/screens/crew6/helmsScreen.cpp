@@ -24,7 +24,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", 5000.0, nullptr);
     
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
-    combat_maneuver->setPosition(-50, -50, ABottomRight)->setSize(280, 265);
+    combat_maneuver->setPosition(-50, -50, ABottomRight)->setSize(280, 215);
     
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
