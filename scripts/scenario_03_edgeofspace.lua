@@ -11,8 +11,9 @@ function init()
     Player:setTypeName("Technician Cruiser")
     --             		 # Arc, Dir, Range, CycleTime, Dmg
     Player:setBeamWeapon(0, 90,-25, 1000.0, 6.0, 10)
-    Player:setBeamWeapon(0, 90, 25, 1000.0, 6.0, 10)
+    Player:setBeamWeapon(1, 90, 25, 1000.0, 6.0, 10)
     Player:setWeaponTubeCount(1)
+    Player:setWeaponTubeDirection(0, 0)
     Player:setWeaponStorageMax("Nuke", 0)
     Player:setWeaponStorageMax("Mine", 0)
 
@@ -591,11 +592,15 @@ Please dock so we can come aboard.]])
 		if Player:isDocked(EOS_Station) then
             -- Reconfigure the player ship into a Wartime Technician, which has more weapon capabilities then the Technical cruiser.
 			Player:setTypeName("Wartime Technician")
-            --             # Arc, Dir, Range, CycleTime, Dmg
+            --                    # Arc, Dir, Range, CycleTime, Dmg
             Player:setBeamWeapon(0, 100, -20, 1000.0, 6.0, 10)
             Player:setBeamWeapon(1, 100,  20, 1000.0, 6.0, 10)
             Player:setBeamWeapon(2,  90, 180, 1000.0, 6.0, 10)
-            Player:setWeaponTubeCount(2)
+            Player:setWeaponTubeCount(3)
+            Player:setWeaponTubeDirection(0, 0):weaponTubeDisallowMissle(0, "Mine")
+            Player:setWeaponTubeDirection(1, 0):weaponTubeDisallowMissle(1, "Mine")
+            Player:setWeaponTubeDirection(2, 180)
+            Player:setWeaponTubeExclusiveFor(2, "Mine")
             Player:setWeaponStorageMax("Homing", 12)
             Player:setWeaponStorageMax("Nuke", 4)
             Player:setWeaponStorageMax("Mine", 8)
