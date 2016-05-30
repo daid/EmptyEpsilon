@@ -17,6 +17,7 @@
 #include "gui/gui2_selector.h"
 #include "gui/gui2_scrolltext.h"
 #include "gui/gui2_listbox.h"
+#include "gui/gui2_slider.h"
 
 ScienceScreen::ScienceScreen(GuiContainer* owner)
 : GuiOverlay(owner, "SCIENCE_SCREEN", colorConfig.background)
@@ -117,10 +118,14 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     });
     probe_view_button->setPosition(20, -120, ABottomLeft)->setSize(200, 50)->disable();
 
-    (new GuiSelector(radar_view, "ZOOM_SELECT", [this](int index, string value) {
-        float zoom_amount = 1 + 0.5 * index;
-        science_radar->setDistance(gameGlobalInfo->long_range_radar_range / zoom_amount);
-    }))->setOptions({"Zoom: 1x", "Zoom: 1.5x", "Zoom: 2x", "Zoom: 2.5x", "Zoom: 3x"})->setSelectionIndex(0)->setPosition(-20, -20, ABottomRight)->setSize(250, 50);
+    zoom_slider = new GuiSlider(radar_view, "", gameGlobalInfo->long_range_radar_range, 5000.0, gameGlobalInfo->long_range_radar_range, [this](float value)
+    {
+        zoom_label->setText("Zoom: " + string(gameGlobalInfo->long_range_radar_range / value, 1) + "x");
+        science_radar->setDistance(value);
+    });
+    zoom_slider->setPosition(-20, -20, ABottomRight)->setSize(250, 50);
+    zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1x", 30);
+    zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     if (!gameGlobalInfo->use_beam_shield_frequencies)
     {

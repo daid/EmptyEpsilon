@@ -12,6 +12,8 @@ class GuiFrequencyCurve;
 class GuiScrollText;
 class GuiButton;
 class GuiToggleButton;
+class GuiSlider;
+class GuiLabel;
 class DatabaseViewComponent;
 
 class ScienceScreen : public GuiOverlay
@@ -23,6 +25,8 @@ protected:
     TargetsContainer targets;
     GuiRadarView* science_radar;
     GuiRadarView* probe_radar;
+    GuiSlider* zoom_slider;
+    GuiLabel* zoom_label;
     GuiKeyValueDisplay* info_callsign;
     GuiKeyValueDisplay* info_distance;
     GuiKeyValueDisplay* info_heading;
