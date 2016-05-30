@@ -62,6 +62,8 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     drawRangeIndicators(background_texture);
     if (show_target_projection)
         drawTargetProjections(background_texture);
+    if (show_missile_tubes)
+        drawMissileTubes(background_texture);
 
     ///Start drawing of foreground
     forground_texture.clear(sf::Color::Transparent);
@@ -490,6 +492,30 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
             }
             window.draw(a);
         }
+    }
+}
+
+void GuiRadarView::drawMissileTubes(sf::RenderTarget& window)
+{
+    sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
+    float scale = std::min(rect.width, rect.height) / 2.0f / distance;
+
+    if (my_spaceship)
+    {
+        sf::VertexArray a(sf::LinesStrip, my_spaceship->weapon_tube_count * 2);
+        for(int n=0; n<my_spaceship->weapon_tube_count; n++)
+        {
+            sf::Vector2f fire_position = my_spaceship->getPosition() + sf::rotateVector(my_spaceship->ship_template->model_data->getTubePosition2D(n), my_spaceship->getRotation());
+            sf::Vector2f fire_draw_position = radar_screen_center + (view_position - fire_position) * scale;
+
+            float fire_angle = my_spaceship->getRotation() + my_spaceship->weapon_tube[n].getDirection();
+            
+            a[n * 2].position = fire_draw_position;
+            a[n * 2 + 1].position = fire_draw_position + (sf::vector2FromAngle(fire_angle) * 1000.0f) * scale;
+            a[n * 2].color = sf::Color(128, 128, 128, 128);
+            a[n * 2 + 1].color = sf::Color(128, 128, 128, 0);
+        }
+        window.draw(a);
     }
 }
 
