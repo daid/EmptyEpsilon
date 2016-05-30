@@ -38,6 +38,8 @@ public:
     void commandSetTargetPosition(sf::Vector2i position);
 
     virtual void update(float delta);
+private:
+    bool isTargetPositionTaken(sf::Vector2i position);
 };
 PVector<RepairCrew> getRepairCrewFor(P<PlayerSpaceship> ship);
 

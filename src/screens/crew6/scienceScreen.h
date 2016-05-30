@@ -12,14 +12,12 @@ class GuiFrequencyCurve;
 class GuiScrollText;
 class GuiButton;
 class GuiToggleButton;
-class RawScannerDataRadarOverlay;
 class DatabaseViewComponent;
 
 class ScienceScreen : public GuiOverlay
 {
 protected:
     GuiElement* radar_view;
-    RawScannerDataRadarOverlay* raw_scanner_data_overlay;
     DatabaseViewComponent* database_view;
 
     TargetsContainer targets;

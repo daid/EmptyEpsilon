@@ -41,8 +41,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
         }, nullptr, nullptr
     );
-    raw_scanner_data_overlay = new RawScannerDataRadarOverlay(science_radar, "", gameGlobalInfo->long_range_radar_range);
-    raw_scanner_data_overlay->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    new RawScannerDataRadarOverlay(science_radar, "", gameGlobalInfo->long_range_radar_range);
 
     probe_radar = new GuiRadarView(radar_view, "PROBE_RADAR", 5000, &targets);
     probe_radar->setPosition(-270, 0, ACenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
@@ -55,6 +54,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
         }, nullptr, nullptr
     );
+    new RawScannerDataRadarOverlay(probe_radar, "", 5000);
 
 
     GuiAutoLayout* sidebar = new GuiAutoLayout(radar_view, "SIDE_BAR", GuiAutoLayout::LayoutVerticalTopToBottom);

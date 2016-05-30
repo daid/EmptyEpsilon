@@ -219,7 +219,14 @@ void RepairCrew::onReceiveClientCommand(int32_t client_id, sf::Packet& packet)
     switch(command)
     {
     case CMD_SET_TARGET_POSITION:
-        packet >> target_position;
+        {
+            sf::Vector2i pos;
+            packet >> pos;
+            if (!isTargetPositionTaken(pos))
+            {
+                target_position = pos;
+            }
+        }
         break;
     }
 }
@@ -229,6 +236,16 @@ void RepairCrew::commandSetTargetPosition(sf::Vector2i position)
     sf::Packet packet;
     packet << CMD_SET_TARGET_POSITION << position;
     sendClientCommand(packet);
+}
+
+bool RepairCrew::isTargetPositionTaken(sf::Vector2i pos)
+{
+    foreach(RepairCrew, c, repairCrewList)
+    {
+        if (c->ship_id == ship_id && c->target_position == pos)
+            return true;
+    }
+    return false;
 }
 
 PVector<RepairCrew> getRepairCrewFor(P<PlayerSpaceship> ship)
