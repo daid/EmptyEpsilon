@@ -74,6 +74,7 @@ private:
     void writeValue(bool b) { fprintf(f, b ? "true" : "false"); }
     void writeValue(int i) { fprintf(f, "%d", i); }
     void writeValue(float _f) { fprintf(f, "%g", _f); }
+    void writeValue(const char* value) { fprintf(f, "\"%s\"", value); }
     void writeValue(const string& value) { fprintf(f, "\"%s\"", value.c_str()); }
 
     FILE* f;
