@@ -6,11 +6,16 @@
 #include "screenComponents/viewport3d.h"
 #include "screenComponents/radarView.h"
 
+class GuiSelector;
+class GuiToggleButton;
+
 class TopDownScreen : public GuiCanvas, public Updatable
 {
 private:
     GuiViewport3D* viewport;
     P<SpaceObject> target;
+    GuiSelector* camera_lock_selector;
+    GuiToggleButton* camera_lock_toggle;
 public:
     TopDownScreen();
     
