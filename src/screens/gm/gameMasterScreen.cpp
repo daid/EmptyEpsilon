@@ -57,6 +57,12 @@ GameMasterScreen::GameMasterScreen()
         object_creation_screen->show();
     });
     create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
+
+    export_button = new GuiButton(this, "EXPORT_BUTTON", "Copy scenario", [this]() {
+        Clipboard::setClipboard(getScriptExport());
+    });
+    export_button->setPosition(-20, -20, ABottomRight)->setSize(250, 50);
+
     cancel_create_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
         create_button->show();
         cancel_create_button->hide();

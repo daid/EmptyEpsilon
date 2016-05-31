@@ -37,6 +37,7 @@ private:
     GuiAutoLayout* order_layout;
     GuiButton* player_comms_hail;
     GuiButton* ship_tweak_button;
+    GuiButton* export_button;
     
     enum EClickAndDragState
     {
