@@ -23,20 +23,16 @@ TopDownScreen::TopDownScreen()
     // This selector is visible only if the lock toggle is on and at least one
     // player ship exists.
     camera_lock_selector = new GuiSelector(this, "CAMERA_LOCK_SELECTOR", [this](int index, string value) {
-        if (gameGlobalInfo->getPlayerShip(index))
-            target = gameGlobalInfo->getPlayerShip(index);
+        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(value.toInt());
+        if (ship)
+            target = ship;
     });
-    camera_lock_selector->setPosition(20, -80, ABottomLeft)->setSize(300, 50);
+    camera_lock_selector->setPosition(20, -80, ABottomLeft)->setSize(300, 50)->hide();
 
     // Toggle whether to lock onto a player ship.
     // This button is visible only if at least one player ship exists.
-    camera_lock_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOGGLE", "Lock camera on ship", [this](bool value) {
-        if (value)
-            camera_lock_selector->show();
-        else
-            camera_lock_selector->hide();
-    });
-    camera_lock_toggle->setPosition(20, -20, ABottomLeft)->setSize(300, 50);
+    camera_lock_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOGGLE", "Lock camera on ship", [this](bool value) {});
+    camera_lock_toggle->setPosition(20, -20, ABottomLeft)->setSize(300, 50)->hide();
 
     new GuiIndicatorOverlays(this);
 }
@@ -77,19 +73,6 @@ void TopDownScreen::update(float delta)
         }
     }
 
-    // Determine whether the camera lock button or selector are visible.
-    if (camera_lock_selector->entryCount() > 0 || camera_lock_toggle->getValue())
-    {
-        camera_lock_toggle->show();
-	if (camera_lock_toggle->getValue())
-            camera_lock_selector->show();
-        else
-            camera_lock_selector->hide();
-    }else{
-        camera_lock_selector->hide();
-        camera_lock_toggle->hide();
-    }
-
     // Enforce a top-down view with up pointing toward heading 0.
     camera_yaw = -90.0f;
     camera_pitch = 90.0f;
@@ -108,6 +91,34 @@ void TopDownScreen::onKey(sf::Keyboard::Key key, int unicode)
 {
     switch(key)
     {
+    // Toggle UI visibility with the H key.
+    case sf::Keyboard::H:
+        if (camera_lock_toggle->isVisible() || camera_lock_selector->isVisible())
+        {
+            camera_lock_toggle->hide();
+            camera_lock_selector->hide();
+        }else{
+            camera_lock_toggle->show();
+            camera_lock_selector->show();
+        }
+        break;
+    // Toggle camera lock with the L key.
+    case sf::Keyboard::L:
+        camera_lock_toggle->setValue(!camera_lock_toggle->getValue());
+        break;
+    // Cycle through player ships with the J and K keys.
+    case sf::Keyboard::J:
+        camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() - 1);
+        if (camera_lock_selector->getSelectionIndex() < 0)
+            camera_lock_selector->setSelectionIndex(camera_lock_selector->entryCount() - 1);
+        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
+        break;
+    case sf::Keyboard::K:
+        camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
+        if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
+            camera_lock_selector->setSelectionIndex(0);
+        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
+        break;
     // WASD controls for the unlocked camera.
     case sf::Keyboard::W:
         if (!camera_lock_toggle->getValue())
