@@ -39,8 +39,8 @@ private:
 
     GuiTextEntry* type_name;
     GuiTextEntry* callsign;
-    GuiSelector* warp_selector;
-    GuiSelector* jump_selector;
+    GuiToggleButton* warp_toggle;
+    GuiToggleButton* jump_toggle;
     GuiSlider* impulse_speed_slider;
     GuiSlider* turn_speed_slider;
     GuiSlider* hull_max_slider;
@@ -58,8 +58,8 @@ class GuiShipTweakMissileWeapons : public GuiTweakPage
 private:
     P<SpaceShip> target;
 
-    GuiSelector* missile_storage_amount_selector[MW_Count];
-    GuiSelector* missile_current_amount_selector[MW_Count];
+    GuiSlider* missile_storage_amount_slider[MW_Count];
+    GuiSlider* missile_current_amount_slider[MW_Count];
 public:
     GuiShipTweakMissileWeapons(GuiContainer* owner);
 
