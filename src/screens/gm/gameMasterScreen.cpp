@@ -485,6 +485,11 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
         setCreateScript("Mine():setFactionId(" + string(faction_selector->getSelectionIndex()) + ")");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
+    // Default supply drop values copied from scripts/supply_drop.lua
+    (new GuiButton(box, "CREATE_SUPPLY_DROP", "Supply Drop", [this]() {
+        setCreateScript("SupplyDrop():setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setEnergy(500):setWeaponStorage('Nuke', 1):setWeaponStorage('Homing', 4):setWeaponStorage('Mine', 2):setWeaponStorage('EMP', 1)");
+    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
+    y += 30;
     (new GuiButton(box, "CREATE_ASTEROID", "Asteroid", [this]() {
         setCreateScript("Asteroid()");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
