@@ -57,6 +57,12 @@ GameMasterScreen::GameMasterScreen()
         object_creation_screen->show();
     });
     create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
+
+    export_button = new GuiButton(this, "EXPORT_BUTTON", "Copy scenario", [this]() {
+        Clipboard::setClipboard(getScriptExport());
+    });
+    export_button->setPosition(-20, -20, ABottomRight)->setSize(250, 50);
+
     cancel_create_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
         create_button->show();
         cancel_create_button->hide();
@@ -483,6 +489,15 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
     y += 30;
     (new GuiButton(box, "CREATE_MINE", "Mine", [this]() {
         setCreateScript("Mine():setFactionId(" + string(faction_selector->getSelectionIndex()) + ")");
+    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
+    y += 30;
+    // Default supply drop values copied from scripts/supply_drop.lua
+    (new GuiButton(box, "CREATE_SUPPLY_DROP", "Supply Drop", [this]() {
+        setCreateScript("SupplyDrop():setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setEnergy(500):setWeaponStorage('Nuke', 1):setWeaponStorage('Homing', 4):setWeaponStorage('Mine', 2):setWeaponStorage('EMP', 1)");
+    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
+    y += 30;
+    (new GuiButton(box, "CREATE_ASTEROID", "Asteroid", [this]() {
+        setCreateScript("Asteroid()");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
     (new GuiButton(box, "CREATE_BLACKHOLE", "BlackHole", [this]() {
