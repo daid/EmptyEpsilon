@@ -1,1000 +1,1002 @@
 <!doctype html>
 <html lang="us">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>EmptyEpsilon - Multiplayer Spaceship Bridge Simulator</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css" rel="stylesheet">
-  <link href="bebasneue.css" rel="stylesheet">
-  <link href="main.css" rel="stylesheet">
-  <link rel="shortcut icon" href="favicon.ico">
-  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-  <link href="https://file.myfontastic.com/mVfeXmXgbKVhLxnHWexUtb/icons.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>EmptyEpsilon - Multiplayer Spaceship Bridge Simulator</title>
+	<link href="jquery-ui.min.css" rel="stylesheet">
+	<link href="main.css" rel="stylesheet">
+	<link rel="shortcut icon" href="favicon.ico">
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<link href="https://file.myfontastic.com/mVfeXmXgbKVhLxnHWexUtb/icons.css" rel="stylesheet">
+	<link href="magnific-popup.css" rel="stylesheet">
 </head>
 <body>
 
 <h1 class="logo">EmptyEpsilon</h1>
 <div id="tabs">
+	<ul>
+		<li><a href="#tabs-info"><span class="button-text">Info</span></a></li>
+		<li><a href="#tabs-media"><span class="button-text">Media</span></a></li>
+		<li><a href="#tabs-running"><span class="button-text">Running a game</span></a></li>
+		<li><a href="#tabs-stations"><span class="button-text">Stations</span></a></li>
+		<li><a href="#tabs-scripting"><span class="button-text">Mission scripting</span></a></li>
+		<li><a href="#tabs-download"><span class="button-text">Download</span></a></li>
+		<li><a href="#tabs-forums"><span class="button-text">Forums</span></a></li>
+	</ul>
+	<div id="tabs-info">
+		<h2>What is it?</h2>
+		<p>EmptyEpsilon is a spaceship bridge simulator game. It's fully open source, so it can be modified in any way people wish.</p>
 
-  <ul>
-    <li><a href="#tabs-info"><span class="button-text">Info</span></a></li>
-    <li><a href="#tabs-media"><span class="button-text">Media</span></a></li>
-    <li><a href="#tabs-running"><span class="button-text">Running a game</span></a></li>
-    <li><a href="#tabs-stations"><span class="button-text">Stations</span></a></li>
-    <li><a href="#tabs-scripting"><span class="button-text">Mission scripting</span></a></li>
-    <li><a href="#tabs-download"><span class="button-text">Download</span></a></li>
-    <li><a href="#tabs-changelog"><span class="button-text">Changelog</span></a></li>
-    <li><a href="#tabs-forums"><span class="button-text">Forums</span></a></li>
-  </ul>
+		<h2>What does this mean?</h2>
+		<p>EmptyEpsilon places you in the roles of a spaceship's bridge officers, like those seen in <a href="http://en.wikipedia.org/wiki/Star_Trek">Star Trek</a>. While you can play EmptyEpsilon alone or with friends, the best experience involves 6 players working together on each ship.</p>
+		<p>Each officer fills a unique role: Captain, Helms, Weapons, Relay, Science, and Engineering. Except for the Captain, each officer operates part of the ship through a specialized screen. The Captain relies on their trusty crew to report information and follow orders.</p>
 
-  <div id="tabs-info">
-    <h2>What is it?</h2>
-    <p>EmptyEpsilon is a spaceship bridge simulator game. It's fully open source, so it can be modified in any way people wish.</p>
+		<h2>Like Artemis Spaceship Bridge Simulator?</h2>
+		<p><a href="http://artemis.eochu.com/">Artemis Spaceship Bridge Simulator</a> was the inspiration for EmptyEpsilon. It's pretty good as a bridge simulator, but we had some issues with it that we wanted to fix. Since Artemis isn't open source, our only solution was to start over by ourselves.</p>
+		<p>For example, the "comms" station of Artemis is pretty limited and can be boring for the player. The game could fall out of sync, confusing the players. Also, its Game Master screen didn't do everything that we wanted.</p>
+		<p>All in all, Artemis is a nice game. We wrote our own to be able to implement new features and extensibility.</p>
 
-    <h2>What does this mean?</h2>
-    <p>EmptyEpsilon places you in the roles of a spaceship's bridge officers, like those seen in <a href="http://en.wikipedia.org/wiki/Star_Trek">Star Trek</a>. While you can play EmptyEpsilon alone or with friends, the best experience involves 6 players working together on each ship.</p>
-    <p>Each officer fills a unique role: Captain, Helms, Weapons, Relay, Science, and Engineering. Except for the Captain, each officer operates part of the ship through a specialized screen. The Captain relies on their trusty crew to report information and follow orders.</p>
+		<h2>Contact</h2>
+		<p>The best place to talk about bridge simulation and EmptyEpsilon is the <a href="http://bridgesim.net/">Starship Bridge Simulation Network</a>. We regularly check this forum, and post updates and battle logs of our space adventures.</p>
+		<p>The main developers of EmptyEpsilon go by the names of <a href="https://github.com/daid/">Daid</a> and <a href="https://github.com/nallath/">Nallath</a>.</p>
 
-    <h2>Like Artemis Spaceship Bridge Simulator?</h2>
-    <p><a href="http://artemis.eochu.com/">Artemis Spaceship Bridge Simulator</a> was the inspiration for EmptyEpsilon. It's pretty good as a bridge simulator, but we had some issues with it that we wanted to fix. Since Artemis isn't open source, our only solution was to start over by ourselves.</p>
-    <p>For example, the "comms" station of Artemis is pretty limited and can be boring for the player. The game could fall out of sync, confusing the players. Also, its Game Master screen didn't do everything that we wanted.</p>
-    <p>All in all, Artemis is a nice game. We wrote our own to be able to implement new features and extensibility.</p>
+		<h2>Donations</h2>
+		<p>EmptyEpsilon is a 100% free game. We made this because we wanted to play the game we envisioned for ourselves, but we are not artists, so we need to buy the game's 3D models.</p>
+		<p>We are raising money to buy: <a href="http://www.turbosquid.com/Search/Artists/Angryfly">Not sure yet (we still have cash reserve)</a></p>
+		<p><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+		<input type="hidden" name="cmd" value="_s-xclick">
+		<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHLwYJKoZIhvcNAQcEoIIHIDCCBxwCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYCVbnpD7hW71fSbbk1Y56Hj0wum2SY7smaaImtwZ2DgsZ9QasKO1eRNSzIM8iTgzm9mTtnC/RmyqngDwGFJb6AS2xbh/t6FgDts1it+Kgx4ogQYHWoCOHIhMyWK/VlUf47uQAYBI82SsFls5HWn+5pc+hqKT8EXfELa3Y6SMSjs3zELMAkGBSsOAwIaBQAwgawGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQIJGU9R1IVGpyAgYjBx33ek6s/WoGL96486h44OEh5HcSk3LS9sRP1owxuaOm4POUYO9uNmg5MkRZBDtnN3oGMj5AvJVwK5zwiUh303rFMldoM6zO0bcHGDB8YS8cjzxAixnV6lDDHKzkWsm4xtSwwzQVZ7LFhOUsUh2NUm1Vhgkem7CaqV0SoJrgEw3dvBH660m5eoIIDhzCCA4MwggLsoAMCAQICAQAwDQYJKoZIhvcNAQEFBQAwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tMB4XDTA0MDIxMzEwMTMxNVoXDTM1MDIxMzEwMTMxNVowgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDBR07d/ETMS1ycjtkpkvjXZe9k+6CieLuLsPumsJ7QC1odNz3sJiCbs2wC0nLE0uLGaEtXynIgRqIddYCHx88pb5HTXv4SZeuv0Rqq4+axW9PLAAATU8w04qqjaSXgbGLP3NmohqM6bV9kZZwZLR/klDaQGo1u9uDb9lr4Yn+rBQIDAQABo4HuMIHrMB0GA1UdDgQWBBSWn3y7xm8XvVk/UtcKG+wQ1mSUazCBuwYDVR0jBIGzMIGwgBSWn3y7xm8XvVk/UtcKG+wQ1mSUa6GBlKSBkTCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb22CAQAwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOBgQCBXzpWmoBa5e9fo6ujionW1hUhPkOBakTr3YCDjbYfvJEiv/2P+IobhOGJr85+XHhN0v4gUkEDI8r2/rNk1m0GA8HKddvTjyGw/XqXa+LSTlDYkqI8OwR8GEYj4efEtcRpRYBxV8KxAW93YDWzFGvruKnnLbDAF6VR5w/cCMn5hzGCAZowggGWAgEBMIGUMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMTUwMjE5MDg1MzE1WjAjBgkqhkiG9w0BCQQxFgQUBJPj1UZDDW3rRUMIqXiSF5BJ9/IwDQYJKoZIhvcNAQEBBQAEgYB3mZpC9BJNH+rL045uUa1K7lJZ0yNulQG9CP/MKJLpQT9RMuRR0x30PIWk0uZxMXTuib95aSrLGQkWM41/J8F+gSLDsPKQ70b1oaQuGNilOBMTQM8+u2XECFNc4RVj+/3X3yg31ZjyKeZOqcEGpqDdCnNLMx6LOuxPJGXVoqtpYw==-----END PKCS7-----">
+		<input type="image" src="https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_92x26.png" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+		<img alt="" border="0" src="https://www.paypalobjects.com/nl_NL/i/scr/pixel.gif" width="1" height="1">
+		</form></p>
 
-    <h2>Contact</h2>
-    <p>The best place to talk about bridge simulation and EmptyEpsilon is the <a href="http://bridgesim.net/">Starship Bridge Simulation Network</a>. We regularly check this forum, and post updates and battle logs of our space adventures.</p>
-    <p>The main developers of EmptyEpsilon go by the names of <a href="https://github.com/daid/">Daid</a> and <a href="https://github.com/nallath/">Nallath</a>.</p>
+		<h2>Previous contributions</h2>
+		<!-- Outstanding cash from: Troy Hall and Kevin Primm -->
+		<p>Thanks to the contributions of Daniel Ginat, we managed to buy: <a href="http://www.turbosquid.com/3d-models/maya-5-small-frigates/828573">more frigate models</a>.</p>
+		<p>Thanks to the generous contribution of Serge Wroclawski, we managed to buy: <a href="http://www.turbosquid.com/3d-models/max-5-battleship-destroyers-upgraded/707660">more battleship models</a>.</p>
+		<p>Thanks to the contributions of MadKat and Daid, we managed to buy: <a href="http://www.turbosquid.com/3d-models/4-space-station-max/679444">larger 3D station models</a>.</p>
+	</div>
 
-    <h2>Donations</h2>
-    <p>EmptyEpsilon is a 100% free game. We made this because we wanted to play the game we envisioned for ourselves, but we are not artists, so we need to buy the game's 3D models.</p>
-    <p>We are raising money to buy: <a href="http://www.turbosquid.com/Search/Artists/Angryfly">Not sure yet (we still have cash reserve)</a></p>
-    <p><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-    <input type="hidden" name="cmd" value="_s-xclick">
-    <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHLwYJKoZIhvcNAQcEoIIHIDCCBxwCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYCVbnpD7hW71fSbbk1Y56Hj0wum2SY7smaaImtwZ2DgsZ9QasKO1eRNSzIM8iTgzm9mTtnC/RmyqngDwGFJb6AS2xbh/t6FgDts1it+Kgx4ogQYHWoCOHIhMyWK/VlUf47uQAYBI82SsFls5HWn+5pc+hqKT8EXfELa3Y6SMSjs3zELMAkGBSsOAwIaBQAwgawGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQIJGU9R1IVGpyAgYjBx33ek6s/WoGL96486h44OEh5HcSk3LS9sRP1owxuaOm4POUYO9uNmg5MkRZBDtnN3oGMj5AvJVwK5zwiUh303rFMldoM6zO0bcHGDB8YS8cjzxAixnV6lDDHKzkWsm4xtSwwzQVZ7LFhOUsUh2NUm1Vhgkem7CaqV0SoJrgEw3dvBH660m5eoIIDhzCCA4MwggLsoAMCAQICAQAwDQYJKoZIhvcNAQEFBQAwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tMB4XDTA0MDIxMzEwMTMxNVoXDTM1MDIxMzEwMTMxNVowgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDBR07d/ETMS1ycjtkpkvjXZe9k+6CieLuLsPumsJ7QC1odNz3sJiCbs2wC0nLE0uLGaEtXynIgRqIddYCHx88pb5HTXv4SZeuv0Rqq4+axW9PLAAATU8w04qqjaSXgbGLP3NmohqM6bV9kZZwZLR/klDaQGo1u9uDb9lr4Yn+rBQIDAQABo4HuMIHrMB0GA1UdDgQWBBSWn3y7xm8XvVk/UtcKG+wQ1mSUazCBuwYDVR0jBIGzMIGwgBSWn3y7xm8XvVk/UtcKG+wQ1mSUa6GBlKSBkTCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb22CAQAwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOBgQCBXzpWmoBa5e9fo6ujionW1hUhPkOBakTr3YCDjbYfvJEiv/2P+IobhOGJr85+XHhN0v4gUkEDI8r2/rNk1m0GA8HKddvTjyGw/XqXa+LSTlDYkqI8OwR8GEYj4efEtcRpRYBxV8KxAW93YDWzFGvruKnnLbDAF6VR5w/cCMn5hzGCAZowggGWAgEBMIGUMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMTUwMjE5MDg1MzE1WjAjBgkqhkiG9w0BCQQxFgQUBJPj1UZDDW3rRUMIqXiSF5BJ9/IwDQYJKoZIhvcNAQEBBQAEgYB3mZpC9BJNH+rL045uUa1K7lJZ0yNulQG9CP/MKJLpQT9RMuRR0x30PIWk0uZxMXTuib95aSrLGQkWM41/J8F+gSLDsPKQ70b1oaQuGNilOBMTQM8+u2XECFNc4RVj+/3X3yg31ZjyKeZOqcEGpqDdCnNLMx6LOuxPJGXVoqtpYw==-----END PKCS7-----">
-    <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_92x26.png" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
-    <img alt="" border="0" src="https://www.paypalobjects.com/nl_NL/i/scr/pixel.gif" width="1" height="1">
-    </form></p>
+	<div id="tabs-media">
+		<div class="gallery">
+			<div class="gallery-image">
+				<a class="image-link" href="screenshots/mainscreen.png"><img src="screenshots/mainscreen.png"></a>
+				<p>Main screen view from a cruiser near a station being attacked by two enemy cruisers.</p>
+			</div>
+			<div class="gallery-image">
+				<a class="image-link" href="screenshots/helms.png"><img src="screenshots/helms.png"></a>
+				<p>View of the helms officer's screen, which controls the ship's movement.</p>
+			</div>
+			<div class="gallery-image">
+				<a class="image-link" href="screenshots/weapons.png"><img src="screenshots/weapons.png"></a>
+				<p>View of the weapons officer's screen, which controls the ship's weapons and shields.</p>
+			</div>
+			<div class="gallery-image">
+				<a class="image-link" href="screenshots/engineering.png"><img src="screenshots/engineering.png"></a>
+				<p>View of the engineering officer's screen, which can allocate power and repairs to the ship's subsystems.</p>
+			</div>
+			<div class="gallery-image">
+				<a class="image-link" href="screenshots/science.png"><img src="screenshots/science.png"></a>
+				<p>View of the science officer's screen, which has long-range scanners and a large database of information.</p>
+			</div>
+			<div class="gallery-image">
+				<a class="image-link" href="screenshots/relay.png"><img src="screenshots/relay.png"></a>
+				<p>View of the relay officer's screen, which can see and hail allies, share their short-range radar, and launch remote probes.</p>
+			</div>
+		</div>
+	</div>
 
-    <h2>Previous contributions</h2>
-    <!-- Outstanding cash from: Troy Hall and Kevin Primm -->
-    <p>Thanks to the contributions of Daniel Ginat, we managed to buy: <a href="http://www.turbosquid.com/3d-models/maya-5-small-frigates/828573">more frigate models</a>.</p>
-    <p>Thanks to the generous contribution of Serge Wroclawski, we managed to buy: <a href="http://www.turbosquid.com/3d-models/max-5-battleship-destroyers-upgraded/707660">more battleship models</a>.</p>
-    <p>Thanks to the contributions of MadKat and Daid, we managed to buy: <a href="http://www.turbosquid.com/3d-models/4-space-station-max/679444">larger 3D station models</a>.</p>
-  </div>
+	<div id="tabs-running">
+		<div id="running-tabs">
+			<ul>
+				<li><a href="#running-tabs-standard"><span class="button-text">Standard setup</span></a></li>
+				<li><a href="#running-tabs-limited"><span class="button-text">Limited setup</span></a></li>
+				<!--<li><a href="#running-tabs-auto"><span class="button-text">Automated setup</span></a></li>-->
+				<li><a href="#running-tabs-gm"><span class="button-text">Game Master</span></a></li>
+			</ul>
 
-  <div id="tabs-media">
-    <div class="gallery">
-      <div class="gallery-image">
-        <a class="image-link" href="screenshots/mainscreen.png"><img src="screenshots/mainscreen.png"></a>
-        <p>Main screen view from a cruiser near a station being attacked by two enemy cruisers.</p>
-      </div>
-      <div class="gallery-image">
-        <a class="image-link" href="screenshots/helms.png"><img src="screenshots/helms.png"></a>
-        <p>View of the helms officer's screen, which controls the ship's movement.</p>
-      </div>
-      <div class="gallery-image">
-        <a class="image-link" href="screenshots/weapons.png"><img src="screenshots/weapons.png"></a>
-        <p>View of the weapons officer's screen, which controls the ship's weapons and shields.</p>
-      </div>
-      <div class="gallery-image">
-        <a class="image-link" href="screenshots/engineering.png"><img src="screenshots/engineering.png"></a>
-        <p>View of the engineering officer's screen, which can allocate power and repairs to the ship's subsystems.</p>
-      </div>
-      <div class="gallery-image">
-        <a class="image-link" href="screenshots/science.png"><img src="screenshots/science.png"></a>
-        <p>View of the science officer's screen, which has long-range scanners and a large database of information.</p>
-      </div>
-      <div class="gallery-image">
-        <a class="image-link" href="screenshots/relay.png"><img src="screenshots/relay.png"></a>
-        <p>View of the relay officer's screen, which can see and hail allies, share their short-range radar, and launch remote probes.</p>
-      </div>
-    </div>
-  </div>
+			<div id="running-tabs-standard">
+				<p>To run a standard bridge for EmptyEpsilon, you need the following equipment:</p>
+				<ul>
+					<li>4-6 devices, 1 for each officer except the captain. These can be laptops, desktops, or Android devices.</li>
+					<li>One big screen (large monitor, TV, or projector).</li>
+					<li>A stable network. Wifi can work, but we recommend a wired LAN.</li>
+					<li>If playing over the internet, voice chat is strongly recommended.</li>
+				</ul>
+				<p>All but 1 of the officers operate "stations" that control different parts of the ship. The last computer is for the main screen, which does not need any input and should be visible to all players.</p>
+				<p>Designate 1 player as Captain, whose computer can serve as the ship's main screen. The Captain's only duty is to communicate with the other officers and tell them what they should do.</p>
+				<p>The other officers each operate one of the ship's stations, which are described in the <a href="#tabs-stations">Stations tab</a>.</p>
 
-  <div id="tabs-running">
-    <div id="running-tabs">
-      <ul>
-        <li><a href="#running-tabs-standard"><span class="button-text">Standard setup</span></a></li>
-        <li><a href="#running-tabs-limited"><span class="button-text">Limited setup</span></a></li>
-        <!--<li><a href="#running-tabs-auto"><span class="button-text">Automated setup</span></a></li>-->
-        <li><a href="#running-tabs-gm"><span class="button-text">Game Master</span></a></li>
-      </ul>
+				<h2>Running the game</h2>
+				<p>After starting the game on the computer serving as the main screen, you can also configure it as the game server. The other stations can then connect to the game server as clients.</p>
+				<p>After starting the server, select a scenario (we recommend the "Waves" or "Basic" scenarios for first games), then spawn a player ship for everyone to join.</p>
+				<p>Everyone should select the same ship and choose their designated station. That's it! You're now in command of a fully functional spaceship.</p>
 
-      <div id="running-tabs-standard">
-        <p>To run a standard bridge for EmptyEpsilon, you need the following equipment:</p>
-        <ul>
-          <li>4-6 devices, 1 for each officer except the captain. These can be laptops, desktops, or Android devices.</li>
-          <li>One big screen (large monitor, TV, or projector).</li>
-          <li>A stable network. Wifi can work, but we recommend a wired LAN.</li>
-          <li>If playing over the internet, voice chat is strongly recommended.</li>
-        </ul>
-        <p>All but 1 of the officers operate "stations" that control different parts of the ship. The last computer is for the main screen, which does not need any input and should be visible to all players.</p>
-        <p>Designate 1 player as Captain, whose computer can serve as the ship's main screen. The Captain's only duty is to communicate with the other officers and tell them what they should do.</p>
-        <p>The other officers each operate one of the ship's stations, which are described in the <a href="#tabs-stations">Stations tab</a>.</p>
+				<h2>Internet play</h2>
+				<p>A crew can play EmptyEpsilon over internet connections. This means the game server needs to be accessible from the internet. The server runs on port <b>35666</b>, which needs to be open in your firewall and forwarded to your server if you are behind a router.</p>
+			</div>
 
-        <h2>Running the game</h2>
-        <p>After starting the game on the computer serving as the main screen, you can also configure it as the game server. The other stations can then connect to the game server as clients.</p>
-        <p>After starting the server, select a scenario (we recommend the "Waves" or "Basic" scenarios for first games), then spawn a player ship for everyone to join.</p>
-        <p>Everyone should select the same ship and choose their designated station. That's it! You're now in command of a fully functional spaceship.</p>
+			<div id="running-tabs-limited">
+				<p>If you don't have enough players (or stations), you can run multiple stations on a single machine by selecting multiple roles in the ship selection menu. You can then switch between stations by pressing the button in the top right of the game screen.</p>
+				<p>There are also 3 special screens designed for crews of 3-4 officers: <b>Tactical</b>, <b>Engineering+</b>, and <b>Operations</b>.</p>
+				<ul>
+					<li><b>Tactical</b> combines helms and weapons into one station.</li>
+					<li><b>Engineering+</b> takes shields activation from the weapon station.</p></li>
+					<li><b>Operations</b> acts the same as the science station, but also allows for communications.</li>
+				</ul>
+				<p>These 3 stations can also be combined with the 5 standard stations.</p>
+			</div>
+			<!--
+			<div id="running-tabs-auto">
+				<p>TODO (You can make EmptyEpsilon auto connect to any available server on the network, and selecting a station instantly. Lowering setup time)
+				</p>
+			</div>
+			-->
+			<div id="running-tabs-gm">
+				<p>A Game Master can modify scenarios on the fly by adding and removing AI-operated ships and stations, changing their configurations, placing space hazards, and communicating with player ships, all making for a more interesting and customized experience for players.</p>
+				<p>Scenarios can also add special GM functions that trigger scripted events. This lets Game Masters build complex stories and intricate, dynamic situations that they can manipulate at will during gameplay. Scripting commands are covered in depth on the <a href="#tabs-scripting">Mission Scripting tab</a>.</p>
+			</div>
+		</div>
+	</div>
 
-        <h2>Internet play</h2>
-        <p>A crew can play EmptyEpsilon over internet connections. This means the game server needs to be accessible from the internet. The server runs on port <b>35666</b>, which needs to be open in your firewall and forwarded to your server if you are behind a router.</p>
-      </div>
+	<div id="tabs-stations">
+		<div id="station-tabs">
+			<ul>
+				<li><a href="#station-tabs-main" class="captain"><span class="button-text">Main screen/Captain</span></a></li>
+				<li><a href="#station-tabs-helm" class="helms icon"><span class="icon"></span><span class="button-text">Helms</span></a></li>
+				<li><a href="#station-tabs-weapons" class="weapons icon"><span class="icon"></span><span class="button-text">Weapons</span></a></li>
+				<li><a href="#station-tabs-engineering" class="engineering icon"><span class="icon"></span><span class="button-text">Engineering</span></a></li>
+				<li><a href="#station-tabs-science" class="science icon"><span class="icon"></span><span class="button-text">Science</span></a></li>
+				<li><a href="#station-tabs-relay" class="relay icon"><span class="icon"></span><span class="button-text">Relay</span></a></li>
+			</ul>
+			<div id="station-tabs-main">
+				<p><a class="image-link float-right" href="screenshots/mainscreen.png"><img src="screenshots/mainscreen.png"></a></p>
+				<p>Without direct control of the ship, the Captain keeps the crew focused on their goal and makes tactical decisions in combat. The ship's main screen should be set up on a large monitor or projector so that all players can track their ship's status.</p>
 
-      <div id="running-tabs-limited">
-        <p>If you don't have enough players (or stations), you can run multiple stations on a single machine by selecting multiple roles in the ship selection menu. You can then switch between stations by pressing the button in the top right of the game screen.</p>
-        <p>There are also 3 special screens designed for crews of 3-4 officers: <b>Tactical</b>, <b>Engineering+</b>, and <b>Operations</b>.</p>
-        <ul>
-          <li><b>Tactical</b> combines helms and weapons into one station.</li>
-          <li><b>Engineering+</b> takes shields activation from the weapon station.</p></li>
-          <li><b>Operations</b> acts the same as the science station, but also allows for communications.</li>
-        </ul>
-        <p>These 3 stations can also be combined with the 5 standard stations.</p>
-      </div>
-      <!--
-      <div id="running-tabs-auto">
-        <p>TODO (You can make EmptyEpsilon auto connect to any available server on the network, and selecting a station instantly. Lowering setup time)
-        </p>
-      </div>
-      -->
-      <div id="running-tabs-gm">
-        <p>A Game Master can modify scenarios on the fly by adding and removing AI-operated ships and stations, changing their configurations, placing space hazards, and communicating with player ships, all making for a more interesting and customized experience for players.</p>
-        <p>Scenarios can also add special GM functions that trigger scripted events. This lets Game Masters build complex stories and intricate, dynamic situations that they can manipulate at will during gameplay. Scripting commands are covered in depth on the <a href="#tabs-scripting">Mission Scripting tab</a>.</p>
-      </div>
-    </div>
-  </div>
+				<h2>The Captain's tasks include:</h2>
+				<ul>
+					<li>Planning the next actions</li>
+					<li>Co-ordinating combat tactics</li>
+					<li>Preventing mutiny</li>
+					<li>Setting priorities</li>
+				</ul>
 
-  <div id="tabs-stations">
-    <div id="station-tabs">
-      <ul>
-        <li><a href="#station-tabs-main" class="captain"><span class="button-text">Main screen/Captain</span></a></li>
-        <li><a href="#station-tabs-helm" class="helms icon"><span class="icon"></span><span class="button-text">Helms</span></a></li>
-        <li><a href="#station-tabs-weapons" class="weapons icon"><span class="icon"></span><span class="button-text">Weapons</span></a></li>
-        <li><a href="#station-tabs-engineering" class="engineering icon"><span class="icon"></span><span class="button-text">Engineering</span></a></li>
-        <li><a href="#station-tabs-science" class="science icon"><span class="icon"></span><span class="button-text">Science</span></a></li>
-        <li><a href="#station-tabs-relay" class="relay icon"><span class="icon"></span><span class="button-text">Relay</span></a></li>
-      </ul>
-      <div id="station-tabs-main">
-        <p><a class="image-link float-right" href="screenshots/mainscreen.png"><img src="screenshots/mainscreen.png"></a></p>
-        <p>Without direct control of the ship, the Captain keeps the crew focused on their goal and makes tactical decisions in combat. The ship's main screen should be set up on a large monitor or projector so that all players can track their ship's status.</p>
+				<h2>Controls</h2>
+				<p>There are many ways to configure the main screen and define the Captain's role. You can grant any officer's station control over the main screen, but you can also give the Captain direct control over it with these keyboard controls:</p>
+				<ul>
+					<li>Left mouse button: Rotate the main screen 90 degrees to the left</li>
+					<li>Right mouse button: Rotate the main screen 90 degrees to the right</li>
+					<li>Middle mouse button: Switch between ship, short-range radar, and long-range radar views</li>
+					<li>Up key: Set main screen to forward view</li>
+					<li>Down key: Set main screen to rear view</li>
+					<li>Left key: Set main screen to left view</li>
+					<li>Right key: Set main screen to right view</li>
+					<li>Tab key: Set main screen to short-range radar view</li>
+					<li>Q key: Set main screen to long-range radar view</li>
+					<li>F key: Set main screen to first-person view</li>
+				</ul>
+				<p>Note that these controls are optional and are not necessary to play the game, but could be used in custom hardware setups. These controls are only for the main screen.</p>
+				<p>A "custom" hardware setup for the Captain could be as simple as taping a 3-button mouse to an armchair.</p>
+			</div>
 
-        <h2>The Captain's tasks include:</h2>
-        <ul>
-          <li>Planning the next actions</li>
-          <li>Co-ordinating combat tactics</li>
-          <li>Preventing mutiny</li>
-          <li>Setting priorities</li>
-        </ul>
+			<div id="station-tabs-helm">
+				<p><a class="image-link float-right" href="screenshots/helms.png"><img src="screenshots/helms.png"></a></p>
+				<h2 class="station helms">Helms</h2>
+				<p><b>Data:</b> In the upper-left corner, the Helms officer's screen displays the ship's energy (max is 1,000), current heading in degrees, and current speed in Units/minute. Below this data are two sliders.</p>
+				<p><b>Engines:</b> The left slider controls the impulse engines, from -100% (full reverse) to 0% (full stop) to 100% (full ahead). The right slider controls the ship's high-speed warp or instantly teleporting jump drives, if the ship is equipped with either.</p>
+				<p><b>Setting a Heading:</b> The Helms officer has a short-range radar. Pressing inside this radar sets the ship's heading in that direction. If the ship has beam weapons, the radar view includes those weapons' firing arcs to help the Helms officer keep targets in the Weapons officer's sights.</p>
+				<p><b>Jumping:</b> A jump drive teleports the ship across the specified distance along its current heading. The ship's impulse engines shut down, and after a countdown the ship disappears from its position and instantly reappears at its destination. Each jump consumes energy, with longer jumps consuming more energy. A standard jump takes 10 seconds to initiate, but depending on how much power is allocated to the drive (and how damaged it is), the time to power the jump might vary.</p>
+				<p><b>Warping:</b> A warp drive propels the ship straight ahead several times faster than impulse engines, but drain energy at a much faster rate. A warping ship can still collide with hazards like asteroids and mines, but a ship can enter warp very quickly for rapid escapes and advanced tactical maneuvers.</p>
+				<p><b>Combat Maneuvers:</b> For ships capable of performing combat maneuvers, the Helms screen includes up to two special sliders at the bottom right. The vertical slider rapidly increases the ship's forward speed above its maximum cruising speed, but generates lots of heat in the impulse engines and consumes energy quickly. The horizontal slider moves the ship laterally but can quickly overheat the maneuvering system. Combat maneuvers can be exhausted but recharge over time.</p>
+				<p><b>Docking:</b> The Helms officer can dock with a friendly or neutral station (or in some cases, a larger ship) when it is within 1U. While docked, the ship can't engage its engines or fire weapons, but its energy recharges faster, repairs take less time, the ship's supply of probes is replenished, and the Relay officer can request missile weapon rearmament. The Helms officer is also responsible for undocking the ship.</p>
+				<p><b>Retrieving Objects:</b> The Helms officer is also responsible for piloting the ship into supply drops and other retrievable items to retrieve them.</p>
+			</div>
 
-        <h2>Controls</h2>
-        <p>There are many ways to configure the main screen and define the Captain's role. You can grant any officer's station control over the main screen, but you can also give the Captain direct control over it with these keyboard controls:</p>
-        <ul>
-          <li>Left mouse button: Rotate the main screen 90 degrees to the left</li>
-          <li>Right mouse button: Rotate the main screen 90 degrees to the right</li>
-          <li>Middle mouse button: Switch between ship, short-range radar, and long-range radar views</li>
-          <li>Up key: Set main screen to forward view</li>
-          <li>Down key: Set main screen to rear view</li>
-          <li>Left key: Set main screen to left view</li>
-          <li>Right key: Set main screen to right view</li>
-          <li>Tab key: Set main screen to short-range radar view</li>
-          <li>Q key: Set main screen to long-range radar view</li>
-          <li>F key: Set main screen to first-person view</li>
-        </ul>
-        <p>Note that these controls are optional and are not necessary to play the game, but could be used in custom hardware setups. These controls are only for the main screen.</p>
-        <p>A "custom" hardware setup for the Captain could be as simple as taping a 3-button mouse to an armchair.</p>
-      </div>
+			<div id="station-tabs-weapons">
+				<p><a class="image-link float-right" href="screenshots/weapons.png"><img src="screenshots/weapons.png"></a></p>
+				<h2 class="station weapons">Weapons</h2>
+				<p><b>Data:</b> In the upper-left corner, the Weapons officer's screen displays the ship's energy (max is 1,000), and the strength of its front and rear shields.</p>
+				<p><b>Targeting:</b> To fire beam weapons and target guided missile weapons, the Weapons officer can select ships on the screen's short-range radar.</p>
+				<p><b>Missiles:</b> Missiles are one of a ship's most destructive weapons. Before a missile can be fired, the Weapons officer selects it, then selects one of the weapon tubes to load it. Loading and unloading weapon tubes takes time. (Mines are also be loaded into a special type of weapon tube.) Weapon tubes face a specific direction, and some ships only have tubes on certain sides of a ship, making cooperation with the helms officer's maneuvers especially important.</p>
+				<p>To fire a missile, the Weapons officer presses a loaded missile tube. Except for HVLIs, missiles home in on any target selected by the Weapons officer. Otherwise, the missile is dumb-fired and flies in a straight line from its tube. The Weapons officer can choose to lock the tube's aim onto a target or click the Lock button to the top right of the radar to manually angle a shot.</p>
+				<p>There are several types of missile weapons:</p>
+				<ul>
+					<li><b>Homing:</b> A simple, high-speed missile with a small warhead.</li>
+					<li><b>Nuke:</b> A powerful homing missile that deal tremendous damage to all ships within 1U of its detonation.</li>
+					<li><b>Electromagentic Pulse (EMP):</b> A homing missile that deal powerful damage to the shields of all ships within 1U of detonation, but don't damage physical systems or hulls.</li>
+					<li><b>High-velocity Lead Impactor (HVLI):</b> A group of 5 simple lead slugs fired in a single burst at extremely high velocity. These bolts don't home in on an enemy target.</li>
+					<li><b>Mine:</b> A powerful, stationary explosive that detonates when a ship moves to within 1U of it. The explosion damages all objects within a 1U radius.</li>
+				</ul>
+				<p><b>Beam Weapons:</b> The location and range of beam weapons are indicated by red firing arcs originating from the players' ship. After the Weapons officer selects a target, the ship's beam weapons will automatically fire at that target when it is inside a beam's firing arc. The officer can use the frequency selectors at the bottom right, along with data about a target's shield frequencies provided by the <a href="#tabs-science">Science officer</a>, to remodulate beams to a frequency that deals more damage. Note that you can change the beam frequency instantaneously.</p>
+				<p>Beam weapons fire at a target's hull by default, but the Weapons officer can also target specific subsystems to disable an enemy. If you simply wish to destroy an enemy, however, it's best left on hull.</p>
+				<p><b>Shields:</b> The Weapons officer is responsible for activating the ship's shields and modulating their frequency. It might be tempting to keep the shields up at all times, but they drain significantly more power when active. Certain shield frequencies are especially resistant to certain beam frequencies, which can also be detected in targets by the Science officer. Unlike beam weapons, however, remodulating the shields' frequency brings them offline for several seconds and leaves the ship temporarily defenseless.</p>
+			</div>
 
-      <div id="station-tabs-helm">
-        <p><a class="image-link float-right" href="screenshots/helms.png"><img src="screenshots/helms.png"></a></p>
-        <h2 class="station helms">Helms</h2>
-        <p><b>Data:</b> In the upper-left corner, the Helms officer's screen displays the ship's energy (max is 1,000), current heading in degrees, and current speed in Units/minute. Below this data are two sliders.</p>
-        <p><b>Engines:</b> The left slider controls the impulse engines, from -100% (full reverse) to 0% (full stop) to 100% (full ahead). The right slider controls the ship's high-speed warp or instantly teleporting jump drives, if the ship is equipped with either.</p>
-        <p><b>Setting a Heading:</b> The Helms officer has a short-range radar. Pressing inside this radar sets the ship's heading in that direction. If the ship has beam weapons, the radar view includes those weapons' firing arcs to help the Helms officer keep targets in the Weapons officer's sights.</p>
-        <p><b>Jumping:</b> A jump drive teleports the ship across the specified distance along its current heading. The ship's impulse engines shut down, and after a countdown the ship disappears from its position and instantly reappears at its destination. Each jump consumes energy, with longer jumps consuming more energy. A standard jump takes 10 seconds to initiate, but depending on how much power is allocated to the drive (and how damaged it is), the time to power the jump might vary.</p>
-        <p><b>Warping:</b> A warp drive propels the ship straight ahead several times faster than impulse engines, but drain energy at a much faster rate. A warping ship can still collide with hazards like asteroids and mines, but a ship can enter warp very quickly for rapid escapes and advanced tactical maneuvers.</p>
-        <p><b>Combat Maneuvers:</b> For ships capable of performing combat maneuvers, the Helms screen includes up to two special sliders at the bottom right. The vertical slider rapidly increases the ship's forward speed above its maximum cruising speed, but generates lots of heat in the impulse engines and consumes energy quickly. The horizontal slider moves the ship laterally but can quickly overheat the maneuvering system. Combat maneuvers can be exhausted but recharge over time.</p>
-        <p><b>Docking:</b> The Helms officer can dock with a friendly or neutral station (or in some cases, a larger ship) when it is within 1U. While docked, the ship can't engage its engines or fire weapons, but its energy recharges faster, repairs take less time, the ship's supply of probes is replenished, and the Relay officer can request missile weapon rearmament. The Helms officer is also responsible for undocking the ship.</p>
-        <p><b>Retrieving Objects:</b> The Helms officer is also responsible for piloting the ship into supply drops and other retrievable items to retrieve them.</p>
-      </div>
+			<div id="station-tabs-engineering">
+				<p><a class="image-link float-right" href="screenshots/engineering.png"><img src="screenshots/engineering.png"></a></p>
+				<h2 class="station engineering">Engineering</h2>
+				<p><b>Power Management:</b> The Engineering officer can route power to systems by selecting a system and moving its power slider. Giving a system more power increases its output. For instance, an overpowered reactor produces more energy, overpowered shields reduce more damage and regenerate faster, and overpowered impulse engines increase its maximum speed. Overpowering a system (above 100%) also increases its heat generation and, except for the reactor, its energy draw. Underpowering a system (below 100%) likewise reduces heat output and energy draw.</p>
+				<p><b>Coolant Management:</b> By adding coolant to a system, the Engineering officer can reduce its temperature and prevent the system from damaging the ship. The ship has an unlimited reseve of coolant, but a finite amount of coolant can be applied at any given time, so the Engineering officer must budget how much coolant each system can receive. A system's change in temperature is indicated by white arrows in the temperature column. The brighter an arrow is, the larger the trend.</p>
+				<p><b>Repairs:</b> When systems are damaged by being shot, colliding with space hazards, or overheating, the Engineering officer can dispatch repair crews to the system for repairs. Each systems has a damage state between -100% to 100%. Systems below 100% function suboptimally, in much the same way as if they are underpowered. Once a system is at or below 0%, it completely stops functioning until it is repaired. Systems can be repaired by sending a repair crew to the room containing the system. Hull damage affects the entire ship, and repair crews can always repair it, but hull repairs progress very slowly.</p>
+			</div>
 
-      <div id="station-tabs-weapons">
-        <p><a class="image-link float-right" href="screenshots/weapons.png"><img src="screenshots/weapons.png"></a></p>
-        <h2 class="station weapons">Weapons</h2>
-        <p><b>Data:</b> In the upper-left corner, the Weapons officer's screen displays the ship's energy (max is 1,000), and the strength of its front and rear shields.</p>
-        <p><b>Targeting:</b> To fire beam weapons and target guided missile weapons, the Weapons officer can select ships on the screen's short-range radar.</p>
-        <p><b>Missiles:</b> Missiles are one of a ship's most destructive weapons. Before a missile can be fired, the Weapons officer selects it, then selects one of the weapon tubes to load it. Loading and unloading weapon tubes takes time. (Mines are also be loaded into a special type of weapon tube.) Weapon tubes face a specific direction, and some ships only have tubes on certain sides of a ship, making cooperation with the helms officer's maneuvers especially important.</p>
-        <p>To fire a missile, the Weapons officer presses a loaded missile tube. Except for HVLIs, missiles home in on any target selected by the Weapons officer. Otherwise, the missile is dumb-fired and flies in a straight line from its tube. The Weapons officer can choose to lock the tube's aim onto a target or click the Lock button to the top right of the radar to manually angle a shot.</p>
-        <p>There are several types of missile weapons:</p>
-        <ul>
-          <li><b>Homing:</b> A simple, high-speed missile with a small warhead.</li>
-          <li><b>Nuke:</b> A powerful homing missile that deal tremendous damage to all ships within 1U of its detonation.</li>
-          <li><b>Electromagentic Pulse (EMP):</b> A homing missile that deal powerful damage to the shields of all ships within 1U of detonation, but don't damage physical systems or hulls.</li>
-          <li><b>High-velocity Lead Impactor (HVLI):</b> A group of 5 simple lead slugs fired in a single burst at extremely high velocity. These bolts don't home in on an enemy target.</li>
-          <li><b>Mine:</b> A powerful, stationary explosive that detonates when a ship moves to within 1U of it. The explosion damages all objects within a 1U radius.</li>
-        </ul>
-        <p><b>Beam Weapons:</b> The location and range of beam weapons are indicated by red firing arcs originating from the players' ship. After the Weapons officer selects a target, the ship's beam weapons will automatically fire at that target when it is inside a beam's firing arc. The officer can use the frequency selectors at the bottom right, along with data about a target's shield frequencies provided by the <a href="#tabs-science">Science officer</a>, to remodulate beams to a frequency that deals more damage. Note that you can change the beam frequency instantaneously.</p>
-        <p>Beam weapons fire at a target's hull by default, but the Weapons officer can also target specific subsystems to disable an enemy. If you simply wish to destroy an enemy, however, it's best left on hull.</p>
-        <p><b>Shields:</b> The Weapons officer is responsible for activating the ship's shields and modulating their frequency. It might be tempting to keep the shields up at all times, but they drain significantly more power when active. Certain shield frequencies are especially resistant to certain beam frequencies, which can also be detected in targets by the Science officer. Unlike beam weapons, however, remodulating the shields' frequency brings them offline for several seconds and leaves the ship temporarily defenseless.</p>
-      </div>
+			<div id="station-tabs-science">
+				<p><a class="image-link float-right" href="screenshots/science.png"><img src="screenshots/science.png"></a></p>
+				<h2 class="station science">Science</h2>
+				<p><b>Long-range Radar:</b> The Science station has a long-range radar that can locate ships and objects at a distance of up to 25U. The Science officer's most important task is to report the sector's status and any changes within it. On the edge of the radar are colored bands of signal interference that can vaguely suggest the presence of objects or space hazards even further from the ship, but it's up to the Science officer to interpret them.</p>
+				<p><b>Scanning:</b> You can scan ships to get more information about them. The Science officer must align two of the ship's scanning frequencies with a target to complete the scan. Most ships are unknown (gray) to your crew at the start of a scenario and must be scanned before they can be identified as a friend (green), foe (red), or neutral (blue). A scan also identifies the ship's type, which the Science officer can use to identify its capabilities in the station's database.</p>
+				<p><b>Deep Scans:</b> A second, more difficult scan yields more information about the ship, including its shield and beam frequencies. The Science officer must align both the frequency and modulation of each scan type to complete a deep scan. The helms and weapons screen can also see the firing arcs of deep-scanned ships, which help them guide your ship from being shot by their beams.</p>
+				<p><b>Nebulae:</b> Nebulae block the ship's long-range scanner. The Science officer cannot see what's inside or behind them, and while in a nebula the ship's radars cannot detect what's outside of it. These traits make nebulae ideal places to hide for repairs or stage an ambush. To avoid surprises around nebulae, relay information about where you can and cannot see objects to both the Captain and the Relay officer.</p>
+				<p><b>Probe View:</b> The Relay officer can launch probes and link one to the Science station. The Science officer can view the probe's short-range sensor data to scan ships within its range, even if the probe is far from the ship's long-range scanners or in a nebula.</p>
+				<p><b>Database:</b> The Science officer can access the ship's database of all known ships, as well as data about weapons and space hazards. This can be vital when assessing a ship's capabilities without a deep scan, or for help navigating a black hole, wormhole, or other anomaly.</p>
+			</div>
 
-      <div id="station-tabs-engineering">
-        <p><a class="image-link float-right" href="screenshots/engineering.png"><img src="screenshots/engineering.png"></a></p>
-        <h2 class="station engineering">Engineering</h2>
-        <p><b>Power Management:</b> The Engineering officer can route power to systems by selecting a system and moving its power slider. Giving a system more power increases its output. For instance, an overpowered reactor produces more energy, overpowered shields reduce more damage and regenerate faster, and overpowered impulse engines increase its maximum speed. Overpowering a system (above 100%) also increases its heat generation and, except for the reactor, its energy draw. Underpowering a system (below 100%) likewise reduces heat output and energy draw.</p>
-        <p><b>Coolant Management:</b> By adding coolant to a system, the Engineering officer can reduce its temperature and prevent the system from damaging the ship. The ship has an unlimited reseve of coolant, but a finite amount of coolant can be applied at any given time, so the Engineering officer must budget how much coolant each system can receive. A system's change in temperature is indicated by white arrows in the temperature column. The brighter an arrow is, the larger the trend.</p>
-        <p><b>Repairs:</b> When systems are damaged by being shot, colliding with space hazards, or overheating, the Engineering officer can dispatch repair crews to the system for repairs. Each systems has a damage state between -100% to 100%. Systems below 100% function suboptimally, in much the same way as if they are underpowered. Once a system is at or below 0%, it completely stops functioning until it is repaired. Systems can be repaired by sending a repair crew to the room containing the system. Hull damage affects the entire ship, and repair crews can always repair it, but hull repairs progress very slowly.</p>
-      </div>
+			<div id="station-tabs-relay">
+				<p><a class="image-link float-right" href="screenshots/relay.png"><img src="screenshots/relay.png"></a></p>
+				<h2 class="station relay">Relay</h2>
+				<p><b>Sector Map:</b> The Relay station can view a map of the sector, including space hazards and ships within short-range scanner range (5U). It can also see the short-range sensor data around other friendly ships and stations, potentially spotting distant ships before the science station does. The Relay officer cannot scan ships, however.</p>
+				<p><b>Probes:</b> The Relay officer can launch up to 8 high-speed probes to any point in the sector. These probes fly toward a location and transmit short-range sensor data to the ship for 10 minutes. Probes work inside nebulae, and thus are powerful tools when faced with an area blocked by nebula. The Relay officer can also link a probe's sensors to the Science station, which lets the Science officer scan ships within the probe's sensor range even if the probe is beyond the ship's long-range scanners. Probes cannot be retrieved and can be destroyed by enemies; your ship's stock of probes can be replenished only by docking at a station.</p>
+				<p><b>Waypoints:</b> The Relay officer can set waypoints around the sector. These waypoints appear on the Helms officer's short-range scanner and can guide the ship toward a destination or on a specific route through space. Waypoints are also necessary when requesting aid from friendly stations.</p>
+				<p><b>Communications:</b> The Relay officer can open communications with stations and other ships. Friendly ships hailed by the Relay officer can take orders, and friendly stations can dispatch backup and supply ships. While your ship is docked at a station, the Relay officer can request rearmament of the ship's missiles and mines. Some of these requests can cost some of your crew's reputation, which is also tracked by the Relay station.</p>
+			</div>
+		</div>
+	</div>
 
-      <div id="station-tabs-science">
-        <p><a class="image-link float-right" href="screenshots/science.png"><img src="screenshots/science.png"></a></p>
-        <h2 class="station science">Science</h2>
-        <p><b>Long-range Radar:</b> The Science station has a long-range radar that can locate ships and objects at a distance of up to 25U. The Science officer's most important task is to report the sector's status and any changes within it. On the edge of the radar are colored bands of signal interference that can vaguely suggest the presence of objects or space hazards even further from the ship, but it's up to the Science officer to interpret them.</p>
-        <p><b>Scanning:</b> You can scan ships to get more information about them. The Science officer must align two of the ship's scanning frequencies with a target to complete the scan. Most ships are unknown (gray) to your crew at the start of a scenario and must be scanned before they can be identified as a friend (green), foe (red), or neutral (blue). A scan also identifies the ship's type, which the Science officer can use to identify its capabilities in the station's database.</p>
-        <p><b>Deep Scans:</b> A second, more difficult scan yields more information about the ship, including its shield and beam frequencies. The Science officer must align both the frequency and modulation of each scan type to complete a deep scan. The helms and weapons screen can also see the firing arcs of deep-scanned ships, which help them guide your ship from being shot by their beams.</p>
-        <p><b>Nebulae:</b> Nebulae block the ship's long-range scanner. The Science officer cannot see what's inside or behind them, and while in a nebula the ship's radars cannot detect what's outside of it. These traits make nebulae ideal places to hide for repairs or stage an ambush. To avoid surprises around nebulae, relay information about where you can and cannot see objects to both the Captain and the Relay officer.</p>
-        <p><b>Probe View:</b> The Relay officer can launch probes and link one to the Science station. The Science officer can view the probe's short-range sensor data to scan ships within its range, even if the probe is far from the ship's long-range scanners or in a nebula.</p>
-        <p><b>Database:</b> The Science officer can access the ship's database of all known ships, as well as data about weapons and space hazards. This can be vital when assessing a ship's capabilities without a deep scan, or for help navigating a black hole, wormhole, or other anomaly.</p>
-      </div>
+	<div id="tabs-scripting">
+		<div id="scripting-tabs">
+			<ul>
+				<li><a href="#scripting-tabs-0"><span class="button-text">0: Tools &amp; basics</span></a></li>
+				<li><a href="#scripting-tabs-1"><span class="button-text">1: Building a world</span></a></li>
+				<li><a href="#scripting-tabs-2"><span class="button-text">2: Death &amp; destruction</span></a></li>
+				<li><a href="#scripting-tabs-3"><span class="button-text">3: We are on a mission!</span></a></li>
+			</ul>
+			<div id="scripting-tabs-0">
+				<h2>About this series</h2>
+				<p>This series of scripting documentation will document the steps taken to develop the EmptyEpsilon mission <b>Beacon of light</b></p>
+				<p>The world scenario and mission are used freely troughout this series. EmptyEpsilon has scripted scenarios, which can be less or more complex. We will be focusing here on building a mission.</p>
+				<p>This mission will start out with a fixed set of instructions for the player to follow. And will provide them with challanges to overcome.</p>
+				<p>The scenario scripting system can be used for more complex setups. But this won't be done in this series. Look at the "Waves" scenario for a different setup.</p>
+				<p>These series will start of easy, with very little to no programming knowledge required. But will go into more advanced topics later on.</p>
+				<h2>Tools</h2>
+				<p>For scenario/mission development you need a basic text editor. While windows notepad can work, I highly recommend something more advanced.</p>
+				<p>There are various options:</p>
+				<ul>
+					<li><a href="http://www.pnotepad.org/">Programmers notepad</a> (windows)</li>
+					<li><a href="http://www.sublimetext.com/">Sublime text</a> (windows, mac, linux)</li>
+					<li><a href="https://notepad-plus-plus.org/">Nodepad++</a> (windows)</li>
+				</ul>
+				<p>And there are many more. I personally use Programmers notepad. But any of these editors will do.</p>
+				<p>Download and install the editor of your choice.</p>
+				<h2>Setting up the file</h2>
+				<p>We'll start out with an empty scenario, as a template to setup our initial game in step 1.</p>
+				<p>Open the editor of your choise, and enter the following code:</p>
+				<p class="code">
+				-- Name: Beacon of light series
+				-- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
 
-      <div id="station-tabs-relay">
-        <p><a class="image-link float-right" href="screenshots/relay.png"><img src="screenshots/relay.png"></a></p>
-        <h2 class="station relay">Relay</h2>
-        <p><b>Sector Map:</b> The Relay station can view a map of the sector, including space hazards and ships within short-range scanner range (5U). It can also see the short-range sensor data around other friendly ships and stations, potentially spotting distant ships before the science station does. The Relay officer cannot scan ships, however.</p>
-        <p><b>Probes:</b> The Relay officer can launch up to 8 high-speed probes to any point in the sector. These probes fly toward a location and transmit short-range sensor data to the ship for 10 minutes. Probes work inside nebulae, and thus are powerful tools when faced with an area blocked by nebula. The Relay officer can also link a probe's sensors to the Science station, which lets the Science officer scan ships within the probe's sensor range even if the probe is beyond the ship's long-range scanners. Probes cannot be retrieved and can be destroyed by enemies; your ship's stock of probes can be replenished only by docking at a station.</p>
-        <p><b>Waypoints:</b> The Relay officer can set waypoints around the sector. These waypoints appear on the Helms officer's short-range scanner and can guide the ship toward a destination or on a specific route through space. Waypoints are also necessary when requesting aid from friendly stations.</p>
-        <p><b>Communications:</b> The Relay officer can open communications with stations and other ships. Friendly ships hailed by the Relay officer can take orders, and friendly stations can dispatch backup and supply ships. While your ship is docked at a station, the Relay officer can request rearmament of the ship's missiles and mines. Some of these requests can cost some of your crew's reputation, which is also tracked by the Relay station.</p>
-      </div>
-    </div>
-  </div>
+				-- Init is run when the scenario is started. Create your initial
+				function init()
+				    -- Create the main ship for the players.
+				    PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
+				end
 
-  <div id="tabs-scripting">
-    <div id="scripting-tabs">
-      <ul>
-        <li><a href="#scripting-tabs-0"><span class="button-text">0: Tools &amp; basics</span></a></li>
-        <li><a href="#scripting-tabs-1"><span class="button-text">1: Building a world</span></a></li>
-        <li><a href="#scripting-tabs-2"><span class="button-text">2: Death &amp; destruction</span></a></li>
-        <li><a href="#scripting-tabs-3"><span class="button-text">3: We are on a mission!</span></a></li>
-      </ul>
-      <div id="scripting-tabs-0">
-        <h2>About this series</h2>
-        <p>This series of scripting documentation will document the steps taken to develop the EmptyEpsilon mission <b>Beacon of light</b></p>
-        <p>The world scenario and mission are used freely troughout this series. EmptyEpsilon has scripted scenarios, which can be less or more complex. We will be focusing here on building a mission.</p>
-        <p>This mission will start out with a fixed set of instructions for the player to follow. And will provide them with challanges to overcome.</p>
-        <p>The scenario scripting system can be used for more complex setups. But this won't be done in this series. Look at the "Waves" scenario for a different setup.</p>
-        <p>These series will start of easy, with very little to no programming knowledge required. But will go into more advanced topics later on.</p>
-        <h2>Tools</h2>
-        <p>For scenario/mission development you need a basic text editor. While windows notepad can work, I highly recommend something more advanced.</p>
-        <p>There are various options:</p>
-        <ul>
-          <li><a href="http://www.pnotepad.org/">Programmers notepad</a> (windows)</li>
-          <li><a href="http://www.sublimetext.com/">Sublime text</a> (windows, mac, linux)</li>
-          <li><a href="https://notepad-plus-plus.org/">Nodepad++</a> (windows)</li>
-        </ul>
-        <p>And there are many more. I personally use Programmers notepad. But any of these editors will do.</p>
-        <p>Download and install the editor of your choice.</p>
-        <h2>Setting up the file</h2>
-        <p>We'll start out with an empty scenario, as a template to setup our initial game in step 1.</p>
-        <p>Open the editor of your choise, and enter the following code:</p>
-        <pre><code class="lua">
-          -- Name: Beacon of light series
-          -- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
+				function update(delta)
+				end
+				</p>
+				<p>Save this as a file named <b>scenario_99_tutorial.lua</b> in the folder <b>EmptyEpsilon/scripts</b></p>
+				<p>Open EmptyEpsilon and start a new server. Your scenario should be at the bottom of the list. Start it, and you will notice that there is a ship for the players created per default.</p>
+				<h2>Tips &amp; Tricks</h2>
+				<p>The file needs to start with <b>scenario_</b> to be picked up as a scenario.</p>
+				<p>The number in the scenario filename is for the order in which EmptyEpsilon shows the scenarios.</p>
+				<p>The final part of the filename is only for reference. The actual name shown is in the first line of the script file.</p>
+				<p>Lines starting with a double dash -- are comment lines in the scenario script. They do not do anything while playing, but are for your own reference so you know what the code does.</p>
+				<p>To quickly view how the scenario looks, you can use the GameMaster screen, this allows you to view the whole game world with ease.</p>
+				<p>EmptyEpsilon scenarios are build in lua scripting. For a full reference of the lua language see <a href="http://www.lua.org/">http://www.lua.org/</a>.</p>
+			</div>
+			<div id="scripting-tabs-1">
+				<h2>Building a world?</h2>
+				<p>Now that you have setup a basic script and know how to save and run it. Let us populate the world a bit more.</p>
+				<p>We'll first fill it with some stations, and then add some nebulae and asteroids.</p>
+				<h2>Building a world - Stations</h2>
+				<p>Right now the only thing in the world is the ship for the players. Which does not make for an intresting world.</p>
+				<p>So let's add some stations. Add the following code after the creation of the player ship:</p>
+				<p class="code">
+    SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(23500, 16100)
+    SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(-25200, 32200)
+    SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setPosition(-45600, -15800)
+    SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setPosition(9100,-35400)
+</p>
+				<p>This places a friendly small station at 23k,16k. Which is in sector F6. Another friendly station in sector G3. A large enemy Kralor station in sector E2. And a small neutral station at sector D5.</p>
+				<p>Each sector is 20x20km. And sector F5 starts at 0,0. <a href="info_images/sector_positions.png">Look at this image for more details.</a></p>
+				<p>Now, we want the player to start a bit closer to the small friendly station. So we set the player position near the small station.</p>
+				<p class="code">    PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser"):setPosition(22400, 16200)</p>
+				<h2>Building more world - Nebulae</h2>
+				<p>Nebulae are intresting to add to the game world. As they block of a 5km range of the long range radar. And add more mistery to the whole world.</p>
+				<p>They provide an intresting tactical difference to the game. As computer controlled ships are also blocked by Nebulae.</p>
+				<p>So we surround the enemy station by some nebula, so it's shielded from direct sight.</p>
+				<p class="code">
+    --Nebula that hide the enemy station.
+    Nebula():setPosition(-43300,  2200)
+    Nebula():setPosition(-34000,  -700)
+    Nebula():setPosition(-32000,-10000)
+    Nebula():setPosition(-24000,-14300)
+    Nebula():setPosition(-28600,-21900)
+</p>
+				<p>But a cloud of nebulae like that clearly hides something, so add a few random nebulae as well.</p>
+				<p class="code">
+    --Random nebulae in the system
+    Nebula():setPosition( -8000,-38300)
+    Nebula():setPosition( 24000,-30700)
+    Nebula():setPosition( 42300,  3100)
+    Nebula():setPosition( 49200, 10700)
+    Nebula():setPosition(  3750, 31250)
+    Nebula():setPosition(-39500, 18700)
+</p>
+				<h2>Building more world - Asteroids</h2>
+				<p>Asteroids can be placed in the same way as Nebula and stations.</p>
+				<p class="code">Astroid():setPosition(-1000, -1000)</p>
+				<p>However, because you usually want 50 or even 100 asteroids. Placing the position by hand will be a hell do to.</p>
+				<p>So we can use more lua programming functions to do this.</p>
+				<p class="code">
+				--Place a single random asteroid in sector E5:
+Asteroid():setPosition(random(0, 20000), random(-20000, 0))
+</p>
+				<p>So that is a single astroid. Which does not really feel like an astroid field.</p>
+				<p class="code">
+				--Create 100 Asteroids
+for asteroid_counter=1,100 do
+    Asteroid():setPosition(random(0, 20000), random(-20000, 0))
+end
+</p>
+				<p>Surrounding it in a simple for loop however, will generate a 100 random Asteroids.</p>
+				<p>Which... results in a pretty square asteroid field. Not that pretty.</p>
+				<p>So right now, we just tweak the parameters to have an field from sector E4 to G4 in a straight line.</p>
+				<p class="code">
+	--Create 50 Asteroids
+	for asteroid_counter=1,50 do
+		Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
+	end
+</p>
+				<p>Already a whole lot better. But when you look at it in the 3D view now, it does look very flat. To fix that we add some VisualAsteroids as well. These asteroids are above or below the ship flying plane and cannot be hit. They are just there for visuals.</p>
+				<p class="code">
+	--Create 100 Asteroids
+	for asteroid_counter=1,50 do
+		Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
+		VisualAsteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
+	end
+</p>
+				<h2>Spice it up a bit</h2>
+				<p>Right now the stations are just called DS-7, and other DS-? numbers. But we can change this.</p>
+				<p>By calling the setCallSign function on the stations, we can set a different name for them. Be sure to keep this short.</p>
+				<p class="code">
+    SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(23500, 16100):setCallSign("Research-1")
+    SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(-25200, 32200):setCallSign("Orion-5")
+    SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setPosition(-45600, -15800):setCallSign("Omega")
+    SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setPosition(9100,-35400):setCallSign("Refugee-X")
+				</p>
+				<p>We call the small station a research station, which gives it a bit more character. The enemy station is called Omega, as it's big. And the neutral station is called Refugee-X, which makes it sound like it could be housing refugees.</p>
+				<p>A few simple names can give the whole world more character.</p>
+				<p>Finally we call the player ship <b>TheEpsilon</b></p>
+				<p class="code">PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser"):setPosition(22400, 18200):setCallSign("TheEpsilon")</p>
+				<h2>Tips &amp; Tricks - Building even more world?</h2>
+				<p>Next to asteroids, stations and nebulae there are a few more options to populate your world.</p>
+				<p>While we do not use anything else at this point in time. The following objects can also be created:</p>
+				<p class="code">
+BlackHole() -- Create a black hole, a 5km radius black hole which destroys anything that comes into the center.
+Mine() -- A simple mine. Explodes with a 1km radius when a ship comes too close.
+WarpJammer():setFaction("Kraylor") -- A warp jammer, jams warp and jump drives in a 5km radius. Can be destroyed.
+SupplyDrop():setFaction("Human Navy") -- A supply drop, can be picked up by flying over it, empty per default, can be filled with energy and missile weapons.</p>
+				<h2>Final script for today.</h2>
+				<p>We end off with the complete script for reference.</p>
+				<p class="code">-- Name: Beacon of light - Day 1
+-- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
 
-          -- Init is run when the scenario is started. Create your initial
-          function init()
-              -- Create the main ship for the players.
-              PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
-          end
+-- Init is run when the scenario is started. Create your initial
+function init()
+    -- Create the main ship for the players.
+    PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser"):setPosition(22400, 18200):setCallSign("TheEpsilon")
 
-          function update(delta)
-          end
-        </code></pre>
-        <p>Save this as a file named <b>scenario_99_tutorial.lua</b> in the folder <b>EmptyEpsilon/scripts</b></p>
-        <p>Open EmptyEpsilon and start a new server. Your scenario should be at the bottom of the list. Start it, and you will notice that there is a ship for the players created per default.</p>
-        <h2>Tips &amp; Tricks</h2>
-        <p>The file needs to start with <b>scenario_</b> to be picked up as a scenario.</p>
-        <p>The number in the scenario filename is for the order in which EmptyEpsilon shows the scenarios.</p>
-        <p>The final part of the filename is only for reference. The actual name shown is in the first line of the script file.</p>
-        <p>Lines starting with a double dash -- are comment lines in the scenario script. They do not do anything while playing, but are for your own reference so you know what the code does.</p>
-        <p>To quickly view how the scenario looks, you can use the GameMaster screen, this allows you to view the whole game world with ease.</p>
-        <p>EmptyEpsilon scenarios are build in lua scripting. For a full reference of the lua language see <a href="http://www.lua.org/">http://www.lua.org/</a>.</p>
-      </div>
-      <div id="scripting-tabs-1">
-        <h2>Building a world?</h2>
-        <p>Now that you have setup a basic script and know how to save and run it. Let us populate the world a bit more.</p>
-        <p>We'll first fill it with some stations, and then add some nebulae and asteroids.</p>
-        <h2>Building a world - Stations</h2>
-        <p>Right now the only thing in the world is the ship for the players. Which does not make for an intresting world.</p>
-        <p>So let's add some stations. Add the following code after the creation of the player ship:</p>
-        <pre><code class="lua">
-          SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(23500, 16100)
-          SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(-25200, 32200)
-          SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setPosition(-45600, -15800)
-          SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setPosition(9100,-35400)
-        </code></pre>
-        <p>This places a friendly small station at 23k,16k. Which is in sector F6. Another friendly station in sector G3. A large enemy Kralor station in sector E2. And a small neutral station at sector D5.</p>
-        <p>Each sector is 20x20km. And sector F5 starts at 0,0. <a href="info_images/sector_positions.png">Look at this image for more details.</a></p>
-        <p>Now, we want the player to start a bit closer to the small friendly station. So we set the player position near the small station.</p>
-        <p class="code">    PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser"):setPosition(22400, 16200)</p>
-        <h2>Building more world - Nebulae</h2>
-        <p>Nebulae are intresting to add to the game world. As they block of a 5km range of the long range radar. And add more mistery to the whole world.</p>
-        <p>They provide an intresting tactical difference to the game. As computer controlled ships are also blocked by Nebulae.</p>
-        <p>So we surround the enemy station by some nebula, so it's shielded from direct sight.</p>
-        <pre><code class="lua">
-          --Nebula that hide the enemy station.
-          Nebula():setPosition(-43300,  2200)
-          Nebula():setPosition(-34000,  -700)
-          Nebula():setPosition(-32000,-10000)
-          Nebula():setPosition(-24000,-14300)
-          Nebula():setPosition(-28600,-21900)
-        </code></pre>
-        <p>But a cloud of nebulae like that clearly hides something, so add a few random nebulae as well.</p>
-        <pre><code class="lua">
-          --Random nebulae in the system
-          Nebula():setPosition( -8000,-38300)
-          Nebula():setPosition( 24000,-30700)
-          Nebula():setPosition( 42300,  3100)
-          Nebula():setPosition( 49200, 10700)
-          Nebula():setPosition(  3750, 31250)
-          Nebula():setPosition(-39500, 18700)
-        </code></pre>
-        <h2>Building more world - Asteroids</h2>
-        <p>Asteroids can be placed in the same way as Nebula and stations.</p>
-        <p class="code">Astroid():setPosition(-1000, -1000)</p>
-        <p>However, because you usually want 50 or even 100 asteroids. Placing the position by hand will be a hell do to.</p>
-        <p>So we can use more lua programming functions to do this.</p>
-        <pre><code class="lua">
-          --Place a single random asteroid in sector E5:
-          Asteroid():setPosition(random(0, 20000), random(-20000, 0))
-        </code></pre>
-        <p>So that is a single astroid. Which does not really feel like an astroid field.</p>
-        <pre><code class="lua">
-        --Create 100 Asteroids
-        for asteroid_counter=1,100 do
-          Asteroid():setPosition(random(0, 20000), random(-20000, 0))
+    SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(23500, 16100):setCallSign("Research-1")
+    SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(-25200, 32200):setCallSign("Orion-5")
+    SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setPosition(-45600, -15800):setCallSign("Omega")
+    SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setPosition(9100,-35400):setCallSign("Refugee-X")
+
+	--Nebula that hide the enemy station.
+    Nebula():setPosition(-43300,  2200)
+    Nebula():setPosition(-34000,  -700)
+    Nebula():setPosition(-32000,-10000)
+    Nebula():setPosition(-24000,-14300)
+    Nebula():setPosition(-28600,-21900)
+
+	--Random nebulae in the system
+    Nebula():setPosition( -8000,-38300)
+    Nebula():setPosition( 24000,-30700)
+    Nebula():setPosition( 42300,  3100)
+    Nebula():setPosition( 49200, 10700)
+    Nebula():setPosition(  3750, 31250)
+    Nebula():setPosition(-39500, 18700)
+
+    --Create 50 Asteroids
+    for asteroid_counter=1,50 do
+        Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
+        VisualAsteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
+    end
+end
+
+function update(delta)
+end
+</p>
+			</div>
+			<div id="scripting-tabs-2">
+				<h2>Well, that is boring...</h2>
+				<p>Congradulations on building the most boring scenario so far.</p>
+				<p>Now we're going to add some things that really spice things up. Other ships.</p>
+				<h2>About other ships</h2>
+				<p>What you need to remember when working with other ships are a few basic things.</p>
+				<p><b>Factions:</b> First off, the faction of a ship defines it's relation to other ships. For example Kraylor ships attack any other ship or station except when they belong to the Independent faction.</p>
+				<p><b>Orders:</b> Every ship has orders. The orders define how the ship behaves, if it stays still, or attacks for example, or seeks out targets on it's own.</p>
+				<p><b>Templates:</b> Finally every ship has a template, the template defines how it looks, what weapons it starts out with.</p>
+				<h2>Your first enemy</h2>
+				<p>So, let's create an enemy.</p>
+				<p class="code">CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(1000, 1000)</p>
+				<p>Fight it! I'm sure you will win.</p>
+				<p>Well, that was easy right? Most likely you are already reading this before you tried. But if you did try. You will notice it did not do anything. This is because the default orders for a CpuShip are to stay idle and do nothing.</p>
+				<p>Damn it, still boring. So let's give it simple orders.</p>
+				<p class="code">CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(1000, 1000):orderRoaming()</p>
+				<p>Roaming is one of the most basic orders that can be given to a ship. It orders the ship to fly around the world and seek a target to destroy.</p>
+				<p>Ping! Suddently you have an enemy to fight. Great!</p>
+				<p>Let us set this up as 2 cruisers that start at the lower nebula, they will fly out and seek out the player quite well on their own.</p>
+				<p class="code">    --Small Kraylor strike team, starting in the nebula at G5
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3550, 31250):orderRoaming()
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3950, 31250):orderRoaming()
+</p>
+				<h2>Defending the station</h2>
+				<p>The Kraylors have an large station in this area. So let us set up some defence.</p>
+				<p>We'll create 2 Cruisers and a Dreadnought in direct defence of the station. This means we need a reference to the station.</p>
+				<p class="code">
+    -- Grab a reference to the Kraylor station
+    enemy_station = SpaceStation():setTemplate("Large Station"):setFaction("Kraylor")
+    enemy_station:setPosition(-45600, -15800):setCallSign("Omega")
+				</p>
+				<p>With that reference, we can setup ships to defend the station</p>
+				<p class="code">
+    -- Create the defense for the station
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-45000, -14000):orderDefendTarget(enemy_station)
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-46000, -14000):orderDefendTarget(enemy_station)
+    CpuShip():setShipTemplate("Dreadnought"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_station)</p>
+				<p>With the defend target orders, the ship will circle around the target and attack enemies in range. You can defend any object, including another ship.</p>
+				<p>For example, we can setup two extra fighters which defend the Dreadnought.</p>
+				<p class="code">
+    enemy_dreadnought = CpuShip():setShipTemplate("Dreadnought"):setFaction("Kraylor")
+    enemy_dreadnought:setPosition(-46000, -18000):orderDefendTarget(enemy_station)
+    CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
+    CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)</p>
+				<h2>You lose! (Or, you should be able to)</h2>
+				<p>Right now, when you are killed, or kill all enemies. Nothing happens. So let us fix this. First off, we want to end the game with defeat if we lose the player ship.</p>
+				<p>Because of this, we need a reference to the player ship that we created.</p>
+				<p class="code">    player = PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
+    player:setPosition(22400, 18200):setCallSign("TheEpsilon")</p>
+				<p>Next, we'll ve finally using the <b>update</b> function that has been empty so far. The code in the update function is run every game tick, so about 60 times per second.</p>
+				<p>So in there we want to check if the player is destroyed, and if the ship is, end the game.</p>
+				<p class="code">
+function update(delta)
+    --When the player ship is destroyed, call it a victory for the Kraylor
+    if not player:isValid() then
+        victory("Kraylor")
+    end
+end
+				</p>
+				<p>Pretty simple right? And naturally, you can setup victory for the player the same way, but then with the destruction of the enemy station.</p>
+				<p class="code">
+    --When the kraylor station is destroyed, call it a victory for the Kraylor
+    if not enemy_station:isValid() then
+        victory("Human Navy")
+    end
+				</p>
+				<h2>Tips &amp; Tricks - More about ships.</h2>
+				<p>For a full list of possible ship templates, you can check the shipTemplates.lua file. This file contains all the definitions for all the possible ship types.</p>
+				<p>Next to orderRoaming and orderDefendTarget, there is also:</p>
+				<ul>
+					<li><b>orderIdle()</b> Default state, do nothing, do not move or attack.</li>
+					<li><b>orderStandGround()</b> Ship does not fly away, but does try to hit you when you are in range. Will fire missiles as well as beam weapons.</li>
+					<li><b>orderDefendLocation(x, y)</b> Fly towards the given position, and defend it from attacks.</li>
+					<li><b>orderFlyFormation(target, offset_x, offset_y)</b> Fly in formation with the target. Stay at a certain offset. When enemies are near your target, engage them. Gives fleet behaviour.</li>
+					<li><b>orderFlyTowards(x, y)</b> Fly towards a target position, but do attack enemies when they come too close.</li>
+					<li><b>orderFlyTowardsBlind(x, y)</b> Fly towards a target position, and ignore everything else.</li>
+					<li><b>orderAttack(target)</b> Attack a specific target.</li>
+					<li><b>orderDock(target)</b> Dock with an target. Can be used to make computer controlled ships dock with stations.</li>
+				</ul>
+				<h2>Final script for today.</h2>
+				<p>We end off with the complete script for reference.</p>
+				<p class="code">
+-- Name: Beacon of light - Day 2
+-- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
+
+-- Init is run when the scenario is started. Create your initial
+function init()
+    -- Create the main ship for the players.
+    player = PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
+    player:setPosition(22400, 18200):setCallSign("TheEpsilon")
+
+    SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(23500, 16100):setCallSign("Research-1")
+    SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(-25200, 32200):setCallSign("Orion-5")
+    -- Grab a reference to the Kraylor station
+    enemy_station = SpaceStation():setTemplate("Large Station"):setFaction("Kraylor")
+    enemy_station:setPosition(-45600, -15800):setCallSign("Omega")
+    SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setPosition(9100,-35400):setCallSign("Refugee-X")
+
+    --Nebula that hide the enemy station.
+    Nebula():setPosition(-43300,  2200)
+    Nebula():setPosition(-34000,  -700)
+    Nebula():setPosition(-32000,-10000)
+    Nebula():setPosition(-24000,-14300)
+    Nebula():setPosition(-28600,-21900)
+
+    --Random nebulae in the system
+    Nebula():setPosition( -8000,-38300)
+    Nebula():setPosition( 24000,-30700)
+    Nebula():setPosition( 42300,  3100)
+    Nebula():setPosition( 49200, 10700)
+    Nebula():setPosition(  3750, 31250)
+    Nebula():setPosition(-39500, 18700)
+
+    --Create 50 Asteroids
+    for asteroid_counter=1,50 do
+        Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
+        VisualAsteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
+    end
+
+    -- Create the defense for the station
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-44000, -14000):orderDefendTarget(enemy_station)
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-47000, -14000):orderDefendTarget(enemy_station)
+    enemy_dreadnought = CpuShip():setShipTemplate("Dreadnought"):setFaction("Kraylor")
+    enemy_dreadnought:setPosition(-46000, -18000):orderDefendTarget(enemy_station)
+    CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
+    CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
+
+    --Small Kraylor strike team, starting in the nebula at G5
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3550, 31250):orderRoaming()
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3950, 31250):orderRoaming()
+end
+
+function update(delta)
+    --When the player ship is destroyed, call it a victory for the Kraylor
+    if not player:isValid() then
+        victory("Kraylor")
+    end
+    --When the kraylor station is destroyed, call it a victory for the Kraylor
+    if not enemy_station:isValid() then
+        victory("Human Navy")
+    end
+end
+</p>
+			</div>
+			<div id="scripting-tabs-3">
+				<h2>Ready for your orders?</h2>
+				<p>So, now that we know how to create a basic world, and fill it with some bad guys. Let us start creating a mission.</p>
+				<p>To kick off this mission, we will start by sending out a transmission from <b>Research-1</b> towards the player, indicating that a transport ship carring a diplomat got lost on route from the Research station to Orion-X.</p>
+                <p>This will involve more actual code, and will be explained in less details then the previous steps.</p>
+                <h2>Your first order!</h2>
+				<p>So let us start by making references to the rest of the stations, as we will need the rest later on.</p>
+				<p class="code">
+    research_station = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy")
+    research_station:setPosition(23500, 16100):setCallSign("Research-1")
+    main_station = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy")
+    main_station:setPosition(-25200, 32200):setCallSign("Orion-5")
+    enemy_station = SpaceStation():setTemplate("Large Station"):setFaction("Kraylor")
+    enemy_station:setPosition(-45600, -15800):setCallSign("Omega")
+    neutral_station = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
+    neutral_station:setPosition(9100,-35400):setCallSign("Refugee-X")
+				</p>
+				<p>Now, at the end of the init function, we will send out a transmission to the player</p>
+				<p class="code">
+    --Start off the mission by sending a transmission to the player
+    research_station:sendCommsMessage(player, [[TheEpsilon, please come in?
+
+We lost contact with our transport RT-4, who was transporting a diplomat from our research station to Orion-X.
+
+Last contact was before RT-4 entered the nebula at G5.
+
+Please investigate and recover the diplomat if possible!.]])
+				</p>
+                <h2>Improving the enemy strike team to a real objective</h2>
+				<p>Now, we still have the Kraylor strike team setup in the nebula at G5. However, they are on roaming orders, and thus will fly out of the nebula and engage. Instead we want the strike team to hide in the nebula. We also need a transport TR-4 in the nebula. We setup the comms script of RT-4 to nothing, so we cannot give it orders.</p>
+				<p class="code">
+    --Small Kraylor strike team, guarding TR-4 in the nebula at G5.
+    kraylor_TR4_guard1 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3550, 31250):orderIdle()
+    kraylor_TR4_guard2 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3950, 31250):orderIdle()
+    transport_TR4 = CpuShip():setShipTemplate("Tug"):setFaction("Human Navy"):setPosition(3750, 31250)
+    transport_TR4:orderIdle():setCallSign("TR-4"):setCommsScript("")
+    transport_TR4:setHull(1):setFrontShieldMax(1):setRearShieldMax(1)
+				</p>
+				<p>As we want the Kraylor ships to destroy the transport in front of the players eyes, we put all orders on Idle so they will not move till ordered to do differently. We also set the hull and shields to 1 for the transport, so it can be destroyed in a single shot.</p>
+                <p>So we need to do some actual mission scripting. First, in the init function, at the end, we will set the initial mission state. This is a variable which tracks the current state the mission is in. We will increase it every time we come to a new thing that can happen in the mission.</p>
+                <p class="code">
+    --Set the initial mission state
+    mission_state = 1
+                </p>
+                <p>Next, we will change the update function. We will keep the defeat condition in tact, as we want the mission to end when the player is destroyed. But we will remove the other victory condition for now. We add a bunch of more code, first, the mission state needs to be 1. Then, when the player gets within 5k of the TR-5 ship, order the Kraylor ships to roam around. This will cause them to target TR-4 and destroy it, and target the player after that. Finally, we also add an utility function to measure distance between two objects.</p>
+                <p class="code">
+function update(delta)
+    --When the player ship, or the research station is destroyed, call it a victory for the Kraylor
+    if not player:isValid() or not research_station:isValid() then
+        victory("Kraylor")
+    end
+
+    if mission_state == 1 then
+        if distance(player, transport_TR4) &lt; 5000 then
+            kraylor_TR4_guard1:orderRoaming()
+            kraylor_TR4_guard2:orderRoaming()
+            mission_state = 2
         end
-        </code></pre>
-        <p>Surrounding it in a simple for loop however, will generate a 100 random Asteroids.</p>
-        <p>Which... results in a pretty square asteroid field. Not that pretty.</p>
-        <p>So right now, we just tweak the parameters to have an field from sector E4 to G4 in a straight line.</p>
-        <pre><code class="lua">
-          --Create 50 Asteroids
-          for asteroid_counter=1,50 do
-            Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
-          end
-        </code></pre>
-        <p>Already a whole lot better. But when you look at it in the 3D view now, it does look very flat. To fix that we add some VisualAsteroids as well. These asteroids are above or below the ship flying plane and cannot be hit. They are just there for visuals.</p>
-        <pre><code class="lua">
-          --Create 100 Asteroids
-          for asteroid_counter=1,50 do
-            Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
-            VisualAsteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
-          end
-        </code></pre>
-        <h2>Spice it up a bit</h2>
-        <p>Right now the stations are just called DS-7, and other DS-? numbers. But we can change this.</p>
-        <p>By calling the setCallSign function on the stations, we can set a different name for them. Be sure to keep this short.</p>
-        <pre><code class="lua">
-          SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(23500, 16100):setCallSign("Research-1")
-          SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(-25200, 32200):setCallSign("Orion-5")
-          SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setPosition(-45600, -15800):setCallSign("Omega")
-          SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setPosition(9100,-35400):setCallSign("Refugee-X")
-        </code></pre>
-        <p>We call the small station a research station, which gives it a bit more character. The enemy station is called Omega, as it's big. And the neutral station is called Refugee-X, which makes it sound like it could be housing refugees.</p>
-        <p>A few simple names can give the whole world more character.</p>
-        <p>Finally we call the player ship <b>TheEpsilon</b></p>
-        <p class="code">PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser"):setPosition(22400, 18200):setCallSign("TheEpsilon")</p>
-        <h2>Tips &amp; Tricks - Building even more world?</h2>
-        <p>Next to asteroids, stations and nebulae there are a few more options to populate your world.</p>
-        <p>While we do not use anything else at this point in time. The following objects can also be created:</p>
-        <pre><code class="lua">
-          BlackHole()                           -- Create a black hole, a 5km radius black hole which destroys anything that comes into the center.
-          Mine()                                -- A simple mine. Explodes with a 1km radius when a ship comes too close.
-          WarpJammer():setFaction("Kraylor")    -- A warp jammer, jams warp and jump drives in a 5km radius. Can be destroyed.
-          SupplyDrop():setFaction("Human Navy") -- A supply drop, can be picked up by flying over it, empty per default, can be filled with energy and missile weapons.
-        </code></pre>
-        <h2>Final script for today.</h2>
-        <p>We end off with the complete script for reference.</p>
-        <pre><code class="lua">
-          -- Name: Beacon of light - Day 1
-          -- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
+    end
+end
 
-          -- Init is run when the scenario is started. Create your initial
-          function init()
-            -- Create the main ship for the players.
-            PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser"):setPosition(22400, 18200):setCallSign("TheEpsilon")
+function distance(obj1, obj2)
+    x1, y1 = obj1:getPosition()
+    x2, y2 = obj2:getPosition()
+    xd, yd = (x1 - x2), (y1 - y2)
+    return math.sqrt(xd * xd + yd * yd)
+end
+                </p>
+                <h2>Get the Kraylor scum! Oh, and save the diplomat.</h2>
+                <p>Now, we can quite safe assume the RT-4 will be destroyed. So in mission_state 2 we will wait till the ship is destroyed, and when it is we will spawn an empty supply drop as escape pod. We will also message the ship to indicate what to do.</p>
+                <p class="code">
+    if mission_state == 2 then
+        if not transport_TR4:isValid() then
+            -- TR-4 destroyed, send a transmission to the player, create a supply drop to indicate an escape pod.
+            mission_state = 3
+            transport_TR4_drop = SupplyDrop():setFaction("Human Navy"):setPosition(3750, 31250)
+            research_station:sendCommsMessage(player, [[RT-4 has been destroyed! But an escape pod is ejected from the ship.
 
-            SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(23500, 16100):setCallSign("Research-1")
-            SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(-25200, 32200):setCallSign("Orion-5")
-            SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setPosition(-45600, -15800):setCallSign("Omega")
-            SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setPosition(9100,-35400):setCallSign("Refugee-X")
+Lifesigns detected in the pod, please pick up the pod to see if the diplomat made it.
 
-          --Nebula that hide the enemy station.
-            Nebula():setPosition(-43300,  2200)
-            Nebula():setPosition(-34000,  -700)
-            Nebula():setPosition(-32000,-10000)
-            Nebula():setPosition(-24000,-14300)
-            Nebula():setPosition(-28600,-21900)
+And destroy those Kraylor scum while you are at it!]])
+        end
+    end
+                </p>
+                <p>Once again, we increase the mission state, so we can check for the next event to happen. We also create the supply drop and keep a reference to it. And send a message pressing the player on what to do next.</p>
+                <p>Now, we want the escape pod to be picked up, but we also want the Kraylor ships to be destroyed before we continue. After we pickup the escape pod, we want to deliver it to the station, and finish the mission.</p>
+                <p class="code">
+    if mission_state == 3 then
+        if not transport_TR4_drop:isValid() and not kraylor_TR4_guard1:isValid() and not kraylor_TR4_guard2:isValid() then
+            -- Escape pod picked up, all kraylor ships destroyed.
+            mission_state = 4
+            research_station:sendCommsMessage(player, [[The diplomat is safely picked up! Thanks for that.
 
-          --Random nebulae in the system
-            Nebula():setPosition( -8000,-38300)
-            Nebula():setPosition( 24000,-30700)
-            Nebula():setPosition( 42300,  3100)
-            Nebula():setPosition( 49200, 10700)
-            Nebula():setPosition(  3750, 31250)
-            Nebula():setPosition(-39500, 18700)
-
-            --Create 50 Asteroids
-            for asteroid_counter=1,50 do
-              Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
-              VisualAsteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
-            end
-          end
-
-          function update(delta)
-          end
-        </code></pre>
-      </div>
-      <div id="scripting-tabs-2">
-        <h2>Well, that is boring...</h2>
-        <p>Congradulations on building the most boring scenario so far.</p>
-        <p>Now we're going to add some things that really spice things up. Other ships.</p>
-        <h2>About other ships</h2>
-        <p>What you need to remember when working with other ships are a few basic things.</p>
-        <p><b>Factions:</b> First off, the faction of a ship defines it's relation to other ships. For example Kraylor ships attack any other ship or station except when they belong to the Independent faction.</p>
-        <p><b>Orders:</b> Every ship has orders. The orders define how the ship behaves, if it stays still, or attacks for example, or seeks out targets on it's own.</p>
-        <p><b>Templates:</b> Finally every ship has a template, the template defines how it looks, what weapons it starts out with.</p>
-        <h2>Your first enemy</h2>
-        <p>So, let's create an enemy.</p>
-        <pre><code class="lua">CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(1000, 1000)</code></pre>
-        <p>Fight it! I'm sure you will win.</p>
-        <p>Well, that was easy right? Most likely you are already reading this before you tried. But if you did try. You will notice it did not do anything. This is because the default orders for a CpuShip are to stay idle and do nothing.</p>
-        <p>Damn it, still boring. So let's give it simple orders.</p>
-        <pre><code class="lua">CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(1000, 1000):orderRoaming()</code></pre>
-        <p>Roaming is one of the most basic orders that can be given to a ship. It orders the ship to fly around the world and seek a target to destroy.</p>
-        <p>Ping! Suddently you have an enemy to fight. Great!</p>
-        <p>Let us set this up as 2 cruisers that start at the lower nebula, they will fly out and seek out the player quite well on their own.</p>
-        <pre><code class="lua">
-          --Small Kraylor strike team, starting in the nebula at G5
-          CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3550, 31250):orderRoaming()
-          CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3950, 31250):orderRoaming()
-        </code></pre>
-        <h2>Defending the station</h2>
-        <p>The Kraylors have an large station in this area. So let us set up some defence.</p>
-        <p>We'll create 2 Cruisers and a Dreadnought in direct defence of the station. This means we need a reference to the station.</p>
-        <pre><code class="lua">
-          -- Grab a reference to the Kraylor station
-          enemy_station = SpaceStation():setTemplate("Large Station"):setFaction("Kraylor")
-          enemy_station:setPosition(-45600, -15800):setCallSign("Omega")
-        </code></pre>
-        <p>With that reference, we can setup ships to defend the station</p>
-        <pre><code class="lua">
-          -- Create the defense for the station
-          CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-45000, -14000):orderDefendTarget(enemy_station)
-          CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-46000, -14000):orderDefendTarget(enemy_station)
-          CpuShip():setShipTemplate("Dreadnought"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_station)
-        </code></pre>
-        <p>With the defend target orders, the ship will circle around the target and attack enemies in range. You can defend any object, including another ship.</p>
-        <p>For example, we can setup two extra fighters which defend the Dreadnought.</p>
-        <pre><code class="lua">
-          enemy_dreadnought = CpuShip():setShipTemplate("Dreadnought"):setFaction("Kraylor")
-          enemy_dreadnought:setPosition(-46000, -18000):orderDefendTarget(enemy_station)
-          CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
-          CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
-        </code></pre>
-        <h2>You lose! (Or, you should be able to)</h2>
-        <p>Right now, when you are killed, or kill all enemies. Nothing happens. So let us fix this. First off, we want to end the game with defeat if we lose the player ship.</p>
-        <p>Because of this, we need a reference to the player ship that we created.</p>
-        <pre><code class="lua">
-          player = PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
-          player:setPosition(22400, 18200):setCallSign("TheEpsilon")
-        </code></pre>
-        <p>Next, we'll ve finally using the <b>update</b> function that has been empty so far. The code in the update function is run every game tick, so about 60 times per second.</p>
-        <p>So in there we want to check if the player is destroyed, and if the ship is, end the game.</p>
-        <pre><code class="lua">
-          function update(delta)
-            --When the player ship is destroyed, call it a victory for the Kraylor
-            if not player:isValid() then
-              victory("Kraylor")
-            end
-          end
-        </code></pre>
-        <p>Pretty simple right? And naturally, you can setup victory for the player the same way, but then with the destruction of the enemy station.</p>
-        <pre><code class="lua">
-          --When the kraylor station is destroyed, call it a victory for the Kraylor
-          if not enemy_station:isValid() then
+Please deliver the diplomat to Omega-X in sector G3, do this by docking with the station.]])
+        end
+    end
+    if mission_state == 4 then
+        if player:isDocked(main_station) then
+            -- Docked and delivered the diplomat.
             victory("Human Navy")
-          end
-        </code></pre>
-        <h2>Tips &amp; Tricks - More about ships.</h2>
-        <p>For a full list of possible ship templates, you can check the shipTemplates.lua file. This file contains all the definitions for all the possible ship types.</p>
-        <p>Next to orderRoaming and orderDefendTarget, there is also:</p>
-        <table class="function-list">
-          <tbody>
-            <tr><td>orderIdle ()</td>                                  <td>Default state, do nothing, do not move or attack.</td></tr>
-            <tr><td>orderStandGround ()</td>                           <td>Ship does not fly away, but does try to hit you when you are in range. Will fire missiles as well as beam weapons.</td></tr>
-            <tr><td>orderDefendLocation (x, y)</td>                    <td>Fly towards the given position, and defend it from attacks.</td></tr>
-            <tr><td>orderFlyFormation (target, offset_x, offset_y)</td><td>Fly in formation with the target. Stay at a certain offset. When enemies are near your target, engage them. Gives fleet behaviour.</td></tr>
-            <tr><td>orderFlyTowards (x, y)</td>                        <td> Fly towards a target position, but do attack enemies when they come too close.</td></tr>
-            <tr><td>orderFlyTowardsBlind (x, y)</td>                   <td>Fly towards a target position, and ignore everything else.</td></tr>
-            <tr><td>orderAttack (target)</td>                          <td>Attack a specific target.</td></tr>
-            <tr><td>orderDock (target)</td>                            <td>Dock with an target. Can be used to make computer controlled ships dock with stations.</td></tr>
-          </tbody>
-        </table>
-        <h2>Final script for today.</h2>
-        <p>We end off with the complete script for reference.</p>
-        <pre><code class="lua">
-          -- Name: Beacon of light - Day 2
-          -- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
+        end
+    end
+                </p>
+                <h2>Tips&amp;ticks</h2>
+                <p>There is a LOT you can do from mission scripting. Even with the limited tools at your disposal. By no means the mission progression has to be linear. You could create forks or different conditions. For example, you could set it up that saving the diplomat before destroying the Kraylor ships yields more rewards or a different mission path.</p>
+                <p>If you want to try some things for yourself, but not sure where to go from here. You could setup the next step of the mission to be retaliation from the Kraylor. Spawn some ships near the edge of the nebulae at the enemy station, and have them attack the player. You can also send a transmission from the new enemy ships to the player to let him know why he is attacked.</p>
+                <h2>Final script for today.</h2>
+                <p class="code">
+-- Name: Beacon of light series
+-- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
 
-          -- Init is run when the scenario is started. Create your initial
-          function init()
-            -- Create the main ship for the players.
-            player = PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
-            player:setPosition(22400, 18200):setCallSign("TheEpsilon")
+-- Init is run when the scenario is started. Create your initial
+function init()
+    -- Create the main ship for the players.
+    player = PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
+	player:setPosition(22400, 18200):setCallSign("TheEpsilon")
 
-            SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(23500, 16100):setCallSign("Research-1")
-            SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(-25200, 32200):setCallSign("Orion-5")
-            -- Grab a reference to the Kraylor station
-            enemy_station = SpaceStation():setTemplate("Large Station"):setFaction("Kraylor")
-            enemy_station:setPosition(-45600, -15800):setCallSign("Omega")
-            SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setPosition(9100,-35400):setCallSign("Refugee-X")
+    research_station = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy")
+    research_station:setPosition(23500, 16100):setCallSign("Research-1")
+    main_station = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy")
+    main_station:setPosition(-25200, 32200):setCallSign("Orion-5")
+    enemy_station = SpaceStation():setTemplate("Large Station"):setFaction("Kraylor")
+    enemy_station:setPosition(-45600, -15800):setCallSign("Omega")
+    neutral_station = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
+    neutral_station:setPosition(9100,-35400):setCallSign("Refugee-X")
 
-            --Nebula that hide the enemy station.
-            Nebula():setPosition(-43300,  2200)
-            Nebula():setPosition(-34000,  -700)
-            Nebula():setPosition(-32000,-10000)
-            Nebula():setPosition(-24000,-14300)
-            Nebula():setPosition(-28600,-21900)
+    --Nebula that hide the enemy station.
+    Nebula():setPosition(-43300,  2200)
+    Nebula():setPosition(-34000,  -700)
+    Nebula():setPosition(-32000,-10000)
+    Nebula():setPosition(-24000,-14300)
+    Nebula():setPosition(-28600,-21900)
 
-            --Random nebulae in the system
-            Nebula():setPosition( -8000,-38300)
-            Nebula():setPosition( 24000,-30700)
-            Nebula():setPosition( 42300,  3100)
-            Nebula():setPosition( 49200, 10700)
-            Nebula():setPosition(  3750, 31250)
-            Nebula():setPosition(-39500, 18700)
+    --Random nebulae in the system
+    Nebula():setPosition( -8000,-38300)
+    Nebula():setPosition( 24000,-30700)
+    Nebula():setPosition( 42300,  3100)
+    Nebula():setPosition( 49200, 10700)
+    Nebula():setPosition(  3750, 31250)
+    Nebula():setPosition(-39500, 18700)
 
-            --Create 50 Asteroids
-            for asteroid_counter=1,50 do
-              Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
-              VisualAsteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
-            end
+    --Create 50 Asteroids
+    for asteroid_counter=1,50 do
+        Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
+        VisualAsteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
+    end
 
-            -- Create the defense for the station
-            CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-44000, -14000):orderDefendTarget(enemy_station)
-            CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-47000, -14000):orderDefendTarget(enemy_station)
-            enemy_dreadnought = CpuShip():setShipTemplate("Dreadnought"):setFaction("Kraylor")
-            enemy_dreadnought:setPosition(-46000, -18000):orderDefendTarget(enemy_station)
-            CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
-            CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
+    -- Create the defense for the station
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-44000, -14000):orderDefendTarget(enemy_station)
+    CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-47000, -14000):orderDefendTarget(enemy_station)
+    enemy_dreadnought = CpuShip():setShipTemplate("Dreadnought"):setFaction("Kraylor")
+    enemy_dreadnought:setPosition(-46000, -18000):orderDefendTarget(enemy_station)
+    CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
+    CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
 
-            --Small Kraylor strike team, starting in the nebula at G5
-            CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3550, 31250):orderRoaming()
-            CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3950, 31250):orderRoaming()
-          end
+    --Small Kraylor strike team, guarding TR-4 in the nebula at G5.
+    kraylor_TR4_guard1 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3550, 31250):orderIdle()
+    kraylor_TR4_guard2 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3950, 31250):orderIdle()
+    transport_TR4 = CpuShip():setShipTemplate("Tug"):setFaction("Human Navy"):setPosition(3750, 31250)
+    transport_TR4:orderIdle():setCallSign("TR-4"):setCommsScript("")
+    transport_TR4:setHull(1):setFrontShieldMax(1):setRearShieldMax(1)
 
-          function update(delta)
-            --When the player ship is destroyed, call it a victory for the Kraylor
-            if not player:isValid() then
-              victory("Kraylor")
-            end
-            --When the kraylor station is destroyed, call it a victory for the Kraylor
-            if not enemy_station:isValid() then
-              victory("Human Navy")
-            end
-          end
-        </code></pre>
-      </div>
-      <div id="scripting-tabs-3">
-        <h2>Ready for your orders?</h2>
-        <p>So, now that we know how to create a basic world, and fill it with some bad guys. Let us start creating a mission.</p>
-        <p>To kick off this mission, we will start by sending out a transmission from <b>Research-1</b> towards the player, indicating that a transport ship carring a diplomat got lost on route from the Research station to Orion-X.</p>
-        <p>This will involve more actual code, and will be explained in less details then the previous steps.</p>
-        <h2>Your first order!</h2>
-        <p>So let us start by making references to the rest of the stations, as we will need the rest later on.</p>
-        <pre><code class="lua">
-          research_station = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy")
-          research_station:setPosition(23500, 16100):setCallSign("Research-1")
-          main_station = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy")
-          main_station:setPosition(-25200, 32200):setCallSign("Orion-5")
-          enemy_station = SpaceStation():setTemplate("Large Station"):setFaction("Kraylor")
-          enemy_station:setPosition(-45600, -15800):setCallSign("Omega")
-          neutral_station = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
-          neutral_station:setPosition(9100,-35400):setCallSign("Refugee-X")
-        </code></pre>
-        <p>Now, at the end of the init function, we will send out a transmission to the player</p>
-        <pre><code class="lua">
-          --Start off the mission by sending a transmission to the player
-          research_station:sendCommsMessage(player, [[
-            TheEpsilon, please come in?
-            We lost contact with our transport RT-4, who was transporting a diplomat from our research station to Orion-X.
-            Last contact was before RT-4 entered the nebula at G5.
-            Please investigate and recover the diplomat if possible!.
-          ]])
-        </code></pre>
-        <h2>Improving the enemy strike team to a real objective</h2>
-        <p>Now, we still have the Kraylor strike team setup in the nebula at G5. However, they are on roaming orders, and thus will fly out of the nebula and engage. Instead we want the strike team to hide in the nebula. We also need a transport TR-4 in the nebula. We setup the comms script of RT-4 to nothing, so we cannot give it orders.</p>
-        <pre><code class="lua">
-          --Small Kraylor strike team, guarding TR-4 in the nebula at G5.
-          kraylor_TR4_guard1 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3550, 31250):orderIdle()
-          kraylor_TR4_guard2 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3950, 31250):orderIdle()
-          transport_TR4 = CpuShip():setShipTemplate("Tug"):setFaction("Human Navy"):setPosition(3750, 31250)
-          transport_TR4:orderIdle():setCallSign("TR-4"):setCommsScript("")
-          transport_TR4:setHull(1):setFrontShieldMax(1):setRearShieldMax(1)
-        </code></pre>
-        <p>As we want the Kraylor ships to destroy the transport in front of the players eyes, we put all orders on Idle so they will not move till ordered to do differently. We also set the hull and shields to 1 for the transport, so it can be destroyed in a single shot.</p>
-        <p>So we need to do some actual mission scripting. First, in the init function, at the end, we will set the initial mission state. This is a variable which tracks the current state the mission is in. We will increase it every time we come to a new thing that can happen in the mission.</p>
-        <pre><code class="lua">
-          --Set the initial mission state
-          mission_state = 1
-        </code></pre>
-        <p>Next, we will change the update function. We will keep the defeat condition in tact, as we want the mission to end when the player is destroyed. But we will remove the other victory condition for now. We add a bunch of more code, first, the mission state needs to be 1. Then, when the player gets within 5k of the TR-5 ship, order the Kraylor ships to roam around. This will cause them to target TR-4 and destroy it, and target the player after that. Finally, we also add an utility function to measure distance between two objects.</p>
-        <pre><code class="lua">
-          function update(delta)
-            --When the player ship, or the research station is destroyed, call it a victory for the Kraylor
-            if not player:isValid() or not research_station:isValid() then
-              victory("Kraylor")
-            end
+    --Start off the mission by sending a transmission to the player
+    research_station:sendCommsMessage(player, [[TheEpsilon, please come in?
 
-            if mission_state == 1 then
-              if distance(player, transport_TR4) &lt; 5000 then
-                kraylor_TR4_guard1:orderRoaming()
-                kraylor_TR4_guard2:orderRoaming()
-                mission_state = 2
-              end
-            end
-          end
+We lost contact with our transport RT-4, who was transporting a diplomat from our research station to Orion-X.
 
-          function distance(obj1, obj2)
-            x1, y1 = obj1:getPosition()
-            x2, y2 = obj2:getPosition()
-            xd, yd = (x1 - x2), (y1 - y2)
-            return math.sqrt(xd * xd + yd * yd)
-          end
-        </code></pre>
-        <h2>Get the Kraylor scum! Oh, and save the diplomat.</h2>
-        <p>Now, we can quite safe assume the RT-4 will be destroyed. So in mission_state 2 we will wait till the ship is destroyed, and when it is we will spawn an empty supply drop as escape pod. We will also message the ship to indicate what to do.</p>
-        <pre><code class="lua">
-          if mission_state == 2 then
-            if not transport_TR4:isValid() then
-              -- TR-4 destroyed, send a transmission to the player, create a supply drop to indicate an escape pod.
-              mission_state = 3
-              transport_TR4_drop = SupplyDrop():setFaction("Human Navy"):setPosition(3750, 31250)
-              research_station:sendCommsMessage(player, [[
-                RT-4 has been destroyed! But an escape pod is ejected from the ship.
-                Lifesigns detected in the pod, please pick up the pod to see if the diplomat made it.
-                And destroy those Kraylor scum while you are at it!
-              ]])
-            end
-          end
-        </code></pre>
-        <p>Once again, we increase the mission state, so we can check for the next event to happen. We also create the supply drop and keep a reference to it. And send a message pressing the player on what to do next.</p>
-        <p>Now, we want the escape pod to be picked up, but we also want the Kraylor ships to be destroyed before we continue. After we pickup the escape pod, we want to deliver it to the station, and finish the mission.</p>
-        <pre><code class="lua">
-          if mission_state == 3 then
-            if not transport_TR4_drop:isValid() and not kraylor_TR4_guard1:isValid() and not kraylor_TR4_guard2:isValid() then
-              -- Escape pod picked up, all kraylor ships destroyed.
-              mission_state = 4
-              research_station:sendCommsMessage(player, [[
-                The diplomat is safely picked up! Thanks for that.
-                Please deliver the diplomat to Omega-X in sector G3, do this by docking with the station.
-              ]])
-            end
-          end
-          if mission_state == 4 then
-            if player:isDocked(main_station) then
-              -- Docked and delivered the diplomat.
-              victory("Human Navy")
-            end
-          end
-        </code></pre>
-        <h2>Tips&amp;ticks</h2>
-        <p>There is a LOT you can do from mission scripting. Even with the limited tools at your disposal. By no means the mission progression has to be linear. You could create forks or different conditions. For example, you could set it up that saving the diplomat before destroying the Kraylor ships yields more rewards or a different mission path.</p>
-        <p>If you want to try some things for yourself, but not sure where to go from here. You could setup the next step of the mission to be retaliation from the Kraylor. Spawn some ships near the edge of the nebulae at the enemy station, and have them attack the player. You can also send a transmission from the new enemy ships to the player to let him know why he is attacked.</p>
-        <h2>Final script for today.</h2>
-        <pre><code class="lua">
-          -- Name: Beacon of light series
-          -- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
+Last contact was before RT-4 entered the nebula at G5.
 
-          -- Init is run when the scenario is started. Create your initial
-          function init()
-            -- Create the main ship for the players.
-            player = PlayerSpaceship():setFaction("Human Navy"):setShipTemplate("Player Cruiser")
-            player:setPosition(22400, 18200):setCallSign("TheEpsilon")
+Please investigate and recover the diplomat if possible!.]])
+    --Set the initial mission state
+    mission_state = 1
+end
 
-            research_station = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy")
-            research_station:setPosition(23500, 16100):setCallSign("Research-1")
-            main_station = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy")
-            main_station:setPosition(-25200, 32200):setCallSign("Orion-5")
-            enemy_station = SpaceStation():setTemplate("Large Station"):setFaction("Kraylor")
-            enemy_station:setPosition(-45600, -15800):setCallSign("Omega")
-            neutral_station = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
-            neutral_station:setPosition(9100,-35400):setCallSign("Refugee-X")
+function update(delta)
+    --When the player ship, or the research station is destroyed, call it a victory for the Kraylor
+    if not player:isValid() or not research_station:isValid() then
+        victory("Kraylor")
+    end
 
-            --Nebula that hide the enemy station.
-            Nebula():setPosition(-43300,  2200)
-            Nebula():setPosition(-34000,  -700)
-            Nebula():setPosition(-32000,-10000)
-            Nebula():setPosition(-24000,-14300)
-            Nebula():setPosition(-28600,-21900)
+    if mission_state == 1 then
+        if distance(player, transport_TR4) &lt; 5000 then
+            kraylor_TR4_guard1:orderRoaming()
+            kraylor_TR4_guard2:orderRoaming()
+            mission_state = 2
+        end
+    end
+    if mission_state == 2 then
+        if not transport_TR4:isValid() then
+            -- TR-4 destroyed, send a transmission to the player, create a supply drop to indicate an escape pod.
+            mission_state = 3
+            transport_TR4_drop = SupplyDrop():setFaction("Human Navy"):setPosition(3750, 31250)
+            research_station:sendCommsMessage(player, [[RT-4 has been destroyed! But an escape pod is ejected from the ship.
 
-            --Random nebulae in the system
-            Nebula():setPosition( -8000,-38300)
-            Nebula():setPosition( 24000,-30700)
-            Nebula():setPosition( 42300,  3100)
-            Nebula():setPosition( 49200, 10700)
-            Nebula():setPosition(  3750, 31250)
-            Nebula():setPosition(-39500, 18700)
+Lifesigns detected in the pod, please pick up the pod to see if the diplomat made it.
 
-            --Create 50 Asteroids
-            for asteroid_counter=1,50 do
-              Asteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
-              VisualAsteroid():setPosition(random(-10000, -5000), random(-10000, 30000))
-            end
+And destroy those Kraylor scum while you are at it!]])
+        end
+    end
+    if mission_state == 3 then
+        if not transport_TR4_drop:isValid() and not kraylor_TR4_guard1:isValid() and not kraylor_TR4_guard2:isValid() then
+            -- Escape pod picked up, all kraylor ships destroyed.
+            mission_state = 4
+            research_station:sendCommsMessage(player, [[The diplomat is safely picked up! Thanks for that.
 
-            -- Create the defense for the station
-            CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-44000, -14000):orderDefendTarget(enemy_station)
-            CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(-47000, -14000):orderDefendTarget(enemy_station)
-            enemy_dreadnought = CpuShip():setShipTemplate("Dreadnought"):setFaction("Kraylor")
-            enemy_dreadnought:setPosition(-46000, -18000):orderDefendTarget(enemy_station)
-            CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
-            CpuShip():setShipTemplate("Fighter"):setFaction("Kraylor"):setPosition(-46000, -18000):orderDefendTarget(enemy_dreadnought)
+Please deliver the diplomat to Omega-X in sector G3, do this by docking with the station.]])
+        end
+    end
+    if mission_state == 4 then
+        if player:isDocked(main_station) then
+            -- Docked and delivered the diplomat.
+            victory("Human Navy")
+        end
+    end
 
-            --Small Kraylor strike team, guarding TR-4 in the nebula at G5.
-            kraylor_TR4_guard1 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3550, 31250):orderIdle()
-            kraylor_TR4_guard2 = CpuShip():setShipTemplate("Cruiser"):setFaction("Kraylor"):setPosition(3950, 31250):orderIdle()
-            transport_TR4 = CpuShip():setShipTemplate("Tug"):setFaction("Human Navy"):setPosition(3750, 31250)
-            transport_TR4:orderIdle():setCallSign("TR-4"):setCommsScript("")
-            transport_TR4:setHull(1):setFrontShieldMax(1):setRearShieldMax(1)
+end
 
-            --Start off the mission by sending a transmission to the player
-            research_station:sendCommsMessage(player, [[
-              TheEpsilon, please come in?
-              We lost contact with our transport RT-4, who was transporting a diplomat from our research station to Orion-X.
-              Last contact was before RT-4 entered the nebula at G5.
-              Please investigate and recover the diplomat if possible!.
-            ]])
-            --Set the initial mission state
-            mission_state = 1
-          end
-
-          function update(delta)
-            --When the player ship, or the research station is destroyed, call it a victory for the Kraylor
-            if not player:isValid() or not research_station:isValid() then
-              victory("Kraylor")
-            end
-
-            if mission_state == 1 then
-              if distance(player, transport_TR4) &lt; 5000 then
-                kraylor_TR4_guard1:orderRoaming()
-                kraylor_TR4_guard2:orderRoaming()
-                mission_state = 2
-              end
-            end
-            if mission_state == 2 then
-              if not transport_TR4:isValid() then
-                -- TR-4 destroyed, send a transmission to the player, create a supply drop to indicate an escape pod.
-                mission_state = 3
-                transport_TR4_drop = SupplyDrop():setFaction("Human Navy"):setPosition(3750, 31250)
-                research_station:sendCommsMessage(player, [[
-                  RT-4 has been destroyed! But an escape pod is ejected from the ship.
-                  Lifesigns detected in the pod, please pick up the pod to see if the diplomat made it.
-                  And destroy those Kraylor scum while you are at it!
-                ]])
-              end
-            end
-            if mission_state == 3 then
-              if not transport_TR4_drop:isValid() and not kraylor_TR4_guard1:isValid() and not kraylor_TR4_guard2:isValid() then
-                -- Escape pod picked up, all kraylor ships destroyed.
-                mission_state = 4
-                research_station:sendCommsMessage(player, [[
-                  The diplomat is safely picked up! Thanks for that.
-                  Please deliver the diplomat to Omega-X in sector G3, do this by docking with the station.
-                ]])
-              end
-            end
-            if mission_state == 4 then
-              if player:isDocked(main_station) then
-                -- Docked and delivered the diplomat.
-                victory("Human Navy")
-              end
-            end
-          end
-
-          function distance(obj1, obj2)
-            x1, y1 = obj1:getPosition()
-            x2, y2 = obj2:getPosition()
-            xd, yd = (x1 - x2), (y1 - y2)
-            return math.sqrt(xd * xd + yd * yd)
-          end
-        </code></pre>
-      </div>
+function distance(obj1, obj2)
+    x1, y1 = obj1:getPosition()
+    x2, y2 = obj2:getPosition()
+    xd, yd = (x1 - x2), (y1 - y2)
+    return math.sqrt(xd * xd + yd * yd)
+end
+                </p>
+			</div>
+		</div>
+	</div>
+	<div id="tabs-download">
+		<h2>Download</h2>
+		<p id="downloads-info">Downloads for Windows and Android are available at: <a href="http://software.ultimaker.com/EmptyEpsilon/">[download list]</a></p>
+		<p>You need to use the same version number for all users or else the game will not work correctly. Mixing different version numbers is not supported.</p>
+		<p>Storage for downloads provided by <a href="http://ultimaker.com/">Ultimaker</a>. Many thanks that they allow us to use their build and download servers. If you are concidering an 3D printer, buy from Ultimaker, they are nice people.</p>
+		<h2>Source</h2>
+		<p>The sourcecode is up on github at:</p>
+		<p><a href="https://github.com/daid/EmptyEpsilon">https://github.com/daid/EmptyEpsilon</a> (Game source code)</p>
+		<p><a href="https://github.com/daid/SeriousProton">https://github.com/daid/SeriousProton</a> (Engine source code)</p>
+	</div>
+    <div id="tabs-forums">
+        <p>The forums where we communicate about the game can be found at: <a href="http://bridgesim.net/categories/emptyepsilon">bridgesim.net</a></p>
     </div>
-  </div>
-
-  <div id="tabs-download">
-    <h2>Download</h2>
-    <p>You need to use the same version number for all users or else the game will not work correctly. Mixing different version numbers is not supported.</p>
-    <p>Storage for downloads provided by <a href="http://ultimaker.com/">Ultimaker</a>. Many thanks that they allow us to use their build and download servers. If you are concidering an 3D printer, buy from Ultimaker, they are nice people.</p>
-    <p id="downloads-info">Downloads for Windows and Android are available at: <a href="http://software.ultimaker.com/EmptyEpsilon/">[download list]</a></p>
-    <h2>Source</h2>
-    <p>The sourcecode is up on github at:</p>
-    <p><a href="https://github.com/daid/EmptyEpsilon">https://github.com/daid/EmptyEpsilon</a> (Game source code)</p>
-    <p><a href="https://github.com/daid/SeriousProton">https://github.com/daid/SeriousProton</a> (Engine source code)</p>
-  </div>
-
-  <div id="tabs-changelog">
-    <p>Loading change log from GitHub</p>
-  </div>
-
-  <div id="tabs-forums">
-    <p>The forums where we communicate about the game can be found at: <a href="http://bridgesim.net/categories/emptyepsilon">bridgesim.net</a></p>
-  </div>
 </div>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/xt256.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/lua.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+<script src="jquery.min.js"></script>
+<script src="jquery-ui.min.js"></script>
 <script>
-function mapHash() {
-  var parts = location.hash.substr(1).split(',');
-  var data = {}
-  parts.forEach(function(part) {
-    var info = part.split("=");
-    if (info.length > 1)
-      data[info[0]] = info[1];
-  });
-  return data;
+function mapHash()
+{
+	var parts = location.hash.substr(1).split(',');
+	var data = {}
+	parts.forEach(function(part)
+	{
+		var info = part.split("=");
+		if (info.length > 1)
+			data[info[0]] = info[1];
+	});
+	return data;
 }
 
-function updateHashFromTab(event, ui) {
-  var target_id, target_index, data, hash, key;
-  target_id = event.target.id;
-  target_index = $(event.target).tabs("option", "active");
-  if (target_id == "tabs" && $("#tabs > ul .ui-tabs-active").text() === "Forums") {
-    document.location.href = "http://bridgesim.net/categories/emptyepsilon";
-  }
+function updateHashFromTab(event, ui)
+{
+	var target_id = event.target.id;
+	var target_index = $(event.target).tabs("option", "active");
 
-  data = mapHash();
-  data[target_id] = target_index;
-  hash = [];
-  for(key in data) {
-    hash.push(key + "=" + data[key])
-  }
-  location.hash = hash.join(",");
+    if (target_id == "tabs" && target_index == 6)
+    {
+        window.location.href = "http://bridgesim.net/categories/emptyepsilon";
+    }
+
+	var data = mapHash();
+	data[target_id] = target_index;
+	var hash = [];
+	for(var key in data)
+	{
+		hash.push(key + "=" + data[key])
+	}
+	location.hash = hash.join(",");
 }
 
 $(function() {
-  $("#tabs").tabs({activate: updateHashFromTab});
-  $("#station-tabs").tabs({activate: updateHashFromTab});
-  $("#running-tabs").tabs({activate: updateHashFromTab});
+	$("#tabs").tabs({activate: updateHashFromTab});
+	$("#station-tabs").tabs({activate: updateHashFromTab});
+	$("#running-tabs").tabs({activate: updateHashFromTab});
 
-  $("#scripting-tabs").tabs({activate: updateHashFromTab}).addClass("ui-tabs-vertical ui-helper-clearfix");
-  $("#scripting-tabs ul").removeClass("ui-widget-header");
-  $("#scripting-tabs li" ).removeClass("ui-corner-top").addClass("ui-corner-left");
-  $("#scripting-tabs div" ).removeClass("ui-corner-bottom");
+	$("#scripting-tabs").tabs({activate: updateHashFromTab}).addClass("ui-tabs-vertical ui-helper-clearfix");
+	$("#scripting-tabs ul").removeClass("ui-widget-header");
+	$("#scripting-tabs li" ).removeClass("ui-corner-top").addClass("ui-corner-left");
+	$("#scripting-tabs div" ).removeClass("ui-corner-bottom");
 
-  var hashData = mapHash()
-  for (var key in hashData) {
-    $("#" + key).tabs("option", "active", hashData[key]);
-  }
+	// $.each($("img"), function(idx, element)
+	// {
+	// 	element = $(element)
+	// 	if (element.attr('src').indexOf('screenshots/') != 0)
+	// 		return true;
+	// 	element.css('width', '200px');
+	// 	var wrapper = $("<span style='position: relative'>");
+	// 	var button = $("<span class='ui-icon ui-icon-circle-zoomin' style='position: absolute; bottom: 6px; right: 4px;'></span>");
+	// 	scale_function = function() {
+	// 		if (element.css('width') == '200px')
+	// 			element.animate({'width': element[0].naturalWidth + 'px'}, 500);
+	// 		else
+	// 			element.animate({'width': '200px'}, 500);
+	// 	}
+	// 	element.click(scale_function);
+	// 	button.click(scale_function);
+	// 	element.wrap(wrapper);
+	// 	element.after(button);
+	// });
+	$.each($(".code"), function(idx, element)
+	{
+		element = $(element);
+		var lines = element.html().split("\n");
+		var output = [];
+		lines.forEach(function(line) {
+			if (line.indexOf("--") > -1)
+			{
+				n = line.indexOf("--");
+				line = line.substr(0, n) + "<span style='color: green'>" + line.substr(n) + "</span>";
+			}
+            line = line.replace(/"([^"]*)"/g, "<span style='color: blue'>\"$1\"</span>");
+			output.push(line);
+		});
+		while(output.length > 0 && output[0].trim() == "")
+			output.shift()
+		while(output.length > 0 && output[output.length - 1].trim() == "")
+			output.pop()
+        output = output.join("\n");
+        output = output.replace(/\[\[([^(\]\])]*)\]\]/gm, "<span style='color: blue'>[[$1]]</span>");
+		element.html(output);
+	})
 
-  $.get("http://software.ultimaker.com/ee_files.php", function(data) {
-    var files = {}
-    for (var idx in data) {
-      var f = data[idx]
-      var version = f.match("[0-9][0-9][0-9][0-9]\.?[0-9][0-9]\.?[0-9][0-9]");
-      if (version.length == 1) {
-        var os = "";
-        version = parseInt(version[0].replace(/\./g, ""));
-        if (f.toLowerCase().indexOf("win32") > -1 || f.toLowerCase().indexOf("windows") > -1)
-          os = "windows";
-        if (f.toLowerCase().indexOf("android") > -1)
-          os = "android";
-        if (f.toLowerCase().indexOf("osx") > -1 || f.toLowerCase().indexOf("macos") > -1)
-          os = "osx";
+	var hashData = mapHash()
+	for(var key in hashData)
+	{
+		$("#" + key).tabs("option", "active", hashData[key]);
+	}
 
-        if (os != "")
-        {
-          if (files[version] == undefined)
-            files[version] = {}
-          files[version][os] = f;
+	$.get("http://software.ultimaker.com/ee_files.php", function(data) {
+		var files = {}
+		for(var idx in data)
+		{
+			var f = data[idx]
+			var version = f.match("[0-9][0-9][0-9][0-9]\.?[0-9][0-9]\.?[0-9][0-9]");
+			if (version.length == 1)
+			{
+				var os = "";
+				version = parseInt(version[0].replace(/\./g, ""));
+				if (f.toLowerCase().indexOf("win32") > -1 || f.toLowerCase().indexOf("windows") > -1)
+					os = "windows";
+				if (f.toLowerCase().indexOf("android") > -1)
+					os = "android";
+				if (f.toLowerCase().indexOf("osx") > -1 || f.toLowerCase().indexOf("macos") > -1)
+					os = "osx";
+
+				if (os != "")
+				{
+					if (files[version] == undefined)
+						files[version] = {}
+					files[version][os] = f;
+				}
+			}
+		}
+
+		var html = '<table class="downloads"><tr><th>OS<th>File<th>version';
+		var part2 = '<tr><th>OS<th>File<th>version'
+        var first = true;
+        var versions = [];
+		for(var version in files)
+		{
+            versions.push(version);
         }
-      }
-    }
+        versions.sort();
+        versions.reverse();
+		for(var i in versions)
+		{
+            var version = versions[i];
+			var oses = [];
+			for(var os in files[version])
+				oses.push(os);
+			oses.sort();
+			oses.reverse();
 
-    var html = '<table class="downloads"><tr><th>OS<th>File<th>version';
-    var part2 = '<tr><th>OS<th>File<th>version'
-    var first = true;
-    var versions = [];
-    for (var version in files) {
-      versions.push(version);
-    }
-    versions.sort();
-    versions.reverse();
-    for (var i in versions) {
-      var version = versions[i];
-      var oses = [];
-      for(var os in files[version])
-        oses.push(os);
-      oses.sort();
-      oses.reverse();
-
-      for (var idx in oses) {
-        var os = oses[idx];
-        var vers = version.substr(0, 4) + "-" + version.substr(4, 2) + "-" + version.substr(6, 2);
-        var url = 'http://software.ultimaker.com/EmptyEpsilon/' + files[version][os];
-        row = '<tr class="' + os + '"><td><a href="' + url + '"><img src="images/os_' + os + '.svg" width="24"></a><td><a href="' + url + '" class="download ' + os + '">' + files[version][os] + '</a><td>' + vers;
-        if (first)
-          html += row;
-        else
-          part2 += row;
-      }
-      first = false;
-    }
-    html += part2;
-    html += '</table>';
-    $('#downloads-info').html(html);
-  }, "json");
+			for(var idx in oses)
+			{
+                var os = oses[idx];
+				var vers = version.substr(0, 4) + "-" + version.substr(4, 2) + "-" + version.substr(6, 2);
+				var url = 'http://software.ultimaker.com/EmptyEpsilon/' + files[version][os];
+				row = '<tr class="' + os + '"><td><a href="' + url + '"><img src="images/os_' + os + '.svg" width="24"></a><td><a href="' + url + '" class="download ' + os + '">' + files[version][os] + '</a><td>' + vers;
+				if (first)
+					html += row;
+				else
+					part2 += row;
+			}
+            first = false;
+		}
+		html += part2;
+		html += '</table>';
+		$('#downloads-info').html(html);
+	}, "json");
 });
+</script>
+<script src="jquery.magnific-popup.min.js"></script>
+<script type="text/javascript">
+	$('.image-link').magnificPopup({
+	  type: 'image',
+		closeOnContentClick: 'true',
+		showCloseBtn: 'false',
+	  mainClass: 'mfp-with-zoom', // this class is for CSS animation below
 
-$('.image-link').magnificPopup({
-  type: 'image',
-  closeOnContentClick: 'true',
-  showCloseBtn: 'false',
-  mainClass: 'mfp-with-zoom', // this class is for CSS animation below
-  zoom: {
-    enabled: true, // By default it's false, so don't forget to enable it
-    duration: 300, // duration of the effect, in milliseconds
-    easing: 'ease-in-out', // CSS transition easing function
-    // The "opener" function should return the element from which popup will be zoomed in
-    // and to which popup will be scaled down
-    // By defailt it looks for an image tag:
-    opener: function(openerElement) {
-      // openerElement is the element on which popup was initialized, in this case its <a> tag
-      // you don't need to add "opener" option if this code matches your needs, it's defailt one.
-      return openerElement.is('img') ? openerElement : openerElement.find('img');
-    }
-  }
+	  zoom: {
+	    enabled: true, // By default it's false, so don't forget to enable it
 
-});
+	    duration: 300, // duration of the effect, in milliseconds
+	    easing: 'ease-in-out', // CSS transition easing function
 
-/* Clean up and syntax highlight code */
-(function () {
-  $("code").each(function () {
-     $(this).html(function (index, content) {
-      var matches, indent;
-      // Determine the base indent
-      matches = /^\s*\n(\s+)/m.exec(content);
-      if (matches) {
-        // Create an expression to target the indent
-        indent = new RegExp("^" +  matches[1], "mg");
-        // Remove the excess indenting
-        content = content.replace(indent, "");
-      }
-      return content.trim();
-    });
-  });
-  hljs.initHighlightingOnLoad();
-}());
+	    // The "opener" function should return the element from which popup will be zoomed in
+	    // and to which popup will be scaled down
+	    // By defailt it looks for an image tag:
+	    opener: function(openerElement) {
+	      // openerElement is the element on which popup was initialized, in this case its <a> tag
+	      // you don't need to add "opener" option if this code matches your needs, it's defailt one.
+	      return openerElement.is('img') ? openerElement : openerElement.find('img');
+	    }
+	  }
 
-/* Load the change log from GitHub and render the MarkDown */
-(function () {
-  var target = $("#tabs-changelog");
-
-  $.ajax({
-    url:      "https://raw.githubusercontent.com/daid/EmptyEpsilon/master/CHANGELOG.md",
-    dataType: "text"
-  }).done(function (data, textStatus, jqXHR) {
-    target.html(marked(data));
-  }).fail(function (jqXHR, textStatus, errorThrown) {
-    target.html("<p>There was an error retreiving the change log, please check back later.</p><p>" + textStatus + ": " + errorThrown + "</p>");
-  });
-}());
+	});
 </script>
 </body>
 </html>
