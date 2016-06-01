@@ -33,6 +33,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     left_panel = new GuiElement(this, "LEFT_PANEL");
     left_panel->setPosition(0, 0, ATopLeft)->setSize(1000, GuiElement::GuiSizeMax);
 
+    // 5U tactical radar with piloting features.
     radar = new GuiRadarView(left_panel, "TACTICAL_RADAR", 5000.0, &targets);
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 650);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
@@ -54,6 +55,9 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
         }
     );
 
+    // Ship stats and combat maneuver at bottom right corner of left panel.
+    (new GuiCombatManeuver(left_panel, "COMBAT_MANEUVER"))->setPosition(-20, -180, ABottomRight)->setSize(200, 150);
+
     energy_display = new GuiKeyValueDisplay(left_panel, "ENERGY_DISPLAY", 0.45, "Energy", "");
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(-20, -140, ABottomRight)->setSize(240, 40);
     heading_display = new GuiKeyValueDisplay(left_panel, "HEADING_DISPLAY", 0.45, "Heading", "");
@@ -63,29 +67,32 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     shields_display = new GuiKeyValueDisplay(left_panel, "SHIELDS_DISPLAY", 0.45, "Shields", "");
     shields_display->setIcon("gui/icons/shields")->setTextSize(20)->setPosition(-20, -20, ABottomRight)->setSize(240, 40);
 
+    // Unlocked missile aim dial and lock controls.
     missile_aim = new GuiRotationDial(left_panel, "MISSILE_AIM", -90, 360 - 90, 0, [this](float value){
         tube_controls->setMissileTargetAngle(value);
     });
     missile_aim->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 700);
+
+    // Weapon tube controls.
     tube_controls = new GuiMissileTubeControls(left_panel, "MISSILE_TUBES");
     radar->enableTargetProjections(tube_controls);
+
+    // Missile lock button near top right of left panel.
     lock_aim = new AimLockButton(left_panel, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim->setPosition(300, 130, ATopCenter)->setSize(130, 50);
 
+    // Engine layout in top left corner of left panel.
     GuiAutoLayout* engine_layout = new GuiAutoLayout(left_panel, "ENGINE_LAYOUT", GuiAutoLayout::LayoutHorizontalLeftToRight);
-    engine_layout->setPosition(20, 70, ATopLeft)->setSize(GuiElement::GuiSizeMax, 250);
+    engine_layout->setPosition(20, 80, ATopLeft)->setSize(GuiElement::GuiSizeMax, 250);
     (new GuiImpulseControls(engine_layout, "IMPULSE"))->setSize(100, GuiElement::GuiSizeMax);
     warp_controls = (new GuiWarpControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
     jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
 
-    (new GuiDockingButton(left_panel, "DOCKING"))->setPosition(20, 20, ATopLeft)->setSize(280, 50);
-    (new GuiShieldsEnableButton(left_panel, "SHIELDS_ENABLE"))->setPosition(300, 20, ATopLeft)->setSize(280, 50);
-
-    (new GuiOpenCommsButton(left_panel, "OPEN_COMMS_BUTTON", &targets))->setPosition(-20, 20, ATopRight)->setSize(250, 50);
+    // Docking, comms, and shields buttons across top.
+    (new GuiDockingButton(left_panel, "DOCKING"))->setPosition(20, 20, ATopLeft)->setSize(250, 50);
+    (new GuiOpenCommsButton(left_panel, "OPEN_COMMS_BUTTON", &targets))->setPosition(270, 20, ATopLeft)->setSize(250, 50);
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-
-    //TODO: Fit this somewhere on the already full and chaotic tactical UI...
-    //(new GuiCombatManeuver(left_panel, "COMBAT_MANEUVER"))->setPosition(-50, -50, ABottomRight)->setSize(280, 265);
+    (new GuiShieldsEnableButton(left_panel, "SHIELDS_ENABLE"))->setPosition(520, 20, ATopLeft)->setSize(250, 50);
 }
 
 void SinglePilotScreen::onDraw(sf::RenderTarget& window)
@@ -105,6 +112,7 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
     }
     GuiOverlay::onDraw(window);
 
+    // Responsively show/hide the 3D viewport.
     if (viewport->getRect().width < viewport->getRect().height / 3.0f)
     {
         viewport->hide();
