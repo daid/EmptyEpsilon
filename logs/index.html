@@ -1,0 +1,304 @@
+<html>
+<head>
+<script src="jquery.js"></script>
+</head>
+<body>
+<canvas id="canvas" style="position: absolute; top: 0; left: 0; margin: 0" width="200" height="100"></canvas>
+<div style="position: absolute; bottom: 0; left: 0; right: 0; margin: auto; width: 500px">
+    <input id="time_selector" type="range" min="0" max="0" value="0" style="width: 100%; margin: auto;">
+</div>
+<div id="dropzone" style="position: absolute; top:0; bottom: 0; left: 0; right: 0; margin: auto; width: 300px; height: 100px; background-color: #8080FF">
+    Drop log file here.
+</div>
+<script>
+class LogData
+{
+    constructor(text)
+    {
+        this.entries = [];
+        
+        var lines = text.match(/^.*([\n\r]+|$)/gm);
+        for (var index = 0; index < lines.length; index++)
+        {
+            try
+            {
+                if (lines[index].trim() != "")
+                    this.entries.push(JSON.parse(lines[index]));
+            }catch(err){
+                console.debug("Read json line error: ", err);
+            }
+        }
+        console.debug("Loaded: " + this.entries.length + " log entries")
+    }
+    
+    getMaxTime()
+    {
+        return this.entries[this.entries.length-1].time;
+    }
+    
+    getEntriesAtTime(time)
+    {
+        var last_objects = {}
+        var static_objects = {}
+        for (var index = 0; index < this.entries.length; index++)
+        {
+            var entry = this.entries[index];
+            if (entry.time > time)
+                break
+            last_objects = entry.objects;
+            for(var i=0; i<entry.new_static.length; i++)
+            {
+                var obj = entry.new_static[i];
+                static_objects[obj.id] = obj;
+            }
+            for(var i=0; i<entry.del_static.length; i++)
+            {
+                var obj_id = entry.del_static[i];
+                delete static_objects[obj_id];
+            }
+        }
+        for(var i=0; i<last_objects.length; i++)
+        {
+            var obj = last_objects[i];
+            static_objects[obj.id] = obj;
+        }
+        return static_objects;
+    }
+};
+
+class Canvas
+{
+    constructor()
+    {
+        this._canvas = $("#canvas");
+        this._canvas.mousedown(function(e) { canvas._mouseDown(e); });
+        this._canvas.mousemove(function(e) { canvas._mouseMove(e); });
+        this._canvas.mouseup(function(e) { canvas._mouseUp(e); });
+        this._canvas.bind('mousewheel', function(e) { e.stopPropagation(); e.preventDefault(); canvas._mouseWheel(e.originalEvent.wheelDelta); });
+        $(window).resize(function(e) { canvas.update(); });
+        
+        this._view_x = 0;
+        this._view_y = 0;
+        this._zoom_scale = 100.0 / 20000.0; //20U = 100pixels default zoom.
+        
+        this.update()
+    }
+    
+    _mouseDown(e)
+    {
+        this._last_mouse_x = e.clientX
+        this._last_mouse_y = e.clientY
+    }
+    _mouseMove(e)
+    {
+        if (!e.buttons)
+            return;
+
+        this._view_x += (this._last_mouse_x - e.clientX) / this._zoom_scale;
+        this._view_y += (this._last_mouse_y - e.clientY) / this._zoom_scale;
+
+        this._last_mouse_x = e.clientX;
+        this._last_mouse_y = e.clientY;
+        
+        this.update();
+    }
+    _mouseUp(e)
+    {
+        this._last_mouse_x = e.clientX
+        this._last_mouse_y = e.clientY
+    }
+    
+    _mouseWheel(delta)
+    {
+        this._zoom_scale *= (1.0 + (delta / 1000.0));
+        this.update();
+    }
+    
+    update()
+    {
+        var w = document.documentElement.clientWidth;
+        var h = document.documentElement.clientHeight;
+        this._canvas[0].width = w;
+        this._canvas[0].height = h;
+
+        var ctx = this._canvas[0].getContext("2d");
+        ctx.fillStyle = "#000000";
+        ctx.fillRect(0, 0, w, h);
+        
+        if (!log)
+            return
+        
+        var time = $("#time_selector").val();
+        
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillText(formatTime(time), 20, 20);
+        
+        var entries = log.getEntriesAtTime(time);
+        for(var id in entries)
+        {
+            var entry = entries[id];
+            var x = (entry["position"][0] - this._view_x) * this._zoom_scale + w / 2.0;
+            var y = (entry["position"][1] - this._view_y) * this._zoom_scale + h / 2.0;
+            
+            if (entry.type == "Nebula")
+            {
+                var r = 5000.0 * this._zoom_scale;
+                ctx.globalAlpha = 0.2
+                ctx.beginPath();
+                ctx.arc(x, y, r, 0, 2 * Math.PI, false);
+                ctx.fillStyle = "#202080";
+                ctx.fill();
+                ctx.globalAlpha = 1.0
+            }
+            else if (entry.type == "BlackHole")
+            {
+                var r = 5000.0 * this._zoom_scale;
+                ctx.globalAlpha = 0.2
+                ctx.beginPath();
+                ctx.arc(x, y, r, 0, 2 * Math.PI, false);
+                ctx.fillStyle = "#802020";
+                ctx.fill();
+                ctx.globalAlpha = 1.0
+            }
+            else if (entry.type == "Mine")
+            {
+                var r = 1000.0 * this._zoom_scale;
+                ctx.globalAlpha = 0.2
+                ctx.beginPath();
+                ctx.arc(x, y, r, 0, 2 * Math.PI, false);
+                ctx.fillStyle = "#808080";
+                ctx.fill();
+                ctx.globalAlpha = 1.0
+                ctx.fillStyle = "#FFFFFF";
+                ctx.fillRect(x, y, 1, 1);
+            }
+            else if (entry.type == "PlayerSpaceship")
+            {
+                this.drawShip(ctx, x, y, entry);
+            }
+            else if (entry.type == "CpuShip")
+            {
+                this.drawShip(ctx, x, y, entry);
+            }
+            else if (entry.type == "SpaceStation")
+            {
+                ctx.fillStyle = "#AAFFAA";
+                ctx.fillRect(x - 2, y - 2, 5, 5);
+            }
+            else if (entry.type == "Asteroid")
+            {
+                ctx.fillStyle = "#FFC864";
+                ctx.fillRect(x, y, 1, 1);
+            }
+            else if (entry.type == "ScanProbe")
+            {
+                ctx.fillStyle = "#60C080";
+                ctx.fillRect(x, y, 1, 1);
+            }
+            else if (entry.type == "VisualAsteroid")
+            {
+            }
+            else if (entry.type == "BeamEffect")
+            {
+            }
+            else if (entry.type == "ExplosionEffect")
+            {
+            }
+            else
+            {
+                console.debug("Unknown object type: ", entry.type)
+                ctx.fillStyle = "#FF0000";
+                ctx.fillRect(x, y, 2, 2);
+            }
+        }
+    }
+    
+    drawShip(ctx, x, y, entry)
+    {
+        if (entry.type == "PlayerSpaceship")
+            ctx.fillStyle = "#FFFFFF";
+        else
+            ctx.fillStyle = "#AAAAAA";
+        ctx.fillRect(x - 1, y - 1, 3, 3);
+        
+        if (entry.config.beams)
+        {
+            for(var idx=0; idx<entry.config.beams.length; idx++)
+            {
+                var beam = entry.config.beams[idx];
+                var a = entry.rotation + beam.direction;
+                var r = beam.range * this._zoom_scale;
+                var a1 = (a - beam.arc / 2.0) / 180.0 * Math.PI
+                var a2 = (a + beam.arc / 2.0) / 180.0 * Math.PI
+                var x1 = x + Math.cos(a1) * r;
+                var y1 = y + Math.sin(a1) * r;
+                var x2 = x + Math.cos(a2) * r;
+                var y2 = y + Math.sin(a2) * r;
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x1, y1);
+                ctx.arc(x, y, r, a1, a2, false);
+                ctx.lineTo(x2, y2);
+                ctx.lineTo(x, y);
+
+                ctx.globalAlpha = 0.5
+                ctx.strokeStyle = "#FF0000";
+                ctx.stroke();
+                ctx.globalAlpha = 1.0
+            }
+        }
+    }
+};
+
+function loadLog(data)
+{
+    log = new LogData(data)
+    if (log.entries.length > 0)
+    {
+        $("#dropzone").hide()
+        console.debug(log.getMaxTime());
+        canvas.update();
+        $("#time_selector").attr("max", log.getMaxTime());
+    }
+}
+
+function formatTime(time)
+{
+    if (time % 60 < 10)
+        return Math.floor(time / 60) + ":0" + (time % 60)
+    return Math.floor(time / 60) + ":" + (time % 60)
+}
+
+function autoPlay()
+{
+    $("#time_selector").val($("#time_selector").val() + 1);
+    canvas.update();
+}
+
+var log;
+var canvas;
+
+$().ready(function()
+{
+    document.addEventListener('dragover', function(e) { e.stopPropagation(); e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; });
+    document.addEventListener('drop', function(e)
+    {
+        e.stopPropagation();
+        e.preventDefault();
+        var files = e.dataTransfer.files;
+        for (var i=0, file; file=files[i]; i++)
+        {
+            var reader = new FileReader();
+            reader.onload = function(e2) { loadLog(e2.target.result); }
+            reader.readAsText(file);
+        }
+    });
+    canvas = new Canvas();
+    
+    $("#time_selector").change(function(e) { canvas.update(); })
+    
+    setTimeout(autoPlay, 100);
+});
+</script>
+</body>
+</html>
