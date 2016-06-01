@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="us">
+<head>
+	<meta charset="utf-8">
+	<title>EmptyEpsilon</title>
+</head>
+<body>
+This code serves as an example on how to use the EmptyEpsilon HTTP API.<br>
+This API is enabled by setting the "httpserver" option to a port number (suggested 8080) in the "options.ini" file.<br>
+Then you can access http://localhost:8080/index.html to check this page. (All files from the www folder as served).<br>
+The main API is "exec.lua", which can be used to run any lua code and get the result. See the script_reference.html for functions you can call.<br>
+<br>
+You can use this text area to test out calls and see the result:<br>
+<textarea id="script" style="width: 400px; height: 400px">player = getPlayerShip(-1)
+if player == nil then return {error = "No ship"} end
+return {hull = player:getHull() / player:getHullMax()}
+</textarea>
+<button onclick="send()">Send</button>
+<div id="output"></div>
+
+<script src="jquery.js"></script>
+<script>
+function send()
+{
+	$.post('exec.lua', $("#script").val(), function(data) {
+		$("#output").text(JSON.stringify(data));
+	}, "json")
+	.fail(function(x, y, reason) {
+		$("#output").text("FAIL:" + reason);
+	});
+}
+</script>
+</body>
+</html>
