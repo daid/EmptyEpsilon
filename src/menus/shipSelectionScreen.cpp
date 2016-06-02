@@ -6,6 +6,7 @@
 #include "gameGlobalInfo.h"
 #include "screens/windowScreen.h"
 #include "screens/topDownScreen.h"
+#include "screens/cinematicViewScreen.h"
 #include "screens/gm/gameMasterScreen.h"
 
 #include "gui/gui2_autolayout.h"
@@ -63,11 +64,13 @@ ShipSelectionScreen::ShipSelectionScreen()
     game_master_button = new GuiToggleButton(stations_layout, "GAME_MASTER_BUTTON", "Game master", [this](bool value) {
         window_button->setValue(false);
         topdown_button->setValue(false);
+        cinematic_view_button->setValue(false);
     });
     game_master_button->setSize(GuiElement::GuiSizeMax, 50);
     window_button = new GuiToggleButton(stations_layout, "WINDOW_BUTTON", "Ship window", [this](bool value) {
         game_master_button->setValue(false);
         topdown_button->setValue(false);
+        cinematic_view_button->setValue(false);
     });
     window_button->setSize(GuiElement::GuiSizeMax, 50);
     window_angle = new GuiSelector(stations_layout, "WINDOW_ANGLE", nullptr);
@@ -75,11 +78,22 @@ ShipSelectionScreen::ShipSelectionScreen()
         window_angle->addEntry(string(n) + " degrees", string(n));
     window_angle->setSelectionIndex(0);
     window_angle->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Top down view button
     topdown_button = new GuiToggleButton(stations_layout, "TOP_DOWN_3D_BUTTON", "Top down 3D", [this](bool value) {
         game_master_button->setValue(false);
         window_button->setValue(false);
+        cinematic_view_button->setValue(false);
     });
     topdown_button->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Cinematic view button
+    cinematic_view_button = new GuiToggleButton(stations_layout, "CINEMATIC_VIEW_BUTTON", "Cinematic view", [this](bool value) {
+        game_master_button->setValue(false);
+        window_button->setValue(false);
+        topdown_button->setValue(false);
+    });
+    cinematic_view_button->setSize(GuiElement::GuiSizeMax, 50);
     
     if (game_server)
     {
@@ -186,7 +200,7 @@ void ShipSelectionScreen::updateReadyButton()
     {
         if (my_spaceship && main_screen_button->isVisible() && main_screen_button->getValue())
             ready_button->enable();
-        else if (game_master_button->getValue() || topdown_button->getValue())
+        else if (game_master_button->getValue() || topdown_button->getValue() || cinematic_view_button->getValue())
             ready_button->enable();
         else if (my_spaceship && window_button->getValue())
             ready_button->enable();
@@ -206,11 +220,13 @@ void ShipSelectionScreen::updateCrewTypeOptions()
     window_button->hide();
     window_angle->hide();
     topdown_button->hide();
+    cinematic_view_button->hide();
     main_screen_button->setVisible(canDoMainScreen());
     main_screen_button->setValue(false);
     game_master_button->setValue(false);
     window_button->setValue(false);
     topdown_button->setValue(false);
+    cinematic_view_button->setValue(false);
     for(int n=0; n<max_crew_positions; n++)
     {
         crew_position_button[n]->setValue(false)->hide();
@@ -237,6 +253,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
         window_button->setVisible(canDoMainScreen());
         window_angle->setVisible(canDoMainScreen());
         topdown_button->setVisible(canDoMainScreen());
+        cinematic_view_button->setVisible(canDoMainScreen());
         break;
     }
     for(int n=0; n<max_crew_positions; n++)
@@ -265,6 +282,11 @@ void ShipSelectionScreen::onReadyClick()
         my_player_info->commandSetShipId(-1);
         destroy();
         new TopDownScreen();
+    }else if(cinematic_view_button->getValue())
+    {
+        my_player_info->commandSetShipId(-1);
+        destroy();
+        new CinematicViewScreen();
     }else{
         destroy();
         my_player_info->spawnUI();
