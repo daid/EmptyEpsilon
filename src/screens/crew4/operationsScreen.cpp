@@ -6,6 +6,6 @@
 OperationScreen::OperationScreen(GuiContainer* owner)
 : ScienceScreen(owner)
 {
-    (new GuiOpenCommsButton(this, "OPEN_COMMS_BUTTON", &targets))->setPosition(20, 20, ATopLeft)->setSize(250, 50);
-    (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiOpenCommsButton(this->radar_view, "OPEN_COMMS_BUTTON", &targets))->setPosition(-270, -20, ABottomRight)->setSize(200, 50);
+    (new GuiCommsOverlay(this->radar_view))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
