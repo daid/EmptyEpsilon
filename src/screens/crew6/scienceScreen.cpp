@@ -170,6 +170,9 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         if (view_distance < 5000.0f)
             view_distance = 5000.0f;
         science_radar->setDistance(view_distance);
+        // Keep the zoom slider in sync.
+        zoom_slider->setValue(view_distance);
+        zoom_label->setText("Zoom: " + string(gameGlobalInfo->long_range_radar_range / view_distance, 1) + "x");
     }
 
     if (!my_spaceship)
