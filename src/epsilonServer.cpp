@@ -20,8 +20,7 @@ EpsilonServer::EpsilonServer()
     {
         state_logger = new GameStateLogger();
         state_logger->start();
-    } else if (state_logger)
-        state_logger->destroy();
+    }
 }
 
 EpsilonServer::~EpsilonServer()
