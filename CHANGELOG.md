@@ -2,6 +2,28 @@
 
 ## [Unreleased]
 ### Added
+- combat manuever controls for the tactical screen
+### Changed
+- move ops communication buttons to avoid overlapping the radar
+- synchronize the science zoom slider behavior with the mouse wheel zoom
+### Fixed
+- hardware blick effect, could not set on\_value
+- prevent ops communication buttons from appearing in the database view
+
+
+## [2016-06-02]
+### Added
+- example of HTTP API
+- basic log viewer using HTML and Javascript
+- combat manuevers controls for single pilot screen
+- SIL OFL for _Bebas Neue_
+- toggle GUI visibility with <kbd>H</kbd> and camera locking with <kbd>L</kbd>
+- top-down controls for zooming and panning
+- selector for picking a players ship to lock onto
+- button to copy a scenario script to clipboard
+- buttons to create an asteroid or supply drop for the game master
+- missile tube indicators for helm
+- raw scanner overlay for science probe view
 - button to the science station to open the database to the selected ship
 - icon for the HVLI
 - window title to cmake file
@@ -10,6 +32,8 @@
 - status requests respond with missile counts
 - basic pack logging
 ### Changed
+- engineering ship room image #271
+- tweaks to the panel UI (see 4c96062155cd33433ff5b40a8c3fbb12b1815af1)
 - damage is done to a single sytem instead of 5 random systems
 - combat maneuvering is now two dimensional allowing boosting and strafing at the same time
 - improved the weapons UI when the shield frequency feature is disabled
@@ -19,6 +43,10 @@
 - moved music to the clients
 - ship and station communication scripts
 ### Fixed
+- communications button on single pilot screen
+- logging on stations
+- game state log entry being converted to bool
+- _Edge of Space_ scenario was modifying the player ship incorrectly
 - small fixes to the game state logger
 - Fix system <-> shield link when there are more than 2 shields
 
@@ -235,7 +263,8 @@
 - create button visible through the cancel button on game master screen
 - clicking outside the radar circle but inside its reactangle caused callbacks
 
-[Unreleased]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.05.22...HEAD
+[Unreleased]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.02...HEAD
+[Unreleased]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.05.22...EE-2016.06.02
 [2016-05-22]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.05.07...EE-2016.05.22
 [2016-05-07]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.04.30...EE-2016.05.07
 [2016-04-30]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.04.28...EE-2016.04.30
