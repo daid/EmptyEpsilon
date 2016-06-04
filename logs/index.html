@@ -135,8 +135,13 @@ class Canvas
         var time = $("#time_selector").val();
         
         ctx.fillStyle = "#FFFFFF";
-        ctx.fillText(formatTime(time), 20, 20);
-        
+        var stateTextTime = formatTime(time);
+        var stateTextZoom = "100px = " + (0.1 / this._zoom_scale).toPrecision(3) + "U";
+        var stateTextX = "X: " + this._view_x.toPrecision(6);
+        var stateTextY = "Y: " + this._view_y.toPrecision(6);
+        var stateText = stateTextTime + " / " + stateTextZoom + " / " + stateTextX + " / " + stateTextY;
+        ctx.fillText(stateText, 20, 20);
+
         var entries = log.getEntriesAtTime(time);
         for(var id in entries)
         {
