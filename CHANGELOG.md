@@ -282,7 +282,7 @@
 - clicking outside the radar circle but inside its reactangle caused callbacks
 
 [Unreleased]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.02...HEAD
-[Unreleased]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.05.22...EE-2016.06.02
+[2016-06-02]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.05.22...EE-2016.06.02
 [2016-05-22]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.05.07...EE-2016.05.22
 [2016-05-07]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.04.30...EE-2016.05.07
 [2016-04-30]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.04.28...EE-2016.04.30
