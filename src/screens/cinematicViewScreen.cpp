@@ -129,8 +129,8 @@ void CinematicViewScreen::update(float delta)
             tot_distance_3D = sf::length(tot_diff_3D);
 
             // Position the camera over the selected ship.
-            camera_position.x = target_position_2D.x + (10.0f * sf::normalize(tot_diff_2D).x);
-            camera_position.y = target_position_2D.y + (10.0f * sf::normalize(tot_diff_2D).y);
+            camera_position.x = target_position_2D.x - (100.0f * sf::normalize(tot_diff_2D).x);
+            camera_position.y = target_position_2D.y - (100.0f * sf::normalize(tot_diff_2D).y);
             camera_position.z = 100.0f;
 
             // Set the camera angle to point at the selected ship's target.
@@ -150,7 +150,6 @@ void CinematicViewScreen::update(float delta)
             camera_position.x = camera_destination.x;
             camera_position.y = camera_destination.y;
         } else {
-
             // Calculate the angles between the camera and the ship.
             angle_yaw = sf::vector2ToAngle(diff_2D);
             angle_pitch = (atan(camera_position.z / distance_3D)) * (180 / pi);
