@@ -12,10 +12,41 @@ class GuiToggleButton;
 class CinematicViewScreen : public GuiCanvas, public Updatable
 {
 private:
+    const double pi = M_PI;
+
     GuiViewport3D* viewport;
     P<PlayerSpaceship> target;
     GuiSelector* camera_lock_selector;
     GuiToggleButton* camera_lock_toggle;
+    GuiToggleButton* camera_lock_tot_toggle;
+    float camera_distance;
+    sf::Vector2f camera_rotation_vector;
+    sf::Vector2f camera_destination;
+    float angle_yaw;
+    float angle_pitch;
+
+    sf::Vector2f diff_2D;
+    sf::Vector3f diff_3D;
+    float distance_2D;
+    float distance_3D;
+
+    sf::Vector2f target_position_2D;
+    sf::Vector3f target_position_3D;
+    // camera_position is a Vector3, so no need to declare one here.
+    sf::Vector2f camera_position_2D;
+    float target_rotation;
+    float target_velocity;
+
+    P<SpaceObject> target_of_target;
+
+    sf::Vector2f tot_position_2D;
+    sf::Vector3f tot_position_3D;
+    sf::Vector2f tot_diff_2D;
+    sf::Vector3f tot_diff_3D;
+    float tot_angle;
+    float tot_distance_2D;
+    float tot_distance_3D;
+
 public:
     CinematicViewScreen();
     

@@ -22,17 +22,24 @@ CinematicViewScreen::CinematicViewScreen()
     camera_yaw = -90.0f;
     camera_pitch = 45.0f;
 
+    // Lock onto player ship 0 to start.
+    if (gameGlobalInfo->getPlayerShip(0))
+        target = gameGlobalInfo->getPlayerShip(0);
+
     // Let the screen operator select a player ship to lock the camera onto.
     camera_lock_selector = new GuiSelector(this, "CAMERA_LOCK_SELECTOR", [this](int index, string value) {
         P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(value.toInt());
         if (ship)
             target = ship;
     });
-    camera_lock_selector->setPosition(20, -80, ABottomLeft)->setSize(300, 50)->hide();
+    camera_lock_selector->setSelectionIndex(0)->setPosition(20, -80, ABottomLeft)->setSize(300, 50)->hide();
 
     // Toggle whether to lock the camera onto a ship.
     camera_lock_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOGGLE", "Lock camera on ship", [this](bool value) {});
-    camera_lock_toggle->setPosition(20, -20, ABottomLeft)->setSize(300, 50)->hide();
+    camera_lock_toggle->setValue(true)->setPosition(20, -20, ABottomLeft)->setSize(300, 50)->hide();
+
+    camera_lock_tot_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOT_TOGGLE", "Lock camera on ship's target", [this](bool value) {});
+    camera_lock_tot_toggle->setValue(false)->setPosition(320, -20, ABottomLeft)->setSize(350, 50)->hide();
 
     new GuiIndicatorOverlays(this);
 }
@@ -46,17 +53,6 @@ void CinematicViewScreen::update(float delta)
         disconnectFromServer();
         returnToMainMenu();
         return;
-    }
-
-    // Enable mouse wheel zoom.
-    float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
-    if (mouse_wheel_delta != 0.0)
-    {
-        camera_position.z = camera_position.z * (1.0 - (mouse_wheel_delta) * 0.1f);
-        if (camera_position.z > 10000.0)
-            camera_position.z = 10000.0;
-        if (camera_position.z < 200.0)
-            camera_position.z = 200.0;
     }
 
     // TODO: Add mouselook.
@@ -82,79 +78,81 @@ void CinematicViewScreen::update(float delta)
     // If lock is enabled and a ship is selected...
     if (camera_lock_toggle->getValue() && target)
     {
-        // M_PI = 3.1415926535897932384626433832795;
-        const double pi = M_PI;
+        // Show the target-of-target lock button.
+        if (camera_lock_toggle->isVisible())
+            camera_lock_tot_toggle->show();
 
         // Get the selected ship's current position.
-        sf::Vector2f target_position_2D = target->getPosition();
+        target_position_2D = target->getPosition();
         // Copy the selected ship's position into a Vector3 for camera angle
         // calculations.
-        sf::Vector3f target_position_3D;
         target_position_3D.x = target_position_2D.x;
         target_position_3D.y = target_position_2D.y;
         target_position_3D.z = 0;
 
         // Copy the camera position into a Vector2 for camera angle
         // calculations.
-        sf::Vector2f camera_position_2D;
         camera_position_2D.x = camera_position.x;
         camera_position_2D.y = camera_position.y;
 
         // Calculate the distance from the camera to the selected ship.
-        sf::Vector2f diff = target_position_2D - camera_position_2D;
-        sf::Vector3f diff_3D = target_position_3D - camera_position;
+        diff_2D = target_position_2D - camera_position_2D;
+        diff_3D = target_position_3D - camera_position;
 
-        float distance = sf::length(diff);
-        float distance_3D = sf::length(diff_3D);
+        distance_2D = sf::length(diff_2D);
+        distance_3D = sf::length(diff_3D);
 
         // Get the ship's current heading and velocity.
-        float target_rotation = target->getRotation();
+        target_rotation = target->getRotation();
         // float target_velocity = sf::length(target->getVelocity());
 
         // We want the camera to always be less than 1U from the selected ship.
-        float camera_distance = 1000.0f;
+        camera_distance = 1000.0f;
 
         // Check if our selected ship has a weapons target.
-        P<SpaceObject> target_of_target = target->getTarget();
+        target_of_target = target->getTarget();
 
-        // Initialize angles.
-        float angle_yaw;
-        float angle_pitch;
-
-        if (target_of_target)
+        // If it does, lock the camera onto that target.
+        if (camera_lock_tot_toggle->getValue() && target_of_target)
         {
-            camera_position.x = target_position_2D.x;
-            camera_position.y = target_position_2D.y;
-            camera_position.z = 100.0f;
-
-            sf::Vector2f tot_position_2D = target_of_target->getPosition();
-            sf::Vector3f tot_position_3D;
+            // Get the position of the selected ship's target.
+            tot_position_2D = target_of_target->getPosition();
+            // Convert it to a 3D vector.
             tot_position_3D.x = tot_position_2D.x;
             tot_position_3D.y = tot_position_3D.y;
             tot_position_3D.z = 0;
-            sf::Vector2f tot_diff = tot_position_2D - camera_position_2D;
-            sf::Vector3f tot_diff_3D = tot_position_3D - camera_position;
-            float tot_distance = sf::length(tot_diff);
-            float tot_distance_3D = sf::length(tot_diff_3D);
+            // Get the diff, distance, and angle between the ToT and camera.
+            tot_diff_2D = tot_position_2D - camera_position_2D;
+            tot_diff_3D = tot_position_3D - camera_position;
+            tot_angle = sf::vector2ToAngle(tot_diff_2D);
+            tot_distance_2D = sf::length(tot_diff_2D);
+            tot_distance_3D = sf::length(tot_diff_3D);
 
-            angle_yaw = sf::vector2ToAngle(tot_diff);
+            // Position the camera over the selected ship.
+            camera_position.x = target_position_2D.x + (10.0f * sf::normalize(tot_diff_2D).x);
+            camera_position.y = target_position_2D.y + (10.0f * sf::normalize(tot_diff_2D).y);
+            camera_position.z = 100.0f;
+
+            // Set the camera angle to point at the selected ship's target.
+            angle_yaw = tot_angle;
             angle_pitch = (atan(camera_position.z / tot_distance_3D)) * (180 / pi);
-        } else if (distance > camera_distance)
+        } else if (distance_2D > camera_distance)
         // If the selected ship moves more than 1U from the camera ...
         {
             // Set a vector 5 degrees to the right of the selected ship's
             // rotation.
-            sf::Vector2f camera_rotation_vector = sf::vector2FromAngle(target_rotation + 5);
+            camera_rotation_vector = sf::vector2FromAngle(target_rotation + 5);
 
             // Plot a destination on that vector at a distance of 1U.
-            sf::Vector2f camera_destination = target_position_2D + camera_rotation_vector * camera_distance;
+            camera_destination = target_position_2D + camera_rotation_vector * camera_distance;
 
             // Move the camera's X and Y coordinates to this destination.
             camera_position.x = camera_destination.x;
             camera_position.y = camera_destination.y;
         } else {
+
             // Calculate the angles between the camera and the ship.
-            angle_yaw = sf::vector2ToAngle(diff);
+            angle_yaw = sf::vector2ToAngle(diff_2D);
             angle_pitch = (atan(camera_position.z / distance_3D)) * (180 / pi);
         }
         /* else{
@@ -166,6 +164,9 @@ void CinematicViewScreen::update(float delta)
         // Point the camera.
         camera_yaw = angle_yaw;
         camera_pitch = angle_pitch;
+    } else {
+        // Hide the target-of-target camera lock button.
+        camera_lock_tot_toggle->hide();
     }
 
 #ifdef DEBUG
@@ -185,10 +186,11 @@ void CinematicViewScreen::onKey(sf::Keyboard::Key key, int unicode)
     {
     // Toggle UI visibility with the H key.
     case sf::Keyboard::H:
-        if (camera_lock_toggle->isVisible() || camera_lock_selector->isVisible())
+        if (camera_lock_toggle->isVisible() || camera_lock_selector->isVisible() || camera_lock_tot_toggle->isVisible())
         {
             camera_lock_toggle->hide();
             camera_lock_selector->hide();
+            camera_lock_tot_toggle->hide();
         }else{
             camera_lock_toggle->show();
             camera_lock_selector->show();
