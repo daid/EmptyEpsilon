@@ -82,7 +82,7 @@ void CinematicViewScreen::update(float delta)
     // If lock is enabled and a ship is selected...
     if (camera_lock_toggle->getValue() && target)
     {
-        // const double pi = 3.1415926535897932384626433832795;
+        // M_PI = 3.1415926535897932384626433832795;
         const double pi = M_PI;
 
         // Get the selected ship's current position.
@@ -114,8 +114,33 @@ void CinematicViewScreen::update(float delta)
         // We want the camera to always be less than 1U from the selected ship.
         float camera_distance = 1000.0f;
 
-        // If the ship moves more than 1U from the camera ...
-        if (distance > camera_distance)
+        // Check if our selected ship has a weapons target.
+        P<SpaceObject> target_of_target = target->getTarget();
+
+        // Initialize angles.
+        float angle_yaw;
+        float angle_pitch;
+
+        if (target_of_target)
+        {
+            camera_position.x = target_position_2D.x;
+            camera_position.y = target_position_2D.y;
+            camera_position.z = 100.0f;
+
+            sf::Vector2f tot_position_2D = target_of_target->getPosition();
+            sf::Vector3f tot_position_3D;
+            tot_position_3D.x = tot_position_2D.x;
+            tot_position_3D.y = tot_position_3D.y;
+            tot_position_3D.z = 0;
+            sf::Vector2f tot_diff = tot_position_2D - camera_position_2D;
+            sf::Vector3f tot_diff_3D = tot_position_3D - camera_position;
+            float tot_distance = sf::length(tot_diff);
+            float tot_distance_3D = sf::length(tot_diff_3D);
+
+            angle_yaw = sf::vector2ToAngle(tot_diff);
+            angle_pitch = (atan(camera_position.z / tot_distance_3D)) * (180 / pi);
+        } else if (distance > camera_distance)
+        // If the selected ship moves more than 1U from the camera ...
         {
             // Set a vector 5 degrees to the right of the selected ship's
             // rotation.
@@ -124,9 +149,13 @@ void CinematicViewScreen::update(float delta)
             // Plot a destination on that vector at a distance of 1U.
             sf::Vector2f camera_destination = target_position_2D + camera_rotation_vector * camera_distance;
 
-            // Move the camera's X and Y coordinates to this vector.
+            // Move the camera's X and Y coordinates to this destination.
             camera_position.x = camera_destination.x;
             camera_position.y = camera_destination.y;
+        } else {
+            // Calculate the angles between the camera and the ship.
+            angle_yaw = sf::vector2ToAngle(diff);
+            angle_pitch = (atan(camera_position.z / distance_3D)) * (180 / pi);
         }
         /* else{
             // Park the camera at a photogenic angle at high speeds.
@@ -134,18 +163,10 @@ void CinematicViewScreen::update(float delta)
             camera_position.y = target_position_2D.y;
         } */
 
-        // Calculate the angles between the camera and the ship.
-        float angle_yaw = sf::vector2ToAngle(diff);
-        float angle_pitch = (atan(camera_position.z / distance_3D)) * (180 / pi);
-
-        // Point the camera at the ship.
+        // Point the camera.
         camera_yaw = angle_yaw;
         camera_pitch = angle_pitch;
     }
-
-    // TODO: If locked player ship has a hostile weapons target...
-    //           Move the camera to rotate around the player ship, pointing at
-    //             the player ship's weapons target.
 
 #ifdef DEBUG
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))

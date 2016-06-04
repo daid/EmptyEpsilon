@@ -13,7 +13,7 @@ class CinematicViewScreen : public GuiCanvas, public Updatable
 {
 private:
     GuiViewport3D* viewport;
-    P<SpaceObject> target;
+    P<PlayerSpaceship> target;
     GuiSelector* camera_lock_selector;
     GuiToggleButton* camera_lock_toggle;
 public:
