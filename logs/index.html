@@ -6,6 +6,7 @@
 <body>
 <canvas id="canvas" style="position: absolute; top: 0; left: 0; margin: 0" width="200" height="100"></canvas>
 <div style="position: absolute; bottom: 0; left: 0; right: 0; margin: auto; width: 500px">
+    <a id="autoplay" href="#" style="color: #fff; text-decoration: none;">Play</a>
     <input id="time_selector" type="range" min="0" max="0" value="0" style="width: 100%; margin: auto;">
 </div>
 <div id="dropzone" style="position: absolute; top:0; bottom: 0; left: 0; right: 0; margin: auto; width: 300px; height: 100px; background-color: #8080FF">
@@ -306,7 +307,9 @@ function formatTime(time)
 
 function autoPlay()
 {
-    $("#time_selector").val($("#time_selector").val() + 1);
+    timeValue = parseInt($("#time_selector").val());
+    timeValue += 1;
+    $("#time_selector").val(timeValue);
     canvas.update();
 }
 
@@ -329,10 +332,30 @@ $().ready(function()
         }
     });
     canvas = new Canvas();
-    
-    $("#time_selector").change(function(e) { canvas.update(); })
-    
-    setTimeout(autoPlay, 100);
+
+    // Update the canvas when the time selector is modified.
+    $("#time_selector").on("input change", function(e) { canvas.update(); });
+
+    // Track the play/pause button.
+    var isAutoplaying = false;
+
+    $("#autoplay").on("click", function(e) {
+        isAutoplaying = !isAutoplaying;
+    });
+
+    // On an interval when autoplay is enabled, increment the time controller.
+    var loopAutoplay = setInterval(function() {
+        if (isAutoplaying)
+        {
+            autoPlay();
+        }
+        if (parseInt($("#time_selector").val()) >= parseInt($("#time_selector").attr("max")))
+        {
+            isAutoplaying = false;
+            $("#time_selector").val("0");
+            canvas.update();
+        }
+    }, 100);
 });
 </script>
 </body>
