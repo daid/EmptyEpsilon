@@ -173,7 +173,7 @@ class Canvas
                 ctx.fill();
                 ctx.globalAlpha = 1.0
                 ctx.fillStyle = "#FFFFFF";
-                ctx.fillRect(x, y, 1, 1);
+                ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
             }
             else if (entry.type == "PlayerSpaceship")
             {
@@ -186,32 +186,64 @@ class Canvas
             else if (entry.type == "SpaceStation")
             {
                 ctx.fillStyle = "#AAFFAA";
-                ctx.fillRect(x - 2, y - 2, 5, 5);
+                ctx.fillRect(x - 2, y - 2, Math.max(166 * this._zoom_scale, 5), Math.max(166 * this._zoom_scale, 5));
             }
             else if (entry.type == "Asteroid")
             {
                 ctx.fillStyle = "#FFC864";
-                ctx.fillRect(x, y, 1, 1);
+                ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
             }
             else if (entry.type == "ScanProbe")
             {
                 ctx.fillStyle = "#60C080";
-                ctx.fillRect(x, y, 1, 1);
+                ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+            }
+            else if (entry.type == "Nuke")
+            {
+                ctx.fillStyle = "#FA0";
+                ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+            }
+            else if (entry.type == "EMP")
+            {
+                ctx.fillStyle = "#0FF";
+                ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+            }
+            else if (entry.type == "HomingMissile")
+            {
+                ctx.fillStyle = "#A00";
+                ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+            }
+            else if (entry.type == "HVLI")
+            {
+                ctx.fillStyle = "#AAA";
+                ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
             }
             else if (entry.type == "VisualAsteroid")
             {
             }
             else if (entry.type == "BeamEffect")
             {
+                var r = 50.0 * this._zoom_scale;
+                ctx.globalAlpha = 0.4
+                ctx.beginPath();
+                ctx.arc(x, y, r, 0, 2 * Math.PI, false);
+                ctx.fillStyle = "#A60";
+                ctx.fill();
             }
             else if (entry.type == "ExplosionEffect")
             {
+                var r = 100.0 * this._zoom_scale;
+                ctx.globalAlpha = 0.4
+                ctx.beginPath();
+                ctx.arc(x, y, r, 0, 2 * Math.PI, false);
+                ctx.fillStyle = "#FF0";
+                ctx.fill();
             }
             else
             {
                 console.debug("Unknown object type: ", entry.type)
                 ctx.fillStyle = "#FF0000";
-                ctx.fillRect(x, y, 2, 2);
+                ctx.fillRect(x, y, Math.max(66 * this._zoom_scale, 2), Math.max(66 * this._zoom_scale, 2));
             }
         }
     }
