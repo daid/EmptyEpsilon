@@ -111,7 +111,9 @@ class Canvas
     
     _mouseWheel(delta)
     {
-        this._zoom_scale *= (1.0 + (delta / 1000.0));
+        // Cap delta to avoid impossible zoom scales.
+        delta = Math.max(delta, -999.99);
+        this._zoom_scale *= 1.0 + delta / 1000.0;
         this.update();
     }
     
