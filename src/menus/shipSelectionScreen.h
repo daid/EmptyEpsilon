@@ -25,6 +25,7 @@ private:
     GuiToggleButton* window_button;
     GuiSelector* window_angle;
     GuiToggleButton* topdown_button;
+    GuiToggleButton* cinematic_view_button;
     
 public:
     ShipSelectionScreen();
