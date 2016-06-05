@@ -22,6 +22,7 @@ class GameMasterScreen : public GuiCanvas, public Updatable
 {
 private:
     TargetsContainer targets;
+    P<SpaceObject> target;
     GuiRadarView* main_radar;
     GuiOverlay* box_selection_overlay;
     GuiSelector* faction_selector;
@@ -38,6 +39,7 @@ private:
     GuiButton* player_comms_hail;
     GuiButton* ship_tweak_button;
     GuiButton* export_button;
+    GuiSelector* player_ship_selector;
     
     enum EClickAndDragState
     {

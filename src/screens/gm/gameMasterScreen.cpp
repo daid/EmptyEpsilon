@@ -53,6 +53,15 @@ GameMasterScreen::GameMasterScreen()
         global_message_entry->show();
     }))->setPosition(20, -20, ABottomLeft)->setSize(250, 50);
 
+    player_ship_selector = new GuiSelector(this, "PLAYER_SHIP_SELECTOR", [this](int index, string value) {
+        P<SpaceObject> ship = gameGlobalInfo->getPlayerShip(value.toInt());
+        if (ship)
+            target = ship;
+        main_radar->setViewPosition(ship->getPosition());
+        targets.set(ship);
+    });
+    player_ship_selector->setPosition(270, -20, ABottomLeft)->setSize(250, 50);
+
     create_button = new GuiButton(this, "CREATE_OBJECT_BUTTON", "Create...", [this]() {
         object_creation_screen->show();
     });
@@ -164,6 +173,21 @@ void GameMasterScreen::update(float delta)
     bool has_ship = false;
     bool has_cpu_ship = false;
     bool has_player_ship = false;
+
+    // Add and remove entries from the player ship list.
+    for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
+    {
+        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
+        if (ship)
+        {
+            if (player_ship_selector->indexByValue(string(n)) == -1)
+                player_ship_selector->addEntry(ship->getTypeName() + " " + ship->getCallSign(), string(n));
+        }else{
+            if (player_ship_selector->indexByValue(string(n)) != -1)
+                player_ship_selector->removeEntry(player_ship_selector->indexByValue(string(n)));
+        }
+    }
+
     for(P<SpaceObject> obj : targets.getTargets())
     {
         if (P<SpaceShip>(obj))
@@ -175,6 +199,11 @@ void GameMasterScreen::update(float delta)
                 has_player_ship = true;
         }
     }
+    if (player_ship_selector->entryCount() == 0)
+        player_ship_selector->hide();
+    else
+        player_ship_selector->show();
+
     ship_tweak_button->setVisible(has_ship);
     order_layout->setVisible(has_cpu_ship);
     gm_script_options->setVisible(!has_cpu_ship);
