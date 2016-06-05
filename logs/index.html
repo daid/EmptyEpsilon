@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <script src="jquery.js"></script>
@@ -5,6 +6,7 @@
 <body>
 <canvas id="canvas" style="position: absolute; top: 0; left: 0; margin: 0" width="200" height="100"></canvas>
 <div style="position: absolute; bottom: 0; left: 0; right: 0; margin: auto; width: 500px">
+    <a id="autoplay" href="#" style="color: #fff; text-decoration: none;">Play</a>
     <input id="time_selector" type="range" min="0" max="0" value="0" style="width: 100%; margin: auto;">
 </div>
 <div id="dropzone" style="position: absolute; top:0; bottom: 0; left: 0; right: 0; margin: auto; width: 300px; height: 100px; background-color: #8080FF">
@@ -110,7 +112,9 @@ class Canvas
     
     _mouseWheel(delta)
     {
-        this._zoom_scale *= (1.0 + (delta / 1000.0));
+        // Cap delta to avoid impossible zoom scales.
+        delta = Math.max(delta, -999.99);
+        this._zoom_scale *= 1.0 + delta / 1000.0;
         this.update();
     }
     
@@ -131,8 +135,13 @@ class Canvas
         var time = $("#time_selector").val();
         
         ctx.fillStyle = "#FFFFFF";
-        ctx.fillText(formatTime(time), 20, 20);
-        
+        var stateTextTime = formatTime(time);
+        var stateTextZoom = "100px = " + (0.1 / this._zoom_scale).toPrecision(3) + "U";
+        var stateTextX = "X: " + this._view_x.toPrecision(6);
+        var stateTextY = "Y: " + this._view_y.toPrecision(6);
+        var stateText = stateTextTime + " / " + stateTextZoom + " / " + stateTextX + " / " + stateTextY;
+        ctx.fillText(stateText, 20, 20);
+
         var entries = log.getEntriesAtTime(time);
         for(var id in entries)
         {
@@ -170,7 +179,7 @@ class Canvas
                 ctx.fill();
                 ctx.globalAlpha = 1.0
                 ctx.fillStyle = "#FFFFFF";
-                ctx.fillRect(x, y, 1, 1);
+                ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
             }
             else if (entry.type == "PlayerSpaceship")
             {
@@ -183,32 +192,64 @@ class Canvas
             else if (entry.type == "SpaceStation")
             {
                 ctx.fillStyle = "#AAFFAA";
-                ctx.fillRect(x - 2, y - 2, 5, 5);
+                ctx.fillRect(x - 2, y - 2, Math.max(166 * this._zoom_scale, 5), Math.max(166 * this._zoom_scale, 5));
             }
             else if (entry.type == "Asteroid")
             {
                 ctx.fillStyle = "#FFC864";
-                ctx.fillRect(x, y, 1, 1);
+                ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
             }
             else if (entry.type == "ScanProbe")
             {
                 ctx.fillStyle = "#60C080";
-                ctx.fillRect(x, y, 1, 1);
+                ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+            }
+            else if (entry.type == "Nuke")
+            {
+                ctx.fillStyle = "#FA0";
+                ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+            }
+            else if (entry.type == "EMP")
+            {
+                ctx.fillStyle = "#0FF";
+                ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+            }
+            else if (entry.type == "HomingMissile")
+            {
+                ctx.fillStyle = "#A00";
+                ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+            }
+            else if (entry.type == "HVLI")
+            {
+                ctx.fillStyle = "#AAA";
+                ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
             }
             else if (entry.type == "VisualAsteroid")
             {
             }
             else if (entry.type == "BeamEffect")
             {
+                var r = 50.0 * this._zoom_scale;
+                ctx.globalAlpha = 0.4
+                ctx.beginPath();
+                ctx.arc(x, y, r, 0, 2 * Math.PI, false);
+                ctx.fillStyle = "#A60";
+                ctx.fill();
             }
             else if (entry.type == "ExplosionEffect")
             {
+                var r = 100.0 * this._zoom_scale;
+                ctx.globalAlpha = 0.4
+                ctx.beginPath();
+                ctx.arc(x, y, r, 0, 2 * Math.PI, false);
+                ctx.fillStyle = "#FF0";
+                ctx.fill();
             }
             else
             {
                 console.debug("Unknown object type: ", entry.type)
                 ctx.fillStyle = "#FF0000";
-                ctx.fillRect(x, y, 2, 2);
+                ctx.fillRect(x, y, Math.max(66 * this._zoom_scale, 2), Math.max(66 * this._zoom_scale, 2));
             }
         }
     }
@@ -281,7 +322,9 @@ function formatTime(time)
 
 function autoPlay()
 {
-    $("#time_selector").val($("#time_selector").val() + 1);
+    timeValue = parseInt($("#time_selector").val());
+    timeValue += 1;
+    $("#time_selector").val(timeValue);
     canvas.update();
 }
 
@@ -304,10 +347,30 @@ $().ready(function()
         }
     });
     canvas = new Canvas();
-    
-    $("#time_selector").change(function(e) { canvas.update(); })
-    
-    setTimeout(autoPlay, 100);
+
+    // Update the canvas when the time selector is modified.
+    $("#time_selector").on("input change", function(e) { canvas.update(); });
+
+    // Track the play/pause button.
+    var isAutoplaying = false;
+
+    $("#autoplay").on("click", function(e) {
+        isAutoplaying = !isAutoplaying;
+    });
+
+    // On an interval when autoplay is enabled, increment the time controller.
+    var loopAutoplay = setInterval(function() {
+        if (isAutoplaying)
+        {
+            autoPlay();
+        }
+        if (parseInt($("#time_selector").val()) >= parseInt($("#time_selector").attr("max")))
+        {
+            isAutoplaying = false;
+            $("#time_selector").val("0");
+            canvas.update();
+        }
+    }, 100);
 });
 </script>
 </body>
