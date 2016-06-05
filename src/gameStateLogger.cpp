@@ -230,6 +230,7 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
     bool has_beam_weapons = false;
     
     json.write("callsign", ship->getCallSign());
+    json.write("faction", ship->getFaction());
     json.write("ship_type", ship->type_name);
     json.write("energy_level", ship->energy_level);
     json.write("hull", ship->hull_strength);

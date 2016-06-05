@@ -215,11 +215,21 @@ class Canvas
     
     drawShip(ctx, x, y, entry)
     {
+        // Use a brighter color for player ships.
+        var fillStyleMagnitude = "A";
         if (entry.type == "PlayerSpaceship")
-            ctx.fillStyle = "#FFFFFF";
+            fillStyleMagnitude = "F";
+
+        // Rudimentary faction ID; would be nice to use the list from factioninfo.lua.
+        if (entry.faction == "Human Navy")
+            ctx.fillStyle = "#0" + fillStyleMagnitude + "0";
+        else if (entry.faction == "Independent")
+            ctx.fillStyle = "#00" + fillStyleMagnitude;
         else
-            ctx.fillStyle = "#AAAAAA";
-        ctx.fillRect(x - 1, y - 1, 3, 3);
+            ctx.fillStyle = "#" + fillStyleMagnitude + "00";
+
+        // Draw the ship rectangle and scale it on zoom.
+        ctx.fillRect(x - Math.max(66 * this._zoom_scale, 2), y - Math.max(66 * this._zoom_scale, 2), Math.max(120 * this._zoom_scale, 3), Math.max(120 * this._zoom_scale, 3));
         
         if (entry.config.beams)
         {
