@@ -95,6 +95,8 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
     if (!isOpen())
         return;
 #ifdef __WIN32__
+    FlushFileBuffers(handle);
+
     DCB dcb;
     memset(&dcb, 0, sizeof(DCB));
     if (!GetCommState(handle, &dcb))
@@ -155,6 +157,8 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
     }
 #endif
 #ifdef __gnu_linux__
+    fsync(handle);
+
     struct termios2 tio;
     ioctl(handle, TCGETS2, &tio);
 
@@ -294,16 +298,29 @@ void SerialPort::send(void* data, int data_size)
     if (!isOpen())
         return;
 #ifdef __WIN32__
-    DWORD written = 0;
-    if (!WriteFile(handle, data, data_size, &written, NULL))
+    while(data_size > 0)
     {
-        COMSTAT comStat;
-        DWORD   dwErrors;
-        ClearCommError(handle, &dwErrors, &comStat);
+        DWORD written = 0;
+        if (!WriteFile(handle, data, data_size, &written, NULL))
+        {
+            COMSTAT comStat;
+            DWORD   dwErrors;
+            ClearCommError(handle, &dwErrors, &comStat);
+            return;
+        }
+        data = ((char*)data) + written;
+        data_size -= written;
     }
 #endif
 #if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
-    write(handle, data, data_size);
+    while(data_size > 0)
+    {
+        int written = write(handle, data, data_size);
+        if (written < 1)
+            return;
+        data = ((char*)data) + written;
+        data_size -= written;
+    }
 #endif
 }
 
