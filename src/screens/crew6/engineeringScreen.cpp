@@ -69,10 +69,12 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
         info.heat_bar->setSize(100, GuiElement::GuiSizeMax);
         info.heat_arrow = new GuiArrow(info.heat_bar, id + "_HEAT_ARROW", 0);
         info.heat_arrow->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        info.heat_icon = new GuiImage(info.heat_bar, "", "gui/icons/status_overheat");
+        info.heat_icon->setColor(colorConfig.overlay_overheating)->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
         info.power_bar = new GuiProgressbar(info.layout, id + "_POWER", 0.0, 3.0, 0.0);
-        info.power_bar->setColor(sf::Color(192, 192, 0))->setSize(100, GuiElement::GuiSizeMax);
+        info.power_bar->setColor(sf::Color(192, 192, 32, 128))->setSize(100, GuiElement::GuiSizeMax);
         info.coolant_bar = new GuiProgressbar(info.layout, id + "_COOLANT", 0.0, 10.0, 0.0);
-        info.coolant_bar->setColor(sf::Color(0, 128, 128))->setSize(100, GuiElement::GuiSizeMax);
+        info.coolant_bar->setColor(sf::Color(32, 128, 128, 128))->setSize(100, GuiElement::GuiSizeMax);
 
         info.layout->moveToBack();
         system_rows.push_back(info);
@@ -147,13 +149,13 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
 
             float health = my_spaceship->systems[n].health;
             if (health < 0.0)
-                info.damage_bar->setValue(-health)->setColor(sf::Color(128, 32, 32));
+                info.damage_bar->setValue(-health)->setColor(sf::Color(128, 32, 32, 192));
             else
-                info.damage_bar->setValue(health)->setColor(sf::Color(64, 128 * health, 64 * health));
+                info.damage_bar->setValue(health)->setColor(sf::Color(64, 128 * health, 64 * health, 192));
             info.damage_label->setText(string(int(health * 100)) + "%");
 
             float heat = my_spaceship->systems[n].heat_level;
-            info.heat_bar->setValue(heat)->setColor(sf::Color(128, 128 * (1.0 - heat), 0));
+            info.heat_bar->setValue(heat)->setColor(sf::Color(128, 32 + 96 * (1.0 - heat), 32, 192));
             float heating_diff = my_spaceship->systems[n].getHeatingDelta();
             if (heating_diff > 0)
                 info.heat_arrow->setAngle(90);
@@ -161,6 +163,10 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
                 info.heat_arrow->setAngle(-90);
             info.heat_arrow->setVisible(heat > 0);
             info.heat_arrow->setColor(sf::Color(255, 255, 255, std::min(255, int(255 * fabs(heating_diff)))));
+            if (heat > 0.9 && fmod(engine->getElapsedTime(), 0.5) < 0.25)
+                info.heat_icon->show();
+            else
+                info.heat_icon->hide();
 
             info.power_bar->setValue(my_spaceship->systems[n].power_level);
             info.coolant_bar->setValue(my_spaceship->systems[n].coolant_level);

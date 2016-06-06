@@ -8,6 +8,7 @@ class GuiKeyValueDisplay;
 class GuiLabel;
 class GuiSlider;
 class GuiAutoLayout;
+class GuiImage;
 class GuiArrow;
 class GuiToggleButton;
 class GuiProgressbar;
@@ -33,6 +34,7 @@ private:
         GuiLabel* damage_label;
         GuiProgressbar* heat_bar;
         GuiArrow* heat_arrow;
+        GuiImage* heat_icon;
         GuiProgressbar* power_bar;
         GuiProgressbar* coolant_bar;
     };
