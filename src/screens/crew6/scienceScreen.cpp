@@ -90,6 +90,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     info_type_button->setTextSize(20)->setPosition(0, 0, ATopRight)->setSize(50, GuiElement::GuiSizeMax);
     info_shields = new GuiKeyValueDisplay(sidebar, "SCIENCE_SHIELDS", 0.4, "Shields", "");
     info_shields->setSize(GuiElement::GuiSizeMax, 30);
+    info_hull = new GuiKeyValueDisplay(sidebar, "SCIENCE_HULL", 0.4, "Hull", "");
+    info_hull->setSize(GuiElement::GuiSizeMax, 30);
 
     info_shield_frequency = new GuiFrequencyCurve(sidebar, "SCIENCE_SHIELD_FREQUENCY", false, true);
     info_shield_frequency->setSize(GuiElement::GuiSizeMax, 100);
@@ -199,6 +201,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     info_faction->setValue("-");
     info_type->setValue("-");
     info_shields->setValue("-");
+    info_hull->setValue("-");
     info_shield_frequency->setFrequency(-1)->hide();
     info_beam_frequency->setFrequency(-1)->hide();
     info_description->hide();
@@ -246,6 +249,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                 info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
                 info_type->setValue(ship->getTypeName());
                 info_shields->setValue(ship->getShieldDataString());
+                info_hull->setValue(int(ship->getHull()));
                 info_type_button->show();
             }
             if (ship->getScannedStateFor(my_spaceship) >= SS_FullScan)
@@ -267,6 +271,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             {
                 info_type->setValue(station->template_name);
                 info_shields->setValue(station->getShieldDataString());
+                info_hull->setValue(int(station->getHull()));
             }
         }
         string description = obj->getDescription();
