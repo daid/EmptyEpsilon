@@ -13,6 +13,7 @@
     #include <asm/termios.h>
     #include <fcntl.h>
     #include <unistd.h>
+    #include <dirent.h>
 #endif
 #if defined(__APPLE__) && defined(__MACH__)
     #include <IOKit/serial/ioss.h>
@@ -448,6 +449,24 @@ std::vector<string> SerialPort::getAvailablePorts()
         RegCloseKey(key);
     }else{
         LOG(ERROR) << "Failed to open registry key for serial port list.";
+    }
+#endif
+#ifdef __gnu_linux__
+    DIR* dir = opendir("/dev/");
+    if (dir)
+    {
+        struct dirent *entry;
+        while ((entry = readdir(dir)) != nullptr)
+        {
+            string filename = entry->d_name;
+            if (!filename.startswith("tty"))
+                continue;
+            if (filename.startswith("ttyACM"))
+                names.push_back(filename);
+            if (filename.startswith("ttyUSB"))
+                names.push_back(filename);
+        }
+        closedir(dir);
     }
 #endif
     return names;
