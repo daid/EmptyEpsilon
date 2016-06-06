@@ -4,7 +4,9 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "script.h"
 #include "GMScriptCallback.h"
+#include "gameStateLogger.h"
 
+class GameStateLogger;
 class GameGlobalInfo;
 extern P<GameGlobalInfo> gameGlobalInfo;
 
@@ -33,6 +35,7 @@ enum EScanningComplexity
 
 class GameGlobalInfo : public MultiplayerObject, public Updatable
 {
+    P<GameStateLogger> state_logger;
 public:
     /*!
      * \brief Maximum number of player ships.
