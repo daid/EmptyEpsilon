@@ -3,6 +3,7 @@
 #include "gameGlobalInfo.h"
 #include "gameStateLogger.h"
 #include "main.h"
+#include "preferenceManager.h"
 
 EpsilonServer::EpsilonServer()
 : GameServer("Server", VERSION_NUMBER)
@@ -15,8 +16,11 @@ EpsilonServer::EpsilonServer()
     for(unsigned int n=0; n<factionInfo.size(); n++)
         factionInfo[n]->reset();
 
-    state_logger = new GameStateLogger();
-    state_logger->start();
+    if (PreferencesManager::get("game_logs", "1").toInt())
+    {
+        state_logger = new GameStateLogger();
+        state_logger->start();
+    }
 }
 
 EpsilonServer::~EpsilonServer()
