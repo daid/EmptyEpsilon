@@ -19,6 +19,8 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     ///The other ship needs to be a PlayerSpaceship as well, or this function will do nothing.
     ///This can be used in scenarios to change the ship the crew if flying in.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, transferPlayersToShip);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, transferPlayersAtPositionToShip);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, hasPlayerAtPosition);
 
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsInactive);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsOpening);
@@ -615,6 +617,31 @@ void PlayerSpaceship::transferPlayersToShip(P<PlayerSpaceship> other_ship)
             i->ship_id = other_ship->getMultiplayerId();
         }
     }
+}
+
+void PlayerSpaceship::transferPlayersAtPositionToShip(ECrewPosition position, P<PlayerSpaceship> other_ship)
+{
+    if (!other_ship)
+        return;
+    foreach(PlayerInfo, i, player_info_list)
+    {
+        if (i->ship_id == getMultiplayerId() && i->crew_position[position])
+        {
+            i->ship_id = other_ship->getMultiplayerId();
+        }
+    }
+}
+
+bool PlayerSpaceship::hasPlayerAtPosition(ECrewPosition position)
+{
+    foreach(PlayerInfo, i, player_info_list)
+    {
+        if (i->ship_id == getMultiplayerId() && i->crew_position[position])
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 void PlayerSpaceship::setCommsMessage(string message)

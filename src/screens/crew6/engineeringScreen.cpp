@@ -51,7 +51,6 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
             }
             selected_system = ESystem(n);
             power_slider->enable();
-            coolant_slider->enable();
             if (my_spaceship)
             {
                 power_slider->setValue(my_spaceship->systems[n].power_request);
@@ -178,6 +177,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
             ShipSystem& system = my_spaceship->systems[selected_system];
             power_label->setText("Power: " + string(int(system.power_level * 100)) + "%/" + string(int(system.power_request * 100)) + "%");
             coolant_label->setText("Coolant: " + string(int(system.coolant_level / PlayerSpaceship::max_coolant * 100)) + "%/" + string(int(system.coolant_request / PlayerSpaceship::max_coolant * 100)) + "%");
+            coolant_slider->setEnable(!my_spaceship->auto_coolant_enabled);
             
             system_effects_index = 0;
             float effectiveness = my_spaceship->getSystemEffectiveness(selected_system);

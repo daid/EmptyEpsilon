@@ -182,6 +182,8 @@ public:
     const std::vector<ShipLogEntry>& getShipsLog() const;
     
     void transferPlayersToShip(P<PlayerSpaceship> other_ship);
+    void transferPlayersAtPositionToShip(ECrewPosition position, P<PlayerSpaceship> other_ship);
+    bool hasPlayerAtPosition(ECrewPosition position);
 
     virtual bool getShieldsActive() override { return shields_active; }
     void setShieldsActive(bool active) { shields_active = active; }
