@@ -173,6 +173,7 @@ public:
     virtual void update(float delta);
     virtual float getShieldRechargeRate(int shield_index) override;
     virtual float getShieldDamageFactor(DamageInfo& info, int shield_index) override;
+    float getJumpDriveRechargeRate() { return Tween<float>::linear(getSystemEffectiveness(SYS_JumpDrive), 0.0, 1.0, -0.25, 1.0); }
 
     /*!
      * Check if the ship can be targeted.

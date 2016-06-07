@@ -428,7 +428,7 @@ void SpaceShip::update(float delta)
     }else{
         if (has_jump_drive)
         {
-            float f = Tween<float>::linear(getSystemEffectiveness(SYS_JumpDrive), 0.0, 1.0, -0.25, 1.0);
+            float f = getJumpDriveRechargeRate();
             if (f > 0)
             {
                 if (jump_drive_charge < jump_drive_max_distance)
@@ -510,7 +510,7 @@ void SpaceShip::update(float delta)
         }
     }else if (combat_maneuver_charge < 1.0)
     {
-        combat_maneuver_charge += (delta / combat_maneuver_charge_time) * getSystemEffectiveness(SYS_Maneuver);
+        combat_maneuver_charge += (delta / combat_maneuver_charge_time) * (getSystemEffectiveness(SYS_Maneuver) + getSystemEffectiveness(SYS_Impulse)) / 2.0;
         if (combat_maneuver_charge > 1.0)
             combat_maneuver_charge = 1.0;
     }

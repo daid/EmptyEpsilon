@@ -39,7 +39,12 @@ private:
         GuiProgressbar* coolant_bar;
     };
     std::vector<SystemRow> system_rows;
+    GuiAutoLayout* system_effects_container;
+    std::vector<GuiKeyValueDisplay*> system_effects;
+    unsigned int system_effects_index;
     ESystem selected_system;
+    
+    void addSystemEffect(string key, string value);
 public:
     EngineeringScreen(GuiContainer* owner);
     
