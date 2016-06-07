@@ -3,11 +3,8 @@
 
 #include "engine.h"
 
-class GameStateLogger;
-
 class EpsilonServer : public GameServer
 {
-    P<GameStateLogger> state_logger;
 public:
     EpsilonServer();
     virtual ~EpsilonServer();
