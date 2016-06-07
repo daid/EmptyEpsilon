@@ -70,6 +70,9 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     ///Set the amount of crew members available in the engineering repair screen.
     ///This adds new crew at random locations when new crew members need to be created.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setRepairCrewCount);
+    ///Function to set automatic coolant distribution. This will set the amount of coolant propotional to the amount of heat in that system.
+    /// Can be used to make ships that requires less player intaction to operate, especially in combination with the AutoRepair option.
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setAutoCoolant);
 }
 
 static float system_power_user_factor[] = {
@@ -149,6 +152,7 @@ PlayerSpaceship::PlayerSpaceship()
     comms_open_delay = 0.0;
     shield_calibration_delay = 0.0;
     auto_repair_enabled = false;
+    auto_coolant_enabled = false;
     activate_self_destruct = false;
     self_destruct_countdown = 0.0;
     scanning_delay = 0.0;
@@ -179,6 +183,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&shields_active);
     registerMemberReplication(&shield_calibration_delay, 0.5);
     registerMemberReplication(&auto_repair_enabled);
+    registerMemberReplication(&auto_coolant_enabled);
     registerMemberReplication(&beam_system_target);
     registerMemberReplication(&comms_state);
     registerMemberReplication(&comms_open_delay, 1.0);
@@ -271,6 +276,24 @@ void PlayerSpaceship::update(float delta)
         }
     }else{
         scan_probe_recharge = 0.0;
+    }
+    
+    if (auto_coolant_enabled)
+    {
+        float total_heat = 0.0;
+        for(int n=0; n<SYS_COUNT; n++)
+        {
+            if (!hasSystem(ESystem(n))) continue;
+            total_heat += systems[n].heat_level;
+        }
+        if (total_heat > 0.0)
+        {
+            for(int n=0; n<SYS_COUNT; n++)
+            {
+                if (!hasSystem(ESystem(n))) continue;
+                systems[n].coolant_request = max_coolant * systems[n].heat_level / total_heat;
+            }
+        }
     }
 
     if (game_server)
