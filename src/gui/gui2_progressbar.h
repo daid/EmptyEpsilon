@@ -19,6 +19,7 @@ public:
     virtual void onDraw(sf::RenderTarget& window);
 
     GuiProgressbar* setValue(float value);
+    GuiProgressbar* setRange(float min, float max);
     GuiProgressbar* setText(string text);
     GuiProgressbar* setColor(sf::Color color);
     GuiProgressbar* setDrawBackground(bool drawBackground);

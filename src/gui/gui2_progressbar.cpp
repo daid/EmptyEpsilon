@@ -33,6 +33,13 @@ GuiProgressbar* GuiProgressbar::setValue(float value)
     return this;
 }
 
+GuiProgressbar* GuiProgressbar::setRange(float min, float max)
+{
+    this->min = min;
+    this->max = max;
+    return this;
+}
+
 GuiProgressbar* GuiProgressbar::setText(string text)
 {
     this->text = text;

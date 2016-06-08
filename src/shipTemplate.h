@@ -99,6 +99,8 @@ public:
     float combat_maneuver_boost_speed;
     float combat_maneuver_strafe_speed;
     bool has_jump_drive, has_cloaking;
+    float jump_drive_min_distance;
+    float jump_drive_max_distance;
     int weapon_storage[MW_Count];
 
     string radar_trace;
@@ -140,6 +142,7 @@ public:
     void setCombatManeuver(float boost, float strafe);
     void setWarpSpeed(float warp);
     void setJumpDrive(bool enabled);
+    void setJumpDriveRange(float min, float max) { jump_drive_min_distance = min; jump_drive_max_distance = max; }
     void setCloaking(bool enabled);
     void setWeaponStorage(EMissileWeapons weapon, int amount);
     void addRoom(sf::Vector2i position, sf::Vector2i size);

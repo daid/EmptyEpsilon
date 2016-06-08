@@ -33,6 +33,7 @@ public:
     GuiSlider* clearSnapValues();
     GuiSlider* addSnapValue(float value, float range);
     GuiSlider* setValue(float value);
+    GuiSlider* setRange(float min, float max);
     GuiSlider* addOverlay();
     float getValue();
 };

@@ -53,6 +53,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWarpSpeed);
     /// Set if this ship has a jump drive. Example: template:setJumpDrive(true)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDrive);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDriveRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCloaking);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWeaponStorage);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoom);
@@ -93,6 +94,8 @@ ShipTemplate::ShipTemplate()
     combat_maneuver_strafe_speed = 0.0f;
     warp_speed = 0.0;
     has_jump_drive = false;
+    jump_drive_min_distance = 5000.0;
+    jump_drive_max_distance = 50000.0;
     has_cloaking = false;
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = 0;

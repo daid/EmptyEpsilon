@@ -42,6 +42,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setCombatManeuver);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDrive);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDriveRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasWarpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWarpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponArc);
@@ -82,6 +83,8 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     warp_request = 0.0;
     current_warp = 0.0;
     has_jump_drive = true;
+    jump_drive_min_distance = 5000.0;
+    jump_drive_max_distance = 50000.0;
     jump_drive_charge = jump_drive_max_distance;
     jump_distance = 0.0;
     jump_delay = 0.0;
@@ -115,6 +118,8 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&has_jump_drive);
     registerMemberReplication(&jump_drive_charge, 0.5);
     registerMemberReplication(&jump_delay, 0.5);
+    registerMemberReplication(&jump_drive_min_distance);
+    registerMemberReplication(&jump_drive_max_distance);
     registerMemberReplication(&wormhole_alpha, 0.5);
     registerMemberReplication(&weapon_tube_count);
     registerMemberReplication(&target_id);
@@ -195,6 +200,8 @@ void SpaceShip::applyTemplateValues()
     has_warp_drive = ship_template->warp_speed > 0.0;
     warp_speed_per_warp_level = ship_template->warp_speed;
     has_jump_drive = ship_template->has_jump_drive;
+    jump_drive_min_distance = ship_template->jump_drive_min_distance;
+    jump_drive_max_distance = ship_template->jump_drive_max_distance;
     for(int n=0; n<max_weapon_tubes; n++)
     {
         weapon_tube[n].setLoadTimeConfig(ship_template->weapon_tube[n].load_time);
@@ -433,8 +440,8 @@ void SpaceShip::update(float delta)
             {
                 if (jump_drive_charge < jump_drive_max_distance)
                 {
-                    float extra_charge = (delta / jump_drive_charge_time_per_km) * f;
-                    if (useEnergy(extra_charge * jump_drive_energy_per_km_charge))
+                    float extra_charge = (delta / jump_drive_charge_time * jump_drive_max_distance) * f;
+                    if (useEnergy(extra_charge * jump_drive_energy_per_km_charge / 1000.0))
                     {
                         jump_drive_charge += extra_charge;
                         if (jump_drive_charge >= jump_drive_max_distance)
@@ -442,7 +449,7 @@ void SpaceShip::update(float delta)
                     }
                 }
             }else{
-                jump_drive_charge += (delta / jump_drive_charge_time_per_km) * f;
+                jump_drive_charge += (delta / jump_drive_charge_time * jump_drive_max_distance) * f;
                 if (jump_drive_charge < 0.0f)
                     jump_drive_charge = 0.0f;
             }
@@ -561,7 +568,7 @@ void SpaceShip::executeJump(float distance)
         return;
 
     distance = (distance * f) + (distance * (1.0 - f) * random(0.5, 1.5));
-    sf::Vector2f target_position = getPosition() + sf::vector2FromAngle(getRotation()) * distance * 1000.0f;
+    sf::Vector2f target_position = getPosition() + sf::vector2FromAngle(getRotation()) * distance;
     if (WarpJammer::isWarpJammed(target_position))
         target_position = WarpJammer::getFirstNoneJammedPosition(getPosition(), target_position);
     setPosition(target_position);

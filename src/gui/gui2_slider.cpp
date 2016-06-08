@@ -181,6 +181,14 @@ GuiSlider* GuiSlider::setValue(float value)
     return this;
 }
 
+GuiSlider* GuiSlider::setRange(float min, float max)
+{
+    this->min_value = min;
+    this->max_value = max;
+    setValue(this->value);
+    return this;
+}
+
 GuiSlider* GuiSlider::addOverlay()
 {
     if (!overlay_label)

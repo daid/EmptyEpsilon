@@ -49,9 +49,7 @@ public:
     constexpr static float combat_maneuver_strafe_max_time = 3.0f; /*< Amount of time we can strafe with a fully charged combat maneuver system */
     constexpr static float warp_charge_time = 4.0f;
     constexpr static float warp_decharge_time = 2.0f;
-    constexpr static float jump_drive_charge_time_per_km = 2.0;
-    constexpr static float jump_drive_min_distance = 5.0;
-    constexpr static float jump_drive_max_distance = 50.0;
+    constexpr static float jump_drive_charge_time = 90.0;   /*<Total charge time for the jump drive after a max range jump */
     constexpr static float jump_drive_energy_per_km_charge = 4.0f;
     constexpr static float jump_drive_heat_per_jump = 0.35;
     constexpr static float heat_per_combat_maneuver_boost = 0.2;
@@ -131,6 +129,8 @@ public:
     float jump_drive_charge; //[output]
     float jump_distance;     //[output]
     float jump_delay;        //[output]
+    float jump_drive_min_distance; //[config]
+    float jump_drive_max_distance; //[config]
     float wormhole_alpha;    //Used for displaying the Warp-postprocessor
 
     int weapon_storage[MW_Count];
@@ -292,6 +292,7 @@ public:
 
     bool hasJumpDrive() { return has_jump_drive; }
     void setJumpDrive(bool has_jump) { has_jump_drive = has_jump; }
+    void setJumpDriveRange(float min, float max) { jump_drive_min_distance = min; jump_drive_max_distance = max; }
     bool hasWarpDrive() { return has_warp_drive; }
     void setWarpDrive(bool has_warp)
     {
