@@ -126,7 +126,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
         science_radar->setDistance(value);
     });
     zoom_slider->setPosition(-20, -20, ABottomRight)->setSize(250, 50);
-    zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1x", 30);
+    zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 30);
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     if (!gameGlobalInfo->use_beam_shield_frequencies)
