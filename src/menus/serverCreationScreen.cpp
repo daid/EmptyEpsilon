@@ -143,7 +143,7 @@ ServerCreationScreen::ServerCreationScreen()
     GuiPanel* panel = new GuiPanel(right_panel, "SCENARIO_DESCRIPTION_BOX");
     panel->setSize(GuiElement::GuiSizeMax, 200);
     scenario_description = new GuiScrollText(panel, "SCENARIO_DESCRIPTION", "");
-    scenario_description->setTextSize(24)->setMargins(15, 15, 15, 25)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    scenario_description->setTextSize(24)->setMargins(15)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // If the scenario has variations, show and select from them.
     variation_container = new GuiAutoLayout(right_panel, "VARIATION_CONTAINER", GuiAutoLayout::LayoutVerticalTopToBottom);
@@ -161,7 +161,7 @@ ServerCreationScreen::ServerCreationScreen()
     panel = new GuiPanel(variation_container, "VARIATION_DESCRIPTION_BOX");
     panel->setSize(GuiElement::GuiSizeMax, 150);
     variation_description = new GuiScrollText(panel, "VARIATION_DESCRIPTION", "");
-    variation_description->setTextSize(24)->setMargins(15, 15, 15, 25)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    variation_description->setTextSize(24)->setMargins(15)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Buttons beneath the columns.
     // Close server button.

@@ -7,6 +7,7 @@
 #include "screenComponents/radarView.h"
 #include "screenComponents/openCommsButton.h"
 #include "screenComponents/commsOverlay.h"
+#include "screenComponents/shipsLogControl.h"
 
 #include "gui/gui2_autolayout.h"
 #include "gui/gui2_keyvaluedisplay.h"
@@ -80,7 +81,7 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     (new GuiSelector(this, "ZOOM_SELECT", [this](int index, string value) {
         float zoom_amount = powf(2.0f, index);
         radar->setDistance(50000.0f / zoom_amount);
-    }))->setOptions({"Zoom: 1x", "Zoom: 2x", "Zoom: 4x", "Zoom: 8x"})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(250, 50);
+    }))->setOptions({"Zoom: 1x", "Zoom: 2x", "Zoom: 4x", "Zoom: 8x"})->setSelectionIndex(0)->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
 
     option_buttons = new GuiAutoLayout(this, "BUTTONS", GuiAutoLayout::LayoutVerticalTopToBottom);
     option_buttons->setPosition(20, 50, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
@@ -113,7 +114,7 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     info_reputation->setSize(GuiElement::GuiSizeMax, 40);
 
     GuiAutoLayout* layout = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutVerticalBottomToTop);
-    layout->setPosition(-20, -20, ABottomRight)->setSize(300, GuiElement::GuiSizeMax);
+    layout->setPosition(-20, -70, ABottomRight)->setSize(300, GuiElement::GuiSizeMax);
     alert_level_button = new GuiToggleButton(layout, "", "Alert level", [this](bool value)
     {
         for(GuiButton* button : alert_level_buttons)
@@ -136,6 +137,8 @@ RelayScreen::RelayScreen(GuiContainer* owner)
         alert_button->setSize(GuiElement::GuiSizeMax, 50);
         alert_level_buttons.push_back(alert_button);
     }
+
+    new ShipsLog(this);
 
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }

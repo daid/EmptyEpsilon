@@ -1,9 +1,9 @@
 #ifndef OPERATIONS_SCREEN_H
 #define OPERATIONS_SCREEN_H
 
-#include "screens/crew6/scienceScreen.h"
+#include "gui/gui2_overlay.h"
 
-class OperationScreen : public ScienceScreen
+class OperationScreen : public GuiOverlay
 {
 public:
     OperationScreen(GuiContainer* owner);

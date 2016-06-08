@@ -18,7 +18,7 @@ class DatabaseViewComponent;
 
 class ScienceScreen : public GuiOverlay
 {
-protected:
+public:
     GuiElement* radar_view;
     DatabaseViewComponent* database_view;
 

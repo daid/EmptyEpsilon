@@ -152,7 +152,7 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new DatabaseScreen(screen), getCrewPositionName(databaseView), getCrewPositionIcon(databaseView));
         
         //Ship log screen, if you have comms, you have ships log.
-        if (crew_position[relayOfficer] || crew_position[operationsOfficer] || crew_position[singlePilot])
+        if (crew_position[singlePilot])
             screen->addStationTab(new ShipLogScreen(screen), "Ships log", "");
         
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(screen, "SELF_DESTRUCT_ENTRY");

@@ -124,6 +124,7 @@ set(SOURCES
 	src/screenComponents/signalQualityIndicator.cpp
 	src/screenComponents/mainScreenControls.cpp
 	src/screenComponents/databaseView.cpp
+	src/screenComponents/shipsLogControl.cpp
 	src/gui/colorConfig.cpp
 	src/gui/mouseRenderer.cpp
 	src/gui/scriptError.cpp
