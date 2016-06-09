@@ -57,9 +57,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     );
     new RawScannerDataRadarOverlay(probe_radar, "", 5000);
 
-
     GuiAutoLayout* sidebar = new GuiAutoLayout(radar_view, "SIDE_BAR", GuiAutoLayout::LayoutVerticalTopToBottom);
-    sidebar->setPosition(-20, 100, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    sidebar->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiScanTargetButton(sidebar, "SCAN_BUTTON", &targets))->setSize(GuiElement::GuiSizeMax, 50);
 
     info_callsign = new GuiKeyValueDisplay(sidebar, "SCIENCE_CALLSIGN", 0.4, "Callsign", "");
@@ -75,7 +74,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
     info_type = new GuiKeyValueDisplay(sidebar, "SCIENCE_TYPE", 0.4, "Type", "");
     info_type->setSize(GuiElement::GuiSizeMax, 30);
-    info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", "Data", [this]() {
+    info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", "DB", [this]() {
         P<SpaceShip> ship = targets.get();
         if (ship)
         {
@@ -87,16 +86,16 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
             }
         }
     });
-    info_type_button->setTextSize(20)->setPosition(0, 0, ATopRight)->setSize(50, GuiElement::GuiSizeMax);
+    info_type_button->setTextSize(20)->setPosition(0, 1, ATopRight)->setSize(50, 28);
     info_shields = new GuiKeyValueDisplay(sidebar, "SCIENCE_SHIELDS", 0.4, "Shields", "");
     info_shields->setSize(GuiElement::GuiSizeMax, 30);
     info_hull = new GuiKeyValueDisplay(sidebar, "SCIENCE_HULL", 0.4, "Hull", "");
     info_hull->setSize(GuiElement::GuiSizeMax, 30);
 
     info_shield_frequency = new GuiFrequencyCurve(sidebar, "SCIENCE_SHIELD_FREQUENCY", false, true);
-    info_shield_frequency->setSize(GuiElement::GuiSizeMax, 100);
+    info_shield_frequency->setSize(GuiElement::GuiSizeMax, 75);
     info_beam_frequency = new GuiFrequencyCurve(sidebar, "SCIENCE_SHIELD_FREQUENCY", true, false);
-    info_beam_frequency->setSize(GuiElement::GuiSizeMax, 100);
+    info_beam_frequency->setSize(GuiElement::GuiSizeMax, 75);
 
     probe_view_button = new GuiToggleButton(radar_view, "PROBE_VIEW", "Probe View", [this](bool value){
         P<ScanProbe> probe;
