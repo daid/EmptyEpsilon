@@ -6,8 +6,8 @@
 
 #include "gui/gui2_label.h"
 
-AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_main_screen, int ship_index)
-: crew_position(crew_position), control_main_screen(control_main_screen), ship_index(ship_index)
+AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_main_screen, string ship_filter)
+: crew_position(crew_position), control_main_screen(control_main_screen)
 {
     scanner = new ServerScanner(VERSION_NUMBER);
     scanner->scanLocalNetwork();
@@ -20,6 +20,20 @@ AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_m
         position_name = getCrewPositionName(crew_position);
 
     (new GuiLabel(this, "POSITION", position_name, 50))->setPosition(0, 400, ATopCenter)->setSize(0, 30);
+    
+    for(string filter : ship_filter.split(";"))
+    {
+        std::vector<string> key_value = filter.split("=", 1);
+        string key = key_value[0].strip().lower();
+        if (key.length() < 1)
+            continue;
+
+        if (key_value.size() == 1)
+            ship_filters[key] = "1";
+        else if (key_value.size() == 2)
+            ship_filters[key] = key_value[1].strip();
+        LOG(INFO) << "Auto connect filter: " << key << " = " << ship_filters[key];
+    }
 }
 
 AutoConnectScreen::~AutoConnectScreen()
@@ -68,13 +82,12 @@ void AutoConnectScreen::update(float delta)
                     status_label->setText("Waiting for ship...");
                     if (!my_spaceship)
                     {
-                        if (ship_index >= 0 && ship_index < GameGlobalInfo::max_player_ships)
+                        for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
                         {
-                            checkForPlayerShip(ship_index);
-                        }else{
-                            for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
+                            if (isValidShip(n))
                             {
-                                checkForPlayerShip(n);
+                                connectToShip(n);
+                                break;
                             }
                         }
                     }else{
@@ -93,28 +106,60 @@ void AutoConnectScreen::update(float delta)
     }
 }
 
-void AutoConnectScreen::checkForPlayerShip(int index)
+bool AutoConnectScreen::isValidShip(int index)
 {
     P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(index);
-    if (ship && ship->ship_template)
+
+    if (!ship || !ship->ship_template)
+        return false;
+
+    for(auto it : ship_filters)
     {
-        int cnt = 0;
-        foreach(PlayerInfo, i, player_info_list)
+        if (it.first == "solo")
         {
-            if (i->ship_id == ship->getMultiplayerId())
+            int crew_at_position = 0;
+            foreach(PlayerInfo, i, player_info_list)
             {
-                if (crew_position != max_crew_positions && i->crew_position[crew_position])
-                    cnt++;
+                if (i->ship_id == ship->getMultiplayerId())
+                {
+                    if (crew_position != max_crew_positions && i->crew_position[crew_position])
+                        crew_at_position++;
+                }
             }
+            if (crew_at_position > 0)
+                return false;
         }
-        if (cnt == 0)
+        else if (it.first == "faction")
         {
-            if (crew_position != max_crew_positions)
-            {
-                my_player_info->commandSetCrewPosition(crew_position, true);
-                my_player_info->commandSetMainScreenControl(control_main_screen);
-            }
-            my_player_info->commandSetShipId(ship->getMultiplayerId());
+            if (ship->getFactionId() != FactionInfo::findFactionId(it.second))
+                return false;
+        }
+        else if (it.first == "callsign")
+        {
+            if (ship->getCallSign().lower() != it.second.lower())
+                return false;
+        }
+        else if (it.first == "type")
+        {
+            if (ship->getTypeName().lower() != it.second.lower())
+                return false;
+        }
+        else
+        {
+            LOG(WARNING) << "Unknown ship filter: " << it.first << " = " << it.second;
         }
     }
+    return true;
+}
+
+void AutoConnectScreen::connectToShip(int index)
+{
+    P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(index);
+
+    if (crew_position != max_crew_positions)    //If we are not the main screen, setup the right crew position.
+    {
+        my_player_info->commandSetCrewPosition(crew_position, true);
+        my_player_info->commandSetMainScreenControl(control_main_screen);
+    }
+    my_player_info->commandSetShipId(ship->getMultiplayerId());
 }

@@ -12,17 +12,18 @@ class AutoConnectScreen : public GuiCanvas, public Updatable
     sf::IpAddress connect_to_address;
     ECrewPosition crew_position;
     bool control_main_screen;
-    int ship_index;
+    std::map<string, string> ship_filters;
     
     GuiLabel* status_label;
 public:
-    AutoConnectScreen(ECrewPosition crew_position, bool control_main_screen, int ship_index);
+    AutoConnectScreen(ECrewPosition crew_position, bool control_main_screen, string ship_filter);
     virtual ~AutoConnectScreen();
     
     virtual void update(float delta);
 
 private:
-    void checkForPlayerShip(int index);
+    bool isValidShip(int index);
+    void connectToShip(int index);
 };
 
 #endif//AUTO_CONNECT_SCREEN_H
