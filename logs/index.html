@@ -286,7 +286,7 @@
 
                     this._view_x = 0;
                     this._view_y = 0;
-                    this._zoom_scale = 100.0 / 20000.0; //20U = 100pixels default zoom.
+                    this._zoom_scale = 100.0 / 20000.0; // 20U = 100 pixels at default zoom.
                     this.showCallsigns = false;
 
                     this.update()
@@ -332,9 +332,9 @@
                     this._canvas[0].height = h;
 
                     // Cap the zoom scales to reasonable levels.
-                    if (this._zoom_scale > 1.25)
+                    if (this._zoom_scale > 1.25) // 100px = 0.08U
                         this._zoom_scale = 1.25;
-                    else if (this._zoom_scale < 0.000333)
+                    else if (this._zoom_scale < 0.000333) // 100px = 300U
                         this._zoom_scale = 0.000333;
 
                     var ctx = this._canvas[0].getContext("2d");
@@ -345,6 +345,8 @@
                         return
 
                     var time = $("#time_selector").val();
+
+                    this.drawGrid(ctx, this._view_x, this._view_y, w, h, 20000.0, 1000000.0, "#00A");
 
                     ctx.fillStyle = "#FFFFFF";
                     var stateTextTime = formatTime(time);
@@ -481,6 +483,43 @@
                             console.debug("Unknown object type: ", entry.type)
                             ctx.fillStyle = "#FF0000";
                             ctx.fillRect(x, y, Math.max(66 * this._zoom_scale, 2), Math.max(66 * this._zoom_scale, 2));
+                        }
+                    }
+                }
+
+                drawGrid(ctx, x, y, canvasWidth, canvasHeight, gridPixelSize, gridSize, color)
+                {
+                    ctx.lineWidth = 0.5;
+                    ctx.strokeStyle = color;
+                    ctx.fillStyle = color;
+                    ctx.font = "20px bebas_neue_regularregular, Impact, Arial, sans-serif";
+
+                    var gridlineX;
+                    var gridlineY;
+
+                    // Draw horizontal grid.
+                    for(var i = -gridSize / 2; i <= gridSize / 2; i = i + gridPixelSize)
+                    {
+                        gridlineY = (i - y) * this._zoom_scale + canvasHeight / 2.0;
+                        gridlineX = (i - x) * this._zoom_scale + canvasWidth / 2.0;
+
+                        // Draw the gridline unless it falls off the canvas.
+                        if ((gridlineY > 0) && (gridlineY < canvasHeight))
+                        {
+                            ctx.beginPath();
+                            ctx.moveTo(0, gridlineY);
+                            ctx.lineTo(canvasWidth, gridlineY);
+                            ctx.closePath();
+                            ctx.stroke();
+                        }
+
+                        if ((gridlineX > 0) && (gridlineX < canvasWidth))
+                        {
+                            ctx.beginPath();
+                            ctx.moveTo(gridlineX, 0);
+                            ctx.lineTo(gridlineX, canvasWidth);
+                            ctx.closePath();
+                            ctx.stroke();
                         }
                     }
                 }
