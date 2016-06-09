@@ -9,8 +9,11 @@
 AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_main_screen, string ship_filter)
 : crew_position(crew_position), control_main_screen(control_main_screen)
 {
-    scanner = new ServerScanner(VERSION_NUMBER);
-    scanner->scanLocalNetwork();
+    if (!game_client)
+    {
+        scanner = new ServerScanner(VERSION_NUMBER);
+        scanner->scanLocalNetwork();
+    }
     
     status_label = new GuiLabel(this, "STATUS", "Searching for server...", 50);
     status_label->setPosition(0, 300, ATopCenter)->setSize(0, 50);

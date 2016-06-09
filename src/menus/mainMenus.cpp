@@ -7,7 +7,6 @@
 #include "gameGlobalInfo.h"
 #include "spaceObjects/spaceship.h"
 #include "mouseCalibrator.h"
-#include "menus/shipSelectionScreen.h"
 #include "menus/serverCreationScreen.h"
 #include "menus/optionsMenu.h"
 #include "menus/serverBrowseMenu.h"

@@ -4,7 +4,6 @@
 #include "main.h"
 #include "epsilonServer.h"
 #include "preferenceManager.h"
-#include "menus/shipSelectionScreen.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/selfDestructIndicator.h"
@@ -219,7 +218,7 @@ void ScreenMainScreen::onKey(sf::Keyboard::Key key, int unicode)
     case sf::Keyboard::Home:
         soundManager->stopMusic();
         destroy();
-        new ShipSelectionScreen();
+        returnToShipSelection();
         break;
     case sf::Keyboard::P:
         if (game_server)

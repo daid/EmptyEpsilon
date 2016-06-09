@@ -2,7 +2,6 @@
 #include "epsilonServer.h"
 #include "menus/joinServerMenu.h"
 #include "menus/serverBrowseMenu.h"
-#include "menus/shipSelectionScreen.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "gui/gui2_label.h"
@@ -63,7 +62,7 @@ void JoinServerScreen::update(float delta)
                     my_player_info = i;
             if (my_player_info && gameGlobalInfo)
             {
-                new ShipSelectionScreen();
+                returnToShipSelection();
                 destroy();
             }
         }

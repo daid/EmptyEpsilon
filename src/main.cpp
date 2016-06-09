@@ -9,6 +9,7 @@
 #include "gui/colorConfig.h"
 #include "menus/mainMenus.h"
 #include "menus/autoConnectScreen.h"
+#include "menus/shipSelectionScreen.h"
 #include "mouseCalibrator.h"
 #include "factionInfo.h"
 #include "gameGlobalInfo.h"
@@ -366,5 +367,18 @@ void returnToMainMenu()
         new MouseCalibrator(PreferencesManager::get("touchcalibfile"));
     }else{
         new MainMenu();
+    }
+}
+
+void returnToShipSelection()
+{
+    if (PreferencesManager::get("autoconnect").toInt())
+    {
+        //If we are auto connect, return to the auto connect screen instead of the ship selection. The returnToMainMenu will handle this.
+        returnToMainMenu();
+    }
+    else
+    {
+        new ShipSelectionScreen();
     }
 }
