@@ -118,14 +118,14 @@
               cursor: pointer;
               background: rgba(0, 0, 0, 0.8);
               border-radius: 34px;
-              border: 2px solid #ffffff;
+              border: 2px solid #fff;
             }
             input[type=range]::-webkit-slider-thumb {
-              border: 3px solid #000000;
+              border: 3px solid #000;
               height: 34px;
               width: 34px;
               border-radius: 34px;
-              background: #ffffff;
+              background: #fff;
               cursor: pointer;
               -webkit-appearance: none;
               margin-top: 1px;
@@ -142,11 +142,11 @@
               border: 2px solid rgba(255,255,255,0.5);
             }
             input[type=range]::-moz-range-thumb {
-              border: 3px solid #000000;
+              border: 3px solid #000;
               height: 34px;
               width: 34px;
               border-radius: 34px;
-              background: #ffffff;
+              background: #fff;
               cursor: pointer;
             }
             input[type=range]::-ms-track {
@@ -168,10 +168,10 @@
               border-radius: 34px;
             }
             input[type=range]::-ms-thumb {
-              border: 3px solid #000000;
+              border: 3px solid #000;
               width: 34px;
               border-radius: 34px;
-              background: #ffffff;
+              background: #fff;
               cursor: pointer;
               height: 34px;
             }
@@ -338,7 +338,7 @@
                         this._zoom_scale = 0.000333;
 
                     var ctx = this._canvas[0].getContext("2d");
-                    ctx.fillStyle = "#000000";
+                    ctx.fillStyle = "#141414";
                     ctx.fillRect(0, 0, w, h);
 
                     if (!log)
@@ -346,14 +346,20 @@
 
                     var time = $("#time_selector").val();
 
-                    this.drawGrid(ctx, this._view_x, this._view_y, w, h, 20000.0, 1000000.0, "#00A");
+                    this.drawGrid(ctx, this._view_x, this._view_y, w, h, 20000.0, "#202040");
 
-                    ctx.fillStyle = "#FFFFFF";
+                    ctx.fillStyle = "#FFF";
                     var stateTextTime = formatTime(time);
                     var stateTextZoom = "100px = " + (0.1 / this._zoom_scale).toPrecision(3) + "U";
                     var stateTextX = "X: " + this._view_x.toPrecision(6);
                     var stateTextY = "Y: " + this._view_y.toPrecision(6);
-                    var stateText = stateTextTime + " / " + stateTextZoom + " / " + stateTextX + " / " + stateTextY;
+                    var sectorLetter = String.fromCharCode('F'.charCodeAt() + Math.floor(this._view_y / 20000));
+                    var sectorNumber = 5 + Math.floor(this._view_x / 20000);
+                    if (sectorNumber < 0)
+                        sectorNumber = 100 + sectorNumber;
+                    var stateTextSector = "(" + sectorLetter + sectorNumber + ")";
+                    // TODO: Fix out-of-range sector designations in-game.
+                    var stateText = stateTextTime + " / " + stateTextZoom + " / " + stateTextX + " / " + stateTextY + " " + stateTextSector;
                     ctx.font="20px bebas_neue_regularregular, Impact, Arial, sans-serif";
                     ctx.fillText(stateText, 20, 40);
 
@@ -481,53 +487,63 @@
                         else
                         {
                             console.debug("Unknown object type: ", entry.type)
-                            ctx.fillStyle = "#FF0000";
+                            ctx.fillStyle = "#F00";
                             ctx.fillRect(x, y, Math.max(66 * this._zoom_scale, 2), Math.max(66 * this._zoom_scale, 2));
                         }
                     }
                 }
 
-                drawGrid(ctx, x, y, canvasWidth, canvasHeight, gridPixelSize, gridSize, color)
+                drawGrid(ctx, x, y, canvasWidth, canvasHeight, gridIntervalSize, gridlineColor)
                 {
                     ctx.lineWidth = 0.5;
-                    ctx.strokeStyle = color;
-                    ctx.fillStyle = color;
-                    ctx.font = "20px bebas_neue_regularregular, Impact, Arial, sans-serif";
+                    ctx.strokeStyle = gridlineColor;
 
-                    var gridlineX;
-                    var gridlineY;
+                    var gridlineHoriz;
+                    var gridlineVert;
 
-                    // Draw horizontal grid.
-                    for(var i = -gridSize / 2; i <= gridSize / 2; i = i + gridPixelSize)
+                    // Translate the visible canvas into world coordinates.
+                    var canvasEdges = {
+                        "left":   x - ((canvasWidth / 2) / this._zoom_scale),
+                        "right":  x + ((canvasWidth / 2) / this._zoom_scale),
+                        "top":    y - ((canvasHeight / 2) / this._zoom_scale),
+                        "bottom": y + ((canvasHeight / 2) / this._zoom_scale)
+                    };
+
+                    // Find the first gridlines from the top left.
+                    var gridlineHorizTop = canvasEdges.top - canvasEdges.top % 20000;
+                    var gridlineVertLeft = canvasEdges.left - canvasEdges.left % 20000;
+
+                    // Draw horizontal gridlines until we run out of canvas.
+                    for(var i = gridlineHorizTop; i <= canvasEdges.bottom; i = i + gridIntervalSize)
                     {
-                        gridlineY = (i - y) * this._zoom_scale + canvasHeight / 2.0;
-                        gridlineX = (i - x) * this._zoom_scale + canvasWidth / 2.0;
+                        // Translate screen position to world position.
+                        gridlineHoriz = (i - y) * this._zoom_scale + canvasHeight / 2.0;
 
-                        // Draw the gridline unless it falls off the canvas.
-                        if ((gridlineY > 0) && (gridlineY < canvasHeight))
-                        {
-                            ctx.beginPath();
-                            ctx.moveTo(0, gridlineY);
-                            ctx.lineTo(canvasWidth, gridlineY);
-                            ctx.closePath();
-                            ctx.stroke();
-                        }
+                        ctx.beginPath();
+                        ctx.moveTo(0, gridlineHoriz);
+                        ctx.lineTo(canvasWidth, gridlineHoriz);
+                        ctx.closePath();
+                        ctx.stroke();
+                    }
 
-                        if ((gridlineX > 0) && (gridlineX < canvasWidth))
-                        {
-                            ctx.beginPath();
-                            ctx.moveTo(gridlineX, 0);
-                            ctx.lineTo(gridlineX, canvasWidth);
-                            ctx.closePath();
-                            ctx.stroke();
-                        }
+                    // Draw vertical gridlines until we run out of canvas.
+                    for(var i = gridlineVertLeft; i < canvasEdges.right; i = i + gridIntervalSize)
+                    {
+                        // Translate screen position to world position.
+                        gridlineVert = (i - x) * this._zoom_scale + canvasWidth / 2.0;
+
+                        ctx.beginPath();
+                        ctx.moveTo(gridlineVert, 0);
+                        ctx.lineTo(gridlineVert, canvasHeight);
+                        ctx.closePath();
+                        ctx.stroke();
                     }
                 }
 
                 getFactionColor(faction, lowColor, highColor)
                 {
-                    // Rudimentary faction ID; would be nice to use the list
-                    // from factioninfo.lua. Returns a fillStyle string.
+                    // Rudimentary faction ID; would be nice to use the GM
+                    // colors from factioninfo.lua. Returns a fillStyle string.
                     if (faction == "Human Navy")
                         return "#" + lowColor + highColor + lowColor;
                     else if (faction == "Independent")
@@ -541,7 +557,7 @@
                     // Draw the object's callsign.
                     ctx.fillStyle = this.getFactionColor(entry.faction, lowColor, highColor);
                     ctx.font = fontSize + "px bebas_neue_regularregular, Impact, Arial, sans-serif";
-                    var textDriftAmount = Math.max((textDrift * 33.333) * zoom_scale, textDrift);
+                    var textDriftAmount = Math.max((textDrift * 66.666) * zoom_scale, textDrift);
                     ctx.fillText(entry.callsign, x + textDriftAmount, y + textDriftAmount);
                 }
 
@@ -557,9 +573,9 @@
 
                     if (entry.station_type == "Large Station")
                     {
-                        sizeModifier = 6;
+                        sizeModifier = 12;
                     } else if (entry.station_type == "Medium Station") {
-                        sizeModifier = 4;
+                        sizeModifier = 6;
                     } else {
                         sizeModifier = 3;
                     }
@@ -589,6 +605,7 @@
                     if (this.showCallsigns === true)
                         this.drawCallsign(ctx, x, y, this._zoom_scale, entry, "18", "B8", fillStyleMagnitude, 2);
 
+                    // Draw beam arcs.
                     if (entry.config.beams)
                     {
                         for(var idx=0; idx<entry.config.beams.length; idx++)
@@ -610,7 +627,7 @@
                             ctx.lineTo(x, y);
 
                             ctx.globalAlpha = 0.5
-                            ctx.strokeStyle = "#FF0000";
+                            ctx.strokeStyle = "#F00";
                             ctx.stroke();
                             ctx.globalAlpha = 1.0
                         }
@@ -618,6 +635,7 @@
                 }
             };
 
+            // Load log data into the dropzone div and setup the time selector.
             function loadLog(data)
             {
                 log = new LogData(data)
@@ -630,6 +648,7 @@
                 }
             }
 
+            // Format scenario time into MM:SS.
             function formatTime(time)
             {
                 if (time % 60 < 10)
@@ -637,6 +656,7 @@
                 return Math.floor(time / 60) + ":" + (time % 60)
             }
 
+            // Programmatically advance the time selector.
             function autoPlay(isAutoplaying)
             {
                 timeValue = parseInt($("#time_selector").val());
@@ -655,8 +675,12 @@
             var log;
             var canvas;
 
+            // Main function.
             $().ready(function()
             {
+                // Listen from drag and drop events to load log files.
+                // TODO: Add file picker option for browser/OS combos that
+                // complicate drag-and-drop.
                 document.addEventListener('dragover', function(e) {
                     e.stopPropagation();
                     e.preventDefault();
