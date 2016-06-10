@@ -643,8 +643,8 @@
                     if (this.showCallsigns === true)
                         this.drawCallsign(ctx, x, y, this._zoom_scale, entry, "18", "B8", fillStyleMagnitude, 2);
 
-                    // Draw beam arcs.
-                    if (entry.config.beams)
+                    // Draw beam arcs if the object has them.
+                    if (typeof entry.config !== "undefined" && typeof entry.config.beams != "undefined")
                     {
                         for(var idx=0; idx<entry.config.beams.length; idx++)
                         {
