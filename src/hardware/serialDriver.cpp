@@ -102,7 +102,9 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
     memset(&dcb, 0, sizeof(DCB));
     if (!GetCommState(handle, &dcb))
     {
-        LOG(ERROR) << "GetCommState failed!";
+        DWORD error;
+        ClearCommError(handle, &error, nullptr);
+        LOG(ERROR) << "GetCommState failed!" << error;
         return;
     }
     dcb.BaudRate = baudrate;
@@ -142,7 +144,7 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
     dcb.fNull = false;
 
     //Abort on error. Need to call ClearCommError when an error is returned.
-    dcb.fAbortOnError = true;
+    dcb.fAbortOnError = false;
 
     //Disable all flow control settings, so we can control the DTR and RTS lines manually.
     dcb.fOutxCtsFlow = false;
@@ -154,7 +156,9 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
 
     if(!SetCommState(handle, &dcb))
     {
-        LOG(ERROR) << "SetCommState failed!";
+        DWORD error;
+        ClearCommError(handle, &error, nullptr);
+        LOG(ERROR) << "SetCommState failed!" << error;
     }
 #endif
 #ifdef __gnu_linux__
