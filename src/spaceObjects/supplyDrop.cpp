@@ -72,6 +72,6 @@ string SupplyDrop::getExportLine()
         ret += ":setEnergy(" + string(energy, 0) + ")";
     for(int n=0; n<MW_Count; n++)
         if (weapon_storage[n] > 0)
-            ret += ":setWeaponStorage(" + getMissileWeaponName(EMissileWeapons(n)) + ", " + string(weapon_storage[n]) + ")";
+            ret += ":setWeaponStorage(\"" + getMissileWeaponName(EMissileWeapons(n)) + "\", " + string(weapon_storage[n]) + ")";
     return ret;
 }
