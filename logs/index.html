@@ -426,6 +426,14 @@
                         {
                             this.drawShip(ctx, x, y, entry);
                         }
+                        else if (entry.type == "WarpJammer")
+                        {
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#C89664", 1.0, 4)
+                        }
+                        else if (entry.type == "SupplyDrop")
+                        {
+                            this.drawShip(ctx, x, y, entry);
+                        }
                         else if (entry.type == "SpaceStation")
                         {
                             this.drawStation(ctx, x, y, entry);
@@ -575,21 +583,21 @@
                         return "#" + highColor + lowColor + lowColor;
                 }
 
-                drawSquare(ctx, x, y, zoomScale, fillColor, sizeModifier)
+                drawSquare(ctx, x, y, zoomScale, fillColor, fillAlpha, sizeModifier)
                 {
                     ctx.fillStyle = fillColor;
-                    var sizeMultiplier = sizeModifier * 100 / 3;
+                    var sizeMultiplier = sizeModifier * (100 / 3);
                     var squareSize = Math.max(sizeMultiplier * zoomScale, sizeModifier);
                     ctx.fillRect(x - squareSize / 2, y - squareSize / 2, squareSize, squareSize);
                 }
 
-                drawCircle(ctx, x, y, zoomScale, fillColor, sizeModifier)
+                drawCircle(ctx, x, y, zoomScale, fillColor, fillAlpha, sizeModifier)
                 {
                     ctx.fillStyle = fillColor;
-                    var sizeMultiplier = (sizeModifier / 2) * (100 / 3);
-                    var circleSize = Math.max(sizeMultiplier * zoomScale, sizeModifier / 2);
+                    var sizeMultiplier = sizeModifier * (100 / 3);
+                    var circleSize = Math.max(sizeMultiplier * zoomScale, sizeModifier);
                     ctx.beginPath();
-                    ctx.arc(x - circleSize, y - circleSize, circleSize, 0, 2 * Math.PI, false);
+                    ctx.arc(x, y, circleSize / 2, 0, 2 * Math.PI, false);
                     ctx.fill();
                 }
 
@@ -610,16 +618,18 @@
                     // Draw a circle and scale it by zoom and station type.
                     var sizeModifier;
 
-                    if (entry.station_type == "Large Station")
+                    if (entry.station_type == "Huge Station")
                     {
                         sizeModifier = 12;
+                    } else if (entry.station_type == "Large Station") {
+                        sizeModifier = 9;
                     } else if (entry.station_type == "Medium Station") {
                         sizeModifier = 6;
                     } else {
                         sizeModifier = 3;
                     }
 
-                    this.drawCircle(ctx, x, y, this._zoom_scale, factionColor, sizeModifier);
+                    this.drawCircle(ctx, x, y, this._zoom_scale, factionColor, 1.0, sizeModifier);
 
                     // Draw its callsign.
                     if (this.showCallsigns === true)
@@ -637,7 +647,7 @@
                     var factionColor = this.getFactionColor(entry.faction, "0", fillStyleMagnitude);
 
                     // Draw the ship rectangle and scale it on zoom.
-                    this.drawSquare(ctx, x, y, this._zoom_scale, factionColor, 3);
+                    this.drawSquare(ctx, x, y, this._zoom_scale, factionColor, 1.0, 4);
 
                     // Draw its callsign. Draw player callsigns brighter.
                     if (this.showCallsigns === true)
@@ -743,7 +753,7 @@
                     var reader = new FileReader();
                     if (file)
                     {
-                        reader.onload = function(e2) { 
+                        reader.onload = function(e2) {
                             var contents = e2.target.result;
                             loadLog(contents);
                         };
