@@ -216,7 +216,10 @@
             <input id="time_selector" type="range" min="0" max="0" value="0">
             <button class="ee-button" id="callsigns" unselectable>Callsigns</button>
         </div>
-        <div id="dropzone" unselectable>Drop log file here</div>
+        <div id="dropzone" unselectable>
+            <p style="margin: 0;">Drop log file here</p>
+            <input id="filepicker" type="file">
+        </div>
         <script>
             class LogData
             {
@@ -331,38 +334,41 @@
                     this._canvas[0].width = w;
                     this._canvas[0].height = h;
 
+                    // Warkaround for weird intermittent canvas bug.
+                    if (isNaN(this._view_x))
+                    {
+                        console.error("x was undef: ", this._view_x);
+                        this._view_x = 0;
+                    }
+                    if (isNaN(this._view_y))
+                    {
+                        console.error("y was undef: ", this._view_y);
+                        this._view_y = 0;
+                    }
+
                     // Cap the zoom scales to reasonable levels.
                     if (this._zoom_scale > 1.25) // 100px = 0.08U
                         this._zoom_scale = 1.25;
                     else if (this._zoom_scale < 0.000333) // 100px = 300U
                         this._zoom_scale = 0.000333;
 
+                    // Draw the canvas background.
                     var ctx = this._canvas[0].getContext("2d");
                     ctx.fillStyle = "#141414";
                     ctx.fillRect(0, 0, w, h);
 
+                    // Don't bother if we don't have a log to read.
                     if (!log)
                         return
 
+                    // Set the scenario time to the time selector range input.
                     var time = $("#time_selector").val();
 
+                    // Draw the background grid.
                     this.drawGrid(ctx, this._view_x, this._view_y, w, h, 20000.0, "#202040");
 
-                    ctx.fillStyle = "#FFF";
-                    var stateTextTime = formatTime(time);
-                    var stateTextZoom = "100px = " + (0.1 / this._zoom_scale).toPrecision(3) + "U";
-                    var stateTextX = "X: " + this._view_x.toPrecision(6);
-                    var stateTextY = "Y: " + this._view_y.toPrecision(6);
-                    var sectorLetter = String.fromCharCode('F'.charCodeAt() + Math.floor(this._view_y / 20000));
-                    var sectorNumber = 5 + Math.floor(this._view_x / 20000);
-                    if (sectorNumber < 0)
-                        sectorNumber = 100 + sectorNumber;
-                    var stateTextSector = "(" + sectorLetter + sectorNumber + ")";
-                    // TODO: Fix out-of-range sector designations in-game.
-                    var stateText = stateTextTime + " / " + stateTextZoom + " / " + stateTextX + " / " + stateTextY + " " + stateTextSector;
-                    ctx.font="20px bebas_neue_regularregular, Impact, Arial, sans-serif";
-                    ctx.fillText(stateText, 20, 40);
-
+                    // For each entry at the given time, determine its type and
+                    // draw an appropriate shape.
                     var entries = log.getEntriesAtTime(time);
                     for(var id in entries)
                     {
@@ -417,6 +423,14 @@
                             this.drawShip(ctx, x, y, entry);
                         }
                         else if (entry.type == "CpuShip")
+                        {
+                            this.drawShip(ctx, x, y, entry);
+                        }
+                        else if (entry.type == "WarpJammer")
+                        {
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#C89664", 1.0, 4)
+                        }
+                        else if (entry.type == "SupplyDrop")
                         {
                             this.drawShip(ctx, x, y, entry);
                         }
@@ -491,6 +505,23 @@
                             ctx.fillRect(x, y, Math.max(66 * this._zoom_scale, 2), Math.max(66 * this._zoom_scale, 2));
                         }
                     }
+
+                    // Draw the info line showing the scenario time, scale,
+                    // X/Y coordinates, and sector designation.
+                    ctx.fillStyle = "#FFF";
+                    var stateTextTime = formatTime(time);
+                    var stateTextZoom = "100px = " + (0.1 / this._zoom_scale).toPrecision(3) + "U";
+                    var stateTextX = "X: " + this._view_x.toPrecision(6);
+                    var stateTextY = "Y: " + this._view_y.toPrecision(6);
+                    var sectorLetter = String.fromCharCode('F'.charCodeAt() + Math.floor(this._view_y / 20000));
+                    var sectorNumber = 5 + Math.floor(this._view_x / 20000);
+                    if (sectorNumber < 0)
+                        sectorNumber = 100 + sectorNumber;
+                    var stateTextSector = "(" + sectorLetter + sectorNumber + ")";
+                    // TODO: Fix out-of-range sector designations in-game.
+                    var stateText = stateTextTime + " / " + stateTextZoom + " / " + stateTextX + " / " + stateTextY + " " + stateTextSector;
+                    ctx.font="20px bebas_neue_regularregular, Impact, Arial, sans-serif";
+                    ctx.fillText(stateText, 20, 40);
                 }
 
                 drawGrid(ctx, x, y, canvasWidth, canvasHeight, gridIntervalSize, gridlineColor)
@@ -552,36 +583,53 @@
                         return "#" + highColor + lowColor + lowColor;
                 }
 
-                drawCallsign(ctx, x, y, zoom_scale, entry, fontSize, lowColor, highColor, textDrift)
+                drawSquare(ctx, x, y, zoomScale, fillColor, fillAlpha, sizeModifier)
+                {
+                    ctx.fillStyle = fillColor;
+                    var sizeMultiplier = sizeModifier * (100 / 3);
+                    var squareSize = Math.max(sizeMultiplier * zoomScale, sizeModifier);
+                    ctx.fillRect(x - squareSize / 2, y - squareSize / 2, squareSize, squareSize);
+                }
+
+                drawCircle(ctx, x, y, zoomScale, fillColor, fillAlpha, sizeModifier)
+                {
+                    ctx.fillStyle = fillColor;
+                    var sizeMultiplier = sizeModifier * (100 / 3);
+                    var circleSize = Math.max(sizeMultiplier * zoomScale, sizeModifier);
+                    ctx.beginPath();
+                    ctx.arc(x, y, circleSize / 2, 0, 2 * Math.PI, false);
+                    ctx.fill();
+                }
+
+                drawCallsign(ctx, x, y, zoomScale, entry, fontSize, lowColor, highColor, textDrift)
                 {
                     // Draw the object's callsign.
                     ctx.fillStyle = this.getFactionColor(entry.faction, lowColor, highColor);
                     ctx.font = fontSize + "px bebas_neue_regularregular, Impact, Arial, sans-serif";
-                    var textDriftAmount = Math.max((textDrift * 66.666) * zoom_scale, textDrift);
+                    var textDriftAmount = Math.max((textDrift * 66.666) * zoomScale, textDrift);
                     ctx.fillText(entry.callsign, x + textDriftAmount, y + textDriftAmount);
                 }
 
                 drawStation(ctx, x, y, entry)
                 {
                     // Get its faction color.
-                    ctx.fillStyle = this.getFactionColor(entry.faction, "5", "F");
+                    var factionColor = this.getFactionColor(entry.faction, "5", "F");
 
                     // Draw a circle and scale it by zoom and station type.
-                    ctx.beginPath();
-
                     var sizeModifier;
 
-                    if (entry.station_type == "Large Station")
+                    if (entry.station_type == "Huge Station")
                     {
                         sizeModifier = 12;
+                    } else if (entry.station_type == "Large Station") {
+                        sizeModifier = 9;
                     } else if (entry.station_type == "Medium Station") {
                         sizeModifier = 6;
                     } else {
                         sizeModifier = 3;
                     }
 
-                    ctx.arc(x, y, Math.max((sizeModifier * 66.666) * this._zoom_scale, sizeModifier), 0, 2 * Math.PI, false);
-                    ctx.fill();
+                    this.drawCircle(ctx, x, y, this._zoom_scale, factionColor, 1.0, sizeModifier);
 
                     // Draw its callsign.
                     if (this.showCallsigns === true)
@@ -596,17 +644,17 @@
                         fillStyleMagnitude = "F";
 
                     // Get its faction color.
-                    ctx.fillStyle = this.getFactionColor(entry.faction, "0", fillStyleMagnitude);
+                    var factionColor = this.getFactionColor(entry.faction, "0", fillStyleMagnitude);
 
                     // Draw the ship rectangle and scale it on zoom.
-                    ctx.fillRect(x - Math.max(66 * this._zoom_scale, 2), y - Math.max(66 * this._zoom_scale, 2), Math.max(120 * this._zoom_scale, 3), Math.max(120 * this._zoom_scale, 3));
+                    this.drawSquare(ctx, x, y, this._zoom_scale, factionColor, 1.0, 4);
 
                     // Draw its callsign. Draw player callsigns brighter.
                     if (this.showCallsigns === true)
                         this.drawCallsign(ctx, x, y, this._zoom_scale, entry, "18", "B8", fillStyleMagnitude, 2);
 
-                    // Draw beam arcs.
-                    if (entry.config.beams)
+                    // Draw beam arcs if the object has them.
+                    if (typeof entry.config !== "undefined" && typeof entry.config.beams != "undefined")
                     {
                         for(var idx=0; idx<entry.config.beams.length; idx++)
                         {
@@ -686,8 +734,7 @@
                     e.preventDefault();
                     e.dataTransfer.dropEffect = 'copy';
                 });
-                document.addEventListener('drop', function(e)
-                {
+                document.addEventListener('drop', function(e) {
                     e.stopPropagation();
                     e.preventDefault();
                     var files = e.dataTransfer.files;
@@ -695,6 +742,21 @@
                     {
                         var reader = new FileReader();
                         reader.onload = function(e2) { loadLog(e2.target.result); }
+                        reader.readAsText(file);
+                    }
+                });
+                var filepicker = document.getElementById("filepicker");
+                filepicker.addEventListener('change', function(e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    var file = filepicker.files[0];
+                    var reader = new FileReader();
+                    if (file)
+                    {
+                        reader.onload = function(e2) {
+                            var contents = e2.target.result;
+                            loadLog(contents);
+                        };
                         reader.readAsText(file);
                     }
                 });
