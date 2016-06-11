@@ -13,6 +13,9 @@ private:
     std::vector<GuiButton*> buttons;
     GuiButton* tactical_button;
     GuiButton* long_range_button;
+    GuiButton* show_comms_button;
+    GuiButton* hide_comms_button;
+    bool onscreen_comms_active = false;
 public:
     GuiMainScreenControls(GuiContainer* owner);
 };
