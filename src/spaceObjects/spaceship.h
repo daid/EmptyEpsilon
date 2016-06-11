@@ -13,7 +13,9 @@ enum EMainScreenSetting
     MSS_Left,
     MSS_Right,
     MSS_Tactical,
-    MSS_LongRange
+    MSS_LongRange,
+    MSS_ShowComms,
+    MSS_HideComms
 };
 template<> void convert<EMainScreenSetting>::param(lua_State* L, int& idx, EMainScreenSetting& mss);
 
@@ -44,7 +46,7 @@ class SpaceShip : public ShipTemplateBasedObject
 {
 public:
     constexpr static int max_frequency = 20;
-    constexpr static float combat_maneuver_charge_time = 20.0f; /*< Amount of time it takes to fully charge the combat meneuver system */
+    constexpr static float combat_maneuver_charge_time = 20.0f; /*< Amount of time it takes to fully charge the combat maneuver system */
     constexpr static float combat_maneuver_boost_max_time = 3.0f; /*< Amount of time we can boost with a fully charged combat maneuver system */
     constexpr static float combat_maneuver_strafe_max_time = 3.0f; /*< Amount of time we can strafe with a fully charged combat maneuver system */
     constexpr static float warp_charge_time = 4.0f;
