@@ -58,6 +58,8 @@ GuiShipInternalView* GuiShipInternalView::setShip(P<SpaceShip> ship)
 
 void GuiShipInternalView::onDraw(sf::RenderTarget& window)
 {
+    setShip(my_spaceship);
+        
     if (!viewing_ship && room_container)
     {
         room_container->destroy();

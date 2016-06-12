@@ -4,6 +4,7 @@
 #include "engine.h"
 #include "gui/gui2_canvas.h"
 #include "screenComponents/viewport3d.h"
+#include "threatLevelEstimate.h"
 
 class GuiButton;
 class GuiToggleButton;
@@ -11,6 +12,7 @@ class GuiPanel;
 
 class CrewStationScreen : public GuiCanvas, public Updatable
 {
+    P<ThreatLevelEstimate> threat_estimate;
 private:
     GuiButton* select_station_button;
     GuiPanel* button_strip;

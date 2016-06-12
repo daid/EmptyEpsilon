@@ -15,12 +15,12 @@ public:
     JSONGenerator(FILE* f)
     : f(f), first(true)
     {
+        fprintf(f, "{");
     }
     
     ~JSONGenerator()
     {
-        if (!first)
-            fprintf(f, "}");
+        fprintf(f, "}");
     }
     
     template<typename T> void write(const char* key, const T& value)
@@ -28,7 +28,7 @@ public:
         if (!first)
             fprintf(f, ",\"%s\":", key);
         else
-            fprintf(f, "{\"%s\":", key);
+            fprintf(f, "\"%s\":", key);
         first = false;
         writeValue(value);
     }
@@ -37,7 +37,7 @@ public:
         if (!first)
             fprintf(f, ",\"%s\":", key);
         else
-            fprintf(f, "{\"%s\":", key);
+            fprintf(f, "\"%s\":", key);
         first = false;
         return JSONGenerator(f);
     }
@@ -46,7 +46,7 @@ public:
         if (!first)
             fprintf(f, ",\"%s\":[", key);
         else
-            fprintf(f, "{\"%s\":[", key);
+            fprintf(f, "\"%s\":[", key);
         first = false;
         array_first = true;
     }
@@ -74,6 +74,7 @@ private:
     void writeValue(bool b) { fprintf(f, b ? "true" : "false"); }
     void writeValue(int i) { fprintf(f, "%d", i); }
     void writeValue(float _f) { fprintf(f, "%g", _f); }
+    void writeValue(const char* value) { fprintf(f, "\"%s\"", value); }
     void writeValue(const string& value) { fprintf(f, "\"%s\"", value.c_str()); }
 
     FILE* f;
@@ -214,6 +215,12 @@ void GameStateLogger::writeObjectEntry(JSONGenerator& json, P<SpaceObject> obj)
     if (ship)
     {
         writeShipEntry(json, ship);
+    }else{
+        P<SpaceStation> station = obj;
+        if (station)
+        {
+            writeStationEntry(json, station);
+        }
     }
 }
 
@@ -223,7 +230,8 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
     bool has_beam_weapons = false;
     
     json.write("callsign", ship->getCallSign());
-    json.write("type", ship->type_name);
+    json.write("faction", ship->getFaction());
+    json.write("ship_type", ship->type_name);
     json.write("energy_level", ship->energy_level);
     json.write("hull", ship->hull_strength);
     if (ship->target_id > -1)
@@ -303,7 +311,7 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
                 system.write("power_request", ship->systems[n].power_request);
                 system.write("heat", ship->systems[n].heat_level);
                 system.write("coolant_level", ship->systems[n].coolant_level);
-                system.write("power_request", ship->systems[n].coolant_request);
+                system.write("coolant_request", ship->systems[n].coolant_request);
             }
         }
     }
@@ -419,7 +427,8 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
 void GameStateLogger::writeStationEntry(JSONGenerator& json, P<SpaceStation> station)
 {
     json.write("callsign", station->getCallSign());
-    json.write("type", station->type_name);
+    json.write("faction", station->getFaction());
+    json.write("station_type", station->type_name);
     json.write("hull", station->hull_strength);
     if (station->shield_count > 0)
     {

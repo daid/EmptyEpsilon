@@ -67,6 +67,7 @@ public:
     int scanning_depth;
     float shield_calibration_delay;
     bool auto_repair_enabled;
+    bool auto_coolant_enabled;
     bool shields_active;
 
 private:
@@ -181,9 +182,13 @@ public:
     const std::vector<ShipLogEntry>& getShipsLog() const;
     
     void transferPlayersToShip(P<PlayerSpaceship> other_ship);
+    void transferPlayersAtPositionToShip(ECrewPosition position, P<PlayerSpaceship> other_ship);
+    bool hasPlayerAtPosition(ECrewPosition position);
 
     virtual bool getShieldsActive() override { return shields_active; }
     void setShieldsActive(bool active) { shields_active = active; }
+    
+    void setAutoCoolant(bool active) { auto_coolant_enabled = active; }
 
     int getWaypointCount() { return waypoints.size(); }
     sf::Vector2f getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1]; return sf::Vector2f(0, 0); }

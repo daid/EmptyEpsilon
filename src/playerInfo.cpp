@@ -152,7 +152,7 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new DatabaseScreen(screen), getCrewPositionName(databaseView), getCrewPositionIcon(databaseView));
         
         //Ship log screen, if you have comms, you have ships log.
-        if (crew_position[relayOfficer] || crew_position[operationsOfficer] || crew_position[singlePilot])
+        if (crew_position[singlePilot])
             screen->addStationTab(new ShipLogScreen(screen), "Ships log", "");
         
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(screen, "SELF_DESTRUCT_ENTRY");
@@ -219,4 +219,45 @@ string getCrewPositionIcon(ECrewPosition position)
     case databaseView: return "";
     default: return "ErrUnk: " + string(position);
     }
+}
+
+/* Define script conversion function for the ECrewPosition enum. */
+template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosition& cp)
+{
+    string str = string(luaL_checkstring(L, idx++)).lower();
+
+    //6/5 player crew
+    if (str == "helms" || str == "helmsofficer")
+        cp = helmsOfficer;
+    else if (str == "weapons" || str == "weaponsofficer")
+        cp = weaponsOfficer;
+    else if (str == "engineering" || str == "engineeringsofficer")
+        cp = engineering;
+    else if (str == "science" || str == "scienceofficer")
+        cp = scienceOfficer;
+    else if (str == "relay" || str == "relayofficer")
+        cp = relayOfficer;
+
+    //4/3 player crew
+    else if (str == "tactical" || str == "tacticalofficer")
+        cp = tacticalOfficer;    //helms+weapons-shields
+    else if (str == "engineering+" || str == "engineering+officer" || str == "engineeringadvanced" || str == "engineeringadvancedofficer")
+        cp = engineeringAdvanced;//engineering+shields
+    else if (str == "operations" || str == "operationsofficer")
+        cp = operationsOfficer; //science+comms
+
+    //1 player crew
+    else if (str == "single" || str == "singlePilot")
+        cp = singlePilot;
+
+    //extras
+    else if (str == "damagecontrol")
+        cp = damageControl;
+    else if (str == "powermanagement")
+        cp = powerManagement;
+    else if (str == "database" || str == "databaseview")
+        cp = databaseView;
+    
+    else
+        luaL_error(L, "Unknown value for crew position: %s", str.c_str());
 }

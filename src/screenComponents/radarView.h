@@ -51,6 +51,7 @@ private:
     bool show_ghost_dots;
     bool show_waypoints;
     bool show_target_projection;
+    bool show_missile_tubes;
     bool show_callsigns;
     bool show_heading_indicators;
     bool show_game_master_data;
@@ -81,6 +82,8 @@ public:
     GuiRadarView* disableWaypoints() { show_waypoints = false; return this; }
     GuiRadarView* enableTargetProjections(GuiMissileTubeControls* missile_tube_controls) { show_target_projection = true; this->missile_tube_controls = missile_tube_controls; return this; }
     GuiRadarView* disableTargetProjections() { show_target_projection = false; return this; }
+    GuiRadarView* enableMissileTubeIndicators() { show_missile_tubes = true; return this; }
+    GuiRadarView* disableMissileTubeIndicators() { show_missile_tubes = false; return this; }
     GuiRadarView* enableCallsigns() { show_callsigns = true; return this; }
     GuiRadarView* disableCallsigns() { show_callsigns = false; return this; }
     GuiRadarView* enableHeadingIndicators() { show_heading_indicators = true; return this; }
@@ -117,6 +120,7 @@ private:
     void drawWaypoints(sf::RenderTarget& window);
     void drawRangeIndicators(sf::RenderTarget& window);
     void drawTargetProjections(sf::RenderTarget& window);
+    void drawMissileTubes(sf::RenderTarget& window);
     void drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget& window_alpha);
     void drawObjectsGM(sf::RenderTarget& window);
     void drawTargets(sf::RenderTarget& window);

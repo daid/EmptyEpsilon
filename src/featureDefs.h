@@ -1,6 +1,7 @@
 #ifndef FEATURES_H
 #define FEATURES_H
 
+// Android doesn't bundle 3D models or music.
 #ifndef FEATURE_3D_RENDERING
 
 # ifdef __ANDROID__

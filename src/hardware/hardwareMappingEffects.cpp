@@ -56,8 +56,8 @@ void HardwareMappingEffectGlow::onInactive()
 
 bool HardwareMappingEffectBlink::configure(std::unordered_map<string, string> settings)
 {
+    OPT_SETTING("on_value", on_value, "blink", 1.0);
     OPT_SETTING("off_value", off_value, "blink", 0.0);
-    OPT_SETTING("on_value", off_value, "blink", 1.0);
     REQ_SETTING("on_time", on_time, "blink");
     REQ_SETTING("off_time", off_time, "blink");
     clock.restart();

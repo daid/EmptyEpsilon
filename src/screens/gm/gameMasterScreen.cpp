@@ -3,7 +3,6 @@
 #include "gameMasterScreen.h"
 #include "tweak.h"
 #include "chatDialog.h"
-#include "menus/shipSelectionScreen.h"
 #include "spaceObjects/cpuShip.h"
 #include "spaceObjects/spaceStation.h"
 #include "spaceObjects/wormHole.h"
@@ -53,10 +52,25 @@ GameMasterScreen::GameMasterScreen()
         global_message_entry->show();
     }))->setPosition(20, -20, ABottomLeft)->setSize(250, 50);
 
+    player_ship_selector = new GuiSelector(this, "PLAYER_SHIP_SELECTOR", [this](int index, string value) {
+        P<SpaceObject> ship = gameGlobalInfo->getPlayerShip(value.toInt());
+        if (ship)
+            target = ship;
+        main_radar->setViewPosition(ship->getPosition());
+        targets.set(ship);
+    });
+    player_ship_selector->setPosition(270, -20, ABottomLeft)->setSize(250, 50);
+
     create_button = new GuiButton(this, "CREATE_OBJECT_BUTTON", "Create...", [this]() {
         object_creation_screen->show();
     });
     create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
+
+    export_button = new GuiButton(this, "EXPORT_BUTTON", "Copy scenario", [this]() {
+        Clipboard::setClipboard(getScriptExport());
+    });
+    export_button->setPosition(-20, -20, ABottomRight)->setSize(250, 50);
+
     cancel_create_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
         create_button->show();
         cancel_create_button->hide();
@@ -158,6 +172,21 @@ void GameMasterScreen::update(float delta)
     bool has_ship = false;
     bool has_cpu_ship = false;
     bool has_player_ship = false;
+
+    // Add and remove entries from the player ship list.
+    for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
+    {
+        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
+        if (ship)
+        {
+            if (player_ship_selector->indexByValue(string(n)) == -1)
+                player_ship_selector->addEntry(ship->getTypeName() + " " + ship->getCallSign(), string(n));
+        }else{
+            if (player_ship_selector->indexByValue(string(n)) != -1)
+                player_ship_selector->removeEntry(player_ship_selector->indexByValue(string(n)));
+        }
+    }
+
     for(P<SpaceObject> obj : targets.getTargets())
     {
         if (P<SpaceShip>(obj))
@@ -169,6 +198,11 @@ void GameMasterScreen::update(float delta)
                 has_player_ship = true;
         }
     }
+    if (player_ship_selector->entryCount() == 0)
+        player_ship_selector->hide();
+    else
+        player_ship_selector->show();
+
     ship_tweak_button->setVisible(has_ship);
     order_layout->setVisible(has_cpu_ship);
     gm_script_options->setVisible(!has_cpu_ship);
@@ -394,7 +428,7 @@ void GameMasterScreen::onKey(sf::Keyboard::Key key, int unicode)
     case sf::Keyboard::Escape:
     case sf::Keyboard::Home:
         destroy();
-        new ShipSelectionScreen();
+        returnToShipSelection();
         break;
     case sf::Keyboard::P:
         if (game_server)
@@ -483,6 +517,15 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
     y += 30;
     (new GuiButton(box, "CREATE_MINE", "Mine", [this]() {
         setCreateScript("Mine():setFactionId(" + string(faction_selector->getSelectionIndex()) + ")");
+    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
+    y += 30;
+    // Default supply drop values copied from scripts/supply_drop.lua
+    (new GuiButton(box, "CREATE_SUPPLY_DROP", "Supply Drop", [this]() {
+        setCreateScript("SupplyDrop():setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setEnergy(500):setWeaponStorage('Nuke', 1):setWeaponStorage('Homing', 4):setWeaponStorage('Mine', 2):setWeaponStorage('EMP', 1)");
+    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
+    y += 30;
+    (new GuiButton(box, "CREATE_ASTEROID", "Asteroid", [this]() {
+        setCreateScript("Asteroid()");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
     (new GuiButton(box, "CREATE_BLACKHOLE", "BlackHole", [this]() {

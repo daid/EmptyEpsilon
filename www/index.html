@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="us">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>EmptyEpsilon - HTTP API Sandbox</title>
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <!--<link rel="stylesheet" href="jquery-ui.min.css">-->
+    <style>
+      /*! jQuery UI - v1.11.4 - 2015-03-11
+      * http://jqueryui.com
+      * Includes: core.css, accordion.css, autocomplete.css, button.css, datepicker.css, dialog.css, draggable.css, menu.css, progressbar.css, resizable.css, selectable.css, selectmenu.css, slider.css, sortable.css, spinner.css, tabs.css, tooltip.css, theme.css
+      * To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Trebuchet%20MS%2CTahoma%2CVerdana%2CArial%2Csans-serif&fwDefault=bold&fsDefault=1.1em&cornerRadius=4px&bgColorHeader=f6a828&bgTextureHeader=gloss_wave&bgImgOpacityHeader=35&borderColorHeader=e78f08&fcHeader=ffffff&iconColorHeader=ffffff&bgColorContent=eeeeee&bgTextureContent=highlight_soft&bgImgOpacityContent=100&borderColorContent=dddddd&fcContent=333333&iconColorContent=222222&bgColorDefault=f6f6f6&bgTextureDefault=glass&bgImgOpacityDefault=100&borderColorDefault=cccccc&fcDefault=1c94c4&iconColorDefault=ef8c08&bgColorHover=fdf5ce&bgTextureHover=glass&bgImgOpacityHover=100&borderColorHover=fbcb09&fcHover=c77405&iconColorHover=ef8c08&bgColorActive=ffffff&bgTextureActive=glass&bgImgOpacityActive=65&borderColorActive=fbd850&fcActive=eb8f00&iconColorActive=ef8c08&bgColorHighlight=ffe45c&bgTextureHighlight=highlight_soft&bgImgOpacityHighlight=75&borderColorHighlight=fed22f&fcHighlight=363636&iconColorHighlight=228ef1&bgColorError=b81900&bgTextureError=diagonals_thick&bgImgOpacityError=18&borderColorError=cd0a0a&fcError=ffffff&iconColorError=ffd27a&bgColorOverlay=666666&bgTextureOverlay=diagonals_thick&bgImgOpacityOverlay=20&opacityOverlay=50&bgColorShadow=000000&bgTextureShadow=flat&bgImgOpacityShadow=10&opacityShadow=20&thicknessShadow=5px&offsetTopShadow=-5px&offsetLeftShadow=-5px&cornerRadiusShadow=5px
+      * Copyright 2015 jQuery Foundation and other contributors; Licensed MIT */
+
+      .ui-helper-hidden{display:none}.ui-helper-hidden-accessible{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.ui-helper-reset{margin:0;padding:0;border:0;outline:0;line-height:1.3;text-decoration:none;font-size:100%;list-style:none}.ui-helper-clearfix:before,.ui-helper-clearfix:after{content:"";display:table;border-collapse:collapse}.ui-helper-clearfix:after{clear:both}.ui-helper-clearfix{min-height:0}.ui-helper-zfix{width:100%;height:100%;top:0;left:0;position:absolute;opacity:0;filter:Alpha(Opacity=0)}.ui-front{z-index:100}.ui-state-disabled{cursor:default!important}.ui-icon{display:block;text-indent:-99999px;overflow:hidden;background-repeat:no-repeat}.ui-widget-overlay{position:fixed;top:0;left:0;width:100%;height:100%}.ui-accordion .ui-accordion-header{display:block;cursor:pointer;position:relative;margin:2px 0 0 0;padding:.5em .5em .5em .7em;min-height:0;font-size:100%}.ui-accordion .ui-accordion-icons{padding-left:2.2em}.ui-accordion .ui-accordion-icons .ui-accordion-icons{padding-left:2.2em}.ui-accordion .ui-accordion-header .ui-accordion-header-icon{position:absolute;left:.5em;top:50%;margin-top:-8px}.ui-accordion .ui-accordion-content{padding:1em 2.2em;border-top:0;overflow:auto}.ui-autocomplete{position:absolute;top:0;left:0;cursor:default}.ui-button{display:inline-block;position:relative;padding:0;line-height:normal;margin-right:.1em;cursor:pointer;vertical-align:middle;text-align:center;overflow:visible}.ui-button,.ui-button:link,.ui-button:visited,.ui-button:hover,.ui-button:active{text-decoration:none}.ui-button-icon-only{width:2.2em}button.ui-button-icon-only{width:2.4em}.ui-button-icons-only{width:3.4em}button.ui-button-icons-only{width:3.7em}.ui-button .ui-button-text{display:block;line-height:normal}.ui-button-text-only .ui-button-text{padding:.4em 1em}.ui-button-icon-only .ui-button-text,.ui-button-icons-only .ui-button-text{padding:.4em;text-indent:-9999999px}.ui-button-text-icon-primary .ui-button-text,.ui-button-text-icons .ui-button-text{padding:.4em 1em .4em 2.1em}.ui-button-text-icon-secondary .ui-button-text,.ui-button-text-icons .ui-button-text{padding:.4em 2.1em .4em 1em}.ui-button-text-icons .ui-button-text{padding-left:2.1em;padding-right:2.1em}input.ui-button{padding:.4em 1em}.ui-button-icon-only .ui-icon,.ui-button-text-icon-primary .ui-icon,.ui-button-text-icon-secondary .ui-icon,.ui-button-text-icons .ui-icon,.ui-button-icons-only .ui-icon{position:absolute;top:50%;margin-top:-8px}.ui-button-icon-only .ui-icon{left:50%;margin-left:-8px}.ui-button-text-icon-primary .ui-button-icon-primary,.ui-button-text-icons .ui-button-icon-primary,.ui-button-icons-only .ui-button-icon-primary{left:.5em}.ui-button-text-icon-secondary .ui-button-icon-secondary,.ui-button-text-icons .ui-button-icon-secondary,.ui-button-icons-only .ui-button-icon-secondary{right:.5em}.ui-buttonset{margin-right:7px}.ui-buttonset .ui-button{margin-left:0;margin-right:-.3em}input.ui-button::-moz-focus-inner,button.ui-button::-moz-focus-inner{border:0;padding:0}.ui-datepicker{width:17em;padding:.2em .2em 0;display:none}.ui-datepicker .ui-datepicker-header{position:relative;padding:.2em 0}.ui-datepicker .ui-datepicker-prev,.ui-datepicker .ui-datepicker-next{position:absolute;top:2px;width:1.8em;height:1.8em}.ui-datepicker .ui-datepicker-prev-hover,.ui-datepicker .ui-datepicker-next-hover{top:1px}.ui-datepicker .ui-datepicker-prev{left:2px}.ui-datepicker .ui-datepicker-next{right:2px}.ui-datepicker .ui-datepicker-prev-hover{left:1px}.ui-datepicker .ui-datepicker-next-hover{right:1px}.ui-datepicker .ui-datepicker-prev span,.ui-datepicker .ui-datepicker-next span{display:block;position:absolute;left:50%;margin-left:-8px;top:50%;margin-top:-8px}.ui-datepicker .ui-datepicker-title{margin:0 2.3em;line-height:1.8em;text-align:center}.ui-datepicker .ui-datepicker-title select{font-size:1em;margin:1px 0}.ui-datepicker select.ui-datepicker-month,.ui-datepicker select.ui-datepicker-year{width:45%}.ui-datepicker table{width:100%;font-size:.9em;border-collapse:collapse;margin:0 0 .4em}.ui-datepicker th{padding:.7em .3em;text-align:center;font-weight:bold;border:0}.ui-datepicker td{border:0;padding:1px}.ui-datepicker td span,.ui-datepicker td a{display:block;padding:.2em;text-align:right;text-decoration:none}.ui-datepicker .ui-datepicker-buttonpane{background-image:none;margin:.7em 0 0 0;padding:0 .2em;border-left:0;border-right:0;border-bottom:0}.ui-datepicker .ui-datepicker-buttonpane button{float:right;margin:.5em .2em .4em;cursor:pointer;padding:.2em .6em .3em .6em;width:auto;overflow:visible}.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current{float:left}.ui-datepicker.ui-datepicker-multi{width:auto}.ui-datepicker-multi .ui-datepicker-group{float:left}.ui-datepicker-multi .ui-datepicker-group table{width:95%;margin:0 auto .4em}.ui-datepicker-multi-2 .ui-datepicker-group{width:50%}.ui-datepicker-multi-3 .ui-datepicker-group{width:33.3%}.ui-datepicker-multi-4 .ui-datepicker-group{width:25%}.ui-datepicker-multi .ui-datepicker-group-last .ui-datepicker-header,.ui-datepicker-multi .ui-datepicker-group-middle .ui-datepicker-header{border-left-width:0}.ui-datepicker-multi .ui-datepicker-buttonpane{clear:left}.ui-datepicker-row-break{clear:both;width:100%;font-size:0}.ui-datepicker-rtl{direction:rtl}.ui-datepicker-rtl .ui-datepicker-prev{right:2px;left:auto}.ui-datepicker-rtl .ui-datepicker-next{left:2px;right:auto}.ui-datepicker-rtl .ui-datepicker-prev:hover{right:1px;left:auto}.ui-datepicker-rtl .ui-datepicker-next:hover{left:1px;right:auto}.ui-datepicker-rtl .ui-datepicker-buttonpane{clear:right}.ui-datepicker-rtl .ui-datepicker-buttonpane button{float:left}.ui-datepicker-rtl .ui-datepicker-buttonpane button.ui-datepicker-current,.ui-datepicker-rtl .ui-datepicker-group{float:right}.ui-datepicker-rtl .ui-datepicker-group-last .ui-datepicker-header,.ui-datepicker-rtl .ui-datepicker-group-middle .ui-datepicker-header{border-right-width:0;border-left-width:1px}.ui-dialog{overflow:hidden;position:absolute;top:0;left:0;padding:.2em;outline:0}.ui-dialog .ui-dialog-titlebar{padding:.4em 1em;position:relative}.ui-dialog .ui-dialog-title{float:left;margin:.1em 0;white-space:nowrap;width:90%;overflow:hidden;text-overflow:ellipsis}.ui-dialog .ui-dialog-titlebar-close{position:absolute;right:.3em;top:50%;width:20px;margin:-10px 0 0 0;padding:1px;height:20px}.ui-dialog .ui-dialog-content{position:relative;border:0;padding:.5em 1em;background:none;overflow:auto}.ui-dialog .ui-dialog-buttonpane{text-align:left;border-width:1px 0 0 0;background-image:none;margin-top:.5em;padding:.3em 1em .5em .4em}.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset{float:right}.ui-dialog .ui-dialog-buttonpane button{margin:.5em .4em .5em 0;cursor:pointer}.ui-dialog .ui-resizable-se{width:12px;height:12px;right:-5px;bottom:-5px;background-position:16px 16px}.ui-draggable .ui-dialog-titlebar{cursor:move}.ui-draggable-handle{-ms-touch-action:none;touch-action:none}.ui-menu{list-style:none;padding:0;margin:0;display:block;outline:none}.ui-menu .ui-menu{position:absolute}.ui-menu .ui-menu-item{position:relative;margin:0;padding:3px 1em 3px .4em;cursor:pointer;min-height:0;list-style-image:url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7")}.ui-menu .ui-menu-divider{margin:5px 0;height:0;font-size:0;line-height:0;border-width:1px 0 0 0}.ui-menu .ui-state-focus,.ui-menu .ui-state-active{margin:-1px}.ui-menu-icons{position:relative}.ui-menu-icons .ui-menu-item{padding-left:2em}.ui-menu .ui-icon{position:absolute;top:0;bottom:0;left:.2em;margin:auto 0}.ui-menu .ui-menu-icon{left:auto;right:0}.ui-progressbar{height:2em;text-align:left;overflow:hidden}.ui-progressbar .ui-progressbar-value{margin:-1px;height:100%}.ui-progressbar .ui-progressbar-overlay{background:url("data:image/gif;base64,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");height:100%;filter:alpha(opacity=25);opacity:0.25}.ui-progressbar-indeterminate .ui-progressbar-value{background-image:none}.ui-resizable{position:relative}.ui-resizable-handle{position:absolute;font-size:0.1px;display:block;-ms-touch-action:none;touch-action:none}.ui-resizable-disabled .ui-resizable-handle,.ui-resizable-autohide .ui-resizable-handle{display:none}.ui-resizable-n{cursor:n-resize;height:7px;width:100%;top:-5px;left:0}.ui-resizable-s{cursor:s-resize;height:7px;width:100%;bottom:-5px;left:0}.ui-resizable-e{cursor:e-resize;width:7px;right:-5px;top:0;height:100%}.ui-resizable-w{cursor:w-resize;width:7px;left:-5px;top:0;height:100%}.ui-resizable-se{cursor:se-resize;width:12px;height:12px;right:1px;bottom:1px}.ui-resizable-sw{cursor:sw-resize;width:9px;height:9px;left:-5px;bottom:-5px}.ui-resizable-nw{cursor:nw-resize;width:9px;height:9px;left:-5px;top:-5px}.ui-resizable-ne{cursor:ne-resize;width:9px;height:9px;right:-5px;top:-5px}.ui-selectable{-ms-touch-action:none;touch-action:none}.ui-selectable-helper{position:absolute;z-index:100;border:1px dotted black}.ui-selectmenu-menu{padding:0;margin:0;position:absolute;top:0;left:0;display:none}.ui-selectmenu-menu .ui-menu{overflow:auto;overflow-x:hidden;padding-bottom:1px}.ui-selectmenu-menu .ui-menu .ui-selectmenu-optgroup{font-size:1em;font-weight:bold;line-height:1.5;padding:2px 0.4em;margin:0.5em 0 0 0;height:auto;border:0}.ui-selectmenu-open{display:block}.ui-selectmenu-button{display:inline-block;overflow:hidden;position:relative;text-decoration:none;cursor:pointer}.ui-selectmenu-button span.ui-icon{right:0.5em;left:auto;margin-top:-8px;position:absolute;top:50%}.ui-selectmenu-button span.ui-selectmenu-text{text-align:left;padding:0.4em 2.1em 0.4em 1em;display:block;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ui-slider{position:relative;text-align:left}.ui-slider .ui-slider-handle{position:absolute;z-index:2;width:1.2em;height:1.2em;cursor:default;-ms-touch-action:none;touch-action:none}.ui-slider .ui-slider-range{position:absolute;z-index:1;font-size:.7em;display:block;border:0;background-position:0 0}.ui-slider.ui-state-disabled .ui-slider-handle,.ui-slider.ui-state-disabled .ui-slider-range{filter:inherit}.ui-slider-horizontal{height:.8em}.ui-slider-horizontal .ui-slider-handle{top:-.3em;margin-left:-.6em}.ui-slider-horizontal .ui-slider-range{top:0;height:100%}.ui-slider-horizontal .ui-slider-range-min{left:0}.ui-slider-horizontal .ui-slider-range-max{right:0}.ui-slider-vertical{width:.8em;height:100px}.ui-slider-vertical .ui-slider-handle{left:-.3em;margin-left:0;margin-bottom:-.6em}.ui-slider-vertical .ui-slider-range{left:0;width:100%}.ui-slider-vertical .ui-slider-range-min{bottom:0}.ui-slider-vertical .ui-slider-range-max{top:0}.ui-sortable-handle{-ms-touch-action:none;touch-action:none}.ui-spinner{position:relative;display:inline-block;overflow:hidden;padding:0;vertical-align:middle}.ui-spinner-input{border:none;background:none;color:inherit;padding:0;margin:.2em 0;vertical-align:middle;margin-left:.4em;margin-right:22px}.ui-spinner-button{width:16px;height:50%;font-size:.5em;padding:0;margin:0;text-align:center;position:absolute;cursor:default;display:block;overflow:hidden;right:0}.ui-spinner a.ui-spinner-button{border-top:none;border-bottom:none;border-right:none}.ui-spinner .ui-icon{position:absolute;margin-top:-8px;top:50%;left:0}.ui-spinner-up{top:0}.ui-spinner-down{bottom:0}.ui-spinner .ui-icon-triangle-1-s{background-position:-65px -16px}.ui-tabs{position:relative;padding:.2em}.ui-tabs .ui-tabs-nav{margin:0;padding:.2em .2em 0}.ui-tabs .ui-tabs-nav li{list-style:none;float:left;position:relative;top:0;margin:1px .2em 0 0;border-bottom-width:0;padding:0;white-space:nowrap}.ui-tabs .ui-tabs-nav .ui-tabs-anchor{float:left;padding:.5em 1em;text-decoration:none}.ui-tabs .ui-tabs-nav li.ui-tabs-active{margin-bottom:-1px;padding-bottom:1px}.ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor,.ui-tabs .ui-tabs-nav li.ui-state-disabled .ui-tabs-anchor,.ui-tabs .ui-tabs-nav li.ui-tabs-loading .ui-tabs-anchor{cursor:text}.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor{cursor:pointer}.ui-tabs .ui-tabs-panel{display:block;border-width:0;padding:1em 1.4em;background:none}.ui-tooltip{padding:8px;position:absolute;z-index:9999;max-width:300px;-webkit-box-shadow:0 0 5px #aaa;box-shadow:0 0 5px #aaa}body .ui-tooltip{border-width:2px}.ui-widget{font-family:Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;font-size:1.1em}.ui-widget .ui-widget{font-size:1em}.ui-widget input,.ui-widget select,.ui-widget textarea,.ui-widget button{font-family:Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;font-size:1em}.ui-widget-content{border:1px solid #ddd;background:#eee url("images/ui-bg_highlight-soft_100_eeeeee_1x100.png") 50% top repeat-x;color:#333}.ui-widget-content a{color:#333}.ui-widget-header{border:1px solid #e78f08;background:#f6a828 url("images/ui-bg_gloss-wave_35_f6a828_500x100.png") 50% 50% repeat-x;color:#fff;font-weight:bold}.ui-widget-header a{color:#fff}.ui-state-default,.ui-widget-content .ui-state-default,.ui-widget-header .ui-state-default{border:1px solid #ccc;background:#f6f6f6 url("images/ui-bg_glass_100_f6f6f6_1x400.png") 50% 50% repeat-x;font-weight:bold;color:#1c94c4}.ui-state-default a,.ui-state-default a:link,.ui-state-default a:visited{color:#1c94c4;text-decoration:none}.ui-state-hover,.ui-widget-content .ui-state-hover,.ui-widget-header .ui-state-hover,.ui-state-focus,.ui-widget-content .ui-state-focus,.ui-widget-header .ui-state-focus{border:1px solid #fbcb09;background:#fdf5ce url("images/ui-bg_glass_100_fdf5ce_1x400.png") 50% 50% repeat-x;font-weight:bold;color:#c77405}.ui-state-hover a,.ui-state-hover a:hover,.ui-state-hover a:link,.ui-state-hover a:visited,.ui-state-focus a,.ui-state-focus a:hover,.ui-state-focus a:link,.ui-state-focus a:visited{color:#c77405;text-decoration:none}.ui-state-active,.ui-widget-content .ui-state-active,.ui-widget-header .ui-state-active{border:1px solid #fbd850;background:#fff url("images/ui-bg_glass_65_ffffff_1x400.png") 50% 50% repeat-x;font-weight:bold;color:#eb8f00}.ui-state-active a,.ui-state-active a:link,.ui-state-active a:visited{color:#eb8f00;text-decoration:none}.ui-state-highlight,.ui-widget-content .ui-state-highlight,.ui-widget-header .ui-state-highlight{border:1px solid #fed22f;background:#ffe45c url("images/ui-bg_highlight-soft_75_ffe45c_1x100.png") 50% top repeat-x;color:#363636}.ui-state-highlight a,.ui-widget-content .ui-state-highlight a,.ui-widget-header .ui-state-highlight a{color:#363636}.ui-state-error,.ui-widget-content .ui-state-error,.ui-widget-header .ui-state-error{border:1px solid #cd0a0a;background:#b81900 url("images/ui-bg_diagonals-thick_18_b81900_40x40.png") 50% 50% repeat;color:#fff}.ui-state-error a,.ui-widget-content .ui-state-error a,.ui-widget-header .ui-state-error a{color:#fff}.ui-state-error-text,.ui-widget-content .ui-state-error-text,.ui-widget-header .ui-state-error-text{color:#fff}.ui-priority-primary,.ui-widget-content .ui-priority-primary,.ui-widget-header .ui-priority-primary{font-weight:bold}.ui-priority-secondary,.ui-widget-content .ui-priority-secondary,.ui-widget-header .ui-priority-secondary{opacity:.7;filter:Alpha(Opacity=70);font-weight:normal}.ui-state-disabled,.ui-widget-content .ui-state-disabled,.ui-widget-header .ui-state-disabled{opacity:.35;filter:Alpha(Opacity=35);background-image:none}.ui-state-disabled .ui-icon{filter:Alpha(Opacity=35)}.ui-icon{width:16px;height:16px}.ui-icon,.ui-widget-content .ui-icon{background-image:url("images/ui-icons_222222_256x240.png")}.ui-widget-header .ui-icon{background-image:url("images/ui-icons_ffffff_256x240.png")}.ui-state-default .ui-icon{background-image:url("images/ui-icons_ef8c08_256x240.png")}.ui-state-hover .ui-icon,.ui-state-focus .ui-icon{background-image:url("images/ui-icons_ef8c08_256x240.png")}.ui-state-active .ui-icon{background-image:url("images/ui-icons_ef8c08_256x240.png")}.ui-state-highlight .ui-icon{background-image:url("images/ui-icons_228ef1_256x240.png")}.ui-state-error .ui-icon,.ui-state-error-text .ui-icon{background-image:url("images/ui-icons_ffd27a_256x240.png")}.ui-icon-blank{background-position:16px 16px}.ui-icon-carat-1-n{background-position:0 0}.ui-icon-carat-1-ne{background-position:-16px 0}.ui-icon-carat-1-e{background-position:-32px 0}.ui-icon-carat-1-se{background-position:-48px 0}.ui-icon-carat-1-s{background-position:-64px 0}.ui-icon-carat-1-sw{background-position:-80px 0}.ui-icon-carat-1-w{background-position:-96px 0}.ui-icon-carat-1-nw{background-position:-112px 0}.ui-icon-carat-2-n-s{background-position:-128px 0}.ui-icon-carat-2-e-w{background-position:-144px 0}.ui-icon-triangle-1-n{background-position:0 -16px}.ui-icon-triangle-1-ne{background-position:-16px -16px}.ui-icon-triangle-1-e{background-position:-32px -16px}.ui-icon-triangle-1-se{background-position:-48px -16px}.ui-icon-triangle-1-s{background-position:-64px -16px}.ui-icon-triangle-1-sw{background-position:-80px -16px}.ui-icon-triangle-1-w{background-position:-96px -16px}.ui-icon-triangle-1-nw{background-position:-112px -16px}.ui-icon-triangle-2-n-s{background-position:-128px -16px}.ui-icon-triangle-2-e-w{background-position:-144px -16px}.ui-icon-arrow-1-n{background-position:0 -32px}.ui-icon-arrow-1-ne{background-position:-16px -32px}.ui-icon-arrow-1-e{background-position:-32px -32px}.ui-icon-arrow-1-se{background-position:-48px -32px}.ui-icon-arrow-1-s{background-position:-64px -32px}.ui-icon-arrow-1-sw{background-position:-80px -32px}.ui-icon-arrow-1-w{background-position:-96px -32px}.ui-icon-arrow-1-nw{background-position:-112px -32px}.ui-icon-arrow-2-n-s{background-position:-128px -32px}.ui-icon-arrow-2-ne-sw{background-position:-144px -32px}.ui-icon-arrow-2-e-w{background-position:-160px -32px}.ui-icon-arrow-2-se-nw{background-position:-176px -32px}.ui-icon-arrowstop-1-n{background-position:-192px -32px}.ui-icon-arrowstop-1-e{background-position:-208px -32px}.ui-icon-arrowstop-1-s{background-position:-224px -32px}.ui-icon-arrowstop-1-w{background-position:-240px -32px}.ui-icon-arrowthick-1-n{background-position:0 -48px}.ui-icon-arrowthick-1-ne{background-position:-16px -48px}.ui-icon-arrowthick-1-e{background-position:-32px -48px}.ui-icon-arrowthick-1-se{background-position:-48px -48px}.ui-icon-arrowthick-1-s{background-position:-64px -48px}.ui-icon-arrowthick-1-sw{background-position:-80px -48px}.ui-icon-arrowthick-1-w{background-position:-96px -48px}.ui-icon-arrowthick-1-nw{background-position:-112px -48px}.ui-icon-arrowthick-2-n-s{background-position:-128px -48px}.ui-icon-arrowthick-2-ne-sw{background-position:-144px -48px}.ui-icon-arrowthick-2-e-w{background-position:-160px -48px}.ui-icon-arrowthick-2-se-nw{background-position:-176px -48px}.ui-icon-arrowthickstop-1-n{background-position:-192px -48px}.ui-icon-arrowthickstop-1-e{background-position:-208px -48px}.ui-icon-arrowthickstop-1-s{background-position:-224px -48px}.ui-icon-arrowthickstop-1-w{background-position:-240px -48px}.ui-icon-arrowreturnthick-1-w{background-position:0 -64px}.ui-icon-arrowreturnthick-1-n{background-position:-16px -64px}.ui-icon-arrowreturnthick-1-e{background-position:-32px -64px}.ui-icon-arrowreturnthick-1-s{background-position:-48px -64px}.ui-icon-arrowreturn-1-w{background-position:-64px -64px}.ui-icon-arrowreturn-1-n{background-position:-80px -64px}.ui-icon-arrowreturn-1-e{background-position:-96px -64px}.ui-icon-arrowreturn-1-s{background-position:-112px -64px}.ui-icon-arrowrefresh-1-w{background-position:-128px -64px}.ui-icon-arrowrefresh-1-n{background-position:-144px -64px}.ui-icon-arrowrefresh-1-e{background-position:-160px -64px}.ui-icon-arrowrefresh-1-s{background-position:-176px -64px}.ui-icon-arrow-4{background-position:0 -80px}.ui-icon-arrow-4-diag{background-position:-16px -80px}.ui-icon-extlink{background-position:-32px -80px}.ui-icon-newwin{background-position:-48px -80px}.ui-icon-refresh{background-position:-64px -80px}.ui-icon-shuffle{background-position:-80px -80px}.ui-icon-transfer-e-w{background-position:-96px -80px}.ui-icon-transferthick-e-w{background-position:-112px -80px}.ui-icon-folder-collapsed{background-position:0 -96px}.ui-icon-folder-open{background-position:-16px -96px}.ui-icon-document{background-position:-32px -96px}.ui-icon-document-b{background-position:-48px -96px}.ui-icon-note{background-position:-64px -96px}.ui-icon-mail-closed{background-position:-80px -96px}.ui-icon-mail-open{background-position:-96px -96px}.ui-icon-suitcase{background-position:-112px -96px}.ui-icon-comment{background-position:-128px -96px}.ui-icon-person{background-position:-144px -96px}.ui-icon-print{background-position:-160px -96px}.ui-icon-trash{background-position:-176px -96px}.ui-icon-locked{background-position:-192px -96px}.ui-icon-unlocked{background-position:-208px -96px}.ui-icon-bookmark{background-position:-224px -96px}.ui-icon-tag{background-position:-240px -96px}.ui-icon-home{background-position:0 -112px}.ui-icon-flag{background-position:-16px -112px}.ui-icon-calendar{background-position:-32px -112px}.ui-icon-cart{background-position:-48px -112px}.ui-icon-pencil{background-position:-64px -112px}.ui-icon-clock{background-position:-80px -112px}.ui-icon-disk{background-position:-96px -112px}.ui-icon-calculator{background-position:-112px -112px}.ui-icon-zoomin{background-position:-128px -112px}.ui-icon-zoomout{background-position:-144px -112px}.ui-icon-search{background-position:-160px -112px}.ui-icon-wrench{background-position:-176px -112px}.ui-icon-gear{background-position:-192px -112px}.ui-icon-heart{background-position:-208px -112px}.ui-icon-star{background-position:-224px -112px}.ui-icon-link{background-position:-240px -112px}.ui-icon-cancel{background-position:0 -128px}.ui-icon-plus{background-position:-16px -128px}.ui-icon-plusthick{background-position:-32px -128px}.ui-icon-minus{background-position:-48px -128px}.ui-icon-minusthick{background-position:-64px -128px}.ui-icon-close{background-position:-80px -128px}.ui-icon-closethick{background-position:-96px -128px}.ui-icon-key{background-position:-112px -128px}.ui-icon-lightbulb{background-position:-128px -128px}.ui-icon-scissors{background-position:-144px -128px}.ui-icon-clipboard{background-position:-160px -128px}.ui-icon-copy{background-position:-176px -128px}.ui-icon-contact{background-position:-192px -128px}.ui-icon-image{background-position:-208px -128px}.ui-icon-video{background-position:-224px -128px}.ui-icon-script{background-position:-240px -128px}.ui-icon-alert{background-position:0 -144px}.ui-icon-info{background-position:-16px -144px}.ui-icon-notice{background-position:-32px -144px}.ui-icon-help{background-position:-48px -144px}.ui-icon-check{background-position:-64px -144px}.ui-icon-bullet{background-position:-80px -144px}.ui-icon-radio-on{background-position:-96px -144px}.ui-icon-radio-off{background-position:-112px -144px}.ui-icon-pin-w{background-position:-128px -144px}.ui-icon-pin-s{background-position:-144px -144px}.ui-icon-play{background-position:0 -160px}.ui-icon-pause{background-position:-16px -160px}.ui-icon-seek-next{background-position:-32px -160px}.ui-icon-seek-prev{background-position:-48px -160px}.ui-icon-seek-end{background-position:-64px -160px}.ui-icon-seek-start{background-position:-80px -160px}.ui-icon-seek-first{background-position:-80px -160px}.ui-icon-stop{background-position:-96px -160px}.ui-icon-eject{background-position:-112px -160px}.ui-icon-volume-off{background-position:-128px -160px}.ui-icon-volume-on{background-position:-144px -160px}.ui-icon-power{background-position:0 -176px}.ui-icon-signal-diag{background-position:-16px -176px}.ui-icon-signal{background-position:-32px -176px}.ui-icon-battery-0{background-position:-48px -176px}.ui-icon-battery-1{background-position:-64px -176px}.ui-icon-battery-2{background-position:-80px -176px}.ui-icon-battery-3{background-position:-96px -176px}.ui-icon-circle-plus{background-position:0 -192px}.ui-icon-circle-minus{background-position:-16px -192px}.ui-icon-circle-close{background-position:-32px -192px}.ui-icon-circle-triangle-e{background-position:-48px -192px}.ui-icon-circle-triangle-s{background-position:-64px -192px}.ui-icon-circle-triangle-w{background-position:-80px -192px}.ui-icon-circle-triangle-n{background-position:-96px -192px}.ui-icon-circle-arrow-e{background-position:-112px -192px}.ui-icon-circle-arrow-s{background-position:-128px -192px}.ui-icon-circle-arrow-w{background-position:-144px -192px}.ui-icon-circle-arrow-n{background-position:-160px -192px}.ui-icon-circle-zoomin{background-position:-176px -192px}.ui-icon-circle-zoomout{background-position:-192px -192px}.ui-icon-circle-check{background-position:-208px -192px}.ui-icon-circlesmall-plus{background-position:0 -208px}.ui-icon-circlesmall-minus{background-position:-16px -208px}.ui-icon-circlesmall-close{background-position:-32px -208px}.ui-icon-squaresmall-plus{background-position:-48px -208px}.ui-icon-squaresmall-minus{background-position:-64px -208px}.ui-icon-squaresmall-close{background-position:-80px -208px}.ui-icon-grip-dotted-vertical{background-position:0 -224px}.ui-icon-grip-dotted-horizontal{background-position:-16px -224px}.ui-icon-grip-solid-vertical{background-position:-32px -224px}.ui-icon-grip-solid-horizontal{background-position:-48px -224px}.ui-icon-gripsmall-diagonal-se{background-position:-64px -224px}.ui-icon-grip-diagonal-se{background-position:-80px -224px}.ui-corner-all,.ui-corner-top,.ui-corner-left,.ui-corner-tl{border-top-left-radius:4px}.ui-corner-all,.ui-corner-top,.ui-corner-right,.ui-corner-tr{border-top-right-radius:4px}.ui-corner-all,.ui-corner-bottom,.ui-corner-left,.ui-corner-bl{border-bottom-left-radius:4px}.ui-corner-all,.ui-corner-bottom,.ui-corner-right,.ui-corner-br{border-bottom-right-radius:4px}.ui-widget-overlay{background:#666 url("images/ui-bg_diagonals-thick_20_666666_40x40.png") 50% 50% repeat;opacity:.5;filter:Alpha(Opacity=50)}.ui-widget-shadow{margin:-5px 0 0 -5px;padding:5px;background:#000 url("images/ui-bg_flat_10_000000_40x100.png") 50% 50% repeat-x;opacity:.2;filter:Alpha(Opacity=20);border-radius:5px}    </style>
+    <!--<link rel="stylesheet" href="bebasneue.css">-->
+    <style>
+      /* Generated by Font Squirrel (http://www.fontsquirrel.com) on March 23, 2016 */
+
+      @font-face {
+          font-family: 'bebas_neuebold';
+          src: url('fonts/bebasneue_bold-webfont.eot');
+          src: url('fonts/bebasneue_bold-webfont.eot?#iefix') format('embedded-opentype'),
+               url('fonts/bebasneue_bold-webfont.woff2') format('woff2'),
+               url('fonts/bebasneue_bold-webfont.woff') format('woff'),
+               url('fonts/bebasneue_bold-webfont.ttf') format('truetype'),
+               url('fonts/bebasneue_bold-webfont.svg#bebas_neuebold') format('svg');
+          font-weight: normal;
+          font-style: normal;
+      }
+
+      @font-face {
+          font-family: 'bebas_neue_regularregular';
+          src: url('fonts/bebasneue_regular-webfont.eot');
+          src: url('fonts/bebasneue_regular-webfont.eot?#iefix') format('embedded-opentype'),
+               url('fonts/bebasneue_regular-webfont.woff2') format('woff2'),
+               url('fonts/bebasneue_regular-webfont.woff') format('woff'),
+               url('fonts/bebasneue_regular-webfont.ttf') format('truetype'),
+               url('fonts/bebasneue_regular-webfont.svg#bebas_neue_regularregular') format('svg');
+          font-weight: normal;
+          font-style: normal;
+      }
+    </style>
+    <!--<link rel="stylesheet" href="montserrat.css">-->
+    <style>
+      @font-face {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Montserrat-Regular'), url(fonts/montserrat_regular.ttf) format('truetype');
+      }
+    </style>
+    <!--<link rel="stylesheet" href="main.css">-->
+    <style>
+      body {
+        font: 16px 'Montserrat', sans-serif;
+        color: #fff;
+        margin: 50px 0;
+        background: url(images/bg.jpg) center center no-repeat fixed #000000;
+        background-size: cover;
+      }
+
+      h1.logo {
+        text-indent: 750px;
+        overflow: hidden;
+        margin: 0 auto 25px;
+        width: 750px;
+        height: 150px;
+        background: url(images/logo.png) center top no-repeat;
+        background-size: cover;
+      }
+
+      h2 {
+        font: 2rem bebas_neuebold, Impact, sans-serif;
+        font-weight: normal;
+      }
+
+      header h2 {
+        font-size: 3rem;
+      }
+
+      h1:first-of-type, 
+      h2:first-of-type, 
+      h3:first-of-type, 
+      h4:first-of-type, 
+      h5:first-of-type, 
+      h6:first-of-type {
+        margin-top: 0;
+      }
+
+      a {
+        outline: none;
+      }
+
+      #tabs-info input[type="image"] {
+        width: 92px;
+        height: 26px;
+        overflow: hidden;
+        border-radius: 4px;
+      }
+
+      select {
+        width: 200px;
+      }
+
+      .code, .ui-tabs-panel textarea {
+        font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+        line-height: 140%;
+        white-space: pre;
+        white-space: pre-wrap;
+        white-space: -moz-pre-wrap;
+        white-space: -o-pre-wrap;
+        color: #fff;
+        background: #000;
+        display: block;
+        padding: 0.5em 1em;
+        border: 1px solid #444;
+        box-sizing: border-box;
+        resize: none;
+        margin: 0;
+      }
+
+      p code {
+        font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+      }
+
+      .ui-tabs-vertical .ui-tabs-nav {
+        float: left;
+        width: 25%;
+        box-sizing: border-box;
+      }
+
+      .ui-tabs-vertical .ui-tabs-nav li {
+        clear: left;
+        width: 100%;
+        border-bottom-width: 0 !important;
+        border-right-width: 0 !important;
+        margin: 10px 0 0;
+        padding: 0;
+      }
+
+      .ui-tabs-vertical .ui-tabs-nav li a {
+        display: block;
+        width: 100%;
+        text-align: left;
+        box-sizing: border-box;
+      }
+
+      .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
+        margin-bottom: 0.2em;
+        padding-bottom: 0;
+        border-right-width: 0;
+      }
+
+      .ui-tabs-vertical .ui-tabs-panel {
+        padding: 1em;
+        float: right;
+        border-left-width: 0;
+        height: 100%;
+        width: 70%;
+        padding: 0.625rem 1.25rem 1.875rem !important;
+      }
+
+      .ui-widget-content {
+        color: #fff;
+        background: rgba(16,19,23,0.8);
+        background: -moz-radial-gradient(center, ellipse cover, rgba(16,19,23,0.8) 0%, rgba(31,37,45,0.8) 100%);
+        background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(16,19,23,0.8)), color-stop(100%, rgba(31,37,45,0.8)));
+        background: -webkit-radial-gradient(center, ellipse cover, rgba(16,19,23,0.8) 0%, rgba(31,37,45,0.8) 100%);
+        background: -o-radial-gradient(center, ellipse cover, rgba(16,19,23,0.8) 0%, rgba(31,37,45,0.8) 100%);
+        background: -ms-radial-gradient(center, ellipse cover, rgba(16,19,23,0.8) 0%, rgba(31,37,45,0.8) 100%);
+        background: radial-gradient(ellipse at center, rgba(16,19,23,0.8) 0%, rgba(31,37,45,0.8) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#101317', endColorstr='#1f252d', GradientType=1 );
+        border: none !important;
+        border-radius: 0 !important;
+        padding: 0.625rem 1.25rem 0;
+      }
+
+      .ui-widget-content a {
+        color: #09d;
+      }
+
+      .ui-widget-header {
+        background: none !important;
+        border: none !important;
+      }
+
+      .ui-widget {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.1rem;
+        line-height: 1.5;
+      }
+
+      .ui-tabs-anchor, .ui-widget button {
+        font-family: 'bebas_neue_regularregular', 'Arial Narrow', sans-serif;
+        font-size: 1.375rem;
+        padding: 0 1.5rem !important;
+        line-height: 1.66;
+        height: 2.5rem;
+        border-radius: 1.25rem;
+        background: rgba(0,0,0,0.25);
+        color: #fff !important;
+        transition: all 0.2s;
+        position: relative;
+        box-sizing: border-box;
+        z-index: 100;
+        border-top: 2px solid rgba(255,255,255,0.5);
+        border-bottom: 2px solid rgba(255,255,255,0.5);
+        border-left: 2px solid rgba(255,255,255,0.5);
+        border-right: 2px solid rgba(255,255,255,0.5);
+      }
+
+      li.ui-state-active .ui-tabs-anchor {
+        border-top: 2px solid rgba(255,255,255,1);
+        border-bottom: 2px solid rgba(255,255,255,1);
+        border-left: 2px solid rgba(255,255,255,1);
+        border-right: 2px solid rgba(255,255,255,1);
+      }
+
+      .ui-state-active .ui-tabs-anchor {
+        color: #000!important;
+      }
+
+      .ui-tabs-anchor::before {
+        content: "";
+        display: block;
+        width: 2px;
+        height: 2px;
+        background: #fff;
+        position: absolute;
+        left: -2px;
+        top: 17px;
+        z-index: 100;
+        transition: border 0.1s ease-in-out;
+      }
+
+      .ui-tabs-anchor::after {
+        content: "";
+        display: block;
+        width: 2px;
+        height: 2px;
+        background: #fff;
+        position: absolute;
+        right: -2px;
+        top: 17px;
+        z-index: 100;
+        transition: border 0.1s ease-in-out;
+      }
+
+      .ui-tabs-anchor:hover::before {
+        width: 40px;
+        height: 40px;
+        background: none;
+        left: -2px;
+        top: -2px;
+        z-index: 100;
+        border-left: 2px solid rgba(255,255,255,1);
+        border-radius: 20px;
+      }
+
+      .ui-tabs-anchor:hover::after {
+        width: 40px;
+        height: 40px;
+        background: none;
+        right: -2px;
+        top: -2px;
+        z-index: 100;
+        border-right: 2px solid rgba(255,255,255,1);
+        border-radius: 20px;
+      }
+
+      li.ui-state-active .ui-tabs-anchor::after {
+        content: "";
+        display: block;
+        background: #fff;
+        position: absolute;
+        width: auto!important;
+        height: auto!important;
+        top: 2px;
+        right: 2px;
+        left: 2px;
+        bottom: 2px;
+        z-index: 50;
+        border-radius: 20px;
+      }
+
+      li.ui-state-active .ui-tabs-anchor span.button-text {
+        z-index: 100;
+        position: relative;
+      }
+
+      .ui-tabs-anchor:hover {
+        border-left: 2px solid rgba(255,255,255,1);
+        border-right: 2px solid rgba(255,255,255,1);
+      }
+
+      .ui-tabs .ui-tabs-nav li {
+        margin: 10px 4px 0;
+        border: none!important;
+        background: none!important;
+        float: none!important;
+        display: inline-block;
+      }
+
+      .ui-state-active a, .ui-state-active a:link, 
+      .ui-state-active a:visited {
+        background: rgba(0,0,0,0.65);
+      }
+
+      #tabs {
+        margin: 0 auto;
+        width: 1200px;
+        box-sizing: border-box;
+        border-top: 1px solid rgba(255,255,255,0.5)!important;
+        border-bottom: 1px solid rgba(255,255,255,0.5)!important;
+        position: relative;
+      }
+
+      #tabs .ui-tabs.ui-widget-content {
+        background: rgba(0,0,0,0.4)!important;
+        border-left: 1px solid rgba(255,255,255,0.5)!important;
+        border-right: 1px solid rgba(255,255,255,0.5)!important;
+      }
+
+      #tabs .ui-tabs.ui-widget-content .ui-tabs-panel {
+        min-height: 300px;
+      }
+
+      .ui-tabs-nav {
+        border-top-style: none;
+        border-left-style: none;
+        border-right-style: none;
+        border-radius: 0px;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+      }
+
+      .ui-tabs .ui-tabs-nav {
+        padding: 0;
+      }
+
+      .ui-tabs-nav::before {
+        content: "";
+        display: block;
+        width: 2px;
+        height: 2px;
+        background: #fff;
+        position: absolute;
+        left: 0;
+        top: -1px;
+        z-index: 100;
+      }
+
+      #tabs .ui-tabs.ui-widget-content .ui-tabs-nav::before {
+        top: 0px;
+        left: -1px;
+      }
+
+      .ui-tabs-nav::after {
+        content: "";
+        display: block;
+        width: 2px;
+        height: 2px;
+        background: #fff;
+        position: absolute;
+        right: 0;
+        top: -1px;
+        z-index: 100;
+      }
+
+      #tabs .ui-tabs.ui-widget-content .ui-tabs-nav::after {
+        top: 0px;
+        right: -1px;
+      }
+
+      #tabs::before {
+        content: "";
+        display: block;
+        width: 2px;
+        height: 2px;
+        background: #fff;
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        z-index: 100;
+      }
+
+      #tabs .ui-tabs .ui-tabs-panel::before {
+        content: "";
+        display: block;
+        width: 2px;
+        height: 2px;
+        background: #fff;
+        position: absolute;
+        left: -1px;
+        bottom: 0px;
+        z-index: 100;
+      }
+
+      #tabs::after {
+        content: "";
+        display: block;
+        width: 2px;
+        height: 2px;
+        background: #fff;
+        position: absolute;
+        right: 0;
+        bottom: -1px;
+        z-index: 100;
+      }
+
+      #tabs .ui-tabs .ui-tabs-panel::after {
+        content: "";
+        display: block;
+        width: 2px;
+        height: 2px;
+        background: #fff;
+        position: absolute;
+        right: -1px;
+        bottom: 0px;
+        z-index: 100;
+      }
+
+      .ui-tabs .ui-tabs-panel {
+        padding: 20px 20px 40px;
+      }
+
+      a.icon {
+        position: relative;
+        padding-left: 50px!important;
+      }
+
+      a.icon span.icon::before {
+        font-family: "empty-epsilon";
+        font-weight: normal;
+        width: 40px;
+        height: 40px;
+        margin: 0 0 0 10px;
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        content: "";
+        z-index: 100;
+      }
+
+      a.helms span.icon::before {
+        content: "r";
+      }
+
+      a.weapons span.icon::before {
+        content: "l";
+      }
+
+      a.engineering span.icon::before {
+        content: "q";
+      }
+
+      a.science span.icon::before {
+        content: "k";
+      }
+
+      a.relay span.icon::before {
+        content: "j";
+      }
+
+      a.image-link img {
+        width: 400px;
+        height: auto;
+      }
+
+      a.image-link.float-right {
+        float: right;
+        margin: 0 0 20px 20px;
+      }
+
+      .gallery {
+        text-align: center;
+      }
+
+      .gallery-image {
+        display: inline-block;
+        width: 300px;
+        margin: 20px 10px 0;
+        vertical-align: top;
+      }
+
+      .gallery-image a img {
+        width: 300px;
+      }
+
+      h2.station {
+        position: relative;
+        font-size: 40px;
+        line-height: 40px;
+      }
+
+      h2.station::before, 
+      h2.station::after {
+        font-family: empty-epsilon;
+      }
+
+      h2.station::before {
+        line-height: 40px;
+        font-size: 40px;
+        margin: 0 5px 0 0;
+        position: relative;
+        bottom: -5px;
+      }
+
+      h2.station::after {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        font-size: 300px;
+        text-align: center;
+        line-height: 250px;
+        opacity: 0.1;
+      }
+
+      h2.helms::before, 
+      h2.helms::after {
+        content: "r";
+      }
+
+      h2.weapons::before, 
+      h2.weapons::after {
+        content: "l";
+      }
+
+      h2.engineering::before, 
+      h2.engineering::after {
+        content: "q";
+      }
+
+      h2.science::before, 
+      h2.science::after {
+        content: "k";
+      }
+
+      h2.relay::before, 
+      h2.relay::after {
+        content: "j";
+      }
+
+      @media only screen and (max-width: 1200px) {
+        
+        #tabs {
+          width: 1000px;
+        }
+        
+        .ui-tabs-vertical .ui-tabs-nav li a {
+          font-size: 24px;
+        }
+        
+      }
+
+      @media only screen and (max-width: 1000px) {
+        
+        #tabs {
+          width: 80%;
+        }
+        
+        .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+          font-size: 22px;
+        }
+        
+        .ui-tabs-vertical .ui-tabs-nav li a {
+          font-size: 18px!important;
+          padding: 0 15px!important;
+        }
+        
+        .ui-tabs-vertical .ui-tabs-panel {
+          width: 68%;
+        }
+        
+      }
+
+      @media only screen and (max-width: 800px) {
+        
+        body {
+          margin: 40px 0;
+        }
+        
+        h1.logo {
+          width: 600px;
+          height: 120px;
+        }
+        
+        a.image-link {
+          
+        }
+        
+        a.image-link.float-right {
+          float: none;
+          display: block;
+          margin: 0 0 20px;
+          text-align: center;
+        }
+        
+        .ui-tabs-vertical .ui-tabs-nav {
+          width: 100%;
+          float: none;
+        }
+        
+        .ui-tabs-vertical .ui-tabs-panel {
+          width: 100%;
+          float: none;
+          box-sizing: border-box;
+        }
+        
+      }
+
+      @media only screen and (max-width: 600px) {
+        
+        body {
+          margin: 30px 0;
+        }
+        
+        #tabs {
+          width: 90%;
+        }
+        
+        a.image-link img {
+          width: 100%;
+        }
+        
+        .ui-tabs-anchor {
+          padding: 0 10px!important;
+        }
+        
+        .ui-tabs .ui-tabs-panel {
+          padding: 20px 0;
+        }
+        
+        .gallery-image {
+          width: 100%;
+          display: block;
+          margin: 20px 0 0;
+        }
+        
+        a.download {
+          padding: 5px 10px;
+          height: auto; 
+          line-height: inherit;
+          border-radius: 100px;
+        }
+        
+        table.downloads tr td {
+          padding: 5px 0;
+        }
+        
+        table.downloads tr th {
+          font-size: 20px;
+          padding: 25px 0 5px 0;
+        }
+        
+        h1.logo {
+          width: 300px;
+          height: 60px;
+          margin: ;
+        }
+        
+        .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+          font-size: 21px;
+        }
+        
+        a.icon span.icon::before {
+          margin: 0;
+        }
+        
+        a.icon {
+          padding-left: 40px!important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <header>
+      <h1 class="logo">EmptyEpsilon</h1>
+      <h2 style="text-align: center;">HTTP API Sandbox</h2>
+    </header>
+
+    <nav id="tabs">
+      <ul>
+        <li>
+          <a href="#tabs-1"><span class="button-text">About</span></a>
+        </li>
+        <li>
+          <a href="#tabs-2"><span class="button-text">exec.lua</span></a>
+        </li>
+        <li>
+          <a href="#tabs-3"><span class="button-text">get.lua</span></a>
+        </li>
+        <li>
+          <a href="#tabs-4"><span class="button-text">set.lua</span></a>
+        </li>
+      </ul>
+
+      <section id="tabs-1">
+        <h2>About the HTTP API</h2>
+        <p>This API is enabled by setting the <code>httpserver</code> option to a port number (suggested 8080) in the <code>options.ini</code> file.</p>
+        <p>Once enabled, you can access this page at <a href="http://localhost:8080/">http://localhost:8080</a>, substituting the port number you configured in place of <code>8080</code> if necessary. (EmptyEpsilon serves all files in the <code>www</code> folder, including any you add to it.)</p>
+      </section>
+
+      <section id="tabs-2">
+        <h2>/exec.lua endpoint</h2>
+        <p>The main API endpoint is <code>/exec.lua</code>, which can run any Lua code passed as the data in a POST request and returns the result. Regardless of whether the script is successful, the request returns HTTP code 200. Any output from the script is returned in the response body. See <!--<a href="script_reference.html">the script reference</a>-->the script reference for a list of functions you can call.</p>
+
+        <h2>Sandbox</h2>
+        <p>You can send a script to this endpoint by entering it in the sandbox to the left and clicking the Send button to run it. The results appear in the text area to the right.</p>
+        <div class="sandboxes">
+          <textarea id="exec-script" style="width: 50%; height: 400px; float: left;">player = getPlayerShip(-1)
+  if player == nil then return {error = "No ship"} end
+  return {hull = player:getHull() / player:getHullMax()}</textarea>
+          <pre class="code" id="exec-output" style="width: 50%; height: 400px; float: right;" readonly></textarea>
+        </div>
+        <button onclick="exec_send()">Send</button>
+
+        <script>
+          function exec_send()
+          {
+	          $.post('exec.lua', $("#exec-script").val(), function(data) {
+		          $("#exec-output").text(JSON.stringify(data));
+	          }, "json")
+	          .fail(function(x, y, reason) {
+		          $("#exec-output").text("FAIL:" + reason);
+	          });
+          }
+        </script>
+      </section>
+
+      <section id="tabs-3">
+        <h2>/get.lua endpoint</h2>
+        <p>The <code>/get.lua</code> endpoint calls Lua-exposed script functions to retrieve data and returns their results in a dictionary. Each function can be passed to the endpoint as a separate parameter of a GET request. Use the <code>_OBJECT_=someObjectGetter()</code> parameter to select the function call's target object. The default object is <code>getPlayerShip(-1)</code>, which typically represents the most recently created player ship.</p>
+        <p>This endpoint returns the requested data if successful, or an error (such as {"ERROR": "Script error"}) on failure.</p>
+
+        <h2>Sandbox</h2>
+        <p>You can send a request to this endpoint by entering function calls as URL parameters in the sandbox to the left, and then clicking the Send button. The results appear in the text area to the right.</p>
+        <div class="sandboxes">
+          <textarea id="get-script" style="width: 50%; height: 400px; float: left;">callsign=getName()&hull=getHull()&nukes=getWeaponStorage("nuke")</textarea>
+          <textarea id="get-output" style="width: 50%; height: 400px; float: right;" readonly></textarea>
+        </div>
+        <button onclick="get_send()">Send</button>
+
+        <script>
+          function get_send()
+          {
+            $.get('get.lua', $("#get-script").val())
+              .done(function(data) {
+                $("#get-output").text(JSON.stringify(JSON.parse(data), null, 2));
+              })
+	            .fail(function(x, y, reason) {
+		            $("#get-output").text("FAIL:" + reason);
+	            });
+          }
+        </script>
+      </section>
+
+      <section id="tabs-4">
+        <h2>/set.lua endpoint</h2>
+        <p>The <code>/set.lua</code> endpoint calls Lua-exposed setter functions, such as <code>setShieldsActive</code>. Each function can be passed to the endpoint as a separate parameter of a GET request. Use the <code>_OBJECT_=someObjectGetter()</code> parameter to select the function call's target object. The default object is <code>getPlayerShip(-1)</code>, which typically represents the most recently created player ship.</p>
+        <p>This endpoint returns nothing if successful, or an error (such as {"ERROR": "Script error"}) on failure.</p>
+
+        <h2>Sandbox</h2>
+        <p>You can send a request to this endpoint by entering function calls as URL parameters in the sandbox to the left, and then clicking the Send button. The results (if any) appear in the text area to the right.</p>
+        <div class="sandboxes">
+          <textarea id="set-script" style="width: 50%; height: 400px; float: left;">setShieldsActive(true)&commandTargetRotation(200)&commandImpulse(0.75)
+</textarea>
+          <textarea id="set-output" style="width: 50%; height: 400px; float: right;" readonly></textarea>
+        </div>
+        <button onclick="set_send()">Send</button>
+
+        <script>
+          function set_send()
+          {
+            $.get('set.lua', $("#set-script").val())
+              .done(function(data) {
+                $("#set-output").text(JSON.stringify(JSON.parse(data), null, 2));
+              });
+	            .fail(function(x, y, reason) {
+		            $("#set-output").text("FAIL:" + reason);
+	            });
+          }
+        </script>
+      </section>
+    </nav>
+
+    <footer>
+      <script src="jquery.min.js"></script>
+      <script src="jquery-ui.min.js"></script>
+
+      <script>
+        function mapHash()
+        {
+          var parts = location.hash.substr(1).split(',');
+          var data = {}
+          parts.forEach(function(part)
+          {
+            var info = part.split("=");
+            if (info.length > 1)
+              data[info[0]] = info[1];
+          });
+          return data;
+        }
+
+        function updateHashFromTab(event, ui)
+        {
+          var target_id = event.target.id;
+          var target_index = $(event.target).tabs("option", "active");
+
+          var data = mapHash();
+          data[target_id] = target_index;
+          var hash = [];
+          for(var key in data)
+          {
+            hash.push(key + "=" + data[key])
+          }
+          location.hash = hash.join(",");
+        }
+
+        $(function() {
+          $("#tabs").tabs({activate: updateHashFromTab});
+
+          $.each($(".code"), function(idx, element)
+          {
+            element = $(element);
+            var lines = element.html().split("\n");
+            var output = [];
+            lines.forEach(function(line) {
+              if (line.indexOf("--") > -1)
+              {
+                n = line.indexOf("--");
+                line = line.substr(0, n) + "<span style='color: green'>" + line.substr(n) + "</span>";
+              }
+                    line = line.replace(/"([^"]*)"/g, "<span style='color: blue'>\"$1\"</span>");
+              output.push(line);
+            });
+            while(output.length > 0 && output[0].trim() == "")
+              output.shift()
+            while(output.length > 0 && output[output.length - 1].trim() == "")
+              output.pop()
+                output = output.join("\n");
+                output = output.replace(/\[\[([^(\]\])]*)\]\]/gm, "<span style='color: blue'>[[$1]]</span>");
+            element.html(output);
+          })
+        });
+      </script>
+
+    </body>
+  
+  </html>

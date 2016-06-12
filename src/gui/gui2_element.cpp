@@ -225,8 +225,8 @@ void GuiElement::updateRect(sf::FloatRect parent_rect)
     if (local_size.y == GuiSizeMatchWidth)
         local_size.y = local_size.x;
     
-    local_size.x -= margins.width - margins.left;
-    local_size.y -= margins.height - margins.top;
+    local_size.x -= margins.width + margins.left;
+    local_size.y -= margins.height + margins.top;
     
     switch(position_alignment)
     {

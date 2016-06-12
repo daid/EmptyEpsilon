@@ -7,10 +7,13 @@
 #include "screenComponents/radarView.h"
 #include "screenComponents/openCommsButton.h"
 #include "screenComponents/commsOverlay.h"
+#include "screenComponents/shipsLogControl.h"
 
 #include "gui/gui2_autolayout.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_selector.h"
+#include "gui/gui2_slider.h"
+#include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"
 
 RelayScreen::RelayScreen(GuiContainer* owner)
@@ -77,10 +80,13 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     info_faction = new GuiKeyValueDisplay(sidebar, "SCIENCE_FACTION", 0.4, "Faction", "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
 
-    (new GuiSelector(this, "ZOOM_SELECT", [this](int index, string value) {
-        float zoom_amount = powf(2.0f, index);
-        radar->setDistance(50000.0f / zoom_amount);
-    }))->setOptions({"Zoom: 1x", "Zoom: 2x", "Zoom: 4x", "Zoom: 8x"})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(250, 50);
+    zoom_slider = new GuiSlider(this, "ZOOM_SLIDER", 50000.0f, 6250.0f, 50000.0f, [this](float value) {
+        zoom_label->setText("Zoom: " + string(50000.0f / value, 1.0f) + "x"); 
+        radar->setDistance(value);
+    });
+    zoom_slider->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
+    zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 30);
+    zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     option_buttons = new GuiAutoLayout(this, "BUTTONS", GuiAutoLayout::LayoutVerticalTopToBottom);
     option_buttons->setPosition(20, 50, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
@@ -113,7 +119,7 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     info_reputation->setSize(GuiElement::GuiSizeMax, 40);
 
     GuiAutoLayout* layout = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutVerticalBottomToTop);
-    layout->setPosition(-20, -20, ABottomRight)->setSize(300, GuiElement::GuiSizeMax);
+    layout->setPosition(-20, -70, ABottomRight)->setSize(300, GuiElement::GuiSizeMax);
     alert_level_button = new GuiToggleButton(layout, "", "Alert level", [this](bool value)
     {
         for(GuiButton* button : alert_level_buttons)
@@ -137,6 +143,8 @@ RelayScreen::RelayScreen(GuiContainer* owner)
         alert_level_buttons.push_back(alert_button);
     }
 
+    new ShipsLog(this);
+
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
@@ -149,9 +157,12 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
         float view_distance = radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
         if (view_distance > 50000.0f)
             view_distance = 50000.0f;
-        if (view_distance < 5000.0f)
-            view_distance = 5000.0f;
+        if (view_distance < 6250.0f)
+            view_distance = 6250.0f;
         radar->setDistance(view_distance);
+        // Keep the zoom slider in sync.
+        zoom_slider->setValue(view_distance);
+        zoom_label->setText("Zoom: " + string(50000.0f / view_distance, 1.0f) + "x");
     }
     ///!
 

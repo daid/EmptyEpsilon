@@ -86,6 +86,10 @@ void GuiSelector::onMouseUp(sf::Vector2f position)
             popup_buttons[n]->setActive(int(n) == selection_index);
             popup_buttons[n]->setPosition(0, n * 50, ATopLeft);
         }
+        for(unsigned int n=entries.size(); n<popup_buttons.size(); n++)
+        {
+            popup_buttons[n]->hide();
+        }
         popup->show()->moveToFront();
     }
 }

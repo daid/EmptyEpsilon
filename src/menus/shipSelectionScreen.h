@@ -4,9 +4,11 @@
 #include "playerInfo.h"
 #include "gui/gui2_canvas.h"
 
+class GuiAutoLayout;
 class GuiLabel;
 class GuiListbox;
 class GuiSelector;
+class GuiSlider;
 class GuiButton;
 class GuiToggleButton;
 
@@ -22,9 +24,12 @@ private:
     GuiToggleButton* crew_position_button[max_crew_positions];
     GuiToggleButton* main_screen_controls_button;
     GuiToggleButton* game_master_button;
+    GuiAutoLayout* window_button_row;
     GuiToggleButton* window_button;
-    GuiSelector* window_angle;
+    GuiSlider* window_angle;
+    GuiLabel* window_angle_label;
     GuiToggleButton* topdown_button;
+    GuiToggleButton* cinematic_view_button;
     
 public:
     ShipSelectionScreen();

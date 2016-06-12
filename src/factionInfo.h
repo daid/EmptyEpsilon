@@ -69,7 +69,7 @@ public:
      */
     void reset();
 
-    static int findFactionId(string name);
+    static unsigned int findFactionId(string name);
 protected:
 
     string name;

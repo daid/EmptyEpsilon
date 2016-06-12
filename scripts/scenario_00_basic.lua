@@ -135,7 +135,7 @@ function init()
 	addGMFunction("Random friendly", function()
 		a = setWaveAngle(math.random(20), math.random(20))
 		d = random(15000, 20000 + math.random(20) * 1500)
-		friendlyShip = {'Cruiser','Fighter','Missile Cruiser'}
+		friendlyShip = {'Phobos T3','MU52 Hornet','Piranha F12'}
 		friendlyShipIndex = math.random(#friendlyShip)
 		table.insert(friendlyList, setCirclePos(CpuShip():setTemplate(friendlyShip[friendlyShipIndex]):setRotation(a):setFaction("Human Navy"):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 	end)

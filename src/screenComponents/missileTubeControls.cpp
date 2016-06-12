@@ -80,6 +80,7 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
     load_type_rows[MW_Mine].button->setIcon("gui/icons/weapon-mine.png");
     load_type_rows[MW_EMP].button->setIcon("gui/icons/weapon-emp.png");
     load_type_rows[MW_Nuke].button->setIcon("gui/icons/weapon-nuke.png");
+    load_type_rows[MW_HVLI].button->setIcon("gui/icons/weapon-hvli.png");
 }
 
 void GuiMissileTubeControls::onDraw(sf::RenderTarget& window)

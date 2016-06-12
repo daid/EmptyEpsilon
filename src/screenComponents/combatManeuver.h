@@ -3,15 +3,13 @@
 
 #include "gui/gui2_element.h"
 
-class GuiSnapSlider;
+class GuiSnapSlider2D;
 class GuiProgressbar;
 
 class GuiCombatManeuver : public GuiElement
 {
 private:
-    GuiSnapSlider* boost_slider;
-    GuiSnapSlider* strafe_slider;
-public:
+    GuiSnapSlider2D* slider;
     GuiProgressbar* charge_bar;
 public:
     GuiCombatManeuver(GuiContainer* owner, string id);

@@ -1,7 +1,7 @@
 #include "gui2_progressbar.h"
 
 GuiProgressbar::GuiProgressbar(GuiContainer* owner, string id, float min, float max, float value)
-: GuiElement(owner, id), min(min), max(max), value(value), color(sf::Color::White), drawBackground(true)
+: GuiElement(owner, id), min(min), max(max), value(value), color(sf::Color(255, 255, 255, 64)), drawBackground(true)
 {
 }
 
@@ -30,6 +30,13 @@ void GuiProgressbar::onDraw(sf::RenderTarget& window)
 GuiProgressbar* GuiProgressbar::setValue(float value)
 {
     this->value = value;
+    return this;
+}
+
+GuiProgressbar* GuiProgressbar::setRange(float min, float max)
+{
+    this->min = min;
+    this->max = max;
     return this;
 }
 

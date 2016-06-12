@@ -13,6 +13,7 @@
     #include <asm/termios.h>
     #include <fcntl.h>
     #include <unistd.h>
+    #include <dirent.h>
 #endif
 #if defined(__APPLE__) && defined(__MACH__)
     #include <IOKit/serial/ioss.h>
@@ -95,11 +96,15 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
     if (!isOpen())
         return;
 #ifdef __WIN32__
+    FlushFileBuffers(handle);
+
     DCB dcb;
     memset(&dcb, 0, sizeof(DCB));
     if (!GetCommState(handle, &dcb))
     {
-        LOG(ERROR) << "GetCommState failed!";
+        DWORD error;
+        ClearCommError(handle, &error, nullptr);
+        LOG(ERROR) << "GetCommState failed!" << error;
         return;
     }
     dcb.BaudRate = baudrate;
@@ -139,7 +144,7 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
     dcb.fNull = false;
 
     //Abort on error. Need to call ClearCommError when an error is returned.
-    dcb.fAbortOnError = true;
+    dcb.fAbortOnError = false;
 
     //Disable all flow control settings, so we can control the DTR and RTS lines manually.
     dcb.fOutxCtsFlow = false;
@@ -151,10 +156,14 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
 
     if(!SetCommState(handle, &dcb))
     {
-        LOG(ERROR) << "SetCommState failed!";
+        DWORD error;
+        ClearCommError(handle, &error, nullptr);
+        LOG(ERROR) << "SetCommState failed!" << error;
     }
 #endif
 #ifdef __gnu_linux__
+    fsync(handle);
+
     struct termios2 tio;
     ioctl(handle, TCGETS2, &tio);
 
@@ -294,16 +303,29 @@ void SerialPort::send(void* data, int data_size)
     if (!isOpen())
         return;
 #ifdef __WIN32__
-    DWORD written = 0;
-    if (!WriteFile(handle, data, data_size, &written, NULL))
+    while(data_size > 0)
     {
-        COMSTAT comStat;
-        DWORD   dwErrors;
-        ClearCommError(handle, &dwErrors, &comStat);
+        DWORD written = 0;
+        if (!WriteFile(handle, data, data_size, &written, NULL))
+        {
+            COMSTAT comStat;
+            DWORD   dwErrors;
+            ClearCommError(handle, &dwErrors, &comStat);
+            return;
+        }
+        data = ((char*)data) + written;
+        data_size -= written;
     }
 #endif
 #if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
-    write(handle, data, data_size);
+    while(data_size > 0)
+    {
+        int written = write(handle, data, data_size);
+        if (written < 1)
+            return;
+        data = ((char*)data) + written;
+        data_size -= written;
+    }
 #endif
 }
 
@@ -431,6 +453,24 @@ std::vector<string> SerialPort::getAvailablePorts()
         RegCloseKey(key);
     }else{
         LOG(ERROR) << "Failed to open registry key for serial port list.";
+    }
+#endif
+#ifdef __gnu_linux__
+    DIR* dir = opendir("/dev/");
+    if (dir)
+    {
+        struct dirent *entry;
+        while ((entry = readdir(dir)) != nullptr)
+        {
+            string filename = entry->d_name;
+            if (!filename.startswith("tty"))
+                continue;
+            if (filename.startswith("ttyACM"))
+                names.push_back(filename);
+            if (filename.startswith("ttyUSB"))
+                names.push_back(filename);
+        }
+        closedir(dir);
     }
 #endif
     return names;
