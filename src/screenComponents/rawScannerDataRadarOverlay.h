@@ -3,13 +3,16 @@
 
 #include "gui/gui2_element.h"
 
+class GuiRadarView;
+
 class RawScannerDataRadarOverlay : public GuiElement
 {
 public:
-    RawScannerDataRadarOverlay(GuiContainer* owner, string id, float distance);
+    RawScannerDataRadarOverlay(GuiRadarView* owner, string id, float distance);
 
     virtual void onDraw(sf::RenderTarget& window) override;
 private:
+    GuiRadarView* radar;
     float distance;
 };
 

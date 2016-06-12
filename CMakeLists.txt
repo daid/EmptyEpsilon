@@ -67,6 +67,7 @@ set(SOURCES
 	src/menus/optionsMenu.cpp
 	src/menus/shipSelectionScreen.cpp
 	src/menus/autoConnectScreen.cpp
+	src/screens/cinematicViewScreen.cpp
 	src/screens/crewStationScreen.cpp
 	src/screens/topDownScreen.cpp
 	src/screens/windowScreen.cpp
@@ -123,6 +124,7 @@ set(SOURCES
 	src/screenComponents/signalQualityIndicator.cpp
 	src/screenComponents/mainScreenControls.cpp
 	src/screenComponents/databaseView.cpp
+	src/screenComponents/shipsLogControl.cpp
 	src/gui/colorConfig.cpp
 	src/gui/mouseRenderer.cpp
 	src/gui/scriptError.cpp
@@ -303,6 +305,7 @@ foreach(SP_SOURCE
   	list(APPEND SOURCES ${SERIOUS_PROTON_DIR}${SP_SOURCE})
 endforeach()
 
+add_definitions(-DWINDOW_TITLE="EmptyEpsilon")
 add_definitions(-DVERSION_NUMBER=${CPACK_PACKAGE_VERSION_MAJOR}${CPACK_PACKAGE_VERSION_MINOR}${CPACK_PACKAGE_VERSION_PATCH})
 if(ENABLE_CRASH_LOGGER)
   add_definitions(-DENABLE_CRASH_LOGGER)

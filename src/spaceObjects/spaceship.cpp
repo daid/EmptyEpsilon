@@ -42,6 +42,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setCombatManeuver);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDrive);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDriveRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasWarpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWarpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponArc);
@@ -82,6 +83,8 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     warp_request = 0.0;
     current_warp = 0.0;
     has_jump_drive = true;
+    jump_drive_min_distance = 5000.0;
+    jump_drive_max_distance = 50000.0;
     jump_drive_charge = jump_drive_max_distance;
     jump_distance = 0.0;
     jump_delay = 0.0;
@@ -115,6 +118,8 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&has_jump_drive);
     registerMemberReplication(&jump_drive_charge, 0.5);
     registerMemberReplication(&jump_delay, 0.5);
+    registerMemberReplication(&jump_drive_min_distance);
+    registerMemberReplication(&jump_drive_max_distance);
     registerMemberReplication(&wormhole_alpha, 0.5);
     registerMemberReplication(&weapon_tube_count);
     registerMemberReplication(&target_id);
@@ -195,6 +200,8 @@ void SpaceShip::applyTemplateValues()
     has_warp_drive = ship_template->warp_speed > 0.0;
     warp_speed_per_warp_level = ship_template->warp_speed;
     has_jump_drive = ship_template->has_jump_drive;
+    jump_drive_min_distance = ship_template->jump_drive_min_distance;
+    jump_drive_max_distance = ship_template->jump_drive_max_distance;
     for(int n=0; n<max_weapon_tubes; n++)
     {
         weapon_tube[n].setLoadTimeConfig(ship_template->weapon_tube[n].load_time);
@@ -428,13 +435,13 @@ void SpaceShip::update(float delta)
     }else{
         if (has_jump_drive)
         {
-            float f = Tween<float>::linear(getSystemEffectiveness(SYS_JumpDrive), 0.0, 1.0, -0.25, 1.0);
+            float f = getJumpDriveRechargeRate();
             if (f > 0)
             {
                 if (jump_drive_charge < jump_drive_max_distance)
                 {
-                    float extra_charge = (delta / jump_drive_charge_time_per_km) * f;
-                    if (useEnergy(extra_charge * jump_drive_energy_per_km_charge))
+                    float extra_charge = (delta / jump_drive_charge_time * jump_drive_max_distance) * f;
+                    if (useEnergy(extra_charge * jump_drive_energy_per_km_charge / 1000.0))
                     {
                         jump_drive_charge += extra_charge;
                         if (jump_drive_charge >= jump_drive_max_distance)
@@ -442,7 +449,7 @@ void SpaceShip::update(float delta)
                     }
                 }
             }else{
-                jump_drive_charge += (delta / jump_drive_charge_time_per_km) * f;
+                jump_drive_charge += (delta / jump_drive_charge_time * jump_drive_max_distance) * f;
                 if (jump_drive_charge < 0.0f)
                     jump_drive_charge = 0.0f;
             }
@@ -495,29 +502,22 @@ void SpaceShip::update(float delta)
             combat_maneuver_strafe_active = combat_maneuver_strafe_request;
     }
 
-    if (combat_maneuver_boost_active != 0.0)
+    if (combat_maneuver_boost_active != 0.0 || combat_maneuver_strafe_active != 0.0)
     {
         combat_maneuver_charge -= combat_maneuver_boost_active * delta / combat_maneuver_boost_max_time;
-        if (combat_maneuver_charge <= 0.0)
-        {
-            combat_maneuver_charge = 0.0;
-            combat_maneuver_boost_request = 0.0;
-        }else{
-            setVelocity(getVelocity() + forward * combat_maneuver_boost_speed * combat_maneuver_boost_active);
-        }
-    }else if (combat_maneuver_strafe_active != 0.0)
-    {
         combat_maneuver_charge -= fabs(combat_maneuver_strafe_active) * delta / combat_maneuver_strafe_max_time;
         if (combat_maneuver_charge <= 0.0)
         {
             combat_maneuver_charge = 0.0;
+            combat_maneuver_boost_request = 0.0;
             combat_maneuver_strafe_request = 0.0;
         }else{
+            setVelocity(getVelocity() + forward * combat_maneuver_boost_speed * combat_maneuver_boost_active);
             setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() + 90) * combat_maneuver_strafe_speed * combat_maneuver_strafe_active);
         }
     }else if (combat_maneuver_charge < 1.0)
     {
-        combat_maneuver_charge += (delta / combat_maneuver_charge_time) * getSystemEffectiveness(SYS_Maneuver);
+        combat_maneuver_charge += (delta / combat_maneuver_charge_time) * (getSystemEffectiveness(SYS_Maneuver) + getSystemEffectiveness(SYS_Impulse)) / 2.0;
         if (combat_maneuver_charge > 1.0)
             combat_maneuver_charge = 1.0;
     }
@@ -544,12 +544,13 @@ void SpaceShip::update(float delta)
 float SpaceShip::getShieldRechargeRate(int shield_index)
 {
     float rate = 0.3f;
-    if (shield_index == 0)
-        rate *= getSystemEffectiveness(SYS_FrontShield);
-    else
-        rate *= getSystemEffectiveness(SYS_RearShield);
+    rate *= getSystemEffectiveness(getShieldSystemForShieldIndex(shield_index));
     if (docking_state == DS_Docked)
-        rate *= 4.0;
+    {
+        P<SpaceShip> docked_with_ship = docking_target;
+        if (!docked_with_ship)
+            rate *= 4.0;
+    }
     return rate;
 }
 
@@ -567,7 +568,7 @@ void SpaceShip::executeJump(float distance)
         return;
 
     distance = (distance * f) + (distance * (1.0 - f) * random(0.5, 1.5));
-    sf::Vector2f target_position = getPosition() + sf::vector2FromAngle(getRotation()) * distance * 1000.0f;
+    sf::Vector2f target_position = getPosition() + sf::vector2FromAngle(getRotation()) * distance;
     if (WarpJammer::isWarpJammed(target_position))
         target_position = WarpJammer::getFirstNoneJammedPosition(getPosition(), target_position);
     setPosition(target_position);
@@ -752,10 +753,14 @@ float SpaceShip::getShieldDamageFactor(DamageInfo& info, int shield_index)
     {
         frequency_damage_factor = frequencyVsFrequencyDamageFactor(info.frequency, shield_frequency);
     }
-    ESystem system = SYS_FrontShield;
-    if (shield_index > 0)
-        system = SYS_RearShield;
-    float shield_damage_factor = 1.25 - getSystemEffectiveness(system) * 0.25;
+    ESystem system = getShieldSystemForShieldIndex(shield_index);
+
+    //Shield damage reduction curve. Damage reduction gets slightly exponetial effective with power.
+    // This also greatly reduces the ineffectiveness at low power situations.
+    float shield_damage_exponent = 1.6;
+    float shield_damage_divider = 7.0;
+    float shield_damage_factor = 1.0 + powf(1.0, shield_damage_exponent) / shield_damage_divider-powf(getSystemEffectiveness(system), shield_damage_exponent) / shield_damage_divider;
+    
     return shield_damage_factor * frequency_damage_factor;
 }
 
@@ -780,7 +785,7 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
         if (info.system_target != SYS_None)
         {
             //Target specific system
-            float system_damage = (damage_amount / hull_max) * 1.0;
+            float system_damage = (damage_amount / hull_max) * 2.0;
             if (info.type == DT_Energy)
                 system_damage *= 3.0;   //Beam weapons do more system damage, as they penetrate the hull easier.
             systems[info.system_target].health -= system_damage;
@@ -802,17 +807,14 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
             else
                 damage_amount *= 0.5;
         }else{
-            for(int n=0; n<5; n++)
-            {
-                ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
-                //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
-                float system_damage = (damage_amount / hull_max) * 0.8;
-                if (info.type == DT_Energy)
-                    system_damage *= 2.5;   //Beam weapons do more system damage, as they penetrate the hull easier.
-                systems[random_system].health -= system_damage;
-                if (systems[random_system].health < -1.0)
-                    systems[random_system].health = -1.0;
-            }
+            ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
+            //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
+            float system_damage = (damage_amount / hull_max) * 3.0;
+            if (info.type == DT_Energy)
+                system_damage *= 2.5;   //Beam weapons do more system damage, as they penetrate the hull easier.
+            systems[random_system].health -= system_damage;
+            if (systems[random_system].health < -1.0)
+                systems[random_system].health = -1.0;
         }
     }
 

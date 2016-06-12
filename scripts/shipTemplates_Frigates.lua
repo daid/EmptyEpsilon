@@ -32,6 +32,51 @@ variation:setSpeed(55, 10, 10)
 variation:weaponTubeDisallowMissle(0, "Mine"):weaponTubeDisallowMissle(1, "Mine")
 variation:setTubeDirection(2,  180):setWeaponTubeExclusiveFor(2, "Mine")
 
+variation = variation:copy("Phobos M3P"):setType("playership")
+variation:setDescription([[Player variant of the Phobos M3, not as strong as the atlantis, but has front firing tubes, making it an easier to use ship in some scenarios.]])
+variation:setShields(100, 100)
+variation:setHull(200)
+variation:setSpeed(80, 10, 20)
+variation:setCombatManeuver(400, 250)
+variation:setWeaponStorage("Homing", 10)
+variation:setWeaponStorage("Nuke", 2)
+variation:setWeaponStorage("Mine", 4)
+variation:setWeaponStorage("EMP", 3)
+
+variation:addRoomSystem(1, 0, 2, 1, "Maneuver");
+variation:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
+variation:addRoom(2, 2, 2, 1);
+
+variation:addRoomSystem(0, 3, 1, 2, "RearShield");
+variation:addRoomSystem(1, 3, 2, 2, "Reactor");
+variation:addRoomSystem(3, 3, 2, 2, "Warp");
+variation:addRoomSystem(5, 3, 1, 2, "JumpDrive");
+variation:addRoom(6, 3, 2, 1);
+variation:addRoom(6, 4, 2, 1);
+variation:addRoomSystem(8, 3, 1, 2, "FrontShield");
+
+variation:addRoom(2, 5, 2, 1);
+variation:addRoomSystem(1, 6, 2, 1, "MissileSystem");
+variation:addRoomSystem(1, 7, 2, 1, "Impulse");
+
+variation:addDoor(1, 1, true);
+variation:addDoor(2, 2, true);
+variation:addDoor(3, 3, true);
+variation:addDoor(1, 3, false);
+variation:addDoor(3, 4, false);
+variation:addDoor(3, 5, true);
+variation:addDoor(2, 6, true);
+variation:addDoor(1, 7, true);
+variation:addDoor(5, 3, false);
+variation:addDoor(6, 3, false);
+variation:addDoor(6, 4, false);
+variation:addDoor(8, 3, false);
+variation:addDoor(8, 4, false);
+ 
+--Airlock doors
+--variation:addDoor(2, 2, false);
+--variation:addDoor(2, 5, false);
+
 template = ShipTemplate():setName("Nirvana R5"):setClass("Frigate", "Cruiser: Anti-fighter"):setModel("small_frigate_5") -- TODO: Better 3D model selection
 template:setDescription([[The Nirvana R5 is an anti-fighter cruiser. It has several rapid-firing, low-damage point-defense weapons to quickly take out starfighters.]])
 template:setBeamWeapon(0, 90, -15, 1200, 3, 1)

@@ -170,6 +170,7 @@
 			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 			<Add option="-DENABLE_CRASH_LOGGER" />
+			<Add option='-DWINDOW_TITLE=\&quot;EmptyEpsilon\&quot;' />
 			<Add directory="../SeriousProton/src" />
 			<Add directory="src" />
 		</Compiler>
@@ -648,6 +649,8 @@
 		<Unit filename="src/screenComponents/shipDestroyedPopup.h" />
 		<Unit filename="src/screenComponents/shipInternalView.cpp" />
 		<Unit filename="src/screenComponents/shipInternalView.h" />
+		<Unit filename="src/screenComponents/shipsLogControl.cpp" />
+		<Unit filename="src/screenComponents/shipsLogControl.h" />
 		<Unit filename="src/screenComponents/signalQualityIndicator.cpp" />
 		<Unit filename="src/screenComponents/signalQualityIndicator.h" />
 		<Unit filename="src/screenComponents/snapSlider.cpp" />
@@ -658,6 +661,8 @@
 		<Unit filename="src/screenComponents/viewport3d.h" />
 		<Unit filename="src/screenComponents/warpControls.cpp" />
 		<Unit filename="src/screenComponents/warpControls.h" />
+		<Unit filename="src/screens/cinematicViewScreen.cpp" />
+		<Unit filename="src/screens/cinematicViewScreen.h" />
 		<Unit filename="src/screens/crew1/singlePilotScreen.cpp" />
 		<Unit filename="src/screens/crew1/singlePilotScreen.h" />
 		<Unit filename="src/screens/crew4/engineeringAdvancedScreen.cpp" />

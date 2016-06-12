@@ -5,23 +5,28 @@
 #include "gui/gui2_overlay.h"
 #include "spaceObjects/scanProbe.h"
 
+class GuiListbox;
 class GuiRadarView;
 class GuiKeyValueDisplay;
 class GuiFrequencyCurve;
 class GuiScrollText;
+class GuiButton;
 class GuiToggleButton;
-class RawScannerDataRadarOverlay;
+class GuiSlider;
+class GuiLabel;
+class DatabaseViewComponent;
 
 class ScienceScreen : public GuiOverlay
 {
-protected:
+public:
     GuiElement* radar_view;
-    RawScannerDataRadarOverlay* raw_scanner_data_overlay;
-    GuiElement* database_view;
+    DatabaseViewComponent* database_view;
 
     TargetsContainer targets;
     GuiRadarView* science_radar;
     GuiRadarView* probe_radar;
+    GuiSlider* zoom_slider;
+    GuiLabel* zoom_label;
     GuiKeyValueDisplay* info_callsign;
     GuiKeyValueDisplay* info_distance;
     GuiKeyValueDisplay* info_heading;
@@ -29,7 +34,9 @@ protected:
 
     GuiKeyValueDisplay* info_faction;
     GuiKeyValueDisplay* info_type;
+    GuiButton* info_type_button;
     GuiKeyValueDisplay* info_shields;
+    GuiKeyValueDisplay* info_hull;
     GuiScrollText* info_description;
     GuiFrequencyCurve* info_shield_frequency;
     GuiFrequencyCurve* info_beam_frequency;
@@ -37,6 +44,7 @@ protected:
 
     GuiToggleButton* probe_view_button;
     P<ScanProbe> observation_point;
+    GuiListbox* view_mode_selection;
 public:
     ScienceScreen(GuiContainer* owner);
 

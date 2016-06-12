@@ -60,7 +60,7 @@ void FactionInfo::setFriendly(P<FactionInfo> other)
     }
 }
 
-int FactionInfo::findFactionId(string name)
+unsigned int FactionInfo::findFactionId(string name)
 {
     for(unsigned int n = 0; n < factionInfo.size(); n++)
         if (factionInfo[n]->name == name)

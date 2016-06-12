@@ -8,6 +8,7 @@ class GuiKeyValueDisplay;
 class GuiLabel;
 class GuiSlider;
 class GuiAutoLayout;
+class GuiImage;
 class GuiArrow;
 class GuiToggleButton;
 class GuiProgressbar;
@@ -33,11 +34,17 @@ private:
         GuiLabel* damage_label;
         GuiProgressbar* heat_bar;
         GuiArrow* heat_arrow;
+        GuiImage* heat_icon;
         GuiProgressbar* power_bar;
         GuiProgressbar* coolant_bar;
     };
     std::vector<SystemRow> system_rows;
+    GuiAutoLayout* system_effects_container;
+    std::vector<GuiKeyValueDisplay*> system_effects;
+    unsigned int system_effects_index;
     ESystem selected_system;
+    
+    void addSystemEffect(string key, string value);
 public:
     EngineeringScreen(GuiContainer* owner);
     

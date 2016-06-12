@@ -1,10 +1,12 @@
 #include "rawScannerDataRadarOverlay.h"
+#include "radarView.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 
-RawScannerDataRadarOverlay::RawScannerDataRadarOverlay(GuiContainer* owner, string id, float distance)
-: GuiElement(owner, id), distance(distance)
+RawScannerDataRadarOverlay::RawScannerDataRadarOverlay(GuiRadarView* owner, string id, float distance)
+: GuiElement(owner, id), radar(owner), distance(distance)
 {
+    setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
 void RawScannerDataRadarOverlay::onDraw(sf::RenderTarget& window)
@@ -12,7 +14,7 @@ void RawScannerDataRadarOverlay::onDraw(sf::RenderTarget& window)
     if (!my_spaceship)
         return;
 
-    sf::Vector2f view_position = my_spaceship->getPosition();;
+    sf::Vector2f view_position = radar->getViewPosition();
 
     const int point_count = 512;
     float radius = std::min(rect.width, rect.height) / 2.0f;

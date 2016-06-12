@@ -1,4 +1,5 @@
 #include "gameGlobalInfo.h"
+#include "preferenceManager.h"
 
 P<GameGlobalInfo> gameGlobalInfo;
 
@@ -160,12 +161,20 @@ void GameGlobalInfo::startScenario(string filename)
     P<ScriptObject> script = new ScriptObject();
     script->run(filename);
     engine->registerObject("scenario", script);
+
+    if (PreferencesManager::get("game_logs", "1").toInt())
+    {
+        state_logger = new GameStateLogger();
+        state_logger->start();
+    }
 }
 
 void GameGlobalInfo::destroy()
 {
     reset();
     MultiplayerObject::destroy();
+    if (state_logger)
+        state_logger->destroy();
 }
 
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)

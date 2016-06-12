@@ -29,6 +29,10 @@ public:
     GuiEntryList* setOptions(std::vector<string> options);
     GuiEntryList* setOptions(std::vector<string> options, std::vector<string> values);
 
+    void setEntryName(int index, string name);
+    void setEntryValue(int index, string value);
+    void setEntry(int index, string name, string value);
+
     int addEntry(string name, string value);
     int indexByValue(string value);
     void removeEntry(int index);

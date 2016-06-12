@@ -3,7 +3,7 @@
 #include "mainScreen.h"
 #include "main.h"
 #include "epsilonServer.h"
-#include "menus/shipSelectionScreen.h"
+#include "preferenceManager.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/selfDestructIndicator.h"
@@ -39,7 +39,19 @@ ScreenMainScreen::ScreenMainScreen()
     new GuiSelfDestructIndicator(this);
     new GuiGlobalMessage(this);
     new GuiIndicatorOverlays(this);
-    
+
+    if (PreferencesManager::get("music_enabled") != "0")
+    {
+        threat_estimate = new ThreatLevelEstimate();
+        threat_estimate->setCallbacks([](){
+            LOG(INFO) << "Switching to ambient music";
+            soundManager->playMusicSet(findResources("music/ambient/*.ogg"));
+        }, []() {
+            LOG(INFO) << "Switching to combat music";
+            soundManager->playMusicSet(findResources("music/combat/*.ogg"));
+        });
+    }
+
     first_person = false;
 }
 
@@ -47,6 +59,7 @@ void ScreenMainScreen::update(float delta)
 {
     if (game_client && game_client->getStatus() == GameClient::Disconnected)
     {
+        soundManager->stopMusic();
         destroy();
         disconnectFromServer();
         returnToMainMenu();
@@ -203,8 +216,9 @@ void ScreenMainScreen::onKey(sf::Keyboard::Key key, int unicode)
     //TODO: This is more generic code and is duplicated.
     case sf::Keyboard::Escape:
     case sf::Keyboard::Home:
+        soundManager->stopMusic();
         destroy();
-        new ShipSelectionScreen();
+        returnToShipSelection();
         break;
     case sf::Keyboard::P:
         if (game_server)

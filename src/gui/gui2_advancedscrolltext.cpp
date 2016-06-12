@@ -94,4 +94,5 @@ void GuiAdvancedScrollText::onDraw(sf::RenderTarget& window)
         if (auto_scroll_down)
             scrollbar->setValue(scrollbar->getValue() + diff);
     }
+    scrollbar->setVisible(rect.height > 100);
 }

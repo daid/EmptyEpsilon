@@ -25,7 +25,7 @@ void GuiFrequencyCurve::onDraw(sf::RenderTarget& window)
             else
                 f = frequencyVsFrequencyDamageFactor(n, frequency);
             f = Tween<float>::linear(f, 0.5, 1.5, 0.1, 1.0);
-            float h = (rect.height - 40) * f;
+            float h = (rect.height - 50) * f;
             sf::RectangleShape bar(sf::Vector2f(w * 0.8, h));
             bar.setPosition(x, rect.top + rect.height - 10 - h);
             if (more_damage_is_positive)
