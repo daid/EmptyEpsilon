@@ -88,6 +88,7 @@ public:
     float scan_probe_recharge;
 
     EMainScreenSetting main_screen_setting;
+    EMainScreenOverlay main_screen_overlay;
 
     bool activate_self_destruct;
     uint32_t self_destruct_code[max_self_destruct_codes];
@@ -138,6 +139,7 @@ public:
     void commandFireTube(int8_t tubeNumber, float missile_target_angle);
     void commandSetShields(bool enabled);
     void commandMainScreenSetting(EMainScreenSetting mainScreen);
+    void commandMainScreenOverlay(EMainScreenOverlay mainScreen);
     void commandScan(P<SpaceObject> object);
     void commandSetSystemPowerRequest(ESystem system, float power_level);
     void commandSetSystemCoolantRequest(ESystem system, float coolant_level);

@@ -9,6 +9,7 @@
 #include "screenComponents/selfDestructIndicator.h"
 #include "screenComponents/globalMessage.h"
 #include "screenComponents/jumpIndicator.h"
+#include "screenComponents/commsOverlay.h"
 #include "screenComponents/viewport3d.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/shipDestroyedPopup.h"
@@ -32,6 +33,8 @@ ScreenMainScreen::ScreenMainScreen()
     long_range_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->enableCallsigns()->hide();
     long_range_radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
+    onscreen_comms = new GuiCommsOverlay(this);
+    onscreen_comms->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setVisible(false);
 
     new GuiShipDestroyedPopup(this);
     
@@ -127,6 +130,18 @@ void ScreenMainScreen::update(float delta)
             viewport->hide();
             tactical_radar->hide();
             long_range_radar->show();
+            break;
+        }
+
+        switch(my_spaceship->main_screen_overlay)
+        {
+        case MSO_ShowComms:
+            onscreen_comms->clearElements();
+            onscreen_comms->show();
+            break;
+        case MSO_HideComms:
+            onscreen_comms->clearElements();
+            onscreen_comms->hide();
             break;
         }
     }
