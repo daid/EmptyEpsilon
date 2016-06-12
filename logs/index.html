@@ -47,6 +47,13 @@
                 height: 40px;
                 text-align: center;
             }
+            #zoom_selector {
+                position: absolute;
+                top: 40px;
+                right: -20px;
+                width: 100px;
+                transform: rotate(270deg);
+            }
 
             .ee-button {
               font-family: 'bebas_neue_regularregular', 'Impact', 'Arial Narrow', sans-serif;
@@ -216,6 +223,7 @@
             <input id="time_selector" type="range" min="0" max="0" value="0">
             <button class="ee-button" id="callsigns" unselectable>Callsigns</button>
         </div>
+        <input id="zoom_selector" type="range" min="2" max="150"> <!-- smaller range than mouse wheel -->
         <div id="dropzone" unselectable>
             <p style="margin: 0;">Drop log file here</p>
             <input id="filepicker" type="file">
@@ -324,6 +332,7 @@
                     // Cap delta to avoid impossible zoom scales.
                     delta = Math.max(delta, -999.99);
                     this._zoom_scale *= 1.0 + delta / 1000.0;
+                    $("#zoom_selector").val(canvas._zoom_scale * 1000);
                     this.update();
                 }
 
@@ -349,12 +358,12 @@
                     // Cap the zoom scales to reasonable levels.
                     if (this._zoom_scale > 1.25) // 100px = 0.08U
                         this._zoom_scale = 1.25;
-                    else if (this._zoom_scale < 0.000333) // 100px = 300U
-                        this._zoom_scale = 0.000333;
+                    else if (this._zoom_scale < 0.001) // 100px = 100U
+                        this._zoom_scale = 0.001;
 
                     // Draw the canvas background.
                     var ctx = this._canvas[0].getContext("2d");
-                    ctx.fillStyle = "#141414";
+                    ctx.fillStyle = "#000";
                     ctx.fillRect(0, 0, w, h);
 
                     // Don't bother if we don't have a log to read.
@@ -378,45 +387,23 @@
 
                         if (entry.type == "Nebula")
                         {
-                            var r = 5000.0 * this._zoom_scale;
-                            ctx.globalAlpha = 0.2
-                            ctx.beginPath();
-                            ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-                            ctx.fillStyle = "#202080";
-                            ctx.fill();
-                            ctx.globalAlpha = 1.0
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#202080", 0.3, 300)
                         }
                         else if (entry.type == "BlackHole")
                         {
-                            var r = 5000.0 * this._zoom_scale;
-                            ctx.globalAlpha = 0.2
-                            ctx.beginPath();
-                            ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-                            ctx.fillStyle = "#802020";
-                            ctx.fill();
-                            ctx.globalAlpha = 1.0
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#802020", 0.3, 300)
                         }
                         else if (entry.type == "WormHole")
                         {
-                            var r = 5000.0 * this._zoom_scale;
-                            ctx.globalAlpha = 0.2
-                            ctx.beginPath();
-                            ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-                            ctx.fillStyle = "#800080";
-                            ctx.fill();
-                            ctx.globalAlpha = 1.0
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#800080", 0.3, 300)
                         }
                         else if (entry.type == "Mine")
                         {
-                            var r = 1000.0 * this._zoom_scale;
-                            ctx.globalAlpha = 0.2
-                            ctx.beginPath();
-                            ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-                            ctx.fillStyle = "#808080";
-                            ctx.fill();
-                            ctx.globalAlpha = 1.0
-                            ctx.fillStyle = "#FFFFFF";
-                            ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+                            // Draw mine radius.
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#808080", 0.3, 30)
+
+                            // Draw mine location.
+                            this.drawSquare(ctx, x, y, this._zoom_scale, "#FFF", 1.0, 1)
                         }
                         else if (entry.type == "PlayerSpaceship")
                         {
@@ -440,69 +427,47 @@
                         }
                         else if (entry.type == "Asteroid")
                         {
-                            ctx.fillStyle = "#FFC864";
-                            ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+                            this.drawSquare(ctx, x, y, this._zoom_scale, "#FFC864", 1.0, 1)
                         }
                         else if (entry.type == "ScanProbe")
                         {
-                            ctx.fillStyle = "#60C080";
-                            ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+                            this.drawSquare(ctx, x, y, this._zoom_scale, "#60C080", 1.0, 1)
                         }
                         else if (entry.type == "Nuke")
                         {
-                            ctx.fillStyle = "#F40";
-                            ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+                            this.drawSquare(ctx, x, y, this._zoom_scale, "#F40", 1.0, 1)
                         }
                         else if (entry.type == "EMPMissile")
                         {
-                            ctx.fillStyle = "#0FF";
-                            ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+                            this.drawSquare(ctx, x, y, this._zoom_scale, "#0FF", 1.0, 1)
                         }
                         else if (entry.type == "HomingMissile")
                         {
-                            ctx.fillStyle = "#FA0";
-                            ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+                            this.drawSquare(ctx, x, y, this._zoom_scale, "#FA0", 1.0, 1)
                         }
                         else if (entry.type == "HVLI")
                         {
-                            ctx.fillStyle = "#AAA";
-                            ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+                            this.drawSquare(ctx, x, y, this._zoom_scale, "#AAA", 1.0, 1)
                         }
                         else if (entry.type == "VisualAsteroid")
                         {
                         }
                         else if (entry.type == "BeamEffect")
                         {
-                            var r = 50.0 * this._zoom_scale;
-                            ctx.globalAlpha = 0.4
-                            ctx.beginPath();
-                            ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-                            ctx.fillStyle = "#A60";
-                            ctx.fill();
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#A60", 0.5, 2)
                         }
                         else if (entry.type == "ExplosionEffect")
                         {
-                            var r = 100.0 * this._zoom_scale;
-                            ctx.globalAlpha = 0.4
-                            ctx.beginPath();
-                            ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-                            ctx.fillStyle = "#FF0";
-                            ctx.fill();
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#FF0", 0.5, 3)
                         }
                         else if (entry.type == "ElectricExplosionEffect")
                         {
-                            var r = 100.0 * this._zoom_scale;
-                            ctx.globalAlpha = 0.4
-                            ctx.beginPath();
-                            ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-                            ctx.fillStyle = "#0FF";
-                            ctx.fill();
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#0FF", 0.5, 3)
                         }
                         else
                         {
                             console.debug("Unknown object type: ", entry.type)
-                            ctx.fillStyle = "#F00";
-                            ctx.fillRect(x, y, Math.max(66 * this._zoom_scale, 2), Math.max(66 * this._zoom_scale, 2));
+                            this.drawSquare(ctx, x, y, this._zoom_scale, "#F00", 1.0, 2)
                         }
                     }
 
@@ -513,15 +478,28 @@
                     var stateTextZoom = "100px = " + (0.1 / this._zoom_scale).toPrecision(3) + "U";
                     var stateTextX = "X: " + this._view_x.toPrecision(6);
                     var stateTextY = "Y: " + this._view_y.toPrecision(6);
-                    var sectorLetter = String.fromCharCode('F'.charCodeAt() + Math.floor(this._view_y / 20000));
-                    var sectorNumber = 5 + Math.floor(this._view_x / 20000);
-                    if (sectorNumber < 0)
-                        sectorNumber = 100 + sectorNumber;
-                    var stateTextSector = "(" + sectorLetter + sectorNumber + ")";
+                    var stateTextSector = "(" + this.getSectorDesignation(this._view_x, this._view_y) + ")";
                     // TODO: Fix out-of-range sector designations in-game.
                     var stateText = stateTextTime + " / " + stateTextZoom + " / " + stateTextX + " / " + stateTextY + " " + stateTextSector;
-                    ctx.font="20px bebas_neue_regularregular, Impact, Arial, sans-serif";
+                    ctx.font = "20px bebas_neue_regularregular, Impact, Arial, sans-serif";
                     ctx.fillText(stateText, 20, 40);
+                }
+
+                getSectorDesignation(x, y)
+                {
+                    // Sectors are designated with a letter (Y axis) and number
+                    // (X axis). Coordinates 0, 0 represent the intersection of
+                    // F and 5. Each sector is a 20U (20000) square.
+
+                    // TODO: Fix out-of-range sector designations in-game.
+                    var sectorLetter = String.fromCharCode('F'.charCodeAt() + Math.floor(y / 20000));
+
+                    // Sector numbers are 0-99.
+                    var sectorNumber = 5 + Math.floor(x / 20000);
+                    if (sectorNumber < 0)
+                        sectorNumber = 100 + sectorNumber;
+
+                    return sectorLetter + sectorNumber;
                 }
 
                 drawGrid(ctx, x, y, canvasWidth, canvasHeight, gridIntervalSize, gridlineColor)
@@ -543,12 +521,18 @@
                     // Find the first gridlines from the top left.
                     var gridlineHorizTop = canvasEdges.top - canvasEdges.top % 20000;
                     var gridlineVertLeft = canvasEdges.left - canvasEdges.left % 20000;
+                    var gridlineVertWorldList = [];
+                    var gridlineVertCanvasList = [];
+                    var gridlineHorizWorldList = [];
+                    var gridlineHorizCanvasList = [];
 
                     // Draw horizontal gridlines until we run out of canvas.
                     for(var i = gridlineHorizTop; i <= canvasEdges.bottom; i = i + gridIntervalSize)
                     {
                         // Translate screen position to world position.
                         gridlineHoriz = (i - y) * this._zoom_scale + canvasHeight / 2.0;
+                        gridlineHorizWorldList.push(i);
+                        gridlineHorizCanvasList.push(gridlineHoriz);
 
                         ctx.beginPath();
                         ctx.moveTo(0, gridlineHoriz);
@@ -562,12 +546,27 @@
                     {
                         // Translate screen position to world position.
                         gridlineVert = (i - x) * this._zoom_scale + canvasWidth / 2.0;
+                        gridlineVertWorldList.push(i);
+                        gridlineVertCanvasList.push(gridlineVert);
 
                         ctx.beginPath();
                         ctx.moveTo(gridlineVert, 0);
                         ctx.lineTo(gridlineVert, canvasHeight);
                         ctx.closePath();
                         ctx.stroke();
+                    }
+
+                    ctx.fillStyle = gridlineColor;
+                    ctx.font = "24px bebas_neue_regularregular, Impact, Arial, sans-serif";
+                    if (gridlineHorizCanvasList.length <= 25 && gridlineVertCanvasList.length <= 25)
+                    {
+                        for(var i = 0; i < gridlineHorizCanvasList.length; i++)
+                        {
+                            for(var j = 0; j < gridlineVertCanvasList.length; j++)
+                            {
+                                ctx.fillText(this.getSectorDesignation(gridlineHorizWorldList[i], gridlineVertWorldList[j]), gridlineVertCanvasList[j], gridlineHorizCanvasList[i] + 16);
+                            }
+                        }
                     }
                 }
 
@@ -579,26 +578,56 @@
                         return "#" + lowColor + highColor + lowColor;
                     else if (faction == "Independent")
                         return "#" + lowColor + lowColor + highColor;
+                    else if (faction == "Arlenians")
+                        return "#" + highColor + lowColor + "0";
+                    else if (faction == "Exuari")
+                        return "#" + highColor + "0" + lowColor;
+                    else if (faction == "Ghosts")
+                        return "#" + highColor + highColor + highColor;
+                    else if (faction == "Ktlitans") // Very close to Human Navy
+                        return "#" + lowColor + highColor + "0";
                     else // Everybody else is evil
                         return "#" + highColor + lowColor + lowColor;
                 }
 
                 drawSquare(ctx, x, y, zoomScale, fillColor, fillAlpha, sizeModifier)
                 {
+                    // Draw a square that scales with the zoom level.
+                    ctx.globalAlpha = fillAlpha;
                     ctx.fillStyle = fillColor;
+
+                    // Prevent small objects from disappearing when zoomed out.
                     var sizeMultiplier = sizeModifier * (100 / 3);
-                    var squareSize = Math.max(sizeMultiplier * zoomScale, sizeModifier);
+                    var squareSize;
+
+                    if (sizeModifier < 50)
+                        squareSize = Math.max(sizeMultiplier * zoomScale, sizeModifier);
+                    else
+                        squareSize = sizeMultiplier * zoomScale;
+
                     ctx.fillRect(x - squareSize / 2, y - squareSize / 2, squareSize, squareSize);
+                    ctx.globalAlpha = 1.0;
                 }
 
                 drawCircle(ctx, x, y, zoomScale, fillColor, fillAlpha, sizeModifier)
                 {
+                    // Draw a circle that scales with the zoom level.
+                    ctx.globalAlpha = fillAlpha;
                     ctx.fillStyle = fillColor;
+
+                    // Prevent small objects from disappearing when zoomed out.
                     var sizeMultiplier = sizeModifier * (100 / 3);
-                    var circleSize = Math.max(sizeMultiplier * zoomScale, sizeModifier);
+                    var circleSize;
+
+                    if (sizeModifier < 50)
+                        circleSize = Math.max(sizeMultiplier * zoomScale, sizeModifier / 2);
+                    else
+                        circleSize = sizeMultiplier * zoomScale;
+
                     ctx.beginPath();
                     ctx.arc(x, y, circleSize / 2, 0, 2 * Math.PI, false);
                     ctx.fill();
+                    ctx.globalAlpha = 1.0;
                 }
 
                 drawCallsign(ctx, x, y, zoomScale, entry, fontSize, lowColor, highColor, textDrift)
@@ -620,20 +649,20 @@
 
                     if (entry.station_type == "Huge Station")
                     {
-                        sizeModifier = 12;
+                        sizeModifier = 48;
                     } else if (entry.station_type == "Large Station") {
-                        sizeModifier = 9;
+                        sizeModifier = 36;
                     } else if (entry.station_type == "Medium Station") {
-                        sizeModifier = 6;
+                        sizeModifier = 28;
                     } else {
-                        sizeModifier = 3;
+                        sizeModifier = 18;
                     }
 
                     this.drawCircle(ctx, x, y, this._zoom_scale, factionColor, 1.0, sizeModifier);
 
                     // Draw its callsign.
                     if (this.showCallsigns === true)
-                        this.drawCallsign(ctx, x, y, this._zoom_scale, entry, "18", "C8", "FF", sizeModifier);
+                        this.drawCallsign(ctx, x, y, this._zoom_scale, entry, "18", "C8", "FF", sizeModifier / Math.PI);
                 }
 
                 drawShip(ctx, x, y, entry)
@@ -766,6 +795,13 @@
                 $("#time_selector").on("input change", function(e) {
                     canvas.update();
                 });
+
+                // Zoom bar.
+                $("#zoom_selector").on("input change", function(e) {
+                    var zoom_value = $("#zoom_selector").val();
+                    canvas._zoom_scale = $("#zoom_selector").val() / 1000;
+                    canvas.update();
+                })
 
                 // Track the play/pause button.
                 var isAutoplaying = false;
