@@ -131,11 +131,15 @@ void ScreenMainScreen::update(float delta)
             tactical_radar->hide();
             long_range_radar->show();
             break;
-        case MSS_ShowComms:
+        }
+
+        switch(my_spaceship->main_screen_overlay)
+        {
+        case MSO_ShowComms:
             onscreen_comms->clearElements();
             onscreen_comms->show();
             break;
-        case MSS_HideComms:
+        case MSO_HideComms:
             onscreen_comms->clearElements();
             onscreen_comms->hide();
             break;

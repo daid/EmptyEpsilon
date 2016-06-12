@@ -94,7 +94,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         {
             if (my_spaceship)
             {
-                my_spaceship->commandMainScreenSetting(MSS_ShowComms);
+                my_spaceship->commandMainScreenOverlay(MSO_ShowComms);
                 onscreen_comms_active = true;
             }
             open_button->setValue(false);
@@ -107,7 +107,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         {
             if (my_spaceship)
             {
-                my_spaceship->commandMainScreenSetting(MSS_HideComms);
+                my_spaceship->commandMainScreenOverlay(MSO_HideComms);
                 onscreen_comms_active = false;
             }
             open_button->setValue(false);

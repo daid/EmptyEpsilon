@@ -16,12 +16,18 @@ template<> void convert<EMainScreenSetting>::param(lua_State* L, int& idx, EMain
         mss = MSS_Tactical;
     else if (str == "longrange")
         mss = MSS_LongRange;
-    else if (str == "showcomms")
-        mss = MSS_ShowComms;
-    else if (str == "hidecomms")
-        mss = MSS_HideComms;
     else
         mss = MSS_Front;
 }
 
+template<> void convert<EMainScreenOverlay>::param(lua_State* L, int& idx, EMainScreenOverlay& mso)
+{
+    string str = string(luaL_checkstring(L, idx++)).lower();
+    if (str == "hidecomms")
+        mso = MSO_HideComms;
+    else if (str == "showcomms")
+        mso = MSO_ShowComms;
+    else
+        mso = MSO_HideComms;
+}
 #endif /* _SPACEOBJECTS_HPP_ */

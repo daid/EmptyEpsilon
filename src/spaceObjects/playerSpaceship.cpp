@@ -44,6 +44,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandFireTube);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetShields);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMainScreenSetting);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMainScreenOverlay);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandScan);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetSystemPowerRequest);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetSystemCoolantRequest);
@@ -98,7 +99,7 @@ static const int16_t CMD_LOAD_TUBE = 0x0006;
 static const int16_t CMD_UNLOAD_TUBE = 0x0007;
 static const int16_t CMD_FIRE_TUBE = 0x0008;
 static const int16_t CMD_SET_SHIELDS = 0x0009;
-static const int16_t CMD_SET_MAIN_SCREEN_SETTING = 0x000A;
+static const int16_t CMD_SET_MAIN_SCREEN_SETTING = 0x000A; // Overlay is 0x0027
 static const int16_t CMD_SCAN_OBJECT = 0x000B;
 static const int16_t CMD_SCAN_DONE = 0x000C;
 static const int16_t CMD_SCAN_CANCEL = 0x000D;
@@ -127,6 +128,7 @@ static const int16_t CMD_LAUNCH_PROBE = 0x0023;
 static const int16_t CMD_SET_ALERT_LEVEL = 0x0024;
 static const int16_t CMD_SET_SCIENCE_LINK = 0x0025;
 static const int16_t CMD_ABORT_DOCK = 0x0026;
+static const int16_t CMD_SET_MAIN_SCREEN_OVERLAY = 0x0027;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -813,6 +815,9 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     case CMD_SET_MAIN_SCREEN_SETTING:
         packet >> main_screen_setting;
         break;
+    case CMD_SET_MAIN_SCREEN_OVERLAY:
+        packet >> main_screen_overlay;
+        break;
     case CMD_SCAN_OBJECT:
         {
             int32_t id;
@@ -1212,6 +1217,13 @@ void PlayerSpaceship::commandMainScreenSetting(EMainScreenSetting mainScreen)
 {
     sf::Packet packet;
     packet << CMD_SET_MAIN_SCREEN_SETTING << mainScreen;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandMainScreenOverlay(EMainScreenOverlay mainScreen)
+{
+    sf::Packet packet;
+    packet << CMD_SET_MAIN_SCREEN_OVERLAY << mainScreen;
     sendClientCommand(packet);
 }
 

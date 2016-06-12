@@ -13,11 +13,16 @@ enum EMainScreenSetting
     MSS_Left,
     MSS_Right,
     MSS_Tactical,
-    MSS_LongRange,
-    MSS_ShowComms,
-    MSS_HideComms
+    MSS_LongRange
 };
 template<> void convert<EMainScreenSetting>::param(lua_State* L, int& idx, EMainScreenSetting& mss);
+
+enum EMainScreenOverlay
+{
+    MSO_HideComms = 0,
+    MSO_ShowComms
+};
+template<> void convert<EMainScreenOverlay>::param(lua_State* L, int& idx, EMainScreenOverlay& mso);
 
 enum EDockingState
 {
@@ -363,6 +368,7 @@ string getMissileWeaponName(EMissileWeapons missile);
 REGISTER_MULTIPLAYER_ENUM(EMissileWeapons);
 REGISTER_MULTIPLAYER_ENUM(EWeaponTubeState);
 REGISTER_MULTIPLAYER_ENUM(EMainScreenSetting);
+REGISTER_MULTIPLAYER_ENUM(EMainScreenOverlay);
 REGISTER_MULTIPLAYER_ENUM(EDockingState);
 REGISTER_MULTIPLAYER_ENUM(EScannedState);
 
