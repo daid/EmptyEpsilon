@@ -1,5 +1,6 @@
 #include "main.h"
 #include "autoConnectScreen.h"
+#include "preferenceManager.h"
 #include "epsilonServer.h"
 #include "gameGlobalInfo.h"
 #include "playerInfo.h"
@@ -36,6 +37,11 @@ AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_m
         else if (key_value.size() == 2)
             ship_filters[key] = key_value[1].strip();
         LOG(INFO) << "Auto connect filter: " << key << " = " << ship_filters[key];
+    }
+
+    if (PreferencesManager::get("instance_name") != "")
+    {
+        (new GuiLabel(this, "", PreferencesManager::get("instance_name"), 25))->setAlignment(ACenterLeft)->setPosition(20, 20, ATopLeft)->setSize(0, 18);
     }
 }
 

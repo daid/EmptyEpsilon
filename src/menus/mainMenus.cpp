@@ -1,6 +1,7 @@
 #include "engine.h"
 #include "mainMenus.h"
 #include "main.h"
+#include "preferenceManager.h"
 #include "epsilonServer.h"
 #include "tutorialGame.h"
 #include "playerInfo.h"
@@ -139,6 +140,11 @@ MainMenu::MainMenu()
     (new GuiLabel(this, "CREDITS23", "Ralf Leichter", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
     (new GuiLabel(this, "CREDITS24", "Lee McDonough (Flea)", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
     (new GuiLabel(this, "CREDITS25", "Mickael Houet", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
+
+    if (PreferencesManager::get("instance_name") != "")
+    {
+        (new GuiLabel(this, "", PreferencesManager::get("instance_name"), 25))->setAlignment(ACenterLeft)->setPosition(20, 20, ATopLeft)->setSize(0, 18);
+    }
 
 #ifdef DEBUG
     (new GuiButton(this, "", "TO DA GM!", [this]() {
