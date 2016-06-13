@@ -403,7 +403,7 @@
                             this.drawCircle(ctx, x, y, this._zoom_scale, "#808080", 0.3, 30)
 
                             // Draw mine location.
-                            this.drawSquare(ctx, x, y, this._zoom_scale, "#FFF", 1.0, 1)
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#FFF", 1.0, 1)
                         }
                         else if (entry.type == "PlayerSpaceship")
                         {
@@ -419,7 +419,7 @@
                         }
                         else if (entry.type == "SupplyDrop")
                         {
-                            this.drawShip(ctx, x, y, entry);
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#0FF", 1.0, 2);
                         }
                         else if (entry.type == "SpaceStation")
                         {
@@ -427,11 +427,15 @@
                         }
                         else if (entry.type == "Asteroid")
                         {
-                            this.drawSquare(ctx, x, y, this._zoom_scale, "#FFC864", 1.0, 1)
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#FFC864", 1.0, 1)
                         }
                         else if (entry.type == "ScanProbe")
                         {
-                            this.drawSquare(ctx, x, y, this._zoom_scale, "#60C080", 1.0, 1)
+                            // Draw probe scan radius.
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#60C080", 0.1, 300)
+
+                            // Draw probe location.
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#60C080", 1.0, 1)
                         }
                         else if (entry.type == "Nuke")
                         {
