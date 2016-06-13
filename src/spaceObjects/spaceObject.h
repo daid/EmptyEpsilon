@@ -113,7 +113,7 @@ public:
     virtual void destroy();
 
     virtual void setCallSign(string new_callsign) { callsign = new_callsign; }
-    virtual string getCallSign() { return ""; }
+    virtual string getCallSign() { return callsign; }
     virtual bool canBeDockedBy(P<SpaceObject> obj) { return false; }
     virtual bool hasShield() { return false; }
     virtual bool canHideInNebula() { return true; }
