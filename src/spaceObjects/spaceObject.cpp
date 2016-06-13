@@ -39,6 +39,8 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setCommsFunction);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isEnemy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isFriendly);
+    /// Set a custom callsign for this object. Objects get assigned random callsigns at creation, but you can overrule this from scenario scripts.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setCallSign);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getCallSign);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, areEnemiesInRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getObjectsInRange);
@@ -94,6 +96,7 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     scanning_complexity_value = 0;
     scanning_depth_value = 0;
 
+    registerMemberReplication(&callsign);
     registerMemberReplication(&faction_id);
     registerMemberReplication(&scanned_by_faction);
     registerMemberReplication(&object_description);

@@ -18,6 +18,10 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
             tactical_button->setVisible(false);
         if (!gameGlobalInfo->allow_main_screen_long_range_radar)
             long_range_button->setVisible(false);
+        if (onscreen_comms_active)
+            show_comms_button->setVisible(false);
+        if (!onscreen_comms_active)
+            hide_comms_button->setVisible(false);
     });
     open_button->setValue(false);
     open_button->setSize(GuiElement::GuiSizeMax, 50);
@@ -73,7 +77,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
             button->setVisible(false);
     }));
     tactical_button = buttons.back();
-    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_LONG_RANGE_BUTTON", "LongRange", [this]()
+    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_LONG_RANGE_BUTTON", "Long Range", [this]()
     {
         if (my_spaceship)
         {
@@ -84,7 +88,35 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
             button->setVisible(false);
     }));
     long_range_button = buttons.back();
-    
+    if (my_player_info->crew_position[relayOfficer] || my_player_info->crew_position[operationsOfficer] || my_player_info->crew_position[singlePilot])
+    {
+        buttons.push_back(new GuiButton(this, "MAIN_SCREEN_SHOW_COMMS_BUTTON", "Show comms", [this]()
+        {
+            if (my_spaceship)
+            {
+                my_spaceship->commandMainScreenOverlay(MSO_ShowComms);
+                onscreen_comms_active = true;
+            }
+            open_button->setValue(false);
+            for (GuiButton* button : buttons)
+                button->setVisible(false);
+        }));
+        show_comms_button = buttons.back();
+
+        buttons.push_back(new GuiButton(this, "MAIN_SCREEN_HIDE_COMMS_BUTTON", "Hide comms", [this]()
+        {
+            if (my_spaceship)
+            {
+                my_spaceship->commandMainScreenOverlay(MSO_HideComms);
+                onscreen_comms_active = false;
+            }
+            open_button->setValue(false);
+            for (GuiButton* button : buttons)
+                button->setVisible(false);
+        }));
+        hide_comms_button = buttons.back();
+    }
+
     for(GuiButton* button : buttons)
         button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(false);
 }
