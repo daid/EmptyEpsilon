@@ -18,7 +18,7 @@ end
 
 function friendlyComms(comms_data)
 	if comms_data.friendlyness < 20 then
-		setCommsMessage("What the fuck do you want?");
+		setCommsMessage("What do you want?");
 	else
 		setCommsMessage("Sir, how can we assist?");
 	end
@@ -93,7 +93,7 @@ function enemyComms(comms_data)
 		elseif faction == "Exuari" then
 			setCommsMessage("Stay out of our way, or your death will amuse us extremely!");
 		elseif faction == "Ghosts" then
-			setCommsMessage("One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not fucking cross us:\nCommunication halted.");
+			setCommsMessage("One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted.");
 			taunt_option = "EXECUTE: SELFDESTRUCT"
 			taunt_success_reply = "Rogue command received. Targeting source."
 			taunt_failed_reply = "External command ignored."
