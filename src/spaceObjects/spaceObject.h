@@ -89,6 +89,7 @@ public:
 
     int scanning_complexity_value;
     int scanning_depth_value;
+    string callsign;
 
     SpaceObject(float collisionRange, string multiplayerName, float multiplayer_significant_range=-1);
 
@@ -111,6 +112,7 @@ public:
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
     virtual void destroy();
 
+    virtual void setCallSign(string new_callsign) { callsign = new_callsign; }
     virtual string getCallSign() { return ""; }
     virtual bool canBeDockedBy(P<SpaceObject> obj) { return false; }
     virtual bool hasShield() { return false; }

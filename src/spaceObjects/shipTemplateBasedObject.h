@@ -18,7 +18,6 @@ public:
     string template_name;
     string type_name;
     string radar_trace;
-    string callsign;
     P<ShipTemplate> ship_template;
 
     int shield_count;
@@ -51,7 +50,6 @@ public:
     void setShipTemplate(string template_name) { LOG(WARNING) << "Depricated \"setShipTemplate\" function called."; setTemplate(template_name); }
     void setTypeName(string type_name) { this->type_name = type_name; }
     string getTypeName() { return type_name; }
-    void setCallSign(string new_callsign) { callsign = new_callsign; }
 
     float getHull() { return hull_strength; }
     float getHullMax() { return hull_max; }
