@@ -20,12 +20,12 @@ void AlertLevelOverlay::onDraw(sf::RenderTarget& window)
     {
     case AL_RedAlert:
         color = sf::Color(255, 0, 0);
-        text = "RED ALERT";
+        text = "";
         text_size = 70;
         break;
     case AL_YellowAlert:
         color = sf::Color(255, 255, 0);
-        text = "YELLOW ALERT";
+        text = "";
         text_size = 60;
         break;
     case AL_Normal:
