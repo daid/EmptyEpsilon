@@ -71,12 +71,20 @@ void ScreenMainScreen::update(float delta)
 
     if (my_spaceship)
     {
+        P<SpaceObject> target_ship = my_spaceship->getTarget();
         float target_camera_yaw = my_spaceship->getRotation();
         switch(my_spaceship->main_screen_setting)
         {
         case MSS_Back: target_camera_yaw += 180; break;
         case MSS_Left: target_camera_yaw -= 90; break;
         case MSS_Right: target_camera_yaw += 90; break;
+        case MSS_Target:
+            if (target_ship)
+            {
+                sf::Vector2f target_camera_diff = my_spaceship->getPosition() - target_ship->getPosition();
+                target_camera_yaw = sf::vector2ToAngle(target_camera_diff) + 180;
+            }
+            break;
         default: break;
         }
         camera_pitch = 30.0f;
@@ -117,6 +125,7 @@ void ScreenMainScreen::update(float delta)
         case MSS_Back:
         case MSS_Left:
         case MSS_Right:
+        case MSS_Target:
             viewport->show();
             tactical_radar->hide();
             long_range_radar->hide();
@@ -215,6 +224,10 @@ void ScreenMainScreen::onKey(sf::Keyboard::Key key, int unicode)
     case sf::Keyboard::Down:
         if (my_spaceship)
             my_spaceship->commandMainScreenSetting(MSS_Back);
+        break;
+    case sf::Keyboard::T:
+        if (my_spaceship)
+            my_spaceship->commandMainScreenSetting(MSS_Target);
         break;
     case sf::Keyboard::Tab:
         if (my_spaceship && gameGlobalInfo->allow_main_screen_tactical_radar)
