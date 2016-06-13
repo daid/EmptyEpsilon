@@ -10,8 +10,6 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     /// Set the class name of this object. Normally the class name is copied from the template name (Ex "Cruiser") but you can override it with this function.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setTypeName);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getTypeName);
-    /// Set a custom callsign for this object. Objects get assigned random callsigns at creation, but you can overrule this from scenario scripts.
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setCallSign);
     /// Get the current amount of hull
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getHull);
     /// Get the maximum hull value
@@ -77,7 +75,6 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
         registerMemberReplication(&shield_max[n]);
         registerMemberReplication(&shield_hit_effect[n], 0.5);
     }
-    registerMemberReplication(&callsign);
     registerMemberReplication(&radar_trace);
 
     callsign = "[" + string(getMultiplayerId()) + "]";
