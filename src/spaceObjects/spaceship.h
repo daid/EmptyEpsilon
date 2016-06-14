@@ -12,6 +12,7 @@ enum EMainScreenSetting
     MSS_Back,
     MSS_Left,
     MSS_Right,
+    MSS_Target,
     MSS_Tactical,
     MSS_LongRange
 };

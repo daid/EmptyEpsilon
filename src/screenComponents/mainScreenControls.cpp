@@ -9,7 +9,8 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
 {
     setSize(250, GuiElement::GuiSizeMax);
     setPosition(-20, 70, ATopRight);
-    
+
+    // Set which buttons appear when opening the main screen controls.
     open_button = new GuiToggleButton(this, "MAIN_SCREEN_CONTROLS_SHOW", "Main screen", [this](bool value)
     {
         for(GuiButton* button : buttons)
@@ -25,7 +26,8 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     });
     open_button->setValue(false);
     open_button->setSize(GuiElement::GuiSizeMax, 50);
-    
+
+    // Front, back, left, and right view buttons.
     buttons.push_back(new GuiButton(this, "MAIN_SCREEN_FRONT_BUTTON", "Front", [this]()
     {
         if (my_spaceship)
@@ -66,6 +68,24 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         for(GuiButton* button : buttons)
             button->setVisible(false);
     }));
+
+    // If the player has control over weapons targeting, enable the target view
+    // option in the main screen controls.
+    if (my_player_info->crew_position[weaponsOfficer] || my_player_info->crew_position[tacticalOfficer] || my_player_info->crew_position[singlePilot])
+    {
+        buttons.push_back(new GuiButton(this, "MAIN_SCREEN_TARGET_BUTTON", "Target lock", [this]()
+        {
+            if (my_spaceship)
+            {
+                my_spaceship->commandMainScreenSetting(MSS_Target);
+            }
+            for (GuiButton* button : buttons)
+                button->setVisible(false);
+        }));
+        target_lock_button = buttons.back();
+    }
+
+    // Tactical radar button.
     buttons.push_back(new GuiButton(this, "MAIN_SCREEN_TACTICAL_BUTTON", "Tactical", [this]()
     {
         if (my_spaceship)
@@ -77,6 +97,8 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
             button->setVisible(false);
     }));
     tactical_button = buttons.back();
+
+    // Long-range radar button.
     buttons.push_back(new GuiButton(this, "MAIN_SCREEN_LONG_RANGE_BUTTON", "Long Range", [this]()
     {
         if (my_spaceship)
@@ -88,6 +110,9 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
             button->setVisible(false);
     }));
     long_range_button = buttons.back();
+
+    // If the player has control over comms, they can toggle the comms overlay
+    // on the main screen.
     if (my_player_info->crew_position[relayOfficer] || my_player_info->crew_position[operationsOfficer] || my_player_info->crew_position[singlePilot])
     {
         buttons.push_back(new GuiButton(this, "MAIN_SCREEN_SHOW_COMMS_BUTTON", "Show comms", [this]()
