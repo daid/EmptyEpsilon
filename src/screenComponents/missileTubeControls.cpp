@@ -142,6 +142,8 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window){
             rows[n].loading_bar->hide();
         }
     }
+    for(int n=my_spaceship->weapon_tube_count; n<max_weapon_tubes; n++)
+        rows[n].layout->hide();
 
     GuiAutoLayout::onDraw(window);
 }
