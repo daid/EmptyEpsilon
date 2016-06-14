@@ -88,6 +88,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
             {
                 view_mode_selection->setSelectionIndex(1);
                 radar_view->hide();
+                background_gradient->hide();
                 database_view->show();
             }
         }
@@ -155,6 +156,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
 
     view_mode_selection = new GuiListbox(this, "VIEW_SELECTION", [this](int index, string value) {
         radar_view->setVisible(index == 0);
+        background_gradient->setVisible(index == 0);
         database_view->setVisible(index == 1);
     });
     view_mode_selection->setOptions({"Radar", "Database"})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(200, 100);

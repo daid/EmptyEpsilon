@@ -115,7 +115,7 @@ void DatabaseViewComponent::display(P<ScienceDatabase> entry)
         }
     } else if (entry->longDescription.length() > 0)
     {
-        (new GuiScrollText(database_entry, "DATABASE_LONG_DESCRIPTION", entry->longDescription))->setTextSize(24)->setPosition(450,0,ATopLeft)->setMargins(0, 0, 50, 50)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        (new GuiScrollText(database_entry, "DATABASE_LONG_DESCRIPTION", entry->longDescription))->setTextSize(24)->setPosition(450,0,ATopLeft)->setMargins(0, 120, 50, 50)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     }
     if (entry->items.size() > 0)
     {
