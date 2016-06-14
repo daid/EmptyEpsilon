@@ -10,6 +10,9 @@ class GuiLabel;
 class HelmsScreen : public GuiOverlay
 {
 private:
+    GuiOverlay* background_gradient;
+    GuiOverlay* background_crosses;
+
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* heading_display;
     GuiKeyValueDisplay* velocity_display;

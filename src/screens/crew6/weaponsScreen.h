@@ -13,6 +13,9 @@ class GuiRotationDial;
 class WeaponsScreen : public GuiOverlay
 {
 private:
+    GuiOverlay* background_gradient;
+    GuiOverlay* background_crosses;
+
     TargetsContainer targets;
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* front_shield_display;
@@ -27,4 +30,4 @@ public:
     virtual void onDraw(sf::RenderTarget& window);
 };
 
-#endif//HELMS_SCREEN_H
+#endif//WEAPONS_SCREEN_H

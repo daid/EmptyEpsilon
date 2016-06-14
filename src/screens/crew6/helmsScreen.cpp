@@ -17,8 +17,14 @@
 HelmsScreen::HelmsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "HELMS_SCREEN", colorConfig.background)
 {
-    (new GuiOverlay(this, "", sf::Color::White))->setTextureCenter("gui/BackgroundGradient");
-    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+    // Render the radar shadow and background decorations.
+    background_gradient = new GuiOverlay(this, "BACKGROUND_GRADIENT", sf::Color::White);
+    background_gradient->setTextureCenter("gui/BackgroundGradient");
+
+    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", sf::Color::White);
+    background_crosses->setTextureTiled("gui/BackgroundCrosses");
+
+    // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
 
     GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", 5000.0, nullptr);

@@ -24,8 +24,14 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
 {
     targets.setAllowWaypointSelection();
 
-    (new GuiOverlay(this, "", sf::Color::White))->setTextureCenter("gui/BackgroundGradientOffset");
-    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+    // Render the radar shadow and background decorations.
+    background_gradient = new GuiOverlay(this, "BACKGROUND_GRADIENT", sf::Color::White);
+    background_gradient->setTextureCenter("gui/BackgroundGradientOffset");
+
+    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", sf::Color::White);
+    background_crosses->setTextureTiled("gui/BackgroundCrosses");
+
+    // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
 
     radar_view = new GuiElement(this, "RADAR_VIEW");
