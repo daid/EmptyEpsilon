@@ -23,6 +23,7 @@ public:
     GuiOverlay* setAlpha(int alpha);
     GuiOverlay* setTextureCenter(string texture);
     GuiOverlay* setTextureTiled(string texture);
+    GuiOverlay* setTextureNone();
 };
 
-#endif//GUI2_BOX_H
+#endif//GUI2_OVERLAY_H
