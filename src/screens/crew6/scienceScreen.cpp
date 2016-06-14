@@ -24,7 +24,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
 {
     targets.setAllowWaypointSelection();
 
-    (new GuiOverlay(this, "", sf::Color::White))->setTextureCenter("gui/BackgroundGradient");
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureCenter("gui/BackgroundGradientOffset");
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
     (new AlertLevelOverlay(this));
 

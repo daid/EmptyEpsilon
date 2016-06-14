@@ -22,6 +22,7 @@
 TacticalScreen::TacticalScreen(GuiContainer* owner)
 : GuiOverlay(owner, "TACTICAL_SCREEN", colorConfig.background)
 {
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureCenter("gui/BackgroundGradient");
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
     (new AlertLevelOverlay(this));
 

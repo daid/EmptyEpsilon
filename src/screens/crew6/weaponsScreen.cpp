@@ -40,6 +40,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     missile_aim->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 850);
 
     tube_controls = new GuiMissileTubeControls(this, "MISSILE_TUBES");
+    tube_controls->setPosition(20, -20, ABottomLeft);
     radar->enableTargetProjections(tube_controls);
 
     lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);

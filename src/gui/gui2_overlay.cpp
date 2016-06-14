@@ -60,3 +60,10 @@ GuiOverlay* GuiOverlay::setTextureTiled(string texture)
     this->texture_mode = TM_Tiled;
     return this;
 }
+
+GuiOverlay* GuiOverlay::setTextureNone()
+{
+    this->texture = nullptr;
+    this->texture_mode = TM_None;
+    return this;
+}
