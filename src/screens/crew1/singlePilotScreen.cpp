@@ -37,10 +37,10 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     left_panel->setPosition(0, 0, ATopLeft)->setSize(1000, GuiElement::GuiSizeMax);
 
     // Render the radar shadow and background decorations.
-    background_gradient = new GuiOverlay(this, "BACKGROUND_GRADIENT", sf::Color::White);
+    background_gradient = new GuiOverlay(left_panel, "BACKGROUND_GRADIENT", sf::Color::White);
     background_gradient->setTextureCenter("gui/BackgroundGradientSingle");
 
-    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", sf::Color::White);
+    background_crosses = new GuiOverlay(left_panel, "BACKGROUND_CROSSES", sf::Color::White);
     background_crosses->setTextureTiled("gui/BackgroundCrosses");
 
     // Render the alert level color overlay.
