@@ -5,6 +5,7 @@
 
 #include "screenComponents/viewport3d.h"
 
+#include "screenComponents/alertOverlay.h"
 #include "screenComponents/combatManeuver.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/impulseControls.h"
@@ -35,9 +36,15 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     left_panel = new GuiElement(this, "LEFT_PANEL");
     left_panel->setPosition(0, 0, ATopLeft)->setSize(1000, GuiElement::GuiSizeMax);
 
-    // Draw background textures in the left panel.
-    (new GuiOverlay(left_panel, "", sf::Color::White))->setTextureCenter("gui/BackgroundGradientSingle");
-    (new GuiOverlay(left_panel, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+    // Render the radar shadow and background decorations.
+    background_gradient = new GuiOverlay(this, "BACKGROUND_GRADIENT", sf::Color::White);
+    background_gradient->setTextureCenter("gui/BackgroundGradientSingle");
+
+    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", sf::Color::White);
+    background_crosses->setTextureTiled("gui/BackgroundCrosses");
+
+    // Render the alert level color overlay.
+    (new AlertLevelOverlay(this));
 
     // 5U tactical radar with piloting features.
     radar = new GuiRadarView(left_panel, "TACTICAL_RADAR", 5000.0, &targets);

@@ -16,6 +16,9 @@ class GuiProgressbar;
 class EngineeringScreen : public GuiOverlay
 {
 private:
+    GuiOverlay* background_gradient;
+    GuiOverlay* background_crosses;
+
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* hull_display;
     GuiKeyValueDisplay* front_shield_display;

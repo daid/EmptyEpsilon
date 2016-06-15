@@ -18,7 +18,11 @@
 EngineeringScreen::EngineeringScreen(GuiContainer* owner)
 : GuiOverlay(owner, "ENGINEERING_SCREEN", colorConfig.background), selected_system(SYS_None)
 {
-    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+    // Render the background decorations.
+    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", sf::Color::White);
+    background_crosses->setTextureTiled("gui/BackgroundCrosses");
+
+    // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
 
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
