@@ -75,6 +75,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     info_heading->setSize(GuiElement::GuiSizeMax, 30);
     info_relspeed = new GuiKeyValueDisplay(sidebar, "SCIENCE_REL_SPEED", 0.4, "Rel.Speed", "");
     info_relspeed->setSize(GuiElement::GuiSizeMax, 30);
+    info_duration = new GuiKeyValueDisplay(sidebar, "SCIENCE_DURATION", 0.4, "Duration", "");
+    info_duration->setSize(GuiElement::GuiSizeMax, 30);
 
     info_faction = new GuiKeyValueDisplay(sidebar, "SCIENCE_FACTION", 0.4, "Faction", "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
@@ -205,6 +207,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     info_distance->setValue("-");
     info_heading->setValue("-");
     info_relspeed->setValue("-");
+    info_duration->setValue("-");
     info_faction->setValue("-");
     info_type->setValue("-");
     info_shields->setValue("-");
@@ -244,11 +247,45 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         if (fabs(rel_velocity) < 0.01)
             rel_velocity = 0.0;
 
+        string duration = "";
+
+        if (fabs(rel_velocity) > 0.1)
+        {
+            int seconds = fabs(distance/rel_velocity);
+            float heading_actual = my_spaceship->getHeading();
+            float diff_heading = fabs(heading_actual-heading);
+            if (diff_heading < 10)
+            {
+                int hours, minutes;
+                minutes = seconds / 60;
+                hours = minutes / 60;
+                
+                if (hours < 10)
+                    duration += "0";
+                duration += string(hours);
+                duration += ":";
+                
+                if (minutes%60 < 10)
+                    duration += "0";
+                duration += string(minutes%60);
+                duration += ":";
+                
+                if (seconds%60 < 10)
+                    duration += "0";
+                duration += string(seconds%60);
+            }
+            else
+                duration = "Bad direction";
+        }
+        else
+            duration = "-";
+
         info_callsign->setValue(obj->getCallSign());
         info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
         info_heading->setValue(string(int(heading)));
         info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
-
+        info_duration->setValue(duration);
+        
         if (ship)
         {
             if (ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
