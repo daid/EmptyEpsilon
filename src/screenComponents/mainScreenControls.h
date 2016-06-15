@@ -11,8 +11,12 @@ class GuiMainScreenControls : public GuiAutoLayout
 private:
     GuiToggleButton* open_button;
     std::vector<GuiButton*> buttons;
+    GuiButton* target_lock_button;
     GuiButton* tactical_button;
     GuiButton* long_range_button;
+    GuiButton* show_comms_button;
+    GuiButton* hide_comms_button;
+    bool onscreen_comms_active = false;
 public:
     GuiMainScreenControls(GuiContainer* owner);
 };

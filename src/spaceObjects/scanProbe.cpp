@@ -30,6 +30,8 @@ ScanProbe::ScanProbe()
         model_info.setData("SensorBuoyMKIII");
         break;
     }
+
+    setCallSign(string(getMultiplayerId()) + "P");
 }
 
 void ScanProbe::update(float delta)

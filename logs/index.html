@@ -47,6 +47,13 @@
                 height: 40px;
                 text-align: center;
             }
+            #zoom_selector {
+                position: absolute;
+                top: 40px;
+                right: -20px;
+                width: 100px;
+                transform: rotate(270deg);
+            }
 
             .ee-button {
               font-family: 'bebas_neue_regularregular', 'Impact', 'Arial Narrow', sans-serif;
@@ -118,14 +125,14 @@
               cursor: pointer;
               background: rgba(0, 0, 0, 0.8);
               border-radius: 34px;
-              border: 2px solid #ffffff;
+              border: 2px solid #fff;
             }
             input[type=range]::-webkit-slider-thumb {
-              border: 3px solid #000000;
+              border: 3px solid #000;
               height: 34px;
               width: 34px;
               border-radius: 34px;
-              background: #ffffff;
+              background: #fff;
               cursor: pointer;
               -webkit-appearance: none;
               margin-top: 1px;
@@ -142,11 +149,11 @@
               border: 2px solid rgba(255,255,255,0.5);
             }
             input[type=range]::-moz-range-thumb {
-              border: 3px solid #000000;
+              border: 3px solid #000;
               height: 34px;
               width: 34px;
               border-radius: 34px;
-              background: #ffffff;
+              background: #fff;
               cursor: pointer;
             }
             input[type=range]::-ms-track {
@@ -168,10 +175,10 @@
               border-radius: 34px;
             }
             input[type=range]::-ms-thumb {
-              border: 3px solid #000000;
+              border: 3px solid #000;
               width: 34px;
               border-radius: 34px;
-              background: #ffffff;
+              background: #fff;
               cursor: pointer;
               height: 34px;
             }
@@ -216,7 +223,11 @@
             <input id="time_selector" type="range" min="0" max="0" value="0">
             <button class="ee-button" id="callsigns" unselectable>Callsigns</button>
         </div>
-        <div id="dropzone" unselectable>Drop log file here</div>
+        <input id="zoom_selector" type="range" min="2" max="150"> <!-- smaller range than mouse wheel -->
+        <div id="dropzone" unselectable>
+            <p style="margin: 0;">Drop log file here</p>
+            <input id="filepicker" type="file">
+        </div>
         <script>
             class LogData
             {
@@ -321,6 +332,7 @@
                     // Cap delta to avoid impossible zoom scales.
                     delta = Math.max(delta, -999.99);
                     this._zoom_scale *= 1.0 + delta / 1000.0;
+                    $("#zoom_selector").val(canvas._zoom_scale * 1000);
                     this.update();
                 }
 
@@ -331,32 +343,41 @@
                     this._canvas[0].width = w;
                     this._canvas[0].height = h;
 
+                    // Warkaround for weird intermittent canvas bug.
+                    if (isNaN(this._view_x))
+                    {
+                        console.error("x was undef: ", this._view_x);
+                        this._view_x = 0;
+                    }
+                    if (isNaN(this._view_y))
+                    {
+                        console.error("y was undef: ", this._view_y);
+                        this._view_y = 0;
+                    }
+
                     // Cap the zoom scales to reasonable levels.
                     if (this._zoom_scale > 1.25) // 100px = 0.08U
                         this._zoom_scale = 1.25;
-                    else if (this._zoom_scale < 0.000333) // 100px = 300U
-                        this._zoom_scale = 0.000333;
+                    else if (this._zoom_scale < 0.001) // 100px = 100U
+                        this._zoom_scale = 0.001;
 
+                    // Draw the canvas background.
                     var ctx = this._canvas[0].getContext("2d");
-                    ctx.fillStyle = "#000000";
+                    ctx.fillStyle = "#000";
                     ctx.fillRect(0, 0, w, h);
 
+                    // Don't bother if we don't have a log to read.
                     if (!log)
                         return
 
+                    // Set the scenario time to the time selector range input.
                     var time = $("#time_selector").val();
 
-                    this.drawGrid(ctx, this._view_x, this._view_y, w, h, 20000.0, 1000000.0, "#00A");
+                    // Draw the background grid.
+                    this.drawGrid(ctx, this._view_x, this._view_y, w, h, 20000.0, "#202040");
 
-                    ctx.fillStyle = "#FFFFFF";
-                    var stateTextTime = formatTime(time);
-                    var stateTextZoom = "100px = " + (0.1 / this._zoom_scale).toPrecision(3) + "U";
-                    var stateTextX = "X: " + this._view_x.toPrecision(6);
-                    var stateTextY = "Y: " + this._view_y.toPrecision(6);
-                    var stateText = stateTextTime + " / " + stateTextZoom + " / " + stateTextX + " / " + stateTextY;
-                    ctx.font="20px bebas_neue_regularregular, Impact, Arial, sans-serif";
-                    ctx.fillText(stateText, 20, 40);
-
+                    // For each entry at the given time, determine its type and
+                    // draw an appropriate shape.
                     var entries = log.getEntriesAtTime(time);
                     for(var id in entries)
                     {
@@ -366,45 +387,23 @@
 
                         if (entry.type == "Nebula")
                         {
-                            var r = 5000.0 * this._zoom_scale;
-                            ctx.globalAlpha = 0.2
-                            ctx.beginPath();
-                            ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-                            ctx.fillStyle = "#202080";
-                            ctx.fill();
-                            ctx.globalAlpha = 1.0
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#202080", 0.3, 300)
                         }
                         else if (entry.type == "BlackHole")
                         {
-                            var r = 5000.0 * this._zoom_scale;
-                            ctx.globalAlpha = 0.2
-                            ctx.beginPath();
-                            ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-                            ctx.fillStyle = "#802020";
-                            ctx.fill();
-                            ctx.globalAlpha = 1.0
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#802020", 0.3, 300)
                         }
                         else if (entry.type == "WormHole")
                         {
-                            var r = 5000.0 * this._zoom_scale;
-                            ctx.globalAlpha = 0.2
-                            ctx.beginPath();
-                            ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-                            ctx.fillStyle = "#800080";
-                            ctx.fill();
-                            ctx.globalAlpha = 1.0
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#800080", 0.3, 300)
                         }
                         else if (entry.type == "Mine")
                         {
-                            var r = 1000.0 * this._zoom_scale;
-                            ctx.globalAlpha = 0.2
-                            ctx.beginPath();
-                            ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-                            ctx.fillStyle = "#808080";
-                            ctx.fill();
-                            ctx.globalAlpha = 1.0
-                            ctx.fillStyle = "#FFFFFF";
-                            ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+                            // Draw mine radius.
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#808080", 0.3, 30)
+
+                            // Draw mine location.
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#FFF", 1.0, 1)
                         }
                         else if (entry.type == "PlayerSpaceship")
                         {
@@ -414,162 +413,260 @@
                         {
                             this.drawShip(ctx, x, y, entry);
                         }
+                        else if (entry.type == "WarpJammer")
+                        {
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#C89664", 1.0, 4)
+                        }
+                        else if (entry.type == "SupplyDrop")
+                        {
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#0FF", 1.0, 2);
+                        }
                         else if (entry.type == "SpaceStation")
                         {
                             this.drawStation(ctx, x, y, entry);
                         }
                         else if (entry.type == "Asteroid")
                         {
-                            ctx.fillStyle = "#FFC864";
-                            ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#FFC864", 1.0, 1)
                         }
                         else if (entry.type == "ScanProbe")
                         {
-                            ctx.fillStyle = "#60C080";
-                            ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+                            // Draw probe scan radius.
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#60C080", 0.1, 300)
+
+                            // Draw probe location.
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#60C080", 1.0, 1)
                         }
                         else if (entry.type == "Nuke")
                         {
-                            ctx.fillStyle = "#F40";
-                            ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+                            this.drawSquare(ctx, x, y, this._zoom_scale, "#F40", 1.0, 1)
                         }
                         else if (entry.type == "EMPMissile")
                         {
-                            ctx.fillStyle = "#0FF";
-                            ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+                            this.drawSquare(ctx, x, y, this._zoom_scale, "#0FF", 1.0, 1)
                         }
                         else if (entry.type == "HomingMissile")
                         {
-                            ctx.fillStyle = "#FA0";
-                            ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+                            this.drawSquare(ctx, x, y, this._zoom_scale, "#FA0", 1.0, 1)
                         }
                         else if (entry.type == "HVLI")
                         {
-                            ctx.fillStyle = "#AAA";
-                            ctx.fillRect(x, y, Math.max(33 * this._zoom_scale, 1), Math.max(33 * this._zoom_scale, 1));
+                            this.drawSquare(ctx, x, y, this._zoom_scale, "#AAA", 1.0, 1)
                         }
                         else if (entry.type == "VisualAsteroid")
                         {
                         }
                         else if (entry.type == "BeamEffect")
                         {
-                            var r = 50.0 * this._zoom_scale;
-                            ctx.globalAlpha = 0.4
-                            ctx.beginPath();
-                            ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-                            ctx.fillStyle = "#A60";
-                            ctx.fill();
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#A60", 0.5, 2)
                         }
                         else if (entry.type == "ExplosionEffect")
                         {
-                            var r = 100.0 * this._zoom_scale;
-                            ctx.globalAlpha = 0.4
-                            ctx.beginPath();
-                            ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-                            ctx.fillStyle = "#FF0";
-                            ctx.fill();
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#FF0", 0.5, 3)
                         }
                         else if (entry.type == "ElectricExplosionEffect")
                         {
-                            var r = 100.0 * this._zoom_scale;
-                            ctx.globalAlpha = 0.4
-                            ctx.beginPath();
-                            ctx.arc(x, y, r, 0, 2 * Math.PI, false);
-                            ctx.fillStyle = "#0FF";
-                            ctx.fill();
+                            this.drawCircle(ctx, x, y, this._zoom_scale, "#0FF", 0.5, 3)
                         }
                         else
                         {
                             console.debug("Unknown object type: ", entry.type)
-                            ctx.fillStyle = "#FF0000";
-                            ctx.fillRect(x, y, Math.max(66 * this._zoom_scale, 2), Math.max(66 * this._zoom_scale, 2));
+                            this.drawSquare(ctx, x, y, this._zoom_scale, "#F00", 1.0, 2)
                         }
                     }
+
+                    // Draw the info line showing the scenario time, scale,
+                    // X/Y coordinates, and sector designation.
+                    ctx.fillStyle = "#FFF";
+                    var stateTextTime = formatTime(time);
+                    var stateTextZoom = "100px = " + (0.1 / this._zoom_scale).toPrecision(3) + "U";
+                    var stateTextX = "X: " + this._view_x.toPrecision(6);
+                    var stateTextY = "Y: " + this._view_y.toPrecision(6);
+                    var stateTextSector = "(" + this.getSectorDesignation(this._view_x, this._view_y) + ")";
+                    // TODO: Fix out-of-range sector designations in-game.
+                    var stateText = stateTextTime + " / " + stateTextZoom + " / " + stateTextX + " / " + stateTextY + " " + stateTextSector;
+                    ctx.font = "20px bebas_neue_regularregular, Impact, Arial, sans-serif";
+                    ctx.fillText(stateText, 20, 40);
                 }
 
-                drawGrid(ctx, x, y, canvasWidth, canvasHeight, gridPixelSize, gridSize, color)
+                getSectorDesignation(x, y)
+                {
+                    // Sectors are designated with a letter (Y axis) and number
+                    // (X axis). Coordinates 0, 0 represent the intersection of
+                    // F and 5. Each sector is a 20U (20000) square.
+
+                    // TODO: Fix out-of-range sector designations in-game.
+                    var sectorLetter = String.fromCharCode('F'.charCodeAt() + Math.floor(y / 20000));
+
+                    // Sector numbers are 0-99.
+                    var sectorNumber = 5 + Math.floor(x / 20000);
+                    if (sectorNumber < 0)
+                        sectorNumber = 100 + sectorNumber;
+
+                    return sectorLetter + sectorNumber;
+                }
+
+                drawGrid(ctx, x, y, canvasWidth, canvasHeight, gridIntervalSize, gridlineColor)
                 {
                     ctx.lineWidth = 0.5;
-                    ctx.strokeStyle = color;
-                    ctx.fillStyle = color;
-                    ctx.font = "20px bebas_neue_regularregular, Impact, Arial, sans-serif";
+                    ctx.strokeStyle = gridlineColor;
 
-                    var gridlineX;
-                    var gridlineY;
+                    var gridlineHoriz;
+                    var gridlineVert;
 
-                    // Draw horizontal grid.
-                    for(var i = -gridSize / 2; i <= gridSize / 2; i = i + gridPixelSize)
+                    // Translate the visible canvas into world coordinates.
+                    var canvasEdges = {
+                        "left":   x - ((canvasWidth / 2) / this._zoom_scale),
+                        "right":  x + ((canvasWidth / 2) / this._zoom_scale),
+                        "top":    y - ((canvasHeight / 2) / this._zoom_scale),
+                        "bottom": y + ((canvasHeight / 2) / this._zoom_scale)
+                    };
+
+                    // Find the first gridlines from the top left.
+                    var gridlineHorizTop = canvasEdges.top - canvasEdges.top % 20000;
+                    var gridlineVertLeft = canvasEdges.left - canvasEdges.left % 20000;
+                    var gridlineVertWorldList = [];
+                    var gridlineVertCanvasList = [];
+                    var gridlineHorizWorldList = [];
+                    var gridlineHorizCanvasList = [];
+
+                    // Draw horizontal gridlines until we run out of canvas.
+                    for(var i = gridlineHorizTop; i <= canvasEdges.bottom; i = i + gridIntervalSize)
                     {
-                        gridlineY = (i - y) * this._zoom_scale + canvasHeight / 2.0;
-                        gridlineX = (i - x) * this._zoom_scale + canvasWidth / 2.0;
+                        // Translate screen position to world position.
+                        gridlineHoriz = (i - y) * this._zoom_scale + canvasHeight / 2.0;
+                        gridlineHorizWorldList.push(i);
+                        gridlineHorizCanvasList.push(gridlineHoriz);
 
-                        // Draw the gridline unless it falls off the canvas.
-                        if ((gridlineY > 0) && (gridlineY < canvasHeight))
-                        {
-                            ctx.beginPath();
-                            ctx.moveTo(0, gridlineY);
-                            ctx.lineTo(canvasWidth, gridlineY);
-                            ctx.closePath();
-                            ctx.stroke();
-                        }
+                        ctx.beginPath();
+                        ctx.moveTo(0, gridlineHoriz);
+                        ctx.lineTo(canvasWidth, gridlineHoriz);
+                        ctx.closePath();
+                        ctx.stroke();
+                    }
 
-                        if ((gridlineX > 0) && (gridlineX < canvasWidth))
+                    // Draw vertical gridlines until we run out of canvas.
+                    for(var i = gridlineVertLeft; i < canvasEdges.right; i = i + gridIntervalSize)
+                    {
+                        // Translate screen position to world position.
+                        gridlineVert = (i - x) * this._zoom_scale + canvasWidth / 2.0;
+                        gridlineVertWorldList.push(i);
+                        gridlineVertCanvasList.push(gridlineVert);
+
+                        ctx.beginPath();
+                        ctx.moveTo(gridlineVert, 0);
+                        ctx.lineTo(gridlineVert, canvasHeight);
+                        ctx.closePath();
+                        ctx.stroke();
+                    }
+
+                    ctx.fillStyle = gridlineColor;
+                    ctx.font = "24px bebas_neue_regularregular, Impact, Arial, sans-serif";
+                    if (gridlineHorizCanvasList.length <= 25 && gridlineVertCanvasList.length <= 25)
+                    {
+                        for(var i = 0; i < gridlineHorizCanvasList.length; i++)
                         {
-                            ctx.beginPath();
-                            ctx.moveTo(gridlineX, 0);
-                            ctx.lineTo(gridlineX, canvasWidth);
-                            ctx.closePath();
-                            ctx.stroke();
+                            for(var j = 0; j < gridlineVertCanvasList.length; j++)
+                            {
+                                ctx.fillText(this.getSectorDesignation(gridlineHorizWorldList[i], gridlineVertWorldList[j]), gridlineVertCanvasList[j], gridlineHorizCanvasList[i] + 16);
+                            }
                         }
                     }
                 }
 
                 getFactionColor(faction, lowColor, highColor)
                 {
-                    // Rudimentary faction ID; would be nice to use the list
-                    // from factioninfo.lua. Returns a fillStyle string.
+                    // Rudimentary faction ID; would be nice to use the GM
+                    // colors from factioninfo.lua. Returns a fillStyle string.
                     if (faction == "Human Navy")
                         return "#" + lowColor + highColor + lowColor;
                     else if (faction == "Independent")
                         return "#" + lowColor + lowColor + highColor;
+                    else if (faction == "Arlenians")
+                        return "#" + highColor + lowColor + "0";
+                    else if (faction == "Exuari")
+                        return "#" + highColor + "0" + lowColor;
+                    else if (faction == "Ghosts")
+                        return "#" + highColor + highColor + highColor;
+                    else if (faction == "Ktlitans") // Very close to Human Navy
+                        return "#" + lowColor + highColor + "0";
                     else // Everybody else is evil
                         return "#" + highColor + lowColor + lowColor;
                 }
 
-                drawCallsign(ctx, x, y, zoom_scale, entry, fontSize, lowColor, highColor, textDrift)
+                drawSquare(ctx, x, y, zoomScale, fillColor, fillAlpha, sizeModifier)
+                {
+                    // Draw a square that scales with the zoom level.
+                    ctx.globalAlpha = fillAlpha;
+                    ctx.fillStyle = fillColor;
+
+                    // Prevent small objects from disappearing when zoomed out.
+                    var sizeMultiplier = sizeModifier * (100 / 3);
+                    var squareSize;
+
+                    if (sizeModifier < 50)
+                        squareSize = Math.max(sizeMultiplier * zoomScale, sizeModifier);
+                    else
+                        squareSize = sizeMultiplier * zoomScale;
+
+                    ctx.fillRect(x - squareSize / 2, y - squareSize / 2, squareSize, squareSize);
+                    ctx.globalAlpha = 1.0;
+                }
+
+                drawCircle(ctx, x, y, zoomScale, fillColor, fillAlpha, sizeModifier)
+                {
+                    // Draw a circle that scales with the zoom level.
+                    ctx.globalAlpha = fillAlpha;
+                    ctx.fillStyle = fillColor;
+
+                    // Prevent small objects from disappearing when zoomed out.
+                    var sizeMultiplier = sizeModifier * (100 / 3);
+                    var circleSize;
+
+                    if (sizeModifier < 50)
+                        circleSize = Math.max(sizeMultiplier * zoomScale, sizeModifier / 2);
+                    else
+                        circleSize = sizeMultiplier * zoomScale;
+
+                    ctx.beginPath();
+                    ctx.arc(x, y, circleSize / 2, 0, 2 * Math.PI, false);
+                    ctx.fill();
+                    ctx.globalAlpha = 1.0;
+                }
+
+                drawCallsign(ctx, x, y, zoomScale, entry, fontSize, lowColor, highColor, textDrift)
                 {
                     // Draw the object's callsign.
                     ctx.fillStyle = this.getFactionColor(entry.faction, lowColor, highColor);
                     ctx.font = fontSize + "px bebas_neue_regularregular, Impact, Arial, sans-serif";
-                    var textDriftAmount = Math.max((textDrift * 33.333) * zoom_scale, textDrift);
+                    var textDriftAmount = Math.max((textDrift * 66.666) * zoomScale, textDrift);
                     ctx.fillText(entry.callsign, x + textDriftAmount, y + textDriftAmount);
                 }
 
                 drawStation(ctx, x, y, entry)
                 {
                     // Get its faction color.
-                    ctx.fillStyle = this.getFactionColor(entry.faction, "5", "F");
+                    var factionColor = this.getFactionColor(entry.faction, "5", "F");
 
                     // Draw a circle and scale it by zoom and station type.
-                    ctx.beginPath();
-
                     var sizeModifier;
 
-                    if (entry.station_type == "Large Station")
+                    if (entry.station_type == "Huge Station")
                     {
-                        sizeModifier = 6;
+                        sizeModifier = 48;
+                    } else if (entry.station_type == "Large Station") {
+                        sizeModifier = 36;
                     } else if (entry.station_type == "Medium Station") {
-                        sizeModifier = 4;
+                        sizeModifier = 28;
                     } else {
-                        sizeModifier = 3;
+                        sizeModifier = 18;
                     }
 
-                    ctx.arc(x, y, Math.max((sizeModifier * 66.666) * this._zoom_scale, sizeModifier), 0, 2 * Math.PI, false);
-                    ctx.fill();
+                    this.drawCircle(ctx, x, y, this._zoom_scale, factionColor, 1.0, sizeModifier);
 
                     // Draw its callsign.
                     if (this.showCallsigns === true)
-                        this.drawCallsign(ctx, x, y, this._zoom_scale, entry, "18", "C8", "FF", sizeModifier);
+                        this.drawCallsign(ctx, x, y, this._zoom_scale, entry, "18", "C8", "FF", sizeModifier / Math.PI);
                 }
 
                 drawShip(ctx, x, y, entry)
@@ -580,16 +677,17 @@
                         fillStyleMagnitude = "F";
 
                     // Get its faction color.
-                    ctx.fillStyle = this.getFactionColor(entry.faction, "0", fillStyleMagnitude);
+                    var factionColor = this.getFactionColor(entry.faction, "0", fillStyleMagnitude);
 
                     // Draw the ship rectangle and scale it on zoom.
-                    ctx.fillRect(x - Math.max(66 * this._zoom_scale, 2), y - Math.max(66 * this._zoom_scale, 2), Math.max(120 * this._zoom_scale, 3), Math.max(120 * this._zoom_scale, 3));
+                    this.drawSquare(ctx, x, y, this._zoom_scale, factionColor, 1.0, 4);
 
                     // Draw its callsign. Draw player callsigns brighter.
                     if (this.showCallsigns === true)
                         this.drawCallsign(ctx, x, y, this._zoom_scale, entry, "18", "B8", fillStyleMagnitude, 2);
 
-                    if (entry.config.beams)
+                    // Draw beam arcs if the object has them.
+                    if (typeof entry.config !== "undefined" && typeof entry.config.beams != "undefined")
                     {
                         for(var idx=0; idx<entry.config.beams.length; idx++)
                         {
@@ -610,7 +708,7 @@
                             ctx.lineTo(x, y);
 
                             ctx.globalAlpha = 0.5
-                            ctx.strokeStyle = "#FF0000";
+                            ctx.strokeStyle = "#F00";
                             ctx.stroke();
                             ctx.globalAlpha = 1.0
                         }
@@ -618,6 +716,7 @@
                 }
             };
 
+            // Load log data into the dropzone div and setup the time selector.
             function loadLog(data)
             {
                 log = new LogData(data)
@@ -630,6 +729,7 @@
                 }
             }
 
+            // Format scenario time into MM:SS.
             function formatTime(time)
             {
                 if (time % 60 < 10)
@@ -637,6 +737,7 @@
                 return Math.floor(time / 60) + ":" + (time % 60)
             }
 
+            // Programmatically advance the time selector.
             function autoPlay(isAutoplaying)
             {
                 timeValue = parseInt($("#time_selector").val());
@@ -655,15 +756,18 @@
             var log;
             var canvas;
 
+            // Main function.
             $().ready(function()
             {
+                // Listen from drag and drop events to load log files.
+                // TODO: Add file picker option for browser/OS combos that
+                // complicate drag-and-drop.
                 document.addEventListener('dragover', function(e) {
                     e.stopPropagation();
                     e.preventDefault();
                     e.dataTransfer.dropEffect = 'copy';
                 });
-                document.addEventListener('drop', function(e)
-                {
+                document.addEventListener('drop', function(e) {
                     e.stopPropagation();
                     e.preventDefault();
                     var files = e.dataTransfer.files;
@@ -674,12 +778,34 @@
                         reader.readAsText(file);
                     }
                 });
+                var filepicker = document.getElementById("filepicker");
+                filepicker.addEventListener('change', function(e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    var file = filepicker.files[0];
+                    var reader = new FileReader();
+                    if (file)
+                    {
+                        reader.onload = function(e2) {
+                            var contents = e2.target.result;
+                            loadLog(contents);
+                        };
+                        reader.readAsText(file);
+                    }
+                });
                 canvas = new Canvas();
 
                 // Update the canvas when the time selector is modified.
                 $("#time_selector").on("input change", function(e) {
                     canvas.update();
                 });
+
+                // Zoom bar.
+                $("#zoom_selector").on("input change", function(e) {
+                    var zoom_value = $("#zoom_selector").val();
+                    canvas._zoom_scale = $("#zoom_selector").val() / 1000;
+                    canvas.update();
+                })
 
                 // Track the play/pause button.
                 var isAutoplaying = false;

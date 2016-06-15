@@ -25,5 +25,6 @@ extern PostProcessor* glitchPostProcessor;
 extern PostProcessor* warpPostProcessor;
 
 void returnToMainMenu();
+void returnToShipSelection();
 
 #endif//MAIN_H

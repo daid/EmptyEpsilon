@@ -88,6 +88,7 @@ public:
     float scan_probe_recharge;
 
     EMainScreenSetting main_screen_setting;
+    EMainScreenOverlay main_screen_overlay;
 
     bool activate_self_destruct;
     uint32_t self_destruct_code[max_self_destruct_codes];
@@ -116,6 +117,7 @@ public:
     ECommsState getCommsState() { return comms_state; }
     float getCommsOpeningDelay() { return comms_open_delay; }
     const std::vector<string>& getCommsReplyOptions() const { return comms_reply_message; }
+    P<SpaceObject> getCommsTarget() { return comms_target; }
     const string& getCommsTargetName() { return comms_target_name; }
     const string& getCommsIncommingMessage() { return comms_incomming_message; }
     bool hailCommsByGM(string target_name);
@@ -138,6 +140,7 @@ public:
     void commandFireTube(int8_t tubeNumber, float missile_target_angle);
     void commandSetShields(bool enabled);
     void commandMainScreenSetting(EMainScreenSetting mainScreen);
+    void commandMainScreenOverlay(EMainScreenOverlay mainScreen);
     void commandScan(P<SpaceObject> object);
     void commandSetSystemPowerRequest(ESystem system, float power_level);
     void commandSetSystemCoolantRequest(ESystem system, float coolant_level);

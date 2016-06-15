@@ -3,7 +3,6 @@
 #include "cinematicViewScreen.h"
 #include "epsilonServer.h"
 #include "main.h"
-#include "menus/shipSelectionScreen.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "gui/gui2_selector.h"
@@ -263,7 +262,7 @@ void CinematicViewScreen::onKey(sf::Keyboard::Key key, int unicode)
     case sf::Keyboard::Escape:
     case sf::Keyboard::Home:
         destroy();
-        new ShipSelectionScreen();
+        returnToShipSelection();
         break;
     // If this is the server, pause the game with the P key.
     case sf::Keyboard::P:

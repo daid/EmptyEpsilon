@@ -28,6 +28,7 @@ GuiResizableDialog::GuiResizableDialog(GuiContainer* owner, string id, string ti
     contents->setPosition(resize_icon_size / 2.0, title_bar_height, ATopLeft);
     
     min_size = sf::Vector2f(200, title_bar_height + resize_icon_size);
+    minimized = false;
 }
 
 void GuiResizableDialog::minimize(bool minimize)

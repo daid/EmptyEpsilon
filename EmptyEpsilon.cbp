@@ -11,7 +11,7 @@
 				<Option object_output=".obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="fullscreen=0 screen43=0 touchscreen=0 autoconnect=0 touchcalib=0 " />
+				<Option parameters="fullscreen=0 screen43=0 touchscreen=0 autoconnect=0 touchcalib=0 instance_name=DEBUG" />
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DDEBUG" />
@@ -39,7 +39,7 @@
 				<Option object_output=".obj/Release/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
-				<Option parameters="fullscreen=0 screen43=0 touchscreen=0" />
+				<Option parameters="fullscreen=0 screen43=0 touchscreen=0 instance_name=RELEASE" />
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-g" />
@@ -621,6 +621,8 @@
 		<Unit filename="src/screenComponents/missileTubeControls.h" />
 		<Unit filename="src/screenComponents/noiseOverlay.cpp" />
 		<Unit filename="src/screenComponents/noiseOverlay.h" />
+		<Unit filename="src/screenComponents/onScreenKeyboard.cpp" />
+		<Unit filename="src/screenComponents/onScreenKeyboard.h" />
 		<Unit filename="src/screenComponents/openCommsButton.cpp" />
 		<Unit filename="src/screenComponents/openCommsButton.h" />
 		<Unit filename="src/screenComponents/powerDamageIndicator.cpp" />
@@ -649,6 +651,8 @@
 		<Unit filename="src/screenComponents/shipDestroyedPopup.h" />
 		<Unit filename="src/screenComponents/shipInternalView.cpp" />
 		<Unit filename="src/screenComponents/shipInternalView.h" />
+		<Unit filename="src/screenComponents/shipsLogControl.cpp" />
+		<Unit filename="src/screenComponents/shipsLogControl.h" />
 		<Unit filename="src/screenComponents/signalQualityIndicator.cpp" />
 		<Unit filename="src/screenComponents/signalQualityIndicator.h" />
 		<Unit filename="src/screenComponents/snapSlider.cpp" />

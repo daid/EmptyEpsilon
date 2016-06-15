@@ -1,13 +1,17 @@
 #include "chatDialog.h"
+#include "gameGlobalInfo.h"
 #include "spaceObjects/playerSpaceship.h"
+
+#include "screenComponents/radarView.h"
 
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_scrolltext.h"
 
-GameMasterChatDialog::GameMasterChatDialog(GuiContainer* owner, P<PlayerSpaceship> player)
+GameMasterChatDialog::GameMasterChatDialog(GuiContainer* owner, GuiRadarView* radar, int index)
 : GuiResizableDialog(owner, "", "")
 {
-    this->player = player;
+    this->player_index = index;
+    this->radar = radar;
     
     text_entry = new GuiTextEntry(contents, "", "");
     text_entry->setTextSize(23)->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 30);
@@ -34,6 +38,8 @@ GameMasterChatDialog::GameMasterChatDialog(GuiContainer* owner, P<PlayerSpaceshi
 void GameMasterChatDialog::onDraw(sf::RenderTarget& window)
 {
     GuiResizableDialog::onDraw(window);
+    if (!player)
+        player = gameGlobalInfo->getPlayerShip(player_index);
 
     if (!player)
     {
@@ -76,8 +82,11 @@ void GameMasterChatDialog::onDraw(sf::RenderTarget& window)
             chat_text->setText(player->getCommsIncommingMessage());
             notification = true;
         }
+        if (player->getCommsTarget())
+            drawLine(window, radar->worldToScreen(player->getCommsTarget()->getPosition()));
         break;
     }
+    drawLine(window, radar->worldToScreen(player->getPosition()));
 }
 
 void GameMasterChatDialog::disableComms(string title)
@@ -96,4 +105,14 @@ void GameMasterChatDialog::onClose()
         player->closeComms();
     }
     destroy();
+}
+
+void GameMasterChatDialog::drawLine(sf::RenderTarget& window, sf::Vector2f target)
+{
+    sf::VertexArray a(sf::LinesStrip, 2);
+    a[0].position = getCenterPoint();
+    a[1].position = target;
+    a[0].color = sf::Color(128,255,128,128);
+    a[1].color = a[0].color;
+    window.draw(a);
 }

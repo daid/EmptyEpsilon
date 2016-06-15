@@ -19,6 +19,9 @@ class DatabaseViewComponent;
 class ScienceScreen : public GuiOverlay
 {
 public:
+    GuiOverlay* background_gradient;
+    GuiOverlay* background_crosses;
+
     GuiElement* radar_view;
     DatabaseViewComponent* database_view;
 

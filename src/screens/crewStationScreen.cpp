@@ -2,7 +2,6 @@
 #include "epsilonServer.h"
 #include "main.h"
 #include "preferenceManager.h"
-#include "menus/shipSelectionScreen.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/noiseOverlay.h"
@@ -106,7 +105,7 @@ void CrewStationScreen::onKey(sf::Keyboard::Key key, int unicode)
     case sf::Keyboard::Home:
         destroy();
         soundManager->stopMusic();
-        new ShipSelectionScreen();
+        returnToShipSelection();
         break;
     case sf::Keyboard::P:
         if (game_server)

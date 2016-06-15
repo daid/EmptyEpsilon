@@ -9,6 +9,8 @@ class GuiKeyValueDisplay;
 class GuiAutoLayout;
 class GuiButton;
 class GuiToggleButton;
+class GuiSlider;
+class GuiLabel;
 
 class RelayScreen : public GuiOverlay
 {
@@ -37,6 +39,9 @@ private:
 
     GuiToggleButton* alert_level_button;
     std::vector<GuiButton*> alert_level_buttons;
+
+    GuiSlider* zoom_slider;
+    GuiLabel* zoom_label;
 
     sf::Vector2f mouse_down_position;
 public:

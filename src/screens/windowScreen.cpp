@@ -3,7 +3,6 @@
 #include "windowScreen.h"
 #include "epsilonServer.h"
 #include "main.h"
-#include "menus/shipSelectionScreen.h"
 
 #include "screenComponents/viewport3d.h"
 #include "screenComponents/indicatorOverlays.h"
@@ -59,7 +58,7 @@ void WindowScreen::onKey(sf::Keyboard::Key key, int unicode)
     case sf::Keyboard::Escape:
     case sf::Keyboard::Home:
         destroy();
-        new ShipSelectionScreen();
+        returnToShipSelection();
         break;
     case sf::Keyboard::P:
         if (game_server)

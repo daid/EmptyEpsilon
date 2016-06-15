@@ -9,6 +9,7 @@
 #include "gui/colorConfig.h"
 #include "menus/mainMenus.h"
 #include "menus/autoConnectScreen.h"
+#include "menus/shipSelectionScreen.h"
 #include "mouseCalibrator.h"
 #include "factionInfo.h"
 #include "gameGlobalInfo.h"
@@ -359,12 +360,25 @@ void returnToMainMenu()
         int crew_position = PreferencesManager::get("autoconnect").toInt() - 1;
         if (crew_position < 0) crew_position = 0;
         if (crew_position > max_crew_positions) crew_position = max_crew_positions;
-        new AutoConnectScreen(ECrewPosition(crew_position), PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "-1").toInt());
+        new AutoConnectScreen(ECrewPosition(crew_position), PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "solo"));
     }
     else if (PreferencesManager::get("touchcalib").toInt())
     {
         new MouseCalibrator(PreferencesManager::get("touchcalibfile"));
     }else{
         new MainMenu();
+    }
+}
+
+void returnToShipSelection()
+{
+    if (PreferencesManager::get("autoconnect").toInt())
+    {
+        //If we are auto connect, return to the auto connect screen instead of the ship selection. The returnToMainMenu will handle this.
+        returnToMainMenu();
+    }
+    else
+    {
+        new ShipSelectionScreen();
     }
 }

@@ -3,7 +3,6 @@
 #include "gameMasterScreen.h"
 #include "tweak.h"
 #include "chatDialog.h"
-#include "menus/shipSelectionScreen.h"
 #include "spaceObjects/cpuShip.h"
 #include "spaceObjects/spaceStation.h"
 #include "spaceObjects/wormHole.h"
@@ -38,6 +37,10 @@ GameMasterScreen::GameMasterScreen()
         else
             engine->setGameSpeed(0.0f);
     }))->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, ATopLeft)->setSize(250, 50);
+
+    (new GuiToggleButton(this, "", "Intercept all comms", [this](bool value) {
+        gameGlobalInfo->intercept_all_comms_to_gm = value;
+    }))->setValue(gameGlobalInfo->intercept_all_comms_to_gm)->setTextSize(20)->setPosition(300, 20, ATopLeft)->setSize(200, 25);
     
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR", [this](int index, string value) {
         for(P<SpaceObject> obj : targets.getTargets())
@@ -70,7 +73,7 @@ GameMasterScreen::GameMasterScreen()
     export_button = new GuiButton(this, "EXPORT_BUTTON", "Copy scenario", [this]() {
         Clipboard::setClipboard(getScriptExport());
     });
-    export_button->setPosition(-20, -20, ABottomRight)->setSize(250, 50);
+    export_button->setTextSize(20)->setPosition(-20, -20, ABottomRight)->setSize(125, 25);
 
     cancel_create_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
         create_button->show();
@@ -94,7 +97,8 @@ GameMasterScreen::GameMasterScreen()
         {
             if (P<PlayerSpaceship>(obj))
             {
-                (new GameMasterChatDialog(chat_layer, obj))->setPosition(main_radar->worldToScreen(obj->getPosition()))->setSize(300, 300);
+                int idx = gameGlobalInfo->findPlayerShip(obj);
+                chat_dialog_per_ship[idx]->show()->setPosition(main_radar->worldToScreen(obj->getPosition()))->setSize(300, 300);
             }
         }
     });
@@ -143,6 +147,11 @@ GameMasterScreen::GameMasterScreen()
 
     chat_layer = new GuiElement(this, "");
     chat_layer->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
+    {
+        chat_dialog_per_ship.push_back(new GameMasterChatDialog(chat_layer, main_radar, n));
+        chat_dialog_per_ship[n]->hide();
+    }
 
     ship_tweak_dialog = new GuiShipTweak(this);
     ship_tweak_dialog->hide();
@@ -182,6 +191,14 @@ void GameMasterScreen::update(float delta)
         {
             if (player_ship_selector->indexByValue(string(n)) == -1)
                 player_ship_selector->addEntry(ship->getTypeName() + " " + ship->getCallSign(), string(n));
+            
+            if (ship->isCommsBeingHailedByGM() || ship->isCommsChatOpenToGM())
+            {
+                if (!chat_dialog_per_ship[n]->isVisible())
+                {
+                    chat_dialog_per_ship[n]->show()->setPosition(main_radar->worldToScreen(ship->getPosition()))->setSize(300, 300);
+                }
+            }
         }else{
             if (player_ship_selector->indexByValue(string(n)) != -1)
                 player_ship_selector->removeEntry(player_ship_selector->indexByValue(string(n)));
@@ -429,7 +446,7 @@ void GameMasterScreen::onKey(sf::Keyboard::Key key, int unicode)
     case sf::Keyboard::Escape:
     case sf::Keyboard::Home:
         destroy();
-        new ShipSelectionScreen();
+        returnToShipSelection();
         break;
     case sf::Keyboard::P:
         if (game_server)

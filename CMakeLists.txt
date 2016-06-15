@@ -125,6 +125,7 @@ set(SOURCES
 	src/screenComponents/mainScreenControls.cpp
 	src/screenComponents/databaseView.cpp
 	src/screenComponents/shipsLogControl.cpp
+	src/screenComponents/onScreenKeyboard.cpp
 	src/gui/colorConfig.cpp
 	src/gui/mouseRenderer.cpp
 	src/gui/scriptError.cpp

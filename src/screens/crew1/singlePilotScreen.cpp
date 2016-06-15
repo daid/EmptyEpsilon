@@ -5,6 +5,7 @@
 
 #include "screenComponents/viewport3d.h"
 
+#include "screenComponents/alertOverlay.h"
 #include "screenComponents/combatManeuver.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/impulseControls.h"
@@ -27,11 +28,23 @@
 SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
 : GuiOverlay(owner, "SINGLEPILOT_SCREEN", colorConfig.background)
 {
+    // Create a 3D viewport behind everything, to serve as the right-side panel
     viewport = new GuiViewport3D(this, "3D_VIEW");
     viewport->setPosition(1000, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
+    // Create left panel for controls.
     left_panel = new GuiElement(this, "LEFT_PANEL");
     left_panel->setPosition(0, 0, ATopLeft)->setSize(1000, GuiElement::GuiSizeMax);
+
+    // Render the radar shadow and background decorations.
+    background_gradient = new GuiOverlay(left_panel, "BACKGROUND_GRADIENT", sf::Color::White);
+    background_gradient->setTextureCenter("gui/BackgroundGradientSingle");
+
+    background_crosses = new GuiOverlay(left_panel, "BACKGROUND_CROSSES", sf::Color::White);
+    background_crosses->setTextureTiled("gui/BackgroundCrosses");
+
+    // Render the alert level color overlay.
+    (new AlertLevelOverlay(this));
 
     // 5U tactical radar with piloting features.
     radar = new GuiRadarView(left_panel, "TACTICAL_RADAR", 5000.0, &targets);
@@ -75,6 +88,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
 
     // Weapon tube controls.
     tube_controls = new GuiMissileTubeControls(left_panel, "MISSILE_TUBES");
+    tube_controls->setPosition(20, -20, ABottomLeft);
     radar->enableTargetProjections(tube_controls);
 
     // Missile lock button near top right of left panel.

@@ -270,6 +270,6 @@ void ServerCreationScreen::startScenario()
 
     // Destroy this screen and move on to ship selection.
     destroy();
-    new ShipSelectionScreen();
+    returnToShipSelection();
     new ScriptErrorRenderer();
 }

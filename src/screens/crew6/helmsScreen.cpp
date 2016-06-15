@@ -17,14 +17,20 @@
 HelmsScreen::HelmsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "HELMS_SCREEN", colorConfig.background)
 {
-    (new GuiOverlay(this, "", sf::Color::White))->setTextureCenter("gui/BackgroundGradient");
-    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+    // Render the radar shadow and background decorations.
+    background_gradient = new GuiOverlay(this, "BACKGROUND_GRADIENT", sf::Color::White);
+    background_gradient->setTextureCenter("gui/BackgroundGradient");
+
+    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", sf::Color::White);
+    background_crosses->setTextureTiled("gui/BackgroundCrosses");
+
+    // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
 
     GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", 5000.0, nullptr);
     
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
-    combat_maneuver->setPosition(-50, -50, ABottomRight)->setSize(280, 215);
+    combat_maneuver->setPosition(-20, -20, ABottomRight)->setSize(280, 215);
     
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);

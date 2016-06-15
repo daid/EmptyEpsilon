@@ -12,10 +12,18 @@ enum EMainScreenSetting
     MSS_Back,
     MSS_Left,
     MSS_Right,
+    MSS_Target,
     MSS_Tactical,
     MSS_LongRange
 };
 template<> void convert<EMainScreenSetting>::param(lua_State* L, int& idx, EMainScreenSetting& mss);
+
+enum EMainScreenOverlay
+{
+    MSO_HideComms = 0,
+    MSO_ShowComms
+};
+template<> void convert<EMainScreenOverlay>::param(lua_State* L, int& idx, EMainScreenOverlay& mso);
 
 enum EDockingState
 {
@@ -44,7 +52,7 @@ class SpaceShip : public ShipTemplateBasedObject
 {
 public:
     constexpr static int max_frequency = 20;
-    constexpr static float combat_maneuver_charge_time = 20.0f; /*< Amount of time it takes to fully charge the combat meneuver system */
+    constexpr static float combat_maneuver_charge_time = 20.0f; /*< Amount of time it takes to fully charge the combat maneuver system */
     constexpr static float combat_maneuver_boost_max_time = 3.0f; /*< Amount of time we can boost with a fully charged combat maneuver system */
     constexpr static float combat_maneuver_strafe_max_time = 3.0f; /*< Amount of time we can strafe with a fully charged combat maneuver system */
     constexpr static float warp_charge_time = 4.0f;
@@ -361,6 +369,7 @@ string getMissileWeaponName(EMissileWeapons missile);
 REGISTER_MULTIPLAYER_ENUM(EMissileWeapons);
 REGISTER_MULTIPLAYER_ENUM(EWeaponTubeState);
 REGISTER_MULTIPLAYER_ENUM(EMainScreenSetting);
+REGISTER_MULTIPLAYER_ENUM(EMainScreenOverlay);
 REGISTER_MULTIPLAYER_ENUM(EDockingState);
 REGISTER_MULTIPLAYER_ENUM(EScannedState);
 

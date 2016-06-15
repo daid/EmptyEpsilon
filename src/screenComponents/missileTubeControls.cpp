@@ -12,9 +12,10 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
 : GuiAutoLayout(owner, id, LayoutVerticalBottomToTop), load_type(MW_None), manual_aim(false), missile_target_angle(0)
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
+
     rows.resize(max_weapon_tubes);
-    for(int n=max_weapon_tubes-1; n>=0; n--)
+
+    for (int n = max_weapon_tubes - 1; n >= 0; n--)
     {
         TubeRow row;
         row.layout = new GuiAutoLayout(this, id + "_ROW_" + string(n), LayoutHorizontalLeftToRight);
@@ -50,10 +51,10 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
                 my_spaceship->commandFireTube(n, target_angle);
             }
         });
-        row.fire_button->setSize(300, 50);
+        row.fire_button->setSize(200, 50);
         (new GuiPowerDamageIndicator(row.fire_button, id + "_" + string(n) + "_PDI", SYS_MissileSystem, ACenterRight))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         row.loading_bar = new GuiProgressbar(row.layout, id + "_" + string(n) + "_PROGRESS", 0, 1.0, 0);
-        row.loading_bar->setColor(sf::Color(128, 128, 128))->setSize(300, 50);
+        row.loading_bar->setColor(sf::Color(128, 128, 128))->setSize(200, 50);
         row.loading_label = new GuiLabel(row.loading_bar, id + "_" + string(n) + "_PROGRESS_LABEL", "Loading", 35);
         row.loading_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         
@@ -61,7 +62,7 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
     }
     
     
-    for(int n=MW_Count-1; n>=0; n--)
+    for (int n = MW_Count-1; n >= 0; n--)
     {
         load_type_rows[n].layout = new GuiAutoLayout(this, id + "_ROW_" + string(n), LayoutHorizontalLeftToRight);
         load_type_rows[n].layout->setSize(GuiElement::GuiSizeMax, 40);
@@ -71,10 +72,10 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
                 load_type = EMissileWeapons(n);
             else
                 load_type = MW_None;
-            for(int idx=0; idx<MW_Count; idx++)
+            for(int idx = 0; idx < MW_Count; idx++)
                 load_type_rows[idx].button->setValue(idx == load_type);
         });
-        load_type_rows[n].button->setTextSize(28)->setSize(220, 40);
+        load_type_rows[n].button->setTextSize(28)->setSize(200, 40);
     }
     load_type_rows[MW_Homing].button->setIcon("gui/icons/weapon-homing.png");
     load_type_rows[MW_Mine].button->setIcon("gui/icons/weapon-mine.png");
@@ -83,17 +84,16 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
     load_type_rows[MW_HVLI].button->setIcon("gui/icons/weapon-hvli.png");
 }
 
-void GuiMissileTubeControls::onDraw(sf::RenderTarget& window)
-{
+void GuiMissileTubeControls::onDraw(sf::RenderTarget& window){
     if (!my_spaceship)
         return;
-    for(int n=0; n<MW_Count; n++)
+    for (int n = 0; n < MW_Count; n++)
     {
         load_type_rows[n].button->setText(getMissileWeaponName(EMissileWeapons(n)) + " [" + string(my_spaceship->weapon_storage[n]) + "/" + string(my_spaceship->weapon_storage_max[n]) + "]");
         load_type_rows[n].layout->setVisible(my_spaceship->weapon_storage_max[n] > 0);
     }
     
-    for(int n=0; n<my_spaceship->weapon_tube_count; n++)
+    for (int n = 0; n < my_spaceship->weapon_tube_count; n++)
     {
         WeaponTube& tube = my_spaceship->weapon_tube[n];
         rows[n].layout->show();
@@ -144,6 +144,7 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window)
     }
     for(int n=my_spaceship->weapon_tube_count; n<max_weapon_tubes; n++)
         rows[n].layout->hide();
+
     GuiAutoLayout::onDraw(window);
 }
 

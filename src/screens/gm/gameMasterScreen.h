@@ -17,6 +17,7 @@ class GuiKeyValueDisplay;
 class GuiListbox;
 class GuiButton;
 class GuiTextEntry;
+class GameMasterChatDialog;
 
 class GameMasterScreen : public GuiCanvas, public Updatable
 {
@@ -28,6 +29,7 @@ private:
     GuiSelector* faction_selector;
     
     GuiElement* chat_layer;
+    std::vector<GameMasterChatDialog*> chat_dialog_per_ship;
     GuiGlobalMessageEntry* global_message_entry;
     GuiObjectCreationScreen* object_creation_screen;
     GuiShipTweak* ship_tweak_dialog;

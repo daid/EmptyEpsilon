@@ -31,7 +31,7 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
         }
         display(entry);
     });
-    item_list->setPosition(0, 0, ATopLeft)->setMargins(20, 50, 20, 250)->setSize(350, GuiElement::GuiSizeMax);
+    item_list->setPosition(0, 0, ATopLeft)->setMargins(20, 20, 20, 130)->setSize(400, GuiElement::GuiSizeMax);
     fillListBox();
 }
 
@@ -88,10 +88,10 @@ void DatabaseViewComponent::display(P<ScienceDatabase> entry)
         database_entry->destroy();
     
     database_entry = new GuiElement(this, "DATABASE_ENTRY");
-    database_entry->setPosition(400, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    database_entry->setPosition(400, 20, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     
     GuiAutoLayout* layout = new GuiAutoLayout(database_entry, "DATABASE_ENTRY_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    layout->setPosition(0, 0, ATopLeft)->setMargins(25, 0)->setSize(400, GuiElement::GuiSizeMax);
+    layout->setPosition(0, 0, ATopLeft)->setMargins(0, 0)->setSize(400, GuiElement::GuiSizeMax);
 
     if (!entry)
         return;
@@ -113,11 +113,9 @@ void DatabaseViewComponent::display(P<ScienceDatabase> entry)
         {
             (new GuiScrollText(database_entry, "DATABASE_LONG_DESCRIPTION", entry->longDescription))->setTextSize(24)->setPosition(450,0,ABottomLeft)->setMargins(0, 0, 50, 50)->setSize(GuiElement::GuiSizeMax, 240);
         }
-    } else {
-        if (entry->longDescription.length() > 0)
-        {
-            (new GuiScrollText(database_entry, "DATABASE_LONG_DESCRIPTION", entry->longDescription))->setTextSize(24)->setPosition(450,0,ATopLeft)->setMargins(0, 0, 50, 50)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-        }
+    } else if (entry->longDescription.length() > 0)
+    {
+        (new GuiScrollText(database_entry, "DATABASE_LONG_DESCRIPTION", entry->longDescription))->setTextSize(24)->setPosition(450,0,ATopLeft)->setMargins(0, 120, 50, 50)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     }
     if (entry->items.size() > 0)
     {
