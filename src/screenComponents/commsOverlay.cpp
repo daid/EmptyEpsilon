@@ -9,6 +9,8 @@
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_textentry.h"
 
+#include "onScreenKeyboard.h"
+
 GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
 : GuiElement(owner, "COMMS_OVERLAY")
 {
@@ -110,6 +112,15 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
             my_spaceship->commandCloseTextComm();
     });
     chat_comms_close_button->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
+    
+    if (!engine->getObject("mouseRenderer")) //If we are a touch screen, add a on screen keyboard.
+    {
+        OnScreenKeyboardControl* keyboard = new OnScreenKeyboardControl(chat_comms_box, chat_comms_message_entry);
+        keyboard->setPosition(20, -20, ABottomLeft)->setSize(760, 200);
+        chat_comms_message_entry->setPosition(20, -220, ABottomLeft);
+        chat_comms_send_button->setPosition(-20, -220, ABottomRight);
+        chat_comms_text->setSize(chat_comms_text->getSize().x, chat_comms_text->getSize().y - 200);
+    }
 
     // Panel for scripted comms with objects.
     script_comms_box = new GuiPanel(owner, "COMMS_SCRIPT_BOX");

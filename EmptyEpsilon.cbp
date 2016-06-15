@@ -621,6 +621,8 @@
 		<Unit filename="src/screenComponents/missileTubeControls.h" />
 		<Unit filename="src/screenComponents/noiseOverlay.cpp" />
 		<Unit filename="src/screenComponents/noiseOverlay.h" />
+		<Unit filename="src/screenComponents/onScreenKeyboard.cpp" />
+		<Unit filename="src/screenComponents/onScreenKeyboard.h" />
 		<Unit filename="src/screenComponents/openCommsButton.cpp" />
 		<Unit filename="src/screenComponents/openCommsButton.h" />
 		<Unit filename="src/screenComponents/powerDamageIndicator.cpp" />
