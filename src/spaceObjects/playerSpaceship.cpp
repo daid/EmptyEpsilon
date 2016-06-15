@@ -273,17 +273,11 @@ void PlayerSpaceship::update(float delta)
                     scan_probe_recharge = 0.0;
                 }
             }
-            if (hull_strength < hull_max)
-            {
-                hull_strength += delta;
-                if (hull_strength > hull_max)
-                    hull_strength = hull_max;
-            }
         }
     }else{
         scan_probe_recharge = 0.0;
     }
-    
+
     if (auto_coolant_enabled)
     {
         float total_heat = 0.0;
