@@ -33,9 +33,11 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
     front_shield_display->setIcon("gui/icons/shields-fore")->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
     rear_shield_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, "Rear", "");
     rear_shield_display->setIcon("gui/icons/shields-aft")->setTextSize(20)->setPosition(20, 220, ATopLeft)->setSize(240, 40);
-
-    (new GuiSelfDestructButton(this, "SELF_DESTRUCT"))->setPosition(20, 260, ATopLeft)->setSize(240, 100);
-
+    oxygen_display = new GuiKeyValueDisplay(this, "OXYGEN_DISPLAY", 0.45, "Oxygen", "");
+    oxygen_display->setIcon("gui/icons/weapon-hvli")->setTextSize(20)->setPosition(20, 260, ATopLeft)->setSize(240, 40);
+    
+    (new GuiSelfDestructButton(this, "SELF_DESTRUCT"))->setPosition(20, 300, ATopLeft)->setSize(240, 100);
+    
     GuiElement* system_config_container = new GuiElement(this, "");
     system_config_container->setPosition(0, -20, ABottomCenter)->setSize(750 + 300, GuiElement::GuiSizeMax);
     GuiAutoLayout* system_row_layouts = new GuiAutoLayout(system_config_container, "SYSTEM_ROWS", GuiAutoLayout::LayoutVerticalBottomToTop);
@@ -146,6 +148,12 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
             hull_display->setColor(sf::Color::White);
         front_shield_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "%");
         rear_shield_display->setValue(string(my_spaceship->getShieldPercentage(1)) + "%");
+
+        oxygen_display->setValue(string(my_spaceship->getOxygenPoints(), 0));
+        if (my_spaceship->getOxygenPoints() < 20)
+            oxygen_display->setColor(sf::Color::Red);
+        else
+            oxygen_display->setColor(sf::Color::White);
 
         for(int n=0; n<SYS_COUNT; n++)
         {
