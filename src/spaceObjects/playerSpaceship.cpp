@@ -328,10 +328,15 @@ void PlayerSpaceship::update(float delta)
                             playerShip->comms_target_name = getCallSign();
                         }
                     }else{
-                        if (comms_script_interface.openCommChannel(this, comms_target))
-                            comms_state = CS_ChannelOpen;
-                        else
-                            comms_state = CS_ChannelFailed;
+                        if (gameGlobalInfo->intercept_all_comms_to_gm)
+                        {
+                            comms_state = CS_ChannelOpenGM;
+                        }else{
+                            if (comms_script_interface.openCommChannel(this, comms_target))
+                                comms_state = CS_ChannelOpen;
+                            else
+                                comms_state = CS_ChannelFailed;
+                        }
                     }
                 }
             }

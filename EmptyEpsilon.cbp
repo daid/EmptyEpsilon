@@ -11,7 +11,7 @@
 				<Option object_output=".obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="fullscreen=0 screen43=0 touchscreen=0 autoconnect=0 touchcalib=0 " />
+				<Option parameters="fullscreen=0 screen43=0 touchscreen=0 autoconnect=0 touchcalib=0 instance_name=DEBUG" />
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DDEBUG" />
@@ -39,7 +39,7 @@
 				<Option object_output=".obj/Release/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
-				<Option parameters="fullscreen=0 screen43=0 touchscreen=0" />
+				<Option parameters="fullscreen=0 screen43=0 touchscreen=0 instance_name=RELEASE" />
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-g" />

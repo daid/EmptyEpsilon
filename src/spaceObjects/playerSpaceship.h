@@ -117,6 +117,7 @@ public:
     ECommsState getCommsState() { return comms_state; }
     float getCommsOpeningDelay() { return comms_open_delay; }
     const std::vector<string>& getCommsReplyOptions() const { return comms_reply_message; }
+    P<SpaceObject> getCommsTarget() { return comms_target; }
     const string& getCommsTargetName() { return comms_target_name; }
     const string& getCommsIncommingMessage() { return comms_incomming_message; }
     bool hailCommsByGM(string target_name);
