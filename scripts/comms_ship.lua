@@ -44,6 +44,11 @@ function friendlyComms(comms_data)
 			addCommsReply("Back", mainMenu)
 		end)
 	end
+	addCommsReply("Tow me", function()
+		setCommsMessage("Heading toward you to tow.");
+		comms_target:orderTowTarget(player)
+		addCommsReply("Back", mainMenu)
+        end)
 	addCommsReply("Report status", function()
 		msg = "Hull: " .. math.floor(comms_target:getHull() / comms_target:getHullMax() * 100) .. "%\n"
 		shields = comms_target:getShieldCount()
