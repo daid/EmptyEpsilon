@@ -15,6 +15,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getAlertLevel);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setShieldsActive);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addToShipLog);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addToShipLogIntern);
     ///Move all the player stations connected to this ship to a different ship.
     ///The other ship needs to be a PlayerSpaceship as well, or this function will do nothing.
     ///This can be used in scenarios to change the ship the crew if flying in.
@@ -145,6 +146,9 @@ string alertLevelToString(EAlertLevel level)
 static inline sf::Packet& operator << (sf::Packet& packet, const PlayerSpaceship::ShipLogEntry& e) { return packet << e.prefix << e.text << e.color.r << e.color.g << e.color.b << e.color.a; }
 static inline sf::Packet& operator >> (sf::Packet& packet, PlayerSpaceship::ShipLogEntry& e) { packet >> e.prefix >> e.text >> e.color.r >> e.color.g >> e.color.b >> e.color.a; return packet; }
 
+static inline sf::Packet& operator << (sf::Packet& packet, const PlayerSpaceship::ShipLogInternEntry& e) { return packet << e.prefix << e.text << e.color.r << e.color.g << e.color.b << e.color.a; }
+static inline sf::Packet& operator >> (sf::Packet& packet, PlayerSpaceship::ShipLogInternEntry& e) { packet >> e.prefix >> e.text >> e.color.r >> e.color.g >> e.color.b >> e.color.a; return packet; }
+
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 PlayerSpaceship::PlayerSpaceship()
 : SpaceShip("PlayerSpaceship", 5000)
@@ -197,6 +201,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&comms_target_name);
     registerMemberReplication(&comms_incomming_message);
     registerMemberReplication(&ships_log);
+    registerMemberReplication(&ships_logIntern);
     registerMemberReplication(&waypoints);
     registerMemberReplication(&scan_probe_stock);
     registerMemberReplication(&activate_self_destruct);
@@ -242,6 +247,7 @@ PlayerSpaceship::PlayerSpaceship()
     setCallSign("PL" + string(getMultiplayerId()));
 
     addToShipLog("Start of log", sf::Color::White);
+    addToShipLogIntern("Start of intern log", sf::Color::White);
 }
 
 void PlayerSpaceship::update(float delta)
@@ -505,6 +511,7 @@ void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
         hull_damage_indicator = 1.5;
     }
     SpaceShip::takeHullDamage(damage_amount, info);
+    addToShipLogIntern(string(damage_amount) + string(" damage to hull."),sf::Color::Red);
 }
 
 void PlayerSpaceship::setSystemCoolantRequest(ESystem system, float request)
@@ -607,6 +614,18 @@ void PlayerSpaceship::addToShipLog(string message, sf::Color color)
 const std::vector<PlayerSpaceship::ShipLogEntry>& PlayerSpaceship::getShipsLog() const
 {
     return ships_log;
+}
+
+void PlayerSpaceship::addToShipLogIntern(string message, sf::Color color)
+{
+    if (ships_logIntern.size() > 100)
+        ships_logIntern.erase(ships_logIntern.begin());
+    ships_logIntern.emplace_back(string(engine->getElapsedTime(), 1) + string(": "), message, color);
+}
+
+const std::vector<PlayerSpaceship::ShipLogInternEntry>& PlayerSpaceship::getShipsLogIntern() const
+{
+    return ships_logIntern;
 }
 
 void PlayerSpaceship::transferPlayersToShip(P<PlayerSpaceship> other_ship)
@@ -807,9 +826,15 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             {
                 shields_active = active;
                 if (active)
+                {
                     soundManager->playSound("shield_up.wav");
+                    addToShipLogIntern(string("Shields on"),sf::Color::Green);
+                }
                 else
+                {
                     soundManager->playSound("shield_down.wav");
+                    addToShipLogIntern(string("Shields off"),sf::Color::Green);
+                }
             }
         }
         break;
