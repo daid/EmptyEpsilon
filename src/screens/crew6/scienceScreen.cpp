@@ -245,22 +245,20 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             rel_velocity = 0.0;
 
         string duration = "";
-
-        if (fabs(rel_velocity) > 0.1)
+        if (fabs(rel_velocity) > 0.01)
         {
-            int seconds = fabs(distance/rel_velocity);
-            float heading_actual = my_spaceship->getHeading();
-            float diff_heading = fabs(heading_actual-heading);
-            if (diff_heading < 10)
+            if (fabs(my_spaceship->getHeading()-heading) < 10)
             {
-                int minutes;
-                minutes = seconds / 60;
+                int seconds = fabs(distance/rel_velocity);
+                int minutes = seconds / 60;
 
-                duration += "  (";
+                duration += " (";
+                if (minutes < 10)
+                    duration += "0";
                 duration += string(minutes);
-                duration += "min ";
-                duration += string(seconds%60);
-                duration += "sec";
+                duration += ":";
+                if (seconds%60 < 10)
+                    duration += "0";
                 duration += ")";
             }
         }
