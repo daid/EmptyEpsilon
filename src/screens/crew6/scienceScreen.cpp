@@ -259,7 +259,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                 duration += ":";
                 if (seconds%60 < 10)
                     duration += "0";
-                duration += string(seconds);
+                duration += string(seconds%60);
                 duration += ")";
             }
         }
