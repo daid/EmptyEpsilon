@@ -59,6 +59,20 @@ public:
         bool operator!=(const ShipLogEntry& e) { return prefix != e.prefix || text != e.text || color != e.color; }
     };
 
+    class ShipLogInternEntry
+    {
+    public:
+        string prefix;
+        string text;
+        sf::Color color;
+
+        ShipLogInternEntry() {}
+        ShipLogInternEntry(string prefix, string text, sf::Color color)
+        : prefix(prefix), text(text), color(color) {}
+
+        bool operator!=(const ShipLogInternEntry& e) { return prefix != e.prefix || text != e.text || color != e.color; }
+    };
+
     float hull_damage_indicator;
     float jump_indicator;
     P<SpaceObject> scanning_target; //Server only
@@ -81,6 +95,7 @@ private:
     CommsScriptInterface comms_script_interface;  //Server only
 
     std::vector<ShipLogEntry> ships_log;
+    std::vector<ShipLogInternEntry> ships_logIntern;
 
 public:
     std::vector<sf::Vector2f> waypoints;
@@ -183,6 +198,9 @@ public:
 
     void addToShipLog(string message, sf::Color color);
     const std::vector<ShipLogEntry>& getShipsLog() const;
+    
+    void addToShipLogIntern(string message, sf::Color color);
+    const std::vector<ShipLogInternEntry>& getShipsLogIntern() const;
     
     void transferPlayersToShip(P<PlayerSpaceship> other_ship);
     void transferPlayersAtPositionToShip(ECrewPosition position, P<PlayerSpaceship> other_ship);
