@@ -19,9 +19,9 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
             tactical_button->setVisible(false);
         if (!gameGlobalInfo->allow_main_screen_long_range_radar)
             long_range_button->setVisible(false);
-        if (onscreen_comms_active)
+        if (show_comms_button && onscreen_comms_active)
             show_comms_button->setVisible(false);
-        if (!onscreen_comms_active)
+        if (hide_comms_button && !onscreen_comms_active)
             hide_comms_button->setVisible(false);
     });
     open_button->setValue(false);
