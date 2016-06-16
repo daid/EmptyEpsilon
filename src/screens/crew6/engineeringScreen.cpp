@@ -5,6 +5,7 @@
 #include "screenComponents/shipInternalView.h"
 #include "screenComponents/selfDestructButton.h"
 #include "screenComponents/alertOverlay.h"
+#include "screenComponents/shipsLogInternControl.h"
 
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_autolayout.h"
@@ -127,6 +128,8 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
         coolant_slider->addSnapValue(snap_point, 0.1);
     coolant_slider->disable();
 
+    new ShipsLogIntern(this);
+    
     (new GuiShipInternalView(system_row_layouts, "SHIP_INTERNAL_VIEW", 48.0f))->setShip(my_spaceship)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
