@@ -36,6 +36,11 @@ void ColorConfig::load()
     
     DEF_COLOR(background);
     DEF_COLOR(radar_outline);
+    DEF_COLOR(log_generic);
+    DEF_COLOR(log_send);
+    DEF_COLOR(log_receive_friendly);
+    DEF_COLOR(log_receive_enemy);
+    DEF_COLOR(log_receive_neutral);
     DEF_WIDGETCOLORSET(button);
     DEF_WIDGETCOLORSET(label);
     DEF_WIDGETCOLORSET(text_entry);
