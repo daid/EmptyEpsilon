@@ -37,6 +37,21 @@ function friendlyComms(comms_data)
 			end
 		end
 	end)
+	addCommsReply("Go to a waypoint", function()
+		if player:getWaypointCount() == 0 then
+			setCommsMessage("No waypoints set. Please set a waypoint first.");
+			addCommsReply("Back", mainMenu)
+		else
+			setCommsMessage("Toward which waypoint should we move?");
+			for n=1,player:getWaypointCount() do
+				addCommsReply("Go to WP" .. n, function()
+					comms_target:orderFlyTowards(player:getWaypoint(n))
+					setCommsMessage("We are heading toward WP" .. n ..".");
+					addCommsReply("Back", mainMenu)
+				end)
+			end
+		end
+	end)
 	if comms_data.friendlyness > 0.2 then
 		addCommsReply("Assist me", function()
 			setCommsMessage("Heading toward you to assist.");
@@ -44,11 +59,6 @@ function friendlyComms(comms_data)
 			addCommsReply("Back", mainMenu)
 		end)
 	end
-	addCommsReply("Tow me", function()
-		setCommsMessage("Heading toward you to tow.");
-		comms_target:orderTowTarget(player)
-		addCommsReply("Back", mainMenu)
-        end)
 	addCommsReply("Report status", function()
 		msg = "Hull: " .. math.floor(comms_target:getHull() / comms_target:getHullMax() * 100) .. "%\n"
 		shields = comms_target:getShieldCount()
