@@ -34,6 +34,8 @@ ScenarioInfo::ScenarioInfo(string filename)
         }
     }
     addKeyValue(key, value);
+    if (type == "")
+        LOG(WARNING) << "No scenario type for: " << filename;
 }
 
 void ScenarioInfo::addKeyValue(string key, string value)
