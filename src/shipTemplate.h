@@ -98,6 +98,7 @@ public:
     float impulse_acceleration;
     float combat_maneuver_boost_speed;
     float combat_maneuver_strafe_speed;
+    bool shares_energy;
     bool has_jump_drive, has_cloaking;
     float jump_drive_min_distance;
     float jump_drive_max_distance;
@@ -141,6 +142,7 @@ public:
     void setSpeed(float impulse, float turn, float acceleration);
     void setCombatManeuver(float boost, float strafe);
     void setWarpSpeed(float warp);
+    void setSharesEnergy(bool enabled);
     void setJumpDrive(bool enabled);
     void setJumpDriveRange(float min, float max) { jump_drive_min_distance = min; jump_drive_max_distance = max; }
     void setCloaking(bool enabled);
