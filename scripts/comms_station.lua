@@ -23,10 +23,12 @@ function mainMenu()
         services = {
             supplydrop = "friend",
             reinforcements = "friend",
+            tow = "friend"
         },
         service_cost = {
             supplydrop = 100,
             reinforcements = 150,
+            tow = 150
         },
         reputation_cost_multipliers = {
             friend = 1.0,
@@ -172,6 +174,17 @@ function handleUndockedState()
                         addCommsReply("Back", mainMenu)
                     end)
                 end
+            end
+            addCommsReply("Back", mainMenu)
+        end)
+    end
+    if isAllowedTo(comms_target.comms_data.services.tow) then
+        addCommsReply("We need to to be towed. ("..getServiceCost("tow").."rep)", function()
+            if player:takeReputationPoints(getServiceCost("tow")) then
+                ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Small Tug"):setScanned(true):orderPickup(player)
+                setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to pick you up.");
+            else
+                setCommsMessage("Not enough reputation!");
             end
             addCommsReply("Back", mainMenu)
         end)
