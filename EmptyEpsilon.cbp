@@ -585,6 +585,8 @@
 		<Unit filename="src/preferenceManager.h" />
 		<Unit filename="src/repairCrew.cpp" />
 		<Unit filename="src/repairCrew.h" />
+		<Unit filename="src/scenarioInfo.cpp" />
+		<Unit filename="src/scenarioInfo.h" />
 		<Unit filename="src/scienceDatabase.cpp" />
 		<Unit filename="src/scienceDatabase.h" />
 		<Unit filename="src/screenComponents/aimLock.cpp" />

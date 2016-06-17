@@ -57,6 +57,7 @@ set(SOURCES
 	src/missileWeaponData.cpp
 	src/factionInfo.cpp
 	src/mesh.cpp
+	src/scenarioInfo.cpp
 	src/repairCrew.cpp
 	src/GMScriptCallback.cpp
 	src/tutorialGame.cpp
