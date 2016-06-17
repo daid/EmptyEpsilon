@@ -180,3 +180,14 @@ for cnt=1,5 do
         variation:setJumpDrive(true)
     end
 end
+
+template = ShipTemplate():setName("Jump Carrier"):setClass("Corvette", "Freighter"):setModel("transport_4_2")
+template:setDescription([[The Jump Carrier is a specialized Freigher. It does not carry any cargo, as it's cargo bay is taken up by a specialized jump drive and the energy storage required to run this jump drive.
+It is designed to carry other ships deep into space. So it has special docking parameters, allowing other ships to attach themselves to this ship.]])
+template:setHull(100)
+template:setShields(50, 50)
+template:setSpeed(50, 6, 10)
+template:setRadarTrace("radar_transport.png")
+template:setJumpDrive(true)
+template:setJumpDriveRange(5000, 100 * 50000) --The jump carrier can jump a 100x longer distance then normal jump drives.
+template:setDockClasses("Starfighter", "Frigates", "Corvette")
