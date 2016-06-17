@@ -182,6 +182,7 @@ public:
     float getNetPowerUsage();
 
     void addToShipLog(string message, sf::Color color);
+    void addToShipLogBy(string message, P<SpaceObject> target);
     const std::vector<ShipLogEntry>& getShipsLog() const;
     
     void transferPlayersToShip(P<PlayerSpaceship> other_ship);

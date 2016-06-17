@@ -1,10 +1,80 @@
--- Name: Basic
--- Description: Basic scenario. A few random stations, with random stuff around them, are under attack by enemies. Kill all enemies to win.
--- Type: Basic
--- Variation[Empty]: Places no enemies. Recommended for GM-controlled scenarios and rookie crew orientation. The scenario continues until the GM declares victory or all Human Navy craft are destroyed.
--- Variation[Easy]: Places fewer enemies. Recommended for inexperienced crews.
--- Variation[Hard]: Places more enemies. Recommended if you have multiple player-controlled ships.
--- Variation[Extreme]: Places many enemies. You're pretty surely overwhelmed.
+-- Name: Quick Basic
+-- Description: Different version of the basic scenario. Which intended to play out quicker. There is only a single small station to defend.
+--- This scenario is designed to be ran on conventions. As you can run a 4 player crew in 20 minutes trough a game with minimal experience.
+-- Type: Convention
+-- Variation[Advanced]: Gived the players a stronger Atlantis instead of the Phobos. Which is more difficult to control, but has more firepower and defense. Increases enemy strengh as well.
+
+gametimeleft = 20 * 60 -- Maximum game time in seconds.
+timewarning = 10 * 60 -- Used for checking when to give a warning, and to update it so the warning happens once.
+
+ship_names = {
+    "SS Epsilon",
+    "Ironic Gentleman",
+    "Binary Sunset",
+    "USS Roddenberry",
+    "Earthship Sagan",
+    "Explorer",
+    "ISV Phantom",
+    "Keelhaul",
+    "Peacekeeper",
+    "WarMonger",
+    "Death Bringer",
+    "Executor",
+    "Excaliber",
+    "Voyager",
+    "Khan's Wrath",
+    "Kronos' Savior",
+    "HMS Captor",
+    "Imperial Stature",
+    "ESS Hellfire",
+    "Helen's Fury",
+    "Venus' Light",
+    "Blackbeard's Way",
+    "ISV Monitor",
+    "Argent",
+    "Echo One",
+    "Earth's Might",
+    "ESS Tomahawk",
+    "Sabretooth",
+    "Hiro-maru",
+    "USS Nimoy",
+    "Earthship Tyson",
+    "Destiny's Tear",
+    "HMS SuperNova",
+    "Alma del Terra",
+    "DreadHeart",
+    "Devil's Maw",
+    "Cougar's Claw",
+    "Blood-oath",
+    "Imperial Fist",
+    "HMS Promise",
+    "ESS Catalyst",
+    "Hercules Ascendant",
+    "Heavens Mercy",
+    "HMS Adams",
+    "Explorer",
+    "Discovery",
+    "Stratosphere",
+    "USS Kelly",
+    "HMS Honour",
+    "Devilfish",
+    "Minnow",
+    "Earthship Nye",
+    "Starcruiser Solo",
+    "Starcruiser Reynolds",
+    "Starcruiser Hunt",
+    "Starcruiser Lipinski",
+    "Starcruiser Tylor",
+    "Starcruiser Kato",
+    "Starcruiser Picard",
+    "Starcruiser Janeway",
+    "Starcruiser Archer",
+    "Starcruiser Sisko",
+    "Starcruiser Kirk",
+    "Aluminum Falcon",
+    "SS Essess",
+    "Jenny"
+}
 
 function vectorFromAngle(angle, length)
 	return math.cos(angle / 180 * math.pi) * length, math.sin(angle / 180 * math.pi) * length
@@ -53,110 +123,72 @@ function addWave(enemyList,type,a,d)
 	elseif type < 9.0 then
 		table.insert(enemyList, setCirclePos(CpuShip():setTemplate('MU52 Hornet'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 	else
-		table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Stalker R7'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-		table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Stalker R7'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setTemplate('WX-Lindworm'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setTemplate('WX-Lindworm'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 	end
 end
 
 -- Returns a semi-random heading.
 -- cnt: A counter, generally between 1 and the number of enemy groups.
 -- enemy_group_count: A number of enemy groups, generally set by the scenario type.
-function setWaveAngle(cnt,enemy_group_count)
+function getWaveAngle(cnt,enemy_group_count)
 	return cnt * 360/enemy_group_count + random(-60, 60)
 end
 
 -- Returns a semi-random distance.
+-- cnt: A counter, generally between 1 and the number of enemy groups.
 -- enemy_group_count: A number of enemy groups, generally set by the scenario type.
-function setWaveDistance(enemy_group_count)
-	return random(35000, 40000 + enemy_group_count * 3000)
+function getWaveDistance(cnt, enemy_group_count)
+	return random(25000 + cnt * 1000, 30000 + cnt * 3000)
 end
 
 function init()
 	enemyList = {}
 	friendlyList = {}
 
-	-- Randomly distribute 3 allied stations throughout the region.
-	n = 0
-	table.insert(friendlyList, setCirclePos(SpaceStation():setTemplate('Small Station'):setRotation(random(0, 360)):setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
-	n = 1
-	table.insert(friendlyList, setCirclePos(SpaceStation():setTemplate('Medium Station'):setRotation(random(0, 360)):setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
-	n = 2
-	table.insert(friendlyList, setCirclePos(SpaceStation():setTemplate('Large Station'):setRotation(random(0, 360)):setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
+	if getScenarioVariation() == "Advanced" then
+        player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
+    else
+        player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Phobos M3P")
+    end
+    player:setPosition(random(-2000, 2000), random(-2000, 2000)):setCallSign(ship_names[math.random(1,#ship_names)])
+    player:setJumpDrive(true)
+    player:setWarpDrive(false)
+
+	-- Put a single small station here, which needs to be defended.
+	table.insert(friendlyList, SpaceStation():setTemplate('Small Station'):setCallSign("DS-1"):setRotation(random(0, 360)):setFaction("Human Navy"):setPosition(random(-2000, 2000), random(-2000, 2000)))
 
 	-- Start the players with 300 reputation.
 	friendlyList[1]:addReputationPoints(300.0)
 
 	-- Randomly scatter nebulae near the players' spawn point.
 	local x, y = friendlyList[1]:getPosition()
-	setCirclePos(Nebula(), x, y, random(0, 360), 6000)
+	setCirclePos(Nebula(), x, y, random(0, 360), 12000)
 
 	for n=1, 5 do
-		setCirclePos(Nebula(), 0, 0, random(0, 360), random(20000, 45000))
+		setCirclePos(Nebula(), 0, 0, random(0, 360), random(23000, 45000))
 	end
-
-	-- GM functions to manually trigger enemy waves.
-	addGMFunction("Strikeship wave", function()
-		addWave(enemyList,0,setWaveAngle(math.random(20), math.random(20)),setWaveDistance(math.random(5)))
-	end)
-
-	addGMFunction("Fighter wave", function()
-		addWave(enemyList,1,setWaveAngle(math.random(20), math.random(20)),setWaveDistance(math.random(5)))
-	end)
-
-	addGMFunction("Gunship wave", function()
-		addWave(enemyList,2,setWaveAngle(math.random(20), math.random(20)),setWaveDistance(math.random(5)))
-	end)
-
-	addGMFunction("Dreadnought", function()
-		addWave(enemyList,4,setWaveAngle(math.random(20), math.random(20)),setWaveDistance(math.random(5)))
-	end)
-
-	addGMFunction("Missile cruiser wave", function()
-		addWave(enemyList,5,setWaveAngle(math.random(20), math.random(20)),setWaveDistance(math.random(5)))
-	end)
-
-	addGMFunction("Cruiser wave", function()
-		addWave(enemyList,6,setWaveAngle(math.random(20), math.random(20)),setWaveDistance(math.random(5)))
-	end)
-
-	addGMFunction("Adv. striker wave", function()
-		addWave(enemyList,9,setWaveAngle(math.random(20), math.random(20)),setWaveDistance(math.random(5)))
-	end)
-
-	-- Let the GM spawn a random enemy wave.
-	addGMFunction("Random wave", function()
-		a = setWaveAngle(math.random(20), math.random(20))
-		d = setWaveDistance(math.random(20))
-		type = random(0, 10)
-		addWave(enemyList,type,a,d)
-	end)
-
-	-- Let the GM spawn random reinforcements. Their distance from the
-	-- players' spawn point is about half that of enemy waves.
-	addGMFunction("Random friendly", function()
-		a = setWaveAngle(math.random(20), math.random(20))
-		d = random(15000, 20000 + math.random(20) * 1500)
-		friendlyShip = {'Phobos T3','MU52 Hornet','Piranha F12'}
-		friendlyShipIndex = math.random(#friendlyShip)
-		table.insert(friendlyList, setCirclePos(CpuShip():setTemplate(friendlyShip[friendlyShipIndex]):setRotation(a):setFaction("Human Navy"):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-	end)
 
 	-- Let the GM declare the Humans (players) victorious.
 	addGMFunction("Win", function()
 		victory("Human Navy");
 	end)
 
+	-- Let the GM declare the Humans (players) defeated.
+	addGMFunction("Defeat", function()
+		victory("Kraylor");
+	end)
+
+	-- Let the GM declare the Humans (players) defeated.
+	addGMFunction("Extra wave", function()
+		addWave(enemyList, random(0, 10), random(0, 360), random(25000, 30000))
+	end)
+
 	-- Set the number of enemy waves based on the scenario variation.
-	if getScenarioVariation() == "Extreme" then
-		enemy_group_count = 20
-	elseif getScenarioVariation() == "Hard" then
-		enemy_group_count = 8
-	elseif getScenarioVariation() == "Easy" then
-		enemy_group_count = 3
-	elseif getScenarioVariation() == "Empty" then
-		enemy_group_count = 0
+	if getScenarioVariation() == "Advanced" then
+		enemy_group_count = 6
 	else
-		enemy_group_count = 5
+		enemy_group_count = 3
 	end
 
 	-- If not in the Empty variation, spawn the corresponding number of random
@@ -164,15 +196,15 @@ function init()
 	-- relative to the players' spawn point.
 	if enemy_group_count > 0 then
 		for cnt=1,enemy_group_count do
-			a = setWaveAngle(cnt, enemy_group_count)
-			d = setWaveDistance(enemy_group_count)
+			a = getWaveAngle(cnt, enemy_group_count)
+			d = getWaveDistance(cnt, enemy_group_count)
 			type = random(0, 10)
 			addWave(enemyList, type, a, d)
 		end
 	end
 
-	-- Spawn 2-5 random asteroid belts.
-	for cnt=1,random(2, 5) do
+	-- Spawn 1-3 random asteroid belts.
+	for cnt=1,random(1, 3) do
 		a = random(0, 360)
 		a2 = random(0, 360)
 		d = random(3000, 40000)
@@ -191,8 +223,8 @@ function init()
 		end
 	end
 
-	-- Spawn 0-3 random mine fields.
-	for cnt=1,random(0, 3) do
+	-- Spawn 0-1 random mine fields.
+	for cnt=1,random(0, 1) do
 		a = random(0, 360)
 		a2 = random(0, 360)
 		d = random(20000, 40000)
@@ -209,17 +241,37 @@ function init()
 		end
 	end
 
-	-- Spawn a random black hole.
-	a = random(0, 360)
-	d = random(10000, 45000)
-	x, y = vectorFromAngle(a, d)
-	BlackHole():setPosition(x, y)
-
+    --Create a bunch of neutral stations
+	for n=1, 6 do
+		setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 0, 0, random(0, 360), random(15000, 30000))
+	end
 	-- Spawn random neutral transports.
 	Script():run("util_random_transports.lua")
+    
+    friendlyList[1]:sendCommsMessage(player, string.format([[%s, please inform your Captain and crew that you have a total of %d minutes for this mission.
+The mission started at the arrival of this message.
+Your objective is to fend off the incomming Kraylor attack.
+Good Luck.]], player:getCallSign(), gametimeleft / 60))  
 end
 
 function update(delta)
+    --Calculate the game time left, and act on it.
+    gametimeleft = gametimeleft - delta
+    if gametimeleft < 0 then
+        victory("Kraylor")
+    end
+    if gametimeleft < timewarning then
+        if timewarning <= 1 * 60 then --Less then 1 minutes left.
+            friendlyList[1]:sendCommsMessage(player, string.format([[%s, you have 1 minute remaining.]], player:getCallSign(), timewarning / 60))  
+            timewarning = timewarning - 2 * 60
+        elseif timewarning <= 5 * 60 then --Less then 5 minutes left. Warn ever 2 minutes instead of every 5.
+            friendlyList[1]:sendCommsMessage(player, string.format([[%s, you have %d minutes remaining.]], player:getCallSign(), timewarning / 60))  
+            timewarning = timewarning - 2 * 60
+        else
+            friendlyList[1]:sendCommsMessage(player, string.format([[%s, you have %d minutes remaining of mission time.]], player:getCallSign(), timewarning / 60))  
+            timewarning = timewarning - 5 * 60
+        end
+    end
 	enemy_count = 0
 	friendly_count = 0
 
@@ -236,19 +288,15 @@ function update(delta)
 		end
 	end
 
-	-- If not playing the Empty variation, declare victory for the
-	-- Humans (players) once all enemies are destroyed. Note that players can win
-	-- even if they destroy the enemies by blowing themselves up.
-	--
-	-- In the Empty variation, the GM must use the Win button to declare
-	-- a Human victory.
-	if (enemy_count == 0 and getScenarioVariation() ~= "Empty") then
-		victory("Human Navy");
+	-- Declare victory for the Humans (players) once all enemies are destroyed.
+    -- Note that players can win even if they destroy the enemies by blowing themselves up.
+	if enemy_count == 0 then
+		victory("Human Navy")
 	end
 
 	-- If all allies are destroyed, the Humans (players) lose.
-	if friendly_count == 0 then
-		victory("Kraylor");
+	if friendly_count == 0 or not player:isValid() then
+		victory("Kraylor")
 	else
 		-- As the battle continues, award reputation based on
 		-- the players' progress and number of surviving allies.

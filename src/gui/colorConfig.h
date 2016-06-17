@@ -25,6 +25,12 @@ public:
     sf::Color background;
     sf::Color radar_outline;
     
+    sf::Color log_generic;
+    sf::Color log_send;
+    sf::Color log_receive_friendly;
+    sf::Color log_receive_enemy;
+    sf::Color log_receive_neutral;
+    
     WidgetColorSet button;
     WidgetColorSet label;
     WidgetColorSet text_entry;
