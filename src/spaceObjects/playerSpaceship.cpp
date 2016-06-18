@@ -171,6 +171,7 @@ PlayerSpaceship::PlayerSpaceship()
     scan_probe_recharge = 0.0;
     alert_level = AL_Normal;
     shields_active = false;
+    warp_indicator = 0;
 
     setFactionId(1);
 
@@ -412,33 +413,13 @@ void PlayerSpaceship::update(float delta)
                 warp_request = 0;
         }
 
-        if (current_warp != 1)
-            logInternWarp1 = 0
-        if (current_warp == 1 && logInternWarp1 == 0)
+        for(int n=1; n<4; n++)
         {
-            logInternWarp1 = 1
-            addToShipLogIntern("WARP 1", sf::Color::White);
-        }
-        if (current_warp != 2)
-            logInternWarp2 = 0
-        if (current_warp == 2 && logInternWarp2 == 0)
-        {
-            logInternWarp2 = 1
-            addToShipLogIntern("WARP 2", sf::Color::White);
-        }
-        if (current_warp != 3)
-            logInternWarp3 = 0
-        if (current_warp == 3 && logInternWarp3 == 0)
-        {
-            logInternWarp3 = 1
-            addToShipLogIntern("WARP 3", sf::Color::White);
-        }
-        if (current_warp != 4)
-            logInternWarp4 = 0
-        if (current_warp == 4 && logInternWarp4 == 0)
-        {
-            logInternWarp4 = 1
-            addToShipLogIntern("WARP 4", sf::Color::White);
+            if (current_warp == n && warp_indicator != n)
+            {
+                warp_indicator = n
+                addToShipLogIntern(string("WARP " + n), sf::Color::White);
+            }
         }
 
         if (scanning_target)
