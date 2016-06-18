@@ -411,6 +411,36 @@ void PlayerSpaceship::update(float delta)
             if (!useEnergy(energy_warp_per_second * delta * powf(warp_request, 1.2f) * (shields_active ? 1.5 : 1.0)))
                 warp_request = 0;
         }
+
+        if (current_warp != 1)
+            logInternWarp1 = 0
+        if (current_warp == 1 && logInternWarp1 == 0)
+        {
+            logInternWarp1 = 1
+            addToShipLogIntern("WARP 1", sf::Color::White);
+        }
+        if (current_warp != 2)
+            logInternWarp2 = 0
+        if (current_warp == 2 && logInternWarp2 == 0)
+        {
+            logInternWarp2 = 1
+            addToShipLogIntern("WARP 2", sf::Color::White);
+        }
+        if (current_warp != 3)
+            logInternWarp3 = 0
+        if (current_warp == 3 && logInternWarp3 == 0)
+        {
+            logInternWarp3 = 1
+            addToShipLogIntern("WARP 3", sf::Color::White);
+        }
+        if (current_warp != 4)
+            logInternWarp4 = 0
+        if (current_warp == 4 && logInternWarp4 == 0)
+        {
+            logInternWarp4 = 1
+            addToShipLogIntern("WARP 4", sf::Color::White);
+        }
+
         if (scanning_target)
         {
             if (scanning_complexity < 1)
