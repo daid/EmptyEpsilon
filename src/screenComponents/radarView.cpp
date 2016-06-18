@@ -56,8 +56,17 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
 
     ///Draw the background texture
     drawBackground(background_texture);
-    if (fog_style == NebulaFogOfWar || fog_style == FriendlysShortRangeFogOfWar)    //Mask the background color with the nebula blocked areas, but show the rest.
+#ifdef __APPLE__
+    if (fog_style == NebulaFogOfWar || fog_style == FriendlysShortRangeFogOfWar)
+        // Macs can't deal with advanced blend modes. Instead of multiplying
+        // to remove the mask's white elements, apply mask_texture with less
+        // transparency as a workaround.
+        drawRenderTexture(mask_texture, background_texture, sf::Color(255, 255, 255, 25), sf::BlendAdd);
+#else
+    if (fog_style == NebulaFogOfWar || fog_style == FriendlysShortRangeFogOfWar)
+        // Mask the background color with the nebula-blocked areas, but show the rest.
         drawRenderTexture(mask_texture, background_texture, sf::Color::White, sf::BlendMultiply);
+#endif
     drawSectorGrid(background_texture);
     drawRangeIndicators(background_texture);
     if (show_target_projection)
@@ -76,8 +85,12 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     drawObjects(forground_texture, background_texture);
     if (show_game_master_data)
         drawObjectsGM(forground_texture);
-
     //Draw the mask on the drawn objects
+#ifdef __APPLE__
+    if (fog_style == NebulaFogOfWar || fog_style == FriendlysShortRangeFogOfWar)
+        // Macs can't deal with SFML blend modes.
+        drawRenderTexture(mask_texture, forground_texture, sf::Color(255, 255, 255, 25), sf::BlendAdd);
+#else
     if (fog_style == NebulaFogOfWar || fog_style == FriendlysShortRangeFogOfWar)
     {
         drawRenderTexture(mask_texture, forground_texture, sf::Color::White, sf::BlendMode(
@@ -85,6 +98,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
             sf::BlendMode::Zero, sf::BlendMode::SrcColor, sf::BlendMode::Add
         ));
     }
+#endif
     //Post masking
     if (show_waypoints)
         drawWaypoints(forground_texture);
@@ -111,11 +125,15 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     if (style == CircularMasked || style == Circular)
     {
         //When we have a circular masked radar, use the mask_texture to clear out everything that is not part of the circle.
+#ifdef __APPLE__
+    sf::BlendMode blend_mode(sf::BlendAdd);
+#else
         mask_texture.clear(sf::Color(0, 0, 0, 0));
         float r = std::min(rect.width, rect.height) / 2.0f - 2.0f;
         sf::CircleShape circle(r, 50);
         circle.setOrigin(r, r);
         circle.setPosition(getCenterPoint());
+        circle.setFillColor(sf::Color(0, 0, 0, 128));
         circle.setFillColor(sf::Color::Black);
         circle.setOutlineColor(colorConfig.radar_outline);
         circle.setOutlineThickness(2.0);
@@ -125,6 +143,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
             sf::BlendMode::One, sf::BlendMode::SrcAlpha, sf::BlendMode::Add,
             sf::BlendMode::Zero, sf::BlendMode::SrcAlpha, sf::BlendMode::Add
         );
+#endif
         drawRenderTexture(mask_texture, background_texture, sf::Color::White, blend_mode);
         drawRenderTexture(mask_texture, forground_texture, sf::Color::White, blend_mode);
     }
@@ -260,11 +279,21 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
 
 void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
 {
+#ifdef __APPLE__
+    // Macs can't deal with advanced blend modes. Use plain additive blend
+    // and start with a transparent canvas.
+    sf::BlendMode blend(sf::BlendAdd);
+    window.clear(sf::Color::Transparent);
+    float opacity_level = 128;
+#else
+    // Start with a white canvas and blend objects with a special blend mode.
     sf::BlendMode blend(
         sf::BlendMode::One, sf::BlendMode::Zero, sf::BlendMode::Add,
         sf::BlendMode::One, sf::BlendMode::Zero, sf::BlendMode::Add
     );
     window.clear(sf::Color(255, 255, 255, 255));
+    float opacity_level = 255;
+#endif
     if (!my_spaceship)
         return;
     sf::Vector2f scan_center = my_spaceship->getPosition();
@@ -272,27 +301,38 @@ void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
     float scale = std::min(rect.width, rect.height) / 2.0f / distance;
 
     PVector<Nebula> nebulas = Nebula::getNebulas();
+    // For each nebula (as n) ...
     foreach(Nebula, n, nebulas)
     {
+        // Get its position and the distance from the radar's center to the
+        // nebula.
         sf::Vector2f diff = n->getPosition() - scan_center;
         float diff_len = sf::length(diff);
 
+        // If the nebula is in radar range ...
         if (diff_len < n->getRadius() + distance)
-        {
+        { 
+            // ... and we're inside the nebula ...
             if (diff_len < n->getRadius())
             {
+                // ... cover the entire view with black, hiding everything.
+                // (The 5U short-range unmask comes after the loop.)
                 sf::RectangleShape background(sf::Vector2f(rect.width, rect.height));
                 background.setPosition(rect.left, rect.top);
-                background.setFillColor(sf::Color(0, 0, 0, 255));
+                background.setFillColor(sf::Color(0, 0, 0, opacity_level));
                 window.draw(background, blend);
             }else{
+                // Otherwise, scale the nebula's radius and draw it as a black
+                // circle on the background over the nebula, then blend it.
                 float r = n->getRadius() * scale;
                 sf::CircleShape circle(r, 32);
                 circle.setOrigin(r, r);
                 circle.setPosition(radar_screen_center + (n->getPosition() - view_position) * scale);
-                circle.setFillColor(sf::Color(0, 0, 0, 255));
+                circle.setFillColor(sf::Color(0, 0, 0, opacity_level));
                 window.draw(circle, blend);
 
+                // Get the angle to the nebula and use it to draw a sensory
+                // "shadow" cast from the nebula.
                 float diff_angle = sf::vector2ToAngle(diff);
                 float angle = acosf(n->getRadius() / diff_len) / M_PI * 180.0f;
 
@@ -308,21 +348,27 @@ void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
                 a[2].position = radar_screen_center + (pos_c - view_position) * scale;
                 a[3].position = radar_screen_center + (pos_d - view_position) * scale;
                 a[4].position = radar_screen_center + (pos_e - view_position) * scale;
-                for(int n=0; n<5;n++)
-                    a[n].color = sf::Color(0, 0, 0, 255);
+
+                // Then draw the shadow as black shapes on the radar.
+                for(int n = 0; n < 5; n++)
+                    a[n].color = sf::Color(0, 0, 0, opacity_level);
                 window.draw(a, blend);
             }
         }
     }
 
+#ifndef __APPLE__
     {
+        // Draw a scaled 5U white circle on the center of the radar.
+        // This represents our short-range radar, which nebulae never block.
         float r = 5000.0f * scale;
         sf::CircleShape circle(r, 32);
         circle.setOrigin(r, r);
         circle.setPosition(radar_screen_center + (scan_center - view_position) * scale);
-        circle.setFillColor(sf::Color(255, 255, 255,255));
+        circle.setFillColor(sf::Color(255, 255, 255, opacity_level));
         window.draw(circle, blend);
     }
+#endif
 }
 
 void GuiRadarView::drawGhostDots(sf::RenderTarget& window)
