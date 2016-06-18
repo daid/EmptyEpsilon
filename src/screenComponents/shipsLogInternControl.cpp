@@ -10,7 +10,7 @@ ShipsLogIntern::ShipsLogIntern(GuiContainer* owner)
 {
     setPosition(0, 0, ABottomCenter);
     setSize(GuiElement::GuiSizeMax, 50);
-    setMargins(20, 0);
+    setMargins(10, 0);
     
     open = false;
     
