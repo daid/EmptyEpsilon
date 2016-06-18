@@ -895,13 +895,20 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             int32_t id;
             packet >> id;
             requestDock(game_server->getObjectById(id));
+            addToShipLogIntern(string("Docking requested"),sf::Color::White);
         }
         break;
     case CMD_UNDOCK:
-        requestUndock();
+        {
+            requestUndock();
+            addToShipLogIntern(string("Undocking requested"),sf::Color::White);
+        }
         break;
     case CMD_ABORT_DOCK:
-        abortDock();
+        {
+            abortDock();
+            addToShipLogIntern(string("Docking aborded"),sf::Color::White);
+        }
         break;
     case CMD_OPEN_TEXT_COMM:
         if (comms_state == CS_Inactive || comms_state == CS_BeingHailed || comms_state == CS_BeingHailedByGM || comms_state == CS_ChannelClosed)
@@ -1036,6 +1043,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 beam_frequency = 0;
             if (beam_frequency > SpaceShip::max_frequency)
                 beam_frequency = SpaceShip::max_frequency;
+            addToShipLogIntern(string("Beam frequency changed : " + new_frequency + " Thz"),sf::Color::White);
         }
         break;
     case CMD_SET_BEAM_SYSTEM_TARGET:
@@ -1063,6 +1071,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                     shield_frequency = 0;
                 if (shield_frequency > SpaceShip::max_frequency)
                     shield_frequency = SpaceShip::max_frequency;
+                addToShipLogIntern(string("Shields frequency changed : " + new_frequency + " Thz"),sf::Color::White);
             }
         }
         break;
@@ -1093,6 +1102,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         break;
     case CMD_ACTIVATE_SELF_DESTRUCT:
         activate_self_destruct = true;
+        addToShipLogIntern(string("Auto destruction activated"),sf::Color::Yellow);
         for(int n=0; n<max_self_destruct_codes; n++)
         {
             self_destruct_code[n] = irandom(0, 99999);
@@ -1121,6 +1131,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         if (self_destruct_countdown <= 0.0f)
         {
             activate_self_destruct = false;
+            addToShipLogIntern(string("Auto destruction canceled"),sf::Color::Yellow);
         }
         break;
     case CMD_CONFIRM_SELF_DESTRUCT:
