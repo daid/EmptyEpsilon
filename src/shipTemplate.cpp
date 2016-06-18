@@ -51,6 +51,8 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCombatManeuver);
     /// Set the warp speed for warp level 1 for this ship. Setting this will indicate that this ship has a warpdrive. (normal value is 1000)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWarpSpeed);
+    /// Set if this ship shares energy with docked ships. Example: template:setSharesEnergy(false)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSharesEnergy);
     /// Set if this ship has a jump drive. Example: template:setJumpDrive(true)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDriveRange);
@@ -93,6 +95,7 @@ ShipTemplate::ShipTemplate()
     combat_maneuver_boost_speed = 0.0f;
     combat_maneuver_strafe_speed = 0.0f;
     warp_speed = 0.0;
+    shares_energy = true;
     has_jump_drive = false;
     jump_drive_min_distance = 5000.0;
     jump_drive_max_distance = 50000.0;
@@ -329,6 +332,11 @@ void ShipTemplate::setWarpSpeed(float warp)
     warp_speed = warp;
 }
 
+void ShipTemplate::setSharesEnergy(bool enabled)
+{
+    shares_energy = enabled;
+}
+
 void ShipTemplate::setJumpDrive(bool enabled)
 {
     has_jump_drive = enabled;
@@ -397,6 +405,7 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->impulse_acceleration;
     result->combat_maneuver_boost_speed;
     result->combat_maneuver_strafe_speed;
+    result->shares_energy = shares_energy;
     result->has_jump_drive = has_jump_drive;
     result->has_cloaking = has_cloaking;
     for(int n=0; n<MW_Count; n++)

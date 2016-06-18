@@ -261,7 +261,7 @@ void PlayerSpaceship::update(float delta)
     {
         P<SpaceShip> docked_with_ship = docking_target;
         float energy_request = std::min(delta * 10.0f, max_energy_level - energy_level);
-        if (!docked_with_ship || docked_with_ship->useEnergy(energy_request))
+        if (!docked_with_ship || (docked_with_ship->shares_energy && docked_with_ship->useEnergy(energy_request)))
             energy_level += energy_request;
         if (!docked_with_ship)  //Only recharge probes and hull when we are not docked to a ship (and thus a station). Bit hackish for now.
         {
