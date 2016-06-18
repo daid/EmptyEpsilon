@@ -367,8 +367,8 @@ void SpaceShip::update(float delta)
                 setPosition(docking_target->getPosition() + sf::rotateVector(docking_offset, docking_target->getRotation()));
                 target_rotation = sf::vector2ToAngle(getPosition() - docking_target->getPosition());
 
-                P<SpaceShip> docked_with_ship = docking_target;
-                if (!docked_with_ship)  //Only hull when we are not docked to a ship (and thus a station). Bit hackish for now.
+                P<ShipTemplateBasedObject> docked_with_template_based = docking_target;
+                if (docked_with_template_based && docked_with_template_based->repair_docked)  //Check if what we are docked to allows hull repairs, and if so, do it.
                 {
                     if (hull_strength < hull_max)
                     {

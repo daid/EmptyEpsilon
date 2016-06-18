@@ -85,6 +85,9 @@ public:
      * List of ship classes that can dock with this ship. (only used for ship2ship docking)
      */
     std::unordered_set<string> can_be_docked_by_class;
+    bool shares_energy_with_docked;
+    bool repair_docked;
+    
     float energy_storage_amount;
     int repair_crew_count;
     string default_ai_name;
@@ -98,7 +101,6 @@ public:
     float impulse_acceleration;
     float combat_maneuver_boost_speed;
     float combat_maneuver_strafe_speed;
-    bool shares_energy;
     bool has_jump_drive, has_cloaking;
     float jump_drive_min_distance;
     float jump_drive_max_distance;
@@ -117,6 +119,8 @@ public:
     void setModel(string model_name);
     void setDefaultAI(string default_ai_name);
     void setDockClasses(std::vector<string> classes);
+    void setSharesEnergyWithDocked(bool enabled);
+    void setRepairDocked(bool enabled);
     void setMesh(string model, string color_texture, string specular_texture, string illumination_texture);
     void setEnergyStorage(float energy_amount);
     void setRepairCrewCount(int amount);
@@ -142,7 +146,6 @@ public:
     void setSpeed(float impulse, float turn, float acceleration);
     void setCombatManeuver(float boost, float strafe);
     void setWarpSpeed(float warp);
-    void setSharesEnergy(bool enabled);
     void setJumpDrive(bool enabled);
     void setJumpDriveRange(float min, float max) { jump_drive_min_distance = min; jump_drive_max_distance = max; }
     void setCloaking(bool enabled);

@@ -177,8 +177,6 @@ PlayerSpaceship::PlayerSpaceship()
 
     updateMemberReplicationUpdateDelay(&target_rotation, 0.1);
     registerMemberReplication(&hull_damage_indicator, 0.5);
-    registerMemberReplication(&hull_strength, 0.5);
-    registerMemberReplication(&hull_max);
     registerMemberReplication(&jump_indicator, 0.5);
     registerMemberReplication(&energy_level, 0.1);
     registerMemberReplication(&max_energy_level);
@@ -259,12 +257,19 @@ void PlayerSpaceship::update(float delta)
 
     if (docking_state == DS_Docked)
     {
+        P<ShipTemplateBasedObject> docked_with_template_based = docking_target;
         P<SpaceShip> docked_with_ship = docking_target;
+
         float energy_request = std::min(delta * 10.0f, max_energy_level - energy_level);
-        if (!docked_with_ship || (docked_with_ship->shares_energy && docked_with_ship->useEnergy(energy_request)))
-            energy_level += energy_request;
-        if (!docked_with_ship)  //Only recharge probes and hull when we are not docked to a ship (and thus a station). Bit hackish for now.
+        if (docked_with_template_based && docked_with_template_based->shares_energy_with_docked)
         {
+            if (!docked_with_ship || docked_with_ship->useEnergy(energy_request))
+                energy_level += energy_request;
+        }
+
+        if (docked_with_template_based && docked_with_template_based->shares_energy_with_docked && !docked_with_ship)
+        {
+            //Only recharge probes and hull when we are not docked to a ship (and thus a station). Bit hackish for now.
             if (scan_probe_stock < max_scan_probes)
             {
                 scan_probe_recharge += delta;

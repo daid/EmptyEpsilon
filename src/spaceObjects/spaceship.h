@@ -133,7 +133,6 @@ public:
     float combat_maneuver_boost_speed; /*< [config] Speed to indicate how fast we will fly forwards with a full boost */
     float combat_maneuver_strafe_speed; /*< [config] Speed to indicate how fast we will fly sideways with a full strafe */
 
-    bool shares_energy;       //[config]
     bool has_jump_drive;      //[config]
     float jump_drive_charge; //[output]
     float jump_distance;     //[output]
@@ -245,8 +244,6 @@ public:
 
     /// Dummy virtual function to use energy. Only player ships currently model energy use.
     virtual bool useEnergy(float amount) { return true; }
-    virtual bool getSharesEnergy() { return shares_energy; }
-    virtual void setSharesEnergy(bool enabled) { shares_energy = enabled; }
 
     /// Dummy virtual function to add heat on a system. The player ship class has an actual implementation of this as only player ships model heat right now.
     virtual void addHeat(ESystem system, float amount) {}
