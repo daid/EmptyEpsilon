@@ -415,7 +415,8 @@ void PlayerSpaceship::update(float delta)
 
         for(int n=0; n<4; n++)
         {
-            if (abs(current_warp-n) < 0.01 && warp_indicator != n)
+            float diff = abs(current_warp - n);
+            if (diff < 0.01 && warp_indicator != n)
             {
                 warp_indicator = n;
                 addToShipLogIntern("WARP " + string(n), sf::Color::White);
