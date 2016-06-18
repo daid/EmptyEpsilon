@@ -641,7 +641,7 @@ void SpaceShip::requestDock(P<SpaceObject> target)
 
 void SpaceShip::requestUndock()
 {
-    if (docking_state == DS_Docked)
+    if (docking_state == DS_Docked && getSystemEffectiveness(SYS_Impulse) > 0.1)
     {
         docking_state = DS_NotDocking;
         impulse_request = 0.5;
