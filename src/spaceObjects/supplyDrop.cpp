@@ -65,6 +65,17 @@ void SupplyDrop::collide(Collisionable* target, float force)
     }
 }
 
+bool SupplyDrop::canBePickedUpBy(P<Collisionable> target)
+{
+    // TODO: Let non-player ships pick up supply drops?
+    // P<SpaceShip> ship = target;
+    P<PlayerSpaceship> ship = target;
+    if (ship && isFriendly(ship))
+        return true;
+    else
+        return false;
+}
+
 string SupplyDrop::getExportLine()
 {
     string ret = "SupplyDrop():setFaction(\"" + getFaction() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";

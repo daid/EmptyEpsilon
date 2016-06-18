@@ -389,6 +389,8 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
                         }else{
                             if (!shift_down && target->canBeDockedBy(cpu_ship))
                                 cpu_ship->orderDock(target);
+                            else if (!shift_down && cpu_ship->canBeDockedBy(target))
+                                cpu_ship->orderPickup(target);
                             else
                                 cpu_ship->orderDefendTarget(target);
                         }

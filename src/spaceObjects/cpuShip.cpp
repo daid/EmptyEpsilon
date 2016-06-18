@@ -38,6 +38,9 @@ REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderAttack);
     /// Order this ship to dock at a specific object (station or otherwise)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderDock);
+    /// Order this ship to move within docking range of an object and initiate
+    /// docking on the target ship.
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderPickup);
 }
 
 REGISTER_MULTIPLAYER_CLASS(CpuShip, "CpuShip");
@@ -181,6 +184,15 @@ void CpuShip::orderDock(P<SpaceObject> object)
     this->addBroadcast(FVF_Friendly, "Docking to " + object->getCallSign() + ".");
 }
 
+void CpuShip::orderPickup(P<SpaceObject> object)
+{
+    if (!object)
+        return;
+    orders = AI_Pickup;
+    order_target = object;
+    this->addBroadcast(FVF_Friendly, "Moving to pickup " + object->getCallSign() + ".");
+}
+
 void CpuShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
     SpaceShip::drawOnGMRadar(window, position, scale, long_range);
@@ -209,6 +221,7 @@ string CpuShip::getExportLine()
     case AI_FlyTowardsBlind: ret += ":orderFlyTowardsBlind(" + string(order_target_location.x, 0) + ", " + string(order_target_location.y, 0) + ")"; break;
     case AI_Attack: ret += ":orderAttack(?)"; break;
     case AI_Dock: ret += ":orderDock(?)"; break;
+    case AI_Pickup: ret += ":orderPickup(?)"; break;
     }
     return ret + getScriptExportModificationsOnTemplate();
 }
@@ -227,6 +240,7 @@ string getAIOrderString(EAIOrder order)
     case AI_FlyTowardsBlind: return "Fly towards (ignore all)";
     case AI_Attack: return "Attack";
     case AI_Dock: return "Dock";
+    case AI_Pickup: return "Pickup";
     }
     return "Unknown";
 }

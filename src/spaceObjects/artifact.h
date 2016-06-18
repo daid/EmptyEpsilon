@@ -21,7 +21,8 @@ public:
     void setModel(string name);
     void explode();
     void allowPickup(bool allow);
-    
+    virtual bool canBePickedUpBy(P<Collisionable> target) override;
+
     virtual string getExportLine();
 };
 

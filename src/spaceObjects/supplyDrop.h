@@ -18,9 +18,10 @@ public:
 
     void setEnergy(float amount) { energy = amount; }
     void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon != MW_None) weapon_storage[weapon] = amount; }
+    virtual bool canBePickedUpBy(P<Collisionable> target) override;
     
     virtual string getExportLine();
 };
 
-#endif//ASTEROID_H
+#endif//SUPPLY_DROP_H
 

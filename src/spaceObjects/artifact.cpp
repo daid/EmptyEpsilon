@@ -87,6 +87,17 @@ void Artifact::allowPickup(bool allow)
     allow_pickup = allow;
 }
 
+bool Artifact::canBePickedUpBy(P<Collisionable> target)
+{
+    // TODO: Let non-player ships pick up artifacts?
+    P<PlayerSpaceship> ship = target;
+
+    if (ship && allow_pickup)
+        return true;
+    else
+        return false;
+}
+
 string Artifact::getExportLine()
 {
     string ret = "Artifact():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";

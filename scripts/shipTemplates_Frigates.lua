@@ -264,6 +264,19 @@ variation:addDoor(2, 5, true)
 variation:addDoor(5, 5, true)
 variation:addDoor(6, 5, true)
 
+--[[ Support craft ]]
+template = ShipTemplate():setName("Small Tug"):setClass("Frigate", "Support"):setModel("space_tug")
+template:setDescription([[An unarmed, unshielded tug capable of towing other craft. Nearly all of its power is devoted to its unique tractor system, which is powerful enough to push and pull ships larger than itself.]])
+template:setRadarTrace("radar_tug.png")
+template:setHull(50)
+template:setSpeed(30, 3.5, 5)
+template:setDockClasses("Starfighter", "Frigate", "Corvette")
+
+variation = template:copy("Small Jump Tug")
+variation:setDescription([[An unarmed, unshielded tug capable of towing light craft. Most of its power is devoted to its unique tractor system, which is powerful enough to push and pull ships its own size. It also boasts a jump drive configured to carry both itself and its towed craft at the expense of moving corvette-class ships.]])
+variation:setJumpDrive(true)
+variation:setDockClasses("Starfighter", "Frigate")
+
 --Support: mine layer
 --Support: mine sweeper
 --Support: science vessel

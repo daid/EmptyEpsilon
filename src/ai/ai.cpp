@@ -302,6 +302,8 @@ void ShipAI::updateTarget()
             target = NULL;
         if (orders == AI_FlyFormation && target_distance > 6000)
             target = NULL;
+        if (orders == AI_Pickup)
+            target = NULL;
         if (orders == AI_Dock)
             target = NULL;
     }
@@ -413,7 +415,74 @@ void ShipAI::runOrders()
             owner->orderRoaming();  //Nothing to dock, just fall back to roaming.
         }
         break;
-    }
+    // Collide with a target and dock it to this ship. This allows for tugs and
+    // carriers to pick up immobilized ships.
+    case AI_Pickup:
+        // Make sure the ship has a valid target to pickup.
+        P<Collisionable> pickup_target = owner->getOrderTarget();
+
+        // Get the target's position.
+        sf::Vector2f pickup_target_position = pickup_target->getPosition();
+
+        // If we have a valid pickup target ...
+        if (pickup_target)
+        {
+            // ... get a vector to the target and fly toward it.
+	    sf::Vector2f pickup_target_position_diff = pickup_target_position - owner->getPosition();
+	    float pickup_target_distance = sf::length(pickup_target_position_diff);
+            sf::Vector2f pickup_location = pickup_target_position + (pickup_target_position_diff / pickup_target_distance);
+            flyTowards(pickup_location);
+
+            // If the pickup target is a ship capable of docking with us, we
+            // want to collide with it and dock it to us (tow it).
+            P<SpaceShip> tow_target = pickup_target;
+            if (tow_target)
+            {
+                P<CpuShip> tow_target_is_cpu = tow_target;
+                // Try to pick a target up only if:
+                // -   the target is capable of docking with this ship
+                // -   and either
+                //     -   this ship is not already in the process of docking
+                //     -   or we're already docked as a client of the ship
+                //         that we've been told to pick up
+                // -   and either
+                //     -   our target is a player ship
+                //     -   our target's is a CPU ship and its AI is idle
+                if (owner->canBeDockedBy(tow_target) && (owner->docking_state == DS_NotDocking || owner->docking_target != tow_target) && (tow_target->docking_state != DS_Docked) && (!tow_target_is_cpu || tow_target_is_cpu->getOrder() == AI_Idle))
+		{
+		    // Once within 0.1U, set the target's docking state.
+		    if (pickup_target_distance < 100.0f + tow_target->getRadius() + owner->getRadius())
+                    {
+                        tow_target->requestDock(owner);
+		    }
+                // If the target is a ship but we can't tow it, don't bother.
+                // Revert to roaming orders and break.
+		} else {
+                    owner->orderRoaming();
+		    break;
+                }
+            // If the target isn't a ship, collide with it.
+	    // TODO: If the target isn't a ship, check if it can be picked up.
+	    //       Non-player ships can't yet pick up collectibles, so this
+            //.      does nothing.
+            } else {
+                P<SpaceObject> pickup_object = pickup_target;
+
+                if (!pickup_object->canBePickedUpBy(owner))
+                {
+                    // We can't pick up the object, so roam and break.
+		    owner->orderRoaming();
+                    break;
+                } // else {
+		    // We can pick up the object, so collide with it.
+                // }
+            }
+        // If the ship doesn't have a valid pickup target, default to roaming.
+        } else {
+            owner->orderRoaming();
+        }
+        break;
+    }      
 }
 
 void ShipAI::runAttack(P<SpaceObject> target)
