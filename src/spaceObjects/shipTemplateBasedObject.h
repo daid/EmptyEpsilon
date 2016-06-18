@@ -25,6 +25,9 @@ public:
     float shield_max[max_shield_count];
     float hull_strength, hull_max;
     float shield_hit_effect[max_shield_count];
+
+    bool shares_energy_with_docked;       //[config]
+    bool repair_docked;                   //[config]
 public:
     ShipTemplateBasedObject(float collision_range, string multiplayer_name, float multiplayer_significant_range=-1);
 
@@ -78,6 +81,11 @@ public:
     void setRearShieldMax(float amount) { if (amount < 0) return; shield_max[1] = amount; shield_level[1] = std::min(shield_level[1], shield_max[1]); }
 
     void setRadarTrace(string trace) { radar_trace = trace; }
+
+    bool getSharesEnergyWithDocked() { return shares_energy_with_docked; }
+    void setSharesEnergyWithDocked(bool enabled) { shares_energy_with_docked = enabled; }
+    bool getRepairDocked() { return repair_docked; }
+    void setRepairDocked(bool enabled) { repair_docked = enabled; }
     
     string getShieldDataString();
 };

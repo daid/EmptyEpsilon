@@ -51,6 +51,8 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCombatManeuver);
     /// Set the warp speed for warp level 1 for this ship. Setting this will indicate that this ship has a warpdrive. (normal value is 1000)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWarpSpeed);
+    /// Set if this ship shares energy with docked ships. Example: template:setSharesEnergyWithDocked(false)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSharesEnergyWithDocked);
     /// Set if this ship has a jump drive. Example: template:setJumpDrive(true)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDriveRange);
@@ -74,6 +76,8 @@ ShipTemplate::ShipTemplate()
     type = Ship;
     class_name = "No class";
     class_name = "No sub-class";
+    shares_energy_with_docked = true;
+    repair_docked = false;
     energy_storage_amount = 1000;
     repair_crew_count = 3;
     weapon_tube_count = 0;
@@ -159,7 +163,9 @@ void ShipTemplate::setType(TemplateType type)
     {
         radar_trace = "RadarBlip.png";
     }
-     this->type = type;
+    if (type == Station)
+        repair_docked = true;
+    this->type = type;
 }
 
 void ShipTemplate::setName(string name)
@@ -329,6 +335,16 @@ void ShipTemplate::setWarpSpeed(float warp)
     warp_speed = warp;
 }
 
+void ShipTemplate::setSharesEnergyWithDocked(bool enabled)
+{
+    shares_energy_with_docked = enabled;
+}
+
+void ShipTemplate::setRepairDocked(bool enabled)
+{
+    repair_docked = enabled;
+}
+
 void ShipTemplate::setJumpDrive(bool enabled)
 {
     has_jump_drive = enabled;
@@ -397,6 +413,8 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->impulse_acceleration;
     result->combat_maneuver_boost_speed;
     result->combat_maneuver_strafe_speed;
+    result->shares_energy_with_docked = shares_energy_with_docked;
+    result->repair_docked = repair_docked;
     result->has_jump_drive = has_jump_drive;
     result->has_cloaking = has_cloaking;
     for(int n=0; n<MW_Count; n++)
