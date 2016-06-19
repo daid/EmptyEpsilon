@@ -1056,7 +1056,12 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 beam_frequency = 0;
             if (beam_frequency > SpaceShip::max_frequency)
                 beam_frequency = SpaceShip::max_frequency;
-            addToShipLogIntern("Beam frequency changed : " + string(new_frequency) + " Thz",sf::Color::White);
+                
+            // string frequencyToString(int frequency)
+            // {
+            //     return string(400 + (frequency * 20)) + "THz";
+            // }
+            addToShipLogIntern("Beam frequency changed : " + frequencyToString(new_frequency) + " Thz",sf::Color::White);
         }
         break;
     case CMD_SET_BEAM_SYSTEM_TARGET:
@@ -1084,7 +1089,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                     shield_frequency = 0;
                 if (shield_frequency > SpaceShip::max_frequency)
                     shield_frequency = SpaceShip::max_frequency;
-                addToShipLogIntern("Shields frequency changed : " + string(new_frequency) + " Thz",sf::Color::White);
+                addToShipLogIntern("Shields frequency changed : " + frequencyToString(new_frequency) + " Thz",sf::Color::White);
             }
         }
         break;
