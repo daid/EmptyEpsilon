@@ -908,19 +908,19 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             int32_t id;
             packet >> id;
             requestDock(game_server->getObjectById(id));
-            addToShipLogIntern(string("Docking requested"),sf::Color::Yellow);
+            addToShipLogIntern(string("Docking requested"),sf::Color::Cyan);
         }
         break;
     case CMD_UNDOCK:
         {
             requestUndock();
-            addToShipLogIntern(string("Undocking requested"),sf::Color::Yellow);
+            addToShipLogIntern(string("Undocking requested"),sf::Color::Cyan);
         }
         break;
     case CMD_ABORT_DOCK:
         {
             abortDock();
-            addToShipLogIntern(string("Docking aborded"),sf::Color::Yellow);
+            addToShipLogIntern(string("Docking aborded"),sf::Color::Cyan);
         }
         break;
     case CMD_OPEN_TEXT_COMM:
@@ -1057,7 +1057,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             if (beam_frequency > SpaceShip::max_frequency)
                 beam_frequency = SpaceShip::max_frequency;
 
-            addToShipLogIntern("Beam frequency changed : " + frequencyToString(new_frequency),sf::Color::Orange);
+            addToShipLogIntern("Beam frequency changed : " + frequencyToString(new_frequency),sf::Color::Yellow);
         }
         break;
     case CMD_SET_BEAM_SYSTEM_TARGET:
@@ -1070,7 +1070,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             if (beam_system_target > ESystem(int(SYS_COUNT) - 1))
                 beam_system_target = ESystem(int(SYS_COUNT) - 1);
             
-            addToShipLogIntern("Beam system target changed : " + getSystemName(system),sf::Color::Orange);
+            addToShipLogIntern("Beam system target changed : " + getSystemName(system),sf::Color::Yellow);
         }
         break;
     case CMD_SET_SHIELD_FREQUENCY:
