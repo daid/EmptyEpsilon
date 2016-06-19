@@ -152,8 +152,10 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     //Render the final radar
     drawRenderTexture(background_texture, window);
     drawRenderTexture(forground_texture, window);
-    //if (style == Circular)
-    //    drawRadarCutoff(window);
+#ifdef __APPLE__
+    if (style == Circular)
+        drawRadarCutoff(window);
+#endif
 }
 
 void GuiRadarView::updateGhostDots()
@@ -312,7 +314,7 @@ void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
 
         // If the nebula is in radar range ...
         if (diff_len < n->getRadius() + distance)
-        { 
+        {
             // ... and we're inside the nebula ...
             if (diff_len < n->getRadius())
             {
