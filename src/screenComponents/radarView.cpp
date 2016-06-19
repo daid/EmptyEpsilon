@@ -126,14 +126,15 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     {
         //When we have a circular masked radar, use the mask_texture to clear out everything that is not part of the circle.
 #ifdef __APPLE__
-    sf::BlendMode blend_mode(sf::BlendAdd);
+        // Since we're using transparency instead of blending on OS X, we can't
+        // use blending tricks that modify transparency to mask circular radar.
+        sf::BlendMode blend_mode(sf::BlendAdd);
 #else
         mask_texture.clear(sf::Color(0, 0, 0, 0));
         float r = std::min(rect.width, rect.height) / 2.0f - 2.0f;
         sf::CircleShape circle(r, 50);
         circle.setOrigin(r, r);
         circle.setPosition(getCenterPoint());
-        circle.setFillColor(sf::Color(0, 0, 0, 128));
         circle.setFillColor(sf::Color::Black);
         circle.setOutlineColor(colorConfig.radar_outline);
         circle.setOutlineThickness(2.0);
@@ -282,7 +283,7 @@ void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
 #ifdef __APPLE__
     // Macs can't deal with advanced blend modes. Use plain additive blend
     // and start with a transparent canvas.
-    sf::BlendMode blend(sf::BlendAdd);
+    sf::BlendMode blend(sf::BlendNone);
     window.clear(sf::Color::Transparent);
     float opacity_level = 128;
 #else
