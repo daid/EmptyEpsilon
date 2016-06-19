@@ -128,7 +128,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
 #ifdef __APPLE__
         // Since we're using transparency instead of blending on OS X, we can't
         // use blending tricks that modify transparency to mask circular radar.
-        sf::BlendMode blend_mode(sf::BlendAdd);
+        sf::BlendMode blend_mode(sf::BlendAlpha);
 #else
         mask_texture.clear(sf::Color(0, 0, 0, 0));
         float r = std::min(rect.width, rect.height) / 2.0f - 2.0f;
@@ -285,7 +285,7 @@ void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
     // and start with a transparent canvas.
     sf::BlendMode blend(sf::BlendNone);
     window.clear(sf::Color::Transparent);
-    float opacity_level = 128;
+    float opacity_level = 48;
 #else
     // Start with a white canvas and blend objects with a special blend mode.
     sf::BlendMode blend(
