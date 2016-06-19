@@ -69,7 +69,7 @@ public:
     
     PVector<SpaceObject> getSelection();
     
-    string getScriptExport();
+    string getScriptExport(bool selected_only);
 };
 
 class GuiGlobalMessageEntry : public GuiOverlay

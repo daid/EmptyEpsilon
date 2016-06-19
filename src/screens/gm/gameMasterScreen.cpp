@@ -71,9 +71,13 @@ GameMasterScreen::GameMasterScreen()
     create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
 
     export_button = new GuiButton(this, "EXPORT_BUTTON", "Copy scenario", [this]() {
-        Clipboard::setClipboard(getScriptExport());
+        Clipboard::setClipboard(getScriptExport(false));
     });
     export_button->setTextSize(20)->setPosition(-20, -20, ABottomRight)->setSize(125, 25);
+
+    (new GuiButton(this, "EXPORT_BUTTON", "Copy selected", [this]() {
+        Clipboard::setClipboard(getScriptExport(true));
+    }))->setTextSize(20)->setPosition(-20, -45, ABottomRight)->setSize(125, 25);
 
     cancel_create_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
         create_button->show();
@@ -439,7 +443,7 @@ void GameMasterScreen::onKey(sf::Keyboard::Key key, int unicode)
         }
         break;
     case sf::Keyboard::F5:
-        Clipboard::setClipboard(getScriptExport());
+        Clipboard::setClipboard(getScriptExport(false));
         break;
 
     //TODO: This is more generic code and is duplicated.
@@ -462,10 +466,18 @@ PVector<SpaceObject> GameMasterScreen::getSelection()
     return targets.getTargets();
 }
 
-string GameMasterScreen::getScriptExport()
+string GameMasterScreen::getScriptExport(bool selected_only)
 {
     string output;
-    foreach(SpaceObject, obj, space_object_list)
+    PVector<SpaceObject> objs;
+    if (selected_only)
+    {
+        objs = targets.getTargets();
+    }else{
+        objs = space_object_list;
+    }
+    
+    foreach(SpaceObject, obj, objs)
     {
         string line = obj->getExportLine();
         if (line == "")
