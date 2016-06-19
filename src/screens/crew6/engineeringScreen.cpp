@@ -38,7 +38,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
     (new GuiSelfDestructButton(this, "SELF_DESTRUCT"))->setPosition(20, 260, ATopLeft)->setSize(240, 100);
 
     GuiElement* system_config_container = new GuiElement(this, "");
-    system_config_container->setPosition(0, -40, ABottomCenter)->setSize(750 + 300, GuiElement::GuiSizeMax);
+    system_config_container->setPosition(0, -50, ABottomCenter)->setSize(750 + 300, GuiElement::GuiSizeMax);
     GuiAutoLayout* system_row_layouts = new GuiAutoLayout(system_config_container, "SYSTEM_ROWS", GuiAutoLayout::LayoutVerticalBottomToTop);
     system_row_layouts->setPosition(0, 0, ABottomLeft);
     system_row_layouts->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
