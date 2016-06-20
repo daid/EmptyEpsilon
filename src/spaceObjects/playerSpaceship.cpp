@@ -523,8 +523,8 @@ void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
     {
         hull_damage_indicator = 1.5;
     }
-    SpaceShip::takeHullDamage(damage_amount, info);
     addToShipLogIntern(string(damage_amount) + string(" damage to hull."),sf::Color::Red);
+    SpaceShip::takeHullDamage(damage_amount, info, true);
 }
 
 void PlayerSpaceship::setSystemCoolantRequest(ESystem system, float request)
