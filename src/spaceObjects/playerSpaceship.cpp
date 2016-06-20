@@ -1475,6 +1475,21 @@ void PlayerSpaceship::setRepairCrewCount(int amount)
     }
 }
 
+void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+{
+    SpaceShip::drawOnGMRadar(window, position, scale, long_range);
+    if (long_range)
+    {
+        sf::CircleShape radar_radius(gameGlobalInfo->long_range_radar_range * scale);
+        radar_radius.setOrigin(gameGlobalInfo->long_range_radar_range * scale, gameGlobalInfo->long_range_radar_range * scale);
+        radar_radius.setPosition(position);
+        radar_radius.setFillColor(sf::Color::Transparent);
+        radar_radius.setOutlineColor(sf::Color(255, 255, 255, 64));
+        radar_radius.setOutlineThickness(3.0);
+        window.draw(radar_radius);
+    }
+}
+
 string PlayerSpaceship::getExportLine()
 {
     return "PlayerSpaceship():setTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" + getScriptExportModificationsOnTemplate();;

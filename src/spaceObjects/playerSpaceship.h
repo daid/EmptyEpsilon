@@ -200,6 +200,8 @@ public:
     int getRepairCrewCount();
     void setRepairCrewCount(int amount);
 
+    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
+
     EAlertLevel getAlertLevel() { return alert_level; }
 
     virtual string getExportLine();
