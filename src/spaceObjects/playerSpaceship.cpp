@@ -523,14 +523,22 @@ void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
     {
         hull_damage_indicator = 1.5;
     }
+    
+    //ShipSystem systems_diff[SYS_COUNT];
+    float systems_diff[SYS_COUNT];
+    for(int n=0; n<SYS_COUNT; n++)
+    {
+        systems_diff[n] = systems[n].health
+    }
     addToShipLogIntern(string(damage_amount) + string(" damage to hull"),sf::Color::Red);
     SpaceShip::takeHullDamage(damage_amount, info);
     
-    // takeHullDamage create a list called damage_system_list
-    foreach(ESystem, obj, damage_system_list)
+    for(int n=0; n<SYS_COUNT; n++)
     {
-        addToShipLogIntern("System affected : " + getSystemName(obj),sf::Color::Red);
+        if(systems_diff[n] != systems[n].health)
+            addToShipLogIntern("system afffected : " + string(getSystemName(ESystem(n)))),sf::Color::Red);
     }
+
 }
 
 void PlayerSpaceship::setSystemCoolantRequest(ESystem system, float request)
