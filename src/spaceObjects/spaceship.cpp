@@ -813,7 +813,7 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info,bool is_Pla
                     systems[random_system].health = -1.0;
                     
                 if (is_PlayerShip)
-                    PlayerSpaceship::addToShipLogIntern(string(abs(system_damage)) + " damages to " + getSystemName(system),sf::Color::Red);
+                    PlayerSpaceship::addToShipLogIntern(string(abs(system_damage)) + " damages to " + getSystemName(random_system),sf::Color::Red);
             }
 
             if (info.type == DT_Energy)
