@@ -523,7 +523,7 @@ void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
     {
         hull_damage_indicator = 1.5;
     }
-    addToShipLogIntern(string(damage_amount) + string(" damage to hull."),sf::Color::Red);
+    addToShipLogIntern(string(damage_amount) + string(" damage to hull"),sf::Color::Red);
     SpaceShip::takeHullDamage(damage_amount, info, true);
 }
 
@@ -793,6 +793,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             float distance;
             packet >> distance;
             initializeJump(distance);
+            addToShipLogIntern(string("Jump Initialisation"),sf::Color::Green);
         }
         break;
     case CMD_SET_TARGET:
