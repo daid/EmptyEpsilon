@@ -789,12 +789,16 @@ void SpaceShip::didAnOffensiveAction()
     }
 }
 
-void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info,bool is_PlayerShip = false)
+void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
 {
+    //Clear damage system list
+    damage_system_list.clear();
+    
     if (gameGlobalInfo->use_system_damage)
     {
         if (info.system_target != SYS_None)
         {
+            
             //Target specific system
             float system_damage = (damage_amount / hull_max) * 2.0;
             if (info.type == DT_Energy)
@@ -802,6 +806,7 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info,bool is_Pla
             systems[info.system_target].health -= system_damage;
             if (systems[info.system_target].health < -1.0)
                 systems[info.system_target].health = -1.0;
+            damage_system_list.push_back (system_target);
 
             for(int n=0; n<2; n++)
             {
@@ -811,9 +816,7 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info,bool is_Pla
                 systems[random_system].health -= system_damage;
                 if (systems[random_system].health < -1.0)
                     systems[random_system].health = -1.0;
-                    
-                if (is_PlayerShip)
-                    this -> PlayerSpaceship::addToShipLogIntern(string(abs(system_damage)) + " damages to " + getSystemName(random_system),sf::Color::Red);
+                damage_system_list.push_back (random_system);
             }
 
             if (info.type == DT_Energy)
@@ -821,6 +824,10 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info,bool is_Pla
             else
                 damage_amount *= 0.5;
         }else{
+            
+            //stock of systems affected
+            sdt::list<ESystem> list_systems (1);
+            
             ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
             //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
             float system_damage = (damage_amount / hull_max) * 3.0;
@@ -829,10 +836,13 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info,bool is_Pla
             systems[random_system].health -= system_damage;
             if (systems[random_system].health < -1.0)
                 systems[random_system].health = -1.0;
+            damage_system_list.push_back (random_system);
         }
     }
 
     ShipTemplateBasedObject::takeHullDamage(damage_amount, info);
+    
+    return damage_system_list;
 }
 
 void SpaceShip::destroyedByDamage(DamageInfo& info)
