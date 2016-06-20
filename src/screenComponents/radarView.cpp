@@ -734,23 +734,24 @@ void GuiRadarView::drawRadarCutoff(sf::RenderTarget& window)
     textureManager.setTexture(cutOff, "radarCutoff.png");
     cutOff.setPosition(radar_screen_center);
     cutOff.setScale(screen_size / float(cutOff.getTextureRect().width) * 2, screen_size / float(cutOff.getTextureRect().width) * 2);
+    cutOff.setColor(colorConfig.background);
     window.draw(cutOff);
 
     sf::RectangleShape rectTop(sf::Vector2f(rect.width, radar_screen_center.y - screen_size - rect.top));
-    rectTop.setFillColor(sf::Color::Black);
+    rectTop.setFillColor(colorConfig.background);
     rectTop.setPosition(rect.left, rect.top);
     window.draw(rectTop);
     sf::RectangleShape rectBottom(sf::Vector2f(rect.width, rect.height - screen_size - (radar_screen_center.y - rect.top)));
-    rectBottom.setFillColor(sf::Color::Black);
+    rectBottom.setFillColor(colorConfig.background);
     rectBottom.setPosition(rect.left, radar_screen_center.y + screen_size);
     window.draw(rectBottom);
 
     sf::RectangleShape rectLeft(sf::Vector2f(radar_screen_center.x - screen_size - rect.left, rect.height));
-    rectLeft.setFillColor(sf::Color::Black);
+    rectLeft.setFillColor(colorConfig.background);
     rectLeft.setPosition(rect.left, rect.top);
     window.draw(rectLeft);
     sf::RectangleShape rectRight(sf::Vector2f(rect.width - screen_size - (radar_screen_center.x - rect.left), rect.height));
-    rectRight.setFillColor(sf::Color::Black);
+    rectRight.setFillColor(colorConfig.background);
     rectRight.setPosition(radar_screen_center.x + screen_size, rect.top);
     window.draw(rectRight);
 }
