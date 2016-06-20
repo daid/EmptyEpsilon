@@ -201,7 +201,7 @@ end)
 
 addToSequence(weaponsTutorial, [[This is the weapons screen.
 As the weapons officer, you are responsible for targeting beam weapons, loading and firing missile weapons, and controlling your shields.]])
-addToSequence(weaponsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setPosition(700, 0):setRotation(0):orderIdle():setScanned(true) end)
+addToSequence(weaponsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setPosition(700, 0):setRotation(0):orderIdle():setScanned(true) end)
 addToSequence(weaponsTutorial, [[Your most fundamental task is to target your ship's weapons.
 Your beam weapons only fire at your selected target, and homing missiles travel toward your selected target.
 
@@ -210,7 +210,7 @@ addToSequence(weaponsTutorial, [[Good! Notice that your beam weapons did not fir
 
 Next up: shield controls.]])
 addToSequence(weaponsTutorial, function() prev_object:destroy() end)
-addToSequence(weaponsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setPosition(-700, 0):setRotation(0):orderAttack(player):setScanned(true) end)
+addToSequence(weaponsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setPosition(-700, 0):setRotation(0):orderAttack(player):setScanned(true) end)
 addToSequence(weaponsTutorial, [[As you might notice, you are being shot at. Do not worry, you cannot die right now.
 
 You are taking damage, however, so enable your shields to protect yourself.]], function()
@@ -311,7 +311,7 @@ addToSequence(engineeringTutorial, [[In this top area, you see your damage contr
 addToSequence(engineeringTutorial, [[The front shield system is damaged, as indicated by the color of this room's outline.
 
 Select a damage control team from elsewhere on the ship by pressing it, then press on that room to initiate repairs.
-(Repairs will take a while.)]], function() return player:getSystemHealth("frontshield") > 0.9 end)
+(Repairs will take a while.)]], function() player:commandSetSystemPowerRequest("frontshield", 0.0) return player:getSystemHealth("frontshield") > 0.9 end)
 addToSequence(engineeringTutorial, function() tutorial:setMessageToTopPosition() end)
 addToSequence(engineeringTutorial, [[Good. Now you know your most important tasks. Next, we'll go over each system's function in detail.
 Remember, each system performs better with more power, but performs less well when damaged. Your job is to keep vital systems running as well as you can.]])
