@@ -63,6 +63,8 @@ public:
     constexpr static float heat_per_combat_maneuver_boost = 0.2;
     constexpr static float heat_per_combat_maneuver_strafe = 0.2;
     constexpr static float heat_per_warp = 0.02;
+    
+    extern PVector<ESystem> damage_system_list;
 
     float energy_level;
     float max_energy_level;
@@ -200,7 +202,6 @@ public:
      * \param damage_amount Damage to be delt.
      * \param info Information about damage type (usefull for damage reduction, etc)
      */
-    extern PVector<ESystem> damage_system_list;
     virtual void takeHullDamage(float damage_amount, DamageInfo& info) override;
 
     /*!
