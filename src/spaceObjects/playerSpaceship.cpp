@@ -525,6 +525,12 @@ void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
     }
     addToShipLogIntern(string(damage_amount) + string(" damage to hull"),sf::Color::Red);
     SpaceShip::takeHullDamage(damage_amount, info);
+    
+    // takeHullDamage create a list called damage_system_list
+    foreach(ESystem, obj, damage_system_list)
+    {
+        addToShipLogIntern("System affected : " + getSystemName(obj),sf::Color::Red);
+    }
 }
 
 void PlayerSpaceship::setSystemCoolantRequest(ESystem system, float request)
