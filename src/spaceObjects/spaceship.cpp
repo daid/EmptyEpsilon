@@ -791,14 +791,10 @@ void SpaceShip::didAnOffensiveAction()
 
 void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
 {
-    //Clear damage system list
-    damage_system_list.clear();
-    
     if (gameGlobalInfo->use_system_damage)
     {
         if (info.system_target != SYS_None)
         {
-            
             //Target specific system
             float system_damage = (damage_amount / hull_max) * 2.0;
             if (info.type == DT_Energy)
@@ -806,7 +802,6 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
             systems[info.system_target].health -= system_damage;
             if (systems[info.system_target].health < -1.0)
                 systems[info.system_target].health = -1.0;
-            damage_system_list.push_back (system_target);
 
             for(int n=0; n<2; n++)
             {
@@ -816,7 +811,6 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
                 systems[random_system].health -= system_damage;
                 if (systems[random_system].health < -1.0)
                     systems[random_system].health = -1.0;
-                damage_system_list.push_back (random_system);
             }
 
             if (info.type == DT_Energy)
@@ -832,7 +826,6 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
             systems[random_system].health -= system_damage;
             if (systems[random_system].health < -1.0)
                 systems[random_system].health = -1.0;
-            damage_system_list.push_back (random_system);
         }
     }
 
