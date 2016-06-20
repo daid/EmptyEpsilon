@@ -63,8 +63,6 @@ public:
     constexpr static float heat_per_combat_maneuver_boost = 0.2;
     constexpr static float heat_per_combat_maneuver_strafe = 0.2;
     constexpr static float heat_per_warp = 0.02;
-    
-    extern PVector<ESystem> damage_system_list;
 
     float energy_level;
     float max_energy_level;
