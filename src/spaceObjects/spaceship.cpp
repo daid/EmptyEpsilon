@@ -824,10 +824,6 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
             else
                 damage_amount *= 0.5;
         }else{
-            
-            //stock of systems affected
-            sdt::list<ESystem> list_systems (1);
-            
             ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
             //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
             float system_damage = (damage_amount / hull_max) * 3.0;
