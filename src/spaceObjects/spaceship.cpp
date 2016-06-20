@@ -811,6 +811,11 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
                 systems[random_system].health -= system_damage;
                 if (systems[random_system].health < -1.0)
                     systems[random_system].health = -1.0;
+                    
+                
+                P<PlayerSpaceship> playerShip = this;
+                if (playerShip)
+                    PlayerSpaceship::addToShipLogIntern(string(abs(system_damage)) + " damages to " + getSystemName(system),sf::Color::Red);
             }
 
             if (info.type == DT_Energy)
