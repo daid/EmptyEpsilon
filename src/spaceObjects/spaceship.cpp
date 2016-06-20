@@ -789,7 +789,7 @@ void SpaceShip::didAnOffensiveAction()
     }
 }
 
-void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
+void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info,bool is_PlayerShip = false)
 {
     if (gameGlobalInfo->use_system_damage)
     {
@@ -812,9 +812,7 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
                 if (systems[random_system].health < -1.0)
                     systems[random_system].health = -1.0;
                     
-                
-                P<PlayerSpaceship> playerShip = this;
-                if (playerShip)
+                if (is_PlayerShip)
                     PlayerSpaceship::addToShipLogIntern(string(abs(system_damage)) + " damages to " + getSystemName(system),sf::Color::Red);
             }
 
