@@ -828,10 +828,7 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
                 systems[random_system].health = -1.0;
         }
     }
-
     ShipTemplateBasedObject::takeHullDamage(damage_amount, info);
-    
-    return damage_system_list;
 }
 
 void SpaceShip::destroyedByDamage(DamageInfo& info)
