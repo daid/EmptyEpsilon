@@ -200,7 +200,7 @@ public:
      * \param damage_amount Damage to be delt.
      * \param info Information about damage type (usefull for damage reduction, etc)
      */
-    virtual void takeHullDamage(float damage_amount, DamageInfo& info, bool is_PlayerShip) override;
+    virtual void takeHullDamage(float damage_amount, DamageInfo& info, bool is_PlayerShip);
 
     /*!
      * Spaceship is destroyed by damage.
