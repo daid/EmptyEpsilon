@@ -135,16 +135,8 @@ string alertLevelToString(EAlertLevel level)
 {
     switch(level)
     {
-    case AL_RedAlert: 
-    {
-        return "RED ALERT";
-        addToShipLogIntern("RED ALERT",sf::Color::Red);
-    }
-    case AL_YellowAlert: 
-    {
-        return "YELLOW ALERT";
-        addToShipLogIntern("YELLOW ALERT",sf::Color::Yellow);
-    }
+    case AL_RedAlert: return "RED ALERT";
+    case AL_YellowAlert: return "YELLOW ALERT";
     case AL_Normal: return "Normal";
     default:
         return "???";
@@ -1217,6 +1209,11 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     case CMD_SET_ALERT_LEVEL:
         {
             packet >> alert_level;
+            alert_level_string = alertLevelToString(alert_level);
+            if(alert_level_string == "RED ALERT")
+                addToShipLogIntern("RED ALERT",sf::Color::Red);
+            if(alert_level_string == "YELLOW ALERT")
+                addToShipLogIntern("YELLOW ALERT",sf::Color::Yellow);
         }
         break;
     case CMD_SET_SCIENCE_LINK:
