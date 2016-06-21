@@ -247,7 +247,7 @@ PlayerSpaceship::PlayerSpaceship()
 
     setCallSign("PL" + string(getMultiplayerId()));
 
-    addToShipLog("Start of log", colorConfig.log_generic);
+    addToShipLog("Start of log", sf::Color::White);
     addToShipLogIntern("Start of intern log", sf::Color::White);
 }
 
