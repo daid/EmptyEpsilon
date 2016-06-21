@@ -344,7 +344,12 @@ bool SpaceObject::sendCommsMessage(P<PlayerSpaceship> target, string message)
     if (!target)
         return false;
 
-    return target->hailByObject(this, message);
+    bool result = target->hailByObject(this, message);
+    if (!result && message != "")
+    {
+        target->addToShipLogBy(message, this);
+    }
+    return result;
 }
 
 template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& di)

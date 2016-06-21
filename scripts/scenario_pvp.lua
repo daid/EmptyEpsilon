@@ -1,5 +1,10 @@
 -- Name: Clash in Shangri-La (PVP)
--- Description: Since its creation, the Shangri-la station was governed by a multi-ethnic consortium which assured the independence of the station across the conflicts that shook the sector. However, the station's tranquility came to an abrupt end when most of the governing consortium's members were assassinated under a Exuari false flag operation. Now the station is in state of civil war, with total infighting breaking out between warring factions. Both the neighboring Human Navy and Kraylors are worried that the breakdown of order in Shangri-La could give any advantage to the other and sent out "peacekeepers" to turn the situation to their own advantage. Human Navy's HNS Gallipoli and Kraylor's Crusader Naa'Tvek face off in an all out battle for Shangri-La.
+-- Description: Since its creation, the Shangri-la station was governed by a multi-ethnic consortium which assured the independence of the station across the conflicts that shook the sector.
+---             However, the station's tranquility came to an abrupt end when most of the governing consortium's members were assassinated under a Exuari false flag operation.
+---             Now the station is in state of civil war, with total infighting breaking out between warring factions. Both the neighboring Human Navy and Kraylors are worried that the breakdown
+---             of order in Shangri-La could give any advantage to the other and sent out "peacekeepers" to turn the situation to their own advantage.
+---             Human Navy's HNS Gallipoli and Kraylor's Crusader Naa'Tvek face off in an all out battle for Shangri-La.
+-- Type: PvP
 
 function init()
 	humanTroops = {}

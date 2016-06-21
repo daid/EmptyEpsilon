@@ -1,5 +1,6 @@
 -- Name: Waves
 -- Description: Waves of increasing difficult enemies.
+-- Type: Basic
 -- Variation[Hard]: Effectively starts at difficulty of wave 5, and increases by 1.5 every defeated wave. (Players are quicker overwhelmed, leading to shorter games)
 -- Variation[Easy]: Decreases the amount of ships in each progressing wave, making for easier progress and easier waves. (Takes longer for the players to be overwhelmed, good for new players)
 

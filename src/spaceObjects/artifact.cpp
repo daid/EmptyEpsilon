@@ -28,7 +28,7 @@ Artifact::Artifact()
 
     setRotation(random(0, 360));
     
-    current_model_data_name = "artifact" + string(random(1, 8));
+    current_model_data_name = "artifact" + string(irandom(1, 8));
     model_data_name = current_model_data_name;
     model_info.setData(current_model_data_name);
     

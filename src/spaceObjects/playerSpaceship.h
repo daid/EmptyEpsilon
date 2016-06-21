@@ -182,6 +182,7 @@ public:
     float getNetPowerUsage();
 
     void addToShipLog(string message, sf::Color color);
+    void addToShipLogBy(string message, P<SpaceObject> target);
     const std::vector<ShipLogEntry>& getShipsLog() const;
     
     void transferPlayersToShip(P<PlayerSpaceship> other_ship);
@@ -198,6 +199,8 @@ public:
 
     int getRepairCrewCount();
     void setRepairCrewCount(int amount);
+
+    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
 
     EAlertLevel getAlertLevel() { return alert_level; }
 

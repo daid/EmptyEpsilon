@@ -34,6 +34,12 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRadarTrace);
     /// Are the shields online or not. Currently always returns true except for player ships, as only players can turn off shields.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldsActive);
+
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getSharesEnergyWithDocked);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setSharesEnergyWithDocked);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getRepairDocked);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRepairDocked);
+
     /// [Depricated]
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getFrontShield);
     /// [Depricated]
@@ -76,6 +82,8 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
         registerMemberReplication(&shield_hit_effect[n], 0.5);
     }
     registerMemberReplication(&radar_trace);
+    registerMemberReplication(&hull_strength, 0.5);
+    registerMemberReplication(&hull_max);
 
     callsign = "[" + string(getMultiplayerId()) + "]";
 }
@@ -280,6 +288,9 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
         shield_level[n] = shield_max[n] = ship_template->shield_level[n];
 
     radar_trace = ship_template->radar_trace;
+
+    shares_energy_with_docked = ship_template->shares_energy_with_docked;
+    repair_docked = ship_template->repair_docked;
 
     ship_template->setCollisionData(this);
     model_info.setData(ship_template->model_data);
