@@ -135,8 +135,16 @@ string alertLevelToString(EAlertLevel level)
 {
     switch(level)
     {
-    case AL_RedAlert: return "RED ALERT";
-    case AL_YellowAlert: return "YELLOW ALERT";
+    case AL_RedAlert: 
+    {
+        return "RED ALERT";
+        addToShipLogIntern("RED ALERT",sf::Color::Red);
+    }
+    case AL_YellowAlert: 
+    {
+        return "YELLOW ALERT";
+        addToShipLogIntern("YELLOW ALERT",sf::Color::Yellow);
+    }
     case AL_Normal: return "Normal";
     default:
         return "???";
@@ -533,7 +541,7 @@ void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
     SpaceShip::takeHullDamage(damage_amount, info);
     
     // Infos for log intern
-    addToShipLogIntern(string(damage_amount) + string(" damage to hull"),sf::Color::Red);
+    addToShipLogIntern(string(abs(damage_amount)) + string(" damages to hull"),sf::Color::Red);
     for(int n=0; n<SYS_COUNT; n++)
     {
         if(systems_diff[n] != systems[n].health)
@@ -843,7 +851,11 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             packet >> tube_nr >> missile_target_angle;
 
             if (tube_nr >= 0 && tube_nr < max_weapon_tubes)
+            {
+                addToShipLogIntern(string("Missile fire"),sf::Color::Yellow);
                 weapon_tube[tube_nr].fire(missile_target_angle);
+            }
+
         }
         break;
     case CMD_SET_SHIELDS:
