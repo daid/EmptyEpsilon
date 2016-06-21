@@ -807,7 +807,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             float distance;
             packet >> distance;
             initializeJump(distance);
-            addToShipLogIntern(string("Jump Initialisation"),sf::Color::Green);
+            addToShipLogIntern(string("Jump Initialisation"),sf::Color::White);
         }
         break;
     case CMD_SET_TARGET:
