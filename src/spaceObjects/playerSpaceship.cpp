@@ -1087,7 +1087,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 beam_frequency = 0;
             if (beam_frequency > SpaceShip::max_frequency)
                 beam_frequency = SpaceShip::max_frequency;
-            addToShipLog("Beam frequency changed : " + frequencyToString(new_frequency),sf::Color::Yellow;"intern");
+            addToShipLog("Beam frequency changed : " + frequencyToString(new_frequency),sf::Color::Yellow,"intern");
         }
         break;
     case CMD_SET_BEAM_SYSTEM_TARGET:
