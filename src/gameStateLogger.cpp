@@ -455,9 +455,11 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
                     config.startArray("beams");
                 has_beam_weapons = true;
                 JSONGenerator beam = config.arrayCreateDict();
-                beam.write("range", ship->beam_weapons[n].getRange());
                 beam.write("arc", ship->beam_weapons[n].getArc());
                 beam.write("direction", ship->beam_weapons[n].getDirection());
+                beam.write("range", ship->beam_weapons[n].getRange());
+                beam.write("turret_arc", ship->beam_weapons[n].getTurretArc());
+                beam.write("turret_direction", ship->beam_weapons[n].getTurretDirection());
                 beam.write("damage", ship->beam_weapons[n].getDamage());
                 beam.write("cycle_time", ship->beam_weapons[n].getCycleTime());
             }

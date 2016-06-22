@@ -48,11 +48,14 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponArc);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponDirection);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponTurretArc);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponTurretDirection);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponCycleTime);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponDamage);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponEnergyPerFire);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponHeatPerFire);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeapon);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponTurret);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponTexture);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponEnergyPerFire);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponHeatPerFire);
@@ -183,6 +186,9 @@ void SpaceShip::applyTemplateValues()
         beam_weapons[n].setArc(ship_template->beams[n].getArc());
         beam_weapons[n].setDirection(ship_template->beams[n].getDirection());
         beam_weapons[n].setRange(ship_template->beams[n].getRange());
+        beam_weapons[n].setTurretArc(ship_template->beams[n].getTurretArc());
+        beam_weapons[n].setTurretDirection(ship_template->beams[n].getTurretDirection());
+        beam_weapons[n].setTurretRotationRate(ship_template->beams[n].getTurretRotationRate());
         beam_weapons[n].setCycleTime(ship_template->beams[n].getCycleTime());
         beam_weapons[n].setDamage(ship_template->beams[n].getDamage());
         beam_weapons[n].setBeamTexture(ship_template->beams[n].getBeamTexture());
@@ -242,56 +248,121 @@ void SpaceShip::draw3DTransparent()
 
 void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
+    // Draw beam arcs on short-range radar only, and only for fully scanned
+    // ships.
     if (!long_range && (!my_spaceship || (getScannedStateFor(my_spaceship) == SS_FullScan)))
     {
-        for(int n=0; n<max_beam_weapons; n++)
+        // For each beam ...
+        for(int n = 0; n < max_beam_weapons; n++)
         {
+            // Draw beam arcs only if the beam has a range. A beam with range 0
+            // effectively doesn't exist; exit if that's the case.
             if (beam_weapons[n].getRange() == 0.0) continue;
+
+            // Color beam arcs red.
+            // TODO: Make this color configurable.
             sf::Color color = sf::Color::Red;
+
+            // If the beam is cooling down, flash and fade the arc color.
             if (beam_weapons[n].getCooldown() > 0)
                 color = sf::Color(255, 255 * (beam_weapons[n].getCooldown() / beam_weapons[n].getCycleTime()), 0);
 
-            float direction = beam_weapons[n].getDirection();
-            float arc = beam_weapons[n].getArc();
-            float range = beam_weapons[n].getRange();
+            // Initialize variables from the beam's data.
+            float beam_direction = beam_weapons[n].getDirection();
+            float beam_arc = beam_weapons[n].getArc();
+            float beam_range = beam_weapons[n].getRange();
 
+            // Set the beam's origin on radar to its relative position on the
+            // mesh.
             sf::Vector2f beam_offset = sf::rotateVector(ship_template->model_data->getBeamPosition2D(n) * scale, getRotation());
+
+            // Configure an array to hold each point of the arc. Each point in
+            // the array draws a line to the next point. If the color between
+            // points is different, it's drawn as a gradient from the origin
+            // point's color to the destination point's.
             sf::VertexArray a(sf::LinesStrip, 3);
             a[0].color = color;
             a[1].color = color;
             a[2].color = sf::Color(color.r, color.g, color.b, 0);
+
+            // Drop the pen onto the beam's origin.
             a[0].position = beam_offset + position;
-            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (direction + arc / 2.0f)) * range * scale;
-            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (direction + arc / 2.0f)) * range * scale * 1.3f;
-            window.draw(a);
-            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (direction - arc / 2.0f)) * range * scale;
-            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (direction - arc / 2.0f)) * range * scale * 1.3f;
+
+            // Draw the beam's left bound.
+            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_direction + beam_arc / 2.0f)) * beam_range * scale;
+            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_direction + beam_arc / 2.0f)) * beam_range * scale * 1.3f;
             window.draw(a);
 
-            int arcPoints = int(arc / 10) + 1;
+            // Draw the beam's right bound.
+            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_direction - beam_arc / 2.0f)) * beam_range * scale;
+            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_direction - beam_arc / 2.0f)) * beam_range * scale * 1.3f;
+            window.draw(a);
+
+            // Draw the beam's arc.
+            int arcPoints = int(beam_arc / 10) + 1;
             sf::VertexArray arc_line(sf::LinesStrip, arcPoints);
             for(int i=0; i<arcPoints; i++)
             {
                 arc_line[i].color = color;
-                arc_line[i].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (direction - arc / 2.0f + 10 * i)) * range * scale;
+                arc_line[i].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_direction - beam_arc / 2.0f + 10 * i)) * beam_range * scale;
             }
-            arc_line[arcPoints-1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (direction + arc / 2.0f)) * range * scale;
+            arc_line[arcPoints-1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_direction + beam_arc / 2.0f)) * beam_range * scale;
             window.draw(arc_line);
+
+            // If the beam is turreted, draw the turret's arc. Otherwise, exit.
+            if (beam_weapons[n].getTurretArc() == 0.0) continue;
+
+            // Initialize variables from the turret data.
+            float turret_arc = beam_weapons[n].getTurretArc();
+            float turret_direction = beam_weapons[n].getTurretDirection();
+
+            // Draw the turret's bounds, at half the transparency of the beam's.
+            // TODO: Make this color configurable.
+            a[0].color = sf::Color(color.r, color.g, color.b, color.a / 2);
+            a[1].color = sf::Color(color.r, color.g, color.b, color.a / 2);
+
+            // Draw the turret's left bound. (We're reusing the beam's origin.)
+            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (turret_direction + turret_arc / 2.0f)) * beam_range * scale;
+            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (turret_direction + turret_arc / 2.0f)) * beam_range * scale * 1.3f;
+            window.draw(a);
+
+            // Draw the turret's right bound.
+            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (turret_direction - turret_arc / 2.0f)) * beam_range * scale;
+            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (turret_direction - turret_arc / 2.0f)) * beam_range * scale * 1.3f;
+            window.draw(a);
+
+            // Draw the turret's arc.
+            int turret_points = int(turret_arc / 10) + 1;
+            sf::VertexArray turret_line(sf::LinesStrip, turret_points);
+            for(int i = 0; i < turret_points; i++)
+            {
+                turret_line[i].color = sf::Color(color.r, color.g, color.b, color.a / 2);
+                turret_line[i].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (turret_direction - turret_arc / 2.0f + 10 * i)) * beam_range * scale;
+            }
+            turret_line[turret_points-1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (turret_direction + turret_arc / 2.0f)) * beam_range * scale;
+            window.draw(turret_line);
         }
     }
+    // If not on long-range radar ...
     if (!long_range)
     {
+        // ... and the ship being drawn is either not our ship or has been
+        // scanned ...
         if (!my_spaceship || getScannedStateFor(my_spaceship) >= SS_SimpleScan)
         {
+            // ... draw and show shield indicators on our radar.
             drawShieldsOnRadar(window, position, scale, 1.0, true);
         } else {
+            // Otherwise, draw the indicators, but don't show them.
             drawShieldsOnRadar(window, position, scale, 1.0, false);
         }
     }
 
+    // Set up the radar sprite for objects.
     sf::Sprite objectSprite;
 
-    //if the ship is not scanned, set the default icon, else the ship specific
+    // If the object is a ship that hasn't been scanned, draw the default icon.
+    // Otherwise, draw the ship-specific icon.
     if (my_spaceship && (getScannedStateFor(my_spaceship) == SS_NotScanned || getScannedStateFor(my_spaceship) == SS_FriendOrFoeIdentified))
     {
         textureManager.setTexture(objectSprite, "RadarArrow.png");
@@ -1067,10 +1138,14 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
         if (beam_weapons[n].getArc() != ship_template->beams[n].getArc()
          || beam_weapons[n].getDirection() != ship_template->beams[n].getDirection()
          || beam_weapons[n].getRange() != ship_template->beams[n].getRange()
+         || beam_weapons[n].getTurretArc() != ship_template->beams[n].getTurretArc()
+         || beam_weapons[n].getTurretDirection() != ship_template->beams[n].getTurretDirection()
+         || beam_weapons[n].getTurretRotationRate() != ship_template->beams[n].getTurretRotationRate()
          || beam_weapons[n].getCycleTime() != ship_template->beams[n].getCycleTime()
          || beam_weapons[n].getDamage() != ship_template->beams[n].getDamage())
         {
             ret += ":setBeamWeapon(" + string(n) + ", " + string(beam_weapons[n].getArc(), 0) + ", " + string(beam_weapons[n].getDirection(), 0) + ", " + string(beam_weapons[n].getRange(), 0) + ", " + string(beam_weapons[n].getCycleTime(), 1) + ", " + string(beam_weapons[n].getDamage(), 1) + ")";
+            ret += ":setBeamWeaponTurret(" + string(n) + ", " + string(beam_weapons[n].getTurretArc(), 0) + ", " + string(beam_weapons[n].getTurretDirection(), 0) + ", " + string(beam_weapons[n].getTurretRotationRate(), 0) + ")";
         }
     }
 

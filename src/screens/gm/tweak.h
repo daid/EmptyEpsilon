@@ -6,6 +6,7 @@
 #include "shipTemplate.h"
 
 class SpaceShip;
+class GuiLabel;
 class GuiTextEntry;
 class GuiSlider;
 class GuiSelector;
@@ -111,6 +112,10 @@ private:
     GuiSlider* arc_slider;
     GuiSlider* direction_slider;
     GuiSlider* range_slider;
+    GuiSlider* turret_arc_slider;
+    GuiSlider* turret_direction_slider;
+    GuiSlider* turret_rotation_rate_slider;
+    GuiLabel* turret_rotation_rate_overlay_label;
     GuiSlider* cycle_time_slider;
     GuiSlider* damage_slider;
 public:
