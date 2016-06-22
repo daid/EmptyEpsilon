@@ -877,7 +877,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 else
                 {
                     soundManager->playSound("shield_down.wav");
-                    addToShipLogIntern(string("Shields off"),sf::Color::Green,"intern");
+                    addToShipLog(string("Shields off"),sf::Color::Green,"intern");
                 }
             }
         }
@@ -1220,9 +1220,9 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         {
             packet >> alert_level;
             if(alertLevelToString(alert_level) == "RED ALERT")
-                addToShipLogIntern("RED ALERT",sf::Color::Red);
+                addToShipLog("RED ALERT",sf::Color::Red,"intern");
             if(alertLevelToString(alert_level) == "YELLOW ALERT")
-                addToShipLogIntern("YELLOW ALERT",sf::Color::Yellow);
+                addToShipLog("YELLOW ALERT",sf::Color::Yellow,"intern");
         }
         break;
     case CMD_SET_SCIENCE_LINK:
