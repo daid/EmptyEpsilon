@@ -168,6 +168,7 @@ PlayerSpaceship::PlayerSpaceship()
     scan_probe_recharge = 0.0;
     alert_level = AL_Normal;
     shields_active = false;
+    warp_indicator = 0;
 
     setFactionId(1);
 
@@ -412,6 +413,15 @@ void PlayerSpaceship::update(float delta)
         {
             if (!useEnergy(energy_warp_per_second * delta * powf(warp_request, 1.2f) * (shields_active ? 1.5 : 1.0)))
                 warp_request = 0;
+                
+            for(float n=0; n<=4; n++)
+            {
+                if ((current_warp > n-0.1 && current_warp < n+0.1) && warp_indicator != n)
+                {
+                    warp_indicator = n;
+                    addToShipLog("WARP " + string(abs(n)), sf::Color::White,"intern");
+                }
+            }
         }
         if (scanning_target)
         {
@@ -512,7 +522,22 @@ void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
     {
         hull_damage_indicator = 1.5;
     }
+    
+    float systems_diff[SYS_COUNT];
+    for(int n=0; n<SYS_COUNT; n++)
+    {
+        systems_diff[n] = systems[n].health;
+    }
     SpaceShip::takeHullDamage(damage_amount, info);
+    
+    // Infos for log intern
+    string system_damage = string(abs(damage_amount)) + string(" damages to hull. System affected : ");
+    for(int n=0; n<SYS_COUNT; n++)
+    {
+        if(systems_diff[n] != systems[n].health)
+            system_damage = system_damage + string(getSystemName(ESystem(n))) + string(" ");
+    }
+    addToShipLog(system_damage,sf::Color::Red,"intern");
 }
 
 void PlayerSpaceship::setSystemCoolantRequest(ESystem system, float request)
@@ -795,6 +820,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             float distance;
             packet >> distance;
             initializeJump(distance);
+            addToShipLog(string("Jump Initialisation"),sf::Color::White,"intern");
         }
         break;
     case CMD_SET_TARGET:
@@ -830,7 +856,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             packet >> tube_nr >> missile_target_angle;
 
             if (tube_nr >= 0 && tube_nr < max_weapon_tubes)
+            {
                 weapon_tube[tube_nr].fire(missile_target_angle);
+                addToShipLog(string("Missile fire"),sf::Color::Yellow,"intern");
+            }
         }
         break;
     case CMD_SET_SHIELDS:
@@ -841,9 +870,15 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             {
                 shields_active = active;
                 if (active)
+                {
                     soundManager->playSound("shield_up.wav");
+                    addToShipLog(string("Shields on"),sf::Color::Green,"intern");
+                }
                 else
+                {
                     soundManager->playSound("shield_down.wav");
+                    addToShipLogIntern(string("Shields off"),sf::Color::Green,"intern");
+                }
             }
         }
         break;
@@ -904,13 +939,20 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             int32_t id;
             packet >> id;
             requestDock(game_server->getObjectById(id));
+            addToShipLog(string("Docking requested"),sf::Color::Cyan,"intern");
         }
         break;
     case CMD_UNDOCK:
-        requestUndock();
+        {
+            requestUndock();
+            addToShipLog(string("Undocking requested"),sf::Color::Cyan,"intern");
+        }
         break;
     case CMD_ABORT_DOCK:
-        abortDock();
+        {
+            abortDock();
+            addToShipLog(string("Docking aborded"),sf::Color::Cyan,"intern");
+        }
         break;
     case CMD_OPEN_TEXT_COMM:
         if (comms_state == CS_Inactive || comms_state == CS_BeingHailed || comms_state == CS_BeingHailedByGM || comms_state == CS_ChannelClosed)
@@ -1045,6 +1087,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 beam_frequency = 0;
             if (beam_frequency > SpaceShip::max_frequency)
                 beam_frequency = SpaceShip::max_frequency;
+            addToShipLog("Beam frequency changed : " + frequencyToString(new_frequency),sf::Color::Yellow;"intern");
         }
         break;
     case CMD_SET_BEAM_SYSTEM_TARGET:
@@ -1056,6 +1099,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 beam_system_target = SYS_None;
             if (beam_system_target > ESystem(int(SYS_COUNT) - 1))
                 beam_system_target = ESystem(int(SYS_COUNT) - 1);
+            addToShipLog("Beam system target changed : " + getSystemName(system),sf::Color::Yellow,"intern");
         }
         break;
     case CMD_SET_SHIELD_FREQUENCY:
@@ -1072,6 +1116,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                     shield_frequency = 0;
                 if (shield_frequency > SpaceShip::max_frequency)
                     shield_frequency = SpaceShip::max_frequency;
+                addToShipLog("Shields frequency changed : " + frequencyToString(new_frequency),sf::Color::Green,"intern");
             }
         }
         break;
@@ -1102,6 +1147,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         break;
     case CMD_ACTIVATE_SELF_DESTRUCT:
         activate_self_destruct = true;
+        addToShipLog(string("Auto destruction activated"),sf::Color::Red,"intern");
         for(int n=0; n<max_self_destruct_codes; n++)
         {
             self_destruct_code[n] = irandom(0, 99999);
@@ -1130,6 +1176,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         if (self_destruct_countdown <= 0.0f)
         {
             activate_self_destruct = false;
+            addToShipLog(string("Auto destruction canceled"),sf::Color::Red,"intern");
         }
         break;
     case CMD_CONFIRM_SELF_DESTRUCT:
@@ -1172,6 +1219,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     case CMD_SET_ALERT_LEVEL:
         {
             packet >> alert_level;
+            if(alertLevelToString(alert_level) == "RED ALERT")
+                addToShipLogIntern("RED ALERT",sf::Color::Red);
+            if(alertLevelToString(alert_level) == "YELLOW ALERT")
+                addToShipLogIntern("YELLOW ALERT",sf::Color::Yellow);
         }
         break;
     case CMD_SET_SCIENCE_LINK:
