@@ -5,6 +5,7 @@
 #include "screenComponents/shipInternalView.h"
 #include "screenComponents/selfDestructButton.h"
 #include "screenComponents/alertOverlay.h"
+#include "screenComponents/shipsLogControl.h"
 
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_autolayout.h"
