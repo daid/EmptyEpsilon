@@ -81,6 +81,7 @@ private:
     CommsScriptInterface comms_script_interface;  //Server only
 
     std::vector<ShipLogEntry> ships_log;
+    std::vector<ShipLogEntry> ships_log_intern;
 
 public:
     std::vector<sf::Vector2f> waypoints;
