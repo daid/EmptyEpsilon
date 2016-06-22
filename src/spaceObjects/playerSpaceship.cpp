@@ -826,7 +826,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     case CMD_SET_TARGET:
         {
             packet >> target_id;
-            if target_id != int32_t(-1);
+            if (target_id != int32_t(-1))
                 addToShipLog("Target activated : " + string(SpaceShip::getTarget()->SpaceObject::getCallSign()),sf::Color::Yellow,"intern");
         }
         break;
