@@ -143,7 +143,7 @@ RelayScreen::RelayScreen(GuiContainer* owner)
         alert_level_buttons.push_back(alert_button);
     }
 
-    new ShipsLog(this);
+    new ShipsLog(this,"extern");
 
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
