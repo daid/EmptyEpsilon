@@ -195,7 +195,8 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&comms_reply_message);
     registerMemberReplication(&comms_target_name);
     registerMemberReplication(&comms_incomming_message);
-    registerMemberReplication(&ships_log);
+    registerMemberReplication(&ships_log_extern);
+    registerMemberReplication(&ships_log_intern);
     registerMemberReplication(&waypoints);
     registerMemberReplication(&scan_probe_stock);
     registerMemberReplication(&activate_self_destruct);
@@ -603,11 +604,20 @@ float PlayerSpaceship::getNetPowerUsage()
     return net_power;
 }
 
-void PlayerSpaceship::addToShipLog(string message, sf::Color color)
+void PlayerSpaceship::addToShipLog(string message, sf::Color color, string station = "extern")
 {
-    if (ships_log.size() > 100)
-        ships_log.erase(ships_log.begin());
-    ships_log.emplace_back(string(engine->getElapsedTime(), 1) + string(": "), message, color);
+    if (station == "extern")
+    {
+        if (ships_log_extern.size() > 100)
+            ships_log_extern.erase(ships_log_extern.begin());
+        ships_log_extern.emplace_back(string(engine->getElapsedTime(), 1) + string(": "), message, color, station);
+    }
+    else if (station == "intern")
+    {
+        if (ships_log_intern.size() > 100)
+            ships_log_intern.erase(ships_log_intern.begin());
+        ships_log_intern.emplace_back(string(engine->getElapsedTime(), 1) + string(": "), message, color, station);
+    }
 }
 
 void PlayerSpaceship::addToShipLogBy(string message, P<SpaceObject> target)
@@ -622,9 +632,12 @@ void PlayerSpaceship::addToShipLogBy(string message, P<SpaceObject> target)
         addToShipLog(message, colorConfig.log_receive_neutral);
 }
 
-const std::vector<PlayerSpaceship::ShipLogEntry>& PlayerSpaceship::getShipsLog() const
+const std::vector<PlayerSpaceship::ShipLogEntry>& PlayerSpaceship::getShipsLog(string station) const
 {
-    return ships_log;
+    if (station == "extern")
+        return ships_log_extern;
+    if (station == "intern")
+        return ships_log_intern;
 }
 
 void PlayerSpaceship::transferPlayersToShip(P<PlayerSpaceship> other_ship)
