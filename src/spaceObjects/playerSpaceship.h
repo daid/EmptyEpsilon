@@ -51,12 +51,13 @@ public:
         string prefix;
         string text;
         sf::Color color;
+        string station;
 
         ShipLogEntry() {}
-        ShipLogEntry(string prefix, string text, sf::Color color)
-        : prefix(prefix), text(text), color(color) {}
+        ShipLogEntry(string prefix, string text, sf::Color color, string station)
+        : prefix(prefix), text(text), color(color), station(station) {}
 
-        bool operator!=(const ShipLogEntry& e) { return prefix != e.prefix || text != e.text || color != e.color; }
+        bool operator!=(const ShipLogEntry& e) { return prefix != e.prefix || text != e.text || color != e.color || station != e.station; }
     };
 
     float hull_damage_indicator;
