@@ -820,12 +820,13 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             float distance;
             packet >> distance;
             initializeJump(distance);
-            addToShipLog(string("Jump Initialisation"),sf::Color::White,"intern");
+            addToShipLog("Jump Initialisation",sf::Color::White,"intern");
         }
         break;
     case CMD_SET_TARGET:
         {
             packet >> target_id;
+            addToShipLog("Target activated : " + SpaceShip::getTarget()::getCallSign(),sf::Color::Yellow,"intern");
         }
         break;
     case CMD_LOAD_TUBE:
@@ -858,7 +859,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             if (tube_nr >= 0 && tube_nr < max_weapon_tubes)
             {
                 weapon_tube[tube_nr].fire(missile_target_angle);
-                addToShipLog(string("Missile fire"),sf::Color::Yellow,"intern");
+                addToShipLog("Missile fire",sf::Color::Yellow,"intern");
             }
         }
         break;
@@ -872,12 +873,12 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 if (active)
                 {
                     soundManager->playSound("shield_up.wav");
-                    addToShipLog(string("Shields on"),sf::Color::Green,"intern");
+                    addToShipLog("Shields on",sf::Color::Green,"intern");
                 }
                 else
                 {
                     soundManager->playSound("shield_down.wav");
-                    addToShipLog(string("Shields off"),sf::Color::Green,"intern");
+                    addToShipLog("Shields off",sf::Color::Green,"intern");
                 }
             }
         }
@@ -939,19 +940,19 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             int32_t id;
             packet >> id;
             requestDock(game_server->getObjectById(id));
-            addToShipLog(string("Docking requested"),sf::Color::Cyan,"intern");
+            addToShipLog("Docking requested",sf::Color::Cyan,"intern");
         }
         break;
     case CMD_UNDOCK:
         {
             requestUndock();
-            addToShipLog(string("Undocking requested"),sf::Color::Cyan,"intern");
+            addToShipLog("Undocking requested",sf::Color::Cyan,"intern");
         }
         break;
     case CMD_ABORT_DOCK:
         {
             abortDock();
-            addToShipLog(string("Docking aborded"),sf::Color::Cyan,"intern");
+            addToShipLog("Docking aborded",sf::Color::Cyan,"intern");
         }
         break;
     case CMD_OPEN_TEXT_COMM:
@@ -1076,7 +1077,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         }
         break;
     case CMD_SET_AUTO_REPAIR:
-        packet >> auto_repair_enabled;
+        {
+            packet >> auto_repair_enabled;
+            addToShipLog("Auto repair enabled",sf::Color::White,"intern");
+        }
         break;
     case CMD_SET_BEAM_FREQUENCY:
         {
@@ -1147,7 +1151,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         break;
     case CMD_ACTIVATE_SELF_DESTRUCT:
         activate_self_destruct = true;
-        addToShipLog(string("Auto destruction activated"),sf::Color::Red,"intern");
+        addToShipLog("Auto destruction activated",sf::Color::Red,"intern");
         for(int n=0; n<max_self_destruct_codes; n++)
         {
             self_destruct_code[n] = irandom(0, 99999);
@@ -1176,7 +1180,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         if (self_destruct_countdown <= 0.0f)
         {
             activate_self_destruct = false;
-            addToShipLog(string("Auto destruction canceled"),sf::Color::Red,"intern");
+            addToShipLog("Auto destruction canceled",sf::Color::Red,"intern");
         }
         break;
     case CMD_CONFIRM_SELF_DESTRUCT:
