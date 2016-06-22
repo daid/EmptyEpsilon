@@ -241,7 +241,8 @@ PlayerSpaceship::PlayerSpaceship()
 
     setCallSign("PL" + string(getMultiplayerId()));
 
-    addToShipLog("Start of log", colorConfig.log_generic);
+    addToShipLog("Start of extern log", colorConfig.log_generic,"extern");
+    addToShipLog("Start of intern log", colorConfig.log_generic,"intern");
 }
 
 void PlayerSpaceship::update(float delta)
