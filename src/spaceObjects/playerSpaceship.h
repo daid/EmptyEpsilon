@@ -182,7 +182,7 @@ public:
 
     float getNetPowerUsage();
 
-    void addToShipLog(string message, sf::Color color);
+    void addToShipLog(string message, sf::Color color, string station);
     void addToShipLogBy(string message, P<SpaceObject> target);
     const std::vector<ShipLogEntry>& getShipsLog(string station) const;
     
