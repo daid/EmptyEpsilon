@@ -80,7 +80,7 @@ private:
     std::vector<string> comms_reply_message;
     CommsScriptInterface comms_script_interface;  //Server only
 
-    std::vector<ShipLogEntry> ships_log;
+    std::vector<ShipLogEntry> ships_log_extern;
     std::vector<ShipLogEntry> ships_log_intern;
 
 public:
