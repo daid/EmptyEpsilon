@@ -70,6 +70,7 @@ public:
     bool auto_repair_enabled;
     bool auto_coolant_enabled;
     bool shields_active;
+    int warp_indicator;
 
 private:
     ECommsState comms_state;
