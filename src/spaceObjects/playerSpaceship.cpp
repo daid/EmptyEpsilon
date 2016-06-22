@@ -437,6 +437,7 @@ void PlayerSpaceship::update(float delta)
                 if (do_self_destruct)
                 {
                     self_destruct_countdown = 10.0f;
+                    soundManager->playSound("vocal_self_destruction.wav");
                 }
             }else{
                 self_destruct_countdown -= delta;
