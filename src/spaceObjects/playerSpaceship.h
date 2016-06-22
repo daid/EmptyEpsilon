@@ -184,7 +184,7 @@ public:
 
     void addToShipLog(string message, sf::Color color);
     void addToShipLogBy(string message, P<SpaceObject> target);
-    const std::vector<ShipLogEntry>& getShipsLog() const;
+    const std::vector<ShipLogEntry>& getShipsLog(string station) const;
     
     void transferPlayersToShip(P<PlayerSpaceship> other_ship);
     void transferPlayersAtPositionToShip(ECrewPosition position, P<PlayerSpaceship> other_ship);
