@@ -1,5 +1,8 @@
 #include <time.h>
 
+//We need a really fast float to string conversion. dtoa from milo does this very well.
+#include "dtoa/dtoa_milo.h"
+
 #include "gameStateLogger.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/spaceObject.h"
@@ -12,72 +15,101 @@
 class JSONGenerator
 {
 public:
-    JSONGenerator(FILE* f)
-    : f(f), first(true)
+    JSONGenerator(char*& ptr)
+    : ptr(ptr), first(true)
     {
-        fprintf(f, "{");
+        *ptr++ = '{';
     }
     
     ~JSONGenerator()
     {
-        fprintf(f, "}");
+        *ptr++ = '}';
     }
     
     template<typename T> void write(const char* key, const T& value)
     {
         if (!first)
-            fprintf(f, ",\"%s\":", key);
-        else
-            fprintf(f, "\"%s\":", key);
+            *ptr++ = ',';
+        *ptr++ = '"';
+        while(*key)
+            *ptr++ = *key++;
+        *ptr++ = '"';
+        *ptr++ = ':';
         first = false;
         writeValue(value);
     }
     JSONGenerator createDict(const char* key)
     {
         if (!first)
-            fprintf(f, ",\"%s\":", key);
-        else
-            fprintf(f, "\"%s\":", key);
+            *ptr++ = ',';
+        *ptr++ = '"';
+        while(*key)
+            *ptr++ = *key++;
+        *ptr++ = '"';
+        *ptr++ = ':';
         first = false;
-        return JSONGenerator(f);
+        return JSONGenerator(ptr);
     }
     void startArray(const char* key)
     {
         if (!first)
-            fprintf(f, ",\"%s\":[", key);
-        else
-            fprintf(f, "\"%s\":[", key);
+            *ptr++ = ',';
+        *ptr++ = '"';
+        while(*key)
+            *ptr++ = *key++;
+        *ptr++ = '"';
+        *ptr++ = ':';
+        *ptr++ = '[';
         first = false;
         array_first = true;
     }
     JSONGenerator arrayCreateDict()
     {
         if (!array_first)
-            fprintf(f, ",");
+            *ptr++ = ',';
         array_first = false;
-        return JSONGenerator(f);
+        return JSONGenerator(ptr);
     }
     template<typename T> void arrayWrite(const T& value)
     {
         if (!array_first)
-            fprintf(f, ",");
+            *ptr++ = ',';
         array_first = false;
         writeValue(value);
     }
     void endArray()
     {
-        fprintf(f, "]");
+        *ptr++ = ']';
         first = false;
         array_first = true;
     }
 private:
-    void writeValue(bool b) { fprintf(f, b ? "true" : "false"); }
-    void writeValue(int i) { fprintf(f, "%d", i); }
-    void writeValue(float _f) { fprintf(f, "%g", _f); }
-    void writeValue(const char* value) { fprintf(f, "\"%s\"", value); }
-    void writeValue(const string& value) { fprintf(f, "\"%s\"", value.c_str()); }
+    void writeValue(bool b)
+    {
+        const char* c = "false";
+        if (b) c = "true";
+        while(*c)
+            *ptr++ = *c++;
+    }
+    void writeValue(int i) { ptr += sprintf(ptr, "%d", i); }
+    void writeValue(float _f) { dtoa_milo(_f, ptr); ptr += strlen(ptr); }
+    void writeValue(const char* value)
+    { /*ptr += sprintf(ptr, "\"%s\"", value);*/ 
+        *ptr++ = '"';
+        while(*value)
+            *ptr++ = *value++;
+        *ptr++ = '"';
+    }
+    void writeValue(const string& value)
+    {
+        const char* str = value.c_str();
+        *ptr++ = '"';
+        while(*str)
+            *ptr++ = *str++;
+        *ptr++ = '"';
+    }
 
-    FILE* f;
+    char*& ptr;
     bool first, array_first;
 };
 
@@ -128,7 +160,6 @@ void GameStateLogger::update(float delta)
     logging_delay = logging_interval;
     
     logGameState();
-    fprintf(log_file, "\n");
 }
 
 /* Write the state log entry. All entries are in json format.
@@ -143,48 +174,69 @@ void GameStateLogger::update(float delta)
 */
 void GameStateLogger::logGameState()
 {
-    JSONGenerator json(log_file);
-    json.write("type", "state");
-    json.write("time", engine->getElapsedTime() - start_time);
-    json.startArray("new_static");
-    foreach(SpaceObject, obj, space_object_list)
+    static char log_line_buffer[1024*1024*10];
+    char* ptr = log_line_buffer;
+    
     {
-        if (isStatic(obj) && static_objects.find(obj->getMultiplayerId()) == static_objects.end())
+        JSONGenerator json(ptr);
+        json.write("type", "state");
+        json.write("time", engine->getElapsedTime() - start_time);
+        json.startArray("new_static");
+        foreach(SpaceObject, obj, space_object_list)
         {
-            static_objects[obj->getMultiplayerId()] = obj->getPosition();
+            if (isStatic(obj) && static_objects.find(obj->getMultiplayerId()) == static_objects.end())
+            {
+                static_objects[obj->getMultiplayerId()] = obj->getPosition();
+                JSONGenerator entry = json.arrayCreateDict();
+                writeObjectEntry(entry, obj);
+                
+                if ((unsigned int)(ptr - log_line_buffer) > sizeof(log_line_buffer) / 2)
+                {
+                    fwrite(log_line_buffer, 1, ptr - log_line_buffer, log_file);
+                    ptr = log_line_buffer;
+                }
+            }
+        }
+        json.endArray();
+        std::vector<int> del_list;
+        for(auto it : static_objects)
+        {
+            if (!game_server->getObjectById(it.first))
+            {
+                del_list.push_back(it.first);
+            }
+        }
+        json.startArray("del_static");
+        for(int id : del_list)
+        {
+            json.arrayWrite(id);
+            static_objects.erase(id);
+        }
+        json.endArray();
+        
+        json.startArray("objects");
+        foreach(SpaceObject, obj, space_object_list)
+        {
+            if (static_objects.find(obj->getMultiplayerId()) != static_objects.end())
+            {
+                if (static_objects[obj->getMultiplayerId()] == obj->getPosition())
+                    continue;
+            }
             JSONGenerator entry = json.arrayCreateDict();
             writeObjectEntry(entry, obj);
+
+            if ((unsigned int)(ptr - log_line_buffer) > sizeof(log_line_buffer) / 2)
+            {
+                fwrite(log_line_buffer, 1, ptr - log_line_buffer, log_file);
+                ptr = log_line_buffer;
+            }
         }
+        json.endArray();
     }
-    json.endArray();
-    std::vector<int> del_list;
-    for(auto it : static_objects)
-    {
-        if (!game_server->getObjectById(it.first))
-        {
-            del_list.push_back(it.first);
-        }
-    }
-    json.startArray("del_static");
-    for(int id : del_list)
-    {
-        json.arrayWrite(id);
-        static_objects.erase(id);
-    }
-    json.endArray();
     
-    json.startArray("objects");
-    foreach(SpaceObject, obj, space_object_list)
-    {
-        if (static_objects.find(obj->getMultiplayerId()) != static_objects.end())
-        {
-            if (static_objects[obj->getMultiplayerId()] == obj->getPosition())
-                continue;
-        }
-        JSONGenerator entry = json.arrayCreateDict();
-        writeObjectEntry(entry, obj);
-    }
-    json.endArray();
+    *ptr++ = '\n';
+    *ptr = '\0';
+    fwrite(log_line_buffer, 1, ptr - log_line_buffer, log_file);
 }
 
 bool GameStateLogger::isStatic(P<SpaceObject> obj)
