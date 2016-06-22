@@ -9,6 +9,7 @@ class GuiAdvancedScrollText;
 class ShipsLog : public GuiElement
 {
 public:
+    string station;
     ShipsLog(GuiContainer* owner, string station);
 
     virtual void onDraw(sf::RenderTarget& window) override;
