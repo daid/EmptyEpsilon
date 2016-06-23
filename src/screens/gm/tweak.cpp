@@ -349,16 +349,43 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
     index_selector->setSelectionIndex(0);
 
     (new GuiLabel(right_col, "", "Arc:", 20))->setSize(GuiElement::GuiSizeMax, 30);
-    arc_slider = new GuiSlider(right_col, "", 0.0, 360, 0.0, [this](float value) {
+    arc_slider = new GuiSlider(right_col, "", 0.0, 360.0, 0.0, [this](float value) {
         target->beam_weapons[beam_index].setArc(roundf(value));
     });
     arc_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     (new GuiLabel(right_col, "", "Direction:", 20))->setSize(GuiElement::GuiSizeMax, 30);
-    direction_slider = new GuiSlider(right_col, "", -180.0, 180, 0.0, [this](float value) {
+    direction_slider = new GuiSlider(right_col, "", -180.0, 180.0, 0.0, [this](float value) {
         target->beam_weapons[beam_index].setDirection(roundf(value));
     });
     direction_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(right_col, "", "Turret Arc:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    turret_arc_slider = new GuiSlider(right_col, "", 0.0, 360.0, 0.0, [this](float value) {
+        target->beam_weapons[beam_index].setTurretArc(roundf(value));
+    });
+    turret_arc_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(right_col, "", "Turret Direction:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    turret_direction_slider = new GuiSlider(right_col, "", -180.0, 180.0, 0.0, [this](float value) {
+        target->beam_weapons[beam_index].setTurretDirection(roundf(value));
+    });
+    turret_direction_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(right_col, "", "Turret Rotation Rate:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    // 25 is an arbitrary limit for granularity; values greater than 25 result
+    // in practicaly instantaneous turret rotation.
+    turret_rotation_rate_slider = new GuiSlider(right_col, "", 0.0, 250.0, 0.0, [this](float value) {
+        // Divide a large value for granularity.
+        if (value > 0)
+            target->beam_weapons[beam_index].setTurretRotationRate(value / 10.0);
+        else
+            target->beam_weapons[beam_index].setTurretRotationRate(0.0);
+    });
+    turret_rotation_rate_slider->setSize(GuiElement::GuiSizeMax, 40);
+    // Override overlay label.
+    turret_rotation_rate_overlay_label = new GuiLabel(turret_rotation_rate_slider, "", "", 30);
+    turret_rotation_rate_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     (new GuiLabel(right_col, "", "Range:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     range_slider = new GuiSlider(right_col, "", 0.0, 5000.0, 0.0, [this](float value) {
@@ -386,6 +413,10 @@ void GuiShipTweakBeamweapons::onDraw(sf::RenderTarget& window)
     arc_slider->setValue(target->beam_weapons[beam_index].getArc());
     direction_slider->setValue(sf::angleDifference(0.0f, target->beam_weapons[beam_index].getDirection()));
     range_slider->setValue(target->beam_weapons[beam_index].getRange());
+    turret_arc_slider->setValue(target->beam_weapons[beam_index].getTurretArc());
+    turret_direction_slider->setValue(sf::angleDifference(0.0f, target->beam_weapons[beam_index].getTurretDirection()));
+    turret_rotation_rate_slider->setValue(target->beam_weapons[beam_index].getTurretRotationRate() * 10.0f);
+    turret_rotation_rate_overlay_label->setText(string(target->beam_weapons[beam_index].getTurretRotationRate()));
     cycle_time_slider->setValue(target->beam_weapons[beam_index].getCycleTime());
     damage_slider->setValue(target->beam_weapons[beam_index].getDamage());
 }

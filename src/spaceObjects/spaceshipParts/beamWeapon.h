@@ -24,6 +24,15 @@ public:
     void setRange(float range);
     float getRange();
 
+    void setTurretArc(float arc);
+    float getTurretArc();
+
+    void setTurretDirection(float direction);
+    float getTurretDirection();
+
+    void setTurretRotationRate(float rotation_rate);
+    float getTurretRotationRate();
+
     void setCycleTime(float cycle_time);
     float getCycleTime();
     
@@ -53,6 +62,9 @@ protected:
     float arc;
     float direction;
     float range;
+    float turret_arc;
+    float turret_direction;
+    float turret_rotation_rate;
     float cycle_time;
     float damage;//Server side only
     float energy_per_beam_fire;//Server side only

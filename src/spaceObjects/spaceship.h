@@ -318,6 +318,28 @@ public:
     float getBeamWeaponArc(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getArc(); }
     float getBeamWeaponDirection(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getDirection(); }
     float getBeamWeaponRange(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getRange(); }
+
+    float getBeamWeaponTurretArc(int index) 
+    {
+        if (index < 0 || index >= max_beam_weapons)
+            return 0.0;
+        return beam_weapons[index].getTurretArc();
+    }
+
+    float getBeamWeaponTurretDirection(int index)
+    {
+        if (index < 0 || index >= max_beam_weapons)
+            return 0.0;
+        return beam_weapons[index].getTurretDirection();
+    }
+
+    float getBeamWeaponTurretRotationRate(int index)
+    {
+        if (index < 0 || index >= max_beam_weapons)
+            return 0.0;
+        return beam_weapons[index].getTurretRotationRate();
+    }
+
     float getBeamWeaponCycleTime(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getCycleTime(); }
     float getBeamWeaponDamage(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getDamage(); }
     float getBeamWeaponEnergyPerFire(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getEnergyPerFire(); }
@@ -334,6 +356,15 @@ public:
         beam_weapons[index].setRange(range);
         beam_weapons[index].setCycleTime(cycle_time);
         beam_weapons[index].setDamage(damage);
+    }
+
+    void setBeamWeaponTurret(int index, float arc, float direction, float rotation_rate)
+    {
+        if (index < 0 || index >= max_beam_weapons)
+            return;
+        beam_weapons[index].setTurretArc(arc);
+        beam_weapons[index].setTurretDirection(direction);
+        beam_weapons[index].setTurretRotationRate(rotation_rate);
     }
 
     void setBeamWeaponTexture(int index, string texture)
