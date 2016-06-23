@@ -66,37 +66,31 @@ float BeamWeapon::getRange()
 
 void BeamWeapon::setTurretArc(float arc)
 {
-    LOG(INFO) << "BeamWeapon::setTurretArc: " << arc;
     this->turret_arc = arc;
 }
 
 float BeamWeapon::getTurretArc()
 {
-    LOG(INFO) << "BeamWeapon::getTurretArc: " << turret_arc;
     return turret_arc;
 }
 
 void BeamWeapon::setTurretDirection(float direction)
 {
-    LOG(INFO) << "BeamWeapon::setTurretDirection: " << direction;
     this->turret_direction = direction;
 }
 
 float BeamWeapon::getTurretDirection()
 {
-    LOG(INFO) << "BeamWeapon::getTurretDirection: " << turret_direction;
     return turret_direction;
 }
 
 void BeamWeapon::setTurretRotationRate(float rotation_rate)
 {
-    LOG(INFO) << "BeamWeapon::setTurretRotationRate: " << rotation_rate;
     this->turret_rotation_rate = rotation_rate;
 }
 
 float BeamWeapon::getTurretRotationRate()
 {
-    LOG(INFO) << "BeamWeapon::getTurretRotationRate: " << turret_rotation_rate;
     return turret_rotation_rate;
 }
 
