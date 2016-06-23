@@ -437,6 +437,7 @@ void PlayerSpaceship::update(float delta)
                 if (do_self_destruct)
                 {
                     self_destruct_countdown = 10.0f;
+                    soundManager->playSound("vocal_self_destruction.wav");
                 }
             }else{
                 self_destruct_countdown -= delta;
@@ -1472,6 +1473,21 @@ void PlayerSpaceship::setRepairCrewCount(int amount)
     {
         P<RepairCrew> rc = new RepairCrew();
         rc->ship_id = getMultiplayerId();
+    }
+}
+
+void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+{
+    SpaceShip::drawOnGMRadar(window, position, scale, long_range);
+    if (long_range)
+    {
+        sf::CircleShape radar_radius(gameGlobalInfo->long_range_radar_range * scale);
+        radar_radius.setOrigin(gameGlobalInfo->long_range_radar_range * scale, gameGlobalInfo->long_range_radar_range * scale);
+        radar_radius.setPosition(position);
+        radar_radius.setFillColor(sf::Color::Transparent);
+        radar_radius.setOutlineColor(sf::Color(255, 255, 255, 64));
+        radar_radius.setOutlineThickness(3.0);
+        window.draw(radar_radius);
     }
 }
 

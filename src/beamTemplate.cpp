@@ -1,9 +1,12 @@
+#include <iostream>
 #include "beamTemplate.h"
 
 BeamTemplate::BeamTemplate()
 {
     direction = 0;
     range = 0;
+    turret_direction = 0;
+    turret_rotation_rate = 0;
     cycle_time = 0;
     damage = 0;
     beam_texture = "beam_orange.png";
@@ -65,6 +68,52 @@ void BeamTemplate::setRange(float range)
         this->range = range;
 }
 
+float BeamTemplate::getTurretDirection()
+{
+    return turret_direction;
+}
+
+void BeamTemplate::setTurretDirection(float direction)
+{
+    // Clamp values
+    while(direction < 0)
+        direction += 360;
+    while(direction > 360)
+        direction -= 360;
+    this->turret_direction = direction;
+}
+
+float BeamTemplate::getTurretArc()
+{
+    return turret_arc;
+}
+
+void BeamTemplate::setTurretArc(float arc)
+{
+    while(arc < 0)
+        arc += 360;
+    while(arc > 360)
+        arc -=360;
+    this->turret_arc = arc;
+}
+
+float BeamTemplate::getTurretRotationRate()
+{
+    return turret_rotation_rate;
+}
+
+void BeamTemplate::setTurretRotationRate(float rotation_rate)
+{
+    if (rotation_rate < 0)
+        this->turret_rotation_rate = 0.0;
+    // 25 is an arbitrary limit. Values greater than 25.0 are nearly
+    // instantaneous.
+    else if (rotation_rate > 25.0)
+        this->turret_rotation_rate = 25.0;
+    else
+        this->turret_rotation_rate = rotation_rate;
+}
+
 float BeamTemplate::getCycleTime()
 {
     return cycle_time;
@@ -117,6 +166,9 @@ BeamTemplate& BeamTemplate::operator=(const BeamTemplate& other)
     direction = other.direction;
     arc = other.arc;
     range = other.range;
+    turret_direction = other.turret_direction;
+    turret_arc = other.turret_arc;
+    turret_arc = other.turret_rotation_rate;
     cycle_time = other.cycle_time;
     damage = other.damage;
     energy_per_beam_fire = other.energy_per_beam_fire;
