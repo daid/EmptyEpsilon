@@ -284,6 +284,7 @@
 		<Unit filename="../SeriousProton/src/clipboard.h" />
 		<Unit filename="../SeriousProton/src/collisionable.cpp" />
 		<Unit filename="../SeriousProton/src/collisionable.h" />
+		<Unit filename="../SeriousProton/src/dtoa/dtoa_milo.h" />
 		<Unit filename="../SeriousProton/src/engine.cpp" />
 		<Unit filename="../SeriousProton/src/engine.h" />
 		<Unit filename="../SeriousProton/src/event.cpp" />
