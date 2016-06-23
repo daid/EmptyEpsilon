@@ -739,7 +739,7 @@ function handleJumpCarrier(jc, source_x, source_y, dest_x, dest_y, jumping_messa
     elseif jumping_state == 'wait_for_jump' then
         if distance(jc, dest_x, dest_y) < 10000 then
             --We check for the player 1 tick later, as it can take a game tick for the player position to update as well.
-            jumping_state == 'check_for_player'
+            jumping_state = 'check_for_player'
         end
     elseif jumping_state == 'check_for_player' then
         jumping_state = 'wait_for_dock'
