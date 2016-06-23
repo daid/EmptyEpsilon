@@ -36,10 +36,11 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     left_panel = new GuiElement(this, "LEFT_PANEL");
     left_panel->setPosition(0, 0, ATopLeft)->setSize(1000, GuiElement::GuiSizeMax);
 
+#ifndef __APPLE__
     // Render the radar shadow and background decorations.
     background_gradient = new GuiOverlay(left_panel, "BACKGROUND_GRADIENT", sf::Color::White);
     background_gradient->setTextureCenter("gui/BackgroundGradientSingle");
-
+#endif
     background_crosses = new GuiOverlay(left_panel, "BACKGROUND_CROSSES", sf::Color::White);
     background_crosses->setTextureTiled("gui/BackgroundCrosses");
 

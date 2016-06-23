@@ -24,10 +24,11 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
 {
     targets.setAllowWaypointSelection();
 
+#ifndef __APPLE__
     // Render the radar shadow and background decorations.
     background_gradient = new GuiOverlay(this, "BACKGROUND_GRADIENT", sf::Color::White);
     background_gradient->setTextureCenter("gui/BackgroundGradientOffset");
-
+#endif
     background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", sf::Color::White);
     background_crosses->setTextureTiled("gui/BackgroundCrosses");
 
