@@ -16,6 +16,7 @@ enum EAIOrder
     AI_FlyTowardsBlind, //Fly towards [order_target_location], not attacking anything
     AI_Dock,            //Dock with target
     AI_Attack,          //Attack [order_target] very specificly.
+    AI_Repair,          //Order to rearm and repair to the nearest friendly station.
 };
 
 
@@ -26,6 +27,7 @@ class CpuShip : public SpaceShip
     static constexpr float missile_resupply_time = 10.0f;
 
     EAIOrder orders;                    //Server only
+    EAIOrder previous_orders;           //Server only
     sf::Vector2f order_target_location; //Server only
     P<SpaceObject> order_target;        //Server only
     ShipAI* ai;
@@ -50,6 +52,8 @@ public:
     void orderFlyTowardsBlind(sf::Vector2f target);
     void orderAttack(P<SpaceObject> object);
     void orderDock(P<SpaceObject> object);
+    void orderRepair();
+    void orderResume();
 
     EAIOrder getOrder() { return orders; }
     sf::Vector2f getOrderTargetLocation() { return order_target_location; }

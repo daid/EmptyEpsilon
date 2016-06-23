@@ -3,6 +3,7 @@
 
 #include <SFML/System.hpp>
 #include "pathPlanner.h"
+#include "spaceObjects/spaceStation.h"
 
 ///Forward declaration
 class CpuShip;
@@ -31,7 +32,7 @@ protected:
     };
     EWeaponDirection weapon_direction;
     EMissileWeapons best_missile_type;
-    
+
     float update_target_delay;
 
     PathPlanner pathPlanner;
@@ -77,6 +78,8 @@ protected:
      * Used for missiles, as they require some intelligence to fire.
      */
     float calculateFiringSolution(P<SpaceObject> target, int tube_index);
+
+    P<SpaceStation> searchFriendlyStation(float range);
 
     /// Because the GameMasterUI needs to be touching privates. Hmm.
     friend class GameMasterUI;
