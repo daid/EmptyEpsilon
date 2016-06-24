@@ -353,7 +353,7 @@ void ShipAI::runOrders()
             if (owner->hasJumpDrive() || owner->hasWarpDrive())
                 supply_station = searchFriendlyStation(100000.0);
             else
-                supply_station = searchFriendlyStation(15000.0)
+                supply_station = searchFriendlyStation(15000.0);
 
             if (supply_station)
             {
@@ -438,14 +438,14 @@ void ShipAI::runOrders()
             else
                 supply_station = searchFriendlyStation(15000.0);
 
-            if (friendly_station)
+            if (supply_station)
             {
-                float dist = sf::length(owner->getPosition() - friendly_station->getPosition());
-                if (dist < 950 + friendly_station->getRadius())
+                float dist = sf::length(owner->getPosition() - supply_station->getPosition());
+                if (dist < 950 + supply_station->getRadius())
                 {
-                    owner->requestDock(friendly_station);
+                    owner->requestDock(supply_station);
                 }else{
-                    flyTowards(friendly_station->getPosition());
+                    flyTowards(supply_station->getPosition());
                 }
             }
             else
