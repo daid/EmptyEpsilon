@@ -428,45 +428,44 @@ void ShipAI::runOrders()
         }
         break;
 
-        case AI_Repair:            //Repair at the nearest station
-        if (owner->docking_state == DS_NotDocking)
+    case AI_Repair:            //Repair at the nearest station
+        P<SpaceStation> supply_station;
+        bool missiles_full = 1;
+        for(int n=0; n<MW_Count; n++)
         {
-            P<SpaceStation> supply_station;
-
-            if (owner->hasJumpDrive() || owner->hasWarpDrive())
-                supply_station = searchFriendlyStation(100000.0);
-            else
-                supply_station = searchFriendlyStation(15000.0);
-
-            if (supply_station)
+            if  (owner->weapon_storage[n] != owner->weapon_storage_max[n])
             {
-                float dist = sf::length(owner->getPosition() - supply_station->getPosition());
-                if (dist < 950 + supply_station->getRadius())
-                {
-                    owner->requestDock(supply_station);
-                }else{
-                    flyTowards(supply_station->getPosition());
-                }
-            }
-            else
-            {
-                owner->orderResume();  //No friendly station in range to dock, revert orders.
+                missiles_full = 0;
             }
         }
-        else if (owner->docking_state == DS_Docked)
-        {
-            bool missiles_full = 1;
-            for(int n=0; n<MW_Count; n++)
-            {
-                if  (owner->weapon_storage[n] != owner->weapon_storage_max[n])
-                {
-                    missiles_full = 0;
-                }
-            }
 
-            if (missiles_full && owner->getHull() == owner->getHullMax())
+        if (missiles_full && owner->getHull() == owner->getHullMax())
+        {
+            owner->orderResume();
+        }
+        else
+        {
+            if (owner->docking_state == DS_NotDocking)
             {
-                owner->orderResume();
+                if (owner->hasJumpDrive() || owner->hasWarpDrive())
+                    supply_station = searchFriendlyStation(100000.0);
+                else
+                    supply_station = searchFriendlyStation(15000.0);
+
+                if (supply_station)
+                {
+                    float dist = sf::length(owner->getPosition() - supply_station->getPosition());
+                    if (dist < 950 + supply_station->getRadius())
+                    {
+                        owner->requestDock(supply_station);
+                    }else{
+                        flyTowards(supply_station->getPosition());
+                    }
+                }
+                else
+                {
+                    owner->orderResume();  //No friendly station in range to dock, revert orders.
+                }
             }
         }
         break;
