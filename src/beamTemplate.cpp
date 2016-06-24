@@ -1,10 +1,11 @@
-#include <iostream>
 #include "beamTemplate.h"
 
 BeamTemplate::BeamTemplate()
 {
+    arc = 0;
     direction = 0;
     range = 0;
+    turret_arc = 0;
     turret_direction = 0;
     turret_rotation_rate = 0;
     cycle_time = 0;
