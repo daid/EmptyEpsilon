@@ -348,8 +348,12 @@ void ShipAI::runOrders()
                 flyTowards(owner->getOrderTargetLocation());
             }
         }else{
+            P<SpaceStation> supply_station;
 
-            P<SpaceStation> supply_station = searchFriendlyStation(15000.0);
+            if (owner->hasJumpDrive() || owner->hasWarpDrive())
+                supply_station = searchFriendlyStation(100000.0);
+            else
+                supply_station = searchFriendlyStation(15000.0)
 
             if (supply_station)
             {
@@ -427,7 +431,12 @@ void ShipAI::runOrders()
         case AI_Repair:            //Repair at the nearest station
         if (owner->docking_state == DS_NotDocking)
         {
-            P<SpaceStation> friendly_station = searchFriendlyStation(15000.0);
+            P<SpaceStation> supply_station;
+
+            if (owner->hasJumpDrive() || owner->hasWarpDrive())
+                supply_station = searchFriendlyStation(100000.0);
+            else
+                supply_station = searchFriendlyStation(15000.0);
 
             if (friendly_station)
             {
