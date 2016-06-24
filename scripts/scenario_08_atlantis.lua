@@ -327,7 +327,7 @@ end
 --[[*********************************************************************--]]
 
 function phase2WaitForJump(delta)
-    if handleJumpCarrier(jc, 24000, 125000, 310000, -71000, [[Hold on tight, heading for sector B20.]]) then
+    if handleJumpCarrier(jc88, 24000, 125000, 310000, -71000, [[Hold on tight, heading for sector B20.]]) then
         --Good, continue.
         jc88:sendCommsMessage(player, [[Atlantis-1,
 Here we are. B20. Looks like there are some lingering Kraylors here.
@@ -410,7 +410,7 @@ Try to get to sector ZU5. We are sending JC88 to get you out of there.]])
 end
 
 function phase3EscapeTheKraylorDefenseLine(delta)
-    if handleJumpCarrier(jc, 10000, -210000, 24000, 125000, [[Hold on tight, heading for Shipyard-Gamma.]]) then
+    if handleJumpCarrier(jc88, 10000, -210000, 24000, 125000, [[Hold on tight, heading for Shipyard-Gamma.]]) then
         --Good, continue.
         jc88:sendCommsMessage(player, [[Welcome home Atlantis-1.
 Best dock with Supply-6 to recharge and restock.
@@ -451,7 +451,7 @@ end
 --[[*********************************************************************--]]
 
 function phase4JumpBackToKraylorLine(delta)
-    if handleJumpCarrier(jc, 24000, 125000, 10000, -210000, [[Hold on tight, heading for Kraylor defense line.]]) then
+    if handleJumpCarrier(jc88, 24000, 125000, 10000, -210000, [[Hold on tight, heading for Kraylor defense line.]]) then
         --Good, continue.
         jc88:sendCommsMessage(player, [[We are here. Find the right moment to take out that transport, and grab the cargo and dock with me.
 Expect heavy retaliation as soon as you attack the transport.]])
@@ -481,7 +481,7 @@ function phase4DestroyTheTransport(delta)
 end
 
 function phase4JumpBackToShipyard(delta)
-    if handleJumpCarrier(jc, 10000, -210000, 24000, 125000, [[Hold on tight, heading for Shipyard-Gamma.]]) then
+    if handleJumpCarrier(jc88, 10000, -210000, 24000, 125000, [[Hold on tight, heading for Shipyard-Gamma.]]) then
         --Good, continue.
         shipyard_gamma:sendCommsMessage(player, [[Atlantis-1,
 Perfect recovery. Seems like the transport was moving highly encrypted documents.
