@@ -77,12 +77,6 @@ function friendlyComms(comms_data)
 			end)
 		end
 	end
-	
-	addCommsReply("Repair at the nearest station.", function()
-		setCommsMessage("Roger, we'll try to find a station in range.");
-		comms_target:orderRepair()
-		addCommsReply("Back", mainMenu)
-	end)
 	return true
 end
 
