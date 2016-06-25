@@ -6,14 +6,12 @@
 -- Variation[Hard]: Places more enemies. Recommended if you have multiple player-controlled ships.
 -- Variation[Extreme]: Places many enemies. You're pretty surely overwhelmed.
 
-function vectorFromAngle(angle, length)
-	return math.cos(angle / 180 * math.pi) * length, math.sin(angle / 180 * math.pi) * length
-end
-
-function setCirclePos(obj, x, y, angle, distance)
-	dx, dy = vectorFromAngle(angle, distance)
-	return obj:setPosition(x + dx, y + dy)
-end
+require("utils.lua")
+-- For this scenario, utils.lua provides:
+--   vectorFromAngle(angle, length)
+--      Returns a relative vector (x, y coordinates)
+--   setCirclePos(obj, x, y, angle, distance)
+--      Returns the object with its position set to the resulting coordinates.
 
 -- Add an enemy wave.
 -- enemyList: A table containing enemy ship objects.
