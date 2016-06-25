@@ -1,5 +1,10 @@
 # Change Log
 
+## [2016-06-24]
+### Fixed
+- _Birth of Atlantis_ scenario
+- initialize beam and turret arc values
+
 ## [2016-06-23]
 ### Added
 - _Birth of Atlantis_ scenario, less combat and more feature focused
@@ -371,6 +376,7 @@
 - create button visible through the cancel button on game master screen
 - clicking outside the radar circle but inside its reactangle caused callbacks
 
+[2016-06-24]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.23...EE-2016.06.24
 [2016-06-23]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.02...EE-2016.06.23
 [2016-06-02]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.05.22...EE-2016.06.02
 [2016-05-22]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.05.07...EE-2016.05.22
