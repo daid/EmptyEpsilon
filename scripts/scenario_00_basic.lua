@@ -138,7 +138,7 @@ function init()
 		d = random(15000, 20000 + math.random(20) * 1500)
 		friendlyShip = {'Phobos T3','MU52 Hornet','Piranha F12'}
 		friendlyShipIndex = math.random(#friendlyShip)
-		table.insert(friendlyList, setCirclePos(CpuShip():setTemplate(friendlyShip[friendlyShipIndex]):setRotation(a):setFaction("Human Navy"):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+		table.insert(friendlyList, setCirclePos(CpuShip():setTemplate(friendlyShip[friendlyShipIndex]):setRotation(a):setFaction("Human Navy"):orderRoaming():setScanned(true), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 	end)
 
 	-- Let the GM declare the Humans (players) victorious.
@@ -175,13 +175,17 @@ function init()
 	for cnt=1,random(2, 5) do
 		a = random(0, 360)
 		a2 = random(0, 360)
+		adiff = math.abs(a2 - a)
 		d = random(3000, 40000)
 		x, y = vectorFromAngle(a, d)
 
 		for acnt=1,50 do
 			dx1, dy1 = vectorFromAngle(a2, random(-1000, 1000))
 			dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
-			Asteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2):setSize(random(100, 500))
+			-- Avoid spawning asteroids within 1U of the player start position.
+			if math.abs(x + dx1 + dx2) > 1000 and math.abs(y + dy1 + dy2) > 1000 then
+				Asteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2):setSize(random(100, 500))
+			end
 		end
 
 		for acnt=1,100 do
