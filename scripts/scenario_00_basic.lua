@@ -70,16 +70,26 @@ function setWaveDistance(enemy_group_count)
 end
 
 function init()
+	-- Spawn a player Atlantis.
+	player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
+
 	enemyList = {}
 	friendlyList = {}
+	stationList = {}
 
 	-- Randomly distribute 3 allied stations throughout the region.
 	n = 0
-	table.insert(friendlyList, setCirclePos(SpaceStation():setTemplate('Small Station'):setRotation(random(0, 360)):setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
+	station_1 = SpaceStation():setTemplate('Small Station'):setRotation(random(0, 360)):setFaction("Human Navy")
+	table.insert(stationList, station_1)
+	table.insert(friendlyList, setCirclePos(station_1, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
 	n = 1
-	table.insert(friendlyList, setCirclePos(SpaceStation():setTemplate('Medium Station'):setRotation(random(0, 360)):setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
+	table.insert(stationList, station_2)
+	station_2 = SpaceStation():setTemplate('Medium Station'):setRotation(random(0, 360)):setFaction("Human Navy")
+	table.insert(friendlyList, setCirclePos(station_2, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
 	n = 2
-	table.insert(friendlyList, setCirclePos(SpaceStation():setTemplate('Large Station'):setRotation(random(0, 360)):setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
+	table.insert(stationList, station_3)
+	station_3 = SpaceStation():setTemplate('Large Station'):setRotation(random(0, 360)):setFaction("Human Navy")
+	table.insert(friendlyList, setCirclePos(station_3, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
 
 	-- Start the players with 300 reputation.
 	friendlyList[1]:addReputationPoints(300.0)
@@ -180,9 +190,16 @@ function init()
 		for acnt=1,50 do
 			dx1, dy1 = vectorFromAngle(a2, random(-1000, 1000))
 			dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
-			-- Avoid spawning asteroids within 1U of the player start position.
-			if math.abs(x + dx1 + dx2) > 1000 and math.abs(y + dy1 + dy2) > 1000 then
-				Asteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2):setSize(random(100, 500))
+			posx = x + dx1 + dx2
+			posy = x + dy1 + dy2
+			-- Avoid spawning asteroids within 1U of the player start position or
+			-- 2U of any station.
+			if math.abs(posx) > 1000 and math.abs(posy) > 1000 then
+				for i,station in ipairs(stationList) do
+					if distance(station, posx, posy) > 2000 then
+						Asteroid():setPosition(posx, posy):setSize(random(100, 500))
+					end
+				end
 			end
 		end
 
@@ -215,6 +232,18 @@ function init()
 	a = random(0, 360)
 	d = random(10000, 45000)
 	x, y = vectorFromAngle(a, d)
+	-- Watching a station fall into a black hole to start the game never gets old,
+	-- but players hate it. Avoid spawning black holes too close to stations.
+	spawn_hole = false
+	while not spawn_hole do
+		for i,station in ipairs(stationList) do
+			if distance(station, x, y) > 3000 then
+				spawn_hole = true
+			else
+				spawn_hole = false
+			end
+		end
+	end
 	BlackHole():setPosition(x, y)
 
 	-- Spawn random neutral transports.
