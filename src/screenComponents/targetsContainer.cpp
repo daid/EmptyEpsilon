@@ -37,6 +37,7 @@ void TargetsContainer::set(P<SpaceObject> obj)
     {
         clear();
     }
+    waypoint_selection_index = -1;
 }
 
 void TargetsContainer::set(PVector<SpaceObject> objs)

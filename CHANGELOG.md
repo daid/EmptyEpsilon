@@ -1,17 +1,112 @@
 # Change Log
 
-## [Unreleased]
+## [2016-06-24]
+### Fixed
+- _Birth of Atlantis_ scenario
+- initialize beam and turret arc values
+
+## [2016-06-23]
 ### Added
+- _Birth of Atlantis_ scenario, less combat and more feature focused
+- configurable turrets (arc, direction and rotation rate)
+- beam turrets
+- self-destruction sound
+- show the player radar range on the game master screen
+- game master button to copy the selected object to the clipboard
+- function to create a grid of objects
+- flag to allow selective repairs on docked ships
+- flag to allow sharing energy with docked ships
+- a jump carrier
+- scenario type identifiers
+- quick basic scenario (for quick setup and with a time limit)
+- colors for log entries
+- on-screen keyboard for text communications
+- option for the game master to intercept all communication requests
+- named background overlays
+- target lock view for main screen
+- show the probe radius
+- overlays can be displayed on the main screen
+- communications display for the main screen
+- zoom slider for the log viewer
+- more faction colors in the log viewer
+- file picker input
+- ships log control which replaces the log screen
+- max jump drive distance per ship configuration
+- log station factions to game state log
+- option for player ships to have automatic collant distribution
+- scripts can move player crew positions and check if a station is taken
+- show the effect of boosting power into subsystems
+- flashing overheating warning icon in engineering
+- hull information on the science screen
+- search list for linux serial devices
+- player ship selection on the game master screen
+- cinematic view
+- target-of-target toggle and controls
 - combat manuever controls for the tactical screen
 
 ### Changed
+- tweaked the game master sliders
+- shield sounds
+- AI ships recharge missiles when docked at a station
+- edge of warp jammers are more obvious
+- how sectors are named for far away sectors
+- work around possible issues in the tutorial
+- AI jump drive behavior for non-standard jump drive distances
+- scenario descriptions can be multi line
+- moved the scenario loading code out of the scenario selection screeen
+- aim lock button placement
+- all ships repair hull when docked
+- hide the radar graident in the database view
+- reduce width of missile tube controls
+- smaller alert overlay without the bars on the top and bottom
+- tweak non-ship object rendering in log viewer
+- moved _setCallSign_ to _spaceObject_
+- draw non-ship objects as circles
+- moved callsigns to _spaceObject_
+- sector designations on the log viewer grid
+- use square/circle drawing functions in the log viewer
+- separated the on-screen layers from the overlays
+- allow communications overlay to be manually cleared
+- show which stations are occupied and by how many
+- show the ship faction
+- changed the ship angle selection to a slider
+- moved square and circle drawing into functions
+- reset coordinates when loading a log if they are not a number
+- database view margins
+- change zoom control to a slider on the relay screen
+- auto connect selects on filters rather than index
+- adjusted the science screen to avoid overlay
+- ship database lookup button position
+- only show combat recharge if the ship has combat maneuvers available
+- moved shield buttons from system info on Eng+
+- move game state logging from server creation to start of scenario
+- expand and restyle the API sandbox
+- move game state logging to _gameGlobalInfo_
+- boost player hulls
+- improve engineering bar colors
+- slightly increased repair speeds
+- two option selectors to toggle button on the server creation screen
+- show radar range in U instead of raw values
+- reworded some headings and descriptions on the server creation screen
+- scale objects with zoom
+- cap mouse wheel changes to avoid breaking the zoom
 - move ops communication buttons to avoid overlapping the radar
 - synchronize the science zoom slider behavior with the mouse wheel zoom
 
 ### Fixed
+- performance issue with the game state logger
+- sector name rendering at edge of radar
+- communications buttons
+- missile tube state change
+- return to the auto connect screen instead of ship selection when auto connect is used
+- autoplay
 - hardware blick effect, could not set on\_value
 - prevent ops communication buttons from appearing in the database view
 
+### Removed
+- debug messages
+- swear words from communication scripts
+- alert text
 
 ## [2016-06-02]
 ### Added
@@ -281,7 +376,8 @@
 - create button visible through the cancel button on game master screen
 - clicking outside the radar circle but inside its reactangle caused callbacks
 
-[Unreleased]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.02...HEAD
+[2016-06-24]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.23...EE-2016.06.24
+[2016-06-23]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.02...EE-2016.06.23
 [2016-06-02]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.05.22...EE-2016.06.02
 [2016-05-22]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.05.07...EE-2016.05.22
 [2016-05-07]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.04.30...EE-2016.05.07
