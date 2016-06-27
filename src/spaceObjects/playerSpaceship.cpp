@@ -347,9 +347,6 @@ void PlayerSpaceship::update(float delta)
                 comms_state = CS_ChannelBroken;
         }
 
-        if (shields_active)
-            useEnergy(delta * energy_shield_use_per_second);
-
         energy_level += delta * getNetPowerUsage() * 0.08;
         for(int n=0; n<SYS_COUNT; n++)
         {
@@ -601,6 +598,9 @@ float PlayerSpaceship::getNetPowerUsage()
             net_power -= system_power_user_factor[n] * systems[n].power_level;
         }
     }
+    if (shields_active)
+        net_power -= energy_shield_use_per_second;
+
     return net_power;
 }
 
