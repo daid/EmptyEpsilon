@@ -588,6 +588,8 @@ void SpaceShip::update(float delta)
     {
         combat_maneuver_charge -= combat_maneuver_boost_active * delta / combat_maneuver_boost_max_time;
         combat_maneuver_charge -= fabs(combat_maneuver_strafe_active) * delta / combat_maneuver_strafe_max_time;
+
+        // Use boost only if we have boost available.
         if (combat_maneuver_charge <= 0.0)
         {
             combat_maneuver_charge = 0.0;
@@ -953,10 +955,21 @@ bool SpaceShip::hasSystem(ESystem system)
 float SpaceShip::getSystemEffectiveness(ESystem system)
 {
     float power = systems[system].power_level;
-    if (energy_level < 10.0)
-        power = std::max(0.1f, power);
+
+    // Degrade all systems except the reactor once energy level drops below 10.
+    if (system != SYS_Reactor)
+    {
+        if (energy_level < 10.0 && energy_level > 0.0 && power > 0.0)
+            power = std::min((10.0f * energy_level) / power, power);
+        else if (energy_level <= 0.0 || power <= 0.0)
+            power = 0.0f;
+    }
+
+    // Degrade damaged systems.
     if (gameGlobalInfo && gameGlobalInfo->use_system_damage)
         return std::max(0.0f, power * systems[system].health);
+
+    // If a system is undamaged, excessive heat degrades it.
     return std::max(0.0f, power * (1.0f - systems[system].heat_level));
 }
 
