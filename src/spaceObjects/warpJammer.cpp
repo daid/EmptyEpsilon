@@ -21,6 +21,7 @@ WarpJammer::WarpJammer()
     hull = 50;
 
     jammer_list.push_back(this);
+    setRadarSignatureInfo(0.05, 0.5, 0.0);
 
     registerMemberReplication(&range);
     

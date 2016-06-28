@@ -6,7 +6,7 @@
 
 #include "scriptInterface.h"
 
-/// Nebulas block long range sensors in a 5km range.
+// Nebulae block long-range radar in a 5U range.
 REGISTER_SCRIPT_SUBCLASS(Nebula, SpaceObject)
 {
 }
@@ -17,9 +17,12 @@ REGISTER_MULTIPLAYER_CLASS(Nebula, "Nebula")
 Nebula::Nebula()
 : SpaceObject(5000, "Nebula")
 {
-    setCollisionRadius(1);  //Nebula need a big radius to render properly from a distance. But they do not really need collision. So set the collision radius to a tiny range.
+    // Nebulae need a large radius to render properly from a distance, but
+    // collision isn't important, so set the collision radius to a tiny range.
+    setCollisionRadius(1);
     setRotation(random(0, 360));
     radar_visual = irandom(1, 3);
+    setRadarSignatureInfo(0.0, 0.8, -1.0);
     
     registerMemberReplication(&radar_visual);
     

@@ -54,6 +54,11 @@ public:
         return *this;
     }
 
+    bool operator!=(const RawRadarSignatureInfo& o)
+    {
+        return gravity != o.gravity || electrical != o.electrical || biological != o.biological;
+    }
+
     RawRadarSignatureInfo operator*(const float f) const
     {
         return RawRadarSignatureInfo(gravity * f, electrical * f, biological * f);
@@ -77,6 +82,7 @@ class SpaceObject : public Collisionable, public MultiplayerObject
     float object_radius;
     uint8_t faction_id;
     string object_description;
+    RawRadarSignatureInfo radar_signature;
 
     /*!
      * Scan state per faction. Implementation wise, this vector is resized when
@@ -99,14 +105,18 @@ public:
     float getRadius() { return object_radius; }
     void setRadius(float radius) { object_radius = radius; setCollisionRadius(radius); }
 
+    // Return the object's raw radar signature. The default signature is 0,0,0.
+    virtual RawRadarSignatureInfo getRadarSignatureInfo() { return radar_signature; }
+    void setRadarSignatureInfo(float grav, float elec, float bio) { radar_signature = RawRadarSignatureInfo(grav, elec, bio); }
+    float getRadarSignatureGravity() { return radar_signature.gravity; }
+    float getRadarSignatureElectrical() { return radar_signature.electrical; }
+    float getRadarSignatureBiological() { return radar_signature.biological; }
+
     string getDescription() { return object_description; }
     void setDescription(string description) { object_description = description; }
 
     float getHeading() { float ret = getRotation() - 270; while(ret < 0) ret += 360.0f; while(ret > 360.0f) ret -= 360.0f; return ret; }
     void setHeading(float heading) { setRotation(heading - 90); }
-
-    // Return the object's raw radar signature. The default signature is none.
-    virtual RawRadarSignatureInfo getRadarSignatureInfo() { return RawRadarSignatureInfo(0, 0, 0); }
 
 #if FEATURE_3D_RENDERING
     virtual void draw3D();
@@ -169,8 +179,5 @@ protected:
 
 // Define a script conversion function for the DamageInfo structure.
 template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& di);
-
-// Define a script conversion function for the RawRadarSignatureInfo structure.
-template<> void convert<RawRadarSignatureInfo>::param(lua_State* L, int& idx, RawRadarSignatureInfo& rrsi);
 
 #endif//SPACE_OBJECT_H

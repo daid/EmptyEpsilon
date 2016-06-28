@@ -12,7 +12,8 @@
 #define AVOIDANCE_MULTIPLIER      1.2
 #define TARGET_SPREAD             500
 
-/// A Wormhole object. Drags you in like a black hole and teleports when you're at the center.
+// A wormhole object that drags objects toward it like a black hole, and then
+// teleports them to another point when they reach its center.
 REGISTER_SCRIPT_SUBCLASS(WormHole, SpaceObject)
 {
     /// Set the target of this wormhole
@@ -26,7 +27,9 @@ WormHole::WormHole()
     pathPlanner = PathPlannerManager::getInstance();
     pathPlanner->addAvoidObject(this, (DEFAULT_COLLISION_RADIUS * AVOIDANCE_MULTIPLIER) );
     
-    // Which texture to show on radar
+    setRadarSignatureInfo(0.9, 0.0, 0.0);
+
+    // Choose a texture to show on radar
     radar_visual = irandom(1, 3);
     registerMemberReplication(&radar_visual);
     
@@ -86,7 +89,7 @@ void WormHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, floa
     window.draw(object_sprite, sf::RenderStates(sf::BlendAdd));
 }
 
-/* Draw a line towards the target position */
+// Draw a line toward the target position
 void WormHole::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {    
     sf::VertexArray a(sf::Lines, 2);
@@ -132,11 +135,11 @@ void WormHole::collide(Collisionable* target, float collision_force)
                 obj->wormhole_alpha = 0.0;
     }
     
-    // warp postprocessor-alpha is calculated using alpha = (1 - (delay/10))
+    // Warp postprocessor-alpha is calculated using alpha = (1 - (delay/10))
     if (obj)
         obj->wormhole_alpha = ((distance / getRadius()) * ALPHA_MULTIPLIER);
     
-    //TODO Change setPosition to something Newtonianish. Now escaping is impossible
+    // TODO: Escaping is impossible. Change setPosition to something Newtonianish.
     target->setPosition(target->getPosition() + diff / distance * update_delta * force);
 }
 
