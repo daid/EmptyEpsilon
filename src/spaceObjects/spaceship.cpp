@@ -555,7 +555,11 @@ void SpaceShip::update(float delta)
                 current_impulse = impulse_request;
         }
     }
+
+    // Add heat based on warp factor.
     addHeat(SYS_Warp, current_warp * delta * heat_per_warp);
+
+    // Determine forward direction and velocity.
     sf::Vector2f forward = sf::vector2FromAngle(getRotation());
     setVelocity(forward * (current_impulse * impulse_max_speed * getSystemEffectiveness(SYS_Impulse) + current_warp * warp_speed_per_warp_level * getSystemEffectiveness(SYS_Warp)));
 
@@ -584,8 +588,10 @@ void SpaceShip::update(float delta)
             combat_maneuver_strafe_active = combat_maneuver_strafe_request;
     }
 
+    // If the ship is making a combat maneuver ...
     if (combat_maneuver_boost_active != 0.0 || combat_maneuver_strafe_active != 0.0)
     {
+        // ... consume its combat maneuver boost.
         combat_maneuver_charge -= combat_maneuver_boost_active * delta / combat_maneuver_boost_max_time;
         combat_maneuver_charge -= fabs(combat_maneuver_strafe_active) * delta / combat_maneuver_strafe_max_time;
 
@@ -595,16 +601,20 @@ void SpaceShip::update(float delta)
             combat_maneuver_charge = 0.0;
             combat_maneuver_boost_request = 0.0;
             combat_maneuver_strafe_request = 0.0;
-        }else{
+        }else
+        {
             setVelocity(getVelocity() + forward * combat_maneuver_boost_speed * combat_maneuver_boost_active);
             setVelocity(getVelocity() + sf::vector2FromAngle(getRotation() + 90) * combat_maneuver_strafe_speed * combat_maneuver_strafe_active);
         }
+    // If the ship isn't making a combat maneuver, recharge its boost.
     }else if (combat_maneuver_charge < 1.0)
     {
         combat_maneuver_charge += (delta / combat_maneuver_charge_time) * (getSystemEffectiveness(SYS_Maneuver) + getSystemEffectiveness(SYS_Impulse)) / 2.0;
         if (combat_maneuver_charge > 1.0)
             combat_maneuver_charge = 1.0;
     }
+
+    // Add heat to systems consuming combat maneuver boost.
     addHeat(SYS_Impulse, combat_maneuver_boost_active * delta * heat_per_combat_maneuver_boost);
     addHeat(SYS_Maneuver, fabs(combat_maneuver_strafe_active) * delta * heat_per_combat_maneuver_strafe);
 
