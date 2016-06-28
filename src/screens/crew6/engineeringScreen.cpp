@@ -156,7 +156,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
             }
         }
 
-        energy_display->setValue(string(int(my_spaceship->energy_level)) + " (" + string(int(average_energy_delta)) + "/s)");
+        energy_display->setValue(string(int(my_spaceship->energy_level)) + " (" + string(average_energy_delta) + "/s)");
         if (my_spaceship->energy_level < 100)
             energy_display->setColor(sf::Color::Red);
         else
