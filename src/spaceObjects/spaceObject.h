@@ -32,6 +32,7 @@ public:
     {}
 };
 
+// Radar signature data, used by rawScannerDataOverlay.
 class RawRadarSignatureInfo
 {
 public:
@@ -70,6 +71,7 @@ enum EScannedState
 class SpaceObject;
 class PlayerSpaceship;
 extern PVector<SpaceObject> space_object_list;
+
 class SpaceObject : public Collisionable, public MultiplayerObject
 {
     float object_radius;
@@ -77,10 +79,11 @@ class SpaceObject : public Collisionable, public MultiplayerObject
     string object_description;
 
     /*!
-     * Scan state per faction. Implementation wise, this vector is resized when a scan is done.
-     * Index in the vector is the faction ID.
-     * Which means the vector can be smaller then the number of factions available.
-     * When the vector is smaller then the required faction ID, the scan state is SS_NotScanned
+     * Scan state per faction. Implementation wise, this vector is resized when
+     * a scan is done. The vector is indexed by faction ID, which means the
+     * vector can be smaller than the number of available factions.
+     * When the vector is smaller then the required faction ID, the scan state
+     * is SS_NotScanned
      */
     std::vector<EScannedState> scanned_by_faction;
 public:
@@ -102,6 +105,7 @@ public:
     float getHeading() { float ret = getRotation() - 270; while(ret < 0) ret += 360.0f; while(ret > 360.0f) ret -= 360.0f; return ret; }
     void setHeading(float heading) { setRotation(heading - 90); }
 
+    // Return the object's raw radar signature. The default signature is none.
     virtual RawRadarSignatureInfo getRadarSignatureInfo() { return RawRadarSignatureInfo(0, 0, 0); }
 
 #if FEATURE_3D_RENDERING
@@ -163,7 +167,10 @@ protected:
     ModelInfo model_info;
 };
 
-/* Define script conversion function for the DamageInfo structure. */
+// Define a script conversion function for the DamageInfo structure.
 template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& di);
+
+// Define a script conversion function for the RawRadarSignatureInfo structure.
+template<> void convert<RawRadarSignatureInfo>::param(lua_State* L, int& idx, RawRadarSignatureInfo& rrsi);
 
 #endif//SPACE_OBJECT_H
