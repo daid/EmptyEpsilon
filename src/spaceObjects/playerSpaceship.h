@@ -44,6 +44,8 @@ public:
     constexpr static int max_scan_probes = 8;
     constexpr static float scan_probe_charge_time = 10.0f;
     constexpr static float max_scanning_delay = 6.0;
+    
+    static float system_power_user_factor[];
 
     class ShipLogEntry
     {
@@ -179,7 +181,7 @@ public:
     virtual bool useEnergy(float amount) override;
     virtual void addHeat(ESystem system, float amount) override;
 
-    float getNetPowerUsage();
+    float getNetSystemEnergyUsage();
 
     void addToShipLog(string message, sf::Color color);
     void addToShipLogBy(string message, P<SpaceObject> target);
