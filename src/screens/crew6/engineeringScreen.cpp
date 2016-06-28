@@ -156,7 +156,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
             }
         }
 
-        energy_display->setValue(string(int(my_spaceship->energy_level)) + " (" + string(int(average_energy_delta * 60.0f)) + ")");
+        energy_display->setValue(string(int(my_spaceship->energy_level)) + " (" + string(int(average_energy_delta)) + "/s)");
         if (my_spaceship->energy_level < 100)
             energy_display->setColor(sf::Color::Red);
         else
@@ -212,7 +212,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
             case SYS_Reactor:
                 if (effectiveness > 1.0f)
                     effectiveness = (1.0f + effectiveness) / 2.0f;
-                addSystemEffect("Energy production", string(effectiveness * -PlayerSpaceship::system_power_user_factor[SYS_Reactor] * 60.0, 1) + "/s");
+                addSystemEffect("Energy production", string(effectiveness * -PlayerSpaceship::system_power_user_factor[SYS_Reactor], 1) + "/s");
                 break;
             case SYS_BeamWeapons:
                 addSystemEffect("Firing rate", string(int(effectiveness * 100)) + "%");
