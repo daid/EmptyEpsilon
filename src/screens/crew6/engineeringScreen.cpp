@@ -134,7 +134,8 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
 {
     if (my_spaceship)
     {
-        energy_display->setValue(string(int(my_spaceship->energy_level)) + " (" + string(my_spaceship->getNetPowerUsage()) + ")");
+        // getNetPowerUsage returns energy use per 1/12.5 (0.08) of a second.
+        energy_display->setValue(string(int(my_spaceship->energy_level)) + " (" + string(my_spaceship->getNetPowerUsage() * 0.08f) + "/s)");
         if (my_spaceship->energy_level < 100)
             energy_display->setColor(sf::Color::Red);
         else
