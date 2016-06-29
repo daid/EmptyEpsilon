@@ -46,6 +46,10 @@ private:
     std::vector<GuiKeyValueDisplay*> system_effects;
     unsigned int system_effects_index;
     ESystem selected_system;
+
+    float previous_energy_measurement;
+    float previous_energy_level;
+    float average_energy_delta;
     
     void addSystemEffect(string key, string value);
 public:

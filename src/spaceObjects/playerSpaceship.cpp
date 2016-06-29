@@ -79,16 +79,16 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setAutoCoolant);
 }
 
-static float system_power_user_factor[] = {
-    /*SYS_Reactor*/ -25.0,
-    /*SYS_BeamWeapons*/ 3.0,
-    /*SYS_MissileSystem*/ 1.0,
-    /*SYS_Maneuver*/ 2.0,
-    /*SYS_Impulse*/ 4.0,
-    /*SYS_Warp*/ 5.0,
-    /*SYS_JumpDrive*/ 5.0,
-    /*SYS_FrontShield*/ 5.0,
-    /*SYS_RearShield*/ 5.0,
+float PlayerSpaceship::system_power_user_factor[] = {
+    /*SYS_Reactor*/     -25.0 * 0.08,
+    /*SYS_BeamWeapons*/   3.0 * 0.08,
+    /*SYS_MissileSystem*/ 1.0 * 0.08,
+    /*SYS_Maneuver*/      2.0 * 0.08,
+    /*SYS_Impulse*/       4.0 * 0.08,
+    /*SYS_Warp*/          5.0 * 0.08,
+    /*SYS_JumpDrive*/     5.0 * 0.08,
+    /*SYS_FrontShield*/   5.0 * 0.08,
+    /*SYS_RearShield*/    5.0 * 0.08,
 };
 
 static const int16_t CMD_TARGET_ROTATION = 0x0001;
@@ -350,7 +350,7 @@ void PlayerSpaceship::update(float delta)
         if (shields_active)
             useEnergy(delta * energy_shield_use_per_second);
 
-        energy_level += delta * getNetPowerUsage() * 0.08;
+        energy_level += delta * getNetSystemEnergyUsage();
         for(int n=0; n<SYS_COUNT; n++)
         {
             if (!hasSystem(ESystem(n))) continue;
@@ -583,7 +583,7 @@ void PlayerSpaceship::addHeat(ESystem system, float amount)
         systems[system].heat_level = 0.0;
 }
 
-float PlayerSpaceship::getNetPowerUsage()
+float PlayerSpaceship::getNetSystemEnergyUsage()
 {
     float net_power = 0.0;
     for(int n=0; n<SYS_COUNT; n++)

@@ -128,13 +128,35 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
     coolant_slider->disable();
 
     (new GuiShipInternalView(system_row_layouts, "SHIP_INTERNAL_VIEW", 48.0f))->setShip(my_spaceship)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    previous_energy_level = 0.0;
+    average_energy_delta = 0.0;
+    previous_energy_measurement = 0.0;
 }
 
 void EngineeringScreen::onDraw(sf::RenderTarget& window)
 {
     if (my_spaceship)
     {
-        energy_display->setValue(string(int(my_spaceship->energy_level)) + " (" + string(my_spaceship->getNetPowerUsage()) + ")");
+        //Update the energy usage.
+        if (previous_energy_measurement == 0.0)
+        {
+            previous_energy_level = my_spaceship->energy_level;
+            previous_energy_measurement = engine->getElapsedTime();
+        }else{
+            if (previous_energy_measurement != engine->getElapsedTime())
+            {
+                float delta_t = engine->getElapsedTime() - previous_energy_measurement;
+                float delta_e = my_spaceship->energy_level - previous_energy_level;
+                float delta_e_per_second = delta_e / delta_t;
+                average_energy_delta = average_energy_delta * 0.99 + delta_e_per_second * 0.01;
+                
+                previous_energy_level = my_spaceship->energy_level;
+                previous_energy_measurement = engine->getElapsedTime();
+            }
+        }
+
+        energy_display->setValue(string(int(my_spaceship->energy_level)) + " (" + string(int(average_energy_delta * 60.0f)) + "/m)");
         if (my_spaceship->energy_level < 100)
             energy_display->setColor(sf::Color::Red);
         else
@@ -190,7 +212,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
             case SYS_Reactor:
                 if (effectiveness > 1.0f)
                     effectiveness = (1.0f + effectiveness) / 2.0f;
-                addSystemEffect("Energy production", string(effectiveness * 25.0, 1));
+                addSystemEffect("Energy production", string(effectiveness * -PlayerSpaceship::system_power_user_factor[SYS_Reactor] * 60.0, 1) + "/m");
                 break;
             case SYS_BeamWeapons:
                 addSystemEffect("Firing rate", string(int(effectiveness * 100)) + "%");
