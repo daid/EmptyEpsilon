@@ -73,6 +73,8 @@ public:
     bool shields_active;
 
 private:
+    // soundManager index of the sf::Sound playing the shields sound.
+    int shield_sound;
     ECommsState comms_state;
     float comms_open_delay;
     string comms_target_name;
