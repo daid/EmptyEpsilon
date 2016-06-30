@@ -53,12 +53,13 @@ public:
         string prefix;
         string text;
         sf::Color color;
+        string station;
 
         ShipLogEntry() {}
-        ShipLogEntry(string prefix, string text, sf::Color color)
-        : prefix(prefix), text(text), color(color) {}
+        ShipLogEntry(string prefix, string text, sf::Color color, string station)
+        : prefix(prefix), text(text), color(color), station(station) {}
 
-        bool operator!=(const ShipLogEntry& e) { return prefix != e.prefix || text != e.text || color != e.color; }
+        bool operator!=(const ShipLogEntry& e) { return prefix != e.prefix || text != e.text || color != e.color || station != e.station; }
     };
 
     float hull_damage_indicator;
@@ -71,6 +72,7 @@ public:
     bool auto_repair_enabled;
     bool auto_coolant_enabled;
     bool shields_active;
+    int warp_indicator;
 
 private:
     ECommsState comms_state;
@@ -82,7 +84,8 @@ private:
     std::vector<string> comms_reply_message;
     CommsScriptInterface comms_script_interface;  //Server only
 
-    std::vector<ShipLogEntry> ships_log;
+    std::vector<ShipLogEntry> ships_log_extern;
+    std::vector<ShipLogEntry> ships_log_intern;
 
 public:
     std::vector<sf::Vector2f> waypoints;
@@ -183,9 +186,9 @@ public:
 
     float getNetSystemEnergyUsage();
 
-    void addToShipLog(string message, sf::Color color);
+    void addToShipLog(string message, sf::Color color, string station);
     void addToShipLogBy(string message, P<SpaceObject> target);
-    const std::vector<ShipLogEntry>& getShipsLog() const;
+    const std::vector<ShipLogEntry>& getShipsLog(string station) const;
     
     void transferPlayersToShip(P<PlayerSpaceship> other_ship);
     void transferPlayersAtPositionToShip(ECrewPosition position, P<PlayerSpaceship> other_ship);

@@ -13,6 +13,6 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     science->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(0, 0, 0, 50);
     (new GuiOpenCommsButton(science->radar_view, "OPEN_COMMS_BUTTON", &science->targets))->setPosition(-270, -20, ABottomRight)->setSize(200, 50);
     
-    new ShipsLog(this);
+    new ShipsLog(this,"extern");
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }

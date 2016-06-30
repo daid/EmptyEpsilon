@@ -34,6 +34,7 @@ public:
     GuiKeyValueDisplay* info_distance;
     GuiKeyValueDisplay* info_heading;
     GuiKeyValueDisplay* info_relspeed;
+    GuiKeyValueDisplay* info_duration;
 
     GuiKeyValueDisplay* info_faction;
     GuiKeyValueDisplay* info_type;
