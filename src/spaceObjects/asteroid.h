@@ -12,8 +12,6 @@ public:
 
     Asteroid();
     
-    virtual RawRadarSignatureInfo getRadarSignatureInfo() { return RawRadarSignatureInfo(0.05, 0.0, 0.0); }
-
     virtual void draw3D();
 
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);

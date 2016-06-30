@@ -8,8 +8,6 @@ class SpaceStation : public ShipTemplateBasedObject
 public:
     SpaceStation();
     
-    virtual RawRadarSignatureInfo getRadarSignatureInfo() { return RawRadarSignatureInfo(0.2, 0.5, 0.5); }
-
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
     virtual bool canBeDockedBy(P<SpaceObject> obj);
     virtual void destroyedByDamage(DamageInfo& info);
@@ -18,4 +16,4 @@ public:
     virtual string getExportLine();
 };
 
-#endif//SPACE_SHIP_H
+#endif//SPACE_STATION_H
