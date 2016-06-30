@@ -1,4 +1,3 @@
-
 #ifndef _PLAYERSPACESHIP_HPP_
 #define _PLAYERSPACESHIP_HPP_
 

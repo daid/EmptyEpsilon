@@ -22,5 +22,5 @@ public:
     virtual string getExportLine();
 };
 
-#endif//ASTEROID_H
+#endif//SUPPLY_DROP_H
 

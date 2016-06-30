@@ -1,5 +1,5 @@
-#ifndef SUPPLY_DROP_H
-#define SUPPLY_DROP_H
+#ifndef WARP_JAMMER_H
+#define WARP_JAMMER_H
 
 #include "spaceObject.h"
 
@@ -12,8 +12,6 @@ class WarpJammer : public SpaceObject
 public:
     WarpJammer();
     
-    virtual RawRadarSignatureInfo getRadarSignatureInfo() override { return RawRadarSignatureInfo(0.05, 0.5, 0.0); }
-
     void setRange(float range) { this->range = range; }
 
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
@@ -27,5 +25,5 @@ public:
     virtual string getExportLine() { return "WarpJammer():setFaction(\"" + getFaction() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 };
 
-#endif//ASTEROID_H
+#endif//WARP_JAMMER_H
 
