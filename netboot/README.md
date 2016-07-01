@@ -73,3 +73,5 @@ If you run "update.sh", it will try to update your local EmptyEpsilon installati
 
 distcc
 ======
+The clients are setup for distributed compiling of EmptyEpsilon. Which means every on computer can assist in the build of EmptyEpsilon.
+This reduced the compile time from 20 minutes to 3 minutes in my case. However, I haven't setup scripts to do this yet. As this wasn't 100% reliable yet.
