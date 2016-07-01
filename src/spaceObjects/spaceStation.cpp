@@ -19,6 +19,7 @@ SpaceStation::SpaceStation()
 : ShipTemplateBasedObject(300, "SpaceStation")
 {
     comms_script_name = "comms_station.lua";
+    setRadarSignatureInfo(0.2, 0.5, 0.5);
 
     callsign = "DS" + string(getMultiplayerId());
 }

@@ -63,6 +63,16 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, sendCommsMessage);
     /// Let this object take damage, the DamageInfo parameter can be empty, or a string which indicates if it's energy, kinetic or emp damage.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, takeDamage);
+    // Set the description of this object. The description is visible on the
+    // Science station.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setDescription);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getDescription);
+    // Set the radar signature of this object. Objects' signatures create noise
+    // on the Science station's raw radar signal ring.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setRadarSignatureInfo);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureGravity);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureElectrical);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureBiological);
     /// Set the description of this object, description is visible at the science station.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setDescription);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getDescription);
@@ -100,6 +110,9 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     registerMemberReplication(&faction_id);
     registerMemberReplication(&scanned_by_faction);
     registerMemberReplication(&object_description);
+    registerMemberReplication(&radar_signature.gravity);
+    registerMemberReplication(&radar_signature.electrical);
+    registerMemberReplication(&radar_signature.biological);
     registerMemberReplication(&scanning_complexity_value);
     registerMemberReplication(&scanning_depth_value);
     registerCollisionableReplication(multiplayer_significant_range);
@@ -352,6 +365,7 @@ bool SpaceObject::sendCommsMessage(P<PlayerSpaceship> target, string message)
     return result;
 }
 
+// Define a script conversion function for the DamageInfo structure.
 template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& di)
 {
     if (!lua_isstring(L, idx))

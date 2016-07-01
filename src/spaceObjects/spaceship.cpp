@@ -158,11 +158,13 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     {
         beam_weapons[n].setParent(this);
     }
+
     for(int n = 0; n < max_weapon_tubes; n++)
     {
         weapon_tube[n].setParent(this);
         weapon_tube[n].setIndex(n);
     }
+
     for(int n = 0; n < MW_Count; n++)
     {
         weapon_storage[n] = 0;
@@ -173,6 +175,8 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
 
     scanning_complexity_value = -1;
     scanning_depth_value = -1;
+
+    setRadarSignatureInfo(0.05, 0.3, 0.3);
 
     if (game_server)
         setCallSign(gameGlobalInfo->getNextShipCallsign());

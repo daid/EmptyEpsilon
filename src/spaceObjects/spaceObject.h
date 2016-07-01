@@ -32,6 +32,7 @@ public:
     {}
 };
 
+// Radar signature data, used by rawScannerDataOverlay.
 class RawRadarSignatureInfo
 {
 public:
@@ -53,6 +54,11 @@ public:
         return *this;
     }
 
+    bool operator!=(const RawRadarSignatureInfo& o)
+    {
+        return gravity != o.gravity || electrical != o.electrical || biological != o.biological;
+    }
+
     RawRadarSignatureInfo operator*(const float f) const
     {
         return RawRadarSignatureInfo(gravity * f, electrical * f, biological * f);
@@ -70,17 +76,20 @@ enum EScannedState
 class SpaceObject;
 class PlayerSpaceship;
 extern PVector<SpaceObject> space_object_list;
+
 class SpaceObject : public Collisionable, public MultiplayerObject
 {
     float object_radius;
     uint8_t faction_id;
     string object_description;
+    RawRadarSignatureInfo radar_signature;
 
     /*!
-     * Scan state per faction. Implementation wise, this vector is resized when a scan is done.
-     * Index in the vector is the faction ID.
-     * Which means the vector can be smaller then the number of factions available.
-     * When the vector is smaller then the required faction ID, the scan state is SS_NotScanned
+     * Scan state per faction. Implementation wise, this vector is resized when
+     * a scan is done. The vector is indexed by faction ID, which means the
+     * vector can be smaller than the number of available factions.
+     * When the vector is smaller then the required faction ID, the scan state
+     * is SS_NotScanned
      */
     std::vector<EScannedState> scanned_by_faction;
 public:
@@ -96,13 +105,18 @@ public:
     float getRadius() { return object_radius; }
     void setRadius(float radius) { object_radius = radius; setCollisionRadius(radius); }
 
+    // Return the object's raw radar signature. The default signature is 0,0,0.
+    virtual RawRadarSignatureInfo getRadarSignatureInfo() { return radar_signature; }
+    void setRadarSignatureInfo(float grav, float elec, float bio) { radar_signature = RawRadarSignatureInfo(grav, elec, bio); }
+    float getRadarSignatureGravity() { return radar_signature.gravity; }
+    float getRadarSignatureElectrical() { return radar_signature.electrical; }
+    float getRadarSignatureBiological() { return radar_signature.biological; }
+
     string getDescription() { return object_description; }
     void setDescription(string description) { object_description = description; }
 
     float getHeading() { float ret = getRotation() - 270; while(ret < 0) ret += 360.0f; while(ret > 360.0f) ret -= 360.0f; return ret; }
     void setHeading(float heading) { setRotation(heading - 90); }
-
-    virtual RawRadarSignatureInfo getRadarSignatureInfo() { return RawRadarSignatureInfo(0, 0, 0); }
 
 #if FEATURE_3D_RENDERING
     virtual void draw3D();
@@ -163,7 +177,7 @@ protected:
     ModelInfo model_info;
 };
 
-/* Define script conversion function for the DamageInfo structure. */
+// Define a script conversion function for the DamageInfo structure.
 template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& di);
 
 #endif//SPACE_OBJECT_H
