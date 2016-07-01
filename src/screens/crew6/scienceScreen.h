@@ -11,7 +11,9 @@ class GuiKeyValueDisplay;
 class GuiFrequencyCurve;
 class GuiScrollText;
 class GuiButton;
+class GuiScanTargetButton;
 class GuiToggleButton;
+class GuiSelector;
 class GuiSlider;
 class GuiLabel;
 class DatabaseViewComponent;
@@ -30,6 +32,9 @@ public:
     GuiRadarView* probe_radar;
     GuiSlider* zoom_slider;
     GuiLabel* zoom_label;
+
+    GuiSelector* sidebar_pager;
+    GuiScanTargetButton* scan_button;
     GuiKeyValueDisplay* info_callsign;
     GuiKeyValueDisplay* info_distance;
     GuiKeyValueDisplay* info_heading;
