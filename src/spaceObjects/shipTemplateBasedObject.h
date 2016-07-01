@@ -18,7 +18,7 @@ public:
     string template_name;
     string type_name;
     string radar_trace;
-    string impulse_sound = "engine.wav";
+    string impulse_sound_file = "engine.wav";
     P<ShipTemplate> ship_template;
 
     int shield_count;
