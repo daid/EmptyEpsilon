@@ -773,6 +773,31 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         break;
     case CMD_IMPULSE:
         packet >> impulse_request;
+
+        // If we have an impulse request, loop the engine sound.
+        // TODO: Play the sound only if the engines are functioning.
+        if (abs(impulse_request) > 0.0f)
+        {
+            if (impulse_sound != -1)
+            {
+                // TODO: Add a way in soundManager to set pitch and volume of existing sounds.
+                // TODO: Add a way to fade sounds in and out in soundManager.
+            }
+            else
+            {
+                // TODO: Let ship templates set engine sound parameters.
+                impulse_sound = soundManager->playSound("engine.wav", 1.0f, 100.0f, true);
+            }
+        }
+        // If we don't have an engine request, stop the engine sound.
+        // TODO: Only fully silence engine if it's not powered/damaged?
+        else if (abs(impulse_request) <= 0.0f && impulse_sound > -1)
+        {
+            // TODO: Add a way to fade sounds in and out in soundManager.
+            soundManager->stopSound(impulse_sound);
+            impulse_sound = -1;
+        }
+
         break;
     case CMD_WARP:
         packet >> warp_request;
@@ -829,7 +854,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 shields_active = active;
                 if (active)
                 {
-                    shield_sound = soundManager->playSound("shield_up.wav", 1.0f, 100.0f, true);
+                    shield_sound = soundManager->playSound("shield_up.wav");
                 }
                 else
                 {
