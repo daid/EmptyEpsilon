@@ -460,6 +460,7 @@ void PlayerSpaceship::update(float delta)
         }
     }else{
         //Client side
+
         if (scanning_complexity < 1)
         {
             if (scanning_delay > 0.0)
@@ -828,9 +829,14 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             {
                 shields_active = active;
                 if (active)
-                    soundManager->playSound("shield_up.wav");
+                {
+                    shield_sound = soundManager->playSound("shield_up.wav");
+                }
                 else
+                {
+                    soundManager->stopSound(shield_sound);
                     soundManager->playSound("shield_down.wav");
+                }
             }
         }
         break;
