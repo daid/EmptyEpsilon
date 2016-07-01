@@ -88,6 +88,8 @@ public:
     bool auto_coolant_enabled;
     // Whether shields are up (true) or down
     bool shields_active;
+    // Password to join a ship. Default is empty.
+    string control_code;
 
 private:
     // soundManager index of the shield object
@@ -231,6 +233,9 @@ public:
     // Waypoint functions
     int getWaypointCount() { return waypoints.size(); }
     sf::Vector2f getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1]; return sf::Vector2f(0, 0); }
+
+    // Ship control code/password setter
+    void setControlCode(string code) { control_code = code; }
 
     // Radar function
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;

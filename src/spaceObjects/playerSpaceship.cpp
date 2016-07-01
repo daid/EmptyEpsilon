@@ -98,6 +98,8 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     // Use this command on ships to require less player interaction, especially
     // when combined with commandSetAutoRepair/auto_repair_enabled.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setAutoCoolant);
+    // Set a password to join the ship.
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setControlCode);
 }
 
 float PlayerSpaceship::system_power_user_factor[] = {
@@ -192,11 +194,12 @@ PlayerSpaceship::PlayerSpaceship()
     scan_probe_recharge = 0.0;
     alert_level = AL_Normal;
     shields_active = false;
+    control_code = "";
 
     setFactionId(1);
 
     // For now, set player ships to always be fully scanned to all other ships
-    for(unsigned int faction_id=0; faction_id<factionInfo.size(); faction_id++)
+    for(unsigned int faction_id = 0; faction_id < factionInfo.size(); faction_id++)
         setScannedStateForFaction(faction_id, SS_FullScan);
 
     updateMemberReplicationUpdateDelay(&target_rotation, 0.1);
@@ -226,6 +229,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&self_destruct_countdown, 0.2);
     registerMemberReplication(&alert_level);
     registerMemberReplication(&linked_science_probe_id);
+    registerMemberReplication(&control_code);
 
     // Determine which stations must provide self-destruct confirmation codes.
     for(int n = 0; n < max_self_destruct_codes; n++)
