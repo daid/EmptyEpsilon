@@ -75,7 +75,6 @@ public:
 private:
     // soundManager indexes of sf::Sound objects.
     int shield_sound;
-    int impulse_sound = -1;
     ECommsState comms_state;
     float comms_open_delay;
     string comms_target_name;

@@ -63,6 +63,7 @@ void ScreenMainScreen::update(float delta)
     if (game_client && game_client->getStatus() == GameClient::Disconnected)
     {
         soundManager->stopMusic();
+        soundManager->stopSound(impulse_sound);
         destroy();
         disconnectFromServer();
         returnToMainMenu();
@@ -153,6 +154,30 @@ void ScreenMainScreen::update(float delta)
             onscreen_comms->hide();
             break;
         }
+
+        // If we have an impulse power, loop the engine sound.
+        float impulse_ability = std::max(0.0f, std::min(my_spaceship->getSystemEffectiveness(SYS_Impulse), my_spaceship->getSystemPower(SYS_Impulse)));
+        string impulse_sound_file = my_spaceship->impulse_sound;
+        if (impulse_ability > 0 && impulse_sound_file.length() > 0)
+        {
+            if (impulse_sound > -1)
+            {
+                soundManager->setSoundVolume(impulse_sound, std::max(10.0f * impulse_ability, fabsf(my_spaceship->current_impulse) * 10.0f * std::max(0.1f, impulse_ability)));
+                soundManager->setSoundPitch(impulse_sound, std::max(0.7f * impulse_ability, fabsf(my_spaceship->current_impulse) + 0.2f * std::max(0.1f, impulse_ability)));
+            }
+            else
+            {
+                impulse_sound = soundManager->playSound(my_spaceship->impulse_sound, std::max(0.7f * impulse_ability, fabsf(my_spaceship->current_impulse) + 0.2f * impulse_ability), std::max(30.0f, fabsf(my_spaceship->current_impulse) * 10.0f * impulse_ability), true);
+            }
+        }
+        // If we don't have impulse available, stop the engine sound.
+        else if (impulse_sound > -1)
+        {
+            soundManager->stopSound(impulse_sound);
+            // TODO: Play an engine failure sound.
+            impulse_sound = -1;
+        }
+
     }
 }
 
@@ -245,6 +270,7 @@ void ScreenMainScreen::onKey(sf::Keyboard::Key key, int unicode)
     case sf::Keyboard::Escape:
     case sf::Keyboard::Home:
         soundManager->stopMusic();
+        soundManager->stopSound(impulse_sound);
         destroy();
         returnToShipSelection();
         break;
