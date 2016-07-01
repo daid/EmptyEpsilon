@@ -458,8 +458,33 @@ void PlayerSpaceship::update(float delta)
                 }
             }
         }
+
+        // If we have an impulse power, loop the engine sound.
+        if (fabsf(current_impulse) > 0.0f)
+        {
+            if (impulse_sound > -1)
+            {
+                soundManager->setSoundVolume(impulse_sound, std::max(30.0f, fabsf(current_impulse) * 10.0f));
+                soundManager->setSoundPitch(impulse_sound, std::max(0.7f, fabsf(current_impulse) + 0.2f));
+            }
+            else
+            {
+                // TODO: Let ship templates set engine sound parameters.
+                impulse_sound = soundManager->playSound("engine.wav", fabsf(current_impulse), fabsf(current_impulse) * 10.0f, true);
+            }
+        }
+        // If we don't have impulse available, stop the engine sound.
+        else if (abs(impulse_request) <= 0.0f && impulse_sound > -1)
+        {
+            if (getSystemEffectiveness(SYS_Impulse) < 0.0 || getSystemPower(SYS_Impulse) == 0.0)
+            {
+                soundManager->stopSound(impulse_sound);
+                impulse_sound = -1;
+            }
+        }
     }else{
         //Client side
+
         if (scanning_complexity < 1)
         {
             if (scanning_delay > 0.0)
@@ -828,9 +853,14 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             {
                 shields_active = active;
                 if (active)
-                    soundManager->playSound("shield_up.wav");
+                {
+                    shield_sound = soundManager->playSound("shield_up.wav");
+                }
                 else
+                {
+                    soundManager->stopSound(shield_sound);
                     soundManager->playSound("shield_down.wav");
+                }
             }
         }
         break;
