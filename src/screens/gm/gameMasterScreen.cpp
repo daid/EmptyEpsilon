@@ -224,7 +224,6 @@ void GameMasterScreen::update(float delta)
     // Record object type.
     for(P<SpaceObject> obj : targets.getTargets())
     {
-        has_object = true;
         if (P<SpaceShip>(obj))
             has_ship = true;
         else if (P<CpuShip>(obj))

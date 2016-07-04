@@ -159,6 +159,7 @@ private:
     P<PlayerSpaceship> target;
 
     GuiTextEntry* control_code;
+    GuiSlider* reputation;
     GuiLabel* position_count;
     GuiKeyValueDisplay* position[max_crew_positions];
 public:

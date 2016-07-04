@@ -509,6 +509,14 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
         target->control_code = text;
     });
 
+    // Edit reputation.
+    (new GuiLabel(left_col, "", "Reputation:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    reputation = new GuiSlider(left_col, "", 0.0, 9999.0, 0.0, [this](float value) {
+        target->setReputationPoints(value);
+    });
+    reputation->addOverlay()->setSize(GuiElement::GuiSizeMax, 50);
+
     // Right column
     // Count and list ship positions and whether they're occupied.
     position_count = new GuiLabel(right_col, "", "Positions occupied: ", 30);
@@ -550,6 +558,9 @@ void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
 
         // Update the total occupied position count.
         position_count->setText("Positions occupied: " + string(position_counter));
+
+        // Update rep.
+        reputation->setValue(player->getReputationPoints());
     }
 }
 
