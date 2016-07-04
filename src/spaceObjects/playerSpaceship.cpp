@@ -509,8 +509,7 @@ void PlayerSpaceship::update(float delta)
                 if (do_self_destruct)
                 {
                     self_destruct_countdown = 10.0f;
-                    // TODO: Move sound off the server.
-                    soundManager->playSound("vocal_self_destruction.wav");
+                    playSoundOnMainScreen("vocal_self_destruction.wav");
                 }
             }else{
                 // If the countdown has started, tick the clock.
@@ -684,6 +683,15 @@ void PlayerSpaceship::addHeat(ESystem system, float amount)
 
     if (systems[system].heat_level < 0.0)
         systems[system].heat_level = 0.0;
+}
+
+void PlayerSpaceship::playSoundOnMainScreen(string sound_name)
+{
+    sf::Packet packet;
+    packet << CMD_PLAY_CLIENT_SOUND;
+    packet << max_crew_positions;
+    packet << sound_name;
+    broadcastServerCommand(packet);
 }
 
 float PlayerSpaceship::getNetSystemEnergyUsage()
@@ -1005,18 +1013,16 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             bool active;
             packet >> active;
 
-            // TODO: Move sounds off of the server.
             if (shield_calibration_delay <= 0.0 && active != shields_active)
             {
                 shields_active = active;
                 if (active)
                 {
-                    shield_sound = soundManager->playSound("shield_up.wav");
+                    playSoundOnMainScreen("shield_up.wav");
                 }
                 else
                 {
-                    soundManager->stopSound(shield_sound);
-                    soundManager->playSound("shield_down.wav");
+                    playSoundOnMainScreen("shield_down.wav");
                 }
             }
         }
@@ -1639,6 +1645,27 @@ void PlayerSpaceship::commandSetScienceLink(int32_t id){
     sf::Packet packet;
     packet << CMD_SET_SCIENCE_LINK << id;
     sendClientCommand(packet);
+}
+
+void PlayerSpaceship::onReceiveServerCommand(sf::Packet& packet)
+{
+    int16_t command;
+    packet >> command;
+    switch(command)
+    {
+    case CMD_PLAY_CLIENT_SOUND:
+        if (my_spaceship == this && my_player_info)
+        {
+            ECrewPosition position;
+            string sound_name;
+            packet >> position >> sound_name;
+            if ((position == max_crew_positions && my_player_info->isMainScreen()) || my_player_info->crew_position[position])
+            {
+                soundManager->playSound(sound_name);
+            }
+        }
+        break;
+    }
 }
 
 void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
