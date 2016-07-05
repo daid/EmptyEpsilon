@@ -531,7 +531,6 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
     }
 }
 
-
 void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
 {
     P<PlayerSpaceship> player = target;
@@ -559,7 +558,7 @@ void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
         // Update the total occupied position count.
         position_count->setText("Positions occupied: " + string(position_counter));
 
-        // Update rep.
+        // Update reputation points.
         reputation->setValue(player->getReputationPoints());
     }
 }
@@ -567,4 +566,12 @@ void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
 void GuiShipTweakPlayer::open(P<SpaceShip> target)
 {
     this->target = target;
+
+    P<PlayerSpaceship> player = target;
+
+    if (player)
+    {
+        // Read ship's control code.
+        control_code->setText(player->control_code);
+    }
 }
