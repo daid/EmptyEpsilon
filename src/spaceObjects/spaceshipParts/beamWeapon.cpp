@@ -196,7 +196,7 @@ void BeamWeapon::update(float delta)
                         // ... rotate the turret's beam toward the target.
                         if (fabsf(angle_diff) > 0)
                         {
-                            direction += (angle_diff / fabsf(angle_diff)) * std::min(turret_rotation_rate, fabsf(angle_diff));
+                            direction += (angle_diff / fabsf(angle_diff)) * std::min(turret_rotation_rate * parent->getSystemEffectiveness(SYS_BeamWeapons), fabsf(angle_diff));
                         }
                     // If the target is outside of the turret's arc ...
                     } else {
@@ -206,7 +206,7 @@ void BeamWeapon::update(float delta)
 
                         if (fabsf(reset_angle_diff) > 0)
                         {
-                            direction += (reset_angle_diff / fabsf(reset_angle_diff)) * std::min(turret_rotation_rate, fabsf(reset_angle_diff));
+                            direction += (reset_angle_diff / fabsf(reset_angle_diff)) * std::min(turret_rotation_rate * parent->getSystemEffectiveness(SYS_BeamWeapons), fabsf(reset_angle_diff));
                         }
                     }
                 }
@@ -228,7 +228,7 @@ void BeamWeapon::update(float delta)
 
         if (fabsf(reset_angle_diff) > 0)
         {
-            direction += (reset_angle_diff / fabsf(reset_angle_diff)) * std::min(turret_rotation_rate, fabsf(reset_angle_diff));
+            direction += (reset_angle_diff / fabsf(reset_angle_diff)) * std::min(turret_rotation_rate * parent->getSystemEffectiveness(SYS_BeamWeapons), fabsf(reset_angle_diff));
         }
     }
 }
