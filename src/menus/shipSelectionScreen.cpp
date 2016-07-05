@@ -370,7 +370,7 @@ void ShipSelectionScreen::updateReadyButton()
         // If the main screen button is both available and selected and a
         // player ship is also selected, and the player isn't being asked for a
         // command code, enable the Ready button.
-        if (my_spaceship && main_screen_button->isVisible() && main_screen_button->getValue() && !password_overlay->isVisible())
+        if (my_spaceship && main_screen_button->isVisible() && main_screen_button->getValue())
             ready_button->enable();
         // If the GM or spectator buttons are enabled, enable the Ready button.
         // TODO: Allow GM or spectator screens to require a control code.
@@ -387,7 +387,7 @@ void ShipSelectionScreen::updateReadyButton()
     }else{
         // If a player ship is selected and the player isn't being asked for a
         // control code, enable the Ready button. Otherwise, disable it.
-        if (my_spaceship && !password_overlay->isVisible())
+        if (my_spaceship)
             ready_button->enable();
         else
             ready_button->disable();
