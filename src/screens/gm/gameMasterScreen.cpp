@@ -66,7 +66,7 @@ GameMasterScreen::GameMasterScreen()
         main_radar->setViewPosition(ship->getPosition());
         targets.set(ship);
     });
-    player_ship_selector->setPosition(270, -20, ABottomLeft)->setSize(250, 50);
+    player_ship_selector->setPosition(270, -20, ABottomLeft)->setSize(350, 50);
 
     create_button = new GuiButton(this, "CREATE_OBJECT_BUTTON", "Create...", [this]() {
         object_creation_screen->show();
