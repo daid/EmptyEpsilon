@@ -4,13 +4,24 @@
 #include "gui/gui2_panel.h"
 #include "missileWeaponData.h"
 #include "shipTemplate.h"
+#include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 
 class SpaceShip;
+class GuiKeyValueDisplay;
 class GuiLabel;
 class GuiTextEntry;
 class GuiSlider;
 class GuiSelector;
 class GuiToggleButton;
+
+enum ETweakType
+{
+    TW_Object,  // TODO: Space object
+    TW_Ship,    // Ships
+    TW_Station, // TODO: Space stations
+    TW_Player   // Player ships
+};
 
 class GuiTweakPage : public GuiElement
 {
@@ -20,10 +31,10 @@ public:
     virtual void open(P<SpaceShip> target) = 0;
 };
 
-class GuiShipTweak : public GuiPanel
+class GuiObjectTweak : public GuiPanel
 {
 public:
-    GuiShipTweak(GuiContainer* owner);
+    GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type);
     
     void open(P<SpaceShip> target);
 
@@ -142,4 +153,20 @@ public:
     virtual void onDraw(sf::RenderTarget& window) override;
 };
 
+class GuiShipTweakPlayer : public GuiTweakPage
+{
+private:
+    P<PlayerSpaceship> target;
+
+    GuiTextEntry* control_code;
+    GuiSlider* reputation;
+    GuiLabel* position_count;
+    GuiKeyValueDisplay* position[max_crew_positions];
+public:
+    GuiShipTweakPlayer(GuiContainer* owner);
+
+    virtual void open(P<SpaceShip> target);
+
+    virtual void onDraw(sf::RenderTarget& window) override;
+};
 #endif//GAME_MASTER_TWEAK_H

@@ -1,15 +1,17 @@
 #include "tweak.h"
+#include "playerInfo.h"
 #include "spaceObjects/spaceship.h"
 
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_autolayout.h"
+#include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_slider.h"
 #include "gui/gui2_togglebutton.h"
 
-GuiShipTweak::GuiShipTweak(GuiContainer* owner)
+GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
 : GuiPanel(owner, "GM_TWEAK_DIALOG")
 {
     setPosition(0, -100, ABottomCenter);
@@ -21,26 +23,37 @@ GuiShipTweak::GuiShipTweak(GuiContainer* owner)
             page->hide();
         pages[index]->show();
     });
+
     list->setSize(300, GuiElement::GuiSizeMax);
     list->setPosition(25, 25, ATopLeft);
-    
-    pages.push_back(new GuiShipTweakBase(this));
-    list->addEntry("Base", "");
-    pages.push_back(new GuiShipTweakShields(this));
-    list->addEntry("Shields", "");
-    pages.push_back(new GuiShipTweakMissileTubes(this));
-    list->addEntry("Tubes", "");
-    pages.push_back(new GuiShipTweakMissileWeapons(this));
-    list->addEntry("Missiles", "");
-    pages.push_back(new GuiShipTweakBeamweapons(this));
-    list->addEntry("Beams", "");
-    pages.push_back(new GuiShipTweakSystems(this));
-    list->addEntry("Systems", "");
+
+    if (tweak_type == TW_Ship || tweak_type == TW_Player)
+    {
+        pages.push_back(new GuiShipTweakBase(this));
+        list->addEntry("Base", "");
+        pages.push_back(new GuiShipTweakShields(this));
+        list->addEntry("Shields", "");
+        pages.push_back(new GuiShipTweakMissileTubes(this));
+        list->addEntry("Tubes", "");
+        pages.push_back(new GuiShipTweakMissileWeapons(this));
+        list->addEntry("Missiles", "");
+        pages.push_back(new GuiShipTweakBeamweapons(this));
+        list->addEntry("Beams", "");
+        pages.push_back(new GuiShipTweakSystems(this));
+        list->addEntry("Systems", "");
+    }
+
+    if (tweak_type == TW_Player)
+    {
+        pages.push_back(new GuiShipTweakPlayer(this));
+        list->addEntry("Player", "");
+    }
 
     for(GuiTweakPage* page : pages)
     {
         page->setSize(700, 600)->setPosition(0, 0, ABottomRight)->hide();
     }
+
     pages[0]->show();
     list->setSelectionIndex(0);
 
@@ -49,15 +62,17 @@ GuiShipTweak::GuiShipTweak(GuiContainer* owner)
     }))->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
 }
 
-void GuiShipTweak::open(P<SpaceShip> target)
+void GuiObjectTweak::open(P<SpaceShip> target)
 {
     this->target = target;
+
     for(GuiTweakPage* page : pages)
         page->open(target);
+
     show();
 }
 
-void GuiShipTweak::onDraw(sf::RenderTarget& window)
+void GuiObjectTweak::onDraw(sf::RenderTarget& window)
 {
     GuiPanel::onDraw(window);
     
@@ -466,6 +481,90 @@ void GuiShipTweakSystems::onDraw(sf::RenderTarget& window)
 }
 
 void GuiShipTweakSystems::open(P<SpaceShip> target)
+{
+    this->target = target;
+}
+
+GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
+: GuiTweakPage(owner)
+{
+    // TODO: Add more player ship tweaks here.
+    // -   Ship-to-ship player transfer
+    // -   Reputation
+
+    // Add two columns.
+    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+
+    GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+
+    // Left column
+    // Edit control code.
+    (new GuiLabel(left_col, "", "Control code:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    control_code = new GuiTextEntry(left_col, "", "");
+    control_code->setSize(GuiElement::GuiSizeMax, 50);
+    control_code->callback([this](string text) {
+        target->control_code = text;
+    });
+
+    // Edit reputation.
+    (new GuiLabel(left_col, "", "Reputation:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    reputation = new GuiSlider(left_col, "", 0.0, 9999.0, 0.0, [this](float value) {
+        target->setReputationPoints(value);
+    });
+    reputation->addOverlay()->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Right column
+    // Count and list ship positions and whether they're occupied.
+    position_count = new GuiLabel(right_col, "", "Positions occupied: ", 30);
+    position_count->setSize(GuiElement::GuiSizeMax, 50);
+
+    for(int n = 0; n < max_crew_positions; n++)
+    {
+        string position_name = getCrewPositionName(ECrewPosition(n));
+
+        position[n] = new GuiKeyValueDisplay(right_col, "CREW_POSITION_" + position_name, 0.5, position_name, "-");
+        position[n]->setSize(GuiElement::GuiSizeMax, 30);
+    }
+}
+
+
+void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
+{
+    P<PlayerSpaceship> player = target;
+
+    if (player)
+    {
+        // Update position list.
+        int position_counter = 0;
+
+        // Update the status of each crew position.
+        for(int n = 0; n < max_crew_positions; n++)
+        {
+            string position_name = getCrewPositionName(ECrewPosition(n));
+            string position_state = "-";
+
+            if (player->hasPlayerAtPosition(ECrewPosition(n)))
+            {
+                position_state = "Occupied";
+                position_counter += 1;
+            }
+
+            position[n]->setValue(position_state);
+        }
+
+        // Update the total occupied position count.
+        position_count->setText("Positions occupied: " + string(position_counter));
+
+        // Update rep.
+        reputation->setValue(player->getReputationPoints());
+    }
+}
+
+void GuiShipTweakPlayer::open(P<SpaceShip> target)
 {
     this->target = target;
 }
