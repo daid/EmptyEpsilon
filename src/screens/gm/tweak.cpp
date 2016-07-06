@@ -62,7 +62,7 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
     }))->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
 }
 
-void GuiObjectTweak::open(P<SpaceShip> target)
+void GuiObjectTweak::open(P<SpaceObject> target)
 {
     this->target = target;
 
@@ -149,7 +149,7 @@ void GuiShipTweakBase::onDraw(sf::RenderTarget& window)
     hull_slider->setValue(target->hull_strength);
 }
 
-void GuiShipTweakBase::open(P<SpaceShip> target)
+void GuiShipTweakBase::open(P<SpaceObject> target)
 {
     this->target = target;
     
@@ -209,7 +209,7 @@ void GuiShipTweakMissileWeapons::onDraw(sf::RenderTarget& window)
     }
 }
 
-void GuiShipTweakMissileWeapons::open(P<SpaceShip> target)
+void GuiShipTweakMissileWeapons::open(P<SpaceObject> target)
 {
     for(int n=0; n<MW_Count; n++)
         missile_storage_amount_slider[n]->setValue(float(target->weapon_storage_max[n]));
@@ -289,7 +289,7 @@ void GuiShipTweakMissileTubes::onDraw(sf::RenderTarget& window)
     }
 }
 
-void GuiShipTweakMissileTubes::open(P<SpaceShip> target)
+void GuiShipTweakMissileTubes::open(P<SpaceObject> target)
 {
     missile_tube_amount_selector->setSelectionIndex(target->weapon_tube_count);
 
@@ -333,7 +333,7 @@ void GuiShipTweakShields::onDraw(sf::RenderTarget& window)
     }
 }
 
-void GuiShipTweakShields::open(P<SpaceShip> target)
+void GuiShipTweakShields::open(P<SpaceObject> target)
 {
     this->target = target;
 
@@ -436,7 +436,7 @@ void GuiShipTweakBeamweapons::onDraw(sf::RenderTarget& window)
     damage_slider->setValue(target->beam_weapons[beam_index].getDamage());
 }
 
-void GuiShipTweakBeamweapons::open(P<SpaceShip> target)
+void GuiShipTweakBeamweapons::open(P<SpaceObject> target)
 {
     this->target = target;
 }
@@ -480,7 +480,7 @@ void GuiShipTweakSystems::onDraw(sf::RenderTarget& window)
     }
 }
 
-void GuiShipTweakSystems::open(P<SpaceShip> target)
+void GuiShipTweakSystems::open(P<SpaceObject> target)
 {
     this->target = target;
 }
@@ -583,7 +583,7 @@ void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
     }
 }
 
-void GuiShipTweakPlayer::open(P<SpaceShip> target)
+void GuiShipTweakPlayer::open(P<SpaceObject> target)
 {
     this->target = target;
 

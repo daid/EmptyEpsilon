@@ -28,7 +28,7 @@ class GuiTweakPage : public GuiElement
 public:
     GuiTweakPage(GuiContainer* owner) : GuiElement(owner, "") {}
 
-    virtual void open(P<SpaceShip> target) = 0;
+    virtual void open(P<SpaceObject> target) = 0;
 };
 
 class GuiObjectTweak : public GuiPanel
@@ -36,18 +36,18 @@ class GuiObjectTweak : public GuiPanel
 public:
     GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type);
     
-    void open(P<SpaceShip> target);
+    void open(P<SpaceObject> target);
 
     virtual void onDraw(sf::RenderTarget& window) override;
 private:
-    P<SpaceShip> target;
+    P<SpaceObject> target;
     std::vector<GuiTweakPage*> pages;
 };
 
 class GuiShipTweakBase : public GuiTweakPage
 {
 private:
-    P<SpaceShip> target;
+    P<SpaceObject> target;
 
     GuiTextEntry* type_name;
     GuiTextEntry* callsign;
@@ -62,13 +62,13 @@ public:
 
     virtual void onDraw(sf::RenderTarget& window) override;
     
-    virtual void open(P<SpaceShip> target) override;
+    virtual void open(P<SpaceObject> target) override;
 };
 
 class GuiShipTweakMissileWeapons : public GuiTweakPage
 {
 private:
-    P<SpaceShip> target;
+    P<SpaceObject> target;
 
     GuiSlider* missile_storage_amount_slider[MW_Count];
     GuiSlider* missile_current_amount_slider[MW_Count];
@@ -77,13 +77,13 @@ public:
 
     virtual void onDraw(sf::RenderTarget& window) override;
     
-    virtual void open(P<SpaceShip> target) override;
+    virtual void open(P<SpaceObject> target) override;
 };
 
 class GuiShipTweakMissileTubes : public GuiTweakPage
 {
 private:
-    P<SpaceShip> target;
+    P<SpaceObject> target;
 
     int tube_index;
     GuiSelector* index_selector;
@@ -96,13 +96,13 @@ public:
 
     virtual void onDraw(sf::RenderTarget& window) override;
     
-    virtual void open(P<SpaceShip> target) override;
+    virtual void open(P<SpaceObject> target) override;
 };
 
 class GuiShipTweakShields : public GuiTweakPage
 {
 private:
-    P<SpaceShip> target;
+    P<SpaceObject> target;
 
     GuiSlider* shield_max_slider[max_shield_count];
     GuiSlider* shield_slider[max_shield_count];
@@ -111,13 +111,13 @@ public:
 
     virtual void onDraw(sf::RenderTarget& window) override;
     
-    virtual void open(P<SpaceShip> target) override;
+    virtual void open(P<SpaceObject> target) override;
 };
 
 class GuiShipTweakBeamweapons : public GuiTweakPage
 {
 private:
-    P<SpaceShip> target;
+    P<SpaceObject> target;
 
     int beam_index;
     GuiSlider* arc_slider;
@@ -132,7 +132,7 @@ private:
 public:
     GuiShipTweakBeamweapons(GuiContainer* owner);
 
-    virtual void open(P<SpaceShip> target) override;
+    virtual void open(P<SpaceObject> target) override;
 
     virtual void onDraw(sf::RenderTarget& window) override;
 };
@@ -140,7 +140,7 @@ public:
 class GuiShipTweakSystems : public GuiTweakPage
 {
 private:
-    P<SpaceShip> target;
+    P<SpaceObject> target;
 
     GuiSlider* system_damage[SYS_COUNT];
     GuiSlider* system_heat[SYS_COUNT];
@@ -148,7 +148,7 @@ private:
 public:
     GuiShipTweakSystems(GuiContainer* owner);
 
-    virtual void open(P<SpaceShip> target) override;
+    virtual void open(P<SpaceObject> target) override;
 
     virtual void onDraw(sf::RenderTarget& window) override;
 };
@@ -167,7 +167,7 @@ private:
 public:
     GuiShipTweakPlayer(GuiContainer* owner);
 
-    virtual void open(P<SpaceShip> target);
+    virtual void open(P<SpaceObject> target);
 
     virtual void onDraw(sf::RenderTarget& window) override;
 };
