@@ -102,6 +102,11 @@ GameMasterScreen::GameMasterScreen()
                 ship_tweak_dialog->open(obj);
                 break;
             }
+            else
+            {
+                object_tweak_dialog->open(obj);
+                break;
+            }
         }
     });
     tweak_button->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->hide();
@@ -171,6 +176,8 @@ GameMasterScreen::GameMasterScreen()
     player_tweak_dialog->hide();
     ship_tweak_dialog = new GuiObjectTweak(this, TW_Ship);
     ship_tweak_dialog->hide();
+    object_tweak_dialog = new GuiObjectTweak(this, TW_Object);
+    object_tweak_dialog->hide();
 
     global_message_entry = new GuiGlobalMessageEntry(this);
     global_message_entry->hide();
@@ -195,6 +202,7 @@ void GameMasterScreen::update(float delta)
             main_radar->longRange();
     }
     
+    bool has_object = false;
     bool has_ship = false;
     bool has_cpu_ship = false;
     bool has_player_ship = false;
@@ -224,6 +232,7 @@ void GameMasterScreen::update(float delta)
     // Record object type.
     for(P<SpaceObject> obj : targets.getTargets())
     {
+        has_object = true;
         if (P<SpaceShip>(obj))
             has_ship = true;
         else if (P<CpuShip>(obj))
@@ -236,7 +245,7 @@ void GameMasterScreen::update(float delta)
     player_ship_selector->setVisible(player_ship_selector->entryCount() > 0);
 
     // Show tweak button.
-    tweak_button->setVisible(has_ship);
+    tweak_button->setVisible(has_object);
 
     order_layout->setVisible(has_cpu_ship);
     gm_script_options->setVisible(!has_cpu_ship);

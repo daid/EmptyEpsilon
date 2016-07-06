@@ -49,6 +49,12 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
         list->addEntry("Player", "");
     }
 
+    if (tweak_type == TW_Object)
+    {
+        pages.push_back(new GuiObjectTweakBase(this));
+        list->addEntry("Base", "");
+    }
+
     for(GuiTweakPage* page : pages)
     {
         page->setSize(700, 600)->setPosition(0, 0, ABottomRight)->hide();
@@ -62,7 +68,7 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
     }))->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
 }
 
-void GuiObjectTweak::open(P<SpaceShip> target)
+void GuiObjectTweak::open(P<SpaceObject> target)
 {
     this->target = target;
 
@@ -142,6 +148,17 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
         target->hull_strength = std::min(roundf(value), target->hull_max);
     });
     hull_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Edit object's description.
+    // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
+    // editing long strings.
+    (new GuiLabel(right_col, "", "Description:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    description = new GuiTextEntry(right_col, "", "");
+    description->setSize(GuiElement::GuiSizeMax, 50);
+    description->callback([this](string text) {
+        target->setDescription(text);
+    });
 }
 
 void GuiShipTweakBase::onDraw(sf::RenderTarget& window)
@@ -149,20 +166,22 @@ void GuiShipTweakBase::onDraw(sf::RenderTarget& window)
     hull_slider->setValue(target->hull_strength);
 }
 
-void GuiShipTweakBase::open(P<SpaceShip> target)
+void GuiShipTweakBase::open(P<SpaceObject> target)
 {
-    this->target = target;
+    P<SpaceShip> ship = target;
+    this->target = ship;
     
-    type_name->setText(target->getTypeName());
-    callsign->setText(target->callsign);
-    warp_toggle->setValue(target->has_warp_drive);
-    jump_toggle->setValue(target->hasJumpDrive());
-    impulse_speed_slider->setValue(target->impulse_max_speed);
-    impulse_speed_slider->clearSnapValues()->addSnapValue(target->ship_template->impulse_speed, 5.0f);
-    turn_speed_slider->setValue(target->turn_speed);
-    turn_speed_slider->clearSnapValues()->addSnapValue(target->ship_template->turn_speed, 1.0f);
-    hull_max_slider->setValue(target->hull_max);
-    hull_max_slider->clearSnapValues()->addSnapValue(target->ship_template->hull, 5.0f);
+    type_name->setText(ship->getTypeName());
+    callsign->setText(ship->callsign);
+    description->setText(ship->getDescription());
+    warp_toggle->setValue(ship->has_warp_drive);
+    jump_toggle->setValue(ship->hasJumpDrive());
+    impulse_speed_slider->setValue(ship->impulse_max_speed);
+    impulse_speed_slider->clearSnapValues()->addSnapValue(ship->ship_template->impulse_speed, 5.0f);
+    turn_speed_slider->setValue(ship->turn_speed);
+    turn_speed_slider->clearSnapValues()->addSnapValue(ship->ship_template->turn_speed, 1.0f);
+    hull_max_slider->setValue(ship->hull_max);
+    hull_max_slider->clearSnapValues()->addSnapValue(ship->ship_template->hull, 5.0f);
 }
 
 GuiShipTweakMissileWeapons::GuiShipTweakMissileWeapons(GuiContainer* owner)
@@ -209,12 +228,13 @@ void GuiShipTweakMissileWeapons::onDraw(sf::RenderTarget& window)
     }
 }
 
-void GuiShipTweakMissileWeapons::open(P<SpaceShip> target)
+void GuiShipTweakMissileWeapons::open(P<SpaceObject> target)
 {
-    for(int n=0; n<MW_Count; n++)
-        missile_storage_amount_slider[n]->setValue(float(target->weapon_storage_max[n]));
+    P<SpaceShip> ship = target;
+    this->target = ship;
 
-    this->target = target;
+    for(int n = 0; n < MW_Count; n++)
+        missile_storage_amount_slider[n]->setValue(float(ship->weapon_storage_max[n]));
 }
 
 GuiShipTweakMissileTubes::GuiShipTweakMissileTubes(GuiContainer* owner)
@@ -289,11 +309,12 @@ void GuiShipTweakMissileTubes::onDraw(sf::RenderTarget& window)
     }
 }
 
-void GuiShipTweakMissileTubes::open(P<SpaceShip> target)
+void GuiShipTweakMissileTubes::open(P<SpaceObject> target)
 {
-    missile_tube_amount_selector->setSelectionIndex(target->weapon_tube_count);
+    P<SpaceShip> ship = target;
+    this->target = ship;
 
-    this->target = target;
+    missile_tube_amount_selector->setSelectionIndex(ship->weapon_tube_count);
 }
 
 GuiShipTweakShields::GuiShipTweakShields(GuiContainer* owner)
@@ -333,14 +354,15 @@ void GuiShipTweakShields::onDraw(sf::RenderTarget& window)
     }
 }
 
-void GuiShipTweakShields::open(P<SpaceShip> target)
+void GuiShipTweakShields::open(P<SpaceObject> target)
 {
-    this->target = target;
+    P<SpaceShip> ship = target;
+    this->target = ship;
 
-    for(int n=0; n<max_shield_count; n++)
+    for(int n = 0; n < max_shield_count; n++)
     {
-        shield_max_slider[n]->setValue(target->shield_max[n]);
-        shield_max_slider[n]->clearSnapValues()->addSnapValue(target->ship_template->shield_level[n], 5.0f);
+        shield_max_slider[n]->setValue(ship->shield_max[n]);
+        shield_max_slider[n]->clearSnapValues()->addSnapValue(ship->ship_template->shield_level[n], 5.0f);
     }
 }
 
@@ -436,9 +458,10 @@ void GuiShipTweakBeamweapons::onDraw(sf::RenderTarget& window)
     damage_slider->setValue(target->beam_weapons[beam_index].getDamage());
 }
 
-void GuiShipTweakBeamweapons::open(P<SpaceShip> target)
+void GuiShipTweakBeamweapons::open(P<SpaceObject> target)
 {
-    this->target = target;
+    P<SpaceShip> ship = target;
+    this->target = ship;
 }
 
 GuiShipTweakSystems::GuiShipTweakSystems(GuiContainer* owner)
@@ -480,9 +503,10 @@ void GuiShipTweakSystems::onDraw(sf::RenderTarget& window)
     }
 }
 
-void GuiShipTweakSystems::open(P<SpaceShip> target)
+void GuiShipTweakSystems::open(P<SpaceObject> target)
 {
-    this->target = target;
+    P<SpaceShip> ship = target;
+    this->target = ship;
 }
 
 GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
@@ -515,7 +539,7 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
     reputation_point_slider = new GuiSlider(left_col, "", 0.0, 9999.0, 0.0, [this](float value) {
         target->setReputationPoints(value);
     });
-    reputation_point_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 50);
+    reputation_point_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     // Edit energy level.
     (new GuiLabel(left_col, "", "Max energy:", 30))->setSize(GuiElement::GuiSizeMax, 50);
@@ -524,14 +548,14 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
         target->max_energy_level = value;
         target->energy_level = std::min(target->energy_level, target->max_energy_level);
     });
-    max_energy_level_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 50);
+    max_energy_level_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     (new GuiLabel(left_col, "", "Current energy:", 30))->setSize(GuiElement::GuiSizeMax, 50);
 
     energy_level_slider = new GuiSlider(left_col, "", 0.0, 2000, 0.0, [this](float value) {
         target->energy_level = std::min(value, target->max_energy_level);
     });
-    energy_level_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 50);
+    energy_level_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     // Right column
     // Count and list ship positions and whether they're occupied.
@@ -549,49 +573,91 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
 
 void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
 {
-    P<PlayerSpaceship> player = target;
+    // Update position list.
+    int position_counter = 0;
 
-    if (player)
+    // Update the status of each crew position.
+    for(int n = 0; n < max_crew_positions; n++)
     {
-        // Update position list.
-        int position_counter = 0;
+        string position_name = getCrewPositionName(ECrewPosition(n));
+        string position_state = "-";
 
-        // Update the status of each crew position.
-        for(int n = 0; n < max_crew_positions; n++)
+        if (target->hasPlayerAtPosition(ECrewPosition(n)))
         {
-            string position_name = getCrewPositionName(ECrewPosition(n));
-            string position_state = "-";
-
-            if (player->hasPlayerAtPosition(ECrewPosition(n)))
-            {
-                position_state = "Occupied";
-                position_counter += 1;
-            }
-
-            position[n]->setValue(position_state);
+            position_state = "Occupied";
+            position_counter += 1;
         }
 
-        // Update the total occupied position count.
-        position_count->setText("Positions occupied: " + string(position_counter));
-
-        // Update the ship's energy level.
-        energy_level_slider->setValue(player->energy_level);
-        max_energy_level_slider->setValue(player->max_energy_level);
-
-        // Update reputation points.
-        reputation_point_slider->setValue(player->getReputationPoints());
+        position[n]->setValue(position_state);
     }
+
+    // Update the total occupied position count.
+    position_count->setText("Positions occupied: " + string(position_counter));
+
+    // Update the ship's energy level.
+    energy_level_slider->setValue(target->energy_level);
+    max_energy_level_slider->setValue(target->max_energy_level);
+
+    // Update reputation points.
+    reputation_point_slider->setValue(target->getReputationPoints());
 }
 
-void GuiShipTweakPlayer::open(P<SpaceShip> target)
+void GuiShipTweakPlayer::open(P<SpaceObject> target)
 {
-    this->target = target;
-
     P<PlayerSpaceship> player = target;
+    this->target = player;
 
     if (player)
     {
         // Read ship's control code.
         control_code->setText(player->control_code);
     }
+}
+
+GuiObjectTweakBase::GuiObjectTweakBase(GuiContainer* owner)
+: GuiTweakPage(owner)
+{
+    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+
+    GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+
+    // Left column
+    // Edit object's callsign.
+    (new GuiLabel(left_col, "", "Callsign:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    callsign = new GuiTextEntry(left_col, "", "");
+    callsign->setSize(GuiElement::GuiSizeMax, 50);
+    callsign->callback([this](string text) {
+        target->callsign = text;
+    });
+
+    // Edit object's description.
+    // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
+    // editing long strings.
+    (new GuiLabel(left_col, "", "Description:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    description = new GuiTextEntry(left_col, "", "");
+    description->setSize(GuiElement::GuiSizeMax, 50);
+    description->callback([this](string text) {
+        target->setDescription(text);
+    });
+
+    // Right column
+}
+
+void GuiObjectTweakBase::onDraw(sf::RenderTarget& window)
+{
+}
+
+void GuiObjectTweakBase::open(P<SpaceObject> target)
+{
+    this->target = target;
+    
+    callsign->setText(target->callsign);
+    // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
+    // editing long strings.
+    description->setText(target->getDescription());
+
 }
