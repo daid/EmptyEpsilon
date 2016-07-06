@@ -49,6 +49,12 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
         list->addEntry("Player", "");
     }
 
+    if (tweak_type == TW_Object)
+    {
+        pages.push_back(new GuiObjectTweakBase(this));
+        list->addEntry("Base", "");
+    }
+
     for(GuiTweakPage* page : pages)
     {
         page->setSize(700, 600)->setPosition(0, 0, ABottomRight)->hide();
@@ -594,4 +600,36 @@ void GuiShipTweakPlayer::open(P<SpaceObject> target)
         // Read ship's control code.
         control_code->setText(player->control_code);
     }
+}
+
+GuiObjectTweakBase::GuiObjectTweakBase(GuiContainer* owner)
+: GuiTweakPage(owner)
+{
+    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+
+    GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+
+    // Left column
+    (new GuiLabel(left_col, "", "Callsign:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    callsign = new GuiTextEntry(left_col, "", "");
+    callsign->setSize(GuiElement::GuiSizeMax, 50);
+    callsign->callback([this](string text) {
+        target->callsign = text;
+    });
+
+    // Right column
+}
+
+void GuiObjectTweakBase::onDraw(sf::RenderTarget& window)
+{
+}
+
+void GuiObjectTweakBase::open(P<SpaceObject> target)
+{
+    this->target = target;
+    
+    callsign->setText(target->callsign);
 }

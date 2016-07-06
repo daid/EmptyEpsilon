@@ -176,6 +176,8 @@ class GuiObjectTweakBase : public GuiTweakPage
 {
 private:
     P<SpaceObject> target;
+
+    GuiTextEntry* callsign;
 public:
     GuiObjectTweakBase(GuiContainer* owner);
 
