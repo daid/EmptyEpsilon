@@ -151,18 +151,19 @@ void GuiShipTweakBase::onDraw(sf::RenderTarget& window)
 
 void GuiShipTweakBase::open(P<SpaceObject> target)
 {
-    this->target = target;
+    P<SpaceShip> ship = target;
+    this->target = ship;
     
-    type_name->setText(target->getTypeName());
-    callsign->setText(target->callsign);
-    warp_toggle->setValue(target->has_warp_drive);
-    jump_toggle->setValue(target->hasJumpDrive());
-    impulse_speed_slider->setValue(target->impulse_max_speed);
-    impulse_speed_slider->clearSnapValues()->addSnapValue(target->ship_template->impulse_speed, 5.0f);
-    turn_speed_slider->setValue(target->turn_speed);
-    turn_speed_slider->clearSnapValues()->addSnapValue(target->ship_template->turn_speed, 1.0f);
-    hull_max_slider->setValue(target->hull_max);
-    hull_max_slider->clearSnapValues()->addSnapValue(target->ship_template->hull, 5.0f);
+    type_name->setText(ship->getTypeName());
+    callsign->setText(ship->callsign);
+    warp_toggle->setValue(ship->has_warp_drive);
+    jump_toggle->setValue(ship->hasJumpDrive());
+    impulse_speed_slider->setValue(ship->impulse_max_speed);
+    impulse_speed_slider->clearSnapValues()->addSnapValue(ship->ship_template->impulse_speed, 5.0f);
+    turn_speed_slider->setValue(ship->turn_speed);
+    turn_speed_slider->clearSnapValues()->addSnapValue(ship->ship_template->turn_speed, 1.0f);
+    hull_max_slider->setValue(ship->hull_max);
+    hull_max_slider->clearSnapValues()->addSnapValue(ship->ship_template->hull, 5.0f);
 }
 
 GuiShipTweakMissileWeapons::GuiShipTweakMissileWeapons(GuiContainer* owner)
@@ -211,10 +212,11 @@ void GuiShipTweakMissileWeapons::onDraw(sf::RenderTarget& window)
 
 void GuiShipTweakMissileWeapons::open(P<SpaceObject> target)
 {
-    for(int n=0; n<MW_Count; n++)
-        missile_storage_amount_slider[n]->setValue(float(target->weapon_storage_max[n]));
+    P<SpaceShip> ship = target;
+    this->target = ship;
 
-    this->target = target;
+    for(int n = 0; n < MW_Count; n++)
+        missile_storage_amount_slider[n]->setValue(float(ship->weapon_storage_max[n]));
 }
 
 GuiShipTweakMissileTubes::GuiShipTweakMissileTubes(GuiContainer* owner)
@@ -291,9 +293,10 @@ void GuiShipTweakMissileTubes::onDraw(sf::RenderTarget& window)
 
 void GuiShipTweakMissileTubes::open(P<SpaceObject> target)
 {
-    missile_tube_amount_selector->setSelectionIndex(target->weapon_tube_count);
+    P<SpaceShip> ship = target;
+    this->target = ship;
 
-    this->target = target;
+    missile_tube_amount_selector->setSelectionIndex(ship->weapon_tube_count);
 }
 
 GuiShipTweakShields::GuiShipTweakShields(GuiContainer* owner)
@@ -335,12 +338,13 @@ void GuiShipTweakShields::onDraw(sf::RenderTarget& window)
 
 void GuiShipTweakShields::open(P<SpaceObject> target)
 {
-    this->target = target;
+    P<SpaceShip> ship = target;
+    this->target = ship;
 
-    for(int n=0; n<max_shield_count; n++)
+    for(int n = 0; n < max_shield_count; n++)
     {
-        shield_max_slider[n]->setValue(target->shield_max[n]);
-        shield_max_slider[n]->clearSnapValues()->addSnapValue(target->ship_template->shield_level[n], 5.0f);
+        shield_max_slider[n]->setValue(ship->shield_max[n]);
+        shield_max_slider[n]->clearSnapValues()->addSnapValue(ship->ship_template->shield_level[n], 5.0f);
     }
 }
 
@@ -438,7 +442,8 @@ void GuiShipTweakBeamweapons::onDraw(sf::RenderTarget& window)
 
 void GuiShipTweakBeamweapons::open(P<SpaceObject> target)
 {
-    this->target = target;
+    P<SpaceShip> ship = target;
+    this->target = ship;
 }
 
 GuiShipTweakSystems::GuiShipTweakSystems(GuiContainer* owner)
@@ -482,7 +487,8 @@ void GuiShipTweakSystems::onDraw(sf::RenderTarget& window)
 
 void GuiShipTweakSystems::open(P<SpaceObject> target)
 {
-    this->target = target;
+    P<SpaceShip> ship = target;
+    this->target = ship;
 }
 
 GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
@@ -549,45 +555,39 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
 
 void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
 {
-    P<PlayerSpaceship> player = target;
+    // Update position list.
+    int position_counter = 0;
 
-    if (player)
+    // Update the status of each crew position.
+    for(int n = 0; n < max_crew_positions; n++)
     {
-        // Update position list.
-        int position_counter = 0;
+        string position_name = getCrewPositionName(ECrewPosition(n));
+        string position_state = "-";
 
-        // Update the status of each crew position.
-        for(int n = 0; n < max_crew_positions; n++)
+        if (target->hasPlayerAtPosition(ECrewPosition(n)))
         {
-            string position_name = getCrewPositionName(ECrewPosition(n));
-            string position_state = "-";
-
-            if (player->hasPlayerAtPosition(ECrewPosition(n)))
-            {
-                position_state = "Occupied";
-                position_counter += 1;
-            }
-
-            position[n]->setValue(position_state);
+            position_state = "Occupied";
+            position_counter += 1;
         }
 
-        // Update the total occupied position count.
-        position_count->setText("Positions occupied: " + string(position_counter));
-
-        // Update the ship's energy level.
-        energy_level_slider->setValue(player->energy_level);
-        max_energy_level_slider->setValue(player->max_energy_level);
-
-        // Update reputation points.
-        reputation_point_slider->setValue(player->getReputationPoints());
+        position[n]->setValue(position_state);
     }
+
+    // Update the total occupied position count.
+    position_count->setText("Positions occupied: " + string(position_counter));
+
+    // Update the ship's energy level.
+    energy_level_slider->setValue(target->energy_level);
+    max_energy_level_slider->setValue(target->max_energy_level);
+
+    // Update reputation points.
+    reputation_point_slider->setValue(target->getReputationPoints());
 }
 
 void GuiShipTweakPlayer::open(P<SpaceObject> target)
 {
-    this->target = target;
-
     P<PlayerSpaceship> player = target;
+    this->target = player;
 
     if (player)
     {

@@ -47,7 +47,7 @@ private:
 class GuiShipTweakBase : public GuiTweakPage
 {
 private:
-    P<SpaceObject> target;
+    P<SpaceShip> target;
 
     GuiTextEntry* type_name;
     GuiTextEntry* callsign;
@@ -68,7 +68,7 @@ public:
 class GuiShipTweakMissileWeapons : public GuiTweakPage
 {
 private:
-    P<SpaceObject> target;
+    P<SpaceShip> target;
 
     GuiSlider* missile_storage_amount_slider[MW_Count];
     GuiSlider* missile_current_amount_slider[MW_Count];
@@ -83,7 +83,7 @@ public:
 class GuiShipTweakMissileTubes : public GuiTweakPage
 {
 private:
-    P<SpaceObject> target;
+    P<SpaceShip> target;
 
     int tube_index;
     GuiSelector* index_selector;
@@ -102,7 +102,7 @@ public:
 class GuiShipTweakShields : public GuiTweakPage
 {
 private:
-    P<SpaceObject> target;
+    P<SpaceShip> target;
 
     GuiSlider* shield_max_slider[max_shield_count];
     GuiSlider* shield_slider[max_shield_count];
@@ -117,7 +117,7 @@ public:
 class GuiShipTweakBeamweapons : public GuiTweakPage
 {
 private:
-    P<SpaceObject> target;
+    P<SpaceShip> target;
 
     int beam_index;
     GuiSlider* arc_slider;
@@ -140,7 +140,7 @@ public:
 class GuiShipTweakSystems : public GuiTweakPage
 {
 private:
-    P<SpaceObject> target;
+    P<SpaceShip> target;
 
     GuiSlider* system_damage[SYS_COUNT];
     GuiSlider* system_heat[SYS_COUNT];
