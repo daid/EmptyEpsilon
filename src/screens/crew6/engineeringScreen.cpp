@@ -216,6 +216,16 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
                 break;
             case SYS_BeamWeapons:
                 addSystemEffect("Firing rate", string(int(effectiveness * 100)) + "%");
+                // If the ship has a turret, also note that the rotation rate
+                // is affected.
+                for(int n = 0; n < max_beam_weapons; n++)
+                {
+                    if (my_spaceship->beam_weapons[n].getTurretArc() > 0)
+                    {
+                        addSystemEffect("Turret rotation rate", string(int(effectiveness * 100)) + "%");
+                        break;
+                    }
+                }
                 break;
             case SYS_MissileSystem:
                 addSystemEffect("Reload rate", string(int(effectiveness * 100)) + "%");
@@ -231,11 +241,11 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
                     addSystemEffect("Combat recharge rate", string(int(((my_spaceship->getSystemEffectiveness(SYS_Maneuver) + my_spaceship->getSystemEffectiveness(SYS_Impulse)) / 2.0) * 100)) + "%");
                 break;
             case SYS_Warp:
-                addSystemEffect("Warpdrive speed", string(int(effectiveness * 100)) + "%");
+                addSystemEffect("Warp drive speed", string(int(effectiveness * 100)) + "%");
                 break;
             case SYS_JumpDrive:
-                addSystemEffect("Jumpdrive recharge rate", string(int(my_spaceship->getJumpDriveRechargeRate() * 100)) + "%");
-                addSystemEffect("Jumpdrive jump speed", string(int(effectiveness * 100)) + "%");
+                addSystemEffect("Jump drive recharge rate", string(int(my_spaceship->getJumpDriveRechargeRate() * 100)) + "%");
+                addSystemEffect("Jump drive jump speed", string(int(effectiveness * 100)) + "%");
                 break;
             case SYS_FrontShield:
                 if (gameGlobalInfo->use_beam_shield_frequencies)
