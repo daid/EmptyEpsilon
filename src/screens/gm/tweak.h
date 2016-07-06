@@ -171,4 +171,16 @@ public:
 
     virtual void onDraw(sf::RenderTarget& window) override;
 };
+
+class GuiObjectTweakBase : public GuiTweakPage
+{
+private:
+    P<SpaceObject> target;
+public:
+    GuiObjectTweakBase(GuiContainer* owner);
+
+    virtual void open(P<SpaceObject> target);
+
+    virtual void onDraw(sf::RenderTarget& window) override;
+};
 #endif//GAME_MASTER_TWEAK_H
