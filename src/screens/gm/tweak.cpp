@@ -148,6 +148,17 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
         target->hull_strength = std::min(roundf(value), target->hull_max);
     });
     hull_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Edit object's description.
+    // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
+    // editing long strings.
+    (new GuiLabel(right_col, "", "Description:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    description = new GuiTextEntry(right_col, "", "");
+    description->setSize(GuiElement::GuiSizeMax, 50);
+    description->callback([this](string text) {
+        target->setDescription(text);
+    });
 }
 
 void GuiShipTweakBase::onDraw(sf::RenderTarget& window)
@@ -162,6 +173,7 @@ void GuiShipTweakBase::open(P<SpaceObject> target)
     
     type_name->setText(ship->getTypeName());
     callsign->setText(ship->callsign);
+    description->setText(ship->getDescription());
     warp_toggle->setValue(ship->has_warp_drive);
     jump_toggle->setValue(ship->hasJumpDrive());
     impulse_speed_slider->setValue(ship->impulse_max_speed);
@@ -612,12 +624,24 @@ GuiObjectTweakBase::GuiObjectTweakBase(GuiContainer* owner)
     right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     // Left column
+    // Edit object's callsign.
     (new GuiLabel(left_col, "", "Callsign:", 30))->setSize(GuiElement::GuiSizeMax, 50);
 
     callsign = new GuiTextEntry(left_col, "", "");
     callsign->setSize(GuiElement::GuiSizeMax, 50);
     callsign->callback([this](string text) {
         target->callsign = text;
+    });
+
+    // Edit object's description.
+    // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
+    // editing long strings.
+    (new GuiLabel(left_col, "", "Description:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    description = new GuiTextEntry(left_col, "", "");
+    description->setSize(GuiElement::GuiSizeMax, 50);
+    description->callback([this](string text) {
+        target->setDescription(text);
     });
 
     // Right column
@@ -632,4 +656,8 @@ void GuiObjectTweakBase::open(P<SpaceObject> target)
     this->target = target;
     
     callsign->setText(target->callsign);
+    // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
+    // editing long strings.
+    description->setText(target->getDescription());
+
 }

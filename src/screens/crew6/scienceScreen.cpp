@@ -295,10 +295,13 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
 
         if (description.size() > 0)
         {
-            info_description->setText(description);
+            LOG(INFO) << "Show description in sidebar: " << description;
+            info_description->setText(description)->show();
 
             if (!sidebar_pager->indexByValue("Description"))
+            {
                 sidebar_pager->addEntry("Description", "Description");
+            }
         }
         else
         {

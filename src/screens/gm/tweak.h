@@ -51,6 +51,7 @@ private:
 
     GuiTextEntry* type_name;
     GuiTextEntry* callsign;
+    GuiTextEntry* description;
     GuiToggleButton* warp_toggle;
     GuiToggleButton* jump_toggle;
     GuiSlider* impulse_speed_slider;
@@ -178,6 +179,7 @@ private:
     P<SpaceObject> target;
 
     GuiTextEntry* callsign;
+    GuiTextEntry* description;
 public:
     GuiObjectTweakBase(GuiContainer* owner);
 
