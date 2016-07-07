@@ -128,7 +128,7 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
     turn_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     (new GuiLabel(left_col, "", "Heading:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-    heading_slider = new GuiSlider(left_col, "", 0.0, 359.0, 0.0, [this](float value) {
+    heading_slider = new GuiSlider(left_col, "", 0.0, 359.9, 0.0, [this](float value) {
         target->setHeading(value);
 
         // If the target is a player, also set its target rotation.
@@ -404,29 +404,29 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
     arc_slider = new GuiSlider(right_col, "", 0.0, 360.0, 0.0, [this](float value) {
         target->beam_weapons[beam_index].setArc(roundf(value));
     });
-    arc_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+    arc_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", "Direction:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     direction_slider = new GuiSlider(right_col, "", -180.0, 180.0, 0.0, [this](float value) {
         target->beam_weapons[beam_index].setDirection(roundf(value));
     });
-    direction_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+    direction_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
-    (new GuiLabel(right_col, "", "Turret Arc:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(right_col, "", "Turret arc:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     turret_arc_slider = new GuiSlider(right_col, "", 0.0, 360.0, 0.0, [this](float value) {
         target->beam_weapons[beam_index].setTurretArc(roundf(value));
     });
-    turret_arc_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+    turret_arc_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
-    (new GuiLabel(right_col, "", "Turret Direction:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(right_col, "", "Turret direction:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     turret_direction_slider = new GuiSlider(right_col, "", -180.0, 180.0, 0.0, [this](float value) {
         target->beam_weapons[beam_index].setTurretDirection(roundf(value));
     });
-    turret_direction_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+    turret_direction_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
-    (new GuiLabel(right_col, "", "Turret Rotation Rate:", 20))->setSize(GuiElement::GuiSizeMax, 30);
-    // 25 is an arbitrary limit for granularity; values greater than 25 result
-    // in practicaly instantaneous turret rotation.
+    (new GuiLabel(right_col, "", "Turret rotation rate:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    // 25 is an arbitrary limit to add granularity; values greater than 25
+    // result in practicaly instantaneous turret rotation anyway.
     turret_rotation_rate_slider = new GuiSlider(right_col, "", 0.0, 250.0, 0.0, [this](float value) {
         // Divide a large value for granularity.
         if (value > 0)
@@ -434,7 +434,7 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
         else
             target->beam_weapons[beam_index].setTurretRotationRate(0.0);
     });
-    turret_rotation_rate_slider->setSize(GuiElement::GuiSizeMax, 40);
+    turret_rotation_rate_slider->setSize(GuiElement::GuiSizeMax, 30);
     // Override overlay label.
     turret_rotation_rate_overlay_label = new GuiLabel(turret_rotation_rate_slider, "", "", 30);
     turret_rotation_rate_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -443,24 +443,24 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
     range_slider = new GuiSlider(right_col, "", 0.0, 5000.0, 0.0, [this](float value) {
         target->beam_weapons[beam_index].setRange(roundf(value / 100) * 100);
     });
-    range_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+    range_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", "Cycle time:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     cycle_time_slider = new GuiSlider(right_col, "", 0.1, 20.0, 0.0, [this](float value) {
         target->beam_weapons[beam_index].setCycleTime(value);
     });
-    cycle_time_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+    cycle_time_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", "Damage:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     damage_slider = new GuiSlider(right_col, "", 0.1, 50.0, 0.0, [this](float value) {
         target->beam_weapons[beam_index].setDamage(value);
     });
-    damage_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+    damage_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 }
 
 void GuiShipTweakBeamweapons::onDraw(sf::RenderTarget& window)
 {
-    target->drawOnRadar(window, sf::Vector2f(rect.left + rect.width / 2.0f, rect.top + rect.height * 0.8), 300.0f / 5000.0f, false);
+    target->drawOnRadar(window, sf::Vector2f(rect.left - 150.0f + rect.width / 2.0f, rect.top + rect.height * 0.66), 300.0f / 5000.0f, false);
 
     arc_slider->setValue(target->beam_weapons[beam_index].getArc());
     direction_slider->setValue(sf::angleDifference(0.0f, target->beam_weapons[beam_index].getDirection()));
@@ -662,7 +662,7 @@ GuiObjectTweakBase::GuiObjectTweakBase(GuiContainer* owner)
 
     // Set object's heading.
     (new GuiLabel(left_col, "", "Heading:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-    heading_slider = new GuiSlider(left_col, "", 0.0, 360.0, 0.0, [this](float value) {
+    heading_slider = new GuiSlider(left_col, "", 0.0, 359.9, 0.0, [this](float value) {
         target->setHeading(value);
     });
     heading_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
@@ -672,7 +672,7 @@ GuiObjectTweakBase::GuiObjectTweakBase(GuiContainer* owner)
 
 void GuiObjectTweakBase::onDraw(sf::RenderTarget& window)
 {
-    heading_slider->setValue(target->getHeading());    
+    heading_slider->setValue(target->getHeading());
 }
 
 void GuiObjectTweakBase::open(P<SpaceObject> target)
