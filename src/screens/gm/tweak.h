@@ -4,32 +4,43 @@
 #include "gui/gui2_panel.h"
 #include "missileWeaponData.h"
 #include "shipTemplate.h"
+#include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 
 class SpaceShip;
+class GuiKeyValueDisplay;
 class GuiLabel;
 class GuiTextEntry;
 class GuiSlider;
 class GuiSelector;
 class GuiToggleButton;
 
+enum ETweakType
+{
+    TW_Object,  // TODO: Space object
+    TW_Ship,    // Ships
+    TW_Station, // TODO: Space stations
+    TW_Player   // Player ships
+};
+
 class GuiTweakPage : public GuiElement
 {
 public:
     GuiTweakPage(GuiContainer* owner) : GuiElement(owner, "") {}
 
-    virtual void open(P<SpaceShip> target) = 0;
+    virtual void open(P<SpaceObject> target) = 0;
 };
 
-class GuiShipTweak : public GuiPanel
+class GuiObjectTweak : public GuiPanel
 {
 public:
-    GuiShipTweak(GuiContainer* owner);
+    GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type);
     
-    void open(P<SpaceShip> target);
+    void open(P<SpaceObject> target);
 
     virtual void onDraw(sf::RenderTarget& window) override;
 private:
-    P<SpaceShip> target;
+    P<SpaceObject> target;
     std::vector<GuiTweakPage*> pages;
 };
 
@@ -40,6 +51,7 @@ private:
 
     GuiTextEntry* type_name;
     GuiTextEntry* callsign;
+    GuiTextEntry* description;
     GuiToggleButton* warp_toggle;
     GuiToggleButton* jump_toggle;
     GuiSlider* impulse_speed_slider;
@@ -51,7 +63,7 @@ public:
 
     virtual void onDraw(sf::RenderTarget& window) override;
     
-    virtual void open(P<SpaceShip> target) override;
+    virtual void open(P<SpaceObject> target) override;
 };
 
 class GuiShipTweakMissileWeapons : public GuiTweakPage
@@ -66,7 +78,7 @@ public:
 
     virtual void onDraw(sf::RenderTarget& window) override;
     
-    virtual void open(P<SpaceShip> target) override;
+    virtual void open(P<SpaceObject> target) override;
 };
 
 class GuiShipTweakMissileTubes : public GuiTweakPage
@@ -85,7 +97,7 @@ public:
 
     virtual void onDraw(sf::RenderTarget& window) override;
     
-    virtual void open(P<SpaceShip> target) override;
+    virtual void open(P<SpaceObject> target) override;
 };
 
 class GuiShipTweakShields : public GuiTweakPage
@@ -100,7 +112,7 @@ public:
 
     virtual void onDraw(sf::RenderTarget& window) override;
     
-    virtual void open(P<SpaceShip> target) override;
+    virtual void open(P<SpaceObject> target) override;
 };
 
 class GuiShipTweakBeamweapons : public GuiTweakPage
@@ -121,7 +133,7 @@ private:
 public:
     GuiShipTweakBeamweapons(GuiContainer* owner);
 
-    virtual void open(P<SpaceShip> target) override;
+    virtual void open(P<SpaceObject> target) override;
 
     virtual void onDraw(sf::RenderTarget& window) override;
 };
@@ -137,9 +149,42 @@ private:
 public:
     GuiShipTweakSystems(GuiContainer* owner);
 
-    virtual void open(P<SpaceShip> target) override;
+    virtual void open(P<SpaceObject> target) override;
 
     virtual void onDraw(sf::RenderTarget& window) override;
 };
 
+class GuiShipTweakPlayer : public GuiTweakPage
+{
+private:
+    P<PlayerSpaceship> target;
+
+    GuiTextEntry* control_code;
+    GuiSlider* reputation_point_slider;
+    GuiSlider* energy_level_slider;
+    GuiSlider* max_energy_level_slider;
+    GuiLabel* position_count;
+    GuiKeyValueDisplay* position[max_crew_positions];
+public:
+    GuiShipTweakPlayer(GuiContainer* owner);
+
+    virtual void open(P<SpaceObject> target);
+
+    virtual void onDraw(sf::RenderTarget& window) override;
+};
+
+class GuiObjectTweakBase : public GuiTweakPage
+{
+private:
+    P<SpaceObject> target;
+
+    GuiTextEntry* callsign;
+    GuiTextEntry* description;
+public:
+    GuiObjectTweakBase(GuiContainer* owner);
+
+    virtual void open(P<SpaceObject> target);
+
+    virtual void onDraw(sf::RenderTarget& window) override;
+};
 #endif//GAME_MASTER_TWEAK_H

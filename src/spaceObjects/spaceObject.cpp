@@ -44,6 +44,8 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getCallSign);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, areEnemiesInRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getObjectsInRange);
+    /// Sets the reputation to a value.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setReputationPoints);
     /// Return the current amount of reputation points.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getReputationPoints);
     /// Take a certain amount of reputation points, returns true when there are enough points to take. Returns false when there are not enough points and does not lower the points.
@@ -309,6 +311,13 @@ PVector<SpaceObject> SpaceObject::getObjectsInRange(float range)
         }
     }
     return ret;
+}
+
+void SpaceObject::setReputationPoints(float amount)
+{
+    if (gameGlobalInfo->reputation_points.size() < faction_id)
+        return;
+    gameGlobalInfo->reputation_points[faction_id] = amount;
 }
 
 int SpaceObject::getReputationPoints()

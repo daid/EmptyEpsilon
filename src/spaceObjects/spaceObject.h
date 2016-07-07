@@ -159,6 +159,7 @@ public:
     string getFaction() { return factionInfo[this->faction_id]->getName(); }
     void setFactionId(unsigned int faction_id) { this->faction_id = faction_id; }
     unsigned int getFactionId() { return faction_id; }
+    void setReputationPoints(float amount);
     int getReputationPoints();
     bool takeReputationPoints(float amount);
     void removeReputationPoints(float amount);
