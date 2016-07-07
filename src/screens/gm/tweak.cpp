@@ -96,20 +96,23 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
     right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     // Left column
-    (new GuiLabel(left_col, "", "Type name:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-
-    type_name = new GuiTextEntry(left_col, "", "");
-    type_name->setSize(GuiElement::GuiSizeMax, 50);
-    type_name->callback([this](string text) {
-        target->setTypeName(text);
-    });
-
     (new GuiLabel(left_col, "", "Callsign:", 30))->setSize(GuiElement::GuiSizeMax, 50);
 
     callsign = new GuiTextEntry(left_col, "", "");
     callsign->setSize(GuiElement::GuiSizeMax, 50);
     callsign->callback([this](string text) {
         target->callsign = text;
+    });
+
+    // Edit object's description.
+    // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
+    // editing long strings.
+    (new GuiLabel(left_col, "", "Description:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    description = new GuiTextEntry(left_col, "", "");
+    description->setSize(GuiElement::GuiSizeMax, 50);
+    description->callback([this](string text) {
+        target->setDescription(text);
     });
 
     (new GuiLabel(left_col, "", "Impulse speed:", 30))->setSize(GuiElement::GuiSizeMax, 50);
@@ -124,18 +127,28 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
     });
     turn_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
-    (new GuiLabel(left_col, "", "Special drives:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-    warp_toggle = new GuiToggleButton(left_col, "", "Warp Drive", [this](bool value) {
-        target->setWarpDrive(value);
-    });
-    warp_toggle->setSize(GuiElement::GuiSizeMax, 40);
+    (new GuiLabel(left_col, "", "Heading:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    heading_slider = new GuiSlider(left_col, "", 0.0, 359.0, 0.0, [this](float value) {
+        target->setHeading(value);
 
-    jump_toggle = new GuiToggleButton(left_col, "", "Jump Drive", [this](bool value) {
-        target->setJumpDrive(value);
+        // If the target is a player, also set its target rotation.
+        P<PlayerSpaceship> player = target;
+        if (player)
+            player->commandTargetRotation(value - 90.0f);
     });
-    jump_toggle->setSize(GuiElement::GuiSizeMax, 40);
+    heading_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     // Right column
+    // Set type name. Does not change ship type.
+    (new GuiLabel(right_col, "", "Type name:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    type_name = new GuiTextEntry(right_col, "", "");
+    type_name->setSize(GuiElement::GuiSizeMax, 50);
+    type_name->callback([this](string text) {
+        target->setTypeName(text);
+    });
+
+    // Hull max and state sliders
     (new GuiLabel(right_col, "", "Hull max:", 30))->setSize(GuiElement::GuiSizeMax, 50);
     hull_max_slider = new GuiSlider(right_col, "", 0.0, 500, 0.0, [this](float value) {
         target->hull_max = round(value);
@@ -149,20 +162,22 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
     });
     hull_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
-    // Edit object's description.
-    // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
-    // editing long strings.
-    (new GuiLabel(right_col, "", "Description:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-
-    description = new GuiTextEntry(right_col, "", "");
-    description->setSize(GuiElement::GuiSizeMax, 50);
-    description->callback([this](string text) {
-        target->setDescription(text);
+    // Warp and jump drive toggles
+    (new GuiLabel(right_col, "", "Special drives:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    warp_toggle = new GuiToggleButton(right_col, "", "Warp Drive", [this](bool value) {
+        target->setWarpDrive(value);
     });
+    warp_toggle->setSize(GuiElement::GuiSizeMax, 40);
+
+    jump_toggle = new GuiToggleButton(right_col, "", "Jump Drive", [this](bool value) {
+        target->setJumpDrive(value);
+    });
+    jump_toggle->setSize(GuiElement::GuiSizeMax, 40);
 }
 
 void GuiShipTweakBase::onDraw(sf::RenderTarget& window)
 {
+    heading_slider->setValue(target->getHeading());
     hull_slider->setValue(target->hull_strength);
 }
 
@@ -638,17 +653,26 @@ GuiObjectTweakBase::GuiObjectTweakBase(GuiContainer* owner)
     // editing long strings.
     (new GuiLabel(left_col, "", "Description:", 30))->setSize(GuiElement::GuiSizeMax, 50);
 
+    // Set object's description.
     description = new GuiTextEntry(left_col, "", "");
     description->setSize(GuiElement::GuiSizeMax, 50);
     description->callback([this](string text) {
         target->setDescription(text);
     });
 
+    // Set object's heading.
+    (new GuiLabel(left_col, "", "Heading:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    heading_slider = new GuiSlider(left_col, "", 0.0, 360.0, 0.0, [this](float value) {
+        target->setHeading(value);
+    });
+    heading_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
     // Right column
 }
 
 void GuiObjectTweakBase::onDraw(sf::RenderTarget& window)
 {
+    heading_slider->setValue(target->getHeading());    
 }
 
 void GuiObjectTweakBase::open(P<SpaceObject> target)

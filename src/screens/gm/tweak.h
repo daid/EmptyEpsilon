@@ -56,6 +56,7 @@ private:
     GuiToggleButton* jump_toggle;
     GuiSlider* impulse_speed_slider;
     GuiSlider* turn_speed_slider;
+    GuiSlider* heading_slider;
     GuiSlider* hull_max_slider;
     GuiSlider* hull_slider;
 public:
@@ -180,6 +181,7 @@ private:
 
     GuiTextEntry* callsign;
     GuiTextEntry* description;
+    GuiSlider* heading_slider;
 public:
     GuiObjectTweakBase(GuiContainer* owner);
 
