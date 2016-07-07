@@ -143,6 +143,7 @@ string alertLevelToString(EAlertLevel level)
     }
 }
 
+// Configure ship's log packets.
 static inline sf::Packet& operator << (sf::Packet& packet, const PlayerSpaceship::ShipLogEntry& e) { return packet << e.prefix << e.text << e.color.r << e.color.g << e.color.b << e.color.a << e.station; }
 static inline sf::Packet& operator >> (sf::Packet& packet, PlayerSpaceship::ShipLogEntry& e) { packet >> e.prefix >> e.text >> e.color.r >> e.color.g >> e.color.b >> e.color.a >> e.station; return packet; }
 
