@@ -203,7 +203,6 @@ void GameMasterScreen::update(float delta)
     }
     
     bool has_object = false;
-    bool has_ship = false;
     bool has_cpu_ship = false;
     bool has_player_ship = false;
 
@@ -233,9 +232,7 @@ void GameMasterScreen::update(float delta)
     for(P<SpaceObject> obj : targets.getTargets())
     {
         has_object = true;
-        if (P<SpaceShip>(obj))
-            has_ship = true;
-        else if (P<CpuShip>(obj))
+        if (P<CpuShip>(obj))
             has_cpu_ship = true;
         else if (P<PlayerSpaceship>(obj))
             has_player_ship = true;
