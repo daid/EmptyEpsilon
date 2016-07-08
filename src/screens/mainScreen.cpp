@@ -230,9 +230,9 @@ void ScreenMainScreen::onClick(sf::Vector2f mouse_position)
     }
 }
 
-void ScreenMainScreen::onKey(sf::Keyboard::Key key, int unicode)
+void ScreenMainScreen::onKey(sf::Event::KeyEvent key, int unicode)
 {
-    switch(key)
+    switch(key.code)
     {
     case sf::Keyboard::Up:
         if (my_spaceship)

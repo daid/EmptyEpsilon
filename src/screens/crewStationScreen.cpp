@@ -2,6 +2,7 @@
 #include "epsilonServer.h"
 #include "main.h"
 #include "preferenceManager.h"
+#include "playerInfo.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/noiseOverlay.h"
@@ -42,19 +43,7 @@ void CrewStationScreen::addStationTab(GuiElement* element, string name, string i
     element->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     info.element = element;
     info.button = new GuiToggleButton(button_strip, "STATION_BUTTON_" + name, name, [this, element](bool value) {
-        for(CrewTabInfo& info : tabs)
-        {
-            if (info.element == element)
-            {
-                info.element->show();
-                info.button->setValue(true);
-                select_station_button->setText(info.button->getText());
-                select_station_button->setIcon(info.button->getIcon());
-            }else{
-                info.element->hide();
-                info.button->setValue(false);
-            }
-        }
+        showTab(element);
         button_strip->hide();
     });
     info.button->setIcon(icon);
@@ -96,9 +85,30 @@ void CrewStationScreen::update(float delta)
     }
 }
 
-void CrewStationScreen::onKey(sf::Keyboard::Key key, int unicode)
+void CrewStationScreen::onHotkey(const HotkeyResult& key)
 {
-    switch(key)
+    if (key.category == "GENERAL")
+    {
+        if (key.hotkey == "NEXT_STATION")
+            showNextTab(1);
+        else if (key.hotkey == "PREV_STATION")
+            showNextTab(-1);
+        else if (key.hotkey == "HELMS_STATION")
+            showTab(findTab(getCrewPositionName(helmsOfficer)));
+        else if (key.hotkey == "WEAPONS_STATION")
+            showTab(findTab(getCrewPositionName(weaponsOfficer)));
+        else if (key.hotkey == "STATION_ENGINEERING")
+            showTab(findTab(getCrewPositionName(engineering)));
+        else if (key.hotkey == "STATION_SCIENCE")
+            showTab(findTab(getCrewPositionName(scienceOfficer)));
+        else if (key.hotkey == "STATION_RELAY")
+            showTab(findTab(getCrewPositionName(relayOfficer)));
+    }
+}
+
+void CrewStationScreen::onKey(sf::Event::KeyEvent key, int unicode)
+{
+    switch(key.code)
     {
     //TODO: This is more generic code and is duplicated.
     case sf::Keyboard::Escape:
@@ -114,4 +124,45 @@ void CrewStationScreen::onKey(sf::Keyboard::Key key, int unicode)
     default:
         break;
     }
+}
+
+void CrewStationScreen::showNextTab(int offset)
+{
+    int current = 0;
+    for(unsigned int n=0; n<tabs.size(); n++)
+    {
+        if (tabs[n].element->isVisible())
+            current = n;
+    }
+    int next = (current + offset + tabs.size()) % tabs.size();
+    showTab(tabs[next].element);
+}
+
+void CrewStationScreen::showTab(GuiElement* element)
+{
+    if (!element)
+        return;
+    for(CrewTabInfo& info : tabs)
+    {
+        if (info.element == element)
+        {
+            info.element->show();
+            info.button->setValue(true);
+            select_station_button->setText(info.button->getText());
+            select_station_button->setIcon(info.button->getIcon());
+        }else{
+            info.element->hide();
+            info.button->setValue(false);
+        }
+    }
+}
+
+GuiElement* CrewStationScreen::findTab(string name)
+{
+    for(CrewTabInfo& info : tabs)
+    {
+        if (info.button->getText() == name)
+            return info.element;
+    }
+    return nullptr;
 }

@@ -4,12 +4,9 @@
 #include "preferenceManager.h"
 
 GuiButton::GuiButton(GuiContainer* owner, string id, string text, func_t func)
-: GuiElement(owner, id), text(text), func(func), hotkey(sf::Keyboard::KeyCount)
+: GuiElement(owner, id), text(text), func(func)
 {
     text_size = 30;
-    
-    if (id != "")
-        hotkey = PreferencesManager::getKey(id + "_BUTTON_HOTKEY");
 }
 
 void GuiButton::onDraw(sf::RenderTarget& window)
@@ -71,17 +68,6 @@ void GuiButton::onMouseUp(sf::Vector2f position)
     }
 }
 
-bool GuiButton::onHotkey(sf::Keyboard::Key key, int unicode)
-{
-    if (key == hotkey)
-    {
-        if (func)
-            func();
-        return true;
-    }
-    return false;
-}
-
 string GuiButton::getText()
 {
     return text;
@@ -90,12 +76,6 @@ string GuiButton::getText()
 GuiButton* GuiButton::setText(string text)
 {
     this->text = text;
-    return this;
-}
-
-GuiButton* GuiButton::setHotkey(sf::Keyboard::Key key)
-{
-    hotkey = key;
     return this;
 }
 

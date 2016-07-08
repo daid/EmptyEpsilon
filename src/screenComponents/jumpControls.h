@@ -18,7 +18,8 @@ private:
 public:
     GuiJumpControls(GuiContainer* owner, string id);
     
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onHotkey(const HotkeyResult& key) override;
 };
 
 #endif//GUI_JUMP_CONTROLS_H

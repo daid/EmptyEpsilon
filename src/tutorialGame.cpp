@@ -112,9 +112,9 @@ void TutorialGame::update(float delta)
     }
 }
 
-void TutorialGame::onKey(sf::Keyboard::Key key, int unicode)
+void TutorialGame::onKey(sf::Event::KeyEvent key, int unicode)
 {
-    switch(key)
+    switch(key.code)
     {
     case sf::Keyboard::Escape:
     case sf::Keyboard::Home:

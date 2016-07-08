@@ -453,14 +453,15 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
     box_selection_overlay->hide();
 }
 
-void GameMasterScreen::onKey(sf::Keyboard::Key key, int unicode)
+void GameMasterScreen::onKey(sf::Event::KeyEvent key, int unicode)
 {
-    switch(key)
+    switch(key.code)
     {
     case sf::Keyboard::Delete:
         for(P<SpaceObject> obj : targets.getTargets())
         {
-            obj->destroy();
+            if (obj)
+                obj->destroy();
         }
         break;
     case sf::Keyboard::F5:

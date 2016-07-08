@@ -50,9 +50,9 @@ private:
 public:
     CinematicViewScreen();
     
-    virtual void update(float delta);
+    virtual void update(float delta) override;
     
-    virtual void onKey(sf::Keyboard::Key key, int unicode);
+    virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
 };
 
 #endif//CINEMATIC_VIEW_SCREEN_H

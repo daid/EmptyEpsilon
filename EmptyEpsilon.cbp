@@ -523,6 +523,8 @@
 		<Unit filename="src/gui/gui2_textentry.h" />
 		<Unit filename="src/gui/gui2_togglebutton.cpp" />
 		<Unit filename="src/gui/gui2_togglebutton.h" />
+		<Unit filename="src/gui/hotkeyConfig.cpp" />
+		<Unit filename="src/gui/hotkeyConfig.h" />
 		<Unit filename="src/gui/mouseRenderer.cpp" />
 		<Unit filename="src/gui/mouseRenderer.h" />
 		<Unit filename="src/gui/scriptError.cpp" />

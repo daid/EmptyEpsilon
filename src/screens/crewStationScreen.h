@@ -17,7 +17,6 @@ private:
     GuiButton* select_station_button;
     GuiPanel* button_strip;
     struct CrewTabInfo {
-        string name;
         GuiToggleButton* button;
         GuiElement* element;
     };
@@ -27,8 +26,14 @@ public:
     void addStationTab(GuiElement* element, string name, string icon);
     void finishCreation();
     
-    virtual void update(float delta);
-    virtual void onKey(sf::Keyboard::Key key, int unicode);
+    virtual void update(float delta) override;
+    virtual void onHotkey(const HotkeyResult& key) override;
+    virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
+
+private:
+    void showNextTab(int offset=1);
+    void showTab(GuiElement* element);
+    GuiElement* findTab(string name);
 };
 
 #endif//CREW_STATION_SCREEN_H

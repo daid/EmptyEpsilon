@@ -128,6 +128,7 @@ set(SOURCES
 	src/screenComponents/shipsLogControl.cpp
 	src/screenComponents/onScreenKeyboard.cpp
 	src/gui/colorConfig.cpp
+	src/gui/hotkeyConfig.cpp
 	src/gui/mouseRenderer.cpp
 	src/gui/scriptError.cpp
 	src/gui/gui2_slider.cpp

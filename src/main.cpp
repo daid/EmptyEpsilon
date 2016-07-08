@@ -7,6 +7,7 @@
 #include "gui/mouseRenderer.h"
 #include "gui/debugRenderer.h"
 #include "gui/colorConfig.h"
+#include "gui/hotkeyConfig.h"
 #include "menus/mainMenus.h"
 #include "menus/autoConnectScreen.h"
 #include "menus/shipSelectionScreen.h"
@@ -170,6 +171,7 @@ int main(int argc, char** argv)
     }
 
     colorConfig.load();
+    hotkeys.load();
 
     if (PreferencesManager::get("headless") == "")
     {

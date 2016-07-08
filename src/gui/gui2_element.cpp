@@ -29,14 +29,13 @@ void GuiElement::onMouseUp(sf::Vector2f position)
 {
 }
 
-bool GuiElement::onKey(sf::Keyboard::Key key, int unicode)
+bool GuiElement::onKey(sf::Event::KeyEvent key, int unicode)
 {
     return false;
 }
 
-bool GuiElement::onHotkey(sf::Keyboard::Key key, int unicode)
+void GuiElement::onHotkey(const HotkeyResult& key)
 {
-    return false;
 }
 
 bool GuiElement::onJoystickXYMove(sf::Vector2f position)

@@ -33,3 +33,35 @@ void GuiWarpControls::onDraw(sf::RenderTarget& window)
     if (my_spaceship)
         label->setValue(string(my_spaceship->current_warp, 1));
 }
+
+void GuiWarpControls::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "HELMS" && my_spaceship)
+    {
+        if (key.hotkey == "WARP_0")
+        {
+            my_spaceship->commandWarp(0);
+            slider->setValue(0);
+        }
+        else if (key.hotkey == "WARP_1")
+        {
+            my_spaceship->commandWarp(1);
+            slider->setValue(1);
+        }
+        else if (key.hotkey == "WARP_2")
+        {
+            my_spaceship->commandWarp(2);
+            slider->setValue(2);
+        }
+        else if (key.hotkey == "WARP_3")
+        {
+            my_spaceship->commandWarp(3);
+            slider->setValue(3);
+        }
+        else if (key.hotkey == "WARP_4")
+        {
+            my_spaceship->commandWarp(4);
+            slider->setValue(4);
+        }
+    }
+}
