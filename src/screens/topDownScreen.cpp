@@ -33,7 +33,7 @@ TopDownScreen::TopDownScreen()
     new GuiIndicatorOverlays(this);
 
     // Lock onto the first player ship to start.
-    for(int n = 0; n < gameGlobalInfo->max_player_ships; n++)
+    for(int n = 0; n < GameGlobalInfo::max_player_ships; n++)
     {
         if (gameGlobalInfo->getPlayerShip(n))
         {
