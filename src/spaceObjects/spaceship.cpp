@@ -1091,7 +1091,12 @@ std::unordered_map<string, string> SpaceShip::getGMInfo()
 
 string SpaceShip::getScriptExportModificationsOnTemplate()
 {
+    // Exports attributes common to ships as Lua script function calls.
+    // Initialize the exported string.
     string ret = "";
+
+    // If traits don't differ from the ship template, don't bother exporting
+    // them.
     if (getTypeName() != ship_template->getName())
         ret += ":setTypeName(" + getTypeName() + ")";
     if (hull_max != ship_template->hull)
@@ -1107,42 +1112,59 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
     if (has_warp_drive != (ship_template->warp_speed > 0))
         ret += ":setWarpDrive(" + string(has_warp_drive ? "true" : "false") + ")";
 
-    /// shield data
+    // Shield data
+    // Determine whether to export shield data.
     bool add_shields_max_line = getShieldCount() != ship_template->shield_count;
     bool add_shields_line = getShieldCount() != ship_template->shield_count;
-    for(int n=0; n<getShieldCount(); n++)
+
+    // If shield max and level don't differ from the template, don't bother
+    // exporting them.
+    for(int n = 0; n < getShieldCount(); n++)
     {
         if (getShieldMax(n) != ship_template->shield_level[n])
             add_shields_max_line = true;
         if (getShieldLevel(n) != ship_template->shield_level[n])
             add_shields_line = true;
     }
+
+    // If we're exporting shield max ...
     if (add_shields_max_line)
     {
         ret += ":setShieldsMax(";
-        for(int n=0; n<getShieldCount(); n++)
+
+        // ... for each shield, export the shield max.
+        for(int n = 0; n < getShieldCount(); n++)
         {
             if (n > 0)
                 ret += ", ";
-            ret += getShieldMax(n);
+
+            ret += string(getShieldMax(n));
         }
+
         ret += ")";
     }
+
+    // If we're exporting shield level ...
     if (add_shields_line)
     {
         ret += ":setShields(";
-        for(int n=0; n<getShieldCount(); n++)
+
+        // ... for each shield, export the shield level.
+        for(int n = 0; n < getShieldCount(); n++)
         {
             if (n > 0)
                 ret += ", ";
-            ret += getShieldLevel(n);
+
+            ret += string(getShieldLevel(n));
         }
+
         ret += ")";
     }
 
     ///Missile weapon data
     if (weapon_tube_count != ship_template->weapon_tube_count)
         ret += ":setWeaponTubeCount(" + string(weapon_tube_count) + ")";
+
     for(int n=0; n<weapon_tube_count; n++)
     {
         WeaponTube& tube = weapon_tube[n];
