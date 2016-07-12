@@ -63,12 +63,12 @@ OptionsMenu::OptionsMenu()
     sound_volume_slider = new GuiSlider(this, "SOUND_VOLUME_SLIDER", 0.0f, 100.0f, soundManager->getMasterSoundVolume(), [this](float volume)
     {
         soundManager->setMasterSoundVolume(volume);
-        sound_volume_overlay_label->setText("Sound Volume: " + string(soundManager->getMasterSoundVolume()) + "%");
+        sound_volume_overlay_label->setText("Sound Volume: " + string(int(soundManager->getMasterSoundVolume())) + "%");
     });
     sound_volume_slider->setPosition(50, top, ATopLeft)->setSize(300, 50);
 
     // Override overlay label.
-    sound_volume_overlay_label = new GuiLabel(sound_volume_slider, "SOUND_VOLUME_SLIDER_LABEL", "Sound Volume: " + string(soundManager->getMasterSoundVolume()) + "%", 30);
+    sound_volume_overlay_label = new GuiLabel(sound_volume_slider, "SOUND_VOLUME_SLIDER_LABEL", "Sound Volume: " + string(int(soundManager->getMasterSoundVolume())) + "%", 30);
     sound_volume_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Music volume slider.
@@ -76,12 +76,12 @@ OptionsMenu::OptionsMenu()
     music_volume_slider = new GuiSlider(this, "MUSIC_VOLUME_SLIDER", 0.0f, 100.0f, soundManager->getMusicVolume(), [this](float volume)
     {
         soundManager->setMusicVolume(volume);
-        music_volume_overlay_label->setText("Music Volume: " + string(soundManager->getMusicVolume()) + "%");
+        music_volume_overlay_label->setText("Music Volume: " + string(int(soundManager->getMusicVolume())) + "%");
     });
     music_volume_slider->setPosition(50, top, ATopLeft)->setSize(300, 50);
 
     // Override overlay label.
-    music_volume_overlay_label = new GuiLabel(music_volume_slider, "MUSIC_VOLUME_SLIDER_LABEL", "Music Volume: " + string(soundManager->getMusicVolume()) + "%", 30);
+    music_volume_overlay_label = new GuiLabel(music_volume_slider, "MUSIC_VOLUME_SLIDER_LABEL", "Music Volume: " + string(int(soundManager->getMusicVolume())) + "%", 30);
     music_volume_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Music playback state.

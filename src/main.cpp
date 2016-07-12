@@ -226,6 +226,7 @@ int main(int argc, char** argv)
     }
 
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
+    soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());
 
     if (PreferencesManager::get("disable_shaders").toInt())
         PostProcessor::setEnable(false);
@@ -311,8 +312,9 @@ int main(int argc, char** argv)
         PreferencesManager::set("fullscreen", windowManager->isFullscreen() ? 1 : 0);
     }
 
-    // Set the default music_volume option to the current volume.
+    // Set the default music_volume and sound_volume to the current volume.
     PreferencesManager::set("music_volume", soundManager->getMusicVolume());
+    PreferencesManager::set("sound_volume", soundManager->getMasterSoundVolume());
 
     // Enable music on the main screen only by default.
     if (PreferencesManager::get("music_enabled").empty())
