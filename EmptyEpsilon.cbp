@@ -596,6 +596,8 @@
 		<Unit filename="src/screenComponents/aimLock.h" />
 		<Unit filename="src/screenComponents/alertOverlay.cpp" />
 		<Unit filename="src/screenComponents/alertOverlay.h" />
+		<Unit filename="src/screenComponents/helpOverlay.cpp" />
+		<Unit filename="src/screenComponents/helpOverlay.h" />
 		<Unit filename="src/screenComponents/beamFrequencySelector.cpp" />
 		<Unit filename="src/screenComponents/beamFrequencySelector.h" />
 		<Unit filename="src/screenComponents/beamTargetSelector.cpp" />
