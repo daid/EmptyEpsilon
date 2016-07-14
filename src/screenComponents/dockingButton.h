@@ -1,5 +1,5 @@
-#ifndef GUI_DOCKING_BUTTON_H
-#define GUI_DOCKING_BUTTON_H
+#ifndef DOCKING_BUTTON_H
+#define DOCKING_BUTTON_H
 
 #include "gui/gui2_button.h"
 
@@ -17,4 +17,4 @@ private:
     P<SpaceObject> findDockingTarget();
 };
 
-#endif//GUI_DOCKING_BUTTON_H
+#endif//DOCKING_BUTTON_H

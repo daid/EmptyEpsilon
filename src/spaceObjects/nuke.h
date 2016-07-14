@@ -15,4 +15,3 @@ public:
 };
 
 #endif//NUKE_H
-

@@ -33,4 +33,4 @@ public:
     int getMin();
 };
 
-#endif//GUI2_SLIDER_H
+#endif//GUI2_SCROLLBAR_H

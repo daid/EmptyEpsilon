@@ -1,5 +1,5 @@
-#ifndef GUI2_ADVANCED_SCROLL_TEST_H
-#define GUI2_ADVANCED_SCROLL_TEST_H
+#ifndef GUI2_ADVANCEDSCROLLTEXT_H
+#define GUI2_ADVANCEDSCROLLTEXT_H
 
 #include "gui2_element.h"
 #include "gui2_scrollbar.h"
@@ -36,4 +36,4 @@ public:
     virtual void onDraw(sf::RenderTarget& window);
 };
 
-#endif//GUI2_ADVANCED_SCROLL_TEST_H
+#endif//GUI2_ADVANCEDSCROLLTEXT_H

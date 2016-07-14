@@ -1,5 +1,5 @@
-#ifndef GUI_POWER_DAMAGE_INDICATOR_H
-#define GUI_POWER_DAMAGE_INDICATOR_H
+#ifndef POWER_DAMAGE_INDICATOR_H
+#define POWER_DAMAGE_INDICATOR_H
 
 #include "gui/gui2_element.h"
 #include "shipTemplate.h"
@@ -23,4 +23,4 @@ private:
     void drawIcon(sf::RenderTarget& window, string icon_name, sf::Color color);
 };
 
-#endif//GUI_POWER_DAMAGE_INDICATOR_H
+#endif//POWER_DAMAGE_INDICATOR_H

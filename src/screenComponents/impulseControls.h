@@ -1,5 +1,5 @@
-#ifndef GUI_IMPULSE_CONTROLS_H
-#define GUI_IMPULSE_CONTROLS_H
+#ifndef IMPULSE_CONTROLS_H
+#define IMPULSE_CONTROLS_H
 
 #include "gui/gui2_element.h"
 
@@ -18,4 +18,4 @@ public:
     virtual void onHotkey(const HotkeyResult& key) override;
 };
 
-#endif//GUI_IMPULSE_CONTROLS_H
+#endif//IMPULSE_CONTROLS_H

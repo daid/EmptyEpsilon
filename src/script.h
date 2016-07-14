@@ -1,5 +1,5 @@
-#ifndef GAMESCRIPT_H
-#define GAMESCRIPT_H
+#ifndef SCRIPT_H
+#define SCRIPT_H
 
 #include "engine.h"
 
@@ -13,4 +13,4 @@ public:
     virtual ~Script();
 };
 
-#endif//GAMESCRIPT_H
+#endif//SCRIPT_H

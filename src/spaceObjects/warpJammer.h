@@ -26,4 +26,3 @@ public:
 };
 
 #endif//WARP_JAMMER_H
-

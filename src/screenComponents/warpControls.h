@@ -1,5 +1,5 @@
-#ifndef GUI_WARP_CONTROLS_H
-#define GUI_WARP_CONTROLS_H
+#ifndef WARP_CONTROLS_H
+#define WARP_CONTROLS_H
 
 #include "gui/gui2_element.h"
 
@@ -18,4 +18,4 @@ public:
     virtual void onHotkey(const HotkeyResult& key) override;
 };
 
-#endif//GUI_WARP_CONTROLS_H
+#endif//WARP_CONTROLS_H

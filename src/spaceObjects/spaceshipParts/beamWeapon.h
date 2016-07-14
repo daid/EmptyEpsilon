@@ -74,4 +74,4 @@ protected:
     string beam_texture;
 };
 
-#endif //BEAM_WEAPON_H
+#endif//BEAM_WEAPON_H

@@ -35,5 +35,4 @@ private:
     void updateLoop();
 };
 
-
 #endif//DMX512_SERIAL_DEVICE_H
