@@ -68,4 +68,4 @@ protected:
     float heat_per_beam_fire;
 };
 
-#endif //BEAM_TEMPLATE_H
+#endif//BEAM_TEMPLATE_H

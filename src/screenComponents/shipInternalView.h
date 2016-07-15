@@ -1,5 +1,5 @@
-#ifndef GUI_SHIP_INTERNAL_VIEW_H
-#define GUI_SHIP_INTERNAL_VIEW_H
+#ifndef SHIP_INTERNAL_VIEW_H
+#define SHIP_INTERNAL_VIEW_H
 
 #include "gui/gui2_element.h"
 #include "spaceObjects/spaceship.h"
@@ -94,4 +94,4 @@ public:
     virtual void onMouseUp(sf::Vector2f position);
 };
 
-#endif//GUI_SHIP_INTERNAL_VIEW_H
+#endif//SHIP_INTERNAL_VIEW_H

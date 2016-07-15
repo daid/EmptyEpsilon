@@ -1,5 +1,5 @@
-#ifndef GAME_MASTER_CHAT_DIALOG_H
-#define GAME_MASTER_CHAT_DIALOG_H
+#ifndef CHAT_DIALOG_H
+#define CHAT_DIALOG_H
 
 #include "gui/gui2_resizabledialog.h"
 
@@ -31,4 +31,4 @@ private:
     void drawLine(sf::RenderTarget& window, sf::Vector2f target);
 };
 
-#endif//GAME_MASTER_CHAT_DIALOG_H
+#endif//CHAT_DIALOG_H

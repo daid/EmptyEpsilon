@@ -1,5 +1,5 @@
-#ifndef GUI2_AUTO_LAYOUT_H
-#define GUI2_AUTO_LAYOUT_H
+#ifndef GUI2_AUTOLAYOUT_H
+#define GUI2_AUTOLAYOUT_H
 
 #include "gui2_element.h"
 
@@ -27,4 +27,4 @@ protected:
     virtual void drawElements(sf::FloatRect parent_rect, sf::RenderTarget& window);
 };
 
-#endif//GUI2_AUTO_LAYOUT_H
+#endif//GUI2_AUTOLAYOUT_H

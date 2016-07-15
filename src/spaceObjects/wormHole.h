@@ -1,5 +1,5 @@
-#ifndef WORMHOLE_H
-#define WORMHOLE_H
+#ifndef WORM_HOLE_H
+#define WORM_HOLE_H
 
 #include "nebula.h"
 #include "spaceObject.h"
@@ -16,7 +16,6 @@ class WormHole : public SpaceObject, public Updatable
     NebulaCloud clouds[cloud_count];
 
 public:
-
     WormHole();
 
 #if FEATURE_3D_RENDERING
@@ -32,5 +31,4 @@ public:
     virtual string getExportLine() { return "WormHole():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + "):setTargetPosition(" + string(target_position.x, 0) + ", " + string(target_position.y, 0) + ")"; }
 };
 
-#endif//WORMHOLE_H
-
+#endif//WORM_HOLE_H

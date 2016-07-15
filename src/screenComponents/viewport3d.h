@@ -1,5 +1,5 @@
-#ifndef GUI_VIEWPORT_3D_H
-#define GUI_VIEWPORT_3D_H
+#ifndef VIEWPORT_3D_H
+#define VIEWPORT_3D_H
 
 #include "gui/gui2_element.h"
 
@@ -24,4 +24,4 @@ private:
     sf::Vector3f worldToScreen(sf::RenderTarget& window, sf::Vector3f world);
 };
 
-#endif//GUI_VIEWPORT_3D_H
+#endif//VIEWPORT_3D_H

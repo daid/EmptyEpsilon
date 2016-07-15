@@ -24,5 +24,4 @@ private:
     P<SpaceObject> target;
 };
 
-
 #endif//COMMS_SCRIPT_INTERFACE_H

@@ -1,5 +1,5 @@
-#ifndef GUI2_RESIZABLE_DIALOG_H
-#define GUI2_RESIZABLE_DIALOG_H
+#ifndef GUI2_RESIZABLEDIALOG_H
+#define GUI2_RESIZABLEDIALOG_H
 
 #include "gui2_panel.h"
 
@@ -45,4 +45,4 @@ protected:
     GuiElement* contents;
 };
 
-#endif//GUI2_RESIZABLE_DIALOG_H
+#endif//GUI2_RESIZABLEDIALOG_H

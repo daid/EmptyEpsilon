@@ -1,5 +1,5 @@
-#ifndef GAME_MASTER_TWEAK_H
-#define GAME_MASTER_TWEAK_H
+#ifndef TWEAK_H
+#define TWEAK_H
 
 #include "gui/gui2_panel.h"
 #include "missileWeaponData.h"
@@ -189,4 +189,4 @@ public:
 
     virtual void onDraw(sf::RenderTarget& window) override;
 };
-#endif//GAME_MASTER_TWEAK_H
+#endif//TWEAK_H

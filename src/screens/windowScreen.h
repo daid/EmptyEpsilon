@@ -19,4 +19,4 @@ public:
     virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
 };
 
-#endif//MAIN_SCREEN_H
+#endif//WINDOW_SCREEN_H

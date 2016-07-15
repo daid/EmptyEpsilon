@@ -1,5 +1,5 @@
-#ifndef REDONCULUS_SERVER_H
-#define REDONCULUS_SERVER_H
+#ifndef EPSILON_SERVER_H
+#define EPSILON_SERVER_H
 
 #include "engine.h"
 
@@ -15,4 +15,4 @@ public:
 
 void disconnectFromServer();
 
-#endif//REDONCULUS_SERVER_H
+#endif//EPSILON_SERVER_H

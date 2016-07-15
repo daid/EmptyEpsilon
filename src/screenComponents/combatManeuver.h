@@ -1,5 +1,5 @@
-#ifndef GUI_COMBAT_MANEUVER_H
-#define GUI_COMBAT_MANEUVER_H
+#ifndef COMBAT_MANEUVER_H
+#define COMBAT_MANEUVER_H
 
 #include "gui/gui2_element.h"
 
@@ -21,4 +21,4 @@ public:
     void setStrafeValue(float value);
 };
 
-#endif//GUI_COMBAT_MANEUVER_H
+#endif//COMBAT_MANEUVER_H

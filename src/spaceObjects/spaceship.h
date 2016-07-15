@@ -1,5 +1,5 @@
-#ifndef SPACE_SHIP_H
-#define SPACE_SHIP_H
+#ifndef SPACESHIP_H
+#define SPACESHIP_H
 
 #include "shipTemplateBasedObject.h"
 #include "spaceStation.h"
@@ -409,4 +409,4 @@ string frequencyToString(int frequency);
 #include "spaceship.hpp"
 #endif
 
-#endif//SPACE_SHIP_H
+#endif//SPACESHIP_H

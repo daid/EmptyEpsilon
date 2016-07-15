@@ -1,5 +1,5 @@
-#ifndef GUI2_ENTRY_LIST_H
-#define GUI2_ENTRY_LIST_H
+#ifndef GUI2_ENTRYLIST_H
+#define GUI2_ENTRYLIST_H
 
 #include "gui2_element.h"
 #include "gui2_button.h"
@@ -49,5 +49,4 @@ private:
     virtual void entriesChanged();
 };
 
-#endif//GUI2_ENTRY_LIST_H
-
+#endif//GUI2_ENTRYLIST_H

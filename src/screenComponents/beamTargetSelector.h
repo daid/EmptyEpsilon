@@ -1,5 +1,5 @@
-#ifndef GUI_BEAM_TARGET_SELECTOR_H
-#define GUI_BEAM_TARGET_SELECTOR_H
+#ifndef BEAM_TARGET_SELECTOR_H
+#define BEAM_TARGET_SELECTOR_H
 
 #include "gui/gui2_selector.h"
 
@@ -9,4 +9,4 @@ public:
     GuiBeamTargetSelector(GuiContainer* owner, string id);
 };
 
-#endif//GUI_BEAM_TARGET_SELECTOR_H
+#endif//BEAM_TARGET_SELECTOR_H

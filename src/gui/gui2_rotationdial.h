@@ -1,5 +1,5 @@
-#ifndef GUI2_ROTATION_DAIL_H
-#define GUI2_ROTATION_DAIL_H
+#ifndef GUI2_ROTATIONDIAL_H
+#define GUI2_ROTATIONDIAL_H
 
 #include "gui2_element.h"
 
@@ -24,4 +24,4 @@ public:
     float getValue();
 };
 
-#endif//GUI2_ROTATION_DAIL_H
+#endif//GUI2_ROTATIONDIAL_H
