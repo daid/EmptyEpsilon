@@ -93,9 +93,9 @@ void CrewStationScreen::onHotkey(const HotkeyResult& key)
             showNextTab(1);
         else if (key.hotkey == "PREV_STATION")
             showNextTab(-1);
-        else if (key.hotkey == "HELMS_STATION")
+        else if (key.hotkey == "STATION_HELMS")
             showTab(findTab(getCrewPositionName(helmsOfficer)));
-        else if (key.hotkey == "WEAPONS_STATION")
+        else if (key.hotkey == "STATION_WEAPONS")
             showTab(findTab(getCrewPositionName(weaponsOfficer)));
         else if (key.hotkey == "STATION_ENGINEERING")
             showTab(findTab(getCrewPositionName(engineering)));
