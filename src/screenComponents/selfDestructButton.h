@@ -1,5 +1,5 @@
-#ifndef GUI_SELF_DESTRUCT_BUTTON_H
-#define GUI_SELF_DESTRUCT_BUTTON_H
+#ifndef SELF_DESTRUCT_BUTTON_H
+#define SELF_DESTRUCT_BUTTON_H
 
 #include "gui/gui2_element.h"
 
@@ -17,4 +17,4 @@ public:
     virtual void onDraw(sf::RenderTarget& window);
 };
 
-#endif//GUI_SELF_DESTRUCT_BUTTON_H
+#endif//SELF_DESTRUCT_BUTTON_H

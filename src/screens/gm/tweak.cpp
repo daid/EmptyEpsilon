@@ -96,20 +96,23 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
     right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     // Left column
-    (new GuiLabel(left_col, "", "Type name:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-
-    type_name = new GuiTextEntry(left_col, "", "");
-    type_name->setSize(GuiElement::GuiSizeMax, 50);
-    type_name->callback([this](string text) {
-        target->setTypeName(text);
-    });
-
     (new GuiLabel(left_col, "", "Callsign:", 30))->setSize(GuiElement::GuiSizeMax, 50);
 
     callsign = new GuiTextEntry(left_col, "", "");
     callsign->setSize(GuiElement::GuiSizeMax, 50);
     callsign->callback([this](string text) {
         target->callsign = text;
+    });
+
+    // Edit object's description.
+    // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
+    // editing long strings.
+    (new GuiLabel(left_col, "", "Description:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    description = new GuiTextEntry(left_col, "", "");
+    description->setSize(GuiElement::GuiSizeMax, 50);
+    description->callback([this](string text) {
+        target->setDescription(text);
     });
 
     (new GuiLabel(left_col, "", "Impulse speed:", 30))->setSize(GuiElement::GuiSizeMax, 50);
@@ -124,18 +127,28 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
     });
     turn_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
-    (new GuiLabel(left_col, "", "Special drives:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-    warp_toggle = new GuiToggleButton(left_col, "", "Warp Drive", [this](bool value) {
-        target->setWarpDrive(value);
-    });
-    warp_toggle->setSize(GuiElement::GuiSizeMax, 40);
+    (new GuiLabel(left_col, "", "Heading:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    heading_slider = new GuiSlider(left_col, "", 0.0, 359.9, 0.0, [this](float value) {
+        target->setHeading(value);
 
-    jump_toggle = new GuiToggleButton(left_col, "", "Jump Drive", [this](bool value) {
-        target->setJumpDrive(value);
+        // If the target is a player, also set its target rotation.
+        P<PlayerSpaceship> player = target;
+        if (player)
+            player->commandTargetRotation(value - 90.0f);
     });
-    jump_toggle->setSize(GuiElement::GuiSizeMax, 40);
+    heading_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     // Right column
+    // Set type name. Does not change ship type.
+    (new GuiLabel(right_col, "", "Type name:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    type_name = new GuiTextEntry(right_col, "", "");
+    type_name->setSize(GuiElement::GuiSizeMax, 50);
+    type_name->callback([this](string text) {
+        target->setTypeName(text);
+    });
+
+    // Hull max and state sliders
     (new GuiLabel(right_col, "", "Hull max:", 30))->setSize(GuiElement::GuiSizeMax, 50);
     hull_max_slider = new GuiSlider(right_col, "", 0.0, 500, 0.0, [this](float value) {
         target->hull_max = round(value);
@@ -149,20 +162,22 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
     });
     hull_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
-    // Edit object's description.
-    // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
-    // editing long strings.
-    (new GuiLabel(right_col, "", "Description:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-
-    description = new GuiTextEntry(right_col, "", "");
-    description->setSize(GuiElement::GuiSizeMax, 50);
-    description->callback([this](string text) {
-        target->setDescription(text);
+    // Warp and jump drive toggles
+    (new GuiLabel(right_col, "", "Special drives:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    warp_toggle = new GuiToggleButton(right_col, "", "Warp Drive", [this](bool value) {
+        target->setWarpDrive(value);
     });
+    warp_toggle->setSize(GuiElement::GuiSizeMax, 40);
+
+    jump_toggle = new GuiToggleButton(right_col, "", "Jump Drive", [this](bool value) {
+        target->setJumpDrive(value);
+    });
+    jump_toggle->setSize(GuiElement::GuiSizeMax, 40);
 }
 
 void GuiShipTweakBase::onDraw(sf::RenderTarget& window)
 {
+    heading_slider->setValue(target->getHeading());
     hull_slider->setValue(target->hull_strength);
 }
 
@@ -389,29 +404,29 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
     arc_slider = new GuiSlider(right_col, "", 0.0, 360.0, 0.0, [this](float value) {
         target->beam_weapons[beam_index].setArc(roundf(value));
     });
-    arc_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+    arc_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", "Direction:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     direction_slider = new GuiSlider(right_col, "", -180.0, 180.0, 0.0, [this](float value) {
         target->beam_weapons[beam_index].setDirection(roundf(value));
     });
-    direction_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+    direction_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
-    (new GuiLabel(right_col, "", "Turret Arc:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(right_col, "", "Turret arc:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     turret_arc_slider = new GuiSlider(right_col, "", 0.0, 360.0, 0.0, [this](float value) {
         target->beam_weapons[beam_index].setTurretArc(roundf(value));
     });
-    turret_arc_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+    turret_arc_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
-    (new GuiLabel(right_col, "", "Turret Direction:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(right_col, "", "Turret direction:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     turret_direction_slider = new GuiSlider(right_col, "", -180.0, 180.0, 0.0, [this](float value) {
         target->beam_weapons[beam_index].setTurretDirection(roundf(value));
     });
-    turret_direction_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+    turret_direction_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
-    (new GuiLabel(right_col, "", "Turret Rotation Rate:", 20))->setSize(GuiElement::GuiSizeMax, 30);
-    // 25 is an arbitrary limit for granularity; values greater than 25 result
-    // in practicaly instantaneous turret rotation.
+    (new GuiLabel(right_col, "", "Turret rotation rate:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    // 25 is an arbitrary limit to add granularity; values greater than 25
+    // result in practicaly instantaneous turret rotation anyway.
     turret_rotation_rate_slider = new GuiSlider(right_col, "", 0.0, 250.0, 0.0, [this](float value) {
         // Divide a large value for granularity.
         if (value > 0)
@@ -419,7 +434,7 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
         else
             target->beam_weapons[beam_index].setTurretRotationRate(0.0);
     });
-    turret_rotation_rate_slider->setSize(GuiElement::GuiSizeMax, 40);
+    turret_rotation_rate_slider->setSize(GuiElement::GuiSizeMax, 30);
     // Override overlay label.
     turret_rotation_rate_overlay_label = new GuiLabel(turret_rotation_rate_slider, "", "", 30);
     turret_rotation_rate_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -428,24 +443,24 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
     range_slider = new GuiSlider(right_col, "", 0.0, 5000.0, 0.0, [this](float value) {
         target->beam_weapons[beam_index].setRange(roundf(value / 100) * 100);
     });
-    range_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+    range_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", "Cycle time:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     cycle_time_slider = new GuiSlider(right_col, "", 0.1, 20.0, 0.0, [this](float value) {
         target->beam_weapons[beam_index].setCycleTime(value);
     });
-    cycle_time_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+    cycle_time_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", "Damage:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     damage_slider = new GuiSlider(right_col, "", 0.1, 50.0, 0.0, [this](float value) {
         target->beam_weapons[beam_index].setDamage(value);
     });
-    damage_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+    damage_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 }
 
 void GuiShipTweakBeamweapons::onDraw(sf::RenderTarget& window)
 {
-    target->drawOnRadar(window, sf::Vector2f(rect.left + rect.width / 2.0f, rect.top + rect.height * 0.8), 300.0f / 5000.0f, false);
+    target->drawOnRadar(window, sf::Vector2f(rect.left - 150.0f + rect.width / 2.0f, rect.top + rect.height * 0.66), 300.0f / 5000.0f, false);
 
     arc_slider->setValue(target->beam_weapons[beam_index].getArc());
     direction_slider->setValue(sf::angleDifference(0.0f, target->beam_weapons[beam_index].getDirection()));
@@ -638,17 +653,26 @@ GuiObjectTweakBase::GuiObjectTweakBase(GuiContainer* owner)
     // editing long strings.
     (new GuiLabel(left_col, "", "Description:", 30))->setSize(GuiElement::GuiSizeMax, 50);
 
+    // Set object's description.
     description = new GuiTextEntry(left_col, "", "");
     description->setSize(GuiElement::GuiSizeMax, 50);
     description->callback([this](string text) {
         target->setDescription(text);
     });
 
+    // Set object's heading.
+    (new GuiLabel(left_col, "", "Heading:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    heading_slider = new GuiSlider(left_col, "", 0.0, 359.9, 0.0, [this](float value) {
+        target->setHeading(value);
+    });
+    heading_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
     // Right column
 }
 
 void GuiObjectTweakBase::onDraw(sf::RenderTarget& window)
 {
+    heading_slider->setValue(target->getHeading());
 }
 
 void GuiObjectTweakBase::open(P<SpaceObject> target)

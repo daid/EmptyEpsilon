@@ -51,4 +51,3 @@ public:
 };
 
 #endif//RELAY_SCREEN_H
-

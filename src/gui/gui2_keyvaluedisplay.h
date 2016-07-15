@@ -1,5 +1,5 @@
-#ifndef GUI_KEY_VALUE_DISPLAY_H
-#define GUI_KEY_VALUE_DISPLAY_H
+#ifndef GUI_KEYVALUEDISPLAY_H
+#define GUI_KEYVALUEDISPLAY_H
 
 #include "gui2_element.h"
 
@@ -24,4 +24,4 @@ public:
     GuiKeyValueDisplay* setIcon(string icon_texture);
 };
 
-#endif//GUI_KEY_VALUE_DISPLAY_H
+#endif//GUI_KEYVALUEDISPLAY_H

@@ -1,5 +1,5 @@
-#ifndef GUI_ROTATING_MODEL_VIEW_H
-#define GUI_ROTATING_MODEL_VIEW_H
+#ifndef ROTATING_MODEL_VIEW_H
+#define ROTATING_MODEL_VIEW_H
 
 #include "gui/gui2_element.h"
 #include "modelData.h"
@@ -14,5 +14,4 @@ public:
     virtual void onDraw(sf::RenderTarget& window);
 };
 
-#endif//GUI_COMBAT_MANEUVER_H
-
+#endif//ROTATING_MODEL_VIEW_H

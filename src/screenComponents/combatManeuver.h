@@ -1,5 +1,5 @@
-#ifndef GUI_COMBAT_MANEUVER_H
-#define GUI_COMBAT_MANEUVER_H
+#ifndef COMBAT_MANEUVER_H
+#define COMBAT_MANEUVER_H
 
 #include "gui/gui2_element.h"
 
@@ -14,9 +14,11 @@ private:
 public:
     GuiCombatManeuver(GuiContainer* owner, string id);
     
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onHotkey(const HotkeyResult& key) override;
+    
     void setBoostValue(float value);
     void setStrafeValue(float value);
 };
 
-#endif//GUI_COMBAT_MANEUVER_H
+#endif//COMBAT_MANEUVER_H

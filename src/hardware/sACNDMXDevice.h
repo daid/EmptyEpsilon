@@ -1,5 +1,5 @@
-#ifndef ACN_DMX_DEVICE_H
-#define ACN_DMX_DEVICE_H
+#ifndef S_ACN_DMX_DEVICE_H
+#define S_ACN_DMX_DEVICE_H
 
 #include <SFML/System.hpp>
 #include <SFML/Network.hpp>
@@ -43,5 +43,4 @@ private:
     void updateLoop();
 };
 
-
-#endif//ACN_DMX_DEVICE_H
+#endif//S_ACN_DMX_DEVICE_H

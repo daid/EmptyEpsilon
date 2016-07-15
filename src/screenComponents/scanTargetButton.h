@@ -1,5 +1,5 @@
-#ifndef GUI_SCAN_TARGET_BUTTON_H
-#define GUI_SCAN_TARGET_BUTTON_H
+#ifndef SCAN_TARGET_BUTTON_H
+#define SCAN_TARGET_BUTTON_H
 
 #include "gui/gui2_element.h"
 
@@ -19,4 +19,4 @@ public:
     virtual void onDraw(sf::RenderTarget& window);
 };
 
-#endif//GUI_SCAN_TARGET_BUTTON_H
+#endif//SCAN_TARGET_BUTTON_H

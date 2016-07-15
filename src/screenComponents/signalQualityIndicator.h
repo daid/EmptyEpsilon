@@ -1,5 +1,5 @@
-#ifndef GUI_SIGNAL_QUALITY_INDICATOR_H
-#define GUI_SIGNAL_QUALITY_INDICATOR_H
+#ifndef SIGNAL_QUALITY_INDICATOR_H
+#define SIGNAL_QUALITY_INDICATOR_H
 
 #include <math.h>
 
@@ -22,4 +22,4 @@ public:
     void setPhaseError(float f) { error_phase = std::min(fabsf(f), 1.0f); }
 };
 
-#endif//GUI_SIGNAL_QUALITY_INDICATOR_H
+#endif//SIGNAL_QUALITY_INDICATOR_H

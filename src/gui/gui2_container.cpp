@@ -101,17 +101,15 @@ GuiElement* GuiContainer::getClickElement(sf::Vector2f mouse_position)
     return nullptr;
 }
 
-bool GuiContainer::forwardKeypressToElements(sf::Keyboard::Key key, int unicode)
+bool GuiContainer::forwardKeypressToElements(const HotkeyResult& key)
 {
     for(GuiElement* element : elements)
     {
         if (element->isVisible())
         {
             if (element->isEnabled())
-                if (element->onHotkey(key, unicode))
-                    return true;
-            if (element->forwardKeypressToElements(key, unicode))
-                return true;
+                element->onHotkey(key);
+            element->forwardKeypressToElements(key);
         }
     }
     return false;

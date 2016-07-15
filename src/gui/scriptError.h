@@ -1,5 +1,5 @@
-#ifndef GUI_SCRIPT_ERROR_H
-#define GUI_SCRIPT_ERROR_H
+#ifndef SCRIPT_ERROR_H
+#define SCRIPT_ERROR_H
 
 #include "engine.h"
 
@@ -11,5 +11,4 @@ public:
     virtual void render(sf::RenderTarget& window);
 };
 
-
-#endif//GUI_SCRIPT_ERROR_H
+#endif//SCRIPT_ERROR_H

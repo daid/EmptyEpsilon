@@ -22,10 +22,10 @@ private:
 public:
     ScreenMainScreen();
     
-    virtual void update(float delta);
+    virtual void update(float delta) override;
     
-    virtual void onClick(sf::Vector2f mouse_position);
-    virtual void onKey(sf::Keyboard::Key key, int unicode);
+    virtual void onClick(sf::Vector2f mouse_position) override;
+    virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
 };
 
 #endif//MAIN_SCREEN_H

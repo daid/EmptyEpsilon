@@ -1,5 +1,5 @@
-#ifndef GUI_COMMS_OVERLAY_H
-#define GUI_COMMS_OVERLAY_H
+#ifndef COMMS_OVERLAY_H
+#define COMMS_OVERLAY_H
 
 #include "gui/gui2_element.h"
 
@@ -44,5 +44,4 @@ public:
     void clearElements();
 };
 
-#endif//GUI_INDICATOR_OVERLAYS_H
-
+#endif//COMMS_OVERLAY_H

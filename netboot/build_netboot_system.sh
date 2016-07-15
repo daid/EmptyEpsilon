@@ -87,6 +87,7 @@ ln -s ${TARGET_TFTP_DIR}/initrd.img ${TARGET_TFTP_DIR}/efi32/initrd.img
 ln -s ${TARGET_TFTP_DIR}/initrd.img ${TARGET_TFTP_DIR}/efi64/initrd.img
 
 # Setup vmlinuz.img kernel in ${TARGET_TFTP_DIR}
+chroot ${TARGET_NFS_DIR} apt-get update
 chroot ${TARGET_NFS_DIR} apt-get -y install linux-image-686-pae firmware-linux-nonfree
 cp ${TARGET_NFS_DIR}/boot/vmlinuz* ${TARGET_TFTP_DIR}/vmlinuz.img
 cp ${TARGET_NFS_DIR}/boot/initrd.img* ${TARGET_TFTP_DIR}/initrd.img

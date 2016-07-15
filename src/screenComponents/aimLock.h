@@ -1,5 +1,5 @@
-#ifndef GUI_AIM_LOCK_H
-#define GUI_AIM_LOCK_H
+#ifndef AIM_LOCK_H
+#define AIM_LOCK_H
 
 #include "gui/gui2_togglebutton.h"
 
@@ -15,4 +15,4 @@ private:
     GuiRotationDial* missile_aim;
 };
 
-#endif//GUI_AIM_LOCK_H
+#endif//AIM_LOCK_H

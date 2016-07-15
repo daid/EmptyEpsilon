@@ -130,3 +130,14 @@ void HelmsScreen::onDraw(sf::RenderTarget& window)
     }
     GuiOverlay::onDraw(window);
 }
+
+void HelmsScreen::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "HELMS" && my_spaceship)
+    {
+        if (key.hotkey == "TURN_LEFT")
+            my_spaceship->commandTargetRotation(my_spaceship->getRotation() - 5.0f);
+        else if (key.hotkey == "TURN_RIGHT")
+            my_spaceship->commandTargetRotation(my_spaceship->getRotation() + 5.0f);
+    }
+}

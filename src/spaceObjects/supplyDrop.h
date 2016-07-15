@@ -23,4 +23,3 @@ public:
 };
 
 #endif//SUPPLY_DROP_H
-

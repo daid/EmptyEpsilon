@@ -91,6 +91,7 @@ set(SOURCES
 	src/screens/gm/tweak.cpp
 	src/screenComponents/aimLock.cpp
 	src/screenComponents/alertOverlay.cpp
+	src/screenComponents/helpOverlay.cpp
 	src/screenComponents/missileTubeControls.cpp
 	src/screenComponents/selfDestructIndicator.cpp
 	src/screenComponents/viewport3d.cpp
@@ -128,6 +129,7 @@ set(SOURCES
 	src/screenComponents/shipsLogControl.cpp
 	src/screenComponents/onScreenKeyboard.cpp
 	src/gui/colorConfig.cpp
+	src/gui/hotkeyConfig.cpp
 	src/gui/mouseRenderer.cpp
 	src/gui/scriptError.cpp
 	src/gui/gui2_slider.cpp

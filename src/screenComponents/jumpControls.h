@@ -1,5 +1,5 @@
-#ifndef GUI_JUMP_CONTROLS_H
-#define GUI_JUMP_CONTROLS_H
+#ifndef JUMP_CONTROLS_H
+#define JUMP_CONTROLS_H
 
 #include "gui/gui2_element.h"
 
@@ -18,7 +18,8 @@ private:
 public:
     GuiJumpControls(GuiContainer* owner, string id);
     
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onHotkey(const HotkeyResult& key) override;
 };
 
-#endif//GUI_JUMP_CONTROLS_H
+#endif//JUMP_CONTROLS_H

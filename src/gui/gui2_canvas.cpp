@@ -71,13 +71,17 @@ void GuiCanvas::render(sf::RenderTarget& window)
     previous_mouse_position = mouse_position;
 }
 
-void GuiCanvas::handleKeyPress(sf::Keyboard::Key key, int unicode)
+void GuiCanvas::handleKeyPress(sf::Event::KeyEvent key, int unicode)
 {
     if (focus_element)
         if (focus_element->onKey(key, unicode))
             return;
-    if (forwardKeypressToElements(key, unicode))
-        return;
+    HotkeyResult hotkey = hotkeys.getHotkey(key);
+    if (hotkey.category != "")
+    {
+        forwardKeypressToElements(hotkey);
+        onHotkey(hotkey);
+    }
     onKey(key, unicode);
 }
 
@@ -85,7 +89,11 @@ void GuiCanvas::onClick(sf::Vector2f mouse_position)
 {
 }
 
-void GuiCanvas::onKey(sf::Keyboard::Key key, int unicode)
+void GuiCanvas::onHotkey(const HotkeyResult& key)
+{
+}
+
+void GuiCanvas::onKey(sf::Event::KeyEvent key, int unicode)
 {
 }
 

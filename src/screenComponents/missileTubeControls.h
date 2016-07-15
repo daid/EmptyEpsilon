@@ -1,5 +1,5 @@
-#ifndef GUI_MISSILE_TUBE_CONTROLS_H
-#define GUI_MISSILE_TUBE_CONTROLS_H
+#ifndef MISSILE_TUBE_CONTROLS_H
+#define MISSILE_TUBE_CONTROLS_H
 
 #include "gui/gui2_autolayout.h"
 #include "missileWeaponData.h"
@@ -41,4 +41,4 @@ public:
     bool getManualAim();
 };
 
-#endif//GUI_MISSILE_TUBE_CONTROLS_H
+#endif//MISSILE_TUBE_CONTROLS_H

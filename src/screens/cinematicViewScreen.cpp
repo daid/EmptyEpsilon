@@ -178,9 +178,9 @@ void CinematicViewScreen::update(float delta)
 #endif
 }
 
-void CinematicViewScreen::onKey(sf::Keyboard::Key key, int unicode)
+void CinematicViewScreen::onKey(sf::Event::KeyEvent key, int unicode)
 {
-    switch(key)
+    switch(key.code)
     {
     // Toggle UI visibility with the H key.
     case sf::Keyboard::H:
