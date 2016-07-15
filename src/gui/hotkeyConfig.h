@@ -37,6 +37,8 @@ public:
     HotkeyConfig();
 
     void load();
+    std::vector<string> getCategories();
+    std::vector<std::pair<string, string>> listHotkeysByCategory(string hotkey_category);
     
     HotkeyResult getHotkey(sf::Event::KeyEvent key);
 private:
