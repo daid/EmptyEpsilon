@@ -228,6 +228,42 @@ void HotkeyConfig::newKey(string key, string name)
     categories.back().hotkeys.emplace_back(key, name);
 }
 
+std::vector<string> HotkeyConfig::getCategories()
+{
+    // Initialize return value.
+    std::vector<string> ret;
+
+    // Add each category to the return value.
+    for(HotkeyConfigCategory& cat : categories)
+    {
+        ret.push_back(cat.name);
+    }
+
+    return ret;
+}
+
+std::vector<std::pair<string, string>> HotkeyConfig::listHotkeysByCategory(string hotkey_category)
+{
+    std::vector<std::pair<string, string>> ret;
+
+    for(HotkeyConfigCategory& cat : categories)
+    {
+        if (cat.name == hotkey_category)
+        {
+            for(HotkeyConfigItem& item : cat.hotkeys)
+            {
+                for(auto key_name : sfml_key_names)
+                {
+                    if (key_name.second == item.hotkey.code)
+                        ret.push_back({item.name, key_name.first});
+                }
+            }
+        }
+    }
+
+    return ret;
+}
+
 HotkeyConfigItem::HotkeyConfigItem(string key, string name)
 {
     this->key = key;

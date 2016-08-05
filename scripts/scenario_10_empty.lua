@@ -17,6 +17,7 @@ function init()
     --addGMFunction("move 2 to 1", function() player2:transferPlayersToShip(player1) end)
     --CpuShip():setTemplate("Adder MK5"):setPosition(0, 0):setRotation(0):setFaction("Human Navy")
     --CpuShip():setTemplate("Piranha F12"):setPosition(2000, 0):setRotation(-90):setFaction("Kraylor")
+    Planet():setPosition(1000, 1000):setPlanetRadius(5000):setDistanceFromMovementPlane(4000)
     
     addGMFunction("Random asteroid field", function()
         cleanup()

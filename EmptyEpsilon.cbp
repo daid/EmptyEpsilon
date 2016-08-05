@@ -612,6 +612,8 @@
 		<Unit filename="src/screenComponents/frequencyCurve.h" />
 		<Unit filename="src/screenComponents/globalMessage.cpp" />
 		<Unit filename="src/screenComponents/globalMessage.h" />
+		<Unit filename="src/screenComponents/helpOverlay.cpp" />
+		<Unit filename="src/screenComponents/helpOverlay.h" />
 		<Unit filename="src/screenComponents/impulseControls.cpp" />
 		<Unit filename="src/screenComponents/impulseControls.h" />
 		<Unit filename="src/screenComponents/indicatorOverlays.cpp" />
@@ -743,6 +745,8 @@
 		<Unit filename="src/spaceObjects/nebula.h" />
 		<Unit filename="src/spaceObjects/nuke.cpp" />
 		<Unit filename="src/spaceObjects/nuke.h" />
+		<Unit filename="src/spaceObjects/planet.cpp" />
+		<Unit filename="src/spaceObjects/planet.h" />
 		<Unit filename="src/spaceObjects/playerSpaceship.cpp" />
 		<Unit filename="src/spaceObjects/playerSpaceship.h" />
 		<Unit filename="src/spaceObjects/playerSpaceship.hpp" />
