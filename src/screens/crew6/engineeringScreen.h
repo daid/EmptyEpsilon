@@ -52,10 +52,12 @@ private:
     float average_energy_delta;
     
     void addSystemEffect(string key, string value);
+    void selectSystem(ESystem system);
 public:
     EngineeringScreen(GuiContainer* owner);
     
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onHotkey(const HotkeyResult& key) override;
 };
 
 #endif//ENGINEERING_SCREEN_H

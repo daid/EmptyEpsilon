@@ -1,5 +1,86 @@
 #include "hotkeyConfig.h"
 #include "preferenceManager.h"
+#include "shipTemplate.h"
+
+HotkeyConfig hotkeys;
+
+HotkeyConfig::HotkeyConfig()
+{
+    newCategory("GENERAL", "General");
+    newKey("NEXT_STATION", "Switch to next crew station");
+    newKey("PREV_STATION", "Switch to previous crew station");
+    newKey("STATION_HELMS", "Switch to helms station");
+    newKey("STATION_WEAPONS", "Switch to weapons station");
+    newKey("STATION_ENGINEERING", "Switch to engineering station");
+    newKey("STATION_SCIENCE", "Switch to science station");
+    newKey("STATION_RELAY", "Switch to relay station");
+    
+    newCategory("HELMS", "Helms");
+    newKey("INC_IMPULSE", "Increase impulse");
+    newKey("DEC_IMPULSE", "Decrease impulse");
+    newKey("ZERO_IMPULSE", "Zero impulse");
+    newKey("MAX_IMPULSE", "Max impulse");
+    newKey("MIN_IMPULSE", "Max reverse impulse");
+    newKey("TURN_LEFT", "Turn left");
+    newKey("TURN_RIGHT", "Turn right");
+    newKey("WARP_0", "Warp off");
+    newKey("WARP_1", "Warp 1");
+    newKey("WARP_2", "Warp 2");
+    newKey("WARP_3", "Warp 3");
+    newKey("WARP_4", "Warp 4");
+    newKey("DOCK_ACTION", "Dock request/abort/undock");
+    newKey("DOCK_REQUEST", "Initiate docking");
+    newKey("DOCK_ABORT", "Abort docking");
+    newKey("UNDOCK", "Undock");
+    newKey("INC_JUMP", "Increase jump distance");
+    newKey("DEC_JUMP", "Decrease jump distance");
+    newKey("JUMP", "Initiate jump");
+    //newKey("COMBAT_LEFT", "Combat maneuver left");
+    //newKey("COMBAT_RIGHT", "Combat maneuver right");
+    //newKey("COMBAT_BOOST", "Combat maneuver boost");
+
+    newCategory("WEAPONS", "Weapons");
+    newKey("SELECT_MISSILE_TYPE_HOMING", "Select homing");
+    newKey("SELECT_MISSILE_TYPE_NUKE", "Select nuke");
+    newKey("SELECT_MISSILE_TYPE_MINE", "Select mine");
+    newKey("SELECT_MISSILE_TYPE_EMP", "Select EMP");
+    newKey("SELECT_MISSILE_TYPE_HVLI", "Select HVLI");
+    for(int n=0; n<max_weapon_tubes; n++)
+        newKey("LOAD_TUBE_" + string(n+1), "Load tube " + string(n+1));
+    for(int n=0; n<max_weapon_tubes; n++)
+        newKey("UNLOAD_TUBE_" + string(n+1), "Unload tube " + string(n+1));
+    for(int n=0; n<max_weapon_tubes; n++)
+        newKey("FIRE_TUBE_" + string(n+1), "Fire tube " + string(n+1));
+    newKey("NEXT_ENEMY_TARGET", "Select next target");
+    newKey("NEXT_TARGET", "Select next target (any)");
+    newKey("TOGGLE_SHIELDS", "Toggle shields");
+    newKey("ENABLE_SHIELDS", "Enable shields");
+    newKey("DISABLE_SHIELDS", "Disable shields");
+    newKey("BEAM_SUBSYSTEM_TARGET_NEXT", "Next beam subsystem target type");
+    newKey("BEAM_SUBSYSTEM_TARGET_PREV", "Previous beam subsystem target type");
+    newKey("BEAM_FREQUENCY_INCREASE", "Increase beam frequency");
+    newKey("BEAM_FREQUENCY_DECREASE", "Decrease beam frequency");
+    newKey("TOGGLE_AIM_LOCK", "Toggle missile aim lock");
+    newKey("ENABLE_AIM_LOCK", "Enable missile aim lock");
+    newKey("DISABLE_AIM_LOCK", "Disable missile aim lock");
+    newKey("AIM_MISSILE_LEFT", "Turn missile aim to the left");
+    newKey("AIM_MISSILE_RIGHT", "Turn missile aim to the right");
+    
+    newCategory("ENGINEERING", "Engineering");
+    newKey("SELECT_REACTOR", "Select reactor system");
+    newKey("SELECT_BEAM_WEAPONS", "Select beam weapon system");
+    newKey("SELECT_MISSILE_SYSTEM", "Select missile weapon system");
+    newKey("SELECT_MANEUVER", "Select maneuvering system");
+    newKey("SELECT_IMPULSE", "Select impulse system");
+    newKey("SELECT_WARP", "Select warp system");
+    newKey("SELECT_JUMP_DRIVE", "Select jump drive system");
+    newKey("SELECT_FRONT_SHIELDS", "Select front shields system");
+    newKey("SELECT_REAR_SHIELDS", "Select rear shields system");
+    newKey("INCREASE_POWER", "Increase system power");
+    newKey("DECREASE_POWER", "Decrease system power");
+    newKey("INCREASE_COOLANT", "Increase system coolant");
+    newKey("DECREASE_COOLANT", "Decrease system coolant");
+}
 
 static std::vector<std::pair<string, sf::Keyboard::Key> > sfml_key_names = {
     {"A", sf::Keyboard::A},
@@ -104,45 +185,6 @@ static std::vector<std::pair<string, sf::Keyboard::Key> > sfml_key_names = {
     {"F15", sf::Keyboard::F15},
     {"Pause", sf::Keyboard::Pause},
 };
-
-HotkeyConfig hotkeys;
-
-HotkeyConfig::HotkeyConfig()
-{
-    newCategory("GENERAL", "General");
-    newKey("NEXT_STATION", "Switch to next crew station");
-    newKey("PREV_STATION", "Switch to previous crew station");
-    newKey("STATION_HELMS", "Switch to helms station");
-    newKey("STATION_WEAPONS", "Switch to weapons station");
-    newKey("STATION_ENGINEERING", "Switch to engineering station");
-    newKey("STATION_SCIENCE", "Switch to science station");
-    newKey("STATION_RELAY", "Switch to relay station");
-    
-    newCategory("HELMS", "Helms");
-    newKey("INC_IMPULSE", "Increase impulse");
-    newKey("DEC_IMPULSE", "Decrease impulse");
-    newKey("ZERO_IMPULSE", "Zero impulse");
-    newKey("MAX_IMPULSE", "Max impulse");
-    newKey("MIN_IMPULSE", "Max reverse impulse");
-    newKey("TURN_LEFT", "Turn left");
-    newKey("TURN_RIGHT", "Turn right");
-    newKey("WARP_0", "Warp off");
-    newKey("WARP_1", "Warp 1");
-    newKey("WARP_2", "Warp 2");
-    newKey("WARP_3", "Warp 3");
-    newKey("WARP_4", "Warp 4");
-    newKey("DOCK_ACTION", "Dock request/abort/undock");
-    newKey("DOCK_REQUEST", "Initiate docking");
-    newKey("DOCK_ABORT", "Abort docking");
-    newKey("UNDOCK", "Undock");
-    newKey("INC_JUMP", "Increase jump distance");
-    newKey("DEC_JUMP", "Decrease jump distance");
-    newKey("JUMP", "Initiate jump");
-    newKey("COMBAT_LEFT", "Combat maneuver left");
-    newKey("COMBAT_RIGHT", "Combat maneuver right");
-    newKey("COMBAT_BOOST", "Combat maneuver boost");
-
-}
 
 void HotkeyConfig::load()
 {
