@@ -283,6 +283,14 @@ static int getObjectsInRadius(lua_State* L)
 /// Return a list of all space objects at the x,y location within a certain radius.
 REGISTER_SCRIPT_FUNCTION(getObjectsInRadius);
 
+static int getAllObjects(lua_State* L)
+{
+    return convert<PVector<SpaceObject> >::returnType(L, space_object_list);
+}
+/// getAllObjects()
+/// Return a list of all space objects. (Use with care, this could return a very long list which could slow down the game when called every update)
+REGISTER_SCRIPT_FUNCTION(getAllObjects);
+
 static int getScenarioVariation(lua_State* L)
 {
     lua_pushstring(L, gameGlobalInfo->variation.c_str());

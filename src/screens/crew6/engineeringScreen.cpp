@@ -49,17 +49,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
         info.layout->setSize(GuiElement::GuiSizeMax, 50);
 
         info.button = new GuiToggleButton(info.layout, id + "_SELECT", getSystemName(ESystem(n)), [this, n](bool value){
-            for(int idx=0; idx<SYS_COUNT; idx++)
-            {
-                system_rows[idx].button->setValue(idx == n);
-            }
-            selected_system = ESystem(n);
-            power_slider->enable();
-            if (my_spaceship)
-            {
-                power_slider->setValue(my_spaceship->systems[n].power_request);
-                coolant_slider->setValue(my_spaceship->systems[n].coolant_request);
-            }
+            selectSystem(ESystem(n));
         });
         info.button->setSize(300, GuiElement::GuiSizeMax);
         info.damage_bar = new GuiProgressbar(info.layout, id + "_DAMAGE", 0.0, 1.0, 0.0);
@@ -283,6 +273,64 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
         }
     }
     GuiOverlay::onDraw(window);
+}
+
+void EngineeringScreen::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "ENGINEERING" && my_spaceship)
+    {
+        if (key.hotkey == "SELECT_REACTOR") selectSystem(SYS_Reactor);
+        if (key.hotkey == "SELECT_BEAM_WEAPONS") selectSystem(SYS_BeamWeapons);
+        if (key.hotkey == "SELECT_MISSILE_SYSTEM") selectSystem(SYS_MissileSystem);
+        if (key.hotkey == "SELECT_MANEUVER") selectSystem(SYS_Maneuver);
+        if (key.hotkey == "SELECT_IMPULSE") selectSystem(SYS_Impulse);
+        if (key.hotkey == "SELECT_WARP") selectSystem(SYS_Warp);
+        if (key.hotkey == "SELECT_JUMP_DRIVE") selectSystem(SYS_JumpDrive);
+        if (key.hotkey == "SELECT_FRONT_SHIELDS") selectSystem(SYS_FrontShield);
+        if (key.hotkey == "SELECT_REAR_SHIELDS") selectSystem(SYS_RearShield);
+        
+        if (selected_system != SYS_None)
+        {
+            if (key.hotkey == "INCREASE_POWER")
+            {
+                power_slider->setValue(my_spaceship->systems[selected_system].power_request + 0.1f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "DECREASE_POWER")
+            {
+                power_slider->setValue(my_spaceship->systems[selected_system].power_request - 0.1f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "INCREASE_COOLANT")
+            {
+                coolant_slider->setValue(my_spaceship->systems[selected_system].coolant_request + 0.5f);
+                my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
+            }
+            if (key.hotkey == "DECREASE_COOLANT")
+            {
+                coolant_slider->setValue(my_spaceship->systems[selected_system].coolant_request - 0.5f);
+                my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
+            }
+        }
+    }
+}
+
+void EngineeringScreen::selectSystem(ESystem system)
+{
+    if (my_spaceship && !my_spaceship->hasSystem(system))
+        return;
+    
+    for(int idx=0; idx<SYS_COUNT; idx++)
+    {
+        system_rows[idx].button->setValue(idx == system);
+    }
+    selected_system = system;
+    power_slider->enable();
+    if (my_spaceship)
+    {
+        power_slider->setValue(my_spaceship->systems[system].power_request);
+        coolant_slider->setValue(my_spaceship->systems[system].coolant_request);
+    }
 }
 
 void EngineeringScreen::addSystemEffect(string key, string value)

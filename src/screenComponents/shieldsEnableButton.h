@@ -14,7 +14,8 @@ private:
 public:
     GuiShieldsEnableButton(GuiContainer* owner, string id);
     
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onHotkey(const HotkeyResult& key) override;
 };
 
 #endif//SHIELDS_ENABLE_BUTTON_H

@@ -9,8 +9,8 @@ std::vector<Particle> ParticleEngine::particles;
 void ParticleEngine::render()
 {
 #if FEATURE_3D_RENDERING
-    billboardShader->setParameter("textureMap", *textureManager.getTexture("particle.png"));
-    sf::Shader::bind(billboardShader);
+    ShaderManager::getShader("billboardShader")->setParameter("textureMap", *textureManager.getTexture("particle.png"));
+    sf::Shader::bind(ShaderManager::getShader("billboardShader"));
     glBegin(GL_QUADS);
     for(unsigned int n=0; n<particles.size(); n++)
     {

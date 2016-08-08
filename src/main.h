@@ -10,10 +10,6 @@
 extern sf::Vector3f camera_position;
 extern float camera_yaw;
 extern float camera_pitch;
-extern sf::Shader* objectShader;
-extern sf::Shader* simpleObjectShader;
-extern sf::Shader* basicShader;
-extern sf::Shader* billboardShader;
 extern sf::Font* main_font;
 extern sf::Font* bold_font;
 extern RenderLayer* backgroundLayer;
