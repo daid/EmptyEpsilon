@@ -42,6 +42,4 @@ There is no clear goal where this game is going. This means that there is no for
 
 ## Building
 
-    $ # OSX? `brew install sfml` first
-    $ cmake -D SERIOUS_PROTON_DIR=/path/to/serious/proton/ .
-    $ make
+See https://github.com/daid/EmptyEpsilon/wiki/Build-from-sources
