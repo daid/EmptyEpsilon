@@ -25,12 +25,11 @@ public:
     void setPlanetRadius(float size);
     void setPlanetCloudRadius(float size);
     void setDistanceFromMovementPlane(float distance_from_movement_plane);
+    void setAxialRotationSpeed(float speed);
     
     virtual string getExportLine() { return "Planet():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 
 private:
-    float update_delta;
-    
     //Config:
     float planet_size;
     float cloud_size;
@@ -40,6 +39,8 @@ private:
     string atmosphere_texture;
     sf::Color atmosphere_color;
     float distance_from_movement_plane;
+    
+    float axial_rotation_speed;
     
     float collision_size;
 

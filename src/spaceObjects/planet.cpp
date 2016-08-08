@@ -29,14 +29,12 @@ public:
         
         for(unsigned int n=0; n<vertices.size(); n++)
         {
-            //Recalculate the U values of the uvMap so we get proper spherical mapping.
-            float u = vertices[n].uv[0];
-            float v = fabs(vertices[n].uv[1] - 0.5) * 2.0; // = 0 when at center, 1 at top/bottom of the texture.
-            if (v < 1.0)
-                u = fmod(u, 0.25) / (1.0 - v) + (floorf(u * 4) / 4.0f);
-            
+            float u = sf::vector2ToAngle(sf::Vector2f(vertices[n].position[1], vertices[n].position[0])) / 360.0f;
+            if (u < 0.0f)
+                u = 1.0 + u;
+            if (std::abs(u - vertices[n].uv[0]) > 0.5)
+                u += 1.0f;
             vertices[n].uv[0] = u;
-            
             vertices[n].uv[1] = 0.5 + sf::vector2ToAngle(sf::Vector2f(sf::length(sf::Vector2f(vertices[n].position[0], vertices[n].position[1])), vertices[n].position[2])) / 180.0f;
         }
     }
@@ -102,6 +100,7 @@ REGISTER_SCRIPT_SUBCLASS(Planet, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetRadius);
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetCloudRadius);
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setDistanceFromMovementPlane);
+    REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setAxialRotationSpeed);
 }
 
 REGISTER_MULTIPLAYER_CLASS(Planet, "Planet");
@@ -115,8 +114,8 @@ Planet::Planet()
     atmosphere_texture = "";
     atmosphere_color = sf::Color(0, 0, 0);
     distance_from_movement_plane = 0;
+    axial_rotation_speed = 0.0;
 
-    update_delta = 0.0;
     collision_size = -2.0f;
 
     setRadarSignatureInfo(0.5, 0, 0);
@@ -128,6 +127,7 @@ Planet::Planet()
     registerMemberReplication(&atmosphere_texture);
     registerMemberReplication(&atmosphere_color);
     registerMemberReplication(&distance_from_movement_plane);
+    registerMemberReplication(&axial_rotation_speed);
 }
 
 void Planet::setPlanetAtmosphereColor(float r, float g, float b)
@@ -169,16 +169,21 @@ void Planet::setDistanceFromMovementPlane(float distance_from_movement_plane)
     this->distance_from_movement_plane = distance_from_movement_plane;
 }
 
+void Planet::setAxialRotationSpeed(float speed)
+{
+    axial_rotation_speed = speed;
+}
+
 void Planet::update(float delta)
 {
-    update_delta = delta;
-    
     if (collision_size == -2.0f)
     {
         updateCollisionSize();
         if (collision_size > 0.0)
             PathPlannerManager::getInstance()->addAvoidObject(this, collision_size);
     }
+    
+    setRotation(getRotation() + axial_rotation_speed * delta);
 }
 
 #if FEATURE_3D_RENDERING
@@ -278,26 +283,10 @@ void Planet::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float 
 
 void Planet::collide(Collisionable* target, float collision_force)
 {
-    if (update_delta == 0.0)
-        return;
-/*
-    sf::Vector2f diff = getPosition() - target->getPosition();
-    float distance = sf::length(diff);
-    float force = (getRadius() * getRadius() * 50.0f) / (distance * distance);
-    if (force > 10000.0)
+    if (collision_size > 0)
     {
-        force = 10000.0;
-        if (isServer())
-            target->destroy();
+        //Something hit this planet...
     }
-    DamageInfo info(NULL, DT_Kinetic, getPosition());
-    if (force > 100.0 && isServer())
-    {
-        P<SpaceObject> obj = P<Collisionable>(target);
-        if (obj)
-            obj->takeDamage(force * update_delta / 10.0f, info);
-    }
-    target->setPosition(target->getPosition() + diff / distance * update_delta * force);*/
 }
 
 void Planet::updateCollisionSize()
