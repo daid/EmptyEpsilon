@@ -36,6 +36,8 @@ public:
                 u = fmod(u, 0.25) / (1.0 - v) + (floorf(u * 4) / 4.0f);
             
             vertices[n].uv[0] = u;
+            
+            vertices[n].uv[1] = 0.5 + sf::vector2ToAngle(sf::Vector2f(sf::length(sf::Vector2f(vertices[n].position[0], vertices[n].position[1])), vertices[n].position[2])) / 180.0f;
         }
     }
     
@@ -111,7 +113,7 @@ Planet::Planet()
     planet_texture = "";
     cloud_texture = "";
     atmosphere_texture = "";
-    atmosphere_color = sf::Color(255, 255, 255);
+    atmosphere_color = sf::Color(0, 0, 0);
     distance_from_movement_plane = 0;
 
     update_delta = 0.0;
@@ -203,8 +205,10 @@ void Planet::draw3D()
             PlanetMeshGenerator planet_mesh_generator(level_of_detail);
             planet_mesh[level_of_detail] = new Mesh(planet_mesh_generator.vertices);
         }
-        ShaderManager::getShader("planetShader")->setParameter("baseMap", *textureManager.getTexture(planet_texture));
-        sf::Shader::bind(ShaderManager::getShader("planetShader"));
+        sf::Shader* shader = ShaderManager::getShader("planetShader");
+        shader->setParameter("baseMap", *textureManager.getTexture(planet_texture));
+        shader->setParameter("atmosphereColor", atmosphere_color);
+        sf::Shader::bind(shader);
         planet_mesh[level_of_detail]->render();
     }
 }
@@ -234,8 +238,10 @@ void Planet::draw3DTransparent()
             PlanetMeshGenerator planet_mesh_generator(level_of_detail);
             planet_mesh[level_of_detail] = new Mesh(planet_mesh_generator.vertices);
         }
-        ShaderManager::getShader("planetShader")->setParameter("baseMap", *textureManager.getTexture(cloud_texture));
-        sf::Shader::bind(ShaderManager::getShader("planetShader"));
+        sf::Shader* shader = ShaderManager::getShader("planetShader");
+        shader->setParameter("baseMap", *textureManager.getTexture(cloud_texture));
+        shader->setParameter("atmosphereColor", sf::Color(0,0,0));
+        sf::Shader::bind(shader);
         planet_mesh[level_of_detail]->render();
         glPopMatrix();
     }
