@@ -55,8 +55,8 @@ void Nebula::draw3DTransparent()
         if (alpha < 0.0)
             continue;
 
-        billboardShader->setParameter("textureMap", *textureManager.getTexture("Nebula" + string(cloud.texture) + ".png"));
-        sf::Shader::bind(billboardShader);
+        ShaderManager::getShader("billboardShader")->setParameter("textureMap", *textureManager.getTexture("Nebula" + string(cloud.texture) + ".png"));
+        sf::Shader::bind(ShaderManager::getShader("billboardShader"));
         glBegin(GL_QUADS);
         glColor4f(alpha * 0.8, alpha * 0.8, alpha * 0.8, size);
         glTexCoord2f(0, 0);

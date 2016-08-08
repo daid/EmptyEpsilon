@@ -41,10 +41,6 @@
 sf::Vector3f camera_position;
 float camera_yaw;
 float camera_pitch;
-sf::Shader* objectShader;
-sf::Shader* simpleObjectShader;
-sf::Shader* basicShader;
-sf::Shader* billboardShader;
 sf::Font* main_font;
 sf::Font* bold_font;
 RenderLayer* backgroundLayer;
@@ -238,27 +234,6 @@ int main(int argc, char** argv)
     P<ResourceStream> bold_font_stream = getResourceStream("gui/fonts/BebasNeue Bold.otf");
     bold_font = new sf::Font();
     bold_font->loadFromStream(**bold_font_stream);
-
-    if (sf::Shader::isAvailable())
-    {
-        objectShader = new sf::Shader();
-        simpleObjectShader = new sf::Shader();
-        basicShader = new sf::Shader();
-        billboardShader = new sf::Shader();
-
-        P<ResourceStream> vertexStream = getResourceStream("objectShader.vert");
-        P<ResourceStream> fragmentStream = getResourceStream("objectShader.frag");
-        objectShader->loadFromStream(**vertexStream, **fragmentStream);
-        vertexStream = getResourceStream("simpleObjectShader.vert");
-        fragmentStream = getResourceStream("simpleObjectShader.frag");
-        simpleObjectShader->loadFromStream(**vertexStream, **fragmentStream);
-        vertexStream = getResourceStream("basicShader.vert");
-        fragmentStream = getResourceStream("basicShader.frag");
-        basicShader->loadFromStream(**vertexStream, **fragmentStream);
-        vertexStream = getResourceStream("billboardShader.vert");
-        fragmentStream = getResourceStream("billboardShader.frag");
-        billboardShader->loadFromStream(**vertexStream, **fragmentStream);
-    }
 
     {
         P<ScriptObject> modelDataScript = new ScriptObject("model_data.lua");

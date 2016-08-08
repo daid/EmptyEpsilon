@@ -180,6 +180,7 @@ set(SOURCES
 	src/spaceObjects/nuke.cpp
 	src/spaceObjects/artifact.cpp
 	src/spaceObjects/shipTemplateBasedObject.cpp
+	src/spaceObjects/planet.cpp
 	src/spaceObjects/spaceshipParts/beamWeapon.cpp
 	src/spaceObjects/spaceshipParts/weaponTube.cpp
 	src/ai/fighterAI.cpp
