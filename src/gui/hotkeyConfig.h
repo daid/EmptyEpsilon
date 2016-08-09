@@ -27,6 +27,8 @@ public:
 class HotkeyResult
 {
 public:
+    HotkeyResult(string category, string hotkey) : category(category), hotkey(hotkey) {}
+
     string category;
     string hotkey;
 };
@@ -40,7 +42,7 @@ public:
     std::vector<string> getCategories();
     std::vector<std::pair<string, string>> listHotkeysByCategory(string hotkey_category);
     
-    HotkeyResult getHotkey(sf::Event::KeyEvent key);
+    std::vector<HotkeyResult> getHotkey(sf::Event::KeyEvent key);
 private:
     std::vector<HotkeyConfigCategory> categories;
     

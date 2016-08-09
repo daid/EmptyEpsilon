@@ -80,6 +80,15 @@ HotkeyConfig::HotkeyConfig()
     newKey("DECREASE_POWER", "Decrease system power");
     newKey("INCREASE_COOLANT", "Increase system coolant");
     newKey("DECREASE_COOLANT", "Decrease system coolant");
+    newKey("NEXT_REPAIR_CREW", "Next repair crew");
+    newKey("REPAIR_CREW_MOVE_UP", "Crew move up");
+    newKey("REPAIR_CREW_MOVE_DOWN", "Crew move down");
+    newKey("REPAIR_CREW_MOVE_LEFT", "Crew move left");
+    newKey("REPAIR_CREW_MOVE_RIGHT", "Crew move right");
+    newKey("SHIELD_CAL_INC", "Increase shield frequency target");
+    newKey("SHIELD_CAL_DEC", "Decrease shield frequency target");
+    newKey("SHIELD_CAL_START", "Start shield calibration");
+
 }
 
 static std::vector<std::pair<string, sf::Keyboard::Key> > sfml_key_names = {
@@ -198,22 +207,20 @@ void HotkeyConfig::load()
     }
 }
 
-HotkeyResult HotkeyConfig::getHotkey(sf::Event::KeyEvent key)
+std::vector<HotkeyResult> HotkeyConfig::getHotkey(sf::Event::KeyEvent key)
 {
-    HotkeyResult result;
+    std::vector<HotkeyResult> results;
     for(HotkeyConfigCategory& cat : categories)
     {
         for(HotkeyConfigItem& item : cat.hotkeys)
         {
             if (item.hotkey.code == key.code && item.hotkey.alt == key.alt && item.hotkey.control == key.control && item.hotkey.shift == key.shift && item.hotkey.system == key.system)
             {
-                result.category = cat.key;
-                result.hotkey = item.key;
-                return result;
+                results.emplace_back(cat.key, item.key);
             }
         }
     }
-    return result;
+    return results;
 }
 
 void HotkeyConfig::newCategory(string key, string name)
