@@ -88,6 +88,9 @@ HotkeyConfig::HotkeyConfig()
     newKey("SHIELD_CAL_INC", "Increase shield frequency target");
     newKey("SHIELD_CAL_DEC", "Decrease shield frequency target");
     newKey("SHIELD_CAL_START", "Start shield calibration");
+    newKey("SELF_DESTRUCT_START", "Start self-destruct");
+    newKey("SELF_DESTRUCT_CONFIRM", "Confirm self-destruct");
+    newKey("SELF_DESTRUCT_CANCEL", "Cancel self-destruct");
 
 }
 
