@@ -157,6 +157,11 @@ public:
     void addCommsReply(int32_t id, string message);
     void closeComms();
 
+    void setEnergyLevel(float amount) { energy_level = std::max(0.0f, std::min(max_energy_level, amount)); }
+    void setEnergyLevelMax(float amount) { max_energy_level = std::max(0.0f, amount); energy_level = std::min(energy_level, max_energy_level); }
+    float getEnergyLevel() { return energy_level; }
+    float getEnergyLevelMax() { return max_energy_level; }
+
     // Client command functions
     virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet) override;
     void commandTargetRotation(float target);
