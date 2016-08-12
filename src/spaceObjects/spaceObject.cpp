@@ -168,6 +168,20 @@ bool SpaceObject::canBeScannedBy(P<SpaceObject> other)
     return false;
 }
 
+bool SpaceObject::canBeHackedBy(P<SpaceObject> other)
+{
+    return false;
+}
+
+std::vector<std::pair<string, float> > SpaceObject::getHackingTargets()
+{
+    return std::vector<std::pair<string, float> >();
+}
+
+void SpaceObject::hackFinished(P<SpaceObject> source, string target)
+{
+}
+
 EScannedState SpaceObject::getScannedStateFor(P<SpaceObject> other)
 {
     if (!other)

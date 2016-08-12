@@ -434,6 +434,8 @@
 		<Unit filename="../SeriousProton/src/scriptInterface.h" />
 		<Unit filename="../SeriousProton/src/scriptInterfaceMagic.cpp" />
 		<Unit filename="../SeriousProton/src/scriptInterfaceMagic.h" />
+		<Unit filename="../SeriousProton/src/shaderManager.cpp" />
+		<Unit filename="../SeriousProton/src/shaderManager.h" />
 		<Unit filename="../SeriousProton/src/soundManager.cpp" />
 		<Unit filename="../SeriousProton/src/soundManager.h" />
 		<Unit filename="../SeriousProton/src/stringImproved.cpp" />
@@ -612,6 +614,8 @@
 		<Unit filename="src/screenComponents/frequencyCurve.h" />
 		<Unit filename="src/screenComponents/globalMessage.cpp" />
 		<Unit filename="src/screenComponents/globalMessage.h" />
+		<Unit filename="src/screenComponents/hackingDialog.cpp" />
+		<Unit filename="src/screenComponents/hackingDialog.h" />
 		<Unit filename="src/screenComponents/helpOverlay.cpp" />
 		<Unit filename="src/screenComponents/helpOverlay.h" />
 		<Unit filename="src/screenComponents/impulseControls.cpp" />

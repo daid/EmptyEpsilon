@@ -128,6 +128,7 @@ set(SOURCES
 	src/screenComponents/databaseView.cpp
 	src/screenComponents/shipsLogControl.cpp
 	src/screenComponents/onScreenKeyboard.cpp
+	src/screenComponents/hackingDialog.cpp
 	src/gui/colorConfig.cpp
 	src/gui/hotkeyConfig.cpp
 	src/gui/mouseRenderer.cpp

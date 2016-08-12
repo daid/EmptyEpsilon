@@ -158,6 +158,7 @@ static const int16_t CMD_SET_ALERT_LEVEL = 0x0024;
 static const int16_t CMD_SET_SCIENCE_LINK = 0x0025;
 static const int16_t CMD_ABORT_DOCK = 0x0026;
 static const int16_t CMD_SET_MAIN_SCREEN_OVERLAY = 0x0027;
+static const int16_t CMD_HACKING_FINISHED = 0x0028;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -1366,6 +1367,16 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             packet >> linked_science_probe_id;
         }
         break;
+    case CMD_HACKING_FINISHED:
+        {
+            uint32_t id;
+            string target_system;
+            packet >> id >> target_system;
+            P<SpaceObject> obj = game_server->getObjectById(id);
+            if (obj)
+                obj->hackFinished(this, target_system);
+        }
+        break;
     }
 }
 
@@ -1643,6 +1654,15 @@ void PlayerSpaceship::commandSetAlertLevel(EAlertLevel level)
     sf::Packet packet;
     packet << CMD_SET_ALERT_LEVEL;
     packet << level;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandHackingFinished(P<SpaceObject> target, string target_system)
+{
+    sf::Packet packet;
+    packet << CMD_HACKING_FINISHED;
+    packet << target->getMultiplayerId();
+    packet << target_system;
     sendClientCommand(packet);
 }
 

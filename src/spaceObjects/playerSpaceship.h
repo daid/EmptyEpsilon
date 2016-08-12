@@ -203,6 +203,7 @@ public:
     void commandScanDone();
     void commandScanCancel();
     void commandSetAlertLevel(EAlertLevel level);
+    void commandHackingFinished(P<SpaceObject> target, string target_system);
 
     virtual void onReceiveServerCommand(sf::Packet& packet) override;
 

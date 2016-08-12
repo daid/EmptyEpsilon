@@ -7,7 +7,7 @@ MissileWeaponData missile_data[MW_Count] =
     MissileWeaponData(200.0f, 10.f, 27.0f, sf::Color(255, 100, 32), 500.0),/*MW_Nuke*/
     MissileWeaponData(100.0f,  0.f, 10.0f, sf::Color(255, 255, 255), 0.0),/*MW_Mine, lifetime is used at time which the mine is ejecting from the ship*/
     MissileWeaponData(200.0f, 10.f, 27.0f, sf::Color(100, 32, 255), 500.0),/*MW_EMP*/
-    MissileWeaponData(400.0f,  0.f, 13.5f, sf::Color(200, 200, 200), 0.0),/*MW_HVLI*/
+    MissileWeaponData(500.0f,  0.f, 13.5f, sf::Color(200, 200, 200), 0.0),/*MW_HVLI*/
 };
 
 MissileWeaponData::MissileWeaponData(float speed, float turnrate, float lifetime, sf::Color color, float homing_range)
