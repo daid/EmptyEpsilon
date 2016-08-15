@@ -3,6 +3,7 @@
 #include "main.h"
 #include "preferenceManager.h"
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/noiseOverlay.h"
@@ -10,6 +11,7 @@
 
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_panel.h"
+#include "gui/gui2_scrolltext.h"
 
 CrewStationScreen::CrewStationScreen()
 {
@@ -22,6 +24,26 @@ CrewStationScreen::CrewStationScreen()
     button_strip = new GuiPanel(this, "");
     button_strip->setPosition(-20, 20, ATopRight)->setSize(250, 50);
     button_strip->hide();
+
+    message_frame = new GuiPanel(this, "");
+    message_frame->setPosition(0, 0, ATopCenter)->setSize(900, 230)->hide();
+    
+    message_text = new GuiScrollText(message_frame, "", "");
+    message_text->setTextSize(20)->setPosition(20, 20, ATopLeft)->setSize(900 - 40, 200 - 40);
+    message_close_button = new GuiButton(message_frame, "", "Close", [this]() {
+        if (my_spaceship)
+        {
+            for(PlayerSpaceship::CustomShipFunction& csf : my_spaceship->custom_functions)
+            {
+                if (csf.crew_position == current_position && csf.type == PlayerSpaceship::CustomShipFunction::Type::Message)
+                {
+                    my_spaceship->commandCustomFunction(csf.name);
+                    break;
+                }
+            }
+        }
+    });
+    message_close_button->setTextSize(30)->setPosition(-20, -20, ABottomRight)->setSize(300, 30);
 
     keyboard_help = new GuiHelpOverlay(this, "Keyboard Shortcuts");
 
@@ -43,11 +65,12 @@ CrewStationScreen::CrewStationScreen()
 #endif
 }
 
-void CrewStationScreen::addStationTab(GuiElement* element, string name, string icon)
+void CrewStationScreen::addStationTab(GuiElement* element, ECrewPosition position, string name, string icon)
 {
     CrewTabInfo info;
 
     element->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    info.position = position;
     info.element = element;
 
     info.button = new GuiToggleButton(button_strip, "STATION_BUTTON_" + name, name, [this, element](bool value) {
@@ -59,6 +82,7 @@ void CrewStationScreen::addStationTab(GuiElement* element, string name, string i
 
     if (tabs.size() == 0)
     {
+        current_position = position;
         element->show();
         info.button->setValue(true);
         select_station_button->setText(name);
@@ -84,6 +108,8 @@ void CrewStationScreen::finishCreation()
     button_strip->moveToFront();
     button_strip->setSize(button_strip->getSize().x, 50 * tabs.size());
 
+    message_frame->moveToFront();
+
     new GuiIndicatorOverlays(this);
     new GuiNoiseOverlay(this);
     new GuiShipDestroyedPopup(this);
@@ -103,6 +129,19 @@ void CrewStationScreen::update(float delta)
         disconnectFromServer();
         returnToMainMenu();
         return;
+    }
+    if (my_spaceship)
+    {
+        message_frame->hide();
+        for(PlayerSpaceship::CustomShipFunction& csf : my_spaceship->custom_functions)
+        {
+            if (csf.crew_position == current_position && csf.type == PlayerSpaceship::CustomShipFunction::Type::Message)
+            {
+                message_frame->show();
+                message_text->setText(csf.caption);
+                break;
+            }
+        }
     }
 }
 
@@ -175,6 +214,7 @@ void CrewStationScreen::showTab(GuiElement* element)
     {
         if (info.element == element)
         {
+            current_position = info.position;
             info.element->show();
             info.button->setValue(true);
             select_station_button->setText(info.button->getText());

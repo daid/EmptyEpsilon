@@ -70,6 +70,24 @@ public:
 
         bool operator!=(const ShipLogEntry& e) { return prefix != e.prefix || text != e.text || color != e.color; }
     };
+    
+    class CustomShipFunction
+    {
+    public:
+        enum class Type
+        {
+            Info,
+            Button,
+            Message
+        };
+        Type type;
+        string name;
+        string caption;
+        ECrewPosition crew_position;
+        ScriptSimpleCallback callback;
+        
+        bool operator!=(const CustomShipFunction& csf) { return type != csf.type || name != csf.name || caption != csf.caption || crew_position != csf.crew_position; }
+    };
 
     // Visual indicators of hull damage and in-progress jumps
     float hull_damage_indicator;
@@ -107,8 +125,10 @@ private:
     CommsScriptInterface comms_script_interface; // Server only
     // Ship's log container
     std::vector<ShipLogEntry> ships_log;
-
+    
 public:
+    std::vector<CustomShipFunction> custom_functions;
+
     std::vector<sf::Vector2f> waypoints;
     int scan_probe_stock;
     float scan_probe_recharge;
@@ -162,6 +182,12 @@ public:
     float getEnergyLevel() { return energy_level; }
     float getEnergyLevelMax() { return max_energy_level; }
 
+    void addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback);
+    void addCustomInfo(ECrewPosition position, string name, string caption);
+    void addCustomMessage(ECrewPosition position, string name, string caption);
+    void addCustomMessageWithCallback(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback);
+    void removeCustom(string name);
+
     // Client command functions
     virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet) override;
     void commandTargetRotation(float target);
@@ -204,6 +230,7 @@ public:
     void commandScanCancel();
     void commandSetAlertLevel(EAlertLevel level);
     void commandHackingFinished(P<SpaceObject> target, string target_system);
+    void commandCustomFunction(string name);
 
     virtual void onReceiveServerCommand(sf::Packet& packet) override;
 
@@ -259,6 +286,9 @@ public:
 REGISTER_MULTIPLAYER_ENUM(ECommsState);
 template<> int convert<EAlertLevel>::returnType(lua_State* L, EAlertLevel l);
 REGISTER_MULTIPLAYER_ENUM(EAlertLevel);
+
+static inline sf::Packet& operator << (sf::Packet& packet, const PlayerSpaceship::CustomShipFunction& csf) { return packet << uint8_t(csf.type) << uint8_t(csf.crew_position) << csf.name << csf.caption; } \
+static inline sf::Packet& operator >> (sf::Packet& packet, PlayerSpaceship::CustomShipFunction& csf) { int8_t tmp; packet >> tmp; csf.type = PlayerSpaceship::CustomShipFunction::Type(tmp); packet >> tmp; csf.crew_position = ECrewPosition(tmp); packet >> csf.name >> csf.caption; return packet; }
 
 string alertLevelToString(EAlertLevel level);
 
