@@ -9,6 +9,7 @@
 #include "screenComponents/commsOverlay.h"
 #include "screenComponents/shipsLogControl.h"
 #include "screenComponents/hackingDialog.h"
+#include "screenComponents/customShipFunctions.h"
 
 #include "gui/gui2_autolayout.h"
 #include "gui/gui2_keyvaluedisplay.h"
@@ -167,6 +168,8 @@ RelayScreen::RelayScreen(GuiContainer* owner)
         alert_button->setSize(GuiElement::GuiSizeMax, 50);
         alert_level_buttons.push_back(alert_button);
     }
+
+    //(new GuiCustomShipFunctions(this, relayOfficer, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 
     hacking_dialog = new GuiHackingDialog(this, "");
 

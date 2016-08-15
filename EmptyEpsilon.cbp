@@ -606,6 +606,8 @@
 		<Unit filename="src/screenComponents/combatManeuver.h" />
 		<Unit filename="src/screenComponents/commsOverlay.cpp" />
 		<Unit filename="src/screenComponents/commsOverlay.h" />
+		<Unit filename="src/screenComponents/customShipFunctions.cpp" />
+		<Unit filename="src/screenComponents/customShipFunctions.h" />
 		<Unit filename="src/screenComponents/databaseView.cpp" />
 		<Unit filename="src/screenComponents/databaseView.h" />
 		<Unit filename="src/screenComponents/dockingButton.cpp" />

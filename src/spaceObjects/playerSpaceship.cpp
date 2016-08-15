@@ -856,6 +856,7 @@ void PlayerSpaceship::addCustomButton(ECrewPosition position, string name, strin
     CustomShipFunction& csf = custom_functions.back();
     csf.type = CustomShipFunction::Type::Button;
     csf.name = name;
+    csf.crew_position = position;
     csf.caption = caption;
     csf.callback = callback;
 }
@@ -867,6 +868,7 @@ void PlayerSpaceship::addCustomInfo(ECrewPosition position, string name, string 
     CustomShipFunction& csf = custom_functions.back();
     csf.type = CustomShipFunction::Type::Info;
     csf.name = name;
+    csf.crew_position = position;
     csf.caption = caption;
 }
 
@@ -877,6 +879,7 @@ void PlayerSpaceship::addCustomMessage(ECrewPosition position, string name, stri
     CustomShipFunction& csf = custom_functions.back();
     csf.type = CustomShipFunction::Type::Message;
     csf.name = name;
+    csf.crew_position = position;
     csf.caption = caption;
 }
 

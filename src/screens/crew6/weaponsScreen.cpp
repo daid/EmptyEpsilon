@@ -10,6 +10,7 @@
 #include "screenComponents/shieldFreqencySelect.h"
 #include "screenComponents/shieldsEnableButton.h"
 #include "screenComponents/alertOverlay.h"
+#include "screenComponents/customShipFunctions.h"
 
 #include "gui/gui2_rotationdial.h"
 #include "gui/gui2_label.h"
@@ -82,6 +83,8 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     }else{
         (new GuiShieldsEnableButton(this, "SHIELDS_ENABLE"))->setPosition(-20, -20, ABottomRight)->setSize(280, 50);
     }
+
+    (new GuiCustomShipFunctions(this, weaponsOfficer, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 
 void WeaponsScreen::onDraw(sf::RenderTarget& window)

@@ -8,6 +8,7 @@
 #include "screenComponents/jumpControls.h"
 #include "screenComponents/dockingButton.h"
 #include "screenComponents/alertOverlay.h"
+#include "screenComponents/customShipFunctions.h"
 
 #include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"
@@ -114,6 +115,8 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
     
     (new GuiDockingButton(this, "DOCKING"))->setPosition(20, -20, ABottomLeft)->setSize(280, 50);
+
+    (new GuiCustomShipFunctions(this, helmsOfficer, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 
 void HelmsScreen::onDraw(sf::RenderTarget& window)

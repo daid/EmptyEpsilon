@@ -10,6 +10,7 @@
 #include "screenComponents/scanningDialog.h"
 #include "screenComponents/databaseView.h"
 #include "screenComponents/alertOverlay.h"
+#include "screenComponents/customShipFunctions.h"
 
 #include "gui/gui2_autolayout.h"
 #include "gui/gui2_keyvaluedisplay.h"
@@ -196,6 +197,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
         database_view->setVisible(index == 1);
     });
     view_mode_selection->setOptions({"Radar", "Database"})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(200, 100);
+
+    //(new GuiCustomShipFunctions(this, scienceOfficer, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 
     // Scanning dialog.
     new GuiScanningDialog(this, "SCANNING_DIALOG");
