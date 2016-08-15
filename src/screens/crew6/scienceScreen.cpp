@@ -298,7 +298,6 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
 
         if (description.size() > 0)
         {
-            LOG(INFO) << "Show description in sidebar: " << description;
             info_description->setText(description)->show();
 
             if (!sidebar_pager->indexByValue("Description"))
@@ -331,7 +330,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             if (ship->getScannedStateFor(my_spaceship) >= SS_FullScan)
             {
                 scan_button->hide();
-                sidebar_pager->show();
+                sidebar_pager->setVisible(sidebar_pager->entryCount() > 1);
 
                 // Check sidebar pager state.
                 if (sidebar_pager_selection == "Tactical")
@@ -344,7 +343,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                         info_system[n]->hide();
                     }
 
-                info_description->hide();
+                    info_description->hide();
                 }
                 else if (sidebar_pager_selection == "Systems")
                 {
