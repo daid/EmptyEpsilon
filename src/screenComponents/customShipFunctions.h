@@ -11,6 +11,7 @@ public:
     
     virtual void onDraw(sf::RenderTarget& window) override;
 
+    bool hasEntries();
 private:
     class Entry
     {

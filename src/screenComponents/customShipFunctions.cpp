@@ -29,6 +29,16 @@ void GuiCustomShipFunctions::onDraw(sf::RenderTarget& window)
     }
 }
 
+bool GuiCustomShipFunctions::hasEntries()
+{
+    for(Entry& e : entries)
+    {
+        if (e.element)
+            return true;
+    }
+    return false;
+}
+
 void GuiCustomShipFunctions::createEntries()
 {
     for(Entry& e : entries)
