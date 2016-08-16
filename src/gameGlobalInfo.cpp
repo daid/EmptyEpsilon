@@ -39,6 +39,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&scanning_complexity);
     registerMemberReplication(&global_message);
     registerMemberReplication(&global_message_timeout, 1.0);
+    registerMemberReplication(&banner_string);
     registerMemberReplication(&victory_faction);
     registerMemberReplication(&long_range_radar_range);
     registerMemberReplication(&use_beam_shield_frequencies);
@@ -235,6 +236,15 @@ static int globalMessage(lua_State* L)
 /// globalMessage(string)
 /// Show a global message on the main screens of all active player ships.
 REGISTER_SCRIPT_FUNCTION(globalMessage);
+
+static int setBanner(lua_State* L)
+{
+    gameGlobalInfo->banner_string = luaL_checkstring(L, 1);
+    return 0;
+}
+/// setBanner(string)
+/// Show a scrolling banner containing this text on the cinematic and top down views.
+REGISTER_SCRIPT_FUNCTION(setBanner);
 
 static int getPlayerShip(lua_State* L)
 {

@@ -5,6 +5,7 @@
 #include "main.h"
 
 #include "screenComponents/indicatorOverlays.h"
+#include "screenComponents/scrollingBanner.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_togglebutton.h"
 
@@ -31,6 +32,8 @@ TopDownScreen::TopDownScreen()
     camera_lock_toggle->setPosition(20, -20, ABottomLeft)->setSize(300, 50)->hide();
 
     new GuiIndicatorOverlays(this);
+
+    (new GuiScrollingBanner(this))->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, 100);
 
     // Lock onto the first player ship to start.
     for(int n = 0; n < GameGlobalInfo::max_player_ships; n++)

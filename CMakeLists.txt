@@ -130,6 +130,7 @@ set(SOURCES
 	src/screenComponents/onScreenKeyboard.cpp
 	src/screenComponents/hackingDialog.cpp
 	src/screenComponents/customShipFunctions.cpp
+	src/screenComponents/scrollingBanner.cpp
 	src/gui/colorConfig.cpp
 	src/gui/hotkeyConfig.cpp
 	src/gui/mouseRenderer.cpp

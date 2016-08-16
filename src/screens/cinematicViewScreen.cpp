@@ -5,6 +5,7 @@
 #include "main.h"
 
 #include "screenComponents/indicatorOverlays.h"
+#include "screenComponents/scrollingBanner.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_togglebutton.h"
 
@@ -41,6 +42,8 @@ CinematicViewScreen::CinematicViewScreen()
     camera_lock_tot_toggle->setValue(false)->setPosition(320, -20, ABottomLeft)->setSize(350, 50)->hide();
 
     new GuiIndicatorOverlays(this);
+
+    (new GuiScrollingBanner(this))->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, 100);
 }
 
 void CinematicViewScreen::update(float delta)

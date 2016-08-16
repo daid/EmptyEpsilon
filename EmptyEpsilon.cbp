@@ -650,6 +650,8 @@
 		<Unit filename="src/screenComponents/scanTargetButton.h" />
 		<Unit filename="src/screenComponents/scanningDialog.cpp" />
 		<Unit filename="src/screenComponents/scanningDialog.h" />
+		<Unit filename="src/screenComponents/scrollingBanner.cpp" />
+		<Unit filename="src/screenComponents/scrollingBanner.h" />
 		<Unit filename="src/screenComponents/selfDestructButton.cpp" />
 		<Unit filename="src/screenComponents/selfDestructButton.h" />
 		<Unit filename="src/screenComponents/selfDestructEntry.cpp" />
