@@ -41,6 +41,7 @@ public:
     float heat_level; //0.0-1.0, system will damage at 1.0
     float coolant_level; //0.0-10.0
     float coolant_request;
+    float hacked_level; //0.0-1.0
 
     float getHeatingDelta()
     {
@@ -63,6 +64,7 @@ public:
     constexpr static float heat_per_combat_maneuver_boost = 0.2;
     constexpr static float heat_per_combat_maneuver_strafe = 0.2;
     constexpr static float heat_per_warp = 0.02;
+    constexpr static float unhack_time = 180.0f; //It takes this amount of time to go from 100% hacked to 0% hacked for systems.
 
     float energy_level;
     float max_energy_level;
@@ -257,6 +259,10 @@ public:
     bool isFullyScannedBy(P<SpaceObject> other);
     bool isFriendOrFoeIdentifiedByFaction(int faction_id);
     bool isFullyScannedByFaction(int faction_id);
+
+    virtual bool canBeHackedBy(P<SpaceObject> other) override;
+    virtual std::vector<std::pair<string, float> > getHackingTargets() override;
+    virtual void hackFinished(P<SpaceObject> source, string target) override;
 
     /*!
      * Check if ship has certain system

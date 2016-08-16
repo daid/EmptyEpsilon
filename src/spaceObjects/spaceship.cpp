@@ -150,8 +150,10 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         systems[n].coolant_level = 0.0;
         systems[n].coolant_request = 0.0;
         systems[n].heat_level = 0.0;
+        systems[n].hacked_level = 0.0;
 
         registerMemberReplication(&systems[n].health, 0.1);
+        registerMemberReplication(&systems[n].hacked_level, 0.1);
     }
 
     for(int n = 0; n < max_beam_weapons; n++)
@@ -631,6 +633,11 @@ void SpaceShip::update(float delta)
     {
         weapon_tube[n].update(delta);
     }
+    
+    for(int n=0; n<SYS_COUNT; n++)
+    {
+        systems[n].hacked_level = std::max(0.0f, systems[n].hacked_level - delta / unhack_time);
+    }
 
     model_info.engine_scale = std::min(1.0f, (float) std::max(fabs(getAngularVelocity() / turn_speed), fabs(current_impulse)));
     if (has_jump_drive && jump_delay > 0.0f)
@@ -844,6 +851,40 @@ bool SpaceShip::isFullyScannedByFaction(int faction_id)
     return getScannedStateForFaction(faction_id) >= SS_FullScan;
 }
 
+bool SpaceShip::canBeHackedBy(P<SpaceObject> other)
+{
+    return true;
+}
+
+std::vector<std::pair<string, float>> SpaceShip::getHackingTargets()
+{
+    std::vector<std::pair<string, float>> results;
+    for(unsigned int n=0; n<SYS_COUNT; n++)
+    {
+        if (n != SYS_Reactor && hasSystem(ESystem(n)))
+        {
+            results.emplace_back(getSystemName(ESystem(n)), systems[n].hacked_level);
+        }
+    }
+    return results;
+}
+
+void SpaceShip::hackFinished(P<SpaceObject> source, string target)
+{
+    for(unsigned int n=0; n<SYS_COUNT; n++)
+    {
+        if (hasSystem(ESystem(n)))
+        {
+            if (target == getSystemName(ESystem(n)))
+            {
+                systems[n].hacked_level = std::min(1.0f, systems[n].hacked_level + 0.5f);
+                return;
+            }
+        }
+    }
+    LOG(WARNING) << "Unknown hacked target: " << target;
+}
+
 float SpaceShip::getShieldDamageFactor(DamageInfo& info, int shield_index)
 {
     float frequency_damage_factor = 1.0;
@@ -969,6 +1010,7 @@ bool SpaceShip::hasSystem(ESystem system)
 float SpaceShip::getSystemEffectiveness(ESystem system)
 {
     float power = systems[system].power_level;
+    power *= (1.0f - systems[system].hacked_level * 0.75f);
 
     // Degrade all systems except the reactor once energy level drops below 10.
     if (system != SYS_Reactor)
@@ -983,7 +1025,7 @@ float SpaceShip::getSystemEffectiveness(ESystem system)
     if (gameGlobalInfo && gameGlobalInfo->use_system_damage)
         return std::max(0.0f, power * systems[system].health);
 
-    // If a system is undamaged, excessive heat degrades it.
+    // If a system cannot be damaged, excessive heat degrades it.
     return std::max(0.0f, power * (1.0f - systems[system].heat_level));
 }
 

@@ -16,7 +16,8 @@ private:
 public:
     GuiShieldFrequencySelect(GuiContainer* owner, string id);
     
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onHotkey(const HotkeyResult& key) override;
 };
 
 #endif//SHIELD_FREQUENCY_SELECT_H

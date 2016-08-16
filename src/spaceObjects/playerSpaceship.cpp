@@ -48,6 +48,17 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsChatOpenToPlayer);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsScriptOpen);
 
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setEnergyLevel);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setEnergyLevelMax);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getEnergyLevel);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getEnergyLevelMax);
+
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomButton);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomInfo);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomMessage);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomMessageWithCallback);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, removeCustom);
+
     // Command functions
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandTargetRotation);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandImpulse);
@@ -153,6 +164,8 @@ static const int16_t CMD_SET_ALERT_LEVEL = 0x0024;
 static const int16_t CMD_SET_SCIENCE_LINK = 0x0025;
 static const int16_t CMD_ABORT_DOCK = 0x0026;
 static const int16_t CMD_SET_MAIN_SCREEN_OVERLAY = 0x0027;
+static const int16_t CMD_HACKING_FINISHED = 0x0028;
+static const int16_t CMD_CUSTOM_FUNCTION = 0x0029;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -230,6 +243,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&alert_level);
     registerMemberReplication(&linked_science_probe_id);
     registerMemberReplication(&control_code);
+    registerMemberReplication(&custom_functions);
 
     // Determine which stations must provide self-destruct confirmation codes.
     for(int n = 0; n < max_self_destruct_codes; n++)
@@ -835,6 +849,62 @@ bool PlayerSpaceship::hasPlayerAtPosition(ECrewPosition position)
     return false;
 }
 
+void PlayerSpaceship::addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback)
+{
+    removeCustom(name);
+    custom_functions.emplace_back();
+    CustomShipFunction& csf = custom_functions.back();
+    csf.type = CustomShipFunction::Type::Button;
+    csf.name = name;
+    csf.crew_position = position;
+    csf.caption = caption;
+    csf.callback = callback;
+}
+
+void PlayerSpaceship::addCustomInfo(ECrewPosition position, string name, string caption)
+{
+    removeCustom(name);
+    custom_functions.emplace_back();
+    CustomShipFunction& csf = custom_functions.back();
+    csf.type = CustomShipFunction::Type::Info;
+    csf.name = name;
+    csf.crew_position = position;
+    csf.caption = caption;
+}
+
+void PlayerSpaceship::addCustomMessage(ECrewPosition position, string name, string caption)
+{
+    removeCustom(name);
+    custom_functions.emplace_back();
+    CustomShipFunction& csf = custom_functions.back();
+    csf.type = CustomShipFunction::Type::Message;
+    csf.name = name;
+    csf.crew_position = position;
+    csf.caption = caption;
+}
+
+void PlayerSpaceship::addCustomMessageWithCallback(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback)
+{
+    removeCustom(name);
+    custom_functions.emplace_back();
+    CustomShipFunction& csf = custom_functions.back();
+    csf.type = CustomShipFunction::Type::Message;
+    csf.name = name;
+    csf.caption = caption;
+    csf.callback = callback;
+}
+
+void PlayerSpaceship::removeCustom(string name)
+{
+    for(auto it = custom_functions.begin(); it != custom_functions.end();)
+    {
+        if (it->name == name)
+            it = custom_functions.erase(it);
+        else
+            it++;
+    }
+}
+
 void PlayerSpaceship::setCommsMessage(string message)
 {
     // Record a new comms message to the ship's log.
@@ -1361,6 +1431,32 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             packet >> linked_science_probe_id;
         }
         break;
+    case CMD_HACKING_FINISHED:
+        {
+            uint32_t id;
+            string target_system;
+            packet >> id >> target_system;
+            P<SpaceObject> obj = game_server->getObjectById(id);
+            if (obj)
+                obj->hackFinished(this, target_system);
+        }
+        break;
+    case CMD_CUSTOM_FUNCTION:
+        {
+            string name;
+            packet >> name;
+            for(CustomShipFunction& csf : custom_functions)
+            {
+                if (csf.name == name)
+                {
+                    if (csf.type == CustomShipFunction::Type::Message)
+                        removeCustom(name);
+                    if (csf.type == CustomShipFunction::Type::Button || csf.type == CustomShipFunction::Type::Message)
+                        csf.callback.call();
+                }
+            }
+        }
+        break;
     }
 }
 
@@ -1638,6 +1734,23 @@ void PlayerSpaceship::commandSetAlertLevel(EAlertLevel level)
     sf::Packet packet;
     packet << CMD_SET_ALERT_LEVEL;
     packet << level;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandHackingFinished(P<SpaceObject> target, string target_system)
+{
+    sf::Packet packet;
+    packet << CMD_HACKING_FINISHED;
+    packet << target->getMultiplayerId();
+    packet << target_system;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandCustomFunction(string name)
+{
+    sf::Packet packet;
+    packet << CMD_CUSTOM_FUNCTION;
+    packet << name;
     sendClientCommand(packet);
 }
 

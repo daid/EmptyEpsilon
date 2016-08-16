@@ -88,6 +88,58 @@ void GuiShipInternalView::onDraw(sf::RenderTarget& window)
     }
 }
 
+void GuiShipInternalView::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "ENGINEERING" && my_spaceship)
+    {
+        if (key.hotkey == "NEXT_REPAIR_CREW")
+        {
+            PVector<RepairCrew> crew = getRepairCrewFor(viewing_ship);
+            P<RepairCrew> crew_member;
+            bool found = false;
+            foreach(RepairCrew, rc, crew)
+            {
+                if (selected_crew_member == rc)
+                {
+                    found = true;
+                }
+                else if (found)
+                {
+                    crew_member = rc;
+                    break;
+                }
+            }
+            if (!crew_member)
+            {
+                foreach(RepairCrew, rc, crew)
+                {
+                    crew_member = rc;
+                    break;
+                }
+            }
+            if (crew_member)
+            {
+                if (selected_crew_member)
+                    selected_crew_member->selected = false;
+                selected_crew_member = crew_member;
+                if (selected_crew_member)
+                    selected_crew_member->selected = true;
+            }
+        }
+        if (selected_crew_member)
+        {
+            if (key.hotkey == "REPAIR_CREW_MOVE_UP")
+                selected_crew_member->commandSetTargetPosition(sf::Vector2i(selected_crew_member->position + sf::Vector2f(0.5, 0.5)) + sf::Vector2i(0, -1));
+            if (key.hotkey == "REPAIR_CREW_MOVE_DOWN")
+                selected_crew_member->commandSetTargetPosition(sf::Vector2i(selected_crew_member->position + sf::Vector2f(0.5, 0.5)) + sf::Vector2i(0, 1));
+            if (key.hotkey == "REPAIR_CREW_MOVE_LEFT")
+                selected_crew_member->commandSetTargetPosition(sf::Vector2i(selected_crew_member->position + sf::Vector2f(0.5, 0.5)) + sf::Vector2i(-1, 0));
+            if (key.hotkey == "REPAIR_CREW_MOVE_RIGHT")
+                selected_crew_member->commandSetTargetPosition(sf::Vector2i(selected_crew_member->position + sf::Vector2f(0.5, 0.5)) + sf::Vector2i(1, 0));
+        }
+    }
+}
+
 GuiShipRoomContainer::GuiShipRoomContainer(GuiContainer* owner, string id, float room_size, func_t func)
 : GuiElement(owner, id), room_size(room_size), func(func)
 {

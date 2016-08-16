@@ -100,7 +100,8 @@ REGISTER_SCRIPT_SUBCLASS(Planet, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetRadius);
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetCloudRadius);
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setDistanceFromMovementPlane);
-    REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setAxialRotationSpeed);
+    REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setAxialRotationTime);
+    REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setOrbit);
 }
 
 REGISTER_MULTIPLAYER_CLASS(Planet, "Planet");
@@ -114,7 +115,10 @@ Planet::Planet()
     atmosphere_texture = "";
     atmosphere_color = sf::Color(0, 0, 0);
     distance_from_movement_plane = 0;
-    axial_rotation_speed = 0.0;
+    axial_rotation_time = 0.0;
+    orbit_target_id = -1;
+    orbit_time = 0.0f;
+    orbit_distance = 0.0f;
 
     collision_size = -2.0f;
 
@@ -127,7 +131,10 @@ Planet::Planet()
     registerMemberReplication(&atmosphere_texture);
     registerMemberReplication(&atmosphere_color);
     registerMemberReplication(&distance_from_movement_plane);
-    registerMemberReplication(&axial_rotation_speed);
+    registerMemberReplication(&axial_rotation_time);
+    registerMemberReplication(&orbit_target_id);
+    registerMemberReplication(&orbit_time);
+    registerMemberReplication(&orbit_distance);
 }
 
 void Planet::setPlanetAtmosphereColor(float r, float g, float b)
@@ -169,9 +176,18 @@ void Planet::setDistanceFromMovementPlane(float distance_from_movement_plane)
     this->distance_from_movement_plane = distance_from_movement_plane;
 }
 
-void Planet::setAxialRotationSpeed(float speed)
+void Planet::setAxialRotationTime(float time)
 {
-    axial_rotation_speed = speed;
+    axial_rotation_time = time;
+}
+
+void Planet::setOrbit(P<SpaceObject> target, float orbit_time)
+{
+    if (!target)
+        return;
+    this->orbit_target_id = target->getMultiplayerId();
+    this->orbit_distance = sf::length(getPosition() - target->getPosition());
+    this->orbit_time = orbit_time;
 }
 
 void Planet::update(float delta)
@@ -183,7 +199,23 @@ void Planet::update(float delta)
             PathPlannerManager::getInstance()->addAvoidObject(this, collision_size);
     }
     
-    setRotation(getRotation() + axial_rotation_speed * delta);
+    if (orbit_distance > 0.0f)
+    {
+        P<SpaceObject> orbit_target;
+        if (game_server)
+            orbit_target = game_server->getObjectById(orbit_target_id);
+        else
+            orbit_target = game_client->getObjectById(orbit_target_id);
+        if (orbit_target)
+        {
+            float angle = sf::vector2ToAngle(getPosition() - orbit_target->getPosition());
+            angle += delta / orbit_time * 360.0f;
+            setPosition(orbit_target->getPosition() + sf::vector2FromAngle(angle) * orbit_distance);
+        }
+    }
+    
+    if (axial_rotation_time != 0.0f)
+        setRotation(getRotation() + delta / axial_rotation_time * 360.0f);
 }
 
 #if FEATURE_3D_RENDERING
@@ -279,6 +311,17 @@ void Planet::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float 
         radar_radius.setFillColor(sf::Color(atmosphere_color.r, atmosphere_color.g, atmosphere_color.b, 128));
         window.draw(radar_radius);
     }
+}
+
+void Planet::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+{
+    sf::CircleShape radar_radius(planet_size * scale);
+    radar_radius.setOrigin(planet_size * scale, planet_size * scale);
+    radar_radius.setPosition(position);
+    radar_radius.setFillColor(sf::Color::Transparent);
+    radar_radius.setOutlineColor(sf::Color(255, 255, 255, 128));
+    radar_radius.setOutlineThickness(3);
+    window.draw(radar_radius);
 }
 
 void Planet::collide(Collisionable* target, float collision_force)

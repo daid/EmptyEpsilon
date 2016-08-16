@@ -122,38 +122,38 @@ void PlayerInfo::spawnUI()
         
         //Crew 6/5
         if (crew_position[helmsOfficer])
-            screen->addStationTab(new HelmsScreen(screen), getCrewPositionName(helmsOfficer), getCrewPositionIcon(helmsOfficer));
+            screen->addStationTab(new HelmsScreen(screen), helmsOfficer, getCrewPositionName(helmsOfficer), getCrewPositionIcon(helmsOfficer));
         if (crew_position[weaponsOfficer])
-            screen->addStationTab(new WeaponsScreen(screen), getCrewPositionName(weaponsOfficer), getCrewPositionIcon(weaponsOfficer));
+            screen->addStationTab(new WeaponsScreen(screen), weaponsOfficer, getCrewPositionName(weaponsOfficer), getCrewPositionIcon(weaponsOfficer));
         if (crew_position[engineering])
-            screen->addStationTab(new EngineeringScreen(screen), getCrewPositionName(engineering), getCrewPositionIcon(engineering));
+            screen->addStationTab(new EngineeringScreen(screen), engineering, getCrewPositionName(engineering), getCrewPositionIcon(engineering));
         if (crew_position[scienceOfficer])
-            screen->addStationTab(new ScienceScreen(screen), getCrewPositionName(scienceOfficer), getCrewPositionIcon(scienceOfficer));
+            screen->addStationTab(new ScienceScreen(screen), scienceOfficer, getCrewPositionName(scienceOfficer), getCrewPositionIcon(scienceOfficer));
         if (crew_position[relayOfficer])
-            screen->addStationTab(new RelayScreen(screen), getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
+            screen->addStationTab(new RelayScreen(screen), relayOfficer, getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
         
         //Crew 4/3
         if (crew_position[tacticalOfficer])
-            screen->addStationTab(new TacticalScreen(screen), getCrewPositionName(tacticalOfficer), getCrewPositionIcon(tacticalOfficer));
+            screen->addStationTab(new TacticalScreen(screen), tacticalOfficer, getCrewPositionName(tacticalOfficer), getCrewPositionIcon(tacticalOfficer));
         if (crew_position[engineeringAdvanced])
-            screen->addStationTab(new EngineeringAdvancedScreen(screen), getCrewPositionName(engineeringAdvanced), getCrewPositionIcon(engineeringAdvanced));
+            screen->addStationTab(new EngineeringAdvancedScreen(screen), engineeringAdvanced, getCrewPositionName(engineeringAdvanced), getCrewPositionIcon(engineeringAdvanced));
         if (crew_position[operationsOfficer])
-            screen->addStationTab(new OperationScreen(screen), getCrewPositionName(operationsOfficer), getCrewPositionIcon(operationsOfficer));
+            screen->addStationTab(new OperationScreen(screen), operationsOfficer, getCrewPositionName(operationsOfficer), getCrewPositionIcon(operationsOfficer));
 
         //Crew 1
         if (crew_position[singlePilot])
-            screen->addStationTab(new SinglePilotScreen(screen), getCrewPositionName(singlePilot), getCrewPositionIcon(singlePilot));
+            screen->addStationTab(new SinglePilotScreen(screen), singlePilot, getCrewPositionName(singlePilot), getCrewPositionIcon(singlePilot));
         //Extra
         if (crew_position[damageControl])
-            screen->addStationTab(new DamageControlScreen(screen), getCrewPositionName(damageControl), getCrewPositionIcon(damageControl));
+            screen->addStationTab(new DamageControlScreen(screen), damageControl, getCrewPositionName(damageControl), getCrewPositionIcon(damageControl));
         if (crew_position[powerManagement])
-            screen->addStationTab(new PowerManagementScreen(screen), getCrewPositionName(powerManagement), getCrewPositionIcon(powerManagement));
+            screen->addStationTab(new PowerManagementScreen(screen), powerManagement, getCrewPositionName(powerManagement), getCrewPositionIcon(powerManagement));
         if (crew_position[databaseView])
-            screen->addStationTab(new DatabaseScreen(screen), getCrewPositionName(databaseView), getCrewPositionIcon(databaseView));
+            screen->addStationTab(new DatabaseScreen(screen), databaseView, getCrewPositionName(databaseView), getCrewPositionIcon(databaseView));
         
-        //Ship log screen, if you have comms, you have ships log.
+        //Ship log screen, if you have comms, you have ships log. (note this is mostly replaced by the [at the bottom of the screen openable log]
         if (crew_position[singlePilot])
-            screen->addStationTab(new ShipLogScreen(screen), "Ships log", "");
+            screen->addStationTab(new ShipLogScreen(screen), max_crew_positions, "Ships log", "");
         
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(screen, "SELF_DESTRUCT_ENTRY");
         for(int n=0; n<max_crew_positions; n++)

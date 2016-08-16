@@ -33,3 +33,28 @@ GuiSelfDestructButton::GuiSelfDestructButton(GuiContainer* owner, string id)
 void GuiSelfDestructButton::onDraw(sf::RenderTarget& window)
 {
 }
+
+void GuiSelfDestructButton::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "ENGINEERING" && my_spaceship)
+    {
+        if (key.hotkey == "SELF_DESTRUCT_START" && activate_button->isVisible())
+        {
+            activate_button->hide();
+            confirm_button->show();
+            cancel_button->show();
+        }
+        if (key.hotkey == "SELF_DESTRUCT_CONFIRM" && confirm_button->isVisible())
+        {
+            confirm_button->hide();
+            my_spaceship->commandActivateSelfDestruct();
+        }
+        if (key.hotkey == "SELF_DESTRUCT_CANCEL" && cancel_button->isVisible())
+        {
+            activate_button->show();
+            confirm_button->hide();
+            cancel_button->hide();
+            my_spaceship->commandCancelSelfDestruct();
+        }
+    }
+}

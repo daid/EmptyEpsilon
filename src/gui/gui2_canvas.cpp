@@ -76,11 +76,11 @@ void GuiCanvas::handleKeyPress(sf::Event::KeyEvent key, int unicode)
     if (focus_element)
         if (focus_element->onKey(key, unicode))
             return;
-    HotkeyResult hotkey = hotkeys.getHotkey(key);
-    if (hotkey.category != "")
+    std::vector<HotkeyResult> hotkey_list = hotkeys.getHotkey(key);
+    for(HotkeyResult& result : hotkey_list)
     {
-        forwardKeypressToElements(hotkey);
-        onHotkey(hotkey);
+        forwardKeypressToElements(result);
+        onHotkey(result);
     }
     onKey(key, unicode);
 }

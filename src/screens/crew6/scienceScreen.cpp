@@ -10,6 +10,7 @@
 #include "screenComponents/scanningDialog.h"
 #include "screenComponents/databaseView.h"
 #include "screenComponents/alertOverlay.h"
+#include "screenComponents/customShipFunctions.h"
 
 #include "gui/gui2_autolayout.h"
 #include "gui/gui2_keyvaluedisplay.h"
@@ -197,6 +198,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     });
     view_mode_selection->setOptions({"Radar", "Database"})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(200, 100);
 
+    //(new GuiCustomShipFunctions(this, scienceOfficer, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+
     // Scanning dialog.
     new GuiScanningDialog(this, "SCANNING_DIALOG");
 }
@@ -315,7 +318,6 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
 
         if (description.size() > 0)
         {
-            LOG(INFO) << "Show description in sidebar: " << description;
             info_description->setText(description)->show();
 
             if (!sidebar_pager->indexByValue("Description"))
@@ -348,7 +350,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             if (ship->getScannedStateFor(my_spaceship) >= SS_FullScan)
             {
                 scan_button->hide();
-                sidebar_pager->show();
+                sidebar_pager->setVisible(sidebar_pager->entryCount() > 1);
 
                 // Check sidebar pager state.
                 if (sidebar_pager_selection == "Tactical")
@@ -361,7 +363,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                         info_system[n]->hide();
                     }
 
-                info_description->hide();
+                    info_description->hide();
                 }
                 else if (sidebar_pager_selection == "Systems")
                 {
