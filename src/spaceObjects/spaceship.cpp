@@ -633,7 +633,7 @@ void SpaceShip::update(float delta)
     {
         weapon_tube[n].update(delta);
     }
-    
+
     for(int n=0; n<SYS_COUNT; n++)
     {
         systems[n].hacked_level = std::max(0.0f, systems[n].hacked_level - delta / unhack_time);
@@ -853,7 +853,7 @@ bool SpaceShip::isFullyScannedByFaction(int faction_id)
 
 bool SpaceShip::canBeHackedBy(P<SpaceObject> other)
 {
-    return true;
+    return (!(factionInfo[this->getFactionId()]->states[other->getFactionId()] == FVF_Friendly) && this->isFriendOrFoeIdentifiedBy(other) ;
 }
 
 std::vector<std::pair<string, float>> SpaceShip::getHackingTargets()
