@@ -853,7 +853,7 @@ bool SpaceShip::isFullyScannedByFaction(int faction_id)
 
 bool SpaceShip::canBeHackedBy(P<SpaceObject> other)
 {
-    return (!(factionInfo[this->getFactionId()]->states[other->getFactionId()] == FVF_Friendly) && this->isFriendOrFoeIdentifiedBy(other) ;
+    return (!(this->isFriendly(other)) && this->isFriendOrFoeIdentifiedBy(other)) ;
 }
 
 std::vector<std::pair<string, float>> SpaceShip::getHackingTargets()
@@ -1100,7 +1100,7 @@ void SpaceShip::addBroadcast(int threshold, string message)
         P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
         if (ship)
         {
-            if (factionInfo[this->getFactionId()]->states[ship->getFactionId()] == FVF_Friendly)
+            if (this->isFriendly(ship))
             {
                 color = sf::Color(154,255,154); //ally = light green
                 addtolog = 1;
@@ -1110,7 +1110,7 @@ void SpaceShip::addBroadcast(int threshold, string message)
                 color = sf::Color(128,128,128); //neutral = grey
                 addtolog = 1;
             }
-            else if ((factionInfo[this->getFactionId()]->states[ship->getFactionId()] == FVF_Enemy) && (threshold == FVF_Enemy))
+            else if ((this->isEnemy(ship)) && (threshold == FVF_Enemy))
             {
                 color = sf::Color(255,102,102); //enemy = light red
                 addtolog = 1;
