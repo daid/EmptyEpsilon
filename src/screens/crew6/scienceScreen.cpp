@@ -67,26 +67,38 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     );
     new RawScannerDataRadarOverlay(probe_radar, "", 5000);
 
+    sidebar_selector = new GuiSelector(radar_view, "", [this](int index, string value)
+    {
+        info_sidebar->setVisible(index == 0);    
+        custom_function_sidebar->setVisible(index == 1);
+    });
+    sidebar_selector->setOptions({"Scanning", "Other"});
+    sidebar_selector->setSelectionIndex(0);
+    sidebar_selector->setPosition(-20, 120, ATopRight)->setSize(250, 50);
+
     // Target scan data sidebar.
-    GuiAutoLayout* sidebar = new GuiAutoLayout(radar_view, "SIDEBAR", GuiAutoLayout::LayoutVerticalTopToBottom);
-    sidebar->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    info_sidebar = new GuiAutoLayout(radar_view, "SIDEBAR", GuiAutoLayout::LayoutVerticalTopToBottom);
+    info_sidebar->setPosition(-20, 170, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+
+    custom_function_sidebar = new GuiCustomShipFunctions(radar_view, scienceOfficer, "");
+    custom_function_sidebar->setPosition(-20, 170, ATopRight)->setSize(250, GuiElement::GuiSizeMax)->hide();
 
     // Scan button.
-    scan_button = new GuiScanTargetButton(sidebar, "SCAN_BUTTON", &targets);
+    scan_button = new GuiScanTargetButton(info_sidebar, "SCAN_BUTTON", &targets);
     scan_button->setSize(GuiElement::GuiSizeMax, 50);
 
     // Simple scan data.
-    info_callsign = new GuiKeyValueDisplay(sidebar, "SCIENCE_CALLSIGN", 0.4, "Callsign", "");
+    info_callsign = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_CALLSIGN", 0.4, "Callsign", "");
     info_callsign->setSize(GuiElement::GuiSizeMax, 30);
-    info_distance = new GuiKeyValueDisplay(sidebar, "SCIENCE_DISTANCE", 0.4, "Distance", "");
+    info_distance = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_DISTANCE", 0.4, "Distance", "");
     info_distance->setSize(GuiElement::GuiSizeMax, 30);
-    info_heading = new GuiKeyValueDisplay(sidebar, "SCIENCE_HEADING", 0.4, "Heading", "");
+    info_heading = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HEADING", 0.4, "Heading", "");
     info_heading->setSize(GuiElement::GuiSizeMax, 30);
-    info_relspeed = new GuiKeyValueDisplay(sidebar, "SCIENCE_REL_SPEED", 0.4, "Rel. Speed", "");
+    info_relspeed = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_REL_SPEED", 0.4, "Rel. Speed", "");
     info_relspeed->setSize(GuiElement::GuiSizeMax, 30);
-    info_faction = new GuiKeyValueDisplay(sidebar, "SCIENCE_FACTION", 0.4, "Faction", "");
+    info_faction = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_FACTION", 0.4, "Faction", "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
-    info_type = new GuiKeyValueDisplay(sidebar, "SCIENCE_TYPE", 0.4, "Type", "");
+    info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4, "Type", "");
     info_type->setSize(GuiElement::GuiSizeMax, 30);
     info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", "DB", [this]() {
         P<SpaceShip> ship = targets.get();
@@ -102,15 +114,15 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
         }
     });
     info_type_button->setTextSize(20)->setPosition(0, 1, ATopRight)->setSize(50, 28);
-    info_shields = new GuiKeyValueDisplay(sidebar, "SCIENCE_SHIELDS", 0.4, "Shields", "");
+    info_shields = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SHIELDS", 0.4, "Shields", "");
     info_shields->setSize(GuiElement::GuiSizeMax, 30);
-    info_hull = new GuiKeyValueDisplay(sidebar, "SCIENCE_HULL", 0.4, "Hull", "");
+    info_hull = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HULL", 0.4, "Hull", "");
     info_hull->setSize(GuiElement::GuiSizeMax, 30);
 
     // Full scan data
 
     // Draw and hide the sidebar pager.
-    sidebar_pager = new GuiSelector(sidebar, "SIDEBAR_PAGER", [this](int index, string value) {});
+    sidebar_pager = new GuiSelector(info_sidebar, "SIDEBAR_PAGER", [this](int index, string value) {});
     sidebar_pager->setSize(GuiElement::GuiSizeMax, 50)->hide();
 
     // If the server uses frequencies, add the Tactical sidebar page.
@@ -129,9 +141,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     sidebar_pager->setSelectionIndex(0);
 
     // Prep and hide the frequency graphs.
-    info_shield_frequency = new GuiFrequencyCurve(sidebar, "SCIENCE_SHIELD_FREQUENCY", false, true);
+    info_shield_frequency = new GuiFrequencyCurve(info_sidebar, "SCIENCE_SHIELD_FREQUENCY", false, true);
     info_shield_frequency->setSize(GuiElement::GuiSizeMax, 150);
-    info_beam_frequency = new GuiFrequencyCurve(sidebar, "SCIENCE_BEAM_FREQUENCY", true, false);
+    info_beam_frequency = new GuiFrequencyCurve(info_sidebar, "SCIENCE_BEAM_FREQUENCY", true, false);
     info_beam_frequency->setSize(GuiElement::GuiSizeMax, 150);
 
     // Show shield and beam frequencies only if enabled by the server.
@@ -144,13 +156,13 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     // List each system's status.
     for(int n = 0; n < SYS_COUNT; n++)
     {
-        info_system[n] = new GuiKeyValueDisplay(sidebar, "SCIENCE_SYSTEM_" + string(n), 0.75, getSystemName(ESystem(n)), "-");
+        info_system[n] = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SYSTEM_" + string(n), 0.75, getSystemName(ESystem(n)), "-");
         info_system[n]->setSize(GuiElement::GuiSizeMax, 30);
         info_system[n]->hide();
     }
 
     // Prep and hide the description text area.
-    info_description = new GuiScrollText(sidebar, "SCIENCE_DESC", "");
+    info_description = new GuiScrollText(info_sidebar, "SCIENCE_DESC", "");
     info_description->setTextSize(28)->setMargins(20, 20, 0, 0)->setSize(GuiElement::GuiSizeMax, 400)->hide();
 
     // Prep and hide the database view.
@@ -198,8 +210,6 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     });
     view_mode_selection->setOptions({"Radar", "Database"})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(200, 100);
 
-    //(new GuiCustomShipFunctions(this, scienceOfficer, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
-
     // Scanning dialog.
     new GuiScanningDialog(this, "SCANNING_DIALOG");
 }
@@ -240,6 +250,8 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         if (targets.get() && Nebula::blockedByNebula(my_spaceship->getPosition(), targets.get()->getPosition()))
             targets.clear();
     }
+    
+    sidebar_selector->setVisible(sidebar_selector->getSelectionIndex() > 0 || custom_function_sidebar->hasEntries());
 
     info_callsign->setValue("-");
     info_distance->setValue("-");
@@ -349,7 +361,6 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             // description (if one is set).
             if (ship->getScannedStateFor(my_spaceship) >= SS_FullScan)
             {
-                scan_button->hide();
                 sidebar_pager->setVisible(sidebar_pager->entryCount() > 1);
 
                 // Check sidebar pager state.
@@ -408,8 +419,6 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                     float system_health = ship->systems[n].health;
                     info_system[n]->setValue(string(int(system_health * 100.0f)) + "%")->setColor(sf::Color(255, 127.5 * (system_health + 1), 127.5 * (system_health + 1), 255));
                 }
-            }else{
-                scan_button->show();
             }
         }
 

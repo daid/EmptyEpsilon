@@ -13,7 +13,11 @@ void GuiCustomShipFunctions::onDraw(sf::RenderTarget& window)
 {
     if (!my_spaceship)
         return;
-    
+    checkEntries();
+}
+
+void GuiCustomShipFunctions::checkEntries()
+{
     if (my_spaceship->custom_functions.size() != entries.size())
     {
         createEntries();
@@ -31,6 +35,7 @@ void GuiCustomShipFunctions::onDraw(sf::RenderTarget& window)
 
 bool GuiCustomShipFunctions::hasEntries()
 {
+    checkEntries();
     for(Entry& e : entries)
     {
         if (e.element)

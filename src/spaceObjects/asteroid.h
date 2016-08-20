@@ -9,6 +9,7 @@ public:
     float rotation_speed;
     float z;
     float size;
+    int model_number;
 
     Asteroid();
     
@@ -29,6 +30,7 @@ public:
     float rotation_speed;
     float z;
     float size;
+    int model_number;
 
     VisualAsteroid();
 

@@ -93,7 +93,7 @@ end
 -- d: The spawned wave's distance from the players' spawn point.
 function addWave(enemyList,type,a,d)
 	if type < 1.0 then
-		table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Stalker Q7'):setRotation(a + 180):orderRoaming(), 0, 0, a, d))
+		table.insert(enemyList, setCirclePos(CpuShip():setTemplate('Ranus U'):setRotation(a + 180):orderRoaming(), 0, 0, a, d))
 	elseif type < 2.0 then
 		leader = setCirclePos(CpuShip():setTemplate('Phobos T3'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-1, 1), d + random(-100, 100))
 		table.insert(enemyList, leader)
@@ -259,6 +259,8 @@ function update(delta)
     gametimeleft = gametimeleft - delta
     if gametimeleft < 0 then
         victory("Kraylor")
+        setBanner("Mission: FAILED")
+        return
     end
     if gametimeleft < timewarning then
         if timewarning <= 1 * 60 then --Less then 1 minutes left.
@@ -292,11 +294,15 @@ function update(delta)
     -- Note that players can win even if they destroy the enemies by blowing themselves up.
 	if enemy_count == 0 then
 		victory("Human Navy")
+        setBanner("Mission: SUCCESS")
+        return
 	end
 
 	-- If all allies are destroyed, the Humans (players) lose.
 	if friendly_count == 0 or not player:isValid() then
 		victory("Kraylor")
+        setBanner("Mission: FAILED")
+        return
 	else
 		-- As the battle continues, award reputation based on
 		-- the players' progress and number of surviving allies.
@@ -305,5 +311,14 @@ function update(delta)
 				friendly:addReputationPoints(delta * friendly_count * 0.1)
 			end
 		end
+        
+        local condition = "green"
+        if player:getShieldLevel(0) < player:getShieldMax(0) * 0.8 or player:getShieldLevel(1) < player:getShieldMax(1) * 0.8 then
+            condition = "yellow"
+        end
+        if player:getHull() < player:getHullMax() * 0.8 then
+            condition = "red"
+        end
+        setBanner(string.format("Mission in progress - Time left: %d:%02d - Enemies: %d - Condition: %s", math.floor(gametimeleft / 60), math.floor(gametimeleft % 60), enemy_count, condition))
 	end
 end

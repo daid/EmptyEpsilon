@@ -23,6 +23,7 @@ private:
     ECrewPosition position;
     std::vector<Entry> entries;
     
+    void checkEntries();
     void createEntries();
 };
 

@@ -19,7 +19,8 @@ private:
     GuiSelector* camera_lock_selector;
     GuiToggleButton* camera_lock_toggle;
     GuiToggleButton* camera_lock_tot_toggle;
-    float camera_distance;
+    float min_camera_distance;
+    float max_camera_distance;
     sf::Vector2f camera_rotation_vector;
     sf::Vector2f camera_destination;
     float angle_yaw;

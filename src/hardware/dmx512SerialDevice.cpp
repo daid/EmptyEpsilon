@@ -69,25 +69,14 @@ void DMX512SerialDevice::updateLoop()
 {
     //On the Open DMX USB controller, the RTS line is used to enable the RS485 transmitter.
     port->clearRTS();
+
+    //Configure the port for straight DMX-512 protocol.
+    port->configure(250000, 8, SerialPort::NoParity, SerialPort::TwoStopbits);
     
-    uint8_t start_code[1] = {'\0'};
     while(run_thread)
     {
-        //Send a break to initiate transfer
-        //port->sendBreak(); //Does not seem to work? (Windows with Arduino running: https://github.com/mathertel/DMXSerial )
-        
-        //Configure the serial port for fake break.
-        #if defined(__APPLE__) && defined(__MACH__)
-            // Didin't work with even parity in os x.
-            port->configure(57600, 8, SerialPort::NoParity, SerialPort::TwoStopbits);
-        #else
-            port->configure(57600, 8, SerialPort::EvenParity, SerialPort::TwoStopbits);
-        #endif
-        //Send the fake break. 8 bits of 0, 1 parity bit which is 0. Which gives 9 bits at 17.3uSec. Which is 155.7uSec, more then the required 88uSec
-        port->send(start_code, sizeof(start_code));
-        
-        //Configure the port for straight DMX-512 protocol.
-        port->configure(250000, 8, SerialPort::NoParity, SerialPort::TwoStopbits);
+        //Send a break to initiate transfer, break needs to be at least 88uSec (note, not all USB serial convertors implement BREAK sending)
+        port->sendBreak();
 
         //Send the channel data.
         port->send(data_stream, 1 + channel_count);

@@ -422,6 +422,7 @@ void SerialPort::sendBreak()
 {
 #ifdef __WIN32__
     SetCommBreak(handle);
+    Sleep(1);
     ClearCommBreak(handle);
 #endif
 #if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))

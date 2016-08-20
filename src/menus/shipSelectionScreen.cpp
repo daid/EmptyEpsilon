@@ -404,6 +404,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
     cinematic_view_button->hide();
     main_screen_button->setVisible(canDoMainScreen());
     main_screen_button->setValue(false);
+    main_screen_controls_button->setVisible(crew_type_selector->getSelectionIndex() != 3);
     game_master_button->setValue(false);
     window_button->setValue(false);
     topdown_button->setValue(false);
