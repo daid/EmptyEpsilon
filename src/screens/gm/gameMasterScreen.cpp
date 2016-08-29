@@ -128,14 +128,17 @@ GameMasterScreen::GameMasterScreen()
     
     gm_script_options = new GuiListbox(this, "GM_SCRIPT_OPTIONS", [this](int index, string value)
     {
+        gm_script_options->setSelectionIndex(-1);
         int n = 0;
         for(GMScriptCallback& callback : gameGlobalInfo->gm_callback_functions)
         {
             if (n == index)
+            {
                 callback.callback.call();
+                return;
+            }
             n++;
         }
-        gm_script_options->setSelectionIndex(-1);
     });
     gm_script_options->setPosition(20, 130, ATopLeft)->setSize(250, 500);
     
