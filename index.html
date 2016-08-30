@@ -941,7 +941,10 @@ $(function() {
                 var os = oses[idx];
 				var vers = version.substr(0, 4) + "-" + version.substr(4, 2) + "-" + version.substr(6, 2);
 				var url = 'http://software.ultimaker.com/EmptyEpsilon/' + files[version][os];
-				row = '<tr class="' + os + '"><td><a href="' + url + '"><img src="images/os_' + os + '.svg" width="24"></a><td><a href="' + url + '" class="download ' + os + '">' + files[version][os] + '</a><td>' + vers;
+                var title = files[version][os];
+                if (os == "android")
+                    title += " (BETA)";
+				row = '<tr class="' + os + '"><td><a href="' + url + '"><img src="images/os_' + os + '.svg" width="24"></a><td><a href="' + url + '" class="download ' + os + '">' + title + '</a><td>' + vers;
 				if (first)
 					html += row;
 				else
