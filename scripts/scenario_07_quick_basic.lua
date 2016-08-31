@@ -160,12 +160,11 @@ function init()
 	table.insert(friendlyList, SpaceStation():setTemplate('Small Station'):setCallSign("DS-1"):setRotation(random(0, 360)):setFaction("Human Navy"):setPosition(random(-2000, 2000), random(-2000, 2000)))
 
 	-- Start the players with 300 reputation.
-	friendlyList[1]:addReputationPoints(300.0)
+	player:addReputationPoints(300.0)
 
 	-- Randomly scatter nebulae near the players' spawn point.
-	local x, y = friendlyList[1]:getPosition()
-	setCirclePos(Nebula(), x, y, random(0, 360), 12000)
-
+	local x, y = player:getPosition()
+	setCirclePos(Nebula(), x, y, random(0, 360), 15000)
 	for n=1, 5 do
 		setCirclePos(Nebula(), 0, 0, random(0, 360), random(23000, 45000))
 	end
