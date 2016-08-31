@@ -26,6 +26,12 @@ FactionInfo::FactionInfo()
 
 void FactionInfo::setEnemy(P<FactionInfo> other)
 {
+    if (!other)
+    {
+        LOG(WARNING) << "Tried to set a an undefined faction to enemy with " << name;
+        return;
+    }
+
     int id1 = -1;
     int id2 = -1;
     for(unsigned int n = 0; n < factionInfo.size(); n++)
@@ -44,6 +50,12 @@ void FactionInfo::setEnemy(P<FactionInfo> other)
 
 void FactionInfo::setFriendly(P<FactionInfo> other)
 {
+    if (!other)
+    {
+        LOG(WARNING) << "Tried to set a an undefined faction to friendly with " << name;
+        return;
+    }
+        
     int id1 = -1;
     int id2 = -1;
     for(unsigned int n = 0; n < factionInfo.size(); n++)
