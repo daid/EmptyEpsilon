@@ -1,5 +1,53 @@
 # Change Log
 
+## [2016-09-02]
+
+### Added
+
+- Operations tutorial (disabled)
+- Option to loop tutorials from the command line
+- Reset button when the tutorial is looping
+- variant of the basic scenario that waits for the game master to start it so crews can get used to the interface
+- Fully scanned ships now show frequencies and subsystem status in the science screen sidebar pages
+- Scanned targets subsystems are colored red when damaged
+- Ship control codes, which prevent a player from selecting a ship without the correct code
+- `setControlCode(string control_code)` to add a control code to a ship via script or template
+- Player page for the game master tweaks panel, to set control codes, see energy levels and manned stations
+- Show the effectiveness of the beam subsystem on the Engineering screen (effects the rotation speed)
+- Place/delete waypoints from the Operations screen
+- Sound volume can be set in the options
+- Help overlay and keyboard hotkey display
+- Basic build instructions
+- Relay can hack ship subsystems
+- Planets can orbit other objects
+- Scrolling banner of information for the cinematic screen
+- Show planets in the 3D world
+
+### Changed
+
+- Adjusted the nebula in the basic scenario
+- Avoid spawing asteroids on the player start position
+- Game master friendly spawned ships are already scanned when created
+- Expanded utils.lua (more documentation, `setCirclePos` and `vectorFromAngle`)
+- Avoid spawning black holes too close to stations in the basic scenario
+- Updated fighters and advanced gunships to the new template
+- Systems become degraded when low on power (< 10%)
+- Increased the height of the frequency graphs for better contrast
+- Radar signatures can be referenced in scripts
+- Game masters can change object callsigns and descriptions
+- Replaced the hotkey system with something better
+- Revised the options menu
+- Improved the cinematic screen
+
+### Fixed
+
+- Prevent bad use of faction friend/foe calls from crashing the game
+- Game crashed if the game master presses a button that is removed durring event handling
+- Calls for reinforcements were impeded
+- Science screen from overlapping or running off the bottom edge of the screen
+- Orders not showing on the game master screen
+- Text entry fields #373
+
 ## [2016-06-24]
 
 ### Fixed
@@ -441,6 +489,7 @@
 - create button visible through the cancel button on game master screen
 - clicking outside the radar circle but inside its reactangle caused callbacks
 
+[2016-09-02]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.24...EE-2016.09.02
 [2016-06-24]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.23...EE-2016.06.24
 [2016-06-23]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.02...EE-2016.06.23
 [2016-06-02]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.05.22...EE-2016.06.02
