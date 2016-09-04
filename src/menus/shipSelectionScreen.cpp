@@ -437,7 +437,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
         break;
     case 3:
         main_screen_button->hide();
-        game_master_button->setVisible(game_server);
+        game_master_button->setVisible(bool(game_server));
         window_button->setVisible(canDoMainScreen());
         window_angle->setVisible(canDoMainScreen());
         topdown_button->setVisible(canDoMainScreen());
