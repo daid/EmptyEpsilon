@@ -40,19 +40,17 @@ void GuiScrollingBanner::onDraw(sf::RenderTarget& window)
     {
         float font_size = rect.height;
         sf::Text text(gameGlobalInfo->banner_string, *bold_font, font_size);
-        float x = rect.left + rect.width / 2.0 - text.getLocalBounds().width / 2.0 - text.getLocalBounds().left;
-        if (text.getLocalBounds().width < window.getView().getSize().x)
-        {
-            draw_offset = 0;
-        }else{
-            x = window.getView().getSize().x - draw_offset;
-            if (x + text.getLocalBounds().width < 0)
-            {
-                draw_offset = 0;
-            }
-        }
+        if (draw_offset > text.getLocalBounds().width + black_area)
+            draw_offset -= text.getLocalBounds().width + black_area;
+        float x = -draw_offset;
         float y = rect.top + rect.height / 2 - font_size + font_size * 0.35;
-        text.setPosition(x, y);
-        window.draw(text);
+        
+        while(x < window.getView().getSize().x)
+        {
+            text.setPosition(x, y);
+            window.draw(text);
+            x += text.getLocalBounds().width;
+            x += black_area;
+        }
     }
 }

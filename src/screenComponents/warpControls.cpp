@@ -30,8 +30,11 @@ GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id)
     slider->addSnapValue(3.0, 0.5);
     slider->addSnapValue(4.0, 0.5);
 
-    // Set the slider's value to the current warp request.
-    slider->setValue(my_spaceship->warp_request);
+    if (my_spaceship)
+    {
+        // Set the slider's value to the current warp request.
+        slider->setValue(my_spaceship->warp_request);
+    }
 
     // Label the warp slider.
     label = new GuiKeyValueDisplay(this, id + "_LABEL", 0.5, "Warp", "0.0");

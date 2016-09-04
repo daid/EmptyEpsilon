@@ -2,7 +2,8 @@
 -- Description: Different version of the basic scenario. Which intended to play out quicker. There is only a single small station to defend.
 --- This scenario is designed to be ran on conventions. As you can run a 4 player crew in 20 minutes trough a game with minimal experience.
 -- Type: Convention
--- Variation[Advanced]: Gived the players a stronger Atlantis instead of the Phobos. Which is more difficult to control, but has more firepower and defense. Increases enemy strengh as well.
+-- Variation[Advanced]: Give the players a stronger Atlantis instead of the Phobos. Which is more difficult to control, but has more firepower and defense. Increases enemy strengh as well.
+-- Variation[GM Start]: The scenario is not started until the GM gives the start sign. This gives some time for a new crew to get a feeling for the controls before the actual scenario starts.
 
 gametimeleft = 20 * 60 -- Maximum game time in seconds.
 timewarning = 10 * 60 -- Used for checking when to give a warning, and to update it so the warning happens once.
@@ -159,12 +160,11 @@ function init()
 	table.insert(friendlyList, SpaceStation():setTemplate('Small Station'):setCallSign("DS-1"):setRotation(random(0, 360)):setFaction("Human Navy"):setPosition(random(-2000, 2000), random(-2000, 2000)))
 
 	-- Start the players with 300 reputation.
-	friendlyList[1]:addReputationPoints(300.0)
+	player:addReputationPoints(300.0)
 
 	-- Randomly scatter nebulae near the players' spawn point.
-	local x, y = friendlyList[1]:getPosition()
-	setCirclePos(Nebula(), x, y, random(0, 360), 12000)
-
+	local x, y = player:getPosition()
+	setCirclePos(Nebula(), x, y, random(0, 360), 15000)
 	for n=1, 5 do
 		setCirclePos(Nebula(), 0, 0, random(0, 360), random(23000, 45000))
 	end
@@ -179,30 +179,11 @@ function init()
 		victory("Kraylor");
 	end)
 
-	-- Let the GM declare the Humans (players) defeated.
+	-- Let the GM create more enemies if the players are having a too easy time.
 	addGMFunction("Extra wave", function()
 		addWave(enemyList, random(0, 10), random(0, 360), random(25000, 30000))
 	end)
-
-	-- Set the number of enemy waves based on the scenario variation.
-	if getScenarioVariation() == "Advanced" then
-		enemy_group_count = 6
-	else
-		enemy_group_count = 3
-	end
-
-	-- If not in the Empty variation, spawn the corresponding number of random
-	-- enemy waves at distributed random headings and semi-random distances
-	-- relative to the players' spawn point.
-	if enemy_group_count > 0 then
-		for cnt=1,enemy_group_count do
-			a = getWaveAngle(cnt, enemy_group_count)
-			d = getWaveDistance(cnt, enemy_group_count)
-			type = random(0, 10)
-			addWave(enemyList, type, a, d)
-		end
-	end
-
+    
 	-- Spawn 1-3 random asteroid belts.
 	for cnt=1,random(1, 3) do
 		a = random(0, 360)
@@ -247,78 +228,122 @@ function init()
 	end
 	-- Spawn random neutral transports.
 	Script():run("util_random_transports.lua")
+
+    --If we have a GM started scenario.
+    scenario_started = false
+    if getScenarioVariation() == "GM Start" then
+        addGMFunction("Start", function()
+            startScenario()
+            removeGMFunction("Start")
+        end)
+    end
+end
+
+function startScenario()
+	-- Set the number of enemy waves based on the scenario variation.
+	if getScenarioVariation() == "Advanced" then
+		enemy_group_count = 6
+	else
+		enemy_group_count = 3
+	end
+
+	-- If not in the Empty variation, spawn the corresponding number of random
+	-- enemy waves at distributed random headings and semi-random distances
+	-- relative to the players' spawn point.
+	if enemy_group_count > 0 then
+		for cnt=1,enemy_group_count do
+			a = getWaveAngle(cnt, enemy_group_count)
+			d = getWaveDistance(cnt, enemy_group_count)
+			type = random(0, 10)
+			addWave(enemyList, type, a, d)
+		end
+	end
     
     friendlyList[1]:sendCommsMessage(player, string.format([[%s, please inform your Captain and crew that you have a total of %d minutes for this mission.
 The mission started at the arrival of this message.
 Your objective is to fend off the incomming Kraylor attack.
 Good Luck.]], player:getCallSign(), gametimeleft / 60))  
+    scenario_started = true
 end
 
 function update(delta)
     --Calculate the game time left, and act on it.
-    gametimeleft = gametimeleft - delta
-    if gametimeleft < 0 then
-        victory("Kraylor")
-        setBanner("Mission: FAILED")
-        return
-    end
-    if gametimeleft < timewarning then
-        if timewarning <= 1 * 60 then --Less then 1 minutes left.
-            friendlyList[1]:sendCommsMessage(player, string.format([[%s, you have 1 minute remaining.]], player:getCallSign(), timewarning / 60))  
-            timewarning = timewarning - 2 * 60
-        elseif timewarning <= 5 * 60 then --Less then 5 minutes left. Warn ever 2 minutes instead of every 5.
-            friendlyList[1]:sendCommsMessage(player, string.format([[%s, you have %d minutes remaining.]], player:getCallSign(), timewarning / 60))  
-            timewarning = timewarning - 2 * 60
+    if scenario_started then
+        gametimeleft = gametimeleft - delta
+        if gametimeleft < 0 then
+            victory("Kraylor")
+            setBanner("Mission: FAILED")
+            return
+        end
+        if gametimeleft < timewarning then
+            if timewarning <= 1 * 60 then --Less then 1 minutes left.
+                friendlyList[1]:sendCommsMessage(player, string.format([[%s, you have 1 minute remaining.]], player:getCallSign(), timewarning / 60))  
+                timewarning = timewarning - 2 * 60
+            elseif timewarning <= 5 * 60 then --Less then 5 minutes left. Warn ever 2 minutes instead of every 5.
+                friendlyList[1]:sendCommsMessage(player, string.format([[%s, you have %d minutes remaining.]], player:getCallSign(), timewarning / 60))  
+                timewarning = timewarning - 2 * 60
+            else
+                friendlyList[1]:sendCommsMessage(player, string.format([[%s, you have %d minutes remaining of mission time.]], player:getCallSign(), timewarning / 60))  
+                timewarning = timewarning - 5 * 60
+            end
+        end
+        enemy_count = 0
+        friendly_count = 0
+
+        -- Count all surviving enemies and allies.
+        for _, enemy in ipairs(enemyList) do
+            if enemy:isValid() then
+                enemy_count = enemy_count + 1
+            end
+        end
+
+        for _, friendly in ipairs(friendlyList) do
+            if friendly:isValid() then
+                friendly_count = friendly_count + 1
+            end
+        end
+
+        -- Declare victory for the Humans (players) once all enemies are destroyed.
+        -- Note that players can win even if they destroy the enemies by blowing themselves up.
+        if enemy_count == 0 then
+            victory("Human Navy")
+            setBanner("Mission: SUCCESS")
+            return
+        end
+
+        -- If all allies are destroyed, the Humans (players) lose.
+        if friendly_count == 0 or not player:isValid() then
+            victory("Kraylor")
+            setBanner("Mission: FAILED")
+            return
         else
-            friendlyList[1]:sendCommsMessage(player, string.format([[%s, you have %d minutes remaining of mission time.]], player:getCallSign(), timewarning / 60))  
-            timewarning = timewarning - 5 * 60
+            -- As the battle continues, award reputation based on
+            -- the players' progress and number of surviving allies.
+            for _, friendly in ipairs(friendlyList) do
+                if friendly:isValid() then
+                    friendly:addReputationPoints(delta * friendly_count * 0.1)
+                end
+            end
+            
+            local condition = "green"
+            if player:getShieldLevel(0) < player:getShieldMax(0) * 0.8 or player:getShieldLevel(1) < player:getShieldMax(1) * 0.8 then
+                condition = "yellow"
+            end
+            if player:getHull() < player:getHullMax() * 0.8 then
+                condition = "red"
+            end
+            setBanner(string.format("Mission in progress - Time left: %d:%02d - Enemies: %d - Condition: %s", math.floor(gametimeleft / 60), math.floor(gametimeleft % 60), enemy_count, condition))
+        end
+    else
+        if not player:isValid() then
+            victory("Kraylor")
+            setBanner("Mission: FAILED")
+            return
+        end
+        setBanner("Mission: PREPARING")
+        if delta > 0 and getScenarioVariation() ~= "GM Start" then
+            --Start the scenario when the game is not paused and we are not waiting for the GM to start the game.
+            startScenario()
         end
     end
-	enemy_count = 0
-	friendly_count = 0
-
-	-- Count all surviving enemies and allies.
-	for _, enemy in ipairs(enemyList) do
-		if enemy:isValid() then
-			enemy_count = enemy_count + 1
-		end
-	end
-
-	for _, friendly in ipairs(friendlyList) do
-		if friendly:isValid() then
-			friendly_count = friendly_count + 1
-		end
-	end
-
-	-- Declare victory for the Humans (players) once all enemies are destroyed.
-    -- Note that players can win even if they destroy the enemies by blowing themselves up.
-	if enemy_count == 0 then
-		victory("Human Navy")
-        setBanner("Mission: SUCCESS")
-        return
-	end
-
-	-- If all allies are destroyed, the Humans (players) lose.
-	if friendly_count == 0 or not player:isValid() then
-		victory("Kraylor")
-        setBanner("Mission: FAILED")
-        return
-	else
-		-- As the battle continues, award reputation based on
-		-- the players' progress and number of surviving allies.
-		for _, friendly in ipairs(friendlyList) do
-			if friendly:isValid() then
-				friendly:addReputationPoints(delta * friendly_count * 0.1)
-			end
-		end
-        
-        local condition = "green"
-        if player:getShieldLevel(0) < player:getShieldMax(0) * 0.8 or player:getShieldLevel(1) < player:getShieldMax(1) * 0.8 then
-            condition = "yellow"
-        end
-        if player:getHull() < player:getHullMax() * 0.8 then
-            condition = "red"
-        end
-        setBanner(string.format("Mission in progress - Time left: %d:%02d - Enemies: %d - Condition: %s", math.floor(gametimeleft / 60), math.floor(gametimeleft % 60), enemy_count, condition))
-	end
 end
