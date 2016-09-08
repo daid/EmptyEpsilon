@@ -240,7 +240,7 @@ end
 
 function Security()
 
-        setCommsMessage("How do you want us to proceed Captain? finalValue = " .. finalValue)
+        setCommsMessage("How do you want us to proceed Captain?")
         addCommsReply("Post security at each crossroads and access point", function()
             setCommsMessage("Yes Sir!")
         AV = 1
