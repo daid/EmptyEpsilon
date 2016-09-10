@@ -106,7 +106,10 @@ void GuiSlider::onMouseDrag(sf::Vector2f position)
     {
         value = new_value;
         if (func)
-            func(value);
+        {
+            func_t f = func;
+            f(value);
+        }
     }
 }
 

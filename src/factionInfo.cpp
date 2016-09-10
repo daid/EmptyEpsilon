@@ -13,6 +13,8 @@ PVector<FactionInfo> factionInfo;
 
 FactionInfo::FactionInfo()
 {
+    if (game_server) { LOG(ERROR) << "FactionInfo objects can not be created during a scenario right now."; destroy(); return; }
+
     foreach(FactionInfo, i, factionInfo)
         i->states.push_back(FVF_Neutral);
     factionInfo.push_back(this);

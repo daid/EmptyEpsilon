@@ -64,7 +64,10 @@ void GuiButton::onMouseUp(sf::Vector2f position)
     {
         soundManager->playSound("button.wav");
         if (func)
-            func();
+        {
+            func_t f = func;
+            f();
+        }
     }
 }
 

@@ -32,12 +32,20 @@ bool GuiTextEntry::onKey(sf::Event::KeyEvent key, int unicode)
     {
         text = text.substr(0, -1);
         if (func)
-            func(text);
+        {
+            func_t f = func;
+            f(text);
+        }
+        return true;
     }
     if (key.code == sf::Keyboard::Return)
     {
         if (enter_func)
-            enter_func(text);
+        {
+            func_t f = enter_func;
+            f(text);
+        }
+        return true;
     }
     if (key.code == sf::Keyboard::V && key.control)
     {
@@ -47,14 +55,21 @@ bool GuiTextEntry::onKey(sf::Event::KeyEvent key, int unicode)
                 text += string(char(unicode));
         }
         if (func)
-            func(text);
+        {
+            func_t f = func;
+            f(text);
+        }
         return true;
     }
     if (unicode > 31 && unicode < 128)
     {
         text += string(char(unicode));
         if (func)
-            func(text);
+        {
+            func_t f = func;
+            f(text);
+        }
+        return true;
     }
     return true;
 }

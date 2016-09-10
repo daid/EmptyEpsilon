@@ -232,6 +232,12 @@ function init()
     --If we have a GM started scenario.
     scenario_started = false
     if getScenarioVariation() == "GM Start" then
+        target_practice_drone = CpuShip():setFaction("Ghosts"):setTemplate("MT52 Hornet"):setTypeName("Target practice")
+        target_practice_drone:setScannedByFaction("Human Navy", true)
+        target_practice_drone:setImpulseMaxSpeed(60)
+        target_practice_drone:setBeamWeapon(0, 0, 0, 0.0, 0, 0)
+        x, y = 2500, 3500
+        target_practice_drone:setPosition(x, y):orderDefendLocation(x, y)
         addGMFunction("Start", function()
             startScenario()
             removeGMFunction("Start")
@@ -246,6 +252,10 @@ function startScenario()
 	else
 		enemy_group_count = 3
 	end
+    
+    if target_practice_drone ~= nil and target_practice_drone:isValid() then
+        target_practice_drone:destroy()
+    end
 
 	-- If not in the Empty variation, spawn the corresponding number of random
 	-- enemy waves at distributed random headings and semi-random distances
