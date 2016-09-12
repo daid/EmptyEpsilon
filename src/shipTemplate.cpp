@@ -301,8 +301,8 @@ string getSystemName(ESystem system)
     case SYS_Impulse: return "Impulse Engines";
     case SYS_Warp: return "Warp Drive";
     case SYS_JumpDrive: return "Jump Drive";
-    case SYS_FrontShield: return "Front Shields";
-    case SYS_RearShield: return "Rear Shields";
+    case SYS_FrontShield: return "Front Shield Generator";
+    case SYS_RearShield: return "Rear Shield Generator";
     default:
         return "UNKNOWN";
     }
