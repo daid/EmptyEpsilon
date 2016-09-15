@@ -267,26 +267,6 @@ function Security()
         end)
 end
 
-function removeVtable(input,remove)
-local n=#input
-for i=1,n do
-        if remove[input[i]] then
-                input[i]=nil
-        end
-end
-
-local j=0
-for i=1,n do
-        if input[i]~=nil then
-                j=j+1
-                input[j]=input[i]
-        end
-end
-for i=j+1,n do
-        input[i]=nil
-end
-end
-
 function missionDistance()
 
   for key, value in pairs(fleet[6]) do
