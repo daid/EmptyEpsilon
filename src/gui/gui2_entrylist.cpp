@@ -125,9 +125,10 @@ void GuiEntryList::callback()
 {
     if (func)
     {
+        func_t f = func;
         if (selection_index >= 0 && selection_index < (int)entries.size())
-            func(selection_index, entries[selection_index].value);
+            f(selection_index, entries[selection_index].value);
         else
-            func(selection_index, "");
+            f(selection_index, "");
     }
 }
