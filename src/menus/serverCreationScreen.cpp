@@ -31,6 +31,8 @@ ServerCreationScreen::ServerCreationScreen()
     gameGlobalInfo->use_system_damage = PreferencesManager::get("server_config_use_system_damage", "1").toInt();
     gameGlobalInfo->allow_main_screen_tactical_radar = PreferencesManager::get("server_config_allow_main_screen_tactical_radar", "1").toInt();
     gameGlobalInfo->allow_main_screen_long_range_radar = PreferencesManager::get("server_config_allow_main_screen_long_range_radar", "1").toInt();
+    gameGlobalInfo->allow_main_screen_global_range_radar = PreferencesManager::get("server_config_allow_main_screen_global_range_radar", "1").toInt();
+    gameGlobalInfo->allow_main_screen_ship_state = PreferencesManager::get("server_config_allow_main_screen_ship_state", "1").toInt();
 
     // Create a two-column layout.
     GuiElement* container = new GuiAutoLayout(this, "", GuiAutoLayout::ELayoutMode::LayoutVerticalColumns);
@@ -115,8 +117,8 @@ ServerCreationScreen::ServerCreationScreen()
         gameGlobalInfo->allow_main_screen_global_range_radar = value == 1;
     }))->setValue(gameGlobalInfo->allow_main_screen_global_range_radar)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenterLeft);
     (new GuiToggleButton(row, "MAIN_SHIP_STATE", "Ship State", [](bool value) {
-        gameGlobalInfo->allow_main_screen_ship_state_radar = value == 1;
-    }))->setValue(gameGlobalInfo->allow_main_screen_ship_state_radar)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenterRight);
+        gameGlobalInfo->allow_main_screen_ship_state = value == 1;
+    }))->setValue(gameGlobalInfo->allow_main_screen_ship_state)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenterRight);
     
     // Game rules section.
     (new GuiLabel(left_panel, "GAME_RULES_LABEL", "Game rules", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
