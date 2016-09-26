@@ -33,6 +33,8 @@ GameGlobalInfo::GameGlobalInfo()
     use_system_damage = true;
     allow_main_screen_tactical_radar = true;
     allow_main_screen_long_range_radar = true;
+    allow_main_screen_global_range_radar = true;
+    allow_main_screen_ship_state = true;
     
     intercept_all_comms_to_gm = false;
 
