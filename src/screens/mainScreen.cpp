@@ -14,6 +14,8 @@
 #include "screenComponents/radarView.h"
 #include "screenComponents/shipDestroyedPopup.h"
 
+#include "screens/extra/damcon.h"
+
 #include "gui/gui2_overlay.h"
 
 ScreenMainScreen::ScreenMainScreen()
@@ -35,7 +37,10 @@ ScreenMainScreen::ScreenMainScreen()
     long_range_radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
     onscreen_comms = new GuiCommsOverlay(this);
     onscreen_comms->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setVisible(false);
-
+    
+    ship_state = new DamageControlScreen(this);
+    ship_state->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    
     new GuiShipDestroyedPopup(this);
     
     new GuiJumpIndicator(this);
@@ -140,6 +145,12 @@ void ScreenMainScreen::update(float delta)
             viewport->hide();
             tactical_radar->hide();
             long_range_radar->show();
+            break;
+        case MSS_ShipState:
+            viewport->hide();
+            tactical_radar->hide();
+            long_range_radar->hide();
+            ship_state->show();
             break;
         }
 
