@@ -40,12 +40,14 @@ ScreenMainScreen::ScreenMainScreen()
     global_range_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     global_range_radar->setAutoCentering(true);
     global_range_radar->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
-    
+    global_range_radar->hide();
+        
     onscreen_comms = new GuiCommsOverlay(this);
     onscreen_comms->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setVisible(false);
     
     ship_state = new DamageControlScreen(this);
     ship_state->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    ship_state->hide();
     
     new GuiShipDestroyedPopup(this);
     
