@@ -19,6 +19,7 @@ private:
     bool first_person;
     GuiCommsOverlay* onscreen_comms;
     int impulse_sound = -1;
+    DamageControlScreen*ship_state ;
 public:
     ScreenMainScreen();
     
