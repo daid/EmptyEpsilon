@@ -18,6 +18,8 @@ template<> void convert<EMainScreenSetting>::param(lua_State* L, int& idx, EMain
         mss = MSS_Tactical;
     else if (str == "longrange")
         mss = MSS_LongRange;
+    else if (str == "globalrange")
+        mss = MSS_GlobalRange;
     else if (str == "shipstate")
         mss = MSS_ShipState;
     else
