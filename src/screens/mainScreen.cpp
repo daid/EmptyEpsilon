@@ -15,7 +15,6 @@
 #include "screenComponents/shipDestroyedPopup.h"
 
 #include "screens/extra/damcon.h"
-#include "screens/crew6/relayScreen.h"
 
 #include "gui/gui2_overlay.h"
 
@@ -36,8 +35,12 @@ ScreenMainScreen::ScreenMainScreen()
     long_range_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->enableCallsigns()->hide();
     long_range_radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
-    global_range_radar = new RelayScreen(this);
+
+    global_range_radar = new GuiRadarView(this, "GLOBAL", 80000.0f, nullptr);
     global_range_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    global_range_radar->setAutoCentering(true);
+    global_range_radar->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
+    
     onscreen_comms = new GuiCommsOverlay(this);
     onscreen_comms->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setVisible(false);
     
