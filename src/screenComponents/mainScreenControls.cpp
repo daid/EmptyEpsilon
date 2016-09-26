@@ -111,6 +111,19 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     }));
     long_range_button = buttons.back();
     
+    // Global-range radar button.
+    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_GLOBAL_RANGE_BUTTON", "Global Range", [this]()
+    {
+        if (my_spaceship)
+        {
+            my_spaceship->commandMainScreenSetting(MSS_GlobalRange);
+        }
+        open_button->setValue(false);
+        for(GuiButton* button : buttons)
+            button->setVisible(false);
+    }));
+    global_range_button = buttons.back();
+    
      // Ship State button.
     buttons.push_back(new GuiButton(this, "MAIN_SCREEN_SHIP_STATE_BUTTON", "Ship State", [this]()
     {
