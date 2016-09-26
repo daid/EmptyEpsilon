@@ -36,7 +36,7 @@ ScreenMainScreen::ScreenMainScreen()
     long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->enableCallsigns()->hide();
     long_range_radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
 
-    global_range_radar = new GuiRadarView(this, "GLOBAL", 80000.0f, nullptr);
+    global_range_radar = new GuiRadarView(this, "GLOBAL", 50000.0f, nullptr);
     global_range_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     global_range_radar->setAutoCentering(true);
     global_range_radar->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
