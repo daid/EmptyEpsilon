@@ -232,10 +232,17 @@ void ScreenMainScreen::onClick(sf::Vector2f mouse_position)
         case MSS_Tactical:
             if (gameGlobalInfo->allow_main_screen_long_range_radar)
                 my_spaceship->commandMainScreenSetting(MSS_LongRange);
+            else
+                my_spaceship->commandMainScreenSetting(MSS_ShipState);
             break;
         case MSS_LongRange:
+            my_spaceship->commandMainScreenSetting(MSS_ShipState);
+            break;
+        case MSS_ShipState:
             if (gameGlobalInfo->allow_main_screen_tactical_radar)
                 my_spaceship->commandMainScreenSetting(MSS_Tactical);
+            else if (gameGlobalInfo->allow_main_screen_long_range_radar)
+                my_spaceship->commandMainScreenSetting(MSS_LongRange);
             break;
         }
     }
