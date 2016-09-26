@@ -18,7 +18,7 @@ private:
     GuiViewport3D* viewport;
     GuiRadarView* tactical_radar;
     GuiRadarView* long_range_radar;
-    RelayScreen* global_range_radar;
+    GuiRadarView* global_range_radar;
     bool first_person;
     GuiCommsOverlay* onscreen_comms;
     int impulse_sound = -1;
