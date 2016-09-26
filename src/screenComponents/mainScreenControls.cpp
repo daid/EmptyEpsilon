@@ -19,6 +19,10 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
             tactical_button->setVisible(false);
         if (!gameGlobalInfo->allow_main_screen_long_range_radar)
             long_range_button->setVisible(false);
+        if (!gameGlobalInfo->allow_main_screen_global_range_radar)
+            global_range_button->setVisible(false);
+        if (!gameGlobalInfo->allow_main_screen_ship_state)
+            ship_state_button->setVisible(false);
         if (show_comms_button && onscreen_comms_active)
             show_comms_button->setVisible(false);
         if (hide_comms_button && !onscreen_comms_active)
