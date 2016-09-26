@@ -8,6 +8,7 @@
 class GuiViewport3D;
 class GuiRadarView;
 class GuiCommsOverlay;
+class DamageControlScreen;
 
 class ScreenMainScreen : public GuiCanvas, public Updatable
 {
