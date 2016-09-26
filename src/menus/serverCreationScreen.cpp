@@ -245,6 +245,8 @@ void ServerCreationScreen::startScenario()
     PreferencesManager::set("server_config_use_system_damage", string(int(gameGlobalInfo->use_system_damage)));
     PreferencesManager::set("server_config_allow_main_screen_tactical_radar", string(int(gameGlobalInfo->allow_main_screen_tactical_radar)));
     PreferencesManager::set("server_config_allow_main_screen_long_range_radar", string(int(gameGlobalInfo->allow_main_screen_long_range_radar)));
+    PreferencesManager::set("server_config_allow_main_screen_global_range_radar", string(int(gameGlobalInfo->allow_main_screen_global_range_radar)));
+    PreferencesManager::set("server_config_allow_main_screen_ship_state", string(int(gameGlobalInfo->allow_main_screen_ship_state)));
 
     // Start the selected scenario.
     gameGlobalInfo->startScenario(selected_scenario_filename);
