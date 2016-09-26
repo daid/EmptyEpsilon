@@ -248,24 +248,42 @@ void ScreenMainScreen::onClick(sf::Vector2f mouse_position)
                 my_spaceship->commandMainScreenSetting(MSS_Tactical);
             else if (gameGlobalInfo->allow_main_screen_long_range_radar)
                 my_spaceship->commandMainScreenSetting(MSS_LongRange);
+            else if (gameGlobalInfo->allow_main_screen_global_range_radar)
+                my_spaceship->commandMainScreenSetting(MSS_GlobalRange);
+            else if (gameGlobalInfo->allow_main_screen_ship_state)
+                my_spaceship->commandMainScreenSetting(MSS_ShipState);
             break;
         case MSS_Tactical:
             if (gameGlobalInfo->allow_main_screen_long_range_radar)
                 my_spaceship->commandMainScreenSetting(MSS_LongRange);
-            else
+            else if (gameGlobalInfo->allow_main_screen_global_range_radar)
+                my_spaceship->commandMainScreenSetting(MSS_GlobalRange);
+            else if (gameGlobalInfo->allow_main_screen_ship_state)
                 my_spaceship->commandMainScreenSetting(MSS_ShipState);
             break;
         case MSS_LongRange:
-            my_spaceship->commandMainScreenSetting(MSS_GlobalRange);
+            if (gameGlobalInfo->allow_main_screen_global_range_radar)
+                my_spaceship->commandMainScreenSetting(MSS_GlobalRange);
+            else if (gameGlobalInfo->allow_main_screen_ship_state)
+                my_spaceship->commandMainScreenSetting(MSS_ShipState);
+            else if (gameGlobalInfo->allow_main_screen_tactical_radar)
+                my_spaceship->commandMainScreenSetting(MSS_Tactical);
             break;
         case MSS_GlobalRange:
-            my_spaceship->commandMainScreenSetting(MSS_ShipState);
+            if (gameGlobalInfo->allow_main_screen_ship_state)
+                my_spaceship->commandMainScreenSetting(MSS_ShipState);
+            else if (gameGlobalInfo->allow_main_screen_tactical_radar)
+                my_spaceship->commandMainScreenSetting(MSS_Tactical);
+            else if (gameGlobalInfo->allow_main_screen_long_range_radar)
+                my_spaceship->commandMainScreenSetting(MSS_LongRange);
             break;
         case MSS_ShipState:
             if (gameGlobalInfo->allow_main_screen_tactical_radar)
                 my_spaceship->commandMainScreenSetting(MSS_Tactical);
             else if (gameGlobalInfo->allow_main_screen_long_range_radar)
                 my_spaceship->commandMainScreenSetting(MSS_LongRange);
+            else if (gameGlobalInfo->allow_main_screen_global_range_radar)
+                my_spaceship->commandMainScreenSetting(MSS_GlobalRange);
             break;
         }
     }
