@@ -14,6 +14,7 @@ private:
     GuiButton* target_lock_button;
     GuiButton* tactical_button;
     GuiButton* long_range_button;
+    GuiButton* global_range_button;
     GuiButton* ship_state_button;
     GuiButton* show_comms_button;
     GuiButton* hide_comms_button;
