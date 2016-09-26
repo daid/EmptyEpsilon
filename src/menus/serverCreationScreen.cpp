@@ -109,6 +109,15 @@ ServerCreationScreen::ServerCreationScreen()
         gameGlobalInfo->allow_main_screen_long_range_radar = value == 1;
     }))->setValue(gameGlobalInfo->allow_main_screen_long_range_radar)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenterRight);
 
+    row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
+    row->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiToggleButton(row, "MAIN_GLOBAL_RANGE_TOGGLE", "Global radar", [](bool value) {
+        gameGlobalInfo->allow_main_screen_global_range_radar = value == 1;
+    }))->setValue(gameGlobalInfo->allow_main_screen_global_range_radar)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenterLeft);
+    (new GuiToggleButton(row, "MAIN_SHIP_STATE", "Ship State", [](bool value) {
+        gameGlobalInfo->allow_main_screen_ship_state_radar = value == 1;
+    }))->setValue(gameGlobalInfo->allow_main_screen_ship_state_radar)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenterRight);
+    
     // Game rules section.
     (new GuiLabel(left_panel, "GAME_RULES_LABEL", "Game rules", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
 
