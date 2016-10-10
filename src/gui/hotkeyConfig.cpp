@@ -93,8 +93,8 @@ HotkeyConfig::HotkeyConfig()
     newKey("SELF_DESTRUCT_CANCEL", "Cancel self-destruct");
     
     newCategory("SCIENCE", "Science");
-    newKey("NEXT_ENEMY_TARGET", "Select next target");
-    newKey("NEXT_TARGET", "Select next target (any)");
+    newKey("NEXT_ENEMY_SCAN", "Select next target");
+    newKey("NEXT_SCAN", "Select next target (any)");
     newKey("SCAN_START", "Start scan");
     newKey("NEXT_INFO_TARGET", "Next info on target");
     newKey("SELECT_TACTICAL", "Select tactical info");
