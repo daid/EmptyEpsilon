@@ -556,21 +556,19 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
         {		
             if (ship->getScannedStateFor(my_spaceship) >= SS_FullScan)
             {
-                if (key.hotkey == "SELECT_TACTICAL")
-                    sidebar_pager_selection == "Tactical")
-                if (key.hotkey == "SELECT_SYSTEMS")
-                    sidebar_pager_selection == "Systems")
-                if (key.hotkey == "SELECT_DESCRIPTION")
-                    sidebar_pager_selection == "Description")
-                if (key.hotkey == "SELECT_DESCRIPTION")
-                    sidebar_pager_selection == "Description")
+                if (key.hotkey == "SELECT_TACTICAL" && sidebar_pager->indexByValue("Tactical"))
+					sidebar_pager->setSelectionIndex(sidebar_pager->indexByValue("Tactical"));
+                if (key.hotkey == "SELECT_SYSTEMS" && sidebar_pager->indexByValue("Systems"))
+					sidebar_pager->setSelectionIndex(sidebar_pager->indexByValue("Systems"));
+                if (key.hotkey == "SELECT_DESCRIPTION" && sidebar_pager->indexByValue("Description"))
+					sidebar_pager->setSelectionIndex(sidebar_pager->indexByValue("Description"));
 
                 if (key.hotkey == "NEXT_INFO_TARGET")
                 {
                     if (sidebar_pager->getSelectionIndex() >= sidebar_pager->entryCount() - 1)
-                        new_frequency->setSelectionIndex(0);
+                        sidebar_pager->setSelectionIndex(0);
                     else
-                        new_frequency->setSelectionIndex(new_frequency->getSelectionIndex() + 1);
+                        sidebar_pager->setSelectionIndex(sidebar_pager->getSelectionIndex() + 1);
                 }
             }
         }
