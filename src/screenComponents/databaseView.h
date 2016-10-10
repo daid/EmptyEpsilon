@@ -11,7 +11,7 @@ class DatabaseViewComponent : public GuiElement
 public:
     DatabaseViewComponent(GuiContainer* owner);
 
-    bool findAndDisplayEntry(string name) override;
+    bool findAndDisplayEntry(string name);
     virtual void onHotkey(const HotkeyResult& key) override;
 private:
     bool findAndDisplayEntry(string name, P<ScienceDatabase> parent);
