@@ -174,14 +174,14 @@ void GuiScanningDialog::onHotkey(const HotkeyResult& key)
                 {
                     float new_value = sliders[n]->getValue()-0.05;
                     if (new_value <= 0.0)
-                        new_value = 0.0
+                        new_value = 0.0;
                     sliders[n]->setValue(new_value);
                 }
                 if (key.hotkey == "MOVE_RIGHT_SCAN_"+string(n+1))
                 {
                     float new_value = sliders[n]->getValue()+0.05;
                     if (new_value >= 1.0)
-                        new_value = 1.0
+                        new_value = 1.0;
                     sliders[n]->setValue(new_value);
                 }
             }
