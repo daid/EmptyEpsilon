@@ -124,7 +124,7 @@ void DatabaseViewComponent::display(P<ScienceDatabase> entry)
     }
 }
 
-void ScienceScreen::onHotkey(const HotkeyResult& key)
+void DatabaseViewComponent::onHotkey(const HotkeyResult& key)
 {
     if (key.category == "SCIENCE" && my_spaceship)
     {
