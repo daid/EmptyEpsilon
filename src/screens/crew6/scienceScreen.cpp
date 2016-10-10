@@ -578,7 +578,6 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
 		view_mode_selection->setSelectionIndex(1);
 	if (key.hotkey == "SHOW_RADAR")
 		view_mode_selection->setSelectionIndex(0);
-	if (key.hotkey == "INCREASE_ZOOM")
-	if (key.hotkey == "DECREASE_ZOOM")
-    }
+	//if (key.hotkey == "INCREASE_ZOOM")
+	//if (key.hotkey == "DECREASE_ZOOM")
 }
