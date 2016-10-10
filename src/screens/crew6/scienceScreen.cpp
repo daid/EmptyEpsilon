@@ -526,27 +526,6 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
                 }
             }
         }
-        if (key.hotkey == "SHOW_PROBE")
-        {
-            P<ScanProbe> probe;
-
-            if (game_server)
-                probe = game_server->getObjectById(my_spaceship->linked_science_probe_id);
-            else
-                probe = game_client->getObjectById(my_spaceship->linked_science_probe_id);
-
-            if (probe)
-            {
-                sf::Vector2f probe_position = probe->getPosition();
-                science_radar->hide();
-                probe_radar->show();
-                probe_radar->setViewPosition(probe_position)->show();
-            }else{
-                probe_view_button->setValue(false);
-                science_radar->show();
-                probe_radar->hide();
-            }
-		}
 		if (targets.get())
 		{
 			P<SpaceObject> obj = targets.get();
@@ -573,12 +552,65 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
 				}
 			}
 		}
+ 		if (key.hotkey == "SHOW_PROBE")
+        {
+            P<ScanProbe> probe;
 
+            if (game_server)
+                probe = game_server->getObjectById(my_spaceship->linked_science_probe_id);
+            else
+                probe = game_client->getObjectById(my_spaceship->linked_science_probe_id);
+
+            if (probe)
+            {
+				probe_view_button->setValue(true);
+                sf::Vector2f probe_position = probe->getPosition();
+                science_radar->hide();
+                probe_radar->show();
+                probe_radar->setViewPosition(probe_position)->show();
+            }else{
+                probe_view_button->setValue(false);
+                science_radar->show();
+                probe_radar->hide();
+            }
+		}
 		if (key.hotkey == "SHOW_DATABASE")
+		{
 			view_mode_selection->setSelectionIndex(1);
+			radar_view->hide();
+			background_gradient->hide();
+			database_view->show();
+		}
 		if (key.hotkey == "SHOW_RADAR")
+		{
 			view_mode_selection->setSelectionIndex(0);
-		//if (key.hotkey == "INCREASE_ZOOM")
-		//if (key.hotkey == "DECREASE_ZOOM")
+			radar_view->show();
+			background_gradient->show();
+			database_view->hide();
+		}
+		if (key.hotkey == "INCREASE_ZOOM")
+		{
+			float view_distance = science_radar->getDistance() * 100f;
+			if (view_distance > gameGlobalInfo->long_range_radar_range)
+				view_distance = gameGlobalInfo->long_range_radar_range;
+			if (view_distance < 5000.0f)
+				view_distance = 5000.0f;
+			science_radar->setDistance(view_distance);
+			// Keep the zoom slider in sync.
+			zoom_slider->setValue(view_distance);
+			zoom_label->setText("Zoom: " + string(gameGlobalInfo->long_range_radar_range / view_distance, 1) + "x");
+		}
+		if (key.hotkey == "DECREASE_ZOOM")
+		{
+			float view_distance = science_radar->getDistance() * 100f;
+			if (view_distance > gameGlobalInfo->long_range_radar_range)
+				view_distance = gameGlobalInfo->long_range_radar_range;
+			if (view_distance < 5000.0f)
+				view_distance = 5000.0f;
+			science_radar->setDistance(view_distance);
+			// Keep the zoom slider in sync.
+			zoom_slider->setValue(view_distance);
+			zoom_label->setText("Zoom: " + string(gameGlobalInfo->long_range_radar_range / view_distance, 1) + "x");
+		}
 	}
 }
