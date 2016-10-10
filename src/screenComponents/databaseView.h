@@ -11,8 +11,8 @@ class DatabaseViewComponent : public GuiElement
 public:
     DatabaseViewComponent(GuiContainer* owner);
 
-    bool findAndDisplayEntry(string name);
-
+    bool findAndDisplayEntry(string name) override;
+    virtual void onHotkey(const HotkeyResult& key) override;
 private:
     bool findAndDisplayEntry(string name, P<ScienceDatabase> parent);
     //Fill the selection listbox with options from the selected_entry, or the main database list if selected_entry is nullptr
