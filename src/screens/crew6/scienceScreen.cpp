@@ -561,7 +561,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
             else
                 probe = game_client->getObjectById(my_spaceship->linked_science_probe_id);
 
-            if (probe & !probe_view_button->getValue())
+            if (probe && !probe_view_button->getValue())
             {
 				probe_view_button->setValue(true);
                 sf::Vector2f probe_position = probe->getPosition();
