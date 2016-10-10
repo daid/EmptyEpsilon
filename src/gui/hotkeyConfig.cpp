@@ -91,7 +91,20 @@ HotkeyConfig::HotkeyConfig()
     newKey("SELF_DESTRUCT_START", "Start self-destruct");
     newKey("SELF_DESTRUCT_CONFIRM", "Confirm self-destruct");
     newKey("SELF_DESTRUCT_CANCEL", "Cancel self-destruct");
-
+    
+    newCategory("SCIENCE", "Science");
+    newKey("NEXT_ENEMY_TARGET", "Select next target");
+    newKey("NEXT_TARGET", "Select next target (any)");
+    newKey("SCAN_START", "Start scan");
+    newKey("NEXT_INFO_TARGET", "Next info on target");
+    newKey("SELECT_TACTICAL", "Select tactical info");
+    newKey("SELECT_SYSTEMS", "Select systems info");
+    newKey("SELECT_DESCRIPTION", "Select description info");
+    newKey("SHOW_DATABASE", "Show database");
+    newKey("SHOW_PROBE", "Show probe view");
+    newKey("SHOW_RADAR", "Show radar");
+    newKey("INCREASE_ZOOM", "Increase Zoom");
+    newKey("DECREASE_ZOOM", "Decrease Zoom");
 }
 
 static std::vector<std::pair<string, sf::Keyboard::Key> > sfml_key_names = {
