@@ -105,7 +105,7 @@ HotkeyConfig::HotkeyConfig()
     newKey("SHOW_RADAR", "Show radar");
     newKey("INCREASE_ZOOM", "Increase Zoom");
     newKey("DECREASE_ZOOM", "Decrease Zoom");
-    for(int n=0; 3; n++)
+    for(int n=0; n<3; n++)
     {
         newKey("MOVE_LEFT_SCAN_" + string(n+1), "Move left scan " + string(n+1));
         newKey("MOVE_RIGHT_SCAN_" + string(n+1), "Move right scan " + string(n+1));
