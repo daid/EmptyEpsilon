@@ -546,38 +546,39 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
                 science_radar->show();
                 probe_radar->hide();
             }
-	}
-	if (targets.get())
-	{
-		P<SpaceObject> obj = targets.get();
-		P<SpaceShip> ship = obj;
-		P<SpaceStation> station = obj;
-        if (ship)
-        {		
-            if (ship->getScannedStateFor(my_spaceship) >= SS_FullScan)
-            {
-                if (key.hotkey == "SELECT_TACTICAL" && sidebar_pager->indexByValue("Tactical"))
-					sidebar_pager->setSelectionIndex(sidebar_pager->indexByValue("Tactical"));
-                if (key.hotkey == "SELECT_SYSTEMS" && sidebar_pager->indexByValue("Systems"))
-					sidebar_pager->setSelectionIndex(sidebar_pager->indexByValue("Systems"));
-                if (key.hotkey == "SELECT_DESCRIPTION" && sidebar_pager->indexByValue("Description"))
-					sidebar_pager->setSelectionIndex(sidebar_pager->indexByValue("Description"));
+		}
+		if (targets.get())
+		{
+			P<SpaceObject> obj = targets.get();
+			P<SpaceShip> ship = obj;
+			P<SpaceStation> station = obj;
+			if (ship)
+			{		
+				if (ship->getScannedStateFor(my_spaceship) >= SS_FullScan)
+				{
+					if (key.hotkey == "SELECT_TACTICAL" && sidebar_pager->indexByValue("Tactical"))
+						sidebar_pager->setSelectionIndex(sidebar_pager->indexByValue("Tactical"));
+					if (key.hotkey == "SELECT_SYSTEMS" && sidebar_pager->indexByValue("Systems"))
+						sidebar_pager->setSelectionIndex(sidebar_pager->indexByValue("Systems"));
+					if (key.hotkey == "SELECT_DESCRIPTION" && sidebar_pager->indexByValue("Description"))
+						sidebar_pager->setSelectionIndex(sidebar_pager->indexByValue("Description"));
 
-                if (key.hotkey == "NEXT_INFO_TARGET")
-                {
-                    if (sidebar_pager->getSelectionIndex() >= sidebar_pager->entryCount() - 1)
-                        sidebar_pager->setSelectionIndex(0);
-                    else
-                        sidebar_pager->setSelectionIndex(sidebar_pager->getSelectionIndex() + 1);
-                }
-            }
-        }
-	}
+					if (key.hotkey == "NEXT_INFO_TARGET")
+					{
+						if (sidebar_pager->getSelectionIndex() >= sidebar_pager->entryCount() - 1)
+							sidebar_pager->setSelectionIndex(0);
+						else
+							sidebar_pager->setSelectionIndex(sidebar_pager->getSelectionIndex() + 1);
+					}
+				}
+			}
+		}
 
-	if (key.hotkey == "SHOW_DATABASE")
-		view_mode_selection->setSelectionIndex(1);
-	if (key.hotkey == "SHOW_RADAR")
-		view_mode_selection->setSelectionIndex(0);
-	//if (key.hotkey == "INCREASE_ZOOM")
-	//if (key.hotkey == "DECREASE_ZOOM")
+		if (key.hotkey == "SHOW_DATABASE")
+			view_mode_selection->setSelectionIndex(1);
+		if (key.hotkey == "SHOW_RADAR")
+			view_mode_selection->setSelectionIndex(0);
+		//if (key.hotkey == "INCREASE_ZOOM")
+		//if (key.hotkey == "DECREASE_ZOOM")
+	}
 }
