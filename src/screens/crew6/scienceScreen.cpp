@@ -547,5 +547,31 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
                 probe_radar->hide();
             }
         }
+		if (ship->getScannedStateFor(my_spaceship) >= SS_FullScan)
+		{
+			if (key.hotkey == "SELECT_TACTICAL")
+				sidebar_pager_selection == "Tactical")
+			if (key.hotkey == "SELECT_SYSTEMS")
+				sidebar_pager_selection == "Systems")
+			if (key.hotkey == "SELECT_DESCRIPTION")
+				sidebar_pager_selection == "Description")
+			if (key.hotkey == "SELECT_DESCRIPTION")
+				sidebar_pager_selection == "Description")
+			
+			if (key.hotkey == "NEXT_INFO_TARGET")
+	        {
+				if (sidebar_pager->getSelectionIndex() >= sidebar_pager->entryCount() - 1)
+					new_frequency->setSelectionIndex(0);
+				else
+					new_frequency->setSelectionIndex(new_frequency->getSelectionIndex() + 1);
+			}
+		}
+		
+		if (key.hotkey == "SHOW_DATABASE")
+			view_mode_selection->setSelectionIndex(1);
+		if (key.hotkey == "SHOW_RADAR")
+			view_mode_selection->setSelectionIndex(0);
+		if (key.hotkey == "INCREASE_ZOOM")
+		if (key.hotkey == "DECREASE_ZOOM")
     }
 }
