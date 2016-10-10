@@ -460,7 +460,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     }
 }
 
-void WeaponsScreen::onHotkey(const HotkeyResult& key)
+void ScienceScreen::onHotkey(const HotkeyResult& key)
 {
     if (key.category == "SCIENCE" && my_spaceship)
     {
@@ -524,6 +524,27 @@ void WeaponsScreen::onHotkey(const HotkeyResult& key)
                     my_spaceship->commandSetTarget(targets.get());
                     return;
                 }
+            }
+        }
+        if (key.hotkey == "SHOW_PROBE")
+        {
+            P<ScanProbe> probe;
+
+            if (game_server)
+                probe = game_server->getObjectById(my_spaceship->linked_science_probe_id);
+            else
+                probe = game_client->getObjectById(my_spaceship->linked_science_probe_id);
+
+            if (probe)
+            {
+                sf::Vector2f probe_position = probe->getPosition();
+                science_radar->hide();
+                probe_radar->show();
+                probe_radar->setViewPosition(probe_position)->show();
+            }else{
+                probe_view_button->setValue(false);
+                science_radar->show();
+                probe_radar->hide();
             }
         }
     }
