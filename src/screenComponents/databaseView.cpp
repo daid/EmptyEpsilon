@@ -123,29 +123,3 @@ void DatabaseViewComponent::display(P<ScienceDatabase> entry)
         fillListBox();
     }
 }
-
-void DatabaseViewComponent::onHotkey(const HotkeyResult& key)
-{
-    if (key.category == "SCIENCE")
-    {
-        if (key.hotkey == "DATABASE_UP")
-        {
-            if (selected_entry)
-                item_list->setSelectionIndex(selected_entry);
-            //{
-            //    if (index == 0)
-            //    {
-            //        selected_entry = selected_entry->parent;
-            //        fillListBox();
-            //    }else{
-            //        entry = selected_entry->items[index - 1];
-            //    }
-            //}
-            //else
-            //{
-            //    entry = ScienceDatabase::science_databases[index];
-            //}
-            //display(entry);
-        }
-    }
-}
