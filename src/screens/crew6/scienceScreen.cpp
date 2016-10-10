@@ -561,7 +561,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
             else
                 probe = game_client->getObjectById(my_spaceship->linked_science_probe_id);
 
-            if (probe)
+            if (probe & !probe_view_button->getValue())
             {
 				probe_view_button->setValue(true);
                 sf::Vector2f probe_position = probe->getPosition();
@@ -590,7 +590,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
 		}
 		if (key.hotkey == "INCREASE_ZOOM")
 		{
-			float view_distance = science_radar->getDistance() + 100.0f;
+			float view_distance = science_radar->getDistance() + 500.0f;
 			if (view_distance > gameGlobalInfo->long_range_radar_range)
 				view_distance = gameGlobalInfo->long_range_radar_range;
 			if (view_distance < 5000.0f)
@@ -602,7 +602,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
 		}
 		if (key.hotkey == "DECREASE_ZOOM")
 		{
-			float view_distance = science_radar->getDistance() - 100.0f;
+			float view_distance = science_radar->getDistance() - 500.0f;
 			if (view_distance > gameGlobalInfo->long_range_radar_range)
 				view_distance = gameGlobalInfo->long_range_radar_range;
 			if (view_distance < 5000.0f)
