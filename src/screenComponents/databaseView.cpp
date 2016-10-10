@@ -126,7 +126,7 @@ void DatabaseViewComponent::display(P<ScienceDatabase> entry)
 
 void DatabaseViewComponent::onHotkey(const HotkeyResult& key)
 {
-    if (key.category == "SCIENCE" && my_spaceship)
+    if (key.category == "SCIENCE")
     {
         if (key.hotkey == "DATABASE_UP")
         {
