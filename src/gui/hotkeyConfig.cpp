@@ -107,8 +107,8 @@ HotkeyConfig::HotkeyConfig()
     newKey("DECREASE_ZOOM", "Decrease Zoom");
     for(int n=0; 3; n++)
     {
-        newKey("MOVE_LEFT_SCAN" + string(n+1), "Move left scan " + string(n+1));
-        newKey("MOVE_RIGHT_SCAN" + string(n+1), "Move right scan " + string(n+1));
+        newKey("MOVE_LEFT_SCAN_" + string(n+1), "Move left scan " + string(n+1));
+        newKey("MOVE_RIGHT_SCAN_" + string(n+1), "Move right scan " + string(n+1));
     }
 }
 
