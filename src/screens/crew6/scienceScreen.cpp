@@ -590,7 +590,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
 		}
 		if (key.hotkey == "INCREASE_ZOOM")
 		{
-			float view_distance = science_radar->getDistance() * 100f;
+			float view_distance = science_radar->getDistance() + 100f;
 			if (view_distance > gameGlobalInfo->long_range_radar_range)
 				view_distance = gameGlobalInfo->long_range_radar_range;
 			if (view_distance < 5000.0f)
@@ -602,7 +602,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
 		}
 		if (key.hotkey == "DECREASE_ZOOM")
 		{
-			float view_distance = science_radar->getDistance() * 100f;
+			float view_distance = science_radar->getDistance() - 100f;
 			if (view_distance > gameGlobalInfo->long_range_radar_range)
 				view_distance = gameGlobalInfo->long_range_radar_range;
 			if (view_distance < 5000.0f)
