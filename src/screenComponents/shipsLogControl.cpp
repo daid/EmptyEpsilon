@@ -95,7 +95,6 @@ void ShipsLog::onHotkey(const HotkeyResult& key)
 				setSize(getSize().x, 800);
 			else
 				setSize(getSize().x, 50);
-			return true;
 		}
 	}
 }
