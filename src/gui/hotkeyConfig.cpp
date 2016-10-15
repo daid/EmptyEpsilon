@@ -6,16 +6,7 @@ HotkeyConfig hotkeys;
 
 HotkeyConfig::HotkeyConfig()
 {
-    newCategory("GENERAL", "General");
-    newKey("NEXT_STATION", "Switch to next crew station");
-    newKey("PREV_STATION", "Switch to previous crew station");
-    newKey("STATION_HELMS", "Switch to helms station");
-    newKey("STATION_WEAPONS", "Switch to weapons station");
-    newKey("STATION_ENGINEERING", "Switch to engineering station");
-    newKey("STATION_SCIENCE", "Switch to science station");
-    newKey("STATION_RELAY", "Switch to relay station");
-    
-    newCategory("HELMS", "Helms");
+	newCategory("HELMS", "Helms");
     newKey("INC_IMPULSE", "Increase impulse");
     newKey("DEC_IMPULSE", "Decrease impulse");
     newKey("ZERO_IMPULSE", "Zero impulse");
@@ -38,6 +29,7 @@ HotkeyConfig::HotkeyConfig()
     newKey("COMBAT_LEFT", "Combat maneuver left");
     newKey("COMBAT_RIGHT", "Combat maneuver right");
     newKey("COMBAT_BOOST", "Combat maneuver boost");
+    newKey("COMBAT_STOP", "Stop Combat maneuver");
 
     newCategory("WEAPONS", "Weapons");
     newKey("SELECT_MISSILE_TYPE_HOMING", "Select homing");
@@ -65,6 +57,9 @@ HotkeyConfig::HotkeyConfig()
     newKey("DISABLE_AIM_LOCK", "Disable missile aim lock");
     newKey("AIM_MISSILE_LEFT", "Turn missile aim to the left");
     newKey("AIM_MISSILE_RIGHT", "Turn missile aim to the right");
+	newKey("SHIELD_CAL_INC", "Increase shield frequency target");
+    newKey("SHIELD_CAL_DEC", "Decrease shield frequency target");
+    newKey("SHIELD_CAL_START", "Start shield calibration");
     
     newCategory("ENGINEERING", "Engineering");
     newKey("SELECT_REACTOR", "Select reactor system");
@@ -128,6 +123,17 @@ HotkeyConfig::HotkeyConfig()
     newKey("ALERTE_NORMAL", "Alert normal");
     newKey("ALERTE_YELLOW", "Alert yellow");
     newKey("ALERTE_RED", "Alert red");
+	
+    newCategory("GENERAL", "General");
+    newKey("NEXT_STATION", "Switch to next crew station");
+    newKey("PREV_STATION", "Switch to previous crew station");
+    newKey("STATION_HELMS", "Switch to helms station");
+    newKey("STATION_WEAPONS", "Switch to weapons station");
+    newKey("STATION_ENGINEERING", "Switch to engineering station");
+    newKey("STATION_SCIENCE", "Switch to science station");
+    newKey("STATION_RELAY", "Switch to relay station");
+    newKey("ARROW_UP", "Move up");
+    newKey("ARROW_DOWN", "Move down");
 }
 
 static std::vector<std::pair<string, sf::Keyboard::Key> > sfml_key_names = {

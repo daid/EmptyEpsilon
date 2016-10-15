@@ -125,3 +125,14 @@ int GuiScrollbar::getMin()
 {
     return min_value;
 }
+
+void GuiScrollbar::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "GENERAL" && my_spaceship)
+    {
+        if (key.hotkey == "ARROW_UP")
+            setValue(getValue() - 1)
+        if (key.hotkey == "ARROW_DOWN")
+			setValue(getValue() + 1);
+    }
+}
