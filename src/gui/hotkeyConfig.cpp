@@ -35,9 +35,9 @@ HotkeyConfig::HotkeyConfig()
     newKey("INC_JUMP", "Increase jump distance");
     newKey("DEC_JUMP", "Decrease jump distance");
     newKey("JUMP", "Initiate jump");
-    //newKey("COMBAT_LEFT", "Combat maneuver left");
-    //newKey("COMBAT_RIGHT", "Combat maneuver right");
-    //newKey("COMBAT_BOOST", "Combat maneuver boost");
+    newKey("COMBAT_LEFT", "Combat maneuver left");
+    newKey("COMBAT_RIGHT", "Combat maneuver right");
+    newKey("COMBAT_BOOST", "Combat maneuver boost");
 
     newCategory("WEAPONS", "Weapons");
     newKey("SELECT_MISSILE_TYPE_HOMING", "Select homing");

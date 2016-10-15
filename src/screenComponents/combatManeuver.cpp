@@ -47,11 +47,11 @@ void GuiCombatManeuver::onHotkey(const HotkeyResult& key)
     if (key.category == "HELMS" && my_spaceship)
     {
         if (key.hotkey == "COMBAT_LEFT")
-        {}//TODO
+			my_spaceship->commandCombatManeuverStrafe(-1.0f);
         else if (key.hotkey == "COMBAT_RIGHT")
-        {}//TODO
+			my_spaceship->commandCombatManeuverStrafe(1.0f);
         else if (key.hotkey == "COMBAT_BOOST")
-        {}//TODO
+			my_spaceship->commandCombatManeuverBoost(1.0f);
     }
 }
 
