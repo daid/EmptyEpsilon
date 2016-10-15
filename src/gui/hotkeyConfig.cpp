@@ -91,6 +91,8 @@ HotkeyConfig::HotkeyConfig()
     newKey("SELF_DESTRUCT_START", "Start self-destruct");
     newKey("SELF_DESTRUCT_CONFIRM", "Confirm self-destruct");
     newKey("SELF_DESTRUCT_CANCEL", "Cancel self-destruct");
+    newKey("ACTIVE_AUTO_COOLANT", "Activation Auto coolant");
+    newKey("ACTIVE_AUTO_REPAIR", "Activation Auto repair");
     
     newCategory("SCIENCE", "Science");
     newKey("NEXT_ENEMY_SCAN", "Select next target");
