@@ -345,7 +345,8 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
 		}
         if (key.hotkey == "LINK_SCIENCE")
         {
-            if (P<ScanProbe>(targets.get()) && obj->isFriendly(my_spaceship))
+			P<ScanProbe> obj = targets.get(); 
+            if (obj && obj->isFriendly(my_spaceship))
 			{	
 				if (!link_to_science_button->getValue())
 					my_spaceship->commandSetScienceLink(targets.get()->getMultiplayerId());
