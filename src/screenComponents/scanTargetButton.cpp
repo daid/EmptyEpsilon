@@ -49,7 +49,7 @@ void GuiScanTargetButton::onHotkey(const HotkeyResult& key)
     {
 		if (key.hotkey == "SCAN_START")
 		{
-			if (my_spaceship && this->targets && this->targets->get())
+			if (this->targets && this->targets->get())
                 my_spaceship->commandScan(this->targets->get());
 		}
     }

@@ -22,3 +22,16 @@ void GuiOpenCommsButton::onDraw(sf::RenderTarget& window)
     }
     GuiButton::onDraw(window);
 }
+
+
+void RelayScreen::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "RELAY" && my_spaceship)
+    {
+        if (key.hotkey == "OPEN_COMM")
+        {
+			if (this->targets->get())
+				my_spaceship->commandOpenTextComm(this->targets->get());
+		}
+	}
+}

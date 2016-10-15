@@ -110,6 +110,22 @@ HotkeyConfig::HotkeyConfig()
         newKey("MOVE_LEFT_SCAN_" + string(n+1), "Move left scan " + string(n+1));
         newKey("MOVE_RIGHT_SCAN_" + string(n+1), "Move right scan " + string(n+1));
     }
+	
+	newCategory("RELAY", "Relay");
+    newKey("OPEN_COMM", "Open communication");
+    newKey("NEXT_ENEMY_RELAY", "Select next target");
+    newKey("NEXT_RELAY", "Select next target (any)");
+    newKey("LINK_SCIENCE", "Link probe to science");
+    newKey("BEGIN_HACK", "Begin Hack");
+    newKey("ADD_WAYPOINT", "Add a waypoint");
+    newKey("DELETE_WAYPOINT", "Delelte waypoint");
+    newKey("LAUNCH_PROBE", "Launch probe");
+    newKey("INCREASE_ZOOM", "Increase Zoom");
+    newKey("DECREASE_ZOOM", "Decrease Zoom");
+    newKey("OPEN_LOG", "Open log");
+    newKey("ALERTE_NORMAL", "Alert normal");
+    newKey("ALERTE_YELLOW", "Alert yellow");
+    newKey("ALERTE_RED", "Alert red");
 }
 
 static std::vector<std::pair<string, sf::Keyboard::Key> > sfml_key_names = {
