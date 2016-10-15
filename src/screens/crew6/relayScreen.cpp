@@ -345,10 +345,13 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
 		}
         if (key.hotkey == "LINK_SCIENCE")
         {
-			if (!link_to_science_button->getValue())
-				my_spaceship->commandSetScienceLink(targets.get()->getMultiplayerId());
-			else
-				my_spaceship->commandSetScienceLink(-1);
+            if (P<ScanProbe>(targets.get()) && obj->isFriendly(my_spaceship))
+			{	
+				if (!link_to_science_button->getValue())
+					my_spaceship->commandSetScienceLink(targets.get()->getMultiplayerId());
+				else
+					my_spaceship->commandSetScienceLink(-1);
+			}
 		}
         if (key.hotkey == "BEGIN_HACK")
 		{
