@@ -24,7 +24,7 @@ void GuiOpenCommsButton::onDraw(sf::RenderTarget& window)
 }
 
 
-void RelayScreen::onHotkey(const HotkeyResult& key)
+void GuiOpenCommsButton::onHotkey(const HotkeyResult& key)
 {
     if (key.category == "RELAY" && my_spaceship)
     {

@@ -84,7 +84,7 @@ bool ShipsLog::onMouseDown(sf::Vector2f position)
     return true;
 }
 
-void RelayScreen::onHotkey(const HotkeyResult& key)
+void ShipsLog::onHotkey(const HotkeyResult& key)
 {
     if (key.category == "RELAY" && my_spaceship)
     {
