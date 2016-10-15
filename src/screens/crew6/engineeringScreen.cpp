@@ -319,7 +319,6 @@ void EngineeringScreen::onHotkey(const HotkeyResult& key)
 		if (key.hotkey == "ACTIVE_AUTO_COOLANT") my_spaceship->auto_coolant_enabled = !my_spaceship->auto_coolant_enabled;
 		if (key.hotkey == "ACTIVE_AUTO_REPAIR") my_spaceship->auto_repair_enabled = !my_spaceship->auto_repair_enabled;
 		
-		}
     }
 }
 
