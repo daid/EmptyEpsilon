@@ -474,10 +474,10 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
                     current_found = true;
                     continue;
                 }
-                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < gameGlobalInfo->long_range_radar_range && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < gameGlobalInfo->long_range_radar_range && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_SimpleScan && obj->canBeTargetedBy(my_spaceship))
                 {
                     targets.set(obj);
-                    my_spaceship->commandSetTarget(targets.get());
+                    // my_spaceship->commandSetTarget(targets.get());
                     return;
                 }
             }
@@ -487,10 +487,10 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
                 {
                     continue;
                 }
-                if (my_spaceship->isEnemy(obj) && sf::length(obj->getPosition() - my_spaceship->getPosition()) < gameGlobalInfo->long_range_radar_range && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                if (my_spaceship->isEnemy(obj) && sf::length(obj->getPosition() - my_spaceship->getPosition()) < gameGlobalInfo->long_range_radar_range && my_spaceship->getScannedStateFor(obj) >= SS_SimpleScan && obj->canBeTargetedBy(my_spaceship))
                 {
                     targets.set(obj);
-                    my_spaceship->commandSetTarget(targets.get());
+                    // my_spaceship->commandSetTarget(targets.get());
                     return;
                 }
             }
@@ -510,7 +510,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
                 if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < gameGlobalInfo->long_range_radar_range && obj->canBeTargetedBy(my_spaceship))
                 {
                     targets.set(obj);
-                    my_spaceship->commandSetTarget(targets.get());
+                    // my_spaceship->commandSetTarget(targets.get());
                     return;
                 }
             }
@@ -521,7 +521,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
                 if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < gameGlobalInfo->long_range_radar_range && obj->canBeTargetedBy(my_spaceship))
                 {
                     targets.set(obj);
-                    my_spaceship->commandSetTarget(targets.get());
+                    // my_spaceship->commandSetTarget(targets.get());
                     return;
                 }
             }

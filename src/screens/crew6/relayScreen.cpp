@@ -291,10 +291,10 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
                     current_found = true;
                     continue;
                 }
-                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 50000.0 && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 50000.0 && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_SimpleScan && obj->canBeTargetedBy(my_spaceship))
                 {
                     targets.set(obj);
-                    my_spaceship->commandSetTarget(targets.get());
+                    // my_spaceship->commandSetTarget(targets.get());
                     return;
                 }
             }
@@ -304,10 +304,10 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
                 {
                     continue;
                 }
-                if (my_spaceship->isEnemy(obj) && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 50000.0 && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                if (my_spaceship->isEnemy(obj) && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 50000.0 && my_spaceship->getScannedStateFor(obj) >= SS_SimpleScan && obj->canBeTargetedBy(my_spaceship))
                 {
                     targets.set(obj);
-                    my_spaceship->commandSetTarget(targets.get());
+                    // my_spaceship->commandSetTarget(targets.get());
                     return;
                 }
             }
@@ -327,7 +327,7 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
                 if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 50000.0 && obj->canBeTargetedBy(my_spaceship))
                 {
                     targets.set(obj);
-                    my_spaceship->commandSetTarget(targets.get());
+                    // my_spaceship->commandSetTarget(targets.get());
                     return;
                 }
             }
@@ -338,20 +338,18 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
                 if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < 50000.0 && obj->canBeTargetedBy(my_spaceship))
                 {
                     targets.set(obj);
-                    my_spaceship->commandSetTarget(targets.get());
+                    // my_spaceship->commandSetTarget(targets.get());
                     return;
                 }
             }
 		}
-		
         if (key.hotkey == "LINK_SCIENCE")
         {
-			if (alert_level_button->getValue())
+			if (!alert_level_button->getValue())
 				my_spaceship->commandSetScienceLink(targets.get()->getMultiplayerId());
 			else
 				my_spaceship->commandSetScienceLink(-1);
 		}
-		
         if (key.hotkey == "BEGIN_HACK")
 		{
 			P<SpaceObject> target = targets.get();
@@ -360,7 +358,6 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
 				hacking_dialog->open(target);
 			}
 		}
-		
         if (key.hotkey == "ADD_WAYPOINT")
         {
 			mode = WaypointPlacement;
@@ -387,8 +384,7 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
 			// Keep the zoom slider in sync.
 			zoom_slider->setValue(view_distance);
 			zoom_label->setText("Zoom: " + string(50000.0f / view_distance, 1.0f) + "x");
-		}			
-		
+		}
 		if (key.hotkey == "DECREASE_ZOOM")
 		{
 			float view_distance = radar->getDistance() - 1500.0f;
