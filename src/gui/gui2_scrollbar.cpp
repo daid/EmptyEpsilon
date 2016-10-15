@@ -131,7 +131,7 @@ void GuiScrollbar::onHotkey(const HotkeyResult& key)
     if (key.category == "GENERAL")
     {
         if (key.hotkey == "ARROW_UP")
-            setValue(getValue() - 1)
+            setValue(getValue() - 1);
         if (key.hotkey == "ARROW_DOWN")
 			setValue(getValue() + 1);
     }
