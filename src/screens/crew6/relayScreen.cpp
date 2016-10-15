@@ -324,7 +324,7 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
                 }
                 if (obj == my_spaceship)
                     continue;
-                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < radar->getDistance() && obj->canBeTargetedBy(my_spaceship))
+                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < radar->getDistance())
                 {
                     targets.set(obj);
                     // my_spaceship->commandSetTarget(targets.get());
@@ -335,7 +335,7 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
             {
                 if (obj == targets.get() || obj == my_spaceship)
                     continue;
-                if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < radar->getDistance() && obj->canBeTargetedBy(my_spaceship))
+                if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < radar->getDistance())
                 {
                     targets.set(obj);
                     // my_spaceship->commandSetTarget(targets.get());
