@@ -6,16 +6,7 @@ HotkeyConfig hotkeys;
 
 HotkeyConfig::HotkeyConfig()
 {
-    newCategory("GENERAL", "General");
-    newKey("NEXT_STATION", "Switch to next crew station");
-    newKey("PREV_STATION", "Switch to previous crew station");
-    newKey("STATION_HELMS", "Switch to helms station");
-    newKey("STATION_WEAPONS", "Switch to weapons station");
-    newKey("STATION_ENGINEERING", "Switch to engineering station");
-    newKey("STATION_SCIENCE", "Switch to science station");
-    newKey("STATION_RELAY", "Switch to relay station");
-    
-    newCategory("HELMS", "Helms");
+	newCategory("HELMS", "Helms");
     newKey("INC_IMPULSE", "Increase impulse");
     newKey("DEC_IMPULSE", "Decrease impulse");
     newKey("ZERO_IMPULSE", "Zero impulse");
@@ -35,9 +26,10 @@ HotkeyConfig::HotkeyConfig()
     newKey("INC_JUMP", "Increase jump distance");
     newKey("DEC_JUMP", "Decrease jump distance");
     newKey("JUMP", "Initiate jump");
-    //newKey("COMBAT_LEFT", "Combat maneuver left");
-    //newKey("COMBAT_RIGHT", "Combat maneuver right");
-    //newKey("COMBAT_BOOST", "Combat maneuver boost");
+    newKey("COMBAT_LEFT", "Combat maneuver left");
+    newKey("COMBAT_RIGHT", "Combat maneuver right");
+    newKey("COMBAT_BOOST", "Combat maneuver boost");
+    newKey("COMBAT_STOP", "Stop Combat maneuver");
 
     newCategory("WEAPONS", "Weapons");
     newKey("SELECT_MISSILE_TYPE_HOMING", "Select homing");
@@ -65,6 +57,9 @@ HotkeyConfig::HotkeyConfig()
     newKey("DISABLE_AIM_LOCK", "Disable missile aim lock");
     newKey("AIM_MISSILE_LEFT", "Turn missile aim to the left");
     newKey("AIM_MISSILE_RIGHT", "Turn missile aim to the right");
+	newKey("SHIELD_CAL_INC", "Increase shield frequency target");
+    newKey("SHIELD_CAL_DEC", "Decrease shield frequency target");
+    newKey("SHIELD_CAL_START", "Start shield calibration");
     
     newCategory("ENGINEERING", "Engineering");
     newKey("SELECT_REACTOR", "Select reactor system");
@@ -91,7 +86,63 @@ HotkeyConfig::HotkeyConfig()
     newKey("SELF_DESTRUCT_START", "Start self-destruct");
     newKey("SELF_DESTRUCT_CONFIRM", "Confirm self-destruct");
     newKey("SELF_DESTRUCT_CANCEL", "Cancel self-destruct");
-
+    newKey("ACTIVE_AUTO_COOLANT", "Activation Auto coolant");
+    newKey("ACTIVE_AUTO_REPAIR", "Activation Auto repair");
+    
+    newCategory("POWER_MANAGEMENT", "Power Management");
+	for(int n=0; n<SYS_COUNT; n++)
+	{
+		newKey(getSystemName(ESystem(n))+ string("_POWER_UP"), getSystemName(ESystem(n))+ string(" Power Up"));
+		newKey(getSystemName(ESystem(n))+ string("_POWER_DOWN"), getSystemName(ESystem(n))+ string(" Power Down"));
+		newKey(getSystemName(ESystem(n))+ string("_COOLANT_UP"), getSystemName(ESystem(n))+ string(" Coolant Up"));
+		newKey(getSystemName(ESystem(n))+ string("_COOLANT_DOWN"), getSystemName(ESystem(n))+string(" Coolant Down"));
+	}
+	
+    newCategory("SCIENCE", "Science");
+    newKey("NEXT_ENEMY_SCAN", "Select next target");
+    newKey("NEXT_SCAN", "Select next target (any)");
+    newKey("SCAN_START", "Start scan");
+    newKey("NEXT_INFO_TARGET", "Next info on target");
+    newKey("SELECT_TACTICAL", "Select tactical info");
+    newKey("SELECT_SYSTEMS", "Select systems info");
+    newKey("SELECT_DESCRIPTION", "Select description info");
+    newKey("SHOW_DATABASE", "Show database");
+    newKey("SHOW_PROBE", "Show probe view");
+    newKey("SHOW_RADAR", "Show radar");
+    newKey("INCREASE_ZOOM", "Increase Zoom");
+    newKey("DECREASE_ZOOM", "Decrease Zoom");
+    for(int n=0; n<3; n++)
+    {
+        newKey("MOVE_LEFT_SCAN_" + string(n+1), "Move left scan " + string(n+1));
+        newKey("MOVE_RIGHT_SCAN_" + string(n+1), "Move right scan " + string(n+1));
+    }
+	
+	newCategory("RELAY", "Relay");
+    newKey("OPEN_COMM", "Open communication");
+    newKey("NEXT_ENEMY_RELAY", "Select next target");
+    newKey("NEXT_RELAY", "Select next target (any)");
+    newKey("LINK_SCIENCE", "Link probe to science");
+    newKey("BEGIN_HACK", "Begin Hack");
+    newKey("ADD_WAYPOINT", "Add a waypoint");
+    newKey("DELETE_WAYPOINT", "Delelte waypoint");
+    newKey("LAUNCH_PROBE", "Launch probe");
+    newKey("INCREASE_ZOOM", "Increase Zoom");
+    newKey("DECREASE_ZOOM", "Decrease Zoom");
+    newKey("OPEN_LOG", "Open log");
+    newKey("ALERTE_NORMAL", "Alert normal");
+    newKey("ALERTE_YELLOW", "Alert yellow");
+    newKey("ALERTE_RED", "Alert red");
+	
+    newCategory("GENERAL", "General");
+    newKey("NEXT_STATION", "Switch to next crew station");
+    newKey("PREV_STATION", "Switch to previous crew station");
+    newKey("STATION_HELMS", "Switch to helms station");
+    newKey("STATION_WEAPONS", "Switch to weapons station");
+    newKey("STATION_ENGINEERING", "Switch to engineering station");
+    newKey("STATION_SCIENCE", "Switch to science station");
+    newKey("STATION_RELAY", "Switch to relay station");
+    newKey("ARROW_UP", "Move up");
+    newKey("ARROW_DOWN", "Move down");
 }
 
 static std::vector<std::pair<string, sf::Keyboard::Key> > sfml_key_names = {
@@ -218,9 +269,7 @@ std::vector<HotkeyResult> HotkeyConfig::getHotkey(sf::Event::KeyEvent key)
         for(HotkeyConfigItem& item : cat.hotkeys)
         {
             if (item.hotkey.code == key.code && item.hotkey.alt == key.alt && item.hotkey.control == key.control && item.hotkey.shift == key.shift && item.hotkey.system == key.system)
-            {
                 results.emplace_back(cat.key, item.key);
-            }
         }
     }
     return results;

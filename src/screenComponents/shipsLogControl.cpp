@@ -83,3 +83,18 @@ bool ShipsLog::onMouseDown(sf::Vector2f position)
         setSize(getSize().x, 50);
     return true;
 }
+
+void ShipsLog::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "RELAY" && my_spaceship)
+    {
+        if (key.hotkey == "OPEN_LOG")
+        {
+			open = !open;
+		    if (open)
+				setSize(getSize().x, 800);
+			else
+				setSize(getSize().x, 50);
+		}
+	}
+}

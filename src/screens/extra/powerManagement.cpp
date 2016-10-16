@@ -77,3 +77,46 @@ void PowerManagementScreen::onDraw(sf::RenderTarget& window)
         }
     }
 }
+
+void PowerManagementScreen::onHotkey(const HotkeyResult& key)
+{
+	if (key.category == "POWER_MANAGEMENT" && my_spaceship)
+    {
+		if (my_spaceship)
+		{		
+			for(int n=0; n<SYS_COUNT; n++)
+			{
+				if (key.hotkey == getSystemName(ESystem(n))+ string("_POWER_UP"))
+				{
+					if(my_spaceship->systems[n].power_request < 3.0f)
+					
+						my_spaceship->commandSetSystemPowerRequest(ESystem(n), my_spaceship->systems[n].power_request + 0.1f);
+					else
+						my_spaceship->commandSetSystemPowerRequest(ESystem(n), 3.0f);
+				}
+				if (key.hotkey == getSystemName(ESystem(n))+ string("_POWER_DOWN"))
+				{
+					if(my_spaceship->systems[n].power_request > 0.0f)
+						my_spaceship->commandSetSystemPowerRequest(ESystem(n), my_spaceship->systems[n].power_request - 0.1f);
+					else
+						my_spaceship->commandSetSystemPowerRequest(ESystem(n), 0.0f);
+				}
+				if (key.hotkey == getSystemName(ESystem(n))+ string("_COOLANT_UP"))
+				{
+					if(my_spaceship->systems[n].coolant_request < 10.0f)
+						my_spaceship->commandSetSystemCoolantRequest(ESystem(n), my_spaceship->systems[n].coolant_request + 0.5f);
+					else
+						my_spaceship->commandSetSystemCoolantRequest(ESystem(n), 10.0f);	
+				}
+				if (key.hotkey == getSystemName(ESystem(n))+ string("_COOLANT_DOWN"))
+				{
+					if(my_spaceship->systems[n].coolant_request > 0.0f)
+						my_spaceship->commandSetSystemCoolantRequest(ESystem(n), my_spaceship->systems[n].coolant_request - 0.5f);
+					else
+						my_spaceship->commandSetSystemCoolantRequest(ESystem(n), 0.0f);
+				}
+			}
+		}
+	}
+}
+
