@@ -84,44 +84,23 @@ void PowerManagementScreen::onHotkey(const HotkeyResult& key)
     {
 		if (my_spaceship)
 		{		
-			float new_value;
 			for(int n=0; n<SYS_COUNT; n++)
 			{
 				if (key.hotkey == getSystemName(ESystem(n))+ string("_POWER_UP"))
 				{
-					new_value = systems[n].power_request + 0.5f;
-					if (new_value > 1.0f)
-						new_value = 1.0f;
-					if (new_value < 0.0f)
-						new_value = 0.0f;
-					my_spaceship->commandSetSystemPowerRequest(ESystem(n), my_spaceship->new_value);
+					my_spaceship->commandSetSystemPowerRequest(ESystem(n), my_spaceship->systems[n].power_request + 0.5f);
 				}
 				if (key.hotkey == getSystemName(ESystem(n))+ string("_POWER_DOWN"))
 				{
-					new_value = systems[n].power_request - 0.5f;
-					if (new_value > 1.0f)
-						new_value = 1.0f;
-					if (new_value < 0.0f)
-						new_value = 0.0f;
-					my_spaceship->commandSetSystemPowerRequest(ESystem(n), my_spaceship->new_value);
+					my_spaceship->commandSetSystemPowerRequest(ESystem(n), my_spaceship->systems[n].power_request - 0.5f);
 				}
 				if (key.hotkey == getSystemName(ESystem(n))+ string("_COOLANT_UP"))
 				{
-					new_value = systems[n].coolant_request + 0.5f;
-					if (new_value > 1.0f)
-						new_value = 1.0f;
-					if (new_value < 0.0f)
-						new_value = 0.0f;
-					my_spaceship->commandSetSystemCoolantRequest(ESystem(n), my_spaceship->new_value);
+					my_spaceship->commandSetSystemCoolantRequest(ESystem(n), my_spaceship->systems[n].coolant_request + 0.5f);
 				}	
 				if (key.hotkey == getSystemName(ESystem(n))+ string("_COOLANT_DOWN"))
 				{
-					new_value = systems[n].coolant_request - 0.5f;
-					if (new_value > 1.0f)
-						new_value = 1.0f;
-					if (new_value < 0.0f)
-						new_value = 0.0f;
-					my_spaceship->commandSetSystemCoolantRequest(ESystem(n), my_spaceship->new_value);
+					my_spaceship->commandSetSystemCoolantRequest(ESystem(n), my_spaceship->systems[n].coolant_request - 0.5f);
 				}
 			}
 		}
