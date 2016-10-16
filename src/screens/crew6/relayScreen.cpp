@@ -291,7 +291,7 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
                     current_found = true;
                     continue;
                 }
-                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < radar->getDistance() && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < radar->getDistance() && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeSelectedBy(my_spaceship))
                 {
                     targets.set(obj);
                     // my_spaceship->commandSetTarget(targets.get());
@@ -304,7 +304,7 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
                 {
                     continue;
                 }
-                if (my_spaceship->isEnemy(obj) && sf::length(obj->getPosition() - my_spaceship->getPosition()) < radar->getDistance() && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                if (my_spaceship->isEnemy(obj) && sf::length(obj->getPosition() - my_spaceship->getPosition()) < radar->getDistance() && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeSelectedBy(my_spaceship))
                 {
                     targets.set(obj);
                     // my_spaceship->commandSetTarget(targets.get());
@@ -315,9 +315,10 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
         if (key.hotkey == "NEXT_RELAY")
         {
 			bool current_found = false;
-            foreach(SpaceObject, obj, space_object_list)
-            {
-                if (obj == targets.get())
+			
+            foreach(SpaceObject, obj, my_spaceship->getObjectsInRange(5000.0f))
+			{
+				if (obj == targets.get())
                 {
                     current_found = true;
                     continue;
@@ -327,20 +328,56 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
                 if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < radar->getDistance())
                 {
                     targets.set(obj);
-                    // my_spaceship->commandSetTarget(targets.get());
                     return;
                 }
-            }
-            foreach(SpaceObject, obj, space_object_list)
+			}
+            foreach(SpaceObject, probe, space_object_list)
             {
-                if (obj == targets.get() || obj == my_spaceship)
+				if(P<ScanProbe> probe)
+				{
+					foreach(SpaceObject, obj, probe->getObjectsInRange(5000.0f))
+					{
+						if (obj == targets.get())
+						{
+							current_found = true;
+							continue;
+						}
+						if (obj == my_spaceship)
+							continue;
+						if (current_found && sf::length(obj->getPosition() - probe->getPosition()) < radar->getDistance())
+						{
+							targets.set(obj);
+							return;
+						}
+					}
+				}                
+            }
+			
+            foreach(SpaceObject, obj, my_spaceship->getObjectsInRange(5000.0f))
+			{
+				if (obj == targets.get()  || obj == my_spaceship)
                     continue;
                 if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < radar->getDistance())
                 {
                     targets.set(obj);
-                    // my_spaceship->commandSetTarget(targets.get());
                     return;
                 }
+			}
+            foreach(SpaceObject, probe, space_object_list)
+            {
+				if(P<ScanProbe> probe)
+				{
+					foreach(SpaceObject, obj, probe->getObjectsInRange(5000.0f))
+					{
+						if (obj == targets.get() || obj == my_spaceship)
+							continue;
+						if (sf::length(obj->getPosition() - probe->getPosition()) < radar->getDistance())
+						{
+							targets.set(obj);
+							return;
+						}
+					}
+				}                
             }
 		}
         if (key.hotkey == "LINK_SCIENCE")
