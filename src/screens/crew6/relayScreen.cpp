@@ -316,7 +316,10 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
         if (key.hotkey == "NEXT_RELAY")
         {
 			bool current_found = false;
-			PVector<SpaceObject> list_range = my_spaceship->getObjectsInRange(5000.0f);
+			PVector<SpaceObject> list_range;
+			PVector<SpaceObject> list_range_probe;
+			
+			list_range = my_spaceship->getObjectsInRange(5000.0f);
             foreach(SpaceObject, obj, list_range)
 			{
 				if (obj == targets.get())
@@ -337,7 +340,7 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
 				P<ScanProbe> test = probe;
 				if(test)
 				{
-					PVector<SpaceObject> list_range_probe = probe->getObjectsInRange(5000.0f);
+					list_range_probe = probe->getObjectsInRange(5000.0f);
 					foreach(SpaceObject, obj, list_range_probe)
 					{
 						if (obj == targets.get())
@@ -356,7 +359,7 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
 				}                
             }
 			
-			PVector<SpaceObject> list_range = my_spaceship->getObjectsInRange(5000.0f);
+			list_range = my_spaceship->getObjectsInRange(5000.0f);
             foreach(SpaceObject, obj, list_range)
 			{
 				if (obj == targets.get()  || obj == my_spaceship)
@@ -372,7 +375,7 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
 				P<ScanProbe> test = probe;
 				if(test)
 				{
-					PVector<SpaceObject> list_range_probe = probe->getObjectsInRange(5000.0f);
+					list_range_probe = probe->getObjectsInRange(5000.0f);
 					foreach(SpaceObject, obj, list_range_probe)
 					{
 						if (obj == targets.get() || obj == my_spaceship)
