@@ -260,9 +260,7 @@ std::vector<HotkeyResult> HotkeyConfig::getHotkey(sf::Event::KeyEvent key)
         for(HotkeyConfigItem& item : cat.hotkeys)
         {
             if (item.hotkey.code == key.code && item.hotkey.alt == key.alt && item.hotkey.control == key.control && item.hotkey.shift == key.shift && item.hotkey.system == key.system)
-            {
                 results.emplace_back(cat.key, item.key);
-            }
         }
     }
     return results;
