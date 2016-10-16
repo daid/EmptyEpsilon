@@ -334,10 +334,11 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
 			}
             foreach(SpaceObject, probe, space_object_list)
             {
-				if(P<ScanProbe> probe)
+				P<ScanProbe> test = probe;
+				if(test)
 				{
 					PVector<SpaceObject> list_range_probe = probe->getObjectsInRange(5000.0f);
-					foreach(SpaceObject, obj, list_range2)
+					foreach(SpaceObject, obj, list_range_probe)
 					{
 						if (obj == targets.get())
 						{
@@ -368,7 +369,8 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
 			}
             foreach(SpaceObject, probe, space_object_list)
             {
-				if(P<ScanProbe> probe)
+				P<ScanProbe> test = probe;
+				if(test)
 				{
 					PVector<SpaceObject> list_range_probe = probe->getObjectsInRange(5000.0f);
 					foreach(SpaceObject, obj, list_range_probe)
