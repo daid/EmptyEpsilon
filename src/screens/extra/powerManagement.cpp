@@ -115,6 +115,11 @@ void PowerManagementScreen::onHotkey(const HotkeyResult& key)
 					else
 						my_spaceship->commandSetSystemCoolantRequest(ESystem(n), 0.0f);
 				}
+				if (key.hotkey == getSystemName(ESystem(n))+ string("_RESET"))
+				{
+					my_spaceship->commandSetSystemPowerRequest(ESystem(n), 1.0f);
+					my_spaceship->commandSetSystemCoolantRequest(ESystem(n), 0.0f);
+				}
 			}
 		}
 	}
