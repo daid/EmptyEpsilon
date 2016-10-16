@@ -317,7 +317,7 @@ void RelayScreen::onHotkey(const HotkeyResult& key)
         {
 			bool current_found = false;
 			PVector<SpaceObject> list_range;
-			PVector<SpaceObject> list_range_probe;
+			PVector<SpaceObject> list_range_obj_relai;
 			
 			list_range = my_spaceship->getObjectsInRange(5000.0f);
             foreach(SpaceObject, obj, list_range)
