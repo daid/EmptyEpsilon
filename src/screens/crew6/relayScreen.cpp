@@ -2,6 +2,7 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/scanProbe.h"
+#include "spaceObjects/spaceObject.h"
 #include "scriptInterface.h"
 
 #include "screenComponents/radarView.h"
