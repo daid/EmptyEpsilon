@@ -89,6 +89,15 @@ HotkeyConfig::HotkeyConfig()
     newKey("ACTIVE_AUTO_COOLANT", "Activation Auto coolant");
     newKey("ACTIVE_AUTO_REPAIR", "Activation Auto repair");
     
+    newCategory("POWER_MANAGEMENT", "Power Management");
+	for(int n=0; n<SYS_COUNT; n++)
+	{
+		newKey(getSystemName(ESystem(n))+ string("_POWER_UP"), getSystemName(ESystem(n))+ string(" Power Up"));
+		newKey(getSystemName(ESystem(n))+ string("_POWER_DOWN"), getSystemName(ESystem(n))+ string(" Power Down"));
+		newKey(getSystemName(ESystem(n))+ string("_COOLANT_UP"), getSystemName(ESystem(n))+ string(" Coolant Up"));
+		newKey(getSystemName(ESystem(n))+ string("_COOLANT_DOWN"), getSystemName(ESystem(n))+string(" Coolant Down"));
+	}
+	
     newCategory("SCIENCE", "Science");
     newKey("NEXT_ENEMY_SCAN", "Select next target");
     newKey("NEXT_SCAN", "Select next target (any)");
