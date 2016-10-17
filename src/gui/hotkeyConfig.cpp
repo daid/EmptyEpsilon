@@ -96,6 +96,7 @@ HotkeyConfig::HotkeyConfig()
 		newKey(getSystemName(ESystem(n))+ string("_POWER_DOWN"), getSystemName(ESystem(n))+ string(" Power Down"));
 		newKey(getSystemName(ESystem(n))+ string("_COOLANT_UP"), getSystemName(ESystem(n))+ string(" Coolant Up"));
 		newKey(getSystemName(ESystem(n))+ string("_COOLANT_DOWN"), getSystemName(ESystem(n))+string(" Coolant Down"));
+		newKey(getSystemName(ESystem(n))+ string("_RESET"), getSystemName(ESystem(n))+string(" Reset"));
 	}
 	
     newCategory("SCIENCE", "Science");
