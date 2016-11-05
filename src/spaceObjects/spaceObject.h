@@ -99,6 +99,7 @@ public:
     int scanning_complexity_value;
     int scanning_depth_value;
     string callsign;
+    int oxygen_points;
 
     SpaceObject(float collisionRange, string multiplayerName, float multiplayer_significant_range=-1);
 
