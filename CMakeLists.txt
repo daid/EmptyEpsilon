@@ -18,12 +18,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 # install resources, scripts, and packs to app bundle instead of system dir.
 if(APPLE)
 set(CMAKE_INSTALL_PREFIX "./")
-endif()
-
-# set INSTALL_PREFIX for linux so that the built binary is able to find resources
-if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D INSTALL_PREFIX=\\\"${CMAKE_INSTALL_PREFIX}\\\"")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D INSTALL_PREFIX=\\\"${CMAKE_INSTALL_PREFIX}\\\"")
+elseif(UNIX)
+# Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
+add_definitions(-DRESOURCE_BASE_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/")
 endif()
 
 ## ensure c++11 is used
