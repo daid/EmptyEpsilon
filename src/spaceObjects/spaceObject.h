@@ -168,6 +168,11 @@ public:
     bool takeReputationPoints(float amount);
     void removeReputationPoints(float amount);
     void addReputationPoints(float amount);
+    void setOxygenPoints(float amount);
+    int getOxygenPoints();
+    bool takeOxygenPoints(float amount);
+    void removeOxygenPoints(float amount);
+    void addOxygenPoints(float amount);
     void setCommsScript(string script_name) { this->comms_script_name = script_name; this->comms_script_callback.clear(); }
     void setCommsFunction(ScriptSimpleCallback callback) { this->comms_script_name = ""; this->comms_script_callback = callback; }
     bool areEnemiesInRange(float range);
