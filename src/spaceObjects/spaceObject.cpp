@@ -52,6 +52,8 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, takeReputationPoints);
     /// Add a certain amount of reputation points.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, addReputationPoints);
+    /// Sets the oxygen to a value.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setOxygenPoints);
     /// Return the current amount of oxygen points.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getOxygenPoints);
     /// Take a certain amount of oxygen points, returns true when there are enough points to take. Returns false when there are not enough points and does not lower the points.
@@ -375,6 +377,11 @@ void SpaceObject::addReputationPoints(float amount)
     gameGlobalInfo->reputation_points[faction_id] += amount;
     if (gameGlobalInfo->reputation_points[faction_id] < 0.0)
         gameGlobalInfo->reputation_points[faction_id] = 0.0;
+}
+
+void SpaceObject::setOxygenPoints(float amount)
+{
+    oxygen_points = amount;
 }
 
 int SpaceObject::getOxygenPoints()
