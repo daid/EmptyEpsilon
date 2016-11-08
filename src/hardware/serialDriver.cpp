@@ -422,6 +422,7 @@ void SerialPort::sendBreak()
 {
 #ifdef __WIN32__
     SetCommBreak(handle);
+    Sleep(1);
     ClearCommBreak(handle);
 #endif
 #if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
@@ -537,11 +538,15 @@ string SerialPort::getPseudoDriverName(string port)
 
 std::vector<string> SerialPort::portsByPseudoDriverName(string driver_name)
 {
+    std::vector<string> driver_names = driver_name.split(";");
     std::vector<string> names;
-    for(string port : getAvailablePorts())
+    for(string driver : driver_names)
     {
-        if (getPseudoDriverName(port) == driver_name)
-            names.push_back(port);
+        for(string port : getAvailablePorts())
+        {
+            if (getPseudoDriverName(port) == driver)
+                names.push_back(port);
+        }
     }
     return names;
 }

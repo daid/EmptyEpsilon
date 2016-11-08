@@ -1,5 +1,5 @@
-#ifndef SHIP_AI_H
-#define SHIP_AI_H
+#ifndef AI_H
+#define AI_H
 
 #include <SFML/System.hpp>
 #include "pathPlanner.h"
@@ -82,4 +82,4 @@ protected:
     friend class GameMasterUI;
 };
 
-#endif//SHIP_AI_H
+#endif//AI_H

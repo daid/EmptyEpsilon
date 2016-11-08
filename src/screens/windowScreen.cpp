@@ -43,9 +43,9 @@ void WindowScreen::update(float delta)
     }
 }
 
-void WindowScreen::onKey(sf::Keyboard::Key key, int unicode)
+void WindowScreen::onKey(sf::Event::KeyEvent key, int unicode)
 {
-    switch(key)
+    switch(key.code)
     {
     case sf::Keyboard::Left:
         angle -= 5.0f;

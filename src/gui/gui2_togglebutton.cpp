@@ -24,5 +24,8 @@ void GuiToggleButton::onClick()
 {
     setValue(!value);
     if (toggle_func)
-        toggle_func(value);
+    {
+        func_t f = toggle_func;
+        f(value);
+    }
 }

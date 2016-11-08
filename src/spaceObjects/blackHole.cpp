@@ -15,6 +15,7 @@ BlackHole::BlackHole()
 {
     update_delta = 0.0;
     PathPlannerManager::getInstance()->addAvoidObject(this, 7000);
+    setRadarSignatureInfo(0.9, 0, 0);
 }
 
 void BlackHole::update(float delta)

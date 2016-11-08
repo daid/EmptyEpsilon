@@ -1,5 +1,5 @@
-#ifndef GUI2_PROGRESS_BAR_H
-#define GUI2_PROGRESS_BAR_H
+#ifndef GUI2_PROGRESSBAR_H
+#define GUI2_PROGRESSBAR_H
 
 #include "gui2_element.h"
 
@@ -25,4 +25,4 @@ public:
     GuiProgressbar* setDrawBackground(bool drawBackground);
 };
 
-#endif//GUI2_PROGRESS_BAR_H
+#endif//GUI2_PROGRESSBAR_H

@@ -57,6 +57,7 @@ set(SOURCES
 	src/missileWeaponData.cpp
 	src/factionInfo.cpp
 	src/mesh.cpp
+	src/scenarioInfo.cpp
 	src/repairCrew.cpp
 	src/GMScriptCallback.cpp
 	src/tutorialGame.cpp
@@ -90,6 +91,7 @@ set(SOURCES
 	src/screens/gm/tweak.cpp
 	src/screenComponents/aimLock.cpp
 	src/screenComponents/alertOverlay.cpp
+	src/screenComponents/helpOverlay.cpp
 	src/screenComponents/missileTubeControls.cpp
 	src/screenComponents/selfDestructIndicator.cpp
 	src/screenComponents/viewport3d.cpp
@@ -126,7 +128,11 @@ set(SOURCES
 	src/screenComponents/databaseView.cpp
 	src/screenComponents/shipsLogControl.cpp
 	src/screenComponents/onScreenKeyboard.cpp
+	src/screenComponents/hackingDialog.cpp
+	src/screenComponents/customShipFunctions.cpp
+	src/screenComponents/scrollingBanner.cpp
 	src/gui/colorConfig.cpp
+	src/gui/hotkeyConfig.cpp
 	src/gui/mouseRenderer.cpp
 	src/gui/scriptError.cpp
 	src/gui/gui2_slider.cpp
@@ -177,6 +183,7 @@ set(SOURCES
 	src/spaceObjects/nuke.cpp
 	src/spaceObjects/artifact.cpp
 	src/spaceObjects/shipTemplateBasedObject.cpp
+	src/spaceObjects/planet.cpp
 	src/spaceObjects/spaceshipParts/beamWeapon.cpp
 	src/spaceObjects/spaceshipParts/weaponTube.cpp
 	src/ai/fighterAI.cpp
@@ -272,6 +279,7 @@ foreach(SP_SOURCE
 	src/networkAudioStream.cpp
 	src/engine.cpp
 	src/windowManager.cpp
+	src/shaderManager.cpp
 	src/GL/glew.c
 	src/lua/lundump.c
 	src/lua/lmem.c

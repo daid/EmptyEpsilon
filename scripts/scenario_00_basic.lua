@@ -1,18 +1,17 @@
 -- Name: Basic
 -- Description: Basic scenario. A few random stations, with random stuff around them, are under attack by enemies. Kill all enemies to win.
+-- Type: Basic
 -- Variation[Empty]: Places no enemies. Recommended for GM-controlled scenarios and rookie crew orientation. The scenario continues until the GM declares victory or all Human Navy craft are destroyed.
 -- Variation[Easy]: Places fewer enemies. Recommended for inexperienced crews.
 -- Variation[Hard]: Places more enemies. Recommended if you have multiple player-controlled ships.
 -- Variation[Extreme]: Places many enemies. You're pretty surely overwhelmed.
 
-function vectorFromAngle(angle, length)
-	return math.cos(angle / 180 * math.pi) * length, math.sin(angle / 180 * math.pi) * length
-end
-
-function setCirclePos(obj, x, y, angle, distance)
-	dx, dy = vectorFromAngle(angle, distance)
-	return obj:setPosition(x + dx, y + dy)
-end
+require("utils.lua")
+-- For this scenario, utils.lua provides:
+--   vectorFromAngle(angle, length)
+--      Returns a relative vector (x, y coordinates)
+--   setCirclePos(obj, x, y, angle, distance)
+--      Returns the object with its position set to the resulting coordinates.
 
 -- Add an enemy wave.
 -- enemyList: A table containing enemy ship objects.
@@ -71,16 +70,26 @@ function setWaveDistance(enemy_group_count)
 end
 
 function init()
+	-- Spawn a player Atlantis.
+	player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
+
 	enemyList = {}
 	friendlyList = {}
+	stationList = {}
 
 	-- Randomly distribute 3 allied stations throughout the region.
 	n = 0
-	table.insert(friendlyList, setCirclePos(SpaceStation():setTemplate('Small Station'):setRotation(random(0, 360)):setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
+	station_1 = SpaceStation():setTemplate('Small Station'):setRotation(random(0, 360)):setFaction("Human Navy")
+	table.insert(stationList, station_1)
+	table.insert(friendlyList, setCirclePos(station_1, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
 	n = 1
-	table.insert(friendlyList, setCirclePos(SpaceStation():setTemplate('Medium Station'):setRotation(random(0, 360)):setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
+	table.insert(stationList, station_2)
+	station_2 = SpaceStation():setTemplate('Medium Station'):setRotation(random(0, 360)):setFaction("Human Navy")
+	table.insert(friendlyList, setCirclePos(station_2, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
 	n = 2
-	table.insert(friendlyList, setCirclePos(SpaceStation():setTemplate('Large Station'):setRotation(random(0, 360)):setFaction("Human Navy"), 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
+	table.insert(stationList, station_3)
+	station_3 = SpaceStation():setTemplate('Large Station'):setRotation(random(0, 360)):setFaction("Human Navy")
+	table.insert(friendlyList, setCirclePos(station_3, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
 
 	-- Start the players with 300 reputation.
 	friendlyList[1]:addReputationPoints(300.0)
@@ -137,7 +146,7 @@ function init()
 		d = random(15000, 20000 + math.random(20) * 1500)
 		friendlyShip = {'Phobos T3','MU52 Hornet','Piranha F12'}
 		friendlyShipIndex = math.random(#friendlyShip)
-		table.insert(friendlyList, setCirclePos(CpuShip():setTemplate(friendlyShip[friendlyShipIndex]):setRotation(a):setFaction("Human Navy"):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+		table.insert(friendlyList, setCirclePos(CpuShip():setTemplate(friendlyShip[friendlyShipIndex]):setRotation(a):setFaction("Human Navy"):orderRoaming():setScanned(true), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 	end)
 
 	-- Let the GM declare the Humans (players) victorious.
@@ -174,13 +183,24 @@ function init()
 	for cnt=1,random(2, 5) do
 		a = random(0, 360)
 		a2 = random(0, 360)
+		adiff = math.abs(a2 - a)
 		d = random(3000, 40000)
 		x, y = vectorFromAngle(a, d)
 
 		for acnt=1,50 do
 			dx1, dy1 = vectorFromAngle(a2, random(-1000, 1000))
 			dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
-			Asteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2):setSize(random(100, 500))
+			posx = x + dx1 + dx2
+			posy = x + dy1 + dy2
+			-- Avoid spawning asteroids within 1U of the player start position or
+			-- 2U of any station.
+			if math.abs(posx) > 1000 and math.abs(posy) > 1000 then
+				for i,station in ipairs(stationList) do
+					if distance(station, posx, posy) > 2000 then
+						Asteroid():setPosition(posx, posy):setSize(random(100, 500))
+					end
+				end
+			end
 		end
 
 		for acnt=1,100 do
@@ -212,6 +232,18 @@ function init()
 	a = random(0, 360)
 	d = random(10000, 45000)
 	x, y = vectorFromAngle(a, d)
+	-- Watching a station fall into a black hole to start the game never gets old,
+	-- but players hate it. Avoid spawning black holes too close to stations.
+	spawn_hole = false
+	while not spawn_hole do
+		for i,station in ipairs(stationList) do
+			if distance(station, x, y) > 3000 then
+				spawn_hole = true
+			else
+				spawn_hole = false
+			end
+		end
+	end
 	BlackHole():setPosition(x, y)
 
 	-- Spawn random neutral transports.

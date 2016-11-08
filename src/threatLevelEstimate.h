@@ -1,5 +1,5 @@
-#ifndef THREAD_LEVEL_ESTIMATE_H
-#define THREAD_LEVEL_ESTIMATE_H
+#ifndef THREAT_LEVEL_ESTIMATE_H
+#define THREAT_LEVEL_ESTIMATE_H
 
 #include "engine.h"
 
@@ -30,4 +30,4 @@ private:
     float getThreatFor(P<SpaceShip> ship);
 };
 
-#endif//THREAD_LEVEL_ESTIMATE_H
+#endif//THREAT_LEVEL_ESTIMATE_H

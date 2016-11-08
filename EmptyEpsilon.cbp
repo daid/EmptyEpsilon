@@ -284,6 +284,7 @@
 		<Unit filename="../SeriousProton/src/clipboard.h" />
 		<Unit filename="../SeriousProton/src/collisionable.cpp" />
 		<Unit filename="../SeriousProton/src/collisionable.h" />
+		<Unit filename="../SeriousProton/src/dtoa/dtoa_milo.h" />
 		<Unit filename="../SeriousProton/src/engine.cpp" />
 		<Unit filename="../SeriousProton/src/engine.h" />
 		<Unit filename="../SeriousProton/src/event.cpp" />
@@ -433,6 +434,8 @@
 		<Unit filename="../SeriousProton/src/scriptInterface.h" />
 		<Unit filename="../SeriousProton/src/scriptInterfaceMagic.cpp" />
 		<Unit filename="../SeriousProton/src/scriptInterfaceMagic.h" />
+		<Unit filename="../SeriousProton/src/shaderManager.cpp" />
+		<Unit filename="../SeriousProton/src/shaderManager.h" />
 		<Unit filename="../SeriousProton/src/soundManager.cpp" />
 		<Unit filename="../SeriousProton/src/soundManager.h" />
 		<Unit filename="../SeriousProton/src/stringImproved.cpp" />
@@ -522,6 +525,8 @@
 		<Unit filename="src/gui/gui2_textentry.h" />
 		<Unit filename="src/gui/gui2_togglebutton.cpp" />
 		<Unit filename="src/gui/gui2_togglebutton.h" />
+		<Unit filename="src/gui/hotkeyConfig.cpp" />
+		<Unit filename="src/gui/hotkeyConfig.h" />
 		<Unit filename="src/gui/mouseRenderer.cpp" />
 		<Unit filename="src/gui/mouseRenderer.h" />
 		<Unit filename="src/gui/scriptError.cpp" />
@@ -585,6 +590,8 @@
 		<Unit filename="src/preferenceManager.h" />
 		<Unit filename="src/repairCrew.cpp" />
 		<Unit filename="src/repairCrew.h" />
+		<Unit filename="src/scenarioInfo.cpp" />
+		<Unit filename="src/scenarioInfo.h" />
 		<Unit filename="src/scienceDatabase.cpp" />
 		<Unit filename="src/scienceDatabase.h" />
 		<Unit filename="src/screenComponents/aimLock.cpp" />
@@ -599,6 +606,8 @@
 		<Unit filename="src/screenComponents/combatManeuver.h" />
 		<Unit filename="src/screenComponents/commsOverlay.cpp" />
 		<Unit filename="src/screenComponents/commsOverlay.h" />
+		<Unit filename="src/screenComponents/customShipFunctions.cpp" />
+		<Unit filename="src/screenComponents/customShipFunctions.h" />
 		<Unit filename="src/screenComponents/databaseView.cpp" />
 		<Unit filename="src/screenComponents/databaseView.h" />
 		<Unit filename="src/screenComponents/dockingButton.cpp" />
@@ -607,6 +616,10 @@
 		<Unit filename="src/screenComponents/frequencyCurve.h" />
 		<Unit filename="src/screenComponents/globalMessage.cpp" />
 		<Unit filename="src/screenComponents/globalMessage.h" />
+		<Unit filename="src/screenComponents/hackingDialog.cpp" />
+		<Unit filename="src/screenComponents/hackingDialog.h" />
+		<Unit filename="src/screenComponents/helpOverlay.cpp" />
+		<Unit filename="src/screenComponents/helpOverlay.h" />
 		<Unit filename="src/screenComponents/impulseControls.cpp" />
 		<Unit filename="src/screenComponents/impulseControls.h" />
 		<Unit filename="src/screenComponents/indicatorOverlays.cpp" />
@@ -637,6 +650,8 @@
 		<Unit filename="src/screenComponents/scanTargetButton.h" />
 		<Unit filename="src/screenComponents/scanningDialog.cpp" />
 		<Unit filename="src/screenComponents/scanningDialog.h" />
+		<Unit filename="src/screenComponents/scrollingBanner.cpp" />
+		<Unit filename="src/screenComponents/scrollingBanner.h" />
 		<Unit filename="src/screenComponents/selfDestructButton.cpp" />
 		<Unit filename="src/screenComponents/selfDestructButton.h" />
 		<Unit filename="src/screenComponents/selfDestructEntry.cpp" />
@@ -738,6 +753,8 @@
 		<Unit filename="src/spaceObjects/nebula.h" />
 		<Unit filename="src/spaceObjects/nuke.cpp" />
 		<Unit filename="src/spaceObjects/nuke.h" />
+		<Unit filename="src/spaceObjects/planet.cpp" />
+		<Unit filename="src/spaceObjects/planet.h" />
 		<Unit filename="src/spaceObjects/playerSpaceship.cpp" />
 		<Unit filename="src/spaceObjects/playerSpaceship.h" />
 		<Unit filename="src/spaceObjects/playerSpaceship.hpp" />

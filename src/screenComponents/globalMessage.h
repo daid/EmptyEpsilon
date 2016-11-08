@@ -1,5 +1,5 @@
-#ifndef GUI_GLOBAL_MESSAGE_H
-#define GUI_GLOBAL_MESSAGE_H
+#ifndef GLOBAL_MESSAGE_H
+#define GLOBAL_MESSAGE_H
 
 #include "gui/gui2_element.h"
 
@@ -17,4 +17,4 @@ public:
     virtual void onDraw(sf::RenderTarget& window);
 };
 
-#endif//GUI_SELF_DESTRUCT_INDICATOR_H
+#endif//GLOBAL_MESSAGE_H

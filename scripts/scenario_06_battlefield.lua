@@ -1,5 +1,6 @@
 -- Name: Battlefield
 -- Description: The Humans are fighting off the Exuari who are on all out war on a neutral station. (This scenario is mostly for performance testing)
+-- Type: Basic
 -- Variation[Large]: Larger battle, normally it's about 30 vs 30 ships. This increases this to 100 vs 100 ships.
 -- Variation[Huge]: Huge battle, normally it's about 30 vs 30 ships. This increases this to 500 vs 500 ships.
 

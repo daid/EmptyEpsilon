@@ -1,5 +1,5 @@
-#ifndef GUI_AIM_LOCK_H
-#define GUI_AIM_LOCK_H
+#ifndef AIM_LOCK_H
+#define AIM_LOCK_H
 
 #include "gui/gui2_togglebutton.h"
 
@@ -10,9 +10,13 @@ class AimLockButton : public GuiToggleButton
 {
 public:
     AimLockButton(GuiContainer* owner, string id, GuiMissileTubeControls* tube_controls, GuiRotationDial* missile_aim);
+    
+    virtual void onHotkey(const HotkeyResult& key) override;
 private:
     GuiMissileTubeControls* tube_controls;
     GuiRotationDial* missile_aim;
+    
+    void setAimLock(bool value);
 };
 
-#endif//GUI_AIM_LOCK_H
+#endif//AIM_LOCK_H

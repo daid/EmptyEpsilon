@@ -56,6 +56,8 @@ private:
 public:
     string global_message;
     float global_message_timeout;
+    
+    string banner_string;
 
     std::vector<float> reputation_points;
     NebulaInfo nebula_info[max_nebulas];

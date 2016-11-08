@@ -1,5 +1,5 @@
-#ifndef GUI_RADAR_VIEW_H
-#define GUI_RADAR_VIEW_H
+#ifndef RADAR_VIEW_H
+#define RADAR_VIEW_H
 
 #include "gui/gui2_element.h"
 
@@ -128,4 +128,4 @@ private:
     void drawRadarCutoff(sf::RenderTarget& window);
 };
 
-#endif//GUI_RADAR_VIEW_H
+#endif//RADAR_VIEW_H

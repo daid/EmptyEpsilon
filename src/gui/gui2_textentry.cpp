@@ -26,20 +26,28 @@ bool GuiTextEntry::onMouseDown(sf::Vector2f position)
     return true;
 }
 
-bool GuiTextEntry::onKey(sf::Keyboard::Key key, int unicode)
+bool GuiTextEntry::onKey(sf::Event::KeyEvent key, int unicode)
 {
-    if (key == sf::Keyboard::BackSpace && text.length() > 0)
+    if (key.code == sf::Keyboard::BackSpace && text.length() > 0)
     {
         text = text.substr(0, -1);
         if (func)
-            func(text);
+        {
+            func_t f = func;
+            f(text);
+        }
+        return true;
     }
-    if (key == sf::Keyboard::Return)
+    if (key.code == sf::Keyboard::Return)
     {
         if (enter_func)
-            enter_func(text);
+        {
+            func_t f = enter_func;
+            f(text);
+        }
+        return true;
     }
-    if (key == sf::Keyboard::V && (InputHandler::keyboardIsDown(sf::Keyboard::LControl) || InputHandler::keyboardIsDown(sf::Keyboard::RControl)))
+    if (key.code == sf::Keyboard::V && key.control)
     {
         for(int unicode : Clipboard::readClipboard())
         {
@@ -47,13 +55,21 @@ bool GuiTextEntry::onKey(sf::Keyboard::Key key, int unicode)
                 text += string(char(unicode));
         }
         if (func)
-            func(text);
+        {
+            func_t f = func;
+            f(text);
+        }
+        return true;
     }
     if (unicode > 31 && unicode < 128)
     {
         text += string(char(unicode));
         if (func)
-            func(text);
+        {
+            func_t f = func;
+            f(text);
+        }
+        return true;
     }
     return true;
 }

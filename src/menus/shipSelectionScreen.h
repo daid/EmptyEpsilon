@@ -7,18 +7,32 @@
 class GuiAutoLayout;
 class GuiLabel;
 class GuiListbox;
+class GuiOverlay;
 class GuiSelector;
 class GuiSlider;
+class GuiPanel;
 class GuiButton;
 class GuiToggleButton;
+class GuiTextEntry;
 
 class ShipSelectionScreen : public GuiCanvas, public Updatable
 {
 private:
+    GuiAutoLayout* container;
+    GuiElement* left_container;
+    GuiElement* right_container;
+
     GuiLabel* no_ships_label;
     GuiListbox* player_ship_list;
     GuiButton* ready_button;
     GuiSelector* crew_type_selector;
+    GuiOverlay* password_overlay;
+    GuiLabel* password_label;
+    GuiPanel* password_entry_box;
+    GuiTextEntry* password_entry;
+    GuiButton* password_entry_ok;
+    GuiButton* password_cancel;
+    GuiButton* password_confirmation;
     
     GuiToggleButton* main_screen_button;
     GuiToggleButton* crew_position_button[max_crew_positions];

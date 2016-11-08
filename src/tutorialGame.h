@@ -15,19 +15,21 @@ class TutorialGame : public Updatable, public GuiCanvas
     GuiElement* viewport;
     GuiRadarView* tactical_radar;
     GuiRadarView* long_range_radar;
-    GuiElement* station_screen[5];
+    GuiElement* station_screen[8];
  
     P<ScriptObject> script;
     GuiPanel* frame;
     GuiScrollText* text;
     GuiButton* next_button;
+    
+    bool repeated_tutorial;
 public:
     ScriptSimpleCallback _onNext;
     
-    TutorialGame();
+    TutorialGame(bool repeated_tutorial = false);
     
     virtual void update(float delta) override;
-    virtual void onKey(sf::Keyboard::Key key, int unicode) override;
+    virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
     
     void setPlayerShip(P<PlayerSpaceship> ship);
     

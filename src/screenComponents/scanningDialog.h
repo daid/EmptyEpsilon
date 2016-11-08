@@ -1,5 +1,5 @@
-#ifndef GUI_SCANNING_DIALOG_H
-#define GUI_SCANNING_DIALOG_H
+#ifndef SCANNING_DIALOG_H
+#define SCANNING_DIALOG_H
 
 #include "gui/gui2_element.h"
 #include "signalQualityIndicator.h"
@@ -35,4 +35,4 @@ public:
     void updateSignal();
 };
 
-#endif//GUI_SCANNING_DIALOG_H
+#endif//SCANNING_DIALOG_H

@@ -73,8 +73,8 @@ void ModelInfo::renderOverlay(sf::Texture* texture, float alpha)
     glTranslatef(data->mesh_offset.x, data->mesh_offset.y, data->mesh_offset.z);
     glDepthFunc(GL_EQUAL);
     glColor4f(alpha, alpha, alpha, 1);
-    basicShader->setParameter("textureMap", *texture);
-    sf::Shader::bind(basicShader);
+    ShaderManager::getShader("basicShader")->setParameter("textureMap", *texture);
+    sf::Shader::bind(ShaderManager::getShader("basicShader"));
     data->mesh->render();
     glDepthFunc(GL_LESS);
 
@@ -85,8 +85,8 @@ void ModelInfo::renderOverlay(sf::Texture* texture, float alpha)
 void ModelInfo::renderShield(float alpha)
 {
 #if FEATURE_3D_RENDERING
-    basicShader->setParameter("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
-    sf::Shader::bind(basicShader);
+    ShaderManager::getShader("basicShader")->setParameter("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
+    sf::Shader::bind(ShaderManager::getShader("basicShader"));
 
     glPushMatrix();
     glColor4f(alpha, alpha, alpha, 1);
@@ -103,8 +103,8 @@ void ModelInfo::renderShield(float alpha, float angle)
 #if FEATURE_3D_RENDERING
     if (!data) return;
 
-    basicShader->setParameter("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
-    sf::Shader::bind(basicShader);
+    ShaderManager::getShader("basicShader")->setParameter("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
+    sf::Shader::bind(ShaderManager::getShader("basicShader"));
 
     glPushMatrix();
     glColor4f(alpha, alpha, alpha, 1);

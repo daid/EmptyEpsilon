@@ -17,7 +17,9 @@ GuiShipDestroyedPopup::GuiShipDestroyedPopup(GuiCanvas* owner)
     
     (new GuiLabel(frame, "SHIP_DESTROYED_TEXT", "SHIP DESTROYED!", 70))->setPosition(0, -25, ACenter)->setSize(0, 0);
     (new GuiButton(frame, "SHIP_DESTROYED_BUTTON", "Return", [this]() {
-        this->owner->onKey(sf::Keyboard::Home, -1);
+        this->owner->destroy();
+        soundManager->stopMusic();
+        returnToShipSelection();
     }))->setPosition(0, 50, ACenter)->setSize(300, 50);
     
     show_timeout.restart();

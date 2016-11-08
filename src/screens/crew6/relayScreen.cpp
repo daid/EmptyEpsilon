@@ -8,6 +8,8 @@
 #include "screenComponents/openCommsButton.h"
 #include "screenComponents/commsOverlay.h"
 #include "screenComponents/shipsLogControl.h"
+#include "screenComponents/hackingDialog.h"
+#include "screenComponents/customShipFunctions.h"
 
 #include "gui/gui2_autolayout.h"
 #include "gui/gui2_keyvaluedisplay.h"
@@ -88,9 +90,24 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 30);
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
+    // Option buttons for comms, waypoints, and probes.
     option_buttons = new GuiAutoLayout(this, "BUTTONS", GuiAutoLayout::LayoutVerticalTopToBottom);
     option_buttons->setPosition(20, 50, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
+
+    // Open comms button.
     (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", &targets))->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Hack target
+    hack_target_button = new GuiButton(option_buttons, "HACK_TARGET", "Start hacking", [this](){
+        P<SpaceObject> target = targets.get();
+        if (my_spaceship && target && target->canBeHackedBy(my_spaceship))
+        {
+            hacking_dialog->open(target);
+        }
+    });
+    hack_target_button->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Link probe to science button.
     link_to_science_button = new GuiToggleButton(option_buttons, "LINK_TO_SCIENCE", "Link to Science", [this](bool value){
         if (value)
             my_spaceship->commandSetScienceLink(targets.get()->getMultiplayerId());
@@ -98,10 +115,13 @@ RelayScreen::RelayScreen(GuiContainer* owner)
             my_spaceship->commandSetScienceLink(-1);
     });
     link_to_science_button->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Manage waypoints.
     (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", "Place Waypoint", [this]() {
         mode = WaypointPlacement;
         option_buttons->hide();
     }))->setSize(GuiElement::GuiSizeMax, 50);
+
     delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", "Delete Waypoint", [this]() {
         if (my_spaceship && targets.getWaypointIndex() >= 0)
         {
@@ -109,17 +129,23 @@ RelayScreen::RelayScreen(GuiContainer* owner)
         }
     });
     delete_waypoint_button->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Launch probe button.
     launch_probe_button = new GuiButton(option_buttons, "LAUNCH_PROBE_BUTTON", "Launch Probe", [this]() {
         mode = LaunchProbe;
         option_buttons->hide();
     });
     launch_probe_button->setSize(GuiElement::GuiSizeMax, 50);
 
+    // Reputation display.
     info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.7, "Reputation:", "");
     info_reputation->setSize(GuiElement::GuiSizeMax, 40);
 
+    // Bottom layout.
     GuiAutoLayout* layout = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutVerticalBottomToTop);
     layout->setPosition(-20, -70, ABottomRight)->setSize(300, GuiElement::GuiSizeMax);
+
+    // Alert level buttons.
     alert_level_button = new GuiToggleButton(layout, "", "Alert level", [this](bool value)
     {
         for(GuiButton* button : alert_level_buttons)
@@ -142,6 +168,10 @@ RelayScreen::RelayScreen(GuiContainer* owner)
         alert_button->setSize(GuiElement::GuiSizeMax, 50);
         alert_level_buttons.push_back(alert_button);
     }
+
+    (new GuiCustomShipFunctions(this, relayOfficer, ""))->setPosition(-20, 240, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+
+    hacking_dialog = new GuiHackingDialog(this, "");
 
     new ShipsLog(this);
 
@@ -223,7 +253,14 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
             link_to_science_button->setValue(false);
             link_to_science_button->disable();
         }
+        if (obj->canBeHackedBy(my_spaceship))
+        {
+            hack_target_button->enable();
+        }else{
+            hack_target_button->disable();
+        }
     }else{
+        hack_target_button->disable();
         link_to_science_button->disable();
         link_to_science_button->setValue(false);
         info_callsign->setValue("-");

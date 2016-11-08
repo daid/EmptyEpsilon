@@ -1,5 +1,5 @@
-#ifndef DATABASE_VIEW_COMPONENT_H
-#define DATABASE_VIEW_COMPONENT_H
+#ifndef DATABASE_VIEW_H
+#define DATABASE_VIEW_H
 
 #include "gui/gui2_element.h"
 
@@ -24,4 +24,4 @@ private:
     GuiElement* database_entry;
 };
 
-#endif//DATABASE_VIEW_COMPONENT_H
+#endif//DATABASE_VIEW_H

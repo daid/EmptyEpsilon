@@ -21,6 +21,8 @@ Asteroid::Asteroid()
     rotation_speed = random(0.1, 0.8);
     z = random(-50, 50);
     size = getRadius();
+    model_number = irandom(1, 10);
+    setRadarSignatureInfo(0.05, 0, 0);
 
     registerMemberReplication(&z);
     registerMemberReplication(&size);
@@ -37,9 +39,11 @@ void Asteroid::draw3D()
     glTranslatef(0, 0, z);
     glRotatef(engine->getElapsedTime() * rotation_speed, 0, 0, 1);
     glScalef(getRadius(), getRadius(), getRadius());
-    simpleObjectShader->setParameter("baseMap", *textureManager.getTexture("asteroid.png"));
-    sf::Shader::bind(simpleObjectShader);
-    Mesh* m = Mesh::getMesh("asteroid.obj");
+    sf::Shader* shader = ShaderManager::getShader("objectShaderBS");
+    shader->setParameter("baseMap", *textureManager.getTexture("Astroid_" + string(model_number) + "_d.png"));
+    shader->setParameter("specularMap", *textureManager.getTexture("Astroid_" + string(model_number) + "_s.png"));
+    sf::Shader::bind(shader);
+    Mesh* m = Mesh::getMesh("Astroid_" + string(model_number) + ".model");
     m->render();
 #endif//FEATURE_3D_RENDERING
 }
@@ -101,6 +105,7 @@ VisualAsteroid::VisualAsteroid()
         z = -z;
 
     size = getRadius();
+    model_number = irandom(1, 10);
 
     registerMemberReplication(&z);
     registerMemberReplication(&size);
@@ -115,9 +120,11 @@ void VisualAsteroid::draw3D()
     glTranslatef(0, 0, z);
     glRotatef(engine->getElapsedTime() * rotation_speed, 0, 0, 1);
     glScalef(getRadius(), getRadius(), getRadius());
-    simpleObjectShader->setParameter("baseMap", *textureManager.getTexture("asteroid.png"));
-    sf::Shader::bind(simpleObjectShader);
-    Mesh* m = Mesh::getMesh("asteroid.obj");
+    sf::Shader* shader = ShaderManager::getShader("objectShaderBS");
+    shader->setParameter("baseMap", *textureManager.getTexture("Astroid_" + string(model_number) + "_d.png"));
+    shader->setParameter("specularMap", *textureManager.getTexture("Astroid_" + string(model_number) + "_s.png"));
+    sf::Shader::bind(shader);
+    Mesh* m = Mesh::getMesh("Astroid_" + string(model_number) + ".model");
     m->render();
 #endif//FEATURE_3D_RENDERING
 }

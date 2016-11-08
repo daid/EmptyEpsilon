@@ -7,6 +7,7 @@
 #include "gui/mouseRenderer.h"
 #include "gui/debugRenderer.h"
 #include "gui/colorConfig.h"
+#include "gui/hotkeyConfig.h"
 #include "menus/mainMenus.h"
 #include "menus/autoConnectScreen.h"
 #include "menus/shipSelectionScreen.h"
@@ -21,6 +22,7 @@
 #include "httpScriptAccess.h"
 #include "preferenceManager.h"
 #include "networkRecorder.h"
+#include "tutorialGame.h"
 
 #include "hardware/hardwareController.h"
 
@@ -40,10 +42,6 @@
 sf::Vector3f camera_position;
 float camera_yaw;
 float camera_pitch;
-sf::Shader* objectShader;
-sf::Shader* simpleObjectShader;
-sf::Shader* basicShader;
-sf::Shader* billboardShader;
 sf::Font* main_font;
 sf::Font* bold_font;
 RenderLayer* backgroundLayer;
@@ -170,6 +168,7 @@ int main(int argc, char** argv)
     }
 
     colorConfig.load();
+    hotkeys.load();
 
     if (PreferencesManager::get("headless") == "")
     {
@@ -224,6 +223,7 @@ int main(int argc, char** argv)
     }
 
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
+    soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());
 
     if (PreferencesManager::get("disable_shaders").toInt())
         PostProcessor::setEnable(false);
@@ -235,27 +235,6 @@ int main(int argc, char** argv)
     P<ResourceStream> bold_font_stream = getResourceStream("gui/fonts/BebasNeue Bold.otf");
     bold_font = new sf::Font();
     bold_font->loadFromStream(**bold_font_stream);
-
-    if (sf::Shader::isAvailable())
-    {
-        objectShader = new sf::Shader();
-        simpleObjectShader = new sf::Shader();
-        basicShader = new sf::Shader();
-        billboardShader = new sf::Shader();
-
-        P<ResourceStream> vertexStream = getResourceStream("objectShader.vert");
-        P<ResourceStream> fragmentStream = getResourceStream("objectShader.frag");
-        objectShader->loadFromStream(**vertexStream, **fragmentStream);
-        vertexStream = getResourceStream("simpleObjectShader.vert");
-        fragmentStream = getResourceStream("simpleObjectShader.frag");
-        simpleObjectShader->loadFromStream(**vertexStream, **fragmentStream);
-        vertexStream = getResourceStream("basicShader.vert");
-        fragmentStream = getResourceStream("basicShader.frag");
-        basicShader->loadFromStream(**vertexStream, **fragmentStream);
-        vertexStream = getResourceStream("billboardShader.vert");
-        fragmentStream = getResourceStream("billboardShader.frag");
-        billboardShader->loadFromStream(**vertexStream, **fragmentStream);
-    }
 
     {
         P<ScriptObject> modelDataScript = new ScriptObject("model_data.lua");
@@ -309,8 +288,9 @@ int main(int argc, char** argv)
         PreferencesManager::set("fullscreen", windowManager->isFullscreen() ? 1 : 0);
     }
 
-    // Set the default music_volume option to the current volume.
+    // Set the default music_volume and sound_volume to the current volume.
     PreferencesManager::set("music_volume", soundManager->getMusicVolume());
+    PreferencesManager::set("sound_volume", soundManager->getMasterSoundVolume());
 
     // Enable music on the main screen only by default.
     if (PreferencesManager::get("music_enabled").empty())
@@ -365,6 +345,10 @@ void returnToMainMenu()
     else if (PreferencesManager::get("touchcalib").toInt())
     {
         new MouseCalibrator(PreferencesManager::get("touchcalibfile"));
+    }
+    else if (PreferencesManager::get("tutorial").toInt())
+    {
+        new TutorialGame(true);
     }else{
         new MainMenu();
     }

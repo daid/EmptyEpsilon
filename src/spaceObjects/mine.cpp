@@ -21,6 +21,7 @@ Mine::Mine()
     triggerTimeout = triggerDelay;
     ejectTimeout = 0.0;
     particleTimeout = 0.0;
+    setRadarSignatureInfo(0.0, 0.05, 0.0);
 
     PathPlannerManager::getInstance()->addAvoidObject(this, trigger_range * 1.2f);
 }

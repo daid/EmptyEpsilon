@@ -38,3 +38,8 @@ If you are a coder and want to contribute, there are a few things to take into a
 ### Art
 
 There is no clear goal where this game is going. This means that there is no formal game, art, or asset design. If you have something that you would like to see in this game (or want to make something), drop us a line. We'd love to see what you can do and how you can help improve the game.
+
+
+## Building
+
+See https://github.com/daid/EmptyEpsilon/wiki/Build-from-sources

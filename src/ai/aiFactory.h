@@ -1,5 +1,5 @@
-#ifndef SHIP_AI_FACTORY_H
-#define SHIP_AI_FACTORY_H
+#ifndef AI_FACTORY_H
+#define AI_FACTORY_H
 
 #include "engine.h"
 
@@ -26,4 +26,4 @@ public:
     static ShipAI* c ## _factory_function (CpuShip* owner) { return new c(owner); } \
     ShipAIFactory c ## _factory(n, c ## _factory_function )
 
-#endif//SHIP_AI_FACTORY_H
+#endif//AI_FACTORY_H

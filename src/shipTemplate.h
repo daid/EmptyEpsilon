@@ -85,6 +85,9 @@ public:
      * List of ship classes that can dock with this ship. (only used for ship2ship docking)
      */
     std::unordered_set<string> can_be_docked_by_class;
+    bool shares_energy_with_docked;
+    bool repair_docked;
+    
     float energy_storage_amount;
     int repair_crew_count;
     string default_ai_name;
@@ -116,12 +119,15 @@ public:
     void setModel(string model_name);
     void setDefaultAI(string default_ai_name);
     void setDockClasses(std::vector<string> classes);
+    void setSharesEnergyWithDocked(bool enabled);
+    void setRepairDocked(bool enabled);
     void setMesh(string model, string color_texture, string specular_texture, string illumination_texture);
     void setEnergyStorage(float energy_amount);
     void setRepairCrewCount(int amount);
 
     void setBeam(int index, float arc, float direction, float range, float cycle_time, float damage);
     void setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage);
+    void setBeamWeaponTurret(int index, float arc, float direction, float rotation_rate);
 
     /**
      * Convenience function to set the texture of a beam by index.

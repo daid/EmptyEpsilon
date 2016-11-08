@@ -12,5 +12,4 @@ public:
     virtual bool onMouseDown(sf::Vector2f position) override;
 };
 
-#endif//GUI2_BOX_H
-
+#endif//GUI2_PANEL_H

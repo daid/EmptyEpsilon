@@ -1,5 +1,6 @@
 -- Name: Surrounded
 -- Description: You are surrounded by astroids, enemies and mines.
+-- Type: Basic
 
 function setCirclePos(obj, angle, distance)
 	obj:setPosition(math.sin(angle / 180 * math.pi) * distance, -math.cos(angle / 180 * math.pi) * distance)

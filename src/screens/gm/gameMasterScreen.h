@@ -8,7 +8,7 @@
 
 class GuiGlobalMessageEntry;
 class GuiObjectCreationScreen;
-class GuiShipTweak;
+class GuiObjectTweak;
 class GuiRadarView;
 class GuiOverlay;
 class GuiSelector;
@@ -16,6 +16,7 @@ class GuiAutoLayout;
 class GuiKeyValueDisplay;
 class GuiListbox;
 class GuiButton;
+class GuiToggleButton;
 class GuiTextEntry;
 class GameMasterChatDialog;
 
@@ -32,15 +33,21 @@ private:
     std::vector<GameMasterChatDialog*> chat_dialog_per_ship;
     GuiGlobalMessageEntry* global_message_entry;
     GuiObjectCreationScreen* object_creation_screen;
-    GuiShipTweak* ship_tweak_dialog;
+    GuiObjectTweak* player_tweak_dialog;
+    GuiObjectTweak* ship_tweak_dialog;
+    GuiObjectTweak* object_tweak_dialog;
     
     GuiAutoLayout* info_layout;
     std::vector<GuiKeyValueDisplay*> info_items;
     GuiListbox* gm_script_options;
     GuiAutoLayout* order_layout;
     GuiButton* player_comms_hail;
-    GuiButton* ship_tweak_button;
-    GuiButton* export_button;
+    GuiButton* global_message_button;
+    GuiToggleButton* pause_button;
+    GuiToggleButton* intercept_comms_button;
+    GuiButton* tweak_button;
+    GuiButton* copy_scenario_button;
+    GuiButton* copy_selected_button;
     GuiSelector* player_ship_selector;
     
     enum EClickAndDragState
@@ -65,11 +72,11 @@ public:
     void onMouseDrag(sf::Vector2f position);
     void onMouseUp(sf::Vector2f position);
 
-    virtual void onKey(sf::Keyboard::Key key, int unicode);
+    virtual void onKey(sf::Event::KeyEvent key, int unicode);
     
     PVector<SpaceObject> getSelection();
     
-    string getScriptExport();
+    string getScriptExport(bool selected_only);
 };
 
 class GuiGlobalMessageEntry : public GuiOverlay
