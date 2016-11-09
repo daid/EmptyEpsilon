@@ -28,6 +28,8 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponStorageMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getShieldsFrequency);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setShieldsFrequency);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getEnergy);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setEnergy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHealth);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHealth);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHeat);
