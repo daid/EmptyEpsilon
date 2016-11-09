@@ -571,6 +571,13 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
         target->energy_level = std::min(value, target->max_energy_level);
     });
     energy_level_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+    
+    (new GuiLabel(left_col, "", "Number of repair teams:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    repair_team_slider = new GuiSlider(left_col, "", 0.0, 2000, 0.0, [this](float value) {
+        target->setRepairCrewCount(value);
+    });
+    repair_team_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     // Right column
     // Count and list ship positions and whether they're occupied.
@@ -615,6 +622,9 @@ void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
 
     // Update reputation points.
     reputation_point_slider->setValue(target->getReputationPoints());
+    
+    // Update repair team number.
+    repair_team_slider->setValue(target->getRepairCrewCount());
 }
 
 void GuiShipTweakPlayer::open(P<SpaceObject> target)
