@@ -595,6 +595,10 @@ void PlayerSpaceship::applyTemplateValues()
         setWarpDrive(true);
         setJumpDrive(true);
         break;
+    case PWJ_None:
+        setWarpDrive(false);
+        setJumpDrive(false);
+        break;
     }
 
     // Set the ship's number of repair crews in Engineering from the ship's
