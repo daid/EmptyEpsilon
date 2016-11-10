@@ -350,6 +350,7 @@ public:
     float getBeamWeaponHeatPerFire(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getHeatPerFire(); }
 
     int getShieldsFrequency(void){ return shield_frequency; }
+    void setShieldsFrequency(float freq) { if ((freq > SpaceShip::max_frequency) || (freq < 0)) return; shield_frequency = freq;}
 
     void setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage)
     {
