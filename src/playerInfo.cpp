@@ -155,6 +155,14 @@ void PlayerInfo::spawnUI()
         if (crew_position[singlePilot])
             screen->addStationTab(new ShipLogScreen(screen), max_crew_positions, "Ships log", "");
         
+        //Add more log screen for extra screen
+        if (crew_position[damageControl])
+            screen->addStationTab(new ShipLogScreen(screen), max_crew_positions, "Ships log", "");
+        if (crew_position[powerManagement])
+            screen->addStationTab(new ShipLogScreen(screen), max_crew_positions, "Ships log", "");
+         if (crew_position[databaseView])
+            screen->addStationTab(new ShipLogScreen(screen), max_crew_positions, "Ships log", "");
+        
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(screen, "SELF_DESTRUCT_ENTRY");
         for(int n=0; n<max_crew_positions; n++)
             if (crew_position[n])
