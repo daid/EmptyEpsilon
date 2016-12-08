@@ -93,7 +93,7 @@ MainMenu::MainMenu()
         engine->shutdown();
     }))->setPosition(sf::Vector2f(50, -50), ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "START_TUTORIAL", "Tutorial", [this]() {
+    (new GuiButton(this, "START_TUTORIAL", "Tutorials", [this]() {
         new TutorialMenu();
         destroy();
     }))->setPosition(sf::Vector2f(370, -50), ABottomLeft)->setSize(300, 50);
