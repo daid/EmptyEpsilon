@@ -118,18 +118,6 @@ function resetPlayerShip()
 end
 --End Region Tut Utils
 
-
-weaponsTutorial = createSequence()
-addToSequence(weaponsTutorial, function()
-    tutorial:switchViewToScreen(1)
-    tutorial:setMessageToTopPosition()
-    resetPlayerShip()
-    player:setJumpDrive(false)
-    player:setWarpDrive(false)
-    player:setImpulseMaxSpeed(0)
-    player:setRotationMaxSpeed(0)
-end)
-
 engineeringTutorial = createSequence()
 addToSequence(engineeringTutorial, function()
     tutorial:switchViewToScreen(2)
