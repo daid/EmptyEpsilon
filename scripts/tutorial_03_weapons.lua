@@ -33,7 +33,6 @@
 --- Shields: The Weapons officer is responsible for activating the ship's shields and modulating their frequency. It might be tempting to keep the shields up at all times, but they drain significantly more power when active. Certain shield frequencies are especially resistant to certain beam frequencies, which can also be detected in targets by the Science officer. Unlike beam weapons, however, remodulating the shields' frequency brings them offline for several seconds and leaves the ship temporarily defenseless.
 -- Type: Basic
 require("utils.lua")
-require("utils_tutorial.lua")
 function init()
     --Create the player ship
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Phobos M3P")
