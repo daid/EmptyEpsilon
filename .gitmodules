@@ -1,0 +1,3 @@
+[submodule "SeriousProton"]
+	path = SeriousProton
+	url = https://git@github.com/daid/SeriousProton
