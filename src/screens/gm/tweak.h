@@ -165,6 +165,7 @@ private:
     GuiSlider* oxygen_point_slider;
     GuiSlider* energy_level_slider;
     GuiSlider* max_energy_level_slider;
+    GuiSlider* repair_team_slider;
     GuiLabel* position_count;
     GuiKeyValueDisplay* position[max_crew_positions];
 public:
