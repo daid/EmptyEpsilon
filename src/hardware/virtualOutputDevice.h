@@ -45,5 +45,4 @@ public:
     void render(sf::RenderTarget& window);
 };
 
-
-#endif//DMX512_SERIAL_DEVICE_H
+#endif//VIRTUAL_OUTPUT_DEVICE_H

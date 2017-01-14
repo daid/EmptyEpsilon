@@ -14,5 +14,4 @@ public:
     virtual void hitObject(P<SpaceObject> object);
 };
 
-#endif//NUKE_H
-
+#endif//EMP_MISSILE_H

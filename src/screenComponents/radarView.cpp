@@ -208,9 +208,18 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
     int sector_x_max = floor((view_position.x + (rect.left + rect.width - radar_screen_center.x) / scale) / sector_size);
     int sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.top) / scale) / sector_size) + 1;
     int sector_y_max = floor((view_position.y + (rect.top + rect.height - radar_screen_center.y) / scale) / sector_size);
+    sf::Color color(64, 64, 128, 128);
+    for(int sector_x = sector_x_min - 1; sector_x <= sector_x_max; sector_x++)
+    {
+        float x = radar_screen_center.x + ((sector_x * sector_size) - view_position.x) * scale;
+        for(int sector_y = sector_y_min - 1; sector_y <= sector_y_max; sector_y++)
+        {
+            float y = radar_screen_center.y + ((sector_y * sector_size) - view_position.y) * scale;
+            drawText(window, sf::FloatRect(x, y, 30, 30), getSectorName(sf::Vector2f(sector_x * sector_size + sub_sector_size, sector_y * sector_size + sub_sector_size)), ATopLeft, 30, bold_font, color);
+        }
+    }
     sf::VertexArray lines_x(sf::Lines, 2 * (sector_x_max - sector_x_min + 1));
     sf::VertexArray lines_y(sf::Lines, 2 * (sector_y_max - sector_y_min + 1));
-    sf::Color color(64, 64, 128, 128);
     for(int sector_x = sector_x_min; sector_x <= sector_x_max; sector_x++)
     {
         float x = radar_screen_center.x + ((sector_x * sector_size) - view_position.x) * scale;
@@ -218,11 +227,6 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
         lines_x[(sector_x - sector_x_min)*2].color = color;
         lines_x[(sector_x - sector_x_min)*2+1].position = sf::Vector2f(x, rect.top + rect.height);
         lines_x[(sector_x - sector_x_min)*2+1].color = color;
-        for(int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
-        {
-            float y = radar_screen_center.y + ((sector_y * sector_size) - view_position.y) * scale;
-            drawText(window, sf::FloatRect(x, y, 30, 30), getSectorName(sf::Vector2f(sector_x * sector_size + sub_sector_size, sector_y * sector_size + sub_sector_size)), ATopLeft, 30, bold_font, color);
-        }
     }
     for(int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
     {

@@ -1,16 +1,15 @@
 -- Name: Waves
--- Description: Waves of increasing difficult enemies.
+-- Description: Waves of increasingly difficult enemies.
 -- Type: Basic
--- Variation[Hard]: Effectively starts at difficulty of wave 5, and increases by 1.5 every defeated wave. (Players are quicker overwhelmed, leading to shorter games)
--- Variation[Easy]: Decreases the amount of ships in each progressing wave, making for easier progress and easier waves. (Takes longer for the players to be overwhelmed, good for new players)
+-- Variation[Hard]: Difficulty starts at wave 5 and increases by 1.5 after the players defeat each wave. (Players are more quickly overwhelmed, leading to shorter games.)
+-- Variation[Easy]: Makes each wave easier by decreasing the number of ships in each wave. (Takes longer for the players to be overwhelmed; good for new players.)
 
-function vectorFromAngle(angle, length)
-	return math.cos(angle / 180 * math.pi) * length, math.sin(angle / 180 * math.pi) * length
-end
-function setCirclePos(obj, x, y, angle, distance)
-	dx, dy = vectorFromAngle(angle, distance)
-	return obj:setPosition(x + dx, y + dy)
-end
+require("utils.lua")
+-- For this scenario, utils.lua provides:
+--   vectorFromAngle(angle, length)
+--      Returns a relative vector (x, y coordinates)
+--   setCirclePos(obj, x, y, angle, distance)
+--      Returns the object with its position set to the resulting coordinates.
 
 function randomStationTemplate()
 	if random(0, 100) < 10 then

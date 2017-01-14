@@ -127,6 +127,7 @@ public:
 
     void setBeam(int index, float arc, float direction, float range, float cycle_time, float damage);
     void setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage);
+    void setBeamWeaponTurret(int index, float arc, float direction, float rotation_rate);
 
     /**
      * Convenience function to set the texture of a beam by index.

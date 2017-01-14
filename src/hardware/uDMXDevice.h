@@ -1,5 +1,5 @@
-#ifndef UDMX_SERIAL_DEVICE_H
-#define UDMX_SERIAL_DEVICE_H
+#ifndef UDMX_DEVICE_H
+#define UDMX_DEVICE_H
 
 #include <SFML/System.hpp>
 #include <stdint.h>
@@ -22,6 +22,4 @@ public:
     virtual int getChannelCount();
 };
 
-
-#endif//DMX512_SERIAL_DEVICE_H
-
+#endif//UDMX_DEVICE_H

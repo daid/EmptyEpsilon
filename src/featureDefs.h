@@ -1,5 +1,5 @@
-#ifndef FEATURES_H
-#define FEATURES_H
+#ifndef FEATURE_DEFS_H
+#define FEATURE_DEFS_H
 
 // Android doesn't bundle 3D models or music.
 #ifndef FEATURE_3D_RENDERING
@@ -14,4 +14,4 @@
 
 #define DISTANCE_UNIT_1K "u"
 
-#endif//FEATURES_H
+#endif//FEATURE_DEFS_H

@@ -1,5 +1,5 @@
-#ifndef GUI_SCAN_TARGET_BUTTON_H
-#define GUI_SCAN_TARGET_BUTTON_H
+#ifndef SCAN_TARGET_BUTTON_H
+#define SCAN_TARGET_BUTTON_H
 
 #include "gui/gui2_element.h"
 
@@ -16,7 +16,8 @@ private:
 public:
     GuiScanTargetButton(GuiContainer* owner, string id, TargetsContainer* targets);
     
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onHotkey(const HotkeyResult& key) override;
 };
 
-#endif//GUI_SCAN_TARGET_BUTTON_H
+#endif//SCAN_TARGET_BUTTON_H

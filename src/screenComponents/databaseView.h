@@ -1,5 +1,5 @@
-#ifndef DATABASE_VIEW_COMPONENT_H
-#define DATABASE_VIEW_COMPONENT_H
+#ifndef DATABASE_VIEW_H
+#define DATABASE_VIEW_H
 
 #include "gui/gui2_element.h"
 
@@ -12,7 +12,6 @@ public:
     DatabaseViewComponent(GuiContainer* owner);
 
     bool findAndDisplayEntry(string name);
-
 private:
     bool findAndDisplayEntry(string name, P<ScienceDatabase> parent);
     //Fill the selection listbox with options from the selected_entry, or the main database list if selected_entry is nullptr
@@ -24,4 +23,4 @@ private:
     GuiElement* database_entry;
 };
 
-#endif//DATABASE_VIEW_COMPONENT_H
+#endif//DATABASE_VIEW_H

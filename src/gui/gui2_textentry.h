@@ -17,9 +17,9 @@ protected:
 public:
     GuiTextEntry(GuiContainer* owner, string id, string text);
 
-    virtual void onDraw(sf::RenderTarget& window);
-    virtual bool onMouseDown(sf::Vector2f position);
-    virtual bool onKey(sf::Keyboard::Key key, int unicode);
+    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual bool onMouseDown(sf::Vector2f position) override;
+    virtual bool onKey(sf::Event::KeyEvent key, int unicode) override;
     
     string getText();
     GuiTextEntry* setText(string text);

@@ -58,3 +58,16 @@ void GuiJumpControls::onDraw(sf::RenderTarget& window)
         }
     }
 }
+
+void GuiJumpControls::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "HELMS" && my_spaceship)
+    {
+        if (key.hotkey == "INC_JUMP")
+            slider->setValue(slider->getValue() + 1000.0f);
+        if (key.hotkey == "DEC_JUMP")
+            slider->setValue(slider->getValue() - 1000.0f);
+        if (key.hotkey == "JUMP")
+            my_spaceship->commandJump(slider->getValue());
+    }
+}

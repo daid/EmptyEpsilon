@@ -8,6 +8,14 @@ if(NOT DEFINED SERIOUS_PROTON_DIR)
  message(FATAL_ERROR "SERIOUS_PROTON_DIR was not set. Unable to continue")
 endif(NOT DEFINED SERIOUS_PROTON_DIR)
 
+if(DEFINED ENABLE_CRASH_LOGGER)
+ if(WIN32)
+  if(NOT DEFINED DRMINGW_ROOT)
+   message(FATAL_ERROR "DRMINGW_ROOT was not set. Unable to continue")
+  endif(NOT DEFINED DRMINGW_ROOT)
+ endif(WIN32)
+endif(DEFINED ENABLE_CRASH_LOGGER)
+
 string(TIMESTAMP CPACK_PACKAGE_VERSION_MAJOR "%Y")
 string(TIMESTAMP CPACK_PACKAGE_VERSION_MINOR "%m")
 string(TIMESTAMP CPACK_PACKAGE_VERSION_PATCH "%d")
@@ -18,12 +26,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 # install resources, scripts, and packs to app bundle instead of system dir.
 if(APPLE)
 set(CMAKE_INSTALL_PREFIX "./")
-endif()
-
-# set INSTALL_PREFIX for linux so that the built binary is able to find resources
-if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D INSTALL_PREFIX=\\\"${CMAKE_INSTALL_PREFIX}\\\"")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D INSTALL_PREFIX=\\\"${CMAKE_INSTALL_PREFIX}\\\"")
+elseif(UNIX)
+# Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
+add_definitions(-DRESOURCE_BASE_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/")
 endif()
 
 ## ensure c++11 is used
@@ -91,6 +96,7 @@ set(SOURCES
 	src/screens/gm/tweak.cpp
 	src/screenComponents/aimLock.cpp
 	src/screenComponents/alertOverlay.cpp
+	src/screenComponents/helpOverlay.cpp
 	src/screenComponents/missileTubeControls.cpp
 	src/screenComponents/selfDestructIndicator.cpp
 	src/screenComponents/viewport3d.cpp
@@ -127,7 +133,11 @@ set(SOURCES
 	src/screenComponents/databaseView.cpp
 	src/screenComponents/shipsLogControl.cpp
 	src/screenComponents/onScreenKeyboard.cpp
+	src/screenComponents/hackingDialog.cpp
+	src/screenComponents/customShipFunctions.cpp
+	src/screenComponents/scrollingBanner.cpp
 	src/gui/colorConfig.cpp
+	src/gui/hotkeyConfig.cpp
 	src/gui/mouseRenderer.cpp
 	src/gui/scriptError.cpp
 	src/gui/gui2_slider.cpp
@@ -178,6 +188,7 @@ set(SOURCES
 	src/spaceObjects/nuke.cpp
 	src/spaceObjects/artifact.cpp
 	src/spaceObjects/shipTemplateBasedObject.cpp
+	src/spaceObjects/planet.cpp
 	src/spaceObjects/spaceshipParts/beamWeapon.cpp
 	src/spaceObjects/spaceshipParts/weaponTube.cpp
 	src/ai/fighterAI.cpp
@@ -273,6 +284,7 @@ foreach(SP_SOURCE
 	src/networkAudioStream.cpp
 	src/engine.cpp
 	src/windowManager.cpp
+	src/shaderManager.cpp
 	src/GL/glew.c
 	src/lua/lundump.c
 	src/lua/lmem.c

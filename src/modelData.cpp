@@ -161,9 +161,13 @@ void ModelData::load()
             illumination_texture = textureManager.getTexture(illumination_texture_name);
 
         if (texture && specular_texture && illumination_texture)
-            shader = objectShader;
+            shader = ShaderManager::getShader("objectShaderBSI");
+        else if (texture && specular_texture)
+            shader = ShaderManager::getShader("objectShaderBS");
+        else if (texture && illumination_texture)
+            shader = ShaderManager::getShader("objectShaderBI");
         else
-            shader = simpleObjectShader;
+            shader = ShaderManager::getShader("objectShaderB");
 
         loaded = true;
     }

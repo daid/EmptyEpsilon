@@ -14,6 +14,8 @@
 #include "screenComponents/radarView.h"
 #include "screenComponents/shipDestroyedPopup.h"
 
+#include "screens/extra/damcon.h"
+
 #include "gui/gui2_overlay.h"
 
 ScreenMainScreen::ScreenMainScreen()
@@ -33,9 +35,20 @@ ScreenMainScreen::ScreenMainScreen()
     long_range_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->enableCallsigns()->hide();
     long_range_radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
+
+    global_range_radar = new GuiRadarView(this, "GLOBAL", 50000.0f, nullptr);
+    global_range_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    global_range_radar->setAutoCentering(true);
+    global_range_radar->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
+    global_range_radar->hide();
+        
     onscreen_comms = new GuiCommsOverlay(this);
     onscreen_comms->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setVisible(false);
-
+    
+    ship_state = new DamageControlScreen(this);
+    ship_state->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    ship_state->hide();
+    
     new GuiShipDestroyedPopup(this);
     
     new GuiJumpIndicator(this);
@@ -63,6 +76,7 @@ void ScreenMainScreen::update(float delta)
     if (game_client && game_client->getStatus() == GameClient::Disconnected)
     {
         soundManager->stopMusic();
+        soundManager->stopSound(impulse_sound);
         destroy();
         disconnectFromServer();
         returnToMainMenu();
@@ -129,16 +143,36 @@ void ScreenMainScreen::update(float delta)
             viewport->show();
             tactical_radar->hide();
             long_range_radar->hide();
+            global_range_radar->hide();
+            ship_state->hide();
             break;
         case MSS_Tactical:
             viewport->hide();
             tactical_radar->show();
             long_range_radar->hide();
+            global_range_radar->hide();
+            ship_state->hide();
             break;
         case MSS_LongRange:
             viewport->hide();
             tactical_radar->hide();
             long_range_radar->show();
+            global_range_radar->hide();
+            ship_state->hide();
+            break;
+        case MSS_GlobalRange:
+            viewport->hide();
+            tactical_radar->hide();
+            long_range_radar->hide();
+            global_range_radar->show();
+            ship_state->hide();
+            break;
+        case MSS_ShipState:
+            viewport->hide();
+            tactical_radar->hide();
+            long_range_radar->hide();
+            global_range_radar->hide();
+            ship_state->show();
             break;
         }
 
@@ -153,6 +187,30 @@ void ScreenMainScreen::update(float delta)
             onscreen_comms->hide();
             break;
         }
+
+        // If we have an impulse power, loop the engine sound.
+        float impulse_ability = std::max(0.0f, std::min(my_spaceship->getSystemEffectiveness(SYS_Impulse), my_spaceship->getSystemPower(SYS_Impulse)));
+        string impulse_sound_file = my_spaceship->impulse_sound_file;
+        if (impulse_ability > 0 && impulse_sound_file.length() > 0)
+        {
+            if (impulse_sound > -1)
+            {
+                soundManager->setSoundVolume(impulse_sound, std::max(10.0f * impulse_ability, fabsf(my_spaceship->current_impulse) * 10.0f * std::max(0.1f, impulse_ability)));
+                soundManager->setSoundPitch(impulse_sound, std::max(0.7f * impulse_ability, fabsf(my_spaceship->current_impulse) + 0.2f * std::max(0.1f, impulse_ability)));
+            }
+            else
+            {
+                impulse_sound = soundManager->playSound(impulse_sound_file, std::max(0.7f * impulse_ability, fabsf(my_spaceship->current_impulse) + 0.2f * impulse_ability), std::max(30.0f, fabsf(my_spaceship->current_impulse) * 10.0f * impulse_ability), true);
+            }
+        }
+        // If we don't have impulse available, stop the engine sound.
+        else if (impulse_sound > -1)
+        {
+            soundManager->stopSound(impulse_sound);
+            // TODO: Play an engine failure sound.
+            impulse_sound = -1;
+        }
+
     }
 }
 
@@ -192,22 +250,50 @@ void ScreenMainScreen::onClick(sf::Vector2f mouse_position)
                 my_spaceship->commandMainScreenSetting(MSS_Tactical);
             else if (gameGlobalInfo->allow_main_screen_long_range_radar)
                 my_spaceship->commandMainScreenSetting(MSS_LongRange);
+            else if (gameGlobalInfo->allow_main_screen_global_range_radar)
+                my_spaceship->commandMainScreenSetting(MSS_GlobalRange);
+            else if (gameGlobalInfo->allow_main_screen_ship_state)
+                my_spaceship->commandMainScreenSetting(MSS_ShipState);
             break;
         case MSS_Tactical:
             if (gameGlobalInfo->allow_main_screen_long_range_radar)
                 my_spaceship->commandMainScreenSetting(MSS_LongRange);
+            else if (gameGlobalInfo->allow_main_screen_global_range_radar)
+                my_spaceship->commandMainScreenSetting(MSS_GlobalRange);
+            else if (gameGlobalInfo->allow_main_screen_ship_state)
+                my_spaceship->commandMainScreenSetting(MSS_ShipState);
             break;
         case MSS_LongRange:
+            if (gameGlobalInfo->allow_main_screen_global_range_radar)
+                my_spaceship->commandMainScreenSetting(MSS_GlobalRange);
+            else if (gameGlobalInfo->allow_main_screen_ship_state)
+                my_spaceship->commandMainScreenSetting(MSS_ShipState);
+            else if (gameGlobalInfo->allow_main_screen_tactical_radar)
+                my_spaceship->commandMainScreenSetting(MSS_Tactical);
+            break;
+        case MSS_GlobalRange:
+            if (gameGlobalInfo->allow_main_screen_ship_state)
+                my_spaceship->commandMainScreenSetting(MSS_ShipState);
+            else if (gameGlobalInfo->allow_main_screen_tactical_radar)
+                my_spaceship->commandMainScreenSetting(MSS_Tactical);
+            else if (gameGlobalInfo->allow_main_screen_long_range_radar)
+                my_spaceship->commandMainScreenSetting(MSS_LongRange);
+            break;
+        case MSS_ShipState:
             if (gameGlobalInfo->allow_main_screen_tactical_radar)
                 my_spaceship->commandMainScreenSetting(MSS_Tactical);
+            else if (gameGlobalInfo->allow_main_screen_long_range_radar)
+                my_spaceship->commandMainScreenSetting(MSS_LongRange);
+            else if (gameGlobalInfo->allow_main_screen_global_range_radar)
+                my_spaceship->commandMainScreenSetting(MSS_GlobalRange);
             break;
         }
     }
 }
 
-void ScreenMainScreen::onKey(sf::Keyboard::Key key, int unicode)
+void ScreenMainScreen::onKey(sf::Event::KeyEvent key, int unicode)
 {
-    switch(key)
+    switch(key.code)
     {
     case sf::Keyboard::Up:
         if (my_spaceship)
@@ -245,6 +331,7 @@ void ScreenMainScreen::onKey(sf::Keyboard::Key key, int unicode)
     case sf::Keyboard::Escape:
     case sf::Keyboard::Home:
         soundManager->stopMusic();
+        soundManager->stopSound(impulse_sound);
         destroy();
         returnToShipSelection();
         break;

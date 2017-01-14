@@ -52,6 +52,8 @@ CpuShip::CpuShip()
 
     comms_script_name = "comms_ship.lua";
 
+    missile_resupply = 0.0;
+
     if (game_server)
         ai = ShipAIFactory::getAIFactory("default")(this);
     else
@@ -82,6 +84,36 @@ void CpuShip::update(float delta)
         new_ai_name = "";
     }
     ai->run(delta);
+
+    //recharge missiles of CPU ships docked to station. uses the same trick as player ships. VERY hackish.
+    if (docking_state == DS_Docked)
+    {
+        P<ShipTemplateBasedObject> docked_with_template_based = docking_target;
+        P<SpaceShip> docked_with_ship = docking_target;
+
+        if (docked_with_template_based && !docked_with_ship)
+        {
+            bool needs_missile = 0;
+
+            for(int n=0; n<MW_Count; n++)
+            {
+                if  (weapon_storage[n] < weapon_storage_max[n])
+                {
+                    if (missile_resupply >= missile_resupply_time)
+                    {
+                        weapon_storage[n] += 1;
+                        missile_resupply = 0.0;
+                        break;
+                    }
+                    else
+                        needs_missile = 1;
+                }
+            }
+
+            if (needs_missile)
+                missile_resupply += delta;
+        }
+    }
 }
 
 void CpuShip::applyTemplateValues()

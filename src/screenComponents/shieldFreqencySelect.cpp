@@ -35,3 +35,28 @@ void GuiShieldFrequencySelect::onDraw(sf::RenderTarget& window)
     }
     GuiElement::onDraw(window);
 }
+
+void GuiShieldFrequencySelect::onHotkey(const HotkeyResult& key)
+{
+    if ((key.category == "ENGINEERING" || key.category == "WEAPONS") && my_spaceship)
+    {
+        if (key.hotkey == "SHIELD_CAL_INC")
+        {
+            if (new_frequency->getSelectionIndex() >= new_frequency->entryCount() - 1)
+                new_frequency->setSelectionIndex(0);
+            else
+                new_frequency->setSelectionIndex(new_frequency->getSelectionIndex() + 1);
+        }
+        if (key.hotkey == "SHIELD_CAL_DEC")
+        {
+            if (new_frequency->getSelectionIndex() <= 0)
+                new_frequency->setSelectionIndex(new_frequency->entryCount() - 1);
+            else
+                new_frequency->setSelectionIndex(new_frequency->getSelectionIndex() - 1);
+        }
+        if (key.hotkey == "SHIELD_CAL_START")
+        {
+            my_spaceship->commandSetShieldFrequency(new_frequency->getSelectionIndex());
+        }
+    }
+}

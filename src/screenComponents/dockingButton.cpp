@@ -54,6 +54,34 @@ void GuiDockingButton::onDraw(sf::RenderTarget& window)
     GuiButton::onDraw(window);
 }
 
+void GuiDockingButton::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "HELMS" && my_spaceship)
+    {
+        if (key.hotkey == "DOCK_ACTION")
+        {
+            switch(my_spaceship->docking_state)
+            {
+            case DS_NotDocking:
+                my_spaceship->commandDock(findDockingTarget());
+                break;
+            case DS_Docking:
+                my_spaceship->commandAbortDock();
+                break;
+            case DS_Docked:
+                my_spaceship->commandUndock();
+                break;
+            }
+        }
+        else if (key.hotkey == "DOCK_REQUEST")
+            my_spaceship->commandDock(findDockingTarget());
+        else if (key.hotkey == "DOCK_ABORT")
+            my_spaceship->commandAbortDock();
+        else if (key.hotkey == "UNDOCK")
+            my_spaceship->commandUndock();
+    }
+}
+
 P<SpaceObject> GuiDockingButton::findDockingTarget()
 {
     PVector<Collisionable> obj_list = CollisionManager::queryArea(my_spaceship->getPosition() - sf::Vector2f(1000, 1000), my_spaceship->getPosition() + sf::Vector2f(1000, 1000));

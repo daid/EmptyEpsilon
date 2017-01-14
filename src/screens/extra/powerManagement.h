@@ -1,5 +1,5 @@
-#ifndef POWER_MANAGEMENT_SCREEN_H
-#define POWER_MANAGEMENT_SCREEN_H
+#ifndef POWER_MANAGEMENT_H
+#define POWER_MANAGEMENT_H
 
 #include "gui/gui2_overlay.h"
 #include "shipTemplate.h"
@@ -26,6 +26,7 @@ public:
     PowerManagementScreen(GuiContainer* owner);
     
     void onDraw(sf::RenderTarget& window) override;
+    virtual void onHotkey(const HotkeyResult& key) override;
 };
 
-#endif//POWER_MANAGEMENT_SCREEN_H
+#endif//POWER_MANAGEMENT_H

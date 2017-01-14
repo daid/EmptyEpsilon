@@ -1,5 +1,5 @@
-#ifndef LISTBOX_H
-#define LISTBOX_H
+#ifndef GUI2_LISTBOX_H
+#define GUI2_LISTBOX_H
 
 #include "gui2_element.h"
 #include "gui2_entrylist.h"
@@ -30,4 +30,4 @@ private:
     virtual void entriesChanged();
 };
 
-#endif//LISTBOX_H
+#endif//GUI2_LISTBOX_H

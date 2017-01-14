@@ -13,4 +13,4 @@ public:
     virtual void onDraw(sf::RenderTarget& window);
 };
 
-#endif//GUI2_BUTTON_H
+#endif//GUI2_ARROWBUTTON_H

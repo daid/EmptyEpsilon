@@ -1,5 +1,5 @@
-#ifndef GUI_SELF_DESTRUCT_ENTRY_H
-#define GUI_SELF_DESTRUCT_ENTRY_H
+#ifndef SELF_DESTRUCT_ENTRY_H
+#define SELF_DESTRUCT_ENTRY_H
 
 #include "gui/gui2_element.h"
 #include "spaceObjects/playerSpaceship.h"
@@ -26,4 +26,4 @@ public:
     void enablePosition(ECrewPosition position) { has_position[position] = true; }
 };
 
-#endif//GUI_SELF_DESTRUCT_ENTRY_H
+#endif//SELF_DESTRUCT_ENTRY_H

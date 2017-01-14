@@ -1,5 +1,5 @@
-#ifndef GUI_SHIP_DESTROYED_RETURN_TIMEOUT_H
-#define GUI_SHIP_DESTROYED_RETURN_TIMEOUT_H
+#ifndef SHIP_DESTROYED_POPUP_H
+#define SHIP_DESTROYED_POPUP_H
 
 #include "gui/gui2_element.h"
 
@@ -18,4 +18,4 @@ public:
     virtual void onDraw(sf::RenderTarget& window);
 };
 
-#endif//GUI_SHIP_DESTROYED_RETURN_TIMEOUT_H
+#endif//SHIP_DESTROYED_POPUP_H

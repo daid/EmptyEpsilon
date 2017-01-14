@@ -37,7 +37,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         soundManager->setListenerPosition(sf::Vector2f(camera_position.x, camera_position.y), camera_yaw);
     window.pushGLStates();
 
-    billboardShader->setParameter("camera_position", camera_position);
+    ShaderManager::getShader("billboardShader")->setParameter("camera_position", camera_position);
 
     float camera_fov = 60.0f;
     float sx = window.getSize().x * window.getView().getViewport().width / window.getView().getSize().x;
@@ -52,7 +52,8 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    _glPerspective(camera_fov, rect.width/rect.height, 1.f, 25000.f);
+    //_glPerspective(camera_fov, rect.width/rect.height, 1.f, 25000.f);
+    _glPerspective(camera_fov, rect.width/rect.height, 1.f,  999999.f);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -230,10 +231,10 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
         glTranslatef(target->getPosition().x, target->getPosition().y, 0);
 
-        billboardShader->setParameter("textureMap", *textureManager.getTexture("redicule2.png"));
-        sf::Shader::bind(billboardShader);
-        glBegin(GL_QUADS);
+        ShaderManager::getShader("billboardShader")->setParameter("textureMap", *textureManager.getTexture("redicule2.png"));
+        sf::Shader::bind(ShaderManager::getShader("billboardShader"));
         glColor4f(0.5, 0.5, 0.5, target->getRadius() * 2.5);
+        glBegin(GL_QUADS);
         glTexCoord2f(0, 0);
         glVertex3f(0, 0, 0);
         glTexCoord2f(1, 0);

@@ -12,7 +12,8 @@ WindowScreen::WindowScreen(float angle)
 : angle(angle)
 {
     viewport = new GuiViewport3D(this, "VIEWPORT");
-    viewport->showCallsigns()->showHeadings()->showSpacedust();
+    // viewport->showCallsigns()->showHeadings()->showSpacedust();
+    viewport->showSpacedust();
     viewport->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     new GuiShipDestroyedPopup(this);
@@ -40,12 +41,14 @@ void WindowScreen::update(float delta)
         camera_position.x = position.x;
         camera_position.y = position.y;
         camera_position.z = 0.0;
+        
+        my_spaceship->draw3DTransparent();
     }
 }
 
-void WindowScreen::onKey(sf::Keyboard::Key key, int unicode)
+void WindowScreen::onKey(sf::Event::KeyEvent key, int unicode)
 {
-    switch(key)
+    switch(key.code)
     {
     case sf::Keyboard::Left:
         angle -= 5.0f;

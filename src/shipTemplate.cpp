@@ -29,6 +29,8 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeam);
     /// Setup a beam weapon.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeapon);
+    /// Setup a beam's turret.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponTurret);
     /// Setup a beam weapon texture
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamTexture);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponEnergyPerFire);
@@ -203,6 +205,15 @@ void ShipTemplate::setBeamWeapon(int index, float arc, float direction, float ra
     beams[index].setDamage(damage);
 }
 
+void ShipTemplate::setBeamWeaponTurret(int index, float arc, float direction, float rotation_rate)
+{
+    if (index < 0 || index > max_beam_weapons)
+        return;
+    beams[index].setTurretArc(arc);
+    beams[index].setTurretDirection(direction);
+    beams[index].setTurretRotationRate(rotation_rate);
+}
+
 sf::Vector2i ShipTemplate::interiorSize()
 {
     sf::Vector2i min_pos(1000, 1000);
@@ -290,8 +301,8 @@ string getSystemName(ESystem system)
     case SYS_Impulse: return "Impulse Engines";
     case SYS_Warp: return "Warp Drive";
     case SYS_JumpDrive: return "Jump Drive";
-    case SYS_FrontShield: return "Front Shields";
-    case SYS_RearShield: return "Rear Shields";
+    case SYS_FrontShield: return "Front Shield Generator";
+    case SYS_RearShield: return "Rear Shield Generator";
     default:
         return "UNKNOWN";
     }

@@ -1,5 +1,5 @@
-#ifndef GUI_SCANNING_DIALOG_H
-#define GUI_SCANNING_DIALOG_H
+#ifndef SCANNING_DIALOG_H
+#define SCANNING_DIALOG_H
 
 #include "gui/gui2_element.h"
 #include "signalQualityIndicator.h"
@@ -29,10 +29,11 @@ private:
 public:
     GuiScanningDialog(GuiContainer* owner, string id);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onHotkey(const HotkeyResult& key) override;
     
     void setupParameters();
     void updateSignal();
 };
 
-#endif//GUI_SCANNING_DIALOG_H
+#endif//SCANNING_DIALOG_H

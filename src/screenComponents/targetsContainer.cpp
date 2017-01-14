@@ -37,6 +37,7 @@ void TargetsContainer::set(P<SpaceObject> obj)
     {
         clear();
     }
+    waypoint_selection_index = -1;
 }
 
 void TargetsContainer::set(PVector<SpaceObject> objs)
@@ -106,4 +107,10 @@ void TargetsContainer::setWaypointIndex(int index)
     waypoint_selection_index = index;
     if (my_spaceship && index >= 0 && index < (int)my_spaceship->waypoints.size())
         waypoint_selection_position = my_spaceship->waypoints[index];
+}
+
+sf::Vector2f TargetsContainer::getWaypointPosition()
+{
+    if (my_spaceship && waypoint_selection_index >= 0)
+        return waypoint_selection_position;
 }

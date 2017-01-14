@@ -1,5 +1,5 @@
-#ifndef GUI_WARP_CONTROLS_H
-#define GUI_WARP_CONTROLS_H
+#ifndef WARP_CONTROLS_H
+#define WARP_CONTROLS_H
 
 #include "gui/gui2_element.h"
 
@@ -14,7 +14,8 @@ private:
 public:
     GuiWarpControls(GuiContainer* owner, string id);
     
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onHotkey(const HotkeyResult& key) override;
 };
 
-#endif//GUI_WARP_CONTROLS_H
+#endif//WARP_CONTROLS_H

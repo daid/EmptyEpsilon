@@ -5,6 +5,7 @@
 #include "main.h"
 
 #include "screenComponents/indicatorOverlays.h"
+#include "screenComponents/scrollingBanner.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_togglebutton.h"
 
@@ -15,7 +16,7 @@ CinematicViewScreen::CinematicViewScreen()
     viewport->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Initialize the camera's vertical position.
-    camera_position.z = 100.0;
+    camera_position.z = 200.0;
     // Initialize an angled top-down view with the top of the screen pointing
     // toward heading 0.
     camera_yaw = -90.0f;
@@ -38,9 +39,11 @@ CinematicViewScreen::CinematicViewScreen()
     camera_lock_toggle->setValue(true)->setPosition(20, -20, ABottomLeft)->setSize(300, 50)->hide();
 
     camera_lock_tot_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOT_TOGGLE", "Lock camera on ship's target", [this](bool value) {});
-    camera_lock_tot_toggle->setValue(false)->setPosition(320, -20, ABottomLeft)->setSize(350, 50)->hide();
+    camera_lock_tot_toggle->setValue(true)->setPosition(320, -20, ABottomLeft)->setSize(350, 50)->hide();
 
     new GuiIndicatorOverlays(this);
+
+    (new GuiScrollingBanner(this))->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, 100);
 }
 
 void CinematicViewScreen::update(float delta)
@@ -55,6 +58,42 @@ void CinematicViewScreen::update(float delta)
     }
 
     // TODO: Add mouselook.
+    if (InputHandler::keyboardIsDown(sf::Keyboard::W))
+    {
+        sf::Vector2f xy_vector = sf::vector2FromAngle(camera_yaw) * delta * 100.0f;
+        camera_position.x += xy_vector.x;
+        camera_position.y += xy_vector.y;
+    }
+    if (InputHandler::keyboardIsDown(sf::Keyboard::S))
+    {
+        sf::Vector2f xy_vector = sf::vector2FromAngle(camera_yaw) * delta * 100.0f;
+        camera_position.x -= xy_vector.x;
+        camera_position.y -= xy_vector.y;
+    }
+    if (InputHandler::keyboardIsDown(sf::Keyboard::A))
+    {
+        sf::Vector2f xy_vector = sf::vector2FromAngle(camera_yaw) * delta * 100.0f;
+        camera_position.x += xy_vector.y;
+        camera_position.y -= xy_vector.x;
+    }
+    if (InputHandler::keyboardIsDown(sf::Keyboard::D))
+    {
+        sf::Vector2f xy_vector = sf::vector2FromAngle(camera_yaw) * delta * 100.0f;
+        camera_position.x -= xy_vector.y;
+        camera_position.y += xy_vector.x;
+    }
+    if (InputHandler::keyboardIsDown(sf::Keyboard::R))
+        camera_position.z += delta * 100.0f;
+    if (InputHandler::keyboardIsDown(sf::Keyboard::F))
+        camera_position.z -= delta * 100.0f;
+    if (InputHandler::keyboardIsDown(sf::Keyboard::Left))
+        camera_yaw -= delta * 50.0f;
+    if (InputHandler::keyboardIsDown(sf::Keyboard::Right))
+        camera_yaw += delta * 50.0f;
+    if (InputHandler::keyboardIsDown(sf::Keyboard::Up))
+        camera_pitch -= delta * 50.0f;
+    if (InputHandler::keyboardIsDown(sf::Keyboard::Down))
+        camera_pitch += delta * 50.0f;
 
     // Add and remove entries from the player ship list.
     // TODO: Allow any ship or station to be the camera target.
@@ -106,7 +145,8 @@ void CinematicViewScreen::update(float delta)
         // float target_velocity = sf::length(target->getVelocity());
 
         // We want the camera to always be less than 1U from the selected ship.
-        camera_distance = 1000.0f;
+        max_camera_distance = 1000.0f + target->getRadius();
+        min_camera_distance = target->getRadius() * 2.0f;
 
         // Check if our selected ship has a weapons target.
         target_of_target = target->getTarget();
@@ -120,6 +160,7 @@ void CinematicViewScreen::update(float delta)
             tot_position_3D.x = tot_position_2D.x;
             tot_position_3D.y = tot_position_3D.y;
             tot_position_3D.z = 0;
+            
             // Get the diff, distance, and angle between the ToT and camera.
             tot_diff_2D = tot_position_2D - camera_position_2D;
             tot_diff_3D = tot_position_3D - camera_position;
@@ -127,37 +168,48 @@ void CinematicViewScreen::update(float delta)
             tot_distance_2D = sf::length(tot_diff_2D);
             tot_distance_3D = sf::length(tot_diff_3D);
 
-            // Position the camera over the selected ship.
-            camera_position.x = target_position_2D.x - (100.0f * sf::normalize(tot_diff_2D).x);
-            camera_position.y = target_position_2D.y - (100.0f * sf::normalize(tot_diff_2D).y);
-            camera_position.z = 100.0f;
+            //Point the camera aiming between the target ship and the target of the target.
+            angle_yaw = tot_angle + sf::angleDifference(tot_angle, sf::vector2ToAngle(diff_2D)) / 2.0f;
+            if (std::abs(sf::angleDifference(angle_yaw, tot_angle)) > 40.0f)
+            {
+                //The target of target is not really in view, so re-position the camera.
+                camera_position_2D = target_position_2D - sf::vector2FromAngle(sf::vector2ToAngle(tot_position_2D - target_position_2D) + 20) * target->getRadius() * 2.0f;
+                camera_position.x = camera_position_2D.x;
+                camera_position.y = camera_position_2D.y;
+            }
 
-            // Set the camera angle to point at the selected ship's target.
-            angle_yaw = tot_angle;
             angle_pitch = (atan(camera_position.z / tot_distance_3D)) * (180 / pi);
-        } else if (distance_2D > camera_distance)
+        } 
+        
+        if (distance_2D > max_camera_distance)
         // If the selected ship moves more than 1U from the camera ...
         {
-            // Set a vector 5 degrees to the right of the selected ship's
+            // Set a vector 10 degrees to the right of the selected ship's
             // rotation.
-            camera_rotation_vector = sf::vector2FromAngle(target_rotation + 5);
+            camera_rotation_vector = sf::vector2FromAngle(target_rotation + 10);
 
             // Plot a destination on that vector at a distance of 1U.
-            camera_destination = target_position_2D + camera_rotation_vector * camera_distance;
+            camera_destination = target_position_2D + camera_rotation_vector * max_camera_distance;
 
             // Move the camera's X and Y coordinates to this destination.
             camera_position.x = camera_destination.x;
             camera_position.y = camera_destination.y;
         } else {
-            // Calculate the angles between the camera and the ship.
-            angle_yaw = sf::vector2ToAngle(diff_2D);
-            angle_pitch = (atan(camera_position.z / distance_3D)) * (180 / pi);
+            //If we are too close to the ship, move away from it.
+            if (distance_3D < min_camera_distance && distance_2D > 0.0f)
+            {
+                camera_position.x -= diff_2D.x / distance_2D * (min_camera_distance - distance_3D);
+                camera_position.y -= diff_2D.y / distance_2D * (min_camera_distance - distance_3D);
+            }
+            
+            if (!camera_lock_tot_toggle->getValue() || !target_of_target)
+            {
+                // Calculate the angles between the camera and the ship.
+                angle_yaw = sf::vector2ToAngle(diff_2D);
+                angle_pitch = (atan(camera_position.z / distance_3D)) * (180 / pi);
+            }
         }
-        /* else{
-            // Park the camera at a photogenic angle at high speeds.
-            camera_position.x = target_position_2D.x;
-            camera_position.y = target_position_2D.y;
-        } */
+        // TODO: Park the camera at a photogenic angle at high speeds.
 
         // Point the camera.
         camera_yaw = angle_yaw;
@@ -166,21 +218,11 @@ void CinematicViewScreen::update(float delta)
         // Hide the target-of-target camera lock button.
         camera_lock_tot_toggle->hide();
     }
-
-#ifdef DEBUG
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-    {
-        camera_position.x = target->getPosition().x;
-        camera_position.y = target->getPosition().y;
-        camera_position.z = 3000.0;
-        camera_pitch = 90.0f;
-    }
-#endif
 }
 
-void CinematicViewScreen::onKey(sf::Keyboard::Key key, int unicode)
+void CinematicViewScreen::onKey(sf::Event::KeyEvent key, int unicode)
 {
-    switch(key)
+    switch(key.code)
     {
     // Toggle UI visibility with the H key.
     case sf::Keyboard::H:
@@ -211,51 +253,6 @@ void CinematicViewScreen::onKey(sf::Keyboard::Key key, int unicode)
             camera_lock_selector->setSelectionIndex(0);
         target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
         break;
-    // WASD controls for the camera.
-    // TODO: If unlocked, W moves the camera forward on its current heading.
-    //       If locked, W moves the camera toward the target.
-    case sf::Keyboard::W:
-        if (!camera_lock_toggle->getValue())
-            camera_position.y = camera_position.y - (50 * (camera_position.z / 1000));
-        break;
-    // TODO: If unlocked, A moves the camera laterally to the left of its
-    //         current heading.
-    //       If locked, A moves the camera counterclockwise around the
-    //         target.
-    case sf::Keyboard::A:
-        if (!camera_lock_toggle->getValue())
-            camera_position.x = camera_position.x - (50 * (camera_position.z / 1000));
-        break;
-    // TODO: If unlocked, S moves the camera laterally to the right of its
-    //         current heading.
-    //       If locked, S moves the camera clockwise around the target.
-    case sf::Keyboard::S:
-        if (!camera_lock_toggle->getValue())
-            camera_position.y = camera_position.y + (50 * (camera_position.z / 1000));
-        break;
-    // TODO: If unlocked, D moves the camera backward from its current heading.
-    //       If locked, D moves the camera away from the target.
-    case sf::Keyboard::D:
-        if (!camera_lock_toggle->getValue())
-            camera_position.x = camera_position.x + (50 * (camera_position.z / 1000));
-        break;
-    // TODO: If unlocked, R moves the camera vertically upward from its current
-    //         heading, and F moves it downward.
-    //       If locked, R moves the camera vertically upward around the target,
-    //         and F moves it downward.
-    case sf::Keyboard::R:
-        if (camera_position.z > 200.0)
-            camera_position.z = camera_position.z - 100;
-        else
-            camera_position.z = 1000.0;
-        break;
-    case sf::Keyboard::F:
-        if (camera_position.z < 10000.0)
-            camera_position.z = camera_position.z + 100;
-        else
-            camera_position.z = 10000.0;
-        break;
-    // TODO: If unlocked, the arrow keys turn the camera.
     // TODO: X resets the camera to a default relative position and heading.
     // TODO: This is more generic code and is duplicated.
     // Exit the screen with the escape or home keys.

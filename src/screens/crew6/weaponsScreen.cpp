@@ -10,6 +10,7 @@
 #include "screenComponents/shieldFreqencySelect.h"
 #include "screenComponents/shieldsEnableButton.h"
 #include "screenComponents/alertOverlay.h"
+#include "screenComponents/customShipFunctions.h"
 
 #include "gui/gui2_rotationdial.h"
 #include "gui/gui2_label.h"
@@ -82,6 +83,8 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     }else{
         (new GuiShieldsEnableButton(this, "SHIELDS_ENABLE"))->setPosition(-20, -20, ABottomRight)->setSize(280, 50);
     }
+
+    (new GuiCustomShipFunctions(this, weaponsOfficer, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 
 void WeaponsScreen::onDraw(sf::RenderTarget& window)
@@ -96,4 +99,83 @@ void WeaponsScreen::onDraw(sf::RenderTarget& window)
         missile_aim->setVisible(tube_controls->getManualAim());
     }
     GuiOverlay::onDraw(window);
+}
+
+void WeaponsScreen::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "WEAPONS" && my_spaceship)
+    {
+        if (key.hotkey == "NEXT_ENEMY_TARGET")
+        {
+            bool current_found = false;
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get())
+                {
+                    current_found = true;
+                    continue;
+                }
+                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get())
+                {
+                    continue;
+                }
+                if (my_spaceship->isEnemy(obj) && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+        }
+        if (key.hotkey == "NEXT_TARGET")
+        {
+            bool current_found = false;
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get())
+                {
+                    current_found = true;
+                    continue;
+                }
+                if (obj == my_spaceship)
+                    continue;
+                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get() || obj == my_spaceship)
+                    continue;
+                if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+        }
+        if (key.hotkey == "AIM_MISSILE_LEFT")
+        {
+            missile_aim->setValue(missile_aim->getValue() - 5.0f);
+            tube_controls->setMissileTargetAngle(missile_aim->getValue());
+        }
+        if (key.hotkey == "AIM_MISSILE_RIGHT")
+        {
+            missile_aim->setValue(missile_aim->getValue() + 5.0f);
+            tube_controls->setMissileTargetAngle(missile_aim->getValue());
+        }
+    }
 }
