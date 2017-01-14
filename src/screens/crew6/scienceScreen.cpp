@@ -1,6 +1,7 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "scienceScreen.h"
+#include "scienceDatabase.h"
 #include "spaceObjects/nebula.h"
 
 #include "screenComponents/radarView.h"
