@@ -23,6 +23,7 @@ enum EPlayerWarpJumpDrive
     PWJ_WarpDrive,
     PWJ_JumpDrive,
     PWJ_WarpAndJumpDrive,
+    PWJ_None,
     PWJ_MAX,
 };
 enum EScanningComplexity
@@ -71,6 +72,8 @@ public:
     bool use_system_damage;
     bool allow_main_screen_tactical_radar;
     bool allow_main_screen_long_range_radar;
+    bool allow_main_screen_global_range_radar;
+    bool allow_main_screen_ship_state;
     string variation = "None";
 
     //List of script functions that can be called from the GM interface (Server only!)

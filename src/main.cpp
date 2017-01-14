@@ -32,13 +32,6 @@
 #include <libgen.h>
 #endif
 
-#ifdef __linux__
-#ifndef INSTALL_PREFIX
-#define INSTALL_PREFIX "/usr/local"
-#endif
-#define RESOURCE_BASE_DIR INSTALL_PREFIX "/share/emptyepsilon/"
-#endif
-
 sf::Vector3f camera_position;
 float camera_yaw;
 float camera_pitch;

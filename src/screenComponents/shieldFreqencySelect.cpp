@@ -38,7 +38,7 @@ void GuiShieldFrequencySelect::onDraw(sf::RenderTarget& window)
 
 void GuiShieldFrequencySelect::onHotkey(const HotkeyResult& key)
 {
-    if (key.category == "ENGINEERING" && my_spaceship)
+    if ((key.category == "ENGINEERING" || key.category == "WEAPONS") && my_spaceship)
     {
         if (key.hotkey == "SHIELD_CAL_INC")
         {

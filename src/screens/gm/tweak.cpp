@@ -555,6 +555,14 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
         target->setReputationPoints(value);
     });
     reputation_point_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+    
+    // Edit oxygen.
+    (new GuiLabel(left_col, "", "Oxygen:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    oxygen_point_slider = new GuiSlider(left_col, "", 0.0, 100.0, 0.0, [this](float value) {
+        target->setOxygenPoints(value);
+    });
+    oxygen_point_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     // Edit energy level.
     (new GuiLabel(left_col, "", "Max energy:", 30))->setSize(GuiElement::GuiSizeMax, 50);
@@ -622,9 +630,10 @@ void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
 
     // Update reputation points.
     reputation_point_slider->setValue(target->getReputationPoints());
-    
     // Update repair team number.
     repair_team_slider->setValue(target->getRepairCrewCount());
+    // Update oxygen points.
+    oxygen_point_slider->setValue(target->getOxygenPoints());
 }
 
 void GuiShipTweakPlayer::open(P<SpaceObject> target)

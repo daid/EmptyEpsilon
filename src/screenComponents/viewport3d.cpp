@@ -52,7 +52,8 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    _glPerspective(camera_fov, rect.width/rect.height, 1.f, 25000.f);
+    //_glPerspective(camera_fov, rect.width/rect.height, 1.f, 25000.f);
+    _glPerspective(camera_fov, rect.width/rect.height, 1.f,  999999.f);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
