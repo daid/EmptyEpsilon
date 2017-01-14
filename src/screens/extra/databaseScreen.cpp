@@ -1,4 +1,5 @@
 #include "databaseScreen.h"
+#include "scienceDatabase.h"
 
 #include "screenComponents/databaseView.h"
 

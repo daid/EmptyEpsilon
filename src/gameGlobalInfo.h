@@ -23,6 +23,7 @@ enum EPlayerWarpJumpDrive
     PWJ_WarpDrive,
     PWJ_JumpDrive,
     PWJ_WarpAndJumpDrive,
+    PWJ_None,
     PWJ_MAX,
 };
 enum EScanningComplexity
