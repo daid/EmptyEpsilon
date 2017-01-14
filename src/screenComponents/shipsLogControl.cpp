@@ -5,8 +5,8 @@
 #include "gui/gui2_panel.h"
 #include "gui/gui2_advancedscrolltext.h"
 
-ShipsLog::ShipsLog(GuiContainer* owner)
-: GuiElement(owner, "")
+ShipsLog::ShipsLog(GuiContainer* owner, string station)
+: GuiElement(owner, ""), station(station)
 {
     setPosition(0, 0, ABottomCenter);
     setSize(GuiElement::GuiSizeMax, 50);
@@ -26,11 +26,11 @@ void ShipsLog::onDraw(sf::RenderTarget& window)
     if (!my_spaceship)
         return;
 
-    const std::vector<PlayerSpaceship::ShipLogEntry>& logs = my_spaceship->getShipsLog();
+    const std::vector<PlayerSpaceship::ShipLogEntry>& logs = my_spaceship->getShipsLog(station);
     
     if (open)
     {
-        const std::vector<PlayerSpaceship::ShipLogEntry>& logs = my_spaceship->getShipsLog();
+        const std::vector<PlayerSpaceship::ShipLogEntry>& logs = my_spaceship->getShipsLog(station);
         if (log_text->getEntryCount() > 0 && logs.size() == 0)
             log_text->clearEntries();
 
