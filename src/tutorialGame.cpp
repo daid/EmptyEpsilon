@@ -39,19 +39,19 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(TutorialGame)
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, finish);
 }
 
-TutorialGame::TutorialGame(bool repeated_tutorial)
+TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
 {
     new LocalOnlyGame();
 
     new GuiOverlay(this, "", colorConfig.background);
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
-    
+
     this->viewport = nullptr;
     this->repeated_tutorial = repeated_tutorial;
 
     script = new ScriptObject();
     script->registerObject(this, "tutorial");
-    script->run("tutorial.lua");
+    script->run(filename);
 }
 
 void TutorialGame::createScreens()
@@ -79,17 +79,17 @@ void TutorialGame::createScreens()
         station_screen[n]->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopLeft);
 
     new GuiIndicatorOverlays(this);
-    
+
     frame = new GuiPanel(this, "");
     frame->setPosition(0, 0, ATopCenter)->setSize(900, 230)->hide();
-    
+
     text = new GuiScrollText(frame, "", "");
     text->setTextSize(20)->setPosition(20, 20, ATopLeft)->setSize(900 - 40, 200 - 40);
     next_button = new GuiButton(frame, "", "Next", [this]() {
         _onNext.call();
     });
     next_button->setTextSize(30)->setPosition(-20, -20, ABottomRight)->setSize(300, 30);
-    
+
     if (repeated_tutorial)
     {
         (new GuiButton(this, "", "Reset", [this]()
@@ -142,7 +142,7 @@ void TutorialGame::onKey(sf::Event::KeyEvent key, int unicode)
 void TutorialGame::setPlayerShip(P<PlayerSpaceship> ship)
 {
     my_player_info->commandSetShipId(ship->getMultiplayerId());
-    
+
     if (viewport == nullptr)
         createScreens();
 }
@@ -228,14 +228,14 @@ void TutorialGame::finish()
             obj->destroy();
         script->destroy();
         hideAllScreens();
-        
+
         script = new ScriptObject();
         script->registerObject(this, "tutorial");
         script->run("tutorial.lua");
     }else{
         script->destroy();
         destroy();
-        
+
         disconnectFromServer();
         returnToMainMenu();
     }
@@ -249,7 +249,7 @@ void TutorialGame::hideAllScreens()
     viewport->hide();
     tactical_radar->hide();
     long_range_radar->hide();
-    
+
     for(int n=0; n<8; n++)
     {
         station_screen[n]->hide();
