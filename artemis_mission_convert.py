@@ -91,6 +91,58 @@ def convertSystemName(node):
         
     raise UnknownArtemisTagError(node)
 
+def convertSystemState(system_state):
+    if system_state == 'shieldStateFront':
+        return ['FrontShield']
+    elif system_state == 'shieldStateBack':
+        return ['RearShield']
+    elif system_state == 'shieldMaxStateFront':
+        return ['FrontShieldMax']
+    elif system_state == 'shieldMaxStateBack':
+        return ['RearShieldMax']
+    elif system_state == 'systemDamageBeam':
+        return ['beamweapons']
+    elif system_state == 'systemDamageTorpedo':
+        return ['missilesystem']
+    elif system_state == 'systemDamageTactical':
+        return ['reactor']
+    elif system_state == 'systemDamageTurning':
+        return ['maneuver']
+    elif system_state == 'systemDamageImpulse':
+        return ['impulse']
+    elif system_state == 'systemDamageWarp':
+        return ['warp', 'jumpdrive']
+    elif system_state == 'systemDamageFrontShield':
+        return ['frontshield']
+    elif system_state == 'systemDamageBackShield':
+        return ['rearshield']
+    return None
+
+def setSystemHealth(obj, property_name, value):
+    _value = float(value)
+    if 'shield' in property_name and 'State' in property_name:
+        _value /= 100.0
+
+    format_string = '%s:setSystemHealth("%s", %f)'
+    return_string = ''
+
+    property_list = convertSystemState(property_name)
+
+    if property_list is not None:
+        for item in property_list:
+            return_string += format_string % (obj, item, _value)
+            return_string += '\n'
+
+    if return_string.endswith('\n'):
+        return return_string[:-2]
+
+    return return_string
+
+
+def getSystemHealth(obj, property_name):
+    return '%s:getSystemHealth("%s")' % (obj, convertSystemState(property_name))
+
+
 class Event:
     def __init__(self, main_node):
         self._valid = True
@@ -99,6 +151,7 @@ class Event:
         self._warnings = []
         self._done = {}
         self._ai_info = {}
+        self.set_end_tag = False
         
         for node in main_node:
             if node.tag == 'big_message':
@@ -156,32 +209,8 @@ class Event:
                     self._body.append('    local x, y = %s:getPosition()' % (name))
                     x, y = convertPosition(0, node.get('value'))
                     self._body.append('    %s:setPosition(x, %s)' % (name, y))
-                elif property == 'shieldStateFront':
-                    self._body.append('    %s:setFrontShield(%f)' % (name, float(node.get('value'))))
-                elif property == 'shieldStateBack':
-                    self._body.append('    %s:setRearShield(%f)' % (name, float(node.get('value'))))
-                elif property == 'shieldMaxStateFront':
-                    self._body.append('    %s:setFrontShieldMax(%f)' % (name, float(node.get('value'))))
-                elif property == 'shieldMaxStateBack':
-                    self._body.append('    %s:setRearShieldMax(%f)' % (name, float(node.get('value'))))
-                elif property == 'systemDamageBeam':
-                    self._body.append('    %s:setSystemHealth("beamweapons", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
-                elif property == 'systemDamageTorpedo':
-                    self._body.append('    %s:setSystemHealth("missilesystem", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
-                elif property == 'systemDamageTactical':
-                    self.warning('Reactor instead of sensors', node)
-                    self._body.append('    %s:setSystemHealth("reactor", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
-                elif property == 'systemDamageTurning':
-                    self._body.append('    %s:setSystemHealth("maneuver", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
-                elif property == 'systemDamageImpulse':
-                    self._body.append('    %s:setSystemHealth("impulse", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
-                elif property == 'systemDamageWarp':
-                    self._body.append('    %s:setSystemHealth("warp", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
-                    self._body.append('    %s:setSystemHealth("jumpdrive", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
-                elif property == 'systemDamageFrontShield':
-                    self._body.append('    %s:setSystemHealth("frontshield", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
-                elif property == 'systemDamageBackShield':
-                    self._body.append('    %s:setSystemHealth("rearshield", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
+                elif convertSystemState(property) is not None:
+                    self._body.append(setSystemHealth(name, property, node.get('value')))
                 elif property == 'willAcceptCommsOrders':
                     self.warning('Ignore', node)
                 elif property == 'eliteAIType':
@@ -196,6 +225,11 @@ class Event:
                     self.warning('Ignore', node)
                     #raise UnknownArtemisTagError(node)
                 self._body.append('end')
+            elif node.tag == 'if_object_property':
+                self._body.append('if %s %s %s then' % (getSystemHealth(convertName(node.get('name')),
+                                                                        node.get('property')),
+                                                        convertComparator(node), node.get('value')))
+                self.set_end_tag = True
             elif node.tag == 'set_fleet_property':
                 self.warning('Ignore', node)
             elif node.tag == 'set_timer':
@@ -287,6 +321,10 @@ class Event:
             else:
                 raise UnknownArtemisTagError(node)
                 self.warning('Ignore', node)
+
+        if self.set_end_tag:
+            self._body.append('end')
+            self.set_end_tag = False
 
         # Convert the AI statements to EE AI.
         for name, ai in self._ai_info.items():
