@@ -62,6 +62,9 @@ public:
     ScienceScreen(GuiContainer* owner);
 
     virtual void onDraw(sf::RenderTarget& window);
+
+private:
+    void addDescriptionBox(const string &description, bool condition) const;
 };
 
 #endif//SCIENCE_SCREEN_H

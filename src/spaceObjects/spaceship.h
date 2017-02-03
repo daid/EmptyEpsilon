@@ -167,6 +167,11 @@ public:
     P<SpaceObject> docking_target; //Server only
     sf::Vector2f docking_offset; //Server only
 
+    /**
+     * An additional descrption only revealed on deep scan
+     */
+    string object_description_scanned;
+
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
 
 #if FEATURE_3D_RENDERING
@@ -397,6 +402,9 @@ public:
     void setRadarTrace(string trace) { radar_trace = trace; }
 
     void addBroadcast(int threshold, string message);
+
+    string getDescriptionScanned() { return object_description_scanned; }
+    void setDescriptionScanned(string description) { object_description_scanned = description; }
 
     //Return a string that can be appended to an object create function in the lua scripting.
     // This function is used in getScriptExport calls to adjust for tweaks done in the GM screen.
