@@ -232,10 +232,9 @@ class Event:
                     #raise UnknownArtemisTagError(node)
                 self._body.append('end')
             elif node.tag == 'if_object_property':
-                self._body.append('if %s %s %s then' % (getSystemHealth(convertName(node.get('name')),
+                self._conditions.append('%s %s %s' % (getSystemHealth(convertName(node.get('name')),
                                                                         node.get('property')),
                                                         convertComparator(node), node.get('value')))
-                self.set_end_tag = True
             elif node.tag == 'set_fleet_property':
                 self.warning('Ignore', node)
             elif node.tag == 'set_timer':
