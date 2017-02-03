@@ -39,7 +39,13 @@ def convertPosition(x, z):
     return convertFloat('20000-(%s)' % (x)), convertFloat('(%s)-100000' % (z))
 
 def convertName(name):
-    return '%s' % (name.replace(' ', '_').replace('-', '_').replace('*', 'X').replace('.', '__'))
+    prefix = ''
+    try:
+        if int(name[0]) in range(10):
+            prefix = 'object_'
+    except ValueError:
+        pass
+    return '%s%s' % (prefix, name.replace(' ', '_').replace('-', '_').replace('*', 'X').replace('.', '__'))
 
 def convertRaceKeys(node, default=None):
     keys = node.get('raceKeys', default)
