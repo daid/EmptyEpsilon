@@ -309,7 +309,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         string description = obj->getDescriptionFor(my_spaceship);
         string sidebar_pager_selection = sidebar_pager->getSelectionValue();
 
-        addDescriptionBox(description, description.size() > 0)
+        addDescriptionBox(description, description.size() > 0);
 
         // If the target is a ship, show information about the ship based on how
         // deeply we've scanned it.
@@ -354,10 +354,10 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                 {
                     if (description_scanned.size() > 0)
                     {
-                        desc = "Special Intel:\n" + description_scanned
+                        desc = "Special Intel:\n" + description_scanned;
                     }
                 }
-                addDescriptionBox(desc, description.size() > 0 || description_scanned.size() > 0)
+                addDescriptionBox(desc, description.size() > 0 || description_scanned.size() > 0);
                 sidebar_pager->setVisible(sidebar_pager->entryCount() > 1);
 
                 // Check sidebar pager state.
