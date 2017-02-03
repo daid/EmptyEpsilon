@@ -77,6 +77,9 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadarTrace);
 
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, addBroadcast);
+
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setDescriptionScanned);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDescriptionScanned);
 }
 
 SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_range)
