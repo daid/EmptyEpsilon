@@ -286,8 +286,9 @@ class Event:
                     self._body.append('end')
             
             elif node.tag == 'if_gm_key':
-                self._conditions.append('0') # gm key triggers are never run.
-                self.warning('Ignore', node)
+                self._body.append('addGMFunction("addMissingCaption", function()')
+                self.warning('Add missing Caption', node)
+                self.set_end_tag = True
             elif node.tag == 'if_client_key':
                 self._conditions.append('0')
                 self.warning('Ignore', node)
@@ -323,12 +324,15 @@ class Event:
                 self._conditions.append('(%s == nil or not %s:isValid())' % (convertName(node.get('name')), convertName(node.get('name'))))
             elif node.tag == 'if_player_is_targeting':
                 self._conditions.append('(%s ~= nil and %s:isValid() and getPlayerShip(-1):getTarget() == %s)' % (convertName(node.get('name')), convertName(node.get('name')), convertName(node.get('name'))))
+            elif node.tag == 'if_damcon_members':
+                self.damcon_condition += 1
+                break
             else:
                 raise UnknownArtemisTagError(node)
                 self.warning('Ignore', node)
 
         if self.set_end_tag:
-            self._body.append('end')
+            self._body.append('end)')
             self.set_end_tag = False
 
         # Convert the AI statements to EE AI.
