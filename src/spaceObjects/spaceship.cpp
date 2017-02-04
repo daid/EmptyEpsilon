@@ -5,6 +5,7 @@
 #include "spaceObjects/beamEffect.h"
 #include "factionInfo.h"
 #include "spaceObjects/explosionEffect.h"
+#include "spaceObjects/spaceStation.h"
 #include "particleEffect.h"
 #include "spaceObjects/warpJammer.h"
 #include "gameGlobalInfo.h"
@@ -706,6 +707,17 @@ void SpaceShip::collide(Collisionable* other, float force)
             docking_offset = sf::rotateVector(getPosition() - other->getPosition(), -other->getRotation());
             float length = sf::length(docking_offset);
             docking_offset = docking_offset / length * (length + 2.0f);
+            // if Player has no permission to dock give a penalty of -10 reputation
+            P<SpaceStation> station = dock_object;
+            if (station && !station->hasDockingPermission(this)) {
+                P<PlayerSpaceship> player = P<SpaceShip>(this);
+                player->removeReputationPoints(10);
+                station->sendCommsMessage(player, "What is this? We did not give permission for docking!");
+            }
+            // if Player had permission remove him from the docking permission list after docking
+            if (station && station->hasDockingPermission(this)) {
+                station->removeDockingPermission(this);
+            }
         }
     }
 }

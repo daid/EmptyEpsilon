@@ -23,10 +23,12 @@ function mainMenu()
         services = {
             supplydrop = "friend",
             reinforcements = "friend",
+            dock = "neutral",
         },
         service_cost = {
             supplydrop = 100,
             reinforcements = 150,
+            dock = 0,
         },
         reputation_cost_multipliers = {
             friend = 1.0,
@@ -174,6 +176,19 @@ function handleUndockedState()
                 end
             end
             addCommsReply("Back", mainMenu)
+        end)
+    end
+    if isAllowedTo(comms_target.comms_data.services.dock) then
+        addCommsReply("Request permission to dock!", function()
+             --addCommsReply("WP" .. n, function()
+                 if distance(player,comms_target) > 5000 then
+                     setCommsMessage("Docking permission denied. Permisson can only be granted for ships in close ranges.")
+                 else
+                     comms_target:addDockingPermission(player);
+                     setCommsMessage("Permission granted!");
+                 end
+                 addCommsReply("Back", mainMenu)
+             --end)
         end)
     end
 end
