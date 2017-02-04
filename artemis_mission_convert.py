@@ -124,6 +124,35 @@ def convertSystemState(system_state):
         return ['rearshield']
     return None
 
+
+def convert_positions(node):
+    positions = set()
+    if 'C' in node.get("consoles"):
+        positions.add("relayOfficer")
+        positions.add("operationsOfficer")
+        positions.add("singlePilot")
+    if 'H' in node.get("consoles"):
+        positions.add("helmsOfficer")
+        positions.add("tacticalOfficer")
+        positions.add("singlePilot")
+    if 'W' in node.get("consoles"):
+        positions.add("weaponsOfficer")
+        positions.add("tacticalOfficer")
+        positions.add("singlePilot")
+    if 'E' in node.get("consoles"):
+        positions.add("engineering")
+        positions.add("engineeringAdvanced")
+        positions.add("singlePilot")
+    if 'S' in node.get("consoles"):
+        positions.add("scienceOfficer")
+        positions.add("operationsOfficer")
+        positions.add("singlePilot")
+
+    if len(positions) == 0:
+        raise UnknownArtemisTagError(node)
+
+    return positions
+
 def setSystemHealth(obj, property_name, value):
     _value = float(value)
     if 'shield' in property_name and 'State' in property_name:
@@ -150,7 +179,7 @@ def getSystemHealth(obj, property_name):
 
 
 class Event:
-    def __init__(self, main_node):
+    def __init__(self, main_node, player = None):
         self._valid = True
         self._body = []
         self._conditions = []
@@ -158,7 +187,8 @@ class Event:
         self._done = {}
         self._ai_info = {}
         self.set_end_tag = False
-        
+        self._player = player
+
         for node in main_node:
             if node.tag == 'big_message':
                 message = convertString(node.get('title', ''))
@@ -170,7 +200,11 @@ class Event:
             elif node.tag == 'incoming_comms_text':
                 self._body.append('temp_transmission_object:setCallSign("%s"):sendCommsMessage(getPlayerShip(-1), "%s")' % (convertString(node.get('from')), convertString(node.text)));
             elif node.tag == 'warning_popup_message':
-                self.warning('Ignore', node)
+                if self._player is None:
+                    self.warning('Ignore - no player ready', node)
+                if 'M' in node.get("consoles") or 'O' in node.get('consoles'):
+                    self.warning('Ignore', node)
+                self._body.append('%s:addCustomInfo(%s, %s, "%s")' % (self._player, convert_positions(node), 'warning', node.get('message')))
             elif node.tag == 'start_getting_keypresses_from':
                 self.warning('Ignore', node)
             elif node.tag == 'end_getting_keypresses_from':
@@ -350,6 +384,9 @@ class Event:
             else:
                 self.warning('Unknown AI: %s: %s' % (name, ai))
 
+    def getPlayer(self):
+        return self._player
+
     def parseCreate(self, node):
         if node.get('use_gm_position') is not None:
             return
@@ -358,6 +395,7 @@ class Event:
             name = convertName(node.get('name'))
             x, y = convertPosition(node.get('x'), node.get('z'))
             self._body.append('%s = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Player Cruiser"):setCallSign("%s"):setPosition(%s, %s)' % (name, node.get('name'), x, y))
+            self._player = name
         elif create_type == 'neutral':
             name = convertName(node.get('name'))
             x, y = convertPosition(node.get('x'), node.get('z'))
@@ -472,7 +510,7 @@ class Converter:
         self._events = []
         self._start_event = Event(self._data.find("start"))
         for node in self._data.findall("event"):
-            self._events.append(Event(node))
+            self._events.append(Event(node, self._start_event.getPlayer()))
     
     def export(self, name, filename):
         f = open(filename, "w")
