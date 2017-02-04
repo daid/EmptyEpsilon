@@ -3,6 +3,7 @@
 #include "targetsContainer.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "spaceObjects/spaceStation.h"
 
 GuiOpenCommsButton::GuiOpenCommsButton(GuiContainer* owner, string id, TargetsContainer* targets)
 : GuiButton(owner, id, "Open comms", [this]() {

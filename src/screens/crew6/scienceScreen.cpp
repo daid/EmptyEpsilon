@@ -3,6 +3,7 @@
 #include "scienceScreen.h"
 #include "scienceDatabase.h"
 #include "spaceObjects/nebula.h"
+#include "spaceObjects/spaceStation.h"
 
 #include "screenComponents/radarView.h"
 #include "screenComponents/rawScannerDataRadarOverlay.h"

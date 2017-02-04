@@ -2,7 +2,6 @@
 #define SPACESHIP_H
 
 #include "shipTemplateBasedObject.h"
-#include "spaceStation.h"
 #include "spaceshipParts/beamWeapon.h"
 #include "spaceshipParts/weaponTube.h"
 

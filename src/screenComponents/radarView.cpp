@@ -4,6 +4,7 @@
 #include "gameGlobalInfo.h"
 #include "spaceObjects/nebula.h"
 #include "spaceObjects/scanProbe.h"
+#include "spaceObjects/spaceStation.h"
 #include "playerInfo.h"
 #include "radarView.h"
 #include "missileTubeControls.h"
