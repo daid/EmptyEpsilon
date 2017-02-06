@@ -5,7 +5,7 @@ ScenarioInfo::ScenarioInfo(string filename)
 {
     this->filename = filename;
     name = filename.substr(9, -4);
-    
+
     P<ResourceStream> stream = getResourceStream(filename);
     if (!stream) return;
 
@@ -20,7 +20,7 @@ ScenarioInfo::ScenarioInfo(string filename)
         if (line.startswith("---"))
         {
             line = line.substr(3).strip();
-            value = value + " " + line;
+            value = value + "\n" + line;
         }else{
             line = line.substr(2).strip();
             if (line.find(":") < 0)

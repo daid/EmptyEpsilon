@@ -3,13 +3,13 @@
 #include "main.h"
 #include "preferenceManager.h"
 #include "epsilonServer.h"
-#include "tutorialGame.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/spaceship.h"
 #include "mouseCalibrator.h"
 #include "menus/serverCreationScreen.h"
 #include "menus/optionsMenu.h"
+#include "menus/tutorialMenu.h"
 #include "menus/serverBrowseMenu.h"
 #include "screens/gm/gameMasterScreen.h"
 #include "screenComponents/rotatingModelView.h"
@@ -93,9 +93,9 @@ MainMenu::MainMenu()
         engine->shutdown();
     }))->setPosition(sf::Vector2f(50, -50), ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "START_TUTORIAL", "Tutorial", [this]() {
+    (new GuiButton(this, "START_TUTORIAL", "Tutorials", [this]() {
+        new TutorialMenu();
         destroy();
-        new TutorialGame();
     }))->setPosition(sf::Vector2f(370, -50), ABottomLeft)->setSize(300, 50);
 
     if (InputHandler::touch_screen)
