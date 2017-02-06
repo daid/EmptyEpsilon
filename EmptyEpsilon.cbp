@@ -567,6 +567,8 @@
 		<Unit filename="src/menus/serverCreationScreen.h" />
 		<Unit filename="src/menus/shipSelectionScreen.cpp" />
 		<Unit filename="src/menus/shipSelectionScreen.h" />
+		<Unit filename="src/menus/tutorialMenu.cpp" />
+		<Unit filename="src/menus/tutorialMenu.h" />
 		<Unit filename="src/mesh.cpp" />
 		<Unit filename="src/mesh.h" />
 		<Unit filename="src/missileWeaponData.cpp" />

@@ -1,9 +1,8 @@
---[[ The tutorial script looks a lot like a normal scenario script,
-        except that it has access to the "tutorial" object.
-        This object contains special functions to help explain the game.
---]]
+-- Name: Run All
+-- Description: All Station Tutorials. This cycles through all the stations. 
+-- Type: Basic
 require("utils.lua")
-
+--TODO Remove this file. 
 function init()
     --Create the player ship
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Phobos M3P")

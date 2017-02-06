@@ -288,6 +288,7 @@ public:
 };
 REGISTER_MULTIPLAYER_ENUM(ECommsState);
 template<> int convert<EAlertLevel>::returnType(lua_State* L, EAlertLevel l);
+template<> void convert<EAlertLevel>::param(lua_State* L, int& idx, EAlertLevel& al);
 REGISTER_MULTIPLAYER_ENUM(EAlertLevel);
 
 static inline sf::Packet& operator << (sf::Packet& packet, const PlayerSpaceship::CustomShipFunction& csf) { return packet << uint8_t(csf.type) << uint8_t(csf.crew_position) << csf.name << csf.caption; } \
