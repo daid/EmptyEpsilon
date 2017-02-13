@@ -20,7 +20,7 @@
 - Target drone for the quick basic scenario to practice firing missiles
 - `setShieldFrequency` function
 - `getEnergy`/`setEnergy` functions that take `max_energy_level` into consideration
-- CMake error if `DRMINGW__ROOT` is not set
+- CMake error if `DRMINGW_ROOT` is not set
 
 ### Changed
 
