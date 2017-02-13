@@ -1,5 +1,39 @@
 # Change Log
 
+## [Unreleased]
+
+### Added
+
+- Tutorial menu
+- Default hotkeys
+- F1 shows the available hotkeys
+
+### Changed
+
+- Re-factored the all tutorial into individual stations
+
+## [2017-01-19]
+
+### Added
+
+- 5U circle around players on the Game Master screen
+- Target drone for the quick basic scenario to practice firing missiles
+- `setShieldFrequency` function
+- `getEnergy`/`setEnergy` functions that take `max_energy_level` into consideration
+- CMake error if `DRMINGW__ROOT` is not set
+
+### Changed
+
+- Improved callback handling to prevent closures from being deleted while in use
+- Renamed shield system to shield generators
+- Timing of rescue ship in _Beacon of Light_ scenario
+
+### Fixed
+
+- Operations screen not being able to select things
+- Set `RESOURCE__BASE__DIR` to fix missing resource directory when compling on FreeBSD
+- Null pointer exception in getSystemHealth
+
 ## [2016-09-02]
 
 ### Added
@@ -489,6 +523,7 @@
 - create button visible through the cancel button on game master screen
 - clicking outside the radar circle but inside its reactangle caused callbacks
 
+[2017-01-19]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.24...EE-2016.09.02
 [2016-09-02]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.24...EE-2016.09.02
 [2016-06-24]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.23...EE-2016.06.24
 [2016-06-23]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.02...EE-2016.06.23
