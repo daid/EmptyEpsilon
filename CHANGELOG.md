@@ -523,7 +523,8 @@
 - create button visible through the cancel button on game master screen
 - clicking outside the radar circle but inside its reactangle caused callbacks
 
-[2017-01-19]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.24...EE-2016.09.02
+[Unreleased]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.01.19...HEAD
+[2017-01-19]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.09.02...EE-2017.01.19
 [2016-09-02]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.24...EE-2016.09.02
 [2016-06-24]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.23...EE-2016.06.24
 [2016-06-23]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.02...EE-2016.06.23
