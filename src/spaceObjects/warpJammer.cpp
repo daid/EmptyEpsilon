@@ -1,5 +1,6 @@
 #include "warpJammer.h"
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "explosionEffect.h"
 #include "main.h"
 
@@ -20,6 +21,7 @@ WarpJammer::WarpJammer()
     hull = 50;
 
     jammer_list.push_back(this);
+    setRadarSignatureInfo(0.05, 0.5, 0.0);
 
     registerMemberReplication(&range);
     
@@ -46,7 +48,7 @@ void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, fl
         range_circle.setOrigin(range * scale, range * scale);
         range_circle.setPosition(position);
         range_circle.setFillColor(sf::Color::Transparent);
-        range_circle.setOutlineColor(sf::Color(255, 255, 255, 32));
+        range_circle.setOutlineColor(sf::Color(255, 255, 255, 64));
         range_circle.setOutlineThickness(2.0);
         window.draw(range_circle);
     }

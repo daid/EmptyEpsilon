@@ -17,4 +17,4 @@ public:
     GuiArrow* setAngle(float angle) { this->angle = angle; return this; }
 };
 
-#endif//GUI2_BOX_H
+#endif//GUI2_ARROW_H

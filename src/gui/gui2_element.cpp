@@ -2,15 +2,18 @@
 #include "main.h"
 
 GuiElement::GuiElement(GuiContainer* owner, string id)
-: position_alignment(ATopLeft), owner(owner), rect(0, 0, 0, 0), visible(true), enabled(true), hover(false), focus(false), id(id)
+: position_alignment(ATopLeft), owner(owner), rect(0, 0, 0, 0), visible(true), enabled(true), hover(false), focus(false), active(false), id(id)
 {
     owner->elements.push_back(this);
+    destroyed = false;
 }
 
 GuiElement::~GuiElement()
 {
     if (owner)
-        owner->elements.remove(this);
+    {
+        LOG(ERROR) << "GuiElement waa destroyed while it still had an owner...";
+    }
 }
 
 bool GuiElement::onMouseDown(sf::Vector2f position)
@@ -26,14 +29,13 @@ void GuiElement::onMouseUp(sf::Vector2f position)
 {
 }
 
-bool GuiElement::onKey(sf::Keyboard::Key key, int unicode)
+bool GuiElement::onKey(sf::Event::KeyEvent key, int unicode)
 {
     return false;
 }
 
-bool GuiElement::onHotkey(sf::Keyboard::Key key, int unicode)
+void GuiElement::onHotkey(const HotkeyResult& key)
 {
-    return false;
 }
 
 bool GuiElement::onJoystickXYMove(sf::Vector2f position)
@@ -67,6 +69,28 @@ GuiElement* GuiElement::setSize(float x, float y)
 sf::Vector2f GuiElement::getSize()
 {
     return size;
+}
+
+GuiElement* GuiElement::setMargins(float n)
+{
+    margins.left = margins.top = margins.width = margins.height = n;
+    return this;
+}
+
+GuiElement* GuiElement::setMargins(float x, float y)
+{
+    margins.left = margins.width = x;
+    margins.top = margins.height = y;
+    return this;
+}
+
+GuiElement* GuiElement::setMargins(float left, float top, float right, float bottom)
+{
+    margins.left = left;
+    margins.top = top;
+    margins.width = right;
+    margins.height = bottom;
+    return this;
 }
 
 GuiElement* GuiElement::setPosition(float x, float y, EGuiAlign alignment)
@@ -135,6 +159,17 @@ bool GuiElement::isEnabled()
     return enabled;
 }
 
+GuiElement* GuiElement::setActive(bool active)
+{
+    this->active = active;
+    return this;
+}
+
+bool GuiElement::isActive()
+{
+    return active;
+}
+
 void GuiElement::moveToFront()
 {
     if (owner)
@@ -158,33 +193,56 @@ sf::Vector2f GuiElement::getCenterPoint()
     return sf::Vector2f(rect.left + rect.width / 2.0, rect.top + rect.height / 2.0);
 }
 
-void GuiElement::updateRect(sf::FloatRect window_rect)
+GuiContainer* GuiElement::getOwner()
+{
+    return owner;
+}
+
+GuiContainer* GuiElement::getTopLevelContainer()
+{
+    GuiContainer* top_level = owner;
+    while(dynamic_cast<GuiElement*>(top_level) != nullptr)
+        top_level = dynamic_cast<GuiElement*>(top_level)->getOwner();
+    return top_level;
+}
+
+void GuiElement::destroy()
+{
+    destroyed = true;
+}
+
+void GuiElement::updateRect(sf::FloatRect parent_rect)
 {
     sf::Vector2f local_size = size;
     if (local_size.x == GuiSizeMax)
-        local_size.x = window_rect.width - fabs(position.x);
+        local_size.x = parent_rect.width - fabs(position.x);
     if (local_size.y == GuiSizeMax)
-        local_size.y = window_rect.height - fabs(position.y);
+        local_size.y = parent_rect.height - fabs(position.y);
+    
     if (local_size.x == GuiSizeMatchHeight)
         local_size.x = local_size.y;
     if (local_size.y == GuiSizeMatchWidth)
         local_size.y = local_size.x;
+    
+    local_size.x -= margins.width + margins.left;
+    local_size.y -= margins.height + margins.top;
+    
     switch(position_alignment)
     {
     case ATopLeft:
     case ACenterLeft:
     case ABottomLeft:
-        rect.left = window_rect.left + position.x;
+        rect.left = parent_rect.left + position.x + margins.left;
         break;
     case ATopCenter:
     case ACenter:
     case ABottomCenter:
-        rect.left = window_rect.left + window_rect.width / 2.0 + position.x - local_size.x / 2.0;
+        rect.left = parent_rect.left + parent_rect.width / 2.0 + position.x - local_size.x / 2.0;
         break;
     case ATopRight:
     case ACenterRight:
     case ABottomRight:
-        rect.left = window_rect.left + window_rect.width + position.x - local_size.x;
+        rect.left = parent_rect.left + parent_rect.width + position.x - local_size.x - margins.width;
         break;
     }
 
@@ -193,17 +251,17 @@ void GuiElement::updateRect(sf::FloatRect window_rect)
     case ATopLeft:
     case ATopRight:
     case ATopCenter:
-        rect.top = window_rect.top + position.y;
+        rect.top = parent_rect.top + position.y + margins.top;
         break;
     case ACenterLeft:
     case ACenterRight:
     case ACenter:
-        rect.top = window_rect.top + window_rect.height / 2.0 + position.y - local_size.y / 2.0;
+        rect.top = parent_rect.top + parent_rect.height / 2.0 + position.y - local_size.y / 2.0;
         break;
     case ABottomLeft:
     case ABottomRight:
     case ABottomCenter:
-        rect.top = window_rect.top + window_rect.height + position.y - local_size.y;
+        rect.top = parent_rect.top + parent_rect.height + position.y - local_size.y - margins.height;
         break;
     }
     
@@ -270,29 +328,34 @@ void GuiElement::drawRenderTexture(sf::RenderTexture& texture, sf::RenderTarget&
     window.draw(sprite, states);
 }
 
-void GuiElement::drawText(sf::RenderTarget& window, sf::FloatRect rect, string text, EGuiAlign align, float font_size, sf::Color color)
+void GuiElement::drawText(sf::RenderTarget& window, sf::FloatRect rect, string text, EGuiAlign align, float font_size, sf::Font* font, sf::Color color)
 {
-    sf::Text textElement(text, *mainFont, font_size);
+    sf::Text textElement(text, *font, font_size);
     float y = 0;
     float x = 0;
+    
+    //The "base line" of the text draw is the "Y position where the text is drawn" + font_size.
+    //The height of normal text is 70% of the font_size.
+    //So use those properties to align the text. Depending on the localbounds does not work.
     switch(align)
     {
     case ATopLeft:
     case ATopRight:
     case ATopCenter:
-        y = rect.top - textElement.getLocalBounds().top;
+        y = rect.top - 0.3 * font_size;
         break;
     case ABottomLeft:
     case ABottomRight:
     case ABottomCenter:
-        y = rect.top + rect.height - (textElement.getLocalBounds().height + textElement.getLocalBounds().top);
+        y = rect.top + rect.height - font_size;
         break;
     case ACenterLeft:
     case ACenterRight:
     case ACenter:
-        y = rect.top + rect.height / 2.0 - (textElement.getLocalBounds().height + textElement.getLocalBounds().top) / 2.0 - font_size / 8.0;
+        y = rect.top + rect.height / 2.0 - font_size + font_size * 0.35;
         break;
     }
+    
     switch(align)
     {
     case ATopLeft:
@@ -316,13 +379,13 @@ void GuiElement::drawText(sf::RenderTarget& window, sf::FloatRect rect, string t
     window.draw(textElement);
 }
 
-void GuiElement::drawVerticalText(sf::RenderTarget& window, sf::FloatRect rect, string text, EGuiAlign align, float font_size, sf::Color color)
+void GuiElement::drawVerticalText(sf::RenderTarget& window, sf::FloatRect rect, string text, EGuiAlign align, float font_size, sf::Font* font, sf::Color color)
 {
-    sf::Text textElement(text, *mainFont, font_size);
+    sf::Text textElement(text, *font, font_size);
     textElement.setRotation(-90);
     float x = 0;
     float y = 0;
-    x = rect.left + rect.width / 2.0 - textElement.getLocalBounds().height / 2.0 - textElement.getLocalBounds().top / 2.0;
+    x = rect.left + rect.width / 2.0 - textElement.getLocalBounds().height / 2.0 - textElement.getLocalBounds().top;
     switch(align)
     {
     case ATopLeft:
@@ -546,16 +609,162 @@ void GuiElement::draw9CutV(sf::RenderTarget& window, sf::FloatRect rect, string 
     }
 }
 
+void GuiElement::drawStretched(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color)
+{
+    if (rect.width >= rect.height)
+    {
+        drawStretchedH(window, rect, texture, color);
+    }else{
+        drawStretchedV(window, rect, texture, color);
+    }
+}
+
+void GuiElement::drawStretchedH(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color)
+{
+    sf::Texture* texture_ptr = textureManager.getTexture(texture);
+    sf::Vector2f texture_size = sf::Vector2f(texture_ptr->getSize());
+    sf::VertexArray a(sf::TrianglesStrip, 8);
+    
+    float w = rect.height / 2.0f;
+    if (w * 2 > rect.width)
+        w = rect.width / 2.0f;
+    a[0].position = sf::Vector2f(rect.left, rect.top);
+    a[1].position = sf::Vector2f(rect.left, rect.top + rect.height);
+    a[2].position = sf::Vector2f(rect.left + w, rect.top);
+    a[3].position = sf::Vector2f(rect.left + w, rect.top + rect.height);
+    a[4].position = sf::Vector2f(rect.left + rect.width - w, rect.top);
+    a[5].position = sf::Vector2f(rect.left + rect.width - w, rect.top + rect.height);
+    a[6].position = sf::Vector2f(rect.left + rect.width, rect.top);
+    a[7].position = sf::Vector2f(rect.left + rect.width, rect.top + rect.height);
+    
+    a[0].texCoords = sf::Vector2f(0, 0);
+    a[1].texCoords = sf::Vector2f(0, texture_size.y);
+    a[2].texCoords = sf::Vector2f(texture_size.x / 2, 0);
+    a[3].texCoords = sf::Vector2f(texture_size.x / 2, texture_size.y);
+    a[4].texCoords = sf::Vector2f(texture_size.x / 2, 0);
+    a[5].texCoords = sf::Vector2f(texture_size.x / 2, texture_size.y);
+    a[6].texCoords = sf::Vector2f(texture_size.x, 0);
+    a[7].texCoords = sf::Vector2f(texture_size.x, texture_size.y);
+
+    for(int n=0; n<8; n++)
+        a[n].color = color;
+    
+    window.draw(a, texture_ptr);
+}
+
+void GuiElement::drawStretchedV(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color)
+{
+    sf::Texture* texture_ptr = textureManager.getTexture(texture);
+    sf::Vector2f texture_size = sf::Vector2f(texture_ptr->getSize());
+    sf::VertexArray a(sf::TrianglesStrip, 8);
+    
+    float h = rect.width / 2.0;
+    if (h * 2 > rect.height)
+        h = rect.height / 2.0f;
+    a[0].position = sf::Vector2f(rect.left, rect.top);
+    a[1].position = sf::Vector2f(rect.left + rect.width, rect.top);
+    a[2].position = sf::Vector2f(rect.left, rect.top + h);
+    a[3].position = sf::Vector2f(rect.left + rect.width, rect.top + h);
+    a[4].position = sf::Vector2f(rect.left, rect.top + rect.height - h);
+    a[5].position = sf::Vector2f(rect.left + rect.width, rect.top + rect.height - h);
+    a[6].position = sf::Vector2f(rect.left, rect.top + rect.height);
+    a[7].position = sf::Vector2f(rect.left + rect.width, rect.top + rect.height);
+    
+    a[0].texCoords = sf::Vector2f(0, 0);
+    a[1].texCoords = sf::Vector2f(0, texture_size.y);
+    a[2].texCoords = sf::Vector2f(texture_size.x / 2, 0);
+    a[3].texCoords = sf::Vector2f(texture_size.x / 2, texture_size.y);
+    a[4].texCoords = sf::Vector2f(texture_size.x / 2, 0);
+    a[5].texCoords = sf::Vector2f(texture_size.x / 2, texture_size.y);
+    a[6].texCoords = sf::Vector2f(texture_size.x, 0);
+    a[7].texCoords = sf::Vector2f(texture_size.x, texture_size.y);
+
+    for(int n=0; n<8; n++)
+        a[n].color = color;
+    
+    window.draw(a, texture_ptr);
+}
+
+void GuiElement::drawStretchedHV(sf::RenderTarget& window, sf::FloatRect rect, float corner_size, string texture, sf::Color color)
+{
+    sf::Texture* texture_ptr = textureManager.getTexture(texture);
+    sf::Vector2f texture_size = sf::Vector2f(texture_ptr->getSize());
+    sf::VertexArray a(sf::TrianglesStrip, 8);
+
+    for(int n=0; n<8; n++)
+        a[n].color = color;
+    
+    corner_size = std::min(corner_size, rect.height / 2.0f);
+    corner_size = std::min(corner_size, rect.width / 2.0f);
+    
+    a[0].position = sf::Vector2f(rect.left, rect.top);
+    a[1].position = sf::Vector2f(rect.left, rect.top + corner_size);
+    a[2].position = sf::Vector2f(rect.left + corner_size, rect.top);
+    a[3].position = sf::Vector2f(rect.left + corner_size, rect.top + corner_size);
+    a[4].position = sf::Vector2f(rect.left + rect.width - corner_size, rect.top);
+    a[5].position = sf::Vector2f(rect.left + rect.width - corner_size, rect.top + corner_size);
+    a[6].position = sf::Vector2f(rect.left + rect.width, rect.top);
+    a[7].position = sf::Vector2f(rect.left + rect.width, rect.top + corner_size);
+    
+    a[0].texCoords = sf::Vector2f(0, 0);
+    a[1].texCoords = sf::Vector2f(0, texture_size.y / 2.0);
+    a[2].texCoords = sf::Vector2f(texture_size.x / 2, 0);
+    a[3].texCoords = sf::Vector2f(texture_size.x / 2, texture_size.y / 2.0);
+    a[4].texCoords = sf::Vector2f(texture_size.x / 2, 0);
+    a[5].texCoords = sf::Vector2f(texture_size.x / 2, texture_size.y / 2.0);
+    a[6].texCoords = sf::Vector2f(texture_size.x, 0);
+    a[7].texCoords = sf::Vector2f(texture_size.x, texture_size.y / 2.0);
+
+    window.draw(a, texture_ptr);
+
+    a[0].position.y = rect.top + rect.height - corner_size;
+    a[2].position.y = rect.top + rect.height - corner_size;
+    a[4].position.y = rect.top + rect.height - corner_size;
+    a[6].position.y = rect.top + rect.height - corner_size;
+    
+    a[0].texCoords.y = texture_size.y / 2.0;
+    a[2].texCoords.y = texture_size.y / 2.0;
+    a[4].texCoords.y = texture_size.y / 2.0;
+    a[6].texCoords.y = texture_size.y / 2.0;
+    
+    window.draw(a, texture_ptr);
+
+    a[1].position.y = rect.top + rect.height;
+    a[3].position.y = rect.top + rect.height;
+    a[5].position.y = rect.top + rect.height;
+    a[7].position.y = rect.top + rect.height;
+    
+    a[1].texCoords.y = texture_size.y;
+    a[3].texCoords.y = texture_size.y;
+    a[5].texCoords.y = texture_size.y;
+    a[7].texCoords.y = texture_size.y;
+    
+    window.draw(a, texture_ptr);
+}
+
 void GuiElement::drawArrow(sf::RenderTarget& window, sf::FloatRect rect, sf::Color color, float rotation)
 {
     sf::Sprite arrow;
-    textureManager.setTexture(arrow, "gui_arrow.png");
+    textureManager.setTexture(arrow, "gui/SelectorArrow");
     arrow.setPosition(rect.left + rect.width / 2.0, rect.top + rect.height / 2.0);
     float f = rect.height / float(arrow.getTextureRect().height);
     arrow.setScale(f, f);
     arrow.setRotation(rotation);
     arrow.setColor(color);
     window.draw(arrow);
+}
+
+sf::Color GuiElement::selectColor(ColorSet& color_set)
+{
+    if (!enabled)
+        return color_set.disabled;
+    if (active)
+        return color_set.active;
+    if (hover)
+        return color_set.hover;
+    if (focus)
+        return color_set.focus;
+    return color_set.normal;
 }
 
 GuiElement::LineWrapResult GuiElement::doLineWrap(string text, float font_size, float width)
@@ -584,7 +793,7 @@ GuiElement::LineWrapResult GuiElement::doLineWrap(string text, float font_size, 
                 first_word = false;
             }
 
-            sf::Glyph glyph = mainFont->getGlyph(currentChar, font_size, false);
+            sf::Glyph glyph = main_font->getGlyph(currentChar, font_size, false);
             currentOffset += glyph.advance;
 
             if (!first_word && currentOffset > width)

@@ -10,8 +10,6 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     /// Set the class name of this object. Normally the class name is copied from the template name (Ex "Cruiser") but you can override it with this function.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setTypeName);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getTypeName);
-    /// Set a custom callsign for this station. Stations get assigned random callsigns at creation, but you can overrule this from scenario scripts.
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setCallSign);
     /// Get the current amount of hull
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getHull);
     /// Get the maximum hull value
@@ -36,6 +34,12 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRadarTrace);
     /// Are the shields online or not. Currently always returns true except for player ships, as only players can turn off shields.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldsActive);
+
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getSharesEnergyWithDocked);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setSharesEnergyWithDocked);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getRepairDocked);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRepairDocked);
+
     /// [Depricated]
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getFrontShield);
     /// [Depricated]
@@ -77,8 +81,9 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
         registerMemberReplication(&shield_max[n]);
         registerMemberReplication(&shield_hit_effect[n], 0.5);
     }
-    registerMemberReplication(&callsign);
     registerMemberReplication(&radar_trace);
+    registerMemberReplication(&hull_strength, 0.5);
+    registerMemberReplication(&hull_max);
 
     callsign = "[" + string(getMultiplayerId()) + "]";
 }
@@ -267,17 +272,12 @@ float ShipTemplateBasedObject::getShieldDamageFactor(DamageInfo& info, int shiel
 
 float ShipTemplateBasedObject::getShieldRechargeRate(int shield_index)
 {
-    return 0.2;
+    return 0.3;
 }
 
 void ShipTemplateBasedObject::setTemplate(string template_name)
 {
     P<ShipTemplate> new_ship_template = ShipTemplate::getTemplate(template_name);
-    if (!new_ship_template)
-    {
-        LOG(ERROR) << "Failed to find template: " << template_name;
-        return;
-    }
     this->template_name = template_name;
     ship_template = new_ship_template;
     type_name = template_name;
@@ -288,6 +288,9 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
         shield_level[n] = shield_max[n] = ship_template->shield_level[n];
 
     radar_trace = ship_template->radar_trace;
+
+    shares_energy_with_docked = ship_template->shares_energy_with_docked;
+    repair_docked = ship_template->repair_docked;
 
     ship_template->setCollisionData(this);
     model_info.setData(ship_template->model_data);
@@ -312,6 +315,16 @@ void ShipTemplateBasedObject::setShieldsMax(std::vector<float> amounts)
         shield_max[n] = amounts[n];
         shield_level[n] = std::min(shield_level[n], shield_max[n]);
     }
+}
+
+ESystem ShipTemplateBasedObject::getShieldSystemForShieldIndex(int index)
+{
+    if (shield_count < 2)
+        return SYS_FrontShield;
+    float angle = index * 360.0 / shield_count;
+    if (std::abs(sf::angleDifference(angle, 0.0f)) < 90)
+        return SYS_FrontShield;
+    return SYS_RearShield;
 }
 
 string ShipTemplateBasedObject::getShieldDataString()

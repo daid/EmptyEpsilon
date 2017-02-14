@@ -1,7 +1,10 @@
-#ifndef GUI_INDICATOR_OVERLAYS_H
-#define GUI_INDICATOR_OVERLAYS_H
+#ifndef INDICATOR_OVERLAYS_H
+#define INDICATOR_OVERLAYS_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
+
+class GuiOverlay;
+class GuiLabel;
 /**
     * Full screen overlay for shield hit effect
     * Full screen overlay for hull hit effect
@@ -31,4 +34,4 @@ private:
     void drawAlertLevel(sf::RenderTarget& window);
 };
 
-#endif//GUI_INDICATOR_OVERLAYS_H
+#endif//INDICATOR_OVERLAYS_H

@@ -1,5 +1,5 @@
-#ifndef SHIP_AI_H
-#define SHIP_AI_H
+#ifndef AI_H
+#define AI_H
 
 #include <SFML/System.hpp>
 #include "pathPlanner.h"
@@ -21,6 +21,16 @@ protected:
     bool has_missiles;
     bool has_beams;
     float beam_weapon_range;
+    enum class EWeaponDirection
+    {
+        Front,
+        Left,
+        Right,
+        Side,
+        Rear
+    };
+    EWeaponDirection weapon_direction;
+    EMissileWeapons best_missile_type;
     
     float update_target_delay;
 
@@ -66,10 +76,10 @@ protected:
     /**!
      * Used for missiles, as they require some intelligence to fire.
      */
-    float calculateFiringSolution(P<SpaceObject> target);
+    float calculateFiringSolution(P<SpaceObject> target, int tube_index);
 
     /// Because the GameMasterUI needs to be touching privates. Hmm.
     friend class GameMasterUI;
 };
 
-#endif//SHIP_AI_H
+#endif//AI_H

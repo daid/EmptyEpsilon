@@ -4,7 +4,7 @@
 
 REGISTER_MULTIPLAYER_CLASS(Nuke, "Nuke");
 Nuke::Nuke()
-: MissileWeapon("Nuke", 500.0, sf::Color(255, 100, 32))
+: MissileWeapon("Nuke", MissileWeaponData::getDataFor(MW_Nuke))
 {
 }
 

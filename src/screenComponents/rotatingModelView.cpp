@@ -71,6 +71,53 @@ void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
         float scale = 100.0f / model->getRadius();
         glScalef(scale, scale, scale);
         model->render();
+#ifdef DEBUG
+
+        sf::Shader::bind(NULL);
+        for (const EngineEmitterData& ee : model->engine_emitters)
+        {
+            sf::Vector3f offset = ee.position * model->scale;
+            float r = model->scale * ee.scale * 0.5;
+            
+            glColor3f(ee.color.x, ee.color.y, ee.color.z);
+            glBegin(GL_LINES);
+            glVertex3f(offset.x + r, offset.y, offset.z);
+            glVertex3f(offset.x - r, offset.y, offset.z);
+            glVertex3f(offset.x, offset.y + r, offset.z);
+            glVertex3f(offset.x, offset.y - r, offset.z);
+            glVertex3f(offset.x, offset.y, offset.z + r);
+            glVertex3f(offset.x, offset.y, offset.z - r);
+            glEnd();
+        }
+        float r = model->getRadius() * 0.1f;
+        glColor3f(1.0, 1.0, 1.0);
+        for (const sf::Vector3f& position : model->beam_position)
+        {
+            sf::Vector3f offset = position * model->scale;
+            
+            glBegin(GL_LINES);
+            glVertex3f(offset.x + r, offset.y, offset.z);
+            glVertex3f(offset.x - r, offset.y, offset.z);
+            glVertex3f(offset.x, offset.y + r, offset.z);
+            glVertex3f(offset.x, offset.y - r, offset.z);
+            glVertex3f(offset.x, offset.y, offset.z + r);
+            glVertex3f(offset.x, offset.y, offset.z - r);
+            glEnd();
+        }
+        for (const sf::Vector3f& position : model->tube_position)
+        {
+            sf::Vector3f offset = position * model->scale;
+            
+            glBegin(GL_LINES);
+            glVertex3f(offset.x + r * 3, offset.y, offset.z);
+            glVertex3f(offset.x - r, offset.y, offset.z);
+            glVertex3f(offset.x, offset.y + r, offset.z);
+            glVertex3f(offset.x, offset.y - r, offset.z);
+            glVertex3f(offset.x, offset.y, offset.z + r);
+            glVertex3f(offset.x, offset.y, offset.z - r);
+            glEnd();
+        }
+#endif
     }
     
     sf::Shader::bind(NULL);

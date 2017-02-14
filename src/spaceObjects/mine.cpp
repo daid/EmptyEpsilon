@@ -14,13 +14,14 @@ REGISTER_SCRIPT_SUBCLASS(Mine, SpaceObject)
 
 REGISTER_MULTIPLAYER_CLASS(Mine, "Mine");
 Mine::Mine()
-: SpaceObject(50, "Mine")
+: SpaceObject(50, "Mine"), data(MissileWeaponData::getDataFor(MW_Mine))
 {
     setCollisionRadius(trigger_range);
     triggered = false;
     triggerTimeout = triggerDelay;
     ejectTimeout = 0.0;
     particleTimeout = 0.0;
+    setRadarSignatureInfo(0.0, 0.05, 0.0);
 
     PathPlannerManager::getInstance()->addAvoidObject(this, trigger_range * 1.2f);
 }
@@ -71,7 +72,7 @@ void Mine::update(float delta)
     if (ejectTimeout > 0.0)
     {
         ejectTimeout -= delta;
-        setVelocity(sf::vector2FromAngle(getRotation()) * speed);
+        setVelocity(sf::vector2FromAngle(getRotation()) * data.speed);
     }else{
         setVelocity(sf::Vector2f(0, 0));
     }
@@ -89,7 +90,7 @@ void Mine::collide(Collisionable* target, float force)
     if (!game_server || triggered || ejectTimeout > 0.0)
         return;
     P<SpaceObject> hitObject = P<Collisionable>(target);
-    if (!hitObject || !hitObject->canBeTargeted())
+    if (!hitObject || !hitObject->canBeTargetedBy(nullptr))
         return;
 
     triggered = true;
@@ -97,7 +98,7 @@ void Mine::collide(Collisionable* target, float force)
 
 void Mine::eject()
 {
-    ejectTimeout = ejectDelay;
+    ejectTimeout = data.lifetime;
 }
 
 void Mine::explode()

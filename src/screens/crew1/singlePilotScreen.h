@@ -1,15 +1,22 @@
-#ifndef SINGLE_PILOR_SCREEN_H
-#define SINGLE_PILOR_SCREEN_H
+#ifndef SINGLE_PILOT_SCREEN_H
+#define SINGLE_PILOT_SCREEN_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_overlay.h"
 #include "screenComponents/targetsContainer.h"
 
 class GuiViewport3D;
 class GuiMissileTubeControls;
 class GuiRadarView;
+class GuiKeyValueDisplay;
+class GuiToggleButton;
+class GuiRotationDial;
+
 class SinglePilotScreen : public GuiOverlay
 {
 private:
+    GuiOverlay* background_gradient;
+    GuiOverlay* background_crosses;
+
     GuiViewport3D* viewport;
     GuiElement* left_panel;
 
@@ -31,5 +38,4 @@ public:
     virtual void onDraw(sf::RenderTarget& window);
 };
 
-#endif//ENGINEERING_ADVANCED_SCREEN_H
-
+#endif//SINGLE_PILOT_SCREEN_H

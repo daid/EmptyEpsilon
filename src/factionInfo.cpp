@@ -13,6 +13,8 @@ PVector<FactionInfo> factionInfo;
 
 FactionInfo::FactionInfo()
 {
+    if (game_server) { LOG(ERROR) << "FactionInfo objects can not be created during a scenario right now."; destroy(); return; }
+
     foreach(FactionInfo, i, factionInfo)
         i->states.push_back(FVF_Neutral);
     factionInfo.push_back(this);
@@ -26,6 +28,12 @@ FactionInfo::FactionInfo()
 
 void FactionInfo::setEnemy(P<FactionInfo> other)
 {
+    if (!other)
+    {
+        LOG(WARNING) << "Tried to set a an undefined faction to enemy with " << name;
+        return;
+    }
+
     int id1 = -1;
     int id2 = -1;
     for(unsigned int n = 0; n < factionInfo.size(); n++)
@@ -44,6 +52,12 @@ void FactionInfo::setEnemy(P<FactionInfo> other)
 
 void FactionInfo::setFriendly(P<FactionInfo> other)
 {
+    if (!other)
+    {
+        LOG(WARNING) << "Tried to set a an undefined faction to friendly with " << name;
+        return;
+    }
+        
     int id1 = -1;
     int id2 = -1;
     for(unsigned int n = 0; n < factionInfo.size(); n++)
@@ -60,7 +74,7 @@ void FactionInfo::setFriendly(P<FactionInfo> other)
     }
 }
 
-int FactionInfo::findFactionId(string name)
+unsigned int FactionInfo::findFactionId(string name)
 {
     for(unsigned int n = 0; n < factionInfo.size(); n++)
         if (factionInfo[n]->name == name)

@@ -14,7 +14,7 @@ GuiShipInternalView* GuiShipInternalView::setShip(P<SpaceShip> ship)
     viewing_ship = ship;
     if (room_container)
     {
-        delete room_container;
+        room_container->destroy();
         room_container = nullptr;
     }
     if (!ship)
@@ -53,28 +53,90 @@ GuiShipInternalView* GuiShipInternalView::setShip(P<SpaceShip> ship)
     }
     room_container->setSize(sf::Vector2f(max_size) * room_size);
     
-    PVector<RepairCrew> crew = getRepairCrewFor(ship);
-    foreach(RepairCrew, rc, crew)
-    {
-        int id = rc->getMultiplayerId();
-        (new GuiShipCrew(room_container, id + "_CREW", rc, [this](P<RepairCrew> crew_member){
-            if (selected_crew_member)
-                selected_crew_member->selected = false;
-            selected_crew_member = crew_member;
-            if (selected_crew_member)
-                selected_crew_member->selected = true;
-        }))->setSize(room_size, room_size);
-    }
-    
     return this;
 }
 
 void GuiShipInternalView::onDraw(sf::RenderTarget& window)
 {
+    setShip(my_spaceship);
+        
     if (!viewing_ship && room_container)
     {
-        delete room_container;
+        room_container->destroy();
         room_container = nullptr;
+    }else{
+        PVector<RepairCrew> crew = getRepairCrewFor(viewing_ship);
+        if (crew.size() != crew_list.size())
+        {
+            for(GuiShipCrew* c : crew_list)
+                c->destroy();
+            crew_list.clear();
+
+            foreach(RepairCrew, rc, crew)
+            {
+                int id = rc->getMultiplayerId();
+                crew_list.push_back(new GuiShipCrew(room_container, id + "_CREW", rc, [this](P<RepairCrew> crew_member){
+                    if (selected_crew_member)
+                        selected_crew_member->selected = false;
+                    selected_crew_member = crew_member;
+                    if (selected_crew_member)
+                        selected_crew_member->selected = true;
+                }));
+                crew_list.back()->setSize(room_size, room_size);
+            }
+        }
+    }
+}
+
+void GuiShipInternalView::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "ENGINEERING" && my_spaceship)
+    {
+        if (key.hotkey == "NEXT_REPAIR_CREW")
+        {
+            PVector<RepairCrew> crew = getRepairCrewFor(viewing_ship);
+            P<RepairCrew> crew_member;
+            bool found = false;
+            foreach(RepairCrew, rc, crew)
+            {
+                if (selected_crew_member == rc)
+                {
+                    found = true;
+                }
+                else if (found)
+                {
+                    crew_member = rc;
+                    break;
+                }
+            }
+            if (!crew_member)
+            {
+                foreach(RepairCrew, rc, crew)
+                {
+                    crew_member = rc;
+                    break;
+                }
+            }
+            if (crew_member)
+            {
+                if (selected_crew_member)
+                    selected_crew_member->selected = false;
+                selected_crew_member = crew_member;
+                if (selected_crew_member)
+                    selected_crew_member->selected = true;
+            }
+        }
+        if (selected_crew_member)
+        {
+            if (key.hotkey == "REPAIR_CREW_MOVE_UP")
+                selected_crew_member->commandSetTargetPosition(sf::Vector2i(selected_crew_member->position + sf::Vector2f(0.5, 0.5)) + sf::Vector2i(0, -1));
+            if (key.hotkey == "REPAIR_CREW_MOVE_DOWN")
+                selected_crew_member->commandSetTargetPosition(sf::Vector2i(selected_crew_member->position + sf::Vector2f(0.5, 0.5)) + sf::Vector2i(0, 1));
+            if (key.hotkey == "REPAIR_CREW_MOVE_LEFT")
+                selected_crew_member->commandSetTargetPosition(sf::Vector2i(selected_crew_member->position + sf::Vector2f(0.5, 0.5)) + sf::Vector2i(-1, 0));
+            if (key.hotkey == "REPAIR_CREW_MOVE_RIGHT")
+                selected_crew_member->commandSetTargetPosition(sf::Vector2i(selected_crew_member->position + sf::Vector2f(0.5, 0.5)) + sf::Vector2i(1, 0));
+        }
     }
 }
 
@@ -115,36 +177,38 @@ void GuiShipRoom::onDraw(sf::RenderTarget& window)
         switch(system)
         {
         case SYS_Reactor:
-            textureManager.setTexture(sprite, "icon_generator.png");
+            textureManager.setTexture(sprite, "gui/icons/system_reactor");
             break;
         case SYS_BeamWeapons:
-            textureManager.setTexture(sprite, "icon_beam.png");
+            textureManager.setTexture(sprite, "gui/icons/system_beam");
             break;
         case SYS_MissileSystem:
-            textureManager.setTexture(sprite, "icon_missile.png");
+            textureManager.setTexture(sprite, "gui/icons/system_missile");
             break;
         case SYS_Maneuver:
-            textureManager.setTexture(sprite, "icon_maneuver.png");
+            textureManager.setTexture(sprite, "gui/icons/system_maneuver");
             break;
         case SYS_Impulse:
-            textureManager.setTexture(sprite, "icon_impulse.png");
+            textureManager.setTexture(sprite, "gui/icons/system_impulse");
             break;
         case SYS_Warp:
+            textureManager.setTexture(sprite, "gui/icons/system_warpdrive");
+            break;
         case SYS_JumpDrive:
-            textureManager.setTexture(sprite, "icon_warp.png");
+            textureManager.setTexture(sprite, "gui/icons/system_jumpdrive");
             break;
         case SYS_FrontShield:
-            textureManager.setTexture(sprite, "icon_front_shield.png");
+            textureManager.setTexture(sprite, "gui/icons/shields-fore");
             break;
         case SYS_RearShield:
-            textureManager.setTexture(sprite, "icon_rear_shield.png");
+            textureManager.setTexture(sprite, "gui/icons/shields-aft");
             break;
         default:
             textureManager.setTexture(sprite, "particle.png");
             break;
         }
         sprite.setPosition(getCenterPoint());
-        sprite.setScale(room_size / 48.0f, room_size / 48.0f);
+        sprite.setScale(room_size / sprite.getTextureRect().height, room_size / sprite.getTextureRect().height);
         window.draw(sprite);
     }
 }

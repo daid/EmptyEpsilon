@@ -21,15 +21,21 @@ static std::unordered_map<string, Mesh*> meshMap;
 Mesh::Mesh()
 {
     vertices = NULL;
-    indices = NULL;
     vertexCount = 0;
+    vbo = NO_BUFFER;
+}
+
+Mesh::Mesh(std::vector<MeshVertex>& vertices)
+{
+    this->vertices = new MeshVertex[vertices.size()];
+    memcpy(this->vertices, vertices.data(), sizeof(MeshVertex) * vertices.size());
+    vertexCount = vertices.size();
     vbo = NO_BUFFER;
 }
 
 Mesh::~Mesh()
 {
     if (vertices) delete vertices;
-    if (indices) delete indices;
     if (vbo != NO_BUFFER)
         glDeleteBuffers(1, &vbo);
 }
@@ -37,6 +43,8 @@ Mesh::~Mesh()
 void Mesh::render()
 {
 #if FEATURE_3D_RENDERING
+    if (!vertexCount)
+        return;
     if (glGenBuffers)
     {
         if (vbo == NO_BUFFER)

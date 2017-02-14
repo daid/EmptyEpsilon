@@ -1,22 +1,24 @@
-#ifndef GUI_COMBAT_MANEUVER_H
-#define GUI_COMBAT_MANEUVER_H
+#ifndef COMBAT_MANEUVER_H
+#define COMBAT_MANEUVER_H
 
-#include "gui/gui2.h"
-#include "snapSlider.h"
+#include "gui/gui2_element.h"
+
+class GuiSnapSlider2D;
+class GuiProgressbar;
 
 class GuiCombatManeuver : public GuiElement
 {
 private:
-    GuiSnapSlider* boost_slider;
-    GuiSnapSlider* strafe_slider;
-public:
+    GuiSnapSlider2D* slider;
     GuiProgressbar* charge_bar;
 public:
     GuiCombatManeuver(GuiContainer* owner, string id);
     
-    virtual void onDraw(sf::RenderTarget& window);
-    void setBoostValue(float value) { boost_slider->setValue(value); }
-    void setStrafeValue(float value) { strafe_slider->setValue(value); }
+    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onHotkey(const HotkeyResult& key) override;
+    
+    void setBoostValue(float value);
+    void setStrafeValue(float value);
 };
 
-#endif//GUI_COMBAT_MANEUVER_H
+#endif//COMBAT_MANEUVER_H

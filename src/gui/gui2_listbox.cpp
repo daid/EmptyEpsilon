@@ -58,12 +58,12 @@ void GuiListbox::entriesChanged()
             callback();
         });
         button->setPosition(0, offset * button_height, ATopLeft);
-        button->setColor(unselected_color);
+        button->setActive(false);
         buttons.push_back(button);
     }
     while(buttons.size() > entries.size())
     {
-        delete buttons.back();
+        buttons.back()->destroy();
         buttons.erase(buttons.begin() + buttons.size() - 1);
     }
     
@@ -72,9 +72,9 @@ void GuiListbox::entriesChanged()
         buttons[n]->setText(entries[n + scroll->getValue()].name);
         buttons[n]->setSize(button_width, button_height);
         if (n + scroll->getValue() == selection_index)
-            buttons[n]->setColor(selected_color);
+            buttons[n]->setActive(true);
         else
-            buttons[n]->setColor(unselected_color);
+            buttons[n]->setActive(false);
     }
 }
 

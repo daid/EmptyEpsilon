@@ -1,7 +1,9 @@
-#ifndef GUI_SELF_DESTRUCT_BUTTON_H
-#define GUI_SELF_DESTRUCT_BUTTON_H
+#ifndef SELF_DESTRUCT_BUTTON_H
+#define SELF_DESTRUCT_BUTTON_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
+
+class GuiButton;
 
 class GuiSelfDestructButton : public GuiElement
 {
@@ -12,7 +14,8 @@ private:
 public:
     GuiSelfDestructButton(GuiContainer* owner, string id);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onHotkey(const HotkeyResult& key) override;
 };
 
-#endif//GUI_SELF_DESTRUCT_BUTTON_H
+#endif//SELF_DESTRUCT_BUTTON_H

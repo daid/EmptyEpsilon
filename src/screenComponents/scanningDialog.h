@@ -1,8 +1,13 @@
-#ifndef GUI_SCANNING_DIALOG_H
-#define GUI_SCANNING_DIALOG_H
+#ifndef SCANNING_DIALOG_H
+#define SCANNING_DIALOG_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
 #include "signalQualityIndicator.h"
+
+class GuiPanel;
+class GuiLabel;
+class GuiSlider;
+class GuiButton;
 
 class GuiScanningDialog : public GuiElement
 {
@@ -10,7 +15,7 @@ private:
     static constexpr int max_sliders = 4;
     static constexpr float lock_delay = 2.0f;
 
-    GuiBox* box;
+    GuiPanel* box;
     GuiLabel* signal_label;
     GuiLabel* locked_label;
     GuiSignalQualityIndicator* signal_quality;
@@ -30,4 +35,4 @@ public:
     void updateSignal();
 };
 
-#endif//GUI_SCANNING_DIALOG_H
+#endif//SCANNING_DIALOG_H

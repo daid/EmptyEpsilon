@@ -1,5 +1,6 @@
-#include "playerInfo.h"
 #include "targetsContainer.h"
+#include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 
 TargetsContainer::TargetsContainer()
 {
@@ -36,6 +37,7 @@ void TargetsContainer::set(P<SpaceObject> obj)
     {
         clear();
     }
+    waypoint_selection_index = -1;
 }
 
 void TargetsContainer::set(PVector<SpaceObject> objs)
@@ -56,11 +58,11 @@ void TargetsContainer::setToClosestTo(sf::Vector2f position, float max_range, ES
             switch(selection_type)
             {
             case Selectable:
-                if (!spaceObject->canBeSelected())
+                if (!spaceObject->canBeSelectedBy(my_spaceship))
                     continue;
                 break;
             case Targetable:
-                if (!spaceObject->canBeTargeted())
+                if (!spaceObject->canBeTargetedBy(my_spaceship))
                     continue;
                 break;
             }
@@ -98,4 +100,11 @@ int TargetsContainer::getWaypointIndex()
     else if (my_spaceship->waypoints[waypoint_selection_index] != waypoint_selection_position)
         waypoint_selection_index = -1;
     return waypoint_selection_index;
+}
+
+void TargetsContainer::setWaypointIndex(int index)
+{
+    waypoint_selection_index = index;
+    if (my_spaceship && index >= 0 && index < (int)my_spaceship->waypoints.size())
+        waypoint_selection_position = my_spaceship->waypoints[index];
 }

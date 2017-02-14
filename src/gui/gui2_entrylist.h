@@ -1,5 +1,5 @@
-#ifndef GUI2_ENTRY_LIST_H
-#define GUI2_ENTRY_LIST_H
+#ifndef GUI2_ENTRYLIST_H
+#define GUI2_ENTRYLIST_H
 
 #include "gui2_element.h"
 #include "gui2_button.h"
@@ -29,6 +29,10 @@ public:
     GuiEntryList* setOptions(std::vector<string> options);
     GuiEntryList* setOptions(std::vector<string> options, std::vector<string> values);
 
+    void setEntryName(int index, string name);
+    void setEntryValue(int index, string value);
+    void setEntry(int index, string name, string value);
+
     int addEntry(string name, string value);
     int indexByValue(string value);
     void removeEntry(int index);
@@ -45,5 +49,4 @@ private:
     virtual void entriesChanged();
 };
 
-#endif//GUI2_ENTRY_LIST_H
-
+#endif//GUI2_ENTRYLIST_H

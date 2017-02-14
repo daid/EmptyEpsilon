@@ -1,13 +1,15 @@
 -- Name: Waves
--- Description: Waves of increasing difficult enemies.
+-- Description: Waves of increasingly difficult enemies.
+-- Type: Basic
+-- Variation[Hard]: Difficulty starts at wave 5 and increases by 1.5 after the players defeat each wave. (Players are more quickly overwhelmed, leading to shorter games.)
+-- Variation[Easy]: Makes each wave easier by decreasing the number of ships in each wave. (Takes longer for the players to be overwhelmed; good for new players.)
 
-function vectorFromAngle(angle, length)
-	return math.cos(angle / 180 * math.pi) * length, math.sin(angle / 180 * math.pi) * length
-end
-function setCirclePos(obj, x, y, angle, distance)
-	dx, dy = vectorFromAngle(angle, distance)
-	return obj:setPosition(x + dx, y + dy)
-end
+require("utils.lua")
+-- For this scenario, utils.lua provides:
+--   vectorFromAngle(angle, length)
+--      Returns a relative vector (x, y coordinates)
+--   setCirclePos(obj, x, y, angle, distance)
+--      Returns the object with its position set to the resulting coordinates.
 
 function randomStationTemplate()
 	if random(0, 100) < 10 then
@@ -28,7 +30,7 @@ function init()
 	enemyList = {}
 	friendlyList = {}
 	
-	PlayerSpaceship():setFaction("Human Navy"):setTemplate("Player Cruiser")
+	PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
 
 	for n=1, 2 do
 		table.insert(friendlyList, SpaceStation():setTemplate(randomStationTemplate()):setFaction("Human Navy"):setPosition(random(-5000, 5000), random(-5000, 5000)))
@@ -94,7 +96,13 @@ function spawnWave()
 	friendlyList[1]:addReputationPoints(150 + waveNumber * 15)
 	
 	enemyList = {}
-	totalScoreRequirement = math.pow(waveNumber, 1.3) * 10;
+	if getScenarioVariation() == "Hard" then
+		totalScoreRequirement = math.pow(waveNumber * 1.5 + 4, 1.3) * 10;
+	elseif getScenarioVariation() == "Easy" then
+		totalScoreRequirement = math.pow(waveNumber * 0.8, 1.3) * 9;
+	else
+		totalScoreRequirement = math.pow(waveNumber, 1.3) * 10;
+	end
 	
 	scoreInSpawnPoint = 0
 	spawnDistance = 20000
@@ -113,22 +121,41 @@ function spawnWave()
 		type = random(0, 10)
 		score = 9999
 		if type < 2 then
-			ship:setTemplate("Fighter");
+            if irandom(1, 100) < 80 then
+                ship:setTemplate("MT52 Hornet");
+            else
+                ship:setTemplate("MU52 Hornet");
+            end
 			score = 5
+        elseif type < 3 then
+            if irandom(1, 100) < 80 then
+                ship:setTemplate("Adder MK5")
+            else
+                ship:setTemplate("WX-Lindworm")
+            end
+            score = 7
 		elseif type < 6 then
-			ship:setTemplate("Cruiser");
+            if irandom(1, 100) < 80 then
+                ship:setTemplate("Phobos T3");
+            else
+                ship:setTemplate("Piranha F12");
+            end
 			score = 15
 		elseif type < 7 then
-			ship:setTemplate("Adv. Gunship");
+			ship:setTemplate("Ranus U");
 			score = 25
 		elseif type < 8 then
-			ship:setTemplate("Strikeship");
+            if irandom(1, 100) < 50 then
+                ship:setTemplate("Stalker Q7");
+            else
+                ship:setTemplate("Stalker R7");
+            end
 			score = 25
 		elseif type < 9 then
-			ship:setTemplate("Dreadnought");
+			ship:setTemplate("Atlantis X23");
 			score = 50
 		else
-			ship:setTemplate("Battlestation");
+			ship:setTemplate("Odin");
 			score = 250
 		end
 		

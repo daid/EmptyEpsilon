@@ -27,6 +27,31 @@ GuiEntryList* GuiEntryList::setOptions(std::vector<string> options, std::vector<
     return this;
 }
 
+void GuiEntryList::setEntryName(int index, string name)
+{
+    if (index < 0 || index >= (int)entries.size())
+        return;
+    entries[index].name = name;
+    entriesChanged();
+}
+
+void GuiEntryList::setEntryValue(int index, string value)
+{
+    if (index < 0 || index >= (int)entries.size())
+        return;
+    entries[index].value = value;
+    entriesChanged();
+}
+
+void GuiEntryList::setEntry(int index, string name, string value)
+{
+    if (index < 0 || index >= (int)entries.size())
+        return;
+    entries[index].value = value;
+    entries[index].name = name;
+    entriesChanged();
+}
+
 int GuiEntryList::addEntry(string name, string value)
 {
     entries.emplace_back(name, value);
@@ -100,9 +125,10 @@ void GuiEntryList::callback()
 {
     if (func)
     {
+        func_t f = func;
         if (selection_index >= 0 && selection_index < (int)entries.size())
-            func(selection_index, entries[selection_index].value);
+            f(selection_index, entries[selection_index].value);
         else
-            func(selection_index, "");
+            f(selection_index, "");
     }
 }

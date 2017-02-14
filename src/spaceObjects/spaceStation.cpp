@@ -1,5 +1,7 @@
 #include "spaceObjects/explosionEffect.h"
 #include "spaceObjects/spaceStation.h"
+#include "spaceObjects/spaceship.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "shipTemplate.h"
 #include "playerInfo.h"
 #include "factionInfo.h"
@@ -17,6 +19,7 @@ SpaceStation::SpaceStation()
 : ShipTemplateBasedObject(300, "SpaceStation")
 {
     comms_script_name = "comms_station.lua";
+    setRadarSignatureInfo(0.2, 0.5, 0.5);
 
     callsign = "DS" + string(getMultiplayerId());
 }
@@ -39,8 +42,10 @@ void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, 
     {
         if (isEnemy(my_spaceship))
             objectSprite.setColor(sf::Color::Red);
-        if (isFriendly(my_spaceship))
+        else if (isFriendly(my_spaceship))
             objectSprite.setColor(sf::Color(128, 255, 128));
+        else
+            objectSprite.setColor(sf::Color(128, 128, 255));
     }else{
         objectSprite.setColor(factionInfo[getFactionId()]->gm_color);
     }

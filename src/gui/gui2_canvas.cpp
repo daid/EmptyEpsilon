@@ -71,13 +71,17 @@ void GuiCanvas::render(sf::RenderTarget& window)
     previous_mouse_position = mouse_position;
 }
 
-void GuiCanvas::handleKeyPress(sf::Keyboard::Key key, int unicode)
+void GuiCanvas::handleKeyPress(sf::Event::KeyEvent key, int unicode)
 {
     if (focus_element)
         if (focus_element->onKey(key, unicode))
             return;
-    if (forwardKeypressToElements(key, unicode))
-        return;
+    std::vector<HotkeyResult> hotkey_list = hotkeys.getHotkey(key);
+    for(HotkeyResult& result : hotkey_list)
+    {
+        forwardKeypressToElements(result);
+        onHotkey(result);
+    }
     onKey(key, unicode);
 }
 
@@ -85,6 +89,20 @@ void GuiCanvas::onClick(sf::Vector2f mouse_position)
 {
 }
 
-void GuiCanvas::onKey(sf::Keyboard::Key key, int unicode)
+void GuiCanvas::onHotkey(const HotkeyResult& key)
 {
+}
+
+void GuiCanvas::onKey(sf::Event::KeyEvent key, int unicode)
+{
+}
+
+void GuiCanvas::unfocusElementTree(GuiElement* element)
+{
+    if (focus_element == element)
+        focus_element = nullptr;
+    if (click_element == element)
+        click_element = nullptr;
+    for(GuiElement* child : element->elements)
+        unfocusElementTree(child);
 }

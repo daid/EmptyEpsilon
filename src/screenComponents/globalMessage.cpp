@@ -1,13 +1,16 @@
 #include "gameGlobalInfo.h"
 #include "globalMessage.h"
 
+#include "gui/gui2_panel.h"
+#include "gui/gui2_label.h"
+
 GuiGlobalMessage::GuiGlobalMessage(GuiContainer* owner)
 : GuiElement(owner, "GLOBAL_MESSAGE")
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    box = new GuiBox(owner, "GLOBAL_MESSAGE_BOX");
-    box->fill()->setSize(800, 100)->setPosition(0, 250, ATopCenter);
+    box = new GuiPanel(owner, "GLOBAL_MESSAGE_BOX");
+    box->setSize(800, 100)->setPosition(0, 250, ATopCenter);
     label = new GuiLabel(box, "GLOBAL_MESSAGE_LABEL", "...", 40);
     label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenter);
 }

@@ -1,17 +1,21 @@
-#ifndef GUI_SHIELDS_ENABLE_H
-#define GUI_SHIELDS_ENABLE_H
+#ifndef SHIELDS_ENABLE_BUTTON_H
+#define SHIELDS_ENABLE_BUTTON_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
+
+class GuiToggleButton;
+class GuiProgressbar;
 
 class GuiShieldsEnableButton : public GuiElement
 {
 private:
-    GuiButton* button;
+    GuiToggleButton* button;
     GuiProgressbar* bar;
 public:
     GuiShieldsEnableButton(GuiContainer* owner, string id);
     
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onHotkey(const HotkeyResult& key) override;
 };
 
-#endif//GUI_SHIELDS_ENABLE_H
+#endif//SHIELDS_ENABLE_BUTTON_H

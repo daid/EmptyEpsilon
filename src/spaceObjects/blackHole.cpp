@@ -15,6 +15,7 @@ BlackHole::BlackHole()
 {
     update_delta = 0.0;
     PathPlannerManager::getInstance()->addAvoidObject(this, 7000);
+    setRadarSignatureInfo(0.9, 0, 0);
 }
 
 void BlackHole::update(float delta)
@@ -29,7 +30,7 @@ void BlackHole::draw3D()
 void BlackHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
     sf::Sprite object_sprite;
-    textureManager.setTexture(object_sprite, "RadarBlip.png");
+    textureManager.setTexture(object_sprite, "blackHole.png");
     object_sprite.setRotation(getRotation());
     object_sprite.setPosition(position);
     float size = getRadius() * scale / object_sprite.getTextureRect().width * 2;

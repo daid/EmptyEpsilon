@@ -15,7 +15,8 @@ private:
     
     bool run_thread;
     int channel_count;
-    uint8_t channel_data[512];
+    int resend_delay;
+    uint8_t data_stream[1+512];
 public:
     DMX512SerialDevice();
     virtual ~DMX512SerialDevice();
@@ -33,6 +34,5 @@ public:
 private:
     void updateLoop();
 };
-
 
 #endif//DMX512_SERIAL_DEVICE_H

@@ -1,8 +1,10 @@
-#ifndef GUI_RADAR_VIEW_H
-#define GUI_RADAR_VIEW_H
+#ifndef RADAR_VIEW_H
+#define RADAR_VIEW_H
 
-#include "targetsContainer.h"
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
+
+class GuiMissileTubeControls;
+class TargetsContainer;
 
 class GuiRadarView : public GuiElement
 {
@@ -41,6 +43,7 @@ private:
     float next_ghost_dot_update;
 
     TargetsContainer* targets;
+    GuiMissileTubeControls* missile_tube_controls;
 
     float distance;
     sf::Vector2f view_position;
@@ -48,12 +51,12 @@ private:
     bool show_ghost_dots;
     bool show_waypoints;
     bool show_target_projection;
+    bool show_missile_tubes;
     bool show_callsigns;
     bool show_heading_indicators;
     bool show_game_master_data;
     bool auto_center_on_my_ship;
     float range_indicator_step_size;
-    float missile_target_angle;
     ERadarStyle style;
     EFogOfWarStyle fog_style;
     func_t mouse_down_func;
@@ -77,8 +80,10 @@ public:
     GuiRadarView* disableGhostDots() { show_ghost_dots = false; return this; }
     GuiRadarView* enableWaypoints() { show_waypoints = true; return this; }
     GuiRadarView* disableWaypoints() { show_waypoints = false; return this; }
-    GuiRadarView* enableTargetProjections() { show_target_projection = true; return this; }
+    GuiRadarView* enableTargetProjections(GuiMissileTubeControls* missile_tube_controls) { show_target_projection = true; this->missile_tube_controls = missile_tube_controls; return this; }
     GuiRadarView* disableTargetProjections() { show_target_projection = false; return this; }
+    GuiRadarView* enableMissileTubeIndicators() { show_missile_tubes = true; return this; }
+    GuiRadarView* disableMissileTubeIndicators() { show_missile_tubes = false; return this; }
     GuiRadarView* enableCallsigns() { show_callsigns = true; return this; }
     GuiRadarView* disableCallsigns() { show_callsigns = false; return this; }
     GuiRadarView* enableHeadingIndicators() { show_heading_indicators = true; return this; }
@@ -93,7 +98,6 @@ public:
                   { this->joystick_x_func = joystick_x_func; this->joystick_y_func = joystick_y_func; this->joystick_z_func = joystick_z_func; this->joystick_r_func = joystick_r_func; return this; }
     GuiRadarView* setViewPosition(sf::Vector2f view_position) { this->view_position = view_position; return this; }
     sf::Vector2f getViewPosition() { return view_position; }
-    void setMissileTargetAngle(float angle) { missile_target_angle = angle; }
 
     sf::Vector2f worldToScreen(sf::Vector2f world_position);
     sf::Vector2f screenToWorld(sf::Vector2f screen_position);
@@ -116,6 +120,7 @@ private:
     void drawWaypoints(sf::RenderTarget& window);
     void drawRangeIndicators(sf::RenderTarget& window);
     void drawTargetProjections(sf::RenderTarget& window);
+    void drawMissileTubes(sf::RenderTarget& window);
     void drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget& window_alpha);
     void drawObjectsGM(sf::RenderTarget& window);
     void drawTargets(sf::RenderTarget& window);
@@ -123,4 +128,4 @@ private:
     void drawRadarCutoff(sf::RenderTarget& window);
 };
 
-#endif//GUI_RADAR_VIEW_H
+#endif//RADAR_VIEW_H

@@ -1,5 +1,9 @@
-#include "playerInfo.h"
 #include "scanTargetButton.h"
+#include "playerInfo.h"
+#include "targetsContainer.h"
+#include "spaceObjects/playerSpaceship.h"
+#include "gui/gui2_button.h"
+#include "gui/gui2_progressbar.h"
 
 GuiScanTargetButton::GuiScanTargetButton(GuiContainer* owner, string id, TargetsContainer* targets)
 : GuiElement(owner, id), targets(targets)
@@ -30,10 +34,11 @@ void GuiScanTargetButton::onDraw(sf::RenderTarget& window)
         if (targets)
             obj = targets->get();
         
-        if (obj && obj->canBeScanned())
-            button->show();
+        button->show();
+        if (obj && obj->canBeScannedBy(my_spaceship))
+            button->enable();
         else
-            button->hide();
+            button->disable();
         progress->hide();
     }
 }

@@ -18,10 +18,12 @@ enum EAIOrder
     AI_Attack,          //Attack [order_target] very specificly.
 };
 
+
 class ShipAI;
 class CpuShip : public SpaceShip
 {
     static constexpr float auto_system_repair_per_second = 0.005f;
+    static constexpr float missile_resupply_time = 10.0f;
 
     EAIOrder orders;                    //Server only
     sf::Vector2f order_target_location; //Server only
@@ -52,13 +54,15 @@ public:
     EAIOrder getOrder() { return orders; }
     sf::Vector2f getOrderTargetLocation() { return order_target_location; }
     P<SpaceObject> getOrderTarget() { return order_target; }
-    
+
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
     virtual std::unordered_map<string, string> getGMInfo() override;
-    
+
     virtual string getExportLine() override;
 
     friend class GameMasterUI;
+
+    float missile_resupply;
 };
 string getAIOrderString(EAIOrder order);
 

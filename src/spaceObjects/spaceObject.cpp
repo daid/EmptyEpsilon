@@ -24,7 +24,7 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getVelocity);
     /// Gets the rotational velocity of the object, in degree/second
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getAngularVelocity);
-    
+
     /// Sets the faction to which this object belongs. Requires a string as input.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setFaction);
     /// Gets the faction name to which this object belongs.
@@ -39,9 +39,13 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setCommsFunction);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isEnemy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isFriendly);
+    /// Set a custom callsign for this object. Objects get assigned random callsigns at creation, but you can overrule this from scenario scripts.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setCallSign);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getCallSign);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, areEnemiesInRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getObjectsInRange);
+    /// Sets the reputation to a value.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setReputationPoints);
     /// Return the current amount of reputation points.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getReputationPoints);
     /// Take a certain amount of reputation points, returns true when there are enough points to take. Returns false when there are not enough points and does not lower the points.
@@ -61,6 +65,16 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, sendCommsMessage);
     /// Let this object take damage, the DamageInfo parameter can be empty, or a string which indicates if it's energy, kinetic or emp damage.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, takeDamage);
+    // Set the description of this object. The description is visible on the
+    // Science station.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setDescription);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getDescription);
+    // Set the radar signature of this object. Objects' signatures create noise
+    // on the Science station's raw radar signal ring.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setRadarSignatureInfo);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureGravity);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureElectrical);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureBiological);
     /// Set the description of this object, description is visible at the science station.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setDescription);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getDescription);
@@ -70,8 +84,16 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, scanningChannelDepth);
     ///Set the scanning complexity and depth for this object.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setScanningParameters);
-    ///Check if this object is scanned already.
+    ///[DEPRICATED] Check if this object is scanned already.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isScanned);
+    /// Check if this object is scanned by the faction of another object
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isScannedBy);
+    /// Check if this object is scanned by another faction
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isScannedByFaction);
+    /// Set if this object is scanned or not by every faction.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setScanned);
+    /// Set if this object is scanned or not by a particular faction.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setScannedByFaction);
 }
 
 PVector<SpaceObject> space_object_list;
@@ -85,9 +107,16 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
 
     scanning_complexity_value = 0;
     scanning_depth_value = 0;
-    is_scanned = false;
 
+    registerMemberReplication(&callsign);
     registerMemberReplication(&faction_id);
+    registerMemberReplication(&scanned_by_faction);
+    registerMemberReplication(&object_description);
+    registerMemberReplication(&radar_signature.gravity);
+    registerMemberReplication(&radar_signature.electrical);
+    registerMemberReplication(&radar_signature.biological);
+    registerMemberReplication(&scanning_complexity_value);
+    registerMemberReplication(&scanning_depth_value);
     registerCollisionableReplication(multiplayer_significant_range);
 }
 
@@ -112,25 +141,25 @@ void SpaceObject::destroy()
     MultiplayerObject::destroy();
 }
 
-bool SpaceObject::canBeTargeted()
+bool SpaceObject::canBeTargetedBy(P<SpaceObject> other)
 {
     return false;
 }
 
-bool SpaceObject::canBeSelected()
+bool SpaceObject::canBeSelectedBy(P<SpaceObject> other)
 {
     if (object_description.length() > 0)
         return true;
-    if (canBeScanned())
+    if (canBeScannedBy(other))
         return true;
-    if (canBeTargeted())
+    if (canBeTargetedBy(other))
         return true;
     return false;
 }
 
-bool SpaceObject::canBeScanned()
+bool SpaceObject::canBeScannedBy(P<SpaceObject> other)
 {
-    if (isScanned())
+    if (getScannedStateFor(other) == SS_FullScan)
         return false;
     if (scanning_complexity_value > 0)
         return true;
@@ -139,11 +168,105 @@ bool SpaceObject::canBeScanned()
     return false;
 }
 
+bool SpaceObject::canBeHackedBy(P<SpaceObject> other)
+{
+    return false;
+}
+
+std::vector<std::pair<string, float> > SpaceObject::getHackingTargets()
+{
+    return std::vector<std::pair<string, float> >();
+}
+
+void SpaceObject::hackFinished(P<SpaceObject> source, string target)
+{
+}
+
+EScannedState SpaceObject::getScannedStateFor(P<SpaceObject> other)
+{
+    if (!other)
+    {
+        return SS_NotScanned;
+    }
+    return getScannedStateForFaction(other->getFactionId());
+}
+
+void SpaceObject::setScannedStateFor(P<SpaceObject> other, EScannedState state)
+{
+    if (!other)
+    {
+        LOG(ERROR) << "setScannedStateFor called with no other";
+        return;
+    }
+    setScannedStateForFaction(other->getFactionId(), state);
+}
+
+EScannedState SpaceObject::getScannedStateForFaction(int faction_id)
+{
+    if (int(scanned_by_faction.size()) <= faction_id)
+        return SS_NotScanned;
+    return scanned_by_faction[faction_id];
+}
+
+void SpaceObject::setScannedStateForFaction(int faction_id, EScannedState state)
+{
+    while (int(scanned_by_faction.size()) <= faction_id)
+        scanned_by_faction.push_back(SS_NotScanned);
+    scanned_by_faction[faction_id] = state;
+}
+
+bool SpaceObject::isScanned()
+{
+    LOG(WARNING) << "Depricated \"isScanned\" function called, use isScannedBy or isScannedByFaction.";
+    for(unsigned int faction_id = 0; faction_id < scanned_by_faction.size(); faction_id++)
+    {
+        if (scanned_by_faction[faction_id] > SS_FriendOrFoeIdentified)
+            return true;
+    }
+    return false;
+}
+
+void SpaceObject::setScanned(bool scanned)
+{
+    for(unsigned int faction_id = 0; faction_id < factionInfo.size(); faction_id++)
+    {
+        if (!scanned)
+            setScannedStateForFaction(faction_id, SS_NotScanned);
+        else
+            setScannedStateForFaction(faction_id, SS_FullScan);
+    }
+}
+
+void SpaceObject::setScannedByFaction(string faction_name, bool scanned)
+{
+    if (!scanned)
+        setScannedStateForFaction(FactionInfo::findFactionId(faction_name), SS_NotScanned);
+    else
+        setScannedStateForFaction(FactionInfo::findFactionId(faction_name), SS_FullScan);
+}
+
+bool SpaceObject::isScannedBy(P<SpaceObject> obj)
+{
+    return getScannedStateFor(obj) > SS_FriendOrFoeIdentified;
+}
+
+bool SpaceObject::isScannedByFaction(string faction)
+{
+    int faction_id = FactionInfo::findFactionId(faction);
+    return getScannedStateForFaction(faction_id) > SS_FriendOrFoeIdentified;
+}
+
+void SpaceObject::scannedBy(P<SpaceObject> other)
+{
+    setScannedStateFor(other, SS_FullScan);
+}
+
 void SpaceObject::setScanningParameters(int complexity, int depth)
 {
     scanning_complexity_value = std::min(4, std::max(0, complexity));
     scanning_depth_value = std::max(0, depth);
-    is_scanned = false;
+
+    scanned_by_faction.clear();
 }
 
 bool SpaceObject::isEnemy(P<SpaceObject> obj)
@@ -204,6 +327,13 @@ PVector<SpaceObject> SpaceObject::getObjectsInRange(float range)
     return ret;
 }
 
+void SpaceObject::setReputationPoints(float amount)
+{
+    if (gameGlobalInfo->reputation_points.size() < faction_id)
+        return;
+    gameGlobalInfo->reputation_points[faction_id] = amount;
+}
+
 int SpaceObject::getReputationPoints()
 {
     if (gameGlobalInfo->reputation_points.size() < faction_id)
@@ -249,10 +379,16 @@ bool SpaceObject::sendCommsMessage(P<PlayerSpaceship> target, string message)
 {
     if (!target)
         return false;
-    
-    return target->hailByObject(this, message);
+
+    bool result = target->hailByObject(this, message);
+    if (!result && message != "")
+    {
+        target->addToShipLogBy(message, this);
+    }
+    return result;
 }
 
+// Define a script conversion function for the DamageInfo structure.
 template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& di)
 {
     if (!lua_isstring(L, idx))

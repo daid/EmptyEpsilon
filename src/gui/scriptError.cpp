@@ -18,7 +18,7 @@ void ScriptErrorRenderer::render(sf::RenderTarget& window)
     string error = script->getError();
     if (error != "")
     {
-        sf::Text textElement(error, *mainFont, 25);
+        sf::Text textElement(error, *bold_font, 25);
         textElement.setColor(sf::Color::Red);
         textElement.setPosition(0, 0);
         window.draw(textElement);

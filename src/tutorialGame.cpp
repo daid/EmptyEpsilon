@@ -1,6 +1,7 @@
 #include "tutorialGame.h"
 #include "scriptInterface.h"
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "main.h"
 
 #include "screenComponents/viewport3d.h"
@@ -11,8 +12,15 @@
 #include "screens/crew6/engineeringScreen.h"
 #include "screens/crew6/scienceScreen.h"
 #include "screens/crew6/relayScreen.h"
+#include "screens/crew4/tacticalScreen.h"
+#include "screens/crew4/engineeringAdvancedScreen.h"
+#include "screens/crew4/operationsScreen.h"
 
 #include "screenComponents/indicatorOverlays.h"
+
+#include "gui/gui2_panel.h"
+#include "gui/gui2_scrolltext.h"
+#include "gui/gui2_button.h"
 
 ///The TutorialGame object is normally never created.
 /// And it only used to setup the special tutorial level.
@@ -28,17 +36,22 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(TutorialGame)
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, setMessageToTopPosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, setMessageToBottomPosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, onNext);
+    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, finish);
 }
 
-TutorialGame::TutorialGame()
+TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
 {
-    new GuiOverlay(this, "", sf::Color::Black);
-    
-    viewport = nullptr;
+    new LocalOnlyGame();
+
+    new GuiOverlay(this, "", colorConfig.background);
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+
+    this->viewport = nullptr;
+    this->repeated_tutorial = repeated_tutorial;
 
     script = new ScriptObject();
     script->registerObject(this, "tutorial");
-    script->run("tutorial.lua");
+    script->run(filename);
 }
 
 void TutorialGame::createScreens()
@@ -59,21 +72,31 @@ void TutorialGame::createScreens()
     station_screen[2] = new EngineeringScreen(this);
     station_screen[3] = new ScienceScreen(this);
     station_screen[4] = new RelayScreen(this);
-    for(int n=0; n<5; n++)
+    station_screen[5] = new TacticalScreen(this);
+    station_screen[6] = new EngineeringAdvancedScreen(this);
+    station_screen[7] = new OperationScreen(this);
+    for(int n=0; n<8; n++)
         station_screen[n]->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopLeft);
 
     new GuiIndicatorOverlays(this);
-    
-    frame = new GuiBox(this, "");
-    frame->fill()->setPosition(0, 0, ATopCenter)->setSize(900, 230)->hide();
-    
+
+    frame = new GuiPanel(this, "");
+    frame->setPosition(0, 0, ATopCenter)->setSize(900, 230)->hide();
+
     text = new GuiScrollText(frame, "", "");
     text->setTextSize(20)->setPosition(20, 20, ATopLeft)->setSize(900 - 40, 200 - 40);
     next_button = new GuiButton(frame, "", "Next", [this]() {
         _onNext.call();
     });
     next_button->setTextSize(30)->setPosition(-20, -20, ABottomRight)->setSize(300, 30);
-    
+
+    if (repeated_tutorial)
+    {
+        (new GuiButton(this, "", "Reset", [this]()
+        {
+            finish();
+        }))->setPosition(-20, 20, ATopRight)->setSize(120, 50);
+    }
     hideAllScreens();
 
     engine->setGameSpeed(1.0);
@@ -103,11 +126,23 @@ void TutorialGame::update(float delta)
     }
 }
 
+void TutorialGame::onKey(sf::Event::KeyEvent key, int unicode)
+{
+    switch(key.code)
+    {
+    case sf::Keyboard::Escape:
+    case sf::Keyboard::Home:
+        finish();
+        break;
+    default:
+        break;
+    }
+}
+
 void TutorialGame::setPlayerShip(P<PlayerSpaceship> ship)
 {
-    my_spaceship = ship;
-    my_player_info->setShipId(ship->getMultiplayerId());
-    
+    my_player_info->commandSetShipId(ship->getMultiplayerId());
+
     if (viewport == nullptr)
         createScreens();
 }
@@ -163,7 +198,7 @@ void TutorialGame::switchViewToScreen(int n)
     if (viewport == nullptr)
         return;
 
-    if (n < 0 || n >= 5)
+    if (n < 0 || n >= 8)
         return;
     hideAllScreens();
     station_screen[n]->show();
@@ -185,6 +220,27 @@ void TutorialGame::setMessageToBottomPosition()
     frame->setPosition(0, -50, ABottomCenter);
 }
 
+void TutorialGame::finish()
+{
+    if (repeated_tutorial)
+    {
+        foreach(SpaceObject, obj, space_object_list)
+            obj->destroy();
+        script->destroy();
+        hideAllScreens();
+
+        script = new ScriptObject();
+        script->registerObject(this, "tutorial");
+        script->run("tutorial.lua");
+    }else{
+        script->destroy();
+        destroy();
+
+        disconnectFromServer();
+        returnToMainMenu();
+    }
+}
+
 void TutorialGame::hideAllScreens()
 {
     if (viewport == nullptr)
@@ -193,9 +249,17 @@ void TutorialGame::hideAllScreens()
     viewport->hide();
     tactical_radar->hide();
     long_range_radar->hide();
-    
-    for(int n=0; n<5; n++)
+
+    for(int n=0; n<8; n++)
     {
         station_screen[n]->hide();
     }
+}
+
+LocalOnlyGame::LocalOnlyGame()
+{
+}
+
+void LocalOnlyGame::update(float delta)
+{
 }

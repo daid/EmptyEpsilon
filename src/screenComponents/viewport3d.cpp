@@ -37,7 +37,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         soundManager->setListenerPosition(sf::Vector2f(camera_position.x, camera_position.y), camera_yaw);
     window.pushGLStates();
 
-    billboardShader->setParameter("camera_position", camera_position);
+    ShaderManager::getShader("billboardShader")->setParameter("camera_position", camera_position);
 
     float camera_fov = 60.0f;
     float sx = window.getSize().x * window.getView().getViewport().width / window.getView().getSize().x;
@@ -66,43 +66,48 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     glGetDoublev(GL_MODELVIEW_MATRIX, model_matrix);
     glGetDoublev(GL_VIEWPORT, viewport);
 
-    sf::Texture::bind(textureManager.getTexture("Stars"), sf::Texture::Pixels);
     glDepthMask(false);
+    sf::Texture::bind(textureManager.getTexture("StarsBack"), sf::Texture::Normalized);
     glBegin(GL_TRIANGLE_STRIP);
-    glTexCoord2f(1024,    0); glVertex3f( 100, 100, 100);
-    glTexCoord2f(   0,    0); glVertex3f( 100, 100,-100);
-    glTexCoord2f(1024, 1024); glVertex3f(-100, 100, 100);
-    glTexCoord2f(   0, 1024); glVertex3f(-100, 100,-100);
+    glTexCoord2f(0.0, 0.0); glVertex3f( 100, 100, 100);
+    glTexCoord2f(0.0, 1.0); glVertex3f( 100, 100,-100);
+    glTexCoord2f(1.0, 0.0); glVertex3f(-100, 100, 100);
+    glTexCoord2f(1.0, 1.0); glVertex3f(-100, 100,-100);
     glEnd();
+    sf::Texture::bind(textureManager.getTexture("StarsLeft"), sf::Texture::Normalized);
     glBegin(GL_TRIANGLE_STRIP);
-    glTexCoord2f(1024,    0); glVertex3f(-100, 100, 100);
-    glTexCoord2f(   0,    0); glVertex3f(-100, 100,-100);
-    glTexCoord2f(1024, 1024); glVertex3f(-100,-100, 100);
-    glTexCoord2f(   0, 1024); glVertex3f(-100,-100,-100);
+    glTexCoord2f(0.0, 0.0); glVertex3f(-100, 100, 100);
+    glTexCoord2f(0.0, 1.0); glVertex3f(-100, 100,-100);
+    glTexCoord2f(1.0, 0.0); glVertex3f(-100,-100, 100);
+    glTexCoord2f(1.0, 1.0); glVertex3f(-100,-100,-100);
     glEnd();
+    sf::Texture::bind(textureManager.getTexture("StarsFront"), sf::Texture::Normalized);
     glBegin(GL_TRIANGLE_STRIP);
-    glTexCoord2f(1024,    0); glVertex3f(-100,-100, 100);
-    glTexCoord2f(   0,    0); glVertex3f(-100,-100,-100);
-    glTexCoord2f(1024, 1024); glVertex3f( 100,-100, 100);
-    glTexCoord2f(   0, 1024); glVertex3f( 100,-100,-100);
+    glTexCoord2f(0.0, 0.0); glVertex3f(-100,-100, 100);
+    glTexCoord2f(0.0, 1.0); glVertex3f(-100,-100,-100);
+    glTexCoord2f(1.0, 0.0); glVertex3f( 100,-100, 100);
+    glTexCoord2f(1.0, 1.0); glVertex3f( 100,-100,-100);
     glEnd();
+    sf::Texture::bind(textureManager.getTexture("StarsRight"), sf::Texture::Normalized);
     glBegin(GL_TRIANGLE_STRIP);
-    glTexCoord2f(1024,    0); glVertex3f( 100,-100, 100);
-    glTexCoord2f(   0,    0); glVertex3f( 100,-100,-100);
-    glTexCoord2f(1024, 1024); glVertex3f( 100, 100, 100);
-    glTexCoord2f(   0, 1024); glVertex3f( 100, 100,-100);
+    glTexCoord2f(0.0, 0.0); glVertex3f( 100,-100, 100);
+    glTexCoord2f(0.0, 1.0); glVertex3f( 100,-100,-100);
+    glTexCoord2f(1.0, 0.0); glVertex3f( 100, 100, 100);
+    glTexCoord2f(1.0, 1.0); glVertex3f( 100, 100,-100);
     glEnd();
+    sf::Texture::bind(textureManager.getTexture("StarsTop"), sf::Texture::Normalized);
     glBegin(GL_TRIANGLE_STRIP);
-    glTexCoord2f(1024,    0); glVertex3f( 100,-100, 100);
-    glTexCoord2f(   0,    0); glVertex3f(-100,-100, 100);
-    glTexCoord2f(1024, 1024); glVertex3f( 100, 100, 100);
-    glTexCoord2f(   0, 1024); glVertex3f(-100, 100, 100);
+    glTexCoord2f(0.0, 0.0); glVertex3f(-100, 100, 100);
+    glTexCoord2f(0.0, 1.0); glVertex3f(-100,-100, 100);
+    glTexCoord2f(1.0, 0.0); glVertex3f( 100, 100, 100);
+    glTexCoord2f(1.0, 1.0); glVertex3f( 100,-100, 100);
     glEnd();
+    sf::Texture::bind(textureManager.getTexture("StarsBottom"), sf::Texture::Normalized);
     glBegin(GL_TRIANGLE_STRIP);
-    glTexCoord2f(1024,    0); glVertex3f( 100,-100,-100);
-    glTexCoord2f(   0,    0); glVertex3f(-100,-100,-100);
-    glTexCoord2f(1024, 1024); glVertex3f( 100, 100,-100);
-    glTexCoord2f(   0, 1024); glVertex3f(-100, 100,-100);
+    glTexCoord2f(1.0, 0.0); glVertex3f( 100,-100,-100);
+    glTexCoord2f(0.0, 0.0); glVertex3f(-100,-100,-100);
+    glTexCoord2f(1.0, 1.0); glVertex3f( 100, 100,-100);
+    glTexCoord2f(0.0, 1.0); glVertex3f(-100, 100,-100);
     glEnd();
 
     if (gameGlobalInfo)
@@ -117,10 +122,10 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
             glRotatef(180, gameGlobalInfo->nebula_info[n].vector.x, gameGlobalInfo->nebula_info[n].vector.y, gameGlobalInfo->nebula_info[n].vector.z);
             glColor4f(1,1,1,0.1);
             glBegin(GL_TRIANGLE_STRIP);
-            glTexCoord2f(1024,    0); glVertex3f( 100, 100, 100);
+            glTexCoord2f(1.0,    0); glVertex3f( 100, 100, 100);
             glTexCoord2f(   0,    0); glVertex3f( 100, 100,-100);
-            glTexCoord2f(1024, 1024); glVertex3f(-100, 100, 100);
-            glTexCoord2f(   0, 1024); glVertex3f(-100, 100,-100);
+            glTexCoord2f(1.0, 1.0); glVertex3f(-100, 100, 100);
+            glTexCoord2f(   0, 1.0); glVertex3f(-100, 100,-100);
             glEnd();
             glPopMatrix();
         }
@@ -225,10 +230,10 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
         glTranslatef(target->getPosition().x, target->getPosition().y, 0);
 
-        billboardShader->setParameter("textureMap", *textureManager.getTexture("redicule2.png"));
-        sf::Shader::bind(billboardShader);
-        glBegin(GL_QUADS);
+        ShaderManager::getShader("billboardShader")->setParameter("textureMap", *textureManager.getTexture("redicule2.png"));
+        sf::Shader::bind(ShaderManager::getShader("billboardShader"));
         glColor4f(0.5, 0.5, 0.5, target->getRadius() * 2.5);
+        glBegin(GL_QUADS);
         glTexCoord2f(0, 0);
         glVertex3f(0, 0, 0);
         glTexCoord2f(1, 0);
@@ -271,7 +276,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     {
         foreach(SpaceObject, obj, renderList)
         {
-            if (!obj->canBeTargeted() || obj == my_spaceship)
+            if (!obj->canBeTargetedBy(my_spaceship) || obj == my_spaceship)
                 continue;
             string call_sign = obj->getCallSign();
             if (call_sign == "")
@@ -283,7 +288,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
             if (screen_position.z > 10000.0)
                 continue;
             float distance_factor = 1.0f - (screen_position.z / 10000.0f);
-            drawText(window, sf::FloatRect(screen_position.x, screen_position.y, 0, 0), call_sign, ACenter, 20 * distance_factor, sf::Color(255, 255, 255, 128 * distance_factor));
+            drawText(window, sf::FloatRect(screen_position.x, screen_position.y, 0, 0), call_sign, ACenter, 20 * distance_factor, bold_font, sf::Color(255, 255, 255, 128 * distance_factor));
         }
     }
     
@@ -296,7 +301,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
             sf::Vector2f world_pos = my_spaceship->getPosition() + sf::vector2FromAngle(float(angle - 90)) * distance;
             sf::Vector3f screen_pos = worldToScreen(window, sf::Vector3f(world_pos.x, world_pos.y, 0.0f));
             if (screen_pos.z > 0.0f)
-                drawText(window, sf::FloatRect(screen_pos.x, screen_pos.y, 0, 0), string(angle), ACenter, 30, sf::Color(255, 255, 255, 128));
+                drawText(window, sf::FloatRect(screen_pos.x, screen_pos.y, 0, 0), string(angle), ACenter, 30, bold_font, sf::Color(255, 255, 255, 128));
         }
     }
 #endif//FEATURE_3D_RENDERING

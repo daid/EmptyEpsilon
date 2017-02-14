@@ -2,6 +2,12 @@
 #include "serverBrowseMenu.h"
 #include "joinServerMenu.h"
 
+#include "gui/gui2_overlay.h"
+#include "gui/gui2_button.h"
+#include "gui/gui2_selector.h"
+#include "gui/gui2_textentry.h"
+#include "gui/gui2_listbox.h"
+
 ServerBrowserMenu::ServerBrowserMenu(SearchSource source)
 {
     scanner = new ServerScanner(VERSION_NUMBER);
@@ -10,13 +16,24 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source)
     else
         scanner->scanMasterServer("http://daid.eu/ee/list.php");
 
+    new GuiOverlay(this, "", colorConfig.background);
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+
     (new GuiButton(this, "BACK", "Back", [this]() {
         destroy();
         returnToMainMenu();
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
 
+    lan_internet_selector = new GuiSelector(this, "LAN_INTERNET_SELECT", [this](int index, string value) {
+        if (index == 0)
+            scanner->scanLocalNetwork();
+        else
+            scanner->scanMasterServer("http://daid.eu/ee/list.php");
+    });
+    lan_internet_selector->setOptions({"LAN", "Internet"})->setSelectionIndex(source == Local ? 0 : 1)->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
+
     connect_button = new GuiButton(this, "CONNECT", "Connect", [this]() {
-        new JoinServerScreen(sf::IpAddress(manual_ip->getText()));
+        new JoinServerScreen(lan_internet_selector->getSelectionIndex() == 0 ? Local : Internet, sf::IpAddress(manual_ip->getText()));
         destroy();
     });
     connect_button->setPosition(-50, -50, ABottomRight)->setSize(300, 50);

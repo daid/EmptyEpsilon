@@ -24,18 +24,33 @@ public:
     void setRange(float range);
     float getRange();
 
+    void setTurretArc(float arc);
+    float getTurretArc();
+
+    void setTurretDirection(float direction);
+    float getTurretDirection();
+
+    void setTurretRotationRate(float rotation_rate);
+    float getTurretRotationRate();
+
     void setCycleTime(float cycle_time);
     float getCycleTime();
     
     void setDamage(float damage);
     float getDamage();
 
+    float getEnergyPerFire();
+    void setEnergyPerFire(float energy);
+
+    float getHeatPerFire();
+    void setHeatPerFire(float heat);
+
     void setPosition(sf::Vector3f position);
     sf::Vector3f getPosition();
     
     void setBeamTexture(string beam_texture);
     string getBeamTexture();
-    
+
     float getCooldown();
     
     void update(float delta);
@@ -47,13 +62,16 @@ protected:
     float arc;
     float direction;
     float range;
+    float turret_arc;
+    float turret_direction;
+    float turret_rotation_rate;
     float cycle_time;
     float damage;//Server side only
     float energy_per_beam_fire;//Server side only
-    float heat_per_beam_fire;
+    float heat_per_beam_fire;//Server side only
     //Beam runtime state
     float cooldown;
     string beam_texture;
 };
 
-#endif //BEAM_WEAPON_H
+#endif//BEAM_WEAPON_H

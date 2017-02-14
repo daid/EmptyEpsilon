@@ -3,6 +3,11 @@
 #include "gameGlobalInfo.h"
 #include "main.h"
 
+#include "gui/gui2_overlay.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_panel.h"
+#include "gui/gui2_button.h"
+
 GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
 : GuiElement(owner, "INDICATOR_OVERLAYS")
 {
@@ -12,7 +17,7 @@ GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
     hull_hit_overlay = new GuiOverlay(this, "HULL_HIT", sf::Color(255, 0, 0, 0));
     shield_low_warning_overlay = new GuiOverlay(this, "SHIELD_LOW", sf::Color(255, 0, 0, 0));
     pause_overlay = new GuiOverlay(this, "PAUSE", sf::Color(0, 0, 0, 128));
-    (new GuiBox(pause_overlay, "PAUSE_BOX"))->fill()->setPosition(0, 0, ACenter)->setSize(500, 100);
+    (new GuiPanel(pause_overlay, "PAUSE_BOX"))->setPosition(0, 0, ACenter)->setSize(500, 100);
     (new GuiLabel(pause_overlay, "PAUSE_LABEL", "Game Paused", 70))->setPosition(0, 0, ACenter)->setSize(500, 100);
     if (game_server)
     {
@@ -22,7 +27,7 @@ GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
     }
     
     victory_overlay = new GuiOverlay(this, "VICTORY", sf::Color(0, 0, 0, 128));
-    (new GuiBox(victory_overlay, "VICTORY_BOX"))->setPosition(0, 0, ACenter)->setSize(500, 100);
+    (new GuiPanel(victory_overlay, "VICTORY_BOX"))->setPosition(0, 0, ACenter)->setSize(500, 100);
     victory_label = new GuiLabel(victory_overlay, "VICTORY_LABEL", "...", 70);
     victory_label->setPosition(0, 0, ACenter)->setSize(500, 100);
 }
@@ -129,24 +134,15 @@ bool GuiIndicatorOverlays::onMouseDown(sf::Vector2f position)
 
 void GuiIndicatorOverlays::drawAlertLevel(sf::RenderTarget& window)
 {
-    sf::Color color;
     sf::Color multiply_color = sf::Color::White;
-    string text;
-    float text_size;
     
     switch(my_spaceship->alert_level)
     {
     case AL_RedAlert:
-        color = sf::Color(255, 0, 0, glow(32, 64, 3.0));
         multiply_color = sf::Color(255, 192, 192, 255);
-        text = "RED ALERT";
-        text_size = 70;
         break;
     case AL_YellowAlert:
-        color = sf::Color(255, 255, 0, glow(32, 64, 3.0));
         multiply_color = sf::Color(255, 255, 192, 255);
-        text = "YELLOW ALERT";
-        text_size = 60;
         break;
     case AL_Normal:
     default:
@@ -157,15 +153,4 @@ void GuiIndicatorOverlays::drawAlertLevel(sf::RenderTarget& window)
     overlay.setPosition(rect.left, rect.top);
     overlay.setFillColor(multiply_color);
     window.draw(overlay, sf::BlendMultiply);
-
-    sf::Sprite alert;
-    textureManager.setTexture(alert, "alert_overlay.png");
-    alert.setColor(color);
-    alert.setPosition(window.getView().getSize() / 2.0f);
-    window.draw(alert);
-    sf::Text alert_text(text, *mainFont, text_size);
-    alert_text.setColor(color);
-    alert_text.setOrigin(sf::Vector2f(alert_text.getLocalBounds().width / 2.0f, alert_text.getLocalBounds().height / 2.0f + alert_text.getLocalBounds().top));
-    alert_text.setPosition(window.getView().getSize() / 2.0f - sf::Vector2f(0, 300));
-    window.draw(alert_text);
 }

@@ -2,22 +2,27 @@
 #include "epsilonServer.h"
 #include "menus/joinServerMenu.h"
 #include "menus/serverBrowseMenu.h"
-#include "menus/shipSelectionScreen.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_panel.h"
+#include "gui/gui2_textentry.h"
+#include "gui/gui2_button.h"
 
-JoinServerScreen::JoinServerScreen(sf::IpAddress ip)
+JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source, sf::IpAddress ip)
 : ip(ip)
 {
+    this->source = source;
+    
     status_label = new GuiLabel(this, "STATUS", "Connecting...", 30);
     status_label->setPosition(0, 300, ATopCenter)->setSize(0, 50);
     (new GuiButton(this, "BTN_CANCEL", "Cancel", [this]() {
         destroy();
         disconnectFromServer();
-        new ServerBrowserMenu(ServerBrowserMenu::Local);
+        new ServerBrowserMenu(this->source);
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
     
-    password_entry_box = new GuiBox(this, "PASSWORD_ENTRY_BOX");
+    password_entry_box = new GuiPanel(this, "PASSWORD_ENTRY_BOX");
     password_entry_box->setPosition(0, 350, ATopCenter)->setSize(600, 100);
     password_entry_box->hide();
     password_entry = new GuiTextEntry(password_entry_box, "PASSWORD_ENTRY", "");
@@ -47,7 +52,7 @@ void JoinServerScreen::update(float delta)
     case GameClient::Disconnected:
         destroy();
         disconnectFromServer();
-        new ServerBrowserMenu(ServerBrowserMenu::Local);
+        new ServerBrowserMenu(this->source);
         break;
     case GameClient::Connected:
         if (game_client->getClientId() > 0)
@@ -57,7 +62,7 @@ void JoinServerScreen::update(float delta)
                     my_player_info = i;
             if (my_player_info && gameGlobalInfo)
             {
-                new ShipSelectionScreen();
+                returnToShipSelection();
                 destroy();
             }
         }

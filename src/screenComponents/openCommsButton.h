@@ -1,8 +1,9 @@
-#ifndef GUI_OPEN_COMMS_BUTTON_H
-#define GUI_OPEN_COMMS_BUTTON_H
+#ifndef OPEN_COMMS_BUTTON_H
+#define OPEN_COMMS_BUTTON_H
 
-#include "gui/gui2.h"
-#include "targetsContainer.h"
+#include "gui/gui2_button.h"
+
+class TargetsContainer;
 
 class GuiOpenCommsButton : public GuiButton
 {
@@ -13,4 +14,4 @@ public:
     virtual void onDraw(sf::RenderTarget& window);
 };
 
-#endif//GUI_OPEN_COMMS_BUTTON_H
+#endif//OPEN_COMMS_BUTTON_H

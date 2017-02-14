@@ -1,5 +1,5 @@
-#ifndef GUI2_TOGGLE_BUTTON_H
-#define GUI2_TOGGLE_BUTTON_H
+#ifndef GUI2_TOGGLEBUTTON_H
+#define GUI2_TOGGLEBUTTON_H
 
 #include "gui2_button.h"
 
@@ -10,9 +10,7 @@ public:
 private:
     bool value;
     func_t toggle_func;
-    sf::Color selected_color;
-    sf::Color unselected_color;
-    
+
 public:
     GuiToggleButton(GuiContainer* owner, string id, string text, func_t func);
     
@@ -22,4 +20,4 @@ private:
     void onClick();
 };
 
-#endif//GUI2_TOGGLE_BUTTON_H
+#endif//GUI2_TOGGLEBUTTON_H

@@ -1,13 +1,16 @@
-#ifndef GUI_SELF_DESTRUCT_ENTRY_H
-#define GUI_SELF_DESTRUCT_ENTRY_H
+#ifndef SELF_DESTRUCT_ENTRY_H
+#define SELF_DESTRUCT_ENTRY_H
 
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
 #include "spaceObjects/playerSpaceship.h"
+
+class GuiPanel;
+class GuiLabel;
 
 class GuiSelfDestructEntry : public GuiElement
 {
 private:
-    GuiBox* box;
+    GuiPanel* box;
     GuiLabel* code_label;
     GuiElement* code_entry;
     GuiLabel* code_entry_code_label;
@@ -23,4 +26,4 @@ public:
     void enablePosition(ECrewPosition position) { has_position[position] = true; }
 };
 
-#endif//GUI_SELF_DESTRUCT_ENTRY_H
+#endif//SELF_DESTRUCT_ENTRY_H

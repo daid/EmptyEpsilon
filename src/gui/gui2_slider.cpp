@@ -4,51 +4,65 @@
 #include "preferenceManager.h"
 
 GuiSlider::GuiSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
-: GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), snap_value(std::numeric_limits<float>::infinity()), func(func), up_hotkey(sf::Keyboard::KeyCount), down_hotkey(sf::Keyboard::KeyCount)
+: GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func)
 {
     overlay_label = nullptr;
-    if (id != "")
-    {
-        up_hotkey = PreferencesManager::getKey(id + "_UP_HOTKEY");
-        down_hotkey = PreferencesManager::getKey(id + "_DOWN_HOTKEY");
-    }
 }
 
 void GuiSlider::onDraw(sf::RenderTarget& window)
 {
-    draw9Cut(window, rect, "button_background", sf::Color(64,64,64, 255));
+    drawStretched(window, rect, "gui/SliderBackground", selectColor(colorConfig.slider.background));
 
-    sf::Color color = sf::Color::White;
-    if (!enabled)
-        color = color * sf::Color(96, 96, 96, 255);
-    else if (hover)
-        color = sf::Color(255,255,255, 128);
+    sf::Color color = selectColor(colorConfig.slider.forground);
+
     if (rect.width > rect.height)
     {
         float x;
 
-        if (snap_value != std::numeric_limits<float>::infinity())
+        for(TSnapPoint& point : snap_points)
         {
-            x = rect.left + (rect.width - rect.height) * (snap_value - min_value) / (max_value - min_value);
-            sf::RectangleShape backgroundZero(sf::Vector2f(8.0, rect.height));
-            backgroundZero.setPosition(x + rect.height / 2.0 - 4.0, rect.top);
-            backgroundZero.setFillColor(sf::Color(8,8,8,255));
-            window.draw(backgroundZero);
+            x = rect.left + (rect.width - rect.height) * (point.value - min_value) / (max_value - min_value);
+
+            sf::Sprite snap_sprite;
+            textureManager.setTexture(snap_sprite, "gui/SliderTick");
+            snap_sprite.setRotation(90);
+            snap_sprite.setPosition(x + rect.height / 2, rect.top + rect.height / 2);
+            snap_sprite.setScale(rect.height / snap_sprite.getTextureRect().width, rect.height / snap_sprite.getTextureRect().width);
+            snap_sprite.setColor(selectColor(colorConfig.slider.background));
+            window.draw(snap_sprite);
         }
         x = rect.left + (rect.width - rect.height) * (value - min_value) / (max_value - min_value);
-        draw9Cut(window, sf::FloatRect(x, rect.top, rect.height, rect.height), "button_background", color);
+
+        sf::Sprite sprite;
+        textureManager.setTexture(sprite, "gui/SliderKnob");
+        sprite.setOrigin(0, 0);
+        sprite.setPosition(x, rect.top);
+        sprite.setScale(rect.height / sprite.getTextureRect().width, rect.height / sprite.getTextureRect().width);
+        sprite.setColor(color);
+        window.draw(sprite);
     }else{
         float y;
-        if (snap_value != std::numeric_limits<float>::infinity())
+        for(TSnapPoint& point : snap_points)
         {
-            y = rect.top + (rect.height - rect.width) * (snap_value - min_value) / (max_value - min_value);
-            sf::RectangleShape backgroundZero(sf::Vector2f(rect.width, 8.0));
-            backgroundZero.setPosition(rect.left, y + rect.width / 2.0 - 4.0);
-            backgroundZero.setFillColor(sf::Color(8,8,8,255));
-            window.draw(backgroundZero);
+            y = rect.top + (rect.height - rect.width) * (point.value - min_value) / (max_value - min_value);
+
+            sf::Sprite snap_sprite;
+            textureManager.setTexture(snap_sprite, "gui/SliderTick");
+            snap_sprite.setOrigin(0, 0);
+            snap_sprite.setPosition(rect.left, y);
+            snap_sprite.setScale(rect.width / snap_sprite.getTextureRect().width, rect.width / snap_sprite.getTextureRect().width);
+            snap_sprite.setColor(selectColor(colorConfig.slider.background));
+            window.draw(snap_sprite);
         }
         y = rect.top + (rect.height - rect.width) * (value - min_value) / (max_value - min_value);
-        draw9Cut(window, sf::FloatRect(rect.left, y, rect.width, rect.width), "button_background", color);
+
+        sf::Sprite sprite;
+        textureManager.setTexture(sprite, "gui/SliderKnob");
+        sprite.setOrigin(0, 0);
+        sprite.setPosition(rect.left, y);
+        sprite.setScale(rect.width / sprite.getTextureRect().width, rect.width / sprite.getTextureRect().width);
+        sprite.setColor(color);
+        window.draw(sprite);
     }
     
     if (overlay_label)
@@ -71,8 +85,11 @@ void GuiSlider::onMouseDrag(sf::Vector2f position)
     else
         new_value = (position.y - rect.top - (rect.width / 2.0)) / (rect.height - rect.width);
     new_value = min_value + (max_value - min_value) * new_value;
-    if (fabs(new_value - snap_value) < snap_range)
-        new_value = snap_value;
+    for(TSnapPoint& point : snap_points)
+    {
+        if (fabs(new_value - point.value) < point.range)
+            new_value = point.value;
+    }
     if (min_value < max_value)
     {
         if (new_value < min_value)
@@ -89,7 +106,10 @@ void GuiSlider::onMouseDrag(sf::Vector2f position)
     {
         value = new_value;
         if (func)
-            func(value);
+        {
+            func_t f = func;
+            f(value);
+        }
     }
 }
 
@@ -97,40 +117,17 @@ void GuiSlider::onMouseUp(sf::Vector2f position)
 {
 }
 
-bool GuiSlider::onHotkey(sf::Keyboard::Key key, int unicode)
+GuiSlider* GuiSlider::clearSnapValues()
 {
-    if (key == up_hotkey || key == down_hotkey)
-    {
-        float new_value = value + (max_value - min_value) * 0.1;
-        if (key == down_hotkey)
-            new_value = value - (max_value - min_value) * 0.1;
-        if (min_value < max_value)
-        {
-            if (new_value < min_value)
-                new_value = min_value;
-            if (new_value > max_value)
-                new_value = max_value;
-        }else{
-            if (new_value > min_value)
-                new_value = min_value;
-            if (new_value < max_value)
-                new_value = max_value;
-        }
-        if (value != new_value)
-        {
-            value = new_value;
-            if (func)
-                func(value);
-        }
-        return true;
-    }
-    return false;
+    snap_points.clear();
+    return this;
 }
 
-GuiSlider* GuiSlider::setSnapValue(float value, float range)
+GuiSlider* GuiSlider::addSnapValue(float value, float range)
 {
-    snap_value = value;
-    snap_range = range;
+    snap_points.emplace_back();
+    snap_points.back().value = value;
+    snap_points.back().range = range;
     return this;
 }
 
@@ -152,6 +149,14 @@ GuiSlider* GuiSlider::setValue(float value)
     return this;
 }
 
+GuiSlider* GuiSlider::setRange(float min, float max)
+{
+    this->min_value = min;
+    this->max_value = max;
+    setValue(this->value);
+    return this;
+}
+
 GuiSlider* GuiSlider::addOverlay()
 {
     if (!overlay_label)
@@ -163,6 +168,132 @@ GuiSlider* GuiSlider::addOverlay()
 }
 
 float GuiSlider::getValue()
+{
+    return value;
+}
+
+GuiSlider2D::GuiSlider2D(GuiContainer* owner, string id, sf::Vector2f min_value, sf::Vector2f max_value, sf::Vector2f start_value, func_t func)
+: GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func)
+{
+}
+
+void GuiSlider2D::onDraw(sf::RenderTarget& window)
+{
+    drawStretchedHV(window, rect, 25.0f, "gui/SliderBackground", selectColor(colorConfig.slider.background));
+
+    sf::Color color = selectColor(colorConfig.slider.forground);
+
+    float x = rect.left + (rect.width - 50.0) * (value.x - min_value.x) / (max_value.x - min_value.x);
+    float y = rect.top + (rect.height - 50.0) * (value.y - min_value.y) / (max_value.y - min_value.y);
+
+    sf::Sprite sprite;
+    textureManager.setTexture(sprite, "gui/SliderKnob");
+    sprite.setOrigin(0, 0);
+    sprite.setPosition(x, y);
+    sprite.setScale(50.0 / sprite.getTextureRect().width, 50.0 / sprite.getTextureRect().width);
+    sprite.setColor(color);
+    window.draw(sprite);
+}
+
+bool GuiSlider2D::onMouseDown(sf::Vector2f position)
+{
+    onMouseDrag(position);
+    return true;
+}
+
+void GuiSlider2D::onMouseDrag(sf::Vector2f position)
+{
+    sf::Vector2f new_value;
+    new_value.x = (position.x - rect.left - 25.0f) / (rect.width - 50.0f);
+    new_value.y = (position.y - rect.top - 25.0f) / (rect.height - 50.0f);
+    new_value.x = min_value.x + (max_value.x - min_value.x) * new_value.x;
+    new_value.y = min_value.y + (max_value.y - min_value.y) * new_value.y;
+    for(TSnapPoint& point : snap_points)
+    {
+        if (fabs(new_value.x - point.value.x) < point.range.x && fabs(new_value.y - point.value.y) < point.range.y)
+            new_value = point.value;
+    }
+    if (min_value.x < max_value.x)
+    {
+        if (new_value.x < min_value.x)
+            new_value.x = min_value.x;
+        if (new_value.x > max_value.x)
+            new_value.x = max_value.x;
+    }else{
+        if (new_value.x > min_value.x)
+            new_value.x = min_value.x;
+        if (new_value.x < max_value.x)
+            new_value.x = max_value.x;
+    }
+    if (min_value.y < max_value.y)
+    {
+        if (new_value.y < min_value.y)
+            new_value.y = min_value.y;
+        if (new_value.y > max_value.y)
+            new_value.y = max_value.y;
+    }else{
+        if (new_value.y > min_value.y)
+            new_value.y = min_value.y;
+        if (new_value.y < max_value.y)
+            new_value.y = max_value.y;
+    }
+    if (value != new_value)
+    {
+        value = new_value;
+        if (func)
+            func(value);
+    }
+}
+
+void GuiSlider2D::onMouseUp(sf::Vector2f position)
+{
+}
+
+GuiSlider2D* GuiSlider2D::clearSnapValues()
+{
+    snap_points.clear();
+    return this;
+}
+
+GuiSlider2D* GuiSlider2D::addSnapValue(sf::Vector2f value, sf::Vector2f range)
+{
+    snap_points.emplace_back();
+    snap_points.back().value = value;
+    snap_points.back().range = range;
+    return this;
+}
+
+GuiSlider2D* GuiSlider2D::setValue(sf::Vector2f value)
+{
+    if (min_value.x < max_value.x)
+    {
+        if (value.x < min_value.x)
+            value.x = min_value.x;
+        if (value.x > max_value.x)
+            value.x = max_value.x;
+    }else{
+        if (value.x > min_value.x)
+            value.x = min_value.x;
+        if (value.x < max_value.x)
+            value.x = max_value.x;
+    }
+    if (min_value.y < max_value.y)
+    {
+        if (value.y < min_value.y)
+            value.y = min_value.y;
+        if (value.y > max_value.y)
+            value.y = max_value.y;
+    }else{
+        if (value.y > min_value.y)
+            value.y = min_value.y;
+        if (value.y < max_value.y)
+            value.y = max_value.y;
+    }
+    this->value = value;
+    return this;
+}
+
+sf::Vector2f GuiSlider2D::getValue()
 {
     return value;
 }

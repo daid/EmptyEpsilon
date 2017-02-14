@@ -14,10 +14,10 @@ private:
 #ifdef __WIN32__
     HANDLE handle;
 #endif
-#ifdef __gnu_linux__
+#if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
     int handle;
 #endif
-    
+
 public:
     enum EParity
     {

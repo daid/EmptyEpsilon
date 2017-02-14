@@ -4,6 +4,9 @@
 #include "main.h"
 
 #include "scriptInterface.h"
+REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ScanProbe, SpaceObject)
+{
+}
 
 REGISTER_MULTIPLAYER_CLASS(ScanProbe, "ScanProbe");
 ScanProbe::ScanProbe()
@@ -14,6 +17,22 @@ ScanProbe::ScanProbe()
     registerMemberReplication(&owner_id);
     registerMemberReplication(&target_position);
     registerMemberReplication(&lifetime, 60.0);
+    setRadarSignatureInfo(0.0, 0.2, 0);
+    
+    switch(irandom(1, 3))
+    {
+    case 1:
+        model_info.setData("SensorBuoyMKI");
+        break;
+    case 2:
+        model_info.setData("SensorBuoyMKII");
+        break;
+    default:
+        model_info.setData("SensorBuoyMKIII");
+        break;
+    }
+
+    setCallSign(string(getMultiplayerId()) + "P");
 }
 
 void ScanProbe::update(float delta)
@@ -28,7 +47,7 @@ void ScanProbe::update(float delta)
     }
 }
 
-bool ScanProbe::canBeTargeted()
+bool ScanProbe::canBeTargetedBy(P<SpaceObject> other)
 {
     return (getTarget() - getPosition()) < getRadius();
 }

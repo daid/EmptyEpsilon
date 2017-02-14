@@ -1,11 +1,16 @@
 #include <string.h>
+#ifndef _MSC_VER
 #include <unistd.h>
 #include <sys/stat.h>
+#endif
 #include <sys/types.h>
 #include "gui/mouseRenderer.h"
 #include "gui/debugRenderer.h"
+#include "gui/colorConfig.h"
+#include "gui/hotkeyConfig.h"
 #include "menus/mainMenus.h"
 #include "menus/autoConnectScreen.h"
+#include "menus/shipSelectionScreen.h"
 #include "mouseCalibrator.h"
 #include "factionInfo.h"
 #include "gameGlobalInfo.h"
@@ -17,6 +22,7 @@
 #include "httpScriptAccess.h"
 #include "preferenceManager.h"
 #include "networkRecorder.h"
+#include "tutorialGame.h"
 
 #include "hardware/hardwareController.h"
 
@@ -26,21 +32,11 @@
 #include <libgen.h>
 #endif
 
-#ifdef __linux__
-#ifndef INSTALL_PREFIX
-#define INSTALL_PREFIX "/usr/local"
-#endif
-#define RESOURCE_BASE_DIR INSTALL_PREFIX "/share/emptyepsilon/"
-#endif
-
 sf::Vector3f camera_position;
 float camera_yaw;
 float camera_pitch;
-sf::Shader* objectShader;
-sf::Shader* simpleObjectShader;
-sf::Shader* basicShader;
-sf::Shader* billboardShader;
-sf::Font* mainFont;
+sf::Font* main_font;
+sf::Font* bold_font;
 RenderLayer* backgroundLayer;
 RenderLayer* objectLayer;
 RenderLayer* effectLayer;
@@ -95,6 +91,11 @@ int main(int argc, char** argv)
 
 #ifdef DEBUG
     Logging::setLogLevel(LOGLEVEL_DEBUG);
+#else
+    Logging::setLogLevel(LOGLEVEL_INFO);
+#endif
+#if defined(__WIN32__) && !defined(DEBUG)
+    Logging::setLogFile("EmptyEpsilon.log");
 #endif
 #ifdef RESOURCE_BASE_DIR
     PreferencesManager::load(RESOURCE_BASE_DIR "options.ini");
@@ -113,23 +114,35 @@ int main(int argc, char** argv)
     }
 
     new Engine();
+
+    if (PreferencesManager::get("mod") != "")
+    {
+        string mod = PreferencesManager::get("mod");
+        if (getenv("HOME"))
+        {
+            new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod);
+            PackResourceProvider::addPackResourcesForDirectory(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod);
+        }
+        new DirectoryResourceProvider("resources/mods/" + mod);
+        PackResourceProvider::addPackResourcesForDirectory("resources/mods/" + mod);
+    }
+
 #ifdef RESOURCE_BASE_DIR
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/");
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "scripts/");
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "packs/SolCommand/");
-    new PackResourceProvider(RESOURCE_BASE_DIR "packs/Angryfly.pack");
+    PackResourceProvider::addPackResourcesForDirectory(RESOURCE_BASE_DIR "packs");
 #endif
     if (getenv("HOME"))
     {
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/");
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/scripts/");
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/packs/SolCommand/");
-        new PackResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/packs/SolCommand/");
     }
     new DirectoryResourceProvider("resources/");
     new DirectoryResourceProvider("scripts/");
     new DirectoryResourceProvider("packs/SolCommand/");
-    new PackResourceProvider("packs/Angryfly.pack");
+    PackResourceProvider::addPackResourcesForDirectory("packs");
     textureManager.setDefaultSmooth(true);
     textureManager.setDefaultRepeated(true);
     textureManager.setAutoSprite(false);
@@ -146,6 +159,9 @@ int main(int argc, char** argv)
         server->addHandler(new HttpRequestFileHandler("www"));
         server->addHandler(new HttpScriptHandler());
     }
+
+    colorConfig.load();
+    hotkeys.load();
 
     if (PreferencesManager::get("headless") == "")
     {
@@ -200,53 +216,49 @@ int main(int argc, char** argv)
     }
 
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
+    soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());
 
     if (PreferencesManager::get("disable_shaders").toInt())
         PostProcessor::setEnable(false);
 
-    P<ResourceStream> stream = getResourceStream("sansation.ttf");
-    mainFont = new sf::Font();
-    mainFont->loadFromStream(**stream);
+    P<ResourceStream> main_font_stream = getResourceStream("gui/fonts/BebasNeue Regular.otf");
+    main_font = new sf::Font();
+    main_font->loadFromStream(**main_font_stream);
 
-    if (sf::Shader::isAvailable())
-    {
-        objectShader = new sf::Shader();
-        simpleObjectShader = new sf::Shader();
-        basicShader = new sf::Shader();
-        billboardShader = new sf::Shader();
-
-        P<ResourceStream> vertexStream = getResourceStream("objectShader.vert");
-        P<ResourceStream> fragmentStream = getResourceStream("objectShader.frag");
-        objectShader->loadFromStream(**vertexStream, **fragmentStream);
-        vertexStream = getResourceStream("simpleObjectShader.vert");
-        fragmentStream = getResourceStream("simpleObjectShader.frag");
-        simpleObjectShader->loadFromStream(**vertexStream, **fragmentStream);
-        vertexStream = getResourceStream("basicShader.vert");
-        fragmentStream = getResourceStream("basicShader.frag");
-        basicShader->loadFromStream(**vertexStream, **fragmentStream);
-        vertexStream = getResourceStream("billboardShader.vert");
-        fragmentStream = getResourceStream("billboardShader.frag");
-        billboardShader->loadFromStream(**vertexStream, **fragmentStream);
-    }
+    P<ResourceStream> bold_font_stream = getResourceStream("gui/fonts/BebasNeue Bold.otf");
+    bold_font = new sf::Font();
+    bold_font->loadFromStream(**bold_font_stream);
 
     {
         P<ScriptObject> modelDataScript = new ScriptObject("model_data.lua");
-        if (modelDataScript)
-            modelDataScript->destroy();
+        if (modelDataScript->getError() != "") exit(1);
+        modelDataScript->destroy();
 
         P<ScriptObject> shipTemplatesScript = new ScriptObject("shipTemplates.lua");
-        if (shipTemplatesScript)
-            shipTemplatesScript->destroy();
+        if (shipTemplatesScript->getError() != "") exit(1);
+        shipTemplatesScript->destroy();
 
         P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");
-        if (factionInfoScript)
-            factionInfoScript->destroy();
+        if (factionInfoScript->getError() != "") exit(1);
+        factionInfoScript->destroy();
 
         fillDefaultDatabaseData();
 
         P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
-        if (scienceInfoScript)
-            scienceInfoScript->destroy();
+        if (scienceInfoScript->getError() != "") exit(1);
+        scienceInfoScript->destroy();
+
+        //Find out which model data isn't used by ship templates and output that to log.
+        std::set<string> used_model_data;
+        for(string template_name : ShipTemplate::getAllTemplateNames())
+            used_model_data.insert(ShipTemplate::getTemplate(template_name)->model_data->getName());
+        for(string name : ModelData::getModelDataNames())
+        {
+            if (used_model_data.find(name) == used_model_data.end())
+            {
+                LOG(INFO) << "Model data: " << name << " is not used by any ship template";
+            }
+        }
     }
 
     P<HardwareController> hardware_controller = new HardwareController();
@@ -261,25 +273,42 @@ int main(int argc, char** argv)
     returnToMainMenu();
     engine->runMainLoop();
 
+    // Set FSAA and fullscreen defaults from windowManager.
     P<WindowManager> windowManager = engine->getObject("windowManager");
     if (windowManager)
     {
         PreferencesManager::set("fsaa", windowManager->getFSAA());
         PreferencesManager::set("fullscreen", windowManager->isFullscreen() ? 1 : 0);
     }
+
+    // Set the default music_volume and sound_volume to the current volume.
     PreferencesManager::set("music_volume", soundManager->getMusicVolume());
+    PreferencesManager::set("sound_volume", soundManager->getMasterSoundVolume());
+
+    // Enable music on the main screen only by default.
+    if (PreferencesManager::get("music_enabled").empty())
+        PreferencesManager::set("music_enabled", "2");
+
+    // Set shaders to default.
     PreferencesManager::set("disable_shaders", PostProcessor::isEnabled() ? 0 : 1);
 
-    if (getenv("HOME"))
+    if (PreferencesManager::get("headless") == "")
     {
+#ifndef _MSC_VER
+		// MFC TODO: Fix me -- save prefs to user prefs dir on Windows.
+        if (getenv("HOME"))
+        {
 #ifdef __WIN32__
-        mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str());
+            mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str());
 #else
-        mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+            mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 #endif
-        PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
-    }else{
-        PreferencesManager::save("options.ini");
+            PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
+        }else
+#endif
+		{
+            PreferencesManager::save("options.ini");
+        }
     }
 
     delete engine;
@@ -292,7 +321,11 @@ void returnToMainMenu()
     if (PreferencesManager::get("headless") != "")
     {
         new EpsilonServer();
+        if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
+        if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password"));
+        if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer("http://daid.eu/ee/register.php");
         gameGlobalInfo->startScenario(PreferencesManager::get("headless"));
+
         engine->setGameSpeed(1.0);
     }
     else if (PreferencesManager::get("autoconnect").toInt())
@@ -300,12 +333,29 @@ void returnToMainMenu()
         int crew_position = PreferencesManager::get("autoconnect").toInt() - 1;
         if (crew_position < 0) crew_position = 0;
         if (crew_position > max_crew_positions) crew_position = max_crew_positions;
-        new AutoConnectScreen(ECrewPosition(crew_position), PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "-1").toInt());
+        new AutoConnectScreen(ECrewPosition(crew_position), PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "solo"));
     }
     else if (PreferencesManager::get("touchcalib").toInt())
     {
         new MouseCalibrator(PreferencesManager::get("touchcalibfile"));
+    }
+    else if (PreferencesManager::get("tutorial").toInt())
+    {
+        new TutorialGame(true);
     }else{
         new MainMenu();
+    }
+}
+
+void returnToShipSelection()
+{
+    if (PreferencesManager::get("autoconnect").toInt())
+    {
+        //If we are auto connect, return to the auto connect screen instead of the ship selection. The returnToMainMenu will handle this.
+        returnToMainMenu();
+    }
+    else
+    {
+        new ShipSelectionScreen();
     }
 }

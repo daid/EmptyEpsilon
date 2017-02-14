@@ -3,7 +3,10 @@
 
 #include <functional>
 #include "stringImproved.h"
+#include "colorConfig.h"
+#include "hotkeyConfig.h"
 #include "gui2_container.h"
+#include "main.h"
 
 enum EGuiAlign
 {
@@ -23,7 +26,9 @@ class GuiElement : public GuiContainer
 private:
     sf::Vector2f position;
     sf::Vector2f size;
+    sf::FloatRect margins;
     EGuiAlign position_alignment;
+    bool destroyed;
 protected:
     GuiContainer* owner;
     sf::FloatRect rect;
@@ -31,6 +36,7 @@ protected:
     bool enabled;
     bool hover;
     bool focus;
+    bool active;
     string id;
 public:
     constexpr static float GuiSizeMatchHeight = -1.0;
@@ -44,8 +50,8 @@ public:
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
-    virtual bool onKey(sf::Keyboard::Key key, int unicode);
-    virtual bool onHotkey(sf::Keyboard::Key key, int unicode);
+    virtual bool onKey(sf::Event::KeyEvent key, int unicode);
+    virtual void onHotkey(const HotkeyResult& key);
     virtual bool onJoystickXYMove(sf::Vector2f position);
     virtual bool onJoystickZMove(float position);
     virtual bool onJoystickRMove(float position);
@@ -53,6 +59,9 @@ public:
     GuiElement* setSize(sf::Vector2f size);
     GuiElement* setSize(float x, float y);
     sf::Vector2f getSize();
+    GuiElement* setMargins(float n);
+    GuiElement* setMargins(float x, float y);
+    GuiElement* setMargins(float left, float top, float right, float bottom);
     GuiElement* setPosition(float x, float y, EGuiAlign alignment = ATopLeft);
     GuiElement* setPosition(sf::Vector2f position, EGuiAlign alignment = ATopLeft);
     sf::Vector2f getPositionOffset();
@@ -63,6 +72,8 @@ public:
     GuiElement* setEnable(bool enable);
     GuiElement* enable();
     GuiElement* disable();
+    GuiElement* setActive(bool active);
+    bool isActive();
     sf::FloatRect getRect() const { return rect; }
     bool isEnabled();
     
@@ -71,10 +82,16 @@ public:
     
     sf::Vector2f getCenterPoint();
     
+    GuiContainer* getOwner();
+    GuiContainer* getTopLevelContainer();
+    
+    //Have this GuiElement destroyed, but at a safe point&time in the code. (handled by the container)
+    void destroy();
+    
     friend class GuiContainer;
     friend class GuiCanvas;
 private:
-    void updateRect(sf::FloatRect window_rect);
+    void updateRect(sf::FloatRect parent_rect);
 protected:
     void adjustRenderTexture(sf::RenderTexture& texture);
     void drawRenderTexture(sf::RenderTexture& texture, sf::RenderTarget& window, sf::Color color = sf::Color::White, const sf::RenderStates& states = sf::RenderStates::Default);
@@ -86,7 +103,7 @@ protected:
      * \param text_size Size of the text
      * \param color Color of text
      */
-    void drawText(sf::RenderTarget& window, sf::FloatRect rect, string text, EGuiAlign align = ATopLeft, float text_size = 30, sf::Color color=sf::Color::White);
+    void drawText(sf::RenderTarget& window, sf::FloatRect rect, string text, EGuiAlign align = ATopLeft, float text_size = 30, sf::Font* font = main_font, sf::Color color=sf::Color::White);
 
     /*!
      * Draw a certain text on the screen with vertical orientation
@@ -95,12 +112,19 @@ protected:
      * \param text_size Size of the text
      * \param color Color of text
      */
-    void drawVerticalText(sf::RenderTarget& window, sf::FloatRect rect, string text, EGuiAlign align = ATopLeft, float text_size = 30, sf::Color color=sf::Color::White);
+    void drawVerticalText(sf::RenderTarget& window, sf::FloatRect rect, string text, EGuiAlign align = ATopLeft, float text_size = 30, sf::Font* font = main_font, sf::Color color=sf::Color::White);
 
     void draw9Cut(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White, float width_factor = 1.0);
     void draw9CutV(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White, float height_factor = 1.0);
     
+    void drawStretched(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White);
+    void drawStretchedH(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White);
+    void drawStretchedV(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White);
+    void drawStretchedHV(sf::RenderTarget& window, sf::FloatRect rect, float corner_size, string texture, sf::Color color=sf::Color::White);
+    
     void drawArrow(sf::RenderTarget& window, sf::FloatRect rect, sf::Color=sf::Color::White, float rotation=0);
+    
+    sf::Color selectColor(ColorSet& color_set);
     
     class LineWrapResult
     {

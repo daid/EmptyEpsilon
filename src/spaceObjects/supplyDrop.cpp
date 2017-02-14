@@ -18,7 +18,10 @@ SupplyDrop::SupplyDrop()
 {
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = 0;
+
     energy = 0.0;
+    setRadarSignatureInfo(0.0, 0.1, 0.1);
+
     model_info.setData("ammo_box");
 }
 
@@ -72,6 +75,6 @@ string SupplyDrop::getExportLine()
         ret += ":setEnergy(" + string(energy, 0) + ")";
     for(int n=0; n<MW_Count; n++)
         if (weapon_storage[n] > 0)
-            ret += ":setWeaponStorage(" + getMissileWeaponName(EMissileWeapons(n)) + ", " + string(weapon_storage[n]) + ")";
+            ret += ":setWeaponStorage(\"" + getMissileWeaponName(EMissileWeapons(n)) + "\", " + string(weapon_storage[n]) + ")";
     return ret;
 }

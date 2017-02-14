@@ -21,7 +21,7 @@ enum ERepairCrewDirection
 class RepairCrew : public MultiplayerObject, public Updatable
 {
     static constexpr float move_speed = 2.0;
-    static constexpr float repair_per_second = 0.005;
+    static constexpr float repair_per_second = 0.007;
 public:
     sf::Vector2f position;
     sf::Vector2i target_position;
@@ -38,6 +38,8 @@ public:
     void commandSetTargetPosition(sf::Vector2i position);
 
     virtual void update(float delta);
+private:
+    bool isTargetPositionTaken(sf::Vector2i position);
 };
 PVector<RepairCrew> getRepairCrewFor(P<PlayerSpaceship> ship);
 

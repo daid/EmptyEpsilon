@@ -3,8 +3,8 @@
 #include "windowScreen.h"
 #include "epsilonServer.h"
 #include "main.h"
-#include "menus/shipSelectionScreen.h"
 
+#include "screenComponents/viewport3d.h"
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/shipDestroyedPopup.h"
 
@@ -43,9 +43,9 @@ void WindowScreen::update(float delta)
     }
 }
 
-void WindowScreen::onKey(sf::Keyboard::Key key, int unicode)
+void WindowScreen::onKey(sf::Event::KeyEvent key, int unicode)
 {
-    switch(key)
+    switch(key.code)
     {
     case sf::Keyboard::Left:
         angle -= 5.0f;
@@ -58,7 +58,7 @@ void WindowScreen::onKey(sf::Keyboard::Key key, int unicode)
     case sf::Keyboard::Escape:
     case sf::Keyboard::Home:
         destroy();
-        new ShipSelectionScreen();
+        returnToShipSelection();
         break;
     case sf::Keyboard::P:
         if (game_server)

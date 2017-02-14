@@ -2,8 +2,9 @@
 #define WINDOW_SCREEN_H
 
 #include "engine.h"
-#include "gui/gui2.h"
-#include "screenComponents/viewport3d.h"
+#include "gui/gui2_canvas.h"
+
+class GuiViewport3D;
 
 class WindowScreen : public GuiCanvas, public Updatable
 {
@@ -13,9 +14,9 @@ private:
 public:
     WindowScreen(float angle);
     
-    virtual void update(float delta);
+    virtual void update(float delta) override;
 
-    virtual void onKey(sf::Keyboard::Key key, int unicode);
+    virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
 };
 
-#endif//MAIN_SCREEN_H
+#endif//WINDOW_SCREEN_H

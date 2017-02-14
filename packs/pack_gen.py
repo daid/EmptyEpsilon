@@ -38,7 +38,7 @@ def convertObj(filename):
 
 def buildPack(name):
 	os.chdir(name)
-	filenames = glob.glob('*') + glob.glob('*/*')
+	filenames = glob.glob('*') + glob.glob('*/*') + glob.glob('*/*/*')
 	files = {}
 	for filename in filenames:
 		filename = filename.encode('ascii')
@@ -56,6 +56,7 @@ def buildPack(name):
 			files[filename] = data
 	os.chdir('..')
 	f = open(name + '.pack', 'wb')
+	flog = open(name + '.packlist', 'wb')
 	f.write(struct.pack('>i', FORMAT_VERSION))
 	f.write(struct.pack('>i', len(files)))
 	offset = 8
@@ -64,16 +65,19 @@ def buildPack(name):
 	for filename, data in files.items():
 		f.write(struct.pack('>B', len(filename)))
 		f.write(filename)
+		flog.write(filename + '\n')
 		f.write(struct.pack('>ii', offset, len(data)))
 		print offset, filename
 		offset += len(data)
 	for filename, data in files.items():
 		f.write(data)
 	f.close()
+	flog.close()
 
 def main():
 	for dir in os.listdir("."):
 		if os.path.isdir(dir):
-			buildPack(dir)
+			if not dir.startswith("SolCommand"):
+				buildPack(dir)
 
 main()

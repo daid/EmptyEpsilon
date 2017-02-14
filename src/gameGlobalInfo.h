@@ -4,7 +4,9 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "script.h"
 #include "GMScriptCallback.h"
+#include "gameStateLogger.h"
 
+class GameStateLogger;
 class GameGlobalInfo;
 extern P<GameGlobalInfo> gameGlobalInfo;
 
@@ -21,6 +23,7 @@ enum EPlayerWarpJumpDrive
     PWJ_WarpDrive,
     PWJ_JumpDrive,
     PWJ_WarpAndJumpDrive,
+    PWJ_None,
     PWJ_MAX,
 };
 enum EScanningComplexity
@@ -33,6 +36,7 @@ enum EScanningComplexity
 
 class GameGlobalInfo : public MultiplayerObject, public Updatable
 {
+    P<GameStateLogger> state_logger;
 public:
     /*!
      * \brief Maximum number of player ships.
@@ -53,6 +57,8 @@ private:
 public:
     string global_message;
     float global_message_timeout;
+    
+    string banner_string;
 
     std::vector<float> reputation_points;
     NebulaInfo nebula_info[max_nebulas];
@@ -66,9 +72,12 @@ public:
     bool use_system_damage;
     bool allow_main_screen_tactical_radar;
     bool allow_main_screen_long_range_radar;
+    string variation = "None";
 
-    //List of script functions that can be called from the GM interface
+    //List of script functions that can be called from the GM interface (Server only!)
     std::list<GMScriptCallback> gm_callback_functions;
+    //When active, all comms request goto the GM as chat, and normal scripted converstations are disabled. This does not disallow player<->player ship comms.
+    bool intercept_all_comms_to_gm;
 
     GameGlobalInfo();
 

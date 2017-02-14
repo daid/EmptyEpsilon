@@ -1,26 +1,17 @@
 -- Name: Ghost from the Past
--- Description: Far from any frontline or civilization, patrolling the Stakhanov Mining Complex can be dull, consisting mainly of seizing contraband and stopping drunken brawls. It is indeed a lonely ward brightened only by R&R at the Marco Polo station. However, when an inbound FTL-capable Ktlitan Swarm is announced, you must scramble to save the Sector !
+-- Description: Far from any frontline or civilization, patrolling the Stakhanov Mining Complex can be dull,
+--- consisting mainly of seizing contraband and stopping drunken brawls. It is indeed a lonely ward brightened only by R&R at the Marco Polo station.
+--- However, when an inbound FTL-capable Ktlitan Swarm is announced, you must scramble to save the Sector ! [Requires beam/shield frequenies] [Hard]
+-- Type: Mission
 -- Author: Fouindor
 
 function init()
-    template = ShipTemplate():setName("Hacker"):setModel("transport_1_1")
-    template:setHull(100)
-    template:setShields(50, 50)
-    template:setSpeed(120, 10, 10)
-	
-	template = ShipTemplate():setName("Nuker"):setModel("battleship_destroyer_4_upgraded")
-	template:setHull(100)
-	template:setShields(100, 80)
-	template:setSpeed(80, 5, 10)
-	template:setTubes(2, 8.0)
-	template:setWeaponStorage("Nuke", 10)
-		
 	--Spawn Marco Polo, its defenders and a Ktilitian strike team
 	marco_polo = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCallSign("Marco Polo"):setDescription("A merchant and entertainement hub."):setPosition(-21200, 45250)
-	parangon = CpuShip():setTemplate("Cruiser"):setFaction("Human Navy"):setCallSign("HNS Parangon"):orderDefendTarget(marco_polo):setPosition(-21500, 44500):setScanned(true)
-	CpuShip():setTemplate("Fighter"):setFaction("Human Navy"):setCallSign("P-1"):setPosition(-21600, 45000):orderDefendTarget(parangon):setScanned(true)
-	CpuShip():setTemplate("Fighter"):setFaction("Human Navy"):setCallSign("P-2"):setPosition(-21000, 44000):orderDefendTarget(parangon):setScanned(true)
-	CpuShip():setTemplate("Fighter"):setFaction("Human Navy"):setCallSign("P-3"):setPosition(-22000, 46000):orderDefendTarget(parangon):setScanned(true)
+	parangon = CpuShip():setTemplate("Phobos T3"):setFaction("Human Navy"):setCallSign("HNS Parangon"):orderDefendTarget(marco_polo):setPosition(-21500, 44500):setScanned(true)
+	CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setCallSign("P-1"):setPosition(-21600, 45000):orderDefendTarget(parangon):setScanned(true)
+	CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setCallSign("P-2"):setPosition(-21000, 44000):orderDefendTarget(parangon):setScanned(true)
+	CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setCallSign("P-3"):setPosition(-22000, 46000):orderDefendTarget(parangon):setScanned(true)
 	
 	CpuShip():setTemplate("Ktlitan Fighter"):setCallSign("Ksa-1"):setFaction("Ktlitans"):setPosition(-43000, 47000):orderRoaming()
 	CpuShip():setTemplate("Ktlitan Fighter"):setCallSign("Ksa-2"):setFaction("Ktlitans"):setPosition(-43000, 46000):orderRoaming()
@@ -33,13 +24,13 @@ function init()
 	create(Asteroid, 90, 4000, 16000, 32000, 9000)
 	create(VisualAsteroid, 70, 4000, 15000, 32000, 9000)
 	
-	euphrates = CpuShip():setTemplate("Missile Cruiser"):setFaction("Human Navy"):setCallSign("HNS Euphrates"):setScanned(true):orderDefendTarget(stakhanov):setPosition(31000, 8500)
-	CpuShip():setTemplate("Fighter"):setFaction("Human Navy"):setPosition(32500, 8500):orderDefendTarget(euphrates):setScanned(true)
-	CpuShip():setTemplate("Fighter"):setFaction("Human Navy"):setPosition(32500, 9500):orderDefendTarget(euphrates):setScanned(true)
+	euphrates = CpuShip():setTemplate("Piranha F12"):setFaction("Human Navy"):setCallSign("HNS Euphrates"):setScanned(true):orderDefendTarget(stakhanov):setPosition(31000, 8500)
+	CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setPosition(32500, 8500):orderDefendTarget(euphrates):setScanned(true)
+	CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setPosition(32500, 9500):orderDefendTarget(euphrates):setScanned(true)
 	
-	tigris = CpuShip():setTemplate("Cruiser"):setFaction("Human Navy"):setCallSign("HNS Tigris"):setScanned(true):orderDefendTarget(stakhanov):setPosition(33000, 9000)
-	CpuShip():setTemplate("Fighter"):setFaction("Human Navy"):setPosition(31500, 8500):orderDefendTarget(tigris):setScanned(true)
-	CpuShip():setTemplate("Fighter"):setFaction("Human Navy"):setPosition(31500, 9500):orderDefendTarget(tigris):setScanned(true)
+	tigris = CpuShip():setTemplate("Phobos T3"):setFaction("Human Navy"):setCallSign("HNS Tigris"):setScanned(true):orderDefendTarget(stakhanov):setPosition(33000, 9000)
+	CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setPosition(31500, 8500):orderDefendTarget(tigris):setScanned(true)
+	CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setPosition(31500, 9500):orderDefendTarget(tigris):setScanned(true)
 	
 	CpuShip():setTemplate("Ktlitan Breaker"):setCallSign("Nleb-1"):setFaction("Ktlitans"):setPosition(60000, 7000):orderRoaming()
 	CpuShip():setTemplate("Ktlitan Breaker"):setCallSign("Nleb-2"):setFaction("Ktlitans"):setPosition(59000, 6000):orderRoaming()
@@ -55,7 +46,7 @@ function init()
 	create(Mine, 8, 5000, 7500, -45600, -14800)
 	
 	--Spawn the Arlenian Lighbringer
-	lightbringer = CpuShip():setTemplate("Adv. Gunship"):setCallSign("Lightbringer"):setFaction("Arlenians"):setPosition(-10000, -20000)
+	lightbringer = CpuShip():setTemplate("Phobos T3"):setCallSign("Lightbringer"):setFaction("Arlenians"):setPosition(-10000, -20000)
 	Nebula():setPosition(-10000, -20000)
 	create(Nebula, 2, 4500, 5500, -10000, -20000)
 	
@@ -74,7 +65,7 @@ function init()
 	create(Nebula, 5, 10000, 60000, -10000, 10000)
 	
 	--Spawn the Player
-	player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Player Cruiser"):setPosition(-22000, 44000):setCallSign("Epsilon")
+	player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setPosition(-22000, 44000):setCallSign("Epsilon")
 	
 	--start the mission
 	main_mission = 1
@@ -230,12 +221,12 @@ KTLITAN ATTACK IS A DISTRACTION -STOP- STAKHANOV IS NOT THE TRUE TARGET -STOP- D
 	
 "Epsilon, please come in, this is Black Site #114 dispatch relay. We are under heavy assault by a portion of the main Ktlitan fleet ! Location of the base is on a need-to-know basis, so we trust your discreetion."]])) then
 	bs114:setFaction("Human Navy")
-	korolev = CpuShip():setTemplate("Adv. Gunship"):setFaction("Human Navy"):setCallSign("HNS Korolev"):setPosition(-45000, -16000):orderDefendTarget(bs114):setScanned(true)
-	k1 = CpuShip():setTemplate("Fighter"):setFaction("Human Navy"):setCallSign("K-1"):setPosition(-44000, -15000):orderDefendTarget(bs114):setScanned(true)
-	k2 = CpuShip():setTemplate("Fighter"):setFaction("Human Navy"):setCallSign("K-2"):setPosition(-44500, -15500):orderDefendTarget(bs114):setScanned(true)
-	k3 = CpuShip():setTemplate("Fighter"):setFaction("Human Navy"):setCallSign("K-3"):setPosition(-46000, -16000):orderDefendTarget(bs114):setScanned(true)
-	k4 = CpuShip():setTemplate("Fighter"):setFaction("Human Navy"):setCallSign("K-4"):setPosition(-46500, -16500):orderDefendTarget(bs114):setScanned(true)
-	k5 = CpuShip():setTemplate("Fighter"):setFaction("Human Navy"):setCallSign("K-5"):setPosition(-46500, -16500):orderDefendTarget(bs114):setScanned(true)
+	korolev = CpuShip():setTemplate("Phobos T3"):setFaction("Human Navy"):setCallSign("HNS Korolev"):setPosition(-45000, -16000):orderDefendTarget(bs114):setScanned(true)
+	k1 = CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setCallSign("K-1"):setPosition(-44000, -15000):orderDefendTarget(bs114):setScanned(true)
+	k2 = CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setCallSign("K-2"):setPosition(-44500, -15500):orderDefendTarget(bs114):setScanned(true)
+	k3 = CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setCallSign("K-3"):setPosition(-46000, -16000):orderDefendTarget(bs114):setScanned(true)
+	k4 = CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setCallSign("K-4"):setPosition(-46500, -16500):orderDefendTarget(bs114):setScanned(true)
+	k5 = CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setCallSign("K-5"):setPosition(-46500, -16500):orderDefendTarget(bs114):setScanned(true)
 	
 	CpuShip():setTemplate("Ktlitan Breaker"):setCallSign("Flen-1"):setFaction("Ktlitans"):setPosition(-51000, -16000):orderRoaming()
 	CpuShip():setTemplate("Ktlitan Breaker"):setCallSign("Flen-2"):setFaction("Ktlitans"):setPosition(-51000, -17000):orderRoaming()
@@ -254,7 +245,7 @@ KTLITAN ATTACK IS A DISTRACTION -STOP- STAKHANOV IS NOT THE TRUE TARGET -STOP- D
 	
 "It seems that the enemy is changing its tactics. Our long-range scanners show that a unknown high-velocity ship, escorted by fighters, overrode our internal security. They will try to dock with us, you must intercept it at once !"]])) then
 	
-	ghost_hacker = CpuShip():setTemplate("Hacker"):setCallSign("???"):setFaction("Ghosts"):setPosition(-60000, -14000):orderFlyTowardsBlind(-45000, -14800)
+	ghost_hacker = spawnHacker():setCallSign("???"):setFaction("Ghosts"):setPosition(-60000, -14000):orderFlyTowardsBlind(-45000, -14800)
 	s1 = CpuShip():setTemplate("Ktlitan Fighter"):setCallSign("Slan-1"):setFaction("Ktlitans"):setPosition(-61000, -13000):orderFlyTowards(-45000, -14800)
 	s2 = CpuShip():setTemplate("Ktlitan Fighter"):setCallSign("Slan-2"):setFaction("Ktlitans"):setPosition(-61000, -14000):orderFlyTowards(-45000, -14800)
 	s3 = CpuShip():setTemplate("Ktlitan Fighter"):setCallSign("Slan-3"):setFaction("Ktlitans"):setPosition(-61000, -15000):orderFlyTowards(-45000, -14800)
@@ -341,27 +332,27 @@ Whatever that means, it cannot be good.]])
 To summarize, get near the infected ships, find a backdoor using the frequency LEAST absorbed by their shields and deploy our patches. Godspeed Epsilon."]])
 
 			if korolev:isValid() then
-			korolev:setFaction("Ghosts"):setScanned(false):setCommsScript("gtfp_comms_hacked_ship.lua")
+			korolev:setFaction("Ghosts"):setScanned(false):setCommsFunction(commsHackedShip)
 			end
 			
 			if k1:isValid() then
-			k1:setFaction("Ghosts"):setScanned(false):setCommsScript("gtfp_comms_hacked_ship.lua")
+			k1:setFaction("Ghosts"):setScanned(false):setCommsFunction(commsHackedShip)
 			end
 			
 			if k2:isValid() then
-			k2:setFaction("Ghosts"):setScanned(false):setCommsScript("gtfp_comms_hacked_ship.lua")
+			k2:setFaction("Ghosts"):setScanned(false):setCommsFunction(commsHackedShip)
 			end
 			
 			if k3:isValid() then
-			k3:setFaction("Ghosts"):setScanned(false):setCommsScript("gtfp_comms_hacked_ship.lua")
+			k3:setFaction("Ghosts"):setScanned(false):setCommsFunction(commsHackedShip)
 			end
 			
 			if k4:isValid() then
-			k4:setFaction("Ghosts"):setScanned(false):setCommsScript("gtfp_comms_hacked_ship.lua")
+			k4:setFaction("Ghosts"):setScanned(false):setCommsFunction(commsHackedShip)
 			end
 			
 			if k5:isValid() then
-			k5:setFaction("Ghosts"):setScanned(false):setCommsScript("gtfp_comms_hacked_ship.lua")
+			k5:setFaction("Ghosts"):setScanned(false):setCommsFunction(commsHackedShip)
 			end
 		
 		main_mission = 7
@@ -456,10 +447,10 @@ We are both ready to continue our purpose, it seems."]])) then
 		if (hacked == 1) and (distance(player, nsa) < 10000) and (stakhanov:sendCommsMessage(player, [[Central Command comes in :
 		"Bogeys on their way to NSA, Epsilon. Take care of them."]])) then
 		
-		gfighter1=CpuShip():setTemplate("Fighter"):setCallSign("Z-1"):setFaction("Ghosts"):setPosition(-20000, -10000):orderFlyTowards(5000, 5000)
-		gfighter2=CpuShip():setTemplate("Fighter"):setCallSign("Z-2"):setFaction("Ghosts"):setPosition(-20000, -10000):orderFlyTowards(5000, 5000)
-		gfighter3=CpuShip():setTemplate("Fighter"):setCallSign("Z-3"):setFaction("Ghosts"):setPosition(-20000, -11000):orderFlyTowards(5000, 5000)
-		gfighter4=CpuShip():setTemplate("Fighter"):setCallSign("Z-4"):setFaction("Ghosts"):setPosition(-20000, -11000):orderFlyTowards(5000, 5000)
+		gfighter1=CpuShip():setTemplate("MT52 Hornet"):setCallSign("Z-1"):setFaction("Ghosts"):setPosition(-20000, -10000):orderFlyTowards(5000, 5000)
+		gfighter2=CpuShip():setTemplate("MT52 Hornet"):setCallSign("Z-2"):setFaction("Ghosts"):setPosition(-20000, -10000):orderFlyTowards(5000, 5000)
+		gfighter3=CpuShip():setTemplate("MT52 Hornet"):setCallSign("Z-3"):setFaction("Ghosts"):setPosition(-20000, -11000):orderFlyTowards(5000, 5000)
+		gfighter4=CpuShip():setTemplate("MT52 Hornet"):setCallSign("Z-4"):setFaction("Ghosts"):setPosition(-20000, -11000):orderFlyTowards(5000, 5000)
 		
 		main_mission = 10
 		end
@@ -484,17 +475,17 @@ We are both ready to continue our purpose, it seems."]])) then
 			parangon:orderFlyTowards(37000, 43000)
 			end
 		
-		scout = CpuShip():setTemplate("Hacker"):setFaction("Human Navy"):setCallSign("Recovery Team"):setPosition(35500, 43000):setScanned(true)
+		scout = spawnHacker():setFaction("Human Navy"):setCallSign("Recovery Team"):setPosition(35500, 43000):setScanned(true)
 		main_mission = 11
 		end	
 		
 		--if the assault on NSA is repelled
 		if (hacked==1) and (not gfighter1:isValid()) and (not gfighter2:isValid()) and (not gfighter3:isValid()) and (not gfighter4:isValid()) then
-		shiva = CpuShip():setTemplate("Nuker"):setCallSign("HNS Shiva"):setFaction("Human Navy"):setPosition(2000, 2000):orderFlyTowards(-44600, -13800):setScanned(true)
+		shiva = spawnNuker():setCallSign("HNS Shiva"):setFaction("Human Navy"):setPosition(2000, 2000):orderFlyTowards(-44600, -13800):setScanned(true)
 		shiva:sendCommsMessage(player, [[Come in, this is HNS Shiva, here to clean this mess. Your mission for now is to escort us to the compromised site. Let's roll !]])
-		CpuShip():setTemplate("Fighter"):setFaction("Human Navy"):setCallSign("S-1"):setPosition(3000, 3000):orderDefendTarget(shiva):setScanned(true)
-		CpuShip():setTemplate("Fighter"):setFaction("Human Navy"):setCallSign("S-2"):setPosition(1000, 1000):orderDefendTarget(shiva):setScanned(true)
-		CpuShip():setTemplate("Fighter"):setFaction("Human Navy"):setCallSign("S-3"):setPosition(3000, 1000):orderDefendTarget(shiva):setScanned(true)
+		CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setCallSign("S-1"):setPosition(3000, 3000):orderDefendTarget(shiva):setScanned(true)
+		CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setCallSign("S-2"):setPosition(1000, 1000):orderDefendTarget(shiva):setScanned(true)
+		CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setCallSign("S-3"):setPosition(3000, 1000):orderDefendTarget(shiva):setScanned(true)
 		main_mission = 11
 		end
 	end
@@ -538,10 +529,10 @@ We are both ready to continue our purpose, it seems."]])) then
 			scout:sendCommsMessage(player, [[We're in. Protect us while we take what we need inside.]])
 			mission_time = 0
 			main_mission = 13
-			CpuShip():setTemplate("Fighter"):setFaction("Ghosts"):setCallSign("Z-1"):setPosition(40000, 53000):orderAttack(scout)
-			CpuShip():setTemplate("Fighter"):setFaction("Ghosts"):setCallSign("Z-2"):setPosition(40000, 53500):orderAttack(scout)
-			CpuShip():setTemplate("Fighter"):setFaction("Ghosts"):setCallSign("Z-3"):setPosition(40000, 52500):orderAttack(scout)
-			puShip():setTemplate("Fighter"):setFaction("Ghosts"):setCallSign("Z-3"):setPosition(40000, 52500):orderAttack(scout)
+			CpuShip():setTemplate("MT52 Hornet"):setFaction("Ghosts"):setCallSign("Z-1"):setPosition(40000, 53000):orderAttack(scout)
+			CpuShip():setTemplate("MT52 Hornet"):setFaction("Ghosts"):setCallSign("Z-2"):setPosition(40000, 53500):orderAttack(scout)
+			CpuShip():setTemplate("MT52 Hornet"):setFaction("Ghosts"):setCallSign("Z-3"):setPosition(40000, 52500):orderAttack(scout)
+			puShip():setTemplate("MT52 Hornet"):setFaction("Ghosts"):setCallSign("Z-3"):setPosition(40000, 52500):orderAttack(scout)
 			end
 			
 			if (not scout:isValid()) then
@@ -599,7 +590,26 @@ We are both ready to continue our purpose, it seems."]])) then
 	end
 end
 
+function spawnHacker()
+    ship = CpuShip():setTemplate("Transport1x1")
+    ship:setHullMax(100):setHull(100)
+    ship:setShieldsMax(50, 50):setShields(50, 50)
+    ship:setImpulseMaxSpeed(120):setRotationMaxSpeed(10)
+    return ship
+end
 
+function spawnNuker()
+    ship = CpuShip():setTemplate("Phobos T3")
+    ship:setHullMax(100):setHull(100)
+    ship:setShieldsMax(100, 100):setShields(100, 100)
+    ship:setImpulseMaxSpeed(80):setRotationMaxSpeed(5)
+    ship:setBeamWeapon(0, 0, 0, 0, 0, 0)
+    ship:setBeamWeapon(1, 0, 0, 0, 0, 0)
+	ship:setWeaponStorageMax("Homing", 0)
+	ship:setWeaponStorageMax("Nuke", 10)
+    ship:setWeaponStorage("Nuke", 10)
+    return ship
+end
 
 -- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0)
 function create(object_type, amount, dist_min, dist_max, x0, y0)

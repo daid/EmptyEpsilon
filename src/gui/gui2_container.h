@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 
 class GuiElement;
+class HotkeyResult;
 class GuiContainer
 {
 protected:
@@ -16,10 +17,10 @@ public:
     virtual ~GuiContainer();
 
 protected:
-    virtual void drawElements(sf::FloatRect window_rect, sf::RenderTarget& window);
-    virtual void drawDebugElements(sf::FloatRect window_rect, sf::RenderTarget& window);
+    virtual void drawElements(sf::FloatRect parent_rect, sf::RenderTarget& window);
+    virtual void drawDebugElements(sf::FloatRect parent_rect, sf::RenderTarget& window);
     GuiElement* getClickElement(sf::Vector2f mouse_position);
-    bool forwardKeypressToElements(sf::Keyboard::Key key, int unicode);
+    bool forwardKeypressToElements(const HotkeyResult& key);
     bool forwardJoystickXYMoveToElements(sf::Vector2f position);
     bool forwardJoystickZMoveToElements(float position);
     bool forwardJoystickRMoveToElements(float position);

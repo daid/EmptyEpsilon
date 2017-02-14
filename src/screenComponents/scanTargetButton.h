@@ -1,8 +1,11 @@
-#ifndef GUI_SCAN_TARGET_BUTTON_H
-#define GUI_SCAN_TARGET_BUTTON_H
+#ifndef SCAN_TARGET_BUTTON_H
+#define SCAN_TARGET_BUTTON_H
 
-#include "targetsContainer.h"
-#include "gui/gui2.h"
+#include "gui/gui2_element.h"
+
+class GuiButton;
+class GuiProgressbar;
+class TargetsContainer;
 
 class GuiScanTargetButton : public GuiElement
 {
@@ -16,4 +19,4 @@ public:
     virtual void onDraw(sf::RenderTarget& window);
 };
 
-#endif//GUI_SCAN_TARGET_BUTTON_H
+#endif//SCAN_TARGET_BUTTON_H

@@ -8,8 +8,8 @@ extern PVector<FactionInfo> factionInfo;
 
 enum EFactionVsFactionState
 {
-    FVF_Neutral,
     FVF_Friendly,
+    FVF_Neutral,
     FVF_Enemy
 };
 
@@ -69,11 +69,10 @@ public:
      */
     void reset();
 
-    static int findFactionId(string name);
+    static unsigned int findFactionId(string name);
 protected:
-
     string name;
     string description;
 };
 
-#endif//Faction_INFO_H
+#endif//FACTION_INFO_H

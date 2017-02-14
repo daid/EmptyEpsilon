@@ -1,4 +1,5 @@
 #include "gameGlobalInfo.h"
+#include "preferenceManager.h"
 
 P<GameGlobalInfo> gameGlobalInfo;
 
@@ -32,10 +33,13 @@ GameGlobalInfo::GameGlobalInfo()
     use_system_damage = true;
     allow_main_screen_tactical_radar = true;
     allow_main_screen_long_range_radar = true;
+    
+    intercept_all_comms_to_gm = false;
 
     registerMemberReplication(&scanning_complexity);
     registerMemberReplication(&global_message);
     registerMemberReplication(&global_message_timeout, 1.0);
+    registerMemberReplication(&banner_string);
     registerMemberReplication(&victory_faction);
     registerMemberReplication(&long_range_radar_range);
     registerMemberReplication(&use_beam_shield_frequencies);
@@ -94,6 +98,17 @@ void GameGlobalInfo::update(float delta)
     {
         global_message_timeout -= delta;
     }
+    if (my_player_info)
+    {
+        //Set the my_spaceship variable based on the my_player_info->ship_id
+        if ((my_spaceship && my_spaceship->getMultiplayerId() != my_player_info->ship_id) || (my_spaceship && my_player_info->ship_id == -1) || (!my_spaceship && my_player_info->ship_id != -1))
+        {
+            if (game_server)
+                my_spaceship = game_server->getObjectById(my_player_info->ship_id);
+            else
+                my_spaceship = game_client->getObjectById(my_player_info->ship_id);
+        }
+    }
 }
 
 string GameGlobalInfo::getNextShipCallsign()
@@ -124,7 +139,7 @@ void GameGlobalInfo::addScript(P<Script> script)
 void GameGlobalInfo::reset()
 {
     gm_callback_functions.clear();
-    
+
     foreach(GameEntity, e, entityList)
         e->destroy();
     foreach(SpaceObject, o, space_object_list)
@@ -145,16 +160,24 @@ void GameGlobalInfo::reset()
 void GameGlobalInfo::startScenario(string filename)
 {
     reset();
-    
+
     P<ScriptObject> script = new ScriptObject();
     script->run(filename);
     engine->registerObject("scenario", script);
+
+    if (PreferencesManager::get("game_logs", "1").toInt())
+    {
+        state_logger = new GameStateLogger();
+        state_logger->start();
+    }
 }
 
 void GameGlobalInfo::destroy()
 {
     reset();
     MultiplayerObject::destroy();
+    if (state_logger)
+        state_logger->destroy();
 }
 
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
@@ -184,7 +207,7 @@ string getSectorName(sf::Vector2f position)
     if (sector_y >= 0)
         y = string(char('A' + (sector_y)));
     else
-        y = string(char('z' + 1 + sector_y)) + string(char('z' + 1 + sector_y));
+        y = string(char('z' + sector_y / 20)) + string(char('z' + 1 + (sector_y % 26)));
     if (sector_x >= 0)
         x = string(sector_x);
     else
@@ -213,6 +236,15 @@ static int globalMessage(lua_State* L)
 /// globalMessage(string)
 /// Show a global message on the main screens of all active player ships.
 REGISTER_SCRIPT_FUNCTION(globalMessage);
+
+static int setBanner(lua_State* L)
+{
+    gameGlobalInfo->banner_string = luaL_checkstring(L, 1);
+    return 0;
+}
+/// setBanner(string)
+/// Show a scrolling banner containing this text on the cinematic and top down views.
+REGISTER_SCRIPT_FUNCTION(setBanner);
 
 static int getPlayerShip(lua_State* L)
 {
@@ -243,9 +275,9 @@ static int getObjectsInRadius(lua_State* L)
     float x = luaL_checknumber(L, 1);
     float y = luaL_checknumber(L, 2);
     float r = luaL_checknumber(L, 3);
-    
+
     sf::Vector2f position(x, y);
-    
+
     PVector<SpaceObject> objects;
     PVector<Collisionable> objectList = CollisionManager::queryArea(position - sf::Vector2f(r, r), position + sf::Vector2f(r, r));
     foreach(Collisionable, obj, objectList)
@@ -254,9 +286,78 @@ static int getObjectsInRadius(lua_State* L)
         if (sobj && (sobj->getPosition() - position) < r)
             objects.push_back(sobj);
     }
-    
+
     return convert<PVector<SpaceObject> >::returnType(L, objects);
 }
 /// getObjectsInRadius(x, y, radius)
 /// Return a list of all space objects at the x,y location within a certain radius.
 REGISTER_SCRIPT_FUNCTION(getObjectsInRadius);
+
+static int getAllObjects(lua_State* L)
+{
+    return convert<PVector<SpaceObject> >::returnType(L, space_object_list);
+}
+/// getAllObjects()
+/// Return a list of all space objects. (Use with care, this could return a very long list which could slow down the game when called every update)
+REGISTER_SCRIPT_FUNCTION(getAllObjects);
+
+static int getScenarioVariation(lua_State* L)
+{
+    lua_pushstring(L, gameGlobalInfo->variation.c_str());
+    return 1;
+}
+/// getScenarioVariation()
+/// Returns the currently used scenario variation.
+REGISTER_SCRIPT_FUNCTION(getScenarioVariation);
+
+/** Short lived object to do a scenario change on the update loop. See "setScenario" for details */
+class ScenarioChanger : public Updatable
+{
+public:
+    ScenarioChanger(string script_name, string variation)
+    : script_name(script_name), variation(variation)
+    {
+    }
+    
+    virtual void update(float delta)
+    {
+        gameGlobalInfo->variation = variation;
+        gameGlobalInfo->startScenario(script_name);
+        destroy();
+    }
+private:
+    string script_name;
+    string variation;
+};
+
+static int setScenario(lua_State* L)
+{
+    string script_name = luaL_checkstring(L, 1);
+    string variation = luaL_optstring(L, 2, "");
+    //This could be called from a currently active scenario script.
+    // Calling GameGlobalInfo::startScenario is unsafe at this point,
+    // as this will destroy the lua state that this function is running in.
+    //So use the ScenarioChanger object which will do the change in the update loop. Which is safe.
+    new ScenarioChanger(script_name, variation);
+    return 0;
+}
+/// setScenario(script_name, variation_name)
+/// Change the current scenario to a different one.
+REGISTER_SCRIPT_FUNCTION(setScenario);
+
+static int shutdownGame(lua_State* L)
+{
+    engine->shutdown();
+    return 0;
+}
+/// Shutdown the game.
+/// Calling this function will close the game. Mainly usefull for a headless server setup.
+REGISTER_SCRIPT_FUNCTION(shutdownGame);
+
+static int getLongRangeRadarRange(lua_State* L)
+{
+    lua_pushnumber(L, gameGlobalInfo->long_range_radar_range);
+    return 1;
+}
+/// Return the long range radar range, normally 30.000, but can be configured per game.
+REGISTER_SCRIPT_FUNCTION(getLongRangeRadarRange);

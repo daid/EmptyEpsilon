@@ -9,9 +9,10 @@ public:
     float rotation_speed;
     float z;
     float size;
+    int model_number;
 
     Asteroid();
-
+    
     virtual void draw3D();
 
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
@@ -29,6 +30,7 @@ public:
     float rotation_speed;
     float z;
     float size;
+    int model_number;
 
     VisualAsteroid();
 

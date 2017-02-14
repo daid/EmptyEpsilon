@@ -1,9 +1,11 @@
 #include "playerInfo.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "dockingButton.h"
 
 GuiDockingButton::GuiDockingButton(GuiContainer* owner, string id)
 : GuiButton(owner, id, "", [this]() { click(); })
 {
+    setIcon("gui/icons/docking");
 }
 
 void GuiDockingButton::click()
@@ -16,6 +18,7 @@ void GuiDockingButton::click()
         my_spaceship->commandDock(findDockingTarget());
         break;
     case DS_Docking:
+        my_spaceship->commandAbortDock();
         break;
     case DS_Docked:
         my_spaceship->commandUndock();
@@ -39,8 +42,8 @@ void GuiDockingButton::onDraw(sf::RenderTarget& window)
             }
             break;
         case DS_Docking:
-            setText("Docking...");
-            disable();
+            setText("Cancel Docking");
+            enable();
             break;
         case DS_Docked:
             setText("Undock");
@@ -49,6 +52,34 @@ void GuiDockingButton::onDraw(sf::RenderTarget& window)
         }
     }
     GuiButton::onDraw(window);
+}
+
+void GuiDockingButton::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "HELMS" && my_spaceship)
+    {
+        if (key.hotkey == "DOCK_ACTION")
+        {
+            switch(my_spaceship->docking_state)
+            {
+            case DS_NotDocking:
+                my_spaceship->commandDock(findDockingTarget());
+                break;
+            case DS_Docking:
+                my_spaceship->commandAbortDock();
+                break;
+            case DS_Docked:
+                my_spaceship->commandUndock();
+                break;
+            }
+        }
+        else if (key.hotkey == "DOCK_REQUEST")
+            my_spaceship->commandDock(findDockingTarget());
+        else if (key.hotkey == "DOCK_ABORT")
+            my_spaceship->commandAbortDock();
+        else if (key.hotkey == "UNDOCK")
+            my_spaceship->commandUndock();
+    }
 }
 
 P<SpaceObject> GuiDockingButton::findDockingTarget()

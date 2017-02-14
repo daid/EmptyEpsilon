@@ -54,7 +54,7 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
     if (distance < 4500 && has_missiles)
     {
         bool all_loaded = true;
-        for(int n=0; n<owner->weapon_tubes; n++)
+        for(int n=0; n<owner->weapon_tube_count; n++)
         {
             if (owner->weapon_tube[n].isLoaded())
             {
@@ -65,17 +65,28 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
         
         if (all_loaded)
         {
-            float target_angle = calculateFiringSolution(target);
-            if (target_angle != std::numeric_limits<float>::infinity())
+            int can_fire_count = 0;
+            for(int n=0; n<owner->weapon_tube_count; n++)
             {
-                for(int n=0; n<owner->weapon_tubes; n++)
+                float target_angle = calculateFiringSolution(target, owner->weapon_tube[n].getLoadType());
+                if (target_angle != std::numeric_limits<float>::infinity())
                 {
-                    if (n == 0)
+                    can_fire_count++;
+                }
+            }
+            
+            for(int n=0; n<owner->weapon_tube_count; n++)
+            {
+                float target_angle = calculateFiringSolution(target, owner->weapon_tube[n].getLoadType());
+                if (target_angle != std::numeric_limits<float>::infinity())
+                {
+                    can_fire_count--;
+                    if (can_fire_count == 0)
                         owner->weapon_tube[n].fire(target_angle);
-                    else if ((n % 2) == 0)
-                        owner->weapon_tube[n].fire(target_angle + 20.0f * (n / 2));
+                    else if ((can_fire_count % 2) == 0)
+                        owner->weapon_tube[n].fire(target_angle + 20.0f * (can_fire_count / 2));
                     else
-                        owner->weapon_tube[n].fire(target_angle - 20.0f * ((n + 1) / 2));
+                        owner->weapon_tube[n].fire(target_angle - 20.0f * ((can_fire_count + 1) / 2));
                 }
             }
         }

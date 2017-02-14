@@ -8,6 +8,14 @@ if(NOT DEFINED SERIOUS_PROTON_DIR)
  message(FATAL_ERROR "SERIOUS_PROTON_DIR was not set. Unable to continue")
 endif(NOT DEFINED SERIOUS_PROTON_DIR)
 
+if(DEFINED ENABLE_CRASH_LOGGER)
+ if(WIN32)
+  if(NOT DEFINED DRMINGW_ROOT)
+   message(FATAL_ERROR "DRMINGW_ROOT was not set. Unable to continue")
+  endif(NOT DEFINED DRMINGW_ROOT)
+ endif(WIN32)
+endif(DEFINED ENABLE_CRASH_LOGGER)
+
 string(TIMESTAMP CPACK_PACKAGE_VERSION_MAJOR "%Y")
 string(TIMESTAMP CPACK_PACKAGE_VERSION_MINOR "%m")
 string(TIMESTAMP CPACK_PACKAGE_VERSION_PATCH "%d")
@@ -18,6 +26,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 # install resources, scripts, and packs to app bundle instead of system dir.
 if(APPLE)
 set(CMAKE_INSTALL_PREFIX "./")
+elseif(UNIX)
+# Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
+add_definitions(-DRESOURCE_BASE_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/")
 endif()
 
 ## ensure c++11 is used
@@ -45,10 +56,13 @@ set(SOURCES
 	src/gameGlobalInfo.cpp
 	src/script.cpp
 	src/playerInfo.cpp
+	src/gameStateLogger.cpp
 	src/shipTemplate.cpp
 	src/beamTemplate.cpp
+	src/missileWeaponData.cpp
 	src/factionInfo.cpp
 	src/mesh.cpp
+	src/scenarioInfo.cpp
 	src/repairCrew.cpp
 	src/GMScriptCallback.cpp
 	src/tutorialGame.cpp
@@ -56,12 +70,13 @@ set(SOURCES
 	src/menus/serverBrowseMenu.cpp
 	src/menus/mainMenus.cpp
 	src/menus/serverCreationScreen.cpp
+	src/menus/tutorialMenu.cpp
 	src/menus/optionsMenu.cpp
 	src/menus/shipSelectionScreen.cpp
 	src/menus/autoConnectScreen.cpp
+	src/screens/cinematicViewScreen.cpp
 	src/screens/crewStationScreen.cpp
 	src/screens/topDownScreen.cpp
-	src/screens/gameMasterScreen.cpp
 	src/screens/windowScreen.cpp
 	src/screens/mainScreen.cpp
 	src/screens/crew4/operationsScreen.cpp
@@ -77,6 +92,12 @@ set(SOURCES
 	src/screens/extra/powerManagement.cpp
 	src/screens/extra/databaseScreen.cpp
 	src/screens/extra/shipLogScreen.cpp
+	src/screens/gm/gameMasterScreen.cpp
+	src/screens/gm/chatDialog.cpp
+	src/screens/gm/tweak.cpp
+	src/screenComponents/aimLock.cpp
+	src/screenComponents/alertOverlay.cpp
+	src/screenComponents/helpOverlay.cpp
 	src/screenComponents/missileTubeControls.cpp
 	src/screenComponents/selfDestructIndicator.cpp
 	src/screenComponents/viewport3d.cpp
@@ -94,6 +115,7 @@ set(SOURCES
 	src/screenComponents/shipInternalView.cpp
 	src/screenComponents/beamFrequencySelector.cpp
 	src/screenComponents/radarView.cpp
+	src/screenComponents/rawScannerDataRadarOverlay.cpp
 	src/screenComponents/scanTargetButton.cpp
 	src/screenComponents/snapSlider.cpp
 	src/screenComponents/indicatorOverlays.cpp
@@ -110,6 +132,13 @@ set(SOURCES
 	src/screenComponents/signalQualityIndicator.cpp
 	src/screenComponents/mainScreenControls.cpp
 	src/screenComponents/databaseView.cpp
+	src/screenComponents/shipsLogControl.cpp
+	src/screenComponents/onScreenKeyboard.cpp
+	src/screenComponents/hackingDialog.cpp
+	src/screenComponents/customShipFunctions.cpp
+	src/screenComponents/scrollingBanner.cpp
+	src/gui/colorConfig.cpp
+	src/gui/hotkeyConfig.cpp
 	src/gui/mouseRenderer.cpp
 	src/gui/scriptError.cpp
 	src/gui/gui2_slider.cpp
@@ -120,6 +149,7 @@ set(SOURCES
 	src/gui/gui2_rotationdial.cpp
 	src/gui/gui2_textentry.cpp
 	src/gui/gui2_label.cpp
+	src/gui/gui2_image.cpp
 	src/gui/gui2_autolayout.cpp
 	src/gui/gui2_arrowbutton.cpp
 	src/gui/gui2_entrylist.cpp
@@ -127,14 +157,14 @@ set(SOURCES
 	src/gui/gui2_scrolltext.cpp
 	src/gui/gui2_advancedscrolltext.cpp
 	src/gui/gui2_button.cpp
+	src/gui/gui2_resizabledialog.cpp
 	src/gui/debugRenderer.cpp
 	src/gui/gui2_element.cpp
-	src/gui/gui2.cpp
 	src/gui/gui2_keyvaluedisplay.cpp
 	src/gui/gui2_listbox.cpp
 	src/gui/gui2_scrollbar.cpp
 	src/gui/gui2_container.cpp
-	src/gui/gui2_box.cpp
+	src/gui/gui2_panel.cpp
 	src/gui/gui2_overlay.cpp
 	src/spaceObjects/spaceStation.cpp
 	src/spaceObjects/spaceship.cpp
@@ -151,6 +181,7 @@ set(SOURCES
 	src/spaceObjects/playerSpaceship.cpp
 	src/spaceObjects/beamEffect.cpp
 	src/spaceObjects/homingMissile.cpp
+	src/spaceObjects/hvli.cpp
 	src/spaceObjects/electricExplosionEffect.cpp
 	src/spaceObjects/supplyDrop.cpp
 	src/spaceObjects/warpJammer.cpp
@@ -158,6 +189,7 @@ set(SOURCES
 	src/spaceObjects/nuke.cpp
 	src/spaceObjects/artifact.cpp
 	src/spaceObjects/shipTemplateBasedObject.cpp
+	src/spaceObjects/planet.cpp
 	src/spaceObjects/spaceshipParts/beamWeapon.cpp
 	src/spaceObjects/spaceshipParts/weaponTube.cpp
 	src/ai/fighterAI.cpp
@@ -166,12 +198,17 @@ set(SOURCES
 	src/ai/missileVolleyAI.cpp
 	src/hardware/dmx512SerialDevice.cpp
 	src/hardware/enttecDMXProDevice.cpp
+	src/hardware/sACNDMXDevice.cpp
+	src/hardware/uDMXDevice.cpp
 	src/hardware/hardwareController.cpp
 	src/hardware/hardwareMappingEffects.cpp
 	src/hardware/hardwareOutputDevice.cpp
 	src/hardware/serialDriver.cpp
 	src/hardware/virtualOutputDevice.cpp
 )
+if(WIN32)
+    list(APPEND SOURCES EmptyEpsilon.rc)
+endif()
 
 foreach(SP_SOURCE
 	src/soundManager.cpp
@@ -248,6 +285,7 @@ foreach(SP_SOURCE
 	src/networkAudioStream.cpp
 	src/engine.cpp
 	src/windowManager.cpp
+	src/shaderManager.cpp
 	src/GL/glew.c
 	src/lua/lundump.c
 	src/lua/lmem.c
@@ -282,6 +320,7 @@ foreach(SP_SOURCE
   	list(APPEND SOURCES ${SERIOUS_PROTON_DIR}${SP_SOURCE})
 endforeach()
 
+add_definitions(-DWINDOW_TITLE="EmptyEpsilon")
 add_definitions(-DVERSION_NUMBER=${CPACK_PACKAGE_VERSION_MAJOR}${CPACK_PACKAGE_VERSION_MINOR}${CPACK_PACKAGE_VERSION_PATCH})
 if(ENABLE_CRASH_LOGGER)
   add_definitions(-DENABLE_CRASH_LOGGER)

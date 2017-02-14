@@ -1,23 +1,75 @@
 #include "engine.h"
 #include "mainMenus.h"
 #include "main.h"
+#include "preferenceManager.h"
 #include "epsilonServer.h"
-#include "tutorialGame.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/spaceship.h"
 #include "mouseCalibrator.h"
-#include "menus/shipSelectionScreen.h"
 #include "menus/serverCreationScreen.h"
 #include "menus/optionsMenu.h"
+#include "menus/tutorialMenu.h"
 #include "menus/serverBrowseMenu.h"
+#include "screens/gm/gameMasterScreen.h"
+#include "screenComponents/rotatingModelView.h"
+
+#include "gui/gui2_image.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_button.h"
+
+class DebugAllModelView : public GuiCanvas
+{
+public:
+    DebugAllModelView()
+    {
+        new GuiOverlay(this, "", colorConfig.background);
+        (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+
+        std::vector<string> names = ModelData::getModelDataNames();
+        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.startswith("transport_"); }), names.end());
+        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.startswith("artifact"); }), names.end());
+        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.startswith("SensorBuoyMK"); }), names.end());
+        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.startswith("space_station_"); }), names.end());
+        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name == "ammo_box"; }), names.end());
+        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name == "shield_generator"; }), names.end());
+        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.endswith("Blue"); }), names.end());
+        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.endswith("Green"); }), names.end());
+        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.endswith("Grey"); }), names.end());
+        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.endswith("Red"); }), names.end());
+        names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.endswith("White"); }), names.end());
+        int col_count = sqrtf(names.size()) + 1;
+        int row_count = ceil(names.size() / col_count) + 1;
+        int x = 0;
+        int y = 0;
+        float w = 1600 / col_count;
+        float h = 900 / row_count;
+        for(string name : names)
+        {
+            (new GuiRotatingModelView(this, "", ModelData::getModel(name)))->setPosition(x * w, y * h, ATopLeft)->setSize(w, h);
+            x++;
+            if (x == col_count)
+            {
+                x = 0;
+                y++;
+            }
+        }
+    }
+};
 
 MainMenu::MainMenu()
 {
-    (new GuiLabel(this, "TITLE_A", "Empty", 180))->setPosition(0, 100, ATopCenter)->setSize(0, 300);
-    (new GuiLabel(this, "TITLE_B", "Epsilon", 200))->setPosition(0, 250, ATopCenter)->setSize(0, 300);
-    (new GuiLabel(this, "VERSION", "Version: " + string(VERSION_NUMBER), 20))->setPosition(0, 30, ACenter)->setSize(0, 100);
-    
+    constexpr float logo_size = 256;
+    constexpr float logo_size_y = 256;
+    constexpr float logo_size_x = 1024;
+    constexpr float title_y = 160;
+
+    new GuiOverlay(this, "", colorConfig.background);
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+
+    (new GuiImage(this, "LOGO", "logo_full"))->setPosition(0, title_y, ATopCenter)->setSize(logo_size_x, logo_size_y);
+    (new GuiLabel(this, "VERSION", "Version: " + string(VERSION_NUMBER), 20))->setPosition(0, title_y + logo_size, ATopCenter)->setSize(0, 20);
+
     (new GuiButton(this, "START_SERVER", "Start server", [this]() {
         new EpsilonServer();
         if (game_server)
@@ -41,12 +93,10 @@ MainMenu::MainMenu()
         engine->shutdown();
     }))->setPosition(sf::Vector2f(50, -50), ABottomLeft)->setSize(300, 50);
 
-#ifdef DEBUG
-    (new GuiButton(this, "START_TUTORIAL", "Tutorial", [this]() {
+    (new GuiButton(this, "START_TUTORIAL", "Tutorials", [this]() {
+        new TutorialMenu();
         destroy();
-        new TutorialGame();
     }))->setPosition(sf::Vector2f(370, -50), ABottomLeft)->setSize(300, 50);
-#endif
 
     if (InputHandler::touch_screen)
     {
@@ -59,8 +109,11 @@ MainMenu::MainMenu()
     float y = 100;
     (new GuiLabel(this, "CREDITS", "Credits", 25))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 25); y += 25;
     (new GuiLabel(this, "CREDITS1", "Programming:", 20))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 20); y += 20;
-    (new GuiLabel(this, "CREDITS2", "Daid (github.com/daid)", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS3", "Nallath (github.com/nallath)", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS2", "Daid", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS3", "Nallath", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
+    y += 10;
+    (new GuiLabel(this, "CREDITS1", "Graphics:", 20))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 20); y += 20;
+    (new GuiLabel(this, "CREDITS3", "Interesting John", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
     y += 10;
     (new GuiLabel(this, "CREDITS4", "Music:", 20))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 20); y += 20;
     (new GuiLabel(this, "CREDITS5", "Matthew Pablo", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
@@ -87,4 +140,28 @@ MainMenu::MainMenu()
     (new GuiLabel(this, "CREDITS23", "Ralf Leichter", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
     (new GuiLabel(this, "CREDITS24", "Lee McDonough (Flea)", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
     (new GuiLabel(this, "CREDITS25", "Mickael Houet", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
+
+    if (PreferencesManager::get("instance_name") != "")
+    {
+        (new GuiLabel(this, "", PreferencesManager::get("instance_name"), 25))->setAlignment(ACenterLeft)->setPosition(20, 20, ATopLeft)->setSize(0, 18);
+    }
+
+#ifdef DEBUG
+    (new GuiButton(this, "", "TO DA GM!", [this]() {
+        new EpsilonServer();
+        if (game_server)
+        {
+            gameGlobalInfo->startScenario("scenario_10_empty.lua");
+
+            my_player_info->commandSetShipId(-1);
+            destroy();
+            new GameMasterScreen();
+        }
+    }))->setPosition(sf::Vector2f(370, -150), ABottomLeft)->setSize(300, 50);
+    
+    (new GuiButton(this, "", "MODELS!", [this]() {
+        destroy();
+        new DebugAllModelView();
+    }))->setPosition(sf::Vector2f(370, -200), ABottomLeft)->setSize(300, 50);
+#endif
 }

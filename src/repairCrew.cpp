@@ -12,7 +12,7 @@ RepairCrew::RepairCrew()
     position.x = -1;
     action = RC_Idle;
     direction = ERepairCrewDirection(irandom(RC_Up, RC_Right + 1));
-    
+
     selected = false;
 
     registerMemberReplication(&ship_id);
@@ -22,47 +22,68 @@ RepairCrew::RepairCrew()
     repairCrewList.push_back(this);
 }
 
-struct PathNode
+/* struct PathNode
 {
     ERepairCrewDirection arrive_direction;
     bool right, down;
 };
+*/
+
+class PathMap {
+	class PathNode {
+	public:
+		ERepairCrewDirection arrive_direction;
+		bool right, down;
+        PathNode() : arrive_direction(RC_None), right(false), down(false) { };
+	};
+private:
+	std::vector<PathNode> pathMap;
+public:
+	int width;
+	int height;
+
+	PathMap(const sf::Vector2i &size) : pathMap(size.x*size.y), width(size.x), height(size.y) {
+		// init all interior down/right doors (not right or bottom edge)
+		for (int x = 0; x < width-1; x++) {
+			for (int y = 0; y < height-1; y++) {
+				Node(x, y).down = true;
+				Node(x, y).right = true;
+			}
+		}
+	}
+
+	inline PathNode& Node(int x, int y) {
+		assert(x >= 0 && x < width && y >= 0 && y < height);
+		return pathMap[y*width + x];
+	}
+};
 
 ERepairCrewDirection pathFind(sf::Vector2i start_pos, sf::Vector2i target_pos, P<ShipTemplate> t)
 {
-    sf::Vector2i size = t->interiorSize();
-    PathNode node[size.x][size.y];
-    memset(node, 0, sizeof(PathNode) * size.x * size.y);
-    for(int x=0; x<size.x; x++)
-    {
-        for(int y=0; y<size.y; y++)
-        {
-            if (y < size.y - 1)
-                node[x][y].down = true;
-            if (x < size.x - 1)
-                node[x][y].right = true;
-        }
-    }
+	PathMap map(t->interiorSize());
+
     for(unsigned int n=0; n<t->rooms.size(); n++)
     {
-        for(int x=0; x<t->rooms[n].size.x; x++)
+		const ShipRoomTemplate &room = t->rooms[n];
+        for(int x=0; x<room.size.x; x++)
         {
-            node[t->rooms[n].position.x + x][t->rooms[n].position.y - 1].down = false;
-            node[t->rooms[n].position.x + x][t->rooms[n].position.y + t->rooms[n].size.y - 1].down = false;
+            map.Node(room.position.x + x,room.position.y - 1).down = false;
+            map.Node(room.position.x + x,room.position.y + room.size.y - 1).down = false;
         }
-        for(int y=0; y<t->rooms[n].size.y; y++)
+        for(int y=0; y<room.size.y; y++)
         {
-            node[t->rooms[n].position.x - 1][t->rooms[n].position.y + y].right = false;
-            node[t->rooms[n].position.x + t->rooms[n].size.x - 1][t->rooms[n].position.y + y].right = false;
+            map.Node(room.position.x - 1,room.position.y + y).right = false;
+            map.Node(room.position.x + room.size.x - 1,room.position.y + y).right = false;
         }
     }
     for(unsigned int n=0; n<t->doors.size(); n++)
     {
-        if (t->doors[n].horizontal)
+		const ShipDoorTemplate &door = t->doors[n];
+        if (door.horizontal)
         {
-            node[t->doors[n].position.x][t->doors[n].position.y - 1].down = true;
+            map.Node(door.position.x,door.position.y - 1).down = true;
         }else{
-            node[t->doors[n].position.x - 1][t->doors[n].position.y].right = true;
+            map.Node(door.position.x - 1,door.position.y).right = true;
         }
     }
 
@@ -72,31 +93,31 @@ ERepairCrewDirection pathFind(sf::Vector2i start_pos, sf::Vector2i target_pos, P
     {
         sf::Vector2i pos = search_points[0];
         if (pos == target_pos)
-            return node[pos.x][pos.y].arrive_direction;
+            return map.Node(pos.x,pos.y).arrive_direction;
         search_points.erase(search_points.begin());
 
-        if (node[pos.x][pos.y].right && node[pos.x + 1][pos.y].arrive_direction == RC_None)
+        if (map.Node(pos.x,pos.y).right && map.Node(pos.x + 1,pos.y).arrive_direction == RC_None)
         {
-            node[pos.x + 1][pos.y].arrive_direction = node[pos.x][pos.y].arrive_direction;
-            if (node[pos.x + 1][pos.y].arrive_direction == RC_None) node[pos.x + 1][pos.y].arrive_direction = RC_Right;
+            map.Node(pos.x + 1,pos.y).arrive_direction = map.Node(pos.x,pos.y).arrive_direction;
+            if (map.Node(pos.x + 1,pos.y).arrive_direction == RC_None) map.Node(pos.x + 1,pos.y).arrive_direction = RC_Right;
             search_points.push_back(sf::Vector2i(pos.x + 1, pos.y));
         }
-        if (pos.x > 0 && node[pos.x - 1][pos.y].right && node[pos.x - 1][pos.y].arrive_direction == RC_None)
+        if (pos.x > 0 && map.Node(pos.x - 1,pos.y).right && map.Node(pos.x - 1,pos.y).arrive_direction == RC_None)
         {
-            node[pos.x - 1][pos.y].arrive_direction = node[pos.x][pos.y].arrive_direction;
-            if (node[pos.x - 1][pos.y].arrive_direction == RC_None) node[pos.x - 1][pos.y].arrive_direction = RC_Left;
+            map.Node(pos.x - 1,pos.y).arrive_direction = map.Node(pos.x,pos.y).arrive_direction;
+            if (map.Node(pos.x - 1,pos.y).arrive_direction == RC_None) map.Node(pos.x - 1,pos.y).arrive_direction = RC_Left;
             search_points.push_back(sf::Vector2i(pos.x - 1, pos.y));
         }
-        if (node[pos.x][pos.y].down && node[pos.x][pos.y + 1].arrive_direction == RC_None)
+        if (map.Node(pos.x,pos.y).down && map.Node(pos.x,pos.y + 1).arrive_direction == RC_None)
         {
-            node[pos.x][pos.y + 1].arrive_direction = node[pos.x][pos.y].arrive_direction;
-            if (node[pos.x][pos.y + 1].arrive_direction == RC_None) node[pos.x][pos.y + 1].arrive_direction = RC_Down;
+            map.Node(pos.x,pos.y + 1).arrive_direction = map.Node(pos.x,pos.y).arrive_direction;
+            if (map.Node(pos.x,pos.y + 1).arrive_direction == RC_None) map.Node(pos.x,pos.y + 1).arrive_direction = RC_Down;
             search_points.push_back(sf::Vector2i(pos.x, pos.y + 1));
         }
-        if (pos.y > 0 && node[pos.x][pos.y - 1].down && node[pos.x][pos.y - 1].arrive_direction == RC_None)
+        if (pos.y > 0 && map.Node(pos.x,pos.y - 1).down && map.Node(pos.x,pos.y - 1).arrive_direction == RC_None)
         {
-            node[pos.x][pos.y - 1].arrive_direction = node[pos.x][pos.y].arrive_direction;
-            if (node[pos.x][pos.y - 1].arrive_direction == RC_None) node[pos.x][pos.y - 1].arrive_direction = RC_Up;
+            map.Node(pos.x,pos.y - 1).arrive_direction = map.Node(pos.x,pos.y).arrive_direction;
+            if (map.Node(pos.x,pos.y - 1).arrive_direction == RC_None) map.Node(pos.x,pos.y - 1).arrive_direction = RC_Up;
             search_points.push_back(sf::Vector2i(pos.x, pos.y - 1));
         }
     }
@@ -198,7 +219,14 @@ void RepairCrew::onReceiveClientCommand(int32_t client_id, sf::Packet& packet)
     switch(command)
     {
     case CMD_SET_TARGET_POSITION:
-        packet >> target_position;
+        {
+            sf::Vector2i pos;
+            packet >> pos;
+            if (!isTargetPositionTaken(pos))
+            {
+                target_position = pos;
+            }
+        }
         break;
     }
 }
@@ -208,6 +236,16 @@ void RepairCrew::commandSetTargetPosition(sf::Vector2i position)
     sf::Packet packet;
     packet << CMD_SET_TARGET_POSITION << position;
     sendClientCommand(packet);
+}
+
+bool RepairCrew::isTargetPositionTaken(sf::Vector2i pos)
+{
+    foreach(RepairCrew, c, repairCrewList)
+    {
+        if (c->ship_id == ship_id && c->target_position == pos)
+            return true;
+    }
+    return false;
 }
 
 PVector<RepairCrew> getRepairCrewFor(P<PlayerSpaceship> ship)
