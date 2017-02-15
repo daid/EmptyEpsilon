@@ -41,8 +41,10 @@ public:
     void load();
     std::vector<string> getCategories();
     std::vector<std::pair<string, string>> listHotkeysByCategory(string hotkey_category);
-    
+    std::vector<std::pair<string, string>> listAllHotkeysByCategory(string hotkey_category);
+
     std::vector<HotkeyResult> getHotkey(sf::Event::KeyEvent key);
+    void setHotKey(std::string work_cat, std::pair<string,string> key, std::string new_value);
 private:
     std::vector<HotkeyConfigCategory> categories;
     

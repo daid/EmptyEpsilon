@@ -6,6 +6,12 @@ HotkeyConfig hotkeys;
 
 HotkeyConfig::HotkeyConfig()
 {  // this list includes all Hotkeys and their standard configuration
+    newCategory("BASIC", "basic"); // these Items should all have predefined values
+    newKey("PAUSE", std::make_tuple("Pause game", "P"));
+    newKey("HELP", std::make_tuple("Show in-game help", "F1"));
+    newKey("ESCAPE", std::make_tuple("Return to ship options menu", "Escape"));
+    newKey("HOME", std::make_tuple("Return to ship options menu", "Home"));  // Remove this item as it does the same as Escape?
+
     newCategory("GENERAL", "General");
     newKey("NEXT_STATION", std::make_tuple("Switch to next crew station", ""));
     newKey("PREV_STATION", std::make_tuple("Switch to previous crew station", ""));
@@ -274,6 +280,24 @@ std::vector<std::pair<string, string>> HotkeyConfig::listHotkeysByCategory(strin
     return ret;
 }
 
+std::vector<std::pair<string, string>> HotkeyConfig::listAllHotkeysByCategory(string hotkey_category)
+{
+    std::vector<std::pair<string, string>> ret;
+
+    for(HotkeyConfigCategory& cat : categories)
+    {
+        if (cat.name == hotkey_category)
+        {
+            for(HotkeyConfigItem& item : cat.hotkeys)
+            {
+                ret.push_back({std::get<0>(item.value), std::get<1>(item.value)});
+            }
+        }
+    }
+
+    return ret;
+}
+
 HotkeyConfigItem::HotkeyConfigItem(string key, std::tuple<string, string> value)
 {
     this->key = key;
@@ -309,4 +333,31 @@ void HotkeyConfigItem::load(string key_config)
             }
         }
     }
+}
+
+void HotkeyConfig::setHotKey(std::string work_cat, std::pair<string,string> key, std::string new_value)
+{
+
+    for(HotkeyConfigCategory& cat : categories)
+    {
+        if (cat.name == work_cat)
+        {
+            int i = 0;
+            for(HotkeyConfigItem& item : cat.hotkeys)
+            {
+                if (key.first == std::get<0>(item.value)) {
+
+                    cat.hotkeys.emplace_back(item.key, std::make_tuple(key.first, new_value));
+                    PreferencesManager::set(std::string("HOTKEY.") + cat.key + "." + item.key, new_value);
+
+                    // erase last, as pointer will show different information afterwards
+                    cat.hotkeys.erase(cat.hotkeys.begin()+i);
+
+                    // needs test if new_value is part of the sfml_list
+                }
+                i++;
+            }
+        }
+    }
+
 }
