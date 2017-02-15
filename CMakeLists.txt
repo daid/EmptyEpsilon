@@ -70,6 +70,7 @@ set(SOURCES
 	src/menus/serverBrowseMenu.cpp
 	src/menus/mainMenus.cpp
 	src/menus/serverCreationScreen.cpp
+	src/menus/tutorialMenu.cpp
 	src/menus/optionsMenu.cpp
 	src/menus/shipSelectionScreen.cpp
 	src/menus/autoConnectScreen.cpp
