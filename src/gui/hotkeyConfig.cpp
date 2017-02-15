@@ -86,7 +86,7 @@ HotkeyConfig::HotkeyConfig()
     newKey("SHIELD_CAL_START", std::make_tuple("Start shield calibration", ""));
     newKey("SELF_DESTRUCT_START", std::make_tuple("Start self-destruct", ""));
     newKey("SELF_DESTRUCT_CONFIRM", std::make_tuple("Confirm self-destruct", ""));
-    newKey("SELF_DESTRUCT_CANCEL", std::make_tuple("Cancel self-destruct", "");
+    newKey("SELF_DESTRUCT_CANCEL", std::make_tuple("Cancel self-destruct", ""));
            
     newKey("ACTIVE_AUTO_COOLANT", std::make_tuple("Activation Auto coolant", ""));
     newKey("ACTIVE_AUTO_REPAIR", std::make_tuple("Activation Auto repair", ""));
@@ -101,7 +101,7 @@ HotkeyConfig::HotkeyConfig()
       newKey(getSystemName(ESystem(n))+ string("_RESET"), std::make_tuple(getSystemName(ESystem(n))+string(" Reset"), ""));
     }
 	
-    newCategory("SCIENCE", std::make_tuple("Science");
+    newCategory("SCIENCE", "Science");
     newKey("NEXT_ENEMY_SCAN", std::make_tuple("Select next target", ""));
     newKey("NEXT_SCAN", std::make_tuple("Select next target (any)", ""));
     newKey("SCAN_START", std::make_tuple("Start scan", ""));
