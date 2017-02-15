@@ -328,7 +328,7 @@ std::vector<std::pair<string, string>> HotkeyConfig::listHotkeysByCategory(strin
     return ret;
 }
 
-HotkeyConfigItem::HotkeyConfigItem(string key, std::tuple<string, string> value)
+HotkeyConfigItem::HotkeyConfigItem(string key, string name)
 {
     this->key = key;
     this->name = name;
