@@ -16,7 +16,8 @@ private:
 public:
     GuiScanTargetButton(GuiContainer* owner, string id, TargetsContainer* targets);
     
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onHotkey(const HotkeyResult& key) override;
 };
 
 #endif//SCAN_TARGET_BUTTON_H

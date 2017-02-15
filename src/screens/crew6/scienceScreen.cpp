@@ -460,3 +460,158 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
     }
 }
+
+void ScienceScreen::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "SCIENCE" && my_spaceship)
+    {
+        if (key.hotkey == "NEXT_ENEMY_SCAN")
+        {
+            bool current_found = false;
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get())
+                {
+                    current_found = true;
+                    continue;
+                }
+                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < gameGlobalInfo->long_range_radar_range && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeSelectedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    // my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get())
+                {
+                    continue;
+                }
+                if (my_spaceship->isEnemy(obj) && sf::length(obj->getPosition() - my_spaceship->getPosition()) < gameGlobalInfo->long_range_radar_range && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeSelectedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    // my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+        }
+        if (key.hotkey == "NEXT_SCAN")
+        {
+            bool current_found = false;
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get())
+                {
+                    current_found = true;
+                    continue;
+                }
+                if (obj == my_spaceship)
+                    continue;
+                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < gameGlobalInfo->long_range_radar_range && obj->canBeSelectedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    // my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get() || obj == my_spaceship)
+                    continue;
+                if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < gameGlobalInfo->long_range_radar_range && obj->canBeSelectedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    // my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+        }
+		if (targets.get())
+		{
+			P<SpaceObject> obj = targets.get();
+			P<SpaceShip> ship = obj;
+			P<SpaceStation> station = obj;
+			if (ship)
+			{		
+				if (ship->getScannedStateFor(my_spaceship) >= SS_FullScan)
+				{
+					if (key.hotkey == "SELECT_TACTICAL" && sidebar_pager->indexByValue("Tactical"))
+						sidebar_pager->setSelectionIndex(sidebar_pager->indexByValue("Tactical"));
+					if (key.hotkey == "SELECT_SYSTEMS" && sidebar_pager->indexByValue("Systems"))
+						sidebar_pager->setSelectionIndex(sidebar_pager->indexByValue("Systems"));
+					if (key.hotkey == "SELECT_DESCRIPTION" && sidebar_pager->indexByValue("Description"))
+						sidebar_pager->setSelectionIndex(sidebar_pager->indexByValue("Description"));
+
+					if (key.hotkey == "NEXT_INFO_TARGET")
+					{
+						if (sidebar_pager->getSelectionIndex() >= sidebar_pager->entryCount() - 1)
+							sidebar_pager->setSelectionIndex(0);
+						else
+							sidebar_pager->setSelectionIndex(sidebar_pager->getSelectionIndex() + 1);
+					}
+				}
+			}
+		}
+ 		if (key.hotkey == "SHOW_PROBE")
+        {
+            P<ScanProbe> probe;
+
+            if (game_server)
+                probe = game_server->getObjectById(my_spaceship->linked_science_probe_id);
+            else
+                probe = game_client->getObjectById(my_spaceship->linked_science_probe_id);
+
+            if (probe && !probe_view_button->getValue())
+            {
+				probe_view_button->setValue(true);
+                sf::Vector2f probe_position = probe->getPosition();
+                science_radar->hide();
+                probe_radar->show();
+                probe_radar->setViewPosition(probe_position)->show();
+            }else{
+                probe_view_button->setValue(false);
+                science_radar->show();
+                probe_radar->hide();
+            }
+		}
+		if (key.hotkey == "SHOW_DATABASE")
+		{
+			view_mode_selection->setSelectionIndex(1);
+			radar_view->hide();
+			background_gradient->hide();
+			database_view->show();
+		}
+		if (key.hotkey == "SHOW_RADAR")
+		{
+			view_mode_selection->setSelectionIndex(0);
+			radar_view->show();
+			background_gradient->show();
+			database_view->hide();
+		}
+		if (key.hotkey == "INCREASE_ZOOM")
+		{
+			float view_distance = science_radar->getDistance() + 1500.0f;
+			if (view_distance > gameGlobalInfo->long_range_radar_range)
+				view_distance = gameGlobalInfo->long_range_radar_range;
+			if (view_distance < 5000.0f)
+				view_distance = 5000.0f;
+			science_radar->setDistance(view_distance);
+			// Keep the zoom slider in sync.
+			zoom_slider->setValue(view_distance);
+			zoom_label->setText("Zoom: " + string(gameGlobalInfo->long_range_radar_range / view_distance, 1) + "x");
+		}
+		if (key.hotkey == "DECREASE_ZOOM")
+		{
+			float view_distance = science_radar->getDistance() - 1500.0f;
+			if (view_distance > gameGlobalInfo->long_range_radar_range)
+				view_distance = gameGlobalInfo->long_range_radar_range;
+			if (view_distance < 5000.0f)
+				view_distance = 5000.0f;
+			science_radar->setDistance(view_distance);
+			// Keep the zoom slider in sync.
+			zoom_slider->setValue(view_distance);
+			zoom_label->setText("Zoom: " + string(gameGlobalInfo->long_range_radar_range / view_distance, 1) + "x");
+		}
+	}
+}
