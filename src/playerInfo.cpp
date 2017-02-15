@@ -151,15 +151,15 @@ void PlayerInfo::spawnUI()
         if (crew_position[databaseView])
             screen->addStationTab(new DatabaseScreen(screen), databaseView, getCrewPositionName(databaseView), getCrewPositionIcon(databaseView));
         if (crew_position[logView])
-            screen->addStationTab(new ShipLogScreen(screen,'extern'), logView, getCrewPositionName(logView), getCrewPositionIcon(logView));
+            screen->addStationTab(new ShipLogScreen(screen,"extern"), logView, getCrewPositionName(logView), getCrewPositionIcon(logView));
          if (crew_position[internLogView])
-            screen->addStationTab(new ShipLogScreen(screen,'intern'), internLogView, getCrewPositionName(internLogView), getCrewPositionIcon(internLogView));
+            screen->addStationTab(new ShipLogScreen(screen,"intern"), internLogView, getCrewPositionName(internLogView), getCrewPositionIcon(internLogView));
         
         //Ship log screen, if you have comms, you have ships log. (note this is mostly replaced by the [at the bottom of the screen openable log]
         if (crew_position[singlePilot])
         {
-            screen->addStationTab(new ShipLogScreen(screen,'extern'), max_crew_positions, "Ships log", "");
-            screen->addStationTab(new ShipLogScreen(screen,'intern'), max_crew_positions, "Intern log", "");
+            screen->addStationTab(new ShipLogScreen(screen,"extern"), max_crew_positions, "Ships log", "");
+            screen->addStationTab(new ShipLogScreen(screen,"intern"), max_crew_positions, "Intern log", "");
         }
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(screen, "SELF_DESTRUCT_ENTRY");
         for(int n=0; n<max_crew_positions; n++)
