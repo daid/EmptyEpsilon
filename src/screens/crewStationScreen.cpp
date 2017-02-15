@@ -181,6 +181,10 @@ void CrewStationScreen::onKey(sf::Event::KeyEvent key, int unicode)
         // Toggle keyboard help.
         keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
         break;
+    case sf::Keyboard::F1:
+        // Toggle keyboard help.
+        keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
+        break;
     case sf::Keyboard::P:
         if (game_server)
             engine->setGameSpeed(0.0);
