@@ -16,31 +16,33 @@ class TutorialGame : public Updatable, public GuiCanvas
     GuiRadarView* tactical_radar;
     GuiRadarView* long_range_radar;
     GuiElement* station_screen[8];
- 
+
     P<ScriptObject> script;
     GuiPanel* frame;
     GuiScrollText* text;
     GuiButton* next_button;
-    
+
     bool repeated_tutorial;
 public:
     ScriptSimpleCallback _onNext;
-    
-    TutorialGame(bool repeated_tutorial = false);
-    
+
+    TutorialGame(bool repeated_tutorial = false, string filename = "tutorial.lua");
+
     virtual void update(float delta) override;
     virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
-    
+
     void setPlayerShip(P<PlayerSpaceship> ship);
-    
+
     void showMessage(string message, bool show_next);
+    void showLittleMessage(string message, bool show_next);
+    void hideMessage();
     void switchViewToMainScreen();
     void switchViewToTactical();
     void switchViewToLongRange();
     void switchViewToScreen(int n);
     void setMessageToTopPosition();
     void setMessageToBottomPosition();
-    
+
     void onNext(ScriptSimpleCallback callback) { _onNext = callback; }
     void finish();
 private:
@@ -52,7 +54,7 @@ class LocalOnlyGame : public EpsilonServer
 {
 public:
     LocalOnlyGame();
-    
+
     //Overide the update function from the game server, so no actuall socket communication is done.
     virtual void update(float delta) override;
 };

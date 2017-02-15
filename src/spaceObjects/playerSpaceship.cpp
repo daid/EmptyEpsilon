@@ -97,6 +97,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandConfirmDestructCode);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCombatManeuverBoost);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetScienceLink);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAlertLevel);
 
     // Return the number of Engineering repair crews on the ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getRepairCrewCount);
@@ -181,8 +182,8 @@ string alertLevelToString(EAlertLevel level)
 }
 
 // Configure ship's log packets.
-static inline sf::Packet& operator << (sf::Packet& packet, const PlayerSpaceship::ShipLogEntry& e) { return packet << e.prefix << e.text << e.color.r << e.color.g << e.color.b << e.color.a; }
-static inline sf::Packet& operator >> (sf::Packet& packet, PlayerSpaceship::ShipLogEntry& e) { packet >> e.prefix >> e.text >> e.color.r >> e.color.g >> e.color.b >> e.color.a; return packet; }
+static inline sf::Packet& operator << (sf::Packet& packet, const PlayerSpaceship::ShipLogEntry& e) { return packet << e.prefix << e.text << e.color.r << e.color.g << e.color.b << e.color.a << e.station; }
+static inline sf::Packet& operator >> (sf::Packet& packet, PlayerSpaceship::ShipLogEntry& e) { packet >> e.prefix >> e.text >> e.color.r >> e.color.g >> e.color.b >> e.color.a >> e.station; return packet; }
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 PlayerSpaceship::PlayerSpaceship()
@@ -207,6 +208,7 @@ PlayerSpaceship::PlayerSpaceship()
     scan_probe_recharge = 0.0;
     alert_level = AL_Normal;
     shields_active = false;
+    warp_indicator = 0;
     control_code = "";
 
     setFactionId(1);
@@ -235,7 +237,8 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&comms_reply_message);
     registerMemberReplication(&comms_target_name);
     registerMemberReplication(&comms_incomming_message);
-    registerMemberReplication(&ships_log);
+    registerMemberReplication(&ships_log_extern);
+    registerMemberReplication(&ships_log_intern);
     registerMemberReplication(&waypoints);
     registerMemberReplication(&scan_probe_stock);
     registerMemberReplication(&activate_self_destruct);
@@ -287,7 +290,8 @@ PlayerSpaceship::PlayerSpaceship()
     setCallSign("PL" + string(getMultiplayerId()));
 
     // Initialize the ship's log.
-    addToShipLog("Start of log", colorConfig.log_generic);
+    addToShipLog("Start of extern log", colorConfig.log_generic,"extern");
+    addToShipLog("Start of intern log", colorConfig.log_generic,"intern");
 }
 
 void PlayerSpaceship::update(float delta)
@@ -488,6 +492,15 @@ void PlayerSpaceship::update(float delta)
             if (!useEnergy(energy_warp_per_second * delta * powf(warp_request, 1.2f) * (shields_active ? 1.5 : 1.0)))
                 // If there's not enough energy, fall out of warp.
                 warp_request = 0;
+                
+            for(float n=0; n<=4; n++)
+            {
+                if ((current_warp > n-0.1 && current_warp < n+0.1) && warp_indicator != n)
+                {
+                    warp_indicator = n;
+                    addToShipLog("WARP " + string(abs(n)), sf::Color::White,"intern");
+                }
+            }
         }
 
         if (scanning_target)
@@ -595,6 +608,10 @@ void PlayerSpaceship::applyTemplateValues()
         setWarpDrive(true);
         setJumpDrive(true);
         break;
+    case PWJ_None:
+        setWarpDrive(false);
+        setJumpDrive(false);
+        break;
     }
 
     // Set the ship's number of repair crews in Engineering from the ship's
@@ -616,9 +633,24 @@ void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
     {
         hull_damage_indicator = 1.5;
     }
+    
+    float systems_diff[SYS_COUNT];
+    for(int n=0; n<SYS_COUNT; n++)
+    {
+        systems_diff[n] = systems[n].health;
+    }
 
     // Take hull damage like any other ship.
     SpaceShip::takeHullDamage(damage_amount, info);
+    
+    // Infos for log intern
+    string system_damage = string(abs(damage_amount)) + string(" damages to hull. System affected : ");
+    for(int n=0; n<SYS_COUNT; n++)
+    {
+        if(systems_diff[n] != systems[n].health)
+            system_damage = system_damage + string(getSystemName(ESystem(n))) + string(" ");
+    }
+    addToShipLog(system_damage,sf::Color::Red,"intern");
 }
 
 void PlayerSpaceship::setSystemCoolantRequest(ESystem system, float request)
@@ -769,15 +801,20 @@ void PlayerSpaceship::setRepairCrewCount(int amount)
     }
 }
 
-void PlayerSpaceship::addToShipLog(string message, sf::Color color)
+void PlayerSpaceship::addToShipLog(string message, sf::Color color, string station = "extern")
 {
-    // Cap the ship's log size to 100 entries. If it exceeds that limit,
-    // start erasing entries from the beginning.
-    if (ships_log.size() > 100)
-        ships_log.erase(ships_log.begin());
-
-    // Timestamp a log entry, color it, and add it to the end of the log.
-    ships_log.emplace_back(string(engine->getElapsedTime(), 1) + string(": "), message, color);
+    if (station == "extern")
+    {
+        if (ships_log_extern.size() > 100)
+            ships_log_extern.erase(ships_log_extern.begin());
+        ships_log_extern.emplace_back(string(engine->getElapsedTime(), 1) + string(": "), message, color, station);
+    }
+    else if (station == "intern")
+    {
+        if (ships_log_intern.size() > 100)
+            ships_log_intern.erase(ships_log_intern.begin());
+        ships_log_intern.emplace_back(string(engine->getElapsedTime(), 1) + string(": "), message, color, station);
+    }
 }
 
 void PlayerSpaceship::addToShipLogBy(string message, P<SpaceObject> target)
@@ -794,10 +831,13 @@ void PlayerSpaceship::addToShipLogBy(string message, P<SpaceObject> target)
         addToShipLog(message, colorConfig.log_receive_neutral);
 }
 
-const std::vector<PlayerSpaceship::ShipLogEntry>& PlayerSpaceship::getShipsLog() const
+const std::vector<PlayerSpaceship::ShipLogEntry>& PlayerSpaceship::getShipsLog(string station) const
 {
     // Return the ship's log.
-    return ships_log;
+    if (station == "extern")
+        return ships_log_extern;
+    if (station == "intern")
+        return ships_log_intern;
 }
 
 void PlayerSpaceship::transferPlayersToShip(P<PlayerSpaceship> other_ship)
@@ -1040,11 +1080,14 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             float distance;
             packet >> distance;
             initializeJump(distance);
+            addToShipLog("Jump Initialisation",sf::Color::White,"intern");
         }
         break;
     case CMD_SET_TARGET:
         {
             packet >> target_id;
+            if (target_id != int32_t(-1))
+                addToShipLog("Target activated : " + string(SpaceShip::getTarget()->SpaceObject::getCallSign()),sf::Color::Yellow,"intern");
         }
         break;
     case CMD_LOAD_TUBE:
@@ -1075,7 +1118,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             packet >> tube_nr >> missile_target_angle;
 
             if (tube_nr >= 0 && tube_nr < max_weapon_tubes)
+            {
                 weapon_tube[tube_nr].fire(missile_target_angle);
+                addToShipLog("Missile fire",sf::Color::Yellow,"intern");
+            }
         }
         break;
     case CMD_SET_SHIELDS:
@@ -1088,11 +1134,13 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 shields_active = active;
                 if (active)
                 {
-                    playSoundOnMainScreen("shield_up.wav");
+                    soundManager->playSound("shield_up.wav");
+                    addToShipLog("Shields on",sf::Color::Green,"intern");
                 }
                 else
                 {
-                    playSoundOnMainScreen("shield_down.wav");
+                    soundManager->playSound("shield_down.wav");
+                    addToShipLog("Shields off",sf::Color::Green,"intern");
                 }
             }
         }
@@ -1154,13 +1202,20 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             int32_t id;
             packet >> id;
             requestDock(game_server->getObjectById(id));
+            addToShipLog("Docking requested",sf::Color::Cyan,"intern");
         }
         break;
     case CMD_UNDOCK:
-        requestUndock();
+        {
+            requestUndock();
+            addToShipLog("Undocking requested",sf::Color::Cyan,"intern");
+        }
         break;
     case CMD_ABORT_DOCK:
-        abortDock();
+        {
+            abortDock();
+            addToShipLog("Docking aborded",sf::Color::Cyan,"intern");
+        }
         break;
     case CMD_OPEN_TEXT_COMM:
         if (comms_state == CS_Inactive || comms_state == CS_BeingHailed || comms_state == CS_BeingHailedByGM || comms_state == CS_ChannelClosed)
@@ -1286,7 +1341,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         }
         break;
     case CMD_SET_AUTO_REPAIR:
-        packet >> auto_repair_enabled;
+        {
+            packet >> auto_repair_enabled;
+            addToShipLog("Auto repair enabled",sf::Color::White,"intern");
+        }
         break;
     case CMD_SET_BEAM_FREQUENCY:
         {
@@ -1297,6 +1355,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 beam_frequency = 0;
             if (beam_frequency > SpaceShip::max_frequency)
                 beam_frequency = SpaceShip::max_frequency;
+            addToShipLog("Beam frequency changed : " + frequencyToString(new_frequency),sf::Color::Yellow,"intern");
         }
         break;
     case CMD_SET_BEAM_SYSTEM_TARGET:
@@ -1308,6 +1367,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 beam_system_target = SYS_None;
             if (beam_system_target > ESystem(int(SYS_COUNT) - 1))
                 beam_system_target = ESystem(int(SYS_COUNT) - 1);
+            addToShipLog("Beam system target changed : " + getSystemName(system),sf::Color::Yellow,"intern");
         }
         break;
     case CMD_SET_SHIELD_FREQUENCY:
@@ -1324,6 +1384,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                     shield_frequency = 0;
                 if (shield_frequency > SpaceShip::max_frequency)
                     shield_frequency = SpaceShip::max_frequency;
+                addToShipLog("Shields frequency changed : " + frequencyToString(new_frequency),sf::Color::Green,"intern");
             }
         }
         break;
@@ -1354,6 +1415,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         break;
     case CMD_ACTIVATE_SELF_DESTRUCT:
         activate_self_destruct = true;
+        addToShipLog("Auto destruction activated",sf::Color::Red,"intern");
         for(int n=0; n<max_self_destruct_codes; n++)
         {
             self_destruct_code[n] = irandom(0, 99999);
@@ -1382,6 +1444,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         if (self_destruct_countdown <= 0.0f)
         {
             activate_self_destruct = false;
+            addToShipLog("Auto destruction canceled",sf::Color::Red,"intern");
         }
         break;
     case CMD_CONFIRM_SELF_DESTRUCT:
@@ -1424,6 +1487,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     case CMD_SET_ALERT_LEVEL:
         {
             packet >> alert_level;
+            if(alertLevelToString(alert_level) == "RED ALERT")
+                addToShipLog("RED ALERT",sf::Color::Red,"intern");
+            if(alertLevelToString(alert_level) == "YELLOW ALERT")
+                addToShipLog("YELLOW ALERT",sf::Color::Yellow,"intern");
         }
         break;
     case CMD_SET_SCIENCE_LINK:

@@ -376,15 +376,15 @@ We are reading a huge gravity surge from your direction. Get the hell out of the
 
     --The explosion damages all systems, but makes sure the impulse, warp and jumpdrive are none-functional. This prevents the player from escaping the grasp of the wormhole.
     --We made sure we are around 2U of the wormhole before this function is called.
-    player:setSystemHealth("reactor", getSystemHealth("reactor") - random(0.0, 0.5))
-    player:setSystemHealth("beamweapons", getSystemHealth("beamweapons") - random(0.0, 0.5))
-    player:setSystemHealth("maneuver", getSystemHealth("maneuver") - random(0.0, 0.5))
-    player:setSystemHealth("missilesystem", getSystemHealth("missilesystem") - random(0.0, 0.5))
-    player:setSystemHealth("impulse", getSystemHealth("impulse") - random(1.3, 1.5))
-    player:setSystemHealth("warp", getSystemHealth("warp") - random(1.3, 1.5))
-    player:setSystemHealth("jumpdrive", getSystemHealth("jumpdrive") - random(1.3, 1.5))
-    player:setSystemHealth("frontshield", getSystemHealth("frontshield") - random(0.0, 0.5))
-    player:setSystemHealth("rearshield", getSystemHealth("rearshield") - random(0.0, 0.5))
+    player:setSystemHealth("reactor", player:getSystemHealth("reactor") - random(0.0, 0.5))
+    player:setSystemHealth("beamweapons", player:getSystemHealth("beamweapons") - random(0.0, 0.5))
+    player:setSystemHealth("maneuver", player:getSystemHealth("maneuver") - random(0.0, 0.5))
+    player:setSystemHealth("missilesystem", player:getSystemHealth("missilesystem") - random(0.0, 0.5))
+    player:setSystemHealth("impulse", player:getSystemHealth("impulse") - random(1.3, 1.5))
+    player:setSystemHealth("warp", player:getSystemHealth("warp") - random(1.3, 1.5))
+    player:setSystemHealth("jumpdrive", player:getSystemHealth("jumpdrive") - random(1.3, 1.5))
+    player:setSystemHealth("frontshield", player:getSystemHealth("frontshield") - random(0.0, 0.5))
+    player:setSystemHealth("rearshield", player:getSystemHealth("rearshield") - random(0.0, 0.5))
     
     mission_state = phase2WaitTillWormholeWarpedPlayer
 end
