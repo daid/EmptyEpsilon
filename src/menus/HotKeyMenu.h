@@ -5,6 +5,7 @@
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_scrollbar.h"
 
+class GuiOverlay;
 class GuiSlider;
 class GuiLabel;
 class GuiCanvas;
@@ -18,6 +19,7 @@ private:
     std::vector<GuiTextEntry*> text_entries;
     std::vector<GuiLabel*> label_entries;
     GuiLabel* Cat_label;
+    GuiOverlay* error_window;
 
     string category = "";
     int    cat_index = 1;

@@ -1,6 +1,7 @@
 #include "hotkeyConfig.h"
 #include "preferenceManager.h"
 #include "shipTemplate.h"
+#include <boost/algorithm/string.hpp>
 
 HotkeyConfig hotkeys;
 
@@ -212,6 +213,7 @@ void HotkeyConfig::load()
         {
             string key_config = PreferencesManager::get(std::string("HOTKEY.") + cat.key + "." + item.key, std::get<1>(item.value));
             item.load(key_config);
+            item.value = std::make_tuple(std::get<0>(item.value), key_config);
         }
     }
 }
@@ -325,7 +327,7 @@ void HotkeyConfigItem::load(string key_config)
         {
             for(auto key_name : sfml_key_names)
             {
-                if (key_name.first == config)
+                if (boost::iequals(key_name.first, config))
                 {
                     hotkey.code = key_name.second;
                     break;
@@ -335,29 +337,29 @@ void HotkeyConfigItem::load(string key_config)
     }
 }
 
-void HotkeyConfig::setHotKey(std::string work_cat, std::pair<string,string> key, std::string new_value)
+bool HotkeyConfig::setHotKey(std::string work_cat, std::pair<string,string> key, std::string new_value)
 {
 
-    for(HotkeyConfigCategory& cat : categories)
-    {
-        if (cat.name == work_cat)
-        {
-            int i = 0;
-            for(HotkeyConfigItem& item : cat.hotkeys)
-            {
-                if (key.first == std::get<0>(item.value)) {
+    // needs test if new_value is part of the sfml_list
+    for (std::pair<string, sf::Keyboard::Key> sfml_key : sfml_key_names) {
 
-                    cat.hotkeys.emplace_back(item.key, std::make_tuple(key.first, new_value));
-                    PreferencesManager::set(std::string("HOTKEY.") + cat.key + "." + item.key, new_value);
+        if (boost::iequals(sfml_key.first, new_value) || new_value == "") {
+            for (HotkeyConfigCategory &cat : categories) {
+                if (cat.name == work_cat) {
+                    int i = 0;
+                    for (HotkeyConfigItem &item : cat.hotkeys) {
+                        if (key.first == std::get<0>(item.value)) {
 
-                    // erase last, as pointer will show different information afterwards
-                    cat.hotkeys.erase(cat.hotkeys.begin()+i);
+                            item.load(new_value);
+                            item.value = std::make_tuple(std::get<0>(item.value), new_value);
 
-                    // needs test if new_value is part of the sfml_list
+                            return true;
+                        }
+                        i++;
+                    }
                 }
-                i++;
             }
         }
     }
-
+    return false;
 }
