@@ -16,9 +16,11 @@ if(DEFINED ENABLE_CRASH_LOGGER)
  endif(WIN32)
 endif(DEFINED ENABLE_CRASH_LOGGER)
 
-string(TIMESTAMP CPACK_PACKAGE_VERSION_MAJOR "%Y")
-string(TIMESTAMP CPACK_PACKAGE_VERSION_MINOR "%m")
-string(TIMESTAMP CPACK_PACKAGE_VERSION_PATCH "%d")
+if(NOT DEFINED CPACK_PACKAGE_VERSION_MAJOR)
+ string(TIMESTAMP CPACK_PACKAGE_VERSION_MAJOR "%Y")
+ string(TIMESTAMP CPACK_PACKAGE_VERSION_MINOR "%m")
+ string(TIMESTAMP CPACK_PACKAGE_VERSION_PATCH "%d")
+endif(NOT DEFINED CPACK_PACKAGE_VERSION_MAJOR)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
@@ -29,6 +31,12 @@ set(CMAKE_INSTALL_PREFIX "./")
 elseif(UNIX)
 # Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
 add_definitions(-DRESOURCE_BASE_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/")
+endif()
+
+if(CONFIG_DIR)
+    add_definitions(-DCONFIG_DIR="${CONFIG_DIR}")
+elseif(UNIX)
+    add_definitions(-DCONFIG_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/")
 endif()
 
 ## ensure c++11 is used
