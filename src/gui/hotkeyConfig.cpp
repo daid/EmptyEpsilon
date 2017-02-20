@@ -326,7 +326,7 @@ void HotkeyConfigItem::load(string key_config)
         {
             for(auto key_name : sfml_key_names)
             {
-                if (hotkeys.iequals(key_name.first, config))
+                if (key_name.first.lower() == config.lower())
                 {
                     hotkey.code = key_name.second;
                     break;
@@ -336,41 +336,30 @@ void HotkeyConfigItem::load(string key_config)
     }
 }
 
-bool HotkeyConfig::setHotKey(std::string work_cat, std::pair<string,string> key, std::string new_value)
+bool HotkeyConfig::setHotKey(std::string work_cat, std::pair<string,string> key, string new_value)
 {
 
-    // needs test if new_value is part of the sfml_list
+    // test if new_value is part of the sfml_list
     for (std::pair<string, sf::Keyboard::Key> sfml_key : sfml_key_names) {
+        if ((sfml_key.first.lower() == new_value.lower()) || new_value == "") {
 
-        if (hotkeys.iequals(sfml_key.first, new_value) || new_value == "") {
             for (HotkeyConfigCategory &cat : categories) {
                 if (cat.name == work_cat) {
-                    int i = 0;
+
                     for (HotkeyConfigItem &item : cat.hotkeys) {
                         if (key.first == std::get<0>(item.value)) {
 
                             item.load(new_value);
                             item.value = std::make_tuple(std::get<0>(item.value), new_value);
 
+                            PreferencesManager::set(std::string("HOTKEY.") + cat.key + "." + item.key, std::get<1>(item.value));
+
                             return true;
                         }
-                        i++;
                     }
                 }
             }
         }
     }
     return false;
-}
-
-bool HotkeyConfig::iequals(const string& a, const string& b)
-{
-    // implements simple case insensitive string comparison
-    unsigned int sz = a.size();
-    if (b.size() != sz)
-        return false;
-    for (unsigned int i = 0; i < sz; ++i)
-        if (tolower(a[i]) != tolower(b[i]))
-            return false;
-    return true;
 }

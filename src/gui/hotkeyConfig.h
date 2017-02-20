@@ -44,12 +44,12 @@ public:
     std::vector<std::pair<string, string>> listAllHotkeysByCategory(string hotkey_category);
 
     std::vector<HotkeyResult> getHotkey(sf::Event::KeyEvent key);
-    bool setHotKey(std::string work_cat, std::pair<string,string> key, std::string new_value);
+    bool setHotKey(std::string work_cat, std::pair<string,string> key, string new_value);
 private:
     std::vector<HotkeyConfigCategory> categories;
     
     void newCategory(string key, string name);
-    void newKey(string key, std::tuple<string, string>);
+    void newKey(string key, std::tuple<string, string> value);
 };
 
 extern HotkeyConfig hotkeys;
