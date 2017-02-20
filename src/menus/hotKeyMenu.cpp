@@ -119,6 +119,18 @@ void HotKeyMenu::updateHotKeys()
     std::string text = "";
     bool hotkey_exists = false;
 
+    if (category == "basic"){
+        error_window = new GuiOverlay(this, "KEY_ERROR_OVERLAY", sf::Color::Black);
+        error_window->setPosition(0, -100, ACenter)->setSize(500, 200)->setVisible(true);
+        (new GuiLabel(error_window, "ERROR_LABEL", "BASIC Hotkeys shall not be changed", 30))->setPosition(0, 50, ATopCenter)->setSize(300, 50);
+        (new GuiButton(error_window, "ERROR_OK", "OK", [this]()
+        {
+            // Close this window
+            error_window->destroy();
+        }))->setPosition(0, -10, ABottomCenter)->setSize(200, 50);
+        return;
+    }
+
     // read in all TextEntry values and update hotkeys
     for (std::pair<string,string> item : HotKeyList) {
 
