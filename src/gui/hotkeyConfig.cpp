@@ -1,7 +1,6 @@
 #include "hotkeyConfig.h"
 #include "preferenceManager.h"
 #include "shipTemplate.h"
-#include <boost/algorithm/string.hpp>
 
 HotkeyConfig hotkeys;
 
@@ -327,7 +326,7 @@ void HotkeyConfigItem::load(string key_config)
         {
             for(auto key_name : sfml_key_names)
             {
-                if (boost::iequals(key_name.first, config))
+                if (hotkeys.iequals(key_name.first, config))
                 {
                     hotkey.code = key_name.second;
                     break;
@@ -343,7 +342,7 @@ bool HotkeyConfig::setHotKey(std::string work_cat, std::pair<string,string> key,
     // needs test if new_value is part of the sfml_list
     for (std::pair<string, sf::Keyboard::Key> sfml_key : sfml_key_names) {
 
-        if (boost::iequals(sfml_key.first, new_value) || new_value == "") {
+        if (hotkeys.iequals(sfml_key.first, new_value) || new_value == "") {
             for (HotkeyConfigCategory &cat : categories) {
                 if (cat.name == work_cat) {
                     int i = 0;
@@ -362,4 +361,16 @@ bool HotkeyConfig::setHotKey(std::string work_cat, std::pair<string,string> key,
         }
     }
     return false;
+}
+
+bool HotkeyConfig::iequals(const string& a, const string& b)
+{
+    // implements simple case insensitive string comparison
+    unsigned int sz = a.size();
+    if (b.size() != sz)
+        return false;
+    for (unsigned int i = 0; i < sz; ++i)
+        if (tolower(a[i]) != tolower(b[i]))
+            return false;
+    return true;
 }

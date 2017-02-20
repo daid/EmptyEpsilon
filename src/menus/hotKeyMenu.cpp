@@ -1,15 +1,10 @@
 #include "engine.h"
-#include "HotKeyMenu.h"
-#include "main.h"
-#include "preferenceManager.h"
-#include "gui/gui2_element.h"
+#include "hotKeyMenu.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_overlay.h"
-#include "gui/gui2_autolayout.h"
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
-#include "gui/gui2_scrollbar.h"
 
 HotKeyMenu::HotKeyMenu()
 {

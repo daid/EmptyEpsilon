@@ -10,7 +10,7 @@
 #include "gui/gui2_slider.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_keyvaluedisplay.h"
-#include "HotKeyMenu.h"
+#include "hotKeyMenu.h"
 
 OptionsMenu::OptionsMenu() {
     P<WindowManager> windowManager = engine->getObject("windowManager");
