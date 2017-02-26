@@ -163,3 +163,14 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
         camera_yaw += sf::angleDifference(camera_yaw, target_camera_yaw) * 0.1f;
     }
 }
+
+void SinglePilotScreen::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "HELMS" && my_spaceship)
+    {
+        if (key.hotkey == "TURN_LEFT")
+            my_spaceship->commandTargetRotation(my_spaceship->getRotation() - 5.0f);
+        else if (key.hotkey == "TURN_RIGHT")
+            my_spaceship->commandTargetRotation(my_spaceship->getRotation() + 5.0f);
+    }
+}
