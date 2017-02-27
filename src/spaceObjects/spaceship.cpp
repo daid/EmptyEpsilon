@@ -603,7 +603,7 @@ void SpaceShip::update(float delta)
     if (combat_maneuver_boost_active != 0.0 || combat_maneuver_strafe_active != 0.0)
     {
         // ... consume its combat maneuver boost.
-        combat_maneuver_charge -= combat_maneuver_boost_active * delta / combat_maneuver_boost_max_time;
+        combat_maneuver_charge -= fabs(combat_maneuver_boost_active) * delta / combat_maneuver_boost_max_time;
         combat_maneuver_charge -= fabs(combat_maneuver_strafe_active) * delta / combat_maneuver_strafe_max_time;
 
         // Use boost only if we have boost available.
@@ -626,7 +626,7 @@ void SpaceShip::update(float delta)
     }
 
     // Add heat to systems consuming combat maneuver boost.
-    addHeat(SYS_Impulse, combat_maneuver_boost_active * delta * heat_per_combat_maneuver_boost);
+    addHeat(SYS_Impulse, fabs(combat_maneuver_boost_active) * delta * heat_per_combat_maneuver_boost);
     addHeat(SYS_Maneuver, fabs(combat_maneuver_strafe_active) * delta * heat_per_combat_maneuver_strafe);
 
     for(int n = 0; n < max_beam_weapons; n++)
