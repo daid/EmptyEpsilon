@@ -255,8 +255,13 @@ GuiElement* CrewStationScreen::findTab(string name)
 string CrewStationScreen::listHotkeysLimited(string station)
 {	
 	string ret = "";
+	keyboard_general = "";
+	for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("General"))
+		if (shortcut.first == "Switch to next crew station" || shortcut.first =="Switch to previous crew station") 				
+			keyboard_general += shortcut.second + ":\t" + shortcut.first + "\n";
 	if (station == "Tactical")
-	{
+	{	
+		
 		for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Helms"))
             ret += shortcut.second + ":\t" + shortcut.first + "\n";
 		for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Weapons"))

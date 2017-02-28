@@ -7,7 +7,7 @@ HotkeyConfig hotkeys;
 HotkeyConfig::HotkeyConfig()
 {  // this list includes all Hotkeys and their standard configuration
     newCategory("GENERAL", "General");
-    newKey("NEXT_STATION", std::make_tuple("Switch to next crew station", ""));
+    newKey("NEXT_STATION", std::make_tuple("Switch to next crew station", "Tab"));
     newKey("PREV_STATION", std::make_tuple("Switch to previous crew station", ""));
     newKey("STATION_HELMS", std::make_tuple("Switch to helms station", "F2"));
     newKey("STATION_WEAPONS", std::make_tuple("Switch to weapons station", "F3"));
