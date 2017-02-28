@@ -36,6 +36,7 @@ public:
     SinglePilotScreen(GuiContainer* owner);
     
     virtual void onDraw(sf::RenderTarget& window);
+    virtual void onHotkey(const HotkeyResult& key) override;
 };
 
 #endif//SINGLE_PILOT_SCREEN_H
