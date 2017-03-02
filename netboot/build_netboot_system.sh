@@ -178,6 +178,23 @@ WantedBy=multi-user.target
 EOT
 chroot ${TARGET_NFS_DIR} systemctl enable emptyepsilon.service
 
+# Disable screen standby/blanking
+mkdir -p ${TARGET_NFS_DIR}/etc/X11/xorg.conf.d
+cat > ${TARGET_NFS_DIR}/etc/X11/xorg.conf.d/10-monitor.config <<-EOT
+Section "Monitor"
+    Identifier "LVDS0"
+    Option "DPMS" "false"
+EndSection
+
+Section "ServerLayout"
+    Identifier "ServerLayout0"
+    Option "StandbyTime" "0"
+    Option "SuspendTime" "0"
+    Option "OffTime"     "0"
+    Option "BlankTime"   "0"
+EndSection
+EOT
+
 # Instead of running a login shell on tty1, run a normal shell so we do not have to login with a username/password are just root. Who cares, we are on a read only system.
 cat > ${TARGET_NFS_DIR}/etc/systemd/system/shell_on_tty.service <<-EOT
 [Unit]
