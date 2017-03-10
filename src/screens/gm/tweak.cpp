@@ -162,6 +162,12 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
     });
     hull_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
+    // Can be destroyed bool
+    can_be_destroyed_toggle = new GuiToggleButton(right_col, "", "Could be destroyed", [this](bool value) {
+        target->setCanBeDestroyed(value);
+    });
+    can_be_destroyed_toggle->setSize(GuiElement::GuiSizeMax, 40);
+    
     // Warp and jump drive toggles
     (new GuiLabel(right_col, "", "Special drives:", 30))->setSize(GuiElement::GuiSizeMax, 50);
     warp_toggle = new GuiToggleButton(right_col, "", "Warp Drive", [this](bool value) {
@@ -197,6 +203,7 @@ void GuiShipTweakBase::open(P<SpaceObject> target)
     turn_speed_slider->clearSnapValues()->addSnapValue(ship->ship_template->turn_speed, 1.0f);
     hull_max_slider->setValue(ship->hull_max);
     hull_max_slider->clearSnapValues()->addSnapValue(ship->ship_template->hull, 5.0f);
+    can_be_destroyed_toggle->setValue(ship->getCanBeDestroyed());
 }
 
 GuiShipTweakMissileWeapons::GuiShipTweakMissileWeapons(GuiContainer* owner)
