@@ -26,6 +26,7 @@ public:
     float shield_max[max_shield_count];
     float hull_strength, hull_max;
     float shield_hit_effect[max_shield_count];
+    bool can_be_destroyed;
 
     bool shares_energy_with_docked;       //[config]
     bool repair_docked;                   //[config]
@@ -46,6 +47,9 @@ public:
     virtual void takeHullDamage(float damage_amount, DamageInfo& info);
     virtual void destroyedByDamage(DamageInfo& info) = 0;
     virtual float getShieldDamageFactor(DamageInfo& info, int shield_index);
+    
+    void setCanBeDestroyed(bool enabled) { can_be_destroyed = enabled; }
+    bool getCanBeDestroyed(){ return can_be_destroyed; }
     
     virtual void applyTemplateValues() = 0;
     virtual float getShieldRechargeRate(int shield_index);
