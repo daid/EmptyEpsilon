@@ -805,13 +805,13 @@ void PlayerSpaceship::addToShipLog(string message, sf::Color color, string stati
 {
     if (station == "extern")
     {
-        if (ships_log_extern.size() > 100)
+        while (ships_log_extern.size() > 50)
             ships_log_extern.erase(ships_log_extern.begin());
         ships_log_extern.emplace_back(string(engine->getElapsedTime(), 1) + string(": "), message, color, station);
     }
     else if (station == "intern")
     {
-        if (ships_log_intern.size() > 100)
+        while (ships_log_intern.size() > 50)
             ships_log_intern.erase(ships_log_intern.begin());
         ships_log_intern.emplace_back(string(engine->getElapsedTime(), 1) + string(": "), message, color, station);
     }
