@@ -8,10 +8,10 @@ class HotkeyConfigItem
 {
 public:
     string key;
-    std::tuple<string, string> value;
+    string name;
     sf::Event::KeyEvent hotkey;
     
-    HotkeyConfigItem(string key, std::tuple<string, string>);
+    HotkeyConfigItem(string key, string name);
     
     void load(string key_config);
 };
@@ -47,7 +47,7 @@ private:
     std::vector<HotkeyConfigCategory> categories;
     
     void newCategory(string key, string name);
-    void newKey(string key, std::tuple<string, string>);
+    void newKey(string key, string name);
 };
 
 extern HotkeyConfig hotkeys;
