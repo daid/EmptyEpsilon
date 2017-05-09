@@ -165,7 +165,7 @@ addToSequence(helmsTutorial, function() prev_object:destroy() end)
 addToSequence(helmsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Flavia"):setPosition(-1500, 1500):orderIdle():setScanned(true) end)
 addToSequence(helmsTutorial, function() player:commandSetTarget(prev_object) end)
 addToSequence(helmsTutorial, [[Ok, there are just a few more things that you need to know.
-Remember those beam weapons? As helms officer, is it your task to keep those beams on your target.
+Remember the beam weapons from the basics tutorial? As helms officer, is it your task to keep those beams on your target.
 I've set up an stationary enemy ship as a target. Destroy it with your beam weapons.]], function() return not prev_object:isValid() end)
 addToSequence(helmsTutorial, [[Aggression is not always the solution, but boy, it is fun!
 

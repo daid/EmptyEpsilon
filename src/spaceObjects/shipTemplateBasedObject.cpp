@@ -18,6 +18,10 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setHull);
     /// Set the maximum amount of hull for this station. Stations never repair hull damage, so this only effects the percentage displays
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setHullMax);
+    /// Set if the object can be destroyed or not. true or false
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setCanBeDestroyed);
+    /// Get if the object can be destroyed or not. true or false
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getCanBeDestroyed);
     /// Get the current shield level, stations only have a single shield, unlike ships that have a front&back shield
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldLevel);
     /// Get the amount of shields fit on this object.
@@ -86,6 +90,9 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
     registerMemberReplication(&hull_max);
 
     callsign = "[" + string(getMultiplayerId()) + "]";
+    
+    can_be_destroyed = true;
+    registerMemberReplication(&can_be_destroyed);
 }
 
 void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float sprite_scale, bool show_levels)
@@ -258,6 +265,10 @@ void ShipTemplateBasedObject::takeDamage(float damage_amount, DamageInfo info)
 void ShipTemplateBasedObject::takeHullDamage(float damage_amount, DamageInfo& info)
 {
     hull_strength -= damage_amount;
+    if (hull_strength <= 0.0 && !can_be_destroyed)
+    {
+        hull_strength = 1;
+    }
     if (hull_strength <= 0.0)
     {
         destroyedByDamage(info);

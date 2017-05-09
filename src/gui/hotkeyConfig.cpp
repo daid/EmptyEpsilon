@@ -6,6 +6,16 @@ HotkeyConfig hotkeys;
 
 HotkeyConfig::HotkeyConfig()
 {  // this list includes all Hotkeys and their standard configuration
+
+    newCategory("GENERAL", "General");
+    newKey("NEXT_STATION", std::make_tuple("Switch to next crew station", "Tab"));
+    newKey("PREV_STATION", std::make_tuple("Switch to previous crew station", ""));
+    newKey("STATION_HELMS", std::make_tuple("Switch to helms station", "F2"));
+    newKey("STATION_WEAPONS", std::make_tuple("Switch to weapons station", "F3"));
+    newKey("STATION_ENGINEERING", std::make_tuple("Switch to engineering station", "F4"));
+    newKey("STATION_SCIENCE", std::make_tuple("Switch to science station", "F5"));
+    newKey("STATION_RELAY", std::make_tuple("Switch to relay station", "F6"));
+
     newCategory("HELMS", "Helms");
     newKey("INC_IMPULSE", std::make_tuple("Increase impulse", "Up"));
     newKey("DEC_IMPULSE", std::make_tuple("Decrease impulse", "Down"));
@@ -135,15 +145,6 @@ HotkeyConfig::HotkeyConfig()
     newKey("ALERTE_NORMAL", std::make_tuple("Alert normal", ""));
     newKey("ALERTE_YELLOW", std::make_tuple("Alert yellow", ""));
     newKey("ALERTE_RED", std::make_tuple("Alert red", ""));
-	
-    newCategory("GENERAL", "General");
-    newKey("NEXT_STATION", std::make_tuple("Switch to next crew station", ""));
-    newKey("PREV_STATION", std::make_tuple("Switch to previous crew station", ""));
-    newKey("STATION_HELMS", std::make_tuple("Switch to helms station", "F2"));
-    newKey("STATION_WEAPONS", std::make_tuple("Switch to weapons station", "F3"));
-    newKey("STATION_ENGINEERING", std::make_tuple("Switch to engineering station", "F4"));
-    newKey("STATION_SCIENCE", std::make_tuple("Switch to science station", "F5"));
-    newKey("STATION_RELAY", std::make_tuple("Switch to relay station", "F6"));
     
     newKey("ARROW_UP", std::make_tuple("Move up", ""));
     newKey("ARROW_DOWN", std::make_tuple("Move down", ""));
