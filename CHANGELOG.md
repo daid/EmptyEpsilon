@@ -2,12 +2,28 @@
 
 ## [Unreleased]
 
+- Nothing
+
+## [2017-05-06] 
+
 ### Added
 
 - Number of hotkeys for the tactical, engineering+ and single pilot screens.
 - Hotkeys to navigate between the screens
 - Attempt to disable screen saving when netbooting
 - "Can be destroyed" flag for ship objects
+- 3D sprite for black hole
+- script function to set the number and maximum of probes
+
+### Changed
+
+- Adjusted the tutorial
+
+### Fixed
+
+- Typo in the tutorial
+- Communication dialogs not opening for second time on Game Master screens
+- Options.ini diffusion
 
 ## [2017-02-23]
 
@@ -536,7 +552,8 @@
 - create button visible through the cancel button on game master screen
 - clicking outside the radar circle but inside its reactangle caused callbacks
 
-[Unreleased]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.02.23...HEAD
+[Unreleased]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.05.06...HEAD
+[2017-05-06]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.02.23...EE-2017-05-06
 [2017-02-23]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.01.19...EE-2017-02-23
 [2017-01-19]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.09.02...EE-2017.01.19
 [2016-09-02]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.24...EE-2016.09.02
