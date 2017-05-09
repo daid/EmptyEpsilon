@@ -146,7 +146,7 @@ chroot ${TARGET_NFS_DIR} sh -c 'cd /root/EmptyEpsilon/_build && cmake .. -DSERIO
 # Create a symlink for the final executable.
 chroot ${TARGET_NFS_DIR} ln -s _build/EmptyEpsilon /root/EmptyEpsilon/EmptyEpsilon
 # Create a symlink to store the options.ini file in /tmp/, this so the client can load a custom file.
-ln -s /tmp/options.ini ${TARGET_NFS_DIR}/root/EmptyEpsilon/options.ini
+chroot ${TARGET_NFS_DIR} ln -s /tmp/options.ini /root/EmptyEpsilon/options.ini
 
 cat > ${TARGET_NFS_DIR}/root/setup_option_file.sh <<-EOT
 #!/bin/sh
@@ -177,6 +177,23 @@ ExecStart=/usr/bin/startx /root/EmptyEpsilon/EmptyEpsilon -- -logfile /tmp/x.log
 WantedBy=multi-user.target
 EOT
 chroot ${TARGET_NFS_DIR} systemctl enable emptyepsilon.service
+
+# Disable screen standby/blanking
+mkdir -p ${TARGET_NFS_DIR}/etc/X11/xorg.conf.d
+cat > ${TARGET_NFS_DIR}/etc/X11/xorg.conf.d/10-monitor.config <<-EOT
+Section "Monitor"
+    Identifier "LVDS0"
+    Option "DPMS" "false"
+EndSection
+
+Section "ServerLayout"
+    Identifier "ServerLayout0"
+    Option "StandbyTime" "0"
+    Option "SuspendTime" "0"
+    Option "OffTime"     "0"
+    Option "BlankTime"   "0"
+EndSection
+EOT
 
 # Instead of running a login shell on tty1, run a normal shell so we do not have to login with a username/password are just root. Who cares, we are on a read only system.
 cat > ${TARGET_NFS_DIR}/etc/systemd/system/shell_on_tty.service <<-EOT

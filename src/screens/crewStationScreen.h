@@ -45,7 +45,10 @@ private:
     string keyboard_general = "";
     void showNextTab(int offset=1);
     void showTab(GuiElement* element);
+
     GuiElement* findTab(string name);
+    
+    string listHotkeysLimited(string station);
 };
 
 #endif//CREW_STATION_SCREEN_H

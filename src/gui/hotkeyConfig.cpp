@@ -6,6 +6,16 @@ HotkeyConfig hotkeys;
 
 HotkeyConfig::HotkeyConfig()
 {  // this list includes all Hotkeys and their standard configuration
+
+    newCategory("GENERAL", "General");
+    newKey("NEXT_STATION", std::make_tuple("Switch to next crew station", "Tab"));
+    newKey("PREV_STATION", std::make_tuple("Switch to previous crew station", ""));
+    newKey("STATION_HELMS", std::make_tuple("Switch to helms station", "F2"));
+    newKey("STATION_WEAPONS", std::make_tuple("Switch to weapons station", "F3"));
+    newKey("STATION_ENGINEERING", std::make_tuple("Switch to engineering station", "F4"));
+    newKey("STATION_SCIENCE", std::make_tuple("Switch to science station", "F5"));
+    newKey("STATION_RELAY", std::make_tuple("Switch to relay station", "F6"));
+
     newCategory("HELMS", "Helms");
     newKey("INC_IMPULSE", "Increase impulse");
     newKey("DEC_IMPULSE", "Decrease impulse");
@@ -120,30 +130,22 @@ HotkeyConfig::HotkeyConfig()
         newKey("MOVE_RIGHT_SCAN_" + string(n+1), "Move right scan " + string(n+1));
     }
 	
-	newCategory("RELAY", "Relay");
-    newKey("OPEN_COMM", "Open communication");
-    newKey("NEXT_ENEMY_RELAY", "Select next target");
-    newKey("NEXT_RELAY", "Select next target (any)");
-    newKey("LINK_SCIENCE", "Link probe to science");
-    newKey("BEGIN_HACK", "Begin Hack");
-    newKey("ADD_WAYPOINT", "Add a waypoint");
-    newKey("DELETE_WAYPOINT", "Delelte waypoint");
-    newKey("LAUNCH_PROBE", "Launch probe");
-    newKey("INCREASE_ZOOM", "Increase Zoom");
-    newKey("DECREASE_ZOOM", "Decrease Zoom");
-    newKey("OPEN_LOG", "Open log");
-    newKey("ALERTE_NORMAL", "Alert normal");
-    newKey("ALERTE_YELLOW", "Alert yellow");
-    newKey("ALERTE_RED", "Alert red");
-	
-    newCategory("GENERAL", "General");
-    newKey("NEXT_STATION", "Switch to next crew station");
-    newKey("PREV_STATION", "Switch to previous crew station");
-    newKey("STATION_HELMS", "Switch to helms station");
-    newKey("STATION_WEAPONS", "Switch to weapons station");
-    newKey("STATION_ENGINEERING", "Switch to engineering station");
-    newKey("STATION_SCIENCE", "Switch to science station");
-    newKey("STATION_RELAY", "Switch to relay station");
+	  newCategory("RELAY", "Relay");
+    newKey("OPEN_COMM", std::make_tuple("Open communication", ""));
+    newKey("NEXT_ENEMY_RELAY", std::make_tuple("Select next target", ""));
+    newKey("NEXT_RELAY", std::make_tuple("Select next target (any)", ""));
+    newKey("LINK_SCIENCE", std::make_tuple("Link probe to science", ""));
+    newKey("BEGIN_HACK", std::make_tuple("Begin Hack", ""));
+    newKey("ADD_WAYPOINT", std::make_tuple("Add a waypoint", ""));
+    newKey("DELETE_WAYPOINT", std::make_tuple("Delelte waypoint", ""));
+    newKey("LAUNCH_PROBE", std::make_tuple("Launch probe", ""));
+    newKey("INCREASE_ZOOM", std::make_tuple("Increase Zoom", ""));
+    newKey("DECREASE_ZOOM", std::make_tuple("Decrease Zoom", ""));
+    newKey("OPEN_LOG", std::make_tuple("Open log", ""));
+    newKey("ALERTE_NORMAL", std::make_tuple("Alert normal", ""));
+    newKey("ALERTE_YELLOW", std::make_tuple("Alert yellow", ""));
+    newKey("ALERTE_RED", std::make_tuple("Alert red", ""));
+
     
     newKey("ARROW_UP", "Move up");
     newKey("ARROW_DOWN", "Move down");

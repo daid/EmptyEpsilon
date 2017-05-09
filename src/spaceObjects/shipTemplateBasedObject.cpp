@@ -93,6 +93,9 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
     registerMemberReplication(&can_be_destroyed);
     
     callsign = "[" + string(getMultiplayerId()) + "]";
+    
+    can_be_destroyed = true;
+    registerMemberReplication(&can_be_destroyed);
 }
 
 void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float sprite_scale, bool show_levels)
