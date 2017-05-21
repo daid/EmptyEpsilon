@@ -19,6 +19,10 @@ TopDownScreen::TopDownScreen()
     // Set the camera's vertical position/zoom.
     camera_position.z = 7000.0;
 
+    // Lock onto player ship 0 to start.
+    if (gameGlobalInfo->getPlayerShip(0))
+        target = gameGlobalInfo->getPlayerShip(0);
+
     // Let the screen operator select a player ship to lock the camera onto.
     camera_lock_selector = new GuiSelector(this, "CAMERA_LOCK_SELECTOR", [this](int index, string value) {
         P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(value.toInt());
@@ -29,7 +33,11 @@ TopDownScreen::TopDownScreen()
 
     // Toggle whether to lock onto a player ship.
     camera_lock_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOGGLE", "Lock camera on ship", [this](bool value) {});
-    camera_lock_toggle->setPosition(20, -20, ABottomLeft)->setSize(300, 50)->hide();
+    camera_lock_toggle->setValue(true)->setPosition(20, -20, ABottomLeft)->setSize(300, 50)->hide();
+
+    // Toggle whether to also lock onto the weapons target of a player ship.
+    camera_lock_tot_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOT_TOGGLE", "Lock camera on ship's target", [this](bool value) {});
+    camera_lock_tot_toggle->setValue(false)->setPosition(320, -20, ABottomLeft)->setSize(350, 50)->hide();
 
     new GuiIndicatorOverlays(this);
 
@@ -91,9 +99,26 @@ void TopDownScreen::update(float delta)
     if (camera_lock_toggle->getValue() && target)
     {
         sf::Vector2f target_position = target->getPosition();
+        P<SpaceObject> target_of_target = target->getTarget();
+        if (camera_lock_toggle->isVisible())
+            camera_lock_tot_toggle->show();
 
-        camera_position.x = target_position.x;
-        camera_position.y = target_position.y;
+        // If the selected ship has a weapons target, move the camera to the
+        // midpoint between them and keep them in view.
+        if (target_of_target && camera_lock_tot_toggle->getValue())
+        {
+            sf::Vector2f tot_position = target_of_target->getPosition();
+            sf::Vector2f tot_diff = tot_position - target_position;
+            camera_position.x = target_position.x + (tot_diff.x / 2);
+            camera_position.y = target_position.y + (tot_diff.y / 2);
+            // TODO: Figure out zoom-to-fit
+            camera_position.z = ((sf::length(tot_diff) + target->getRadius() + target_of_target->getRadius())  / 2) / tanf(1.0472f / 2);
+        } else {
+            camera_position.x = target_position.x;
+            camera_position.y = target_position.y;
+        }
+    } else {
+        camera_lock_tot_toggle->hide();
     }
 }
 
@@ -103,10 +128,11 @@ void TopDownScreen::onKey(sf::Event::KeyEvent key, int unicode)
     {
     // Toggle UI visibility with the H key.
     case sf::Keyboard::H:
-        if (camera_lock_toggle->isVisible() || camera_lock_selector->isVisible())
+        if (camera_lock_toggle->isVisible() || camera_lock_selector->isVisible() || camera_lock_tot_toggle->isVisible())
         {
             camera_lock_toggle->hide();
             camera_lock_selector->hide();
+            camera_lock_tot_toggle->hide();
         }else{
             camera_lock_toggle->show();
             camera_lock_selector->show();
@@ -116,6 +142,9 @@ void TopDownScreen::onKey(sf::Event::KeyEvent key, int unicode)
     case sf::Keyboard::L:
         camera_lock_toggle->setValue(!camera_lock_toggle->getValue());
         break;
+    // Toggle target-of-target lock with the semicolon (;) key.
+    case sf::Keyboard::SemiColon:
+        camera_lock_tot_toggle->setValue(!camera_lock_tot_toggle->getValue());
     // Cycle through player ships with the J and K keys.
     case sf::Keyboard::J:
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() - 1);
