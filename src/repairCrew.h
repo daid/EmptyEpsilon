@@ -29,7 +29,7 @@ public:
     ERepairCrewDirection direction;
     float action_delay;
     int32_t ship_id;
-    
+
     bool selected; //TODO: This should not be tracked here but in the GUI.
 
     RepairCrew();
@@ -42,5 +42,6 @@ private:
     bool isTargetPositionTaken(sf::Vector2i position);
 };
 PVector<RepairCrew> getRepairCrewFor(P<PlayerSpaceship> ship);
+bool searchOverlap(P<PlayerSpaceship> ship, sf::Vector2i position);
 
 #endif//REPAIR_CREW_H

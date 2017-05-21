@@ -259,3 +259,16 @@ PVector<RepairCrew> getRepairCrewFor(P<PlayerSpaceship> ship)
             ret.push_back(c);
     return ret;
 }
+
+bool searchOverlap(P<PlayerSpaceship> ship, sf::Vector2i planned_target_position)
+{
+    PVector<RepairCrew> crew_list = getRepairCrewFor(ship);
+
+    foreach(RepairCrew, crew_member, crew_list)
+    {
+        if (crew_member->target_position == planned_target_position)
+            return true;
+    }
+
+    return false;
+}

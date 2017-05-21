@@ -19,16 +19,16 @@ GuiShipInternalView* GuiShipInternalView::setShip(P<SpaceShip> ship)
     }
     if (!ship)
         return this;
-    
+
     P<ShipTemplate> st = ship->ship_template;
-    
+
     room_container = new GuiShipRoomContainer(this, id + "_ROOM_CONTAINER", room_size, [this](sf::Vector2i position) {
-        if (selected_crew_member)
+        if (selected_crew_member && !searchOverlap(viewing_ship, position))
             selected_crew_member->commandSetTargetPosition(position);
     });
     room_container->setPosition(0, 0, ACenter);
     sf::Vector2i max_size = st->interiorSize();
-    
+
     for(unsigned int n=0; n<st->rooms.size(); n++)
     {
         ShipRoomTemplate& rt = st->rooms[n];
@@ -36,11 +36,11 @@ GuiShipInternalView* GuiShipInternalView::setShip(P<SpaceShip> ship)
         room->setPosition(sf::Vector2f(rt.position) * room_size, ATopLeft);
         room->setSystem(ship, rt.system);
     }
-    
+
     for(unsigned int n=0; n<st->doors.size(); n++)
     {
         ShipDoorTemplate& dt = st->doors[n];
-        
+
         GuiShipDoor* door = new GuiShipDoor(room_container, id + "_DOOR_" + string(n), nullptr);
         door->setSize(room_size, room_size);
         if (dt.horizontal)
@@ -52,14 +52,14 @@ GuiShipInternalView* GuiShipInternalView::setShip(P<SpaceShip> ship)
         }
     }
     room_container->setSize(sf::Vector2f(max_size) * room_size);
-    
+
     return this;
 }
 
 void GuiShipInternalView::onDraw(sf::RenderTarget& window)
 {
     setShip(my_spaceship);
-        
+
     if (!viewing_ship && room_container)
     {
         room_container->destroy();
@@ -270,7 +270,7 @@ void GuiShipCrew::onDraw(sf::RenderTarget& window)
     if (!crew)
         return;
     setPosition(crew->position * getSize().x, ATopLeft);
-    
+
     sf::Sprite sprite;
     if (crew->action == RC_Move)
         textureManager.setTexture(sprite, "Tokka_WalkingMan.png", int(crew->action_delay * 12) % 6);
@@ -296,7 +296,7 @@ void GuiShipCrew::onDraw(sf::RenderTarget& window)
         break;
     }
     window.draw(sprite);
-    
+
     if (crew->selected)
     {
         sf::Sprite select_sprite;
