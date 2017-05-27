@@ -5,7 +5,7 @@ option(ENABLE_CRASH_LOGGER "Enable the drmingw crash logging facilities" OFF)
 
 # Check if serious proton dir is set.
 if(NOT DEFINED SERIOUS_PROTON_DIR)
- message(FATAL_ERROR "SERIOUS_PROTON_DIR was not set. Unable to continue")
+ set(SERIOUS_PROTON_DIR "${CMAKE_SOURCE_DIR}/SeriousProton/")
 endif(NOT DEFINED SERIOUS_PROTON_DIR)
 
 if(DEFINED ENABLE_CRASH_LOGGER)
