@@ -10,9 +10,9 @@
 #include "gui/gui2_slider.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_keyvaluedisplay.h"
+#include "HotKeyMenu.h"
 
-OptionsMenu::OptionsMenu()
-{
+OptionsMenu::OptionsMenu() {
     P<WindowManager> windowManager = engine->getObject("windowManager");
 
     new GuiOverlay(this, "", colorConfig.background);
@@ -98,6 +98,16 @@ OptionsMenu::OptionsMenu()
         // 2: On if main screen, off otherwise (default)
         PreferencesManager::set("music_enabled", string(index));
     }))->setOptions({"Disabled", "Enabled", "Main Screen only"})->setSelectionIndex(music_enabled_index)->setPosition(50, top, ATopLeft)->setSize(300, 50);
+
+    // Hotkey Options: set Keys
+    top += 60;
+    (new GuiLabel(this, "HELP_KEY_OPTIONS_LABEL", "Help Key Options", 30))->addBackground()->setPosition(50, top, ATopLeft)->setSize(300, 50);
+
+    top += 50;
+    (new GuiButton(this, "SET_HOTKEYS", " HotKeys Menu", [this]() {
+        new HotKeyMenu();
+        destroy();
+    }))->setPosition(50, top , ATopLeft)->setSize(300, 50);
 
     // Right column, manual layout. Draw first element 50px from top.
     top = 50;
