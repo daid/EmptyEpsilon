@@ -301,10 +301,30 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         if (fabs(rel_velocity) < 0.01)
             rel_velocity = 0.0;
 
+        string duration = "";
+        if (fabs(rel_velocity) > 0.01)
+        {
+            if (fabs(my_spaceship->getHeading()-heading) < 10)
+            {
+                int seconds = fabs(distance/rel_velocity);
+                int minutes = seconds / 60;
+
+                duration += " (";
+                if (minutes < 10)
+                    duration += "0";
+                duration += string(minutes);
+                duration += ":";
+                if (seconds%60 < 10)
+                    duration += "0";
+                duration += string(seconds%60);
+                duration += ")";
+            }
+        }
+
         info_callsign->setValue(obj->getCallSign());
         info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
         info_heading->setValue(string(int(heading)));
-        info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
+        info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min" + duration);
 
         string description = obj->getDescription();
         string sidebar_pager_selection = sidebar_pager->getSelectionValue();
