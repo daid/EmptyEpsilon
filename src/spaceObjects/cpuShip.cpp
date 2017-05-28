@@ -30,7 +30,7 @@ REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderDefendTarget);
     /// Order this ship to fly in formation with another ship. It will attack nearby enemies.
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyFormation);
-    /// Order this ship to fly to a location, attacking everything alogn the way.
+    /// Order this ship to fly to a location, attacking everything along the way.
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyTowards);
     /// Order this ship to fly to a location, without attacking anything
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyTowardsBlind);
@@ -46,6 +46,7 @@ CpuShip::CpuShip()
 {
     setFactionId(2);
     orders = AI_Idle;
+    previous_orders = AI_Idle;
 
     setRotation(random(0, 360));
     target_rotation = getRotation();
@@ -213,6 +214,20 @@ void CpuShip::orderDock(P<SpaceObject> object)
     this->addBroadcast(FVF_Friendly, "Docking to " + object->getCallSign() + ".");
 }
 
+void CpuShip::orderRepair()
+{
+    if (orders != AI_Repair)
+    {
+        previous_orders = orders;
+        orders = AI_Repair;
+    }
+}
+
+void CpuShip::orderResume()
+{
+    orders = previous_orders;
+}
+
 void CpuShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
     SpaceShip::drawOnGMRadar(window, position, scale, long_range);
@@ -241,6 +256,7 @@ string CpuShip::getExportLine()
     case AI_FlyTowardsBlind: ret += ":orderFlyTowardsBlind(" + string(order_target_location.x, 0) + ", " + string(order_target_location.y, 0) + ")"; break;
     case AI_Attack: ret += ":orderAttack(?)"; break;
     case AI_Dock: ret += ":orderDock(?)"; break;
+    case AI_Repair: ret += ":orderRepair()"; break;
     }
     return ret + getScriptExportModificationsOnTemplate();
 }
@@ -259,6 +275,7 @@ string getAIOrderString(EAIOrder order)
     case AI_FlyTowardsBlind: return "Fly towards (ignore all)";
     case AI_Attack: return "Attack";
     case AI_Dock: return "Dock";
+    case AI_Repair: return "Repair";
     }
     return "Unknown";
 }
