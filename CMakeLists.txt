@@ -100,7 +100,7 @@ set(SOURCES
 	src/screens/extra/powerManagement.cpp
 	src/screens/extra/databaseScreen.cpp
 	src/screens/extra/shipLogScreen.cpp
-	src/screens/extra/RadarScreen.cpp
+	src/screens/extra/radarScreen.cpp
 	src/screens/gm/gameMasterScreen.cpp
 	src/screens/gm/chatDialog.cpp
 	src/screens/gm/tweak.cpp
