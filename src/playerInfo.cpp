@@ -20,9 +20,7 @@
 
 #include "screens/extra/shipLogScreen.h"
 
-#include "screens/extra/tacticalRadar.h"
-#include "screens/extra/scienceRadar.h"
-#include "screens/extra/relayRadar.h"
+#include "screens/extra/RadarScreen.h"
 
 #include "screenComponents/mainScreenControls.h"
 #include "screenComponents/selfDestructEntry.h"
@@ -155,11 +153,11 @@ void PlayerInfo::spawnUI()
         if (crew_position[databaseView])
             screen->addStationTab(new DatabaseScreen(screen), databaseView, getCrewPositionName(databaseView), getCrewPositionIcon(databaseView));
         if (crew_position[tacticalRadar])
-            screen->addStationTab(new TacticalRadarScreen(screen), tacticalRadar, getCrewPositionName(tacticalRadar), getCrewPositionIcon(tacticalRadar));
+            screen->addStationTab(new RadarScreen(screen,"tactical"), tacticalRadar, getCrewPositionName(tacticalRadar), getCrewPositionIcon(tacticalRadar));
         if (crew_position[scienceRadar])
-            screen->addStationTab(new ScienceRadarScreen(screen), scienceRadar, getCrewPositionName(scienceRadar), getCrewPositionIcon(scienceRadar));
+            screen->addStationTab(new RadarScreen(screen,"science"), scienceRadar, getCrewPositionName(scienceRadar), getCrewPositionIcon(scienceRadar));
         if (crew_position[relayRadar])
-            screen->addStationTab(new RelayRadarScreen(screen), relayRadar, getCrewPositionName(relayRadar), getCrewPositionIcon(relayRadar));
+            screen->addStationTab(new RadarScreen(screen,"relay"), relayRadar, getCrewPositionName(relayRadar), getCrewPositionIcon(relayRadar));
         //Ship log screen, if you have comms, you have ships log. (note this is mostly replaced by the [at the bottom of the screen openable log]
         if (crew_position[singlePilot])
             screen->addStationTab(new ShipLogScreen(screen), max_crew_positions, "Ships log", "");
