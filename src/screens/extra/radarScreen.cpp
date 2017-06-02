@@ -1,5 +1,6 @@
 #include "radarScreen.h"
 #include "playerInfo.h"
+#include "gameGlobalInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 
 #include "screenComponents/indicatorOverlays.h"
