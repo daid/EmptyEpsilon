@@ -1,5 +1,5 @@
-#ifndef GUI_JUMP_INDICATOR_H
-#define GUI_JUMP_INDICATOR_H
+#ifndef JUMP_INDICATOR_H
+#define JUMP_INDICATOR_H
 
 #include "gui/gui2_element.h"
 
@@ -17,4 +17,4 @@ public:
     virtual void onDraw(sf::RenderTarget& window);
 };
 
-#endif//GUI_SELF_DESTRUCT_INDICATOR_H
+#endif//JUMP_INDICATOR_H

@@ -1,5 +1,5 @@
-#ifndef GUI_SHIP_INTERNAL_VIEW_H
-#define GUI_SHIP_INTERNAL_VIEW_H
+#ifndef SHIP_INTERNAL_VIEW_H
+#define SHIP_INTERNAL_VIEW_H
 
 #include "gui/gui2_element.h"
 #include "spaceObjects/spaceship.h"
@@ -21,7 +21,8 @@ public:
     
     GuiShipInternalView* setShip(P<SpaceShip> ship);
     
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onHotkey(const HotkeyResult& key) override;
 };
 
 class GuiShipRoomContainer : public GuiElement
@@ -94,4 +95,4 @@ public:
     virtual void onMouseUp(sf::Vector2f position);
 };
 
-#endif//GUI_SHIP_INTERNAL_VIEW_H
+#endif//SHIP_INTERNAL_VIEW_H

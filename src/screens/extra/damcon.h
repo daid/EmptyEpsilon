@@ -1,5 +1,5 @@
-#ifndef DAMCON_SCREEN_H
-#define DAMCON_SCREEN_H
+#ifndef DAMCON_H
+#define DAMCON_H
 
 #include "gui/gui2_overlay.h"
 #include "shipTemplate.h"
@@ -17,4 +17,4 @@ public:
     void onDraw(sf::RenderTarget& window) override;
 };
 
-#endif//DAMCON_SCREEN_H
+#endif//DAMCON_H

@@ -71,9 +71,8 @@ public:
 
     static unsigned int findFactionId(string name);
 protected:
-
     string name;
     string description;
 };
 
-#endif//Faction_INFO_H
+#endif//FACTION_INFO_H

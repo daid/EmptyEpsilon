@@ -5,6 +5,7 @@
 #include "screenComponents/shipInternalView.h"
 #include "screenComponents/selfDestructButton.h"
 #include "screenComponents/alertOverlay.h"
+#include "screenComponents/customShipFunctions.h"
 
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_autolayout.h"
@@ -49,17 +50,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
         info.layout->setSize(GuiElement::GuiSizeMax, 50);
 
         info.button = new GuiToggleButton(info.layout, id + "_SELECT", getSystemName(ESystem(n)), [this, n](bool value){
-            for(int idx=0; idx<SYS_COUNT; idx++)
-            {
-                system_rows[idx].button->setValue(idx == n);
-            }
-            selected_system = ESystem(n);
-            power_slider->enable();
-            if (my_spaceship)
-            {
-                power_slider->setValue(my_spaceship->systems[n].power_request);
-                coolant_slider->setValue(my_spaceship->systems[n].coolant_request);
-            }
+            selectSystem(ESystem(n));
         });
         info.button->setSize(300, GuiElement::GuiSizeMax);
         info.damage_bar = new GuiProgressbar(info.layout, id + "_DAMAGE", 0.0, 1.0, 0.0);
@@ -128,13 +119,37 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
     coolant_slider->disable();
 
     (new GuiShipInternalView(system_row_layouts, "SHIP_INTERNAL_VIEW", 48.0f))->setShip(my_spaceship)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    
+    (new GuiCustomShipFunctions(this, engineering, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+
+    previous_energy_level = 0.0;
+    average_energy_delta = 0.0;
+    previous_energy_measurement = 0.0;
 }
 
 void EngineeringScreen::onDraw(sf::RenderTarget& window)
 {
     if (my_spaceship)
     {
-        energy_display->setValue(string(int(my_spaceship->energy_level)) + " (" + string(my_spaceship->getNetPowerUsage()) + ")");
+        //Update the energy usage.
+        if (previous_energy_measurement == 0.0)
+        {
+            previous_energy_level = my_spaceship->energy_level;
+            previous_energy_measurement = engine->getElapsedTime();
+        }else{
+            if (previous_energy_measurement != engine->getElapsedTime())
+            {
+                float delta_t = engine->getElapsedTime() - previous_energy_measurement;
+                float delta_e = my_spaceship->energy_level - previous_energy_level;
+                float delta_e_per_second = delta_e / delta_t;
+                average_energy_delta = average_energy_delta * 0.99 + delta_e_per_second * 0.01;
+                
+                previous_energy_level = my_spaceship->energy_level;
+                previous_energy_measurement = engine->getElapsedTime();
+            }
+        }
+
+        energy_display->setValue(string(int(my_spaceship->energy_level)) + " (" + string(int(average_energy_delta * 60.0f)) + "/m)");
         if (my_spaceship->energy_level < 100)
             energy_display->setColor(sf::Color::Red);
         else
@@ -190,10 +205,20 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
             case SYS_Reactor:
                 if (effectiveness > 1.0f)
                     effectiveness = (1.0f + effectiveness) / 2.0f;
-                addSystemEffect("Energy production", string(effectiveness * 25.0, 1));
+                addSystemEffect("Energy production", string(effectiveness * -PlayerSpaceship::system_power_user_factor[SYS_Reactor] * 60.0, 1) + "/m");
                 break;
             case SYS_BeamWeapons:
                 addSystemEffect("Firing rate", string(int(effectiveness * 100)) + "%");
+                // If the ship has a turret, also note that the rotation rate
+                // is affected.
+                for(int n = 0; n < max_beam_weapons; n++)
+                {
+                    if (my_spaceship->beam_weapons[n].getTurretArc() > 0)
+                    {
+                        addSystemEffect("Turret rotation rate", string(int(effectiveness * 100)) + "%");
+                        break;
+                    }
+                }
                 break;
             case SYS_MissileSystem:
                 addSystemEffect("Reload rate", string(int(effectiveness * 100)) + "%");
@@ -209,11 +234,11 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
                     addSystemEffect("Combat recharge rate", string(int(((my_spaceship->getSystemEffectiveness(SYS_Maneuver) + my_spaceship->getSystemEffectiveness(SYS_Impulse)) / 2.0) * 100)) + "%");
                 break;
             case SYS_Warp:
-                addSystemEffect("Warpdrive speed", string(int(effectiveness * 100)) + "%");
+                addSystemEffect("Warp drive speed", string(int(effectiveness * 100)) + "%");
                 break;
             case SYS_JumpDrive:
-                addSystemEffect("Jumpdrive recharge rate", string(int(my_spaceship->getJumpDriveRechargeRate() * 100)) + "%");
-                addSystemEffect("Jumpdrive jump speed", string(int(effectiveness * 100)) + "%");
+                addSystemEffect("Jump drive recharge rate", string(int(my_spaceship->getJumpDriveRechargeRate() * 100)) + "%");
+                addSystemEffect("Jump drive jump speed", string(int(effectiveness * 100)) + "%");
                 break;
             case SYS_FrontShield:
                 if (gameGlobalInfo->use_beam_shield_frequencies)
@@ -251,6 +276,64 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
         }
     }
     GuiOverlay::onDraw(window);
+}
+
+void EngineeringScreen::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "ENGINEERING" && my_spaceship)
+    {
+        if (key.hotkey == "SELECT_REACTOR") selectSystem(SYS_Reactor);
+        if (key.hotkey == "SELECT_BEAM_WEAPONS") selectSystem(SYS_BeamWeapons);
+        if (key.hotkey == "SELECT_MISSILE_SYSTEM") selectSystem(SYS_MissileSystem);
+        if (key.hotkey == "SELECT_MANEUVER") selectSystem(SYS_Maneuver);
+        if (key.hotkey == "SELECT_IMPULSE") selectSystem(SYS_Impulse);
+        if (key.hotkey == "SELECT_WARP") selectSystem(SYS_Warp);
+        if (key.hotkey == "SELECT_JUMP_DRIVE") selectSystem(SYS_JumpDrive);
+        if (key.hotkey == "SELECT_FRONT_SHIELDS") selectSystem(SYS_FrontShield);
+        if (key.hotkey == "SELECT_REAR_SHIELDS") selectSystem(SYS_RearShield);
+        
+        if (selected_system != SYS_None)
+        {
+            if (key.hotkey == "INCREASE_POWER")
+            {
+                power_slider->setValue(my_spaceship->systems[selected_system].power_request + 0.1f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "DECREASE_POWER")
+            {
+                power_slider->setValue(my_spaceship->systems[selected_system].power_request - 0.1f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "INCREASE_COOLANT")
+            {
+                coolant_slider->setValue(my_spaceship->systems[selected_system].coolant_request + 0.5f);
+                my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
+            }
+            if (key.hotkey == "DECREASE_COOLANT")
+            {
+                coolant_slider->setValue(my_spaceship->systems[selected_system].coolant_request - 0.5f);
+                my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
+            }
+        }
+    }
+}
+
+void EngineeringScreen::selectSystem(ESystem system)
+{
+    if (my_spaceship && !my_spaceship->hasSystem(system))
+        return;
+    
+    for(int idx=0; idx<SYS_COUNT; idx++)
+    {
+        system_rows[idx].button->setValue(idx == system);
+    }
+    selected_system = system;
+    power_slider->enable();
+    if (my_spaceship)
+    {
+        power_slider->setValue(my_spaceship->systems[system].power_request);
+        coolant_slider->setValue(my_spaceship->systems[system].coolant_request);
+    }
 }
 
 void EngineeringScreen::addSystemEffect(string key, string value)

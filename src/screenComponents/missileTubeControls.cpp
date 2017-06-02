@@ -148,6 +148,42 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window){
     GuiAutoLayout::onDraw(window);
 }
 
+void GuiMissileTubeControls::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "WEAPONS" && my_spaceship)
+    {
+        if (key.hotkey == "SELECT_MISSILE_TYPE_HOMING")
+            selectMissileWeapon(MW_Homing);
+        if (key.hotkey == "SELECT_MISSILE_TYPE_NUKE")
+            selectMissileWeapon(MW_Nuke);
+        if (key.hotkey == "SELECT_MISSILE_TYPE_MINE")
+            selectMissileWeapon(MW_Mine);
+        if (key.hotkey == "SELECT_MISSILE_TYPE_EMP")
+            selectMissileWeapon(MW_EMP);
+        if (key.hotkey == "SELECT_MISSILE_TYPE_HVLI")
+            selectMissileWeapon(MW_HVLI);
+
+        for(int n=0; n<my_spaceship->weapon_tube_count; n++)
+        {
+            if (key.hotkey == "LOAD_TUBE_" + string(n+1))
+                my_spaceship->commandLoadTube(n, load_type);
+            if (key.hotkey == "UNLOAD_TUBE_" + string(n+1))
+                my_spaceship->commandUnloadTube(n);
+            if (key.hotkey == "FIRE_TUBE_" + string(n+1))
+            {
+                float target_angle = missile_target_angle;
+                if (!manual_aim)
+                {
+                    target_angle = my_spaceship->weapon_tube[n].calculateFiringSolution(my_spaceship->getTarget());
+                    if (target_angle == std::numeric_limits<float>::infinity())
+                        target_angle = my_spaceship->getRotation() + my_spaceship->weapon_tube[n].getDirection();
+                }
+                my_spaceship->commandFireTube(n, target_angle);
+            }
+        }
+    }
+}
+
 void GuiMissileTubeControls::setMissileTargetAngle(float angle)
 {
     missile_target_angle = angle;
@@ -166,4 +202,11 @@ void GuiMissileTubeControls::setManualAim(bool manual)
 bool GuiMissileTubeControls::getManualAim()
 {
     return manual_aim;
+}
+
+void GuiMissileTubeControls::selectMissileWeapon(EMissileWeapons type)
+{
+    load_type = type;
+    for(int idx = 0; idx < MW_Count; idx++)
+        load_type_rows[idx].button->setValue(idx == type);
 }

@@ -498,8 +498,14 @@ void ShipAI::flyTowards(sf::Vector2f target, float keep_distance)
                     if (has_missiles)
                         jump -= 5000;
                 }
-                if (jump > 15000)
-                    jump = 15000;
+                if (owner->jump_drive_max_distance == 50000)
+                {   //If the ship has the default max jump drive distance of 50k, then limit our jumps to 15k, else we limit ourselves to whatever the ship layout is with a bit margin.
+                    if (jump > 15000)
+                        jump = 15000;
+                }else{
+                    if (jump > owner->jump_drive_max_distance - 2000)
+                        jump = owner->jump_drive_max_distance - 2000;
+                }
                 jump += random(-1500, 1500);
                 owner->initializeJump(jump);
             }

@@ -1,5 +1,5 @@
-#ifndef GUI_IMPULSE_CONTROLS_H
-#define GUI_IMPULSE_CONTROLS_H
+#ifndef IMPULSE_CONTROLS_H
+#define IMPULSE_CONTROLS_H
 
 #include "gui/gui2_element.h"
 
@@ -14,7 +14,8 @@ private:
 public:
     GuiImpulseControls(GuiContainer* owner, string id);
     
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onHotkey(const HotkeyResult& key) override;
 };
 
-#endif//GUI_IMPULSE_CONTROLS_H
+#endif//IMPULSE_CONTROLS_H

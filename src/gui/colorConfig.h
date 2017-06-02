@@ -25,6 +25,12 @@ public:
     sf::Color background;
     sf::Color radar_outline;
     
+    sf::Color log_generic;
+    sf::Color log_send;
+    sf::Color log_receive_friendly;
+    sf::Color log_receive_enemy;
+    sf::Color log_receive_neutral;
+    
     WidgetColorSet button;
     WidgetColorSet label;
     WidgetColorSet text_entry;
@@ -33,6 +39,7 @@ public:
 
     sf::Color overlay_damaged;
     sf::Color overlay_jammed;
+    sf::Color overlay_hacked;
     sf::Color overlay_no_power;
     sf::Color overlay_low_energy;
     sf::Color overlay_low_power;

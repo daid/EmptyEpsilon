@@ -18,6 +18,10 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setHull);
     /// Set the maximum amount of hull for this station. Stations never repair hull damage, so this only effects the percentage displays
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setHullMax);
+    /// Set if the object can be destroyed or not. true or false
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setCanBeDestroyed);
+    /// Get if the object can be destroyed or not. true or false
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getCanBeDestroyed);
     /// Get the current shield level, stations only have a single shield, unlike ships that have a front&back shield
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldLevel);
     /// Get the amount of shields fit on this object.
@@ -34,6 +38,12 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRadarTrace);
     /// Are the shields online or not. Currently always returns true except for player ships, as only players can turn off shields.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldsActive);
+
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getSharesEnergyWithDocked);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setSharesEnergyWithDocked);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getRepairDocked);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRepairDocked);
+
     /// [Depricated]
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getFrontShield);
     /// [Depricated]
@@ -76,8 +86,13 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
         registerMemberReplication(&shield_hit_effect[n], 0.5);
     }
     registerMemberReplication(&radar_trace);
+    registerMemberReplication(&hull_strength, 0.5);
+    registerMemberReplication(&hull_max);
 
     callsign = "[" + string(getMultiplayerId()) + "]";
+    
+    can_be_destroyed = true;
+    registerMemberReplication(&can_be_destroyed);
 }
 
 void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float sprite_scale, bool show_levels)
@@ -250,6 +265,10 @@ void ShipTemplateBasedObject::takeDamage(float damage_amount, DamageInfo info)
 void ShipTemplateBasedObject::takeHullDamage(float damage_amount, DamageInfo& info)
 {
     hull_strength -= damage_amount;
+    if (hull_strength <= 0.0 && !can_be_destroyed)
+    {
+        hull_strength = 1;
+    }
     if (hull_strength <= 0.0)
     {
         destroyedByDamage(info);
@@ -280,6 +299,9 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
         shield_level[n] = shield_max[n] = ship_template->shield_level[n];
 
     radar_trace = ship_template->radar_trace;
+
+    shares_energy_with_docked = ship_template->shares_energy_with_docked;
+    repair_docked = ship_template->repair_docked;
 
     ship_template->setCollisionData(this);
     model_info.setData(ship_template->model_data);

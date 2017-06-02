@@ -1,5 +1,5 @@
-#ifndef GUI_INDICATOR_OVERLAYS_H
-#define GUI_INDICATOR_OVERLAYS_H
+#ifndef INDICATOR_OVERLAYS_H
+#define INDICATOR_OVERLAYS_H
 
 #include "gui/gui2_element.h"
 
@@ -34,4 +34,4 @@ private:
     void drawAlertLevel(sf::RenderTarget& window);
 };
 
-#endif//GUI_INDICATOR_OVERLAYS_H
+#endif//INDICATOR_OVERLAYS_H

@@ -460,6 +460,7 @@ class Converter:
                     warning_types[item.tag] += 1
         for key, count in warning_types.items():
             print("Warning: %s %dx" % (key, count))
+        return len(warning_types) == 0
 
 if __name__ == "__main__":
     count = 0
@@ -486,8 +487,10 @@ if __name__ == "__main__":
                 try:
                     c = Converter(filename)
                     name = os.path.splitext(os.path.basename(filename))[0].replace("MISS_", "")
-                    c.export(name, "scripts/scenario_99_%s.lua" % (name))
+                    if c.export(name, "scripts/scenario_99_%s.lua" % (name)):
+                        sys.exit(1)
                     success += 1
                 except:
                     traceback.print_exc()
+                    sys.exit(1)
     print("Converted %d of the %d scripts" % (success, count))

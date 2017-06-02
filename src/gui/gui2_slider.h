@@ -19,7 +19,6 @@ protected:
     float value;
     std::vector<TSnapPoint> snap_points;
     func_t func;
-    sf::Keyboard::Key up_hotkey, down_hotkey;
     GuiLabel* overlay_label;
 public:
     GuiSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func);
@@ -28,7 +27,6 @@ public:
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
-    virtual bool onHotkey(sf::Keyboard::Key key, int unicode);
     
     GuiSlider* clearSnapValues();
     GuiSlider* addSnapValue(float value, float range);
@@ -69,4 +67,3 @@ public:
 };
 
 #endif//GUI2_SLIDER_H
-

@@ -10,11 +10,15 @@ class GuiRadarView;
 class GuiKeyValueDisplay;
 class GuiFrequencyCurve;
 class GuiScrollText;
+class GuiAutoLayout;
 class GuiButton;
+class GuiScanTargetButton;
 class GuiToggleButton;
+class GuiSelector;
 class GuiSlider;
 class GuiLabel;
 class DatabaseViewComponent;
+class GuiCustomShipFunctions;
 
 class ScienceScreen : public GuiOverlay
 {
@@ -30,6 +34,12 @@ public:
     GuiRadarView* probe_radar;
     GuiSlider* zoom_slider;
     GuiLabel* zoom_label;
+
+    GuiSelector* sidebar_selector;
+    GuiAutoLayout* info_sidebar;
+    GuiCustomShipFunctions* custom_function_sidebar;
+    GuiSelector* sidebar_pager;
+    GuiScanTargetButton* scan_button;
     GuiKeyValueDisplay* info_callsign;
     GuiKeyValueDisplay* info_distance;
     GuiKeyValueDisplay* info_heading;

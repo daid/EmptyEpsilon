@@ -18,6 +18,7 @@ public:
     string template_name;
     string type_name;
     string radar_trace;
+    string impulse_sound_file = "engine.wav";
     P<ShipTemplate> ship_template;
 
     int shield_count;
@@ -25,6 +26,10 @@ public:
     float shield_max[max_shield_count];
     float hull_strength, hull_max;
     float shield_hit_effect[max_shield_count];
+    bool can_be_destroyed;
+
+    bool shares_energy_with_docked;       //[config]
+    bool repair_docked;                   //[config]
 public:
     ShipTemplateBasedObject(float collision_range, string multiplayer_name, float multiplayer_significant_range=-1);
 
@@ -36,18 +41,21 @@ public:
 
     virtual std::unordered_map<string, string> getGMInfo() override;
     virtual bool canBeTargetedBy(P<SpaceObject> other) override { return true; }
-    virtual bool hasShield()  override;
+    virtual bool hasShield() override;
     virtual string getCallSign() override { return callsign; }
     virtual void takeDamage(float damage_amount, DamageInfo info) override;
     virtual void takeHullDamage(float damage_amount, DamageInfo& info);
     virtual void destroyedByDamage(DamageInfo& info) = 0;
     virtual float getShieldDamageFactor(DamageInfo& info, int shield_index);
     
+    void setCanBeDestroyed(bool enabled) { can_be_destroyed = enabled; }
+    bool getCanBeDestroyed(){ return can_be_destroyed; }
+    
     virtual void applyTemplateValues() = 0;
     virtual float getShieldRechargeRate(int shield_index);
 
     void setTemplate(string template_name);
-    void setShipTemplate(string template_name) { LOG(WARNING) << "Depricated \"setShipTemplate\" function called."; setTemplate(template_name); }
+    void setShipTemplate(string template_name) { LOG(WARNING) << "Deprecated \"setShipTemplate\" function called."; setTemplate(template_name); }
     void setTypeName(string type_name) { this->type_name = type_name; }
     string getTypeName() { return type_name; }
 
@@ -67,7 +75,7 @@ public:
     int getShieldPercentage(int index) { if (index < 0 || index >= shield_count || shield_max[index] <= 0.0) return 0; return int(100 * shield_level[index] / shield_max[index]); }
     ESystem getShieldSystemForShieldIndex(int index);
 
-    ///Depricated old script functions for shields
+    ///Deprecated old script functions for shields
     float getFrontShield() { return shield_level[0]; }
     float getFrontShieldMax() { return shield_max[0]; }
     void setFrontShield(float amount) { if (amount < 0) return; shield_level[0] = amount; }
@@ -78,6 +86,11 @@ public:
     void setRearShieldMax(float amount) { if (amount < 0) return; shield_max[1] = amount; shield_level[1] = std::min(shield_level[1], shield_max[1]); }
 
     void setRadarTrace(string trace) { radar_trace = trace; }
+
+    bool getSharesEnergyWithDocked() { return shares_energy_with_docked; }
+    void setSharesEnergyWithDocked(bool enabled) { shares_energy_with_docked = enabled; }
+    bool getRepairDocked() { return repair_docked; }
+    void setRepairDocked(bool enabled) { repair_docked = enabled; }
     
     string getShieldDataString();
 };

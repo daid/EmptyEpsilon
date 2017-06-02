@@ -5,6 +5,7 @@
 #include "main.h"
 
 #include "screenComponents/indicatorOverlays.h"
+#include "screenComponents/scrollingBanner.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_togglebutton.h"
 
@@ -19,21 +20,31 @@ TopDownScreen::TopDownScreen()
     camera_position.z = 7000.0;
 
     // Let the screen operator select a player ship to lock the camera onto.
-    // This selector is visible only if the lock toggle is on and at least one
-    // player ship exists.
     camera_lock_selector = new GuiSelector(this, "CAMERA_LOCK_SELECTOR", [this](int index, string value) {
         P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(value.toInt());
         if (ship)
             target = ship;
     });
-    camera_lock_selector->setPosition(20, -80, ABottomLeft)->setSize(300, 50)->hide();
+    camera_lock_selector->setSelectionIndex(0)->setPosition(20, -80, ABottomLeft)->setSize(300, 50)->hide();
 
     // Toggle whether to lock onto a player ship.
-    // This button is visible only if at least one player ship exists.
     camera_lock_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOGGLE", "Lock camera on ship", [this](bool value) {});
     camera_lock_toggle->setPosition(20, -20, ABottomLeft)->setSize(300, 50)->hide();
 
     new GuiIndicatorOverlays(this);
+
+    (new GuiScrollingBanner(this))->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, 100);
+
+    // Lock onto the first player ship to start.
+    for(int n = 0; n < GameGlobalInfo::max_player_ships; n++)
+    {
+        if (gameGlobalInfo->getPlayerShip(n))
+        {
+            target = gameGlobalInfo->getPlayerShip(n);
+            camera_lock_toggle->setValue(true);
+            break;
+        }
+    }
 }
 
 void TopDownScreen::update(float delta)
@@ -86,9 +97,9 @@ void TopDownScreen::update(float delta)
     }
 }
 
-void TopDownScreen::onKey(sf::Keyboard::Key key, int unicode)
+void TopDownScreen::onKey(sf::Event::KeyEvent key, int unicode)
 {
-    switch(key)
+    switch(key.code)
     {
     // Toggle UI visibility with the H key.
     case sf::Keyboard::H:
@@ -138,13 +149,13 @@ void TopDownScreen::onKey(sf::Keyboard::Key key, int unicode)
     // Zoom the camera in and out with the R and F keys.
     case sf::Keyboard::R:
         if (camera_position.z > 1000.0)
-            camera_position.z = camera_position.z - 100;
+            camera_position.z -= 100.0;
         else
             camera_position.z = 1000.0;
         break;
     case sf::Keyboard::F:
         if (camera_position.z < 10000.0)
-            camera_position.z = camera_position.z + 100;
+            camera_position.z += 100.0;
         else
             camera_position.z = 10000.0;
         break;

@@ -1,5 +1,5 @@
-#ifndef GUI_SCROLL_TEXT_H
-#define GUI_SCROLL_TEXT_H
+#ifndef GUI_SCROLLTEXT_H
+#define GUI_SCROLLTEXT_H
 
 #include "gui2_element.h"
 #include "gui2_scrollbar.h"
@@ -26,4 +26,4 @@ public:
     virtual void onDraw(sf::RenderTarget& window);
 };
 
-#endif//GUI_SCROLL_TEXT_H
+#endif//GUI_SCROLLTEXT_H

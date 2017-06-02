@@ -4,6 +4,7 @@
 #include <functional>
 #include "stringImproved.h"
 #include "colorConfig.h"
+#include "hotkeyConfig.h"
 #include "gui2_container.h"
 #include "main.h"
 
@@ -49,8 +50,8 @@ public:
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
-    virtual bool onKey(sf::Keyboard::Key key, int unicode);
-    virtual bool onHotkey(sf::Keyboard::Key key, int unicode);
+    virtual bool onKey(sf::Event::KeyEvent key, int unicode);
+    virtual void onHotkey(const HotkeyResult& key);
     virtual bool onJoystickXYMove(sf::Vector2f position);
     virtual bool onJoystickZMove(float position);
     virtual bool onJoystickRMove(float position);
