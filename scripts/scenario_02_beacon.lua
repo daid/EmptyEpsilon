@@ -1,5 +1,7 @@
 -- Name: Beacon of light series
--- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org
+-- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org.
+--- Near the far outpost of Orion-5, Kraylor attacks are increasing. A diplomat went missing, and your mission will start with recovering him. (Must use Epsilon as ship)
+-- Type: Mission
 
 -- Init is run when the scenario is started. Create your initial world
 function init()
@@ -251,8 +253,9 @@ function missionStopTransport(delta)
         transport_target:setImpulseMaxSpeed(70):setJumpDrive(true)
         mission_state = missionTransportWaitForRecovery
         mission_timer = 40
-        
-        transport_recovery_team = CpuShip():setTemplate("Flavia"):setFaction("Human Navy"):setPosition(-22000, 30000)
+		
+        local x, y = transport_target:getPosition()
+        transport_recovery_team = CpuShip():setTemplate("Flavia"):setFaction("Human Navy"):setPosition(x - random(8000, 10000), y + random(8000, 10000))
         transport_recovery_team:setCallSign("RTRV"):setScanned(true)
         transport_recovery_team:orderFlyTowardsBlind(transport_target:getPosition()):setCommsScript("")
     end

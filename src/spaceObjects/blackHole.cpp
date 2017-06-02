@@ -1,5 +1,7 @@
 #include "blackHole.h"
 #include "pathPlanner.h"
+#include "main.h"
+#include <SFML/OpenGL.hpp>
 
 #include "scriptInterface.h"
 
@@ -15,6 +17,7 @@ BlackHole::BlackHole()
 {
     update_delta = 0.0;
     PathPlannerManager::getInstance()->addAvoidObject(this, 7000);
+    setRadarSignatureInfo(0.9, 0, 0);
 }
 
 void BlackHole::update(float delta)
@@ -22,9 +25,28 @@ void BlackHole::update(float delta)
     update_delta = delta;
 }
 
-void BlackHole::draw3D()
+#if FEATURE_3D_RENDERING
+void BlackHole::draw3DTransparent()
 {
+    float distance = sf::length(camera_position - sf::Vector3f(getPosition().x, getPosition().y, 0));
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    ShaderManager::getShader("billboardShader")->setParameter("textureMap", *textureManager.getTexture("blackHole3d.png"));
+    sf::Shader::bind(ShaderManager::getShader("billboardShader"));
+    glColor4f(1, 1, 1, 5000.0);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glVertex3f(0, 0, 0);
+    glTexCoord2f(1, 0);
+    glVertex3f(0, 0, 0);
+    glTexCoord2f(1, 1);
+    glVertex3f(0, 0, 0);
+    glTexCoord2f(0, 1);
+    glVertex3f(0, 0, 0);
+    glEnd();
+    glBlendFunc(GL_ONE, GL_ONE);
 }
+#endif
 
 void BlackHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {

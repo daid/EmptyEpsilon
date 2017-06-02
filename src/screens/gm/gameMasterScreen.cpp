@@ -31,16 +31,18 @@ GameMasterScreen::GameMasterScreen()
     box_selection_overlay = new GuiOverlay(main_radar, "BOX_SELECTION", sf::Color(255, 255, 255, 32));
     box_selection_overlay->hide();
     
-    (new GuiToggleButton(this, "PAUSE_BUTTON", "Pause", [this](bool value) {
+    pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", "Pause", [this](bool value) {
         if (!value)
             engine->setGameSpeed(1.0f);
         else
             engine->setGameSpeed(0.0f);
-    }))->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, ATopLeft)->setSize(250, 50);
+    });
+    pause_button->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, ATopLeft)->setSize(250, 50);
 
-    (new GuiToggleButton(this, "", "Intercept all comms", [this](bool value) {
+    intercept_comms_button = new GuiToggleButton(this, "INTERCEPT_COMMS_BUTTON", "Intercept all comms", [this](bool value) {
         gameGlobalInfo->intercept_all_comms_to_gm = value;
-    }))->setValue(gameGlobalInfo->intercept_all_comms_to_gm)->setTextSize(20)->setPosition(300, 20, ATopLeft)->setSize(200, 25);
+    });
+    intercept_comms_button->setValue(gameGlobalInfo->intercept_all_comms_to_gm)->setTextSize(20)->setPosition(300, 20, ATopLeft)->setSize(200, 25);
     
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR", [this](int index, string value) {
         for(P<SpaceObject> obj : targets.getTargets())
@@ -52,9 +54,10 @@ GameMasterScreen::GameMasterScreen()
         faction_selector->addEntry(info->getName(), info->getName());
     faction_selector->setPosition(20, 70, ATopLeft)->setSize(250, 50);
     
-    (new GuiButton(this, "GLOBAL_MESSAGE_BUTTON", "Global message", [this]() {
+    global_message_button = new GuiButton(this, "GLOBAL_MESSAGE_BUTTON", "Global message", [this]() {
         global_message_entry->show();
-    }))->setPosition(20, -20, ABottomLeft)->setSize(250, 50);
+    });
+    global_message_button->setPosition(20, -20, ABottomLeft)->setSize(250, 50);
 
     player_ship_selector = new GuiSelector(this, "PLAYER_SHIP_SELECTOR", [this](int index, string value) {
         P<SpaceObject> ship = gameGlobalInfo->getPlayerShip(value.toInt());
@@ -63,17 +66,22 @@ GameMasterScreen::GameMasterScreen()
         main_radar->setViewPosition(ship->getPosition());
         targets.set(ship);
     });
-    player_ship_selector->setPosition(270, -20, ABottomLeft)->setSize(250, 50);
+    player_ship_selector->setPosition(270, -20, ABottomLeft)->setSize(350, 50);
 
     create_button = new GuiButton(this, "CREATE_OBJECT_BUTTON", "Create...", [this]() {
         object_creation_screen->show();
     });
     create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
 
-    export_button = new GuiButton(this, "EXPORT_BUTTON", "Copy scenario", [this]() {
-        Clipboard::setClipboard(getScriptExport());
+    copy_scenario_button = new GuiButton(this, "COPY_SCENARIO_BUTTON", "Copy scenario", [this]() {
+        Clipboard::setClipboard(getScriptExport(false));
     });
-    export_button->setTextSize(20)->setPosition(-20, -20, ABottomRight)->setSize(125, 25);
+    copy_scenario_button->setTextSize(20)->setPosition(-20, -20, ABottomRight)->setSize(125, 25);
+
+    copy_selected_button = new GuiButton(this, "COPY_SELECTED_BUTTON", "Copy selected", [this]() {
+        Clipboard::setClipboard(getScriptExport(true));
+    });
+    copy_selected_button->setTextSize(20)->setPosition(-20, -45, ABottomRight)->setSize(125, 25);
 
     cancel_create_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
         create_button->show();
@@ -81,17 +89,28 @@ GameMasterScreen::GameMasterScreen()
     });
     cancel_create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
 
-    ship_tweak_button = new GuiButton(this, "TWEAK_SHIP", "Tweak", [this]() {
+    tweak_button = new GuiButton(this, "TWEAK_OBJECT", "Tweak", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
         {
-            if (P<SpaceShip>(obj))
+            if (P<PlayerSpaceship>(obj))
+            {
+                player_tweak_dialog->open(obj);
+                break;
+            }
+            else if (P<SpaceShip>(obj))
             {
                 ship_tweak_dialog->open(obj);
                 break;
             }
+            else
+            {
+                object_tweak_dialog->open(obj);
+                break;
+            }
         }
     });
-    ship_tweak_button->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->hide();
+    tweak_button->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->hide();
+
     player_comms_hail = new GuiButton(this, "HAIL_PLAYER", "Hail ship", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
         {
@@ -103,20 +122,23 @@ GameMasterScreen::GameMasterScreen()
         }
     });
     player_comms_hail->setPosition(20, -170, ABottomLeft)->setSize(250, 50)->hide();
-    
+
     info_layout = new GuiAutoLayout(this, "INFO_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     info_layout->setPosition(-20, 20, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
     
     gm_script_options = new GuiListbox(this, "GM_SCRIPT_OPTIONS", [this](int index, string value)
     {
+        gm_script_options->setSelectionIndex(-1);
         int n = 0;
         for(GMScriptCallback& callback : gameGlobalInfo->gm_callback_functions)
         {
             if (n == index)
+            {
                 callback.callback.call();
+                return;
+            }
             n++;
         }
-        gm_script_options->setSelectionIndex(-1);
     });
     gm_script_options->setPosition(20, 130, ATopLeft)->setSize(250, 500);
     
@@ -134,7 +156,7 @@ GameMasterScreen::GameMasterScreen()
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderRoaming();
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    (new GuiButton(order_layout, "ORDER_STAND_GROUND", "Stand Ground", [this]() {
+    (new GuiButton(order_layout, "ORDER_STAND_GROUND", "Stand ground", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderStandGround();
@@ -153,8 +175,12 @@ GameMasterScreen::GameMasterScreen()
         chat_dialog_per_ship[n]->hide();
     }
 
-    ship_tweak_dialog = new GuiShipTweak(this);
+    player_tweak_dialog = new GuiObjectTweak(this, TW_Player);
+    player_tweak_dialog->hide();
+    ship_tweak_dialog = new GuiObjectTweak(this, TW_Ship);
     ship_tweak_dialog->hide();
+    object_tweak_dialog = new GuiObjectTweak(this, TW_Object);
+    object_tweak_dialog->hide();
 
     global_message_entry = new GuiGlobalMessageEntry(this);
     global_message_entry->hide();
@@ -179,7 +205,7 @@ void GameMasterScreen::update(float delta)
             main_radar->longRange();
     }
     
-    bool has_ship = false;
+    bool has_object = false;
     bool has_cpu_ship = false;
     bool has_player_ship = false;
 
@@ -205,28 +231,29 @@ void GameMasterScreen::update(float delta)
         }
     }
 
+    // Record object type.
     for(P<SpaceObject> obj : targets.getTargets())
     {
-        if (P<SpaceShip>(obj))
-        {
-            has_ship = true;
-            if (P<CpuShip>(obj))
-                has_cpu_ship = true;
-            else if (P<PlayerSpaceship>(obj))
-                has_player_ship = true;
-        }
+        has_object = true;
+        if (P<CpuShip>(obj))
+            has_cpu_ship = true;
+        else if (P<PlayerSpaceship>(obj))
+            has_player_ship = true;
     }
-    if (player_ship_selector->entryCount() == 0)
-        player_ship_selector->hide();
-    else
-        player_ship_selector->show();
 
-    ship_tweak_button->setVisible(has_ship);
+    // Show player ship selector only if there are player ships.
+    player_ship_selector->setVisible(player_ship_selector->entryCount() > 0);
+
+    // Show tweak button.
+    tweak_button->setVisible(has_object);
+
     order_layout->setVisible(has_cpu_ship);
     gm_script_options->setVisible(!has_cpu_ship);
     player_comms_hail->setVisible(has_player_ship);
     
     std::unordered_map<string, string> selection_info;
+
+    // For each selected object, determine and report their type.
     for(P<SpaceObject> obj : targets.getTargets())
     {
         std::unordered_map<string, string> info = obj->getGMInfo();
@@ -242,6 +269,7 @@ void GameMasterScreen::update(float delta)
             }
         }
     }
+
     if (targets.getTargets().size() == 1)
     {
         selection_info["Position"] = string(targets.getTargets()[0]->getPosition().x, 0) + "," + string(targets.getTargets()[0]->getPosition().y, 0);
@@ -428,18 +456,19 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
     box_selection_overlay->hide();
 }
 
-void GameMasterScreen::onKey(sf::Keyboard::Key key, int unicode)
+void GameMasterScreen::onKey(sf::Event::KeyEvent key, int unicode)
 {
-    switch(key)
+    switch(key.code)
     {
     case sf::Keyboard::Delete:
         for(P<SpaceObject> obj : targets.getTargets())
         {
-            obj->destroy();
+            if (obj)
+                obj->destroy();
         }
         break;
     case sf::Keyboard::F5:
-        Clipboard::setClipboard(getScriptExport());
+        Clipboard::setClipboard(getScriptExport(false));
         break;
 
     //TODO: This is more generic code and is duplicated.
@@ -462,10 +491,18 @@ PVector<SpaceObject> GameMasterScreen::getSelection()
     return targets.getTargets();
 }
 
-string GameMasterScreen::getScriptExport()
+string GameMasterScreen::getScriptExport(bool selected_only)
 {
     string output;
-    foreach(SpaceObject, obj, space_object_list)
+    PVector<SpaceObject> objs;
+    if (selected_only)
+    {
+        objs = targets.getTargets();
+    }else{
+        objs = space_object_list;
+    }
+    
+    foreach(SpaceObject, obj, objs)
     {
         string line = obj->getExportLine();
         if (line == "")

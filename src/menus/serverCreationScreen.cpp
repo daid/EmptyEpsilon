@@ -13,6 +13,7 @@
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_scrolltext.h"
+#include "scenarioInfo.h"
 #include "main.h"
 
 ServerCreationScreen::ServerCreationScreen()
@@ -85,7 +86,7 @@ ServerCreationScreen::ServerCreationScreen()
     (new GuiLabel(row, "WARP_JUMP_LABEL", "Warp/Jump: ", 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiSelector(row, "WARP_JUMP_SELECT", [](int index, string value) {
         gameGlobalInfo->player_warp_jump_drive_setting = EPlayerWarpJumpDrive(index);
-    }))->setOptions({"Ship default", "Warp drive", "Jump drive", "Both"})->setSelectionIndex((int)gameGlobalInfo->player_warp_jump_drive_setting)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    }))->setOptions({"Ship default", "Warp drive", "Jump drive", "Both", "Neither"})->setSelectionIndex((int)gameGlobalInfo->player_warp_jump_drive_setting)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Radar range limit row.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
@@ -183,22 +184,8 @@ ServerCreationScreen::ServerCreationScreen()
     // For each scenario file, extract its name, then add it to the list.
     for(string filename : scenario_filenames)
     {
-        P<ResourceStream> stream = getResourceStream(filename);
-        if (!stream) continue;
-
-        string name = filename.substr(9, -4);
-
-        for(int i=0; i<10; i++)
-        {
-            string line = stream->readLine().strip();
-            // Get the scenario name from Lua comments that begin with "Name:".
-            if (!line.startswith("--"))
-                continue;
-            line = line.substr(2).strip();
-            if (line.startswith("Name:"))
-                name = line.substr(5).strip();
-        }
-        scenario_list->addEntry(name, filename);
+        ScenarioInfo info(filename);
+        scenario_list->addEntry(info.name, filename);
     }
     // Select the first scenario in the list by default.
     scenario_list->setSelectionIndex(0);
@@ -223,30 +210,13 @@ void ServerCreationScreen::selectScenario(string filename)
     variation_description->setText("No variation selected. Play the scenario as intended.");
 
     // Open the scenario file.
-    P<ResourceStream> stream = getResourceStream(selected_scenario_filename);
-    if (!stream) return;
+    ScenarioInfo info(selected_scenario_filename);
+    scenario_description->setText(info.description);
 
-    for(int i=0; i<30; i++)
+    for(auto variation : info.variations)
     {
-        string line = stream->readLine().strip();
-        // Read only comments in the Lua file.
-        if (!line.startswith("--"))
-            continue;
-        line = line.substr(2).strip();
-        // If the comment starts with "Description:", get that line as the
-        // scenario description.
-        if (line.startswith("Description:"))
-            scenario_description->setText(line.substr(12).strip());
-        // If it starts with "Variation[", get and parse that line as a
-        // scenario variation.
-        if (line.startswith("Variation["))
-        {
-            line = line.substr(10).strip();
-            string variation_name = line.substr(0, line.find("]"));
-
-            variation_names_list.push_back(variation_name);
-            variation_descriptions_list.push_back(line.substr(line.find("]")+2).strip());
-        }
+        variation_names_list.push_back(variation.first);
+        variation_descriptions_list.push_back(variation.second);
     }
     
     variation_selection->setOptions(variation_names_list);

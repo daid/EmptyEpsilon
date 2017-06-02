@@ -18,7 +18,10 @@ SupplyDrop::SupplyDrop()
 {
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = 0;
+
     energy = 0.0;
+    setRadarSignatureInfo(0.0, 0.1, 0.1);
+
     model_info.setData("ammo_box");
 }
 

@@ -36,5 +36,4 @@ private:
     const MissileWeaponData& data;
 };
 
-#endif//NUKE_H
-
+#endif//MINE_H

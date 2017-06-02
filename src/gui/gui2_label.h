@@ -26,5 +26,4 @@ public:
     GuiLabel* setBold(bool bold=true);
 };
 
-
 #endif//GUI2_LABEL_H

@@ -1,5 +1,5 @@
-#ifndef GUI2_TOGGLE_BUTTON_H
-#define GUI2_TOGGLE_BUTTON_H
+#ifndef GUI2_TOGGLEBUTTON_H
+#define GUI2_TOGGLEBUTTON_H
 
 #include "gui2_button.h"
 
@@ -20,4 +20,4 @@ private:
     void onClick();
 };
 
-#endif//GUI2_TOGGLE_BUTTON_H
+#endif//GUI2_TOGGLEBUTTON_H

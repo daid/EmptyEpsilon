@@ -14,4 +14,4 @@ public:
     virtual void hitObject(P<SpaceObject> object);
 };
 
-#endif//HOMING_MISSLE_H
+#endif//HVLI_H

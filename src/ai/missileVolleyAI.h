@@ -1,5 +1,5 @@
-#ifndef FIGHTER_AI_H
-#define FIGHTER_AI_H
+#ifndef MISSILE_VOLLEY_AI_H
+#define MISSILE_VOLLEY_AI_H
 
 #include "ai.h"
 
@@ -29,4 +29,4 @@ public:
 };
 
 
-#endif//FIGHTER_AI_H
+#endif//MISSILE_VOLLEY_AI_H

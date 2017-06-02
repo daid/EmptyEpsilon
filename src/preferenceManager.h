@@ -13,8 +13,6 @@ public:
     
     static void load(string filename);
     static void save(string filename);
-    
-    static sf::Keyboard::Key getKey(string key);
 };
 
 #endif//PREFERENCES_MANAGER_H

@@ -23,6 +23,7 @@ enum EPlayerWarpJumpDrive
     PWJ_WarpDrive,
     PWJ_JumpDrive,
     PWJ_WarpAndJumpDrive,
+    PWJ_None,
     PWJ_MAX,
 };
 enum EScanningComplexity
@@ -56,6 +57,8 @@ private:
 public:
     string global_message;
     float global_message_timeout;
+    
+    string banner_string;
 
     std::vector<float> reputation_points;
     NebulaInfo nebula_info[max_nebulas];

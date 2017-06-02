@@ -12,6 +12,9 @@
 #include "screens/crew6/engineeringScreen.h"
 #include "screens/crew6/scienceScreen.h"
 #include "screens/crew6/relayScreen.h"
+#include "screens/crew4/tacticalScreen.h"
+#include "screens/crew4/engineeringAdvancedScreen.h"
+#include "screens/crew4/operationsScreen.h"
 
 #include "screenComponents/indicatorOverlays.h"
 
@@ -36,18 +39,19 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(TutorialGame)
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, finish);
 }
 
-TutorialGame::TutorialGame()
+TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
 {
     new LocalOnlyGame();
 
     new GuiOverlay(this, "", colorConfig.background);
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
-    
-    viewport = nullptr;
+
+    this->viewport = nullptr;
+    this->repeated_tutorial = repeated_tutorial;
 
     script = new ScriptObject();
     script->registerObject(this, "tutorial");
-    script->run("tutorial.lua");
+    script->run(filename);
 }
 
 void TutorialGame::createScreens()
@@ -68,21 +72,31 @@ void TutorialGame::createScreens()
     station_screen[2] = new EngineeringScreen(this);
     station_screen[3] = new ScienceScreen(this);
     station_screen[4] = new RelayScreen(this);
-    for(int n=0; n<5; n++)
+    station_screen[5] = new TacticalScreen(this);
+    station_screen[6] = new EngineeringAdvancedScreen(this);
+    station_screen[7] = new OperationScreen(this);
+    for(int n=0; n<8; n++)
         station_screen[n]->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopLeft);
 
     new GuiIndicatorOverlays(this);
-    
+
     frame = new GuiPanel(this, "");
     frame->setPosition(0, 0, ATopCenter)->setSize(900, 230)->hide();
-    
+
     text = new GuiScrollText(frame, "", "");
     text->setTextSize(20)->setPosition(20, 20, ATopLeft)->setSize(900 - 40, 200 - 40);
     next_button = new GuiButton(frame, "", "Next", [this]() {
         _onNext.call();
     });
     next_button->setTextSize(30)->setPosition(-20, -20, ABottomRight)->setSize(300, 30);
-    
+
+    if (repeated_tutorial)
+    {
+        (new GuiButton(this, "", "Reset", [this]()
+        {
+            finish();
+        }))->setPosition(-20, 20, ATopRight)->setSize(120, 50);
+    }
     hideAllScreens();
 
     engine->setGameSpeed(1.0);
@@ -112,9 +126,9 @@ void TutorialGame::update(float delta)
     }
 }
 
-void TutorialGame::onKey(sf::Keyboard::Key key, int unicode)
+void TutorialGame::onKey(sf::Event::KeyEvent key, int unicode)
 {
-    switch(key)
+    switch(key.code)
     {
     case sf::Keyboard::Escape:
     case sf::Keyboard::Home:
@@ -128,7 +142,7 @@ void TutorialGame::onKey(sf::Keyboard::Key key, int unicode)
 void TutorialGame::setPlayerShip(P<PlayerSpaceship> ship)
 {
     my_player_info->commandSetShipId(ship->getMultiplayerId());
-    
+
     if (viewport == nullptr)
         createScreens();
 }
@@ -184,7 +198,7 @@ void TutorialGame::switchViewToScreen(int n)
     if (viewport == nullptr)
         return;
 
-    if (n < 0 || n >= 5)
+    if (n < 0 || n >= 8)
         return;
     hideAllScreens();
     station_screen[n]->show();
@@ -208,11 +222,23 @@ void TutorialGame::setMessageToBottomPosition()
 
 void TutorialGame::finish()
 {
-    script->destroy();
-    destroy();
-    
-    disconnectFromServer();
-    returnToMainMenu();
+    if (repeated_tutorial)
+    {
+        foreach(SpaceObject, obj, space_object_list)
+            obj->destroy();
+        script->destroy();
+        hideAllScreens();
+
+        script = new ScriptObject();
+        script->registerObject(this, "tutorial");
+        script->run("tutorial.lua");
+    }else{
+        script->destroy();
+        destroy();
+
+        disconnectFromServer();
+        returnToMainMenu();
+    }
 }
 
 void TutorialGame::hideAllScreens()
@@ -223,8 +249,8 @@ void TutorialGame::hideAllScreens()
     viewport->hide();
     tactical_radar->hide();
     long_range_radar->hide();
-    
-    for(int n=0; n<5; n++)
+
+    for(int n=0; n<8; n++)
     {
         station_screen[n]->hide();
     }

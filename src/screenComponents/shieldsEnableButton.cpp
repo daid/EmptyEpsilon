@@ -45,3 +45,16 @@ void GuiShieldsEnableButton::onDraw(sf::RenderTarget& window)
         }
     }
 }
+
+void GuiShieldsEnableButton::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "WEAPONS" && my_spaceship)
+    {
+        if (key.hotkey == "TOGGLE_SHIELDS")
+            my_spaceship->commandSetShields(!my_spaceship->shields_active);
+        if (key.hotkey == "ENABLE_SHIELDS")
+            my_spaceship->commandSetShields(true);
+        if (key.hotkey == "DISABLE_SHIELDS")
+            my_spaceship->commandSetShields(false);
+    }
+}

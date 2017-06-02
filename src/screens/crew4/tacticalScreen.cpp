@@ -113,7 +113,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     });
     missile_aim->hide()->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
-    lock_aim->setPosition(300, 70, ATopCenter)->setSize(110, 50);
+    lock_aim->setPosition(250, 20, ATopCenter)->setSize(110, 50);
 
     // Combat maneuver and propulsion controls in the bottom right corner.
     (new GuiCombatManeuver(this, "COMBAT_MANEUVER"))->setPosition(-20, -390, ABottomRight)->setSize(200, 150);
@@ -141,4 +141,90 @@ void TacticalScreen::onDraw(sf::RenderTarget& window)
         targets.set(my_spaceship->getTarget());
     }
     GuiOverlay::onDraw(window);
+}
+
+void TacticalScreen::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "HELMS" && my_spaceship)
+    {
+        if (key.hotkey == "TURN_LEFT")
+            my_spaceship->commandTargetRotation(my_spaceship->getRotation() - 5.0f);
+        else if (key.hotkey == "TURN_RIGHT")
+            my_spaceship->commandTargetRotation(my_spaceship->getRotation() + 5.0f);
+    }
+    if (key.category == "WEAPONS" && my_spaceship)
+    {
+        if (key.hotkey == "NEXT_ENEMY_TARGET")
+        {
+            bool current_found = false;
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get())
+                {
+                    current_found = true;
+                    continue;
+                }
+                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get())
+                {
+                    continue;
+                }
+                if (my_spaceship->isEnemy(obj) && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+        }
+        if (key.hotkey == "NEXT_TARGET")
+        {
+            bool current_found = false;
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get())
+                {
+                    current_found = true;
+                    continue;
+                }
+                if (obj == my_spaceship)
+                    continue;
+                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get() || obj == my_spaceship)
+                    continue;
+                if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+        }
+        if (key.hotkey == "AIM_MISSILE_LEFT")
+        {
+            missile_aim->setValue(missile_aim->getValue() - 5.0f);
+            tube_controls->setMissileTargetAngle(missile_aim->getValue());
+        }
+        if (key.hotkey == "AIM_MISSILE_RIGHT")
+        {
+            missile_aim->setValue(missile_aim->getValue() + 5.0f);
+            tube_controls->setMissileTargetAngle(missile_aim->getValue());
+        }
+    }
 }

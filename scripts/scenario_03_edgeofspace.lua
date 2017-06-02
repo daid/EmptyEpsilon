@@ -1,5 +1,8 @@
 -- Name: The Edge-of-Space
--- Description: You command the Technician Cruiser Apollo, a repair ship on the border of dangerous space. The Apollo is outfitted with minimal weapons as there is a cease-fire between the Human Navy and the neighboring Kraylor. You are tasked with discovering the cause of damage on one of your deep space telescopes.
+-- Description: You command the Technician Cruiser Apollo, a repair ship on the border of dangerous space.
+--- The Apollo is outfitted with minimal weapons as there is a cease-fire between the Human Navy and the neighboring Kraylor.
+---- You are tasked with discovering the cause of damage on one of your deep space telescopes.
+-- Type: Mission
 -- Author: Visjammer
 
 -- Init is run when the scenario is started. Create your initial world

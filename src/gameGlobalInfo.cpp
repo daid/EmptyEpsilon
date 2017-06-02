@@ -39,6 +39,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&scanning_complexity);
     registerMemberReplication(&global_message);
     registerMemberReplication(&global_message_timeout, 1.0);
+    registerMemberReplication(&banner_string);
     registerMemberReplication(&victory_faction);
     registerMemberReplication(&long_range_radar_range);
     registerMemberReplication(&use_beam_shield_frequencies);
@@ -206,7 +207,7 @@ string getSectorName(sf::Vector2f position)
     if (sector_y >= 0)
         y = string(char('A' + (sector_y)));
     else
-        y = string(char('z' + 1 + sector_y)) + string(char('z' + 1 + sector_y));
+        y = string(char('z' + sector_y / 20)) + string(char('z' + 1 + (sector_y % 26)));
     if (sector_x >= 0)
         x = string(sector_x);
     else
@@ -235,6 +236,15 @@ static int globalMessage(lua_State* L)
 /// globalMessage(string)
 /// Show a global message on the main screens of all active player ships.
 REGISTER_SCRIPT_FUNCTION(globalMessage);
+
+static int setBanner(lua_State* L)
+{
+    gameGlobalInfo->banner_string = luaL_checkstring(L, 1);
+    return 0;
+}
+/// setBanner(string)
+/// Show a scrolling banner containing this text on the cinematic and top down views.
+REGISTER_SCRIPT_FUNCTION(setBanner);
 
 static int getPlayerShip(lua_State* L)
 {
@@ -282,6 +292,14 @@ static int getObjectsInRadius(lua_State* L)
 /// getObjectsInRadius(x, y, radius)
 /// Return a list of all space objects at the x,y location within a certain radius.
 REGISTER_SCRIPT_FUNCTION(getObjectsInRadius);
+
+static int getAllObjects(lua_State* L)
+{
+    return convert<PVector<SpaceObject> >::returnType(L, space_object_list);
+}
+/// getAllObjects()
+/// Return a list of all space objects. (Use with care, this could return a very long list which could slow down the game when called every update)
+REGISTER_SCRIPT_FUNCTION(getAllObjects);
 
 static int getScenarioVariation(lua_State* L)
 {
