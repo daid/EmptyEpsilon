@@ -3,6 +3,7 @@
 
 #include <SFML/Window/Event.hpp>
 #include "stringImproved.h"
+#include <tuple>
 
 class HotkeyConfigItem
 {
