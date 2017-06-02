@@ -18,7 +18,7 @@ RadarScreen::RadarScreen(GuiContainer* owner,string type)
 : GuiOverlay(owner, "RADAR_SCREEN", colorConfig.background)
 {
 
-    if (type == "tactial"){
+    if (type == "tactical"){
       tactical_radar = new GuiRadarView(this, "TACTICAL", 5000.0f, nullptr);
       tactical_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
       tactical_radar->setRangeIndicatorStepSize(1000.0f)->shortRange()->enableCallsigns()->show();
