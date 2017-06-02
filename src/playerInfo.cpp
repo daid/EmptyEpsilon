@@ -20,7 +20,7 @@
 
 #include "screens/extra/shipLogScreen.h"
 
-#include "screens/extra/RadarScreen.h"
+#include "screens/extra/radarScreen.h"
 
 #include "screenComponents/mainScreenControls.h"
 #include "screenComponents/selfDestructEntry.h"
