@@ -13,7 +13,7 @@ private:
     GuiRadarView* relay_radar;
 public:
     string type;
-    TacticalRadarScreen(GuiContainer* owner, string type);
+    RadarScreen(GuiContainer* owner, string type);
 };
 
 #endif//RADAR_SCREEN_H
