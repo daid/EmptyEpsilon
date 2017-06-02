@@ -85,6 +85,9 @@ set(SOURCES
 	src/screens/extra/powerManagement.cpp
 	src/screens/extra/databaseScreen.cpp
 	src/screens/extra/shipLogScreen.cpp
+	src/screens/extra/tacticalRadar.cpp
+	src/screens/extra/scienceRadar.cpp
+	src/screens/extra/relayRadar.cpp
 	src/screens/gm/gameMasterScreen.cpp
 	src/screens/gm/chatDialog.cpp
 	src/screens/gm/tweak.cpp
