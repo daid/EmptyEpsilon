@@ -1,6 +1,7 @@
 #ifndef HOTKEY_CONFIG_H
 #define HOTKEY_CONFIG_H
 
+#include <tuple>
 #include <SFML/Window/Event.hpp>
 #include "stringImproved.h"
 
