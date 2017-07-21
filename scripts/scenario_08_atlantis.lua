@@ -1,4 +1,4 @@
--- Name: Birth of the Altantis
+-- Name: Birth of the Atlantis
 -- Description: You are the first crew of a new and improved version of the Atlantis space explorer.
 --- Your mission will be to take it trough it's first tests and initial mission.
 -- Type: Mission
