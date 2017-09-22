@@ -453,26 +453,30 @@ class Event:
             raise UnknownArtemisTagError(node)
     
     def parseCreateCount(self, object_create_script, node):
-        count = convertFloat(node.get('count'))
+        count = int(eval    (str(node.get('count')), {}, {}))
         x, y = convertPosition(node.get('startX', 0), node.get('startZ', 0))
-        self._body.append('tmp_count = %s' % (count))
-        self._body.append('for tmp_counter=1,tmp_count do')
-        if node.get('radius') is not None:
-            radius = convertFloat(node.get('radius'))
-            start_angle = float(node.get('startAngle', 0)) - 90
-            end_angle = float(node.get('endAngle', 360)) - 90
-            self._body.append('    tmp_x, tmp_y = vectorFromAngle(%s + (%s - %s) * (tmp_counter - 1) / tmp_count, %s)' % (start_angle, end_angle, start_angle, radius))
-            self._body.append('    tmp_x, tmp_y = tmp_x + %s, tmp_y + %s' % (x, y))
+        if count == 1:
+            self._body.append('%s:setPosition(%s, %s)' % (object_create_script, x, y))
         else:
-            x2, y2 = convertPosition(node.get('endX'), node.get('endZ'))
-            self._body.append('    tmp_x = %s + (%s - %s) * (tmp_counter - 1) / tmp_count' % (x, x2, x))
-            self._body.append('    tmp_y = %s + (%s - %s) * (tmp_counter - 1) / tmp_count' % (y, y2, y))
-        if node.get('randomRange') is not None:
-            random_range = convertFloat(node.get('randomRange', 0))
-            self._body.append('    tmp_x2, tmp_y2 = vectorFromAngle(random(0, 360), random(0, %s))' % (random_range))
-            self._body.append('    tmp_x, tmp_y = tmp_x + tmp_x2, tmp_y + tmp_y2')
-        self._body.append('    %s:setPosition(tmp_x, tmp_y)' % (object_create_script))
-        self._body.append('end')
+            self._body.append('tmp_count = %s' % (count))
+            self._body.append('for tmp_counter=1,tmp_count do')
+            if node.get('radius') is not None:
+                radius = convertFloat(node.get('radius'))
+                start_angle = float(node.get('startAngle', 0)) - 90
+                end_angle = float(node.get('endAngle', 360)) - 90
+                self._body.append('    tmp_x, tmp_y = vectorFromAngle(%s + (%s - %s) * (tmp_counter - 1) / tmp_count, %s)' % (start_angle, end_angle, start_angle, radius))
+                self._body.append('    tmp_x, tmp_y = tmp_x + %s, tmp_y + %s' % (x, y))
+            else:
+                x2, y2 = convertPosition(node.get('endX'), node.get('endZ'))
+                self._body.append('    tmp_x = %s + (%s - %s) * (tmp_counter - 1) / tmp_count' % (x, x2, x))
+                self._body.append('    tmp_y = %s + (%s - %s) * (tmp_counter - 1) / tmp_count' % (y, y2, y))
+            if node.get('randomRange') is not None:
+                random_range = convertFloat(node.get('randomRange', 0))
+                self._body.append('    tmp_x2, tmp_y2 = vectorFromAngle(random(0, 360), random(0, %s))' % (random_range))
+                self._body.append('    tmp_x, tmp_y = tmp_x + tmp_x2, tmp_y + tmp_y2')
+            self._body.append('    %s:setPosition(tmp_x, tmp_y)' % (object_create_script))
+            self._body.append('end')
+
 
     def addToFleet(self, name, node, fleetnumber=-1):
         if fleetnumber != -1:
