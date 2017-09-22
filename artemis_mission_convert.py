@@ -45,7 +45,13 @@ def convertName(name):
             prefix = 'object_'
     except ValueError:
         pass
-    return '%s%s' % (prefix, name.replace(' ', '_').replace('-', '_').replace('*', 'X').replace('.', '__'))
+    return '%s%s' % (prefix, name.replace(' ', '_')
+                                 .replace('-', '_')
+                                 .replace('*', 'X')
+                                 .replace('.', '__')
+                                 .replace('/', '___')
+                                 .replace('=', 'equals')
+                                 .replace('\'', '____'))
 
 def convertRaceKeys(node, default=None):
     keys = node.get('raceKeys', default)
