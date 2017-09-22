@@ -135,24 +135,24 @@ def convert_positions(node):
     positions = set()
     if 'C' in node.get("consoles"):
         positions.add("relayOfficer")
-        positions.add("operationsOfficer")
-        positions.add("singlePilot")
+        #positions.add("operationsOfficer")
+        #positions.add("singlePilot")
     if 'H' in node.get("consoles"):
         positions.add("helmsOfficer")
-        positions.add("tacticalOfficer")
-        positions.add("singlePilot")
+        #positions.add("tacticalOfficer")
+        #positions.add("singlePilot")
     if 'W' in node.get("consoles"):
         positions.add("weaponsOfficer")
-        positions.add("tacticalOfficer")
-        positions.add("singlePilot")
+        #positions.add("tacticalOfficer")
+        #positions.add("singlePilot")
     if 'E' in node.get("consoles"):
         positions.add("engineering")
-        positions.add("engineeringAdvanced")
-        positions.add("singlePilot")
+        #positions.add("engineeringAdvanced")
+        #positions.add("singlePilot")
     if 'S' in node.get("consoles"):
         positions.add("scienceOfficer")
-        positions.add("operationsOfficer")
-        positions.add("singlePilot")
+        #positions.add("operationsOfficer")
+        #positions.add("singlePilot")
 
     if len(positions) == 0:
         raise UnknownArtemisTagError(node)
@@ -210,7 +210,8 @@ class Event:
                     self.warning('Ignore - no player ready', node)
                 if 'M' in node.get("consoles") or 'O' in node.get('consoles'):
                     self.warning('Ignore', node)
-                self._body.append('%s:addCustomInfo(%s, %s, "%s")' % (self._player, convert_positions(node), 'warning', node.get('message')))
+                for position in convert_positions(node):
+                    self._body.append('%s:addCustomInfo("%s", "%s", "%s")' % (self._player, position, 'warning', node.get('message')))
             elif node.tag == 'start_getting_keypresses_from':
                 self.warning('Ignore', node)
             elif node.tag == 'end_getting_keypresses_from':
