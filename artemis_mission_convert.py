@@ -383,7 +383,9 @@ class Event:
                 self._body.append('%s:orderAttack(%s)' % (name, convertName(ai['ATTACK']['targetName'])))
             elif ai_list == ['POINT_THROTTLE'] or ai_list == ['FOLLOW_COMMS_ORDERS', 'POINT_THROTTLE'] or ai_list == ['CHASE_PLAYER', 'POINT_THROTTLE']:
                 x, y = convertPosition(ai['POINT_THROTTLE']['value1'], ai['POINT_THROTTLE']['value3'])
-                self._body.append('%s:orderFlyTowards(%s, %s)' % (name, x, y))
+                self._body.append('if %s ~= nil and %s:isValid() then' % (name, name))
+                self._body.append('    %s:orderFlyTowards(%s, %s)' % (name, x, y))
+                self._body.append('end')
             elif ai_list == ['CLEAR']:
                 self._body.append('%s:orderIdle()' % (name))
             elif ai_list == ['ELITE_AI']:
