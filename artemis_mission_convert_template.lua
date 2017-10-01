@@ -21,14 +21,7 @@ function vectorFromAngle(angle, length)
 end
 
 function ifOutsideBox(obj, x1, y1, x2, y2)
-	if obj == nil or not obj:isValid() then
-		return false
-	end
-	x, y = obj:getPosition()
-	if x >= x1 and x <= x2 and y >= y1 and y <= y2 then
-		return false
-	end
-	return true
+	return not ifInsideBox(obj, x1, y1, x2, y2)
 end
 
 function ifInsideBox(obj, x1, y1, x2, y2)
@@ -36,7 +29,7 @@ function ifInsideBox(obj, x1, y1, x2, y2)
 		return false
 	end
 	x, y = obj:getPosition()
-	if x >= x1 and x <= x2 and y >= y1 and y <= y2 then
+	if ((x >= x1 and x <= x2) or (x >= x2 and x <= x1)) and ((y >= y1 and y <= y2) or (y >= y2 and y <= y1)) then
 		return true
 	end
 	return false
