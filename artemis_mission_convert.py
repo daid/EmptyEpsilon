@@ -129,6 +129,19 @@ def convertSystemState(system_state):
     return None
 
 
+def convertWeaponName(weapon):
+    if weapon == 'countHoming' or weapon == 'missileStoresHoming':
+        return 'MW_Homing'
+    if weapon == 'countNuke' or weapon == 'missileStoresNuke':
+        return 'MW_Nuke'
+    if weapon == 'countMine' or weapon == 'missileStoresMine':
+        return 'MW_Mine'
+    elif weapon == 'countECM' or weapon == 'missileStoresECM':
+        return 'MW_EMP'
+    #return None #'MW_HVLI'
+    return None
+
+
 def convert_positions(node):
     positions = set()
     if node.get("consoles") == None: #if consoles is empty no position will be returned
@@ -255,6 +268,9 @@ class Event:
                     self._body.append('    %s:setPosition(x, %s)' % (name, y))
                 elif convertSystemState(property) is not None:
                     self._body.append(setSystemHealth(name, property, node.get('value')))
+                elif convertWeaponName(property):
+                    self._body.append('    %s:setWeaponStorage("%s", %s)' % (
+                        name, convertWeaponName(property), int(float(node.get('value')))))
                 elif property == 'willAcceptCommsOrders':
                     self.warning('Ignore', node)
                 elif property == 'eliteAIType':
@@ -273,6 +289,16 @@ class Event:
                 self._conditions.append('%s %s %s' % (getSystemHealth(convertName(node.get('name')),
                                                                         node.get('property')),
                                                         convertComparator(node), node.get('value')))
+            elif node.tag == 'addto_object_property':
+                name = convertName(node.get('name'))
+                property = node.get('property')
+                if convertWeaponName(property):
+                    self._body.append(
+                        '    local weapon_count = %s:getWeaponStorage("%s")' % (name, convertWeaponName(property)))
+                    self._body.append('    %s:setWeaponStorage("%s", weapon_count + %s)' % (
+                        name, convertWeaponName(property), int(float(node.get('value')))))
+                else:
+                    self.warning('Ignore', node)
             elif node.tag == 'set_fleet_property':
                 self.warning('Ignore', node)
             elif node.tag == 'set_timer':
