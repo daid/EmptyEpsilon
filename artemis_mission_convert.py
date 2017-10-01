@@ -218,7 +218,7 @@ class Event:
             elif node.tag == 'warning_popup_message':
                 if self._player is None:
                     self.warning('Ignore - no player ready', node)
-                if 'M' in node.get("consoles") or 'O' in node.get('consoles'):
+                if node.get("consoles") == None or 'M' in node.get("consoles") or 'O' in node.get('consoles'):
                     self.warning('Ignore', node)
                 for position in convert_positions(node):
                     self._body.append('%s:addCustomInfo("%s", "%s", "%s")' % (self._player, position, 'warning', node.get('message')))
