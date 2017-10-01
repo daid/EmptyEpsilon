@@ -77,9 +77,9 @@ def convertComparator(node):
     elif comparator == "less" or comparator == "<":
         return "<"
     elif comparator == "greater_equal" or comparator == "<=":
-        return "<="
-    elif comparator == "less_equal" or comparator == ">=":
         return ">="
+    elif comparator == "less_equal" or comparator == ">=":
+        return "<="
     raise UnknownArtemisTagError(node)
 
 def convertSystemName(node):
