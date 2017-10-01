@@ -221,7 +221,7 @@ class Event:
                 if node.get("consoles") == None or 'M' in node.get("consoles") or 'O' in node.get('consoles'):
                     self.warning('Ignore', node)
                 for position in convert_positions(node):
-                    self._body.append('%s:addCustomInfo("%s", "%s", "%s")' % (self._player, position, 'warning', node.get('message')))
+                    self._body.append('%s:addCustomMessage("%s", "%s", "%s")' % (self._player, position, 'warning', node.get('message')))
             elif node.tag == 'start_getting_keypresses_from':
                 self.warning('Ignore', node)
             elif node.tag == 'end_getting_keypresses_from':
