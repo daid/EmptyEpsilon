@@ -1,5 +1,3 @@
-from glob import glob
-import json
 import xml.etree.ElementTree
 import os.path
 import traceback
