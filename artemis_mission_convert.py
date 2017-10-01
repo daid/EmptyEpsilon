@@ -131,6 +131,8 @@ def convertSystemState(system_state):
 
 def convert_positions(node):
     positions = set()
+    if node.get("consoles") == None: #if consoles is empty no position will be returned
+        return []
     if 'C' in node.get("consoles"):
         positions.add("relayOfficer")
         #positions.add("operationsOfficer")
@@ -151,9 +153,6 @@ def convert_positions(node):
         positions.add("scienceOfficer")
         #positions.add("operationsOfficer")
         #positions.add("singlePilot")
-
-    if len(positions) == 0:
-        raise UnknownArtemisTagError(node)
 
     return positions
 
