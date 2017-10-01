@@ -502,9 +502,9 @@ class Event:
 
 
     def addToFleet(self, name, node, fleetnumber=-1):
-        if fleetnumber != -1:
+        if fleetnumber == -1:
             fleetnumber = int(node.get('fleetnumber', -1))
-        if fleetnumber > 0:
+        if fleetnumber >= 0:
             if 'fleet_check_%d' % (fleetnumber) not in self._done:
                 self._done['fleet_check_%d' % (fleetnumber)] = True
                 self._body.append('if fleet[%d] == nil then fleet[%d] = {} end' % (fleetnumber, fleetnumber))
