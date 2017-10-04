@@ -317,6 +317,7 @@ class Event:
                 self._body.append('tmp_x2, tmp_y2 = vectorFromAngle(%s:getRotation() + %f, %f)' % (convertName(node.get('name1')), float(node.get('angle')), float(node.get('distance'))));
                 self._body.append('%s:setPosition(x, y);' % (convertName(node.get('name2'))));
             elif node.tag == 'end_mission':
+                self.warning('Change to correct faction', node)
                 self._body.append('victory("Independent")')
             elif node.tag == 'set_player_grid_damage':
                 if convertSystemName(node) == 'warp':
