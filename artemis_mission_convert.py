@@ -564,7 +564,7 @@ class Converter:
                         continue
                     if event.getCondition() != "":
                         f.write("    if %s then\n" % event.getCondition())
-                        f.write(event.getBody(2))
+                        f.write(event.getBody(2).encode('UTF-8'))
                         warnings += event.getWarnings()
                         f.write("    end\n")
                     else:
