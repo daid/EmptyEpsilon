@@ -149,6 +149,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&combat_maneuver_boost_speed);
     registerMemberReplication(&combat_maneuver_strafe_speed);
     registerMemberReplication(&radar_trace);
+    registerMemberReplication(&object_description_scanned);
 
     for(int n=0; n<SYS_COUNT; n++)
     {
