@@ -6,6 +6,10 @@ import fnmatch
 import tokenize
 import io
 
+dict_hull_id_ships = {
+
+}
+
 class UnknownArtemisTagError(Exception):
     def __init__(self, node):
         super().__init__('%s: %s' % (node.tag, node.attrib))
@@ -193,6 +197,12 @@ def setSystemHealth(obj, property_name, value):
 def getSystemHealth(obj, property_name):
     return '%s:getSystemHealth("%s")' % (obj, convertSystemState(property_name))
 
+def getTemplate(node):
+    hull_id = node.get('hullID')
+    if hull_id in dict_hull_id_ships:
+        return dict_hull_id_ships[hull_id]
+
+    return None
 
 class Event:
     def __init__(self, main_node, player = None):
@@ -432,19 +442,28 @@ class Event:
         elif create_type == 'neutral':
             name = convertName(node.get('name'))
             x, y = convertPosition(node.get('x'), node.get('z'))
-            self._body.append('%s = CpuShip():setTemplate("Tug"):setCallSign("%s"):setFaction("%s"):setPosition(%s, %s):orderRoaming()' % (name, node.get('name'), convertRaceKeys(node, 'neutral'), x, y))
+            template = getTemplate(node)
+            if template is None:
+                template = "Tug"
+            self._body.append('%s = CpuShip():setTemplate("%s"):setCallSign("%s"):setFaction("%s"):setPosition(%s, %s):orderRoaming()' % (name, template, node.get('name'), convertRaceKeys(node, 'neutral'), x, y))
             self.addToFleet(name, node)
         elif create_type == 'enemy':
             name = convertName(node.get('name', 'temp_enemy_name'))
             x, y = convertPosition(node.get('x'), node.get('z'))
-            self._body.append('%s = CpuShip():setTemplate("Cruiser"):setCallSign("%s"):setFaction("%s"):setPosition(%s, %s):orderRoaming()' % (name, node.get('name'), convertRaceKeys(node, 'enemy'), x, y))
+            template = getTemplate(node)
+            if template is None:
+                template = "Cruiser"
+            self._body.append('%s = CpuShip():setTemplate("%s"):setCallSign("%s"):setFaction("%s"):setPosition(%s, %s):orderRoaming()' % (name, template, node.get('name'), convertRaceKeys(node, 'enemy'), x, y))
             self.addToFleet(name, node)
             
             self.addToFleet(name, node, 0) # Add every enemy ship to fleet 0
         elif create_type == 'station':
             name = convertName(node.get('name'))
             x, y = convertPosition(node.get('x'), node.get('z'))
-            self._body.append('%s = SpaceStation():setTemplate("Small Station"):setCallSign("%s"):setFaction("%s"):setPosition(%s, %s)' % (name, node.get('name'), convertRaceKeys(node, 'friendly'), x, y))
+            template = getTemplate(node)
+            if template is None:
+                template = "Small Station"
+            self._body.append('%s = SpaceStation():setTemplate("%s"):setCallSign("%s"):setFaction("%s"):setPosition(%s, %s)' % (name, template, node.get('name'), convertRaceKeys(node, 'friendly'), x, y))
         elif create_type == 'blackHole':
             name = convertName(node.get('name', 'temp_blackhole_name'))
             x, y = convertPosition(node.get('x'), node.get('z'))
