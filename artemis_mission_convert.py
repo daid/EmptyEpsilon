@@ -7,6 +7,8 @@ import tokenize
 import io
 
 dict_hull_id_ships = {
+    "1":"Adder MK4",
+    "2":"Atlantis X23",
     "2000":"Phobos T3",
     "2001":"Phobos M3",
     "2002":"Phobos M3P",
