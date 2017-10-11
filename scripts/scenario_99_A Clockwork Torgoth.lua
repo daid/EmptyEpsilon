@@ -282,8 +282,8 @@ function init()
     Nebula():setPosition(-53340.0, -247.0)
     Nebula():setPosition(-49811.0, -2866.0)
     Nebula():setPosition(-45143.0, -2752.0)
-    TSN_Ivan = CpuShip():setTemplate("Tug"):setCallSign("TSN Ivan"):setFaction("Independent"):setPosition(-75655.0, -33947.0):orderRoaming()
-    Drone_Scout_42 = CpuShip():setTemplate("Tug"):setCallSign("Drone Scout 42"):setFaction("Independent"):setPosition(-19868.0, -34630.0):orderRoaming()
+    TSN_Ivan = CpuShip():setTemplate("Atlantis X23"):setCallSign("TSN Ivan"):setFaction("Independent"):setPosition(-75655.0, -33947.0):orderRoaming()
+    Drone_Scout_42 = CpuShip():setTemplate("Adder MK4"):setCallSign("Drone Scout 42"):setFaction("Independent"):setPosition(-19868.0, -34630.0):orderRoaming()
     DS_27 = SpaceStation():setTemplate("Small Station"):setCallSign("DS 27"):setFaction("Human Navy"):setPosition(-43321.0, -21196.0)
     DS_31 = SpaceStation():setTemplate("Small Station"):setCallSign("DS 31"):setFaction("Human Navy"):setPosition(-14061.0, -9014.0)
     Artemis = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Player Cruiser"):setCallSign("Artemis"):setPosition(-76224.0, -4915.0)
@@ -813,16 +813,16 @@ function update(delta)
     end
     if (timers["mapB"] ~= nil and timers["mapB"] < 0.0) and variable_mapB ~= (1.0) then
         variable_mapB = 1.0
-        T_75 = CpuShip():setTemplate("Cruiser"):setCallSign("T 75"):setFaction("Kraylor"):setPosition(-46054.0, -93264.0):orderRoaming()
+        T_75 = CpuShip():setTemplate("Cruiser Q8"):setCallSign("T 75"):setFaction("Kraylor"):setPosition(-46054.0, -93264.0):orderRoaming()
         if fleet[0] == nil then fleet[0] = {} end
         table.insert(fleet[0], T_75)
-        T_74 = CpuShip():setTemplate("Cruiser"):setCallSign("T 74"):setFaction("Kraylor"):setPosition(-46167.0, -92467.0):orderRoaming()
+        T_74 = CpuShip():setTemplate("Cruiser Q8"):setCallSign("T 74"):setFaction("Kraylor"):setPosition(-46167.0, -92467.0):orderRoaming()
         table.insert(fleet[0], T_74)
-        T_72 = CpuShip():setTemplate("Cruiser"):setCallSign("T 72"):setFaction("Kraylor"):setPosition(-46054.0, -94744.0):orderRoaming()
+        T_72 = CpuShip():setTemplate("Cruiser Q8"):setCallSign("T 72"):setFaction("Kraylor"):setPosition(-46054.0, -94744.0):orderRoaming()
         table.insert(fleet[0], T_72)
-        T_81 = CpuShip():setTemplate("Cruiser"):setCallSign("T 81"):setFaction("Kraylor"):setPosition(-44574.0, -92240.0):orderRoaming()
+        T_81 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 81"):setFaction("Kraylor"):setPosition(-44574.0, -92240.0):orderRoaming()
         table.insert(fleet[0], T_81)
-        T_21 = CpuShip():setTemplate("Cruiser"):setCallSign("T 21"):setFaction("Kraylor"):setPosition(-61765.0, -93492.0):orderRoaming()
+        T_21 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 21"):setFaction("Kraylor"):setPosition(-61765.0, -93492.0):orderRoaming()
         table.insert(fleet[0], T_21)
         Anomaly_A2_260 = SupplyDrop():setFaction("Human Navy"):setPosition(-54023.0, -88141.0):setEnergy(500):setWeaponStorage("Nuke", 0):setWeaponStorage("Homing", 0):setWeaponStorage("Mine", 0):setWeaponStorage("EMP", 0)
     end
@@ -1055,87 +1055,87 @@ function update(delta)
         Nebula():setPosition(12011.0, -95314.0)
     end
     if ifInsideBox(Artemis, 19450.0, -70220.0, -79011.0, -69671.0) and (timers["mapB"] ~= nil and timers["mapB"] < 0.0) and variable_DS_31_to_Artemis ~= (1.0) and variable_mapC == (1.0) then
-        T_771 = CpuShip():setTemplate("Cruiser"):setCallSign("T 771"):setFaction("Kraylor"):setPosition(-8824.0, -3093.0):orderRoaming()
+        T_771 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 771"):setFaction("Kraylor"):setPosition(-8824.0, -3093.0):orderRoaming()
         if fleet[0] == nil then fleet[0] = {} end
         table.insert(fleet[0], T_771)
-        T_777 = CpuShip():setTemplate("Cruiser"):setCallSign("T 777"):setFaction("Kraylor"):setPosition(-10760.0, -3549.0):orderRoaming()
+        T_777 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 777"):setFaction("Kraylor"):setPosition(-10760.0, -3549.0):orderRoaming()
         table.insert(fleet[0], T_777)
         variable_DS_31_to_Artemis = 1.0
         temp_transmission_object:setCallSign("DS 31"):sendCommsMessage(getPlayerShip(-1), "DS 31 to TSN  vessels,  we have enemy ships inbound.  Can you assist us?  Repeat (static)...Help us (static)...")
     end
     if ifInsideBox(Intrepid, 19450.0, -70220.0, -79011.0, -69671.0) and (timers["mapB"] ~= nil and timers["mapB"] < 0.0) and variable_DS_31_to_Artemis ~= (1.0) and variable_mapC == (1.0) then
-        T_771 = CpuShip():setTemplate("Cruiser"):setCallSign("T 771"):setFaction("Kraylor"):setPosition(-8824.0, -3093.0):orderRoaming()
+        T_771 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 771"):setFaction("Kraylor"):setPosition(-8824.0, -3093.0):orderRoaming()
         if fleet[0] == nil then fleet[0] = {} end
         table.insert(fleet[0], T_771)
-        T_777 = CpuShip():setTemplate("Cruiser"):setCallSign("T 777"):setFaction("Kraylor"):setPosition(-10760.0, -3549.0):orderRoaming()
+        T_777 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 777"):setFaction("Kraylor"):setPosition(-10760.0, -3549.0):orderRoaming()
         table.insert(fleet[0], T_777)
         variable_DS_31_to_Artemis = 1.0
         temp_transmission_object:setCallSign("DS 31"):sendCommsMessage(getPlayerShip(-1), "DS 31 to TSN  vessels,  we have enemy ships inbound.  Can you assist us?  Repeat (static)...Help us (static)...")
     end
     if (Artemis ~= nil and DS_31 ~= nil and Artemis:isValid() and DS_31:isValid() and distance(Artemis, DS_31) <= 6000.000000) and (timers["mapB"] ~= nil and timers["mapB"] < 0.0) and variable_spawn_up_E2____s ~= (1.0) then
-        T_911 = CpuShip():setTemplate("Cruiser"):setCallSign("T 911"):setFaction("Kraylor"):setPosition(-51519.0, -5484.0):orderRoaming()
+        T_911 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 911"):setFaction("Kraylor"):setPosition(-51519.0, -5484.0):orderRoaming()
         if fleet[0] == nil then fleet[0] = {} end
         table.insert(fleet[0], T_911)
-        T_912 = CpuShip():setTemplate("Cruiser"):setCallSign("T 912"):setFaction("Kraylor"):setPosition(-50494.0, -6054.0):orderRoaming()
+        T_912 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 912"):setFaction("Kraylor"):setPosition(-50494.0, -6054.0):orderRoaming()
         table.insert(fleet[0], T_912)
-        T_917 = CpuShip():setTemplate("Cruiser"):setCallSign("T 917"):setFaction("Kraylor"):setPosition(-49355.0, -6623.0):orderRoaming()
+        T_917 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 917"):setFaction("Kraylor"):setPosition(-49355.0, -6623.0):orderRoaming()
         table.insert(fleet[0], T_917)
         variable_spawn_up_E2____s = 1.0
         temp_transmission_object:setCallSign("DS 31"):sendCommsMessage(getPlayerShip(-1), "DS 31 to Fleet, we have an attack force heading on our position.")
     end
     if (T_74 == nil or not T_74:isValid()) and variable_sh____t_stormA ~= (1.0) and (timers["mapB"] ~= nil and timers["mapB"] < 0.0) then
         variable_sh____t_stormA = 1.0
-        T_67 = CpuShip():setTemplate("Cruiser"):setCallSign("T 67"):setFaction("Kraylor"):setPosition(16907.0, -75389.0):orderRoaming()
+        T_67 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 67"):setFaction("Kraylor"):setPosition(16907.0, -75389.0):orderRoaming()
         if fleet[0] == nil then fleet[0] = {} end
         table.insert(fleet[0], T_67)
-        T_62 = CpuShip():setTemplate("Cruiser"):setCallSign("T 62"):setFaction("Kraylor"):setPosition(18159.0, -65940.0):orderRoaming()
+        T_62 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 62"):setFaction("Kraylor"):setPosition(18159.0, -65940.0):orderRoaming()
         table.insert(fleet[0], T_62)
-        T_65 = CpuShip():setTemplate("Cruiser"):setCallSign("T 65"):setFaction("Kraylor"):setPosition(17703.0, -74593.0):orderRoaming()
+        T_65 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 65"):setFaction("Kraylor"):setPosition(17703.0, -74593.0):orderRoaming()
         table.insert(fleet[0], T_65)
-        T_511 = CpuShip():setTemplate("Cruiser"):setCallSign("T 511"):setFaction("Kraylor"):setPosition(5066.0, -33834.0):orderRoaming()
+        T_511 = CpuShip():setTemplate("Cruiser Q8"):setCallSign("T 511"):setFaction("Kraylor"):setPosition(5066.0, -33834.0):orderRoaming()
         table.insert(fleet[0], T_511)
-        T_512 = CpuShip():setTemplate("Cruiser"):setCallSign("T 512"):setFaction("Kraylor"):setPosition(3927.0, -33492.0):orderRoaming()
+        T_512 = CpuShip():setTemplate("Cruiser Q8"):setCallSign("T 512"):setFaction("Kraylor"):setPosition(3927.0, -33492.0):orderRoaming()
         table.insert(fleet[0], T_512)
     end
     if (T_75 == nil or not T_75:isValid()) and variable_sh____t_stormA ~= (1.0) and variable_mapC == (1.0) and (timers["mapB"] ~= nil and timers["mapB"] < 0.0) then
         variable_sh____t_stormA = 1.0
-        T_55 = CpuShip():setTemplate("Cruiser"):setCallSign("T 55"):setFaction("Kraylor"):setPosition(-43549.0, -5826.0):orderRoaming()
+        T_55 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 55"):setFaction("Kraylor"):setPosition(-43549.0, -5826.0):orderRoaming()
         if fleet[0] == nil then fleet[0] = {} end
         table.insert(fleet[0], T_55)
-        T_233 = CpuShip():setTemplate("Cruiser"):setCallSign("T 233"):setFaction("Kraylor"):setPosition(-42980.0, -4232.0):orderRoaming()
+        T_233 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 233"):setFaction("Kraylor"):setPosition(-42980.0, -4232.0):orderRoaming()
         table.insert(fleet[0], T_233)
-        T_333 = CpuShip():setTemplate("Cruiser"):setCallSign("T 333"):setFaction("Kraylor"):setPosition(-78046.0, -21310.0):orderRoaming()
+        T_333 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 333"):setFaction("Kraylor"):setPosition(-78046.0, -21310.0):orderRoaming()
         table.insert(fleet[0], T_333)
-        T_337 = CpuShip():setTemplate("Cruiser"):setCallSign("T 337"):setFaction("Kraylor"):setPosition(-76908.0, -20399.0):orderRoaming()
+        T_337 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 337"):setFaction("Kraylor"):setPosition(-76908.0, -20399.0):orderRoaming()
         table.insert(fleet[0], T_337)
-        T_336 = CpuShip():setTemplate("Cruiser"):setCallSign("T 336"):setFaction("Kraylor"):setPosition(-76111.0, -19830.0):orderRoaming()
+        T_336 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 336"):setFaction("Kraylor"):setPosition(-76111.0, -19830.0):orderRoaming()
         table.insert(fleet[0], T_336)
-        T_316 = CpuShip():setTemplate("Cruiser"):setCallSign("T 316"):setFaction("Kraylor"):setPosition(-75997.0, -19147.0):orderRoaming()
+        T_316 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 316"):setFaction("Kraylor"):setPosition(-75997.0, -19147.0):orderRoaming()
         table.insert(fleet[0], T_316)
-        T_44 = CpuShip():setTemplate("Cruiser"):setCallSign("T 44"):setFaction("Kraylor"):setPosition(-76338.0, -13226.0):orderRoaming()
+        T_44 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 44"):setFaction("Kraylor"):setPosition(-76338.0, -13226.0):orderRoaming()
         table.insert(fleet[0], T_44)
-        T_778 = CpuShip():setTemplate("Cruiser"):setCallSign("T 778"):setFaction("Kraylor"):setPosition(2333.0, -28596.0):orderRoaming()
+        T_778 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 778"):setFaction("Kraylor"):setPosition(2333.0, -28596.0):orderRoaming()
         table.insert(fleet[0], T_778)
-        T_771 = CpuShip():setTemplate("Cruiser"):setCallSign("T 771"):setFaction("Kraylor"):setPosition(1537.0, -27799.0):orderRoaming()
+        T_771 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 771"):setFaction("Kraylor"):setPosition(1537.0, -27799.0):orderRoaming()
         table.insert(fleet[0], T_771)
     end
     if (T_74 == nil or not T_74:isValid()) and (timers["mapB"] ~= nil and timers["mapB"] < 0.0) and variable_intrepid_sh____t_stormA ~= (1.0) and (Intrepid ~= nil and Intrepid:isValid()) then
         variable_sh____t_stormA = 1.0
-        T_401 = CpuShip():setTemplate("Cruiser"):setCallSign("T 401"):setFaction("Kraylor"):setPosition(-62355.0, -2304.0):orderRoaming()
+        T_401 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 401"):setFaction("Kraylor"):setPosition(-62355.0, -2304.0):orderRoaming()
         if fleet[0] == nil then fleet[0] = {} end
         table.insert(fleet[0], T_401)
-        T_402 = CpuShip():setTemplate("Cruiser"):setCallSign("T 402"):setFaction("Kraylor"):setPosition(-58709.0, -2912.0):orderRoaming()
+        T_402 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 402"):setFaction("Kraylor"):setPosition(-58709.0, -2912.0):orderRoaming()
         table.insert(fleet[0], T_402)
-        T_403 = CpuShip():setTemplate("Cruiser"):setCallSign("T 403"):setFaction("Kraylor"):setPosition(-57038.0, -3064.0):orderRoaming()
+        T_403 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 403"):setFaction("Kraylor"):setPosition(-57038.0, -3064.0):orderRoaming()
         table.insert(fleet[0], T_403)
         timers["intrepid_sh____t_stormB"] = 12.000000
     end
     if (timers["intrepid_sh____t_stormB"] ~= nil and timers["intrepid_sh____t_stormB"] < 0.0) and (Intrepid ~= nil and Intrepid:isValid()) and (Artemis ~= nil and Artemis:isValid()) and variable_intrepid_sh____t_stormB ~= (1.0) then
         variable_intrepid_sh____t_stormB = 1.0
-        T_421 = CpuShip():setTemplate("Cruiser"):setCallSign("T 421"):setFaction("Kraylor"):setPosition(-7823.0, -2152.0):orderRoaming()
+        T_421 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 421"):setFaction("Kraylor"):setPosition(-7823.0, -2152.0):orderRoaming()
         if fleet[0] == nil then fleet[0] = {} end
         table.insert(fleet[0], T_421)
-        T_422 = CpuShip():setTemplate("Cruiser"):setCallSign("T 422"):setFaction("Kraylor"):setPosition(-7368.0, -1545.0):orderRoaming()
+        T_422 = CpuShip():setTemplate("Starhammer II"):setCallSign("T 422"):setFaction("Kraylor"):setPosition(-7368.0, -1545.0):orderRoaming()
         table.insert(fleet[0], T_422)
         timers["intrepid_sh____t_stormB"] = 12.000000
     end
@@ -1459,7 +1459,7 @@ function update(delta)
     end
     if (timers["spawn_last_chaseA"] ~= nil and timers["spawn_last_chaseA"] < 0.0) and variable_last_chaseA ~= (1.0) then
         variable_last_chaseA = 1.0
-        K_57 = CpuShip():setTemplate("Cruiser"):setCallSign("K 57"):setFaction("Kraylor"):setPosition(4383.0, -31329.0):orderRoaming()
+        K_57 = CpuShip():setTemplate("Phobos M3P"):setCallSign("K 57"):setFaction("Kraylor"):setPosition(4383.0, -31329.0):orderRoaming()
         if fleet[0] == nil then fleet[0] = {} end
         table.insert(fleet[0], K_57)
         temp_transmission_object:setCallSign("TSN Ivan"):sendCommsMessage(getPlayerShip(-1), "Ivan to TSN  fleet, we are being pursued by an enemy warship. We have exhausted our weapons and are running on minimal (static)...need assistence...")
@@ -1479,10 +1479,10 @@ function update(delta)
     end
     if (timers["spawn_last_chaseB"] ~= nil and timers["spawn_last_chaseB"] < 0.0) and variable_spawn_last_chaseA ~= (1.0) then
         variable_spawn_last_chaseA = 1.0
-        K_32 = CpuShip():setTemplate("Cruiser"):setCallSign("K 32"):setFaction("Kraylor"):setPosition(4383.0, -31329.0):orderRoaming()
+        K_32 = CpuShip():setTemplate("Phobos M3P"):setCallSign("K 32"):setFaction("Kraylor"):setPosition(4383.0, -31329.0):orderRoaming()
         if fleet[0] == nil then fleet[0] = {} end
         table.insert(fleet[0], K_32)
-        K477 = CpuShip():setTemplate("Cruiser"):setCallSign("K477"):setFaction("Kraylor"):setPosition(2789.0, -31784.0):orderRoaming()
+        K477 = CpuShip():setTemplate("Phobos M3P"):setCallSign("K477"):setFaction("Kraylor"):setPosition(2789.0, -31784.0):orderRoaming()
         table.insert(fleet[0], K477)
     end
     if (timers["spawn_last_chaseC"] ~= nil and timers["spawn_last_chaseC"] < 0.0) and variable_looks_like_thats_it ~= (1.0) and countFleet(0) <= 0.000000 then
