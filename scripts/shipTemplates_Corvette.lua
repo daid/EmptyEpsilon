@@ -80,6 +80,24 @@ variation:addDoor(8, 4, false);
 --variation:addDoor(2, 2, false);
 --variation:addDoor(2, 5, false);
 
+-- small enemy corvette
+
+variation = template:copy("Cruiser Q8")
+variation:setDescription([[The enemies version of the Atlantis X23.]])
+variation:setShields(350, 250)
+variation:setHull(200)
+variation:setSpeed(110, 15, 25)
+variation:setCombatManeuver(300, 150)
+template:setBeam(0,100, -20, 1200.0, 6.0, 8)
+template:setBeam(1,100,  20, 1200.0, 6.0, 8)
+template:setBeam(2,100, 180, 1200.0, 6.0, 8)
+template:setBeam(3,100, -180, 1200.0, 6.0, 8)
+variation:setWeaponStorage("Homing", 12)
+variation:setWeaponStorage("Nuke", 4)
+variation:setWeaponStorage("Mine", 8)
+variation:setWeaponStorage("EMP", 6)
+variation:setTubes(5, 8.0) -- Amount of torpedo tubes, and loading time of the tubes.
+
 template = ShipTemplate():setName("Starhammer II"):setClass("Corvette", "Destroyer"):setModel("battleship_destroyer_4_upgraded")
 template:setDescription([[Contrary to its predecessor, the Starhammer II lives up to its name. By resolving the original Starhammer's power and heat management issues, the updated model makes for a phenomenal frontal assault ship. Its low speed makes it difficult to position, but when in the right place at the right time, even the strongest shields can't withstand a Starhammer's assault for long.]])
 template:setRadarTrace("radar_dread.png")
