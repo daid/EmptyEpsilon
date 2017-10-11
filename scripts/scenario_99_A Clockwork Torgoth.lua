@@ -1570,7 +1570,7 @@ function update(delta)
         timers["ending_creditsG"] = 8.000000
     end
     if (timers["ending_creditsG"] ~= nil and timers["ending_creditsG"] < 0.0) then
-        victory("Independent")
+        victory("Human Navy")
     end
     if (DS_27 ~= nil and DS_27:isValid()) and variable_DS_27_survived ~= (1.0) and (DS_31 == nil or not DS_31:isValid()) then
         variable_DS_27_survived = 1.0
@@ -1606,7 +1606,7 @@ function update(delta)
         Artemis:addCustomMessage("helmsOfficer", "warning", "Mission unsuccessful")
     end
     if (timers["enending_countdownD"] ~= nil and timers["enending_countdownD"] < 0.0) then
-        victory("Independent")
+        victory("Kraylor")
     end
     if ifInsideBox(TSN_Ivan, 19028.0, -93886.0, -13297.0, -68572.0) and ifOutsideBox(Artemis, 19200.0, -77086.0, -12858.0, -70572.0) and variable_vanish_ivanA ~= (1.0) then
         variable_vanish_ivanA = 1.0
@@ -1683,7 +1683,7 @@ function update(delta)
         variable_successful_ending = 1.0
     end
     if (timers["enending_countdownF"] ~= nil and timers["enending_countdownF"] < 0.0) then
-        victory("Independent")
+        victory("Human Navy")
     end
     if ifInsideBox(Artemis, 0.0, -87033.0, -19891.0, -67803.0) and variable_scans_negativeA ~= (1.0) and (timers["lose_the_ivanA"] ~= nil and timers["lose_the_ivanA"] < 0.0) then
         variable_scans_negativeA = 1.0
