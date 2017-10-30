@@ -38,9 +38,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         {
             my_spaceship->commandMainScreenSetting(MSS_Front);
         }
-        open_button->setValue(false);
-        for(GuiButton* button : buttons)
-            button->setVisible(false);
+        closePopup();
     }));
     buttons.push_back(new GuiButton(this, "MAIN_SCREEN_BACK_BUTTON", "Back", [this]()
     {
@@ -48,9 +46,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         {
             my_spaceship->commandMainScreenSetting(MSS_Back);
         }
-        open_button->setValue(false);
-        for(GuiButton* button : buttons)
-            button->setVisible(false);
+        closePopup();
     }));
     buttons.push_back(new GuiButton(this, "MAIN_SCREEN_LEFT_BUTTON", "Left", [this]()
     {
@@ -58,9 +54,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         {
             my_spaceship->commandMainScreenSetting(MSS_Left);
         }
-        open_button->setValue(false);
-        for(GuiButton* button : buttons)
-            button->setVisible(false);
+        closePopup();
     }));
     buttons.push_back(new GuiButton(this, "MAIN_SCREEN_RIGHT_BUTTON", "Right", [this]()
     {
@@ -68,9 +62,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         {
             my_spaceship->commandMainScreenSetting(MSS_Right);
         }
-        open_button->setValue(false);
-        for(GuiButton* button : buttons)
-            button->setVisible(false);
+        closePopup();
     }));
 
     // If the player has control over weapons targeting, enable the target view
@@ -83,8 +75,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
             {
                 my_spaceship->commandMainScreenSetting(MSS_Target);
             }
-            for (GuiButton* button : buttons)
-                button->setVisible(false);
+            closePopup();
         }));
         target_lock_button = buttons.back();
     }
@@ -96,9 +87,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         {
             my_spaceship->commandMainScreenSetting(MSS_Tactical);
         }
-        open_button->setValue(false);
-        for(GuiButton* button : buttons)
-            button->setVisible(false);
+        closePopup();
     }));
     tactical_button = buttons.back();
 
@@ -109,9 +98,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         {
             my_spaceship->commandMainScreenSetting(MSS_LongRange);
         }
-        open_button->setValue(false);
-        for(GuiButton* button : buttons)
-            button->setVisible(false);
+        closePopup();
     }));
     long_range_button = buttons.back();
     
@@ -152,9 +139,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
                 my_spaceship->commandMainScreenOverlay(MSO_ShowComms);
                 onscreen_comms_active = true;
             }
-            open_button->setValue(false);
-            for (GuiButton* button : buttons)
-                button->setVisible(false);
+            closePopup();
         }));
         show_comms_button = buttons.back();
 
@@ -165,13 +150,18 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
                 my_spaceship->commandMainScreenOverlay(MSO_HideComms);
                 onscreen_comms_active = false;
             }
-            open_button->setValue(false);
-            for (GuiButton* button : buttons)
-                button->setVisible(false);
+            closePopup();
         }));
         hide_comms_button = buttons.back();
     }
 
     for(GuiButton* button : buttons)
         button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(false);
+}
+
+void GuiMainScreenControls::closePopup()
+{
+    open_button->setValue(false);
+    for (GuiButton* button : buttons)
+        button->setVisible(false);
 }

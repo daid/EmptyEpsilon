@@ -68,6 +68,42 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
         }
     );
 
+    // Joystick controls.
+    radar->setJoystickCallbacks(
+        [this](float x_position) {
+            if (my_spaceship)
+            {
+                float angle = my_spaceship->getRotation() + x_position;
+                my_spaceship->commandTargetRotation(angle);
+            }
+        },
+        [this](float y_position) {
+            if (my_spaceship && (fabs(y_position) > 20))
+            {
+                // Add some more hysteresis, since y-axis can be hard to keep at 0
+                float value;
+                if (y_position > 0)
+                    value = (y_position-20) * 1.25 / 100;
+                else
+                    value = (y_position+20) * 1.25 / 100;
+
+                my_spaceship->commandCombatManeuverBoost(-value);
+            }
+            else if (my_spaceship)
+            {
+                my_spaceship->commandCombatManeuverBoost(0.0);
+            }
+        },
+        [this](float z_position) {
+            if (my_spaceship)
+                my_spaceship->commandImpulse(-(z_position / 100));
+        },
+        [this](float r_position) {
+            if (my_spaceship)
+                my_spaceship->commandCombatManeuverStrafe(r_position / 100);
+        }
+    );
+
     // Ship stats and combat maneuver at bottom right corner of left panel.
     (new GuiCombatManeuver(left_panel, "COMBAT_MANEUVER"))->setPosition(-20, -180, ABottomRight)->setSize(200, 150);
 
@@ -172,5 +208,80 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
             my_spaceship->commandTargetRotation(my_spaceship->getRotation() - 5.0f);
         else if (key.hotkey == "TURN_RIGHT")
             my_spaceship->commandTargetRotation(my_spaceship->getRotation() + 5.0f);
+    }
+    if (key.category == "WEAPONS" && my_spaceship)
+    {
+        if (key.hotkey == "NEXT_ENEMY_TARGET")
+        {
+            bool current_found = false;
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get())
+                {
+                    current_found = true;
+                    continue;
+                }
+                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get())
+                {
+                    continue;
+                }
+                if (my_spaceship->isEnemy(obj) && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+        }
+        if (key.hotkey == "NEXT_TARGET")
+        {
+            bool current_found = false;
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get())
+                {
+                    current_found = true;
+                    continue;
+                }
+                if (obj == my_spaceship)
+                    continue;
+                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get() || obj == my_spaceship)
+                    continue;
+                if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+        }
+        if (key.hotkey == "AIM_MISSILE_LEFT")
+        {
+            missile_aim->setValue(missile_aim->getValue() - 5.0f);
+            tube_controls->setMissileTargetAngle(missile_aim->getValue());
+        }
+        if (key.hotkey == "AIM_MISSILE_RIGHT")
+        {
+            missile_aim->setValue(missile_aim->getValue() + 5.0f);
+            tube_controls->setMissileTargetAngle(missile_aim->getValue());
+        }
     }
 }

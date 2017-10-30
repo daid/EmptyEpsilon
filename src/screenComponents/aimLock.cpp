@@ -26,14 +26,17 @@ void AimLockButton::onHotkey(const HotkeyResult& key)
         if (key.hotkey == "TOGGLE_AIM_LOCK")
         {
             setAimLock(!getValue());
+            setValue(!getValue());
         }
         if (key.hotkey == "ENABLE_AIM_LOCK")
         {
             setAimLock(true);
+            setValue(true);
         }
         if (key.hotkey == "DISABLE_AIM_LOCK")
         {
             setAimLock(false);
+            setValue(false);
         }
     }
 }

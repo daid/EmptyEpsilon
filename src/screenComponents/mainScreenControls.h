@@ -19,6 +19,8 @@ private:
     GuiButton* show_comms_button;
     GuiButton* hide_comms_button;
     bool onscreen_comms_active = false;
+    
+    void closePopup();
 public:
     GuiMainScreenControls(GuiContainer* owner);
 };
