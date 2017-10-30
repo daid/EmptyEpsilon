@@ -194,7 +194,7 @@ void GuiShipTweakBase::open(P<SpaceObject> target)
     
     type_name->setText(ship->getTypeName());
     callsign->setText(ship->callsign);
-    description->setText(ship->getDescription());
+    description->setText(ship->getDescription(SS_NotScanned));
     warp_toggle->setValue(ship->has_warp_drive);
     jump_toggle->setValue(ship->hasJumpDrive());
     impulse_speed_slider->setValue(ship->impulse_max_speed);
@@ -689,6 +689,5 @@ void GuiObjectTweakBase::open(P<SpaceObject> target)
     callsign->setText(target->callsign);
     // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
     // editing long strings.
-    description->setText(target->getDescription());
-
+    description->setText(target->getDescription(SS_NotScanned));
 }
