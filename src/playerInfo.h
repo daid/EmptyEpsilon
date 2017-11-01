@@ -21,6 +21,8 @@ enum ECrewPosition
     damageControl,
     powerManagement,
     databaseView,
+    logView,
+    internLogView,
 
     max_crew_positions
 };

@@ -88,7 +88,10 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
     registerMemberReplication(&radar_trace);
     registerMemberReplication(&hull_strength, 0.5);
     registerMemberReplication(&hull_max);
-
+    
+    can_be_destroyed = true;
+    registerMemberReplication(&can_be_destroyed);
+    
     callsign = "[" + string(getMultiplayerId()) + "]";
     
     can_be_destroyed = true;

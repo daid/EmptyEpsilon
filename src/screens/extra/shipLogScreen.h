@@ -10,7 +10,8 @@ class ShipLogScreen : public GuiOverlay
 private:
     GuiAdvancedScrollText* log_text;
 public:
-    ShipLogScreen(GuiContainer* owner);
+    string station;
+    ShipLogScreen(GuiContainer* owner, string station);
     
     void onDraw(sf::RenderTarget& window) override;
 };

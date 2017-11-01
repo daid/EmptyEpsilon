@@ -52,6 +52,17 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, takeReputationPoints);
     /// Add a certain amount of reputation points.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, addReputationPoints);
+    /// Sets the oxygen to a value.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setOxygenPoints);
+    /// Return the current amount of oxygen points.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getOxygenPoints);
+    /// Take a certain amount of oxygen points, returns true when there are enough points to take. Returns false when there are not enough points and does not lower the points.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, takeOxygenPoints);
+    /// Add a certain amount of Oxygen points.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, addOxygenPoints);
+    /// Remove a certain amount of Oxygen points.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject,removeOxygenPoints);
+    
     /// Get the name of the sector this object is in (A4 for example)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getSectorName);
     /// Hail a player ship from this object. The ship will get a notification and can accept or deny the hail.
@@ -103,12 +114,15 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     object_radius = collision_range;
     space_object_list.push_back(this);
     faction_id = 0;
+    
+    oxygen_points = 100;
 
     scanning_complexity_value = 0;
     scanning_depth_value = 0;
 
     registerMemberReplication(&callsign);
     registerMemberReplication(&faction_id);
+    registerMemberReplication(&oxygen_points);
     registerMemberReplication(&scanned_by_faction);
     registerMemberReplication(&object_description.not_scanned);
     registerMemberReplication(&object_description.friend_of_foe_identified);
@@ -365,6 +379,36 @@ void SpaceObject::addReputationPoints(float amount)
     gameGlobalInfo->reputation_points[faction_id] += amount;
     if (gameGlobalInfo->reputation_points[faction_id] < 0.0)
         gameGlobalInfo->reputation_points[faction_id] = 0.0;
+}
+
+void SpaceObject::setOxygenPoints(float amount)
+{
+    oxygen_points = amount;
+}
+
+int SpaceObject::getOxygenPoints()
+{
+    return oxygen_points;
+}
+
+bool SpaceObject::takeOxygenPoints(float amount)
+{
+	if (oxygen_points < amount)
+		return false;
+	oxygen_points -= amount;
+    	return true;
+}
+
+void SpaceObject::removeOxygenPoints(float amount)
+{
+    addOxygenPoints(-amount);
+}
+
+void SpaceObject::addOxygenPoints(float amount)
+{
+    oxygen_points += amount;
+    if (oxygen_points < 0.0)
+    	oxygen_points = 0.0;
 }
 
 string SpaceObject::getSectorName()

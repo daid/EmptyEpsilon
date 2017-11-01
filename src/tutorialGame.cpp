@@ -33,6 +33,8 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(TutorialGame)
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, switchViewToLongRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, switchViewToScreen);
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, showMessage);
+    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, showLittleMessage);
+    REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, hideMessage);
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, setMessageToTopPosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, setMessageToBottomPosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, onNext);
@@ -164,6 +166,32 @@ void TutorialGame::showMessage(string message, bool show_next)
         next_button->hide();
         frame->setSize(900, 200);
     }
+}
+
+void TutorialGame::showLittleMessage(string message, bool show_next)
+{
+    if (viewport == nullptr)
+    return;
+    
+    frame->show();
+    text->setText(message)->setSize(900 - 40, 50 - 40);
+    if (show_next)
+    {
+        next_button->show();
+        frame->setSize(900, 80);
+    }
+    else
+    {
+        next_button->hide();
+        frame->setSize(900, 50);
+    }
+}
+
+void TutorialGame::hideMessage()
+{
+    if (viewport == nullptr)
+        return;
+	frame->hide();
 }
 
 void TutorialGame::switchViewToMainScreen()
