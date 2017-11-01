@@ -194,7 +194,7 @@ void GuiShipTweakBase::open(P<SpaceObject> target)
     
     type_name->setText(ship->getTypeName());
     callsign->setText(ship->callsign);
-    description->setText(ship->getDescription());
+    description->setText(ship->getDescription(SS_NotScanned));
     warp_toggle->setValue(ship->has_warp_drive);
     jump_toggle->setValue(ship->hasJumpDrive());
     impulse_speed_slider->setValue(ship->impulse_max_speed);
@@ -579,6 +579,19 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
     });
     energy_level_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
+    // Display Boost/Strafe speed sliders
+    (new GuiLabel(left_col, "", "Boost Speed:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    combat_maneuver_boost_speed_slider = new GuiSlider(left_col, "", 0.0, 1000, 0.0, [this](float value) {
+        target->combat_maneuver_boost_speed = value;
+    });
+    combat_maneuver_boost_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(left_col, "", "Strafe Speed:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    combat_maneuver_strafe_speed_slider = new GuiSlider(left_col, "", 0.0, 1000, 0.0, [this](float value) {
+        target->combat_maneuver_strafe_speed = value;
+    });
+    combat_maneuver_strafe_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
     // Right column
     // Count and list ship positions and whether they're occupied.
     position_count = new GuiLabel(right_col, "", "Positions occupied: ", 30);
@@ -633,6 +646,14 @@ void GuiShipTweakPlayer::open(P<SpaceObject> target)
     {
         // Read ship's control code.
         control_code->setText(player->control_code);
+
+        // Set and snap boost speed slider to current value
+        combat_maneuver_boost_speed_slider->setValue(player->combat_maneuver_boost_speed);
+        combat_maneuver_boost_speed_slider->clearSnapValues()->addSnapValue(player->combat_maneuver_boost_speed, 20.0f);
+
+        // Set and snap strafe speed slider to current value
+        combat_maneuver_strafe_speed_slider->setValue(player->combat_maneuver_strafe_speed);
+        combat_maneuver_strafe_speed_slider->clearSnapValues()->addSnapValue(player->combat_maneuver_strafe_speed, 20.0f);
     }
 }
 
@@ -689,6 +710,5 @@ void GuiObjectTweakBase::open(P<SpaceObject> target)
     callsign->setText(target->callsign);
     // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
     // editing long strings.
-    description->setText(target->getDescription());
-
+    description->setText(target->getDescription(SS_NotScanned));
 }
