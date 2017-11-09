@@ -722,6 +722,8 @@
 		<Unit filename="src/screens/topDownScreen.h" />
 		<Unit filename="src/screens/windowScreen.cpp" />
 		<Unit filename="src/screens/windowScreen.h" />
+		<Unit filename="src/screens/probeScreen.cpp" />
+		<Unit filename="src/screens/probeScreen.h" />
 		<Unit filename="src/script.cpp" />
 		<Unit filename="src/script.h" />
 		<Unit filename="src/shipTemplate.cpp" />

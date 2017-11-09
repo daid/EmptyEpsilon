@@ -8,8 +8,7 @@
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/shipDestroyedPopup.h"
 
-WindowScreen::WindowScreen(float angle)
-: angle(angle)
+WindowScreen::WindowScreen()
 {
     viewport = new GuiViewport3D(this, "VIEWPORT");
     viewport->showCallsigns()->showHeadings()->showSpacedust();

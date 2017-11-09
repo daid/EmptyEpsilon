@@ -86,6 +86,7 @@ set(SOURCES
 	src/screens/crewStationScreen.cpp
 	src/screens/topDownScreen.cpp
 	src/screens/windowScreen.cpp
+	src/screens/probeScreen.cpp
 	src/screens/mainScreen.cpp
 	src/screens/crew4/operationsScreen.cpp
 	src/screens/crew4/engineeringAdvancedScreen.cpp
