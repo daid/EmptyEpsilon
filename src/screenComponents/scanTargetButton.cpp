@@ -42,15 +42,3 @@ void GuiScanTargetButton::onDraw(sf::RenderTarget& window)
         progress->hide();
     }
 }
-
-void GuiScanTargetButton::onHotkey(const HotkeyResult& key)
-{
-    if (key.category == "SCIENCE" && my_spaceship)
-    {
-		if (key.hotkey == "SCAN_START")
-		{
-			if (this->targets && this->targets->get())
-                my_spaceship->commandScan(this->targets->get());
-		}
-    }
-}

@@ -51,8 +51,7 @@ private:
 public:
     RelayScreen(GuiContainer* owner);
 
-    virtual void onDraw(sf::RenderTarget& window) override;
-    virtual void onHotkey(const HotkeyResult& key) override;
+    virtual void onDraw(sf::RenderTarget& window);
 };
 
 #endif//RELAY_SCREEN_H

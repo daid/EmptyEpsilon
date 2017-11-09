@@ -76,7 +76,6 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     
     mode = TargetSelection;
 
-    new ShipsLog(this,"extern");
-  
+    new ShipsLog(this);
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }

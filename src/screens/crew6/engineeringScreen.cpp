@@ -5,7 +5,6 @@
 #include "screenComponents/shipInternalView.h"
 #include "screenComponents/selfDestructButton.h"
 #include "screenComponents/alertOverlay.h"
-#include "screenComponents/shipsLogControl.h"
 #include "screenComponents/customShipFunctions.h"
 
 #include "gui/gui2_keyvaluedisplay.h"
@@ -35,13 +34,11 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
     front_shield_display->setIcon("gui/icons/shields-fore")->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
     rear_shield_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, "Rear", "");
     rear_shield_display->setIcon("gui/icons/shields-aft")->setTextSize(20)->setPosition(20, 220, ATopLeft)->setSize(240, 40);
-    oxygen_display = new GuiKeyValueDisplay(this, "OXYGEN_DISPLAY", 0.45, "Oxygen", "");
-    oxygen_display->setIcon("gui/icons/weapon-hvli")->setTextSize(20)->setPosition(20, 260, ATopLeft)->setSize(240, 40);
-    
-    (new GuiSelfDestructButton(this, "SELF_DESTRUCT"))->setPosition(20, 300, ATopLeft)->setSize(240, 100);
-    
+
+    (new GuiSelfDestructButton(this, "SELF_DESTRUCT"))->setPosition(20, 260, ATopLeft)->setSize(240, 100);
+
     GuiElement* system_config_container = new GuiElement(this, "");
-    system_config_container->setPosition(0, -50, ABottomCenter)->setSize(750 + 300, GuiElement::GuiSizeMax);
+    system_config_container->setPosition(0, -20, ABottomCenter)->setSize(750 + 300, GuiElement::GuiSizeMax);
     GuiAutoLayout* system_row_layouts = new GuiAutoLayout(system_config_container, "SYSTEM_ROWS", GuiAutoLayout::LayoutVerticalBottomToTop);
     system_row_layouts->setPosition(0, 0, ABottomLeft);
     system_row_layouts->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -120,8 +117,6 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
     for(float snap_point = 0.0; snap_point <= 10.0; snap_point += 2.5)
         coolant_slider->addSnapValue(snap_point, 0.1);
     coolant_slider->disable();
-    
-    new ShipsLog(this,"intern");
 
     (new GuiShipInternalView(system_row_layouts, "SHIP_INTERNAL_VIEW", 48.0f))->setShip(my_spaceship)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     
@@ -166,12 +161,6 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
             hull_display->setColor(sf::Color::White);
         front_shield_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "%");
         rear_shield_display->setValue(string(my_spaceship->getShieldPercentage(1)) + "%");
-
-        oxygen_display->setValue(string(my_spaceship->getOxygenPoints(), 0));
-        if (my_spaceship->getOxygenPoints() < 20)
-            oxygen_display->setColor(sf::Color::Red);
-        else
-            oxygen_display->setColor(sf::Color::White);
 
         for(int n=0; n<SYS_COUNT; n++)
         {
@@ -326,10 +315,6 @@ void EngineeringScreen::onHotkey(const HotkeyResult& key)
                 my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
             }
         }
-		
-		if (key.hotkey == "ACTIVE_AUTO_COOLANT") my_spaceship->auto_coolant_enabled = !my_spaceship->auto_coolant_enabled;
-		if (key.hotkey == "ACTIVE_AUTO_REPAIR") my_spaceship->auto_repair_enabled = !my_spaceship->auto_repair_enabled;
-		
     }
 }
 

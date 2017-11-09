@@ -29,8 +29,7 @@ private:
 public:
     GuiScanningDialog(GuiContainer* owner, string id);
 
-    virtual void onDraw(sf::RenderTarget& window) override;
-    virtual void onHotkey(const HotkeyResult& key) override;
+    virtual void onDraw(sf::RenderTarget& window);
     
     void setupParameters();
     void updateSignal();

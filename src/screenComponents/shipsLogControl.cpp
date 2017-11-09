@@ -5,8 +5,8 @@
 #include "gui/gui2_panel.h"
 #include "gui/gui2_advancedscrolltext.h"
 
-ShipsLog::ShipsLog(GuiContainer* owner, string station)
-: GuiElement(owner, ""), station(station)
+ShipsLog::ShipsLog(GuiContainer* owner)
+: GuiElement(owner, "")
 {
     setPosition(0, 0, ABottomCenter);
     setSize(GuiElement::GuiSizeMax, 50);
@@ -26,11 +26,11 @@ void ShipsLog::onDraw(sf::RenderTarget& window)
     if (!my_spaceship)
         return;
 
-    const std::vector<PlayerSpaceship::ShipLogEntry>& logs = my_spaceship->getShipsLog(station);
+    const std::vector<PlayerSpaceship::ShipLogEntry>& logs = my_spaceship->getShipsLog();
     
     if (open)
     {
-        const std::vector<PlayerSpaceship::ShipLogEntry>& logs = my_spaceship->getShipsLog(station);
+        const std::vector<PlayerSpaceship::ShipLogEntry>& logs = my_spaceship->getShipsLog();
         if (log_text->getEntryCount() > 0 && logs.size() == 0)
             log_text->clearEntries();
 
@@ -82,19 +82,4 @@ bool ShipsLog::onMouseDown(sf::Vector2f position)
     else
         setSize(getSize().x, 50);
     return true;
-}
-
-void ShipsLog::onHotkey(const HotkeyResult& key)
-{
-    if (key.category == "RELAY" && my_spaceship)
-    {
-        if (key.hotkey == "OPEN_LOG")
-        {
-			open = !open;
-		    if (open)
-				setSize(getSize().x, 800);
-			else
-				setSize(getSize().x, 50);
-		}
-	}
 }

@@ -14,8 +14,6 @@
 #include "screenComponents/radarView.h"
 #include "screenComponents/shipDestroyedPopup.h"
 
-#include "screens/extra/damcon.h"
-
 #include "gui/gui2_overlay.h"
 
 ScreenMainScreen::ScreenMainScreen()
@@ -35,20 +33,9 @@ ScreenMainScreen::ScreenMainScreen()
     long_range_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->enableCallsigns()->hide();
     long_range_radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
-
-    global_range_radar = new GuiRadarView(this, "GLOBAL", 50000.0f, nullptr);
-    global_range_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    global_range_radar->setAutoCentering(true);
-    global_range_radar->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
-    global_range_radar->hide();
-        
     onscreen_comms = new GuiCommsOverlay(this);
     onscreen_comms->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setVisible(false);
-    
-    ship_state = new DamageControlScreen(this);
-    ship_state->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    ship_state->hide();
-    
+
     new GuiShipDestroyedPopup(this);
     
     new GuiJumpIndicator(this);
@@ -143,36 +130,16 @@ void ScreenMainScreen::update(float delta)
             viewport->show();
             tactical_radar->hide();
             long_range_radar->hide();
-            global_range_radar->hide();
-            ship_state->hide();
             break;
         case MSS_Tactical:
             viewport->hide();
             tactical_radar->show();
             long_range_radar->hide();
-            global_range_radar->hide();
-            ship_state->hide();
             break;
         case MSS_LongRange:
             viewport->hide();
             tactical_radar->hide();
             long_range_radar->show();
-            global_range_radar->hide();
-            ship_state->hide();
-            break;
-        case MSS_GlobalRange:
-            viewport->hide();
-            tactical_radar->hide();
-            long_range_radar->hide();
-            global_range_radar->show();
-            ship_state->hide();
-            break;
-        case MSS_ShipState:
-            viewport->hide();
-            tactical_radar->hide();
-            long_range_radar->hide();
-            global_range_radar->hide();
-            ship_state->show();
             break;
         }
 
@@ -250,42 +217,14 @@ void ScreenMainScreen::onClick(sf::Vector2f mouse_position)
                 my_spaceship->commandMainScreenSetting(MSS_Tactical);
             else if (gameGlobalInfo->allow_main_screen_long_range_radar)
                 my_spaceship->commandMainScreenSetting(MSS_LongRange);
-            else if (gameGlobalInfo->allow_main_screen_global_range_radar)
-                my_spaceship->commandMainScreenSetting(MSS_GlobalRange);
-            else if (gameGlobalInfo->allow_main_screen_ship_state)
-                my_spaceship->commandMainScreenSetting(MSS_ShipState);
             break;
         case MSS_Tactical:
             if (gameGlobalInfo->allow_main_screen_long_range_radar)
                 my_spaceship->commandMainScreenSetting(MSS_LongRange);
-            else if (gameGlobalInfo->allow_main_screen_global_range_radar)
-                my_spaceship->commandMainScreenSetting(MSS_GlobalRange);
-            else if (gameGlobalInfo->allow_main_screen_ship_state)
-                my_spaceship->commandMainScreenSetting(MSS_ShipState);
             break;
         case MSS_LongRange:
-            if (gameGlobalInfo->allow_main_screen_global_range_radar)
-                my_spaceship->commandMainScreenSetting(MSS_GlobalRange);
-            else if (gameGlobalInfo->allow_main_screen_ship_state)
-                my_spaceship->commandMainScreenSetting(MSS_ShipState);
-            else if (gameGlobalInfo->allow_main_screen_tactical_radar)
-                my_spaceship->commandMainScreenSetting(MSS_Tactical);
-            break;
-        case MSS_GlobalRange:
-            if (gameGlobalInfo->allow_main_screen_ship_state)
-                my_spaceship->commandMainScreenSetting(MSS_ShipState);
-            else if (gameGlobalInfo->allow_main_screen_tactical_radar)
-                my_spaceship->commandMainScreenSetting(MSS_Tactical);
-            else if (gameGlobalInfo->allow_main_screen_long_range_radar)
-                my_spaceship->commandMainScreenSetting(MSS_LongRange);
-            break;
-        case MSS_ShipState:
             if (gameGlobalInfo->allow_main_screen_tactical_radar)
                 my_spaceship->commandMainScreenSetting(MSS_Tactical);
-            else if (gameGlobalInfo->allow_main_screen_long_range_radar)
-                my_spaceship->commandMainScreenSetting(MSS_LongRange);
-            else if (gameGlobalInfo->allow_main_screen_global_range_radar)
-                my_spaceship->commandMainScreenSetting(MSS_GlobalRange);
             break;
         }
     }

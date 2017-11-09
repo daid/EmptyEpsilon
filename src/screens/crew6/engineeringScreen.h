@@ -23,7 +23,6 @@ private:
     GuiKeyValueDisplay* hull_display;
     GuiKeyValueDisplay* front_shield_display;
     GuiKeyValueDisplay* rear_shield_display;
-    GuiKeyValueDisplay* oxygen_display;
     GuiLabel* power_label;
     GuiSlider* power_slider;
     GuiLabel* coolant_label;

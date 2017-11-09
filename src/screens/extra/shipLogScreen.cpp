@@ -4,8 +4,8 @@
 
 #include "gui/gui2_advancedscrolltext.h"
 
-ShipLogScreen::ShipLogScreen(GuiContainer* owner, string station)
-: GuiOverlay(owner, "SHIP_LOG_SCREEN", colorConfig.background), station(station)
+ShipLogScreen::ShipLogScreen(GuiContainer* owner)
+: GuiOverlay(owner, "SHIP_LOG_SCREEN", colorConfig.background)
 {
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
 
@@ -20,8 +20,7 @@ void ShipLogScreen::onDraw(sf::RenderTarget& window)
     
     if (my_spaceship)
     {
-        const std::vector<PlayerSpaceship::ShipLogEntry>& logs = my_spaceship->getShipsLog(station);
-
+        const std::vector<PlayerSpaceship::ShipLogEntry>& logs = my_spaceship->getShipsLog();
         if (log_text->getEntryCount() > 0 && logs.size() == 0)
             log_text->clearEntries();
 

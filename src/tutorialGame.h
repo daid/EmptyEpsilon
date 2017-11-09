@@ -34,8 +34,6 @@ public:
     void setPlayerShip(P<PlayerSpaceship> ship);
 
     void showMessage(string message, bool show_next);
-    void showLittleMessage(string message, bool show_next);
-    void hideMessage();
     void switchViewToMainScreen();
     void switchViewToTactical();
     void switchViewToLongRange();

@@ -49,8 +49,6 @@ private:
     GuiButton* copy_scenario_button;
     GuiButton* copy_selected_button;
     GuiSelector* player_ship_selector;
-    GuiSelector* CPU_ship_selector;
-    GuiSelector* space_station_selector;
     
     enum EClickAndDragState
     {
