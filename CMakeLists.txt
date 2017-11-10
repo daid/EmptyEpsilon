@@ -86,7 +86,6 @@ set(SOURCES
 	src/screens/crewStationScreen.cpp
 	src/screens/topDownScreen.cpp
 	src/screens/windowScreen.cpp
-	src/screens/probeScreen.cpp
 	src/screens/mainScreen.cpp
 	src/screens/crew4/operationsScreen.cpp
 	src/screens/crew4/engineeringAdvancedScreen.cpp
@@ -101,6 +100,7 @@ set(SOURCES
 	src/screens/extra/powerManagement.cpp
 	src/screens/extra/databaseScreen.cpp
 	src/screens/extra/shipLogScreen.cpp
+	src/screens/extra/probeScreen.cpp
 	src/screens/gm/gameMasterScreen.cpp
 	src/screens/gm/chatDialog.cpp
 	src/screens/gm/tweak.cpp

@@ -3,17 +3,20 @@
 
 #include "engine.h"
 #include "gui/gui2_canvas.h"
+#include "screenComponents/targetsContainer.h"
+#include "gui/gui2_overlay.h"
+#include "spaceObjects/scanProbe.h"
 
 class GuiViewport3D;
 
-class WindowScreen : public GuiCanvas, public Updatable
+class ProbeScreen : public GuiCanvas, public Updatable
 {
 private:
     GuiViewport3D* viewport;
     float angle;
 	float rotatetime;
 public:
-    WindowScreen();
+    ProbeScreen();
     
     virtual void update(float delta) override;
 

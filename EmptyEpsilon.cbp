@@ -710,6 +710,8 @@
 		<Unit filename="src/screens/extra/powerManagement.h" />
 		<Unit filename="src/screens/extra/shipLogScreen.cpp" />
 		<Unit filename="src/screens/extra/shipLogScreen.h" />
+		<Unit filename="src/screens/extra/probeScreen.cpp" />
+		<Unit filename="src/screens/extra/probeScreen.h" />
 		<Unit filename="src/screens/gm/chatDialog.cpp" />
 		<Unit filename="src/screens/gm/chatDialog.h" />
 		<Unit filename="src/screens/gm/gameMasterScreen.cpp" />
@@ -722,8 +724,6 @@
 		<Unit filename="src/screens/topDownScreen.h" />
 		<Unit filename="src/screens/windowScreen.cpp" />
 		<Unit filename="src/screens/windowScreen.h" />
-		<Unit filename="src/screens/probeScreen.cpp" />
-		<Unit filename="src/screens/probeScreen.h" />
 		<Unit filename="src/script.cpp" />
 		<Unit filename="src/script.h" />
 		<Unit filename="src/shipTemplate.cpp" />
