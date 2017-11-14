@@ -12,13 +12,17 @@ class GuiViewport3D;
 class ProbeScreen : public GuiCanvas, public Updatable
 {
 private:
+    GuiOverlay* background_crosses;
     GuiViewport3D* viewport;
     float angle;
-	float rotatetime;
+    float rotatetime;
+    P<ScanProbe> probe;
 public:
     ProbeScreen();
     
     virtual void update(float delta) override;
+
+    virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
 
 };
 
