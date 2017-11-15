@@ -17,6 +17,7 @@
 #include "screens/extra/damcon.h"
 #include "screens/extra/powerManagement.h"
 #include "screens/extra/databaseScreen.h"
+#include "screens/extra/commsScreen.h"
 
 #include "screens/extra/shipLogScreen.h"
 
@@ -131,8 +132,6 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new ScienceScreen(screen), scienceOfficer, getCrewPositionName(scienceOfficer), getCrewPositionIcon(scienceOfficer));
         if (crew_position[relayOfficer])
             screen->addStationTab(new RelayScreen(screen), relayOfficer, getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
-        if (crew_position[relayOfficerNC])
-            screen->addStationTab(new RelayScreen(screen,false), relayOfficer, getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
         
         //Crew 4/3
         if (crew_position[tacticalOfficer])
@@ -152,6 +151,8 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new PowerManagementScreen(screen), powerManagement, getCrewPositionName(powerManagement), getCrewPositionIcon(powerManagement));
         if (crew_position[databaseView])
             screen->addStationTab(new DatabaseScreen(screen), databaseView, getCrewPositionName(databaseView), getCrewPositionIcon(databaseView));
+	if (crew_position[relayOfficerNC])
+            screen->addStationTab(new RelayScreen(screen,false), relayOfficer, getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
         if (crew_position[commsView])
             screen->addStationTab(new CommsScreen(screen), commsView, getCrewPositionName(commsView), getCrewPositionIcon(commsView));
         
@@ -194,6 +195,7 @@ string getCrewPositionName(ECrewPosition position)
     case engineering: return "Engineering";
     case scienceOfficer: return "Science";
     case relayOfficer: return "Relay";
+    case relayOfficerNC: return "Relay (No comms)";
     case tacticalOfficer: return "Tactical";
     case engineeringAdvanced: return "Engineering+";
     case operationsOfficer: return "Operations";
@@ -201,6 +203,7 @@ string getCrewPositionName(ECrewPosition position)
     case damageControl: return "Damage Control";
     case powerManagement: return "Power Management";
     case databaseView: return "Database";
+    case commsView: return "Comms View";
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -214,6 +217,7 @@ string getCrewPositionIcon(ECrewPosition position)
     case engineering: return "gui/icons/station-engineering";
     case scienceOfficer: return "gui/icons/station-science";
     case relayOfficer: return "gui/icons/station-relay";
+    case relayOfficerNC: return "gui/icons/station-relay";
     case tacticalOfficer: return "";
     case engineeringAdvanced: return "";
     case operationsOfficer: return "";
@@ -221,6 +225,7 @@ string getCrewPositionIcon(ECrewPosition position)
     case damageControl: return "";
     case powerManagement: return "";
     case databaseView: return "";
+    case commsView: return "";
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -261,6 +266,8 @@ template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosit
         cp = powerManagement;
     else if (str == "database" || str == "databaseview")
         cp = databaseView;
+    else if (str == "comms" || str == "commsview")
+        cp = commsView;
     
     else
         luaL_error(L, "Unknown value for crew position: %s", str.c_str());

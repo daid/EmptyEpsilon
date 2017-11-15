@@ -11,7 +11,6 @@ enum ECrewPosition
     engineering,
     scienceOfficer,
     relayOfficer,
-	relayOfficerNC,
     //4/3 player crew
     tacticalOfficer,    //helms+weapons-shields
     engineeringAdvanced,//engineering+shields
@@ -22,7 +21,8 @@ enum ECrewPosition
     damageControl,
     powerManagement,
     databaseView,
-	commsView,
+    relayOfficerNC,
+    commsView,
 
     max_crew_positions
 };

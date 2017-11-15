@@ -10,7 +10,7 @@ class GuiToggleButton;
 class GuiSlider;
 class GuiLabel;
 
-class RelayScreen : public GuiOverlay
+class CommsScreen : public GuiOverlay
 {
 private:
 

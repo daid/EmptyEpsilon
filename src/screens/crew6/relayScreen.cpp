@@ -18,8 +18,8 @@
 #include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"
 
-RelayScreen::RelayScreen(GuiContainer* owner, bool has_comms = true)
-: GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background), mode(TargetSelection)
+RelayScreen::RelayScreen(GuiContainer* owner, bool has_comms)
+: GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background),has_comms(has_comms),mode(TargetSelection)
 {
     targets.setAllowWaypointSelection();
     radar = new GuiRadarView(this, "RELAY_RADAR", 50000.0f, &targets);
