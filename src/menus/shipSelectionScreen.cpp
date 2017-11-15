@@ -434,6 +434,8 @@ void ShipSelectionScreen::updateCrewTypeOptions()
         crew_position_button[damageControl]->show();
         crew_position_button[powerManagement]->show();
         crew_position_button[databaseView]->show();
+	crew_position_button[relayOfficerNC]->show();
+	crew_position_button[commsView]->show();
         break;
     case 3:
         main_screen_button->hide();
