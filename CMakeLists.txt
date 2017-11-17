@@ -100,6 +100,7 @@ set(SOURCES
 	src/screens/extra/powerManagement.cpp
 	src/screens/extra/databaseScreen.cpp
 	src/screens/extra/shipLogScreen.cpp
+	src/screens/extra/radarScreen.cpp
 	src/screens/extra/probeScreen.cpp
 	src/screens/gm/gameMasterScreen.cpp
 	src/screens/gm/chatDialog.cpp
