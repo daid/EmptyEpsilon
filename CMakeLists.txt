@@ -101,6 +101,8 @@ set(SOURCES
 	src/screens/extra/databaseScreen.cpp
 	src/screens/extra/commsScreen.cpp
 	src/screens/extra/shipLogScreen.cpp
+	src/screens/extra/radarScreen.cpp
+	src/screens/extra/probeScreen.cpp
 	src/screens/gm/gameMasterScreen.cpp
 	src/screens/gm/chatDialog.cpp
 	src/screens/gm/tweak.cpp

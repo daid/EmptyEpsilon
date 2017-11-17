@@ -21,6 +21,8 @@
 
 #include "screens/extra/shipLogScreen.h"
 
+#include "screens/extra/radarScreen.h"
+
 #include "screenComponents/mainScreenControls.h"
 #include "screenComponents/selfDestructEntry.h"
 
@@ -151,11 +153,16 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new PowerManagementScreen(screen), powerManagement, getCrewPositionName(powerManagement), getCrewPositionIcon(powerManagement));
         if (crew_position[databaseView])
             screen->addStationTab(new DatabaseScreen(screen), databaseView, getCrewPositionName(databaseView), getCrewPositionIcon(databaseView));
-	if (crew_position[relayOfficerNC])
+      	if (crew_position[relayOfficerNC])
             screen->addStationTab(new RelayScreen(screen,false), relayOfficer, getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
         if (crew_position[commsView])
             screen->addStationTab(new CommsScreen(screen), commsView, getCrewPositionName(commsView), getCrewPositionIcon(commsView));
-        
+        if (crew_position[tacticalRadar])
+            screen->addStationTab(new RadarScreen(screen,"tactical"), tacticalRadar, getCrewPositionName(tacticalRadar), getCrewPositionIcon(tacticalRadar));
+        if (crew_position[scienceRadar])
+            screen->addStationTab(new RadarScreen(screen,"science"), scienceRadar, getCrewPositionName(scienceRadar), getCrewPositionIcon(scienceRadar));
+        if (crew_position[relayRadar])
+            screen->addStationTab(new RadarScreen(screen,"relay"), relayRadar, getCrewPositionName(relayRadar), getCrewPositionIcon(relayRadar));
         //Ship log screen, if you have comms, you have ships log. (note this is mostly replaced by the [at the bottom of the screen openable log]
         if (crew_position[singlePilot])
             screen->addStationTab(new ShipLogScreen(screen), max_crew_positions, "Ships log", "");
@@ -204,6 +211,9 @@ string getCrewPositionName(ECrewPosition position)
     case powerManagement: return "Power Management";
     case databaseView: return "Database";
     case commsView: return "Comms View";
+    case tacticalRadar: return "Tactical Radar";
+    case scienceRadar: return "Science Radar";
+    case relayRadar: return "Relay Radar";
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -226,6 +236,9 @@ string getCrewPositionIcon(ECrewPosition position)
     case powerManagement: return "";
     case databaseView: return "";
     case commsView: return "";
+    case tacticalRadar: return "";
+    case scienceRadar: return "";
+    case relayRadar: return "";
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -268,7 +281,12 @@ template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosit
         cp = databaseView;
     else if (str == "comms" || str == "commsview")
         cp = commsView;
-    
+    else if (str == "tacticalradar" || str == "tacticalradarview")
+        cp = tacticalRadar;
+    else if (str == "scienceradar" || str == "scienceradarview")
+        cp = scienceRadar;
+    else if (str == "relayradar" || str == "relayradarview")
+        cp = relayRadar;
     else
         luaL_error(L, "Unknown value for crew position: %s", str.c_str());
 }

@@ -23,6 +23,9 @@ enum ECrewPosition
     databaseView,
     relayOfficerNC,
     commsView,
+    tacticalRadar,
+    scienceRadar,
+    relayRadar,
 
     max_crew_positions
 };
