@@ -162,11 +162,11 @@ To dock, maneuver within 1u of a station and press the "Request Dock" button, fr
 Maneuver to the nearby station and request permission to dock.]], function() return player:isDocked(prev_object) end)
 addToSequence(helmsTutorial, [[Now that you are docked, your movement is locked. As helms officer, there is nothing else you can do but undock, so do that now.]], function() return not player:isDocked(prev_object) end)
 addToSequence(helmsTutorial, function() prev_object:destroy() end)
-addToSequence(helmsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Flavia"):setPosition(-1500, 1500):orderIdle():setScanned(true) end)
+addToSequence(helmsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Flavia"):setPosition(-1500, 1500):orderIdle():setScanned(true):setHull(15):setShieldsMax(15) end)
 addToSequence(helmsTutorial, function() player:commandSetTarget(prev_object) end)
 addToSequence(helmsTutorial, [[Ok, there are just a few more things that you need to know.
-Remember the beam weapons from the basics tutorial? As helms officer, is it your task to keep those beams on your target.
-I've set up an stationary enemy ship as a target. Destroy it with your beam weapons.]], function() return not prev_object:isValid() end)
+Remember the beam weapons from the basics tutorial? As helms officer, it is your task to keep those beams on your target.
+I've set up an stationary enemy ship as a target. Destroy it with your beam weapons. Note that at every shot, the corresponding firing arc will change color]], function() return not prev_object:isValid() end)
 addToSequence(helmsTutorial, [[Aggression is not always the solution, but boy, it is fun!
 
 On to the next task: moving long distances.
