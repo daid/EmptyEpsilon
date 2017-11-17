@@ -149,6 +149,7 @@ public:
     EAlertLevel alert_level;
 
     int32_t linked_science_probe_id;
+    int32_t linked_probe_3D_id;
 
     PlayerSpaceship();
 
@@ -202,6 +203,7 @@ public:
     void commandJump(float distance);
     void commandSetTarget(P<SpaceObject> target);
     void commandSetScienceLink(int32_t id);
+    void commandSetProbe3DLink(int32_t id);
     void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
     void commandUnloadTube(int8_t tubeNumber);
     void commandFireTube(int8_t tubeNumber, float missile_target_angle);
