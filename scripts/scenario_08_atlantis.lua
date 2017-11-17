@@ -1,4 +1,4 @@
--- Name: Birth of the Altantis
+-- Name: Birth of the Atlantis
 -- Description: You are the first crew of a new and improved version of the Atlantis space explorer.
 --- Your mission will be to take it trough it's first tests and initial mission.
 -- Type: Mission
@@ -105,7 +105,12 @@ function init()
     
     nebula = table.remove(b20_nebula_list, math.random(#b20_nebula_list))
     x, y = nebula:getPosition()
-    b20_artifact = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setDescription("An odd object floating in space.")
+    b20_artifact = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setDescriptions("An odd object floating in space.", string.format([[Found it, this object is giving off strange readings.
+Sensor readings:
+Beta radiation: %i
+Gravity disruption: %i
+Ionic phase shift: %i
+Doppler instability: %i]], b20_artifact.beta_radiation, b20_artifact.gravity_disruption, b20_artifact.ionic_phase_shift, b20_artifact.doppler_instability))
     b20_artifact:setScanningParameters(3, 1)
     b20_artifact.nebula = nebula
     b20_artifact.beta_radiation = irandom(1, 10)
@@ -114,11 +119,11 @@ function init()
     b20_artifact.doppler_instability = irandom(1, 10)
 
     x, y = table.remove(b20_nebula_list, math.random(#b20_nebula_list)):getPosition()
-    b20_dummy_artifact_1 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setDescription("An odd object floating in space.")
+    b20_dummy_artifact_1 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setDescriptions("An odd object floating in space.", "This object seems to be inhert, and not giving any readings on your sensors. The actual object must be somewhere else.")
     b20_dummy_artifact_1:setScanningParameters(3, 1)
 
     x, y = table.remove(b20_nebula_list, math.random(#b20_nebula_list)):getPosition()
-    b20_dummy_artifact_2 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setDescription("An odd object floating in space.")
+    b20_dummy_artifact_2 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setDescriptions("An odd object floating in space.", "This object seems to be inhert, and not giving any readings on your sensors. The actual object must be somewhere else.")
     b20_dummy_artifact_2:setScanningParameters(3, 1)
 
     x, y = table.remove(b20_nebula_list, math.random(#b20_nebula_list)):getPosition()
@@ -340,12 +345,6 @@ end
 
 function phase2SeekArtifact(delta)
     if b20_artifact:isScannedBy(player) then
-        b20_artifact:setDescription(string.format([[Found it, this object is giving off strange readings.
-Sensor readings:
-Beta radiation: %i
-Gravity disruption: %i
-Ionic phase shift: %i
-Doppler instability: %i]], b20_artifact.beta_radiation, b20_artifact.gravity_disruption, b20_artifact.ionic_phase_shift, b20_artifact.doppler_instability))
         mission_state = phase2ReportArtifactReadings
     end
 end
@@ -787,15 +786,6 @@ function update(delta)
         if distance(player, station) < 3000 then
             putKraylorDefenseLineOnFullOffense()
         end
-    end
-
-    if b20_dummy_artifact_1 ~= nil and b20_dummy_artifact_1:isScannedBy(player) then
-        b20_dummy_artifact_1:setDescription("This object seems to be inhert, and not giving any readings on your sensors. The actual object must be somewhere else.")
-        b20_dummy_artifact_1 = nil
-    end
-    if b20_dummy_artifact_2 ~= nil and b20_dummy_artifact_2:isScannedBy(player) then
-        b20_dummy_artifact_2:setDescription("This object seems to be inhert, and not giving any readings on your sensors. The actual object must be somewhere else.")
-        b20_dummy_artifact_2 = nil
     end
     
     if mission_state ~= nil then

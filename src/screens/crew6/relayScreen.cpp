@@ -62,7 +62,11 @@ RelayScreen::RelayScreen(GuiContainer* owner)
                 break;
             case LaunchProbe:
                 if (my_spaceship)
-                    my_spaceship->commandLaunchProbe(position);
+				{
+					my_spaceship->commandLaunchProbe(position);
+					targets.setToClosestTo(my_spaceship->getPosition(), 500, TargetsContainer::Targetable);
+					my_spaceship->commandSetProbe3DLink(targets.get()->getMultiplayerId());
+				}
                 mode = TargetSelection;
                 option_buttons->show();
                 break;
@@ -115,6 +119,15 @@ RelayScreen::RelayScreen(GuiContainer* owner)
             my_spaceship->commandSetScienceLink(-1);
     });
     link_to_science_button->setSize(GuiElement::GuiSizeMax, 50);
+	
+    // Link probe to 3D port button.
+    link_to_3D_port_button = new GuiToggleButton(option_buttons, "LINK_TO_3D_PORT", "Camera Probe", [this](bool value){
+        if (value)
+            my_spaceship->commandSetProbe3DLink(targets.get()->getMultiplayerId());
+        else
+            my_spaceship->commandSetProbe3DLink(-1);
+    });
+    link_to_3D_port_button->setSize(GuiElement::GuiSizeMax, 50);
 
     // Manage waypoints.
     (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", "Place Waypoint", [this]() {
@@ -247,13 +260,19 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
         {
             link_to_science_button->setValue(my_spaceship->linked_science_probe_id == probe->getMultiplayerId());
             link_to_science_button->enable();
+			
+            link_to_3D_port_button->setValue(my_spaceship->linked_probe_3D_id == probe->getMultiplayerId());
+            link_to_3D_port_button->enable();
         }
         else
         {
             link_to_science_button->setValue(false);
             link_to_science_button->disable();
+			
+            link_to_3D_port_button->setValue(false);
+            link_to_3D_port_button->disable();
         }
-        if (obj->canBeHackedBy(my_spaceship))
+        if (my_spaceship && obj->canBeHackedBy(my_spaceship))
         {
             hack_target_button->enable();
         }else{
@@ -263,6 +282,8 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
         hack_target_button->disable();
         link_to_science_button->disable();
         link_to_science_button->setValue(false);
+		link_to_3D_port_button->disable();
+		link_to_3D_port_button->setValue(false);
         info_callsign->setValue("-");
     }
     if (my_spaceship)

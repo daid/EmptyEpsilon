@@ -5,6 +5,7 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "screens/windowScreen.h"
+#include "screens/extra/probeScreen.h"
 #include "screens/topDownScreen.h"
 #include "screens/cinematicViewScreen.h"
 #include "screens/gm/gameMasterScreen.h"
@@ -75,6 +76,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     // Game master button
     game_master_button = new GuiToggleButton(stations_layout, "GAME_MASTER_BUTTON", "Game master", [this](bool value) {
         window_button->setValue(false);
+		probe_button->setValue(false);
         topdown_button->setValue(false);
         cinematic_view_button->setValue(false);
     });
@@ -86,6 +88,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     window_button = new GuiToggleButton(window_button_row, "WINDOW_BUTTON", "Ship window", [this](bool value) {
         game_master_button->setValue(false);
         topdown_button->setValue(false);
+		probe_button->setValue(false);
         cinematic_view_button->setValue(false);
     });
     window_button->setSize(175, 50);
@@ -96,11 +99,21 @@ ShipSelectionScreen::ShipSelectionScreen()
     window_angle->setSize(GuiElement::GuiSizeMax, 50);
     window_angle_label = new GuiLabel(window_angle, "WINDOW_ANGLE_LABEL", "0 degrees", 30);
     window_angle_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+	
+	// Probe view button
+    probe_button = new GuiToggleButton(stations_layout, "PROBE_BUTTON", "Probe view", [this](bool value) {
+        game_master_button->setValue(false);
+        window_button->setValue(false);
+		topdown_button->setValue(false);
+        cinematic_view_button->setValue(false);
+    });
+    probe_button->setSize(GuiElement::GuiSizeMax, 50);
 
     // Top-down view button
     topdown_button = new GuiToggleButton(stations_layout, "TOP_DOWN_3D_BUTTON", "Top-down 3D view", [this](bool value) {
         game_master_button->setValue(false);
         window_button->setValue(false);
+        probe_button->setValue(false);
         cinematic_view_button->setValue(false);
     });
     topdown_button->setSize(GuiElement::GuiSizeMax, 50);
@@ -109,6 +122,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     cinematic_view_button = new GuiToggleButton(stations_layout, "CINEMATIC_VIEW_BUTTON", "Cinematic view", [this](bool value) {
         game_master_button->setValue(false);
         window_button->setValue(false);
+		probe_button->setValue(false);
         topdown_button->setValue(false);
     });
     cinematic_view_button->setSize(GuiElement::GuiSizeMax, 50);
@@ -376,9 +390,11 @@ void ShipSelectionScreen::updateReadyButton()
         // TODO: Allow GM or spectator screens to require a control code.
         else if (game_master_button->getValue() || topdown_button->getValue() || cinematic_view_button->getValue())
             ready_button->enable();
-        // If a player ship and the window view are selected, enable the Ready
-        // button.
+        // If a player ship and the window view are selected, enable the Ready button.
         else if (my_spaceship && window_button->getValue())
+            ready_button->enable();
+		// If a player ship and the probe view are selected, enable the Ready button.
+        else if (my_spaceship && probe_button->getValue())
             ready_button->enable();
         // Otherwise, disable the Ready button.
         else
@@ -399,6 +415,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
     // Hide and unselect alternative and view screens.
     game_master_button->hide();
     window_button->hide();
+    probe_button->hide();
     window_angle->hide();
     topdown_button->hide();
     cinematic_view_button->hide();
@@ -407,6 +424,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
     main_screen_controls_button->setVisible(crew_type_selector->getSelectionIndex() != 3);
     game_master_button->setValue(false);
     window_button->setValue(false);
+    probe_button->setValue(false);
     topdown_button->setValue(false);
     cinematic_view_button->setValue(false);
 
@@ -442,6 +460,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
         main_screen_button->hide();
         game_master_button->setVisible(bool(game_server));
         window_button->setVisible(canDoMainScreen());
+        probe_button->setVisible(canDoMainScreen());
         window_angle->setVisible(canDoMainScreen());
         topdown_button->setVisible(canDoMainScreen());
         cinematic_view_button->setVisible(canDoMainScreen());
@@ -478,6 +497,10 @@ void ShipSelectionScreen::onReadyClick()
     {
         destroy();
         new WindowScreen(int(window_angle->getValue()));
+    }else if (probe_button->getValue())
+    {
+        destroy();
+        new ProbeScreen();
     }else if(topdown_button->getValue())
     {
         my_player_info->commandSetShipId(-1);
