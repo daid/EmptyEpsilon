@@ -4,6 +4,27 @@
 
 - Nothing
 
+## [2017-11-03]
+
+### Added
+
+- Game Master slides to control combat speed.
+- Random object creation helper functions.
+- Joystick controls for single pilot screen.
+- Weapon hotkeys for tactical and single pilot screens.
+
+### Changed
+
+- Can set a description on each object based on scan state.
+- Darken screen when your ship is destroyed.
+
+### Fixed
+
+- (Possibly) Crash on the relay station when your ship is destroyed.
+- Main screen buttons properly reset state on target follow selection.
+- Spelling on _Birth of the Atlantis_ scenario.
+- TOGGLE_AIM_LOCK will only work if button state is properly set.
+
 ## [2017-05-06] 
 
 ### Added
@@ -552,9 +573,10 @@
 - create button visible through the cancel button on game master screen
 - clicking outside the radar circle but inside its reactangle caused callbacks
 
-[Unreleased]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.05.06...HEAD
-[2017-05-06]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.02.23...EE-2017-05-06
-[2017-02-23]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.01.19...EE-2017-02-23
+[Unreleased]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.11.03...HEAD
+[2017-11-03]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.05.06...EE-2017.11.03
+[2017-05-06]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.02.23...EE-2017.05.06
+[2017-02-23]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.01.19...EE-2017.02.23
 [2017-01-19]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.09.02...EE-2017.01.19
 [2016-09-02]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.24...EE-2016.09.02
 [2016-06-24]: https://github.com/daid/EmptyEpsilon/compare/EE-2016.06.23...EE-2016.06.24
