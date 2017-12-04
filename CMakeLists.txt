@@ -22,8 +22,24 @@ if(NOT DEFINED CPACK_PACKAGE_VERSION_MAJOR)
  string(TIMESTAMP CPACK_PACKAGE_VERSION_PATCH "%d")
 endif(NOT DEFINED CPACK_PACKAGE_VERSION_MAJOR)
 
+# Set our optimization flags.
+set(OPTIMIZER_FLAGS "")
+if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
+    # On gcc, we want some general optimalizations that improve speed a lot.
+    set(OPTIMIZER_FLAGS "${OPTIMIZER_FLAGS} -O3 -flto -funsafe-math-optimizations")
+
+    # If we are compiling for a rasberry pi, we want to aggressively optimize for the CPU we are running on.
+    # Note that this check only works if we are compiling directly on the pi, as it is a dirty way of checkif if we are on the pi.
+    if(EXISTS /opt/vc/include/bcm_host.h OR COMPILE_FOR_PI)
+        set(OPTIMIZER_FLAGS "${OPTIMIZER_FLAGS} -mcpu=native -mfpu=neon-vfpv4 -mfloat-abi=hard")
+    endif()
+endif()
+
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} ${OPTIMIZER_FLAGS}")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ${OPTIMIZER_FLAGS}")
 
 # install resources, scripts, and packs to app bundle instead of system dir.
 if(APPLE)
