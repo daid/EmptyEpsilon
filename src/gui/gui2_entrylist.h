@@ -34,15 +34,15 @@ public:
     void setEntry(int index, string name, string value);
 
     int addEntry(string name, string value);
-    int indexByValue(string value);
+    int indexByValue(string value) const;
     void removeEntry(int index);
-    int entryCount();
-    string getEntryName(int index);
-    string getEntryValue(int index);
-    
-    int getSelectionIndex();
+    int entryCount() const;
+    string getEntryName(int index) const;
+    string getEntryValue(int index) const;
+
+    int getSelectionIndex() const;
     GuiEntryList* setSelectionIndex(int index);
-    string getSelectionValue();
+    string getSelectionValue() const;
 protected:
     void callback();
 private:

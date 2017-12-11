@@ -26,8 +26,8 @@ public:
     GuiButton* setText(string text);
     GuiButton* setTextSize(float size);
     GuiButton* setIcon(string icon_name, EGuiAlign icon_alignment = ACenterLeft, float rotation=0);
-    string getText();
-    string getIcon();
+    string getText() const;
+    string getIcon() const;
 };
 
 #endif//GUI2_BUTTON_H

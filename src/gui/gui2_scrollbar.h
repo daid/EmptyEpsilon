@@ -27,10 +27,10 @@ public:
     void setValueSize(int size);
     
     void setValue(int value);
-    int getValue();
-    
-    int getMax();
-    int getMin();
+    int getValue() const;
+
+    int getMax() const;
+    int getMin() const;
 };
 
 #endif//GUI2_SCROLLBAR_H

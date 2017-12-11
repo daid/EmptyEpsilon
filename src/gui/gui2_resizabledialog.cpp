@@ -49,7 +49,7 @@ void GuiResizableDialog::minimize(bool minimize)
     minimized = minimize;
 }
 
-bool GuiResizableDialog::isMinimized()
+bool GuiResizableDialog::isMinimized() const
 {
     return minimized;
 }
