@@ -60,8 +60,6 @@ public:
 
     virtual string getExportLine() override;
 
-    friend class GameMasterUI;
-
     float missile_resupply;
 };
 string getAIOrderString(EAIOrder order);
