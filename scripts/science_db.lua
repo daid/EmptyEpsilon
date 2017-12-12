@@ -12,7 +12,7 @@ item:setLongDescription([[Nebulae are the birthing places of new stars. These ga
 item = space_objects:addEntry('Black hole')
 item:setLongDescription([[A black hole is a point of supercondensed mass with a gravitational pull so powerful that not even light can escape it. It has no locally detectable features, and can only be seen indirectly by blocking the view and distorting its surroundings, creating a strange circular mirror image of the galaxy. The black disc in the middle marks the event horizon, the boundary where event light can't escape it anymore. 
 	
-On the sensors, a black hole appears as a disc indicating the zone where the pull is getting stronger then the ship's engines. An object that crosses a black hole is drawn toward its center and quickly ripped apart by the gravitational forces.]])
+On the sensors, a black hole appears as a disc indicating the zone where the gravitational pull is getting dangerous, and soon will be stronger then the ship's impulse engines. An object that crosses a black hole is drawn toward its center and quickly ripped apart by the gravitational forces.]])
 
 item = space_objects:addEntry('Wormhole')
 item:setLongDescription([[A wormhole, also known as an Einstein-Rosen bridge, is a phenomena that connects two points of spacetime. Jump drives operate in a similar fashion, but instead of being created at will, a wormhole occupies a specific location in space. Objects that enter a wormhole instantaneously emerge from the other end, which might be anywhere from a few feet to thousands of light years away. 
