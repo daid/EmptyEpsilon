@@ -12,7 +12,7 @@
 --- -By adding coolant to a system, the Engineering officer can reduce its temperature and prevent the system from damaging the ship. The ship has an unlimited reseve of coolant, but a finite amount of coolant can be applied at any given time, so the Engineering officer must budget how much coolant each system can receive. A system's change in temperature is indicated by white arrows in the temperature column. The brighter an arrow is, the larger the trend.
 ---
 ---Repairs: 
---- -When systems are damaged by being shot, colliding with space hazards, or overheating, the Engineering officer can dispatch repair crews to the system for repairs. Each systems has a damage state between -100% to 100%. Systems below 100% function suboptimally, in much the same way as if they are underpowered. Once a system is at or below 0%, it completely stops functioning until it is repaired. Systems can be repaired by sending a repair crew to the room containing the system. Hull damage affects the entire ship, and repair crews can always repair it, but hull repairs progress very slowly.
+--- -When systems are damaged by being shot, colliding with space hazards, or overheating, the Engineering officer can dispatch repair crews to the system for repairs. Each systems has a damage state between -100% to 100%. Systems below 100% function suboptimally, in much the same way as if they are underpowered. Once a system is at or below 0%, it completely stops functioning until it is repaired. Systems can be repaired by sending a repair crew to the room containing the system. Hull damage affects the entire ship, and docking at a station can repair it, but hull repairs progress very slowly.
 -- Type: Basic
 require("utils.lua")
 
