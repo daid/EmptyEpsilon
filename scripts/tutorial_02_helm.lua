@@ -166,7 +166,7 @@ addToSequence(helmsTutorial, function() prev_object = CpuShip():setFaction("Kray
 addToSequence(helmsTutorial, function() player:commandSetTarget(prev_object) end)
 addToSequence(helmsTutorial, [[Ok, there are just a few more things that you need to know.
 Remember the beam weapons from the basics tutorial? As helms officer, it is your task to keep those beams on your target.
-I've set up an stationary enemy ship as a target. Destroy it with your beam weapons. Note that at every shot, the corresponding firing arc will change color]], function() return not prev_object:isValid() end)
+I've set up an stationary enemy ship as a target. Destroy it with your beam weapons. Note that at every shot, the corresponding firing arc will change color.]], function() return not prev_object:isValid() end)
 addToSequence(helmsTutorial, [[Aggression is not always the solution, but boy, it is fun!
 
 On to the next task: moving long distances.
