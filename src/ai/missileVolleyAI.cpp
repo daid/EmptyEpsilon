@@ -53,22 +53,25 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
 
     if (distance < 4500 && has_missiles)
     {
-        bool all_loaded = true;
+        bool all_possible_loaded = true;
         for(int n=0; n<owner->weapon_tube_count; n++)
         {
-            if (owner->weapon_tube[n].isLoaded())
+            WeaponTube& weapon_tube = owner->weapon_tube[n];
+            //Base AI class already loads the tubes with available missiles.
+            //If a tube is not loaded, but is currently being load with a new missile, then we still have missiles to load before we want to fire.
+            if (weapon_tube.isLoading())
             {
-                all_loaded = false;
+                all_possible_loaded = false;
                 break;
             }
         }
         
-        if (all_loaded)
+        if (all_possible_loaded)
         {
             int can_fire_count = 0;
             for(int n=0; n<owner->weapon_tube_count; n++)
             {
-                float target_angle = calculateFiringSolution(target, owner->weapon_tube[n].getLoadType());
+                float target_angle = calculateFiringSolution(target, n);
                 if (target_angle != std::numeric_limits<float>::infinity())
                 {
                     can_fire_count++;
@@ -77,7 +80,7 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
             
             for(int n=0; n<owner->weapon_tube_count; n++)
             {
-                float target_angle = calculateFiringSolution(target, owner->weapon_tube[n].getLoadType());
+                float target_angle = calculateFiringSolution(target, n);
                 if (target_angle != std::numeric_limits<float>::infinity())
                 {
                     can_fire_count--;
@@ -95,7 +98,7 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
     sf::Vector2f target_position;
     if (flank_position == Left)
     {
-        target_position = target->getPosition() + sf::vector2FromAngle(target_angle - 100) * 3500.0f;
+        target_position = target->getPosition() + sf::vector2FromAngle(target_angle - 120) * 3500.0f;
     }else{
         target_position = target->getPosition() + sf::vector2FromAngle(target_angle + 120) * 3500.0f;
     }
