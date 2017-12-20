@@ -3,7 +3,7 @@
 
 #include <SFML/System.hpp>
 #include <stdint.h>
-#include "hardwareOutputDevice.h"
+#include "hardware/hardwareOutputDevice.h"
 
 class UDMXDevice : public HardwareOutputDevice
 {

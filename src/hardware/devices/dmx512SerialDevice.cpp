@@ -1,5 +1,5 @@
 #include "dmx512SerialDevice.h"
-#include "serialDriver.h"
+#include "hardware/serialDriver.h"
 #include "logging.h"
 
 DMX512SerialDevice::DMX512SerialDevice()

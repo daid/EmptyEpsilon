@@ -1,5 +1,5 @@
 #include "enttecDMXProDevice.h"
-#include "serialDriver.h"
+#include "hardware/serialDriver.h"
 #include "logging.h"
 
 EnttecDMXProDevice::EnttecDMXProDevice()

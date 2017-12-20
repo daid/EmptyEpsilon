@@ -6,11 +6,12 @@
 #include "spaceObjects/nebula.h"
 #include "spaceObjects/warpJammer.h"
 
-#include "dmx512SerialDevice.h"
-#include "enttecDMXProDevice.h"
-#include "virtualOutputDevice.h"
-#include "sACNDMXDevice.h"
-#include "uDMXDevice.h"
+#include "devices/dmx512SerialDevice.h"
+#include "devices/enttecDMXProDevice.h"
+#include "devices/virtualOutputDevice.h"
+#include "devices/sACNDMXDevice.h"
+#include "devices/uDMXDevice.h"
+
 #include "hardwareMappingEffects.h"
 
 HardwareController::HardwareController()

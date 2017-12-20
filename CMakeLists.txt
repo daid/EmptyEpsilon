@@ -222,15 +222,15 @@ set(SOURCES
 	src/ai/ai.cpp
 	src/ai/aiFactory.cpp
 	src/ai/missileVolleyAI.cpp
-	src/hardware/dmx512SerialDevice.cpp
-	src/hardware/enttecDMXProDevice.cpp
-	src/hardware/sACNDMXDevice.cpp
-	src/hardware/uDMXDevice.cpp
 	src/hardware/hardwareController.cpp
 	src/hardware/hardwareMappingEffects.cpp
 	src/hardware/hardwareOutputDevice.cpp
 	src/hardware/serialDriver.cpp
-	src/hardware/virtualOutputDevice.cpp
+	src/hardware/devices/dmx512SerialDevice.cpp
+	src/hardware/devices/enttecDMXProDevice.cpp
+	src/hardware/devices/sACNDMXDevice.cpp
+	src/hardware/devices/uDMXDevice.cpp
+	src/hardware/devices/virtualOutputDevice.cpp
 )
 if(WIN32)
     list(APPEND SOURCES EmptyEpsilon.rc)
