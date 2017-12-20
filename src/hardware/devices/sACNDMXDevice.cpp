@@ -20,6 +20,7 @@ StreamingAcnDMXDevice::StreamingAcnDMXDevice()
         uuid[n] = uint8_t(irandom(0, 255));
     memset(source_name, 0, sizeof(source_name));
     strcpy((char*)source_name, "EmptyEpsilon");
+    run_thread = false;
 }
 
 StreamingAcnDMXDevice::~StreamingAcnDMXDevice()

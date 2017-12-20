@@ -10,6 +10,7 @@ DMX512SerialDevice::DMX512SerialDevice()
         data_stream[n] = 0;
     channel_count = 512;
     resend_delay = 25;
+    run_thread = false;
 }
 
 DMX512SerialDevice::~DMX512SerialDevice()

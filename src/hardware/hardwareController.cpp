@@ -11,6 +11,7 @@
 #include "devices/virtualOutputDevice.h"
 #include "devices/sACNDMXDevice.h"
 #include "devices/uDMXDevice.h"
+#include "devices/philipsHueDevice.h"
 
 #include "hardwareMappingEffects.h"
 
@@ -100,6 +101,10 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
             device = new StreamingAcnDMXDevice();
         else if (settings["device"] == "uDMXDevice")
             device = new UDMXDevice();
+        else if (settings["device"] == "PhilipsHueDevice")
+            device = new PhilipsHueDevice();
+        else
+            LOG(ERROR) << "Unknown device definition in [hardware] section: " << settings["device"];
         if (device)
         {
             if (!device->configure(settings))

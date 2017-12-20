@@ -231,6 +231,7 @@ set(SOURCES
 	src/hardware/devices/sACNDMXDevice.cpp
 	src/hardware/devices/uDMXDevice.cpp
 	src/hardware/devices/virtualOutputDevice.cpp
+	src/hardware/devices/philipsHueDevice.cpp
 )
 if(WIN32)
     list(APPEND SOURCES EmptyEpsilon.rc)
