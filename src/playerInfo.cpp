@@ -247,7 +247,7 @@ template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosit
         cp = operationsOfficer; //science+comms
 
     //1 player crew
-    else if (str == "single" || str == "singlePilot")
+    else if (str == "single" || str == "singlepilot")
         cp = singlePilot;
 
     //extras
