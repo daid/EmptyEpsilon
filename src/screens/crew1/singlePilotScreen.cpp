@@ -22,6 +22,8 @@
 #include "screenComponents/openCommsButton.h"
 #include "screenComponents/commsOverlay.h"
 
+#include "screenComponents/customShipFunctions.h"
+
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_rotationdial.h"
 
