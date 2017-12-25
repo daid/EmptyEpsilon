@@ -207,7 +207,7 @@ string getSectorName(sf::Vector2f position)
     if (sector_y >= 0)
         y = string(char('A' + (sector_y)));
     else
-        y = string(char('z' + sector_y / 20)) + string(char('z' + 1 + (sector_y % 26)));
+        y = string(char('z' + sector_y / 26)) + string(char('z' + 1 + (sector_y % 26)));
     if (sector_x >= 0)
         x = string(sector_x);
     else
