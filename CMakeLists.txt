@@ -7,6 +7,9 @@ option(ENABLE_CRASH_LOGGER "Enable the drmingw crash logging facilities" OFF)
 if(NOT DEFINED SERIOUS_PROTON_DIR)
  message(FATAL_ERROR "SERIOUS_PROTON_DIR was not set. Unable to continue")
 endif(NOT DEFINED SERIOUS_PROTON_DIR)
+if(NOT IS_ABSOLUTE "${SERIOUS_PROTON_DIR}")
+  get_filename_component(SERIOUS_PROTON_DIR "${CMAKE_BINARY_DIR}/${SERIOUS_PROTON_DIR}" ABSOLUTE)
+endif()
 
 if(DEFINED ENABLE_CRASH_LOGGER)
  if(WIN32)
@@ -344,7 +347,7 @@ foreach(SP_SOURCE
 	src/lua/lgc.c
 	src/lua/lbitlib.c
 	)
-  	list(APPEND SOURCES ${SERIOUS_PROTON_DIR}${SP_SOURCE})
+	list(APPEND SOURCES ${SERIOUS_PROTON_DIR}/${SP_SOURCE})
 endforeach()
 
 add_definitions(-DWINDOW_TITLE="EmptyEpsilon")
