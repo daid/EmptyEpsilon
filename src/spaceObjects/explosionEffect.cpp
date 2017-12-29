@@ -2,6 +2,13 @@
 #include "main.h"
 #include "explosionEffect.h"
 
+/// ExplosionEffect is a visible explosion, like from nukes, missiles, ship destruction, etc
+/// Example: ExplosionEffect():setPosition(500,5000):setSize(20)
+REGISTER_SCRIPT_SUBCLASS(ExplosionEffect, SpaceObject)
+{
+    REGISTER_SCRIPT_CLASS_FUNCTION(ExplosionEffect, setSize);
+}
+
 REGISTER_MULTIPLAYER_CLASS(ExplosionEffect, "ExplosionEffect");
 ExplosionEffect::ExplosionEffect()
 : SpaceObject(1000.0, "ExplosionEffect")
