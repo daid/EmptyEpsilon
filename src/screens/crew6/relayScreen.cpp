@@ -185,8 +185,8 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
     if (mouse_wheel_delta != 0.0)
     {
         float view_distance = radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
-        if (view_distance > 50000.0f)
-            view_distance = 50000.0f;
+        if (view_distance > 10000000.0f)
+            view_distance = 10000000.0f;
         if (view_distance < 6250.0f)
             view_distance = 6250.0f;
         radar->setDistance(view_distance);

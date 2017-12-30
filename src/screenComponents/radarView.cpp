@@ -200,10 +200,14 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
 {
     sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
 
-    constexpr float sector_size = 20000;
-    const float sub_sector_size = sector_size / 8;
+    constexpr float base_sector_size = 20000;
+    constexpr float sub_sectors_count = 8;
 
-    float scale = std::min(rect.width, rect.height) / 2.0 / distance;
+    const float scale = std::min(rect.width, rect.height) / 2.0 / distance;
+    const float scale_magnitude = 2 - std::min(2.f, std::floor(std::log10(base_sector_size * scale)));
+    const float sector_size = base_sector_size * std::pow(sub_sectors_count, scale_magnitude);
+    const float sub_sector_size = sector_size / sub_sectors_count;
+
     int sector_x_min = floor((view_position.x - (radar_screen_center.x - rect.left) / scale) / sector_size) + 1;
     int sector_x_max = floor((view_position.x + (rect.left + rect.width - radar_screen_center.x) / scale) / sector_size);
     int sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.top) / scale) / sector_size) + 1;
