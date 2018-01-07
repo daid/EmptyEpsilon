@@ -4,6 +4,17 @@
 
 - Nothing
 
+## [2018-01-05]
+
+### Changed
+
+- Allow spawning explosions from scripts.
+
+### Fixed
+
+- Hang on start of tutorial with no tutorial selected.
+- Add DMX cues for system status. #506
+
 ## [2017-12-25]
 
 ### Changed
