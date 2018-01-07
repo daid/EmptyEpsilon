@@ -4,6 +4,17 @@
 
 - Nothing
 
+## [2018-01-05]
+
+### Changed
+
+- Allow spawning explosions from scripts.
+
+### Fixed
+
+- Hang on start of tutorial with no tutorial selected.
+- Add DMX cues for system status. #506
+
 ## [2017-12-25]
 
 ### Changed
@@ -613,7 +624,8 @@
 - create button visible through the cancel button on game master screen
 - clicking outside the radar circle but inside its reactangle caused callbacks
 
-[Unreleased]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.12.25...HEAD
+[Unreleased]: https://github.com/daid/EmptyEpsilon/compare/EE-2018.01.05...HEAD
+[2018-01-05]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.12.25...EE-2018.01.05
 [2017-12-25]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.12.22...EE-2017.12.25
 [2017-12-22]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.11.03...EE-2017.12.22
 [2017-11-03]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.05.06...EE-2017.11.03
