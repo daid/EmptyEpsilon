@@ -222,10 +222,7 @@ string getSectorName(sf::Vector2f position)
         sector_y = (int)((sector_y - digit) / 26);
     }
 
-    char column[(sector_x / 10) + 1];
-    sprintf(column, "%d", (int)sector_x);
-
-    return row + column + string(char('A' +quadrant));
+    return row + string(sector_x) + string(char('A' +quadrant));
 }
 
 static int victory(lua_State* L)
