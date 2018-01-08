@@ -80,10 +80,10 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     //Draw the mask on the drawn objects
     if (fog_style == NebulaFogOfWar || fog_style == FriendlysShortRangeFogOfWar)
     {
-        drawRenderTexture(mask_texture, forground_texture, sf::Color::White, sf::BlendMode(
-            sf::BlendMode::Zero, sf::BlendMode::SrcColor, sf::BlendMode::Add,
-            sf::BlendMode::Zero, sf::BlendMode::SrcColor, sf::BlendMode::Add
-        ));
+//        drawRenderTexture(mask_texture, forground_texture, sf::Color::White, sf::BlendMode(
+//            sf::BlendMode::Zero, sf::BlendMode::SrcColor, sf::BlendMode::Add,
+//            sf::BlendMode::Zero, sf::BlendMode::SrcColor, sf::BlendMode::Add
+//        ));
     }
     //Post masking
     if (show_waypoints)
