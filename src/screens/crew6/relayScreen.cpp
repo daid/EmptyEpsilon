@@ -82,12 +82,12 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     info_faction = new GuiKeyValueDisplay(sidebar, "SCIENCE_FACTION", 0.4, "Faction", "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
 
-    zoom_slider = new GuiSlider(this, "ZOOM_SLIDER", 50000.0f, 6250.0f, 50000.0f, [this](float value) {
-        zoom_label->setText("Zoom: " + string(50000.0f / value, 1.0f) + "x"); 
+    zoom_slider = new GuiSlider(this, "ZOOM_SLIDER", 10000000.0f, 6250.0f, 50000.0f, [this](float value) {
+        zoom_label->setText("Zoom: " + string(10000000.0f / value, 1.0f) + "x");
         radar->setDistance(value);
     });
-    zoom_slider->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
-    zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 30);
+    zoom_slider->setPosition(20, -70, ABottomLeft)->setSize(500, 50);
+    zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 200.0x", 30);
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Option buttons for comms, waypoints, and probes.
@@ -192,7 +192,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
         radar->setDistance(view_distance);
         // Keep the zoom slider in sync.
         zoom_slider->setValue(view_distance);
-        zoom_label->setText("Zoom: " + string(50000.0f / view_distance, 1.0f) + "x");
+        zoom_label->setText("Zoom: " + string(10000000.0f / view_distance, 1.0f) + "x");
     }
     ///!
 

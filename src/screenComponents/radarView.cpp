@@ -212,7 +212,7 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
     int sector_x_max = floor((view_position.x + (rect.left + rect.width - radar_screen_center.x) / scale) / sector_size);
     int sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.top) / scale) / sector_size) + 1;
     int sector_y_max = floor((view_position.y + (rect.top + rect.height - radar_screen_center.y) / scale) / sector_size);
-    sf::Color color(64, 64, 128, 128);
+    sf::Color color(63 + 64 * scale_magnitude, 64 + 32 * scale_magnitude, 128, 128);
     for(int sector_x = sector_x_min - 1; sector_x <= sector_x_max; sector_x++)
     {
         float x = radar_screen_center.x + ((sector_x * sector_size) - view_position.x) * scale;
