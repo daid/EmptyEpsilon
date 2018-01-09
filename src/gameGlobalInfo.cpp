@@ -215,13 +215,11 @@ string getSectorName(sf::Vector2f position)
         quadrant += 1;
         sector_x = -1 - sector_x;
     }
-    while (sector_y > 0)
+    while (sector_y > -1)
     {
-        int digit = (sector_y - 1) % 26;
-        row = (char)('A' + digit) + row;
-        sector_y = (int)((sector_y - digit) / 26);
+        row = string(char('A' + (sector_y % 26))) + row;
+        sector_y = int(sector_y / 26) - 1;
     }
-
     return row + string(sector_x) + string(char('A' +quadrant));
 }
 
