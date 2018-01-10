@@ -202,17 +202,25 @@ string getSectorName(sf::Vector2f position)
     constexpr float sector_size = 20000;
     int sector_x = floorf(position.x / sector_size) + 5;
     int sector_y = floorf(position.y / sector_size) + 5;
-    string y;
-    string x;
-    if (sector_y >= 0)
-        y = string(char('A' + (sector_y)));
-    else
-        y = string(char('z' + sector_y / 26)) + string(char('z' + 1 + (sector_y % 26)));
-    if (sector_x >= 0)
-        x = string(sector_x);
-    else
-        x = string(100 + sector_x);
-    return y + x;
+
+    int quadrant = 0;
+    string row = "";
+    if (sector_y < 0)
+    {
+        quadrant += 2;
+        sector_y = -1 - sector_y;
+    }
+    if (sector_x < 0)
+    {
+        quadrant += 1;
+        sector_x = -1 - sector_x;
+    }
+    while (sector_y > -1)
+    {
+        row = string(char('A' + (sector_y % 26))) + row;
+        sector_y = int(sector_y / 26) - 1;
+    }
+    return row + string(sector_x) + string(char('A' +quadrant));
 }
 
 static int victory(lua_State* L)
