@@ -163,8 +163,8 @@ function transportSpawn(delta)
 end
 
 function transportWait(delta)
-	transportDelay = TransportDelay + delta
-	if transportDelay > 3 then
+	transportDelay = transportDelay + delta
+	if transportDelay > 8 then
 		transportPlot = transportSpawn
 	end
 end
