@@ -281,3 +281,9 @@ string getAIOrderString(EAIOrder order)
     }
     return "Unknown";
 }
+
+template<> int convert<EAIOrder>::returnType(lua_State* L, EAIOrder o)
+{
+    lua_pushstring(L, getAIOrderString(o).c_str());
+    return 1;
+}
