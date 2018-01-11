@@ -27,8 +27,14 @@ SpaceStation::SpaceStation()
 void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
     sf::Sprite objectSprite;
+    sf::Sprite objectFactionAura;
     textureManager.setTexture(objectSprite, radar_trace);
     objectSprite.setPosition(position);
+
+    textureManager.setTexture(objectFactionAura, "RadarBlip.png");
+    objectFactionAura.setPosition (position);
+    objectFactionAura.setColor( sf::Color::Transparent);
+
     float sprite_scale = scale * getRadius() * 1.5 / objectSprite.getTextureRect().width;
 
     if (!long_range)
@@ -38,8 +44,13 @@ void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, 
     }
     sprite_scale = std::max(0.15f, sprite_scale);
     objectSprite.setScale(sprite_scale, sprite_scale);
+    objectFactionAura.setScale (sprite_scale*1.5, sprite_scale*1.5);
     if (my_spaceship)
     {
+        sf::Color factionColor = factionInfo[getFactionId()]->gm_color;
+        sf::Color factionAuraColor (factionColor.r, factionColor.g, factionColor.b, 128);
+        objectFactionAura.setColor( factionAuraColor);
+
         if (isEnemy(my_spaceship))
             objectSprite.setColor(sf::Color::Red);
         else if (isFriendly(my_spaceship))
@@ -49,6 +60,7 @@ void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, 
     }else{
         objectSprite.setColor(factionInfo[getFactionId()]->gm_color);
     }
+    window.draw(objectFactionAura);
     window.draw(objectSprite);
 }
 
@@ -62,7 +74,7 @@ void SpaceStation::destroyedByDamage(DamageInfo& info)
     ExplosionEffect* e = new ExplosionEffect();
     e->setSize(getRadius());
     e->setPosition(getPosition());
-    
+
     if (info.instigator)
     {
         float points = 0;
