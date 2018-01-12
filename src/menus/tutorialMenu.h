@@ -6,11 +6,13 @@
 class GuiSlider;
 class GuiLabel;
 class GuiScrollText;
+class GuiButton;
 
 class TutorialMenu : public GuiCanvas
 {
     string selected_tutorial_filename;
     GuiScrollText* tutorial_description;
+    GuiButton* start_tutorial_button;
 private:
 
     void selectTutorial(string filename);
