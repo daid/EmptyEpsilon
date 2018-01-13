@@ -25,6 +25,7 @@ GameGlobalInfo::GameGlobalInfo()
         registerMemberReplication(&nebula_info[n].textureName);
     }
 
+    custom_coordinates = false;
     global_message_timeout = 0.0;
     player_warp_jump_drive_setting = PWJ_ShipDefault;
     scanning_complexity = SC_Normal;
@@ -197,7 +198,7 @@ string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
     }
 }
 
-string getSectorName(sf::Vector2f position)
+string defaultGetSectorName(sf::Vector2f position)
 {
     constexpr float sector_size = 20000;
     int sector_x = floorf(position.x / sector_size) + 5;
@@ -214,6 +215,43 @@ string getSectorName(sf::Vector2f position)
         x = string(100 + sector_x);
     return y + x;
 }
+
+string getSectorName(sf::Vector2f position)
+{
+    if (gameGlobalInfo->custom_coordinates)
+    {
+        P<ScriptObject> script = new ScriptObject();
+        script->setMaxRunCycles(100000);
+        string output;
+        if (!script->runCode("return " + gameGlobalInfo->position_to_sector + "("+string(position.x)+","+string(position.y)+")", output))
+            LOG(ERROR) << "sector name script error: " << script->getError();
+        script->destroy();
+
+        return output.substr(1, -1); // un-json the result string
+    }
+    else
+    {
+        return defaultGetSectorName(position);
+    }
+}
+
+void GameGlobalInfo::setCoordinates(string positionToSectorCode)
+{
+    custom_coordinates = true;
+    position_to_sector = positionToSectorCode;
+}
+
+
+static int setCoordinates(lua_State* L)
+{
+
+    gameGlobalInfo->custom_coordinates = true;
+    gameGlobalInfo->position_to_sector = luaL_checkstring(L, 1);
+    return 0;
+}
+/// setCoordinates(string)
+/// configures a custom coordinates system
+REGISTER_SCRIPT_FUNCTION(setCoordinates);
 
 static int victory(lua_State* L)
 {
