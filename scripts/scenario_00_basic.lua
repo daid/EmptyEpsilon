@@ -6,6 +6,7 @@
 -- Variation[Hard]: Places more enemies. Recommended if you have multiple player-controlled ships.
 -- Variation[Extreme]: Places many enemies. You're pretty surely overwhelmed.
 
+require("new_coordinates.lua")
 require("utils.lua")
 -- For this scenario, utils.lua provides:
 --   vectorFromAngle(angle, length)
@@ -69,12 +70,9 @@ function setWaveDistance(enemy_group_count)
 	return random(35000, 40000 + enemy_group_count * 3000)
 end
 
-_G.sectorName = function (x, y)
-	return "demo:"..math.floor(x/20000)..":"..math.floor(y/20000)
-end
 
 function init()
-	setCoordinates('sectorName')
+
 	-- Spawn a player Atlantis.
 	player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
 

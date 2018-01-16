@@ -26,6 +26,7 @@ GameGlobalInfo::GameGlobalInfo()
     }
 
     custom_coordinates = false;
+    sector_size = 20000;
     global_message_timeout = 0.0;
     player_warp_jump_drive_setting = PWJ_ShipDefault;
     scanning_complexity = SC_Normal;
@@ -37,6 +38,10 @@ GameGlobalInfo::GameGlobalInfo()
     
     intercept_all_comms_to_gm = false;
 
+    registerMemberReplication(&custom_coordinates);
+    registerMemberReplication(&position_to_sector);
+    registerMemberReplication(&sector_to_position);
+    registerMemberReplication(&sector_size);
     registerMemberReplication(&scanning_complexity);
     registerMemberReplication(&global_message);
     registerMemberReplication(&global_message_timeout, 1.0);
@@ -223,7 +228,7 @@ string getSectorName(sf::Vector2f position)
         P<ScriptObject> script = new ScriptObject();
         script->setMaxRunCycles(100000);
         string output;
-        if (!script->runCode("return " + gameGlobalInfo->position_to_sector + "("+string(position.x)+","+string(position.y)+")", output))
+        if (!script->runCode("return (" + gameGlobalInfo->position_to_sector + ")("+string(position.x)+","+string(position.y)+")", output))
             LOG(ERROR) << "sector name script error: " << script->getError();
         script->destroy();
 
@@ -235,18 +240,13 @@ string getSectorName(sf::Vector2f position)
     }
 }
 
-void GameGlobalInfo::setCoordinates(string positionToSectorCode)
-{
-    custom_coordinates = true;
-    position_to_sector = positionToSectorCode;
-}
-
-
 static int setCoordinates(lua_State* L)
 {
 
     gameGlobalInfo->custom_coordinates = true;
     gameGlobalInfo->position_to_sector = luaL_checkstring(L, 1);
+    gameGlobalInfo->sector_to_position = luaL_checkstring(L, 2);
+    gameGlobalInfo->sector_size = luaL_checknumber(L, 3);
     return 0;
 }
 /// setCoordinates(string)

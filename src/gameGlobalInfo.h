@@ -57,6 +57,8 @@ private:
 public:
     bool custom_coordinates;
     string position_to_sector;
+    string sector_to_position;
+    float sector_size;
     string global_message;
     float global_message_timeout;
     
