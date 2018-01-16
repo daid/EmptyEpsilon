@@ -419,7 +419,7 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
         if (getScannedStateFor(my_spaceship) >= SS_SimpleScan)
         {
             sf::Color factionColor = factionInfo[getFactionId()]->gm_color;
-            sf::Color factionAuraColor (factionColor.r, factionColor.g, factionColor.b, 128);
+            sf::Color factionAuraColor (factionColor.r, factionColor.g, factionColor.b, 192);
             objectFactionAura.setColor( factionAuraColor);
         }
     }else{

@@ -48,7 +48,7 @@ void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, 
     if (my_spaceship)
     {
         sf::Color factionColor = factionInfo[getFactionId()]->gm_color;
-        sf::Color factionAuraColor (factionColor.r, factionColor.g, factionColor.b, 128);
+        sf::Color factionAuraColor (factionColor.r, factionColor.g, factionColor.b, 192);
         objectFactionAura.setColor( factionAuraColor);
 
         if (isEnemy(my_spaceship))
