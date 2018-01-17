@@ -39,7 +39,7 @@ AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_m
         LOG(INFO) << "Auto connect filter: " << key << " = " << ship_filters[key];
     }
 
-    if (!PreferencesManager::get("instance_name").compare(""))
+    if (PreferencesManager::get("instance_name") != "")
     {
         (new GuiLabel(this, "", PreferencesManager::get("instance_name"), 25))->setAlignment(ACenterLeft)->setPosition(20, 20, ATopLeft)->setSize(0, 18);
     }
@@ -124,7 +124,7 @@ bool AutoConnectScreen::isValidShip(int index)
 
     for(auto it : ship_filters)
     {
-        if (it.first.compare("solo"))
+        if (it.first == "solo")
         {
             int crew_at_position = 0;
             foreach(PlayerInfo, i, player_info_list)
@@ -138,19 +138,19 @@ bool AutoConnectScreen::isValidShip(int index)
             if (crew_at_position > 0)
                 return false;
         }
-        else if (it.first.compare("faction"))
+        else if (it.first == "faction")
         {
             if (ship->getFactionId() != FactionInfo::findFactionId(it.second))
                 return false;
         }
-        else if (it.first.compare("callsign"))
+        else if (it.first == "callsign")
         {
-            if (!ship->getCallSign().lower().compare(it.second.lower()))
+            if (ship->getCallSign().lower() != it.second.lower())
                 return false;
         }
-        else if (it.first.compare("type"))
+        else if (it.first == "type")
         {
-            if (!ship->getTypeName().lower().compare(it.second.lower()))
+            if (ship->getTypeName().lower() != it.second.lower())
                 return false;
         }
         else
