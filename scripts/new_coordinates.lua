@@ -22,6 +22,6 @@ function (x, y)
 end
 ]], [[
 function (sectorName)
-    return 1 , 2
+    return 3 * 20000, 2 * 20000
 end
 ]], 20000)

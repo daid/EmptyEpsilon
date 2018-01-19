@@ -3,6 +3,7 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/scanProbe.h"
 #include "scriptInterface.h"
+#include "gameGlobalInfo.h"
 
 #include "screenComponents/radarView.h"
 #include "screenComponents/openCommsButton.h"
@@ -17,6 +18,7 @@
 #include "gui/gui2_slider.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"
+#include "gui/gui2_textentry.h"
 
 RelayScreen::RelayScreen(GuiContainer* owner)
 : GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background), mode(TargetSelection)
@@ -40,7 +42,10 @@ RelayScreen::RelayScreen(GuiContainer* owner)
         },
         [this](sf::Vector2f position) { //drag
             if (mode == TargetSelection)
+            {
+                sector_name_custom = false;
                 radar->setViewPosition(radar->getViewPosition() - (position - mouse_down_position));
+            }
             if (mode == MoveWaypoint && my_spaceship)
                 my_spaceship->commandMoveWaypoint(drag_waypoint_index, position);
         },
@@ -82,13 +87,31 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     info_faction = new GuiKeyValueDisplay(sidebar, "SCIENCE_FACTION", 0.4, "Faction", "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
 
-    zoom_slider = new GuiSlider(this, "ZOOM_SLIDER", 50000.0f, 6250.0f, 50000.0f, [this](float value) {
+    // Controls for the radar view
+    view_controls = new GuiAutoLayout(this, "VIEW_CONTROLS", GuiAutoLayout::LayoutVerticalBottomToTop);
+    view_controls->setPosition(20, -70, ABottomLeft)->setSize(250, GuiElement::GuiSizeMax);
+
+    zoom_slider = new GuiSlider(view_controls, "ZOOM_SLIDER", 50000.0f, 6250.0f, 50000.0f, [this](float value) {
         zoom_label->setText("Zoom: " + string(50000.0f / value, 1.0f) + "x"); 
         radar->setDistance(value);
     });
-    zoom_slider->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
+    zoom_slider->setSize(GuiElement::GuiSizeMax, 50);
     zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 30);
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    sector_name_custom = false;
+    sector_name_text = new GuiTextEntry(view_controls, "SECTOR_NAME_TEXT", "");
+    sector_name_text->setSize(GuiElement::GuiSizeMax, 50);
+    sector_name_text->setEnable(gameGlobalInfo->custom_coordinates);
+    sector_name_text->callback([this](string text){
+        sector_name_custom = true;
+    });
+    sector_name_text->enterCallback([this](string text){
+        sector_name_custom = false;
+        sf::Vector2f pos = getSectorPosition(text);
+        LOG(INFO) << "pos : " << pos;
+        radar->setViewPosition(pos);
+    });
 
     // Option buttons for comms, waypoints, and probes.
     option_buttons = new GuiAutoLayout(this, "BUTTONS", GuiAutoLayout::LayoutVerticalTopToBottom);
@@ -275,4 +298,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
         delete_waypoint_button->enable();
     else
         delete_waypoint_button->disable();
+
+    if(!sector_name_custom)
+        sector_name_text->setText(getSectorName(radar->getViewPosition()));
 }

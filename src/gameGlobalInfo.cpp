@@ -221,6 +221,22 @@ string defaultGetSectorName(sf::Vector2f position)
     return y + x;
 }
 
+sf::Vector2f getSectorPosition(string sectorName)
+{
+    sf::Vector2f result(0,0);
+    if (gameGlobalInfo->custom_coordinates)
+    {
+        P<ScriptObject> script = new ScriptObject();
+        script->setMaxRunCycles(100000);
+        string output;
+        if (!script->runCode("return (" + gameGlobalInfo->sector_to_position + ")('"+sectorName+"')", output))
+            LOG(ERROR) << "sector position script error: " << script->getError();
+        script->destroy();
+        sscanf(output.c_str(), "%f, %f", &result.x, &result.y);
+    }
+    return result;
+}
+
 string getSectorName(sf::Vector2f position)
 {
     if (gameGlobalInfo->custom_coordinates)

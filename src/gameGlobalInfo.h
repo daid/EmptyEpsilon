@@ -115,6 +115,7 @@ public:
 
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive);
 string getSectorName(sf::Vector2f position);
+sf::Vector2f getSectorPosition(string sectorName);
 
 REGISTER_MULTIPLAYER_ENUM(EScanningComplexity);
 
