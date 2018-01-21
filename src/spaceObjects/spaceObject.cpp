@@ -63,7 +63,8 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Return true when the hail is enabled with succes. Returns false when the target player cannot be hailed right now (because it's already communicating with something else)
     /// This function will display the message given as parameter when the hail is answered.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, sendCommsMessage);
-    /// Let this object take damage, the DamageInfo parameter can be empty, or a string which indicates if it's energy, kinetic or emp damage.
+    /// Let this object take damage, the DamageInfo parameter can be empty, or a string which indicates if it's energy, kinetic or emp damage
+    /// optionally followed by the location of the damage's origin (to damage the correct shield), followed by the frequency band (0-20 for energy damage) and the ESystem to target.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, takeDamage);
     /// Set the description of this object. The description is visible on the Science station.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setDescription);
@@ -402,6 +403,24 @@ template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& d
         di.type = DT_Kinetic;
     else if (str == "emp")
         di.type = DT_EMP;
+
+    if (!lua_isnumber(L, idx))
+        return;
+
+    di.location.x = luaL_checknumber(L, idx++);
+    di.location.y = luaL_checknumber(L, idx++);
+
+    if (lua_isnil(L, idx))
+        idx++;
+    else if (!lua_isnumber(L, idx))
+        return;
+    else
+        di.frequency = luaL_checkinteger(L, idx++);
+
+    if (!lua_isstring(L, idx))
+        return;
+
+    convert<ESystem>::param(L, idx, di.system_target);
 }
 
 template<> void convert<EScannedState>::param(lua_State* L, int& idx, EScannedState& ss)
