@@ -22,6 +22,21 @@ function (x, y)
 end
 ]], [[
 function (sectorName)
-    return 3 * 20000, 2 * 20000
+    local ascii_offset = ('A'):byte()
+    local float sector_size = 20000
+    local quadrant = sectorName:sub(sectorName:len()):upper():byte() - ascii_offset;
+    local sector_x = tonumber(sectorName:sub(sectorName:find('%d+')))
+    local row = sectorName:sub(sectorName:find('%a+')):upper()
+    local sector_y = 0;
+    for i = #row, 1 do
+        sector_y = sector_y * 26 + row:byte(i) - ascii_offset
+    end
+    if quadrant % 2 == 1 then
+        sector_x = -1 - sector_x
+    end
+    if (math.floor(quadrant /2)) % 2 == 1 then
+        sector_y = -1 - sector_y
+    end
+    return sector_x * sector_size, sector_y * sector_size
 end
 ]], 20000)
