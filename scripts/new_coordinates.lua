@@ -38,6 +38,6 @@ function (sectorName)
     if (math.floor(quadrant /2)) % 2 == 1 then
         sector_y = -1 - sector_y
     end
-    return sector_x * sector_size, sector_y * sector_size
+    return (sector_x + 0.5) * sector_size, (sector_y + 0.5) * sector_size
 end
 ]], 20000)
