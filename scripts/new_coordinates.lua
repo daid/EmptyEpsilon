@@ -24,13 +24,14 @@ end
 function (sectorName)
     local ascii_offset = ('A'):byte()
     local float sector_size = 20000
-    local quadrant = sectorName:sub(sectorName:len()):upper():byte() - ascii_offset;
-    local sector_x = tonumber(sectorName:sub(sectorName:find('%d+')))
-    local row = sectorName:sub(sectorName:find('%a+')):upper()
+    local quadrant = sectorName:sub(sectorName:len()):upper():byte() - ascii_offset
+    local sector_x = tonumber(sectorName:match('%d+'))
+    local row = sectorName:match('%a+'):upper()
     local sector_y = 0;
-    for i = #row, 1 do
-        sector_y = sector_y * 26 + row:byte(i) - ascii_offset
+    for i = 1, #row do
+        sector_y = sector_y + math.pow(26, #row - i) * (row:byte(i) - ascii_offset + 1)
     end
+    sector_y = sector_y - 1
     if quadrant % 2 == 1 then
         sector_x = -1 - sector_x
     end
