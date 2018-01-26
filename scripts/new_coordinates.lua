@@ -1,4 +1,4 @@
-setCoordinates([[
+local getSectorName = [[
 function (x, y)
     local ascii_offset = ('A'):byte()
     local float sector_size = 20000
@@ -20,7 +20,8 @@ function (x, y)
     end
     return row .. sector_x .. string.char(ascii_offset + quadrant)
 end
-]], [[
+]]
+local getSectorPosition = [[
 function (sectorName)
     local ascii_offset = ('A'):byte()
     local float sector_size = 20000
@@ -40,4 +41,5 @@ function (sectorName)
     end
     return (sector_x + 0.5) * sector_size, (sector_y + 0.5) * sector_size
 end
-]], 20000)
+]]
+setCoordinates(getSectorName, getSectorPosition, 20000)
