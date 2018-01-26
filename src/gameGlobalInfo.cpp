@@ -41,6 +41,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&custom_coordinates);
     registerMemberReplication(&position_to_sector);
     registerMemberReplication(&sector_to_position);
+    registerMemberReplication(&sector_validator);
     registerMemberReplication(&sector_size);
     registerMemberReplication(&scanning_complexity);
     registerMemberReplication(&global_message);
@@ -221,6 +222,13 @@ string defaultGetSectorName(sf::Vector2f position)
     return y + x;
 }
 
+string sanitizeLua(string lua_str)
+{
+    return lua_str
+        .replace(string("\n"), string(" "))
+        .replace(string("\\"), string("\\\\"))
+        .replace(string("\""), string("\\\""));
+}
 bool isValidSectorName(string sectorName)
 {
     if (gameGlobalInfo->custom_coordinates)
@@ -228,12 +236,10 @@ bool isValidSectorName(string sectorName)
         P<ScriptObject> script = new ScriptObject();
         script->setMaxRunCycles(100000);
         string output;
-        if (!script->runCode("return (" + gameGlobalInfo->sector_validator + ")('"+sectorName+"')", output))
+        if (!script->runCode("return (" + gameGlobalInfo->sector_validator + ")('"+sanitizeLua(sectorName)+"')", output))
             LOG(ERROR) << "sector name script error: " << script->getError();
         script->destroy();
-            LOG(INFO) << "validation result " << output.strip().lower();
-
-        return output.strip().lower() == "true"; // un-json the result string
+        return output.strip().lower() == "true"; // also false when script error
     }
     return true;
 }
@@ -245,7 +251,7 @@ sf::Vector2f getSectorPosition(string sectorName)
         P<ScriptObject> script = new ScriptObject();
         script->setMaxRunCycles(100000);
         string output;
-        if (!script->runCode("return (" + gameGlobalInfo->sector_to_position + ")('"+sectorName+"')", output))
+        if (!script->runCode("return (" + gameGlobalInfo->sector_to_position + ")('"+sanitizeLua(sectorName)+"')", output))
             LOG(ERROR) << "sector position script error: " << script->getError();
         script->destroy();
         sscanf(output.c_str(), "%f, %f", &result.x, &result.y);

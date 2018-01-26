@@ -44,7 +44,10 @@ RelayScreen::RelayScreen(GuiContainer* owner)
             if (mode == TargetSelection)
             {
                 sector_name_custom = false;
-                radar->setViewPosition(radar->getViewPosition() - (position - mouse_down_position));
+                sf::Vector2f newPosition = radar->getViewPosition() - (position - mouse_down_position);
+                radar->setViewPosition(newPosition);
+                if(!sector_name_custom)
+                    sector_name_text->setText(getSectorName(newPosition));
             }
             if (mode == MoveWaypoint && my_spaceship)
                 my_spaceship->commandMoveWaypoint(drag_waypoint_index, position);
@@ -115,7 +118,7 @@ RelayScreen::RelayScreen(GuiContainer* owner)
             radar->setViewPosition(pos);
         }
     });
-
+    sector_name_text->setText(getSectorName(radar->getViewPosition()));
     // Option buttons for comms, waypoints, and probes.
     option_buttons = new GuiAutoLayout(this, "BUTTONS", GuiAutoLayout::LayoutVerticalTopToBottom);
     option_buttons->setPosition(20, 50, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
@@ -301,7 +304,4 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
         delete_waypoint_button->enable();
     else
         delete_waypoint_button->disable();
-
-    if(!sector_name_custom)
-        sector_name_text->setText(getSectorName(radar->getViewPosition()));
 }
