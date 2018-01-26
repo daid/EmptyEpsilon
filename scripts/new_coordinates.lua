@@ -21,6 +21,12 @@ function (x, y)
     return row .. sector_x .. string.char(ascii_offset + quadrant)
 end
 ]]
+local isValidSectorName = [[
+function (sectorName)
+    local patternStart, patternEnd = sectorName:find('%a+%d+[abcdABCD]')
+    return patternStart == 1 and patternEnd == sectorName:len()
+end
+]]
 local getSectorPosition = [[
 function (sectorName)
     local ascii_offset = ('A'):byte()
@@ -42,4 +48,4 @@ function (sectorName)
     return (sector_x + 0.5) * sector_size, (sector_y + 0.5) * sector_size
 end
 ]]
-setCoordinates(getSectorName, getSectorPosition, 20000)
+setCoordinates(getSectorName, getSectorPosition, isValidSectorName, 20000)

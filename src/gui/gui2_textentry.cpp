@@ -2,7 +2,7 @@
 #include "input.h"
 
 GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
-: GuiElement(owner, id), text(text), text_size(30), func(nullptr), enter_func(nullptr), validator_func(nullptr), isValid(true)
+: GuiElement(owner, id), text(text), text_size(30), func(nullptr), enter_func(nullptr), validator_func(nullptr), valid(true)
 {
 }
 
@@ -18,7 +18,7 @@ void GuiTextEntry::onDraw(sf::RenderTarget& window)
         typing_indicator = false;
     if (blink_clock.getElapsedTime().asSeconds() > blink_rate * 2.0f)
         blink_clock.restart();
-    sf::Color textColor = (isValid || !validator_func) ? selectColor(colorConfig.text_entry.forground) : colorConfig.text_entry_invalid;
+    sf::Color textColor = (valid || !validator_func) ? selectColor(colorConfig.text_entry.forground) : colorConfig.text_entry_invalid;
     drawText(window, sf::FloatRect(rect.left + 16, rect.top, rect.width, rect.height), text + (typing_indicator ? "_" : ""), ACenterLeft, text_size, main_font, textColor);
 }
 
@@ -35,7 +35,7 @@ bool GuiTextEntry::onKey(sf::Event::KeyEvent key, int unicode)
         if (validator_func)
         {
             Validator v = validator_func;
-            isValid = v(text);
+            valid = v(text);
         }
         if (func)
         {
@@ -63,7 +63,7 @@ bool GuiTextEntry::onKey(sf::Event::KeyEvent key, int unicode)
         if (validator_func)
         {
             Validator v = validator_func;
-            isValid = v(text);
+            valid = v(text);
         }
         if (func)
         {
@@ -78,7 +78,7 @@ bool GuiTextEntry::onKey(sf::Event::KeyEvent key, int unicode)
         if (validator_func)
         {
             Validator v = validator_func;
-            isValid = v(text);
+            valid = v(text);
         }
         if (func)
         {
@@ -88,6 +88,11 @@ bool GuiTextEntry::onKey(sf::Event::KeyEvent key, int unicode)
         return true;
     }
     return true;
+}
+
+bool GuiTextEntry::isValid()
+{
+    return valid;
 }
 
 string GuiTextEntry::getText()
@@ -101,7 +106,7 @@ GuiTextEntry* GuiTextEntry::setText(string text)
     if (validator_func)
     {
         Validator v = validator_func;
-        isValid = v(text);
+        valid = v(text);
     }
     return this;
 }
@@ -126,6 +131,6 @@ GuiTextEntry* GuiTextEntry::enterCallback(func_t func)
 GuiTextEntry* GuiTextEntry::validator(Validator v)
 {
     this->validator_func = v;
-    isValid = v(text);
+    valid = v(text);
     return this;
 }

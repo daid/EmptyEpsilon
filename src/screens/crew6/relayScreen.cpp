@@ -106,11 +106,14 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     sector_name_text->callback([this](string text){
         sector_name_custom = true;
     });
+    sector_name_text->validator(isValidSectorName);
     sector_name_text->enterCallback([this](string text){
         sector_name_custom = false;
-        sf::Vector2f pos = getSectorPosition(text);
-        LOG(INFO) << "pos : " << pos;
-        radar->setViewPosition(pos);
+        if (sector_name_text->isValid())
+        {
+            sf::Vector2f pos = getSectorPosition(text);
+            radar->setViewPosition(pos);
+        }
     });
 
     // Option buttons for comms, waypoints, and probes.

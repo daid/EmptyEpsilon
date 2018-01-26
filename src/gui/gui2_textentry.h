@@ -15,7 +15,7 @@ protected:
     func_t func;
     func_t enter_func;
     sf::Clock blink_clock;
-    bool isValid;
+    bool valid;
     Validator validator_func;
 public:
     GuiTextEntry(GuiContainer* owner, string id, string text);
@@ -25,6 +25,7 @@ public:
     virtual bool onKey(sf::Event::KeyEvent key, int unicode) override;
     
     string getText();
+    bool isValid();
     GuiTextEntry* setText(string text);
     GuiTextEntry* setTextSize(float size);
     GuiTextEntry* callback(func_t func);

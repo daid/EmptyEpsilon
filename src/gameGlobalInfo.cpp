@@ -221,6 +221,22 @@ string defaultGetSectorName(sf::Vector2f position)
     return y + x;
 }
 
+bool isValidSectorName(string sectorName)
+{
+    if (gameGlobalInfo->custom_coordinates)
+    {
+        P<ScriptObject> script = new ScriptObject();
+        script->setMaxRunCycles(100000);
+        string output;
+        if (!script->runCode("return (" + gameGlobalInfo->sector_validator + ")('"+sectorName+"')", output))
+            LOG(ERROR) << "sector name script error: " << script->getError();
+        script->destroy();
+            LOG(INFO) << "validation result " << output.strip().lower();
+
+        return output.strip().lower() == "true"; // un-json the result string
+    }
+    return true;
+}
 sf::Vector2f getSectorPosition(string sectorName)
 {
     sf::Vector2f result(0,0);
@@ -262,7 +278,8 @@ static int setCoordinates(lua_State* L)
     gameGlobalInfo->custom_coordinates = true;
     gameGlobalInfo->position_to_sector = luaL_checkstring(L, 1);
     gameGlobalInfo->sector_to_position = luaL_checkstring(L, 2);
-    gameGlobalInfo->sector_size = luaL_checknumber(L, 3);
+    gameGlobalInfo->sector_validator = luaL_checkstring(L, 3);
+    gameGlobalInfo->sector_size = luaL_checknumber(L, 4);
     return 0;
 }
 /// setCoordinates(string)

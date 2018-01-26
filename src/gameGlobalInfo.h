@@ -58,6 +58,7 @@ public:
     bool custom_coordinates;
     string position_to_sector;
     string sector_to_position;
+    string sector_validator;
     float sector_size;
     string global_message;
     float global_message_timeout;
@@ -116,6 +117,7 @@ public:
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive);
 string getSectorName(sf::Vector2f position);
 sf::Vector2f getSectorPosition(string sectorName);
+bool isValidSectorName(string sectorName);
 
 REGISTER_MULTIPLAYER_ENUM(EScanningComplexity);
 
