@@ -19,7 +19,7 @@ public:
     virtual void onDraw(sf::RenderTarget& window);
     
     GuiLabel* setText(string text);
-    string getText();
+    string getText() const;
     GuiLabel* setAlignment(EGuiAlign alignment);
     GuiLabel* addBackground();
     GuiLabel* setVertical();

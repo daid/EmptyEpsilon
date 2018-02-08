@@ -25,7 +25,7 @@ GuiLabel* GuiLabel::setText(string text)
     return this;
 }
 
-string GuiLabel::getText()
+string GuiLabel::getText() const
 {
     return text;
 }

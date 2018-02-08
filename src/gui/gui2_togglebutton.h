@@ -13,8 +13,8 @@ private:
 
 public:
     GuiToggleButton(GuiContainer* owner, string id, string text, func_t func);
-    
-    bool getValue();
+
+    bool getValue() const;
     GuiToggleButton* setValue(bool value);
 private:
     void onClick();

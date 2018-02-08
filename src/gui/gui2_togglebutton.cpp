@@ -6,7 +6,7 @@ GuiToggleButton::GuiToggleButton(GuiContainer* owner, string id, string text, fu
     value = false;
 }
 
-bool GuiToggleButton::getValue()
+bool GuiToggleButton::getValue() const
 {
     return value;
 }

@@ -15,7 +15,7 @@ GuiScrollText* GuiScrollText::setText(string text)
     return this;
 }
 
-string GuiScrollText::getText()
+string GuiScrollText::getText() const
 {
     return text;
 }

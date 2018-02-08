@@ -59,7 +59,7 @@ int GuiEntryList::addEntry(string name, string value)
     return entries.size() - 1;
 }
 
-int GuiEntryList::indexByValue(string value)
+int GuiEntryList::indexByValue(string value) const
 {
     for(unsigned int n=0; n<entries.size(); n++)
         if (entries[n].value == value)
@@ -79,26 +79,26 @@ void GuiEntryList::removeEntry(int index)
     entriesChanged();
 }
 
-int GuiEntryList::entryCount()
+int GuiEntryList::entryCount() const
 {
     return entries.size();
 }
 
-string GuiEntryList::getEntryName(int index)
+string GuiEntryList::getEntryName(int index) const
 {
     if (index < 0 || index >= int(entries.size()))
         return "";
     return entries[index].name;
 }
 
-string GuiEntryList::getEntryValue(int index)
+string GuiEntryList::getEntryValue(int index) const
 {
     if (index < 0 || index >= int(entries.size()))
         return "";
     return entries[index].value;
 }
 
-int GuiEntryList::getSelectionIndex()
+int GuiEntryList::getSelectionIndex() const
 {
     return selection_index;
 }
@@ -110,7 +110,7 @@ GuiEntryList* GuiEntryList::setSelectionIndex(int index)
     return this;
 }
 
-string GuiEntryList::getSelectionValue()
+string GuiEntryList::getSelectionValue() const
 {
     if (selection_index < 0 || selection_index >= (int)entries.size())
         return "";
