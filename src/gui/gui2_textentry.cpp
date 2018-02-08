@@ -90,12 +90,12 @@ bool GuiTextEntry::onKey(sf::Event::KeyEvent key, int unicode)
     return true;
 }
 
-bool GuiTextEntry::isValid()
+bool GuiTextEntry::isValid() const
 {
     return valid;
 }
 
-string GuiTextEntry::getText()
+string GuiTextEntry::getText() const
 {
     return text;
 }

@@ -18,7 +18,7 @@ public:
     virtual void onMouseDrag(sf::Vector2f position) override;
     
     void minimize(bool minimize=true);
-    bool isMinimized();
+    bool isMinimized() const;
     void setTitle(string title);
 private:
     static constexpr float resize_icon_size = 25.0f;

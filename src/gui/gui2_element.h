@@ -58,30 +58,30 @@ public:
     
     GuiElement* setSize(sf::Vector2f size);
     GuiElement* setSize(float x, float y);
-    sf::Vector2f getSize();
+    sf::Vector2f getSize() const;
     GuiElement* setMargins(float n);
     GuiElement* setMargins(float x, float y);
     GuiElement* setMargins(float left, float top, float right, float bottom);
     GuiElement* setPosition(float x, float y, EGuiAlign alignment = ATopLeft);
     GuiElement* setPosition(sf::Vector2f position, EGuiAlign alignment = ATopLeft);
-    sf::Vector2f getPositionOffset();
+    sf::Vector2f getPositionOffset() const;
     GuiElement* setVisible(bool visible);
     GuiElement* hide();
     GuiElement* show();
-    bool isVisible();
+    bool isVisible() const;
     GuiElement* setEnable(bool enable);
     GuiElement* enable();
     GuiElement* disable();
     GuiElement* setActive(bool active);
-    bool isActive();
+    bool isActive() const;
     sf::FloatRect getRect() const { return rect; }
-    bool isEnabled();
-    
+    bool isEnabled() const;
+
     void moveToFront();
     void moveToBack();
-    
-    sf::Vector2f getCenterPoint();
-    
+
+    sf::Vector2f getCenterPoint() const;
+
     GuiContainer* getOwner();
     GuiContainer* getTopLevelContainer();
     
@@ -123,9 +123,9 @@ protected:
     void drawStretchedHV(sf::RenderTarget& window, sf::FloatRect rect, float corner_size, string texture, sf::Color color=sf::Color::White);
     
     void drawArrow(sf::RenderTarget& window, sf::FloatRect rect, sf::Color=sf::Color::White, float rotation=0);
-    
-    sf::Color selectColor(ColorSet& color_set);
-    
+
+    sf::Color selectColor(ColorSet& color_set) const;
+
     class LineWrapResult
     {
     public:

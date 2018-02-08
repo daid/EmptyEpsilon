@@ -728,6 +728,8 @@ bool GuiRadarView::onMouseDown(sf::Vector2f position)
         if (position - getCenterPoint() > radius)
             return false;
     }
+    if (!mouse_down_func && !mouse_drag_func && !mouse_up_func)
+        return false;
     if (mouse_down_func)
         mouse_down_func(screenToWorld(position));
     return true;

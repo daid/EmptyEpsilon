@@ -64,4 +64,6 @@ public:
 };
 string getAIOrderString(EAIOrder order);
 
+template<> int convert<EAIOrder>::returnType(lua_State* L, EAIOrder o);
+
 #endif//CPU_SHIP_H

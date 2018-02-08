@@ -71,7 +71,7 @@ void GuiButton::onMouseUp(sf::Vector2f position)
     }
 }
 
-string GuiButton::getText()
+string GuiButton::getText() const
 {
     return text;
 }
@@ -96,7 +96,7 @@ GuiButton* GuiButton::setIcon(string icon_name, EGuiAlign icon_alignment, float 
     return this;
 }
 
-string GuiButton::getIcon()
+string GuiButton::getIcon() const
 {
     return icon_name;
 }

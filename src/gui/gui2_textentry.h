@@ -24,8 +24,8 @@ public:
     virtual bool onMouseDown(sf::Vector2f position) override;
     virtual bool onKey(sf::Event::KeyEvent key, int unicode) override;
     
-    string getText();
-    bool isValid();
+    bool isValid() const;
+    string getText() const;
     GuiTextEntry* setText(string text);
     GuiTextEntry* setTextSize(float size);
     GuiTextEntry* callback(func_t func);

@@ -12,7 +12,7 @@ GuiElement::~GuiElement()
 {
     if (owner)
     {
-        LOG(ERROR) << "GuiElement waa destroyed while it still had an owner...";
+        LOG(ERROR) << "GuiElement was destroyed while it still had an owner...";
     }
 }
 
@@ -66,7 +66,7 @@ GuiElement* GuiElement::setSize(float x, float y)
     return this;
 }
 
-sf::Vector2f GuiElement::getSize()
+sf::Vector2f GuiElement::getSize() const
 {
     return size;
 }
@@ -108,7 +108,7 @@ GuiElement* GuiElement::setPosition(sf::Vector2f position, EGuiAlign alignment)
     return this;
 }
 
-sf::Vector2f GuiElement::getPositionOffset()
+sf::Vector2f GuiElement::getPositionOffset() const
 {
     return position;
 }
@@ -131,7 +131,7 @@ GuiElement* GuiElement::show()
     return this;
 }
 
-bool GuiElement::isVisible()
+bool GuiElement::isVisible() const
 {
     return visible;
 }
@@ -154,7 +154,7 @@ GuiElement* GuiElement::disable()
     return this;
 }
 
-bool GuiElement::isEnabled()
+bool GuiElement::isEnabled() const
 {
     return enabled;
 }
@@ -165,7 +165,7 @@ GuiElement* GuiElement::setActive(bool active)
     return this;
 }
 
-bool GuiElement::isActive()
+bool GuiElement::isActive() const
 {
     return active;
 }
@@ -188,7 +188,7 @@ void GuiElement::moveToBack()
     }
 }
 
-sf::Vector2f GuiElement::getCenterPoint()
+sf::Vector2f GuiElement::getCenterPoint() const
 {
     return sf::Vector2f(rect.left + rect.width / 2.0, rect.top + rect.height / 2.0);
 }
@@ -754,7 +754,7 @@ void GuiElement::drawArrow(sf::RenderTarget& window, sf::FloatRect rect, sf::Col
     window.draw(arrow);
 }
 
-sf::Color GuiElement::selectColor(ColorSet& color_set)
+sf::Color GuiElement::selectColor(ColorSet& color_set) const
 {
     if (!enabled)
         return color_set.disabled;
