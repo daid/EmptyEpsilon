@@ -257,6 +257,39 @@ void SpaceShip::draw3DTransparent()
 }
 #endif//FEATURE_3D_RENDERING
 
+void SpaceShip::drawFactionOnRadar (sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+{
+    sf::Sprite objectFactionAura;
+
+    textureManager.setTexture(objectFactionAura, "RadarBlip.png");
+    objectFactionAura.setPosition (position);
+    objectFactionAura.setColor( sf::Color::Transparent);
+
+    sf::Sprite objectSprite;
+    textureManager.setTexture(objectSprite, radar_trace);
+
+    float sprite_scale = 0.7f*1.5f;
+
+    if (!long_range)
+    {
+        sprite_scale*=1.5f;
+    }
+
+    objectFactionAura.setScale (sprite_scale, sprite_scale);
+
+    if (my_spaceship)
+    {
+        if (getScannedStateFor(my_spaceship) >= SS_SimpleScan)
+        {
+            sf::Color factionColor = factionInfo[getFactionId()]->gm_color;
+            sf::Color factionAuraColor (factionColor.r, factionColor.g, factionColor.b, 192);
+            objectFactionAura.setColor( factionAuraColor);
+        }
+    }
+
+    window.draw(objectFactionAura);
+}
+
 void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
     // Draw beam arcs on short-range radar only, and only for fully scanned
@@ -371,11 +404,6 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
 
     // Set up the radar sprite for objects.
     sf::Sprite objectSprite;
-    sf::Sprite objectFactionAura;
-
-    textureManager.setTexture(objectFactionAura, "RadarBlip.png");
-    objectFactionAura.setPosition (position);
-    objectFactionAura.setColor( sf::Color::Transparent);
 
     // If the object is a ship that hasn't been scanned, draw the default icon.
     // Otherwise, draw the ship-specific icon.
@@ -395,10 +423,7 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
     {
         objectSprite.setScale(0.7, 0.7);
     }
-    else
-    {
-        objectFactionAura.setScale (1.5, 1.5);
-    }
+
     if (my_spaceship == this)
     {
         objectSprite.setColor(sf::Color(192, 192, 255));
@@ -416,16 +441,10 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
             objectSprite.setColor(sf::Color(192, 192, 192));
         }
 
-        if (getScannedStateFor(my_spaceship) >= SS_SimpleScan)
-        {
-            sf::Color factionColor = factionInfo[getFactionId()]->gm_color;
-            sf::Color factionAuraColor (factionColor.r, factionColor.g, factionColor.b, 192);
-            objectFactionAura.setColor( factionAuraColor);
-        }
     }else{
         objectSprite.setColor(factionInfo[getFactionId()]->gm_color);
     }
-    window.draw(objectFactionAura);
+
     window.draw(objectSprite);
 }
 

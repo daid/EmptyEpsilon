@@ -513,7 +513,7 @@ void GuiRadarView::drawMissileTubes(sf::RenderTarget& window)
             sf::Vector2f fire_draw_position = radar_screen_center + (view_position - fire_position) * scale;
 
             float fire_angle = my_spaceship->getRotation() + my_spaceship->weapon_tube[n].getDirection();
-            
+
             a[n * 2].position = fire_draw_position;
             a[n * 2 + 1].position = fire_draw_position + (sf::vector2FromAngle(fire_angle) * 1000.0f) * scale;
             a[n * 2].color = sf::Color(128, 128, 128, 128);
@@ -586,6 +586,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             sf::RenderTarget* window = &window_normal;
             if (!obj->canHideInNebula())
                 window = &window_alpha;
+            if (gameGlobalInfo->allow_faction_aura) obj->drawFactionOnRadar(*window, object_position_on_screen, scale, long_range);
             obj->drawOnRadar(*window, object_position_on_screen, scale, long_range);
             if (show_callsigns && obj->getCallSign() != "")
                 drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
@@ -594,6 +595,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
     if (my_spaceship)
     {
         sf::Vector2f object_position_on_screen = radar_screen_center + (my_spaceship->getPosition() - view_position) * scale;
+        if (gameGlobalInfo->allow_faction_aura) my_spaceship->drawFactionOnRadar(window_normal, object_position_on_screen, scale, long_range);
         my_spaceship->drawOnRadar(window_normal, object_position_on_screen, scale, long_range);
     }
 }
