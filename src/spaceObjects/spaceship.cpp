@@ -77,6 +77,9 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadarTrace);
 
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, addBroadcast);
+
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setDescriptionScanned);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDescriptionScanned);
 }
 
 SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_range)
@@ -146,6 +149,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&combat_maneuver_boost_speed);
     registerMemberReplication(&combat_maneuver_strafe_speed);
     registerMemberReplication(&radar_trace);
+    registerMemberReplication(&object_description_scanned);
 
     for(int n=0; n<SYS_COUNT; n++)
     {
