@@ -4,6 +4,22 @@
 
 - Nothing
 
+## [2018-02-15]
+
+### Added
+
+- _Deliver Ambassador Gremus_ scenario.
+- Scripts can CpuShip orders.
+
+### Changed
+
+- Clean up the GUI code.
+- SpaceObject:takeDamage allows setting the origin, frequency and system_target.
+
+### Fixed
+
+- Different approach to prevent the radar from capturing clicks. #498
+
 ## [2018-01-05]
 
 ### Changed
@@ -624,7 +640,8 @@
 - create button visible through the cancel button on game master screen
 - clicking outside the radar circle but inside its reactangle caused callbacks
 
-[Unreleased]: https://github.com/daid/EmptyEpsilon/compare/EE-2018.01.05...HEAD
+[Unreleased]: https://github.com/daid/EmptyEpsilon/compare/EE-2018.02.15...HEAD
+[2018-02-15]: https://github.com/daid/EmptyEpsilon/compare/EE-2018.01.05...EE-2018.02.15
 [2018-01-05]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.12.25...EE-2018.01.05
 [2017-12-25]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.12.22...EE-2017.12.25
 [2017-12-22]: https://github.com/daid/EmptyEpsilon/compare/EE-2017.11.03...EE-2017.12.22
