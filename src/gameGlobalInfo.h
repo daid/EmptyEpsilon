@@ -57,7 +57,7 @@ private:
 public:
     string global_message;
     float global_message_timeout;
-    
+
     string banner_string;
 
     std::vector<float> reputation_points;
@@ -72,6 +72,7 @@ public:
     bool use_system_damage;
     bool allow_main_screen_tactical_radar;
     bool allow_main_screen_long_range_radar;
+    bool allow_faction_aura;
     string variation = "None";
 
     //List of script functions that can be called from the GM interface (Server only!)

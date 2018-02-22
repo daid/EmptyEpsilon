@@ -176,6 +176,7 @@ public:
      * Draw this ship on the radar.
      */
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
+    virtual void drawFactionOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
 
     virtual void update(float delta) override;
@@ -327,7 +328,7 @@ public:
     float getBeamWeaponDirection(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getDirection(); }
     float getBeamWeaponRange(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getRange(); }
 
-    float getBeamWeaponTurretArc(int index) 
+    float getBeamWeaponTurretArc(int index)
     {
         if (index < 0 || index >= max_beam_weapons)
             return 0.0;

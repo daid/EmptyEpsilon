@@ -3,7 +3,7 @@ neutral:setGMColor(128, 128, 128)
 neutral:setDescription([[Despite appearing as a faction, independents are distinguished primarily by having no strong affiliation with any faction at all. Most traders consider themselves independent, though certain voices have started to speak up about creating a merchant faction.]])
 
 human = FactionInfo():setName("Human Navy")
-human:setGMColor(255, 255, 255)
+human:setGMColor(0, 255, 255)
 human:setDescription([[The remnants of the human navy.
 
 While all other races were driven to the stars out of greed or scientific research, humans where the only race to start exploring the galaxy because their homeworld could no longer sustain their population. Some other races view humans as a sort of virus or plague due to the rate at which they can breed and spread.

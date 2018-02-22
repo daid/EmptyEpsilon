@@ -165,6 +165,7 @@ public:
     virtual void draw3D();
     virtual void draw3DTransparent() {}
 #endif//FEATURE_3D_RENDERING
+    virtual void drawFactionOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
     virtual void destroy();
