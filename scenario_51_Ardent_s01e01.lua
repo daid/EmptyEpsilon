@@ -174,25 +174,25 @@ function missionDiplomat(delta)
     end
     end
 
-    if REenvoy1 == (1) and variable_igetya ~= (1) and ifInsideSphere(Ardent, 10000.0, -71000.0, 4500.000000) then
+    if REenvoy1 == (1) and variable_igetya ~= (1) and ifInsideSphere(Ardent, 10000.0, -71000.0, 4500.0) then
 
     CV02 = CpuShip():setTemplate("Phobos T3"):setCallSign("CV02"):setFaction("Kraylor"):setPosition(-55000.0, -49900.0):orderAttack(Ardent)
     if fleet[1] == nil then fleet[1] = {} end
     table.insert(fleet[1], CV02)
         tmp_x, tmp_y = Ardent:getPosition()
-        tmp_x2, tmp_y2 = vectorFromAngle(Ardent:getRotation() + 270.000000, 1000.000000)
+        tmp_x2, tmp_y2 = vectorFromAngle(Ardent:getRotation() + 270.000000, 1000.0)
         tmp_x, tmp_y = tmp_x + tmp_x2, tmp_y + tmp_y2
         CV02:setPosition(tmp_x, tmp_y);
         CV01 = CpuShip():setTemplate("Phobos T3"):setCallSign("CV01"):setFaction("Kraylor"):setPosition(-55000.0, -49900.0):orderAttack(Ardent)
         table.insert(fleet[1], CV01)
         tmp_x, tmp_y = Ardent:getPosition()
-        tmp_x2, tmp_y2 = vectorFromAngle(Ardent:getRotation() + 0.000000, 1000.000000)
+        tmp_x2, tmp_y2 = vectorFromAngle(Ardent:getRotation() + 0.0, 1000.0)
         tmp_x, tmp_y = tmp_x + tmp_x2, tmp_y + tmp_y2
         CV01:setPosition(tmp_x, tmp_y);
         CV03 = CpuShip():setTemplate("Phobos T3"):setCallSign("CV03"):setFaction("Kraylor"):setPosition(-55000.0, -49900.0):orderAttack(Ardent)
         table.insert(fleet[1], CV03)
         tmp_x, tmp_y = Ardent:getPosition()
-        tmp_x2, tmp_y2 = vectorFromAngle(Ardent:getRotation() + 90.000000, 1000.000000)
+        tmp_x2, tmp_y2 = vectorFromAngle(Ardent:getRotation() + 90.0, 1000.0)
         tmp_x, tmp_y = tmp_x + tmp_x2, tmp_y + tmp_y2
         CV03:setPosition(tmp_x, tmp_y);
         variable_igetya = 1.0
@@ -305,28 +305,28 @@ else
 falla=systems[irandom(1,n)]
 if falla == "shield" then
 Sec:sendCommsMessage(Ardent, [[The saboteur slipped past us and installed a virus in the shield control matrix.]])
-        Ardent:setSystemHealth("rearshield", -1.000000)
-        getPlayerShip(-1):setSystemHealth("frontshield", -1.000000)
+        Ardent:setSystemHealth("rearshield", -1.0)
+        getPlayerShip(-1):setSystemHealth("frontshield", -1.0)
 sabo["shield"]=true
 elseif falla == "beam" then
 Sec:sendCommsMessage(Ardent, [[While we were waiting in ambush the saboteur bypassed us completely and took out the primary beam emitters.]])
-        getPlayerShip(-1):setSystemHealth("beamweapons", -1.000000)
+        getPlayerShip(-1):setSystemHealth("beamweapons", -1.0)
 sabo["beam"]=true
 elseif falla == "maneuver" then
 Sec:sendCommsMessage(Ardent, [[As we were standing guard the saboteur detonated a small thermite bomb in the navigational relays that have completely crippled the relays.]])
-        getPlayerShip(-1):setSystemHealth("maneuver", -1.000000)
+        getPlayerShip(-1):setSystemHealth("maneuver", -1.0)
 sabo["maneuver"]=true
 elseif falla == "missile" then
 Sec:sendCommsMessage(Ardent, [[My two sentries outside the torpedo tube loading area are dead. Looks like the saboteur murdered them with some kind of disruptor weapon before jamming the tube hatches closed.]])
-        getPlayerShip(-1):setSystemHealth("missilesystem", -1.000000)
+        getPlayerShip(-1):setSystemHealth("missilesystem", -1.0)
 sabo["missile"]=true
 elseif falla == "impulse" then
 Sec:sendCommsMessage(Ardent, [[The saboteur detonated a small bomb in the engine room.]])
-        getPlayerShip(-1):setSystemHealth("impulse", -1.000)
+        getPlayerShip(-1):setSystemHealth("impulse", -1.0)
 sabo["impulse"]=true
 elseif falla == "warp" then
 Sec:sendCommsMessage(Ardent,[[The saboteur has locked the Emergency shutdown trips of the warp core]])
-        getPlayerShip(-1):setSystemHealth("warp", -1.000)
+        getPlayerShip(-1):setSystemHealth("warp", -1.0)
 sabo["warp"]=true
 end
 -- next sabotage
@@ -355,7 +355,7 @@ Sec:setCallSign("")
 
    if tllegit ~= nil and tllegit < 0.0 and llegit == 1 then
         tmp_x, tmp_y = Ardent:getPosition()
-        tmp_x2, tmp_y2 = vectorFromAngle(Ardent:getRotation() + 180.000000, 50.000000)
+        tmp_x2, tmp_y2 = vectorFromAngle(Ardent:getRotation() + 180.0, 50.0)
         tmp_x, tmp_y = tmp_x + tmp_x2, tmp_y + tmp_y2
   Saboteur = CpuShip():setTemplate("MU52 Hornet"):setCallSign("Saboteur"):setFaction("Kraylor"):setPosition(tmp_x, tmp_y):orderRoaming()
         if fleet[4] == nil then fleet[4] = {} end
@@ -396,8 +396,8 @@ end
 end
 
 
- if countFleet(7) < 1.000000 and countFleet(6) < 2.000000 and variable_workonce ~= (1.0) then
-        disaster = 10.000000
+ if countFleet(7) < 1.0 and countFleet(6) < 2.0 and variable_workonce ~= (1.0) then
+        disaster = 10.0
         variable_workonce = 1.0
  end
  if variable_workonce == (1.0) then 
