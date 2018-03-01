@@ -49,12 +49,12 @@ placeRandomsphere(VisualAsteroid,15, -30385.0, -77581.0, 15000)
     end
 -- Crea Neutrales
    Verran = CpuShip():setTemplate("Flavia"):setCallSign("Verran"):setFaction("Human Navy"):setPosition(-70000.0, -91000.0):orderRoaming():setCommsScript("")
-   Verran:setDescription("A Drenni civillian transport. ID: 487G3")
    CIV_TR = CpuShip():setTemplate("Personnel Freighter 1"):setCallSign("CIV TR"):setFaction("Human Navy"):setPosition(15000.0, -57500.0):orderRoaming():setCommsScript("")
-   CIV_TR:setDescription("Official Manifest lists 46 Passangers, 8 Eggs and 6 Crew.")
+   CIV_TR:setDescriptions("A Drenni civillian transport. ID: 487G3","Official Manifest lists 46 Passangers, 8 Eggs and 6 Crew.")
 -- Crea estaciones
    Outpost_12 = SpaceStation():setTemplate("Small Station"):setCallSign("Outpost 12"):setFaction("Human Navy"):setPosition(-30000.0, -75000.0)
-   Outpost_12:setCommsFunction(O12_calls)   
+   Outpost_12:setCommsFunction(O12_calls)
+   Outpost_12:setDescription("One of 13 Drenni space stations in this star system.")
    Science_Facility_4 = SpaceStation():setTemplate("Small Station"):setCallSign("Science Facility 4"):setFaction("Human Navy"):setPosition(-70000.0, -10000.0)
    Science_Facility_4:setCommsFunction(SF4_calls)
 -- Variables de la mision
