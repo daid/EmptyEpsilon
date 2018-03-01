@@ -331,7 +331,13 @@ class Event:
                 else:
                     self._body.append('variable_%s = %s' % (convertName(node.get('name')), convertFloat(node.get('value'))))
             elif node.tag == 'set_ship_text':
-                self.warning('Ignore', node)
+                scan_desc = node.get('scan_desc')
+                desc = node.get('desc', "")
+                if scan_desc is None:
+                    self._body.append('%s:setDescription("%s")' % (convertName(node.get('name')), desc))
+                else:
+                    self._body.append(
+                        '%s:setDescriptions("%s", "%s")' % (convertName(node.get('name')), desc, scan_desc))
             elif node.tag == 'set_relative_position':
                 self._body.append('tmp_x, tmp_y = %s:getPosition()' % (convertName(node.get('name1'))));
                 self._body.append('tmp_x2, tmp_y2 = vectorFromAngle(%s:getRotation() + %f, %f)' % (convertName(node.get('name1')), float(node.get('angle')), float(node.get('distance'))));
