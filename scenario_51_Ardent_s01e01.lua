@@ -11,7 +11,7 @@ function init()
 -- Inicia tiempo
     globalMessage("Episode One:     Cause And Effect \n By Andrew Lacey fox_glos@hotmail.com \n Ported by Manuel Bravo manu161@hotmail.com");
 -- Crea nave
-  Ardent = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setCallSign("TSN Ardent"):setPosition(15000.0, -95000.0):setJumpDrive(false)
+  Ardent = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setCallSign("TSN Ardent"):setPosition(15000.0, -95000.0):setJumpDrive(false):setWarpDrive(true):setWarpSpeed(500)
     Sec = Nebula():setPosition(-40728.0,-59161.0):setCommsFunction(Security)
 -- Crea Comando
    tto = SpaceStation():setTemplate("Small Station"):setPosition(-1000000, -1000000):setCallSign("TSN Command")
