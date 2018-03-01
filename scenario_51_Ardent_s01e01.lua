@@ -77,7 +77,7 @@ end
 
 function SF4_calls()
 if mission_state == missionSF4 and Ardent:isDocked(Science_Facility_4) then
-setCommsMessage("This facility is a joint USFP and Drenni operation, attempting to collaboratively develop some of the more powerful Drenni technologies. TSN Command considers this a top priority. Which is why we were alarmed when our recent scans of the quadrant detected enemy vessels hidden in the nearby nebular. Their proximity to such a valuable asset is unacceptable.")
+setCommsMessage("This facility is a joint USFP and Drenni operation, attempting to collaboratively develop some of the more powerful Drenni technologies. TSN Command considers this a top priority. Which is why we were alarmed when our recent scans of the quadrant detected enemy vessels hidden in the nearby nebula. Their proximity to such a valuable asset is unacceptable.")
         addCommsReply("Accept", function()
             setCommsMessage([[Enter the nebula and deal with the enemy threat.]])
         mission_state = missionDistance
@@ -105,7 +105,7 @@ function tto_calls()
  if mission_state == missionBH and disaster < 0.0 and expo == 1 then
  setCommsMessage([[It s a disaster! Science Facility 4 has been destroyed and the classified singularity experiment it was working on is now completely out of control. The space-continuum has been ripped and the tear will continue to expand at an ever increasing rate. We predict that the quadrant will be destroyed in less than an hour with the whole star system destroyed in less than three. Try to Evacuate as many as possible !!.]])
         addCommsReply("Accept", function()
-            setCommsMessage([[Travel to within 1 UA to start beaming whoever you choose to evacuate and then escaping the quadrant at maximum warp by going to sector A5. Hurry! There isn t much time!.]])
+            setCommsMessage([[Travel to within 1 UA to start beaming whoever you choose to evacuate and then escaping the quadrant at maximum warp by going to sector A5. Hurry! There isn't much time!.]])
   Rift = BlackHole():setPosition(-70000.0, -10000.0)
   nextbh=15
   mission_state = missionEvacuation
