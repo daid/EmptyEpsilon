@@ -309,19 +309,24 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         string description = obj->getDescriptionFor(my_spaceship);
         string sidebar_pager_selection = sidebar_pager->getSelectionValue();
 
-        addDescriptionBox(description, description.size() > 0);
+        if (description.size() > 0)
+        {
+            info_description->setText(description)->show();
+
+            if (!sidebar_pager->indexByValue("Description"))
+            {
+                sidebar_pager->addEntry("Description", "Description");
+            }
+        }
+        else
+        {
+            sidebar_pager->removeEntry(sidebar_pager->indexByValue("Description"));
+        }
 
         // If the target is a ship, show information about the ship based on how
         // deeply we've scanned it.
         if (ship)
         {
-            string description_scanned = ship->getDescriptionScanned();
-            if (ship->getScannedStateFor(my_spaceship) < SS_SimpleScan)
-            {
-                sidebar_pager->removeEntry(sidebar_pager->indexByValue("Description"));
-                info_description->hide();
-            }
-
             // On a simple scan or deeper, show the faction, ship type, shields,
             // hull integrity, and database reference button.
             if (ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
@@ -331,33 +336,12 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                 info_type_button->show();
                 info_shields->setValue(ship->getShieldDataString());
                 info_hull->setValue(int(ship->getHull()));
-                addDescriptionBox(description, description.size() > 0);
             }
 
             // On a full scan, show tactical and systems data (if any), and its
             // description (if one is set).
             if (ship->getScannedStateFor(my_spaceship) >= SS_FullScan)
             {
-                string desc = "";
-                if (description.size() > 0)
-                {
-                    if (description_scanned.size() > 0)
-                    {
-                        desc = description + "\nSpecial Intel:\n" + description_scanned;
-                    }
-                    else
-                    {
-                        desc = description;
-                    }
-                }
-                else
-                {
-                    if (description_scanned.size() > 0)
-                    {
-                        desc = "Special Intel:\n" + description_scanned;
-                    }
-                }
-                addDescriptionBox(desc, description.size() > 0 || description_scanned.size() > 0);
                 sidebar_pager->setVisible(sidebar_pager->entryCount() > 1);
 
                 // Check sidebar pager state.
@@ -454,21 +438,5 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
         info_heading->setValue(string(int(heading)));
         info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
-    }
-}
-
-void ScienceScreen::addDescriptionBox(const string &description, bool condition) const {
-    if (condition)
-    {
-        info_description->setText(description)->show();
-
-        if (!sidebar_pager->indexByValue("Description"))
-        {
-            sidebar_pager->addEntry("Description", "Description");
-        }
-    }
-    else
-    {
-        sidebar_pager->removeEntry(sidebar_pager->indexByValue("Description"));
     }
 }
