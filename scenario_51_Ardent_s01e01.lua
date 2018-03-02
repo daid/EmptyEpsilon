@@ -15,6 +15,7 @@ function init()
     Sec = Nebula():setPosition(-40728.0,-59161.0):setCommsFunction(Security)
 -- Crea Comando
    tto = SpaceStation():setTemplate("Small Station"):setPosition(-1000000, -1000000):setCallSign("TSN Command")
+   temp_transmission_object = SpaceStation():setTemplate("Small Station"):setPosition(-1000000, -1000000)
 -- Crea asteroides
 placeRandomsphere(Asteroid, 50, 9075, -71750, 6500)
 placeRandomsphere(VisualAsteroid, 50, 9075, -71750, 6500)
@@ -96,7 +97,7 @@ function tto_calls()
      setCommsMessage([[Welcome to Drenni territory. The Drenni that populate this region of space are a scientifically advanced bipedal lizard race that have developed a number of unique technologies. They have colonised half a dozen of the nearby star systems and are considering membership to the USFP. But the Drenni are currently at war with the neighbouring space fairing race, an arachnid species called the Navien. If we could end the conflict it would bring stability to this part of the galaxy. After exhausting negotiation the Navien have finally agreed to send a single diplomat to the Drenni, for top secret peace talks.]])
         addCommsReply("Accept", function()
             setCommsMessage([[Good. The Navien ambassador is already aboard your ship. Deliver her to the luxury liner called the Verran for the clandestine meeting.]])
-           mission_state = missionDiplomat
+           mission_state = ambushComms
            REenvoy1 = 1
            entregat = 0
         end)
@@ -112,54 +113,48 @@ function tto_calls()
  end)
 end
 end
-function hack()
- setCommsMessage([[The location of the diplomatic meeting has changed and is now on a need to know basis. Proceed immediately to the middle of the asteroid field in Sector B5 and await your next nav co-ordinates. We have sent you the waypoint]])
-    Ardent:commandAddWaypoint(10000.0,-71000.0)
-       entregat = 1
-end
-
 
 function missionStartState()
     tto:openCommsTo(Ardent)
 end
 
-function missionDiplomat(delta)
-    Verran:setCommsFunction(hack)
-    
-    if ifOutsideBox(Ardent, 20000.0, -100000.0, 10000, -90000.0) and entregat ~= (1) then
-    Verran:setCommsFunction(hack)
-    Verran:openCommsTo(Ardent)
+function ambushComms(delta)
+    if ifOutsideBox(Ardent, 20000.0, -100000.0, -20000.0, -70000.0) then
+        temp_transmission_object:setCallSign("Unsecured...Ch@nnel"):setCommsMessage("The loc@tion of the diplom@tic meeting has ch@nged and is now on @ need to know b@sis... Proceed immedi@tely to the middle of the @steroid field in Sector B5 and @w@it your next n@v co-ordin@tes...")
     end
 
-    if REenvoy1 == (1) and ifInsideSphere(Ardent, 10000.0, -71000.0, 5500.0) then
-       realt = 1
-    end
-    if realt == (1) then
-    realtime = realtime + delta
-      if realtime > 0.0 and entregat3 == nil then
+    mission_state = missionDiplomat
+end
+
+function missionDiplomat(delta)
+
+    if entregado4 ~= nil and entregado4 == 1 then
+      realtime = realtime + delta
+      if realtime > 15.0 and entregat3 == nil then
             Verran:sendCommsMessage(Ardent, [[Ardent, our ..... signal is .... ..... !Please ..... to 1000m of our ..... location ..... we will beam ..... diplomat aboard.]])
             entregat3 = 1
       end
-      if realtime > 60.0 and entregat3 == (1) then
-        Verran:sendCommsMessage(Ardent, [[Ardent, our ..... signal is being ..... !Please ..... to 1000m of our ..... location ..... we will beam ..... diplomat aboard.]])
-        entregat3 = 2
-      end
     end
   
-    cerca = distance(Ardent, Verran)
+    distance_ardent_verra = distance(Ardent, Verran)
     
-    if REenvoy1 == (1) and cerca < (15000.0) and entregat2 == nil then
+    if distance_ardent_verra < (40000.0) and REenvoy2 ~= (1) then
+      Verran:sendCommsMessage(Ardent, [[Ardent, our ..... signal is being ..... !Please ..... to 1000m of our ..... location ..... we will beam ..... diplomat aboard.]])
+      REenvoy2 = 1
+    end
+
+    if REenvoy1 == (1) and distance_ardent_verra < (15000.0) and entregat2 == nil then
  Verran:sendCommsMessage(Ardent, [[Ardent, our comms signal is being hacked! Please come to 1000m of our current location and we will beam the diplomat aboard. Thank you.]])
  entregat2 = 1
     end
 
-    if REenvoy1 == (1) and cerca < (1000.0) and Ardent:getShieldsActive() then
+    if REenvoy1 == (1) and distance_ardent_verra < (1000.0) and Ardent:getShieldsActive() then
     if Ardent:isCommsInactive() then
       Verran:sendCommsMessage(Ardent, [[Please, switch off the shields so we can beam aboard the diplomat.]])
     end
     end
 
-    if REenvoy1 == (1) and cerca < (1000.0) and not Ardent:getShieldsActive() then
+    if REenvoy1 == (1) and distance_ardent_verra < (1000.0) and not Ardent:getShieldsActive() then
     if Ardent:isCommsInactive() then
       Verran:sendCommsMessage(Ardent, [[The diplomat has successfully been beamed aboard. Diplomatic negotiations will begin shortly. Thank you Ardent. Verran out.]])
       REenvoy1 = 0
@@ -170,7 +165,8 @@ function missionDiplomat(delta)
     if variable_igetya == (1) and entregado4 == nil then
     if Ardent:isCommsInactive() then
     CV02:sendCommsMessage(Ardent, [[Our fake transmission brought you right into our ambush! There will be no peace and you will die here!]])
-    entregado4= 1
+    Ardent:addCustomMessage("scienceOfficer", "warning", "Enemy Ships Decloaking")
+    entregado4 = 1
     end
     end
 
@@ -195,7 +191,7 @@ function missionDiplomat(delta)
         tmp_x2, tmp_y2 = vectorFromAngle(Ardent:getRotation() + 90.0, 1000.0)
         tmp_x, tmp_y = tmp_x + tmp_x2, tmp_y + tmp_y2
         CV03:setPosition(tmp_x, tmp_y);
-        variable_igetya = 1.0
+        variable_igetya = 1
     end
 end
 
