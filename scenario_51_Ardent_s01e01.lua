@@ -357,6 +357,7 @@ function missionSAhuida(delta)
 Sec:setCallSign("Internal Comms - Security"):sendCommsMessage(Ardent,[[The saboteur has retreated to Cargo Bay 2. There is some kind of stealth vessel attached to the outside of the hull.]])
 Sec:setCallSign("")
         TG01 = CpuShip():setTemplate("Starhammer II"):setCallSign("TG01"):setFaction("Kraylor"):setPosition(-30000.0, -45000.0):orderAttack(Ardent)
+        TG01:setDescription("The recon vessel is transmitting a number of encrypted signals, some intended for the saboteur and others directed towards Science Facility 4.")
         if fleet[7] == nil then fleet[7] = {} end
         table.insert(fleet[7], TG01)
     tllegit = 30
@@ -381,10 +382,7 @@ Sec:setCallSign("Internal Comms - Security"):sendCommsMessage(Ardent,[[The sabot
 Sec:setCallSign("")
     tllegit=20
     llegit6=1
-    end
-    if Ardent:isCommsInactive() and llegit6 == 1 and tllegit < 0.0 then
-TG01:sendCommsMessage(Ardent,"&&%%%213·57890%23¡¡|30ndRD921º \n \n We are receiving a number of encrypted signals. \n Some are intended for the saboteur \n and others are directed towards Science Facility 4.")
-  mission_state=missionBH
+    mission_state=missionBH
     end
 end
 
@@ -402,6 +400,7 @@ end
  if byebye == nil and Saboteur ~= nil and TG01 ~= nil and Saboteur:isValid() and TG01:isValid() and distance(Saboteur, TG01) < 1000. then
   byebye = 1
   Saboteur:destroy()
+  Ardent:addCustomMessage("scienceOfficer", "warning", "The saboteur has docked with TG01")
   jumpin = 20
 end
 
