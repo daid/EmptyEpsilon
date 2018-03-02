@@ -188,7 +188,7 @@ end
 
 end
 
-function missionSF4()
+function missionSF4(delta)
 
   if Ardent:isDocked(Science_Facility_4) and variable_SF4dock == nil then
     Science_Facility_4:setCommsMessage("This facility is a joint USFP and Drenni operation, attempting to collaboratively develop some of the more powerful Drenni technologies. TSN Command considers this a top priority. Our latest test probe in C4 isn't responding. We'de like you to retrieve it and return it to us.")
@@ -246,6 +246,45 @@ function missionSF4()
         finalValue=irandom(1,4)
         variable_SF4dock= 1
   end
+
+    saboteur(delta)
+end
+
+function saboteur(delta)
+    if variable_sab == nil and variable_SF4dock ~= nil and distance(Science_Facility_4, Ardent) > 2000 then
+        sab_timer = 10.0
+        variable_sab = 1
+    end
+
+    if sab_start = 1 then
+        sab_timer = sab_timer - delta
+    end
+
+    if sab_timer ~= nill and sab_timer < 0 then
+        stored_energy = Ardent:getEnergy()
+        Ardent:setEnergy(0.0)
+        Ardent:addCustomMessage("scienceOfficer", "warning", "Internal Explosion Detected")
+        Ardent:addCustomMessage("engineering", "warning", "Main Power Conduit Overload")
+        sab_timerb = 5.0
+        sab_timerc = 10.0
+        variable_sab = 2
+    end
+
+    if variable_sab ~= nil and variable_sab == 2 then
+        sab_timerb = sab_timerb - delta
+        sab_timerc = sab_timerc - delta
+    end
+
+    if timerb_fired ~= 1 and sab_timerb < 0 then
+        Ardent:addCustomMessage("engineering", "warning", "Rerouting Power")
+        timerb_fired = 1
+    end
+
+    if timerc_fired ~= 1 and sab_timerc < 0 then
+        Ardent:setEnergy(stored_energy)
+        Ardent:addCustomMessage("engineering", "warning", "Energy Restored")
+        timerc_fired = 1
+    end
 end
 
 function Security()
