@@ -76,22 +76,6 @@ function O12_calls()
  
 end
 
-function SF4_calls()
-if mission_state == missionSF4 and Ardent:isDocked(Science_Facility_4) then
-setCommsMessage("This facility is a joint USFP and Drenni operation, attempting to collaboratively develop some of the more powerful Drenni technologies. TSN Command considers this a top priority. Which is why we were alarmed when our recent scans of the quadrant detected enemy vessels hidden in the nearby nebula. Their proximity to such a valuable asset is unacceptable.")
-        addCommsReply("Accept", function()
-            setCommsMessage([[Enter the nebula and deal with the enemy threat.]])
-        mission_state = missionDistance
-         end)
-elseif mission_state == missionBH then 
-setCommsMessage([[Experiment... sabotaged... explossions... chainreaction... can t... Help... contact... Please...]])
-else
- setCommsMessage("This facility is a joint USFP and Drenni operation, attempting to collaboratively develop some of the more powerful Drenni technologies, you're wellcome to the sector")
-end
-
-
-end
-
 function tto_calls()
   if mission_state == missionStartState then
      setCommsMessage([[Welcome to Drenni territory. The Drenni that populate this region of space are a scientifically advanced bipedal lizard race that have developed a number of unique technologies. They have colonised half a dozen of the nearby star systems and are considering membership to the USFP. But the Drenni are currently at war with the neighbouring space fairing race, an arachnid species called the Navien. If we could end the conflict it would bring stability to this part of the galaxy. After exhausting negotiation the Navien have finally agreed to send a single diplomat to the Drenni, for top secret peace talks.]])
@@ -206,7 +190,37 @@ end
 
 function missionSF4()
 
- if Ardent:isDocked(Science_Facility_4) and variable_SF4dock == nil then
+  if Ardent:isDocked(Science_Facility_4) and variable_SF4dock == nil then
+    Science_Facility_4:setCommsMessage("This facility is a joint USFP and Drenni operation, attempting to collaboratively develop some of the more powerful Drenni technologies. TSN Command considers this a top priority. Our latest test probe in C4 isn't responding. We'de like you to retrieve it and return it to us.")
+    probe = SupplyDrop():setPosition(-46638.0, -58319.0):setDescription("Probe")
+    variable_SF4dock = 1
+    skaraansattack = 1
+  end
+
+  if skaraansattack ~= nil and skaraansattack == 1 then
+    CV01 = CpuShip():setTemplate("Phobos T3"):setCallSign("CV01"):setFaction("Kraylor"):setPosition(6603.0, -81820.0):orderAttack(Verran):setJumpDrive(false)
+    if fleet[1] == nil then fleet[1] = {} end
+    table.insert(fleet[1], CV01)
+    CV02 = CpuShip():setTemplate("Phobos T3"):setCallSign("CV02"):setFaction("Kraylor"):setPosition(883.0, -67782.0):orderAttack(Ardent):setJumpDrive(false)
+    if fleet[2] == nil then fleet[2] = {} end
+    table.insert(fleet[2], CV02)
+    skaraansattack = 2
+  end
+
+  if variable_SF4dock ~= nil and variable_SF4dock == 1 and distance(Ardent, Probe) < 251.0 then
+    Ardent:addCustomMessage("scienceOfficer", "warning", "Probe Collected")
+    variable_SF4dock = 2
+    gotprobe = 1
+  end
+
+  if gotprobe ~= nil and gotprobe = 1 then
+    if docked_again == nil and Ardent:isDocked(Science_Facility_4) then
+      Science_Facility_4:setCommsMessage("We're detected unussual signals in the nearby nebular. Enter the nebula and investigate.")
+      docked_again = 1
+    end
+  end
+
+  if  then
     Science_Facility_4:openCommsTo(Ardent)
         KR07 = CpuShip():setTemplate("Phobos T3"):setCallSign("KR07"):setFaction("Kraylor"):setPosition(4000.0, -35900.0):orderAttack(Ardent):setJumpDrive(false)
         if fleet[6] == nil then fleet[6] = {} end
@@ -231,7 +245,7 @@ function missionSF4()
         REstartsab=10
         finalValue=irandom(1,4)
         variable_SF4dock= 1
-end
+  end
 end
 
 function Security()
