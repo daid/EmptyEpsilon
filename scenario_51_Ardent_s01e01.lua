@@ -327,6 +327,9 @@ end
 function missionKill(delta)
      REstartsab = REstartsab - delta
 
+    if makewave == nil and isInsideBox(Ardent, 20000.0, -40000.0, -40000.0, 0.0) then
+        Science_Facility_4:setCommsMessage("Thats unbelieveable! TAK forces here! They've smuggled an operational gate right into the nearby nebula. They must be stopped. Engage all hostile forces and destroy that jump gate!")
+
 if Ardent:isCommsInactive() and dicho == nil then
 Sec:setCallSign("Internal Comms - Security"):sendCommsMessage(Ardent,[[This is Lieutenant Commander Hail of Security. Sir, we investigated the blown power conduit and detected explosive residue. It seems we have a saboteur aboard. The internal sensors aren’t picking anything up.]])
 Sec:setCallSign("")
