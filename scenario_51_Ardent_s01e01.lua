@@ -213,12 +213,22 @@ function missionSF4(delta)
     gotprobe = 1
   end
 
-  if gotprobe ~= nil and gotprobe = 1 then
+  if gotprobe ~= nil and gotprobe == 1 then
     if docked_again == nil and Ardent:isDocked(Science_Facility_4) then
       Science_Facility_4:setCommsMessage("We're detected unussual signals in the nearby nebular. Enter the nebula and investigate.")
       docked_again = 1
+      saboteur_timer = 45
     end
   end
+
+    if docked_again == 1 then
+        saboteur_timer = saboteur_timer - delta
+
+        if saboteur_timer ~= nil and saboteur_timer < 0.0 then
+            mission_state = missionKill
+            REstartsab=10
+            finalValue=irandom(1,4)
+        end
 
   if  then
     Science_Facility_4:openCommsTo(Ardent)
@@ -242,9 +252,7 @@ function missionSF4(delta)
         KR03 = CpuShip():setTemplate("Atlantis X23"):setCallSign("KR03"):setFaction("Kraylor"):setPosition(-35000.0, -14600.0):orderAttack(Ardent):setJumpDrive(false)
         table.insert(fleet[6], KR03)
 --        REstartsab=45
-        REstartsab=10
-        finalValue=irandom(1,4)
-        variable_SF4dock= 1
+
   end
 
     saboteur(delta)
@@ -316,19 +324,11 @@ function Security()
         end)
 end
 
-function missionDistance()
-
-  for key, value in pairs(fleet[6]) do
-    if distance(Ardent, value) < 5000 then
-mission_state=missionKill
-    end
-  end
-end
 function missionKill(delta)
      REstartsab = REstartsab - delta
 
 if Ardent:isCommsInactive() and dicho == nil then
-Sec:setCallSign("Internal Comms - Security"):sendCommsMessage(Ardent,[[This is Lieutenant Commander Hail of Security. Sir, we just found an undetonated thermite explosive on one of the EPS conduits of the port stabilizers. Luckily we managed to deactivate the device before it could cause any damage. Sir, it would seem we have a saboteur aboard. The internal sensors aren\'t picking anything up and my security teams did a sweep of the whole ship and came up empty handed.]])
+Sec:setCallSign("Internal Comms - Security"):sendCommsMessage(Ardent,[[This is Lieutenant Commander Hail of Security. Sir, we investigated the blown power conduit and detected explosive residue. It seems we have a saboteur aboard. The internal sensors aren’t picking anything up.]])
 Sec:setCallSign("")
    dicho=1
    REstartsab=120
