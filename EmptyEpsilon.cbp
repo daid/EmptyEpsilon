@@ -555,6 +555,8 @@
 		<Unit filename="src/httpScriptAccess.h" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/main.h" />
+		<Unit filename="src/math/centerOfMass.h" />
+		<Unit filename="src/math/triangulate.h" />
 		<Unit filename="src/menus/autoConnectScreen.cpp" />
 		<Unit filename="src/menus/autoConnectScreen.h" />
 		<Unit filename="src/menus/joinServerMenu.cpp" />
@@ -783,6 +785,8 @@
 		<Unit filename="src/spaceObjects/warpJammer.h" />
 		<Unit filename="src/spaceObjects/wormHole.cpp" />
 		<Unit filename="src/spaceObjects/wormHole.h" />
+		<Unit filename="src/spaceObjects/zone.cpp" />
+		<Unit filename="src/spaceObjects/zone.h" />
 		<Unit filename="src/threatLevelEstimate.cpp" />
 		<Unit filename="src/threatLevelEstimate.h" />
 		<Unit filename="src/tutorialGame.cpp" />

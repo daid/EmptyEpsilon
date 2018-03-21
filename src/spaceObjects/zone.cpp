@@ -14,6 +14,9 @@
 REGISTER_SCRIPT_SUBCLASS(Zone, SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(Zone, setPoints);
+    REGISTER_SCRIPT_CLASS_FUNCTION(Zone, setColor);
+    REGISTER_SCRIPT_CLASS_FUNCTION(Zone, setLabel);
+    REGISTER_SCRIPT_CLASS_FUNCTION(Zone, isInside);
 }
 
 REGISTER_MULTIPLAYER_CLASS(Zone, "Zone");
@@ -49,6 +52,19 @@ void Zone::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float sc
     }
     window.draw(triangle_array);
     window.draw(outline_array);
+    
+    if (label.length() > 0)
+    {
+        int font_size = getRadius() * scale / label.length();
+        sf::Text text_element(label, *main_font, font_size);
+
+        float x = position.x - text_element.getLocalBounds().width / 2.0 - text_element.getLocalBounds().left;
+        float y = position.y - font_size + font_size * 0.35;
+
+        text_element.setPosition(x, y);
+        text_element.setColor(sf::Color(color.r, color.g, color.b, 128));
+        window.draw(text_element);
+    }
 }
 
 void Zone::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
@@ -89,4 +105,11 @@ void Zone::setPoints(std::vector<sf::Vector2f> points)
 void Zone::setLabel(string label)
 {
     this->label = label;
+}
+
+bool Zone::isInside(P<SpaceObject> obj)
+{
+    if (!obj)
+        return false;
+    return insidePolygon(outline, obj->getPosition() - getPosition());
 }
