@@ -219,6 +219,7 @@ set(SOURCES
 	src/spaceObjects/artifact.cpp
 	src/spaceObjects/shipTemplateBasedObject.cpp
 	src/spaceObjects/planet.cpp
+	src/spaceObjects/zone.cpp
 	src/spaceObjects/spaceshipParts/beamWeapon.cpp
 	src/spaceObjects/spaceshipParts/weaponTube.cpp
 	src/ai/fighterAI.cpp
