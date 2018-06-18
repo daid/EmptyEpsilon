@@ -1,5 +1,9 @@
 -- Name: Shoreline
--- Description: Waves of increasingly difficult enemies. A given wave may include a required or optional mission
+-- Description: Waves of increasingly difficult enemies. At least one required mission and several optional missions randomly selected
+---
+--- Maximum of 8 player ships supported by scenario. More player ships may experience strange results
+---
+--- Version 2
 -- Type: Re-playable Mission
 -- Variation[Timed]: Normal difficulty with a 45 minute time limit
 -- Variation[Very Easy]: Few or weak enemies
@@ -181,6 +185,15 @@ function init()
 					{"software",0},
 					{"battery",0}	}
 	diagnostic = false
+	playerShipNamesForMP52Hornet = {"Dragonfly","Scarab","Mantis","Yellow Jacket","Jimminy","Flik","Thorny"}
+	playerShipNamesForPiranha = {"Razor's Edge","Biter","Ripper","Voracious","Carnivorous","Characid","Vulture","Predator"}
+	playerShipNamesForFlaviaPFalcon = {"Ladyhawke","Hunter","Seeker","Gyrefalcon","Kestrel","Magpie","Bandit","Buccaneer"}
+	playerShipNamesForPhobosM3P = {"Blinder","Shadow","Distortion","Diemos","Ganymede","Castillo","Thebe","Retrograde"}
+	playerShipNamesForAtlantis = {"Excaliber","Thrasher","Punisher","Vorpal","Protang","Drummond","Parchim","Coronado"}
+	playerShipNamesForCruiser = {"Excelsior","Velociraptor","Thunder","Kona","Encounter","Perth","Aspern","Panther"}
+	playerShipNamesForMissileCruiser = {"Projectus","Hurlmeister","Flinger","Ovod","Amatola","Nakhimov","Antigone"}
+	playerShipNamesForFighter = {"Buzzer","Flitter","Zippiticus","Hopper","Molt"}
+	playerShipNamesForLeftovers = {"Forgone","Righteous","Masher"}
 	goods = {}
 	setVariations()
 	setPlayers()
@@ -211,6 +224,7 @@ function setVariations()
 		waveDelayCountCheck = 15
 	else
 		gameTimeLimit = 0
+		clueMessageDelay = 30*60
 		playWithTimeLimit = false
 		requiredMissionDelay = 20
 		waveDelayCountCheck = 30
@@ -247,42 +261,90 @@ function setPlayers()
 				pobj:addReputationPoints(25-(difficulty*6))
 				pobj.initialRep = true
 			end
-			tempPlayerType = pobj:getTypeName()
-			if tempPlayerType == "MP52 Hornet" then
-				pobj.shipScore = 7
-				pobj.maxCargo = 3
-				pobj:setWarpDrive(true)
-			elseif tempPlayerType == "Piranha" then
-				pobj.shipScore = 16
-				pobj.maxCargo = 8
-			elseif tempPlayerType == "Flavia P.Falcon" then
-				pobj.shipScore = 15
-				pobj.maxCargo = 15
-			elseif tempPlayerType == "Phobos M3P" then
-				pobj.shipScore = 19
-				pobj.maxCargo = 10
-				pobj:setWarpDrive(true)
-			elseif tempPlayerType == "Atlantis" then
-				pobj.shipScore = 52
-				pobj.maxCargo = 6
-			elseif tempPlayerType == "Player Cruiser" then
-				pobj.shipScore = 40
-				pobj.maxCargo = 6
-			elseif tempPlayerType == "Player Missile Cr." then
-				pobj.shipScore = 45
-				pobj.maxCargo = 8
-			elseif tempPlayerType == "Player Fighter" then
-				pobj.shipScore = 7
-				pobj.maxCargo = 3
-				pobj:setJumpDrive(true)
-				pobj:setJumpDriveRange(3000,40000)
-			else
-				pobj.shipScore = 24
-				pobj.maxCargo = 5
-				pobj:setWarpDrive(true)
-			end
-			if pobj.cargo == nil then
-				pobj.cargo = pobj.maxCargo
+			if not pobj.nameAssigned then
+				pobj.nameAssigned = true
+				tempPlayerType = pobj:getTypeName()
+				if tempPlayerType == "MP52 Hornet" then
+					if #playerShipNamesForMP52Hornet > 0 then
+						ni = math.random(1,#playerShipNamesForMP52Hornet)
+						pobj:setCallSign(playerShipNamesForMP52Hornet[ni])
+						table.remove(playerShipNamesForMP52Hornet,ni)
+					end
+					pobj.shipScore = 7
+					pobj.maxCargo = 3
+					pobj:setWarpDrive(true)
+				elseif tempPlayerType == "Piranha" then
+					if #playerShipNamesForPiranha > 0 then
+						ni = math.random(1,#playerShipNamesForPiranha)
+						pobj:setCallSign(playerShipNamesForPiranha[ni])
+						table.remove(playerShipNamesForPiranha,ni)
+					end
+					pobj.shipScore = 16
+					pobj.maxCargo = 8
+				elseif tempPlayerType == "Flavia P.Falcon" then
+					if #playerShipNamesForFlaviaPFalcon > 0 then
+						ni = math.random(1,#playerShipNamesForFlaviaPFalcon)
+						pobj:setCallSign(playerShipNamesForFlaviaPFalcon[ni])
+						table.remove(playerShipNamesForFlaviaPFalcon,ni)
+					end
+					pobj.shipScore = 15
+					pobj.maxCargo = 15
+				elseif tempPlayerType == "Phobos M3P" then
+					if #playerShipNamesForPhobosM3P > 0 then
+						ni = math.random(1,#playerShipNamesForPhobosM3P)
+						pobj:setCallSign(playerShipNamesForPhobosM3P[ni])
+						table.remove(playerShipNamesForPhobosM3P,ni)
+					end
+					pobj.shipScore = 19
+					pobj.maxCargo = 10
+					pobj:setWarpDrive(true)
+				elseif tempPlayerType == "Atlantis" then
+					if #playerShipNamesForAtlantis > 0 then
+						ni = math.random(1,#playerShipNamesForAtlantis)
+						pobj:setCallSign(playerShipNamesForAtlantis[ni])
+						table.remove(playerShipNamesForAtlantis,ni)
+					end
+					pobj.shipScore = 52
+					pobj.maxCargo = 6
+				elseif tempPlayerType == "Player Cruiser" then
+					if #playerShipNamesForCruiser > 0 then
+						ni = math.random(1,#playerShipNamesForCruiser)
+						pobj:setCallSign(playerShipNamesForCruiser[ni])
+						table.remove(playerShipNamesForCruiser,ni)
+					end
+					pobj.shipScore = 40
+					pobj.maxCargo = 6
+				elseif tempPlayerType == "Player Missile Cr." then
+					if #playerShipNamesForMissileCruiser > 0 then
+						ni = math.random(1,#playerShipNamesForMissileCruiser)
+						pobj:setCallSign(playerShipNamesForMissileCruiser[ni])
+						table.remove(playerShipNamesForMissileCruiser,ni)
+					end
+					pobj.shipScore = 45
+					pobj.maxCargo = 8
+				elseif tempPlayerType == "Player Fighter" then
+					if #playerShipNamesForFighter > 0 then
+						ni = math.random(1,#playerShipNamesForFighter)
+						pobj:setCallSign(playerShipNamesForFighter[ni])
+						table.remove(playerShipNamesForFighter,ni)
+					end
+					pobj.shipScore = 7
+					pobj.maxCargo = 3
+					pobj:setJumpDrive(true)
+					pobj:setJumpDriveRange(3000,40000)
+				else
+					if #playerShipNamesForLeftovers > 0 then
+						ni = math.random(1,#playerShipNamesForLeftovers)
+						pobj:setCallSign(playerShipNamesForLeftovers[ni])
+						table.remove(playerShipNamesForLeftovers,ni)
+					end
+					pobj.shipScore = 24
+					pobj.maxCargo = 5
+					pobj:setWarpDrive(true)
+				end
+				if pobj.cargo == nil then
+					pobj.cargo = pobj.maxCargo
+				end
 			end
 		end
 	end
@@ -1447,6 +1509,29 @@ function handleUndockedState()
 				addCommsReply("Back", commsStation)
 			end
 		end)
+		addCommsReply("Where can I find particular goods?", function()
+			gkMsg = "Friendly stations generally have food or medicine or both. Neutral stations often trade their goods for food, medicine or luxury."
+			if comms_target.goodsKnowledge == nil then
+				gkMsg = gkMsg .. " Beyond that, I have no knowledge of specific stations.\n\nCheck back later, someone else may have better knowledge"
+				setCommsMessage(gkMsg)
+				addCommsReply("Back", commsStation)
+				fillStationBrains()
+			else
+				if #comms_target.goodsKnowledge == 0 then
+					gkMsg = gkMsg .. " Beyond that, I have no knowledge of specific stations"
+				else
+					gkMsg = gkMsg .. " I've heard about these goods:"
+					for gk=1,#comms_target.goodsKnowledge do
+						addCommsReply(comms_target.goodsKnowledgeType[gk],function()
+							setCommsMessage(string.format("Station %s in sector %s has %s%s",comms_target.goodsKnowledge[gk],comms_target.goodsKnowledgeSector[gk],comms_target.goodsKnowledgeType[gk],comms_target.goodsKnowledgeTrade[gk]))
+							addCommsReply("Back", commsStation)
+						end)
+					end
+				end
+				setCommsMessage(gkMsg)
+				addCommsReply("Back", commsStation)
+			end
+		end)
 	end)
 	if player:isFriendly(comms_target) then
 		addCommsReply("What are my current orders?", function()
@@ -1463,7 +1548,7 @@ function handleUndockedState()
 			if playWithTimeLimit then
 				dMsg = string.format("Game time remaining: %f",gameTimeLimit)
 			else
-				dMsg = "No game time limit"
+				dMsg = string.format("Clue message time remaining: %f",clueMessageDelay)
 			end
 			for p12idx=1,8 do
 				p12 = getPlayerShip(p12idx)
@@ -1640,6 +1725,52 @@ function handleUndockedState()
             addCommsReply("Back", commsStation)
         end)
     end
+end
+
+function fillStationBrains()
+	comms_target.goodsKnowledge = {}
+	comms_target.goodsKnowledgeSector = {}
+	comms_target.goodsKnowledgeType = {}
+	comms_target.goodsKnowledgeTrade = {}
+	knowledgeCount = 0
+	knowledgeMax = 10
+	for sti=1,#stationList do
+		if stationList[sti] ~= nil and stationList[sti]:isValid() then
+			for gi=1,#goods[stationList[sti]] do
+				if math.random(1,10) == 1 then
+					table.insert(comms_target.goodsKnowledge,stationList[sti]:getCallSign())
+					table.insert(comms_target.goodsKnowledgeSector,stationList[sti]:getSectorName())
+					table.insert(comms_target.goodsKnowledgeType,goods[stationList[sti]][gi][1])
+					tradeString = ""
+					stationTrades = false
+					if tradeMedicine[stationList[sti]] ~= nil then
+						tradeString = " and will trade it for medicine"
+						stationTrades = true
+					end
+					if tradeFood[stationList[sti]] ~= nil then
+						if stationTrades then
+							tradeString = tradeString .. " or food"
+						else
+							tradeString = tradeString .. " and will trade it for food"
+							stationTrades = true
+						end
+					end
+					if tradeLuxury[stationList[sti]] ~= nil then
+						if stationTrades then
+							tradeString = tradeString .. " or luxury"
+						else
+							tradeString = tradeString .. " and will trade it for luxury"
+						end
+					end
+					table.insert(comms_target.goodsKnowledgeTrade,tradeString)
+					knowledgeCount = knowledgeCount + 1
+					if knowledgeCount >= knowledgeMax then
+						return
+					end
+				end
+			end
+		end
+	end
 end
 
 function getFriendStatus()
@@ -3587,6 +3718,11 @@ function quantumDeliverArt(delta)
 end
 
 function update(delta)
+	if delta == 0 then
+		--game paused
+		setPlayers()
+		return
+	end
 	if playWithTimeLimit then
 		gameTimeLimit = gameTimeLimit - delta
 		if gameTimeLimit < 0 then
@@ -3626,6 +3762,35 @@ function update(delta)
 			end
 		end
 	else
+		clueMessageDelay = clueMessageDelay - delta
+		if clueMessageDelay < 0 then
+			if clueMessage ~= "delivered" then
+				clMsg = "Intelligence has analyzed all the enemy activity in this area and has determined that there must be three enemy bases. Find these bases and destroy them."
+				enemyBaseCount = 0
+				if stationEmpok:isValid() then
+					enemyBaseCount = enemyBaseCount + 1
+				end
+				if stationTic:isValid() then
+					enemyBaseCount = enemyBaseCount + 1
+				end
+				if stationGanalda:isValid() then
+					enemyBaseCount = enemyBaseCount + 1
+				end
+				if enemyBaseCount == 1 then
+					clMsg = clMsg .. " You have already destroyed two of them."
+				elseif enemyBaseCount == 2 then
+					clMsg = clMsg .. " You have already destroyed one of them."
+				end
+				primaryOrders = "Defend bases in the area (human navy and independent) from enemy attack and destroy three enemy bases."
+				for p43idx=1,8 do
+					p43 = getPlayerShip(p43idx)
+					if p43 ~= nil and p43:isValid() then
+						p43:addToShipLog(clMsg,"Magenta")
+					end
+				end
+				clueMessage = "delivered"
+			end
+		end
 		if plotR == nil then
 			requiredMissionDelay = requiredMissionDelay - delta
 			if requiredMissionCount > 0 and not stationEmpok:isValid() and not stationTic:isValid() and not stationGanalda:isValid() then
