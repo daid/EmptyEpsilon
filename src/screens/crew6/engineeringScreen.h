@@ -3,6 +3,7 @@
 
 #include "gui/gui2_overlay.h"
 #include "shipTemplate.h"
+#include "playerInfo.h"
 
 class GuiKeyValueDisplay;
 class GuiLabel;
@@ -54,7 +55,7 @@ private:
     void addSystemEffect(string key, string value);
     void selectSystem(ESystem system);
 public:
-    EngineeringScreen(GuiContainer* owner);
+    EngineeringScreen(GuiContainer* owner, ECrewPosition crew_position=engineering);
     
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;
