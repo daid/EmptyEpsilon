@@ -115,7 +115,6 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window){
             rows[n].fire_button->disable()->show();
             rows[n].fire_button->setText(tube.getTubeName() + ": Empty");
             rows[n].loading_bar->hide();
-            rows[n].auto_button->disable();
         }else if(tube.isLoaded())
         {
             rows[n].load_button->enable();
@@ -123,7 +122,6 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window){
             rows[n].fire_button->enable()->show();
             rows[n].fire_button->setText(tube.getTubeName() + ": " + getMissileWeaponName(tube.getLoadType()));
             rows[n].loading_bar->hide();
-            rows[n].auto_button->enable();
         }else if(tube.isLoading())
         {
             rows[n].load_button->disable();
@@ -133,7 +131,6 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window){
             rows[n].loading_bar->show();
             rows[n].loading_bar->setValue(tube.getLoadProgress());
             rows[n].loading_label->setText("Loading");
-            rows[n].auto_button->enable();
         }else if(tube.isUnloading())
         {
             rows[n].load_button->disable();
@@ -143,7 +140,6 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window){
             rows[n].loading_bar->show();
             rows[n].loading_bar->setValue(tube.getUnloadProgress());
             rows[n].loading_label->setText("Unloading");
-            rows[n].auto_button->disable();
         }else if(tube.isFiring())
         {
             rows[n].load_button->disable();
@@ -151,7 +147,6 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window){
             rows[n].fire_button->disable()->show();
             rows[n].fire_button->setText("Firing");
             rows[n].loading_bar->hide();
-            rows[n].auto_button->enable();
         }
     }
     for(int n=my_spaceship->weapon_tube_count; n<max_weapon_tubes; n++)
