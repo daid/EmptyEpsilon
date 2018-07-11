@@ -17,6 +17,7 @@ WeaponTube::WeaponTube()
     state = WTS_Empty;
     delay = 0.0;
     tube_index = 0;
+    auto_loading = false;
 }
 
 void WeaponTube::setParent(SpaceShip* parent)
@@ -31,6 +32,7 @@ void WeaponTube::setParent(SpaceShip* parent)
     parent->registerMemberReplication(&type_loaded);
     parent->registerMemberReplication(&state);
     parent->registerMemberReplication(&delay, 0.5);
+    parent->registerMemberReplication(&auto_loading);
 }
 
 float WeaponTube::getLoadTimeConfig()
@@ -79,7 +81,17 @@ void WeaponTube::startUnload()
     {
         state = WTS_Unloading;
         delay = load_time;
+        auto_loading = false;
     }
+}
+
+void WeaponTube::startAutoLoad(EMissileWeapons type)
+{
+	if (!auto_loading)
+		return;
+	if (type_loaded != type)
+		return;
+	startLoad(type_loaded);
 }
 
 void WeaponTube::fire(float target_angle)
@@ -98,7 +110,10 @@ void WeaponTube::fire(float target_angle)
     }else{
         spawnProjectile(target_angle);
         state = WTS_Empty;
-        type_loaded = MW_None;
+        if (auto_loading)
+        	startLoad(type_loaded);
+        else
+        	type_loaded = MW_None;
     }
 }
 
@@ -264,6 +279,23 @@ bool WeaponTube::isUnloading()
 bool WeaponTube::isFiring()
 {
     return state == WTS_Firing;
+}
+
+bool WeaponTube::isAutoLoading()
+{
+	return auto_loading;
+}
+
+void WeaponTube::enableAutoLoading()
+{
+	auto_loading = true;
+}
+
+void WeaponTube::disableAutoLoading()
+{
+	auto_loading = false;
+	if (state == WTS_Empty)
+		type_loaded = MW_None;
 }
 
 float WeaponTube::getLoadProgress()

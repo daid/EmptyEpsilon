@@ -35,6 +35,8 @@ public:
      */
     void startLoad(EMissileWeapons type);
     void startUnload();
+    void startAutoLoad(EMissileWeapons type);
+
     /*!
      * Fire a missile tube.
      * \param target_angle Angle in degrees to where the missile needs to be shot.
@@ -55,7 +57,11 @@ public:
     bool isLoading();
     bool isUnloading();
     bool isFiring();
-    
+    bool isAutoLoading();
+
+    void enableAutoLoading();
+    void disableAutoLoading();
+
     float getLoadProgress();
     float getUnloadProgress();
 
@@ -83,6 +89,7 @@ private:
     EWeaponTubeState state;
     float delay;
     int fire_count;
+    bool auto_loading;
 };
 
 #endif//WEAPON_TUBE_H

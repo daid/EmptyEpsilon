@@ -16,6 +16,7 @@ private:
         GuiAutoLayout* layout;
         GuiButton* load_button;
         GuiButton* fire_button;
+        GuiToggleButton* auto_button;
         GuiProgressbar* loading_bar;
         GuiLabel* loading_label;
     };

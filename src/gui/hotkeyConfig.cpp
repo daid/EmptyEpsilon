@@ -45,12 +45,12 @@ HotkeyConfig::HotkeyConfig()
     newKey("SELECT_MISSILE_TYPE_MINE", std::make_tuple("Select mine", "Num3"));
     newKey("SELECT_MISSILE_TYPE_EMP", std::make_tuple("Select EMP", "Num4"));
     newKey("SELECT_MISSILE_TYPE_HVLI", std::make_tuple("Select HVLI", "Num5"));
-    for(int n=0; n<max_weapon_tubes; n++)
+    for(int n=0; n<max_weapon_tubes; n++) {
         newKey(std::string("LOAD_TUBE_") + string(n+1), std::make_tuple(std::string("Load tube ") + string(n+1), ""));
-    for(int n=0; n<max_weapon_tubes; n++)
         newKey(std::string("UNLOAD_TUBE_") + string(n+1), std::make_tuple(std::string("Unload tube ") + string(n+1), ""));
-    for(int n=0; n<max_weapon_tubes; n++)
         newKey(std::string("FIRE_TUBE_") + string(n+1), std::make_tuple(std::string("Fire tube ") + string(n+1), ""));
+        newKey(std::string("AUTO_TUBE_") + string(n+1), std::make_tuple(std::string("Auto-reload tube ") + string(n+1), ""));
+    }
     newKey("NEXT_ENEMY_TARGET", std::make_tuple("Select next target", ""));
     newKey("NEXT_TARGET", std::make_tuple("Select next target (any)", ""));
     newKey("TOGGLE_SHIELDS", std::make_tuple("Toggle shields", "S"));
