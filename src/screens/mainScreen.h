@@ -8,6 +8,8 @@
 class GuiViewport3D;
 class GuiRadarView;
 class GuiCommsOverlay;
+class DamageControlScreen;
+class RelayScreen;
 
 class ScreenMainScreen : public GuiCanvas, public Updatable
 {
@@ -16,6 +18,8 @@ private:
     GuiViewport3D* viewport;
     GuiRadarView* tactical_radar;
     GuiRadarView* long_range_radar;
+    GuiRadarView* global_range_radar;
+    DamageControlScreen* ship_state;
     bool first_person;
     GuiCommsOverlay* onscreen_comms;
     int impulse_sound = -1;

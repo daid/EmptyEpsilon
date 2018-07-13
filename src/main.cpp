@@ -11,6 +11,7 @@
 #include "menus/mainMenus.h"
 #include "menus/autoConnectScreen.h"
 #include "menus/shipSelectionScreen.h"
+#include "menus/optionsMenu.h"
 #include "mouseCalibrator.h"
 #include "factionInfo.h"
 #include "gameGlobalInfo.h"
@@ -359,4 +360,9 @@ void returnToShipSelection()
     {
         new ShipSelectionScreen();
     }
+}
+
+void returnToOptionMenu()
+{
+	new OptionsMenu();
 }
