@@ -14,9 +14,7 @@ enum EMainScreenSetting
     MSS_Right,
     MSS_Target,
     MSS_Tactical,
-    MSS_LongRange,
-	MSS_Global,
-	MSS_ShipState
+    MSS_LongRange
 };
 template<> void convert<EMainScreenSetting>::param(lua_State* L, int& idx, EMainScreenSetting& mss);
 
