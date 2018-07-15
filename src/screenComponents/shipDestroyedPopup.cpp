@@ -33,6 +33,14 @@ void GuiShipDestroyedPopup::onDraw(sf::RenderTarget& window)
         show_timeout.restart();
     }else{
         if (show_timeout.getElapsedTime().asSeconds() > 5.0)
+        {
             ship_destroyed_overlay->show();
+            if (show_timeout.getElapsedTime().asSeconds() > 15.0)
+            {
+            	this->owner->destroy();
+            	soundManager->stopMusic();
+            	returnToShipSelection();
+            }
+        }
     }
 }
