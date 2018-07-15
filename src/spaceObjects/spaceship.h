@@ -286,7 +286,7 @@ public:
     bool canStartDocking() { return current_warp <= 0.0 && (!has_jump_drive || jump_delay <= 0.0); }
     int getWeaponStorage(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage[weapon]; }
     int getWeaponStorageMax(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage_max[weapon]; }
-    void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage[weapon] = amount; for (int n = 0; n < max_weapon_tubes; n++) weapon_tube[n]->startAutoLoad(weapon); }
+    void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage[weapon] = amount; for (int n = 0; n < max_weapon_tubes; n++) weapon_tube[n].startAutoLoad(weapon); }
     void setWeaponStorageMax(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage_max[weapon] = amount; weapon_storage[weapon] = std::min(int(weapon_storage[weapon]), amount); }
     float getMaxEnergy() { return max_energy_level; }
     void setMaxEnergy(float amount) { if (amount > 0.0) { max_energy_level = amount;} }
