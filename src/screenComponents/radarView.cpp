@@ -80,10 +80,10 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     //Draw the mask on the drawn objects
     if (fog_style == NebulaFogOfWar || fog_style == FriendlysShortRangeFogOfWar)
     {
-        drawRenderTexture(mask_texture, forground_texture, sf::Color::White, sf::BlendMode(
-            sf::BlendMode::Zero, sf::BlendMode::SrcColor, sf::BlendMode::Add,
-            sf::BlendMode::Zero, sf::BlendMode::SrcColor, sf::BlendMode::Add
-        ));
+//        drawRenderTexture(mask_texture, forground_texture, sf::Color::White, sf::BlendMode(
+//            sf::BlendMode::Zero, sf::BlendMode::SrcColor, sf::BlendMode::Add,
+//            sf::BlendMode::Zero, sf::BlendMode::SrcColor, sf::BlendMode::Add
+//        ));
     }
     //Post masking
     if (show_waypoints)
@@ -200,15 +200,19 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
 {
     sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
 
-    constexpr float sector_size = 20000;
-    const float sub_sector_size = sector_size / 8;
+    constexpr float base_sector_size = 20000;
+    constexpr float sub_sectors_count = 8;
 
-    float scale = std::min(rect.width, rect.height) / 2.0 / distance;
+    const float scale = std::min(rect.width, rect.height) / 2.0 / distance;
+    const float scale_magnitude = 2 - std::min(2.f, std::floor(std::log10(base_sector_size * scale)));
+    const float sector_size = base_sector_size * std::pow(sub_sectors_count, scale_magnitude);
+    const float sub_sector_size = sector_size / sub_sectors_count;
+
     int sector_x_min = floor((view_position.x - (radar_screen_center.x - rect.left) / scale) / sector_size) + 1;
     int sector_x_max = floor((view_position.x + (rect.left + rect.width - radar_screen_center.x) / scale) / sector_size);
     int sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.top) / scale) / sector_size) + 1;
     int sector_y_max = floor((view_position.y + (rect.top + rect.height - radar_screen_center.y) / scale) / sector_size);
-    sf::Color color(64, 64, 128, 128);
+    sf::Color color(63 + 64 * scale_magnitude, 64 + 32 * scale_magnitude, 128, 128);
     for(int sector_x = sector_x_min - 1; sector_x <= sector_x_max; sector_x++)
     {
         float x = radar_screen_center.x + ((sector_x * sector_size) - view_position.x) * scale;
