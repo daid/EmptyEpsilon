@@ -81,8 +81,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     if (fog_style == NebulaFogOfWar || fog_style == FriendlysShortRangeFogOfWar)
     {
         drawRenderTexture(mask_texture, forground_texture, sf::Color::White, sf::BlendMode(
-            sf::BlendMode::Zero, sf::BlendMode::SrcColor, sf::BlendMode::Add,
-            sf::BlendMode::Zero, sf::BlendMode::SrcColor, sf::BlendMode::Add
+            sf::BlendMode::Zero, sf::BlendMode::SrcAlpha, sf::BlendMode::Add
         ));
     }
     //Post masking
