@@ -74,7 +74,6 @@ GameMasterScreen::GameMasterScreen()
     sector_name_custom = false;
     sector_name_text = new GuiTextEntry(this, "SECTOR_NAME_TEXT", "");
     sector_name_text->setPosition(620, -20, ABottomLeft)->setSize(250, 50);
-    sector_name_text->setEnable(gameGlobalInfo->custom_coordinates);
     sector_name_text->callback([this](string text){
         sector_name_custom = true;
     });

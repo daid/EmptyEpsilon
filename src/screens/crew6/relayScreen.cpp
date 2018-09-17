@@ -105,7 +105,6 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     sector_name_custom = false;
     sector_name_text = new GuiTextEntry(view_controls, "SECTOR_NAME_TEXT", "");
     sector_name_text->setSize(GuiElement::GuiSizeMax, 50);
-    sector_name_text->setEnable(gameGlobalInfo->custom_coordinates);
     sector_name_text->callback([this](string text){
         sector_name_custom = true;
     });

@@ -1,5 +1,6 @@
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
+#include <regex>
 
 P<GameGlobalInfo> gameGlobalInfo;
 
@@ -24,9 +25,6 @@ GameGlobalInfo::GameGlobalInfo()
         registerMemberReplication(&nebula_info[n].vector);
         registerMemberReplication(&nebula_info[n].textureName);
     }
-
-    custom_coordinates = false;
-    sector_size = 20000;
     global_message_timeout = 0.0;
     player_warp_jump_drive_setting = PWJ_ShipDefault;
     scanning_complexity = SC_Normal;
@@ -38,11 +36,6 @@ GameGlobalInfo::GameGlobalInfo()
     
     intercept_all_comms_to_gm = false;
 
-    registerMemberReplication(&custom_coordinates);
-    registerMemberReplication(&position_to_sector);
-    registerMemberReplication(&sector_to_position);
-    registerMemberReplication(&sector_validator);
-    registerMemberReplication(&sector_size);
     registerMemberReplication(&scanning_complexity);
     registerMemberReplication(&global_message);
     registerMemberReplication(&global_message_timeout, 1.0);
@@ -204,93 +197,62 @@ string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
     }
 }
 
-string defaultGetSectorName(sf::Vector2f position)
-{
-    constexpr float sector_size = 20000;
-    int sector_x = floorf(position.x / sector_size) + 5;
-    int sector_y = floorf(position.y / sector_size) + 5;
-    string y;
-    string x;
-    if (sector_y >= 0)
-        y = string(char('A' + (sector_y)));
-    else
-        y = string(char('z' + sector_y / 26)) + string(char('z' + 1 + (sector_y % 26)));
-    if (sector_x >= 0)
-        x = string(sector_x);
-    else
-        x = string(100 + sector_x);
-    return y + x;
-}
-
-string sanitizeLua(string lua_str)
-{
-    return lua_str
-        .replace(string("\n"), string(" "))
-        .replace(string("\\"), string("\\\\"))
-        .replace(string("\""), string("\\\""));
-}
 bool isValidSectorName(string sectorName)
 {
-    if (gameGlobalInfo->custom_coordinates)
-    {
-        P<ScriptObject> script = new ScriptObject();
-        script->setMaxRunCycles(100000);
-        string output;
-        if (!script->runCode("return (" + gameGlobalInfo->sector_validator + ")('"+sanitizeLua(sectorName)+"')", output))
-            LOG(ERROR) << "sector name script error: " << script->getError();
-        script->destroy();
-        return output.strip().lower() == "true"; // also false when script error
-    }
-    return true;
+    std::regex rgx("^[a-zA-Z]+\\d+[a-dA-D]$");
+    return std::regex_match (sectorName, rgx);
 }
 sf::Vector2f getSectorPosition(string sectorName)
 {
-    sf::Vector2f result(0,0);
-    if (gameGlobalInfo->custom_coordinates)
+    constexpr float sector_size = 20000;
+    std::regex rgx("^([a-zA-Z]+)(\\d+)([a-dA-D])$");
+    std::smatch matches;
+    if(std::regex_search(sectorName, matches, rgx)) 
     {
-        P<ScriptObject> script = new ScriptObject();
-        script->setMaxRunCycles(100000);
-        string output;
-        if (!script->runCode("return (" + gameGlobalInfo->sector_to_position + ")('"+sanitizeLua(sectorName)+"')", output))
-            LOG(ERROR) << "sector position script error: " << script->getError();
-        script->destroy();
-        sscanf(output.c_str(), "%f, %f", &result.x, &result.y);
+        int sector_x = std::stoi(matches.str(2));
+        string row = string(matches.str(1)).upper();
+        int sector_y = 0;
+        for(unsigned int i=0; i<row.size(); i++)
+            sector_y = sector_y + std::pow(26, row.size() - i - 1) * (row.at(i) - 'A' + 1);
+        sector_y = sector_y - 1;
+
+        int quadrant = std::toupper(matches.str(3).at(0)) - 'A';
+        if (quadrant % 2)
+            sector_x = -1 - sector_x;
+        if ((quadrant /2) % 2)
+            sector_y = -1 - sector_y;
+        return sf::Vector2f((sector_x + 0.5) * sector_size, (sector_y + 0.5) * sector_size);
+    } 
+    else 
+    {
+        return sf::Vector2f(0,0);
     }
-    return result;
 }
 
 string getSectorName(sf::Vector2f position)
 {
-    if (gameGlobalInfo->custom_coordinates)
+    constexpr float sector_size = 20000;
+    int sector_x = floorf(position.x / sector_size);
+    int sector_y = floorf(position.y / sector_size);
+    int quadrant = 0;
+    string row = "";
+    if (sector_y < 0)
     {
-        P<ScriptObject> script = new ScriptObject();
-        script->setMaxRunCycles(100000);
-        string output;
-        if (!script->runCode("return (" + gameGlobalInfo->position_to_sector + ")("+string(position.x)+","+string(position.y)+")", output))
-            LOG(ERROR) << "sector name script error: " << script->getError();
-        script->destroy();
-
-        return output.substr(1, -1); // un-json the result string
+        quadrant += 2;
+        sector_y = -1 - sector_y;
     }
-    else
+    if (sector_x < 0)
     {
-        return defaultGetSectorName(position);
+        quadrant += 1;
+        sector_x = -1 - sector_x;
     }
+    while (sector_y > -1)
+    {
+        row = string(char('A' + (sector_y % 26))) + row;
+        sector_y = int(sector_y / 26) - 1;
+    }
+    return row + string(sector_x) + string(char('A' +quadrant));
 }
-
-static int setCoordinates(lua_State* L)
-{
-
-    gameGlobalInfo->custom_coordinates = true;
-    gameGlobalInfo->position_to_sector = luaL_checkstring(L, 1);
-    gameGlobalInfo->sector_to_position = luaL_checkstring(L, 2);
-    gameGlobalInfo->sector_validator = luaL_checkstring(L, 3);
-    gameGlobalInfo->sector_size = luaL_checknumber(L, 4);
-    return 0;
-}
-/// setCoordinates(string)
-/// configures a custom coordinates system
-REGISTER_SCRIPT_FUNCTION(setCoordinates);
 
 static int victory(lua_State* L)
 {

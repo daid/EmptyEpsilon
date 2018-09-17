@@ -199,7 +199,7 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
 {
     sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
 
-    const float sector_size = gameGlobalInfo->sector_size;
+    constexpr float sector_size = 20000;
     const float sub_sector_size = sector_size / 8;
 
     float scale = std::min(rect.width, rect.height) / 2.0 / distance;

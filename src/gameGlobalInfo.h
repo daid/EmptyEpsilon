@@ -55,11 +55,6 @@ private:
      */
     PVector<Script> script_list;
 public:
-    bool custom_coordinates;
-    string position_to_sector;
-    string sector_to_position;
-    string sector_validator;
-    float sector_size;
     string global_message;
     float global_message_timeout;
     
@@ -86,7 +81,6 @@ public:
 
     GameGlobalInfo();
 
-    void setCoordinates(string positionToSectorCode);
     P<PlayerSpaceship> getPlayerShip(int index);
     void setPlayerShip(int index, P<PlayerSpaceship> ship);
 
