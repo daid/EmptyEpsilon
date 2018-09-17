@@ -36,7 +36,9 @@ private:
     GuiObjectTweak* player_tweak_dialog;
     GuiObjectTweak* ship_tweak_dialog;
     GuiObjectTweak* object_tweak_dialog;
-    
+
+    bool sector_name_custom;
+    GuiTextEntry* sector_name_text;
     GuiAutoLayout* info_layout;
     std::vector<GuiKeyValueDisplay*> info_items;
     GuiListbox* gm_script_options;

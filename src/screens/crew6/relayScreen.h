@@ -12,6 +12,7 @@ class GuiToggleButton;
 class GuiSlider;
 class GuiLabel;
 class GuiHackingDialog;
+class GuiTextEntry;
 
 class RelayScreen : public GuiOverlay
 {
@@ -38,6 +39,9 @@ private:
     GuiToggleButton* link_to_science_button;
     GuiButton* delete_waypoint_button;
     GuiButton* launch_probe_button;
+    GuiAutoLayout* view_controls;
+    bool sector_name_custom;
+    GuiTextEntry* sector_name_text;
 
     GuiToggleButton* alert_level_button;
     std::vector<GuiButton*> alert_level_buttons;

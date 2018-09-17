@@ -33,7 +33,7 @@ ColorConfig colorConfig;
 void ColorConfig::load()
 {
     std::unordered_map<string, std::vector<sf::Color*>> color_mapping;
-    
+
     DEF_COLOR(background);
     DEF_COLOR(radar_outline);
     DEF_COLOR(log_generic);
@@ -46,6 +46,7 @@ void ColorConfig::load()
     DEF_WIDGETCOLORSET(text_entry);
     DEF_WIDGETCOLORSET(slider);
     DEF_WIDGETCOLORSET(textbox);
+    DEF_COLOR(text_entry_invalid);
     DEF_COLOR(overlay_damaged);
     DEF_COLOR(overlay_jammed);
     DEF_COLOR(overlay_hacked);
