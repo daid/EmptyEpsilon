@@ -16,7 +16,7 @@
 #include "gui/gui2_image.h"
 #include "gui/gui2_panel.h"
 
-EngineeringScreen::EngineeringScreen(GuiContainer* owner)
+EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_position)
 : GuiOverlay(owner, "ENGINEERING_SCREEN", colorConfig.background), selected_system(SYS_None)
 {
     // Render the background decorations.
@@ -120,7 +120,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner)
 
     (new GuiShipInternalView(system_row_layouts, "SHIP_INTERNAL_VIEW", 48.0f))->setShip(my_spaceship)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     
-    (new GuiCustomShipFunctions(this, engineering, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, crew_position, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 
     previous_energy_level = 0.0;
     average_energy_delta = 0.0;

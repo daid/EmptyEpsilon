@@ -6,6 +6,7 @@
 #include "spaceObjects/cpuShip.h"
 #include "spaceObjects/spaceStation.h"
 #include "spaceObjects/wormHole.h"
+#include "spaceObjects/zone.h"
 
 #include "screenComponents/radarView.h"
 
@@ -463,7 +464,8 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
             PVector<SpaceObject> space_objects;
             foreach(Collisionable, c, objects)
             {
-                space_objects.push_back(c);
+                if (!P<Zone>(c))
+                    space_objects.push_back(c);
             }
             targets.set(space_objects);
             if (space_objects.size() > 0)

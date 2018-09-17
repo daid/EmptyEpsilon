@@ -15,8 +15,6 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DDEBUG" />
-					<Add directory="../SFML-2.3.1/include" />
-					<Add directory="../drmingw-0.7.6-win32/include" />
 				</Compiler>
 				<Linker>
 					<Add library="sfml-window-d" />
@@ -30,8 +28,8 @@
 					<Add library="iphlpapi" />
 					<Add library="wsock32" />
 					<Add library="exchndl" />
-					<Add directory="../SFML-2.3.1/lib" />
-					<Add directory="../drmingw-0.7.6-win32/lib" />
+					<Add directory="../SFML-2.5.0/lib" />
+					<Add directory="../drmingw-0.8.2-win32/lib" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -43,8 +41,6 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-g" />
-					<Add directory="../SFML-2.3.1/include" />
-					<Add directory="../drmingw-0.7.6-win32/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -59,8 +55,8 @@
 					<Add library="iphlpapi" />
 					<Add library="wsock32" />
 					<Add library="exchndl" />
-					<Add directory="../SFML-2.3.1/lib" />
-					<Add directory="../drmingw-0.7.6-win32/lib" />
+					<Add directory="../SFML-2.5.0/lib" />
+					<Add directory="../drmingw-0.8.2-win32/lib" />
 				</Linker>
 			</Target>
 			<Target title="Linux Debug">
@@ -80,6 +76,7 @@
 					<Add library="sfml-network" />
 					<Add library="GL" />
 					<Add library="GLU" />
+					<Add directory="../SFML-2.5.0/lib" />
 				</Linker>
 			</Target>
 			<Target title="Linux Release">
@@ -136,6 +133,7 @@
 					<Add library="sfml-system" />
 					<Add library="sfml-window" />
 					<Add library="sfml-network" />
+					<Add directory="../SFML-2.5.0/lib" />
 				</Linker>
 			</Target>
 			<Target title="Profile">
@@ -148,7 +146,6 @@
 					<Add option="-O2" />
 					<Add option="-pg" />
 					<Add option="-g" />
-					<Add directory="../SFML-2.3.1/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-pg -lgmon" />
@@ -162,7 +159,8 @@
 					<Add library="glu32" />
 					<Add library="iphlpapi" />
 					<Add library="wsock32" />
-					<Add directory="../SFML-2.3.1/lib" />
+					<Add directory="../SFML-2.5.0/lib" />
+					<Add directory="../drmingw-0.8.2-win32/lib" />
 				</Linker>
 			</Target>
 		</Build>
@@ -171,9 +169,15 @@
 			<Add option="-Wall" />
 			<Add option="-DENABLE_CRASH_LOGGER" />
 			<Add option='-DWINDOW_TITLE=\&quot;EmptyEpsilon\&quot;' />
-			<Add directory="../SeriousProton/src" />
 			<Add directory="src" />
+			<Add directory="../SeriousProton/src" />
+			<Add directory="../SFML-2.5.0/include" />
+			<Add directory="../drmingw-0.8.2-win32/include" />
 		</Compiler>
+		<Linker>
+            <Add directory="../SFML-2.5.0/bin" />
+            <Add directory="../drmingw-0.8.2-win32/bin" />
+		</Linker>
 		<Unit filename="../SeriousProton/src/Box2D/Box2D.h" />
 		<Unit filename="../SeriousProton/src/Box2D/Collision/Shapes/b2ChainShape.cpp" />
 		<Unit filename="../SeriousProton/src/Box2D/Collision/Shapes/b2ChainShape.h" />
@@ -555,6 +559,8 @@
 		<Unit filename="src/httpScriptAccess.h" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/main.h" />
+		<Unit filename="src/math/centerOfMass.h" />
+		<Unit filename="src/math/triangulate.h" />
 		<Unit filename="src/menus/autoConnectScreen.cpp" />
 		<Unit filename="src/menus/autoConnectScreen.h" />
 		<Unit filename="src/menus/joinServerMenu.cpp" />
@@ -783,6 +789,8 @@
 		<Unit filename="src/spaceObjects/warpJammer.h" />
 		<Unit filename="src/spaceObjects/wormHole.cpp" />
 		<Unit filename="src/spaceObjects/wormHole.h" />
+		<Unit filename="src/spaceObjects/zone.cpp" />
+		<Unit filename="src/spaceObjects/zone.h" />
 		<Unit filename="src/threatLevelEstimate.cpp" />
 		<Unit filename="src/threatLevelEstimate.h" />
 		<Unit filename="src/tutorialGame.cpp" />
@@ -790,7 +798,6 @@
 		<Extensions>
 			<code_completion />
 			<envvars />
-			<debugger />
 			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>

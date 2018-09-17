@@ -219,6 +219,7 @@ set(SOURCES
 	src/spaceObjects/artifact.cpp
 	src/spaceObjects/shipTemplateBasedObject.cpp
 	src/spaceObjects/planet.cpp
+	src/spaceObjects/zone.cpp
 	src/spaceObjects/spaceshipParts/beamWeapon.cpp
 	src/spaceObjects/spaceshipParts/weaponTube.cpp
 	src/ai/fighterAI.cpp
@@ -396,8 +397,10 @@ endif()
 include(InstallRequiredSystemLibraries)
 
 if(WIN32)
-  install(FILES ${MING_DLL_PATH}/libstdc++-6.dll DESTINATION .)
-  install(FILES ${MING_DLL_PATH}/libgcc_s_sjlj-1.dll DESTINATION .)
+  execute_process(COMMAND ${CMAKE_CXX_COMPILER} -print-file-name=libstdc++-6.dll OUTPUT_VARIABLE MINGW_STDCPP_DLL OUTPUT_STRIP_TRAILING_WHITESPACE)
+  execute_process(COMMAND ${CMAKE_CXX_COMPILER} -print-file-name=libgcc_s_sjlj-1.dll OUTPUT_VARIABLE MINGW_LIBGCC_DLL OUTPUT_STRIP_TRAILING_WHITESPACE)
+  execute_process(COMMAND ${CMAKE_CXX_COMPILER} -print-file-name=libwinpthread-1.dll OUTPUT_VARIABLE MINGW_PTHREAD_DLL OUTPUT_STRIP_TRAILING_WHITESPACE)
+  install(FILES ${MINGW_STDCPP_DLL} ${MINGW_LIBGCC_DLL} ${MINGW_PTHREAD_DLL} DESTINATION .)
   install(FILES /usr/i686-w64-mingw32/lib/libwinpthread-1.dll DESTINATION .)
   install(FILES ${SFML_ROOT}/bin/OpenAL32.dll DESTINATION .)
   install(FILES ${SFML_ROOT}/bin/libFLAC-8.dll DESTINATION .)

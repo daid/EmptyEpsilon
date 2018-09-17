@@ -12,16 +12,16 @@
 --- -To fire beam weapons and target guided missile weapons, the Weapons officer can select ships on the screen's short-range radar.
 ---
 --- Missiles:
---- -Missiles are one of a ship's most destructive weapons. Before a missile can be fired, the Weapons officer selects it, then selects one of the weapon tubes to load it. Loading and unloading weapon tubes takes time. (Mines are also be loaded into a special type of weapon tube.) Weapon tubes face a specific direction, and some ships only have tubes on certain sides of a ship, making cooperation with the helms officer's maneuvers especially important.
+--- -Missiles are one of a ship's most destructive weapons. Before a missile can be fired, the Weapons officer selects it, then selects one of the weapon tubes to load it. Loading and unloading weapon tubes takes time. Mines are also loaded into a special type of weapon tube. Weapon tubes face a specific direction, and some ships only have tubes on certain sides of a ship, making cooperation with the helms officer's maneuvers especially important.
 --- -To fire a missile, the Weapons officer presses a loaded missile tube. Except for HVLIs, missiles home in on any target selected by the Weapons officer. Otherwise, the missile is dumb-fired and flies in a straight line from its tube. The Weapons officer can choose to lock the tube's aim onto a target or click the Lock button to the top right of the radar to manually angle a shot.
 ---
 --- Weapon Types:
 --- Homing: 
 --- -A simple, high-speed missile with a small warhead.
 --- Nuke: 
---- -A powerful homing missile that deal tremendous damage to all ships within 1U of its detonation.
+--- -A powerful homing missile that deals tremendous damage to all ships within 1U of its detonation.
 --- Electromagentic Pulse (EMP): 
---- -A homing missile that deal powerful damage to the shields of all ships within 1U of detonation, but don't damage physical systems or hulls.
+--- -A homing missile that deals powerful damage to the shields of all ships within 1U of detonation, but doesn't damage physical systems or hulls.
 --- High-velocity Lead Impactor (HVLI): 
 --- -A group of 5 simple lead slugs fired in a single burst at extremely high velocity. These bolts don't home in on an enemy target.
 --- Mine: 

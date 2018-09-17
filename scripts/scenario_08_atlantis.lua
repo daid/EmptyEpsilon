@@ -120,11 +120,11 @@ Ionic phase shift: %i
 Doppler instability: %i]], b20_artifact.beta_radiation, b20_artifact.gravity_disruption, b20_artifact.ionic_phase_shift, b20_artifact.doppler_instability))
 
     x, y = table.remove(b20_nebula_list, math.random(#b20_nebula_list)):getPosition()
-    b20_dummy_artifact_1 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setDescriptions("An odd object floating in space.", "This object seems to be inhert, and not giving any readings on your sensors. The actual object must be somewhere else.")
+    b20_dummy_artifact_1 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setDescriptions("An odd object floating in space.", "This object seems to be inert, and not giving any readings on your sensors. The actual object must be somewhere else.")
     b20_dummy_artifact_1:setScanningParameters(3, 1)
 
     x, y = table.remove(b20_nebula_list, math.random(#b20_nebula_list)):getPosition()
-    b20_dummy_artifact_2 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setDescriptions("An odd object floating in space.", "This object seems to be inhert, and not giving any readings on your sensors. The actual object must be somewhere else.")
+    b20_dummy_artifact_2 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setDescriptions("An odd object floating in space.", "This object seems to be inert, and not giving any readings on your sensors. The actual object must be somewhere else.")
     b20_dummy_artifact_2:setScanningParameters(3, 1)
 
     x, y = table.remove(b20_nebula_list, math.random(#b20_nebula_list)):getPosition()

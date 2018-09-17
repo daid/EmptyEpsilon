@@ -4,6 +4,7 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "screenComponents/shieldFreqencySelect.h"
 #include "screenComponents/shipInternalView.h"
+#include "screenComponents/customShipFunctions.h"
 
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_autolayout.h"
@@ -24,6 +25,8 @@ DamageControlScreen::DamageControlScreen(GuiContainer* owner)
         system_health[n] = new GuiKeyValueDisplay(system_health_layout, "DAMCON_HEALTH_" + string(n), 0.8, getSystemName(ESystem(n)), "0%");
         system_health[n]->setSize(GuiElement::GuiSizeMax, 40);
     }
+
+    (new GuiCustomShipFunctions(this, damageControl, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 
 void DamageControlScreen::onDraw(sf::RenderTarget& window)
