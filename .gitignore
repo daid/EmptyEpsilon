@@ -30,8 +30,13 @@ thumbs.db
 
 # output directory
 .bin
+.obj
 
 # vim
 *.swp
 
 options.ini
+
+logs
+.idea
+
