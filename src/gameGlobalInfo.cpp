@@ -1,5 +1,6 @@
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
+#include <regex>
 
 P<GameGlobalInfo> gameGlobalInfo;
 
@@ -24,7 +25,6 @@ GameGlobalInfo::GameGlobalInfo()
         registerMemberReplication(&nebula_info[n].vector);
         registerMemberReplication(&nebula_info[n].textureName);
     }
-
     global_message_timeout = 0.0;
     player_warp_jump_drive_setting = PWJ_ShipDefault;
     scanning_complexity = SC_Normal;
@@ -33,6 +33,8 @@ GameGlobalInfo::GameGlobalInfo()
     use_system_damage = true;
     allow_main_screen_tactical_radar = true;
     allow_main_screen_long_range_radar = true;
+    allow_main_screen_global_range_radar = true;
+    allow_main_screen_ship_state = true;
     
     intercept_all_comms_to_gm = false;
 
@@ -46,6 +48,8 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&use_system_damage);
     registerMemberReplication(&allow_main_screen_tactical_radar);
     registerMemberReplication(&allow_main_screen_long_range_radar);
+    registerMemberReplication(&allow_main_screen_global_range_radar);
+    registerMemberReplication(&allow_main_screen_ship_state);
 
     for(unsigned int n=0; n<factionInfo.size(); n++)
         reputation_points.push_back(0);
@@ -197,22 +201,59 @@ string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
     }
 }
 
+bool isValidSectorName(string sectorName)
+{
+    std::regex rgx("^[a-zA-Z]+\\d+[a-dA-D]$");
+    return std::regex_match (sectorName, rgx);
+}
+sf::Vector2f getSectorPosition(string sectorName)
+{
+    std::regex rgx("^([a-zA-Z]+)(\\d+)([a-dA-D])$");
+    std::smatch matches;
+    if(std::regex_search(sectorName, matches, rgx)) 
+    {
+        int sector_x = std::stoi(matches.str(2));
+        string row = string(matches.str(1)).upper();
+        int sector_y = 0;
+        for(unsigned int i=0; i<row.size(); i++)
+            sector_y = sector_y + std::pow(26, row.size() - i - 1) * (row.at(i) - 'A' + 1);
+        sector_y = sector_y - 1;
+
+        int quadrant = std::toupper(matches.str(3).at(0)) - 'A';
+        if (quadrant % 2)
+            sector_x = -1 - sector_x;
+        if ((quadrant /2) % 2)
+            sector_y = -1 - sector_y;
+        return sf::Vector2f((sector_x + 0.5) * GameGlobalInfo::sector_size, (sector_y + 0.5) * GameGlobalInfo::sector_size);
+    } 
+    else 
+    {
+        return sf::Vector2f(0,0);
+    }
+}
+
 string getSectorName(sf::Vector2f position)
 {
-    constexpr float sector_size = 20000;
-    int sector_x = floorf(position.x / sector_size) + 5;
-    int sector_y = floorf(position.y / sector_size) + 5;
-    string y;
-    string x;
-    if (sector_y >= 0)
-        y = string(char('A' + (sector_y)));
-    else
-        y = string(char('z' + sector_y / 26)) + string(char('z' + 1 + (sector_y % 26)));
-    if (sector_x >= 0)
-        x = string(sector_x);
-    else
-        x = string(100 + sector_x);
-    return y + x;
+    int sector_x = floorf(position.x / GameGlobalInfo::sector_size);
+    int sector_y = floorf(position.y / GameGlobalInfo::sector_size);
+    int quadrant = 0;
+    string row = "";
+    if (sector_y < 0)
+    {
+        quadrant += 2;
+        sector_y = -1 - sector_y;
+    }
+    if (sector_x < 0)
+    {
+        quadrant += 1;
+        sector_x = -1 - sector_x;
+    }
+    while (sector_y > -1)
+    {
+        row = string(char('A' + (sector_y % 26))) + row;
+        sector_y = int(sector_y / 26) - 1;
+    }
+    return row + string(sector_x) + string(char('A' +quadrant));
 }
 
 static int victory(lua_State* L)

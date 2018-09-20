@@ -46,6 +46,10 @@ public:
      * \brief Maximum number of visual background nebulas.
      */
     static const int max_nebulas = 32;
+     /*!
+     * \size of a sector.
+     */
+    static const int sector_size = 20000;
 private:
     int victory_faction;
     int32_t playerShipId[max_player_ships];
@@ -72,6 +76,8 @@ public:
     bool use_system_damage;
     bool allow_main_screen_tactical_radar;
     bool allow_main_screen_long_range_radar;
+    bool allow_main_screen_global_range_radar;
+    bool allow_main_screen_ship_state;
     string variation = "None";
 
     //List of script functions that can be called from the GM interface (Server only!)
@@ -110,6 +116,8 @@ public:
 
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive);
 string getSectorName(sf::Vector2f position);
+sf::Vector2f getSectorPosition(string sectorName);
+bool isValidSectorName(string sectorName);
 
 REGISTER_MULTIPLAYER_ENUM(EScanningComplexity);
 

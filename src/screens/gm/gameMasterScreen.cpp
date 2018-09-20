@@ -65,10 +65,46 @@ GameMasterScreen::GameMasterScreen()
         if (ship)
             target = ship;
         main_radar->setViewPosition(ship->getPosition());
+        if(!sector_name_custom)
+            sector_name_text->setText(getSectorName(ship->getPosition()));
         targets.set(ship);
     });
     player_ship_selector->setPosition(270, -20, ABottomLeft)->setSize(350, 50);
 
+    sector_name_custom = false;
+    sector_name_text = new GuiTextEntry(this, "SECTOR_NAME_TEXT", "");
+    sector_name_text->setPosition(620, -20, ABottomLeft)->setSize(250, 50);
+    sector_name_text->callback([this](string text){
+        sector_name_custom = true;
+    });
+    sector_name_text->validator(isValidSectorName);
+    sector_name_text->enterCallback([this](string text){
+        sector_name_custom = false;
+        if (sector_name_text->isValid())
+        {
+            sf::Vector2f pos = getSectorPosition(text);
+            main_radar->setViewPosition(pos);
+        }
+    });
+    sector_name_text->setText(getSectorName(main_radar->getViewPosition()));
+    CPU_ship_selector = new GuiSelector(this, "CPU_SHIP_SELECTOR", [this](int index, string value) {
+        P<SpaceObject> ship = space_object_list[value.toInt()];
+        if (ship)
+            target = ship;
+        main_radar->setViewPosition(ship->getPosition());
+        targets.set(ship);
+    });
+    CPU_ship_selector->setPosition(270, -70, ABottomLeft)->setSize(250, 50);
+
+    space_station_selector = new GuiSelector(this, "SPACE_STATION_SELECTOR", [this](int index, string value) {
+        P<SpaceObject> station = space_object_list[value.toInt()];
+        if (station)
+            target = station;
+        main_radar->setViewPosition(station->getPosition());
+        targets.set(station);
+    });
+    space_station_selector->setPosition(270, -120, ABottomLeft)->setSize(250, 50);
+    
     create_button = new GuiButton(this, "CREATE_OBJECT_BUTTON", "Create...", [this]() {
         object_creation_screen->show();
     });
@@ -195,10 +231,10 @@ void GameMasterScreen::update(float delta)
     if (mouse_wheel_delta != 0.0)
     {
         float view_distance = main_radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
-        if (view_distance > 100000)
-            view_distance = 100000;
-        if (view_distance < 5000)
-            view_distance = 5000;
+        if (view_distance > max_distance)
+            view_distance = max_distance;
+        if (view_distance < min_distance)
+            view_distance = min_distance;
         main_radar->setDistance(view_distance);
         if (view_distance < 10000)
             main_radar->shortRange();
@@ -230,6 +266,31 @@ void GameMasterScreen::update(float delta)
             if (player_ship_selector->indexByValue(string(n)) != -1)
                 player_ship_selector->removeEntry(player_ship_selector->indexByValue(string(n)));
         }
+    }
+    
+    // Add and remove entries from the CPU ship and space station list.
+    int n = 0;
+    foreach(SpaceObject, obj, space_object_list)
+    {
+        P<SpaceShip> ship = obj;
+        P<SpaceStation> station = obj;
+        if (ship)
+        {
+            if (CPU_ship_selector->indexByValue(string(n)) == -1)
+                CPU_ship_selector->addEntry(ship->getTypeName() + " " + ship->getCallSign(), string(n));
+            }else{
+                if (CPU_ship_selector->indexByValue(string(n)) != -1)
+                    CPU_ship_selector->removeEntry(CPU_ship_selector->indexByValue(string(n)));
+            }
+        if (station)
+        {
+            if (space_station_selector->indexByValue(string(n)) == -1)
+                space_station_selector->addEntry(station->getTypeName() + " " + station->getCallSign(), string(n));
+            }else{
+                if (space_station_selector->indexByValue(string(n)) != -1)
+                    space_station_selector->removeEntry(space_station_selector->indexByValue(string(n)));
+            }
+        n += 1;
     }
 
     // Record object type.
@@ -350,6 +411,8 @@ void GameMasterScreen::onMouseDrag(sf::Vector2f position)
     case CD_DragView:
         click_and_drag_state = CD_DragView;
         main_radar->setViewPosition(main_radar->getViewPosition() - (position - drag_previous_position));
+        if(!sector_name_custom)
+            sector_name_text->setText(getSectorName(main_radar->getViewPosition()));
         position -= (position - drag_previous_position);
         break;
     case CD_DragObjects:
