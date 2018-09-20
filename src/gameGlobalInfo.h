@@ -46,6 +46,10 @@ public:
      * \brief Maximum number of visual background nebulas.
      */
     static const int max_nebulas = 32;
+     /*!
+     * \size of a sector.
+     */
+    static const int sector_size = 20000;
 private:
     int victory_faction;
     int32_t playerShipId[max_player_ships];
@@ -110,6 +114,8 @@ public:
 
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive);
 string getSectorName(sf::Vector2f position);
+sf::Vector2f getSectorPosition(string sectorName);
+bool isValidSectorName(string sectorName);
 
 REGISTER_MULTIPLAYER_ENUM(EScanningComplexity);
 

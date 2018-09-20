@@ -36,7 +36,9 @@ private:
     GuiObjectTweak* player_tweak_dialog;
     GuiObjectTweak* ship_tweak_dialog;
     GuiObjectTweak* object_tweak_dialog;
-    
+
+    bool sector_name_custom;
+    GuiTextEntry* sector_name_text;
     GuiAutoLayout* info_layout;
     std::vector<GuiKeyValueDisplay*> info_items;
     GuiListbox* gm_script_options;
@@ -60,6 +62,8 @@ private:
     } click_and_drag_state;
     sf::Vector2f drag_start_position;
     sf::Vector2f drag_previous_position;
+    const float max_distance = 10000000.0f;
+    const float min_distance = 6250.0f;
 public:
     GuiButton* create_button;
     GuiButton* cancel_create_button;
