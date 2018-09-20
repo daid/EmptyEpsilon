@@ -6,6 +6,8 @@ message(STATUS "ENABLE_CRASH_LOGGER is " ${ENABLE_CRASH_LOGGER})
 option(COMPILE_DEV_HELPER "Compile with the 'DEBUG' fpreprocessor flag" OFF)
 message(STATUS "COMPILE_DEV_HELPER is " ${COMPILE_DEV_HELPER})
 
+cmake_policy(SET CMP0074 NEW)
+
 # Check if serious proton dir is set.
 if(NOT DEFINED SERIOUS_PROTON_DIR)
  message(FATAL_ERROR "SERIOUS_PROTON_DIR was not set. Unable to continue")
