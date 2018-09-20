@@ -562,6 +562,14 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
         target->setReputationPoints(value);
     });
     reputation_point_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+    
+    // Edit oxygen.
+    (new GuiLabel(left_col, "", "Oxygen:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    oxygen_point_slider = new GuiSlider(left_col, "", 0.0, 100.0, 0.0, [this](float value) {
+        target->setOxygenPoints(value);
+    });
+    oxygen_point_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     // Edit energy level.
     (new GuiLabel(left_col, "", "Max energy:", 30))->setSize(GuiElement::GuiSizeMax, 50);
@@ -578,6 +586,13 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
         target->energy_level = std::min(value, target->max_energy_level);
     });
     energy_level_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+    
+    (new GuiLabel(left_col, "", "Number of repair teams:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    repair_team_slider = new GuiSlider(left_col, "", 0.0, 2000, 0.0, [this](float value) {
+        target->setRepairCrewCount(value);
+    });
+    repair_team_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     // Display Boost/Strafe speed sliders
     (new GuiLabel(left_col, "", "Boost Speed:", 30))->setSize(GuiElement::GuiSizeMax, 50);
@@ -635,6 +650,10 @@ void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
 
     // Update reputation points.
     reputation_point_slider->setValue(target->getReputationPoints());
+    // Update repair team number.
+    repair_team_slider->setValue(target->getRepairCrewCount());
+    // Update oxygen points.
+    oxygen_point_slider->setValue(target->getOxygenPoints());
 }
 
 void GuiShipTweakPlayer::open(P<SpaceObject> target)

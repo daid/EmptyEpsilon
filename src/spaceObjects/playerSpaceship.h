@@ -61,12 +61,13 @@ public:
         string prefix;
         string text;
         sf::Color color;
+        string station;
 
         ShipLogEntry() {}
-        ShipLogEntry(string prefix, string text, sf::Color color)
-        : prefix(prefix), text(text), color(color) {}
+        ShipLogEntry(string prefix, string text, sf::Color color, string station)
+        : prefix(prefix), text(text), color(color), station(station) {}
 
-        bool operator!=(const ShipLogEntry& e) { return prefix != e.prefix || text != e.text || color != e.color; }
+        bool operator!=(const ShipLogEntry& e) { return prefix != e.prefix || text != e.text || color != e.color || station != e.station; }
     };
     
     class CustomShipFunction
@@ -106,6 +107,7 @@ public:
     bool auto_coolant_enabled;
     // Whether shields are up (true) or down
     bool shields_active;
+    int warp_indicator;
     // Password to join a ship. Default is empty.
     string control_code;
 
@@ -120,10 +122,11 @@ private:
     P<SpaceObject> comms_target; // Server only
     std::vector<int> comms_reply_id;
     std::vector<string> comms_reply_message;
-    CommsScriptInterface comms_script_interface; // Server only
+    CommsScriptInterface comms_script_interface;  //Server only
     // Ship's log container
-    std::vector<ShipLogEntry> ships_log;
-    
+    std::vector<ShipLogEntry> ships_log_extern;
+    std::vector<ShipLogEntry> ships_log_intern;
+
 public:
     std::vector<CustomShipFunction> custom_functions;
 
@@ -263,9 +266,9 @@ public:
     float getNetSystemEnergyUsage();
 
     // Ship's log functions
-    void addToShipLog(string message, sf::Color color);
+    void addToShipLog(string message, sf::Color color, string station);
     void addToShipLogBy(string message, P<SpaceObject> target);
-    const std::vector<ShipLogEntry>& getShipsLog() const;
+    const std::vector<ShipLogEntry>& getShipsLog(string station) const;
 
     // Ship's crew functions
     void transferPlayersToShip(P<PlayerSpaceship> other_ship);

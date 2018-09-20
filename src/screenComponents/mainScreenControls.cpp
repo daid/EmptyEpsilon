@@ -19,6 +19,10 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
             tactical_button->setVisible(false);
         if (!gameGlobalInfo->allow_main_screen_long_range_radar)
             long_range_button->setVisible(false);
+        if (!gameGlobalInfo->allow_main_screen_global_range_radar)
+            global_range_button->setVisible(false);
+        if (!gameGlobalInfo->allow_main_screen_ship_state)
+            ship_state_button->setVisible(false);
         if (show_comms_button && onscreen_comms_active)
             show_comms_button->setVisible(false);
         if (hide_comms_button && !onscreen_comms_active)
@@ -97,6 +101,32 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         closePopup();
     }));
     long_range_button = buttons.back();
+    
+    // Global-range radar button.
+    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_GLOBAL_RANGE_BUTTON", "Global Range", [this]()
+    {
+        if (my_spaceship)
+        {
+            my_spaceship->commandMainScreenSetting(MSS_GlobalRange);
+        }
+        open_button->setValue(false);
+        for(GuiButton* button : buttons)
+            button->setVisible(false);
+    }));
+    global_range_button = buttons.back();
+    
+     // Ship State button.
+    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_SHIP_STATE_BUTTON", "Ship State", [this]()
+    {
+        if (my_spaceship)
+        {
+            my_spaceship->commandMainScreenSetting(MSS_ShipState);
+        }
+        open_button->setValue(false);
+        for(GuiButton* button : buttons)
+            button->setVisible(false);
+    }));
+    ship_state_button = buttons.back();
 
     // If the player has control over comms, they can toggle the comms overlay
     // on the main screen.

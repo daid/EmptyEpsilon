@@ -2,7 +2,9 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/scanProbe.h"
+#include "spaceObjects/spaceObject.h"
 #include "scriptInterface.h"
+#include "gameGlobalInfo.h"
 
 #include "screenComponents/radarView.h"
 #include "screenComponents/openCommsButton.h"
@@ -17,6 +19,7 @@
 #include "gui/gui2_slider.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"
+#include "gui/gui2_textentry.h"
 
 RelayScreen::RelayScreen(GuiContainer* owner)
 : GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background), mode(TargetSelection)
@@ -40,7 +43,13 @@ RelayScreen::RelayScreen(GuiContainer* owner)
         },
         [this](sf::Vector2f position) { //drag
             if (mode == TargetSelection)
-                radar->setViewPosition(radar->getViewPosition() - (position - mouse_down_position));
+            {
+                sector_name_custom = false;
+                sf::Vector2f newPosition = radar->getViewPosition() - (position - mouse_down_position);
+                radar->setViewPosition(newPosition);
+                if(!sector_name_custom)
+                    sector_name_text->setText(getSectorName(newPosition));
+            }
             if (mode == MoveWaypoint && my_spaceship)
                 my_spaceship->commandMoveWaypoint(drag_waypoint_index, position);
         },
@@ -82,14 +91,33 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     info_faction = new GuiKeyValueDisplay(sidebar, "SCIENCE_FACTION", 0.4, "Faction", "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
 
-    zoom_slider = new GuiSlider(this, "ZOOM_SLIDER", 50000.0f, 6250.0f, 50000.0f, [this](float value) {
-        zoom_label->setText("Zoom: " + string(50000.0f / value, 1.0f) + "x"); 
+    // Controls for the radar view
+    view_controls = new GuiAutoLayout(this, "VIEW_CONTROLS", GuiAutoLayout::LayoutVerticalBottomToTop);
+    view_controls->setPosition(20, -70, ABottomLeft)->setSize(250, GuiElement::GuiSizeMax);
+    zoom_slider = new GuiSlider(view_controls, "ZOOM_SLIDER", max_distance, min_distance, radar->getDistance(), [this](float value) {
+        zoom_label->setText("Zoom: " + string(max_distance / value, 1.0f) + "x");
         radar->setDistance(value);
     });
-    zoom_slider->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
-    zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 30);
+    zoom_slider->setPosition(20, -70, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
+    zoom_label = new GuiLabel(zoom_slider, "", "Zoom: " + string(max_distance / radar->getDistance(), 1.0f) + "x", 30);
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
+    sector_name_custom = false;
+    sector_name_text = new GuiTextEntry(view_controls, "SECTOR_NAME_TEXT", "");
+    sector_name_text->setSize(GuiElement::GuiSizeMax, 50);
+    sector_name_text->callback([this](string text){
+        sector_name_custom = true;
+    });
+    sector_name_text->validator(isValidSectorName);
+    sector_name_text->enterCallback([this](string text){
+        sector_name_custom = false;
+        if (sector_name_text->isValid())
+        {
+            sf::Vector2f pos = getSectorPosition(text);
+            radar->setViewPosition(pos);
+        }
+    });
+    sector_name_text->setText(getSectorName(radar->getViewPosition()));
     // Option buttons for comms, waypoints, and probes.
     option_buttons = new GuiAutoLayout(this, "BUTTONS", GuiAutoLayout::LayoutVerticalTopToBottom);
     option_buttons->setPosition(20, 50, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
@@ -173,7 +201,7 @@ RelayScreen::RelayScreen(GuiContainer* owner)
 
     hacking_dialog = new GuiHackingDialog(this, "");
 
-    new ShipsLog(this);
+    new ShipsLog(this,"extern");
 
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
@@ -185,14 +213,10 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
     if (mouse_wheel_delta != 0.0)
     {
         float view_distance = radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
-        if (view_distance > 50000.0f)
-            view_distance = 50000.0f;
-        if (view_distance < 6250.0f)
-            view_distance = 6250.0f;
-        radar->setDistance(view_distance);
-        // Keep the zoom slider in sync.
         zoom_slider->setValue(view_distance);
-        zoom_label->setText("Zoom: " + string(50000.0f / view_distance, 1.0f) + "x");
+        view_distance = zoom_slider->getValue();
+        radar->setDistance(view_distance);
+        zoom_label->setText("Zoom: " + string(max_distance / view_distance, 1.0f) + "x");
     }
     ///!
 
@@ -276,3 +300,197 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
     else
         delete_waypoint_button->disable();
 }
+
+void RelayScreen::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "RELAY" && my_spaceship)
+    {
+        if (key.hotkey == "NEXT_ENEMY_RELAY")
+        {
+			bool current_found = false;
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get())
+                {
+                    current_found = true;
+                    continue;
+                }
+                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < radar->getDistance() && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    // my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get())
+                {
+                    continue;
+                }
+                if (my_spaceship->isEnemy(obj) && sf::length(obj->getPosition() - my_spaceship->getPosition()) < radar->getDistance() && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    // my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+		}
+        if (key.hotkey == "NEXT_RELAY")
+        {
+			bool current_found = false;
+			PVector<SpaceObject> list_range;
+			PVector<SpaceObject> list_range_obj_relai;
+			
+			list_range = my_spaceship->getObjectsInRange(5000.0f);
+            foreach(SpaceObject, obj, list_range)
+			{
+				if (obj == targets.get())
+                {
+                    current_found = true;
+                    continue;
+                }
+                if (obj == my_spaceship)
+                    continue;
+                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < radar->getDistance() && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    return;
+                }
+			}
+            foreach(SpaceObject, obj_relai, space_object_list)
+            {
+				// P<ScanProbe> test = obj_relai;
+				if(obj_relai->isFriendly(my_spaceship))
+				{
+					list_range_obj_relai = obj_relai->getObjectsInRange(5000.0f);
+					foreach(SpaceObject, obj, list_range_obj_relai)
+					{
+						if (obj == targets.get())
+						{
+							current_found = true;
+							continue;
+						}
+						if (obj == my_spaceship)
+							continue;
+						if (current_found && sf::length(obj->getPosition() - obj_relai->getPosition()) < radar->getDistance() && obj->canBeTargetedBy(my_spaceship))
+						{
+							targets.set(obj);
+							return;
+						}
+					}
+				}                    
+            }
+			
+			list_range = my_spaceship->getObjectsInRange(5000.0f);
+            foreach(SpaceObject, obj, list_range)
+			{
+				if (obj == targets.get()  || obj == my_spaceship)
+                    continue;
+                if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < radar->getDistance() && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    return;
+                }
+			}
+            foreach(SpaceObject, obj_relai, space_object_list)
+            {
+				// P<ScanProbe> test = probe;
+				if(obj_relai->isFriendly(my_spaceship))
+				{
+					list_range_obj_relai = obj_relai->getObjectsInRange(5000.0f);
+					foreach(SpaceObject, obj, list_range_obj_relai)
+					{
+						if (obj == targets.get() || obj == my_spaceship)
+							continue;
+						if (sf::length(obj->getPosition() - obj_relai->getPosition()) < radar->getDistance() && obj->canBeTargetedBy(my_spaceship))
+						{
+							targets.set(obj);
+							return;
+						}
+					}
+				}                
+            }
+		}
+        if (key.hotkey == "LINK_SCIENCE")
+        {
+			P<ScanProbe> obj = targets.get(); 
+            if (obj && obj->isFriendly(my_spaceship))
+			{	
+				if (!link_to_science_button->getValue())
+					my_spaceship->commandSetScienceLink(targets.get()->getMultiplayerId());
+				else
+					my_spaceship->commandSetScienceLink(-1);
+			}
+		}
+        if (key.hotkey == "BEGIN_HACK")
+		{
+			P<SpaceObject> target = targets.get();
+			if (target && target->canBeHackedBy(my_spaceship))
+			{
+				hacking_dialog->open(target);
+			}
+		}
+        if (key.hotkey == "ADD_WAYPOINT")
+        {
+			mode = WaypointPlacement;
+			option_buttons->hide();
+		}
+        if (key.hotkey == "DELETE_WAYPOINT")
+        {
+			if (targets.getWaypointIndex() >= 0)
+				my_spaceship->commandRemoveWaypoint(targets.getWaypointIndex());
+		}
+        if (key.hotkey == "LAUNCH_PROBE")
+        {
+			mode = LaunchProbe;
+			option_buttons->hide();
+		}
+        if (key.hotkey == "INCREASE_ZOOM")
+        {
+			float view_distance = radar->getDistance() + 1500.0f;
+			if (view_distance > 50000.0f)
+				view_distance = 50000.0f;
+			if (view_distance < 6250.0f)
+				view_distance = 6250.0f;
+			radar->setDistance(view_distance);
+			// Keep the zoom slider in sync.
+			zoom_slider->setValue(view_distance);
+			zoom_label->setText("Zoom: " + string(50000.0f / view_distance, 1.0f) + "x");
+		}
+		if (key.hotkey == "DECREASE_ZOOM")
+		{
+			float view_distance = radar->getDistance() - 1500.0f;
+			if (view_distance > 50000.0f)
+				view_distance = 50000.0f;
+			if (view_distance < 6250.0f)
+				view_distance = 6250.0f;
+			radar->setDistance(view_distance);
+			// Keep the zoom slider in sync.
+			zoom_slider->setValue(view_distance);
+			zoom_label->setText("Zoom: " + string(50000.0f / view_distance, 1.0f) + "x");			
+		}
+        if (key.hotkey == "ALERTE_NORMAL")
+        {
+			my_spaceship->commandSetAlertLevel(AL_Normal);
+            for(GuiButton* button : alert_level_buttons)
+                button->setVisible(false);
+            alert_level_button->setValue(false);	
+		}
+        if (key.hotkey == "ALERTE_YELLOW")
+        {
+			my_spaceship->commandSetAlertLevel(AL_YellowAlert);
+            for(GuiButton* button : alert_level_buttons)
+                button->setVisible(false);
+            alert_level_button->setValue(false);	
+		}
+        if (key.hotkey == "ALERTE_RED")
+        {
+			my_spaceship->commandSetAlertLevel(AL_RedAlert);
+            for(GuiButton* button : alert_level_buttons)
+                button->setVisible(false);
+            alert_level_button->setValue(false);	
+		}
+	}
+}
+

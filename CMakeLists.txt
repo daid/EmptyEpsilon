@@ -2,6 +2,11 @@ project(EmptyEpsilon)
 cmake_minimum_required(VERSION 2.8.12)
 
 option(ENABLE_CRASH_LOGGER "Enable the drmingw crash logging facilities" OFF)
+message(STATUS "ENABLE_CRASH_LOGGER is " ${ENABLE_CRASH_LOGGER})
+option(COMPILE_DEV_HELPER "Compile with the 'DEBUG' fpreprocessor flag" OFF)
+message(STATUS "COMPILE_DEV_HELPER is " ${COMPILE_DEV_HELPER})
+
+cmake_policy(SET CMP0074 NEW)
 
 # Check if serious proton dir is set.
 if(NOT DEFINED SERIOUS_PROTON_DIR)
@@ -11,13 +16,17 @@ if(NOT IS_ABSOLUTE "${SERIOUS_PROTON_DIR}")
   get_filename_component(SERIOUS_PROTON_DIR "${CMAKE_BINARY_DIR}/${SERIOUS_PROTON_DIR}" ABSOLUTE)
 endif()
 
-if(DEFINED ENABLE_CRASH_LOGGER)
+if(COMPILE_DEV_HELPER)
+	add_compile_definitions(DEBUG)
+endif(COMPILE_DEV_HELPER)
+
+if(ENABLE_CRASH_LOGGER)
  if(WIN32)
   if(NOT DEFINED DRMINGW_ROOT)
    message(FATAL_ERROR "DRMINGW_ROOT was not set. Unable to continue")
   endif(NOT DEFINED DRMINGW_ROOT)
  endif(WIN32)
-endif(DEFINED ENABLE_CRASH_LOGGER)
+endif(ENABLE_CRASH_LOGGER)
 
 if(NOT DEFINED CPACK_PACKAGE_VERSION_MAJOR)
  string(TIMESTAMP CPACK_PACKAGE_VERSION_MAJOR "%Y")
