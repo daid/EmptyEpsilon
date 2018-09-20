@@ -308,11 +308,19 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             {
                 int seconds = fabs(distance/rel_velocity);
                 int minutes = seconds / 60;
+                int hours = minutes / 60;
+                int days = hours / 24;
 
                 duration += " (";
+                duration += string(days);
+                duration += ":";
+                if (hours < 10)
+                    duration += "0";
+                duration += string(hours%24);
+                duration += ":";
                 if (minutes < 10)
                     duration += "0";
-                duration += string(minutes);
+                duration += string(minutes%60);
                 duration += ":";
                 if (seconds%60 < 10)
                     duration += "0";
