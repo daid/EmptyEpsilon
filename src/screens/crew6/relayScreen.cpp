@@ -93,13 +93,12 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     // Controls for the radar view
     view_controls = new GuiAutoLayout(this, "VIEW_CONTROLS", GuiAutoLayout::LayoutVerticalBottomToTop);
     view_controls->setPosition(20, -70, ABottomLeft)->setSize(250, GuiElement::GuiSizeMax);
-
-    zoom_slider = new GuiSlider(view_controls, "ZOOM_SLIDER", 50000.0f, 6250.0f, 50000.0f, [this](float value) {
-        zoom_label->setText("Zoom: " + string(50000.0f / value, 1.0f) + "x"); 
+    zoom_slider = new GuiSlider(view_controls, "ZOOM_SLIDER", max_distance, min_distance, radar->getDistance(), [this](float value) {
+        zoom_label->setText("Zoom: " + string(max_distance / value, 1.0f) + "x");
         radar->setDistance(value);
     });
-    zoom_slider->setSize(GuiElement::GuiSizeMax, 50);
-    zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 30);
+    zoom_slider->setPosition(20, -70, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
+    zoom_label = new GuiLabel(zoom_slider, "", "Zoom: " + string(max_distance / radar->getDistance(), 1.0f) + "x", 30);
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     sector_name_custom = false;
@@ -213,14 +212,10 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
     if (mouse_wheel_delta != 0.0)
     {
         float view_distance = radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
-        if (view_distance > 50000.0f)
-            view_distance = 50000.0f;
-        if (view_distance < 6250.0f)
-            view_distance = 6250.0f;
-        radar->setDistance(view_distance);
-        // Keep the zoom slider in sync.
         zoom_slider->setValue(view_distance);
-        zoom_label->setText("Zoom: " + string(50000.0f / view_distance, 1.0f) + "x");
+        view_distance = zoom_slider->getValue();
+        radar->setDistance(view_distance);
+        zoom_label->setText("Zoom: " + string(max_distance / view_distance, 1.0f) + "x");
     }
     ///!
 

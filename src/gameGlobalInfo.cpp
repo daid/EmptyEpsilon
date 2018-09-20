@@ -204,7 +204,6 @@ bool isValidSectorName(string sectorName)
 }
 sf::Vector2f getSectorPosition(string sectorName)
 {
-    constexpr float sector_size = 20000;
     std::regex rgx("^([a-zA-Z]+)(\\d+)([a-dA-D])$");
     std::smatch matches;
     if(std::regex_search(sectorName, matches, rgx)) 
@@ -221,7 +220,7 @@ sf::Vector2f getSectorPosition(string sectorName)
             sector_x = -1 - sector_x;
         if ((quadrant /2) % 2)
             sector_y = -1 - sector_y;
-        return sf::Vector2f((sector_x + 0.5) * sector_size, (sector_y + 0.5) * sector_size);
+        return sf::Vector2f((sector_x + 0.5) * GameGlobalInfo::sector_size, (sector_y + 0.5) * GameGlobalInfo::sector_size);
     } 
     else 
     {
@@ -231,9 +230,8 @@ sf::Vector2f getSectorPosition(string sectorName)
 
 string getSectorName(sf::Vector2f position)
 {
-    constexpr float sector_size = 20000;
-    int sector_x = floorf(position.x / sector_size);
-    int sector_y = floorf(position.y / sector_size);
+    int sector_x = floorf(position.x / GameGlobalInfo::sector_size);
+    int sector_y = floorf(position.y / GameGlobalInfo::sector_size);
     int quadrant = 0;
     string row = "";
     if (sector_y < 0)
