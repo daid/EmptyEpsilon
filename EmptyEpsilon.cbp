@@ -718,6 +718,8 @@
 		<Unit filename="src/screens/extra/powerManagement.h" />
 		<Unit filename="src/screens/extra/shipLogScreen.cpp" />
 		<Unit filename="src/screens/extra/shipLogScreen.h" />
+		<Unit filename="src/screens/extra/commsScreen.cpp" />
+		<Unit filename="src/screens/extra/commsScreen.h" />
 		<Unit filename="src/screens/extra/probeScreen.cpp" />
 		<Unit filename="src/screens/extra/probeScreen.h" />
 		<Unit filename="src/screens/gm/chatDialog.cpp" />

@@ -20,8 +20,8 @@
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_textentry.h"
 
-RelayScreen::RelayScreen(GuiContainer* owner)
-: GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background), mode(TargetSelection)
+RelayScreen::RelayScreen(GuiContainer* owner, bool has_comms)
+: GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background),has_comms(has_comms),mode(TargetSelection)
 {
     targets.setAllowWaypointSelection();
     radar = new GuiRadarView(this, "RELAY_RADAR", 50000.0f, &targets);
@@ -214,7 +214,8 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     hacking_dialog = new GuiHackingDialog(this, "");
 
     new ShipsLog(this,"extern");
-    (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+	if (has_comms)
+		(new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
 void RelayScreen::onDraw(sf::RenderTarget& window)

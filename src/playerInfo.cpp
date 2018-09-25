@@ -17,6 +17,7 @@
 #include "screens/extra/damcon.h"
 #include "screens/extra/powerManagement.h"
 #include "screens/extra/databaseScreen.h"
+#include "screens/extra/commsScreen.h"
 
 #include "screens/extra/shipLogScreen.h"
 
@@ -152,6 +153,10 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new PowerManagementScreen(screen), powerManagement, getCrewPositionName(powerManagement), getCrewPositionIcon(powerManagement));
         if (crew_position[databaseView])
             screen->addStationTab(new DatabaseScreen(screen), databaseView, getCrewPositionName(databaseView), getCrewPositionIcon(databaseView));
+      	if (crew_position[relayOfficerNC])
+            screen->addStationTab(new RelayScreen(screen,false), relayOfficer, getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
+        if (crew_position[commsView])
+            screen->addStationTab(new CommsScreen(screen), commsView, getCrewPositionName(commsView), getCrewPositionIcon(commsView));
         if (crew_position[tacticalRadar])
             screen->addStationTab(new RadarScreen(screen,"tactical"), tacticalRadar, getCrewPositionName(tacticalRadar), getCrewPositionIcon(tacticalRadar));
         if (crew_position[scienceRadar])
@@ -197,6 +202,7 @@ string getCrewPositionName(ECrewPosition position)
     case engineering: return "Engineering";
     case scienceOfficer: return "Science";
     case relayOfficer: return "Relay";
+    case relayOfficerNC: return "Relay (No comms)";
     case tacticalOfficer: return "Tactical";
     case engineeringAdvanced: return "Engineering+";
     case operationsOfficer: return "Operations";
@@ -204,6 +210,7 @@ string getCrewPositionName(ECrewPosition position)
     case damageControl: return "Damage Control";
     case powerManagement: return "Power Management";
     case databaseView: return "Database";
+    case commsView: return "Comms View";
     case tacticalRadar: return "Tactical Radar";
     case scienceRadar: return "Science Radar";
     case relayRadar: return "Relay Radar";
@@ -220,6 +227,7 @@ string getCrewPositionIcon(ECrewPosition position)
     case engineering: return "gui/icons/station-engineering";
     case scienceOfficer: return "gui/icons/station-science";
     case relayOfficer: return "gui/icons/station-relay";
+    case relayOfficerNC: return "gui/icons/station-relay";
     case tacticalOfficer: return "";
     case engineeringAdvanced: return "";
     case operationsOfficer: return "";
@@ -227,6 +235,7 @@ string getCrewPositionIcon(ECrewPosition position)
     case damageControl: return "";
     case powerManagement: return "";
     case databaseView: return "";
+    case commsView: return "";
     case tacticalRadar: return "";
     case scienceRadar: return "";
     case relayRadar: return "";
@@ -270,6 +279,8 @@ template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosit
         cp = powerManagement;
     else if (str == "database" || str == "databaseview")
         cp = databaseView;
+    else if (str == "comms" || str == "commsview")
+        cp = commsView;
     else if (str == "tacticalradar" || str == "tacticalradarview")
         cp = tacticalRadar;
     else if (str == "scienceradar" || str == "scienceradarview")

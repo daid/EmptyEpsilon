@@ -21,6 +21,8 @@ enum ECrewPosition
     damageControl,
     powerManagement,
     databaseView,
+    relayOfficerNC,
+    commsView,
     tacticalRadar,
     scienceRadar,
     relayRadar,

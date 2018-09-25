@@ -56,7 +56,8 @@ private:
     const float max_distance = 10000000.0f;
     const float min_distance = 6250.0f;
 public:
-    RelayScreen(GuiContainer* owner);
+    bool has_comms;
+    RelayScreen(GuiContainer* owner, bool has_comms = true);
 
     virtual void onDraw(sf::RenderTarget& window);
 };
