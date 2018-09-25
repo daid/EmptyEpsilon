@@ -49,7 +49,11 @@ void ScanProbe::update(float delta)
 
 bool ScanProbe::canBeTargetedBy(P<SpaceObject> other)
 {
-    return true;
+    // This (slightly odd) logic is in place 
+    // to prevent AI ships from actively seeking out probes and destroying them. 
+    // But only seek and destroy probes when they are near the ships.
+    // see https://github.com/daid/EmptyEpsilon/pull/485#discussion_r154773755
+    return (getTarget() - getPosition()) < getRadius();
 }
 
 void ScanProbe::takeDamage(float damage_amount, DamageInfo info)
