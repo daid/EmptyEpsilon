@@ -355,6 +355,8 @@ public:
 
     int getShieldsFrequency(void){ return shield_frequency; }
     void setShieldsFrequency(float freq) { if ((freq > SpaceShip::max_frequency) || (freq < 0)) return; shield_frequency = freq;}
+    
+    int getBeamsFrequency(void){ return beam_frequency; }
 
     void setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage)
     {
