@@ -3,8 +3,6 @@ cmake_minimum_required(VERSION 2.8.12)
 
 option(ENABLE_CRASH_LOGGER "Enable the drmingw crash logging facilities" OFF)
 message(STATUS "ENABLE_CRASH_LOGGER is " ${ENABLE_CRASH_LOGGER})
-option(COMPILE_DEV_HELPER "Compile with the 'DEBUG' fpreprocessor flag" OFF)
-message(STATUS "COMPILE_DEV_HELPER is " ${COMPILE_DEV_HELPER})
 
 # Check if serious proton dir is set.
 if(NOT DEFINED SERIOUS_PROTON_DIR)
@@ -14,9 +12,9 @@ if(NOT IS_ABSOLUTE "${SERIOUS_PROTON_DIR}")
   get_filename_component(SERIOUS_PROTON_DIR "${CMAKE_BINARY_DIR}/${SERIOUS_PROTON_DIR}" ABSOLUTE)
 endif()
 
-if(COMPILE_DEV_HELPER)
+if(CMAKE_BUILD_TYPE MATCHES Debug)
 	add_compile_definitions(DEBUG)
-endif(COMPILE_DEV_HELPER)
+endif(CMAKE_BUILD_TYPE MATCHES Debug)
 
 if(ENABLE_CRASH_LOGGER)
  if(WIN32)
