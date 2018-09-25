@@ -20,7 +20,7 @@ void ShipLogScreen::onDraw(sf::RenderTarget& window)
     
     if (my_spaceship)
     {
-        const std::vector<PlayerSpaceship::ShipLogEntry>& logs = my_spaceship->getShipsLog();
+        const std::vector<PlayerSpaceship::ShipLogEntry>& logs = my_spaceship->getShipsLog("extern");
         if (log_text->getEntryCount() > 0 && logs.size() == 0)
             log_text->clearEntries();
 

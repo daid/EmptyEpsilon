@@ -9,6 +9,8 @@ class TargetsContainer;
 class GuiRadarView : public GuiElement
 {
 public:
+    static const int grid_scale_size = 5;
+
     enum ERadarStyle
     {
         Rectangular,
@@ -28,6 +30,9 @@ private:
     sf::RenderTexture background_texture;
     sf::RenderTexture forground_texture;
     sf::RenderTexture mask_texture;
+    sf::Color grid_colors [GuiRadarView::grid_scale_size];
+   
+    const float sub_sectors_count = 8;
 
     class GhostDot
     {
@@ -110,7 +115,7 @@ public:
     virtual bool onJoystickRMove(float position);
 private:
     void updateGhostDots();
-
+    int calcGridScaleMagnitude(int scale_magnitude, int position);
     void drawBackground(sf::RenderTarget& window);
     void drawSectorGrid(sf::RenderTarget& window);
     void drawNebulaBlockedAreas(sf::RenderTarget& window);
