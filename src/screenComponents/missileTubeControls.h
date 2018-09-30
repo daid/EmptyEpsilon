@@ -16,6 +16,7 @@ private:
         GuiAutoLayout* layout;
         GuiButton* load_button;
         GuiButton* fire_button;
+        GuiToggleButton* auto_button;
         GuiProgressbar* loading_bar;
         GuiLabel* loading_label;
     };
@@ -31,13 +32,13 @@ private:
     float missile_target_angle;
 public:
     GuiMissileTubeControls(GuiContainer* owner, string id);
-    
+
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;
-    
+
     void setMissileTargetAngle(float angle);
     float getMissileTargetAngle();
-    
+
     void setManualAim(bool manual);
     bool getManualAim();
 
