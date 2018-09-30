@@ -6,12 +6,6 @@ HotkeyConfig hotkeys;
 
 HotkeyConfig::HotkeyConfig()
 {  // this list includes all Hotkeys and their standard configuration
-	newCategory("BASIC", "Basic");  // these items should all have predefined values
-	newKey("PAUSE", std::make_tuple("Pause game", "P"));
-	newKey("HELP", std::make_tuple("Show in-game help", "F1"));
-	newKey("ESCAPE", std::make_tuple("Return to ship options menu", "Escape"));
-	newKey("HOME", std::make_tuple("Return to ship options menu", "Home"));  // Remove this item as it does the same as Escape?
-
     newCategory("GENERAL", "General");
     newKey("NEXT_STATION", std::make_tuple("Switch to next crew station", "Tab"));
     newKey("PREV_STATION", std::make_tuple("Switch to previous crew station", ""));
@@ -20,7 +14,7 @@ HotkeyConfig::HotkeyConfig()
     newKey("STATION_ENGINEERING", std::make_tuple("Switch to engineering station", "F4"));
     newKey("STATION_SCIENCE", std::make_tuple("Switch to science station", "F5"));
     newKey("STATION_RELAY", std::make_tuple("Switch to relay station", "F6"));
-    
+
     newCategory("HELMS", "Helms");
     newKey("INC_IMPULSE", std::make_tuple("Increase impulse", "Up"));
     newKey("DEC_IMPULSE", std::make_tuple("Decrease impulse", "Down"));
@@ -52,12 +46,13 @@ HotkeyConfig::HotkeyConfig()
     newKey("SELECT_MISSILE_TYPE_EMP", std::make_tuple("Select EMP", "Num4"));
     newKey("SELECT_MISSILE_TYPE_HVLI", std::make_tuple("Select HVLI", "Num5"));
     for(int n=0; n<max_weapon_tubes; n++)
-    {
         newKey(std::string("LOAD_TUBE_") + string(n+1), std::make_tuple(std::string("Load tube ") + string(n+1), ""));
+    for(int n=0; n<max_weapon_tubes; n++)
         newKey(std::string("UNLOAD_TUBE_") + string(n+1), std::make_tuple(std::string("Unload tube ") + string(n+1), ""));
+    for(int n=0; n<max_weapon_tubes; n++)
         newKey(std::string("FIRE_TUBE_") + string(n+1), std::make_tuple(std::string("Fire tube ") + string(n+1), ""));
+    for(int n=0; n<max_weapon_tubes; n++)
         newKey(std::string("AUTO_TUBE_") + string(n+1), std::make_tuple(std::string("Auto-reload tube ") + string(n+1), ""));
-    }
     newKey("NEXT_ENEMY_TARGET", std::make_tuple("Select next target", ""));
     newKey("NEXT_TARGET", std::make_tuple("Select next target (any)", ""));
     newKey("TOGGLE_SHIELDS", std::make_tuple("Toggle shields", "S"));
@@ -72,7 +67,7 @@ HotkeyConfig::HotkeyConfig()
     newKey("DISABLE_AIM_LOCK", std::make_tuple("Disable missile aim lock", ""));
     newKey("AIM_MISSILE_LEFT", std::make_tuple("Turn missile aim to the left", ""));
     newKey("AIM_MISSILE_RIGHT", std::make_tuple("Turn missile aim to the right", ""));
-    
+
     newCategory("ENGINEERING", "Engineering");
     newKey("SELECT_REACTOR", std::make_tuple("Select reactor system", "Num1"));
     newKey("SELECT_BEAM_WEAPONS", std::make_tuple("Select beam weapon system", "Num2"));
@@ -213,7 +208,6 @@ void HotkeyConfig::load()
         {
             string key_config = PreferencesManager::get(std::string("HOTKEY.") + cat.key + "." + item.key, std::get<1>(item.value));
             item.load(key_config);
-            item.value = std::make_tuple(std::get<0>(item.value), key_config);
         }
     }
 }
@@ -282,24 +276,6 @@ std::vector<std::pair<string, string>> HotkeyConfig::listHotkeysByCategory(strin
     return ret;
 }
 
-std::vector<std::pair<string, string>> HotkeyConfig::listAllHotkeysByCategory(string hotkey_category)
-{
-	std::vector<std::pair<string, string>> ret;
-
-	for(HotkeyConfigCategory& cat : categories)
-	{
-		if (cat.name == hotkey_category)
-		{
-			for (HotkeyConfigItem& item : cat.hotkeys)
-			{
-				ret.push_back({std::get<0>(item.value), std::get<1>(item.value)});
-			}
-		}
-	}
-
-	return ret;
-}
-
 HotkeyConfigItem::HotkeyConfigItem(string key, std::tuple<string, string> value)
 {
     this->key = key;
@@ -327,7 +303,7 @@ void HotkeyConfigItem::load(string key_config)
         {
             for(auto key_name : sfml_key_names)
             {
-                if (key_name.first.lower() == config.lower())
+                if (key_name.first == config)
                 {
                     hotkey.code = key_name.second;
                     break;
@@ -335,31 +311,4 @@ void HotkeyConfigItem::load(string key_config)
             }
         }
     }
-}
-
-bool HotkeyConfig::setHotkey(std::string work_cat, std::pair<string,string> key, string new_value)
-{
-	// Test if new_value is part of sfml_list
-	for(std::pair<string, sf::Keyboard::Key> sfml_key : sfml_key_names)
-	{
-		if ((sfml_key.first.lower() == new_value.lower()) || new_value == "")
-		{
-			for(HotkeyConfigCategory &cat : categories)
-			{
-				if (cat.name == work_cat)
-				{
-					for(HotkeyConfigItem &item : cat.hotkeys) {
-						if (key.first == std::get<0>(item.value))
-						{
-							item.load(new_value);
-							item.value = std::make_tuple(std::get<0>(item.value), new_value);
-							PreferencesManager::set(std::string("HOTKEY.") + cat.key + "." + item.key, std::get<1>(item.value));
-							return true;
-						}
-					}
-				}
-			}
-		}
-	}
-	return false;
 }

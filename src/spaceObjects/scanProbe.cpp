@@ -49,7 +49,7 @@ void ScanProbe::update(float delta)
 
 bool ScanProbe::canBeTargetedBy(P<SpaceObject> other)
 {
-    return true;
+    return (getTarget() - getPosition()) < getRadius();
 }
 
 void ScanProbe::takeDamage(float damage_amount, DamageInfo info)

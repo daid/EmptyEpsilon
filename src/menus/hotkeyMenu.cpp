@@ -11,7 +11,7 @@ HotkeyMenu::HotkeyMenu()
 	P<WindowManager> windowManager = engine->getObject("windowManager");
 
 	new GuiOverlay(this, "", colorConfig.background);
-	(new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosess");
+	(new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
 
 	// Left column, manual layout. Draw first element at 50px from top.
 	int top = 50;
@@ -104,7 +104,7 @@ void HotkeyMenu::setCategory(int cat)
 		label_entries.back()->setPosition(left, top, ATopLeft)->setSize(300, 50);
 
 		text_entries.push_back(new GuiTextEntry(frame, "HOTKEY_ENTRY_" + string(i), item.second));
-		text_entries.back().setTextSize(30)->setPosition(left+300, top, ATopLeft)->setSize(200, 50);
+		text_entries.back()->setTextSize(30)->setPosition(left+300, top, ATopLeft)->setSize(200, 50);
 		top += 50;
 		i++;
 
@@ -140,8 +140,8 @@ void HotkeyMenu::updateHotkeys()
 	// Read in all TextEntry values and update hotkeys
 	for (std::pair<string,string> item : hotkey_list)
 	{
-		text = text_entries[i].getText();
-		hotkey_exists = hotkey.setHotkey(category, item, text);
+		text = text_entries[i]->getText();
+		hotkey_exists = hotkeys.setHotkey(category, item, text);
 
 		if (!hotkey_exists)
 		{

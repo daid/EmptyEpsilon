@@ -28,7 +28,7 @@ public:
 
     void setDirection(float direction);
     float getDirection();
-    
+
     /*!
      * Load a missile tube.
      * \param type Weapon type that is loaded.
@@ -36,7 +36,6 @@ public:
     void startLoad(EMissileWeapons type);
     void startUnload();
     void startAutoLoad(EMissileWeapons type);
-
     /*!
      * Fire a missile tube.
      * \param target_angle Angle in degrees to where the missile needs to be shot.
@@ -47,9 +46,9 @@ public:
     bool canOnlyLoad(EMissileWeapons type);
     void allowLoadOf(EMissileWeapons type);
     void disallowLoadOf(EMissileWeapons type);
-    
+
     void forceUnload();
-    
+
     void update(float delta);
 
     bool isEmpty();
@@ -62,11 +61,13 @@ public:
     void enableAutoLoading();
     void disableAutoLoading();
 
+    void setAutoLoading(bool auto_load);
+
     float getLoadProgress();
     float getUnloadProgress();
 
     EMissileWeapons getLoadType();
-    
+
     string getTubeName(); //Get the tube name based on the direction of the tube.
 
     //Calculate a possible firing solution towards the target for this missile tube.
@@ -78,7 +79,7 @@ private:
 
     SpaceShip* parent;
     int tube_index;
-    
+
     //Configuration
     float load_time;
     uint32_t type_allowed_mask;

@@ -108,8 +108,3 @@ void TargetsContainer::setWaypointIndex(int index)
     if (my_spaceship && index >= 0 && index < (int)my_spaceship->waypoints.size())
         waypoint_selection_position = my_spaceship->waypoints[index];
 }
-
-sf::Vector2f TargetsContainer::getWaypointPosition()
-{
-	return waypoint_selection_position;
-}

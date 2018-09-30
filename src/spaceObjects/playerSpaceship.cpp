@@ -52,7 +52,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setEnergyLevelMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getEnergyLevel);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getEnergyLevelMax);
-    
+
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setScanProbeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getScanProbeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setMaxScanProbeCount);
@@ -102,7 +102,6 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandConfirmDestructCode);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCombatManeuverBoost);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetScienceLink);
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetProbe3DLink);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAlertLevel);
 
     // Return the number of Engineering repair crews on the ship.
@@ -140,40 +139,40 @@ static const int16_t CMD_SET_TARGET = 0x0005;
 static const int16_t CMD_LOAD_TUBE = 0x0006;
 static const int16_t CMD_UNLOAD_TUBE = 0x0007;
 static const int16_t CMD_FIRE_TUBE = 0x0008;
-static const int16_t CMD_SET_SHIELDS = 0x0009;
-static const int16_t CMD_SET_MAIN_SCREEN_SETTING = 0x000A; // Overlay is 0x0027
-static const int16_t CMD_SCAN_OBJECT = 0x000B;
-static const int16_t CMD_SCAN_DONE = 0x000C;
-static const int16_t CMD_SCAN_CANCEL = 0x000D;
-static const int16_t CMD_SET_SYSTEM_POWER_REQUEST = 0x000E;
-static const int16_t CMD_SET_SYSTEM_COOLANT_REQUEST = 0x000F;
-static const int16_t CMD_DOCK = 0x0010;
-static const int16_t CMD_UNDOCK = 0x0011;
-static const int16_t CMD_OPEN_TEXT_COMM = 0x0012; //TEXT communication
-static const int16_t CMD_CLOSE_TEXT_COMM = 0x0013;
-static const int16_t CMD_SEND_TEXT_COMM = 0x0014;
-static const int16_t CMD_SEND_TEXT_COMM_PLAYER = 0x0015;
-static const int16_t CMD_ANSWER_COMM_HAIL = 0x0016;
-static const int16_t CMD_SET_AUTO_REPAIR = 0x0017;
-static const int16_t CMD_SET_BEAM_FREQUENCY = 0x0018;
-static const int16_t CMD_SET_BEAM_SYSTEM_TARGET = 0x0019;
-static const int16_t CMD_SET_SHIELD_FREQUENCY = 0x001A;
-static const int16_t CMD_ADD_WAYPOINT = 0x001B;
-static const int16_t CMD_REMOVE_WAYPOINT = 0x001C;
-static const int16_t CMD_MOVE_WAYPOINT = 0x001D;
-static const int16_t CMD_ACTIVATE_SELF_DESTRUCT = 0x001E;
-static const int16_t CMD_CANCEL_SELF_DESTRUCT = 0x001F;
-static const int16_t CMD_CONFIRM_SELF_DESTRUCT = 0x0020;
-static const int16_t CMD_COMBAT_MANEUVER_BOOST = 0x0021;
-static const int16_t CMD_COMBAT_MANEUVER_STRAFE = 0x0022;
-static const int16_t CMD_LAUNCH_PROBE = 0x0023;
-static const int16_t CMD_SET_ALERT_LEVEL = 0x0024;
-static const int16_t CMD_SET_SCIENCE_LINK = 0x0025;
-static const int16_t CMD_SET_PROBE_3D_LINK = 0x0026;
+static const int16_t CMD_AUTO_TUBE = 0x0009;
+static const int16_t CMD_SET_SHIELDS = 0x000A;
+static const int16_t CMD_SET_MAIN_SCREEN_SETTING = 0x000B; // Overlay is 0x0027
+static const int16_t CMD_SCAN_OBJECT = 0x000C;
+static const int16_t CMD_SCAN_DONE = 0x000D;
+static const int16_t CMD_SCAN_CANCEL = 0x000E;
+static const int16_t CMD_SET_SYSTEM_POWER_REQUEST = 0x000F;
+static const int16_t CMD_SET_SYSTEM_COOLANT_REQUEST = 0x0010;
+static const int16_t CMD_DOCK = 0x0011;
+static const int16_t CMD_UNDOCK = 0x0012;
+static const int16_t CMD_OPEN_TEXT_COMM = 0x0013; //TEXT communication
+static const int16_t CMD_CLOSE_TEXT_COMM = 0x0014;
+static const int16_t CMD_SEND_TEXT_COMM = 0x0015;
+static const int16_t CMD_SEND_TEXT_COMM_PLAYER = 0x0016;
+static const int16_t CMD_ANSWER_COMM_HAIL = 0x0017;
+static const int16_t CMD_SET_AUTO_REPAIR = 0x0018;
+static const int16_t CMD_SET_BEAM_FREQUENCY = 0x0019;
+static const int16_t CMD_SET_BEAM_SYSTEM_TARGET = 0x001A;
+static const int16_t CMD_SET_SHIELD_FREQUENCY = 0x001B;
+static const int16_t CMD_ADD_WAYPOINT = 0x001C;
+static const int16_t CMD_REMOVE_WAYPOINT = 0x001D;
+static const int16_t CMD_MOVE_WAYPOINT = 0x001E;
+static const int16_t CMD_ACTIVATE_SELF_DESTRUCT = 0x001F;
+static const int16_t CMD_CANCEL_SELF_DESTRUCT = 0x0020;
+static const int16_t CMD_CONFIRM_SELF_DESTRUCT = 0x0021;
+static const int16_t CMD_COMBAT_MANEUVER_BOOST = 0x0022;
+static const int16_t CMD_COMBAT_MANEUVER_STRAFE = 0x0023;
+static const int16_t CMD_LAUNCH_PROBE = 0x0024;
+static const int16_t CMD_SET_ALERT_LEVEL = 0x0025;
+static const int16_t CMD_SET_SCIENCE_LINK = 0x0026;
 static const int16_t CMD_ABORT_DOCK = 0x0027;
 static const int16_t CMD_SET_MAIN_SCREEN_OVERLAY = 0x0028;
 static const int16_t CMD_HACKING_FINISHED = 0x0029;
-static const int16_t CMD_CUSTOM_FUNCTION = 0x0030;
+static const int16_t CMD_CUSTOM_FUNCTION = 0x002A;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -251,7 +250,6 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&self_destruct_countdown, 0.2);
     registerMemberReplication(&alert_level);
     registerMemberReplication(&linked_science_probe_id);
-    registerMemberReplication(&linked_probe_3D_id);
     registerMemberReplication(&control_code);
     registerMemberReplication(&custom_functions);
 
@@ -1093,6 +1091,16 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 weapon_tube[tube_nr].fire(missile_target_angle);
         }
         break;
+    case CMD_AUTO_TUBE:
+        {
+            int8_t tube_nr;
+            bool auto_load;
+            packet >> tube_nr >> auto_load;
+
+            if (tube_nr >= 0 && tube_nr < max_weapon_tubes)
+                weapon_tube[tube_nr].setAutoLoading(auto_load);
+        }
+        break;
     case CMD_SET_SHIELDS:
         {
             bool active;
@@ -1448,11 +1456,6 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             packet >> linked_science_probe_id;
         }
         break;
-    case CMD_SET_PROBE_3D_LINK:
-        {
-            packet >> linked_probe_3D_id;
-        }
-        break;
     case CMD_HACKING_FINISHED:
         {
             uint32_t id;
@@ -1544,6 +1547,13 @@ void PlayerSpaceship::commandFireTube(int8_t tubeNumber, float missile_target_an
 {
     sf::Packet packet;
     packet << CMD_FIRE_TUBE << tubeNumber << missile_target_angle;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetTubeAutoLoading(int8_t tubeNumber, bool auto_load)
+{
+    sf::Packet packet;
+    packet << CMD_AUTO_TUBE << tubeNumber << auto_load;
     sendClientCommand(packet);
 }
 
@@ -1781,17 +1791,9 @@ void PlayerSpaceship::commandCustomFunction(string name)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandSetScienceLink(int32_t id)
-{
+void PlayerSpaceship::commandSetScienceLink(int32_t id){
     sf::Packet packet;
     packet << CMD_SET_SCIENCE_LINK << id;
-    sendClientCommand(packet);
-}
-
-void PlayerSpaceship::commandSetProbe3DLink(int32_t id)
-{
-    sf::Packet packet;
-    packet << CMD_SET_PROBE_3D_LINK << id;
     sendClientCommand(packet);
 }
 

@@ -9,7 +9,7 @@
 WeaponTube::WeaponTube()
 {
     parent = nullptr;
-    
+
     load_time = 8.0;
     direction = 0;
     type_allowed_mask = (1 << MW_Count) - 1;
@@ -28,7 +28,7 @@ void WeaponTube::setParent(SpaceShip* parent)
     parent->registerMemberReplication(&load_time);
     parent->registerMemberReplication(&type_allowed_mask);
     parent->registerMemberReplication(&direction);
-    
+
     parent->registerMemberReplication(&type_loaded);
     parent->registerMemberReplication(&state);
     parent->registerMemberReplication(&delay, 0.5);
@@ -68,7 +68,7 @@ void WeaponTube::startLoad(EMissileWeapons type)
         return;
     if (parent->weapon_storage[type] <= 0)
         return;
-        
+
     state = WTS_Loading;
     delay = load_time;
     type_loaded = type;
@@ -87,11 +87,11 @@ void WeaponTube::startUnload()
 
 void WeaponTube::startAutoLoad(EMissileWeapons type)
 {
-	if (!auto_loading)
-		return;
-	if (type_loaded != type)
-		return;
-	startLoad(type_loaded);
+    if (!auto_loading)
+        return;
+    if (type_loaded != type)
+        return;
+    startLoad(type_loaded);
 }
 
 void WeaponTube::fire(float target_angle)
@@ -101,7 +101,7 @@ void WeaponTube::fire(float target_angle)
     if (parent->docking_state != DS_NotDocking) return;
     if (parent->current_warp > 0.0) return;
     if (state != WTS_Loaded) return;
-    
+
     if (type_loaded == MW_HVLI)
     {
         fire_count = 5;
@@ -111,9 +111,9 @@ void WeaponTube::fire(float target_angle)
         spawnProjectile(target_angle);
         state = WTS_Empty;
         if (auto_loading)
-        	startLoad(type_loaded);
+            startLoad(type_loaded);
         else
-        	type_loaded = MW_None;
+            type_loaded = MW_None;
     }
 }
 
@@ -237,7 +237,7 @@ void WeaponTube::update(float delta)
         case WTS_Firing:
             {
                 spawnProjectile(0);
-                
+
                 fire_count -= 1;
                 if (fire_count > 0)
                 {
@@ -283,19 +283,27 @@ bool WeaponTube::isFiring()
 
 bool WeaponTube::isAutoLoading()
 {
-	return auto_loading;
+    return auto_loading;
 }
 
 void WeaponTube::enableAutoLoading()
 {
-	auto_loading = true;
+    auto_loading = true;
 }
 
 void WeaponTube::disableAutoLoading()
 {
-	auto_loading = false;
-	if (state == WTS_Empty)
-		type_loaded = MW_None;
+    auto_loading = false;
+    if (state == WTS_Empty)
+        type_loaded = MW_None;
+}
+
+void WeaponTube::setAutoLoading(bool auto_load)
+{
+    if (auto_load)
+        enableAutoLoading();
+    else
+        disableAutoLoading();
 }
 
 float WeaponTube::getLoadProgress()
@@ -333,14 +341,14 @@ float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
     const MissileWeaponData& data = MissileWeaponData::getDataFor(type_loaded);
     if (data.turnrate == 0.0f)  //If the missile cannot turn, we cannot find a firing solution.
         return std::numeric_limits<float>::infinity();
-    
+
     sf::Vector2f target_position = target->getPosition();
     sf::Vector2f target_velocity = target->getVelocity();
     float target_velocity_length = sf::length(target_velocity);
     float missile_angle = sf::vector2ToAngle(target_position - parent->getPosition());
     float turn_radius = ((360.0f / data.turnrate) * data.speed) / (2.0f * M_PI);
     float missile_exit_angle = parent->getRotation() + direction;
-    
+
     for(int iterations=0; iterations<10; iterations++)
     {
         float angle_diff = sf::angleDifference(missile_angle, missile_exit_angle);
