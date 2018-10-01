@@ -14,7 +14,7 @@ HotkeyConfig::HotkeyConfig()
     newKey("STATION_ENGINEERING", std::make_tuple("Switch to engineering station", "F4"));
     newKey("STATION_SCIENCE", std::make_tuple("Switch to science station", "F5"));
     newKey("STATION_RELAY", std::make_tuple("Switch to relay station", "F6"));
-
+    
     newCategory("HELMS", "Helms");
     newKey("INC_IMPULSE", std::make_tuple("Increase impulse", "Up"));
     newKey("DEC_IMPULSE", std::make_tuple("Decrease impulse", "Down"));
@@ -67,7 +67,7 @@ HotkeyConfig::HotkeyConfig()
     newKey("DISABLE_AIM_LOCK", std::make_tuple("Disable missile aim lock", ""));
     newKey("AIM_MISSILE_LEFT", std::make_tuple("Turn missile aim to the left", ""));
     newKey("AIM_MISSILE_RIGHT", std::make_tuple("Turn missile aim to the right", ""));
-
+    
     newCategory("ENGINEERING", "Engineering");
     newKey("SELECT_REACTOR", std::make_tuple("Select reactor system", "Num1"));
     newKey("SELECT_BEAM_WEAPONS", std::make_tuple("Select beam weapon system", "Num2"));

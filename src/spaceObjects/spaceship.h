@@ -327,7 +327,7 @@ public:
     float getBeamWeaponDirection(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getDirection(); }
     float getBeamWeaponRange(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getRange(); }
 
-    float getBeamWeaponTurretArc(int index)
+    float getBeamWeaponTurretArc(int index) 
     {
         if (index < 0 || index >= max_beam_weapons)
             return 0.0;
