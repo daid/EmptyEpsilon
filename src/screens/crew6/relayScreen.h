@@ -16,6 +16,9 @@ class GuiTextEntry;
 
 class RelayScreen : public GuiOverlay
 {
+public:
+    bool has_comms;
+
 private:
     enum EMode
     {
@@ -55,11 +58,11 @@ private:
     sf::Vector2f mouse_down_position;
     const float max_distance = 10000000.0f;
     const float min_distance = 6250.0f;
+
 public:
-    bool has_comms;
     RelayScreen(GuiContainer* owner, bool has_comms = true);
 
     virtual void onDraw(sf::RenderTarget& window);
 };
 
-#endif//RELAY_SCREEN_H
+#endif //RELAY_SCREEN_H

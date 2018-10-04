@@ -22,14 +22,15 @@ void GuiSlider::onDraw(sf::RenderTarget& window)
         for(TSnapPoint& point : snap_points)
         {
             x = rect.left + (rect.width - rect.height) * (point.value - min_value) / (max_value - min_value);
-
-            sf::Sprite snap_sprite;
-            textureManager.setTexture(snap_sprite, "gui/SliderTick");
-            snap_sprite.setRotation(90);
-            snap_sprite.setPosition(x + rect.height / 2, rect.top + rect.height / 2);
-            snap_sprite.setScale(rect.height / snap_sprite.getTextureRect().width, rect.height / snap_sprite.getTextureRect().width);
-            snap_sprite.setColor(selectColor(colorConfig.slider.background));
-            window.draw(snap_sprite);
+            if (x >= rect.left && x <= rect.left + rect.width ){
+                sf::Sprite snap_sprite;
+                textureManager.setTexture(snap_sprite, "gui/SliderTick");
+                snap_sprite.setRotation(90);
+                snap_sprite.setPosition(x + rect.height / 2, rect.top + rect.height / 2);
+                snap_sprite.setScale(rect.height / snap_sprite.getTextureRect().width, rect.height / snap_sprite.getTextureRect().width);
+                snap_sprite.setColor(selectColor(colorConfig.slider.background));
+                window.draw(snap_sprite);
+            }
         }
         x = rect.left + (rect.width - rect.height) * (value - min_value) / (max_value - min_value);
 
@@ -45,14 +46,15 @@ void GuiSlider::onDraw(sf::RenderTarget& window)
         for(TSnapPoint& point : snap_points)
         {
             y = rect.top + (rect.height - rect.width) * (point.value - min_value) / (max_value - min_value);
-
-            sf::Sprite snap_sprite;
-            textureManager.setTexture(snap_sprite, "gui/SliderTick");
-            snap_sprite.setOrigin(0, 0);
-            snap_sprite.setPosition(rect.left, y);
-            snap_sprite.setScale(rect.width / snap_sprite.getTextureRect().width, rect.width / snap_sprite.getTextureRect().width);
-            snap_sprite.setColor(selectColor(colorConfig.slider.background));
-            window.draw(snap_sprite);
+            if (y >= rect.top && y <= rect.top + rect.height ){
+                sf::Sprite snap_sprite;
+                textureManager.setTexture(snap_sprite, "gui/SliderTick");
+                snap_sprite.setOrigin(0, 0);
+                snap_sprite.setPosition(rect.left, y);
+                snap_sprite.setScale(rect.width / snap_sprite.getTextureRect().width, rect.width / snap_sprite.getTextureRect().width);
+                snap_sprite.setColor(selectColor(colorConfig.slider.background));
+                window.draw(snap_sprite);
+            }
         }
         y = rect.top + (rect.height - rect.width) * (value - min_value) / (max_value - min_value);
 
@@ -151,9 +153,11 @@ GuiSlider* GuiSlider::setValue(float value)
 
 GuiSlider* GuiSlider::setRange(float min, float max)
 {
-    this->min_value = min;
-    this->max_value = max;
-    setValue(this->value);
+    if (min != this->min_value || max != this->max_value){
+        this->min_value = min;
+        this->max_value = max;
+        setValue(this->value);
+    }
     return this;
 }
 

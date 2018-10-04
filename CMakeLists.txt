@@ -134,6 +134,8 @@ set(SOURCES
 	src/screens/gm/gameMasterScreen.cpp
 	src/screens/gm/chatDialog.cpp
 	src/screens/gm/tweak.cpp
+	src/screens/helios/navigationScreen.h
+	src/screens/helios/navigationScreen.cpp
 	src/screenComponents/aimLock.cpp
 	src/screenComponents/alertOverlay.cpp
 	src/screenComponents/helpOverlay.cpp
@@ -177,6 +179,7 @@ set(SOURCES
 	src/screenComponents/hackingDialog.cpp
 	src/screenComponents/customShipFunctions.cpp
 	src/screenComponents/scrollingBanner.cpp
+	src/screenComponents/navigationView.cpp
 	src/gui/colorConfig.cpp
 	src/gui/hotkeyConfig.cpp
 	src/gui/mouseRenderer.cpp

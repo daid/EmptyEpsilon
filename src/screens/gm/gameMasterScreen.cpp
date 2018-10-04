@@ -291,7 +291,12 @@ void GameMasterScreen::update(float delta)
 
     if (targets.getTargets().size() == 1)
     {
-        selection_info["Position"] = string(targets.getTargets()[0]->getPosition().x, 0) + "," + string(targets.getTargets()[0]->getPosition().y, 0);
+        P<SpaceObject> target = targets.getTargets()[0];
+        selection_info["Position"] = string(target->getPosition().x, 0) + "," + string(target->getPosition().y, 0);
+        P<SpaceShip> targetSpaceship = P<SpaceShip>(target);
+        if (targetSpaceship){
+            selection_info["Max Warp"] = string(targetSpaceship->max_warp, 0);
+        }
     }
     
     unsigned int cnt = 0;

@@ -44,7 +44,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     crew_type_selector = new GuiSelector(stations_layout, "CREW_TYPE_SELECTION", [this](int index, string value) {
         updateCrewTypeOptions();
     });
-    crew_type_selector->setOptions({"6/5 player crew", "4/3 player crew", "1 player crew/extras", "Alternative options"})->setSize(GuiElement::GuiSizeMax, 50);
+    crew_type_selector->setOptions({"Helios", "6/5 player crew", "4/3 player crew", "1 player crew/extras", "Alternative options"})->setSize(GuiElement::GuiSizeMax, 50);
 
     // Main screen button
     main_screen_button = new GuiToggleButton(stations_layout, "MAIN_SCREEN_BUTTON", "Main screen", [this](bool value) {
@@ -221,7 +221,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     });
     ready_button->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
 
-    // Set the crew type selector's default to 6/5 person crew screens.
+    // Set the crew type selector's default toHelios crew screens.
     crew_type_selector->setSelectionIndex(0);
     updateCrewTypeOptions();
 
@@ -421,7 +421,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
     cinematic_view_button->hide();
     main_screen_button->setVisible(canDoMainScreen());
     main_screen_button->setValue(false);
-    main_screen_controls_button->setVisible(crew_type_selector->getSelectionIndex() != 3);
+    main_screen_controls_button->setVisible(crew_type_selector->getSelectionIndex() != 4);
     game_master_button->setValue(false);
     window_button->setValue(false);
     probe_button->setValue(false);
@@ -438,16 +438,25 @@ void ShipSelectionScreen::updateCrewTypeOptions()
     switch(crew_type_selector->getSelectionIndex())
     {
     case 0:
+        crew_position_button[helmsOfficer]->show();
+        crew_position_button[weaponsOfficer]->show();
+        crew_position_button[powerManagement]->show();
+        crew_position_button[scienceOfficer]->show();
+        crew_position_button[relayOfficerNC]->show();
+        crew_position_button[commsView]->show();
+        crew_position_button[navigation]->show();
+        break;
+    case 1:
         for(int n = helmsOfficer; n <= relayOfficer; n++)
         {
             crew_position_button[n]->show();
         }
         break;
-    case 1:
+    case 2:
         for(int n = tacticalOfficer; n <= operationsOfficer; n++)
             crew_position_button[n]->show();
         break;
-    case 2:
+    case 3:
         crew_position_button[singlePilot]->show();
         crew_position_button[damageControl]->show();
         crew_position_button[powerManagement]->show();
@@ -458,7 +467,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
         crew_position_button[scienceRadar]->show();
         crew_position_button[relayRadar]->show();
         break;
-    case 3:
+    case 4:
         main_screen_button->hide();
         game_master_button->setVisible(bool(game_server));
         window_button->setVisible(canDoMainScreen());

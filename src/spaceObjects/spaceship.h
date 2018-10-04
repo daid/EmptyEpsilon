@@ -107,6 +107,11 @@ public:
     bool has_warp_drive;
 
     /*!
+     * [output] Current maximum warp amount, from 0.0 to 4.0
+     */
+    float max_warp;
+
+    /*!
      * [input] Level of warp requested, from 0 to 4
      */
     int8_t warp_request;

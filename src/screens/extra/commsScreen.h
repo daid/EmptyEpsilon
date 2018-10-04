@@ -20,4 +20,4 @@ public:
     virtual void onDraw(sf::RenderTarget& window);
 };
 
-#endif//RELAY_SCREEN_H
+#endif//COMMS_SCREEN_H
