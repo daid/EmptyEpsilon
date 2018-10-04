@@ -468,8 +468,7 @@ void SpaceShip::update(float delta)
             warp_request = 0.0;
             
         if (gameGlobalInfo->terrain.defined){
-            float terrainWarpValue = 4 * float(gameGlobalInfo->getTerrainPixel(getPosition()).a) / 255;
-            max_warp = std::max(2.0f, terrainWarpValue);
+            max_warp = 2.0f + 2.0f * float(gameGlobalInfo->getTerrainPixel(getPosition()).a) / 255;
         }
     }
 
