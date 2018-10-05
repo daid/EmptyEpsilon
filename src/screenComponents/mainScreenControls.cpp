@@ -128,32 +128,27 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     }));
     ship_state_button = buttons.back();
 
-    // If the player has control over comms, they can toggle the comms overlay
-    // on the main screen.
-    if (my_player_info->crew_position[relayOfficer] || my_player_info->crew_position[operationsOfficer] || my_player_info->crew_position[singlePilot])
+    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_SHOW_COMMS_BUTTON", "Show comms", [this]()
     {
-        buttons.push_back(new GuiButton(this, "MAIN_SCREEN_SHOW_COMMS_BUTTON", "Show comms", [this]()
+        if (my_spaceship)
         {
-            if (my_spaceship)
-            {
-                my_spaceship->commandMainScreenOverlay(MSO_ShowComms);
-                onscreen_comms_active = true;
-            }
-            closePopup();
-        }));
-        show_comms_button = buttons.back();
+            my_spaceship->commandMainScreenOverlay(MSO_ShowComms);
+            onscreen_comms_active = true;
+        }
+        closePopup();
+    }));
+    show_comms_button = buttons.back();
 
-        buttons.push_back(new GuiButton(this, "MAIN_SCREEN_HIDE_COMMS_BUTTON", "Hide comms", [this]()
+    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_HIDE_COMMS_BUTTON", "Hide comms", [this]()
+    {
+        if (my_spaceship)
         {
-            if (my_spaceship)
-            {
-                my_spaceship->commandMainScreenOverlay(MSO_HideComms);
-                onscreen_comms_active = false;
-            }
-            closePopup();
-        }));
-        hide_comms_button = buttons.back();
-    }
+            my_spaceship->commandMainScreenOverlay(MSO_HideComms);
+            onscreen_comms_active = false;
+        }
+        closePopup();
+    }));
+    hide_comms_button = buttons.back();
 
     for(GuiButton* button : buttons)
         button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(false);
