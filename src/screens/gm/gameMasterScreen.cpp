@@ -295,7 +295,7 @@ void GameMasterScreen::update(float delta)
         selection_info["Position"] = string(target->getPosition().x, 0) + "," + string(target->getPosition().y, 0);
         P<SpaceShip> targetSpaceship = P<SpaceShip>(target);
         if (targetSpaceship){
-            selection_info["Max Warp"] = string(targetSpaceship->max_warp, 0);
+            selection_info["Max Warp"] = string(targetSpaceship->max_warp, 2);
         }
     }
     
