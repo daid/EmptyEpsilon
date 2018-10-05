@@ -2,7 +2,28 @@
 
 ## [Unreleased]
 
-- Nothing
+### Added
+
+- "go to sector" box in relay and GM screens
+- x100 zoom out in relay and GM screens, incl. sector wrapping to reduce visual noise
+- ETA in science screen info
+- Engineering (intern) log
+- Ship state mode in main screen
+- Long range radar mode in main screen
+- 3D probe screen
+- 3 types of radar (3U, 5U, grid)  screens
+- Possibility to separate Comms from relay
+- Map terrain configuration - image file, position, coordinates and scale. set example in 'Basic' scenario
+- New navigation screen that displays terrain image and manage waypoints
+- Selected ship's max_warp displayed in GM screen info
+
+### Changed
+
+- New sector naming system
+- Probes selectable by anyone of same faction
+- Warp energy consumption changed from exponential to linear
+- Alpha channel of terrain limit the maximum warp the ship can reach on it (2.0 to 4.0)
+- Terrain image displayed in GM screen background
 
 ## [2018-02-15]
 

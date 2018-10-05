@@ -175,8 +175,8 @@
 			<Add directory="../drmingw-0.8.2-win32/include" />
 		</Compiler>
 		<Linker>
-            <Add directory="../SFML-2.5.0/bin" />
-            <Add directory="../drmingw-0.8.2-win32/bin" />
+			<Add directory="../SFML-2.5.0/bin" />
+			<Add directory="../drmingw-0.8.2-win32/bin" />
 		</Linker>
 		<Unit filename="../SeriousProton/src/Box2D/Box2D.h" />
 		<Unit filename="../SeriousProton/src/Box2D/Collision/Shapes/b2ChainShape.cpp" />
@@ -642,6 +642,8 @@
 		<Unit filename="src/screenComponents/mainScreenControls.h" />
 		<Unit filename="src/screenComponents/missileTubeControls.cpp" />
 		<Unit filename="src/screenComponents/missileTubeControls.h" />
+		<Unit filename="src/screenComponents/navigationView.cpp" />
+		<Unit filename="src/screenComponents/navigationView.h" />
 		<Unit filename="src/screenComponents/noiseOverlay.cpp" />
 		<Unit filename="src/screenComponents/noiseOverlay.h" />
 		<Unit filename="src/screenComponents/onScreenKeyboard.cpp" />
@@ -662,6 +664,8 @@
 		<Unit filename="src/screenComponents/scanningDialog.h" />
 		<Unit filename="src/screenComponents/scrollingBanner.cpp" />
 		<Unit filename="src/screenComponents/scrollingBanner.h" />
+		<Unit filename="src/screenComponents/sectorsView.cpp" />
+		<Unit filename="src/screenComponents/sectorsView.h" />
 		<Unit filename="src/screenComponents/selfDestructButton.cpp" />
 		<Unit filename="src/screenComponents/selfDestructButton.h" />
 		<Unit filename="src/screenComponents/selfDestructEntry.cpp" />
@@ -710,24 +714,28 @@
 		<Unit filename="src/screens/crew6/weaponsScreen.h" />
 		<Unit filename="src/screens/crewStationScreen.cpp" />
 		<Unit filename="src/screens/crewStationScreen.h" />
+		<Unit filename="src/screens/extra/commsScreen.cpp" />
+		<Unit filename="src/screens/extra/commsScreen.h" />
 		<Unit filename="src/screens/extra/damcon.cpp" />
 		<Unit filename="src/screens/extra/damcon.h" />
 		<Unit filename="src/screens/extra/databaseScreen.cpp" />
 		<Unit filename="src/screens/extra/databaseScreen.h" />
 		<Unit filename="src/screens/extra/powerManagement.cpp" />
 		<Unit filename="src/screens/extra/powerManagement.h" />
-		<Unit filename="src/screens/extra/shipLogScreen.cpp" />
-		<Unit filename="src/screens/extra/shipLogScreen.h" />
-		<Unit filename="src/screens/extra/commsScreen.cpp" />
-		<Unit filename="src/screens/extra/commsScreen.h" />
 		<Unit filename="src/screens/extra/probeScreen.cpp" />
 		<Unit filename="src/screens/extra/probeScreen.h" />
+		<Unit filename="src/screens/extra/radarScreen.cpp" />
+		<Unit filename="src/screens/extra/radarScreen.h" />
+		<Unit filename="src/screens/extra/shipLogScreen.cpp" />
+		<Unit filename="src/screens/extra/shipLogScreen.h" />
 		<Unit filename="src/screens/gm/chatDialog.cpp" />
 		<Unit filename="src/screens/gm/chatDialog.h" />
 		<Unit filename="src/screens/gm/gameMasterScreen.cpp" />
 		<Unit filename="src/screens/gm/gameMasterScreen.h" />
 		<Unit filename="src/screens/gm/tweak.cpp" />
 		<Unit filename="src/screens/gm/tweak.h" />
+		<Unit filename="src/screens/helios/navigationScreen.cpp" />
+		<Unit filename="src/screens/helios/navigationScreen.h" />
 		<Unit filename="src/screens/mainScreen.cpp" />
 		<Unit filename="src/screens/mainScreen.h" />
 		<Unit filename="src/screens/topDownScreen.cpp" />
@@ -803,6 +811,7 @@
 			<code_completion />
 			<envvars />
 			<lib_finder disable_auto="1" />
+			<debugger />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
