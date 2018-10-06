@@ -25,6 +25,12 @@
 - Alpha channel of terrain limit the maximum warp the ship can reach on it (2.0 to 4.0)
 - Terrain image displayed in GM screen background
 
+### Fixed
+
+- delete zoom slider for relay and navigator
+- fix unclickable buttons in position selection menu when longer than 8 items
+- fix crash when opening main screen control menu from position that is not relay, operation or single-pilot.
+
 ## [2018-02-15]
 
 ### Added
