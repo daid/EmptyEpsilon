@@ -125,6 +125,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&has_warp_drive);
     registerMemberReplication(&warp_request, 0.1);
     registerMemberReplication(&current_warp, 0.1);
+    registerMemberReplication(&max_warp, 0.5);
     registerMemberReplication(&has_jump_drive);
     registerMemberReplication(&jump_drive_charge, 0.5);
     registerMemberReplication(&jump_delay, 0.5);
@@ -481,8 +482,6 @@ void SpaceShip::update(float delta)
     else
         setAngularVelocity(rotationDiff * turn_speed * getSystemEffectiveness(SYS_Maneuver));
     
-    if (current_warp > max_warp)
-        current_warp = max_warp;
     if ((has_jump_drive && jump_delay > 0) || (has_warp_drive && warp_request > 0))
     {
         if (WarpJammer::isWarpJammed(getPosition()))
@@ -521,17 +520,15 @@ void SpaceShip::update(float delta)
             if (current_impulse < 0.0)
                 current_impulse = 0.0;
         }else{
-            if (current_warp < warp_request && current_warp < max_warp)
+            float destWarp = std::min(float(warp_request), max_warp);
+            if (current_warp < destWarp) 
             {
                 current_warp += delta / warp_charge_time;
-                if (current_warp > warp_request)
-                    current_warp = warp_request;
-                if (current_warp > max_warp)
-                    current_warp = max_warp;    
-            }else if (current_warp > warp_request || current_warp > max_warp)
+                if (current_warp > destWarp)
+                    current_warp = destWarp;  
+            } else if (current_warp > destWarp)
             {
-                float destWarp = std::min(float(warp_request), max_warp);
-                current_warp -= delta / warp_decharge_time;
+                current_warp -= std::max(1.0f, destWarp - current_warp) * delta / warp_decharge_time;
                 if (current_warp < destWarp)
                     current_warp = destWarp;
             }
