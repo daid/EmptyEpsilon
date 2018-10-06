@@ -55,9 +55,6 @@ bool ScanProbe::canBeTargetedBy(P<SpaceObject> other)
     // see https://github.com/daid/EmptyEpsilon/pull/485#discussion_r154773755
     return (getTarget() - getPosition()) < getRadius();
 }
-bool ScanProbe::canBeSelectedBy(P<SpaceObject> other) {
-    return getFactionId() == other->getFactionId();
-}
 
 void ScanProbe::takeDamage(float damage_amount, DamageInfo info)
 {

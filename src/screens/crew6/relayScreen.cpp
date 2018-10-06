@@ -70,11 +70,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool has_comms)
                 break;
             case LaunchProbe:
                 if (my_spaceship)
-				{
 					my_spaceship->commandLaunchProbe(position);
-					targets.setToClosestTo(my_spaceship->getPosition(), 500, TargetsContainer::Selectable);
-					my_spaceship->commandSetProbe3DLink(targets.get()->getMultiplayerId());
-				}
                 mode = TargetSelection;
                 option_buttons->show();
                 break;

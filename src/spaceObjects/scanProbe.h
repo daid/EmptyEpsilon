@@ -18,8 +18,6 @@ public:
 
     virtual bool canBeTargetedBy(P<SpaceObject> other) override;
 
-    virtual bool canBeSelectedBy(P<SpaceObject> other) override;
-
     virtual void takeDamage(float damage_amount, DamageInfo info) override;
 
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
