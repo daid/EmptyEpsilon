@@ -102,6 +102,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool has_comms)
         radar->setDistance(value);
     });
     zoom_slider->setPosition(20, -70, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
+    zoom_slider->setVisible(false);
     zoom_label = new GuiLabel(zoom_slider, "", "Zoom: " + string(max_distance / radar->getDistance(), 1.0f) + "x", 30);
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 

@@ -80,9 +80,9 @@ NavigationScreen::NavigationScreen(GuiContainer *owner)
         radar->setDistance(value);
     });
     zoom_slider->setPosition(20, -70, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
+    zoom_slider->setVisible(false);
     zoom_label = new GuiLabel(zoom_slider, "", "Zoom: " + string(max_distance / radar->getDistance(), 1.0f) + "x", 30);
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-
     sector_name_custom = false;
     sector_name_text = new GuiTextEntry(view_controls, "SECTOR_NAME_TEXT", "");
     sector_name_text->setSize(GuiElement::GuiSizeMax, 50);
