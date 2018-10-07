@@ -38,5 +38,7 @@ thumbs.db
 options.ini
 
 logs
+*.log
 .idea
 .vscode
+scripts_docs.html

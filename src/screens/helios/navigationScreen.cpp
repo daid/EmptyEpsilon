@@ -118,7 +118,7 @@ NavigationScreen::NavigationScreen(GuiContainer *owner)
     });
     delete_waypoint_button->setSize(GuiElement::GuiSizeMax, 50);
 
-    (new GuiCustomShipFunctions(this, navigation, ""))->setPosition(-20, 240, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, navigation, "", my_spaceship))->setPosition(-20, 240, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 
 void NavigationScreen::onDraw(sf::RenderTarget &window)

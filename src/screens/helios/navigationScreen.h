@@ -12,7 +12,6 @@ class GuiButton;
 class GuiToggleButton;
 class GuiSlider;
 class GuiLabel;
-class GuiHackingDialog;
 class GuiTextEntry;
 
 class NavigationScreen : public GuiOverlay

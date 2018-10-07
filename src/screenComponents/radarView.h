@@ -3,6 +3,7 @@
 
 #include "gui/gui2_element.h"
 #include "sectorsView.h"
+#include "spaceObjects/playerSpaceship.h"
 
 class GuiMissileTubeControls;
 
@@ -44,6 +45,7 @@ private:
     float next_ghost_dot_update;
     GuiMissileTubeControls* missile_tube_controls;
 
+    P<PlayerSpaceship>& target_spaceship;
     bool long_range;
     bool show_ghost_dots;
     bool show_waypoints;
@@ -64,7 +66,7 @@ private:
     ffunc_t joystick_z_func;
     ffunc_t joystick_r_func;
 public:
-    GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets);
+    GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets, P<PlayerSpaceship>& targetSpaceship);
 
     virtual void onDraw(sf::RenderTarget& window);
 

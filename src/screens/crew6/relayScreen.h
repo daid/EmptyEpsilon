@@ -43,6 +43,7 @@ private:
     GuiToggleButton* link_to_3D_port_button;
     GuiButton* delete_waypoint_button;
     GuiButton* launch_probe_button;
+    GuiButton* launch_drone_button;
     GuiAutoLayout* view_controls;
     bool sector_name_custom;
     GuiTextEntry* sector_name_text;

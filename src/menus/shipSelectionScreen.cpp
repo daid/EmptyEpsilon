@@ -322,7 +322,7 @@ void ShipSelectionScreen::update(float delta)
     for(int n = 0; n < GameGlobalInfo::max_player_ships; n++)
     {
         P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
-        if (ship)
+        if (ship && ship->ship_template && ship->ship_template->getType() != ShipTemplate::TemplateType::Drone)
         {
             string ship_name = ship->getFaction() + " " + ship->getTypeName() + " " + ship->getCallSign();
             // If a player ship isn't in already in the list, add it.
@@ -340,7 +340,7 @@ void ShipSelectionScreen::update(float delta)
                 if (ship->hasPlayerAtPosition(ECrewPosition(n)))
                     ship_position_count += 1;
             }
-            player_ship_list->setEntryName(n, ship_name + " (" + string(ship_position_count) + ")");
+            player_ship_list->setEntryName(player_ship_list->indexByValue(string(n)), ship_name + " (" + string(ship_position_count) + ")");
         }else{
             if (player_ship_list->indexByValue(string(n)) != -1)
                 player_ship_list->removeEntry(player_ship_list->indexByValue(string(n)));
@@ -445,6 +445,8 @@ void ShipSelectionScreen::updateCrewTypeOptions()
         crew_position_button[relayOfficerNC]->show();
         crew_position_button[commsView]->show();
         crew_position_button[navigation]->show();
+        crew_position_button[dronePilot]->show();
+        crew_position_button[dockMaster]->show();
         break;
     case 1:
         for(int n = helmsOfficer; n <= relayOfficer; n++)

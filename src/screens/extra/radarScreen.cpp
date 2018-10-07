@@ -19,16 +19,16 @@ RadarScreen::RadarScreen(GuiContainer* owner,string type)
 {
 
     if (type == "tactical"){
-      tactical_radar = new GuiRadarView(this, "TACTICAL", 5000.0f, nullptr);
+      tactical_radar = new GuiRadarView(this, "TACTICAL", 5000.0f, nullptr, my_spaceship);
       tactical_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
       tactical_radar->setRangeIndicatorStepSize(1000.0f)->shortRange()->enableCallsigns()->show();
     } else if (type == "science"){
-      science_radar = new GuiRadarView(this, "SCIENCE", gameGlobalInfo->long_range_radar_range, nullptr);
+      science_radar = new GuiRadarView(this, "SCIENCE", gameGlobalInfo->long_range_radar_range, nullptr, my_spaceship);
       science_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
       science_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->enableCallsigns()->show();
       science_radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
     } else if (type == "relay"){
-      relay_radar = new GuiRadarView(this, "RELAY", 50000.0f, nullptr);
+      relay_radar = new GuiRadarView(this, "RELAY", 50000.0f, nullptr, my_spaceship);
       relay_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
       relay_radar->setAutoCentering(true);
       relay_radar->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);

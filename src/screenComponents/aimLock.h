@@ -2,20 +2,23 @@
 #define AIM_LOCK_H
 
 #include "gui/gui2_togglebutton.h"
+#include "spaceObjects/playerSpaceship.h"
 
 class GuiMissileTubeControls;
 class GuiRotationDial;
 
 class AimLockButton : public GuiToggleButton
 {
+private:
+    P<PlayerSpaceship>& target_spaceship;
+    GuiMissileTubeControls* tube_controls;
+    GuiRotationDial* missile_aim;
+
 public:
-    AimLockButton(GuiContainer* owner, string id, GuiMissileTubeControls* tube_controls, GuiRotationDial* missile_aim);
+    AimLockButton(GuiContainer* owner, string id, GuiMissileTubeControls* tube_controls, GuiRotationDial* missile_aim, P<PlayerSpaceship>& targetSpaceship);
     
     virtual void onHotkey(const HotkeyResult& key) override;
 private:
-    GuiMissileTubeControls* tube_controls;
-    GuiRotationDial* missile_aim;
-    
     void setAimLock(bool value);
 };
 

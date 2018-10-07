@@ -11,7 +11,7 @@
 GuiShieldFrequencySelect::GuiShieldFrequencySelect(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
-    (new GuiShieldsEnableButton(this, "SHIELDS_ENABLE"))->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiShieldsEnableButton(this, "SHIELDS_ENABLE", my_spaceship))->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, 50);
     calibrate_button = new GuiButton(this, "", "Calibrate", [this]() {
         if (my_spaceship)
             my_spaceship->commandSetShieldFrequency(new_frequency->getSelectionIndex());

@@ -1,9 +1,10 @@
 project(EmptyEpsilon)
 cmake_minimum_required(VERSION 2.8.12)
 
+
 option(ENABLE_CRASH_LOGGER "Enable the drmingw crash logging facilities" OFF)
 message(STATUS "ENABLE_CRASH_LOGGER is " ${ENABLE_CRASH_LOGGER})
-cmake_policy(SET CMP0074 NEW)
+# cmake_policy(SET CMP0074 NEW)
 
 # Check if serious proton dir is set.
 if(NOT DEFINED SERIOUS_PROTON_DIR)
@@ -127,6 +128,7 @@ set(SOURCES
 	src/screens/crew6/weaponsScreen.cpp
 	src/screens/crew6/helmsScreen.cpp
 	src/screens/crew1/singlePilotScreen.cpp
+	src/screens/crew1/singlePilotView.cpp
 	src/screens/extra/damcon.cpp
 	src/screens/extra/powerManagement.cpp
 	src/screens/extra/databaseScreen.cpp
@@ -137,8 +139,9 @@ set(SOURCES
 	src/screens/gm/gameMasterScreen.cpp
 	src/screens/gm/chatDialog.cpp
 	src/screens/gm/tweak.cpp
-	src/screens/helios/navigationScreen.h
 	src/screens/helios/navigationScreen.cpp
+	src/screens/helios/droneOperatorScreen.cpp
+	src/screens/helios/dockMasterScreen.cpp
 	src/screenComponents/aimLock.cpp
 	src/screenComponents/alertOverlay.cpp
 	src/screenComponents/helpOverlay.cpp
@@ -239,6 +242,7 @@ set(SOURCES
 	src/spaceObjects/zone.cpp
 	src/spaceObjects/spaceshipParts/beamWeapon.cpp
 	src/spaceObjects/spaceshipParts/weaponTube.cpp
+	src/spaceObjects/spaceshipParts/dock.cpp
 	src/ai/fighterAI.cpp
 	src/ai/ai.cpp
 	src/ai/aiFactory.cpp
@@ -392,7 +396,8 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)
 include_directories(${SFML_INCLUDE_DIR})
 message(STATUS "EXECUTABLE: ${EXECUTABLE_NAME}")
-target_link_libraries(${EXECUTABLE_NAME} sfml-system sfml-window sfml-graphics sfml-audio sfml-network)
+# target_link_libraries(${EXECUTABLE_NAME} sfml-system sfml-window sfml-graphics sfml-audio sfml-network)
+target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
 
 # Setup OpenGl
 find_package(OpenGL REQUIRED)

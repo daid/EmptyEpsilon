@@ -17,7 +17,8 @@ Odin's core contains the largest jump drive ever created. About 150 support crew
 Due to the enormous cost of this dreadnaught, only the richest star systems are able to build and maintain ships like the Odin. 
 
 This machine's primary tactic is to jump into an unsuspecting enemy system and destroy everything before they know what hit them. It's effective and destructive, but extremely expensive.]])
-template:setJumpDrive(true)
+template:setDockClasses("Drone")
+-- template:setJumpDrive(true)
 template:setTubes(16, 3.0)
 template:setWeaponStorage("Homing", 1000)
 for n=0,15 do

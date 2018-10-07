@@ -24,7 +24,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool has_comms)
 : GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background),has_comms(has_comms),mode(TargetSelection)
 {
     targets.setAllowWaypointSelection();
-    radar = new GuiRadarView(this, "RELAY_RADAR", 50000.0f, &targets);
+    radar = new GuiRadarView(this, "RELAY_RADAR", 50000.0f, &targets, my_spaceship);
     radar->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
     radar->setAutoCentering(false);
     radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -174,6 +174,12 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool has_comms)
     });
     launch_probe_button->setSize(GuiElement::GuiSizeMax, 50);
 
+    // Launch drone button.
+    launch_drone_button = new GuiButton(option_buttons, "LAUNCH_DRONE_BUTTON", "Launch Drone", [this]() {
+        my_spaceship->commandLaunchCargo(2); 
+    });
+    launch_drone_button->setSize(GuiElement::GuiSizeMax, 50);
+
     // Reputation display.
     info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.7, "Reputation:", "");
     info_reputation->setSize(GuiElement::GuiSizeMax, 40);
@@ -206,7 +212,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool has_comms)
         alert_level_buttons.push_back(alert_button);
     }
 
-    (new GuiCustomShipFunctions(this, relayOfficer, ""))->setPosition(-20, 240, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, relayOfficer, "", my_spaceship))->setPosition(-20, 240, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 
     hacking_dialog = new GuiHackingDialog(this, "");
 

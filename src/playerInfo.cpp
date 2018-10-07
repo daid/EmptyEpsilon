@@ -3,6 +3,8 @@
 #include "screens/crewStationScreen.h"
 
 #include "screens/helios/navigationScreen.h"
+#include "screens/helios/droneOperatorScreen.h"
+#include "screens/helios/dockMasterScreen.h"
 
 #include "screens/crew6/helmsScreen.h"
 #include "screens/crew6/weaponsScreen.h"
@@ -167,6 +169,11 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new RadarScreen(screen,"relay"), relayRadar, getCrewPositionName(relayRadar), getCrewPositionIcon(relayRadar));
         if (crew_position[navigation])
             screen->addStationTab(new NavigationScreen(screen), navigation, getCrewPositionName(navigation), getCrewPositionIcon(navigation));
+        if (crew_position[dronePilot])
+            screen->addStationTab(new DroneOperatorScreen(screen), dronePilot, getCrewPositionName(dronePilot), getCrewPositionIcon(dronePilot));
+        if (crew_position[dockMaster])
+            screen->addStationTab(new DockMasterScreen(screen), dockMaster, getCrewPositionName(dockMaster), getCrewPositionIcon(dockMaster));
+       
         //Ship log screen, if you have comms, you have ships log. (note this is mostly replaced by the [at the bottom of the screen openable log]
         if (crew_position[singlePilot])
             screen->addStationTab(new ShipLogScreen(screen), max_crew_positions, "Ships log", "");
@@ -219,6 +226,8 @@ string getCrewPositionName(ECrewPosition position)
     case scienceRadar: return "Science Radar";
     case relayRadar: return "Relay Radar";
     case navigation: return "Navigation";
+    case dronePilot: return "Drone Pilot";
+    case dockMaster: return "Dock Master";
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -245,6 +254,8 @@ string getCrewPositionIcon(ECrewPosition position)
     case scienceRadar: return "";
     case relayRadar: return "";
     case navigation: return "";
+    case dronePilot: return "";
+    case dockMaster: return "";
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -293,8 +304,13 @@ template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosit
         cp = scienceRadar;
     else if (str == "relayradar" || str == "relayradarview")
         cp = relayRadar;
+    // helios
     else if (str == "navigation" || str == "navigationview")
         cp = navigation;
+    else if (str == "dronepilot" || str == "dronepilotview")
+        cp = dronePilot;
+    else if (str == "dockmaster" || str == "dockmasterview")
+        cp = dockMaster;
     else
         luaL_error(L, "Unknown value for crew position: %s", str.c_str());
 }

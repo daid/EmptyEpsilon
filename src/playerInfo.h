@@ -26,8 +26,10 @@ enum ECrewPosition
     tacticalRadar,
     scienceRadar,
     relayRadar,
+    // helios
     navigation,
-    
+    dronePilot,
+    dockMaster,
     max_crew_positions
 };
 
