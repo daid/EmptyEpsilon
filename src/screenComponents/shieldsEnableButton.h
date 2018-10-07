@@ -3,16 +3,18 @@
 
 #include "gui/gui2_element.h"
 
+class PlayerSpaceship;
 class GuiToggleButton;
 class GuiProgressbar;
 
 class GuiShieldsEnableButton : public GuiElement
 {
 private:
+    P<PlayerSpaceship>& target_spaceship;
     GuiToggleButton* button;
     GuiProgressbar* bar;
 public:
-    GuiShieldsEnableButton(GuiContainer* owner, string id);
+    GuiShieldsEnableButton(GuiContainer* owner, string id, P<PlayerSpaceship>& targetSpaceship);
     
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;

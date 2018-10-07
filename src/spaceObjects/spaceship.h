@@ -5,6 +5,7 @@
 #include "spaceStation.h"
 #include "spaceshipParts/beamWeapon.h"
 #include "spaceshipParts/weaponTube.h"
+#include "spaceshipParts/dock.h"
 
 enum EMainScreenSetting
 {
@@ -59,6 +60,7 @@ public:
     constexpr static float warp_charge_time = 4.0f;
     constexpr static float warp_decharge_time = 2.0f;
     constexpr static float jump_drive_charge_time = 90.0;   /*<Total charge time for the jump drive after a max range jump */
+    constexpr static float dock_move_time = 15.0f; // It takes this amount of time to move cargo between two docks
     constexpr static float jump_drive_energy_per_km_charge = 4.0f;
     constexpr static float jump_drive_heat_per_jump = 0.35;
     constexpr static float heat_per_combat_maneuver_boost = 0.2;
@@ -66,8 +68,11 @@ public:
     constexpr static float heat_per_warp = 0.02;
     constexpr static float unhack_time = 180.0f; //It takes this amount of time to go from 100% hacked to 0% hacked for systems.
 
+
     float energy_level;
     float max_energy_level;
+    Dock docks[max_docks_count];
+
     ShipSystem systems[SYS_COUNT];
     /*!
      *[input] Ship will try to aim to this rotation. (degrees)
@@ -401,6 +406,7 @@ public:
     //Return a string that can be appended to an object create function in the lua scripting.
     // This function is used in getScriptExport calls to adjust for tweaks done in the GM screen.
     string getScriptExportModificationsOnTemplate();
+    bool tryDockDrone(SpaceShip* other);
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);
@@ -412,6 +418,9 @@ REGISTER_MULTIPLAYER_ENUM(EMainScreenSetting);
 REGISTER_MULTIPLAYER_ENUM(EMainScreenOverlay);
 REGISTER_MULTIPLAYER_ENUM(EDockingState);
 REGISTER_MULTIPLAYER_ENUM(EScannedState);
+REGISTER_MULTIPLAYER_ENUM(EDockType);
+REGISTER_MULTIPLAYER_ENUM(EDockState);
+
 
 string frequencyToString(int frequency);
 

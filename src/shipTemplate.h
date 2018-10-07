@@ -11,6 +11,7 @@
 constexpr static int max_beam_weapons = 16;
 constexpr static int max_weapon_tubes = 16;
 constexpr static int max_shield_count = 8;
+constexpr static int max_docks_count = 16;
 
 enum ESystem
 {
@@ -24,11 +25,18 @@ enum ESystem
     SYS_JumpDrive,
     SYS_FrontShield,
     SYS_RearShield,
+    SYS_Docks,
+    SYS_Drones,
     SYS_COUNT
 };
 /* Define script conversion function for the ESystem enum. */
 template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es);
-
+class DroneTemplate {
+    public:
+    string template_name;
+    int count;
+    DroneTemplate(string template_name, int count): template_name(template_name), count(count) {}
+};
 class ShipRoomTemplate
 {
 public:
@@ -53,6 +61,7 @@ class ShipTemplate : public PObject
 public:
     enum TemplateType
     {
+        Drone,
         Ship,
         PlayerShip,
         Station
@@ -87,6 +96,7 @@ public:
     std::unordered_set<string> can_be_docked_by_class;
     bool shares_energy_with_docked;
     bool repair_docked;
+    bool has_reactor;
     
     float energy_storage_amount;
     int repair_crew_count;
@@ -105,11 +115,13 @@ public:
     float jump_drive_min_distance;
     float jump_drive_max_distance;
     int weapon_storage[MW_Count];
-
+    int launcher_dock_count;
+    int energy_dock_count;
     string radar_trace;
 
     std::vector<ShipRoomTemplate> rooms;
     std::vector<ShipDoorTemplate> doors;
+    std::vector<DroneTemplate> drones;
 
     ShipTemplate();
 
@@ -121,6 +133,7 @@ public:
     void setDockClasses(std::vector<string> classes);
     void setSharesEnergyWithDocked(bool enabled);
     void setRepairDocked(bool enabled);
+    void setHasReactor(bool hasReactor);
     void setMesh(string model, string color_texture, string specular_texture, string illumination_texture);
     void setEnergyStorage(float energy_amount);
     void setRepairCrewCount(int amount);
@@ -154,6 +167,8 @@ public:
     void addRoom(sf::Vector2i position, sf::Vector2i size);
     void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system);
     void addDoor(sf::Vector2i position, bool horizontal);
+    void addDrones(string template_name, int count);
+    void setDocks(int launchers, int energy);
     void setRadarTrace(string trace);
 
     P<ShipTemplate> copy(string new_name);

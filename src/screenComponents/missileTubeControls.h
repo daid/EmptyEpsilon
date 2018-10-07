@@ -4,6 +4,7 @@
 #include "gui/gui2_autolayout.h"
 #include "missileWeaponData.h"
 
+class PlayerSpaceship;
 class GuiButton;
 class GuiProgressbar;
 class GuiLabel;
@@ -19,6 +20,7 @@ private:
         GuiProgressbar* loading_bar;
         GuiLabel* loading_label;
     };
+    P<PlayerSpaceship>& target_spaceship;
     std::vector<TubeRow> rows;
     class TypeRow {
     public:
@@ -30,7 +32,7 @@ private:
     bool manual_aim;
     float missile_target_angle;
 public:
-    GuiMissileTubeControls(GuiContainer* owner, string id);
+    GuiMissileTubeControls(GuiContainer* owner, string id, P<PlayerSpaceship>& targetSpaceship);
     
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;

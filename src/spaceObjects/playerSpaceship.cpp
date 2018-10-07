@@ -129,6 +129,8 @@ float PlayerSpaceship::system_power_user_factor[] = {
     /*SYS_JumpDrive*/     5.0 * 0.08,
     /*SYS_FrontShield*/   5.0 * 0.08,
     /*SYS_RearShield*/    5.0 * 0.08,
+    /*SYS_Docks*/         1.0 * 0.08,
+    /*SYS_Drones*/        3.0 * 0.08,
 };
 
 static const int16_t CMD_TARGET_ROTATION = 0x0001;
@@ -172,6 +174,11 @@ static const int16_t CMD_ABORT_DOCK = 0x0026;
 static const int16_t CMD_SET_MAIN_SCREEN_OVERLAY = 0x0027;
 static const int16_t CMD_HACKING_FINISHED = 0x0028;
 static const int16_t CMD_CUSTOM_FUNCTION = 0x0029;
+static const int16_t CMD_LAUNCH_CARGO = 0x0030;
+static const int16_t CMD_MOVE_CARGO = 0x0031;
+static const int16_t CMD_CANCEL_MOVE_CARGO = 0x0032;
+static const int16_t CMD_SET_DOCK_MOVE_TARGET = 0x0033;
+static const int16_t CMD_SET_DOCK_ENERGY_REQUEST = 0x0034;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -317,36 +324,43 @@ void PlayerSpaceship::update(float delta)
     // Docking actions.
     if (docking_state == DS_Docked)
     {
-        P<ShipTemplateBasedObject> docked_with_template_based = docking_target;
         P<SpaceShip> docked_with_ship = docking_target;
-
-        // Derive a base energy request rate from the player ship's maximum
-        // energy capacity.
-        float energy_request = std::min(delta * 10.0f, max_energy_level - energy_level);
-
-        // If we're docked with a shipTemplateBasedObject, and that object is
-        // set to share its energy with docked ships, transfer energy from the
-        // mothership to docked ships until the mothership runs out of energy
-        // or the docked ship doesn't require any.
-        if (docked_with_template_based && docked_with_template_based->shares_energy_with_docked)
+        if (docked_with_ship && docked_with_ship->tryDockDrone(this))
         {
-            if (!docked_with_ship || docked_with_ship->useEnergy(energy_request))
-                energy_level += energy_request;
-        }
+            // this drone has docked with a carrier
+            destroy();
+        } else {
+            P<ShipTemplateBasedObject> docked_with_template_based = docking_target;
+            P<SpaceShip> docked_with_ship = docking_target;
 
-        // If a shipTemplateBasedObject isn't a ship and is allowed to share
-        // energy with docked ships, also resupply docked ships' scan probes.
-        // A bit hackish for now.
-        if (docked_with_template_based && docked_with_template_based->shares_energy_with_docked && !docked_with_ship)
-        {
-            if (scan_probe_stock < max_scan_probes)
+            // Derive a base energy request rate from the player ship's maximum
+            // energy capacity.
+            float energy_request = std::min(delta * 10.0f, max_energy_level - energy_level);
+
+            // If we're docked with a shipTemplateBasedObject, and that object is
+            // set to share its energy with docked ships, transfer energy from the
+            // mothership to docked ships until the mothership runs out of energy
+            // or the docked ship doesn't require any.
+            if (docked_with_template_based && docked_with_template_based->shares_energy_with_docked)
             {
-                scan_probe_recharge += delta;
+                if (!docked_with_ship || docked_with_ship->useEnergy(energy_request))
+                    energy_level += energy_request;
+            }
 
-                if (scan_probe_recharge > scan_probe_charge_time)
+            // If a shipTemplateBasedObject isn't a ship and is allowed to share
+            // energy with docked ships, also resupply docked ships' scan probes.
+            // A bit hackish for now.
+            if (docked_with_template_based && docked_with_template_based->shares_energy_with_docked && !docked_with_ship)
+            {
+                if (scan_probe_stock < max_scan_probes)
                 {
-                    scan_probe_stock += 1;
-                    scan_probe_recharge = 0.0;
+                    scan_probe_recharge += delta;
+
+                    if (scan_probe_recharge > scan_probe_charge_time)
+                    {
+                        scan_probe_stock += 1;
+                        scan_probe_recharge = 0.0;
+                    }
                 }
             }
         }
@@ -555,6 +569,7 @@ void PlayerSpaceship::update(float delta)
                 }
             }
         }
+        
     }else{
         // Actions performed on the client-side only.
 
@@ -1435,6 +1450,50 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             scan_probe_stock--;
         }
         break;
+    case CMD_LAUNCH_CARGO:
+        int dockIndex;
+        packet >> dockIndex;
+        if (docks[dockIndex].state == EDockState::Docked 
+            && docks[dockIndex].getCargo()->onLaunch(getPosition(), getRotation()))
+        {
+            docks[dockIndex].getCargo()->destroy();
+            docks[dockIndex].empty();
+        }
+        break;
+    case CMD_SET_DOCK_MOVE_TARGET:
+        {
+            int srcIdx, destIdx;
+            packet >> srcIdx >> destIdx;
+            Dock& src = docks[srcIdx];
+            src.setMoveTarget(destIdx);
+        }
+        break;
+        break;
+    case CMD_MOVE_CARGO:
+        {
+            int index;
+            packet >> index;
+            Dock& src = docks[index];
+            src.startMoveCargo();
+        }
+        break;
+    case CMD_CANCEL_MOVE_CARGO:
+        {
+            int index;
+            packet >> index;
+            Dock& src = docks[index];
+            src.cancelMoveCargo();
+        }
+        break;
+    case CMD_SET_DOCK_ENERGY_REQUEST:
+        packet >> dockIndex;
+        if (docks[dockIndex].state == EDockState::Docked && docks[dockIndex].dock_type == Energy)
+        {
+            float value;
+            packet >> value;
+            docks[dockIndex].energy_request = value;
+        }
+        break;
     case CMD_SET_ALERT_LEVEL:
         {
             packet >> alert_level;
@@ -1731,6 +1790,40 @@ void PlayerSpaceship::commandLaunchProbe(sf::Vector2f target_position)
 {
     sf::Packet packet;
     packet << CMD_LAUNCH_PROBE << target_position;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandLaunchCargo(int index)
+{
+    sf::Packet packet;
+    packet << CMD_LAUNCH_CARGO << index;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandMoveCargo(int index)
+{
+    sf::Packet packet;
+    packet << CMD_MOVE_CARGO << index;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandCancelMoveCargo(int index)
+{
+    sf::Packet packet;
+    packet << CMD_CANCEL_MOVE_CARGO << index;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetDockMoveTarget(int srcIdx, int destIdx)
+{
+    sf::Packet packet;
+    packet << CMD_SET_DOCK_MOVE_TARGET << srcIdx << destIdx;
+    sendClientCommand(packet);
+}
+void PlayerSpaceship::commandSetDockEnergyRequest(int index, float value)
+{
+    sf::Packet packet;
+    packet << CMD_SET_DOCK_ENERGY_REQUEST << index << value;
     sendClientCommand(packet);
 }
 

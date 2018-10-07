@@ -37,11 +37,14 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponHeatPerFire);
     /// Set the amount of missile tubes, limited to a maximum of 16.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubes);
+    /// set the amount of docks (launcher, energy)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDocks);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubeLoadTime);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, weaponTubeAllowMissle);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, weaponTubeDisallowMissle);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWeaponTubeExclusiveFor);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubeDirection);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setHasReactor);
     /// Set the amount of starting hull
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setHull);
     /// Set the shield levels, amount of parameters defines the amount of shields. (Up to a maximum of 8 shields)
@@ -63,6 +66,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoom);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoomSystem);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addDoor);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addDrones);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadarTrace);
     /// Return a new template with the given name, which is an exact copy of this template.
     /// Used to make easy variations of templates.
@@ -106,6 +110,9 @@ ShipTemplate::ShipTemplate()
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = 0;
     radar_trace = "RadarArrow.png";
+    has_reactor = true;
+    launcher_dock_count = 0;
+    energy_dock_count = 0;
 }
 
 void ShipTemplate::setBeamTexture(int index, string texture)
@@ -303,6 +310,8 @@ string getSystemName(ESystem system)
     case SYS_JumpDrive: return "Jump Drive";
     case SYS_FrontShield: return "Front Shield Generator";
     case SYS_RearShield: return "Rear Shield Generator";
+    case SYS_Docks: return "Cargo Docks";
+    case SYS_Drones: return "Drones Control";
     default:
         return "UNKNOWN";
     }
@@ -356,6 +365,11 @@ void ShipTemplate::setRepairDocked(bool enabled)
     repair_docked = enabled;
 }
 
+void ShipTemplate::setHasReactor(bool hasReactor)
+{
+    has_reactor = hasReactor;
+}
+
 void ShipTemplate::setJumpDrive(bool enabled)
 {
     has_jump_drive = enabled;
@@ -387,6 +401,16 @@ void ShipTemplate::addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESyst
 void ShipTemplate::addDoor(sf::Vector2i position, bool horizontal)
 {
     doors.push_back(ShipDoorTemplate(position, horizontal));
+}
+
+void ShipTemplate::addDrones(string template_name, int count)
+{
+    drones.push_back(DroneTemplate(template_name, count));
+}
+
+void ShipTemplate::setDocks(int launchers, int energy){
+    launcher_dock_count = launchers;
+    energy_dock_count = energy;
 }
 
 void ShipTemplate::setRadarTrace(string trace)
@@ -434,7 +458,9 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
 
     result->rooms = rooms;
     result->doors = doors;
-    
+    result->drones = drones;
+    result->launcher_dock_count = launcher_dock_count;
+    result->energy_dock_count = energy_dock_count;
     return result;
 }
 

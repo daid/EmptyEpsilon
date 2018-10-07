@@ -22,7 +22,7 @@ RelayScreen::RelayScreen(GuiContainer* owner)
 : GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background), mode(TargetSelection)
 {
     targets.setAllowWaypointSelection();
-    radar = new GuiRadarView(this, "RELAY_RADAR", 50000.0f, &targets);
+    radar = new GuiRadarView(this, "RELAY_RADAR", 50000.0f, &targets, my_spaceship);
     radar->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
     radar->setAutoCentering(false);
     radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -169,7 +169,7 @@ RelayScreen::RelayScreen(GuiContainer* owner)
         alert_level_buttons.push_back(alert_button);
     }
 
-    (new GuiCustomShipFunctions(this, relayOfficer, ""))->setPosition(-20, 240, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, relayOfficer, "", my_spaceship))->setPosition(-20, 240, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 
     hacking_dialog = new GuiHackingDialog(this, "");
 

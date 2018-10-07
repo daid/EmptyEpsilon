@@ -13,6 +13,7 @@ They come in 3 different subclasses:
 
 template = ShipTemplate():setName("Atlantis X23"):setClass("Corvette", "Destroyer"):setModel("battleship_destroyer_1_upgraded")
 template:setDescription([[The Atlantis X23 is the smallest model of destroyer, and its combination of frigate-like size and corvette-like power makes it an excellent escort ship when defending larger ships against multiple smaller enemies. Because the Atlantis X23 is fitted with a jump drive, it can also serve as an intersystem patrol craft.]])
+template:setDockClasses("Drone")
 template:setRadarTrace("radar_dread.png")
 template:setHull(100)
 template:setShields(200, 200, 200, 200)
@@ -29,9 +30,13 @@ template:setTubeDirection(0, -90)
 template:setTubeDirection(1, -90)
 template:setTubeDirection(2,  90)
 template:setTubeDirection(3,  90)
+template:setDocks(10, 2)
+template:addDrones("L3 Mouse", 6)
+template:addDrones("L3 Cat", 1)
 
 variation = template:copy("Atlantis"):setType("playership")
 variation:setDescription([[A refitted Atlantis X23 for more general tasks. The large shield system has been replaced with an advanced combat maneuvering systems and improved impulse engines. Its missile loadout is also more diverse. Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake.]])
+template:setDockClasses("Drone")
 variation:setShields(200, 200)
 variation:setHull(250)
 variation:setSpeed(90, 10, 20)
@@ -48,14 +53,14 @@ variation:setTubeDirection(4, 180):setWeaponTubeExclusiveFor(4, "Mine")
 
 variation:addRoomSystem(1, 0, 2, 1, "Maneuver");
 variation:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
-variation:addRoom(2, 2, 2, 1);
+variation:addRoomSystem(2, 2, 2, 1, "Drones");
 
 variation:addRoomSystem(0, 3, 1, 2, "RearShield");
 variation:addRoomSystem(1, 3, 2, 2, "Reactor");
 variation:addRoomSystem(3, 3, 2, 2, "Warp");
 variation:addRoomSystem(5, 3, 1, 2, "JumpDrive");
 variation:addRoom(6, 3, 2, 1);
-variation:addRoom(6, 4, 2, 1);
+variation:addRoomSystem(6, 4, 2, 1, "Docks");
 variation:addRoomSystem(8, 3, 1, 2, "FrontShield");
 
 variation:addRoom(2, 5, 2, 1);
@@ -108,7 +113,7 @@ template:setRadarTrace("radartrace_smallstation.png")
 template:setHull(150)
 template:setShields(120, 120, 120, 120, 120, 120)
 template:setSpeed(0, 0.5, 0)
-template:setDockClasses("Starfighter", "Frigate")
+template:setDockClasses("Starfighter", "Frigate", "Drone")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 30,   0, 4000.0, 1.5, 20)
 template:setBeam(1, 30,  60, 4000.0, 1.5, 20)

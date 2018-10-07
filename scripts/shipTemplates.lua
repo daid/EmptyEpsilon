@@ -4,7 +4,8 @@ Each sub-file defines it's own set of ship classes.
 
 These are:
 * Stations: For different kinds of space stations, from tiny to huge.
-* Starfighters: Smallest ships in the game.
+* Drones: Smallest ships in the game. docked inside other ships.
+* Starfighters: Small ships. fast and simple.
 * Frigates: Medium sized ships. Operate on a small crew.
 * Covette: Large, slower, less maneuverable ships.
 * Dreadnaught: Huge things. Everything in here is really really big, and generally really really deadly.
@@ -13,6 +14,7 @@ Player ships are in general large frigates to small corvette class
 --]]
 require("shipTemplates_Stations.lua")
 ---[[Until these are ready, they are disabled
+require("shipTemplates_Drones.lua")
 require("shipTemplates_StarFighters.lua")
 require("shipTemplates_Frigates.lua")
 require("shipTemplates_Corvette.lua")
