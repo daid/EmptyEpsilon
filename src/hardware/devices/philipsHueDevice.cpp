@@ -130,7 +130,7 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
             //Count the number of { and } brackets and when they're equal and there's a quotation mark, look for a number.
 
             int bracket_counter = -1;
-            int int_builder = 0;
+            int int_builder = -1;
             light_count = 0;
             for ( unsigned int i = 0; i < body.size(); i++ )
             {
