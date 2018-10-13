@@ -1,7 +1,7 @@
 -- Name: Engineering
 -- Description: [Station Tutorial]
 --- -------------------
---- -Goes over controling the power of each station and repairs.
+--- -Goes over controlling the power of each station and repairs.
 ---
 --- [Station Info]
 --- -------------------
