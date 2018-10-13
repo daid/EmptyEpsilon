@@ -124,8 +124,48 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
         }
         else
         {
-            //TODO: Figure out the amount of available lights from the response.
-            light_count = 16;
+            string body = response.getBody();
+            //The response should be roughly: {"1":{light1info},"5":{light2info},"2":{light3info}}
+            //As a result, 1+the number of commas separating each light gives us the number of lights for this system.
+            //Count the number of { and } brackets and when they're equal and there's a quotation mark, look for a number.
+
+            int bracket_counter = -1;
+            int int_builder = 0;
+            light_count = 0;
+            for ( unsigned int i = 0; i < body.size(); i++ )
+            {
+                if ( int_builder != 0 )
+                {
+                    //The int builder process consumes digits after a " until a non-numeric char is found.
+                    if ( int_builder == -1 ) { int_builder = 0; }
+                    if ( std::isdigit(body[i]) )
+                    {
+                        int this_digit = body[i] - '0'; //Char to int
+                        int_builder *= 10;
+                        int_builder += this_digit;
+                    }
+                    else
+                    {
+                        LOG(DEBUG) << "Found light ID " << int_builder << " in Hue response.";
+                        if( int_builder > light_count ) { light_count = int_builder; }
+                        int_builder = 0;
+                    }
+                }
+
+                switch(body[i])
+                {
+                    case '{':
+                        bracket_counter++;
+                        break;
+                    case '}':
+                        bracket_counter--;
+                        break;
+                    case '"':
+                        if(bracket_counter == 0) { int_builder = -1; }
+                        break;
+                }
+            }
+
             lights.resize(light_count);
             
             FILE* f = fopen(userfile.c_str(), "wt");
