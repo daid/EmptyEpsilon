@@ -54,6 +54,7 @@ private:
     void updateLoop();
     
     string ip_address;
+    int port = 80;
     string username;
     string userfile;
     int light_count;
