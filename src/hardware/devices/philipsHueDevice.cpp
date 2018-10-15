@@ -1,7 +1,11 @@
+//The Hue bridge returns its info in JSON form, so the json11 library takes this role.
+
 #include "philipsHueDevice.h"
 #include "hardware/serialDriver.h"
 #include "logging.h"
 #include <unistd.h>
+
+using namespace json11;
 
 PhilipsHueDevice::PhilipsHueDevice()
 : update_thread(&PhilipsHueDevice::updateLoop, this)
@@ -125,44 +129,16 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
         else
         {
             string body = response.getBody();
-            //The response should be roughly: {"1":{light1info},"5":{light2info},"2":{light3info}}
-            //As a result, 1+the number of commas separating each light gives us the number of lights for this system.
-            //Count the number of { and } brackets and when they're equal and there's a quotation mark, look for a number.
+            string err;
+            json11::Json hue_json = json11::Json::parse(body,err);
+            LOG(ERROR) << "Json parser returned error " << err;
 
-            int bracket_counter = -1;
-            int int_builder = -1;
             light_count = 0;
-            for ( unsigned int i = 0; i < body.size(); i++ )
-            {
-                if ( int_builder != -1 )
-                {
-                    //The int builder process consumes digits after a " until a non-numeric char is found.
-                    if ( std::isdigit(body[i]) )
-                    {
-                        int this_digit = body[i] - '0'; //Char to int
-                        int_builder *= 10;
-                        int_builder += this_digit;
-                    }
-                    else
-                    {
-                        LOG(DEBUG) << "Found light ID " << int_builder << " in Hue response.";
-                        if( int_builder > light_count ) { light_count = int_builder; }
-                        int_builder = -1;
-                    }
-                }
-
-                switch(body[i])
-                {
-                    case '{':
-                        bracket_counter++;
-                        break;
-                    case '}':
-                        bracket_counter--;
-                        break;
-                    case '"':
-                        if(bracket_counter == 0) { int_builder = 0; }
-                        break;
-                }
+            std::map<std::__cxx11::basic_string<char>, json11::Json> jsonMap = hue_json.object_items();
+            for(std::map<std::__cxx11::basic_string<char>,json11::Json>::iterator it = jsonMap.begin(); it != jsonMap.end(); it++) {
+                  int currentInt = std::stoi (it->first,nullptr,10); //TODO: Replace STOI with toInt()
+                  LOG(DEBUG) << "Got key from Hue API " << currentInt;
+                  if (currentInt >= light_count) light_count = currentInt;
             }
 
             lights.resize(light_count);
