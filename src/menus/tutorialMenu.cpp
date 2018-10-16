@@ -21,25 +21,24 @@ TutorialMenu::TutorialMenu()
 
     // Tutorial section.
     (new GuiLabel(this, "TUTORIAL_LABEL", "Tutorials", 30))->addBackground()->setPosition(50, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, 50);
-    // List each scenario derived from scenario_*.lua files in Resources.
+    // List each tutorial derived from tutorial_*.lua files in Resources.
     GuiListbox* tutorial_list = new GuiListbox(this, "TUTORIAL_LIST", [this](int index, string value) {
         selectTutorial(value);
     });
     tutorial_list->setPosition(50, 120, ATopLeft)->setSize(GuiElement::GuiSizeMax, 250);
 
-        // Fetch and sort all Lua files starting with "tutorial_".
+    // Fetch and sort all Lua files starting with "tutorial_".
     std::vector<string> tutorial_filenames = findResources("tutorial_*.lua");
     std::sort(tutorial_filenames.begin(), tutorial_filenames.end());
 
-    // For each scenario file, extract its name, then add it to the list.
+    // For each tutorial file, extract its name, then add it to the list.
     for(string filename : tutorial_filenames)
     {
         ScenarioInfo info(filename);
         tutorial_list->addEntry(info.name, filename);
     }
 
-
-        // Show the scenario description text.
+    // Show the tutorial description text.
     GuiPanel* panel = new GuiPanel(this, "VARIATION_DESCRIPTION_BOX");
     panel->setSize(GuiElement::GuiSizeMax, 400)->setPosition(50, 400, ATopLeft);
     tutorial_description = new GuiScrollText(panel, "TUTORIAL_DESCRIPTION", "");
@@ -47,7 +46,12 @@ TutorialMenu::TutorialMenu()
 
     start_tutorial_button = new GuiButton(this, "START_TUTORIAL", "Start Tutorial", [this]() {
         destroy();
-        new TutorialGame(false,selected_tutorial_filename);
+        if (PreferencesManager::get("tutorial").toInt())
+        {
+            new TutorialGame(selected_tutorial_filename, true);
+        }else{
+            new TutorialGame(selected_tutorial_filename);
+        }
     });
     start_tutorial_button->setEnable(false)->setPosition(0, -50, ABottomRight)->setSize(300, 50);
     // Bottom GUI.
@@ -59,7 +63,7 @@ TutorialMenu::TutorialMenu()
         returnToMainMenu();
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
 
-    // Select the first scenario in the list by default.
+    // Select the first tutorial in the list by default.
     if (!tutorial_filenames.empty()) {
         tutorial_list->setSelectionIndex(0);
         selectTutorial(tutorial_filenames.front());

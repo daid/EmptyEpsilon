@@ -23,10 +23,11 @@ class TutorialGame : public Updatable, public GuiCanvas
     GuiButton* next_button;
 
     bool repeated_tutorial;
+    string tutorial_name;
 public:
     ScriptSimpleCallback _onNext;
 
-    TutorialGame(bool repeated_tutorial = false, string filename = "tutorial.lua");
+    TutorialGame(string filename, bool repeated = false);
 
     virtual void update(float delta) override;
     virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
@@ -53,7 +54,7 @@ class LocalOnlyGame : public EpsilonServer
 public:
     LocalOnlyGame();
 
-    //Overide the update function from the game server, so no actuall socket communication is done.
+    //Override the update function from the game server, so no actual socket communication is done.
     virtual void update(float delta) override;
 };
 
