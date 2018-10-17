@@ -46,12 +46,7 @@ TutorialMenu::TutorialMenu()
 
     start_tutorial_button = new GuiButton(this, "START_TUTORIAL", "Start Tutorial", [this]() {
         destroy();
-        if (PreferencesManager::get("tutorial").toInt())
-        {
-            new TutorialGame(selected_tutorial_filename, true);
-        }else{
-            new TutorialGame(selected_tutorial_filename);
-        }
+        new TutorialGame(selected_tutorial_filename);
     });
     start_tutorial_button->setEnable(false)->setPosition(0, -50, ABottomRight)->setSize(300, 50);
     // Bottom GUI.
@@ -67,8 +62,18 @@ TutorialMenu::TutorialMenu()
     if (!tutorial_filenames.empty()) {
         tutorial_list->setSelectionIndex(0);
         selectTutorial(tutorial_filenames.front());
+
+        if (PreferencesManager::get("tutorial").toInt())
+        {
+            int settings_index = PreferencesManager::get("tutorial").toInt() - 1;
+            if (settings_index < 0) settings_index = 0;
+            if (settings_index >= tutorial_list->entryCount()) settings_index = tutorial_list->entryCount() - 1;
+            destroy();
+            new TutorialGame(tutorial_list->getEntryValue(settings_index), true);
+        }
     }
 }
+
 void TutorialMenu::selectTutorial(string filename)
 {
     selected_tutorial_filename = filename;

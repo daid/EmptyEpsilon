@@ -22,6 +22,7 @@
 #include "httpScriptAccess.h"
 #include "preferenceManager.h"
 #include "networkRecorder.h"
+#include "menus/tutorialMenu.h"
 
 #include "hardware/hardwareController.h"
 
@@ -338,6 +339,10 @@ void returnToMainMenu()
     else if (PreferencesManager::get("touchcalib").toInt())
     {
         new MouseCalibrator(PreferencesManager::get("touchcalibfile"));
+    }
+    else if (PreferencesManager::get("tutorial").toInt())
+    {
+        new TutorialMenu();
     }else{
         new MainMenu();
     }
