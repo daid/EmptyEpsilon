@@ -396,6 +396,7 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
         SHIP_VARIABLE("TubeLoaded" + string(n), ship->weapon_tube[n].isLoaded() ? 1.0f : 0.0f);
         SHIP_VARIABLE("TubeLoading" + string(n), ship->weapon_tube[n].isLoading() ? 1.0f : 0.0f);
         SHIP_VARIABLE("TubeUnloading" + string(n), ship->weapon_tube[n].isUnloading() ? 1.0f : 0.0f);
+        SHIP_VARIABLE("TubeFired" + string(n), ship->weapon_tube[n].hasFired(bool(game_server)) ? 1.0f : 0.0f);
         SHIP_VARIABLE("TubeFiring" + string(n), ship->weapon_tube[n].isFiring() ? 1.0f : 0.0f);
     }
     for(int n=0; n<SYS_COUNT; n++)
