@@ -531,6 +531,9 @@ void ShipAI::flyFormation(P<SpaceObject> target, sf::Vector2f offset)
 
     if (pathPlanner.route.size() == 1)
     {
+        if (owner->docking_state == DS_Docked)
+            owner->requestUndock();
+
         sf::Vector2f diff = target_position - owner->getPosition();
         float distance = sf::length(diff);
 
