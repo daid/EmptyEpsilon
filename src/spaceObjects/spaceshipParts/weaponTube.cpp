@@ -222,6 +222,8 @@ void WeaponTube::update(float delta)
     if (delay > 0.0)
     {
         delay -= delta * parent->getSystemEffectiveness(SYS_MissileSystem);
+        if (auto_loading)
+        	state = WTS_Loading;
     }else{
         switch(state)
         {

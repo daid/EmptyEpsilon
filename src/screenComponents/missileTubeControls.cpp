@@ -107,7 +107,7 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window){
             rows[n].fire_button->setIcon("gui/icons/weapon-mine", ACenterLeft);
         else
             rows[n].fire_button->setIcon("gui/icons/missile", ACenterLeft, tube.getDirection());
-        rows[n].auto_button->setValue(my_spaceship->weapon_tube[n].isAutoLoading());
+        rows[n].auto_button->setValue(tube.isAutoLoading());
         if(tube.isEmpty())
         {
             rows[n].load_button->setEnable(tube.canLoad(load_type));
