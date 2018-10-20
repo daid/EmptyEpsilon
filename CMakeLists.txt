@@ -1,6 +1,7 @@
 project(EmptyEpsilon)
 cmake_minimum_required(VERSION 2.8.12)
 
+
 option(ENABLE_CRASH_LOGGER "Enable the drmingw crash logging facilities" OFF)
 message(STATUS "ENABLE_CRASH_LOGGER is " ${ENABLE_CRASH_LOGGER})
 
