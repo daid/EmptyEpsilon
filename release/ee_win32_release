@@ -1,0 +1,177 @@
+#!/bin/bash
+
+# build a statically linked win32 release for EmptyEpsilon
+# including download and build all dependencies (SFML 2.5) from sources
+# based on yuval's tutorial
+# https://gist.github.com/gmyuval/7c52bee28124a46a7f9fa6a5502e8047
+# instructions : in an empty directory, run this script with the path of Empty Epsilon source as an argument
+
+if [ "$1" = "" ]; then
+  echo "Usage: $0 <path to EmptyEpsilon source code directory>"
+  exit 1
+fi
+
+if [ ! -d $1 ]; then
+  echo "$1 is not a directory"
+  exit 1
+fi
+
+if [ ! -f "$1/CMakeLists.txt" ]; then
+  echo "$1 does not appear to contain CMakeLists.txt"
+  exit 1
+fi
+
+EE="$(realpath -e $1)"
+ROOT="$(pwd)"
+DEP_BUILD_DIR="$ROOT/dep-build"
+EE_BUILD_DIR="$ROOT/ee-build"
+TOOLCHAIN_FILE="$ROOT/mingw-win32-toolchain.cmake"
+CORES="$(grep -c ^processor /proc/cpuinfo)"
+
+shopt -s extglob
+exec 3>&1 
+function start_log {
+    exec 1>"$ROOT/install.log"
+}
+function stop_log {
+    exec 1>&3
+}
+function get_code {
+    FILE_NAME="$(basename $1)"
+    DIR_NAME="${FILE_NAME%%+(.tar|.gz|.xz|-sources.zip)}"
+    cd $ROOT
+    echo ">>> making $DIR_NAME" 
+    echo ">>> making $DIR_NAME" >&3
+    if [ ! -f $ROOT/$FILE_NAME ]; then
+        wget $1
+    fi
+    if [ ! -d $DIR_NAME ]; then
+        case "$FILE_NAME" in
+            *.gz) tar -xzvf $FILE_NAME
+            ;;
+            *.zip) unzip $FILE_NAME
+            ;;
+            *) tar -xvf $FILE_NAME 
+            ;;
+        esac 
+    fi
+}
+function build_autoconf {
+    cd $ROOT/$1
+    ./configure MANIFEST_TOOL=: --host="i686-w64-mingw32" --disable-shared --prefix=$DEP_BUILD_DIR CPPFLAGS="-I$DEP_BUILD_DIR/include -Wimplicit-fallthrough=0" LDFLAGS="-L$DEP_BUILD_DIR/lib"  PKG_CONFIG_LIBDIR="$DEP_BUILD_DIR/lib/pkgconfig" 
+    make -j$CORES
+    make install 
+}
+function build_zlib {
+    # zlib 'configure' script is currently broken, use win32/Makefile.gcc directly
+    cd $ROOT/zlib-1.2.11
+    sed -e s/"PREFIX ="/"PREFIX = i686-w64-mingw32-"/ -i win32/Makefile.gcc
+    prefix=$DEP_BUILD_DIR BINARY_PATH=$DEP_BUILD_DIR/bin INCLUDE_PATH=$DEP_BUILD_DIR/include LIBRARY_PATH=$DEP_BUILD_DIR/lib make -f win32/Makefile.gcc -j$CORES
+    prefix=$DEP_BUILD_DIR BINARY_PATH=$DEP_BUILD_DIR/bin INCLUDE_PATH=$DEP_BUILD_DIR/include LIBRARY_PATH=$DEP_BUILD_DIR/lib make -f win32/Makefile.gcc install
+}
+function build_cmake {
+    if [ ! -d $ROOT/$1/_build ]; then
+        mkdir $ROOT/$1/_build
+    fi
+    cd $ROOT/$1/_build
+    shift
+    cmake \
+        -DBUILD_SHARED_LIBS=OFF \
+        -DCMAKE_BUILD_TYPE="Release" \
+        -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
+        -DCMAKE_INSTALL_PREFIX="$DEP_BUILD_DIR" \
+        "$@" \
+        ..
+    make -j$CORES
+    make install 
+}
+rm install.log
+if [ ! -f $TOOLCHAIN_FILE ]; then
+    cat > $TOOLCHAIN_FILE <<END
+SET(CMAKE_SYSTEM_NAME Windows)
+
+# compilers - here the default mingw location is set. If it's installed in a different location, change accordingly
+SET(CMAKE_C_COMPILER /usr/bin/i686-w64-mingw32-gcc)
+SET(CMAKE_CXX_COMPILER /usr/bin/i686-w64-mingw32-g++)
+SET(CMAKE_RC_COMPILER /usr/bin/i686-w64-mingw32-windres)
+
+# The following line tells cmake where to look for libraries and include files. Set it according to your setup
+SET(CMAKE_FIND_ROOT_PATH ${DEP_BUILD_DIR}/) 
+
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM BOTH)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+
+set(MING_DLL_PATH /usr/lib/gcc/i686-w64-mingw32/7.3-win32/)
+END
+fi
+
+start_log
+
+get_code http://downloads.xiph.org/releases/ogg/libogg-1.3.3.tar.gz
+build_autoconf libogg-1.3.3
+
+get_code http://downloads.xiph.org/releases/flac/flac-1.3.2.tar.xz
+build_autoconf flac-1.3.2
+
+get_code http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.6.tar.gz
+build_autoconf libvorbis-1.3.6
+
+get_code http://zlib.net/zlib-1.2.11.tar.gz
+build_zlib
+
+get_code https://sourceforge.net/projects/libpng/files/libpng16/older-releases/1.6.29/libpng-1.6.29.tar.gz
+build_autoconf libpng-1.6.29
+
+get_code http://downloads.sourceforge.net/project/freetype/freetype2/2.8/freetype-2.8.tar.gz
+build_cmake freetype-2.8 '-DWITH_ZLIB=ON' '-DWITH_PNG=ON'
+
+get_code https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip
+cp $ROOT/SFML-2.5.1/extlibs/bin/x86/openal32.dll  $DEP_BUILD_DIR/bin/OpenAL32.dll
+cp $ROOT/SFML-2.5.1/extlibs/headers/AL/* $DEP_BUILD_DIR/include
+build_cmake SFML-2.5.1 '-DOPENAL_INCLUDE_DIR=$DEP_BUILD_DIR/bin'
+
+
+echo ">>> building Empty Epsilon" 
+echo ">>> building Empty Epsilon" >&3
+
+get_code https://github.com/daid/SeriousProton/archive/EE-2018.09.06.tar.gz
+SERIOUS_PROTON_DIR="$ROOT/SeriousProton-EE-2018.09.06"
+
+if [ ! -d $EE_BUILD_DIR ]; then
+    mkdir $EE_BUILD_DIR
+fi
+
+cd $EE_BUILD_DIR
+cmake \
+    -DCMAKE_CXX_FLAGS="-I$DEP_BUILD_DIR/include -L$DEP_BUILD_DIR/lib" \
+    -CMAKE_EXE_LINKER_FLAGS="-static-libstdc++ -static-libgcc" \
+    -DCMAKE_BUILD_TYPE="Release" \
+    -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
+    -DCMAKE_PREFIX_PATH="$DEP_BUILD_DIR" \
+    -DSERIOUS_PROTON_DIR="$SERIOUS_PROTON_DIR" \
+    -DSFML_DIR="$DEP_BUILD_DIR/lib/cmake/SFML" \
+    -DSFML_STATIC_LIBRARIES=TRUE \
+    -DCMAKE_VERBOSE_MAKEFILE=ON \
+    "$EE"
+
+# hack : SFML adds -lOpenGL32 to linked libs but it is case sensitive in linux
+
+sed -e s/" -lOpenGL32 "/" -lopengl32 "/ -i $EE_BUILD_DIR/CMakeFiles/EmptyEpsilon.dir/linklibs.rsp 
+
+make -j$CORES
+
+stop_log
+
+if [ 0 == $? ]; then
+    echo "Done!" 
+    if [ -f "$EE_BUILD_DIR/EmptyEpsilon.exe" ]; then
+        echo "check out $EE_BUILD_DIR/EmptyEpsilon.exe" 
+    else
+        echo "but $EE_BUILD_DIR/EmptyEpsilon.exe is missing :("
+        exit 1
+    fi
+fi
+
+exit $?

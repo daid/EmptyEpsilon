@@ -377,9 +377,9 @@ include_directories(${SERIOUS_PROTON_DIR}/src)
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
 ## Setup SFML
-find_package(SFML 2.3 REQUIRED system window graphics network audio)
+find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)
 include_directories(${SFML_INCLUDE_DIR})
-target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
+target_link_libraries(${EXECUTABLE_NAME} sfml-system sfml-window sfml-graphics sfml-audio sfml-network)
 
 # Setup OpenGl
 find_package(OpenGL REQUIRED)
