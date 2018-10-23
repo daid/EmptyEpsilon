@@ -182,7 +182,7 @@ for cnt=1,5 do
 end
 
 template = ShipTemplate():setName("Jump Carrier"):setClass("Corvette", "Freighter"):setModel("transport_4_2")
-template:setDescription([[The Jump Carrier is a specialized Freigher. It does not carry any cargo, as it's cargo bay is taken up by a specialized jump drive and the energy storage required to run this jump drive.
+template:setDescription([[The Jump Carrier is a specialized Freighter. It does not carry any cargo, as it's cargo bay is taken up by a specialized jump drive and the energy storage required to run this jump drive.
 It is designed to carry other ships deep into space. So it has special docking parameters, allowing other ships to attach themselves to this ship.]])
 template:setHull(100)
 template:setShields(50, 50)
@@ -190,4 +190,50 @@ template:setSpeed(50, 6, 10)
 template:setRadarTrace("radar_transport.png")
 template:setJumpDrive(true)
 template:setJumpDriveRange(5000, 100 * 50000) --The jump carrier can jump a 100x longer distance then normal jump drives.
-template:setDockClasses("Starfighter", "Frigates", "Corvette")
+template:setDockClasses("Starfighter", "Frigate", "Corvette")
+--template:setSharesEnergyWithDocked(true)
+
+variation = template:copy("Benedict"):setType("playership"):setClass("Corvette","Freighter/Carrier")
+variation:setDescription("Benedict is an improved version of the Jump Carrier")
+variation:setShields(70, 70)
+variation:setHull(200)
+variation:setSpeed(60, 6, 8)
+--                  Arc, Dir, Range, CycleTime, Dmg
+variation:setBeam(0, 10,   0, 1500.0, 6.0, 4)
+variation:setBeam(1, 10, 180, 1500.0, 6.0, 4)
+--								 Arc, Dir, Rotate speed
+variation:setBeamWeaponTurret( 0, 90,   0, 6)
+variation:setBeamWeaponTurret( 1, 90, 180, 6)
+variation:setCombatManeuver(400, 250)
+variation:setJumpDriveRange(5000, 90000) 
+
+variation:setRepairCrewCount(6)
+variation:addRoomSystem(3,0,2,3, "Reactor")
+variation:addRoomSystem(3,3,2,3, "Warp")
+variation:addRoomSystem(6,0,2,3, "JumpDrive")
+variation:addRoomSystem(6,3,2,3, "MissileSystem")
+variation:addRoomSystem(5,2,1,2, "Maneuver")
+variation:addRoomSystem(2,2,1,2, "RearShield")
+variation:addRoomSystem(0,1,2,4, "Beamweapons")
+variation:addRoomSystem(8,2,1,2, "FrontShield")
+variation:addRoomSystem(9,1,2,4, "Impulse")
+
+variation:addDoor(3, 3, true)
+variation:addDoor(6, 3, true)
+variation:addDoor(5, 2, false)
+variation:addDoor(6, 3, false)
+variation:addDoor(3, 2, false)
+variation:addDoor(2, 3, false)
+variation:addDoor(8, 2, false)
+variation:addDoor(9, 3, false)
+
+var2 = variation:copy("Kiriya")
+var2:setDescription("Kiriya is an improved warp drive version of the Jump Carrier")
+--                  Arc, Dir, Range, CycleTime, Dmg
+var2:setBeam(0, 10,   0, 1500.0, 6.0, 4)
+var2:setBeam(1, 10, 180, 1500.0, 6.0, 4)
+--								 Arc, Dir, Rotate speed
+var2:setBeamWeaponTurret( 0, 90,   0, 6)
+var2:setBeamWeaponTurret( 1, 90, 180, 6)
+var2:setJumpDrive(false)
+var2:setWarpSpeed(750)
