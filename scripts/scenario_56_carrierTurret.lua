@@ -1,68 +1,45 @@
--- Name: Defender Hunter
--- Description: Defend home station and hunt down enemies
---- 
---- Initially, you're tasked with defending your home base.  Over time, you'll discover more about the enemies harassing you and you'll be ordered to find and destroy the enemies responsible.  There may be various missions given along the way, but the enemy harassment will continue.  You must balance your two missions.
+-- Name: Carriers and turrets
+-- Description: Three player ships: a carrier and two smaller ships docked with the carrier. Objective: search out and find the enemy. Use the carrier to travel long distances.
 ---
---- Designed for 1-8 cooperating player ships.  Randomization makes many details different for each game, but the primary goals remain the same.  Untimed variations can take an hour or longer for full mission completion.  Different sub-missions may be chosen by the players or will be chosen at random.  Achieving victory in a timed hunter variation is quite a challenge.  Like the Waves scenario, the enemies get harder over time.
----
---- Features: 
---- - Randomly selected player ship names based on type (not just the default call sign generation)
---- - Simple mix of variations based on time and difficulty
---- - Named stations with cargo type often related to name
---- - Some cargo based missions
---- - Mortal but replaceable at station repair crew
---- - Asteroids and nebulae in motion
---- - Intense pacing
---- - Player fighters may activate auto-cooling in engineering
----
---- Version 8 - 6Oct2018
--- Type: Replayable mission
+--- Carrier and several player ships with turrets available for use by the players made available with this scenario script and the associated files.
+-- Type: Mission
 -- Variation[Easy]: Easy goals and/or enemies
 -- Variation[Hard]: Hard goals and/or enemies
--- Variation[Timed Defender]: Victory if home station survives after 30 minutes
--- Variation[Timed Hunter]: Victory if target enemy base destroyed in 30 minutes
--- Variation[Easy Timed Defender]: Easy goals and/or enemies, victory if home station survives after 30 minutes
--- Variation[Easy Timed Hunter]: Easy goals and/or enemies, victory if target enemy base destroyed in 30 minutes
--- Variation[Hard Timed Defender]: Hard goals and/or enemies, victory if home station survives after 30 minutes
--- Variation[Hard Timed Hunter]: Hard goals and/or enemies, victory if target enemy base destroyed in 30 minutes
+-- Variation[Very Easy]: Very Easy goals and/or enemies
+
+-- If you find that your crew cannot resist the do not push button,
+-- change "plot4 = doNotPush" to "plot4 = nil" in this scenario file
 
 -- typical colors used in ship log
 -- 	"Red"			Red									Enemies spotted
 --	"Blue"			Blue
---	"Yellow"		Yellow								Maria Shrivner
+--	"Yellow"		Yellow								
 --	"Magenta"		Magenta								Headquarters
 --	"Green"			Green
 --	"Cyan"			Cyan
 --	"Black"			Black
 --	"#555555"		Dark gray			"55,55,55"
---	"#ff4500"		Orange red			"255,69,0"		HMS Bounty
---	"#ff7f50"		Coral				"255,127,80"
---	"#5f9ea0"		Cadet blue			"95,158,160"	Paul Straight
---	"#4169e1"		Royal blue			"65,105,225"
---	"#8a2be2"		Blue violet			"138,43,226"
---	"#ba55d3"		Medium orchid		"186,85,211"	Maria's station
---	"#a0522d"		Sienna				"160,82,45"
---	"#b29650"		Arbitrary			"178,150,80"
---	"#556b2f"		Dark olive green	"85,107,47"		Home station
+--	"#ff4500"		Orange red			"255,69,0"		
+--	"#ff7f50"		Coral				"255,127,80"	
+--	"#5f9ea0"		Cadet blue			"95,158,160"	scientist station
+--	"#4169e1"		Royal blue			"65,105,225"	
+--	"#8a2be2"		Blue violet			"138,43,226"	doctor station
+--	"#ba55d3"		Medium orchid		"186,85,211"	
+--	"#a0522d"		Sienna				"160,82,45"		
+--	"#b29650"		Arbitrary			"178,150,80"	repair station
+--	"#556b2f"		Dark olive green	"85,107,47"		tractor ship
 --	"#228b22"		Forest green		"34,139,34"
 --	"#b22222"		Firebrick			"178,34,34"
 
 require("utils.lua")
 
---[[-------------------------------------------------------------------
-	Initialization routines
---]]-------------------------------------------------------------------
 function init()
-	wfv = "nowhere"		--wolf fence value - used for debugging
-	setVariations()
-	setMovingAsteroids()
-	setMovingNebulae()
-	setWormArt()
 	missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 	--Ship Template Name List
-	stnl = {"MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Ranus U","Nirvana R5A","Stalker Q7","Stalker R7","Atlantis X23","Starhammer II","Odin","Fighter","Cruiser","Missile Cruiser","Strikeship","Adv. Striker","Dreadnought","Battlestation","Blockade Runner","Ktlitan Fighter","Ktlitan Breaker","Ktlitan Worker","Ktlitan Drone","Ktlitan Feeder","Ktlitan Scout","Ktlitan Destroyer"}
+	stnl = {"MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Ranus U","Nirvana R5A","Stalker Q7","Stalker R7","Atlantis X23","Starhammer II","Odin","Flavia Falcon","Fighter","Karnack","Cruiser","Missile Cruiser","Gunship","Adv. Gunship","Strikeship","Adv. Striker","Dreadnought","Battlestation","Blockade Runner","Ktlitan Fighter","Ktlitan Breaker","Ktlitan Worker","Ktlitan Drone","Ktlitan Feeder","Ktlitan Scout","Ktlitan Destroyer"}
 	--Ship Template Score List
-	stsl = {5            ,5            ,7          ,6          ,7            ,8          ,15         ,16         ,15          ,15           ,25       ,20           ,25          ,25          ,50            ,70             ,250   ,6        ,18       ,14               ,30          ,27            ,80           ,100            ,65               ,6                ,45               ,40              ,4              ,48              ,8              ,50}
+	stsl = {5            ,5            ,7          ,6          ,7            ,8          ,15         ,16         ,15          ,15           ,25       ,20           ,25          ,25          ,50            ,70             ,250   ,9              ,6        ,17       ,18       ,14               ,27       ,28            ,30          ,27            ,80           ,100            ,65               ,6                ,45               ,40              ,4              ,48              ,8              ,50}
+	difficulty = 1
 	--Player Ship Beams
 	psb = {}
 	psb["MP52 Hornet"] = 2
@@ -74,7 +51,6 @@ function init()
 	psb["Striker"] = 2
 	psb["ZX-Lindworm"] = 1
 	psb["Ender"] = 12
-	psb["Repulse"] = 2
 	psb["Benedict"] = 2
 	psb["Kiriya"] = 2
 	psb["Nautilus"] = 2
@@ -84,7 +60,6 @@ function init()
 	-- rough hexagonal deployment
 	fleetPosDelta2x = {0,2,-2,1,-1, 1, 1,4,-4,0, 0,2,-2,-2, 2,3,-3, 3,-3,6,-6,1,-1, 1,-1,3,-3, 3,-3,4,-4, 4,-4,5,-5, 5,-5}
 	fleetPosDelta2y = {0,0, 0,1, 1,-1,-1,0, 0,2,-2,2,-2, 2,-2,1,-1,-1, 1,0, 0,3, 3,-3,-3,3,-3,-3, 3,2,-2,-2, 2,1,-1,-1, 1}
-	--list of goods available to buy, sell or trade (sell still under development)
 	goodsList = {	{"food",0},
 					{"medicine",0},
 					{"nickel",0},
@@ -113,22 +88,19 @@ function init()
 					{"software",0},
 					{"circuit",0},
 					{"battery",0}	}
-	diagnostic = false			
+	diagnostic = false
 	GMDiagnosticOn = "Turn On Diagnostic"
 	addGMFunction(GMDiagnosticOn,turnOnDiagnostic)
-	interWave = 280			
+	interWave = 280				
 	GMDelayNormalToSlow = "Delay normal to slow"
 	addGMFunction(GMDelayNormalToSlow,delayNormalToSlow)
-	goods = {}					--overall tracking of goods
-	stationList = {}			--friendly and neutral stations
-	friendlyStationList = {}	
+	goods = {}
+	stationList = {}
+	friendlyStationList = {}
 	enemyStationList = {}
-	tradeFood = {}				--stations that will trade food for other goods
-	tradeLuxury = {}			--stations that will trade luxury for other goods
-	tradeMedicine = {}			--stations that will trade medicine for other goods
-	totalStations = 0
-	friendlyStations = 0
-	neutralStations = 0
+	tradeFood = {}
+	tradeLuxury = {}
+	tradeMedicine = {}
 	--array of functions to facilitate randomized station placement (friendly and neutral)
 	placeStation = {placeAlcaleica,			-- 1
 					placeAnderson,			-- 2
@@ -221,19 +193,6 @@ function init()
 					placeScarletCit,		--10
 					placeStahlstadt,		--11
 					placeTic}				--12
-	--gossip will have meaning for a future mission addition. Right now, it's just color
-	gossipSnippets = {}
-	table.insert(gossipSnippets,"I hear the head of operations has a thing for his administrative assistant")	--1
-	table.insert(gossipSnippets,"My mining friends tell me Krak or Kruk is about to strike it rich")			--2
-	table.insert(gossipSnippets,"Did you know you can usually hire replacement repair crew cheaper at friendly stations?")		--3
-	table.insert(gossipSnippets,"Under their uniforms, the Kraylors have an extra appendage. I wonder what they use it for")	--4
-	table.insert(gossipSnippets,"The Kraylors may be human navy enemies, but they make some mighty fine BBQ Mynock")			--5
-	table.insert(gossipSnippets,"The Kraylors and the Ktlitans may be nearing a cease fire from what I hear. That'd be bad news for us")		--6
-	table.insert(gossipSnippets,"Docking bay 7 has interesting mind altering substances for sale, but they're monitored between 1900 and 2300")	--7
-	table.insert(gossipSnippets,"Watch the sky tonight in quadrant J around 2243. It should be spectacular")					--8
-	table.insert(gossipSnippets,"I think the shuttle pilot has a tame miniature Ktlitan caged in his quarters. Sometimes I hear it at night")	--9
-	table.insert(gossipSnippets,"Did you hear the screaming chase in the corridors on level 4 last night? Three Kraylors were captured and put in the brig")	--10
-	table.insert(gossipSnippets,"Rumor has it that the two Lichten brothers are on the verge of a new discovery. And it's not another wine flavor either")		--11
 	buildStations()
 	--Player ship name lists to supplant standard randomized call sign generation
 	playerShipNamesForMP52Hornet = {"Dragonfly","Scarab","Mantis","Yellow Jacket","Jimminy","Flik","Thorny","Buzz"}
@@ -258,28 +217,104 @@ function init()
 	secondaryOrders = ""
 	optionalOrders = ""
 	transportList = {}
-	homeDelivery = false
-	infoPromised = false
-	baseIntelligenceAvailable = false
-	spinUpgradeAvailable = false
-	hullUpgradeAvailable = false
-	rotateUpgradeAvailable = false
-	beamTimeUpgradeAvailable = false
-	missionLength = 1
-	initialOrderTimer = 3
-	plot1 = initialOrders
 	transportSpawnDelay = 10
 	plotT = transportPlot
+	plotC = cargoTransfer
 	plotH = healthCheck
-	plotC = autoCoolant
 	healthCheckTimer = 5
 	healthCheckTimerInterval = 5
 	healthCheckCount = 0
-	plot4choices = {}
-	table.insert(plot4choices,stationShieldDelay)
-	table.insert(plot4choices,repairBountyDelay)
-	table.insert(plot4choices,insertAgentDelay)
+	missionLength = 1
+	initialOrderTimer = 3
+	plot1 = initialOrders
+	startx = 0
+	starty = 0
+	offsetList = getObjectsInRadius(startx,starty,1500)
+	if #offsetList > 0 then
+		repeat
+			jx, jy = vectorFromAngle(random(0,360),1600)
+			nox, noy = offsetList[1]:getPosition()
+			startx = nox+jx
+			starty = noy+jy
+			offsetList = getObjectsInRadius(startx,starty,1500)
+		until(#offsetList < 1)
+	end
+	if math.random() < .5 then
+		playerCarrier = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Benedict")
+	else
+		playerCarrier = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Kiriya")
+	end
+	playerCarrier:setPosition(startx,starty):setRotation(-90):commandTargetRotation(-90)
+	if diagnostic then		--make carrier ridiculously powerful for mission diagnostic test purposes
+		playerCarrier:setBeamWeapon(0, 10,   0, 1500.0, 1.0, 104):setBeamWeapon(1, 10, 180, 1500.0, 1.0, 104):setBeamWeaponHeatPerFire(0,playerCarrier:getBeamWeaponHeatPerFire(0)*.01):setBeamWeaponHeatPerFire(1,playerCarrier:getBeamWeaponHeatPerFire(1)*.01)
+		playerCarrier:setBeamWeaponTurret(0,270,0,6):setBeamWeaponTurret(1,270,180,6):setBeamWeaponEnergyPerFire(0,1):setBeamWeaponEnergyPerFire(1,1)
+	end
+	if math.random() < .5 then
+		playerBlade = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Striker"):setJumpDrive(false):setWarpDrive(false)
+		playerBlade:setPosition(startx-240,starty):commandDock(playerCarrier):setRotation(-180):commandTargetRotation(-180)
+	else
+		playerBlade = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Repulse"):setJumpDrive(false):setWarpDrive(false)
+		playerBlade:setPosition(startx-240,starty):commandDock(playerCarrier):setRotation(-180):commandTargetRotation(-180)
+	end
+	if math.random() < .5 then
+		playerPoint = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Piranha"):setJumpDrive(false):setWarpDrive(false)
+		playerPoint:setPosition(startx+175,starty):commandDock(playerCarrier):setRotation(0):commandTargetRotation(0)
+	else
+		playerPoint = PlayerSpaceship():setFaction("Human Navy"):setTemplate("ZX-Lindworm"):setJumpDrive(false):setWarpDrive(false)
+		playerPoint:setPosition(startx+175,starty):commandDock(playerCarrier):setRotation(0):commandTargetRotation(0)
+	end
+	plotH = healthCheck
+	healthCheckTimer = 5
+	healthCheckTimerInterval = 5
+	healthCheckCount = 0
+	setMovingAsteroids()
+	plot2choices = {}
+	table.insert(plot2choices,upgradeShipSpin)
+	table.insert(plot2choices,locateTargetEnemyBase)
+	table.insert(plot2choices,rescueDyingScientist)
+	GMStartPlot2upgradeShipSpin = "P2 upgrade spin"
+	GMStartPlot2locateTargetEnemyBase = "P2 locate enemy base"
+	GMStartPlot2rescueDyingScientist = "P2 rescue scientist"
+	addGMFunction(GMStartPlot2upgradeShipSpin,gmPlot2upgradeShipSpin)
+	addGMFunction(GMStartPlot2locateTargetEnemyBase,gmPlot2locateEnemyBase)
+	addGMFunction(GMStartPlot2rescueDyingScientist,gmPlot2rescueDyingScientist)
+	plot3choices = {}
+	table.insert(plot3choices,upgradeBeamDamage)
+	table.insert(plot3choices,tractorDisabledShip)
+	table.insert(plot3choices,addTubeToShip)
+	GMStartPlot3upgradeBeamDamage = "P3 upgrade beam dmg"
+	GMStartPlot3tractorDisabledShip = "P3 tractor ship"
+	GMStartPlot3addTubeToShip = "P3 add tube"
+	addGMFunction(GMStartPlot3upgradeBeamDamage,gmPlot3upgradeBeamDamage)
+	addGMFunction(GMStartPlot3tractorDisabledShip,gmPlot3tractorDisabledShip)
+	addGMFunction(GMStartPlot3addTubeToShip,gmPlot3addTubeToShip)
+	--plot 4 choices will come eventually, just not with this release
 	wfv = "end of init"
+end
+--plot based GM functions
+function gmPlot2upgradeShipSpin()
+	nextPlot2 = upgradeShipSpin
+	removeGMFunction(GMStartPlot2upgradeShipSpin)
+end
+function gmPlot2locateEnemyBase()
+	nextPlot2 = locateTargetEnemyBase
+	removeGMFunction(GMStartPlot2locateTargetEnemyBase)
+end
+function gmPlot2rescueDyingScientist()
+	nextPlot2 = rescueDyingScientist
+	removeGMFunction(GMStartPlot2rescueDyingScientist)
+end
+function gmPlot3upgradeBeamDamage()
+	nextPlot3 = upgradeBeamDamage
+	removeGMFunction(GMStartPlot3upgradeBeamDamage)
+end
+function gmPlot3tractorDisabledShip()
+	nextPlot3 = tractorDisabledShip
+	removeGMFunction(GMStartPlot3tractorDisabledShip)
+end
+function gmPlot3addTubeToShip()
+	nextPlot3 = addTubeToShip
+	removeGMFunction(GMStartPlot3addTubeToShip)
 end
 -- Let the GM spawn a random group of enemies to attack a player
 function GMSpawnsEnemies()
@@ -341,67 +376,24 @@ function delayFastToNormal()
 end
 --translate variations into a numeric difficulty value
 function setVariations()
-	if string.find(getScenarioVariation(),"Easy") then
+	if string.find(getScenarioVariation(),"Very Easy") then
+		difficulty = .2
+	elseif string.find(getScenarioVariation(),"Easy") then
 		difficulty = .5
 	elseif string.find(getScenarioVariation(),"Hard") then
 		difficulty = 2
 	else
-		difficulty = 1		--default (normal)
+		difficulty = 1
 	end
 	gameTimeLimit = 0
 	if string.find(getScenarioVariation(),"Timed") then
 		timedIntelligenceInterval = 200
 		playWithTimeLimit = true
-		gameTimeLimit = 30*60		
+		gameTimeLimit = 30*60
 		plot6 = timedGame
 	else
 		timedIntelligenceInterval = 300
 		playWithTimeLimit = false
-	end
-end
--- dynamic universe functions: asteroids and nebulae in motion
-function setMovingNebulae()
-	movingNebulae = {}
-	upperNeb = math.random(5,10)
-	for nidx=1,upperNeb do
-		xNeb = random(-100000,100000)
-		yNeb = random(-100000,100000)
-		mNeb = Nebula():setPosition(xNeb, yNeb)
-		mNeb.angle = random(0,360)
-		mNeb.travel = random(1,100)
-		table.insert(movingNebulae,mNeb)
-	end
-	plotN = moveNebulae
-end
-
-function moveNebulae(delta)
-	for nidx=1,#movingNebulae do
-		mnx, mny = movingNebulae[nidx]:getPosition()
-		angleChange = false
-		if mnx < -100000 then
-			angleChange = true
-			movingNebulae[nidx].angle = random(0,180) + 270
-		end
-		if mnx > 100000 then
-			angleChange = true
-			movingNebulae[nidx].angle = random(90,270)
-		end
-		if mny < -100000 then
-			angleChange = true
-			movingNebulae[nidx].angle = random(0,180)
-		end
-		if mny > 100000 then
-			angleChange = true
-			movingNebulae[nidx].angle = random(180,360)
-		end
-		if angleChange then
-			deltaNebx, deltaNeby = vectorFromAngle(movingNebulae[nidx].angle, movingNebulae[nidx].travel/10+20)
-			movingNebulae[nidx]:setPosition(mnx+deltaNebx, mny+deltaNeby)
-			movingNebulae.travel = random(1,100)
-		else
-			deltaNebx, deltaNeby = vectorFromAngle(movingNebulae[nidx].angle, movingNebulae[nidx].travel/10)
-			movingNebulae[nidx]:setPosition(mnx+deltaNebx, mny+deltaNeby)
-		end
 	end
 end
 
@@ -410,26 +402,15 @@ function setMovingAsteroids()
 	for aidx=1,30 do
 		xAst = random(-100000,100000)
 		yAst = random(-100000,100000)
-		outRange = true
-		for p2idx=1,8 do
-			p2obj = getPlayerShip(p2idx)
-			if p2obj ~= nil and p2obj:isValid() then
-				if distance(p2obj,xAst,yAst) < 30000 then
-					outRange = false
-				end
-			end
+		mAst = Asteroid():setPosition(xAst,yAst)
+		mAst.angle = random(0,360)
+		mAst.travel = random(40,220)
+		if random(1,100) < 85 then
+			mAst.curve = 0
+		else
+			mAst.curve = math.random()*.16 - .08
 		end
-		if outRange then
-			mAst = Asteroid():setPosition(xAst,yAst)
-			mAst.angle = random(0,360)
-			mAst.travel = random(40,220)
-			if random(1,100) < 50 then
-				mAst.curve = 0
-			else
-				mAst.curve = math.random()*.16 - .08
-			end
-			table.insert(movingAsteroidList,mAst)
-		end
+		table.insert(movingAsteroidList,mAst)
 	end
 	plotA = moveAsteroids
 end
@@ -442,7 +423,7 @@ function moveAsteroids(delta)
 			mAstx, mAsty = aObj:getPosition()
 			if mAstx < -150000 or mAstx > 150000 or mAsty < -150000 or mAsty > 150000 then
 				aObj.angle = random(0,360)
-				if random(1,100) < 50 then
+				if random(1,100) < 85 then
 					curve = 0
 				else
 					curve = math.random()*.08
@@ -487,8 +468,42 @@ function moveAsteroids(delta)
 		setMovingAsteroids()
 	end
 end
+-- Create amount of objects of type object_type along arc
+-- Center defined by x and y
+-- Radius defined by distance
+-- Start of arc between 0 and 360 (startArc), end arc: endArcClockwise
+-- Use randomize to vary the distance from the center point. Omit to keep distance constant
+-- Example:
+--   createRandomAlongArc(Asteroid, 100, 500, 3000, 65, 120, 450)
+function createRandomAlongArc(object_type, amount, x, y, distance, startArc, endArcClockwise, randomize)
+	if randomize == nil then randomize = 0 end
+	if amount == nil then amount = 1 end
+	arcLen = endArcClockwise - startArc
+	if startArc > endArcClockwise then
+		endArcClockwise = endArcClockwise + 360
+		arcLen = arcLen + 360
+	end
+	if amount > arcLen then
+		for ndex=1,arcLen do
+			radialPoint = startArc+ndex
+			pointDist = distance + random(-randomize,randomize)
+			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+		end
+		for ndex=1,amount-arcLen do
+			radialPoint = random(startArc,endArcClockwise)
+			pointDist = distance + random(-randomize,randomize)
+			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+		end
+	else
+		for ndex=1,amount do
+			radialPoint = random(startArc,endArcClockwise)
+			pointDist = distance + random(-randomize,randomize)
+			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
+		end
+	end
+end
 -- Organically (simulated asymetrically) grow stations from a central grid location
--- Order of creation: friendlies, planet, neutrals, black hole, generic enemies, leading enemies
+-- Order of creation: friendlies, neutrals, generic enemies, leading enemies
 -- Statistically, the enemy stations typically end up on the edge, a fair distance away, but not always
 function buildStations()
 	gbLow = 1		--grid boundary low
@@ -539,59 +554,16 @@ function buildStations()
 		if j == 1 then								--identify first station as home station
 			homeStation = pStation
 		end
-		if #gossipSnippets > 0 then
-			if gp % 2 == 0 then
-				ni = math.random(1,#gossipSnippets)
-				pStation.gossip = gossipSnippets[ni]
-				table.remove(gossipSnippets,ni)
-			end
-		end
 		gp = gp + 1						--set next station number
 		rn = math.random(1,#adjList)	--random next station start location
 		gx = adjList[rn][1]
 		gy = adjList[rn][2]
 	end
-	--insert a planet
-	tSize = 7
-	grid[gx][gy] = gp
-	gRegion = {}
-	table.insert(gRegion,{gx,gy})
-	for i=1,tSize do
-		adjList = getAdjacentGridLocations(gx,gy)
-		if #adjList < 1 then
-			break
-		end
-		rd = math.random(1,#adjList)
-		grid[adjList[rd][1]][adjList[rd][2]] = gp
-		table.insert(gRegion,{adjList[rd][1],adjList[rd][2]})
-	end
-	adjList = getAdjacentGridLocations(gx,gy)
-	if #adjList < 1 then
-		adjList = getAllAdjacentGridLocations(gx,gy)	
-	else
-		if random(1,5) >= 2 then
-			adjList = getAllAdjacentGridLocations(gx,gy)
-		end
-	end
-	sri = math.random(1,#gRegion)
-	aldx = (gRegion[sri][1] - (gbHigh/2))*gSize
-	aldy = (gRegion[sri][2] - (gbHigh/2))*gSize
-	alderaan= Planet():setPosition(aldx,aldy):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setCallSign("Alderaan")
-	alderaan:setPlanetSurfaceTexture("planets/planet-1.png"):setPlanetCloudTexture("planets/clouds-1.png")
-	alderaan:setPlanetAtmosphereTexture("planets/atmosphere.png"):setPlanetAtmosphereColor(0.2,0.2,1.0)
-	alderaan:setAxialRotationTime(400.0):setDescription("Lush planet with only mild seasonal variations")
-	stationAnet = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
-	stationAnet:setPosition(aldx,aldy+3000):setCallSign("ANet"):setDescription("Alderaan communications network hub")
-	stationAnet.angle = 90
-	gp = gp + 1
-	rn = math.random(1,#adjList)
-	gx = adjList[rn][1]
-	gy = adjList[rn][2]
 	--place independent stations
 	stationFaction = "Independent"
 	fb = gp	--set faction boundary (between friendly and neutral)
 	for j=1,30 do
-		tSize = math.random(2,5)	--tack on to region size
+		tSize = math.random(3,6)	--tack on to region size
 		grid[gx][gy] = gp
 		gRegion = {}				--grow region
 		table.insert(gRegion,{gx,gy})
@@ -634,41 +606,11 @@ function buildStations()
 		gx = adjList[rn][1]
 		gy = adjList[rn][2]
 	end
-	--insert a black hole
-	tSize = 7
-	grid[gx][gy] = gp
-	gRegion = {}
-	table.insert(gRegion,{gx,gy})
-	for i=1,tSize do
-		adjList = getAdjacentGridLocations(gx,gy)
-		if #adjList < 1 then
-			break
-		end
-		rd = math.random(1,#adjList)
-		grid[adjList[rd][1]][adjList[rd][2]] = gp
-		table.insert(gRegion,{adjList[rd][1],adjList[rd][2]})
-	end
-	adjList = getAdjacentGridLocations(gx,gy)
-	if #adjList < 1 then
-		adjList = getAllAdjacentGridLocations(gx,gy)	
-	else
-		if random(1,5) >= 2 then
-			adjList = getAllAdjacentGridLocations(gx,gy)
-		end
-	end
-	sri = math.random(1,#gRegion)
-	bhx = (gRegion[sri][1] - (gbHigh/2))*gSize
-	bhy = (gRegion[sri][2] - (gbHigh/2))*gSize
-	BlackHole():setPosition(bhx,bhy)
-	gp = gp + 1
-	rn = math.random(1,#adjList)
-	gx = adjList[rn][1]
-	gy = adjList[rn][2]
 	--place enemy stations (from generic pool)
-	stationFaction = "Kraylor"
+	stationFaction = "Ktlitans"
 	fb = gp	--set faction boundary (between neutral and enemy)
 	for j=1,5 do
-		tSize = math.random(3,6)	--tack on to region size
+		tSize = math.random(4,7)	--tack on to region size
 		grid[gx][gy] = gp
 		gRegion = {}				--grow region
 		table.insert(gRegion,{gx,gy})
@@ -712,10 +654,10 @@ function buildStations()
 		gy = adjList[rn][2]
 	end
 	--place enemy stations (from enemy pool)
-	stationFaction = "Kraylor"
+	stationFaction = "Ktlitans"
 	fb = gp	--set faction boundary (between enemy and enemy leadership)
 	for j=1,2 do
-		tSize = math.random(4,6)	--tack on to region size
+		tSize = math.random(4,9)	--tack on to region size
 		grid[gx][gy] = gp
 		gRegion = {}				--grow region
 		table.insert(gRegion,{gx,gy})
@@ -752,27 +694,12 @@ function buildStations()
 		table.insert(enemyStationList,pStation)
 		if j == 2 then					--identify last placed enemy station as target enemy station
 			targetEnemyStation = pStation
-			if diagnostic then
-				pStation:setCallSign(pStation:getCallSign() .. " Target")
-			end
 		end
 		gp = gp + 1						--set next station number
 		rn = math.random(1,#adjList)	--random next station start location
 		gx = adjList[rn][1]
 		gy = adjList[rn][2]
 	end
-	--show adjacent list with a bunch of small stations for testing result purposes
-	--[[--
-	if #adjList >= 1 then
-		for i=1,#adjList do
-			tsix = adjList[i][1]
-			tsiy = adjList[i][2]
-			tsx = (tsix - 250)*gSize
-			tsy = (tsiy - 250)*gSize
-			SpaceStation():setTemplate("Small Station"):setCallSign(string.format("%i i:%i x:%i y:%i",sPool,i,tsix,tsiy)):setPosition(tsx,tsy)
-		end
-	end
-	--]]--
 	if not diagnostic then
 		placeRandomAroundPoint(Nebula,math.random(10,30),1,150000,0,0)
 	end
@@ -1139,15 +1066,19 @@ function getAdjacentGridLocationsSkip(dSkip,lx,ly)
 			end
 		end
 	end
-end
---Randomly choose station size template
+end--Randomly choose station size template unless overridden
 function szt()
+	if stationSize ~= nil then
+		sizeTemplate = stationSize
+		stationSize = nil
+		return sizeTemplate
+	end
 	stationSizeRandom = random(1,100)
-	if stationSizeRandom <= 8 then
+	if stationSizeRandom < 8 then
 		sizeTemplate = "Huge Station"		-- 8 percent huge
-	elseif stationSizeRandom <= 24 then
+	elseif stationSizeRandom < 24 then
 		sizeTemplate = "Large Station"		--16 percent large
-	elseif stationSizeRandom <= 50 then
+	elseif stationSizeRandom < 50 then
 		sizeTemplate = "Medium Station"		--26 percent medium
 	else
 		sizeTemplate = "Small Station"		--50 percent small
@@ -2736,7 +2667,6 @@ function placeTic()
 	stationTic:setPosition(psx,psy):setCallSign("Ticonderoga")
 	return stationTic
 end
-
 --[[-----------------------------------------------------------------
     Transport ship generation and handling 
 -----------------------------------------------------------------]]--
@@ -2849,7 +2779,12 @@ function transportPlot(delta)
 			else
 				name = name .. " Freighter " .. irandom(1, 5)
 			end
-			obj = CpuShip():setTemplate(name):setFaction('Independent'):setCommsScript(""):setCommsFunction(commsShip)
+			if random(1,100) < 20 then
+				tFaction = "Human Navy"
+			else
+				tFaction = "Independent"
+			end
+			obj = CpuShip():setTemplate(name):setFaction(tFaction):setCommsScript(""):setCommsFunction(commsShip)
 			obj.target = target
 			obj.undock_delay = irandom(1,4)
 			rifl = math.floor(random(1,#goodsList))	-- random item from list
@@ -2884,23 +2819,23 @@ function commsStation()
             EMP = "friend"
         },
         weapon_cost = {
-            Homing = math.random(1,4),
-            HVLI = math.random(1,3),
-            Mine = math.random(2,5),
-            Nuke = math.random(12,18),
-            EMP = math.random(7,13)
+            Homing = 2,
+            HVLI = 2,
+            Mine = 2,
+            Nuke = 15,
+            EMP = 10
         },
         services = {
             supplydrop = "friend",
             reinforcements = "friend",
         },
         service_cost = {
-            supplydrop = math.random(80,120),
-            reinforcements = math.random(125,175)
+            supplydrop = 100,
+            reinforcements = 150,
         },
         reputation_cost_multipliers = {
             friend = 1.0,
-            neutral = 3.0
+            neutral = 2.5
         },
         max_weapon_refill_amount = {
             friend = 1.0,
@@ -2947,98 +2882,16 @@ function handleDockedState()
 		missilePresence = missilePresence + player:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
-		if comms_target.nukeAvail == nil then
-			if math.random(1,10) <= (4 - difficulty) then
-				comms_target.nukeAvail = true
-			else
-				comms_target.nukeAvail = false
-			end
-			if math.random(1,10) <= (5 - difficulty) then
-				comms_target.empAvail = true
-			else
-				comms_target.empAvail = false
-			end
-			if math.random(1,10) <= (6 - difficulty) then
-				comms_target.homeAvail = true
-			else
-				comms_target.homeAvail = false
-			end
-			if math.random(1,10) <= (7 - difficulty) then
-				comms_target.mineAvail = true
-			else
-				comms_target.mineAvail = false
-			end
-			if math.random(1,10) <= (9 - difficulty) then
-				comms_target.hvliAvail = true
-			else
-				comms_target.hvliAvail = false
-			end
-		end
-		if comms_target.nukeAvail or comms_target.empAvail or comms_target.homeAvail or comms_target.mineAvail or comms_target.hvliAvail then
-			addCommsReply("I need ordnance restocked", function()
-				setCommsMessage("What type of ordnance?")
-				if player:getWeaponStorageMax("Nuke") > 0 then
-					if comms_target.nukeAvail then
-						if math.random(1,10) <= 5 then
-							nukePrompt = "Can you supply us with some nukes? ("
-						else
-							nukePrompt = "We really need some nukes ("
-						end
-						addCommsReply(nukePrompt .. getWeaponCost("Nuke") .. " rep each)", function()
-							handleWeaponRestock("Nuke")
-						end)
-					end
+		addCommsReply("I need ordnance restocked", function()
+			setCommsMessage("What type of ordnance?")
+			for _, missile_type in ipairs(missile_types) do
+				if player:getWeaponStorageMax(missile_type) > 0 then
+					addCommsReply(missile_type .. " (" .. getWeaponCost(missile_type) .. "rep each)", function()
+						handleWeaponRestock(missile_type)
+					end)
 				end
-				if player:getWeaponStorageMax("EMP") > 0 then
-					if comms_target.empAvail then
-						if math.random(1,10) <= 5 then
-							empPrompt = "Please re-stock our EMP missiles. ("
-						else
-							empPrompt = "Got any EMPs? ("
-						end
-						addCommsReply(empPrompt .. getWeaponCost("EMP") .. " rep each)", function()
-							handleWeaponRestock("EMP")
-						end)
-					end
-				end
-				if player:getWeaponStorageMax("Homing") > 0 then
-					if comms_target.homeAvail then
-						if math.random(1,10) <= 5 then
-							homePrompt = "Do you have spare homing missiles for us? ("
-						else
-							homePrompt = "Do you have extra homing missiles? ("
-						end
-						addCommsReply(homePrompt .. getWeaponCost("Homing") .. " rep each)", function()
-							handleWeaponRestock("Homing")
-						end)
-					end
-				end
-				if player:getWeaponStorageMax("Mine") > 0 then
-					if comms_target.mineAvail then
-						if math.random(1,10) <= 5 then
-							minePrompt = "We could use some mines. ("
-						else
-							minePrompt = "How about mines? ("
-						end
-						addCommsReply(minePrompt .. getWeaponCost("Mine") .. " rep each)", function()
-							handleWeaponRestock("Mine")
-						end)
-					end
-				end
-				if player:getWeaponStorageMax("HVLI") > 0 then
-					if comms_target.hvliAvail then
-						if math.random(1,10) <= 5 then
-							hvliPrompt = "What about HVLI? ("
-						else
-							hvliPrompt = "Could you provide HVLI? ("
-						end
-						addCommsReply(hvliPrompt .. getWeaponCost("HVLI") .. " rep each)", function()
-							handleWeaponRestock("HVLI")
-						end)
-					end
-				end
-			end)
-		end
+			end
+		end)
 	end
 	if player:isFriendly(comms_target) then
 		addCommsReply("What are my current orders?", function()
@@ -3050,7 +2903,7 @@ function handleDockedState()
 			setCommsMessage(ordMsg)
 			addCommsReply("Back", commsStation)
 		end)
-		if math.random(1,5) <= (3 - difficulty) then
+		if random(1,5) <= (3 - difficulty) then
 			if player:getRepairCrewCount() < player.maxRepairCrew then
 				hireCost = math.random(30,60)
 			else
@@ -3066,7 +2919,7 @@ function handleDockedState()
 			end)
 		end
 	else
-		if math.random(1,5) <= (3 - difficulty) then
+		if random(1,5) <= (3 - difficulty) then
 			if player:getRepairCrewCount() < player.maxRepairCrew then
 				hireCost = math.random(45,90)
 			else
@@ -3082,82 +2935,209 @@ function handleDockedState()
 			end)
 		end
 	end
-	if comms_target == homeStation then
-		if homeDelivery then
-			if plot2name == "easyDelivery" or plot4name == "randomDelivery" then
-				easyCargoAboard = false
-				randomCargoAboard = false
-				gi = 1
-				repeat
-					if goods[player][gi][1] == easyDeliverGood then
-						if goods[player][gi][2] > 0 then
-							easyCargoAboard = true
+	if plot2name == "spinScientist" then
+		if comms_target == spinScientistStation  and not spinUpgradeAvailable then
+			addCommsReply("Speak with Paulina Lindquist", function()
+				setCommsMessage(string.format("Greetings, %s, what can I do for you?",player:getCallSign()))
+				addCommsReply("Do you want to apply your engine research?", function()
+					setCommsMessage("Over the years, I've discovered that research does not pay very well. Do you have some kind of compensation in mind? Gold, platinum or luxury would do nicely")
+					gi = 1
+					giftQuantity = 0
+					repeat
+						if goods[player][gi][1] == "gold" then
+							giftQuantity = giftQuantity + goods[player][gi][2]
 						end
-					end
-					if goods[player][gi][1] == randomDeliverGood then
-						if goods[player][gi][2] > 0 then
-							randomCargoAboard = true
+						if goods[player][gi][1] == "platinum" then
+							giftQuantity = giftQuantity + goods[player][gi][2]
 						end
-					end
-					gi = gi + 1
-				until(gi > #goods[player])
-				if easyCargoAboard or randomCargoAboard then
-					addCommsReply("Provide cargo", function()
-						setCommsMessage("Do you have something for us?")
-						if easyCargoAboard then
-							homeStationEasyDelivery()					
+						if goods[player][gi][1] == "luxury" then
+							giftQuantity = giftQuantity + goods[player][gi][2]
 						end
-						if randomCargoAboard then
-							homeStationRandomDelivery()
-						end
-					end)
-				end
-			end
-		end
-		if infoPromised then
-			if spinUpgradeAvailable or beamTimeUpgradeAvailable or rotateUpgradeAvailable or baseIntelligenceAvailable or hullUpgradeAvailable then
-				addCommsReply("Request promised information", function()
-					setCommsMessage("Remind me what information I promised")
-					if spinUpgradeAvailable then
-						homeStationSpinUpgrade()
-					end
-					if beamTimeUpgradeAvailable then
-						homeStationBeamTimeUpgrade()
-					end
-					if rotateUpgradeAvailable then
-						homeStationRotateUpgrade()
-					end
-					if baseIntelligenceAvailable then
-						homeStationBaseIntelligence()
-					end
-					if hullUpgradeAvailable then
-						homeStationHullUpgrade()
+						gi = gi + 1
+					until(gi > #goods[player])
+					if giftQuantity > 0 then
+						addCommsReply("Offer compensation from cargo aboard", function()
+							gi = 1
+							giftList = {}
+							repeat
+								if goods[player][gi][1] == "gold" and goods[player][gi][2] > 0 then
+									table.insert(giftList,"gold")
+								end
+								if goods[player][gi][1] == "platinum" and goods[player][gi][2] > 0 then
+									table.insert(giftList,"platinum")
+								end
+								if goods[player][gi][1] == "luxury" and goods[player][gi][2] > 0 then
+									table.insert(giftList,"luxury")
+								end
+								gi = gi + 1
+							until(gi > #goods[player])
+							gifti = math.random(1,#giftList)
+							decrementPlayerGoods(giftList[gifti])
+							player.cargo = player.cargo + 1
+							setCommsMessage(string.format("Thanks for the %s. I've transmitted instructions on conducting the upgrade. Any friendly station can do the upgrade, but you'll need to provide impulse cargo for the upgrade",giftList[gifti]))
+							spinUpgradeAvailable = true
+							plot2reminder = "Get spin upgrade from friendly station for impulse"
+						end)
 					end
 					addCommsReply("Back", commsStation)
+				end)
+				addCommsReply("Back", commsStation)
+			end)
+		end
+	end
+	if plot3name == "tubeOfficer" then
+		if comms_target == addTubeStation then
+			gi = 1
+			tubePartQuantity = 0
+			repeat
+				if goods[player][gi][1] == tubePart then
+					tubePartQuantity = goods[player][gi][2]
+				end
+				gi = gi + 1
+			until(gi > #goods[player])
+			if tubePartQuantity > 0 then
+				addCommsReply(string.format("Give %s to Boris Eggleston for additional tube",tubePart), function()
+					if player.tubeAdded then
+						setCommsMessage("You already have the extra tube")
+					else
+						setCommsMessage("I can install it point to the front or to the rear. Which would you prefer?")
+						addCommsReply("Front", function()
+							decrementPlayerGoods(tubePart)
+							player.cargo = player.cargo + 1
+							player.tubeAdded = true
+							originalTubes = player:getWeaponTubeCount()
+							newTubes = originalTubes + 1
+							player:setWeaponTubeCount(newTubes)
+							player:setWeaponTubeExclusiveFor(originalTubes, "Homing")
+							player:setWeaponStorageMax("Homing", player:getWeaponStorageMax("Homing") + 2)
+							player:setWeaponStorage("Homing", player:getWeaponStorage("Homing") + 2)
+							setCommsMessage("You now have an additional homing torpedo tube pointing forward")
+						end)
+						addCommsReply("Rear", function()
+							decrementPlayerGoods(tubePart)
+							player.cargo = player.cargo + 1
+							player.tubeAdded = true
+							originalTubes = player:getWeaponTubeCount()
+							newTubes = originalTubes + 1
+							player:setWeaponTubeCount(newTubes)
+							player:setWeaponTubeExclusiveFor(originalTubes, "Homing")
+							player:setWeaponStorageMax("Homing", player:getWeaponStorageMax("Homing") + 2)
+							player:setWeaponStorage("Homing", player:getWeaponStorage("Homing") + 2)
+							player:setWeaponTubeDirection(originalTubes, 180)
+							setCommsMessage("You now have an additional homing torpedo tube pointing to the rear")
+						end)
+					end
+				end)
+			else
+				addCommsReply("May I speak with Boris Eggleston?", function()
+					setCommsMessage("[Boris Eggleston]\nHello, what can I do for you?")
+					addCommsReply("Can you really add another weapons tube to our ship?", function()
+						setCommsMessage(string.format("Definitely. But I'll need %s before I can do it",tubePart))
+						addCommsReply("Back",commsStation)
+					end)
 				end)
 			end
 		end
 	end
-	if comms_target == spinBase then
-		spinStation()
+	if plot3name == "beamPhysicist" then
+		if comms_target == beamDamageStation then
+			gi = 1
+			beamPart1Quantity = 0
+			beamPart2Quantity = 0
+			repeat
+				if goods[player][gi][1] == beamPart1 then
+					beamPart1Quantity = goods[player][gi][2]
+				end
+				if goods[player][gi][1] == beamPart2 then
+					beamPart2Quantity = goods[player][gi][2]
+				end
+				gi = gi + 1
+			until(gi > #goods[player])
+			if beamPart1Quantity > 0 and beamPart2Quantity > 0 then
+				addCommsReply(string.format("Give %s and %s to Frederico Booker for upgrade",beamPart1,beamPart2), function()
+					if player.beamDamageUpgrade then
+						setCommsMessage("You already have the upgrade")
+					else
+						if player:getBeamWeaponRange(0) > 0 then
+							decrementPlayerGoods(beamPart1)
+							decrementPlayerGoods(beamPart2)
+							player.cargo = player.cargo + 2
+							bi = 0	--beam index
+							repeat
+								tempArc = player:getBeamWeaponArc(bi)
+								tempDir = player:getBeamWeaponDirection(bi)
+								tempRng = player:getBeamWeaponRange(bi)
+								tempCyc = player:getBeamWeaponCycleTime(bi)
+								tempDmg = player:getBeamWeaponDamage(bi)
+								player:setBeamWeapon(bi,tempArc,tempDir,tempRng,tempCyc,tempDmg*1.5)
+								bi = bi + 1
+							until(player:getBeamWeaponRange(bi) < 1)
+							player.beamDamageUpgrade = true
+							setCommsMessage("Your ship beam weapons now deal 50% more damage")
+						else
+							setCommsMessage("Your ship has no beam weapons to upgrade")
+						end
+					end
+				end)
+			else
+				addCommsReply("Talk to Frederico Booker", function()
+					setCommsMessage(string.format("[Frederico Booker]\nGreetings, %s. What brings you to %s to talk to me?",player:getCallSign(),beamDamageStation:getCallSign()))
+					addCommsReply("Can you upgrade our beam weapons systems?", function()
+						setCommsMessage(string.format("[Frederico Booker]\nOh, you've heard about my research and the practical results? I can certainly upgrade the damage dealt by your beam weapons systems, but you'll need to provide me with %s and %s before I can complete the job",beamPart1,beamPart2))
+						addCommsReply("Back", commsStation)
+					end)
+				end)
+			end
+		end
 	end
-	if comms_target == beamTimeBase then
-		beamTimeStation()
+	if plot2name == "friendlyClue" then
+		if comms_target == friendlyClueStation then
+			addCommsReply("Speak with Herbert Long", function()
+				setCommsMessage(string.format("Well, if it isn't the good ship, %s! What brings you to %s?",player:getCallSign(),friendlyClueStation:getCallSign()))
+				addCommsReply("Please share your enemy base information", function()
+					setCommsMessage(string.format("That's old news. Wouldn't you rather know about %s's leadership woes or the latest readings on unique stellar phenomenae in the area?",friendlyClueStation:getCallSign()))
+					addCommsReply("No, I just want to know about the enemy base", function()
+						setCommsMessage(string.format("Well, that's easy. The name of the base is %s. Enjoy your stay on %s!",targetEnemyStation:getCallSign(),friendlyClueStation:getCallSign()))
+						addCommsReply("Back", commsStation)
+					end)
+					addCommsReply(string.format("What is %s struggling with?",friendlyClueStation:getCallSign()), function()
+						setCommsMessage(string.format("There are so many requests for transfers, %s may be understaffed by next week",friendlyClueStation:getCallSign()))
+						addCommsReply("Back", commsStation)
+					end)
+					addCommsReply("What kind of unique stellar phenomenae?", function()
+						setCommsMessage(string.format("While we were in %s spying on %s, we picked up readings in a nebula hinting at the formation of a new star",targetEnemyStation:getSectorName(),targetEnemyStation:getCallSign()))
+						primaryOrders = string.format("Destroy enemy station %s in %s",targetEnemyStation:getCallSign(),targetEnemyStation:getSectorName())
+						betweenPlot2fleet()
+					end)
+					addCommsReply("Back", commsStation)
+				end)
+				addCommsReply("Back", commsStation)
+			end)
+		end
 	end
-	if comms_target == rotateBase then
-		rotateStation()
-	end
-	if comms_target == baseInt1 then
-		intelligenceStation()
-	end
-	if comms_target == baseInt2 then
-		secondIntelligenceStation()
-	end
-	if comms_target == hullBase then
-		hullStation()
-	end
-	if comms_target == shieldExpertStation then
-		shieldExpertBase()
+	if spinUpgradeAvailable and player:isFriendly(comms_target) then
+		gi = 1
+		impulseQuantity = 0
+		repeat
+			if goods[player][gi][1] == "impulse" then
+				impulseQuantity = goods[player][gi][2]
+			end
+			gi = gi + 1
+		until(gi > #goods[player])
+		if impulseQuantity > 0 then
+			addCommsReply("Upgrade ship maneuverability for impulse", function()
+				if player.spinUpgrade then
+					setCommsMessage("You already have the upgrade")
+				else
+					player.spinUpgrade = true
+					decrementPlayerGoods("impulse")
+					player.cargo = player.cargo + 1
+					player:setRotationMaxSpeed(player:getRotationMaxSpeed()*1.5)
+					setCommsMessage("Maneuverability upgraded by 50%")
+				end
+				addCommsReply("Back", commsStation)
+			end)
+		end
 	end
 	if comms_target.publicRelations then
 		addCommsReply("Tell me more about your station", function()
@@ -3369,445 +3349,64 @@ function handleDockedState()
 				until(gi > #goods[player])
 				addCommsReply("Back", commsStation)
 			end)
-		end
-	end
-end
-
-function homeStationEasyDelivery()
-	addCommsReply(string.format("Provide %s as requested",easyDeliverGood), function()
-		decrementPlayerGoods(easyDeliverGood)
-		player.cargo = player.cargo + 1
-		player:addReputationPoints(30)
-		setCommsMessage("Thanks, we really needed that.\n\nI have some information for you. Decide which one you want")
-		addCommsReply("Ship maneuver upgrade", function()
-			plot2 = spinUpgradeStart
-			setCommsMessage("Check back shortly and I'll tell you all about it")
-		end)
-		addCommsReply("Intelligence", function()
-			plot2 = enemyBaseInfoStart
-			setCommsMessage("Check back shortly and I'll tell you all about it")
-		end)
-	end)
-end
-
-function homeStationRandomDelivery()
-	addCommsReply(string.format("Give %s as requested",randomDeliverGood), function()
-		decrementPlayerGoods(randomDeliverGood)
-		player.cargo = player.cargo + 1
-		player:addReputationPoints(35)
-		setCommsMessage(string.format("Thanks, we needed that %s.\n\nI have information for you. Decide which one you want",randomDeliverGood))
-		addCommsReply(string.format("Upgrade %s to auto-rotate",homeStation:getCallSign()), function()
-			plot4 = rotateUpgradeStart
-			setCommsMessage("Check back in a bit and I'll tell you all about it")
-		end)
-		addCommsReply("Upgrade beam weapon cycle time", function()
-			plot4 = beamTimeUpgradeStart
-			setCommsMessage("Check back in a bit and I'll tell you all about it")
-		end)
-		addCommsReply("Upgrade hull damage capacity", function()
-			plot4 = hullUpgradeStart
-			setCommsMessage("Check back in a bit and I'll tell you all about it")
-		end)
-	end)
-end
-
-function homeStationSpinUpgrade()
-	addCommsReply("What about that maneuver upgrade information you promised?", function()
-		setCommsMessage(string.format("I hear %s can upgrade your maneuverability, but they need %s to do the job",spinBase:getCallSign(),spinGood))
-		if spinReveal < 1 then spinReveal = 1 end
-		addCommsReply(string.format("Where is %s?",spinBase:getCallSign()), function()
-			setCommsMessage(string.format("%s is in sector %s",spinBase:getCallSign(),spinBase:getSectorName()))
-			if spinReveal < 2 then spinReveal = 2 end
-			addCommsReply("Back", commsStation)
-		end)
-		addCommsReply(string.format("Where might I find some %s?",spinGood), function()
-			setCommsMessage(string.format("I think %s might have some",spinGoodBase:getCallSign()))
-			if spinReveal < 3 then spinReveal = 3 end
-			if difficulty < 2 then
-				addCommsReply(string.format("And where the heck is %s?",spinGoodBase:getCallSign()), function()
-					setCommsMessage(string.format("My, my, you're quite inquisitive.\n%s is in sector %s",spinGoodBase:getCallSign(),spinGoodBase:getSectorName()))
-					if spinReveal < 4 then spinReveal = 4 end
-					addCommsReply("Back", commsStation)
-				end)
-			end
-			addCommsReply("Back", commsStation)
-		end)
-		addCommsReply("Back", commsStation)
-	end)
-end
-
-function homeStationBeamTimeUpgrade()
-	addCommsReply("You mentioned a beam weapon cycle time upgrade...", function()
-		setCommsMessage(string.format("Station %s can do that for %s",beamTimeBase:getCallSign(),beamTimeGood))
-		if beamTimeReveal < 1 then beamTimeReveal = 1 end
-		addCommsReply(string.format("I've never heard of %s. Where is %s?",beamTimeBase:getCallSign(),beamTimeBase:getCallSign()), function()
-			setCommsMessage(string.format("You haven't? I'm surprised. %s is in %s",beamTimeBase:getCallSign(),beamTimeBase:getSectorName()))
-			if beamTimeReveal < 2 then beamTimeReveal = 2 end
-			addCommsReply("Back", commsStation)
-		end)
-		addCommsReply(string.format("Can you direct me to a station with %s?",beamTimeGood), function()
-			setCommsMessage(string.format("%s has %s *and* they have the best indigenous Kraylor honey you've ever tasted",beamTimeGoodBase:getCallSign(),beamTimeGood))
-			if beamTimeReveal < 3 then beamTimeReveal = 3 end
-			if difficulty < 2 then
-				addCommsReply(string.format("Sounds tasty. Where is %s?",beamTimeGoodBase:getCallSign()), function()
-					setCommsMessage(string.format("It's in %s",beamTimeGoodBase:getSectorName()))
-					if beamTimeReveal < 4 then beamTimeReveal = 4 end
-					addCommsReply("Back", commsStation)
-				end)
-			end
-			addCommsReply("Back", commsStation)
-		end)
-		addCommsReply("Back", commsStation)
-	end)
-end
-
-function homeStationRotateUpgrade()
-	addCommsReply("Where's that station rotation upgrade information?", function()
-		setCommsMessage(string.format("station %s has the technical knowledge but lacks the %s",rotateBase:getCallSign(),rotateGood))
-		if rotateReveal < 1 then rotateReveal = 1 end
-		addCommsReply(string.format("Where is station %s?",rotateBase:getCallSign()), function()
-			setCommsMessage(string.format("%s is in %s",rotateBase:getCallSign(),rotateBase:getSectorName()))
-			if rotateReveal < 2 then rotateReveal = 2 end
-			addCommsReply("Back", commsStation)
-		end)
-		if difficulty < 2 then
-			addCommsReply(string.format("Where could I get %s?",rotateGood), function()
-				setCommsMessage(string.format("%s should have %s",rotateGoodBase:getCallSign(),rotateGood))
-				if rotateReveal < 3 then rotateReveal = 3 end
-				if difficulty < 1 then
-					addCommsReply(string.format("Do you know where %s is located?",rotateGoodBase:getCallSign()), function()
-						setCommsMessage(string.format("Yes, it's in %s",rotateGoodBase:getSectorName()))
-						if rotateReveal < 4 then rotateReveal = 4 end
-						addCommsReply("Back", commsStation)
+			for pidx=1,8 do
+				p = getPlayerShip(pidx)
+				if p == comms_target and player:isDocked(p) and p.cargo > 0 then
+					addCommsReply(string.format("Transfer cargo to %s",p:getCallSign()), function()
+						setCommsMessage("What would you like to transfer?")
+						gi = 1
+						repeat
+							local goodsType = goods[player][gi][1]
+							local goodsQuantity = goods[player][gi][2]
+							if goodsQuantity > 0 then
+								addCommsReply(goodsType, function()
+									decrementPlayerGoods(goodsType)
+									local gi2 = 1
+									repeat
+										if goods[p][gi2][1] == goodsType then
+											goods[p][gi2][2] = goods[p][gi2][2] + 1
+										end
+										gi2 = gi2 + 1
+									until(gi2 > #goods[p])
+									player.cargo = player.cargo + 1
+									p.cargo = p.cargo - 1
+									setCommsMessage(string.format("One %s transferred to %s",goodsType,p:getCallSign()))
+									p:addToShipLog(string.format("One %s transferred from %s",goodsType,player:getCallSign()),"#228b22")
+									addCommsReply("Back", commsStation)
+								end)
+							end
+							gi = gi + 1
+						until(gi > #goods[player])
 					end)
+					break
 				end
-				addCommsReply("Back", commsStation)
-			end)
-		end
-		addCommsReply("Back", commsStation)
-	end)
-end
-
-function homeStationBaseIntelligence()
-	addCommsReply("What about that intelligence information you promised?", function()
-		setCommsMessage(string.format("I hear Marcy Sorenson just got back from an enemy scouting expedition. She was talking about enemy bases. She can probably tell you where some of these bases are located. She's based on %s",baseInt1:getCallSign()))
-		plot2reminder = string.format("Talk with Marcy Sorenson on %s",baseInt1:getCallSign())
-		addCommsReply("Back", commsStation)
-	end)
-end
-
-function homeStationHullUpgrade()
-	addCommsReply("Remember, you promised some ship hull upgrade information?", function()
-		setCommsMessage(string.format("Oh yes, %s can upgrade your hull, but they want %s to do the job",hullBase:getCallSign(),hullGood))
-		if hullReveal < 1 then hullReveal = 1 end
-		addCommsReply(string.format("So, where is %s?",hullBase:getCallSign()), function()
-			setCommsMessage(string.format("%s is in sector %s",hullBase:getCallSign(),hullBase:getSectorName()))
-			if hullReveal < 2 then hullReveal = 2 end
-			addCommsReply("Back", commsStation)
-		end)
-		addCommsReply(string.format("Where could I find some %s?",hullGood), function()
-			setCommsMessage(string.format("I think %s may have some",hullGoodBase:getCallSign()))
-			if hullReveal < 3 then hullReveal = 3 end
-			if difficulty < 2 then
-				addCommsReply(string.format("And just where is %s?",hullGoodBase:getCallSign()), function()
-					setCommsMessage(string.format("If you must know, %s is in sector %s",hullGoodBase:getCallSign(),hullGoodBase:getSectorName()))
-					if hullReveal < 4 then hullReveal = 4 end
-					addCommsReply("Back", commsStation)
-				end)
 			end
-			addCommsReply("Back", commsStation)
-		end)
-		addCommsReply("Back", commsStation)
-	end)
-end
-
-function spinStation()
-	if spinUpgradeAvailable then
-		if not player.spinUpgrade then
-			addCommsReply("Upgrade maneuverability", function()
-				gi = 1
-				spinUpgradePartQuantity = 0
-				repeat
-					if goods[player][gi][1] == spinGood then
-						spinUpgradePartQuantity = goods[player][gi][2]
-					end
-					gi = gi + 1
-				until(gi > #goods[player])
-				if spinUpgradePartQuantity > 0 then
-					player.spinUpgrade = true
-					decrementPlayerGoods(spinGood)
-					player.cargo = player.cargo + 1
-					player:setRotationMaxSpeed(player:getRotationMaxSpeed()*1.5)
-					setCommsMessage("Upgraded maneuverability")
-				else
-					setCommsMessage(string.format("You need to bring some %s for the upgrade",spinGood))
-				end
-				addCommsReply("Back", commsStation)
-			end)
 		end
-	end
-end
-
-function beamTimeStation()
-	if beamTimeUpgradeAvailable then
-		if not player.beamTimeUpgrade then
-			addCommsReply("Upgrade beam cycle time", function()
-				tempBeam = psb[player:getTypeName()]
-				if tempBeam == nil then
-					setCommsMessage("Your ship type does not support a beam weapon upgrade.")
-				else
-					gi = 1
-					beamTimeUpgradePartQuantity = 0
-					repeat
-						if goods[player][gi][1] == beamTimeGood then
-							beamTimeUpgradePartQuantity = goods[player][gi][2]
-						end
-						gi = gi + 1
-					until(gi > #goods[player])
-					if beamTimeUpgradePartQuantity > 0 then
-						player.beamTimeUpgrade = true
-						decrementPlayerGoods(beamTimeGood)
-						player.cargo = player.cargo + 1					
-						for b=0,tempBeam-1 do
-							tempRange = player:getBeamWeaponRange(b)
-							newCycle = player:getBeamWeaponCycleTime(b) * .8
-							tempDamage = player:getBeamWeaponDamage(b)
-							tempArc = player:getBeamWeaponArc(b)
-							tempDirection = player:getBeamWeaponDirection(b)
-							player:setBeamWeapon(b,tempArc,tempDirection,tempRange,newCycle,tempDamage)
-						end
-						setCommsMessage("Beam cycle time reduced by 20%")
-					else
-						setCommsMessage(string.format("We require %s before we can upgrade your beam weapons",beamTimeGood))
-					end
-				end
-			end)
-		end
-	end
-end
-
-function rotateStation()
-	if rotateUpgradeAvailable then
-		if not homeStationRotationEnabled then
-			addCommsReply(string.format("Upgrade %s to auto-rotate",homeStation:getCallSign()), function()
-				gi = 1
-				rotateUpgradePartQuantity = 0
-				repeat
-					if goods[player][gi][1] == rotateGood then
-						rotateUpgradePartQuantity = goods[player][gi][2]
-					end
-					gi = gi + 1
-				until(gi > #goods[player])
-				if rotateUpgradePartQuantity > 0 then
-					homeStationRotationEnabled = true
-					decrementPlayerGoods(rotateGood)
-					player.cargo = player.cargo + 1
-					setCommsMessage(string.format("%s was just what we needed. The technical details have been transmitted to %s. The auto-rotation has begun",rotateGood,homeStation:getCallSign()))
-				else
-					setCommsMessage(string.format("You need to bring some %s for the upgrade",rotateGood))
-				end
-				addCommsReply("Back", commsStation)
-			end)
-		end
-	end
-end
-
-function intelligenceStation()
-	addCommsReply("May I speak with Marcy Sorenson?", function()
-		baseInt1Visit = true
-		if baseInt2 ~= nil then
-			setCommsMessage(string.format("She transferred to %s",baseInt2:getCallSign()))
-			plot2reminder = string.format("Talk with Marcy Sorenson on %s",baseInt2:getCallSign())
-			addCommsReply(string.format("Where exactly is %s?",baseInt2:getCallSign()), function()
-				setCommsMessage(string.format("%s is in %s",baseInt2:getCallSign(),baseInt2:getSectorName()))
-				plot2reminder = string.format("Talk with Marcy Sorenson on %s in %s",baseInt2:getCallSign(),baseInt2:getSectorName())
-				addCommsReply("Back", commsStation)
-			end)
-			addCommsReply("Back", commsStation)
-		else
-			setCommsMessage("This is Marcy. Whatcha want?")
-			addCommsReply("Please tell me about the enemy bases found", function()
-				for i=1,#enemyStationList do
-					if enemyStationList[i]:isValid() then
-						if enemyInt1 == nil then
-							enemyInt1 = enemyStationList[i]
-						elseif enemyInt2 == nil then
-							enemyInt2 = enemyStationList[i]
-							break
-						end
-					end
-				end
-				setCommsMessage(string.format("Sure. We found a couple of enemy stations in %s and %s",enemyInt1:getSectorName(),enemyInt2:getSectorName()))
-				plot2reminder = string.format("Investigate enemy bases in %s and %s",enemyInt1:getSectorName(),enemyInt2:getSectorName())
-				addCommsReply("Back", commsStation)
-			end)
-			addCommsReply("Back", commsStation)
-		end
-	end)
-end
-
-function secondIntelligenceStation()
-	if baseInt1Visit then
-		addCommsReply("May I speak with Marcy Sorenson, please?", function()
-			setCommsMessage("This is Marcy. Whatcha want?")
-			addCommsReply("Please tell me about the enemy bases found", function()
-				for i=1,#enemyStationList do
-					if enemyStationList[i]:isValid() then
-						if enemyInt1 == nil then
-							enemyInt1 = enemyStationList[i]
-						elseif enemyInt2 == nil then
-							enemyInt2 = enemyStationList[i]
-						elseif enemyInt3 == nil then
-							enemyInt3 = enemyStationList[i]
-						end
-					end
-				end
-				setCommsMessage(string.format("Sure. We found some enemy stations in %s, %s and %s",enemyInt1:getSectorName(),enemyInt2:getSectorName(),enemyInt3:getSectorName()))
-				plot2reminder = string.format("Investigate enemy bases in %s, %s and %s",enemyInt1:getSectorName(),enemyInt2:getSectorName(),enemyInt3:getSectorName())
-				addCommsReply("Back", commsStation)
-			end)
-			addCommsReply("Back", commsStation)				
-		end)
-	end
-end
-
-function hullStation()
-	if hullUpgradeAvailable then
-		if not player.hullUpgrade then
-			addCommsReply("Upgrade hull damage capacity", function()
-				gi = 1
-				hullUpgradePartQuantity = 0
-				repeat
-					if goods[player][gi][1] == hullGood then
-						hullUpgradePartQuantity = goods[player][gi][2]
-					end
-					gi = gi + 1
-				until(gi > #goods[player])
-				if hullUpgradePartQuantity > 0 then
-					player.hullUpgrade = true
-					decrementPlayerGoods(hullGood)
-					player.cargo = player.cargo + 1
-					player:setHullMax(player:getHullMax() * 1.2)
-					setCommsMessage("Upgraded hull capacity for damage by 20%")
-				else
-					setCommsMessage(string.format("We won't upgrade your hull until we have %s",hullGood))
-				end
-				addCommsReply("Back", commsStation)
-			end)
-		end
-	end
-end
-
-function shieldExpertBase()
-	if plot4 == giftForBeau then
-		addCommsReply("Offer gift on behalf of Maria Shrivner", function()
-			gi = 1
-			giftQuantity = 0
-			giftList = {}
-			repeat
-				if goods[player][gi][1] == "gold" then
-					giftQuantity = giftQuantity + goods[player][gi][2]
-					table.insert(giftList,"gold")
-				end
-				if goods[player][gi][1] == "platinum" then
-					giftQuantity = giftQuantity + goods[player][gi][2]
-					table.insert(giftList,"platinum")
-				end
-				if goods[player][gi][1] == "dilithium" then
-					giftQuantity = giftQuantity + goods[player][gi][2]
-					table.insert(giftList,"dilithium")
-				end
-				if goods[player][gi][1] == "tritanium" then
-					giftQuantity = giftQuantity + goods[player][gi][2]
-					table.insert(giftList,"tritanium")
-				end
-				if goods[player][gi][1] == "cobalt" then
-					giftQuantity = giftQuantity + goods[player][gi][2]
-					table.insert(giftList,"cobalt")
-				end
-				gi = gi + 1
-			until(gi > #goods[player])
-			if giftQuantity > 0 then
-				beauGift = true
-				gifti = math.random(1,#giftList)
-				decrementPlayerGoods(giftList[gifti])
-				player.Cargo = player.Cargo + 1
-				setCommsMessage("Thanks. He's impressed with the gift to such a degree that he's speechless")
-			else
-				setCommsMessage("I know this couple (or former couple). Only gold, platinum, dilithium, tritanium or cobolt will work as a gift")
-			end
-			addCommsReply("Back", commsStation)
-		end)
 	end
 end
 
 function setOptionalOrders()
-	optionalOrders = ""
-	optionalOrdersPresent = false
+	optionalOrders = "\n"
+	ifs = "Optional:\n"
 	if plot2reminder ~= nil then
-		if plot2reminder == "Get ship maneuver upgrade" then
-			if spinReveal == 0 then
-				optionalOrders = "\nOptional:\n" .. plot2reminder
-			elseif spinReveal == 1 then
-				optionalOrders = string.format("\nOptional:\nGet ship maneuver upgrade from %s for %s",spinBase:getCallSign(),spinGood)
-			elseif spinReveal == 2 then
-				optionalOrders = string.format("\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s",spinBase:getCallSign(),spinBase:getSectorName(),spinGood)
-			elseif spinReveal == 3 then
-				optionalOrders = string.format("\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s.\n    You might find %s at %s",spinBase:getCallSign(),spinBase:getSectorName(),spinGood,spinGood,spinGoodBase:getCallSign())
-			else
-				optionalOrders = string.format("\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s.\n    You might find %s at %s in sector %s",spinBase:getCallSign(),spinBase:getSectorName(),spinGood,spinGood,spinGoodBase:getCallSign(),spinGoodBase:getSectorName())
-			end
-		else
-			optionalOrders = "\nOptional:\n" .. plot2reminder
-		end
-		optionalOrdersPresent = true
+		optionalOrders = optionalOrders .. ifs .. plot2reminder
+		ifs = "\n"
+	end
+	if plot3reminder ~= nil then
+		optionalOrders = optionalOrders .. ifs .. plot3reminder
+		ifs = "\n"
 	end
 	if plot4reminder ~= nil then
-		if optionalOrdersPresent then
-			ifs = "\n"
-		else
-			ifs = "\nOptional:\n"
-			optionalOrdersPresent = true
-		end
-		if plot4reminder == string.format("Upgrade %s to rotate",homeStation:getCallSign()) then
-			if rotateReveal == 0 then
-				optionalOrders = optionalOrders .. ifs .. plot4reminder
-			elseif rotateReveal == 1 then
-				optionalOrders = optionalOrders .. ifs .. string.format("Upgrade %s to auto-rotate by taking %s to %s",homeStation:getCallSign(),rotateGood,rotateBase:getCallSign())
-			elseif rotateReveal == 2 then
-				optionalOrders = optionalOrders .. ifs .. string.format("Upgrade %s to auto-rotate by taking %s to %s in %s",homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName()) 
-			elseif rotateReveal == 3 then
-				optionalOrders = optionalOrders .. ifs .. string.format("Upgrade %s to auto-rotate by taking %s to %s in %s.\n    %s may bave %s",homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName(),rotateGoodBase:getCallSign(),rotateGood)
-			else
-				optionalOrders = optionalOrders .. ifs .. string.format("Upgrade %s to auto-rotate by taking %s to %s in %s.\n    %s in %s may bave %s",homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName(),rotateGoodBase:getCallSign(),rotateGoodBase:getSectorName(),rotateGood)
-			end
-		elseif plot4reminder == "Get beam cycle time upgrade" then
-			if beamTimeReveal == 0 then
-				optionalOrders = optionalOrders .. ifs .. plot4reminder
-			elseif beamTimeReveal == 1 then
-				optionalOrders = optionalOrders .. ifs .. string.format("Get beam cycle time upgrade from %s for %s",beamTimeBase:getCallSign(),beamTimeGood)
-			elseif beamTimeReveal == 2 then
-				optionalOrders = optionalOrders .. ifs .. string.format("Get beam cycle time upgrade from %s in %s for %s",beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood)
-			elseif beamTimeReveal == 3 then
-				optionalOrders = optionalOrders .. ifs .. string.format("Get beam cycle time upgrade from %s in %s for %s\n    You might find %s at %s",beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood,beamTimeGood,beamTimeGoodBase:getCallSign())
-			else
-				optionalOrders = optionalOrders .. ifs .. string.format("Get beam cycle time upgrade from %s in %s for %s\n    You might find %s at %s in %s",beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood,beamTimeGood,beamTimeGoodBase:getCallSign(),beamTimeGoodBase:getSectorName())
-			end
-		elseif plot4reminder == "Get hull upgrade" then
-			if hullReveal == 0 then
-				optionalOrders = optionalOrders .. ifs .. plot4reminder
-			elseif hullReveal == 1 then
-				optionalOrders = optionalOrders .. ifs .. string.format("Get %s to upgrade hull for %s",hullBase:getCallSign(),hullGood)
-			elseif hullReveal == 2 then
-				optionalOrders = optionalOrders .. ifs .. string.format("Get %s in %s to upgrade hull for %s",hullBase:getCallSign(),hullBase:getSectorName(),hullGood)
-			elseif hullReveal == 3 then
-				optionalOrders = optionalOrders .. ifs .. string.format("Get %s in %s to upgrade hull for %s\n    %s might have %s",hullBase:getCallSign(),hullBase:getSectorName(),hullGood,hullGoodBase:getCallSign(),hullGood)
-			else
-				optionalOrders = optionalOrders .. ifs .. string.format("Get %s in %s to upgrade hull for %s\n    %s in %s might have %s",hullBase:getCallSign(),hullBase:getSectorName(),hullGood,hullGoodBase:getCallSign(),hullGoodBase:getSectorName(),hullGood)
-			end
-		else
-			optionalOrders = optionalOrders .. ifs .. plot4reminder
-		end
+		optionalOrders = optionalOrders .. ifs .. plot4reminder
+		ifs = "\n"
+	end
+	if plot5reminder ~= nil then
+		optionalOrders = optionalOrders .. ifs .. plot5reminder
+		ifs = "\n"
+	end
+	if plot6reminder ~= nil then
+		optionalOrders = optionalOrders .. ifs .. plot6reminder
+		ifs = "\n"
 	end
 end
 
@@ -3870,69 +3469,9 @@ function handleUndockedState()
     if comms_target:areEnemiesInRange(20000) then
 		oMsg = oMsg .. "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you."
 	end
-	if comms_target.nukeAvail == nil then
-		if math.random(1,10) <= (4 - difficulty) then
-			comms_target.nukeAvail = true
-		else
-			comms_target.nukeAvail = false
-		end
-		if math.random(1,10) <= (5 - difficulty) then
-			comms_target.empAvail = true
-		else
-			comms_target.empAvail = false
-		end
-		if math.random(1,10) <= (6 - difficulty) then
-			comms_target.homeAvail = true
-		else
-			comms_target.homeAvail = false
-		end
-		if math.random(1,10) <= (7 - difficulty) then
-			comms_target.mineAvail = true
-		else
-			comms_target.mineAvail = false
-		end
-		if math.random(1,10) <= (9 - difficulty) then
-			comms_target.hvliAvail = true
-		else
-			comms_target.hvliAvail = false
-		end
-	end
 	setCommsMessage(oMsg)
  	addCommsReply("I need information", function()
 		setCommsMessage("What kind of information do you need?")
-		addCommsReply("What ordnance do you have available for restock?", function()
-			missileTypeAvailableCount = 0
-			oMsg = ""
-			if comms_target.nukeAvail then
-				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. "\n   Nuke"
-			end
-			if comms_target.empAvail then
-				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. "\n   EMP"
-			end
-			if comms_target.homeAvail then
-				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. "\n   Homing"
-			end
-			if comms_target.mineAvail then
-				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. "\n   Mine"
-			end
-			if comms_target.hvliAvail then
-				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. "\n   HVLI"
-			end
-			if missileTypeAvailableCount == 0 then
-				oMsg = "We have no ordnance available for restock"
-			elseif missileTypeAvailableCount == 1 then
-				oMsg = "We have the following type of ordnance available for restock:" .. oMsg
-			else
-				oMsg = "We have the following types of ordnance available for restock:" .. oMsg
-			end
-			setCommsMessage(oMsg)
-			addCommsReply("Back", commsStation)
-		end)
 		addCommsReply("See any enemies in your area?", function()
 			if player:isFriendly(comms_target) then
 				enemiesInRange = 0
@@ -3999,29 +3538,177 @@ function handleUndockedState()
 			setCommsMessage(ordMsg)
 			addCommsReply("Back", commsStation)
 		end)
+		if spinUpgradeAvailable and player:isFriendly(comms_target) and distance(player,comms_target) < 1000 then
+			gi = 1
+			impulseQuantity = 0
+			repeat
+				if goods[player][gi][1] == "impulse" then
+					impulseQuantity = goods[player][gi][2]
+				end
+				gi = gi + 1
+			until(gi > #goods[player])
+			if impulseQuantity > 0 then
+				addCommsReply("Upgrade ship maneuverability for impulse", function()
+					if player.spinUpgrade then
+						setCommsMessage("You already have the upgrade")
+					else
+						player.spinUpgrade = true
+						decrementPlayerGoods("impulse")
+						player.cargo = player.cargo + 1
+						player:setRotationMaxSpeed(player:getRotationMaxSpeed()*1.5)
+						setCommsMessage("Maneuverability upgraded by 50%")
+					end
+					addCommsReply("Back", commsStation)
+				end)
+			end
+		end
+	end
+	if plot3name == "awaitingTractor" then
+		if comms_target == tractorStation and player == playerCarrier and distance(player,comms_target) < 2000 then
+			addCommsReply("Install tractor equipment", function()
+				if playerCarrier:hasPlayerAtPosition("Engineering") then
+					tractorIntegrationMsg = "tractorIntegrationMsg"
+					playerCarrier:addCustomMessage("Engineering",tractorIntegrationMsg,string.format("The tractor equipment has been transported aboard %s. You need to make the final connections for full installation",playerCarrier:getCallSign()))
+				end
+				if playerCarrier:hasPlayerAtPosition("Engineering+") then
+					tractorIntegrationMsgPlus = "tractorIntegrationMsgPlus"
+					playerCarrier:addCustomMessage("Engineering+",tractorIntegrationMsgPlus,string.format("The tractor equipment has been transported aboard %s. You need to make the final connections for full installation",playerCarrier:getCallSign()))
+				end
+				tractorIntegrationButton = "tractorIntegrationButton"
+				playerCarrier:addCustomButton("Engineering",tractorIntegrationButton,"Connect Tractor",connectTractor)
+				tractorIntegrationButtonPlus = "tractorIntegrationButtonPlus"
+				playerCarrier:addCustomButton("Engineering+",tractorIntegrationButtonPlus,"Connect Tractor",connectTractor)
+				setCommsMessage("Tractor equipment transferred to engine room")
+			end)
+		end
+	end
+	if plot3name == "tubeOfficer" then
+		if comms_target == addTubeStation and distance(player,comms_target) < 1200 then
+			gi = 1
+			tubePartQuantity = 0
+			repeat
+				if goods[player][gi][1] == tubePart then
+					tubePartQuantity = goods[player][gi][2]
+				end
+				gi = gi + 1
+			until(gi > #goods[player])
+			if tubePartQuantity > 0 then
+				addCommsReply(string.format("Give %s to Boris Eggleston for additional tube",tubePart), function()
+					if player.tubeAdded then
+						setCommsMessage("You already have the extra tube")
+					else
+						setCommsMessage("I can install it point to the front or to the rear. Which would you prefer?")
+						addCommsReply("Front", function()
+							decrementPlayerGoods(tubePart)
+							player.cargo = player.cargo + 1
+							player.tubeAdded = true
+							originalTubes = player:getWeaponTubeCount()
+							newTubes = originalTubes + 1
+							player:setWeaponTubeCount(newTubes)
+							player:setWeaponTubeExclusiveFor(originalTubes, "Homing")
+							player:setWeaponStorageMax("Homing", player:getWeaponStorageMax("Homing") + 2)
+							player:setWeaponStorage("Homing", player:getWeaponStorage("Homing") + 2)
+							setCommsMessage("You now have an additional homing torpedo tube pointing forward")
+						end)
+						addCommsReply("Rear", function()
+							decrementPlayerGoods(tubePart)
+							player.cargo = player.cargo + 1
+							player.tubeAdded = true
+							originalTubes = player:getWeaponTubeCount()
+							newTubes = originalTubes + 1
+							player:setWeaponTubeCount(newTubes)
+							player:setWeaponTubeExclusiveFor(originalTubes, "Homing")
+							player:setWeaponStorageMax("Homing", player:getWeaponStorageMax("Homing") + 2)
+							player:setWeaponStorage("Homing", player:getWeaponStorage("Homing") + 2)
+							player:setWeaponTubeDirection(originalTubes, 180)
+							setCommsMessage("You now have an additional homing torpedo tube pointing to the rear")
+						end)
+					end
+				end)
+			else
+				addCommsReply("May I speak with Boris Eggleston?", function()
+					setCommsMessage("[Boris Eggleston]\nHello, what can I do for you?")
+					addCommsReply("Can you really add another weapons tube to our ship?", function()
+						setCommsMessage(string.format("Definitely. But I'll need %s before I can do it",tubePart))
+						addCommsReply("Back",commsStation)
+					end)
+				end)
+			end
+		end
+	end
+	if plot3name == "beamPhysicist" then
+		if comms_target == beamDamageStation and distance(player,comms_target) < 1000 then
+			gi = 1
+			beamPart1Quantity = 0
+			beamPart2Quantity = 0
+			repeat
+				if goods[player][gi][1] == beamPart1 then
+					beamPart1Quantity = goods[player][gi][2]
+				end
+				if goods[player][gi][1] == beamPart2 then
+					beamPart2Quantity = goods[player][gi][2]
+				end
+				gi = gi + 1
+			until(gi > #goods[player])
+			if beamPart1Quantity > 0 and beamPart2Quantity > 0 then
+				addCommsReply(string.format("Give %s and %s to Frederico Booker for upgrade",beamPart1,beamPart2), function()
+					if player.beamDamageUpgrade then
+						setCommsMessage("You already have the upgrade")
+					else
+						if player:getBeamWeaponRange(0) > 0 then
+							decrementPlayerGoods(beamPart1)
+							decrementPlayerGoods(beamPart2)
+							player.cargo = player.cargo + 2
+							bi = 0	--beam index
+							repeat
+								tempArc = player:getBeamWeaponArc(bi)
+								tempDir = player:getBeamWeaponDirection(bi)
+								tempRng = player:getBeamWeaponRange(bi)
+								tempCyc = player:getBeamWeaponCycleTime(bi)
+								tempDmg = player:getBeamWeaponDamage(bi)
+								player:setBeamWeapon(bi,tempArc,tempDir,tempRng,tempCyc,tempDmg*1.5)
+								bi = bi + 1
+							until(player:getBeamWeaponRange(bi) < 1)
+							player.beamDamageUpgrade = true
+							setCommsMessage("Your ship beam weapons now deal 50% more damage")
+						else
+							setCommsMessage("Your ship has no beam weapons to upgrade")
+						end
+					end
+				end)
+			else
+				addCommsReply("Talk to Frederico Booker", function()
+					setCommsMessage(string.format("[Frederico Booker]\nGreetings, %s. What brings you to %s to talk to me?",player:getCallSign(),beamDamageStation:getCallSign()))
+					addCommsReply("Can you upgrade our beam weapons systems?", function()
+						setCommsMessage(string.format("[Frederico Booker]\nOh, you've heard about my research and the practical results? I can certainly upgrade the damage dealt by your beam weapons systems, but you'll need to provide me with %s and %s before I can complete the job",beamPart1,beamPart2))
+						addCommsReply("Back", commsStation)
+					end)
+				end)
+			end
+		end
 	end
 	--Diagnostic data is used to help test and debug the script while it is under construction
 	if diagnostic then
 		addCommsReply("Diagnostic data", function()
 			oMsg = string.format("Difficulty: %.1f",difficulty)
 			if playWithTimeLimit then
-				oMsg = oMsg .. string.format(" Time remaining: %.2f",gameTimeLimit)
+				oMsg = oMsg .. string.format("Time remaining: %.2f",gameTimeLimit)
 			else
 				oMsg = oMsg .. " no time limit"
+			end
+			if plotT ~= nil then
+				oMsg = oMsg .. string.format("\nTransport spawn delay: %.f",transportSpawnDelay)
 			end
 			if plot1name == nil or plot1 == nil then
 				oMsg = oMsg .. ""
 			else
 				oMsg = oMsg .. "\nplot1: " .. plot1name
-				oMsg = oMsg .. string.format(" wavetimer: %.2f danger value: %.1f",waveTimer,dangerValue)
+				oMsg = oMsg .. string.format("\n%s location: %s",targetEnemyStation:getCallSign(),targetEnemyStation:getSectorName())
 			end
 			if plot2name == nil or plot2 == nil then
 				oMsg = oMsg .. ""
 			else
 				oMsg = oMsg .. "\nplot2: " .. plot2name
-				if plot2name == "destroyef2" then
-					oMsg = oMsg .. string.format(" ef2count: %i",ef2Count)
-				end
 			end
 			if plot3name == nil or plot3 == nil then
 				oMsg = oMsg .. ""
@@ -4037,33 +3724,13 @@ function handleUndockedState()
 				oMsg = oMsg .. ""
 			else
 				oMsg = oMsg .. "\nplot5: " .. plot5name
-				oMsg = oMsg .. string.format(" helpful warning timer: %.2f",helpfulWarningTimer)
 			end
-			if plotWname == nil or plotW == nil then
+			if plot6name == nil or plot6 == nil then
 				oMsg = oMsg .. ""
 			else
-				oMsg = oMsg .. "\nplotw: " .. plotWname
-			end
-			if infoPromised then
-				oMsg = oMsg .. "\nInfo promised"
-				if spinUpgradeAvailable then
-					oMsg = oMsg .. ", spin upgrade available"
-				end
-				if baseIntelligenceAvailable then
-					oMsg = oMsg .. ", base intelligence available"
-				end
-				if hullUpgradeAvailable then
-					oMsg = oMsg .. ", hull upgrade available"
-				end
-				if rotateUpgradeAvailable then
-					oMsg = oMsg .. ", rotate upgrade available"
-				end
-				if beamTimeUpgradeAvailable then
-					oMsg = oMsg .. ", beam time upgrade available"
-				end
+				oMsg = oMsg .. "\nplot6: " .. plot6name
 			end
 			oMsg = oMsg .. "\nwfv: " .. wfv
-			oMsg = oMsg .. string.format("\nSupply drop: %s",comms_target.comms_data.services.supplydrop)
 			setCommsMessage(oMsg)
 			addCommsReply("Back", commsStation)
 		end)
@@ -4115,8 +3782,69 @@ function handleUndockedState()
             addCommsReply("Back", commsStation)
         end)
     end
+	gi = 1
+	cargoHoldEmpty = true
+	repeat
+		playerGoodsType = goods[player][gi][1]
+		playerGoodsQuantity = goods[player][gi][2]
+		if playerGoodsQuantity > 0 then
+			cargoHoldEmpty = false
+		end
+		gi = gi + 1
+	until(gi > #goods[player])
+	if not cargoHoldEmpty then
+		addCommsReply("Jettison cargo", function()
+			setCommsMessage(string.format("Available space: %i\nWhat would you like to jettison?",player.cargo))
+			gi = 1
+			repeat
+				local goodsType = goods[player][gi][1]
+				local goodsQuantity = goods[player][gi][2]
+				if goodsQuantity > 0 then
+					addCommsReply(goodsType, function()
+						decrementPlayerGoods(goodsType)
+						player.cargo = player.cargo + 1
+						setCommsMessage(string.format("One %s jettisoned",goodsType))
+						addCommsReply("Back", commsStation)
+					end)
+				end
+				gi = gi + 1
+			until(gi > #goods[player])
+			addCommsReply("Back", commsStation)
+		end)
+		for pidx=1,8 do
+			p = getPlayerShip(pidx)
+			if p == comms_target and distance(p,player) < 1000 and p.cargo > 0 then
+				addCommsReply(string.format("Transfer cargo to %s",p:getCallSign()), function()
+					setCommsMessage("What would you like to transfer?")
+					gi = 1
+					repeat
+						local goodsType = goods[player][gi][1]
+						local goodsQuantity = goods[player][gi][2]
+						if goodsQuantity > 0 then
+							addCommsReply(goodsType, function()
+								decrementPlayerGoods(goodsType)
+								local gi2 = 1
+								repeat
+									if goods[p][gi2][1] == goodsType then
+										goods[p][gi2][2] = goods[p][gi2][2] + 1
+									end
+									gi2 = gi2 + 1
+								until(gi2 > #goods[p])
+								player.cargo = player.cargo + 1
+								p.cargo = p.cargo - 1
+								setCommsMessage(string.format("One %s transferred to %s",goodsType,p:getCallSign()))
+								p:addToShipLog(string.format("One %s transferred from %s",goodsType,player:getCallSign()),"#228b22")
+								addCommsReply("Back", commsStation)
+							end)
+						end
+						gi = gi + 1
+					until(gi > #goods[player])
+				end)
+				break
+			end
+		end
+	end
 end
-
 -- Return the number of reputation points that a specified service costs for
 -- the current player.
 function getServiceCost(service)
@@ -4211,62 +3939,100 @@ function commsShip()
 end
 
 function friendlyComms(comms_data)
-	if comms_data.friendlyness < 20 then
-		setCommsMessage("What do you want?");
+	shipType = comms_target:getTypeName()
+	if shipType:find("Freighter") ~= nil then
+		freighterComms(comms_data)
 	else
-		setCommsMessage("Sir, how can we assist?");
-	end
-	addCommsReply("Defend a waypoint", function()
-		if player:getWaypointCount() == 0 then
-			setCommsMessage("No waypoints set. Please set a waypoint first.");
-			addCommsReply("Back", commsShip)
+		if comms_data.friendlyness < 20 then
+			setCommsMessage("What do you want?");
 		else
-			setCommsMessage("Which waypoint should we defend?");
-			for n=1,player:getWaypointCount() do
-				addCommsReply("Defend WP" .. n, function()
-					comms_target:orderDefendLocation(player:getWaypoint(n))
-					setCommsMessage("We are heading to assist at WP" .. n ..".");
+			setCommsMessage("Sir, how can we assist?");
+		end
+		addCommsReply("Defend a waypoint", function()
+			if player:getWaypointCount() == 0 then
+				setCommsMessage("No waypoints set. Please set a waypoint first.");
+				addCommsReply("Back", commsShip)
+			else
+				setCommsMessage("Which waypoint should we defend?");
+				for n=1,player:getWaypointCount() do
+					addCommsReply("Defend WP" .. n, function()
+						comms_target:orderDefendLocation(player:getWaypoint(n))
+						setCommsMessage("We are heading to assist at WP" .. n ..".");
+						addCommsReply("Back", commsShip)
+					end)
+				end
+			end
+		end)
+		if comms_data.friendlyness > 0.2 then
+			addCommsReply("Assist me", function()
+				setCommsMessage("Heading toward you to assist.");
+				comms_target:orderDefendTarget(player)
+				addCommsReply("Back", commsShip)
+			end)
+		end
+		addCommsReply("Report status", function()
+			msg = "Hull: " .. math.floor(comms_target:getHull() / comms_target:getHullMax() * 100) .. "%\n"
+			shields = comms_target:getShieldCount()
+			if shields == 1 then
+				msg = msg .. "Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
+			elseif shields == 2 then
+				msg = msg .. "Front Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
+				msg = msg .. "Rear Shield: " .. math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100) .. "%\n"
+			else
+				for n=0,shields-1 do
+					msg = msg .. "Shield " .. n .. ": " .. math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100) .. "%\n"
+				end
+			end
+
+			missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+			for i, missile_type in ipairs(missile_types) do
+				if comms_target:getWeaponStorageMax(missile_type) > 0 then
+						msg = msg .. missile_type .. " Missiles: " .. math.floor(comms_target:getWeaponStorage(missile_type)) .. "/" .. math.floor(comms_target:getWeaponStorageMax(missile_type)) .. "\n"
+				end
+			end
+			
+			setCommsMessage(msg);
+			addCommsReply("Back", commsShip)
+		end)
+		for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
+			if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+				addCommsReply("Dock at " .. obj:getCallSign(), function()
+					setCommsMessage("Docking at " .. obj:getCallSign() .. ".");
+					comms_target:orderDock(obj)
 					addCommsReply("Back", commsShip)
 				end)
 			end
 		end
-	end)
-	if comms_data.friendlyness > 0.2 then
-		addCommsReply("Assist me", function()
-			setCommsMessage("Heading toward you to assist.");
-			comms_target:orderDefendTarget(player)
-			addCommsReply("Back", commsShip)
-		end)
-	end
-	addCommsReply("Report status", function()
-		msg = "Hull: " .. math.floor(comms_target:getHull() / comms_target:getHullMax() * 100) .. "%\n"
-		shields = comms_target:getShieldCount()
-		if shields == 1 then
-			msg = msg .. "Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
-		elseif shields == 2 then
-			msg = msg .. "Front Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
-			msg = msg .. "Rear Shield: " .. math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100) .. "%\n"
-		else
-			for n=0,shields-1 do
-				msg = msg .. "Shield " .. n .. ": " .. math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100) .. "%\n"
-			end
+		hasWeapons = false
+		if comms_target:getBeamWeaponRange(0) > 0 then
+			hasWeapons = true
 		end
-
-		missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
-		for i, missile_type in ipairs(missile_types) do
-			if comms_target:getWeaponStorageMax(missile_type) > 0 then
-					msg = msg .. missile_type .. " Missiles: " .. math.floor(comms_target:getWeaponStorage(missile_type)) .. "/" .. math.floor(comms_target:getWeaponStorageMax(missile_type)) .. "\n"
-			end
+		if comms_target:getWeaponTubeCount() > 0 then
+			hasWeapons = true
 		end
-		
-		setCommsMessage(msg);
-		addCommsReply("Back", commsShip)
-	end)
-	for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
-			addCommsReply("Dock at " .. obj:getCallSign(), function()
-				setCommsMessage("Docking at " .. obj:getCallSign() .. ".");
-				comms_target:orderDock(obj)
+		if hasWeapons then
+			addCommsReply("Attack nearby enemy target", function()
+				localTargetCount = 0
+				enemyTargetList = {}
+				etlCount = 0
+				for _, obj in ipairs(comms_target:getObjectsInRange(15000)) do
+					if comms_target:isEnemy(obj) then
+						addCommsReply(obj:getCallSign(), function()
+							setCommsMessage("Attacking " .. obj:getCallSign())
+							comms_target:orderAttack(obj)
+							addCommsReply("Back", commsShip)
+						end)
+						localTargetCount = localTargetCount + 1
+						if localTargetCount > 9 then
+							break
+						end
+					end
+				end
+				if localTargetCount == 0 then
+					setCommsMessage("No enemy targets nearby")
+				else
+					setCommsMessage("Which enemy target?")
+				end
 				addCommsReply("Back", commsShip)
 			end)
 		end
@@ -4313,176 +4079,249 @@ function enemyComms(comms_data)
 	return false
 end
 
-function neutralComms(comms_data)
-	shipType = comms_target:getTypeName()
-	if shipType:find("Freighter") ~= nil then
-		if comms_data.friendlyness > 66 then
-			setCommsMessage("Yes?")
-			-- Offer destination information
-			addCommsReply("Where are you headed?", function()
-				setCommsMessage(comms_target.target:getCallSign())
-				addCommsReply("Back", commsShip)
-			end)
-			-- Offer to trade goods if goods or equipment freighter
-			if distance(player,comms_target) < 5000 then
-				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
-					gi = 1
-					luxuryQuantity = 0
-					repeat
-						if goods[player][gi][1] == "luxury" then
-							luxuryQuantity = goods[player][gi][2]
-						end
-						gi = gi + 1
-					until(gi > #goods[player])
-					if luxuryQuantity > 0 then
-						gi = 1
-						repeat
-							local goodsType = goods[comms_target][gi][1]
-							local goodsQuantity = goods[comms_target][gi][2]
-							addCommsReply(string.format("Trade luxury for %s",goods[comms_target][gi][1]), function()
-								if goodsQuantity < 1 then
-									setCommsMessage("Insufficient inventory on freighter for trade")
-								else
-									decrementShipGoods(goodsType)
-									incrementPlayerGoods(goodsType)
-									decrementPlayerGoods("luxury")
-									setCommsMessage("Traded")
-								end
-								addCommsReply("Back", commsShip)
-							end)
-							gi = gi + 1
-						until(gi > #goods[comms_target])
-					else
-						setCommsMessage("Insufficient luxury to trade")
+function freighterComms(comms_data)
+	if comms_data.friendlyness > 66 then
+		setCommsMessage("Yes?")
+		-- Offer destination information
+		addCommsReply("Where are you headed?", function()
+			setCommsMessage(comms_target.target:getCallSign())
+			addCommsReply("Back", commsShip)
+		end)
+		-- Offer to trade goods if goods or equipment freighter
+		if distance(player,comms_target) < 5000 then
+			if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
+				gi = 1
+				luxuryQuantity = 0
+				repeat
+					if goods[player][gi][1] == "luxury" then
+						luxuryQuantity = goods[player][gi][2]
 					end
-					addCommsReply("Back", commsShip)
-				else
-					-- Offer to sell goods
+					gi = gi + 1
+				until(gi > #goods[player])
+				if luxuryQuantity > 0 then
 					gi = 1
 					repeat
 						local goodsType = goods[comms_target][gi][1]
 						local goodsQuantity = goods[comms_target][gi][2]
-						local goodsRep = goods[comms_target][gi][3]
-						addCommsReply(string.format("Buy one %s for %i reputation",goods[comms_target][gi][1],goods[comms_target][gi][3]), function()
-							if player.cargo < 1 then
-								setCommsMessage("Insufficient cargo space for purchase")
-							elseif goodsQuantity < 1 then
-								setCommsMessage("Insufficient inventory on freighter")
+						addCommsReply(string.format("Trade luxury for %s",goods[comms_target][gi][1]), function()
+							if goodsQuantity < 1 then
+								setCommsMessage("Insufficient inventory on freighter for trade")
 							else
-								if not player:takeReputationPoints(goodsRep) then
-									setCommsMessage("Insufficient reputation for purchase")
-								else
-									player.cargo = player.cargo - 1
-									decrementShipGoods(goodsType)
-									incrementPlayerGoods(goodsType)
-									setCommsMessage("Purchased")
-								end
+								decrementShipGoods(goodsType)
+								incrementPlayerGoods(goodsType)
+								decrementPlayerGoods("luxury")
+								setCommsMessage("Traded")
 							end
 							addCommsReply("Back", commsShip)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
-				end
-			end
-		elseif comms_data.friendlyness > 33 then
-			setCommsMessage("What do you want?")
-			-- Offer to sell destination information
-			destRep = random(1,5)
-			addCommsReply(string.format("Where are you headed? (cost: %f reputation)",destRep), function()
-				if not player:takeReputationPoints(destRep) then
-					setCommsMessage("Insufficient reputation")
 				else
-					setCommsMessage(comms_target.target:getCallSign())
+					setCommsMessage("Insufficient luxury to trade")
 				end
 				addCommsReply("Back", commsShip)
-			end)
-			-- Offer to sell goods if goods or equipment freighter
-			if distance(player,comms_target) < 5000 then
-				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
-					gi = 1
-					repeat
-						local goodsType = goods[comms_target][gi][1]
-						local goodsQuantity = goods[comms_target][gi][2]
-						local goodsRep = goods[comms_target][gi][3]
-						addCommsReply(string.format("Buy one %s for %i reputation",goods[comms_target][gi][1],goods[comms_target][gi][3]), function()
-							if player.cargo < 1 then
-								setCommsMessage("Insufficient cargo space for purchase")
-							elseif goodsQuantity < 1 then
-								setCommsMessage("Insufficient inventory on freighter")
+			else
+				-- Offer to sell goods
+				gi = 1
+				repeat
+					local goodsType = goods[comms_target][gi][1]
+					local goodsQuantity = goods[comms_target][gi][2]
+					local goodsRep = goods[comms_target][gi][3]
+					addCommsReply(string.format("Buy one %s for %i reputation",goods[comms_target][gi][1],goods[comms_target][gi][3]), function()
+						if player.cargo < 1 then
+							setCommsMessage("Insufficient cargo space for purchase")
+						elseif goodsQuantity < 1 then
+							setCommsMessage("Insufficient inventory on freighter")
+						else
+							if not player:takeReputationPoints(goodsRep) then
+								setCommsMessage("Insufficient reputation for purchase")
 							else
-								if not player:takeReputationPoints(goodsRep) then
-									setCommsMessage("Insufficient reputation for purchase")
-								else
-									player.cargo = player.cargo - 1
-									decrementShipGoods(goodsType)
-									incrementPlayerGoods(goodsType)
-									setCommsMessage("Purchased")
-								end
+								player.cargo = player.cargo - 1
+								decrementShipGoods(goodsType)
+								incrementPlayerGoods(goodsType)
+								setCommsMessage("Purchased")
 							end
-							addCommsReply("Back", commsShip)
-						end)
-						gi = gi + 1
-					until(gi > #goods[comms_target])
-				else
-					-- Offer to sell goods double price
-					gi = 1
-					repeat
-						local goodsType = goods[comms_target][gi][1]
-						local goodsQuantity = goods[comms_target][gi][2]
-						local goodsRep = goods[comms_target][gi][3]*2
-						addCommsReply(string.format("Buy one %s for %i reputation",goods[comms_target][gi][1],goods[comms_target][gi][3]*2), function()
-							if player.cargo < 1 then
-								setCommsMessage("Insufficient cargo space for purchase")
-							elseif goodsQuantity < 1 then
-								setCommsMessage("Insufficient inventory on freighter")
-							else
-								if not player:takeReputationPoints(goodsRep) then
-									setCommsMessage("Insufficient reputation for purchase")
-								else
-									player.cargo = player.cargo - 1
-									decrementShipGoods(goodsType)
-									incrementPlayerGoods(goodsType)
-									setCommsMessage("Purchased")
-								end
-							end
-							addCommsReply("Back", commsShip)
-						end)
-						gi = gi + 1
-					until(gi > #goods[comms_target])
-				end
+						end
+						addCommsReply("Back", commsShip)
+					end)
+					gi = gi + 1
+				until(gi > #goods[comms_target])
 			end
 		else
-			setCommsMessage("Why are you bothering me?")
-			-- Offer to sell goods if goods or equipment freighter double price
-			if distance(player,comms_target) < 5000 then
-				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
-					gi = 1
-					repeat
-						local goodsType = goods[comms_target][gi][1]
-						local goodsQuantity = goods[comms_target][gi][2]
-						local goodsRep = goods[comms_target][gi][3]*2
-						addCommsReply(string.format("Buy one %s for %i reputation",goods[comms_target][gi][1],goods[comms_target][gi][3]*2), function()
-							if player.cargo < 1 then
-								setCommsMessage("Insufficient cargo space for purchase")
-							elseif goodsQuantity < 1 then
-								setCommsMessage("Insufficient inventory on freighter")
-							else
-								if not player:takeReputationPoints(goodsRep) then
-									setCommsMessage("Insufficient reputation for purchase")
-								else
-									player.cargo = player.cargo - 1
-									decrementShipGoods(goodsType)
-									incrementPlayerGoods(goodsType)
-									setCommsMessage("Purchased")
-								end
+			if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
+				goodsQuantity = 0
+				gi = 1
+				repeat
+					goodsQuantity = goodsQuantity + goods[comms_target][gi][2]
+					gi = gi + 1
+				until(gi > #goods[comms_target])
+				if goodsQuantity > 0 then
+					addCommsReply("What kind of cargo are you carrying?", function()
+						gi = 1
+						gMsg = ""
+						repeat
+							if goods[comms_target][gi][2] > 0 then
+								gMsg = gMsg .. goods[comms_target][gi][1] .. "\n"
 							end
-							addCommsReply("Back", commsShip)
-						end)
-						gi = gi + 1
-					until(gi > #goods[comms_target])
+							gi = gi + 1
+						until(gi > #goods[comms_target])
+						setCommsMessage(gMsg)
+						addCommsReply("Back", commsShip)
+					end)
 				end
 			end
 		end
+	elseif comms_data.friendlyness > 33 then
+		setCommsMessage("What do you want?")
+		-- Offer to sell destination information
+		destRep = random(1,5)
+		addCommsReply(string.format("Where are you headed? (cost: %f reputation)",destRep), function()
+			if not player:takeReputationPoints(destRep) then
+				setCommsMessage("Insufficient reputation")
+			else
+				setCommsMessage(comms_target.target:getCallSign())
+			end
+			addCommsReply("Back", commsShip)
+		end)
+		-- Offer to sell goods if goods or equipment freighter
+		if distance(player,comms_target) < 5000 then
+			if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
+				gi = 1
+				repeat
+					local goodsType = goods[comms_target][gi][1]
+					local goodsQuantity = goods[comms_target][gi][2]
+					local goodsRep = goods[comms_target][gi][3]
+					addCommsReply(string.format("Buy one %s for %i reputation",goods[comms_target][gi][1],goods[comms_target][gi][3]), function()
+						if player.cargo < 1 then
+							setCommsMessage("Insufficient cargo space for purchase")
+						elseif goodsQuantity < 1 then
+							setCommsMessage("Insufficient inventory on freighter")
+						else
+							if not player:takeReputationPoints(goodsRep) then
+								setCommsMessage("Insufficient reputation for purchase")
+							else
+								player.cargo = player.cargo - 1
+								decrementShipGoods(goodsType)
+								incrementPlayerGoods(goodsType)
+								setCommsMessage("Purchased")
+							end
+						end
+						addCommsReply("Back", commsShip)
+					end)
+					gi = gi + 1
+				until(gi > #goods[comms_target])
+			else
+				-- Offer to sell goods double price
+				gi = 1
+				repeat
+					local goodsType = goods[comms_target][gi][1]
+					local goodsQuantity = goods[comms_target][gi][2]
+					local goodsRep = goods[comms_target][gi][3]*2
+					addCommsReply(string.format("Buy one %s for %i reputation",goods[comms_target][gi][1],goods[comms_target][gi][3]*2), function()
+						if player.cargo < 1 then
+							setCommsMessage("Insufficient cargo space for purchase")
+						elseif goodsQuantity < 1 then
+							setCommsMessage("Insufficient inventory on freighter")
+						else
+							if not player:takeReputationPoints(goodsRep) then
+								setCommsMessage("Insufficient reputation for purchase")
+							else
+								player.cargo = player.cargo - 1
+								decrementShipGoods(goodsType)
+								incrementPlayerGoods(goodsType)
+								setCommsMessage("Purchased")
+							end
+						end
+						addCommsReply("Back", commsShip)
+					end)
+					gi = gi + 1
+				until(gi > #goods[comms_target])
+			end
+		else
+			if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
+				goodsQuantity = 0
+				gi = 1
+				repeat
+					goodsQuantity = goodsQuantity + goods[comms_target][gi][2]
+					gi = gi + 1
+				until(gi > #goods[comms_target])
+				if goodsQuantity > 0 then
+					addCommsReply("What kind of cargo are you carrying?", function()
+						gi = 1
+						gMsg = ""
+						repeat
+							if goods[comms_target][gi][2] > 0 then
+								gMsg = gMsg .. goods[comms_target][gi][1] .. "\n"
+							end
+							gi = gi + 1
+						until(gi > #goods[comms_target])
+						setCommsMessage(gMsg)
+						addCommsReply("Back", commsShip)
+					end)
+				end
+			end
+		end
+	else
+		setCommsMessage("Why are you bothering me?")
+		-- Offer to sell goods if goods or equipment freighter double price
+		if distance(player,comms_target) < 5000 then
+			if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
+				gi = 1
+				repeat
+					local goodsType = goods[comms_target][gi][1]
+					local goodsQuantity = goods[comms_target][gi][2]
+					local goodsRep = goods[comms_target][gi][3]*2
+					addCommsReply(string.format("Buy one %s for %i reputation",goods[comms_target][gi][1],goods[comms_target][gi][3]*2), function()
+						if player.cargo < 1 then
+							setCommsMessage("Insufficient cargo space for purchase")
+						elseif goodsQuantity < 1 then
+							setCommsMessage("Insufficient inventory on freighter")
+						else
+							if not player:takeReputationPoints(goodsRep) then
+								setCommsMessage("Insufficient reputation for purchase")
+							else
+								player.cargo = player.cargo - 1
+								decrementShipGoods(goodsType)
+								incrementPlayerGoods(goodsType)
+								setCommsMessage("Purchased")
+							end
+						end
+						addCommsReply("Back", commsShip)
+					end)
+					gi = gi + 1
+				until(gi > #goods[comms_target])
+			end
+		else
+			if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
+				goodsQuantity = 0
+				gi = 1
+				repeat
+					goodsQuantity = goodsQuantity + goods[comms_target][gi][2]
+					gi = gi + 1
+				until(gi > #goods[comms_target])
+				if goodsQuantity > 0 then
+					addCommsReply("What kind of cargo are you carrying?", function()
+						gi = 1
+						gMsg = ""
+						repeat
+							if goods[comms_target][gi][2] > 0 then
+								gMsg = gMsg .. goods[comms_target][gi][1] .. "\n"
+							end
+							gi = gi + 1
+						until(gi > #goods[comms_target])
+						setCommsMessage(gMsg)
+						addCommsReply("Back", commsShip)
+					end)
+				end
+			end
+		end
+	end
+end
+
+function neutralComms(comms_data)
+	shipType = comms_target:getTypeName()
+	if shipType:find("Freighter") ~= nil then
+		freighterComms(comms_data)
 	else
 		if comms_data.friendlyness > 50 then
 			setCommsMessage("Sorry, we have no time to chat with you.\nWe are on an important mission.");
@@ -4534,8 +4373,135 @@ function decrementShipGoods(goodsType)
 		gi = gi + 1
 	until(gi > #goods[comms_target])
 end
+
+function cargoTransfer(delta)
+	if playerCarrier.cargo > 0 and playerBlade:isDocked(playerCarrier) and playerBlade.cargo < playerBlade.maxCargo then
+		if bladeTransferButton == nil then
+			bladeTransferButton = "bladeTransferButton"
+			playerBlade:addCustomButton("Relay", bladeTransferButton, "Transfer Cargo", bladeCargoTransfer)
+			bladeTransferButtonOp = "bladeTransferButtonOp"
+			playerBlade:addCustomButton("Operations", bladeTransferButtonOp, "Transfer Cargo", bladeCargoTransfer)
+		end
+	else
+		if bladeTransferButton ~= nil then
+			playerBlade:removeCustom(bladeTransferButton)
+			playerBlade:removeCustom(bladeTransferButtonOp)
+			bladeTransferButton = nil
+			bladeTransferButtonOp = nil
+		end
+	end
+	if playerCarrier.cargo > 0 and playerPoint:isDocked(playerCarrier) and playerPoint.cargo < playerPoint.maxCargo then
+		if pointTransferButton == nil then
+			pointTransferButton = "pointTransferButton"
+			playerPoint:addCustomButton("Relay", pointTransferButton, "Transfer Cargo", pointCargoTransfer)
+			pointTransferButtonOp = "pointTransferButtonOp"
+			playerPoint:addCustomButton("Operations", pointTransferButtonOp, "Transfer Cargo", pointCargoTransfer)
+		end
+	else
+		if pointTransferButton ~= nil then
+			playerPoint:removeCustom(pointTransferButton)
+			playerPoint:removeCustom(pointTransferButtonOp)
+			pointTransferButton = nil
+			pointTransferButtonOp = nil
+		end
+	end
+end
+
+function bladeCargoTransfer()
+	quantityToTransfer = 0
+	gi = 1
+	repeat
+		if goods[playerBlade][gi][2] > 0 then
+			quantityToTransfer = quantityToTransfer + 1
+		end
+		gi = gi + 1
+	until(gi > #goods[playerBlade])
+	if quantityToTransfer <= playerCarrier.cargo then
+		gi = 1
+		repeat
+			if goods[playerBlade][gi][2] > 0 then
+				gi2 = 1
+				repeat
+					if goods[playerCarrier][gi2][1] == goods[playerBlade][gi][1] then
+						playerCarrier.cargo = playerCarrier.cargo - 1
+						goods[playerCarrier][gi2][2] = goods[playerCarrier][gi2][2] + 1
+						playerBlade.cargo = playerBlade.cargo + 1
+						goods[playerBlade][gi][2] = goods[playerBlade][gi][2] - 1
+					end
+					gi2 = gi2 + 1
+				until(gi2 > #goods[playerCarrier])
+			end
+			gi = gi + 1
+		until(gi > #goods[playerBlade])
+		if playerBlade:hasPlayerAtPosition("Relay") then
+			bladeCargoTransferredMsg = "bladeCargoTransferredMsg"
+			playerBlade:addCustomMessage("Relay",bladeCargoTransferredMsg,string.format("One of each type of cargo aboard %s transferred to %s",playerBlade:getCallSign(),playerCarrier:getCallSign()))
+		end
+		if playerBlade:hasPlayerAtPosition("Operations") then
+			bladeCargoTransferredMsgOp = "bladeCargoTransferredMsgOp"
+			playerBlade:addCustomMessage("Operations",bladeCargoTransferredMsgOp,string.format("One of each type of cargo aboard %s transferred to %s",playerBlade:getCallSign(),playerCarrier:getCallSign()))
+		end
+		playerCarrier:addToShipLog(string.format("Cargo transferred from %s",playerBlade:getCallSign()),"Magenta")
+	else
+		if playerBlade:hasPlayerAtPosition("Relay") then
+			insufficientCarrierCargoSpaceMsg = "insufficientCarrierCargoSpaceMsg"
+			playerBlade:addCustomMessage("Relay",insufficientCarrierCargoSpaceMsg,string.format("Insufficient space on %s to accept your cargo transfer",playerCarrier:getCallSign()))
+		end
+		if playerBlade:hasPlayerAtPosition("Operations") then
+			insufficientCarrierCargoSpaceMsgOp = "insufficientCarrierCargoSpaceMsgOp"
+			playerBlade:addCustomMessage("Operations",insufficientCarrierCargoSpaceMsgOp,string.format("Insufficient space on %s to accept your cargo transfer",playerCarrier:getCallSign()))
+		end
+	end
+end
+
+function pointCargoTransfer()
+	quantityToTransfer = 0
+	gi = 1
+	repeat
+		if goods[playerPoint][gi][2] > 0 then
+			quantityToTransfer = quantityToTransfer + 1
+		end
+		gi = gi + 1
+	until(gi > #goods[playerPoint])
+	if quantityToTransfer <= playerCarrier.cargo then
+		gi = 1
+		repeat
+			if goods[playerPoint][gi][2] > 0 then
+				gi2 = 1
+				repeat
+					if goods[playerCarrier][gi2][1] == goods[playerPoint][gi][1] then
+						playerCarrier.cargo = playerCarrier.cargo - 1
+						goods[playerCarrier][gi2][2] = goods[playerCarrier][gi2][2] + 1
+						playerPoint.cargo = playerPoint.cargo + 1
+						goods[playerPoint][gi][2] = goods[playerPoint][gi][2] - 1
+					end
+					gi2 = gi2 + 1
+				until(gi2 > #goods[playerCarrier])
+			end
+			gi = gi + 1
+		until(gi > #goods[playerPoint])
+		if playerPoint:hasPlayerAtPosition("Relay") then
+			pointCargoTransferredMsg = "pointCargoTransferredMsg"
+			playerPoint:addCustomMessage("Relay",pointCargoTransferredMsg,string.format("One of each type of cargo aboard %s transferred to %s",playerPoint:getCallSign(),playerCarrier:getCallSign()))
+		end
+		if playerPoint:hasPlayerAtPosition("Operations") then
+			pointCargoTransferredMsgOp = "pointCargoTransferredMsgOp"
+			playerPoint:addCustomMessage("Operations",pointCargoTransferredMsgOp,string.format("One of each type of cargo aboard %s transferred to %s",playerPoint:getCallSign(),playerCarrier:getCallSign()))
+		end
+		playerCarrier:addToShipLog(string.format("Cargo transferred from %s",playerPoint:getCallSign()),"Magenta")
+	else
+		if playerPoint:hasPlayerAtPosition("Relay") then
+			insufficientCarrierCargoSpaceMsgPoint = "insufficientCarrierCargoSpaceMsgPoint"
+			playerPoint:addCustomMessage("Relay",insufficientCarrierCargoSpaceMsgPoint,string.format("Insufficient space on %s to accept your cargo transfer",playerCarrier:getCallSign()))
+		end
+		if playerPoint:hasPlayerAtPosition("Operations") then
+			insufficientCarrierCargoSpaceMsgPointOp = "insufficientCarrierCargoSpaceMsgPointOp"
+			playerPoint:addCustomMessage("Operations",insufficientCarrierCargoSpaceMsgPointOp,string.format("Insufficient space on %s to accept your cargo transfer",playerCarrier:getCallSign()))
+		end
+	end
+end
 --[[-----------------------------------------------------------------
-      First plot line
+      First plot line. Mission briefing, spawn other plots, wave handling
 -----------------------------------------------------------------]]--
 function initialOrders(delta)
 	plot1name = "initialOrders"
@@ -4546,9 +4512,8 @@ function initialOrders(delta)
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() then
-					p:addToShipLog(string.format("You are to protect your home base, %s, against enemy attack. Respond to other requests as you see fit",homeStation:getCallSign()),"Magenta")
-					primaryOrders = string.format("Protect %s",homeStation:getCallSign())
-					playSoundFile("sa_55_Commander1.wav")
+					p:addToShipLog(string.format("The Ktlitans keep sending harassing ships. We've decrypted some of their communications - enough to identify their primary base by name if not by location. Find and destroy Ktlitan station %s. Respond to other requests from stations in the area if you wish, but your primary goal is do destroy %s. You're in control of our prototype carrier. As you know, it has minimal weapons and cannot dock with a station. It is in your best interest to protect it since it will significantly shorten the duration of your mission.",targetEnemyStation:getCallSign(),targetEnemyStation:getCallSign()),"Magenta")
+					primaryOrders = string.format("Destroy %s",targetEnemyStation:getCallSign())
 				end
 			end
 			plot1 = setEnemyDefenseFleet
@@ -4562,7 +4527,11 @@ function setEnemyDefenseFleet(delta)
 		enemyDefenseFleets = "set"
 		for i=1,#enemyStationList do
 			defx, defy = enemyStationList[i]:getPosition()
-			ntf = spawnEnemies(defx,defy,1.5,enemyStationList[i]:getFaction())
+			if i == #enemyStationList then
+				ntf = spawnEnemies(defx,defy,2,enemyStationList[i]:getFaction())
+			else
+				ntf = spawnEnemies(defx,defy,1,enemyStationList[i]:getFaction())
+			end
 			for _, enemy in ipairs(ntf) do
 				enemy:orderDefendTarget(enemyStationList[i])
 			end
@@ -4584,6 +4553,7 @@ function threadedPursuit(delta)
 			end
 			enemy:orderFlyTowards(scx,scy)
 		end
+		plot2name = "destroyef2"
 		plot2 = destroyef2
 	end
 	if ef3 == nil then
@@ -4603,34 +4573,21 @@ function threadedPursuit(delta)
 		cpx, cpy = vectorFromAngle(random(0,360),random(40000,50000))
 		ef4 = spawnEnemies(scx+cpx,scy+cpy,1)
 		for _, enemy in ipairs(ef4) do
+			if diagnostic then
+				enemy:setCallSign(enemy:getCallSign() .. "ef4")
+			end
 			enemy:orderAttack(p)
 		end
 		plot4 = destroyef4
 	end
-	helpfulWarningTimer = 90
-	plot5 = helpfulWarning
 	waveTimer = interWave
-	if difficulty < 1 then
-		dangerValue = .5
-		dangerIncrement = .1
-	elseif difficulty > 1 then
-		dangerValue = 1
-		dangerIncrement = .5
-	else
-		dangerValue = .8
-		dangerIncrement = .2
-	end
+	dangerValue = .5
+	dangerIncrement = .2
 	plot1 = pressureWaves
 end
 
 function pressureWaves(delta)
 	plot1name = "pressureWaves"
-	if not homeStation:isValid() then
-		missionVictory = false
-		endStatistics()
-		victory("Kraylor")
-		return
-	end
 	if not targetEnemyStation:isValid() then
 		missionVictory = true
 		endStatistics()
@@ -4639,14 +4596,12 @@ function pressureWaves(delta)
 	end
 	waveTimer = waveTimer - delta
 	if waveTimer < 0 then
-		waveSpawned = false
 		dangerValue = dangerValue + dangerIncrement
 		for i=1,#enemyStationList do
 			if enemyStationList[i]:isValid() then
-				if random(1,5) <= 2 then
+				if random(1,5) <= 1 then
 					esx, esy = enemyStationList[i]:getPosition()
 					ntf = spawnEnemies(esx,esy,dangerValue,enemyStationList[i]:getFaction())
-					waveSpawned = true
 					if random(1,5) <= 3 then
 						p = closestPlayerTo(enemyStationList[i])
 						for _, enemy in ipairs(ntf) do
@@ -4662,10 +4617,11 @@ function pressureWaves(delta)
 		end
 		if random(1,5) <= 2 then
 			ntf = spawnEnemies(mnx,mny,dangerValue,targetEnemyStation:getFaction())
-			waveSpawned = true
 			if random(1,5) >= 4 then
-				for _, enemy in ipairs(ntf) do
-					enemy:orderAttack(homeStation)
+				if homeStation:isValid() then
+					for _, enemy in ipairs(ntf) do
+						enemy:orderAttack(homeStation)
+					end
 				end
 			end
 		end
@@ -4673,81 +4629,36 @@ function pressureWaves(delta)
 			p = closestPlayerTo(targetEnemyStation)
 			esx, esy = targetEnemyStation:getPosition()
 			px, py = p:getPosition()
-			ntf = spawnEnemies((esx+px)/2,(esy+py)/2,dangerValue/2,targetEnemyStation:getFaction())
-			waveSpawned = true
+			ntf = spawnEnemies((esx+px)/2,(esy+py)/2,dangerValue,targetEnemyStation:getFaction())
 			if random(1,5) <= 2 then
 				for _, enemy in ipairs(ntf) do
 					enemy:orderAttack(p)
 				end
 			end
 		end
-		if random(1,5) <= 2 then
-			p = closestPlayerTo(targetEnemyStation)
-			px, py = p:getPosition()
-			spx, spy = vectorFromAngle(random(0,360), random(30000, 40000))
-			ntf = spawnEnemies(px+spx, py+spy, dangerValue/2, targetEnemyStation:getFaction())
-			waveSpawned = true
-			for _, enemy in ipairs(ntf) do
-				enemy:orderAttack(p)
-			end
-		end
 		if random(1,5) <= 1 then
-			hsx, hsy = homeStation:getPosition()
+			if homeStation:isValid() then
+				hsx, hsy = homeStation:getPosition()
+			else
+				hsx, hsy = targetEnemyStation()
+			end
 			spx, spy = vectorFromAngle(random(0,360),random(30000,40000))
 			ntf = spawnEnemies(hsx+spx,hsy+spy,dangerValue,targetEnemyStation:getFaction())
-			waveSpawned = true
 			if random(1,5) <= 3 then
-				for _, enemy in ipairs(ntf) do
-					enemy:orderFlyTowards(hsx,hsy)
+				if homeStation:isValid() then
+					for _, enemy in ipairs(ntf) do
+						enemy:orderFlyTowards(hsx,hsy)
+					end
 				end
-			end
-		end
-		if random(1,5) <= 1 then
-			p = closestPlayerTo(targetEnemyStation)
-			px, py = p:getPosition()
-			nol = getObjectsInRadius(px, py, 30000)
-			nearbyNebulae = {}
-			for _, obj in ipairs(nol) do
-				if string.find(obj:getTypeName(),"Nebula") then
-					table.insert(nearbyNebulae,obj)
-				end
-			end
-			if #nearbyNebulae > 0 then
-				nx, ny = nearbyNebulae[math.random(1,#nearbyNebulae)]:getPosition()
-				ntf = spawnEnemies(nx,ny,dangerValue,targetEnemyStation:getFaction())
-				waveSpawned = true
-				for _, enemy in ipairs(ntf) do
-					enemy:orderAttack(p)
-				end
-			end
-		end
-		if not waveSpawned then
-			p = closestPlayerTo(targetEnemyStation)
-			px, py = p:getPosition()
-			spawnAngle = random(0,360)
-			spx, spy = vectorFromAngle(spawnAngle, random(15000,20000))
-			ntf = spawnEnemies(px+spx, py+spy, dangerValue, targetEnemyStation:getFaction())
-			spawnAngle = spawnAngle + random(60,180)
-			spx, spy = vectorFromAngle(spawnAngle, random(20000,25000))
-			ntf = spawnEnemies(px+spx, py+spy, dangerValue, targetEnemyStation:getFaction())
-			for _, enemy in ipairs(ntf) do
-				enemy:orderFlyTowards(px, py)
-			end
-			spawnAngle = spawnAngle + random(60,120)
-			spx, spy = vectorFromAngle(spawnAngle, random(25000,30000))
-			ntf = spawnEnemies(px+spx, py+spy, dangerValue, targetEnemyStation:getFaction())
-			for _, enemy in ipairs(ntf) do
-				enemy:orderAttack(p)
 			end
 		end
 		waveTimer = delta + interWave + dangerValue*10 + random(1,60)
 	end
 end
 --[[-----------------------------------------------------------------
-    Plot 2 Easy delivery, improve maneuverability or get base intelligence
+    Plot 2 
 -----------------------------------------------------------------]]--
 function destroyef2(delta)
-	plot2name = "destroyef2"
 	ef2Count = 0
 	for _, enemy in ipairs(ef2) do
 		if enemy:isValid() then
@@ -4755,288 +4666,331 @@ function destroyef2(delta)
 		end
 	end
 	if ef2Count == 0 then
-		easyDeliveryTimer = 15
-		plot2 = easyDelivery
-		homeDelivery = true
-		p = closestPlayerTo(targetEnemyStation)
-		p:addReputationPoints(20)
-	end
-end
---required cargo should be easy to find, if expensive in reputation to get
-function easyDelivery(delta)
-	plot2name = "easyDelivery"
-	easyDeliveryTimer = easyDeliveryTimer - delta
-	if easyDeliveryTimer < 0 then
-		if easyDeliveryMsg == nil then
-			p = closestPlayerTo(homeStation)
-			if #goods[homeStation] > 0 then
-				for i=2,#stationList do
-					easyStation = stationList[i]
-					gi = 1
-					repeat
-						easyDeliverGood = goods[easyStation][gi][1]
-						gj = 1
-						matchAway = false
-						repeat			
-							if easyDeliverGood == goods[homeStation][gj][1] then
-								matchAway = true
-								break
-							end
-							gj = gj + 1
-						until(gj > #goods[homeStation])
-						if not matchAway then break end
-						gi = gi + 1
-					until(gi > #goods[easyStation])
-					if not matchAway then break end
-				end
-			else
-				matchAway = false
-			end
-			if matchAway then
-				plot2 = nil
-				plot2reminder = nil
-			else
-				p:addToShipLog(string.format("[%s] We need some goods of type %s. Can you help? I hear %s has some",homeStation:getCallSign(),easyDeliverGood,easyStation:getCallSign()),"85,107,47")
-				plot2reminder = string.format("Bring %s to %s. Possible source: %s",easyDeliverGood,homeStation:getCallSign(),easyStation:getCallSign())
-				playSoundFile("sa_55_Manager1.wav")
-			end
-			easyDeliveryMsg = "sent"
-		end
+		plot2 = chooseNextPlot2line
 	end
 end
 
-function spinUpgradeStart(delta)
-	plot2name = "spinUpgradeStart"
-	infoPromised = true
-	spinUpgradeAvailable = false
-	plot2reminder = "Get ship maneuver upgrade"
-	if pickSpinBase == nil then
-		p = closestPlayerTo(homeStation)
-		for i=13,#stationList do
-			if stationList[i]:isValid() then
-				candidate = stationList[i]
-				if #goods[candidate] > 0 then
-					gi = 1
-					repeat
-						if goods[candidate][gi][1] ~= "food" and goods[candidate][gi][1] ~= "medicine" then
-							spinBase = candidate	--last valid station in list without food or medicine
-						end
-						gi = gi + 1
-					until(gi > #goods[candidate])
-				end
-			end
-		end
-		if diagnostic then
-			p:addToShipLog(string.format("Final choice: %s previous: %s",spinBase:getCallSign(),candidate:getCallSign()),"Blue")
-		end
-		pickSpinBase = "done"
-		plot2 = pickSpinGood
-	end
-end
-
-function pickSpinGood(delta)
-	plot2name = "pickSpinGood"
-	if pickSpinGoodBase == nil then
-		p = closestPlayerTo(homeStation)
-		for i=14,#stationList do
-			if stationList[i]:isValid() then
-				candidate = stationList[i]
-				if diagnostic then
-					p:addToShipLog(string.format("valid: %s index: %i",candidate:getCallSign(),i),"Blue")
-				end
-				if #goods[candidate] > 0 then
-					spinGoodBase = candidate
-					if diagnostic then
-						p:addToShipLog(string.format("has %i goods",#goods[candidate]),"Blue")
-					end
-					gi = 1
-					repeat
-						spinGood = goods[spinGoodBase][gi][1]
-						if diagnostic then
-							p:addToShipLog(string.format("top of spin good base good loop. gi: %i good: %s",gi,spinGood),"Blue")
-						end
-						matchAway = false
-						gj = 1
-						repeat
-							if spinGood == "food" or spinGood == "medicine" or spinGood == goods[spinBase][gj][1] then
-								matchAway = true
-								break
-							end
-							gj = gj + 1
-						until(gj > #goods[spinBase])
-						if not matchAway then break end
-						gi = gi + 1
-					until(gi > #goods[spinGoodBase])
-					if not matchAway then break end
-				end
-			end
-		end
-		if diagnostic then
-			p:addToShipLog(string.format("spin base: %s spin good base: %s spin good: %s",spinBase:getCallSign(),spinGoodBase:getCallSign(),spinGood),"Blue")
-		end
-		plot2 = cleanupSpinners
-		spinReveal = 0
-		spinUpgradeAvailable = true
-		pickSpinGoodBase = "done"
-	end
-end
-
-function cleanupSpinners(delta)
-	plot2name = "cleanupSpinners"
-	noSpinCount = 0
-	for pidx=1,8 do
-		pc = getPlayerShip(pidx)
-		if pc ~= nil and pc:isValid() then
-			if not pc.spinUpgrade then
-				noSpinCount = noSpinCount + 1
-			end
-		end
-	end
-	if noSpinCount == 0 then
-		plot2reminder = nil
-		plot2 = warpJamLineStart
-		warpJamLineTimer = 300
-		p = closestPlayerTo(targetEnemyStation)
-		p:addReputationPoints(20)
-	end
-end
-
-function enemyBaseInfoStart(delta)
-	plot2name = "enemyBaseInfoStart"
-	baseIntelligenceAvailable = true
-	infoPromised = true
-	rvfCount = 0
-	rvnCount = 0
-	baseInt1Visit = false
-	for i=4,12 do
-		if stationList[i]:isValid() then
-			rvfCount = rvfCount + 1
-		end
-	end
-	for i=13,30 do
-		if stationList[i]:isValid() then
-			rvnCount = rvnCount + 1
-		end
-	end
-	if rvfCount > 0 then
-		repeat
-			baseInt1 = stationList[math.random(4,12)]
-		until(baseInt1:isValid())
-		if rvnCount > 1 then
-			repeat
-				baseInt2 = stationList[math.random(13,30)]
-			until(baseInt2:isValid())
-		end
-	end
+function chooseNextPlot2line(delta)
+	plot2name = "chooseNextPlot2line"
 	plot2reminder = nil
-	plot2 = warpJamLineStart
-	warpJamLineTimer = 300
-end
-
-function warpJamLineStart(delta)
-	plot2name = "warpJamLineStart"
-	warpJamLineTimer = warpJamLineTimer - delta
-	if warpJamLineTimer < 0 then
-		p = closestPlayerTo(targetEnemyStation)
-		esx, esy = targetEnemyStation:getPosition()
-		cpx, cpy = p:getPosition()
-		wjCenter = CpuShip():setFaction("Kraylor"):setTemplate("Phobos M3"):setPosition((esx+cpx)/2,(esy+cpy)/2):orderFlyTowardsBlind(cpx,cpy)
-		wjP1 = CpuShip():setFaction("Kraylor"):setTemplate("Phobos M3"):setPosition((esx+cpx)/2+20000,(esy+cpy)/2+20000):orderFlyTowardsBlind(cpx+20000,cpy+20000)
-		wjP2 = CpuShip():setFaction("Kraylor"):setTemplate("Phobos M3"):setPosition((esx+cpx)/2-20000,(esy+cpy)/2-20000):orderFlyTowardsBlind(cpx-20000,cpy-20000)
-		wjP3 = CpuShip():setFaction("Kraylor"):setTemplate("Phobos M3"):setPosition((esx+cpx)/2+20000,(esy+cpy)/2-20000):orderFlyTowardsBlind(cpx+20000,cpy-20000)
-		wjP4 = CpuShip():setFaction("Kraylor"):setTemplate("Phobos M3"):setPosition((esx+cpx)/2-20000,(esy+cpy)/2+20000):orderFlyTowardsBlind(cpx-20000,cpy+20000)
-		wjCenterE1 = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setPosition((esx+cpx)/2,(esy+cpy)/2):orderDefendTarget(wjCenter)
-		wjCenterE2 = CpuShip():setFaction("Kraylor"):setTemplate("MU52 Hornet"):setPosition((esx+cpx)/2,(esy+cpy)/2):orderDefendTarget(wjCenter)
-		wjCenterE3 = CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setPosition((esx+cpx)/2,(esy+cpy)/2):orderDefendTarget(wjCenter)
-		wjCenterE4 = CpuShip():setFaction("Kraylor"):setTemplate("Ktlitan Fighter"):setPosition((esx+cpx)/2,(esy+cpy)/2):orderDefendTarget(wjCenter)
-		wjP1E1 = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setPosition((esx+cpx)/2+20000,(esy+cpy)/2+20000):orderDefendTarget(wjP1)
-		wjP1E2 = CpuShip():setFaction("Kraylor"):setTemplate("MU52 Hornet"):setPosition((esx+cpx)/2+20000,(esy+cpy)/2+20000):orderDefendTarget(wjP1)
-		wjP1E3 = CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setPosition((esx+cpx)/2+20000,(esy+cpy)/2+20000):orderDefendTarget(wjP1)
-		wjP1E4 = CpuShip():setFaction("Kraylor"):setTemplate("Ktlitan Fighter"):setPosition((esx+cpx)/2+20000,(esy+cpy)/2+20000):orderDefendTarget(wjP1)
-		wjP2E1 = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setPosition((esx+cpx)/2-20000,(esy+cpy)/2-20000):orderDefendTarget(wjP2)
-		wjP2E2 = CpuShip():setFaction("Kraylor"):setTemplate("MU52 Hornet"):setPosition((esx+cpx)/2-20000,(esy+cpy)/2-20000):orderDefendTarget(wjP2)
-		wjP2E3 = CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setPosition((esx+cpx)/2-20000,(esy+cpy)/2-20000):orderDefendTarget(wjP2)
-		wjP2E4 = CpuShip():setFaction("Kraylor"):setTemplate("Ktlitan Fighter"):setPosition((esx+cpx)/2-20000,(esy+cpy)/2-20000):orderDefendTarget(wjP2)
-		wjP3E1 = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setPosition((esx+cpx)/2+20000,(esy+cpy)/2-20000):orderDefendTarget(wjP3)
-		wjP3E2 = CpuShip():setFaction("Kraylor"):setTemplate("MU52 Hornet"):setPosition((esx+cpx)/2+20000,(esy+cpy)/2-20000):orderDefendTarget(wjP3)
-		wjP3E3 = CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setPosition((esx+cpx)/2+20000,(esy+cpy)/2-20000):orderDefendTarget(wjP3)
-		wjP3E4 = CpuShip():setFaction("Kraylor"):setTemplate("Ktlitan Fighter"):setPosition((esx+cpx)/2+20000,(esy+cpy)/2-20000):orderDefendTarget(wjP3)
-		wjP4E1 = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setPosition((esx+cpx)/2-20000,(esy+cpy)/2+20000):orderDefendTarget(wjP4)
-		wjP4E2 = CpuShip():setFaction("Kraylor"):setTemplate("MU52 Hornet"):setPosition((esx+cpx)/2-20000,(esy+cpy)/2+20000):orderDefendTarget(wjP4)
-		wjP4E3 = CpuShip():setFaction("Kraylor"):setTemplate("Fighter"):setPosition((esx+cpx)/2-20000,(esy+cpy)/2+20000):orderDefendTarget(wjP4)
-		wjP4E4 = CpuShip():setFaction("Kraylor"):setTemplate("Ktlitan Fighter"):setPosition((esx+cpx)/2-20000,(esy+cpy)/2+20000):orderDefendTarget(wjP4)
-		plot2 = warpJamLineSpring
-	end
-end
-
-function warpJamLineSpring(delta)
-	plot2name = "warpJamLineSpring"
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
-		if p ~= nil and p:isValid() and wjCenter:isValid() then
-			if distance(p,wjCenter) < 10000 then
-				plot2 = warpJamLineRelease
+	if nextPlot2 == nil then
+		if #plot2choices > 0 then
+			p2c = math.random(1,#plot2choices)
+			plot2 = plot2choices[p2c]
+			table.remove(plot2choices,p2c)
+			plot2DelayTimer = random(40,120)
+		else
+			plot2 = nil
+		end
+	else
+		plot2 = nextPlot2
+		for i=1,#plot2choices do
+			if plot2choices[i] == plot2 then
+				table.remove(plot2choices,i)
+				plot2DelayTimer = random(40,120)
 				break
 			end
 		end
-	end
-	if wjCenter:isValid() then
-		if distance(wjCenter,homeStation) < 10000 then
-			plot2 = warpJamLineRelease
-		end
-	else
-		plot2 = warpJamLineRelease
+		nextPlot2 = nil
 	end
 end
 
-function warpJamLineRelease(delta)
-	plot2name = "warpJamLineRelease"
-	if wjCenter:isValid() then
-		wx, wy = wjCenter:getPosition()
-		WarpJammer():setFaction("Kraylor"):setRange(20000):setPosition(wx,wy)
-		wjCenter:orderStandGround()
+function betweenPlot2fleet()
+	p = closestPlayerTo(targetEnemyStation)
+	p:addReputationPoints(20)
+	scx, scy = p:getPosition()
+	cpx, cpy = vectorFromAngle(random(0,360),random(30000,35000))
+	ef2 = spawnEnemies(scx+cpx,scy+cpy,dangerValue)
+	for _, enemy in ipairs(ef2) do
+		if diagnostic then
+			enemy:setCallSign(enemy:getCallSign() .. "ef2")
+		end
+		enemy:orderAttack(p)
 	end
-	if wjP1:isValid() then
-		wx, wy = wjP1:getPosition()
-		WarpJammer():setFaction("Kraylor"):setRange(20000):setPosition(wx,wy)
-		wjP1:orderStandGround()
+	plot2reminder = nil
+	plot2 = destroyef2
+	plot2name = "destroyef2"
+end
+-- upgrade ship spin functions
+function upgradeShipSpin(delta)
+	plot2name = "upgradeShipSpin"
+	removeGMFunction(GMStartPlot2upgradeShipSpin)
+	plot2DelayTimer = plot2DelayTimer - delta
+	if plot2DelayTimer < 0 then
+		repeat
+			candidate = stationList[math.random(13,#stationList)]
+			if candidate:isValid() then
+				spinScientistStation = candidate
+			end
+		until(spinScientistStation ~= nil)
+		for pidx=1,8 do
+			p = getPlayerShip(pidx)
+			if p ~= nil and p:isValid() then
+				p:addToShipLog(string.format("Paulina Lindquist, a noted research engineer recently published her latest theories on engine design. We believe her theories have practical applications to our ship maneuvering systems. You may want to talk to her about putting her theories into practice on our naval vessels. She's currently stationed on %s in %s",spinScientistStation:getCallSign(),spinScientistStation:getSectorName()),"Magenta")
+			end
+		end
+		plot2reminder = string.format("Visit Paulina Lindquist on %s in %s regarding ship spin upgrade",spinScientistStation:getCallSign(),spinScientistStation:getSectorName())
+		plot2name = "spinScientist"
+		plot2 = spinScientist
+		spinUpgradeAvailable = false
 	end
-	if wjP2:isValid() then
-		wx, wy = wjP2:getPosition()
-		WarpJammer():setFaction("Kraylor"):setRange(20000):setPosition(wx,wy)
-		wjP2:orderStandGround()
+end
+function spinScientist(delta)
+	validPlayers = 0
+	spinPlayers = 0
+	if spinUpgradeAvailable then
+		for pidx=1,8 do
+			p = getPlayerShip(pidx)
+			if p ~= nil and p:isValid() then
+				validPlayers = validPlayers + 1
+				if p.spinUpgrade then
+					spinPlayers = spinPlayers + 1
+				end
+			end
+		end
+		if spinPlayers == validPlayers then
+			betweenPlot2fleet()
+		end
+	else
+		if not spinScientistStation:isValid() then
+			spinScientistStation = nil
+			repeat
+				candidate = stationList[math.random(13,#stationList)]
+				if candidate:isValid() then
+					spinScientistStation = candidate
+				end
+			until(spinScientistStation ~= nil)
+			for pidx=1,8 do
+				p = getPlayerShip(pidx)
+				if p ~= nil and p:isValid() then
+					p:addToShipLog(string.format("Paulina Lindquist, has been reassigned to station %s in %s",spinScientistStation:getCallSign(),spinScientistStation:getSectorName()),"Magenta")
+				end
+			end
+			plot2reminder = string.format("Visit Paulina Lindquist on %s in %s regarding ship spin upgrade",spinScientistStation:getCallSign(),spinScientistStation:getSectorName())
+		end
 	end
-	if wjP3:isValid() then
-		wx, wy = wjP3:getPosition()
-		WarpJammer():setFaction("Kraylor"):setRange(20000):setPosition(wx,wy)
-		wjP3:orderStandGround()
+end
+-- Locate target enemy base functions
+function locateTargetEnemyBase(delta)
+	plot2name = "locateTargetEnemyBase"
+	removeGMFunction(GMStartPlot2locateTargetEnemyBase)
+	plot2DelayTimer = plot2DelayTimer - delta
+	if plot2DelayTimer < 0 then
+		repeat
+			candidate = stationList[math.random(1,12)]
+			if candidate:isValid() then
+			end
+		until(friendlyClueStation ~= nil)
+		for pidx=1,8 do
+			p = getPlayerShip(pidx)
+			if p ~= nil and p:isValid() then
+				p:addToShipLog(string.format("Herbert Long believes he has a lead on some information about the enemy base that has been the source of the harassing ships. He's stationed on %s in %s",friendlyClueStation:getCallSign(),friendlyClueStation:getSectorName()),"Magenta")
+			end
+		end
+		plot2reminder = string.format("Talk to Herbert Long on %s in %s regarding enemy base",friendlyClueStation:getCallSign(),friendlyClueStation:getSectorName())
+		plot2name = "friendlyClue"
+		plot2 = friendlyClue
 	end
-	if wjP4:isValid() then
-		wx, wy = wjP4:getPosition()
-		WarpJammer():setFaction("Kraylor"):setRange(20000):setPosition(wx,wy)
-		wjP4:orderStandGround()
+end
+function friendlyClue(delta)
+end
+-- Rescue dying scientist functions
+function rescueDyingScientist(delta)
+	plot2name = "rescueDyingScientist"
+	removeGMFunction(GMStartPlot2rescueDyingScientist)
+	scientistDeathTimer = 300
+	pickScientistStation()
+	pickDoctorStation()
+	placeHullArtifact()
+	for pidx=1,8 do
+		p = getPlayerShip(pidx)
+		if p ~= nil and p:isValid() then
+			p:addToShipLog(string.format("[%s in %s] Medical emergency: Engineering research scientist Terrence Forsythe has contracted a rare medical condition. After contacting nearly every station in the area, we found that doctor Geraldine Polaski on %s has the expertise and facilities to help. However, we don't have the necessary transport to get Terrence there in time - he has only a few minutes left to live. Can you take Terrence to %s?",scientistStation:getCallSign(),scientistStation:getSectorName(),doctorStation:getCallSign(),doctorStation:getCallSign()),"95,158,160")
+		end
 	end
-	startAngle = random(0,360)
-	hsx, hsy = homeStation:getPosition()
-	wjAdvx, wjAdvy = vectorFromAngle(startAngle,random(25000,30000))
-	wjAdv1ef = spawnEnemies(hsx+wjAdvx,hsy+wjAdvy,1)
-	angle2 = startAngle + random(60,120)
-	wjAdvx, wjAdvy = vectorFromAngle(angle2,random(30000,35000))
-	wjAdv2ef = spawnEnemies(hsx+wjAdvx,hsy+wjAdvy,1)
-	angle3 = angle2 + random(60,120)
-	wjAdvx, wjAdvy = vectorFromAngle(angle3,random(35000,40000))
-	wjAdv3ef = spawnEnemies(hsx+wjAdvx,hsy+wjAdvy,1)
-	for _, enemy in ipairs(wjAdv2ef) do
-		enemy:orderAttack(homeStation)
+	plot2reminder = string.format("Transport Terrence Forsythe from %s in %s to %s before he dies",scientistStation:getCallSign(),scientistStation:getSectorName(),doctorStation:getCallSign())
+	plot2name = "getSickScientist"
+	plot2 = getSickScientist
+end
+function pickScientistStation()
+	repeat
+		candidate = stationList[math.random(13,30)]
+		if candidate:isValid() then
+			scientistStation = candidate
+		end
+	until(scientistStation ~= nil)
+end
+function pickDoctorStation()
+	repeat
+		candidate = stationList[math.random(1,12)]
+		if candidate:isValid() then
+			doctorStation = candidate
+		end
+	until(doctorStation ~= nil)
+end
+function placeHullArtifact()
+	asx, asy = scientistStation:getPosition()
+	wx, wy = vectorFromAngle(random(0,360),random(2500,3500))
+	hullArtifact = Artifact():setPosition(asx+wx,asy+wy):setModel("artifact2"):allowPickup(false):setScanningParameters(3,2)
+	hullArtifact:setDescriptions("Artificially manufactured object of unknown purpose","Prototype device intended for ship system integration"):setRadarSignatureInfo(10,50,5)
+end
+function getSickScientist(delta)
+	scientistDeathTimer = scientistDeathTimer - delta
+	if scientistDeathTimer < 0 then
+		scientistDies()
 	end
-	for _, enemy in ipairs(wjAdv3ef) do
-		enemy:orderFlyTowards(hsx, hsy)
+	if scientistStation:isValid() then
+		for pidx=1,8 do
+			p = getPlayerShip(pidx)
+			if p ~= nil and p:isValid() and distance(p,scientistStation) < 1000 then
+				playerWithScientist = p
+				pickupMsg = string.format("[%s] Terrence Forsythe has been transported aboard your ship. Please take him to Dr. Polaski on %s. ",scientistStation:getCallSign(),doctorStation:getCallSign())
+				minutesToLive = math.floor(scientistDeathTimer/60)
+				if minutesToLive == 0 then
+					pickupMsg = pickupMsg .. "We believe he has less than a minute to live"
+				elseif minutesToLive == 1 then
+					pickupMsg = pickupMsg .. "We think he has about a minute before he dies"
+				else
+					pickupMsg = pickupMsg .. string.format("He probably has about %i minutes to live",minutesToLive)
+				end
+				p:addToShipLog(pickupMsg,"95,158,160")
+				plot2name = "deliverSickScientist"
+				plot2 = deliverSickScientist
+				break
+			end
+		end
+		if pickupMsg ~= nil then
+			for pidx=1,8 do
+				p = getPlayerShip(pidx)
+				if p ~= nil and p:isValid() and p ~= playerWithScientist then
+					p:addToShipLog(string.format("Terrence Forsyth aboard %s",playerWithScientist:getCallSign()),"Magenta")
+				end
+			end
+		end
+	else
+		for pidx=1,8 do
+			p = getPlayerShip(pidx)
+			if p ~= nil and p:isValid() then
+				p:addToShipLog(string.format("%s has been destroyed",scientistStation:getCallSign()),"Magenta")
+			end
+		end
+		betweenPlot2fleet()
 	end
-	plot2name = nil
-	plot2 = nil
+end
+function deliverSickScientist(delta)
+	scientistDeathTimer = scientistDeathTimer - delta
+	if scientistDeathTimer < 0 then
+		scientistDies()
+	end
+	if doctorStation:isValid() then
+		if playerWithScientist:isValid() then
+			if distance(playerWithScientist,doctorStation) < 1000 then
+				playerWithScientist:addToShipLog(string.format("[%s] We have received your emergency medical transport of research scientist Terrence Forsythe. Doctor Geraldine Polaski has stabalized his condition.",doctorStation:getCallSign()),"#8a2be2")
+				plot2name = "keyToArtifact"
+				plot2reminder = nil
+				scientistRecoveryTimer = 90
+				plot2 = keyToArtifact
+			end
+		else
+			betweenPlot2fleet()
+		end
+	else
+		for pidx=1,8 do
+			p = getPlayerShip(pidx)
+			if p ~= nil and p:isValid() then
+				p:addToShipLog(string.format("%s has been destroyed",doctorStation:getCallSign()),"Magenta")
+			end
+		end
+		betweenPlot2fleet()
+	end
+end
+function keyToArtifact(delta)
+	scientistRecoveryTimer = scientistRecoveryTimer - delta
+	if scientistRecoveryTimer < 0 then
+		keyMsg = string.format("[Terrence Forsythe] I can never repay you for saving my life. However, you might be able to use the practical results of my latest research. Near %s in %s you'll find a prototype for ship system integration. This prototype allows for the rapid and semi-automated repair of hull damage as directed by your Engineer. I have transmitted the key to allow you to use this prototype",scientistStation:getCallSign(),scientistStation:getSectorName())
+		if playerWithScientist:isValid() then
+			playerWithScientist:addToShipLog(keyMsg,"#8a2be2")
+		else
+			for pidx=1,8 do
+				p = getPlayerShip(pidx)
+				if p ~= nil and p:isValid() then
+					p:addToShipLog(keyMsg,"#8a2be2")
+				end
+			end
+		end
+		plot2name = "recoverHullArtifact"
+		plot2reminder = string.format("Recover hull repair prototype near %s in %s",scientistStation:getCallSign(),scientistStation:getSectorName())
+		plot2 = recoverHullArtifact
+	end
+end
+-- Semi-automated hull repair functions
+function recoverHullArtifact(delta)
+	for pidx=1,8 do
+		p = getPlayerShip(pidx)
+		if p ~= nil and p:isValid() then
+			tempPlayerType = p:getTypeName()
+			if tempPlayerType == "Benedict" or tempPlayerType == "Kiriya" then
+				if distance(p,hullArtifact) < 1000 then
+					playerWithAutoHullRepair = p
+					installAutoHullRepair()
+					hullArtifact:destroy()
+					betweenPlot2fleet()
+					break
+				end
+			else
+				if distance(p,hullArtifact) < 500 then
+					playerWithAutoHullRepair = p
+					installAutoHullRepair()
+					hullArtifact:destroy()
+					betweenPlot2fleet()
+					break
+				end
+			end
+		end
+	end
+end
+function installAutoHullRepair()
+	repairHullUses = 5
+	if playerWithAutoHullRepair:hasPlayerAtPosition("Engineering") then
+		hullUseMsg = "hullUseMsg"
+		playerWithAutoHullRepair:addCustomMessage("Engineering",hullUseMsg,string.format("Hull repair prototype installed. Limited to %i uses",repairHullUses))
+	end
+	if playerWithAutoHullRepair:hasPlayerAtPosition("Engineering+") then
+		hullUseMsgPlus = "hullUseMsgPlus"
+		playerWithAutoHullRepair:addCustomMessage("Engineering+",hullUseMsgPlus,string.format("Hull repair prototype installed. Limited to %i uses",repairHullUses))
+	end
+	repairHullButton = string.format("repairHullButton%i",repairHullUses)
+	playerWithAutoHullRepair:addCustomButton("Engineering",repairHullButton,string.format("Repair Hull (%i)",repairHullUses),repairHull)
+	repairHullButtonPlus = string.format("repairHullButtonPlus%i",repairHullUses)
+	playerWithAutoHullRepair:addCustomButton("Engineering+",repairHullButtonPlus,string.format("Repair Hull (%i)",repairHullUses),repairHull)
+end
+function repairHull()
+	if playerWithAutoHullRepair:getHull() < playerWithAutoHullRepair:getHullMax() then
+		playerWithAutoHullRepair:setHull(playerWithAutoHullRepair:getHullMax())
+		repairHullUses = repairHullUses - 1
+		playerWithAutoHullRepair:removeCustom(repairHullButton)
+		playerWithAutoHullRepair:removeCustom(repairHullButtonPlus)
+		repairHullButton = nil
+		repairHullButtonPlus = nil
+		if repairHullUses > 0 then
+			repairHullButton = string.format("repairHullButton%i",repairHullUses)
+			playerWithAutoHullRepair:addCustomButton("Engineering",repairHullButton,string.format("Repair Hull (%i)",repairHullUses),repairHull)
+			repairHullButtonPlus = string.format("repairHullButtonPlus%i",repairHullUses)
+			playerWithAutoHullRepair:addCustomButton("Engineering+",repairHullButtonPlus,string.format("Repair Hull (%i)",repairHullUses),repairHull)
+		end
+	end
+end
+function scientistDies()
+	for pidx=1,8 do
+		p = getPlayerShip(pidx)
+		if p ~= nil and p:isValid() then
+			p:addToShipLog("Terrence Forsythe has perished","Magenta")
+		end
+	end
+	betweenPlot2fleet()
 end
 --[[-----------------------------------------------------------------
-    Plot 3 Development of intelligence over time
+    Plot 3 
 -----------------------------------------------------------------]]--
 function destroyef3(delta)
 	plot3name = "destroyef3"
@@ -5047,301 +5001,404 @@ function destroyef3(delta)
 		end
 	end
 	if ef3Count == 0 then
-		hunterTransition1Timer = timedIntelligenceInterval
-		plot3 = hunterTransition1
-		p = closestPlayerTo(targetEnemyStation)
-		p:addReputationPoints(20)
+		plot3 = chooseNextPlot3line
 	end
 end
 
-function hunterTransition1(delta)
-	plot3name = "hunterTransition1"
-	hunterTransition1Timer = hunterTransition1Timer - delta
-	if hunterTransition1Timer < 0 then
-		iuMsg = string.format("The enemy activity has been traced back to enemy bases nearby. Find these bases and stop these incursions. Threat Assessment: %.1f",dangerValue)
+function chooseNextPlot3line(delta)
+	plot3name = "chooseNextPlot2line"
+	plot3reminder = nil
+	if nextPlot3 == nil then
+		if #plot3choices > 0 then
+			p3c = math.random(1,#plot3choices)
+			plot3 = plot3choices[p3c]
+			table.remove(plot3choices,p3c)
+			plot3DelayTimer = random(40,120)
+		else
+			plot3 = nil
+		end
+	else
+		plot3 = nextPlot3
+		for i=1,#plot3choices do
+			if plot3choices[i] == plot3 then
+				table.remove(plot3choices,i)
+				plot3DelayTimer = random(40,120)
+				break
+			end
+		end
+		nextPlot3 = nil
+	end
+end
+
+function betweenPlot3fleet()
+	p = closestPlayerTo(targetEnemyStation)
+	p:addReputationPoints(20)
+	scx, scy = p:getPosition()
+	cpx, cpy = vectorFromAngle(random(0,360),random(30000,35000))
+	ef3 = spawnEnemies(scx+cpx,scy+cpy,dangerValue)
+	for _, enemy in ipairs(ef3) do
+		if diagnostic then
+			enemy:setCallSign(enemy:getCallSign() .. "ef3")
+		end
+		enemy:orderAttack(p)
+	end
+	plot3reminder = nil
+	plot3 = destroyef3
+	plot3name = "destroyef3"
+end
+-- plot 3 add homing missile weapons tube to ship
+function addTubeToShip(delta)
+	plot3name = "addTubeToShip"
+	removeGMFunction(GMStartPlot3addTubeToShip)
+	plot3DelayTimer = plot3DelayTimer - delta
+	if plot3DelayTimer < 0 then
+		repeat
+			candidate = stationList[math.random(13,#stationList)]
+			if candidate:isValid() then
+				addTubeStation = candidate
+			end
+		until(addTubeStation ~= nil)
+		tubeCargoChoice = math.random(1,3)
+		if tubeCargoChoice == 1 then
+			tubePart = "lifter"
+		elseif tubeCargoChoice == 2 then
+			tubePart = "circuit"
+		else
+			tubePart = "nanites"
+		end
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(iuMsg,"Magenta")
+				p:addToShipLog(string.format("Retired naval officer, Boris Eggleston has taken his expertise in miniaturization and come up with a way to add a missile tube to naval vessels. He's vacationing on %s in %s",addTubeStation:getCallSign(),addTubeStation:getSectorName()),"Magenta")
+				
 			end
 		end
-		secondaryOrders = string.format("Find enemy bases. Stop enemy incursions. TA:%.1f",dangerValue)
-		scx, scy = homeStation:getPosition()
-		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
-		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
-		for _, enemy in ipairs(ef3) do
-			enemy:orderFlyTowards(scx,scy)
-		end
-		plot3 = destroyef3v2
+		plot3reminder = string.format("Get extra weapons tube from Boris Eggleston on %s in %s",addTubeStation:getCallSign(),addTubeStation:getSectorName())
+		plot3name = "tubeOfficer"
+		plot3 = tubeOfficer
 	end
 end
-
-function destroyef3v2(delta)
-	plot3name = "destroyef3v2"
-	ef3Count = 0
-	for _, enemy in ipairs(ef3) do
-		if enemy:isValid() then
-			ef3Count = ef3Count + 1
-		end
-	end
-	if ef3Count == 0 then
-		hunterTransition2Timer = timedIntelligenceInterval
-		plot3 = hunterTransition2
-		p = closestPlayerTo(targetEnemyStation)
-		p:addReputationPoints(20)
-	end
-end
-
-function hunterTransition2(delta)
-	plot3name = "hunterTransition2"
-	hunterTransition2Timer = hunterTransition2Timer - delta
-	if hunterTransition2Timer < 0 then
-		iuMsg = string.format("Kraylor prefect Ghalontor has moved to one of the enemy stations. Destroy that station and the Kraylor incursion will crumble. Threat Assessment: %.1f",dangerValue)
-		playSoundFile("sa_55_Commander2.wav")
+function tubeOfficer(delta)
+	if addTubeStation:isValid() then
+		validPlayers = 0
+		tubePlayers = 0
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(iuMsg,"Magenta")
-			end
-		end
-		secondaryOrders = string.format("Destroy enemy base with Prefect Ghalontor aboard. TA:%.1f",dangerValue)
-		scx, scy = homeStation:getPosition()
-		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
-		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
-		for _, enemy in ipairs(ef3) do
-			enemy:orderFlyTowards(scx,scy)
-		end
-		plot3 = destroyef3v3
-	end
-end
-
-function destroyef3v3(delta)
-	plot3name = "destroyef3v3"
-	ef3Count = 0
-	for _, enemy in ipairs(ef3) do
-		if enemy:isValid() then
-			ef3Count = ef3Count + 1
-		end
-	end
-	if ef3Count == 0 then
-		hunterTransition3Timer = timedIntelligenceInterval
-		plot3 = hunterTransition3
-	end
-end
-
-function hunterTransition3(delta)
-	plot3name = "hunterTransition3"
-	hunterTransition3Timer = hunterTransition3Timer - delta
-	if hunterTransition3Timer < 0 then
-		for i=4,#enemyStationList do
-			if enemyStationList[i]:isValid() then
-				if enemyInt4 == nil then
-					enemyInt4 = enemyStationList[i]
-					break
+				validPlayers = validPlayers + 1
+				if p.tubeAdded then
+					tubePlayers = tubePlayers + 1
 				end
 			end
 		end
-		if enemyInt4 == nil then
-			enemyInt4 = targetEnemyStation
+		if tubePlayers == validPlayers then
+			betweenPlot3fleet()
 		end
-		iuMsg = string.format("Enemy base located in %s. Others expected nearby. Threat Assessment: %.1f",enemyInt4:getSectorName(),dangerValue)
+	else
+		addTubeStation = nil
+		repeat
+			candidate = stationList[math.random(13,#stationList)]
+			if candidate:isValid() then
+				addTubeStation = candidate
+			end
+		until(addTubeStation ~= nil)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(iuMsg,"Magenta")
+				p:addToShipLog(string.format("Boris Eggleston changed his vacation spot to %s in %s",addTubeStation:getCallSign(),addTubeStation:getSectorName()),"Magenta")
 			end
 		end
-		secondaryOrders = string.format("Destroy enemy base possibly near %s with Prefect Ghalontor aboard. TA:%.1f",enemyInt4:getSectorName(),dangerValue)
-		scx, scy = homeStation:getPosition()
-		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
-		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
-		for _, enemy in ipairs(ef3) do
-			enemy:orderFlyTowards(scx,scy)
-		end
-		plot3 = destroyef3v4
+		plot3reminder = string.format("Get extra weapons tube from Boris Eggleston on %s in %s",addTubeStation:getCallSign(),addTubeStation:getSectorName())
 	end
 end
-
-function destroyef3v4(delta)
-	plot3name = "destroyef3v4"
-	ef3Count = 0
-	for _, enemy in ipairs(ef3) do
-		if enemy:isValid() then
-			ef3Count = ef3Count + 1
+-- plot 3 upgrade the amount of damage done by beam weapons
+function upgradeBeamDamage(delta)
+	plot3name = "upgradeBeamDamage"
+	removeGMFunction(GMStartPlot3upgradeBeamDamage)
+	plot3DelayTimer = plot3DelayTimer - delta
+	if plot3DelayTimer < 0 then
+		repeat
+			candidate = stationList[math.random(13,#stationList)]
+			if candidate:isValid() then
+				beamDamageStation = candidate
+			end
+		until(beamDamageStation ~= nil)
+		beamCargoChoice = math.random(1,5)
+		if beamCargoChoice == 1 then
+			beamPart1 = "gold"
+		elseif beamCargoChoice == 2 then
+			beamPart1 = "platinum"
+		elseif beamCargoChoice == 3 then
+			beamPart1 = "tritanium"
+		elseif beamCargoChoice == 4 then
+			beamPart1 = "dilithium"
+		else
+			beamPart1 = "cobalt"
 		end
-	end
-	if ef3Count == 0 then
-		hunterTransition4Timer = timedIntelligenceInterval
-		plot3 = hunterTransition4
+		beamCargoChoice = math.random(1,5)
+		if beamCargoChoice == 1 then
+			beamPart2 = "beam"
+		elseif beamCargoChoice == 2 then
+			beamPart2 = "optic"
+		elseif beamCargoChoice == 3 then
+			beamPart2 = "filament"
+		elseif beamCargoChoice == 4 then
+			beamPart2 = "battery"
+		else
+			beamPart2 = "robotic"
+		end
+		for pidx=1,8 do
+			p = getPlayerShip(pidx)
+			if p ~= nil and p:isValid() then
+				p:addToShipLog(string.format("There's a physicist turned maintenance technician named Frederico Booker that has developed some innovative beam weapon technology that could increase the damage produced by our beam weapons. He's based on %s in %s",beamDamageStation:getCallSign(),beamDamageStation:getSectorName()),"Magenta")
+			end
+		end
+		plot3reminder = string.format("Talk to Frederico Booker on %s in %s about a beam upgrade",beamDamageStation:getCallSign(),beamDamageStation:getSectorName())
+		plot3name = "beamPhysicist"
+		plot3 = beamPhysicist
 	end
 end
-
-function hunterTransition4(delta)
-	plot3name = "hunterTransition4"
-	hunterTransition4Timer = hunterTransition4Timer - delta
-	if hunterTransition4Timer < 0 then
-		for i=5,#enemyStationList do
-			if enemyStationList[i]:isValid() then
-				if enemyInt5 == nil then
-					enemyInt5 = enemyStationList[i]
-					break
+function beamPhysicist(delta)
+	if beamDamageStation:isValid() then
+		validPlayers = 0
+		beamPlayers = 0
+		for pidx=1,8 do
+			p = getPlayerShip(pidx)
+			if p ~= nil and p:isValid() and p:getBeamWeaponRange(0) > 0 then
+				validPlayers = validPlayers + 1
+				if p.beamDamageUpgrade then
+					beamPlayers = beamPlayers + 1
 				end
 			end
 		end
-		if enemyInt5 == nil then
-			enemyInt5 = targetEnemyStation
+		if beamPlayers == validPlayers then
+			betweenPlot3fleet()
 		end
-		iuMsg = string.format("Another enemy base located in %s. Others expected nearby. Threat Assessment: %.1f",enemyInt5:getSectorName(),dangerValue)
+	else
+		beamDamageStation = nil
+		repeat
+			candidate = stationList[math.random(13,#stationList)]
+			if candidate:isValid() then
+				beamDamageStation = candidate
+			end
+		until(beamDamageStation ~= nil)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(iuMsg,"Magenta")
+				p:addToShipLog(string.format("Frederico Booker has moved to station %s in %s",beamDamageStation:getCallSign(),beamDamageStation:getSectorName()),"Magenta")
 			end
 		end
-		secondaryOrders = string.format("Destroy enemy base possibly near %s or %s with Prefect Ghalontor aboard. TA:%.1f",enemyInt4:getSectorName(),enemyInt5:getSectorName(),dangerValue)
-		scx, scy = homeStation:getPosition()
-		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
-		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
-		for _, enemy in ipairs(ef3) do
-			enemy:orderFlyTowards(scx,scy)
-		end
-		plot3 = destroyef3v5
+		plot3reminder = string.format("Talk to Frederico Booker on %s in %s about a beam upgrade",beamDamageStation:getCallSign(),beamDamageStation:getSectorName())
 	end
 end
-
-function destroyef3v5(delta)
-	plot3name = "destroyef3v5"
-	ef3Count = 0
-	for _, enemy in ipairs(ef3) do
-		if enemy:isValid() then
-			ef3Count = ef3Count + 1
-		end
-	end
-	if ef3Count == 0 then
-		hunterTransition5Timer = timedIntelligenceInterval
-		plot3 = hunterTransition5
-	end
-end
-
-function hunterTransition5(delta)
-	plot3name = "hunterTransition5"
-	hunterTransition5Timer = hunterTransition5Timer - delta
-	if hunterTransition5Timer < 0 then
-		for i=6,#enemyStationList do
-			if enemyStationList[i]:isValid() then
-				if enemyInt6 == nil then
-					enemyInt6 = enemyStationList[i]
-					break
+-- plot 3 tractor ship in for repairs
+function tractorDisabledShip(delta)
+	plot3name = "tractorDisabledShip"
+	removeGMFunction(GMStartPlot3tractorDisabledShip)
+	plot3DelayTimer = plot3DelayTimer - delta
+	if plot3DelayTimer < 0 then
+		if playerCarrier:isValid() then
+			repeat
+				candidate = stationList[math.random(13,#stationList)]
+				if candidate:isValid() then
+					tractorStation = candidate
+				end
+			until(tractorStation ~= nil)
+			p = farthestPlayerFrom(homeStation)
+			ppx, ppy = p:getPosition()
+			tpx, tpy = vectorFromAngle(random(0,360),random(40000,45000))
+			strikeShipNames = {"Cropper","Dunner","Forthwith","Stellar","Trammel","Greeble"}
+			tractorShip = CpuShip():setTemplate("Strikeship"):setFaction("Human Navy"):setPosition(ppx+tpx,ppy+tpy):setScanned(true)
+			tractorShip:setSystemHealth("warp",-.5):setSystemHealth("jumpdrive",-.5):orderStandGround():setCallSign(strikeShipNames[math.random(1,#strikeShipNames)])
+			for pidx=1,8 do
+				p = getPlayerShip(pidx)
+				if p ~= nil and p:isValid() then
+					p:addToShipLog(string.format("[%s] Help requested: Our engines are damaged beyond our ability to repair. We are located in %s",tractorShip:getCallSign(),tractorShip:getSectorName()),"#556b2f")
 				end
 			end
+			plot3name = "confirmRescue"
+			confirmRescueTimer = 40
+			plot3 = confirmRescue
+		else
+			betweenPlot3fleet()
 		end
-		if enemyInt6 == nil then
-			enemyInt6 = targetEnemyStation
+	end
+end
+function confirmRescue(delta)
+	confirmRescueTimer = confirmRescueTimer - delta
+	if confirmRescueTimer < 0 then
+		if playerCarrier:isValid() then
+			playerCarrier:addToShipLog(string.format("Station %s in %s has tractor equipment you can use to tractor %s in for repairs",tractorStation:getCallSign(),tractorStation:getSectorName(),tractorShip:getCallSign()),"Magenta") 
+			plot3reminder = string.format("Install tractor equipment in %s from station %s in %s",playerCarrier:getCallSign(),tractorStation:getCallSign(),tractorStation:getSectorName())
+			plot3name = "awaitingTractor"
+			plot3 = awaitingTractor
+		else
+			betweenPlot3fleet()
 		end
-		iuMsg = string.format("Another enemy base located in %s. Others expected nearby. Threat Assessment: %.1f",enemyInt6:getSectorName(),dangerValue)
+	end
+end
+function awaitingTractor(delta)
+	if playerCarrier:isValid() then
+		if tractorShip:isValid() then
+			tractorShip:setSystemHealth("warp",-.5):setSystemHealth("jumpdrive",-.5)
+			if tractorInstalled and distance(playerCarrier,tractorShip) < 5000 then
+				enableTractorOn()
+				enableTractorOff()
+				if tractorShip:isDocked(playerCarrier) then
+					if tractorPlayerDockMsg == nil then
+						tractorPlayerDockMsg = "tractorPlayerDockMsg"
+						if playerCarrier:hasPlayerAtPosition("Weapons") then
+							playerCarrier:addCustomMessage("Weapons",tractorPlayerDockMsg,string.format("%s has been tractored to %s and is now docked",tractorShip:getCallSign(),playerCarrier:getCallSign()))
+						end
+						if playerCarrier:hasPlayerAtPosition("Tactical") then
+							playerCarrier:addCustomMessage("Tactical",tractorPlayerDockMsg,string.format("%s has been tractored to %s and is now docked",tractorShip:getCallSign(),playerCarrier:getCallSign()))
+						end
+					end
+				else
+					if tractorPlayerDockMsg ~= nil then
+						tractorPlayerDockMsg = nil
+					end
+					if repairStation == nil then
+						validFriendlyStations = 0
+						for fsi=1,12 do
+							if stationList[fsi]:isValid() then
+								validFriendlyStations = validFriendlyStations + 1
+							end
+						end
+						if validFriendlyStations > 0 then
+							repeat
+								candidate = stationList[math.random(1,12)]
+								if candidate:isValid() then
+									repairStation = candidate
+								end
+							until(repairStation ~= nil)
+							playerCarrier:addToShipLog(string.format("Tractor %s to %s to be repaired",tractorShip:getCallSign(),repairStation:getCallSign()),"Magenta")
+							plot3reminder = string.format("Tractor %s to %s",tractorShip:getCallSign(),repairStation:getCallSign())
+						else
+							disableTractorOff()
+							disableTractorOn()
+							betweenPlot3fleet()
+						end
+					else
+						if repairStation:isValid() then
+							if tractorShip:isValid() then
+								if distance(repairStation,tractorShip) < 1000 then
+									playerCarrier:addToShipLog(string.format("Thanks for bringing %s in for repairs, %s. We'll take it from here",tractorShip:getCallSign(),playerCarrier:getCallSign()),"#b29650")
+									tractorShip:orderDock(repairStation)
+									disableTractorOff()
+									disableTractorOn()
+									repairDelayTimer = 60
+									plot3name = "awaitRepairs"
+									plot3reminder = nil
+									plot3 = awaitRepairs
+								else
+									if bringCloser == nil and distance(tractorShip, repairStation) < 5000 then
+										playerCarrier:addToShipLog(string.format("[%s] Greetings, %s. You'll need to tractor %s to within 1U before we can start repairs",repairStation:getCallSign(),playerCarrier:getCallSign(),tractorShip:getCallSign()),"#b29650")
+										bringCloser = "messageSent"
+									end
+								end
+							else
+								disableTractorOff()
+								disableTractorOn()
+								betweenPlot3fleet()
+							end
+						else
+							repairStation = nil
+						end
+					end
+				end
+			else
+				disableTractorOn()
+				disableTractorOff()
+			end
+		else
+			disableTractorOn()
+			disableTractorOff()
+			betweenPlot3fleet()
+		end
+	else
+		betweenPlot3fleet()
+	end
+end
+function enableTractorOn()
+	if tractorOnButton == nil then
+		tractorOnButton = "tractorOnButton"
+		playerCarrier:addCustomButton("Weapons",tractorOnButton,"Tractor On",simulateTractorOn)
+		tractorOnButtonTac = "tractorOnButtonTac"
+		playerCarrier:addCustomButton("Tactical",tractorOnButtonTac,"Tractor On",simulateTractorOn)
+	end
+end
+function disableTractorOn()
+	if tractorOnButton ~= nil then
+		playerCarrier:removeCustom(tractorOnButton)
+		playerCarrier:removeCustom(tractorOnButtonTac)
+		tractorOnButton = nil
+		tractorOnButtonTac = nil
+	end
+end
+function simulateTractorOn()
+	tractorShip:orderDock(playerCarrier)
+	disableTractorOn()
+	enableTractorOff()
+end
+function enableTractorOff()
+	if tractorOffButton == nil then
+		tractorOffButton = "tractorOffButton"
+		playerCarrier:addCustomButton("Weapons",tractorOffButton,"Tractor Off",simulateTractorOff)
+		tractorOffButtonTac = "tractorOffButtonTac"
+		playerCarrier:addCustomButton("Tactical",tractorOffButtonTac,"Tractor Off",simulateTractorOff)
+	end
+end
+function disableTractorOff()
+	if tractorOffButton ~= nil then
+		playerCarrier:removeCustom(tractorOffButton)
+		playerCarrier:removeCustom(tractorOffButtonTac)
+		tractorOffButton = nil
+		tractorOffButtonTac = nil
+	end
+end
+function simulateTractorOff()
+	tlx, tly = tractorShip:getPosition()
+	tractorShip:orderFlyTowards(tlx,tly)
+	disableTractorOff()
+	enableTractorOn()
+end
+function connectTractor()
+	playerCarrier:removeCustom(tractorIntegrationButton)
+	playerCarrier:removeCustom(tractorIntegrationButtonPlus)
+	if playerCarrier:hasPlayerAtPosition("Engineering") then
+		tractorConfirmationMsg = "tractorConfirmationMsg"
+		playerCarrier:addCustomMessage("Engineering",tractorConfirmationMsg,"The tractor equipment has been fully integrated with ship systems. It is ready for the weapons officer to activate at the appropriate time")
+	end
+	if playerCarrier:hasPlayerAtPosition("Engineering+") then
+		tractorConfirmationMsgPlus = "tractorConfirmationMsgPlus"
+		playerCarrier:addCustomMessage("Engineering",tractorConfirmationMsgPlus,"The tractor equipment has been fully integrated with ship systems. It is ready for the weapons officer to activate at the appropriate time")
+	end
+	if playerCarrier:hasPlayerAtPosition("Weapons") then
+		wTractorConfirmationMsg = "wTractorConfirmationMsg"
+		playerCarrier:addCustomMessage("Weapons",wTractorConfirmationMsg,string.format("Tractor equipment installed.\nWhen %s is in range of the disabled ship, %s, You can engage the tractor system via the (Tractor On) button. This system works with %s's on board systems to draw and maneuver %s to %s until it is docked",playerCarrier:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),playerCarrier:getCallSign()))
+	end
+	if playerCarrier:hasPlayerAtPosition("Tactical") then
+		tTractorConfirmationMsg = "tTractorConfirmationMsg"
+		playerCarrier:addCustomMessage("Tactical",tTractorConfirmationMsg,string.format("Tractor equipment installed.\nWhen %s is in range of the disabled ship, %s, You can engage the tractor system via the (Tractor On) button. This system works with %s's on board systems to draw and maneuver %s to %s until it is docked",playerCarrier:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),tractorShip:getCallSign(),playerCarrier:getCallSign()))
+	end
+	tractorInstalled = true
+end
+function awaitRepairs(delta)
+	repairDelayTimer = repairDelayTimer - delta
+	if repairDelayTimer < 0 then
+		tractorShip:setSystemHealth("warp",1):setSystemHealth("jumpdrive",1)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(iuMsg,"Magenta")
+				p:addToShipLog(string.format("[%s] Our engines have been repaired and we stand ready to assist",tractorShip:getCallSign()),"#556b2f")
 			end
 		end
-		secondaryOrders = string.format("Destroy enemy base possibly near %s, %s or %s with Prefect Ghalontor aboard. TA:%.1f",enemyInt4:getSectorName(),enemyInt5:getSectorName(),enemyInt6:getSectorName(),dangerValue)
-		scx, scy = homeStation:getPosition()
-		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
-		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
-		for _, enemy in ipairs(ef3) do
-			enemy:orderFlyTowards(scx,scy)
-		end
-		plot3 = destroyef3v6
-	end
-end
-
-function destroyef3v6(delta)
-	plot3name = "destroyef3v6"
-	ef3Count = 0
-	for _, enemy in ipairs(ef3) do
-		if enemy:isValid() then
-			ef3Count = ef3Count + 1
-		end
-	end
-	if ef3Count == 0 then
-		hunterTransition6Timer = timedIntelligenceInterval
-		plot3 = hunterTransition6
-	end
-end
-
-function hunterTransition6(delta)
-	plot3name = "hunterTransition6"
-	hunterTransition6Timer = hunterTransition6Timer - delta
-	if hunterTransition6Timer < 0 then
-		iuMsg = string.format("Another enemy base located in %s. Others expected nearby: Threat Assessment: %.1f",targetEnemyStation:getSectorName(),dangerValue)
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
-			if p ~= nil and p:isValid() then
-				p:addToShipLog(iuMsg,"Magenta")
-			end
-		end
-		secondaryOrders = string.format("Destroy enemy base possibly near %s, %s, %s or %s with Prefect Ghalontor aboard. TA:%.1f",targetEnemyStation:getSectorName(),enemyInt4:getSectorName(),enemyInt5:getSectorName(),enemyInt6:getSectorName(),dangerValue)
-		scx, scy = homeStation:getPosition()
-		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
-		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
-		for _, enemy in ipairs(ef3) do
-			enemy:orderFlyTowards(scx,scy)
-		end
-		plot3 = destroyef3v7
-	end
-end
-
-function destroyef3v7(delta)
-	plot3name = "destroyef3v7"
-	ef3Count = 0
-	for _, enemy in ipairs(ef3) do
-		if enemy:isValid() then
-			ef3Count = ef3Count + 1
-		end
-	end
-	if ef3Count == 0 then
-		hunterTransition7Timer = timedIntelligenceInterval
-		plot3 = hunterTransition7
-	end
-end
-
-function hunterTransition7(delta)
-	plot3name = "hunterTransition7"
-	hunterTransition7Timer = hunterTransition7Timer - delta
-	if hunterTransition7Timer < 0 then
-		iuMsg = string.format("We confirmed Prefect Ghalontor is aboard enemy station %s in %s. Threat Assessment: %.1f",targetEnemyStation:getCallSign(),targetEnemyStation:getSectorName(),dangerValue)
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
-			if p ~= nil and p:isValid() then
-				p:addToShipLog(iuMsg,"Magenta")
-			end
-		end
-		secondaryOrders = string.format("Destroy enemy base %s in %s. TA:%.1f",targetEnemyStation:getCallSign(),targetEnemyStation:getSectorName(),dangerValue)
-		scx, scy = homeStation:getPosition()
-		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
-		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
-		for _, enemy in ipairs(ef3) do
-			enemy:orderFlyTowards(scx,scy)
-		end
-		plot3 = destroyef3v8
-	end
-end
-
-function destroyef3v8(delta)
-	plot3namename = "destroyef3v8"
-	ef3Count = 0
-	for _, enemy in ipairs(ef3) do
-		if enemy:isValid() then
-			ef3Count = ef3Count + 1
-		end
-	end
-	if ef3Count == 0 then
-		plot3 = nil
+		betweenPlot3fleet()
 	end
 end
 --[[-----------------------------------------------------------------
-    Plot 4 station rotate upgrade or beam time upgrade or hull upgrade
+    Plot 4 - more depth to plot 4 to come in a later revision
 -----------------------------------------------------------------]]--
 function destroyef4(delta)
 	plot4name = "destroyef4"
@@ -5352,1063 +5409,232 @@ function destroyef4(delta)
 		end
 	end
 	if ef4Count == 0 then
-		randomDeliveryTimer = 45
-		plot4 = randomDelivery
-		homeDelivery = true
-		p = closestPlayerTo(targetEnemyStation)
-		p:addReputationPoints(20)
+		plot4 = doNotPush
 	end
 end
-
-function randomDelivery(delta)
-	plot4name = "randomDelivery"
-	randomDeliveryTimer = randomDeliveryTimer - delta
-	if randomDeliveryTimer < 0 then
-		if randomDeliveryMsg == nil then
-			p = closestPlayerTo(homeStation)
-			if #goods[homeStation] > 0 then
-				repeat
-					repeat
-						randomDeliverStation = stationList[math.random(6,#stationList)]
-					until(randomDeliverStation:isValid())
-					gi = 1
-					repeat
-						randomDeliverGood = goods[randomDeliverStation][gi][1]
-						gj = 1
-						matchAway = false
-						repeat			
-							if randomDeliverGood == goods[homeStation][gj][1] then
-								matchAway = true
-								break
-							end
-							gj = gj + 1
-						until(gj > #goods[homeStation])
-						if not matchAway then break end
-						gi = gi + 1
-					until(gi > #goods[randomDeliverStation])
-				until(not matchAway)
-			else
-				matchAway = false
-			end
-			if matchAway then
-				plot4reminder = nil
-				plot4delay = 100
-				plot4 = delayef4v2
-			else
-				p:addToShipLog(string.format("[%s] We are running low on goods of type %s. Can you help? %s in %s should have some",homeStation:getCallSign(),randomDeliverGood,randomDeliverStation:getCallSign(),randomDeliverStation:getSectorName()),"85,107,47")
-				plot4reminder = string.format("Bring %s to %s. Possible source: %s in %s",randomDeliverGood,homeStation:getCallSign(),randomDeliverStation:getCallSign(),randomDeliverStation:getSectorName())
-				playSoundFile("sa_55_Manager2.wav")
-			end
-			randomDeliveryMsg = "sent"
-		end
+function doNotPush(delta)
+	alienHack = false
+	doNotPushButton = "doNotPushButton"
+	playerCarrier:addCustomButton("Weapons",doNotPushButton,"Do Not Push",pushed)
+	doNotPushButtonTac = "doNotPushButtonTac"
+	playerCarrier:addCustomButton("Tactical",doNotPushButtonTac,"Do Not Push",pushed)
+	if playerCarrier:hasPlayerAtPosition("Science") then
+		alienHackMsg = "alienHackMsg"
+		playerCarrier:addCustomMessage("Science",alienHackMsg,"Internal security sensors indicate ship systems hacked by unknown source. For a moment I thought I heard evil laughter")
 	end
+	if playerCarrier:hasPlayerAtPosition("Operations") then
+		alienHackMsgOp = "alienHackMsgOp"
+		playerCarrier:addCustomMessage("Operations",alienHackMsgOp,"Internal security sensors indicate ship systems hacked by unknown source. For a moment I thought I heard evil laughter")
+	end
+	plot4 = nil
 end
-
-function rotateUpgradeStart(delta)
-	plot4name = "rotateUpgradeStart"
-	infoPromised = true
-	homeStationRotationEnabled = false
-	rotateUpgradeAvailable = false
-	plot4reminder = string.format("Upgrade %s to rotate",homeStation:getCallSign())
-	if pickRotateBase == nil then
-		repeat
-			candidate = stationList[math.random(13,#stationList)]
-			if candidate ~= nil and candidate:isValid() then
-				if #goods[candidate] > 0 then
-					gi = 1
-					repeat
-						if goods[candidate][gi][1] ~= "food" and goods[candidate][gi][1] ~= "medicine" then
-							rotateBase = candidate
-						end
-						gi = gi + 1
-					until(gi > #goods[candidate])
-				end
-			end
-		until(rotateBase ~= nil)
-		pickRotateBase = "done"
-		plot4 = pickRotateGood
+function pushed()
+	alienHack = true
+	px, py = playerCarrier:getPosition()
+	bha = 0
+	for i=1,8 do
+		bhx, bhy = vectorFromAngle(bha,7500)
+		BlackHole():setPosition(px+bhx,py+bhy)
+		bha = bha + 45
 	end
-end
-
-function pickRotateGood(delta)
-	plot4name = "pickRotateGood"
-	if pickRotateGoodBase == nil then
-		matchAway = true
-		repeat
-			candidate = stationList[math.random(13,#stationList)]
-			if candidate ~= nil and candidate:isValid() and candidate ~= rotateBase then
-				if #goods[candidate] > 0 then
-					rotateGoodBase = candidate
-					gi = 1
-					repeat
-						rotateGood = goods[rotateGoodBase][gi][1]
-						matchAway = false
-						gj = 1
-						repeat
-							if rotateGood == "food" or rotateGood == "medicine" or rotateGood == goods[rotateBase][gj][1] then
-								matchAway = true
-								break
-							end
-							gj = gj + 1
-						until(gj > #goods[rotateBase])
-						if not matchAway then break end
-						gi = gi + 1
-					until(gi > #goods[rotateGoodBase])
-				end
-			end
-		until(not matchAway)
-		plot4delay = 100
-		plot4 = delayef4v2
-		rotateReveal = 0
-		rotateUpgradeAvailable = true
-		pickRotateGoodBase = "done"
-	end
-end
-
-function beamTimeUpgradeStart(delta)
-	plot4name = "beamTimeUpgradeStart"
-	infoPromised = true
-	beamTimeUpgradeAvailable = false
-	plot4reminder = "Get beam cycle time upgrade"
-	if pickBeamTimeBase == nil then
-		repeat
-			candidate = stationList[math.random(13,#stationList)]
-			if candidate ~= nil and candidate:isValid() then
-				if #goods[candidate] > 0 then
-					gi = 1
-					repeat
-						if goods[candidate][gi][1] ~= "food" and goods[candidate][gi][1] ~= "medicine" then
-							beamTimeBase = candidate
-						end
-						gi = gi + 1
-					until(gi > #goods[candidate])
-				end
-			end
-		until(beamTimeBase ~= nil)
-		pickBeamTimeBase = "done"
-		plot4 = pickBeamTimeGood
-	end
-end
-
-function pickBeamTimeGood(delta)
-	plot4name = "pickBeamTimeGood"
-	if pickBeamTimeGoodBase == nil then
-		repeat
-			candidate = stationList[math.random(13,#stationList)]
-			if candidate ~= nil and candidate:isValid() and candidate ~= beamTimeBase then
-				if #goods[candidate] > 0 then
-					beamTimeGoodBase = candidate
-					gi = 1
-					repeat
-						beamTimeGood = goods[beamTimeGoodBase][gi][1]
-						matchAway = false
-						gj = 1
-						repeat
-							if beamTimeGood == "food" or beamTimeGood == "medicine" or beamTimeGood == goods[beamTimeBase][gj][1] then
-								matchAway = true
-								break
-							end
-							gj = gj + 1
-						until(gj > #goods[beamTimeBase])
-						if not matchAway then break end
-						gi = gi + 1
-					until(gi > #goods[beamTimeGoodBase])
-				end
-			end
-		until(not matchAway)
-		plot4 = cleanUpBeamTimers
-		beamTimeReveal = 0
-		beamTimeUpgradeAvailable = true
-		pickBeamTimeGoodBase = "done"
-	end
-end
-
-function cleanUpBeamTimers(delta)
-	plot4name = "cleanUpBeamTimers"
-	noBeamTimeCount = 0
-	for pidx=1,8 do
-		pc = getPlayerShip(pidx)
-		if pc ~= nil and pc:isValid() then
-			if not pc.beamTimeUpgrade then
-				noBeamTimeCount = noBeamTimeCount + 1
-			end
-		end
-	end
-	if noBeamTimeCount == 0 then
-		plot4reminder = nil
-		plot4name = nil
-		plot4delay = 100
-		plot4 = delayef4v2
-		p = closestPlayerTo(targetEnemyStation)
-		p:addReputationPoints(20)
-	end	
-end
-
-function hullUpgradeStart(delta)
-	plot4name = "hullUpgradeStart"
-	infoPromised = true
-	hullUpgradeAvailable = false
-	plot4reminder = "Get hull upgrade"
-	if pickHullBase == nil then
-		repeat
-			candidate = stationList[math.random(13,#stationList)]
-			if candidate ~= nil and candidate:isValid() then
-				if #goods[candidate] > 0 then
-					gi = 1
-					repeat
-						if goods[candidate][gi][1] ~= "food" and goods[candidate][gi][1] ~= "medicine" then
-							hullBase = candidate
-						end
-						gi = gi + 1
-					until(gi > #goods[candidate])
-				end
-			end
-		until(hullBase ~= nil)
-		pickHullBase = "done"
-		plot4 = pickHullGood
-	end
-end
-
-function pickHullGood(delta)
-	plot4name = "pickHullGood"
-	if pickHullGoodBase == nil then
-		repeat
-			candidate = stationList[math.random(13,#stationList)]
-			if candidate ~= nil and candidate:isValid() and candidate ~= hullBase then
-				if #goods[candidate] > 0 then
-					hullGoodBase = candidate
-					gi = 1
-					repeat
-						hullGood = goods[hullGoodBase][gi][1]
-						matchAway = false
-						gj = 1
-						repeat
-							if hullGood == "food" or hullGood == "medicine" or hullGood == goods[hullBase][gj][1] then
-								matchAway = true
-								break
-							end
-							gj = gj + 1
-						until(gj > #goods[hullBase])
-						if not matchAway then break end
-						gi = gi + 1
-					until(gi > #goods[hullGoodBase])
-				end
-			end
-		until(not matchAway)
-		plot4 = cleanUpHullers
-		hullReveal = 0
-		hullUpgradeAvailable = true
-		pickhullGoodBase = "done"
-	end
-end
-
-function cleanUpHullers(delta)
-	plot4name = "cleanUpHullers"
-	noHullCount = 0
-	for pidx=1,8 do
-		pc = getPlayerShip(pidx)
-		if pc ~= nil and pc:isValid() then
-			if not pc.hullUpgrade then
-				noHullCount = noHullCount + 1
-			end
-		end
-	end
-	if noHullCount == 0 then
-		plot4reminder = nil
-		plot4delay = 100
-		plot4 = delayef4v2
-		p = closestPlayerTo(targetEnemyStation)
-		p:addReputationPoints(20)
-	end	
-end
-
-function delayef4v2(delta)
-	plot4name = "delayef4v2"
-	plot4delay = plot4delay - delta
-	if plot4delay < 0 then
-		p = closestPlayerTo(targetEnemyStation)
-		px, py = p:getPosition()
-		ambushAngle = random(0,360)
-		a1x, a1y = vectorFromAngle(ambushAngle,random(30000,40000))
-		ef4v2 = spawnEnemies(px+a1x,py+a1y,dangerValue/2,targetEnemyStation:getFaction())
-		for _, enemy in ipairs(ef4v2) do
-			enemy:orderAttack(p)
-		end
-		a1x, a1y = vectorFromAngle(ambushAngle+random(60,120),random(30000,40000))
-		ntf = spawnEnemies(px+a1x,py+a1y,dangerValue/2,targetEnemyStation:getFaction())
-		for _, enemy in ipairs(ntf) do
-			enemy:orderAttack(p)
-			table.insert(ef4v2,enemy)
-		end
-		a1x, a1y = vectorFromAngle(ambushAngle+random(180,300),random(30000,40000))
-		ntf = spawnEnemies(px+a1x,py+a1y,dangerValue/2,targetEnemyStation:getFaction())
-		for _, enemy in ipairs(ntf) do
-			enemy:orderAttack(p)
-			table.insert(ef4v2,enemy)
-		end
-		plot4 = destroyef4v2
-	end
-end
--- random plot 4 development after enemy fleet for plot 4 version 2 is destroyed
-function destroyef4v2(delta)
-	plot4name = "destroyef4v2"
-	ef4Count = 0
-	for _, enemy in ipairs(ef4v2) do
-		if enemy:isValid() then
-			ef4Count = ef4Count + 1
-		end
-	end
-	if ef4Count == 0 then
-		choooseNextPlot4line()
-	end
-end
-
-function choooseNextPlot4line()
-	plot4reminder = nil
-	if #plot4choices > 0 then
-		p4c = math.random(1,#plot4choices)
-		plot4 = plot4choices[p4c]
-		table.remove(plot4choices,p4c)
-		plot4delayTimer = random(40,120)
+	sealed = WarpJammer():setPosition(px,py):setRange(10000)
+	if difficulty >= 1 then
+		sealed:setFaction("Human Navy")
 	else
-		plot4 = nil
+		sealed:setFaction("Kraylor")
 	end
-end
-
-function insertAgentDelay(delta)
-	plot4name = "insertAgentDelay"
-	plot4delayTimer = plot4delayTimer - delta
-	if plot4delayTimer < 0 then
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
-			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format("Agent Paul Straight has information on enemies in the area and a proposal. Pick him and his equipment up at station %s",homeStation:getCallSign()),"Magenta")
-				plot4reminder = string.format("Get Paul Straight at station %s",homeStation:getCallSign())
-			end
-		end
-		plot4 = getAgentStraight
-	end
-end
-
-function getAgentStraight(delta)
-	plot4name = "getAgentStraight"
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
-		if p ~= nil and p:isValid() and p:isDocked(homeStation) then
-			p.straight = true
-			if #enemyStationList > 0 then
-				for eidx=1,#enemyStationList do
-					if enemyStationList[eidx]:isValid() then
-						insertEnemyStation = enemyStationList[eidx]
-						break
-					end
-				end
-			end
-			p:addToShipLog(string.format("[Paul Straight] I've been studying enemy station %s in %s: traffic patterns, communication traffic, energy signature, etc. I've built a specialized short range transporter that should be able to beam me onto the station through their shields. I need to get refined readings from 20 units or closer for final calibration. Please take me to within 20 units of %s",insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName(),insertEnemyStation:getCallSign()),"#5f9ea0")
-			plot4reminder = string.format("Take Paul Straight to within 20U of %s in %s",insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName())
-			plot4 = scanEnemyStation
-			break
-		end
-	end
-end
-
-function scanEnemyStation(delta)
-	plot4name = "scanEnemyStation"
-	if insertEnemyStation:isValid() then
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
-			if p ~= nil and p:isValid() and p.straight then
-				if distance(p,insertEnemyStation) <= 20000 then
-					insertRunDelayTimer = 15
-					p:addToShipLog("[Paul Straight] I've got my readings. Let me calibrate the transporter","#5f9ea0")
-					if p:hasPlayerAtPosition("Helms") then
-						inRangeMsg = "inRangeMsg"
-						p:addCustomMessage("Helms",inRangeMsg,"[Paul Straight] The ship is in range. I completed my scans. Thank you")
-					end
-					if p:hasPlayerAtPosition("Tactical") then
-						inRangeMsgTactical = "inRangeMsgTactical"
-						p:addCustomMessage("Tactical",inRangeMsgTactical,"[Paul Straight] The ship is in range. I completed my scans. Thank you")
-					end
-					plot4 = insertRunDelay
-				end
-			end
-		end
-	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
-			if p ~= nil and p:isValid() and p.straight then
-				p:addToShipLog("[Paul Straight] It's too bad the station was destroyed","#5f9ea0")
-				choooseNextPlot4line()
-				break
-			end
-		end
-	end
-end
-
-function insertRunDelay(delta)
-	plot4name = "insertRunDelay"
-	insertRunDelayTimer = insertRunDelayTimer - delta
-	if insertRunDelayTimer < 0 then
-		if insertEnemyStation:isValid() then
-			for pidx=1,8 do
-				p = getPlayerShip(pidx)
-				if p ~= nil and p:isValid() and p.straight then
-					p:addToShipLog(string.format("[Paul Straight] My transporter is ready. I've disguised myself as a Kraylor technician. I need you to take the ship within 2.5U of %s. You don't need to defeat any patrols, but there might be some enemy interest in your ship flying so close to the station. After I am aboard %s, I will gether intelligence and transmit it back. I'm ready to proceed",insertEnemyStation:getCallSign(),insertEnemyStation:getCallSign()),"#5f9ea0")
-					plot4reminder = string.format("Get ship within 2.5U of %s in %s to secretly transport Paul Straight",insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName())
-					plot4 = insertRun
-					break
-				end
-			end
-		else
-			for pidx=1,8 do
-				p = getPlayerShip(pidx)
-				if p ~= nil and p:isValid() and p.straight then
-					p:addToShipLog("[Paul Straight] It's too bad the station was destroyed","#5f9ea0")
-					choooseNextPlot4line()
-					break
-				end
-			end
-		end
-	end
-end
-
-function insertRun(delta)
-	plot4name = "insertRun"
-	if insertEnemyStation:isValid() then
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
-			if p ~= nil and p:isValid() and p.straight then
-				if distance(p,insertEnemyStation) <= 2500 then
-					if p:hasPlayerAtPosition("Science") then
-						straightTransportedMsg = "straightTransportedMsg"
-						p:addCustomMessage("Science",straightTransportedMsg,string.format("Paul Straight has transported aboard %s",insertEnemyStation:getCallSign()))
-					end
-					if p:hasPlayerAtPosition("Operations") then
-						straightTransportedMsgOps = "straightTransportedMsgOps"
-						p:addCustomMessage("Operations",straightTransportedMsgOps,string.format("Paul Straight has transported aboard %s",insertEnemyStation:getCallSign()))
-					end
-					plot4 = resultDelay
-					plot4reminder = string.format("Await intelligence results from Paul Straight on %s",insertEnemyStation:getCallSign())
-					resultDelayTimer = random(30,60)
-				end
-			end
-		end
-	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
-			if p ~= nil and p:isValid() and p.straight then
-				p:addToShipLog("[Paul Straight] It's too bad the station was destroyed","#5f9ea0")
-				choooseNextPlot4line()
-				break
-			end
-		end
-	end
-end
-
-function resultDelay(delta)
-	plot4name = "resultDelay"
-	if insertEnemyStation:isValid() then
-		resultDelayTimer = resultDelayTimer - delta
-		if resultDelayTimer < 0 then
-			locationResultMsg = "[Paul Straight] I discovered the location of the enemy bases in the area:"
-			for eidx=1,#enemyStationList do
-				if enemyStationList[eidx]:isValid() then
-					locationResultMsg = locationResultMsg .. string.format("\n%s in %s",enemyStationList[eidx]:getCallSign(),enemyStationList[eidx]:getSectorName())
-				end
-			end
-			p = closestPlayerTo(insertEnemyStation)
-			p:addToShipLog(locationResultMsg,"#5f9ea0")
-			resultDelay2Timer = random(120,240)
-			plot4 = resultDelay2
-		end
-	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
-			if p ~= nil and p:isValid() and p.straight then
-				if p:hasPlayerAtPosition("Science") then
-					fatalMsg = "fatalMsg"
-					p:addCustomMessage("Science",fatalMsg,"Lifesign telemetry from Paul Straight's equipment has ceased")
-				end
-				if p:hasPlayerAtPosition("Operations") then
-					fatalMsgOps = "fatalMsgOps"
-					p:addCustomMessage("Operations",fatalMsgOps,"Lifesign telemetry from Paul Straight's equipment has ceased")
-				end
-			end
-		end
-		choooseNextPlot4line()
-	end
-end
-
-function resultDelay2(delta)
-	plot4name = "resultDelay2"
-	if insertEnemyStation:isValid() then
-		resultDelay2Timer = resultDelay2Timer - delta
-		if resultDelay2Timer < 0 then
-			p = closestPlayerTo(insertEnemyStation)
-			p:addToShipLog(string.format("[Paul Straight] Prefect Ghalantor is on station %s. Wait, someone is coming...",targetEnemyStation:getCallSign()),"#5f9ea0")
-			straightExecutionTimer = random(40,80)
-			plot4 = straightExecution
-		end
-	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
-			if p ~= nil and p:isValid() and p.straight then
-				if p:hasPlayerAtPosition("Science") then
-					fatalMsg = "fatalMsg"
-					p:addCustomMessage("Science",fatalMsg,"Lifesign telemetry from Paul Straight's equipment has ceased")
-				end
-				if p:hasPlayerAtPosition("Operations") then
-					fatalMsgOps = "fatalMsgOps"
-					p:addCustomMessage("Operations",fatalMsgOps,"Lifesign telemetry from Paul Straight's equipment has ceased")
-				end
-			end
-		end
-		choooseNextPlot4line()
-	end
-end
-
-function straightExecution(delta)
-	plot4name = "straightExecution"
-	if insertEnemyStation:isValid() then
-		straightExecutionTimer = straightExecutionTimer - delta
-		if straightExecutionTimer < 0 then
-			p = closestPlayerTo(insertEnemyStation)
-			insertEnemyStation:sendCommsMessage(p,"We discovered your perfidious spy aboard our station. He will be executed for his treasonous activities")
-			plot4 = agentDemise
-			agentDemiseTimer = random (40,80)
-		end
-	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
-			if p ~= nil and p:isValid() and p.straight then
-				if p:hasPlayerAtPosition("Science") then
-					fatalMsg = "fatalMsg"
-					p:addCustomMessage("Science",fatalMsg,"Lifesign telemetry from Paul Straight's equipment has ceased")
-				end
-				if p:hasPlayerAtPosition("Operations") then
-					fatalMsgOps = "fatalMsgOps"
-					p:addCustomMessage("Operations",fatalMsgOps,"Lifesign telemetry from Paul Straight's equipment has ceased")
-				end
-			end
-		end
-		choooseNextPlot4line()
-	end
-end
-
-function agentDemise(delta)
-	plot4name = "agentDemise"
-	if insertEnemyStation:isValid() then
-		agentDemiseTimer = agentDemiseTimer - delta
-		if agentDemiseTimer < 0 then
-			for pidx=1,8 do
-				p = getPlayerShip(pidx)
-				if p ~= nil and p:isValid() and p.straight then
-					if p:hasPlayerAtPosition("Science") then
-						fatalMsg = "fatalMsg"
-						p:addCustomMessage("Science",fatalMsg,"Lifesign telemetry from Paul Straight's equipment has ceased")
-					end
-					if p:hasPlayerAtPosition("Operations") then
-						fatalMsgOps = "fatalMsgOps"
-						p:addCustomMessage("Operations",fatalMsgOps,"Lifesign telemetry from Paul Straight's equipment has ceased")
-					end
-				end
-			end
-			choooseNextPlot4line()
-		end
-	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
-			if p ~= nil and p:isValid() and p.straight then
-				if p:hasPlayerAtPosition("Science") then
-					fatalMsg = "fatalMsg"
-					p:addCustomMessage("Science",fatalMsg,"Lifesign telemetry from Paul Straight's equipment has ceased")
-				end
-				if p:hasPlayerAtPosition("Operations") then
-					fatalMsgOps = "fatalMsgOps"
-					p:addCustomMessage("Operations",fatalMsgOps,"Lifesign telemetry from Paul Straight's equipment has ceased")
-				end
-			end
-		end
-		choooseNextPlot4line()
-	end
-end
-
-function repairBountyDelay(delta)
-	plot4name = "repairBountyDelay"
-	plot4delayTimer = plot4delayTimer - delta
-	if plot4delayTimer < 0 then
-		hx, hy = homeStation:getPosition()
-		ex, ey = targetEnemyStation:getPosition()
-		bx, by = vectorFromAngle(random(0,360),6000)
-		hmsBounty = CpuShip():setFaction("Human Navy"):setTemplate("Stalker Q7"):setScanned(true)
-		hmsBounty:setSystemHealth("warp", -0.5):setCommsScript(""):setCommsFunction(commsShip)
-		hmsBounty:setSystemHealth("impulse", 0.5):setCallSign("HMS Bounty"):orderStandGround()
-		hmsBounty:setSystemHealth("jumpdrive", -0.5):setPosition(((hx+ex)/2)+bx,((hy+ey)/2)+by)
-		hmsBounty.repaired = false
-		p = closestPlayerTo(hmsBounty)
-		p:addToShipLog(string.format("[HMS Bounty] We stole a Kraylor ship, but were damaged during the escape. Can you help? We are in %s",hmsBounty:getSectorName()),"#ff4500")
-		plot4reminder = string.format("Help HMS Bounty in %s",hmsBounty:getSectorName())
-		ntf = spawnEnemies((hx+ex)/2,(hy+ey)/2,dangerValue,targetEnemyStation:getFaction())
-		for _, enemy in ipairs(ntf) do
-			enemy:orderAttack(hmsBounty)
-		end
-		plot4 = repairBounty
-	end
-end
-
-function repairBounty(delta)
-	p = closestPlayerTo(hmsBounty)
-	if hmsBounty:isValid() then
-		if distance(p,hmsBounty) < 2500 then
-			p:addToShipLog("[HMS Bounty] Please ask your engineer to transport a spare repair technician to help with repairs","#ff4500")
-			if p:hasPlayerAtPosition("Engineering") then
-				transportRepairTechnicianButton = "transportRepairTechnicianButton"
-				p:addCustomButton("Engineering",transportRepairTechnicianButton,"Transport technician",transportRepairTechnician)
-			end
-			if p:hasPlayerAtPosition("Engineering+") then
-				transportRepairTechnicianButtonPlus = "transportRepairTechnicianButtonPlus"
-				p:addCustomButton("Engineering+",transportRepairTechnicianButtonPlus,"Transport technician",transportRepairTechnician)
-			end
-			p.transportButton = true
-			plot4 = nil
-		end
-	else
-		p:addToShipLog("HMS Bounty has been destroyed","Magenta")
-		plot4 = nil
-		plot4reminder = nil
-	end
-end
-
-function transportRepairTechnician()
-	hmsBounty:setSystemHealth("warp",1)
-	hmsBounty:setSystemHealth("impulse",1)
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
-		if p ~= nil and p:isValid() then
-			if p.transportButton then
-				if transportRepairTechnicianButton ~= nil then
-					p:removeCustom(transportRepairTechnicianButton)
-				end
-				if transportRepairTechnicianButtonPlus ~= nil then
-					p:removeCustom(transportRepairTechnicianButtonPlus)
-				end
-				p:addToShipLog("[HMS Bounty] Our engines have been repaired. We stand ready to assist","#ff4500")
-			end
-		end
-	end
-	choooseNextPlot4line()
-end
-
-function stationShieldDelay(delta)
-	plot4name = "stationShieldDelay"
-	plot4delayTimer = plot4delayTimer - delta
-	if plot4delayTimer < 0 then
-		repeat
-			candidate = stationList[math.random(13,#stationList)]
-			if candidate ~= nil and candidate:isValid() then
-				shieldExpertStation = candidate
-			end
-		until(shieldExpertStation ~= nil)
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
-			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format("Intelligence analysis shows research on the network that could double the shield strength of station %s. The analysis shows that the technical expert can be found on station %s in sector %s",homeStation:getCallSign(),shieldExpertStation:getCallSign(),shieldExpertStation:getSectorName()),"Magenta")
-			end
-		end
-		playSoundFile("sa_55_Commander3.wav")
-		plot4reminder = string.format("Find shield expert at station %s in %s",shieldExpertStation:getCallSign(),shieldExpertStation:getSectorName())
-		plot4 = visitShieldExpertStation
-	end
-end
-
-function visitShieldExpertStation(delta)
-	plot4name = "visitShieldExpertStation"
-	if shieldExpertTransport == nil then
-		repeat
-			candidate = transportList[math.random(1,#transportList)]
-			if candidate ~= nil and candidate:isValid() then
-				shieldExpertTransport = candidate
-			end
-		until(shieldExpertTransport ~= nil)
-	end
-	if shieldExpertStation:isValid() then
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
-			if p ~= nil and p:isValid() then
-				if p:isDocked(shieldExpertStation) then
-					p:addToShipLog(string.format("We heard you were looking for our former shield maintenance technician, Maria Shrivner who's been publishing hints about advances in shield technology. We've been looking for her. We only just found out that she left the station after a severe romantic breakup with her supervisor. She took a job on a freighter %s which was last reported in %s",shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName()),"#ba55d3")
-					plot4 = meetShieldExportTransportHeartbroken
-					plot4reminder = string.format("Meet transport %s last reported in %s to find Maria Shrivner",shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName())
-					playSoundFile("sa_55_BaseChief.wav")
-				end
-			end
-		end
-	else
-		if shieldExpertTransport:isValid() then
-			for pidx=1,8 do
-				p = getPlayerShip(pidx)
-				if p ~= nil and p:isValid() then
-					p:addToShipLog(string.format("We received word that station %s has been destroyed. However, in some of their final records we see that Maria Shrivner left the station to take a job on freighter %s which was last reported in %s",shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName()),"Magenta")
-					plot4 = meetShieldExportTransport
-					plot4reminder = stringFormat("Meet transport %s last reported in %s to find Maria Shrivner",shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName())
-				end
-			end
-		else
-			for pidx=1,8 do
-				p = getPlayerShip(pidx)
-				if p ~= nil and p:isValid() then
-					p:addToShipLog("Station %s has been destroyed leaving no hints for shield upgrade followup","Magenta")
-				end
-			end
-			choooseNextPlot4line()
-		end
-	end
-end
-
-function meetShieldExportTransport(delta)
-	plot4name = "meetShieldExportTransport"
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
-		if p ~= nil and p:isValid() then
-			if distance(p,shieldExpertTransport) < 500 then
-				p.shieldExpert = true
-				p:addToShipLog(string.format("[Maria Shrivner] It was tragic that %s was destroyed. Bring me to %s and I'll double %s's shield effectiveness",shieldExpertStation:getCallSign(),homeStation:getCallSign(),homeStation:getCallSign()),"Yellow")
-				playSoundFile("sa_55_Maria1.wav")
-				plot4 = returnHomeForShields
-				plot4reminder = "Return to home base with Maria Shrivner to double shield capacity"
-				break
-			end
-		end
-	end
-end
-
-function meetShieldExportTransportHeartbroken(delta)
-	plot4name = "meetShieldExportTransportHeartbroken"
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
-		if p ~= nil and p:isValid() then
-			if distance(p,shieldExpertTransport) < 500 then
-				p.shieldExpert = true
-				p:addToShipLog(string.format("[Maria Shrivner] I should not have broken up with him, it was all a misunderstanding. Help me get him some rare material as a gift and I'll double %s's shield effectiveness",homeStation:getCallSign()),"Yellow")
-				playSoundFile("sa_55_Maria2.wav")
-				plot4 = giftForBeau
-				beauGift = false
-				plot4reminder = string.format("Get gold, platinum, dilithium, tritanium or cobalt and bring it and Maria Shrivner to %s",shieldExpertStation:getCallSign())
-				break
-			end
-		end
-	end
-end
-
-function giftForBeau(delta)
-	plot4name = "giftForBeau"
-	if shieldExpertStation:isValid() then
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
-			if p ~= nil and p:isValid() then
-				if p:isDocked(shieldExpertStation) then
-					if p.shieldExpert then
-						if beauGift then
-							p:addToShipLog(string.format("[Maria Shrivner] Well, he's at least thinking about it. He liked the gift. Take me to %s and let's get those shields upgraded",homeStation:getCallSign()),"Yellow")
-							playSoundFile("sa_55_Maria3.wav")
-							plot4 = returnHomeForShields
-							plot4reminder = "Return to home base with Maria Shrivner to double shield capacity"
-						end
-					end
-				end
-			end
-		end
-	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
-			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format("We were just notified that station %s has been destroyed",shieldExpertStation:getCallSign()),"Magenta")
-				if p.shieldExpert then
-					p:addToShipLog(string.format("[Maria Shrivner] Oh no! I'm too late! Now we'll never be reconciled. *sniff* Well, the least I can do is upgrade %s's shields. Take me there and I'll double %s's shield capacity",homeStation:getCallSign(),homeStation:getCallSign()),"Yellow")
-					playSoundFile("sa_55_Maria4.wav")
-					plot4 = returnHomeForShields
-					plot4reminder = "Return to home base with Maria Shrivner to double shield capacity"
-				end
-			end
-		end
-	end
-end
-
-function returnHomeForShields(delta)
-	plot4name = "returnHomeForShields"
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
-		if p ~= nil and p:isValid() then
-			if p:isDocked(homeStation) then
-				if homeStation.shieldUpgrade == nil then
-					if p.shieldExpert then
-						newMax = homeStation:getShieldMax(0)*2
-						if homeStation:getShieldCount() == 1 then
-							homeStation:setShieldsMax(newMax)
-						end
-						if homeStation:getShieldCount() == 3 then
-							homeStation:setShieldsMax(newMax,newMax,newMax)
-						end
-						if homeStation:getShieldCount() == 4 then
-							homeStation:setShieldsMax(newMax,newMax,newMax,newMax)
-						end
-					end
-					p:addToShipLog(string.format("[Maria Shrivner] %s's shield capacity has been doubled. They should charge up to their new capacity eventually",homeStation:getCallSign()),"Yellow")
-					playSoundFile("sa_55_Maria5.wav")
-					choooseNextPlot4line()
-					homeStation.shieldUpgrade = true
-				end
-			end
-		end
-	end
+	playerCarrier:removeCustom(doNotPushButton)
+	playerCarrier:removeCustom(doNotPushButtonTac)
 end
 --[[-----------------------------------------------------------------
-    Plot 5 Helpful warnings
+      Give player ships defaults for this script. Called at the start 
+	  while paused & each time a ship's relay officer interacts with a station
 -----------------------------------------------------------------]]--
-function helpfulWarning(delta)
-	plot5name = "helpfulWarning"
-	helpfulWarningTimer = helpfulWarningTimer - delta
-	if helpfulWarningTimer < 0 then
-		warningProvided = false
-		for i=1,#stationList do
-			if stationList[i]:isValid() then
-				p = closestPlayerTo(stationList[i])
-				for _, obj in ipairs(stationList[i]:getObjectsInRange(30000)) do
-					if obj:isEnemy(p) then
-						if not string.find(obj:getTypeName(),"Station") then
-							wMsg = string.format("[%s] Our sensors detect enemies nearby",stationList[i]:getCallSign())
-							if diagnostic or difficulty < 1 then
-								wMsg = wMsg .. string.format(" - Type: %s",obj:getTypeName())
-							end
-							if i == 1 then
-								stationShields = homeStation:getShieldCount()
-								shieldsDamaged = false
-								if stationShields == 1 then
-									sl = homeStation:getShieldLevel(0)
-									sm = homeStation:getShieldMax(0)
-									if sl < sm then
-										sdMsg = sdMsg .. string.format("\n   Shield: %i% (%.1f/%i) ",math.floor(sl/sm*100),sl,sm)
-										shieldsDamaged = true
-									end
-								else
-									sdMsg = string.format("\n   Shield count: %i ",stationShields)
-									for j=1,stationShields do
-										sl = homeStation:getShieldLevel(j-1)
-										sm = homeStation:getShieldMax(j-1)
-										if sl < sm then
-											sdMsg = sdMsg .. string.format("\n      Shield %i: %i% (%.1f/%i) ",j,math.floor(sl/sm*100),sl,sm)
-											shieldsDamaged = true
-										end
-									end
-								end
-								if shieldsDamaged then
-									wMsg = wMsg .. "\nStation status:" .. sdMsg
-								end
-								hl = homeStation:getHull()
-								hm = homeStation:getHullMax()
-								if hl < hm then
-									if shieldsDamaged then
-										wMsg = wMsg .. string.format("\n   Hull: %i% (%.1f/%i)",math.floor(hl/hm*100),hl,hm)
-									else
-										wMsg = wMsg .. "\nStation status:" .. string.format("\n   Hull: %i% (%.1f/%i)",math.floor(hl/hm*100),hl,hm)										
-									end
-								end
-							end
-							p:addToShipLog(wMsg,"Red")
-							warningProvided = true
-							break
-						end
+function setPlayers()
+	concurrentPlayerCount = 0
+	for p1idx=1,8 do
+		pobj = getPlayerShip(p1idx)
+		if pobj ~= nil and pobj:isValid() then
+			concurrentPlayerCount = concurrentPlayerCount + 1
+			if goods[pobj] == nil then
+				goods[pobj] = goodsList
+			end
+			if pobj.initialRep == nil then
+				pobj:addReputationPoints(150-(difficulty*6))
+				pobj.initialRep = true
+			end
+			if not pobj.nameAssigned then
+				pobj.nameAssigned = true
+				tempPlayerType = pobj:getTypeName()
+				if tempPlayerType == "MP52 Hornet" then
+					if #playerShipNamesForMP52Hornet > 0 then
+						ni = math.random(1,#playerShipNamesForMP52Hornet)
+						pobj:setCallSign(playerShipNamesForMP52Hornet[ni])
+						table.remove(playerShipNamesForMP52Hornet,ni)
+					end
+					pobj.shipScore = 6
+					pobj.maxCargo = 3
+				elseif tempPlayerType == "Piranha" then
+					if #playerShipNamesForPiranha > 0 then
+						ni = math.random(1,#playerShipNamesForPiranha)
+						pobj:setCallSign(playerShipNamesForPiranha[ni])
+						table.remove(playerShipNamesForPiranha,ni)
+					end
+					pobj.shipScore = 16
+					pobj.maxCargo = 8
+				elseif tempPlayerType == "Flavia P.Falcon" then
+					if #playerShipNamesForFlaviaPFalcon > 0 then
+						ni = math.random(1,#playerShipNamesForFlaviaPFalcon)
+						pobj:setCallSign(playerShipNamesForFlaviaPFalcon[ni])
+						table.remove(playerShipNamesForFlaviaPFalcon,ni)
+					end
+					pobj.shipScore = 13
+					pobj.maxCargo = 15
+				elseif tempPlayerType == "Phobos M3P" then
+					if #playerShipNamesForPhobosM3P > 0 then
+						ni = math.random(1,#playerShipNamesForPhobosM3P)
+						pobj:setCallSign(playerShipNamesForPhobosM3P[ni])
+						table.remove(playerShipNamesForPhobosM3P,ni)
+					end
+					pobj.shipScore = 19
+					pobj.maxCargo = 10
+				elseif tempPlayerType == "Atlantis" then
+					if #playerShipNamesForAtlantis > 0 then
+						ni = math.random(1,#playerShipNamesForAtlantis)
+						pobj:setCallSign(playerShipNamesForAtlantis[ni])
+						table.remove(playerShipNamesForAtlantis,ni)
+					end
+					pobj.shipScore = 52
+					pobj.maxCargo = 6
+				elseif tempPlayerType == "Player Cruiser" then
+					if #playerShipNamesForCruiser > 0 then
+						ni = math.random(1,#playerShipNamesForCruiser)
+						pobj:setCallSign(playerShipNamesForCruiser[ni])
+						table.remove(playerShipNamesForCruiser,ni)
+					end
+					pobj.shipScore = 40
+					pobj.maxCargo = 6
+				elseif tempPlayerType == "Player Missile Cr." then
+					if #playerShipNamesForMissileCruiser > 0 then
+						ni = math.random(1,#playerShipNamesForMissileCruiser)
+						pobj:setCallSign(playerShipNamesForMissileCruiser[ni])
+						table.remove(playerShipNamesForMissileCruiser,ni)
+					end
+					pobj.shipScore = 45
+					pobj.maxCargo = 8
+				elseif tempPlayerType == "Player Fighter" then
+					if #playerShipNamesForFighter > 0 then
+						ni = math.random(1,#playerShipNamesForFighter)
+						pobj:setCallSign(playerShipNamesForFighter[ni])
+						table.remove(playerShipNamesForFighter,ni)
+					end
+					pobj.shipScore = 7
+					pobj.maxCargo = 3
+				elseif tempPlayerType == "Benedict" then
+					if #playerShipNamesForBenedict > 0 then
+						ni = math.random(1,#playerShipNamesForBenedict)
+						pobj:setCallSign(playerShipNamesForBenedict[ni])
+						table.remove(playerShipNamesForBenedict,ni)
+					end
+					if diagnostic then
+						pobj.shipScore = 1
+					else
+						pobj.shipScore = 10
+					end
+					pobj.maxCargo = 9
+				elseif tempPlayerType == "Kiriya" then
+					if #playerShipNamesForKiriya > 0 then
+						ni = math.random(1,#playerShipNamesForKiriya)
+						pobj:setCallSign(playerShipNamesForKiriya[ni])
+						table.remove(playerShipNamesForKiriya,ni)
+					end
+					if diagnostic then
+						pobj.shipScore = 1
+					else
+						pobj.shipScore = 10
+					end
+					pobj.maxCargo = 9
+				elseif tempPlayerType == "Striker" then
+					if #playerShipNamesForStriker > 0 then
+						ni = math.random(1,#playerShipNamesForStriker)
+						pobj:setCallSign(playerShipNamesForStriker[ni])
+						table.remove(playerShipNamesForStriker,ni)
+					end
+					pobj.shipScore = 7
+					pobj.maxCargo = 4
+				elseif tempPlayerType == "ZX-Lindworm" then
+					if #playerShipNamesForLindworm > 0 then
+						ni = math.random(1,#playerShipNamesForLindworm)
+						pobj:setCallSign(playerShipNamesForLindworm[ni])
+						table.remove(playerShipNamesForLindworm,ni)
+					end
+					pobj.shipScore = 7
+					pobj.maxCargo = 3
+				elseif tempPlayerType == "Repulse" then
+					if #playerShipNamesForRepulse > 0 then
+						ni = math.random(1,#playerShipNamesForRepulse)
+						pobj:setCallSign(playerShipNamesForRepulse[ni])
+						table.remove(playerShipNamesForRepulse,ni)
+					end
+					pobj.shipScore = 14
+					pobj.maxCargo = 12
+				elseif tempPlayerType == "Ender" then
+					if #playerShipNamesForEnder > 0 then
+						ni = math.random(1,#playerShipNamesForEnder)
+						pobj:setCallSign(playerShipNamesForEnder[ni])
+						table.remove(playerShipNamesForEnder,ni)
+					end
+					pobj.shipScore = 100
+					pobj.maxCargo = 20
+				elseif tempPlayerType == "Nautilus" then
+					if #playerShipNamesForNautilus > 0 then
+						ni = math.random(1,#playerShipNamesForNautilus)
+						pobj:setCallSign(playerShipNamesForNautilus[ni])
+						table.remove(playerShipNamesForNautilus,ni)
+					end
+					pobj.shipScore = 12
+					pobj.maxCargo = 7
+				else
+					if #playerShipNamesForLeftovers > 0 then
+						ni = math.random(1,#playerShipNamesForLeftovers)
+						pobj:setCallSign(playerShipNamesForLeftovers[ni])
+						table.remove(playerShipNamesForLeftovers,ni)
+					end
+					pobj.shipScore = 24
+					pobj.maxCargo = 5
+				end
+				if pobj.cargo == nil then
+					pobj.cargo = pobj.maxCargo
+					pobj.maxRepairCrew = pobj:getRepairCrewCount()
+					pobj.healthyShield = 1.0
+					pobj.prevShield = 1.0
+					pobj.healthyReactor = 1.0
+					pobj.prevReactor = 1.0
+					pobj.healthyManeuver = 1.0
+					pobj.prevManeuver = 1.0
+					pobj.healthyImpulse = 1.0
+					pobj.prevImpulse = 1.0
+					if psb[pobj:getTypeName()] ~= nil then
+						pobj.healthyBeam = 1.0
+						pobj.prevBeam = 1.0
+					end
+					if pobj:getWeaponTubeCount() > 0 then
+						pobj.healthyMissile = 1.0
+						pobj.prevMissile = 1.0
+					end
+					if pobj:hasWarp() then
+						pobj.healthyWarp = 1.0
+						pobj.prevWarp = 1.0
+					end
+					if pobj:hasJumpDrive() then
+						pobj.healthyJump = 1.0
+						pobj.prevJump = 1.0
 					end
 				end
 			end
-			if warningProvided then
-				break
-			end
-		end
-		helpfulWarningTimer = delta + random(90,200)
-	end
-end
---[[-----------------------------------------------------------------
-    Plot 6 Timed Game
------------------------------------------------------------------]]--
-function timedGame(delta)
-	gameTimeLimit = gameTimeLimit - delta
-	if gameTimeLimit < 0 then
-		if string.find(getScenarioVariation(),"Defender") then
-			missionVictory = true
-			endStatistics()
-			victory("Human Navy")
-		else
-			missionVictory = false
-			endStatistics()
-			victory("Kraylor")
 		end
 	end
-end
---[[-----------------------------------------------------------------
-      Plot W - wormhole starts as an artifact in unusual motion
------------------------------------------------------------------]]--
-function setWormArt()
-	wormArt = Artifact():setPosition(random(-90000,90000),random(-90000,90000)):setModel("artifact4"):allowPickup(false):setScanningParameters(2,5)
-	wormArt:setDescriptions("sprightly unassuming object","Object shows rapidly building energy"):setRadarSignatureInfo(50,10,5)
-	wormArt.travelAngle = random(0,360)
-	wormArt.tempAngle = -90
-	wormArt.travel = 5
-	plotW = moveWormArt
-end
-
-function moveWormArt(delta)
-	plotWname = "moveWormArt"
-	if wormArt:isScannedByFaction("Human Navy") then
-		wormDelayTimer = 5
-		plotW = wormBirth
-	end
-	p = closestPlayerTo(wormArt)
-	if distance(p,wormArt) > 5000 then
-		wax, way = wormArt:getPosition()
-		angleChange = false
-		if wax < -100000 then
-			angleChange = true
-			wormArt.travelAngle = random(0,180) + 270
-		end
-		if wax > 100000 then
-			angleChange = true
-			wormArt.travelAngle = random(90,270)
-		end
-		if way < -100000 then
-			angleChange = true
-			wormArt.travelAngle = random(0,180)
-		end
-		if way > 100000 then
-			angleChange = true
-			wormArt.travelAngle = random(180,360)
-		end
-		if angleChange then
-			wadx, wady = vectorFromAngle(wormArt.travelAngle,wormArt.travel+20)
-			wormArt:setPosition(wax+wadx,way+wady)
-		else
-			wadx, wady = vectorFromAngle(wormArt.travelAngle + wormArt.tempAngle,wormArt.travel)
-			wormArt:setPosition(wax+wadx,way+wady)
-			wormArt.tempAngle = wormArt.tempAngle + 1
-			if wormArt.tempAngle > 90 then
-				wormArt.tempAngle = -90
-			end
-		end
-	end
-end
-
-function wormBirth(delta)
-	plotWname = "wormBirth"
-	wormDelayTimer = wormDelayTimer - delta
-	if wormDelayTimer < 0 then
-		wax, way = wormArt:getPosition()
-		wormArt:explode()
-		plotW = wormBirth2
-		wormDelayTimer2 = 5
-	end
-end
-
-function wormBirth2(delta)
-	plotWname = "wormBirth2"
-	wormDelayTimer2 = wormDelayTimer2 - delta
-	if wormDelayTimer2 < 0 then
-		ElectricExplosionEffect():setPosition(wax,way):setSize(5000)
-		wormDelayTimer3 = 5
-		plotW = wormBirth3
-	end
-end
-
-function wormBirth3(delta)
-	plotWname = "wormBirth3"
-	wormDelayTimer3 = wormDelayTimer3 - delta
-	if wormDelayTimer3 < 0 then
-		wdx, wdy = vectorFromAngle(random(0,360),random(200000,300000))
-		WormHole():setPosition(wax,way):setTargetPosition(wax+wdx,way+wdy)
-		plotW = nil
-	end
-end
-
---[[-----------------------------------------------------------------
-      Generic or utility functions
------------------------------------------------------------------]]--
-function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
-	if enemyFaction == nil then
-		enemyFaction = "Kraylor"
-	end
-	if danger == nil then 
-		danger = 1
-	end
-	enemyStrength = math.max(danger * difficulty * playerPower(),5)
-	enemyPosition = 0
-	sp = irandom(300,500)			--random spacing of spawned group
-	deployConfig = random(1,100)	--randomly choose between squarish formation and hexagonish formation
-	enemyList = {}
-	-- Reminder: stsl and stnl are ship template score and name list
-	while enemyStrength > 0 do
-		shipTemplateType = irandom(1,#stsl)
-		while stsl[shipTemplateType] > enemyStrength * 1.1 + 5 do
-			shipTemplateType = irandom(1,#stsl)
-		end		
-		ship = CpuShip():setFaction(enemyFaction):setTemplate(stnl[shipTemplateType]):orderRoaming()
-		enemyPosition = enemyPosition + 1
-		if deployConfig < 50 then
-			ship:setPosition(xOrigin+fleetPosDelta1x[enemyPosition]*sp,yOrigin+fleetPosDelta1y[enemyPosition]*sp)
-		else
-			ship:setPosition(xOrigin+fleetPosDelta2x[enemyPosition]*sp,yOrigin+fleetPosDelta2y[enemyPosition]*sp)
-		end
-		table.insert(enemyList, ship)
-		enemyStrength = enemyStrength - stsl[shipTemplateType]
-	end
-	return enemyList
-end
---evaluate the players for enemy strength and size spawning purposes
-function playerPower()
-	playerShipScore = 0
-	for p5idx=1,8 do
-		p5obj = getPlayerShip(p5idx)
-		if p5obj ~= nil and p5obj:isValid() then
-			if p5obj.shipScore == nil then
-				playerShipScore = playerShipScore + 24
-			else
-				playerShipScore = playerShipScore + p5obj.shipScore
-			end
-		end
-	end
-	return playerShipScore
-end
--- Create amount of objects of type object_type along arc
--- Center defined by x and y
--- Radius defined by distance
--- Start of arc between 0 and 360 (startArc), end arc: endArcClockwise
--- Use randomize to vary the distance from the center point. Omit to keep distance constant
--- Example:
---   createRandomAlongArc(Asteroid, 100, 500, 3000, 65, 120, 450)
-function createRandomAlongArc(object_type, amount, x, y, distance, startArc, endArcClockwise, randomize)
-	if randomize == nil then randomize = 0 end
-	if amount == nil then amount = 1 end
-	arcLen = endArcClockwise - startArc
-	if startArc > endArcClockwise then
-		endArcClockwise = endArcClockwise + 360
-		arcLen = arcLen + 360
-	end
-	if amount > arcLen then
-		for ndex=1,arcLen do
-			radialPoint = startArc+ndex
-			pointDist = distance + random(-randomize,randomize)
-			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
-		end
-		for ndex=1,amount-arcLen do
-			radialPoint = random(startArc,endArcClockwise)
-			pointDist = distance + random(-randomize,randomize)
-			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
-		end
-	else
-		for ndex=1,amount do
-			radialPoint = random(startArc,endArcClockwise)
-			pointDist = distance + random(-randomize,randomize)
-			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
-		end
-	end
+	setConcurrenetPlayerCount = concurrentPlayerCount
 end
 -- Return the player ship closest to passed object parameter
 -- Return nil if no valid result
@@ -6492,200 +5718,56 @@ function farthestStationTo(obj)
 		return nil
 	end
 end
---set up players with name, goods, cargo space, reputation and either a warp drive or a jump drive if applicable
-function setPlayers()
-	concurrentPlayerCount = 0
-	for p1idx=1,8 do
-		pobj = getPlayerShip(p1idx)
-		if pobj ~= nil and pobj:isValid() then
-			concurrentPlayerCount = concurrentPlayerCount + 1
-			if goods[pobj] == nil then
-				goods[pobj] = goodsList
-			end
-			if pobj.initialRep == nil then
-				pobj:addReputationPoints(180-(difficulty*6))
-				pobj.initialRep = true
-			end
-			if not pobj.nameAssigned then
-				pobj.nameAssigned = true
-				pobj.spinUpgrade = false
-				pobj.beamTimeUpgrade = false
-				pobj.hullUpgrade = false
-				tempPlayerType = pobj:getTypeName()
-				if tempPlayerType == "MP52 Hornet" then
-					if #playerShipNamesForMP52Hornet > 0 then
-						ni = math.random(1,#playerShipNamesForMP52Hornet)
-						pobj:setCallSign(playerShipNamesForMP52Hornet[ni])
-						table.remove(playerShipNamesForMP52Hornet,ni)
-					end
-					pobj.shipScore = 7
-					pobj.maxCargo = 3
-					pobj.autoCoolant = false
-					pobj:setWarpDrive(true)
-				elseif tempPlayerType == "Piranha" then
-					if #playerShipNamesForPiranha > 0 then
-						ni = math.random(1,#playerShipNamesForPiranha)
-						pobj:setCallSign(playerShipNamesForPiranha[ni])
-						table.remove(playerShipNamesForPiranha,ni)
-					end
-					pobj.shipScore = 16
-					pobj.maxCargo = 8
-				elseif tempPlayerType == "Flavia P.Falcon" then
-					if #playerShipNamesForFlaviaPFalcon > 0 then
-						ni = math.random(1,#playerShipNamesForFlaviaPFalcon)
-						pobj:setCallSign(playerShipNamesForFlaviaPFalcon[ni])
-						table.remove(playerShipNamesForFlaviaPFalcon,ni)
-					end
-					pobj.shipScore = 13
-					pobj.maxCargo = 15
-				elseif tempPlayerType == "Phobos M3P" then
-					if #playerShipNamesForPhobosM3P > 0 then
-						ni = math.random(1,#playerShipNamesForPhobosM3P)
-						pobj:setCallSign(playerShipNamesForPhobosM3P[ni])
-						table.remove(playerShipNamesForPhobosM3P,ni)
-					end
-					pobj.shipScore = 19
-					pobj.maxCargo = 10
-					pobj:setWarpDrive(true)
-				elseif tempPlayerType == "Atlantis" then
-					if #playerShipNamesForAtlantis > 0 then
-						ni = math.random(1,#playerShipNamesForAtlantis)
-						pobj:setCallSign(playerShipNamesForAtlantis[ni])
-						table.remove(playerShipNamesForAtlantis,ni)
-					end
-					pobj.shipScore = 52
-					pobj.maxCargo = 6
-				elseif tempPlayerType == "Player Cruiser" then
-					if #playerShipNamesForCruiser > 0 then
-						ni = math.random(1,#playerShipNamesForCruiser)
-						pobj:setCallSign(playerShipNamesForCruiser[ni])
-						table.remove(playerShipNamesForCruiser,ni)
-					end
-					pobj.shipScore = 40
-					pobj.maxCargo = 6
-				elseif tempPlayerType == "Player Missile Cr." then
-					if #playerShipNamesForMissileCruiser > 0 then
-						ni = math.random(1,#playerShipNamesForMissileCruiser)
-						pobj:setCallSign(playerShipNamesForMissileCruiser[ni])
-						table.remove(playerShipNamesForMissileCruiser,ni)
-					end
-					pobj.shipScore = 45
-					pobj.maxCargo = 8
-				elseif tempPlayerType == "Player Fighter" then
-					if #playerShipNamesForFighter > 0 then
-						ni = math.random(1,#playerShipNamesForFighter)
-						pobj:setCallSign(playerShipNamesForFighter[ni])
-						table.remove(playerShipNamesForFighter,ni)
-					end
-					pobj.shipScore = 7
-					pobj.maxCargo = 3
-					pobj.autoCoolant = false
-					pobj:setJumpDrive(true)
-					pobj:setJumpDriveRange(3000,40000)
-				elseif tempPlayerType == "Benedict" then
-					if #playerShipNamesForBenedict > 0 then
-						ni = math.random(1,#playerShipNamesForBenedict)
-						pobj:setCallSign(playerShipNamesForBenedict[ni])
-						table.remove(playerShipNamesForBenedict,ni)
-					end
-					pobj.shipScore = 10
-					pobj.maxCargo = 9
-				elseif tempPlayerType == "Kiriya" then
-					if #playerShipNamesForKiriya > 0 then
-						ni = math.random(1,#playerShipNamesForKiriya)
-						pobj:setCallSign(playerShipNamesForKiriya[ni])
-						table.remove(playerShipNamesForKiriya,ni)
-					end
-					pobj.shipScore = 10
-					pobj.maxCargo = 9
-				elseif tempPlayerType == "Striker" then
-					if #playerShipNamesForStriker > 0 then
-						ni = math.random(1,#playerShipNamesForStriker)
-						pobj:setCallSign(playerShipNamesForStriker[ni])
-						table.remove(playerShipNamesForStriker,ni)
-					end
-					pobj.shipScore = 8
-					pobj.maxCargo = 4
-					pobj:setJumpDrive(true)
-					pobj:setJumpDriveRange(3000,40000)
-				elseif tempPlayerType == "ZX-Lindworm" then
-					if #playerShipNamesForLindworm > 0 then
-						ni = math.random(1,#playerShipNamesForLindworm)
-						pobj:setCallSign(playerShipNamesForLindworm[ni])
-						table.remove(playerShipNamesForLindworm,ni)
-					end
-					pobj.shipScore = 8
-					pobj.maxCargo = 3
-					pobj.autoCoolant = false
-					pobj:setWarpDrive(true)
-				elseif tempPlayerType == "Repulse" then
-					if #playerShipNamesForRepulse > 0 then
-						ni = math.random(1,#playerShipNamesForRepulse)
-						pobj:setCallSign(playerShipNamesForRepulse[ni])
-						table.remove(playerShipNamesForRepulse,ni)
-					end
-					pobj.shipScore = 14
-					pobj.maxCargo = 12
-				elseif tempPlayerType == "Ender" then
-					if #playerShipNamesForEnder > 0 then
-						ni = math.random(1,#playerShipNamesForEnder)
-						pobj:setCallSign(playerShipNamesForEnder[ni])
-						table.remove(playerShipNamesForEnder,ni)
-					end
-					pobj.shipScore = 100
-					pobj.maxCargo = 20
-				elseif tempPlayerType == "Nautilus" then
-					if #playerShipNamesForNautilus > 0 then
-						ni = math.random(1,#playerShipNamesForNautilus)
-						pobj:setCallSign(playerShipNamesForNautilus[ni])
-						table.remove(playerShipNamesForNautilus,ni)
-					end
-					pobj.shipScore = 12
-					pobj.maxCargo = 7
-				else
-					if #playerShipNamesForLeftovers > 0 then
-						ni = math.random(1,#playerShipNamesForLeftovers)
-						pobj:setCallSign(playerShipNamesForLeftovers[ni])
-						table.remove(playerShipNamesForLeftovers,ni)
-					end
-					pobj.shipScore = 24
-					pobj.maxCargo = 5
-					pobj:setWarpDrive(true)
-				end
-				if pobj.cargo == nil then
-					pobj.cargo = pobj.maxCargo
-					pobj.maxRepairCrew = pobj:getRepairCrewCount()
-					pobj.healthyShield = 1.0
-					pobj.prevShield = 1.0
-					pobj.healthyReactor = 1.0
-					pobj.prevReactor = 1.0
-					pobj.healthyManeuver = 1.0
-					pobj.prevManeuver = 1.0
-					pobj.healthyImpulse = 1.0
-					pobj.prevImpulse = 1.0
-					if psb[pobj:getTypeName()] ~= nil then
-						pobj.healthyBeam = 1.0
-						pobj.prevBeam = 1.0
-					end
-					if pobj:getWeaponTubeCount() > 0 then
-						pobj.healthyMissile = 1.0
-						pobj.prevMissile = 1.0
-					end
-					if pobj:hasWarp() then
-						pobj.healthyWarp = 1.0
-						pobj.prevWarp = 1.0
-					end
-					if pobj:hasJumpDrive() then
-						pobj.healthyJump = 1.0
-						pobj.prevJump = 1.0
-					end
-				end
+
+-- spawn enemies based on player strength
+function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
+	if enemyFaction == nil then
+		enemyFaction = "Kraylor"
+	end
+	if danger == nil then 
+		danger = 1
+	end
+	enemyStrength = math.max(danger * difficulty * playerPower(),5)
+	enemyPosition = 0
+	sp = irandom(300,500)			--random spacing of spawned group
+	deployConfig = random(1,100)	--randomly choose between squarish formation and hexagonish formation
+	enemyList = {}
+	-- Reminder: stsl and stnl are ship template score and name list
+	while enemyStrength > 0 do
+		shipTemplateType = irandom(1,#stsl)
+		while stsl[shipTemplateType] > enemyStrength * 1.1 + 5 do
+			shipTemplateType = irandom(1,#stsl)
+		end		
+		ship = CpuShip():setFaction(enemyFaction):setTemplate(stnl[shipTemplateType]):orderRoaming()
+		enemyPosition = enemyPosition + 1
+		if deployConfig < 50 then
+			ship:setPosition(xOrigin+fleetPosDelta1x[enemyPosition]*sp,yOrigin+fleetPosDelta1y[enemyPosition]*sp)
+		else
+			ship:setPosition(xOrigin+fleetPosDelta2x[enemyPosition]*sp,yOrigin+fleetPosDelta2y[enemyPosition]*sp)
+		end
+		table.insert(enemyList, ship)
+		enemyStrength = enemyStrength - stsl[shipTemplateType]
+	end
+	return enemyList
+end
+--evaluate the players for enemy strength and size spawning purposes
+function playerPower()
+	playerShipScore = 0
+	for p5idx=1,8 do
+		p5obj = getPlayerShip(p5idx)
+		if p5obj ~= nil and p5obj:isValid() then
+			if p5obj.shipScore == nil then
+				playerShipScore = playerShipScore + 24
+			else
+				playerShipScore = playerShipScore + p5obj.shipScore
 			end
 		end
 	end
-	setConcurrenetPlayerCount = concurrentPlayerCount
+	return playerShipScore
 end
-
+--[[-----------------------------------------------------------------
+      Care and maintenance of repair crew directed by engineer or damage control
+-----------------------------------------------------------------]]--
 function healthCheck(delta)
 	healthCheckTimer = healthCheckTimer - delta
 	if healthCheckTimer < 0 then
@@ -6765,137 +5847,6 @@ function crewFate(p, fatalityChance)
 			p:addCustomMessage("Engineering+",repairCrewFatalityPlus,"One of your repair crew has perished")
 		end
 	end
-end
-
-function autoCoolant(delta)
-	if enableAutoCoolFunctionList == nil then
-		enableAutoCoolFunctionList = {}
-		table.insert(enableAutoCoolFunctionList,enableAutoCool1)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool2)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool3)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool4)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool5)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool6)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool7)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool8)
-	end
-	if disableAutoCoolFunctionList == nil then
-		disableAutoCoolFunctionList = {}
-		table.insert(disableAutoCoolFunctionList,disableAutoCool1)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool2)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool3)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool4)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool5)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool6)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool7)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool8)
-	end
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
-		if p ~= nil and p:isValid() then
-			if p.autoCoolant ~= nil then
-				if p:hasPlayerAtPosition("Engineering") then
-					if p.autoCoolButton == nil then
-						tbi = "enableAutoCool" .. p:getCallSign()
-						p:addCustomButton("Engineering",tbi,"Auto cool",enableAutoCoolFunctionList[pidx])
-						tbi = "disableAutoCool" .. p:getCallSign()
-						p:addCustomButton("Engineering",tbi,"Manual cool",disableAutoCoolFunctionList[pidx])
-						p.autoCoolButton = true
-					end
-				end
-				if p:hasPlayerAtPosition("Engineering+") then
-					if p.autoCoolButton == nil then
-						tbi = "enableAutoCoolPlus" .. p:getCallSign()
-						p:addCustomButton("Engineering+",tbi,"Auto cool",enableAutoCoolFunctionList[pidx])
-						tbi = "disableAutoCoolPlus" .. p:getCallSign()
-						p:addCustomButton("Engineering+",tbi,"Manual cool",disableAutoCoolFunctionList[pidx])
-						p.autoCoolButton = true
-					end
-				end
-			end
-		end
-	end
-end
-
-function enableAutoCool1()
-	p = getPlayerShip(1)
-	p:setAutoCoolant(true)
-	p.autoCoolant = true
-end
-function disableAutoCool1()
-	p = getPlayerShip(1)
-	p:setAutoCoolant(false)
-	p.autoCoolant = false
-end
-function enableAutoCool2()
-	p = getPlayerShip(2)
-	p:setAutoCoolant(true)
-	p.autoCoolant = true
-end
-function disableAutoCool2()
-	p = getPlayerShip(2)
-	p:setAutoCoolant(false)
-	p.autoCoolant = false
-end
-function enableAutoCool3()
-	p = getPlayerShip(3)
-	p:setAutoCoolant(true)
-	p.autoCoolant = true
-end
-function disableAutoCool3()
-	p = getPlayerShip(3)
-	p:setAutoCoolant(false)
-	p.autoCoolant = false
-end
-function enableAutoCool4()
-	p = getPlayerShip(4)
-	p:setAutoCoolant(true)
-	p.autoCoolant = true
-end
-function disableAutoCool4()
-	p = getPlayerShip(4)
-	p:setAutoCoolant(false)
-	p.autoCoolant = false
-end
-function enableAutoCool5()
-	p = getPlayerShip(5)
-	p:setAutoCoolant(true)
-	p.autoCoolant = true
-end
-function disableAutoCool5()
-	p = getPlayerShip(5)
-	p:setAutoCoolant(false)
-	p.autoCoolant = false
-end
-function enableAutoCool6()
-	p = getPlayerShip(6)
-	p:setAutoCoolant(true)
-	p.autoCoolant = true
-end
-function disableAutoCool6()
-	p = getPlayerShip(6)
-	p:setAutoCoolant(false)
-	p.autoCoolant = false
-end
-function enableAutoCool7()
-	p = getPlayerShip(7)
-	p:setAutoCoolant(true)
-	p.autoCoolant = true
-end
-function disableAutoCool7()
-	p = getPlayerShip(7)
-	p:setAutoCoolant(false)
-	p.autoCoolant = false
-end
-function enableAutoCool8()
-	p = getPlayerShip(8)
-	p:setAutoCoolant(true)
-	p.autoCoolant = true
-end
-function disableAutoCool8()
-	p = getPlayerShip(8)
-	p:setAutoCoolant(false)
-	p.autoCoolant = false
 end
 --final page for victory or defeat on main streen. Station stats only for now
 function endStatistics()
@@ -6977,7 +5928,7 @@ function update(delta)
 	concurrentPlayerCount = 0
 	for pidx=1,8 do
 		p = getPlayerShip(pidx)
-		if p ~= nil then
+		if p ~= nil and p:isValid() then
 			concurrentPlayerCount = concurrentPlayerCount + 1
 		end
 	end
@@ -6996,89 +5947,28 @@ function update(delta)
 		GMSpawnEnemyGroup = "Spawn Enemies"
 		addGMFunction(GMSpawnEnemyGroup,GMSpawnsEnemies)
 	end
-	if difficultySpecificSetup == nil then
-		difficultySpecificSetup = "done"
-		if difficulty >= 1 then
-			tesx, tesy = targetEnemyStation:getPosition()
-			wpRadius = 3000
-			wpAngle = random(0,360)
-			rx, ry = vectorFromAngle(wpAngle,wpRadius)
-			wp9 = CpuShip():setCallSign("WP-9"):setFaction(stationFaction):setPosition(tesx+rx,tesy+ry):setTemplate("Defense platform"):orderRoaming()
-			wpAngle = wpAngle + 90
-			rx, ry = vectorFromAngle(wpAngle,wpRadius)
-			wp15 = CpuShip():setCallSign("WP-15"):setFaction(stationFaction):setPosition(tesx+rx,tesy+ry):setTemplate("Defense platform"):orderRoaming()
-			wpAngle = wpAngle + 90
-			rx, ry = vectorFromAngle(wpAngle,wpRadius)
-			wp46 = CpuShip():setCallSign("WP-46"):setFaction(stationFaction):setPosition(tesx+rx,tesy+ry):setTemplate("Defense platform"):orderRoaming()
-			wpAngle = wpAngle + 90
-			rx, ry = vectorFromAngle(wpAngle,wpRadius)
-			wp20 = CpuShip():setCallSign("WP-20"):setFaction(stationFaction):setPosition(tesx+rx,tesy+ry):setTemplate("Defense platform"):orderRoaming()
-		end
-		if difficulty > 1 then
-			tesx, tesy = targetEnemyStation:getPosition()
-			wp66cpos = 0
-			rx, ry = vectorFromAngle(wp66cpos,6000)
-			wp66 = CpuShip():setCallSign("WP-66"):setFaction(stationFaction):setPosition(tesx+rx,tesy+ry):setTemplate("Defense platform"):orderRoaming()
-		end		
+	if plotH ~= nil then
+		plotH(delta)		--health of repair crew
 	end
-	if difficulty > 1 then
-		if wp66:isValid() then
-			wp66cpos = wp66cpos + .1
-			if wp66cpos >= 360 then
-				wp66cpos = 0
-			end
-			rx, ry = vectorFromAngle(wp66cpos, 6000)
-			wp66:setPosition(tesx+rx,tesy+ry)
-		end
+	if plotT ~= nil then
+		plotT(delta)		--transports
 	end
-	if homeStation:isValid() then
-		if homeStationRotationEnabled then
-			homeStation:setRotation(homeStation:getRotation()+.1)
-			if homeStation:getRotation() >= 360 then
-				homeStation:setRotation(0)
-			end
-		end
+	if plotA ~= nil then
+		plotA(delta)		--asteroids
 	end
-	anetx, anety = vectorFromAngle(stationAnet.angle,3000)
-	stationAnet:setPosition(aldx+anetx,aldy+anety):setRotation(stationAnet.angle)
-	stationAnet.angle = stationAnet.angle + .05
-	if stationAnet.angle >= 360 then
-		stationAnet.angle = 0
-	end
-	if plot6 ~= nil then	--timed game
-		plot6(delta)
-	end
-	if plot1 ~= nil then	--initial and primary plot
+	if plot1 ~= nil then	--initial sets of enemies wave generation
 		plot1(delta)
-	end
-	if plot2 ~= nil then	--delivery, spin upgrade, base intelligence, warp jam
+	end	
+	if plot2 ~= nil then	--3 random missions
 		plot2(delta)
-	end
-	if plot4 ~= nil then	--deliver, base rotate, beam time/hull upgrades
-		plot4(delta)
-	end
-	if plotH ~= nil then	--health
-		plotH(delta)
-	end
-	if plotA ~= nil then	--asteroids in motion
-		plotA(delta)
-	end
-	if plotN ~= nil then	--nebulae in motion
-		plotN(delta)
-	end
-	if plotT ~= nil then	--transports
-		plotT(delta)
-	end
-	if plot3 ~= nil then	--intelligence over time
+	end	
+	if plot3 ~= nil then	--3 random missions
 		plot3(delta)
-	end
-	if plotW ~= nil then	--worm artifact
-		plotW(delta)
-	end
-	if plotC ~= nil then	--coolant automation for fighters
+	end	
+	if plot4 ~= nil then	-- simple - awaiting more development
+		plot4(delta)
+	end	
+	if plotC ~= nil then	-- cargo transfer
 		plotC(delta)
-	end
-	if plot5 ~= nil then	--helpful warning
-		plot5(delta)
 	end
 end
