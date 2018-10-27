@@ -36,9 +36,9 @@ require("utils.lua")
 function init()
 	missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 	--Ship Template Name List
-	stnl = {"MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Ranus U","Nirvana R5A","Stalker Q7","Stalker R7","Atlantis X23","Starhammer II","Odin","Flavia Falcon","Fighter","Karnack","Cruiser","Missile Cruiser","Gunship","Adv. Gunship","Strikeship","Adv. Striker","Dreadnought","Battlestation","Blockade Runner","Ktlitan Fighter","Ktlitan Breaker","Ktlitan Worker","Ktlitan Drone","Ktlitan Feeder","Ktlitan Scout","Ktlitan Destroyer"}
+	stnl = {"MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Ranus U","Nirvana R5A","Stalker Q7","Stalker R7","Atlantis X23","Starhammer II","Odin","Fighter","Cruiser","Missile Cruiser","Strikeship","Adv. Striker","Dreadnought","Battlestation","Blockade Runner","Ktlitan Fighter","Ktlitan Breaker","Ktlitan Worker","Ktlitan Drone","Ktlitan Feeder","Ktlitan Scout","Ktlitan Destroyer","Storm"}
 	--Ship Template Score List
-	stsl = {5            ,5            ,7          ,6          ,7            ,8          ,15         ,16         ,15          ,15           ,25       ,20           ,25          ,25          ,50            ,70             ,250   ,9              ,6        ,17       ,18       ,14               ,27       ,28            ,30          ,27            ,80           ,100            ,65               ,6                ,45               ,40              ,4              ,48              ,8              ,50}
+	stsl = {5            ,5            ,7          ,6          ,7            ,8          ,15         ,16         ,15          ,15           ,25       ,20           ,25          ,25          ,50            ,70             ,250   ,6        ,18       ,14               ,30          ,27            ,80           ,100            ,65               ,6                ,45               ,40              ,4              ,48              ,8              ,50                 ,22}
 	difficulty = 1
 	--Player Ship Beams
 	psb = {}
@@ -54,6 +54,7 @@ function init()
 	psb["Benedict"] = 2
 	psb["Kiriya"] = 2
 	psb["Nautilus"] = 2
+	psb["Hathcock"] = 4
 	-- square grid deployment
 	fleetPosDelta1x = {0,1,0,-1, 0,1,-1, 1,-1,2,0,-2, 0,2,-2, 2,-2,2, 2,-2,-2,1,-1, 1,-1}
 	fleetPosDelta1y = {0,0,1, 0,-1,1,-1,-1, 1,0,2, 0,-2,2,-2,-2, 2,1,-1, 1,-1,2, 2,-2,-2}
@@ -210,6 +211,7 @@ function init()
 	playerShipNamesForRepulse = {"Fiddler","Brinks","Loomis","Mowag","Patria","Pandur","Terrex","Komatsu","Eitan"}
 	playerShipNamesForEnder = {"Mongo","Godzilla","Leviathan","Kraken","Jupiter","Saturn"}
 	playerShipNamesForNautilus = {"October", "Abdiel", "Manxman", "Newcon", "Nusret", "Pluton", "Amiral", "Amur", "Heinkel", "Dornier"}
+	playerShipNamesForHathcock = {"Hayha", "Waldron", "Plunkett", "Mawhinney", "Furlong", "Zaytsev", "Pavlichenko", "Pegahmagabow", "Fett", "Hawkeye", "Hanzo"}
 	playerShipNamesForLeftovers = {"Foregone","Righteous","Masher"}
 	highestConcurrentPlayerCount = 0
 	setConcurrentPlayerCount = 0
@@ -1066,7 +1068,8 @@ function getAdjacentGridLocationsSkip(dSkip,lx,ly)
 			end
 		end
 	end
-end--Randomly choose station size template unless overridden
+end
+--Randomly choose station size template unless overridden
 function szt()
 	if stationSize ~= nil then
 		sizeTemplate = stationSize
@@ -3166,7 +3169,7 @@ function handleDockedState()
 	end
 	if goods[comms_target] ~= nil then
 		addCommsReply("Buy, sell, trade", function()
-			oMsg = "Goods or components available here: quantity, cost in reputation\n"
+			oMsg = string.format("Station %s:\nGoods or components available: quantity, cost in reputation\n",comms_target:getCallSign())
 			gi = 1		-- initialize goods index
 			repeat
 				goodsType = goods[comms_target][gi][1]
@@ -3472,6 +3475,29 @@ function handleUndockedState()
 	setCommsMessage(oMsg)
  	addCommsReply("I need information", function()
 		setCommsMessage("What kind of information do you need?")
+		goodsQuantityAvailable = 0
+		gi = 1
+		repeat
+			if goods[comms_target][gi][2] > 0 then
+				goodsQuantityAvailable = goodsQuantityAvailable + goods[comms_target][gi][2]
+			end
+			gi = gi + 1
+		until(gi > #goods[comms_target])
+		if goodsQuantityAvailable > 0 then
+			addCommsReply("What goods do you have available for sale or trade?", function()
+				oMsg = string.format("Station %s:\nGoods or components available: quantity, cost in reputation\n",comms_target:getCallSign())
+				gi = 1		-- initialize goods index
+				repeat
+					goodsType = goods[comms_target][gi][1]
+					goodsQuantity = goods[comms_target][gi][2]
+					goodsRep = goods[comms_target][gi][3]
+					oMsg = oMsg .. string.format("   %14s: %2i, %3i\n",goodsType,goodsQuantity,goodsRep)
+					gi = gi + 1
+				until(gi > #goods[comms_target])
+				setCommsMessage(oMsg)
+				addCommsReply("Back", commsStation)
+			end)
+		end
 		addCommsReply("See any enemies in your area?", function()
 			if player:isFriendly(comms_target) then
 				enemiesInRange = 0
@@ -5594,6 +5620,14 @@ function setPlayers()
 					end
 					pobj.shipScore = 12
 					pobj.maxCargo = 7
+				elseif tempPlayerType == "Hathcock" then
+					if #playerShipNamesForHathcock > 0 then
+						ni = math.random(1,#playerShipNamesForHathcock)
+						pobj:setCallSign(playerShipNamesForHathcock[ni])
+						table.remove(playerShipNamesForHathcock,ni)
+					end
+					pobj.shipScore = 30
+					pobj.maxCargo = 6
 				else
 					if #playerShipNamesForLeftovers > 0 then
 						ni = math.random(1,#playerShipNamesForLeftovers)
