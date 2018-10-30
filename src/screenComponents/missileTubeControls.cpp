@@ -189,7 +189,7 @@ void GuiMissileTubeControls::onHotkey(const HotkeyResult& key)
             }
             if (key.hotkey == "AUTO_TUBE_" + string(n+1))
             {
-                my_spaceship->weapon_tube[n].setAutoLoading(!my_spaceship->weapon_tube[n].isAutoLoading());
+            	my_spaceship->commandSetTubeAutoLoading(n, !my_spaceship->weapon_tube[n].isAutoLoading());
             }
         }
     }
