@@ -9,6 +9,7 @@ private:
     string current_model_data_name;
     string model_data_name;
     bool allow_pickup;
+    ScriptSimpleCallback on_pickup_callback;
 public:
     Artifact();
 
@@ -23,6 +24,7 @@ public:
     void allowPickup(bool allow);
     
     virtual string getExportLine();
+    void setPickUpCallback(ScriptSimpleCallback callback);
 };
 
 #endif//ARTIFACT_H
