@@ -253,7 +253,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
             link_to_science_button->setValue(false);
             link_to_science_button->disable();
         }
-        if (obj->canBeHackedBy(my_spaceship))
+        if (my_spaceship && obj->canBeHackedBy(my_spaceship))
         {
             hack_target_button->enable();
         }else{

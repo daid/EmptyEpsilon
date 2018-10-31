@@ -81,8 +81,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     if (fog_style == NebulaFogOfWar || fog_style == FriendlysShortRangeFogOfWar)
     {
         drawRenderTexture(mask_texture, forground_texture, sf::Color::White, sf::BlendMode(
-            sf::BlendMode::Zero, sf::BlendMode::SrcColor, sf::BlendMode::Add,
-            sf::BlendMode::Zero, sf::BlendMode::SrcColor, sf::BlendMode::Add
+            sf::BlendMode::Zero, sf::BlendMode::SrcAlpha, sf::BlendMode::Add
         ));
     }
     //Post masking
@@ -728,6 +727,8 @@ bool GuiRadarView::onMouseDown(sf::Vector2f position)
         if (position - getCenterPoint() > radius)
             return false;
     }
+    if (!mouse_down_func && !mouse_drag_func && !mouse_up_func)
+        return false;
     if (mouse_down_func)
         mouse_down_func(screenToWorld(position));
     return true;

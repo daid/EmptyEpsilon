@@ -33,7 +33,7 @@ public:
     GuiSlider* setValue(float value);
     GuiSlider* setRange(float min, float max);
     GuiSlider* addOverlay();
-    float getValue();
+    float getValue() const;
 };
 
 class GuiSlider2D : public GuiElement

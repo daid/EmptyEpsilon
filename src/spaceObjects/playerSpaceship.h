@@ -49,8 +49,6 @@ public:
     constexpr static float max_scanning_delay = 6.0;
     // Maximum number of self-destruction confirmation codes
     constexpr static int max_self_destruct_codes = 3;
-    // Scan probe capacity
-    constexpr static int max_scan_probes = 8;
     // Subsystem effectiveness base rates
     static float system_power_user_factor[];
     
@@ -130,6 +128,9 @@ public:
     std::vector<CustomShipFunction> custom_functions;
 
     std::vector<sf::Vector2f> waypoints;
+    
+    // Scan probe capacity
+    int max_scan_probes;
     int scan_probe_stock;
     float scan_probe_recharge;
 
@@ -181,6 +182,11 @@ public:
     void setEnergyLevelMax(float amount) { max_energy_level = std::max(0.0f, amount); energy_level = std::min(energy_level, max_energy_level); }
     float getEnergyLevel() { return energy_level; }
     float getEnergyLevelMax() { return max_energy_level; }
+    
+    void setScanProbeCount(int amount) { scan_probe_stock = std::max(0, std::min(amount, max_scan_probes)); }
+    int getScanProbeCount() { return scan_probe_stock; }
+    void setMaxScanProbeCount(int amount) { max_scan_probes = std::max(0, amount); scan_probe_stock = std::min(scan_probe_stock, max_scan_probes); }
+    int getMaxScanProbeCount() { return max_scan_probes; }
 
     void addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback);
     void addCustomInfo(ECrewPosition position, string name, string caption);

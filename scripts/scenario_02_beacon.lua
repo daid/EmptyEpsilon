@@ -154,8 +154,10 @@ function missionRT4Died(delta)
         research_station:sendCommsMessage(player, [[Apperently, J.J.Johnson managed to send out a transmission with his mission details to Orion-5 before he passed away.
 
 Head to Orion-5 to receive the details on his mission.]])
+        mission_state = missionRT4PickedUp
     end
 end
+
 function missionRetrieveCriminals(delta)
     if player:isDocked(neutral_station) then
         neutral_station:sendCommsMessage(player, [[Two tough looking criminals board your ship. They are already cuffed, and do not look to happy about the whole situation.

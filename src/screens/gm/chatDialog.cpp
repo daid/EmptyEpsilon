@@ -104,7 +104,7 @@ void GameMasterChatDialog::onClose()
     {
         player->closeComms();
     }
-    destroy();
+    hide();
 }
 
 void GameMasterChatDialog::drawLine(sf::RenderTarget& window, sf::Vector2f target)

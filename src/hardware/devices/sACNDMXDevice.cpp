@@ -20,6 +20,7 @@ StreamingAcnDMXDevice::StreamingAcnDMXDevice()
         uuid[n] = uint8_t(irandom(0, 255));
     memset(source_name, 0, sizeof(source_name));
     strcpy((char*)source_name, "EmptyEpsilon");
+    run_thread = false;
 }
 
 StreamingAcnDMXDevice::~StreamingAcnDMXDevice()
@@ -95,7 +96,7 @@ void StreamingAcnDMXDevice::updateLoop()
         //DMP layer
         packet << uint16_t(0x7000 | (11 + channel_count)); //Flags and length
         packet << uint8_t(2);  //Vector, message is PDU
-        packet << uint8_t(0x1a);  //Format of address and data
+        packet << uint8_t(0xa1);  //Format of address and data
         packet << uint16_t(0x0000);  //First property address
         packet << uint16_t(0x0001);  //Address increments
         packet << uint16_t(1 + channel_count);  //Value count

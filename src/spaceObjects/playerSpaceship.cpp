@@ -52,6 +52,11 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setEnergyLevelMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getEnergyLevel);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getEnergyLevelMax);
+    
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setScanProbeCount);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getScanProbeCount);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setMaxScanProbeCount);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getMaxScanProbeCount);
 
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomButton);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomInfo);
@@ -204,6 +209,7 @@ PlayerSpaceship::PlayerSpaceship()
     scanning_delay = 0.0;
     scanning_complexity = 0;
     scanning_depth = 0;
+    max_scan_probes = 8;
     scan_probe_stock = max_scan_probes;
     scan_probe_recharge = 0.0;
     alert_level = AL_Normal;
@@ -895,6 +901,7 @@ void PlayerSpaceship::addCustomMessageWithCallback(ECrewPosition position, strin
     CustomShipFunction& csf = custom_functions.back();
     csf.type = CustomShipFunction::Type::Message;
     csf.name = name;
+    csf.crew_position = position;
     csf.caption = caption;
     csf.callback = callback;
 }
@@ -1178,7 +1185,9 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 P<PlayerSpaceship> player = comms_target;
                 comms_state = CS_OpeningChannel;
                 comms_open_delay = comms_channel_open_time;
-                addToShipLog("Hailing: " + comms_target->getCallSign(), colorConfig.log_generic);
+                comms_target_name = comms_target->getCallSign();
+                comms_incomming_message = "Opened comms with " + comms_target_name;
+                addToShipLog("Hailing: " + comms_target_name, colorConfig.log_generic);
             }else{
                 comms_state = CS_Inactive;
             }
@@ -1254,7 +1263,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 comms_state = CS_ChannelOpenGM;
 
                 addToShipLog("Opened communication channel to " + comms_target_name, colorConfig.log_generic);
-                comms_incomming_message = "Opened comms";
+                comms_incomming_message = "Opened comms with " + comms_target_name;
             }else{
                 addToShipLog("Refused hail from " + comms_target_name, colorConfig.log_generic);
                 comms_state = CS_Inactive;
@@ -1454,10 +1463,15 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             {
                 if (csf.name == name)
                 {
-                    if (csf.type == CustomShipFunction::Type::Message)
-                        removeCustom(name);
                     if (csf.type == CustomShipFunction::Type::Button || csf.type == CustomShipFunction::Type::Message)
+                    {
                         csf.callback.call();
+                    }
+                    if (csf.type == CustomShipFunction::Type::Message)
+                    {
+                        removeCustom(name);
+                        break;
+                    }
                 }
             }
         }

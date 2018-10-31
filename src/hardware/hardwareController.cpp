@@ -6,11 +6,13 @@
 #include "spaceObjects/nebula.h"
 #include "spaceObjects/warpJammer.h"
 
-#include "dmx512SerialDevice.h"
-#include "enttecDMXProDevice.h"
-#include "virtualOutputDevice.h"
-#include "sACNDMXDevice.h"
-#include "uDMXDevice.h"
+#include "devices/dmx512SerialDevice.h"
+#include "devices/enttecDMXProDevice.h"
+#include "devices/virtualOutputDevice.h"
+#include "devices/sACNDMXDevice.h"
+#include "devices/uDMXDevice.h"
+#include "devices/philipsHueDevice.h"
+
 #include "hardwareMappingEffects.h"
 
 HardwareController::HardwareController()
@@ -99,6 +101,10 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
             device = new StreamingAcnDMXDevice();
         else if (settings["device"] == "uDMXDevice")
             device = new UDMXDevice();
+        else if (settings["device"] == "PhilipsHueDevice")
+            device = new PhilipsHueDevice();
+        else
+            LOG(ERROR) << "Unknown device definition in [hardware] section: " << settings["device"];
         if (device)
         {
             if (!device->configure(settings))
@@ -378,8 +384,8 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     SHIP_VARIABLE("Shield7", ship->getShieldPercentage(7));
     SHIP_VARIABLE("Energy", ship->energy_level * 100 / ship->max_energy_level);
     SHIP_VARIABLE("ShieldsUp", ship->shields_active ? 1.0f : 0.0f);
-    SHIP_VARIABLE("Impulse", ship->current_impulse);
-    SHIP_VARIABLE("Warp", ship->current_warp);
+    SHIP_VARIABLE("Impulse", ship->current_impulse * ship->getSystemEffectiveness(SYS_Impulse));
+    SHIP_VARIABLE("Warp", ship->current_warp * ship->getSystemEffectiveness(SYS_Warp));
     SHIP_VARIABLE("Docking", ship->docking_state == DS_Docking ? 1.0f : 0.0f);
     SHIP_VARIABLE("Docked", ship->docking_state == DS_Docked ? 1.0f : 0.0f);
     SHIP_VARIABLE("InNebula", Nebula::inNebula(ship->getPosition()) ? 1.0f : 0.0f);
@@ -395,6 +401,14 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
         SHIP_VARIABLE("TubeLoading" + string(n), ship->weapon_tube[n].isLoading() ? 1.0f : 0.0f);
         SHIP_VARIABLE("TubeUnloading" + string(n), ship->weapon_tube[n].isUnloading() ? 1.0f : 0.0f);
         SHIP_VARIABLE("TubeFiring" + string(n), ship->weapon_tube[n].isFiring() ? 1.0f : 0.0f);
+    }
+    for(int n=0; n<SYS_COUNT; n++)
+    {
+        SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Health", ship->systems[n].health);
+        SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Power", ship->systems[n].power_level / 3.0);
+        SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Heat", ship->systems[n].heat_level);
+        SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Coolant", ship->systems[n].coolant_level);
+        SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Hacked", ship->systems[n].hacked_level);
     }
     
     LOG(WARNING) << "Unknown variable: " << variable_name;

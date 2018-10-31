@@ -2,6 +2,7 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 
+#include "gui/gui2_overlay.h"
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_button.h"
@@ -12,15 +13,14 @@ GuiShipDestroyedPopup::GuiShipDestroyedPopup(GuiCanvas* owner)
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     
-    frame = new GuiPanel(this, "SHIP_DESTROYED_FRAME");
-    frame->setPosition(0, 0, ACenter)->setSize(700, 200);
-    
-    (new GuiLabel(frame, "SHIP_DESTROYED_TEXT", "SHIP DESTROYED!", 70))->setPosition(0, -25, ACenter)->setSize(0, 0);
-    (new GuiButton(frame, "SHIP_DESTROYED_BUTTON", "Return", [this]() {
+    ship_destroyed_overlay = new GuiOverlay(this, "SHIP_DESTROYED", sf::Color(0, 0, 0, 128));
+    (new GuiPanel(ship_destroyed_overlay, "SHIP_DESTROYED_FRAME"))->setPosition(0, 0, ACenter)->setSize(500, 100);
+    (new GuiLabel(ship_destroyed_overlay, "SHIP_DESTROYED_TEXT", "SHIP DESTROYED!", 70))->setPosition(0, 0, ACenter)->setSize(500, 100);
+    (new GuiButton(ship_destroyed_overlay, "SHIP_DESTROYED_BUTTON", "Return", [this]() {
         this->owner->destroy();
         soundManager->stopMusic();
         returnToShipSelection();
-    }))->setPosition(0, 50, ACenter)->setSize(300, 50);
+    }))->setPosition(0, 75, ACenter)->setSize(500, 50);
     
     show_timeout.restart();
 }
@@ -29,10 +29,10 @@ void GuiShipDestroyedPopup::onDraw(sf::RenderTarget& window)
 {
     if (my_spaceship)
     {
-        frame->hide();
+        ship_destroyed_overlay->hide();
         show_timeout.restart();
     }else{
         if (show_timeout.getElapsedTime().asSeconds() > 5.0)
-            frame->show();
+            ship_destroyed_overlay->show();
     }
 }

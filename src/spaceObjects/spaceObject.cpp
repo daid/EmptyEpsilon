@@ -63,21 +63,21 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Return true when the hail is enabled with succes. Returns false when the target player cannot be hailed right now (because it's already communicating with something else)
     /// This function will display the message given as parameter when the hail is answered.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, sendCommsMessage);
-    /// Let this object take damage, the DamageInfo parameter can be empty, or a string which indicates if it's energy, kinetic or emp damage.
+    /// Let this object take damage, the DamageInfo parameter can be empty, or a string which indicates if it's energy, kinetic or emp damage
+    /// optionally followed by the location of the damage's origin (to damage the correct shield), followed by the frequency band (0-20 for energy damage) and the ESystem to target.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, takeDamage);
-    // Set the description of this object. The description is visible on the
-    // Science station.
+    /// Set the description of this object. The description is visible on the Science station.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setDescription);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setDescriptionForScanState);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getDescription);
-    // Set the radar signature of this object. Objects' signatures create noise
-    // on the Science station's raw radar signal ring.
+    /// Sets the description of this object in scanned and unscanned states. First parameter is the description in unscanned state, while the 2nd parameter is in scanned state.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setDescriptions);
+    /// Set the radar signature of this object. Objects' signatures create noise
+    /// on the Science station's raw radar signal ring.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setRadarSignatureInfo);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureGravity);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureElectrical);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureBiological);
-    /// Set the description of this object, description is visible at the science station.
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setDescription);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getDescription);
     ///Get the scanning complexity of this object (amount of bars in the minigame)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, scanningComplexity);
     ///Get the scanning depth of this object (number of minigames to complete)
@@ -111,7 +111,10 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     registerMemberReplication(&callsign);
     registerMemberReplication(&faction_id);
     registerMemberReplication(&scanned_by_faction);
-    registerMemberReplication(&object_description);
+    registerMemberReplication(&object_description.not_scanned);
+    registerMemberReplication(&object_description.friend_of_foe_identified);
+    registerMemberReplication(&object_description.simple_scan);
+    registerMemberReplication(&object_description.full_scan);
     registerMemberReplication(&radar_signature.gravity);
     registerMemberReplication(&radar_signature.electrical);
     registerMemberReplication(&radar_signature.biological);
@@ -148,7 +151,7 @@ bool SpaceObject::canBeTargetedBy(P<SpaceObject> other)
 
 bool SpaceObject::canBeSelectedBy(P<SpaceObject> other)
 {
-    if (object_description.length() > 0)
+    if (getDescriptionFor(other).length() > 0)
         return true;
     if (canBeScannedBy(other))
         return true;
@@ -400,4 +403,38 @@ template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& d
         di.type = DT_Kinetic;
     else if (str == "emp")
         di.type = DT_EMP;
+
+    if (!lua_isnumber(L, idx))
+        return;
+
+    di.location.x = luaL_checknumber(L, idx++);
+    di.location.y = luaL_checknumber(L, idx++);
+
+    if (lua_isnil(L, idx))
+        idx++;
+    else if (!lua_isnumber(L, idx))
+        return;
+    else
+        di.frequency = luaL_checkinteger(L, idx++);
+
+    if (!lua_isstring(L, idx))
+        return;
+
+    convert<ESystem>::param(L, idx, di.system_target);
+}
+
+template<> void convert<EScannedState>::param(lua_State* L, int& idx, EScannedState& ss)
+{
+    ss = SS_NotScanned;
+    if (!lua_isstring(L, idx))
+        return;
+    string str = string(luaL_checkstring(L, idx++)).lower();
+    if (str == "notscanned" || str == "not")
+        ss = SS_NotScanned;
+    else if (str == "friendorfoeidentified")
+        ss = SS_FriendOrFoeIdentified;
+    else if (str == "simple" || str == "simplescan")
+        ss = SS_SimpleScan;
+    else if (str == "full" || str == "fullscan")
+        ss = SS_FullScan;
 }

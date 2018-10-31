@@ -17,12 +17,12 @@ GuiAdvancedScrollText* GuiAdvancedScrollText::addEntry(string prefix, string tex
     return this; 
 }
 
-unsigned int GuiAdvancedScrollText::getEntryCount()
+unsigned int GuiAdvancedScrollText::getEntryCount() const
 {
     return entries.size();
 }
 
-string GuiAdvancedScrollText::getEntryText(int index)
+string GuiAdvancedScrollText::getEntryText(int index) const
 {
     if (index < 0 || index >= int(getEntryCount()))
         return "";

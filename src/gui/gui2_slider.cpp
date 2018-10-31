@@ -167,7 +167,7 @@ GuiSlider* GuiSlider::addOverlay()
     return this;
 }
 
-float GuiSlider::getValue()
+float GuiSlider::getValue() const
 {
     return value;
 }

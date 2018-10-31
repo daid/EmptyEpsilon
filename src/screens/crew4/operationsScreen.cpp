@@ -13,7 +13,7 @@
 OperationScreen::OperationScreen(GuiContainer* owner)
 : GuiOverlay(owner, "", colorConfig.background)
 {
-    ScienceScreen* science = new ScienceScreen(this);
+    ScienceScreen* science = new ScienceScreen(this, operationsOfficer);
     science->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(0, 0, 0, 50);
     science->science_radar->setCallbacks(
         [this, science](sf::Vector2f position) { // Down
@@ -44,7 +44,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
             switch(mode)
             {
             case TargetSelection:
-                science->targets.setToClosestTo(position, 1000.0, TargetsContainer::Targetable);
+                science->targets.setToClosestTo(position, 1000.0, TargetsContainer::Selectable);
                 break;
             case WaypointPlacement:
                 if (my_spaceship)
@@ -75,7 +75,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     delete_waypoint_button->setPosition(-270, -120, ABottomRight)->setSize(200, 50);
     
     mode = TargetSelection;
-
+    
     new ShipsLog(this);
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }

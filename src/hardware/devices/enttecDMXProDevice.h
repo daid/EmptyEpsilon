@@ -3,7 +3,7 @@
 
 #include <SFML/System.hpp>
 #include <stdint.h>
-#include "hardwareOutputDevice.h"
+#include "hardware/hardwareOutputDevice.h"
 
 //The DMX512SerialDevice can talk to Enttec DMX Pro hardware:
 // http://www.enttec.com/?main_menu=Products&pn=70304

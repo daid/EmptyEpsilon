@@ -6,11 +6,13 @@ space_objects = ScienceDatabase():setName('Natural')
 item = space_objects:addEntry('Asteroid')
 item:setLongDescription([[Asteroids are minor planets, usually smaller than a few kilometers. Larger variants are sometimes refered to as planetoids.]])
 
-item = space_objects:addEntry('Neblua')
+item = space_objects:addEntry('Nebula')
 item:setLongDescription([[Nebulae are the birthing places of new stars. These gas fields, usually created by the death of an old star, slowly form new stars due to the gravitational pull of its gas molecules. Because of the ever-changing nature of gas nebulae, most radar and scanning technologies are unable to penetrate them. Science officers are therefore advised to rely on probes and visual observations.]])
 
 item = space_objects:addEntry('Black hole')
-item:setLongDescription([[A black hole is a point of supercondensed mass with a gravitational pull so powerful that not even light can escape it. It has no locally detectable features and appears only on sensors. An object that crosses a black hole is drawn toward its center and quickly ripped apart by the gravitational forces.]])
+item:setLongDescription([[A black hole is a point of supercondensed mass with a gravitational pull so powerful that not even light can escape it. It has no locally detectable features, and can only be seen indirectly by blocking the view and distorting its surroundings, creating a strange circular mirror image of the galaxy. The black disc in the middle marks the event horizon, the boundary where even light can't escape it anymore. 
+	
+On the sensors, a black hole appears as a disc indicating the zone where the gravitational pull is getting dangerous, and soon will be stronger then the ship's impulse engines. An object that crosses a black hole is drawn toward its center and quickly ripped apart by the gravitational forces.]])
 
 item = space_objects:addEntry('Wormhole')
 item:setLongDescription([[A wormhole, also known as an Einstein-Rosen bridge, is a phenomena that connects two points of spacetime. Jump drives operate in a similar fashion, but instead of being created at will, a wormhole occupies a specific location in space. Objects that enter a wormhole instantaneously emerge from the other end, which might be anywhere from a few feet to thousands of light years away. 

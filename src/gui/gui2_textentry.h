@@ -20,8 +20,8 @@ public:
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual bool onMouseDown(sf::Vector2f position) override;
     virtual bool onKey(sf::Event::KeyEvent key, int unicode) override;
-    
-    string getText();
+
+    string getText() const;
     GuiTextEntry* setText(string text);
     GuiTextEntry* setTextSize(float size);
     GuiTextEntry* callback(func_t func);

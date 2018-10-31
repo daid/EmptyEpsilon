@@ -207,7 +207,7 @@ string getSectorName(sf::Vector2f position)
     if (sector_y >= 0)
         y = string(char('A' + (sector_y)));
     else
-        y = string(char('z' + sector_y / 20)) + string(char('z' + 1 + (sector_y % 26)));
+        y = string(char('z' + sector_y / 26)) + string(char('z' + 1 + (sector_y % 26)));
     if (sector_x >= 0)
         x = string(sector_x);
     else
@@ -361,3 +361,12 @@ static int getLongRangeRadarRange(lua_State* L)
 }
 /// Return the long range radar range, normally 30.000, but can be configured per game.
 REGISTER_SCRIPT_FUNCTION(getLongRangeRadarRange);
+
+static int playSoundFile(lua_State* L)
+{
+    soundManager->playSound(luaL_checkstring(L, 1));
+    return 0;
+}
+/// Play a sound file on the server. Will work with any file supported by SFML (.wav, .ogg, .flac)
+/// Note that the sound is only played on the server. Not on any of the clients.
+REGISTER_SCRIPT_FUNCTION(playSoundFile);

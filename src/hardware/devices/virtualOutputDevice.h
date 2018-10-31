@@ -4,7 +4,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <stdint.h>
-#include "hardwareOutputDevice.h"
+#include "hardware/hardwareOutputDevice.h"
 
 //The virtual output device is a debugging output device.
 class VirtualOutputRenderer;

@@ -18,6 +18,7 @@ REGISTER_SCRIPT_SUBCLASS(WormHole, SpaceObject)
 {
     /// Set the target of this wormhole
     REGISTER_SCRIPT_CLASS_FUNCTION(WormHole, setTargetPosition);
+    REGISTER_SCRIPT_CLASS_FUNCTION(WormHole, getTargetPosition);
 }
 
 REGISTER_MULTIPLAYER_CLASS(WormHole, "WormHole");
@@ -146,4 +147,9 @@ void WormHole::collide(Collisionable* target, float collision_force)
 void WormHole::setTargetPosition(sf::Vector2f v)
 {
     target_position = v;
+}
+
+sf::Vector2f WormHole::getTargetPosition()
+{
+    return target_position;
 }

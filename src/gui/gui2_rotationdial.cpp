@@ -94,7 +94,7 @@ GuiRotationDial* GuiRotationDial::setValue(float value)
     return this;
 }
 
-float GuiRotationDial::getValue()
+float GuiRotationDial::getValue() const
 {
     return value;
 }

@@ -109,14 +109,23 @@ void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
         }else{
             pause_overlay->hide();
             victory_overlay->show();
+            
+            EFactionVsFactionState fvf_state = FVF_Neutral;
             if (my_spaceship)
             {
-                if (factionInfo[gameGlobalInfo->getVictoryFactionId()]->states[my_spaceship->getFactionId()] == FVF_Enemy)
-                    victory_label->setText("Defeat!");
-                else
-                    victory_label->setText("Victory!");
-            }else{
+                fvf_state = factionInfo[gameGlobalInfo->getVictoryFactionId()]->states[my_spaceship->getFactionId()];
+            }
+            switch(fvf_state)
+            {
+            case FVF_Enemy:
+                victory_label->setText("Defeat!");
+                break;
+            case FVF_Friendly:
+                victory_label->setText("Victory!");
+                break;
+            case FVF_Neutral:
                 victory_label->setText(factionInfo[gameGlobalInfo->getVictoryFactionId()]->getName() + " wins");
+                break;
             }
         }
     }else{

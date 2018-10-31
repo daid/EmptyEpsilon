@@ -21,7 +21,7 @@
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_slider.h"
 
-ScienceScreen::ScienceScreen(GuiContainer* owner)
+ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 : GuiOverlay(owner, "SCIENCE_SCREEN", colorConfig.background)
 {
     targets.setAllowWaypointSelection();
@@ -81,7 +81,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner)
     info_sidebar = new GuiAutoLayout(radar_view, "SIDEBAR", GuiAutoLayout::LayoutVerticalTopToBottom);
     info_sidebar->setPosition(-20, 170, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 
-    custom_function_sidebar = new GuiCustomShipFunctions(radar_view, scienceOfficer, "");
+    custom_function_sidebar = new GuiCustomShipFunctions(radar_view, crew_position, "");
     custom_function_sidebar->setPosition(-20, 170, ATopRight)->setSize(250, GuiElement::GuiSizeMax)->hide();
 
     // Scan button.
@@ -306,7 +306,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         info_heading->setValue(string(int(heading)));
         info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
 
-        string description = obj->getDescription();
+        string description = obj->getDescriptionFor(my_spaceship);
         string sidebar_pager_selection = sidebar_pager->getSelectionValue();
 
         if (description.size() > 0)

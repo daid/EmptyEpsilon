@@ -3,7 +3,7 @@
 
 #include <SFML/System.hpp>
 #include <stdint.h>
-#include "hardwareOutputDevice.h"
+#include "hardware/hardwareOutputDevice.h"
 
 //The DMX512SerialDevice can talk to Open DMX USB hardware, and just about any hardware which is just an serial port connected to a line driver.
 class SerialPort;

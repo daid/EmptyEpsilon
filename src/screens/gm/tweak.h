@@ -59,6 +59,7 @@ private:
     GuiSlider* heading_slider;
     GuiSlider* hull_max_slider;
     GuiSlider* hull_slider;
+    GuiToggleButton* can_be_destroyed_toggle;
 public:
     GuiShipTweakBase(GuiContainer* owner);
 
@@ -164,6 +165,8 @@ private:
     GuiSlider* reputation_point_slider;
     GuiSlider* energy_level_slider;
     GuiSlider* max_energy_level_slider;
+    GuiSlider* combat_maneuver_boost_speed_slider;
+    GuiSlider* combat_maneuver_strafe_speed_slider;
     GuiLabel* position_count;
     GuiKeyValueDisplay* position[max_crew_positions];
 public:

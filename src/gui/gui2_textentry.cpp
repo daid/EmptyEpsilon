@@ -74,7 +74,7 @@ bool GuiTextEntry::onKey(sf::Event::KeyEvent key, int unicode)
     return true;
 }
 
-string GuiTextEntry::getText()
+string GuiTextEntry::getText() const
 {
     return text;
 }

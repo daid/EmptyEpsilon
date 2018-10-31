@@ -27,9 +27,9 @@ public:
 
     GuiAdvancedScrollText* addEntry(string prefix, string text, sf::Color color);
     GuiAdvancedScrollText* setTextSize(float text_size) { this->text_size = text_size; return this; }
-    
-    unsigned int getEntryCount();
-    string getEntryText(int index);
+
+    unsigned int getEntryCount() const;
+    string getEntryText(int index) const;
     GuiAdvancedScrollText* removeEntry(int index);
     GuiAdvancedScrollText* clearEntries();
 

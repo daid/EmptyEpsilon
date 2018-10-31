@@ -9,6 +9,7 @@
 #include "screenComponents/jumpControls.h"
 #include "screenComponents/dockingButton.h"
 #include "screenComponents/alertOverlay.h"
+#include "screenComponents/customShipFunctions.h"
 
 #include "screenComponents/missileTubeControls.h"
 #include "screenComponents/aimLock.h"
@@ -123,6 +124,8 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     warp_controls = (new GuiWarpControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
     jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
     (new GuiDockingButton(this, "DOCKING"))->setPosition(-20, -20, ABottomRight)->setSize(280, 50);
+
+    (new GuiCustomShipFunctions(this, tacticalOfficer, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 
 void TacticalScreen::onDraw(sf::RenderTarget& window)
@@ -141,4 +144,90 @@ void TacticalScreen::onDraw(sf::RenderTarget& window)
         targets.set(my_spaceship->getTarget());
     }
     GuiOverlay::onDraw(window);
+}
+
+void TacticalScreen::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "HELMS" && my_spaceship)
+    {
+        if (key.hotkey == "TURN_LEFT")
+            my_spaceship->commandTargetRotation(my_spaceship->getRotation() - 5.0f);
+        else if (key.hotkey == "TURN_RIGHT")
+            my_spaceship->commandTargetRotation(my_spaceship->getRotation() + 5.0f);
+    }
+    if (key.category == "WEAPONS" && my_spaceship)
+    {
+        if (key.hotkey == "NEXT_ENEMY_TARGET")
+        {
+            bool current_found = false;
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get())
+                {
+                    current_found = true;
+                    continue;
+                }
+                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get())
+                {
+                    continue;
+                }
+                if (my_spaceship->isEnemy(obj) && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+        }
+        if (key.hotkey == "NEXT_TARGET")
+        {
+            bool current_found = false;
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get())
+                {
+                    current_found = true;
+                    continue;
+                }
+                if (obj == my_spaceship)
+                    continue;
+                if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj == targets.get() || obj == my_spaceship)
+                    continue;
+                if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < 5000 && obj->canBeTargetedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    my_spaceship->commandSetTarget(targets.get());
+                    return;
+                }
+            }
+        }
+        if (key.hotkey == "AIM_MISSILE_LEFT")
+        {
+            missile_aim->setValue(missile_aim->getValue() - 5.0f);
+            tube_controls->setMissileTargetAngle(missile_aim->getValue());
+        }
+        if (key.hotkey == "AIM_MISSILE_RIGHT")
+        {
+            missile_aim->setValue(missile_aim->getValue() + 5.0f);
+            tube_controls->setMissileTargetAngle(missile_aim->getValue());
+        }
+    }
 }
