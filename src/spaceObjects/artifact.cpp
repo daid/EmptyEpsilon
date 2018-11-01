@@ -71,9 +71,7 @@ void Artifact::collide(Collisionable* target, float force)
     {
         if (on_pickup_callback.isSet())
         {
-            on_pickup_callback.addObjectArgument(player);
-            on_pickup_callback.addObjectArgument(this);
-            on_pickup_callback.call();
+            on_pickup_callback.call(player, P<Artifact>(this));
         }
         destroy();
     }
