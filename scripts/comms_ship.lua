@@ -6,7 +6,7 @@ function mainMenu()
 		comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
 	end
 	comms_data = comms_target.comms_data
-	
+
 	if player:isFriendly(comms_target) then
 		return friendlyComms(comms_data)
 	end
@@ -32,6 +32,21 @@ function friendlyComms(comms_data)
 				addCommsReply("Defend WP" .. n, function()
 					comms_target:orderDefendLocation(player:getWaypoint(n))
 					setCommsMessage("We are heading to assist at WP" .. n ..".");
+					addCommsReply("Back", mainMenu)
+				end)
+			end
+		end
+	end)
+	addCommsReply("Join a fleet", function()
+		if player:getFleetLeaderCount() == 0 then
+			setCommsMessage("No fleet leader set. Please set a fleet leader first.");
+			addCommsReply("Back", mainMenu)
+		else
+			setCommsMessage("Which fleet should we join ?");
+			for n=1,player:getFleetCount() do
+				addCommsReply("Join Fleet " .. n, function()
+					comms_target:orderFlyFormation(player:getFleet(n), 500, 0)
+					setCommsMessage("We are heading to assist Fleet " .. n ..".");
 					addCommsReply("Back", mainMenu)
 				end)
 			end
