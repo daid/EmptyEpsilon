@@ -71,6 +71,7 @@ void WeaponTube::startLoad(EMissileWeapons type)
         
     state = WTS_Loading;
     delay = load_time;
+    parent->forceMemberReplicationUpdate(&delay);
     type_loaded = type;
     parent->weapon_storage[type]--;
 }
@@ -222,8 +223,6 @@ void WeaponTube::update(float delta)
     if (delay > 0.0)
     {
         delay -= delta * parent->getSystemEffectiveness(SYS_MissileSystem);
-        if (auto_loading)
-        	state = WTS_Loading;
     }else{
         switch(state)
         {
