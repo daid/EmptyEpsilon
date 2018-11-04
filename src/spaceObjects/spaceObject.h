@@ -100,7 +100,7 @@ class SpaceObject : public Collisionable, public MultiplayerObject
     std::vector<EScannedState> scanned_by_faction;
 
     // Fleet system
-    bool leadership;
+    int leadership;
 
 public:
     string comms_script_name;
@@ -223,8 +223,8 @@ public:
     bool sendCommsMessage(P<PlayerSpaceship> target, string message);
 
     // Fleet system
-    bool getLeadership() { return leadership; };
-    void setLeadership(bool is_leader) { this->leadership = is_leader; };
+    int getLeadership() { return leadership; };
+    void setLeadership(int is_leader) { this->leadership = is_leader; };
 
     ScriptCallback onDestroyed;
 

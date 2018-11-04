@@ -17,7 +17,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     // Returns the total number of this ship's active waypoints.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getWaypointCount);
     // Takes the index of the fleet as its parameter.
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getFleetLeader);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getFleet);
     // Returns the total number of this ship's active fleet.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getFleetCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, createFleet);

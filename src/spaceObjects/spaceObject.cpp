@@ -111,7 +111,7 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     scanning_depth_value = 0;
 
     // fleet system
-    leadership = false;
+    leadership = 0;
 
     registerMemberReplication(&callsign);
     registerMemberReplication(&faction_id);

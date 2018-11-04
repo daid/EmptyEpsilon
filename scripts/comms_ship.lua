@@ -37,21 +37,39 @@ function friendlyComms(comms_data)
 			end
 		end
 	end)
-	addCommsReply("Join a fleet", function()
-		if player:getFleetLeaderCount() == 0 then
-			setCommsMessage("No fleet leader set. Please set a fleet leader first.");
+	if comms_target:getLeadership() > 0 then
+		addCommsReply("I disband your fleet", function()
+			setCommsMessage("OK. Fleet " .. comms_target:getLeadership() .." has been disanded.");
+			player:disbandFleet(comms_target:getLeadership())
 			addCommsReply("Back", mainMenu)
-		else
-			setCommsMessage("Which fleet should we join ?");
-			for n=1,player:getFleetCount() do
-				addCommsReply("Join Fleet " .. n, function()
-					comms_target:orderFlyFormation(player:getFleet(n), 500, 0)
-					setCommsMessage("We are heading to assist Fleet " .. n ..".");
+		end)
+	else
+		addCommsReply("Join a fleet", function()
+			if player:getFleetCount() == 0 then
+				setCommsMessage("No fleet leader set. Please set a fleet leader first.");
+				addCommsReply("You are the leader of a brand new fleet !", function()
+					player:createFleet(comms_target)
+					setCommsMessage("I am honored to be the leader of Fleet" .. comms_target:getLeadership() .. ".");
 					addCommsReply("Back", mainMenu)
 				end)
+				addCommsReply("Back", mainMenu)
+			else
+				setCommsMessage("Which fleet should we join ?");
+				addCommsReply("You are the leader of a brand new fleet !", function()
+					player:createFleet(comms_target)
+					setCommsMessage("I am honored to be the leader of Fleet" .. comms_target:getLeadership() .. ".");
+					addCommsReply("Back", mainMenu)
+				end)
+				for n=1,player:getFleetCount() do
+					addCommsReply("Join Fleet " .. n, function()
+						comms_target:orderFlyFormation(player:getFleet(n), 500, 0)
+						setCommsMessage("We are heading to assist Fleet " .. n ..".");
+						addCommsReply("Back", mainMenu)
+					end)
+				end
 			end
-		end
-	end)
+		end)
+	end
 	if comms_data.friendlyness > 0.2 then
 		addCommsReply("Assist me", function()
 			setCommsMessage("Heading toward you to assist.");

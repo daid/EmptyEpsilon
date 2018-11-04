@@ -128,7 +128,12 @@ public:
     std::vector<CustomShipFunction> custom_functions;
 
     std::vector<sf::Vector2f> waypoints;
-    std::vector<P<SpaceShip>> fleets;
+    // struct Fleet {
+    //   P<SpaceObject> leader;
+    //   P<SpaceObject> followers;
+    // };
+    // std::vector<Fleet> fleets;
+    std::vector<P<SpaceObject>> fleets;
 
     // Scan probe capacity
     int max_scan_probes;
@@ -283,14 +288,14 @@ public:
 
     // Fleet functions
     int getFleetCount() { return fleets.size(); }
-    P<SpaceObject> getFleetLeader(int index) { if (index > 0 && index <= int(fleets.size())) return fleets[index - 1]; return NULL; }
+    P<SpaceObject> getFleet(int index) { if (index > 0 && index <= int(fleets.size())) return fleets[index - 1]; return NULL; }
     void createFleet(P<SpaceObject> leader) { if (!leader->getLeadership()){
-      fleets.append(leader);
-      leader->setLeadership(true);
+      fleets.push_back(leader);
+      leader->setLeadership(fleets.size());
     }}
-    void disbandFleet(int32_t index) { if (index > 0 && index <= int(fleets.size())) {
-      fleets[index]->setLeadership(false);
-      fleets.remove(fleets.begin() + index);
+    void disbandFleet(int32_t fleet_id) { if (fleet_id > 0 && fleet_id <= int(fleets.size())) {
+      fleets[fleet_id-1]->setLeadership(0);
+      fleets.erase(fleets.begin() + fleet_id - 1);
     }}
 
     // Ship control code/password setter
