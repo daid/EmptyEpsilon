@@ -30,6 +30,8 @@ REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderDefendTarget);
     /// Order this ship to fly in formation with another ship. It will attack nearby enemies.
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyFormation);
+    /// Order this ship to fly in a specific formation with another ship. It will attack nearby enemies.
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyFleetFormation);
     /// Order this ship to fly to a location, attacking everything alogn the way.
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderFlyTowards);
     /// Order this ship to fly to a location, without attacking anything
@@ -194,6 +196,39 @@ void CpuShip::orderFlyFormation(P<SpaceObject> object, sf::Vector2f offset)
     order_target = object;
     order_target_location = offset;
     this->addBroadcast(FVF_Friendly, "Following " + object->getCallSign() + ".");
+}
+
+// Fleet formation management code
+void CpuShip::orderFlyFleetFormation(P<SpaceObject> object, int id, float distance, int formation)
+{
+    if (!object)
+        return;
+
+    switch(formation) {
+        case FF_Arrow:
+            orderFlyFormation(object, sf::Vector2f(-((id+1)/2)*distance/sqrt(2.0), pow(-1, id)*((id+1)/2)*distance/sqrt(2.0)));
+            return;
+        case FF_HLine:
+            // find position inside formation, 0 is center/leader
+            orderFlyFormation(object, sf::Vector2f(0.0, pow(-1, id)*((id+1)/2)*distance));
+            return;
+        case FF_Pyramid:
+        {
+            // find position inside formation, 0 is center/leader
+            // consecutive lines of 1, 2, 3, 4, 5 elements
+            const int line = ceil(-0.5 + sqrt(0.25 + 2*(id+1)));
+            const int id_line_begin = (int) (line - 1)*line/2.0;
+            const int id_line_end   = (int) (line + 1)*line/2.0 - 1;
+            const int line_rel_id_last = id_line_end - id_line_begin;
+            const int line_size = (line_rel_id_last)*distance;
+            sf::Vector2f relative_position = sf::Vector2f(-line*distance*sqrt(3.0)/2.0, line_size*((id-id_line_begin)/line_rel_id_last - 0.5));
+            orderFlyFormation(object, relative_position);
+            return;
+        }
+        default:
+            orderFlyFormation(object, sf::Vector2f(0.0,0.0));
+            return;
+    }
 }
 
 void CpuShip::orderFlyTowards(sf::Vector2f target)

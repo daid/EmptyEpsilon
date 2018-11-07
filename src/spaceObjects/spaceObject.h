@@ -99,9 +99,6 @@ class SpaceObject : public Collisionable, public MultiplayerObject
      */
     std::vector<EScannedState> scanned_by_faction;
 
-    // Fleet system
-    int leadership;
-
 public:
     string comms_script_name;
     ScriptSimpleCallback comms_script_callback;
@@ -221,11 +218,7 @@ public:
     string getSectorName();
     bool openCommsTo(P<PlayerSpaceship> target);
     bool sendCommsMessage(P<PlayerSpaceship> target, string message);
-
-    // Fleet system
-    int getLeadership() { return leadership; };
-    void setLeadership(int is_leader) { this->leadership = is_leader; };
-
+    
     ScriptCallback onDestroyed;
 
 protected:

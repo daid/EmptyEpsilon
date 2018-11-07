@@ -18,6 +18,13 @@ enum EAIOrder
     AI_Attack,          //Attack [order_target] very specificly.
 };
 
+enum FleetFormations
+{
+    FF_None,     // No formations
+    FF_HLine,    // Horizontal line of ships
+    FF_Arrow,    // inversed V
+    FF_Pyramid,  // filled triangle of ships
+};
 
 class ShipAI;
 class CpuShip : public SpaceShip
@@ -46,6 +53,7 @@ public:
     void orderDefendLocation(sf::Vector2f position);
     void orderDefendTarget(P<SpaceObject> object);
     void orderFlyFormation(P<SpaceObject> object, sf::Vector2f offset);
+    void orderFlyFleetFormation(P<SpaceObject> object, int id, float distance, int formation);
     void orderFlyTowards(sf::Vector2f target);
     void orderFlyTowardsBlind(sf::Vector2f target);
     void orderAttack(P<SpaceObject> object);

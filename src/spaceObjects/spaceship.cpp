@@ -77,6 +77,9 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadarTrace);
 
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, addBroadcast);
+
+    /// Get if this object leads a fleet and which one
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getLeadership);
 }
 
 SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_range)
@@ -117,6 +120,9 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     energy_level = 1000;
     max_energy_level = 1000;
 
+    // fleet system
+    leadership = 0;
+
     registerMemberReplication(&target_rotation, 1.5);
     registerMemberReplication(&impulse_request, 0.1);
     registerMemberReplication(&current_impulse, 0.5);
@@ -146,6 +152,9 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&combat_maneuver_boost_speed);
     registerMemberReplication(&combat_maneuver_strafe_speed);
     registerMemberReplication(&radar_trace);
+
+    // fleet system : not sure about this one
+    registerMemberReplication(&leadership);
 
     for(int n=0; n<SYS_COUNT; n++)
     {

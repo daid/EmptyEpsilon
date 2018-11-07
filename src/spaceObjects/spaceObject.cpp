@@ -94,8 +94,6 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setScanned);
     /// Set if this object is scanned or not by a particular faction.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setScannedByFaction);
-    /// Get if this object leads a fleet
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getLeadership);
 }
 
 PVector<SpaceObject> space_object_list;
@@ -110,9 +108,6 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     scanning_complexity_value = 0;
     scanning_depth_value = 0;
 
-    // fleet system
-    leadership = 0;
-
     registerMemberReplication(&callsign);
     registerMemberReplication(&faction_id);
     registerMemberReplication(&scanned_by_faction);
@@ -126,9 +121,6 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     registerMemberReplication(&scanning_complexity_value);
     registerMemberReplication(&scanning_depth_value);
     registerCollisionableReplication(multiplayer_significant_range);
-
-    // fleet system : not sure about this one
-    registerMemberReplication(&leadership);
 }
 
 #if FEATURE_3D_RENDERING

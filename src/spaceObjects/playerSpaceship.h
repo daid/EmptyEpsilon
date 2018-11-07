@@ -128,12 +128,12 @@ public:
     std::vector<CustomShipFunction> custom_functions;
 
     std::vector<sf::Vector2f> waypoints;
-    // struct Fleet {
-    //   P<SpaceObject> leader;
-    //   P<SpaceObject> followers;
-    // };
-    // std::vector<Fleet> fleets;
-    std::vector<P<SpaceObject>> fleets;
+    struct Fleet {
+      P<SpaceShip> leader;
+      std::vector<P<SpaceShip>> members;
+    };
+    std::vector<Fleet> fleets;
+    // std::vector<P<SpaceShip>> fleets;
 
     // Scan probe capacity
     int max_scan_probes;
@@ -288,15 +288,52 @@ public:
 
     // Fleet functions
     int getFleetCount() { return fleets.size(); }
-    P<SpaceObject> getFleet(int index) { if (index > 0 && index <= int(fleets.size())) return fleets[index - 1]; return NULL; }
-    void createFleet(P<SpaceObject> leader) { if (!leader->getLeadership()){
-      fleets.push_back(leader);
-      leader->setLeadership(fleets.size());
-    }}
-    void disbandFleet(int32_t fleet_id) { if (fleet_id > 0 && fleet_id <= int(fleets.size())) {
-      fleets[fleet_id-1]->setLeadership(0);
-      fleets.erase(fleets.begin() + fleet_id - 1);
-    }}
+    P<SpaceShip> getFleetLeader(int fleet_id) {
+      if (fleet_id > 0 && fleet_id <= int(fleets.size())) {
+        return fleets[fleet_id - 1].leader ;
+      }
+      return NULL;
+    }
+    int getFleetMemberId(int fleet_id, P<SpaceShip> member) {
+      if (fleet_id > 0 && fleet_id <= int(fleets.size())) {
+        return std::distance(fleets[fleet_id - 1].members.begin(), std::find(fleets[fleet_id - 1].members.begin(), fleets[fleet_id - 1].members.end(), member)) + 1 ;
+      }
+      return 0 ;
+    }
+    P<SpaceShip> getFleetMember(int fleet_id, int member_id) {
+      if (fleet_id > 0 && fleet_id <= int(fleets.size())) {
+        if (member_id > 0 && member_id <= int(fleets[fleet_id - 1].members.size())){
+          return fleets[fleet_id - 1].members[member_id - 1];
+        }
+      }
+      printf("No fleet member found");
+      return NULL;
+    }
+    void setFleetMember(int fleet_id, P<SpaceShip> member) {
+      if (fleet_id > 0 && fleet_id <= int(fleets.size())) {
+        fleets[fleet_id - 1].members.push_back(member);
+      }
+    }
+    int getFleetSize(int fleet_id) {
+      if (fleet_id > 0 && fleet_id <= int(fleets.size())) {
+        return fleets[fleet_id - 1].members.size() + 1;
+      }
+      return 0;
+    }
+    void createFleet(P<SpaceShip> leader) {
+      if (!leader->getLeadership()){
+        Fleet fleet;
+        fleet.leader = leader;
+        fleets.push_back(fleet);
+        leader->setLeadership(fleets.size()); //last fleet number
+      }
+    }
+    void disbandFleet(int32_t fleet_id) {
+      if (fleet_id > 0 && fleet_id <= int(fleets.size())) {
+        fleets[fleet_id-1].leader->setLeadership(0);
+        fleets.erase(fleets.begin() + fleet_id - 1);
+      }
+    }
 
     // Ship control code/password setter
     void setControlCode(string code) { control_code = code; }
