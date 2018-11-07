@@ -35,3 +35,4 @@ thumbs.db
 *.swp
 
 options.ini
+logs/*.txt

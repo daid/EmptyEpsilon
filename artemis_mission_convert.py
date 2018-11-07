@@ -1,5 +1,3 @@
-from glob import glob
-import json
 import xml.etree.ElementTree
 import os.path
 import traceback
@@ -7,6 +5,19 @@ import sys
 import fnmatch
 import tokenize
 import io
+
+dict_hull_id_ships = {
+    "1":"Adder MK4",
+    "2000":"Phobos T3",
+    "2001":"Phobos M3",
+    "2002":"Phobos M3P",
+    "4000":"Cruiser Q8",
+    "4001":"Starhammer II",
+    "4002":"Starhammer II",
+    "5000":"Stalker Q7",
+    "5001":"Stalker R7",
+    "5002":"Atlantis X23"
+}
 
 class UnknownArtemisTagError(Exception):
     def __init__(self, node):
@@ -39,7 +50,19 @@ def convertPosition(x, z):
     return convertFloat('20000-(%s)' % (x)), convertFloat('(%s)-100000' % (z))
 
 def convertName(name):
-    return '%s' % (name.replace(' ', '_').replace('-', '_').replace('*', 'X').replace('.', '__'))
+    prefix = ''
+    try:
+        if int(name[0]) in range(10):
+            prefix = 'object_'
+    except ValueError:
+        pass
+    return '%s%s' % (prefix, name.replace(' ', '_')
+                                 .replace('-', '_')
+                                 .replace('*', 'X')
+                                 .replace('.', '__')
+                                 .replace('/', '___')
+                                 .replace('=', 'equals')
+                                 .replace('\'', '____'))
 
 def convertRaceKeys(node, default=None):
     keys = node.get('raceKeys', default)
@@ -65,9 +88,9 @@ def convertComparator(node):
     elif comparator == "less" or comparator == "<":
         return "<"
     elif comparator == "greater_equal" or comparator == "<=":
-        return "<="
-    elif comparator == "less_equal" or comparator == ">=":
         return ">="
+    elif comparator == "less_equal" or comparator == ">=":
+        return "<="
     raise UnknownArtemisTagError(node)
 
 def convertSystemName(node):
@@ -91,15 +114,116 @@ def convertSystemName(node):
         
     raise UnknownArtemisTagError(node)
 
+def convertSystemState(system_state):
+    if system_state == 'shieldStateFront':
+        return ['FrontShield']
+    elif system_state == 'shieldStateBack':
+        return ['RearShield']
+    elif system_state == 'shieldMaxStateFront':
+        return ['FrontShieldMax']
+    elif system_state == 'shieldMaxStateBack':
+        return ['RearShieldMax']
+    elif system_state == 'systemDamageBeam':
+        return ['beamweapons']
+    elif system_state == 'systemDamageTorpedo':
+        return ['missilesystem']
+    elif system_state == 'systemDamageTactical':
+        return ['reactor']
+    elif system_state == 'systemDamageTurning':
+        return ['maneuver']
+    elif system_state == 'systemDamageImpulse':
+        return ['impulse']
+    elif system_state == 'systemDamageWarp':
+        return ['warp', 'jumpdrive']
+    elif system_state == 'systemDamageFrontShield':
+        return ['frontshield']
+    elif system_state == 'systemDamageBackShield':
+        return ['rearshield']
+    return None
+
+
+def convertWeaponName(weapon):
+    if weapon == 'countHoming' or weapon == 'missileStoresHoming':
+        return 'MW_Homing'
+    if weapon == 'countNuke' or weapon == 'missileStoresNuke':
+        return 'MW_Nuke'
+    if weapon == 'countMine' or weapon == 'missileStoresMine':
+        return 'MW_Mine'
+    elif weapon == 'countECM' or weapon == 'missileStoresECM':
+        return 'MW_EMP'
+    #return None #'MW_HVLI'
+    return None
+
+
+def convert_positions(node):
+    positions = set()
+    if node.get("consoles") == None: #if consoles is empty no position will be returned
+        return []
+    if 'C' in node.get("consoles"):
+        positions.add("relayOfficer")
+        #positions.add("operationsOfficer")
+        #positions.add("singlePilot")
+    if 'H' in node.get("consoles"):
+        positions.add("helmsOfficer")
+        #positions.add("tacticalOfficer")
+        #positions.add("singlePilot")
+    if 'W' in node.get("consoles"):
+        positions.add("weaponsOfficer")
+        #positions.add("tacticalOfficer")
+        #positions.add("singlePilot")
+    if 'E' in node.get("consoles"):
+        positions.add("engineering")
+        #positions.add("engineeringAdvanced")
+        #positions.add("singlePilot")
+    if 'S' in node.get("consoles"):
+        positions.add("scienceOfficer")
+        #positions.add("operationsOfficer")
+        #positions.add("singlePilot")
+
+    return positions
+
+def setSystemHealth(obj, property_name, value):
+    _value = float(value)
+    if 'shield' in property_name and 'State' in property_name:
+        _value /= 100.0
+
+    format_string = '%s:setSystemHealth("%s", %f)'
+    return_string = ''
+
+    property_list = convertSystemState(property_name)
+
+    if property_list is not None:
+        for item in property_list:
+            return_string += format_string % (obj, item, _value)
+            return_string += '\n'
+
+    if return_string.endswith('\n'):
+        return return_string[:-2]
+
+    return return_string
+
+
+def getSystemHealth(obj, property_name):
+    return '%s:getSystemHealth("%s")' % (obj, convertSystemState(property_name))
+
+def getTemplate(node):
+    hull_id = node.get('hullID')
+    if hull_id in dict_hull_id_ships:
+        return dict_hull_id_ships[hull_id]
+
+    return None
+
 class Event:
-    def __init__(self, main_node):
+    def __init__(self, main_node, player = None):
         self._valid = True
         self._body = []
         self._conditions = []
         self._warnings = []
         self._done = {}
         self._ai_info = {}
-        
+        self.set_end_tag = False
+        self._player = player
+
         for node in main_node:
             if node.tag == 'big_message':
                 message = convertString(node.get('title', ''))
@@ -111,7 +235,12 @@ class Event:
             elif node.tag == 'incoming_comms_text':
                 self._body.append('temp_transmission_object:setCallSign("%s"):sendCommsMessage(getPlayerShip(-1), "%s")' % (convertString(node.get('from')), convertString(node.text)));
             elif node.tag == 'warning_popup_message':
-                self.warning('Ignore', node)
+                if self._player is None:
+                    self.warning('Ignore - no player ready', node)
+                if node.get("consoles") == None or 'M' in node.get("consoles") or 'O' in node.get('consoles'):
+                    self.warning('Ignore', node)
+                for position in convert_positions(node):
+                    self._body.append('%s:addCustomMessage("%s", "%s", "%s")' % (self._player, position, 'warning', node.get('message')))
             elif node.tag == 'start_getting_keypresses_from':
                 self.warning('Ignore', node)
             elif node.tag == 'end_getting_keypresses_from':
@@ -156,32 +285,11 @@ class Event:
                     self._body.append('    local x, y = %s:getPosition()' % (name))
                     x, y = convertPosition(0, node.get('value'))
                     self._body.append('    %s:setPosition(x, %s)' % (name, y))
-                elif property == 'shieldStateFront':
-                    self._body.append('    %s:setFrontShield(%f)' % (name, float(node.get('value'))))
-                elif property == 'shieldStateBack':
-                    self._body.append('    %s:setRearShield(%f)' % (name, float(node.get('value'))))
-                elif property == 'shieldMaxStateFront':
-                    self._body.append('    %s:setFrontShieldMax(%f)' % (name, float(node.get('value'))))
-                elif property == 'shieldMaxStateBack':
-                    self._body.append('    %s:setRearShieldMax(%f)' % (name, float(node.get('value'))))
-                elif property == 'systemDamageBeam':
-                    self._body.append('    %s:setSystemHealth("beamweapons", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
-                elif property == 'systemDamageTorpedo':
-                    self._body.append('    %s:setSystemHealth("missilesystem", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
-                elif property == 'systemDamageTactical':
-                    self.warning('Reactor instead of sensors', node)
-                    self._body.append('    %s:setSystemHealth("reactor", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
-                elif property == 'systemDamageTurning':
-                    self._body.append('    %s:setSystemHealth("maneuver", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
-                elif property == 'systemDamageImpulse':
-                    self._body.append('    %s:setSystemHealth("impulse", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
-                elif property == 'systemDamageWarp':
-                    self._body.append('    %s:setSystemHealth("warp", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
-                    self._body.append('    %s:setSystemHealth("jumpdrive", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
-                elif property == 'systemDamageFrontShield':
-                    self._body.append('    %s:setSystemHealth("frontshield", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
-                elif property == 'systemDamageBackShield':
-                    self._body.append('    %s:setSystemHealth("rearshield", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
+                elif convertSystemState(property) is not None:
+                    self._body.append(setSystemHealth(name, property, node.get('value')))
+                elif convertWeaponName(property):
+                    self._body.append('    %s:setWeaponStorage("%s", %s)' % (
+                        name, convertWeaponName(property), int(float(node.get('value')))))
                 elif property == 'willAcceptCommsOrders':
                     self.warning('Ignore', node)
                 elif property == 'eliteAIType':
@@ -196,6 +304,20 @@ class Event:
                     self.warning('Ignore', node)
                     #raise UnknownArtemisTagError(node)
                 self._body.append('end')
+            elif node.tag == 'if_object_property':
+                self._conditions.append('%s %s %s' % (getSystemHealth(convertName(node.get('name')),
+                                                                        node.get('property')),
+                                                        convertComparator(node), node.get('value')))
+            elif node.tag == 'addto_object_property':
+                name = convertName(node.get('name'))
+                property = node.get('property')
+                if convertWeaponName(property):
+                    self._body.append(
+                        '    local weapon_count = %s:getWeaponStorage("%s")' % (name, convertWeaponName(property)))
+                    self._body.append('    %s:setWeaponStorage("%s", weapon_count + %s)' % (
+                        name, convertWeaponName(property), int(float(node.get('value')))))
+                else:
+                    self.warning('Ignore', node)
             elif node.tag == 'set_fleet_property':
                 self.warning('Ignore', node)
             elif node.tag == 'set_timer':
@@ -208,12 +330,19 @@ class Event:
                 else:
                     self._body.append('variable_%s = %s' % (convertName(node.get('name')), convertFloat(node.get('value'))))
             elif node.tag == 'set_ship_text':
-                self.warning('Ignore', node)
+                scan_desc = node.get('scan_desc')
+                desc = node.get('desc', "")
+                if scan_desc is None:
+                    self._body.append('%s:setDescription("%s")' % (convertName(node.get('name')), desc))
+                else:
+                    self._body.append(
+                        '%s:setDescriptions("%s", "%s")' % (convertName(node.get('name')), desc, scan_desc))
             elif node.tag == 'set_relative_position':
                 self._body.append('tmp_x, tmp_y = %s:getPosition()' % (convertName(node.get('name1'))));
                 self._body.append('tmp_x2, tmp_y2 = vectorFromAngle(%s:getRotation() + %f, %f)' % (convertName(node.get('name1')), float(node.get('angle')), float(node.get('distance'))));
                 self._body.append('%s:setPosition(x, y);' % (convertName(node.get('name2'))));
             elif node.tag == 'end_mission':
+                self.warning('Change to correct faction', node)
                 self._body.append('victory("Independent")')
             elif node.tag == 'set_player_grid_damage':
                 if convertSystemName(node) == 'warp':
@@ -247,8 +376,9 @@ class Event:
                     self._body.append('end')
             
             elif node.tag == 'if_gm_key':
-                self._conditions.append('0') # gm key triggers are never run.
-                self.warning('Ignore', node)
+                self._body.append('addGMFunction("addMissingCaption", function()')
+                self.warning('Add missing Caption', node)
+                self.set_end_tag = True
             elif node.tag == 'if_client_key':
                 self._conditions.append('0')
                 self.warning('Ignore', node)
@@ -284,9 +414,16 @@ class Event:
                 self._conditions.append('(%s == nil or not %s:isValid())' % (convertName(node.get('name')), convertName(node.get('name'))))
             elif node.tag == 'if_player_is_targeting':
                 self._conditions.append('(%s ~= nil and %s:isValid() and getPlayerShip(-1):getTarget() == %s)' % (convertName(node.get('name')), convertName(node.get('name')), convertName(node.get('name'))))
+            elif node.tag == 'if_damcon_members':
+                self.damcon_condition += 1
+                break
             else:
                 raise UnknownArtemisTagError(node)
                 self.warning('Ignore', node)
+
+        if self.set_end_tag:
+            self._body.append('end)')
+            self.set_end_tag = False
 
         # Convert the AI statements to EE AI.
         for name, ai in self._ai_info.items():
@@ -295,13 +432,18 @@ class Event:
                 self._body.append('%s:orderAttack(%s)' % (name, convertName(ai['ATTACK']['targetName'])))
             elif ai_list == ['POINT_THROTTLE'] or ai_list == ['FOLLOW_COMMS_ORDERS', 'POINT_THROTTLE'] or ai_list == ['CHASE_PLAYER', 'POINT_THROTTLE']:
                 x, y = convertPosition(ai['POINT_THROTTLE']['value1'], ai['POINT_THROTTLE']['value3'])
-                self._body.append('%s:orderFlyTowards(%s, %s)' % (name, x, y))
+                self._body.append('if %s ~= nil and %s:isValid() then' % (name, name))
+                self._body.append('    %s:orderFlyTowards(%s, %s)' % (name, x, y))
+                self._body.append('end')
             elif ai_list == ['CLEAR']:
                 self._body.append('%s:orderIdle()' % (name))
             elif ai_list == ['ELITE_AI']:
                 pass
             else:
                 self.warning('Unknown AI: %s: %s' % (name, ai))
+
+    def getPlayer(self):
+        return self._player
 
     def parseCreate(self, node):
         if node.get('use_gm_position') is not None:
@@ -311,22 +453,32 @@ class Event:
             name = convertName(node.get('name'))
             x, y = convertPosition(node.get('x'), node.get('z'))
             self._body.append('%s = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Player Cruiser"):setCallSign("%s"):setPosition(%s, %s)' % (name, node.get('name'), x, y))
+            self._player = name
         elif create_type == 'neutral':
             name = convertName(node.get('name'))
             x, y = convertPosition(node.get('x'), node.get('z'))
-            self._body.append('%s = CpuShip():setTemplate("Tug"):setCallSign("%s"):setFaction("%s"):setPosition(%s, %s):orderRoaming()' % (name, node.get('name'), convertRaceKeys(node, 'neutral'), x, y))
+            template = getTemplate(node)
+            if template is None:
+                template = "Tug"
+            self._body.append('%s = CpuShip():setTemplate("%s"):setCallSign("%s"):setFaction("%s"):setPosition(%s, %s):orderRoaming()' % (name, template, node.get('name'), convertRaceKeys(node, 'neutral'), x, y))
             self.addToFleet(name, node)
         elif create_type == 'enemy':
             name = convertName(node.get('name', 'temp_enemy_name'))
             x, y = convertPosition(node.get('x'), node.get('z'))
-            self._body.append('%s = CpuShip():setTemplate("Cruiser"):setCallSign("%s"):setFaction("%s"):setPosition(%s, %s):orderRoaming()' % (name, node.get('name'), convertRaceKeys(node, 'enemy'), x, y))
+            template = getTemplate(node)
+            if template is None:
+                template = "Cruiser"
+            self._body.append('%s = CpuShip():setTemplate("%s"):setCallSign("%s"):setFaction("%s"):setPosition(%s, %s):orderRoaming()' % (name, template, node.get('name'), convertRaceKeys(node, 'enemy'), x, y))
             self.addToFleet(name, node)
             
             self.addToFleet(name, node, 0) # Add every enemy ship to fleet 0
         elif create_type == 'station':
             name = convertName(node.get('name'))
             x, y = convertPosition(node.get('x'), node.get('z'))
-            self._body.append('%s = SpaceStation():setTemplate("Small Station"):setCallSign("%s"):setFaction("%s"):setPosition(%s, %s)' % (name, node.get('name'), convertRaceKeys(node, 'friendly'), x, y))
+            template = getTemplate(node)
+            if template is None:
+                template = "Small Station"
+            self._body.append('%s = SpaceStation():setTemplate("%s"):setCallSign("%s"):setFaction("%s"):setPosition(%s, %s)' % (name, template, node.get('name'), convertRaceKeys(node, 'friendly'), x, y))
         elif create_type == 'blackHole':
             name = convertName(node.get('name', 'temp_blackhole_name'))
             x, y = convertPosition(node.get('x'), node.get('z'))
@@ -359,31 +511,35 @@ class Event:
             raise UnknownArtemisTagError(node)
     
     def parseCreateCount(self, object_create_script, node):
-        count = convertFloat(node.get('count'))
+        count = int(eval    (str(node.get('count')), {}, {}))
         x, y = convertPosition(node.get('startX', 0), node.get('startZ', 0))
-        self._body.append('tmp_count = %s' % (count))
-        self._body.append('for tmp_counter=1,tmp_count do')
-        if node.get('radius') is not None:
-            radius = convertFloat(node.get('radius'))
-            start_angle = float(node.get('startAngle', 0)) - 90
-            end_angle = float(node.get('endAngle', 360)) - 90
-            self._body.append('    tmp_x, tmp_y = vectorFromAngle(%s + (%s - %s) * (tmp_counter - 1) / tmp_count, %s)' % (start_angle, end_angle, start_angle, radius))
-            self._body.append('    tmp_x, tmp_y = tmp_x + %s, tmp_y + %s' % (x, y))
+        if count == 1:
+            self._body.append('%s:setPosition(%s, %s)' % (object_create_script, x, y))
         else:
-            x2, y2 = convertPosition(node.get('endX'), node.get('endZ'))
-            self._body.append('    tmp_x = %s + (%s - %s) * (tmp_counter - 1) / tmp_count' % (x, x2, x))
-            self._body.append('    tmp_y = %s + (%s - %s) * (tmp_counter - 1) / tmp_count' % (y, y2, y))
-        if node.get('randomRange') is not None:
-            random_range = convertFloat(node.get('randomRange', 0))
-            self._body.append('    tmp_x2, tmp_y2 = vectorFromAngle(random(0, 360), random(0, %s))' % (random_range))
-            self._body.append('    tmp_x, tmp_y = tmp_x + tmp_x2, tmp_y + tmp_y2')
-        self._body.append('    %s:setPosition(tmp_x, tmp_y)' % (object_create_script))
-        self._body.append('end')
+            self._body.append('tmp_count = %s' % (count))
+            self._body.append('for tmp_counter=1,tmp_count do')
+            if node.get('radius') is not None:
+                radius = convertFloat(node.get('radius'))
+                start_angle = float(node.get('startAngle', 0)) - 90
+                end_angle = float(node.get('endAngle', 360)) - 90
+                self._body.append('    tmp_x, tmp_y = vectorFromAngle(%s + (%s - %s) * (tmp_counter - 1) / tmp_count, %s)' % (start_angle, end_angle, start_angle, radius))
+                self._body.append('    tmp_x, tmp_y = tmp_x + %s, tmp_y + %s' % (x, y))
+            else:
+                x2, y2 = convertPosition(node.get('endX'), node.get('endZ'))
+                self._body.append('    tmp_x = %s + (%s - %s) * (tmp_counter - 1) / tmp_count' % (x, x2, x))
+                self._body.append('    tmp_y = %s + (%s - %s) * (tmp_counter - 1) / tmp_count' % (y, y2, y))
+            if node.get('randomRange') is not None:
+                random_range = convertFloat(node.get('randomRange', 0))
+                self._body.append('    tmp_x2, tmp_y2 = vectorFromAngle(random(0, 360), random(0, %s))' % (random_range))
+                self._body.append('    tmp_x, tmp_y = tmp_x + tmp_x2, tmp_y + tmp_y2')
+            self._body.append('    %s:setPosition(tmp_x, tmp_y)' % (object_create_script))
+            self._body.append('end')
+
 
     def addToFleet(self, name, node, fleetnumber=-1):
-        if fleetnumber != -1:
+        if fleetnumber == -1:
             fleetnumber = int(node.get('fleetnumber', -1))
-        if fleetnumber > 0:
+        if fleetnumber >= 0:
             if 'fleet_check_%d' % (fleetnumber) not in self._done:
                 self._done['fleet_check_%d' % (fleetnumber)] = True
                 self._body.append('if fleet[%d] == nil then fleet[%d] = {} end' % (fleetnumber, fleetnumber))
@@ -425,7 +581,7 @@ class Converter:
         self._events = []
         self._start_event = Event(self._data.find("start"))
         for node in self._data.findall("event"):
-            self._events.append(Event(node))
+            self._events.append(Event(node, self._start_event.getPlayer()))
     
     def export(self, name, filename):
         f = open(filename, "w")
@@ -442,7 +598,7 @@ class Converter:
                         continue
                     if event.getCondition() != "":
                         f.write("    if %s then\n" % event.getCondition())
-                        f.write(event.getBody(2))
+                        f.write(event.getBody(2).encode('UTF-8'))
                         warnings += event.getWarnings()
                         f.write("    end\n")
                     else:
