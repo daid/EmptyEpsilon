@@ -168,7 +168,7 @@ public:
     sf::Vector2f docking_offset; //Server only
 
     // Fleet system
-    int leadership;
+    int fleet_id;
 
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
 
@@ -406,8 +406,8 @@ public:
     string getScriptExportModificationsOnTemplate();
 
     // Fleet system
-    int getLeadership() { return leadership; };
-    void setLeadership(int is_leader) { this->leadership = is_leader; };
+    int getFleet() { return fleet_id; };
+    void setFleet(int fleet) { this->fleet_id = fleet; };
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);

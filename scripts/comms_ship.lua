@@ -17,7 +17,7 @@ function mainMenu()
 end
 
 function fleetOrders(comms_target, distance, formation)
-	fleet = comms_target:getLeadership()
+	fleet = comms_target:getFleet()
 	for n=1,player:getFleetSize(fleet)-1 do
 		fleet_member = player:getFleetMember(fleet, n)
 		fleet_member:orderFlyFleetFormation(comms_target, n, distance, formation)
@@ -45,42 +45,42 @@ function friendlyComms(comms_data)
 			end
 		end
 	end)
-	if comms_target:getLeadership() > 0 then
+	if comms_target:getFleet() > 0 then
 		addCommsReply("Fleet order", function()
 			setCommsMessage("Waiting for orders.");
 			addCommsReply("Disband your fleet", function()
-				setCommsMessage("OK. Fleet " .. comms_target:getLeadership() .." has been disanded.");
-				player:disbandFleet(comms_target:getLeadership())
+				setCommsMessage("OK. Fleet " .. comms_target:getFleet() .." has been disbanded.");
+				player:disbandFleet(comms_target:getFleet())
 				addCommsReply("Back", mainMenu)
 			end)
 			addCommsReply("Change formation", function()
 				setCommsMessage("Set the formation.");
-				addCommsReply("Formation HLine Close", function()
+				addCommsReply("Formation Close HLine", function()
 					fleetOrders(comms_target, 500, 1)
 					setCommsMessage("Formation changed to HLine Close.");
 					addCommsReply("Back", mainMenu)
 				end)
-				addCommsReply("Formation HLine Spread", function()
+				addCommsReply("Formation Spread HLine", function()
 					fleetOrders(comms_target, 3000, 1)
 					setCommsMessage("Formation changed to HLine Spread.");
 					addCommsReply("Back", mainMenu)
 				end)
-				addCommsReply("Formation Arrow Close", function()
+				addCommsReply("Formation Close Arrow", function()
 					fleetOrders(comms_target, 500, 2)
 					setCommsMessage("Formation changed to Arrow Close.");
 					addCommsReply("Back", mainMenu)
 				end)
-				addCommsReply("Formation Arrow Spread", function()
+				addCommsReply("Formation Spread Arrow", function()
 					fleetOrders(comms_target, 3000, 2)
 					setCommsMessage("Formation changed to Arrow Spread.");
 					addCommsReply("Back", mainMenu)
 				end)
-				addCommsReply("Formation Pyramid Close", function()
+				addCommsReply("Formation Close Pyramid", function()
 					fleetOrders(comms_target, 500, 3)
 					setCommsMessage("Formation changed to Pyramid Close.");
 					addCommsReply("Back", mainMenu)
 				end)
-				addCommsReply("Formation Pyramid Spread", function()
+				addCommsReply("Formation Spread Pyramid", function()
 					fleetOrders(comms_target, 3000, 3)
 					setCommsMessage("Formation changed to Pyramid Spread.");
 					addCommsReply("Back", mainMenu)
@@ -94,7 +94,7 @@ function friendlyComms(comms_data)
 				setCommsMessage("No fleet leader set. Please set a fleet leader first.");
 				addCommsReply("You are the leader of a brand new fleet !", function()
 					player:createFleet(comms_target)
-					setCommsMessage("I am honored to be the leader of Fleet" .. comms_target:getLeadership() .. ".");
+					setCommsMessage("I am honored to be the leader of Fleet" .. comms_target:getFleet() .. ".");
 					addCommsReply("Back", mainMenu)
 				end)
 				addCommsReply("Back", mainMenu)
@@ -102,7 +102,7 @@ function friendlyComms(comms_data)
 				setCommsMessage("Which fleet should we join ?");
 				addCommsReply("You are the leader of a brand new fleet !", function()
 					player:createFleet(comms_target)
-					setCommsMessage("I am honored to be the leader of Fleet" .. comms_target:getLeadership() .. ".");
+					setCommsMessage("I am honored to be the leader of Fleet" .. comms_target:getFleet() .. ".");
 					addCommsReply("Back", mainMenu)
 				end)
 				for n=1,player:getFleetCount() do
