@@ -3,6 +3,16 @@
 --- Your mission will be to take it trough it's first tests and initial mission.
 -- Type: Mission
 
+--[[Problems
+no rep at start....
+Unclear who to contact for first mission
+jump ship under attack after first jump
+not clear that you need to escape
+warp scramblers not visible
+nebula in kraylor defense line makes it unclear
+jump jammers not always blocking jump?
+--]]
+
 require("utils.lua")
 
 --[[
