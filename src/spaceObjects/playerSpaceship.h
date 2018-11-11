@@ -321,7 +321,7 @@ public:
       return 0;
     }
     void createFleet(P<SpaceShip> leader) {
-      if (!leader->getLeadership()){
+      if (leader->getFleet() == 0){
         Fleet fleet;
         fleet.leader = leader;
         fleets.push_back(fleet);
@@ -330,7 +330,7 @@ public:
     }
     void disbandFleet(int32_t fleet_id) {
       if (fleet_id > 0 && fleet_id <= int(fleets.size())) {
-        fleets[fleet_id-1].leader->setLeadership(0);
+        fleets[fleet_id-1].leader->setFleet(0);
         fleets.erase(fleets.begin() + fleet_id - 1);
       }
     }
