@@ -325,7 +325,7 @@ public:
         Fleet fleet;
         fleet.leader = leader;
         fleets.push_back(fleet);
-        leader->setLeadership(fleets.size()); //last fleet number
+        leader->setFleet(fleets.size()); //last fleet number
       }
     }
     void disbandFleet(int32_t fleet_id) {
