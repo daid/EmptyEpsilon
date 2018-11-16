@@ -152,6 +152,15 @@ void Dock::update(float delta)
             }
         }
     }
+    if (game_server && (state == MovingOut || state == Docked)){
+        auto cargo = getCargo();
+        if (cargo && cargo->getHeat() > 0)
+        {
+            float heatToAbsorve = std::min(cargo->getHeat(), delta * PlayerSpaceship::heat_transfer_per_second);
+            parent->addHeat(SYS_Docks, heatToAbsorve);
+            cargo->setHeat(cargo->getHeat() - heatToAbsorve);
+        }
+    }
 }
 
 string getDockStateName(EDockState state)
