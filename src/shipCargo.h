@@ -14,6 +14,7 @@ public:
   string callsign;
   string template_name;
   float energy_level;
+  float hull_strength;
   
   ShipCargo();
   ShipCargo(P<ShipTemplate> ship_template);

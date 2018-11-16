@@ -10,6 +10,7 @@ ShipCargo::ShipCargo() : Cargo("ShipCargo")
     registerMemberReplication(&callsign);
     registerMemberReplication(&template_name);
     registerMemberReplication(&energy_level);
+    registerMemberReplication(&hull_strength);
 }
 
 ShipCargo::ShipCargo(P<ShipTemplate> ship_template) : ShipCargo()
@@ -17,13 +18,15 @@ ShipCargo::ShipCargo(P<ShipTemplate> ship_template) : ShipCargo()
     this->template_name = ship_template->getName();
     this->callsign = "DRN-" + gameGlobalInfo->getNextShipCallsign();
     this->energy_level = ship_template->energy_storage_amount;
+    this->hull_strength = ship_template->hull;
 }
 
 ShipCargo::ShipCargo(P<SpaceShip> cargo) : ShipCargo()
 {
     this->template_name = cargo->template_name;
-    this->callsign = cargo->callsign;
-    this->energy_level = cargo->energy_level;
+    this->callsign = cargo->getCallSign();
+    this->energy_level = cargo->getEnergy();
+    this->hull_strength = cargo->getHull();
 }
 
 P<ModelData> ShipCargo::getModel()
@@ -48,6 +51,7 @@ bool ShipCargo::onLaunch(sf::Vector2f position, float rotationAngle)
             drone->setEnergyLevel(energy_level);
             drone->setPosition(position);
             drone->setRotation(rotationAngle);
+            drone->setHull(hull_strength);
             drone->impulse_request = 0.5;
             return true;
         }
@@ -61,5 +65,9 @@ Cargo::Entries ShipCargo::getEntries()
     result.push_back(std::make_tuple("callsign", callsign));
     result.push_back(std::make_tuple("type", template_name));
     result.push_back(std::make_tuple("energy", int(energy_level)));
+    P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
+    if (ship_template){
+        result.push_back(std::make_tuple("hull strength", string(100 * this->hull_strength / ship_template->hull, 2) + "%"));
+    }
     return result;
 }
