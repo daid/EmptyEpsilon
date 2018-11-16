@@ -13,15 +13,15 @@
 #include "screenComponents/powerDamageIndicator.h"
 
 const ECrewPosition crewPosition = ECrewPosition::singlePilot;
-DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
- : GuiOverlay(owner, "DRONE_PILOT_SCREEN", colorConfig.background), mode(DroneSelection)
- {
+DroneOperatorScreen::DroneOperatorScreen(GuiContainer *owner)
+    : GuiOverlay(owner, "DRONE_PILOT_SCREEN", colorConfig.background), mode(DroneSelection)
+{
     background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", sf::Color::White);
     background_crosses->setTextureTiled("gui/BackgroundCrosses");
 
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
-    
+
     // Draw a container for drone selection UI
     droneSelection = new GuiAutoLayout(this, "", GuiAutoLayout::ELayoutMode::LayoutHorizontalRows);
     droneSelection->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -46,9 +46,8 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
     // single pilot UI
     single_pilot_view = new SinglePilotView(this, selected_drone);
     single_pilot_view->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
-    disconnect_button = new GuiButton(this, "DISCONNECT_BUTTON", "Disconnect", [this]()
-    {
+
+    disconnect_button = new GuiButton(this, "DISCONNECT_BUTTON", "Disconnect", [this]() {
         mode = DroneSelection;
         selected_drone = NULL;
     });
@@ -61,51 +60,58 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer* owner)
     (new GuiPowerDamageIndicator(this, "DOCKS_DPI", SYS_Drones, ATopCenter, my_spaceship))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
-void DroneOperatorScreen::onDraw(sf::RenderTarget& window){
-    // Update the player ship list with all player ships.
-        PVector<PlayerSpaceship> connected_drones; 
-
-    std::vector<string> options;
-    std::vector<string> values;
-    for(int n = 0; n < GameGlobalInfo::max_player_ships; n++)
+void DroneOperatorScreen::onDraw(sf::RenderTarget &window)
+{
+    if (my_spaceship)
     {
-        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
-        if (ship && ship->ship_template && ship->ship_template->getType() == ShipTemplate::TemplateType::Drone &&
-            (ship->getPosition() - my_spaceship->getPosition()) < gameGlobalInfo->long_range_radar_range)
+        // Update the player ship list with all player ships.
+        PVector<PlayerSpaceship> connected_drones;
+        std::vector<string> options;
+        std::vector<string> values;
+        for (int n = 0; n < GameGlobalInfo::max_player_ships; n++)
         {
-            options.push_back(ship->getTypeName() + " " + ship->getCallSign());
-            values.push_back(ship->getMultiplayerId());
+            P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
+            if (ship && ship->ship_template && ship->ship_template->getType() == ShipTemplate::TemplateType::Drone &&
+                (ship->getPosition() - my_spaceship->getPosition()) < gameGlobalInfo->long_range_radar_range)
+            {
+                options.push_back(ship->getTypeName() + " " + ship->getCallSign());
+                values.push_back(ship->getMultiplayerId());
+            }
         }
-    }
-    drone_list->setOptions(options, values);
-    // automatically change mode if needed
-    if (drone_list->entryCount() == 0){
-        mode = NoDrones;
-        selected_drone = NULL;
-    } else if (!selected_drone || selected_drone->isDestroyed()){
-        mode = DroneSelection;
-        selected_drone = NULL;
-    }
-    // update display according to mode
-    switch(mode){
-        case DroneSelection : 
+        drone_list->setOptions(options, values);
+        // automatically change mode if needed
+        if (drone_list->entryCount() == 0)
+        {
+            mode = NoDrones;
+            selected_drone = NULL;
+        }
+        else if (!selected_drone || selected_drone->isDestroyed())
+        {
+            mode = DroneSelection;
+            selected_drone = NULL;
+        }
+        // update display according to mode
+        switch (mode)
+        {
+        case DroneSelection:
             no_drones_label->hide();
             droneSelection->show();
             single_pilot_view->hide();
             disconnect_button->hide();
-        break;
-        case Piloting :
+            break;
+        case Piloting:
             no_drones_label->hide();
             droneSelection->hide();
             single_pilot_view->show();
             disconnect_button->setText("Disconnect " + selected_drone->callsign);
             disconnect_button->show();
-        break;
-        case NoDrones :
+            break;
+        case NoDrones:
             no_drones_label->show();
             droneSelection->hide();
             single_pilot_view->hide();
             disconnect_button->hide();
-        break;
+            break;
+        }
     }
 }

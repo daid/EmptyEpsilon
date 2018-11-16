@@ -192,16 +192,16 @@ void DockMasterScreen::displayDroneDetails(Dock &dockData)
     sideBar->setVisible(true);
 
     unsigned int cnt = 0;
-    for(std::tuple<string, string> e : cargo->getEntries())
+    for(std::tuple<string, string, string> e : cargo->getEntries())
     {
         if (cnt == cargoInfoItems.size())
         {
-            cargoInfoItems.push_back(new GuiKeyValueDisplay(cargoInfo, "INFO_" + string(cnt), 0.5, std::get<0>(e), std::get<1>(e)));
+            cargoInfoItems.push_back(new GuiKeyValueDisplay(cargoInfo, "INFO_" + string(cnt), 0.5, "", ""));
             cargoInfoItems[cnt]->setSize(COLUMN_WIDTH, 40);
         }else{
             cargoInfoItems[cnt]->show();
-            cargoInfoItems[cnt]->setKey(std::get<0>(e))->setValue(std::get<1>(e));
         }
+        cargoInfoItems[cnt]->setIcon(std::get<0>(e))->setKey(std::get<1>(e))->setValue(std::get<2>(e));
         cnt++;
     }
     while(cnt < cargoInfoItems.size())

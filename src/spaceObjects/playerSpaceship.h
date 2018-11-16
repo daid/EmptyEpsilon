@@ -38,6 +38,7 @@ public:
     constexpr static float system_heatup_per_second = 0.05f;
     constexpr static float system_power_level_change_per_second = 0.3;
     constexpr static float energy_transfer_per_second = 5;
+    constexpr static float heat_transfer_per_second = 0.1;
 
     // Coolant change rate
     constexpr static float system_coolant_level_change_per_second = 1.2;

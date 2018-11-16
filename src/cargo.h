@@ -9,16 +9,24 @@ class ModelData;
 class Cargo : public MultiplayerObject
 {
 public:
-  typedef std::vector<std::tuple<string, string>> Entries;
+  typedef std::vector<std::tuple<string, string, string>> Entries;
+
+private:
+  float heat;
+  float energy_level;
 
 public:
-  Cargo(string multiplayerClassIdentifier) : MultiplayerObject(multiplayerClassIdentifier) {}
-  virtual Entries getEntries() = 0;
-  virtual float getEnergy() = 0;
-  virtual float getMaxEnergy() = 0;
+  Cargo(string multiplayerClassIdentifier);
+  
+  virtual Entries getEntries();
+  virtual float getEnergy() { return energy_level; }
+  virtual void setEnergy(float amount) { this->energy_level = amount; }
+  virtual float getHeat() { return heat; }
+  virtual void setHeat(float amount) { this->heat = amount; }
   virtual float getMinEnergy() { return 0; }
+  
+  virtual float getMaxEnergy() = 0;
   virtual P<ModelData> getModel() = 0;
-  virtual void setEnergy(float amount) = 0;
   virtual bool onLaunch(sf::Vector2f position, float rotationAngle) = 0;
 };
 #endif //CARGO_H
