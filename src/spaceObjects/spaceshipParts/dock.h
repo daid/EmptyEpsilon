@@ -3,6 +3,7 @@
 
 #include "P.h"
 #include "shipTemplate.h"
+#include "cargo.h"
 #include "SFML/System/NonCopyable.hpp"
 
 enum EDockType
@@ -28,10 +29,9 @@ string getDockStateName(EDockState state);
 
 class Dock : public sf::NonCopyable
 {
-    constexpr static float combat_maneuver_charge_time = 20.0f; /*< Amount of time it takes to fully charge the combat maneuver system */
-
+    public:
+    static Dock* findOpenForDocking(Dock docks[], int size);
   protected:
-    P<ShipTemplate> ship_template;
     SpaceShip *parent;
     int index_at_parent;
 
@@ -40,15 +40,14 @@ class Dock : public sf::NonCopyable
     EDockState state;
     float move_speed;
     float current_distance;
-    string callsign;
-    string template_name;
     float energy_request;
-    float energy_level;
     int move_target_index;
+    int32_t cargo_id;
     Dock();
 
     void empty();
-    void dock(SpaceShip *ship);
+    void dock(P<Cargo> cargo);
+    P<Cargo> getCargo();
     void startMoveCargo();
     void cancelMoveCargo();
     bool isOpenForDocking();
@@ -59,26 +58,9 @@ class Dock : public sf::NonCopyable
     void setState(EDockState state) { this->state = state; }
     void setDockType(EDockType dockType) { this->dock_type = dockType; }
     void setIndex(int index) { this->index_at_parent = index; }
-    void setCallSign(string new_callsign) { this->callsign = new_callsign; }
-    string getCallSign() { return callsign; }
-    void setTemplate(string template_name);
-    float getEnergy() { return energy_level; }
-    void setEnergy(float amount)
-    {
-        if ((amount > 0.0) && (amount <= ship_template->energy_storage_amount))
-        {
-            this->energy_level = amount;
-        }
-    }
-
+    void setCargo(int32_t cargo_id){this->cargo_id = cargo_id;}
     float getEnergyRequest() { return energy_request; }
-    void setEnergyRequest(float amount)
-    {
-        if ((amount >= 0.0) && (amount <= ship_template->energy_storage_amount))
-        {
-            this->energy_request = amount;
-        }
-    }
+    void setEnergyRequest(float amount){this->energy_request = amount;}
     void setMoveTarget(int index)
     {
         move_target_index = index;

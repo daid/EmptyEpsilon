@@ -2,10 +2,37 @@
 #include "spaceObjects/spaceship.h"
 #include "spaceObjects/playerSpaceship.h"
 #include <algorithm>
+#include "random.h"
+
+bool isDockOpenForDocking (Dock &d){
+    return d.isOpenForDocking();
+}
+
+Dock *Dock::findOpenForDocking(Dock docks[], int size)
+{
+    int randIdx = irandom(0, size - 1);
+    Dock *dock = std::find_if(docks + randIdx, docks + size, isDockOpenForDocking);
+    if (dock == docks + size)
+        dock = std::find_if(docks, docks + size, isDockOpenForDocking);
+    if (dock == docks + size)
+        return nullptr;
+    else
+        return dock;
+}
 
 Dock::Dock() : parent(nullptr), dock_type(Disabled), move_target_index(-1)
 {
     empty();
+}
+
+P<Cargo> Dock::getCargo()
+{
+    if (state == Empty)
+        return nullptr;
+    if (game_server)
+        return game_server->getObjectById(cargo_id);
+    else
+        return game_client->getObjectById(cargo_id);
 }
 
 void Dock::startMoveCargo()
@@ -17,10 +44,8 @@ void Dock::startMoveCargo()
         {
             this->setState(EDockState::MovingOut);
             current_distance = 0;
-            dest.template_name = template_name;
-            dest.callsign = callsign;
-            dest.energy_level = energy_level;
-            dest.energy_request = energy_level;
+            dest.cargo_id = cargo_id;
+            dest.energy_request = getCargo()->getEnergy();
             dest.setState(EDockState::MovingIn);
             dest.current_distance = 1;
             dest.move_target_index = index_at_parent;
@@ -38,21 +63,19 @@ void Dock::cancelMoveCargo()
     }
 }
 
-void Dock::dock(SpaceShip *other)
+void Dock::dock(P<Cargo> cargo)
 {
-    setTemplate(other->template_name);
-    setCallSign(other->callsign);
-    setEnergy(other->energy_level);
-    setEnergyRequest(other->energy_level);
+    cargo_id = cargo->getMultiplayerId();
     setState(EDockState::Docked);
+    setEnergyRequest(cargo->getEnergy());
     current_distance = 0;
 }
 
 void Dock::empty()
 {
+    cargo_id = -1;
     state = Empty;
-    callsign = template_name = "";
-    energy_request = energy_level = 0;
+    energy_request = 0;
     current_distance = 1;
 }
 
@@ -72,26 +95,16 @@ void Dock::setParent(SpaceShip *parent)
     this->parent = parent;
 
     parent->registerMemberReplication(&dock_type);
+    parent->registerMemberReplication(&cargo_id);
     parent->registerMemberReplication(&state);
-    parent->registerMemberReplication(&callsign);
-    parent->registerMemberReplication(&template_name);
     parent->registerMemberReplication(&energy_request);
-    parent->registerMemberReplication(&energy_level);
     parent->registerMemberReplication(&move_target_index);
-}
-
-void Dock::setTemplate(string template_name)
-{
-    P<ShipTemplate> new_ship_template = ShipTemplate::getTemplate(template_name);
-    this->template_name = template_name;
-    ship_template = new_ship_template;
+    parent->registerMemberReplication(&current_distance);
 }
 
 bool Dock::operator==(const Dock &other)
 {
-    if (state == other.state && state == EDockState::Empty)
-        return true;
-    return state == other.state && ship_template == other.ship_template && callsign == other.callsign && energy_level && other.energy_level;
+    return state == other.state && cargo_id == other.cargo_id;
 }
 
 void Dock::update(float delta)
@@ -100,37 +113,43 @@ void Dock::update(float delta)
     {
         float distanceDelta = delta * parent->getSystemEffectiveness(SYS_Docks) / SpaceShip::dock_move_time;
         current_distance += distanceDelta;
-        Dock &dest = parent->docks[move_target_index];
-        if (current_distance >= 1)
+        if (game_server)
         {
-            empty();
-            dest.setState(Docked);
-        }
-        else
-        {
-            dest.current_distance = 1 - current_distance;
+            Dock &dest = parent->docks[move_target_index];
+            if (current_distance >= 1)
+            {
+                empty();
+                dest.setState(Docked);
+            }
+            else
+            {
+                dest.current_distance = 1 - current_distance;
+            }
         }
     }
-    else if (dock_type == Energy && state == Docked)
+    else if (game_server && dock_type == Energy && state == Docked)
     {
-        if (ship_template)
+        auto cargo = getCargo();
+        if (cargo)
         {
-            energy_request = std::min(energy_request, ship_template->energy_storage_amount);
-        }
-        energy_request = std::max(energy_request, 0.0f);
+            energy_request = std::min(energy_request, cargo->getMaxEnergy());
+            energy_request = std::max(energy_request, 0.0f);
 
-        float energyDelta = std::min(delta * this->parent->getSystemEffectiveness(SYS_Docks) *  PlayerSpaceship::energy_transfer_per_second, std::abs(energy_request - energy_level));
-        if (energy_request > energy_level)
-        {
-            energyDelta = std::min(energyDelta, parent->energy_level);
-            parent->energy_level -= energyDelta;
-            energy_level += energyDelta;
-        }
-        else if (energy_request < energy_level)
-        {
-            energyDelta = std::min(energyDelta, std::max(0.0f, parent->max_energy_level - parent->energy_level));
-            parent->energy_level += energyDelta;
-            energy_level -= energyDelta;
+            float energyDelta = std::min(delta * this->parent->getSystemEffectiveness(SYS_Docks) *
+                                             PlayerSpaceship::energy_transfer_per_second,
+                                         std::abs(energy_request - cargo->getEnergy()));
+            if (energy_request > cargo->getEnergy())
+            {
+                energyDelta = std::min(energyDelta, parent->energy_level);
+                parent->energy_level -= energyDelta;
+                cargo->setEnergy(cargo->getEnergy() + energyDelta);
+            }
+            else if (energy_request < cargo->getEnergy())
+            {
+                energyDelta = std::min(energyDelta, std::max(0.0f, parent->max_energy_level - parent->energy_level));
+                parent->energy_level += energyDelta;
+                cargo->setEnergy(cargo->getEnergy() - energyDelta);
+            }
         }
     }
 }

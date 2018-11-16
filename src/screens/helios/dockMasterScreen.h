@@ -9,6 +9,7 @@ class GuiSlider;
 class GuiButton;
 class GuiLabel;
 class GuiAutoLayout;
+class GuiEntryList;
 class GuiSelector;
 class GuiProgressbar;
 class GuiKeyValueDisplay;
@@ -23,11 +24,10 @@ class DockMasterScreen : public GuiOverlay
     GuiListbox* docks;
     int index = 0;
     GuiLabel *title;
-    GuiAutoLayout *droneDetails;
+    GuiAutoLayout *sideBar;
+    GuiAutoLayout* cargoInfo;
+    std::vector<GuiKeyValueDisplay*> cargoInfoItems;
     GuiRotatingModelView* model;
-    GuiKeyValueDisplay *type;
-    GuiKeyValueDisplay *callsign;
-    GuiKeyValueDisplay *energy;
 
     GuiProgressbar *energy_bar;
     GuiSlider *energy_slider;

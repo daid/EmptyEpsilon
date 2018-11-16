@@ -1516,19 +1516,11 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     case CMD_LAUNCH_CARGO:
         int dockIndex;
         packet >> dockIndex;
-        if (docks[dockIndex].state == EDockState::Docked)
+        if (docks[dockIndex].state == EDockState::Docked 
+            && docks[dockIndex].getCargo()->onLaunch(getPosition(), getRotation()))
         {
-            P<PlayerSpaceship> drone = new PlayerSpaceship();
-            if (drone)
-            {
-                drone->setTemplate(docks[dockIndex].template_name);
-                drone->setCallSign(docks[dockIndex].callsign);
-                drone->setEnergyLevel(docks[dockIndex].energy_level);
-                docks[dockIndex].empty();
-                drone->setPosition(getPosition());
-                drone->setRotation(getRotation());
-                drone->impulse_request = 0.5;
-            }
+            docks[dockIndex].getCargo()->destroy();
+            docks[dockIndex].empty();
         }
         break;
     case CMD_SET_DOCK_MOVE_TARGET:

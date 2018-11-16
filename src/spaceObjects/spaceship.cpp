@@ -8,7 +8,7 @@
 #include "particleEffect.h"
 #include "spaceObjects/warpJammer.h"
 #include "gameGlobalInfo.h"
-#include "random.h"
+#include "shipCargo.h"
 
 #include "scriptInterface.h"
 
@@ -260,29 +260,20 @@ void SpaceShip::applyTemplateValues()
         }
     }
     int maxActiveDockIndex = ship_template->launcher_dock_count + ship_template->energy_dock_count;
-    int drones_count = 0;
-    for (auto &dt : ship_template->drones) // access by reference to avoid copying
+    for (auto &droneTemplate : ship_template->drones) // access by reference to avoid copying
     {  
+        P<ShipTemplate> drone_ship_template = ShipTemplate::getTemplate(droneTemplate.template_name);
         // add drones one by one, assuming all drones are empty, and template is of drone type
-        for (int i = 0; i < dt.count; i++)
+        for (int i = 0; i < droneTemplate.count; i++)
         {
-            P<ShipTemplate> drone_ship_template = ShipTemplate::getTemplate(dt.template_name);
-            if (drones_count + i <= maxActiveDockIndex) 
-            {
-                int idx = irandom(0, maxActiveDockIndex);
-                while (docks[idx].state != Empty){
-                    idx = irandom(0, maxActiveDockIndex);
-                }
-                docks[idx].setState(EDockState::Docked);
-                docks[idx].setCallSign("DRN-" + gameGlobalInfo->getNextShipCallsign());
-                docks[idx].setTemplate(dt.template_name);
-                docks[idx].setEnergy(drone_ship_template->energy_storage_amount);
-                docks[idx].setEnergyRequest(drone_ship_template->energy_storage_amount);
-            } else {
+            Dock *dock = Dock::findOpenForDocking(docks, maxActiveDockIndex);
+            if (!dock) { // no more available docks
                 LOG(ERROR) << "Too many drones: " << template_name;
+                break; 
             }
+            P<ShipCargo> cargo = new ShipCargo(drone_ship_template);
+            dock->dock(cargo);
         }
-        drones_count += dt.count;
     }
 }
 
@@ -1312,16 +1303,10 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
 
 bool SpaceShip::tryDockDrone(SpaceShip* other){
     if(other->ship_template->getType() == ShipTemplate::TemplateType::Drone){
-        int randIdx = irandom(0, max_docks_count-1);
-        auto isOpenForDocking = [](Dock& d)-> bool{
-            return d.isOpenForDocking();
-        };
-        Dock* p = std::find_if(docks + randIdx, docks+max_docks_count, isOpenForDocking);
-        if (p == docks + max_docks_count){
-            p = std::find_if(docks, docks+max_docks_count, isOpenForDocking);
-        }
-        if (p < docks + max_docks_count){
-            p->dock(other);
+        Dock* dock = Dock::findOpenForDocking(docks, max_docks_count);
+        if (dock){
+            P<ShipCargo> cargo = new ShipCargo(other);
+            dock->dock(cargo);
             return true;
         }
     }

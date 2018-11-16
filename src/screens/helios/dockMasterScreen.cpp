@@ -62,11 +62,8 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
     GuiAutoLayout *dockPanel = new GuiAutoLayout(rightSide, "DOCK_PANEL", GuiAutoLayout::LayoutVerticalColumns);
     dockPanel->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 50, ATopCenter);
 
-    droneDetails = new GuiAutoLayout(rightSide, "DRONE_DETAILS", GuiAutoLayout::LayoutVerticalTopToBottom);
-    droneDetails->setSize(COLUMN_WIDTH, GuiElement::GuiSizeMax)->setPosition(0, 100, ATopRight);
-
-    GuiAutoLayout *actionsPanel = new GuiAutoLayout(this, "ACTIONS_PANEL", GuiAutoLayout::LayoutVerticalTopToBottom);
-    actionsPanel->setSize(COLUMN_WIDTH, GuiElement::GuiSizeMax)->setPosition(COLUMN_WIDTH, 100, ATopLeft);
+    sideBar = new GuiAutoLayout(rightSide, "SIDE_BAR", GuiAutoLayout::LayoutVerticalTopToBottom);
+    sideBar->setSize(COLUMN_WIDTH, GuiElement::GuiSizeMax)->setPosition(0, 100, ATopRight);
 
     GuiElement *move_dest = new GuiAutoLayout(dockPanel, "", GuiAutoLayout::LayoutVerticalColumns);
     (new GuiLabel(move_dest, "MOVE_DEST_LABEL", "Destination:", 30))->setAlignment(ACenterRight);
@@ -81,20 +78,13 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
     });
     moveButton->setSize(COLUMN_WIDTH, 40);
 
-    type = new GuiKeyValueDisplay(droneDetails, "", 0.37, "Type", "");
-    type->setSize(COLUMN_WIDTH, 40);
-    callsign = new GuiKeyValueDisplay(droneDetails, "", 0.37, "Callsign", "");
-    callsign->setSize(COLUMN_WIDTH, 40);
-    energy = new GuiKeyValueDisplay(droneDetails, "", 0.37, "Energy", "");
-    energy->setSize(COLUMN_WIDTH, 40);
-
-    launch_button = new GuiButton(droneDetails, "LAUNCH_DRONE_BUTTON", "Launch", [this]() {
+    launch_button = new GuiButton(sideBar, "LAUNCH_DRONE_BUTTON", "Launch", [this]() {
         if (my_spaceship)
             my_spaceship->commandLaunchCargo(index);
     });
     launch_button->setSize(COLUMN_WIDTH, 40);
 
-    GuiElement *energyControl = new GuiElement(droneDetails, "ENERGY_CONTROL");
+    GuiElement *energyControl = new GuiElement(sideBar, "ENERGY_CONTROL");
     energyControl->setSize(COLUMN_WIDTH, 40);
 
     energy_slider = new GuiSlider(energyControl, "ENERGY_SLIDER", 0.0, 10.0, 0.0, [this](float value) {
@@ -105,6 +95,9 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
 
     energy_bar = new GuiProgressbar(energyControl, "ENERGY_BAR", 0.0, 10.0, 0.0);
     energy_bar->setColor(sf::Color(192, 192, 32, 128))->setText("Energy")->setDrawBackground(false)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(10, 0, 10, 0);
+
+    cargoInfo = new GuiAutoLayout(sideBar, "CARGO_INFO", GuiAutoLayout::LayoutVerticalTopToBottom);
+    cargoInfo->setSize(COLUMN_WIDTH, GuiElement::GuiSizeMax);
 
     (new GuiCustomShipFunctions(this, dockMaster, "CUSTOM_FUNCTIONS", my_spaceship))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 
@@ -162,7 +155,7 @@ void DockMasterScreen::onDraw(sf::RenderTarget &window)
         switch (dockData.state)
         {
         case Empty:
-            droneDetails->setVisible(false);
+            sideBar->setVisible(false);
             model->setModel(nullptr);
             overlay->setVisible(true);
             overlay_label->setText("Empty");
@@ -195,17 +188,31 @@ void DockMasterScreen::onDraw(sf::RenderTarget &window)
 
 void DockMasterScreen::displayDroneDetails(Dock &dockData)
 {
-    droneDetails->setVisible(true);
-    type->setValue(dockData.template_name);
-    callsign->setValue(dockData.callsign);
-    energy->setValue(int(dockData.energy_level));
-    energy_bar->setValue(dockData.energy_level);
-    P<ShipTemplate> ship_template = ShipTemplate::getTemplate(dockData.template_name);
-    if (ship_template)
+    P<Cargo> cargo = dockData.getCargo();
+    sideBar->setVisible(true);
+
+    unsigned int cnt = 0;
+    for(std::tuple<string, string> e : cargo->getEntries())
     {
-        model->setModel(ship_template->model_data);
-        energy_bar->setRange(0, ship_template->energy_storage_amount);
-        energy_slider->setRange(0, ship_template->energy_storage_amount);
-        energy_slider->setValue(dockData.energy_request);
+        if (cnt == cargoInfoItems.size())
+        {
+            cargoInfoItems.push_back(new GuiKeyValueDisplay(cargoInfo, "INFO_" + string(cnt), 0.5, std::get<0>(e), std::get<1>(e)));
+            cargoInfoItems[cnt]->setSize(COLUMN_WIDTH, 40);
+        }else{
+            cargoInfoItems[cnt]->show();
+            cargoInfoItems[cnt]->setKey(std::get<0>(e))->setValue(std::get<1>(e));
+        }
+        cnt++;
     }
+    while(cnt < cargoInfoItems.size())
+    {
+        cargoInfoItems[cnt]->hide();
+        cnt++;
+    }
+
+    energy_bar->setValue(cargo->getEnergy());
+    energy_bar->setRange(cargo->getMinEnergy(), cargo->getMaxEnergy());
+    energy_slider->setRange(cargo->getMinEnergy(), cargo->getMaxEnergy());
+    energy_slider->setValue(dockData.energy_request);
+    model->setModel(cargo->getModel());
 }

@@ -81,6 +81,7 @@ endif()
 set(EXECUTABLE_NAME "EmptyEpsilon")
 set(SOURCES
 	src/main.cpp
+	src/shipCargo.cpp
 	src/threatLevelEstimate.cpp
 	src/preferenceManager.cpp
 	src/pathPlanner.cpp
