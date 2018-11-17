@@ -734,8 +734,8 @@
 		<Unit filename="src/screens/gm/gameMasterScreen.h" />
 		<Unit filename="src/screens/gm/tweak.cpp" />
 		<Unit filename="src/screens/gm/tweak.h" />
-		<Unit filename="src/screens/helios/navigationScreen.cpp" />
-		<Unit filename="src/screens/helios/navigationScreen.h" />
+		<Unit filename="src/screens/extra/navigationScreen.cpp" />
+		<Unit filename="src/screens/extra/navigationScreen.h" />
 		<Unit filename="src/screens/mainScreen.cpp" />
 		<Unit filename="src/screens/mainScreen.h" />
 		<Unit filename="src/screens/topDownScreen.cpp" />

@@ -26,7 +26,6 @@ enum ECrewPosition
     tacticalRadar,
     scienceRadar,
     relayRadar,
-    // helios
     navigation,
     dronePilot,
     dockMaster,

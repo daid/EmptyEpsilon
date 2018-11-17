@@ -141,9 +141,9 @@ set(SOURCES
 	src/screens/gm/gameMasterScreen.cpp
 	src/screens/gm/chatDialog.cpp
 	src/screens/gm/tweak.cpp
-	src/screens/helios/navigationScreen.cpp
-	src/screens/helios/droneOperatorScreen.cpp
-	src/screens/helios/dockMasterScreen.cpp
+	src/screens/extra/navigationScreen.cpp
+	src/screens/extra/droneOperatorScreen.cpp
+	src/screens/extra/dockMasterScreen.cpp
 	src/screenComponents/aimLock.cpp
 	src/screenComponents/alertOverlay.cpp
 	src/screenComponents/helpOverlay.cpp

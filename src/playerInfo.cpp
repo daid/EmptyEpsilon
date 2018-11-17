@@ -2,9 +2,9 @@
 #include "screens/mainScreen.h"
 #include "screens/crewStationScreen.h"
 
-#include "screens/helios/navigationScreen.h"
-#include "screens/helios/droneOperatorScreen.h"
-#include "screens/helios/dockMasterScreen.h"
+#include "screens/extra/navigationScreen.h"
+#include "screens/extra/droneOperatorScreen.h"
+#include "screens/extra/dockMasterScreen.h"
 
 #include "screens/crew6/helmsScreen.h"
 #include "screens/crew6/weaponsScreen.h"
@@ -304,7 +304,6 @@ template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosit
         cp = scienceRadar;
     else if (str == "relayradar" || str == "relayradarview")
         cp = relayRadar;
-    // helios
     else if (str == "navigation" || str == "navigationview")
         cp = navigation;
     else if (str == "dronepilot" || str == "dronepilotview")
