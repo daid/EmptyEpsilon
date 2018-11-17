@@ -181,6 +181,7 @@ static const int16_t CMD_MOVE_CARGO = 0x0032;
 static const int16_t CMD_CANCEL_MOVE_CARGO = 0x0033;
 static const int16_t CMD_SET_DOCK_MOVE_TARGET = 0x0034;
 static const int16_t CMD_SET_DOCK_ENERGY_REQUEST = 0x0035;
+static const int16_t CMD_SET_AUTO_REPAIR_SYSTEM_TARGET = 0x0036;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -225,7 +226,7 @@ PlayerSpaceship::PlayerSpaceship()
     shields_active = false;
     control_code = "";
     warp_indicator = 0;
-
+    auto_repairing_system = SYS_None;
     setFactionId(1);
 
     // For now, set player ships to always be fully scanned to all other ships
@@ -263,6 +264,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&linked_probe_3D_id);
     registerMemberReplication(&control_code);
     registerMemberReplication(&custom_functions);
+    registerMemberReplication(&auto_repairing_system);
 
     // Determine which stations must provide self-destruct confirmation codes.
     for(int n = 0; n < max_self_destruct_codes; n++)
@@ -444,6 +446,26 @@ void PlayerSpaceship::update(float delta)
         // Consume power if shields are enabled.
         if (shields_active)
             useEnergy(delta * energy_shield_use_per_second);
+
+        // auto-repair
+        if (!gameGlobalInfo->use_repair_crew){
+            ESystem system = ESystem(auto_repairing_system);
+            if (system > SYS_None && system < SYS_COUNT && hasSystem(system))
+            {
+                systems[system].health += repair_per_second * delta;
+                if (systems[system].health > 1.0)
+                    systems[system].health = 1.0;
+            }
+            if (auto_repair_enabled && (system == SYS_None || !hasSystem(system) || systems[system].health == 1.0))
+            {
+                int n=irandom(0, SYS_COUNT - 1);
+
+                if (hasSystem(ESystem(n)) && systems[n].health < 1.0)
+                {
+                    auto_repairing_system = ESystem(n);
+                }
+            }
+        }
 
         // Consume power based on subsystem requests and state.
         energy_level += delta * getNetSystemEnergyUsage();
@@ -637,9 +659,11 @@ void PlayerSpaceship::applyTemplateValues()
         break;
     }
 
-    // Set the ship's number of repair crews in Engineering from the ship's
-    // template.
-    setRepairCrewCount(ship_template->repair_crew_count);
+    if (gameGlobalInfo->use_repair_crew){
+        // Set the ship's number of repair crews in Engineering from the ship's
+        // template.
+        setRepairCrewCount(ship_template->repair_crew_count);
+    }
 }
 
 void PlayerSpaceship::executeJump(float distance)
@@ -1607,6 +1631,14 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             }
         }
         break;
+    case CMD_SET_AUTO_REPAIR_SYSTEM_TARGET:
+        {
+            ESystem system;
+            packet >> system;
+            if (system < SYS_COUNT)
+                auto_repairing_system = system;
+        }
+        break;
     }
 }
 
@@ -1892,6 +1924,7 @@ void PlayerSpaceship::commandSetDockMoveTarget(int srcIdx, int destIdx)
     packet << CMD_SET_DOCK_MOVE_TARGET << srcIdx << destIdx;
     sendClientCommand(packet);
 }
+
 void PlayerSpaceship::commandSetDockEnergyRequest(int index, float value)
 {
     sf::Packet packet;
@@ -1947,6 +1980,13 @@ void PlayerSpaceship::commandSetScienceLink(int32_t id){
 void PlayerSpaceship::commandSetProbe3DLink(int32_t id){
     sf::Packet packet;
     packet << CMD_SET_PROBE_3D_LINK << id;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetAutoRepairSystemTarget(ESystem system)
+{
+    sf::Packet packet;
+    packet << CMD_SET_AUTO_REPAIR_SYSTEM_TARGET << system;
     sendClientCommand(packet);
 }
 

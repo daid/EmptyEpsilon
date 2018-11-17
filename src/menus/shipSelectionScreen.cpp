@@ -440,6 +440,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
     case 0:
         crew_position_button[helmsOfficer]->show();
         crew_position_button[weaponsOfficer]->show();
+        crew_position_button[damageControl]->show();
         crew_position_button[powerManagement]->show();
         crew_position_button[scienceOfficer]->show();
         crew_position_button[relayOfficerNC]->show();
