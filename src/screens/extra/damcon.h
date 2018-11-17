@@ -5,10 +5,12 @@
 #include "shipTemplate.h"
 
 class GuiKeyValueDisplay;
+class GuiSelector;
 
 class DamageControlScreen : public GuiOverlay
 {
 private:
+    GuiSelector *autoRepairSelector;
     GuiKeyValueDisplay* hull_display;
     GuiKeyValueDisplay* system_health[SYS_COUNT];
 public:

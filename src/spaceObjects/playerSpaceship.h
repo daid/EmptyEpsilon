@@ -39,6 +39,7 @@ public:
     constexpr static float system_power_level_change_per_second = 0.3;
     constexpr static float energy_transfer_per_second = 5;
     constexpr static float heat_transfer_per_second = 0.1;
+    constexpr static float repair_per_second = 0.007;
 
     // Coolant change rate
     constexpr static float system_coolant_level_change_per_second = 1.2;
@@ -130,8 +131,9 @@ private:
 
     std::vector<ShipLogEntry> ships_log_extern;
     std::vector<ShipLogEntry> ships_log_intern;
-
+    
 public:
+    ESystem auto_repairing_system;
     std::vector<CustomShipFunction> custom_functions;
 
     std::vector<sf::Vector2f> waypoints;
@@ -251,6 +253,7 @@ public:
     void commandSetAlertLevel(EAlertLevel level);
     void commandHackingFinished(P<SpaceObject> target, string target_system);
     void commandCustomFunction(string name);
+    void commandSetAutoRepairSystemTarget(ESystem system);
 
     virtual void onReceiveServerCommand(sf::Packet& packet) override;
 

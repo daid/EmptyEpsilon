@@ -37,6 +37,7 @@ GameGlobalInfo::GameGlobalInfo()
     long_range_radar_range = 30000;
     use_beam_shield_frequencies = true;
     use_system_damage = true;
+    use_repair_crew = false;
     allow_main_screen_tactical_radar = true;
     allow_main_screen_long_range_radar = true;
     allow_main_screen_global_range_radar = true;
@@ -52,6 +53,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&long_range_radar_range);
     registerMemberReplication(&use_beam_shield_frequencies);
     registerMemberReplication(&use_system_damage);
+    registerMemberReplication(&use_repair_crew);
     registerMemberReplication(&allow_main_screen_tactical_radar);
     registerMemberReplication(&allow_main_screen_long_range_radar);
     registerMemberReplication(&allow_main_screen_global_range_radar);

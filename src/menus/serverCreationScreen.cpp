@@ -29,6 +29,7 @@ ServerCreationScreen::ServerCreationScreen()
     gameGlobalInfo->scanning_complexity = EScanningComplexity(PreferencesManager::get("server_config_scanning_complexity", "2").toInt());
     gameGlobalInfo->use_beam_shield_frequencies = PreferencesManager::get("server_config_use_beam_shield_frequencies", "1").toInt();
     gameGlobalInfo->use_system_damage = PreferencesManager::get("server_config_use_system_damage", "1").toInt();
+    gameGlobalInfo->use_repair_crew = PreferencesManager::get("server_config_use_repair_crew", "1").toInt();
     gameGlobalInfo->allow_main_screen_tactical_radar = PreferencesManager::get("server_config_allow_main_screen_tactical_radar", "1").toInt();
     gameGlobalInfo->allow_main_screen_long_range_radar = PreferencesManager::get("server_config_allow_main_screen_long_range_radar", "1").toInt();
     gameGlobalInfo->allow_main_screen_global_range_radar = PreferencesManager::get("server_config_allow_main_screen_global_range_radar", "1").toInt();
@@ -141,6 +142,12 @@ ServerCreationScreen::ServerCreationScreen()
     (new GuiToggleButton(row, "GAME_SYS_DAMAGE_TOGGLE", "Per-system damage", [](bool value) {
         gameGlobalInfo->use_system_damage = value == 1;
     }))->setValue(gameGlobalInfo->use_system_damage)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenterRight);
+    // repair crew
+    row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
+    row->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiToggleButton(row, "REPAIR_CREW_TOGGLE", "simulate repair crew", [](bool value) {
+        gameGlobalInfo->use_repair_crew = value == 1;
+    }))->setValue(gameGlobalInfo->use_repair_crew)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenterLeft);
 
     // Right column contents.
     // Scenario section.
@@ -243,6 +250,7 @@ void ServerCreationScreen::startScenario()
     PreferencesManager::set("server_config_scanning_complexity", string(int(gameGlobalInfo->scanning_complexity)));
     PreferencesManager::set("server_config_use_beam_shield_frequencies", string(int(gameGlobalInfo->use_beam_shield_frequencies)));
     PreferencesManager::set("server_config_use_system_damage", string(int(gameGlobalInfo->use_system_damage)));
+    PreferencesManager::set("server_config_use_repair_crew", string(int(gameGlobalInfo->use_repair_crew)));
     PreferencesManager::set("server_config_allow_main_screen_tactical_radar", string(int(gameGlobalInfo->allow_main_screen_tactical_radar)));
     PreferencesManager::set("server_config_allow_main_screen_long_range_radar", string(int(gameGlobalInfo->allow_main_screen_long_range_radar)));
     PreferencesManager::set("server_config_allow_main_screen_global_range_radar", string(int(gameGlobalInfo->allow_main_screen_global_range_radar)));
