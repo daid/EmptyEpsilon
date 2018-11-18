@@ -15,7 +15,7 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
 : GuiPanel(owner, "GM_TWEAK_DIALOG")
 {
     setPosition(0, -100, ABottomCenter);
-    setSize(1000, 600);
+    setSize(1000, 700);
 
     GuiListbox* list = new GuiListbox(this, "", [this](int index, string value)
     {
@@ -57,7 +57,7 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
 
     for(GuiTweakPage* page : pages)
     {
-        page->setSize(700, 600)->setPosition(0, 0, ABottomRight)->hide();
+        page->setSize(700, 700)->setPosition(0, 0, ABottomRight)->hide();
     }
 
     pages[0]->show();
