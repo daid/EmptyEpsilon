@@ -22,6 +22,8 @@ ShipCargo::ShipCargo(P<ShipTemplate> ship_template) : ShipCargo()
 
 ShipCargo::ShipCargo(P<SpaceShip> ship) : ShipCargo()
 {
+    template_name = ship->getTypeName();
+    callsign = ship->getCallSign();
     setEnergy(ship->getEnergy());
     hull_strength = ship->getHull();
 }
