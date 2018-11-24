@@ -162,7 +162,6 @@ private:
     P<PlayerSpaceship> target;
 
     GuiTextEntry* control_code;
-    GuiSlider* reputation_point_slider;
     GuiSlider* energy_level_slider;
     GuiSlider* max_energy_level_slider;
     GuiSlider* combat_maneuver_boost_speed_slider;

@@ -180,10 +180,6 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool has_comms)
     });
     launch_drone_button->setSize(GuiElement::GuiSizeMax, 50);
 
-    // Reputation display.
-    info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.7, "Reputation:", "");
-    info_reputation->setSize(GuiElement::GuiSizeMax, 40);
-
     // Bottom layout.
     GuiAutoLayout* layout = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutVerticalBottomToTop);
     layout->setPosition(-20, -70, ABottomRight)->setSize(300, GuiElement::GuiSizeMax);
@@ -314,7 +310,6 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
     }
     if (my_spaceship)
     {
-        info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0));
         launch_probe_button->setText("Launch probe (" + string(my_spaceship->scan_probe_stock) + ")");
     }
 

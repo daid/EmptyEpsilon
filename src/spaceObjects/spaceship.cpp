@@ -1020,17 +1020,6 @@ void SpaceShip::destroyedByDamage(DamageInfo& info)
     ExplosionEffect* e = new ExplosionEffect();
     e->setSize(getRadius() * 1.5);
     e->setPosition(getPosition());
-
-    if (info.instigator)
-    {
-        float points = hull_max * 0.1f;
-        for(int n=0; n<shield_count; n++)
-            points += shield_max[n] * 0.1f;
-        if (isEnemy(info.instigator))
-            info.instigator->addReputationPoints(points);
-        else
-            info.instigator->removeReputationPoints(points);
-    }
 }
 
 bool SpaceShip::hasSystem(ESystem system)

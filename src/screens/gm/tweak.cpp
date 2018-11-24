@@ -536,7 +536,6 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
 {
     // TODO: Add more player ship tweaks here.
     // -   Ship-to-ship player transfer
-    // -   Reputation
 
     // Add two columns.
     GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
@@ -554,14 +553,6 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
     control_code->callback([this](string text) {
         target->control_code = text;
     });
-
-    // Edit reputation.
-    (new GuiLabel(left_col, "", "Reputation:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-
-    reputation_point_slider = new GuiSlider(left_col, "", 0.0, 9999.0, 0.0, [this](float value) {
-        target->setReputationPoints(value);
-    });
-    reputation_point_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     // Edit energy level.
     (new GuiLabel(left_col, "", "Max energy:", 30))->setSize(GuiElement::GuiSizeMax, 50);
@@ -632,9 +623,6 @@ void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
     // Update the ship's energy level.
     energy_level_slider->setValue(target->energy_level);
     max_energy_level_slider->setValue(target->max_energy_level);
-
-    // Update reputation points.
-    reputation_point_slider->setValue(target->getReputationPoints());
 }
 
 void GuiShipTweakPlayer::open(P<SpaceObject> target)

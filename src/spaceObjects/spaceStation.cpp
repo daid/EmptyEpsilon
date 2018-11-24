@@ -62,24 +62,6 @@ void SpaceStation::destroyedByDamage(DamageInfo& info)
     ExplosionEffect* e = new ExplosionEffect();
     e->setSize(getRadius());
     e->setPosition(getPosition());
-    
-    if (info.instigator)
-    {
-        float points = 0;
-        if (shield_count > 0)
-        {
-            for(int n=0; n<shield_count; n++)
-            {
-                points += shield_max[n] * 0.1;
-            }
-            points /= shield_count;
-        }
-        points += hull_max * 0.1;
-        if (isEnemy(info.instigator))
-            info.instigator->addReputationPoints(points);
-        else
-            info.instigator->removeReputationPoints(points);
-    }
 }
 
 bool SpaceStation::canBeDockedBy(P<SpaceObject> obj)

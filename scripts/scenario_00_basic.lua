@@ -92,9 +92,6 @@ function init()
 	station_3 = SpaceStation():setTemplate('Large Station'):setRotation(random(0, 360)):setFaction("Human Navy")
 	table.insert(friendlyList, setCirclePos(station_3, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
 
-	-- Start the players with 300 reputation.
-	friendlyList[1]:addReputationPoints(300.0)
-
 	-- Randomly scatter nebulae near the players' spawn point.
 	local x, y = friendlyList[1]:getPosition()
 	setCirclePos(Nebula(), x, y, random(0, 360), 6000)
@@ -281,13 +278,5 @@ function update(delta)
 	-- If all allies are destroyed, the Humans (players) lose.
 	if friendly_count == 0 then
 		victory("Kraylor");
-	else
-		-- As the battle continues, award reputation based on
-		-- the players' progress and number of surviving allies.
-		for _, friendly in ipairs(friendlyList) do
-			if friendly:isValid() then
-				friendly:addReputationPoints(delta * friendly_count * 0.1)
-			end
-		end
 	end
 end

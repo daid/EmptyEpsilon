@@ -59,9 +59,6 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&allow_main_screen_global_range_radar);
     registerMemberReplication(&allow_main_screen_ship_state);
 
-    for(unsigned int n=0; n<factionInfo.size(); n++)
-        reputation_points.push_back(0);
-    registerMemberReplication(&reputation_points, 1.0);
 }
 
 P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)
@@ -163,8 +160,6 @@ void GameGlobalInfo::reset()
     {
         s->destroy();
     }
-    for(unsigned int n=0; n<reputation_points.size(); n++)
-        reputation_points[n] = 0;
     callsign_counter = 0;
     victory_faction = -1;
 }

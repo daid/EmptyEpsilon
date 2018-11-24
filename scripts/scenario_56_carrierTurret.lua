@@ -3193,8 +3193,7 @@ function handleDockedState()
 			if cargoHoldEmpty then
 				oMsg = oMsg .. "     Empty\n"
 			end
-			playerRep = math.floor(player:getReputationPoints())
-			oMsg = oMsg .. string.format("Available Space: %i, Available Reputation: %i\n",player.cargo,playerRep)
+			oMsg = oMsg .. string.format("Available Space: %i\n",player.cargo)
 			setCommsMessage(oMsg)
 			-- Buttons for reputation purchases
 			gi = 1

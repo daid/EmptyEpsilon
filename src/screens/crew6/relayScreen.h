@@ -36,7 +36,6 @@ private:
     GuiKeyValueDisplay* info_callsign;
     GuiKeyValueDisplay* info_faction;
 
-    GuiKeyValueDisplay* info_reputation;
     GuiAutoLayout* option_buttons;
     GuiButton* hack_target_button;
     GuiToggleButton* link_to_science_button;

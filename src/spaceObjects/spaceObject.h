@@ -205,11 +205,8 @@ public:
     string getFaction() { return factionInfo[this->faction_id]->getName(); }
     void setFactionId(unsigned int faction_id) { this->faction_id = faction_id; }
     unsigned int getFactionId() { return faction_id; }
-    void setReputationPoints(float amount);
-    int getReputationPoints();
-    bool takeReputationPoints(float amount);
-    void removeReputationPoints(float amount);
-    void addReputationPoints(float amount);
+    bool takeReputationPoints(float amount){ return true;}
+    void addReputationPoints(float amount){}
     void setCommsScript(string script_name) { this->comms_script_name = script_name; this->comms_script_callback.clear(); }
     void setCommsFunction(ScriptSimpleCallback callback) { this->comms_script_name = ""; this->comms_script_callback = callback; }
     bool areEnemiesInRange(float range);
