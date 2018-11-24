@@ -3,8 +3,7 @@
 
 #include "playerInfo.h"
 #include "gui/gui2_autolayout.h"
-#include "spaceObjects/playerSpaceship.h"
-
+class PlayerSpaceship;
 class GuiCustomShipFunctions : public GuiAutoLayout
 {
 private:    

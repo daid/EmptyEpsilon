@@ -5,6 +5,7 @@
 #include "shipTemplate.h"
 #include "spaceObjects/playerSpaceship.h"
 
+class PlayerSpaceship;
 class GuiPowerDamageIndicator : public GuiElement
 {
 public:

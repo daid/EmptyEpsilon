@@ -42,3 +42,4 @@ logs
 .idea
 .vscode
 scripts_docs.html
+*.html

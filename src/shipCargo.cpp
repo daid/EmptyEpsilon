@@ -22,13 +22,13 @@ ShipCargo::ShipCargo(P<ShipTemplate> ship_template) : ShipCargo()
 
 ShipCargo::ShipCargo(P<SpaceShip> ship) : ShipCargo()
 {
-    setEnergy(ship->getEnergy());
     float totalHeat = 0;
     for (unsigned int n = 0; n < SYS_COUNT; n++)
         totalHeat += ship->getSystemHeat(ESystem(n));
     setHeat(totalHeat);
-    template_name = ship->template_name;
+    template_name = ship->getTypeName();
     callsign = ship->getCallSign();
+    setEnergy(ship->getEnergy());
     hull_strength = ship->getHull();
 }
 

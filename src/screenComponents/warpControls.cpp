@@ -47,9 +47,8 @@ GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id, P<PlayerSpacesh
 void GuiWarpControls::onDraw(sf::RenderTarget& window)
 {
     // Update the label with the current warp factor.
-    if (target_spaceship){
+    if (target_spaceship)
         label->setValue(string(target_spaceship->current_warp, 1));
-    }
 }
 
 void GuiWarpControls::onHotkey(const HotkeyResult& key)

@@ -2,8 +2,7 @@
 #define DOCKING_BUTTON_H
 
 #include "gui/gui2_button.h"
-#include "spaceObjects/playerSpaceship.h"
-
+class PlayerSpaceship;
 class SpaceObject;
 class GuiDockingButton : public GuiButton
 {

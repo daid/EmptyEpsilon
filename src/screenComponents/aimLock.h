@@ -3,10 +3,11 @@
 
 #include "gui/gui2_togglebutton.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "P.h"
 
 class GuiMissileTubeControls;
 class GuiRotationDial;
-
+class PlayerSpaceship;
 class AimLockButton : public GuiToggleButton
 {
 private:

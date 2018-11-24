@@ -469,6 +469,8 @@ void ShipSelectionScreen::updateCrewTypeOptions()
         crew_position_button[tacticalRadar]->show();
         crew_position_button[scienceRadar]->show();
         crew_position_button[relayRadar]->show();
+        crew_position_button[dronePilot]->show();
+        crew_position_button[dockMaster]->show();
         break;
     case 4:
         main_screen_button->hide();

@@ -4,6 +4,7 @@
 #include "gui/gui2_element.h"
 #include "spaceObjects/playerSpaceship.h"
 
+class PlayerSpaceship;
 class GuiKeyValueDisplay;
 class GuiSlider;
 

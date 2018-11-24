@@ -2,6 +2,7 @@
 
 #include "playerInfo.h"
 #include "spaceObjects/shipTemplateBasedObject.h"
+#include "spaceObjects/playerSpaceship.h"
 #include "screenComponents/customShipFunctions.h"
 
 #include "gui/gui2_listbox.h"

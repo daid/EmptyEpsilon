@@ -5,7 +5,7 @@
 
 class GuiSnapSlider2D;
 class GuiProgressbar;
-
+class PlayerSpaceship;
 class GuiCombatManeuver : public GuiElement
 {
 private:

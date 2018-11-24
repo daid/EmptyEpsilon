@@ -3,8 +3,6 @@
 #include "screens/crewStationScreen.h"
 
 #include "screens/extra/navigationScreen.h"
-#include "screens/extra/droneOperatorScreen.h"
-#include "screens/extra/dockMasterScreen.h"
 
 #include "screens/crew6/helmsScreen.h"
 #include "screens/crew6/weaponsScreen.h"
@@ -22,6 +20,8 @@
 #include "screens/extra/powerManagement.h"
 #include "screens/extra/databaseScreen.h"
 #include "screens/extra/commsScreen.h"
+#include "screens/extra/droneOperatorScreen.h"
+#include "screens/extra/dockMasterScreen.h"
 
 #include "screens/extra/shipLogScreen.h"
 
@@ -138,7 +138,7 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new ScienceScreen(screen), scienceOfficer, getCrewPositionName(scienceOfficer), getCrewPositionIcon(scienceOfficer));
         if (crew_position[relayOfficer])
             screen->addStationTab(new RelayScreen(screen), relayOfficer, getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
-        
+
         //Crew 4/3
         if (crew_position[tacticalOfficer])
             screen->addStationTab(new TacticalScreen(screen), tacticalOfficer, getCrewPositionName(tacticalOfficer), getCrewPositionIcon(tacticalOfficer));

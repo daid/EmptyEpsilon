@@ -5,6 +5,7 @@
 #include "missileWeaponData.h"
 #include "spaceObjects/playerSpaceship.h"
 
+class PlayerSpaceship;
 class GuiButton;
 class GuiProgressbar;
 class GuiLabel;
