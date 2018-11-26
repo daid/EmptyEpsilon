@@ -174,12 +174,6 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool has_comms)
     });
     launch_probe_button->setSize(GuiElement::GuiSizeMax, 50);
 
-    // Launch drone button.
-    launch_drone_button = new GuiButton(option_buttons, "LAUNCH_DRONE_BUTTON", "Launch Drone", [this]() {
-        my_spaceship->commandLaunchCargo(2); 
-    });
-    launch_drone_button->setSize(GuiElement::GuiSizeMax, 50);
-
     // Bottom layout.
     GuiAutoLayout* layout = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutVerticalBottomToTop);
     layout->setPosition(-20, -70, ABottomRight)->setSize(300, GuiElement::GuiSizeMax);
