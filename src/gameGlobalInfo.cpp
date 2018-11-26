@@ -43,7 +43,7 @@ GameGlobalInfo::GameGlobalInfo()
     allow_main_screen_global_range_radar = true;
     allow_main_screen_ship_state = true;
     terrain.defined = false;
-    intercept_all_comms_to_gm = false;
+    intercept_all_comms_to_gm = CGI_None;
 
     registerMemberReplication(&scanning_complexity);
     registerMemberReplication(&global_message);

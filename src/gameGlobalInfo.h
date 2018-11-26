@@ -42,7 +42,12 @@ enum EScanningComplexity
     SC_Normal,
     SC_Advanced
 };
-
+enum ECommsGmInterception
+{
+    CGI_None = 0,
+    CGI_Temp,
+    CGI_Always
+};
 class GameGlobalInfo : public MultiplayerObject, public Updatable
 {
     P<GameStateLogger> state_logger;
@@ -93,7 +98,7 @@ public:
     //List of script functions that can be called from the GM interface (Server only!)
     std::list<GMScriptCallback> gm_callback_functions;
     //When active, all comms request goto the GM as chat, and normal scripted converstations are disabled. This does not disallow player<->player ship comms.
-    bool intercept_all_comms_to_gm;
+    ECommsGmInterception intercept_all_comms_to_gm;
 
     TerrainInfo terrain;
     GameGlobalInfo();
