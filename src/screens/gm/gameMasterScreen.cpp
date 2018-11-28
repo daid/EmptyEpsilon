@@ -1,6 +1,7 @@
 #include "main.h"
 #include "gameGlobalInfo.h"
 #include "gameMasterScreen.h"
+#include "objectCreationView.h"
 #include "tweak.h"
 #include "chatDialog.h"
 #include "spaceObjects/cpuShip.h"
@@ -70,7 +71,7 @@ GameMasterScreen::GameMasterScreen()
     player_ship_selector->setPosition(270, -20, ABottomLeft)->setSize(350, 50);
 
     create_button = new GuiButton(this, "CREATE_OBJECT_BUTTON", "Create...", [this]() {
-        object_creation_screen->show();
+        object_creation_view->show();
     });
     create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
 
@@ -185,8 +186,12 @@ GameMasterScreen::GameMasterScreen()
 
     global_message_entry = new GuiGlobalMessageEntry(this);
     global_message_entry->hide();
-    object_creation_screen = new GuiObjectCreationScreen(this);
-    object_creation_screen->hide();
+    object_creation_view = new GuiObjectCreationView(this, [this](){
+        create_button->hide();
+        cancel_create_button->show();
+        object_creation_view->hide();
+    });
+    object_creation_view->hide();
 }
 
 void GameMasterScreen::update(float delta)
@@ -325,7 +330,7 @@ void GameMasterScreen::onMouseDown(sf::Vector2f position)
     {
         if (cancel_create_button->isVisible())
         {
-            object_creation_screen->createObject(position);
+            object_creation_view->createObject(position);
         }else{
             click_and_drag_state = CD_BoxSelect;
             
@@ -541,100 +546,4 @@ GuiGlobalMessageEntry::GuiGlobalMessageEntry(GuiContainer* owner)
 bool GuiGlobalMessageEntry::onMouseDown(sf::Vector2f position)
 {   //Catch clicks.
     return true;
-}
-
-GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
-: GuiOverlay(gm_screen, "OBJECT_CREATE_SCREEN", sf::Color(0, 0, 0, 128))
-{
-    this->gm_screen = gm_screen;
-    
-    GuiPanel* box = new GuiPanel(this, "FRAME");
-    box->setPosition(0, 0, ACenter)->setSize(1000, 500);
-
-    faction_selector = new GuiSelector(box, "FACTION_SELECTOR", nullptr);
-    for(P<FactionInfo> info : factionInfo)
-        faction_selector->addEntry(info->getName(), info->getName());
-    faction_selector->setSelectionIndex(0);
-    faction_selector->setPosition(20, 20, ATopLeft)->setSize(300, 50);
-    
-    float y = 20;
-    std::vector<string> template_names = ShipTemplate::getTemplateNameList(ShipTemplate::Station);
-    std::sort(template_names.begin(), template_names.end());
-    for(string template_name : template_names)
-    {
-        (new GuiButton(box, "CREATE_STATION_" + template_name, template_name, [this, template_name]() {
-            setCreateScript("SpaceStation():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + template_name + "\")");
-        }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
-        y += 30;
-    }
-    
-    (new GuiButton(box, "CREATE_WARP_JAMMER", "Warp Jammer", [this]() {
-        setCreateScript("WarpJammer():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + ")");
-    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
-    y += 30;
-    (new GuiButton(box, "CREATE_MINE", "Mine", [this]() {
-        setCreateScript("Mine():setFactionId(" + string(faction_selector->getSelectionIndex()) + ")");
-    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
-    y += 30;
-    // Default supply drop values copied from scripts/supply_drop.lua
-    (new GuiButton(box, "CREATE_SUPPLY_DROP", "Supply Drop", [this]() {
-        setCreateScript("SupplyDrop():setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setEnergy(500):setWeaponStorage('Nuke', 1):setWeaponStorage('Homing', 4):setWeaponStorage('Mine', 2):setWeaponStorage('EMP', 1)");
-    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
-    y += 30;
-    (new GuiButton(box, "CREATE_ASTEROID", "Asteroid", [this]() {
-        setCreateScript("Asteroid()");
-    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
-    y += 30;
-    (new GuiButton(box, "CREATE_BLACKHOLE", "BlackHole", [this]() {
-        setCreateScript("BlackHole()");
-    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
-    y += 30;
-    (new GuiButton(box, "CREATE_NEBULA", "Nebula", [this]() {
-        setCreateScript("Nebula()");
-    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
-    y += 30;
-    (new GuiButton(box, "CREATE_WORMHOLE", "Worm Hole", [this]() {
-        setCreateScript("WormHole()");
-    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
-    y += 30;
-    y = 20;
-    template_names = ShipTemplate::getTemplateNameList(ShipTemplate::Ship);
-    std::sort(template_names.begin(), template_names.end());
-    GuiListbox* listbox = new GuiListbox(box, "CREATE_SHIPS", [this](int index, string value)
-    {
-        setCreateScript("CpuShip():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + value + "\"):orderRoaming()");
-    });
-    listbox->setTextSize(20)->setButtonHeight(30)->setPosition(-20, 20, ATopRight)->setSize(300, 460);
-    for(string template_name : template_names)
-    {
-        listbox->addEntry(template_name, template_name);
-    }
-    
-    (new GuiButton(box, "CLOSE_BUTTON", "Cancel", [this]() {
-        create_script = "";
-        this->hide();
-    }))->setPosition(20, -20, ABottomLeft)->setSize(300, 50);
-}
-
-bool GuiObjectCreationScreen::onMouseDown(sf::Vector2f position)
-{   //Catch clicks.
-    return true;
-}
-
-void GuiObjectCreationScreen::setCreateScript(string script)
-{
-    create_script = script;
-    gm_screen->create_button->hide();
-    gm_screen->cancel_create_button->show();
-    hide();
-}
-
-void GuiObjectCreationScreen::createObject(sf::Vector2f position)
-{
-    if (create_script == "")
-        return;
-    
-    P<ScriptObject> so = new ScriptObject();
-    so->runCode(create_script + ":setPosition("+string(position.x)+","+string(position.y)+")");
-    so->destroy();
 }
