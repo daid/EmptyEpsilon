@@ -35,3 +35,8 @@ thumbs.db
 *.swp
 
 options.ini
+
+
+.vscode
+logs
+*.log
