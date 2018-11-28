@@ -2,6 +2,7 @@
 #include "gameGlobalInfo.h"
 #include "gameMasterScreen.h"
 #include "objectCreationView.h"
+#include "globalMessageEntryView.h"
 #include "tweak.h"
 #include "chatDialog.h"
 #include "spaceObjects/cpuShip.h"
@@ -184,7 +185,7 @@ GameMasterScreen::GameMasterScreen()
     object_tweak_dialog = new GuiObjectTweak(this, TW_Object);
     object_tweak_dialog->hide();
 
-    global_message_entry = new GuiGlobalMessageEntry(this);
+    global_message_entry = new GuiGlobalMessageEntryView(this);
     global_message_entry->hide();
     object_creation_view = new GuiObjectCreationView(this, [this](){
         create_button->hide();
@@ -517,33 +518,4 @@ string GameMasterScreen::getScriptExport(bool selected_only)
         output += "    " + line + "\n";
     }
     return output;
-}
-
-GuiGlobalMessageEntry::GuiGlobalMessageEntry(GuiContainer* owner)
-: GuiOverlay(owner, "GLOBAL_MESSAGE_ENTRY", sf::Color(0, 0, 0, 128))
-{
-    GuiPanel* box = new GuiPanel(this, "FRAME");
-    box->setPosition(0, 0, ACenter)->setSize(800, 150);
-    
-    message_entry = new GuiTextEntry(box, "MESSAGE_ENTRY", "");
-    message_entry->setPosition(0, 20, ATopCenter)->setSize(700, 50);
-    
-    (new GuiButton(box, "CLOSE_BUTTON", "Cancel", [this]() {
-        this->hide();
-    }))->setPosition(20, -20, ABottomLeft)->setSize(300, 50);
-
-    (new GuiButton(box, "SEND_BUTTON", "Send", [this]() {
-        string message = message_entry->getText();
-        if (message.length() > 0)
-        {
-            gameGlobalInfo->global_message = message;
-            gameGlobalInfo->global_message_timeout = 5.0;
-        }
-        this->hide();
-    }))->setPosition(-20, -20, ABottomRight)->setSize(300, 50);
-}
-
-bool GuiGlobalMessageEntry::onMouseDown(sf::Vector2f position)
-{   //Catch clicks.
-    return true;
 }
