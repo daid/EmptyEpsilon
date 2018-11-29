@@ -1,5 +1,5 @@
 #include "globalMessageEntryView.h"
-#include "gameGlobalInfo.h"
+#include "GMActions.h"
 
 #include "gui/gui2_panel.h"
 #include "gui/gui2_textentry.h"
@@ -20,11 +20,7 @@ GuiGlobalMessageEntryView::GuiGlobalMessageEntryView(GuiContainer* owner)
 
     (new GuiButton(box, "SEND_BUTTON", "Send", [this]() {
         string message = message_entry->getText();
-        if (message.length() > 0)
-        {
-            gameGlobalInfo->global_message = message;
-            gameGlobalInfo->global_message_timeout = 5.0;
-        }
+        gameMasterActions->commandSendGlobalMessage(message);
         this->hide();
     }))->setPosition(-20, -20, ABottomRight)->setSize(300, 50);
 }

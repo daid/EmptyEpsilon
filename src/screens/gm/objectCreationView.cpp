@@ -1,5 +1,5 @@
 #include "objectCreationView.h"
-#include "engine.h"
+#include "GMActions.h"
 #include "factionInfo.h"
 #include "shipTemplate.h"
 #include "gui/gui2_panel.h"
@@ -93,8 +93,5 @@ void GuiObjectCreationView::createObject(sf::Vector2f position)
 {
     if (create_script == "")
         return;
-    
-    P<ScriptObject> so = new ScriptObject();
-    so->runCode(create_script + ":setPosition("+string(position.x)+","+string(position.y)+")");
-    so->destroy();
+    gameMasterActions->commandRunScript(create_script + ":setPosition("+string(position.x)+","+string(position.y)+")");
 }

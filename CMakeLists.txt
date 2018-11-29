@@ -88,6 +88,7 @@ set(SOURCES
 	src/commsScriptInterface.cpp
 	src/modelData.cpp
 	src/gameGlobalInfo.cpp
+	src/GMActions.cpp
 	src/script.cpp
 	src/playerInfo.cpp
 	src/gameStateLogger.cpp
