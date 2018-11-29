@@ -1,5 +1,6 @@
 #include "main.h"
 #include "gameGlobalInfo.h"
+#include "GMActions.h"
 #include "gameMasterScreen.h"
 #include "objectCreationView.h"
 #include "globalMessageEntryView.h"
@@ -42,8 +43,8 @@ GameMasterScreen::GameMasterScreen()
     });
     pause_button->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, ATopLeft)->setSize(250, 50);
 
-    intercept_comms_button = new GuiToggleButton(this, "INTERCEPT_COMMS_BUTTON", "Intercept all comms", [this](bool value) {
-        gameGlobalInfo->intercept_all_comms_to_gm = value;
+    intercept_comms_button = new GuiToggleButton(this, "INTERCEPT_COMMS_BUTTON", "Intercept all comms", [](bool value) {
+        gameMasterActions->commandInterceptAllCommsToGm(value);
     });
     intercept_comms_button->setValue(gameGlobalInfo->intercept_all_comms_to_gm)->setTextSize(20)->setPosition(300, 20, ATopLeft)->setSize(200, 25);
     
@@ -132,16 +133,7 @@ GameMasterScreen::GameMasterScreen()
     gm_script_options = new GuiListbox(this, "GM_SCRIPT_OPTIONS", [this](int index, string value)
     {
         gm_script_options->setSelectionIndex(-1);
-        int n = 0;
-        for(GMScriptCallback& callback : gameGlobalInfo->gm_callback_functions)
-        {
-            if (n == index)
-            {
-                callback.callback.call();
-                return;
-            }
-            n++;
-        }
+        gameMasterActions->commandCallGmScript(index, getSelection());
     });
     gm_script_options->setPosition(20, 130, ATopLeft)->setSize(250, 500);
     
@@ -301,20 +293,20 @@ void GameMasterScreen::update(float delta)
         cnt++;
     }
 
-    bool gm_functions_changed = gm_script_options->entryCount() != int(gameGlobalInfo->gm_callback_functions.size());
-    auto it = gameGlobalInfo->gm_callback_functions.begin();
+    bool gm_functions_changed = gm_script_options->entryCount() != int(gameGlobalInfo->gm_callback_names.size());
+    auto it = gameGlobalInfo->gm_callback_names.begin();
     for(int n=0; !gm_functions_changed && n<gm_script_options->entryCount(); n++)
     {
-        if (gm_script_options->getEntryName(n) != it->name)
+        if (gm_script_options->getEntryName(n) != *it)
             gm_functions_changed = true;
         it++;
     }
     if (gm_functions_changed)
     {
         gm_script_options->setOptions({});
-        for(const GMScriptCallback& callback : gameGlobalInfo->gm_callback_functions)
+        for(const string& callbackName : gameGlobalInfo->gm_callback_names)
         {
-            gm_script_options->addEntry(callback.name, callback.name);
+            gm_script_options->addEntry(callbackName, callbackName);
         }
     }
 }
@@ -359,10 +351,7 @@ void GameMasterScreen::onMouseDrag(sf::Vector2f position)
         position -= (position - drag_previous_position);
         break;
     case CD_DragObjects:
-        for(P<SpaceObject> obj : targets.getTargets())
-        {
-            obj->setPosition(obj->getPosition() + (position - drag_previous_position));
-        }
+        gameMasterActions->commandMoveObjects(position - drag_previous_position, targets.getTargets());
         break;
     case CD_BoxSelect:
         box_selection_overlay->show();
