@@ -91,6 +91,7 @@ set(SOURCES
 	src/commsScriptInterface.cpp
 	src/modelData.cpp
 	src/gameGlobalInfo.cpp
+	src/GMActions.cpp
 	src/script.cpp
 	src/playerInfo.cpp
 	src/gameStateLogger.cpp
@@ -131,6 +132,8 @@ set(SOURCES
 	src/screens/extra/databaseScreen.cpp
 	src/screens/extra/shipLogScreen.cpp
 	src/screens/gm/gameMasterScreen.cpp
+	src/screens/gm/objectCreationView.cpp
+	src/screens/gm/globalMessageEntryView.cpp
 	src/screens/gm/chatDialog.cpp
 	src/screens/gm/tweak.cpp
 	src/screens/extra/droneOperatorScreen.cpp
