@@ -47,6 +47,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&allow_main_screen_tactical_radar);
     registerMemberReplication(&allow_main_screen_long_range_radar);
     registerMemberReplication(&gm_callback_names);
+    registerMemberReplication(&intercept_all_comms_to_gm);
 
     for(unsigned int n=0; n<factionInfo.size(); n++)
         reputation_points.push_back(0);

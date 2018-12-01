@@ -8,7 +8,6 @@
 #include "chatDialog.h"
 #include "spaceObjects/cpuShip.h"
 #include "spaceObjects/spaceStation.h"
-#include "spaceObjects/wormHole.h"
 #include "spaceObjects/zone.h"
 
 #include "screenComponents/radarView.h"
@@ -37,9 +36,9 @@ GameMasterScreen::GameMasterScreen()
     
     pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", "Pause", [this](bool value) {
         if (!value)
-            engine->setGameSpeed(1.0f);
+            gameMasterActions->commandSetGameSpeed(1.0f);
         else
-            engine->setGameSpeed(0.0f);
+            gameMasterActions->commandSetGameSpeed(0.0f);
     });
     pause_button->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, ATopLeft)->setSize(250, 50);
 
@@ -49,10 +48,7 @@ GameMasterScreen::GameMasterScreen()
     intercept_comms_button->setValue(gameGlobalInfo->intercept_all_comms_to_gm)->setTextSize(20)->setPosition(300, 20, ATopLeft)->setSize(200, 25);
     
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR", [this](int index, string value) {
-        for(P<SpaceObject> obj : targets.getTargets())
-        {
-            obj->setFactionId(index);
-        }
+        gameMasterActions->commandSetFactionId(index, targets.getTargets());
     });
     for(P<FactionInfo> info : factionInfo)
         faction_selector->addEntry(info->getName(), info->getName());
@@ -113,7 +109,8 @@ GameMasterScreen::GameMasterScreen()
             }
         }
     });
-    tweak_button->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->hide();
+    // tweaks only work on the server
+    tweak_button->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->setEnable(bool(game_server))->hide();
 
     player_comms_hail = new GuiButton(this, "HAIL_PLAYER", "Hail ship", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
@@ -142,24 +139,16 @@ GameMasterScreen::GameMasterScreen()
 
     (new GuiLabel(order_layout, "ORDERS_LABEL", "Orders:", 20))->addBackground()->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_IDLE", "Idle", [this]() {
-        for(P<SpaceObject> obj : targets.getTargets())
-            if (P<CpuShip>(obj))
-                P<CpuShip>(obj)->orderIdle();
+        gameMasterActions->commandOrderShip(SO_Idle, getSelection());
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_ROAMING", "Roaming", [this]() {
-        for(P<SpaceObject> obj : targets.getTargets())
-            if (P<CpuShip>(obj))
-                P<CpuShip>(obj)->orderRoaming();
+        gameMasterActions->commandOrderShip(SO_Roaming, getSelection());
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_STAND_GROUND", "Stand ground", [this]() {
-        for(P<SpaceObject> obj : targets.getTargets())
-            if (P<CpuShip>(obj))
-                P<CpuShip>(obj)->orderStandGround();
+        gameMasterActions->commandOrderShip(SO_StandGround, getSelection());
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", "Defend location", [this]() {
-        for(P<SpaceObject> obj : targets.getTargets())
-            if (P<CpuShip>(obj))
-                P<CpuShip>(obj)->orderDefendLocation(obj->getPosition());
+        gameMasterActions->commandOrderShip(SO_DefendLocation, getSelection());
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
 
     chat_layer = new GuiElement(this, "");
@@ -309,6 +298,8 @@ void GameMasterScreen::update(float delta)
             gm_script_options->addEntry(callbackName, callbackName);
         }
     }
+    pause_button->setValue(engine->getGameSpeed() == 0.0f);
+    intercept_comms_button->setValue(gameGlobalInfo->intercept_all_comms_to_gm);
 }
 
 void GameMasterScreen::onMouseDown(sf::Vector2f position)
@@ -372,64 +363,7 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
         {
             //Right click
             bool shift_down = InputHandler::keyboardIsDown(sf::Keyboard::LShift) || InputHandler::keyboardIsDown(sf::Keyboard::RShift);
-            P<SpaceObject> target;
-            PVector<Collisionable> list = CollisionManager::queryArea(position, position);
-            foreach(Collisionable, collisionable, list)
-            {
-                P<SpaceObject> space_object = collisionable;
-                if (space_object)
-                {
-                    if (!target || sf::length(position - space_object->getPosition()) < sf::length(position - target->getPosition()))
-                        target = space_object;
-                }
-            }
-
-            sf::Vector2f upper_bound(-std::numeric_limits<float>::max(), -std::numeric_limits<float>::max());
-            sf::Vector2f lower_bound(std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
-            for(P<SpaceObject> obj : targets.getTargets())
-            {
-                P<CpuShip> cpu_ship = obj;
-                if (!cpu_ship)
-                    continue;
-                
-                lower_bound.x = std::min(lower_bound.x, obj->getPosition().x);
-                lower_bound.y = std::min(lower_bound.y, obj->getPosition().y);
-                upper_bound.x = std::max(upper_bound.x, obj->getPosition().x);
-                upper_bound.y = std::max(upper_bound.y, obj->getPosition().y);
-            }
-            sf::Vector2f objects_center = (upper_bound + lower_bound) / 2.0f;
-
-            for(P<SpaceObject> obj : targets.getTargets())
-            {
-                P<CpuShip> cpu_ship = obj;
-                P<WormHole> wormhole = obj;
-                if (cpu_ship)
-                {
-                    if (target && target != obj && target->canBeTargetedBy(obj))
-                    {
-                        if (obj->isEnemy(target))
-                        {
-                            cpu_ship->orderAttack(target);
-                        }else{
-                            if (!shift_down && target->canBeDockedBy(cpu_ship))
-                                cpu_ship->orderDock(target);
-                            else
-                                cpu_ship->orderDefendTarget(target);
-                        }
-                    }else{
-                        if (shift_down)
-                            cpu_ship->orderFlyTowardsBlind(position + (obj->getPosition() - objects_center));
-                        else
-                            cpu_ship->orderFlyTowards(position + (obj->getPosition() - objects_center));
-                    }
-                }
-                else if (wormhole)
-                {
-                    wormhole->setTargetPosition(position);
-                }
-                
-                
-            }
+            gameMasterActions->commandContextualGoTo(position, shift_down, targets.getTargets());
         }
         break;
     case CD_BoxSelect:
@@ -458,16 +392,11 @@ void GameMasterScreen::onKey(sf::Event::KeyEvent key, int unicode)
     switch(key.code)
     {
     case sf::Keyboard::Delete:
-        for(P<SpaceObject> obj : targets.getTargets())
-        {
-            if (obj)
-                obj->destroy();
-        }
+        gameMasterActions->commandDestroy(targets.getTargets());
         break;
     case sf::Keyboard::F5:
         Clipboard::setClipboard(getScriptExport(false));
         break;
-
     //TODO: This is more generic code and is duplicated.
     case sf::Keyboard::Escape:
     case sf::Keyboard::Home:
@@ -475,8 +404,10 @@ void GameMasterScreen::onKey(sf::Event::KeyEvent key, int unicode)
         returnToShipSelection();
         break;
     case sf::Keyboard::P:
-        if (game_server)
-            engine->setGameSpeed(0.0);
+        if (engine->getGameSpeed() == 0.0f)
+            gameMasterActions->commandSetGameSpeed(1.0f);
+        else
+            gameMasterActions->commandSetGameSpeed(0.0f);
         break;
     default:
         break;

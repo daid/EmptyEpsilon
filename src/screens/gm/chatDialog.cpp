@@ -3,6 +3,7 @@
 #include "spaceObjects/playerSpaceship.h"
 
 #include "screenComponents/radarView.h"
+#include "GMActions.h"
 
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_scrolltext.h"
@@ -17,12 +18,7 @@ GameMasterChatDialog::GameMasterChatDialog(GuiContainer* owner, GuiRadarView* ra
     text_entry->setTextSize(23)->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 30);
     text_entry->enterCallback([this](string text){
         if (this->player)
-        {
-            if (this->player->isCommsChatOpenToGM())
-                this->player->addCommsIncommingMessage(text_entry->getText());
-            else
-                this->player->hailCommsByGM(text_entry->getText());
-        }
+            gameMasterActions->commandSendCommToPlayerShip(this->player, text_entry->getText());
         text_entry->setText("");
     });
     
@@ -102,7 +98,7 @@ void GameMasterChatDialog::onClose()
 {
     if (player && (player->isCommsChatOpenToGM() || player->isCommsBeingHailedByGM()))
     {
-        player->closeComms();
+        player->commandCloseTextComm();
     }
     hide();
 }
