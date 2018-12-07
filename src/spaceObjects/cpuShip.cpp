@@ -235,7 +235,8 @@ void CpuShip::orderDock(P<SpaceObject> object)
 void CpuShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
     SpaceShip::drawOnGMRadar(window, position, scale, long_range);
-    ai->drawOnGMRadar(window, position, scale);
+    if (ai)
+        ai->drawOnGMRadar(window, position, scale);
 }
 
 std::unordered_map<string, string> CpuShip::getGMInfo()
