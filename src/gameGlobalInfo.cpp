@@ -3,6 +3,14 @@
 #include "resources.h"
 #include <regex>
 
+static inline sf::Packet& operator << (sf::Packet& packet, const ECommsGmInterception& cgi) { return packet << int(cgi); }
+static inline sf::Packet& operator >> (sf::Packet& packet, ECommsGmInterception& cgi) { 
+    int value;
+    packet >> value;
+    cgi = ECommsGmInterception(value);
+    return packet;
+}
+
 P<GameGlobalInfo> gameGlobalInfo;
 
 REGISTER_MULTIPLAYER_CLASS(GameGlobalInfo, "GameGlobalInfo")
