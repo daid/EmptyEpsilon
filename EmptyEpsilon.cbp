@@ -454,8 +454,6 @@
 		<Unit filename="EmptyEpsilon.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
-		<Unit filename="src/GMScriptCallback.cpp" />
-		<Unit filename="src/GMScriptCallback.h" />
 		<Unit filename="src/ai/ai.cpp" />
 		<Unit filename="src/ai/ai.h" />
 		<Unit filename="src/ai/aiFactory.cpp" />
@@ -475,6 +473,8 @@
 		<Unit filename="src/featureDefs.h" />
 		<Unit filename="src/gameGlobalInfo.cpp" />
 		<Unit filename="src/gameGlobalInfo.h" />
+		<Unit filename="src/GMActions.cpp" />
+		<Unit filename="src/GMActions.h" />
 		<Unit filename="src/gameStateLogger.cpp" />
 		<Unit filename="src/gameStateLogger.h" />
 		<Unit filename="src/gui/colorConfig.cpp" />
@@ -732,6 +732,10 @@
 		<Unit filename="src/screens/gm/chatDialog.h" />
 		<Unit filename="src/screens/gm/gameMasterScreen.cpp" />
 		<Unit filename="src/screens/gm/gameMasterScreen.h" />
+		<Unit filename="src/screens/gm/objectCreationView.cpp" />
+		<Unit filename="src/screens/gm/objectCreationView.h" />
+		<Unit filename="src/screens/gm/globalMessageEntryView.cpp" />
+		<Unit filename="src/screens/gm/globalMessageEntryView.h" />
 		<Unit filename="src/screens/gm/tweak.cpp" />
 		<Unit filename="src/screens/gm/tweak.h" />
 		<Unit filename="src/screens/extra/navigationScreen.cpp" />

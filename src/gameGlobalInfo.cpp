@@ -58,6 +58,8 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&allow_main_screen_long_range_radar);
     registerMemberReplication(&allow_main_screen_global_range_radar);
     registerMemberReplication(&allow_main_screen_ship_state);
+    registerMemberReplication(&gm_callback_names);
+    registerMemberReplication(&intercept_all_comms_to_gm);
 
 }
 
