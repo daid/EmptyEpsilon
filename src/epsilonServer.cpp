@@ -1,12 +1,14 @@
 #include "epsilonServer.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
+#include "GMActions.h"
 #include "main.h"
 
 EpsilonServer::EpsilonServer()
 : GameServer("Server", VERSION_NUMBER)
 {
     new GameGlobalInfo();
+    new GameMasterActions();
     PlayerInfo* info = new PlayerInfo();
     info->client_id = 0;
     my_player_info = info;
@@ -45,6 +47,8 @@ void disconnectFromServer()
         game_server->destroy();
     if (gameGlobalInfo)
         gameGlobalInfo->destroy();
+    if (gameMasterActions)
+        gameMasterActions->destroy();
     foreach(PlayerInfo, i, player_info_list)
         i->destroy();
     if (my_player_info)
