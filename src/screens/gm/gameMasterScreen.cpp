@@ -65,28 +65,28 @@ GameMasterScreen::GameMasterScreen()
         if (ship)
             target = ship;
         main_radar->setViewPosition(ship->getPosition());
-        if(!sector_name_custom)
-            sector_name_text->setText(getSectorName(ship->getPosition()));
+        if(!position_text_custom)
+            position_text->setText(getStringFromPosition(ship->getPosition()));
         targets.set(ship);
     });
     player_ship_selector->setPosition(270, -20, ABottomLeft)->setSize(350, 50);
 
-    sector_name_custom = false;
-    sector_name_text = new GuiTextEntry(this, "SECTOR_NAME_TEXT", "");
-    sector_name_text->setPosition(620, -20, ABottomLeft)->setSize(250, 50);
-    sector_name_text->callback([this](string text){
-        sector_name_custom = true;
+    position_text_custom = false;
+    position_text = new GuiTextEntry(this, "SECTOR_NAME_TEXT", "");
+    position_text->setPosition(620, -20, ABottomLeft)->setSize(250, 50);
+    position_text->callback([this](string text){
+        position_text_custom = true;
     });
-    sector_name_text->validator(isValidSectorName);
-    sector_name_text->enterCallback([this](string text){
-        sector_name_custom = false;
-        if (sector_name_text->isValid())
+    position_text->validator(isValidPositionString);
+    position_text->enterCallback([this](string text){
+        position_text_custom = false;
+        if (position_text->isValid())
         {
-            sf::Vector2f pos = getSectorPosition(text);
+            sf::Vector2f pos = getPositionFromSring(text);
             main_radar->setViewPosition(pos);
         }
     });
-    sector_name_text->setText(getSectorName(main_radar->getViewPosition()));
+    position_text->setText(getStringFromPosition(main_radar->getViewPosition()));
     create_button = new GuiButton(this, "CREATE_OBJECT_BUTTON", "Create...", [this]() {
         object_creation_view->show();
     });
@@ -363,8 +363,8 @@ void GameMasterScreen::onMouseDrag(sf::Vector2f position)
     case CD_DragView:
         click_and_drag_state = CD_DragView;
         main_radar->setViewPosition(main_radar->getViewPosition() - (position - drag_previous_position));
-        if(!sector_name_custom)
-            sector_name_text->setText(getSectorName(main_radar->getViewPosition()));
+        if(!position_text_custom)
+            position_text->setText(getStringFromPosition(main_radar->getViewPosition()));
         position -= (position - drag_previous_position);
         break;
     case CD_DragObjects:

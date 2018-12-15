@@ -32,8 +32,8 @@ private:
     GuiAutoLayout* view_controls;
     GuiButton* delete_waypoint_button;
 
-    bool sector_name_custom;
-    GuiTextEntry* sector_name_text;
+    bool position_text_custom;
+    GuiTextEntry* position_text;
 
     GuiSlider* zoom_slider;
     GuiLabel* zoom_label;

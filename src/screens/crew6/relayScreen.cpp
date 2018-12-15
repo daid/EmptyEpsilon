@@ -43,11 +43,11 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool has_comms)
         [this](sf::Vector2f position) { //drag
             if (mode == TargetSelection)
             {
-                sector_name_custom = false;
+                position_text_custom = false;
                 sf::Vector2f newPosition = radar->getViewPosition() - (position - mouse_down_position);
                 radar->setViewPosition(newPosition);
-                if(!sector_name_custom)
-                    sector_name_text->setText(getSectorName(newPosition));
+                if(!position_text_custom)
+                    position_text->setText(getStringFromPosition(newPosition));
             }
             if (mode == MoveWaypoint && my_spaceship)
                 my_spaceship->commandMoveWaypoint(drag_waypoint_index, position);
@@ -102,22 +102,22 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool has_comms)
     zoom_label = new GuiLabel(zoom_slider, "", "Zoom: " + string(max_distance / radar->getDistance(), 1.0f) + "x", 30);
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    sector_name_custom = false;
-    sector_name_text = new GuiTextEntry(view_controls, "SECTOR_NAME_TEXT", "");
-    sector_name_text->setSize(GuiElement::GuiSizeMax, 50);
-    sector_name_text->callback([this](string text){
-        sector_name_custom = true;
+    position_text_custom = false;
+    position_text = new GuiTextEntry(view_controls, "SECTOR_NAME_TEXT", "");
+    position_text->setSize(GuiElement::GuiSizeMax, 50);
+    position_text->callback([this](string text){
+        position_text_custom = true;
     });
-    sector_name_text->validator(isValidSectorName);
-    sector_name_text->enterCallback([this](string text){
-        sector_name_custom = false;
-        if (sector_name_text->isValid())
+    position_text->validator(isValidPositionString);
+    position_text->enterCallback([this](string text){
+        position_text_custom = false;
+        if (position_text->isValid())
         {
-            sf::Vector2f pos = getSectorPosition(text);
+            sf::Vector2f pos = getPositionFromSring(text);
             radar->setViewPosition(pos);
         }
     });
-    sector_name_text->setText(getSectorName(radar->getViewPosition()));
+    position_text->setText(getStringFromPosition(radar->getViewPosition()));
     // Option buttons for comms, waypoints, and probes.
     option_buttons = new GuiAutoLayout(this, "BUTTONS", GuiAutoLayout::LayoutVerticalTopToBottom);
     option_buttons->setPosition(20, 50, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);

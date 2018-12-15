@@ -44,8 +44,8 @@ private:
     GuiButton* launch_probe_button;
     GuiButton* launch_drone_button;
     GuiAutoLayout* view_controls;
-    bool sector_name_custom;
-    GuiTextEntry* sector_name_text;
+    bool position_text_custom;
+    GuiTextEntry* position_text;
 
     GuiToggleButton* alert_level_button;
     std::vector<GuiButton*> alert_level_buttons;
