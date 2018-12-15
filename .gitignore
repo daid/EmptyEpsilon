@@ -41,5 +41,6 @@ options.ini
 *.html
 
 .vscode
-logs
+logs/*.txt
+logs/*.json
 *.log
