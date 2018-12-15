@@ -1445,8 +1445,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         {
             sf::Vector2f position;
             packet >> position;
-            if (waypoints.size() < 9)
-                waypoints.push_back(position);
+            waypoints.push_back(position);
         }
         break;
     case CMD_REMOVE_WAYPOINT:
