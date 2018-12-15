@@ -37,6 +37,8 @@ private:
     GuiKeyValueDisplay* info_faction;
 
     GuiAutoLayout* option_buttons;
+    GuiAutoLayout* waypoint_place_controls;
+    GuiToggleButton* waypoint_place_multiple_toggle;
     GuiButton* hack_target_button;
     GuiToggleButton* link_to_science_button;
     GuiToggleButton* link_to_3D_port_button;
@@ -59,6 +61,8 @@ private:
     const float max_distance = 10000000.0f;
     const float min_distance = 6250.0f;
 
+    void stopPlacingWaypoint();
+    void placeWaypoint(sf::Vector2f position);
 public:
     RelayScreen(GuiContainer* owner, bool has_comms = true);
 

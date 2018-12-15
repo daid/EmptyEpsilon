@@ -59,10 +59,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool has_comms)
                 targets.setToClosestTo(position, 1000, TargetsContainer::Targetable);
                 break;
             case WaypointPlacement:
-                if (my_spaceship)
-                    my_spaceship->commandAddWaypoint(position);
-                mode = TargetSelection;
-                option_buttons->show();
+                placeWaypoint(position);
                 break;
             case MoveWaypoint:
                 mode = TargetSelection;
@@ -122,6 +119,9 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool has_comms)
     option_buttons = new GuiAutoLayout(this, "BUTTONS", GuiAutoLayout::LayoutVerticalTopToBottom);
     option_buttons->setPosition(20, 50, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
 
+    waypoint_place_controls = new GuiAutoLayout(this, "WAYPOINT_PLACE_CONTROLS", GuiAutoLayout::LayoutVerticalTopToBottom);
+    waypoint_place_controls->setPosition(20, 50, ATopLeft)->setSize(250, GuiElement::GuiSizeMax)->setVisible(false);
+    
     // Open comms button.
     (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", &targets))->setSize(GuiElement::GuiSizeMax, 50);
 
@@ -157,7 +157,19 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool has_comms)
     (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", "Place Waypoint", [this]() {
         mode = WaypointPlacement;
         option_buttons->hide();
+        waypoint_place_controls->show();
     }))->setSize(GuiElement::GuiSizeMax, 50);
+
+    (new GuiButton(waypoint_place_controls, "WAYPOINT_PLACE_CANCEL_BUTTON", "Cancel",  [this]() {
+        stopPlacingWaypoint();
+    }))->setSize(GuiElement::GuiSizeMax, 50);
+
+    (new GuiButton(waypoint_place_controls, "WAYPOINT_PLACE_AT_CENTER_BUTTON", "At View Center",  [this]() {
+       placeWaypoint(radar->getViewPosition());
+    }))->setSize(GuiElement::GuiSizeMax, 50);
+
+    waypoint_place_multiple_toggle = new GuiToggleButton(waypoint_place_controls, "WAYPOINT_PLACE_MULTIPLE_BUTTON", "Place More",  [this](bool value) {});
+    waypoint_place_multiple_toggle->setSize(GuiElement::GuiSizeMax, 50);
 
     delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", "Delete Waypoint", [this]() {
         if (my_spaceship && targets.getWaypointIndex() >= 0)
@@ -209,6 +221,23 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool has_comms)
     new ShipsLog(this,"extern");
 	if (has_comms)
 		(new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+}
+
+void RelayScreen::placeWaypoint(sf::Vector2f position)
+{
+    if (my_spaceship)
+        my_spaceship->commandAddWaypoint(position);
+    if (!waypoint_place_multiple_toggle->getValue()){
+        stopPlacingWaypoint();
+    }
+}
+
+void RelayScreen::stopPlacingWaypoint()
+{
+    mode = TargetSelection;
+    waypoint_place_controls->hide();
+    option_buttons->show();
+    waypoint_place_multiple_toggle->setValue(false);
 }
 
 void RelayScreen::onDraw(sf::RenderTarget& window)
