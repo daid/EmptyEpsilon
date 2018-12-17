@@ -196,7 +196,7 @@ void HardwareController::update(float delta)
     {
         float value;
         bool active = false;
-        if (getVariableValue(state.variable, value))
+        if (getVariableValue(state.ship, state.variable, value))
         {
             switch(state.compare_operator)
             {
@@ -218,7 +218,7 @@ void HardwareController::update(float delta)
     {
         float value;
         bool trigger = false;
-        if (getVariableValue(event.trigger_variable, value))
+        if (getVariableValue(event.ship, event.trigger_variable, value))
         {
             if (event.previous_valid)
             {
@@ -275,7 +275,9 @@ void HardwareController::createNewHardwareMappingState(int channel_number, std::
     state.compare_operator = HardwareMappingState::Greater;
     state.compare_value = 0.0;
     state.channel_nr = channel_number;
-    
+    if (settings.find("ship") != settings.end())
+        state.ship = ShipFilter(settings["ship"]);
+
     for(HardwareMappingState::EOperator compare_operator : {HardwareMappingState::Less, HardwareMappingState::Greater, HardwareMappingState::Equal, HardwareMappingState::NotEqual})
     {
         string compare_string = "<";
@@ -324,7 +326,9 @@ void HardwareController::createNewHardwareMappingEvent(int channel_number, std::
     event.runtime = settings["runtime"].toFloat();
     event.triggered = false;
     event.previous_value = 0.0;
-    
+    if (settings.find("ship") != settings.end())
+        event.ship = ShipFilter(settings["ship"]);
+
     event.effect = createEffect(settings);
     if (event.effect)
     {
@@ -355,11 +359,11 @@ HardwareMappingEffect* HardwareController::createEffect(std::unordered_map<strin
 }
 
 #define SHIP_VARIABLE(name, formula) if (variable_name == name) { if (ship) { value = (formula); return true; } return false; }
-bool HardwareController::getVariableValue(string variable_name, float& value)
+bool HardwareController::getVariableValue(const ShipFilter& ship_filter, string variable_name, float& value)
 {
     P<PlayerSpaceship> ship = my_spaceship;
     if (!ship && gameGlobalInfo)
-        ship = gameGlobalInfo->getPlayerShip(0);
+        ship = ship_filter.findValidShip();
     
     if (variable_name == "Always")
     {

@@ -17,7 +17,7 @@ ShipFilter::ShipFilter(string ship_filter, ECrewPosition crew_position) : crew_p
     }
 }
 
-void ShipFilter::log()
+void ShipFilter::log() const
 {
     for (auto& entry : ship_filters) 
     {
@@ -25,20 +25,23 @@ void ShipFilter::log()
     }
 }
 
-P<PlayerSpaceship> ShipFilter::findValidShip()
+P<PlayerSpaceship> ShipFilter::findValidShip() const
 {
-    for (int n = 0; n < GameGlobalInfo::max_player_ships; n++)
+    if (gameGlobalInfo)
     {
-        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
-        if (isValidShip(ship))
+        for (int n = 0; n < GameGlobalInfo::max_player_ships; n++)
         {
-            return ship;
+            P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
+            if (isValidShip(ship))
+            {
+                return ship;
+            }
         }
     }
     return nullptr;
 }
 
-bool ShipFilter::isValidShip(P<PlayerSpaceship> ship)
+bool ShipFilter::isValidShip(P<PlayerSpaceship> ship) const
 {
     if (!ship || !ship->ship_template)
         return false;
