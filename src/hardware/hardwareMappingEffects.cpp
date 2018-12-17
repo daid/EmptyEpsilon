@@ -86,6 +86,9 @@ HardwareMappingEffectVariable::HardwareMappingEffectVariable(HardwareController*
 
 bool HardwareMappingEffectVariable::configure(std::unordered_map<string, string> settings)
 {
+    if (settings.find("ship") != settings.end())
+        ship_filter = ShipFilter(settings["ship"]);
+    
     if (settings.find("condition") != settings.end())
     {
         variable_name = settings["condition"];
@@ -120,7 +123,7 @@ bool HardwareMappingEffectVariable::configure(std::unordered_map<string, string>
 float HardwareMappingEffectVariable::onActive()
 {
     float input = 0.0;
-    controller->getVariableValue(variable_name, input);
+    controller->getVariableValue(ship_filter, variable_name, input);
     input = std::min(max_input, std::max(min_input, input));
     return Tween<float>::linear(input, min_input, max_input, min_output, max_output);
 }

@@ -3,6 +3,7 @@
 
 #include "engine.h"
 #include "hardwareOutputDevice.h"
+#include "shipFilter.h"
 
 class HardwareOutputDevice;
 class HardwareMappingEffect;
@@ -21,7 +22,8 @@ public:
     EOperator compare_operator;
     float compare_value;
     int channel_nr;
-    
+    ShipFilter ship;
+
     HardwareMappingEffect* effect;
 };
 class HardwareMappingEvent
@@ -43,7 +45,8 @@ public:
     bool previous_valid;
     float previous_value;
     int channel_nr;
-    
+    ShipFilter ship;
+
     HardwareMappingEffect* effect;
 };
 class HardwareController : public Updatable
@@ -62,7 +65,7 @@ public:
     
     virtual void update(float delta);
 
-    bool getVariableValue(string variable_name, float& value);
+    bool getVariableValue(const ShipFilter& ship_filter, string variable_name, float& value);
 private:
     void handleConfig(string section, std::unordered_map<string, string>& settings);
     void createNewHardwareMappingState(int channel_number, std::unordered_map<string, string>& settings);

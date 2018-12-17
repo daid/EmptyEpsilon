@@ -4,6 +4,7 @@
 #include <SFML/System.hpp>
 #include <unordered_map>
 #include "stringImproved.h"
+#include "shipFilter.h"
 
 class HardwareController;
 
@@ -59,6 +60,7 @@ class HardwareMappingEffectVariable : public HardwareMappingEffect
 {
 private:
     HardwareController* controller;
+    ShipFilter ship_filter;
     string variable_name;
     float min_input, max_input;
     float min_output, max_output;
