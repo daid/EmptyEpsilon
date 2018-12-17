@@ -92,6 +92,7 @@ set(SOURCES
 	src/script.cpp
 	src/playerInfo.cpp
 	src/gameStateLogger.cpp
+	src/shipFilter.cpp
 	src/shipTemplate.cpp
 	src/beamTemplate.cpp
 	src/missileWeaponData.cpp
