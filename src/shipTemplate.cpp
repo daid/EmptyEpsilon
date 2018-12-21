@@ -113,6 +113,7 @@ ShipTemplate::ShipTemplate()
     has_reactor = true;
     launcher_dock_count = 0;
     energy_dock_count = 0;
+    thermic_dock_count = 0;
 }
 
 void ShipTemplate::setBeamTexture(int index, string texture)
@@ -408,9 +409,10 @@ void ShipTemplate::addDrones(string template_name, int count)
     drones.push_back(DroneTemplate(template_name, count));
 }
 
-void ShipTemplate::setDocks(int launchers, int energy){
+void ShipTemplate::setDocks(int launchers, int energy, int thermic){
     launcher_dock_count = launchers;
     energy_dock_count = energy;
+    thermic_dock_count = thermic;
 }
 
 void ShipTemplate::setRadarTrace(string trace)
@@ -461,6 +463,7 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->drones = drones;
     result->launcher_dock_count = launcher_dock_count;
     result->energy_dock_count = energy_dock_count;
+    result->thermic_dock_count = thermic_dock_count;
     return result;
 }
 

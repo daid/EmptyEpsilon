@@ -249,11 +249,13 @@ void SpaceShip::applyTemplateValues()
     for(int n = 0; n < max_docks_count; n++)
     {
         if (n < ship_template->launcher_dock_count){
-            docks[n].setDockType(Launcher);
+            docks[n].setDockType(Dock_Launcher);
         } else if (n < ship_template->launcher_dock_count + ship_template->energy_dock_count){
-            docks[n].setDockType(Energy);
+            docks[n].setDockType(Dock_Energy);
+        } else if (n < ship_template->launcher_dock_count + ship_template->energy_dock_count + ship_template->thermic_dock_count){
+            docks[n].setDockType(Dock_Thermic);
         } else {
-            docks[n].setDockType(Disabled);
+            docks[n].setDockType(Dock_Disabled);
         }
     }
     int maxActiveDockIndex = ship_template->launcher_dock_count + ship_template->energy_dock_count;
@@ -1052,7 +1054,7 @@ bool SpaceShip::hasSystem(ESystem system)
         return impulse_max_speed > 0.0;
     case SYS_Docks:
     case SYS_Drones:
-        return docks[0].dock_type != Disabled;
+        return docks[0].dock_type != Dock_Disabled;
     }
     return true;
 }

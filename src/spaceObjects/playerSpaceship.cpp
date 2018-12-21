@@ -1487,7 +1487,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         break;
     case CMD_SET_DOCK_ENERGY_REQUEST:
         packet >> dockIndex;
-        if (docks[dockIndex].state == EDockState::Docked && docks[dockIndex].dock_type == Energy)
+        if (docks[dockIndex].state == EDockState::Docked && docks[dockIndex].dock_type == Dock_Energy)
         {
             float value;
             packet >> value;

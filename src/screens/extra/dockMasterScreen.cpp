@@ -44,7 +44,7 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
     // the index in the button list is assumed to equal the index of the dock
     for (int n = 0; n < max_docks_count; n++)
     {
-        if (my_spaceship->docks[n].dock_type != Disabled)
+        if (my_spaceship->docks[n].dock_type != Dock_Disabled)
         {
             string state = my_spaceship ? " (" + getDockStateName(my_spaceship->docks[n].state) + ")" : "";
             docks->addEntry("dock-" + std::to_string(n + 1) + state, "dock-" + std::to_string(n + 1) + " " + getDockTypeName(my_spaceship->docks[n].dock_type));
@@ -126,9 +126,9 @@ void DockMasterScreen::selectDock(int index)
     this->index = index;
     docks->setSelectionIndex(index);
     auto &dockData = my_spaceship->docks[index];
-    launch_button->setVisible(dockData.dock_type == Launcher);
-    energy_bar->setVisible(dockData.dock_type == Energy);
-    energy_slider->setVisible(dockData.dock_type == Energy);
+    launch_button->setVisible(dockData.dock_type == Dock_Launcher);
+    energy_bar->setVisible(dockData.dock_type == Dock_Energy);
+    energy_slider->setVisible(dockData.dock_type == Dock_Energy);
 }
 
 void DockMasterScreen::onDraw(sf::RenderTarget &window)
@@ -140,7 +140,7 @@ void DockMasterScreen::onDraw(sf::RenderTarget &window)
         for (int n = 0; n < max_docks_count; n++)
         {
             Dock &dockData = my_spaceship->docks[n];
-            if (dockData.dock_type != Disabled)
+            if (dockData.dock_type != Dock_Disabled)
             {
                 string state = " (" + getDockStateName(dockData.state) + ")";
                 string dockName = "d" + std::to_string(n + 1) + "-" + getDockTypeName(dockData.dock_type)[0];
