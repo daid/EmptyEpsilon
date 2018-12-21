@@ -47,6 +47,9 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer *owner)
     single_pilot_view = new SinglePilotView(this, selected_drone);
     single_pilot_view->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
+    connection_label = new GuiLabel(this, "CONNECTION_LABEL", "0%", 30);
+    connection_label->setPosition(0, -50, ABottomCenter)->setSize(460, 50);
+
     disconnect_button = new GuiButton(this, "DISCONNECT_BUTTON", "Disconnect", [this]() {disconnected();});
     disconnect_button->setPosition(0, 0, ABottomCenter)->setSize(400, 50);
     disconnect_button->moveToFront();
@@ -66,8 +69,14 @@ bool DroneOperatorScreen::isConnectable(P<PlayerSpaceship> ship)
     return ship 
     && ship->ship_template 
     && ship->ship_template->getType() == ShipTemplate::TemplateType::Drone 
-    && (ship->getPosition() - my_spaceship->getPosition()) < my_spaceship->getDronesControlRange() // in range
-    && ship->getSystemEffectiveness(SYS_Drones) > 0.5; // drone able to communicate
+    && ship->getFactionId() == my_spaceship->getFactionId()
+    && getConnectionQuality(ship) >= 0.01f; 
+}
+float DroneOperatorScreen::getConnectionQuality(P<PlayerSpaceship> ship)
+{
+    float rangeFactor = 1 - std::min(1.0f, (length(ship->getPosition() - my_spaceship->getPosition()) / my_spaceship->getDronesControlRange()));
+    float droneStateFactor = std::min(1.0f, ship->getSystemEffectiveness(SYS_Drones));
+    return rangeFactor * droneStateFactor;
 }
 void DroneOperatorScreen::onDraw(sf::RenderTarget &window)
 {
@@ -80,7 +89,7 @@ void DroneOperatorScreen::onDraw(sf::RenderTarget &window)
         {
             P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
             if (isConnectable(ship)) {
-                options.push_back(ship->getTypeName() + " " + ship->getCallSign());
+                options.push_back(ship->getTypeName() + " " + ship->getCallSign() + "(" + string(int(getConnectionQuality(ship) * 100)) + "%)");
                 values.push_back(ship->getMultiplayerId());
             }
         }
@@ -98,6 +107,7 @@ void DroneOperatorScreen::onDraw(sf::RenderTarget &window)
             droneSelection->show();
             single_pilot_view->hide();
             disconnect_button->hide();
+            connection_label->hide();
             break;
         case Piloting:
             no_drones_label->hide();
@@ -105,12 +115,15 @@ void DroneOperatorScreen::onDraw(sf::RenderTarget &window)
             single_pilot_view->show();
             disconnect_button->setText("Disconnect " + selected_drone->callsign);
             disconnect_button->show();
+            connection_label->setText(string(int(getConnectionQuality(selected_drone) * 100)) + "%");
+            connection_label->show();
             break;
         case NoDrones:
             no_drones_label->show();
             droneSelection->hide();
             single_pilot_view->hide();
             disconnect_button->hide();
+            connection_label->hide();
             break;
         }
     }
