@@ -13,8 +13,10 @@ class ShipCargo : public Cargo
 public:
   string callsign;
   string template_name;
+private:
   float hull_strength;
-  
+  float systems_health[SYS_COUNT];
+public:
   ShipCargo();
   ShipCargo(P<ShipTemplate> ship_template);
   ShipCargo(P<SpaceShip> cargo);
@@ -23,6 +25,9 @@ public:
   string getCallSign() { return callsign; }
   P<ShipTemplate> getTemplate() { return ShipTemplate::getTemplate(template_name); }
   float getMaxEnergy() { return getTemplate()->energy_storage_amount; }
+  float getMaxHealth() { return getTemplate()->hull * (SYS_COUNT + 1); }
+  float getHealth();
+  void addHealth(float amount);
   P<ModelData> getModel();
   bool onLaunch(sf::Vector2f position, float rotationAngle);
 };

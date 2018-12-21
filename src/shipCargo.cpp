@@ -2,6 +2,7 @@
 #include "spaceObjects/spaceship.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "gameGlobalInfo.h"
+#include "tween.h"
 
 REGISTER_MULTIPLAYER_CLASS(ShipCargo, "ShipCargo");
 
@@ -10,6 +11,9 @@ ShipCargo::ShipCargo() : Cargo("ShipCargo")
     registerMemberReplication(&callsign);
     registerMemberReplication(&template_name);
     registerMemberReplication(&hull_strength);
+    for(int n=0; n<SYS_COUNT; n++) {
+        registerMemberReplication(&systems_health[n]);
+    }
 }
 
 ShipCargo::ShipCargo(P<ShipTemplate> ship_template) : ShipCargo()
@@ -18,6 +22,9 @@ ShipCargo::ShipCargo(P<ShipTemplate> ship_template) : ShipCargo()
     callsign = "DRN-" + gameGlobalInfo->getNextShipCallsign();
     setEnergy(ship_template->energy_storage_amount);
     hull_strength = ship_template->hull;
+    for(int n=0; n<SYS_COUNT; n++) {
+        systems_health[n] = 1;
+    }
 }
 
 ShipCargo::ShipCargo(P<SpaceShip> ship) : ShipCargo()
@@ -26,6 +33,9 @@ ShipCargo::ShipCargo(P<SpaceShip> ship) : ShipCargo()
     callsign = ship->getCallSign();
     setEnergy(ship->getEnergy());
     hull_strength = ship->getHull();
+    for(int n=0; n<SYS_COUNT; n++) {
+        systems_health[n] = ship->systems[n].health;
+    }
 }
 
 P<ModelData> ShipCargo::getModel()
@@ -35,6 +45,26 @@ P<ModelData> ShipCargo::getModel()
         return ship_template->model_data;
     else
         return nullptr;
+}
+
+float ShipCargo::getHealth()
+{
+    const float maxHull = getTemplate()->hull;
+    float health = hull_strength;
+    for(int n=0; n<SYS_COUNT; n++) {
+        health += Tween<float>::linear(systems_health[n], -1, 1, 0, maxHull);
+    }
+    return health;
+}
+
+void ShipCargo::addHealth(float amount)
+{
+    const float maxHull = getTemplate()->hull;
+    const float normAmount = amount / getMaxHealth();
+    for(int n=0; n<SYS_COUNT; n++) {
+        systems_health[n] = std::min(1.0f, systems_health[n] + (2 * normAmount));
+    }
+    hull_strength = std::min(maxHull, hull_strength + (maxHull * normAmount));
 }
 
 bool ShipCargo::onLaunch(sf::Vector2f position, float rotationAngle)
@@ -52,9 +82,11 @@ bool ShipCargo::onLaunch(sf::Vector2f position, float rotationAngle)
             ship->setHull(hull_strength);
             ship->impulse_request = 0.5;
             int systemsCount = 0;
-            for (unsigned int n = 0; n < SYS_COUNT; n++)
+            for (unsigned int n = 0; n < SYS_COUNT; n++){
                 if (ship->hasSystem(ESystem(n)))
                     systemsCount++;
+                ship->systems[n].health = systems_health[n];
+            }
             for (unsigned int n = 0; n < SYS_COUNT; n++)
                 if (ship->hasSystem(ESystem(n)))
                     ship->addHeat(ESystem(n), getHeat() / systemsCount);

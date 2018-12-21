@@ -254,6 +254,8 @@ void SpaceShip::applyTemplateValues()
             docks[n].setDockType(Dock_Energy);
         } else if (n < ship_template->launcher_dock_count + ship_template->energy_dock_count + ship_template->thermic_dock_count){
             docks[n].setDockType(Dock_Thermic);
+        } else if (n < ship_template->launcher_dock_count + ship_template->energy_dock_count + ship_template->thermic_dock_count + ship_template->repair_dock_count){
+            docks[n].setDockType(Dock_Repair);
         } else {
             docks[n].setDockType(Dock_Disabled);
         }

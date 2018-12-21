@@ -118,6 +118,7 @@ public:
     int launcher_dock_count;
     int energy_dock_count;
     int thermic_dock_count;
+    int repair_dock_count;
     string radar_trace;
 
     std::vector<ShipRoomTemplate> rooms;
@@ -169,7 +170,7 @@ public:
     void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system);
     void addDoor(sf::Vector2i position, bool horizontal);
     void addDrones(string template_name, int count);
-    void setDocks(int launchers, int energy, int thermic);
+    void setDocks(int launchers, int energy, int thermic, int repair);
     void setRadarTrace(string trace);
 
     P<ShipTemplate> copy(string new_name);

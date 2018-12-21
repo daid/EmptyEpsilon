@@ -409,10 +409,11 @@ void ShipTemplate::addDrones(string template_name, int count)
     drones.push_back(DroneTemplate(template_name, count));
 }
 
-void ShipTemplate::setDocks(int launchers, int energy, int thermic){
+void ShipTemplate::setDocks(int launchers, int energy, int thermic, int repair){
     launcher_dock_count = launchers;
     energy_dock_count = energy;
     thermic_dock_count = thermic;
+    repair_dock_count = repair;
 }
 
 void ShipTemplate::setRadarTrace(string trace)
@@ -464,6 +465,7 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->launcher_dock_count = launcher_dock_count;
     result->energy_dock_count = energy_dock_count;
     result->thermic_dock_count = thermic_dock_count;
+    result->repair_dock_count = repair_dock_count;
     return result;
 }
 

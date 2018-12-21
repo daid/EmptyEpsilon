@@ -11,6 +11,7 @@ enum EDockType
     Dock_Launcher,
     Dock_Energy,
     Dock_Thermic,
+    Dock_Repair,
     Dock_Disabled
 };
 string getDockTypeName(EDockType dockType);

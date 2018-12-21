@@ -30,7 +30,7 @@ template:setTubeDirection(0, -90)
 template:setTubeDirection(1, -90)
 template:setTubeDirection(2,  90)
 template:setTubeDirection(3,  90)
-template:setDocks(8, 2, 2)
+template:setDocks(6, 2, 2, 2)
 template:addDrones("L3 Mouse", 6)
 template:addDrones("L3 Cat", 1)
 

@@ -23,9 +23,12 @@ public:
   virtual void setEnergy(float amount) { this->energy_level = amount; }
   virtual float getHeat() { return heat; }
   virtual void setHeat(float amount) { this->heat = amount; }
+  virtual float getHealth() = 0;
+  virtual void addHealth(float amount) = 0;
+
   virtual float getMinEnergy() { return 0; }
-  
   virtual float getMaxEnergy() = 0;
+  virtual float getMaxHealth() = 0;
   virtual P<ModelData> getModel() = 0;
   virtual bool onLaunch(sf::Vector2f position, float rotationAngle) = 0;
 };
