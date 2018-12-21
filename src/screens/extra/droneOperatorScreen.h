@@ -42,6 +42,9 @@ public:
     DroneOperatorScreen(GuiContainer* owner);
 
     virtual void onDraw(sf::RenderTarget& window);
+private:
+    void disconnected();
+    bool isConnectable(P<PlayerSpaceship> ship);
 };
 
 #endif//DRONE_OPERATOR_SCREEN_H

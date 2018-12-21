@@ -1066,7 +1066,7 @@ float SpaceShip::getSystemEffectiveness(ESystem system)
     if (system != SYS_Reactor)
     {
         if (energy_level < 10.0 && energy_level > 0.0 && power > 0.0)
-            power = std::min((10.0f * energy_level) / power, power);
+             power = std::min(power * energy_level / 10.0f, power);
         else if (energy_level <= 0.0 || power <= 0.0)
             power = 0.0f;
     }
@@ -1303,6 +1303,10 @@ bool SpaceShip::tryDockDrone(SpaceShip* other){
         }
     }
     return false;
+}
+
+float SpaceShip::getDronesControlRange() { 
+    return Tween<float>::easeOutQuad(getSystemEffectiveness(SYS_Drones), 0.0, 3.0, 0.0, gameGlobalInfo->long_range_radar_range); 
 }
 
 string getMissileWeaponName(EMissileWeapons missile)

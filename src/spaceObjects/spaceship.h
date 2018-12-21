@@ -407,6 +407,7 @@ public:
     // This function is used in getScriptExport calls to adjust for tweaks done in the GM screen.
     string getScriptExportModificationsOnTemplate();
     bool tryDockDrone(SpaceShip* other);
+    float getDronesControlRange();
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);
