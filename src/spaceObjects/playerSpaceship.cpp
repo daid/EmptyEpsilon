@@ -73,6 +73,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandLoadTube);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandUnloadTube);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandFireTube);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandFireTubeAtTarget);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetShields);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMainScreenSetting);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMainScreenOverlay);
@@ -1537,6 +1538,21 @@ void PlayerSpaceship::commandFireTube(int8_t tubeNumber, float missile_target_an
     sf::Packet packet;
     packet << CMD_FIRE_TUBE << tubeNumber << missile_target_angle;
     sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandFireTubeAtTarget(int8_t tubeNumber, P<SpaceObject> target)
+{
+  float targetAngle = 0.0;
+  
+  if (!target || tubeNumber < 0 || tubeNumber >= getWeaponTubeCount())
+    return;
+  
+  targetAngle = weapon_tube[tubeNumber].calculateFiringSolution(target);
+  
+  if (targetAngle == std::numeric_limits<float>::infinity())
+      targetAngle = getRotation() + weapon_tube[tubeNumber].getDirection();
+    
+  commandFireTube(tubeNumber, targetAngle);
 }
 
 void PlayerSpaceship::commandSetShields(bool enabled)
