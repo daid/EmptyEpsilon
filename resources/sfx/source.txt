@@ -1,0 +1,24 @@
+=emp_explosion.wav==
+Sounds (c) by Christian "Crystan" Hoffmann
+Creative Commons Attribution-Share Alike 3.0
+Edited version of electro/taserdouble from UFO: Alien Invasion
+
+==hvli_fire.wav==
+Sounds (c) by Michel Baradari apollo-music.de
+Licensed under CC BY 3.0 http://creativecommons.org/licenses/by/3.0/
+explodemini.wav, hosted on opengameart.org
+
+==laser_fire.wav==
+Sounds (c) by Christian "Crystan" Hoffmann
+Creative Commons Attribution-Share Alike 3.0
+laser-medium from UFO: Alien Invasion
+
+==nuke_explosion.wav==
+Sounds (c) by Christian "Crystan" Hoffmann
+Creative Commons Attribution-Share Alike 3.0
+explosion from UFO: Alien Invason
+
+==rlaunch.wav==
+Sounds (c) by Michel Baradari apollo-music.de
+Licensed under CC BY 3.0 http://creativecommons.org/licenses/by/3.0/
+Hosted on opengameart.org
