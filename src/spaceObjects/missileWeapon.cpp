@@ -34,7 +34,7 @@ void MissileWeapon::update(float delta)
 
     if (!launch_sound_played)
     {
-        soundManager->playSound("missile_launch.wav", getPosition(), 200.0, 1.0);
+        soundManager->playSound(data.fire_sound, getPosition(), 200.0, 1.0, 1.0f + random(-0.2f, 0.2f));
         launch_sound_played = true;
     }
     lifetime -= delta;

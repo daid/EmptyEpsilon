@@ -14,6 +14,7 @@ ExplosionEffect::ExplosionEffect()
 : SpaceObject(1000.0, "ExplosionEffect")
 {
     size = 1.0;
+    explosion_sound = "explosion.wav";
     on_radar = false;
     setCollisionRadius(1.0);
     lifetime = maxLifetime;
@@ -109,7 +110,7 @@ void ExplosionEffect::drawOnRadar(sf::RenderTarget& window, sf::Vector2f positio
 void ExplosionEffect::update(float delta)
 {
     if (delta > 0 && lifetime == maxLifetime)
-        soundManager->playSound("explosion.wav", getPosition(), size, 1.0);
+        soundManager->playSound(explosion_sound, getPosition(), size, 1.0);
     lifetime -= delta;
     if (lifetime < 0)
         destroy();

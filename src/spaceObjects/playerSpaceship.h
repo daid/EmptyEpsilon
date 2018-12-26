@@ -215,7 +215,8 @@ public:
     void commandSetProbe3DLink(int32_t id);
     void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
     void commandUnloadTube(int8_t tubeNumber);
-    void commandFireTube(int8_t tubeNumber, float missile_target_angle);
+    void commandFireTube(int8_t tubeNumber, float missile_target_angle);    
+    void commandFireTubeAtTarget(int8_t tubeNumber, P<SpaceObject> target);
     void commandSetShields(bool enabled);
     void commandMainScreenSetting(EMainScreenSetting mainScreen);
     void commandMainScreenOverlay(EMainScreenOverlay mainScreen);
