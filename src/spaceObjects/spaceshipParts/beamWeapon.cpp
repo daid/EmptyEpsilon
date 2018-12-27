@@ -246,6 +246,8 @@ void BeamWeapon::fire(P<SpaceObject> target, ESystem system_target)
     effect->setSource(parent, position);
     effect->setTarget(target, hit_location);
     effect->beam_texture = beam_texture;
+    effect->beam_fire_sound = "sfx/laser_fire.wav";
+    effect->beam_fire_sound_power = damage / 6.0f;
 
     DamageInfo info(parent, DT_Energy, hit_location);
     info.frequency = parent->beam_frequency; // Beam weapons now always use frequency of the ship.
