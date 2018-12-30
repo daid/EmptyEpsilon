@@ -1073,7 +1073,7 @@ float SpaceShip::getSystemEffectiveness(ESystem system)
     if (system != SYS_Reactor)
     {
         if (energy_level < 10.0 && energy_level > 0.0 && power > 0.0)
-             power = std::min(power * energy_level / 10.0f, power);
+            power = std::min(power * energy_level / 10.0f, power);
         else if (energy_level <= 0.0 || power <= 0.0)
             power = 0.0f;
     }

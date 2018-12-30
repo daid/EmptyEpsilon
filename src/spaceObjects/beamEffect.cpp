@@ -20,6 +20,8 @@ BeamEffect::BeamEffect()
     registerMemberReplication(&targetLocation, 1.0);
     registerMemberReplication(&hitNormal);
     registerMemberReplication(&beam_texture);
+    registerMemberReplication(&beam_fire_sound);
+    registerMemberReplication(&beam_fire_sound_power);
 }
 
 #if FEATURE_3D_RENDERING
@@ -93,7 +95,12 @@ void BeamEffect::update(float delta)
         targetLocation = target->getPosition() + sf::Vector2f(targetOffset.x, targetOffset.y);
 
     if (delta > 0 && lifetime == 1.0)
-        soundManager->playSound("laser.wav", getPosition(), 500.0, 1.0);
+    {
+        float volume = 50.0f + (beam_fire_sound_power * 75.0f);
+        float pitch = (1.0f / beam_fire_sound_power) + random(-0.1f, 0.1f);
+        soundManager->playSound(beam_fire_sound, source->getPosition(), 200.0, 1.0, pitch, volume);
+    }
+
     lifetime -= delta;
     if (lifetime < 0)
         destroy();
