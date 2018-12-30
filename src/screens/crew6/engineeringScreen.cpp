@@ -283,6 +283,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
             case SYS_Docks:
                 addSystemEffect("Cargo move speed", string(int(effectiveness * 100)) + "%");
                 addSystemEffect("Energy transfer speed", string(effectiveness * PlayerSpaceship::energy_transfer_per_second) + "/s");
+                addSystemEffect("Tractor beam drag speed", string(int(effectiveness * 100)) + "%");
                 break;
             case SYS_Drones:
                 addSystemEffect("Drones control range", string(my_spaceship->getDronesControlRange(),1) + "U");

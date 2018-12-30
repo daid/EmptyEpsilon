@@ -103,6 +103,9 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCombatManeuverBoost);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetScienceLink);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAlertLevel);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetTractorBeamDirection);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetTractorBeamArc);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetTractorBeamRange);
 
     // Return the number of Engineering repair crews on the ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getRepairCrewCount);
@@ -175,10 +178,14 @@ static const int16_t CMD_SET_MAIN_SCREEN_OVERLAY = 0x0027;
 static const int16_t CMD_HACKING_FINISHED = 0x0028;
 static const int16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const int16_t CMD_LAUNCH_CARGO = 0x0030;
-static const int16_t CMD_MOVE_CARGO = 0x0031;
-static const int16_t CMD_CANCEL_MOVE_CARGO = 0x0032;
-static const int16_t CMD_SET_DOCK_MOVE_TARGET = 0x0033;
-static const int16_t CMD_SET_DOCK_ENERGY_REQUEST = 0x0034;
+static const int16_t CMD_MOVE_CARGO = 0x003A;
+static const int16_t CMD_CANCEL_MOVE_CARGO = 0x003B;
+static const int16_t CMD_SET_DOCK_MOVE_TARGET = 0x003C;
+static const int16_t CMD_SET_DOCK_ENERGY_REQUEST = 0x003D;
+static const int16_t CMD_SET_TRACTOR_BEAM_DIRECTION = 0x003E;
+static const int16_t CMD_SET_TRACTOR_BEAM_ARC = 0x003F;
+static const int16_t CMD_SET_TRACTOR_BEAM_RANGE = 0x0040;
+static const int16_t CMD_SET_TRACTOR_BEAM_MODE = 0x0041;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -1454,7 +1461,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         int dockIndex;
         packet >> dockIndex;
         if (docks[dockIndex].state == EDockState::Docked 
-            && docks[dockIndex].getCargo()->onLaunch(getPosition(), getRotation()))
+            && docks[dockIndex].getCargo()->onLaunch(getPosition() + sf::vector2FromAngle(getRotation()) * getRadius(), getRotation()))
         {
             docks[dockIndex].getCargo()->destroy();
             docks[dockIndex].empty();
@@ -1535,6 +1542,40 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             }
         }
         break;
+    case CMD_SET_TRACTOR_BEAM_DIRECTION:
+    {
+        float direction;
+        packet >> direction;
+        tractor_beam.setDirection(direction);
+    }
+    break;
+    case CMD_SET_TRACTOR_BEAM_ARC:
+    {
+        float arc;
+        packet >> arc;
+        if (tractor_beam.getMaxArea() > 0){
+            tractor_beam.setArc(arc);
+            tractor_beam.setRange(std::min(tractor_beam.getRange(), tractor_beam.getMaxRange(arc)));
+        }
+    }
+    break;
+    case CMD_SET_TRACTOR_BEAM_RANGE:
+    {
+        float range;
+        packet >> range;
+        if (tractor_beam.getMaxArea() > 0){
+            tractor_beam.setRange(range);
+            tractor_beam.setArc(std::min(tractor_beam.getArc(), tractor_beam.getMaxArc(range)));
+        }
+    }
+    break;
+    case CMD_SET_TRACTOR_BEAM_MODE:
+    {
+        int mode;
+        packet >> mode;
+        tractor_beam.setMode(ETractorBeamMode(mode));
+    }
+    break;
     }
 }
 
@@ -1871,6 +1912,29 @@ void PlayerSpaceship::commandSetScienceLink(int32_t id){
     packet << CMD_SET_SCIENCE_LINK << id;
     sendClientCommand(packet);
 }
+
+void PlayerSpaceship::commandSetTractorBeamDirection(float direction){
+    sf::Packet packet;
+    packet << CMD_SET_TRACTOR_BEAM_DIRECTION << direction;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetTractorBeamArc(float arc){
+    sf::Packet packet;
+    packet << CMD_SET_TRACTOR_BEAM_ARC << arc;
+    sendClientCommand(packet);
+}
+void PlayerSpaceship::commandSetTractorBeamRange(float range){
+    sf::Packet packet;
+    packet << CMD_SET_TRACTOR_BEAM_RANGE << range;
+    sendClientCommand(packet);
+}
+void PlayerSpaceship::commandSetTractorBeamMode(ETractorBeamMode mode){
+    sf::Packet packet;
+    packet << CMD_SET_TRACTOR_BEAM_MODE << int(mode);
+    sendClientCommand(packet);
+}
+
 
 void PlayerSpaceship::onReceiveServerCommand(sf::Packet& packet)
 {

@@ -77,7 +77,7 @@ bool ShipCargo::onLaunch(sf::Vector2f position, float rotationAngle)
             ship->setTemplate(template_name);
             ship->setCallSign(callsign);
             ship->setEnergyLevel(getEnergy());
-            ship->setPosition(position);
+            ship->setPosition(position + sf::vector2FromAngle(rotationAngle) * ship->getRadius());
             ship->setRotation(rotationAngle);
             ship->setHull(hull_strength);
             ship->impulse_request = 0.5;

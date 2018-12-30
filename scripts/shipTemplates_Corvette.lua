@@ -33,6 +33,7 @@ template:setTubeDirection(3,  90)
 template:setDocks(6, 2, 2, 2)
 template:addDrones("L3 Mouse", 6)
 template:addDrones("L3 Cat", 1)
+template:setTractorBeam(200000, 100)
 
 variation = template:copy("Atlantis"):setType("playership")
 variation:setDescription([[A refitted Atlantis X23 for more general tasks. The large shield system has been replaced with an advanced combat maneuvering systems and improved impulse engines. Its missile loadout is also more diverse. Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake.]])

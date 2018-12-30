@@ -29,6 +29,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeam);
     /// Setup a beam weapon.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeapon);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTractorBeam);
     /// Setup a beam's turret.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponTurret);
     /// Setup a beam weapon texture
@@ -211,6 +212,12 @@ void ShipTemplate::setBeamWeapon(int index, float arc, float direction, float ra
     beams[index].setRange(range);
     beams[index].setCycleTime(cycle_time);
     beams[index].setDamage(damage);
+}
+
+void ShipTemplate::setTractorBeam(float max_area, float drag_per_second)
+{
+    tractor_beam.setMaxArea(max_area);
+    tractor_beam.setDragPerSecond(drag_per_second);
 }
 
 void ShipTemplate::setBeamWeaponTurret(int index, float arc, float direction, float rotation_rate)
@@ -466,6 +473,7 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->energy_dock_count = energy_dock_count;
     result->thermic_dock_count = thermic_dock_count;
     result->repair_dock_count = repair_dock_count;
+    result->tractor_beam = tractor_beam;
     return result;
 }
 

@@ -97,6 +97,7 @@ set(SOURCES
 	src/gameStateLogger.cpp
 	src/shipTemplate.cpp
 	src/beamTemplate.cpp
+	src/tractorBeamTemplate.cpp
 	src/missileWeaponData.cpp
 	src/factionInfo.cpp
 	src/mesh.cpp
@@ -235,6 +236,7 @@ set(SOURCES
 	src/spaceObjects/planet.cpp
 	src/spaceObjects/zone.cpp
 	src/spaceObjects/spaceshipParts/beamWeapon.cpp
+	src/spaceObjects/spaceshipParts/tractorBeam.cpp
 	src/spaceObjects/spaceshipParts/weaponTube.cpp
 	src/spaceObjects/spaceshipParts/dock.cpp
 	src/ai/fighterAI.cpp

@@ -4,6 +4,7 @@
 #include "shipTemplateBasedObject.h"
 #include "spaceStation.h"
 #include "spaceshipParts/beamWeapon.h"
+#include "spaceshipParts/tractorBeam.h"
 #include "spaceshipParts/weaponTube.h"
 #include "spaceshipParts/dock.h"
 
@@ -159,7 +160,7 @@ public:
     int beam_frequency;
     ESystem beam_system_target;
     BeamWeapon beam_weapons[max_beam_weapons];
-
+    TractorBeam tractor_beam;
     /**
      * Frequency setting of the shields.
      */
@@ -181,6 +182,8 @@ public:
      * Draw this ship on the radar.
      */
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
+    void drawBeamOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, 
+        sf::Color color, sf::Vector2f beam_position, float beam_direction, float beam_arc, float beam_range);
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
 
     virtual void update(float delta) override;
@@ -390,7 +393,15 @@ public:
 
     void setBeamWeaponEnergyPerFire(int index, float energy) { if (index < 0 || index >= max_beam_weapons) return; return beam_weapons[index].setEnergyPerFire(energy); }
     void setBeamWeaponHeatPerFire(int index, float heat) { if (index < 0 || index >= max_beam_weapons) return; return beam_weapons[index].setHeatPerFire(heat); }
-
+    void setTractorBeam(ETractorBeamMode mode, float arc, float direction, float range, float max_area, float drag_per_second)
+    {
+        tractor_beam.setMode(mode);
+        tractor_beam.setArc(arc);
+        tractor_beam.setDirection(direction);
+        tractor_beam.setRange(range);
+        tractor_beam.setMaxArea(max_area);
+        tractor_beam.setDragPerSecond(drag_per_second);
+    }
     void setWeaponTubeCount(int amount);
     int getWeaponTubeCount();
     EMissileWeapons getWeaponTubeLoadType(int index);
@@ -421,6 +432,7 @@ REGISTER_MULTIPLAYER_ENUM(EDockingState);
 REGISTER_MULTIPLAYER_ENUM(EScannedState);
 REGISTER_MULTIPLAYER_ENUM(EDockType);
 REGISTER_MULTIPLAYER_ENUM(EDockState);
+REGISTER_MULTIPLAYER_ENUM(ETractorBeamMode);
 
 
 string frequencyToString(int frequency);
