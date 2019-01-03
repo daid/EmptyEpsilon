@@ -40,6 +40,7 @@ public:
     constexpr static float energy_transfer_per_second = 5;
     constexpr static float heat_transfer_per_second = 0.1;
     constexpr static float repair_per_second = 0.007;
+    constexpr static float cargo_repair_per_second = 0.1;
 
     // Coolant change rate
     constexpr static float system_coolant_level_change_per_second = 1.2;
@@ -255,6 +256,10 @@ public:
     void commandHackingFinished(P<SpaceObject> target, string target_system);
     void commandCustomFunction(string name);
     void commandSetAutoRepairSystemTarget(ESystem system);
+    void commandSetTractorBeamDirection(float direction);
+    void commandSetTractorBeamArc(float arc);
+    void commandSetTractorBeamRange(float range);
+    void commandSetTractorBeamMode(ETractorBeamMode range);
 
     virtual void onReceiveServerCommand(sf::Packet& packet) override;
 

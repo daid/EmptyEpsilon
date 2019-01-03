@@ -20,7 +20,7 @@ Dock *Dock::findOpenForDocking(Dock docks[], int size)
         return dock;
 }
 
-Dock::Dock() : parent(nullptr), dock_type(Disabled), move_target_index(-1)
+Dock::Dock() : parent(nullptr), dock_type(Dock_Disabled), move_target_index(-1)
 {
     empty();
 }
@@ -81,7 +81,7 @@ void Dock::empty()
 
 bool Dock::isUnoccupied()
 {
-    return dock_type != Disabled && state == Empty;
+    return dock_type != Dock_Disabled && state == Empty;
 }
 
 bool Dock::isOpenForDocking()
@@ -127,28 +127,38 @@ void Dock::update(float delta)
             }
         }
     }
-    else if (game_server && dock_type == Energy && state == Docked)
+    else if (game_server && state == Docked)
     {
         auto cargo = getCargo();
         if (cargo)
         {
-            energy_request = std::min(energy_request, cargo->getMaxEnergy());
-            energy_request = std::max(energy_request, 0.0f);
+            if (dock_type == Dock_Energy) {
+                energy_request = std::min(energy_request, cargo->getMaxEnergy());
+                energy_request = std::max(energy_request, 0.0f);
 
-            float energyDelta = std::min(delta * this->parent->getSystemEffectiveness(SYS_Docks) *
-                                             PlayerSpaceship::energy_transfer_per_second,
-                                         std::abs(energy_request - cargo->getEnergy()));
-            if (energy_request > cargo->getEnergy())
-            {
-                energyDelta = std::min(energyDelta, parent->energy_level);
-                parent->energy_level -= energyDelta;
-                cargo->setEnergy(cargo->getEnergy() + energyDelta);
-            }
-            else if (energy_request < cargo->getEnergy())
-            {
-                energyDelta = std::min(energyDelta, std::max(0.0f, parent->max_energy_level - parent->energy_level));
-                parent->energy_level += energyDelta;
-                cargo->setEnergy(cargo->getEnergy() - energyDelta);
+                float energyDelta = std::min(delta * this->parent->getSystemEffectiveness(SYS_Docks) *
+                                                PlayerSpaceship::energy_transfer_per_second,
+                                            std::abs(energy_request - cargo->getEnergy()));
+                if (energy_request > cargo->getEnergy())
+                {
+                    energyDelta = std::min(energyDelta, parent->energy_level);
+                    parent->energy_level -= energyDelta;
+                    cargo->setEnergy(cargo->getEnergy() + energyDelta);
+                }
+                else if (energy_request < cargo->getEnergy())
+                {
+                    energyDelta = std::min(energyDelta, std::max(0.0f, parent->max_energy_level - parent->energy_level));
+                    parent->energy_level += energyDelta;
+                    cargo->setEnergy(cargo->getEnergy() - energyDelta);
+                }
+            } else if (dock_type == Dock_Repair){
+                if (cargo->getHealth() < cargo->getMaxHealth())
+                {
+                    float repairAmount = std::min(delta * this->parent->getSystemEffectiveness(SYS_Docks) * 
+                                                    PlayerSpaceship::cargo_repair_per_second,
+                                                    cargo->getMaxHealth() - cargo->getHealth());
+                    cargo->addHealth(repairAmount);
+                }
             }
         }
     }
@@ -156,9 +166,17 @@ void Dock::update(float delta)
         auto cargo = getCargo();
         if (cargo && cargo->getHeat() > 0)
         {
-            float heatToAbsorve = std::min(cargo->getHeat(), delta * PlayerSpaceship::heat_transfer_per_second);
-            parent->addHeat(SYS_Docks, heatToAbsorve);
-            cargo->setHeat(cargo->getHeat() - heatToAbsorve);
+            if (dock_type == Dock_Thermic){
+                float coolDown = std::min(
+                    delta * this->parent->getSystemEffectiveness(SYS_Docks) * PlayerSpaceship::heat_transfer_per_second * 0.2f, 
+                    cargo->getHeat());
+                parent->addHeat(SYS_Docks, coolDown * 0.2f);
+                cargo->setHeat(cargo->getHeat() - coolDown);
+            } else {
+                float heatToAbsorve = std::min(cargo->getHeat(), delta * PlayerSpaceship::heat_transfer_per_second);
+                parent->addHeat(SYS_Docks, heatToAbsorve);
+                cargo->setHeat(cargo->getHeat() - heatToAbsorve);
+            }
         }
     }
 }
@@ -184,10 +202,14 @@ string getDockTypeName(EDockType dockType)
 {
     switch (dockType)
     {
-    case Launcher:
+    case Dock_Launcher:
         return "Launcher";
-    case Energy:
+    case Dock_Energy:
         return "Energy";
+    case Dock_Thermic:
+        return "Thermic";
+    case Dock_Repair:
+        return "Repair";
     default:
         return "Unknown";
     }

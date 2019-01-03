@@ -7,6 +7,7 @@
 #include "modelData.h"
 
 #include "beamTemplate.h"
+#include "tractorBeamTemplate.h"
 #include "missileWeaponData.h"
 constexpr static int max_beam_weapons = 16;
 constexpr static int max_weapon_tubes = 16;
@@ -102,6 +103,7 @@ public:
     int repair_crew_count;
     string default_ai_name;
     BeamTemplate beams[max_beam_weapons];
+    TractorBeamTemplate tractor_beam;
     int weapon_tube_count;
     TubeTemplate weapon_tube[max_weapon_tubes];
     float hull;
@@ -117,6 +119,8 @@ public:
     int weapon_storage[MW_Count];
     int launcher_dock_count;
     int energy_dock_count;
+    int thermic_dock_count;
+    int repair_dock_count;
     string radar_trace;
 
     std::vector<ShipRoomTemplate> rooms;
@@ -141,7 +145,8 @@ public:
     void setBeam(int index, float arc, float direction, float range, float cycle_time, float damage);
     void setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage);
     void setBeamWeaponTurret(int index, float arc, float direction, float rotation_rate);
-
+    void setTractorBeam(float max_area, float drag_per_second);
+    
     /**
      * Convenience function to set the texture of a beam by index.
      */
@@ -168,7 +173,7 @@ public:
     void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system);
     void addDoor(sf::Vector2i position, bool horizontal);
     void addDrones(string template_name, int count);
-    void setDocks(int launchers, int energy);
+    void setDocks(int launchers, int energy, int thermic, int repair);
     void setRadarTrace(string trace);
 
     P<ShipTemplate> copy(string new_name);

@@ -2,8 +2,10 @@
 #define DOCK_MASTER_SCREEN_H
 
 #include "gui/gui2_overlay.h"
+#include "gui/gui2_autolayout.h"
 #include "spaceObjects/shipTemplateBasedObject.h"
 
+class GuiToggleButton;
 class GuiPanel;
 class GuiSlider;
 class GuiButton;
@@ -17,6 +19,19 @@ class GuiListbox;
 class GuiRotatingModelView;
 class GuiOverlay;
 class Dock;
+
+class GuiTractorBeamControl : public GuiAutoLayout
+{
+private:
+    GuiSelector* mode_slector;
+    GuiSlider* arc_slider;
+    GuiSlider* direction_slider;
+    GuiSlider* range_slider;
+public:
+    GuiTractorBeamControl(GuiContainer* owner, string id);
+    virtual void onDraw(sf::RenderTarget& window) override;
+};
+
 class DockMasterScreen : public GuiOverlay
 {
   private:
@@ -24,10 +39,12 @@ class DockMasterScreen : public GuiOverlay
     GuiListbox* docks;
     int index = 0;
     GuiLabel *title;
-    GuiAutoLayout *sideBar;
+    GuiAutoLayout *cargoView;
     GuiAutoLayout* cargoInfo;
     std::vector<GuiKeyValueDisplay*> cargoInfoItems;
     GuiRotatingModelView* model;
+
+    GuiToggleButton* tractor_beam_switch;
 
     GuiProgressbar *energy_bar;
     GuiSlider *energy_slider;

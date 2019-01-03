@@ -105,6 +105,9 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetScienceLink);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetProbe3DLink);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAlertLevel);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetTractorBeamDirection);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetTractorBeamArc);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetTractorBeamRange);
 
     // Return the number of Engineering repair crews on the ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getRepairCrewCount);
@@ -176,13 +179,17 @@ static const int16_t CMD_SET_PROBE_3D_LINK = 0x0026;
 static const int16_t CMD_ABORT_DOCK = 0x0027;
 static const int16_t CMD_SET_MAIN_SCREEN_OVERLAY = 0x0028;
 static const int16_t CMD_HACKING_FINISHED = 0x0029;
-static const int16_t CMD_CUSTOM_FUNCTION = 0x0030;
-static const int16_t CMD_LAUNCH_CARGO = 0x0031;
-static const int16_t CMD_MOVE_CARGO = 0x0032;
-static const int16_t CMD_CANCEL_MOVE_CARGO = 0x0033;
-static const int16_t CMD_SET_DOCK_MOVE_TARGET = 0x0034;
-static const int16_t CMD_SET_DOCK_ENERGY_REQUEST = 0x0035;
-static const int16_t CMD_SET_AUTO_REPAIR_SYSTEM_TARGET = 0x0036;
+static const int16_t CMD_CUSTOM_FUNCTION = 0x002A;
+static const int16_t CMD_LAUNCH_CARGO = 0x002B;
+static const int16_t CMD_MOVE_CARGO = 0x002C;
+static const int16_t CMD_CANCEL_MOVE_CARGO = 0x002D;
+static const int16_t CMD_SET_DOCK_MOVE_TARGET = 0x002E;
+static const int16_t CMD_SET_DOCK_ENERGY_REQUEST = 0x002F;
+static const int16_t CMD_SET_AUTO_REPAIR_SYSTEM_TARGET = 0x0030;
+static const int16_t CMD_SET_TRACTOR_BEAM_DIRECTION = 0x0031;
+static const int16_t CMD_SET_TRACTOR_BEAM_ARC = 0x0032;
+static const int16_t CMD_SET_TRACTOR_BEAM_RANGE = 0x0033;
+static const int16_t CMD_SET_TRACTOR_BEAM_MODE = 0x0034;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -1541,7 +1548,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         int dockIndex;
         packet >> dockIndex;
         if (docks[dockIndex].state == EDockState::Docked 
-            && docks[dockIndex].getCargo()->onLaunch(getPosition(), getRotation()))
+            && docks[dockIndex].getCargo()->onLaunch(getPosition() + sf::vector2FromAngle(getRotation()) * getRadius(), getRotation()))
         {
             docks[dockIndex].getCargo()->destroy();
             docks[dockIndex].empty();
@@ -1574,7 +1581,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         break;
     case CMD_SET_DOCK_ENERGY_REQUEST:
         packet >> dockIndex;
-        if (docks[dockIndex].state == EDockState::Docked && docks[dockIndex].dock_type == Energy)
+        if (docks[dockIndex].state == EDockState::Docked && docks[dockIndex].dock_type == Dock_Energy)
         {
             float value;
             packet >> value;
@@ -1639,6 +1646,40 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 auto_repairing_system = system;
         }
         break;
+    case CMD_SET_TRACTOR_BEAM_DIRECTION:
+    {
+        float direction;
+        packet >> direction;
+        tractor_beam.setDirection(direction);
+    }
+    break;
+    case CMD_SET_TRACTOR_BEAM_ARC:
+    {
+        float arc;
+        packet >> arc;
+        if (tractor_beam.getMaxArea() > 0){
+            tractor_beam.setArc(arc);
+            tractor_beam.setRange(std::min(tractor_beam.getRange(), tractor_beam.getMaxRange(arc)));
+        }
+    }
+    break;
+    case CMD_SET_TRACTOR_BEAM_RANGE:
+    {
+        float range;
+        packet >> range;
+        if (tractor_beam.getMaxArea() > 0){
+            tractor_beam.setRange(range);
+            tractor_beam.setArc(std::min(tractor_beam.getArc(), tractor_beam.getMaxArc(range)));
+        }
+    }
+    break;
+    case CMD_SET_TRACTOR_BEAM_MODE:
+    {
+        int mode;
+        packet >> mode;
+        tractor_beam.setMode(ETractorBeamMode(mode));
+    }
+    break;
     }
 }
 
@@ -2004,6 +2045,28 @@ void PlayerSpaceship::commandSetAutoRepairSystemTarget(ESystem system)
     packet << CMD_SET_AUTO_REPAIR_SYSTEM_TARGET << system;
     sendClientCommand(packet);
 }
+void PlayerSpaceship::commandSetTractorBeamDirection(float direction){
+    sf::Packet packet;
+    packet << CMD_SET_TRACTOR_BEAM_DIRECTION << direction;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetTractorBeamArc(float arc){
+    sf::Packet packet;
+    packet << CMD_SET_TRACTOR_BEAM_ARC << arc;
+    sendClientCommand(packet);
+}
+void PlayerSpaceship::commandSetTractorBeamRange(float range){
+    sf::Packet packet;
+    packet << CMD_SET_TRACTOR_BEAM_RANGE << range;
+    sendClientCommand(packet);
+}
+void PlayerSpaceship::commandSetTractorBeamMode(ETractorBeamMode mode){
+    sf::Packet packet;
+    packet << CMD_SET_TRACTOR_BEAM_MODE << int(mode);
+    sendClientCommand(packet);
+}
+
 
 void PlayerSpaceship::onReceiveServerCommand(sf::Packet& packet)
 {

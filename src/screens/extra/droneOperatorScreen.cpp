@@ -47,10 +47,10 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer *owner)
     single_pilot_view = new SinglePilotView(this, selected_drone);
     single_pilot_view->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    disconnect_button = new GuiButton(this, "DISCONNECT_BUTTON", "Disconnect", [this]() {
-        mode = DroneSelection;
-        selected_drone = NULL;
-    });
+    connection_label = new GuiLabel(this, "CONNECTION_LABEL", "0%", 30);
+    connection_label->setPosition(0, -50, ABottomCenter)->setSize(460, 50);
+
+    disconnect_button = new GuiButton(this, "DISCONNECT_BUTTON", "Disconnect", [this]() {disconnected();});
     disconnect_button->setPosition(0, 0, ABottomCenter)->setSize(400, 50);
     disconnect_button->moveToFront();
     // label for when there are no drones
@@ -59,36 +59,45 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer *owner)
     // Prep the alert overlay.
     (new GuiPowerDamageIndicator(this, "DOCKS_DPI", SYS_Drones, ATopCenter, my_spaceship))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
-
+void DroneOperatorScreen::disconnected()
+{
+    mode = drone_list->entryCount() == 0 ? NoDrones : DroneSelection;
+    selected_drone = NULL;
+}
+bool DroneOperatorScreen::isConnectable(P<PlayerSpaceship> ship)
+{
+    return ship 
+    && ship->ship_template 
+    && ship->ship_template->getType() == ShipTemplate::TemplateType::Drone 
+    && ship->getFactionId() == my_spaceship->getFactionId()
+    && getConnectionQuality(ship) >= 0.01f; 
+}
+float DroneOperatorScreen::getConnectionQuality(P<PlayerSpaceship> ship)
+{
+    float rangeFactor = 1 - std::min(1.0f, (length(ship->getPosition() - my_spaceship->getPosition()) / my_spaceship->getDronesControlRange()));
+    float droneStateFactor = std::min(1.0f, ship->getSystemEffectiveness(SYS_Drones));
+    return rangeFactor * droneStateFactor;
+}
 void DroneOperatorScreen::onDraw(sf::RenderTarget &window)
 {
     if (my_spaceship)
     {
         // Update the player ship list with all player ships.
-        PVector<PlayerSpaceship> connected_drones;
         std::vector<string> options;
         std::vector<string> values;
         for (int n = 0; n < GameGlobalInfo::max_player_ships; n++)
         {
             P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
-            if (ship && ship->ship_template && ship->ship_template->getType() == ShipTemplate::TemplateType::Drone &&
-                (ship->getPosition() - my_spaceship->getPosition()) < gameGlobalInfo->long_range_radar_range)
-            {
-                options.push_back(ship->getTypeName() + " " + ship->getCallSign());
+            if (isConnectable(ship)) {
+                options.push_back(ship->getTypeName() + " " + ship->getCallSign() + "(" + string(int(getConnectionQuality(ship) * 100)) + "%)");
                 values.push_back(ship->getMultiplayerId());
             }
         }
         drone_list->setOptions(options, values);
         // automatically change mode if needed
-        if (drone_list->entryCount() == 0)
+        if (!selected_drone || !isConnectable(selected_drone) || selected_drone->isDestroyed())
         {
-            mode = NoDrones;
-            selected_drone = NULL;
-        }
-        else if (!selected_drone || selected_drone->isDestroyed())
-        {
-            mode = DroneSelection;
-            selected_drone = NULL;
+           disconnected();
         }
         // update display according to mode
         switch (mode)
@@ -98,6 +107,7 @@ void DroneOperatorScreen::onDraw(sf::RenderTarget &window)
             droneSelection->show();
             single_pilot_view->hide();
             disconnect_button->hide();
+            connection_label->hide();
             break;
         case Piloting:
             no_drones_label->hide();
@@ -105,12 +115,15 @@ void DroneOperatorScreen::onDraw(sf::RenderTarget &window)
             single_pilot_view->show();
             disconnect_button->setText("Disconnect " + selected_drone->callsign);
             disconnect_button->show();
+            connection_label->setText(string(int(getConnectionQuality(selected_drone) * 100)) + "%");
+            connection_label->show();
             break;
         case NoDrones:
             no_drones_label->show();
             droneSelection->hide();
             single_pilot_view->hide();
             disconnect_button->hide();
+            connection_label->hide();
             break;
         }
     }

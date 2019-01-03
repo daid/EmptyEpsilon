@@ -959,22 +959,27 @@ function destroyCratchitFleet(delta)
 		end
 	end
 	if cratchitFleetCount == 0 then
-		player:addReputationPoints(50)
-		player:addToShipLog("[Bob Cratchit on station Bedlam] I hate to dampen your spirits, but my young maintenance technician, Tim, has become seriously ill. Our medical facilities cannot diagnose, much less treat him. The medical ship Turkey Surprise should be able to help. Could you dock with Bedlam and transport Tim to Turkey Surprise?","Yellow")
-		playSoundFile("sa_62_BobCratchit2.wav")
-		turkeyAngle = random(90,180)
-		bx, by = stationBedlam:getPosition()
-		vx, vy = vectorFromAngle(turkeyAngle,random(20000,30000))
-		friendTurkeySurprise = CpuShip():setFaction("Human Navy"):setCallSign("Turkey Surprise"):setTemplate("Equipment Freighter 3"):orderDock(stationSomerset):setPosition(bx+vx,by+vy):setScannedByFaction("Human Navy",true)
-		plot1 = timIll
-		plot1name = "timIll"
-		secondaryOrders = "Take Tim from Bedlam to Turkey Surprise"
-		timAboard = false
-		plot2 = turkeyNemesis
-		plot2name = "turkeyNemesis"
-		turkeyNemesisTimer = 30
-		timLifeTimer = 240
-		timHalfLife = timLifeTimer/2
+		if stationBedlam:isValid() then
+			player:addReputationPoints(50)
+			player:addToShipLog("[Bob Cratchit on station Bedlam] I hate to dampen your spirits, but my young maintenance technician, Tim, has become seriously ill. Our medical facilities cannot diagnose, much less treat him. The medical ship Turkey Surprise should be able to help. Could you dock with Bedlam and transport Tim to Turkey Surprise?","Yellow")
+			playSoundFile("sa_62_BobCratchit2.wav")
+			turkeyAngle = random(90,180)
+			bx, by = stationBedlam:getPosition()
+			vx, vy = vectorFromAngle(turkeyAngle,random(20000,30000))
+			friendTurkeySurprise = CpuShip():setFaction("Human Navy"):setCallSign("Turkey Surprise"):setTemplate("Equipment Freighter 3"):orderDock(stationSomerset):setPosition(bx+vx,by+vy):setScannedByFaction("Human Navy",true)
+			plot1 = timIll
+			plot1name = "timIll"
+			secondaryOrders = "Take Tim from Bedlam to Turkey Surprise"
+			timAboard = false
+			plot2 = turkeyNemesis
+			plot2name = "turkeyNemesis"
+			turkeyNemesisTimer = 30
+			timLifeTimer = 240
+			timHalfLife = timLifeTimer/2
+		else
+			globalMessage("[Ghost of Christmas present] While you fought off the ships near Bedlam, Tiny Tim, Bob Cratchit's maintenance technician perished along with the others aboard station Bedlam. Your engineering crew were so overcome with grief that they neglected a routie maintenance cycle causing engine failure on HMS Scrooge.","Red")
+			victory("Ghosts")
+		end
 	end
 end
 

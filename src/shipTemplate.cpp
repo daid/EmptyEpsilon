@@ -29,6 +29,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeam);
     /// Setup a beam weapon.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeapon);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTractorBeam);
     /// Setup a beam's turret.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponTurret);
     /// Setup a beam weapon texture
@@ -113,6 +114,7 @@ ShipTemplate::ShipTemplate()
     has_reactor = true;
     launcher_dock_count = 0;
     energy_dock_count = 0;
+    thermic_dock_count = 0;
 }
 
 void ShipTemplate::setBeamTexture(int index, string texture)
@@ -210,6 +212,12 @@ void ShipTemplate::setBeamWeapon(int index, float arc, float direction, float ra
     beams[index].setRange(range);
     beams[index].setCycleTime(cycle_time);
     beams[index].setDamage(damage);
+}
+
+void ShipTemplate::setTractorBeam(float max_area, float drag_per_second)
+{
+    tractor_beam.setMaxArea(max_area);
+    tractor_beam.setDragPerSecond(drag_per_second);
 }
 
 void ShipTemplate::setBeamWeaponTurret(int index, float arc, float direction, float rotation_rate)
@@ -408,9 +416,11 @@ void ShipTemplate::addDrones(string template_name, int count)
     drones.push_back(DroneTemplate(template_name, count));
 }
 
-void ShipTemplate::setDocks(int launchers, int energy){
+void ShipTemplate::setDocks(int launchers, int energy, int thermic, int repair){
     launcher_dock_count = launchers;
     energy_dock_count = energy;
+    thermic_dock_count = thermic;
+    repair_dock_count = repair;
 }
 
 void ShipTemplate::setRadarTrace(string trace)
@@ -461,6 +471,9 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->drones = drones;
     result->launcher_dock_count = launcher_dock_count;
     result->energy_dock_count = energy_dock_count;
+    result->thermic_dock_count = thermic_dock_count;
+    result->repair_dock_count = repair_dock_count;
+    result->tractor_beam = tractor_beam;
     return result;
 }
 

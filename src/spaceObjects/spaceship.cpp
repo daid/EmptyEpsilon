@@ -67,6 +67,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponTexture);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponEnergyPerFire);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponHeatPerFire);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setTractorBeam);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponTubeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponTubeLoadType);
@@ -171,6 +172,8 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         beam_weapons[n].setParent(this);
     }
 
+    tractor_beam.setParent(this);
+
     for(int n = 0; n < max_weapon_tubes; n++)
     {
         weapon_tube[n].setParent(this);
@@ -216,6 +219,10 @@ void SpaceShip::applyTemplateValues()
         beam_weapons[n].setEnergyPerFire(ship_template->beams[n].getEnergyPerFire());
         beam_weapons[n].setHeatPerFire(ship_template->beams[n].getHeatPerFire());
     }
+
+    tractor_beam.setMaxArea(ship_template->tractor_beam.getMaxArea());
+    tractor_beam.setDragPerSecond(ship_template->tractor_beam.getDragPerSecond());
+
     weapon_tube_count = ship_template->weapon_tube_count;
     energy_level = max_energy_level = ship_template->energy_storage_amount;
 
@@ -252,11 +259,15 @@ void SpaceShip::applyTemplateValues()
     for(int n = 0; n < max_docks_count; n++)
     {
         if (n < ship_template->launcher_dock_count){
-            docks[n].setDockType(Launcher);
+            docks[n].setDockType(Dock_Launcher);
         } else if (n < ship_template->launcher_dock_count + ship_template->energy_dock_count){
-            docks[n].setDockType(Energy);
+            docks[n].setDockType(Dock_Energy);
+        } else if (n < ship_template->launcher_dock_count + ship_template->energy_dock_count + ship_template->thermic_dock_count){
+            docks[n].setDockType(Dock_Thermic);
+        } else if (n < ship_template->launcher_dock_count + ship_template->energy_dock_count + ship_template->thermic_dock_count + ship_template->repair_dock_count){
+            docks[n].setDockType(Dock_Repair);
         } else {
-            docks[n].setDockType(Disabled);
+            docks[n].setDockType(Dock_Disabled);
         }
     }
     int maxActiveDockIndex = ship_template->launcher_dock_count + ship_template->energy_dock_count;
@@ -295,6 +306,47 @@ void SpaceShip::draw3DTransparent()
 }
 #endif//FEATURE_3D_RENDERING
 
+void SpaceShip::drawBeamOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, 
+    sf::Color color, sf::Vector2f beam_position, float beam_direction, float beam_arc, float beam_range)
+{
+    // Set the beam's origin on radar to its relative position on the
+    // mesh.
+    sf::Vector2f beam_offset = sf::rotateVector(beam_position * scale, getRotation());
+
+    // Configure an array to hold each point of the arc. Each point in
+    // the array draws a line to the next point. If the color between
+    // points is different, it's drawn as a gradient from the origin
+    // point's color to the destination point's.
+    sf::VertexArray a(sf::LinesStrip, 3);
+    a[0].color = color;
+    a[1].color = color;
+    a[2].color = sf::Color(color.r, color.g, color.b, 0);
+
+    // Drop the pen onto the beam's origin.
+    a[0].position = beam_offset + position;
+
+    // Draw the beam's left bound.
+    a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_direction + beam_arc / 2.0f)) * beam_range * scale;
+    a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_direction + beam_arc / 2.0f)) * beam_range * scale * 1.3f;
+    window.draw(a);
+
+    // Draw the beam's right bound.
+    a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_direction - beam_arc / 2.0f)) * beam_range * scale;
+    a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_direction - beam_arc / 2.0f)) * beam_range * scale * 1.3f;
+    window.draw(a);
+
+    // Draw the beam's arc.
+    int arcPoints = int(beam_arc / 10) + 1;
+    sf::VertexArray arc_line(sf::LinesStrip, arcPoints);
+    for(int i=0; i<arcPoints; i++)
+    {
+        arc_line[i].color = color;
+        arc_line[i].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_direction - beam_arc / 2.0f + 10 * i)) * beam_range * scale;
+    }
+    arc_line[arcPoints-1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_direction + beam_arc / 2.0f)) * beam_range * scale;
+    window.draw(arc_line);
+}
+
 void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
     // Draw beam arcs on short-range radar only, and only for fully scanned
@@ -320,43 +372,8 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
             float beam_direction = beam_weapons[n].getDirection();
             float beam_arc = beam_weapons[n].getArc();
             float beam_range = beam_weapons[n].getRange();
-
-            // Set the beam's origin on radar to its relative position on the
-            // mesh.
-            sf::Vector2f beam_offset = sf::rotateVector(ship_template->model_data->getBeamPosition2D(n) * scale, getRotation());
-
-            // Configure an array to hold each point of the arc. Each point in
-            // the array draws a line to the next point. If the color between
-            // points is different, it's drawn as a gradient from the origin
-            // point's color to the destination point's.
-            sf::VertexArray a(sf::LinesStrip, 3);
-            a[0].color = color;
-            a[1].color = color;
-            a[2].color = sf::Color(color.r, color.g, color.b, 0);
-
-            // Drop the pen onto the beam's origin.
-            a[0].position = beam_offset + position;
-
-            // Draw the beam's left bound.
-            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_direction + beam_arc / 2.0f)) * beam_range * scale;
-            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_direction + beam_arc / 2.0f)) * beam_range * scale * 1.3f;
-            window.draw(a);
-
-            // Draw the beam's right bound.
-            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_direction - beam_arc / 2.0f)) * beam_range * scale;
-            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_direction - beam_arc / 2.0f)) * beam_range * scale * 1.3f;
-            window.draw(a);
-
-            // Draw the beam's arc.
-            int arcPoints = int(beam_arc / 10) + 1;
-            sf::VertexArray arc_line(sf::LinesStrip, arcPoints);
-            for(int i=0; i<arcPoints; i++)
-            {
-                arc_line[i].color = color;
-                arc_line[i].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_direction - beam_arc / 2.0f + 10 * i)) * beam_range * scale;
-            }
-            arc_line[arcPoints-1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (beam_direction + beam_arc / 2.0f)) * beam_range * scale;
-            window.draw(arc_line);
+            sf::Vector2f beam_position = ship_template->model_data->getBeamPosition2D(n);
+            drawBeamOnRadar(window, position, scale, color, beam_position, beam_direction, beam_arc, beam_range);
 
             // If the beam is turreted, draw the turret's arc. Otherwise, exit.
             if (beam_weapons[n].getTurretArc() == 0.0) continue;
@@ -364,32 +381,22 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
             // Initialize variables from the turret data.
             float turret_arc = beam_weapons[n].getTurretArc();
             float turret_direction = beam_weapons[n].getTurretDirection();
+            color =  sf::Color(color.r, color.g, color.b, color.a / 2);
+            drawBeamOnRadar(window, position, scale, color, beam_position, turret_direction, turret_arc, beam_range);
+        }
 
-            // Draw the turret's bounds, at half the transparency of the beam's.
+        // Draw beam arcs only if the beam has a range. A beam with range 0
+        // effectively doesn't exist; exit if that's the case.
+        if (tractor_beam.getMode() != TBM_Off && tractor_beam.getRange())
+        {
             // TODO: Make this color configurable.
-            a[0].color = sf::Color(color.r, color.g, color.b, color.a / 2);
-            a[1].color = sf::Color(color.r, color.g, color.b, color.a / 2);
-
-            // Draw the turret's left bound. (We're reusing the beam's origin.)
-            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (turret_direction + turret_arc / 2.0f)) * beam_range * scale;
-            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (turret_direction + turret_arc / 2.0f)) * beam_range * scale * 1.3f;
-            window.draw(a);
-
-            // Draw the turret's right bound.
-            a[1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (turret_direction - turret_arc / 2.0f)) * beam_range * scale;
-            a[2].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (turret_direction - turret_arc / 2.0f)) * beam_range * scale * 1.3f;
-            window.draw(a);
-
-            // Draw the turret's arc.
-            int turret_points = int(turret_arc / 10) + 1;
-            sf::VertexArray turret_line(sf::LinesStrip, turret_points);
-            for(int i = 0; i < turret_points; i++)
-            {
-                turret_line[i].color = sf::Color(color.r, color.g, color.b, color.a / 2);
-                turret_line[i].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (turret_direction - turret_arc / 2.0f + 10 * i)) * beam_range * scale;
-            }
-            turret_line[turret_points-1].position = beam_offset + position + sf::vector2FromAngle(getRotation() + (turret_direction + turret_arc / 2.0f)) * beam_range * scale;
-            window.draw(turret_line);
+            sf::Color color = sf::Color::Cyan;
+                // Initialize variables from the beam's data.
+            float beam_direction = tractor_beam.getDirection();
+            float beam_arc = tractor_beam.getArc();
+            float beam_range = tractor_beam.getRange();
+            sf::Vector2f beam_position = sf::Vector2f(0.0f, 0.0f);
+            drawBeamOnRadar(window, position, scale, color, beam_position, beam_direction, beam_arc, beam_range);
         }
     }
     // If not on long-range radar ...
@@ -676,7 +683,7 @@ void SpaceShip::update(float delta)
     {
         beam_weapons[n].update(delta);
     }
-
+    tractor_beam.update(delta);
     for(int n=0; n<max_weapon_tubes; n++)
     {
         weapon_tube[n].update(delta);
@@ -1049,7 +1056,7 @@ bool SpaceShip::hasSystem(ESystem system)
         return impulse_max_speed > 0.0;
     case SYS_Docks:
     case SYS_Drones:
-        return docks[0].dock_type != Disabled;
+        return docks[0].dock_type != Dock_Disabled;
     }
     return true;
 }
@@ -1063,7 +1070,7 @@ float SpaceShip::getSystemEffectiveness(ESystem system)
     if (system != SYS_Reactor)
     {
         if (energy_level < 10.0 && energy_level > 0.0 && power > 0.0)
-            power = std::min((10.0f * energy_level) / power, power);
+            power = std::min(power * energy_level / 10.0f, power);
         else if (energy_level <= 0.0 || power <= 0.0)
             power = 0.0f;
     }
@@ -1287,6 +1294,15 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
         }
     }
 
+    if (tractor_beam.getMaxArea() != ship_template->tractor_beam.getMaxArea()
+        || tractor_beam.getDragPerSecond() != ship_template->tractor_beam.getDragPerSecond()
+        || tractor_beam.getMode() != TBM_Off 
+        || tractor_beam.getArc() != 0.0f
+        || tractor_beam.getDirection() != 0.0f
+        || tractor_beam.getRange() != 0.0f)
+    {
+        ret += ":setTractorBeam(" + getTractorBeamModeName(tractor_beam.getMode()) + ", " + string(tractor_beam.getArc(), 0) + ", " + string(tractor_beam.getDirection(), 0) + ", " + string(tractor_beam.getRange(), 0) + ", " + string(tractor_beam.getMaxArea(), 0) + ", " + string(tractor_beam.getDragPerSecond(), 0) + ")";
+    }
     return ret;
 }
 
@@ -1300,6 +1316,10 @@ bool SpaceShip::tryDockDrone(SpaceShip* other){
         }
     }
     return false;
+}
+
+float SpaceShip::getDronesControlRange() { 
+    return Tween<float>::easeInQuad(getSystemEffectiveness(SYS_Drones), 0.0, 3.0, 0.001, gameGlobalInfo->long_range_radar_range); 
 }
 
 string getMissileWeaponName(EMissileWeapons missile)
