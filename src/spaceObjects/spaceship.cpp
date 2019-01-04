@@ -1319,7 +1319,7 @@ bool SpaceShip::tryDockDrone(SpaceShip* other){
 }
 
 float SpaceShip::getDronesControlRange() { 
-    return Tween<float>::easeInQuad(getSystemEffectiveness(SYS_Drones), 0.0, 3.0, 0.001, gameGlobalInfo->long_range_radar_range); 
+    return Tween<float>::easeInQuad(getSystemEffectiveness(SYS_Drones), 0.0, 3.0, 1, 37000); 
 }
 
 string getMissileWeaponName(EMissileWeapons missile)

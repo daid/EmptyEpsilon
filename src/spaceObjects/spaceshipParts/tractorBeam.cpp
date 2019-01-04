@@ -16,6 +16,7 @@ void TractorBeam::setParent(SpaceShip* parent)
     parent->registerMemberReplication(&arc);
     parent->registerMemberReplication(&direction);
     parent->registerMemberReplication(&range);
+    parent->registerMemberReplication(&mode);
 }
 
 void TractorBeam::setMode(ETractorBeamMode mode)
