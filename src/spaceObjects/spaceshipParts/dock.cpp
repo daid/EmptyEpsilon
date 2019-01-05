@@ -102,6 +102,18 @@ void Dock::setParent(SpaceShip *parent)
     parent->registerMemberReplication(&current_distance);
 }
 
+sf::Vector2f Dock::getLaunchPosition(float cargoRadius) {
+    return parent->getPosition() - sf::vector2FromAngle(parent->getRotation()) * (cargoRadius + parent->getRadius());
+}
+
+float Dock::getLaunchRotation(){
+    return parent->getRotation();
+}
+
+unsigned int Dock::getFactionId(){
+    return parent->getFactionId();
+}
+
 bool Dock::operator==(const Dock &other)
 {
     return state == other.state && cargo_id == other.cargo_id;

@@ -73,20 +73,21 @@ void ShipCargo::addHealth(float amount)
     hull_strength = std::min(maxHull, hull_strength + (maxHull * normAmount));
 }
 
-bool ShipCargo::onLaunch(sf::Vector2f position, float rotationAngle)
+bool ShipCargo::onLaunch(Dock &source)
 {
     if (game_server)
     {
         P<PlayerSpaceship> ship = new PlayerSpaceship();
         if (ship)
         {
+            ship->setFactionId(source.getFactionId());
             ship->setTemplate(template_name);
             ship->setCallSign(callsign);
             ship->setEnergyLevel(getEnergy());
-            ship->setPosition(position + sf::vector2FromAngle(rotationAngle) * ship->getRadius());
-            ship->setRotation(rotationAngle);
+            ship->setPosition(source.getLaunchPosition(ship->getRadius()));
+            ship->setRotation(source.getLaunchRotation());
             ship->setHull(hull_strength);
-            ship->impulse_request = 0.5;
+            ship->impulse_request = -0.5;
             int systemsCount = 0;
             for (unsigned int n = 0; n < SYS_COUNT; n++){
                 if (ship->hasSystem(ESystem(n)))
