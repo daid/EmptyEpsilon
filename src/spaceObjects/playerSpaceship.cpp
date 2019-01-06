@@ -1462,7 +1462,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         int dockIndex;
         packet >> dockIndex;
         if (docks[dockIndex].state == EDockState::Docked 
-            && docks[dockIndex].getCargo()->onLaunch(getPosition() + sf::vector2FromAngle(getRotation()) * getRadius(), getRotation()))
+            && docks[dockIndex].getCargo()->onLaunch(docks[dockIndex]))
         {
             docks[dockIndex].getCargo()->destroy();
             docks[dockIndex].empty();

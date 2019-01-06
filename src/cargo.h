@@ -3,6 +3,8 @@
 
 #include "P.h"
 #include "engine.h"
+class Cargo;
+#include "spaceObjects/spaceshipParts/dock.h"
 
 class ModelData;
 
@@ -30,6 +32,6 @@ public:
   virtual float getMaxEnergy() = 0;
   virtual float getMaxHealth() = 0;
   virtual P<ModelData> getModel() = 0;
-  virtual bool onLaunch(sf::Vector2f position, float rotationAngle) = 0;
+  virtual bool onLaunch(Dock &source) = 0;
 };
 #endif //CARGO_H

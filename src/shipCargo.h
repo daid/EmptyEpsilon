@@ -29,7 +29,7 @@ public:
   float getHealth();
   void addHealth(float amount);
   P<ModelData> getModel();
-  bool onLaunch(sf::Vector2f position, float rotationAngle);
+  bool onLaunch(Dock &source);
 };
 
 #endif //SHIP_CARGO_H
