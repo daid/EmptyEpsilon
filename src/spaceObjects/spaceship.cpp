@@ -252,22 +252,23 @@ void SpaceShip::applyTemplateValues()
     ship_template->setCollisionData(this);
     model_info.setData(ship_template->model_data);
 
-
-    for(int n = 0; n < max_docks_count; n++)
-    {
-        if (n < ship_template->launcher_dock_count){
-            docks[n].setDockType(Dock_Launcher);
-        } else if (n < ship_template->launcher_dock_count + ship_template->energy_dock_count){
-            docks[n].setDockType(Dock_Energy);
-        } else if (n < ship_template->launcher_dock_count + ship_template->energy_dock_count + ship_template->thermic_dock_count){
-            docks[n].setDockType(Dock_Thermic);
-        } else if (n < ship_template->launcher_dock_count + ship_template->energy_dock_count + ship_template->thermic_dock_count + ship_template->repair_dock_count){
-            docks[n].setDockType(Dock_Repair);
-        } else {
-            docks[n].setDockType(Dock_Disabled);
-        }
+    int droneIdx = 0;
+    for (int i = 0; droneIdx < max_docks_count && i < ship_template->launcher_dock_count; i++, droneIdx++){
+        docks[droneIdx].setDockType(Dock_Launcher);
     }
-    int maxActiveDockIndex = ship_template->launcher_dock_count + ship_template->energy_dock_count;
+    for (int i = 0; droneIdx < max_docks_count && i < ship_template->energy_dock_count; i++, droneIdx++){
+        docks[droneIdx].setDockType(Dock_Energy);
+    }
+    for (int i = 0; droneIdx < max_docks_count && i < ship_template->thermic_dock_count; i++, droneIdx++){
+        docks[droneIdx].setDockType(Dock_Thermic);
+    }
+    for (int i = 0; droneIdx < max_docks_count && i < ship_template->repair_dock_count; i++, droneIdx++){
+        docks[droneIdx].setDockType(Dock_Repair);
+    }
+    int maxActiveDockIndex = droneIdx;
+    for (; droneIdx < max_docks_count; droneIdx++){
+        docks[droneIdx].setDockType(Dock_Disabled);
+    }
     for (auto &droneTemplate : ship_template->drones) // access by reference to avoid copying
     {  
         P<ShipTemplate> drone_ship_template = ShipTemplate::getTemplate(droneTemplate.template_name);
