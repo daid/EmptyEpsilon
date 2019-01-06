@@ -37,7 +37,7 @@ P<Cargo> Dock::getCargo()
 
 void Dock::startMoveCargo()
 {
-    if (move_target_index >= 0 && move_target_index < max_docks_count)
+    if (state == Docked && move_target_index >= 0 && move_target_index < max_docks_count)
     {
         Dock &dest = parent->docks[move_target_index];
         if (dest.isOpenForDocking())
