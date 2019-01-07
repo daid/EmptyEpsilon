@@ -19,6 +19,9 @@ REGISTER_SCRIPT_SUBCLASS(WormHole, SpaceObject)
     /// Set the target of this wormhole
     REGISTER_SCRIPT_CLASS_FUNCTION(WormHole, setTargetPosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(WormHole, getTargetPosition);
+    /// Set a function that will be called if a SpaceObject is teleported.
+    /// First argument given to the function will be the WormHole, the second the SpaceObject that has been teleported.
+    REGISTER_SCRIPT_CLASS_FUNCTION(WormHole, onTeleportation);
 }
 
 REGISTER_MULTIPLAYER_CLASS(WormHole, "WormHole");
@@ -132,8 +135,14 @@ void WormHole::collide(Collisionable* target, float collision_force)
             target->setPosition( (target_position + 
                                   sf::Vector2f(random(-TARGET_SPREAD, TARGET_SPREAD), 
                                                random(-TARGET_SPREAD, TARGET_SPREAD))));
-            if (obj)
-                obj->wormhole_alpha = 0.0;
+        if (obj)
+        {
+            obj->wormhole_alpha = 0.0;
+            if (on_teleportation.isSet())
+            {
+                on_teleportation.call(P<WormHole>(this), obj);
+            }
+        }
     }
     
     // Warp postprocessor-alpha is calculated using alpha = (1 - (delay/10))
@@ -152,4 +161,9 @@ void WormHole::setTargetPosition(sf::Vector2f v)
 sf::Vector2f WormHole::getTargetPosition()
 {
     return target_position;
+}
+
+void WormHole::onTeleportation(ScriptSimpleCallback callback)
+{
+    this->on_teleportation = callback;
 }
