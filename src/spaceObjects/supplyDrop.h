@@ -6,6 +6,8 @@
 
 class SupplyDrop : public SpaceObject
 {
+private:
+    ScriptSimpleCallback on_pickup_callback;
 public:
     int8_t weapon_storage[MW_Count];
     float energy;
@@ -18,7 +20,9 @@ public:
 
     void setEnergy(float amount) { energy = amount; }
     void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon != MW_None) weapon_storage[weapon] = amount; }
-    
+
+    void onPickUp(ScriptSimpleCallback callback);
+
     virtual string getExportLine();
 };
 
