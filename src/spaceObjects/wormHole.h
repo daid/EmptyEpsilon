@@ -15,6 +15,7 @@ class WormHole : public SpaceObject, public Updatable
     static const int cloud_count = 5;
     NebulaCloud clouds[cloud_count];
 
+    ScriptSimpleCallback on_teleportation;
 public:
     WormHole();
 
@@ -28,7 +29,8 @@ public:
     
     void setTargetPosition(sf::Vector2f v);   /* Where to jump to */
     sf::Vector2f getTargetPosition();
-    
+    void onTeleportation(ScriptSimpleCallback callback);
+
     virtual string getExportLine() { return "WormHole():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + "):setTargetPosition(" + string(target_position.x, 0) + ", " + string(target_position.y, 0) + ")"; }
 };
 
