@@ -379,30 +379,32 @@ end
 function moveNebulae(delta)
 	for nidx=1,#movingNebulae do
 		mnx, mny = movingNebulae[nidx]:getPosition()
-		angleChange = false
-		if mnx < -100000 then
-			angleChange = true
-			movingNebulae[nidx].angle = random(0,180) + 270
-		end
-		if mnx > 100000 then
-			angleChange = true
-			movingNebulae[nidx].angle = random(90,270)
-		end
-		if mny < -100000 then
-			angleChange = true
-			movingNebulae[nidx].angle = random(0,180)
-		end
-		if mny > 100000 then
-			angleChange = true
-			movingNebulae[nidx].angle = random(180,360)
-		end
-		if angleChange then
-			deltaNebx, deltaNeby = vectorFromAngle(movingNebulae[nidx].angle, movingNebulae[nidx].travel/10+20)
-			movingNebulae[nidx]:setPosition(mnx+deltaNebx, mny+deltaNeby)
-			movingNebulae.travel = random(1,100)
-		else
-			deltaNebx, deltaNeby = vectorFromAngle(movingNebulae[nidx].angle, movingNebulae[nidx].travel/10)
-			movingNebulae[nidx]:setPosition(mnx+deltaNebx, mny+deltaNeby)
+		if mnx ~= nil and mny ~= nil then
+			angleChange = false
+			if mnx < -100000 then
+				angleChange = true
+				movingNebulae[nidx].angle = random(0,180) + 270
+			end
+			if mnx > 100000 then
+				angleChange = true
+				movingNebulae[nidx].angle = random(90,270)
+			end
+			if mny < -100000 then
+				angleChange = true
+				movingNebulae[nidx].angle = random(0,180)
+			end
+			if mny > 100000 then
+				angleChange = true
+				movingNebulae[nidx].angle = random(180,360)
+			end
+			if angleChange then
+				deltaNebx, deltaNeby = vectorFromAngle(movingNebulae[nidx].angle, movingNebulae[nidx].travel/10+20)
+				movingNebulae[nidx]:setPosition(mnx+deltaNebx, mny+deltaNeby)
+				movingNebulae.travel = random(1,100)
+			else
+				deltaNebx, deltaNeby = vectorFromAngle(movingNebulae[nidx].angle, movingNebulae[nidx].travel/10)
+				movingNebulae[nidx]:setPosition(mnx+deltaNebx, mny+deltaNeby)
+			end
 		end
 	end
 end
@@ -2833,7 +2835,9 @@ function transportPlot(delta)
 			transportList = tempTransportList
 		end
 		if #transportList < #stationList then
-			target = randomStation()
+			repeat
+				target = randomStation()				
+			until(target ~= nil)
 			rnd = irandom(1,5)
 			if rnd == 1 then
 				name = "Personnel"
@@ -4566,16 +4570,20 @@ function initialOrders(delta)
 	initialOrderTimer = initialOrderTimer - delta
 	if initialOrderTimer < 0 then
 		if initialOrdersMsg == nil then
-			initialOrdersMsg = "sent"
+			foundPlayer = false
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() then
+					foundPlayer = true
 					p:addToShipLog(string.format("You are to protect your home base, %s, against enemy attack. Respond to other requests as you see fit",homeStation:getCallSign()),"Magenta")
 					primaryOrders = string.format("Protect %s",homeStation:getCallSign())
 					playSoundFile("sa_55_Commander1.wav")
 				end
 			end
-			plot1 = setEnemyDefenseFleet
+			if foundPlayer then
+				initialOrdersMsg = "sent"
+				plot1 = setEnemyDefenseFleet
+			end
 		end
 	end
 end
@@ -4599,6 +4607,9 @@ function threadedPursuit(delta)
 	plot1name = "threadedPursuit"
 	if ef2 == nil then
 		p = closestPlayerTo(targetEnemyStation)
+		if p == nil then
+			return
+		end
 		scx, scy = p:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(20000,30000))
 		ef2 = spawnEnemies(scx+cpx,scy+cpy,.8)
@@ -6288,34 +6299,36 @@ function moveWormArt(delta)
 		plotW = wormBirth
 	end
 	p = closestPlayerTo(wormArt)
-	if distance(p,wormArt) > 5000 then
-		wax, way = wormArt:getPosition()
-		angleChange = false
-		if wax < -100000 then
-			angleChange = true
-			wormArt.travelAngle = random(0,180) + 270
-		end
-		if wax > 100000 then
-			angleChange = true
-			wormArt.travelAngle = random(90,270)
-		end
-		if way < -100000 then
-			angleChange = true
-			wormArt.travelAngle = random(0,180)
-		end
-		if way > 100000 then
-			angleChange = true
-			wormArt.travelAngle = random(180,360)
-		end
-		if angleChange then
-			wadx, wady = vectorFromAngle(wormArt.travelAngle,wormArt.travel+20)
-			wormArt:setPosition(wax+wadx,way+wady)
-		else
-			wadx, wady = vectorFromAngle(wormArt.travelAngle + wormArt.tempAngle,wormArt.travel)
-			wormArt:setPosition(wax+wadx,way+wady)
-			wormArt.tempAngle = wormArt.tempAngle + 1
-			if wormArt.tempAngle > 90 then
-				wormArt.tempAngle = -90
+	if p ~= nil then
+		if distance(p,wormArt) > 5000 then
+			wax, way = wormArt:getPosition()
+			angleChange = false
+			if wax < -100000 then
+				angleChange = true
+				wormArt.travelAngle = random(0,180) + 270
+			end
+			if wax > 100000 then
+				angleChange = true
+				wormArt.travelAngle = random(90,270)
+			end
+			if way < -100000 then
+				angleChange = true
+				wormArt.travelAngle = random(0,180)
+			end
+			if way > 100000 then
+				angleChange = true
+				wormArt.travelAngle = random(180,360)
+			end
+			if angleChange then
+				wadx, wady = vectorFromAngle(wormArt.travelAngle,wormArt.travel+20)
+				wormArt:setPosition(wax+wadx,way+wady)
+			else
+				wadx, wady = vectorFromAngle(wormArt.travelAngle + wormArt.tempAngle,wormArt.travel)
+				wormArt:setPosition(wax+wadx,way+wady)
+				wormArt.tempAngle = wormArt.tempAngle + 1
+				if wormArt.tempAngle > 90 then
+					wormArt.tempAngle = -90
+				end
 			end
 		end
 	end
