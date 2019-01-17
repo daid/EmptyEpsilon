@@ -2,7 +2,7 @@
 #ifdef __WIN32__
     #include <windows.h>
 #endif
-#ifdef __gnu_linux__
+#ifdef __gnu_linux__ && !defined(__ANDROID__)
     //Including ioctl or termios conflicts with asm/termios.h which we need for TCGETS2. So locally define the ioctl and tcsendbreak functions. Yes, it's dirty, but it works.
     //#include <sys/ioctl.h>
     //#include <termios.h>
@@ -55,7 +55,7 @@ SerialPort::SerialPort(string name)
         }
     }
 #endif
-#if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
+#if defined(__gnu_linux__) && !defined(__ANDROID__) || (defined(__APPLE__) && defined(__MACH__))
     if (!name.startswith("/dev/"))
         name = "/dev/" + name;
     handle = open(name.c_str(), O_RDWR | O_NOCTTY | O_NDELAY);
@@ -74,7 +74,7 @@ SerialPort::~SerialPort()
     CloseHandle(handle);
     handle = INVALID_HANDLE_VALUE;
 #endif
-#if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
+#if defined(__gnu_linux__) && !defined(__ANDROID__) || (defined(__APPLE__) && defined(__MACH__))
     close(handle);
     handle = 0;
 #endif
@@ -85,7 +85,7 @@ bool SerialPort::isOpen()
 #ifdef __WIN32__
     return handle != INVALID_HANDLE_VALUE;
 #endif
-#if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
+#if defined(__gnu_linux__) && !defined(__ANDROID__) || (defined(__APPLE__) && defined(__MACH__))
     return handle;
 #endif
     return false;
@@ -161,7 +161,7 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
         LOG(ERROR) << "SetCommState failed!" << error;
     }
 #endif
-#ifdef __gnu_linux__
+#if defined(__gnu_linux__) && !defined(__ANDROID__)
     fsync(handle);
 
     struct termios2 tio;
@@ -315,7 +315,7 @@ void SerialPort::send(void* data, int data_size)
         data_size -= written;
     }
 #endif
-#if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
+#if defined(__gnu_linux__) && !defined(__ANDROID__) || (defined(__APPLE__) && defined(__MACH__))
     while(data_size > 0)
     {
         int written = write(handle, data, data_size);
@@ -343,7 +343,7 @@ int SerialPort::recv(void* data, int data_size)
     }
     return read_size;
 #endif
-#if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
+#if defined(__gnu_linux__) && !defined(__ANDROID__) || (defined(__APPLE__) && defined(__MACH__))
     int bytes_read = read(handle, data, data_size);
     if (bytes_read > 0)
         return bytes_read;
@@ -359,7 +359,7 @@ void SerialPort::setDTR()
 #ifdef __WIN32__
     EscapeCommFunction(handle, SETDTR);
 #endif
-#ifdef __gnu_linux__
+#if defined(__gnu_linux__) && !defined(__ANDROID__)
     int bit = TIOCM_DTR;
     ioctl(handle, TIOCMBIS, &bit);
 #endif
@@ -375,7 +375,7 @@ void SerialPort::clearDTR()
 #ifdef __WIN32__
     EscapeCommFunction(handle, CLRDTR);
 #endif
-#ifdef __gnu_linux__
+#if defined(__gnu_linux__) && !defined(__ANDROID__)
     int bit = TIOCM_DTR;
     ioctl(handle, TIOCMBIC, &bit);
 #endif
@@ -391,7 +391,7 @@ void SerialPort::setRTS()
 #ifdef __WIN32__
     EscapeCommFunction(handle, SETRTS);
 #endif
-#ifdef __gnu_linux__
+#if defined(__gnu_linux__) && !defined(__ANDROID__)
     int bit = TIOCM_RTS;
     ioctl(handle, TIOCMBIS, &bit);
 #endif
@@ -407,7 +407,7 @@ void SerialPort::clearRTS()
 #ifdef __WIN32__
     EscapeCommFunction(handle, CLRRTS);
 #endif
-#ifdef __gnu_linux__
+#if defined(__gnu_linux__) && !defined(__ANDROID__)
     int bit = TIOCM_RTS;
     ioctl(handle, TIOCMBIC, &bit);
 #endif
@@ -423,7 +423,7 @@ void SerialPort::sendBreak()
     Sleep(1);
     ClearCommBreak(handle);
 #endif
-#if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
+#if defined(__gnu_linux__) && !defined(__ANDROID__) || (defined(__APPLE__) && defined(__MACH__))
     tcsendbreak(handle, 0);
 #endif
 }
@@ -454,7 +454,7 @@ std::vector<string> SerialPort::getAvailablePorts()
         LOG(ERROR) << "Failed to open registry key for serial port list.";
     }
 #endif
-#ifdef __gnu_linux__
+#if defined(__gnu_linux__) && !defined(__ANDROID__)
     DIR* dir = opendir("/dev/");
     if (dir)
     {
@@ -509,7 +509,7 @@ string SerialPort::getPseudoDriverName(string port)
     }
     return ret;
 #endif
-#ifdef __gnu_linux__
+#if defined(__gnu_linux__) && !defined(__ANDROID__)
     FILE* f = fopen(("/sys/class/tty/" + port + "/device/modalias").c_str(), "rt");
     if (!f)
         return "";
