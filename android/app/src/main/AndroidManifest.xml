@@ -20,7 +20,7 @@
               android:icon="@drawable/ic_launcher"
               android:configChanges="keyboardHidden|orientation|screenSize">
 
-        <meta-data android:name="android.app.lib_name" android:value="sfml-activity" />
+        <meta-data android:name="android.app.lib_name" android:value="sfml-activity-d" />
         <meta-data android:name="sfml.app.lib_name" android:value="emptyepsilon" />
 
         <intent-filter>

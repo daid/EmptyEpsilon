@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "org.sfmldev.android"
+        applicationId "eu.daid.emptyepsilon"
         minSdkVersion 14
         targetSdkVersion 26
         versionCode 1
@@ -12,6 +12,7 @@ android {
         externalNativeBuild {
             ndkBuild {
                 // cppFlags "-std=c++14 -frtti -fexceptions"
+                cppFlags ="'-frtti'"
             }
 
         }
@@ -23,7 +24,6 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     externalNativeBuild {
