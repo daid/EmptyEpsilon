@@ -9,6 +9,7 @@
 #include "spaceObjects/cpuShip.h"
 #include "spaceObjects/spaceStation.h"
 #include "spaceObjects/zone.h"
+#include "factions.h"
 
 #include "screenComponents/radarView.h"
 
@@ -108,6 +109,12 @@ GameMasterScreen::GameMasterScreen()
     });
     cancel_create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
 
+    factions_button = new GuiButton(this, "FACTIONS_BUTTON", "Factions", [this]() {
+        factions_dialog->show();
+    });
+    // tweaks only work on the server
+    factions_button->setPosition(20, -120, ABottomLeft)->setSize(250, 50);
+
     tweak_button = new GuiButton(this, "TWEAK_OBJECT", "Tweak", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
         {
@@ -129,7 +136,8 @@ GameMasterScreen::GameMasterScreen()
         }
     });
     // tweaks only work on the server
-    tweak_button->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->setEnable(bool(game_server))->hide();
+    tweak_button->setPosition(20, -170, ABottomLeft)->setSize(250, 50)->setEnable(bool(game_server))->hide();
+
 
     player_comms_hail = new GuiButton(this, "HAIL_PLAYER", "Hail ship", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
@@ -184,6 +192,8 @@ GameMasterScreen::GameMasterScreen()
     ship_tweak_dialog->hide();
     object_tweak_dialog = new GuiObjectTweak(this, TW_Object);
     object_tweak_dialog->hide();
+    factions_dialog = new GuiFactions(this);
+    factions_dialog->hide();
 
     global_message_entry = new GuiGlobalMessageEntryView(this);
     global_message_entry->hide();

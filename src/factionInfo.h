@@ -75,4 +75,6 @@ protected:
     string description;
 };
 
+string getFactionVsFactionStateName(EFactionVsFactionState state);
+
 #endif//FACTION_INFO_H

@@ -145,6 +145,7 @@ set(SOURCES
 	src/screens/gm/globalMessageEntryView.cpp
 	src/screens/gm/chatDialog.cpp
 	src/screens/gm/tweak.cpp
+	src/screens/gm/factions.cpp
 	src/screens/extra/navigationScreen.cpp
 	src/screens/extra/droneOperatorScreen.cpp
 	src/screens/extra/dockMasterScreen.cpp
