@@ -77,31 +77,33 @@ ShipSelectionScreen::ShipSelectionScreen()
         window_button->setValue(false);
         topdown_button->setValue(false);
         cinematic_view_button->setValue(false);
+        window_options_label->hide();window_angle->hide();window_caption_button->hide();
     });
     game_master_button->setSize(GuiElement::GuiSizeMax, 50);
 
     // Ship window button and angle slider
-    window_button_row = new GuiAutoLayout(stations_layout, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
-    window_button_row->setSize(GuiElement::GuiSizeMax, 50);
-    window_button = new GuiToggleButton(window_button_row, "WINDOW_BUTTON", "Ship window", [this](bool value) {
+    //window_button_row = new GuiAutoLayout(stations_layout, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
+    //window_button_row->setSize(GuiElement::GuiSizeMax, 50);
+    window_button = new GuiToggleButton(stations_layout, "WINDOW_BUTTON", "Ship window", [this](bool value) {
         game_master_button->setValue(false);
         topdown_button->setValue(false);
         cinematic_view_button->setValue(false);
+        if (window_button->getValue()) {
+          window_options_label->show();window_angle->show();window_caption_button->show();
+        }
+        else {
+          window_options_label->hide();window_angle->hide();window_caption_button->hide();
+        }
     });
-    window_button->setSize(175, 50);
-
-    window_angle = new GuiSlider(window_button_row, "WINDOW_ANGLE", 0.0, 359.0, 0.0, [this](float value) {
-        window_angle_label->setText(string(int(window_angle->getValue())) + " degrees");
-    });
-    window_angle->setSize(GuiElement::GuiSizeMax, 50);
-    window_angle_label = new GuiLabel(window_angle, "WINDOW_ANGLE_LABEL", "0 degrees", 30);
-    window_angle_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    //window_button->setSize(175, 50);
+    window_button->setSize(GuiElement::GuiSizeMax, 50);
 
     // Top-down view button
     topdown_button = new GuiToggleButton(stations_layout, "TOP_DOWN_3D_BUTTON", "Top-down 3D view", [this](bool value) {
         game_master_button->setValue(false);
         window_button->setValue(false);
         cinematic_view_button->setValue(false);
+        window_options_label->hide();window_angle->hide();window_caption_button->hide();
     });
     topdown_button->setSize(GuiElement::GuiSizeMax, 50);
 
@@ -110,8 +112,23 @@ ShipSelectionScreen::ShipSelectionScreen()
         game_master_button->setValue(false);
         window_button->setValue(false);
         topdown_button->setValue(false);
+        window_options_label->hide();window_angle->hide();window_caption_button->hide();
     });
     cinematic_view_button->setSize(GuiElement::GuiSizeMax, 50);
+
+    // ship window options
+    window_options_label = new GuiLabel(stations_layout, "WINDOW_OPTIONS_LABEL", "Ship Window Settings", 30);
+    window_options_label->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    
+    window_angle = new GuiSlider(stations_layout, "WINDOW_ANGLE", 0.0, 359.0, 0.0, [this](float value) {
+        window_angle_label->setText(string(int(window_angle->getValue())) + " degrees");
+    });
+    window_angle->setSize(GuiElement::GuiSizeMax, 50);
+    window_angle_label = new GuiLabel(window_angle, "WINDOW_ANGLE_LABEL", "0 degrees", 30);
+    window_angle_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    
+    window_caption_button = new GuiToggleButton(stations_layout, "WINDOW_BUTTON", "Show Headings & Callsigns", [this](bool value) {});
+    window_caption_button->setSize(GuiElement::GuiSizeMax, 50);
 
     // If this is the server, add a panel to create player ships.
     if (game_server)
@@ -400,6 +417,8 @@ void ShipSelectionScreen::updateCrewTypeOptions()
     game_master_button->hide();
     window_button->hide();
     window_angle->hide();
+    window_caption_button->hide();
+    window_options_label->hide();
     topdown_button->hide();
     cinematic_view_button->hide();
     main_screen_button->setVisible(canDoMainScreen());
@@ -407,6 +426,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
     main_screen_controls_button->setVisible(crew_type_selector->getSelectionIndex() != 3);
     game_master_button->setValue(false);
     window_button->setValue(false);
+    window_caption_button->setValue(false);
     topdown_button->setValue(false);
     cinematic_view_button->setValue(false);
 
@@ -439,7 +459,9 @@ void ShipSelectionScreen::updateCrewTypeOptions()
         main_screen_button->hide();
         game_master_button->setVisible(bool(game_server));
         window_button->setVisible(canDoMainScreen());
-        window_angle->setVisible(canDoMainScreen());
+        //window_angle->setVisible(canDoMainScreen());
+        //window_caption_button->setVisible(canDoMainScreen());
+        //window_options_label->setVisible(canDoMainScreen());
         topdown_button->setVisible(canDoMainScreen());
         cinematic_view_button->setVisible(canDoMainScreen());
         break;
@@ -466,6 +488,10 @@ void ShipSelectionScreen::onReadyClick()
     // When the Ready button is clicked, destroy the ship selection screen and
     // create the position's screen. If selecting a non-player screen, set the
     // ship ID to -1 (no ship).
+    uint8_t window_caption = 0;
+    window_caption |=  WindowScreen::flag_spacedust;
+    if (window_caption_button->getValue())
+      window_caption |= WindowScreen::flag_callsigns | WindowScreen::flag_headings ;
     if (game_master_button->getValue())
     {
         my_player_info->commandSetShipId(-1);
@@ -474,7 +500,7 @@ void ShipSelectionScreen::onReadyClick()
     }else if (window_button->getValue())
     {
         destroy();
-        new WindowScreen(int(window_angle->getValue()));
+        new WindowScreen(int(window_angle->getValue()), window_caption);
     }else if(topdown_button->getValue())
     {
         my_player_info->commandSetShipId(-1);

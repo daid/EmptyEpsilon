@@ -40,8 +40,10 @@ private:
     GuiToggleButton* game_master_button;
     GuiAutoLayout* window_button_row;
     GuiToggleButton* window_button;
+    GuiToggleButton* window_caption_button;
     GuiSlider* window_angle;
     GuiLabel* window_angle_label;
+    GuiLabel* window_options_label;
     GuiToggleButton* topdown_button;
     GuiToggleButton* cinematic_view_button;
     
