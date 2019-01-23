@@ -120,11 +120,13 @@ int main(int argc, char** argv)
         string mod = PreferencesManager::get("mod");
         if (getenv("HOME"))
         {
-            new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod + "/");
-            PackResourceProvider::addPackResourcesForDirectory(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod + "/");
+            new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod + "/resources/");
+            new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod + "/scripts/");
+            PackResourceProvider::addPackResourcesForDirectory(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod + "/packs/");
         }
-        new DirectoryResourceProvider("resources/mods/" + mod + "/");
-        PackResourceProvider::addPackResourcesForDirectory("resources/mods/" + mod + "/");
+        new DirectoryResourceProvider("resources/mods/" + mod + "/resources/");
+        new DirectoryResourceProvider("resources/mods/" + mod + "/scripts/");
+        PackResourceProvider::addPackResourcesForDirectory("resources/mods/" + mod + "/packs/");
     }
 
 #ifdef RESOURCE_BASE_DIR
