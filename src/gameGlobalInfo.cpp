@@ -172,6 +172,8 @@ void GameGlobalInfo::reset()
     }
     callsign_counter = 0;
     victory_faction = -1;
+    for(unsigned int n=0; n<factionInfo.size(); n++)
+        factionInfo[n]->reset();
 }
 
 void GameGlobalInfo::startScenario(string filename)

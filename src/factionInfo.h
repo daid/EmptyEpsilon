@@ -23,6 +23,7 @@ public:
     sf::Color gm_color;
 
     std::vector<EFactionVsFactionState> states;
+    std::vector<EFactionVsFactionState> defaultStates;
 
     /*!
      * \brief Set name of faction.
@@ -65,9 +66,10 @@ public:
     void setFriendly(P<FactionInfo> other);
     /*!
      * \brief Reset the data.
-     * \todo Implement this.
      */
     void reset();
+
+    string getExportLine();
 
     static unsigned int findFactionId(string name);
 protected:
@@ -76,5 +78,6 @@ protected:
 };
 
 string getFactionVsFactionStateName(EFactionVsFactionState state);
+EFactionVsFactionState getFactionVsFactionStateId(string state);
 
 #endif//FACTION_INFO_H

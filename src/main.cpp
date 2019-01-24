@@ -240,6 +240,9 @@ int main(int argc, char** argv)
         P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");
         if (factionInfoScript->getError() != "") exit(1);
         factionInfoScript->destroy();
+        
+        for(unsigned int n=0; n<factionInfo.size(); n++)
+            factionInfo[n]->reset();
 
         fillDefaultDatabaseData();
 

@@ -56,7 +56,9 @@ GuiFactions::GuiFactions(GuiContainer *owner)
     (new GuiLabel(editPanel, "", "to be", 15))->setAlignment(ACenter)->setPosition(0, MARGIN * 4 + CELL_SIZE * 3, ATopCenter)->setSize(LABEL_SIZE - MARGIN, CELL_SIZE - MARGIN);
 
     edit_selector = new GuiSelector(editPanel, "", [this](int selection_index, string value) {
-        gameMasterActions->commandSetFactionsState(faction_a, faction_b, selection_index);
+        if (faction_a != -1 && faction_b != -1) {
+            gameMasterActions->commandSetFactionsState(faction_a, faction_b, selection_index);
+        }
     });
     edit_selector->setPosition(0, MARGIN * 5 + CELL_SIZE * 4, ATopCenter)->setSize(LABEL_SIZE - MARGIN, CELL_SIZE - MARGIN);
     edit_selector->setOptions({getFactionVsFactionStateName(FVF_Friendly), getFactionVsFactionStateName(FVF_Neutral), getFactionVsFactionStateName(FVF_Enemy)});
@@ -79,7 +81,7 @@ void GuiFactions::onSelectFactions(unsigned int i, unsigned int j)
 
 void GuiFactions::deSelectFactions()
 {
-    if (faction_a != faction_b)
+    if (faction_a != -1 && faction_b != -1)
     {
         this->buttons[faction_a * factionInfo.size() + faction_b]->setActive(false);
         h_labels[faction_a]->removeBackground();

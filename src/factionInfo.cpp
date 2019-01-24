@@ -1,4 +1,5 @@
 #include "factionInfo.h"
+#include "engine.h"
 
 REGISTER_SCRIPT_CLASS(FactionInfo)
 {
@@ -16,14 +17,14 @@ FactionInfo::FactionInfo()
     if (game_server) { LOG(ERROR) << "FactionInfo objects can not be created during a scenario right now."; destroy(); return; }
 
     foreach(FactionInfo, i, factionInfo)
-        i->states.push_back(FVF_Neutral);
+        i->defaultStates.push_back(FVF_Neutral);
     factionInfo.push_back(this);
 
     for(unsigned int n = 0; n < factionInfo.size(); n++)
-        states.push_back(FVF_Neutral);
+        defaultStates.push_back(FVF_Neutral);
     for(unsigned int n = 0; n < factionInfo.size(); n++)
         if (factionInfo[n] == this)
-            states[n] = FVF_Friendly;
+            defaultStates[n] = FVF_Friendly;
 }
 
 void FactionInfo::setEnemy(P<FactionInfo> other)
@@ -45,8 +46,8 @@ void FactionInfo::setEnemy(P<FactionInfo> other)
     }
     if (id1 != -1 && id2 != -1)
     {
-        factionInfo[id1]->states[id2] = FVF_Enemy;
-        factionInfo[id2]->states[id1] = FVF_Enemy;
+        factionInfo[id1]->defaultStates[id2] = FVF_Enemy;
+        factionInfo[id2]->defaultStates[id1] = FVF_Enemy;
     }
 }
 
@@ -69,8 +70,8 @@ void FactionInfo::setFriendly(P<FactionInfo> other)
     }
     if (id1 != -1 && id2 != -1)
     {
-        factionInfo[id1]->states[id2] = FVF_Friendly;
-        factionInfo[id2]->states[id1] = FVF_Friendly;
+        factionInfo[id1]->defaultStates[id2] = FVF_Friendly;
+        factionInfo[id2]->defaultStates[id1] = FVF_Friendly;
     }
 }
 
@@ -85,6 +86,51 @@ unsigned int FactionInfo::findFactionId(string name)
 
 void FactionInfo::reset()
 {
+    states = defaultStates;
+}
+
+string FactionInfo::getExportLine()
+{
+    string ret = "";
+    for(unsigned int n = 0; n < factionInfo.size(); n++)
+    {
+        if (states[n] != defaultStates[n]){
+            ret += string("setFactionVsFactionState(")+
+            "\"" + name + "\", "+
+            "\"" + factionInfo[n]->name + "\", "+
+            "\"" + getFactionVsFactionStateName(states[n]) + "\")\n";
+        }
+    }
+    return ret;
+}
+
+static int setFactionVsFactionState(lua_State* L)
+{
+    string name1 = string(luaL_checkstring(L, 1));
+    string name2 = string(luaL_checkstring(L, 2));
+    string stateName = string(luaL_checkstring(L, 3));
+
+    P<FactionInfo> faction_a = factionInfo[FactionInfo::findFactionId(name1)];
+    unsigned int faction_b_idx = FactionInfo::findFactionId(name2);
+    EFactionVsFactionState state = getFactionVsFactionStateId(stateName);
+    faction_a->states[faction_b_idx] = state;
+
+    return 0;
+}
+
+/// setFactionVsFactionState(factionName1, factionName2, stateName)
+/// Sets how faction 1 treats faction 2 
+REGISTER_SCRIPT_FUNCTION(setFactionVsFactionState);
+
+EFactionVsFactionState getFactionVsFactionStateId(string stateName)
+{
+    string state = stateName.lower();
+    if (state == "enemy")
+        return FVF_Enemy;
+    else if (state == "friendly")
+        return FVF_Friendly;
+    else
+        return FVF_Neutral;
 }
 
 string getFactionVsFactionStateName(EFactionVsFactionState state){
