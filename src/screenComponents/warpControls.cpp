@@ -6,7 +6,7 @@
 #include "gui/gui2_slider.h"
 #include "gui/gui2_keyvaluedisplay.h"
 
-GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id, P<PlayerSpaceship>& targetSpaceship)
+GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id, P<PlayerSpaceship> targetSpaceship)
 : GuiElement(owner, id), target_spaceship(targetSpaceship)
 {
     // Build warp request slider.
@@ -41,7 +41,13 @@ GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id, P<PlayerSpacesh
     label->setTextSize(30)->setPosition(50, 0, ATopLeft)->setSize(40, GuiElement::GuiSizeMax);
 
     // Prep the alert overlay.
-    (new GuiPowerDamageIndicator(this, id + "_DPI", SYS_Warp, ATopCenter, target_spaceship))->setSize(50, GuiElement::GuiSizeMax);
+    pdi = new GuiPowerDamageIndicator(this, id + "_DPI", SYS_Warp, ATopCenter, target_spaceship);
+    pdi->setSize(50, GuiElement::GuiSizeMax);
+}
+
+void GuiWarpControls::setTargetSpaceship(P<PlayerSpaceship> targetSpaceship){
+    target_spaceship = targetSpaceship;
+    pdi->setTargetSpaceship(target_spaceship);
 }
 
 void GuiWarpControls::onDraw(sf::RenderTarget& window)

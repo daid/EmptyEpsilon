@@ -6,7 +6,7 @@
 
 #include "gui/gui2_progressbar.h"
 
-GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id, P<PlayerSpaceship>& targetSpaceship)
+GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id, P<PlayerSpaceship> targetSpaceship)
 : GuiElement(owner, id), target_spaceship(targetSpaceship)
 {
     charge_bar = new GuiProgressbar(this, id + "_CHARGE", 0.0, 1.0, 0.0);
@@ -23,8 +23,16 @@ GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id, P<PlayerSpa
     });
     slider->setPosition(0, -50, ABottomCenter)->setSize(GuiElement::GuiSizeMax, 165);
     
-    (new GuiPowerDamageIndicator(slider, id + "_STRAFE_INDICATOR", SYS_Maneuver, ACenterLeft, target_spaceship))->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiPowerDamageIndicator(slider, id + "_BOOST_INDICATOR", SYS_Impulse, ABottomLeft, target_spaceship))->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
+    strafe_pdi = new GuiPowerDamageIndicator(slider, id + "_STRAFE_INDICATOR", SYS_Maneuver, ACenterLeft, target_spaceship);
+    strafe_pdi->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
+    boost_pdi = new GuiPowerDamageIndicator(slider, id + "_BOOST_INDICATOR", SYS_Impulse, ABottomLeft, target_spaceship);
+    boost_pdi->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
+}
+
+void GuiCombatManeuver::setTargetSpaceship(P<PlayerSpaceship> targetSpaceship){
+    target_spaceship = targetSpaceship;
+    strafe_pdi->setTargetSpaceship(target_spaceship);
+    boost_pdi->setTargetSpaceship(target_spaceship);
 }
 
 void GuiCombatManeuver::onDraw(sf::RenderTarget& window)

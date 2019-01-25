@@ -39,6 +39,7 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer *owner)
         {
             mode = Piloting;
             selected_drone = ship;
+            single_pilot_view->setTargetSpaceship(selected_drone);
         }
     });
     drone_list->setPosition(0, -100, ABottomCenter)->setSize(500, 1000);
@@ -59,11 +60,14 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer *owner)
     // Prep the alert overlay.
     (new GuiPowerDamageIndicator(this, "DOCKS_DPI", SYS_Drones, ATopCenter, my_spaceship))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
+
 void DroneOperatorScreen::disconnected()
 {
     mode = drone_list->entryCount() == 0 ? NoDrones : DroneSelection;
     selected_drone = NULL;
+    single_pilot_view->setTargetSpaceship(selected_drone);
 }
+
 bool DroneOperatorScreen::isConnectable(P<PlayerSpaceship> ship)
 {
     return ship 

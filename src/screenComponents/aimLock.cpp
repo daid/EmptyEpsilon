@@ -6,7 +6,7 @@
 
 #include "gui/gui2_rotationdial.h"
 
-AimLockButton::AimLockButton(GuiContainer* owner, string id, GuiMissileTubeControls* tube_controls, GuiRotationDial* missile_aim, P<PlayerSpaceship>& targetSpaceship)
+AimLockButton::AimLockButton(GuiContainer* owner, string id, GuiMissileTubeControls* tube_controls, GuiRotationDial* missile_aim, P<PlayerSpaceship> targetSpaceship)
 : GuiToggleButton(owner, id, "Lock", [this](bool value){setAimLock(value);}), target_spaceship(targetSpaceship)
 {
     this->tube_controls = tube_controls;

@@ -5,7 +5,7 @@
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_slider.h"
 
-GuiImpulseControls::GuiImpulseControls(GuiContainer* owner, string id, P<PlayerSpaceship>& targetSpaceship)
+GuiImpulseControls::GuiImpulseControls(GuiContainer* owner, string id, P<PlayerSpaceship> targetSpaceship)
 : GuiElement(owner, id), target_spaceship(targetSpaceship)
 {
     slider = new GuiSlider(this, id + "_SLIDER", 1.0, -1.0, 0.0, [this](float value) {
@@ -17,7 +17,13 @@ GuiImpulseControls::GuiImpulseControls(GuiContainer* owner, string id, P<PlayerS
     label = new GuiKeyValueDisplay(this, id, 0.5, "Impulse", "0%");
     label->setTextSize(30)->setPosition(50, 0, ATopLeft)->setSize(40, GuiElement::GuiSizeMax);
     
-    (new GuiPowerDamageIndicator(this, id + "_DPI", SYS_Impulse, ATopCenter, target_spaceship))->setSize(50, GuiElement::GuiSizeMax);
+    pdi = new GuiPowerDamageIndicator(this, id + "_DPI", SYS_Impulse, ATopCenter, target_spaceship);
+    pdi->setSize(50, GuiElement::GuiSizeMax);
+}
+
+void GuiImpulseControls::setTargetSpaceship(P<PlayerSpaceship> targetSpaceship){
+    target_spaceship = targetSpaceship;
+    pdi->setTargetSpaceship(target_spaceship);
 }
 
 void GuiImpulseControls::onDraw(sf::RenderTarget& window)

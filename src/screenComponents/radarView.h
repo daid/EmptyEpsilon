@@ -2,10 +2,10 @@
 #define RADAR_VIEW_H
 
 #include "gui/gui2_element.h"
+#include "spaceObjects/playerSpaceship.h"
 
 class GuiMissileTubeControls;
 class TargetsContainer;
-class PlayerSpaceship;
 class GuiRadarView : public GuiElement
 {
 public:
@@ -47,7 +47,7 @@ private:
 
     float distance;
     sf::Vector2f view_position;
-    P<PlayerSpaceship>& target_spaceship;
+    P<PlayerSpaceship> target_spaceship;
     bool long_range;
     bool show_ghost_dots;
     bool show_waypoints;
@@ -68,7 +68,7 @@ private:
     ffunc_t joystick_z_func;
     ffunc_t joystick_r_func;
 public:
-    GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets, P<PlayerSpaceship>& targetSpaceship);
+    GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets, P<PlayerSpaceship> targetSpaceship);
 
     virtual void onDraw(sf::RenderTarget& window);
 
@@ -109,6 +109,8 @@ public:
     virtual bool onJoystickXYMove(sf::Vector2f position);
     virtual bool onJoystickZMove(float position);
     virtual bool onJoystickRMove(float position);
+    void setTargetSpaceship(P<PlayerSpaceship> targetSpaceship){target_spaceship = targetSpaceship;}
+
 private:
     void updateGhostDots();
 

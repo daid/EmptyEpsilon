@@ -8,7 +8,7 @@
 #include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"
 
-GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id, P<PlayerSpaceship>& targetSpaceship)
+GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id, P<PlayerSpaceship> targetSpaceship)
 : GuiAutoLayout(owner, id, LayoutVerticalBottomToTop), load_type(MW_None), manual_aim(false), missile_target_angle(0) , target_spaceship(targetSpaceship)
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -52,7 +52,8 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id, P
             }
         });
         row.fire_button->setSize(200, 50);
-        (new GuiPowerDamageIndicator(row.fire_button, id + "_" + string(n) + "_PDI", SYS_MissileSystem, ACenterRight, target_spaceship))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        pdi = new GuiPowerDamageIndicator(row.fire_button, id + "_" + string(n) + "_PDI", SYS_MissileSystem, ACenterRight, target_spaceship);
+        pdi->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         row.loading_bar = new GuiProgressbar(row.layout, id + "_" + string(n) + "_PROGRESS", 0, 1.0, 0);
         row.loading_bar->setColor(sf::Color(128, 128, 128))->setSize(200, 50);
         row.loading_label = new GuiLabel(row.loading_bar, id + "_" + string(n) + "_PROGRESS_LABEL", "Loading", 35);
@@ -82,6 +83,11 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id, P
     load_type_rows[MW_EMP].button->setIcon("gui/icons/weapon-emp.png");
     load_type_rows[MW_Nuke].button->setIcon("gui/icons/weapon-nuke.png");
     load_type_rows[MW_HVLI].button->setIcon("gui/icons/weapon-hvli.png");
+}
+
+void GuiMissileTubeControls::setTargetSpaceship(P<PlayerSpaceship> targetSpaceship){
+    target_spaceship = targetSpaceship;
+    pdi->setTargetSpaceship(target_spaceship);
 }
 
 void GuiMissileTubeControls::onDraw(sf::RenderTarget& window){

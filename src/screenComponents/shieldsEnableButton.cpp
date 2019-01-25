@@ -8,7 +8,7 @@
 #include "gui/gui2_progressbar.h"
 #include "gui/gui2_label.h"
 
-GuiShieldsEnableButton::GuiShieldsEnableButton(GuiContainer* owner, string id, P<PlayerSpaceship>& targetSpaceship)
+GuiShieldsEnableButton::GuiShieldsEnableButton(GuiContainer* owner, string id, P<PlayerSpaceship> targetSpaceship)
 : GuiElement(owner, id), target_spaceship(targetSpaceship)
 {
     button = new GuiToggleButton(this, id + "_BUTTON", "Shields: ON", [this](bool value) {
@@ -20,7 +20,13 @@ GuiShieldsEnableButton::GuiShieldsEnableButton(GuiContainer* owner, string id, P
     bar->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     (new GuiLabel(bar, id + "_CALIBRATING_LABEL", "Calibrating", 30))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    (new GuiPowerDamageIndicator(this, id + "_PDI", SYS_FrontShield, ACenterLeft, target_spaceship))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    pdi = new GuiPowerDamageIndicator(this, id + "_PDI", SYS_FrontShield, ACenterLeft, target_spaceship);
+    pdi->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+}
+
+void GuiShieldsEnableButton::setTargetSpaceship(P<PlayerSpaceship> targetSpaceship){
+    target_spaceship = targetSpaceship;
+    pdi->setTargetSpaceship(target_spaceship);
 }
 
 void GuiShieldsEnableButton::onDraw(sf::RenderTarget& window)
