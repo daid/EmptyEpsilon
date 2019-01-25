@@ -44,3 +44,5 @@ options.ini
 logs/*.txt
 logs/*.json
 *.log
+.vs/*
+CMakeSettings.json
