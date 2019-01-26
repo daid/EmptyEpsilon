@@ -34,7 +34,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     (new AlertLevelOverlay(this));
 
     // Short-range tactical radar with a 5U range.
-    radar = new GuiRadarView(this, "TACTICAL_RADAR", 5000.0, &targets, my_spaceship);
+    radar = new GuiRadarView(this, "TACTICAL_RADAR", 5000.0, &targets, (P<SpaceShip>)my_spaceship);
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 750);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
 

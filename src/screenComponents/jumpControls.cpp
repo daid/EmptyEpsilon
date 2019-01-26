@@ -8,7 +8,7 @@
 #include "gui/gui2_progressbar.h"
 #include "gui/gui2_button.h"
 
-GuiJumpControls::GuiJumpControls(GuiContainer* owner, string id, P<PlayerSpaceship>& targetSpaceship)
+GuiJumpControls::GuiJumpControls(GuiContainer* owner, string id, P<PlayerSpaceship> targetSpaceship)
 : GuiElement(owner, id), target_spaceship(targetSpaceship)
 {
     slider = new GuiSlider(this, id + "_SLIDER", 5000.0, 50000.0, 10000.0, nullptr);
@@ -26,7 +26,13 @@ GuiJumpControls::GuiJumpControls(GuiContainer* owner, string id, P<PlayerSpacesh
     });
     button->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
     
-    (new GuiPowerDamageIndicator(this, id + "_DPI", SYS_JumpDrive, ATopCenter, target_spaceship))->setPosition(0, -50, ABottomLeft)->setSize(50, GuiElement::GuiSizeMax);
+    pdi = new GuiPowerDamageIndicator(this, id + "_DPI", SYS_JumpDrive, ATopCenter, target_spaceship);
+    pdi->setPosition(0, -50, ABottomLeft)->setSize(50, GuiElement::GuiSizeMax);
+}
+
+void GuiJumpControls::setTargetSpaceship(P<PlayerSpaceship> targetSpaceship){
+    target_spaceship = targetSpaceship;
+    pdi->setTargetSpaceship(target_spaceship);
 }
 
 void GuiJumpControls::onDraw(sf::RenderTarget& window)

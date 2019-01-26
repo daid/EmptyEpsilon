@@ -28,7 +28,7 @@
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_rotationdial.h"
 
-SinglePilotView::SinglePilotView(GuiContainer* owner, P<PlayerSpaceship>& targetSpaceship)
+SinglePilotView::SinglePilotView(GuiContainer* owner, P<PlayerSpaceship> targetSpaceship)
 : GuiElement(owner, "SINGLE_PILOT_VIEW"), target_spaceship(targetSpaceship)
 {
     // Render the radar shadow and background decorations.
@@ -36,7 +36,7 @@ SinglePilotView::SinglePilotView(GuiContainer* owner, P<PlayerSpaceship>& target
     background_gradient->setTextureCenter("gui/BackgroundGradientSingle");
 
     // 5U tactical radar with piloting features.
-    radar = new GuiRadarView(this, "TACTICAL_RADAR", 5000.0, &targets, target_spaceship);
+    radar = new GuiRadarView(this, "TACTICAL_RADAR", 5000.0, &targets, (P<SpaceShip>)target_spaceship);
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 650);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
@@ -94,7 +94,8 @@ SinglePilotView::SinglePilotView(GuiContainer* owner, P<PlayerSpaceship>& target
     );
 
     // Ship stats and combat maneuver at bottom right corner of left panel.
-    (new GuiCombatManeuver(this, "COMBAT_MANEUVER", target_spaceship))->setPosition(-20, -260, ABottomRight)->setSize(200, 150);
+    combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER", target_spaceship);
+    combat_maneuver->setPosition(-20, -260, ABottomRight)->setSize(200, 150);
 
     heat_display = new GuiKeyValueDisplay(this, "HEAT_DISPLAY", 0.45, "Heat", "");
     heat_display->setIcon("gui/icons/heat")->setTextSize(20)->setPosition(-20, -220, ABottomRight)->setSize(240, 40);
@@ -123,24 +124,44 @@ SinglePilotView::SinglePilotView(GuiContainer* owner, P<PlayerSpaceship>& target
     // Engine layout in top left corner of left panel.
     GuiAutoLayout* engine_layout = new GuiAutoLayout(this, "ENGINE_LAYOUT", GuiAutoLayout::LayoutHorizontalLeftToRight);
     engine_layout->setPosition(20, 80, ATopLeft)->setSize(GuiElement::GuiSizeMax, 250);
-    (new GuiImpulseControls(engine_layout, "IMPULSE", target_spaceship))->setSize(100, GuiElement::GuiSizeMax);
-    warp_controls = (new GuiWarpControls(engine_layout, "WARP", target_spaceship))->setSize(100, GuiElement::GuiSizeMax);
-    jump_controls = (new GuiJumpControls(engine_layout, "JUMP", target_spaceship))->setSize(100, GuiElement::GuiSizeMax);
+    impulse_controls = new GuiImpulseControls(engine_layout, "IMPULSE", target_spaceship);
+    impulse_controls->setSize(100, GuiElement::GuiSizeMax);
+    warp_controls = new GuiWarpControls(engine_layout, "WARP", target_spaceship);
+    warp_controls->setSize(100, GuiElement::GuiSizeMax);
+    jump_controls = new GuiJumpControls(engine_layout, "JUMP", target_spaceship);
+    jump_controls->setSize(100, GuiElement::GuiSizeMax);
 
     // Docking, comms, and shields buttons across top.
-    (new GuiDockingButton(this, "DOCKING", target_spaceship))->setPosition(20, 20, ATopLeft)->setSize(250, 50);
-    if (target_spaceship == my_spaceship) 
+    docking_button = new GuiDockingButton(this, "DOCKING", target_spaceship);
+    docking_button->setPosition(20, 20, ATopLeft)->setSize(250, 50);
+    if (target_spaceship == my_spaceship)
     {
         (new GuiOpenCommsButton(this, "OPEN_COMMS_BUTTON", &targets))->setPosition(270, 20, ATopLeft)->setSize(250, 50);
         (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     }
-    (new GuiShieldsEnableButton(this, "SHIELDS_ENABLE", target_spaceship))->setPosition(520, 20, ATopLeft)->setSize(250, 50);
+    shields_enable_button = new GuiShieldsEnableButton(this, "SHIELDS_ENABLE", target_spaceship);
+    shields_enable_button->setPosition(520, 20, ATopLeft)->setSize(250, 50);
 
     // Missile lock button near top right of left panel.
     lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim, target_spaceship);
     lock_aim->setPosition(250, 70, ATopCenter)->setSize(130, 50);
     
-    (new GuiCustomShipFunctions(this, singlePilot, "", target_spaceship))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    custom_ship_functions = new GuiCustomShipFunctions(this, singlePilot, "", target_spaceship);
+    custom_ship_functions->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+}
+
+void SinglePilotView::setTargetSpaceship(P<PlayerSpaceship> targetSpaceship){
+    target_spaceship = targetSpaceship;
+    radar->setTargetSpaceship((P<SpaceShip>)target_spaceship);
+    combat_maneuver->setTargetSpaceship(target_spaceship);
+    tube_controls->setTargetSpaceship(target_spaceship);
+    impulse_controls->setTargetSpaceship(target_spaceship);
+    warp_controls->setTargetSpaceship(target_spaceship);
+    jump_controls->setTargetSpaceship(target_spaceship);
+    docking_button->setTargetSpaceship(target_spaceship);
+    shields_enable_button->setTargetSpaceship(target_spaceship);
+    lock_aim->setTargetSpaceship(target_spaceship);
+    custom_ship_functions->setTargetSpaceship(target_spaceship);
 }
 
 void SinglePilotView::onDraw(sf::RenderTarget& window)
@@ -168,6 +189,7 @@ void SinglePilotView::onDraw(sf::RenderTarget& window)
     }
     GuiElement::onDraw(window);
 }
+
 
 void SinglePilotView::onHotkey(const HotkeyResult& key)
 {
@@ -256,3 +278,4 @@ void SinglePilotView::onHotkey(const HotkeyResult& key)
         }
     }
 }
+

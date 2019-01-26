@@ -9,11 +9,19 @@ class GuiRadarView;
 class GuiKeyValueDisplay;
 class GuiToggleButton;
 class GuiRotationDial;
+class GuiWarpControls;
+class GuiJumpControls;
+class GuiCombatManeuver;
+class GuiImpulseControls;
+class GuiDockingButton;
+class GuiShieldsEnableButton;
+class GuiCustomShipFunctions;
+class AimLockButton;
 
 class SinglePilotView : public GuiElement
 {
 private:
-    P<PlayerSpaceship>& target_spaceship;
+    P<PlayerSpaceship> target_spaceship;
     GuiOverlay* background_gradient;
 
     GuiKeyValueDisplay* heat_display;
@@ -22,20 +30,26 @@ private:
     GuiKeyValueDisplay* heading_display;
     GuiKeyValueDisplay* velocity_display;
     GuiKeyValueDisplay* shields_display;
-    GuiElement* warp_controls;
-    GuiElement* jump_controls;
+    GuiWarpControls* warp_controls;
+    GuiJumpControls* jump_controls;
     
     TargetsContainer targets;
     GuiRadarView* radar;
+    GuiCombatManeuver* combat_maneuver;
     GuiRotationDial* missile_aim;
     GuiMissileTubeControls* tube_controls;
-    GuiToggleButton* lock_aim;
+    GuiImpulseControls* impulse_controls;
+    GuiDockingButton* docking_button;
+    GuiShieldsEnableButton* shields_enable_button;
+    GuiCustomShipFunctions* custom_ship_functions;
+    AimLockButton* lock_aim;
 public:
-    SinglePilotView(GuiContainer* owner, P<PlayerSpaceship>& targetSpaceship);
+    SinglePilotView(GuiContainer* owner, P<PlayerSpaceship> targetSpaceship);
     
-    void setTargetSpaceship(P<PlayerSpaceship>& targetSpaceship) { target_spaceship = targetSpaceship;}
     virtual void onDraw(sf::RenderTarget& window);
     virtual void onHotkey(const HotkeyResult& key) override;
+    void setTargetSpaceship(P<PlayerSpaceship> targetSpaceship);
+
 };
 
 #endif//SINGLE_PILOT_VIEW_H

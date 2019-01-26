@@ -2,7 +2,7 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "dockingButton.h"
 
-GuiDockingButton::GuiDockingButton(GuiContainer* owner, string id, P<PlayerSpaceship>& targetSpaceship)
+GuiDockingButton::GuiDockingButton(GuiContainer* owner, string id, P<PlayerSpaceship> targetSpaceship)
 : GuiButton(owner, id, "", [this]() { click(); }), target_spaceship(targetSpaceship)
 {
     setIcon("gui/icons/docking");

@@ -4,9 +4,15 @@
 #include "gui/gui2_button.h"
 #include "gui/gui2_label.h"
 
-GuiCustomShipFunctions::GuiCustomShipFunctions(GuiContainer* owner, ECrewPosition position, string id, P<PlayerSpaceship>& targetSpaceship)
+GuiCustomShipFunctions::GuiCustomShipFunctions(GuiContainer* owner, ECrewPosition position, string id, P<PlayerSpaceship> targetSpaceship)
 : GuiAutoLayout(owner, id, GuiAutoLayout::LayoutVerticalTopToBottom), position(position), target_spaceship(targetSpaceship)
 {
+}
+
+void GuiCustomShipFunctions::setTargetSpaceship(P<PlayerSpaceship> targetSpaceship){
+    target_spaceship = targetSpaceship;
+    if (target_spaceship)
+        createEntries();
 }
 
 void GuiCustomShipFunctions::onDraw(sf::RenderTarget& window)
