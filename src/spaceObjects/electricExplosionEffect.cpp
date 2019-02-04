@@ -43,7 +43,7 @@ void ElectricExplosionEffect::draw3DTransparent()
     glScalef(scale * size, scale * size, scale * size);
     glColor3f(alpha, alpha, alpha);
     
-    ShaderManager::getShader("basicShader")->setParameter("textureMap", *textureManager.getTexture("electric_sphere_texture.png"));
+    ShaderManager::getShader("basicShader")->setUniform("textureMap", *textureManager.getTexture("electric_sphere_texture.png"));
     sf::Shader::bind(ShaderManager::getShader("basicShader"));
     Mesh* m = Mesh::getMesh("sphere.obj");
     m->render();
@@ -51,7 +51,7 @@ void ElectricExplosionEffect::draw3DTransparent()
     m->render();
     glPopMatrix();
     
-    ShaderManager::getShader("billboardShader")->setParameter("textureMap", *textureManager.getTexture("particle.png"));
+    ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture("particle.png"));
     sf::Shader::bind(ShaderManager::getShader("billboardShader"));
     scale = Tween<float>::easeInCubic(f, 0.0, 1.0, 0.3f, 3.0f);
     float r = Tween<float>::easeOutQuad(f, 0.0, 1.0, 1.0f, 0.0f);
