@@ -297,6 +297,8 @@
 		<Unit filename="../SeriousProton/src/httpServer.h" />
 		<Unit filename="../SeriousProton/src/input.cpp" />
 		<Unit filename="../SeriousProton/src/input.h" />
+		<Unit filename="../SeriousProton/src/json11/json11.hpp" />
+		<Unit filename="../SeriousProton/src/json11/json11.cpp" />
 		<Unit filename="../SeriousProton/src/logging.cpp" />
 		<Unit filename="../SeriousProton/src/logging.h" />
 		<Unit filename="../SeriousProton/src/lua/lapi.c">
