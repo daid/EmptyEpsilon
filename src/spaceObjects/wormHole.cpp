@@ -63,7 +63,7 @@ void WormHole::draw3DTransparent()
         if (alpha < 0.0)
             continue;
 
-        ShaderManager::getShader("billboardShader")->setParameter("textureMap", *textureManager.getTexture("wormHole" + string(cloud.texture) + ".png"));
+        ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture("wormHole" + string(cloud.texture) + ".png"));
         sf::Shader::bind(ShaderManager::getShader("billboardShader"));
         glBegin(GL_QUADS);
         glColor4f(alpha * 0.8, alpha * 0.8, alpha * 0.8, size);
