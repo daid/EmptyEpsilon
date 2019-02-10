@@ -4,6 +4,7 @@
 #include "hardware/serialDriver.h"
 #include "logging.h"
 #include <unistd.h>
+#include <json11/json11.hpp>
 
 using namespace json11;
 
@@ -135,8 +136,8 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
         }
         else
         {
-            string body = response.getBody();
-            string err;
+            std::string body = response.getBody();
+            std::string err;
             json11::Json hue_json = json11::Json::parse(body,err);
             LOG(ERROR) << "Json parser returned error " << err;
 
