@@ -18,6 +18,7 @@ public:
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f draw_position, float scale, bool long_range) override;
     virtual void update(float delta) override;
     virtual void collide(Collisionable* target, float force) override;
+    virtual bool canHideInNebula()  override { return false; }
     
     void setPlanetAtmosphereColor(float r, float g, float b);
     void setPlanetAtmosphereTexture(string texture_name);
