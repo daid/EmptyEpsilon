@@ -1,8 +1,8 @@
 -- Name: What the Dickens
--- Description: Patrol around London during Christmas. Bah! Humbug!
+-- Description: Patrol around the London area during Christmas. Bah! Humbug!
 -- Type: Mission
--- Variation[Easy]: Easy goals and/or enemies
--- Variation[Hard]: Hard goals and/or enemies
+-- Variation[Easy]: Easy goals and/or enemies. Good for solo players, short handed crews or less experienced crews.
+-- Variation[Hard]: Hard goals and/or enemies. Good for experienced crews looking for a challenge.
 
 require("utils.lua")
 
