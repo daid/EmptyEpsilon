@@ -16,6 +16,9 @@
 - Map terrain configuration - image file, position, coordinates and scale. set example in 'Basic' scenario
 - New navigation screen that displays terrain image and manage waypoints
 - Selected ship's max_warp displayed in GM screen info
+- add docks and drones systems: dockmaster, drone pilot, tractor beam
+- factions control in GM screen
+- GM can posess CPU ships
 
 ### Changed
 

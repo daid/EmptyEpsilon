@@ -22,11 +22,14 @@ class GameMasterChatDialog;
 class GuiObjectCreationView;
 class GuiGlobalMessageEntryView;
 class GuiFactions;
-class GameMasterScreen : public GuiCanvas, public Updatable
+class CpuShip;
+class GameMasterScreen : public GuiCanvas, public Updatable, public JoystickEventHandler
 {
 private:
     TargetsContainer targets;
     P<SpaceObject> target;
+    P<CpuShip> possession_target;
+    int8_t selected_posessed_tube;
     GuiRadarView* main_radar;
     GuiOverlay* box_selection_overlay;
     GuiSelector* faction_selector;
@@ -52,6 +55,7 @@ private:
     GuiToggleButton* intercept_comms_button;
     GuiButton* tweak_button;
     GuiButton* factions_button;
+    GuiToggleButton* possess_button;
     GuiButton* copy_scenario_button;
     GuiButton* copy_selected_button;
     GuiSelector* player_ship_selector;
@@ -81,10 +85,15 @@ public:
     void onMouseUp(sf::Vector2f position);
 
     virtual void onKey(sf::Event::KeyEvent key, int unicode);
+    virtual void handleJoystickAxis(unsigned int joystick, sf::Joystick::Axis axis, float position);
+    virtual void handleJoystickButton(unsigned int joystick, unsigned int button, bool state);
     
     PVector<SpaceObject> getSelection();
     
     string getScriptExport(bool selected_only);
+
+    void possess(P<CpuShip> target);
+    void dePossess();
 };
 
 

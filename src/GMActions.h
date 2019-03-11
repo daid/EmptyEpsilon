@@ -13,6 +13,7 @@ enum EShipOrder
 };
 class GameMasterActions;
 class SpaceObject;
+class CpuShip;
 class PlayerSpaceship;
 extern P<GameMasterActions> gameMasterActions;
 
@@ -36,6 +37,7 @@ public:
     void commandDestroy(PVector<SpaceObject> selection);
     void commandSendCommToPlayerShip(P<PlayerSpaceship> target, string line);
     void commandSetFactionsState(int faction_a, int faction_b, int stateIdx);
+    void commandSetPosessed(P<CpuShip> target, bool posessed);
     virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet);
     
 private:

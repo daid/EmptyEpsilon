@@ -45,7 +45,7 @@ private:
     float next_ghost_dot_update;
     GuiMissileTubeControls* missile_tube_controls;
 
-    P<PlayerSpaceship> target_spaceship;
+    P<SpaceShip> target_spaceship;
     bool long_range;
     bool show_ghost_dots;
     bool show_waypoints;
@@ -66,7 +66,7 @@ private:
     ffunc_t joystick_z_func;
     ffunc_t joystick_r_func;
 public:
-    GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets, P<PlayerSpaceship> targetSpaceship);
+    GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets, P<SpaceShip> targetSpaceship);
 
     virtual void onDraw(sf::RenderTarget& window);
 
@@ -96,7 +96,7 @@ public:
                   { SectorsView::setJoystickCallbacks(joystick_x_func, joystick_y_func, joystick_z_func, joystick_r_func); return this; }
     virtual GuiRadarView* setViewPosition(sf::Vector2f view_position) { SectorsView::setViewPosition(view_position); return this; }
     virtual bool onMouseDown(sf::Vector2f position);
-    void setTargetSpaceship(P<PlayerSpaceship> targetSpaceship){target_spaceship = targetSpaceship;}
+    GuiRadarView* setTargetSpaceship(P<SpaceShip> targetSpaceship){target_spaceship = targetSpaceship; return this;}
 
 private:
     void updateGhostDots();

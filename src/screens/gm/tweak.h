@@ -56,6 +56,8 @@ private:
     GuiToggleButton* jump_toggle;
     GuiSlider* impulse_speed_slider;
     GuiSlider* turn_speed_slider;
+    GuiSlider* combat_maneuver_boost_speed_slider;
+    GuiSlider* combat_maneuver_strafe_speed_slider;
     GuiSlider* heading_slider;
     GuiSlider* hull_max_slider;
     GuiSlider* hull_slider;
@@ -164,8 +166,6 @@ private:
     GuiTextEntry* control_code;
     GuiSlider* energy_level_slider;
     GuiSlider* max_energy_level_slider;
-    GuiSlider* combat_maneuver_boost_speed_slider;
-    GuiSlider* combat_maneuver_strafe_speed_slider;
     GuiLabel* position_count;
     GuiKeyValueDisplay* position[max_crew_positions];
 public:

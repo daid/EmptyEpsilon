@@ -31,6 +31,32 @@ enum EAlertLevel
 
 class PlayerSpaceship : public SpaceShip
 {
+protected:
+    static const int16_t CMD_SET_SHIELDS = 0x0009;
+    static const int16_t CMD_SET_MAIN_SCREEN_SETTING = 0x000A; // Overlay is 0x0027
+    static const int16_t CMD_SCAN_OBJECT = 0x000B;
+    static const int16_t CMD_SCAN_DONE = 0x000C;
+    static const int16_t CMD_SCAN_CANCEL = 0x000D;
+    static const int16_t CMD_SET_SYSTEM_POWER_REQUEST = 0x000E;
+    static const int16_t CMD_SET_SYSTEM_COOLANT_REQUEST = 0x000F;
+    static const int16_t CMD_OPEN_TEXT_COMM = 0x0012; //TEXT communication
+    static const int16_t CMD_CLOSE_TEXT_COMM = 0x0013;
+    static const int16_t CMD_SEND_TEXT_COMM = 0x0014;
+    static const int16_t CMD_SEND_TEXT_COMM_PLAYER = 0x0015;
+    static const int16_t CMD_ANSWER_COMM_HAIL = 0x0016;
+    static const int16_t CMD_SET_AUTO_REPAIR = 0x0017;
+    static const int16_t CMD_ADD_WAYPOINT = 0x001B;
+    static const int16_t CMD_REMOVE_WAYPOINT = 0x001C;
+    static const int16_t CMD_MOVE_WAYPOINT = 0x001D;
+    static const int16_t CMD_ACTIVATE_SELF_DESTRUCT = 0x001E;
+    static const int16_t CMD_CANCEL_SELF_DESTRUCT = 0x001F;
+    static const int16_t CMD_CONFIRM_SELF_DESTRUCT = 0x0020;
+    static const int16_t CMD_SET_ALERT_LEVEL = 0x0024;
+    static const int16_t CMD_SET_SCIENCE_LINK = 0x0025;
+    static const int16_t CMD_SET_PROBE_3D_LINK = 0x0026;
+    static const int16_t CMD_SET_MAIN_SCREEN_OVERLAY = 0x0028;
+    static const int16_t CMD_CUSTOM_FUNCTION = 0x002A;
+    static const int16_t CMD_SET_AUTO_REPAIR_SYSTEM_TARGET = 0x0030;
 public:
     // Power consumption and generation base rates
     constexpr static float energy_shield_use_per_second = 1.5f;
@@ -60,22 +86,6 @@ public:
     
     constexpr static int16_t CMD_PLAY_CLIENT_SOUND = 0x0001;
 
-    // Content of a line in the ship's log
-    class ShipLogEntry
-    {
-    public:
-        string prefix;
-        string text;
-        sf::Color color;
-        string station;
-
-        ShipLogEntry() {}
-        ShipLogEntry(string prefix, string text, sf::Color color, string station)
-        : prefix(prefix), text(text), color(color), station(station) {}
-
-        bool operator!=(const ShipLogEntry& e) { return prefix != e.prefix || text != e.text || color != e.color || station != e.station; }
-    };
-    
     class CustomShipFunction
     {
     public:
@@ -130,9 +140,6 @@ private:
     std::vector<string> comms_reply_message;
     CommsScriptInterface comms_script_interface;  //Server only
 
-    std::vector<ShipLogEntry> ships_log_extern;
-    std::vector<ShipLogEntry> ships_log_intern;
-    
 public:
     ESystem auto_repairing_system;
     std::vector<CustomShipFunction> custom_functions;
@@ -206,35 +213,21 @@ public:
     void removeCustom(string name);
 
     // Client command functions
-    virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet) override;
-    void commandTargetRotation(float target);
-    void commandImpulse(float target);
-    void commandWarp(int8_t target);
-    void commandJump(float distance);
-    void commandSetTarget(P<SpaceObject> target);
+    virtual void handleClientCommand(int32_t client_id, int16_t command, sf::Packet& packet) override;
     void commandSetScienceLink(int32_t id);
     void commandSetProbe3DLink(int32_t id);
-    void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
-    void commandUnloadTube(int8_t tubeNumber);
-    void commandFireTube(int8_t tubeNumber, float missile_target_angle);    
-    void commandFireTubeAtTarget(int8_t tubeNumber, P<SpaceObject> target);
     void commandSetShields(bool enabled);
     void commandMainScreenSetting(EMainScreenSetting mainScreen);
     void commandMainScreenOverlay(EMainScreenOverlay mainScreen);
     void commandScan(P<SpaceObject> object);
     void commandSetSystemPowerRequest(ESystem system, float power_level);
     void commandSetSystemCoolantRequest(ESystem system, float coolant_level);
-    void commandDock(P<SpaceObject> station);
-    void commandUndock();
-    void commandAbortDock();
     void commandOpenTextComm(P<SpaceObject> obj);
     void commandCloseTextComm();
     void commandAnswerCommHail(bool awnser);
     void commandSendComm(uint8_t index);
     void commandSendCommPlayer(string message);
     void commandSetAutoRepair(bool enabled);
-    void commandSetBeamFrequency(int32_t frequency);
-    void commandSetBeamSystemTarget(ESystem system);
     void commandSetShieldFrequency(int32_t frequency);
     void commandAddWaypoint(sf::Vector2f position);
     void commandRemoveWaypoint(int32_t index);
@@ -242,24 +235,12 @@ public:
     void commandActivateSelfDestruct();
     void commandCancelSelfDestruct();
     void commandConfirmDestructCode(int8_t index, uint32_t code);
-    void commandCombatManeuverBoost(float amount);
-    void commandCombatManeuverStrafe(float strafe);
     void commandLaunchProbe(sf::Vector2f target_position);
-    void commandLaunchCargo(int index);
-    void commandMoveCargo(int index);
-    void commandCancelMoveCargo(int index);
-    void commandSetDockMoveTarget(int srcIdx, int destIdx);
-    void commandSetDockEnergyRequest(int index, float value);
     void commandScanDone();
     void commandScanCancel();
     void commandSetAlertLevel(EAlertLevel level);
-    void commandHackingFinished(P<SpaceObject> target, string target_system);
     void commandCustomFunction(string name);
     void commandSetAutoRepairSystemTarget(ESystem system);
-    void commandSetTractorBeamDirection(float direction);
-    void commandSetTractorBeamArc(float arc);
-    void commandSetTractorBeamRange(float range);
-    void commandSetTractorBeamMode(ETractorBeamMode range);
 
     virtual void onReceiveServerCommand(sf::Packet& packet) override;
 
@@ -285,11 +266,6 @@ public:
 
     float getNetSystemEnergyUsage();
 
-    // Ship's log functions
-    void addToShipLog(string message, sf::Color color, string station);
-    void addToShipLogBy(string message, P<SpaceObject> target);
-    const std::vector<ShipLogEntry>& getShipsLog(string station) const;
-    
     // Ship's crew functions
     void transferPlayersToShip(P<PlayerSpaceship> other_ship);
     void transferPlayersAtPositionToShip(ECrewPosition position, P<PlayerSpaceship> other_ship);

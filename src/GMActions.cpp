@@ -17,6 +17,7 @@ const static int16_t CMD_ORDER_SHIP = 0x0008;
 const static int16_t CMD_DESTROY = 0x0009;
 const static int16_t CMD_SEND_COMM_TO_PLAYER_SHIP = 0x000A;
 const static int16_t CMD_SET_FACTIONS_STATE = 0x000B;
+const static int16_t CMD_SET_POSESSED = 0x000C;
 
 P<GameMasterActions> gameMasterActions;
 
@@ -28,8 +29,8 @@ GameMasterActions::GameMasterActions()
     gameMasterActions = this;
 }
 
-static inline sf::Packet& operator << (sf::Packet& packet, const P<SpaceObject>& object) { return packet << object->getMultiplayerId(); }
-static inline sf::Packet& operator >> (sf::Packet& packet, P<SpaceObject>& object) { 
+template<class T> static inline sf::Packet& operator << (sf::Packet& packet, const P<T>& object) { return packet << object->getMultiplayerId(); }
+template<class T> static inline sf::Packet& operator >> (sf::Packet& packet, P<T>& object) { 
     int selectedItemId;
     packet >> selectedItemId;
     object = game_server->getObjectById(selectedItemId);
@@ -186,15 +187,14 @@ void GameMasterActions::onReceiveClientCommand(int32_t client_id, sf::Packet& pa
         break;
         case CMD_SEND_COMM_TO_PLAYER_SHIP:
         {
-            P<SpaceObject> target;
+            P<PlayerSpaceship> target;
             string line;
             packet >> target >> line;
-            P<PlayerSpaceship> targetPlayerShip = target;
-            if (targetPlayerShip) {
-                if (targetPlayerShip->isCommsChatOpenToGM())
-                    targetPlayerShip->addCommsIncommingMessage(line);
+            if (target) {
+                if (target->isCommsChatOpenToGM())
+                    target->addCommsIncommingMessage(line);
                 else
-                    targetPlayerShip->hailCommsByGM(line);      
+                    target->hailCommsByGM(line);      
             }
         }
         break;
@@ -203,6 +203,14 @@ void GameMasterActions::onReceiveClientCommand(int32_t client_id, sf::Packet& pa
             int faction_a, faction_b, stateIdx;
             packet >> faction_a >> faction_b >> stateIdx;
             factionInfo[faction_a]->states[faction_b] = (EFactionVsFactionState) stateIdx;
+        }
+        break;
+        case CMD_SET_POSESSED:
+        {
+            P<CpuShip> target;
+            bool posessed;
+            packet >> target >> posessed;
+            target->possessed = posessed;
         }
         break;
     }
@@ -272,6 +280,12 @@ void GameMasterActions::commandSendCommToPlayerShip(P<PlayerSpaceship> target, s
 {
     sf::Packet packet;
     packet << CMD_SEND_COMM_TO_PLAYER_SHIP << target << line;
+    sendClientCommand(packet);
+}
+void GameMasterActions::commandSetPosessed(P<CpuShip> target, bool posessed)
+{
+    sf::Packet packet;
+    packet << CMD_SET_POSESSED << target << posessed;
     sendClientCommand(packet);
 }
 void GameMasterActions::executeContextualGoTo(sf::Vector2f position, bool force, PVector<SpaceObject> selection)

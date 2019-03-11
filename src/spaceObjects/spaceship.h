@@ -55,6 +55,35 @@ public:
 
 class SpaceShip : public ShipTemplateBasedObject
 {
+protected:
+    static const int16_t CMD_TARGET_ROTATION = 0x0001;
+    static const int16_t CMD_IMPULSE = 0x0002;
+    static const int16_t CMD_WARP = 0x0003;
+    static const int16_t CMD_JUMP = 0x0004;
+    static const int16_t CMD_SET_TARGET = 0x0005;
+    static const int16_t CMD_LOAD_TUBE = 0x0006;
+    static const int16_t CMD_UNLOAD_TUBE = 0x0007;
+    static const int16_t CMD_FIRE_TUBE = 0x0008;
+    static const int16_t CMD_DOCK = 0x0010;
+    static const int16_t CMD_UNDOCK = 0x0011;
+    static const int16_t CMD_SET_BEAM_FREQUENCY = 0x0018;
+    static const int16_t CMD_SET_BEAM_SYSTEM_TARGET = 0x0019;
+    static const int16_t CMD_SET_SHIELD_FREQUENCY = 0x001A; // need player override
+    static const int16_t CMD_COMBAT_MANEUVER_BOOST = 0x0021;
+    static const int16_t CMD_COMBAT_MANEUVER_STRAFE = 0x0022;
+    static const int16_t CMD_LAUNCH_PROBE = 0x0023; // need player override
+    static const int16_t CMD_ABORT_DOCK = 0x0027;
+    static const int16_t CMD_HACKING_FINISHED = 0x0029;
+    static const int16_t CMD_LAUNCH_CARGO = 0x002B;
+    static const int16_t CMD_MOVE_CARGO = 0x002C;
+    static const int16_t CMD_CANCEL_MOVE_CARGO = 0x002D;
+    static const int16_t CMD_SET_DOCK_MOVE_TARGET = 0x002E;
+    static const int16_t CMD_SET_DOCK_ENERGY_REQUEST = 0x002F;
+    static const int16_t CMD_SET_TRACTOR_BEAM_DIRECTION = 0x0031;
+    static const int16_t CMD_SET_TRACTOR_BEAM_ARC = 0x0032;
+    static const int16_t CMD_SET_TRACTOR_BEAM_RANGE = 0x0033;
+    static const int16_t CMD_SET_TRACTOR_BEAM_MODE = 0x0034;
+    static const int16_t CMD_ROTATION = 0x0035;
 public:
     constexpr static int max_frequency = 20;
     constexpr static float combat_maneuver_charge_time = 20.0f; /*< Amount of time it takes to fully charge the combat maneuver system */
@@ -71,6 +100,21 @@ public:
     constexpr static float heat_per_warp = 0.02;
     constexpr static float unhack_time = 180.0f; //It takes this amount of time to go from 100% hacked to 0% hacked for systems.
 
+    // Content of a line in the ship's log
+    class ShipLogEntry
+    {
+    public:
+        string prefix;
+        string text;
+        sf::Color color;
+        string station;
+
+        ShipLogEntry() {}
+        ShipLogEntry(string prefix, string text, sf::Color color, string station)
+        : prefix(prefix), text(text), color(color), station(station) {}
+
+        bool operator!=(const ShipLogEntry& e) { return prefix != e.prefix || text != e.text || color != e.color || station != e.station; }
+    };
 
     float energy_level;
     float max_energy_level;
@@ -81,6 +125,11 @@ public:
      *[input] Ship will try to aim to this rotation. (degrees)
      */
     float target_rotation;
+
+    /*!
+     *[input] Ship will rotate in this velocity. ([-1,1], overrides target_rotation)
+     */
+    float rotation;
 
     /*!
      * [input] Amount of impulse requested from the user (-1.0 to 1.0)
@@ -180,6 +229,12 @@ public:
     P<SpaceObject> docking_target; //Server only
     sf::Vector2f docking_offset; //Server only
 
+    uint8 extern_log_size;
+    uint8 intern_log_size;
+    std::vector<ShipLogEntry> ships_log_extern;
+    std::vector<ShipLogEntry> ships_log_intern;
+    
+
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
 
 #if FEATURE_3D_RENDERING
@@ -192,6 +247,8 @@ public:
     void drawBeamOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, 
         sf::Color color, sf::Vector2f beam_position, float beam_direction, float beam_arc, float beam_range);
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
+    void onReceiveClientCommand(int32_t client_id, sf::Packet& packet);
+    virtual void handleClientCommand(int32_t client_id, int16_t command, sf::Packet& packet);
 
     virtual void update(float delta) override;
     virtual float getShieldRechargeRate(int shield_index) override;
@@ -267,6 +324,11 @@ public:
     virtual int scanningComplexity(P<SpaceObject> other) override;
     virtual int scanningChannelDepth(P<SpaceObject> other) override;
     virtual void scannedBy(P<SpaceObject> other) override;
+
+    // Ship's log functions
+    void addToShipLog(string message, sf::Color color, string station = "extern");
+    void addToShipLogBy(string message, P<SpaceObject> target);
+    const std::vector<ShipLogEntry>& getShipsLog(string station) const;
 
     bool isFriendOrFoeIdentified();//[DEPRICATED]
     bool isFullyScanned();//[DEPRICATED]
@@ -428,6 +490,37 @@ public:
     string getScriptExportModificationsOnTemplate();
     bool tryDockDrone(SpaceShip* other);
     float getDronesControlRange();
+        // Client command functions
+    void commandTargetRotation(float target);
+    void commandRotation(float rotation);
+    void commandImpulse(float target);
+    void commandWarp(int8_t target);
+    void commandJump(float distance);
+    void commandSetTarget(P<SpaceObject> target);
+    void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
+    void commandUnloadTube(int8_t tubeNumber);
+    void commandFireTube(int8_t tubeNumber, float missile_target_angle);    
+    void commandFireTubeAtTarget(int8_t tubeNumber, P<SpaceObject> target);
+    void commandDock(P<SpaceObject> station);
+    void commandUndock();
+    void commandAbortDock();
+    void commandSetBeamFrequency(int32_t frequency);
+    void commandSetBeamSystemTarget(ESystem system);
+    void commandSetShieldFrequency(int32_t frequency);
+    void commandCombatManeuverBoost(float amount);
+    void commandCombatManeuverStrafe(float strafe);
+    void commandLaunchProbe(sf::Vector2f target_position);
+    void commandLaunchCargo(int index);
+    void commandMoveCargo(int index);
+    void commandCancelMoveCargo(int index);
+    void commandSetDockMoveTarget(int srcIdx, int destIdx);
+    void commandSetDockEnergyRequest(int index, float value);
+    void commandHackingFinished(P<SpaceObject> target, string target_system);
+    void commandSetTractorBeamDirection(float direction);
+    void commandSetTractorBeamArc(float arc);
+    void commandSetTractorBeamRange(float range);
+    void commandSetTractorBeamMode(ETractorBeamMode range);
+
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);
