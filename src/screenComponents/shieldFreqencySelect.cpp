@@ -23,7 +23,7 @@ GuiShieldFrequencySelect::GuiShieldFrequencySelect(GuiContainer* owner, string i
     {
         new_frequency->addEntry(frequencyToString(n), string(n));
     }
-    new_frequency->setSelectionIndex(0);
+    new_frequency->setSelectionIndex(my_spaceship->selected_shield_frequency);
 }
 
 void GuiShieldFrequencySelect::onDraw(sf::RenderTarget& window)
@@ -32,6 +32,7 @@ void GuiShieldFrequencySelect::onDraw(sf::RenderTarget& window)
     {
         calibrate_button->setEnable(my_spaceship->shield_calibration_delay <= 0.0);
         new_frequency->setEnable(my_spaceship->shield_calibration_delay <= 0.0);
+        new_frequency->setSelectionIndex(my_spaceship->selected_shield_frequency);
     }
     GuiElement::onDraw(window);
 }

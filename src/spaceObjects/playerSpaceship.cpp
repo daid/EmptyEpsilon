@@ -68,7 +68,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomMessage);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomMessageWithCallback);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, removeCustom);
-    
+
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getBeamSystemTarget);
     /// Gets the name of the target system, instead of the ID
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getBeamSystemTargetName);
@@ -104,6 +104,9 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetBeamFrequency);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetBeamSystemTarget);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetShieldFrequency);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetShieldFrequencySelection);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetNextShieldFrequencySelection);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetPreviousShieldFrequencySelection);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandAddWaypoint);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandRemoveWaypoint);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMoveWaypoint);
@@ -182,6 +185,9 @@ static const int16_t CMD_ABORT_DOCK = 0x0026;
 static const int16_t CMD_SET_MAIN_SCREEN_OVERLAY = 0x0027;
 static const int16_t CMD_HACKING_FINISHED = 0x0028;
 static const int16_t CMD_CUSTOM_FUNCTION = 0x0029;
+static const int16_t CMD_SET_SHIELD_FREQUENCY_SELECTION = 0x002A;
+static const int16_t CMD_SET_NEXT_SHIELD_FREQUENCY_SELECTION = 0x002B;
+static const int16_t CMD_SET_PREVIOUS_SHIELD_FREQUENCY_SELECTION = 0x002C;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -226,6 +232,7 @@ PlayerSpaceship::PlayerSpaceship()
     alert_level = AL_Normal;
     shields_active = false;
     control_code = "";
+    selected_shield_frequency = 1;
 
     setFactionId(1);
 
@@ -1385,6 +1392,34 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             }
         }
         break;
+    case CMD_SET_SHIELD_FREQUENCY_SELECTION:
+        if (shield_calibration_delay <= 0.0) // TODO: Is it ok to change target while calibrating? I'd say no.
+        {
+            int32_t new_frequency;
+            packet >> new_frequency;
+
+            if (new_frequency < 0)
+                selected_shield_frequency = 0;
+            if (new_frequency > SpaceShip::max_frequency)
+                selected_shield_frequency = SpaceShip::max_frequency;
+            else
+                selected_shield_frequency = new_frequency;
+        }
+        break;
+    case CMD_SET_NEXT_SHIELD_FREQUENCY_SELECTION:
+        if (shield_calibration_delay <= 0.0) // TODO: Is it ok to change target while calibrating? I'd say no.
+        {
+            if (selected_shield_frequency != SpaceShip::max_frequency)
+                ++selected_shield_frequency;
+        }
+        break;
+    case CMD_SET_PREVIOUS_SHIELD_FREQUENCY_SELECTION:
+        if (shield_calibration_delay <= 0.0) // TODO: Is it ok to change target while calibrating? I'd say no.
+        {
+            if (selected_shield_frequency != 0)
+                --selected_shield_frequency;
+        }
+        break;
     case CMD_ADD_WAYPOINT:
         {
             sf::Vector2f position;
@@ -1586,15 +1621,15 @@ void PlayerSpaceship::commandFireTube(int8_t tubeNumber, float missile_target_an
 void PlayerSpaceship::commandFireTubeAtTarget(int8_t tubeNumber, P<SpaceObject> target)
 {
   float targetAngle = 0.0;
-  
+
   if (!target || tubeNumber < 0 || tubeNumber >= getWeaponTubeCount())
     return;
-  
+
   targetAngle = weapon_tube[tubeNumber].calculateFiringSolution(target);
-  
+
   if (targetAngle == std::numeric_limits<float>::infinity())
       targetAngle = getRotation() + weapon_tube[tubeNumber].getDirection();
-    
+
   commandFireTube(tubeNumber, targetAngle);
 }
 
@@ -1725,6 +1760,27 @@ void PlayerSpaceship::commandSetShieldFrequency(int32_t frequency)
 {
     sf::Packet packet;
     packet << CMD_SET_SHIELD_FREQUENCY << frequency;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetShieldFrequencySelection(int32_t frequency)
+{
+    sf::Packet packet;
+    packet << CMD_SET_SHIELD_FREQUENCY_SELECTION << frequency;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetNextShieldFrequencySelection()
+{
+    sf::Packet packet;
+    packet << CMD_SET_NEXT_SHIELD_FREQUENCY_SELECTION;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetPreviousShieldFrequencySelection()
+{
+    sf::Packet packet;
+    packet << CMD_SET_PREVIOUS_SHIELD_FREQUENCY_SELECTION;
     sendClientCommand(packet);
 }
 
