@@ -10,6 +10,7 @@ class ExplosionEffect : public SpaceObject, public Updatable
     
     float lifetime;
     float size;
+    string explosion_sound;
     sf::Vector3f particleDirections[particleCount];
     bool on_radar;
 public:
@@ -22,6 +23,7 @@ public:
     virtual void update(float delta);
     
     void setSize(float size) { this->size = size; }
+    void setExplosionSound(string sound) { this->explosion_sound = sound; }
     void setOnRadar(bool on_radar) { this->on_radar = on_radar; }
 };
 

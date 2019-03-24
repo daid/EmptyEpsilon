@@ -55,8 +55,6 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
         info.button->setSize(300, GuiElement::GuiSizeMax);
         info.damage_bar = new GuiProgressbar(info.layout, id + "_DAMAGE", 0.0, 1.0, 0.0);
         info.damage_bar->setSize(150, GuiElement::GuiSizeMax);
-        if (!gameGlobalInfo->use_system_damage)
-            info.damage_bar->hide();
         info.damage_label = new GuiLabel(info.damage_bar, id + "_DAMAGE_LABEL", "...", 20);
         info.damage_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         info.heat_bar = new GuiProgressbar(info.layout, id + "_HEAT", 0.0, 1.0, 0.0);
@@ -69,6 +67,12 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
         info.power_bar->setColor(sf::Color(192, 192, 32, 128))->setSize(100, GuiElement::GuiSizeMax);
         info.coolant_bar = new GuiProgressbar(info.layout, id + "_COOLANT", 0.0, 10.0, 0.0);
         info.coolant_bar->setColor(sf::Color(32, 128, 128, 128))->setSize(100, GuiElement::GuiSizeMax);
+        if (!gameGlobalInfo->use_system_damage){
+            info.damage_bar->hide();
+            info.heat_bar->setSize(150, GuiElement::GuiSizeMax);
+            info.power_bar->setSize(150, GuiElement::GuiSizeMax);
+            info.coolant_bar->setSize(150, GuiElement::GuiSizeMax);
+        }
 
         info.layout->moveToBack();
         system_rows.push_back(info);
@@ -77,10 +81,16 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
     GuiAutoLayout* icon_layout = new GuiAutoLayout(system_row_layouts, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     icon_layout->setSize(GuiElement::GuiSizeMax, 48);
     (new GuiElement(icon_layout, "FILLER"))->setSize(300, GuiElement::GuiSizeMax);
-    (new GuiImage(icon_layout, "SYSTEM_HEALTH_ICON", "gui/icons/system_health"))->setSize(150, GuiElement::GuiSizeMax);
-    (new GuiImage(icon_layout, "HEAT_ICON", "gui/icons/status_overheat"))->setSize(100, GuiElement::GuiSizeMax);
-    (new GuiImage(icon_layout, "POWER_ICON", "gui/icons/energy"))->setSize(100, GuiElement::GuiSizeMax);
-    (new GuiImage(icon_layout, "COOLANT_ICON", "gui/icons/coolant"))->setSize(100, GuiElement::GuiSizeMax);
+    if (gameGlobalInfo->use_system_damage){
+        (new GuiImage(icon_layout, "SYSTEM_HEALTH_ICON", "gui/icons/system_health"))->setSize(150, GuiElement::GuiSizeMax);
+        (new GuiImage(icon_layout, "HEAT_ICON", "gui/icons/status_overheat"))->setSize(100, GuiElement::GuiSizeMax);
+        (new GuiImage(icon_layout, "POWER_ICON", "gui/icons/energy"))->setSize(100, GuiElement::GuiSizeMax);
+        (new GuiImage(icon_layout, "COOLANT_ICON", "gui/icons/coolant"))->setSize(100, GuiElement::GuiSizeMax);
+    } else {
+        (new GuiImage(icon_layout, "HEAT_ICON", "gui/icons/status_overheat"))->setSize(150, GuiElement::GuiSizeMax);
+        (new GuiImage(icon_layout, "POWER_ICON", "gui/icons/energy"))->setSize(150, GuiElement::GuiSizeMax);
+        (new GuiImage(icon_layout, "COOLANT_ICON", "gui/icons/coolant"))->setSize(150, GuiElement::GuiSizeMax);
+    }
 
     system_rows[SYS_Reactor].button->setIcon("gui/icons/system_reactor");
     system_rows[SYS_BeamWeapons].button->setIcon("gui/icons/system_beam");
@@ -119,7 +129,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
     coolant_slider->disable();
 
     (new GuiShipInternalView(system_row_layouts, "SHIP_INTERNAL_VIEW", 48.0f))->setShip(my_spaceship)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
+
     (new GuiCustomShipFunctions(this, crew_position, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 
     previous_energy_level = 0.0;
@@ -143,7 +153,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
                 float delta_e = my_spaceship->energy_level - previous_energy_level;
                 float delta_e_per_second = delta_e / delta_t;
                 average_energy_delta = average_energy_delta * 0.99 + delta_e_per_second * 0.01;
-                
+
                 previous_energy_level = my_spaceship->energy_level;
                 previous_energy_measurement = engine->getElapsedTime();
             }
@@ -197,7 +207,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
             power_label->setText("Power: " + string(int(system.power_level * 100)) + "%/" + string(int(system.power_request * 100)) + "%");
             coolant_label->setText("Coolant: " + string(int(system.coolant_level / PlayerSpaceship::max_coolant * 100)) + "%/" + string(int(system.coolant_request / PlayerSpaceship::max_coolant * 100)) + "%");
             coolant_slider->setEnable(!my_spaceship->auto_coolant_enabled);
-            
+
             system_effects_index = 0;
             float effectiveness = my_spaceship->getSystemEffectiveness(selected_system);
             switch(selected_system)
@@ -261,7 +271,8 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
                 {
                     DamageInfo di;
                     di.type = DT_Kinetic;
-                    float damage_negate = 1.0f - my_spaceship->getShieldDamageFactor(di, my_spaceship->shield_count);
+                    float damage_negate = 1.0f - 
+my_spaceship->getShieldDamageFactor(di, my_spaceship->shield_count - 1);
                     if (damage_negate < 0.0)
                         addSystemEffect("Extra damage", string(int(-damage_negate * 100)) + "%");
                     else

@@ -1,7 +1,12 @@
+//The Hue bridge returns its info in JSON form, so the json11 library takes this role.
+
 #include "philipsHueDevice.h"
 #include "hardware/serialDriver.h"
 #include "logging.h"
 #include <unistd.h>
+#include <json11/json11.hpp>
+
+using namespace json11;
 
 PhilipsHueDevice::PhilipsHueDevice()
 : update_thread(&PhilipsHueDevice::updateLoop, this)
@@ -35,6 +40,11 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
         userfile = settings["userfile"];
     }
 
+    if (settings.find("port") != settings.end())
+    {
+        port = settings["port"].toInt();
+    }
+
     //If no user name set, try to read it from the userfile.
     if (username == "")
     {
@@ -48,12 +58,14 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
         }
     }
 
+    LOG(INFO) << "Attempting to connect to Hue bridge " << ip_address << " on port " << port;
+
     //If no username was set, or no username was read from the userfile, then we need to request one from the philips hue bridge.
     int retry_counter = 120 / 5;
     while(username == "")
     {
-        sf::Http http(ip_address);
-        
+        sf::Http http(ip_address,port);
+
         LOG(INFO) << "No philips hue username. Going to request one. Be sure to press the button on the hue bridge.";
         sf::Http::Response response = http.sendRequest(sf::Http::Request("/api", sf::Http::Request::Post, "{\"devicetype\":\"EmptyEpsilon#EmptyEpsilon\"}"));
         if (response.getStatus() == sf::Http::Response::Ok)
@@ -105,7 +117,7 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
     
     if (username != "")
     {
-        sf::Http http(ip_address);
+        sf::Http http(ip_address,port);
         sf::Http::Response response = http.sendRequest(sf::Http::Request("/api/" + username + "/lights"));
         if (response.getStatus() != sf::Http::Response::Ok)
         {
@@ -124,8 +136,19 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
         }
         else
         {
-            //TODO: Figure out the amount of available lights from the response.
-            light_count = 16;
+            std::string body = response.getBody();
+            std::string err;
+            json11::Json hue_json = json11::Json::parse(body,err);
+            LOG(ERROR) << "Json parser returned error " << err;
+
+            light_count = 0;
+            std::map<std::__cxx11::basic_string<char>, json11::Json> jsonMap = hue_json.object_items();
+            for(std::map<std::__cxx11::basic_string<char>,json11::Json>::iterator it = jsonMap.begin(); it != jsonMap.end(); it++) {
+                  int currentInt = std::stoi (it->first,nullptr,10); //TODO: Replace STOI with toInt()
+                  LOG(DEBUG) << "Got key from Hue API " << currentInt;
+                  if (currentInt >= light_count) light_count = currentInt;
+            }
+
             lights.resize(light_count);
             
             FILE* f = fopen(userfile.c_str(), "wt");
@@ -168,8 +191,8 @@ int PhilipsHueDevice::getChannelCount()
 
 void PhilipsHueDevice::updateLoop()
 {
-    sf::Http http(ip_address);
-    
+    sf::Http http(ip_address,port);
+
     while(run_thread)
     {
         for(int n=0; n<light_count; n++)
