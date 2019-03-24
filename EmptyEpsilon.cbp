@@ -15,7 +15,7 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DDEBUG" />
-					<Add directory="../SFML-2.3.1/include" />
+					<Add directory="../SFML-2.4.0/include" />
 					<Add directory="../drmingw-0.7.6-win32/include" />
 				</Compiler>
 				<Linker>
@@ -30,7 +30,7 @@
 					<Add library="iphlpapi" />
 					<Add library="wsock32" />
 					<Add library="exchndl" />
-					<Add directory="../SFML-2.3.1/lib" />
+					<Add directory="../SFML-2.4.0/lib" />
 					<Add directory="../drmingw-0.7.6-win32/lib" />
 				</Linker>
 			</Target>
@@ -43,7 +43,7 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-g" />
-					<Add directory="../SFML-2.3.1/include" />
+					<Add directory="../SFML-2.4.0/include" />
 					<Add directory="../drmingw-0.7.6-win32/include" />
 				</Compiler>
 				<Linker>
@@ -59,7 +59,7 @@
 					<Add library="iphlpapi" />
 					<Add library="wsock32" />
 					<Add library="exchndl" />
-					<Add directory="../SFML-2.3.1/lib" />
+					<Add directory="../SFML-2.4.0/lib" />
 					<Add directory="../drmingw-0.7.6-win32/lib" />
 				</Linker>
 			</Target>
@@ -148,7 +148,7 @@
 					<Add option="-O2" />
 					<Add option="-pg" />
 					<Add option="-g" />
-					<Add directory="../SFML-2.3.1/include" />
+					<Add directory="../SFML-2.4.0/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-pg -lgmon" />
@@ -162,7 +162,7 @@
 					<Add library="glu32" />
 					<Add library="iphlpapi" />
 					<Add library="wsock32" />
-					<Add directory="../SFML-2.3.1/lib" />
+					<Add directory="../SFML-2.4.0/lib" />
 				</Linker>
 			</Target>
 		</Build>
@@ -297,6 +297,8 @@
 		<Unit filename="../SeriousProton/src/httpServer.h" />
 		<Unit filename="../SeriousProton/src/input.cpp" />
 		<Unit filename="../SeriousProton/src/input.h" />
+		<Unit filename="../SeriousProton/src/json11/json11.cpp" />
+		<Unit filename="../SeriousProton/src/json11/json11.hpp" />
 		<Unit filename="../SeriousProton/src/logging.cpp" />
 		<Unit filename="../SeriousProton/src/logging.h" />
 		<Unit filename="../SeriousProton/src/lua/lapi.c">
@@ -450,6 +452,8 @@
 		<Unit filename="EmptyEpsilon.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="src/GMActions.cpp" />
+		<Unit filename="src/GMActions.h" />
 		<Unit filename="src/GMScriptCallback.cpp" />
 		<Unit filename="src/GMScriptCallback.h" />
 		<Unit filename="src/ai/ai.cpp" />
@@ -718,6 +722,10 @@
 		<Unit filename="src/screens/gm/chatDialog.h" />
 		<Unit filename="src/screens/gm/gameMasterScreen.cpp" />
 		<Unit filename="src/screens/gm/gameMasterScreen.h" />
+		<Unit filename="src/screens/gm/globalMessageEntryView.cpp" />
+		<Unit filename="src/screens/gm/globalMessageEntryView.h" />
+		<Unit filename="src/screens/gm/objectCreationView.cpp" />
+		<Unit filename="src/screens/gm/objectCreationView.h" />
 		<Unit filename="src/screens/gm/tweak.cpp" />
 		<Unit filename="src/screens/gm/tweak.h" />
 		<Unit filename="src/screens/mainScreen.cpp" />
