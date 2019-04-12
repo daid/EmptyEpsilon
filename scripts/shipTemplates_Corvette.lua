@@ -98,6 +98,61 @@ template:setWeaponStorage("Homing", 4)
 template:setWeaponStorage("EMP", 2)
 template:weaponTubeDisallowMissle(1, "EMP")
 
+
+template = ShipTemplate():setName("Maverick"):setClass("Corvette","Gunner"):setModel("LaserCorvetteGreen"):setType("playership")
+template:setDescription("A number of beams bristle from various points on this gunner. Missiles were deemed lower priority, though they are still present. Stronger defenses than a frigate, but not as strong as the Atlantis")
+template:setRadarTrace("radar_laser.png")
+template:setHull(160)
+template:setShields(160,160)
+template:setSpeed(80,15,40)
+template:setCombatManeuver(400, 250)
+template:setJumpDrive(false)
+template:setWarpSpeed(800)
+--                 Arc, Dir,  Range, CycleTime, Dmg
+template:setBeam(0, 10,   0, 2000.0, 6.0, 6)
+template:setBeam(1, 90, -20, 1500.0, 6.0, 8)
+template:setBeam(2, 90,  20, 1500.0, 6.0, 8)
+template:setBeam(3, 40, -70, 1000.0, 4.0, 6)
+template:setBeam(4, 40,  70, 1000.0, 4.0, 6)
+template:setBeam(5, 10, 180,  800.0, 6.0, 4)
+--								Arc, Dir, Rotate speed
+template:setBeamWeaponTurret(5, 180, 180, 3)
+template:setTubes(3, 8.0)
+template:setWeaponStorage("HVLI", 10)
+template:setWeaponStorage("Homing", 6)
+template:setWeaponStorage("EMP", 4)
+template:setWeaponStorage("Nuke", 2)
+template:setWeaponStorage("Mine", 2)
+template:setTubeDirection(0, -90)
+template:setTubeDirection(1,  90)
+template:setTubeDirection(2, 180)
+template:weaponTubeDisallowMissle(0, "Mine")
+template:weaponTubeDisallowMissle(1, "Mine")
+template:setWeaponTubeExclusiveFor(2, "Mine")
+
+template:setRepairCrewCount(4)
+
+template:addRoomSystem(2, 0, 2, 1, "Maneuver");
+template:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
+template:addRoomSystem(0, 2, 3, 2, "RearShield");
+template:addRoomSystem(1, 4, 2, 1, "Reactor");
+template:addRoomSystem(2, 5, 2, 1, "Warp");
+template:addRoomSystem(3, 1, 3, 2, "JumpDrive");
+template:addRoomSystem(3, 3, 3, 2, "FrontShield");
+template:addRoom(6, 2, 6, 2);
+template:addRoomSystem(9, 1, 2, 1, "MissileSystem");
+template:addRoomSystem(9, 4, 2, 1, "Impulse");
+
+template:addDoor(2, 1, true)
+template:addDoor(1, 2, true)
+template:addDoor(1, 4, true)
+template:addDoor(2, 5, true)
+template:addDoor(3, 2, false)
+template:addDoor(4, 3, true)
+template:addDoor(6, 3, false)
+template:addDoor(9, 2, true)
+template:addDoor(10,4, true)
+
 --[[-----------------------Support-----------------------]]
 
 -- The weapons-platform is a stationary platform with beam-weapons. It's extremely slow to turn, but it's beam weapons do a huge amount of damage.
