@@ -1,3 +1,19 @@
+civilians = FactionInfo():setName("Civilians")
+civilians:setGMColor(255, 2, 128)
+
+machines = FactionInfo():setName("Machines")
+machines:setGMColor(255, 0, 0)
+
+eoc = FactionInfo():setName("EOC Starfleet")
+eoc:setGMColor(255, 128, 0)
+
+eoc:setEnemy(machines)
+civilians:setEnemy(machines)
+machines:setEnemy(eoc)
+machines:setEnemy(civilians)
+
+
+
 neutral = FactionInfo():setName("Independent")
 neutral:setGMColor(128, 128, 128)
 neutral:setDescription([[Despite appearing as a faction, independents are distinguished primarily by having no strong affiliation with any faction at all. Most traders consider themselves independent, though certain voices have started to speak up about creating a merchant faction.]])
@@ -61,3 +77,4 @@ It is known, however, that the strict Ktlitan hierarchy starts with their Queen 
 Hive:setEnemy(human)
 Hive:setEnemy(exuari)
 Hive:setEnemy(kraylor)
+
