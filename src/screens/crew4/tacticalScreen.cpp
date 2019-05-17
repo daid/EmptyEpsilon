@@ -9,6 +9,7 @@
 #include "screenComponents/jumpControls.h"
 #include "screenComponents/dockingButton.h"
 #include "screenComponents/alertOverlay.h"
+#include "screenComponents/customShipFunctions.h"
 
 #include "screenComponents/missileTubeControls.h"
 #include "screenComponents/aimLock.h"
@@ -123,6 +124,8 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     warp_controls = (new GuiWarpControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
     jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
     (new GuiDockingButton(this, "DOCKING"))->setPosition(-20, -20, ABottomRight)->setSize(280, 50);
+
+    (new GuiCustomShipFunctions(this, tacticalOfficer, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 
 void TacticalScreen::onDraw(sf::RenderTarget& window)

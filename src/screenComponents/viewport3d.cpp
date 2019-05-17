@@ -35,9 +35,9 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         soundManager->setListenerPosition(my_spaceship->getPosition(), my_spaceship->getRotation());
     else
         soundManager->setListenerPosition(sf::Vector2f(camera_position.x, camera_position.y), camera_yaw);
-    window.pushGLStates();
+    window.popGLStates();
 
-    ShaderManager::getShader("billboardShader")->setParameter("camera_position", camera_position);
+    ShaderManager::getShader("billboardShader")->setUniform("camera_position", camera_position);
 
     float camera_fov = 60.0f;
     float sx = window.getSize().x * window.getView().getViewport().width / window.getView().getSize().x;
@@ -260,7 +260,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
         glTranslatef(target->getPosition().x, target->getPosition().y, 0);
 
-        ShaderManager::getShader("billboardShader")->setParameter("textureMap", *textureManager.getTexture("redicule2.png"));
+        ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture("redicule2.png"));
         sf::Shader::bind(ShaderManager::getShader("billboardShader"));
         glColor4f(0.5, 0.5, 0.5, target->getRadius() * 2.5);
         glBegin(GL_QUADS);
@@ -300,7 +300,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     }
 #endif
 
-    window.popGLStates();
+    window.pushGLStates();
 
     if (show_callsigns && render_lists.size() > 0)
     {

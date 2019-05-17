@@ -21,6 +21,16 @@ class ScriptFunction(object):
 		ret = self.name
 		return '%s' % (ret)
 
+class ScriptMember(object):
+	def __init__(self, name):
+		self.name = name
+		self.description = ""
+		self.origin_class = None
+
+	def __repr__(self):
+		ret = self.name
+		return '%s' % (ret)
+
 class ScriptClass(object):
 	def __init__(self, name):
 		self.name = name
@@ -30,11 +40,16 @@ class ScriptClass(object):
 		self.children = []
 		self.create = True
 		self.functions = []
+		self.members = []
 		self.callbacks = []
 	
 	def addFunction(self, function_name):
 		self.functions.append(ScriptFunction(function_name))
 		return self.functions[-1]
+
+	def addMember(self, member_name):
+		self.members.append(ScriptMember(member_name))
+		return self.members[-1]
 
 	def addCallback(self, callback_name):
 		self.callbacks.append(callback_name)
@@ -177,12 +192,11 @@ class DocumentationGenerator(object):
                     f = definition.addFunction('isValid')
                     f.parameters = ''
                     f.description = 'Check if this is still looking at a valid object. Returns false when the objects that this variable references is destroyed.'
-                    f = definition.addFunction('typeName')
-                    f.parameters = ''
-                    f.description = 'Returns the class name of this object.'
                     f = definition.addFunction('destroy')
                     f.parameters = ''
                     f.description = 'Removes this object from the game.'
+                    f = definition.addMember('typeName')
+                    f.description = 'Returns the class name of this object, this is not a function, but a direct member: if object.typeName == "Mine" then print("MINE!") end'
 
     def generateDocs(self, stream):
         stream.write('<!doctype html><html lang="us"><head><meta charset="utf-8"><title>EmptyEpsilon - Scripting documentation</title>')
@@ -230,6 +244,9 @@ class DocumentationGenerator(object):
                     else:
                         stream.write('<dt>%s:%s(%s)</dt>' % (d.name, func.name, func.parameters.replace('<', '&lt;')))
                     stream.write('<dd>%s</dd>' % (func.description.replace('<', '&lt;')))
+                for member in d.members:
+                    stream.write('<dt>%s:%s</dt>' % (d.name, member.name))
+                    stream.write('<dd>%s</dd>' % (member.description.replace('<', '&lt;')))
                 stream.write('</dl>')
                 stream.write('</div>')
 

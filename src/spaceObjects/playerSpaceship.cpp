@@ -73,6 +73,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandLoadTube);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandUnloadTube);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandFireTube);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandFireTubeAtTarget);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetShields);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMainScreenSetting);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMainScreenOverlay);
@@ -1185,7 +1186,9 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 P<PlayerSpaceship> player = comms_target;
                 comms_state = CS_OpeningChannel;
                 comms_open_delay = comms_channel_open_time;
-                addToShipLog("Hailing: " + comms_target->getCallSign(), colorConfig.log_generic);
+                comms_target_name = comms_target->getCallSign();
+                comms_incomming_message = "Opened comms with " + comms_target_name;
+                addToShipLog("Hailing: " + comms_target_name, colorConfig.log_generic);
             }else{
                 comms_state = CS_Inactive;
             }
@@ -1261,7 +1264,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 comms_state = CS_ChannelOpenGM;
 
                 addToShipLog("Opened communication channel to " + comms_target_name, colorConfig.log_generic);
-                comms_incomming_message = "Opened comms";
+                comms_incomming_message = "Opened comms with " + comms_target_name;
             }else{
                 addToShipLog("Refused hail from " + comms_target_name, colorConfig.log_generic);
                 comms_state = CS_Inactive;
@@ -1468,8 +1471,8 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                     if (csf.type == CustomShipFunction::Type::Message)
                     {
                         removeCustom(name);
-                        break;
                     }
+                    break;
                 }
             }
         }
@@ -1535,6 +1538,21 @@ void PlayerSpaceship::commandFireTube(int8_t tubeNumber, float missile_target_an
     sf::Packet packet;
     packet << CMD_FIRE_TUBE << tubeNumber << missile_target_angle;
     sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandFireTubeAtTarget(int8_t tubeNumber, P<SpaceObject> target)
+{
+  float targetAngle = 0.0;
+  
+  if (!target || tubeNumber < 0 || tubeNumber >= getWeaponTubeCount())
+    return;
+  
+  targetAngle = weapon_tube[tubeNumber].calculateFiringSolution(target);
+  
+  if (targetAngle == std::numeric_limits<float>::infinity())
+      targetAngle = getRotation() + weapon_tube[tubeNumber].getDirection();
+    
+  commandFireTube(tubeNumber, targetAngle);
 }
 
 void PlayerSpaceship::commandSetShields(bool enabled)

@@ -9,6 +9,9 @@ REGISTER_SCRIPT_SUBCLASS(SupplyDrop, SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(SupplyDrop, setEnergy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SupplyDrop, setWeaponStorage);
+    /// Set a function that will be called if a player picks up the supply drop.
+    /// First argument given to the function will be the supply drop, the second the player.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SupplyDrop, onPickUp);
 }
 
 REGISTER_MULTIPLAYER_CLASS(SupplyDrop, "SupplyDrop");
@@ -62,10 +65,20 @@ void SupplyDrop::collide(Collisionable* target, float force)
                 picked_up = true;
             }
         }
+        if (on_pickup_callback.isSet())
+        {
+            on_pickup_callback.call(P<SupplyDrop>(this), player);
+            picked_up = true;
+        }
 
         if (picked_up)
             destroy();
     }
+}
+
+void SupplyDrop::onPickUp(ScriptSimpleCallback callback)
+{
+    this->on_pickup_callback = callback;
 }
 
 string SupplyDrop::getExportLine()
