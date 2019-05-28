@@ -8,7 +8,7 @@ function init()
 		
 	
 -- Station
- planet1 = Planet():setPosition(52000, 52000):setPlanetSurfaceTexture("planets/DE47-HC55.png"):setPlanetRadius(50000):setDistanceFromMovementPlane(-2000):setAxialRotationTime(80.0)
+ planet1 = Planet():setPosition(52000, 52000):setPlanetSurfaceTexture("planets/DE47-HC55.png"):setPlanetRadius(35000):setDistanceFromMovementPlane(-2000):setAxialRotationTime(10000.0)
  
 	
     addGMFunction("Generate EOC Fleet", function()
@@ -16,54 +16,62 @@ function init()
 	x, y = odysseus:getPosition()
 	
 -- EOC Starfleet		
-	aurora = CpuShip():setFaction("EOC Starfleet"):setTemplate("Battlecruiser B952"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):setRotation(-75):setScannedByFaction("Civilians")
+	aurora = CpuShip():setFaction("EOC Starfleet"):setTemplate("Battlecruiser B952"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):setRotation(-75):setScannedByFaction("Corporate owned")
 	
 	flagship = aurora
 
-	taurus = CpuShip():setFaction("EOC Starfleet"):setTemplate("Corvette C754"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -1500, 250):setScannedByFaction("Civilians", true) 
-	valkyrie = CpuShip():setFaction("EOC Starfleet"):setTemplate("Corvette C754"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -3000, 500):setScannedByFaction("Civilians", true) 
-	aries = CpuShip():setFaction("EOC Starfleet"):setTemplate("Scoutship S342"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -4500, 750):setScannedByFaction("Civilians", true) 
+	taurus = CpuShip():setFaction("EOC Starfleet"):setTemplate("Corvette C754"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -1500, 250):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
+	valkyrie = CpuShip():setFaction("EOC Starfleet"):setTemplate("Corvette C754"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -3000, 500):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
+	aries = CpuShip():setFaction("EOC Starfleet"):setTemplate("Scoutship S342"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -4500, 750):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
 
-	inferno = CpuShip():setFaction("EOC Starfleet"):setTemplate("Cruiser C753"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -6000, 1000):setScannedByFaction("Civilians")
+	inferno = CpuShip():setFaction("EOC Starfleet"):setTemplate("Cruiser C753"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -6000, 1000):setScannedByFaction("Corporate owned")
 		
-	harbringer = CpuShip():setFaction("EOC Starfleet"):setTemplate("Cruiser C753"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -9000, 7000):setScannedByFaction("Civilians", true) 
+	harbringer = CpuShip():setFaction("EOC Starfleet"):setTemplate("Cruiser C753"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -9000, 7000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
 
-	envoy = CpuShip():setFaction("EOC Starfleet"):setTemplate("Corvette C754"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -250, 1500):setScannedByFaction("Civilians", true) 
-	bluecoat = CpuShip():setFaction("EOC Starfleet"):setTemplate("Corvette C754"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -500, 3000):setScannedByFaction("Civilians", true) 
+	envoy = CpuShip():setFaction("EOC Starfleet"):setTemplate("Corvette C754"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -250, 1500):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
+	bluecoat = CpuShip():setFaction("EOC Starfleet"):setTemplate("Corvette C754"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -500, 3000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
 	
-	burro = CpuShip():setFaction("EOC Starfleet"):setTemplate("Cargoship T842"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -750, 4500):setScannedByFaction("Civilians", true) 
-	arthas = CpuShip():setFaction("EOC Starfleet"):setTemplate("Scoutship S342"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -1000, 6000):setScannedByFaction("Civilians", true) 
+	burro = CpuShip():setFaction("EOC Starfleet"):setTemplate("Cargoship T842"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -750, 4500):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
+	arthas = CpuShip():setFaction("EOC Starfleet"):setTemplate("Scoutship S342"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -1000, 6000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
 
-	valor = CpuShip():setFaction("EOC Starfleet"):setTemplate("Cruiser C753"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -4000, 9000):setScannedByFaction("Civilians", true) 
+	valor = CpuShip():setFaction("EOC Starfleet"):setTemplate("Cruiser C753"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -4000, 9000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
 
-	warrior = CpuShip():setFaction("EOC Starfleet"):setTemplate("Cruiser C753"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -1500, 8500):setScannedByFaction("Civilians", true) 
+	warrior = CpuShip():setFaction("EOC Starfleet"):setTemplate("Cruiser C753"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -1500, 8500):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
 	
 
-	halo = CpuShip():setFaction("EOC Starfleet"):setTemplate("Battlecruiser B952"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -7000, 9000):setScannedByFaction("Civilians", true) 
+	halo = CpuShip():setFaction("EOC Starfleet"):setTemplate("Battlecruiser B952"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -7000, 9000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
 	
 
 -- Civilians
-	prophet = CpuShip():setFaction("Civilians"):setTemplate("Scoutship S835"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -1000, 1000):setScannedByFaction("Civilians", true) 
-	karma = CpuShip():setFaction("Civilians"):setTemplate("Scoutship S835"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -2000, 2000):setScannedByFaction("Civilians", true) 
-	marauder = CpuShip():setFaction("Civilians"):setTemplate("Scoutship S835"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -3000, 3000):setScannedByFaction("Civilians", true) 
-	discovery = CpuShip():setFaction("Civilians"):setTemplate("Corvette C348"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -4000, 4000):setScannedByFaction("Civilians", true) 
-	whirlwind = CpuShip():setFaction("Civilians"):setTemplate("Corvette C348"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -5000, 5000):setScannedByFaction("Civilians", true) 
-	memory = CpuShip():setFaction("Civilians"):setTemplate("Corvette C348"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -6000, 6000):setScannedByFaction("Civilians", true) 
+	prophet = CpuShip():setFaction("Faith of the High Science"):setTemplate("Scoutship S835"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -1000, 1000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
+	
+	karma = CpuShip():setFaction("Unregistered"):setTemplate("Scoutship S835"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -2000, 2000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
+	
+	marauder = CpuShip():setFaction("Corporate owned"):setTemplate("Scoutship S835"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -3000, 3000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
+	
+	discovery = CpuShip():setFaction("Government owned"):setTemplate("Corvette C348"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -4000, 4000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
+	
+	whirlwind = CpuShip():setFaction("Corporate owned"):setTemplate("Corvette C348"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -5000, 5000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
+	
+	memory = CpuShip():setFaction("Government owned"):setTemplate("Corvette C348"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -6000, 6000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
 
-	vulture = CpuShip():setFaction("Civilians"):setTemplate("Corvette C348"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -4000, 3000):setScannedByFaction("Civilians", true) 
-	cyclone = CpuShip():setFaction("Civilians"):setTemplate("Cruiser C243"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -3000, 4000):setScannedByFaction("Civilians", true) 
+	vulture = CpuShip():setFaction("Corporate owned"):setTemplate("Corvette C348"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -4000, 3000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
 	
-	ravenger = CpuShip():setFaction("Civilians"):setTemplate("Corvette C348"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -7000, 6000):setScannedByFaction("Civilians", true) 
-	spectrum = CpuShip():setFaction("Civilians"):setTemplate("Cruiser C243"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -6000, 7000):setScannedByFaction("Civilians", true) 
+	cyclone = CpuShip():setFaction("Corporate owned"):setTemplate("Cruiser C243"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -3000, 4000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
+	
+	ravenger = CpuShip():setFaction("Corporate owned"):setTemplate("Corvette C348"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -7000, 6000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
+	
+	spectrum = CpuShip():setFaction("Corporate owned"):setTemplate("Cruiser C243"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -6000, 7000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
 
 	
-	centurio = CpuShip():setFaction("Civilians"):setTemplate("Cruiser C243"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -7000, 4000):setScannedByFaction("Civilians", true) 
-	polaris = CpuShip():setFaction("Civilians"):setTemplate("Cruiser C243"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -4000, 7000):setScannedByFaction("Civilians", true) 
+	centurio = CpuShip():setFaction("Corporate owned"):setTemplate("Cruiser C243"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -7000, 4000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
+	
+	polaris = CpuShip():setFaction("Corporate owned"):setTemplate("Cruiser C243"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -4000, 7000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
 	
 	
-	immortal = CpuShip():setFaction("Civilians"):setTemplate("Cruiser C243"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -5500, 3500):setScannedByFaction("Civilians", true) 
+	immortal = CpuShip():setFaction("Corporate owned"):setTemplate("Cruiser C243"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -5500, 3500):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
 	
-	starfall = CpuShip():setFaction("Civilians"):setTemplate("Cruiser C243"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -3500, 5500):setScannedByFaction("Civilians", true) 
+	starfall = CpuShip():setFaction("Corporate owned"):setTemplate("Cruiser C243"):setPosition(x + random(20000, 40000), y + random(-40000, -20000)):orderFlyFormation(flagship, -3500, 5500):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true) 
 
 	removeGMFunction("Generate EOC Fleet")
 	

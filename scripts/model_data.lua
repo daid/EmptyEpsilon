@@ -1,4 +1,57 @@
 model = ModelData()
+model:setName("eoc_fighter")
+model:setMesh("EOC_fighter.obj")
+model:setTexture("EOC_fighter_diffuse2-8bit.png")
+model:setSpecular("EOC_fighter_emission-8bit.png")
+model:setScale(3)
+model:setRadius(40)
+
+model = ModelData()
+model:setName("eoc_odysseus")
+model:setMesh("EOC_odysseus.obj")
+model:setTexture("EOC_Odysseusship_diffuse2-8bit.png")
+--model:setSpecular("EOC_Odysseuship_emission-8bit.png")
+model:setScale(8)
+model:setRadius(100)
+
+model = ModelData()
+model:setName("eoc_frigate")
+model:setMesh("EOC_frigate.obj")
+model:setTexture("EOC_Frigate_diffuse2.png")
+model:setSpecular("EOC_Frigate_emission.png")
+model:setScale(8)
+model:setRadius(100)
+
+model = ModelData()
+model:setName("machine_fighter")
+model:setMesh("Machine_fighter.obj")
+model:setTexture("machinefighter_diffuse2.png")
+model:setSpecular("machinefighter_emission.png")
+model:setScale(3)
+model:setRadius(40)
+
+
+model = ModelData()
+model:setName("machine_frigate")
+model:setMesh("Machine_frigate.obj")
+model:setTexture("Machinefrigate_diffuse2.png")
+model:setSpecular("Machinefrigate_emission.png")
+model:setScale(8)
+model:setRadius(100)
+
+model = ModelData()
+model:setName("machine_mother")
+model:setMesh("Machine_Mothership.obj")
+model:setTexture("Mothership_diffuse2.png")
+model:setSpecular("Mothership_emission.png")
+model:setScale(30)
+model:setRadius(400)
+
+
+
+---
+
+model = ModelData()
 model:setName("space_station_4")
 model:setMesh("space_station_4/space_station_4.model")
 model:setTexture("space_station_4/space_station_4_color.jpg")

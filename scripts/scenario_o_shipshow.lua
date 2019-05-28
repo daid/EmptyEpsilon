@@ -13,14 +13,9 @@ function init()
 	player:setCallSign("Odysseus"):setPosition(0, 5000)
 
 	player = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967")
-	player:setCallSign("ESSODY18"):setPosition(0, 1000):isDocked("Odysseus")
+	player:setCallSign("ESSODY18"):setPosition(0, 1000)
 
-	player = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967")
-	player:setCallSign("ESSODY23"):setPosition(0, 1000):isDocked("Odysseus")
 
-	player = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967")
-	player:setCallSign("ESSODY36"):setPosition(0, 1000)
-		
 
 -- Station
 	station = SpaceStation():setFaction("Civilians"):setTemplate("Medium station"):setCallSign("Solaris 7"):setPosition(-2000, -1000)
