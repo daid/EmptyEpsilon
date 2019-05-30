@@ -8,6 +8,7 @@
 #include "radarView.h"
 #include "missileTubeControls.h"
 #include "targetsContainer.h"
+#include "preferenceManager.h"
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets)
 : GuiElement(owner, id), next_ghost_dot_update(0.0), targets(targets), missile_tube_controls(nullptr), distance(distance), long_range(false), show_ghost_dots(false)
@@ -767,4 +768,54 @@ bool GuiRadarView::onJoystickRMove(float position)
     if (joystick_r_func)
         joystick_r_func(position);
     return true;
+}
+
+
+void GuiRadarView::joystickControl(float axis_position, int axis_number)
+{
+    if (PreferencesManager::get("joystick_rotate").toInt() == axis_number) {
+        if (my_spaceship)
+        {
+            float angle = my_spaceship->getRotation() + axis_position;
+            my_spaceship->commandTargetRotation(angle);
+        }
+    }
+    if (PreferencesManager::get("joystick_combat_boost").toInt() == axis_number) {
+        if (my_spaceship && (fabs(axis_position) > 20))
+        {
+            // Add some more hysteresis, since some axes can be hard to keep at 0
+            float value;
+            if (axis_position > 0)
+                value = (axis_position-20) * 1.25 / 100;
+            else
+                value = (axis_position+20) * 1.25 / 100;
+
+            my_spaceship->commandCombatManeuverBoost(-value);
+        }
+        else if (my_spaceship)
+        {
+            my_spaceship->commandCombatManeuverBoost(0.0);
+        }
+    }
+    if (PreferencesManager::get("joystick_impulse").toInt() == axis_number) {
+        if (my_spaceship)
+            my_spaceship->commandImpulse(-(axis_position / 100));
+    }
+    if (PreferencesManager::get("joystick_combat_strafe").toInt() == axis_number) {
+        if (my_spaceship && (fabs(axis_position) > 20))
+        {
+            // Add some more hysteresis, since some axes can be hard to keep at 0
+            float value;
+            if (axis_position > 0)
+                value = (axis_position-20) * 1.25 / 100;
+            else
+                value = (axis_position+20) * 1.25 / 100;
+
+            my_spaceship->commandCombatManeuverStrafe(value);
+        }
+        else if (my_spaceship)
+        {
+            my_spaceship->commandCombatManeuverStrafe(0.0);
+        }
+    }
 }

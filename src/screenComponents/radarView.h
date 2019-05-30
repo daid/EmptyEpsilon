@@ -108,6 +108,7 @@ public:
     virtual bool onJoystickXYMove(sf::Vector2f position);
     virtual bool onJoystickZMove(float position);
     virtual bool onJoystickRMove(float position);
+    void joystickControl(float axis_position, int axis_number);
 private:
     void updateGhostDots();
 

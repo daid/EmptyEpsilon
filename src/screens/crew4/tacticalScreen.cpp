@@ -19,6 +19,7 @@
 
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_rotationdial.h"
+//#include "preferenceManager.h"
 
 TacticalScreen::TacticalScreen(GuiContainer* owner)
 : GuiOverlay(owner, "TACTICAL_SCREEN", colorConfig.background)
@@ -59,37 +60,17 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
 
     // Joystick controls.
     radar->setJoystickCallbacks(
-        [this](float x_position) {
-            if (my_spaceship)
-            {
-                float angle = my_spaceship->getRotation() + x_position;
-                my_spaceship->commandTargetRotation(angle);
-            }
+        [this](float x_position) {            
+            radar->joystickControl(x_position,1);            
         },
         [this](float y_position) {
-            if (my_spaceship && (fabs(y_position) > 20))
-            {
-                // Add some more hysteresis, since y-axis can be hard to keep at 0
-                float value;
-                if (y_position > 0)
-                    value = (y_position-20) * 1.25 / 100;
-                else
-                    value = (y_position+20) * 1.25 / 100;
-
-                my_spaceship->commandCombatManeuverBoost(-value);
-            }
-            else if (my_spaceship)
-            {
-                my_spaceship->commandCombatManeuverBoost(0.0);
-            }
+            radar->joystickControl(y_position,2);
         },
         [this](float z_position) {
-            if (my_spaceship)
-                my_spaceship->commandImpulse(-(z_position / 100));
+            radar->joystickControl(z_position,3);
         },
         [this](float r_position) {
-            if (my_spaceship)
-                my_spaceship->commandCombatManeuverStrafe(r_position / 100);
+            radar->joystickControl(r_position,4);
         }
     );
 
@@ -145,6 +126,46 @@ void TacticalScreen::onDraw(sf::RenderTarget& window)
     }
     GuiOverlay::onDraw(window);
 }
+
+/*
+void TacticalScreen::joystickControl(float axis_position, int axis_number)
+{
+    if (PreferencesManager::get("joystick_rotate").toInt() == axis_number) {
+        if (my_spaceship)
+        {
+            float angle = my_spaceship->getRotation() + axis_position;
+            my_spaceship->commandTargetRotation(angle);
+        }
+    }
+    if (PreferencesManager::get("joystick_boost").toInt() == axis_number) {
+        if (my_spaceship && (fabs(axis_position) > 20))
+        {
+            // Add some more hysteresis, since y-axis can be hard to keep at 0
+            float value;
+            if (axis_position > 0)
+                value = (axis_position-20) * 1.25 / 100;
+            else
+                value = (axis_position+20) * 1.25 / 100;
+
+            my_spaceship->commandCombatManeuverBoost(-value);
+            //combat_maneuver->setBoostValue(fabs(value));
+        }
+        else if (my_spaceship)
+        {
+            my_spaceship->commandCombatManeuverBoost(0.0);
+        }
+    }
+    if (PreferencesManager::get("joystick_impulse").toInt() == axis_number) {
+        if (my_spaceship)
+            my_spaceship->commandImpulse(-(axis_position / 100));
+    }
+    if (PreferencesManager::get("joystick_strafe").toInt() == axis_number) {                    
+        if (my_spaceship)
+            my_spaceship->commandCombatManeuverStrafe(axis_position / 100);
+    }
+}
+
+*/
 
 void TacticalScreen::onHotkey(const HotkeyResult& key)
 {

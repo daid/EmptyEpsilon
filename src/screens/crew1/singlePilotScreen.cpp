@@ -72,37 +72,17 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
 
     // Joystick controls.
     radar->setJoystickCallbacks(
-        [this](float x_position) {
-            if (my_spaceship)
-            {
-                float angle = my_spaceship->getRotation() + x_position;
-                my_spaceship->commandTargetRotation(angle);
-            }
+        [this](float x_position) {            
+            radar->joystickControl(x_position,1);            
         },
         [this](float y_position) {
-            if (my_spaceship && (fabs(y_position) > 20))
-            {
-                // Add some more hysteresis, since y-axis can be hard to keep at 0
-                float value;
-                if (y_position > 0)
-                    value = (y_position-20) * 1.25 / 100;
-                else
-                    value = (y_position+20) * 1.25 / 100;
-
-                my_spaceship->commandCombatManeuverBoost(-value);
-            }
-            else if (my_spaceship)
-            {
-                my_spaceship->commandCombatManeuverBoost(0.0);
-            }
+            radar->joystickControl(y_position,2);
         },
         [this](float z_position) {
-            if (my_spaceship)
-                my_spaceship->commandImpulse(-(z_position / 100));
+            radar->joystickControl(z_position,3);
         },
         [this](float r_position) {
-            if (my_spaceship)
-                my_spaceship->commandCombatManeuverStrafe(r_position / 100);
+            radar->joystickControl(r_position,4);
         }
     );
 

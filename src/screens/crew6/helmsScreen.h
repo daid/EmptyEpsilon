@@ -4,6 +4,7 @@
 #include "gui/gui2_overlay.h"
 #include "screenComponents/combatManeuver.h"
 
+class GuiRadarView;
 class GuiKeyValueDisplay;
 class GuiLabel;
 
@@ -18,6 +19,7 @@ private:
     GuiKeyValueDisplay* velocity_display;
     GuiElement* warp_controls;
     GuiElement* jump_controls;
+    GuiRadarView* radar;
     GuiLabel* heading_hint;
     GuiCombatManeuver* combat_maneuver;
 public:
