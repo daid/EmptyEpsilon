@@ -163,6 +163,18 @@ int main(int argc, char** argv)
     colorConfig.load();
     hotkeys.load();
 
+    //set joystick defaults to formerly hardcoded settings
+    
+    if (PreferencesManager::get("joystick_combat_strafe").empty())
+        PreferencesManager::set("joystick_combat_strafe", "4");
+    if (PreferencesManager::get("joystick_combat_boost").empty())
+        PreferencesManager::set("joystick_combat_boost", "2");
+    if (PreferencesManager::get("joystick_rotate").empty())
+        PreferencesManager::set("joystick_rotate", "1");
+    if (PreferencesManager::get("joystick_impulse").empty())
+        PreferencesManager::set("joystick_impulse", "3");
+                
+    
     if (PreferencesManager::get("headless") == "")
     {
         //Setup the rendering layers.
