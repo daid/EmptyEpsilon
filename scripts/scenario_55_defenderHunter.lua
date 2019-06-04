@@ -114,7 +114,8 @@ function init()
 					{"software",0},
 					{"circuit",0},
 					{"battery",0}	}
-	diagnostic = false			
+	diagnostic = false		
+	helpfulWarningDiagnostic = false
 	GMDiagnosticOn = "Turn On Diagnostic"
 	addGMFunction(GMDiagnosticOn,turnOnDiagnostic)
 	interWave = 280			
@@ -253,6 +254,7 @@ function init()
 	playerShipNamesForEnder = {"Mongo","Godzilla","Leviathan","Kraken","Jupiter","Saturn"}
 	playerShipNamesForNautilus = {"October", "Abdiel", "Manxman", "Newcon", "Nusret", "Pluton", "Amiral", "Amur", "Heinkel", "Dornier"}
 	playerShipNamesForHathcock = {"Hayha", "Waldron", "Plunkett", "Mawhinney", "Furlong", "Zaytsev", "Pavlichenko", "Pegahmagabow", "Fett", "Hawkeye", "Hanzo"}
+	playerShipNamesForMaverick = {"Festoon", "Earp", "Schwartz", "Tentacular", "Prickly", "Thunderbird", "Hickok", "Clifton", "Fett", "Holliday", "Sundance"}
 	playerShipNamesForLeftovers = {"Foregone","Righteous","Masher"}
 	highestConcurrentPlayerCount = 0
 	setConcurrentPlayerCount = 0
@@ -6208,50 +6210,78 @@ function helpfulWarning(delta)
 		for i=1,#stationList do
 			if stationList[i]:isValid() then
 				p = closestPlayerTo(stationList[i])
-				for _, obj in ipairs(stationList[i]:getObjectsInRange(30000)) do
-					if obj:isEnemy(p) then
-						if not string.find(obj:getTypeName(),"Station") then
-							wMsg = string.format("[%s] Our sensors detect enemies nearby",stationList[i]:getCallSign())
-							if diagnostic or difficulty < 1 then
-								wMsg = wMsg .. string.format(" - Type: %s",obj:getTypeName())
-							end
-							if i == 1 then
-								stationShields = homeStation:getShieldCount()
-								shieldsDamaged = false
-								if stationShields == 1 then
-									sl = homeStation:getShieldLevel(0)
-									sm = homeStation:getShieldMax(0)
-									if sl < sm then
-										sdMsg = sdMsg .. string.format("\n   Shield: %i% (%.1f/%i) ",math.floor(sl/sm*100),sl,sm)
-										shieldsDamaged = true
-									end
-								else
-									sdMsg = string.format("\n   Shield count: %i ",stationShields)
-									for j=1,stationShields do
-										sl = homeStation:getShieldLevel(j-1)
-										sm = homeStation:getShieldMax(j-1)
-										if sl < sm then
-											sdMsg = sdMsg .. string.format("\n      Shield %i: %i% (%.1f/%i) ",j,math.floor(sl/sm*100),sl,sm)
+				if p ~= nil then
+					for _, obj in ipairs(stationList[i]:getObjectsInRange(30000)) do
+						if obj:isEnemy(p) then
+							tempObjType = obj:getTypeName()
+							if not string.find(tempObjType,"Station") then
+								wMsg = string.format("[%s] Our sensors detect enemies nearby",stationList[i]:getCallSign())
+								if diagnostic or difficulty < 1 then
+									wMsg = wMsg .. string.format(" - Type: %s",obj:getTypeName())
+								end
+								p:addToShipLog(wMsg,"Red")
+								if i == 1 then
+									if helpfulWarningDiagnostic then print("home station warning details") end
+									local stationShields = homeStation:getShieldCount()
+									if helpfulWarningDiagnostic then print("number of shields around home station: " .. stationShields) end
+									local shieldsDamaged = false
+									if stationShields == 1 then
+										if helpfulWarningDiagnostic then print("station has only one shield") end
+										local sLevel = homeStation:getShieldLevel(0)
+										if helpfulWarningDiagnostic then print("shield level for the one shield: " .. sLevel) end
+										local sMax = homeStation:getShieldMax(0)
+										if helpfulWarningDiagnostic then print("shield maximum for the one shield: " .. sMax) end
+										if sLevel < sMax then
+											if helpfulWarningDiagnostic then print("shield not fully charged") end
+											sLine = string.format("   Shield: %.1f%% (%.1f/%.1f) ",sLevel/sMax*100,sLevel,sMax)
 											shieldsDamaged = true
 										end
-									end
-								end
-								if shieldsDamaged then
-									wMsg = wMsg .. "\nStation status:" .. sdMsg
-								end
-								hl = homeStation:getHull()
-								hm = homeStation:getHullMax()
-								if hl < hm then
-									if shieldsDamaged then
-										wMsg = wMsg .. string.format("\n   Hull: %i% (%.1f/%i)",math.floor(hl/hm*100),hl,hm)
 									else
-										wMsg = wMsg .. "\nStation status:" .. string.format("\n   Hull: %i% (%.1f/%i)",math.floor(hl/hm*100),hl,hm)										
+										if helpfulWarningDiagnostic then print("station has multiple shields") end
+										sdMsg = string.format("   Shield count: %i ",stationShields)
+										if helpfulWarningDiagnostic then print("about to start shield loop") end
+										shieldStatusLines = {}
+										for j=1,stationShields do
+											if helpfulWarningDiagnostic then print(string.format("loop index: %i, shield number: %i",j,j-1)) end
+											sLevel = homeStation:getShieldLevel(j-1)
+											if helpfulWarningDiagnostic then print("shield level: " .. sLevel) end
+											sMax = homeStation:getShieldMax(j-1)
+											if helpfulWarningDiagnostic then print("max: " .. sMax) end
+											if sLevel < sMax then
+												if helpfulWarningDiagnostic then print("shield not fully charged") end
+												sLine = string.format("      Shield %i: %i%% (%.1f/%i) ",j,math.floor(sLevel/sMax*100),sLevel,sMax)
+												table.insert(shieldStatusLines,sLine)
+												shieldsDamaged = true
+											end
+										end
+									end
+									if shieldsDamaged then
+										p:addToShipLog("Station Status:","Red")
+										if stationShields == 1 then
+											p:addToShipLog(sLine,"Red")
+										else
+											for k=1,#shieldStatusLines do
+												p:addToShipLog(shieldStatusLines[k],"Red")
+											end
+										end
+									end
+									if helpfulWarningDiagnostic then print("Done with shield status, check hull status") end
+									hl = homeStation:getHull()
+									if helpfulWarningDiagnostic then print("current hull: " .. hl) end
+									hm = homeStation:getHullMax()
+									if helpfulWarningDiagnostic then print("max hull: " .. hm) end
+									if hl < hm then
+										if helpfulWarningDiagnostic then print("hull not fully repaired") end
+										if not shieldsDamaged then
+											p:addToShipLog("Station Status:","Red")										
+										end
+										local hLine = string.format("   Hull: %i%% (%.1f/%i)",math.floor(hl/hm*100),hl,hm)
+										p:addToShipLog(hLine,"Red")
 									end
 								end
+								warningProvided = true
+								break
 							end
-							p:addToShipLog(wMsg,"Red")
-							warningProvided = true
-							break
 						end
 					end
 				end
@@ -6687,6 +6717,14 @@ function setPlayers()
 					end
 					pobj.shipScore = 30
 					pobj.maxCargo = 6
+				elseif tempPlayerType == "Maverick" then
+					if #playerShipNamesForMaverick > 0 then
+						ni = math.random(1,#playerShipNamesForMaverick)
+						pobj:setCallSign(playerShipNamesForMaverick[ni])
+						table.remove(playerShipNamesForMaverick,ni)
+					end
+					pobj.shipScore = 45
+					pobj.maxCargo = 5
 				else
 					if #playerShipNamesForLeftovers > 0 then
 						ni = math.random(1,#playerShipNamesForLeftovers)
@@ -6716,7 +6754,7 @@ function setPlayers()
 						pobj.healthyMissile = 1.0
 						pobj.prevMissile = 1.0
 					end
-					if pobj:hasWarp() then
+					if pobj:hasWarpDrive() then
 						pobj.healthyWarp = 1.0
 						pobj.prevWarp = 1.0
 					end
@@ -6951,15 +6989,18 @@ function endStatistics()
 	destroyedNeutralStations = 0
 	survivedNeutralStations = 0
 	for _, station in pairs(originalStationList) do
-		if station:isFriendly(getPlayerShip(-1)) then
-			if station:isValid() then
-				survivedStations = survivedStations + 1
-				survivedFriendlyStations = survivedFriendlyStations + 1
-			end
-		else
-			if station:isValid() then
-				survivedStations = survivedStations + 1
-				survivedNeutralStations = survivedNeutralStations + 1
+		tp = getPlayerShip(-1)
+		if tp ~= nil and tp:isValid() then
+			if station:isFriendly(tp) then
+				if station:isValid() then
+					survivedStations = survivedStations + 1
+					survivedFriendlyStations = survivedFriendlyStations + 1
+				end
+			else
+				if station:isValid() then
+					survivedStations = survivedStations + 1
+					survivedNeutralStations = survivedNeutralStations + 1
+				end
 			end
 		end
 	end

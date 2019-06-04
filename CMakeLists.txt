@@ -376,6 +376,7 @@ foreach(SP_SOURCE
 	src/lua/ltablib.c
 	src/lua/lgc.c
 	src/lua/lbitlib.c
+	src/json11/json11.cpp
 	)
 	list(APPEND SOURCES ${SERIOUS_PROTON_DIR}/${SP_SOURCE})
 endforeach()

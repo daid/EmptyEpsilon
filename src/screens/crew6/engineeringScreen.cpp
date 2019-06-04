@@ -276,7 +276,8 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
                 {
                     DamageInfo di;
                     di.type = DT_Kinetic;
-                    float damage_negate = 1.0f - my_spaceship->getShieldDamageFactor(di, my_spaceship->shield_count);
+                    float damage_negate = 1.0f - 
+my_spaceship->getShieldDamageFactor(di, my_spaceship->shield_count - 1);
                     if (damage_negate < 0.0)
                         addSystemEffect("Extra damage", string(int(-damage_negate * 100)) + "%");
                     else

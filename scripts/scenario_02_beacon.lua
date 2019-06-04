@@ -121,7 +121,7 @@ function missionRT4PickedUp(delta)
     if player:isDocked(main_station) then
         -- Docked and delivered the diplomat.
         if jjj_alive then
-            main_station:sendCommsMessage(player, [[J.J.Johnson thanks you for rescueing him.
+            main_station:sendCommsMessage(player, [[J.J.Johnson thanks you for rescuing him.
 
 He tells you about his mission. He just came back from a mission from the Refugee-X station. Which is a neutral station in the area, known to house anyone no matter their history.
 Lately Refugee-X has been under attack by Exuari ships, and some criminals living there have offered to give themselves up in exchange for better protection of the station.
@@ -160,7 +160,7 @@ end
 
 function missionRetrieveCriminals(delta)
     if player:isDocked(neutral_station) then
-        neutral_station:sendCommsMessage(player, [[Two tough looking criminals board your ship. They are already cuffed, and do not look to happy about the whole situation.
+        neutral_station:sendCommsMessage(player, [[Two tough looking criminals board your ship. They are already cuffed, and do not look too happy about the whole situation.
 One of them is a human pirate, blind in one eye and has clearly seen his fair share of battles. The other is Exuari who hisses what you presume is a curse in their native language.
 
 You are wondering how voluntary their exchange really is...

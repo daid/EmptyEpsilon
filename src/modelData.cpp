@@ -205,11 +205,11 @@ void ModelData::render()
 
     glScalef(scale, scale, scale);
     glTranslatef(mesh_offset.x, mesh_offset.y, mesh_offset.z);
-    shader->setParameter("baseMap", *texture);
+    shader->setUniform("baseMap", *texture);
     if (specular_texture)
-        shader->setParameter("specularMap", *specular_texture);
+        shader->setUniform("specularMap", *specular_texture);
     if (illumination_texture)
-        shader->setParameter("illuminationMap", *illumination_texture);
+        shader->setUniform("illuminationMap", *illumination_texture);
     sf::Shader::bind(shader);
     mesh->render();
 
