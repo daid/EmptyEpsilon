@@ -1,17 +1,20 @@
--- Name: Jump 06
+-- Name: Jump 11
+-- Type: Mission
 -- Type: Mission
 
 function init()
 
       odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Corvette C743")
 	odysseus:setCallSign("ESS Odysseus"):setPosition(0, 0):setCanBeDestroyed(false)
-
+	
+	planet1 = Planet():setPosition(50000, -30000):setPlanetSurfaceTexture("planets/moon-1.png"):setDistanceFromMovementPlane(2000):setPlanetRadius(15000)
+ 
+	
 -- Launched buttons
 	odysseus:addCustomButton("Relay", "Launch ESSODY18", "Launch ESSODY18", launch_essody18)
 	odysseus:addCustomButton("Relay", "Launch ESSODY23", "Launch ESSODY23", launch_essody23)
 	odysseus:addCustomButton("Relay", "Launch ESSODY36", "Launch ESSODY36", launch_essody36)
 
-	
 
 	for asteroid_counter=1,50 do
 		Asteroid():setPosition(random(-75000, 75000), random(-75000, 75000))
@@ -40,10 +43,6 @@ function init()
 	
 	burro = CpuShip():setFaction("EOC Starfleet"):setTemplate("Cargoship T842"):setPosition(x + random(-30000, 30000), y + random(-30000, 30000)):orderFlyFormation(flagship, -750, 4500):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("OSS Burro"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false)
 	
-	arthas = CpuShip():setFaction("EOC Starfleet"):setTemplate("Scoutship S342"):setPosition(x + random(-30000, 30000), y + random(-30000, 30000)):orderFlyFormation(flagship, -1000, 6000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("ESS Arthas"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false) 
-
-	valor = CpuShip():setFaction("EOC Starfleet"):setTemplate("Cruiser C753"):setPosition(x + random(-30000, 30000), y + random(-30000, 30000)):orderFlyFormation(flagship, -4000, 9000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("ESS Valor"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false) 
-
 	warrior = CpuShip():setFaction("EOC Starfleet"):setTemplate("Cruiser C753"):setPosition(x + random(-30000, 30000), y + random(-30000, 30000)):orderFlyFormation(flagship, -1500, 8500):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("ESS Warrior"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false) 
 	
 
@@ -60,7 +59,6 @@ function init()
 	
 	whirlwind = CpuShip():setFaction("Corporate owned"):setTemplate("Corvette C348"):setPosition(x + random(-30000, 30000), y + random(-30000, 30000)):orderFlyFormation(flagship, -5000, 5000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("CSS Whirlwind"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false) 
 	
-	memory = CpuShip():setFaction("Government owned"):setTemplate("Corvette C348"):setPosition(x + random(-30000, 30000), y + random(-30000, 30000)):orderFlyFormation(flagship, -6000, 6000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("ESS Memory"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false) 
 	
 	cyclone = CpuShip():setFaction("Corporate owned"):setTemplate("Cruiser C243"):setPosition(x + random(-30000, 30000), y + random(-30000, 30000)):orderFlyFormation(flagship, -3000, 4000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("CSS Cyclone"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false) 
 	
@@ -69,13 +67,15 @@ function init()
 	spectrum = CpuShip():setFaction("Corporate owned"):setTemplate("Cruiser C243"):setPosition(x + random(-30000, 30000), y + random(-30000, 30000)):orderFlyFormation(flagship, -6000, 7000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("ESS Spectrum"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false) 
 	
 	centurion = CpuShip():setFaction("Corporate owned"):setTemplate("Cruiser C243"):setPosition(x + random(-30000, 30000), y + random(-30000, 30000)):orderFlyFormation(flagship, -7000, 4000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("CSS Centurion"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false) 
-	
-	polaris = CpuShip():setFaction("Corporate owned"):setTemplate("Cruiser C243"):setPosition(x + random(-30000, 30000), y + random(-30000, 30000)):orderFlyFormation(flagship, -4000, 7000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("ESS Polaris"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false) 
-		
+			
 	immortal = CpuShip():setFaction("Corporate owned"):setTemplate("Cruiser C243"):setPosition(x + random(-30000, 30000), y + random(-30000, 30000)):orderFlyFormation(flagship, -5500, 3500):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("OSS Immortal"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false) 
 	
-	starfall = CpuShip():setFaction("Corporate owned"):setTemplate("Cruiser C243"):setPosition(x + random(-30000, 30000), y + random(-30000, 30000)):orderFlyFormation(flagship, -3500, 5500):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("OSS Starfall"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false) 
 
+
+	addGMFunction("Destroy ESS Polaris", function ()
+		polaris:destroy();
+		removeGMFunction("Destroy ESS Polaris")
+	end)
 
 		
     addGMFunction("Enemy wave one", wave_one)
@@ -92,36 +92,36 @@ function wave_one()
 		x, y = odysseus:getPosition()
 		
 	-- Fighters 100
-	-- Cruisers 60
+	-- Cruisers 35
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, -10000), y + random(30000, 70000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-20000, 25000), y + random(-70000,-50000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-60000, -20000), y + random(20000, 70000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-20000, 25000), y + random(-65000, -40000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-60000, -20000), y + random(40000, 70000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, 40000), y + random(-70000, -50000)):orderRoaming(x, y)
         end
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-60000, -20000), y + random(20000, 70000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-20000, 25000), y + random(-65000, -40000)):orderRoaming(x, y)
+        end
+		
+		for n=1,10 do
+			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-40000, 40000), y + random(-80000, -50000)):orderRoaming(x, y)
+        end
+		
+		for n=1,10 do
+			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-20000, 25000), y + random(-80000,-50000)):orderRoaming(x, y)
+        end
+		
+		for n=1,15 do
+			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-20000, 25000), y + random(-65000, -40000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-60000, -20000), y + random(20000, 70000)):orderRoaming(x, y)
-        end
-		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-60000, -10000), y + random(40000, 70000)):orderRoaming(x, y)
-        end
-		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-60000, -20000), y + random(20000, 70000)):orderRoaming(x, y)
-        end
-		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-60000, -20000), y + random(20000, 70000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, 40000), y + random(-60000, -30000)):orderRoaming(x, y)
         end
 		
 	removeGMFunction("Enemy wave one")
@@ -132,36 +132,36 @@ function wave_two()
 	x, y = odysseus:getPosition()
 	
 	-- Fighters 100
-	-- Cruisers 60
+	-- Cruisers 35
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-60000, -10000), y + random(40000, 70000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, 25000), y + random(-60000,-50000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-60000, -20000), y + random(20000, 70000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, 25000), y + random(-65000, -40000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-60000, -20000), y + random(20000, 70000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-65000, 40000), y + random(-80000, -40000)):orderRoaming(x, y)
         end
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-60000, -20000), y + random(20000, 70000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, 25000), y + random(-65000, -40000)):orderRoaming(x, y)
+        end
+		
+		for n=1,10 do
+			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-65000, 40000), y + random(-60000, -40000)):orderRoaming(x, y)
+        end
+		
+		for n=1,10 do
+			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-40000, 25000), y + random(-80000,-40000)):orderRoaming(x, y)
+        end
+		
+		for n=1,15 do
+			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-40000, 25000), y + random(-65000, -40000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-60000, -20000), y + random(20000, 70000)):orderRoaming(x, y)
-        end
-		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-60000, -10000), y + random(40000, 70000)):orderRoaming(x, y)
-        end
-		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-60000, -20000), y + random(20000, 70000)):orderRoaming(x, y)
-        end
-		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-60000, -20000), y + random(20000, 70000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-65000, 40000), y + random(-80000, -50000)):orderRoaming(x, y)
         end
 		
 	removeGMFunction("Enemy wave two")
