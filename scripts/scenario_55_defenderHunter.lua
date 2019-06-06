@@ -114,7 +114,8 @@ function init()
 					{"software",0},
 					{"circuit",0},
 					{"battery",0}	}
-	diagnostic = false			
+	diagnostic = false		
+	helpfulWarningDiagnostic = false
 	GMDiagnosticOn = "Turn On Diagnostic"
 	addGMFunction(GMDiagnosticOn,turnOnDiagnostic)
 	interWave = 280			
@@ -253,6 +254,7 @@ function init()
 	playerShipNamesForEnder = {"Mongo","Godzilla","Leviathan","Kraken","Jupiter","Saturn"}
 	playerShipNamesForNautilus = {"October", "Abdiel", "Manxman", "Newcon", "Nusret", "Pluton", "Amiral", "Amur", "Heinkel", "Dornier"}
 	playerShipNamesForHathcock = {"Hayha", "Waldron", "Plunkett", "Mawhinney", "Furlong", "Zaytsev", "Pavlichenko", "Pegahmagabow", "Fett", "Hawkeye", "Hanzo"}
+	playerShipNamesForMaverick = {"Festoon", "Earp", "Schwartz", "Tentacular", "Prickly", "Thunderbird", "Hickok", "Clifton", "Fett", "Holliday", "Sundance"}
 	playerShipNamesForLeftovers = {"Foregone","Righteous","Masher"}
 	highestConcurrentPlayerCount = 0
 	setConcurrentPlayerCount = 0
@@ -379,30 +381,32 @@ end
 function moveNebulae(delta)
 	for nidx=1,#movingNebulae do
 		mnx, mny = movingNebulae[nidx]:getPosition()
-		angleChange = false
-		if mnx < -100000 then
-			angleChange = true
-			movingNebulae[nidx].angle = random(0,180) + 270
-		end
-		if mnx > 100000 then
-			angleChange = true
-			movingNebulae[nidx].angle = random(90,270)
-		end
-		if mny < -100000 then
-			angleChange = true
-			movingNebulae[nidx].angle = random(0,180)
-		end
-		if mny > 100000 then
-			angleChange = true
-			movingNebulae[nidx].angle = random(180,360)
-		end
-		if angleChange then
-			deltaNebx, deltaNeby = vectorFromAngle(movingNebulae[nidx].angle, movingNebulae[nidx].travel/10+20)
-			movingNebulae[nidx]:setPosition(mnx+deltaNebx, mny+deltaNeby)
-			movingNebulae.travel = random(1,100)
-		else
-			deltaNebx, deltaNeby = vectorFromAngle(movingNebulae[nidx].angle, movingNebulae[nidx].travel/10)
-			movingNebulae[nidx]:setPosition(mnx+deltaNebx, mny+deltaNeby)
+		if mnx ~= nil and mny ~= nil then
+			angleChange = false
+			if mnx < -100000 then
+				angleChange = true
+				movingNebulae[nidx].angle = random(0,180) + 270
+			end
+			if mnx > 100000 then
+				angleChange = true
+				movingNebulae[nidx].angle = random(90,270)
+			end
+			if mny < -100000 then
+				angleChange = true
+				movingNebulae[nidx].angle = random(0,180)
+			end
+			if mny > 100000 then
+				angleChange = true
+				movingNebulae[nidx].angle = random(180,360)
+			end
+			if angleChange then
+				deltaNebx, deltaNeby = vectorFromAngle(movingNebulae[nidx].angle, movingNebulae[nidx].travel/10+20)
+				movingNebulae[nidx]:setPosition(mnx+deltaNebx, mny+deltaNeby)
+				movingNebulae.travel = random(1,100)
+			else
+				deltaNebx, deltaNeby = vectorFromAngle(movingNebulae[nidx].angle, movingNebulae[nidx].travel/10)
+				movingNebulae[nidx]:setPosition(mnx+deltaNebx, mny+deltaNeby)
+			end
 		end
 	end
 end
@@ -2833,7 +2837,9 @@ function transportPlot(delta)
 			transportList = tempTransportList
 		end
 		if #transportList < #stationList then
-			target = randomStation()
+			repeat
+				target = randomStation()				
+			until(target ~= nil)
 			rnd = irandom(1,5)
 			if rnd == 1 then
 				name = "Personnel"
@@ -4567,16 +4573,20 @@ function initialOrders(delta)
 	initialOrderTimer = initialOrderTimer - delta
 	if initialOrderTimer < 0 then
 		if initialOrdersMsg == nil then
-			initialOrdersMsg = "sent"
+			foundPlayer = false
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() then
+					foundPlayer = true
 					p:addToShipLog(string.format("You are to protect your home base, %s, against enemy attack. Respond to other requests as you see fit",homeStation:getCallSign()),"Magenta")
 					primaryOrders = string.format("Protect %s",homeStation:getCallSign())
 					playSoundFile("sa_55_Commander1.wav")
 				end
 			end
-			plot1 = setEnemyDefenseFleet
+			if foundPlayer then
+				initialOrdersMsg = "sent"
+				plot1 = setEnemyDefenseFleet
+			end
 		end
 	end
 end
@@ -4600,6 +4610,9 @@ function threadedPursuit(delta)
 	plot1name = "threadedPursuit"
 	if ef2 == nil then
 		p = closestPlayerTo(targetEnemyStation)
+		if p == nil then
+			return
+		end
 		scx, scy = p:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(20000,30000))
 		ef2 = spawnEnemies(scx+cpx,scy+cpy,.8)
@@ -6198,50 +6211,78 @@ function helpfulWarning(delta)
 		for i=1,#stationList do
 			if stationList[i]:isValid() then
 				p = closestPlayerTo(stationList[i])
-				for _, obj in ipairs(stationList[i]:getObjectsInRange(30000)) do
-					if obj:isEnemy(p) then
-						if not string.find(obj:getTypeName(),"Station") then
-							wMsg = string.format("[%s] Our sensors detect enemies nearby",stationList[i]:getCallSign())
-							if diagnostic or difficulty < 1 then
-								wMsg = wMsg .. string.format(" - Type: %s",obj:getTypeName())
-							end
-							if i == 1 then
-								stationShields = homeStation:getShieldCount()
-								shieldsDamaged = false
-								if stationShields == 1 then
-									sl = homeStation:getShieldLevel(0)
-									sm = homeStation:getShieldMax(0)
-									if sl < sm then
-										sdMsg = sdMsg .. string.format("\n   Shield: %i% (%.1f/%i) ",math.floor(sl/sm*100),sl,sm)
-										shieldsDamaged = true
-									end
-								else
-									sdMsg = string.format("\n   Shield count: %i ",stationShields)
-									for j=1,stationShields do
-										sl = homeStation:getShieldLevel(j-1)
-										sm = homeStation:getShieldMax(j-1)
-										if sl < sm then
-											sdMsg = sdMsg .. string.format("\n      Shield %i: %i% (%.1f/%i) ",j,math.floor(sl/sm*100),sl,sm)
+				if p ~= nil then
+					for _, obj in ipairs(stationList[i]:getObjectsInRange(30000)) do
+						if obj:isEnemy(p) then
+							tempObjType = obj:getTypeName()
+							if not string.find(tempObjType,"Station") then
+								wMsg = string.format("[%s] Our sensors detect enemies nearby",stationList[i]:getCallSign())
+								if diagnostic or difficulty < 1 then
+									wMsg = wMsg .. string.format(" - Type: %s",obj:getTypeName())
+								end
+								p:addToShipLog(wMsg,"Red")
+								if i == 1 then
+									if helpfulWarningDiagnostic then print("home station warning details") end
+									local stationShields = homeStation:getShieldCount()
+									if helpfulWarningDiagnostic then print("number of shields around home station: " .. stationShields) end
+									local shieldsDamaged = false
+									if stationShields == 1 then
+										if helpfulWarningDiagnostic then print("station has only one shield") end
+										local sLevel = homeStation:getShieldLevel(0)
+										if helpfulWarningDiagnostic then print("shield level for the one shield: " .. sLevel) end
+										local sMax = homeStation:getShieldMax(0)
+										if helpfulWarningDiagnostic then print("shield maximum for the one shield: " .. sMax) end
+										if sLevel < sMax then
+											if helpfulWarningDiagnostic then print("shield not fully charged") end
+											sLine = string.format("   Shield: %.1f%% (%.1f/%.1f) ",sLevel/sMax*100,sLevel,sMax)
 											shieldsDamaged = true
 										end
-									end
-								end
-								if shieldsDamaged then
-									wMsg = wMsg .. "\nStation status:" .. sdMsg
-								end
-								hl = homeStation:getHull()
-								hm = homeStation:getHullMax()
-								if hl < hm then
-									if shieldsDamaged then
-										wMsg = wMsg .. string.format("\n   Hull: %i% (%.1f/%i)",math.floor(hl/hm*100),hl,hm)
 									else
-										wMsg = wMsg .. "\nStation status:" .. string.format("\n   Hull: %i% (%.1f/%i)",math.floor(hl/hm*100),hl,hm)										
+										if helpfulWarningDiagnostic then print("station has multiple shields") end
+										sdMsg = string.format("   Shield count: %i ",stationShields)
+										if helpfulWarningDiagnostic then print("about to start shield loop") end
+										shieldStatusLines = {}
+										for j=1,stationShields do
+											if helpfulWarningDiagnostic then print(string.format("loop index: %i, shield number: %i",j,j-1)) end
+											sLevel = homeStation:getShieldLevel(j-1)
+											if helpfulWarningDiagnostic then print("shield level: " .. sLevel) end
+											sMax = homeStation:getShieldMax(j-1)
+											if helpfulWarningDiagnostic then print("max: " .. sMax) end
+											if sLevel < sMax then
+												if helpfulWarningDiagnostic then print("shield not fully charged") end
+												sLine = string.format("      Shield %i: %i%% (%.1f/%i) ",j,math.floor(sLevel/sMax*100),sLevel,sMax)
+												table.insert(shieldStatusLines,sLine)
+												shieldsDamaged = true
+											end
+										end
+									end
+									if shieldsDamaged then
+										p:addToShipLog("Station Status:","Red")
+										if stationShields == 1 then
+											p:addToShipLog(sLine,"Red")
+										else
+											for k=1,#shieldStatusLines do
+												p:addToShipLog(shieldStatusLines[k],"Red")
+											end
+										end
+									end
+									if helpfulWarningDiagnostic then print("Done with shield status, check hull status") end
+									hl = homeStation:getHull()
+									if helpfulWarningDiagnostic then print("current hull: " .. hl) end
+									hm = homeStation:getHullMax()
+									if helpfulWarningDiagnostic then print("max hull: " .. hm) end
+									if hl < hm then
+										if helpfulWarningDiagnostic then print("hull not fully repaired") end
+										if not shieldsDamaged then
+											p:addToShipLog("Station Status:","Red")										
+										end
+										local hLine = string.format("   Hull: %i%% (%.1f/%i)",math.floor(hl/hm*100),hl,hm)
+										p:addToShipLog(hLine,"Red")
 									end
 								end
+								warningProvided = true
+								break
 							end
-							p:addToShipLog(wMsg,"Red")
-							warningProvided = true
-							break
 						end
 					end
 				end
@@ -6289,34 +6330,36 @@ function moveWormArt(delta)
 		plotW = wormBirth
 	end
 	p = closestPlayerTo(wormArt)
-	if distance(p,wormArt) > 5000 then
-		wax, way = wormArt:getPosition()
-		angleChange = false
-		if wax < -100000 then
-			angleChange = true
-			wormArt.travelAngle = random(0,180) + 270
-		end
-		if wax > 100000 then
-			angleChange = true
-			wormArt.travelAngle = random(90,270)
-		end
-		if way < -100000 then
-			angleChange = true
-			wormArt.travelAngle = random(0,180)
-		end
-		if way > 100000 then
-			angleChange = true
-			wormArt.travelAngle = random(180,360)
-		end
-		if angleChange then
-			wadx, wady = vectorFromAngle(wormArt.travelAngle,wormArt.travel+20)
-			wormArt:setPosition(wax+wadx,way+wady)
-		else
-			wadx, wady = vectorFromAngle(wormArt.travelAngle + wormArt.tempAngle,wormArt.travel)
-			wormArt:setPosition(wax+wadx,way+wady)
-			wormArt.tempAngle = wormArt.tempAngle + 1
-			if wormArt.tempAngle > 90 then
-				wormArt.tempAngle = -90
+	if p ~= nil then
+		if distance(p,wormArt) > 5000 then
+			wax, way = wormArt:getPosition()
+			angleChange = false
+			if wax < -100000 then
+				angleChange = true
+				wormArt.travelAngle = random(0,180) + 270
+			end
+			if wax > 100000 then
+				angleChange = true
+				wormArt.travelAngle = random(90,270)
+			end
+			if way < -100000 then
+				angleChange = true
+				wormArt.travelAngle = random(0,180)
+			end
+			if way > 100000 then
+				angleChange = true
+				wormArt.travelAngle = random(180,360)
+			end
+			if angleChange then
+				wadx, wady = vectorFromAngle(wormArt.travelAngle,wormArt.travel+20)
+				wormArt:setPosition(wax+wadx,way+wady)
+			else
+				wadx, wady = vectorFromAngle(wormArt.travelAngle + wormArt.tempAngle,wormArt.travel)
+				wormArt:setPosition(wax+wadx,way+wady)
+				wormArt.tempAngle = wormArt.tempAngle + 1
+				if wormArt.tempAngle > 90 then
+					wormArt.tempAngle = -90
+				end
 			end
 		end
 	end
@@ -6675,6 +6718,14 @@ function setPlayers()
 					end
 					pobj.shipScore = 30
 					pobj.maxCargo = 6
+				elseif tempPlayerType == "Maverick" then
+					if #playerShipNamesForMaverick > 0 then
+						ni = math.random(1,#playerShipNamesForMaverick)
+						pobj:setCallSign(playerShipNamesForMaverick[ni])
+						table.remove(playerShipNamesForMaverick,ni)
+					end
+					pobj.shipScore = 45
+					pobj.maxCargo = 5
 				else
 					if #playerShipNamesForLeftovers > 0 then
 						ni = math.random(1,#playerShipNamesForLeftovers)
@@ -6704,7 +6755,7 @@ function setPlayers()
 						pobj.healthyMissile = 1.0
 						pobj.prevMissile = 1.0
 					end
-					if pobj:hasWarp() then
+					if pobj:hasWarpDrive() then
 						pobj.healthyWarp = 1.0
 						pobj.prevWarp = 1.0
 					end
@@ -6939,15 +6990,18 @@ function endStatistics()
 	destroyedNeutralStations = 0
 	survivedNeutralStations = 0
 	for _, station in pairs(originalStationList) do
-		if station:isFriendly(getPlayerShip(-1)) then
-			if station:isValid() then
-				survivedStations = survivedStations + 1
-				survivedFriendlyStations = survivedFriendlyStations + 1
-			end
-		else
-			if station:isValid() then
-				survivedStations = survivedStations + 1
-				survivedNeutralStations = survivedNeutralStations + 1
+		tp = getPlayerShip(-1)
+		if tp ~= nil and tp:isValid() then
+			if station:isFriendly(tp) then
+				if station:isValid() then
+					survivedStations = survivedStations + 1
+					survivedFriendlyStations = survivedFriendlyStations + 1
+				end
+			else
+				if station:isValid() then
+					survivedStations = survivedStations + 1
+					survivedNeutralStations = survivedNeutralStations + 1
+				end
 			end
 		end
 	end

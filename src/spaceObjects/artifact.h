@@ -24,7 +24,7 @@ public:
     void allowPickup(bool allow);
     
     virtual string getExportLine();
-    void setPickUpCallback(ScriptSimpleCallback callback);
+    void onPickUp(ScriptSimpleCallback callback);
 };
 
 #endif//ARTIFACT_H

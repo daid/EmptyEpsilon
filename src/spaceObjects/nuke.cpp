@@ -17,4 +17,5 @@ void Nuke::hitObject(P<SpaceObject> object)
     e->setSize(blastRange);
     e->setPosition(getPosition());
     e->setOnRadar(true);
+    e->setExplosionSound("sfx/nuke_explosion.wav");
 }

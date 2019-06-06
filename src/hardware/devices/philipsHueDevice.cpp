@@ -1,7 +1,12 @@
+//The Hue bridge returns its info in JSON form, so the json11 library takes this role.
+
 #include "philipsHueDevice.h"
 #include "hardware/serialDriver.h"
 #include "logging.h"
 #include <unistd.h>
+#include <json11/json11.hpp>
+
+using namespace json11;
 
 PhilipsHueDevice::PhilipsHueDevice()
 : update_thread(&PhilipsHueDevice::updateLoop, this)
@@ -131,8 +136,19 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
         }
         else
         {
-            //TODO: Figure out the amount of available lights from the response.
-            light_count = 16;
+            std::string body = response.getBody();
+            std::string err;
+            json11::Json hue_json = json11::Json::parse(body,err);
+            LOG(ERROR) << "Json parser returned error " << err;
+
+            light_count = 0;
+            std::map<std::string, json11::Json> jsonMap = hue_json.object_items();
+            for(std::map<std::string, json11::Json>::iterator it = jsonMap.begin(); it != jsonMap.end(); it++) {
+                  int currentInt = std::stoi (it->first,nullptr,10); //TODO: Replace STOI with toInt()
+                  LOG(DEBUG) << "Got key from Hue API " << currentInt;
+                  if (currentInt >= light_count) light_count = currentInt;
+            }
+
             lights.resize(light_count);
             
             FILE* f = fopen(userfile.c_str(), "wt");

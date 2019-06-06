@@ -14,6 +14,7 @@ ExplosionEffect::ExplosionEffect()
 : SpaceObject(1000.0, "ExplosionEffect")
 {
     size = 1.0;
+    explosion_sound = "explosion.wav";
     on_radar = false;
     setCollisionRadius(1.0);
     lifetime = maxLifetime;
@@ -47,12 +48,12 @@ void ExplosionEffect::draw3DTransparent()
     sf::Vector3f v3 = sf::Vector3f( 1,  1, 0);
     sf::Vector3f v4 = sf::Vector3f(-1,  1, 0);
 
-    ShaderManager::getShader("basicShader")->setParameter("textureMap", *textureManager.getTexture("fire_sphere_texture.png"));
+    ShaderManager::getShader("basicShader")->setUniform("textureMap", *textureManager.getTexture("fire_sphere_texture.png"));
     sf::Shader::bind(ShaderManager::getShader("basicShader"));
     Mesh* m = Mesh::getMesh("sphere.obj");
     m->render();
 
-    ShaderManager::getShader("basicShader")->setParameter("textureMap", *textureManager.getTexture("fire_ring.png"));
+    ShaderManager::getShader("basicShader")->setUniform("textureMap", *textureManager.getTexture("fire_ring.png"));
     sf::Shader::bind(ShaderManager::getShader("basicShader"));
     glScalef(1.5, 1.5, 1.5);
     glBegin(GL_QUADS);
@@ -68,7 +69,7 @@ void ExplosionEffect::draw3DTransparent()
     glPopMatrix();
     
     
-    ShaderManager::getShader("billboardShader")->setParameter("textureMap", *textureManager.getTexture("particle.png"));
+    ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture("particle.png"));
     sf::Shader::bind(ShaderManager::getShader("billboardShader"));
     scale = Tween<float>::easeInCubic(f, 0.0, 1.0, 0.3f, 5.0f);
     float r = Tween<float>::easeInQuad(f, 0.0, 1.0, 1.0f, 0.0f);
@@ -109,7 +110,7 @@ void ExplosionEffect::drawOnRadar(sf::RenderTarget& window, sf::Vector2f positio
 void ExplosionEffect::update(float delta)
 {
     if (delta > 0 && lifetime == maxLifetime)
-        soundManager->playSound("explosion.wav", getPosition(), size, 1.0);
+        soundManager->playSound(explosion_sound, getPosition(), size, 1.0);
     lifetime -= delta;
     if (lifetime < 0)
         destroy();
