@@ -1,8 +1,9 @@
+
 #include "engine.h"
 #include "gui2_overlay.h"
 
 GuiOverlay::GuiOverlay(GuiContainer* owner, string id, sf::Color color)
-: GuiElement(owner, id), color(color)
+: GuiElement(owner, id), color(color), blocking(false)
 {
     texture_mode = TM_None;
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -66,4 +67,9 @@ GuiOverlay* GuiOverlay::setTextureNone()
     this->texture = nullptr;
     this->texture_mode = TM_None;
     return this;
+}
+
+bool GuiOverlay::onMouseDown(sf::Vector2f position)
+{
+    return blocking;
 }
