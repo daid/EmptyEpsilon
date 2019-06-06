@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-- Nothing
+- multiple GM stations
 
 ## [2018-02-15]
 
