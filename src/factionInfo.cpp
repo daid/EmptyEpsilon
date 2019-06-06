@@ -86,3 +86,12 @@ unsigned int FactionInfo::findFactionId(string name)
 void FactionInfo::reset()
 {
 }
+
+string getFactionVsFactionStateName(EFactionVsFactionState state){
+    switch(state) {
+        case FVF_Enemy: return "Enemy";
+        case FVF_Friendly: return "Friendly";
+        case FVF_Neutral: return "Neutral";
+        default : return "Unknown";
+    }
+}

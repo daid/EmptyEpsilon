@@ -35,6 +35,7 @@ public:
     void commandOrderShip(EShipOrder order, PVector<SpaceObject> selection);
     void commandDestroy(PVector<SpaceObject> selection);
     void commandSendCommToPlayerShip(P<PlayerSpaceship> target, string line);
+    void commandSetFactionsState(int faction_a, int faction_b, int stateIdx);
     virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet);
     
 private:

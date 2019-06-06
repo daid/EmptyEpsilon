@@ -22,6 +22,7 @@ public:
     string getText() const;
     GuiLabel* setAlignment(EGuiAlign alignment);
     GuiLabel* addBackground();
+    GuiLabel* removeBackground();
     GuiLabel* setVertical();
     GuiLabel* setBold(bool bold=true);
 };

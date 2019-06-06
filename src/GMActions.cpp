@@ -16,6 +16,7 @@ const static int16_t CMD_CONTEXTUAL_GO_TO = 0x0007;
 const static int16_t CMD_ORDER_SHIP = 0x0008;
 const static int16_t CMD_DESTROY = 0x0009;
 const static int16_t CMD_SEND_COMM_TO_PLAYER_SHIP = 0x000A;
+const static int16_t CMD_SET_FACTIONS_STATE = 0x000B;
 
 P<GameMasterActions> gameMasterActions;
 
@@ -197,6 +198,13 @@ void GameMasterActions::onReceiveClientCommand(int32_t client_id, sf::Packet& pa
             }
         }
         break;
+        case CMD_SET_FACTIONS_STATE:
+        {
+            int faction_a, faction_b, stateIdx;
+            packet >> faction_a >> faction_b >> stateIdx;
+            factionInfo[faction_a]->states[faction_b] = (EFactionVsFactionState) stateIdx;
+        }
+        break;
     }
 }
 
@@ -328,6 +336,13 @@ void GameMasterActions::executeContextualGoTo(sf::Vector2f position, bool force,
             wormhole->setTargetPosition(position);
         }
     }
+}
+
+void GameMasterActions::commandSetFactionsState(int faction_a, int faction_b, int stateIdx)
+{
+    sf::Packet packet;
+    packet << CMD_SET_FACTIONS_STATE << faction_a << faction_b << stateIdx;
+    sendClientCommand(packet);
 }
 
 static int addGMFunction(lua_State* L)
