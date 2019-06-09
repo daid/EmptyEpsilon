@@ -199,7 +199,7 @@ function wave_three()
 			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-65000, 40000), y + random(-80000, -40000)):orderRoaming(x, y)
         end
 		
-		CpuShip():setFaction("Machines"):setTemplate("Machine Unknown"):setPosition(0, -50000):orderRoaming(x, y)
+		CpuShip():setFaction("Machines"):setTemplate("Machine Unknown"):setPosition(50000, 0):orderRoaming(x, y)
 		
 	removeGMFunction("Enemy wave three + Nest")
 	end

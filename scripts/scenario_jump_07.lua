@@ -13,7 +13,7 @@ function init()
 
 	
 -- Station
- planet1 = Planet():setPosition(-50000, -50000):setPlanetSurfaceTexture("planets/CA95-LN71.png"):setPlanetRadius(30000)
+ planet1 = Planet():setPosition(50000, -25000):setPlanetSurfaceTexture("planets/CA95-LN71.png"):setPlanetRadius(30000)
  
  	x, y = odysseus:getPosition()
 	

@@ -14,7 +14,7 @@ function init()
 		
 	
 -- Station
-	planet1 = Planet():setPosition(52000, 52000):setPlanetSurfaceTexture("planets/DE47-HC55.png"):setPlanetRadius(20000)
+	planet1 = Planet():setPosition(52000, 0):setPlanetSurfaceTexture("planets/DE47-HC55.png"):setPlanetRadius(20000)
  
 	
     addGMFunction("Generate EOC Fleet", function()

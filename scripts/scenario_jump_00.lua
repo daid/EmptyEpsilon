@@ -15,8 +15,14 @@ function init()
 		Asteroid():setPosition(random(-200000, 200000), random(-200000, 200000))
 	end
 
+addGMFunction("Change scenario", set_scenario())
 
 end
+
+function set_scenario()
+	setScenario(scenario_jump_01.lua, "Something")
+end
+
 
 function launch_essody18()
 	odyfig18 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967")

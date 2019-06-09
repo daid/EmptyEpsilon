@@ -13,10 +13,10 @@ function init()
 	
 
 -- Station
- planet1 = Planet():setPosition(50000, 50000):setPlanetSurfaceTexture("planets/SI14-UX98.png"):setDistanceFromMovementPlane(2000):setPlanetRadius(20000)
+ planet1 = Planet():setPosition(-50000, 50000):setPlanetSurfaceTexture("planets/SI14-UX98.png"):setDistanceFromMovementPlane(2000):setPlanetRadius(20000)
  
  		for n=1,1500 do
-			Mine():setPosition(random(-50000, -45000),random(-100000, 100000))
+			Mine():setPosition(random(45000, 50000),random(-100000, 100000))
         end
 
 	x, y = odysseus:getPosition()

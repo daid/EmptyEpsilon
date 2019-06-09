@@ -12,7 +12,7 @@ function init()
 	odysseus:addCustomButton("Relay", "Launch ESSODY36", "Launch ESSODY36", launch_essody36)
 	
 -- Station
- planet1 = Planet():setPosition(-50000, 50000):setPlanetSurfaceTexture("planets/OC46-DA97.png"):setPlanetRadius(30000)
+ planet1 = Planet():setPosition(50000, 20000):setPlanetSurfaceTexture("planets/OC46-DA97.png"):setPlanetRadius(30000)
  
 	x, y = odysseus:getPosition()
 	
