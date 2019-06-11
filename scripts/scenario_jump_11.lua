@@ -7,7 +7,7 @@ function init()
       odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Corvette C743")
 	odysseus:setCallSign("ESS Odysseus"):setPosition(0, 0):setCanBeDestroyed(false)
 	
-	planet1 = Planet():setPosition(50000, -30000):setPlanetSurfaceTexture("planets/moon-1.png"):setDistanceFromMovementPlane(2000):setPlanetRadius(15000)
+	planet1 = Planet():setPosition(50000, -30000):setPlanetSurfaceTexture("planets/moon-4.png"):setDistanceFromMovementPlane(2000):setPlanetRadius(15000):setAxialRotationTime(10000)
  
 	
 -- Launched buttons
