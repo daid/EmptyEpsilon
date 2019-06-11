@@ -119,96 +119,85 @@ function init()
 	end)
 	
 	x, y = odysseus:getPosition()
-	
-    addGMFunction("Enemy wave one", wave_one)
-    addGMFunction("Enemy wave two", wave_two)
-	
-	
+
 	addGMFunction("Fighter launchers", fighter_launchers)
+	
+	addGMFunction("Enemy north", wave_north)
+	addGMFunction("Enemy east", wave_east)
+	addGMFunction("Enemy south", wave_south)
+	addGMFunction("Enemy west", wave_west)
 
 end
 
-
-function wave_one()
+function wave_north()
 	
 		x, y = odysseus:getPosition()
 		
-	-- Fighters 100
-	-- Cruisers 60
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, -25000), y + random(-40000,-25000)):orderRoaming(x, y)
+	-- Fighters 10
+	-- Cruisers 5
+		for n=1,10 do
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(-70000,-60000)):orderRoaming(x, y)
+        end
+
+		for n=1,5 do
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(-70000, -60000)):orderRoaming(x, y)
         end
 		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, -25000), y + random(-65000, -40000)):orderRoaming(x, y)
-        end
-		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-65000, -40000), y + random(-40000, -25000)):orderRoaming(x, y)
-        end
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, -25000), y + random(-65000, -40000)):orderRoaming(x, y)
-        end
-		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-65000, -40000), y + random(-40000, -25000)):orderRoaming(x, y)
-        end
-		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-40000, -25000), y + random(-40000,-25000)):orderRoaming(x, y)
-        end
-		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-40000, -25000), y + random(-65000, -40000)):orderRoaming(x, y)
-        end
-		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-65000, -40000), y + random(-40000, -25000)):orderRoaming(x, y)
-        end
-		
-	removeGMFunction("Enemy wave one")
 	end
 
-function wave_two()
 
-	x, y = odysseus:getPosition()
 	
-	-- Fighters 100
-	-- Cruisers 60
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, -25000), y + random(-40000,-25000)):orderRoaming(x, y)
-        end
+function wave_east()
+	
+		x, y = odysseus:getPosition()
 		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, -25000), y + random(-65000, -40000)):orderRoaming(x, y)
+	-- Fighters 10
+	-- Cruisers 5
+		for n=1,10 do
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(60000, 70000), y + random(-50000, 50000)):orderRoaming(x, y)
         end
-		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-65000, -40000), y + random(-40000, -25000)):orderRoaming(x, y)
-        end
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, -25000), y + random(-65000, -40000)):orderRoaming(x, y)
-        end
-		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-65000, -40000), y + random(-40000, -25000)):orderRoaming(x, y)
-        end
-		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-40000, -25000), y + random(-40000,-25000)):orderRoaming(x, y)
-        end
-		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-40000, -25000), y + random(-65000, -40000)):orderRoaming(x, y)
-        end
-		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-65000, -40000), y + random(-40000, -25000)):orderRoaming(x, y)
-        end
-		
-	removeGMFunction("Enemy wave two")
-	end
 
+		for n=1,5 do
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(60000, 70000), y + random(-50000, 50000)):orderRoaming(x, y)
+        end
+		
+	end
+	
+	function wave_south()
+	
+		x, y = odysseus:getPosition()
+		
+	-- Fighters 10
+	-- Cruisers 5
+		
+		
+				for n=1,10 do
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(60000,70000)):orderRoaming(x, y)
+        end
+
+		for n=1,5 do
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(60000,70000)):orderRoaming(x, y)
+        end
+
+		
+	end
+	
+		function wave_west()
+	
+		x, y = odysseus:getPosition()
+		
+	-- Fighters 10
+	-- Cruisers 5
+		for n=1,10 do
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-70000, -60000), y + random(-50000, 50000)):orderRoaming(x, y)
+        end
+
+		for n=1,5 do
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-70000, -60000), y + random(-50000, 50000)):orderRoaming(x, y)
+        end		
+	end
+	
+	
 
 
 

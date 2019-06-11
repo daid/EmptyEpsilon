@@ -3,7 +3,7 @@
 
 function init()
 
-        odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Corvette C743")
+     odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Corvette C743")
 	odysseus:setCallSign("ESS Odysseus"):setPosition(0, 0):setCanBeDestroyed(false)
 	
 	odysseus:addCustomButton("Relay", "Launch ESSODY18", "Launch ESSODY18", launch_essody18)
@@ -15,12 +15,21 @@ function init()
 		Asteroid():setPosition(random(-200000, 200000), random(-200000, 200000))
 	end
 
-addGMFunction("Change scenario", set_scenario())
+addGMFunction("Change scenario", changeScenario)
 
 end
 
-function set_scenario()
-	setScenario(scenario_jump_01.lua, "Something")
+function changeScenario()
+
+	setScenario("scenario_jump_01.lua", "Null")
+	
+end
+
+function changeScenario_confirm()
+
+	setScenario("scenario_jump_01.lua", "Null")
+	removeGMFunction("Change scenario")
+	
 end
 
 
