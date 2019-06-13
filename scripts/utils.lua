@@ -98,6 +98,8 @@ function setCirclePos(obj, x, y, angle, distance)
     return obj:setPosition(x + dx, y + dy)
 end
 
+
+
 -- Create objects along a line between two vectors, optionally with grid
 -- placement and randomization.
 --

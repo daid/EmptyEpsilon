@@ -89,34 +89,34 @@ function wave_one()
 	-- Fighters 100
 	-- Cruisers 60
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, 25000), y + random(-70000,-50000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, 25000), y + random(-65000, -40000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-65000, 40000), y + random(-70000, -50000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, 25000), y + random(-65000, -40000)):orderRoaming(x, y)
-        end
-		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-65000, 40000), y + random(-70000, -50000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-40000, 25000), y + random(-70000,-50000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-40000, 25000), y + random(-65000, -50000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-65000, 40000), y + random(-80000, -50000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(70000, 90000), y + random(-65000,65000)):orderRoaming(x, y)
+        end
+		
+		for n=1,20 do
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 	removeGMFunction("Enemy wave one")
@@ -129,34 +129,34 @@ function wave_two()
 	-- Fighters 100
 	-- Cruisers 60
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, 25000), y + random(-80000,-50000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, 25000), y + random(-65000, -40000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-65000, 40000), y + random(-70000, -50000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, 25000), y + random(-65000, -40000)):orderRoaming(x, y)
-        end
-		
-		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-65000, 40000), y + random(-70000, -50000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-40000, 25000), y + random(-80000,-50000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-40000, 25000), y + random(-65000, -40000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-65000, 40000), y + random(-80000, -50000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
+        end
+		
+		for n=1,20 do
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 	removeGMFunction("Enemy wave two")
@@ -169,37 +169,37 @@ function wave_three()
 	-- Fighters 100
 	-- Cruisers 35
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, 25000), y + random(-80000,-40000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, 25000), y + random(-65000, -40000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-65000, 40000), y + random(-80000, -40000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, 25000), y + random(-65000, -40000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-65000, 40000), y + random(-80000, -40000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-40000, 25000), y + random(-80000,-40000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,15 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-40000, 25000), y + random(-65000, -40000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-65000, 40000), y + random(-80000, -40000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
-		CpuShip():setFaction("Machines"):setTemplate("Machine Unknown"):setPosition(50000, 0):orderRoaming(x, y)
+		CpuShip():setFaction("Machines"):setTemplate("Machine Unknown"):setPosition(80000, 0):orderRoaming(x, y)
 		
 	removeGMFunction("Enemy wave three + Nest")
 	end
@@ -211,34 +211,34 @@ function wave_four()
 	-- Fighters 100
 	-- Cruisers 35
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, 25000), y + random(-80000,-50000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, 25000), y + random(-65000, -40000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-65000, 40000), y + random(-80000, -50000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-40000, 25000), y + random(-65000, -45000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-65000, 40000), y + random(-80000, -50000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-40000, 25000), y + random(-80000,-50000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,15 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(-40000, 25000), y + random(-65000, -40000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Cruiser"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 		for n=1,20 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-65000, 40000), y + random(-80000, -50000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(70000, 120000), y + random(-65000,65000)):orderRoaming(x, y)
         end
 		
 	removeGMFunction("Enemy wave four")
