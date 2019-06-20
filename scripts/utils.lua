@@ -98,6 +98,18 @@ function setCirclePos(obj, x, y, angle, distance)
     return obj:setPosition(x + dx, y + dy)
 end
 
+function wait(seconds)
+	local start = os.time()
+	repeat until os.time() > start + seconds
+end
+
+function sleep(n)
+	if n > 0 then os.execute("ping -n " .. tonumber(n+1) .. " localhost > NUL") end
+end
+
+
+
+
 
 
 -- Create objects along a line between two vectors, optionally with grid

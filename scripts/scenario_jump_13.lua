@@ -1,8 +1,16 @@
 -- Name: Jump 13
 -- Type: Mission
 
+require("utils.lua")
+
 function init()
 
+	odysseus_delay = 1
+	essody18_delay = 1
+	essody23_delay = 1
+	essody36_delay = 1
+	starcaller_delay = 1
+	
     odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Corvette C743")
 	odysseus:setCallSign("ESS Odysseus"):setPosition(0, 0):setCanBeDestroyed(false)
 
@@ -15,10 +23,44 @@ function init()
 -- Station
  planet1 = Planet():setPosition(-40000, 40000):setPlanetSurfaceTexture("planets/SI14-UX98.png"):setDistanceFromMovementPlane(2000):setPlanetRadius(20000)
  
- 		for n=1,1500 do
-			Mine():setPosition(random(45000, 50000),random(-100000, 100000))
+ 		for n=1,150 do
+			Mine():setPosition(random(46500, 46550),random(-100000, 100000))
         end
+		
 
+	warningZone = Zone():setColor(0,0,0)
+	warningZone:setPoints(42000,-100000,
+						43000,-100000,
+						43000,100000,
+						42000,100000)
+						
+	critWarningZone = Zone():setColor(0,0,0)
+	critWarningZone:setPoints(43000, -100000,
+						44000,-100000,
+						44000,100000,
+						43000,100000)
+	
+	dangerZone = Zone():setColor(255,0,0)
+	dangerZone:setPoints(44000,-100000,
+						45999,-100000,
+						45999,100000,
+						44000,100000)
+	
+	critDangerZone = Zone():setColor(255,0,0)
+	critDangerZone:setPoints(46000,-100000,
+						47999,-100000,
+						47999,100000,
+						46000,100000)	
+						
+	deathDangerZone = Zone():setColor(255,0,0)
+	deathDangerZone:setPoints(48000,-100000,
+						99000,-100000,
+						99000,100000,
+						48000,100000)	
+						
+					
+
+						
 	x, y = odysseus:getPosition()
 	
 -- EOC Starfleet		
@@ -86,6 +128,8 @@ function init()
 
 	addGMFunction("Starcaller Fixed", launch_starcaller_button)
 	addGMFunction("Change scenario", changeScenarioPrep)
+	
+	plotZ = zoneChecks
 
 end
 
@@ -119,11 +163,11 @@ function wave_north()
 	-- Fighters 10
 	-- Cruisers 5
 		for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(-70000,-60000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 40000), y + random(-70000,-60000)):orderRoaming(x, y)
         end
 
 		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(-70000, -60000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 40000), y + random(-70000, -60000)):orderRoaming(x, y)
         end
 		
 	end
@@ -139,11 +183,11 @@ function wave_north()
 		
 		
 				for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(60000,70000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 40000), y + random(60000,70000)):orderRoaming(x, y)
         end
 
 		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(60000,70000)):orderRoaming(x, y)
+			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 40000), y + random(60000,70000)):orderRoaming(x, y)
         end
 
 		
@@ -344,7 +388,7 @@ function launch_essody18()
 	
 	odysseus:removeCustom("Launch ESSODY18")
 	
-	odyfig18:addCustomButton("Helms", "Dock to Odysseys", "Dock to Odysseys", dock_essody18)
+	odyfig18:addCustomButton("Helms", "Dock to odysseus", "Dock to odysseus", dock_essody18)
 
 end	
 
@@ -387,7 +431,7 @@ x, y = odysseus:getPosition()
 	
 	odysseus:removeCustom("Launch ESSODY23")
 	
-	odyfig23:addCustomButton("Helms", "Dock to Odysseys", "Dock to Odysseys", dock_essody23)
+	odyfig23:addCustomButton("Helms", "Dock to odysseus", "Dock to odysseus", dock_essody23)
 end
 
 function dock_essody23()
@@ -426,7 +470,7 @@ x, y = odysseus:getPosition()
 	odyfig36:setCallSign("ESSODY36"):setAutoCoolant(true)
 	
 	odysseus:removeCustom("Launch ESSODY36")
-	odyfig36:addCustomButton("Helms", "Dock to Odysseys", "Dock to Odysseys", dock_essody36)
+	odyfig36:addCustomButton("Helms", "Dock to odysseus", "Dock to odysseus", dock_essody36)
 	
 end
 
@@ -456,3 +500,145 @@ function dock_essody36()
 
 			
 end	
+
+function zoneChecks(delta)
+
+	if odysseus_delay < 1 then
+		if dangerZone:isInside(odysseus) then
+			for n=1,4 do
+				dropHealth(odysseus)	
+			end
+		end
+		if critDangerZone:isInside(odysseus) then
+			for n=1,8 do
+				dropHealth(odysseus)	
+			end
+		end
+		if deathDangerZone:isInside(odysseus) then
+			for n=1,16 do
+				dropHealth(odysseus)	
+			end
+		end
+		odysseus_delay = 2
+	else 
+		odysseus_delay = odysseus_delay - delta
+	end
+	
+	if essody18_delay < 1 then
+		if dangerZone:isInside(essody18) then
+			for n=1,4 do
+				dropHealth(essody18)	
+			end
+		end
+		if critDangerZone:isInside(essody18) then
+			for n=1,8 do
+				dropHealth(essody18)	
+			end
+		end
+		if deathDangerZone:isInside(essody18) then
+			for n=1,16 do
+				dropHealth(essody18)	
+			end
+		end
+		essody18_delay = 2
+	else 
+		essody18_delay = essody18_delay - delta
+	end
+	
+	if essody23_delay < 1 then
+		if dangerZone:isInside(essody23) then
+			for n=1,4 do
+				dropHealth(essody23)	
+			end
+		end
+		if critDangerZone:isInside(essody23) then
+			for n=1,8 do
+				dropHealth(essody23)	
+			end
+		end
+		if deathDangerZone:isInside(essody23) then
+			for n=1,16 do
+				dropHealth(essody23)	
+			end
+		end
+		essody23_delay = 2
+	else 
+		essody23_delay = essody23_delay - delta
+	end
+	
+	if essody36_delay < 1 then
+		if dangerZone:isInside(essody36) then
+			for n=1,4 do
+				dropHealth(essody36)	
+			end
+		end
+		if critDangerZone:isInside(essody36) then
+			for n=1,8 do
+				dropHealth(essody36)	
+			end
+		end
+		if deathDangerZone:isInside(essody36) then
+			for n=1,16 do
+				dropHealth(essody36)	
+			end
+		end
+		essody36_delay = 2
+	else 
+		essody36_delay = essody36_delay - delta
+	end
+	
+		if starcaller_delay < 1 then
+		if dangerZone:isInside(starcaller) then
+			for n=1,4 do
+				dropHealth(starcaller)	
+			end
+		end
+		if critDangerZone:isInside(starcaller) then
+			for n=1,8 do
+				dropHealth(starcaller)	
+			end
+		end
+		if deathDangerZone:isInside(starcaller) then
+			for n=1,16 do
+				dropHealth(starcaller)	
+			end
+		end
+		starcaller_delay = 2
+	else 
+		starcaller_delay = starcaller_delay - delta
+	end
+end
+
+function dropHealth(ship)
+					systemHit = math.random(1,7)
+				if systemHit == 1 then
+					ship:setSystemHealth("reactor", ship:getSystemHealth("reactor")*.99)
+				elseif systemHit == 2 then
+					ship:setSystemHealth("beamweapons", ship:getSystemHealth("beamweapons")*.99)
+				elseif systemHit == 3 then
+					ship:setSystemHealth("maneuver", ship:getSystemHealth("maneuver")*.99)
+				elseif systemHit == 4 then
+					ship:setSystemHealth("missilesystem", ship:getSystemHealth("missilesystem")*.99)
+				elseif systemHit == 5 then
+					ship:setSystemHealth("frontshield", ship:getSystemHealth("frontshield")*.99)
+				elseif systemHit == 6 then
+					ship:setSystemHealth("impulse", ship:getSystemHealth("impulse")*.99)
+				else
+					ship:setSystemHealth("rearshield", ship:getSystemHealth("rearshield")*.99)
+				end
+end
+
+
+function update(delta)
+	if delta == 0 then
+		return
+		--game paused
+	end
+	
+	if plotZ ~= nil then
+		plotZ(delta)
+	end
+	
+end
+
+	
