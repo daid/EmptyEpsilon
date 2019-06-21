@@ -115,7 +115,7 @@ void GuiScanningDialog::setupParameters()
     case 5: label += "Ionic phase shift"; break;
     case 6: label += "Infra-red color shift"; break;
     case 7: label += "Doppler stability"; break;
-    case 8: label += "Raspberry jam prevention"; break;
+    case 8: label += "Biogenic subcarrier waves"; break;
     case 9: label += "Infinity impropability"; break;
     case 10: label += "Zerospace audio frequency"; break;
     }
