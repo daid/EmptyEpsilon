@@ -3,6 +3,7 @@
 -- Description: Onload: Odysseus, random asteroids. EOC fleet.
 
 require("utils.lua")
+require("utils_odysseus.lua")
 
 function init()
 
@@ -96,6 +97,8 @@ end
 function wave_one()
 
 		x, y = odysseus:getPosition()
+		
+		odysseus:addToShipLog("EVA long range scanning results. Jump to sector detected.", "Blue")
 
 		CpuShip():setFaction("Machines"):setTemplate("Machine Unknown"):setPosition(80000, 0):orderRoaming(x, y)
 
@@ -114,6 +117,8 @@ function wave_one()
 	end
 
 function wave_two()
+
+	odysseus:addToShipLog("EVA long range scanning results. Jump to sector detected.", "Blue")
 
 	x, y = odysseus:getPosition()
 
@@ -158,6 +163,8 @@ function wave_two()
 
 function wave_three()
 
+	odysseus:addToShipLog("EVA long range scanning results. Jump to sector detected.", "Blue")
+
 		x, y = odysseus:getPosition()
 
 	-- Fighters 100
@@ -199,6 +206,8 @@ function wave_three()
 	end
 
 function wave_four()
+
+	odysseus:addToShipLog("EVA long range scanning results. Jump to sector detected.", "Blue")
 
 	x, y = odysseus:getPosition()
 

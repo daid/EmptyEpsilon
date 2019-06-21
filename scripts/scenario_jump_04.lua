@@ -1,6 +1,8 @@
 -- Name: Jump 04
 -- Type: Mission
 -- Description: Onload: Odysseus, random asteroids. EOC fleet.
+require("utils.lua")
+require("utils_odysseus.lua")
 
 function init()
 
@@ -12,6 +14,7 @@ function init()
 	odysseus:addCustomButton("Relay", "Launch ESSODY23", "Launch ESSODY23", launch_essody23)
 	odysseus:addCustomButton("Relay", "Launch ESSODY36", "Launch ESSODY36", launch_essody36)
 
+	vulture_approved = 0
 	
 	x, y = odysseus:getPosition()
 	
@@ -75,31 +78,27 @@ function init()
 	starfall = CpuShip():setFaction("Corporate owned"):setTemplate("Cruiser C243"):setPosition(x + random(-10000, 10000), y + random(-10000, 10000)):orderFlyFormation(flagship, -3500, 5500):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("OSS Starfall"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false) 
 
 
-	for asteroid_counter=1,50 do
-		Asteroid():setPosition(random(-75000, 75000), random(-75000, 75000))
-	end
+        for n=1,100 do
 
+			Asteroid():setPosition(random(-100000, 100000), random(-100000, 100000)):setSize(random(100, 500))
+
+			VisualAsteroid():setPosition(random(-100000, 190000), random(-100000, 100000)):setSize(random(100, 500))
+
+        end
+		
 
 	
 
-	addGMFunction("Destroy OSS Vulture", function ()
-	
-	x, y = vulture:getPosition()
-	
-	ExplosionEffect():setPosition(x,y):setSize(200)
-	
-		vulture:destroy();
-		removeGMFunction("Destroy OSS Vulture")
-	end)
+addGMFunction("Destroy ESS vulture", confirm_vulture)
 
 	
 	
 	addGMFunction("Fighter launchers", fighter_launchers)
 	
-	addGMFunction("Enemy north", wave_north)
-	addGMFunction("Enemy east", wave_east)
-	addGMFunction("Enemy south", wave_south)
-	addGMFunction("Enemy west", wave_west)
+	addGMFunction("Enemy north", wavenorth)
+	addGMFunction("Enemy east", waveeast)
+	addGMFunction("Enemy south", wavesouth)
+	addGMFunction("Enemy west", wavewest)
 
 	addGMFunction("Starcaller Fixed", launch_starcaller_button)
 	addGMFunction("Change scenario", changeScenarioPrep)
@@ -127,74 +126,34 @@ function changeScenario()
 	
 end
 
-
-function wave_north()
+function wavenorth()
 	
-		x, y = odysseus:getPosition()
-		
-	-- Fighters 10
-	-- Cruisers 5
-		for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(-70000,-60000)):orderRoaming(x, y)
-        end
-
-		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(-70000, -60000)):orderRoaming(x, y)
-        end
-		
-	end
-
-
+	x, y = odysseus:getPosition()
+	wave_north(x, y, odysseus)	
 	
-function wave_east()
-	
-		x, y = odysseus:getPosition()
 		
-	-- Fighters 10
-	-- Cruisers 5
-		for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(60000, 70000), y + random(-50000, 50000)):orderRoaming(x, y)
-        end
+end
 
-		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(60000, 70000), y + random(-50000, 50000)):orderRoaming(x, y)
-        end
-		
-	end
+function waveeast()
 	
-	function wave_south()
-	
-		x, y = odysseus:getPosition()
+	x, y = odysseus:getPosition()
+	wave_east(x, y, odysseus)		
 		
-	-- Fighters 10
-	-- Cruisers 5
-		
-		
-				for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(60000,70000)):orderRoaming(x, y)
-        end
+end
 
-		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(60000,70000)):orderRoaming(x, y)
-        end
-
-		
-	end
+function wavesouth()
 	
-		function wave_west()
-	
-		x, y = odysseus:getPosition()
+	x, y = odysseus:getPosition()
+	wave_south(x, y, odysseus)			
 		
-	-- Fighters 10
-	-- Cruisers 5
-		for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-70000, -60000), y + random(-50000, 50000)):orderRoaming(x, y)
-        end
+end
 
-		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-70000, -60000), y + random(-50000, 50000)):orderRoaming(x, y)
-        end		
-	end
+function wavewest()
+	
+	x, y = odysseus:getPosition()
+	wave_west(x, y, odysseus)		
+		
+end
 	
 	
 
@@ -490,3 +449,48 @@ function dock_essody36()
 
 			
 end	
+
+	function confirm_vulture()
+		removeGMFunction("Destroy ESS vulture")
+		addGMFunction("Cancel destruction", cancel_vulture)
+		addGMFunction("Confirm destruction", prepdestroy_vulture)
+		
+	end
+	
+	function cancel_vulture()
+		addGMFunction("Destroy ESS vulture", confirm_vulture)
+		removeGMFunction("Cancel destruction")
+		removeGMFunction("Confirm destruction")
+	end
+	
+	function prepdestroy_vulture()
+		vulture_approved = 1
+		removeGMFunction("Cancel destruction")
+		removeGMFunction("Confirm destruction")
+	end
+	
+		
+	function destroy_vulture()
+		
+		removeGMFunction("Cancel destruction")
+		removeGMFunction("Confirm destruction")
+		x, y = vulture:getPosition()
+		vulture:destroy()
+		vulture_approved = 0
+		
+		odysseus:addToShipLog("EVA long range scanning results. OSS Vulture left from scanner range. No jump detected.", "Blue")
+		
+
+	end
+
+function update(delta)
+	if delta == 0 then
+		return
+		--game paused
+	end
+	
+	if vulture_approved > 0 then
+		destroy_vulture()
+	end
+
+end

@@ -13,9 +13,21 @@ function init()
 	odysseus:addCustomButton("Relay", "Launch ESSODY36", "Launch ESSODY36", launch_essody36)
 
 
-	for asteroid_counter=1,50 do
-		Asteroid():setPosition(random(-75000, 75000), random(-75000, 75000))
-	end
+	polaris_approved = 0
+	
+        for n=1,100 do
+
+			Asteroid():setPosition(random(-100000, 100000), random(-100000, 100000)):setSize(random(100, 500))
+
+			VisualAsteroid():setPosition(random(-100000, 190000), random(-100000, 100000)):setSize(random(100, 500))
+
+        end
+		
+		for n=1,10 do
+
+			Nebula():setPosition(random(-100000, 100000), random(-100000, 100000))
+
+        end
 
 	x, y = odysseus:getPosition()
 	
@@ -86,19 +98,12 @@ function init()
 
 	addGMFunction("Fighter launchers", fighter_launchers)
 
-	addGMFunction("Destroy ESS Polaris", function ()
-	x, y = polaris:getPosition()
+addGMFunction("Destroy ESS polaris", confirm_polaris)
 	
-	ExplosionEffect():setPosition(x,y):setSize(200)
-	polaris:destroy();
-		removeGMFunction("Destroy ESS Polaris")
-	end)
-	
-	
-	addGMFunction("Enemy north", wave_north)
-	addGMFunction("Enemy east", wave_east)
-	addGMFunction("Enemy south", wave_south)
-	addGMFunction("Enemy west", wave_west)
+	addGMFunction("Enemy north", wavenorth)
+	addGMFunction("Enemy east", waveeast)
+	addGMFunction("Enemy south", wavesouth)
+	addGMFunction("Enemy west", wavewest)
 
 	addGMFunction("Starcaller Fixed", launch_starcaller_button)
 	addGMFunction("Change scenario", changeScenarioPrep)
@@ -168,74 +173,34 @@ halo:orderRoaming(x + random(-20000, 25000), y + random(-60000,-25000))
 end
 
 
-function wave_north()
+function wavenorth()
 	
-		x, y = odysseus:getPosition()
+	x, y = odysseus:getPosition()
+	wave_north(x, y, odysseus)	
+	
 		
-	-- Fighters 10
-	-- Cruisers 5
-		for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(-70000,-60000)):orderRoaming(x, y)
-        end
+end
 
-		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(-70000, -60000)):orderRoaming(x, y)
-        end
+function waveeast()
+	
+	x, y = odysseus:getPosition()
+	wave_east(x, y, odysseus)		
 		
-	end
+end
 
+function wavesouth()
+	
+	x, y = odysseus:getPosition()
+	wave_south(x, y, odysseus)			
+		
+end
 
+function wavewest()
 	
-function wave_east()
-	
-		x, y = odysseus:getPosition()
+	x, y = odysseus:getPosition()
+	wave_west(x, y, odysseus)		
 		
-	-- Fighters 10
-	-- Cruisers 5
-		for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(60000, 70000), y + random(-50000, 50000)):orderRoaming(x, y)
-        end
-
-		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(60000, 70000), y + random(-50000, 50000)):orderRoaming(x, y)
-        end
-		
-	end
-	
-	function wave_south()
-	
-		x, y = odysseus:getPosition()
-		
-	-- Fighters 10
-	-- Cruisers 5
-		
-		
-				for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(60000,70000)):orderRoaming(x, y)
-        end
-
-		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(60000,70000)):orderRoaming(x, y)
-        end
-
-		
-	end
-	
-		function wave_west()
-	
-		x, y = odysseus:getPosition()
-		
-	-- Fighters 10
-	-- Cruisers 5
-		for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-70000, -60000), y + random(-50000, 50000)):orderRoaming(x, y)
-        end
-
-		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-70000, -60000), y + random(-50000, 50000)):orderRoaming(x, y)
-        end		
-	end
-	
+end
 	
 	
 
@@ -531,3 +496,48 @@ function dock_essody36()
 
 			
 end	
+
+	function confirm_polaris()
+		removeGMFunction("Destroy ESS polaris")
+		addGMFunction("Cancel destruction", cancel_polaris)
+		addGMFunction("Confirm destruction", prepdestroy_polaris)
+		
+	end
+	
+	function cancel_polaris()
+		addGMFunction("Destroy ESS polaris", confirm_polaris)
+		removeGMFunction("Cancel destruction")
+		removeGMFunction("Confirm destruction")
+	end
+	
+	function prepdestroy_polaris()
+		polaris_approved = 1
+		removeGMFunction("Cancel destruction")
+		removeGMFunction("Confirm destruction")
+	end
+	
+	
+	function destroy_polaris()
+		
+		removeGMFunction("Cancel destruction")
+		removeGMFunction("Confirm destruction")
+		x, y = polaris:getPosition()
+		polaris:destroy()
+		polaris_approved = 0
+		
+		odysseus:addToShipLog("EVA long range scanning results. ESS Polaris left from scanner range. No jump detected.", "Blue")
+		
+
+	end
+
+function update(delta)
+	if delta == 0 then
+		return
+		--game paused
+	end
+	
+	if polaris_approved > 0 then
+		destroy_polaris()
+	end
+
+end

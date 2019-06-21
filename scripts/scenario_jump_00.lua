@@ -3,6 +3,7 @@
 -- Description: Onload: Odysseus, random asteroids. 
 
 require("utils.lua")
+require("utils_odysseus.lua")
 
 
 function init()
@@ -20,13 +21,60 @@ function init()
 	odysseus:addCustomButton("Relay", "Launch ESSODY36", "Launch ESSODY36", launch_essody36)
 
 	
-	for asteroid_counter=1,50 do
-		Asteroid():setPosition(random(-200000, 200000), random(-200000, 200000))
-	end
 
+        for n=1,100 do
+
+			Asteroid():setPosition(random(-100000, 100000), random(-100000, 100000)):setSize(random(100, 500))
+
+			VisualAsteroid():setPosition(random(-100000, 190000), random(-100000, 100000)):setSize(random(100, 500))
+
+        end
+		
+		for n=1,10 do
+
+			Nebula():setPosition(random(-100000, 100000), random(-100000, 100000))
+
+        end
+
+		addGMFunction("Enemy north", wavenorth)
+	addGMFunction("Enemy east", waveeast)
+	addGMFunction("Enemy south", wavesouth)
+	addGMFunction("Enemy west", wavewest)
+	
 	addGMFunction("Starcaller Fixed", launch_starcaller_button)
 	addGMFunction("Change scenario", changeScenarioPrep)
+	
 
+
+end
+
+function wavenorth()
+	
+	x, y = odysseus:getPosition()
+	wave_north(x, y, odysseus)	
+	
+		
+end
+
+function waveeast()
+	
+	x, y = odysseus:getPosition()
+	wave_east(x, y, odysseus)		
+		
+end
+
+function wavesouth()
+	
+	x, y = odysseus:getPosition()
+	wave_south(x, y, odysseus)			
+		
+end
+
+function wavewest()
+	
+	x, y = odysseus:getPosition()
+	wave_west(x, y, odysseus)		
+		
 end
 
 -- Change scenario
@@ -143,7 +191,6 @@ function dock_essody18()
 		essody18:addCustomMessage("Helms", "Distance too far. Docking canceled.", "Distance too far. Docking canceled.")
 	end
 
-
 end	
 
 
@@ -227,8 +274,6 @@ function dock_essody36()
 
 			
 end	
-
-
 
 
 function update(delta)

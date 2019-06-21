@@ -3,8 +3,19 @@
 -- Description: Onload: Odysseus, random asteroids. EOC fleet. Radiation field. Planet.
 
 require("utils.lua")
+require("utils_odysseus.lua")
 
 function init()
+
+        for n=1,100 do
+
+			Asteroid():setPosition(random(-100000, 100000), random(-100000, 100000)):setSize(random(100, 500))
+
+			VisualAsteroid():setPosition(random(-100000, 190000), random(-100000, 100000)):setSize(random(100, 500))
+
+        end
+		
+
 
 	odysseus_delay = 1
 	essody18_delay = 1
@@ -132,9 +143,9 @@ function init()
 
 	addGMFunction("Fighter launchers", fighter_launchers)
 	
-	addGMFunction("Enemy north", wave_north)
-	addGMFunction("Enemy south", wave_south)
-	addGMFunction("Enemy west", wave_west)
+	addGMFunction("Enemy north", wavenorth)
+	addGMFunction("Enemy south", wavesouth)
+	addGMFunction("Enemy west", wavewest)
 
 	addGMFunction("Starcaller Fixed", launch_starcaller_button)
 	addGMFunction("Change scenario", changeScenarioPrep)
@@ -165,59 +176,34 @@ function changeScenario()
 	
 end
 
-
-function wave_north()
+function wavenorth()
 	
-		x, y = odysseus:getPosition()
-		
-	-- Fighters 10
-	-- Cruisers 5
-		for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 40000), y + random(-70000,-60000)):orderRoaming(x, y)
-        end
-
-		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 40000), y + random(-70000, -60000)):orderRoaming(x, y)
-        end
-		
-	end
-
-
+	x, y = odysseus:getPosition()
+	wave_north(x, y, odysseus)	
 	
-	function wave_south()
-	
-		x, y = odysseus:getPosition()
 		
-	-- Fighters 10
-	-- Cruisers 5
-		
-		
-				for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 40000), y + random(60000,70000)):orderRoaming(x, y)
-        end
+end
 
-		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 40000), y + random(60000,70000)):orderRoaming(x, y)
-        end
-
+function waveeast()
+	
+	x, y = odysseus:getPosition()
+	wave_east(x, y, odysseus)		
 		
-	end
-	
-		function wave_west()
-	
-		x, y = odysseus:getPosition()
-		
-	-- Fighters 10
-	-- Cruisers 5
-		for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-70000, -60000), y + random(-50000, 50000)):orderRoaming(x, y)
-        end
+end
 
-		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-70000, -60000), y + random(-50000, 50000)):orderRoaming(x, y)
-        end		
-	end
+function wavesouth()
 	
+	x, y = odysseus:getPosition()
+	wave_south(x, y, odysseus)			
+		
+end
+
+function wavewest()
+	
+	x, y = odysseus:getPosition()
+	wave_west(x, y, odysseus)		
+		
+end
 	
 
 
@@ -609,12 +595,6 @@ end
 
 function launchShipAlert(ship)
 		if warningZone:isInside(ship) then
-			alertLevel = ship:getAlertLevel()
-			
-			if alertLevel == "Normal" then
-				ship:commandSetAlertLevel("yellow")
-			end
-
 			ship:addToShipLog("EVA scanning results. Space radiation level elevated.", "Blue")
 		end
 		if critWarningZone:isInside(ship) then

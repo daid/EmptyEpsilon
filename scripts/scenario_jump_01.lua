@@ -2,6 +2,9 @@
 -- Type: Mission
 -- Description: Onload: Odysseus, random asteroids. Spacestation Solaris 7.
 
+require("utils.lua")
+require("utils_odysseus.lua")
+
 function init()
 
     odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Corvette C743")
@@ -17,15 +20,25 @@ function init()
 	station = SpaceStation():setFaction("EOC Starfleet"):setTemplate("Medium station"):setCallSign("Solaris 7"):setPosition(20000, 20000)
 
 	
-	for asteroid_counter=1,50 do
-		Asteroid():setPosition(random(-200000, 200000), random(-200000, 200000))
-	end
+        for n=1,100 do
+
+			Asteroid():setPosition(random(-100000, 100000), random(-100000, 100000)):setSize(random(100, 500))
+
+			VisualAsteroid():setPosition(random(-100000, 190000), random(-100000, 100000)):setSize(random(100, 500))
+
+        end
+		
+		for n=1,10 do
+
+			Nebula():setPosition(random(-100000, 100000), random(-100000, 100000))
+
+        end
 
 	
-	addGMFunction("Enemy north", wave_north)
-	addGMFunction("Enemy east", wave_east)
-	addGMFunction("Enemy south", wave_south)
-	addGMFunction("Enemy west", wave_west)
+	addGMFunction("Enemy north", wavenorth)
+	addGMFunction("Enemy east", waveeast)
+	addGMFunction("Enemy south", wavesouth)
+	addGMFunction("Enemy west", wavewest)
 
 	addGMFunction("Starcaller Fixed", launch_starcaller_button)
 	addGMFunction("Change scenario", changeScenarioPrep)
@@ -52,74 +65,34 @@ function changeScenario()
 	setScenario("scenario_jump_02.lua", "Null")
 	
 end
-
-function wave_north()
+function wavenorth()
 	
-		x, y = odysseus:getPosition()
-		
-	-- Fighters 10
-	-- Cruisers 5
-		for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(-70000,-60000)):orderRoaming(x, y)
-        end
-
-		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(-70000, -60000)):orderRoaming(x, y)
-        end
-		
-	end
-
-
+	x, y = odysseus:getPosition()
+	wave_north(x, y, odysseus)	
 	
-function wave_east()
-	
-		x, y = odysseus:getPosition()
 		
-	-- Fighters 10
-	-- Cruisers 5
-		for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(60000, 70000), y + random(-50000, 50000)):orderRoaming(x, y)
-        end
+end
 
-		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(60000, 70000), y + random(-50000, 50000)):orderRoaming(x, y)
-        end
-		
-	end
+function waveeast()
 	
-	function wave_south()
-	
-		x, y = odysseus:getPosition()
+	x, y = odysseus:getPosition()
+	wave_east(x, y, odysseus)		
 		
-	-- Fighters 10
-	-- Cruisers 5
-		
-		
-				for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(60000,70000)):orderRoaming(x, y)
-        end
+end
 
-		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(60000,70000)):orderRoaming(x, y)
-        end
-
-		
-	end
+function wavesouth()
 	
-		function wave_west()
-	
-		x, y = odysseus:getPosition()
+	x, y = odysseus:getPosition()
+	wave_south(x, y, odysseus)			
 		
-	-- Fighters 10
-	-- Cruisers 5
-		for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-70000, -60000), y + random(-50000, 50000)):orderRoaming(x, y)
-        end
+end
 
-		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-70000, -60000), y + random(-50000, 50000)):orderRoaming(x, y)
-        end		
-	end
+function wavewest()
+	
+	x, y = odysseus:getPosition()
+	wave_west(x, y, odysseus)		
+		
+end
 	
 	
 

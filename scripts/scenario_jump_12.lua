@@ -2,6 +2,9 @@
 -- Type: Mission
 -- Description: Onload: Odysseus, random asteroids. 
 
+require("utils.lua")
+require("utils_odysseus.lua")
+
 function init()
 
       odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Corvette C743")

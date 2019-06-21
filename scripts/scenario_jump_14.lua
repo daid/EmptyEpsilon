@@ -3,6 +3,7 @@
 -- Description: Onload: Odysseus, random asteroids. EOC fleet. Asteroid belt.
 
 require("utils.lua")
+require("utils_odysseus.lua")
 
 function init()
     odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Corvette C743")
@@ -12,8 +13,8 @@ function init()
 	odysseus:addCustomButton("Relay", "Launch ESSODY18", "Launch ESSODY18", launch_essody18)
 	odysseus:addCustomButton("Relay", "Launch ESSODY23", "Launch ESSODY23", launch_essody23)
 	odysseus:addCustomButton("Relay", "Launch ESSODY36", "Launch ESSODY36", launch_essody36)
-
 	
+	valkyrie_approved = 0	
 	
 	for n=1, 40 do
 		setCirclePos(Planet():setPlanetSurfaceTexture("planets/asteroid.png"):setDistanceFromMovementPlane(2000):setPlanetRadius(random(1000, 3000)), 87000, 87000, random(0, 360), random(95000, 100000))
@@ -81,29 +82,56 @@ function init()
 	
 	starfall = CpuShip():setFaction("Corporate owned"):setTemplate("Cruiser C243"):setPosition(x + random(-10000, 15000), y + random(-10000, 10000)):orderFlyFormation(flagship, -3500, 5500):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("OSS Starfall"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false) 
 
-	addGMFunction("Destroy ESS Valkyrie", function ()
-		
-		x, y = valkyrie:getPosition()
-		
-		ExplosionEffect:setSize(300):setPosition(x,y)
-		
-		valkyrie:destroy()
-		removeGMFunction("Destroy ESS Valkyrie")
-	end)
-
-
 	addGMFunction("Fighter launchers", fighter_launchers)
 	
-	addGMFunction("Enemy north", wave_north)
-	addGMFunction("Enemy east", wave_east)
-	addGMFunction("Enemy south", wave_south)
-	addGMFunction("Enemy west", wave_west)
+	addGMFunction("Enemy north", wavenorth)
+	addGMFunction("Enemy east", waveeast)
+	addGMFunction("Enemy south", wavesouth)
+	addGMFunction("Enemy west", wavewest)
+	
+	
 	
 	addGMFunction("Starcaller Fixed", launch_starcaller_button)
 
 	addGMFunction("Change scenario", changeScenarioPrep)
+	
+	addGMFunction("Destroy ESS Valkyrie", confirm_valkyrie)
 
 end
+
+
+function wavenorth()
+	
+	x, y = odysseus:getPosition()
+	wave_north(x, y, odysseus)	
+	
+		
+end
+
+function waveeast()
+	
+	x, y = odysseus:getPosition()
+	wave_east(x, y, odysseus)		
+		
+end
+
+function wavesouth()
+	
+	x, y = odysseus:getPosition()
+	wave_south(x, y, odysseus)			
+		
+end
+
+function wavewest()
+	
+	x, y = odysseus:getPosition()
+	wave_west(x, y, odysseus)		
+		
+end
+
+
+
+
 
 function changeScenarioPrep()
 
@@ -125,77 +153,6 @@ function changeScenario()
 	setScenario("scenario_jump_15.lua", "Null")
 	
 end
-
-
-function wave_north()
-	
-		x, y = odysseus:getPosition()
-		
-	-- Fighters 10
-	-- Cruisers 5
-		for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(-70000,-60000)):orderRoaming(x, y)
-        end
-
-		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(-70000, -60000)):orderRoaming(x, y)
-        end
-		
-	end
-
-
-	
-function wave_east()
-	
-		x, y = odysseus:getPosition()
-		
-	-- Fighters 10
-	-- Cruisers 5
-		for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(60000, 70000), y + random(-50000, 50000)):orderRoaming(x, y)
-        end
-
-		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(60000, 70000), y + random(-50000, 50000)):orderRoaming(x, y)
-        end
-		
-	end
-	
-	function wave_south()
-	
-		x, y = odysseus:getPosition()
-		
-	-- Fighters 10
-	-- Cruisers 5
-		
-		
-				for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(60000,70000)):orderRoaming(x, y)
-        end
-
-		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-50000, 50000), y + random(60000,70000)):orderRoaming(x, y)
-        end
-
-		
-	end
-	
-		function wave_west()
-	
-		x, y = odysseus:getPosition()
-		
-	-- Fighters 10
-	-- Cruisers 5
-		for n=1,10 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-70000, -60000), y + random(-50000, 50000)):orderRoaming(x, y)
-        end
-
-		for n=1,5 do
-			CpuShip():setFaction("Machines"):setTemplate("Machine Fighter"):setPosition(x + random(-70000, -60000), y + random(-50000, 50000)):orderRoaming(x, y)
-        end		
-	end
-	
-	
 
 
 
@@ -241,15 +198,6 @@ function wave_east()
 		removeGMFunction("Envoy Fighters")
 		end)
 
-		addGMFunction("Valkyrie Fighters", function()
-		
-		x, y = valkyrie:getPosition()
-		
-			for n=1,9 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
-			end
-		removeGMFunction("Valkyrie Fighters")
-		end)
 		
 		addGMFunction("Harbringer Fighters", function()
 		
@@ -296,7 +244,7 @@ function wave_east()
 			removeGMFunction("Halo Fighters")
 			removeGMFunction("Taurus Fighters")
 			removeGMFunction("Envoy Fighters")
-			removeGMFunction("Valkyrie Fighters")
+			
 			removeGMFunction("Harbringer Fighters")
 			removeGMFunction("Inferno Fighters")
 			removeGMFunction("Valor Fighters")
@@ -489,3 +437,46 @@ function dock_essody36()
 
 			
 end	
+
+	
+	function confirm_valkyrie()
+		removeGMFunction("Destroy ESS Valkyrie")
+		addGMFunction("Cancel destruction", cancel_valkyrie)
+		addGMFunction("Confirm destruction", prepdestroy_valkyrie)
+		
+	end
+	
+	function cancel_valkyrie()
+		addGMFunction("Destroy ESS Valkyrie", confirm_valkyrie)
+		removeGMFunction("Cancel destruction")
+		removeGMFunction("Confirm destruction")
+	end
+	
+	function prepdestroy_valkyrie()
+		valkyrie_approved = 1
+	end
+	
+	function destroy_valkyrie()
+		
+		removeGMFunction("Cancel destruction")
+		removeGMFunction("Confirm destruction")
+		x, y = valkyrie:getPosition()
+		valkyrie:destroy()
+		valkyrie_approved = 0
+		
+		odysseus:addToShipLog("EVA long range scanning results. ESS Valkyrie left from scanner range. No jump detected.", "Blue")
+		
+
+	end
+
+function update(delta)
+	if delta == 0 then
+		return
+		--game paused
+	end
+	
+	if valkyrie_approved > 0 then
+		destroy_valkyrie()
+	end
+
+end
