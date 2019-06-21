@@ -98,17 +98,6 @@ function setCirclePos(obj, x, y, angle, distance)
     return obj:setPosition(x + dx, y + dy)
 end
 
-function wait(seconds)
-	local start = os.time()
-	repeat until os.time() > start + seconds
-end
-
-function sleep(n)
-	if n > 0 then os.execute("ping -n " .. tonumber(n+1) .. " localhost > NUL") end
-end
-
-
-
 
 
 
@@ -151,6 +140,8 @@ function createObjectsOnLine(x1, y1, x2, y2, spacing, object_type, rows, chance,
         end
     end
 end
+
+
 
 -- Merge data from table B into table A. Every key not set in table A is filled
 -- by the data from table B.

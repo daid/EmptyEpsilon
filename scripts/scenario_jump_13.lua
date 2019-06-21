@@ -1,5 +1,6 @@
 -- Name: Jump 13
 -- Type: Mission
+-- Description: Onload: Odysseus, random asteroids. EOC fleet. Radiation field. Planet.
 
 require("utils.lua")
 
@@ -10,6 +11,12 @@ function init()
 	essody23_delay = 1
 	essody36_delay = 1
 	starcaller_delay = 1
+	
+	odysseus_alert = 1
+	essody18_alert = 1
+	essody23_alert = 1
+	essody36_alert = 1
+	starcaller_alert = 1	
 	
     odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Corvette C743")
 	odysseus:setCallSign("ESS Odysseus"):setPosition(0, 0):setCanBeDestroyed(false)
@@ -22,10 +29,6 @@ function init()
 
 -- Station
  planet1 = Planet():setPosition(-40000, 40000):setPlanetSurfaceTexture("planets/SI14-UX98.png"):setDistanceFromMovementPlane(2000):setPlanetRadius(20000)
- 
- 		for n=1,150 do
-			Mine():setPosition(random(46500, 46550),random(-100000, 100000))
-        end
 		
 
 	warningZone = Zone():setColor(0,0,0)
@@ -40,25 +43,32 @@ function init()
 						44000,100000,
 						43000,100000)
 	
-	dangerZone = Zone():setColor(255,0,0)
+	dangerZone = Zone():setColor(0,0,0)
 	dangerZone:setPoints(44000,-100000,
 						45999,-100000,
 						45999,100000,
 						44000,100000)
 	
-	critDangerZone = Zone():setColor(255,0,0)
+	critDangerZone = Zone():setColor(0,0,0)
 	critDangerZone:setPoints(46000,-100000,
 						47999,-100000,
 						47999,100000,
 						46000,100000)	
 						
-	deathDangerZone = Zone():setColor(255,0,0)
+	deathDangerZone = Zone():setColor(0,0,0)
 	deathDangerZone:setPoints(48000,-100000,
 						99000,-100000,
 						99000,100000,
 						48000,100000)	
 						
 					
+
+					
+	colorZone = Zone():setColor(255, 0, 0)
+	colorZone:setPoints(44000,-100000,
+						99000,-100000,
+						99000,100000,
+						44000,100000)	
 
 						
 	x, y = odysseus:getPosition()
@@ -129,7 +139,7 @@ function init()
 	addGMFunction("Starcaller Fixed", launch_starcaller_button)
 	addGMFunction("Change scenario", changeScenarioPrep)
 	
-	plotZ = zoneChecks
+	plotZ = delayChecks
 
 end
 
@@ -217,7 +227,7 @@ function wave_north()
 		 x, y = aurora:getPosition()
 
 			for n=1,69 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
+				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
 			end
 		removeGMFunction("Aurora Fighters")
 		end)
@@ -227,7 +237,7 @@ function wave_north()
 		x, y = halo:getPosition()
 		
 			for n=1,51 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
+				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
 			end
 		removeGMFunction("Halo Fighters")
 		end)
@@ -237,7 +247,7 @@ function wave_north()
 		x, y = taurus:getPosition()
 		
 			for n=1,10 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
+				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
 			end
 		removeGMFunction("Taurus Fighters")
 		end)
@@ -247,7 +257,7 @@ function wave_north()
 		x, y = envoy:getPosition()
 		
 			for n=1,4 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
+				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
 			end
 		removeGMFunction("Envoy Fighters")
 		end)
@@ -257,7 +267,7 @@ function wave_north()
 		x, y = valkyrie:getPosition()
 		
 			for n=1,9 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
+				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
 			end
 		removeGMFunction("Valkyrie Fighters")
 		end)
@@ -267,7 +277,7 @@ function wave_north()
 		x, y = harbringer:getPosition()
 		
 			for n=1,16 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
+				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
 			end
 		removeGMFunction("Harbringer Fighters")
 		end)
@@ -277,7 +287,7 @@ function wave_north()
 		x, y = inferno:getPosition()
 		
 			for n=1,27 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
+				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
 			end
 		removeGMFunction("Inferno Fighters")
 		end)
@@ -287,7 +297,7 @@ function wave_north()
 		x, y = valor:getPosition()
 		
 			for n=1,20 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
+				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
 			end
 		removeGMFunction("Valor Fighters")
 		end)
@@ -297,7 +307,7 @@ function wave_north()
 		x, y = warrior:getPosition()
 		
 			for n=1,18 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
+				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
 			end
 		removeGMFunction("Warrior Fighters")
 		end)
@@ -374,7 +384,7 @@ function dock_starcaller()
 		starcaller:destroy()			
 		odysseus:addCustomButton("Relay", "Launch Starcaller", "Launch Starcaller", launch_starcaller)
 	else
-		starcaller:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+		starcaller:addCustomMessage("Helms", "Distance too far. Docking canceled.", "Distance too far. Docking canceled.")
 	end
 end	
 
@@ -383,18 +393,18 @@ function launch_essody18()
 
 	x, y = odysseus:getPosition()
 
-	odyfig18 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(x, y + 300)
-	odyfig18:setCallSign("ESSODY18"):setAutoCoolant(true)
+	essody18 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(x, y + 300)
+	essody18:setCallSign("ESSODY18"):setAutoCoolant(true)
 	
 	odysseus:removeCustom("Launch ESSODY18")
 	
-	odyfig18:addCustomButton("Helms", "Dock to odysseus", "Dock to odysseus", dock_essody18)
+	essody18:addCustomButton("Helms", "Dock to Odysseus", "Dock to Odysseus", dock_essody18)
 
 end	
 
 function dock_essody18()
 
-	x, y = odyfig18:getPosition()
+	x, y = essody18:getPosition()
 	
 	dockable = false
 	
@@ -409,11 +419,11 @@ function dock_essody18()
 	end
 
 	if dockable == true then
-		odyfig18:destroy()
+		essody18:destroy()
 			
 			odysseus:addCustomButton("Relay", "Launch ESSODY18", "Launch ESSODY18", launch_essody36)
 	else
-		odyfig18:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+		essody18:addCustomMessage("Helms", "Distance too far. Docking canceled.", "Distance too far. Docking canceled.")
 	end
 
 
@@ -426,17 +436,17 @@ function launch_essody23()
 x, y = odysseus:getPosition()
 
 
-	odyfig23 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(x, y + 200)
-	odyfig23:setCallSign("ESSODY23"):setAutoCoolant(true)
+	essody23 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(x, y + 200)
+	essody23:setCallSign("ESSODY23"):setAutoCoolant(true)
 	
 	odysseus:removeCustom("Launch ESSODY23")
 	
-	odyfig23:addCustomButton("Helms", "Dock to odysseus", "Dock to odysseus", dock_essody23)
+	essody23:addCustomButton("Helms", "Dock to Odysseus", "Dock to Odysseus", dock_essody23)
 end
 
 function dock_essody23()
 
-	x, y = odyfig23:getPosition()
+	x, y = essody23:getPosition()
 	
 	dockable = false
 	
@@ -451,11 +461,11 @@ function dock_essody23()
 	end
 
 	if dockable == true then
-		odyfig23:destroy()
+		essody23:destroy()
 			
 			odysseus:addCustomButton("Relay", "Launch ESSODY23", "Launch ESSODY23", launch_essody23)
 	else
-		odyfig23:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+		essody23:addCustomMessage("Helms", "Distance too far. Docking canceled.", "Distance too far. Docking canceled.")
 	end
 
 end	
@@ -466,17 +476,17 @@ function launch_essody36()
 
 x, y = odysseus:getPosition()
 
-	odyfig36 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(x, y + 100)
-	odyfig36:setCallSign("ESSODY36"):setAutoCoolant(true)
+	essody36 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(x, y + 100)
+	essody36:setCallSign("ESSODY36"):setAutoCoolant(true)
 	
 	odysseus:removeCustom("Launch ESSODY36")
-	odyfig36:addCustomButton("Helms", "Dock to odysseus", "Dock to odysseus", dock_essody36)
+	essody36:addCustomButton("Helms", "Dock to Odysseus", "Dock to Odysseus", dock_essody36)
 	
 end
 
 function dock_essody36()
 
-	x, y = odyfig36:getPosition()
+	x, y = essody36:getPosition()
 	
 	dockable = false
 	
@@ -491,122 +501,140 @@ function dock_essody36()
 	end
 
 	if dockable == true then
-		odyfig36:destroy()
+		essody36:destroy()
 			
 			odysseus:addCustomButton("Relay", "Launch ESSODY36", "Launch ESSODY36", launch_essody36)
 	else
-			odyfig36:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+			essody36:addCustomMessage("Helms", "Distance too far. Docking canceled.", "Distance too far. Docking canceled.")
 	end
 
 			
 end	
 
-function zoneChecks(delta)
 
-	if odysseus_delay < 1 then
-		if dangerZone:isInside(odysseus) then
-			for n=1,4 do
-				dropHealth(odysseus)	
-			end
+function delayChecks(delta)
+
+		if odysseus_alert < 1 then
+			launchShipAlert(odysseus)
+			odysseus_alert = 15
+		else
+			odysseus_alert = odysseus_alert - delta
 		end
-		if critDangerZone:isInside(odysseus) then
-			for n=1,8 do
-				dropHealth(odysseus)	
-			end
+		
+		if odysseus_delay < 1 then
+			zoneChecks(odysseus)
+			odysseus_delay = 4
+		else 
+			odysseus_delay = odysseus_delay - delta
 		end
-		if deathDangerZone:isInside(odysseus) then
-			for n=1,16 do
-				dropHealth(odysseus)	
-			end
+		
+		if essody18_alert < 1 then
+			launchShipAlert(essody18)
+			essody18_alert = 15
+		else
+			essody18_alert = essody18_alert - delta
 		end
-		odysseus_delay = 2
-	else 
-		odysseus_delay = odysseus_delay - delta
-	end
-	
-	if essody18_delay < 1 then
-		if dangerZone:isInside(essody18) then
-			for n=1,4 do
-				dropHealth(essody18)	
-			end
+		
+		if essody18_delay < 1 then
+			zoneChecks(essody18)
+			essody18_delay = 4
+		else 
+			essody18_delay = essody18_delay - delta
 		end
-		if critDangerZone:isInside(essody18) then
-			for n=1,8 do
-				dropHealth(essody18)	
-			end
+		
+		if essody23_alert < 1 then
+			launchShipAlert(essody23)
+			essody23_alert = 15
+		else
+			essody23_alert = essody23_alert - delta
 		end
-		if deathDangerZone:isInside(essody18) then
-			for n=1,16 do
-				dropHealth(essody18)	
-			end
+		
+		if essody23_delay < 1 then
+			zoneChecks(essody18)
+			essody23_delay = 4
+		else 
+			essody23_delay = essody23_delay - delta
 		end
-		essody18_delay = 2
-	else 
-		essody18_delay = essody18_delay - delta
-	end
-	
-	if essody23_delay < 1 then
-		if dangerZone:isInside(essody23) then
-			for n=1,4 do
-				dropHealth(essody23)	
-			end
+		
+		if essody36_alert < 1 then
+			launchShipAlert(essody36)
+			essody36_alert = 15
+		else
+			essody36_alert = essody36_alert - delta
 		end
-		if critDangerZone:isInside(essody23) then
-			for n=1,8 do
-				dropHealth(essody23)	
-			end
+		
+		if essody36_delay < 1 then
+			zoneChecks(essody36)
+			essody36_delay = 4
+		else 
+			essody36_delay = essody36_delay - delta
 		end
-		if deathDangerZone:isInside(essody23) then
-			for n=1,16 do
-				dropHealth(essody23)	
-			end
+
+		if starcaller_alert < 1 then
+			launchShipAlert(starcaller)
+			starcaller_alert = 15
+		else
+			starcaller_alert = starcaller_alert - delta
 		end
-		essody23_delay = 2
-	else 
-		essody23_delay = essody23_delay - delta
-	end
-	
-	if essody36_delay < 1 then
-		if dangerZone:isInside(essody36) then
-			for n=1,4 do
-				dropHealth(essody36)	
-			end
-		end
-		if critDangerZone:isInside(essody36) then
-			for n=1,8 do
-				dropHealth(essody36)	
-			end
-		end
-		if deathDangerZone:isInside(essody36) then
-			for n=1,16 do
-				dropHealth(essody36)	
-			end
-		end
-		essody36_delay = 2
-	else 
-		essody36_delay = essody36_delay - delta
-	end
-	
+		
 		if starcaller_delay < 1 then
-		if dangerZone:isInside(starcaller) then
-			for n=1,4 do
-				dropHealth(starcaller)	
-			end
+			zoneChecks(starcaller)
+			starcaller_delay = 4
+		else 
+			starcaller_delay = starcaller_delay - delta
 		end
-		if critDangerZone:isInside(starcaller) then
-			for n=1,8 do
-				dropHealth(starcaller)	
-			end
+		
+		
+end
+
+function zoneChecks(ship)
+	
+	if dangerZone:isInside(ship) then
+		for n=1,4 do
+			dropHealth(ship)	
 		end
-		if deathDangerZone:isInside(starcaller) then
-			for n=1,16 do
-				dropHealth(starcaller)	
-			end
-		end
-		starcaller_delay = 2
-	else 
-		starcaller_delay = starcaller_delay - delta
 	end
+	if critDangerZone:isInside(ship) then
+		for n=1,8 do
+			dropHealth(ship)	
+		end
+	end
+	if deathDangerZone:isInside(ship) then
+		for n=1,16 do
+			dropHealth(ship)	
+		end
+	end
+	
+end
+
+function launchShipAlert(ship)
+		if warningZone:isInside(ship) then
+			alertLevel = ship:getAlertLevel()
+			
+			if alertLevel == "Normal" then
+				ship:commandSetAlertLevel("yellow")
+			end
+
+			ship:addToShipLog("EVA scanning results. Space radiation level elevated.", "Blue")
+		end
+		if critWarningZone:isInside(ship) then
+			alertLevel = ship:getAlertLevel()
+			
+			if alertLevel == "Normal" then
+				ship:commandSetAlertLevel("yellow")
+			end
+
+			ship:addToShipLog("EVA scanning results. Space radiation level critical.", "Yellow")
+		end
+		if colorZone:isInside(ship)	then
+		alertLevel = ship:getAlertLevel()
+	
+			if alertLevel == "Normal" then
+				ship:commandSetAlertLevel("yellow")
+			end
+
+			ship:addToShipLog("EVA scanning results. Space radiation level lethal.", "Red")
+		end
 end
 
 function dropHealth(ship)
@@ -626,6 +654,8 @@ function dropHealth(ship)
 				else
 					ship:setSystemHealth("rearshield", ship:getSystemHealth("rearshield")*.99)
 				end
+	
+
 end
 
 
@@ -641,4 +671,4 @@ function update(delta)
 	
 end
 
-	
+	     

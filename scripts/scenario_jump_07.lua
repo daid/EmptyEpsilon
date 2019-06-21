@@ -1,5 +1,6 @@
 -- Name: Jump 07
 -- Type: Mission
+-- Description: Onload: Odysseus, random asteroids. EOC fleet. Planet CA95-LN71
 
 function init()
 
@@ -187,7 +188,7 @@ function wave_east()
 		 x, y = aurora:getPosition()
 
 			for n=1,69 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
+				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
 			end
 		removeGMFunction("Aurora Fighters")
 		end)
@@ -197,7 +198,7 @@ function wave_east()
 		x, y = halo:getPosition()
 		
 			for n=1,51 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
+				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
 			end
 		removeGMFunction("Halo Fighters")
 		end)
@@ -207,7 +208,7 @@ function wave_east()
 		x, y = taurus:getPosition()
 		
 			for n=1,10 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
+				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
 			end
 		removeGMFunction("Taurus Fighters")
 		end)
@@ -217,7 +218,7 @@ function wave_east()
 		x, y = envoy:getPosition()
 		
 			for n=1,4 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
+				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
 			end
 		removeGMFunction("Envoy Fighters")
 		end)
@@ -227,7 +228,7 @@ function wave_east()
 		x, y = valkyrie:getPosition()
 		
 			for n=1,9 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
+				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
 			end
 		removeGMFunction("Valkyrie Fighters")
 		end)
@@ -237,7 +238,7 @@ function wave_east()
 		x, y = harbringer:getPosition()
 		
 			for n=1,16 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
+				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
 			end
 		removeGMFunction("Harbringer Fighters")
 		end)
@@ -247,7 +248,7 @@ function wave_east()
 		x, y = inferno:getPosition()
 		
 			for n=1,27 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
+				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
 			end
 		removeGMFunction("Inferno Fighters")
 		end)
@@ -257,7 +258,7 @@ function wave_east()
 		x, y = valor:getPosition()
 		
 			for n=1,20 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
+				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
 			end
 		removeGMFunction("Valor Fighters")
 		end)
@@ -267,7 +268,7 @@ function wave_east()
 		x, y = warrior:getPosition()
 		
 			for n=1,18 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
+				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
 			end
 		removeGMFunction("Warrior Fighters")
 		end)
@@ -344,7 +345,7 @@ function dock_starcaller()
 		starcaller:destroy()			
 		odysseus:addCustomButton("Relay", "Launch Starcaller", "Launch Starcaller", launch_starcaller)
 	else
-		starcaller:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+		starcaller:addCustomMessage("Helms", "Distance too far. Docking canceled.", "Distance too far. Docking canceled.")
 	end
 end	
 
@@ -353,18 +354,18 @@ function launch_essody18()
 
 	x, y = odysseus:getPosition()
 
-	odyfig18 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(x, y + 300)
-	odyfig18:setCallSign("ESSODY18"):setAutoCoolant(true)
+	essody18 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(x, y + 300)
+	essody18:setCallSign("ESSODY18"):setAutoCoolant(true)
 	
 	odysseus:removeCustom("Launch ESSODY18")
 	
-	odyfig18:addCustomButton("Helms", "Dock to Odysseys", "Dock to Odysseys", dock_essody18)
+	essody18:addCustomButton("Helms", "Dock to Odysseys", "Dock to Odysseys", dock_essody18)
 
 end	
 
 function dock_essody18()
 
-	x, y = odyfig18:getPosition()
+	x, y = essody18:getPosition()
 	
 	dockable = false
 	
@@ -379,11 +380,11 @@ function dock_essody18()
 	end
 
 	if dockable == true then
-		odyfig18:destroy()
+		essody18:destroy()
 			
 			odysseus:addCustomButton("Relay", "Launch ESSODY18", "Launch ESSODY18", launch_essody36)
 	else
-		odyfig18:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+		essody18:addCustomMessage("Helms", "Distance too far. Docking canceled.", "Distance too far. Docking canceled.")
 	end
 
 
@@ -396,17 +397,17 @@ function launch_essody23()
 x, y = odysseus:getPosition()
 
 
-	odyfig23 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(x, y + 200)
-	odyfig23:setCallSign("ESSODY23"):setAutoCoolant(true)
+	essody23 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(x, y + 200)
+	essody23:setCallSign("ESSODY23"):setAutoCoolant(true)
 	
 	odysseus:removeCustom("Launch ESSODY23")
 	
-	odyfig23:addCustomButton("Helms", "Dock to Odysseys", "Dock to Odysseys", dock_essody23)
+	essody23:addCustomButton("Helms", "Dock to Odysseys", "Dock to Odysseys", dock_essody23)
 end
 
 function dock_essody23()
 
-	x, y = odyfig23:getPosition()
+	x, y = essody23:getPosition()
 	
 	dockable = false
 	
@@ -421,11 +422,11 @@ function dock_essody23()
 	end
 
 	if dockable == true then
-		odyfig23:destroy()
+		essody23:destroy()
 			
 			odysseus:addCustomButton("Relay", "Launch ESSODY23", "Launch ESSODY23", launch_essody23)
 	else
-		odyfig23:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+		essody23:addCustomMessage("Helms", "Distance too far. Docking canceled.", "Distance too far. Docking canceled.")
 	end
 
 end	
@@ -436,17 +437,17 @@ function launch_essody36()
 
 x, y = odysseus:getPosition()
 
-	odyfig36 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(x, y + 100)
-	odyfig36:setCallSign("ESSODY36"):setAutoCoolant(true)
+	essody36 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(x, y + 100)
+	essody36:setCallSign("ESSODY36"):setAutoCoolant(true)
 	
 	odysseus:removeCustom("Launch ESSODY36")
-	odyfig36:addCustomButton("Helms", "Dock to Odysseys", "Dock to Odysseys", dock_essody36)
+	essody36:addCustomButton("Helms", "Dock to Odysseys", "Dock to Odysseys", dock_essody36)
 	
 end
 
 function dock_essody36()
 
-	x, y = odyfig36:getPosition()
+	x, y = essody36:getPosition()
 	
 	dockable = false
 	
@@ -461,11 +462,11 @@ function dock_essody36()
 	end
 
 	if dockable == true then
-		odyfig36:destroy()
+		essody36:destroy()
 			
 			odysseus:addCustomButton("Relay", "Launch ESSODY36", "Launch ESSODY36", launch_essody36)
 	else
-			odyfig36:addCustomMessage("Helms", "Distance too far. Docking cancelled.", "Distance too far. Docking cancelled.")
+			essody36:addCustomMessage("Helms", "Distance too far. Docking canceled.", "Distance too far. Docking canceled.")
 	end
 
 			
