@@ -3,8 +3,21 @@
 #include "playerInfo.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
-#include "gui/gui2_slider.h"
 #include "gui/gui2_button.h"
+
+
+bool FrequencySlider::onMouseDown(sf::Vector2f p) {
+    GuiSlider::onMouseDown(p);
+    mouseDown = true;
+    return true;
+}
+void FrequencySlider::onMouseUp(sf::Vector2f p) {
+    GuiSlider::onMouseUp(p);
+    mouseDown = false;
+    mouseHadClick = true;
+}
+
+
 
 GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
 : GuiElement(owner, id)
@@ -29,7 +42,7 @@ GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
     
     for(int n=0; n<max_sliders; n++)
     {
-        sliders[n] = new GuiSlider(box, id + "_SLIDER_" + string(n), 0.0, 1.0, 0.0, nullptr);
+        sliders[n] = new FrequencySlider(box, id + "_SLIDER_" + string(n), 0.0, 1.0, 0.0, nullptr);
         sliders[n]->setPosition(0, 200 + n * 70, ATopCenter)->setSize(450, 50);
     }
     cancel_button = new GuiButton(box, id + "_CANCEL", "Cancel", []() {
@@ -68,7 +81,7 @@ void GuiScanningDialog::onDraw(sf::RenderTarget& window)
                 }
             }
             
-            if (locked && engine->getElapsedTime() - lock_start_time > lock_delay / 2.0f)
+            if (locked)
             {
                 locked_label->show();
             }else{
@@ -84,6 +97,8 @@ void GuiScanningDialog::setupParameters()
 {
     if (!my_spaceship)
         return;
+    
+    honing_start_time = engine->getElapsedTime();
     
     for(int n=0; n<max_sliders; n++)
     {
@@ -127,32 +142,38 @@ void GuiScanningDialog::updateSignal()
     float noise = 0.0;
     float period = 0.0;
     float phase = 0.0;
-
+    
     for(int n=0; n<max_sliders; n++)
     {
         if (sliders[n]->isVisible())
         {
+            if (sliders[n]->mouseDown) {
+                honing_start_time = engine->getElapsedTime();
+            }
+            else if (sliders[n]->mouseHadClick) {
+                honing_start_time = engine->getElapsedTime();
+                sliders[n]->mouseHadClick = false;
+            }
             noise += fabsf(target[n] - sliders[n]->getValue());
             period += fabsf(target[n] - sliders[n]->getValue());
             phase += fabsf(target[n] - sliders[n]->getValue());
         }
     }
-    if (noise < 0.05f && period < 0.05f && phase < 0.05f)
+    {
+        float mismatch = fmax(fmax(noise,period),phase);
+        float f = 1.0f - (engine->getElapsedTime() - honing_start_time) / (powf(mismatch*20,4.0f)+(mismatch*80));
+        noise *= f;
+        period *= f;
+        phase *= f;
+    }
+    if (noise < 0.001f && period < 0.001f && phase < 0.001f)
     {
         if (!locked)
         {
             lock_start_time = engine->getElapsedTime();
             locked = true;
         }
-        if (engine->getElapsedTime() - lock_start_time > lock_delay / 2.0f)
-        {
-            noise = period = phase = 0.0f;
-        }else{
-            float f = 1.0f - (engine->getElapsedTime() - lock_start_time) / (lock_delay / 2.0f);
-            noise *= f;
-            period *= f;
-            phase *= f;
-        }
+        noise = period = phase = 0.0f;
     }else{
         locked = false;
     }
