@@ -108,13 +108,16 @@ template:setWeaponStorage("EMP", 500)
 
 template:setRepairCrewCount(0)
 --	(H)oriz, (V)ert	   HC,VC,HS,VS, system    (C)oordinate (S)ize
-template:addRoomSystem( 3, 0, 2, 1, "Impulse")
-template:addRoomSystem( 3, 4, 2, 1, "Impulse")
-template:addRoomSystem( 5, 0, 2, 1, "Maneuver")
-template:addRoomSystem( 5, 4, 2, 1, "Maneuver")
-template:addRoomSystem( 3, 1, 3, 3, "Reactor")
-template:addRoomSystem( 1, 1, 2, 3, "MissileSystem")
-template:addRoomSystem( 0, 1, 1, 3, "Beamweapons")
+template:addRoomSystem( 4, 0, 2, 1, "Impulse")
+template:addRoomSystem( 4, 6, 2, 1, "Impulse")
+template:addRoomSystem( 6, 0, 2, 1, "Maneuver")
+template:addRoomSystem( 6, 6, 2, 1, "Maneuver")
+template:addRoomSystem( 5, 1, 2, 1, "RearShield")
+template:addRoomSystem( 5, 5, 2, 1, "RearShield")
+template:addRoomSystem( 4, 2, 4, 3, "Reactor")
+template:addRoomSystem( 2, 2, 2, 3, "MissileSystem")
+template:addRoomSystem( 1, 2, 1, 3, "FrontShield")
+template:addRoomSystem( 0, 2, 1, 3, "Beamweapons")
 
 
 
