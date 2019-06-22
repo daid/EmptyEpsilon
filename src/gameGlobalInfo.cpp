@@ -28,7 +28,7 @@ GameGlobalInfo::GameGlobalInfo()
     global_message_timeout = 0.0;
     player_warp_jump_drive_setting = PWJ_ShipDefault;
     scanning_complexity = SC_Normal;
-    long_range_radar_range = 30000;
+    long_range_radar_range = 100000;
     use_beam_shield_frequencies = true;
     use_system_damage = true;
     allow_main_screen_tactical_radar = true;
