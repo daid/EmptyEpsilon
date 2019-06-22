@@ -24,9 +24,10 @@ ScreenMainScreen::ScreenMainScreen()
     viewport->showCallsigns()->showHeadings()->showSpacedust();
     viewport->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     
-    (new GuiRadarView(viewport, "VIEWPORT_RADAR", 5000.0f, nullptr))->setStyle(GuiRadarView::CircularMasked)->setSize(200, 200)->setPosition(-20, 20, ATopRight);
+   (new GuiRadarView(viewport, "VIEWPORT_RADAR", 5000.0f, nullptr))->setStyle(GuiRadarView::CircularMasked)->setSize(200, 200)->setPosition(-20, 20, ATopRight);
     
-    tactical_radar = new GuiRadarView(this, "TACTICAL", 5000.0f, nullptr);
+//    tactical_radar = new GuiRadarView(this, "TACTICAL", 5000.0f, nullptr); //Riffi edit
+    tactical_radar = new GuiRadarView(this, "TACTICAL", 10000.0f, nullptr); //Riffi edit
     tactical_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     tactical_radar->setRangeIndicatorStepSize(1000.0f)->shortRange()->enableCallsigns()->hide();
     long_range_radar = new GuiRadarView(this, "TACTICAL", gameGlobalInfo->long_range_radar_range, nullptr);
@@ -55,7 +56,7 @@ ScreenMainScreen::ScreenMainScreen()
         });
     }
 
-    first_person = true;
+    first_person = true; //Riffi edit, turned to true
 }
 
 void ScreenMainScreen::update(float delta)
