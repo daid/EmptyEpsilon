@@ -55,7 +55,7 @@ ScreenMainScreen::ScreenMainScreen()
         });
     }
 
-    first_person = false;
+    first_person = true;
 }
 
 void ScreenMainScreen::update(float delta)
