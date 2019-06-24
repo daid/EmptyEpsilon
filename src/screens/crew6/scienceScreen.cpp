@@ -201,7 +201,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
         science_radar->setDistance(value);
     });
     zoom_slider->setPosition(-20, -20, ABottomRight)->setSize(250, 50);
-    zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 100);
+    zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 50);
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Radar/database view toggle.
