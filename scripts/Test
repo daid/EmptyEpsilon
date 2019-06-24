@@ -1,0 +1,34 @@
+unction allow_essody18_cancel()
+	removeGMFunction("Cancel ESSODY18")
+	removeGMFunction("Confirm ESSODY18")
+	addGMFunction("Allow ESSODY18", allow_essody18)
+end
+
+function allow_essody18_confirm()
+	removeGMFunction("Cancel ESSODY18")
+	removeGMFunction("Confirm ESSODY18")
+	odysseus:addCustomButton("Relay", "Launch ESSODY18", "Launch ESSODY18", launch_essody18_prep)
+end
+
+function allow_essody18()
+	odysseus:addCustomButton("Relay", "Launch ESSODY18", "Launch ESSODY18", launch_essody18_prep)
+	removeGMFunction("Allow ESSODY18")
+end
+
+function launch_essody18_prep()
+	odysseus:removeCustom("Launch ESSODY18")
+	odysseus:addCustomButton("Relay", "Cancel ESSODY18 launch", "Cancel ESSODY18 launch", launch_essody18_cancel)
+	odysseus:addCustomButton("Relay", "Confirm ESSODY18 launch", "Confirm ESSODY18 launch", launch_essody18_confirm)
+end
+
+function launch_essody18_cancel()
+	odysseus:addCustomButton("Relay", "Launch ESSODY18", "Launch ESSODY18", launch_essody18_prep)
+	odysseus:removeCustom("Cancel ESSODY18 launch")
+	odysseus:removeCustom("Confirm ESSODY18 launch")
+end
+
+function launch_essody18_confirm()
+	odysseus:removeCustom("Cancel ESSODY18 launch")
+	odysseus:removeCustom("Confirm ESSODY18 launch")
+	essody18_launch()
+end
