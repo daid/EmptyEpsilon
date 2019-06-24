@@ -24,7 +24,7 @@
 
 // Muutettu kaikki gameGlobalInfo->long_range_radar_range --> long_range_radar_range
 
-long_range_radar_range = 100000.0
+long_range_radar_range = 100000
 
 ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 : GuiOverlay(owner, "SCIENCE_SCREEN", colorConfig.background)
