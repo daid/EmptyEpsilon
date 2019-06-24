@@ -52,8 +52,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
         }, nullptr, nullptr
     );
-   new RawScannerDataRadarOverlay(science_radar, "", gameGlobalInfo->long_range_radar_range);
-//        new RawScannerDataRadarOverlay(science_radar, "", long_range_radar_range);
+//   new RawScannerDataRadarOverlay(science_radar, "", gameGlobalInfo->long_range_radar_range);
+        new RawScannerDataRadarOverlay(science_radar, "", 100000);
 
     // Draw and hide the probe radar.
     probe_radar = new GuiRadarView(radar_view, "PROBE_RADAR", 5000, &targets);
