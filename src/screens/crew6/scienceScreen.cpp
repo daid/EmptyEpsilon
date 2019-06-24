@@ -41,9 +41,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     radar_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Draw the science radar.
-    science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", gameGlobalInfo->long_range_radar_range, &targets);
+    science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", 100000.0, &targets);
     science_radar->setPosition(-270, 0, ACenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    science_radar->setRangeIndicatorStepSize(5000.0)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
+    science_radar->setRangeIndicatorStepSize(10000.0)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
     science_radar->setCallbacks(
         [this](sf::Vector2f position) {
             if (!my_spaceship || my_spaceship->scanning_delay > 0.0)
@@ -52,7 +52,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
         }, nullptr, nullptr
     );
-    new RawScannerDataRadarOverlay(science_radar, "", gameGlobalInfo->long_range_radar_range);
+//   new RawScannerDataRadarOverlay(science_radar, "", gameGlobalInfo->long_range_radar_range);
+        new RawScannerDataRadarOverlay(science_radar, "", 100000);
 
     // Draw and hide the probe radar.
     probe_radar = new GuiRadarView(radar_view, "PROBE_RADAR", 5000, &targets);
@@ -101,17 +102,18 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
     info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4, "Type", "");
     info_type->setSize(GuiElement::GuiSizeMax, 30);
-    info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", "DB", [this]() {
+   
+   info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", "DB", [this]() {
         P<SpaceShip> ship = targets.get();
-        if (ship)
-        {
-            if (database_view->findAndDisplayEntry(ship->getTypeName()))
-            {
-                view_mode_selection->setSelectionIndex(1);
-                radar_view->hide();
-                background_gradient->hide();
-                database_view->show();
-            }
+       if (ship)
+    {
+           if (database_view->findAndDisplayEntry(ship->getTypeName()))
+           {
+               view_mode_selection->setSelectionIndex(1);
+               radar_view->hide();
+               background_gradient->hide();
+ //               database_view->show();
+           }
         }
     });
     info_type_button->setTextSize(20)->setPosition(0, 1, ATopRight)->setSize(50, 28);
@@ -195,8 +197,10 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 
     // Draw the zoom slider.
     zoom_slider = new GuiSlider(radar_view, "", gameGlobalInfo->long_range_radar_range, 5000.0, gameGlobalInfo->long_range_radar_range, [this](float value)
+ //     zoom_slider = new GuiSlider(radar_view, "", long_range_radar_range, 5000.0, long_range_radar_range, [this](float value)
     {
         zoom_label->setText("Zoom: " + string(gameGlobalInfo->long_range_radar_range / value, 1) + "x");
+//        zoom_label->setText("Zoom: " + string(long_range_radar_range / value, 1) + "x");
         science_radar->setDistance(value);
     });
     zoom_slider->setPosition(-20, -20, ABottomRight)->setSize(250, 50);
@@ -207,9 +211,10 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     view_mode_selection = new GuiListbox(this, "VIEW_SELECTION", [this](int index, string value) {
         radar_view->setVisible(index == 0);
         background_gradient->setVisible(index == 0);
-        database_view->setVisible(index == 1);
+   //     database_view->setVisible(index == 1);
     });
-    view_mode_selection->setOptions({"Radar", "Database"})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(200, 100);
+//    view_mode_selection->setOptions({"Radar", "Database"})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(200, 100);
+        view_mode_selection->setOptions({"Radar"})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(200, 100);
 
     // Scanning dialog.
     new GuiScanningDialog(this, "SCANNING_DIALOG");
@@ -225,14 +230,18 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     if (mouse_wheel_delta != 0.0)
     {
         float view_distance = science_radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
-        if (view_distance > gameGlobalInfo->long_range_radar_range)
-            view_distance = gameGlobalInfo->long_range_radar_range;
+  //      if (view_distance > gameGlobalInfo->long_range_radar_range)
+  //          view_distance = gameGlobalInfo->long_range_radar_range;
+
+      if (view_distance > 100000.0f)
+            view_distance = 100000.0f;
         if (view_distance < 5000.0f)
             view_distance = 5000.0f;
         science_radar->setDistance(view_distance);
         // Keep the zoom slider in sync.
         zoom_slider->setValue(view_distance);
-        zoom_label->setText("Zoom: " + string(gameGlobalInfo->long_range_radar_range / view_distance, 1) + "x");
+//        zoom_label->setText("Zoom: " + string(gameGlobalInfo->long_range_radar_range / view_distance, 1) + "x");
+        zoom_label->setText("Zoom: " + string(100000.0f / view_distance, 1) + "x");
     }
 
     if (!my_spaceship)
@@ -333,7 +342,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             {
                 info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
                 info_type->setValue(ship->getTypeName());
-                info_type_button->show();
+    //            info_type_button->show();
                 info_shields->setValue(ship->getShieldDataString());
                 info_hull->setValue(int(ship->getHull()));
             }
