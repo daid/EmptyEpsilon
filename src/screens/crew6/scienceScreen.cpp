@@ -267,7 +267,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     info_shield_frequency->setFrequency(-1)->hide();
     info_beam_frequency->setFrequency(-1)->hide();
     info_description->hide();
-//    info_type_button->hide();
+    info_type_button->hide();
     sidebar_pager->hide();
 
     for(int n = 0; n < SYS_COUNT; n++)
