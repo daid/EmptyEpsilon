@@ -101,19 +101,19 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
     info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4, "Type", "");
     info_type->setSize(GuiElement::GuiSizeMax, 30);
-    info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", "DB", [this]() {
-        P<SpaceShip> ship = targets.get();
-        if (ship)
-        {
-            if (database_view->findAndDisplayEntry(ship->getTypeName()))
-            {
-                view_mode_selection->setSelectionIndex(1);
-                radar_view->hide();
-                background_gradient->hide();
-                database_view->show();
-            }
-        }
-    });
+//    info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", "DB", [this]() {
+//        P<SpaceShip> ship = targets.get();
+//        if (ship)
+//        {
+//            if (database_view->findAndDisplayEntry(ship->getTypeName()))
+//            {
+//                view_mode_selection->setSelectionIndex(1);
+//                radar_view->hide();
+//                background_gradient->hide();
+//                database_view->show();
+//            }
+//        }
+//    });
     info_type_button->setTextSize(20)->setPosition(0, 1, ATopRight)->setSize(50, 28);
     info_shields = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SHIELDS", 0.4, "Shields", "");
     info_shields->setSize(GuiElement::GuiSizeMax, 30);
