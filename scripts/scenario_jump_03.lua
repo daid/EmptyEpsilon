@@ -24,6 +24,7 @@ function init()
 
 
     addGMFunction("Generate EOC Fleet", function()
+	addGMFunction("Fighter launchers", fighter_launchers)
 
 		x, y = odysseus:getPosition()
 
@@ -126,7 +127,7 @@ function init()
 
 	x, y = odysseus:getPosition()
 
-	addGMFunction("Fighter launchers", fighter_launchers)
+	
 
 
 	addGMFunction("Change scenario", changeScenarioPrep)
