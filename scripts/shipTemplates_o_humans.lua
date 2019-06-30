@@ -8,7 +8,10 @@ template:setSpeed(30, 15, 13)
 template:setDefaultAI('fighter')
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 30, 0, 700.0, 4.0, 2)
-
+template:setTubes(2, 6.0) -- Amount of torpedo tubes, loading time
+template:setTubeDirection(0, 0)
+template:setTubeDirection(1, 0)
+template:setWeaponStorage("Homing", 250)
 
 -- Scoutship
 
@@ -30,10 +33,14 @@ template:setTubeDirection(1,  1)
 template = ShipTemplate():setName("Scoutship S835"):setClass("Frigate", "Cruiser"):setModel("eoc_frigate")
 template:setRadarTrace("radar_cruiser")
 template:setShields(500, 500, 500, 500)
+template:setBeamWeapon(0, 90, 0, 1200, 8, 6)
+
 template:setHull(200)
 template:setSpeed(20, 5, 10)
 template:setCombatManeuver(400, 250)
-template:setTubes(3, 10.0)
+template:setTubes(2, 10.0)
+template:setTubeDirection(0, -1)
+template:setTubeDirection(1,  1)
 template:setWeaponStorage("Homing", 10)
 template:setWeaponStorage("EMP", 3)
 
@@ -58,9 +65,16 @@ template:setRadarTrace("radar_transport.png")
 template:setHull(50)
 template:setShields(500, 500, 500, 500)
 template:setSpeed(15, 4, 5)
-template:setBeam(0, 40, 170, 1200.0, 6.0, 6)
-template:setBeam(1, 40, 190, 1200.0, 6.0, 6)
-
+template:setBeam(0, 40, -5, 1200.0, 6.0, 6)
+template:setBeam(1, 40, 5, 1200.0, 6.0, 6)
+template:setTubeDirection(0, 0)
+template:setTubeDirection(1, 0)
+template:setTubeDirection(2, -45)
+template:setTubeDirection(3, 45)
+template:setTubeDirection(4, -180)
+template:setTubeDirection(5, 180)
+template:setWeaponStorage("Homing", 500)
+template:setWeaponStorage("EMP", 500)
 
 
 --Corvette
@@ -73,7 +87,14 @@ template:setWarpSpeed(700)
 template:setBeam(0, 40,-5, 1000.0, 6.0, 6)
 template:setBeam(1, 40, 5, 1000.0, 6.0, 6)
 template:setDefaultAI('missilevolley')
-
+template:setTubeDirection(0, 0)
+template:setTubeDirection(1, 0)
+template:setTubeDirection(2, -45)
+template:setTubeDirection(3, 45)
+template:setTubeDirection(4, -180)
+template:setTubeDirection(5, 180)
+template:setWeaponStorage("Homing", 500)
+template:setWeaponStorage("EMP", 500)
 
 
 template = ShipTemplate():setName("Corvette C348"):setClass("Corvette", "Destroyer"):setModel("small_frigate_5")
@@ -84,7 +105,14 @@ template:setSpeed(10, 6, 6)
 template:setWarpSpeed(700)
 template:setBeam(0, 40,-5, 1000.0, 6.0, 6)
 template:setBeam(1, 40, 5, 1000.0, 6.0, 6)
-
+template:setTubeDirection(0, 0)
+template:setTubeDirection(1, 0)
+template:setTubeDirection(2, -45)
+template:setTubeDirection(3, 45)
+template:setTubeDirection(4, -180)
+template:setTubeDirection(5, 180)
+template:setWeaponStorage("Homing", 500)
+template:setWeaponStorage("EMP", 500)
 
 
 
@@ -94,7 +122,16 @@ template:setHull(50)
 template:setShields(500, 500, 500, 500)
 template:setSpeed(10, 4, 5)
 template:setDefaultAI('missilevolley')
-
+template:setBeam(0, 40,-5, 1000.0, 6.0, 6)
+template:setBeam(1, 40, 5, 1000.0, 6.0, 6)
+template:setTubeDirection(0, 0)
+template:setTubeDirection(1, 0)
+template:setTubeDirection(2, -45)
+template:setTubeDirection(3, 45)
+template:setTubeDirection(4, -180)
+template:setTubeDirection(5, 180)
+template:setWeaponStorage("Homing", 500)
+template:setWeaponStorage("EMP", 500)
 
 
 --BattleCruiser
@@ -115,7 +152,14 @@ template:setWeaponStorage("Homing", 4)
 template:setWeaponStorage("EMP", 2)
 template:weaponTubeDisallowMissle(1, "EMP")
 template:setDefaultAI('missilevolley')
-
+template:setTubeDirection(0, 0)
+template:setTubeDirection(1, 0)
+template:setTubeDirection(2, -45)
+template:setTubeDirection(3, 45)
+template:setTubeDirection(4, -180)
+template:setTubeDirection(5, 180)
+template:setWeaponStorage("Homing", 500)
+template:setWeaponStorage("EMP", 500)
 
 
 -- Space station
@@ -125,5 +169,3 @@ template:setSpeed(0, 0, 0)
 template:setDockClasses("Starfighter")
 template:setHull(400)
 template:setShields(800)
-
-

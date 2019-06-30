@@ -8,6 +8,11 @@ template:setBeam(0, 30, 5, 900.0, 4.0, 2.5)
 template:setBeam(1, 30,-5, 900.0, 4.0, 2.5)
 template:setEnergyStorage(400)
 template:setDefaultAI('fighter')
+template:setTubes(2, 6.0) -- Amount of torpedo tubes, loading time
+template:setTubeDirection(0, 0)
+template:setTubeDirection(1, 0)
+template:setWeaponStorage("Homing", 250)
+
 
 
 
@@ -16,9 +21,18 @@ template:setRadarTrace("radar_transport.png")
 template:setHull(500)
 template:setShields(300, 300)
 template:setSpeed(80, 2, 2)
-template:setBeam(0, 40, 170, 1200.0, 6.0, 6)
-template:setBeam(1, 40, 190, 1200.0, 6.0, 6)
+template:setBeam(0, 40, 10, 1200.0, 6.0, 6)
+template:setBeam(1, 40, -10, 1200.0, 6.0, 6)
 template:setDefaultAI('missilevolley')
+template:setTubes(6, 8.0) -- Amount of torpedo tubes, and loading time of the tubes.
+template:setTubeDirection(0, 0)
+template:setTubeDirection(1, 0)
+template:setTubeDirection(2, -45)
+template:setTubeDirection(3, 45)
+template:setTubeDirection(4, -180)
+template:setTubeDirection(5, 180)
+template:setWeaponStorage("Homing", 500)
+template:setWeaponStorage("EMP", 500)
 
 
 
