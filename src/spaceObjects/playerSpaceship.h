@@ -197,6 +197,7 @@ public:
     // Client command functions
     virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet) override;
     void commandTargetRotation(float target);
+    void commandTurnSpeed(float turnSpeed);
     void commandImpulse(float target);
     void commandWarp(int8_t target);
     void commandJump(float distance);

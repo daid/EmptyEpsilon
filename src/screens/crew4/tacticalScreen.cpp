@@ -62,8 +62,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
         [this](float x_position) {
             if (my_spaceship)
             {
-                float angle = my_spaceship->getRotation() + x_position;
-                my_spaceship->commandTargetRotation(angle);
+                my_spaceship->commandTurnSpeed(x_position / 100);
             }
         },
         [this](float y_position) {

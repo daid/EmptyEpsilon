@@ -173,6 +173,7 @@ static const int16_t CMD_ABORT_DOCK = 0x0026;
 static const int16_t CMD_SET_MAIN_SCREEN_OVERLAY = 0x0027;
 static const int16_t CMD_HACKING_FINISHED = 0x0028;
 static const int16_t CMD_CUSTOM_FUNCTION = 0x0029;
+static const int16_t CMD_TURN_SPEED = 0x002A;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -1042,6 +1043,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     case CMD_TARGET_ROTATION:
         packet >> target_rotation;
         break;
+    case CMD_TURN_SPEED:
+        target_rotation = getRotation();
+        packet >> turnSpeed;
+        break;
     case CMD_IMPULSE:
         packet >> impulse_request;
         break;
@@ -1485,6 +1490,13 @@ void PlayerSpaceship::commandTargetRotation(float target)
 {
     sf::Packet packet;
     packet << CMD_TARGET_ROTATION << target;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandTurnSpeed(float turnSpeed)
+{
+    sf::Packet packet;
+    packet << CMD_TURN_SPEED << turnSpeed;
     sendClientCommand(packet);
 }
 
