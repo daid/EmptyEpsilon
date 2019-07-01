@@ -4,8 +4,6 @@
 GuiCanvas::GuiCanvas()
 : click_element(nullptr), focus_element(nullptr)
 {
-    previous_joystick_z_position = 0;
-    previous_joystick_r_position = 0;
     enable_debug_rendering = false;
 }
 
@@ -19,9 +17,6 @@ void GuiCanvas::render(sf::RenderTarget& window)
     sf::FloatRect window_rect(0, 0, window_size.x, window_size.y);
     
     sf::Vector2f mouse_position = InputHandler::getMousePos();
-    sf::Vector2f joystick_xy_position = InputHandler::getJoysticXYPos();
-    float joystick_z_position = InputHandler::getJoysticZPos();
-    float joystick_r_position = InputHandler::getJoysticRPos();
     
     drawElements(window_rect, window);
     
@@ -55,19 +50,6 @@ void GuiCanvas::render(sf::RenderTarget& window)
             click_element = nullptr;
         }
     }
-    
-    if (joystick_xy_position != previous_joystick_xy_position)
-        forwardJoystickXYMoveToElements(joystick_xy_position);
-        
-    if (joystick_z_position != previous_joystick_z_position)
-        forwardJoystickZMoveToElements(joystick_z_position);
-        
-    if (joystick_r_position != previous_joystick_r_position)
-        forwardJoystickRMoveToElements(joystick_r_position);
-    
-    previous_joystick_xy_position = joystick_xy_position;
-    previous_joystick_z_position = joystick_z_position;
-    previous_joystick_r_position = joystick_r_position;
     previous_mouse_position = mouse_position;
 }
 

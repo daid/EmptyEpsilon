@@ -57,41 +57,6 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
         }
     );
 
-    // Joystick controls.
-    radar->setJoystickCallbacks(
-        [this](float x_position) {
-            if (my_spaceship)
-            {
-                my_spaceship->commandTurnSpeed(x_position / 100);
-            }
-        },
-        [this](float y_position) {
-            if (my_spaceship && (fabs(y_position) > 20))
-            {
-                // Add some more hysteresis, since y-axis can be hard to keep at 0
-                float value;
-                if (y_position > 0)
-                    value = (y_position-20) * 1.25 / 100;
-                else
-                    value = (y_position+20) * 1.25 / 100;
-
-                my_spaceship->commandCombatManeuverBoost(-value);
-            }
-            else if (my_spaceship)
-            {
-                my_spaceship->commandCombatManeuverBoost(0.0);
-            }
-        },
-        [this](float z_position) {
-            if (my_spaceship)
-                my_spaceship->commandImpulse(-(z_position / 100));
-        },
-        [this](float r_position) {
-            if (my_spaceship)
-                my_spaceship->commandCombatManeuverStrafe(r_position / 100);
-        }
-    );
-
     // Ship statistics in the top left corner.
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);

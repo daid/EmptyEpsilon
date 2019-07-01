@@ -21,9 +21,6 @@ protected:
     virtual void drawDebugElements(sf::FloatRect parent_rect, sf::RenderTarget& window);
     GuiElement* getClickElement(sf::Vector2f mouse_position);
     void forwardKeypressToElements(const HotkeyResult& key);
-    bool forwardJoystickXYMoveToElements(sf::Vector2f position);
-    bool forwardJoystickZMoveToElements(float position);
-    bool forwardJoystickRMoveToElements(float position);
     
     friend class GuiElement;
 };
