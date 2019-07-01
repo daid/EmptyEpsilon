@@ -3,6 +3,7 @@
 
 #include "gui/gui2_overlay.h"
 #include "screenComponents/targetsContainer.h"
+#include "gui/joystickConfig.h"
 
 class GuiViewport3D;
 class GuiMissileTubeControls;
@@ -11,7 +12,7 @@ class GuiKeyValueDisplay;
 class GuiToggleButton;
 class GuiRotationDial;
 
-class SinglePilotScreen : public GuiOverlay
+class SinglePilotScreen : public GuiOverlay, JoystickMappable
 {
 private:
     GuiOverlay* background_gradient;
@@ -37,6 +38,7 @@ public:
     
     virtual void onDraw(sf::RenderTarget& window);
     virtual void onHotkey(const HotkeyResult& key) override;
+    virtual void onJoystickAxis(AxisAction& axisAction) override;
 };
 
 #endif//SINGLE_PILOT_SCREEN_H

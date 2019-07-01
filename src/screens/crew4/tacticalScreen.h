@@ -3,6 +3,7 @@
 
 #include "gui/gui2_overlay.h"
 #include "screenComponents/targetsContainer.h"
+#include "gui/joystickConfig.h"
 
 class GuiMissileTubeControls;
 class GuiRadarView;
@@ -10,7 +11,7 @@ class GuiKeyValueDisplay;
 class GuiToggleButton;
 class GuiRotationDial;
 
-class TacticalScreen : public GuiOverlay
+class TacticalScreen : public GuiOverlay, JoystickMappable
 {
 private:
     GuiOverlay* background_gradient;
@@ -33,6 +34,7 @@ public:
     
     virtual void onDraw(sf::RenderTarget& window);
     virtual void onHotkey(const HotkeyResult& key) override;
+    virtual void onJoystickAxis(AxisAction& axisAction) override;
 };
 
 #endif//TACTICAL_SCREEN_H

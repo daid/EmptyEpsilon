@@ -3,11 +3,12 @@
 
 #include "gui/gui2_overlay.h"
 #include "screenComponents/combatManeuver.h"
+#include "gui/joystickConfig.h"
 
 class GuiKeyValueDisplay;
 class GuiLabel;
 
-class HelmsScreen : public GuiOverlay
+class HelmsScreen : public GuiOverlay, JoystickMappable
 {
 private:
     GuiOverlay* background_gradient;
@@ -25,6 +26,7 @@ public:
     
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;
+    virtual void onJoystickAxis(AxisAction& axisAction) override;
 };
 
 #endif//HELMS_SCREEN_H
