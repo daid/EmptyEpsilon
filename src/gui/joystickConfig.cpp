@@ -6,8 +6,6 @@ JoystickConfig joystick;
 
 JoystickConfig::JoystickConfig()
 {  // this list includes all Hotkeys and their standard configuration
-    newCategory("GENERAL", "General");
-    newAxis("STATION", std::make_tuple("Switch crew station", "PovY"));
     
     newCategory("HELMS", "Helms");
     newAxis("IMPULSE", std::make_tuple("Change impulse", "-Z"));
@@ -15,13 +13,12 @@ JoystickConfig::JoystickConfig()
     newAxis("STRAFE", std::make_tuple("Combat maneuver strafe", "X"));
     newAxis("BOOST", std::make_tuple("Combat maneuver boost", "-Y"));
 
-    newCategory("WEAPONS", "Weapons");
-    newAxis("AIM_MISSILE", std::make_tuple("Turn missile aim", "R"));
+    // newCategory("WEAPONS", "Weapons");
+    // newAxis("AIM_MISSILE", std::make_tuple("Turn missile aim", "R"));
     
-    newCategory("ENGINEERING", "Engineering");
-    newAxis("SYSTEM", std::make_tuple("Switch selected system", "R"));
-    newAxis("POWER", std::make_tuple("Change system power", "X"));
-    newAxis("COOLANT", std::make_tuple("Change system coolant", "Y"));
+    // newCategory("ENGINEERING", "Engineering");
+    // newAxis("POWER", std::make_tuple("Change system power", "X"));
+    // newAxis("COOLANT", std::make_tuple("Change system coolant", "Y"));
 }
 
 static std::vector<std::pair<string, sf::Joystick::Axis> > sfml_axis_names = {
@@ -103,7 +100,7 @@ std::vector<std::pair<string, string>> JoystickConfig::listJoystickByCategory(st
                 for(auto key_name : sfml_axis_names)
                 {
                     if (key_name.second == item.axis)
-                        ret.push_back({std::get<0>(item.value), key_name.first});
+                        ret.push_back({std::get<0>(item.value), "Joystick axis " + key_name.first});
                 }
             }
         }
