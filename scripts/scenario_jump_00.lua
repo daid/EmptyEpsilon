@@ -11,25 +11,15 @@ function init()
   odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Corvette C743")
 	odysseus:setCallSign("ESS Odysseus"):setPosition(0, 0):setCanBeDestroyed(false)
 
-
-        for n=1,100 do
-
+  for n=1,100 do
 			Asteroid():setPosition(random(-100000, 100000), random(-100000, 100000)):setSize(random(100, 500))
-
 			VisualAsteroid():setPosition(random(-100000, 190000), random(-100000, 100000)):setSize(random(100, 500))
+  end
 
-        end
-
-		for n=1,10 do
-
+	for n=1,10 do
 			Nebula():setPosition(random(-100000, 100000), random(-100000, 100000))
-
-        end
-addGMFunction("Change scenario to 01", changeScenarioPrep)
-addGMFunction("Allow ESSODY18", allow_essody18_prep)
-addGMFunction("Allow ESSODY23", allow_essody23_prep)
-addGMFunction("Allow ESSODY36", allow_essody36_prep)
-
+  end
+  addGMFunction("Change scenario to 01", changeScenarioPrep)
 	addGMFunction("Enemy north", wavenorth)
 	addGMFunction("Enemy east", waveeast)
 	addGMFunction("Enemy south", wavesouth)
