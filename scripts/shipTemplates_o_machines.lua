@@ -1,8 +1,8 @@
-template = ShipTemplate():setName("Machine Fighter"):setClass("Fighter", "Interceptor"):setModel("machine_fighter")
+template = ShipTemplate():setName("Fighter Predator"):setClass("Fighter", "Interceptor"):setModel("machine_fighter")
 template:setRadarTrace("radar_fighter.png")
 template:setHull(30)
 template:setShields(30)
-template:setSpeed(110, 15, 20)
+template:setSpeed(80, 15, 20)
 template:setCombatManeuver(600, 0)
 template:setBeam(0, 30, 0, 800.0, 2.0, 4)
 template:setEnergyStorage(400)
@@ -11,11 +11,11 @@ template:setTubes(1, 8.0) -- Amount of torpedo tubes, loading time
 template:setTubeDirection(0, 0)
 template:setWeaponStorage("Homing", 250)
 
-template = ShipTemplate():setName("Machine Cruiser"):setClass("Corvette", "Destroyer"):setModel("machine_frigate")
+template = ShipTemplate():setName("Frigate Stinger"):setClass("Corvette", "Destroyer"):setModel("machine_frigate")
 template:setRadarTrace("radar_transport.png")
 template:setHull(300)
 template:setShields(250, 250)
-template:setSpeed(60, 5, 5)
+template:setSpeed(50, 5, 5)
 template:setBeam(0, 30, 10, 1500.0, 6.0, 20)
 template:setBeam(1, 30, -10, 1500.0, 6.0, 20)
 template:setBeam(2, 30, -140, 1200.0, 6.0, 15)
@@ -30,11 +30,11 @@ template:setTubeDirection(4, -120)
 template:setWeaponStorage("Homing", 200)
 template:setWeaponStorage("EMP", 20)
 
-template = ShipTemplate():setName("Machine Frigate"):setClass("Frigate", "Cruiser"):setModel("machine_cruiser")
+template = ShipTemplate():setName("Cruiser Reaper"):setClass("Frigate", "Cruiser"):setModel("machine_cruiser")
 template:setRadarTrace("radar_dread.png")
-template:setHull(1200)
-template:setShields(800, 800, 800, 800)
-template:setSpeed(40, 2, 2)
+template:setHull(2500)
+template:setShields(1800, 1800, 1800, 1800)
+template:setSpeed(30, 2, 2)
 template:setBeam(0, 10, 0, 3000.0, 6.0, 50)
 template:setBeam(1, 30, 15, 1500.0, 6.0, 30)
 template:setBeam(2, 30, -15, 1500.0, 6.0, 30)
@@ -59,11 +59,6 @@ template:setWeaponStorage("EMP", 20)
 
 
 
-
-
-
-
-
 template = ShipTemplate():setName("Machine Mothership"):setClass("Dreadnaught", "Odin"):setModel("machine_mother")
 template:setRadarTrace("radartrace_hugestation.png")
 template:setJumpDrive(true)
@@ -73,6 +68,6 @@ for n=0,15 do
     template:setBeamWeapon(n, 90,  n * 22.5, 3200, 3, 10)
     template:setTubeDirection(n, n * 22.5)
 end
-template:setHull(2000)
-template:setShields(1200, 1200, 1200, 1200, 1200, 1200)
-template:setSpeed(50, 1, 0)
+template:setHull(8000)
+template:setShields(2500, 2500, 2500, 2500, 2500, 2500)
+template:setSpeed(20, 1, 0)

@@ -54,20 +54,6 @@ model:setRadius(8)
 model:addEngineEmitter(-5, 0, 0,  1, 0, 0, 1.5)
 
 
--- this is the actual frigate, due to naming mistake
-model = ModelData()
-model:setName("machine_cruiser")
-model:setMesh("Machine_cruiser.obj")
-model:setTexture("Machinecruiser_diffuse2.png")
-model:setIllumination("Machinecruiser_emission_ok.png")
--- model:setSpecular("Machinecruiser_specular.png")
-model:setScale(60)
-model:setRadius(500)
-model:setCollisionBox(1600, 500)
-model:addEngineEmitter(-8.2, 0, -2.4,  0.2, 0.2, 0.96, 1.5)
-
-
--- this is the actual cruiser, due to naming mistake
 model = ModelData()
 model:setName("machine_frigate")
 model:setMesh("Machine_frigate.obj")
@@ -76,6 +62,19 @@ model:setIllumination("Machinefrigate_emission_ok.png")
 model:setScale(10)
 model:setRadius(100)
 model:addEngineEmitter(-8.2, 0, -2.4,  0.2, 0.2, 0.96, 1.5)
+
+
+model = ModelData()
+model:setName("machine_cruiser")
+model:setMesh("Machine_cruiser.obj")
+model:setTexture("machinecruiser_diffuse2.png")
+model:setIllumination("machinecruiser_emission_ok.png")
+-- model:setSpecular("machinecruiser_specular.png")
+model:setScale(60)
+model:setRadius(500)
+model:setCollisionBox(1600, 500)
+model:addEngineEmitter(-8.2, 0, -2.4,  0.2, 0.2, 0.96, 1.5)
+
 
 
 model = ModelData()
