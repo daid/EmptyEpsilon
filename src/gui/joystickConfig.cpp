@@ -13,8 +13,8 @@ JoystickConfig::JoystickConfig()
     newAxis("STRAFE", std::make_tuple("Combat maneuver strafe", "X"));
     newAxis("BOOST", std::make_tuple("Combat maneuver boost", "-Y"));
 
-    // newCategory("WEAPONS", "Weapons");
-    // newAxis("AIM_MISSILE", std::make_tuple("Turn missile aim", "R"));
+    newCategory("WEAPONS", "Weapons");
+    newAxis("AIM_MISSILE", std::make_tuple("Turn missile aim", ""));
     
     // newCategory("ENGINEERING", "Engineering");
     // newAxis("POWER", std::make_tuple("Change system power", "X"));
