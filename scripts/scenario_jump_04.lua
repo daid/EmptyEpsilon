@@ -92,10 +92,6 @@ addGMFunction("Destroy ESS vulture", confirm_vulture)
 
 	addGMFunction("Change scenario", changeScenarioPrep)
 
-  addGMFunction("Allow ESSODY18", allow_essody18_prep)
-  addGMFunction("Allow ESSODY23", allow_essody23_prep)
-  addGMFunction("Allow ESSODY36", allow_essody36_prep)
-
   	addGMFunction("Enemy north", wavenorth)
   	addGMFunction("Enemy east", waveeast)
   	addGMFunction("Enemy south", wavesouth)

@@ -3,18 +3,17 @@
 template = ShipTemplate():setName("Fighter F975"):setClass("Starfighter", "Interceptor"):setModel("eoc_fighter")
 template:setRadarTrace("radar_fighter.png")
 --             Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 30, 0, 1200.0, 2.0, 30)
-template:setHull(200)
-template:setShields(400)
-template:setSpeed(80, 20, 40)
+template:setBeam(0, 30, 0, 1000.0, 2.0, 10)
+template:setHull(100)
+template:setShields(100)
+template:setSpeed(60, 10, 20)
 template:setCombatManeuver(600, 150)
 template:setWarpSpeed(0)
 template:setJumpDrive(false)
 template:setCloaking(false)
 template:setEnergyStorage(400)
-template:setTubes(2, 10.0) -- Amount of torpedo tubes, loading time
+template:setTubes(1, 10.0) -- Amount of torpedo tubes, loading time
 template:setTubeDirection(0, 0)
-template:setTubeDirection(1, 0)
 template:setWeaponStorage("Homing", 250)
 
 
