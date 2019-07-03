@@ -302,7 +302,7 @@ x, y = odysseus:getPosition()
 
 		dockable = false
 
-		for _, obj in ipairs(getObjectsInRadius(x, y, 500)) do
+		for _, obj in ipairs(getObjectsInRadius(x, y, 800)) do
 
 			callSign = obj:getCallSign()
 
@@ -340,7 +340,7 @@ x, y = odysseus:getPosition()
 
 		dockable = false
 
-		for _, obj in ipairs(getObjectsInRadius(x, y, 500)) do
+		for _, obj in ipairs(getObjectsInRadius(x, y, 800)) do
 
 			callSign = obj:getCallSign()
 
@@ -380,7 +380,7 @@ x, y = odysseus:getPosition()
 
 		dockable = false
 
-		for _, obj in ipairs(getObjectsInRadius(x, y, 500)) do
+		for _, obj in ipairs(getObjectsInRadius(x, y, 800)) do
 
 			callSign = obj:getCallSign()
 
@@ -420,7 +420,7 @@ x, y = odysseus:getPosition()
 
 		dockable = false
 
-		for _, obj in ipairs(getObjectsInRadius(x, y, 500)) do
+		for _, obj in ipairs(getObjectsInRadius(x, y, 800)) do
 
 			callSign = obj:getCallSign()
 

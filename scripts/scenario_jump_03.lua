@@ -127,7 +127,7 @@ function init()
 
 	x, y = odysseus:getPosition()
 
-	
+
 
 
 	addGMFunction("Change scenario", changeScenarioPrep)
@@ -522,7 +522,7 @@ end
 
   		dockable = false
 
-  		for _, obj in ipairs(getObjectsInRadius(x, y, 500)) do
+  		for _, obj in ipairs(getObjectsInRadius(x, y, 800)) do
 
   			callSign = obj:getCallSign()
 
@@ -560,7 +560,7 @@ end
 
   		dockable = false
 
-  		for _, obj in ipairs(getObjectsInRadius(x, y, 500)) do
+  		for _, obj in ipairs(getObjectsInRadius(x, y, 800)) do
 
   			callSign = obj:getCallSign()
 
@@ -600,7 +600,7 @@ end
 
   		dockable = false
 
-  		for _, obj in ipairs(getObjectsInRadius(x, y, 500)) do
+  		for _, obj in ipairs(getObjectsInRadius(x, y, 800)) do
 
   			callSign = obj:getCallSign()
 
@@ -640,7 +640,7 @@ end
 
   		dockable = false
 
-  		for _, obj in ipairs(getObjectsInRadius(x, y, 500)) do
+  		for _, obj in ipairs(getObjectsInRadius(x, y, 800)) do
 
   			callSign = obj:getCallSign()
 

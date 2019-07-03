@@ -648,7 +648,7 @@ function wave_four()
 
 			dockable = false
 
-			for _, obj in ipairs(getObjectsInRadius(x, y, 500)) do
+			for _, obj in ipairs(getObjectsInRadius(x, y, 800)) do
 
 				callSign = obj:getCallSign()
 
@@ -686,7 +686,7 @@ function wave_four()
 
 			dockable = false
 
-			for _, obj in ipairs(getObjectsInRadius(x, y, 500)) do
+			for _, obj in ipairs(getObjectsInRadius(x, y, 800)) do
 
 				callSign = obj:getCallSign()
 
@@ -726,7 +726,7 @@ function wave_four()
 
 			dockable = false
 
-			for _, obj in ipairs(getObjectsInRadius(x, y, 500)) do
+			for _, obj in ipairs(getObjectsInRadius(x, y, 800)) do
 
 				callSign = obj:getCallSign()
 
@@ -766,7 +766,7 @@ function wave_four()
 
 			dockable = false
 
-			for _, obj in ipairs(getObjectsInRadius(x, y, 500)) do
+			for _, obj in ipairs(getObjectsInRadius(x, y, 800)) do
 
 				callSign = obj:getCallSign()
 
