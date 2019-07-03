@@ -1,6 +1,8 @@
 -- Name: Fighter race - Asteroids
 -- Type: Race
--- Description: Asteroid field! How fast you can go? Going around the asteroid field is not a solution, it will break your fighter! Once you finish the race, your time will show up at top left corner.
+-- Description: Asteroid field! How fast you can go? Going around the asteroid field is not a solution, it will break your fighter! 
+-- Variation[Challenging]: Even more asteroids...
+-- Variation[Impossible]: And more asteroids...
 
 require("utils.lua")
 require("utils_odysseus.lua")
@@ -8,15 +10,17 @@ require("utils_odysseus.lua")
 
 function init()
 
-	passTime = 0
 	plotZ = delayChecks
 	delayCheck = 0
-	seconds = 0
 
+		simulation01 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(0, 500)
+		simulation01:setCallSign("Sim01"):setAutoCoolant(true)
+		
+		simulation02 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(0, 0)
+		simulation02:setCallSign("Sim02"):setAutoCoolant(true)
 
-
-		simulation01 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(0, 0)
-		simulation01:setCallSign("simulation01"):setAutoCoolant(true)
+		simulation03 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(0, -500)
+		simulation03:setCallSign("Sim03"):setAutoCoolant(true)
 		
 		startZone = Zone():setColor(0, 0, 255)
 		startZone:setPoints(1000, -10000,
@@ -43,12 +47,27 @@ function init()
 							55000, -10000)	
 							
 
-        for n=1,400 do
+        for n=1,150 do
 
 			Asteroid():setPosition(random(1000, 51000), random(-10000, 10000)):setSize(random(100, 500))
 
         end
 
+	if getScenarioVariation() == "Challenging" then
+	 for n=1,100 do
+
+			Asteroid():setPosition(random(1000, 51000), random(-10000, 10000)):setSize(random(100, 500))
+
+        end
+	end
+	
+		if getScenarioVariation() == "Impossible" then
+	 for n=1,200 do
+
+			Asteroid():setPosition(random(1000, 51000), random(-10000, 10000)):setSize(random(100, 500))
+
+        end
+	end
 
 end
 
@@ -61,16 +80,6 @@ function delayChecks(delta)
 		dropHealth(simulation01)
 	else
 		simulation01:commandSetAlertLevel("normal")
-	end
-
-	if not startZone:isInside(simulation01) and
-	not endZone:isInside(simulation01) then 
-		passTime = passTime + 1
-	end
-		
-	if endZone:isInside(simulation01) then
-		passTime = passTime / 60
-		simulation01:addCustomInfo("Helms", "Route passed!", passTime)
 	end
 
 end
