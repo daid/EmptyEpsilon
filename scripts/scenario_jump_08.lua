@@ -691,7 +691,7 @@ end
 		polaris:destroy()
 		polaris_approved = 0
 
-		odysseus:addToShipLog("EVA long range scanning results. ESS Polaris left from scanner range. No jump detected.", "Blue")
+		odysseus:addToShipLog("EVA long range scanning results. ESS Polaris left from scanner range. No jump detected.", "Red")
 
 
 	end

@@ -4,12 +4,12 @@
 -- Cruisers 1
 
 function wave_north(x, y, ship)
-	ship:addToShipLog("EVA sector scanner alarm. Multiple incoming jumps detected from heading 000.", "Red")
+	ship:addToShipLog("EVA sector scanner alarm. Multiple incoming jumps detected from heading 0.", "Red")
 	spawn_wave(x, y-60000)
 end
 
 function wave_east(x, y, ship)
-	ship:addToShipLog("EVA sector scanner alarm. Multiple incoming jumps detected from heading 090.", "Red")
+	ship:addToShipLog("EVA sector scanner alarm. Multiple incoming jumps detected from heading 90.", "Red")
 	spawn_wave(x+60000, y)
 end
 

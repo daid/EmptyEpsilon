@@ -647,7 +647,7 @@ end
 		vulture:destroy()
 		vulture_approved = 0
 
-		odysseus:addToShipLog("EVA long range scanning results. OSS Vulture left from scanner range. No jump detected.", "Blue")
+		odysseus:addToShipLog("EVA long range scanning results. OSS Vulture left from scanner range. No jump detected.", "Red")
 
 
 	end

@@ -12,13 +12,10 @@ function init()
 
 	valkyrie_approved = 0
 
-	for n=1, 40 do
-		setCirclePos(Planet():setPlanetSurfaceTexture("planets/asteroid.png"):setDistanceFromMovementPlane(2000):setPlanetRadius(random(1000, 3000)), 87000, 87000, random(0, 360), random(95000, 100000))
+	for n=1, 50 do
+		setCirclePos(Planet():setPlanetSurfaceTexture("planets/asteroid.png"):setDistanceFromMovementPlane(random(-2000, 2000)):setPlanetRadius(random(800, 3000)), 87000, 87000, random(200, 250), random(95000, 105000))
 	end
 
-	for n=1, 200 do
-		setCirclePos(Planet():setPlanetSurfaceTexture("planets/asteroid.png"):setDistanceFromMovementPlane(2000):setPlanetRadius(random(100, 1000)), 87000, 87000, random(0, 360), random(95000, 100000))
-	end
 
 	x, y = odysseus:getPosition()
 
@@ -39,7 +36,7 @@ function init()
 
 	envoy = CpuShip():setFaction("EOC Starfleet"):setTemplate("Corvette C754"):setPosition(x + random(-10000, 15000), y + random(-10000, 10000)):orderFlyFormation(flagship, -250, 1500):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("ESS Envoy"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false)
 
-	bluecoat = CpuShip():setFaction("EOC Starfleet"):setTemplate("Corvette C754"):setPosition(x + random(-10000, 15000), y + random(-10000, 10000)):orderFlyFormation(flagship, -500, 3000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("ESS Bluecoat"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false)
+	Bluecoat = CpuShip():setFaction("EOC Starfleet"):setTemplate("Corvette C754"):setPosition(x + random(-10000, 15000), y + random(-10000, 10000)):orderFlyFormation(flagship, -500, 3000):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("ESS Bluecoat"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false)
 
 	burro = CpuShip():setFaction("EOC Starfleet"):setTemplate("Cargoship T842"):setPosition(x + random(-10000, 15000), y + random(-10000, 10000)):orderFlyFormation(flagship, -750, 4500):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("OSS Burro"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false)
 
@@ -628,10 +625,10 @@ end
 		removeGMFunction("Cancel destruction")
 		removeGMFunction("Confirm destruction")
 		x, y = valkyrie:getPosition()
-		valkyrie:destroy()
+		valkyrie:takeDamage(999999999)
 		valkyrie_approved = 0
 
-		odysseus:addToShipLog("EVA long range scanning results. ESS Valkyrie left from scanner range. No jump detected.", "Blue")
+		odysseus:addToShipLog("EVA long range scanning results. ESS Valkyrie left from scanner range. No jump detected.", "Red")
 
 
 	end

@@ -33,52 +33,49 @@ starcaller_launched = 0
 	essody36_alert = 1
 	starcaller_alert = 1
 
-    odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Corvette C743")
+    odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Corvette C743"):setRotation(150)
 	odysseus:setCallSign("ESS Odysseus"):setPosition(0, 0):setCanBeDestroyed(false)
 
 
 -- Station
- planet1 = Planet():setPosition(-70000, 40000):setPlanetSurfaceTexture("planets/SI14-UX98.png"):setDistanceFromMovementPlane(2000):setPlanetRadius(30000)
+ planet1 = Planet():setPosition(-60000, 40000):setPlanetSurfaceTexture("planets/SI14-UX98.png"):setDistanceFromMovementPlane(2000):setPlanetRadius(30000)
 
 
 	warningZone = Zone():setColor(0,0,0)
-	warningZone:setPoints(42000,-100000,
-						43000,-100000,
-						43000,100000,
-						42000,100000)
+	warningZone:setPoints(22000,-100000,
+						33000,-100000,
+						33000,100000,
+						22000,100000)
 
-	critWarningZone = Zone():setColor(0,0,0)
-	critWarningZone:setPoints(43000, -100000,
+	critWarningZone = Zone():setColor(50,0,0)
+	critWarningZone:setPoints(33000, -100000,
 						44000,-100000,
 						44000,100000,
-						43000,100000)
+						33000,100000)
 
-	dangerZone = Zone():setColor(0,0,0)
+	dangerZone = Zone():setColor(100,0,0)
 	dangerZone:setPoints(44000,-100000,
-						45999,-100000,
-						45999,100000,
+						50000,-100000,
+						50000,100000,
 						44000,100000)
 
-	critDangerZone = Zone():setColor(0,0,0)
-	critDangerZone:setPoints(46000,-100000,
-						47999,-100000,
-						47999,100000,
-						46000,100000)
+	critDangerZone = Zone():setColor(150,0,0)
+	critDangerZone:setPoints(50000,-100000,
+						55000,-100000,
+						55000,100000,
+						50000,100000)
 
-	deathDangerZone = Zone():setColor(0,0,0)
-	deathDangerZone:setPoints(48000,-100000,
-						99000,-100000,
-						99000,100000,
-						48000,100000)
-
-
-
+	deathDangerZone = Zone():setColor(200,0,0)
+	deathDangerZone:setPoints(55000,-100000,
+						59000,-100000,
+						59000,100000,
+						55000,100000)
 
 	colorZone = Zone():setColor(255, 0, 0)
-	colorZone:setPoints(44000,-100000,
+	colorZone:setPoints(59000,-100000,
 						200000,-100000,
 						200000,100000,
-						44000,100000)
+						59000,100000)
 
 
 	x, y = odysseus:getPosition()
@@ -155,6 +152,8 @@ starcaller_launched = 0
   addGMFunction("Allow Starcaller", allow_starcaller_prep)
 
 	plotZ = delayChecks
+
+  odysseus:addToShipLog("EVA sector scanning alarm. Anomalous radiation field detected at heading 90.", "Red")
 
 end
 

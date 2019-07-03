@@ -83,7 +83,8 @@ model:setMesh("Machine_Mothership.obj")
 model:setTexture("Mothership_diffuse2.png")
 model:setIllumination("Mothership_emission_ok.png")
 model:setScale(300)
-model:setRadius(600)
+model:setRadius(4600)
+
 
 
 
