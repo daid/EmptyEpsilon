@@ -1041,6 +1041,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     switch(command)
     {
     case CMD_TARGET_ROTATION:
+        turnSpeed = 0;
         packet >> target_rotation;
         break;
     case CMD_TURN_SPEED:
