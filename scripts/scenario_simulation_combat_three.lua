@@ -20,48 +20,47 @@ function init()
 
 	simulation03 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(0, -500)
 	simulation03:setCallSign("Sim03"):setAutoCoolant(true)
-		
 
-	CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT1"):setPosition(10000, -2000):orderRoaming()
 
-if getScenarioVariation() == "3-2-0-0" then
-	CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT1"):setPosition(10000, -2000):orderRoaming()
-	CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT1"):setPosition(10000, -2500):orderRoaming()
-end
+	CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT1"):setPosition(20000, 0):orderRoaming()
 
-if getScenarioVariation() == "3-3-0-0" then
-	CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT1"):setPosition(10000, -2000):orderRoaming()
-	CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT1"):setPosition(10000, -2500):orderRoaming()
-	CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT1"):setPosition(10000, -3000):orderRoaming()
-end
+	if getScenarioVariation() == "3-2-0-0" then
+		CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT1"):setPosition(20000, 0):orderRoaming()
+		CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT2"):setPosition(20000, -2500):orderRoaming()
+	end
 
-if getScenarioVariation() == "3-5-0-0" then
-	CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT1"):setPosition(10000, -2000):orderRoaming()
-	CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT1"):setPosition(10000, -2500):orderRoaming()
-	CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT1"):setPosition(10000, -3000):orderRoaming()
-	CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT1"):setPosition(10000, -3500):orderRoaming()
-	CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT1"):setPosition(9500, -3000):orderRoaming()
-end
+	if getScenarioVariation() == "3-3-0-0" then
+		CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT1"):setPosition(22000, 0):orderRoaming()
+		CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT2"):setPosition(20000, -2500):orderRoaming()
+		CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT3"):setPosition(22000, 2500):orderRoaming()
+	end
 
-if getScenarioVariation() == "3-0-1-0" then
-	CpuShip():setFaction("Machines"):setTemplate("Cruiser Reaper"):setCallSign("CRU1"):setPosition(10000, -2000):orderRoaming()
-end
+	if getScenarioVariation() == "3-5-0-0" then
+		CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT1"):setPosition(26000, 0):orderRoaming()
+		CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT2"):setPosition(23000, -2500):orderRoaming()
+		CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT3"):setPosition(20000, 2500):orderRoaming()
+		CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT4"):setPosition(23000, -5000):orderRoaming()
+		CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT5"):setPosition(26000, 5000):orderRoaming()
+	end
 
-if getScenarioVariation() == "3-0-0-1" then
-	CpuShip():setFaction("Machines"):setTemplate("Frigate Stinger"):setCallSign("FRI1"):setPosition(10000, -2500):orderRoaming()
-end
+	if getScenarioVariation() == "3-0-1-0" then
+		CpuShip():setFaction("Machines"):setTemplate("Frigate Stinger"):setCallSign("FRI1"):setPosition(20000, 0):orderRoaming()
+	end
 
-if getScenarioVariation() == "3-1-1-0" then
-	CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT1"):setPosition(10000, -2000):orderRoaming()
-	CpuShip():setFaction("Machines"):setTemplate("Cruiser Reaper"):setCallSign("CRU1"):setPosition(10000, -2500):orderRoaming()
-end
+	if getScenarioVariation() == "3-0-0-1" then
+		CpuShip():setFaction("Machines"):setTemplate("Cruiser Reaper"):setCallSign("CRU1"):setPosition(20000, 0):orderRoaming()
+	end
 
-if getScenarioVariation() == "3-1-0-1" then
-	CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT1"):setPosition(10000, -2000):orderRoaming()
-	CpuShip():setFaction("Machines"):setTemplate("Frigate Stinger"):setCallSign("FRI1"):setPosition(10000, -2500):orderRoaming()
-end
+	if getScenarioVariation() == "3-1-1-0" then
+		CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT1"):setPosition(20000, 0):orderRoaming()
+		CpuShip():setFaction("Machines"):setTemplate("Frigate Stinger"):setCallSign("FRI1"):setPosition(20000, -2500):orderRoaming()
+	end
 
-	addGMFunction("Reset scenario", resetScen)
+	if getScenarioVariation() == "3-1-0-1" then
+		CpuShip():setFaction("Machines"):setTemplate("Fighter Predator"):setCallSign("FGT1"):setPosition(20000, 0):orderRoaming()
+		CpuShip():setFaction("Machines"):setTemplate("Cruiser Reaper"):setCallSign("CRU1"):setPosition(20000, -2500):orderRoaming()
+	end
+
 
 end
 
