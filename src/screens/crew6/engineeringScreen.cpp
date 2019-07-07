@@ -12,6 +12,7 @@
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_slider.h"
 #include "gui/gui2_progressbar.h"
+#include "gui/gui2_progressslider.h"
 #include "gui/gui2_arrow.h"
 #include "gui/gui2_image.h"
 #include "gui/gui2_panel.h"
@@ -63,9 +64,15 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
         info.heat_arrow->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         info.heat_icon = new GuiImage(info.heat_bar, "", "gui/icons/status_overheat");
         info.heat_icon->setColor(colorConfig.overlay_overheating)->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
-        info.power_bar = new GuiProgressbar(info.layout, id + "_POWER", 0.0, 3.0, 0.0);
+        info.power_bar = new GuiProgressSlider(info.layout, id + "_POWER", 0.0, 3.0, 0.0, [this,n](float value){
+            if (my_spaceship)
+                my_spaceship->commandSetSystemPowerRequest(ESystem(n), value);
+        });
         info.power_bar->setColor(sf::Color(192, 192, 32, 128))->setSize(100, GuiElement::GuiSizeMax);
-        info.coolant_bar = new GuiProgressbar(info.layout, id + "_COOLANT", 0.0, 10.0, 0.0);
+        info.coolant_bar = new GuiProgressSlider(info.layout, id + "_COOLANT", 0.0, 10.0, 0.0, [this,n](float value){
+            if (my_spaceship)
+                my_spaceship->commandSetSystemCoolantRequest(ESystem(n), value);
+        });
         info.coolant_bar->setColor(sf::Color(32, 128, 128, 128))->setSize(100, GuiElement::GuiSizeMax);
         if (!gameGlobalInfo->use_system_damage){
             info.damage_bar->hide();
