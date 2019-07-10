@@ -1,6 +1,10 @@
 #include "joystickConfig.h"
 #include "preferenceManager.h"
 #include "shipTemplate.h"
+#include <regex>
+#include <string>
+
+#define ANY_JOYSTICK (unsigned int) -1
 
 JoystickConfig joystick;
 
@@ -51,7 +55,7 @@ std::vector<AxisAction> JoystickConfig::getAxisAction(unsigned int joystickId, s
     {
         for(AxisConfigItem& item : cat.axes)
         {
-            if (item.axis == axis)
+            if ((item.joystickId == joystickId || item.joystickId == ANY_JOYSTICK)&& item.axis == axis)
             {
                 float value = item.reversed? position / -100 : position / 100;
                 actions.emplace_back(cat.key, item.key, value);
@@ -115,20 +119,32 @@ AxisConfigItem::AxisConfigItem(string key, std::tuple<string, string> value)
     this->value = value;
     defined = false;
     reversed = false;
+    joystickId = ANY_JOYSTICK;
 }
 
+std::regex joystickIdExpression ("\\[([0-7])\\]");
+
 void AxisConfigItem::load(string key_config)
-{
-    if (key_config.startswith("-")){
-        reversed = true;
-        key_config = key_config.substr(1);
-    }
-    for(auto key_name : sfml_axis_names) {
-        if (key_name.first == key_config)
-        {
-            axis = key_name.second;
-            defined = true;
-            break;
+{    
+    std::smatch matches;
+    for(string& config : key_config.split(";"))
+    {
+        if (std::regex_match(config, matches, joystickIdExpression)) {
+            joystickId = std::stoi(matches[1]);
+        } else {
+            if (config.startswith("-")){
+                reversed = true;
+                config = config.substr(1);
+            }
+            for(auto key_name : sfml_axis_names) {
+                if (key_name.first == config)
+                {
+                    axis = key_name.second;
+                    
+                    defined = true;
+                    break;
+                }
+            }
         }
     }
 }
