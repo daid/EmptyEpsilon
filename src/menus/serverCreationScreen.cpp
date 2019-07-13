@@ -94,8 +94,8 @@ ServerCreationScreen::ServerCreationScreen()
     (new GuiLabel(row, "RADAR_LABEL", "Radar range: ", 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiSelector(row, "RADAR_SELECT", [](int index, string value) {
         gameGlobalInfo->long_range_radar_range = index * 5000 + 10000;
-//    }))->setOptions({"10U", "15U", "20U", "25U", "30U", "35U", "40U", "45U", "50U"})->setSelectionIndex((gameGlobalInfo->long_range_radar_range - 10000.0) / 5000.0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    }))->setOptions({"10U", "15U", "20U", "25U", "30U", "35U", "40U", "45U", "50U", "55U", "60U", "65U", "70U", "75U", "80U", "85U", "90U", "95U", "100U"})->setSelectionIndex((gameGlobalInfo->long_range_radar_range - 10000.0) / 5000.0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    }))->setOptions({"10U", "15U", "20U", "25U", "30U", "35U", "40U", "45U", "50U"})->setSelectionIndex((gameGlobalInfo->long_range_radar_range - 10000.0) / 5000.0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
 
     // Main screen section.
     (new GuiLabel(left_panel, "MAIN_SCREEN_LABEL", "Main screen options", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
