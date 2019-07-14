@@ -94,7 +94,7 @@ void BeamEffect::update(float delta)
     if (target)
         targetLocation = target->getPosition() + sf::Vector2f(targetOffset.x, targetOffset.y);
 
-    if (delta > 0 && lifetime == 1.0)
+    if (source && delta > 0 && lifetime == 1.0)
     {
         float volume = 50.0f + (beam_fire_sound_power * 75.0f);
         float pitch = (1.0f / beam_fire_sound_power) + random(-0.1f, 0.1f);

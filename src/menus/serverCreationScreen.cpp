@@ -58,7 +58,7 @@ ServerCreationScreen::ServerCreationScreen()
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiLabel(row, "PASSWORD_LABEL", "Server password: ", 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
-    (new GuiTextEntry(row, "SERVER_PASSWORD", ""))->callback([](string text){game_server->setPassword(text);})->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiTextEntry(row, "SERVER_PASSWORD", ""))->callback([](string text){game_server->setPassword(text.upper());})->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Server IP row.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);

@@ -704,7 +704,7 @@ bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)
 
 void SpaceShip::collide(Collisionable* other, float force)
 {
-    if (docking_state == DS_Docking)
+    if (docking_state == DS_Docking && fabs(sf::angleDifference(target_rotation, getRotation())) < 10.0)
     {
         P<SpaceObject> dock_object = P<Collisionable>(other);
         if (dock_object == docking_target)
