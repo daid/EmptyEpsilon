@@ -213,12 +213,6 @@ void JoystickMappable::handleJoystickAxis(unsigned int joystickId, sf::Joystick:
     }
 }
 
-void JoystickMappable::handleKeyPress(sf::Event::KeyEvent key, int unicode)
-{
-    for(HotkeyResult& result : hotkeys.getHotkey(key)){
-        onHotkey(result);
-    }
-}
 void JoystickMappable::handleJoystickButton(unsigned int joystickId, unsigned int button, bool state){
     if (state){
         for(HotkeyResult& action : joystick.getButtonAction(joystickId, button)){
