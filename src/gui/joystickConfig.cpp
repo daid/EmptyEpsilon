@@ -6,6 +6,9 @@
 
 #define ANY_JOYSTICK (unsigned int) -1
 
+std::regex joystickIdExpression ("\\[J([0-7])\\]"); // matches [J0] - [J7] and reference the digit to the first group
+std::regex buttonIdExpression ("\\[B([0-9]|[12][0-9]|3[0-1])\\]"); // matches [B0] - [B31] and reference the digit to the first group
+
 JoystickConfig joystick;
 
 JoystickConfig::JoystickConfig()
@@ -46,6 +49,29 @@ void JoystickConfig::load()
             item.load(key_config);
         }
     }
+    for(HotkeyConfigCategory& cat : hotkeys.categories)
+    {
+        JoystickConfigCategory& categoryToAdd = getCategory(cat.key, cat.name);
+        for(HotkeyConfigItem& item : cat.hotkeys)
+        {
+            ButtonConfigItem buttonConfig(item.key, item.value);
+            string key_config = PreferencesManager::get(std::string("HOTKEY.") + cat.key + "." + item.key, std::get<1>(item.value));
+            std::smatch matches;
+            bool defined = false;
+            for(string& config : key_config.split(";"))
+            {
+                if (std::regex_match(config, matches, joystickIdExpression)) {
+                    buttonConfig.joystickId = std::stoi(matches[1]);
+                } else if (std::regex_match(config, matches, buttonIdExpression)) {
+                    buttonConfig.button = std::stoi(matches[1]);
+                    defined = true;
+                }
+            }
+            if (defined){
+                categoryToAdd.buttons.emplace_back(buttonConfig);
+            }
+        }
+    }
 }
 
 std::vector<AxisAction> JoystickConfig::getAxisAction(unsigned int joystickId, sf::Joystick::Axis axis, float position)
@@ -64,12 +90,39 @@ std::vector<AxisAction> JoystickConfig::getAxisAction(unsigned int joystickId, s
     }
     return actions;
 }
+std::vector<HotkeyResult> JoystickConfig::getButtonAction(unsigned int joystickId, unsigned int button)
+{
+    std::vector<HotkeyResult> actions;
+    for(JoystickConfigCategory& cat : categories)
+    {
+        for(ButtonConfigItem& item : cat.buttons)
+        {
+            if ((item.joystickId == joystickId || item.joystickId == ANY_JOYSTICK)&& item.button == button)
+            {
+                actions.emplace_back(cat.key, item.key);
+            }
+        }
+    }
+    return actions;
+}
 
 void JoystickConfig::newCategory(string key, string name)
 {
     categories.emplace_back();
     categories.back().key = key;
     categories.back().name = name;
+}
+
+JoystickConfigCategory& JoystickConfig::getCategory(string key, string name)
+{
+    for(JoystickConfigCategory& cat : categories)
+    {
+        if(cat.key == key && cat.name == name){
+            return cat;
+        }
+    }
+    newCategory(key, name);
+    return categories.back();
 }
 
 void JoystickConfig::newAxis(string key, std::tuple<string, string> value)
@@ -113,6 +166,13 @@ std::vector<std::pair<string, string>> JoystickConfig::listJoystickByCategory(st
     return ret;
 }
 
+ButtonConfigItem::ButtonConfigItem(string key, std::tuple<string, string> value)
+{
+    this->key = key;
+    this->value = value;
+    joystickId = ANY_JOYSTICK;
+}
+
 AxisConfigItem::AxisConfigItem(string key, std::tuple<string, string> value)
 {
     this->key = key;
@@ -121,8 +181,6 @@ AxisConfigItem::AxisConfigItem(string key, std::tuple<string, string> value)
     reversed = false;
     joystickId = ANY_JOYSTICK;
 }
-
-std::regex joystickIdExpression ("\\[([0-7])\\]");
 
 void AxisConfigItem::load(string key_config)
 {    
@@ -154,5 +212,17 @@ void JoystickMappable::handleJoystickAxis(unsigned int joystickId, sf::Joystick:
         onJoystickAxis(action);
     }
 }
+
+void JoystickMappable::handleKeyPress(sf::Event::KeyEvent key, int unicode)
+{
+    for(HotkeyResult& result : hotkeys.getHotkey(key)){
+        onHotkey(result);
+    }
+}
 void JoystickMappable::handleJoystickButton(unsigned int joystickId, unsigned int button, bool state){
+    if (state){
+        for(HotkeyResult& action : joystick.getButtonAction(joystickId, button)){
+            onHotkey(action);
+        }
+    }
 }
