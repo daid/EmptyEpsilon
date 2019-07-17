@@ -1,8 +1,7 @@
 #include "gui2_progressslider.h"
 
 GuiProgressSlider::GuiProgressSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
-: GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func), color(sf::Color(255, 255, 255, 64)), drawBackground(true)
-
+: GuiBasicSlider(owner, id, min_value, max_value, start_value, func), color(sf::Color(255, 255, 255, 64)), drawBackground(true)
 {
 }
 
@@ -85,36 +84,4 @@ void GuiProgressSlider::onMouseDrag(sf::Vector2f position)
 
 void GuiProgressSlider::onMouseUp(sf::Vector2f position)
 {
-}
-
-GuiProgressSlider* GuiProgressSlider::setValue(float value)
-{
-    if (min_value < max_value)
-    {
-        if (value < min_value)
-            value = min_value;
-        if (value > max_value)
-            value = max_value;
-    }else{
-        if (value > min_value)
-            value = min_value;
-        if (value < max_value)
-            value = max_value;
-    }
-    this->value = value;
-    return this;
-}
-
-GuiProgressSlider* GuiProgressSlider::setRange(float min, float max)
-{
-    this->min_value = min;
-    this->max_value = max;
-    setValue(this->value);
-    return this;
-}
-
-
-float GuiProgressSlider::getValue() const
-{
-    return value;
 }
