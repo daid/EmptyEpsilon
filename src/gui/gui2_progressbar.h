@@ -14,7 +14,7 @@ private:
 
     string text;
 public:
-    GuiProgressbar(GuiContainer* owner, string id, float min_value, float max_value, float value);
+    GuiProgressbar(GuiContainer* owner, string id, float min_value, float max_value, float start_value);
 
     virtual void onDraw(sf::RenderTarget& window);
 
