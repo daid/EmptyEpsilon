@@ -4,25 +4,14 @@
 
 function init()
 
-      odysseus = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Corvette C743")
-	odysseus:setCallSign("ESS Odysseus"):setPosition(0, 0):setCanBeDestroyed(false)
+  for n=1,100 do
+    Asteroid():setPosition(random(-100000, 100000), random(-100000, 100000)):setSize(random(100, 500))
+    VisualAsteroid():setPosition(random(-100000, 190000), random(-100000, 100000)):setSize(random(100, 500))
+  end
 
-
-	polaris_approved = 0
-
-        for n=1,100 do
-
-			Asteroid():setPosition(random(-100000, 100000), random(-100000, 100000)):setSize(random(100, 500))
-
-			VisualAsteroid():setPosition(random(-100000, 190000), random(-100000, 100000)):setSize(random(100, 500))
-
-        end
-
-		for n=1,10 do
-
-			Nebula():setPosition(random(-100000, 100000), random(-100000, 100000))
-
-        end
+  for n=1,10 do
+    Nebula():setPosition(random(-100000, 100000), random(-100000, 100000))
+  end
 
 	x, y = odysseus:getPosition()
 
@@ -83,32 +72,11 @@ function init()
 	starfall = CpuShip():setFaction("Corporate owned"):setTemplate("Cruiser C243"):setPosition(x + random(-50000, 50000), y + random(-50000, 50000)):orderFlyFormation(aurora, -3500, 5500):setScannedByFaction("Corporate owned", true):setScannedByFaction("Faith of the High Science", true):setScannedByFaction("Government owned", true):setScannedByFaction("Unregistered", true):setCallSign("OSS Starfall"):setScannedByFaction("EOC Starfleet", true):setCanBeDestroyed(false)
 
 
-	 addGMFunction("EOC orders", eoc_orders)
-
-
-	addGMFunction("Fighter launchers", fighter_launchers)
-
-addGMFunction("Destroy ESS polaris", confirm_polaris)
-
-
+	addGMFunction("EOC orders", eoc_orders)
+  addGMFunction("Destroy ESS polaris", confirm_polaris)
 	addGMFunction("Change scenario to 09", changeScenarioPrep)
 
-  addGMFunction("Allow ESSODY18", allow_essody18_prep)
-  addGMFunction("Allow ESSODY23", allow_essody23_prep)
-  addGMFunction("Allow ESSODY36", allow_essody36_prep)
-
-  	addGMFunction("Enemy north", wavenorth)
-  	addGMFunction("Enemy east", waveeast)
-  	addGMFunction("Enemy south", wavesouth)
-  	addGMFunction("Enemy west", wavewest)
-
-  	addGMFunction("Allow ESSODY18", allow_essody18_prep)
-  	addGMFunction("Allow ESSODY23", allow_essody23_prep)
-  	addGMFunction("Allow ESSODY36", allow_essody36_prep)
-
-  	addGMFunction("Allow Starcaller", allow_starcaller_prep)
-
-  end
+end
 
 function changeScenarioPrep()
 
@@ -133,12 +101,9 @@ end
 
 
 function eoc_orders()
-
 	x, y = odysseus:getPosition()
 
 -- Fleet to battle
-
-x, y = odysseus:getPosition()
 
 aurora:orderRoaming(x + random(-20000, 25000), y + random(-60000,-25000))
 taurus:orderRoaming(x + random(-20000, 25000), y + random(-60000,-25000))
@@ -162,548 +127,31 @@ halo:orderRoaming(x + random(-20000, 25000), y + random(-60000,-25000))
 	whirlwind:orderFlyTowardsBlind(x + 45000, y + 35000)
 	memory:orderFlyTowardsBlind(x + 40000, y + 42000)
 	cyclone:orderFlyTowardsBlind(x + 43000, y + 40000)
-
 	ravenger:orderFlyTowardsBlind(x + -45000, y + 30000)
 	spectrum:orderFlyTowardsBlind(x + -40000, y + 30000)
 	polaris:orderFlyTowardsBlind(x + -45000, y + 35000)
 	immortal:orderFlyTowardsBlind(x + -39000, y + 31000)
 	starfall:orderFlyTowardsBlind(x + -40000, y + 30000)
-
-
 end
 
 
-function wavenorth()
-
-	x, y = odysseus:getPosition()
-	wave_north(x, y, odysseus)
-
-
-end
-
-function waveeast()
-
-	x, y = odysseus:getPosition()
-	wave_east(x, y, odysseus)
+function confirm_polaris()
+	removeGMFunction("Destroy ESS polaris")
+	addGMFunction("Cancel destruction", cancel_polaris)
+	addGMFunction("Confirm destruction", destroy_polaris)
 
 end
 
-function wavesouth()
-
-	x, y = odysseus:getPosition()
-	wave_south(x, y, odysseus)
-
-end
-
-function wavewest()
-
-	x, y = odysseus:getPosition()
-	wave_west(x, y, odysseus)
-
+function cancel_polaris()
+	addGMFunction("Destroy ESS polaris", confirm_polaris)
+	removeGMFunction("Cancel destruction")
+	removeGMFunction("Confirm destruction")
 end
 
 
-
-
-
-
-	function fighter_launchers()
-		addGMFunction("Aurora Fighters", function()
-
-		 x, y = aurora:getPosition()
-
-			for n=1,69 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
-			end
-		removeGMFunction("Aurora Fighters")
-		end)
-
-		addGMFunction("Halo Fighters", function()
-
-		x, y = halo:getPosition()
-
-			for n=1,51 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
-			end
-		removeGMFunction("Halo Fighters")
-		end)
-
-		addGMFunction("Taurus Fighters", function()
-
-		x, y = taurus:getPosition()
-
-			for n=1,10 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
-			end
-		removeGMFunction("Taurus Fighters")
-		end)
-
-		addGMFunction("Envoy Fighters", function()
-
-		x, y = envoy:getPosition()
-
-			for n=1,4 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
-			end
-		removeGMFunction("Envoy Fighters")
-		end)
-
-		addGMFunction("Valkyrie Fighters", function()
-
-		x, y = valkyrie:getPosition()
-
-			for n=1,9 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
-			end
-		removeGMFunction("Valkyrie Fighters")
-		end)
-
-		addGMFunction("Harbringer Fighters", function()
-
-		x, y = harbringer:getPosition()
-
-			for n=1,16 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
-			end
-		removeGMFunction("Harbringer Fighters")
-		end)
-
-		addGMFunction("Inferno Fighters", function()
-
-		x, y = inferno:getPosition()
-
-			for n=1,27 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
-			end
-		removeGMFunction("Inferno Fighters")
-		end)
-
-		addGMFunction("Valor Fighters", function()
-
-		x, y = valor:getPosition()
-
-			for n=1,20 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
-			end
-		removeGMFunction("Valor Fighters")
-		end)
-
-		addGMFunction("Warrior Fighters", function()
-
-		x, y = warrior:getPosition()
-
-			for n=1,18 do
-				CpuShip():setFaction("EOC Starfleet"):setTemplate("Fighter F975"):orderDefendLocation(x, y):setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
-			end
-		removeGMFunction("Warrior Fighters")
-		end)
-
-		addGMFunction("Hide Fighter launchers", function()
-			removeGMFunction("Aurora Fighters")
-			removeGMFunction("Halo Fighters")
-			removeGMFunction("Taurus Fighters")
-			removeGMFunction("Envoy Fighters")
-			removeGMFunction("Valkyrie Fighters")
-			removeGMFunction("Harbringer Fighters")
-			removeGMFunction("Inferno Fighters")
-			removeGMFunction("Valor Fighters")
-			removeGMFunction("Warrior Fighters")
-			removeGMFunction("Hide Fighter launchers")
-			addGMFunction("Fighter launchers", fighter_launchers)
-		end)
-
-
-	removeGMFunction("Fighter launchers")
-	end
-
-
-  -- FIGHTER AND STARCALLER LAUNCHING
-  function allow_starcaller_prep()
-  	addGMFunction("Cancel Starcaller", allow_starcaller_cancel)
-  	addGMFunction("Confirm Starcaller", allow_starcaller_confirm)
-  	removeGMFunction("Allow Starcaller")
-  end
-
-  function allow_starcaller_cancel()
-  	removeGMFunction("Cancel Starcaller")
-  	removeGMFunction("Confirm Starcaller")
-  	addGMFunction("Allow Starcaller", allow_starcaller_prep)
-  end
-
-  function allow_starcaller_confirm()
-  	removeGMFunction("Cancel Starcaller")
-  	removeGMFunction("Confirm Starcaller")
-  	odysseus:addCustomButton("Relay", "Launch Starcaller", "Launch Starcaller", launch_starcaller_prep)
-  end
-
-  function allow_essody18_prep()
-  	addGMFunction("Cancel ESSODY18", allow_essody18_cancel)
-  	addGMFunction("Confirm ESSODY18", allow_essody18_confirm)
-  	removeGMFunction("Allow ESSODY18")
-  end
-
-
-  function allow_essody18_cancel()
-  	removeGMFunction("Cancel ESSODY18")
-  	removeGMFunction("Confirm ESSODY18")
-  	addGMFunction("Allow ESSODY18", allow_essody18)
-  end
-
-  function allow_essody18_confirm()
-  	removeGMFunction("Cancel ESSODY18")
-  	removeGMFunction("Confirm ESSODY18")
-  	odysseus:addCustomButton("Relay", "Launch ESSODY18", "Launch ESSODY18", launch_essody18_prep)
-  end
-
-  function allow_essody18()
-  	odysseus:addCustomButton("Relay", "Launch ESSODY18", "Launch ESSODY18", launch_essody18_prep)
-  	removeGMFunction("Allow ESSODY18")
-  end
-
-  function launch_essody18_prep()
-  	odysseus:removeCustom("Launch ESSODY18")
-  	odysseus:addCustomButton("Relay", "Cancel ESSODY18 launch", "Cancel ESSODY18 launch", launch_essody18_cancel)
-  	odysseus:addCustomButton("Relay", "Confirm ESSODY18 launch", "Confirm ESSODY18 launch", launch_essody18_confirm)
-  end
-
-  function launch_essody18_cancel()
-  	odysseus:addCustomButton("Relay", "Launch ESSODY18", "Launch ESSODY18", launch_essody18_prep)
-  	odysseus:removeCustom("Cancel ESSODY18 launch")
-  	odysseus:removeCustom("Confirm ESSODY18 launch")
-  end
-
-  function launch_essody18_confirm()
-  	odysseus:removeCustom("Cancel ESSODY18 launch")
-  	odysseus:removeCustom("Confirm ESSODY18 launch")
-  	launch_essody18()
-  end
-
-
-  function allow_essody23_prep()
-  	addGMFunction("Cancel ESSODY23", allow_essody23_cancel)
-  	addGMFunction("Confirm ESSODY23", allow_essody23_confirm)
-  	removeGMFunction("Allow ESSODY23")
-  end
-
-
-  function allow_essody23_cancel()
-  	removeGMFunction("Cancel ESSODY23")
-  	removeGMFunction("Confirm ESSODY23")
-  	addGMFunction("Allow ESSODY23", allow_essody23)
-  end
-
-  function allow_essody23_confirm()
-  	removeGMFunction("Cancel ESSODY23")
-  	removeGMFunction("Confirm ESSODY23")
-  	odysseus:addCustomButton("Relay", "Launch ESSODY23", "Launch ESSODY23", launch_essody23_prep)
-  end
-
-  function allow_essody23()
-  	odysseus:addCustomButton("Relay", "Launch ESSODY23", "Launch ESSODY23", launch_essody23_prep)
-  	removeGMFunction("Allow ESSODY23")
-  end
-
-  function launch_essody23_prep()
-  	odysseus:removeCustom("Launch ESSODY23")
-  	odysseus:addCustomButton("Relay", "Cancel ESSODY23 launch", "Cancel ESSODY23 launch", launch_essody23_cancel)
-  	odysseus:addCustomButton("Relay", "Confirm ESSODY23 launch", "Confirm ESSODY23 launch", launch_essody23_confirm)
-  end
-
-  function launch_essody23_cancel()
-  	odysseus:addCustomButton("Relay", "Launch ESSODY23", "Launch ESSODY23", launch_essody23_prep)
-  	odysseus:removeCustom("Cancel ESSODY23 launch")
-  	odysseus:removeCustom("Confirm ESSODY23 launch")
-  end
-
-  function launch_essody23_confirm()
-  	odysseus:removeCustom("Cancel ESSODY23 launch")
-  	odysseus:removeCustom("Confirm ESSODY23 launch")
-  	launch_essody23()
-  end
-
-  function allow_essody36_prep()
-  	addGMFunction("Cancel ESSODY36", allow_essody36_cancel)
-  	addGMFunction("Confirm ESSODY36", allow_essody36_confirm)
-  	removeGMFunction("Allow ESSODY36")
-  end
-
-
-  function allow_essody36_cancel()
-  	removeGMFunction("Cancel ESSODY36")
-  	removeGMFunction("Confirm ESSODY36")
-  	addGMFunction("Allow ESSODY36", allow_essody36)
-  end
-
-  function allow_essody36_confirm()
-  	removeGMFunction("Cancel ESSODY36")
-  	removeGMFunction("Confirm ESSODY36")
-  	odysseus:addCustomButton("Relay", "Launch ESSODY36", "Launch ESSODY36", launch_essody36_prep)
-  end
-
-  function allow_essody36()
-  	odysseus:addCustomButton("Relay", "Launch ESSODY36", "Launch ESSODY36", launch_essody36_prep)
-  	removeGMFunction("Allow ESSODY36")
-  end
-
-  function launch_essody36_prep()
-  	odysseus:removeCustom("Launch ESSODY36")
-  	odysseus:addCustomButton("Relay", "Cancel ESSODY36 launch", "Cancel ESSODY36 launch", launch_essody36_cancel)
-  	odysseus:addCustomButton("Relay", "Confirm ESSODY36 launch", "Confirm ESSODY36 launch", launch_essody36_confirm)
-  end
-
-  function launch_essody36_cancel()
-  	odysseus:addCustomButton("Relay", "Launch ESSODY36", "Launch ESSODY36", launch_essody36_prep)
-  	odysseus:removeCustom("Cancel ESSODY36 launch")
-  	odysseus:removeCustom("Confirm ESSODY36 launch")
-  end
-
-  function launch_essody36_confirm()
-  	odysseus:removeCustom("Cancel ESSODY36 launch")
-  	odysseus:removeCustom("Confirm ESSODY36 launch")
-  	launch_essody36()
-  end
-
-
-  function allow_starcaller_prep()
-  	addGMFunction("Cancel Starcaller", allow_starcaller_cancel)
-  	addGMFunction("Confirm Starcaller", allow_starcaller_confirm)
-  	removeGMFunction("Allow Starcaller")
-  end
-
-
-  function allow_starcaller_cancel()
-  	removeGMFunction("Cancel Starcaller")
-  	removeGMFunction("Confirm Starcaller")
-  	addGMFunction("Allow Starcaller", allow_starcaller_prep)
-  end
-
-  function allow_starcaller_confirm()
-  	removeGMFunction("Cancel Starcaller")
-  	removeGMFunction("Confirm Starcaller")
-  	odysseus:addCustomButton("Relay", "Launch Starcaller", "Launch Starcaller", launch_starcaller_prep)
-  end
-
-  function allow_starcaller()
-  	odysseus:addCustomButton("Relay", "Launch Starcaller", "Launch Starcaller", launch_starcaller_prep)
-  	removeGMFunction("Allow Starcaller")
-  end
-
-  function launch_starcaller_prep()
-  	odysseus:removeCustom("Launch Starcaller")
-  	odysseus:addCustomButton("Relay", "Cancel Starcaller launch", "Cancel Starcaller launch", launch_starcaller_cancel)
-  	odysseus:addCustomButton("Relay", "Confirm Starcaller launch", "Confirm Starcaller launch", launch_starcaller_confirm)
-  end
-
-  function launch_starcaller_cancel()
-  	odysseus:addCustomButton("Relay", "Launch Starcaller", "Launch Starcaller", launch_starcaller_prep)
-  	odysseus:removeCustom("Cancel Starcaller launch")
-  	odysseus:removeCustom("Confirm Starcaller launch")
-  end
-
-  function launch_starcaller_confirm()
-  	odysseus:removeCustom("Cancel Starcaller launch")
-  	odysseus:removeCustom("Confirm Starcaller launch")
-  	launch_starcaller()
-  end
-
-
-  -- Player launched functions for fighters and starcaller
-  	function launch_starcaller()
-
-  x, y = odysseus:getPosition()
-
-  		starcaller = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Scoutship S392"):setPosition(x - 400, y + 400):setCallSign("ESS Starcaller"):setAutoCoolant(true)
-
-  		odysseus:removeCustom("Launch Starcaller")
-
-  		starcaller:addCustomButton("Helms", "Dock to Odysseus", "Dock to Odysseus", dock_starcaller)
-
-  	end
-
-  	function dock_starcaller()
-  		x, y = starcaller:getPosition()
-
-  		dockable = false
-
-  		for _, obj in ipairs(getObjectsInRadius(x, y, 800)) do
-
-  			callSign = obj:getCallSign()
-
-  			if callSign == "ESS Odysseus" then
-  				dockable = true
-  			end
-
-  		end
-
-  		if dockable == true then
-  			starcaller:destroy()
-  			odysseus:addCustomButton("Relay", "Launch Starcaller", "Launch Starcaller", launch_starcaller_prep)
-  		else
-  			starcaller:addCustomMessage("Helms", "Distance too far. Docking canceled.", "Distance too far. Docking canceled.")
-  		end
-  	end
-
-
-  	function launch_essody18()
-
-  	x, y = odysseus:getPosition()
-
-  		essody18 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(x, y + 300)
-  		essody18:setCallSign("ESSODY18"):setAutoCoolant(true)
-
-  		odysseus:removeCustom("Launch ESSODY18")
-
-  		essody18:addCustomButton("Helms", "Dock to Odysseys", "Dock to Odysseys", dock_essody18)
-
-  	end
-
-  	function dock_essody18()
-
-  		x, y = essody18:getPosition()
-
-  		dockable = false
-
-  		for _, obj in ipairs(getObjectsInRadius(x, y, 800)) do
-
-  			callSign = obj:getCallSign()
-
-  			if callSign == "ESS Odysseus" then
-  				dockable = true
-  			end
-
-  		end
-
-  		if dockable == true then
-  			essody18:destroy()
-
-  				odysseus:addCustomButton("Relay", "Launch ESSODY18", "Launch ESSODY18", launch_essody36)
-  		else
-  			essody18:addCustomMessage("Helms", "Distance too far. Docking canceled.", "Distance too far. Docking canceled.")
-  		end
-
-  	end
-
-
-
-  	function launch_essody23()
-
-  	x, y = odysseus:getPosition()
-
-  		essody23 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(x, y + 200)
-  		essody23:setCallSign("ESSODY23"):setAutoCoolant(true)
-
-  		odysseus:removeCustom("Launch ESSODY23")
-
-  		essody23:addCustomButton("Helms", "Dock to Odysseys", "Dock to Odysseys", dock_essody23)
-  	end
-
-  	function dock_essody23()
-
-  		x, y = essody23:getPosition()
-
-  		dockable = false
-
-  		for _, obj in ipairs(getObjectsInRadius(x, y, 800)) do
-
-  			callSign = obj:getCallSign()
-
-  			if callSign == "ESS Odysseus" then
-  				dockable = true
-  			end
-
-  		end
-
-  		if dockable == true then
-  			essody23:destroy()
-
-  				odysseus:addCustomButton("Relay", "Launch ESSODY23", "Launch ESSODY23", launch_essody23)
-  		else
-  			essody23:addCustomMessage("Helms", "Distance too far. Docking canceled.", "Distance too far. Docking canceled.")
-  		end
-
-  	end
-
-
-
-  	function launch_essody36()
-
-  	x, y = odysseus:getPosition()
-
-  		essody36 = PlayerSpaceship():setFaction("EOC Starfleet"):setTemplate("Fighter F967"):setPosition(x, y + 100)
-  		essody36:setCallSign("ESSODY36"):setAutoCoolant(true)
-
-  		odysseus:removeCustom("Launch ESSODY36")
-  		essody36:addCustomButton("Helms", "Dock to Odysseys", "Dock to Odysseys", dock_essody36)
-
-  	end
-
-  	function dock_essody36()
-
-  		x, y = essody36:getPosition()
-
-  		dockable = false
-
-  		for _, obj in ipairs(getObjectsInRadius(x, y, 800)) do
-
-  			callSign = obj:getCallSign()
-
-  			if callSign == "ESS Odysseus" then
-  				dockable = true
-  			end
-
-  		end
-
-  		if dockable == true then
-  			essody36:destroy()
-
-  				ship:addCustomButton("Relay", "Launch ESSODY36", "Launch ESSODY36", launch_essody36)
-  		else
-  				essody36:addCustomMessage("Helms", "Distance too far. Docking canceled.", "Distance too far. Docking canceled.")
-  		end
-
-
-  	end
-	function confirm_polaris()
-		removeGMFunction("Destroy ESS polaris")
-		addGMFunction("Cancel destruction", cancel_polaris)
-		addGMFunction("Confirm destruction", prepdestroy_polaris)
-
-	end
-
-	function cancel_polaris()
-		addGMFunction("Destroy ESS polaris", confirm_polaris)
-		removeGMFunction("Cancel destruction")
-		removeGMFunction("Confirm destruction")
-	end
-
-	function prepdestroy_polaris()
-		polaris_approved = 1
-		removeGMFunction("Cancel destruction")
-		removeGMFunction("Confirm destruction")
-	end
-
-
-	function destroy_polaris()
-
-		removeGMFunction("Cancel destruction")
-		removeGMFunction("Confirm destruction")
-		x, y = polaris:getPosition()
-		polaris:destroy()
-		polaris_approved = 0
-
-		odysseus:addToShipLog("EVA long range scanning results. ESS Polaris left from scanner range. No jump detected.", "Red")
-
-
-	end
-
-function update(delta)
-	if delta == 0 then
-		return
-		--game paused
-	end
-
-	if polaris_approved > 0 then
-		destroy_polaris()
-	end
-
+function destroy_polaris()
+	removeGMFunction("Cancel destruction")
+	removeGMFunction("Confirm destruction")
+	polaris:destroy()
+	odysseus:addToShipLog("EVA long range scanning results. ESS Polaris left from scanner range. No jump detected.", "Red")
 end
