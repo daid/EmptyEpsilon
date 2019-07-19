@@ -23,9 +23,14 @@ JoystickConfig::JoystickConfig()
     newCategory("WEAPONS", "Weapons");
     newAxis("AIM_MISSILE", std::make_tuple("Turn missile aim", ""));
     
-    // newCategory("ENGINEERING", "Engineering");
-    // newAxis("POWER", std::make_tuple("Change system power", "X"));
-    // newAxis("COOLANT", std::make_tuple("Change system coolant", "Y"));
+    newCategory("ENGINEERING", "Engineering");
+    newAxis("POWER", std::make_tuple("Change power of selected system", ""));
+    newAxis("COOLANT", std::make_tuple("Change coolant of selected system", ""));
+    for(int n=0; n<SYS_COUNT; n++)
+    {
+        newAxis(std::string("POWER_") + getSystemName(ESystem(n)), std::make_tuple(std::string("Change power of ") + getSystemName(ESystem(n)), ""));
+        newAxis(std::string("COOLANT_") + getSystemName(ESystem(n)), std::make_tuple(std::string("Change coolant of ") + getSystemName(ESystem(n)), ""));
+    }
 }
 
 static std::vector<std::pair<string, sf::Joystick::Axis> > sfml_axis_names = {

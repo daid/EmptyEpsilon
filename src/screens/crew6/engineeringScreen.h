@@ -59,6 +59,7 @@ public:
     
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;
+    virtual void onJoystickAxis(AxisAction& axisAction) override;
 };
 
 #endif//ENGINEERING_SCREEN_H
