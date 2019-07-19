@@ -4,10 +4,11 @@
 #include <list>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
+#include "gui/joystickConfig.h"
 
 class GuiElement;
 class HotkeyResult;
-class GuiContainer
+class GuiContainer: public JoystickMappable
 {
 protected:
     std::list<GuiElement*> elements;

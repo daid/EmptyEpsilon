@@ -8,7 +8,7 @@
 class GuiKeyValueDisplay;
 class GuiLabel;
 
-class HelmsScreen : public GuiOverlay, JoystickMappable
+class HelmsScreen : public GuiOverlay
 {
 private:
     GuiOverlay* background_gradient;

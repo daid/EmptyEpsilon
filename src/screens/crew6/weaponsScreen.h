@@ -11,7 +11,7 @@ class GuiKeyValueDisplay;
 class GuiToggleButton;
 class GuiRotationDial;
 
-class WeaponsScreen : public GuiOverlay, JoystickMappable
+class WeaponsScreen : public GuiOverlay
 {
 private:
     GuiOverlay* background_gradient;

@@ -12,7 +12,7 @@ class GuiKeyValueDisplay;
 class GuiToggleButton;
 class GuiRotationDial;
 
-class SinglePilotScreen : public GuiOverlay, JoystickMappable
+class SinglePilotScreen : public GuiOverlay
 {
 private:
     GuiOverlay* background_gradient;
