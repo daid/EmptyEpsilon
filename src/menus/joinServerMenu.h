@@ -14,6 +14,7 @@ class JoinServerScreen : public GuiCanvas, public Updatable
     GuiLabel* status_label;
     GuiPanel* password_entry_box;
     GuiTextEntry* password_entry;
+    bool password_focused = false;
     
     ServerBrowserMenu::SearchSource source;
 public:
