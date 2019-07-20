@@ -1,6 +1,7 @@
 #include "joystickConfig.h"
 #include "preferenceManager.h"
 #include "shipTemplate.h"
+#include "gameGlobalInfo.h"
 #include <regex>
 #include <string>
 
@@ -23,6 +24,10 @@ JoystickConfig::JoystickConfig()
     newCategory("WEAPONS", "Weapons");
     newAxis("AIM_MISSILE", std::make_tuple("Turn missile aim", ""));
     
+    newCategory("SCIENCE", "Science");
+    for(int n=0; n<EScanningComplexity::SC_MAX; n++)
+        newAxis(std::string("SCAN_PARAM_") + string(n+1), std::make_tuple(std::string("Scanning parameter ") + string(n+1), ""));
+   
     newCategory("ENGINEERING", "Engineering");
     newAxis("POWER", std::make_tuple("Change power of selected system", ""));
     newAxis("COOLANT", std::make_tuple("Change coolant of selected system", ""));

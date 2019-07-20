@@ -3,6 +3,7 @@
 
 #include "gui/gui2_element.h"
 #include "signalQualityIndicator.h"
+#include "gameGlobalInfo.h"
 
 class GuiPanel;
 class GuiLabel;
@@ -12,7 +13,7 @@ class GuiButton;
 class GuiScanningDialog : public GuiElement
 {
 private:
-    static constexpr int max_sliders = 4;
+    static constexpr int max_sliders = EScanningComplexity::SC_MAX;
     static constexpr float lock_delay = 2.0f;
 
     GuiPanel* box;
@@ -30,6 +31,7 @@ public:
     GuiScanningDialog(GuiContainer* owner, string id);
 
     virtual void onDraw(sf::RenderTarget& window);
+    virtual void onJoystickAxis(AxisAction& axisAction) override;
     
     void setupParameters();
     void updateSignal();
