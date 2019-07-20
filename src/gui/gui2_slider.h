@@ -4,7 +4,29 @@
 #include "gui2_element.h"
 #include "gui2_label.h"
 
-class GuiSlider : public GuiElement
+class GuiBasicSlider : public GuiElement
+{
+public:
+    typedef std::function<void(float value)> func_t;
+protected:
+    float min_value;
+    float max_value;
+    float value;
+    func_t func;
+public:
+    GuiBasicSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func);
+
+    virtual void onDraw(sf::RenderTarget& window);
+    virtual bool onMouseDown(sf::Vector2f position);
+    virtual void onMouseDrag(sf::Vector2f position);
+    virtual void onMouseUp(sf::Vector2f position);
+    
+    GuiBasicSlider* setValue(float value);
+    GuiBasicSlider* setRange(float min, float max);
+    float getValue() const;
+};
+
+class GuiSlider : public GuiBasicSlider
 {
 public:
     typedef std::function<void(float value)> func_t;
@@ -14,11 +36,7 @@ protected:
         float value;
         float range;
     };
-    float min_value;
-    float max_value;
-    float value;
     std::vector<TSnapPoint> snap_points;
-    func_t func;
     GuiLabel* overlay_label;
 public:
     GuiSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func);
@@ -28,12 +46,10 @@ public:
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
     
+    GuiSlider* setValueSnapped(float value);
     GuiSlider* clearSnapValues();
     GuiSlider* addSnapValue(float value, float range);
-    GuiSlider* setValue(float value);
-    GuiSlider* setRange(float min, float max);
     GuiSlider* addOverlay();
-    float getValue() const;
 };
 
 class GuiSlider2D : public GuiElement

@@ -191,6 +191,7 @@ set(SOURCES
 	src/gui/gui2_arrowbutton.cpp
 	src/gui/gui2_entrylist.cpp
 	src/gui/gui2_progressbar.cpp
+	src/gui/gui2_progressslider.cpp
 	src/gui/gui2_scrolltext.cpp
 	src/gui/gui2_advancedscrolltext.cpp
 	src/gui/gui2_button.cpp
