@@ -110,17 +110,21 @@ void TacticalScreen::onDraw(sf::RenderTarget& window)
     GuiOverlay::onDraw(window);
 }
 
-void TacticalScreen::onJoystickAxis(AxisAction& axisAction){
+bool TacticalScreen::onJoystickAxis(const AxisAction& axisAction){
     if(my_spaceship){
         if (axisAction.category == "HELMS"){
             if (axisAction.action == "IMPULSE"){
                 my_spaceship->commandImpulse(axisAction.value);  
+                return true;
             } else if (axisAction.action == "ROTATE"){
                 my_spaceship->commandTurnSpeed(axisAction.value);
+                return true;
             } else if (axisAction.action == "STRAFE"){
                 my_spaceship->commandCombatManeuverStrafe(axisAction.value);
+                return true;
             } else if (axisAction.action == "BOOST"){
                 my_spaceship->commandCombatManeuverBoost(axisAction.value);
+                return true;
             }
         }
     }

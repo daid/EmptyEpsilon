@@ -30,7 +30,7 @@ public:
     
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;
-    virtual void onJoystickAxis(AxisAction& axisAction) override;
+    virtual bool onJoystickAxis(const AxisAction& axisAction) override;
 };
 
 #endif//WEAPONS_SCREEN_H

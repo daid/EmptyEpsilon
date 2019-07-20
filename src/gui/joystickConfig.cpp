@@ -216,17 +216,3 @@ void AxisConfigItem::load(string key_config)
         }
     }
 }
-
-void JoystickMappable::handleJoystickAxis(unsigned int joystickId, sf::Joystick::Axis axis, float position){
-    for(AxisAction action : joystick.getAxisAction(joystickId, axis, position)){
-        onJoystickAxis(action);
-    }
-}
-
-void JoystickMappable::handleJoystickButton(unsigned int joystickId, unsigned int button, bool state){
-    if (state){
-        for(HotkeyResult& action : joystick.getButtonAction(joystickId, button)){
-            onHotkey(action);
-        }
-    }
-}

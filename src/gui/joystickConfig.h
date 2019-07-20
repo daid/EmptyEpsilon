@@ -87,13 +87,4 @@ private:
 
 extern JoystickConfig joystick;
 
-class JoystickMappable : private JoystickEventHandler
-{
-    virtual void handleJoystickAxis(unsigned int joystickId, sf::Joystick::Axis axis, float position) override;
-    virtual void handleJoystickButton(unsigned int joystickId, unsigned int button, bool state) override;
-
-    virtual void onJoystickAxis(AxisAction& axisAction){};
-    virtual void onHotkey(const HotkeyResult& key) = 0;
-};
-
 #endif//JOYSTICK_CONFIG_H

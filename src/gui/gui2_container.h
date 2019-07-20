@@ -8,7 +8,8 @@
 
 class GuiElement;
 class HotkeyResult;
-class GuiContainer: public JoystickMappable
+class AxisAction;
+class GuiContainer
 {
 protected:
     std::list<GuiElement*> elements;
@@ -22,7 +23,8 @@ protected:
     virtual void drawDebugElements(sf::FloatRect parent_rect, sf::RenderTarget& window);
     GuiElement* getClickElement(sf::Vector2f mouse_position);
     void forwardKeypressToElements(const HotkeyResult& key);
-    
+    bool forwardJoystickAxisToElements(const AxisAction& axisAction);
+
     friend class GuiElement;
 };
 

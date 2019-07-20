@@ -103,3 +103,19 @@ void GuiContainer::forwardKeypressToElements(const HotkeyResult& key)
         }
     }
 }
+
+bool GuiContainer::forwardJoystickAxisToElements(const AxisAction& axisAction)
+{
+    for(GuiElement* element : elements)
+    {
+        if (element->isVisible())
+        {
+            if (element->isEnabled())
+                if (element->onJoystickAxis(axisAction))
+                    return true;
+            if (element->forwardJoystickAxisToElements(axisAction))
+                return true;
+        }
+    }
+    return false;
+}

@@ -167,18 +167,24 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
         camera_yaw += sf::angleDifference(camera_yaw, target_camera_yaw) * 0.1f;
     }
 }
-
-void SinglePilotScreen::onJoystickAxis(AxisAction& axisAction){
+bool SinglePilotScreen::onJoystickAxis(const AxisAction& axisAction){
     if(my_spaceship){
         if (axisAction.category == "HELMS"){
             if (axisAction.action == "IMPULSE"){
                 my_spaceship->commandImpulse(axisAction.value);  
-            } else if (axisAction.action == "ROTATE"){
+                return true;
+            } 
+            if (axisAction.action == "ROTATE"){
                 my_spaceship->commandTurnSpeed(axisAction.value);
-            } else if (axisAction.action == "STRAFE"){
+                return true;
+            } 
+            if (axisAction.action == "STRAFE"){
                 my_spaceship->commandCombatManeuverStrafe(axisAction.value);
-            } else if (axisAction.action == "BOOST"){
+                return true;
+            } 
+            if (axisAction.action == "BOOST"){
                 my_spaceship->commandCombatManeuverBoost(axisAction.value);
+                return true;
             }
         }
     }

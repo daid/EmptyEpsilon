@@ -79,15 +79,14 @@ void GuiScanningDialog::onDraw(sf::RenderTarget& window)
         }
     }
 }
-
-void GuiScanningDialog::onJoystickAxis(AxisAction& axisAction){
+bool GuiScanningDialog::onJoystickAxis(const AxisAction& axisAction){
     if(my_spaceship){
         if (axisAction.category == "SCIENCE"){
             for(int n=0; n<max_sliders; n++) {
                 if (axisAction.action == std::string("SCAN_PARAM_") + string(n+1)){
                     sliders[n]->setValue((axisAction.value + 1) / 2.0);
                     updateSignal();
-                    break;
+                    return true;
                 }
             }   
         }

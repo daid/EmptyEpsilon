@@ -4,7 +4,7 @@
 #include "engine.h"
 #include "gui2_container.h"
 
-class GuiCanvas : public Renderable, public GuiContainer, public InputEventHandler
+class GuiCanvas : public Renderable, public GuiContainer, public InputEventHandler, private JoystickEventHandler
 {
 private:
     GuiElement* click_element;
@@ -17,7 +17,9 @@ public:
 
     virtual void render(sf::RenderTarget& window);
     virtual void handleKeyPress(sf::Event::KeyEvent key, int unicode);
-    
+    virtual void handleJoystickAxis(unsigned int joystickId, sf::Joystick::Axis axis, float position) override;
+    virtual void handleJoystickButton(unsigned int joystickId, unsigned int button, bool state) override;
+
     virtual void onClick(sf::Vector2f mouse_position);
     virtual void onHotkey(const HotkeyResult& key);
     virtual void onKey(sf::Event::KeyEvent key, int unicode);

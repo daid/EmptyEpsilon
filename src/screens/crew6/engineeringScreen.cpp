@@ -289,16 +289,19 @@ my_spaceship->getShieldDamageFactor(di, my_spaceship->shield_count - 1);
     GuiOverlay::onDraw(window);
 }
 
-void EngineeringScreen::onJoystickAxis(AxisAction& axisAction){
+bool EngineeringScreen::onJoystickAxis(const AxisAction& axisAction){
     if(my_spaceship){
         if (axisAction.category == "ENGINEERING"){
             if (selected_system != SYS_None){
                 if (axisAction.action == "POWER" || axisAction.action == std::string("POWER_") + getSystemName(selected_system)){
                     power_slider->setValue((axisAction.value + 1) * 3.0 / 2.0);
                     my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-                } else if (axisAction.action == "COOLANT" || axisAction.action == std::string("COOLANT_") + getSystemName(selected_system)){
+                    return true;
+                } 
+                if (axisAction.action == "COOLANT" || axisAction.action == std::string("COOLANT_") + getSystemName(selected_system)){
                     coolant_slider->setValue((axisAction.value + 1) * 10.0 / 2.0);
                     my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
+                    return true;
                 } 
             } else {
                 for(int n=0; n<SYS_COUNT; n++)
@@ -306,10 +309,11 @@ void EngineeringScreen::onJoystickAxis(AxisAction& axisAction){
                     ESystem system = ESystem(n);
                     if (axisAction.action == std::string("POWER_") + getSystemName(system)){
                         my_spaceship->commandSetSystemPowerRequest(system, (axisAction.value + 1) * 3.0 / 2.0);
-                        break;
-                    } else if (axisAction.action == std::string("COOLANT_") + getSystemName(system)){
+                        return true;
+                    } 
+                    if (axisAction.action == std::string("COOLANT_") + getSystemName(system)){
                         my_spaceship->commandSetSystemCoolantRequest(system, (axisAction.value + 1) * 10.0 / 2.0);
-                        break;
+                        return true;
                     }
                 }
             }

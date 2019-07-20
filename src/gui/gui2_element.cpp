@@ -38,6 +38,11 @@ void GuiElement::onHotkey(const HotkeyResult& key)
 {
 }
 
+bool GuiElement::onJoystickAxis(const AxisAction& axisAction)
+{
+    return false;
+}
+
 GuiElement* GuiElement::setSize(sf::Vector2f size)
 {
     this->size = size;
