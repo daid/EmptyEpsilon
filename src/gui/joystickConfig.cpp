@@ -91,7 +91,7 @@ std::vector<AxisAction> JoystickConfig::getAxisAction(unsigned int joystickId, s
     {
         for(AxisConfigItem& item : cat.axes)
         {
-            if ((item.joystickId == joystickId || item.joystickId == ANY_JOYSTICK)&& item.axis == axis)
+            if (item.defined && (item.joystickId == joystickId || item.joystickId == ANY_JOYSTICK)&& item.axis == axis)
             {
                 float value = item.reversed? position / -100 : position / 100;
                 actions.emplace_back(cat.key, item.key, value);
