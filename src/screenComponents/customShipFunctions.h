@@ -3,16 +3,11 @@
 
 #include "playerInfo.h"
 #include "gui/gui2_autolayout.h"
+#include "spaceObjects/playerSpaceship.h"
 
 class GuiCustomShipFunctions : public GuiAutoLayout
 {
-public:
-    GuiCustomShipFunctions(GuiContainer* owner, ECrewPosition position, string id);
-    
-    virtual void onDraw(sf::RenderTarget& window) override;
-
-    bool hasEntries();
-private:
+private:    
     class Entry
     {
     public:
@@ -22,7 +17,16 @@ private:
     
     ECrewPosition position;
     std::vector<Entry> entries;
+    P<PlayerSpaceship> target_spaceship;
+public:
+    GuiCustomShipFunctions(GuiContainer* owner, ECrewPosition position, string id, P<PlayerSpaceship> targetSpaceship);
     
+    virtual void onDraw(sf::RenderTarget& window) override;
+
+    bool hasEntries();
+    void setTargetSpaceship(P<PlayerSpaceship> targetSpaceship);
+
+private:    
     void checkEntries();
     void createEntries();
 };

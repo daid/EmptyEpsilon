@@ -17,6 +17,8 @@
 #include "screens/extra/damcon.h"
 #include "screens/extra/powerManagement.h"
 #include "screens/extra/databaseScreen.h"
+#include "screens/extra/droneOperatorScreen.h"
+#include "screens/extra/dockMasterScreen.h"
 
 #include "screens/extra/shipLogScreen.h"
 
@@ -131,7 +133,7 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new ScienceScreen(screen), scienceOfficer, getCrewPositionName(scienceOfficer), getCrewPositionIcon(scienceOfficer));
         if (crew_position[relayOfficer])
             screen->addStationTab(new RelayScreen(screen), relayOfficer, getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
-        
+
         //Crew 4/3
         if (crew_position[tacticalOfficer])
             screen->addStationTab(new TacticalScreen(screen), tacticalOfficer, getCrewPositionName(tacticalOfficer), getCrewPositionIcon(tacticalOfficer));
@@ -150,7 +152,11 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new PowerManagementScreen(screen), powerManagement, getCrewPositionName(powerManagement), getCrewPositionIcon(powerManagement));
         if (crew_position[databaseView])
             screen->addStationTab(new DatabaseScreen(screen), databaseView, getCrewPositionName(databaseView), getCrewPositionIcon(databaseView));
-        
+        if (crew_position[dronePilot])
+            screen->addStationTab(new DroneOperatorScreen(screen), dronePilot, getCrewPositionName(dronePilot), getCrewPositionIcon(dronePilot));
+        if (crew_position[dockMaster])
+            screen->addStationTab(new DockMasterScreen(screen), dockMaster, getCrewPositionName(dockMaster), getCrewPositionIcon(dockMaster));
+       
         //Ship log screen, if you have comms, you have ships log. (note this is mostly replaced by the [at the bottom of the screen openable log]
         if (crew_position[singlePilot])
             screen->addStationTab(new ShipLogScreen(screen), max_crew_positions, "Ships log", "");
@@ -197,6 +203,8 @@ string getCrewPositionName(ECrewPosition position)
     case damageControl: return "Damage Control";
     case powerManagement: return "Power Management";
     case databaseView: return "Database";
+    case dronePilot: return "Drone Pilot";
+    case dockMaster: return "Dock Master";
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -217,6 +225,8 @@ string getCrewPositionIcon(ECrewPosition position)
     case damageControl: return "";
     case powerManagement: return "";
     case databaseView: return "";
+    case dronePilot: return "";
+    case dockMaster: return "";
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -257,7 +267,11 @@ template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosit
         cp = powerManagement;
     else if (str == "database" || str == "databaseview")
         cp = databaseView;
-    
+    else if (str == "dronepilot" || str == "dronepilotview")
+        cp = dronePilot;
+    else if (str == "dockmaster" || str == "dockmasterview")
+        cp = dockMaster;
+
     else
         luaL_error(L, "Unknown value for crew position: %s", str.c_str());
 }

@@ -21,7 +21,8 @@ enum ECrewPosition
     damageControl,
     powerManagement,
     databaseView,
-
+    dronePilot,
+    dockMaster,
     max_crew_positions
 };
 

@@ -18,6 +18,8 @@ Due to the enormous cost of this dreadnaught, only the richest star systems are 
 
 This machine's primary tactic is to jump into an unsuspecting enemy system and destroy everything before they know what hit them. It's effective and destructive, but extremely expensive.]])
 template:setJumpDrive(true)
+template:setDockClasses("Drone")
+-- template:setJumpDrive(true)
 template:setTubes(16, 3.0)
 template:setWeaponStorage("Homing", 1000)
 for n=0,15 do
