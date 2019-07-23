@@ -30,7 +30,7 @@ JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source, sf::I
     (new GuiButton(password_entry_box, "PASSWORD_ENTRY_OK", "Ok", [this]()
     {
         password_entry_box->hide();
-        password_focused = false
+        password_focused = false;
         game_client->sendPassword(password_entry->getText().upper());
     }))->setPosition(420, 0, ACenterLeft)->setSize(160, 50);
     
