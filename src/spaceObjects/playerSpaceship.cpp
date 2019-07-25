@@ -335,10 +335,9 @@ void PlayerSpaceship::update(float delta)
                 energy_level += energy_request;
         }
 
-        // If a shipTemplateBasedObject isn't a ship and is allowed to share
-        // energy with docked ships, also resupply docked ships' scan probes.
-        // A bit hackish for now.
-        if (docked_with_template_based && docked_with_template_based->shares_energy_with_docked && !docked_with_ship)
+        // If a shipTemplateBasedObject and is allowed to restock
+        // scan probes with docked ships.
+        if (docked_with_template_based && docked_with_template_based->restocks_scan_probes)
         {
             if (scan_probe_stock < max_scan_probes)
             {
