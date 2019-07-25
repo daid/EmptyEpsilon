@@ -29,6 +29,7 @@ ServerCreationScreen::ServerCreationScreen()
     gameGlobalInfo->scanning_complexity = EScanningComplexity(PreferencesManager::get("server_config_scanning_complexity", "2").toInt());
     gameGlobalInfo->use_beam_shield_frequencies = PreferencesManager::get("server_config_use_beam_shield_frequencies", "1").toInt();
     gameGlobalInfo->use_system_damage = PreferencesManager::get("server_config_use_system_damage", "1").toInt();
+    gameGlobalInfo->use_complex_radar_signatures = PreferencesManager::get("server_config_use_complex_radar_signatures", "1").toInt();
     gameGlobalInfo->allow_main_screen_tactical_radar = PreferencesManager::get("server_config_allow_main_screen_tactical_radar", "1").toInt();
     gameGlobalInfo->allow_main_screen_long_range_radar = PreferencesManager::get("server_config_allow_main_screen_long_range_radar", "1").toInt();
 
@@ -131,6 +132,13 @@ ServerCreationScreen::ServerCreationScreen()
         gameGlobalInfo->use_system_damage = value == 1;
     }))->setValue(gameGlobalInfo->use_system_damage)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenterRight);
 
+    row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
+    row->setSize(GuiElement::GuiSizeMax, 50);
+
+    (new GuiToggleButton(row, "GAME_SYS_RADAR_TOGGLE", "Complex Radar Lines", [](bool value) {
+        gameGlobalInfo->use_complex_radar_signatures = value == 1;
+    }))->setValue(gameGlobalInfo->use_complex_radar_signatures)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenterRight);
+
     // Right column contents.
     // Scenario section.
     (new GuiLabel(right_panel, "SCENARIO_LABEL", "Scenario", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
@@ -232,6 +240,7 @@ void ServerCreationScreen::startScenario()
     PreferencesManager::set("server_config_scanning_complexity", string(int(gameGlobalInfo->scanning_complexity)));
     PreferencesManager::set("server_config_use_beam_shield_frequencies", string(int(gameGlobalInfo->use_beam_shield_frequencies)));
     PreferencesManager::set("server_config_use_system_damage", string(int(gameGlobalInfo->use_system_damage)));
+    PreferencesManager::set("server_config_use_complex_radar_signatures", string(int(gameGlobalInfo->use_complex_radar_signatures)));
     PreferencesManager::set("server_config_allow_main_screen_tactical_radar", string(int(gameGlobalInfo->allow_main_screen_tactical_radar)));
     PreferencesManager::set("server_config_allow_main_screen_long_range_radar", string(int(gameGlobalInfo->allow_main_screen_long_range_radar)));
 

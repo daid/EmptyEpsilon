@@ -31,6 +31,7 @@ GameGlobalInfo::GameGlobalInfo()
     long_range_radar_range = 30000;
     use_beam_shield_frequencies = true;
     use_system_damage = true;
+    use_complex_radar_signatures = true;
     allow_main_screen_tactical_radar = true;
     allow_main_screen_long_range_radar = true;
     
@@ -44,6 +45,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&long_range_radar_range);
     registerMemberReplication(&use_beam_shield_frequencies);
     registerMemberReplication(&use_system_damage);
+    registerMemberReplication(&use_complex_radar_signatures);
     registerMemberReplication(&allow_main_screen_tactical_radar);
     registerMemberReplication(&allow_main_screen_long_range_radar);
 

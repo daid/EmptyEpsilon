@@ -70,6 +70,7 @@ public:
     float long_range_radar_range;
     bool use_beam_shield_frequencies;
     bool use_system_damage;
+    bool use_complex_radar_signatures;
     bool allow_main_screen_tactical_radar;
     bool allow_main_screen_long_range_radar;
     string variation = "None";
