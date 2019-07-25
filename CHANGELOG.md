@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+### Added
+
+- Mission scripts can modify the total coolant available to engineering
+
+### Changed
+
 - Nothing
 
 ## [2018-02-15]
