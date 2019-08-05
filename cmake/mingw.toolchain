@@ -51,7 +51,7 @@ if(NOT SFML_ROOT)
         file(DOWNLOAD https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip "${WIN32_BASE}/sfml.zip" SHOW_PROGRESS EXPECTED_HASH SHA256=bf1e0643acb92369b24572b703473af60bac82caf5af61e77c063b779471bb7f)
         execute_process_ex(COMMAND ${UNZIP} sfml.zip WORKING_DIRECTORY "${WIN32_BASE}")
     endif()
-    if(NOT IS_DIRECTORY "${WIN32_BASE}/SFML_install")
+    if(NOT IS_DIRECTORY "${CMAKE_SYSROOT}/SFML")
         file(MAKE_DIRECTORY "${WIN32_BASE}/SFML_build")
         execute_process_ex(
             COMMAND "${CMAKE_COMMAND}" "${WIN32_BASE}/SFML-2.5.1" "-G" "${CMAKE_GENERATOR}"
