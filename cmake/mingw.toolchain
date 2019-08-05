@@ -10,3 +10,65 @@ set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 
 set(MING_DLL_PATH /usr/lib/gcc/i686-w64-mingw32/4.8/)
+
+function(execute_process_ex)
+    execute_process(${ARGV} RESULT_VARIABLE RES)
+    if(RES)
+        message(FATAL_ERROR "Failed to execute: ${ARGV}")
+    endif()
+endfunction()
+
+if(NOT SFML_ROOT)
+    set(WIN32_BASE "${CMAKE_CURRENT_LIST_DIR}/_win32/")
+    set(CMAKE_SYSROOT "${WIN32_BASE}/sysroot/")
+
+    find_program(UNZIP unzip)
+
+    if(NOT IS_DIRECTORY "${WIN32_BASE}/openal-soft-1.19.1")
+        file(DOWNLOAD https://openal-soft.org/openal-releases/openal-soft-1.19.1.tar.bz2 "${WIN32_BASE}/openal-soft.tar.bz2" SHOW_PROGRESS)
+        execute_process_ex(COMMAND tar -xjf openal-soft.tar.bz2 WORKING_DIRECTORY "${WIN32_BASE}")
+    endif()
+    if(NOT IS_DIRECTORY "${CMAKE_SYSROOT}/include/AL")
+        file(MAKE_DIRECTORY "${WIN32_BASE}/openal_build")
+# TOFIX: DXSDK_DIR is set to a hardcoded path, as openal cannot seem to find dsound.h on my linux system.
+        execute_process_ex(
+            COMMAND "${CMAKE_COMMAND}" "${WIN32_BASE}/openal-soft-1.19.1" "-G" "${CMAKE_GENERATOR}"
+                "-DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM}"
+                "-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}"
+                "-DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}"
+                "-DCMAKE_SYSTEM_NAME=${CMAKE_SYSTEM_NAME}"
+                "-DCMAKE_SYSROOT=${CMAKE_SYSROOT}"
+                "-DCMAKE_INSTALL_PREFIX=${CMAKE_SYSROOT}"
+                "-DCMAKE_BUILD_TYPE=Release"
+                "-DDXSDK_DIR=/usr/i686-w64-mingw32"
+            WORKING_DIRECTORY "${WIN32_BASE}/openal_build")
+        execute_process_ex(
+            COMMAND "${CMAKE_MAKE_PROGRAM}" "-j4" "install"
+            WORKING_DIRECTORY "${WIN32_BASE}/openal_build")
+    endif()
+
+    if(NOT IS_DIRECTORY "${WIN32_BASE}/SFML-2.5.1")
+        file(DOWNLOAD https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip "${WIN32_BASE}/sfml.zip" SHOW_PROGRESS EXPECTED_HASH SHA256=bf1e0643acb92369b24572b703473af60bac82caf5af61e77c063b779471bb7f)
+        execute_process_ex(COMMAND ${UNZIP} sfml.zip WORKING_DIRECTORY "${WIN32_BASE}")
+    endif()
+    if(NOT IS_DIRECTORY "${WIN32_BASE}/SFML_install")
+        file(MAKE_DIRECTORY "${WIN32_BASE}/SFML_build")
+        execute_process_ex(
+            COMMAND "${CMAKE_COMMAND}" "${WIN32_BASE}/SFML-2.5.1" "-G" "${CMAKE_GENERATOR}"
+                "-DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM}"
+                "-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}"
+                "-DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}"
+                "-DCMAKE_SYSTEM_NAME=${CMAKE_SYSTEM_NAME}"
+                "-DCMAKE_SYSROOT=${CMAKE_SYSROOT}"
+                "-DCMAKE_INSTALL_PREFIX=${CMAKE_SYSROOT}"
+                "-DCMAKE_BUILD_TYPE=Release"
+                "-DOPENAL_INCLUDE_DIR=${CMAKE_SYSROOT}/include/AL"
+                "-DOPENAL_LIBRARY=${CMAKE_SYSROOT}/bin/OpenAL32.dll"
+            WORKING_DIRECTORY "${WIN32_BASE}/SFML_build")
+        execute_process_ex(
+            COMMAND "${CMAKE_MAKE_PROGRAM}" "install"
+            WORKING_DIRECTORY "${WIN32_BASE}/SFML_build")
+    endif()
+    
+    set(SFML_ROOT "${WIN32_BASE}/SFML_install")
+endif()
