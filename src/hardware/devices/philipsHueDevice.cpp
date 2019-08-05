@@ -142,8 +142,8 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
             LOG(ERROR) << "Json parser returned error " << err;
 
             light_count = 0;
-            std::map<std::__cxx11::basic_string<char>, json11::Json> jsonMap = hue_json.object_items();
-            for(std::map<std::__cxx11::basic_string<char>,json11::Json>::iterator it = jsonMap.begin(); it != jsonMap.end(); it++) {
+            std::map<std::string, json11::Json> jsonMap = hue_json.object_items();
+            for(std::map<std::string, json11::Json>::iterator it = jsonMap.begin(); it != jsonMap.end(); it++) {
                   int currentInt = std::stoi (it->first,nullptr,10); //TODO: Replace STOI with toInt()
                   LOG(DEBUG) << "Got key from Hue API " << currentInt;
                   if (currentInt >= light_count) light_count = currentInt;
