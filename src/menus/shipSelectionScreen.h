@@ -42,6 +42,7 @@ private:
     GuiToggleButton* window_button;
     GuiSlider* window_angle;
     GuiLabel* window_angle_label;
+    GuiToggleButton* probe_button;
     GuiToggleButton* topdown_button;
     GuiToggleButton* cinematic_view_button;
     
