@@ -429,9 +429,9 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->impulse_speed = impulse_speed;
     result->turn_speed = turn_speed;
     result->warp_speed = warp_speed;
-    result->impulse_acceleration;
-    result->combat_maneuver_boost_speed;
-    result->combat_maneuver_strafe_speed;
+    result->impulse_acceleration = impulse_acceleration;
+    result->combat_maneuver_boost_speed = combat_maneuver_boost_speed;
+    result->combat_maneuver_strafe_speed = combat_maneuver_strafe_speed;
     result->shares_energy_with_docked = shares_energy_with_docked;
     result->repair_docked = repair_docked;
     result->restocks_scan_probes = restocks_scan_probes;
