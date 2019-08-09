@@ -216,6 +216,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
         {
             ShipSystem& system = my_spaceship->systems[selected_system];
             power_label->setText("Power: " + string(int(system.power_level * 100)) + "%/" + string(int(system.power_request * 100)) + "%");
+            power_slider->setValue(system.power_request);
             coolant_label->setText("Coolant: " + string(int(system.coolant_level / PlayerSpaceship::max_coolant_per_system * 100)) + "%/" + string(int(std::min(system.coolant_request, my_spaceship->max_coolant) / PlayerSpaceship::max_coolant_per_system * 100)) + "%");
             coolant_slider->setEnable(!my_spaceship->auto_coolant_enabled);
             coolant_slider->setValue(std::min(system.coolant_request, my_spaceship->max_coolant));
