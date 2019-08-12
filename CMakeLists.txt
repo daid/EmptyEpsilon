@@ -374,7 +374,11 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework OpenGL -framework Foundation")
 endif()
 
-add_executable(${EXECUTABLE_NAME} MACOSX_BUNDLE ${SOURCES})
+if(ANDROID)
+    add_library(${EXECUTABLE_NAME} SHARED ${SOURCES})
+else()
+    add_executable(${EXECUTABLE_NAME} MACOSX_BUNDLE ${SOURCES})
+endif()
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
 include_directories(${SERIOUS_PROTON_DIR}/src)
@@ -403,7 +407,8 @@ if(WIN32)
     target_link_libraries(${EXECUTABLE_NAME} exchndl)
   endif()
 elseif(ANDROID)
-  target_link_libraries(${EXECUTABLE_NAME} log)
+  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--whole-archive ${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-main.a -Wl,--no-whole-archive")
+  target_link_libraries(${EXECUTABLE_NAME} log android EGL)
 elseif(APPLE)
   set_target_properties(${EXECUTABLE_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/osx/MacOSXBundleInfo.plist.in)
   set_target_properties(${EXECUTABLE_NAME} PROPERTIES MACOSX_BUNDLE_ICON_FILE "${EXECUTABLE_NAME}.icns")
@@ -448,6 +453,8 @@ elseif(APPLE)
   install(DIRECTORY resources DESTINATION "EmptyEpsilon.app/Contents/Resources")
   install(DIRECTORY scripts DESTINATION "EmptyEpsilon.app/Contents/Resources")
   install(DIRECTORY packs DESTINATION "EmptyEpsilon.app/Contents/Resources")
+elseif(ANDROID)
+  android_apk(EmptyEpsilon)
 else()
   include(GNUInstallDirs)
   install(DIRECTORY resources DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/emptyepsilon/")
@@ -458,7 +465,12 @@ endif()
 
 find_package(PythonInterp)
 if(PYTHONINTERP_FOUND)
-  add_custom_target(scriptdoc ALL ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/compile_script_docs.py ${CMAKE_BINARY_DIR}/script_reference.html WORKING_DIRECTORY ${CMAKE_SOURCE_DIR} COMMENT "Building script reference documentation.")
+  add_custom_command(
+        OUTPUT ${CMAKE_BINARY_DIR}/script_reference.html
+        ALL
+        COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/compile_script_docs.py ${CMAKE_BINARY_DIR}/script_reference.html
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        COMMENT "Building script reference documentation.")
   install(FILES ${CMAKE_BINARY_DIR}/script_reference.html DESTINATION .)
 endif()
 
