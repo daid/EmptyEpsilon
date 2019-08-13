@@ -76,7 +76,18 @@ class DocumentationGenerator(object):
         self._definitions = []
         self._function_info = []
         self._files = set()
-    
+
+    def addDirectory(self, directory):
+        if not os.path.isdir(directory):
+            return
+
+        for name in os.listdir(directory):
+            name = directory + os.sep + name
+            if os.path.isdir(name):
+                self.addDirectory(name)
+            elif os.path.isfile(name):
+                self.addFile(name)
+
     def addFile(self, filename):
         if filename in self._files:
             return
@@ -85,12 +96,7 @@ class DocumentationGenerator(object):
         
         self._files.add(filename)
         ext = os.path.splitext(filename)[1].lower()
-        if ext == '.cbp':
-            xml = ElementTree.parse(filename)
-            for project in xml.findall('Project'):
-                for unit in project.findall('Unit'):
-                    self.addFile(unit.attrib['filename'])
-        elif ext == '.c' or ext == '.cpp' or ext == '.h':
+        if ext == '.c' or ext == '.cpp' or ext == '.h':
             for line in open(filename, "r"):
                 m = re.match('^# *include *[<"](.*)[>"]$', line)
                 if m is not None:
@@ -257,7 +263,7 @@ class DocumentationGenerator(object):
 
 if __name__ == "__main__":
     dg = DocumentationGenerator()
-    dg.addFile("EmptyEpsilon.cbp")
+    dg.addDirectory("src")
     dg.readFunctionInfo()
     dg.readScriptDefinitions()
     dg.linkFunctions()
