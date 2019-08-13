@@ -100,6 +100,7 @@ set(SOURCES
 	src/scenarioInfo.cpp
 	src/repairCrew.cpp
 	src/GMScriptCallback.cpp
+	src/GMMessage.cpp
 	src/tutorialGame.cpp
 	src/menus/joinServerMenu.cpp
 	src/menus/serverBrowseMenu.cpp
