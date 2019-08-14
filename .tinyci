@@ -4,19 +4,19 @@ enabled = True
 [build-native]
 directory = _build_native
 commands =
-    cmake .. -DSERIOUS_PROTON_DIR=../SeriousProton
+    cmake .. -DSERIOUS_PROTON_DIR=../../SeriousProton
     make -j 3
 
 [build-win32]
 directory = _build_win32
 commands =
-    cmake .. -DSERIOUS_PROTON_DIR=../SeriousProton -DCMAKE_TOOLCHAIN_FILE=../cmake/mingw.toolchain
+    cmake .. -DSERIOUS_PROTON_DIR=../../SeriousProton -DCMAKE_TOOLCHAIN_FILE=../cmake/mingw.toolchain
     make -j 3
 
 [build-android]
 directory = _build_android
 commands =
-    cmake .. -DSERIOUS_PROTON_DIR=../SeriousProton -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain
+    cmake .. -DSERIOUS_PROTON_DIR=../../SeriousProton -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain
     make -j 3
 
 [repos-daid/SeriousProton]
