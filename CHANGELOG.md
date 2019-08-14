@@ -5,6 +5,10 @@
 ### Added
 
 - Mission scripts can modify the total coolant available to engineering
+- GM screen allows modifier keys
+  - `Shift` adds objects to the current selection
+  - `Ctrl` only selects stations and ships
+  - `Alt` only selects objects from the same faction as the faction selector
 
 ### Changed
 

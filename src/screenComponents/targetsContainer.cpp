@@ -16,7 +16,7 @@ void TargetsContainer::clear()
 
 void TargetsContainer::add(P<SpaceObject> obj)
 {
-    if (obj)
+    if (obj && !entries.has(obj))
         entries.push_back(obj);
 }
 

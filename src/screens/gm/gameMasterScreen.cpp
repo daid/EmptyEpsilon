@@ -467,14 +467,33 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
         break;
     case CD_BoxSelect:
         {
+            bool shift_down = InputHandler::keyboardIsDown(sf::Keyboard::LShift) || InputHandler::keyboardIsDown(sf::Keyboard::RShift);
+            //Using sf::Keyboard::isKeyPressed, as CTRL does not seem to generate keydown/key up events in SFML.
+            bool ctrl_down = sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) || sf::Keyboard::isKeyPressed(sf::Keyboard::RControl);
+            bool alt_down = InputHandler::keyboardIsDown(sf::Keyboard::LAlt) || InputHandler::keyboardIsDown(sf::Keyboard::RAlt);
             PVector<Collisionable> objects = CollisionManager::queryArea(drag_start_position, position);
             PVector<SpaceObject> space_objects;
             foreach(Collisionable, c, objects)
             {
-                if (!P<Zone>(c))
-                    space_objects.push_back(c);
+                if (P<Zone>(c))
+                    continue;
+                if (ctrl_down && !P<ShipTemplateBasedObject>(c))
+                    continue;
+                if (alt_down && (!P<SpaceObject>(c) || (int)(P<SpaceObject>(c))->getFactionId() != faction_selector->getSelectionIndex()))
+                    continue;
+                space_objects.push_back(c);
             }
-            targets.set(space_objects);
+            if (shift_down)
+            {
+                foreach(SpaceObject, s, space_objects)
+                {
+                    targets.add(s);
+                }
+            } else {
+                targets.set(space_objects);
+            }
+
+
             if (space_objects.size() > 0)
                 faction_selector->setSelectionIndex(space_objects[0]->getFactionId());
         }
