@@ -149,7 +149,10 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         float depth;
     };
     std::vector<std::vector<RenderInfo>> render_lists;
-    
+    // ensure at least one depth iteration in viewport, as some mandatory GL instructions are in the render_lists loop. 
+    // see #649 
+    render_lists.emplace_back(); 
+
     sf::Vector2f viewVector = sf::vector2FromAngle(camera_yaw);
     float depth_cutoff_back = camera_position.z * -tanf((90+camera_pitch + camera_fov/2.0) / 180.0f * M_PI);
     float depth_cutoff_front = camera_position.z * -tanf((90+camera_pitch - camera_fov/2.0) / 180.0f * M_PI);
