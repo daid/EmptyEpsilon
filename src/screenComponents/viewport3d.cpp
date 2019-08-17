@@ -130,6 +130,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         }
     }
 
+    sf::Texture::bind(NULL);
     {
         float lightpos1[4] = {0, 0, 0, 1.0};
         glLightfv(GL_LIGHT1, GL_POSITION, lightpos1);
@@ -186,7 +187,6 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 
         glColor4f(1,1,1,1);
         glDisable(GL_BLEND);
-        sf::Texture::bind(NULL);
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
         for(auto info : render_list)
