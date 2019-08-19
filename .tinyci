@@ -11,13 +11,14 @@ commands =
 directory = _build_win32
 commands =
     cmake .. -DSERIOUS_PROTON_DIR=../../SeriousProton -DCMAKE_TOOLCHAIN_FILE=../cmake/mingw.toolchain
-    make -j 3
+    make -j 3 package
 
 [build-android]
 directory = _build_android
 commands =
     cmake .. -DSERIOUS_PROTON_DIR=../../SeriousProton -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain
     make -j 3
+artifacts = Mario.apk
 
 [repos-daid/SeriousProton]
 required = True
