@@ -70,5 +70,5 @@ if(NOT SFML_ROOT)
             WORKING_DIRECTORY "${WIN32_BASE}/SFML_build")
     endif()
     
-    set(SFML_ROOT "${WIN32_BASE}/SFML_install")
+    set(SFML_ROOT "${CMAKE_SYSROOT}")
 endif()
