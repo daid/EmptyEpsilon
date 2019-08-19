@@ -466,13 +466,12 @@ endif()
 
 find_package(PythonInterp)
 if(PYTHONINTERP_FOUND)
-  add_custom_target(script_reference ALL)
   add_custom_command(
-        TARGET script_reference
         OUTPUT ${CMAKE_BINARY_DIR}/script_reference.html
         COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/compile_script_docs.py ${CMAKE_BINARY_DIR}/script_reference.html
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         COMMENT "Building script reference documentation.")
+  add_custom_target(script_reference ALL DEPENDS ${CMAKE_BINARY_DIR}/script_reference.html)
   install(FILES ${CMAKE_BINARY_DIR}/script_reference.html DESTINATION .)
 endif()
 
