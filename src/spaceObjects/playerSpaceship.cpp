@@ -270,6 +270,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&linked_science_probe_id);
     registerMemberReplication(&control_code);
     registerMemberReplication(&custom_functions);
+    registerMemberReplication(&selected_shield_frequency);
 
     // Determine which stations must provide self-destruct confirmation codes.
     for(int n = 0; n < max_self_destruct_codes; n++)
