@@ -18,7 +18,7 @@ directory = _build_android
 commands =
     cmake .. -DSERIOUS_PROTON_DIR=../../SeriousProton -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain
     make -j 3
-artifacts = Mario.apk
+artifacts = EmptyEpsilon.apk
 
 [repos-daid/SeriousProton]
 required = True
