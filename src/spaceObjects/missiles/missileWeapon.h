@@ -16,6 +16,9 @@ public:
     P<SpaceObject> owner; //Only valid on server.
     int32_t target_id;
     float target_angle;
+    // Damage modifier for this missile which indicates it's size. (eg; Missiles by fighters have a low modifier), missiles from
+    // capital ships have a high modifier.
+    float category_modifier;  
 
     MissileWeapon(string multiplayer_name, const MissileWeaponData& data);
 

@@ -7,6 +7,7 @@ MissileWeapon::MissileWeapon(string multiplayer_name, const MissileWeaponData& d
 {
     target_id = -1;
     target_angle = 0;
+    category_modifier = 1;
     lifetime = data.lifetime;
     
     registerMemberReplication(&target_id);
