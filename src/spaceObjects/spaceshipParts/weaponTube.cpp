@@ -1,9 +1,9 @@
 #include "weaponTube.h"
-#include "spaceObjects/EMPMissile.h"
-#include "spaceObjects/homingMissile.h"
+#include "spaceObjects/missiles/EMPMissile.h"
+#include "spaceObjects/missiles/homingMissile.h"
 #include "spaceObjects/mine.h"
-#include "spaceObjects/nuke.h"
-#include "spaceObjects/hvli.h"
+#include "spaceObjects/missiles/nuke.h"
+#include "spaceObjects/missiles/hvli.h"
 #include "spaceObjects/spaceship.h"
 
 WeaponTube::WeaponTube()

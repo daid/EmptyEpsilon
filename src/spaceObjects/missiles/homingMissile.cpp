@@ -1,6 +1,6 @@
 #include "homingMissile.h"
 #include "particleEffect.h"
-#include "explosionEffect.h"
+#include "spaceObjects/explosionEffect.h"
 
 REGISTER_MULTIPLAYER_CLASS(HomingMissile, "HomingMissile");
 HomingMissile::HomingMissile()

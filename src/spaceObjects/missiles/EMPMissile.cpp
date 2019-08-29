@@ -1,6 +1,6 @@
 #include "EMPMissile.h"
 #include "particleEffect.h"
-#include "electricExplosionEffect.h"
+#include "spaceObjects/electricExplosionEffect.h"
 
 REGISTER_MULTIPLAYER_CLASS(EMPMissile, "EMPMissile");
 EMPMissile::EMPMissile()

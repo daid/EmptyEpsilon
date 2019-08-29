@@ -1,6 +1,6 @@
 #include "nuke.h"
 #include "particleEffect.h"
-#include "explosionEffect.h"
+#include "spaceObjects/explosionEffect.h"
 
 REGISTER_MULTIPLAYER_CLASS(Nuke, "Nuke");
 Nuke::Nuke()
