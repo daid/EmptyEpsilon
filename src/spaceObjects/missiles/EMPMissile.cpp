@@ -11,10 +11,10 @@ EMPMissile::EMPMissile()
 void EMPMissile::hitObject(P<SpaceObject> object)
 {
     DamageInfo info(owner, DT_EMP, getPosition());
-    SpaceObject::damageArea(getPosition(), blastRange, damageAtEdge, damageAtCenter, info, getRadius());
+    SpaceObject::damageArea(getPosition(), category_modifier * blastRange, category_modifier * damageAtEdge, category_modifier * damageAtCenter, info, getRadius());
 
     P<ElectricExplosionEffect> e = new ElectricExplosionEffect();
-    e->setSize(blastRange);
+    e->setSize(category_modifier * blastRange);
     e->setPosition(getPosition());
     e->setOnRadar(true);
 }
