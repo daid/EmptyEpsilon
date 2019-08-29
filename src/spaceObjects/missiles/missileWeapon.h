@@ -12,6 +12,7 @@ protected:
     float lifetime; //sec
 
     bool launch_sound_played;    
+    
 public:
     P<SpaceObject> owner; //Only valid on server.
     int32_t target_id;
