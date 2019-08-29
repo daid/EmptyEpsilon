@@ -2,8 +2,8 @@
 #include "particleEffect.h"
 #include "explosionEffect.h"
 
-MissileWeapon::MissileWeapon(string multiplayerName, const MissileWeaponData& data)
-: SpaceObject(10, multiplayerName), data(data)
+MissileWeapon::MissileWeapon(string multiplayer_name, const MissileWeaponData& data)
+: SpaceObject(10, multiplayer_name), data(data)
 {
     target_id = -1;
     target_angle = 0;
@@ -19,13 +19,13 @@ void MissileWeapon::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position,
 {
     if (long_range) return;
 
-    sf::Sprite objectSprite;
-    textureManager.setTexture(objectSprite, "RadarArrow.png");
-    objectSprite.setRotation(getRotation());
-    objectSprite.setPosition(position);
-    objectSprite.setColor(data.color);
-    objectSprite.setScale(0.5, 0.5);
-    window.draw(objectSprite);
+    sf::Sprite object_sprite;
+    textureManager.setTexture(object_sprite, "RadarArrow.png");
+    object_sprite.setRotation(getRotation());
+    object_sprite.setPosition(position);
+    object_sprite.setColor(data.color);
+    object_sprite.setScale(0.5, 0.5);
+    window.draw(object_sprite);
 }
 
 void MissileWeapon::update(float delta)
@@ -46,16 +46,22 @@ void MissileWeapon::update(float delta)
     setVelocity(sf::vector2FromAngle(getRotation()) * data.speed);
 
     if (delta > 0)
+    {
         ParticleEngine::spawn(sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(1, 0.8, 0.8), sf::Vector3f(0, 0, 0), 5, 20, 5.0);
+    }
 }
 
 void MissileWeapon::collide(Collisionable* target, float force)
 {
     if (!game_server)
+    {
         return;
+    }
     P<SpaceObject> object = P<Collisionable>(target);
     if (!object || object == owner || !object->canBeTargetedBy(owner))
+    {
         return;
+    }
 
     hitObject(object);
     destroy();
@@ -69,9 +75,13 @@ void MissileWeapon::updateMovement()
         {
             P<SpaceObject> target;
             if (game_server)
+            {
                 target = game_server->getObjectById(target_id);
+            }
             else
+            {
                 target = game_client->getObjectById(target_id);
+            }
 
             if (target && (target->getPosition() - getPosition()) < data.homing_range + target->getRadius())
             {
@@ -79,13 +89,13 @@ void MissileWeapon::updateMovement()
             }
         }
 
-        float angleDiff = sf::angleDifference(getRotation(), target_angle);
+        float angle_diff = sf::angleDifference(getRotation(), target_angle);
 
-        if (angleDiff > 1.0)
+        if (angle_diff > 1.0)
             setAngularVelocity(data.turnrate);
-        else if (angleDiff < -1.0)
+        else if (angle_diff < -1.0)
             setAngularVelocity(data.turnrate * -1.0f);
         else
-            setAngularVelocity(angleDiff * data.turnrate);
+            setAngularVelocity(angle_diff * data.turnrate);
     }
 }

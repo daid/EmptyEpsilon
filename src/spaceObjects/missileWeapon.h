@@ -17,7 +17,7 @@ public:
     int32_t target_id;
     float target_angle;
 
-    MissileWeapon(string multiplayerName, const MissileWeaponData& data);
+    MissileWeapon(string multiplayer_name, const MissileWeaponData& data);
 
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
     virtual void update(float delta);
