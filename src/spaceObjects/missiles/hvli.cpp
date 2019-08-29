@@ -17,7 +17,7 @@ void HVLI::hitObject(P<SpaceObject> object)
     else
         object->takeDamage(category_modifier * 6 * (alive_for / 2.0), info);
     P<ExplosionEffect> e = new ExplosionEffect();
-    e->setSize(20);
+    e->setSize(category_modifier * 20);
     e->setPosition(getPosition());
     e->setOnRadar(true);
 }
