@@ -1,6 +1,6 @@
 #include "hvli.h"
 #include "particleEffect.h"
-#include "explosionEffect.h"
+#include "spaceObjects/explosionEffect.h"
 
 REGISTER_MULTIPLAYER_CLASS(HVLI, "HVLI");
 HVLI::HVLI()

@@ -1,6 +1,6 @@
 #include "missileWeapon.h"
 #include "particleEffect.h"
-#include "explosionEffect.h"
+#include "spaceObjects/explosionEffect.h"
 
 MissileWeapon::MissileWeapon(string multiplayer_name, const MissileWeaponData& data)
 : SpaceObject(10, multiplayer_name), data(data)
