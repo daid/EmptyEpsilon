@@ -1,8 +1,10 @@
 #include "hackingDialog.h"
 #include "playerInfo.h"
+#include "gameGlobalInfo.h"
 #include "spaceObjects/spaceObject.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "mineSweeper.h"
+#include "lightsOut.h"
 
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
@@ -15,8 +17,24 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     hide();
+    string game_id = id + "_BOX";
+    int difficulty = 2;
+    EHackingGames games = HG_All;
+    if (gameGlobalInfo) {
+      int difficulty = gameGlobalInfo->hacking_difficulty;
+      EHackingGames games = gameGlobalInfo->hacking_games;
+    }
 
-    minigame_box = new MineSweeper(this, id + "_BOX", 8);
+    switch (games)
+    {
+    case HG_Lights:
+      minigame_box = new LightsOut(this, game_id, difficulty*2+1);
+      break;
+    case HG_Mine:
+      minigame_box = new MineSweeper(this, game_id, difficulty*4);
+    default:
+      irandom(0,1) ? minigame_box = new LightsOut(this, game_id, difficulty*2+1) : minigame_box = new MineSweeper(this, game_id, difficulty*4);
+    }
 
     target_selection_box = new GuiPanel(this, id + "_BOX");
     target_selection_box->setSize(300, 545)->setPosition(400, 0, ACenter);
