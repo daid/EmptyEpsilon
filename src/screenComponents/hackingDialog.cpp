@@ -2,6 +2,7 @@
 #include "playerInfo.h"
 #include "spaceObjects/spaceObject.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "mineSweeper.h"
 
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
@@ -15,7 +16,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     hide();
 
-    minigame_box = new MiniGame(this, id + "_BOX", 8);
+    minigame_box = new MineSweeper(this, id + "_BOX", 8);
 
     target_selection_box = new GuiPanel(this, id + "_BOX");
     target_selection_box->setSize(300, 545)->setPosition(400, 0, ACenter);
