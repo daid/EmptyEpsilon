@@ -27,9 +27,6 @@ private:
     string target_system;
     float reset_time;
 
-    static constexpr int hacking_field_size = 8;
-    static constexpr int bomb_count = 8;
-    static constexpr float auto_reset_time = 2.0f;
     MiniGame* minigame_box;
     GuiPanel* target_selection_box;
     GuiListbox* target_list;
