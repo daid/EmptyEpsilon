@@ -55,7 +55,7 @@ void MiniGame::setHackingStatusText(string text)
 
 void MiniGame::gameComplete()
 {
-    parent->miniGameComplete(this);
+    parent->miniGameComplete();
     status_label->setText("Hacking SUCCESS");
     progress_bar->setValue(1.0f);
     game_complete = true;

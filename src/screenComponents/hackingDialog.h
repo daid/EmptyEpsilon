@@ -21,7 +21,7 @@ public:
     void open(P<SpaceObject> target);
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual bool onMouseDown(sf::Vector2f position) override;
-    void miniGameComplete(MiniGame* game);
+    void miniGameComplete();
 private:
     P<SpaceObject> target;
     string target_system;

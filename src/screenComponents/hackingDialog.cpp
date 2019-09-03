@@ -113,7 +113,8 @@ bool GuiHackingDialog::onMouseDown(sf::Vector2f position)
     return true;
 }
 
-void GuiHackingDialog::miniGameComplete(MiniGame* game)
+void GuiHackingDialog::miniGameComplete()
 {
     reset_time = engine->getElapsedTime();
+    minigame_box->disable();
 }

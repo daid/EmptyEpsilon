@@ -1,3 +1,8 @@
+/**
+ * An implementation of the Lights Out game, where the goal is to turn all the
+ * lights on. Flipping a single light flips all directly adjacent lights
+ */
+
 #ifndef LIGHTS_OUT_H
 #define LIGHTS_OUT_H
 

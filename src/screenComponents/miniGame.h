@@ -1,3 +1,9 @@
+/** An abstract class to present an interface on which to implement (hacking)
+ *  minigames. Concrete implementations will need to implement at least their
+ *  own constructor and reset() functions, and probably the disable() function.
+ *  Calling gameComplete() registers a successful minigame with the owner
+ */
+
 #ifndef MINIGAME_H
 #define MINIGAME_H
 

@@ -28,8 +28,6 @@ void LightsOut::disable()
         for(int y=0; y<difficulty; y++)
         {
             GuiToggleButton* item = field_item[x][y];
-            item->setText("");
-            item->setValue(false);
             item->disable();
         }
     }
