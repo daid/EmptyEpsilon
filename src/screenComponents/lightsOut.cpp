@@ -6,15 +6,13 @@
 
 LightsOut::LightsOut(GuiHackingDialog* owner, string id, int difficulty)
 : MiniGame(owner, id, difficulty) {
-    field_item = new LightsOutToggleButton**[difficulty];
     for(int x=0; x<difficulty; x++)
     {
-        field_item[x] = new LightsOutToggleButton*[difficulty];
         for(int y=0; y<difficulty; y++)
         {
-            field_item[x][y] = new LightsOutToggleButton(this, "", "", [this, x, y](bool value) {onFieldClick(x, y); } );
-            field_item[x][y]->setSize(50, 50);
-            field_item[x][y]->setPosition(25 + x * 50, 75 + y * 50);
+            field_item.emplace_back(new LightsOutToggleButton(this, "", "", [this, x, y](bool value) {onFieldClick(x, y); } ));
+            field_item.back()->setSize(50, 50);
+            field_item.back()->setPosition(25 + x * 50, 75 + y * 50);
         }
     }
     if (difficulty < 7)
@@ -33,7 +31,7 @@ void LightsOut::disable()
     {
         for(int y=0; y<difficulty; y++)
         {
-            GuiToggleButton* item = field_item[x][y];
+            auto& item = field_item[x + y*difficulty];
             item->disable();
         }
     }
@@ -48,7 +46,7 @@ void LightsOut::reset()
     {
         for(int y=0; y<difficulty; y++)
         {
-            GuiToggleButton* item = field_item[x][y];
+            auto& item = field_item[x + y*difficulty];
             item->setText("");
             item->setValue(true);
             item->enable();
@@ -87,18 +85,18 @@ void LightsOut::onFieldClick(int x, int y)
 void LightsOut::toggle(int x, int y)
 {
     //field itself is already toggled, only need to get Value
-    lights_on += field_item[x][y]->getValue() ? 1 : -1;
+    lights_on += field_item[x + y*difficulty]->getValue() ? 1 : -1;
     if (x > 0) {
-      lights_on += field_item[x-1][y]->toggle() ? 1 : -1;
+      lights_on += field_item[x - 1 + y*difficulty]->toggle() ? 1 : -1;
     }
-    if (x < difficulty-1) {
-      lights_on += field_item[x+1][y]->toggle() ? 1 : -1;
+    if (x < difficulty - 1) {
+      lights_on += field_item[x + 1 + y*difficulty]->toggle() ? 1 : -1;
     }
     if (y > 0) {
-      lights_on += field_item[x][y-1]->toggle() ? 1 : -1;
+      lights_on += field_item[x + (y - 1) * difficulty]->toggle() ? 1 : -1;
     }
-    if (y < difficulty-1) {
-      lights_on += field_item[x][y+1]->toggle() ? 1 : -1;
+    if (y < difficulty - 1) {
+      lights_on += field_item[x + (y + 1) * difficulty]->toggle() ? 1 : -1;
     }
 }
 

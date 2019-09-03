@@ -8,6 +8,8 @@
 
 #include "miniGame.h"
 #include "gui/gui2_togglebutton.h"
+#include <vector>
+#include <memory>
 
 class LightsOut : public MiniGame {
   public:
@@ -25,7 +27,7 @@ class LightsOut : public MiniGame {
         bool toggle();
     };
 
-    LightsOutToggleButton*** field_item;
+    std::vector<std::unique_ptr<LightsOutToggleButton>> field_item;
 };
 
 
