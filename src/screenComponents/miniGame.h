@@ -21,7 +21,7 @@ class MiniGame : public GuiPanel
     virtual bool isGameComplete();
 
     virtual void reset() = 0;
-    virtual void disable() = 0;
+    virtual void disable();
 
   protected:
     int difficulty;

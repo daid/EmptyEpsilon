@@ -32,27 +32,36 @@ MiniGame::MiniGame(GuiHackingDialog* owner, string id, int difficulty)
   progress_bar->setSize(50, difficulty * 50);
 }
 
+void MiniGame::disable()
+{
+  status_label->setText("Select hacking target...");
+  reset_button->disable();
+}
 
 bool MiniGame::onMouseDown(sf::Vector2f position)
 {
     return true;
 }
 
-void MiniGame::setProgress(float progress) {
+void MiniGame::setProgress(float progress)
+{
   progress_bar->setValue(progress);
 }
 
-void MiniGame::setHackingStatusText(string text) {
+void MiniGame::setHackingStatusText(string text)
+{
   hacking_status_label->setText(text);
 }
 
-void MiniGame::gameComplete() {
+void MiniGame::gameComplete()
+{
     parent->miniGameComplete(this);
     status_label->setText("Hacking SUCCESS");
     progress_bar->setValue(1.0f);
     game_complete = true;
 }
 
-bool MiniGame::isGameComplete() {
+bool MiniGame::isGameComplete()
+{
   return game_complete;
 }

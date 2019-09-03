@@ -22,8 +22,7 @@ MineSweeper::MineSweeper(GuiHackingDialog* owner, string id, int difficulty)
 
 void MineSweeper::disable()
 {
-    status_label->setText("Select hacking target...");
-
+    MiniGame::disable();
     for(int x=0; x<difficulty; x++)
     {
         for(int y=0; y<difficulty; y++)
@@ -34,7 +33,6 @@ void MineSweeper::disable()
             item.button->disable();
         }
     }
-    reset_button->disable();
 }
 
 void MineSweeper::reset()
