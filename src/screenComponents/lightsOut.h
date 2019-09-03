@@ -17,8 +17,6 @@ class LightsOut : public MiniGame {
     virtual void reset();
     virtual void disable();
   private:
-    void onFieldClick(int x, int y);
-    void toggle(int x, int y);
     int lights_on;
 
     class LightsOutToggleButton : public GuiToggleButton {
@@ -27,7 +25,11 @@ class LightsOut : public MiniGame {
         bool toggle();
     };
 
-    std::vector<std::unique_ptr<LightsOutToggleButton>> field_item;
+    std::vector<std::unique_ptr<LightsOutToggleButton>> board;
+    void onFieldClick(int x, int y);
+    void toggle(int x, int y);
+    LightsOutToggleButton* getField(int x, int y);
+
 };
 
 

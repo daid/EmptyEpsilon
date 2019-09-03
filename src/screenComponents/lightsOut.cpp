@@ -10,9 +10,9 @@ LightsOut::LightsOut(GuiHackingDialog* owner, string id, int difficulty)
     {
         for(int y=0; y<difficulty; y++)
         {
-            field_item.emplace_back(new LightsOutToggleButton(this, "", "", [this, x, y](bool value) {onFieldClick(x, y); } ));
-            field_item.back()->setSize(50, 50);
-            field_item.back()->setPosition(25 + x * 50, 75 + y * 50);
+            board.emplace_back(new LightsOutToggleButton(this, "", "", [this, x, y](bool value) {onFieldClick(x, y); } ));
+            board.back()->setSize(50, 50);
+            board.back()->setPosition(25 + x * 50, 75 + y * 50);
         }
     }
     if (difficulty < 7)
@@ -22,6 +22,7 @@ LightsOut::LightsOut(GuiHackingDialog* owner, string id, int difficulty)
     }
     reset_button->setPosition(25, 75 + difficulty * 50, ATopLeft);
     close_button->setPosition(-25, 75 + difficulty * 50, ATopRight);
+    setSize(50 * difficulty + 100, 50 * difficulty + 145);
 }
 
 void LightsOut::disable()
@@ -31,8 +32,7 @@ void LightsOut::disable()
     {
         for(int y=0; y<difficulty; y++)
         {
-            auto& item = field_item[x + y*difficulty];
-            item->disable();
+            getField(x, y)->disable();
         }
     }
 }
@@ -46,7 +46,7 @@ void LightsOut::reset()
     {
         for(int y=0; y<difficulty; y++)
         {
-            auto& item = field_item[x + y*difficulty];
+            LightsOut::LightsOutToggleButton* item = getField(x, y);
             item->setText("");
             item->setValue(true);
             item->enable();
@@ -61,7 +61,7 @@ void LightsOut::reset()
         {
             int x=irandom(0, difficulty-1);
             int y=irandom(0, difficulty-1);
-            toggle(x,y);
+            toggle(x, y);
         }
     }
     progress_bar->setValue((float) lights_on / (float) (difficulty*difficulty));
@@ -71,7 +71,7 @@ void LightsOut::reset()
 
 void LightsOut::onFieldClick(int x, int y)
 {
-    toggle(x,y);
+    toggle(x, y);
 
     if (lights_on == difficulty*difficulty)
     {
@@ -85,19 +85,24 @@ void LightsOut::onFieldClick(int x, int y)
 void LightsOut::toggle(int x, int y)
 {
     //field itself is already toggled, only need to get Value
-    lights_on += field_item[x + y*difficulty]->getValue() ? 1 : -1;
+    lights_on += getField(x, y)->getValue() ? 1 : -1;
     if (x > 0) {
-      lights_on += field_item[x - 1 + y*difficulty]->toggle() ? 1 : -1;
+      lights_on += getField(x - 1, y)->toggle() ? 1 : -1;
     }
     if (x < difficulty - 1) {
-      lights_on += field_item[x + 1 + y*difficulty]->toggle() ? 1 : -1;
+      lights_on += getField(x + 1, y)->toggle() ? 1 : -1;
     }
     if (y > 0) {
-      lights_on += field_item[x + (y - 1) * difficulty]->toggle() ? 1 : -1;
+      lights_on += getField(x, y - 1)->toggle() ? 1 : -1;
     }
     if (y < difficulty - 1) {
-      lights_on += field_item[x + (y + 1) * difficulty]->toggle() ? 1 : -1;
+      lights_on += getField(x, y + 1)->toggle() ? 1 : -1;
     }
+}
+
+LightsOut::LightsOutToggleButton* LightsOut::getField(int x, int y)
+{
+    return board[x * difficulty + y].get();
 }
 
 bool LightsOut::LightsOutToggleButton::toggle()

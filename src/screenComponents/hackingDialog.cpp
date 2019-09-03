@@ -35,7 +35,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     default:
       irandom(0,1) ? minigame_box = new LightsOut(this, game_id, difficulty*2+1) : minigame_box = new MineSweeper(this, game_id, difficulty*4);
     }
-    minigame_box->setSize(500,545)->setPosition(0,0,ACenter);
+    minigame_box->setPosition(0,0,ACenter);
 
     target_selection_box = new GuiPanel(this, id + "_BOX");
     target_selection_box->setSize(300, 545)->setPosition(400, 0, ACenter);

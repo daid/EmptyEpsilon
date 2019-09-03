@@ -20,8 +20,7 @@ MineSweeper::MineSweeper(GuiHackingDialog* owner, string id, int difficulty)
     }
     reset_button->setPosition(25, 75 + difficulty * 50, ATopLeft);
     close_button->setPosition(-25, 75 + difficulty * 50, ATopRight);
-
-
+    setSize(50 * difficulty + 100, 50 * difficulty + 145);
 }
 
 void MineSweeper::disable()
