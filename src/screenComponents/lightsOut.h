@@ -7,6 +7,7 @@
 #define LIGHTS_OUT_H
 
 #include "miniGame.h"
+#include "gui/gui2_togglebutton.h"
 
 class LightsOut : public MiniGame {
   public:
