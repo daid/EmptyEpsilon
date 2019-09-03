@@ -61,6 +61,7 @@ void LightsOut::reset()
         {
             int x=irandom(0, difficulty-1);
             int y=irandom(0, difficulty-1);
+            getField(x, y)->setValue(!(getField(x, y)->getValue()));
             toggle(x, y);
         }
     }
