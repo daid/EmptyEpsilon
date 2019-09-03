@@ -1,3 +1,7 @@
+/** An implementation of mineSweeper for use as a hacking minigame.
+ *  Original implementation by https://github.com/daid
+ */
+
 #ifndef MINESWEEPER_H
 #define MINESWEEPER_H
 

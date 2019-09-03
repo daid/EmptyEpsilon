@@ -36,6 +36,7 @@ class MiniGame : public GuiPanel
     GuiLabel* status_label;
     GuiLabel* hacking_status_label;
     GuiButton* reset_button;
+    GuiButton* close_button;
     GuiProgressbar* progress_bar;
     GuiHackingDialog* parent;
     void gameComplete();

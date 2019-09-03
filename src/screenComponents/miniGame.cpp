@@ -21,12 +21,11 @@ MiniGame::MiniGame(GuiHackingDialog* owner, string id, int difficulty)
   reset_button->setSize(200, 50);
   //TODO Set Position
 
-  GuiButton* close_button = new GuiButton(this, "", "Close", [this]()
+  close_button = new GuiButton(this, "", "Close", [this]()
   {
       parent->hide();
   });
   close_button->setSize(200, 50);
-  close_button->setPosition(-25, 75 + difficulty * 50, ATopRight);
   progress_bar = new GuiProgressbar(this, "", 0, 1, 0.0);
   progress_bar->setPosition(-25, 75, ATopRight);
   progress_bar->setSize(50, difficulty * 50);
