@@ -17,9 +17,10 @@ LightsOut::LightsOut(GuiHackingDialog* owner, string id, int difficulty)
             field_item[x][y]->setPosition(25 + x * 50, 75 + y * 50);
         }
     }
-    if (difficulty < 7) {
-      reset_button->setSize(difficulty*50/2, 50);
-      close_button->setSize(difficulty*50/2, 50);
+    if (difficulty < 7)
+    {
+        reset_button->setSize(difficulty * 50 / 2, 50);
+        close_button->setSize(difficulty * 50 / 2, 50);
     }
     reset_button->setPosition(25, 75 + difficulty * 50, ATopLeft);
     close_button->setPosition(-25, 75 + difficulty * 50, ATopRight);
