@@ -42,20 +42,28 @@ void LightsOut::disable()
 void LightsOut::reset()
 {
     game_complete = false;
-    lights_on = 0;
-    int number_lit = irandom(difficulty, difficulty*difficulty-difficulty);
+    //generate solved configuration
+    lights_on = difficulty*difficulty;
     for(int x=0; x<difficulty; x++)
     {
         for(int y=0; y<difficulty; y++)
         {
             GuiToggleButton* item = field_item[x][y];
             item->setText("");
-            bool is_lit = irandom(0, difficulty*difficulty-1) < number_lit;
-            item->setValue(is_lit);
-            if (is_lit) {
-              lights_on++;
-            }
+            item->setValue(true);
             item->enable();
+        }
+    }
+    //make sure we don't have a solved board by accident
+    while (lights_on == difficulty*difficulty)
+    {
+        //Mess the solved board up with n moves
+        int number_moves = irandom(3, 3*difficulty);
+        for (int i=0; i<number_moves; i++)
+        {
+            int x=irandom(0, difficulty-1);
+            int y=irandom(0, difficulty-1);
+            toggle(x,y);
         }
     }
     progress_bar->setValue((float) lights_on / (float) (difficulty*difficulty));
@@ -64,6 +72,19 @@ void LightsOut::reset()
 }
 
 void LightsOut::onFieldClick(int x, int y)
+{
+    toggle(x,y);
+
+    if (lights_on == difficulty*difficulty)
+    {
+        gameComplete();
+    }else{
+        status_label->setText("Hacking in progress: " + string(100*lights_on/(difficulty*difficulty)) + "%");
+        progress_bar->setValue((float) lights_on / (float) (difficulty*difficulty));
+    }
+}
+
+void LightsOut::toggle(int x, int y)
 {
     //field itself is already toggled, only need to get Value
     lights_on += field_item[x][y]->getValue() ? 1 : -1;
@@ -78,15 +99,6 @@ void LightsOut::onFieldClick(int x, int y)
     }
     if (y < difficulty-1) {
       lights_on += field_item[x][y+1]->toggle() ? 1 : -1;
-    }
-
-
-    if (lights_on == difficulty*difficulty)
-    {
-        gameComplete();
-    }else{
-        status_label->setText("Hacking in progress: " + string(100*lights_on/(difficulty*difficulty)) + "%");
-        progress_bar->setValue((float) lights_on / (float) (difficulty*difficulty));
     }
 }
 

@@ -16,6 +16,7 @@ class LightsOut : public MiniGame {
     virtual void disable();
   private:
     void onFieldClick(int x, int y);
+    void toggle(int x, int y);
     int lights_on;
 
     class LightsOutToggleButton : public GuiToggleButton {
