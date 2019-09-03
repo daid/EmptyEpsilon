@@ -62,10 +62,18 @@ void LightsOut::onFieldClick(int x, int y)
 {
     //field itself is already toggled, only need to get Value
     lights_on += field_item[x][y]->getValue() ? 1 : -1;
-    lights_on += field_item[x-1][y]->toggle() ? 1 : -1;
-    lights_on += field_item[x+1][y]->toggle() ? 1 : -1;
-    lights_on += field_item[x][y-1]->toggle() ? 1 : -1;
-    lights_on += field_item[x][y+1]->toggle() ? 1 : -1;
+    if (x > 0) {
+      lights_on += field_item[x-1][y]->toggle() ? 1 : -1;
+    }
+    if (x < difficulty-1) {
+      lights_on += field_item[x+1][y]->toggle() ? 1 : -1;
+    }
+    if (y > 0) {
+      lights_on += field_item[x][y-1]->toggle() ? 1 : -1;
+    }
+    if (y < difficulty-1) {
+      lights_on += field_item[x][y+1]->toggle() ? 1 : -1;
+    }
 
 
     if (lights_on == difficulty*difficulty)
