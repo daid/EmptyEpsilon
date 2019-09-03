@@ -34,6 +34,12 @@ enum EScanningComplexity
     SC_Normal,
     SC_Advanced
 };
+enum EHackingGames
+{
+    HG_Mine,
+    HG_Lights,
+    HG_All
+};
 
 class GameGlobalInfo : public MultiplayerObject, public Updatable
 {
@@ -58,13 +64,15 @@ private:
 public:
     string global_message;
     float global_message_timeout;
-    
+
     string banner_string;
 
     std::vector<float> reputation_points;
     NebulaInfo nebula_info[max_nebulas];
     EPlayerWarpJumpDrive player_warp_jump_drive_setting;
     EScanningComplexity scanning_complexity;
+    int hacking_difficulty;
+    EHackingGames hacking_games;
     /*!
      * \brief Range of the science radar.
      */
