@@ -21,7 +21,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     int difficulty = 2;
     EHackingGames games = HG_All;
     if (gameGlobalInfo) {
-      difficulty = gameGlobalInfo->hacking_difficulty;
+      difficulty = gameGlobalInfo->hacking_difficulty+1;
       games = gameGlobalInfo->hacking_games;
     }
 

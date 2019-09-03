@@ -27,7 +27,7 @@ ServerCreationScreen::ServerCreationScreen()
     gameGlobalInfo->player_warp_jump_drive_setting = EPlayerWarpJumpDrive(PreferencesManager::get("server_config_warp_jump_drive_setting", "0").toInt());
     gameGlobalInfo->long_range_radar_range = PreferencesManager::get("server_config_long_range_radar_range", "30000").toInt();
     gameGlobalInfo->scanning_complexity = EScanningComplexity(PreferencesManager::get("server_config_scanning_complexity", "2").toInt());
-    gameGlobalInfo->hacking_difficulty = PreferencesManager::get("server_config_hacking_difficulty", "2").toInt();
+    gameGlobalInfo->hacking_difficulty = PreferencesManager::get("server_config_hacking_difficulty", "1").toInt();
     gameGlobalInfo->hacking_games = EHackingGames(PreferencesManager::get("server_config_hacking_games", "3").toInt());
     gameGlobalInfo->use_beam_shield_frequencies = PreferencesManager::get("server_config_use_beam_shield_frequencies", "1").toInt();
     gameGlobalInfo->use_system_damage = PreferencesManager::get("server_config_use_system_damage", "1").toInt();
