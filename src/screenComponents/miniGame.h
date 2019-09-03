@@ -25,7 +25,6 @@ class MiniGame : public GuiPanel
 
   private:
     int difficulty;
-    static constexpr float auto_reset_time = 2.0f;
     int error_count;
     int correct_count;
     bool game_complete;
@@ -44,6 +43,6 @@ class MiniGame : public GuiPanel
     GuiHackingDialog* parent;
     void onFieldClick(int x, int y);
     void gameComplete();
-}
+};
 
 #endif//MINIGAME_H

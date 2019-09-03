@@ -26,6 +26,8 @@ private:
     P<SpaceObject> target;
     string target_system;
     float reset_time;
+    static constexpr float auto_reset_time = 2.0f;
+
 
     MiniGame* minigame_box;
     GuiPanel* target_selection_box;
