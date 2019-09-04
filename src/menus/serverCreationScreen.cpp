@@ -130,6 +130,14 @@ ServerCreationScreen::ServerCreationScreen()
         gameGlobalInfo->hacking_difficulty = index;
     }))->setOptions({"Simple", "Normal", "Difficult", "Fiendish"})->setSelectionIndex(gameGlobalInfo->hacking_difficulty)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
+    // Hacking games selector.
+    row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
+    row->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(row, "GAME_HACKING_GAMES_LABEL", "Hacking type: ", 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiSelector(row, "GAME_HACKING_GAME", [](int index, string value) {
+        gameGlobalInfo->hacking_games = EHackingGames(index);
+    }))->setOptions({"Mine", "Lights", "All"})->setSelectionIndex((int)gameGlobalInfo->hacking_games)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
     // Frequency and system damage row.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
