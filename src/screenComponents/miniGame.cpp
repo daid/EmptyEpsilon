@@ -28,8 +28,10 @@ MiniGame::MiniGame(GuiHackingDialog* owner, string id, int difficulty)
   close_button->setSize(200, 50);
   progress_bar = new GuiProgressbar(this, "", 0, 1, 0.0);
   progress_bar->setPosition(-25, 75, ATopRight);
-  progress_bar->setSize(50, difficulty * 50);
+  progress_bar->setSize(50, 400);
   setSize(500, 545);
+  close_button->setPosition(-25, 475, ATopRight);
+  reset_button->setPosition(25, 475, ATopLeft);
 
 }
 
