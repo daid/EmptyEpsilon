@@ -6,6 +6,8 @@
 #define MINESWEEPER_H
 
 #include "miniGame.h"
+#include <vector>
+#include <memory>
 
 
 class MineSweeper : public MiniGame {
@@ -20,12 +22,11 @@ class MineSweeper : public MiniGame {
     class FieldItem
     {
     public:
-        GuiToggleButton* button;
+        std::unique_ptr<GuiToggleButton> button;
         bool bomb;
     };
-
-    FieldItem** field_item;
-
+    std::vector<std::unique_ptr<FieldItem>> board;
+    FieldItem* getFieldItem(int x, int y);
 };
 
 #endif//MINESWEEPER_H

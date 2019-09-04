@@ -7,15 +7,15 @@
 
 MineSweeper::MineSweeper(GuiHackingDialog* owner, string id, int difficulty)
 : MiniGame(owner, id, difficulty) {
-    field_item = new FieldItem*[difficulty];
     for(int x=0; x<difficulty; x++)
     {
-        field_item[x] = new FieldItem[difficulty];
         for(int y=0; y<difficulty; y++)
         {
-            field_item[x][y].button = new GuiToggleButton(this, "", "", [this, x, y](bool value) { field_item[x][y].button->setValue(!value); onFieldClick(x, y); } );
-            field_item[x][y].button->setSize(50, 50);
-            field_item[x][y].button->setPosition(25 + x * 50, 75 + y * 50);
+            std::unique_ptr<FieldItem> item = std::unique_ptr<FieldItem>(new FieldItem());
+            item->button = std::unique_ptr<GuiToggleButton>(new GuiToggleButton(this, "", "", [this, x, y](bool value) { getFieldItem(x, y)->button->setValue(!value); onFieldClick(x, y); } ));
+            item->button->setSize(50, 50);
+            item->button->setPosition(25 + x * 50, 75 + y * 50);
+            board.push_back(std::move(item));
         }
     }
 
@@ -37,10 +37,10 @@ void MineSweeper::disable()
     {
         for(int y=0; y<difficulty; y++)
         {
-            FieldItem& item = field_item[x][y];
-            item.button->setText("");
-            item.button->setValue(false);
-            item.button->disable();
+            FieldItem* item = getFieldItem(x, y);
+            item->button->setText("");
+            item->button->setValue(false);
+            item->button->disable();
         }
     }
 }
@@ -52,11 +52,11 @@ void MineSweeper::reset()
     {
         for(int y=0; y<difficulty; y++)
         {
-            FieldItem& item = field_item[x][y];
-            item.button->setText("");
-            item.button->setValue(false);
-            item.button->enable();
-            item.bomb = false;
+            FieldItem* item = getFieldItem(x, y);
+            item->button->setText("");
+            item->button->setValue(false);
+            item->button->enable();
+            item->bomb = false;
         }
     }
     for(int n=0; n<difficulty; n++)
@@ -64,12 +64,12 @@ void MineSweeper::reset()
         int x = irandom(0, difficulty - 1);
         int y = irandom(0, difficulty - 1);
 
-        if (field_item[x][y].bomb)
+        if (getFieldItem(x, y)->bomb)
         {
             n--;
             continue;
         }
-        field_item[x][y].bomb = true;
+        getFieldItem(x, y)->bomb = true;
     }
     error_count = 0;
     correct_count = 0;
@@ -80,39 +80,40 @@ void MineSweeper::reset()
 
 void MineSweeper::onFieldClick(int x, int y)
 {
-    FieldItem& item = field_item[x][y];
-    if (item.button->getValue() || item.button->getText() == "X" || error_count > 1 || correct_count == (difficulty * difficulty - difficulty))
+    FieldItem* item = getFieldItem(x, y);
+    if (item->button->getValue() || item->button->getText() == "X" || error_count > 1 || correct_count == (difficulty * difficulty - difficulty))
     {
         //Unpressing an already pressed button.
         return;
     }
-    item.button->setValue(true);
-    if (item.bomb)
+    item->button->setValue(true);
+    if (item->bomb)
     {
-        item.button->setText("X");
-        item.button->setValue(false);
+        item->button->setText("X");
+        item->button->setValue(false);
         error_count++;
     }else{
         correct_count++;
         int difficulty = 0;
-        if (x > 0 && y > 0 && field_item[x-1][y-1].bomb) difficulty++;
-        if (x > 0 && field_item[x-1][y].bomb) difficulty++;
-        if (x > 0 && y < difficulty - 1 && field_item[x-1][y+1].bomb) difficulty++;
+        if (x > 0 && y > 0 && getFieldItem(x - 1, y - 1)->bomb) difficulty++;
+        if (x > 0 && getFieldItem(x - 1, y)->bomb) difficulty++;
+        if (x > 0 && y < difficulty - 1 && getFieldItem(x - 1, y + 1)->bomb) difficulty++;
 
-        if (y > 0 && field_item[x][y-1].bomb) difficulty++;
-        if (y < difficulty - 1 && field_item[x][y+1].bomb) difficulty++;
+        if (y > 0 && getFieldItem(x, y - 1)->bomb) difficulty++;
+        if (y < difficulty - 1 && getFieldItem(x, y + 1)->bomb) difficulty++;
 
-        if (x < difficulty - 1 && y > 0 && field_item[x+1][y-1].bomb) difficulty++;
-        if (x < difficulty - 1 && field_item[x+1][y].bomb) difficulty++;
-        if (x < difficulty - 1 && y < difficulty - 1 && field_item[x+1][y+1].bomb) difficulty++;
+        if (x < difficulty - 1 && y > 0 && getFieldItem(x + 1, y - 1)->bomb) difficulty++;
+        if (x < difficulty - 1 && getFieldItem(x + 1, y)->bomb) difficulty++;
+        if (x < difficulty - 1 && y < difficulty - 1 && getFieldItem(x + 1, y + 1)->bomb) difficulty++;
 
         if (difficulty < 1)
-            item.button->setText("");
+            item->button->setText("");
         else
-            item.button->setText(string(difficulty));
+            item->button->setText(string(difficulty));
 
         if (difficulty < 1)
         {
+            //if no bombs found in proximity, auto click on all surrounding tiles
             if (x > 0 && y > 0) onFieldClick(x - 1, y - 1);
             if (x > 0)  onFieldClick(x - 1, y);
             if (x > 0 && y < difficulty - 1) onFieldClick(x - 1, y + 1);
@@ -137,4 +138,10 @@ void MineSweeper::onFieldClick(int x, int y)
         status_label->setText("Hacking in progress: " + string(correct_count * 100 / (difficulty * difficulty - difficulty)) + "%");
         progress_bar->setValue(float(correct_count) / float(difficulty * difficulty - difficulty));
     }
+}
+
+
+MineSweeper::FieldItem* MineSweeper::getFieldItem(int x, int y)
+{
+    return board[x * difficulty + y].get();
 }
