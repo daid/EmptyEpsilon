@@ -30,7 +30,7 @@ private:
     static constexpr float auto_reset_time = 2.0f;
 
 
-    std::unique_ptr<MiniGame> minigame_box;
+    MiniGame* minigame_box;
     GuiPanel* target_selection_box;
     GuiListbox* target_list;
     void getNewGame(bool sameType = false);

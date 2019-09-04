@@ -19,7 +19,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     hide();
     //dummy game panel until we choose a system
-    minigame_box  = std::unique_ptr<MiniGame>(new MiniGame(this, id + "_GAME_BOX", 2));
+    minigame_box  = new MiniGame(this, id + "_GAME_BOX", 2);
     minigame_box->setPosition(0, 0, ACenter);
 
     target_selection_box = new GuiPanel(this, id + "_BOX");
@@ -111,6 +111,7 @@ void GuiHackingDialog::getNewGame(bool sameType) {
       minigame_box->reset();
       return;
     }
+    minigame_box->destroy();
     string game_id = id + "_BOX";
     int difficulty = 2;
     EHackingGames games = HG_All;
@@ -122,13 +123,13 @@ void GuiHackingDialog::getNewGame(bool sameType) {
     switch (games)
     {
     case HG_Lights:
-      minigame_box.reset(new LightsOut(this, game_id, difficulty * 2 + 1));
+      minigame_box = new LightsOut(this, game_id, difficulty * 2 + 1);
       break;
     case HG_Mine:
-      minigame_box.reset(new MineSweeper(this, game_id, difficulty * 2 + 4));
+      minigame_box = new MineSweeper(this, game_id, difficulty * 2 + 4);
       break;
     default:
-      irandom(0,1) ? minigame_box.reset(new LightsOut(this, game_id, difficulty * 2 + 1)) : minigame_box.reset(new MineSweeper(this, game_id, difficulty * 2 + 4));
+      irandom(0,1) ? minigame_box = new LightsOut(this, game_id, difficulty * 2 + 1) : minigame_box = new MineSweeper(this, game_id, difficulty * 2 + 4);
     }
     minigame_box->setPosition(0, 0, ACenter);
 
