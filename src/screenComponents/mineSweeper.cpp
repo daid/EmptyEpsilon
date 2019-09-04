@@ -18,6 +18,13 @@ MineSweeper::MineSweeper(GuiHackingDialog* owner, string id, int difficulty)
             field_item[x][y].button->setPosition(25 + x * 50, 75 + y * 50);
         }
     }
+
+    //make buttons smaller for small boards
+    if (difficulty < 7)
+    {
+        reset_button->setSize(difficulty * 50 / 2, 50);
+        close_button->setSize(difficulty * 50 / 2, 50);
+    }
     reset_button->setPosition(25, 75 + difficulty * 50, ATopLeft);
     close_button->setPosition(-25, 75 + difficulty * 50, ATopRight);
     setSize(50 * difficulty + 100, 50 * difficulty + 145);

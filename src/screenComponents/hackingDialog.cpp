@@ -28,12 +28,12 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     switch (games)
     {
     case HG_Lights:
-      minigame_box = new LightsOut(this, game_id, difficulty*2+1);
+      minigame_box = new LightsOut(this, game_id, difficulty * 2 + 1);
       break;
     case HG_Mine:
-      minigame_box = new MineSweeper(this, game_id, difficulty*4);
+      minigame_box = new MineSweeper(this, game_id, difficulty * 2 + 4);
     default:
-      irandom(0,1) ? minigame_box = new LightsOut(this, game_id, difficulty*2+1) : minigame_box = new MineSweeper(this, game_id, difficulty*4);
+      irandom(0,1) ? minigame_box = new LightsOut(this, game_id, difficulty * 2 + 1) : minigame_box = new MineSweeper(this, game_id, difficulty * 2 + 4);
     }
     minigame_box->setPosition(0,0,ACenter);
 

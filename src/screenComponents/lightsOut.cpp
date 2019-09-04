@@ -15,6 +15,8 @@ LightsOut::LightsOut(GuiHackingDialog* owner, string id, int difficulty)
             board.back()->setPosition(25 + x * 50, 75 + y * 50);
         }
     }
+
+    //make buttons smaller for small boards
     if (difficulty < 7)
     {
         reset_button->setSize(difficulty * 50 / 2, 50);
