@@ -5,6 +5,7 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "mineSweeper.h"
 #include "lightsOut.h"
+#include <memory>
 
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
@@ -17,26 +18,8 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     hide();
-    string game_id = id + "_BOX";
-    int difficulty = 2;
-    EHackingGames games = HG_All;
-    if (gameGlobalInfo) {
-      difficulty = gameGlobalInfo->hacking_difficulty+1;
-      games = gameGlobalInfo->hacking_games;
-    }
-
-    switch (games)
-    {
-    case HG_Lights:
-      minigame_box = new LightsOut(this, game_id, difficulty * 2 + 1);
-      break;
-    case HG_Mine:
-      minigame_box = new MineSweeper(this, game_id, difficulty * 2 + 4);
-    default:
-      irandom(0,1) ? minigame_box = new LightsOut(this, game_id, difficulty * 2 + 1) : minigame_box = new MineSweeper(this, game_id, difficulty * 2 + 4);
-    }
-    minigame_box->setPosition(0,0,ACenter);
-
+    //dummy game panel until we choose a system
+    minigame_box  = std::unique_ptr<MiniGame>(new MiniGame(this, id + "_GAME_BOX", 2));
     target_selection_box = new GuiPanel(this, id + "_BOX");
     target_selection_box->setSize(300, 545)->setPosition(400, 0, ACenter);
 
@@ -46,7 +29,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     target_list = new GuiListbox(target_selection_box, "", [this](int index, string value)
     {
         target_system = value;
-        minigame_box->reset();
+        getNewGame();
     });
     target_list->setPosition(25, 75, ATopLeft);
     target_list->setSize(250, 445);
@@ -67,7 +50,7 @@ void GuiHackingDialog::open(P<SpaceObject> target)
     {
         target_selection_box->hide();
         target_system = targets[0].first;
-        minigame_box->reset();
+        getNewGame();
     }else{
         target_selection_box->show();
         minigame_box->disable();
@@ -90,7 +73,7 @@ void GuiHackingDialog::onDraw(sf::RenderTarget& window)
             {
                 my_spaceship->commandHackingFinished(target, target_system);
             }
-            minigame_box->reset();
+            getNewGame();
         }else{
             minigame_box->setProgress((reset_time - engine->getElapsedTime()) / auto_reset_time);
         }
@@ -118,4 +101,32 @@ void GuiHackingDialog::miniGameComplete()
 {
     reset_time = engine->getElapsedTime() + auto_reset_time;
     minigame_box->disable();
+}
+
+void GuiHackingDialog::getNewGame(bool sameType) {
+    //if we want a game of the same type and the game is already defined, just reset it.
+    if (sameType && minigame_box) {
+      minigame_box->reset();
+      return;
+    }
+    string game_id = id + "_BOX";
+    int difficulty = 2;
+    EHackingGames games = HG_All;
+    if (gameGlobalInfo) {
+      difficulty = gameGlobalInfo->hacking_difficulty+1;
+      games = gameGlobalInfo->hacking_games;
+    }
+
+    switch (games)
+    {
+    case HG_Lights:
+      minigame_box.reset(new LightsOut(this, game_id, difficulty * 2 + 1));
+      break;
+    case HG_Mine:
+      minigame_box.reset(new MineSweeper(this, game_id, difficulty * 2 + 4));
+    default:
+      irandom(0,1) ? minigame_box.reset(new LightsOut(this, game_id, difficulty * 2 + 1)) : minigame_box.reset(new MineSweeper(this, game_id, difficulty * 2 + 4));
+    }
+    minigame_box->setPosition(0, 0, ACenter);
+
 }

@@ -26,7 +26,7 @@ class MiniGame : public GuiPanel
     void setProgress(float progress);
     virtual bool isGameComplete();
 
-    virtual void reset() = 0;
+    virtual void reset();
     virtual void disable();
 
   protected:

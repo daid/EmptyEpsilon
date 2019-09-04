@@ -47,7 +47,7 @@ void MineSweeper::disable()
 
 void MineSweeper::reset()
 {
-    game_complete = false;
+    MiniGame::reset();
     for(int x=0; x<difficulty; x++)
     {
         for(int y=0; y<difficulty; y++)
@@ -76,7 +76,6 @@ void MineSweeper::reset()
 
     progress_bar->setValue(0.0f);
     status_label->setText("Hacking in progress: 0%");
-    reset_button->enable();
 }
 
 void MineSweeper::onFieldClick(int x, int y)

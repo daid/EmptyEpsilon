@@ -41,7 +41,7 @@ void LightsOut::disable()
 
 void LightsOut::reset()
 {
-    game_complete = false;
+    MiniGame::reset();
     //generate solved configuration
     lights_on = difficulty*difficulty;
     for(int x=0; x<difficulty; x++)
@@ -69,7 +69,6 @@ void LightsOut::reset()
     }
     progress_bar->setValue((float) lights_on / (float) (difficulty*difficulty));
     status_label->setText("Hacking in progress: "+string(100*lights_on/(difficulty*difficulty)) + "%");
-    reset_button->enable();
 }
 
 void LightsOut::onFieldClick(int x, int y)

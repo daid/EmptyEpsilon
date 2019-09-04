@@ -3,6 +3,7 @@
 
 #include "gui/gui2_overlay.h"
 #include "miniGame.h"
+#include <memory>
 
 class GuiPanel;
 class GuiLabel;
@@ -29,10 +30,10 @@ private:
     static constexpr float auto_reset_time = 2.0f;
 
 
-    MiniGame* minigame_box;
+    std::unique_ptr<MiniGame> minigame_box;
     GuiPanel* target_selection_box;
     GuiListbox* target_list;
-
+    void getNewGame(bool sameType = false);
 };
 
 #endif//HACKING_DIALOG_H

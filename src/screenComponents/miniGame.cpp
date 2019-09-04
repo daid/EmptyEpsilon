@@ -29,6 +29,14 @@ MiniGame::MiniGame(GuiHackingDialog* owner, string id, int difficulty)
   progress_bar = new GuiProgressbar(this, "", 0, 1, 0.0);
   progress_bar->setPosition(-25, 75, ATopRight);
   progress_bar->setSize(50, difficulty * 50);
+  setSize(500, 545);
+
+}
+
+void MiniGame::reset()
+{
+  game_complete = false;
+  reset_button->enable();
 }
 
 void MiniGame::disable()
