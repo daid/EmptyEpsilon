@@ -25,7 +25,7 @@ void MissileWeapon::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position,
     object_sprite.setRotation(getRotation());
     object_sprite.setPosition(position);
     object_sprite.setColor(data.color);
-    object_sprite.setScale(0.5, 0.5);
+    object_sprite.setScale(category_modifier * 0.5, category_modifier * 0.5);
     window.draw(object_sprite);
 }
 
