@@ -223,6 +223,7 @@ void SpaceShip::applyTemplateValues()
     {
         weapon_tube[n].setLoadTimeConfig(ship_template->weapon_tube[n].load_time);
         weapon_tube[n].setDirection(ship_template->weapon_tube[n].direction);
+        weapon_tube[n].setSize(ship_template->weapon_tube[n].size);
         for(int m=0; m<MW_Count; m++)
         {
             if (ship_template->weapon_tube[n].type_allowed_mask & (1 << m))
