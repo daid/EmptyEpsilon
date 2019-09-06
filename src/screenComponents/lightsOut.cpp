@@ -104,7 +104,7 @@ void LightsOut::toggle(int x, int y)
 
 LightsOut::LightsOutToggleButton* LightsOut::getField(int x, int y)
 {
-    return board[x * difficulty + y].get();
+    return board[x * difficulty + y];
 }
 
 bool LightsOut::LightsOutToggleButton::toggle()
