@@ -30,6 +30,13 @@ MineSweeper::MineSweeper(GuiHackingDialog* owner, string id, int difficulty)
     setSize(50 * difficulty + 100, 50 * difficulty + 145);
 }
 
+MineSweeper::~MineSweeper ()
+{
+    for (FieldItem* const &ptr: board) {
+        delete ptr;
+    }
+}
+
 void MineSweeper::disable()
 {
     MiniGame::disable();

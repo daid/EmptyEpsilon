@@ -13,6 +13,7 @@
 class MineSweeper : public MiniGame {
   public:
     MineSweeper(GuiHackingDialog* owner, string id, int difficulty);
+    ~MineSweeper();
     virtual void reset();
     virtual void disable();
   private:
