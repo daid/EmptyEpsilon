@@ -11,11 +11,11 @@ MineSweeper::MineSweeper(GuiHackingDialog* owner, string id, int difficulty)
     {
         for(int y=0; y<difficulty; y++)
         {
-            std::unique_ptr<FieldItem> item = std::unique_ptr<FieldItem>(new FieldItem());
-            item->button = std::unique_ptr<GuiToggleButton>(new GuiToggleButton(this, "", "", [this, x, y](bool value) { getFieldItem(x, y)->button->setValue(!value); onFieldClick(x, y); } ));
+            FieldItem* item = new FieldItem();
+            item->button = new GuiToggleButton(this, "", "", [this, x, y](bool value) { getFieldItem(x, y)->button->setValue(!value); onFieldClick(x, y); });
             item->button->setSize(50, 50);
             item->button->setPosition(25 + x * 50, 75 + y * 50);
-            board.push_back(std::move(item));
+            board.push_back(item);
         }
     }
 
@@ -143,5 +143,5 @@ void MineSweeper::onFieldClick(int x, int y)
 
 MineSweeper::FieldItem* MineSweeper::getFieldItem(int x, int y)
 {
-    return board[x * difficulty + y].get();
+    return board[x * difficulty + y];
 }

@@ -22,10 +22,10 @@ class MineSweeper : public MiniGame {
     class FieldItem
     {
     public:
-        std::unique_ptr<GuiToggleButton> button;
+        GuiToggleButton *button;
         bool bomb;
     };
-    std::vector<std::unique_ptr<FieldItem>> board;
+    std::vector<FieldItem*> board;
     FieldItem* getFieldItem(int x, int y);
 };
 
