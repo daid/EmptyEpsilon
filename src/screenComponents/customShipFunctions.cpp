@@ -30,6 +30,10 @@ void GuiCustomShipFunctions::checkEntries()
             createEntries();
             return;
         }
+        else if (entries[n].element->getText() != my_spaceship->custom_functions[n].caption)
+        {
+            entries[n].element->setText(my_spaceship->custom_functions[n].caption)
+        }
     }
 }
 
