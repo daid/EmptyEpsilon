@@ -32,7 +32,14 @@ void GuiCustomShipFunctions::checkEntries()
         }
         else if (entries[n].element->getText() != my_spaceship->custom_functions[n].caption)
         {
-            entries[n].element->setText(my_spaceship->custom_functions[n].caption)
+            if (my_spaceship->custom_functions[n].type == PlayerSpaceship::CustomShipFunction::Type::Button)
+            {
+              ((GuiButton*) entries[n].element)->setText(my_spaceship->custom_functions[n].caption);
+            }
+            else if (my_spaceship->custom_functions[n].type == PlayerSpaceship::CustomShipFunction::Type::Info)
+            {
+              ((GuiButton*) entries[n].element)->setText(my_spaceship->custom_functions[n].caption);
+            }
         }
     }
 }
