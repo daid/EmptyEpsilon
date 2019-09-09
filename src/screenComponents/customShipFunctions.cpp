@@ -30,15 +30,20 @@ void GuiCustomShipFunctions::checkEntries()
             createEntries();
             return;
         }
-        else if (entries[n].element->getText() != my_spaceship->custom_functions[n].caption)
+        else if (my_spaceship->custom_functions[n].type == PlayerSpaceship::CustomShipFunction::Type::Button)
         {
-            if (my_spaceship->custom_functions[n].type == PlayerSpaceship::CustomShipFunction::Type::Button)
+            GuiButton* button = (GuiButton*) entries[n].element;
+            if (button->getText() != my_spaceship->custom_functions[n].caption)
             {
-              ((GuiButton*) entries[n].element)->setText(my_spaceship->custom_functions[n].caption);
+              button->setText(my_spaceship->custom_functions[n].caption);
             }
-            else if (my_spaceship->custom_functions[n].type == PlayerSpaceship::CustomShipFunction::Type::Info)
+        }
+        else if (my_spaceship->custom_functions[n].type == PlayerSpaceship::CustomShipFunction::Type::Info)
+        {
+            GuiLabel* label = (GuiLabel*) entries[n].element;
+            if (label->getText() != my_spaceship->custom_functions[n].caption)
             {
-              ((GuiButton*) entries[n].element)->setText(my_spaceship->custom_functions[n].caption);
+              label->setText(my_spaceship->custom_functions[n].caption);
             }
         }
     }
