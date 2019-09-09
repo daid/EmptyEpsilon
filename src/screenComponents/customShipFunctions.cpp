@@ -33,16 +33,16 @@ void GuiCustomShipFunctions::checkEntries()
         }
         else if (my_spaceship->custom_functions[n].type == PlayerSpaceship::CustomShipFunction::Type::Button)
         {
-            GuiButton* button = (GuiButton*) (entries[n].element);
-            if (button->getText() != caption)
+            GuiButton* button = dynamic_cast<GuiButton*>(entries[n].element);
+            if (button && button->getText() != caption)
             {
                 button->setText(caption);
             }
         }
         else if (my_spaceship->custom_functions[n].type == PlayerSpaceship::CustomShipFunction::Type::Info)
         {
-            GuiLabel* label = (GuiLabel*) (entries[n].element);
-            if (label->getText() != caption)
+            GuiLabel* label = dynamic_cast<GuiLabel*>(entries[n].element);
+            if (label && label->getText() != caption)
             {
                 label->setText(caption);
             }
