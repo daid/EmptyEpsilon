@@ -71,4 +71,13 @@ if(NOT SFML_ROOT)
     endif()
     
     set(SFML_ROOT "${CMAKE_SYSROOT}")
+
+    set(ENABLE_CRASH_LOGGER ON)
+    set(DDRMINGW_ROOT "${WIN32_BASE}/drmingw-0.9.2-win32")
+    if(NOT IS_DIRECTORY "${DDRMINGW_ROOT}")
+        file(DOWNLOAD https://github.com/jrfonseca/drmingw/releases/download/0.9.2/drmingw-0.9.2-win32.7z ${WIN32_BASE}/drmingw.7z SHOW_PROGRESS)
+        execute_process_ex(
+            COMMAND "7z" "x" "drmingw.7z"
+            WORKING_DIRECTORY ${WIN32_BASE})
+    endif()
 endif()
