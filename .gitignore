@@ -34,6 +34,9 @@ thumbs.db
 # vim
 *.swp
 
+# build directory
+/_build
+
 options.ini
 
 
