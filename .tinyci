@@ -11,7 +11,7 @@ commands =
 directory = _build_win32
 commands =
     cmake .. -G Ninja -DSERIOUS_PROTON_DIR=../../SeriousProton -DCMAKE_TOOLCHAIN_FILE=../cmake/mingw.toolchain
-    cmake --build .
+    cmake --build . --target package
 artifacts = EmptyEpsilon.zip
 
 [build-android]
