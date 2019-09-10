@@ -954,6 +954,7 @@ $(function() {
 		var files = {}
 		var html = '<table class="downloads"><tr><th>OS<th>File<th>version';
         var first = true;
+        data.sort(function(a, b) {return a["tag_name"].localeCompare(b["tag_name"]);});
 		for(var idx in data)
 		{
 			var release = data[idx]
@@ -965,7 +966,9 @@ $(function() {
                 var title = asset["name"];
 				var url = asset["browser_download_url"];
                 var os = "unknown";
-                if (title.endsWith("-Windows.zip"))
+                if (title.startsWith("Win32_"))
+                    os = "windows";
+                if (title.endsWith("-win32.zip"))
                     os = "windows";
                 if (title.endsWith(".apk"))
                     os = "android";
