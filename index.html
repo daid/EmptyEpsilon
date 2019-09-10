@@ -950,71 +950,32 @@ $(function() {
 		$("#" + key).tabs("option", "active", hashData[key]);
 	}
 
-	$.get("http://daid.eu/ee/files.php", 
-function(data) {
+	$.get("https://api.github.com/repos/daid/EmptyEpsilon/releases", function(data) {
 		var files = {}
+		var html = '<table class="downloads"><tr><th>OS<th>File<th>version';
+        var first = true;
 		for(var idx in data)
 		{
-			var f = data[idx]
-			var version = f.match("[0-9][0-9][0-9][0-9]\.?[0-9][0-9]\.?[0-9][0-9]");
-			if (version.length == 1)
+			var release = data[idx]
+            var release_name = release["tag_name"];
+
+			for(var idx2 in release["assets"])
 			{
-				var os = "";
-				version = parseInt(version[0].replace(/\./g, ""));
-				if (f.toLowerCase().indexOf("win32") > -1 || f.toLowerCase().indexOf("windows") > -1)
-					os = "windows";
-				if (f.toLowerCase().indexOf("android") > -1)
-					os = "android";
-				if (f.toLowerCase().indexOf("osx") > -1 || f.toLowerCase().indexOf("macos") > -1)
-					os = "osx";
-
-				if (os != "")
-				{
-					if (files[version] == undefined)
-						files[version] = {}
-					files[version][os] = f;
-				}
+                var asset = releases["assets"][idx2];
+                var title = asset["name"];
+				var url = asset["browser_download_url"];
+                var os = "unknown";
+                if (title.endsWith("-Windows.zip"))
+                    os = "windows";
+                if (title.endsWith(".apk"))
+                    os = "android";
+				var row = '<tr class="' + os + '"><td><a href="' + url + '"><img src="images/os_' + os + '.svg" width="24"></a><td><a href="' + url + '" class="download ' + os + '">' + title + '</a><td>' + release_name;
+    			html += row;
 			}
-		}
-
-		var html = '<table class="downloads"><tr><th>OS<th>File<th>version';
-		var part2 = '<tr><th>OS<th>File<th>version'
-        var first = true;
-        var versions = [];
-		for(var version in files)
-		{
-            versions.push(version);
-        }
-        versions.sort();
-        versions.reverse();
-		for(var i in versions)
-		{
-            var version = versions[i];
-			var oses = [];
-			for(var os in files[version])
-				oses.push(os);
-			oses.sort();
-			oses.reverse();
-
-			for(var idx in oses)
-			{
-                var os = oses[idx];
-				var vers = version.substr(0, 4) + "-" + version.substr(4, 2) + "-" + version.substr(6, 2);
-				var url = 
-'http://daid.eu/ee/downloads/' + 
-files[version][os];
-                var title = files[version][os];
-                if (os == "android")
-                    title += " (BETA)";
-				row = '<tr class="' + os + '"><td><a href="' + url + '"><img src="images/os_' + os + '.svg" width="24"></a><td><a href="' + url + '" class="download ' + os + '">' + title + '</a><td>' + vers;
-				if (first)
-					html += row;
-				else
-					part2 += row;
-			}
+            if (first)
+                html += "<tr><th>OS<th>File<th>version";
             first = false;
 		}
-		html += part2;
 		html += '</table>';
 		$('#downloads-info').html(html);
 	}, "json");
