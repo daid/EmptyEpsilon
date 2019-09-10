@@ -954,7 +954,7 @@ $(function() {
 		var files = {}
 		var html = '<table class="downloads"><tr><th>OS<th>File<th>version';
         var first = true;
-        data.sort(function(a, b) {return a["tag_name"].localeCompare(b["tag_name"]);});
+        data.sort(function(a, b) {return b["tag_name"].localeCompare(a["tag_name"]);});
 		for(var idx in data)
 		{
 			var release = data[idx]
