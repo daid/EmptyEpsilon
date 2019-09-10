@@ -28,8 +28,6 @@ void BlackHole::update(float delta)
 #if FEATURE_3D_RENDERING
 void BlackHole::draw3DTransparent()
 {
-    float distance = sf::length(camera_position - sf::Vector3f(getPosition().x, getPosition().y, 0));
-
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture("blackHole3d.png"));
     sf::Shader::bind(ShaderManager::getShader("billboardShader"));
