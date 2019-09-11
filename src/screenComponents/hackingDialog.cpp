@@ -5,6 +5,7 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "mineSweeper.h"
 #include "lightsOut.h"
+#include "miniGame.h"
 #include <memory>
 
 #include "gui/gui2_panel.h"

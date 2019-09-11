@@ -2,7 +2,6 @@
 #define HACKING_DIALOG_H
 
 #include "gui/gui2_overlay.h"
-#include "miniGame.h"
 #include <memory>
 
 class GuiPanel;
