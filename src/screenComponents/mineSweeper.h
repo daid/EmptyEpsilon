@@ -6,6 +6,7 @@
 #define MINESWEEPER_H
 
 #include "miniGame.h"
+#include "gui/gui2_togglebutton.h"
 #include <vector>
 #include <memory>
 
