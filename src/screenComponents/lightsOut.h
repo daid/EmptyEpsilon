@@ -13,9 +13,11 @@
 
 class LightsOut : public MiniGame {
   public:
-    LightsOut(GuiHackingDialog* owner, string id, int difficulty);
+    LightsOut(GuiHackingDialog* owner, int difficulty);
     virtual void reset();
     virtual void disable();
+    virtual float getProgress();
+    virtual sf::Vector2f getBoardSize();
   private:
     int lights_on;
 
@@ -25,7 +27,6 @@ class LightsOut : public MiniGame {
         bool toggle();
     };
 
-    std::vector<LightsOutToggleButton*> board;
     void onFieldClick(int x, int y);
     void toggle(int x, int y);
     LightsOutToggleButton* getField(int x, int y);

@@ -4,13 +4,13 @@
 #include "gui/gui2_label.h"
 #include "gui/gui2_progressbar.h"
 
-LightsOut::LightsOut(GuiHackingDialog* owner, string id, int difficulty)
-: MiniGame(owner, id, difficulty) {
+LightsOut::LightsOut(GuiHackingDialog* owner, int difficulty)
+: MiniGame(owner, difficulty) {
     for(int x=0; x<difficulty; x++)
     {
         for(int y=0; y<difficulty; y++)
         {
-            board.emplace_back(new LightsOutToggleButton(this, "", "", [this, x, y](bool value) {onFieldClick(x, y); } ));
+            board.emplace_back(new LightsOutToggleButton(owner, "", "", [this, x, y](bool value) {onFieldClick(x, y); } ));
             board.back()->setSize(50, 50);
             board.back()->setPosition(25 + x * 50, 75 + y * 50);
         }
@@ -25,7 +25,6 @@ LightsOut::LightsOut(GuiHackingDialog* owner, string id, int difficulty)
     reset_button->setPosition(25, 75 + difficulty * 50, ATopLeft);
     close_button->setPosition(-25, 75 + difficulty * 50, ATopRight);
     progress_bar->setSize(50 * difficulty, 50);
-    setSize(50 * difficulty + 100, 50 * difficulty + 145);
 }
 
 void LightsOut::disable()
@@ -72,6 +71,18 @@ void LightsOut::reset()
     status_label->setText("Hacking in progress: "+string(100*lights_on/(difficulty*difficulty)) + "%");
 }
 
+float LightsOut::getProgress()
+{
+  return (float) lights_on / (float) (difficulty*difficulty);
+}
+
+
+sf::Vector2f LightsOut::getBoardSize()
+{
+  return sf::Vector2f(difficulty*50, difficulty*50);
+}
+
+
 void LightsOut::onFieldClick(int x, int y)
 {
     toggle(x, y);
@@ -79,9 +90,6 @@ void LightsOut::onFieldClick(int x, int y)
     if (lights_on == difficulty*difficulty)
     {
         gameComplete();
-    }else{
-        status_label->setText("Hacking in progress: " + string(100*lights_on/(difficulty*difficulty)) + "%");
-        progress_bar->setValue((float) lights_on / (float) (difficulty*difficulty));
     }
 }
 
@@ -105,7 +113,7 @@ void LightsOut::toggle(int x, int y)
 
 LightsOut::LightsOutToggleButton* LightsOut::getField(int x, int y)
 {
-    return board[x * difficulty + y];
+    return dynamic_cast<LightsOut::LightsOutToggleButton*> (board[x * difficulty + y]);
 }
 
 bool LightsOut::LightsOutToggleButton::toggle()

@@ -7,24 +7,24 @@
 #ifndef MINIGAME_H
 #define MINIGAME_H
 
-#include "gui/gui2_panel.h"
+#include <vector>
 
-class GuiContainer;
 class GuiButton;
 class GuiToggleButton;
 class GuiProgressbar;
 class GuiLabel;
 class GuiHackingDialog;
 
-class MiniGame : public GuiPanel
+class MiniGame
 {
   public:
-    MiniGame(GuiHackingDialog* owner, string id, int difficulty);
+    MiniGame(GuiHackingDialog* owner, int difficulty);
+    ~MiniGame();
 
-    virtual bool onMouseDown(sf::Vector2f position) override;
     void setHackingStatusText(string status);
-    void setProgress(float progress);
+    float getProgress();
     virtual bool isGameComplete();
+    virtual sf::Vector2f getBoardSize();
 
     virtual void reset();
     virtual void disable();
@@ -32,13 +32,14 @@ class MiniGame : public GuiPanel
   protected:
     int difficulty;
     bool game_complete;
-
+    GuiPanel* game_panel;
     GuiLabel* status_label;
     GuiLabel* hacking_status_label;
     GuiButton* reset_button;
     GuiButton* close_button;
     GuiProgressbar* progress_bar;
     GuiHackingDialog* parent;
+    std::vector<GuiElement*> board;
     void gameComplete();
 };
 

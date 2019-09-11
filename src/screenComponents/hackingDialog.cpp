@@ -19,8 +19,35 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     hide();
     //dummy game panel until we choose a system
-    minigame_box  = new MiniGame(this, id + "_GAME_BOX", 2);
+    minigame_box  = new GuiPanel(this, id + "_GAME_BOX");
+
     minigame_box->setPosition(0, 0, ACenter);
+    game = new MiniGame(this, 2);
+    sf::Vector2f board_size = game->getBoardSize();
+    minigame_box->setSize(board_size.x + 50, board_size.y + 100);
+
+    status_label = new GuiLabel(minigame_box, "", "...", 25);
+    status_label->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 30);
+
+    hacking_status_label = new GuiLabel(minigame_box, "", "", 25);
+    hacking_status_label->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 0);
+    reset_button = new GuiButton(minigame_box, "", "Reset", [this]()
+    {
+        game->reset();
+    });
+    reset_button->setSize(200, 50);
+    reset_button->setPosition(25, game->getBoardSize().y + 75, ATopLeft);
+    close_button = new GuiButton(minigame_box, "", "Close", [this]()
+    {
+        hide();
+    });
+    close_button->setSize(200, 50);
+    close_button->setPosition(-25, game->getBoardSize().y + 75, ATopRight);
+
+    progress_bar = new GuiProgressbar(minigame_box, "", 0, 1, 0.0);
+    progress_bar->setPosition(-25, 75, ATopRight);
+    progress_bar->setSize(50, game->getBoardSize().y);
+
 
     target_selection_box = new GuiPanel(this, id + "_BOX");
     target_selection_box->setSize(300, 545)->setPosition(400, 0, ACenter);
@@ -35,6 +62,8 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     });
     target_list->setPosition(25, 75, ATopLeft);
     target_list->setSize(250, 445);
+
+    last_game_success = false;
 }
 
 void GuiHackingDialog::open(P<SpaceObject> target)
@@ -67,18 +96,21 @@ void GuiHackingDialog::onDraw(sf::RenderTarget& window)
         return;
     }
     GuiOverlay::onDraw(window);
-    if (minigame_box->isGameComplete())
+    if (game->isGameComplete())
     {
         if (reset_time - engine->getElapsedTime() < 0.0)
         {
-            if (my_spaceship)
+            if (my_spaceship && last_game_success)
             {
                 my_spaceship->commandHackingFinished(target, target_system);
             }
             getNewGame();
         }else{
-            minigame_box->setProgress((reset_time - engine->getElapsedTime()) / auto_reset_time);
+            progress_bar->setValue((reset_time - engine->getElapsedTime()) / auto_reset_time);
         }
+    } else {
+        progress_bar->setValue(game->getProgress());
+        status_label->setText("Hacking in Progress: " + string( int(100 * game->getProgress()))+ "%");
     }
     if (target_system != "")
     {
@@ -87,7 +119,7 @@ void GuiHackingDialog::onDraw(sf::RenderTarget& window)
         {
             if (target.first == target_system)
             {
-                minigame_box->setHackingStatusText("Hacked " + target_system + ": " + string(int(target.second * 100.0f + 0.5f)) + "%");
+                hacking_status_label->setText("Hacked " + target_system + ": " + string(int(target.second * 100.0f + 0.5f)) + "%");
                 break;
             }
         }
@@ -99,20 +131,21 @@ bool GuiHackingDialog::onMouseDown(sf::Vector2f position)
     return true;
 }
 
-void GuiHackingDialog::miniGameComplete()
+void GuiHackingDialog::miniGameComplete(bool success)
 {
     reset_time = engine->getElapsedTime() + auto_reset_time;
     minigame_box->disable();
+    last_game_success = success;
+    status_label->setText("Hacking " + success ? "SUCCESS!" : "FAILURE!");
 }
 
 void GuiHackingDialog::getNewGame(bool sameType) {
     //if we want a game of the same type and the game is already defined, just reset it.
-    if (sameType && minigame_box) {
-      minigame_box->reset();
+    if (sameType) {
+      game->reset();
       return;
     }
-    minigame_box->destroy();
-    string game_id = id + "_BOX";
+    delete game;
     int difficulty = 2;
     EHackingGames games = HG_All;
     if (gameGlobalInfo) {
@@ -123,15 +156,14 @@ void GuiHackingDialog::getNewGame(bool sameType) {
     switch (games)
     {
     case HG_Lights:
-      minigame_box = new LightsOut(this, game_id, difficulty * 2 + 1);
+      game = new LightsOut(this, difficulty * 2 + 1);
       break;
     case HG_Mine:
-      minigame_box = new MineSweeper(this, game_id, difficulty * 2 + 4);
+      game = new MineSweeper(this, difficulty * 2 + 4);
       break;
     default:
-      irandom(0,1) ? minigame_box = new LightsOut(this, game_id, difficulty * 2 + 1) : minigame_box = new MineSweeper(this, game_id, difficulty * 2 + 4);
+      irandom(0,1) ? game = new LightsOut(this, difficulty * 2 + 1) : game = new MineSweeper(this, difficulty * 2 + 4);
     }
-    minigame_box->setPosition(0, 0, ACenter);
-    minigame_box->reset();
+    game->reset();
 
 }

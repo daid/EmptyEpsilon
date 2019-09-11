@@ -22,15 +22,22 @@ public:
     void open(P<SpaceObject> target);
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual bool onMouseDown(sf::Vector2f position) override;
-    void miniGameComplete();
+    void miniGameComplete(bool success);
+
 private:
     P<SpaceObject> target;
     string target_system;
     float reset_time;
     static constexpr float auto_reset_time = 2.0f;
+    bool last_game_success;
+    GuiLabel* status_label;
+    GuiLabel* hacking_status_label;
+    GuiButton* reset_button;
+    GuiButton* close_button;
+    GuiProgressbar* progress_bar;
 
-
-    MiniGame* minigame_box;
+    GuiPanel* minigame_box;
+    MiniGame* game;
     GuiPanel* target_selection_box;
     GuiListbox* target_list;
     void getNewGame(bool sameType = false);

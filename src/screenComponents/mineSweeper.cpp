@@ -5,37 +5,17 @@
 #include "gui/gui2_label.h"
 #include "gui/gui2_progressbar.h"
 
-MineSweeper::MineSweeper(GuiHackingDialog* owner, string id, int difficulty)
-: MiniGame(owner, id, difficulty) {
+MineSweeper::MineSweeper(GuiHackingDialog* owner, int difficulty)
+: MiniGame(owner, difficulty) {
     for(int x=0; x<difficulty; x++)
     {
         for(int y=0; y<difficulty; y++)
         {
-            FieldItem* item = new FieldItem();
-            item->button = new GuiToggleButton(this, "", "", [this, x, y](bool value) { getFieldItem(x, y)->button->setValue(!value); onFieldClick(x, y); });
-            item->button->setSize(50, 50);
-            item->button->setPosition(25 + x * 50, 75 + y * 50);
+            FieldItem* item = new FieldItem(owner, "", "", [this, x, y](bool value) { getFieldItem(x, y)->setValue(!value); onFieldClick(x, y); });
+            item->setSize(50, 50);
+            item->setPosition(25 + x * 50, 75 + y * 50);
             board.push_back(item);
         }
-    }
-
-    //make buttons smaller for small boards
-    if (difficulty < 7)
-    {
-        reset_button->setSize(difficulty * 50 / 2, 50);
-        close_button->setSize(difficulty * 50 / 2, 50);
-    }
-    reset_button->setPosition(25, 75 + difficulty * 50, ATopLeft);
-    close_button->setPosition(-25, 75 + difficulty * 50, ATopRight);
-    progress_bar->setSize(50 * difficulty, 50);
-
-    setSize(50 * difficulty + 100, 50 * difficulty + 145);
-}
-
-MineSweeper::~MineSweeper ()
-{
-    for (FieldItem* const &ptr: board) {
-        delete ptr;
     }
 }
 
@@ -47,9 +27,9 @@ void MineSweeper::disable()
         for(int y=0; y<difficulty; y++)
         {
             FieldItem* item = getFieldItem(x, y);
-            item->button->setText("");
-            item->button->setValue(false);
-            item->button->disable();
+            item->setText("");
+            item->setValue(false);
+            item->disable();
         }
     }
 }
@@ -62,9 +42,9 @@ void MineSweeper::reset()
         for(int y=0; y<difficulty; y++)
         {
             FieldItem* item = getFieldItem(x, y);
-            item->button->setText("");
-            item->button->setValue(false);
-            item->button->enable();
+            item->setText("");
+            item->setValue(false);
+            item->enable();
             item->bomb = false;
         }
     }
@@ -83,23 +63,31 @@ void MineSweeper::reset()
     error_count = 0;
     correct_count = 0;
 
-    progress_bar->setValue(0.0f);
-    status_label->setText("Hacking in progress: 0%");
+}
+
+float MineSweeper::getProgress()
+{
+  return (float)correct_count / (float)(difficulty * difficulty - difficulty);
+}
+
+sf::Vector2f MineSweeper::getBoardSize()
+{
+  return sf::Vector2f(difficulty*50, difficulty*50);
 }
 
 void MineSweeper::onFieldClick(int x, int y)
 {
     FieldItem* item = getFieldItem(x, y);
-    if (item->button->getValue() || item->button->getText() == "X" || error_count > 1 || correct_count == (difficulty * difficulty - difficulty))
+    if (item->getValue() || item->getText() == "X" || error_count > 1 || correct_count == (difficulty * difficulty - difficulty))
     {
         //Unpressing an already pressed button.
         return;
     }
-    item->button->setValue(true);
+    item->setValue(true);
     if (item->bomb)
     {
-        item->button->setText("X");
-        item->button->setValue(false);
+        item->setText("X");
+        item->setValue(false);
         error_count++;
     }else{
         correct_count++;
@@ -116,9 +104,9 @@ void MineSweeper::onFieldClick(int x, int y)
         if (x < difficulty - 1 && y < difficulty - 1 && getFieldItem(x + 1, y + 1)->bomb) difficulty++;
 
         if (difficulty < 1)
-            item->button->setText("");
+            item->setText("");
         else
-            item->button->setText(string(difficulty));
+            item->setText(string(difficulty));
 
         if (difficulty < 1)
         {
@@ -136,21 +124,19 @@ void MineSweeper::onFieldClick(int x, int y)
         }
     }
 
-    if (error_count > 1)
+    if (error_count > 1 || correct_count == (difficulty * difficulty - difficulty))
     {
-        status_label->setText("Hacking FAILED");
-        progress_bar->setValue(0.0f);
-    }else if (correct_count == (difficulty * difficulty - difficulty))
-    {
-        gameComplete();
-    }else{
-        status_label->setText("Hacking in progress: " + string(correct_count * 100 / (difficulty * difficulty - difficulty)) + "%");
-        progress_bar->setValue(float(correct_count) / float(difficulty * difficulty - difficulty));
+      gameComplete();
     }
 }
 
 
 MineSweeper::FieldItem* MineSweeper::getFieldItem(int x, int y)
 {
-    return board[x * difficulty + y];
+    return dynamic_cast<MineSweeper::FieldItem*>(board[x * difficulty + y]);
+}
+
+MineSweeper::FieldItem::FieldItem(GuiContainer* owner, string id, string text, func_t func)
+: GuiToggleButton(owner, id, text, func), bomb(false)
+{
 }

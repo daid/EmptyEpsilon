@@ -12,21 +12,23 @@
 
 class MineSweeper : public MiniGame {
   public:
-    MineSweeper(GuiHackingDialog* owner, string id, int difficulty);
+    MineSweeper(GuiHackingDialog* owner, int difficulty);
     ~MineSweeper();
     virtual void reset();
     virtual void disable();
+    virtual float getProgress();
+    virtual sf::Vector2f getBoardSize();
   private:
     void onFieldClick(int x, int y);
     int error_count;
     int correct_count;
-    class FieldItem
+    class FieldItem : public GuiToggleButton
     {
     public:
-        GuiToggleButton *button;
+        FieldItem(GuiContainer* owner, string id, string text, func_t func);
+
         bool bomb;
     };
-    std::vector<FieldItem*> board;
     FieldItem* getFieldItem(int x, int y);
 };
 

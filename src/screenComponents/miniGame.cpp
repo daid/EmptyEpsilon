@@ -6,55 +6,37 @@
 #include "gui/gui2_progressbar.h"
 #include "hackingDialog.h"
 
-MiniGame::MiniGame(GuiHackingDialog* owner, string id, int difficulty)
-: GuiPanel(owner, id), difficulty(difficulty), parent(owner) {
-  status_label = new GuiLabel(this, "", "...", 25);
-  status_label->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 30);
+MiniGame::MiniGame(GuiHackingDialog* owner, int difficulty)
+:  difficulty(difficulty), parent(owner) {
 
-  hacking_status_label = new GuiLabel(this, "", "", 25);
-  hacking_status_label->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 0);
+}
 
-  reset_button = new GuiButton(this, "", "Reset", [this]()
-  {
-      reset();
-  });
-  reset_button->setSize(200, 50);
-  //TODO Set Position
+MiniGame::~MiniGame()
+{
+    for(auto it = board.begin(); it != board.end(); )
+    {
+        GuiElement* element = *it;
 
-  close_button = new GuiButton(this, "", "Close", [this]()
-  {
-      parent->hide();
-  });
-  close_button->setSize(200, 50);
-  progress_bar = new GuiProgressbar(this, "", 0, 1, 0.0);
-  progress_bar->setPosition(-25, 75, ATopRight);
-  progress_bar->setSize(50, 400);
-  setSize(500, 545);
-  close_button->setPosition(-25, 475, ATopRight);
-  reset_button->setPosition(25, 475, ATopLeft);
+        it = board.erase(it);
 
+        element->destroy();
+
+    }
 }
 
 void MiniGame::reset()
 {
   game_complete = false;
-  reset_button->enable();
 }
 
 void MiniGame::disable()
 {
-  status_label->setText("Select hacking target...");
-  reset_button->disable();
 }
 
-bool MiniGame::onMouseDown(sf::Vector2f position)
-{
-    return true;
-}
 
-void MiniGame::setProgress(float progress)
+float MiniGame::getProgress()
 {
-  progress_bar->setValue(progress);
+  return 0;
 }
 
 void MiniGame::setHackingStatusText(string text)
@@ -64,13 +46,17 @@ void MiniGame::setHackingStatusText(string text)
 
 void MiniGame::gameComplete()
 {
-    parent->miniGameComplete();
-    status_label->setText("Hacking SUCCESS");
-    progress_bar->setValue(1.0f);
+    parent->miniGameComplete(getProgress() > 0.5);
+
     game_complete = true;
 }
 
 bool MiniGame::isGameComplete()
 {
   return game_complete;
+}
+
+sf::Vector2f MiniGame::getBoardSize()
+{
+  return sf::Vector2f(500,500);
 }
