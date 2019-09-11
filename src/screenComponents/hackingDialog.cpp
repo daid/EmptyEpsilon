@@ -132,5 +132,6 @@ void GuiHackingDialog::getNewGame(bool sameType) {
       irandom(0,1) ? minigame_box = new LightsOut(this, game_id, difficulty * 2 + 1) : minigame_box = new MineSweeper(this, game_id, difficulty * 2 + 4);
     }
     minigame_box->setPosition(0, 0, ACenter);
+    minigame_box->reset();
 
 }
