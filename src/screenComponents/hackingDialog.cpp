@@ -25,7 +25,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     minigame_box->setPosition(0, 0, ACenter);
     game = new MiniGame(minigame_box, this, 2);
     sf::Vector2f board_size = game->getBoardSize();
-    minigame_box->setSize(board_size.x + 50, board_size.y + 100);
+    minigame_box->setSize(board_size.x + 50, board_size.y + 150);
 
     status_label = new GuiLabel(minigame_box, "", "...", 25);
     status_label->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 30);
@@ -51,7 +51,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
 
 
     target_selection_box = new GuiPanel(this, id + "_BOX");
-    target_selection_box->setSize(300, 545)->setPosition(400, 0, ACenter);
+    target_selection_box->setSize(300, 545)->setPosition(board_size.x + 100, 0, ACenter);
 
     GuiLabel* target_selection_label = new GuiLabel(target_selection_box, "", "Target system:", 25);
     target_selection_label->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 15);
@@ -166,5 +166,8 @@ void GuiHackingDialog::getNewGame(bool sameType) {
       irandom(0,1) ? game = new LightsOut(minigame_box, this, difficulty * 2 + 1) : game = new MineSweeper(minigame_box, this, difficulty * 2 + 4);
     }
     game->reset();
+    sf::Vector2f board_size = game->getBoardSize();
+
+    minigame_box->setSize(board_size.x + 50, board_size.y + 150);
 
 }
