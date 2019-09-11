@@ -22,8 +22,7 @@ class MiniGame
     MiniGame(GuiPanel* owner, GuiHackingDialog* parent, int difficulty);
     virtual ~MiniGame();
 
-    void setHackingStatusText(string status);
-    float getProgress();
+    virtual float getProgress();
     virtual bool isGameComplete();
     virtual sf::Vector2f getBoardSize();
 
