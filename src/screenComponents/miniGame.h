@@ -19,7 +19,7 @@ class MiniGame
 {
   public:
     MiniGame(GuiHackingDialog* owner, int difficulty);
-    ~MiniGame();
+    virtual ~MiniGame();
 
     void setHackingStatusText(string status);
     float getProgress();
