@@ -8,12 +8,12 @@
 #define MINIGAME_H
 
 #include <vector>
+#include "hackingDialog.h"
 
 class GuiButton;
 class GuiToggleButton;
 class GuiProgressbar;
 class GuiLabel;
-class GuiHackingDialog;
 class GuiPanel;
 
 class MiniGame
