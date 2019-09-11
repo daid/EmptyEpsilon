@@ -14,6 +14,7 @@ class GuiToggleButton;
 class GuiProgressbar;
 class GuiLabel;
 class GuiHackingDialog;
+class GuiPanel;
 
 class MiniGame
 {
@@ -32,12 +33,6 @@ class MiniGame
   protected:
     int difficulty;
     bool game_complete;
-    GuiPanel* game_panel;
-    GuiLabel* status_label;
-    GuiLabel* hacking_status_label;
-    GuiButton* reset_button;
-    GuiButton* close_button;
-    GuiProgressbar* progress_bar;
     GuiHackingDialog* parent;
     std::vector<GuiElement*> board;
     void gameComplete();
