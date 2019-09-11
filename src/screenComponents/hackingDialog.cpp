@@ -23,7 +23,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     minigame_box  = new GuiPanel(this, id + "_GAME_BOX");
 
     minigame_box->setPosition(0, 0, ACenter);
-    game = new MiniGame(this, 2);
+    game = new MiniGame(minigame_box, this, 2);
     sf::Vector2f board_size = game->getBoardSize();
     minigame_box->setSize(board_size.x + 50, board_size.y + 100);
 
