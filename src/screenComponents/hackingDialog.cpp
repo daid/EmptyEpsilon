@@ -51,7 +51,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
 
 
     target_selection_box = new GuiPanel(this, id + "_BOX");
-    target_selection_box->setSize(300, 545)->setPosition(board_size.x / 2 + 175, 0, ACenter);
+    target_selection_box->setSize(300, 545)->setPosition(board_size.x / 2 + 200, 0, ACenter);
 
     GuiLabel* target_selection_label = new GuiLabel(target_selection_box, "", "Target system:", 25);
     target_selection_label->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 15);
@@ -172,6 +172,6 @@ void GuiHackingDialog::getNewGame(bool sameType) {
     progress_bar->setSize(50, game->getBoardSize().y);
     close_button->setPosition(-25, game->getBoardSize().y + 75, ATopRight);
     reset_button->setPosition(25, game->getBoardSize().y + 75, ATopLeft);
-    target_selection_box->setPosition(board_size.x / 2 + 175, 0, ACenter);
+    target_selection_box->setPosition(board_size.x / 2 + 200, 0, ACenter);
 
 }
