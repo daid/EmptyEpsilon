@@ -39,11 +39,6 @@ float MiniGame::getProgress()
   return 0;
 }
 
-void MiniGame::setHackingStatusText(string text)
-{
-  hacking_status_label->setText(text);
-}
-
 void MiniGame::gameComplete()
 {
     parent->miniGameComplete(getProgress() > 0.5);

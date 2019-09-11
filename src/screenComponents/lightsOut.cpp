@@ -1,8 +1,6 @@
 #include "lightsOut.h"
 #include "miniGame.h"
 #include "hackingDialog.h"
-#include "gui/gui2_label.h"
-#include "gui/gui2_progressbar.h"
 
 LightsOut::LightsOut(GuiHackingDialog* owner, int difficulty)
 : MiniGame(owner, difficulty) {
@@ -15,16 +13,6 @@ LightsOut::LightsOut(GuiHackingDialog* owner, int difficulty)
             board.back()->setPosition(25 + x * 50, 75 + y * 50);
         }
     }
-
-    //make buttons smaller for small boards
-    if (difficulty < 7)
-    {
-        reset_button->setSize(difficulty * 50 / 2, 50);
-        close_button->setSize(difficulty * 50 / 2, 50);
-    }
-    reset_button->setPosition(25, 75 + difficulty * 50, ATopLeft);
-    close_button->setPosition(-25, 75 + difficulty * 50, ATopRight);
-    progress_bar->setSize(50 * difficulty, 50);
 }
 
 void LightsOut::disable()
@@ -67,8 +55,6 @@ void LightsOut::reset()
             toggle(x, y);
         }
     }
-    progress_bar->setValue((float) lights_on / (float) (difficulty*difficulty));
-    status_label->setText("Hacking in progress: "+string(100*lights_on/(difficulty*difficulty)) + "%");
 }
 
 float LightsOut::getProgress()
