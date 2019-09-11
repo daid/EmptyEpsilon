@@ -168,6 +168,9 @@ void GuiHackingDialog::getNewGame(bool sameType) {
     game->reset();
     sf::Vector2f board_size = game->getBoardSize();
 
-    minigame_box->setSize(board_size.x + 50, board_size.y + 150);
+    minigame_box->setSize(board_size.x + 100, board_size.y + 150);
+    progress_bar->setSize(50, game->getBoardSize().y);
+    close_button->setPosition(-25, game->getBoardSize().y + 75, ATopRight);
+    reset_button->setPosition(25, game->getBoardSize().y + 75, ATopLeft);
 
 }
