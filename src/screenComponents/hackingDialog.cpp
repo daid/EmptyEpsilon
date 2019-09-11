@@ -157,13 +157,13 @@ void GuiHackingDialog::getNewGame(bool sameType) {
     switch (games)
     {
     case HG_Lights:
-      game = new LightsOut(this, difficulty * 2 + 1);
+      game = new LightsOut(minigame_box, this, difficulty * 2 + 1);
       break;
     case HG_Mine:
-      game = new MineSweeper(this, difficulty * 2 + 4);
+      game = new MineSweeper(minigame_box, this, difficulty * 2 + 4);
       break;
     default:
-      irandom(0,1) ? game = new LightsOut(this, difficulty * 2 + 1) : game = new MineSweeper(this, difficulty * 2 + 4);
+      irandom(0,1) ? game = new LightsOut(minigame_box, this, difficulty * 2 + 1) : game = new MineSweeper(minigame_box, this, difficulty * 2 + 4);
     }
     game->reset();
 
