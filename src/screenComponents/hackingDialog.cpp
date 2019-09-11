@@ -172,6 +172,6 @@ void GuiHackingDialog::getNewGame(bool sameType) {
     progress_bar->setSize(50, game->getBoardSize().y);
     close_button->setPosition(-25, game->getBoardSize().y + 75, ATopRight);
     reset_button->setPosition(25, game->getBoardSize().y + 75, ATopLeft);
-    target_selection_box->setPosition(board_size.x / 2, 0, ACenter);
+    target_selection_box->setPosition(board_size.x / 2 + 150, 0, ACenter);
 
 }
