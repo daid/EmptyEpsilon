@@ -4,9 +4,10 @@
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_progressbar.h"
+#include "gui/gui2_panel.h"
 
-MiniGame::MiniGame(GuiHackingDialog* owner, int difficulty)
-:  difficulty(difficulty), parent(owner) {
+MiniGame::MiniGame(GuiPanel* owner, GuiHackingDialog* parent, int difficulty)
+:  difficulty(difficulty), parent(parent) {
 }
 
 MiniGame::~MiniGame()

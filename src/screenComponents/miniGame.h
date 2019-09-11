@@ -19,7 +19,7 @@ class GuiPanel;
 class MiniGame
 {
   public:
-    MiniGame(GuiHackingDialog* owner, int difficulty);
+    MiniGame(GuiPanel* owner, GuiHackingDialog* parent, int difficulty);
     virtual ~MiniGame();
 
     void setHackingStatusText(string status);

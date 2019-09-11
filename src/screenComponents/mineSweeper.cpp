@@ -4,9 +4,10 @@
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_progressbar.h"
+#include "gui/gui2_panel.h"
 
-MineSweeper::MineSweeper(GuiHackingDialog* owner, int difficulty)
-: MiniGame(owner, difficulty) {
+MineSweeper::MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficulty)
+: MiniGame(owner, parent, difficulty) {
     for(int x=0; x<difficulty; x++)
     {
         for(int y=0; y<difficulty; y++)
@@ -14,7 +15,7 @@ MineSweeper::MineSweeper(GuiHackingDialog* owner, int difficulty)
             FieldItem* item = new FieldItem(owner, "", "", [this, x, y](bool value) { getFieldItem(x, y)->setValue(!value); onFieldClick(x, y); });
             item->setSize(50, 50);
             item->setPosition(25 + x * 50, 75 + y * 50);
-            board.push_back(item);
+            board.emplace_back(item);
         }
     }
 }

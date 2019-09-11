@@ -13,7 +13,7 @@
 
 class LightsOut : public MiniGame {
   public:
-    LightsOut(GuiHackingDialog* owner, int difficulty);
+    LightsOut(GuiPanel* owner, GuiHackingDialog* parent, int difficulty);
     virtual void reset();
     virtual void disable();
     virtual float getProgress();

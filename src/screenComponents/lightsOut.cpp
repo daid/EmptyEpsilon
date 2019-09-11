@@ -1,9 +1,11 @@
 #include "lightsOut.h"
 #include "miniGame.h"
 #include "hackingDialog.h"
+#include "gui/gui2_panel.h"
 
-LightsOut::LightsOut(GuiHackingDialog* owner, int difficulty)
-: MiniGame(owner, difficulty) {
+
+LightsOut::LightsOut(GuiPanel* owner, GuiHackingDialog* parent, int difficulty)
+: MiniGame(owner, parent, difficulty) {
     for(int x=0; x<difficulty; x++)
     {
         for(int y=0; y<difficulty; y++)
