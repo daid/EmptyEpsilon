@@ -61,7 +61,8 @@ void LightsOut::reset()
 
 float LightsOut::getProgress()
 {
-  return (float) lights_on / (float) (difficulty*difficulty);
+//  return ((float) lights_on) / ((float) (difficulty*difficulty));
+return (float) lights_on;
 }
 
 
