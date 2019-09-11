@@ -51,7 +51,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
 
 
     target_selection_box = new GuiPanel(this, id + "_BOX");
-    target_selection_box->setSize(300, 545)->setPosition(board_size.x / 2, 0, ACenter);
+    target_selection_box->setSize(300, 545)->setPosition(board_size.x / 2 + 150, 0, ACenter);
 
     GuiLabel* target_selection_label = new GuiLabel(target_selection_box, "", "Target system:", 25);
     target_selection_label->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 15);
