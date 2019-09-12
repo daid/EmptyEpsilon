@@ -31,8 +31,8 @@ class MiniGame
 
   protected:
     int difficulty;
-    bool game_complete;
     GuiHackingDialog* parent;
+    bool game_complete;
     std::vector<GuiElement*> board;
     void gameComplete();
 };
