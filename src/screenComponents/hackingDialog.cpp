@@ -169,7 +169,7 @@ void GuiHackingDialog::getNewGame(bool sameType) {
     }
     sf::Vector2f board_size = game->getBoardSize();
 
-    minigame_box->setSize(std::min(board_size.x + 100, 500.f), std::min(board_size.y + 150, 450.f));
+    minigame_box->setSize(std::max(board_size.x + 100, 500.f), std::max(board_size.y + 150, 450.f));
     progress_bar->setSize(50, game->getBoardSize().y);
     target_selection_box->setPosition(minigame_box->getSize().x / 2 + 150, 0, ACenter);
 
