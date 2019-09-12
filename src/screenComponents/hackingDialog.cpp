@@ -34,7 +34,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     hacking_status_label->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 0);
     reset_button = new GuiButton(minigame_box, "", "Reset", [this]()
     {
-        game->reset();
+        getNewGame(true);
     });
     reset_button->setSize(200, 50);
     reset_button->setPosition(25, -25, ABottomLeft);
@@ -86,6 +86,7 @@ void GuiHackingDialog::open(P<SpaceObject> target)
     } else
     {
         target_selection_box->show();
+        game->disable();
     }
 }
 
@@ -137,7 +138,7 @@ void GuiHackingDialog::miniGameComplete(bool success)
     reset_time = engine->getElapsedTime() + auto_reset_time;
     game->disable();
     last_game_success = success;
-    status_label->setText("Hacking " + success ? "SUCCESS!" : "FAILURE!");
+    status_label->setText(success ? "Hacking SUCCESS!" : "Hacking FAILURE!");
 }
 
 void GuiHackingDialog::getNewGame(bool sameType) {
