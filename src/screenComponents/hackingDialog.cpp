@@ -21,13 +21,12 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     hide();
     //dummy game panel until we choose a system
-    minigame_box  = new GuiPanel(this, id + "_GAME_BOX");
+    minigame_box = new GuiPanel(this, id + "_GAME_BOX");
 
     minigame_box->setPosition(0, 0, ACenter);
     game = new MiniGame(minigame_box, this, 2);
     sf::Vector2f board_size = game->getBoardSize();
     minigame_box->setSize(board_size.x + 50, board_size.y + 150);
-
     status_label = new GuiLabel(minigame_box, "", "...", 25);
     status_label->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 30);
 
@@ -87,7 +86,6 @@ void GuiHackingDialog::open(P<SpaceObject> target)
     } else
     {
         target_selection_box->show();
-        minigame_box->disable();
     }
 }
 
