@@ -35,7 +35,7 @@ void MiniGame::disable()
 
 float MiniGame::getProgress()
 {
-  return 0;
+    return 0;
 }
 
 void MiniGame::gameComplete()
