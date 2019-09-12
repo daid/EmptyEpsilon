@@ -7,7 +7,7 @@
 #include "gui/gui2_panel.h"
 
 MiniGame::MiniGame(GuiPanel* owner, GuiHackingDialog* parent, int difficulty)
-:  difficulty(difficulty), parent(parent) {
+:  difficulty(difficulty), parent(parent), game_complete(false) {
 }
 
 MiniGame::~MiniGame()
