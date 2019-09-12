@@ -407,7 +407,7 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
             if (!my_spaceship->weapon_tube[n].isLoaded())
                 continue;
             sf::Vector2f fire_position = my_spaceship->getPosition() + sf::rotateVector(my_spaceship->ship_template->model_data->getTubePosition2D(n), my_spaceship->getRotation());
-            sf::Vector2f fire_draw_position = radar_screen_center + (view_position - fire_position) * scale;
+            sf::Vector2f fire_draw_position = radar_screen_center - (view_position - fire_position) * scale;
 
             const MissileWeaponData& data = MissileWeaponData::getDataFor(my_spaceship->weapon_tube[n].getLoadType());
             float fire_angle = my_spaceship->getRotation() + my_spaceship->weapon_tube[n].getDirection();
@@ -505,18 +505,20 @@ void GuiRadarView::drawMissileTubes(sf::RenderTarget& window)
 
     if (my_spaceship)
     {
-        sf::VertexArray a(sf::LinesStrip, my_spaceship->weapon_tube_count * 2);
+        sf::VertexArray a(sf::LinesStrip, my_spaceship->weapon_tube_count * 3);
         for(int n=0; n<my_spaceship->weapon_tube_count; n++)
         {
             sf::Vector2f fire_position = my_spaceship->getPosition() + sf::rotateVector(my_spaceship->ship_template->model_data->getTubePosition2D(n), my_spaceship->getRotation());
-            sf::Vector2f fire_draw_position = radar_screen_center + (view_position - fire_position) * scale;
+            sf::Vector2f fire_draw_position = radar_screen_center - (view_position - fire_position) * scale;
 
             float fire_angle = my_spaceship->getRotation() + my_spaceship->weapon_tube[n].getDirection();
             
-            a[n * 2].position = fire_draw_position;
-            a[n * 2 + 1].position = fire_draw_position + (sf::vector2FromAngle(fire_angle) * 1000.0f) * scale;
-            a[n * 2].color = sf::Color(128, 128, 128, 128);
-            a[n * 2 + 1].color = sf::Color(128, 128, 128, 0);
+            a[n * 3    ].position = fire_draw_position;
+            a[n * 3 + 1].position = fire_draw_position;
+            a[n * 3 + 2].position = fire_draw_position + (sf::vector2FromAngle(fire_angle) * 1000.0f) * scale;
+            a[n * 3    ].color = sf::Color(128, 128, 128, 0);
+            a[n * 3 + 1].color = sf::Color(128, 128, 128, 128);
+            a[n * 3 + 2].color = sf::Color(128, 128, 128, 0);
         }
         window.draw(a);
     }
