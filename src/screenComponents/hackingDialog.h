@@ -39,7 +39,7 @@ private:
     MiniGame* game;
     GuiPanel* target_selection_box;
     GuiListbox* target_list;
-    void getNewGame(bool sameType = false);
+    void getNewGame();
 };
 
 #endif//HACKING_DIALOG_H

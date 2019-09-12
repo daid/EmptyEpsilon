@@ -34,7 +34,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     hacking_status_label->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 0);
     reset_button = new GuiButton(minigame_box, "", "Reset", [this]()
     {
-        getNewGame(true);
+        game->reset();
     });
     reset_button->setSize(200, 50);
     reset_button->setPosition(25, -25, ABottomLeft);
@@ -141,12 +141,7 @@ void GuiHackingDialog::miniGameComplete(bool success)
     status_label->setText(success ? "Hacking SUCCESS!" : "Hacking FAILURE!");
 }
 
-void GuiHackingDialog::getNewGame(bool sameType) {
-    //if we want a game of the same type and the game is already defined, just reset it.
-    if (sameType) {
-      game->reset();
-      return;
-    }
+void GuiHackingDialog::getNewGame() {
     delete game;
     int difficulty = 2;
     EHackingGames games = HG_All;
