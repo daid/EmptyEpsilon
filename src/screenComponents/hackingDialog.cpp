@@ -135,7 +135,7 @@ bool GuiHackingDialog::onMouseDown(sf::Vector2f position)
 void GuiHackingDialog::miniGameComplete(bool success)
 {
     reset_time = engine->getElapsedTime() + auto_reset_time;
-    minigame_box->disable();
+    game->disable();
     last_game_success = success;
     status_label->setText("Hacking " + success ? "SUCCESS!" : "FAILURE!");
 }
