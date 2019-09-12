@@ -7,6 +7,7 @@
 #include "lightsOut.h"
 #include "miniGame.h"
 #include <memory>
+#include <algorithm>
 
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
@@ -37,13 +38,13 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
         game->reset();
     });
     reset_button->setSize(200, 50);
-    reset_button->setPosition(25, game->getBoardSize().y + 75, ATopLeft);
+    reset_button->setPosition(25, -25, ABottomLeft);
     close_button = new GuiButton(minigame_box, "", "Close", [this]()
     {
         hide();
     });
     close_button->setSize(200, 50);
-    close_button->setPosition(-25, game->getBoardSize().y + 75, ATopRight);
+    close_button->setPosition(-25, -25, ABottomRight);
 
     progress_bar = new GuiProgressbar(minigame_box, "", 0, 1, 0.0);
     progress_bar->setPosition(-25, 75, ATopRight);
@@ -83,7 +84,8 @@ void GuiHackingDialog::open(P<SpaceObject> target)
         target_selection_box->hide();
         target_system = targets[0].first;
         getNewGame();
-    }else{
+    } else
+    {
         target_selection_box->show();
         minigame_box->disable();
     }
@@ -165,13 +167,10 @@ void GuiHackingDialog::getNewGame(bool sameType) {
     default:
       irandom(0,1) ? game = new LightsOut(minigame_box, this, difficulty * 2 + 1) : game = new MineSweeper(minigame_box, this, difficulty * 2 + 4);
     }
-    game->reset();
     sf::Vector2f board_size = game->getBoardSize();
 
-    minigame_box->setSize(board_size.x + 100, board_size.y + 150);
+    minigame_box->setSize(std::min(board_size.x + 100, 500.f), std::min(board_size.y + 150, 450.f));
     progress_bar->setSize(50, game->getBoardSize().y);
-    close_button->setPosition(-25, game->getBoardSize().y + 75, ATopRight);
-    reset_button->setPosition(25, game->getBoardSize().y + 75, ATopLeft);
-    target_selection_box->setPosition(board_size.x / 2 + 200, 0, ACenter);
+    target_selection_box->setPosition(minigame_box->getSize().x / 2 + 150, 0, ACenter);
 
 }
