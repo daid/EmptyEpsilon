@@ -74,7 +74,7 @@ float MineSweeper::getProgress()
 
 sf::Vector2f MineSweeper::getBoardSize()
 {
-  return sf::Vector2f(difficulty*50, difficulty*50);
+    return sf::Vector2f(difficulty*50, difficulty*50);
 }
 
 void MineSweeper::onFieldClick(int x, int y)
