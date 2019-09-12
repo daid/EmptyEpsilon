@@ -12,7 +12,7 @@ LightsOut::LightsOut(GuiPanel* owner, GuiHackingDialog* parent, int difficulty)
         {
             board.emplace_back(new LightsOutToggleButton(owner, "", "", [this, x, y](bool value) {onFieldClick(x, y); } ));
             board.back()->setSize(50, 50);
-            board.back()->setPosition(x * 50 - difficulty * 25, 75 + y * 50 - difficulty * 25, ACenter);
+            board.back()->setPosition(x * 50 - difficulty * 25, 25 + y * 50 - difficulty * 25, ACenter);
         }
     }
     reset();

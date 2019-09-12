@@ -47,7 +47,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     close_button->setPosition(-25, -25, ABottomRight);
 
     progress_bar = new GuiProgressbar(minigame_box, "", 0, 1, 0.0);
-    progress_bar->setPosition(-25, 75, ATopRight);
+    progress_bar->setPosition(-25, 100, ATopRight);
     progress_bar->setSize(50, game->getBoardSize().y);
 
 
@@ -171,6 +171,9 @@ void GuiHackingDialog::getNewGame(bool sameType) {
 
     minigame_box->setSize(std::max(board_size.x + 100, 500.f), std::max(board_size.y + 150, 450.f));
     progress_bar->setSize(50, game->getBoardSize().y);
+    progress_bar->setPosition(-25, 50 + (minigame_box->getSize().y - board_size.y)/2, ATopRight);
+
     target_selection_box->setPosition(minigame_box->getSize().x / 2 + 150, 0, ACenter);
+
 
 }
