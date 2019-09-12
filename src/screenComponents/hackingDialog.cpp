@@ -171,7 +171,7 @@ void GuiHackingDialog::getNewGame(bool sameType) {
 
     minigame_box->setSize(std::max(board_size.x + 100, 500.f), std::max(board_size.y + 150, 450.f));
     progress_bar->setSize(50, game->getBoardSize().y);
-    progress_bar->setPosition(-25, 50 + (minigame_box->getSize().y - board_size.y)/2, ATopRight);
+    progress_bar->setPosition(-25, (minigame_box->getSize().y - board_size.y)/2, ATopRight);
 
     target_selection_box->setPosition(minigame_box->getSize().x / 2 + 150, 0, ACenter);
 
