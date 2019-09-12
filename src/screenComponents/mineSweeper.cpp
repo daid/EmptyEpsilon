@@ -69,7 +69,7 @@ void MineSweeper::reset()
 
 float MineSweeper::getProgress()
 {
-  return (float)correct_count / (float)(difficulty * difficulty - difficulty);
+    return (float)correct_count / (float)(difficulty * difficulty - difficulty);
 }
 
 sf::Vector2f MineSweeper::getBoardSize()
