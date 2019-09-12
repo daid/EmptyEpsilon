@@ -128,7 +128,7 @@ void MineSweeper::onFieldClick(int x, int y)
 
     if (error_count > 1 || correct_count == (difficulty * difficulty - difficulty))
     {
-      gameComplete();
+        gameComplete();
     }
 }
 
