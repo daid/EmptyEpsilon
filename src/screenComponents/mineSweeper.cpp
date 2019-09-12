@@ -93,24 +93,24 @@ void MineSweeper::onFieldClick(int x, int y)
         error_count++;
     }else{
         correct_count++;
-        int difficulty = 0;
-        if (x > 0 && y > 0 && getFieldItem(x - 1, y - 1)->bomb) difficulty++;
-        if (x > 0 && getFieldItem(x - 1, y)->bomb) difficulty++;
-        if (x > 0 && y < difficulty - 1 && getFieldItem(x - 1, y + 1)->bomb) difficulty++;
+        int proximity = 0;
+        if (x > 0 && y > 0 && getFieldItem(x - 1, y - 1)->bomb) proximity++;
+        if (x > 0 && getFieldItem(x - 1, y)->bomb) proximity++;
+        if (x > 0 && y < difficulty - 1 && getFieldItem(x - 1, y + 1)->bomb) proximity++;
 
-        if (y > 0 && getFieldItem(x, y - 1)->bomb) difficulty++;
-        if (y < difficulty - 1 && getFieldItem(x, y + 1)->bomb) difficulty++;
+        if (y > 0 && getFieldItem(x, y - 1)->bomb) proximity++;
+        if (y < difficulty - 1 && getFieldItem(x, y + 1)->bomb) proximity++;
 
-        if (x < difficulty - 1 && y > 0 && getFieldItem(x + 1, y - 1)->bomb) difficulty++;
-        if (x < difficulty - 1 && getFieldItem(x + 1, y)->bomb) difficulty++;
-        if (x < difficulty - 1 && y < difficulty - 1 && getFieldItem(x + 1, y + 1)->bomb) difficulty++;
+        if (x < difficulty - 1 && y > 0 && getFieldItem(x + 1, y - 1)->bomb) proximity++;
+        if (x < difficulty - 1 && getFieldItem(x + 1, y)->bomb) proximity++;
+        if (x < difficulty - 1 && y < difficulty - 1 && getFieldItem(x + 1, y + 1)->bomb) proximity++;
 
-        if (difficulty < 1)
+        if (proximity < 1)
             item->setText("");
         else
-            item->setText(string(difficulty));
+            item->setText(string(proximity));
 
-        if (difficulty < 1)
+        if (proximity < 1)
         {
             //if no bombs found in proximity, auto click on all surrounding tiles
             if (x > 0 && y > 0) onFieldClick(x - 1, y - 1);
