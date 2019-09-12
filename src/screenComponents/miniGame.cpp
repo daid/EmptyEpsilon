@@ -40,7 +40,7 @@ float MiniGame::getProgress()
 
 void MiniGame::gameComplete()
 {
-    parent->miniGameComplete(getProgress() > 0.5);
+    parent->onMiniGameComplete(getProgress() > 0.5);
 
     game_complete = true;
 }
