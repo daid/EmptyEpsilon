@@ -151,7 +151,7 @@ void GuiHackingDialog::getNewGame(bool sameType) {
     int difficulty = 2;
     EHackingGames games = HG_All;
     if (gameGlobalInfo) {
-      difficulty = gameGlobalInfo->hacking_difficulty+1;
+      difficulty = gameGlobalInfo->hacking_difficulty + 1;
       games = gameGlobalInfo->hacking_games;
     }
 
