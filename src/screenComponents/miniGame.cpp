@@ -52,5 +52,5 @@ bool MiniGame::isGameComplete()
 
 sf::Vector2f MiniGame::getBoardSize()
 {
-  return sf::Vector2f(500,500);
+    return sf::Vector2f(500,500);
 }
