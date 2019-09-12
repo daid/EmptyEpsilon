@@ -1,7 +1,7 @@
 --[[                  Corvette
 Corvettes are the common large ships. Larger then a frigate, smaller then a dreadnaught.
 They generally have 4 or more shield sections. Run with a crew of 20 to 250.
-This class generally has jumpdrives or warpdrives. But lack the manouverbility that is seen in frigates.
+This class generally has jumpdrives or warpdrives. But lack the maneuverability that is seen in frigates.
 
 They come in 3 different subclasses:
 * Destroyer: Combat oriented ships. No science, no transport. Just death in a large package.
@@ -109,7 +109,7 @@ template:setHull(150)
 template:setShields(120, 120, 120, 120, 120, 120)
 template:setSpeed(0, 0.5, 0)
 template:setDockClasses("Starfighter", "Frigate")
---                  Arc, Dir, Range, CycleTime, Dmg
+--               Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 30,   0, 4000.0, 1.5, 20)
 template:setBeam(1, 30,  60, 4000.0, 1.5, 20)
 template:setBeam(2, 30, 120, 4000.0, 1.5, 20)
@@ -189,9 +189,9 @@ template:setShields(50, 50)
 template:setSpeed(50, 6, 10)
 template:setRadarTrace("radar_transport.png")
 template:setJumpDrive(true)
-template:setJumpDriveRange(5000, 100 * 50000) --The jump carrier can jump a 100x longer distance then normal jump drives.
+template:setJumpDriveRange(5000, 100 * 50000) -- The jump carrier can jump a 100x longer distance then normal jump drives.
 template:setDockClasses("Starfighter", "Frigate", "Corvette")
---template:setSharesEnergyWithDocked(true)
+
 
 variation = template:copy("Benedict"):setType("playership"):setClass("Corvette","Freighter/Carrier")
 variation:setDescription("Benedict is an improved version of the Jump Carrier")
@@ -201,7 +201,7 @@ variation:setSpeed(60, 6, 8)
 --                  Arc, Dir, Range, CycleTime, Dmg
 variation:setBeam(0, 10,   0, 1500.0, 6.0, 4)
 variation:setBeam(1, 10, 180, 1500.0, 6.0, 4)
---								 Arc, Dir, Rotate speed
+--                       Arc, Dir, Rotate speed
 variation:setBeamWeaponTurret( 0, 90,   0, 6)
 variation:setBeamWeaponTurret( 1, 90, 180, 6)
 variation:setCombatManeuver(400, 250)
@@ -229,10 +229,10 @@ variation:addDoor(9, 3, false)
 
 var2 = variation:copy("Kiriya")
 var2:setDescription("Kiriya is an improved warp drive version of the Jump Carrier")
---                  Arc, Dir, Range, CycleTime, Dmg
+--          Arc, Dir, Range, CycleTime, Dmg
 var2:setBeam(0, 10,   0, 1500.0, 6.0, 4)
 var2:setBeam(1, 10, 180, 1500.0, 6.0, 4)
---								 Arc, Dir, Rotate speed
+--                      Arc, Dir, Rotate speed
 var2:setBeamWeaponTurret( 0, 90,   0, 6)
 var2:setBeamWeaponTurret( 1, 90, 180, 6)
 var2:setJumpDrive(false)
