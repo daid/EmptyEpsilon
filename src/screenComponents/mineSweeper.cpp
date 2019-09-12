@@ -18,6 +18,7 @@ MineSweeper::MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficul
             board.emplace_back(item);
         }
     }
+    reset();
 }
 
 void MineSweeper::disable()
