@@ -25,7 +25,7 @@ MiniGame::~MiniGame()
 
 void MiniGame::reset()
 {
-  game_complete = false;
+    game_complete = false;
 }
 
 void MiniGame::disable()
