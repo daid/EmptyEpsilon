@@ -172,6 +172,12 @@ template:setTubeDirection(3,  90):setWeaponTubeExclusiveFor(3, "HVLI")
 template:setTubeDirection(4,  90)
 template:setTubeDirection(5,  90):setWeaponTubeExclusiveFor(5, "HVLI")
 
+template:setTubeSize(0, "large")
+template:setTubeSize(2, "large")
+template:setTubeSize(3, "large")
+template:setTubeSize(5, "large")
+
+
 variation = template:copy("Piranha F12.M")
 variation:setDescription([[This modified Piranha F12 is in all respects the same vessel except for special weapon tube modifications that allow it to fire nukes in addition to its normal loadout. However, these changes reduce its overall missile storage capacity.]])
 variation:setWeaponStorage("HVLI", 10)
