@@ -71,6 +71,7 @@ public:
     NebulaInfo nebula_info[max_nebulas];
     EPlayerWarpJumpDrive player_warp_jump_drive_setting;
     EScanningComplexity scanning_complexity;
+    //Hacking difficulty ranges from 0 to 3
     int hacking_difficulty;
     EHackingGames hacking_games;
     /*!
