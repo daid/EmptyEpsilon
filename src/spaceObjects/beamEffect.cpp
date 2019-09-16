@@ -4,6 +4,14 @@
 #include "mesh.h"
 #include "main.h"
 
+/// BeamEffect is a beam weapon fire effect that will fade after 1 seond
+/// Example: BeamEffect():setSource(player):setTarget(enemy_ship)
+REGISTER_SCRIPT_SUBCLASS(BeamEffect, SpaceObject)
+{
+    REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setSource);
+    REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setTarget);
+}
+
 REGISTER_MULTIPLAYER_CLASS(BeamEffect, "BeamEffect");
 BeamEffect::BeamEffect()
 : SpaceObject(1000, "BeamEffect")
