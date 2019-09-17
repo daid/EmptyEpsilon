@@ -10,6 +10,11 @@ REGISTER_SCRIPT_SUBCLASS(BeamEffect, SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setSource);
     REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setTarget);
+    REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setTexture);
+    REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setBeamFireSound);
+    REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setBeamFireSoundPower);
+    REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setDuration);
+
 }
 
 REGISTER_MULTIPLAYER_CLASS(BeamEffect, "BeamEffect");
