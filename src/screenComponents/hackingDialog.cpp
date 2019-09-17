@@ -24,7 +24,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     minigame_box = new GuiPanel(this, id + "_GAME_BOX");
 
     minigame_box->setPosition(0, 0, ACenter);
-    game = new MiniGame(minigame_box, this, 2);
+    game = std::make_shared<MiniGame>(minigame_box, this, 2);
     sf::Vector2f board_size = game->getBoardSize();
     minigame_box->setSize(board_size.x + 100, board_size.y + 150);
     status_label = new GuiLabel(minigame_box, "", "...", 25);
@@ -142,7 +142,6 @@ void GuiHackingDialog::onMiniGameComplete(bool success)
 }
 
 void GuiHackingDialog::getNewGame() {
-    delete game;
     int difficulty = 2;
     EHackingGames games = HG_All;
     if (gameGlobalInfo) {
@@ -153,13 +152,13 @@ void GuiHackingDialog::getNewGame() {
     switch (games)
     {
     case HG_Lights:
-      game = new LightsOut(minigame_box, this, difficulty * 2 + 1);
+      game = std::make_shared<LightsOut>(minigame_box, this, difficulty * 2 + 1);
       break;
     case HG_Mine:
-      game = new MineSweeper(minigame_box, this, difficulty * 2 + 4);
+      game = std::make_shared<MineSweeper>(minigame_box, this, difficulty * 2 + 4);
       break;
     default:
-      irandom(0,1) ? game = new LightsOut(minigame_box, this, difficulty * 2 + 1) : game = new MineSweeper(minigame_box, this, difficulty * 2 + 4);
+      irandom(0,1) ? game = std::make_shared<LightsOut>(minigame_box, this, difficulty * 2 + 1) : game = std::make_shared<MineSweeper>(minigame_box, this, difficulty * 2 + 4);
     }
     sf::Vector2f board_size = game->getBoardSize();
 

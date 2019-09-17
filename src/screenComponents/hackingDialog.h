@@ -36,7 +36,7 @@ private:
     GuiProgressbar* progress_bar;
 
     GuiPanel* minigame_box;
-    MiniGame* game;
+    std::shared_ptr<MiniGame> game;
     GuiPanel* target_selection_box;
     GuiListbox* target_list;
     void getNewGame();
