@@ -145,20 +145,20 @@ void GuiHackingDialog::getNewGame() {
     int difficulty = 2;
     EHackingGames games = HG_All;
     if (gameGlobalInfo) {
-      difficulty = gameGlobalInfo->hacking_difficulty + 1;
+      difficulty = gameGlobalInfo->hacking_difficulty;
       games = gameGlobalInfo->hacking_games;
     }
 
     switch (games)
     {
     case HG_Lights:
-      game = std::make_shared<LightsOut>(minigame_box, this, difficulty * 2 + 1);
+      game = std::make_shared<LightsOut>(minigame_box, this, difficulty);
       break;
     case HG_Mine:
-      game = std::make_shared<MineSweeper>(minigame_box, this, difficulty * 2 + 4);
+      game = std::make_shared<MineSweeper>(minigame_box, this, difficulty);
       break;
     default:
-      irandom(0,1) ? game = std::make_shared<LightsOut>(minigame_box, this, difficulty * 2 + 1) : game = std::make_shared<MineSweeper>(minigame_box, this, difficulty * 2 + 4);
+      irandom(0,1) ? game = std::make_shared<LightsOut>(minigame_box, this, difficulty) : game = std::make_shared<MineSweeper>(minigame_box, this, difficulty);
     }
     sf::Vector2f board_size = game->getBoardSize();
 

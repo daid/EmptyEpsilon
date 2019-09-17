@@ -7,7 +7,9 @@
 #include "gui/gui2_panel.h"
 
 MineSweeper::MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficulty)
-: MiniGame(owner, parent, difficulty), field_size(difficulty), bomb_count(difficulty) {
+: MiniGame(owner, parent, difficulty) {
+    field_size = difficulty * 2 + 6;
+    bomb_count = difficulty * 2 + 6;
     for(int x=0; x<field_size; x++)
     {
         for(int y=0; y<field_size; y++)

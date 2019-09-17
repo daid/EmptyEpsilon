@@ -20,7 +20,7 @@ class LightsOut : public MiniGame {
     virtual sf::Vector2f getBoardSize() override;
   private:
     int lights_on;
-
+    int grid_size;
     class LightsOutToggleButton : public GuiToggleButton {
       public:
         LightsOutToggleButton(GuiContainer* owner, string id, string text, func_t func);
