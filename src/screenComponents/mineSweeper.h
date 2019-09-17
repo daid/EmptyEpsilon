@@ -14,10 +14,10 @@
 class MineSweeper : public MiniGame {
   public:
     MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficulty);
-    virtual void reset();
-    virtual void disable();
-    virtual float getProgress();
-    virtual sf::Vector2f getBoardSize();
+    virtual void reset() override;
+    virtual void disable() override;
+    virtual float getProgress() override;
+    virtual sf::Vector2f getBoardSize() override;
   private:
     void onFieldClick(int x, int y);
     int error_count;
