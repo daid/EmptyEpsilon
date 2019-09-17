@@ -197,7 +197,7 @@ public:
 
     int getBeamFrequency(){ return beam_frequency; }
     ESystem getBeamSystemTarget(){ return beam_system_target; }
-
+    string getBeamSystemTargetName(){ return getSystemName(beam_system_target); }
     // Client command functions
     virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet) override;
     void commandTargetRotation(float target);
