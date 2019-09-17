@@ -68,7 +68,6 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomMessageWithCallback);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, removeCustom);
     
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getBeamFrequency);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getBeamSystemTarget);
     /// Gets the name of the target system, instead of the ID
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getBeamSystemTargetName);

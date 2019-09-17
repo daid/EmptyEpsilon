@@ -195,7 +195,6 @@ public:
     void addCustomMessageWithCallback(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback);
     void removeCustom(string name);
 
-    int getBeamFrequency(){ return beam_frequency; }
     ESystem getBeamSystemTarget(){ return beam_system_target; }
     string getBeamSystemTargetName(){ return getSystemName(beam_system_target); }
     // Client command functions
