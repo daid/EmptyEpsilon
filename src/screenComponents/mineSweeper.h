@@ -8,7 +8,6 @@
 #include "miniGame.h"
 #include "gui/gui2_togglebutton.h"
 #include <vector>
-#include <memory>
 
 
 class MineSweeper : public MiniGame {
