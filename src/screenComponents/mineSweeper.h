@@ -21,6 +21,7 @@ class MineSweeper : public MiniGame {
     void onFieldClick(int x, int y);
     int error_count;
     int correct_count;
+    int field_size;
     class FieldItem : public GuiToggleButton
     {
     public:

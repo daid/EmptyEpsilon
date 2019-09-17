@@ -7,10 +7,10 @@
 #include "gui/gui2_panel.h"
 
 MineSweeper::MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficulty)
-: MiniGame(owner, parent, difficulty) {
-    for(int x=0; x<difficulty; x++)
+: MiniGame(owner, parent, difficulty), field_size(difficulty) {
+    for(int x=0; x<field_size; x++)
     {
-        for(int y=0; y<difficulty; y++)
+        for(int y=0; y<field_size; y++)
         {
             FieldItem* item = new FieldItem(owner, "", "", [this, x, y](bool value) { getFieldItem(x, y)->setValue(!value); onFieldClick(x, y); });
             item->setSize(50, 50);
@@ -24,9 +24,9 @@ MineSweeper::MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficul
 void MineSweeper::disable()
 {
     MiniGame::disable();
-    for(int x=0; x<difficulty; x++)
+    for(int x=0; x < field_size; x++)
     {
-        for(int y=0; y<difficulty; y++)
+        for(int y=0; y < field_size; y++)
         {
             FieldItem* item = getFieldItem(x, y);
             item->setText("");
@@ -39,9 +39,9 @@ void MineSweeper::disable()
 void MineSweeper::reset()
 {
     MiniGame::reset();
-    for(int x=0; x<difficulty; x++)
+    for(int x=0; x < field_size; x++)
     {
-        for(int y=0; y<difficulty; y++)
+        for(int y=0; y < field_size; y++)
         {
             FieldItem* item = getFieldItem(x, y);
             item->setText("");
@@ -50,10 +50,10 @@ void MineSweeper::reset()
             item->bomb = false;
         }
     }
-    for(int n=0; n<difficulty; n++)
+    for(int n=0; n < difficulty; n++)
     {
-        int x = irandom(0, difficulty - 1);
-        int y = irandom(0, difficulty - 1);
+        int x = irandom(0, field_size - 1);
+        int y = irandom(0, field_size - 1);
 
         if (getFieldItem(x, y)->bomb)
         {
@@ -69,18 +69,18 @@ void MineSweeper::reset()
 
 float MineSweeper::getProgress()
 {
-    return (float)correct_count / (float)(difficulty * difficulty - difficulty);
+    return (float)correct_count / (float)(field_size * field_size - difficulty);
 }
 
 sf::Vector2f MineSweeper::getBoardSize()
 {
-    return sf::Vector2f(difficulty*50, difficulty*50);
+    return sf::Vector2f(field_size*50, field_size*50);
 }
 
 void MineSweeper::onFieldClick(int x, int y)
 {
     FieldItem* item = getFieldItem(x, y);
-    if (item->getValue() || item->getText() == "X" || error_count > 1 || correct_count == (difficulty * difficulty - difficulty))
+    if (item->getValue() || item->getText() == "X" || error_count > 1 || correct_count == (field_size * field_size - difficulty))
     {
         //Unpressing an already pressed button.
         return;
@@ -96,14 +96,14 @@ void MineSweeper::onFieldClick(int x, int y)
         int proximity = 0;
         if (x > 0 && y > 0 && getFieldItem(x - 1, y - 1)->bomb) proximity++;
         if (x > 0 && getFieldItem(x - 1, y)->bomb) proximity++;
-        if (x > 0 && y < difficulty - 1 && getFieldItem(x - 1, y + 1)->bomb) proximity++;
+        if (x > 0 && y < field_size - 1 && getFieldItem(x - 1, y + 1)->bomb) proximity++;
 
         if (y > 0 && getFieldItem(x, y - 1)->bomb) proximity++;
-        if (y < difficulty - 1 && getFieldItem(x, y + 1)->bomb) proximity++;
+        if (y < field_size - 1 && getFieldItem(x, y + 1)->bomb) proximity++;
 
-        if (x < difficulty - 1 && y > 0 && getFieldItem(x + 1, y - 1)->bomb) proximity++;
-        if (x < difficulty - 1 && getFieldItem(x + 1, y)->bomb) proximity++;
-        if (x < difficulty - 1 && y < difficulty - 1 && getFieldItem(x + 1, y + 1)->bomb) proximity++;
+        if (x < field_size - 1 && y > 0 && getFieldItem(x + 1, y - 1)->bomb) proximity++;
+        if (x < field_size - 1 && getFieldItem(x + 1, y)->bomb) proximity++;
+        if (x < field_size - 1 && y < field_size - 1 && getFieldItem(x + 1, y + 1)->bomb) proximity++;
 
         if (proximity < 1)
             item->setText("");
@@ -115,18 +115,18 @@ void MineSweeper::onFieldClick(int x, int y)
             //if no bombs found in proximity, auto click on all surrounding tiles
             if (x > 0 && y > 0) onFieldClick(x - 1, y - 1);
             if (x > 0)  onFieldClick(x - 1, y);
-            if (x > 0 && y < difficulty - 1) onFieldClick(x - 1, y + 1);
+            if (x > 0 && y < field_size - 1) onFieldClick(x - 1, y + 1);
 
             if (y > 0)  onFieldClick(x, y - 1);
-            if (y < difficulty - 1)  onFieldClick(x, y + 1);
+            if (y < field_size - 1)  onFieldClick(x, y + 1);
 
-            if (x < difficulty - 1 && y > 0)  onFieldClick(x + 1, y - 1);
-            if (x < difficulty - 1)  onFieldClick(x + 1, y);
-            if (x < difficulty - 1 && y < difficulty - 1)  onFieldClick(x + 1, y + 1);
+            if (x < field_size - 1 && y > 0)  onFieldClick(x + 1, y - 1);
+            if (x < field_size - 1)  onFieldClick(x + 1, y);
+            if (x < field_size - 1 && y < field_size - 1)  onFieldClick(x + 1, y + 1);
         }
     }
 
-    if (error_count > 1 || correct_count == (difficulty * difficulty - difficulty))
+    if (error_count > 1 || correct_count == (field_size * field_size - difficulty))
     {
         gameComplete();
     }
