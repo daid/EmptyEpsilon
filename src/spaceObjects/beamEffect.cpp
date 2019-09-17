@@ -25,7 +25,9 @@ BeamEffect::BeamEffect()
     lifetime = 1.0;
     sourceId = -1;
     target_id = -1;
-
+    beam_texture = "beam_orange.png";
+    beam_fire_sound = "sfx/laser_fire.wav";
+    beam_fire_sound_power = 1;
     registerMemberReplication(&sourceId);
     registerMemberReplication(&target_id);
     registerMemberReplication(&sourceOffset);
