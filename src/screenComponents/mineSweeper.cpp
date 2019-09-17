@@ -7,14 +7,14 @@
 #include "gui/gui2_panel.h"
 
 MineSweeper::MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficulty)
-: MiniGame(owner, parent, difficulty), field_size(difficulty) {
+: MiniGame(owner, parent, difficulty), field_size(difficulty), bomb_count(difficulty) {
     for(int x=0; x<field_size; x++)
     {
         for(int y=0; y<field_size; y++)
         {
             FieldItem* item = new FieldItem(owner, "", "", [this, x, y](bool value) { getFieldItem(x, y)->setValue(!value); onFieldClick(x, y); });
             item->setSize(50, 50);
-            item->setPosition(x * 50 - difficulty * 25, 25 + y * 50 - difficulty * 25, ACenter);
+            item->setPosition(x * 50 - field_size * 25, 25 + y * 50 - field_size * 25, ACenter);
             board.emplace_back(item);
         }
     }
@@ -50,7 +50,7 @@ void MineSweeper::reset()
             item->bomb = false;
         }
     }
-    for(int n=0; n < difficulty; n++)
+    for(int n=0; n < bomb_count; n++)
     {
         int x = irandom(0, field_size - 1);
         int y = irandom(0, field_size - 1);
@@ -69,7 +69,7 @@ void MineSweeper::reset()
 
 float MineSweeper::getProgress()
 {
-    return (float)correct_count / (float)(field_size * field_size - difficulty);
+    return (float)correct_count / (float)(field_size * field_size - bomb_count);
 }
 
 sf::Vector2f MineSweeper::getBoardSize()
@@ -80,7 +80,7 @@ sf::Vector2f MineSweeper::getBoardSize()
 void MineSweeper::onFieldClick(int x, int y)
 {
     FieldItem* item = getFieldItem(x, y);
-    if (item->getValue() || item->getText() == "X" || error_count > 1 || correct_count == (field_size * field_size - difficulty))
+    if (item->getValue() || item->getText() == "X" || error_count > 1 || correct_count == (field_size * field_size - bomb_count))
     {
         //Unpressing an already pressed button.
         return;
@@ -126,7 +126,7 @@ void MineSweeper::onFieldClick(int x, int y)
         }
     }
 
-    if (error_count > 1 || correct_count == (field_size * field_size - difficulty))
+    if (error_count > 1 || correct_count == (field_size * field_size - bomb_count))
     {
         gameComplete();
     }
@@ -135,7 +135,7 @@ void MineSweeper::onFieldClick(int x, int y)
 
 MineSweeper::FieldItem* MineSweeper::getFieldItem(int x, int y)
 {
-    return dynamic_cast<MineSweeper::FieldItem*>(board[x * difficulty + y]);
+    return dynamic_cast<MineSweeper::FieldItem*>(board[x * field_size + y]);
 }
 
 MineSweeper::FieldItem::FieldItem(GuiContainer* owner, string id, string text, func_t func)
