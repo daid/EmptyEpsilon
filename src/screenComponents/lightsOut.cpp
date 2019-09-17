@@ -105,14 +105,14 @@ LightsOut::LightsOutToggleButton* LightsOut::getField(int x, int y)
     return dynamic_cast<LightsOut::LightsOutToggleButton*> (board[x * difficulty + y]);
 }
 
+LightsOut::LightsOutToggleButton::LightsOutToggleButton(GuiContainer* owner, string id, string text, func_t func) : GuiToggleButton(owner, id, text, func)
+{
+
+}
+
 bool LightsOut::LightsOutToggleButton::toggle()
 {
     bool value = !getValue();
     setValue(value);
     return value;
-}
-
-LightsOut::LightsOutToggleButton::LightsOutToggleButton(GuiContainer* owner, string id, string text, func_t func) : GuiToggleButton(owner, id, text, func)
-{
-
 }
