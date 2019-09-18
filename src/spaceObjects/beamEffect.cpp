@@ -30,6 +30,7 @@ BeamEffect::BeamEffect()
     beam_fire_sound = "sfx/laser_fire.wav";
     beam_fire_sound_power = 1;
     fire_ring = true;
+    registerMemberReplication(&lifetime);
     registerMemberReplication(&sourceId);
     registerMemberReplication(&target_id);
     registerMemberReplication(&sourceOffset);
@@ -39,6 +40,8 @@ BeamEffect::BeamEffect()
     registerMemberReplication(&beam_texture);
     registerMemberReplication(&beam_fire_sound);
     registerMemberReplication(&beam_fire_sound_power);
+    registerMemberReplication(&fire_ring);
+    
 }
 
 #if FEATURE_3D_RENDERING
