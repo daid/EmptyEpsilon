@@ -1,11 +1,13 @@
 #include "EMPMissile.h"
 #include "particleEffect.h"
 #include "spaceObjects/electricExplosionEffect.h"
+#include "pathPlanner.h"
 
 REGISTER_MULTIPLAYER_CLASS(EMPMissile, "EMPMissile");
 EMPMissile::EMPMissile()
 : MissileWeapon("EMPMissile", MissileWeaponData::getDataFor(MW_EMP))
 {
+    avoid_area_added = false;
 }
 
 void EMPMissile::explode()
@@ -29,5 +31,19 @@ void EMPMissile::lifeEnded()
 {
     explode();
 }
+    
+void EMPMissile::update(float delta)
+{
+    MissileWeapon::update(delta);
+    
+    if(!avoid_area_added && data.lifetime / 1.5 > lifetime)
+    {
+        // We won't want to add the avoid area right away, since that would wreak havoc on the path planning 
+        // Ships would try to avoid their own nukes, which is just really silly. 
+        PathPlannerManager::getInstance()->addAvoidObject(this, 1000.f);
+        avoid_area_added = true;
+    }
+}
+
 
 
