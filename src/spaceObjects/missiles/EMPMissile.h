@@ -12,6 +12,8 @@ public:
     EMPMissile();
     
     virtual void hitObject(P<SpaceObject> object);
+    void explode();
+    void lifeEnded();
 };
 
 #endif//EMP_MISSILE_H

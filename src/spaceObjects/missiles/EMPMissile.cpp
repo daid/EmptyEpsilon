@@ -8,7 +8,7 @@ EMPMissile::EMPMissile()
 {
 }
 
-void EMPMissile::hitObject(P<SpaceObject> object)
+void EMPMissile::explode()
 {
     DamageInfo info(owner, DT_EMP, getPosition());
     SpaceObject::damageArea(getPosition(), category_modifier * blast_range, category_modifier * damage_at_edge, category_modifier * damage_at_center, info, getRadius());
@@ -18,3 +18,16 @@ void EMPMissile::hitObject(P<SpaceObject> object)
     e->setPosition(getPosition());
     e->setOnRadar(true);
 }
+
+
+void EMPMissile::hitObject(P<SpaceObject> object)
+{
+    explode();
+}
+
+void EMPMissile::lifeEnded()
+{
+    explode();
+}
+
+
