@@ -12,6 +12,7 @@ MissileWeapon::MissileWeapon(string multiplayer_name, const MissileWeaponData& d
     
     registerMemberReplication(&target_id);
     registerMemberReplication(&target_angle);
+    registerMemberReplication(&category_modifier);
 
     launch_sound_played = false;
 }
