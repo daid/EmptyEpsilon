@@ -1,7 +1,7 @@
 #include "gameGlobalInfo.h"
 #include "threatLevelEstimate.h"
 #include "spaceObjects/beamEffect.h"
-#include "spaceObjects/missileWeapon.h"
+#include "spaceObjects/missiles/missileWeapon.h"
 
 ThreatLevelEstimate::ThreatLevelEstimate()
 {

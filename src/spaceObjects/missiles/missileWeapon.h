@@ -1,7 +1,7 @@
 #ifndef MISSILE_WEAPON_H
 #define MISSILE_WEAPON_H
 
-#include "spaceObject.h"
+#include "spaceObjects/spaceObject.h"
 
 /* Base class for all the missile weapons. Handles missile generic stuff like targeting, lifetime, etc... */
 class MissileWeapon : public SpaceObject, public Updatable
@@ -12,12 +12,16 @@ protected:
     float lifetime; //sec
 
     bool launch_sound_played;    
+    
 public:
     P<SpaceObject> owner; //Only valid on server.
     int32_t target_id;
     float target_angle;
+    // Damage modifier for this missile which indicates it's size. (eg; Missiles by fighters have a low modifier), missiles from
+    // capital ships have a high modifier.
+    float category_modifier;  
 
-    MissileWeapon(string multiplayerName, const MissileWeaponData& data);
+    MissileWeapon(string multiplayer_name, const MissileWeaponData& data);
 
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
     virtual void update(float delta);
