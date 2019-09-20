@@ -13,6 +13,7 @@ class BeamEffect : public SpaceObject, public Updatable
     sf::Vector2f targetLocation;
     sf::Vector3f hitNormal;
 public:
+    bool fire_ring;
     string beam_texture;
     string beam_fire_sound;
     float beam_fire_sound_power;
@@ -34,6 +35,7 @@ public:
     void setBeamFireSoundPower(float power) {this->beam_fire_sound_power = power;}
     ///Control Duration of the beam. Default is 1 second
     void setDuration(float duration) {this->lifetime = duration;}
+    void setRing(bool ring) {this->fire_ring = ring;}
 };
 
 #endif//BEAM_EFFECT_H
