@@ -118,6 +118,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCombatManeuverBoost);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetScienceLink);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAlertLevel);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAimLock);
 
     // Return the number of Engineering repair crews on the ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getRepairCrewCount);
@@ -192,6 +193,7 @@ static const int16_t CMD_SET_NEXT_SHIELD_FREQUENCY_SELECTION = 0x002B;
 static const int16_t CMD_SET_PREVIOUS_SHIELD_FREQUENCY_SELECTION = 0x002C;
 static const int16_t CMD_NEXT_TARGET = 0x002D;
 static const int16_t CMD_PREVIOUS_TARGET = 0x002E;
+static const int16_t CMD_SET_AIM_LOCK = 0x002F;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -237,6 +239,7 @@ PlayerSpaceship::PlayerSpaceship()
     shields_active = false;
     control_code = "";
     selected_shield_frequency = 1;
+    manual_aim = false;
 
     setFactionId(1);
 
@@ -275,6 +278,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&control_code);
     registerMemberReplication(&custom_functions);
     registerMemberReplication(&selected_shield_frequency);
+    registerMemberReplication(&manual_aim);
 
     // Determine which stations must provide self-destruct confirmation codes.
     for(int n = 0; n < max_self_destruct_codes; n++)
@@ -1662,6 +1666,12 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             }
         }
         break;
+    case CMD_SET_AIM_LOCK:
+        {
+            packet >> manual_aim;
+            manual_aim = !manual_aim;
+        }
+        break;
     }
 }
 
@@ -2012,6 +2022,13 @@ void PlayerSpaceship::commandCustomFunction(string name)
 void PlayerSpaceship::commandSetScienceLink(int32_t id){
     sf::Packet packet;
     packet << CMD_SET_SCIENCE_LINK << id;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetAimLock(bool manual_aim)
+{
+    sf::Packet packet;
+    packet << CMD_SET_AIM_LOCK << manual_aim;
     sendClientCommand(packet);
 }
 

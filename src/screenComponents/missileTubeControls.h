@@ -27,17 +27,16 @@ private:
     };
     TypeRow load_type_rows[MW_Count];
     EMissileWeapons load_type;
-    bool manual_aim;
     float missile_target_angle;
 public:
     GuiMissileTubeControls(GuiContainer* owner, string id);
-    
+
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;
-    
+
     void setMissileTargetAngle(float angle);
     float getMissileTargetAngle();
-    
+
     void setManualAim(bool manual);
     bool getManualAim();
 

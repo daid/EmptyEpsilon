@@ -165,6 +165,11 @@ public:
      */
     int selected_shield_frequency;
 
+    /*!
+     * [output] Status of the aim lock
+     */
+    bool manual_aim = false;
+
     /// MultiplayerObjectID of the targeted object, or -1 when no target is selected.
     int32_t target_id;
 
@@ -399,7 +404,7 @@ public:
     int getWeaponTubeCount();
     EMissileWeapons getWeaponTubeLoadType(int index);
     EMissileSizes getWeaponTubeSize(int index);
-    
+
     void weaponTubeAllowMissle(int index, EMissileWeapons type);
     void weaponTubeDisallowMissle(int index, EMissileWeapons type);
     void setWeaponTubeExclusiveFor(int index, EMissileWeapons type);

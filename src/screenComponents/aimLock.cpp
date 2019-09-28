@@ -15,7 +15,7 @@ AimLockButton::AimLockButton(GuiContainer* owner, string id, GuiMissileTubeContr
     this->tube_controls = tube_controls;
     this->missile_aim = missile_aim;
 
-    setValue(true);
+    setValue(!my_spaceship->manual_aim);
     setIcon("gui/icons/lock");
 }
 
@@ -45,9 +45,19 @@ void AimLockButton::setAimLock(bool value)
 {
     this->tube_controls->setManualAim(!value);
     this->missile_aim->setVisible(!value);
+
     if (!value && my_spaceship)
     {
         this->missile_aim->setValue(my_spaceship->getRotation());
         this->tube_controls->setMissileTargetAngle(my_spaceship->getRotation());
     }
+}
+
+void AimLockButton::onDraw(sf::RenderTarget& window)
+{
+    if (my_spaceship) {
+        setValue(!my_spaceship->manual_aim);
+    }
+
+    GuiToggleButton::onDraw(window);
 }

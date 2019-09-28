@@ -246,6 +246,7 @@ public:
     void commandSetAlertLevel(EAlertLevel level);
     void commandHackingFinished(P<SpaceObject> target, string target_system);
     void commandCustomFunction(string name);
+    void commandSetAimLock(bool manual_aim);
 
     virtual void onReceiveServerCommand(sf::Packet& packet) override;
 
