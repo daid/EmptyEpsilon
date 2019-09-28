@@ -247,6 +247,7 @@ public:
     void commandHackingFinished(P<SpaceObject> target, string target_system);
     void commandCustomFunction(string name);
     void commandSetAimLock(bool manual_aim);
+    void commandSetAimAngle(float manual_aim_angle);
 
     virtual void onReceiveServerCommand(sf::Packet& packet) override;
 

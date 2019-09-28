@@ -27,7 +27,7 @@ private:
     };
     TypeRow load_type_rows[MW_Count];
     EMissileWeapons load_type;
-    float missile_target_angle;
+    // float missile_target_angle;
 public:
     GuiMissileTubeControls(GuiContainer* owner, string id);
 

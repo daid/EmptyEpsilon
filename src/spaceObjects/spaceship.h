@@ -170,6 +170,11 @@ public:
      */
     bool manual_aim = false;
 
+    /*!
+     * [output] manual aim angle
+     */
+    float manual_aim_angle = 0;
+
     /// MultiplayerObjectID of the targeted object, or -1 when no target is selected.
     int32_t target_id;
 

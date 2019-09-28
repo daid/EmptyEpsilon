@@ -119,6 +119,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetScienceLink);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAlertLevel);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAimLock);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAimAngle);
 
     // Return the number of Engineering repair crews on the ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getRepairCrewCount);
@@ -194,6 +195,7 @@ static const int16_t CMD_SET_PREVIOUS_SHIELD_FREQUENCY_SELECTION = 0x002C;
 static const int16_t CMD_NEXT_TARGET = 0x002D;
 static const int16_t CMD_PREVIOUS_TARGET = 0x002E;
 static const int16_t CMD_SET_AIM_LOCK = 0x002F;
+static const int16_t CMD_SET_AIM_ANGLE = 0x0030;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -240,6 +242,7 @@ PlayerSpaceship::PlayerSpaceship()
     control_code = "";
     selected_shield_frequency = 1;
     manual_aim = false;
+    manual_aim_angle = 0;
 
     setFactionId(1);
 
@@ -279,6 +282,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&custom_functions);
     registerMemberReplication(&selected_shield_frequency);
     registerMemberReplication(&manual_aim);
+    registerMemberReplication(&manual_aim_angle);
 
     // Determine which stations must provide self-destruct confirmation codes.
     for(int n = 0; n < max_self_destruct_codes; n++)
@@ -1672,6 +1676,11 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             manual_aim = !manual_aim;
         }
         break;
+    case CMD_SET_AIM_ANGLE:
+        {
+            packet >> manual_aim_angle;
+        }
+        break;
     }
 }
 
@@ -2029,6 +2038,13 @@ void PlayerSpaceship::commandSetAimLock(bool manual_aim)
 {
     sf::Packet packet;
     packet << CMD_SET_AIM_LOCK << manual_aim;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetAimAngle(float manual_aim_angle)
+{
+    sf::Packet packet;
+    packet << CMD_SET_AIM_ANGLE << manual_aim_angle;
     sendClientCommand(packet);
 }
 

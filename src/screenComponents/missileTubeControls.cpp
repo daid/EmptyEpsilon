@@ -9,7 +9,7 @@
 #include "gui/gui2_togglebutton.h"
 
 GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
-: GuiAutoLayout(owner, id, LayoutVerticalBottomToTop), load_type(MW_None), missile_target_angle(0)
+: GuiAutoLayout(owner, id, LayoutVerticalBottomToTop), load_type(MW_None)
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
@@ -41,7 +41,7 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
                 return;
             if (my_spaceship->weapon_tube[n].isLoaded())
             {
-                float target_angle = missile_target_angle;
+                float target_angle = my_spaceship->manual_aim_angle;
                 if (!my_spaceship->manual_aim)
                 {
                     target_angle = my_spaceship->weapon_tube[n].calculateFiringSolution(my_spaceship->getTarget());
@@ -171,7 +171,7 @@ void GuiMissileTubeControls::onHotkey(const HotkeyResult& key)
                 my_spaceship->commandUnloadTube(n);
             if (key.hotkey == "FIRE_TUBE_" + string(n+1))
             {
-                float target_angle = missile_target_angle;
+                float target_angle = my_spaceship->manual_aim_angle;
                 if (!my_spaceship->manual_aim)
                 {
                     target_angle = my_spaceship->weapon_tube[n].calculateFiringSolution(my_spaceship->getTarget());
@@ -186,12 +186,12 @@ void GuiMissileTubeControls::onHotkey(const HotkeyResult& key)
 
 void GuiMissileTubeControls::setMissileTargetAngle(float angle)
 {
-    missile_target_angle = angle;
+    my_spaceship->manual_aim_angle = angle;
 }
 
 float GuiMissileTubeControls::getMissileTargetAngle()
 {
-    return missile_target_angle;
+    return my_spaceship->manual_aim_angle;
 }
 
 void GuiMissileTubeControls::setManualAim(bool manual)
