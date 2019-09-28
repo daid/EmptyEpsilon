@@ -34,3 +34,11 @@ void GuiBeamFrequencySelector::onHotkey(const HotkeyResult& key)
         }
     }
 }
+
+void GuiBeamFrequencySelector::onDraw(sf::RenderTarget& window)
+{
+    if (my_spaceship)
+        setSelectionIndex(my_spaceship->beam_frequency);
+
+    GuiSelector::onDraw(window);
+}
