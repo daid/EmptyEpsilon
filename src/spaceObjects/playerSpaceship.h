@@ -204,6 +204,8 @@ public:
     void commandWarp(int8_t target);
     void commandJump(float distance);
     void commandSetTarget(P<SpaceObject> target);
+    void commandNextTarget();
+    void commandPreviousTarget();
     void commandSetScienceLink(int32_t id);
     void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
     void commandUnloadTube(int8_t tubeNumber);

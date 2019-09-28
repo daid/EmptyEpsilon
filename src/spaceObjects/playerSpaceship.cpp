@@ -79,6 +79,8 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandWarp);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandJump);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetTarget);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandNextTarget);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandPreviousTarget);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandLoadTube);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandUnloadTube);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandFireTube);
@@ -188,6 +190,8 @@ static const int16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const int16_t CMD_SET_SHIELD_FREQUENCY_SELECTION = 0x002A;
 static const int16_t CMD_SET_NEXT_SHIELD_FREQUENCY_SELECTION = 0x002B;
 static const int16_t CMD_SET_PREVIOUS_SHIELD_FREQUENCY_SELECTION = 0x002C;
+static const int16_t CMD_NEXT_TARGET = 0x002D;
+static const int16_t CMD_PREVIOUS_TARGET = 0x002E;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -1111,6 +1115,108 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             packet >> target_id;
         }
         break;
+    case CMD_PREVIOUS_TARGET:
+        {
+            sf::Vector2f playerPosition = this->getPosition();
+            sf::Vector2f targetPosition = playerPosition;
+            sf::Vector2f targetVector = sf::Vector2f(1, 1);
+            float targetAngle = 90;
+            float smallestAngle = 360;
+            int32_t newTargetId = target_id;
+
+            // If player has current target, use it's values
+            if (target_id != -1)
+            {
+                targetPosition = this->getTarget()->getPosition();
+                targetVector = targetPosition - playerPosition;
+                targetAngle = sf::vector2ToAngle(targetVector);
+            }
+
+            // Get all possible targets on the radar range
+            PVector<Collisionable> targetCandidates = CollisionManager::queryArea(
+                playerPosition - sf::Vector2f(5000, 5000), playerPosition + sf::Vector2f(5000, 5000));
+
+            foreach(Collisionable, obj, targetCandidates)
+            {
+                P<SpaceObject> targetCandidate = obj;
+
+                if (targetCandidate &&
+                    targetCandidate != this &&
+                    targetCandidate->getMultiplayerId() != target_id &&
+                    targetCandidate->canBeTargetedBy(this))
+                {
+                    sf::Vector2f candidatePosition = targetCandidate->getPosition();
+                    sf::Vector2f candidateVector = candidatePosition - playerPosition;
+                    float candidateAngle = sf::vector2ToAngle(candidateVector);
+
+                    float angleDifference = targetAngle - candidateAngle;
+
+                    if (angleDifference < 0)
+                    {
+                        angleDifference += 360;
+                    }
+
+                    if (angleDifference < smallestAngle) {
+                        smallestAngle = angleDifference;
+                        newTargetId = targetCandidate->getMultiplayerId();
+                    }
+                }
+            }
+
+            target_id = newTargetId;
+        }
+        break;
+    case CMD_NEXT_TARGET:
+        {
+            sf::Vector2f playerPosition = this->getPosition();
+            sf::Vector2f targetPosition = playerPosition;
+            sf::Vector2f targetVector = sf::Vector2f(1, 1);
+            float targetAngle = 90;
+            float largestAngle = 0;
+            int32_t newTargetId = target_id;
+
+            // If player has current target, use it's values
+            if (target_id != -1)
+            {
+                targetPosition = this->getTarget()->getPosition();
+                targetVector = targetPosition - playerPosition;
+                targetAngle = sf::vector2ToAngle(targetVector);
+            }
+
+            // Get all possible targets on the radar range
+            PVector<Collisionable> targetCandidates = CollisionManager::queryArea(
+                playerPosition - sf::Vector2f(5000, 5000), playerPosition + sf::Vector2f(5000, 5000));
+
+            foreach(Collisionable, obj, targetCandidates)
+            {
+                P<SpaceObject> targetCandidate = obj;
+
+                if (targetCandidate &&
+                    targetCandidate != this &&
+                    targetCandidate->getMultiplayerId() != target_id &&
+                    targetCandidate->canBeTargetedBy(this))
+                {
+                    sf::Vector2f candidatePosition = targetCandidate->getPosition();
+                    sf::Vector2f candidateVector = candidatePosition - playerPosition;
+                    float candidateAngle = sf::vector2ToAngle(candidateVector);
+
+                    float angleDifference = targetAngle - candidateAngle;
+
+                    if (angleDifference < 0)
+                    {
+                        angleDifference += 360;
+                    }
+
+                    if (angleDifference > largestAngle) {
+                        largestAngle = angleDifference;
+                        newTargetId = targetCandidate->getMultiplayerId();
+                    }
+                }
+            }
+
+            target_id = newTargetId;
+        }
+        break;
     case CMD_LOAD_TUBE:
         {
             int8_t tube_nr;
@@ -1595,6 +1701,20 @@ void PlayerSpaceship::commandSetTarget(P<SpaceObject> target)
         packet << CMD_SET_TARGET << target->getMultiplayerId();
     else
         packet << CMD_SET_TARGET << int32_t(-1);
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandNextTarget()
+{
+    sf::Packet packet;
+    packet << CMD_NEXT_TARGET;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandPreviousTarget()
+{
+    sf::Packet packet;
+    packet << CMD_PREVIOUS_TARGET;
     sendClientCommand(packet);
 }
 
