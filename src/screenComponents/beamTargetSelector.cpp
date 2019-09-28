@@ -35,3 +35,11 @@ void GuiBeamTargetSelector::onHotkey(const HotkeyResult& key)
         }
     }
 }
+
+void GuiBeamTargetSelector::onDraw(sf::RenderTarget& window)
+{
+    if (my_spaceship)
+        setSelectionIndex(my_spaceship->beam_system_target - SYS_None);
+
+    GuiSelector::onDraw(window);
+}
