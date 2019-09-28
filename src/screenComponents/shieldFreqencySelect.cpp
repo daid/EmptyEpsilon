@@ -17,7 +17,11 @@ GuiShieldFrequencySelect::GuiShieldFrequencySelect(GuiContainer* owner, string i
             my_spaceship->commandSetShieldFrequency(new_frequency->getSelectionIndex());
     });
     calibrate_button->setPosition(0, 50, ATopLeft)->setSize(280 * 0.55, 50);
-    new_frequency = new GuiSelector(this, "", nullptr);
+    new_frequency = new GuiSelector(this, "", [this](int selected_shield_frequency, string value) {
+        if (my_spaceship) {
+            my_spaceship->selected_shield_frequency = selected_shield_frequency;
+        }
+    });
     new_frequency->setPosition(280 * 0.55, 50, ATopLeft)->setSize(280 * 0.45, 50);
     for(int n=0; n<=SpaceShip::max_frequency; n++)
     {

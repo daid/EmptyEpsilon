@@ -212,6 +212,7 @@ public:
     void commandFireTube(int8_t tubeNumber, float missile_target_angle);
     void commandFireTubeAtTarget(int8_t tubeNumber, P<SpaceObject> target);
     void commandSetShields(bool enabled);
+    void commandCalibrateShields();
     void commandMainScreenSetting(EMainScreenSetting mainScreen);
     void commandMainScreenOverlay(EMainScreenOverlay mainScreen);
     void commandScan(P<SpaceObject> object);

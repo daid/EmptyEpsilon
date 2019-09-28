@@ -86,6 +86,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandFireTube);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandFireTubeAtTarget);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetShields);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCalibrateShields);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMainScreenSetting);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMainScreenOverlay);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandScan);
@@ -196,6 +197,7 @@ static const int16_t CMD_NEXT_TARGET = 0x002D;
 static const int16_t CMD_PREVIOUS_TARGET = 0x002E;
 static const int16_t CMD_SET_AIM_LOCK = 0x002F;
 static const int16_t CMD_SET_AIM_ANGLE = 0x0030;
+static const int16_t CMD_CALIBRATE_SHIELDS = 0x0031;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -1275,6 +1277,15 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             }
         }
         break;
+    case CMD_CALIBRATE_SHIELDS:
+        if (shield_calibration_delay <= 0.0 &&
+            shield_frequency != selected_shield_frequency)
+        {
+            shield_frequency = selected_shield_frequency;
+            shield_calibration_delay = shield_calibration_time;
+            shields_active = false;
+        }
+        break;
     case CMD_SET_MAIN_SCREEN_SETTING:
         packet >> main_screen_setting;
         break;
@@ -1777,6 +1788,13 @@ void PlayerSpaceship::commandSetShields(bool enabled)
 {
     sf::Packet packet;
     packet << CMD_SET_SHIELDS << enabled;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandCalibrateShields()
+{
+    sf::Packet packet;
+    packet << CMD_CALIBRATE_SHIELDS;
     sendClientCommand(packet);
 }
 
