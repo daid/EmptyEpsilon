@@ -356,6 +356,8 @@ public:
     int getShieldsFrequency(void){ return shield_frequency; }
     void setShieldsFrequency(float freq) { if ((freq > SpaceShip::max_frequency) || (freq < 0)) return; shield_frequency = freq;}
 
+    int getBeamFrequency(){ return beam_frequency; }
+
     void setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage)
     {
         if (index < 0 || index >= max_beam_weapons)
@@ -389,10 +391,13 @@ public:
     void setWeaponTubeCount(int amount);
     int getWeaponTubeCount();
     EMissileWeapons getWeaponTubeLoadType(int index);
+    EMissileSizes getWeaponTubeSize(int index);
+    
     void weaponTubeAllowMissle(int index, EMissileWeapons type);
     void weaponTubeDisallowMissle(int index, EMissileWeapons type);
     void setWeaponTubeExclusiveFor(int index, EMissileWeapons type);
     void setWeaponTubeDirection(int index, float direction);
+    void setWeaponTubeSize(int index, EMissileSizes size);
 
     void setRadarTrace(string trace) { radar_trace = trace; }
 

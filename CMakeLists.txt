@@ -175,6 +175,9 @@ set(SOURCES
 	src/screenComponents/hackingDialog.cpp
 	src/screenComponents/customShipFunctions.cpp
 	src/screenComponents/scrollingBanner.cpp
+	src/screenComponents/lightsOut.cpp
+	src/screenComponents/miniGame.cpp
+	src/screenComponents/mineSweeper.cpp
 	src/gui/colorConfig.cpp
 	src/gui/hotkeyConfig.cpp
 	src/gui/mouseRenderer.cpp
@@ -205,6 +208,11 @@ set(SOURCES
 	src/gui/gui2_container.cpp
 	src/gui/gui2_panel.cpp
 	src/gui/gui2_overlay.cpp
+	src/spaceObjects/missiles/missileWeapon.cpp
+	src/spaceObjects/missiles/EMPMissile.cpp
+	src/spaceObjects/missiles/homingMissile.cpp
+	src/spaceObjects/missiles/hvli.cpp
+	src/spaceObjects/missiles/nuke.cpp
 	src/spaceObjects/spaceStation.cpp
 	src/spaceObjects/spaceship.cpp
 	src/spaceObjects/wormHole.cpp
@@ -215,17 +223,12 @@ set(SOURCES
 	src/spaceObjects/asteroid.cpp
 	src/spaceObjects/mine.cpp
 	src/spaceObjects/blackHole.cpp
-	src/spaceObjects/missileWeapon.cpp
-	src/spaceObjects/EMPMissile.cpp
 	src/spaceObjects/playerSpaceship.cpp
 	src/spaceObjects/beamEffect.cpp
-	src/spaceObjects/homingMissile.cpp
-	src/spaceObjects/hvli.cpp
 	src/spaceObjects/electricExplosionEffect.cpp
 	src/spaceObjects/supplyDrop.cpp
 	src/spaceObjects/warpJammer.cpp
 	src/spaceObjects/scanProbe.cpp
-	src/spaceObjects/nuke.cpp
 	src/spaceObjects/artifact.cpp
 	src/spaceObjects/shipTemplateBasedObject.cpp
 	src/spaceObjects/planet.cpp

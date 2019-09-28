@@ -28,6 +28,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponStorageMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getShieldsFrequency);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setShieldsFrequency);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamFrequency);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getMaxEnergy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setMaxEnergy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getEnergy);
@@ -223,6 +224,7 @@ void SpaceShip::applyTemplateValues()
     {
         weapon_tube[n].setLoadTimeConfig(ship_template->weapon_tube[n].load_time);
         weapon_tube[n].setDirection(ship_template->weapon_tube[n].direction);
+        weapon_tube[n].setSize(ship_template->weapon_tube[n].size);
         for(int m=0; m<MW_Count; m++)
         {
             if (ship_template->weapon_tube[n].type_allowed_mask & (1 << m))
@@ -1055,6 +1057,20 @@ EMissileWeapons SpaceShip::getWeaponTubeLoadType(int index)
     if (!weapon_tube[index].isLoaded())
         return MW_None;
     return weapon_tube[index].getLoadType();
+}
+
+EMissileSizes SpaceShip::getWeaponTubeSize(int index)
+{
+    if (index < 0 || index >= weapon_tube_count)
+        return MS_Small;
+    return weapon_tube[index].getSize();
+}
+
+void SpaceShip::setWeaponTubeSize(int index, EMissileSizes size)
+{
+    if (index < 0 || index >= weapon_tube_count)
+        return;
+    weapon_tube[index].setSize(size);
 }
 
 void SpaceShip::weaponTubeAllowMissle(int index, EMissileWeapons type)
