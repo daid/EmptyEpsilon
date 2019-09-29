@@ -1764,6 +1764,10 @@ void PlayerSpaceship::commandPreviousTarget()
 
 void PlayerSpaceship::commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType)
 {
+    // Check that tube is valid
+    if (tubeNumber < 0 || tubeNumber >= getWeaponTubeCount())
+        return;
+
     sf::Packet packet;
     packet << CMD_LOAD_TUBE << tubeNumber << missileType;
     sendClientCommand(packet);
@@ -1771,6 +1775,10 @@ void PlayerSpaceship::commandLoadTube(int8_t tubeNumber, EMissileWeapons missile
 
 void PlayerSpaceship::commandUnloadTube(int8_t tubeNumber)
 {
+    // Check that tube is valid
+    if (tubeNumber < 0 || tubeNumber >= getWeaponTubeCount())
+        return;
+
     sf::Packet packet;
     packet << CMD_UNLOAD_TUBE << tubeNumber;
     sendClientCommand(packet);
@@ -1778,6 +1786,10 @@ void PlayerSpaceship::commandUnloadTube(int8_t tubeNumber)
 
 void PlayerSpaceship::commandFireTube(int8_t tubeNumber, float missile_target_angle)
 {
+    // Check that tube is valid
+    if (tubeNumber < 0 || tubeNumber >= getWeaponTubeCount())
+        return;
+
     sf::Packet packet;
     packet << CMD_FIRE_TUBE << tubeNumber << missile_target_angle;
     sendClientCommand(packet);
@@ -1800,6 +1812,10 @@ void PlayerSpaceship::commandFireTubeAtTarget(int8_t tubeNumber, P<SpaceObject> 
 
 void PlayerSpaceship::commandFireTubeAtCurrentTarget(int8_t tubeNumber)
 {
+    // Check that tube is valid
+    if (tubeNumber < 0 || tubeNumber >= getWeaponTubeCount())
+        return;
+
     float target_angle = my_spaceship->manual_aim_angle;
 
     if (!my_spaceship->manual_aim)
