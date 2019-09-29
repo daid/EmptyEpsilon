@@ -85,6 +85,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandUnloadTube);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandFireTube);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandFireTubeAtTarget);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandFireTubeAtCurrentTarget);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetShields);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCalibrateShields);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMainScreenSetting);
@@ -1782,6 +1783,21 @@ void PlayerSpaceship::commandFireTubeAtTarget(int8_t tubeNumber, P<SpaceObject> 
       targetAngle = getRotation() + weapon_tube[tubeNumber].getDirection();
 
   commandFireTube(tubeNumber, targetAngle);
+}
+
+void PlayerSpaceship::commandFireTubeAtCurrentTarget(int8_t tubeNumber)
+{
+    float target_angle = my_spaceship->manual_aim_angle;
+
+    if (!my_spaceship->manual_aim)
+    {
+        target_angle = my_spaceship->weapon_tube[tubeNumber].calculateFiringSolution(my_spaceship->getTarget());
+
+        if (target_angle == std::numeric_limits<float>::infinity())
+            target_angle = my_spaceship->getRotation() + my_spaceship->weapon_tube[tubeNumber].getDirection();
+    }
+
+    my_spaceship->commandFireTube(tubeNumber, target_angle);
 }
 
 void PlayerSpaceship::commandSetShields(bool enabled)
