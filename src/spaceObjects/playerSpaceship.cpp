@@ -122,6 +122,8 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAlertLevel);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAimLock);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAimAngle);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSelectWeapon);
+
 
     // Return the number of Engineering repair crews on the ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getRepairCrewCount);
@@ -199,6 +201,7 @@ static const int16_t CMD_PREVIOUS_TARGET = 0x002E;
 static const int16_t CMD_SET_AIM_LOCK = 0x002F;
 static const int16_t CMD_SET_AIM_ANGLE = 0x0030;
 static const int16_t CMD_CALIBRATE_SHIELDS = 0x0031;
+static const int16_t CMD_SELECT_WEAPON = 0x0032;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -244,6 +247,7 @@ PlayerSpaceship::PlayerSpaceship()
     shields_active = false;
     control_code = "";
     selected_shield_frequency = 1;
+    selected_weapon = EMissileWeapons::MW_None;
     manual_aim = false;
     manual_aim_angle = 0;
 
@@ -284,6 +288,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&control_code);
     registerMemberReplication(&custom_functions);
     registerMemberReplication(&selected_shield_frequency);
+    registerMemberReplication(&selected_weapon);
     registerMemberReplication(&manual_aim);
     registerMemberReplication(&manual_aim_angle);
 
@@ -1259,6 +1264,14 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 weapon_tube[tube_nr].fire(missile_target_angle);
         }
         break;
+    case CMD_SELECT_WEAPON:
+        {
+            EMissileWeapons weapon_type;
+            packet >> weapon_type;
+
+            selected_weapon = weapon_type;
+        }
+        break;
     case CMD_SET_SHIELDS:
         {
             bool active;
@@ -1906,6 +1919,13 @@ void PlayerSpaceship::commandSendCommPlayer(string message)
 {
     sf::Packet packet;
     packet << CMD_SEND_TEXT_COMM_PLAYER << message;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSelectWeapon(EMissileWeapons weapon_type)
+{
+    sf::Packet packet;
+    packet << CMD_SELECT_WEAPON << weapon_type;
     sendClientCommand(packet);
 }
 

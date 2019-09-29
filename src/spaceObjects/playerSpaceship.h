@@ -227,6 +227,7 @@ public:
     void commandAnswerCommHail(bool awnser);
     void commandSendComm(uint8_t index);
     void commandSendCommPlayer(string message);
+    void commandSelectWeapon(EMissileWeapons weapon_type);
     void commandSetAutoRepair(bool enabled);
     void commandSetBeamFrequency(int32_t frequency);
     void commandSetBeamSystemTarget(ESystem system);

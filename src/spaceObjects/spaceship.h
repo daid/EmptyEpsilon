@@ -165,6 +165,11 @@ public:
      */
     int selected_shield_frequency;
 
+    /**
+     * Selected weapon type
+     */
+    EMissileWeapons selected_weapon;
+
     /*!
      * [output] Status of the aim lock
      */

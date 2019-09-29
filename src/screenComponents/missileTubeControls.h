@@ -40,7 +40,6 @@ public:
     void setManualAim(bool manual);
     bool getManualAim();
 
-private:
     void selectMissileWeapon(EMissileWeapons type);
 };
 

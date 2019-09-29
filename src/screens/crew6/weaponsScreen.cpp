@@ -97,6 +97,9 @@ void WeaponsScreen::onDraw(sf::RenderTarget& window)
         targets.set(my_spaceship->getTarget());
 
         missile_aim->setVisible(tube_controls->getManualAim());
+
+        // Set UI selection of weapon type
+        tube_controls->selectMissileWeapon(my_spaceship->selected_weapon);
     }
     GuiOverlay::onDraw(window);
 }
