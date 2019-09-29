@@ -72,8 +72,9 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
                 load_type = EMissileWeapons(n);
             else
                 load_type = MW_None;
-            for(int idx = 0; idx < MW_Count; idx++)
-                load_type_rows[idx].button->setValue(idx == load_type);
+
+            // Set selected weapon to my_spaceship. Weapons screen will take care of updating the UI.
+            my_spaceship->selected_weapon = load_type;
         });
         load_type_rows[n].button->setTextSize(28)->setSize(200, 40);
     }
