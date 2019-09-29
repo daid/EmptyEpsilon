@@ -117,12 +117,15 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandActivateSelfDestruct);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCancelSelfDestruct);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandConfirmDestructCode);
+    // Confirm all self destruct codes without actually entering the codes
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandConfirmSelfDestruct);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCombatManeuverBoost);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetScienceLink);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAlertLevel);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAimLock);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAimAngle);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSelectWeapon);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSelectSystem);
 
 
     // Return the number of Engineering repair crews on the ship.
@@ -202,6 +205,8 @@ static const int16_t CMD_SET_AIM_LOCK = 0x002F;
 static const int16_t CMD_SET_AIM_ANGLE = 0x0030;
 static const int16_t CMD_CALIBRATE_SHIELDS = 0x0031;
 static const int16_t CMD_SELECT_WEAPON = 0x0032;
+static const int16_t CMD_SELECT_SYSTEM = 0x0033;
+static const int16_t CMD_COFIRM_ALL_SELF_DESTRUCT = 0x0034;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -250,6 +255,7 @@ PlayerSpaceship::PlayerSpaceship()
     selected_weapon = EMissileWeapons::MW_None;
     manual_aim = false;
     manual_aim_angle = 0;
+    selected_system = ESystem::SYS_None;
 
     setFactionId(1);
 
@@ -291,6 +297,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&selected_weapon);
     registerMemberReplication(&manual_aim);
     registerMemberReplication(&manual_aim_angle);
+    registerMemberReplication(&selected_system);
 
     // Determine which stations must provide self-destruct confirmation codes.
     for(int n = 0; n < max_self_destruct_codes; n++)
@@ -1272,6 +1279,14 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             selected_weapon = weapon_type;
         }
         break;
+    case CMD_SELECT_SYSTEM:
+        {
+            ESystem system_type;
+            packet >> system_type;
+
+            selected_system = system_type;
+        }
+        break;
     case CMD_SET_SHIELDS:
         {
             bool active;
@@ -1626,6 +1641,12 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 self_destruct_code_confirmed[index] = true;
         }
         break;
+    case CMD_COFIRM_ALL_SELF_DESTRUCT:
+        {
+            for(int i = 0; i<max_self_destruct_codes; i++)
+                self_destruct_code_confirmed[i] = true;
+        }
+        break;
     case CMD_COMBAT_MANEUVER_BOOST:
         {
             float request_amount;
@@ -1945,6 +1966,13 @@ void PlayerSpaceship::commandSelectWeapon(EMissileWeapons weapon_type)
     sendClientCommand(packet);
 }
 
+void PlayerSpaceship::commandSelectSystem(ESystem system_type)
+{
+    sf::Packet packet;
+    packet << CMD_SELECT_SYSTEM << system_type;
+    sendClientCommand(packet);
+}
+
 void PlayerSpaceship::commandSetAutoRepair(bool enabled)
 {
     sf::Packet packet;
@@ -2033,6 +2061,13 @@ void PlayerSpaceship::commandConfirmDestructCode(int8_t index, uint32_t code)
 {
     sf::Packet packet;
     packet << CMD_CONFIRM_SELF_DESTRUCT << index << code;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandConfirmSelfDestruct()
+{
+    sf::Packet packet;
+    packet << CMD_COFIRM_ALL_SELF_DESTRUCT;
     sendClientCommand(packet);
 }
 

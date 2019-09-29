@@ -18,7 +18,7 @@
 #include "gui/gui2_panel.h"
 
 EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_position)
-: GuiOverlay(owner, "ENGINEERING_SCREEN", colorConfig.background), selected_system(SYS_None)
+: GuiOverlay(owner, "ENGINEERING_SCREEN", colorConfig.background)
 {
     // Render the background decorations.
     background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", sf::Color::White);
@@ -121,16 +121,16 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
     coolant_label->setVertical()->setAlignment(ACenterLeft)->setPosition(110, 20, ATopLeft)->setSize(30, 360);
 
     power_slider = new GuiSlider(box, "POWER_SLIDER", 3.0, 0.0, 1.0, [this](float value) {
-        if (my_spaceship && selected_system != SYS_None)
-            my_spaceship->commandSetSystemPowerRequest(selected_system, value);
+        if (my_spaceship && my_spaceship -> selected_system != SYS_None)
+            my_spaceship->commandSetSystemPowerRequest(my_spaceship -> selected_system, value);
     });
     power_slider->setPosition(50, 20, ATopLeft)->setSize(60, 360);
     for(float snap_point = 0.0; snap_point <= 3.0; snap_point += 0.5)
         power_slider->addSnapValue(snap_point, snap_point == 1.0 ? 0.1 : 0.01);
     power_slider->disable();
     coolant_slider = new GuiSlider(box, "COOLANT_SLIDER", 10.0, 0.0, 0.0, [this](float value) {
-        if (my_spaceship && selected_system != SYS_None)
-            my_spaceship->commandSetSystemCoolantRequest(selected_system, value);
+        if (my_spaceship && my_spaceship -> selected_system != SYS_None)
+            my_spaceship->commandSetSystemCoolantRequest(my_spaceship -> selected_system, value);
     });
     coolant_slider->setPosition(140, 20, ATopLeft)->setSize(60, 360);
     for(float snap_point = 0.0; snap_point <= 10.0; snap_point += 2.5)
@@ -210,20 +210,22 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
 
             info.power_bar->setValue(my_spaceship->systems[n].power_level);
             info.coolant_bar->setValue(my_spaceship->systems[n].coolant_level);
+            info.button->setValue(n == my_spaceship->selected_system);
         }
 
-        if (selected_system != SYS_None)
+        if (my_spaceship -> selected_system != SYS_None)
         {
-            ShipSystem& system = my_spaceship->systems[selected_system];
+            ShipSystem& system = my_spaceship->systems[my_spaceship -> selected_system];
             power_label->setText("Power: " + string(int(system.power_level * 100)) + "%/" + string(int(system.power_request * 100)) + "%");
+            power_slider->enable();
             power_slider->setValue(system.power_request);
             coolant_label->setText("Coolant: " + string(int(system.coolant_level / PlayerSpaceship::max_coolant_per_system * 100)) + "%/" + string(int(std::min(system.coolant_request, my_spaceship->max_coolant) / PlayerSpaceship::max_coolant_per_system * 100)) + "%");
             coolant_slider->setEnable(!my_spaceship->auto_coolant_enabled);
             coolant_slider->setValue(std::min(system.coolant_request, my_spaceship->max_coolant));
 
             system_effects_index = 0;
-            float effectiveness = my_spaceship->getSystemEffectiveness(selected_system);
-            switch(selected_system)
+            float effectiveness = my_spaceship->getSystemEffectiveness(my_spaceship -> selected_system);
+            switch(my_spaceship -> selected_system)
             {
             case SYS_Reactor:
                 if (effectiveness > 1.0f)
@@ -284,7 +286,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
                 {
                     DamageInfo di;
                     di.type = DT_Kinetic;
-                    float damage_negate = 1.0f - 
+                    float damage_negate = 1.0f -
 my_spaceship->getShieldDamageFactor(di, my_spaceship->shield_count - 1);
                     if (damage_negate < 0.0)
                         addSystemEffect("Extra damage", string(int(-damage_negate * 100)) + "%");
@@ -315,28 +317,28 @@ void EngineeringScreen::onHotkey(const HotkeyResult& key)
         if (key.hotkey == "SELECT_JUMP_DRIVE") selectSystem(SYS_JumpDrive);
         if (key.hotkey == "SELECT_FRONT_SHIELDS") selectSystem(SYS_FrontShield);
         if (key.hotkey == "SELECT_REAR_SHIELDS") selectSystem(SYS_RearShield);
-        
-        if (selected_system != SYS_None)
+
+        if (my_spaceship -> selected_system != SYS_None)
         {
             if (key.hotkey == "INCREASE_POWER")
             {
-                power_slider->setValue(my_spaceship->systems[selected_system].power_request + 0.1f);
-                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                power_slider->setValue(my_spaceship->systems[my_spaceship -> selected_system].power_request + 0.1f);
+                my_spaceship->commandSetSystemPowerRequest(my_spaceship -> selected_system, power_slider->getValue());
             }
             if (key.hotkey == "DECREASE_POWER")
             {
-                power_slider->setValue(my_spaceship->systems[selected_system].power_request - 0.1f);
-                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                power_slider->setValue(my_spaceship->systems[my_spaceship -> selected_system].power_request - 0.1f);
+                my_spaceship->commandSetSystemPowerRequest(my_spaceship -> selected_system, power_slider->getValue());
             }
             if (key.hotkey == "INCREASE_COOLANT")
             {
-                coolant_slider->setValue(my_spaceship->systems[selected_system].coolant_request + 0.5f);
-                my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
+                coolant_slider->setValue(my_spaceship->systems[my_spaceship -> selected_system].coolant_request + 0.5f);
+                my_spaceship->commandSetSystemCoolantRequest(my_spaceship -> selected_system, coolant_slider->getValue());
             }
             if (key.hotkey == "DECREASE_COOLANT")
             {
-                coolant_slider->setValue(my_spaceship->systems[selected_system].coolant_request - 0.5f);
-                my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
+                coolant_slider->setValue(my_spaceship->systems[my_spaceship -> selected_system].coolant_request - 0.5f);
+                my_spaceship->commandSetSystemCoolantRequest(my_spaceship -> selected_system, coolant_slider->getValue());
             }
         }
     }
@@ -346,18 +348,8 @@ void EngineeringScreen::selectSystem(ESystem system)
 {
     if (my_spaceship && !my_spaceship->hasSystem(system))
         return;
-    
-    for(int idx=0; idx<SYS_COUNT; idx++)
-    {
-        system_rows[idx].button->setValue(idx == system);
-    }
-    selected_system = system;
-    power_slider->enable();
-    if (my_spaceship)
-    {
-        power_slider->setValue(my_spaceship->systems[system].power_request);
-        coolant_slider->setValue(my_spaceship->systems[system].coolant_request);
-    }
+
+    my_spaceship -> selected_system = system;
 }
 
 void EngineeringScreen::addSystemEffect(string key, string value)

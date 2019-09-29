@@ -228,6 +228,7 @@ public:
     void commandSendComm(uint8_t index);
     void commandSendCommPlayer(string message);
     void commandSelectWeapon(EMissileWeapons weapon_type);
+    void commandSelectSystem(ESystem system_type);
     void commandSetAutoRepair(bool enabled);
     void commandSetBeamFrequency(int32_t frequency);
     void commandSetBeamSystemTarget(ESystem system);
@@ -241,6 +242,7 @@ public:
     void commandActivateSelfDestruct();
     void commandCancelSelfDestruct();
     void commandConfirmDestructCode(int8_t index, uint32_t code);
+    void commandConfirmSelfDestruct();
     void commandCombatManeuverBoost(float amount);
     void commandCombatManeuverStrafe(float strafe);
     void commandLaunchProbe(sf::Vector2f target_position);

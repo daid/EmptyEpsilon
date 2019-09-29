@@ -180,6 +180,11 @@ public:
      */
     float manual_aim_angle = 0;
 
+    /**
+     * Selected (engineering) system
+     */
+    ESystem selected_system;
+
     /// MultiplayerObjectID of the targeted object, or -1 when no target is selected.
     int32_t target_id;
 
