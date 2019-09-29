@@ -32,9 +32,15 @@ void GuiSelfDestructIndicator::onDraw(sf::RenderTarget& window)
             label->setText("Waiting for autorization input: " + string(todo) + " left");
         }else{
             if (my_spaceship->self_destruct_countdown <= 3.0f)
+            {
                 label->setText("Have a nice day.");
+            }
             else
-                label->setText("This ship will self-destruct in exactly 10 seconds.");
+            {
+                char buffer[46];
+                snprintf(buffer, 46, "This ship will self-destruct in %.0f seconds.", my_spaceship->self_destruct_countdown);
+                label->setText(buffer);
+            }
         }
     }else{
         box->hide();
