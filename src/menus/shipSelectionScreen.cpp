@@ -18,6 +18,7 @@
 #include "gui/gui2_slider.h"
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_togglebutton.h"
+#include "preferenceManager.h"
 
 ShipSelectionScreen::ShipSelectionScreen()
 {
@@ -474,7 +475,8 @@ void ShipSelectionScreen::onReadyClick()
     }else if (window_button->getValue())
     {
         destroy();
-        new WindowScreen(int(window_angle->getValue()));
+        uint8_t window_caption = PreferencesManager::get("ship_window_caption","1").toInt();
+        new WindowScreen(int(window_angle->getValue()), window_caption);
     }else if(topdown_button->getValue())
     {
         my_player_info->commandSetShipId(-1);
