@@ -475,8 +475,8 @@ void ShipSelectionScreen::onReadyClick()
     }else if (window_button->getValue())
     {
         destroy();
-        uint8_t window_caption = PreferencesManager::get("ship_window_caption","1").toInt();
-        new WindowScreen(int(window_angle->getValue()), window_caption);
+        uint8_t window_flags = PreferencesManager::get("ship_window_flags","1").toInt();
+        new WindowScreen(int(window_angle->getValue()), window_flags);
     }else if(topdown_button->getValue())
     {
         my_player_info->commandSetShipId(-1);
