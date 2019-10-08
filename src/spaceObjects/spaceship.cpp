@@ -1017,7 +1017,9 @@ bool SpaceShip::hasSystem(ESystem system)
 float SpaceShip::getSystemEffectiveness(ESystem system)
 {
     float power = systems[system].power_level;
-    power *= (1.0f - systems[system].hacked_level * 0.75f);
+    
+    // Substract the hacking from the power, making double hacked systems run at 25% efficiency.
+    power = std::max(0.0f, power - systems[system].hacked_level * 0.75f);
 
     // Degrade all systems except the reactor once energy level drops below 10.
     if (system != SYS_Reactor)
