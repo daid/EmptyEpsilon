@@ -3,6 +3,7 @@
 #include "menus/joinServerMenu.h"
 #include "menus/serverBrowseMenu.h"
 #include "playerInfo.h"
+#include "preferenceManager.h"
 #include "gameGlobalInfo.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_panel.h"
@@ -61,6 +62,7 @@ void JoinServerScreen::update(float delta)
         new ServerBrowserMenu(this->source);
         break;
     case GameClient::Connected:
+        PreferencesManager::set("last_server", this->ip.toString());
         if (game_client->getClientId() > 0)
         {
             foreach(PlayerInfo, i, player_info_list)

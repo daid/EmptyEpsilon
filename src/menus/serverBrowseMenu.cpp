@@ -1,6 +1,7 @@
 #include "main.h"
 #include "serverBrowseMenu.h"
 #include "joinServerMenu.h"
+#include "preferenceManager.h"
 
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_button.h"
@@ -44,10 +45,13 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source)
         new JoinServerScreen(lan_internet_selector->getSelectionIndex() == 0 ? Local : Internet, sf::IpAddress(text));
         destroy();
     });
-    
     server_list = new GuiListbox(this, "SERVERS", [this](int index, string value) {
         manual_ip->setText(value);
     });
+    if (PreferencesManager::get("last_server", "") != "") {
+        server_list->addEntry("Last Session (" + PreferencesManager::get("last_server", "")  + ")",
+            PreferencesManager::get("last_server", ""));
+    }
     scanner->addCallbacks([this](sf::IpAddress address, string name) {
         //New server found
         server_list->addEntry(name + " (" + address.toString() + ")", address.toString());
