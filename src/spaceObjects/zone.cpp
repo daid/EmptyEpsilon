@@ -62,7 +62,8 @@ void Zone::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float sc
         float y = position.y - font_size + font_size * 0.35;
 
         text_element.setPosition(x, y);
-        text_element.setColor(sf::Color(color.r, color.g, color.b, 128));
+        text_element.setFillColor(sf::Color(color.r, color.g, color.b, 128));
+        text_element.setOutlineColor(sf::Color(color.r, color.g, color.b, 128));
         window.draw(text_element);
     }
 }
