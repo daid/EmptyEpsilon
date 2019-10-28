@@ -54,7 +54,10 @@ void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, fl
         range_circle.setOrigin(range * scale, range * scale);
         range_circle.setPosition(position);
         range_circle.setFillColor(sf::Color::Transparent);
-        range_circle.setOutlineColor(sf::Color(255, 255, 255, 64));
+        if (my_spaceship && my_spaceship->isEnemy(this))
+            range_circle.setOutlineColor(sf::Color(255, 0, 0, 64));
+        else
+            range_circle.setOutlineColor(sf::Color(200, 150, 100, 64));
         range_circle.setOutlineThickness(2.0);
         window.draw(range_circle);
     }
