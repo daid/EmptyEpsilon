@@ -1,9 +1,9 @@
 -- Name: Shoreline
--- Description: Waves of increasingly difficult enemies. At least one required mission and several optional missions randomly selected
+-- Description: Waves of increasingly difficult enemies. At least one required mission and several optional missions. Missions selected at random unless game master intervenes
 ---
 --- Maximum of 8 player ships supported by scenario. More player ships may experience strange results
 ---
---- Version 2
+--- Version 3
 -- Type: Re-playable Mission
 -- Variation[Timed]: Normal difficulty with a 45 minute time limit
 -- Variation[Very Easy]: Few or weak enemies
@@ -178,6 +178,9 @@ function init()
 					{"software",0},
 					{"battery",0}	}
 	diagnostic = false
+	game_end_statistics_diagnostic = false
+	update_loop_diagnostic = false
+	optional_mission_loop_diagnostic = false
 	goods = {}
 	prefix_length = 0
 	suffix_index = 0
@@ -676,7 +679,8 @@ function setMovingAsteroids()
 			if p2obj ~= nil and p2obj:isValid() then
 				if p2obj == nil then print("p2obj is nil") end
 				if xAst == nil then print("xAst is nil") end
-				if distance(p2obj,xAst,yAst) < 30000 then
+				local x1, y1 = p2obj:getPosition()
+				if distance(x1,y1,xAst,yAst) < 30000 then
 					outRange = false
 				end
 			end
@@ -2495,21 +2499,39 @@ function cargoInventory8()
 end
 --		Gain or lose coolant from nebula functions
 function coolantNebulae(delta)
+	local x1, y1, x2, y2
 	for pidx=1,8 do
 		local p = getPlayerShip(pidx)
 		if p ~= nil and p:isValid() then
 			local inside_gain_coolant_nebula = false
+			local wonky_nebula_index = 0
 			for i=1,#coolant_nebula do
+				--[[
 				if p == nil then print("p is nil") end
 				if coolant_nebula[i] == nil then print("coolant_nebula[i] is nil") end
-				if distance(p,coolant_nebula[i]) < 5000 then
-					if coolant_nebula[i].lose then
-						p:setMaxCoolant(p:getMaxCoolant()*coolant_loss)
-					end
-					if coolant_nebula[i].gain then
-						inside_gain_coolant_nebula = true
-					end
+				x1, y1 = p:getPosition()
+				x2, y2 = coolant_nebula[i]:getPosition()
+				if x2 == nil or y2 == nil then
+					print("wonky nebula")
+					print(string.format("i: %i",i))
+					print(string.format("#coolant_nebula: %i",#coolant_nebula))
 				end
+				--]]
+				if x2 ~= nil and y2 ~= nil then
+					if distance(x1,y1,x2,y2) < 5000 then
+						if coolant_nebula[i].lose then
+							p:setMaxCoolant(p:getMaxCoolant()*coolant_loss)
+						end
+						if coolant_nebula[i].gain then
+							inside_gain_coolant_nebula = true
+						end
+					end
+				else
+					wonky_nebula_index = i
+				end
+			end
+			if wonky_nebula_index ~= 0 then
+				table.remove(coolant_nebula,wonky_nebula_index)
 			end
 			if inside_gain_coolant_nebula then
 				if p.get_coolant then
@@ -2668,7 +2690,9 @@ function nearbyStation(object,pool_size)
 		if temp_station ~= nil and temp_station:isValid() then
 			nearest_station = temp_station
 			nearest_station_index = i
-			nearest_distance = distance(temp_station,object)
+			local x1, y1 = temp_station:getPosition()
+			local x2, y2 = object:getPosition()
+			nearest_distance = distance(x1,y1,x2,y2)
 			break
 		end
 	end
@@ -2682,7 +2706,9 @@ function nearbyStation(object,pool_size)
 				if temp_station ~= nil and temp_station:isValid() then
 					if temp_station == nil then print("temp_station is nil") end
 					if object == nil then print("object is nil") end
-					local temp_distance = distance(temp_station,object)
+					local x1, y1 = temp_station:getPosition()
+					local x2, y2 = object:getPosition()
+					local temp_distance = distance(x1,y1,x2,y2)
 					if temp_distance < nearest_distance then
 						nearest_station_index = j
 						nearest_distance = temp_distance
@@ -3077,6 +3103,9 @@ function handleDockedState()
 	if plotO == spinUpgrade and comms_target == spinBase then
 		researchManeuverUpgrade()
 	end
+	if plotO == beamDamageUpgrade and comms_target == stationNefatha then
+		researchIncreasedBeamDamage()
+	end
 	if comms_target == stationVaiken then
 		if beamRangeUpgradeAvailable then
 			addCommsReply("Apply Marconi station beam range upgrade", function()
@@ -3339,7 +3368,9 @@ function handleUndockedState()
 						local brainCheckChance = 60
 						if comms_target == nil then print("comms_target is nil") end
 						if station == nil then print("station is nil") end
-						if distance(comms_target,station) > 75000 then
+						local x1, y1 = comms_target:getPosition()
+						local x2, y2 = station:getPosition()
+						if distance(x1,y1,x2,y2) > 75000 then
 							brainCheckChance = 20
 						end
 						for good, goodData in pairs(station.comms_data.goods) do
@@ -3551,6 +3582,37 @@ function researchBlackHole()
 				bhsMsg = bhsMsg .. "\nThe mobile black hole was last seen in sector " .. grawp:getSectorName()
 				setCommsMessage(bhsMsg)
 				comms_source.horizonComponents = "provided"
+			end)
+		end
+	end
+end
+function researchIncreasedBeamDamage()
+	if comms_source.beamDamageComponents == nil then
+		local ctd = comms_target.comms_data
+		local bd1partQuantity = 0		
+		local bd2partQuantity = 0		
+		local bd3partQuantity = 0		
+		if comms_source.goods ~= nil then
+			if comms_source.goods[bd1part] ~= nil then
+				if comms_source.goods[bd1part] > 0 then
+					bd1partQuantity = comms_source.goods[bd1part]
+				end
+			end
+		end
+		if comms_source.goods ~= nil and comms_source.goods[bd2part] ~= nil and comms_source.goods[bd2part] > 0 then
+			bd2partQuantity = comms_source.goods[bd2part]
+		end
+		if comms_source.goods ~= nil and comms_source.goods[bd3part] ~= nil and comms_source.goods[bd3part] > 0 then
+			bd3partQuantity = comms_source.goods[bd3part]
+		end
+		if bd1partQuantity > 0 and bd2partQuantity > 0 and bd3partQuantity > 0 then
+			addCommsReply(string.format("Provide %s, %s and %s for beam damage research",br1part,br2part,br3part), function()
+				comms_source.goods[bd1part] = comms_source.goods[bd1part] - 1
+				comms_source.goods[bd2part] = comms_source.goods[bd2part] - 1
+				comms_source.goods[bd3part] = comms_source.goods[bd3part] - 1
+				comms_source.cargo = comms_source.cargo + 3
+				setCommsMessage("Thanks. We completed our beam damage research. We transmitted our results to Vaiken. The next time you dock at Vaiken, you can upgrade your beam weapon damage.")
+				comms_source.beamDamageComponents = "provided"
 			end)
 		end
 	end
@@ -3799,7 +3861,9 @@ function neutralComms(comms_data)
 			-- Offer to trade goods if goods or equipment freighter
 			if comms_source == nil then print("comms_source 2 is nil") end
 			if comms_target == nil then print("comms_target 2 is nil") end
-			if distance(comms_source,comms_target) < 5000 then
+			local x1, y1 = comms_source:getPosition()
+			local x2, y2 = comms_target:getPosition()
+			if distance(x1,y1,x2,y2) < 5000 then
 				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
 					if comms_source.goods == nil then
 						comms_source.goods = {}
@@ -3878,7 +3942,9 @@ function neutralComms(comms_data)
 			-- Offer to sell goods if goods or equipment freighter
 			if comms_source == nil then print("comms_source 3 is nil") end
 			if comms_target == nil then print("comms_target 3 is nil") end
-			if distance(comms_source,comms_target) < 5000 then
+			local x1, y1 = comms_source:getPosition()
+			local x2, y2 = comms_target:getPosition()
+			if distance(x1,y1,x2,y2) < 5000 then
 				if comms_source.cargo < 1 then
 					addCommsReply("Jettison cargo", function()
 						setCommsMessage("What would you like to jettison?")
@@ -3945,7 +4011,9 @@ function neutralComms(comms_data)
 			-- Offer to sell goods if goods or equipment freighter double price
 			if comms_source == nil then print("comms_source 4 is nil") end
 			if comms_target == nil then print("comms_target 4 is nil") end
-			if distance(comms_source,comms_target) < 5000 then
+			local x1, y1 = comms_source:getPosition()
+			local x2, y2 = comms_target:getPosition()
+			if distance(x1,y1,x2,y2) < 5000 then
 				if comms_source.cargo < 1 then
 					addCommsReply("Jettison cargo", function()
 						setCommsMessage("What would you like to jettison?")
@@ -4056,7 +4124,9 @@ function neutralComms(comms_data)
 			if comms_target == runTransport then
 				if comms_source == nil then print("comms_source 6 is nil") end
 				if comms_target == nil then print("comms_target 6 is nil") end
-				if distance(comms_source,comms_target) < 5000 then
+				local x1, y1 = comms_source:getPosition()
+				local x2, y2 = comms_target:getPosition()
+				if distance(x1,y1,x2,y2) < 5000 then
 					if sporiskyLocation ~= "aboard ship" then
 						addCommsReply("We need you to hand over Annette Sporisky", function()
 							local asMsg = "Why should we? Despite what you may have heard, she is not related to this freighter's owner. "
@@ -4329,6 +4399,8 @@ function launchWaves()
 			waveEnemyCount = waveEnemyCount + 1
 		end	
 	end
+	local p = getPlayerShip(-1)
+	p:addReputationPoints(math.floor(waveProgress*10/difficulty))
 end
 function monitorWaves(delta)
 	if waveInProgress then
@@ -4399,7 +4471,9 @@ function monitorWaves(delta)
 						if p6obj ~= nil and p6obj:isValid() then
 							if p6obj == nil then print("p6obj is nil") end
 							if enemy == nil then print("enemy is nil") end
-							local curdist = distance(p6obj,enemy)
+							local x1, y1 = p6obj:getPosition()
+							local x2, y2 = enemy:getPosition()
+							local curdist = distance(x1,y1,x2,y2)
 							if curdist < pecdist then
 								closest = p6obj
 								pecdist = curdist
@@ -4454,7 +4528,9 @@ function waveNear(enemyWaveList)
 				if p7 ~= nil and p7:isValid() then
 					if p7 == nil then print("p7 is nil") end
 					if enemy == nil then print("enemy 2 is nil") end
-					if distance(p7,enemy) < 30000 then
+					local x1, y1 = p7:getPosition()
+					local x2, y2 = enemy:getPosition()
+					if distance(x1,y1,x2,y2) < 30000 then
 						playerInRange = true
 						break
 					end
@@ -4469,7 +4545,9 @@ function waveNear(enemyWaveList)
 							if obj:getFaction() == "Human Navy" or obj:getFaction() == "Independent" then
 								if obj == nil then print("obj is nil") end
 								if enemy == nil then print("enemy 3 is nil") end
-								local curDist = distance(obj,enemy)
+								local x1, y1 = obj:getPosition()
+								local x2, y2 = enemy:getPosition()
+								local curDist = distance(x1,y1,x2,y2)
 								if curDist < distToEnemy then
 									distToEnemy = curDist
 									closestStation = obj
@@ -4487,7 +4565,9 @@ function waveNear(enemyWaveList)
 							if p8 ~= nil and p8:isValid() then
 								if p8 == nil then print("p8 is nil") end
 								if closestStation == nil then print("closestStation is nil") end
-								curDist = distance(p8,closestStation)
+								local x1, y1 = p8:getPosition()
+								local x2, y2 = closestStation:getPosition()
+								curDist = distance(x1,y1,x2,y2)
 								if curDist < distToPlayer then
 									distToPlayer = curDist
 									closestPlayer = p8
@@ -4505,6 +4585,7 @@ function waveNear(enemyWaveList)
 	end
 end
 function showGameEndStatistics()
+	if game_end_statistics_diagnostic then print("top of game end statistics function") end
 	local destroyedStations = 0
 	local survivedStations = 0
 	local destroyedFriendlyStations = 0
@@ -4517,6 +4598,8 @@ function showGameEndStatistics()
 		reference_player = getPlayerShip(1)
 	end
 	if reference_player ~= nil then
+		if game_end_statistics_diagnostic then print("reference player is not nil") end		
+		if game_end_statistics_diagnostic then print("reference player: " .. reference_player:getCallSign()) end		
 		for _, station in pairs(originalStationList) do
 			if station:isFriendly(reference_player) then
 				if station:isValid() then
@@ -4530,6 +4613,7 @@ function showGameEndStatistics()
 				end
 			end
 		end
+		if game_end_statistics_diagnostic then print("completed station examination loop") end		
 		destroyedStations = totalStations - survivedStations
 		destroyedFriendlyStations = friendlyStations - survivedFriendlyStations
 		destroyedNeutralStations = neutralStations - survivedNeutralStations
@@ -4557,10 +4641,12 @@ function showGameEndStatistics()
 		gMsg = "Not enough data from ship to gather statistics"
 	end
 	globalMessage(gMsg)
+	if game_end_statistics_diagnostic then print("end of game end statistics function") end		
 end
 --[[-----------------------------------------------------------------
-      Required plot choice: Undercut leads to base destruction
+      Required plot choices
 -----------------------------------------------------------------]]--
+--		Required plot choice: Undercut leads to base destruction
 function chooseUndercutBase()
 	local hideChoice = math.random(1,4)
 	if hideChoice == 1 then
@@ -4610,14 +4696,14 @@ end
 function undercutOrderMessage(delta)
 	local nMsg = "[Vaiken] As a naval operative, Charles Undercut discovered information about enemies in this region. Unfortunately, he was fired for his poor performance as a maintenance technician by his commanding officer before he could file a report. We need his information."
 	if difficulty > 1 then
-		nMsg = string.format("%s His last known location was station %s. Go find him and get that information",hideBase:getCallSign())
+		nMsg = string.format("%s His last known location was station %s. Go find him and get that information",nMsg,hideBase:getCallSign())
 	else
-		nMsg = string.format("%s His last known location was station %s in sector %s. Go find him and get that information",hideBase:getCallSign(),hideBase:getSectorName())
+		nMsg = string.format("%s His last known location was station %s in sector %s. Go find him and get that information",nMsg,hideBase:getCallSign(),hideBase:getSectorName())
 	end
 	for p11idx=1,8 do
 		local p11 = getPlayerShip(p11idx)
 		if p11 ~= nil and p11:isValid() then
-			p11:addToShipLog(mMsg,"Magenta")
+			p11:addToShipLog(nMsg,"Magenta")
 		end
 	end	
 	if difficulty > 1 then
@@ -4647,7 +4733,10 @@ function undercutStation(delta)
 									if hideBase == nil then print("hideBase is nil") end
 									if t == nil then print("t is nil") end
 									if farthestTransport == nil then print("farthestTransport 2 is nil") end
-									if distance(hideBase, t) > distance(hideBase, farthestTransport) then
+									local x1, y1 = hideBase:getPosition()
+									local x2, y2 = t:getPosition()
+									local x3, y3 = farthestTransport:getPosition()
+									if distance(x1,y1,x2,y2) > distance(x1,y1,x3,y3) then
 										farthestTransport = t
 									end
 								end
@@ -4697,7 +4786,9 @@ function undercutTransport(delta)
 						if p10 ~= nil and p10:isValid() then
 							if p10 == nil then print("p10 is nil") end
 							if hideTransport == nil then print("hideTransport is nil") end
-							local currentDistance = distance(p10,hideTransport)
+							local x1, y1 = p10:getPosition()
+							local x2, y2 = hideTransport:getPosition()
+							local currentDistance = distance(x1,y1,x2,y2)
 							if currentDistance < playerDistance then
 								closestPlayer = p10
 								playerDistance = currentDistance
@@ -4746,9 +4837,7 @@ function undercutEnemyBase(delta)
 		removeGMFunction("R.Undercut")
 	end
 end
---[[-----------------------------------------------------------------
-      Required plot choice: Stettor sensors find enemy base - destroy
------------------------------------------------------------------]]--
+--      Required plot choice: Stettor sensors find enemy base - destroy
 function chooseSensorBase()
 	if sensorBase == nil then
 		local sensorChoice = math.floor(random(1,4))
@@ -4846,9 +4935,7 @@ function stettorEnemyBase(delta)
 		removeGMFunction("R.Stettor")
 	end
 end
---[[-----------------------------------------------------------------
-      Required plot choice: Traitor bought identifies enemy base
------------------------------------------------------------------]]--
+--      Required plot choice: Traitor bought identifies enemy base
 function chooseTraitorBase()
 	if traitorBase == nil then
 		local traiterBaseChoice = math.floor(random(1,3))
@@ -4905,7 +4992,10 @@ function traitorStation(delta)
 									if traitorBase == nil then print("traitorBase is nil") end
 									if t == nil then print("t 2 is nil") end
 									if farthestTransport == nil then print("farthestTransport 3 is nil") end
-									if distance(traitorBase, t) > distance(traitorBase, farthestTransport) then
+									local x1, y1 = traitorBase:getPosition()
+									local x2, y2 = t:getPosition()
+									local x3, y3 = farthestTransport:getPosition()
+									if distance(x1,y1,x2,y2) > distance(x1,y1,x3,y3) then
 										farthestTransport = t
 									end
 								end
@@ -4955,8 +5045,24 @@ function sporiskyQuestioned(delta)
 				if p17:isDocked(stationVaiken) then
 					if p17.traitorBought then
 						p17:addToShipLog("Annette Sporisky transferred to Vaiken station","Magenta")
-						p17:addToShipLog("Spy identified enemy base in sector " .. sporiskyTarget:getSectorName(),"Magenta") 
-						secondaryOrders = string.format("\nDestroy enemy base in sector %s",sporiskyTarget:getSectorName())
+						if sporiskyTarget:isValid() then
+							p17:addToShipLog("Spy identified enemy base in sector " .. sporiskyTarget:getSectorName(),"Magenta") 
+							secondaryOrders = string.format("\nDestroy enemy base in sector %s",sporiskyTarget:getSectorName())
+						else
+							if stationGanalda:isValid() then
+								sporiskyTarget = stationGanalda
+							elseif stationEmpok:isValid() then
+								sporiskyTarget = stationEmpok
+							elseif stationTic:isValid() then
+								sporiskyTarget = stationTic
+							end
+							if sporiskyTarget:isValid() then
+								p17:addToShipLog("Spy identified enemy base in sector " .. sporiskyTarget:getSectorName(),"Magenta") 
+								secondaryOrders = string.format("\nDestroy enemy base in sector %s",sporiskyTarget:getSectorName())
+							else
+								p17:addToShipLog("The enemy base identified has already been destroyed","Magenta")
+							end
+						end
 						plotR = sporiskyEnemyBase
 					end
 				end
@@ -4971,6 +5077,8 @@ end
 function sporiskyEnemyBase(delta)
 	if not sporiskyTarget:isValid() then
 		requiredMissionCount = requiredMissionCount + 1
+		plotR = nil
+		removeGMFunction("R.Sporisky")
 		secondaryOrders = ""
 		sporiskyMission = "done"
 		for p32idx=1,8 do
@@ -4980,13 +5088,9 @@ function sporiskyEnemyBase(delta)
 				sporiskyRep = "awarded"
 			end
 		end
-		plotR = nil
-		removeGMFunction("R.Sporisky")
 	end
 end
---[[-----------------------------------------------------------------
-      Required plot choice: black hole horizon research
------------------------------------------------------------------]]--
+--      Required plot choice: black hole horizon research
 function chooseHorizonParts()
 	if hr1part == nil then
 		local hr1Choice = math.random(3)
@@ -5061,7 +5165,9 @@ function horizonScienceMessage(delta)
 	local grawp_status = nil
 	if phScan == nil then print("phScan is nil") end
 	if grawp == nil then print("grawp is nil") end
-	if distance(phScan,grawp) < horizonScanRange then
+	local x1, y1 = phScan:getPosition()
+	local x2, y2 = grawp:getPosition()
+	if distance(x1,y1,x2,y2) < horizonScanRange then
 		grawp_status = "Grawp in range"
 		if scanGrawpButton then
 			if scanGrawp then
@@ -5173,8 +5279,9 @@ function scanBlackHole()
 	phScan:addToShipLog("[Scan technician] Black hole scan started","Blue")
 end
 --[[-----------------------------------------------------------------
-      Optional plot choice: Beam range upgrade
+      Optional plot choices
 -----------------------------------------------------------------]]--
+--      Optional plot choice: Beam range upgrade
 function chooseBeamRangeParts()
 	if br1part == nil then
 		local br1partChoice = math.floor(random(1,3))
@@ -5250,9 +5357,7 @@ function beamRangeUpgrade(delta)
 		plotO = nil
 	end
 end
---[[-----------------------------------------------------------------
-      Optional plot choice: Beam damage upgrade
------------------------------------------------------------------]]--
+--      Optional plot choice: Beam damage upgrade
 function chooseBeamDamageParts()
 	if bd1part == nil then
 		local bd1partChoice = math.floor(random(1,3))
@@ -5329,9 +5434,7 @@ function beamDamageUpgrade(delta)
 		removeGMFunction("O.Beam Damage")
 	end
 end
---[[-----------------------------------------------------------------
-      Optional plot choice: Spin upgrade - maneuver
------------------------------------------------------------------]]--
+--      Optional plot choice: Spin upgrade - maneuver
 function chooseSpinBaseParts()
 	if sp1part == nil then
 		local sp1partChoice = math.random(3)
@@ -5436,9 +5539,7 @@ function spinUpgrade(delta)
 		removeGMFunction("O.Spin")
 	end
 end
---[[-----------------------------------------------------------------
-      Optional plot choice: Impulse speed upgrade
------------------------------------------------------------------]]--
+--      Optional plot choice: Impulse speed upgrade
 function impulseSpeedParts()
 	if is1part == nil then
 		local is1partChoice = math.floor(random(1,3))
@@ -5539,9 +5640,7 @@ function impulseSpeedUpgrade(delta)
 		removeGMFunction("O.Impulse")
 	end
 end
---[[-----------------------------------------------------------------
-      Optional plot choice: Get quantum biometric artifact
------------------------------------------------------------------]]--
+--      Optional plot choice: Get quantum biometric artifact
 function quantumArtMessage(delta)
 	if stationOrgana:isValid() then
 		optionalOrders = string.format("\nOptional: Retrieve artifact with quantum biometric characteristics and bring to station Organa in sector %s",stationOrgana:getSectorName())
@@ -5587,7 +5686,9 @@ function quantumRetrieveArt(delta)
 			if p41 ~= nil and p41:isValid() then
 				if artQ == nil then print("artQ is nil") end
 				if p41 == nil then print("p41 is nil") end
-				local clpd = distance(artQ,p41)	-- current loop player distance
+				local x1, y1 = artQ:getPosition()
+				local x2, y2 = p41:getPosition()
+				local clpd = distance(x1,y1,x2,y2)	-- current loop player distance
 				if clpd < cptad then
 					cptad = clpd
 					closestPlayer = p41
@@ -5642,6 +5743,76 @@ function quantumDeliverArt(delta)
 		removeGMFunction("O.Shield")
 	end
 end
+function vaikenStatus(delta)
+	if stationVaiken:isValid() then
+		local shields_damaged = false
+		local shield_index = 0
+		local shield_level_total = 0
+		local shield_max_total = 0
+		local shield_level = 0
+		local shield_max = 0
+		local shield_report = "Shields:"
+		local critical_shield = ""
+		repeat
+			shield_level = stationVaiken:getShieldLevel(shield_index)
+			shield_max = stationVaiken:getShieldMax(shield_index)
+			if shield_level < shield_max then
+				shields_damaged = true
+			end
+			shield_level_total = shield_level_total + shield_level
+			shield_max_total = shield_max_total + shield_max
+			shield_report = shield_report .. string.format(" %i:%i/%i",shield_index,math.floor(shield_level),math.floor(shield_max))
+			if shield_level/shield_max < .2 then
+				critical_shield = critical_shield .. string.format("Shield %i is critical ",shield_index)
+			end
+			shield_index = shield_index + 1
+		until(shield_index >= stationVaiken:getShieldCount())
+		if shields_damaged then
+			vaiken_damage_timer = vaiken_damage_timer - delta
+			if vaiken_damage_timer < 0 then
+				if shield_level_total/shield_max_total < .85 then
+					local hull_max = stationVaiken:getHullMax()
+					local hull_level = stationVaiken:getHull()
+					local hull_damage = hull_level/hull_max
+					for pidx=1,8 do
+						local p = getPlayerShip(pidx)
+						if p ~= nil and p:isValid() then
+							p:addToShipLog("[Vaiken] Station has been damaged. " .. shield_report,"Magenta")
+							if critical_shield ~= "" then
+								p:addToShipLog("[Vaiken] " .. critical_shield,"Red")
+								if hull_damage < .4 then
+									p:addToShipLog(string.format("[Vaiken] Hull damage: %i out of %i",math.floor(hull_level),math.floor(hull_max)),"Red")
+								elseif hull_damage < .8 then
+									p:addToShipLog(string.format("[Vaiken] Hull damage: %i out of %i",math.floor(hull_level),math.floor(hull_max)),"Magenta")
+								end
+							end
+						end
+					end
+					if critical_shield ~= "" then
+						vaiken_damage_timer_interval = 60
+						if hull_damage < .4 then
+							vaiken_damage_timer_interval = 30
+						end
+					else
+						vaiken_damage_timer_interval = 120
+					end
+				else
+					for pidx=1,8 do
+						local p = getPlayerShip(pidx)
+						if p ~= nil and p:isValid() then
+							p:addToShipLog("[Vaiken] Station has been damaged","Magenta")
+						end
+					end
+					vaiken_damage_timer_interval = 120
+				end
+				vaiken_damage_timer = delta + vaiken_damage_timer_interval
+			end
+		end
+	else
+		showGameEndStatistics()
+		victory("Kraylor")
+	end
+end
 function update(delta)
 	if delta == 0 then
 		--game paused
@@ -5668,22 +5839,26 @@ function update(delta)
 					plotR = undercutOrderMessage
 					chooseUndercutBase()
 				end
+				removeGMFunction("R.Undercut")
 			elseif requiredMissionChoice == 2 then
 				if stettorMission ~= "done" and gameTimeLimit < 2670 and gameTimeLimit > 1800 then
 					chooseSensorBase()
 					chooseSensorParts()
 					plotR = stettorOrderMessage
 				end
+				removeGMFunction("R.Stettor")
 			elseif requiredMissionChoice == 3 then
 				if horizonMission ~= "done" and gameTimeLimit < 2670 and gameTimeLimit > 1200 then
 					chooseHorizonParts()
 					plotR = horizonOrderMessage
 				end
+				removeGMFunction("R.Horizon")
 			else
 				if sporiskyMission ~= "done" and gameTimeLimit < 2670 and gameTimeLimit > 1700 then
 					chooseTraitorBase()
 					plotR = traitorOrderMessage
 				end
+				removeGMFunction("R.Sporisky")
 			end
 		end
 		local game_time_status = "Game Timer"
@@ -5769,77 +5944,182 @@ function update(delta)
 						chooseTraitorBase()
 						plotR = traitorOrderMessage
 					end
+					removeGMFunction("R.Sporisky")
 				end
 				requiredMissionDelay = delta + random(10,30)
 			end
 		end
-		if stationVaiken:isValid() then
-			local shields_damaged = false
-			local shield_index = 0
-			local shield_level_total = 0
-			local shield_max_total = 0
-			local shield_level = 0
-			local shield_max = 0
-			local shield_report = "Shields:"
-			local critical_shield = ""
-			repeat
-				shield_level = stationVaiken:getShieldLevel(shield_index)
-				shield_max = stationVaiken:getShieldMax(shield_index)
-				if shield_level < shield_max then
-					shields_damaged = true
+		if update_loop_diagnostic then
+			local plot_name = ""
+			local first_reference_station_name = ""
+			local first_reference_station_sector = ""
+			local first_part = ""
+			local second_part = ""
+			local third_part = ""
+			local elapsed_time = 0
+			if plotR == undercutOrderMessage then
+				plot_name = "Required plot Undercut order message"
+				if hideStationName ~= nil then
+					first_reference_station_name = hideStationName
 				end
-				shield_level_total = shield_level_total + shield_level
-				shield_max_total = shield_max_total + shield_max
-				shield_report = shield_report .. string.format(" %i:%i/%i",shield_index,math.floor(shield_level),math.floor(shield_max))
-				if shield_level/shield_max < .2 then
-					critical_shield = critical_shield .. string.format("Shield %i is critical ",shield_index)
+				if hideStationSector ~= nil then 
+					first_reference_station_sector = hideStationSector
 				end
-				shield_index = shield_index + 1
-			until(shield_index >= stationVaiken:getShieldCount())
-			if shields_damaged then
-				vaiken_damage_timer = vaiken_damage_timer - delta
-				if vaiken_damage_timer < 0 then
-					if shield_level_total/shield_max_total < .85 then
-						local hull_max = stationVaiken:getHullMax()
-						local hull_level = stationVaiken:getHull()
-						local hull_damage = hull_level/hull_max
-						for pidx=1,8 do
-							local p = getPlayerShip(pidx)
-							if p ~= nil and p:isValid() then
-								p:addToShipLog("[Vaiken] Station has been damaged. " .. shield_report,"Magenta")
-								if critical_shield ~= "" then
-									p:addToShipLog("[Vaiken] " .. critical_shield,"Red")
-									if hull_damage < .4 then
-										p:addToShipLog(string.format("[Vaiken] Hull damage: %i out of %i",math.floor(hull_level),math.floor(hull_max)),"Red")
-									elseif hull_damage < .8 then
-										p:addToShipLog(string.format("[Vaiken] Hull damage: %i out of %i",math.floor(hull_level),math.floor(hull_max)),"Magenta")
-									end
-								end
-							end
-						end
-						if critical_shield ~= "" then
-							vaiken_damage_timer_interval = 60
-							if hull_damage < .4 then
-								vaiken_damage_timer_interval = 30
-							end
-						else
-							vaiken_damage_timer_interval = 120
-						end
+				--print("Required plot Undercut order message " .. hideStationName .. " " .. hideStationSector .. ". Required missions completed: " .. requiredMissionCount)
+			elseif plotR == stettorOrderMessage then
+				plot_name = "Required plot Stettor order message. Sensor base"
+				if sensorBaseName ~= nil then
+					first_reference_station_name = sensorBaseName
+				end
+				if sensorBaseSector ~= nil then
+					first_reference_station_sector = sensorBaseSector
+				end
+				if s1part ~= nil then
+					first_part = s1part
+				end
+				if s2part ~= nil then
+					second_part = s2part
+				end
+				if s3part ~= nil then
+					third_part = s3part
+				end
+				--print("Required plot Stettor order message. Sensor base: " .. sensorBaseName .. " " .. sensorBaseSector .. ". Parts: " .. s1part .. ", " .. s2part .. ", " .. s3part .. ". Required missions completed: " .. requiredMissionCount)				
+			elseif plotR == horizonOrderMessage then
+				plot_name = "Required plot Horizon order message. Parts"
+				if hr1part ~= nil then
+					first_part = hr1part
+				end
+				if hr2part ~= nil then
+					second_part = hr2part
+				end
+				--print("Required plot Horizon order message. Parts: " .. hr1part .. ", " .. hr2part .. ". Required missions completed: " .. requiredMissionCount)
+			elseif plotR == traitorOrderMessage then
+				plot_name = "Required plot Traitor order message. Traitor base"
+				if traitorBaseName ~= nil then
+					first_reference_station_name = traitorBaseName
+				end
+				if traitorBaseSector ~= nil then
+					first_reference_station_sector = traitorBaseSector
+				end
+				--print("Required plot Traitor order message. Traitor base: " .. traitorBaseName .. " " .. traitorBaseSector .. ". Required missions completed: " .. requiredMissionCount)
+			elseif plotR == undercutStation then
+				plot_name = "Required plot Undercut station"
+				if hideStationName ~= nil then
+					first_reference_station_name = hideStationName
+				end
+				if hideStationSector ~= nil then
+					first_reference_station_sector = hideStationSector
+				end
+				--print("Required plot Undercut station " .. hideStationName .. " " .. hideStationSector .. ". Required missions completed: " .. requiredMissionCount)
+			elseif plotR == undercutTransport then
+				plot_name = "Required plot Undercut transport"
+				if hideTransport ~= nil then
+					if hideTransport:isValid() then
+						first_reference_station_name = hideTransport:getCallSign()
+						first_reference_station_sector = hideTransport:getSectorName()
 					else
-						for pidx=1,8 do
-							local p = getPlayerShip(pidx)
-							if p ~= nil and p:isValid() then
-								p:addToShipLog("[Vaiken] Station has been damaged","Magenta")
-							end
-						end
-						vaiken_damage_timer_interval = 120
+						first_reference_station_name = "not valid"
 					end
-					vaiken_damage_timer = delta + vaiken_damage_timer_interval
 				end
+				--print("Required plot Undercut transport " .. hideTransport:getCallSign() .. " " .. hideTransport:getSectorName() .. ". Required missions completed: " .. requiredMissionCount)
+			elseif plotR == undercutEnemyBase then
+				plot_name = "Required plot Undercut enemy base"
+				if undercutTarget ~= nil then
+					if undercutTarget:isValid() then
+						first_reference_station_name = undercutTarget:getCallSign()
+						first_reference_station_sector = undercutTarget:getSectorName()
+					else
+						first_reference_station_name = "not valid"
+					end
+				end
+				--print("Required plot Undercut enemy base " .. undercutTarget:getCallSign() .. " " .. undercutTarget:getSectorName() .. ". Required missions completed: " .. requiredMissionCount)
+			elseif plotR == stettorStation then
+				plot_name = "Required plot Stettor station. Sensor base"
+				if sensorBaseName ~= nil then
+					first_reference_station_name = sensorBaseName
+				end
+				if sensorBaseSector ~= nil then
+					first_reference_station_sector = sensorBaseSector
+				end
+				if s1part ~= nil then
+					first_part = s1part
+				end
+				if s2part ~= nil then
+					second_part = s2part
+				end
+				if s3part ~= nil then
+					third_part = s3part
+				end
+				--print("Required plot Stettor station. Sensor base: " .. sensorBaseName .. " " .. sensorBaseSector .. ". Parts: " .. s1part .. ", " .. s2part .. ", " .. s3part .. ". Required missions completed: " .. requiredMissionCount)				
+			elseif plotR == stettorEnemyBase then
+				plot_name = "Required plot Stettor enemy base"
+				if stettorTarget ~= nil then
+					if stettorTarget:isValid() then
+						first_reference_station_name = stettorTarget:getCallSign()
+						first_reference_station_sector = stettorTarget:getSectorName()
+					else
+						first_reference_station_name = "not valid"
+					end
+				end
+				--print("Required plot Stettor enemy base " .. stettorTarget:getCallSign() .. " " .. stettorTarget:getSectorName() .. ". Required missions completed: " .. requiredMissionCount)
+			elseif plotR == traitorStation then
+				plot_name = "Required plot Traitor station. Traitor base"
+				if traitorBaseName ~= nil then
+					first_reference_station_name = traitorBaseName
+				end
+				if traitorBaseSector ~= nil then
+					first_reference_station_sector = traitorBaseSector
+				end
+				--print("Required plot Traitor station. Traitor base: " .. traitorBaseName .. " " .. traitorBaseSector .. ". Required missions completed: " .. requiredMissionCount)				
+			elseif plotR == sporiskyTransport then
+				plot_name = "Required plot Sporisky transport"
+				if runTransport ~= nil then
+					if runTransport:isValid() then
+						first_reference_station_name = runTransport:getCallSign()
+						first_reference_station_sector = runTransport:getSectorName()
+					else
+						first_reference_station_name = "not valid"
+					end
+				end
+				--print("Required plot Sporisky transport " .. runTransport:getCallSign() .. " " .. runTransport:getSectorName() .. ". Required missions completed: " .. requiredMissionCount)				
+			elseif plotR == sporiskyQuestioned then
+				plot_name = "Required plot Sporisky questioned"
+				--print("Required plot Sporisky questioned. Required missions completed: " .. requiredMissionCount)				
+			elseif plotR == sporiskyEnemyBase then
+				plot_name = "Required plot Sporisky enemy base"
+				if sporiskyTarget ~= nil then
+					if sporiskyTarget:isValid() then
+						first_reference_station_name = sporiskyTarget:getCallSign()
+						first_reference_station_sector = sporiskyTarget:getSectorName()
+					else
+						first_reference_station_name = "not valid"
+					end
+				end
+				--print("Required plot Sporisky enemy base " .. sporiskyTarget:getCallSign() .. " " .. sporiskyTarget:getSectorName() .. ". Required missions completed: " .. requiredMissionCount)
+			elseif plotR == horizonStationDeliver then
+				plot_name = "Required plot Horizon station deliver. Parts"
+				if hr1part ~= nil then
+					first_part = hr1part
+				end
+				if hr2part ~= nil then
+					second_part = hr2part
+				end
+				--print("Required plot Horizon station deliver. Parts: " .. hr1part .. ", " .. hr2part .. ". Required missions completed: " .. requiredMissionCount)
+			elseif plotR == horizonScienceMessage then
+				plot_name = "Required plot Horizon science message"
+				if elapsedScanTime ~= nil then
+					elapsed_time = elapsedScanTime
+				else
+					elapsed_time = -1
+				end
+				--print(string.format("Required plot Horizon science message. Elapsed scan time: %i. Required missions completed: %i",math.floor(elapsedScanTime),requiredMissionCount))
+			else
+				plot_name = "Required plot undefined"
+				--print("Required plot undefined")
 			end
-		else
-			showGameEndStatistics()
-			victory("Kraylor")
+			print(string.format("%s %s %s %s %s %s Required missions completed: %i",
+				plot_name,first_reference_station_name,first_reference_station_sector,
+				first_part,second_part,third_part,requiredMissionCount))
 		end
 	end
 	-- select optional mission
@@ -5880,6 +6160,169 @@ function update(delta)
 			optionalMissionDelay = delta + random(20,40)
 		end
 	end
+	if optional_mission_loop_diagnostic then
+		plot_name = ""
+		first_reference_station_name = ""
+		first_reference_station_sector = ""
+		first_part = ""
+		second_part = ""
+		third_part = ""
+		if plotO == beamRangeMessage then
+			plot_name = "Optional beam range message"
+			if stationMarconi:isValid() then
+				first_reference_station_name = "Marconi"
+				first_reference_station_sector = stationMarconi:getSectorName()
+			else
+				first_reference_station_name = "not valid"
+			end
+			if br1part ~= nil then
+				first_part = br1part
+			end
+			if br2part ~= nil then
+				second_part = br2part
+			end
+			if br3part ~= nil then
+				third_part = br3part
+			end
+		elseif plotO == beamRangeUpgrade then
+			plot_name = "Optional beam range upgrade"
+			if stationMarconi:isValid() then
+				first_reference_station_name = "Marconi"
+				first_reference_station_sector = stationMarconi:getSectorName()
+			else
+				first_reference_station_name = "not valid"
+			end
+			if br1part ~= nil then
+				first_part = br1part
+			end
+			if br2part ~= nil then
+				second_part = br2part
+			end
+			if br3part ~= nil then
+				third_part = br3part
+			end
+		elseif plotO == impulseSpeedMessage then
+			plot_name = "Optional impulse speed message"
+			if morrisonBase ~= nil then
+				if morrisonBase:isValid() then
+					first_reference_station_name = morrisonBase:getCallSign()
+					first_reference_station_sector = morrisonBase:getSectorName()
+				else
+					first_reference_station_name = "not valid"
+				end
+			end
+		elseif plotO == impulseSpeedPartMessage then
+			plot_name = "Optional impulse speed part message"
+			if morrisonBase ~= nil then
+				if morrisonBase:isValid() then
+					first_reference_station_name = morrisonBase:getCallSign()
+					first_reference_station_sector = morrisonBase:getSectorName()
+				else
+					first_reference_station_name = "not valid"
+				end
+			end
+		elseif plotO == impulseSpeedUpgrade then
+			plot_name = "Optional impulse speed upgrade"
+			if stationCyrus:isValid() then
+				first_reference_station_name = "Cyrus"
+				first_reference_station_sector = stationCyrus:getSectorName()
+			else
+				first_reference_station_name = "not valid"
+			end
+			if is1part ~= nil then
+				first_part = is1part
+			end
+			if is2part ~= nil then
+				second_part = is2part
+			end
+		elseif plotO == spinMessage then
+			plot_name = "Optional spin message"
+			if spinBase ~= nil then
+				if spinBase:isValid() then
+					first_reference_station_name = spinBase:getCallSign()
+					first_reference_station_sector = spinBase:getSectorName()
+				else
+					first_reference_station_name = "not valid"
+				end
+			end
+			if sp1part ~= nil then
+				first_part = sp1part
+			end
+			if sp2part ~= nil then
+				second_part = sp2part
+			end
+			if sp3part ~= nil then
+				third_part = sp3part
+			end
+		elseif plotO == spinUpgrade then
+			plot_name = "Optional spin upgrade"
+			if spinBase ~= nil then
+				if spinBase:isValid() then
+					first_reference_station_name = spinBase:getCallSign()
+					first_reference_station_sector = spinBase:getSectorName()
+				else
+					first_reference_station_name = "not valid"
+				end
+			end
+			if sp1part ~= nil then
+				first_part = sp1part
+			end
+			if sp2part ~= nil then
+				second_part = sp2part
+			end
+			if sp3part ~= nil then
+				third_part = sp3part
+			end
+		elseif plotO == quantumArtMessage then
+			plot_name = "Optional quantum artifact message"
+		elseif plotO == quantumRetrieveArt then
+			plot_name = "Optional quantum retrieve artifact"
+			if artQ ~= nil then
+				if artQ:isValid() then
+					first_reference_station_sector = artQ:getSectorName()
+				else
+					first_reference_station_sector = "not valid"
+				end
+			end
+		elseif plotO == quantumDeliverArt then
+			plot_name = "Optional quantum deliver artifact"
+			if stationOrgana ~= nil then
+				if stationOrgana:isValid() then
+					first_reference_station_name = "Organa"
+					first_reference_station_sector = stationOrgana:getSectorName()
+				else
+					first_reference_station_name = "not valid"
+				end
+			end
+		elseif plotO == beamDamageMessage then
+			plot_name = "Optional beam damage message"
+		elseif plotO == beamDamageUpgrade then
+			plot_name = "Optional beam damage upgrade"
+			if stationNefatha ~= nil then
+				if stationNefatha:isValid() then
+					first_reference_station_name = "Nefatha"
+					first_reference_station_sector = stationNefatha:getSectorName()
+				else
+					first_reference_station_name = "not valid"
+				end
+			end
+			if bd1part ~= nil then
+				first_part = bd1part
+			end
+			if bd2part ~= nil then
+				second_part = bd2part
+			end
+			if bd3part ~= nil then
+				third_part = bd3part
+			end
+		else
+			plot_name = "Optional plot undefined"
+		end
+		print(string.format("%s %s %s %s %s %s",
+			plot_name,first_reference_station_name,first_reference_station_sector,
+			first_part,second_part,third_part))
+	end
+	vaikenStatus(delta)
 	if plotR ~= nil then
 		plotR(delta)		--required mission
 	end
