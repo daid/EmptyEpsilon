@@ -252,6 +252,8 @@ public:
     virtual int scanningComplexity(P<SpaceObject> other) override;
     virtual int scanningChannelDepth(P<SpaceObject> other) override;
     virtual void scannedBy(P<SpaceObject> other) override;
+    void setScanState(EScannedState scanned);
+    void setScanStateByFaction(string faction_name, EScannedState scanned);
 
     bool isFriendOrFoeIdentified();//[DEPRICATED]
     bool isFullyScanned();//[DEPRICATED]
