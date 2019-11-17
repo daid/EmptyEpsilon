@@ -78,6 +78,11 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadarTrace);
 
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, addBroadcast);
+
+    /// Set the scan state of this ship for every faction.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanState);
+    /// Set the scane state of this ship for a particular faction.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanStateByFaction);
 }
 
 SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_range)
@@ -814,6 +819,19 @@ void SpaceShip::scannedBy(P<SpaceObject> other)
     case SS_FullScan:
         break;
     }
+}
+
+void SpaceShip::setScanState(EScannedState state)
+{
+    for(unsigned int faction_id = 0; faction_id < factionInfo.size(); faction_id++)
+    {
+        setScannedStateForFaction(faction_id, state);
+    }
+}
+
+void SpaceShip::setScanStateByFaction(string faction_name, EScannedState state)
+{
+    setScannedStateForFaction(FactionInfo::findFactionId(faction_name), state);
 }
 
 bool SpaceShip::isFriendOrFoeIdentified()
