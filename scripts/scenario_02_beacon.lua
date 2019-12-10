@@ -282,7 +282,7 @@ function missionTransportWaitForRecovery(delta)
         transport_target:orderDock(main_station)
         transport_recovery_team:orderDock(main_station)
         
-        transport_recovery_team:sendCommsMessage(player, [[Transporter recovery team comming in.
+        transport_recovery_team:sendCommsMessage(player, [[Transporter recovery team coming in.
 
 We succesfully captured the Exuari transport. Taking it back to Orion-5. Please head to Orion-5 for a debriefing.]])
         mission_state = missionTransportDone

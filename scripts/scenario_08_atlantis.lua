@@ -650,7 +650,7 @@ function shipyardGammaComms()
         setCommsMessage([[Atlantis-1, all ready and set to go on your first mission?]])
         addCommsReply("Yes", function()
             setCommsMessage([[Good.
-Your first mission will be to seek out odd readings comming from the nebula cloud in sector B20.
+Your first mission will be to seek out odd readings coming from the nebula cloud in sector B20.
 Your ship is not equipped to travel this distance by itself, so we have tasked the Jump carrier JC-88 to take you there.
 Dock with JC-88 and it will handle the rest.]])
             mission_state = phase2WaitForJump
