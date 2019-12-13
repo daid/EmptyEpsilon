@@ -1,17 +1,12 @@
 #include "spaceObjects/explosionEffect.h"
 #include "spaceObjects/spaceStation.h"
-#include "spaceObjects/spaceship.h"
 #include "spaceObjects/playerSpaceship.h"
-#include "shipTemplate.h"
-#include "playerInfo.h"
-#include "factionInfo.h"
-#include "mesh.h"
-#include "main.h"
 #include "pathPlanner.h"
 
 #include "scriptInterface.h"
 REGISTER_SCRIPT_SUBCLASS(SpaceStation, ShipTemplateBasedObject)
 {
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceStation, addDockingPermission);
 }
 
 REGISTER_MULTIPLAYER_CLASS(SpaceStation, "SpaceStation");
@@ -96,4 +91,26 @@ bool SpaceStation::canBeDockedBy(P<SpaceObject> obj)
 string SpaceStation::getExportLine()
 {
     return "SpaceStation():setTemplate(\"" + template_name + "\"):setFaction(\"" + getFaction() + "\"):setCallSign(\"" + getCallSign() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
+}
+
+void SpaceStation::addDockingPermission(P<SpaceObject> obj) {
+    // function to add ship to docking permission list
+    P<SpaceShip> ship = obj;
+    if (ship)
+        docking_permission_list.push_back(ship);
+}
+
+void SpaceStation::removeDockingPermission(P<SpaceObject> obj) {
+    // function to remove ship from docking permission list
+    P<SpaceShip> ship = obj;
+    if (ship)
+        docking_permission_list.remove(ship);
+}
+
+bool SpaceStation::hasDockingPermission(P<SpaceObject> obj) {
+    // function to check if ship that wants to dock has requested permission beforehand
+    P<SpaceShip> ship = obj;
+    if (ship && docking_permission_list.has(ship))
+        return true;
+    return false;
 }

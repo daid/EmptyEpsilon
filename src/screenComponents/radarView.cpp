@@ -4,6 +4,7 @@
 #include "gameGlobalInfo.h"
 #include "spaceObjects/nebula.h"
 #include "spaceObjects/scanProbe.h"
+#include "spaceObjects/spaceStation.h"
 #include "playerInfo.h"
 #include "radarView.h"
 #include "missileTubeControls.h"
@@ -180,7 +181,9 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
 
         foreach(SpaceObject, obj, space_object_list)
         {
-            if ((P<SpaceShip>(obj) || P<SpaceStation>(obj)) && obj->isFriendly(my_spaceship))
+            P<SpaceShip> ship = obj;
+            P<SpaceStation> station = obj;
+            if ((station || ship) && obj->isFriendly(my_spaceship))
             {
                 circle.setPosition(radar_screen_center + (obj->getPosition() - view_position) * scale);
                 window.draw(circle);

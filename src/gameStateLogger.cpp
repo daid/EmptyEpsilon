@@ -10,7 +10,7 @@
 #include "spaceObjects/mine.h"
 #include "spaceObjects/blackHole.h"
 #include "spaceObjects/nebula.h"
-#include "spaceObjects/spaceship.h"
+#include "spaceObjects/spaceStation.h"
 
 class JSONGenerator
 {
