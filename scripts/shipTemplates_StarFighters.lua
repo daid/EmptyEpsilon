@@ -62,7 +62,7 @@ variation:addDoor(5, 1, false);
 variation:addDoor(5, 2, false);
 
 template = ShipTemplate():setName("Adder MK5"):setClass("Starfighter", "Gunship"):setModel("AdlerLongRangeScoutYellow")
-template:setRadarTrace("radar_cruiser.png")
+template:setRadarTrace("radar_fighter.png")
 template:setDescription([[The Adder line's fifth iteration proved to be a great success among pirates and law officers alike. It is cheap, fast, and easy to maintain, and it packs a decent punch.]])
 template:setHull(50)
 template:setShields(30)
