@@ -116,6 +116,7 @@ template:setTubeDirection(4,  2)
 template:setDefaultAI('missilevolley')
 
 template = ShipTemplate():setName("Hathcock"):setClass("Frigate", "Cruiser: Sniper"):setModel("HeavyCorvetteGreen"):setType("playership")
+template:setRadarTrace("radar_cruiser.png")
 template:setDescription("Long range narrow beam and some point defense beams, broadside missiles. Agile for a frigate")
 --						Arc, Dir, Range, CycleTime, Dmg
 template:setBeamWeapon(0, 4,   0, 1400.0, 6.0, 4)
