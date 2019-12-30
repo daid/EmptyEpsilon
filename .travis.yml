@@ -1,0 +1,26 @@
+language: cpp
+
+compiler:
+  - gcc
+
+addons:
+  apt:
+    packages:
+      - p7zip-full
+      - sshpass
+
+before_script:
+  # create a build folder for the out-of-source build
+  - git clone https://github.com/daid/SeriousProton.git
+  - mkdir _build_win32
+  - cd _build_win32
+  - cmake .. -DCMAKE_TOOLCHAIN_FILE=../cmake/mingw.toolchain -DSERIOUS_PROTON_DIR=../SeriousProton -DCMAKE_MAKE_PROGRAM=make
+
+script:
+  # once CMake has done its job we just build using make as usual
+  - make -j $(grep -c ^processor /proc/cpuinfo) package
+
+after_script:
+  - echo 'ftp.tuhismedia.fi ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDL7G4UGuKpyQ5AZvI9FDCBZCr8TD4OBsHikTietPpUy6KtfTosj8CYko7qWVAKJ90RShtHssA2Ozs6HnkfVfhbAUobHeXE8ekTW19m46I6P9nmnhwJe95DxywWajytRYFpm2wOoXpOA7Mdy6hG/MKPgb1cbHgEtZ0ctj2xpZ/pqllljbgu7tfF836RaLmSxDVQI5fEkwoAUKlmHOE8jPziCCnikhzU1VX15EjHNtFofjWzRy8oaQzX6tqjNucU6MgzjdXKSFJqbB9EO7wHkolhJxh/MhQZU+J3Qgid2ZCkGfFW9/+uLePMtdXV8ryTSHuFrGfwykVXOraNgAIEazDX' >> $HOME/.ssh/known_hosts
+  - echo 'ftp.tuhismedia.fi ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBeiqO1YCEUJgFH8Wcu0oZ9gPrJWYermkVptbGRtFOs2eyhQ7xdVHfN5H8UmlJoO0hDUXMmZkGSg3c+fyfq8ylQ=' >> $HOME/.ssh/known_hosts
+  - sshpass -p "${SFTP_PASSWORD}" sftp -P 23 ${SFTP_USER}@ftp.tuhismedia.fi:/public/html/ee <<< $'put ./EmptyEpsilon.zip'

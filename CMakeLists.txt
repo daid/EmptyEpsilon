@@ -1,6 +1,5 @@
 project(EmptyEpsilon)
-cmake_minimum_required(VERSION 3.12.0)
-cmake_policy(SET CMP0074 NEW)
+cmake_minimum_required(VERSION 2.8.12)
 
 option(ENABLE_CRASH_LOGGER "Enable the drmingw crash logging facilities" OFF)
 message(STATUS "ENABLE_CRASH_LOGGER is " ${ENABLE_CRASH_LOGGER})
@@ -35,7 +34,7 @@ endif(NOT DEFINED CPACK_PACKAGE_VERSION_MAJOR)
 set(OPTIMIZER_FLAGS "")
 if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
     # On gcc, we want some general optimalizations that improve speed a lot.
-    set(OPTIMIZER_FLAGS "${OPTIMIZER_FLAGS} -O3 -funsafe-math-optimizations")
+    set(OPTIMIZER_FLAGS "${OPTIMIZER_FLAGS} -O3 -flto -funsafe-math-optimizations")
 
     # If we are compiling for a rasberry pi, we want to aggressively optimize for the CPU we are running on.
     # Note that this check only works if we are compiling directly on the pi, as it is a dirty way of checkif if we are on the pi.
@@ -376,7 +375,7 @@ if(ENABLE_CRASH_LOGGER)
 endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework OpenGL -framework Foundation -static-libgcc -static-libstdc++")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework OpenGL -framework Foundation")
 endif()
 
 if(ANDROID)
