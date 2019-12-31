@@ -25,4 +25,4 @@ after_script:
   - echo 'ftp.tuhismedia.fi ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDL7G4UGuKpyQ5AZvI9FDCBZCr8TD4OBsHikTietPpUy6KtfTosj8CYko7qWVAKJ90RShtHssA2Ozs6HnkfVfhbAUobHeXE8ekTW19m46I6P9nmnhwJe95DxywWajytRYFpm2wOoXpOA7Mdy6hG/MKPgb1cbHgEtZ0ctj2xpZ/pqllljbgu7tfF836RaLmSxDVQI5fEkwoAUKlmHOE8jPziCCnikhzU1VX15EjHNtFofjWzRy8oaQzX6tqjNucU6MgzjdXKSFJqbB9EO7wHkolhJxh/MhQZU+J3Qgid2ZCkGfFW9/+uLePMtdXV8ryTSHuFrGfwykVXOraNgAIEazDX' >> $HOME/.ssh/known_hosts
   - echo 'ftp.tuhismedia.fi ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBeiqO1YCEUJgFH8Wcu0oZ9gPrJWYermkVptbGRtFOs2eyhQ7xdVHfN5H8UmlJoO0hDUXMmZkGSg3c+fyfq8ylQ=' >> $HOME/.ssh/known_hosts
   - sshpass -p "${SFTP_PASSWORD}" sftp -P 23 ${SFTP_USER}@ftp.tuhismedia.fi:/public/html/ee <<< $'put ./EmptyEpsilon.zip'
-  - bash ./telegram_finished_notification.sh
+  - bash ../telegram_finished_notification.sh
