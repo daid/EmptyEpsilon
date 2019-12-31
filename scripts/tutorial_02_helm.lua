@@ -1,7 +1,7 @@
 -- Name: Helm
 -- Description: [Station Tutorial]
 --- -------------------
---- -Goes over controling movement of the ship.
+--- -Goes over controlling movement of the ship.
 ---
 --- [Station Info]
 --- -------------------

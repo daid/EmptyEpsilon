@@ -266,9 +266,18 @@ std::vector<std::pair<string, string>> HotkeyConfig::listHotkeysByCategory(strin
             {
                 for(auto key_name : sfml_key_names)
                 {
-                    if (key_name.second == item.hotkey.code)
-                        ret.push_back({std::get<0>(item.value), key_name.first});
-                }
+                    if (key_name.second == item.hotkey.code){
+			string keyModifier = "";
+			if (item.hotkey.shift) {
+				keyModifier = "Shift+";
+			} else if (item.hotkey.control) {
+				keyModifier = "Ctrl+";
+			} else if (item.hotkey.alt){
+				keyModifier = "Alt+";
+			}
+                        ret.push_back({std::get<0>(item.value), keyModifier + key_name.first});
+                    }
+		}
             }
         }
     }

@@ -8,6 +8,12 @@
 REGISTER_SCRIPT_SUBCLASS(WarpJammer, SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, setRange);
+    /// Set a function that will be called if the warp jammer is taking damage.
+    /// First argument given to the function will be the warp jammer, the second the instigator SpaceObject (or nil).
+    REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, onTakingDamage);
+    /// Set a function that will be called if the warp jammer is destroyed by taking damage.
+    /// First argument given to the function will be the warp jammer, the second the instigator SpaceObject that gave the final blow (or nil).
+    REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, onDestruction);
 }
 
 REGISTER_MULTIPLAYER_CLASS(WarpJammer, "WarpJammer");
@@ -48,7 +54,10 @@ void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, fl
         range_circle.setOrigin(range * scale, range * scale);
         range_circle.setPosition(position);
         range_circle.setFillColor(sf::Color::Transparent);
-        range_circle.setOutlineColor(sf::Color(255, 255, 255, 64));
+        if (my_spaceship && my_spaceship->isEnemy(this))
+            range_circle.setOutlineColor(sf::Color(255, 0, 0, 64));
+        else
+            range_circle.setOutlineColor(sf::Color(200, 150, 100, 64));
         range_circle.setOutlineThickness(2.0);
         window.draw(range_circle);
     }
@@ -64,7 +73,28 @@ void WarpJammer::takeDamage(float damage_amount, DamageInfo info)
         P<ExplosionEffect> e = new ExplosionEffect();
         e->setSize(getRadius());
         e->setPosition(getPosition());
+
+        if (on_destruction.isSet())
+        {
+            if (info.instigator)
+            {
+                on_destruction.call(P<WarpJammer>(this), P<SpaceObject>(info.instigator));
+            } else {
+                on_destruction.call(P<WarpJammer>(this));
+            }
+        }
+
         destroy();
+    } else {
+        if (on_taking_damage.isSet())
+        {
+            if (info.instigator)
+            {
+                on_taking_damage.call(P<WarpJammer>(this), P<SpaceObject>(info.instigator));
+            } else {
+                on_taking_damage.call(P<WarpJammer>(this));
+            }
+        }
     }
 }
 
@@ -106,4 +136,14 @@ sf::Vector2f WarpJammer::getFirstNoneJammedPosition(sf::Vector2f start, sf::Vect
 
     float d = sf::length(first_jammer_q - first_jammer->getPosition());
     return first_jammer_q + sf::normalize(start - end) * sqrtf(first_jammer->range * first_jammer->range - d * d);
+}
+
+void WarpJammer::onTakingDamage(ScriptSimpleCallback callback)
+{
+    this->on_taking_damage = callback;
+}
+
+void WarpJammer::onDestruction(ScriptSimpleCallback callback)
+{
+    this->on_destruction = callback;
 }

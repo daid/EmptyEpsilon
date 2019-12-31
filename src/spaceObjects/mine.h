@@ -11,6 +11,8 @@ class Mine : public SpaceObject, public Updatable
     constexpr static float damageAtCenter = 160.0f;
     constexpr static float damageAtEdge = 30.0f;
 
+    ScriptSimpleCallback on_destruction;
+
 public:
     P<SpaceObject> owner;
     bool triggered;       //Only valid on server.
@@ -29,6 +31,7 @@ public:
     virtual void collide(Collisionable* target, float force);
     void eject();
     void explode();
+    void onDestruction(ScriptSimpleCallback callback);
     
     virtual string getExportLine() { return "Mine():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 

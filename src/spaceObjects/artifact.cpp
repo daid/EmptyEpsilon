@@ -18,6 +18,9 @@ REGISTER_SCRIPT_SUBCLASS(Artifact, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, explode);
     /// Set if this artifact can be picked up or not. When it is picked up, this artifact will be destroyed.
     REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, allowPickup);
+    /// Set a function that will be called if a player picks up the artifact.
+    /// First argument given to the function will be the artifact, the second the player.
+    REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, onPickUp);
 }
 
 REGISTER_MULTIPLAYER_CLASS(Artifact, "Artifact");
@@ -63,8 +66,13 @@ void Artifact::collide(Collisionable* target, float force)
     if (!isServer() || !allow_pickup)
         return;
     P<SpaceObject> hit_object = P<Collisionable>(target);
-    if (P<PlayerSpaceship>(hit_object))
+    P<PlayerSpaceship> player = hit_object;
+    if (player)
     {
+        if (on_pickup_callback.isSet())
+        {
+            on_pickup_callback.call(P<Artifact>(this), player);
+        }
         destroy();
     }
 }
@@ -85,6 +93,12 @@ void Artifact::explode()
 void Artifact::allowPickup(bool allow)
 {
     allow_pickup = allow;
+}
+
+void Artifact::onPickUp(ScriptSimpleCallback callback)
+{
+    this->allow_pickup = 1;
+    this->on_pickup_callback = callback;
 }
 
 string Artifact::getExportLine()

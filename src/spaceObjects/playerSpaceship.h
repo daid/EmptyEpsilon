@@ -39,7 +39,8 @@ public:
     // Coolant change rate
     constexpr static float system_coolant_level_change_per_second = 1.2;
     // Total coolant
-    constexpr static float max_coolant = 10.0;
+    constexpr static float max_coolant_per_system = 10.0f;
+    float max_coolant;
     // Overheat subsystem damage rate
     constexpr static float damage_per_second_on_overheat = 0.08f;
     // Base time it takes to perform an action
@@ -194,6 +195,8 @@ public:
     void addCustomMessageWithCallback(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback);
     void removeCustom(string name);
 
+    ESystem getBeamSystemTarget(){ return beam_system_target; }
+    string getBeamSystemTargetName(){ return getSystemName(beam_system_target); }
     // Client command functions
     virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet) override;
     void commandTargetRotation(float target);
@@ -204,7 +207,8 @@ public:
     void commandSetScienceLink(int32_t id);
     void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
     void commandUnloadTube(int8_t tubeNumber);
-    void commandFireTube(int8_t tubeNumber, float missile_target_angle);
+    void commandFireTube(int8_t tubeNumber, float missile_target_angle);    
+    void commandFireTubeAtTarget(int8_t tubeNumber, P<SpaceObject> target);
     void commandSetTubeAutoLoading(int8_t tubeNumber, bool auto_load);
     void commandSetShields(bool enabled);
     void commandMainScreenSetting(EMainScreenSetting mainScreen);
@@ -248,6 +252,8 @@ public:
     virtual void executeJump(float distance) override;
     virtual void takeHullDamage(float damage_amount, DamageInfo& info) override;
     void setSystemCoolantRequest(ESystem system, float request);
+    void setMaxCoolant(float coolant);
+    float getMaxCoolant() { return max_coolant; }
     void setAutoCoolant(bool active) { auto_coolant_enabled = active; }
     int getRepairCrewCount();
     void setRepairCrewCount(int amount);

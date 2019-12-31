@@ -50,7 +50,7 @@ function distance(a, b, c, d)
         x2, y2 = b, c
     elseif type(a) == "number" and type(b) == "number" and type(c) == "table" then
         -- Assume distance(x, y, obj)
-        x1, y1 = a, b:getPosition()
+        x1, y1 = a, b
         x2, y2 = c:getPosition()
     elseif type(a) == "number" and type(b) == "number" and type(c) == "number" and type(d) == "number" then
         -- a and b are both tables.

@@ -2,6 +2,7 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "main.h"
+#include "preferenceManager.h"
 
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_label.h"
@@ -84,11 +85,11 @@ void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
         }else{
             glitchPostProcessor->enabled = false;
         }
-        if (my_spaceship->current_warp > 0.0)
+        if (my_spaceship->current_warp > 0.0 && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
         {
             warpPostProcessor->enabled = true;
             warpPostProcessor->setUniform("amount", my_spaceship->current_warp * 0.01);
-        }else if (my_spaceship->jump_delay > 0.0 && my_spaceship->jump_delay < 2.0)
+        }else if (my_spaceship->jump_delay > 0.0 && my_spaceship->jump_delay < 2.0 && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
         {
             warpPostProcessor->enabled = true;
             warpPostProcessor->setUniform("amount", (2.0 - my_spaceship->jump_delay) * 0.1);

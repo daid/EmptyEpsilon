@@ -4,6 +4,7 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "script.h"
 #include "GMScriptCallback.h"
+#include "GMMessage.h"
 #include "gameStateLogger.h"
 
 class GameStateLogger;
@@ -33,6 +34,12 @@ enum EScanningComplexity
     SC_Normal,
     SC_Advanced
 };
+enum EHackingGames
+{
+    HG_Mine,
+    HG_Lights,
+    HG_All
+};
 
 class GameGlobalInfo : public MultiplayerObject, public Updatable
 {
@@ -57,13 +64,16 @@ private:
 public:
     string global_message;
     float global_message_timeout;
-    
+
     string banner_string;
 
     std::vector<float> reputation_points;
     NebulaInfo nebula_info[max_nebulas];
     EPlayerWarpJumpDrive player_warp_jump_drive_setting;
     EScanningComplexity scanning_complexity;
+    //Hacking difficulty ranges from 0 to 3
+    int hacking_difficulty;
+    EHackingGames hacking_games;
     /*!
      * \brief Range of the science radar.
      */
@@ -76,6 +86,7 @@ public:
 
     //List of script functions that can be called from the GM interface (Server only!)
     std::list<GMScriptCallback> gm_callback_functions;
+    std::list<GMMessage> gm_messages;
     //When active, all comms request goto the GM as chat, and normal scripted converstations are disabled. This does not disallow player<->player ship comms.
     bool intercept_all_comms_to_gm;
 

@@ -26,6 +26,7 @@ enum ESystem
     SYS_RearShield,
     SYS_COUNT
 };
+
 /* Define script conversion function for the ESystem enum. */
 template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es);
 
@@ -63,6 +64,7 @@ public:
         float load_time;
         uint32_t type_allowed_mask;
         float direction;
+        EMissileSizes size;
     };
 private:
     static std::unordered_map<string, P<ShipTemplate> > templateMap;
@@ -87,6 +89,7 @@ public:
     std::unordered_set<string> can_be_docked_by_class;
     bool shares_energy_with_docked;
     bool repair_docked;
+    bool restocks_scan_probes;
     
     float energy_storage_amount;
     int repair_crew_count;
@@ -121,6 +124,7 @@ public:
     void setDockClasses(std::vector<string> classes);
     void setSharesEnergyWithDocked(bool enabled);
     void setRepairDocked(bool enabled);
+    void setRestocksScanProbes(bool enabled);
     void setMesh(string model, string color_texture, string specular_texture, string illumination_texture);
     void setEnergyStorage(float energy_amount);
     void setRepairCrewCount(int amount);
@@ -141,6 +145,8 @@ public:
     void weaponTubeAllowMissle(int index, EMissileWeapons type);
     void weaponTubeDisallowMissle(int index, EMissileWeapons type);
     void setWeaponTubeExclusiveFor(int index, EMissileWeapons type);
+    void setTubeSize(int index, EMissileSizes size);
+    
     void setTubeDirection(int index, float direction);
     void setHull(float amount) { hull = amount; }
     void setShields(std::vector<float> values);

@@ -47,6 +47,9 @@ public:
     void allowLoadOf(EMissileWeapons type);
     void disallowLoadOf(EMissileWeapons type);
     
+    void setSize(EMissileSizes size);
+    EMissileSizes getSize();
+    
     void forceUnload();
     
     void update(float delta);
@@ -87,6 +90,9 @@ private:
 
     //Runtime state
     EMissileWeapons type_loaded;
+    
+    EMissileSizes size; 
+    float getSizeCategoryModifier();
     EWeaponTubeState state;
     float delay;
     int fire_count;

@@ -88,6 +88,7 @@ set(SOURCES
 	src/commsScriptInterface.cpp
 	src/modelData.cpp
 	src/gameGlobalInfo.cpp
+	src/GMActions.cpp
 	src/script.cpp
 	src/playerInfo.cpp
 	src/gameStateLogger.cpp
@@ -99,6 +100,7 @@ set(SOURCES
 	src/scenarioInfo.cpp
 	src/repairCrew.cpp
 	src/GMScriptCallback.cpp
+	src/GMMessage.cpp
 	src/tutorialGame.cpp
 	src/menus/joinServerMenu.cpp
 	src/menus/serverBrowseMenu.cpp
@@ -127,6 +129,8 @@ set(SOURCES
 	src/screens/extra/databaseScreen.cpp
 	src/screens/extra/shipLogScreen.cpp
 	src/screens/gm/gameMasterScreen.cpp
+	src/screens/gm/objectCreationView.cpp
+	src/screens/gm/globalMessageEntryView.cpp
 	src/screens/gm/chatDialog.cpp
 	src/screens/gm/tweak.cpp
 	src/screenComponents/aimLock.cpp
@@ -171,6 +175,9 @@ set(SOURCES
 	src/screenComponents/hackingDialog.cpp
 	src/screenComponents/customShipFunctions.cpp
 	src/screenComponents/scrollingBanner.cpp
+	src/screenComponents/lightsOut.cpp
+	src/screenComponents/miniGame.cpp
+	src/screenComponents/mineSweeper.cpp
 	src/gui/colorConfig.cpp
 	src/gui/hotkeyConfig.cpp
 	src/gui/mouseRenderer.cpp
@@ -188,6 +195,7 @@ set(SOURCES
 	src/gui/gui2_arrowbutton.cpp
 	src/gui/gui2_entrylist.cpp
 	src/gui/gui2_progressbar.cpp
+	src/gui/gui2_progressslider.cpp
 	src/gui/gui2_scrolltext.cpp
 	src/gui/gui2_advancedscrolltext.cpp
 	src/gui/gui2_button.cpp
@@ -200,6 +208,11 @@ set(SOURCES
 	src/gui/gui2_container.cpp
 	src/gui/gui2_panel.cpp
 	src/gui/gui2_overlay.cpp
+	src/spaceObjects/missiles/missileWeapon.cpp
+	src/spaceObjects/missiles/EMPMissile.cpp
+	src/spaceObjects/missiles/homingMissile.cpp
+	src/spaceObjects/missiles/hvli.cpp
+	src/spaceObjects/missiles/nuke.cpp
 	src/spaceObjects/spaceStation.cpp
 	src/spaceObjects/spaceship.cpp
 	src/spaceObjects/wormHole.cpp
@@ -210,17 +223,12 @@ set(SOURCES
 	src/spaceObjects/asteroid.cpp
 	src/spaceObjects/mine.cpp
 	src/spaceObjects/blackHole.cpp
-	src/spaceObjects/missileWeapon.cpp
-	src/spaceObjects/EMPMissile.cpp
 	src/spaceObjects/playerSpaceship.cpp
 	src/spaceObjects/beamEffect.cpp
-	src/spaceObjects/homingMissile.cpp
-	src/spaceObjects/hvli.cpp
 	src/spaceObjects/electricExplosionEffect.cpp
 	src/spaceObjects/supplyDrop.cpp
 	src/spaceObjects/warpJammer.cpp
 	src/spaceObjects/scanProbe.cpp
-	src/spaceObjects/nuke.cpp
 	src/spaceObjects/artifact.cpp
 	src/spaceObjects/shipTemplateBasedObject.cpp
 	src/spaceObjects/planet.cpp
@@ -352,6 +360,7 @@ foreach(SP_SOURCE
 	src/lua/ltablib.c
 	src/lua/lgc.c
 	src/lua/lbitlib.c
+	src/json11/json11.cpp
 	)
 	list(APPEND SOURCES ${SERIOUS_PROTON_DIR}/${SP_SOURCE})
 endforeach()
@@ -369,7 +378,11 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework OpenGL -framework Foundation")
 endif()
 
-add_executable(${EXECUTABLE_NAME} MACOSX_BUNDLE ${SOURCES})
+if(ANDROID)
+    add_library(${EXECUTABLE_NAME} SHARED ${SOURCES})
+else()
+    add_executable(${EXECUTABLE_NAME} MACOSX_BUNDLE ${SOURCES})
+endif()
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
 include_directories(${SERIOUS_PROTON_DIR}/src)
@@ -382,9 +395,13 @@ include_directories(${SFML_INCLUDE_DIR})
 target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
 
 # Setup OpenGl
-find_package(OpenGL REQUIRED)
-include_directories(${OPENGL_INCLUDE_DIR})
-target_link_libraries(${EXECUTABLE_NAME} ${OPENGL_LIBRARIES})
+if(ANDROID)
+  target_link_libraries(${EXECUTABLE_NAME} GLESv1_CM)
+else()
+  find_package(OpenGL REQUIRED)
+  include_directories(${OPENGL_INCLUDE_DIR})
+  target_link_libraries(${EXECUTABLE_NAME} ${OPENGL_LIBRARIES})
+endif()
 
 # Some magical Win 32 stuff
 if(WIN32)
@@ -393,6 +410,9 @@ if(WIN32)
     include_directories(${DRMINGW_ROOT}/include/)
     target_link_libraries(${EXECUTABLE_NAME} exchndl)
   endif()
+elseif(ANDROID)
+  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--whole-archive ${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-main.a -Wl,--no-whole-archive")
+  target_link_libraries(${EXECUTABLE_NAME} log android EGL)
 elseif(APPLE)
   set_target_properties(${EXECUTABLE_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/osx/MacOSXBundleInfo.plist.in)
   set_target_properties(${EXECUTABLE_NAME} PROPERTIES MACOSX_BUNDLE_ICON_FILE "${EXECUTABLE_NAME}.icns")
@@ -408,12 +428,12 @@ if(WIN32)
   install(FILES ${MINGW_STDCPP_DLL} ${MINGW_LIBGCC_DLL} ${MINGW_PTHREAD_DLL} DESTINATION .)
   install(FILES /usr/i686-w64-mingw32/lib/libwinpthread-1.dll DESTINATION .)
   install(FILES ${SFML_ROOT}/bin/OpenAL32.dll DESTINATION .)
-  install(FILES ${SFML_ROOT}/bin/libFLAC-8.dll DESTINATION .)
-  install(FILES ${SFML_ROOT}/bin/libjpeg-62.dll DESTINATION .)
-  install(FILES ${SFML_ROOT}/bin/libogg-0.dll DESTINATION .)
-  install(FILES ${SFML_ROOT}/bin/libvorbis-0.dll DESTINATION .)
-  install(FILES ${SFML_ROOT}/bin/libvorbisenc-2.dll DESTINATION .)
-  install(FILES ${SFML_ROOT}/bin/libvorbisfile-3.dll DESTINATION .)
+  #install(FILES ${SFML_ROOT}/bin/libFLAC-8.dll DESTINATION .)
+  #install(FILES ${SFML_ROOT}/bin/libjpeg-62.dll DESTINATION .)
+  #install(FILES ${SFML_ROOT}/bin/libogg-0.dll DESTINATION .)
+  #install(FILES ${SFML_ROOT}/bin/libvorbis-0.dll DESTINATION .)
+  #install(FILES ${SFML_ROOT}/bin/libvorbisenc-2.dll DESTINATION .)
+  #install(FILES ${SFML_ROOT}/bin/libvorbisfile-3.dll DESTINATION .)
   install(FILES ${SFML_ROOT}/bin/sfml-audio-2.dll DESTINATION .)
   install(FILES ${SFML_ROOT}/bin/sfml-graphics-2.dll DESTINATION .)
   install(FILES ${SFML_ROOT}/bin/sfml-network-2.dll DESTINATION .)
@@ -437,6 +457,8 @@ elseif(APPLE)
   install(DIRECTORY resources DESTINATION "EmptyEpsilon.app/Contents/Resources")
   install(DIRECTORY scripts DESTINATION "EmptyEpsilon.app/Contents/Resources")
   install(DIRECTORY packs DESTINATION "EmptyEpsilon.app/Contents/Resources")
+elseif(ANDROID)
+  android_apk(EmptyEpsilon)
 else()
   include(GNUInstallDirs)
   install(DIRECTORY resources DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/emptyepsilon/")
@@ -447,10 +469,16 @@ endif()
 
 find_package(PythonInterp)
 if(PYTHONINTERP_FOUND)
-  add_custom_target(scriptdoc ALL ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/compile_script_docs.py ${CMAKE_BINARY_DIR}/script_reference.html WORKING_DIRECTORY ${CMAKE_SOURCE_DIR} COMMENT "Building script reference documentation.")
+  add_custom_command(
+        OUTPUT ${CMAKE_BINARY_DIR}/script_reference.html
+        COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/compile_script_docs.py ${CMAKE_BINARY_DIR}/script_reference.html
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        COMMENT "Building script reference documentation.")
+  add_custom_target(script_reference ALL DEPENDS ${CMAKE_BINARY_DIR}/script_reference.html)
   install(FILES ${CMAKE_BINARY_DIR}/script_reference.html DESTINATION .)
 endif()
 
 set(CPACK_PACKAGE_EXECUTABLES ${EXECUTABLE_NAME})
+set(CPACK_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}")
 set(CPACK_GENERATOR "ZIP")
 include(CPack)

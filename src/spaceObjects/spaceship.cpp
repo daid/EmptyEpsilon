@@ -28,6 +28,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponStorageMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getShieldsFrequency);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setShieldsFrequency);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamFrequency);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getMaxEnergy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setMaxEnergy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getEnergy);
@@ -77,6 +78,11 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadarTrace);
 
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, addBroadcast);
+
+    /// Set the scan state of this ship for every faction.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanState);
+    /// Set the scane state of this ship for a particular faction.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanStateByFaction);
 }
 
 SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_range)
@@ -223,6 +229,7 @@ void SpaceShip::applyTemplateValues()
     {
         weapon_tube[n].setLoadTimeConfig(ship_template->weapon_tube[n].load_time);
         weapon_tube[n].setDirection(ship_template->weapon_tube[n].direction);
+        weapon_tube[n].setSize(ship_template->weapon_tube[n].size);
         for(int m=0; m<MW_Count; m++)
         {
             if (ship_template->weapon_tube[n].type_allowed_mask & (1 << m))
@@ -697,7 +704,7 @@ bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)
 
 void SpaceShip::collide(Collisionable* other, float force)
 {
-    if (docking_state == DS_Docking)
+    if (docking_state == DS_Docking && fabs(sf::angleDifference(target_rotation, getRotation())) < 10.0)
     {
         P<SpaceObject> dock_object = P<Collisionable>(other);
         if (dock_object == docking_target)
@@ -812,6 +819,19 @@ void SpaceShip::scannedBy(P<SpaceObject> other)
     case SS_FullScan:
         break;
     }
+}
+
+void SpaceShip::setScanState(EScannedState state)
+{
+    for(unsigned int faction_id = 0; faction_id < factionInfo.size(); faction_id++)
+    {
+        setScannedStateForFaction(faction_id, state);
+    }
+}
+
+void SpaceShip::setScanStateByFaction(string faction_name, EScannedState state)
+{
+    setScannedStateForFaction(FactionInfo::findFactionId(faction_name), state);
 }
 
 bool SpaceShip::isFriendOrFoeIdentified()
@@ -1015,13 +1035,15 @@ bool SpaceShip::hasSystem(ESystem system)
 float SpaceShip::getSystemEffectiveness(ESystem system)
 {
     float power = systems[system].power_level;
-    power *= (1.0f - systems[system].hacked_level * 0.75f);
+    
+    // Substract the hacking from the power, making double hacked systems run at 25% efficiency.
+    power = std::max(0.0f, power - systems[system].hacked_level * 0.75f);
 
     // Degrade all systems except the reactor once energy level drops below 10.
     if (system != SYS_Reactor)
     {
         if (energy_level < 10.0 && energy_level > 0.0 && power > 0.0)
-            power = std::min((10.0f * energy_level) / power, power);
+            power = std::min(power * energy_level / 10.0f, power);
         else if (energy_level <= 0.0 || power <= 0.0)
             power = 0.0f;
     }
@@ -1055,6 +1077,20 @@ EMissileWeapons SpaceShip::getWeaponTubeLoadType(int index)
     if (!weapon_tube[index].isLoaded())
         return MW_None;
     return weapon_tube[index].getLoadType();
+}
+
+EMissileSizes SpaceShip::getWeaponTubeSize(int index)
+{
+    if (index < 0 || index >= weapon_tube_count)
+        return MS_Small;
+    return weapon_tube[index].getSize();
+}
+
+void SpaceShip::setWeaponTubeSize(int index, EMissileSizes size)
+{
+    if (index < 0 || index >= weapon_tube_count)
+        return;
+    weapon_tube[index].setSize(size);
 }
 
 void SpaceShip::weaponTubeAllowMissle(int index, EMissileWeapons type)

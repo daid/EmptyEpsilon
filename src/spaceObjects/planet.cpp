@@ -12,21 +12,21 @@ class PlanetMeshGenerator
 public:
     std::vector<MeshVertex> vertices;
     int max_iterations;
-    
+
     PlanetMeshGenerator(int iterations)
     {
         max_iterations = iterations;
-        
+
         createFace(0, sf::Vector3f(0, 0, 1), sf::Vector3f(0, 1, 0), sf::Vector3f(1, 0, 0), sf::Vector2f(0, 0), sf::Vector2f(0, 0.5), sf::Vector2f(0.25, 0.5));
         createFace(0, sf::Vector3f(0, 0, 1), sf::Vector3f(1, 0, 0), sf::Vector3f(0,-1, 0), sf::Vector2f(0.25, 0), sf::Vector2f(0.25, 0.5), sf::Vector2f(0.5, 0.5));
         createFace(0, sf::Vector3f(0, 0, 1), sf::Vector3f(0,-1, 0), sf::Vector3f(-1, 0, 0), sf::Vector2f(0.5, 0), sf::Vector2f(0.5, 0.5), sf::Vector2f(0.75, 0.5));
         createFace(0, sf::Vector3f(0, 0, 1), sf::Vector3f(-1, 0, 0), sf::Vector3f(0, 1, 0), sf::Vector2f(0.75, 0), sf::Vector2f(0.75, 0.5), sf::Vector2f(1.0, 0.5));
-        
+
         createFace(0, sf::Vector3f(0, 0,-1), sf::Vector3f(1, 0, 0), sf::Vector3f(0, 1, 0), sf::Vector2f(0, 1.0), sf::Vector2f(0.25, 0.5), sf::Vector2f(0.0, 0.5));
         createFace(0, sf::Vector3f(0, 0,-1), sf::Vector3f(0,-1, 0), sf::Vector3f(1, 0, 0), sf::Vector2f(0.25, 1.0), sf::Vector2f(0.5, 0.5), sf::Vector2f(0.25, 0.5));
         createFace(0, sf::Vector3f(0, 0,-1), sf::Vector3f(-1, 0, 0), sf::Vector3f(0,-1, 0), sf::Vector2f(0.5, 1.0), sf::Vector2f(0.75, 0.5), sf::Vector2f(0.5, 0.5));
         createFace(0, sf::Vector3f(0, 0,-1), sf::Vector3f(0,1, 0), sf::Vector3f(-1, 0, 0), sf::Vector2f(0.75, 1.0), sf::Vector2f(1.0, 0.5), sf::Vector2f(0.75, 0.5));
-        
+
         for(unsigned int n=0; n<vertices.size(); n++)
         {
             float u = sf::vector2ToAngle(sf::Vector2f(vertices[n].position[1], vertices[n].position[0])) / 360.0f;
@@ -38,7 +38,7 @@ public:
             vertices[n].uv[1] = 0.5 + sf::vector2ToAngle(sf::Vector2f(sf::length(sf::Vector2f(vertices[n].position[0], vertices[n].position[1])), vertices[n].position[2])) / 180.0f;
         }
     }
-    
+
     void createFace(int iteration, sf::Vector3f v0, sf::Vector3f v1, sf::Vector3f v2, sf::Vector2f uv0, sf::Vector2f uv1, sf::Vector2f uv2)
     {
         if (iteration < max_iterations)
@@ -123,9 +123,10 @@ Planet::Planet()
     collision_size = -2.0f;
 
     setRadarSignatureInfo(0.5, 0, 0);
-    
+
     registerMemberReplication(&planet_size);
     registerMemberReplication(&cloud_size);
+    registerMemberReplication(&atmosphere_size);
     registerMemberReplication(&planet_texture);
     registerMemberReplication(&cloud_texture);
     registerMemberReplication(&atmosphere_texture);
@@ -198,7 +199,7 @@ void Planet::update(float delta)
         if (collision_size > 0.0)
             PathPlannerManager::getInstance()->addAvoidObject(this, collision_size);
     }
-    
+
     if (orbit_distance > 0.0f)
     {
         P<SpaceObject> orbit_target;
@@ -213,7 +214,7 @@ void Planet::update(float delta)
             setPosition(orbit_target->getPosition() + sf::vector2FromAngle(angle) * orbit_distance);
         }
     }
-    
+
     if (axial_rotation_time != 0.0f)
         setRotation(getRotation() + delta / axial_rotation_time * 360.0f);
 }
@@ -222,7 +223,7 @@ void Planet::update(float delta)
 void Planet::draw3D()
 {
     float distance = sf::length(camera_position - sf::Vector3f(getPosition().x, getPosition().y, distance_from_movement_plane));
-    
+
     //view_scale ~= about the size the planet is on the screen.
     float view_scale = planet_size / distance;
     int level_of_detail = 4;
@@ -243,8 +244,8 @@ void Planet::draw3D()
             planet_mesh[level_of_detail] = new Mesh(planet_mesh_generator.vertices);
         }
         sf::Shader* shader = ShaderManager::getShader("planetShader");
-        shader->setParameter("baseMap", *textureManager.getTexture(planet_texture));
-        shader->setParameter("atmosphereColor", atmosphere_color);
+        shader->setUniform("baseMap", *textureManager.getTexture(planet_texture));
+        shader->setUniform("atmosphereColor", (sf::Glsl::Vec4)atmosphere_color);
         sf::Shader::bind(shader);
         planet_mesh[level_of_detail]->render();
     }
@@ -253,7 +254,7 @@ void Planet::draw3D()
 void Planet::draw3DTransparent()
 {
     float distance = sf::length(camera_position - sf::Vector3f(getPosition().x, getPosition().y, distance_from_movement_plane));
-    
+
     //view_scale ~= about the size the planet is on the screen.
     float view_scale = planet_size / distance;
     int level_of_detail = 4;
@@ -276,15 +277,15 @@ void Planet::draw3DTransparent()
             planet_mesh[level_of_detail] = new Mesh(planet_mesh_generator.vertices);
         }
         sf::Shader* shader = ShaderManager::getShader("planetShader");
-        shader->setParameter("baseMap", *textureManager.getTexture(cloud_texture));
-        shader->setParameter("atmosphereColor", sf::Color(0,0,0));
+        shader->setUniform("baseMap", *textureManager.getTexture(cloud_texture));
+        shader->setUniform("atmosphereColor", (sf::Glsl::Vec4)sf::Color(0,0,0));
         sf::Shader::bind(shader);
         planet_mesh[level_of_detail]->render();
         glPopMatrix();
     }
     if (atmosphere_texture != "" && atmosphere_size > 0)
     {
-        ShaderManager::getShader("billboardShader")->setParameter("textureMap", *textureManager.getTexture(atmosphere_texture));
+        ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture(atmosphere_texture));
         sf::Shader::bind(ShaderManager::getShader("billboardShader"));
         glColor4f(atmosphere_color.r / 255.0f, atmosphere_color.g / 255.0f, atmosphere_color.b / 255.0f, atmosphere_size * 2.0f);
         glBegin(GL_QUADS);

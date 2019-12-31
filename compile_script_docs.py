@@ -21,6 +21,16 @@ class ScriptFunction(object):
 		ret = self.name
 		return '%s' % (ret)
 
+class ScriptMember(object):
+	def __init__(self, name):
+		self.name = name
+		self.description = ""
+		self.origin_class = None
+
+	def __repr__(self):
+		ret = self.name
+		return '%s' % (ret)
+
 class ScriptClass(object):
 	def __init__(self, name):
 		self.name = name
@@ -30,11 +40,16 @@ class ScriptClass(object):
 		self.children = []
 		self.create = True
 		self.functions = []
+		self.members = []
 		self.callbacks = []
 	
 	def addFunction(self, function_name):
 		self.functions.append(ScriptFunction(function_name))
 		return self.functions[-1]
+
+	def addMember(self, member_name):
+		self.members.append(ScriptMember(member_name))
+		return self.members[-1]
 
 	def addCallback(self, callback_name):
 		self.callbacks.append(callback_name)
@@ -61,7 +76,18 @@ class DocumentationGenerator(object):
         self._definitions = []
         self._function_info = []
         self._files = set()
-    
+
+    def addDirectory(self, directory):
+        if not os.path.isdir(directory):
+            return
+
+        for name in os.listdir(directory):
+            name = directory + os.sep + name
+            if os.path.isdir(name):
+                self.addDirectory(name)
+            elif os.path.isfile(name):
+                self.addFile(name)
+
     def addFile(self, filename):
         if filename in self._files:
             return
@@ -70,12 +96,7 @@ class DocumentationGenerator(object):
         
         self._files.add(filename)
         ext = os.path.splitext(filename)[1].lower()
-        if ext == '.cbp':
-            xml = ElementTree.parse(filename)
-            for project in xml.findall('Project'):
-                for unit in project.findall('Unit'):
-                    self.addFile(unit.attrib['filename'])
-        elif ext == '.c' or ext == '.cpp' or ext == '.h':
+        if ext == '.c' or ext == '.cpp' or ext == '.h':
             for line in open(filename, "r"):
                 m = re.match('^# *include *[<"](.*)[>"]$', line)
                 if m is not None:
@@ -177,12 +198,11 @@ class DocumentationGenerator(object):
                     f = definition.addFunction('isValid')
                     f.parameters = ''
                     f.description = 'Check if this is still looking at a valid object. Returns false when the objects that this variable references is destroyed.'
-                    f = definition.addFunction('typeName')
-                    f.parameters = ''
-                    f.description = 'Returns the class name of this object.'
                     f = definition.addFunction('destroy')
                     f.parameters = ''
                     f.description = 'Removes this object from the game.'
+                    f = definition.addMember('typeName')
+                    f.description = 'Returns the class name of this object, this is not a function, but a direct member: if object.typeName == "Mine" then print("MINE!") end'
 
     def generateDocs(self, stream):
         stream.write('<!doctype html><html lang="us"><head><meta charset="utf-8"><title>EmptyEpsilon - Scripting documentation</title>')
@@ -230,6 +250,9 @@ class DocumentationGenerator(object):
                     else:
                         stream.write('<dt>%s:%s(%s)</dt>' % (d.name, func.name, func.parameters.replace('<', '&lt;')))
                     stream.write('<dd>%s</dd>' % (func.description.replace('<', '&lt;')))
+                for member in d.members:
+                    stream.write('<dt>%s:%s</dt>' % (d.name, member.name))
+                    stream.write('<dd>%s</dd>' % (member.description.replace('<', '&lt;')))
                 stream.write('</dl>')
                 stream.write('</div>')
 
@@ -240,7 +263,7 @@ class DocumentationGenerator(object):
 
 if __name__ == "__main__":
     dg = DocumentationGenerator()
-    dg.addFile("EmptyEpsilon.cbp")
+    dg.addDirectory("src")
     dg.readFunctionInfo()
     dg.readScriptDefinitions()
     dg.linkFunctions()

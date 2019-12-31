@@ -23,6 +23,7 @@ template:setWeaponStorage("Homing", 1000)
 for n=0,15 do
     template:setBeamWeapon(n, 90,  n * 22.5, 3200, 3, 10)
     template:setTubeDirection(n, n * 22.5)
+    template:setTubeSize(0, "large")
 end
 template:setHull(2000)
 template:setShields(1200, 1200, 1200, 1200, 1200, 1200)

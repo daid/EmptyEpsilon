@@ -1,18 +1,23 @@
 #include "epsilonServer.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
+#include "GMActions.h"
 #include "main.h"
 
 EpsilonServer::EpsilonServer()
 : GameServer("Server", VERSION_NUMBER)
 {
-    new GameGlobalInfo();
-    PlayerInfo* info = new PlayerInfo();
-    info->client_id = 0;
-    my_player_info = info;
-    engine->setGameSpeed(0.0);
-    for(unsigned int n=0; n<factionInfo.size(); n++)
-        factionInfo[n]->reset();
+    if (game_server)
+    {
+        new GameGlobalInfo();
+        new GameMasterActions();
+        PlayerInfo* info = new PlayerInfo();
+        info->client_id = 0;
+        my_player_info = info;
+        engine->setGameSpeed(0.0);
+        for(unsigned int n=0; n<factionInfo.size(); n++)
+            factionInfo[n]->reset();
+    }
 }
 
 EpsilonServer::~EpsilonServer()
@@ -45,6 +50,8 @@ void disconnectFromServer()
         game_server->destroy();
     if (gameGlobalInfo)
         gameGlobalInfo->destroy();
+    if (gameMasterActions)
+        gameMasterActions->destroy();
     foreach(PlayerInfo, i, player_info_list)
         i->destroy();
     if (my_player_info)
