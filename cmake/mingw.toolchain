@@ -32,8 +32,7 @@ if(NOT SFML_ROOT)
         file(MAKE_DIRECTORY "${WIN32_BASE}/openal_build")
 # TOFIX: DXSDK_DIR is set to a hardcoded path, as openal cannot seem to find dsound.h on my linux system.
         execute_process_ex(
-            COMMAND "${CMAKE_COMMAND}" "${WIN32_BASE}/openal-soft-1.19.1" "-G" "${CMAKE_GENERATOR}"
-                "-DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM}"
+            COMMAND "${CMAKE_COMMAND}" "${WIN32_BASE}/openal-soft-1.19.1"
                 "-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}"
                 "-DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}"
                 "-DCMAKE_SYSTEM_NAME=${CMAKE_SYSTEM_NAME}"
