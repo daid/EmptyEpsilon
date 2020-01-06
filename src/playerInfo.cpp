@@ -143,18 +143,17 @@ void PlayerInfo::spawnUI()
         //Crew 1
         if (crew_position[singlePilot])
             screen->addStationTab(new SinglePilotScreen(screen), singlePilot, getCrewPositionName(singlePilot), getCrewPositionIcon(singlePilot));
-        //Extra
+
+	//Extra
         if (crew_position[damageControl])
             screen->addStationTab(new DamageControlScreen(screen), damageControl, getCrewPositionName(damageControl), getCrewPositionIcon(damageControl));
         if (crew_position[powerManagement])
             screen->addStationTab(new PowerManagementScreen(screen), powerManagement, getCrewPositionName(powerManagement), getCrewPositionIcon(powerManagement));
         if (crew_position[databaseView])
             screen->addStationTab(new DatabaseScreen(screen), databaseView, getCrewPositionName(databaseView), getCrewPositionIcon(databaseView));
-        
-        //Ship log screen, if you have comms, you have ships log. (note this is mostly replaced by the [at the bottom of the screen openable log]
-        if (crew_position[singlePilot])
-            screen->addStationTab(new ShipLogScreen(screen), max_crew_positions, "Ships log", "");
-        
+        if (crew_position[shipLog])
+            screen->addStationTab(new ShipLogScreen(screen), shipLog, getCrewPositionName(shipLog), getCrewPositionIcon(shipLog));
+ 
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(screen, "SELF_DESTRUCT_ENTRY");
         for(int n=0; n<max_crew_positions; n++)
             if (crew_position[n])
@@ -197,6 +196,7 @@ string getCrewPositionName(ECrewPosition position)
     case damageControl: return "Damage Control";
     case powerManagement: return "Power Management";
     case databaseView: return "Database";
+    case shipLog: return "Ship's Log";
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -217,6 +217,7 @@ string getCrewPositionIcon(ECrewPosition position)
     case damageControl: return "";
     case powerManagement: return "";
     case databaseView: return "";
+    case shipLog: return "";
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -257,7 +258,8 @@ template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosit
         cp = powerManagement;
     else if (str == "database" || str == "databaseview")
         cp = databaseView;
-    
+    else if (str == "shiplog")
+        cp = shipLog;
     else
         luaL_error(L, "Unknown value for crew position: %s", str.c_str());
 }
