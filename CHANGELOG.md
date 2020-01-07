@@ -5,6 +5,8 @@
 ### Added
 
 - `SpaceShip:setScanState()` and `setScanStateByFaction()` scripting functions.
+- `Planet:getPlanetRadius()` scripting function.
+- Log planet radius to the game state log and render it in the viewer.
 
 ### Changed
 
