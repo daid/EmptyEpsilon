@@ -20,6 +20,8 @@ public:
     virtual void collide(Collisionable* target, float force) override;
     virtual bool canHideInNebula()  override { return false; }
     
+    float getPlanetRadius();
+
     void setPlanetAtmosphereColor(float r, float g, float b);
     void setPlanetAtmosphereTexture(string texture_name);
     void setPlanetSurfaceTexture(string texture_name);
@@ -53,5 +55,5 @@ private:
     void updateCollisionSize();
 };
 
-#endif//WORM_HOLE_H
+#endif//PLANET_H
 

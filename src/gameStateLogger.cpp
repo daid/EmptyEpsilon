@@ -272,7 +272,13 @@ void GameStateLogger::writeObjectEntry(JSONGenerator& json, P<SpaceObject> obj)
         if (station)
         {
             writeStationEntry(json, station);
-        }
+        }else{
+            P<Planet> planet = obj;
+            if (planet)
+            {
+                writePlanetEntry(json, planet);
+            }
+	}
     }
 }
 
