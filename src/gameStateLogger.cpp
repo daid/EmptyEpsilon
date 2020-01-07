@@ -11,6 +11,7 @@
 #include "spaceObjects/blackHole.h"
 #include "spaceObjects/nebula.h"
 #include "spaceObjects/spaceship.h"
+#include "spaceObjects/planet.h"
 
 class JSONGenerator
 {
@@ -166,7 +167,7 @@ void GameStateLogger::update(float delta)
    The state entry looke like:
     {
         "type": "state",
-        "time": game time passed sinds start of logging,
+        "time": game time passed since start of logging,
         "new_static": [ list of object entries that are not likely to change, and only send once ],
         "objects": [ list of updated objects, this can include objects that have been created by new_static before ],
         "del_static": [ list of ids that have been added with "new_static" in a previous entry, but have been destroyed now ]
@@ -251,6 +252,8 @@ bool GameStateLogger::isStatic(P<SpaceObject> obj)
         return true;
     if (P<Mine>(obj))
         return true;
+    if (P<Planet>(obj))
+        return true;
     return false;
 }
 
@@ -272,10 +275,15 @@ void GameStateLogger::writeObjectEntry(JSONGenerator& json, P<SpaceObject> obj)
         if (station)
         {
             writeStationEntry(json, station);
-        }
+        }else{
+            P<Planet> planet = obj;
+            if (planet)
+            {
+                writePlanetEntry(json, planet);
+            }
+	}
     }
 }
-
 
 void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
 {
@@ -502,4 +510,9 @@ void GameStateLogger::writeStationEntry(JSONGenerator& json, P<SpaceStation> sta
             config.endArray();
         }
     }
+}
+
+void GameStateLogger::writePlanetEntry(JSONGenerator& json, P<Planet> planet)
+{
+    json.write("planet_radius", planet->getPlanetRadius());
 }
