@@ -77,6 +77,7 @@ protected:
      * Used for missiles, as they require some intelligence to fire.
      */
     float calculateFiringSolution(P<SpaceObject> target, int tube_index);
+    P<SpaceObject> findBestMissileRestockTarget(sf::Vector2f position, float radius);
 };
 
 #endif//AI_H

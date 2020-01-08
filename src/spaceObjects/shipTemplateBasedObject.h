@@ -45,6 +45,7 @@ public:
     virtual void update(float delta) override;
 
     virtual std::unordered_map<string, string> getGMInfo() override;
+    virtual bool canRestockMissiles() override { return restocks_missiles_docked; }
     virtual bool canBeTargetedBy(P<SpaceObject> other) override { return true; }
     virtual bool hasShield() override;
     virtual string getCallSign() override { return callsign; }

@@ -160,6 +160,20 @@ void CpuShip::orderRoamingAt(sf::Vector2f position)
     this->addBroadcast(FVF_Friendly, "Searching for hostiles around " + string(position.x) + "," + string(position.y) + ".");
 }
 
+void CpuShip::orderRetreat(P<SpaceObject> object)
+{
+    orders = AI_Retreat;
+    if (!object)
+    {
+        order_target = NULL;
+        this->addBroadcast(FVF_Friendly, "Searching for supplies.");
+    }else{
+        order_target = object;
+        this->addBroadcast(FVF_Friendly, "Docking to " + object->getCallSign() + ".");
+    }
+    order_target_location = sf::Vector2f();
+}
+
 void CpuShip::orderStandGround()
 {
     target_rotation = getRotation();
@@ -254,6 +268,7 @@ string CpuShip::getExportLine()
     {
     case AI_Idle: break;
     case AI_Roaming: ret += ":orderRoaming()"; break;
+    case AI_Retreat: ret += ":orderRetreat(?)"; break;
     case AI_StandGround: ret += ":orderStandGround()"; break;
     case AI_DefendLocation: ret += ":orderDefendLocation(" + string(order_target_location.x, 0) + ", " + string(order_target_location.y, 0) + ")"; break;
     case AI_DefendTarget: ret += ":orderDefendTarget(?)"; break;
@@ -272,6 +287,7 @@ string getAIOrderString(EAIOrder order)
     {
     case AI_Idle: return "Idle";
     case AI_Roaming: return "Roaming";
+    case AI_Retreat: return "Retreat";
     case AI_StandGround: return "Stand Ground";
     case AI_DefendLocation: return "Defend Location";
     case AI_DefendTarget: return "Defend Target";
