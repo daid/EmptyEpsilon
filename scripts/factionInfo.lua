@@ -61,3 +61,39 @@ It is known, however, that the strict Ktlitan hierarchy starts with their Queen 
 Hive:setEnemy(human)
 Hive:setEnemy(exuari)
 Hive:setEnemy(kraylor)
+
+TSN = FactionInfo():setName("TSN")
+TSN:setGMColor(255, 255, 128)
+TSN:setFriendly(human)
+TSN:setEnemy(kraylor)
+TSN:setEnemy(exuari)
+TSN:setEnemy(arlenians)
+TSN:setEnemy(Hive)
+TSN:setDescription([[The Terran Stellar Navy or TSN consists of naval forces based near Terra. Its members are primarily Human.
+
+These humans and other races have banded together to form a navy to protect and enforce common philosophies. They are friendly with the human navy but do not follow the same command structure. Military actions taken in the past have made them enemies of the Arlenians, but they've got a better relationship with the Ghosts than the Human Navy does.
+
+The TSN and USN are enemies because of the USN's neutral stance towards the Kraylor.]])
+
+USN = FactionInfo():setName("USN")
+USN:setGMColor(255, 128, 255)
+USN:setFriendly(human)
+USN:setEnemy(exuari)
+USN:setEnemy(GITM)
+USN:setEnemy(Hive)
+USN:setEnemy(TSN)
+USN:setDescription([[The United Stellar Navy or USN is a naval force near the boundary of Human and Kraylor space consisting of mostly Humans. The USN is friendly with the human navy and uses a similar command structure.
+
+The USN is primarily Human, but other races are also a part, notably, some Kraylors have been accepted into the USN. This acceptance has made the TSN and USN enemies.]])
+
+CUF = FactionInfo():setName("CUF")
+CUF:setGMColor(128, 255, 255)
+CUF:setFriendly(human)
+CUF:setEnemy(exuari)
+CUF:setEnemy(kraylor)
+CUF:setEnemy(GITM)
+CUF:setDescription([[The Celestial Unified Fleet or CUF is the farthest ranging primarily human fleet as well as the least xenophobic. The CUF goals center primarily on exploration and trade, but since it's a dangerous galaxy, they recognize the need for strong warships. 
+
+Friendly with the human navy, neutral to the TSN and USN. Not as structured as the other primarily Human navies.
+
+The CUF have neutral relations with the Ktlitans as well as the Arlenians. They are enemies with Exuari, Kraylor and Ghosts for political and historical reasons, not Xenophobia: some of their best friends are Exuari, Kraylor and Ghosts.]])
