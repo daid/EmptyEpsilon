@@ -56,6 +56,7 @@ CpuShip::CpuShip()
     setRotation(random(0, 360));
     target_rotation = getRotation();
 
+    restocks_missiles_docked = true;
     comms_script_name = "comms_ship.lua";
 
     missile_resupply = 0.0;
@@ -91,13 +92,13 @@ void CpuShip::update(float delta)
     }
     ai->run(delta);
 
-    //recharge missiles of CPU ships docked to station. uses the same trick as player ships. VERY hackish.
+    //recharge missiles of CPU ships docked to station. Can be disabled setting the restocks_missiles_docked flag to false.
     if (docking_state == DS_Docked)
     {
         P<ShipTemplateBasedObject> docked_with_template_based = docking_target;
         P<SpaceShip> docked_with_ship = docking_target;
 
-        if (docked_with_template_based && !docked_with_ship)
+        if (docked_with_template_based && docked_with_template_based->restocks_missiles_docked)
         {
             bool needs_missile = 0;
 
