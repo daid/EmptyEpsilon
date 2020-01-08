@@ -92,6 +92,7 @@ public:
     bool shares_energy_with_docked;
     bool repair_docked;
     bool restocks_scan_probes;
+    bool restocks_missiles_docked;
     bool can_scan = true;
     bool can_hack = true;
     bool can_dock = true;
@@ -137,6 +138,7 @@ public:
     void setSharesEnergyWithDocked(bool enabled);
     void setRepairDocked(bool enabled);
     void setRestocksScanProbes(bool enabled);
+    void setRestocksMissilesDocked(bool enabled);
     void setCanScan(bool enabled) { can_scan = enabled; }
     void setCanHack(bool enabled) { can_hack = enabled; }
     void setCanDock(bool enabled) { can_dock = enabled; }

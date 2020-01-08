@@ -63,6 +63,8 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSharesEnergyWithDocked);
     /// Set if this ship restocks scan probes on docked ships. Example: template:setRestocksScanProbes(false)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRestocksScanProbes);
+    /// Set if this ship restores missiles on docked cpuships. Example template:setRestocksMissilesDocked(false)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRestocksMissilesDocked);
     /// Set if this ship has a jump drive. Example: template:setJumpDrive(true)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDrive);
     /// Set this ship's minimum and maximum jump drive distances.
@@ -100,6 +102,7 @@ ShipTemplate::ShipTemplate()
     shares_energy_with_docked = true;
     repair_docked = false;
     restocks_scan_probes = false;
+    restocks_missiles_docked = false;
     energy_storage_amount = 1000;
     repair_crew_count = 3;
     weapon_tube_count = 0;
@@ -415,6 +418,11 @@ void ShipTemplate::setRestocksScanProbes(bool enabled)
     restocks_scan_probes = enabled;
 }
 
+void ShipTemplate::setRestocksMissilesDocked(bool enabled)
+{
+    restocks_missiles_docked = enabled;
+}
+
 void ShipTemplate::setJumpDrive(bool enabled)
 {
     has_jump_drive = enabled;
@@ -513,6 +521,7 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->shares_energy_with_docked = shares_energy_with_docked;
     result->repair_docked = repair_docked;
     result->restocks_scan_probes = restocks_scan_probes;
+    result->restocks_missiles_docked = restocks_missiles_docked;
     result->has_jump_drive = has_jump_drive;
     result->has_cloaking = has_cloaking;
     for(int n=0; n<MW_Count; n++)

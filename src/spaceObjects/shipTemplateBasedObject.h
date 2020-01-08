@@ -31,6 +31,7 @@ public:
     bool shares_energy_with_docked;       //[config]
     bool repair_docked;                   //[config]
     bool restocks_scan_probes;
+    bool restocks_missiles_docked;        //only restocks cpuships; playerships should use comms
 
     ScriptSimpleCallback on_destruction;
     ScriptSimpleCallback on_taking_damage;
@@ -98,6 +99,8 @@ public:
     void setRepairDocked(bool enabled) { repair_docked = enabled; }
     bool getRestocksScanProbes() { return restocks_scan_probes; }
     void setRestocksScanProbes(bool enabled) { restocks_scan_probes = enabled; }
+    bool getRestocksMissilesDocked() { return restocks_missiles_docked; }
+    void setRestocksMissilesDocked(bool enabled) { restocks_missiles_docked = enabled; }
 
     void onTakingDamage(ScriptSimpleCallback callback);
     void onDestruction(ScriptSimpleCallback callback);
