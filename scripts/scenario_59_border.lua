@@ -1,7 +1,7 @@
 -- Name: Borderline Fever
 -- Description: War temperature rises along the border between Human Navy space and Kraylor space. The treaty holds for now, but the diplomats and intelligence operatives fear the Kraylors are about to break the treaty. We must maintain the treaty despite provocation until war is formally declared.
 ---
---- Version 2 updated to take advantage of some recently released features such as coolant adjustments and friendlier custom info widgets
+--- Version 3 bug fixes etc
 -- Type: Replayable Mission
 -- Variation[Easy]: Easy goals and/or enemies
 -- Variation[Hard]: Hard goals and/or enemies
@@ -132,6 +132,7 @@ function init()
 	plotDGM = dynamicGameMasterButtons
 	plotPA = personalAmbush
 	plotCN = coolantNebulae
+	plotSS = spinalShip
 	enemyVesselDestroyedNameList = {}
 	enemyVesselDestroyedType = {}
 	enemyVesselDestroyedValue = {}
@@ -147,11 +148,7 @@ function init()
 	primaryOrders = ""
 	secondaryOrders = ""
 	optionalOrders = ""
-	addGMFunction("Narsil",createPlayerShipNarsil)
-	addGMFunction("Headhunter",createPlayerShipHeadhunter)
-	addGMFunction("Blazon",createPlayerShipBlazon)
-	addGMFunction("Sting",createPlayerShipSting)
-	addGMFunction("Spyder",createPlayerShipSpyder)
+	mainGMButtons()
 end
 function setVariations()
 	if string.find(getScenarioVariation(),"Easy") then
@@ -187,6 +184,127 @@ function setVariations()
 		gameTimeLimit = 0
 		playWithTimeLimit = false
 	end
+end
+function mainGMButtons()
+	clearGMFunctions()
+	addGMFunction("Narsil",createPlayerShipNarsil)
+	addGMFunction("Headhunter",createPlayerShipHeadhunter)
+	addGMFunction("Blazon",createPlayerShipBlazon)
+	addGMFunction("Sting",createPlayerShipSting)
+	addGMFunction("Spyder",createPlayerShipSpyder)
+	addGMFunction("Spinstar",createPlayerShipSpinstar)
+	addGMFunction("Set Time Limit",setGameTimeLimit)
+	GMBelligerentKraylors = nil
+	GMLimitedWar = nil
+	GMFullWar = nil
+end
+function setGameTimeLimit()
+	clearGMFunctions()
+	addGMFunction("Back from time limit",mainGMButtons)
+	addGMFunction("15 minutes", function()
+		gameTimeLimit = 15*60
+		plot2 = timedGame
+		playWithTimeLimit = true
+		addGMMessage("Game time limit set to 15 minutes")
+	end)
+	addGMFunction("20 minutes", function()
+		gameTimeLimit = 20*60
+		plot2 = timedGame
+		playWithTimeLimit = true
+		addGMMessage("Game time limit set to 20 minutes")
+	end)
+	addGMFunction("25 minutes", function()
+		gameTimeLimit = 25*60
+		plot2 = timedGame
+		playWithTimeLimit = true
+		addGMMessage("Game time limit set to 25 minutes")
+	end)
+	addGMFunction("30 minutes", function()
+		gameTimeLimit = 30*60
+		plot2 = timedGame
+		playWithTimeLimit = true
+		addGMMessage("Game time limit set to 30 minutes")
+	end)
+	addGMFunction("40 minutes", function()
+		gameTimeLimit = 40*60
+		plot2 = timedGame
+		playWithTimeLimit = true
+		addGMMessage("Game time limit set to 40 minutes")
+	end)
+	addGMFunction("45 minutes", function()
+		gameTimeLimit = 45*60
+		plot2 = timedGame
+		playWithTimeLimit = true
+		addGMMessage("Game time limit set to 45 minutes")
+	end)
+	addGMFunction("50 minutes", function()
+		gameTimeLimit = 50*60
+		plot2 = timedGame
+		playWithTimeLimit = true
+		addGMMessage("Game time limit set to 50 minutes")
+	end)
+	addGMFunction("55 minutes", function()
+		gameTimeLimit = 55*60
+		plot2 = timedGame
+		playWithTimeLimit = true
+		addGMMessage("Game time limit set to 55 minutes")
+	end)
+end
+--[[-----------------------------------------------------------------
+    Dynamic game master buttons
+-----------------------------------------------------------------]]--
+function dynamicGameMasterButtons(delta)
+	if treaty then
+		if treatyTimer ~= nil and treatyTimer > 0 then
+			if GMBelligerentKraylors == nil then
+				GMBelligerentKraylors = "belligerent"
+				addGMFunction(GMBelligerentKraylors,belligerentKraylors)
+			end
+		else
+			if treatyStressTimer ~= nil and treatyStressTimer > 0 then
+				if GMLimitedWar == nil then
+					GMLimitedWar = "Limited War"
+					addGMFunction(GMLimitedWar,limitedWarByGM)
+				end
+			end
+		end
+	else
+		if GMBelligerentKraylors ~= nil then
+			removeGMFunction(GMBelligerentKraylors)
+		end
+		GMBelligerentKraylors = nil
+		if GMLimitedWar ~= nil then
+			removeGMFunction(GMLimitedWar)
+		end
+		GMLimitedWar = nil
+		if limitedWarTimer ~= nil and limitedWarTimer > 0 then
+			if GMFullWar == nil then
+				GMFullWar = "Full War"
+				addGMFunction(GMFullWar,fullWarByGM)
+			end
+		end
+	end
+end
+function belligerentKraylors()
+	treatyTimer = 0
+	if GMBelligerentKraylors ~= nil then
+		removeGMFunction(GMBelligerentKraylors)
+	end
+	GMBelligerentKraylors = nil
+end
+function limitedWarByGM()
+	treatyStressTimer = 0
+	if GMLimitedWar ~= nil then
+		removeGMFunction(GMLimitedWar)
+	end
+	GMLimitedWar = nil
+end
+function fullWarByGM()
+	limitedWarTimer = 0
+	if GMFullWar ~= nil then
+		removeGMFunction(GMFullWar)
+	end
+	GMFullWar = nil
 end
 --      New player ship types via GM button
 function createPlayerShipNarsil()
@@ -325,7 +443,111 @@ function createPlayerShipSpyder()
 	playerSpyder:addReputationPoints(50)
 	removeGMFunction("Spyder")
 end
-
+function createPlayerShipSpinstar()
+	playerSpinStar = PlayerSpaceship():setTemplate("Atlantis"):setFaction("Human Navy"):setCallSign("Spinstar")
+	playerSpinStar:setTypeName("Proto-Atlantis")
+	playerSpinStar.spine_request = false
+	playerSpinStar.spine_charge = true
+	playerSpinStar:setRepairCrewCount(4)				--more repair crew (vs 3)
+	playerSpinStar:setImpulseMaxSpeed(70)				--slower impulse max (vs 90)
+	playerSpinStar:setRotationMaxSpeed(14)				--faster spin (vs 10)
+	playerSpinStar:setJumpDrive(false)					--no Jump
+	playerSpinStar:setWarpDrive(true)					--add warp
+	playerSpinStar:setHullMax(200)						--weaker hull (vs 250)
+	playerSpinStar:setHull(200)							
+	playerSpinStar:setShieldsMax(150,150)				--weaker shields (vs 200)
+	playerSpinStar:setShields(150,150)
+	playerSpinStar:setWeaponTubeCount(3)				--fewer tubes
+	playerSpinStar:setWeaponTubeDirection(0,-90)		--one left
+	playerSpinStar:weaponTubeDisallowMissle(0,"Mine")	--no broadside mine
+	playerSpinStar:setWeaponTubeDirection(1,90)			--one right
+	playerSpinStar:weaponTubeDisallowMissle(1,"Mine")	--no broadside mine
+	playerSpinStar:setWeaponTubeDirection(2,180)		--one back
+	playerSpinStar:setWeaponTubeExclusiveFor(2,"Mine")	--Mine only
+	playerSpinStar:addReputationPoints(50)
+	removeGMFunction("Spinstar")
+end
+function spinalAddBeamNow()
+	playerSpinStar.spine_request = true
+	playerSpinStar:setBeamWeapon(4, 5, 0, 2500.0, 0.1, 8)
+end
+function spinalShip(delta)
+	local spine_status_info = "Spine"
+	if playerSpinStar ~= nil and playerSpinStar:isValid() then
+		if playerSpinStar.spine_request then	--the button has been clicked
+			if playerSpinStar.spinal_countdown == nil then	
+				playerSpinStar.spinal_countdown = delta + 5	--set firing time limit
+			end
+			if playerSpinStar.spine_button ~= nil then	--remove button while firing
+				playerSpinStar:removeCustom(playerSpinStar.spine_button)
+				playerSpinStar.spine_button = nil
+			end
+			if playerSpinStar.spine_button_tactical ~= nil then
+				playerSpinStar:removeCustom(playerSpinStar.spine_button_tactical)
+				playerSpinStar.spine_button_tactical = nil
+			end
+			playerSpinStar.spinal_countdown = playerSpinStar.spinal_countdown - delta
+			if playerSpinStar.spinal_countdown < 0 then	--firing time limit expired
+				playerSpinStar:setBeamWeapon(4, 5, 0, 0.0, 0.1, 8)
+				playerSpinStar.spine_request = false
+				playerSpinStar.spine_charge = false
+				playerSpinStar.spinal_countdown = nil
+			else	--show firing time limit on weapons or tactical consoles
+				spine_status_info = string.format("%s: %i",spine_status_info,math.ceil(playerSpinStar.spinal_countdown))
+				if playerSpinStar:hasPlayerAtPosition("Weapons") then
+					playerSpinStar.spine_status_info = "spine_status_info"
+					playerSpinStar:addCustomInfo("Weapons",playerSpinStar.spine_status_info,spine_status_info)
+				end
+				if playerSpinStar:hasPlayerAtPosition("Tactical") then
+					playerSpinStar.spine_status_info_tactical = "spine_status_info_tactical"
+					playerSpinStar:addCustomInfo("Weapons",playerSpinStar.spine_status_info_tactical,spine_status_info)
+				end
+			end
+		else	--the button has not been clicked
+			if playerSpinStar.spine_charge then	--weapon is charged up
+				if playerSpinStar.spine_status_info ~= nil then	--remove charge status
+					playerSpinStar:removeCustom(playerSpinStar.spine_status_info)
+					playerSpinStar.spine_status_info = nil
+				end
+				if playerSpinStar.spine_status_info_tactical ~= nil then
+					playerSpinStar:removeCustom(playerSpinStar.spine_status_info_tactical)
+					playerSpinStar.spine_status_info_tactical = nil
+				end
+				if playerSpinStar.spine_button == nil then	--add fire button to weapons and/or tactical consoles
+					if playerSpinStar:hasPlayerAtPosition("Weapons") then
+						playerSpinStar.spine_button = "spine_button"
+						playerSpinStar:addCustomButton("Weapons",playerSpinStar.spine_button,"Spinal Beam", spinalAddBeamNow)
+					end
+				end
+				if playerSpinStar.spine_button_tactical == nil then
+					if playerSpinStar:hasPlayerAtPosition("Tactical") then
+						playerSpinStar.spine_button_tactical = "spine_button_tactical"
+						playerSpinStar:addCustomButton("Tactical",playerSpinStar.spine_button_tactical,"Spinal Beam", spinalAddBeamNow)
+					end
+				end
+			else	--weapon is not charged
+				if playerSpinStar.charge_countdown == nil then	
+					playerSpinStar.charge_countdown = delta + 30	--set charge time
+				end
+				playerSpinStar.charge_countdown = playerSpinStar.charge_countdown - delta
+				if playerSpinStar.charge_countdown < 0 then	--charge time completed
+					playerSpinStar.spine_charge = true
+					playerSpinStar.charge_countdown = nil
+				else	--show charge time on weapons or tactical consoles
+					spine_status_info = string.format("%s Charging: %i",spine_status_info,math.ceil(playerSpinStar.charge_countdown))
+					if playerSpinStar:hasPlayerAtPosition("Weapons") then
+						playerSpinStar.spine_status_info = "spine_status_info"
+						playerSpinStar:addCustomInfo("Weapons",playerSpinStar.spine_status_info,spine_status_info)
+					end
+					if playerSpinStar:hasPlayerAtPosition("Tactical") then
+						playerSpinStar.spine_status_info_tactical = "spine_status_info_tactical"
+						playerSpinStar:addCustomInfo("Weapons",playerSpinStar.spine_status_info_tactical,spine_status_info)
+					end
+				end	--countdown handling
+			end	--spine weapon charge handling
+		end	--spine button handling
+	end	--valid player ship handling
+end
 function setConstants()
 	missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 	--Ship Template Name List
@@ -356,6 +578,7 @@ function setConstants()
 							["Nautilus"] =				12,
 							["Hathcock"] =				30,
 							["Maverick"] =				45,
+							["Crucible"] =				45,
 							["Proto-Atlantis"] =		40,
 							["Surkov"] =				35,
 							["Stricken"] =				40,
@@ -379,6 +602,7 @@ function setConstants()
 							["Nautilus"] =				7,
 							["Hathcock"] =				6,
 							["Maverick"] =				5,
+							["Crucible"] =				5,
 							["Proto-Atlantis"] =		4,
 							["Surkov"] =				6,
 							["Stricken"] =				4,
@@ -402,6 +626,8 @@ function setConstants()
 	playerShipNamesForNautilus = {"October", "Abdiel", "Manxman", "Newcon", "Nusret", "Pluton", "Amiral", "Amur", "Heinkel", "Dornier"}
 	playerShipNamesForHathcock = {"Hayha", "Waldron", "Plunkett", "Mawhinney", "Furlong", "Zaytsev", "Pavlichenko", "Pegahmagabow", "Fett", "Hawkeye", "Hanzo"}
 	playerShipNamesForProtoAtlantis = {"Narsil", "Blade", "Decapitator", "Trisect", "Sabre"}
+	playerShipNamesForMaverick = {"Angel", "Thunderbird", "Roaster", "Magnifier", "Hedge"}
+	playerShipNamesForCrucible = {"Sling", "Stark", "Torrid", "Kicker", "Flummox"}
 	playerShipNamesForSurkov = {"Sting", "Sneak", "Bingo", "Thrill", "Vivisect"}
 	playerShipNamesForStricken = {"Blazon", "Streaker", "Pinto", "Spear", "Javelin"}
 	playerShipNamesForAtlantisII = {"Spyder", "Shelob", "Tarantula", "Aragog", "Charlotte"}
@@ -2432,7 +2658,7 @@ function placeHayden()
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
         general_information = "We study the cosmos and map stellar phenomena. We also track moving asteroids. Look out! Just kidding",
-    	history = "Statin named in honor of Charles Hayden whose philanthropy continued astrophysical research and education on Earth in the early 20th century"
+    	history = "Station named in honor of Charles Hayden whose philanthropy continued astrophysical research and education on Earth in the early 20th century"
 	}
 	if stationFaction == "Human Navy" then
 		stationHayden.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2755,7 +2981,7 @@ function placeMaiman()
 		buy =	{	[randomMineral()] = math.random(40,200)	},
         public_relations = true,
         general_information = "We research and manufacture energy beam components and systems",
-    	history = "The station is named after Theodore Maiman who researched and built the first laser in the mid 20th centuryon Earth"
+    	history = "The station is named after Theodore Maiman who researched and built the first laser in the mid 20th century on Earth"
 	}
 	if stationFaction == "Human Navy" then
 		stationMaiman.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -3517,10 +3743,7 @@ function placeKrik()
         reputation_cost_multipliers = {friend = 1.0, neutral = 3.0},
         max_weapon_refill_amount = {friend = 1.0, neutral = 0.5 },
         goods = {	nickel =	{quantity = 5,	cost = 20} },
-        trade = {	food = true, medicine = true, luxury = random(1,100) < 50 },
-        public_relations = true,
-        general_information = "The finest shield and armor manufacturer in the quadrant",
-    	history = "We named this station for the pioneering spirit of the 22nd century Starfleet explorer, Captain Jonathan Archer"
+        trade = {	food = true, medicine = true, luxury = random(1,100) < 50 }
 	}
 	local posAxisKrik = random(0,360)
 	local posKrik = random(30000,80000)
@@ -3834,10 +4057,7 @@ function placeScience4()
         reputation_cost_multipliers = {friend = 1.0, neutral = 3.0},
         max_weapon_refill_amount = {friend = 1.0, neutral = 0.5 },
         goods = {},
-        trade = {	food = false, medicine = false, luxury = false },
-        public_relations = true,
-        general_information = "The finest shield and armor manufacturer in the quadrant",
-    	history = "We named this station for the pioneering spirit of the 22nd century Starfleet explorer, Captain Jonathan Archer"
+        trade = {	food = false, medicine = false, luxury = false }
 	}
 	local stationGoodChoice = math.random(1,3)
 	if stationGoodChoice == 1 then
@@ -3932,8 +4152,8 @@ function placeTandon()
         goods = {},
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "The finest shield and armor manufacturer in the quadrant",
-    	history = "We named this station for the pioneering spirit of the 22nd century Starfleet explorer, Captain Jonathan Archer"
+        general_information = "Merging the organic and inorganic through research",
+    	history = "Continued from the Tandon school of engineering started on Earth in the early 21st century"
 	}
 	local stationGoodChoice = math.random(1,3)
 	if stationGoodChoice == 1 then
@@ -4917,7 +5137,7 @@ function increaseSpin()
 				end
 			else
 				comms_source.increaseSpinUpgrade = "done"
-				comms_source:setRotationMaxSpeed(player:getRotationMaxSpeed()*1.5)
+				comms_source:setRotationMaxSpeed(comms_source:getRotationMaxSpeed()*1.5)
 				setCommsMessage(string.format("%s: I increased the speed your ship spins by 50%%. Normally, I'd require %s, but seeing as you're going out to take on the Kraylors, we worked it out",ctd.character,ctd.characterGood))
 			end
 		end)
@@ -5600,14 +5820,14 @@ function handleDockedState()
 			end
 			goodsReport = goodsReport .. string.format("Current cargo aboard %s:\n",comms_source:getCallSign())
 			local cargoHoldEmpty = true
-			local goodCount = 0
+			local player_good_count = 0
 			if comms_source.goods ~= nil then
 				for good, goodQuantity in pairs(comms_source.goods) do
-					goodCount = goodCount + 1
+					player_good_count = player_good_count + 1
 					goodsReport = goodsReport .. string.format("     %s: %i\n",good,goodQuantity)
 				end
 			end
-			if goodCount < 1 then
+			if player_good_count < 1 then
 				goodsReport = goodsReport .. "     Empty\n"
 			end
 			goodsReport = goodsReport .. string.format("Available Space: %i, Available Reputation: %i\n",comms_source.cargo,math.floor(comms_source:getReputationPoints()))
@@ -5727,6 +5947,28 @@ function handleDockedState()
 			end
 			addCommsReply("Back", commsStation)
 		end)
+		local player_good_count = 0
+		if comms_source.goods ~= nil then
+			for good, goodQuantity in pairs(comms_source.goods) do
+				player_good_count = player_good_count + 1
+			end
+		end
+		if player_good_count > 0 then
+			addCommsReply("Jettison cargo", function()
+				setCommsMessage(string.format("Available space: %i\nWhat would you like to jettison?",comms_source.cargo))
+				for good, good_quantity in pairs(comms_source.goods) do
+					if good_quantity > 0 then
+						addCommsReply(good, function()
+							comms_source.goods[good] = comms_source.goods[good] - 1
+							comms_source.cargo = comms_source.cargo + 1
+							setCommsMessage(string.format("One %s jettisoned",good))
+							addCommsReply("Back", commsStation)
+						end)
+					end
+				end
+				addCommsReply("Back", commsStation)
+			end)
+		end
 		addCommsReply("No tutorial covered goods or cargo. Explain", function()
 			setCommsMessage("Different types of cargo or goods may be obtained from stations, freighters or other sources. They go by one word descriptions such as dilithium, optic, warp, etc. Certain mission goals may require a particular type or types of cargo. Each player ship differs in cargo carrying capacity. Goods may be obtained by spending reputation points or by trading other types of cargo (typically food, medicine or luxury)")
 			addCommsReply("Back", commsStation)
@@ -5896,7 +6138,7 @@ function handleUndockedState()
 						if distance(comms_target,station) > 75000 then
 							brainCheckChance = 20
 						end
-						for good, goodData in pairs(ctd.goods) do
+						for good, goodData in pairs(station.comms_data.goods) do
 							if random(1,100) <= brainCheckChance then
 								local stationCallSign = station:getCallSign()
 								local stationSector = station:getSectorName()
@@ -6187,14 +6429,12 @@ function friendlyComms(comms_data)
 				msg = msg .. "Shield " .. n .. ": " .. math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100) .. "%\n"
 			end
 		end
-
 		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 		for i, missile_type in ipairs(missile_types) do
 			if comms_target:getWeaponStorageMax(missile_type) > 0 then
 					msg = msg .. missile_type .. " Missiles: " .. math.floor(comms_target:getWeaponStorage(missile_type)) .. "/" .. math.floor(comms_target:getWeaponStorageMax(missile_type)) .. "\n"
 			end
 		end
-		
 		setCommsMessage(msg);
 		addCommsReply("Back", commsShip)
 	end)
@@ -6271,12 +6511,36 @@ function friendlyComms(comms_data)
 					setCommsMessage("Which waypoint should we defend?");
 					for n=1,comms_source:getWaypointCount() do
 						addCommsReply("Defend WP" .. n, function()
-							for _, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
-								if fleetShip ~= nil and fleetShip:isValid() then
-									fleetShip:orderDefendLocation(comms_source:getWaypoint(n))
+							if treaty then
+								local tempAsteroid = VisualAsteroid():setPosition(comms_source:getWaypoint(n))
+								local waypointInBorderZone = false
+								for i=1,#borderZone do
+									if borderZone[i]:isInside(tempAsteroid) then
+										waypointInBorderZone = true
+										break
+									end
 								end
+								if waypointInBorderZone then
+									setCommsMessage("We cannot break the treaty by defending WP" .. n .. " in the neutral border zone")
+								elseif outerZone:isInside(tempAsteroid) then
+									setCommsMessage("We cannot break the treaty by defending WP" .. n .. " across the neutral border zones")							
+								else
+									for _, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
+										if fleetShip ~= nil and fleetShip:isValid() then
+											fleetShip:orderDefendLocation(comms_source:getWaypoint(n))
+										end
+									end
+									setCommsMessage("We are heading to assist at WP" .. n ..".");
+								end
+								tempAsteroid:destroy()
+							else
+								for _, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
+									if fleetShip ~= nil and fleetShip:isValid() then
+										fleetShip:orderDefendLocation(comms_source:getWaypoint(n))
+									end
+								end
+								setCommsMessage("We are heading to assist at WP" .. n ..".");
 							end
-							setCommsMessage("We are heading to assist at WP" .. n ..".");
 							addCommsReply("Back", commsShip)
 						end)
 					end
@@ -6302,6 +6566,28 @@ function friendlyComms(comms_data)
 		if shipCommsDiagnostic then print("it's a freighter") end
 		if distance(comms_source, comms_target) < 5000 then
 			if shipCommsDiagnostic then print("close enough to trade or sell") end
+			local goodCount = 0
+			if comms_source.goods ~= nil then
+				for good, goodQuantity in pairs(comms_source.goods) do
+					goodCount = goodCount + 1
+				end
+			end
+			if goodCount > 0 then
+				addCommsReply("Jettison cargo", function()
+					setCommsMessage(string.format("Available space: %i\nWhat would you like to jettison?",comms_source.cargo))
+					for good, good_quantity in pairs(comms_source.goods) do
+						if good_quantity > 0 then
+							addCommsReply(good, function()
+								comms_source.goods[good] = comms_source.goods[good] - 1
+								comms_source.cargo = comms_source.cargo + 1
+								setCommsMessage(string.format("One %s jettisoned",good))
+								addCommsReply("Back", commsShip)
+							end)
+						end
+					end
+					addCommsReply("Back", commsShip)
+				end)
+			end
 			if comms_data.friendlyness > 66 then
 				if shipCommsDiagnostic then print("friendliest branch") end
 				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
@@ -6541,6 +6827,28 @@ function neutralComms(comms_data)
 			setCommsMessage(cargoMsg)
 		end)
 		if distance(comms_source,comms_target) < 5000 then
+			local goodCount = 0
+			if comms_source.goods ~= nil then
+				for good, goodQuantity in pairs(comms_source.goods) do
+					goodCount = goodCount + 1
+				end
+			end
+			if goodCount > 0 then
+				addCommsReply("Jettison cargo", function()
+					setCommsMessage(string.format("Available space: %i\nWhat would you like to jettison?",comms_source.cargo))
+					for good, good_quantity in pairs(comms_source.goods) do
+						if good_quantity > 0 then
+							addCommsReply(good, function()
+								comms_source.goods[good] = comms_source.goods[good] - 1
+								comms_source.cargo = comms_source.cargo + 1
+								setCommsMessage(string.format("One %s jettisoned",good))
+								addCommsReply("Back", commsShip)
+							end)
+						end
+					end
+					addCommsReply("Back", commsShip)
+				end)
+			end
 			if comms_source.cargo > 0 then
 				if comms_data.friendlyness > 66 then
 					if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
@@ -6999,6 +7307,22 @@ function setPlayers()
 					end
 					pobj.shipScore = 40
 					pobj.maxCargo = 4
+				elseif tempPlayerType == "Maverick" then
+					if #playerShipNamesForMaverick > 0 then
+						ni = math.random(1,#playerShipNamesForMaverick)
+						pobj:setCallSign(playerShipNamesForMaverick[ni])
+						table.remove(playerShipNamesForMaverick,ni)
+					end
+					pobj.shipScore = 45
+					pobj.maxCargo = 5
+				elseif tempPlayerType == "Crucible" then
+					if #playerShipNamesForCrucible > 0 then
+						ni = math.random(1,#playerShipNamesForCrucible)
+						pobj:setCallSign(playerShipNamesForCrucible[ni])
+						table.remove(playerShipNamesForCrucible,ni)
+					end
+					pobj.shipScore = 45
+					pobj.maxCargo = 5
 				elseif tempPlayerType == "Atlantis II" then
 					if #playerShipNamesForAtlantisII > 0 then
 						ni = math.random(1,#playerShipNamesForAtlantisII)
@@ -7152,7 +7476,7 @@ function healthCheck(delta)
 						crewFate(p,fatalityChance)
 					end
 				else	--no repair crew left
-					if random(1,100) <= (4 - dificulty) then
+					if random(1,100) <= (4 - difficulty) then
 						p:setRepairCrewCount(1)
 						if p:hasPlayerAtPosition("Engineering") then
 							local repairCrewRecovery = "repairCrewRecovery"
@@ -7168,6 +7492,25 @@ function healthCheck(delta)
 			end
 		end
 		healthCheckTimer = delta + healthCheckTimerInterval
+		local friendlySurvivedCount, friendlySurvivedValue, fpct1, fpct2, enemySurvivedCount, enemySurvivedValue, epct1, epct2, neutralSurvivedCount, neutralSurvivedValue, npct1, npct2, friendlyShipSurvivedValue, fpct, enemyShipSurvivedValue, epct = listStatuses()
+		if friendlySurvivedCount ~= nil then
+			local evalFriendly = fpct2*friendlyStationComponentWeight + npct2*neutralStationComponentWeight + fpct*friendlyShipComponentWeight
+			local evalEnemy = epct2*enemyStationComponentWeight + epct*enemyShipComponentWeight
+			local eval_status = string.format("F:%.1f%% E:%.1f%% D:%.1f%%",evalFriendly,evalEnemy,evalFriendly-evalEnemy)
+			for pidx=1,8 do
+				local p = getPlayerShip(pidx)
+				if p ~= nil and p:isValid() then
+					if p:hasPlayerAtPosition("Relay") then
+						p.eval_status = "eval_status"
+						p:addCustomInfo("Relay",p.eval_status,eval_status)
+					end
+					if p:hasPlayerAtPosition("Operations") then
+						p.eval_status_operations = "eval_status_operations"
+						p:addCustomInfo("Operations",p.eval_status_operations,eval_status)
+					end
+				end
+			end
+		end
 	end
 end
 function crewFate(p, fatalityChance)
@@ -8975,7 +9318,8 @@ end
 -----------------------------------------------------------------]]--
 function muckAndFlies(delta)
 	if muckFlyCounter == nil then
-		muckFlyCounter = difficulty*2 + 2
+		local upper_counter = difficulty*2 + 2
+		muckFlyCounter = math.random(1,upper_counter)
 	end
 	if muckFlyTimer == nil then
 --		muckFlyTimer = 10
@@ -9105,62 +9449,6 @@ function armoredWarpJammer(self, instigator)
 	end
 end
 --[[-----------------------------------------------------------------
-    Dynamic game master buttons
------------------------------------------------------------------]]--
-function dynamicGameMasterButtons(delta)
-	if treaty then
-		if treatyTimer ~= nil and treatyTimer > 0 then
-			if GMBelligerentKraylors == nil then
-				GMBelligerentKraylors = "belligerent"
-				addGMFunction(GMBelligerentKraylors,belligerentKraylors)
-			end
-		else
-			if treatyStressTimer ~= nil and treatyStressTimer > 0 then
-				if GMLimitedWar == nil then
-					GMLimitedWar = "Limited War"
-					addGMFunction(GMLimitedWar,limitedWarByGM)
-				end
-			end
-		end
-	else
-		if GMBelligerentKraylors ~= nil then
-			removeGMFunction(GMBelligerentKraylors)
-		end
-		GMBelligerentKraylors = nil
-		if GMLimitedWar ~= nil then
-			removeGMFunction(GMLimitedWar)
-		end
-		GMLimitedWar = nil
-		if limitedWarTimer ~= nil and limitedWarTimer > 0 then
-			if GMFullWar == nil then
-				GMFullWar = "Full War"
-				addGMFunction(GMFullWar,fullWarByGM)
-			end
-		end
-	end
-end
-function belligerentKraylors()
-	treatyTimer = 0
-	if GMBelligerentKraylors ~= nil then
-		removeGMFunction(GMBelligerentKraylors)
-	end
-	GMBelligerentKraylors = nil
-end
-function limitedWarByGM()
-	treatyStressTimer = 0
-	if GMLimitedWar ~= nil then
-		removeGMFunction(GMLimitedWar)
-	end
-	GMLimitedWar = nil
-end
-function fullWarByGM()
-	limitedWarTimer = 0
-	if GMFullWar ~= nil then
-		removeGMFunction(GMFullWar)
-	end
-	GMFullWar = nil
-end
---[[-----------------------------------------------------------------
     Plot end of war checks and functions
 -----------------------------------------------------------------]]--
 function endWar(delta)
@@ -9174,26 +9462,26 @@ function endWar(delta)
 		local evalEnemy = epct2*enemyStationComponentWeight + epct*enemyShipComponentWeight
 		if evalEnemy < enemyDestructionVictoryCondition then
 			missionVictory = true
-			missionCompleteReason = string.format("Enemy reduced to less than %i%% strength",enemyDestructionVictoryCondition)
+			missionCompleteReason = string.format("Enemy reduced to less than %i%% strength",math.floor(enemyDestructionVictoryCondition))
 			endStatistics()
 			victory("Human Navy")
 		end
 		local evalFriendly = fpct2*friendlyStationComponentWeight + npct2*neutralStationComponentWeight + fpct*friendlyShipComponentWeight
 		if evalFriendly < friendlyDestructionDefeatCondition then
 			missionVictory = false
-			missionCompleteReason = string.format("Human Navy reduced to less than %i%% strength",friendlyDestructionDefeatCondition)
+			missionCompleteReason = string.format("Human Navy reduced to less than %i%% strength",math.floor(friendlyDestructionDefeatCondition))
 			endStatistics()
 			victory("Kraylor")
 		end
 		if evalEnemy - evalFriendly > destructionDifferenceEndCondition then
 			missionVictory = false
-			missionCompleteReason = string.format("Enemy strength exceeded ours by %i percentage points",destructionDifferenceEndCondition)
+			missionCompleteReason = string.format("Enemy strength exceeded ours by %i percentage points",math.floor(destructionDifferenceEndCondition))
 			endStatistics()
 			victory("Kraylor")
 		end
 		if evalFriendly - evalEnemy > destructionDifferenceEndCondition then
 			missionVictory = true
-			missionCompleteReason = string.format("Our strength exceeded enemy strength by %i percentage points",destructionDifferenceEndCondition)
+			missionCompleteReason = string.format("Our strength exceeded enemy strength by %i percentage points",math.floor(destructionDifferenceEndCondition))
 			endStatistics()
 			victory("Human Navy")
 		end
@@ -9651,5 +9939,8 @@ function update(delta)
 	end
 	if plotCN ~= nil then	--coolant via nebula
 		plotCN(delta)
+	end
+	if plotSS ~= nil then	--spinal ship
+		plotSS(delta)
 	end
 end
