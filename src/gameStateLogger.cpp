@@ -515,4 +515,5 @@ void GameStateLogger::writeStationEntry(JSONGenerator& json, P<SpaceStation> sta
 void GameStateLogger::writePlanetEntry(JSONGenerator& json, P<Planet> planet)
 {
     json.write("planet_radius", planet->getPlanetRadius());
+    json.write("collision_size", planet->getCollisionSize());
 }
