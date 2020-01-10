@@ -255,6 +255,7 @@ function init()
 	playerShipNamesForNautilus = {"October", "Abdiel", "Manxman", "Newcon", "Nusret", "Pluton", "Amiral", "Amur", "Heinkel", "Dornier"}
 	playerShipNamesForHathcock = {"Hayha", "Waldron", "Plunkett", "Mawhinney", "Furlong", "Zaytsev", "Pavlichenko", "Pegahmagabow", "Fett", "Hawkeye", "Hanzo"}
 	playerShipNamesForMaverick = {"Festoon", "Earp", "Schwartz", "Tentacular", "Prickly", "Thunderbird", "Hickok", "Clifton", "Fett", "Holliday", "Sundance"}
+	playerShipNamesForCrucible = {"Sling", "Stark", "Torrid", "Kicker", "Flummox"}
 	playerShipNamesForLeftovers = {"Foregone","Righteous","Masher"}
 	highestConcurrentPlayerCount = 0
 	setConcurrentPlayerCount = 0
@@ -6214,8 +6215,16 @@ function helpfulWarning(delta)
 				if p ~= nil then
 					for _, obj in ipairs(stationList[i]:getObjectsInRange(30000)) do
 						if obj:isEnemy(p) then
-							tempObjType = obj:getTypeName()
-							if not string.find(tempObjType,"Station") then
+							local detected_enemy_ship = false
+							local obj_type_name = obj.typeName
+							if obj_type_name ~= nil then
+								if string.find(obj_type_name,"CpuShip") then
+									detected_enemy_ship = true
+								end
+							end
+							--tempObjType = obj:getTypeName()
+							--if not string.find(tempObjType,"Station") then
+							if detected_enemy_ship then
 								wMsg = string.format("[%s] Our sensors detect enemies nearby",stationList[i]:getCallSign())
 								if diagnostic or difficulty < 1 then
 									wMsg = wMsg .. string.format(" - Type: %s",obj:getTypeName())
@@ -6723,6 +6732,14 @@ function setPlayers()
 						ni = math.random(1,#playerShipNamesForMaverick)
 						pobj:setCallSign(playerShipNamesForMaverick[ni])
 						table.remove(playerShipNamesForMaverick,ni)
+					end
+					pobj.shipScore = 45
+					pobj.maxCargo = 5
+				elseif tempPlayerType == "Crucible" then
+					if #playerShipNamesForCrucible > 0 then
+						ni = math.random(1,#playerShipNamesForCrucible)
+						pobj:setCallSign(playerShipNamesForCrucible[ni])
+						table.remove(playerShipNamesForCrucible,ni)
 					end
 					pobj.shipScore = 45
 					pobj.maxCargo = 5
