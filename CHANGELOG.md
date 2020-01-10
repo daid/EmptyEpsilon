@@ -5,12 +5,13 @@
 ### Added
 
 - `SpaceShip:setScanState()` and `setScanStateByFaction()` scripting functions.
-- `Planet:getPlanetRadius()` scripting function.
+- `Planet:getPlanetRadius()` and `Planet:getCollisionSize()` scripting functions.
 - Log planet radius to the game state log and render it in the viewer.
 
 ### Changed
 
 - _Shoreline_ scenario refactored to fix errors.
+- Add planet radius to GM screen scripting exports.
 
 ### Fixed
 
