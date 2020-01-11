@@ -12,10 +12,11 @@
 ServerBrowserMenu::ServerBrowserMenu(SearchSource source)
 {
     scanner = new ServerScanner(VERSION_NUMBER);
+
     if (source == Local)
         scanner->scanLocalNetwork();
     else
-        scanner->scanMasterServer("http://daid.eu/ee/list.php");
+        scanner->scanMasterServer(PreferencesManager::get("registry_list_url", "http://daid.eu/ee/list.php"));
 
     new GuiOverlay(this, "", colorConfig.background);
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
@@ -29,7 +30,7 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source)
         if (index == 0)
             scanner->scanLocalNetwork();
         else
-            scanner->scanMasterServer("http://daid.eu/ee/list.php");
+            scanner->scanMasterServer(PreferencesManager::get("registry_list_url", "http://daid.eu/ee/list.php"));
     });
     lan_internet_selector->setOptions({"LAN", "Internet"})->setSelectionIndex(source == Local ? 0 : 1)->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
 

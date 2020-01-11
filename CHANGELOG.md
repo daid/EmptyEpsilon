@@ -12,6 +12,8 @@
 
 - _Shoreline_ scenario refactored to fix errors.
 - Add planet radius to GM screen scripting exports.
+- Added `registry_registration_url` and `registry_list_url` to optionally use a
+  custom Internet master registry server. Only `http://` URLs are allowed.
 
 ### Fixed
 
