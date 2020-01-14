@@ -74,6 +74,13 @@ float MineSweeper::getProgress()
     return (float)correct_count / (float)(field_size * field_size - bomb_count);
 }
 
+void MineSweeper::gameComplete()
+{
+    bool success = correct_count == (field_size * field_size) - bomb_count;
+    parent->onMiniGameComplete(success);
+    game_complete = success;
+}
+
 sf::Vector2f MineSweeper::getBoardSize()
 {
     return sf::Vector2f(field_size*50, field_size*50);

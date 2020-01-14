@@ -34,7 +34,7 @@ class MiniGame : public sf::NonCopyable
     GuiHackingDialog* parent;
     bool game_complete;
     std::vector<GuiElement*> board;
-    void gameComplete();
+    virtual void gameComplete();
 };
 
 #endif//MINIGAME_H
