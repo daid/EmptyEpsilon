@@ -104,21 +104,8 @@ void GuiScanningDialog::setupParameters()
     updateSignal();
     
     string label = "[" + string(scan_depth + 1) + "/" + string(my_spaceship->scanning_depth) + "] ";
-    switch(irandom(0, 10))
-    {
-    default:
-    case 0: label += "Electric signature"; break;
-    case 1: label += "Biomass frequency"; break;
-    case 2: label += "Gravity well signature"; break;
-    case 3: label += "Radiation halftime"; break;
-    case 4: label += "Radio profile"; break;
-    case 5: label += "Ionic phase shift"; break;
-    case 6: label += "Infra-red color shift"; break;
-    case 7: label += "Doppler stability"; break;
-    case 8: label += "Raspberry jam prevention"; break;
-    case 9: label += "Infinity impropability"; break;
-    case 10: label += "Zerospace audio frequency"; break;
-    }
+    std::vector<string> signal_labels = my_spaceship->getSignalLabels();
+    label += signal_labels[irandom(0, signal_labels.size() - 1)];
     signal_label->setText(label);
 }
 

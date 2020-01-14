@@ -127,6 +127,9 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setAutoCoolant);
     // Set a password to join the ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setControlCode);
+    // Changes the list of labels used to describe scans.
+    // Example: player:setSignalLabels("Reticulating splines", "Reversing polarity")
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setSignalLabels);
 }
 
 float PlayerSpaceship::system_power_user_factor[] = {
@@ -226,6 +229,7 @@ PlayerSpaceship::PlayerSpaceship()
     alert_level = AL_Normal;
     shields_active = false;
     control_code = "";
+    signal_labels.assign( { "Electric signature", "Biomass frequency", "Gravity well signature", "Radiation halftime", "Radio profile", "Ionic phase shift", "Infra-red color shift", "Doppler stability", "Raspberry jam prevention", "infinity improbability", "Zerospace audio frequency", "Polarity inversion" } );
 
     setFactionId(1);
 
@@ -1071,6 +1075,15 @@ void PlayerSpaceship::closeComms()
         else
             comms_state = CS_Inactive;
     }
+}
+
+void PlayerSpaceship::setSignalLabels(std::vector<string> labels) {
+    if (labels.size() > 0)
+        signal_labels = labels;
+}
+
+const std::vector<string> PlayerSpaceship::getSignalLabels() {
+    return signal_labels;
 }
 
 void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& packet)
