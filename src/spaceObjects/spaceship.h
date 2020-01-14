@@ -403,6 +403,8 @@ public:
 
     void setRadarTrace(string trace) { radar_trace = trace; }
 
+    const RawRadarSignatureInfo signature_baseline = RawRadarSignatureInfo(0.05, 0.3, 0.3);
+
     void addBroadcast(int threshold, string message);
 
     //Return a string that can be appended to an object create function in the lua scripting.
