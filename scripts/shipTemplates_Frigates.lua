@@ -99,7 +99,7 @@ variation:setBeamWeapon(3, 90, -50, 1200, 2.9, 1)
 variation:setSpeed(70, 15, 10)
 
 template = ShipTemplate():setName("Storm"):setClass("Frigate", "Cruiser: Heavy Artillery"):setModel("HeavyCorvetteYellow")	--Yellow, Green, Blue, White, Red
-template:setRadarTrace("radar_cruiser.png")
+template:setRadarTrace("radar_piranha.png")
 template:setDescription([[A heavy artillery cruiser, the Storm fires bunches of missiles from forward facing tubes.]])
 template:setBeamWeapon(0, 60, 0, 1200, 3, 2)
 template:setHull(50)
@@ -116,7 +116,7 @@ template:setTubeDirection(4,  2)
 template:setDefaultAI('missilevolley')
 
 template = ShipTemplate():setName("Hathcock"):setClass("Frigate", "Cruiser: Sniper"):setModel("HeavyCorvetteGreen"):setType("playership")
-template:setRadarTrace("radar_cruiser.png")
+template:setRadarTrace("radar_piranha.png")
 template:setDescription("Long range narrow beam and some point defense beams, broadside missiles. Agile for a frigate")
 --						Arc, Dir, Range, CycleTime, Dmg
 template:setBeamWeapon(0, 4,   0, 1400.0, 6.0, 4)
@@ -162,7 +162,7 @@ template:addDoor( 5, 1, false)
 
 
 template = ShipTemplate():setName("Piranha F12"):setClass("Frigate", "Cruiser: Light Artillery"):setModel("HeavyCorvetteRed")
-template:setRadarTrace("radar_cruiser.png")
+template:setRadarTrace("radar_piranha.png")
 template:setDescription([[A light artillery cruiser, the Piranha F12 is the smallest ship to exclusively fire from broadside weapon tubes.]])
 template:setHull(70)
 template:setShields(30, 30)
