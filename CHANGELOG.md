@@ -1,25 +1,44 @@
 # Change Log
 
-## [...]
+## [2020-01-15]
 
 ### Added
 
-- `SpaceShip:setScanState()` and `setScanStateByFaction()` scripting functions.
-- `Planet:getPlanetRadius()` and `Planet:getCollisionSize()` scripting functions.
-- Log planet radius to the game state log and render it in the viewer.
+- Crucible corvette-class popper ship.
+- Maverick corvette-class gunner ship.
+- Terran Stellar Navy (TSN), United Stellar Navy (USN), and Celestial Unified
+  Fleet (CUF) factions.
+- `SpaceShip:setScanState()` and `SpaceShip:setScanStateByFaction()` scripting
+  functions.
+- `Planet:getPlanetRadius()` and `Planet:getCollisionSize()` scripting
+  functions.
+- `Mine:onDestruction()` callback scripting function.
+- Planet radius in the game state log and viewer, and to GM screen script
+  exports.
+- Standalone Ship's Log view, moved from the Single Pilot station to Extras.
+- `registry_registration_url` and `registry_list_url` settings in options.ini,
+  to point at a custom Internet master registry server. Only `http://` URLs are
+  allowed. For an example master server, see the `masterserver` directory in
+  `daid/SeriousProton`.
 
 ### Changed
 
-- _Shoreline_ scenario refactored to fix errors.
-- Add planet radius to GM screen scripting exports.
-- Added `registry_registration_url` and `registry_list_url` to optionally use a
-  custom Internet master registry server. Only `http://` URLs are allowed.
+- _Shoreline_ and _Borderline Fever_ scenarios refactored to fix errors and add
+  enhancements.
+- Slowed down Hue lighting updates and added transition channel.
+- Removed an extraneous ZIP from the build.
+- Ship and target passed to the comms script interface.
 
 ### Fixed
 
-- Avoid crashing when the server port is already in use.
-- Add missing radar trace images for ships.
+- Crashes when the server port is already in use.
+- Missing radar trace images for ships.
 - Typos in scenarios.
+- Carrier ships (ships that are docking targets) attempting to dock with
+  themselves, preventing them from being able to dock with stations or other
+  docking targets.
+- Crashes caused by excessive recursion in the AI path planner.
+- Game completion condition for the Minesweeper hacking game.
 
 ## [2019-11-01]
 
