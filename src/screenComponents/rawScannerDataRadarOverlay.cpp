@@ -62,6 +62,46 @@ void RawScannerDataRadarOverlay::onDraw(sf::RenderTarget& window)
         // Get the object's radar signature.
         RawRadarSignatureInfo info = obj->getRadarSignatureInfo();
 
+        // If the object is a SpaceShip, adjust the signature dynamically based
+        // on its current state and activity.
+        P<SpaceShip> this_ship = obj;
+
+        if (this_ship)
+        {
+            RawRadarSignatureInfo signature_delta;
+
+            // For each ship system ...
+            for(int n = 0; n < SYS_COUNT; n++)
+            {
+                ESystem this_system = static_cast<ESystem>(n);
+                // Increase the biological band based on system heat, offset by
+                // coolant.
+                signature_delta.biological += std::max(0.0f, this_ship->getSystemHeat(this_system) - (this_ship->getSystemCoolant(this_system) / 10.0f));
+                // Adjust the electrical band if system power allocation is not
+                // 100%.
+                if (this_system == SYS_JumpDrive && this_ship->jump_drive_charge < this_ship->jump_drive_max_distance)
+                {
+                    // Elevate electrical after a jump, since recharging jump
+                    // consumes energy.
+                    signature_delta.electrical += std::max(0.0f, this_ship->getSystemPower(this_system) * (this_ship->jump_drive_charge + 0.01f / this_ship->jump_drive_max_distance));
+                }else{
+                    signature_delta.electrical += std::max(-1.0f, this_ship->getSystemPower(this_system) - 1.0f);
+                }
+            }
+
+            // Increase the gravitational band if the ship is about to jump, or
+            // is actively warping.
+            if (this_ship->jump_delay > 0.0f)
+            {
+                signature_delta.gravity += std::max(0.0f, std::min((1.0f / this_ship->jump_delay + 0.01f), 10.0f));
+            }else if (this_ship->current_warp > 0.0f) {
+                signature_delta.gravity += this_ship->current_warp;
+            }
+
+            // Update the signature by adding the delta to its baseline.
+            info += signature_delta;
+        }
+
         // For each interval determined by the level of raw data resolution,
         // initialize the signatures array.
         for(float a = a_0; a <= a_1; a += 360.f / float(point_count))

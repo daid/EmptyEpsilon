@@ -189,7 +189,9 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     scanning_complexity_value = -1;
     scanning_depth_value = -1;
 
-    setRadarSignatureInfo(signature_baseline.gravity, signature_baseline.electrical, signature_baseline.biological);
+    // Ships can have dynamic signatures. Initialize a default baseline value
+    // from which clients derive the dynamic signature on update.
+    setRadarSignatureInfo(0.05, 0.2, 0.2);
 
     if (game_server)
         setCallSign(gameGlobalInfo->getNextShipCallsign());
@@ -646,22 +648,10 @@ void SpaceShip::update(float delta)
         weapon_tube[n].update(delta);
     }
 
-    RawRadarSignatureInfo signature_delta;
-
     for(int n=0; n<SYS_COUNT; n++)
     {
-        ESystem this_system = static_cast<ESystem>(n);
         systems[n].hacked_level = std::max(0.0f, systems[n].hacked_level - delta / unhack_time);
-        signature_delta.biological += std::min(0.0f, getSystemHeat(this_system) - getSystemCoolant(this_system) / SYS_COUNT); // Divide by SYS_COUNT? Or let ships with more systems emit more heat?
-        signature_delta.electrical += (getSystemPower(this_system) - 1.0f);
     }
-    signature_delta.gravity += (1.0f / jump_delay + 1.0f) + (current_warp * 0.25f);
- 
-    RawRadarSignatureInfo new_signature;
-    new_signature += signature_baseline;
-    new_signature += signature_delta;
-
-    setRadarSignatureInfo(new_signature.gravity, new_signature.electrical, new_signature.biological);
 
     model_info.engine_scale = std::min(1.0f, (float) std::max(fabs(getAngularVelocity() / turn_speed), fabs(current_impulse)));
     if (has_jump_drive && jump_delay > 0.0f)
