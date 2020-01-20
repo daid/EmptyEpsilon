@@ -189,7 +189,9 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     scanning_complexity_value = -1;
     scanning_depth_value = -1;
 
-    setRadarSignatureInfo(0.05, 0.3, 0.3);
+    // Ships can have dynamic signatures. Initialize a default baseline value
+    // from which clients derive the dynamic signature on update.
+    setRadarSignatureInfo(0.05, 0.2, 0.2);
 
     if (game_server)
         setCallSign(gameGlobalInfo->getNextShipCallsign());
