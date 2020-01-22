@@ -265,6 +265,8 @@ bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2
     if (firstAvoidF < startEndLength)
     {
         sf::Vector2f position = avoidObject.source->getPosition();
+        if (firstAvoidQ.x == position.x && firstAvoidQ.y == position.y)
+            firstAvoidQ.x += 0.1f;
         new_point = position + sf::normalize(firstAvoidQ - position) * avoidObject.size * 1.1f;
         if (alt_point)
             *alt_point = position - sf::normalize(firstAvoidQ - position) * avoidObject.size * 1.1f;
