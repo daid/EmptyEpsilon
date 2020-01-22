@@ -42,7 +42,7 @@ if(NOT SFML_ROOT)
                 "-DDXSDK_DIR=/usr/i686-w64-mingw32"
             WORKING_DIRECTORY "${WIN32_BASE}/openal_build")
         execute_process_ex(
-            COMMAND "${CMAKE_MAKE_PROGRAM}" "-j4" "install"
+            COMMAND "make" "-j4" "install"
             WORKING_DIRECTORY "${WIN32_BASE}/openal_build")
     endif()
 
@@ -53,8 +53,7 @@ if(NOT SFML_ROOT)
     if(NOT IS_DIRECTORY "${CMAKE_SYSROOT}/include/SFML")
         file(MAKE_DIRECTORY "${WIN32_BASE}/SFML_build")
         execute_process_ex(
-            COMMAND "${CMAKE_COMMAND}" "${WIN32_BASE}/SFML-2.5.1" "-G" "${CMAKE_GENERATOR}"
-                "-DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM}"
+            COMMAND "${CMAKE_COMMAND}" "${WIN32_BASE}/SFML-2.5.1"
                 "-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}"
                 "-DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}"
                 "-DCMAKE_SYSTEM_NAME=${CMAKE_SYSTEM_NAME}"
@@ -65,7 +64,7 @@ if(NOT SFML_ROOT)
                 "-DOPENAL_LIBRARY=${CMAKE_SYSROOT}/bin/OpenAL32.dll"
             WORKING_DIRECTORY "${WIN32_BASE}/SFML_build")
         execute_process_ex(
-            COMMAND "${CMAKE_MAKE_PROGRAM}" "install"
+            COMMAND "make" "install"
             WORKING_DIRECTORY "${WIN32_BASE}/SFML_build")
     endif()
     
