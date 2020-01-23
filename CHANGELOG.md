@@ -1,5 +1,12 @@
 # Change Log
 
+## [...]
+
+### Added
+
+- `ScanProbe:onExpiration`, `ScanProbe:onDestruction`, and
+  `PlayerSpaceship:onProbeLaunch` callback scripting functions.
+
 ## [2020-01-15]
 
 ### Added

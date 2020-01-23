@@ -127,6 +127,10 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setAutoCoolant);
     // Set a password to join the ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setControlCode);
+    // Callback when this ship launches a probe.
+    // Returns the launching PlayerSpaceship and launched ScanProbe.
+    // Example: player:onProbeLaunch(trackProbe)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeLaunch);
 }
 
 float PlayerSpaceship::system_power_user_factor[] = {
@@ -1476,6 +1480,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             p->setPosition(getPosition());
             p->setTarget(target);
             p->setOwner(this);
+            if (on_probe_launch.isSet())
+            {
+                on_probe_launch.call(P<PlayerSpaceship>(this), P<ScanProbe>(p));
+            }
             scan_probe_stock--;
         }
         break;
@@ -1885,6 +1893,11 @@ void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f posit
 string PlayerSpaceship::getExportLine()
 {
     return "PlayerSpaceship():setTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" + getScriptExportModificationsOnTemplate();;
+}
+
+void PlayerSpaceship::onProbeLaunch(ScriptSimpleCallback callback)
+{
+    this->on_probe_launch = callback;
 }
 
 #ifndef _MSC_VER
