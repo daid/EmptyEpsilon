@@ -56,6 +56,7 @@ public:
     GuiFrequencyCurve* info_beam_frequency;
     GuiKeyValueDisplay* info_system[SYS_COUNT];
 
+    GuiToggleButton* signal_details_toggle;
     GuiToggleButton* probe_view_button;
     P<ScanProbe> observation_point;
     GuiListbox* view_mode_selection;

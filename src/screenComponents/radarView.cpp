@@ -10,8 +10,7 @@
 #include "targetsContainer.h"
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets)
-: GuiElement(owner, id), next_ghost_dot_update(0.0), targets(targets), missile_tube_controls(nullptr), distance(distance), long_range(false), show_ghost_dots(false)
-, show_waypoints(false), show_target_projection(false), show_missile_tubes(false), show_callsigns(false), show_heading_indicators(false), show_game_master_data(false)
+: GuiElement(owner, id), next_ghost_dot_update(0.0), targets(targets), missile_tube_controls(nullptr), distance(distance), long_range(false), show_ghost_dots(false), show_signal_details(false), show_waypoints(false), show_target_projection(false), show_missile_tubes(false), show_callsigns(false), show_heading_indicators(false), show_game_master_data(false)
 , range_indicator_step_size(0.0f), style(Circular), fog_style(NoFogOfWar), mouse_down_func(nullptr), mouse_drag_func(nullptr), mouse_up_func(nullptr)
 {
     auto_center_on_my_ship = true;
@@ -74,6 +73,8 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
         drawGhostDots(forground_texture);
     }
     drawObjects(forground_texture, background_texture);
+    if (show_signal_details)
+        drawSignalDetails(forground_texture, background_texture);
     if (show_game_master_data)
         drawObjectsGM(forground_texture);
 
@@ -594,6 +595,118 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
     {
         sf::Vector2f object_position_on_screen = radar_screen_center + (my_spaceship->getPosition() - view_position) * scale;
         my_spaceship->drawOnRadar(window_normal, object_position_on_screen, scale, long_range);
+    }
+}
+
+void GuiRadarView::drawSignalDetails(sf::RenderTarget& window_normal, sf::RenderTarget& window_alpha)
+{
+    sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
+    float scale = std::min(rect.width, rect.height) / 2.0f / distance;
+
+    foreach(SpaceObject, obj, space_object_list)
+    {
+        sf::Vector2f object_position_on_screen = radar_screen_center + (obj->getPosition() - view_position) * scale;
+
+        float r = obj->getRadius() * scale;
+
+	sf::FloatRect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
+        if (rect.intersects(object_rect))
+        {
+	    RawRadarSignatureInfo info = obj->getRadarSignatureInfo();
+
+	    // If the object is a SpaceShip, adjust the signature dynamically based
+            // on its current state and activity.
+            P<SpaceShip> this_ship = obj;
+
+            if (this_ship)
+            {
+                RawRadarSignatureInfo signature_delta;
+
+                // For each ship system ...
+                for(int n = 0; n < SYS_COUNT; n++)
+                {
+                    ESystem this_system = static_cast<ESystem>(n);
+                    // Increase the biological band based on system heat, offset by
+                    // coolant.
+                    signature_delta.biological += std::max(0.0f, std::min(1.0f, this_ship->getSystemHeat(this_system) - (this_ship->getSystemCoolant(this_system) / 10.0f)));
+                    // Adjust the electrical band if system power allocation is not
+                    // 100%.
+                   if (this_system == SYS_JumpDrive && this_ship->jump_drive_charge < this_ship->jump_drive_max_distance)
+                   {
+                        // Elevate electrical after a jump, since recharging jump
+                        // consumes energy.
+                        signature_delta.electrical += std::max(0.0f, std::min(1.0f, this_ship->getSystemPower(this_system) * (this_ship->jump_drive_charge + 0.01f / this_ship->jump_drive_max_distance)));
+                    }else if(this_ship->getSystemPower(this_system) != 1.0f){
+                        signature_delta.electrical += std::max(-1.0f, std::min(1.0f, this_ship->getSystemPower(this_system) - 1.0f));
+                    }
+                }
+
+                // Increase the gravitational band if the ship is about to jump, or
+                // is actively warping.
+                if (this_ship->jump_delay > 0.0f)
+                {
+                    signature_delta.gravity += std::max(0.0f, std::min((1.0f / this_ship->jump_delay + 0.01f) + 0.25f, 10.0f));
+                }else if (this_ship->current_warp > 0.0f) {
+                    signature_delta.gravity += this_ship->current_warp;
+                }
+
+                // Update the signature by adding the delta to its baseline.
+                info += signature_delta;
+            }
+            sf::RenderTarget* window = &window_normal;
+            if (!obj->canHideInNebula())
+                window = &window_alpha;
+
+	    float gr = 2.0f + (r * info.gravity);
+	    float er = 2.0f + (r * info.electrical);
+	    float br = 2.0f + (r * info.biological);
+            // Gravitational
+	    sf::CircleShape circle(gr, rand() % 5 + 10);
+            circle.setOutlineThickness(0.0);
+            circle.setOrigin(gr, gr);
+            circle.setPosition(object_position_on_screen);
+	    circle.setFillColor(sf::Color(0,0,255,128));
+	    window->draw(circle);
+	    // Electrical
+	    circle.setRadius(er);
+            circle.setOrigin(er, er);
+            circle.setPosition(object_position_on_screen);
+	    circle.setFillColor(sf::Color(0,255,0,128));
+	    window->draw(circle);
+	    // Biological
+	    circle.setRadius(br);
+            circle.setOrigin(br, br);
+            circle.setPosition(object_position_on_screen);
+	    circle.setFillColor(sf::Color(255,0,0,128));
+	    window->draw(circle);
+            // obj->drawOnGMRadar(window, object_position_on_screen, scale, long_range);
+            if (this_ship) {
+                drawText(*window,
+                    sf::FloatRect(
+                        object_position_on_screen.x + 15,
+			object_position_on_screen.y, 0, 0),
+		    std::to_string(static_cast<int>(
+                        info.gravity * this_ship->getRadius() * 10 + random(0, 5))),
+		    ATopLeft, 15, bold_font, sf::Color(0, 0, 255, 255)
+		);
+                drawText(*window,
+                    sf::FloatRect(
+                        object_position_on_screen.x + 15,
+			object_position_on_screen.y + 15, 0, 0),
+		    std::to_string(static_cast<int>(
+                        info.electrical * this_ship->getRadius() * 10 + random(0, 5))),
+		    ATopLeft, 15, bold_font, sf::Color(0, 255, 0, 255)
+		);
+                drawText(*window,
+                    sf::FloatRect(
+                        object_position_on_screen.x + 15,
+			object_position_on_screen.y + 30, 0, 0),
+		    std::to_string(static_cast<int>(
+                        info.biological * this_ship->getRadius() * 10 + random(0, 5))),
+		    ATopLeft, 15, bold_font, sf::Color(255, 0, 0, 255)
+		);
+	    }
+        }
     }
 }
 

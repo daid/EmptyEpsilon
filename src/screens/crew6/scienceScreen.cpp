@@ -203,6 +203,16 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 30);
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
+    // Radar signal details toggle.
+    signal_details_toggle = new GuiToggleButton(this, "SIGNAL_DETAILS_TOGGLE", "Signal Details", [this](bool value)
+    {
+        if (science_radar->areSignalDetailsEnabled())
+	    science_radar->disableSignalDetails();
+	else
+            science_radar->enableSignalDetails();
+    });
+    signal_details_toggle->setPosition(-270, -20, ABottomRight)->setSize(250, 50);
+
     // Radar/database view toggle.
     view_mode_selection = new GuiListbox(this, "VIEW_SELECTION", [this](int index, string value) {
         radar_view->setVisible(index == 0);
