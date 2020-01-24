@@ -37,7 +37,8 @@ private:
         sf::Vector2f position;
         float end_of_life;
 
-        GhostDot(sf::Vector2f pos) : position(pos), end_of_life(engine->getElapsedTime() + total_lifetime) {}
+        GhostDot(sf::Vector2f pos)
+        : position(pos), end_of_life(engine->getElapsedTime() + total_lifetime) {}
     };
     std::vector<GhostDot> ghost_dots;
     float next_ghost_dot_update;
@@ -49,6 +50,7 @@ private:
     sf::Vector2f view_position;
     bool long_range;
     bool show_ghost_dots;
+    bool show_signal_details;
     bool show_waypoints;
     bool show_target_projection;
     bool show_missile_tubes;
@@ -78,6 +80,9 @@ public:
     GuiRadarView* shortRange() { long_range = false; return this; }
     GuiRadarView* enableGhostDots() { show_ghost_dots = true; return this; }
     GuiRadarView* disableGhostDots() { show_ghost_dots = false; return this; }
+    bool areSignalDetailsEnabled() { return show_signal_details; }
+    GuiRadarView* enableSignalDetails() { show_signal_details = true; return this; }
+    GuiRadarView* disableSignalDetails() { show_signal_details = false; return this; }
     GuiRadarView* enableWaypoints() { show_waypoints = true; return this; }
     GuiRadarView* disableWaypoints() { show_waypoints = false; return this; }
     GuiRadarView* enableTargetProjections(GuiMissileTubeControls* missile_tube_controls) { show_target_projection = true; this->missile_tube_controls = missile_tube_controls; return this; }
@@ -126,6 +131,7 @@ private:
     void drawTargets(sf::RenderTarget& window);
     void drawHeadingIndicators(sf::RenderTarget& window);
     void drawRadarCutoff(sf::RenderTarget& window);
+    void drawSignalDetails(sf::RenderTarget& window);
 };
 
 #endif//RADAR_VIEW_H
