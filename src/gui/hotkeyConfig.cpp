@@ -56,6 +56,9 @@ HotkeyConfig::HotkeyConfig()
     newKey("TOGGLE_SHIELDS", std::make_tuple("Toggle shields", "S"));
     newKey("ENABLE_SHIELDS", std::make_tuple("Enable shields", ""));
     newKey("DISABLE_SHIELDS", std::make_tuple("Disable shields", ""));
+    newKey("SHIELD_CAL_INC", std::make_tuple("Increase shield frequency target", ""));
+    newKey("SHIELD_CAL_DEC", std::make_tuple("Decrease shield frequency target", ""));
+    newKey("SHIELD_CAL_START", std::make_tuple("Start shield calibration", ""));
     newKey("BEAM_SUBSYSTEM_TARGET_NEXT", std::make_tuple("Next beam subsystem target type", ""));
     newKey("BEAM_SUBSYSTEM_TARGET_PREV", std::make_tuple("Previous beam subsystem target type", ""));
     newKey("BEAM_FREQUENCY_INCREASE", std::make_tuple("Increase beam frequency", ""));
@@ -85,9 +88,6 @@ HotkeyConfig::HotkeyConfig()
     newKey("REPAIR_CREW_MOVE_DOWN", std::make_tuple("Crew move down", ""));
     newKey("REPAIR_CREW_MOVE_LEFT", std::make_tuple("Crew move left", ""));
     newKey("REPAIR_CREW_MOVE_RIGHT", std::make_tuple("Crew move right", ""));
-    newKey("SHIELD_CAL_INC", std::make_tuple("Increase shield frequency target", ""));
-    newKey("SHIELD_CAL_DEC", std::make_tuple("Decrease shield frequency target", ""));
-    newKey("SHIELD_CAL_START", std::make_tuple("Start shield calibration", ""));
     newKey("SELF_DESTRUCT_START", std::make_tuple("Start self-destruct", ""));
     newKey("SELF_DESTRUCT_CONFIRM", std::make_tuple("Confirm self-destruct", ""));
     newKey("SELF_DESTRUCT_CANCEL", std::make_tuple("Cancel self-destruct", ""));
