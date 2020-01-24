@@ -7,6 +7,15 @@
 - `ScanProbe:onExpiration`, `ScanProbe:onDestruction`, and
   `PlayerSpaceship:onProbeLaunch` callback scripting functions.
 
+### Changed
+
+- Moved shield calibration hotkey configs in options.ini from Engineering to
+  Weapons. **This is a breaking change** if these hotkeys are set in
+  options.ini:
+  - `SHIELD_CAL_INC`
+  - `SHIELD_CAL_DEC`
+  - `SHIELD_CAL_START`
+
 ## [2020-01-15]
 
 ### Added
