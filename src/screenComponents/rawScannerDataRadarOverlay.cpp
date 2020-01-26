@@ -76,16 +76,17 @@ void RawScannerDataRadarOverlay::onDraw(sf::RenderTarget& window)
                 ESystem this_system = static_cast<ESystem>(n);
                 // Increase the biological band based on system heat, offset by
                 // coolant.
-                signature_delta.biological += std::max(0.0f, this_ship->getSystemHeat(this_system) - (this_ship->getSystemCoolant(this_system) / 10.0f));
+                signature_delta.biological += std::max(0.0f, std::min(1.0f, this_ship->getSystemHeat(this_system) - (this_ship->getSystemCoolant(this_system) / 10.0f)));
                 // Adjust the electrical band if system power allocation is not
                 // 100%.
                 if (this_system == SYS_JumpDrive && this_ship->jump_drive_charge < this_ship->jump_drive_max_distance)
                 {
                     // Elevate electrical after a jump, since recharging jump
                     // consumes energy.
-                    signature_delta.electrical += std::max(0.0f, this_ship->getSystemPower(this_system) * (this_ship->jump_drive_charge + 0.01f / this_ship->jump_drive_max_distance));
-                }else{
-                    signature_delta.electrical += std::max(-1.0f, this_ship->getSystemPower(this_system) - 1.0f);
+                    signature_delta.electrical += std::max(0.0f, std::min(1.0f, this_ship->getSystemPower(this_system) * (this_ship->jump_drive_charge + 0.01f / this_ship->jump_drive_max_distance)));
+                }else if(this_ship->getSystemPower(this_system) != 1.0f){
+                    // Negative delta allowed if systems are underpowered.
+                    signature_delta.electrical += std::max(-1.0f, std::min(1.0f, this_ship->getSystemPower(this_system) - 1.0f));
                 }
             }
 
