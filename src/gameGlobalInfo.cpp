@@ -39,6 +39,8 @@ GameGlobalInfo::GameGlobalInfo()
     intercept_all_comms_to_gm = false;
 
     registerMemberReplication(&scanning_complexity);
+    registerMemberReplication(&hacking_difficulty);
+    registerMemberReplication(&hacking_games);
     registerMemberReplication(&global_message);
     registerMemberReplication(&global_message_timeout, 1.0);
     registerMemberReplication(&banner_string);
