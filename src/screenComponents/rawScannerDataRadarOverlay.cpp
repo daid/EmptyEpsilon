@@ -60,47 +60,18 @@ void RawScannerDataRadarOverlay::onDraw(sf::RenderTarget& window)
         }
 
         // Get the object's radar signature.
-        RawRadarSignatureInfo info = obj->getRadarSignatureInfo();
-
         // If the object is a SpaceShip, adjust the signature dynamically based
         // on its current state and activity.
-        P<SpaceShip> this_ship = obj;
+        RawRadarSignatureInfo info;
+        P<SpaceShip> ship = obj;
 
-        if (this_ship)
+        if (ship)
         {
-            RawRadarSignatureInfo signature_delta;
-
-            // For each ship system ...
-            for(int n = 0; n < SYS_COUNT; n++)
-            {
-                ESystem this_system = static_cast<ESystem>(n);
-                // Increase the biological band based on system heat, offset by
-                // coolant.
-                signature_delta.biological += std::max(0.0f, std::min(1.0f, this_ship->getSystemHeat(this_system) - (this_ship->getSystemCoolant(this_system) / 10.0f)));
-                // Adjust the electrical band if system power allocation is not
-                // 100%.
-                if (this_system == SYS_JumpDrive && this_ship->jump_drive_charge < this_ship->jump_drive_max_distance)
-                {
-                    // Elevate electrical after a jump, since recharging jump
-                    // consumes energy.
-                    signature_delta.electrical += std::max(0.0f, std::min(1.0f, this_ship->getSystemPower(this_system) * (this_ship->jump_drive_charge + 0.01f / this_ship->jump_drive_max_distance)));
-                }else if(this_ship->getSystemPower(this_system) != 1.0f){
-                    // Negative delta allowed if systems are underpowered.
-                    signature_delta.electrical += std::max(-1.0f, std::min(1.0f, this_ship->getSystemPower(this_system) - 1.0f));
-                }
-            }
-
-            // Increase the gravitational band if the ship is about to jump, or
-            // is actively warping.
-            if (this_ship->jump_delay > 0.0f)
-            {
-                signature_delta.gravity += std::max(0.0f, std::min((1.0f / this_ship->jump_delay + 0.01f), 10.0f));
-            }else if (this_ship->current_warp > 0.0f) {
-                signature_delta.gravity += this_ship->current_warp;
-            }
-
-            // Update the signature by adding the delta to its baseline.
-            info += signature_delta;
+            // Use dynamic signatures for ships.
+            info = ship->getDynamicRadarSignatureInfo();
+        } else {
+            // Otherwise, use the baseline only.
+            info = obj->getRadarSignatureInfo();
         }
 
         // For each interval determined by the level of raw data resolution,
