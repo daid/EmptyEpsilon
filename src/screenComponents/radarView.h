@@ -37,7 +37,8 @@ private:
         sf::Vector2f position;
         float end_of_life;
 
-        GhostDot(sf::Vector2f pos) : position(pos), end_of_life(engine->getElapsedTime() + total_lifetime) {}
+        GhostDot(sf::Vector2f pos)
+        : position(pos), end_of_life(engine->getElapsedTime() + total_lifetime) {}
     };
     std::vector<GhostDot> ghost_dots;
     float next_ghost_dot_update;
@@ -130,7 +131,7 @@ private:
     void drawTargets(sf::RenderTarget& window);
     void drawHeadingIndicators(sf::RenderTarget& window);
     void drawRadarCutoff(sf::RenderTarget& window);
-    void drawSignalDetails(sf::RenderTarget& window_normal, sf::RenderTarget& window_alpha);
+    void drawSignalDetails(sf::RenderTarget& window);
 };
 
 #endif//RADAR_VIEW_H
