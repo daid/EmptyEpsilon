@@ -631,9 +631,11 @@ void GuiRadarView::drawSignalDetails(sf::RenderTarget& window)
                 info = obj->getRadarSignatureInfo();
             }
 
+            // Draw proportional circles for each radar band.
             float gr = 2.0f + (r * info.gravity);
             float er = 2.0f + (r * info.electrical);
             float br = 2.0f + (r * info.biological);
+
             // Gravitational
             sf::CircleShape circle(gr, rand() % 5 + 10);
             circle.setOutlineThickness(0.0);
@@ -655,15 +657,15 @@ void GuiRadarView::drawSignalDetails(sf::RenderTarget& window)
             window.draw(circle);
             // obj->drawOnGMRadar(window, object_position_on_screen, scale, long_range);
 
-            // Add numeric values if the object is a ship.
-            if (ship) {
+            // Add numeric values if the object is targeted.
+            if (my_spaceship->getTarget() == obj) {
                 drawText(window,
                     sf::FloatRect(
                         object_position_on_screen.x + 15,
                         object_position_on_screen.y, 0, 0
                     ),
                     std::to_string(static_cast<int>(
-                        info.gravity * ship->getRadius() * 10 + random(0, 5))
+                        info.gravity * obj->getRadius() * 10 + random(0, 5))
                     ),
                     ATopLeft, 15, bold_font, sf::Color(0, 0, 255, 255)
                 );
@@ -673,7 +675,7 @@ void GuiRadarView::drawSignalDetails(sf::RenderTarget& window)
                         object_position_on_screen.y + 15, 0, 0
                     ),
                     std::to_string(static_cast<int>(
-                            info.electrical * ship->getRadius() * 10 + random(0, 5))
+                        info.electrical * obj->getRadius() * 10 + random(0, 5))
                     ),
                     ATopLeft, 15, bold_font, sf::Color(0, 255, 0, 255)
                 );
@@ -683,7 +685,7 @@ void GuiRadarView::drawSignalDetails(sf::RenderTarget& window)
                         object_position_on_screen.y + 30, 0, 0
                     ),
                     std::to_string(static_cast<int>(
-                        info.biological * ship->getRadius() * 10 + random(0, 5))
+                        info.biological * obj->getRadius() * 10 + random(0, 5))
                     ),
                     ATopLeft, 15, bold_font, sf::Color(255, 0, 0, 255)
                 );
@@ -725,6 +727,9 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
         sf::Vector2f object_position_on_screen = radar_screen_center + (obj->getPosition() - view_position) * scale;
         float r = obj->getRadius() * scale;
         sf::FloatRect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
+
+        // If the object is not the controlling ship, and the object is visible
+        // on radar, draw the reticule around it.
         if (obj != my_spaceship && rect.intersects(object_rect))
         {
             target_sprite.setPosition(object_position_on_screen);
@@ -732,6 +737,7 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
         }
     }
 
+    // Draw waypoints.
     if (my_spaceship && targets->getWaypointIndex() > -1 && targets->getWaypointIndex() < my_spaceship->getWaypointCount())
     {
         sf::Vector2f object_position_on_screen = radar_screen_center + (my_spaceship->waypoints[targets->getWaypointIndex()] - view_position) * scale;
