@@ -206,12 +206,45 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     // Radar signal details toggle.
     signal_details_toggle = new GuiToggleButton(this, "SIGNAL_DETAILS_TOGGLE", "Signal Details", [this](bool value)
     {
-        if (science_radar->areSignalDetailsEnabled())
-	    science_radar->disableSignalDetails();
-	else
+        // Toggle visibility of individual radar toggles.
+        signal_details_visual_button->setVisible(value);
+        signal_details_gravity_button->setVisible(value);
+        signal_details_electrical_button->setVisible(value);
+        signal_details_biological_button->setVisible(value);
+        // Toggle signal details.
+        if (value)
             science_radar->enableSignalDetails();
+        else
+            science_radar->disableSignalDetails();
     });
-    signal_details_toggle->setPosition(-270, -20, ABottomRight)->setSize(250, 50);
+    signal_details_toggle->setPosition(-270, -20, ABottomRight)->setSize(200, 50)->setVisible(true);
+    signal_details_visual_button = new GuiToggleButton(this, "SIGNAL_DETAILS_VISUAL", "V", [this](bool value)
+    {
+        if (value)
+            science_radar->enableVisualObjects();
+        else
+            science_radar->disableVisualObjects();
+    });
+    signal_details_visual_button->setPosition(-420, -70, ABottomRight)->setSize(50, 50)->setVisible(false);
+    signal_details_visual_button->setValue(true);
+    signal_details_gravity_button = new GuiToggleButton(this, "SIGNAL_DETAILS_GRAVITY", "G", [this](bool value)
+    {
+        science_radar->setSignalGravity(value);
+    });
+    signal_details_gravity_button->setPosition(-370, -70, ABottomRight)->setSize(50, 50)->setVisible(false);
+    signal_details_gravity_button->setValue(false);
+    signal_details_electrical_button = new GuiToggleButton(this, "SIGNAL_DETAILS_ELECTRICAL", "E", [this](bool value)
+    {
+        science_radar->setSignalElectrical(value);
+    });
+    signal_details_electrical_button->setPosition(-320, -70, ABottomRight)->setSize(50, 50)->setVisible(false);
+    signal_details_electrical_button->setValue(false);
+    signal_details_biological_button = new GuiToggleButton(this, "SIGNAL_DETAILS_BIOLOGICAL", "B", [this](bool value)
+    {
+        science_radar->setSignalBiological(value);
+    });
+    signal_details_biological_button->setPosition(-270, -70, ABottomRight)->setSize(50, 50)->setVisible(false);
+    signal_details_biological_button->setValue(false);
 
     // Radar/database view toggle.
     view_mode_selection = new GuiListbox(this, "VIEW_SELECTION", [this](int index, string value) {
