@@ -57,11 +57,17 @@ public:
     GuiKeyValueDisplay* info_system[SYS_COUNT];
 
     GuiToggleButton* signal_details_toggle;
+    GuiToggleButton* signal_details_visual_button;
+    GuiToggleButton* signal_details_gravity_button;
+    GuiToggleButton* signal_details_electrical_button;
+    GuiToggleButton* signal_details_biological_button;
     GuiToggleButton* probe_view_button;
     P<ScanProbe> observation_point;
     GuiListbox* view_mode_selection;
 public:
     ScienceScreen(GuiContainer* owner, ECrewPosition crew_position=scienceOfficer);
+
+    void setSignalDetailsGravity(bool value);
 
     virtual void onDraw(sf::RenderTarget& window);
     virtual void onHotkey(const HotkeyResult& key) override;
