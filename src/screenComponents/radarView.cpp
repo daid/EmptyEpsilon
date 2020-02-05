@@ -587,68 +587,79 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
         sf::Vector2f object_position_on_screen = radar_screen_center + (obj->getPosition() - view_position) * scale;
         float r = obj->getRadius() * scale;
         sf::FloatRect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
+
+        // Draw visible objects within radar range.
         if (obj != *my_spaceship && rect.intersects(object_rect))
         {
             sf::RenderTarget* window = &window_normal;
+            RawRadarSignatureInfo info;
+            P<SpaceShip> ship = obj;
+
+            // If the object is a SpaceShip, adjust the signature dynamically
+            // based on its current state and activity.
+            if (ship)
+            {
+                // Use dynamic signatures for ships.
+                info = ship->getDynamicRadarSignatureInfo();
+            } else {
+                // Otherwise, use the baseline only.
+                info = obj->getRadarSignatureInfo();
+            }
+
+            // If the object doesn't hide in nebulae, draw it regardless.
             if (!obj->canHideInNebula())
                 window = &window_alpha;
+
+            // Visual objects can be filtered out. Low signatures don't appear.
             if (show_visual_objects)
             {
                 obj->drawOnRadar(*window, object_position_on_screen, scale, long_range);
                 if (show_callsigns && obj->getCallSign() != "")
                     drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
             }
+
+            // Signal details can be visualized.
             if (show_signal_details && (show_gravity || show_electrical || show_biological))
             {
-                RawRadarSignatureInfo info;
-                P<SpaceShip> ship = obj;
-
-                // If the object is a SpaceShip, adjust the signature dynamically
-                // based on its current state and activity.
-                if (ship)
-                {
-                    // Use dynamic signatures for ships.
-                    info = ship->getDynamicRadarSignatureInfo();
-                } else {
-                    // Otherwise, use the baseline only.
-                    info = obj->getRadarSignatureInfo();
-                }
+                // Draw proportional circles for each radar band.
                 sf::CircleShape circle(0.1, rand() % 5 + 10);
                 circle.setOutlineThickness(0.0);
-                // Draw proportional circles for each radar band.
+
+                gr = 2.0f + (r * info.gravity);
+                er = 2.0f + (r * info.electrical);
+                br = 2.0f + (r * info.biological);
+
                 if (show_gravity)
                 {
                     // Gravitational
-                    gr = 2.0f + (r * info.gravity);
                     circle.setRadius(gr);
                     circle.setOrigin(gr, gr);
                     circle.setPosition(object_position_on_screen);
-                    circle.setFillColor(sf::Color(0,0,255,128));
+                    circle.setFillColor(sf::Color(0,0,255,224));
                     window->draw(circle);
                 }
                 if (show_electrical)
                 {
                     // Electrical
-                    er = 2.0f + (r * info.electrical);
                     circle.setRadius(er);
                     circle.setOrigin(er, er);
                     circle.setPosition(object_position_on_screen);
-                    circle.setFillColor(sf::Color(0,255,0,128));
+                    circle.setFillColor(sf::Color(0,255,0,224));
                     window->draw(circle);
                 }
                 if (show_biological)
                 {
                     // Biological
-                    br = 2.0f + (r * info.biological);
                     circle.setRadius(br);
                     circle.setOrigin(br, br);
                     circle.setPosition(object_position_on_screen);
-                    circle.setFillColor(sf::Color(255,0,0,128));
+                    circle.setFillColor(sf::Color(255,0,0,224));
                     window->draw(circle);
                 }
             }
         }
     }
+
     if (my_spaceship)
     {
         sf::Vector2f object_position_on_screen = radar_screen_center + (my_spaceship->getPosition() - view_position) * scale;
