@@ -142,7 +142,6 @@ private:
     void drawTargets(sf::RenderTarget& window);
     void drawHeadingIndicators(sf::RenderTarget& window);
     void drawRadarCutoff(sf::RenderTarget& window);
-    void drawSignalDetails(sf::RenderTarget& window);
 };
 
 #endif//RADAR_VIEW_H

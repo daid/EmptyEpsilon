@@ -80,10 +80,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
         updateGhostDots();
         drawGhostDots(forground_texture);
     }
-    if (show_visual_objects)
-        drawObjects(forground_texture, background_texture);
-    if (show_signal_details)
-        drawSignalDetails(forground_texture);
+    drawObjects(forground_texture, background_texture);
     if (show_game_master_data)
         drawObjectsGM(forground_texture);
 
@@ -585,7 +582,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
         break;
     }
 
-    for(SpaceObject* obj : visible_objects)
+    for(P<SpaceObject> obj : visible_objects)
     {
         sf::Vector2f object_position_on_screen = radar_screen_center + (obj->getPosition() - view_position) * scale;
         float r = obj->getRadius() * scale;
@@ -595,44 +592,19 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             sf::RenderTarget* window = &window_normal;
             if (!obj->canHideInNebula())
                 window = &window_alpha;
-            obj->drawOnRadar(*window, object_position_on_screen, scale, long_range);
-            if (show_callsigns && obj->getCallSign() != "")
-                drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
-        }
-    }
-    if (my_spaceship)
-    {
-        sf::Vector2f object_position_on_screen = radar_screen_center + (my_spaceship->getPosition() - view_position) * scale;
-        my_spaceship->drawOnRadar(window_normal, object_position_on_screen, scale, long_range);
-    }
-}
-
-void GuiRadarView::drawSignalDetails(sf::RenderTarget& window)
-{
-    if (show_gravity || show_electrical || show_biological)
-    {
-        sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
-        float scale = std::min(rect.width, rect.height) / 2.0f / distance;
-
-        for(P<SpaceObject> obj : space_object_list)
-        {
-            // If nebulae cast radar shadows, don't draw details.
-            if (fog_style == NebulaFogOfWar && obj->canHideInNebula() && my_spaceship && Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition()))
-                continue;
-
-            sf::Vector2f object_position_on_screen = radar_screen_center + (obj->getPosition() - view_position) * scale;
-            float r = obj->getRadius() * scale;
-            sf::FloatRect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
-
-            // Draw details only for visible objects.
-            if (rect.intersects(object_rect))
-            {
+            if (show_visual_objects)
+	    {
+                obj->drawOnRadar(*window, object_position_on_screen, scale, long_range);
+                if (show_callsigns && obj->getCallSign() != "")
+                    drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
+            }
+            if (show_signal_details && (show_gravity || show_electrical || show_biological))
+	    {
                 RawRadarSignatureInfo info;
+                P<SpaceShip> ship = obj;
 
                 // If the object is a SpaceShip, adjust the signature dynamically
                 // based on its current state and activity.
-                P<SpaceShip> ship = obj;
-
                 if (ship)
                 {
                     // Use dynamic signatures for ships.
@@ -641,7 +613,6 @@ void GuiRadarView::drawSignalDetails(sf::RenderTarget& window)
                     // Otherwise, use the baseline only.
                     info = obj->getRadarSignatureInfo();
                 }
-
                 sf::CircleShape circle(0.1, rand() % 5 + 10);
                 circle.setOutlineThickness(0.0);
                 // Draw proportional circles for each radar band.
@@ -653,7 +624,7 @@ void GuiRadarView::drawSignalDetails(sf::RenderTarget& window)
                     circle.setOrigin(gr, gr);
                     circle.setPosition(object_position_on_screen);
                     circle.setFillColor(sf::Color(0,0,255,128));
-                    window.draw(circle);
+                    window->draw(circle);
                 }
                 if (show_electrical)
                 {
@@ -663,7 +634,7 @@ void GuiRadarView::drawSignalDetails(sf::RenderTarget& window)
                     circle.setOrigin(er, er);
                     circle.setPosition(object_position_on_screen);
                     circle.setFillColor(sf::Color(0,255,0,128));
-                    window.draw(circle);
+                    window->draw(circle);
                 }
                 if (show_biological)
                 {
@@ -673,11 +644,15 @@ void GuiRadarView::drawSignalDetails(sf::RenderTarget& window)
                     circle.setOrigin(br, br);
                     circle.setPosition(object_position_on_screen);
                     circle.setFillColor(sf::Color(255,0,0,128));
-                    window.draw(circle);
+                    window->draw(circle);
                 }
-                // obj->drawOnGMRadar(window, object_position_on_screen, scale, long_range);
-            }
+	    }
         }
+    }
+    if (my_spaceship)
+    {
+        sf::Vector2f object_position_on_screen = radar_screen_center + (my_spaceship->getPosition() - view_position) * scale;
+        my_spaceship->drawOnRadar(window_normal, object_position_on_screen, scale, long_range);
     }
 }
 
