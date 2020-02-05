@@ -593,13 +593,13 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             if (!obj->canHideInNebula())
                 window = &window_alpha;
             if (show_visual_objects)
-	    {
+            {
                 obj->drawOnRadar(*window, object_position_on_screen, scale, long_range);
                 if (show_callsigns && obj->getCallSign() != "")
                     drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
             }
             if (show_signal_details && (show_gravity || show_electrical || show_biological))
-	    {
+            {
                 RawRadarSignatureInfo info;
                 P<SpaceShip> ship = obj;
 
@@ -646,7 +646,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                     circle.setFillColor(sf::Color(255,0,0,128));
                     window->draw(circle);
                 }
-	    }
+            }
         }
     }
     if (my_spaceship)
@@ -698,7 +698,8 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
             window.draw(target_sprite);
 
             // Add numeric radar signal values if signal details are enabled.
-            if (show_signal_details) {
+            if (show_signal_details)
+            {
                 P<SpaceShip> ship = obj;
                 RawRadarSignatureInfo info;
 
