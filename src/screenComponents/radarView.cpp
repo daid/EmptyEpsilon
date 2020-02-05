@@ -592,11 +592,25 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
         if (obj != *my_spaceship && rect.intersects(object_rect))
         {
             sf::RenderTarget* window = &window_normal;
+            RawRadarSignatureInfo info;
+            P<SpaceShip> ship = obj;
 
+            // If the object is a SpaceShip, adjust the signature dynamically
+            // based on its current state and activity.
+            if (ship)
+            {
+                // Use dynamic signatures for ships.
+                info = ship->getDynamicRadarSignatureInfo();
+            } else {
+                // Otherwise, use the baseline only.
+                info = obj->getRadarSignatureInfo();
+            }
+
+            // If the object doesn't hide in nebulae, draw it regardless.
             if (!obj->canHideInNebula())
                 window = &window_alpha;
 
-            // Visual objects can be filtered out.
+            // Visual objects can be filtered out. Low signatures don't appear.
             if (show_visual_objects)
             {
                 obj->drawOnRadar(*window, object_position_on_screen, scale, long_range);
@@ -607,20 +621,6 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             // Signal details can be visualized.
             if (show_signal_details && (show_gravity || show_electrical || show_biological))
             {
-                RawRadarSignatureInfo info;
-                P<SpaceShip> ship = obj;
-
-                // If the object is a SpaceShip, adjust the signature dynamically
-                // based on its current state and activity.
-                if (ship)
-                {
-                    // Use dynamic signatures for ships.
-                    info = ship->getDynamicRadarSignatureInfo();
-                } else {
-                    // Otherwise, use the baseline only.
-                    info = obj->getRadarSignatureInfo();
-                }
-
                 // Draw proportional circles for each radar band.
                 sf::CircleShape circle(0.1, rand() % 5 + 10);
                 circle.setOutlineThickness(0.0);
@@ -629,7 +629,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                 er = 2.0f + (r * info.electrical);
                 br = 2.0f + (r * info.biological);
 
-                if (show_gravity && gr > 2.0f)
+                if (show_gravity)
                 {
                     // Gravitational
                     circle.setRadius(gr);
@@ -638,7 +638,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                     circle.setFillColor(sf::Color(0,0,255,224));
                     window->draw(circle);
                 }
-                if (show_electrical && er > 2.0f)
+                if (show_electrical)
                 {
                     // Electrical
                     circle.setRadius(er);
@@ -647,7 +647,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                     circle.setFillColor(sf::Color(0,255,0,224));
                     window->draw(circle);
                 }
-                if (show_biological && br > 2.0f)
+                if (show_biological)
                 {
                     // Biological
                     circle.setRadius(br);
