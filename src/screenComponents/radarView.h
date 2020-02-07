@@ -53,11 +53,8 @@ private:
     bool show_ghost_dots;
     bool show_signal_details;
     bool show_gravity;
-    float gr;
     bool show_electrical;
-    float er;
     bool show_biological;
-    float br;
     bool show_waypoints;
     bool show_target_projection;
     bool show_missile_tubes;
@@ -85,15 +82,17 @@ public:
     GuiRadarView* setRangeIndicatorStepSize(float step) { range_indicator_step_size = step; return this; }
     GuiRadarView* longRange() { long_range = true; return this; }
     GuiRadarView* shortRange() { long_range = false; return this; }
+    GuiRadarView* setVisualObjects(bool is_enabled) { show_visual_objects = is_enabled; return this; }
     GuiRadarView* enableVisualObjects() { show_visual_objects = true; return this; }
     GuiRadarView* disableVisualObjects() { show_visual_objects = false; return this; }
     GuiRadarView* enableGhostDots() { show_ghost_dots = true; return this; }
     GuiRadarView* disableGhostDots() { show_ghost_dots = false; return this; }
+    GuiRadarView* setSignalDetails(bool is_enabled) { show_signal_details = is_enabled; return this; }
     GuiRadarView* enableSignalDetails() { show_signal_details = true; return this; }
     GuiRadarView* disableSignalDetails() { show_signal_details = false; return this; }
-    void setSignalGravity(bool enabled) { show_gravity = enabled; }
-    void setSignalElectrical(bool enabled) { show_electrical = enabled; }
-    void setSignalBiological(bool enabled) { show_biological = enabled; }
+    GuiRadarView* setSignalGravity(bool is_enabled) { show_gravity = is_enabled; return this; }
+    GuiRadarView* setSignalElectrical(bool is_enabled) { show_electrical = is_enabled; return this; }
+    GuiRadarView* setSignalBiological(bool is_enabled) { show_biological = is_enabled; return this; }
     GuiRadarView* enableWaypoints() { show_waypoints = true; return this; }
     GuiRadarView* disableWaypoints() { show_waypoints = false; return this; }
     GuiRadarView* enableTargetProjections(GuiMissileTubeControls* missile_tube_controls) { show_target_projection = true; this->missile_tube_controls = missile_tube_controls; return this; }
