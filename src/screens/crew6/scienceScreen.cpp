@@ -221,10 +221,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 
     signal_details_visual_button = new GuiToggleButton(this, "SIGNAL_DETAILS_VISUAL", "V", [this](bool value)
     {
-        if (value)
-            science_radar->enableVisualObjects();
-        else
-            science_radar->disableVisualObjects();
+        science_radar->setVisualObjects(value);
     });
     signal_details_visual_button->setValue(true)->setPosition(-420, -70, ABottomRight)->setSize(50, 50)->setVisible(false);
     signal_details_gravity_button = new GuiToggleButton(this, "SIGNAL_DETAILS_GRAVITY", "G", [this](bool value)
