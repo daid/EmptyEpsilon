@@ -79,6 +79,7 @@ void Asteroid::collide(Collisionable* target, float force)
     P<ExplosionEffect> e = new ExplosionEffect();
     e->setSize(getRadius());
     e->setPosition(getPosition());
+    e->setRadarSignatureInfo(0.0, 0.1, 0.2);
     destroy();
 }
 
