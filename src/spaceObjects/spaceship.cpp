@@ -258,8 +258,7 @@ void SpaceShip::draw3DTransparent()
     if (!ship_template) return;
     ShipTemplateBasedObject::draw3DTransparent();
 
-    if ((has_jump_drive && jump_delay > 0.0f) ||
-        (wormhole_alpha > 0.0f))
+    if ((has_jump_drive && jump_delay > 0.0f) || (wormhole_alpha > 0.0f))
     {
         float delay = jump_delay;
         if (wormhole_alpha > 0.0f)
@@ -277,7 +276,7 @@ RawRadarSignatureInfo SpaceShip::getDynamicRadarSignatureInfo()
     RawRadarSignatureInfo signature_delta;
 
     // For each ship system ...
-    for(int n = 0; n < SYS_COUNT; n++)
+    for (int n = 0; n < SYS_COUNT; n++)
     {
         ESystem ship_system = static_cast<ESystem>(n);
 
@@ -304,8 +303,7 @@ RawRadarSignatureInfo SpaceShip::getDynamicRadarSignatureInfo()
                     getSystemPower(ship_system) * (jump_drive_charge + 0.01f / jump_drive_max_distance)
                 )
             );
-        } else if (getSystemPower(ship_system) != 1.0f)
-        {
+        } else if (getSystemPower(ship_system) != 1.0f) {
             // For non-Jump systems, allow underpowered systems to reduce the
             // total electrical signal output.
             signature_delta.electrical += std::max(
@@ -315,6 +313,22 @@ RawRadarSignatureInfo SpaceShip::getDynamicRadarSignatureInfo()
                     getSystemPower(ship_system) - 1.0f
                 )
             );
+        }
+
+        // Increase the biological and electrical bands if impulse engines are
+        // engaged.
+        if (ship_system == SYS_Impulse && fabs(current_impulse) > 0.0f) {
+            float impulse_delta = std::max(
+                0.0f,
+                std::min(
+                    fabs(current_impulse) * getSystemPower(ship_system),
+                    3.0f
+                )
+            );
+
+            // Imuplse generates more ambient heat (bio) than EM (electrical).
+            signature_delta.biological += impulse_delta;
+            signature_delta.electrical += impulse_delta / 2;
         }
     }
 
@@ -329,9 +343,13 @@ RawRadarSignatureInfo SpaceShip::getDynamicRadarSignatureInfo()
                 10.0f
             )
         );
-    } else if (current_warp > 0.0f)
-    {
+    } else if (current_warp > 0.0f) {
         signature_delta.gravity += current_warp;
+    }
+
+    // Increase the electrical band if the shields are engaged.
+    if (getShieldsActive()) {
+        signature_delta.electrical += 1.5f;
     }
 
     // Update the signature by adding the delta to its baseline.

@@ -598,6 +598,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             {
                 // Use dynamic signatures for ships.
                 info = ship->getDynamicRadarSignatureInfo();
+
             } else {
                 // Otherwise, use the baseline only.
                 info = obj->getRadarSignatureInfo();
@@ -621,6 +622,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                 // Draw proportional circles for each radar band.
                 sf::CircleShape circle(0.1, rand() % 5 + 10);
                 circle.setOutlineThickness(1.0);
+                circle.setPosition(object_position_on_screen);
 
                 float band_radius = 0.0f;
 
@@ -630,7 +632,6 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                     band_radius = 2.0f + (r * info.gravity);
                     circle.setRadius(band_radius);
                     circle.setOrigin(band_radius, band_radius);
-                    circle.setPosition(object_position_on_screen);
                     circle.setOutlineColor(sf::Color(0,0,255,255));
                     circle.setFillColor(sf::Color(0,0,255,128));
                     window->draw(circle);
@@ -641,7 +642,6 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                     band_radius = 2.0f + (r * info.electrical);
                     circle.setRadius(band_radius);
                     circle.setOrigin(band_radius, band_radius);
-                    circle.setPosition(object_position_on_screen);
                     circle.setOutlineColor(sf::Color(0,255,0,255));
                     circle.setFillColor(sf::Color(0,255,0,128));
                     window->draw(circle);
@@ -652,7 +652,6 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                     band_radius = 2.0f + (r * info.biological);
                     circle.setRadius(band_radius);
                     circle.setOrigin(band_radius, band_radius);
-                    circle.setPosition(object_position_on_screen);
                     circle.setOutlineColor(sf::Color(255,0,0,255));
                     circle.setFillColor(sf::Color(255,0,0,128));
                     window->draw(circle);
@@ -714,6 +713,9 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
             {
                 P<SpaceShip> ship = obj;
                 RawRadarSignatureInfo info;
+                float r = obj->getRadius();
+                sf::Vector2f diff = my_spaceship->getPosition() - obj->getPosition();
+                float distance_to_target = sf::length(diff);
 
                 if (ship)
                 {
@@ -724,15 +726,13 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
                     info = obj->getRadarSignatureInfo();
                 }
 
-                LOG(INFO) << obj->getCallSign() << " g" << info.gravity << " e" << info.electrical << " b" << info.biological << " r" << r;
-
                 drawText(window,
                     sf::FloatRect(
                         object_position_on_screen.x + 15,
                         object_position_on_screen.y, 0, 0
                     ),
                     std::to_string(static_cast<int>(
-                        info.gravity * obj->getRadius() * 10 + random(0, 5))
+                        info.gravity * r * 10 + random(0, distance_to_target / 1000))
                     ),
                     ATopLeft, 15, bold_font, sf::Color(0, 0, 255, 255)
                 );
@@ -742,7 +742,7 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
                         object_position_on_screen.y + 15, 0, 0
                     ),
                     std::to_string(static_cast<int>(
-                        info.electrical * obj->getRadius() * 10 + random(0, 5))
+                        info.electrical * r * 10 + random(0, distance_to_target / 1000))
                     ),
                     ATopLeft, 15, bold_font, sf::Color(0, 255, 0, 255)
                 );
@@ -752,7 +752,7 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
                         object_position_on_screen.y + 30, 0, 0
                     ),
                     std::to_string(static_cast<int>(
-                        info.biological * obj->getRadius() * 10 + random(0, 5))
+                        info.biological * r * 10 + random(0, distance_to_target / 1000))
                     ),
                     ATopLeft, 15, bold_font, sf::Color(255, 0, 0, 255)
                 );
