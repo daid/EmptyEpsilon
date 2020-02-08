@@ -608,14 +608,6 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             if (!obj->canHideInNebula())
                 window = &window_alpha;
 
-            // Visual objects can be filtered out. Low signatures don't appear.
-            if (show_visual_objects)
-            {
-                obj->drawOnRadar(*window, object_position_on_screen, scale, long_range);
-                if (show_callsigns && obj->getCallSign() != "")
-                    drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
-            }
-
             // Signal details can be visualized.
             if (show_signal_details && (show_gravity || show_electrical || show_biological))
             {
@@ -649,8 +641,16 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                 band_radius += band_radius_delta;
                 circle.setRadius(band_radius);
                 circle.setOrigin(band_radius, band_radius);
-                circle.setFillColor(band_color + sf::Color(0, 0, 0, 128));
+                circle.setFillColor(band_color + sf::Color(0, 0, 0, 255));
                 window->draw(circle);
+            }
+
+            // Visual objects can be filtered out. Low signatures don't appear.
+            if (show_visual_objects)
+            {
+                obj->drawOnRadar(*window, object_position_on_screen, scale, long_range);
+                if (show_callsigns && obj->getCallSign() != "")
+                    drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
             }
         }
     }
