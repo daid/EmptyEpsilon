@@ -17,11 +17,8 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
 {
     auto_center_on_my_ship = true;
     show_gravity = false;
-    gr = 0.0f;
     show_electrical = false;
-    er = 0.0f;
     show_biological = false;
-    br = 0.0f;
 }
 
 void GuiRadarView::onDraw(sf::RenderTarget& window)
@@ -623,37 +620,41 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             {
                 // Draw proportional circles for each radar band.
                 sf::CircleShape circle(0.1, rand() % 5 + 10);
-                circle.setOutlineThickness(0.0);
+                circle.setOutlineThickness(1.0);
 
-                gr = 2.0f + (r * info.gravity);
-                er = 2.0f + (r * info.electrical);
-                br = 2.0f + (r * info.biological);
+                float band_radius = 0.0f;
 
                 if (show_gravity)
                 {
                     // Gravitational
-                    circle.setRadius(gr);
-                    circle.setOrigin(gr, gr);
+                    band_radius = 2.0f + (r * info.gravity);
+                    circle.setRadius(band_radius);
+                    circle.setOrigin(band_radius, band_radius);
                     circle.setPosition(object_position_on_screen);
-                    circle.setFillColor(sf::Color(0,0,255,224));
+                    circle.setOutlineColor(sf::Color(0,0,255,255));
+                    circle.setFillColor(sf::Color(0,0,255,128));
                     window->draw(circle);
                 }
                 if (show_electrical)
                 {
                     // Electrical
-                    circle.setRadius(er);
-                    circle.setOrigin(er, er);
+                    band_radius = 2.0f + (r * info.electrical);
+                    circle.setRadius(band_radius);
+                    circle.setOrigin(band_radius, band_radius);
                     circle.setPosition(object_position_on_screen);
-                    circle.setFillColor(sf::Color(0,255,0,224));
+                    circle.setOutlineColor(sf::Color(0,255,0,255));
+                    circle.setFillColor(sf::Color(0,255,0,128));
                     window->draw(circle);
                 }
                 if (show_biological)
                 {
                     // Biological
-                    circle.setRadius(br);
-                    circle.setOrigin(br, br);
+                    band_radius = 2.0f + (r * info.biological);
+                    circle.setRadius(band_radius);
+                    circle.setOrigin(band_radius, band_radius);
                     circle.setPosition(object_position_on_screen);
-                    circle.setFillColor(sf::Color(255,0,0,224));
+                    circle.setOutlineColor(sf::Color(255,0,0,255));
+                    circle.setFillColor(sf::Color(255,0,0,128));
                     window->draw(circle);
                 }
             }
@@ -722,6 +723,8 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
                     // Otherwise, use the baseline only.
                     info = obj->getRadarSignatureInfo();
                 }
+
+                LOG(INFO) << obj->getCallSign() << " g" << info.gravity << " e" << info.electrical << " b" << info.biological << " r" << r;
 
                 drawText(window,
                     sf::FloatRect(
