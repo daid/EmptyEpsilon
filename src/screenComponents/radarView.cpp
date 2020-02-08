@@ -624,38 +624,35 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                 circle.setOutlineThickness(1.0);
                 circle.setPosition(object_position_on_screen);
 
-                float band_radius = 0.0f;
+                float band_radius = 2.0f + r;
+                float band_radius_delta = 0;
+                sf::Color band_color(0, 0, 0, 0);
 
                 if (show_gravity)
                 {
                     // Gravitational
-                    band_radius = 2.0f + (r * info.gravity);
-                    circle.setRadius(band_radius);
-                    circle.setOrigin(band_radius, band_radius);
-                    circle.setOutlineColor(sf::Color(0,0,255,255));
-                    circle.setFillColor(sf::Color(0,0,255,128));
-                    window->draw(circle);
+                    band_radius_delta += band_radius * info.gravity;
+                    band_color += sf::Color(0, 0, 255, 0);
                 }
                 if (show_electrical)
                 {
                     // Electrical
-                    band_radius = 2.0f + (r * info.electrical);
-                    circle.setRadius(band_radius);
-                    circle.setOrigin(band_radius, band_radius);
-                    circle.setOutlineColor(sf::Color(0,255,0,255));
-                    circle.setFillColor(sf::Color(0,255,0,128));
-                    window->draw(circle);
+                    band_radius_delta += band_radius * info.electrical;
+                    band_color += sf::Color(0, 255, 0, 0);
                 }
                 if (show_biological)
                 {
                     // Biological
-                    band_radius = 2.0f + (r * info.biological);
-                    circle.setRadius(band_radius);
-                    circle.setOrigin(band_radius, band_radius);
-                    circle.setOutlineColor(sf::Color(255,0,0,255));
-                    circle.setFillColor(sf::Color(255,0,0,128));
-                    window->draw(circle);
+                    band_radius_delta += band_radius * info.biological;
+                    band_color += sf::Color(255, 0, 0, 0);
                 }
+
+                band_radius += band_radius_delta;
+                circle.setRadius(band_radius);
+                circle.setOrigin(band_radius, band_radius);
+                circle.setOutlineColor(band_color + sf::Color(0, 0, 0, 255));
+                circle.setFillColor(band_color + sf::Color(0, 0, 0, 128));
+                window->draw(circle);
             }
         }
     }
