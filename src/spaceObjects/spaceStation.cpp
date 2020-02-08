@@ -63,6 +63,7 @@ void SpaceStation::destroyedByDamage(DamageInfo& info)
     ExplosionEffect* e = new ExplosionEffect();
     e->setSize(getRadius());
     e->setPosition(getPosition());
+    e->setRadarSignatureInfo(0.0, 0.4, 0.4);
     
     if (info.instigator)
     {
