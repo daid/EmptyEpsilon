@@ -621,11 +621,10 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             {
                 // Draw proportional circles for each radar band.
                 sf::CircleShape circle(0.1, rand() % 5 + 10);
-                circle.setOutlineThickness(1.0);
                 circle.setPosition(object_position_on_screen);
 
                 float band_radius = 2.0f + r;
-                float band_radius_delta = 0;
+                float band_radius_delta = 0.0f;
                 sf::Color band_color(0, 0, 0, 0);
 
                 if (show_gravity)
@@ -650,7 +649,6 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                 band_radius += band_radius_delta;
                 circle.setRadius(band_radius);
                 circle.setOrigin(band_radius, band_radius);
-                circle.setOutlineColor(band_color + sf::Color(0, 0, 0, 255));
                 circle.setFillColor(band_color + sf::Color(0, 0, 0, 128));
                 window->draw(circle);
             }
