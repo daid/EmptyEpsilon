@@ -608,6 +608,14 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             if (!obj->canHideInNebula())
                 window = &window_alpha;
 
+            // Visual objects can be filtered out. Low signatures don't appear.
+            if (show_visual_objects)
+            {
+                obj->drawOnRadar(*window, object_position_on_screen, scale, long_range);
+                if (show_callsigns && obj->getCallSign() != "")
+                    drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
+            }
+
             // Signal details can be visualized.
             if (show_signal_details && (show_gravity || show_electrical || show_biological))
             {
@@ -615,42 +623,49 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                 sf::CircleShape circle(0.1, rand() % 5 + 10);
                 circle.setPosition(object_position_on_screen);
 
-                float band_radius = 2.0f + r;
+                float band_radius = 0.0f;
                 float band_radius_delta = 0.0f;
                 sf::Color band_color(0, 0, 0, 0);
 
                 if (show_gravity)
                 {
                     // Gravitational
-                    band_radius_delta += band_radius * info.gravity;
+                    if (info.gravity > 1.0f)
+                        band_radius_delta += (r * info.gravity) + (info.gravity - 1.0f);
+                    else
+                        band_radius_delta += std::max(0.0f, r * info.gravity);
                     band_color += sf::Color(0, 0, 255, 0);
                 }
                 if (show_electrical)
                 {
                     // Electrical
-                    band_radius_delta += band_radius * info.electrical;
+                    if (info.electrical > 1.0f)
+                        band_radius_delta += (r * info.electrical) + (info.electrical - 1.0f);
+                    else
+                        band_radius_delta += std::max(0.0f, r * info.electrical);
                     band_color += sf::Color(0, 255, 0, 0);
                 }
                 if (show_biological)
                 {
                     // Biological
-                    band_radius_delta += band_radius * info.biological;
+                    if (info.biological > 1.0f)
+                        band_radius_delta += (r * info.biological) + (info.biological - 1.0f);
+                    else
+                    band_radius_delta += std::max(0.0f, r * info.biological);
                     band_color += sf::Color(255, 0, 0, 0);
                 }
 
                 band_radius += band_radius_delta;
+
+                if (band_radius > 0.0f && band_radius < 2.0f)
+                    band_radius = 2.0f;
+                else
+                    band_radius = std::max(0.0f, band_radius);
+
                 circle.setRadius(band_radius);
                 circle.setOrigin(band_radius, band_radius);
                 circle.setFillColor(band_color + sf::Color(0, 0, 0, 255));
                 window->draw(circle);
-            }
-
-            // Visual objects can be filtered out. Low signatures don't appear.
-            if (show_visual_objects)
-            {
-                obj->drawOnRadar(*window, object_position_on_screen, scale, long_range);
-                if (show_callsigns && obj->getCallSign() != "")
-                    drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
             }
         }
     }
