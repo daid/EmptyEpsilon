@@ -630,28 +630,34 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                 if (show_electrical)
                 {
                     if (info.electrical > 1.0f)
+                    {
                         band_radius_delta += (r * info.electrical) + (info.electrical - 1.0f);
-                    else
+                    } else if (info.electrical > 0.0f) {
                         band_radius_delta += std::max(0.0f, r * info.electrical);
-                    band_color += sf::Color(255, 0, 0, 0);
+                        band_color.r += 128 + (std::min(1.0f, info.electrical) * 128);
+                    }
                 }
                 // Gravitational (green)
                 if (show_gravity)
                 {
                     if (info.gravity > 1.0f)
+                    {
                         band_radius_delta += (r * info.gravity) + (info.gravity - 1.0f);
-                    else
+                    } else if (info.gravity > 0.0f) {
                         band_radius_delta += std::max(0.0f, r * info.gravity);
-                    band_color += sf::Color(0, 255, 0, 0);
+                        band_color.g += 128 + (std::min(1.0f, info.gravity) * 128);
+                    }
                 }
                 // Biological (blue)
                 if (show_biological)
                 {
                     if (info.biological > 1.0f)
+                    {
                         band_radius_delta += (r * info.biological) + (info.biological - 1.0f);
-                    else
-                    band_radius_delta += std::max(0.0f, r * info.biological);
-                    band_color += sf::Color(0, 0, 255, 0);
+                    } else if (info.biological > 0.0f) {
+                        band_radius_delta += std::max(0.0f, r * info.biological);
+                        band_color.b += 128 + (std::min(1.0f, info.biological) * 128);
+                    }
                 }
 
                 band_radius += band_radius_delta;
@@ -663,7 +669,11 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
 
                 circle.setRadius(band_radius);
                 circle.setOrigin(band_radius, band_radius);
-                circle.setFillColor(band_color + sf::Color(0, 0, 0, 255));
+                if (band_color.r + band_color.g + band_color.b > 0)
+                    band_color.a = 255;
+                else
+                    band_color.a = 0;
+                circle.setFillColor(band_color);
                 window->draw(circle);
             }
         }
