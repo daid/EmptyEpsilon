@@ -598,7 +598,6 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             {
                 // Use dynamic signatures for ships.
                 info = ship->getDynamicRadarSignatureInfo();
-
             } else {
                 // Otherwise, use the baseline only.
                 info = obj->getRadarSignatureInfo();
@@ -609,7 +608,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                 window = &window_alpha;
 
             // Visual objects can be filtered out. Low signatures don't appear.
-            if (show_visual_objects)
+            if (show_visual_objects && (info.gravity > 0.0f || info.electrical > 0.0f || info.biological > 0.0f))
             {
                 obj->drawOnRadar(*window, object_position_on_screen, scale, long_range);
                 if (show_callsigns && obj->getCallSign() != "")
