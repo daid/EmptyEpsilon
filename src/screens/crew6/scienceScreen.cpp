@@ -243,7 +243,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     {
         science_radar->setSignalBiological(value);
     });
-    signal_details_biological_button->setValue(false)->setPosition(-250, -70, ABottomRight)->setSize(50, 50)->setVisible(false);
+    signal_details_biological_button->setValue(false)->setPosition(-270, -70, ABottomRight)->setSize(50, 50)->setVisible(false);
 
     // Radar/database view toggle.
     view_mode_selection = new GuiListbox(this, "VIEW_SELECTION", [this](int index, string value) {
