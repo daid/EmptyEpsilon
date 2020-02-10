@@ -113,9 +113,9 @@ GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
 	    {"Pause", sf::Keyboard::Pause},
 	};
 
-	combat_left_key=PreferencesManager::get("HOTKEY.HELMS.COMBAT_LEFT");
-	combat_right_key=PreferencesManager::get("HOTKEY.HELMS.COMBAT_RIGHT");
-	combat_boost_key=PreferencesManager::get("HOTKEY.HELMS.COMBAT_BOOST");
+	string combat_left_key=PreferencesManager::get("HOTKEY.HELMS.COMBAT_LEFT");
+	string combat_right_key=PreferencesManager::get("HOTKEY.HELMS.COMBAT_RIGHT");
+	string combat_boost_key=PreferencesManager::get("HOTKEY.HELMS.COMBAT_BOOST");
 
 	for(auto key_name : sfml_key_names)
     {
