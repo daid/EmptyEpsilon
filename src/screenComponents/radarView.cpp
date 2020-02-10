@@ -595,20 +595,17 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             // If the object is a SpaceShip, adjust the signature dynamically
             // based on its current state and activity.
             if (ship)
-            {
-                // Use dynamic signatures for ships.
-                info = ship->getDynamicRadarSignatureInfo();
-            } else {
-                // Otherwise, use the baseline only.
-                info = obj->getRadarSignatureInfo();
-            }
+                info = ship->getDynamicRadarSignatureInfo();    // Use dynamic signatures for ships.
+            else
+                info = obj->getRadarSignatureInfo();            // Otherwise, use the baseline only.
 
             // If the object doesn't hide in nebulae, draw it regardless.
             if (!obj->canHideInNebula())
                 window = &window_alpha;
 
-            // Visual objects can be filtered out. Low signatures don't appear.
-            if (show_visual_objects && (info.gravity > 0.0f || info.electrical > 0.0f || info.biological > 0.0f))
+            // Visual objects can be filtered out.
+            // If it doesn't emit sensor values, don't draw it.
+            if (show_visual_objects && (info.electrical > 0.0f || info.gravity > 0.0f || info.biological > 0.0f))
             {
                 obj->drawOnRadar(*window, object_position_on_screen, scale, long_range);
                 if (show_callsigns && obj->getCallSign() != "")
@@ -616,65 +613,53 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             }
 
             // Signal details can be visualized.
-            if (show_signal_details && (show_gravity || show_electrical || show_biological))
+            if (show_signal_details && (show_electrical || show_gravity || show_biological))
             {
-                // Draw proportional circles for each radar band.
-                sf::CircleShape circle(0.1, rand() % 5 + 10);
-                circle.setPosition(object_position_on_screen);
-
-                float band_radius = 0.0f;
-                float band_radius_delta = 0.0f;
-                sf::Color band_color(0, 0, 0, 0);
+                float band_radius = r;
+                sf::Color band_color(0, 0, 0, 223);
 
                 // Electrical (red)
-                if (show_electrical)
+                if (show_electrical && info.electrical > 0)
                 {
+                    band_color.r += 55 + std::min(1.0f, info.electrical) * 200;
+
+                    // If the band exceeds 1.0, increase the signal effect's
+                    // radius.
                     if (info.electrical > 1.0f)
-                    {
-                        band_radius_delta += (r * info.electrical) + (info.electrical - 1.0f);
-                    } else if (info.electrical > 0.0f) {
-                        band_radius_delta += std::max(0.0f, r * info.electrical);
-                        band_color.r += 128 + (std::min(1.0f, info.electrical) * 128);
-                    }
+                        band_radius += r * (info.electrical - 1.0f);
                 }
-                // Gravitational (green)
-                if (show_gravity)
+
+                // Gravity (green)
+                if (show_gravity && info.gravity > 0)
                 {
+                    band_color.g += 55 + std::min(1.0f, info.gravity) * 200;
+
                     if (info.gravity > 1.0f)
-                    {
-                        band_radius_delta += (r * info.gravity) + (info.gravity - 1.0f);
-                    } else if (info.gravity > 0.0f) {
-                        band_radius_delta += std::max(0.0f, r * info.gravity);
-                        band_color.g += 128 + (std::min(1.0f, info.gravity) * 128);
-                    }
+                        band_radius += r * (info.gravity - 1.0f);
                 }
+
                 // Biological (blue)
-                if (show_biological)
+                if (show_biological && info.biological > 0)
                 {
+                    band_color.b += 55 + std::min(1.0f, info.biological) * 200;
+
                     if (info.biological > 1.0f)
-                    {
-                        band_radius_delta += (r * info.biological) + (info.biological - 1.0f);
-                    } else if (info.biological > 0.0f) {
-                        band_radius_delta += std::max(0.0f, r * info.biological);
-                        band_color.b += 128 + (std::min(1.0f, info.biological) * 128);
-                    }
+                        band_radius += r * (info.biological - 1.0f);
                 }
 
-                band_radius += band_radius_delta;
+                // Floor band_radius to 2.0; don't draw if it's <= 0.
+                if (band_radius > 0.0f && band_color.r + band_color.g + band_color.b > 0)
+                {
+                    band_radius = std::max(2.0f, band_radius);
 
-                if (band_radius > 0.0f && band_radius < 2.0f)
-                    band_radius = 2.0f;
-                else
-                    band_radius = std::max(0.0f, band_radius);
-
-                circle.setRadius(band_radius);
-                circle.setOrigin(band_radius, band_radius);
-                if (band_color.r + band_color.g + band_color.b > 0)
-                    band_color.a = 255;
-                else
-                    band_color.a = 0;
-                circle.setFillColor(band_color);
-                window->draw(circle);
+                    // Draw a circle based on the enabled bands' values.
+                    sf::CircleShape circle(0.1, rand() % 5 + 10);
+                    circle.setPosition(object_position_on_screen);
+                    circle.setRadius(band_radius);
+                    circle.setOrigin(band_radius, band_radius);
+                    circle.setFillColor(band_color);
+                    window->draw(circle);
+                }
             }
         }
     }
@@ -737,21 +722,19 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
                 float distance_to_target = sf::length(diff);
 
                 if (ship)
-                {
-                    // Use dynamic signatures for ships.
-                    info = ship->getDynamicRadarSignatureInfo();
-                } else {
-                    // Otherwise, use the baseline only.
-                    info = obj->getRadarSignatureInfo();
-                }
+                    info = ship->getDynamicRadarSignatureInfo();    // Use dynamic signatures for ships.
+                else
+                    info = obj->getRadarSignatureInfo();            // Otherwise, use the baseline only.
 
                 // Electrical (red)
                 drawText(window,
                     sf::FloatRect(
                         object_position_on_screen.x + 15,
-                        object_position_on_screen.y + 15, 0, 0
+                        object_position_on_screen.y, 0, 0
                     ),
                     std::to_string(static_cast<int>(
+                        // Larger objects emit larger values.
+                        // Distant objects emit less stable values.
                         info.electrical * r * 10 + random(0, distance_to_target / 100))
                     ),
                     ATopLeft, 15, bold_font, sf::Color(255, 0, 0, 255)
@@ -760,7 +743,7 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
                 drawText(window,
                     sf::FloatRect(
                         object_position_on_screen.x + 15,
-                        object_position_on_screen.y, 0, 0
+                        object_position_on_screen.y + 15, 0, 0
                     ),
                     std::to_string(static_cast<int>(
                         info.gravity * r * 10 + random(0, distance_to_target / 100))
