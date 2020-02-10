@@ -739,6 +739,7 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
                     ),
                     ATopLeft, 15, bold_font, sf::Color(255, 0, 0, 255)
                 );
+
                 // Gravity (green)
                 drawText(window,
                     sf::FloatRect(
@@ -750,6 +751,7 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
                     ),
                     ATopLeft, 15, bold_font, sf::Color(0, 255, 0, 255)
                 );
+
                 // Biological (blue)
                 drawText(window,
                     sf::FloatRect(

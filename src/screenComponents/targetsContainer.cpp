@@ -53,16 +53,29 @@ void TargetsContainer::setToClosestTo(sf::Vector2f position, float max_range, ES
     foreach(Collisionable, obj, list)
     {
         P<SpaceObject> spaceObject = obj;
+
         if (spaceObject && spaceObject != my_spaceship)
         {
+            // If the object is a SpaceShip, adjust the signature dynamically
+            // based on its current state and activity.
+            P<SpaceShip> ship = obj;
+            RawRadarSignatureInfo info;
+
+            if (ship)
+                info = ship->getDynamicRadarSignatureInfo();    // Use dynamic signatures for ships.
+            else
+                info = spaceObject->getRadarSignatureInfo();    // Otherwise, use the baseline only.
+
+            bool has_signal = info.electrical > 0.0f && info.gravity > 0.0f && info.biological > 0.0f;
+
             switch(selection_type)
             {
             case Selectable:
-                if (!spaceObject->canBeSelectedBy(my_spaceship))
+                if (!spaceObject->canBeSelectedBy(my_spaceship) || !has_signal)
                     continue;
                 break;
             case Targetable:
-                if (!spaceObject->canBeTargetedBy(my_spaceship))
+                if (!spaceObject->canBeTargetedBy(my_spaceship) || !has_signal)
                     continue;
                 break;
             }
@@ -70,8 +83,7 @@ void TargetsContainer::setToClosestTo(sf::Vector2f position, float max_range, ES
                 target = spaceObject;
         }
     }
-    
-    
+
     if (my_spaceship && allow_waypoint_selection)
     {
         for(int n=0; n<my_spaceship->getWaypointCount(); n++)
