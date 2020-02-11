@@ -6,14 +6,18 @@
 GuiButton::GuiButton(GuiContainer* owner, string id, string text, func_t func)
 : GuiElement(owner, id), text(text), func(func)
 {
+    override_color = false;
+    override_text_color = false;
     text_size = 30;
 }
 
 void GuiButton::onDraw(sf::RenderTarget& window)
 {
-    sf::Color color = selectColor(colorConfig.button.background);
-    sf::Color text_color = selectColor(colorConfig.button.forground);
-    
+    if (!override_color)
+        color = selectColor(colorConfig.button.background);
+    if (!override_text_color)
+        text_color = selectColor(colorConfig.button.forground);
+
     if (!enabled)
         drawStretched(window, rect, "gui/ButtonBackground.disabled", color);
     else if (active)
@@ -71,9 +75,11 @@ void GuiButton::onMouseUp(sf::Vector2f position)
     }
 }
 
-string GuiButton::getText() const
+GuiButton* GuiButton::setColor(sf::Color color)
 {
-    return text;
+    this->override_color = true;
+    this->color = color;
+    return this;
 }
 
 GuiButton* GuiButton::setText(string text)
@@ -88,12 +94,24 @@ GuiButton* GuiButton::setTextSize(float size)
     return this;
 }
 
+GuiButton* GuiButton::setTextColor(sf::Color color)
+{
+    this->override_text_color = true;
+    this->text_color = color;
+    return this;
+}
+
 GuiButton* GuiButton::setIcon(string icon_name, EGuiAlign icon_alignment, float rotation)
 {
     this->icon_name = icon_name;
     this->icon_alignment = icon_alignment;
     this->icon_rotation = rotation;
     return this;
+}
+
+string GuiButton::getText() const
+{
+    return text;
 }
 
 string GuiButton::getIcon() const

@@ -11,6 +11,10 @@ public:
 protected:
     string text;
     float text_size;
+    bool override_color;
+    sf::Color color;
+    bool override_text_color;
+    sf::Color text_color;
     EGuiAlign text_alignment;
     func_t func;
     string icon_name;
@@ -23,8 +27,10 @@ public:
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
     
+    GuiButton* setColor(sf::Color button_color);
     GuiButton* setText(string text);
     GuiButton* setTextSize(float size);
+    GuiButton* setTextColor(sf::Color text_color);
     GuiButton* setIcon(string icon_name, EGuiAlign icon_alignment = ACenterLeft, float rotation=0);
     string getText() const;
     string getIcon() const;
