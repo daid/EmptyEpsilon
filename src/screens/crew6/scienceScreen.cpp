@@ -213,7 +213,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
         signal_details_biological_button->setValue(false)->setVisible(value);
         // Toggle signal details.
         science_radar->setSignalDetails(value);
+        probe_radar->setSignalDetails(value);
         science_radar->setVisualObjects(true)->setSignalGravity(false)->setSignalElectrical(false)->setSignalBiological(false);
+        probe_radar->setVisualObjects(true)->setSignalGravity(false)->setSignalElectrical(false)->setSignalBiological(false);
     });
     signal_details_toggle->setPosition(-270, -20, ABottomRight)->setSize(200, 50)->setVisible(true);
 
@@ -221,6 +223,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     signal_details_visual_button = new GuiToggleButton(this, "SIGNAL_DETAILS_VISUAL", "V", [this](bool value)
     {
         science_radar->setVisualObjects(value);
+        probe_radar->setVisualObjects(value);
     });
     signal_details_visual_button->setValue(false)->setPosition(-420, -70, ABottomRight)->setSize(50, 50)->setVisible(false);
 
@@ -228,6 +231,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     signal_details_electrical_button = new GuiToggleButton(this, "SIGNAL_DETAILS_ELECTRICAL", "E", [this](bool value)
     {
         science_radar->setSignalElectrical(value);
+        probe_radar->setSignalElectrical(value);
     });
     signal_details_electrical_button->setValue(true)->setPosition(-370, -70, ABottomRight)->setSize(50, 50)->setVisible(false);
     signal_details_electrical_button->setColors(colorConfig.button_red);
@@ -236,6 +240,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     signal_details_gravity_button = new GuiToggleButton(this, "SIGNAL_DETAILS_GRAVITY", "G", [this](bool value)
     {
         science_radar->setSignalGravity(value);
+        probe_radar->setSignalGravity(value);
     });
     signal_details_gravity_button->setValue(false)->setPosition(-320, -70, ABottomRight)->setSize(50, 50)->setVisible(false);
     signal_details_gravity_button->setColors(colorConfig.button_green);
@@ -244,6 +249,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     signal_details_biological_button = new GuiToggleButton(this, "SIGNAL_DETAILS_BIOLOGICAL", "B", [this](bool value)
     {
         science_radar->setSignalBiological(value);
+        probe_radar->setSignalBiological(value);
     });
     signal_details_biological_button->setValue(false)->setPosition(-270, -70, ABottomRight)->setSize(50, 50)->setVisible(false);
     signal_details_biological_button->setColors(colorConfig.button_blue);

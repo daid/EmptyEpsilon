@@ -616,12 +616,12 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             if (show_signal_details && (show_electrical || show_gravity || show_biological))
             {
                 float band_radius = r;
-                sf::Color band_color(0, 0, 0, 223);
+                sf::Color band_color(32, 32, 32, 223);
 
                 // Electrical (red)
                 if (show_electrical && info.electrical > 0)
                 {
-                    band_color.r += 64 + std::min(1.0f, info.electrical) * 100;
+                    band_color.r += 32 + std::min(1.0f, info.electrical) * 132;
 
                     // If the band exceeds 1.0, increase the signal effect's
                     // radius.
@@ -632,7 +632,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                 // Gravity (green)
                 if (show_gravity && info.gravity > 0)
                 {
-                    band_color.g += 64 + std::min(1.0f, info.gravity) * 100;
+                    band_color.g += 32 + std::min(1.0f, info.gravity) * 132;
 
                     if (info.gravity > 1.0f)
                         band_radius += r * (info.gravity - 1.0f);
@@ -641,14 +641,14 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                 // Biological (blue)
                 if (show_biological && info.biological > 0)
                 {
-                    band_color.b += 64 + std::min(1.0f, info.biological) * 100;
+                    band_color.b += 32 + std::min(1.0f, info.biological) * 132;
 
                     if (info.biological > 1.0f)
                         band_radius += r * (info.biological - 1.0f);
                 }
 
                 // Floor band_radius to 2.0; don't draw if it's <= 0.
-                if (band_radius > 0.0f && band_color.r + band_color.g + band_color.b > 0)
+                if (band_radius > 0.0f && band_color.r + band_color.g + band_color.b > 96)
                 {
                     band_radius = std::max(2.0f, band_radius);
 
