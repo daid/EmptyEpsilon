@@ -212,14 +212,10 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
         signal_details_electrical_button->setValue(false)->setVisible(value);
         signal_details_biological_button->setValue(false)->setVisible(value);
         // Toggle signal details.
-        if (science_radar->isVisible())
-        {
-            science_radar->setSignalDetails(value);
-            science_radar->setVisualObjects(true)->setSignalGravity(false)->setSignalElectrical(false)->setSignalBiological(false);
-        } else if (probe_radar->isVisible()) {
-            probe_radar->setSignalDetails(value);
-            probe_radar->setVisualObjects(true)->setSignalGravity(false)->setSignalElectrical(false)->setSignalBiological(false);
-        }
+        science_radar->setSignalDetails(value);
+        probe_radar->setSignalDetails(value);
+        science_radar->setVisualObjects(true)->setSignalGravity(false)->setSignalElectrical(false)->setSignalBiological(false);
+        probe_radar->setVisualObjects(true)->setSignalGravity(false)->setSignalElectrical(false)->setSignalBiological(false);
     });
     signal_details_toggle->setPosition(-270, -20, ABottomRight)->setSize(200, 50)->setVisible(true);
 
