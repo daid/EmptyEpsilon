@@ -66,7 +66,7 @@ void TargetsContainer::setToClosestTo(sf::Vector2f position, float max_range, ES
             else
                 info = spaceObject->getRadarSignatureInfo();    // Otherwise, use the baseline only.
 
-            bool has_signal = info.electrical > 0.0f && info.gravity > 0.0f && info.biological > 0.0f;
+            bool has_signal = info.electrical > 0.0f || info.gravity > 0.0f || info.biological > 0.0f;
 
             switch(selection_type)
             {
