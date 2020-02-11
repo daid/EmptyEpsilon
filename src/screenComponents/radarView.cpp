@@ -707,17 +707,20 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
 
         // If the object is not the controlling ship, and the object is visible
         // on radar, draw the reticule around it.
-        if (obj != my_spaceship && rect.intersects(object_rect))
+        if (rect.intersects(object_rect))
         {
-            target_sprite.setPosition(object_position_on_screen);
-            window.draw(target_sprite);
+            if (obj != my_spaceship)
+            {
+                target_sprite.setPosition(object_position_on_screen);
+                window.draw(target_sprite);
+            }
 
             // Add numeric radar signal values if signal details are enabled.
             if (show_signal_details)
             {
                 P<SpaceShip> ship = obj;
                 RawRadarSignatureInfo info;
-                float r = obj->getRadius();
+                float object_radius = obj->getRadius();
                 sf::Vector2f diff = my_spaceship->getPosition() - obj->getPosition();
                 float distance_to_target = sf::length(diff);
 
@@ -732,10 +735,10 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
                         object_position_on_screen.x + 15,
                         object_position_on_screen.y, 0, 0
                     ),
-                    std::to_string(static_cast<int>(
+                    "E" + std::to_string(static_cast<int>(
                         // Larger objects emit larger values.
                         // Distant objects emit less stable values.
-                        info.electrical * r * 10 + random(0, distance_to_target / 100))
+                        info.electrical * object_radius * 10 + random(0, distance_to_target / 100))
                     ),
                     ATopLeft, 15, bold_font, sf::Color(255, 0, 0, 255)
                 );
@@ -746,8 +749,8 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
                         object_position_on_screen.x + 15,
                         object_position_on_screen.y + 15, 0, 0
                     ),
-                    std::to_string(static_cast<int>(
-                        info.gravity * r * 10 + random(0, distance_to_target / 100))
+                    "G" + std::to_string(static_cast<int>(
+                        info.gravity * object_radius * 10 + random(0, distance_to_target / 100))
                     ),
                     ATopLeft, 15, bold_font, sf::Color(0, 255, 0, 255)
                 );
@@ -758,8 +761,8 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
                         object_position_on_screen.x + 15,
                         object_position_on_screen.y + 30, 0, 0
                     ),
-                    std::to_string(static_cast<int>(
-                        info.biological * r * 10 + random(0, distance_to_target / 100))
+                    "B" + std::to_string(static_cast<int>(
+                        info.biological * object_radius * 10 + random(0, distance_to_target / 100))
                     ),
                     ATopLeft, 15, bold_font, sf::Color(0, 0, 255, 255)
                 );
