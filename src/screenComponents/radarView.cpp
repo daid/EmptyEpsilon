@@ -621,7 +621,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                 // Electrical (red)
                 if (show_electrical && info.electrical > 0)
                 {
-                    band_color.r += 32 + std::min(1.0f, info.electrical) * 132;
+                    band_color.r += 64 + std::min(1.0f, info.electrical) * 100;
 
                     // If the band exceeds 1.0, increase the signal effect's
                     // radius.
@@ -632,7 +632,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                 // Gravity (green)
                 if (show_gravity && info.gravity > 0)
                 {
-                    band_color.g += 32 + std::min(1.0f, info.gravity) * 132;
+                    band_color.g += 64 + std::min(1.0f, info.gravity) * 100;
 
                     if (info.gravity > 1.0f)
                         band_radius += r * (info.gravity - 1.0f);
@@ -641,7 +641,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                 // Biological (blue)
                 if (show_biological && info.biological > 0)
                 {
-                    band_color.b += 32 + std::min(1.0f, info.biological) * 132;
+                    band_color.b += 64 + std::min(1.0f, info.biological) * 100;
 
                     if (info.biological > 1.0f)
                         band_radius += r * (info.biological - 1.0f);
