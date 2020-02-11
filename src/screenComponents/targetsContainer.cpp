@@ -6,6 +6,7 @@ TargetsContainer::TargetsContainer()
 {
     waypoint_selection_index = -1;
     allow_waypoint_selection = false;
+    signal_threshold = 0.3f;
 }
 
 void TargetsContainer::clear()
@@ -24,13 +25,27 @@ void TargetsContainer::set(P<SpaceObject> obj)
 {
     if (obj)
     {
-        if (entries.size() > 0)
+        P<SpaceShip> ship = obj;
+        bool reaches_signal_threshold;
+
+        // Use dynamic radar values for ships. Otherwise, use the baseline.
+        if (ship)
+            reaches_signal_threshold = ship->reachesSignalThreshold(signal_threshold);
+        else
+            reaches_signal_threshold = obj->reachesSignalThreshold(signal_threshold);
+
+        // Object is targetable only if it exceeds the signal threshold or is
+        // visible.
+        if (obj->isVisible() || reaches_signal_threshold)
         {
-            entries[0] = obj;
-            if (entries.size() > 1)
-                entries.resize(1);
-        }else{
-            entries.push_back(obj);
+            if (entries.size() > 0)
+            {
+                entries[0] = obj;
+                if (entries.size() > 1)
+                    entries.resize(1);
+            } else {
+                entries.push_back(obj);
+            }
         }
     }
     else
@@ -46,6 +61,17 @@ void TargetsContainer::set(PVector<SpaceObject> objs)
     entries = objs;
 }
 
+void TargetsContainer::setSignalThreshold(float signal_threshold)
+{
+    // Threshold in a targets container can't be < 0.
+    signal_threshold = std::max(0.0f, signal_threshold);
+}
+
+float TargetsContainer::getSignalThreshold()
+{
+    return signal_threshold;
+}
+
 void TargetsContainer::setToClosestTo(sf::Vector2f position, float max_range, ESelectionType selection_type)
 {
     P<SpaceObject> target;
@@ -56,26 +82,14 @@ void TargetsContainer::setToClosestTo(sf::Vector2f position, float max_range, ES
 
         if (spaceObject && spaceObject != my_spaceship)
         {
-            // If the object is a SpaceShip, adjust the signature dynamically
-            // based on its current state and activity.
-            P<SpaceShip> ship = obj;
-            RawRadarSignatureInfo info;
-
-            if (ship)
-                info = ship->getDynamicRadarSignatureInfo();    // Use dynamic signatures for ships.
-            else
-                info = spaceObject->getRadarSignatureInfo();    // Otherwise, use the baseline only.
-
-            bool has_signal = info.electrical > 0.0f && info.gravity > 0.0f && info.biological > 0.0f;
-
             switch(selection_type)
             {
             case Selectable:
-                if (!spaceObject->canBeSelectedBy(my_spaceship) || !has_signal)
+                if (!spaceObject->canBeSelectedBy(my_spaceship) && !reachesSignalThreshold(spaceObject))
                     continue;
                 break;
             case Targetable:
-                if (!spaceObject->canBeTargetedBy(my_spaceship) || !has_signal)
+                if (!spaceObject->canBeTargetedBy(my_spaceship) && !reachesSignalThreshold(spaceObject))
                     continue;
                 break;
             }

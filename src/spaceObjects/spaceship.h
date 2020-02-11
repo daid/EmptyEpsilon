@@ -197,6 +197,7 @@ public:
      * Check if the ship can be targeted.
      */
     virtual bool canBeTargetedBy(P<SpaceObject> other) override { return true; }
+    virtual bool reachesSignalThreshold(float signal_threshold) override;
 
     /*!
      * didAnOffensiveAction is called whenever this ship does something offesive towards an other object

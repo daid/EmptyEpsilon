@@ -210,6 +210,20 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureGravity);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureElectrical);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureBiological);
+    /// Determine whether the object's summed radar signal values exceed a given
+    /// threshold.
+    /// Requires a float value.
+    /// Returns a boolean value.
+    /// Example: obj:reachesSignalThreshold(0.3)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, reachesSignalThreshold);
+    /// Sets this object's visibility, both on radar and in 3D rendering.
+    /// Requires a boolean value.
+    /// Example: obj:setVisibility(false)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setVisibility);
+    /// Gets this object's visibility.
+    /// Returns a boolean value.
+    /// Example: local is_visible = obj:isVisible()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isVisible);
     /// Sets this object's scanning complexity (number of bars in the scanning
     /// minigame) and depth (number of scanning minigames to complete).
     /// Requires two integer values.
@@ -554,10 +568,14 @@ bool SpaceObject::sendCommsMessage(P<PlayerSpaceship> target, string message)
 
     bool result = target->hailByObject(this, message);
     if (!result && message != "")
-    {
         target->addToShipLogBy(message, this);
-    }
     return result;
+}
+
+bool SpaceObject::reachesSignalThreshold(float signal_threshold)
+{
+    // Invisible objects can't be targeted unless they hit the signal threshold.
+    return radar_signature.electrical + radar_signature.gravity + radar_signature.biological > signal_threshold;
 }
 
 // Define a script conversion function for the DamageInfo structure.

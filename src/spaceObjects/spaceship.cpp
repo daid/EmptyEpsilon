@@ -77,11 +77,17 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Note: Icon is only shown after scanning, before the ship is scanned it is always shown as an arrow.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadarTrace);
     /// Get the dynamic radar signature values for each component band.
-    /// Returns a float.
+    /// Returns a float value.
     /// Example: obj:getDynamicRadarSignatureGravity()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDynamicRadarSignatureGravity);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDynamicRadarSignatureElectrical);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDynamicRadarSignatureBiological);
+    /// Determine whether the ship's summed dynamic radar signal values exceed a
+    /// given threshold.
+    /// Requires a float value.
+    /// Returns a boolean value.
+    /// Example: obj:reachesSignalThreshold(0.3)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, reachesSignalThreshold);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, addBroadcast);
     /// Set the scan state of this ship for every faction.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanState);
@@ -526,6 +532,12 @@ void SpaceShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, f
         bar.setFillColor(sf::Color(128, 255, 128, 128));
         window.draw(bar);
     }
+}
+
+bool SpaceShip::reachesSignalThreshold(float signal_threshold)
+{
+    // Invisible ships can't be targeted unless they hit the signal threshold.
+    return getDynamicRadarSignatureGravity() + getDynamicRadarSignatureElectrical() + getDynamicRadarSignatureBiological() > signal_threshold;
 }
 
 void SpaceShip::update(float delta)
