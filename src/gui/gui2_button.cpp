@@ -72,11 +72,6 @@ void GuiButton::onMouseUp(sf::Vector2f position)
     }
 }
 
-string GuiButton::getText() const
-{
-    return text;
-}
-
 GuiButton* GuiButton::setText(string text)
 {
     this->text = text;
@@ -101,6 +96,11 @@ GuiButton* GuiButton::setColors(WidgetColorSet color_set)
 {
     this->color_set = color_set;
     return this;
+}
+
+string GuiButton::getText() const
+{
+    return text;
 }
 
 string GuiButton::getIcon() const
