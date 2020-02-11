@@ -63,6 +63,7 @@ public:
     ScienceScreen(GuiContainer* owner, ECrewPosition crew_position=scienceOfficer);
 
     virtual void onDraw(sf::RenderTarget& window);
+    virtual void onHotkey(const HotkeyResult& key) override;
 };
 
 #endif//SCIENCE_SCREEN_H

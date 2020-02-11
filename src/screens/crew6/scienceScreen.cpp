@@ -440,3 +440,24 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
     }
 }
+
+void ScienceScreen::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "SCIENCE" && my_spaceship)
+    {
+        if (key.hotkey == "SCAN_OBJECT")
+        {
+            P<SpaceObject> obj = targets.get();
+
+            // Allow scanning only if the object is scannable, and if the player
+            // isn't already scanning something.
+            if (obj &&
+                obj->canBeScannedBy(my_spaceship) &&
+                my_spaceship->scanning_delay == 0.0)
+            {
+                my_spaceship->commandScan(obj);
+                return;
+            }
+        }
+    }
+}
