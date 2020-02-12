@@ -590,46 +590,51 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
             bool new_value = !signal_details_toggle->getValue();
             setSignalDetailsToggle(new_value);
             signal_details_toggle->setValue(new_value);
+            return;
         }
 
         if (key.hotkey == "TOGGLE_VISUAL_DETAILS")
         {
-            bool new_value = !signal_details_visual_button->getValue();
             if (signal_details_toggle->getValue() == true)
             {
+                bool new_value = !signal_details_visual_button->getValue();
                 setVisualDetailsToggle(new_value);
                 signal_details_visual_button->setValue(new_value);
             }
+            return;
         }
 
         if (key.hotkey == "TOGGLE_ELECTRICAL_DETAILS")
         {
-            bool new_value = !signal_details_electrical_button->getValue();
             if (signal_details_toggle->getValue() == true)
             {
+                bool new_value = !signal_details_electrical_button->getValue();
                 setElectricalDetailsToggle(new_value);
                 signal_details_electrical_button->setValue(new_value);
             }
+            return;
         }
 
         if (key.hotkey == "TOGGLE_GRAVITY_DETAILS")
         {
-            bool new_value = !signal_details_gravity_button->getValue();
             if (signal_details_toggle->getValue() == true)
             {
+                bool new_value = !signal_details_gravity_button->getValue();
                 setGravityDetailsToggle(new_value);
                 signal_details_gravity_button->setValue(new_value);
             }
+            return;
         }
 
         if (key.hotkey == "TOGGLE_BIOLOGICAL_DETAILS")
         {
-            bool new_value = !signal_details_biological_button->getValue();
             if (signal_details_toggle->getValue() == true)
             {
+                bool new_value = !signal_details_biological_button->getValue();
                 setBiologicalDetailsToggle(new_value);
                 signal_details_biological_button->setValue(new_value);
             }
+            return;
         }
     }
 }
