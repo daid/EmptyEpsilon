@@ -204,19 +204,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Radar signal details toggle.
-    signal_details_toggle = new GuiToggleButton(this, "SIGNAL_DETAILS_TOGGLE", "Signal Details", [this](bool value)
-    {
-        // Toggle visibility of signal lens toggles.
-        signal_details_visual_button->setValue(true)->setVisible(value);
-        signal_details_gravity_button->setValue(false)->setVisible(value);
-        signal_details_electrical_button->setValue(false)->setVisible(value);
-        signal_details_biological_button->setValue(false)->setVisible(value);
-        // Toggle signal details.
-        science_radar->setSignalDetails(value);
-        probe_radar->setSignalDetails(value);
-        science_radar->setVisualObjects(true)->setSignalGravity(false)->setSignalElectrical(false)->setSignalBiological(false);
-        probe_radar->setVisualObjects(true)->setSignalGravity(false)->setSignalElectrical(false)->setSignalBiological(false);
-    });
+    signal_details_toggle = new GuiToggleButton(this, "SIGNAL_DETAILS_TOGGLE", "Signal Details", [this](bool value){ toggleSignalDetails(value); });
     signal_details_toggle->setPosition(-270, -20, ABottomRight)->setSize(200, 50)->setVisible(true);
 
     // Visual objects (radar trace) toggle.
@@ -269,6 +257,20 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 
     // Scanning dialog.
     new GuiScanningDialog(this, "SCANNING_DIALOG");
+}
+
+void ScienceScreen::toggleSignalDetails(bool value)
+{
+    // Toggle visibility of signal lens toggles.
+    signal_details_visual_button->setValue(true)->setVisible(value);
+    signal_details_gravity_button->setValue(false)->setVisible(value);
+    signal_details_electrical_button->setValue(false)->setVisible(value);
+    signal_details_biological_button->setValue(false)->setVisible(value);
+    // Toggle and reset signal details.
+    science_radar->setSignalDetails(value);
+    probe_radar->setSignalDetails(value);
+    science_radar->setVisualObjects(true)->setSignalGravity(false)->setSignalElectrical(false)->setSignalBiological(false);
+    probe_radar->setVisualObjects(true)->setSignalGravity(false)->setSignalElectrical(false)->setSignalBiological(false);
 }
 
 void ScienceScreen::onDraw(sf::RenderTarget& window)
