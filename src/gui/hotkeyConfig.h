@@ -44,6 +44,7 @@ public:
     std::vector<std::pair<string, string>> listHotkeysByCategory(string hotkey_category);
     
     std::vector<HotkeyResult> getHotkey(sf::Event::KeyEvent key);
+    static sf::Keyboard::Key stringToKeycode(string hotkey_name);
 private:
     std::vector<HotkeyConfigCategory> categories;
     

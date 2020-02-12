@@ -210,6 +210,18 @@ void HotkeyConfig::load()
     }
 }
 
+sf::Keyboard::Key HotkeyConfig::stringToKeycode(string hotkey_name)
+{
+	for(auto key_name : sfml_key_names)
+    {
+		if (key_name.first == hotkey_name)
+		{
+			return key_name.second;
+		}
+	}
+	return sf::Keyboard::Unknown;
+}
+
 std::vector<HotkeyResult> HotkeyConfig::getHotkey(sf::Event::KeyEvent key)
 {
     std::vector<HotkeyResult> results;
