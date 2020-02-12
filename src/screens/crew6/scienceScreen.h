@@ -64,6 +64,8 @@ public:
     GuiToggleButton* probe_view_button;
     P<ScanProbe> observation_point;
     GuiListbox* view_mode_selection;
+private:
+    void toggleSignalDetails(bool value);
 public:
     ScienceScreen(GuiContainer* owner, ECrewPosition crew_position=scienceOfficer);
 
