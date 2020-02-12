@@ -108,9 +108,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
             if (database_view->findAndDisplayEntry(ship->getTypeName()))
             {
                 view_mode_selection->setSelectionIndex(1);
-                radar_view->hide();
-                background_gradient->hide();
-                database_view->show();
+                setViewModeSelectionToggle(1);
             }
         }
     });
@@ -227,20 +225,23 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     signal_details_biological_button->setColor(sf::Color::Blue);
 
     // Radar/database view toggle.
-    view_mode_selection = new GuiListbox(this, "VIEW_SELECTION", [this](int index, string value) {
-        radar_view->setVisible(index == 0);
-        background_gradient->setVisible(index == 0);
-        signal_details_toggle->setVisible(index == 0);
-        signal_details_visual_button->setVisible(index == 0);
-        signal_details_gravity_button->setVisible(index == 0);
-        signal_details_electrical_button->setVisible(index == 0);
-        signal_details_biological_button->setVisible(index == 0);
-        database_view->setVisible(index == 1);
-    });
+    view_mode_selection = new GuiListbox(this, "VIEW_SELECTION", [this](int index, string value) { setViewModeSelectionToggle(index); });
     view_mode_selection->setOptions({"Radar", "Database"})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(200, 100);
 
     // Scanning dialog.
     new GuiScanningDialog(this, "SCANNING_DIALOG");
+}
+
+void ScienceScreen::setViewModeSelectionToggle(int index)
+{
+    radar_view->setVisible(index == 0);
+    background_gradient->setVisible(index == 0);
+    signal_details_toggle->setVisible(index == 0);
+    signal_details_visual_button->setVisible(index == 0);
+    signal_details_gravity_button->setVisible(index == 0);
+    signal_details_electrical_button->setVisible(index == 0);
+    signal_details_biological_button->setVisible(index == 0);
+    database_view->setVisible(index == 1);
 }
 
 void ScienceScreen::setSignalDetailsToggle(bool value)
@@ -587,15 +588,18 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
         // Signal details toggles.
         if (key.hotkey == "TOGGLE_SIGNAL_DETAILS")
         {
-            bool new_value = !signal_details_toggle->getValue();
-            setSignalDetailsToggle(new_value);
-            signal_details_toggle->setValue(new_value);
+            if (science_radar->isVisible() || probe_radar->isVisible())
+            {
+                bool new_value = !signal_details_toggle->getValue();
+                setSignalDetailsToggle(new_value);
+                signal_details_toggle->setValue(new_value);
+            }
             return;
         }
 
         if (key.hotkey == "TOGGLE_VISUAL_DETAILS")
         {
-            if (signal_details_toggle->getValue() == true)
+            if (signal_details_toggle->getValue() == true && (science_radar->isVisible() || probe_radar->isVisible()))
             {
                 bool new_value = !signal_details_visual_button->getValue();
                 setVisualDetailsToggle(new_value);
@@ -606,7 +610,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
 
         if (key.hotkey == "TOGGLE_ELECTRICAL_DETAILS")
         {
-            if (signal_details_toggle->getValue() == true)
+            if (signal_details_toggle->getValue() == true && (science_radar->isVisible() || probe_radar->isVisible()))
             {
                 bool new_value = !signal_details_electrical_button->getValue();
                 setElectricalDetailsToggle(new_value);
@@ -617,7 +621,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
 
         if (key.hotkey == "TOGGLE_GRAVITY_DETAILS")
         {
-            if (signal_details_toggle->getValue() == true)
+            if (signal_details_toggle->getValue() == true && (science_radar->isVisible() || probe_radar->isVisible()))
             {
                 bool new_value = !signal_details_gravity_button->getValue();
                 setGravityDetailsToggle(new_value);
@@ -628,7 +632,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
 
         if (key.hotkey == "TOGGLE_BIOLOGICAL_DETAILS")
         {
-            if (signal_details_toggle->getValue() == true)
+            if (signal_details_toggle->getValue() == true && (science_radar->isVisible() || probe_radar->isVisible()))
             {
                 bool new_value = !signal_details_biological_button->getValue();
                 setBiologicalDetailsToggle(new_value);
