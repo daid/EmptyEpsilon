@@ -65,6 +65,7 @@ public:
     P<ScanProbe> observation_point;
     GuiListbox* view_mode_selection;
 private:
+    void setViewModeSelectionToggle(int index);
     void setSignalDetailsToggle(bool value);
     void setVisualDetailsToggle(bool value);
     void setElectricalDetailsToggle(bool value);
