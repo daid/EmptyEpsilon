@@ -445,18 +445,67 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
 {
     if (key.category == "SCIENCE" && my_spaceship)
     {
-        if (key.hotkey == "SCAN_OBJECT")
+        // Initiate a scan on scannable objects.
+        if (key.hotkey == "SCAN_OBJECT" &&
+            my_spaceship->scanning_delay == 0.0)
         {
             P<SpaceObject> obj = targets.get();
 
             // Allow scanning only if the object is scannable, and if the player
             // isn't already scanning something.
             if (obj &&
-                obj->canBeScannedBy(my_spaceship) &&
-                my_spaceship->scanning_delay == 0.0)
+                obj->canBeScannedBy(my_spaceship))
             {
                 my_spaceship->commandScan(obj);
                 return;
+            }
+        }
+
+        // Cycle selection through scannable objects.
+        if (key.hotkey == "NEXT_SCANNABLE_OBJECT" &&
+            my_spaceship->scanning_delay == 0.0)
+        {
+            bool current_found = false;
+            for (P<SpaceObject> obj : space_object_list)
+            {
+                // If this object is the current object, flag and skip it.
+                if (obj == targets.get())
+                {
+                    current_found = true;
+                    continue;
+                }
+
+                // If this object is my ship or not visible due to a Nebula,
+                // skip it.
+                if (obj == my_spaceship ||
+                    Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition()))
+                    continue;
+
+                // If this is a scannable object and the currently selected
+                // object, and it remains in radar range, continue to set it.
+                if (current_found &&
+                    sf::length(obj->getPosition() - my_spaceship->getPosition()) < science_radar->getDistance() &&
+                    obj->canBeScannedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    return;
+                }
+            }
+
+            // Advance to the next object.
+            for (P<SpaceObject> obj : space_object_list)
+            {
+                if (obj == targets.get() ||
+                    obj == my_spaceship ||
+                    Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition()))
+                    continue;
+
+                if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < science_radar->getDistance() &&
+                    obj->canBeScannedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    return;
+                }
             }
         }
     }

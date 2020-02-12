@@ -71,6 +71,7 @@ HotkeyConfig::HotkeyConfig()
     
     newCategory("SCIENCE", "Science");
     newKey("SCAN_OBJECT", std::make_tuple("Scan object", "S"));
+    newKey("NEXT_SCANNABLE_OBJECT", std::make_tuple("Select next scannable object", "C"));
 
     newCategory("ENGINEERING", "Engineering");
     newKey("SELECT_REACTOR", std::make_tuple("Select reactor system", "Num1"));
