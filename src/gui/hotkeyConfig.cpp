@@ -72,6 +72,11 @@ HotkeyConfig::HotkeyConfig()
     newCategory("SCIENCE", "Science");
     newKey("SCAN_OBJECT", std::make_tuple("Scan object", "S"));
     newKey("NEXT_SCANNABLE_OBJECT", std::make_tuple("Select next scannable object", "C"));
+    newKey("TOGGLE_SIGNAL_DETAILS", std::make_tuple("Toggle signal details", "W"));
+    newKey("TOGGLE_VISUAL_DETAILS", std::make_tuple("Toggle visual radar traces", "V"));
+    newKey("TOGGLE_ELECTRICAL_DETAILS", std::make_tuple("Toggle electrical signal details", "E"));
+    newKey("TOGGLE_GRAVITY_DETAILS", std::make_tuple("Toggle gravity signal details", "G"));
+    newKey("TOGGLE_BIOLOGICAL_DETAILS", std::make_tuple("Toggle biological signal details", "B"));
 
     newCategory("ENGINEERING", "Engineering");
     newKey("SELECT_REACTOR", std::make_tuple("Select reactor system", "Num1"));

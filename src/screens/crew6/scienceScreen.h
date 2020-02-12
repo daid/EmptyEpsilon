@@ -65,11 +65,13 @@ public:
     P<ScanProbe> observation_point;
     GuiListbox* view_mode_selection;
 private:
-    void toggleSignalDetails(bool value);
+    void setSignalDetailsToggle(bool value);
+    void setVisualDetailsToggle(bool value);
+    void setElectricalDetailsToggle(bool value);
+    void setGravityDetailsToggle(bool value);
+    void setBiologicalDetailsToggle(bool value);
 public:
     ScienceScreen(GuiContainer* owner, ECrewPosition crew_position=scienceOfficer);
-
-    void setSignalDetailsGravity(bool value);
 
     virtual void onDraw(sf::RenderTarget& window);
     virtual void onHotkey(const HotkeyResult& key) override;
