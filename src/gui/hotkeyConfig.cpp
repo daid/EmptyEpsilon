@@ -69,6 +69,9 @@ HotkeyConfig::HotkeyConfig()
     newKey("AIM_MISSILE_LEFT", std::make_tuple("Turn missile aim to the left", ""));
     newKey("AIM_MISSILE_RIGHT", std::make_tuple("Turn missile aim to the right", ""));
     
+    newCategory("SCIENCE", "Science");
+    newKey("SCAN_OBJECT", std::make_tuple("Scan object", "S"));
+
     newCategory("ENGINEERING", "Engineering");
     newKey("SELECT_REACTOR", std::make_tuple("Select reactor system", "Num1"));
     newKey("SELECT_BEAM_WEAPONS", std::make_tuple("Select beam weapon system", "Num2"));

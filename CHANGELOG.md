@@ -6,6 +6,7 @@
 
 - `ScanProbe:onExpiration`, `ScanProbe:onDestruction`, and
   `PlayerSpaceship:onProbeLaunch` callback scripting functions.
+- Scan object hotkey to Science.
 
 ### Changed
 
