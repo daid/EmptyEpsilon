@@ -87,6 +87,7 @@ public:
     GuiRadarView* disableVisualObjects() { show_visual_objects = false; return this; }
     GuiRadarView* enableGhostDots() { show_ghost_dots = true; return this; }
     GuiRadarView* disableGhostDots() { show_ghost_dots = false; return this; }
+    bool getSignalDetails() { return show_signal_details; }
     GuiRadarView* setSignalDetails(bool is_enabled) { show_signal_details = is_enabled; return this; }
     GuiRadarView* enableSignalDetails() { show_signal_details = true; return this; }
     GuiRadarView* disableSignalDetails() { show_signal_details = false; return this; }
