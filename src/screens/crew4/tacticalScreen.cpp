@@ -117,7 +117,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
         GuiElement* beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
         beam_info_box->setPosition(0, -20, ABottomCenter)->setSize(500, 50);
         (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", "Beams", 30))->addBackground()->setPosition(0, 0, ABottomLeft)->setSize(80, 50);
-        (new GuiPowerDamageIndicator(beam_info_box, "", SYS_BeamWeapons, ACenterLeft))->setPosition(0, 0, ABottomLeft)->setSize(80, 50);
+        (new GuiPowerDamageIndicator(beam_info_box, "", SYS_BeamWeapons, ACenterLeft))->setPosition(0, 0, ABottomLeft)->setSize(212, 50);
         (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(80, 0, ABottomLeft)->setSize(132, 50);
         (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, 0, ABottomRight)->setSize(288, 50);
     }
