@@ -1,4 +1,5 @@
 #include "playerInfo.h"
+#include "gameGlobalInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "tacticalScreen.h"
 
@@ -16,8 +17,10 @@
 #include "screenComponents/shieldsEnableButton.h"
 #include "screenComponents/beamFrequencySelector.h"
 #include "screenComponents/beamTargetSelector.h"
+#include "screenComponents/powerDamageIndicator.h"
 
 #include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_label.h"
 #include "gui/gui2_rotationdial.h"
 
 TacticalScreen::TacticalScreen(GuiContainer* owner)
@@ -107,6 +110,17 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     tube_controls = new GuiMissileTubeControls(this, "MISSILE_TUBES");
     tube_controls->setPosition(20, -20, ABottomLeft);
     radar->enableTargetProjections(tube_controls);
+
+    // Beam controls beneath the radar.
+    if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
+    {
+        GuiElement* beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
+        beam_info_box->setPosition(0, -20, ABottomCenter)->setSize(500, 50);
+        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", "Beams", 30))->addBackground()->setPosition(0, 0, ABottomLeft)->setSize(80, 50);
+        (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(80, 0, ABottomLeft)->setSize(132, 50);
+        (new GuiPowerDamageIndicator(beam_info_box, "", SYS_BeamWeapons, ACenterLeft))->setPosition(0, 0, ABottomLeft)->setSize(212, 50);
+        (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, 0, ABottomRight)->setSize(288, 50);
+    }
 
     // Weapon tube locking, and manual aiming controls.
     missile_aim = new GuiRotationDial(this, "MISSILE_AIM", -90, 360 - 90, 0, [this](float value){
