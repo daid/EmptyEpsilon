@@ -9,9 +9,14 @@ GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
 void GuiTextEntry::onDraw(sf::RenderTarget& window)
 {
     if (focus)
+    {
+        sf::Keyboard::setVirtualKeyboardVisible(true);
         drawStretched(window, rect, "gui/TextEntryBackground.focused", selectColor(colorConfig.text_entry.background));
-    else
+    } else {
+        // Let the user control?
+        // sf::Keyboard::setVirtualKeyboardVisible(false);
         drawStretched(window, rect, "gui/TextEntryBackground", selectColor(colorConfig.text_entry.background));
+    }
     bool typing_indicator = focus;
     const float blink_rate = 0.530;
     if (blink_clock.getElapsedTime().asSeconds() < blink_rate)
