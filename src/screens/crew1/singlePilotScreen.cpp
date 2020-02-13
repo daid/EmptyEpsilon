@@ -90,10 +90,12 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
                     value = (y_position+20) * 1.25 / 100;
 
                 my_spaceship->commandCombatManeuverBoost(-value);
+                combat_maneuver->setBoostValue(fabs(value));
             }
             else if (my_spaceship)
             {
                 my_spaceship->commandCombatManeuverBoost(0.0);
+                combat_maneuver->setBoostValue(0.0);
             }
         },
         [this](float z_position) {
@@ -102,12 +104,16 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
         },
         [this](float r_position) {
             if (my_spaceship)
+			{
                 my_spaceship->commandCombatManeuverStrafe(r_position / 100);
+                combat_maneuver->setStrafeValue(r_position/100);
+            }
         }
     );
 
     // Ship stats and combat maneuver at bottom right corner of left panel.
-    (new GuiCombatManeuver(left_panel, "COMBAT_MANEUVER"))->setPosition(-20, -180, ABottomRight)->setSize(200, 150);
+    combat_maneuver = new GuiCombatManeuver(left_panel, "COMBAT_MANEUVER");
+    combat_maneuver->setPosition(-20, -180, ABottomRight)->setSize(200, 150);
 
     energy_display = new GuiKeyValueDisplay(left_panel, "ENERGY_DISPLAY", 0.45, "Energy", "");
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(-20, -140, ABottomRight)->setSize(240, 40);

@@ -77,10 +77,12 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
                     value = (y_position+20) * 1.25 / 100;
 
                 my_spaceship->commandCombatManeuverBoost(-value);
+                combat_maneuver->setBoostValue(fabs(value));
             }
             else if (my_spaceship)
             {
                 my_spaceship->commandCombatManeuverBoost(0.0);
+                combat_maneuver->setBoostValue(0.0);
             }
         },
         [this](float z_position) {
@@ -89,7 +91,10 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
         },
         [this](float r_position) {
             if (my_spaceship)
+            {
                 my_spaceship->commandCombatManeuverStrafe(r_position / 100);
+                combat_maneuver->setStrafeValue(r_position/100);
+            }
         }
     );
 
@@ -117,7 +122,8 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     lock_aim->setPosition(250, 20, ATopCenter)->setSize(110, 50);
 
     // Combat maneuver and propulsion controls in the bottom right corner.
-    (new GuiCombatManeuver(this, "COMBAT_MANEUVER"))->setPosition(-20, -390, ABottomRight)->setSize(200, 150);
+    combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
+    combat_maneuver->setPosition(-20, -390, ABottomRight)->setSize(200, 150);
     GuiAutoLayout* engine_layout = new GuiAutoLayout(this, "ENGINE_LAYOUT", GuiAutoLayout::LayoutHorizontalRightToLeft);
     engine_layout->setPosition(-20, -80, ABottomRight)->setSize(GuiElement::GuiSizeMax, 300);
     (new GuiImpulseControls(engine_layout, "IMPULSE"))->setSize(100, GuiElement::GuiSizeMax);

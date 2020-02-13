@@ -3,6 +3,7 @@
 
 #include "gui/gui2_overlay.h"
 #include "screenComponents/targetsContainer.h"
+#include "screenComponents/combatManeuver.h"
 
 class GuiViewport3D;
 class GuiMissileTubeControls;
@@ -32,6 +33,7 @@ private:
     GuiRotationDial* missile_aim;
     GuiMissileTubeControls* tube_controls;
     GuiToggleButton* lock_aim;
+	GuiCombatManeuver* combat_maneuver;
 public:
     SinglePilotScreen(GuiContainer* owner);
     
