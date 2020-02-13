@@ -95,11 +95,20 @@ void GuiCanvas::onKey(sf::Event::KeyEvent key, int unicode)
 
 void GuiCanvas::focus(GuiElement* element)
 {
+    if (element == focus_element)
+        return;
+
     if (focus_element)
+    {
         focus_element->focus = false;
+        focus_element->onFocusLost();
+    }
     focus_element = element;
     if (focus_element)
+    {
         focus_element->focus = true;
+        focus_element->onFocusGained();
+    }
 }
 
 void GuiCanvas::unfocusElementTree(GuiElement* element)
