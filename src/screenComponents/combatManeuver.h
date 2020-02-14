@@ -14,6 +14,8 @@ private:
 	sf::Keyboard::Key combat_left_keycode;
 	sf::Keyboard::Key combat_right_keycode;
 	sf::Keyboard::Key combat_boost_keycode;
+	bool strafing=false;
+	bool boosting=false;
 public:
     GuiCombatManeuver(GuiContainer* owner, string id);
     

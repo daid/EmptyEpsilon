@@ -37,22 +37,40 @@ GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
 
 void GuiCombatManeuver::onDraw(sf::RenderTarget& window)
 {
+	// combat maneuver keycodes
 	if (slider->getValue().x ==0 && slider->getValue().y==0)
 	{
-		float strafe_amount=0.0;
-		float boost_amount=0.0;
+		if (!strafing)
+		{
+			if (sf::Keyboard::isKeyPressed(combat_left_keycode))
+			{
+				strafing=true;
+				my_spaceship->commandCombatManeuverStrafe(-1.0);
+			}
+			else if (sf::Keyboard::isKeyPressed(combat_right_keycode))
+			{
+				strafing=true;
+				my_spaceship->commandCombatManeuverStrafe(1.0);
+			}
+		}
+		else if (!sf::Keyboard::isKeyPressed(combat_right_keycode) && !sf::Keyboard::isKeyPressed(combat_left_keycode))
+		{
+			strafing=false;
+			my_spaceship->commandCombatManeuverStrafe(0.0);
+		}
 
-		if (sf::Keyboard::isKeyPressed(combat_left_keycode)){
-			strafe_amount=-1.0;
+		if (sf::Keyboard::isKeyPressed(combat_boost_keycode) && !boosting)
+		{
+			boosting=true;
+			my_spaceship->commandCombatManeuverBoost(1.0);
 		}
-		if (sf::Keyboard::isKeyPressed(combat_right_keycode)){
-			strafe_amount=1.0;
+
+		if (!sf::Keyboard::isKeyPressed(combat_boost_keycode) && boosting){
+			boosting=false;
+			my_spaceship->commandCombatManeuverBoost(0.0);
 		}
-		if (sf::Keyboard::isKeyPressed(combat_boost_keycode)){
-			boost_amount=1.0;
-	}
-		my_spaceship->commandCombatManeuverStrafe(strafe_amount);
-	my_spaceship->commandCombatManeuverBoost(boost_amount);
+
+
 	}
 
     if (my_spaceship)
