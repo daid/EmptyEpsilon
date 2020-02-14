@@ -37,7 +37,7 @@ GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
 
 void GuiCombatManeuver::onDraw(sf::RenderTarget& window)
 {
-	// combat maneuver keycodes
+	// combat maneuver hotkeys
 	if (slider->getValue().x ==0 && slider->getValue().y==0)
 	{
 		if (!strafing)
@@ -69,8 +69,6 @@ void GuiCombatManeuver::onDraw(sf::RenderTarget& window)
 			boosting=false;
 			my_spaceship->commandCombatManeuverBoost(0.0);
 		}
-
-
 	}
 
     if (my_spaceship)
