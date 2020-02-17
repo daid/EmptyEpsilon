@@ -5,7 +5,7 @@
 ---
 --- Player ship: Template model: Flavia P. Falcon. Suggest turning music volume to 10% and sound volume to 100% on server
 ---
---- Version 2
+--- Version 3 added expiration timers to relay buttons that trigger audio playback, added a visible mob action timer, converted .wav files to .ogg files to reduce size of download
 -- Type: Mission
 -- Variation[Hard]: More enemies
 -- Variation[Easy]: Fewer enemies
@@ -92,8 +92,90 @@ function init()
 	maxTransport = math.floor(#stationList * 1.5)
 	transportPlot = transportSpawn
 	plot1 = chasePlayer		-- Start main plot line
+	plotAudioButton = audioButtonTimers
 end
-
+function audioButtonTimers(delta)
+	if playMsgMichaelButton ~= nil then
+		if player.playMsgMichaelButton == nil then
+			player.playMsgMichaelButton = delta + 180
+		end
+		player.playMsgMichaelButton = player.playMsgMichaelButton - delta
+		if player.playMsgMichaelButton < 0 then
+			player:removeCustom(playMsgMichaelButton)
+			playMsgMichaelButton = nil
+		end
+	end
+	if playMsgGremus1Button ~= nil then
+		if player.playMsgGremus1Button == nil then
+			player.playMsgGremus1Button = delta + 180
+		end
+		player.playMsgGremus1Button = player.playMsgGremus1Button - delta
+		if player.playMsgGremus1Button < 0 then
+			player:removeCustom(playMsgGremus1Button)
+			playMsgGremus1Button = nil
+		end
+	end
+	if playMsgSentry1Button ~= nil then
+		if player.playMsgSentry1Button == nil then
+			player.playMsgSentry1Button = delta + 180
+		end
+		player.playMsgSentry1Button = player.playMsgSentry1Button - delta
+		if player.playMsgSentry1Button < 0 then
+			player:removeCustom(playMsgSentry1Button)
+			playMsgSentry1Button = nil
+		end
+	end
+	if playMsgGremus2Button ~= nil then
+		if player.playMsgGremus2Button == nil then
+			player.playMsgGremus2Button = delta + 180
+		end
+		player.playMsgGremus2Button = player.playMsgGremus2Button - delta
+		if player.playMsgGremus2Button < 0 then
+			player:removeCustom(playMsgGremus2Button)
+			playMsgGremus2Button = nil
+		end
+	end
+	if playMsgProtocolButton ~= nil then
+		if player.playMsgProtocolButton == nil then
+			player.playMsgProtocolButton = delta + 180
+		end
+		player.playMsgProtocolButton = player.playMsgProtocolButton - delta
+		if player.playMsgProtocolButton < 0 then
+			player:removeCustom(playMsgProtocolButton)
+			playMsgProtocolButton = nil
+		end
+	end
+	if playMsgGremus3Button ~= nil then
+		if player.playMsgGremus3Button == nil then
+			player.playMsgGremus3Button = delta + 180
+		end
+		player.playMsgGremus3Button = player.playMsgGremus3Button - delta
+		if player.playMsgGremus3Button < 0 then
+			player:removeCustom(playMsgGremus3Button)
+			playMsgGremus3Button = nil
+		end
+	end
+	if playMsgFordinaButton ~= nil then
+		if player.playMsgFordinaButton == nil then
+			player.playMsgFordinaButton = delta + 180
+		end
+		player.playMsgFordinaButton = player.playMsgFordinaButton - delta
+		if player.playMsgFordinaButton < 0 then
+			player:removeCustom(playMsgFordinaButton)
+			playMsgFordinaButton = nil
+		end
+	end
+	if playMsgGremus6Button ~= nil then
+		if player.playMsgGremus6Button == nil then
+			player.playMsgGremus6Button = delta + 180
+		end
+		player.playMsgGremus6Button = player.playMsgGremus6Button - delta
+		if player.playMsgGremus6Button < 0 then
+			player:removeCustom(playMsgGremus6Button)
+			playMsgGremus6Button = nil
+		end
+	end
+end
 function randomStation()
 	idx = math.floor(random(1, #stationList + 0.99))
 	return stationList[idx]
@@ -211,8 +293,9 @@ function getAmbassador(delta)
 end
 
 function playMsgMichael()
-	playSoundFile("sa_51_Michael.wav")
+	playSoundFile("sa_51_Michael.ogg")
 	player:removeCustom(playMsgMichaelButton)
+	playMsgMichaelButton = nil
 end
 
 -- Update delay timer. Once timer expires, start revolution timer. Tell player about limited time for mission
@@ -225,20 +308,21 @@ function revolutionFomenting(delta)
 			playMsgGremus1Button = "play"
 			player:addCustomButton("Relay",playMsgGremus1Button,"|> AMBGREMUS001",playMsgGremus1)
 		end
-		breakoutTimer = 0.0
+		breakoutTimer = 60 * 5
 		plot2 = revolutionOccurs
 	end
 end
 
 function playMsgGremus1()
-	playSoundFile("sa_51_Gremus1.wav")
+	playSoundFile("sa_51_Gremus1.ogg")
 	player:removeCustom(playMsgGremus1Button)
+	playMsgGremus1Button = nil
 end
 
 -- Update revolution timer. If timer expires before ship arrives, Gremus dies and mission fails.
 function revolutionOccurs(delta)
-	breakoutTimer = breakoutTimer + delta
-	if breakoutTimer > 60 * 5 then
+	breakoutTimer = breakoutTimer - delta
+	if breakoutTimer < 0 then
 		if ambassadorEscapedBalindor then
 			bpcommnex:sendCommsMessage(player, "Audio message received. Auto-transcribed into log. Stored for playback: GREMUSGRD003")
 			player:addToShipLog("[GREMUSGRD003](Compound Sentry) You got ambassador Gremus just in time. We barely escaped the mob with our lives. I don't recommend bringing the ambassador back anytime soon.","Yellow")
@@ -250,15 +334,41 @@ function revolutionOccurs(delta)
 		else
 			globalMessage([[Ambassador lost to hostile mob. The Kraylors are victorious]])
 			bpcommnex:sendCommsMessage(player, [[(Compound Sentry) I'm sad to report the loss of ambassador Gremus to a hostile mob.]])
-			playSoundFile("sa_51_Sentry2.wav")
+			playSoundFile("sa_51_Sentry2.ogg")
 			plot2 = defeat
+		end
+		if player.mob_timer ~= nil then
+			player:removeCustom(player.mob_timer)
+			player.mob_timer = nil
+		end
+		if player.mob_timer_ops ~= nil then
+			player:removeCustom(player.mob_timer_ops)
+			player.mob_timer_ops = nil
+		end
+	else
+		local mob_label = "Mob Action"
+		local mob_minutes = math.floor(breakoutTimer / 60)
+		local mob_seconds = math.floor(breakoutTimer % 60)
+		if mob_minutes <= 0 then
+			mob_label = string.format("%s %i",mob_label,mob_seconds)
+		else
+			mob_label = string.format("%s %i:%.2i",mob_label,mob_minutes,mob_seconds)
+		end
+		if player:hasPlayerAtPosition("Relay") then
+			player.mob_timer = "mob_timer"
+			player:addCustomInfo("Relay",player.mob_timer,mob_label)
+		end
+		if player:hasPlayerAtPosition("Operations") then
+			player.mob_timer_ops = "mob_timer_ops"
+			player:addCustomInfo("Operations",player.mob_timer_ops,mob_label)
 		end
 	end
 end
 
 function playMsgSentry1()
-	playSoundFile("sa_51_Sentry1.wav")
-	player:removeCustomer(playMsgSentry1Button)
+	playSoundFile("sa_51_Sentry1.ogg")
+	player:removeCustom(playMsgSentry1Button)
+	playMsgSentry1Button = nil
 end
 
 function defeat(delta)
@@ -326,7 +436,7 @@ function ambassadorAboard(delta)
 			playMsgGremus2Button = "play"
 			player:addCustomButton("Relay",playMsgGremus2Button,"|> AMBGREMUS004",playMsgGremus2)
 		end		
-		playSoundFile("sa_51_Gremus2.wav")
+		playSoundFile("sa_51_Gremus2.ogg")
 		ningling = SpaceStation():setTemplate("Large Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
 		ningling:setPosition(12200,-62600):setCallSign("Ningling")
 		stationFranklin:addReputationPoints(25.0)
@@ -340,8 +450,9 @@ function ambassadorAboard(delta)
 end
 
 function playMsgGremus2()
-	playSoundFile("sa_51_Gremus2.wav")
+	playSoundFile("sa_51_Gremus2.ogg")
 	player:removeCustom(playMsgGremus2Button)
+	playMsgGremus2Button = nil
 end
 
 -- Create and send more enemies to stop mission 
@@ -413,7 +524,7 @@ function gotoNingling(delta)
 			playMsgProtocolButton = "play"
 			player:addCustomButton("Relay",playMsgProtocolButton,"|> NINGPCLO002",playMsgProtocol)
 		end
-		playSoundFile("sa_51_Protocol.wav")
+		playSoundFile("sa_51_Protocol.ogg")
 		plot1 = waitForAmbassador
 		meetingTimer = 0.0
 		plot3 = ningWait
@@ -421,8 +532,9 @@ function gotoNingling(delta)
 end
 
 function playMsgProtocol()
-	playSoundFile("sa_51_Protocol.wav")
+	playSoundFile("sa_51_Protocol.ogg")
 	player:removeCustom(playMsgProtocolButton)
+	playMsgProtocolButton = nil
 end
 
 -- While waiting, spawn more enemies to stop mission
@@ -471,8 +583,9 @@ function waitForAmbassador(delta)
 end
 
 function playMsgGremus3()
-	playSoundFile("sa_51_Gremus3.wav")
+	playSoundFile("sa_51_Gremus3.ogg")
 	player:removeCustom(playMsgGremus3Button)
+	playMsgGremus3Button = nil
 end
 
 -- Set next goal: Goltin 7. Inform player. Create planet. Start sub-plots
@@ -501,7 +614,7 @@ function getFromNingling(delta)
 end
 
 function playMsgGremus4()
-	playSoundFile("sa_51_Gremus4.wav")
+	playSoundFile("sa_51_Gremus4.ogg")
 	player:removeCustom(playMsgGremus4Button)
 end
 
@@ -514,7 +627,7 @@ function artifactResearch(delta)
 			playMsgFordinaButton = "play"
 			player:addCustomButton("Relay",playMsgFordinaButton,"|> LSNFRDNA009",playMsgFordina)
 		end
-		playSoundFile("sa_51_Fordina.wav")
+		playSoundFile("sa_51_Fordina.ogg")
 		askForPangoraLocation = "ready"
 		askForNakorLocation = "ready"
 		askForScience37Location = "ready"
@@ -526,8 +639,9 @@ function artifactResearch(delta)
 end
 
 function playMsgFordina()
-	playSoundFile("sa_51_Fordina.wav")
+	playSoundFile("sa_51_Fordina.ogg")
 	player:removeCustom(playMsgFordinaButton)
+	playMsgFordinaButton = nil
 end
 
 -- When the player docks, create the artifact nearby. Enable message additions to station relay messages
@@ -683,7 +797,7 @@ function travelGoltin(delta)
 			globalMessage([[Goltin 7 welcomes ambassador Gremus]])
 			goltincomms:sendCommsMessage(player, "(Ambassador Gremus) Thanks for transporting me, "..playerCallSign..[[. Tensions are high, but I think negotiations will succeed. 
 			In the meantime, be careful of hostile ships.]])
-			playSoundFile("sa_51_Gremus5.wav")
+			playSoundFile("sa_51_Gremus5.ogg")
 			lastMessage = 0.0
 			plot1 = finalMessage
 		end
@@ -701,8 +815,9 @@ function travelGoltin(delta)
 end
 
 function playMsgGremus6()
-	playSoundFile("sa_51_Gremus6.wav")
+	playSoundFile("sa_51_Gremus6.ogg")
 	player:removeCustom(playMsgGremus6Button)
+	playMsgGremus6Button = nil
 end
 
 function departForResearch(delta)
@@ -717,7 +832,7 @@ function goltinAndResearch(delta)
 		if distance(player,goltin) < 3300 then
 			globalMessage([[Goltin 7 welcomes ambassador Gremus]])
 			goltincomms:sendCommsMessage(player, "(Ambassador Gremus) Thanks for researching the artifacts, "..playerCallSign..[[. Tensions are high, but I think negotiations will succeed. In the meantime, be careful of hostile ships.]])
-			playSoundFile("sa_51_Gremus7.wav")
+			playSoundFile("sa_51_Gremus7.ogg")
 			lastMessage = 0.0
 			plot1 = finalMessage			
 		end
@@ -1137,6 +1252,9 @@ function update(delta)
 	end
 	if transportPlot ~= nil then
 		transportPlot(delta)
+	end
+	if plotAudioButton ~= nil then
+		plotAudioButton(delta)
 	end
 end
 
