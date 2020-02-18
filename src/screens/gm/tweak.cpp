@@ -31,6 +31,8 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
     {
         pages.push_back(new GuiShipTweakBase(this));
         list->addEntry("Base", "");
+        pages.push_back(new GuiObjectTweakRadar(this));
+        list->addEntry("Radar", "");
         pages.push_back(new GuiShipTweakShields(this));
         list->addEntry("Shields", "");
         pages.push_back(new GuiShipTweakMissileTubes(this));
