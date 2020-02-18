@@ -274,6 +274,7 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     space_object_list.push_back(this);
     faction_id = 0;
 
+    is_visible = true;
     scanning_complexity_value = 0;
     scanning_depth_value = 0;
 
@@ -287,6 +288,7 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     registerMemberReplication(&radar_signature.gravity);
     registerMemberReplication(&radar_signature.electrical);
     registerMemberReplication(&radar_signature.biological);
+    registerMemberReplication(&is_visible);
     registerMemberReplication(&scanning_complexity_value);
     registerMemberReplication(&scanning_depth_value);
     registerCollisionableReplication(multiplayer_significant_range);
@@ -299,7 +301,8 @@ SpaceObject::~SpaceObject()
 #if FEATURE_3D_RENDERING
 void SpaceObject::draw3D()
 {
-    model_info.render(getPosition(), getRotation());
+    if (is_visible)
+      model_info.render(getPosition(), getRotation());
 }
 #endif//FEATURE_3D_RENDERING
 
