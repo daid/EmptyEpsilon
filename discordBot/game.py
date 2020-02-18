@@ -1,8 +1,17 @@
 import subprocess
 import requests
 import config
+import os
+import time
 
 _process = None
+
+
+def getScenarios():
+    result = []
+    for filename in sorted(filter(lambda f: f.startswith("scenario_") and f.endswith(".lua"), os.listdir("../scripts/"))):
+        result.append(filename)
+    return result
 
 
 def start(scenario, variation):
@@ -12,10 +21,15 @@ def start(scenario, variation):
     command = ["./EmptyEpsilon"]
     command += ["httpserver=8080"]
     command += ["headless=%s" % (scenario), "variation=%s" % (variation)]
-    command += ["headless_password=ee"]
+    if config.server_password is not None:
+        command += ["headless_password=%s" % (config.server_password)]
     command += ["headless_internet=1"]
     command += ["startpaused=1"]
     _process = subprocess.Popen(command, cwd="..")
+    time.sleep(2.0)
+    if _process.poll() is not None:
+        _process = None
+        return False
     return True
 
 def pause():
@@ -24,7 +38,7 @@ def pause():
         return False
     return _lua("pauseGame()") == b''
 
-def unPause():
+def unpause():
     global _process
     if _process is None:
         return False

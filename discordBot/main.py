@@ -52,7 +52,7 @@ class MyClient(discord.Client):
             else:
                 await channel.send('Failed to pause the game')
         elif command == "unpause":
-            if game.pause():
+            if game.unpause():
                 await channel.send('Unpaused the game')
             else:
                 await channel.send('Failed to unpause the game')
