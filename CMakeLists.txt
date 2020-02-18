@@ -13,7 +13,7 @@ if(NOT IS_ABSOLUTE "${SERIOUS_PROTON_DIR}")
 endif()
 
 if(CMAKE_BUILD_TYPE MATCHES Debug)
-	add_compile_definitions(DEBUG)
+	add_definitions(-DDEBUG)
 endif(CMAKE_BUILD_TYPE MATCHES Debug)
 
 if(ENABLE_CRASH_LOGGER)

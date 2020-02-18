@@ -358,6 +358,24 @@ static int shutdownGame(lua_State* L)
 /// Calling this function will close the game. Mainly usefull for a headless server setup.
 REGISTER_SCRIPT_FUNCTION(shutdownGame);
 
+static int pauseGame(lua_State* L)
+{
+    engine->setGameSpeed(0.0);
+    return 0;
+}
+/// Pause the game
+/// Calling this function will pause the game. Mainly usefull for a headless server setup.
+REGISTER_SCRIPT_FUNCTION(pauseGame);
+
+static int unpauseGame(lua_State* L)
+{
+    engine->setGameSpeed(1.0);
+    return 0;
+}
+/// Pause the game
+/// Calling this function will pause the game. Mainly usefull for a headless server setup. As the scenario functions are not called when paused.
+REGISTER_SCRIPT_FUNCTION(unpauseGame);
+
 static int getLongRangeRadarRange(lua_State* L)
 {
     lua_pushnumber(L, gameGlobalInfo->long_range_radar_range);
