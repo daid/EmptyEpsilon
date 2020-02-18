@@ -721,8 +721,13 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
                 P<SpaceShip> ship = obj;
                 RawRadarSignatureInfo info;
                 float object_radius = obj->getRadius();
-                sf::Vector2f diff = my_spaceship->getPosition() - obj->getPosition();
-                float distance_to_target = sf::length(diff);
+                float distance_to_target = sf::length(my_spaceship->getPosition() - obj->getPosition());
+                float distance_variance = 0.0f;
+
+                // Destabilize values if the target is beyond short-range
+                // sensors or has not been scanned.
+                if (distance_to_target > 5000.0f && !obj->isScannedBy(my_spaceship))
+                    distance_variance = random(0, distance_to_target / 100);
 
                 if (ship)
                     info = ship->getDynamicRadarSignatureInfo();    // Use dynamic signatures for ships.
@@ -737,10 +742,9 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
                     ),
                     "E" + std::to_string(static_cast<int>(
                         // Larger objects emit larger values.
-                        // Distant objects emit less stable values.
-                        info.electrical * object_radius * 10 + random(0, distance_to_target / 100))
+                        info.electrical * object_radius * 10 + distance_variance)
                     ),
-                    ATopLeft, 15, bold_font, sf::Color(255, 0, 0, 255)
+                    ATopLeft, 15, bold_font, sf::Color::Red
                 );
 
                 // Gravity (green)
@@ -750,9 +754,9 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
                         object_position_on_screen.y + 15, 0, 0
                     ),
                     "G" + std::to_string(static_cast<int>(
-                        info.gravity * object_radius * 10 + random(0, distance_to_target / 100))
+                        info.gravity * object_radius * 10 + distance_variance)
                     ),
-                    ATopLeft, 15, bold_font, sf::Color(0, 255, 0, 255)
+                    ATopLeft, 15, bold_font, sf::Color::Green
                 );
 
                 // Biological (blue)
@@ -762,9 +766,9 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
                         object_position_on_screen.y + 30, 0, 0
                     ),
                     "B" + std::to_string(static_cast<int>(
-                        info.biological * object_radius * 10 + random(0, distance_to_target / 100))
+                        info.biological * object_radius * 10 + distance_variance)
                     ),
-                    ATopLeft, 15, bold_font, sf::Color(0, 0, 255, 255)
+                    ATopLeft, 15, bold_font, sf::Color::Blue
                 );
             }
         }
