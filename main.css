@@ -86,6 +86,11 @@ a.download.android {
 	border-color: #A4C639;
 }
 
+a.download.linux {
+    color: #CE0056;
+    border-color: #CE0056;
+}
+
 a.download:hover {
 	border-color: #fff;
 	color: #fff;

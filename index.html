@@ -972,8 +972,12 @@ $(function() {
                     os = "windows";
                 if (title.endsWith(".apk"))
                     os = "android";
+                if (title.endsWith(".deb"))
+                    os = "debian";
 				var row = '<tr class="' + os + '"><td><a href="' + url + '"><img src="images/os_' + os + '.svg" width="24"></a><td><a href="' + url + '" class="download ' + os + '">' + title + '</a><td>' + release_name;
     			html += row;
+                if (os == "android")
+                    html += " [BETA]";
 			}
             if (first)
                 html += "<tr><th>OS<th>File<th>version";
