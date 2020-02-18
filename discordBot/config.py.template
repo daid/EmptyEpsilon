@@ -1,0 +1,9 @@
+# Token of your discord bot.
+token = ''
+
+# Main admin user
+# Only servers that have this user can control the bot.
+admin = ''
+
+# Bot control role
+role = 'GameServerAdmin'
