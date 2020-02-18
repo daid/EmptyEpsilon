@@ -4,13 +4,19 @@
 
 ### Added
 
-- `ScanProbe:onExpiration`, `ScanProbe:onDestruction`, and
+- `ScanProbe:onExpiration`, `...onDestruction`, and
   `PlayerSpaceship:onProbeLaunch` callback scripting functions.
 - Scan object and cycle selected object hotkeys added to Science.
 - `Spaceship:getDynamicRadarSignatureGravity`, `...Electrical`, and
   `...Biological` scripting functions.
+- `SpaceObject:setRadarSignatureGravity`, `...Electrical`, and `...Biological`
+  scripting functions.
+- `SpaceObject:setVisibility` and `...isVisible` scripting functions, allowing
+  SpaceObject visibility to be toggled.
 - Detailed radar signal data visualizations as a toggleable view on the Science
   station's radar.
+- GM tweak features for radar signatures.
+- Scan object, cycle selected object, and signal detail hotkeys added to Science.
 
 ### Changed
 
