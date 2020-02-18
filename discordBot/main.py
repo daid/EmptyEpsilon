@@ -26,7 +26,7 @@ class MyClient(discord.Client):
             return True
         admin_found = False
         for member in message.guild.members:
-            if "%s#%s" % (member.name, message.author.discriminator) == config.admin_name:
+            if "%s#%s" % (member.name, member.discriminator) == config.admin_name:
                 admin_found = True
                 break
         if admin_found:
