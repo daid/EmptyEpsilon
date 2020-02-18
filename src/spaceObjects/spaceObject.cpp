@@ -216,8 +216,8 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setVisibility);
     /// Gets this object's visibility.
     /// Returns a boolean value.
-    /// Example: local is_visible = obj:getVisibility()
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getVisibility);
+    /// Example: local is_visible = obj:isVisible()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isVisible);
     /// Sets this object's scanning complexity (number of bars in the scanning
     /// minigame) and depth (number of scanning minigames to complete).
     /// Requires two integer values.
