@@ -11,7 +11,6 @@ private:
     int waypoint_selection_index;
     sf::Vector2f waypoint_selection_position;
     float signal_threshold;
-    bool reachesSignalThreshold(P<SpaceObject> obj);
 public:
     enum ESelectionType
     {

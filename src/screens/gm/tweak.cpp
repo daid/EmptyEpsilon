@@ -31,6 +31,8 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
     {
         pages.push_back(new GuiShipTweakBase(this));
         list->addEntry("Base", "");
+        pages.push_back(new GuiObjectTweakRadar(this));
+        list->addEntry("Radar", "");
         pages.push_back(new GuiShipTweakShields(this));
         list->addEntry("Shields", "");
         pages.push_back(new GuiShipTweakMissileTubes(this));
@@ -53,6 +55,8 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
     {
         pages.push_back(new GuiObjectTweakBase(this));
         list->addEntry("Base", "");
+        pages.push_back(new GuiObjectTweakRadar(this));
+        list->addEntry("Radar", "");
     }
 
     for(GuiTweakPage* page : pages)
@@ -536,7 +540,6 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
 {
     // TODO: Add more player ship tweaks here.
     // -   Ship-to-ship player transfer
-    // -   Reputation
 
     // Add two columns.
     GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
@@ -711,4 +714,58 @@ void GuiObjectTweakBase::open(P<SpaceObject> target)
     // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
     // editing long strings.
     description->setText(target->getDescription(SS_NotScanned));
+}
+
+GuiObjectTweakRadar::GuiObjectTweakRadar(GuiContainer* owner)
+: GuiTweakPage(owner)
+{
+    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+
+    GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+
+    // Left column
+    // Toggle object visibility.
+    visibility_toggle = new GuiToggleButton(left_col, "", "Visible", [this](bool value) {
+        target->setVisibility(value);
+    });
+    visibility_toggle->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Edit object's radar signature bands.
+    // For ships, this modifies only the baseline; system usage will also
+    // modify these values.
+    (new GuiLabel(left_col, "", "Electrical signature:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    electrical_slider = new GuiSlider(left_col, "", -10.0, 10.0, 0.0, [this](float value) {
+        target->setRadarSignatureElectrical(value);
+    });
+    electrical_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(left_col, "", "Gravity signature:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    gravity_slider = new GuiSlider(left_col, "", -10.0, 10.0, 0.0, [this](float value) {
+        target->setRadarSignatureGravity(value);
+    });
+    gravity_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(left_col, "", "Biological signature:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    biological_slider = new GuiSlider(left_col, "", -10.0, 10.0, 0.0, [this](float value) {
+        target->setRadarSignatureBiological(value);
+    });
+    biological_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Right column
+}
+
+void GuiObjectTweakRadar::onDraw(sf::RenderTarget& window)
+{
+}
+
+void GuiObjectTweakRadar::open(P<SpaceObject> target)
+{
+    this->target = target;
+    
+    visibility_toggle->setValue(target->isVisible());
+    electrical_slider->setValue(target->getRadarSignatureElectrical());
+    gravity_slider->setValue(target->getRadarSignatureGravity());
+    biological_slider->setValue(target->getRadarSignatureBiological());
 }

@@ -116,8 +116,11 @@ public:
     // Return the object's raw radar signature. The default signature is 0 grav, 0 elec, 0 bio.
     virtual RawRadarSignatureInfo getRadarSignatureInfo() { return radar_signature; }
     void setRadarSignatureInfo(float grav, float elec, float bio) { radar_signature = RawRadarSignatureInfo(grav, elec, bio); }
+    void setRadarSignatureGravity(float grav) { radar_signature.gravity = grav; }
     float getRadarSignatureGravity() { return radar_signature.gravity; }
+    void setRadarSignatureElectrical(float elec) { radar_signature.electrical = elec; }
     float getRadarSignatureElectrical() { return radar_signature.electrical; }
+    void setRadarSignatureBiological(float bio) { radar_signature.biological = bio; }
     float getRadarSignatureBiological() { return radar_signature.biological; }
 
     // Return the object's radar visibility.

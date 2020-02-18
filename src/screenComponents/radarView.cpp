@@ -607,7 +607,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             // If it is invisible, don't draw it.
             if (show_visual_objects)
             {
-                if (obj->isVisible())
+                if (obj->isVisible() || show_game_master_data)
                 {
                     obj->drawOnRadar(*window, object_position_on_screen, scale, long_range);
                     if (show_callsigns && obj->getCallSign() != "")
@@ -713,7 +713,7 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
         // on radar, draw the reticule around it.
         if (rect.intersects(object_rect))
         {
-            if (obj != my_spaceship && obj->isVisible())
+            if (obj != my_spaceship && (obj->isVisible() || show_game_master_data))
             {
                 target_sprite.setPosition(object_position_on_screen);
                 window.draw(target_sprite);

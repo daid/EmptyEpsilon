@@ -68,6 +68,24 @@ public:
     virtual void open(P<SpaceObject> target) override;
 };
 
+class GuiObjectTweakRadar : public GuiTweakPage
+{
+private:
+    P<SpaceObject> target;
+
+    GuiToggleButton* visibility_toggle;
+    GuiSlider* electrical_slider;
+    GuiSlider* gravity_slider;
+    GuiSlider* biological_slider;
+    // TODO: Radar trace?
+public:
+    GuiObjectTweakRadar(GuiContainer* owner);
+
+    virtual void onDraw(sf::RenderTarget& window) override;
+
+    virtual void open(P<SpaceObject> target) override;
+};
+
 class GuiShipTweakMissileWeapons : public GuiTweakPage
 {
 private:

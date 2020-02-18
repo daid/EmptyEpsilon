@@ -85,11 +85,11 @@ void TargetsContainer::setToClosestTo(sf::Vector2f position, float max_range, ES
             switch(selection_type)
             {
             case Selectable:
-                if (!spaceObject->canBeSelectedBy(my_spaceship) && !reachesSignalThreshold(spaceObject))
+                if (!spaceObject->canBeSelectedBy(my_spaceship))
                     continue;
                 break;
             case Targetable:
-                if (!spaceObject->canBeTargetedBy(my_spaceship) && !reachesSignalThreshold(spaceObject))
+                if (!spaceObject->canBeTargetedBy(my_spaceship))
                     continue;
                 break;
             }
