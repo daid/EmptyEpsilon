@@ -6,6 +6,7 @@ directory = _build_native
 commands =
     cmake .. -G Ninja -DSERIOUS_PROTON_DIR=../../SeriousProton
     cmake --build .
+artifacts = EmptyEpsilon.deb
 
 [build-win32]
 directory = _build_win32
