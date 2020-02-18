@@ -604,12 +604,15 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                 window = &window_alpha;
 
             // Visual objects can be filtered out.
-            // If it doesn't emit sensor values, don't draw it.
-            if (show_visual_objects && (info.electrical > 0.0f || info.gravity > 0.0f || info.biological > 0.0f))
+            // If it is invisible, don't draw it.
+            if (show_visual_objects)
             {
-                obj->drawOnRadar(*window, object_position_on_screen, scale, long_range);
-                if (show_callsigns && obj->getCallSign() != "")
-                    drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
+                if (obj->isVisible())
+                {
+                    obj->drawOnRadar(*window, object_position_on_screen, scale, long_range);
+                    if (show_callsigns && obj->getCallSign() != "")
+                        drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
+                }
             }
 
             // Signal details can be visualized.
@@ -619,6 +622,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                 sf::Color band_color(32, 32, 32, 223);
 
                 // Electrical (red)
+                // Show a signal only if its value is > 0.
                 if (show_electrical && info.electrical > 0)
                 {
                     band_color.r += 64 + std::min(1.0f, info.electrical) * 100;
@@ -709,7 +713,7 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
         // on radar, draw the reticule around it.
         if (rect.intersects(object_rect))
         {
-            if (obj != my_spaceship)
+            if (obj != my_spaceship && obj->isVisible())
             {
                 target_sprite.setPosition(object_position_on_screen);
                 window.draw(target_sprite);
