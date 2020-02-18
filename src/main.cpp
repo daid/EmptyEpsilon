@@ -330,7 +330,8 @@ void returnToMainMenu()
         if (PreferencesManager::get("variation") != "") gameGlobalInfo->variation = PreferencesManager::get("variation");
         gameGlobalInfo->startScenario(PreferencesManager::get("headless"));
 
-        engine->setGameSpeed(1.0);
+        if (PreferencesManager::get("startpaused") != "1")
+            engine->setGameSpeed(1.0);
     }
     else if (PreferencesManager::get("autoconnect").toInt())
     {
