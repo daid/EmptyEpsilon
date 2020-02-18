@@ -5,7 +5,7 @@ enabled = True
 directory = _build_native
 commands =
     cmake .. -G Ninja -DSERIOUS_PROTON_DIR=../../SeriousProton -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    cmake --build .
+    cmake --build . --target package
 artifacts = EmptyEpsilon.deb
 
 [build-win32]
