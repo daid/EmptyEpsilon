@@ -89,6 +89,7 @@ class SpaceObject : public Collisionable, public MultiplayerObject
         string full_scan;
     } object_description;
     RawRadarSignatureInfo radar_signature;
+    bool is_visible;
 
     /*!
      * Scan state per faction. Implementation wise, this vector is resized when
@@ -112,12 +113,16 @@ public:
     float getRadius() { return object_radius; }
     void setRadius(float radius) { object_radius = radius; setCollisionRadius(radius); }
 
-    // Return the object's raw radar signature. The default signature is 0,0,0.
+    // Return the object's raw radar signature. The default signature is 0 grav, 0 elec, 0 bio.
     virtual RawRadarSignatureInfo getRadarSignatureInfo() { return radar_signature; }
     void setRadarSignatureInfo(float grav, float elec, float bio) { radar_signature = RawRadarSignatureInfo(grav, elec, bio); }
     float getRadarSignatureGravity() { return radar_signature.gravity; }
     float getRadarSignatureElectrical() { return radar_signature.electrical; }
     float getRadarSignatureBiological() { return radar_signature.biological; }
+
+    // Return the object's radar visibility.
+    void setVisibility(bool visibility) { is_visible = visibility; }
+    bool isVisible() { return is_visible; }
 
     string getDescription(EScannedState state)
     {

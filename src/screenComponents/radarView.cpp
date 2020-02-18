@@ -585,9 +585,14 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             sf::RenderTarget* window = &window_normal;
             if (!obj->canHideInNebula())
                 window = &window_alpha;
-            obj->drawOnRadar(*window, object_position_on_screen, scale, long_range);
-            if (show_callsigns && obj->getCallSign() != "")
-                drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
+
+            // Draw only visible objects.
+            if (obj->isVisible())
+            {
+                obj->drawOnRadar(*window, object_position_on_screen, scale, long_range);
+                if (show_callsigns && obj->getCallSign() != "")
+                    drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
+            }
         }
     }
     if (my_spaceship)
@@ -632,8 +637,12 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
         sf::FloatRect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
         if (obj != my_spaceship && rect.intersects(object_rect))
         {
-            target_sprite.setPosition(object_position_on_screen);
-            window.draw(target_sprite);
+            // Draw objects only if they're visible.
+            if (obj != my_spaceship && obj->isVisible())
+            {
+                target_sprite.setPosition(object_position_on_screen);
+                window.draw(target_sprite);
+            }
         }
     }
 

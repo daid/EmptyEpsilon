@@ -210,6 +210,14 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureGravity);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureElectrical);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureBiological);
+    /// Sets this object's visibility, both on radar and in 3D rendering.
+    /// Requires a boolean value.
+    /// Example: obj:setVisibility(false)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setVisibility);
+    /// Gets this object's visibility.
+    /// Returns a boolean value.
+    /// Example: local is_visible = obj:isVisible()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isVisible);
     /// Sets this object's scanning complexity (number of bars in the scanning
     /// minigame) and depth (number of scanning minigames to complete).
     /// Requires two integer values.
@@ -260,6 +268,7 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     space_object_list.push_back(this);
     faction_id = 0;
 
+    is_visible = true;
     scanning_complexity_value = 0;
     scanning_depth_value = 0;
 
@@ -273,6 +282,7 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     registerMemberReplication(&radar_signature.gravity);
     registerMemberReplication(&radar_signature.electrical);
     registerMemberReplication(&radar_signature.biological);
+    registerMemberReplication(&is_visible);
     registerMemberReplication(&scanning_complexity_value);
     registerMemberReplication(&scanning_depth_value);
     registerCollisionableReplication(multiplayer_significant_range);
@@ -285,7 +295,9 @@ SpaceObject::~SpaceObject()
 #if FEATURE_3D_RENDERING
 void SpaceObject::draw3D()
 {
-    model_info.render(getPosition(), getRotation());
+    // Draw only visible objects.
+    if (is_visible)
+      model_info.render(getPosition(), getRotation());
 }
 #endif//FEATURE_3D_RENDERING
 
