@@ -326,7 +326,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     {
         if (targets.get() && (probe->getPosition() - targets.get()->getPosition()) > 5000.0f)
             targets.clear();
-    }else{
+    } else {
         if (targets.get() && Nebula::blockedByNebula(my_spaceship->getPosition(), targets.get()->getPosition()))
             targets.clear();
     }
@@ -393,12 +393,8 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             info_description->setText(description)->show();
 
             if (!sidebar_pager->indexByValue("Description"))
-            {
                 sidebar_pager->addEntry("Description", "Description");
-            }
-        }
-        else
-        {
+        } else {
             sidebar_pager->removeEntry(sidebar_pager->indexByValue("Description"));
         }
 
@@ -435,9 +431,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                     }
 
                     info_description->hide();
-                }
-                else if (sidebar_pager_selection == "Systems")
-                {
+                } else if (sidebar_pager_selection == "Systems") {
                     info_shield_frequency->hide();
                     info_beam_frequency->hide();
 
@@ -447,9 +441,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                     }
                     
                     info_description->hide();
-                }
-                else if (sidebar_pager_selection == "Description")
-                {
+                } else if (sidebar_pager_selection == "Description") {
                     info_shield_frequency->hide();
                     info_beam_frequency->hide();
 
@@ -459,9 +451,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                     }
 
                     info_description->show();
-                }
-                else
-                {
+                } else {
                     LOG(WARNING) << "Invalid pager state: " << sidebar_pager_selection;
                 }
 
@@ -480,11 +470,8 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                     info_system[n]->setValue(string(int(system_health * 100.0f)) + "%")->setColor(sf::Color(255, 127.5 * (system_health + 1), 127.5 * (system_health + 1), 255));
                 }
             }
-        }
-
-        // If the target isn't a ship, show basic info.
-        else
-        {
+        } else {
+            // If the target isn't a ship, show basic info.
             sidebar_pager->hide();
             info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
 
@@ -496,12 +483,9 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                 info_hull->setValue(int(station->getHull()));
             }
         }
-    }
-
-    // If the target is a waypoint, show its heading and distance, and our
-    // velocity toward it.
-    else if (targets.getWaypointIndex() >= 0)
-    {
+    } else if (targets.getWaypointIndex() >= 0) {
+        // If the target is a waypoint, show its heading and distance, and our
+        // velocity toward it.
         sidebar_pager->hide();
         sf::Vector2f position_diff = my_spaceship->waypoints[targets.getWaypointIndex()] - my_spaceship->getPosition();
         float distance = sf::length(position_diff);
@@ -585,6 +569,9 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
                     targets.set(obj);
                     return;
                 }
+            }
+        }
+
         // Signal details toggles.
         if (key.hotkey == "TOGGLE_SIGNAL_DETAILS")
         {

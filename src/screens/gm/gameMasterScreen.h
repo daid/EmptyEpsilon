@@ -87,5 +87,4 @@ public:
     string getScriptExport(bool selected_only);
 };
 
-
 #endif//GAME_MASTER_SCREEN_H

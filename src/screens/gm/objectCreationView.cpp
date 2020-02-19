@@ -6,7 +6,6 @@
 #include "gui/gui2_selector.h"
 #include "gui/gui2_listbox.h"
 
-
 GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner, func_t enterCreateMode)
 : GuiOverlay(owner, "OBJECT_CREATE_SCREEN", sf::Color(0, 0, 0, 128)), enterCreateMode(enterCreateMode)
 {

@@ -49,9 +49,7 @@ GameMasterScreen::GameMasterScreen()
     
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR", [this](int index, string value) {
         for(P<SpaceObject> obj : targets.getTargets())
-        {
             obj->setFactionId(index);
-        }
     });
     for(P<FactionInfo> info : factionInfo)
         faction_selector->addEntry(info->getName(), info->getName());
@@ -99,14 +97,10 @@ GameMasterScreen::GameMasterScreen()
             {
                 player_tweak_dialog->open(obj);
                 break;
-            }
-            else if (P<SpaceShip>(obj))
-            {
+            } else if (P<SpaceShip>(obj)) {
                 ship_tweak_dialog->open(obj);
                 break;
-            }
-            else
-            {
+            } else {
                 object_tweak_dialog->open(obj);
                 break;
             }
@@ -201,10 +195,7 @@ GameMasterScreen::GameMasterScreen()
     message_text->setTextSize(20)->setPosition(20, 20, ATopLeft)->setSize(900 - 40, 200 - 40);
     message_close_button = new GuiButton(message_frame, "", "Close", [this]() {
         if (!gameGlobalInfo->gm_messages.empty())
-        {
             gameGlobalInfo->gm_messages.pop_front();
-        }
-
     });
     message_close_button->setTextSize(30)->setPosition(-20, -20, ABottomRight)->setSize(300, 30);
 }
@@ -219,11 +210,14 @@ void GameMasterScreen::update(float delta)
     if (mouse_wheel_delta != 0.0)
     {
         float view_distance = main_radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
+
         if (view_distance > 100000)
             view_distance = 100000;
         if (view_distance < 5000)
             view_distance = 5000;
+
         main_radar->setDistance(view_distance);
+
         if (view_distance < 10000)
             main_radar->shortRange();
         else
@@ -246,11 +240,9 @@ void GameMasterScreen::update(float delta)
             if (ship->isCommsBeingHailedByGM() || ship->isCommsChatOpenToGM())
             {
                 if (!chat_dialog_per_ship[n]->isVisible())
-                {
                     chat_dialog_per_ship[n]->show()->setPosition(main_radar->worldToScreen(ship->getPosition()))->setSize(300, 300);
-                }
             }
-        }else{
+        } else {
             if (player_ship_selector->indexByValue(string(n)) != -1)
                 player_ship_selector->removeEntry(player_ship_selector->indexByValue(string(n)));
         }
@@ -260,6 +252,7 @@ void GameMasterScreen::update(float delta)
     for(P<SpaceObject> obj : targets.getTargets())
     {
         has_object = true;
+
         if (P<CpuShip>(obj))
             has_cpu_ship = true;
         else if (P<PlayerSpaceship>(obj))
@@ -281,23 +274,18 @@ void GameMasterScreen::update(float delta)
     for(P<SpaceObject> obj : targets.getTargets())
     {
         std::unordered_map<string, string> info = obj->getGMInfo();
+
         for(std::unordered_map<string, string>::iterator i = info.begin(); i != info.end(); i++)
         {
             if (selection_info.find(i->first) == selection_info.end())
-            {
                 selection_info[i->first] = i->second;
-            }
             else if (selection_info[i->first] != i->second)
-            {
                 selection_info[i->first] = "*mixed*";
-            }
         }
     }
 
     if (targets.getTargets().size() == 1)
-    {
         selection_info["Position"] = string(targets.getTargets()[0]->getPosition().x, 0) + "," + string(targets.getTargets()[0]->getPosition().y, 0);
-    }
     
     unsigned int cnt = 0;
     for(std::unordered_map<string, string>::iterator i = selection_info.begin(); i != selection_info.end(); i++)
@@ -306,12 +294,13 @@ void GameMasterScreen::update(float delta)
         {
             info_items.push_back(new GuiKeyValueDisplay(info_layout, "INFO_" + string(cnt), 0.5, i->first, i->second));
             info_items[cnt]->setSize(GuiElement::GuiSizeMax, 30);
-        }else{
+        } else {
             info_items[cnt]->show();
             info_items[cnt]->setKey(i->first)->setValue(i->second);
         }
         cnt++;
     }
+
     while(cnt < info_items.size())
     {
         info_items[cnt]->hide();
@@ -320,19 +309,19 @@ void GameMasterScreen::update(float delta)
 
     bool gm_functions_changed = gm_script_options->entryCount() != int(gameGlobalInfo->gm_callback_functions.size());
     auto it = gameGlobalInfo->gm_callback_functions.begin();
+
     for(int n=0; !gm_functions_changed && n<gm_script_options->entryCount(); n++)
     {
         if (gm_script_options->getEntryName(n) != it->name)
             gm_functions_changed = true;
         it++;
     }
+
     if (gm_functions_changed)
     {
         gm_script_options->setOptions({});
         for(const GMScriptCallback& callback : gameGlobalInfo->gm_callback_functions)
-        {
             gm_script_options->addEntry(callback.name, callback.name);
-        }
     }
 
     if (!gameGlobalInfo->gm_messages.empty())
@@ -352,13 +341,11 @@ void GameMasterScreen::onMouseDown(sf::Vector2f position)
     if (InputHandler::mouseIsDown(sf::Mouse::Right))
     {
         click_and_drag_state = CD_DragViewOrOrder;
-    }
-    else
-    {
+    } else {
         if (cancel_create_button->isVisible())
         {
             object_creation_view->createObject(position);
-        }else{
+        } else {
             click_and_drag_state = CD_BoxSelect;
             
             float min_drag_distance = main_radar->getDistance() / 450 * 10;
@@ -386,9 +373,7 @@ void GameMasterScreen::onMouseDrag(sf::Vector2f position)
         break;
     case CD_DragObjects:
         for(P<SpaceObject> obj : targets.getTargets())
-        {
             obj->setPosition(obj->getPosition() + (position - drag_previous_position));
-        }
         break;
     case CD_BoxSelect:
         box_selection_overlay->show();
@@ -423,6 +408,7 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
 
             sf::Vector2f upper_bound(-std::numeric_limits<float>::max(), -std::numeric_limits<float>::max());
             sf::Vector2f lower_bound(std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
+
             for(P<SpaceObject> obj : targets.getTargets())
             {
                 P<CpuShip> cpu_ship = obj;
@@ -434,12 +420,14 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
                 upper_bound.x = std::max(upper_bound.x, obj->getPosition().x);
                 upper_bound.y = std::max(upper_bound.y, obj->getPosition().y);
             }
+
             sf::Vector2f objects_center = (upper_bound + lower_bound) / 2.0f;
 
             for(P<SpaceObject> obj : targets.getTargets())
             {
                 P<CpuShip> cpu_ship = obj;
                 P<WormHole> wormhole = obj;
+
                 if (cpu_ship)
                 {
                     if (target && target != obj && target->canBeTargetedBy(obj))
@@ -447,25 +435,21 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
                         if (obj->isEnemy(target))
                         {
                             cpu_ship->orderAttack(target);
-                        }else{
+                        } else {
                             if (!shift_down && target->canBeDockedBy(cpu_ship))
                                 cpu_ship->orderDock(target);
                             else
                                 cpu_ship->orderDefendTarget(target);
                         }
-                    }else{
+                    } else {
                         if (shift_down)
                             cpu_ship->orderFlyTowardsBlind(position + (obj->getPosition() - objects_center));
                         else
                             cpu_ship->orderFlyTowards(position + (obj->getPosition() - objects_center));
                     }
-                }
-                else if (wormhole)
-                {
+                } else if (wormhole) {
                     wormhole->setTargetPosition(position);
                 }
-                
-                
             }
         }
         break;
@@ -487,6 +471,7 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
                     continue;
                 space_objects.push_back(c);
             }
+
             if (shift_down)
             {
                 foreach(SpaceObject, s, space_objects)
@@ -497,7 +482,6 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
                 targets.set(space_objects);
             }
 
-
             if (space_objects.size() > 0)
                 faction_selector->setSelectionIndex(space_objects[0]->getFactionId());
         }
@@ -505,6 +489,7 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
     default:
         break;
     }
+
     click_and_drag_state = CD_None;
     box_selection_overlay->hide();
 }
@@ -548,12 +533,11 @@ string GameMasterScreen::getScriptExport(bool selected_only)
 {
     string output;
     PVector<SpaceObject> objs;
+
     if (selected_only)
-    {
         objs = targets.getTargets();
-    }else{
+    else
         objs = space_object_list;
-    }
     
     foreach(SpaceObject, obj, objs)
     {
@@ -562,5 +546,6 @@ string GameMasterScreen::getScriptExport(bool selected_only)
             continue;
         output += "    " + line + "\n";
     }
+
     return output;
 }

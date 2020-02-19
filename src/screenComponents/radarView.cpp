@@ -552,9 +552,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             {
                 P<ScanProbe> sp = obj;
                 if (!sp || sp->owner_id != my_spaceship->getMultiplayerId())
-                {
                     continue;
-                }
             }
 
             sf::Vector2f position = obj->getPosition();
@@ -563,9 +561,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             {
                 P<SpaceObject> obj2 = c_obj;
                 if (obj2 && (obj->getPosition() - obj2->getPosition()) < 5000.0f + obj2->getRadius())
-                {
                     visible_objects.insert(*obj2);
-                }
             }
         }
         break;
@@ -731,7 +727,7 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
                 // Destabilize values if the target is beyond short-range
                 // sensors or has not been scanned.
                 if (distance_to_target > 5000.0f && !obj->isScannedBy(my_spaceship))
-                    distance_variance = random(0, distance_to_target / 100);
+                    distance_variance = random(0, (distance_to_target - 5000.0f) / 100);
 
                 if (ship)
                     info = ship->getDynamicRadarSignatureInfo();    // Use dynamic signatures for ships.
