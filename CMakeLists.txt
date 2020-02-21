@@ -381,7 +381,7 @@ endif()
 if(ANDROID)
     add_library(${EXECUTABLE_NAME} SHARED ${SOURCES})
 else()
-    add_executable(${EXECUTABLE_NAME} MACOSX_BUNDLE ${SOURCES})
+    add_executable(${EXECUTABLE_NAME} MACOSX_BUNDLE WIN32 ${SOURCES})
 endif()
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
