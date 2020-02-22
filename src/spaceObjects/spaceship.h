@@ -168,6 +168,7 @@ public:
     sf::Vector2f docking_offset; //Server only
 
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
+    virtual ~SpaceShip();
 
 #if FEATURE_3D_RENDERING
     virtual void draw3DTransparent() override;

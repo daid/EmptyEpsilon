@@ -44,6 +44,10 @@ BeamEffect::BeamEffect()
     
 }
 
+BeamEffect::~BeamEffect()
+{
+}
+
 #if FEATURE_3D_RENDERING
 void BeamEffect::draw3DTransparent()
 {

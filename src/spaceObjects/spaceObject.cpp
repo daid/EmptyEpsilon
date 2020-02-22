@@ -278,6 +278,10 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     registerCollisionableReplication(multiplayer_significant_range);
 }
 
+SpaceObject::~SpaceObject()
+{
+}
+
 #if FEATURE_3D_RENDERING
 void SpaceObject::draw3D()
 {

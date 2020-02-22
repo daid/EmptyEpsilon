@@ -43,6 +43,10 @@ ScanProbe::ScanProbe()
     setCallSign(string(getMultiplayerId()) + "P");
 }
 
+ScanProbe::~ScanProbe()
+{
+}
+
 void ScanProbe::update(float delta)
 {
     lifetime -= delta;

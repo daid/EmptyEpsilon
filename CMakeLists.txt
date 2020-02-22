@@ -279,6 +279,7 @@ foreach(SP_SOURCE
 	src/scriptInterface.cpp
 	src/event.cpp
 	src/multiplayer.cpp
+	src/P.cpp
 	src/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp
 	src/Box2D/Dynamics/Contacts/b2ContactSolver.cpp
 	src/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp

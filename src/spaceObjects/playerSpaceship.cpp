@@ -313,6 +313,10 @@ PlayerSpaceship::PlayerSpaceship()
     addToShipLog("Start of log", colorConfig.log_generic);
 }
 
+PlayerSpaceship::~PlayerSpaceship()
+{
+}
+
 void PlayerSpaceship::update(float delta)
 {
     // If we're flashing the screen for hull damage, tick the fade-out.
