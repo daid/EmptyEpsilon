@@ -32,6 +32,9 @@ public:
     sf::Color log_receive_neutral;
     
     WidgetColorSet button;
+    WidgetColorSet button_red;
+    WidgetColorSet button_green;
+    WidgetColorSet button_blue;
     WidgetColorSet label;
     WidgetColorSet text_entry;
     WidgetColorSet slider;
