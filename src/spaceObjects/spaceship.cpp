@@ -58,9 +58,11 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponTurretDirection);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponCycleTime);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponDamage);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponDamageType);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponEnergyPerFire);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponHeatPerFire);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeapon);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponDamageType);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponTurret);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponTexture);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponEnergyPerFire);
@@ -218,6 +220,7 @@ void SpaceShip::applyTemplateValues()
         beam_weapons[n].setTurretRotationRate(ship_template->beams[n].getTurretRotationRate());
         beam_weapons[n].setCycleTime(ship_template->beams[n].getCycleTime());
         beam_weapons[n].setDamage(ship_template->beams[n].getDamage());
+        beam_weapons[n].setDamageType(static_cast<EDamageType>(ship_template->beams[n].getDamageType()));
         beam_weapons[n].setBeamTexture(ship_template->beams[n].getBeamTexture());
         beam_weapons[n].setEnergyPerFire(ship_template->beams[n].getEnergyPerFire());
         beam_weapons[n].setHeatPerFire(ship_template->beams[n].getHeatPerFire());
@@ -1006,11 +1009,10 @@ void SpaceShip::hackFinished(P<SpaceObject> source, string target)
 float SpaceShip::getShieldDamageFactor(DamageInfo& info, int shield_index)
 {
     float frequency_damage_factor = 1.0;
-    if (info.type == DT_Energy && gameGlobalInfo->use_beam_shield_frequencies)
-    {
-        frequency_damage_factor = frequencyVsFrequencyDamageFactor(info.frequency, shield_frequency);
-    }
     ESystem system = getShieldSystemForShieldIndex(shield_index);
+
+    if (info.type == DT_Energy && gameGlobalInfo->use_beam_shield_frequencies)
+        frequency_damage_factor = frequencyVsFrequencyDamageFactor(info.frequency, shield_frequency);
 
     //Shield damage reduction curve. Damage reduction gets slightly exponetial effective with power.
     // This also greatly reduces the ineffectiveness at low power situations.
@@ -1368,10 +1370,24 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
          || beam_weapons[n].getTurretDirection() != ship_template->beams[n].getTurretDirection()
          || beam_weapons[n].getTurretRotationRate() != ship_template->beams[n].getTurretRotationRate()
          || beam_weapons[n].getCycleTime() != ship_template->beams[n].getCycleTime()
-         || beam_weapons[n].getDamage() != ship_template->beams[n].getDamage())
+         || beam_weapons[n].getDamage() != ship_template->beams[n].getDamage()
+         || beam_weapons[n].getDamageType() != static_cast<EDamageType>(ship_template->beams[n].getDamageType()))
         {
-            ret += ":setBeamWeapon(" + string(n) + ", " + string(beam_weapons[n].getArc(), 0) + ", " + string(beam_weapons[n].getDirection(), 0) + ", " + string(beam_weapons[n].getRange(), 0) + ", " + string(beam_weapons[n].getCycleTime(), 1) + ", " + string(beam_weapons[n].getDamage(), 1) + ")";
-            ret += ":setBeamWeaponTurret(" + string(n) + ", " + string(beam_weapons[n].getTurretArc(), 0) + ", " + string(beam_weapons[n].getTurretDirection(), 0) + ", " + string(beam_weapons[n].getTurretRotationRate(), 0) + ")";
+            ret += ":setBeamWeapon(" + string(n) + ", " +
+                string(beam_weapons[n].getArc(), 0) + ", " +
+                string(beam_weapons[n].getDirection(), 0) + ", " +
+                string(beam_weapons[n].getRange(), 0) + ", " +
+                string(beam_weapons[n].getCycleTime(), 1) + ", " +
+                string(beam_weapons[n].getDamage(), 1) +
+            ")";
+            ret += ":setBeamWeaponDamageType(" + string(n) + ", " +
+                string(beam_weapons[n].getDamageType(), 0) +
+            ")";
+            ret += ":setBeamWeaponTurret(" + string(n) + ", " +
+                string(beam_weapons[n].getTurretArc(), 0) + ", " +
+                string(beam_weapons[n].getTurretDirection(), 0) + ", " +
+                string(beam_weapons[n].getTurretRotationRate(), 0) +
+            ")";
         }
     }
 

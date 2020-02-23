@@ -362,6 +362,7 @@ public:
 
     float getBeamWeaponCycleTime(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getCycleTime(); }
     float getBeamWeaponDamage(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getDamage(); }
+    EDamageType getBeamWeaponDamageType(int index) { if (index < 0 || index >= max_beam_weapons) return DT_Energy; return beam_weapons[index].getDamageType(); }
     float getBeamWeaponEnergyPerFire(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getEnergyPerFire(); }
     float getBeamWeaponHeatPerFire(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getHeatPerFire(); }
 
@@ -379,6 +380,13 @@ public:
         beam_weapons[index].setRange(range);
         beam_weapons[index].setCycleTime(cycle_time);
         beam_weapons[index].setDamage(damage);
+    }
+
+    void setBeamWeaponDamageType(int index, int damage_type)
+    {
+        if (index < 0 || index >= max_beam_weapons)
+            return;
+        beam_weapons[index].setDamageType(static_cast<EDamageType>(damage_type));
     }
 
     void setBeamWeaponTurret(int index, float arc, float direction, float rotation_rate)
