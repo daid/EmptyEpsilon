@@ -360,13 +360,16 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
             // effectively doesn't exist; exit if that's the case.
             if (beam_weapons[n].getRange() == 0.0) continue;
 
-            // Color beam arcs red.
+            // Color energy beam arcs red and EM arcs blue.
             // TODO: Make this color configurable.
             sf::Color color = sf::Color::Red;
 
+            if (beam_weapons[n].getDamageType() == 2)
+                color = sf::Color::Blue;
+
             // If the beam is cooling down, flash and fade the arc color.
             if (beam_weapons[n].getCooldown() > 0)
-                color = sf::Color(255, 255 * (beam_weapons[n].getCooldown() / beam_weapons[n].getCycleTime()), 0);
+                color += sf::Color(0, 255 * (beam_weapons[n].getCooldown() / beam_weapons[n].getCycleTime()), 0);
 
             // Initialize variables from the beam's data.
             float beam_direction = beam_weapons[n].getDirection();
