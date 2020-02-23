@@ -70,7 +70,7 @@ protected:
     float turret_rotation_rate;
     float cycle_time;
     float damage;//Server side only
-    EDamageType damage_type;//Server side only
+    EDamageType damage_type;
     float energy_per_beam_fire;//Server side only
     float heat_per_beam_fire;//Server side only
     //Beam runtime state

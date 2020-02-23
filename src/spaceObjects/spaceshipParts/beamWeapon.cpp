@@ -28,6 +28,7 @@ void BeamWeapon::setParent(SpaceShip* parent)
     parent->registerMemberReplication(&arc);
     parent->registerMemberReplication(&direction);
     parent->registerMemberReplication(&range);
+    parent->registerMemberReplication(&damage_type);
     parent->registerMemberReplication(&turret_arc);
     parent->registerMemberReplication(&turret_direction);
     parent->registerMemberReplication(&turret_rotation_rate);
