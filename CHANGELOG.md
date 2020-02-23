@@ -9,6 +9,8 @@
 - Scan object and cycle selected object hotkeys added to Science.
 - SpaceObjects can be invisible, hiding them from radar and 3D views.
 - `SpaceObject:setVisibility` and `isVisible` scripting functions.
+- `setColors()` and `getColors()` GUI functions, and R/G/B color profiles, for
+  GuiButtons.
 - `SpaceShip:getDynamicRadarSignatureGravity()`, `...Electrical()`, and
   `...Biological()` scripting functions.
 
