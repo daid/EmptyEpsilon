@@ -29,7 +29,7 @@ void TargetsContainer::set(P<SpaceObject> obj)
             entries[0] = obj;
             if (entries.size() > 1)
                 entries.resize(1);
-        }else{
+        }else if (obj->isVisible()){
             entries.push_back(obj);
         }
     }
@@ -58,11 +58,11 @@ void TargetsContainer::setToClosestTo(sf::Vector2f position, float max_range, ES
             switch(selection_type)
             {
             case Selectable:
-                if (!spaceObject->canBeSelectedBy(my_spaceship))
+                if (!spaceObject->canBeSelectedBy(my_spaceship) || !spaceObject->isVisible())
                     continue;
                 break;
             case Targetable:
-                if (!spaceObject->canBeTargetedBy(my_spaceship))
+                if (!spaceObject->canBeTargetedBy(my_spaceship) || !spaceObject->isVisible())
                     continue;
                 break;
             }
