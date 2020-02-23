@@ -7,6 +7,8 @@
 - `ScanProbe:onExpiration`, `ScanProbe:onDestruction`, and
   `PlayerSpaceship:onProbeLaunch` callback scripting functions.
 - Scan object and cycle selected object hotkeys added to Science.
+- `SpaceShip:getDynamicRadarSignatureGravity()`, `...Electrical()`, and
+  `...Biological()` scripting functions.
 
 ### Changed
 
