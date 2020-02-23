@@ -124,7 +124,7 @@ Planet::Planet()
 
     collision_size = -2.0f;
 
-    setRadarSignatureInfo(0.5, 0, 0);
+    setRadarSignatureInfo(0.5, 0, 0.3);
 
     registerMemberReplication(&planet_size);
     registerMemberReplication(&cloud_size);
