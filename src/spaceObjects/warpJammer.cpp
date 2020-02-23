@@ -73,6 +73,7 @@ void WarpJammer::takeDamage(float damage_amount, DamageInfo info)
         P<ExplosionEffect> e = new ExplosionEffect();
         e->setSize(getRadius());
         e->setPosition(getPosition());
+        e->setRadarSignatureInfo(0.5, 0.5, 0.1);
 
         if (on_destruction.isSet())
         {

@@ -81,6 +81,21 @@ void SupplyDrop::onPickUp(ScriptSimpleCallback callback)
     this->on_pickup_callback = callback;
 }
 
+void SupplyDrop::setEnergy(float amount)
+{
+    energy = amount;
+    setRadarSignatureInfo(getRadarSignatureGravity(), getRadarSignatureElectrical() + (amount / 1000.0f), getRadarSignatureBiological());
+}
+
+void SupplyDrop::setWeaponStorage(EMissileWeapons weapon, int amount)
+{
+    if (weapon != MW_None)
+    {
+        weapon_storage[weapon] = amount;
+        setRadarSignatureInfo(getRadarSignatureGravity() + (0.05f * amount), getRadarSignatureElectrical(), getRadarSignatureBiological());
+    }
+}
+
 string SupplyDrop::getExportLine()
 {
     string ret = "SupplyDrop():setFaction(\"" + getFaction() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
