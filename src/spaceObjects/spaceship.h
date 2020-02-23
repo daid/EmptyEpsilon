@@ -174,6 +174,15 @@ public:
     virtual void draw3DTransparent() override;
 #endif
     /*!
+     * Get this ship's radar signature dynamically modified by the state of its
+     * systems and current activity.
+     */
+    virtual RawRadarSignatureInfo getDynamicRadarSignatureInfo();
+    float getDynamicRadarSignatureGravity() { return getDynamicRadarSignatureInfo().gravity; }
+    float getDynamicRadarSignatureElectrical() { return getDynamicRadarSignatureInfo().electrical; }
+    float getDynamicRadarSignatureBiological() { return getDynamicRadarSignatureInfo().biological; }
+
+    /*!
      * Draw this ship on the radar.
      */
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;

@@ -9,6 +9,8 @@
 - Scan object and cycle selected object hotkeys added to Science.
 - `setColors()` and `getColors()` GUI functions, and R/G/B color profiles, for
   GuiButtons.
+- `SpaceShip:getDynamicRadarSignatureGravity()`, `...Electrical()`, and
+  `...Biological()` scripting functions.
 
 ### Changed
 
