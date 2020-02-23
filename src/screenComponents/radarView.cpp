@@ -67,12 +67,13 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
 
     ///Start drawing of foreground
     forground_texture.clear(sf::Color::Transparent);
-    //Draw things that are masked out by fog-of-war
+    //Draw the trails of visible objects
     if (show_ghost_dots)
     {
         updateGhostDots();
         drawGhostDots(forground_texture);
     }
+    //Draw things that are masked out by fog-of-war
     drawObjects(forground_texture, background_texture);
     if (show_game_master_data)
         drawObjectsGM(forground_texture);
@@ -143,7 +144,7 @@ void GuiRadarView::updateGhostDots()
         foreach(SpaceObject, obj, space_object_list)
         {
             P<SpaceShip> ship = obj;
-            if (ship && sf::length(obj->getPosition() - view_position) < distance)
+            if (ship && ship->isVisible() == true && sf::length(obj->getPosition() - view_position) < distance)
             {
                 ghost_dots.push_back(GhostDot(obj->getPosition()));
             }
