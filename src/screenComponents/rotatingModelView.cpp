@@ -13,6 +13,8 @@ static void _glPerspective(double fovY, double aspect, double zNear, double zFar
     fW = fH * aspect;
 
     glFrustum(-fW, fW, -fH, fH, zNear, zFar);
+    // Reverse face culling from default GL_CCW order
+    glFrontFace(GL_CW);
 }
 #endif//FEATURE_3D_RENDERING
 

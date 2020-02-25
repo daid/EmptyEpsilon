@@ -17,6 +17,8 @@ static void _glPerspective(double fovY, double aspect, double zNear, double zFar
     fW = fH * aspect;
 
     glFrustum(-fW, fW, -fH, fH, zNear, zFar);
+    // Reverse face culling from default GL_CCW order
+    glFrontFace(GL_CW);
 }
 #endif//FEATURE_3D_RENDERING
 
@@ -68,45 +70,45 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     glDepthMask(false);
     sf::Texture::bind(textureManager.getTexture("StarsBack"), sf::Texture::Normalized);
     glBegin(GL_TRIANGLE_STRIP);
-    glTexCoord2f(0.0, 0.0); glVertex3f( 100, 100, 100);
-    glTexCoord2f(0.0, 1.0); glVertex3f( 100, 100,-100);
-    glTexCoord2f(1.0, 0.0); glVertex3f(-100, 100, 100);
-    glTexCoord2f(1.0, 1.0); glVertex3f(-100, 100,-100);
-    glEnd();
-    sf::Texture::bind(textureManager.getTexture("StarsLeft"), sf::Texture::Normalized);
-    glBegin(GL_TRIANGLE_STRIP);
-    glTexCoord2f(0.0, 0.0); glVertex3f(-100, 100, 100);
-    glTexCoord2f(0.0, 1.0); glVertex3f(-100, 100,-100);
+    glTexCoord2f(0.0, 0.0); glVertex3f( 100,-100, 100);
+    glTexCoord2f(0.0, 1.0); glVertex3f( 100,-100,-100);
     glTexCoord2f(1.0, 0.0); glVertex3f(-100,-100, 100);
     glTexCoord2f(1.0, 1.0); glVertex3f(-100,-100,-100);
     glEnd();
-    sf::Texture::bind(textureManager.getTexture("StarsFront"), sf::Texture::Normalized);
+    sf::Texture::bind(textureManager.getTexture("StarsLeft"), sf::Texture::Normalized);
     glBegin(GL_TRIANGLE_STRIP);
     glTexCoord2f(0.0, 0.0); glVertex3f(-100,-100, 100);
     glTexCoord2f(0.0, 1.0); glVertex3f(-100,-100,-100);
-    glTexCoord2f(1.0, 0.0); glVertex3f( 100,-100, 100);
-    glTexCoord2f(1.0, 1.0); glVertex3f( 100,-100,-100);
+    glTexCoord2f(1.0, 0.0); glVertex3f(-100, 100, 100);
+    glTexCoord2f(1.0, 1.0); glVertex3f(-100, 100,-100);
+    glEnd();
+    sf::Texture::bind(textureManager.getTexture("StarsFront"), sf::Texture::Normalized);
+    glBegin(GL_TRIANGLE_STRIP);
+    glTexCoord2f(0.0, 0.0); glVertex3f(-100, 100, 100);
+    glTexCoord2f(0.0, 1.0); glVertex3f(-100, 100,-100);
+    glTexCoord2f(1.0, 0.0); glVertex3f( 100, 100, 100);
+    glTexCoord2f(1.0, 1.0); glVertex3f( 100, 100,-100);
     glEnd();
     sf::Texture::bind(textureManager.getTexture("StarsRight"), sf::Texture::Normalized);
     glBegin(GL_TRIANGLE_STRIP);
-    glTexCoord2f(0.0, 0.0); glVertex3f( 100,-100, 100);
-    glTexCoord2f(0.0, 1.0); glVertex3f( 100,-100,-100);
-    glTexCoord2f(1.0, 0.0); glVertex3f( 100, 100, 100);
-    glTexCoord2f(1.0, 1.0); glVertex3f( 100, 100,-100);
+    glTexCoord2f(0.0, 0.0); glVertex3f( 100, 100, 100);
+    glTexCoord2f(0.0, 1.0); glVertex3f( 100, 100,-100);
+    glTexCoord2f(1.0, 0.0); glVertex3f( 100,-100, 100);
+    glTexCoord2f(1.0, 1.0); glVertex3f( 100,-100,-100);
     glEnd();
     sf::Texture::bind(textureManager.getTexture("StarsTop"), sf::Texture::Normalized);
     glBegin(GL_TRIANGLE_STRIP);
-    glTexCoord2f(0.0, 0.0); glVertex3f(-100, 100, 100);
-    glTexCoord2f(0.0, 1.0); glVertex3f(-100,-100, 100);
-    glTexCoord2f(1.0, 0.0); glVertex3f( 100, 100, 100);
-    glTexCoord2f(1.0, 1.0); glVertex3f( 100,-100, 100);
+    glTexCoord2f(0.0, 0.0); glVertex3f(-100,-100, 100);
+    glTexCoord2f(0.0, 1.0); glVertex3f(-100, 100, 100);
+    glTexCoord2f(1.0, 0.0); glVertex3f( 100,-100, 100);
+    glTexCoord2f(1.0, 1.0); glVertex3f( 100, 100, 100);
     glEnd();
     sf::Texture::bind(textureManager.getTexture("StarsBottom"), sf::Texture::Normalized);
     glBegin(GL_TRIANGLE_STRIP);
-    glTexCoord2f(1.0, 0.0); glVertex3f( 100,-100,-100);
-    glTexCoord2f(0.0, 0.0); glVertex3f(-100,-100,-100);
-    glTexCoord2f(1.0, 1.0); glVertex3f( 100, 100,-100);
-    glTexCoord2f(0.0, 1.0); glVertex3f(-100, 100,-100);
+    glTexCoord2f(1.0, 0.0); glVertex3f( 100, 100,-100);
+    glTexCoord2f(0.0, 0.0); glVertex3f(-100, 100,-100);
+    glTexCoord2f(1.0, 1.0); glVertex3f( 100,-100,-100);
+    glTexCoord2f(0.0, 1.0); glVertex3f(-100,-100,-100);
     glEnd();
 
     if (gameGlobalInfo)

@@ -173,10 +173,10 @@ Mesh* Mesh::getMesh(string filename)
         {
             ret->vertices[n].position[0] = -vertices[indices[n].v].x;
             ret->vertices[n].position[1] = vertices[indices[n].v].z;
-            ret->vertices[n].position[2] = vertices[indices[n].v].y;
+            ret->vertices[n].position[2] = -vertices[indices[n].v].y;
             ret->vertices[n].normal[0] = -normals[indices[n].n].x;
             ret->vertices[n].normal[1] = normals[indices[n].n].z;
-            ret->vertices[n].normal[2] = normals[indices[n].n].y;
+            ret->vertices[n].normal[2] = -normals[indices[n].n].y;
             ret->vertices[n].uv[0] = texCoords[indices[n].t].x;
             ret->vertices[n].uv[1] = 1.0 - texCoords[indices[n].t].y;
         }
@@ -185,6 +185,9 @@ Mesh* Mesh::getMesh(string filename)
         ret->vertexCount = readInt(stream);
         ret->vertices = new MeshVertex[ret->vertexCount];
         stream->read(ret->vertices, sizeof(MeshVertex) * ret->vertexCount);
+        // Flip the Y coordinate on every mesh
+        for(unsigned int n = 0; n < ret->vertexCount; n++)
+            ret->vertices[n].position[1] = -ret->vertices[n].position[1];
     }else{
         LOG(ERROR) << "Unknown mesh format: " << filename;
     }
