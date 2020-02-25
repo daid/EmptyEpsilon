@@ -186,8 +186,11 @@ Mesh* Mesh::getMesh(string filename)
         ret->vertices = new MeshVertex[ret->vertexCount];
         stream->read(ret->vertices, sizeof(MeshVertex) * ret->vertexCount);
         // Flip the Y coordinate on every mesh
-        for(unsigned int n = 0; n < ret->vertexCount; n++)
+        for(int n = 0; n < ret->vertexCount; n++)
+        {
             ret->vertices[n].position[1] = -ret->vertices[n].position[1];
+            ret->vertices[n].normal[1] = -ret->vertices[n].normal[1];
+        }
     }else{
         LOG(ERROR) << "Unknown mesh format: " << filename;
     }
