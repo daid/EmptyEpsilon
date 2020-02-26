@@ -22,7 +22,7 @@
 		<li><a href="#tabs-stations"><span class="button-text">Stations</span></a></li>
 		<li><a href="#tabs-scripting"><span class="button-text">Mission scripting</span></a></li>
 		<li><a href="#tabs-download"><span class="button-text">Download</span></a></li>
-		<li><a href="#tabs-forums"><span class="button-text">Forums</span></a></li>
+		<li><a href="#tabs-community"><span class="button-text">Community</span></a></li>
 	</ul>
 	<div id="tabs-info">
 		<h2>What is it?</h2>
@@ -851,8 +851,14 @@ href="https://github.com/daid/EmptyEpsilon/releases">[download list]</a></p>
 		<p><a href="https://github.com/daid/EmptyEpsilon">https://github.com/daid/EmptyEpsilon</a> (Game source code)</p>
 		<p><a href="https://github.com/daid/SeriousProton">https://github.com/daid/SeriousProton</a> (Engine source code)</p>
 	</div>
-    <div id="tabs-forums">
+    <div id="tabs-community">
+        <h2>Forums</h2>
         <p>The forums where we communicate about the game can be found at: <a href="http://bridgesim.net/categories/emptyepsilon">bridgesim.net</a></p>
+        <h2>Discord</h2>
+        <p>Unofficial EmptyEpsilon Discord: <a href="https://discord.gg/buRcFfm">https://discord.gg/buRcFfm</a></p>
+        <p><a href="https://www.unitedstellarnavy.net/">USN</a> has a discord server, for both Artemis and EmptyEpsilon. Regular Internet games being organized: <a href="https://discord.gg/KHBQeEU">https://discord.gg/KHBQeEU</a></p>
+        <h2>Issues</h2>
+        <p>You can report issues on github at <a href="https://github.com/daid/EmptyEpsilon/issues">https://github.com/daid/EmptyEpsilon/issues</a>. Remember to stay civil, and that the maintainers have no obligation to you.</p>
     </div>
 </div>
 
@@ -876,11 +882,6 @@ function updateHashFromTab(event, ui)
 {
 	var target_id = event.target.id;
 	var target_index = $(event.target).tabs("option", "active");
-
-    if (target_id == "tabs" && target_index == 6)
-    {
-        window.location.href = "http://bridgesim.net/categories/emptyepsilon";
-    }
 
 	var data = mapHash();
 	data[target_id] = target_index;
