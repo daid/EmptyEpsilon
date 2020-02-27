@@ -74,7 +74,7 @@ ServerCreationScreen::ServerCreationScreen()
     (new GuiLabel(row, "LAN_INTERNET_LABEL", "Server visibility: ", 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiSelector(row, "LAN_INTERNET_SELECT", [](int index, string value) {
         if (index == 1)
-            game_server->registerOnMasterServer("http://daid.eu/ee/register.php");
+            game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
         else
             game_server->stopMasterServerRegistry();
     }))->setOptions({"LAN only", "Internet"})->setSelectionIndex(0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);

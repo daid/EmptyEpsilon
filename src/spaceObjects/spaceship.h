@@ -168,10 +168,20 @@ public:
     sf::Vector2f docking_offset; //Server only
 
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
+    virtual ~SpaceShip();
 
 #if FEATURE_3D_RENDERING
     virtual void draw3DTransparent() override;
 #endif
+    /*!
+     * Get this ship's radar signature dynamically modified by the state of its
+     * systems and current activity.
+     */
+    virtual RawRadarSignatureInfo getDynamicRadarSignatureInfo();
+    float getDynamicRadarSignatureGravity() { return getDynamicRadarSignatureInfo().gravity; }
+    float getDynamicRadarSignatureElectrical() { return getDynamicRadarSignatureInfo().electrical; }
+    float getDynamicRadarSignatureBiological() { return getDynamicRadarSignatureInfo().biological; }
+
     /*!
      * Draw this ship on the radar.
      */
@@ -405,7 +415,7 @@ public:
 
     void addBroadcast(int threshold, string message);
 
-    //Return a string that can be appended to an object create function in the lua scripting.
+    // Return a string that can be appended to an object create function in the lua scripting.
     // This function is used in getScriptExport calls to adjust for tweaks done in the GM screen.
     string getScriptExportModificationsOnTemplate();
 };

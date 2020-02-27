@@ -39,6 +39,8 @@ GameGlobalInfo::GameGlobalInfo()
     intercept_all_comms_to_gm = false;
 
     registerMemberReplication(&scanning_complexity);
+    registerMemberReplication(&hacking_difficulty);
+    registerMemberReplication(&hacking_games);
     registerMemberReplication(&global_message);
     registerMemberReplication(&global_message_timeout, 1.0);
     registerMemberReplication(&banner_string);
@@ -52,6 +54,10 @@ GameGlobalInfo::GameGlobalInfo()
     for(unsigned int n=0; n<factionInfo.size(); n++)
         reputation_points.push_back(0);
     registerMemberReplication(&reputation_points, 1.0);
+}
+
+GameGlobalInfo::~GameGlobalInfo()
+{
 }
 
 P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)
@@ -355,6 +361,24 @@ static int shutdownGame(lua_State* L)
 /// Shutdown the game.
 /// Calling this function will close the game. Mainly usefull for a headless server setup.
 REGISTER_SCRIPT_FUNCTION(shutdownGame);
+
+static int pauseGame(lua_State* L)
+{
+    engine->setGameSpeed(0.0);
+    return 0;
+}
+/// Pause the game
+/// Calling this function will pause the game. Mainly usefull for a headless server setup.
+REGISTER_SCRIPT_FUNCTION(pauseGame);
+
+static int unpauseGame(lua_State* L)
+{
+    engine->setGameSpeed(1.0);
+    return 0;
+}
+/// Pause the game
+/// Calling this function will pause the game. Mainly usefull for a headless server setup. As the scenario functions are not called when paused.
+REGISTER_SCRIPT_FUNCTION(unpauseGame);
 
 static int getLongRangeRadarRange(lua_State* L)
 {

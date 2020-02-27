@@ -13,7 +13,7 @@ if(NOT IS_ABSOLUTE "${SERIOUS_PROTON_DIR}")
 endif()
 
 if(CMAKE_BUILD_TYPE MATCHES Debug)
-	add_compile_definitions(DEBUG)
+	add_definitions(-DDEBUG)
 endif(CMAKE_BUILD_TYPE MATCHES Debug)
 
 if(ENABLE_CRASH_LOGGER)
@@ -279,6 +279,7 @@ foreach(SP_SOURCE
 	src/scriptInterface.cpp
 	src/event.cpp
 	src/multiplayer.cpp
+	src/P.cpp
 	src/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp
 	src/Box2D/Dynamics/Contacts/b2ContactSolver.cpp
 	src/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp
@@ -480,5 +481,13 @@ endif()
 
 set(CPACK_PACKAGE_EXECUTABLES ${EXECUTABLE_NAME})
 set(CPACK_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}")
-set(CPACK_GENERATOR "ZIP")
+set(CPACK_PACKAGE_CONTACT "https://github.com/daid/")
+if(NOT DEFINED CPACK_GENERATOR)
+  if(WIN32)
+    set(CPACK_GENERATOR "ZIP")
+  elseif(UNIX)
+    set(CPACK_GENERATOR "DEB")
+    set(CPACK_DEBIAN_PACKAGE_DEPENDS "libsfml-dev")
+  endif()
+endif()
 include(CPack)

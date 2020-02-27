@@ -127,6 +127,10 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setAutoCoolant);
     // Set a password to join the ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setControlCode);
+    // Callback when this ship launches a probe.
+    // Returns the launching PlayerSpaceship and launched ScanProbe.
+    // Example: player:onProbeLaunch(trackProbe)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeLaunch);
 }
 
 float PlayerSpaceship::system_power_user_factor[] = {
@@ -309,6 +313,10 @@ PlayerSpaceship::PlayerSpaceship()
     addToShipLog("Start of log", colorConfig.log_generic);
 }
 
+PlayerSpaceship::~PlayerSpaceship()
+{
+}
+
 void PlayerSpaceship::update(float delta)
 {
     // If we're flashing the screen for hull damage, tick the fade-out.
@@ -481,6 +489,7 @@ void PlayerSpaceship::update(float delta)
             ExplosionEffect* e = new ExplosionEffect();
             e->setSize(1000.0f);
             e->setPosition(getPosition());
+            e->setRadarSignatureInfo(0.0, 0.4, 0.4);
 
             DamageInfo info(this, DT_Kinetic, getPosition());
             SpaceObject::damageArea(getPosition(), 500, 30, 60, info, 0.0);
@@ -556,6 +565,7 @@ void PlayerSpaceship::update(float delta)
                         ExplosionEffect* e = new ExplosionEffect();
                         e->setSize(1000.0f);
                         e->setPosition(getPosition() + sf::rotateVector(sf::Vector2f(0, random(0, 500)), random(0, 360)));
+                        e->setRadarSignatureInfo(0.0, 0.6, 0.6);
                     }
 
                     DamageInfo info(this, DT_Kinetic, getPosition());
@@ -1476,6 +1486,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             p->setPosition(getPosition());
             p->setTarget(target);
             p->setOwner(this);
+            if (on_probe_launch.isSet())
+            {
+                on_probe_launch.call(P<PlayerSpaceship>(this), P<ScanProbe>(p));
+            }
             scan_probe_stock--;
         }
         break;
@@ -1885,6 +1899,11 @@ void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f posit
 string PlayerSpaceship::getExportLine()
 {
     return "PlayerSpaceship():setTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" + getScriptExportModificationsOnTemplate();;
+}
+
+void PlayerSpaceship::onProbeLaunch(ScriptSimpleCallback callback)
+{
+    this->on_probe_launch = callback;
 }
 
 #ifndef _MSC_VER

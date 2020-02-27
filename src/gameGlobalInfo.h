@@ -91,6 +91,7 @@ public:
     bool intercept_all_comms_to_gm;
 
     GameGlobalInfo();
+    virtual ~GameGlobalInfo();
 
     P<PlayerSpaceship> getPlayerShip(int index);
     void setPlayerShip(int index, P<PlayerSpaceship> ship);
@@ -123,5 +124,6 @@ string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive);
 string getSectorName(sf::Vector2f position);
 
 REGISTER_MULTIPLAYER_ENUM(EScanningComplexity);
+REGISTER_MULTIPLAYER_ENUM(EHackingGames);
 
 #endif//GAME_GLOBAL_INFO_H

@@ -18,6 +18,7 @@ public:
     string beam_fire_sound;
     float beam_fire_sound_power;
     BeamEffect();
+    virtual ~BeamEffect();
 
 #if FEATURE_3D_RENDERING
     virtual void draw3DTransparent();

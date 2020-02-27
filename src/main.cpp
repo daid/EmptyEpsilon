@@ -115,6 +115,9 @@ int main(int argc, char** argv)
 
     new Engine();
 
+    if (PreferencesManager::get("headless") != "")
+        textureManager.setDisabled(true);
+
     if (PreferencesManager::get("mod") != "")
     {
         string mod = PreferencesManager::get("mod");
@@ -323,11 +326,12 @@ void returnToMainMenu()
         new EpsilonServer();
         if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
         if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password"));
-        if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer("http://daid.eu/ee/register.php");
+        if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
         if (PreferencesManager::get("variation") != "") gameGlobalInfo->variation = PreferencesManager::get("variation");
         gameGlobalInfo->startScenario(PreferencesManager::get("headless"));
 
-        engine->setGameSpeed(1.0);
+        if (PreferencesManager::get("startpaused") != "1")
+            engine->setGameSpeed(1.0);
     }
     else if (PreferencesManager::get("autoconnect").toInt())
     {

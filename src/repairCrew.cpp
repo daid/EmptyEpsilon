@@ -22,6 +22,10 @@ RepairCrew::RepairCrew()
     repairCrewList.push_back(this);
 }
 
+RepairCrew::~RepairCrew()
+{
+}
+
 /* struct PathNode
 {
     ERepairCrewDirection arrive_direction;

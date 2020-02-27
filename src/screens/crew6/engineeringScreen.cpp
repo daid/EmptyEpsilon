@@ -38,7 +38,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
     coolant_display = new GuiKeyValueDisplay(this, "COOLANT_DISPLAY", 0.45, "Coolant", "");
     coolant_display->setIcon("gui/icons/coolant")->setTextSize(20)->setPosition(20, 260, ATopLeft)->setSize(240, 40);
 
-    (new GuiSelfDestructButton(this, "SELF_DESTRUCT"))->setPosition(20, 300, ATopLeft)->setSize(240, 100);
+    (new GuiSelfDestructButton(this, "SELF_DESTRUCT"))->setPosition(20, 20, ATopLeft)->setSize(240, 100);
 
     GuiElement* system_config_container = new GuiElement(this, "");
     system_config_container->setPosition(0, -20, ABottomCenter)->setSize(750 + 300, GuiElement::GuiSizeMax);
