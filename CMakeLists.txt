@@ -127,6 +127,7 @@ set(SOURCES
 	src/screens/extra/damcon.cpp
 	src/screens/extra/powerManagement.cpp
 	src/screens/extra/databaseScreen.cpp
+	src/screens/extra/commsScreen.cpp
 	src/screens/extra/shipLogScreen.cpp
 	src/screens/gm/gameMasterScreen.cpp
 	src/screens/gm/objectCreationView.cpp

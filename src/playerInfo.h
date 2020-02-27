@@ -21,6 +21,8 @@ enum ECrewPosition
     damageControl,
     powerManagement,
     databaseView,
+    altRelay,
+    commsOnly,
     shipLog,
     max_crew_positions
 };

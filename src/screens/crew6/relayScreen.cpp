@@ -18,7 +18,8 @@
 #include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"
 
-RelayScreen::RelayScreen(GuiContainer* owner)
+
+RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 : GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background), mode(TargetSelection)
 {
     targets.setAllowWaypointSelection();
@@ -173,9 +174,11 @@ RelayScreen::RelayScreen(GuiContainer* owner)
 
     hacking_dialog = new GuiHackingDialog(this, "");
 
-    new ShipsLog(this);
-
-    (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    if (allow_comms)
+    {
+        new ShipsLog(this);
+        (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    }
 }
 
 void RelayScreen::onDraw(sf::RenderTarget& window)
