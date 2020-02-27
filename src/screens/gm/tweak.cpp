@@ -736,20 +736,20 @@ GuiObjectTweakRadar::GuiObjectTweakRadar(GuiContainer* owner)
     // For ships, this modifies only the baseline; system usage will also
     // modify these values.
     (new GuiLabel(left_col, "", "Electrical signature:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-    electrical_slider = new GuiSlider(left_col, "", -10.0, 10.0, 0.0, [this](float value) {
-        target->setRadarSignatureElectrical(value);
+    electrical_slider = new GuiSlider(left_col, "", -500.0, 500.0, 0.0, [this](float value) {
+        target->setRadarSignatureElectrical(value / 100.0f);
     });
     electrical_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     (new GuiLabel(left_col, "", "Gravity signature:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-    gravity_slider = new GuiSlider(left_col, "", -10.0, 10.0, 0.0, [this](float value) {
-        target->setRadarSignatureGravity(value);
+    gravity_slider = new GuiSlider(left_col, "", -500.0, 500.0, 0.0, [this](float value) {
+        target->setRadarSignatureGravity(value / 100.00f);
     });
     gravity_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     (new GuiLabel(left_col, "", "Biological signature:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-    biological_slider = new GuiSlider(left_col, "", -10.0, 10.0, 0.0, [this](float value) {
-        target->setRadarSignatureBiological(value);
+    biological_slider = new GuiSlider(left_col, "", -500.0, 500.0, 0.0, [this](float value) {
+        target->setRadarSignatureBiological(value / 100.0f);
     });
     biological_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
@@ -765,10 +765,7 @@ void GuiObjectTweakRadar::open(P<SpaceObject> target)
     this->target = target;
     
     visibility_toggle->setValue(target->isVisible());
-    LOG(INFO) << "target->getRadarSignatureElectrical(): " << target->getRadarSignatureElectrical();
-    electrical_slider->setValue(target->getRadarSignatureElectrical());
-    LOG(INFO) << "target->getRadarSignatureGravity(): " << target->getRadarSignatureGravity();
-    gravity_slider->setValue(target->getRadarSignatureGravity());
-    LOG(INFO) << "target->getRadarSignatureBiological(): " << target->getRadarSignatureBiological();
-    biological_slider->setValue(target->getRadarSignatureBiological());
+    electrical_slider->setValue(target->getRadarSignatureElectrical() * 100.0f);
+    gravity_slider->setValue(target->getRadarSignatureGravity() * 100.0f);
+    biological_slider->setValue(target->getRadarSignatureBiological() * 100.0f);
 }
