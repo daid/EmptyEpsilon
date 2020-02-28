@@ -270,7 +270,7 @@ function phase1MessagePowerup(delta)
         shipyard_gamma:sendCommsMessage(player, [[Come in Atlantis-1.
 Good, your communication systems seems to be working.
 As you well know, you are aboard the newest version of the Atlantis space explorer.
-We will take you through a few quick tests too see if the ship is operating as expected.
+We will take you through a few quick tests to see if the ship is operating as expected.
 
 First, have your engineer power up all systems to 100%, as you are currently in powered down mode.]])
         mission_state = phase1WaitForPowerup
@@ -417,7 +417,7 @@ end
 
 function phase3FindHoleInTheKraylorDefenseLine(delta)
 	px, py = player:getPosition()
-    if distance(player, -5000, -260000) < 10000 or py > -248000 or px > 75000then
+    if distance(player, -5000, -260000) < 10000 or py > -248000 or px > 75000 then
 		if py > -248000 or px > 75000 then
 			shipyard_gamma:sendCommsMessage(player, "Atlantis-1,\nFinally. We thought we lost you. You are not out of the woods yet.\nTry to get to sector ZU5. We are sending JC88 to get you.")
 		else
@@ -451,7 +451,7 @@ function phase3AnalizingData(delta)
     if phase3AnalizingData_timeout < 0.0 then
         shipyard_gamma:sendCommsMessage(player, [[Atlantis-1,
 We've worked through the data you collected on the anomaly that collapsed into the wormhole.
-There are traces of both Kraylor and Arlenians technology in there. Which does not make any sense. While the Arlenians are a peaceful race,
+There are traces of both Kraylor and Arlenian technology in there, which does not make any sense. While the Arlenians are a peaceful race,
 the Kraylor are keen on trying to destroy the Arlenians.
 
 We can only assume that the Kraylor stole some kind of advanced technology from the Arlenians.
@@ -555,7 +555,7 @@ function phase5Cracking2(delta)
 The Arlenians managed to create these negative mass particles. However, the end result was extremely unstable, and could collapse into a black hole at any second.
 A huge amount of power with specially formed magnetic fields is required to keep the particles stable.
 
-In the end, they did manage to make long distance travel possible, by opening a rip in the space time fabric and sending specialized ships trough this tear.
+In the end, they did manage to make long distance travel possible, by opening a rip in the space time fabric and sending specialized ships through this tear.
 
 We'll keep you updated with more information.]])
             cracking_delay = 30
@@ -570,7 +570,7 @@ function phase5Cracking3(delta)
         if cracking_delay < 0.0 then
             shipyard_gamma:sendCommsMessage(player, [[It looks like the Kraylor were watching these experiments and waiting for their moment to steal the end result.
 
-According to these documents the Kraylor actually continued the experiments at sector D20. Explaining the phenomenon you experienced there.
+According to these documents the Kraylor actually continued the experiments at sector D20, explaining the phenomenon you experienced there.
 
 It does look like they were able to successfully prototype this into a working jump drive. However, the documents must have been scrambled here.
 As they go from mentioning distances of 2000U to talking about troop counts and missile storage in insane amounts.]])
@@ -587,9 +587,9 @@ function phase5Cracking4(delta)
             shipyard_gamma:sendCommsMessage(player, [[We cracked the final piece of the puzzle.
 
 This is insane. It is huge. We have the plans for some kind of massive battle station. The wormhole powered jump drive is at the center of this station.
-It seems that Kraylor are actually constructing some kind of large distance moving battle station equipped with an insane amount of firepower.
+It seems that the Kraylor are actually constructing some kind of large distance moving battle station equipped with an insane amount of firepower.
 
-While the technology behind the wormhole jump drive isn't stable, the Kraylor are insane enough to do this. As it will give them a huge battle advantage.]])
+While the technology behind the wormhole jump drive isn't stable, the Kraylor are insane enough to do this, as it will give them a huge battle advantage.]])
             mission_state = phase5CrackingDone
         end
     end
@@ -667,7 +667,7 @@ Dock with JC-88 and it will handle the rest.]])
     if mission_state == phase3ReportBackToShipyard then
         setCommsMessage([[Atlantis-1,
 We've downloaded all the data you collected thanks to the short range quantum entangled data communication radar.
-We are working trough the data right now. We will contact you when we have more details.]])
+We are working through the data right now. We will contact you when we have more details.]])
         mission_state = phase3AnalizingData
         phase3AnalizingData_timeout = 60.0
         return
@@ -779,7 +779,7 @@ function handleJumpCarrier(jc, source_x, source_y, dest_x, dest_y, jumping_messa
         else
             --You idiot. JC-88 will fly back.
             jc88:orderFlyTowardsBlind(source_x, source_y)
-            jc88:sendCommsMessage(player, [[Looks like the docking couplers detached pre-maturely.
+            jc88:sendCommsMessage(player, [[Looks like the docking couplers detached prematurely.
 This happens sometimes. I am on my way so we can try again.]])
         end
     end

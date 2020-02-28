@@ -17,7 +17,7 @@
 #include "screens/extra/damcon.h"
 #include "screens/extra/powerManagement.h"
 #include "screens/extra/databaseScreen.h"
-
+#include "screens/extra/commsScreen.h"
 #include "screens/extra/shipLogScreen.h"
 
 #include "screenComponents/mainScreenControls.h"
@@ -130,7 +130,7 @@ void PlayerInfo::spawnUI()
         if (crew_position[scienceOfficer])
             screen->addStationTab(new ScienceScreen(screen), scienceOfficer, getCrewPositionName(scienceOfficer), getCrewPositionIcon(scienceOfficer));
         if (crew_position[relayOfficer])
-            screen->addStationTab(new RelayScreen(screen), relayOfficer, getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
+            screen->addStationTab(new RelayScreen(screen, true), relayOfficer, getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
         
         //Crew 4/3
         if (crew_position[tacticalOfficer])
@@ -144,13 +144,17 @@ void PlayerInfo::spawnUI()
         if (crew_position[singlePilot])
             screen->addStationTab(new SinglePilotScreen(screen), singlePilot, getCrewPositionName(singlePilot), getCrewPositionIcon(singlePilot));
 
-	//Extra
+        //Extra
         if (crew_position[damageControl])
             screen->addStationTab(new DamageControlScreen(screen), damageControl, getCrewPositionName(damageControl), getCrewPositionIcon(damageControl));
         if (crew_position[powerManagement])
             screen->addStationTab(new PowerManagementScreen(screen), powerManagement, getCrewPositionName(powerManagement), getCrewPositionIcon(powerManagement));
         if (crew_position[databaseView])
             screen->addStationTab(new DatabaseScreen(screen), databaseView, getCrewPositionName(databaseView), getCrewPositionIcon(databaseView));
+        if (crew_position[altRelay])
+            screen->addStationTab(new RelayScreen(screen, false), altRelay, getCrewPositionName(altRelay), getCrewPositionIcon(altRelay));
+        if (crew_position[commsOnly])
+            screen->addStationTab(new CommsScreen(screen), commsOnly, getCrewPositionName(commsOnly), getCrewPositionIcon(commsOnly));
         if (crew_position[shipLog])
             screen->addStationTab(new ShipLogScreen(screen), shipLog, getCrewPositionName(shipLog), getCrewPositionIcon(shipLog));
  
@@ -196,6 +200,8 @@ string getCrewPositionName(ECrewPosition position)
     case damageControl: return "Damage Control";
     case powerManagement: return "Power Management";
     case databaseView: return "Database";
+    case altRelay: return "AltRelay";
+    case commsOnly: return "Comms";
     case shipLog: return "Ship's Log";
     default: return "ErrUnk: " + string(position);
     }
@@ -217,6 +223,8 @@ string getCrewPositionIcon(ECrewPosition position)
     case damageControl: return "";
     case powerManagement: return "";
     case databaseView: return "";
+    case altRelay: return "gui/icons/station-relay";
+    case commsOnly: return "";
     case shipLog: return "";
     default: return "ErrUnk: " + string(position);
     }
@@ -258,6 +266,10 @@ template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosit
         cp = powerManagement;
     else if (str == "database" || str == "databaseview")
         cp = databaseView;
+    else if (str == "altrelay")
+        cp = altRelay;
+    else if (str == "commsonly")
+        cp = commsOnly;
     else if (str == "shiplog")
         cp = shipLog;
     else
