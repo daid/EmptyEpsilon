@@ -482,8 +482,8 @@ if(PYTHONINTERP_FOUND)
 endif()
 
 add_custom_target(update_locale
-	COMMAND xgettext --keyword=tr --omit-header -j -d resources/locale/en ${SOURCES}
-	COMMAND xgettext --keyword=_ --omit-header -j -d resources/locale/en scripts/shipTemplates_* scripts/comms_ship.lua scripts/comms_station.lua scripts/comms_supply_drop.lua scripts/factionInfo.lua scripts/science_db.lua
+	COMMAND xgettext --keyword=tr:1c,2 --keyword=tr:1 --omit-header -j -d resources/locale/en ${SOURCES}
+	COMMAND xgettext --keyword=_:1c,2 --keyword=_:1 --omit-header -j -d resources/locale/en scripts/shipTemplates_* scripts/comms_ship.lua scripts/comms_station.lua scripts/comms_supply_drop.lua scripts/factionInfo.lua scripts/science_db.lua
 	WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
 set(CPACK_PACKAGE_EXECUTABLES ${EXECUTABLE_NAME})
