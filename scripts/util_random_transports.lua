@@ -1,3 +1,7 @@
+require("options.lua")
+require(lang .. "/ships.lua")
+require(lang .. "/factions.lua")
+
 stationList = {}
 transportList = {}
 spawn_delay = 0
@@ -50,27 +54,35 @@ function update(delta)
 			target = randomStation()
 			if target:isValid() then
 				spawn_delay = random(30, 50)
-				
-                rnd = irandom(1, 5)
-                if rnd == 1 then
-                    name = "Personnel"
-                elseif rnd == 2 then
-                    name = "Goods"
-                elseif rnd == 2 then
-                    name = "Garbage"
-                elseif rnd == 2 then
-                    name = "Equipment"
-                else
-                    name = "Fuel"
-                end
-                
+				        
+				rnd = irandom(1, 5)        
                 if irandom(1, 100) < 15 then
-                    name = name .. " Jump Freighter " .. irandom(3, 5)
+					if rnd == 1 then
+						name = personnalJumpFreighter .. " " .. irandom(3, 5)
+					elseif rnd == 2 then
+						name = goodsJumpFreighter .. " " .. irandom(3, 5)
+					elseif rnd == 2 then
+						name = garbageJumpFreighter .. " " .. irandom(3, 5)
+					elseif rnd == 2 then
+						name = equipmentJumpFreighter .. " " .. irandom(3, 5)
+					else
+						name = fuelJumpFreighter .. " " .. irandom(3, 5)
+					end
                 else
-                    name = name .. " Freighter " .. irandom(1, 5)
+					if rnd == 1 then
+						name = personnalFreighter .. " " .. irandom(3, 5)
+					elseif rnd == 2 then
+						name = goodsFreighter .. " " .. irandom(3, 5)
+					elseif rnd == 2 then
+						name = garbageFreighter .. " " .. irandom(3, 5)
+					elseif rnd == 2 then
+						name = equipmentFreighter .. " " .. irandom(3, 5)
+					else
+						name = fuelFreighter .. " " .. irandom(3, 5)
+					end
                 end
                 
-				obj = CpuShip():setTemplate(name):setFaction('Independent')
+				obj = CpuShip():setTemplate(name):setFaction(neutralName)
 				obj.target = target
 				obj.undock_delay = random(5, 30)
 				obj:orderDock(obj.target)

@@ -1,18 +1,22 @@
---[[               Starfighters
-Starfighters are single to 3 person small ships. These are most commonly used as light firepower roles.
-They are common in larger groups. And need a close by station or support ship, as they lack long time life support.
-It's rare to see starfighters with more then 1 shield section.
+require("options.lua")
+require(lang .. "/ships.lua")
+require(lang .. "/factions.lua")
 
-One of the most well known starfighters at earth is the X-Wing.
+--[[               Chasseurs stellaires
+Les chasseurs sont de petits vaisseaux de 1 ? 3 personnes. Ils sont le plus souvent utilis?s pour des r?les n?cessitant une puissance de feu l?g?re.
+Ils sont courants dans les groupes plus importants. Ils ont besoin d'une station proche ou d'un vaisseau de soutien, car ils n'ont pas de syst?me de survie ? long terme.
+Il est rare de voir des chasseurs avec plus d'une section de bouclier.
 
-Starfighters come in 3 subclasses:
-* Interceptors: Fast, low on firepower, high on manouverability
-* Gunship: Equiped with more weapons, but hands in maneuverbility because of it.
-* Bomber: Slowest of all starfighters, but pack a large punch in a small package. Usually come without any lasers, but the largers bombers have been known to deliver nukes.
+L'un des chasseurs les plus connus sur Terre est le X-Wing.
+
+Les chasseurs stellaires sont divis?s en 3 sous-classes :
+* Les intercepteurs : Rapides, peu puissants, tr?s maniables
+* Canonnier : Dot? d'une plus grande puissance de feu, qui le rend moins maniable.
+* Bombardier : Le plus lent de tous les chasseurs, mais avec une grande puissance de frappe. Ils sont g?n?ralement livr?s sans laser, mais les bombardiers de grande taille sont connus pour leur capacit? ? larguer des bombes nucl?aires.
 ----------------------------------------------------------]]
-template = ShipTemplate():setName("MT52 Hornet"):setClass("Starfighter", "Interceptor"):setModel("WespeScoutYellow")
+template = ShipTemplate():setName(hornetMT52):setClass(starfighter, interceptor):setModel("WespeScoutYellow")
 template:setRadarTrace("radar_fighter.png")
-template:setDescription([[The MT52 Hornet is a basic interceptor found in many corners of the galaxy. It's easy to find spare parts for MT52s, not only because they are produced in large numbers, but also because they suffer high losses in combat.]])
+template:setDescription(stalkerR7Description)
 template:setHull(30)
 template:setShields(20)
 template:setSpeed(120, 30, 25)
@@ -20,16 +24,16 @@ template:setDefaultAI('fighter')
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 30, 0, 700.0, 4.0, 2)
 
-variation = template:copy("MU52 Hornet")
+variation = template:copy(hornetMU52)
 variation:setModel("WespeScoutRed")
-variation:setDescription([[The MU52 Hornet is a new, upgraded version of the MT52. All of its systems are slightly improved over the MT52 model.]])
+variation:setDescription(hornetMU52Description)
 variation:setHull(35)
 variation:setShields(22)
 variation:setSpeed(125, 32, 25)
 variation:setBeam(0, 30, 0, 900.0, 4.0, 2.5)
 
-variation = variation:copy("MP52 Hornet"):setType("playership")
-variation:setDescription([[The MP52 Hornet is a significantly upgraded version of MU52 Hornet, with nearly twice the hull strength, nearly three times the shielding, better acceleration, impulse boosters, and a second laser cannon.]])
+variation = variation:copy(hornetMP52):setType("playership")
+variation:setDescription(hornetMP52Description)
 variation:setHull(70)
 variation:setShields(60)
 variation:setSpeed(125, 32, 40)
@@ -39,17 +43,17 @@ variation:setBeam(1, 30,-5, 900.0, 4.0, 2.5)
 variation:setEnergyStorage(400)
 
 variation:setRepairCrewCount(1)
-variation:addRoomSystem(3, 0, 1, 1, "Maneuver");
-variation:addRoomSystem(1, 0, 2, 1, "BeamWeapons");
+variation:addRoomSystem(3, 0, 1, 1, maneuver);
+variation:addRoomSystem(1, 0, 2, 1, beamWeapons);
 
-variation:addRoomSystem(0, 1, 1, 2, "RearShield");
-variation:addRoomSystem(1, 1, 2, 2, "Reactor");
-variation:addRoomSystem(3, 1, 2, 1, "Warp");
-variation:addRoomSystem(3, 2, 2, 1, "JumpDrive");
-variation:addRoomSystem(5, 1, 1, 2, "FrontShield");
+variation:addRoomSystem(0, 1, 1, 2, rearShield);
+variation:addRoomSystem(1, 1, 2, 2, reactor);
+variation:addRoomSystem(3, 1, 2, 1, warp);
+variation:addRoomSystem(3, 2, 2, 1, jumpDrive);
+variation:addRoomSystem(5, 1, 1, 2, frontShield);
 
-variation:addRoomSystem(1, 3, 2, 1, "MissileSystem");
-variation:addRoomSystem(3, 3, 1, 1, "Impulse");
+variation:addRoomSystem(1, 3, 2, 1, missileSystem);
+variation:addRoomSystem(3, 3, 1, 1, impulse);
 
 variation:addDoor(2, 1, true);
 variation:addDoor(3, 1, true);
@@ -61,9 +65,9 @@ variation:addDoor(2, 3, true);
 variation:addDoor(5, 1, false);
 variation:addDoor(5, 2, false);
 
-template = ShipTemplate():setName("Adder MK5"):setClass("Starfighter", "Gunship"):setModel("AdlerLongRangeScoutYellow")
+template = ShipTemplate():setName(adderMK5):setClass(starfighter, gunner):setModel("AdlerLongRangeScoutYellow")
 template:setRadarTrace("radar_fighter.png")
-template:setDescription([[The Adder line's fifth iteration proved to be a great success among pirates and law officers alike. It is cheap, fast, and easy to maintain, and it packs a decent punch.]])
+template:setDescription(adderMK5Description)
 template:setHull(50)
 template:setShields(30)
 template:setSpeed(80, 28, 25)
@@ -72,40 +76,40 @@ template:setBeam(1, 70, 30, 600, 5.0, 2.0)
 template:setBeam(2, 70, -35, 600, 5.0, 2.0)
 template:setTubes(1, 15.0)
 template:setTubeSize(0, "small")
-template:setWeaponStorage("HVLI", 4)
+template:setWeaponStorage(hvli, 4)
 
-variation = template:copy("Adder MK4")
+variation = template:copy(adderMK4)
 variation:setModel("AdlerLongRangeScoutBlue")
-variation:setDescription([[The mark 4 Adder is a rare sight these days due to the success its successor, the mark 5 Adder, which often replaces this model. Its similar hull, however, means careless buyers are sometimes conned into buying mark 4 models disguised as the mark 5.]])
+variation:setDescription(adderMK4Description)
 variation:setHull(40)
 variation:setShields(20)
 variation:setSpeed(60, 20, 20)
 variation:setTubes(1, 20.0)
 variation:setTubeSize(0, "small")
-variation:setWeaponStorage("HVLI", 2)
+variation:setWeaponStorage(hvli, 2)
 
-variation = template:copy("Adder MK6")
+variation = template:copy(adderMK6)
 variation:setModel("AdlerLongRangeScoutRed")
-variation:setDescription([[The mark 6 Adder is a small upgrade compared to the highly successful mark 5 model. Since people still prefer the more familiar and reliable mark 5, the mark 6 has not seen the same level of success.]])
+variation:setDescription(adderMK6Description)
 variation:setBeam(3, 35,180, 600, 6.0, 2.0)
-variation:setWeaponStorage("HVLI", 8)
+variation:setWeaponStorage(hvli, 8)
 
-template = ShipTemplate():setName("WX-Lindworm"):setClass("Starfighter", "Bomber"):setModel("LindwurmFighterYellow")
+template = ShipTemplate():setName(lindwormWX):setClass(starfighter, popper):setModel("LindwurmFighterYellow")
 template:setRadarTrace("radar_fighter.png")
-template:setDescription([[The WX-Lindworm, or "Worm" as it's often called, is a bomber-class starfighter. While one of the least-shielded starfighters in active duty, the Worm's two launchers can pack quite a punch. Its goal is to fly in, destroy its target, and fly out or be destroyed.]])
+template:setDescription(lindwormWXDescription)
 template:setHull(50)
 template:setShields(20)
 template:setSpeed(50, 15, 25)
 template:setTubes(3, 15.0)
-template:setWeaponStorage("HVLI", 6)
-template:setWeaponStorage("Homing", 1)
+template:setWeaponStorage(hvli, 6)
+template:setWeaponStorage(homing, 1)
 template:setTubeSize(0, "small")
 template:setTubeSize(1, "small")
 template:setTubeSize(2, "small")
-template:setTubeDirection(1, 1):setWeaponTubeExclusiveFor(1, "HVLI")
-template:setTubeDirection(2,-1):setWeaponTubeExclusiveFor(2, "HVLI")
+template:setTubeDirection(1, 1):setWeaponTubeExclusiveFor(1, hvli)
+template:setTubeDirection(2,-1):setWeaponTubeExclusiveFor(2, hvli)
 
-variation = template:copy("ZX-Lindworm"):setModel("LindwurmFighterBlue"):setType("playership")
+variation = template:copy(lindwormZX):setModel("LindwurmFighterBlue"):setType("playership")
 variation:setHull(75)
 variation:setShields(40)
 variation:setSpeed(70, 15, 25)
@@ -114,8 +118,8 @@ variation:setTubeSize(0, "small")
 variation:setTubeSize(1, "small")
 variation:setTubeSize(2, "small")
 
-variation:setWeaponStorage("HVLI", 12)
-variation:setWeaponStorage("Homing", 3)
+variation:setWeaponStorage(hvli, 12)
+variation:setWeaponStorage(homing, 3)
 --                  Arc, Dir, Range, CycleTime, Dmg
 variation:setBeam(0, 10, 180, 700, 6.0, 2)
 --								  Arc, Dir, Rotate speed
@@ -124,15 +128,15 @@ variation:setCombatManeuver(250, 150)
 variation:setEnergyStorage(400)
 
 variation:setRepairCrewCount(1)
-variation:addRoomSystem(0,0,1,3,"RearShield")
-variation:addRoomSystem(1,1,3,1,"MissileSystem")
-variation:addRoomSystem(4,1,2,1,"Beamweapons")
-variation:addRoomSystem(3,2,2,1,"Reactor")
-variation:addRoomSystem(2,3,2,1,"Warp")
-variation:addRoomSystem(4,3,5,1,"JumpDrive")
-variation:addRoomSystem(0,4,1,3,"Impulse")
-variation:addRoomSystem(3,4,2,1,"Maneuver")
-variation:addRoomSystem(1,5,3,1,"FrontShield")
+variation:addRoomSystem(0,0,1,3,rearShield)
+variation:addRoomSystem(1,1,3,1,missileSystem)
+variation:addRoomSystem(4,1,2,1,beamWeapons)
+variation:addRoomSystem(3,2,2,1,reactor)
+variation:addRoomSystem(2,3,2,1,warp)
+variation:addRoomSystem(4,3,5,1,jumpDrive)
+variation:addRoomSystem(0,4,1,3,impulse)
+variation:addRoomSystem(3,4,2,1,maneuver)
+variation:addRoomSystem(1,5,3,1,frontShield)
 variation:addRoom(4,5,2,1)
 
 variation:addDoor(1,1,false)
@@ -145,4 +149,3 @@ variation:addDoor(3,4,true)
 variation:addDoor(4,4,true)
 variation:addDoor(3,5,true)
 variation:addDoor(4,5,true)
-

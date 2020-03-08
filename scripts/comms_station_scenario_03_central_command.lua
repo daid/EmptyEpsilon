@@ -120,48 +120,48 @@ function mainMenu()
 		setCommsMessage("Good day officer,\nWhat can we do for you today?")
 		addCommsReply("Do you have spare homing missiles for us? (2rep each)", function()
 			if not player:isDocked(comms_target) then setCommsMessage("You need to stay docked for that action."); return end
-			if not player:takeReputationPoints(2 * (player:getWeaponStorageMax("Homing") - player:getWeaponStorage("Homing"))) then setCommsMessage("Not enough reputation."); return end
-			if player:getWeaponStorage("Homing") >= player:getWeaponStorageMax("Homing") then
+			if not player:takeReputationPoints(2 * (player:getWeaponStorageMax(homing) - player:getWeaponStorage(homing))) then setCommsMessage("Not enough reputation."); return end
+			if player:getWeaponStorage(homing) >= player:getWeaponStorageMax(homing) then
 				setCommsMessage("Sorry sir, but you are fully stocked with homing missiles.");
 				addCommsReply("Back", mainMenu)
 			else
-				player:setWeaponStorage("Homing", player:getWeaponStorageMax("Homing"))
+				player:setWeaponStorage(homing, player:getWeaponStorageMax(homing))
 				setCommsMessage("Filled up your missile supply.")
 				addCommsReply("Back", mainMenu)
 			end
 		end)
 		addCommsReply("Please re-stock our mines. (2rep each)", function()
 			if not player:isDocked(comms_target) then setCommsMessage("You need to stay docked for that action."); return end
-			if not player:takeReputationPoints(2 * (player:getWeaponStorageMax("Mine") - player:getWeaponStorage("Mine"))) then setCommsMessage("Not enough reputation."); return end
-			if player:getWeaponStorage("Mine") >= player:getWeaponStorageMax("Mine") then
+			if not player:takeReputationPoints(2 * (player:getWeaponStorageMax(mine) - player:getWeaponStorage(mine))) then setCommsMessage("Not enough reputation."); return end
+			if player:getWeaponStorage(mine) >= player:getWeaponStorageMax(mine) then
 				setCommsMessage("Captain,\nYou have all the mines you can fit in that ship.");
 				addCommsReply("Back", mainMenu)
 			else
-				player:setWeaponStorage("Mine", player:getWeaponStorageMax("Mine"))
+				player:setWeaponStorage(mine, player:getWeaponStorageMax(mine))
 				setCommsMessage("These mines, are yours.")
 				addCommsReply("Back", mainMenu)
 			end
 		end)
 		addCommsReply("Can you supply us with some nukes. (15rep each)", function()
 			if not player:isDocked(comms_target) then setCommsMessage("You need to stay docked for that action."); return end
-			if not player:takeReputationPoints(15 * (player:getWeaponStorageMax("Nuke") - player:getWeaponStorage("Nuke"))) then setCommsMessage("Not enough reputation."); return end
-			if player:getWeaponStorage("Nuke") >= player:getWeaponStorageMax("Nuke") then
+			if not player:takeReputationPoints(15 * (player:getWeaponStorageMax(nuke) - player:getWeaponStorage(nuke))) then setCommsMessage("Not enough reputation."); return end
+			if player:getWeaponStorage(nuke) >= player:getWeaponStorageMax(nuke) then
 				setCommsMessage("All nukes are charged and primed for distruction.");
 				addCommsReply("Back", mainMenu)
 			else
-				player:setWeaponStorage("Nuke", player:getWeaponStorageMax("Nuke"))
+				player:setWeaponStorage(nuke, player:getWeaponStorageMax(nuke))
 				setCommsMessage("You are fully loaded,\nand ready to explode things.")
 				addCommsReply("Back", mainMenu)
 			end
 		end)
 		addCommsReply("Please re-stock our EMP Missiles. (10rep each)", function()
 			if not player:isDocked(comms_target) then setCommsMessage("You need to stay docked for that action."); return end
-			if not player:takeReputationPoints(10 * (player:getWeaponStorageMax("EMP") - player:getWeaponStorage("EMP"))) then setCommsMessage("Not enough reputation."); return end
-			if player:getWeaponStorage("EMP") >= player:getWeaponStorageMax("EMP") then
+			if not player:takeReputationPoints(10 * (player:getWeaponStorageMax(emp) - player:getWeaponStorage(emp))) then setCommsMessage("Not enough reputation."); return end
+			if player:getWeaponStorage(emp) >= player:getWeaponStorageMax(emp) then
 				setCommsMessage("All storage for EMP missiles is filled sir.");
 				addCommsReply("Back", mainMenu)
 			else
-				player:setWeaponStorage("EMP", player:getWeaponStorageMax("EMP"))
+				player:setWeaponStorage(emp, player:getWeaponStorageMax(emp))
 				setCommsMessage("Recallibrated the electronics and\nfitted you with all the EMP missiles you can carry.")
 				addCommsReply("Back", mainMenu)
 			end
@@ -176,24 +176,24 @@ function mainMenu()
 		setCommsMessage("Welcome to our lovely station")
 		addCommsReply("Do you have spare homing missiles for us? (5rep each)", function()
 			if not player:isDocked(comms_target) then setCommsMessage("You need to stay docked for that action."); return end
-			if player:getWeaponStorage("Homing") >= player:getWeaponStorageMax("Homing") / 2 then
+			if player:getWeaponStorage(homing) >= player:getWeaponStorageMax(homing) / 2 then
 				setCommsMessage("You seem to have more then enough missiles");
 				addCommsReply("Back", mainMenu)
 			else
-				if not player:takeReputationPoints(5 * ((player:getWeaponStorageMax("Homing") / 2) - player:getWeaponStorage("Homing"))) then setCommsMessage("Not enough reputation."); return end
-				player:setWeaponStorage("Homing", player:getWeaponStorageMax("Homing") / 2)
+				if not player:takeReputationPoints(5 * ((player:getWeaponStorageMax(homing) / 2) - player:getWeaponStorage(homing))) then setCommsMessage("Not enough reputation."); return end
+				player:setWeaponStorage(homing, player:getWeaponStorageMax(homing) / 2)
 				setCommsMessage("We generously resupplied you with some free homing missiles.\nPut them to good use.")
 				addCommsReply("Back", mainMenu)
 			end
 		end)
 		addCommsReply("Please re-stock our mines. (5rep each)", function()
 			if not player:isDocked(comms_target) then setCommsMessage("You need to stay docked for that action."); return end
-			if player:getWeaponStorage("Mine") >= player:getWeaponStorageMax("Mine") then
+			if player:getWeaponStorage(mine) >= player:getWeaponStorageMax(mine) then
 				setCommsMessage("You are fully stocked with mines.");
 				addCommsReply("Back", mainMenu)
 			else
-				if not player:takeReputationPoints(5 * (player:getWeaponStorageMax("Mine") - player:getWeaponStorage("Mine"))) then setCommsMessage("Not enough reputation."); return end
-				player:setWeaponStorage("Mine", player:getWeaponStorageMax("Mine"))
+				if not player:takeReputationPoints(5 * (player:getWeaponStorageMax(mine) - player:getWeaponStorage(mine))) then setCommsMessage("Not enough reputation."); return end
+				player:setWeaponStorage(mine, player:getWeaponStorageMax(mine))
 				setCommsMessage("Here, have some mines.\nMines are good defensive weapons.")
 				addCommsReply("Back", mainMenu)
 			end

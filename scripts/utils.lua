@@ -92,7 +92,7 @@ end
 --
 -- Example: To create a space station 10000 units from coordinates 100, -100
 -- at a heading of 45 degrees, run
---   setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 100, -100, 45, 10000)
+--   setCirclePos(SpaceStation():setTemplate(smallStation):setFaction(neutralFaction), 100, -100, 45, 10000)
 function setCirclePos(obj, x, y, angle, distance)
     dx, dy = vectorFromAngle(angle, distance)
     return obj:setPosition(x + dx, y + dy)
