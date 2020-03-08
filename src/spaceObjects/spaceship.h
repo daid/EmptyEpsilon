@@ -143,6 +143,8 @@ public:
     float jump_drive_max_distance; //[config]
     float wormhole_alpha;    //Used for displaying the Warp-postprocessor
 
+    bool has_signal_radar;      //[config]
+
     int weapon_storage[MW_Count];
     int weapon_storage_max[MW_Count];
     int8_t weapon_tube_count;
@@ -415,6 +417,9 @@ public:
     void setRadarTrace(string trace) { radar_trace = trace; }
 
     void addBroadcast(int threshold, string message);
+
+    void setSignalRadar(bool enabled) { has_signal_radar = enabled; }
+    bool hasSignalRadar() { return has_signal_radar; }
 
     // Return a string that can be appended to an object create function in the lua scripting.
     // This function is used in getScriptExport calls to adjust for tweaks done in the GM screen.

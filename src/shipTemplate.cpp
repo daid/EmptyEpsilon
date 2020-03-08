@@ -63,6 +63,9 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     /// Set if this ship has a jump drive. Example: template:setJumpDrive(true)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDriveRange);
+    /// Set whether this ship has detailed signal radar.
+    /// Example: template:setSignalRadar(true)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSignalRadar);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCloaking);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWeaponStorage);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoom);
@@ -110,6 +113,7 @@ ShipTemplate::ShipTemplate()
     jump_drive_min_distance = 5000.0;
     jump_drive_max_distance = 50000.0;
     has_cloaking = false;
+    has_signal_radar = true;
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = 0;
     radar_trace = "RadarArrow.png";
@@ -380,6 +384,11 @@ void ShipTemplate::setJumpDrive(bool enabled)
     has_jump_drive = enabled;
 }
 
+void ShipTemplate::setSignalRadar(bool enabled)
+{
+    has_signal_radar = enabled;
+}
+
 void ShipTemplate::setCloaking(bool enabled)
 {
     has_cloaking = enabled;
@@ -447,6 +456,7 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->repair_docked = repair_docked;
     result->restocks_scan_probes = restocks_scan_probes;
     result->has_jump_drive = has_jump_drive;
+    result->has_signal_radar = has_signal_radar;
     result->has_cloaking = has_cloaking;
     for(int n=0; n<MW_Count; n++)
         result->weapon_storage[n] = weapon_storage[n];

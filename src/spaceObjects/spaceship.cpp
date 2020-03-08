@@ -89,6 +89,14 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Example: obj:reachesSignalThreshold(0.3)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, reachesSignalThreshold);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, addBroadcast);
+    /// Return whether the ship has detailed signal radar.
+    /// Returns a boolean value.
+    /// Example: obj:hasSignalRadar()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasSignalRadar);
+    /// Set whether the ship has detailed signal radar.
+    /// Requires a boolean value.
+    /// Example: obj:setSignalRadar(true)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSignalRadar);
     /// Set the scan state of this ship for every faction.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanState);
     /// Set the scane state of this ship for a particular faction.
@@ -107,6 +115,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     warp_request = 0.0;
     current_warp = 0.0;
     has_jump_drive = true;
+    has_signal_radar = true;
     jump_drive_min_distance = 5000.0;
     jump_drive_max_distance = 50000.0;
     jump_drive_charge = jump_drive_max_distance;
@@ -140,6 +149,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&warp_request, 0.1);
     registerMemberReplication(&current_warp, 0.1);
     registerMemberReplication(&has_jump_drive);
+    registerMemberReplication(&has_signal_radar);
     registerMemberReplication(&jump_drive_charge, 0.5);
     registerMemberReplication(&jump_delay, 0.5);
     registerMemberReplication(&jump_drive_min_distance);
@@ -239,6 +249,7 @@ void SpaceShip::applyTemplateValues()
     has_warp_drive = ship_template->warp_speed > 0.0;
     warp_speed_per_warp_level = ship_template->warp_speed;
     has_jump_drive = ship_template->has_jump_drive;
+    has_signal_radar = ship_template->has_signal_radar;
     jump_drive_min_distance = ship_template->jump_drive_min_distance;
     jump_drive_max_distance = ship_template->jump_drive_max_distance;
     for(int n=0; n<max_weapon_tubes; n++)
@@ -1318,6 +1329,8 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
         ret += ":setJumpDrive(" + string(has_jump_drive ? "true" : "false") + ")";
     if (has_warp_drive != (ship_template->warp_speed > 0))
         ret += ":setWarpDrive(" + string(has_warp_drive ? "true" : "false") + ")";
+    if (has_signal_radar != ship_template->has_signal_radar)
+        ret += ":setSignalRadar(" + string(has_signal_radar ? "true" : "false") + ")";
 
     // Shield data
     // Determine whether to export shield data.
