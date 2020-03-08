@@ -126,15 +126,17 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 
     // If the server uses frequencies, add the Tactical sidebar page.
     if (gameGlobalInfo->use_beam_shield_frequencies)
-    {
         sidebar_pager->addEntry("Tactical", "Tactical");
-    }
 
     // Add sidebar page for systems.
     sidebar_pager->addEntry("Systems", "Systems");
 
     // Add sidebar page for a description.
     sidebar_pager->addEntry("Description", "Description");
+
+    // If the ship has detailed signals on radar, add a sidebar page for them.
+    if (my_spaceship->has_signal_radar)
+        sidebar_pager->addEntry("Signals", "Signals");
 
     // Default the pager to the first item.
     sidebar_pager->setSelectionIndex(0);
@@ -163,6 +165,22 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     // Prep and hide the description text area.
     info_description = new GuiScrollText(info_sidebar, "SCIENCE_DESC", "");
     info_description->setTextSize(28)->setMargins(20, 20, 0, 0)->setSize(GuiElement::GuiSizeMax, 400)->hide();
+
+    // Prep and hide the detailed signal bands.
+    info_electrical_signal_band = new GuiSignalQualityIndicator(info_sidebar, "ELECTRICAL_SIGNAL");
+    info_electrical_signal_band->showGreen(false)->showBlue(false)->setSize(GuiElement::GuiSizeMax, 80)->hide();
+    info_electrical_signal_label = new GuiLabel(info_electrical_signal_band, "", "Electrical", 30);
+    info_electrical_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    info_gravity_signal_band = new GuiSignalQualityIndicator(info_sidebar, "GRAVITY_SIGNAL");
+    info_gravity_signal_band->showRed(false)->showBlue(false)->setSize(GuiElement::GuiSizeMax, 80)->hide();
+    info_gravity_signal_label = new GuiLabel(info_gravity_signal_band, "", "Gravitational", 30);
+    info_gravity_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    info_biological_signal_band = new GuiSignalQualityIndicator(info_sidebar, "BIOLOGICAL_SIGNAL");
+    info_biological_signal_band->showRed(false)->showGreen(false)->setSize(GuiElement::GuiSizeMax, 80)->hide();
+    info_biological_signal_label = new GuiLabel(info_biological_signal_band, "", "Biological", 30);
+    info_biological_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Prep and hide the database view.
     database_view = new DatabaseViewComponent(this);
@@ -368,6 +386,9 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     info_shield_frequency->setFrequency(-1)->hide();
     info_beam_frequency->setFrequency(-1)->hide();
     info_description->hide();
+    info_electrical_signal_band->hide();
+    info_gravity_signal_band->hide();
+    info_biological_signal_band->hide();
     info_type_button->hide();
     sidebar_pager->hide();
 
@@ -455,7 +476,9 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                     }
 
                     info_description->hide();
-                } else if (sidebar_pager_selection == "Systems") {
+                }
+                else if (sidebar_pager_selection == "Systems")
+                {
                     info_shield_frequency->hide();
                     info_beam_frequency->hide();
 
@@ -463,9 +486,11 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                     {
                         info_system[n]->show();
                     }
-                    
+
                     info_description->hide();
-                } else if (sidebar_pager_selection == "Description") {
+                }
+                else if (sidebar_pager_selection == "Description")
+                {
                     info_shield_frequency->hide();
                     info_beam_frequency->hide();
 
@@ -475,7 +500,42 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                     }
 
                     info_description->show();
-                } else {
+                }
+                else if (sidebar_pager_selection == "Signals")
+                {
+                    info_shield_frequency->hide();
+                    info_beam_frequency->hide();
+
+                    for(int n = 0; n < SYS_COUNT; n++)
+                        info_system[n]->hide();
+
+                    info_description->hide();
+
+                    info_electrical_signal_band->show();
+                    info_gravity_signal_band->show();
+                    info_biological_signal_band->show();
+                    // If this ship has detailed signals on radar, calculate their
+                    // waveforms.
+                    if (my_spaceship->has_signal_radar)
+                    {
+                        float signal = ship->getDynamicRadarSignatureElectrical();
+                        info_electrical_signal_band->setMaxAmp(signal);
+                        info_electrical_signal_band->setNoiseError(std::max(0.0f, (signal - 1.0f) / 10));
+                        info_electrical_signal_label->setText("Electrical: " + string(signal) + " MJ");
+
+                        signal = ship->getDynamicRadarSignatureGravity();
+                        info_gravity_signal_band->setMaxAmp(signal);
+                        info_gravity_signal_band->setPeriodError(std::max(0.0f, (signal - 1.0f) / 10));
+                        info_gravity_signal_label->setText("Gravitational: " + string(signal) + " dN");
+
+                        signal = ship->getDynamicRadarSignatureBiological();
+                        info_biological_signal_band->setMaxAmp(signal);
+                        info_biological_signal_band->setPhaseError(std::max(0.0f, (signal - 1.0f) / 10));
+                        info_biological_signal_label->setText("Biological: " + string(signal) + " um");
+                    }
+                }
+                else
+                {
                     LOG(WARNING) << "Invalid pager state: " << sidebar_pager_selection;
                 }
 
@@ -494,8 +554,11 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                     info_system[n]->setValue(string(int(system_health * 100.0f)) + "%")->setColor(sf::Color(255, 127.5 * (system_health + 1), 127.5 * (system_health + 1), 255));
                 }
             }
-        } else {
-            // If the target isn't a ship, show basic info.
+        }
+
+        // If the target isn't a ship, show basic info.
+        else
+        {
             sidebar_pager->hide();
             info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
 
@@ -507,9 +570,12 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                 info_hull->setValue(int(station->getHull()));
             }
         }
-    } else if (targets.getWaypointIndex() >= 0) {
-        // If the target is a waypoint, show its heading and distance, and our
-        // velocity toward it.
+    }
+
+    // If the target is a waypoint, show its heading and distance, and our
+    // velocity toward it.
+    else if (targets.getWaypointIndex() >= 0)
+    {
         sidebar_pager->hide();
         sf::Vector2f position_diff = my_spaceship->waypoints[targets.getWaypointIndex()] - my_spaceship->getPosition();
         float distance = sf::length(position_diff);
