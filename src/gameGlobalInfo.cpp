@@ -170,7 +170,7 @@ void GameGlobalInfo::startScenario(string filename)
 {
     reset();
 
-    i18n::load(filename + "." + PreferencesManager::get("language", "en") + ".po");
+    i18n::load(filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
     P<ScriptObject> script = new ScriptObject();
     script->run(filename);
     engine->registerObject("scenario", script);

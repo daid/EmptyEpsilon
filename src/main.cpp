@@ -115,7 +115,6 @@ int main(int argc, char** argv)
     }
 
     new Engine();
-    i18n::load("locale/" + PreferencesManager::get("language", "en") + ".po");
 
     if (PreferencesManager::get("headless") != "")
         textureManager.setDisabled(true);
@@ -132,6 +131,10 @@ int main(int argc, char** argv)
         PackResourceProvider::addPackResourcesForDirectory("resources/mods/" + mod);
     }
 
+    new DirectoryResourceProvider("resources/");
+    new DirectoryResourceProvider("scripts/");
+    new DirectoryResourceProvider("packs/SolCommand/");
+    PackResourceProvider::addPackResourcesForDirectory("packs");
 #ifdef RESOURCE_BASE_DIR
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/");
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "scripts/");
@@ -144,14 +147,11 @@ int main(int argc, char** argv)
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/scripts/");
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/packs/SolCommand/");
     }
-    new DirectoryResourceProvider("resources/");
-    new DirectoryResourceProvider("scripts/");
-    new DirectoryResourceProvider("packs/SolCommand/");
-    PackResourceProvider::addPackResourcesForDirectory("packs");
     textureManager.setDefaultSmooth(true);
     textureManager.setDefaultRepeated(true);
     textureManager.setAutoSprite(false);
     textureManager.getTexture("Tokka_WalkingMan.png", sf::Vector2i(6, 1)); //Setup the sprite mapping.
+    i18n::load("locale/" + PreferencesManager::get("language", "en") + ".po");
 
     if (PreferencesManager::get("httpserver").toInt() != 0)
     {
