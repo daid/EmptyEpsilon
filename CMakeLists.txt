@@ -281,6 +281,7 @@ foreach(SP_SOURCE
 	src/event.cpp
 	src/multiplayer.cpp
 	src/P.cpp
+	src/i18n.cpp
 	src/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp
 	src/Box2D/Dynamics/Contacts/b2ContactSolver.cpp
 	src/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp
@@ -479,6 +480,11 @@ if(PYTHONINTERP_FOUND)
   add_custom_target(script_reference ALL DEPENDS ${CMAKE_BINARY_DIR}/script_reference.html)
   install(FILES ${CMAKE_BINARY_DIR}/script_reference.html DESTINATION .)
 endif()
+
+add_custom_target(update_locale
+	COMMAND xgettext --keyword=tr --omit-header -j -d resources/locale/en ${SOURCES}
+	COMMAND xgettext --keyword=_ --omit-header -j -d resources/locale/en scripts/shipTemplates_* scripts/comms_ship.lua scripts/comms_station.lua scripts/comms_supply_drop.lua scripts/factionInfo.lua scripts/science_db.lua
+	WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
 set(CPACK_PACKAGE_EXECUTABLES ${EXECUTABLE_NAME})
 set(CPACK_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}")

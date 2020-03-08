@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "engine.h"
 #include "mainMenus.h"
 #include "main.h"
@@ -68,9 +69,9 @@ MainMenu::MainMenu()
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
 
     (new GuiImage(this, "LOGO", "logo_full"))->setPosition(0, title_y, ATopCenter)->setSize(logo_size_x, logo_size_y);
-    (new GuiLabel(this, "VERSION", "Version: " + string(VERSION_NUMBER), 20))->setPosition(0, title_y + logo_size, ATopCenter)->setSize(0, 20);
+    (new GuiLabel(this, "VERSION", tr("Version: {version}").format({{"version", string(VERSION_NUMBER)}}), 20))->setPosition(0, title_y + logo_size, ATopCenter)->setSize(0, 20);
 
-    (new GuiButton(this, "START_SERVER", "Start server", [this]() {
+    (new GuiButton(this, "START_SERVER", tr("Start server"), [this]() {
         new EpsilonServer();
         if (game_server)
         {
@@ -79,28 +80,28 @@ MainMenu::MainMenu()
         }
     }))->setPosition(sf::Vector2f(50, -230), ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "START_CLIENT", "Start client", [this]() {
+    (new GuiButton(this, "START_CLIENT", tr("Start client"), [this]() {
         new ServerBrowserMenu(ServerBrowserMenu::Local);
         destroy();
     }))->setPosition(sf::Vector2f(50, -170), ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "OPEN_OPTIONS", "Options", [this]() {
+    (new GuiButton(this, "OPEN_OPTIONS", tr("Options"), [this]() {
         new OptionsMenu();
         destroy();
     }))->setPosition(sf::Vector2f(50, -110), ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "QUIT", "Quit", [this]() {
+    (new GuiButton(this, "QUIT", tr("Quit"), [this]() {
         engine->shutdown();
     }))->setPosition(sf::Vector2f(50, -50), ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "START_TUTORIAL", "Tutorials", [this]() {
+    (new GuiButton(this, "START_TUTORIAL", tr("Tutorials"), [this]() {
         new TutorialMenu();
         destroy();
     }))->setPosition(sf::Vector2f(370, -50), ABottomLeft)->setSize(300, 50);
 
     if (InputHandler::touch_screen)
     {
-        (new GuiButton(this, "TOUCH_CALIB", "Calibrate\nTouchscreen", [this]() {
+        (new GuiButton(this, "TOUCH_CALIB", tr("Calibrate\nTouchscreen"), [this]() {
             destroy();
             new MouseCalibrator("");
         }))->setPosition(sf::Vector2f(-50, -50), ABottomRight)->setSize(300, 100);

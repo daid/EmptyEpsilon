@@ -1,4 +1,5 @@
 #include <string.h>
+#include <i18n.h>
 #ifndef _MSC_VER
 #include <unistd.h>
 #include <sys/stat.h>
@@ -114,6 +115,7 @@ int main(int argc, char** argv)
     }
 
     new Engine();
+    i18n::load("locale/" + PreferencesManager::get("language", "en") + ".po");
 
     if (PreferencesManager::get("headless") != "")
         textureManager.setDisabled(true);
