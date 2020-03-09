@@ -129,7 +129,7 @@ ServerCreationScreen::ServerCreationScreen()
     (new GuiLabel(row, "GAME_HACKING_DIFFICULTY_LABEL", tr("Hacking difficulty: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiSelector(row, "GAME_HACKING_DIFFICULTY", [](int index, string value) {
         gameGlobalInfo->hacking_difficulty = index;
-    }))->setOptions({tr("Simple", "hacking"), tr("Normal", "hacking"), tr("hacking", "Difficult"), tr("hacking", "Fiendish")})->setSelectionIndex(gameGlobalInfo->hacking_difficulty)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    }))->setOptions({tr("hacking", "Simple"), tr("hacking", "Normal"), tr("hacking", "Difficult"), tr("hacking", "Fiendish")})->setSelectionIndex(gameGlobalInfo->hacking_difficulty)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Hacking games selector.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
