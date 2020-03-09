@@ -270,6 +270,7 @@ foreach(SP_SOURCE
 	src/multiplayer_server_scanner.cpp
 	src/networkRecorder.cpp
 	src/multiplayer_server.cpp
+	src/multiplayer_proxy.cpp
 	src/scriptInterfaceMagic.cpp
 	src/Renderable.cpp
 	src/Updatable.cpp
@@ -396,6 +397,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 find_package(SFML 2.3 REQUIRED system window graphics network audio)
 include_directories(${SFML_INCLUDE_DIR})
 target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
+add_definitions(-DSFML_NO_DEPRECATED_WARNINGS) # SFML 2.5 gives deprication warnings on a few functions we use. But we maintain 2.3 compatibility, so ignore those warnings.
 
 # Setup OpenGl
 if(ANDROID)
