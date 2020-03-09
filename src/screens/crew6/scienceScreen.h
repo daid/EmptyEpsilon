@@ -44,7 +44,7 @@ public:
     GuiScanTargetButton* scan_button;
     GuiKeyValueDisplay* info_callsign;
     GuiKeyValueDisplay* info_distance;
-    GuiKeyValueDisplay* info_heading;
+    GuiKeyValueDisplay* info_bearing;
     GuiKeyValueDisplay* info_relspeed;
 
     GuiKeyValueDisplay* info_faction;

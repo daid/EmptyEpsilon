@@ -93,8 +93,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     info_callsign->setSize(GuiElement::GuiSizeMax, 30);
     info_distance = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_DISTANCE", 0.4, "Distance", "");
     info_distance->setSize(GuiElement::GuiSizeMax, 30);
-    info_heading = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HEADING", 0.4, "Bearing", "");
-    info_heading->setSize(GuiElement::GuiSizeMax, 30);
+    info_bearing = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_BEARING", 0.4, "Bearing", "");
+    info_bearing->setSize(GuiElement::GuiSizeMax, 30);
     info_relspeed = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_REL_SPEED", 0.4, "Rel. Speed", "");
     info_relspeed->setSize(GuiElement::GuiSizeMax, 30);
     info_faction = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_FACTION", 0.4, "Faction", "");
@@ -201,7 +201,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
             science_radar->hide();
             probe_radar->show();
             probe_radar->setViewPosition(probe_position)->show();
-        }else{
+        } else {
             probe_view_button->setValue(false);
             science_radar->show();
             probe_radar->hide();
@@ -356,14 +356,18 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         zoom_label->setText("Zoom: " + string(gameGlobalInfo->long_range_radar_range / view_distance, 1) + "x");
     }
 
+    // Draw only if we're looking at our own ship.
     if (!my_spaceship)
         return;
 
+    // Use local data to determine which probe is linked.
     if (game_server)
         probe = game_server->getObjectById(my_spaceship->linked_science_probe_id);
     else
         probe = game_client->getObjectById(my_spaceship->linked_science_probe_id);
 
+    // Clear our selected target if it is hidden by a nebula or its shadow,
+    // or if we're in probe view and the object is out of range.
     if (probe_view_button->getValue() && probe)
     {
         if (targets.get() && (probe->getPosition() - targets.get()->getPosition()) > 5000.0f)
@@ -373,11 +377,13 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             targets.clear();
     }
     
+    // Show the custom function sidebar if any entries are present.
     sidebar_selector->setVisible(sidebar_selector->getSelectionIndex() > 0 || custom_function_sidebar->hasEntries());
 
+    // Initialize info fields.
     info_callsign->setValue("-");
     info_distance->setValue("-");
-    info_heading->setValue("-");
+    info_bearing->setValue("-");
     info_relspeed->setValue("-");
     info_faction->setValue("-");
     info_type->setValue("-");
@@ -390,24 +396,23 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     info_gravity_signal_band->hide();
     info_biological_signal_band->hide();
     info_type_button->hide();
-    sidebar_pager->hide();
 
     for(int n = 0; n < SYS_COUNT; n++)
         info_system[n]->setValue("-")->hide();
 
+    // Show probe view if enabled.
     if (probe)
     {
         probe_view_button->enable();
         probe_radar->setViewPosition(probe->getPosition());
-    }
-    else
-    {
+    } else {
         probe_view_button->disable();
         probe_view_button->setValue(false);
         science_radar->show();
         probe_radar->hide();
     }
 
+    // Populate data based on our current target.
     if (targets.get())
     {
         P<SpaceObject> obj = targets.get();
@@ -416,9 +421,9 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
 
         sf::Vector2f position_diff = obj->getPosition() - my_spaceship->getPosition();
         float distance = sf::length(position_diff);
-        float heading = sf::vector2ToAngle(position_diff) - 270;
+        float bearing = sf::vector2ToAngle(position_diff) - 270;
 
-        while(heading < 0) heading += 360;
+        while(bearing < 0) bearing += 360;
 
         float rel_velocity = dot(obj->getVelocity(), position_diff / distance) - dot(my_spaceship->getVelocity(), position_diff / distance);
 
@@ -427,28 +432,50 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
 
         info_callsign->setValue(obj->getCallSign());
         info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
-        info_heading->setValue(string(int(heading)));
+        info_bearing->setValue(string(int(bearing)));
         info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
 
         string description = obj->getDescriptionFor(my_spaceship);
         string sidebar_pager_selection = sidebar_pager->getSelectionValue();
+        RawRadarSignatureInfo radar_info;
+
+        if (my_spaceship->has_signal_radar)
+        {
+            // If our ship has detailed signal radar, add the Signals page to
+            // the sidebar.
+            if (!sidebar_pager->indexByValue("Signals"))
+                sidebar_pager->addEntry("Signals", "Signals");
+
+            // Get the target's detailed radar signature information.
+            // If it's a ship, get its dynamic values.
+            if (ship)
+                radar_info = ship->getDynamicRadarSignatureInfo();
+            else
+                radar_info = obj->getRadarSignatureInfo();
+        } else {
+            // Otherwise, remove the page from the sidebar.
+            sidebar_pager->removeEntry(sidebar_pager->indexByValue("Signals"));
+        }
 
         if (description.size() > 0)
         {
-            info_description->setText(description)->show();
-
+            // If the target has a description, add a page for it to the sidebar.
             if (!sidebar_pager->indexByValue("Description"))
                 sidebar_pager->addEntry("Description", "Description");
+
+            // Populate the description.
+            info_description->setText(description)->show();
         } else {
+            // Otherwise, remove the page from the sidebar.
             sidebar_pager->removeEntry(sidebar_pager->indexByValue("Description"));
         }
 
-        // If the target is a ship, show information about the ship based on how
-        // deeply we've scanned it.
+        // If the target is a ship, show additional information about the ship
+        // based on how deeply we've scanned it.
         if (ship)
         {
-            // On a simple scan or deeper, show the faction, ship type, shields,
-            // hull integrity, and database reference button.
+            // On a simple scan or deeper, show the faction, ship type,
+            // shields, hull integrity, and database reference button.
             if (ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
             {
                 info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
@@ -462,83 +489,6 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             // description (if one is set).
             if (ship->getScannedStateFor(my_spaceship) >= SS_FullScan)
             {
-                sidebar_pager->setVisible(sidebar_pager->entryCount() > 1);
-
-                // Check sidebar pager state.
-                if (sidebar_pager_selection == "Tactical")
-                {
-                    info_shield_frequency->show();
-                    info_beam_frequency->show();
-
-                    for(int n = 0; n < SYS_COUNT; n++)
-                    {
-                        info_system[n]->hide();
-                    }
-
-                    info_description->hide();
-                }
-                else if (sidebar_pager_selection == "Systems")
-                {
-                    info_shield_frequency->hide();
-                    info_beam_frequency->hide();
-
-                    for(int n = 0; n < SYS_COUNT; n++)
-                    {
-                        info_system[n]->show();
-                    }
-
-                    info_description->hide();
-                }
-                else if (sidebar_pager_selection == "Description")
-                {
-                    info_shield_frequency->hide();
-                    info_beam_frequency->hide();
-
-                    for(int n = 0; n < SYS_COUNT; n++)
-                    {
-                        info_system[n]->hide();
-                    }
-
-                    info_description->show();
-                }
-                else if (sidebar_pager_selection == "Signals")
-                {
-                    info_shield_frequency->hide();
-                    info_beam_frequency->hide();
-
-                    for(int n = 0; n < SYS_COUNT; n++)
-                        info_system[n]->hide();
-
-                    info_description->hide();
-
-                    info_electrical_signal_band->show();
-                    info_gravity_signal_band->show();
-                    info_biological_signal_band->show();
-                    // If this ship has detailed signals on radar, calculate their
-                    // waveforms.
-                    if (my_spaceship->has_signal_radar)
-                    {
-                        float signal = ship->getDynamicRadarSignatureElectrical();
-                        info_electrical_signal_band->setMaxAmp(signal);
-                        info_electrical_signal_band->setNoiseError(std::max(0.0f, (signal - 1.0f) / 10));
-                        info_electrical_signal_label->setText("Electrical: " + string(signal) + " MJ");
-
-                        signal = ship->getDynamicRadarSignatureGravity();
-                        info_gravity_signal_band->setMaxAmp(signal);
-                        info_gravity_signal_band->setPeriodError(std::max(0.0f, (signal - 1.0f) / 10));
-                        info_gravity_signal_label->setText("Gravitational: " + string(signal) + " dN");
-
-                        signal = ship->getDynamicRadarSignatureBiological();
-                        info_biological_signal_band->setMaxAmp(signal);
-                        info_biological_signal_band->setPhaseError(std::max(0.0f, (signal - 1.0f) / 10));
-                        info_biological_signal_label->setText("Biological: " + string(signal) + " um");
-                    }
-                }
-                else
-                {
-                    LOG(WARNING) << "Invalid pager state: " << sidebar_pager_selection;
-                }
-
                 // If beam and shield frequencies are enabled on the server,
                 // populate their graphs.
                 if (gameGlobalInfo->use_beam_shield_frequencies)
@@ -554,15 +504,11 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                     info_system[n]->setValue(string(int(system_health * 100.0f)) + "%")->setColor(sf::Color(255, 127.5 * (system_health + 1), 127.5 * (system_health + 1), 255));
                 }
             }
-        }
-
-        // If the target isn't a ship, show basic info.
-        else
-        {
-            sidebar_pager->hide();
+        } else {
+            // If the target isn't a ship, populate only basic info.
             info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
 
-            // If the target is a station, show basic tactical info.
+            // If the target is a station, populate basic tactical info.
             if (station)
             {
                 info_type->setValue(station->template_name);
@@ -570,18 +516,72 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                 info_hull->setValue(int(station->getHull()));
             }
         }
-    }
 
-    // If the target is a waypoint, show its heading and distance, and our
-    // velocity toward it.
-    else if (targets.getWaypointIndex() >= 0)
-    {
+        // Show the sidebar pager.
+        sidebar_pager->setVisible(sidebar_pager->entryCount() > 1);
+
+        // Check sidebar pager state.
+        info_shield_frequency->hide();
+        info_beam_frequency->hide();
+
+        for(int n = 0; n < SYS_COUNT; n++)
+            info_system[n]->hide();
+
+        info_description->hide();
+
+        info_electrical_signal_band->hide();
+        info_gravity_signal_band->hide();
+        info_biological_signal_band->hide();
+
+        if (sidebar_pager_selection == "Tactical")
+        {
+            info_shield_frequency->show();
+            info_beam_frequency->show();
+        } else if (sidebar_pager_selection == "Systems") {
+            for(int n = 0; n < SYS_COUNT; n++)
+                info_system[n]->show();
+        } else if (sidebar_pager_selection == "Description") {
+            info_description->show();
+        } else if (sidebar_pager_selection == "Signals") {
+            info_electrical_signal_band->show();
+            info_gravity_signal_band->show();
+            info_biological_signal_band->show();
+
+            // Calculate signal noise for unscanned objects more than 5U away.
+            float distance_variance = 0.0f;
+            float signal = 0.0f;
+            if (distance > 5000.0f && !obj->isScannedBy(my_spaceship))
+                distance_variance = (random(0.01f, (distance - 5000.0f)) / (gameGlobalInfo->long_range_radar_range - 5000.0f)) / 10;
+
+            // Calculate their waveforms.
+            signal = std::max(0.0f, radar_info.electrical - distance_variance);
+            info_electrical_signal_band->setMaxAmp(signal);
+            info_electrical_signal_band->setNoiseError(std::max(0.0f, (signal - 1.0f) / 10));
+            info_electrical_signal_label->setText("Electrical: " + string(signal) + " MJ");
+
+            signal = std::max(0.0f, radar_info.gravity - distance_variance);
+            info_gravity_signal_band->setMaxAmp(signal);
+            info_gravity_signal_band->setPeriodError(std::max(0.0f, (signal - 1.0f) / 10));
+            info_gravity_signal_label->setText("Gravitational: " + string(signal) + " dN");
+
+            signal = std::max(0.0f, radar_info.biological - distance_variance);
+            info_biological_signal_band->setMaxAmp(signal);
+            info_biological_signal_band->setPhaseError(std::max(0.0f, (signal - 1.0f) / 10));
+            info_biological_signal_label->setText("Biological: " + string(signal) + " um");
+        } else {
+            LOG(WARNING) << "Invalid pager state: " << sidebar_pager_selection;
+        }
+    } else if (targets.getWaypointIndex() >= 0) {
+        // If the target is a waypoint, hide the sidebar pager.
         sidebar_pager->hide();
+
+        // Show the waypoint's bearing and distance, and our velocity toward
+        // it.
         sf::Vector2f position_diff = my_spaceship->waypoints[targets.getWaypointIndex()] - my_spaceship->getPosition();
         float distance = sf::length(position_diff);
-        float heading = sf::vector2ToAngle(position_diff) - 270;
+        float bearing = sf::vector2ToAngle(position_diff) - 270;
 
-        while(heading < 0) heading += 360;
+        while(bearing < 0) bearing += 360;
 
         float rel_velocity = -dot(my_spaceship->getVelocity(), position_diff / distance);
 
@@ -589,8 +589,11 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             rel_velocity = 0.0;
 
         info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
-        info_heading->setValue(string(int(heading)));
+        info_bearing->setValue(string(int(bearing)));
         info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
+    } else {
+        // Hide the sidebar pager if we don't have a target.
+        sidebar_pager->hide();
     }
 }
 

@@ -714,63 +714,6 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
                 target_sprite.setPosition(object_position_on_screen);
                 window.draw(target_sprite);
             }
-
-            // Add numeric radar signal values if signal details are enabled.
-            if (show_signal_details)
-            {
-                P<SpaceShip> ship = obj;
-                RawRadarSignatureInfo info;
-                float object_radius = obj->getRadius();
-                float distance_to_target = sf::length(my_spaceship->getPosition() - obj->getPosition());
-                float distance_variance = 0.0f;
-
-                // Destabilize values if the target is beyond short-range
-                // sensors or has not been scanned.
-                if (distance_to_target > 5000.0f && !obj->isScannedBy(my_spaceship))
-                    distance_variance = random(0, (distance_to_target - 5000.0f) / 100);
-
-                if (ship)
-                    info = ship->getDynamicRadarSignatureInfo();    // Use dynamic signatures for ships.
-                else
-                    info = obj->getRadarSignatureInfo();            // Otherwise, use the baseline only.
-
-                // Electrical (red)
-                drawText(window,
-                    sf::FloatRect(
-                        object_position_on_screen.x + 15,
-                        object_position_on_screen.y, 0, 0
-                    ),
-                    "E" + std::to_string(static_cast<int>(
-                        // Larger objects emit larger values.
-                        info.electrical * object_radius * 10 + distance_variance)
-                    ),
-                    ATopLeft, 15, bold_font, sf::Color::Red
-                );
-
-                // Gravity (green)
-                drawText(window,
-                    sf::FloatRect(
-                        object_position_on_screen.x + 15,
-                        object_position_on_screen.y + 15, 0, 0
-                    ),
-                    "G" + std::to_string(static_cast<int>(
-                        info.gravity * object_radius * 10 + distance_variance)
-                    ),
-                    ATopLeft, 15, bold_font, sf::Color::Green
-                );
-
-                // Biological (blue)
-                drawText(window,
-                    sf::FloatRect(
-                        object_position_on_screen.x + 15,
-                        object_position_on_screen.y + 30, 0, 0
-                    ),
-                    "B" + std::to_string(static_cast<int>(
-                        info.biological * object_radius * 10 + distance_variance)
-                    ),
-                    ATopLeft, 15, bold_font, sf::Color::Blue
-                );
-            }
         }
     }
 
