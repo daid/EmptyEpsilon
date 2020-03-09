@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "shipTemplate.h"
 #include "spaceObjects/spaceObject.h"
 #include "mesh.h"
@@ -308,15 +309,15 @@ string getSystemName(ESystem system)
 {
     switch(system)
     {
-    case SYS_Reactor: return "Reactor";
-    case SYS_BeamWeapons: return "Beam Weapons";
-    case SYS_MissileSystem: return "Missile System";
-    case SYS_Maneuver: return "Maneuvering";
-    case SYS_Impulse: return "Impulse Engines";
-    case SYS_Warp: return "Warp Drive";
-    case SYS_JumpDrive: return "Jump Drive";
-    case SYS_FrontShield: return "Front Shield Generator";
-    case SYS_RearShield: return "Rear Shield Generator";
+    case SYS_Reactor: return tr("ship system","Reactor");
+    case SYS_BeamWeapons: return tr("ship system","Beam Weapons");
+    case SYS_MissileSystem: return tr("ship system","Missile System");
+    case SYS_Maneuver: return tr("ship system","Maneuvering");
+    case SYS_Impulse: return tr("ship system","Impulse Engines");
+    case SYS_Warp: return tr("ship system","Warp Drive");
+    case SYS_JumpDrive: return tr("ship system","Jump Drive");
+    case SYS_FrontShield: return tr("ship system","Front Shield Generator");
+    case SYS_RearShield: return tr("ship system","Rear Shield Generator");
     default:
         return "UNKNOWN";
     }
