@@ -19,13 +19,13 @@ require("utils.lua")
 
 function init()
     --Create the player ship
-    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Phobos M3P")
+    player = PlayerSpaceship():setFaction(_("Human Navy")):setTemplate(_("Phobos M3P"))
     tutorial:setPlayerShip(player)
 
-    tutorial:showMessage([[Welcome to the EmptyEpsilon tutorial.
+    tutorial:showMessage(_([[Welcome to the EmptyEpsilon tutorial.
 Note that this tutorial is designed to give you a quick overview of the basic options for the game, but does not cover every single aspect.
 
-Press next to continue...]], true)
+Press next to continue...]]), true)
     tutorial_list = {
         mainscreenTutorial,
 		radarTutorial
@@ -121,42 +121,42 @@ end
 --[[ Radar explanation tutorial ]]
 mainscreenTutorial = createSequence()
 addToSequence(mainscreenTutorial, function() tutorial:switchViewToMainScreen() end)
-addToSequence(mainscreenTutorial, [[This is the main screen, which displays your ship and the surrounding space.
-While you cannot move the ship from this screen, you can use it to visually identify objects.]])
+addToSequence(mainscreenTutorial, _([[This is the main screen, which displays your ship and the surrounding space.
+While you cannot move the ship from this screen, you can use it to visually identify objects.]]))
 
 radarTutorial = createSequence()
 addToSequence(radarTutorial, function() tutorial:switchViewToLongRange() end)
-addToSequence(radarTutorial, [[Welcome to the long-range radar. This radar can detect objects up to 30u from your ship, depicted at the radar's center. This radar allows you to quickly identify distant objects.]])
+addToSequence(radarTutorial, _([[Welcome to the long-range radar. This radar can detect objects up to 30u from your ship, depicted at the radar's center. This radar allows you to quickly identify distant objects.]]))
 addToSequence(radarTutorial, function() prev_object = Asteroid():setPosition(5000, 0) end)
-addToSequence(radarTutorial, [[To the right of your ship is a brown dot. This is an asteroid.
-Asteroid impacts will damage your ship, so avoid hitting them.]])
+addToSequence(radarTutorial, _([[To the right of your ship is a brown dot. This is an asteroid.
+Asteroid impacts will damage your ship, so avoid hitting them.]]))
 addToSequence(radarTutorial, function() prev_object:destroy() end)
 addToSequence(radarTutorial, function() prev_object = Mine():setPosition(5000, 0) end)
-addToSequence(radarTutorial, [[The white dot is a mine. When you move near a mine, it explodes with a powerful 1u-radius blast. Striking a mine while your shields are down will surely destroy your ship.]])
+addToSequence(radarTutorial, _([[The white dot is a mine. When you move near a mine, it explodes with a powerful 1u-radius blast. Striking a mine while your shields are down will surely destroy your ship.]]))
 addToSequence(radarTutorial, function() prev_object:destroy() end)
-addToSequence(radarTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(5000, 0) end)
-addToSequence(radarTutorial, function() prev_object2 = SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setPosition(5000, 5000) end)
-addToSequence(radarTutorial, function() prev_object3 = SpaceStation():setTemplate("Huge Station"):setFaction("Kraylor"):setPosition(5000, -5000) end)
-addToSequence(radarTutorial, [[This large dot is a station. Stations can be several different sizes and belong to different factions. The dot's color indicates whether the station is friendly (green), neutral (light blue), or hostile (red).]])
+addToSequence(radarTutorial, function() prev_object = SpaceStation():setTemplate(_("Medium Station")):setFaction(_("Human Navy")):setPosition(5000, 0) end)
+addToSequence(radarTutorial, function() prev_object2 = SpaceStation():setTemplate(_("Large Station")):setFaction(_("Independent")):setPosition(5000, 5000) end)
+addToSequence(radarTutorial, function() prev_object3 = SpaceStation():setTemplate(_("Huge Station")):setFaction(_("Kraylor")):setPosition(5000, -5000) end)
+addToSequence(radarTutorial, _([[This large dot is a station. Stations can be several different sizes and belong to different factions. The dot's color indicates whether the station is friendly (green), neutral (light blue), or hostile (red).]]))
 addToSequence(radarTutorial, function() prev_object:destroy() end)
 addToSequence(radarTutorial, function() prev_object2:destroy() end)
 addToSequence(radarTutorial, function() prev_object3:destroy() end)
 addToSequence(radarTutorial, function() prev_object = Nebula():setPosition(8000, 0) end)
-addToSequence(radarTutorial, [[The rainbow-colored cloud is a nebula. Nebulae block long-range sensors, preventing ships from detecting what's inside of them at distances of more than 5u. Sensors also cannot detect objects behind nebulae.]])
+addToSequence(radarTutorial, _([[The rainbow-colored cloud is a nebula. Nebulae block long-range sensors, preventing ships from detecting what's inside of them at distances of more than 5u. Sensors also cannot detect objects behind nebulae.]]))
 addToSequence(radarTutorial, function() prev_object:destroy() end)
-addToSequence(radarTutorial, function() prev_object = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(5000, -2500):orderIdle():setScanned(true) end)
-addToSequence(radarTutorial, function() prev_object2 = CpuShip():setFaction("Independent"):setTemplate("Phobos T3"):setPosition(5000, 2500):orderIdle():setScanned(true) end)
-addToSequence(radarTutorial, function() prev_object3 = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setPosition(5000, -7500):orderIdle():setScanned(true) end)
-addToSequence(radarTutorial, function() prev_object4 = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setPosition(5000, 7500):orderIdle():setScanned(false) end)
-addToSequence(radarTutorial, [[Finally, these are ships. They look like you on radar, and their attitude toward you is reflected by the same colors as stations. In addition to green, blue, and red, ships of unknown attitude appear as gray objects.]])
+addToSequence(radarTutorial, function() prev_object = CpuShip():setFaction(_("Human Navy")):setTemplate(_("Phobos T3")):setPosition(5000, -2500):orderIdle():setScanned(true) end)
+addToSequence(radarTutorial, function() prev_object2 = CpuShip():setFaction(_("Independent")):setTemplate(_("Phobos T3")):setPosition(5000, 2500):orderIdle():setScanned(true) end)
+addToSequence(radarTutorial, function() prev_object3 = CpuShip():setFaction(_("Kraylor")):setTemplate(_("Phobos T3")):setPosition(5000, -7500):orderIdle():setScanned(true) end)
+addToSequence(radarTutorial, function() prev_object4 = CpuShip():setFaction(_("Kraylor")):setTemplate(_("Phobos T3")):setPosition(5000, 7500):orderIdle():setScanned(false) end)
+addToSequence(radarTutorial, _([[Finally, these are ships. They look like you on radar, and their attitude toward you is reflected by the same colors as stations. In addition to green, blue, and red, ships of unknown attitude appear as gray objects.]]))
 addToSequence(radarTutorial, function() prev_object:destroy() end)
 addToSequence(radarTutorial, function() prev_object2:destroy() end)
 addToSequence(radarTutorial, function() prev_object3:destroy() end)
 addToSequence(radarTutorial, function() prev_object4:destroy() end)
-addToSequence(radarTutorial, [[Next, we will look at the short-range radar.]])
+addToSequence(radarTutorial, _([[Next, we will look at the short-range radar.]]))
 addToSequence(radarTutorial, function() tutorial:switchViewToTactical() end)
-addToSequence(radarTutorial, [[The short-range radar can detect objects up to 5u from your ship. It also depicts the range of your own beam weapons.
-Your ship has 2 beam weapons aimed forward. Each type of ship has different beam weapon layouts, with different ranges and locations.]])
+addToSequence(radarTutorial, _([[The short-range radar can detect objects up to 5u from your ship. It also depicts the range of your own beam weapons.
+Your ship has 2 beam weapons aimed forward. Each type of ship has different beam weapon layouts, with different ranges and locations.]]))
 endOfTutorial = createSequence()
 addToSequence(endOfTutorial, function() tutorial:switchViewToMainScreen() end)
-addToSequence(endOfTutorial, [[This concludes main screen and radar tutorial. While we have covered the basics, there are more advanced features in the game that you might discover.]])
+addToSequence(endOfTutorial, _([[This concludes main screen and radar tutorial. While we have covered the basics, there are more advanced features in the game that you might discover.]]))
