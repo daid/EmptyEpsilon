@@ -9,6 +9,7 @@
 REGISTER_SCRIPT_CLASS(ShipTemplate)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setName);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLocaleName);
     /// Set the class name, and subclass name for the ship. Used to divide ships into different classes.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setClass);
     /// Set the description shown for this ship in the science database.
@@ -195,6 +196,13 @@ void ShipTemplate::setName(string name)
     if (name.startswith("Player "))
         name = name.substr(7);
     this->name = name;
+    if (this->locale_name == "")
+        this->locale_name = name;
+}
+
+void ShipTemplate::setLocaleName(string name)
+{
+    this->locale_name = name;
 }
 
 void ShipTemplate::setClass(string class_name, string sub_class_name)

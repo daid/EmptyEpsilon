@@ -69,12 +69,14 @@ public:
 private:
     static std::unordered_map<string, P<ShipTemplate> > templateMap;
     string name;
+    string locale_name;
     string description;
     string class_name;
     string sub_class_name;
     TemplateType type;
 public:
     string getName();
+    string getLocaleName();
     string getDescription();
     string getClass();
     string getSubClass();
@@ -117,6 +119,7 @@ public:
     ShipTemplate();
 
     void setName(string name);
+    void setLocaleName(string name);
     void setClass(string class_name, string sub_class_name);
     void setDescription(string description);
     void setModel(string model_name);
