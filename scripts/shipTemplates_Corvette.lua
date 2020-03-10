@@ -232,7 +232,7 @@ template:setBeam(5, 30, 300, 4000.0, 1.5, 20)
 --[[----------------------Freighters----------------------]]
 
 for cnt=1,5 do
-    template = ShipTemplate():setName("Personnel Freighter " .. cnt):setLocaleName(_("Personnel Freighter ") .. cnt):setClass(_("Corvette"), _(_("Freighter"))):setModel("transport_1_" .. cnt)
+    template = ShipTemplate():setName("Personnel Freighter " .. cnt):setLocaleName(_("Personnel Freighter ") .. cnt):setClass(_("Corvette"), _("Freighter")):setModel("transport_1_" .. cnt)
     template:setDescription(_([[These freighters are designed to transport armed troops, military support personnel, and combat gear.]]))
     template:setHull(100)
     template:setShields(50, 50)
