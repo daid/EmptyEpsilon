@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
-"POT-Creation-Date: 2020-03-10 10:28+0100\n"
-"PO-Revision-Date: 2020-03-10 11:05+0100\n"
+"POT-Creation-Date: 2020-03-10 21:28+0100\n"
+"PO-Revision-Date: 2020-03-10 21:28+0100\n"
 "Last-Translator: \n"
 "Language-Team: Aprexia\n"
 "Language: fr_FR\n"
@@ -14,6 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: factionInfo.lua\n"
+"X-Poedit-SearchPath-1: shipTemplates_Corvette.lua\n"
 
 #: factionInfo.lua:1
 msgid "Independent"
@@ -206,7 +207,7 @@ msgstr ""
 "qu'aucune race connue n'ait cree intentionnellement de telles intelligences, "
 "certaines IA sont apparues par accident. Chacune d'entre elles pretend "
 "n'avoir eu aucun role a jouer dans ces experiences, en partie par crainte "
-"que cela ne donne un aperçu trop precis de leurs programmes de recherche. "
+"que cela ne donne un apercu trop precis de leurs programmes de recherche. "
 "Cette politique du \"ne rien demander, ne rien dire\" ne fait que contribuer "
 "au developpement des Fantomes.\n"
 "\n"
@@ -381,3 +382,272 @@ msgstr ""
 "Arlesiens. Ils sont ennemis des Exuari, Kraylor et Ktlitiens pour des "
 "raisons politiques et historiques, et non pour des raisons de xenophobie : "
 "certains de leurs meilleurs amis sont des representants de ces races."
+
+#: shipTemplates_Corvette.lua:14
+msgid "Atlantis X23"
+msgstr "Atlantis X23"
+
+#: shipTemplates_Corvette.lua:14 shipTemplates_Corvette.lua:83
+#: shipTemplates_Corvette.lua:101 shipTemplates_Corvette.lua:157
+#: shipTemplates_Corvette.lua:217 shipTemplates_Corvette.lua:235
+#: shipTemplates_Corvette.lua:247 shipTemplates_Corvette.lua:259
+#: shipTemplates_Corvette.lua:271 shipTemplates_Corvette.lua:283
+#: shipTemplates_Corvette.lua:296 shipTemplates_Corvette.lua:308
+msgid "Corvette"
+msgstr "Corvette"
+
+#: shipTemplates_Corvette.lua:14 shipTemplates_Corvette.lua:83
+msgid "Destroyer"
+msgstr "Destroyer"
+
+#: shipTemplates_Corvette.lua:15
+msgid ""
+"The Atlantis X23 is the smallest model of destroyer, and its combination of "
+"frigate-like size and corvette-like power makes it an excellent escort ship "
+"when defending larger ships against multiple smaller enemies. Because the "
+"Atlantis X23 is fitted with a jump drive, it can also serve as an "
+"intersystem patrol craft."
+msgstr ""
+"Le Atlantis X23 est le plus petit modele de destroyer existant. Il associe "
+"la taille d'une fregate a la puissance de feu d'une corvette, ce qui en fait "
+"un vaisseau de choix pour combattre de pultiple appareil de classe "
+"inferieur. Muni d'un moteur de saut, le Atlantis X23 est egalement tres "
+"adapte aux missions de patrouille de grande envergure."
+
+#: shipTemplates_Corvette.lua:33
+msgid "Atlantis"
+msgstr "Atlantis"
+
+#: shipTemplates_Corvette.lua:34
+msgid ""
+"A refitted Atlantis X23 for more general tasks. The large shield system has "
+"been replaced with an advanced combat maneuvering systems and improved "
+"impulse engines. Its missile loadout is also more diverse. Mistaking the "
+"modified Atlantis for an Atlantis X23 would be a deadly mistake."
+msgstr ""
+"Un Atlantis X23 reamenage pour des missions plus generales. Un systeme de "
+"manœuvre de combat avance et des moteurs a impulsion ameliores remplace les "
+"larges boucliers du X23. Son armement en missiles est egalement plus varie. "
+"Confondre l'Atlantis modifie avec un Atlantis X23 serait une erreur fatale."
+
+#: shipTemplates_Corvette.lua:83
+msgid "Starhammer II"
+msgstr "Starhammer II"
+
+#: shipTemplates_Corvette.lua:84
+msgid ""
+"Contrary to its predecessor, the Starhammer II lives up to its name. By "
+"resolving the original Starhammer's power and heat management issues, the "
+"updated model makes for a phenomenal frontal assault ship. Its low speed "
+"makes it difficult to position, but when in the right place at the right "
+"time, even the strongest shields can't withstand a Starhammer's assault for "
+"long."
+msgstr ""
+"Contrairement a son predecesseur, le Starhammer II est a la hauteur de son "
+"nom. En solutionnant les problemes de puissance et de surchauffe du "
+"Starhammer original, ce modele actualise fait un vaisseau d'assaut "
+"phenomenal. Sa faible vitesse le rend difficile a positionner, mais "
+"lorsqu'il est bien dirige, il peut venir a bout des boucliers les plus "
+"robustes."
+
+#: shipTemplates_Corvette.lua:101
+msgid "Crucible"
+msgstr "Creuset"
+
+#: shipTemplates_Corvette.lua:101
+msgid "Popper"
+msgstr "Bombardier"
+
+#: shipTemplates_Corvette.lua:102
+msgid ""
+"A number of missile tubes range around this ship. Beams were deemed lower "
+"priority, though they are still present. Stronger defenses than a frigate, "
+"but not as strong as the Atlantis"
+msgstr ""
+"Le Creuset embarque un certain nombre de tubes de lancement, pointant dans a "
+"360°. Les faisceaux juges moins prioritaires ont une puissance reduite, bien "
+"qu'ils soient toujours presents. Ses defenses sont plus solides que celles "
+"d'une fregate, mais pas autant que celles de l'Atlantis"
+
+#: shipTemplates_Corvette.lua:157
+msgid "Maverick"
+msgstr "Dissident"
+
+#: shipTemplates_Corvette.lua:157
+msgid "Gunner"
+msgstr "Cannoniere"
+
+#: shipTemplates_Corvette.lua:158
+msgid ""
+"A number of beams bristle from various points on this gunner. Missiles were "
+"deemed lower priority, though they are still present. Stronger defenses than "
+"a frigate, but not as strong as the Atlantis"
+msgstr ""
+"Le modele Dissident est herise de faisceaux pointant dans diverses "
+"directions. Il embarque tres peu de missiles et ne possede que 3 tubes de "
+"lancement. Ses defenses sont plus solides que celles d'une fregate, mais pas "
+"autant que celles de l'Atlantis"
+
+#: shipTemplates_Corvette.lua:217
+msgid "Defense platform"
+msgstr "Plateforme de defense"
+
+#: shipTemplates_Corvette.lua:217
+msgid "Support"
+msgstr "Support"
+
+#: shipTemplates_Corvette.lua:218
+msgid ""
+"This stationary defense platform operates like a station, with docking and "
+"resupply functions, but is armed with powerful beam weapons and can slowly "
+"rotate. Larger systems often use these platforms to resupply patrol ships."
+msgstr ""
+"Cette plate-forme de defense stationnaire fonctionne comme une station avec "
+"ses baies d'amarrage et de reapprovisionnement. Elle est cependant equipee "
+"de puissantes armes a faisceau et peut tourner librement mais lentement. Les "
+"systemes les plus etendus utilisent souvent ces plates-formes pour "
+"reapprovisionner les navires de patrouille."
+
+#: shipTemplates_Corvette.lua:235
+#, lua-format
+msgid "Personnel Freighter %d"
+msgstr "Navette %d"
+
+#: shipTemplates_Corvette.lua:235 shipTemplates_Corvette.lua:247
+#: shipTemplates_Corvette.lua:259 shipTemplates_Corvette.lua:271
+#: shipTemplates_Corvette.lua:283 shipTemplates_Corvette.lua:296
+msgid "Freighter"
+msgstr "Cargo"
+
+#: shipTemplates_Corvette.lua:236
+msgid ""
+"These freighters are designed to transport armed troops, military support "
+"personnel, and combat gear."
+msgstr ""
+"Ces cargos sont destines a transporter des troupes et autres personnels et "
+"equipements militaires."
+
+#: shipTemplates_Corvette.lua:243
+#, lua-format
+msgid "Personnel Jump Freighter %d"
+msgstr "Navette LD %d"
+
+#: shipTemplates_Corvette.lua:247
+#, lua-format
+msgid "Goods Freighter %d"
+msgstr "Transporteur de fret %d"
+
+#: shipTemplates_Corvette.lua:248
+msgid ""
+"Cargo freighters haul large loads of cargo across long distances on impulse "
+"power. Their cargo bays include climate control and stabilization systems "
+"that keep the cargo in good condition."
+msgstr ""
+"Les transporteurs de fret acheminent de grandes quantites de marchandises "
+"sur de longues distances grâce a la puissance de leurs moteurs a impulsion. "
+"Leurs soutes sont equipees de systemes de controle et de stabilisation "
+"climatiques qui maintiennent la cargaison en bon etat."
+
+#: shipTemplates_Corvette.lua:255
+#, lua-format
+msgid "Goods Jump Freighter %d"
+msgstr "Transporteur de fret LD %d"
+
+#: shipTemplates_Corvette.lua:259
+#, lua-format
+msgid "Garbage Freighter %d"
+msgstr "Recycleur %d"
+
+#: shipTemplates_Corvette.lua:260
+msgid ""
+"These freighters are specially designed to haul garbage and waste. They are "
+"fitted with a trash compactor and fewer stabilzation systems than cargo "
+"freighters."
+msgstr ""
+"Ces cargos sont specialement concus pour transporter des ordures et des "
+"dechets. Ils sont equipes d'un compacteur et de moins de systemes de "
+"stabilisation que les transporteurs de fret."
+
+#: shipTemplates_Corvette.lua:267
+#, lua-format
+msgid "Garbage Jump Freighter %d"
+msgstr "Recycleur LD %d"
+
+#: shipTemplates_Corvette.lua:271
+#, lua-format
+msgid "Equipment Freighter %d"
+msgstr "Transport d'equipement %d"
+
+#: shipTemplates_Corvette.lua:272
+msgid ""
+"Equipment freighters have specialized environmental and stabilization "
+"systems to safely carry delicate machinery and complex instruments."
+msgstr ""
+"Les transports d'equipement disposent de systemes specialises "
+"d'environnement et de stabilisation pour transporter en toute securite des "
+"machines delicates et instruments complexes."
+
+#: shipTemplates_Corvette.lua:279
+#, lua-format
+msgid "Equipment Jump Freighter %d"
+msgstr "Transport d'equipement LD %d"
+
+#: shipTemplates_Corvette.lua:283
+#, lua-format
+msgid "Fuel Freighter %d"
+msgstr "Citerne %d"
+
+#: shipTemplates_Corvette.lua:284
+msgid ""
+"Fuel freighters have massive tanks for hauling fuel, and delicate internal "
+"sensors that watch for any changes to their cargo's potentially volatile "
+"state."
+msgstr ""
+"Les citernes de carburant ont des reservoirs gigantesques, et des capteurs "
+"internes extremement sensibles qui controlent a tout moment l'etat de leurs "
+"cargaisons hautement volatile."
+
+#: shipTemplates_Corvette.lua:291
+#, lua-format
+msgid "Fuel Jump Freighter %d"
+msgstr "Citerne LD %d"
+
+#: shipTemplates_Corvette.lua:296
+msgid "Jump Carrier"
+msgstr "Remorqueur LD"
+
+#: shipTemplates_Corvette.lua:297
+msgid ""
+"The Jump Carrier is a specialized Freighter. It does not carry any cargo, as "
+"it's cargo bay is taken up by a specialized jump drive and the energy "
+"storage required to run this jump drive.\n"
+"It is designed to carry other ships deep into space. So it has special "
+"docking parameters, allowing other ships to attach themselves to this ship."
+msgstr ""
+"Il s'agit d'un cargo specialise. Il ne transporte aucune cargaison, car sa "
+"soute est occupee par un moteur de saut specialise et le stockage d'energie "
+"necessaire pour faire fonctionner ce moteur de saut.\n"
+"Il est concu pour transporter d'autres vaisseaux a travers l'espace. Il a "
+"donc des parametres d'amarrage particuliers, permettant a d'autres vaisseaux "
+"de s'y attacher."
+
+#: shipTemplates_Corvette.lua:308
+msgid "Benedict"
+msgstr "Benedict"
+
+#: shipTemplates_Corvette.lua:308
+msgid "Freighter/Carrier"
+msgstr "Cargo / Remorqueur"
+
+#: shipTemplates_Corvette.lua:309
+msgid "Benedict is an improved version of the Jump Carrier"
+msgstr "Le Benedict est une version amelioree du Remorqueur LD"
+
+#: shipTemplates_Corvette.lua:342
+msgid "Kiriya"
+msgstr "Kiriya"
+
+#: shipTemplates_Corvette.lua:343
+msgid "Kiriya is an improved warp drive version of the Jump Carrier"
+msgstr ""
+"Le Kiriya est un Remorqueur LD equipe d'un moteur a distorsion ameliore"
