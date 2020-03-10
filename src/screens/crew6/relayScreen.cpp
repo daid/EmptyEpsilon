@@ -244,10 +244,10 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
         {
             if (ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
             {
-                info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
+                info_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
             }
         }else{
-            info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
+            info_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
         }
 
         if (probe && probe->owner_id == my_spaceship->getMultiplayerId() && probe->canBeTargetedBy(my_spaceship))

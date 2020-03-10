@@ -3,6 +3,7 @@
 REGISTER_SCRIPT_CLASS(FactionInfo)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setName);
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setLocaleName);
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setGMColor);
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setDescription);
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setEnemy);
