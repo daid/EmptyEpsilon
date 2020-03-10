@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
-"POT-Creation-Date: 2020-03-10 12:53+0100\n"
-"PO-Revision-Date: 2020-03-10 20:20+0100\n"
+"POT-Creation-Date: 2020-03-10 21:28+0100\n"
+"PO-Revision-Date: 2020-03-10 21:28+0100\n"
 "Last-Translator: \n"
 "Language-Team: Aprexia\n"
 "Language: fr_FR\n"
@@ -509,8 +509,9 @@ msgstr ""
 "reapprovisionner les navires de patrouille."
 
 #: shipTemplates_Corvette.lua:235
-msgid "Personnel Freighter "
-msgstr "Navette "
+#, lua-format
+msgid "Personnel Freighter %d"
+msgstr "Navette %d"
 
 #: shipTemplates_Corvette.lua:235 shipTemplates_Corvette.lua:247
 #: shipTemplates_Corvette.lua:259 shipTemplates_Corvette.lua:271
@@ -527,12 +528,14 @@ msgstr ""
 "equipements militaires."
 
 #: shipTemplates_Corvette.lua:243
-msgid "Personnel Jump Freighter "
-msgstr "Navette LD "
+#, lua-format
+msgid "Personnel Jump Freighter %d"
+msgstr "Navette LD %d"
 
 #: shipTemplates_Corvette.lua:247
-msgid "Goods Freighter "
-msgstr "Transporteur de fret "
+#, lua-format
+msgid "Goods Freighter %d"
+msgstr "Transporteur de fret %d"
 
 #: shipTemplates_Corvette.lua:248
 msgid ""
@@ -546,12 +549,14 @@ msgstr ""
 "climatiques qui maintiennent la cargaison en bon etat."
 
 #: shipTemplates_Corvette.lua:255
-msgid "Goods Jump Freighter "
-msgstr "Transporteur de fret LD "
+#, lua-format
+msgid "Goods Jump Freighter %d"
+msgstr "Transporteur de fret LD %d"
 
 #: shipTemplates_Corvette.lua:259
-msgid "Garbage Freighter "
-msgstr "Recycleur "
+#, lua-format
+msgid "Garbage Freighter %d"
+msgstr "Recycleur %d"
 
 #: shipTemplates_Corvette.lua:260
 msgid ""
@@ -564,12 +569,14 @@ msgstr ""
 "stabilisation que les transporteurs de fret."
 
 #: shipTemplates_Corvette.lua:267
-msgid "Garbage Jump Freighter "
-msgstr "Recycleur LD "
+#, lua-format
+msgid "Garbage Jump Freighter %d"
+msgstr "Recycleur LD %d"
 
 #: shipTemplates_Corvette.lua:271
-msgid "Equipment Freighter "
-msgstr "Transport d'equipement "
+#, lua-format
+msgid "Equipment Freighter %d"
+msgstr "Transport d'equipement %d"
 
 #: shipTemplates_Corvette.lua:272
 msgid ""
@@ -581,12 +588,14 @@ msgstr ""
 "machines delicates et instruments complexes."
 
 #: shipTemplates_Corvette.lua:279
-msgid "Equipment Jump Freighter "
-msgstr "Transport d'equipement LD "
+#, lua-format
+msgid "Equipment Jump Freighter %d"
+msgstr "Transport d'equipement LD %d"
 
 #: shipTemplates_Corvette.lua:283
-msgid "Fuel Freighter "
-msgstr "Citerne "
+#, lua-format
+msgid "Fuel Freighter %d"
+msgstr "Citerne %d"
 
 #: shipTemplates_Corvette.lua:284
 msgid ""
@@ -599,8 +608,9 @@ msgstr ""
 "cargaisons hautement volatile."
 
 #: shipTemplates_Corvette.lua:291
-msgid "Fuel Jump Freighter "
-msgstr "Citerne LD "
+#, lua-format
+msgid "Fuel Jump Freighter %d"
+msgstr "Citerne LD %d"
 
 #: shipTemplates_Corvette.lua:296
 msgid "Jump Carrier"

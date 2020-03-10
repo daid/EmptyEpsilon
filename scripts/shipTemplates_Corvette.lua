@@ -232,7 +232,7 @@ template:setBeam(5, 30, 300, 4000.0, 1.5, 20)
 --[[----------------------Freighters----------------------]]
 
 for cnt=1,5 do
-    template = ShipTemplate():setName("Personnel Freighter " .. cnt):setLocaleName(_("Personnel Freighter ") .. cnt):setClass(_("Corvette"), _("Freighter")):setModel("transport_1_" .. cnt)
+    template = ShipTemplate():setName("Personnel Freighter " .. cnt):setLocaleName(string.format(_("Personnel Freighter %d"), cnt)):setClass(_("Corvette"), _("Freighter")):setModel("transport_1_" .. cnt)
     template:setDescription(_([[These freighters are designed to transport armed troops, military support personnel, and combat gear.]]))
     template:setHull(100)
     template:setShields(50, 50)
@@ -240,11 +240,11 @@ for cnt=1,5 do
     template:setRadarTrace("radar_transport.png")
     
     if cnt > 2 then
-        variation = template:copy("Personnel Jump Freighter " .. cnt):setLocaleName(_("Personnel Jump Freighter ") .. cnt)
+        variation = template:copy("Personnel Jump Freighter " .. cnt):setLocaleName(string.format(_("Personnel Jump Freighter %d"), cnt))
         variation:setJumpDrive(true)
     end
 
-    template = ShipTemplate():setName("Goods Freighter " .. cnt):setLocaleName(_("Goods Freighter ") .. cnt):setClass(_("Corvette"), _("Freighter")):setModel("transport_2_" .. cnt)
+    template = ShipTemplate():setName("Goods Freighter " .. cnt):setLocaleName(string.format(_("Goods Freighter %d"), cnt)):setClass(_("Corvette"), _("Freighter")):setModel("transport_2_" .. cnt)
     template:setDescription(_([[Cargo freighters haul large loads of cargo across long distances on impulse power. Their cargo bays include climate control and stabilization systems that keep the cargo in good condition.]]))
     template:setHull(100)
     template:setShields(50, 50)
@@ -252,11 +252,11 @@ for cnt=1,5 do
     template:setRadarTrace("radar_transport.png")
     
     if cnt > 2 then
-        variation = template:copy("Goods Jump Freighter " .. cnt):setLocaleName(_("Goods Jump Freighter ") .. cnt)
+        variation = template:copy("Goods Jump Freighter " .. cnt):setLocaleName(string.format(_("Goods Jump Freighter %d"), cnt))
         variation:setJumpDrive(true)
     end
     
-    template = ShipTemplate():setName("Garbage Freighter " .. cnt):setLocaleName(_("Garbage Freighter ") .. cnt):setClass(_("Corvette"), _("Freighter")):setModel("transport_3_" .. cnt)
+    template = ShipTemplate():setName("Garbage Freighter " .. cnt):setLocaleName(string.format(_("Garbage Freighter %d"), cnt)):setClass(_("Corvette"), _("Freighter")):setModel("transport_3_" .. cnt)
     template:setDescription(_([[These freighters are specially designed to haul garbage and waste. They are fitted with a trash compactor and fewer stabilzation systems than cargo freighters.]]))
     template:setHull(100)
     template:setShields(50, 50)
@@ -264,11 +264,11 @@ for cnt=1,5 do
     template:setRadarTrace("radar_transport.png")
     
     if cnt > 2 then
-        variation = template:copy("Garbage Jump Freighter " .. cnt):setLocaleName(_("Garbage Jump Freighter ") .. cnt)
+        variation = template:copy("Garbage Jump Freighter " .. cnt):setLocaleName(string.format(_("Garbage Jump Freighter %d"), cnt))
         variation:setJumpDrive(true)
     end
 
-    template = ShipTemplate():setName("Equipment Freighter " .. cnt):setLocaleName(_("Equipment Freighter ") .. cnt):setClass(_("Corvette"), _("Freighter")):setModel("transport_4_" .. cnt)
+    template = ShipTemplate():setName("Equipment Freighter " .. cnt):setLocaleName(string.format(_("Equipment Freighter %d"), cnt)):setClass(_("Corvette"), _("Freighter")):setModel("transport_4_" .. cnt)
     template:setDescription(_([[Equipment freighters have specialized environmental and stabilization systems to safely carry delicate machinery and complex instruments.]]))
     template:setHull(100)
     template:setShields(50, 50)
@@ -276,11 +276,11 @@ for cnt=1,5 do
     template:setRadarTrace("radar_transport.png")
     
     if cnt > 2 then
-        variation = template:copy("Equipment Jump Freighter " .. cnt):setLocaleName(_("Equipment Jump Freighter ") .. cnt)
+        variation = template:copy("Equipment Jump Freighter " .. cnt):setLocaleName(string.format(_("Equipment Jump Freighter %d"), cnt))
         variation:setJumpDrive(true)
     end
 
-    template = ShipTemplate():setName("Fuel Freighter " .. cnt):setLocaleName(_("Fuel Freighter ") .. cnt):setClass(_("Corvette"), _("Freighter")):setModel("transport_5_" .. cnt)
+    template = ShipTemplate():setName("Fuel Freighter " .. cnt):setLocaleName(string.format(_("Fuel Freighter %d"), cnt)):setClass(_("Corvette"), _("Freighter")):setModel("transport_5_" .. cnt)
     template:setDescription(_([[Fuel freighters have massive tanks for hauling fuel, and delicate internal sensors that watch for any changes to their cargo's potentially volatile state.]]))
     template:setHull(100)
     template:setShields(50, 50)
@@ -288,7 +288,7 @@ for cnt=1,5 do
     template:setRadarTrace("radar_transport.png")
     
     if cnt > 2 then
-        variation = template:copy("Fuel Jump Freighter " .. cnt):setLocaleName(_("Fuel Jump Freighter ") .. cnt)
+        variation = template:copy("Fuel Jump Freighter " .. cnt):setLocaleName(string.format(_("Fuel Jump Freighter %d"), cnt))
         variation:setJumpDrive(true)
     end
 end
