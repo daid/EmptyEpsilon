@@ -1,7 +1,9 @@
+#include <i18n.h>
 #include "tutorialGame.h"
 #include "scriptInterface.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "preferenceManager.h"
 #include "main.h"
 
 #include "screenComponents/viewport3d.h"
@@ -49,6 +51,8 @@ TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
     this->viewport = nullptr;
     this->repeated_tutorial = repeated_tutorial;
 
+    i18n::load("locale/" + PreferencesManager::get("language", "en") + ".po");
+    i18n::load("locale/tutorial." + PreferencesManager::get("language", "en") + ".po");
     script = new ScriptObject();
     script->registerObject(this, "tutorial");
     script->run(filename);
