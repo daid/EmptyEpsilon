@@ -1,0 +1,8 @@
+#: scripts/tutorial_00_all.lua:11
+msgid ""
+"Welcome to the EmptyEpsilon tutorial.\n"
+"Note that this tutorial is designed to give you a quick overview of the "
+"basic options for the game, but does not cover every single aspect.\n"
+"\n"
+"Press next to continue..."
+msgstr ""
