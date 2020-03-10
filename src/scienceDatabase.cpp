@@ -56,7 +56,7 @@ void fillDefaultDatabaseData()
     factionDatabase->setName("Factions");
     for(unsigned int n=0; n<factionInfo.size(); n++)
     {
-        P<ScienceDatabase> entry = factionDatabase->addEntry(factionInfo[n]->getName());
+        P<ScienceDatabase> entry = factionDatabase->addEntry(factionInfo[n]->getLocaleName());
         for(unsigned int m=0; m<factionInfo.size(); m++)
         {
             if (n == m) continue;
@@ -68,7 +68,7 @@ void fillDefaultDatabaseData()
                 case FVF_Enemy: stance = "Enemy"; break;
                 case FVF_Friendly: stance = "Friendly"; break;
             }
-            entry->addKeyValue(factionInfo[m]->getName(), stance);
+            entry->addKeyValue(factionInfo[m]->getLocaleName(), stance);
         }
         entry->setLongDescription(factionInfo[n]->getDescription());
     }
