@@ -59,6 +59,9 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Gets the name of the faction to which this object belongs.
     /// Example: local faction = obj:getFaction()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getFaction);
+    /// Gets the localized name of the faction to which this object belongs, for displaying to the players.
+    /// Example: local faction = obj:getLocaleFaction()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getLocaleFaction);
     /// Sets the faction to which this object belongs, by the faction's index
     /// in the faction list.
     /// Requires the index of a faction in the faction list.
