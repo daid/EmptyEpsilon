@@ -8,10 +8,10 @@ function init()
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Phobos M3P")
     tutorial:setPlayerShip(player)
 
-    tutorial:showMessage([[Welcome to the EmptyEpsilon tutorial.
+    tutorial:showMessage(_([[Welcome to the EmptyEpsilon tutorial.
 Note that this tutorial is designed to give you a quick overview of the basic options for the game, but does not cover every single aspect.
 
-Press next to continue...]], true)
+Press next to continue...]]), true)
     tutorial_list = {
         mainscreenTutorial,
         radarTutorial,
