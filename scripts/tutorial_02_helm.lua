@@ -30,7 +30,7 @@
 require("utils.lua")
 function init()
     --Create the player ship
-    player = PlayerSpaceship():setFaction(_("Human Navy")):setTemplate(_("Phobos M3P"))
+    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Phobos M3P")
     tutorial:setPlayerShip(player)
 
     tutorial:showMessage(_([[Welcome to the EmptyEpsilon tutorial.
@@ -154,7 +154,7 @@ I've disabled your impulse engine for now. Next, let's rotate your ship.
 Rotating the ship is easy. Simply press a heading on the radar screen to rotate your ship in that direction.
 Try rotating to heading 200 right now.]]), function() return math.abs(player:getHeading() - 200) < 1.0 end)
 addToSequence(helmsTutorial, function() player:setImpulseMaxSpeed(90) end)
-addToSequence(helmsTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction(_("Human Navy")):setPosition(0, -1500) end)
+addToSequence(helmsTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(0, -1500) end)
 addToSequence(helmsTutorial, _([[Excellent!
 
 Next up: docking. Docking with a station recharges your energy, repairs your hull, and allows the relay officer to request weapon refills. It can also be important for other mission-related events.
@@ -162,7 +162,7 @@ To dock, maneuver within 1u of a station and press the "Request Dock" button, fr
 Maneuver to the nearby station and request permission to dock.]]), function() return player:isDocked(prev_object) end)
 addToSequence(helmsTutorial, _([[Now that you are docked, your movement is locked. As helms officer, there is nothing else you can do but undock, so do that now.]]), function() return not player:isDocked(prev_object) end)
 addToSequence(helmsTutorial, function() prev_object:destroy() end)
-addToSequence(helmsTutorial, function() prev_object = CpuShip():setFaction(_("Kraylor")):setTemplate(_("Flavia")):setPosition(-1500, 1500):orderIdle():setScanned(true):setHull(15):setShieldsMax(15) end)
+addToSequence(helmsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Flavia"):setPosition(-1500, 1500):orderIdle():setScanned(true):setHull(15):setShieldsMax(15) end)
 addToSequence(helmsTutorial, function() player:commandSetTarget(prev_object) end)
 addToSequence(helmsTutorial, _([[Ok, there are just a few more things that you need to know.
 Remember the beam weapons from the basics tutorial? As helms officer, it is your task to keep those beams on your target.
