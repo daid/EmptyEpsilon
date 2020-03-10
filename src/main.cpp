@@ -1,5 +1,6 @@
 #include <string.h>
 #include <i18n.h>
+#include <multiplayer_proxy.h>
 #ifndef _MSC_VER
 #include <unistd.h>
 #include <sys/stat.h>
@@ -115,6 +116,21 @@ int main(int argc, char** argv)
     }
 
     new Engine();
+
+    if (PreferencesManager::get("proxy") != "")
+    {
+        int port = defaultServerPort;
+        string password = "";
+        int listenPort = defaultServerPort;
+        auto parts = PreferencesManager::get("proxy").split(":");
+        string host = parts[0];
+        if (parts.size() > 1) port = parts[1].toInt();
+        if (parts.size() > 2) password = parts[2];
+        if (parts.size() > 3) listenPort = parts[3].toInt();
+        new GameServerProxy(host, port, password, listenPort);
+        engine->runMainLoop();
+        return 0;
+    }
 
     if (PreferencesManager::get("headless") != "")
         textureManager.setDisabled(true);
