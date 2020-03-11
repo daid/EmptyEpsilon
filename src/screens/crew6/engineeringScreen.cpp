@@ -52,7 +52,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
         info.layout = new GuiAutoLayout(system_row_layouts, id, GuiAutoLayout::LayoutHorizontalLeftToRight);
         info.layout->setSize(GuiElement::GuiSizeMax, 50);
 
-        info.button = new GuiToggleButton(info.layout, id + "_SELECT", getSystemName(ESystem(n)), [this, n](bool value){
+        info.button = new GuiToggleButton(info.layout, id + "_SELECT", getLocaleSystemName(ESystem(n)), [this, n](bool value){
             selectSystem(ESystem(n));
         });
         info.button->setSize(300, GuiElement::GuiSizeMax);

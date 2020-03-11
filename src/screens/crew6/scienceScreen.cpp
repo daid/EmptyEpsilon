@@ -157,7 +157,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     // List each system's status.
     for(int n = 0; n < SYS_COUNT; n++)
     {
-        info_system[n] = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SYSTEM_" + string(n), 0.75, getSystemName(ESystem(n)), "-");
+        info_system[n] = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SYSTEM_" + string(n), 0.75, getLocaleSystemName(ESystem(n)), "-");
         info_system[n]->setSize(GuiElement::GuiSizeMax, 30);
         info_system[n]->hide();
     }
