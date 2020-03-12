@@ -47,6 +47,14 @@ static std::vector<std::pair<string, sf::Joystick::Axis> > sfml_axis_names = {
     {"V", sf::Joystick::V},
     {"PovX", sf::Joystick::PovX},
     {"PovY", sf::Joystick::PovY},
+    {string(sf::Joystick::X), sf::Joystick::X},
+    {string(sf::Joystick::Y), sf::Joystick::Y},
+    {string(sf::Joystick::Z), sf::Joystick::Z},
+    {string(sf::Joystick::R), sf::Joystick::R},
+    {string(sf::Joystick::U), sf::Joystick::U},
+    {string(sf::Joystick::V), sf::Joystick::V},
+    {string(sf::Joystick::PovX), sf::Joystick::PovX},
+    {string(sf::Joystick::PovY), sf::Joystick::PovY},
 };
 
 void JoystickConfig::load()
