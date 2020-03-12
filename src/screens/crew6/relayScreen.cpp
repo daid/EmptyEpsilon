@@ -18,7 +18,8 @@
 #include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"
 
-RelayScreen::RelayScreen(GuiContainer* owner)
+
+RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 : GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background), mode(TargetSelection)
 {
     targets.setAllowWaypointSelection();
@@ -95,7 +96,11 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     option_buttons->setPosition(20, 50, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
 
     // Open comms button.
-    (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", &targets))->setSize(GuiElement::GuiSizeMax, 50);
+    if (allow_comms == true)
+        (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", "Open Comms", &targets))->setSize(GuiElement::GuiSizeMax, 50);
+    else
+        (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", "Link to Comms", &targets))->setSize(GuiElement::GuiSizeMax, 50);
+    
 
     // Hack target
     hack_target_button = new GuiButton(option_buttons, "HACK_TARGET", "Start hacking", [this](){
@@ -173,9 +178,11 @@ RelayScreen::RelayScreen(GuiContainer* owner)
 
     hacking_dialog = new GuiHackingDialog(this, "");
 
-    new ShipsLog(this);
-
-    (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    if (allow_comms)
+    {
+        new ShipsLog(this);
+        (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    }
 }
 
 void RelayScreen::onDraw(sf::RenderTarget& window)
@@ -237,10 +244,10 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
         {
             if (ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
             {
-                info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
+                info_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
             }
         }else{
-            info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
+            info_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
         }
 
         if (probe && probe->owner_id == my_spaceship->getMultiplayerId() && probe->canBeTargetedBy(my_spaceship))

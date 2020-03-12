@@ -127,6 +127,7 @@ set(SOURCES
 	src/screens/extra/damcon.cpp
 	src/screens/extra/powerManagement.cpp
 	src/screens/extra/databaseScreen.cpp
+	src/screens/extra/commsScreen.cpp
 	src/screens/extra/shipLogScreen.cpp
 	src/screens/gm/gameMasterScreen.cpp
 	src/screens/gm/objectCreationView.cpp
@@ -269,6 +270,7 @@ foreach(SP_SOURCE
 	src/multiplayer_server_scanner.cpp
 	src/networkRecorder.cpp
 	src/multiplayer_server.cpp
+	src/multiplayer_proxy.cpp
 	src/scriptInterfaceMagic.cpp
 	src/Renderable.cpp
 	src/Updatable.cpp
@@ -280,6 +282,7 @@ foreach(SP_SOURCE
 	src/event.cpp
 	src/multiplayer.cpp
 	src/P.cpp
+	src/i18n.cpp
 	src/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp
 	src/Box2D/Dynamics/Contacts/b2ContactSolver.cpp
 	src/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp
@@ -394,6 +397,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 find_package(SFML 2.3 REQUIRED system window graphics network audio)
 include_directories(${SFML_INCLUDE_DIR})
 target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
+add_definitions(-DSFML_NO_DEPRECATED_WARNINGS) # SFML 2.5 gives deprication warnings on a few functions we use. But we maintain 2.3 compatibility, so ignore those warnings.
 
 # Setup OpenGl
 if(ANDROID)
@@ -478,6 +482,12 @@ if(PYTHONINTERP_FOUND)
   add_custom_target(script_reference ALL DEPENDS ${CMAKE_BINARY_DIR}/script_reference.html)
   install(FILES ${CMAKE_BINARY_DIR}/script_reference.html DESTINATION .)
 endif()
+
+add_custom_target(update_locale
+	COMMAND xgettext --keyword=tr:1c,2 --keyword=tr:1 --keyword=trMark:1c,2 --keyword=trMark:1 --omit-header -j -d resources/locale/en ${SOURCES}
+	COMMAND xgettext --keyword=_:1c,2 --keyword=_:1 --omit-header -j -d resources/locale/en scripts/shipTemplates_*.lua scripts/comms_ship.lua scripts/comms_station.lua scripts/comms_supply_drop.lua scripts/factionInfo.lua scripts/science_db.lua
+	COMMAND xgettext --keyword=_:1c,2 --keyword=_:1 --omit-header -j -d resources/locale/tutorial.en scripts/tutorial_*.lua
+	WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
 set(CPACK_PACKAGE_EXECUTABLES ${EXECUTABLE_NAME})
 set(CPACK_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}")

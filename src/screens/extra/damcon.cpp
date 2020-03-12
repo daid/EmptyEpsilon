@@ -22,7 +22,7 @@ DamageControlScreen::DamageControlScreen(GuiContainer* owner)
 
     for(unsigned int n=0; n<SYS_COUNT; n++)
     {
-        system_health[n] = new GuiKeyValueDisplay(system_health_layout, "DAMCON_HEALTH_" + string(n), 0.8, getSystemName(ESystem(n)), "0%");
+        system_health[n] = new GuiKeyValueDisplay(system_health_layout, "DAMCON_HEALTH_" + string(n), 0.8, getLocaleSystemName(ESystem(n)), "0%");
         system_health[n]->setSize(GuiElement::GuiSizeMax, 40);
     }
 

@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "engine.h"
 #include "optionsMenu.h"
 #include "main.h"
@@ -22,11 +23,11 @@ OptionsMenu::OptionsMenu()
     int top = 50;
 
     // Graphics options.
-    (new GuiLabel(this, "GRAPHICS_OPTIONS_LABEL", "Graphics Options", 30))->addBackground()->setPosition(50, top, ATopLeft)->setSize(300, 50);
+    (new GuiLabel(this, "GRAPHICS_OPTIONS_LABEL", tr("Graphics Options"), 30))->addBackground()->setPosition(50, top, ATopLeft)->setSize(300, 50);
 
     // Fullscreen toggle.
     top += 50;
-    (new GuiButton(this, "FULLSCREEN_TOGGLE", "Fullscreen toggle", []()
+    (new GuiButton(this, "FULLSCREEN_TOGGLE", tr("Fullscreen toggle"), []()
     {
         P<WindowManager> windowManager = engine->getObject("windowManager");
         windowManager->setFullscreen(!windowManager->isFullscreen());
@@ -56,14 +57,14 @@ OptionsMenu::OptionsMenu()
 
     // Sound options.
     top += 60;
-    (new GuiLabel(this, "SOUND_OPTIONS_LABEL", "Sound Options", 30))->addBackground()->setPosition(50, top, ATopLeft)->setSize(300, 50);
+    (new GuiLabel(this, "SOUND_OPTIONS_LABEL", tr("Sound Options"), 30))->addBackground()->setPosition(50, top, ATopLeft)->setSize(300, 50);
 
     // Sound volume slider.
     top += 50;
     sound_volume_slider = new GuiSlider(this, "SOUND_VOLUME_SLIDER", 0.0f, 100.0f, soundManager->getMasterSoundVolume(), [this](float volume)
     {
         soundManager->setMasterSoundVolume(volume);
-        sound_volume_overlay_label->setText("Sound Volume: " + string(int(soundManager->getMasterSoundVolume())) + "%");
+        sound_volume_overlay_label->setText(tr("Sound Volume: {volume}%").format({{"volume", string(int(soundManager->getMasterSoundVolume()))}}));
     });
     sound_volume_slider->setPosition(50, top, ATopLeft)->setSize(300, 50);
 

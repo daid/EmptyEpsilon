@@ -7,7 +7,7 @@ GuiBeamTargetSelector::GuiBeamTargetSelector(GuiContainer* owner, string id)
 {
     addEntry("Hull", "-1");
     for(int n=0; n<SYS_COUNT; n++)
-        addEntry(getSystemName(ESystem(n)), string(n));
+        addEntry(getLocaleSystemName(ESystem(n)), string(n));
     if (my_spaceship)
         setSelectionIndex(my_spaceship->beam_system_target - SYS_None);
     if (!gameGlobalInfo->use_system_damage)
