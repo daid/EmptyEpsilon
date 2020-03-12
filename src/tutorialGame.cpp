@@ -1,7 +1,9 @@
+#include <i18n.h>
 #include "tutorialGame.h"
 #include "scriptInterface.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "preferenceManager.h"
 #include "main.h"
 
 #include "screenComponents/viewport3d.h"
@@ -49,6 +51,8 @@ TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
     this->viewport = nullptr;
     this->repeated_tutorial = repeated_tutorial;
 
+    i18n::load("locale/" + PreferencesManager::get("language", "en") + ".po");
+    i18n::load("locale/tutorial." + PreferencesManager::get("language", "en") + ".po");
     script = new ScriptObject();
     script->registerObject(this, "tutorial");
     script->run(filename);
@@ -71,7 +75,7 @@ void TutorialGame::createScreens()
     station_screen[1] = new WeaponsScreen(this);
     station_screen[2] = new EngineeringScreen(this);
     station_screen[3] = new ScienceScreen(this);
-    station_screen[4] = new RelayScreen(this);
+    station_screen[4] = new RelayScreen(this, true);
     station_screen[5] = new TacticalScreen(this);
     station_screen[6] = new EngineeringAdvancedScreen(this);
     station_screen[7] = new OperationScreen(this);

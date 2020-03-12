@@ -18,6 +18,7 @@
 #include "gui/gui2_slider.h"
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_togglebutton.h"
+#include "preferenceManager.h"
 
 ShipSelectionScreen::ShipSelectionScreen()
 {
@@ -434,6 +435,9 @@ void ShipSelectionScreen::updateCrewTypeOptions()
         crew_position_button[damageControl]->show();
         crew_position_button[powerManagement]->show();
         crew_position_button[databaseView]->show();
+        crew_position_button[altRelay]->show();
+        crew_position_button[commsOnly]->show();
+        crew_position_button[shipLog]->show();
         break;
     case 3:
         main_screen_button->hide();
@@ -474,7 +478,8 @@ void ShipSelectionScreen::onReadyClick()
     }else if (window_button->getValue())
     {
         destroy();
-        new WindowScreen(int(window_angle->getValue()));
+        uint8_t window_flags = PreferencesManager::get("ship_window_flags","1").toInt();
+        new WindowScreen(int(window_angle->getValue()), window_flags);
     }else if(topdown_button->getValue())
     {
         my_player_info->commandSetShipId(-1);

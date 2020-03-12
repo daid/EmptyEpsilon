@@ -39,7 +39,8 @@ public:
     // Coolant change rate
     constexpr static float system_coolant_level_change_per_second = 1.2;
     // Total coolant
-    constexpr static float max_coolant = 10.0;
+    constexpr static float max_coolant_per_system = 10.0f;
+    float max_coolant;
     // Overheat subsystem damage rate
     constexpr static float damage_per_second_on_overheat = 0.08f;
     // Base time it takes to perform an action
@@ -123,7 +124,7 @@ private:
     CommsScriptInterface comms_script_interface; // Server only
     // Ship's log container
     std::vector<ShipLogEntry> ships_log;
-    
+
 public:
     std::vector<CustomShipFunction> custom_functions;
 
@@ -133,6 +134,8 @@ public:
     int max_scan_probes;
     int scan_probe_stock;
     float scan_probe_recharge;
+
+    ScriptSimpleCallback on_probe_launch;
 
     // Main screen content
     EMainScreenSetting main_screen_setting;
@@ -151,6 +154,7 @@ public:
     int32_t linked_science_probe_id;
 
     PlayerSpaceship();
+    virtual ~PlayerSpaceship();
 
     // Comms functions
     bool isCommsInactive() { return comms_state == CS_Inactive; }
@@ -188,12 +192,16 @@ public:
     void setMaxScanProbeCount(int amount) { max_scan_probes = std::max(0, amount); scan_probe_stock = std::min(scan_probe_stock, max_scan_probes); }
     int getMaxScanProbeCount() { return max_scan_probes; }
 
+    void onProbeLaunch(ScriptSimpleCallback callback);
+
     void addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback);
     void addCustomInfo(ECrewPosition position, string name, string caption);
     void addCustomMessage(ECrewPosition position, string name, string caption);
     void addCustomMessageWithCallback(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback);
     void removeCustom(string name);
 
+    ESystem getBeamSystemTarget(){ return beam_system_target; }
+    string getBeamSystemTargetName(){ return getSystemName(beam_system_target); }
     // Client command functions
     virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet) override;
     void commandTargetRotation(float target);
@@ -249,6 +257,8 @@ public:
     virtual void executeJump(float distance) override;
     virtual void takeHullDamage(float damage_amount, DamageInfo& info) override;
     void setSystemCoolantRequest(ESystem system, float request);
+    void setMaxCoolant(float coolant);
+    float getMaxCoolant() { return max_coolant; }
     void setAutoCoolant(bool active) { auto_coolant_enabled = active; }
     int getRepairCrewCount();
     void setRepairCrewCount(int amount);

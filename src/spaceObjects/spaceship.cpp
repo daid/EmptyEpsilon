@@ -12,9 +12,9 @@
 #include "scriptInterface.h"
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
 {
-    //[DEPRICATED]
+    //[DEPRECATED]
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentified);
-    //[DEPRICATED]
+    //[DEPRECATED]
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScanned);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentifiedBy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScannedBy);
@@ -28,6 +28,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponStorageMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getShieldsFrequency);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setShieldsFrequency);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamFrequency);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getMaxEnergy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setMaxEnergy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getEnergy);
@@ -75,8 +76,17 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// For example, ship:setRadarTrace("RadarBlip.png") will show a dot instead of an arrow for this ship.
     /// Note: Icon is only shown after scanning, before the ship is scanned it is always shown as an arrow.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadarTrace);
-
+    /// Get the dynamic radar signature values for each component band.
+    /// Returns a float.
+    /// Example: obj:getDynamicRadarSignatureGravity()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDynamicRadarSignatureGravity);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDynamicRadarSignatureElectrical);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDynamicRadarSignatureBiological);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, addBroadcast);
+    /// Set the scan state of this ship for every faction.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanState);
+    /// Set the scane state of this ship for a particular faction.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanStateByFaction);
 }
 
 SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_range)
@@ -185,10 +195,16 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     scanning_complexity_value = -1;
     scanning_depth_value = -1;
 
-    setRadarSignatureInfo(0.05, 0.3, 0.3);
+    // Ships can have dynamic signatures. Initialize a default baseline value
+    // from which clients derive the dynamic signature on update.
+    setRadarSignatureInfo(0.05, 0.2, 0.2);
 
     if (game_server)
         setCallSign(gameGlobalInfo->getNextShipCallsign());
+}
+
+SpaceShip::~SpaceShip()
+{
 }
 
 void SpaceShip::applyTemplateValues()
@@ -225,6 +241,7 @@ void SpaceShip::applyTemplateValues()
     {
         weapon_tube[n].setLoadTimeConfig(ship_template->weapon_tube[n].load_time);
         weapon_tube[n].setDirection(ship_template->weapon_tube[n].direction);
+        weapon_tube[n].setSize(ship_template->weapon_tube[n].size);
         for(int m=0; m<MW_Count; m++)
         {
             if (ship_template->weapon_tube[n].type_allowed_mask & (1 << m))
@@ -258,6 +275,76 @@ void SpaceShip::draw3DTransparent()
     }
 }
 #endif//FEATURE_3D_RENDERING
+
+RawRadarSignatureInfo SpaceShip::getDynamicRadarSignatureInfo()
+{
+    // Adjust radar_signature dynamically based on current state and activity.
+    // radar_signature becomes the ship's baseline radar signature.
+    RawRadarSignatureInfo signature_delta;
+
+    // For each ship system ...
+    for(int n = 0; n < SYS_COUNT; n++)
+    {
+        ESystem ship_system = static_cast<ESystem>(n);
+
+        // ... increase the biological band based on system heat, offset by
+        // coolant.
+        signature_delta.biological += std::max(
+            0.0f,
+            std::min(
+                1.0f,
+                getSystemHeat(ship_system) - (getSystemCoolant(ship_system) / 10.0f)
+            )
+        );
+
+        // ... adjust the electrical band if system power allocation is not
+        // 100%.
+        if (ship_system == SYS_JumpDrive && jump_drive_charge < jump_drive_max_distance)
+        {
+            // ... elevate electrical after a jump, since recharging jump
+            // consumes energy.
+            signature_delta.electrical += std::max(
+                0.0f,
+                std::min(
+                    1.0f,
+                    getSystemPower(ship_system) * (jump_drive_charge + 0.01f / jump_drive_max_distance)
+                )
+            );
+        } else if (getSystemPower(ship_system) != 1.0f)
+        {
+            // For non-Jump systems, allow underpowered systems to reduce the
+            // total electrical signal output.
+            signature_delta.electrical += std::max(
+                -1.0f,
+                std::min(
+                    1.0f,
+                    getSystemPower(ship_system) - 1.0f
+                )
+            );
+        }
+    }
+
+    // Increase the gravitational band if the ship is about to jump, or is
+    // actively warping.
+    if (jump_delay > 0.0f)
+    {
+        signature_delta.gravity += std::max(
+            0.0f,
+            std::min(
+                (1.0f / jump_delay + 0.01f) + 0.25f,
+                10.0f
+            )
+        );
+    } else if (current_warp > 0.0f)
+    {
+        signature_delta.gravity += current_warp;
+    }
+
+    // Update the signature by adding the delta to its baseline.
+    RawRadarSignatureInfo info = getRadarSignatureInfo();
+    info += signature_delta;
+    return info;
+}
 
 void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
@@ -499,6 +586,13 @@ void SpaceShip::update(float delta)
             if (current_impulse < 0.0)
                 current_impulse = 0.0;
         }
+        if (current_impulse < 0.0)
+        {
+            if (impulse_max_speed > 0)
+                current_impulse += delta * (impulse_acceleration / impulse_max_speed);
+            if (current_impulse > 0.0)
+                current_impulse = 0.0;
+        }
         if (current_warp > 0.0)
         {
             current_warp -= delta;
@@ -518,6 +612,12 @@ void SpaceShip::update(float delta)
             if (impulse_max_speed > 0)
                 current_impulse -= delta * (impulse_acceleration / impulse_max_speed);
             if (current_impulse < 0.0)
+                current_impulse = 0.0;
+        }else if (current_impulse > 0.0)
+        {
+            if (impulse_max_speed > 0)
+                current_impulse += delta * (impulse_acceleration / impulse_max_speed);
+            if (current_impulse > 0.0)
                 current_impulse = 0.0;
         }else{
             if (current_warp < warp_request)
@@ -821,9 +921,22 @@ void SpaceShip::scannedBy(P<SpaceObject> other)
     }
 }
 
+void SpaceShip::setScanState(EScannedState state)
+{
+    for(unsigned int faction_id = 0; faction_id < factionInfo.size(); faction_id++)
+    {
+        setScannedStateForFaction(faction_id, state);
+    }
+}
+
+void SpaceShip::setScanStateByFaction(string faction_name, EScannedState state)
+{
+    setScannedStateForFaction(FactionInfo::findFactionId(faction_name), state);
+}
+
 bool SpaceShip::isFriendOrFoeIdentified()
 {
-    LOG(WARNING) << "Depricated \"isFriendOrFoeIdentified\" function called, use isFriendOrFoeIdentifiedBy or isFriendOrFoeIdentifiedByFaction.";
+    LOG(WARNING) << "Deprecated \"isFriendOrFoeIdentified\" function called, use isFriendOrFoeIdentifiedBy or isFriendOrFoeIdentifiedByFaction.";
     for(unsigned int faction_id = 0; faction_id < factionInfo.size(); faction_id++)
     {
         if (getScannedStateForFaction(faction_id) > SS_NotScanned)
@@ -834,7 +947,7 @@ bool SpaceShip::isFriendOrFoeIdentified()
 
 bool SpaceShip::isFullyScanned()
 {
-    LOG(WARNING) << "Depricated \"isFullyScanned\" function called, use isFullyScannedBy or isFullyScannedByFaction.";
+    LOG(WARNING) << "Deprecated \"isFullyScanned\" function called, use isFullyScannedBy or isFullyScannedByFaction.";
     for(unsigned int faction_id = 0; faction_id < factionInfo.size(); faction_id++)
     {
         if (getScannedStateForFaction(faction_id) >= SS_FullScan)
@@ -977,6 +1090,7 @@ void SpaceShip::destroyedByDamage(DamageInfo& info)
     ExplosionEffect* e = new ExplosionEffect();
     e->setSize(getRadius() * 1.5);
     e->setPosition(getPosition());
+    e->setRadarSignatureInfo(0.0, 0.2, 0.2);
 
     if (info.instigator)
     {
@@ -1022,7 +1136,9 @@ bool SpaceShip::hasSystem(ESystem system)
 float SpaceShip::getSystemEffectiveness(ESystem system)
 {
     float power = systems[system].power_level;
-    power *= (1.0f - systems[system].hacked_level * 0.75f);
+    
+    // Substract the hacking from the power, making double hacked systems run at 25% efficiency.
+    power = std::max(0.0f, power - systems[system].hacked_level * 0.75f);
 
     // Degrade all systems except the reactor once energy level drops below 10.
     if (system != SYS_Reactor)
@@ -1062,6 +1178,20 @@ EMissileWeapons SpaceShip::getWeaponTubeLoadType(int index)
     if (!weapon_tube[index].isLoaded())
         return MW_None;
     return weapon_tube[index].getLoadType();
+}
+
+EMissileSizes SpaceShip::getWeaponTubeSize(int index)
+{
+    if (index < 0 || index >= weapon_tube_count)
+        return MS_Small;
+    return weapon_tube[index].getSize();
+}
+
+void SpaceShip::setWeaponTubeSize(int index, EMissileSizes size)
+{
+    if (index < 0 || index >= weapon_tube_count)
+        return;
+    weapon_tube[index].setSize(size);
 }
 
 void SpaceShip::weaponTubeAllowMissle(int index, EMissileWeapons type)

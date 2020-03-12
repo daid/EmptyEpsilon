@@ -2,6 +2,8 @@
 -- Description: Escape imprisonment and return home. 
 ---
 --- Mission consists of one ship with a full crew. Engineer, Relay and Science will be busy; Weapons less busy.
+---
+--- Version 2 Added more opportunities to use cargo to accomplish goals, increased variation based on difficulty setting
 -- Type: Mission, somewhat replayable
 -- Variation[Easy]: Easy goals and/or enemies
 -- Variation[Hard]: Hard goals and/or enemies
@@ -318,7 +320,7 @@ function init()
 	playerShipHealth = scragHealth	--set function to constrain player ship health
 	playerFighter:addToShipLog(string.format("You escaped the brig of station %s and transported yourselves onto one of the spaceship hulks in a nearby holding area for junked spacecraft. You carry critical information for the Human Navy regarding Kraylor activity in this area. You need to make good your escape and dock with a Human Navy space station",brigStation:getCallSign()),"Magenta")
 	plot1 = scanRepulse				--enable first plot mission goal
-	print("end of init")
+	--print("end of init")
 end
 --pick a coordinate at random from the passed table
 --remove selected coordinates and return selected coordinates
@@ -999,7 +1001,6 @@ function placeAlcaleica()
 	stationAlcaleica.stationHistory = "This station continues the businesses from Earth based on the merging of several companies including Leica from Switzerland, the lens manufacturer and the Japanese advanced low carbon electronic and optic company"
 	return stationAlcaleica
 end
-
 function placeAnderson()
 	--Anderson 
 	stationAnderson = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1019,7 +1020,6 @@ function placeAnderson()
 	stationAnderson.stationHistory = "The station is named after a fictional software engineer in a late 20th century movie depicting humanity unknowingly conquered by aliens and kept docile by software generated illusion"
 	return stationAnderson
 end
-
 function placeArcher()
 	--Archer 
 	stationArcher = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1041,7 +1041,6 @@ function placeArcher()
 	stationArcher.stationHistory = "We named this station for the pioneering spirit of the 22nd century Starfleet explorer, Captain Jonathan Archer"
 	return stationArcher
 end
-
 function placeArchimedes()
 	--Archimedes
 	stationArchimedes = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1063,7 +1062,6 @@ function placeArchimedes()
 	stationArchimedes.stationHistory = "This station was named after Archimedes who, according to legend, used a series of adjustable focal length mirrors to focus sunlight on a Roman naval fleet invading Syracuse, setting fire to it"
 	return stationArchimedes
 end
-
 function placeArmstrong()
 	--Armstrong
 	stationArmstrong = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1083,7 +1081,6 @@ function placeArmstrong()
 	stationArmstrong.stationHistory = "The station is named after the late 19th century astronaut as well as the fictionlized stations that followed. The station initially constructed entire space worthy vessels. In time, it transitioned into specializeing in propulsion systems."
 	return stationArmstrong
 end
-
 function placeAsimov()
 	--Asimov
 	stationAsimov = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1102,7 +1099,6 @@ function placeAsimov()
 	stationAsimov.stationHistory = "The original station builders were fans of the late 20th century scientist and author Isaac Asimov. The station was initially named Foundation, but was later changed simply to Asimov. It started off as a stellar observatory, then became a supply stop and as it has grown has become an educational and coordination hub for the region"
 	return stationAsimov
 end
-
 function placeBarclay()
 	--Barclay
 	stationBarclay = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1123,7 +1119,6 @@ function placeBarclay()
 	stationBarclay.stationHistory = "The station is named after Reginald Barclay who established the first transgalactic com link through the creative application of a quantum singularity. Station personnel often refer to the station as the Broccoli station"
 	return stationBarclay
 end
-
 function placeBethesda()
 	--Bethesda 
 	stationBethesda = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1134,7 +1129,6 @@ function placeBethesda()
 	stationBethesda.stationHistory = "The station is named after the United States national medical research center based in Bethesda, Maryland on earth which was established in the mid 20th century"
 	return stationBethesda
 end
-
 function placeBroeck()
 	--Broeck
 	stationBroeck = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1159,7 +1153,6 @@ function placeBroeck()
 	stationBroeck.stationHistory = "This station is named after Chris Van Den Broeck who did some initial research into the possibility of warp drive in the late 20th century on Earth"
 	return stationBroeck
 end
-
 function placeCalifornia()
 	--California
 	stationCalifornia = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1175,7 +1168,6 @@ function placeCalifornia()
 	end
 	return stationCalifornia
 end
-
 function placeCalvin()
 	--Calvin 
 	stationCalvin = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1196,7 +1188,6 @@ function placeCalvin()
 	stationCalvin.stationHistory = "This station is named after Dr. Susan Calvin who pioneered robotic behavioral research and programming"
 	return stationCalvin
 end
-
 function placeCavor()
 	--Cavor 
 	stationCavor = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1229,7 +1220,6 @@ function placeCavor()
 	stationCavor.stationHistory = "We named our station after Dr. Cavor, the physicist that invented a barrier material for gravity waves - Cavorite"
 	return stationCavor
 end
-
 function placeChatuchak()
 	--Chatuchak
 	stationChatuchak = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1248,7 +1238,6 @@ function placeChatuchak()
 	stationChatuchak.stationHistory = "Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. Designed and built with trade and commerce in mind"
 	return stationChatuchak
 end
-
 function placeCoulomb()
 	--Coulomb
 	stationCoulomb = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1271,7 +1260,6 @@ function placeCoulomb()
 	stationCoulomb.stationHistory = "Our station is named after the law which quantifies the amount of force with which stationary electrically charged particals repel or attact each other - a fundamental principle in the design of our circuits"
 	return stationCoulomb
 end
-
 function placeCyrus()
 	--Cyrus
 	stationCyrus = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1294,7 +1282,6 @@ function placeCyrus()
 	stationCyrus.stationHistory = "This station was named after the fictional engineer, Cyrus Smith created by 19th century author Jules Verne"
 	return stationCyrus
 end
-
 function placeDeckard()
 	--Deckard
 	stationDeckard = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1315,7 +1302,6 @@ function placeDeckard()
 	stationDeckard.stationHistory = "Named for Richard Deckard who inspired many of the sophisticated safety security algorithms now required for all androids"
 	return stationDeckard
 end
-
 function placeDeer()
 	--Deer
 	stationDeer = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1338,7 +1324,6 @@ function placeDeer()
 	stationDeer.stationHistory = "The station name comes from a short story by the 20th century author Clifford D. Simak as well as from the 19th century developer John Deere who inspired a company that makes the Earth bound equivalents of our products"
 	return stationDeer
 end
-
 function placeErickson()
 	--Erickson
 	stationErickson = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1361,7 +1346,6 @@ function placeErickson()
 	stationErickson.stationHistory = "The station is named after the early 22nd century inventor of the transporter, Dr. Emory Erickson. This station is proud to have received the endorsement of Admiral Leonard McCoy"
 	return stationErickson
 end
-
 function placeEvondos()
 	--Evondos
 	stationEvondos = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1383,7 +1367,6 @@ function placeEvondos()
 	stationEvondos.stationHistory = "The station is the evolution of the company that started automated pharmaceutical dispensing in the early 21st century on Earth in Finland"
 	return stationEvondos
 end
-
 function placeFeynman()
 	--Feynman 
 	stationFeynman = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1405,7 +1388,6 @@ function placeFeynman()
 	stationFeynman.stationHistory = "This station's name recognizes one of the first scientific researchers into nanotechnology, physicist Richard Feynman"
 	return stationFeynman
 end
-
 function placeGrasberg()
 	--Grasberg
 	placeRandomAroundPoint(Asteroid,15,1,15000,psx,psy)
@@ -1451,7 +1433,6 @@ function placeGrasberg()
 	end
 	return stationGrasberg
 end
-
 function placeHayden()
 	--Hayden
 	stationHayden = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1469,7 +1450,6 @@ function placeHayden()
 	stationHayden.generalInformation = "We study the cosmos and map stellar phenomena. We also track moving asteroids. Look out! Just kidding"
 	return stationHayden
 end
-
 function placeHeyes()
 	--Heyes
 	stationHeyes = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1489,7 +1469,6 @@ function placeHeyes()
 	stationHeyes.stationHistory = "The station is named after Tony Heyes the inventor of some of the earliest electromagnetic sensors in the mid 20th century on Earth in the United Kingdom to assist blind human mobility"
 	return stationHeyes
 end
-
 function placeHossam()
 	--Hossam
 	stationHossam = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1512,7 +1491,6 @@ function placeHossam()
 	stationHossam.stationHistory = "This station is named after the nanotechnologist Hossam Haick from the early 21st century on Earth in Israel"
 	return stationHossam
 end
-
 function placeImpala()
 	--Impala
 	placeRandomAroundPoint(Asteroid,15,1,15000,psx,psy)
@@ -1559,7 +1537,6 @@ function placeImpala()
 	end
 	return stationImpala
 end
-
 function placeKomov()
 	--Komov
 	stationKomov = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1581,7 +1558,6 @@ function placeKomov()
 	stationKomov.stationHistory = "A continuation of the research initially conducted by Dr. Gennady Komov in the early 22nd century on Venus, supported by the application of these principles"
 	return stationKomov
 end
-
 function placeKrak()
 	--Krak
 	stationKrak = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1622,7 +1598,6 @@ function placeKrak()
 	tradeMedicine[stationKrak] = true
 	return stationKrak
 end
-
 function placeKruk()
 	--Kruk
 	stationKruk = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1663,7 +1638,6 @@ function placeKruk()
 	if random(1,100) < 50 then tradeMedicine[stationKruk] = true end
 	return stationKruk
 end
-
 function placeLipkin()
 	--Lipkin
 	stationLipkin = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1684,7 +1658,6 @@ function placeLipkin()
 	stationLipkin.stationHistory = "The station is named after Dr. Lipkin who pioneered some of the research and application around robot assisted surgery in the area of partial nephrectomy for renal tumors in the early 21st century on Earth"
 	return stationLipkin
 end
-
 function placeMadison()
 	--Madison
 	stationMadison = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1705,7 +1678,6 @@ function placeMadison()
 	stationMadison.stationHistory = "Named after Madison Square Gardens from 21st century Earth, this station was designed to serve similar purposes in space - a venue for sports and entertainment"
 	return stationMadison
 end
-
 function placeMaiman()
 	--Maiman
 	stationMaiman = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1726,7 +1698,6 @@ function placeMaiman()
 	stationMaiman.stationHistory = "The station is named after Theodore Maiman who researched and built the first laser in the mid 20th centuryon Earth"
 	return stationMaiman
 end
-
 function placeMarconi()
 	--Marconi 
 	stationMarconi = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1749,7 +1720,6 @@ function placeMarconi()
 	stationMarconi.stationHistory = "Station named after Guglielmo Marconi an Italian inventor from early 20th century Earth who, along with Nicolo Tesla, claimed to have invented a death ray or particle beam weapon"
 	return stationMarconi
 end
-
 function placeMayo()
 	--Mayo
 	stationMayo = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1760,7 +1730,6 @@ function placeMayo()
 	stationMayo.stationHistory = "We continue the medical work started by William Worrall Mayo in the late 19th century on Earth"
 	return stationMayo
 end
-
 function placeMiller()
 	--Miller
 	stationMiller = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1779,7 +1748,6 @@ function placeMiller()
 	stationMiller.stationHistory = "This station was named after one the early exobiologists from mid 20th century Earth, Dr. Stanley Miller"
 	return stationMiller
 end
-
 function placeMuddville()
 	--Muddville 
 	stationMudd = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1798,7 +1766,6 @@ function placeMuddville()
 	stationMudd.stationHistory = "Upon retirement, Harry Mudd started this commercial venture using his leftover inventory and extensive connections obtained while he traveled the stars as a salesman"
 	return stationMudd
 end
-
 function placeNexus6()
 	--Nexus-6
 	stationNexus6 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1819,7 +1786,6 @@ function placeNexus6()
 	stationNexus6.stationHistory = "The station is named after the ground breaking model of android produced by the Tyrell corporation"
 	return stationNexus6
 end
-
 function placeOBrien()
 	--O'Brien
 	stationOBrien = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1843,7 +1809,6 @@ function placeOBrien()
 	stationOBrien.stationHistory = "Miles O'Brien started this business after his experience as a transporter chief"
 	return stationOBrien
 end
-
 function placeOlympus()
 	--Olympus
 	stationOlympus = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1865,7 +1830,6 @@ function placeOlympus()
 	stationOlympus.stationHistory = "This station grew out of the Olympus company based on earth in the early 21st century. It merged with Infinera, then bought several software comapnies before branching out into space based industry"
 	return stationOlympus
 end
-
 function placeOrgana()
 	--Organa
 	stationOrgana = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1876,7 +1840,6 @@ function placeOrgana()
 	stationOrgana.stationHistory = "Established by the royal family so critical during the political upheaval era"
 	return stationOrgana
 end
-
 function placeOutpost15()
 	--Outpost 15
 	stationOutpost15 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1920,7 +1883,6 @@ function placeOutpost15()
 	placeRandomAroundPoint(Asteroid,15,1,15000,psx,psy)
 	return stationOutpost15
 end
-
 function placeOutpost21()
 	--Outpost 21
 	stationOutpost21 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1966,7 +1928,6 @@ function placeOutpost21()
 	tradeLuxury[stationOutpost21] = true
 	return stationOutpost21
 end
-
 function placeOwen()
 	--Owen
 	stationOwen = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -1987,7 +1948,6 @@ function placeOwen()
 	stationOwen.stationHistory = "The station is named after Lars Owen. After his extensive eperience with tempermental machinery on Tatooine, he used his subject matter expertise to expand into building and manufacturing the equipment adding innovations based on his years of experience using load lifters and their relative cousins, moisture vaporators"
 	return stationOwen
 end
-
 function placePanduit()
 	--Panduit
 	stationPanduit = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2010,7 +1970,6 @@ function placePanduit()
 	stationPanduit.stationHistory = "This station is an outgrowth of the Panduit corporation started in the mid 20th century on Earth in the United States"
 	return stationPanduit
 end
-
 function placeRipley()
 	--Ripley
 	stationRipley = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2033,7 +1992,6 @@ function placeRipley()
 	stationRipley.stationHistory = "The station is named after Ellen Ripley who made creative and effective use of one of our load lifters when defending her ship"
 	return stationRipley
 end
-
 function placeRutherford()
 	--Rutherford
 	stationRutherford = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2056,7 +2014,6 @@ function placeRutherford()
 	stationRutherford.stationHistory = "This station was named after the national research institution Rutherford Appleton Laboratory in the United Kingdom which conducted some preliminary research into the feasability of generating an energy shield in the late 20th century"
 	return stationRutherford
 end
-
 function placeScience7()
 	--Science 7
 	stationScience7 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2064,7 +2021,6 @@ function placeScience7()
 	goods[stationScience7] = {{"food",2,1}}
 	return stationScience7
 end
-
 function placeShawyer()
 	--Shawyer
 	stationShawyer = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2086,7 +2042,6 @@ function placeShawyer()
 	stationShawyer.stationHistory = "The station is named after Roger Shawyer who built the first prototype impulse engine in the early 21st century"
 	return stationShawyer
 end
-
 function placeShree()
 	--Shree
 	stationShree = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2109,7 +2064,6 @@ function placeShree()
 	stationShree.stationHistory = "Our station is named Shree after one of many tugboat manufacturers in the early 21st century on Earth in India. Tugboats serve a similar purpose for ocean-going vessels on earth as tractor and repulsor beams serve for space-going vessels today"
 	return stationShree
 end
-
 function placeSoong()
 	--Soong 
 	stationSoong = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2130,7 +2084,6 @@ function placeSoong()
 	stationSoong.stationHistory = "The station is named after Dr. Noonian Soong, the famous android researcher and builder"
 	return stationSoong
 end
-
 function placeTiberius()
 	--Tiberius
 	stationTiberius = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2141,7 +2094,6 @@ function placeTiberius()
 	stationTiberius.stationHistory = "We recognize the influence of Starfleet Captain James Tiberius Kirk in the 23rd century in our station name"
 	return stationTiberius
 end
-
 function placeTokra()
 	--Tokra
 	stationTokra = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2174,7 +2126,6 @@ function placeTokra()
 	stationTokra.stationHistory = "We learned several of our critical industrial processes from the Tokra race, so we honor our fortune by naming the station after them"
 	return stationTokra
 end
-
 function placeToohie()
 	--Toohie
 	stationToohie = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2196,7 +2147,6 @@ function placeToohie()
 	stationToohie.stationHistory = "This station was named after one of the earliest researchers in shield technology, Alexander Toohie back when it was considered impractical to construct shields due to the physics involved."
 	return stationToohie
 end
-
 function placeUtopiaPlanitia()
 	--Utopia Planitia
 	stationUtopiaPlanitia = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2214,7 +2164,6 @@ function placeUtopiaPlanitia()
 	stationUtopiaPlanitia.generalInformation = "We work on all aspects of naval ship building and maintenance. Many of the naval models are researched, designed and built right here on this station. Our design goals seek to make the space faring experience as simple as possible given the tremendous capabilities of the modern naval vessel"
 	return stationUtopiaPlanitia
 end
-
 function placeVactel()
 	--Vactel
 	stationVactel = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2233,7 +2182,6 @@ function placeVactel()
 	stationVactel.stationHistory = "We started as an expansion from the lunar based chip manufacturer of Earth legacy Intel electronic chips"
 	return stationVactel
 end
-
 function placeVeloquan()
 	--Veloquan
 	stationVeloquan = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2255,7 +2203,6 @@ function placeVeloquan()
 	stationVeloquan.stationHistory = "The Veloquan company has its roots in the manufacturing of LIDAR sensors in the early 21st century on Earth in the United States for autonomous ground-based vehicles. They expanded research and manufacturing operations to include various sensors for space vehicles. Veloquan was the result of numerous mergers and acquisitions of several companies including Velodyne and Quanergy"
 	return stationVeloquan
 end
-
 function placeZefram()
 	--Zefram
 	stationZefram = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2289,7 +2236,6 @@ function placeJabba()
 	stationJabba.generalInformation = "Come play some games and shop. House take does not exceed 4 percent"
 	return stationJabba
 end
-
 function placeKrik()
 	--Krik
 	stationKrik = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2330,14 +2276,12 @@ function placeKrik()
 	end
 	return stationKrik
 end
-
 function placeLando()
 	--Lando
 	stationLando = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationLando:setPosition(psx,psy):setCallSign("Lando"):setDescription("Casino and Gambling")
 	return stationLando
 end
-
 function placeMaverick()
 	--Maverick
 	stationMaverick = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2346,7 +2290,6 @@ function placeMaverick()
 	stationMaverick.generalInformation = "Relax and meet some interesting players"
 	return stationMaverick
 end
-
 function placeNefatha()
 	--Nefatha
 	stationNefatha = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2354,14 +2297,12 @@ function placeNefatha()
 	goods[stationNefatha] = {{"luxury",5,70}}
 	return stationNefatha
 end
-
 function placeOkun()
 	--Okun
 	stationOkun = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationOkun:setPosition(psx,psy):setCallSign("Okun"):setDescription("Xenopsychology research")
 	return stationOkun
 end
-
 function placeOutpost7()
 	--Outpost 7
 	stationOutpost7 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2369,14 +2310,12 @@ function placeOutpost7()
 	goods[stationOutpost7] = {{"luxury",5,80}}
 	return stationOutpost7
 end
-
 function placeOutpost8()
 	--Outpost 8
 	stationOutpost8 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationOutpost8:setPosition(psx,psy):setCallSign("Outpost-8")
 	return stationOutpost8
 end
-
 function placeOutpost33()
 	--Outpost 33
 	stationOutpost33 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2384,28 +2323,24 @@ function placeOutpost33()
 	goods[stationOutpost33] = {{"luxury",5,75}}
 	return stationOutpost33
 end
-
 function placePrada()
 	--Prada
 	stationPrada = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationPrada:setPosition(psx,psy):setCallSign("Prada"):setDescription("Textiles and fashion")
 	return stationPrada
 end
-
 function placeResearch11()
 	--Research-11
 	stationResearch11 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationResearch11:setPosition(psx,psy):setCallSign("Research-11"):setDescription("Stress Psychology Research")
 	return stationResearch11
 end
-
 function placeResearch19()
 	--Research-19
 	stationResearch19 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationResearch19:setPosition(psx,psy):setCallSign("Research-19"):setDescription("Low gravity research")
 	return stationResearch19
 end
-
 function placeRubis()
 	--Rubis
 	stationRubis = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2415,21 +2350,18 @@ function placeRubis()
 	stationRubis.generalInformation = "Get your energy here! Grab a drink before you go!"
 	return stationRubis
 end
-
 function placeScience2()
 	--Science 2
 	stationScience2 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationScience2:setPosition(psx,psy):setCallSign("Science-2"):setDescription("Research Lab and Observatory")
 	return stationScience2
 end
-
 function placeScience4()
 	--Science 4
 	stationScience4 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationScience4:setPosition(psx,psy):setCallSign("Science-4"):setDescription("Biotech research")
 	return stationScience4
 end
-
 function placeSkandar()
 	--Skandar
 	stationSkandar = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2440,14 +2372,12 @@ function placeSkandar()
 	stationSkandar.stationHistory = "The nomadic Skandars have set up at this station to practice their entertainment and maintenance skills as well as build a community where Skandars can relax"
 	return stationSkandar
 end
-
 function placeSpot()
 	--Spot
 	stationSpot = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationSpot:setPosition(psx,psy):setCallSign("Spot"):setDescription("Observatory")
 	return stationSpot
 end
-
 function placeStarnet()
 	--Starnet 
 	stationStarnet = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2456,14 +2386,12 @@ function placeStarnet()
 	stationStarnet.generalInformation = "We research and create automated weapons systems to improve ship combat capability"
 	return stationStarnet
 end
-
 function placeTandon()
 	--Tandon
 	stationTandon = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationTandon:setPosition(psx,psy):setCallSign("Tandon"):setDescription("Biotechnology research")
 	return stationTandon
 end
-
 function placeVaiken()
 	--Vaiken
 	stationVaiken = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2471,7 +2399,6 @@ function placeVaiken()
 	goods[stationVaiken] = {{"food",10,1},{"medicine",5,5}}
 	return stationVaiken
 end
-
 function placeValero()
 	--Valero
 	stationValero = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
@@ -2487,70 +2414,59 @@ function placeAramanth()
 	stationAramanth = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCallSign("Aramanth"):setPosition(psx,psy)
 	return stationAramanth
 end
-
 function placeEmpok()
 	--Empok Nor
 	stationEmpok = SpaceStation():setTemplate(szt()):setFaction(stationFaction)
 	stationEmpok:setPosition(psx,psy):setCallSign("Empok Nor")
 	return stationEmpok
 end
-
 function placeGandala()
 	--Gandala
 	stationGanalda = SpaceStation():setTemplate(szt()):setFaction(stationFaction)
 	stationGanalda:setPosition(psx,psy):setCallSign("Ganalda")
 	return stationGanalda
 end
-
 function placeHassenstadt()
 	--Hassenstadt
 	stationHassenstadt = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCallSign("Hassenstadt"):setPosition(psx,psy)
 	return stationHassenstadt
 end
-
 function placeKaldor()
 	--Kaldor
 	stationKaldor = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCallSign("Kaldor"):setPosition(psx,psy)
 	return stationKaldor
 end
-
 function placeMagMesra()
 	--Magenta Mesra
 	stationMagMesra = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCallSign("Magenta Mesra"):setPosition(psx,psy)
 	return stationMagMesra
 end
-
 function placeMosEisley()
 	--Mos Eisley
 	stationMosEisley = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCallSign("Mos Eisley"):setPosition(psx,psy)
 	return stationMosEisley
 end
-
 function placeQuestaVerde()
 	--Questa Verde
 	stationQuestaVerde = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCallSign("Questa Verde"):setPosition(psx,psy)
 	return stationQuestaVerde
 end
-
 function placeRlyeh()
 	--R'lyeh
 	stationRlyeh = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCallSign("R'lyeh"):setPosition(psx,psy)
 	return stationRlyeh
 end
-
 function placeScarletCit()
 	--Scarlet Citadel
 	stationScarletCitadel = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationScarletCitadel:setPosition(psx,psy):setCallSign("Scarlet Citadel")
 	return stationScarletCitadel
 end
-
 function placeStahlstadt()
 	--Stahlstadt
 	stationStahlstadt = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCallSign("Stahlstadt"):setPosition(psx,psy)
 	return stationStahlstadt
 end
-
 function placeTic()
 	--Ticonderoga
 	stationTic = SpaceStation():setTemplate(szt()):setFaction(stationFaction)
@@ -2612,7 +2528,6 @@ function commsStation()
     end
     return true
 end
-
 function handleDockedState()
     if player:isFriendly(comms_target) then
 		oMsg = "Good day, officer!\nWhat can we do for you today?\n"
@@ -2771,14 +2686,52 @@ function handleDockedState()
 			addCommsReply("Talk to Johnny", function()
 				setCommsMessage("Mom? Wow, I thought you were toast. Good to hear your voice")
 				addCommsReply("Can you get our impulse drive working better", function()
-					setCommsMessage("Piece of cake")
-					playerRepulse.maxImpulse = 1
-					playerRepulse.impulseFix = "done"
-					addCommsReply("Thank you", function()
-						setCommsMessage("Sure. Mom, I'll see you at Christmas")
-						playerRepulse:addReputationPoints(30)
-						addCommsReply("Back",commsStation)
-					end)
+					if difficulty > 1 then
+						if impulseFixStation.good_base == nil then
+							repeat
+								candidate = stationList[math.random(1,#stationList)]
+								if candidate ~= nil and candidate:isValid() and #goods[candidate] > 0 then
+									gi = 1
+									repeat
+										impulseFixStation.impulse_good = goods[candidate][gi][1]
+										gi = gi + 1
+									until(gi > #goods[candidate])
+								end
+								if impulseFixStation.impulse_good ~= "food" and impulseFixStation.impulse_good ~= "medicine" then
+									impulseFixStation.good_base = candidate
+								end
+							until(impulseFixStation.good_base ~= nil)
+						end
+						gi = 1
+						local impulse_good_quantity = 0
+						repeat
+							if goods[player][gi][1] == impulseFixStation.impulse_good then
+								impulse_good_quantity = goods[player][gi][2]
+							end
+							gi = gi + 1
+						until(gi > #goods[player])
+						if impulse_good_quantity > 0 then
+							setCommsMessage(string.format("Piece of cake. Thanks for the %s",impulseFixStation.impulse_good))
+							playerRepulse.maxImpulse = 1
+							playerRepulse.impulseFix = "done"
+							addCommsReply("Thank you", function()
+								setCommsMessage("Sure. Mom, I'll see you at Christmas")
+								playerRepulse:addReputationPoints(30)
+								addCommsReply("Back",commsStation)
+							end)
+						else
+							setCommsMessage(string.format("Piece of cake, but I'll need %s",impulseFixStation.impulse_good))
+						end
+					else
+						setCommsMessage("Piece of cake")
+						playerRepulse.maxImpulse = 1
+						playerRepulse.impulseFix = "done"
+						addCommsReply("Thank you", function()
+							setCommsMessage("Sure. Mom, I'll see you at Christmas")
+							playerRepulse:addReputationPoints(30)
+							addCommsReply("Back",commsStation)
+						end)
+					end
 					addCommsReply("Back",commsStation)
 				end)
 				addCommsReply("Back",commsStation)
@@ -2790,14 +2743,54 @@ function handleDockedState()
 			addCommsReply("Talk to Nancy's brother", function()
 				setCommsMessage("Nancy! Last I heard, your ship had been captured by Kraylors and you were imprisoned. Good to know you won't be stuck there forever. What brings you here?")
 				addCommsReply("Our jump drive needs some tuning", function()
-					setCommsMessage("That should not be hard to do. I could probably do that in my sleep")
-					playerRepulse.maxJump = 1
-					playerRepulse.jumpFix = "done"
-					addCommsReply("Thanks, bro", function()
-						setCommsMessage("No problem. Treat your jump drive right and it'll always bring you home")
-						playerRepulse:addReputationPoints(30)
-						addCommsReply("Back",commsStation)
-					end)
+					if difficulty >= 1 then
+						if jumpFixStation.good_base == nil then
+							repeat
+								candidate = stationList[math.random(1,#stationList)]
+								if candidate ~= nil and candidate:isValid() and #goods[candidate] > 0 then
+									gi = 1
+									repeat
+										jumpFixStation.jump_good = goods[candidate][gi][1]
+										gi = gi + 1
+									until(gi > #goods[candidate])
+								end
+								if jumpFixStation.jump_good ~= "food" and jumpFixStation.jump_good ~= "medicine" then
+									jumpFixStation.good_base = candidate
+								end
+							until(jumpFixStation.good_base ~= nil)
+						end
+						gi = 1
+						local jump_good_quantity = 0
+						repeat
+							if goods[player][gi][1] == jumpFixStation.jump_good then
+								jump_good_quantity = goods[player][gi][2]
+							end
+							gi = gi + 1
+						until(gi > #goods[player])
+						if jump_good_quantity > 0 then
+							setCommsMessage(string.format("That should not be hard to do. I could probably do that in my sleep. Thanks for bringing %s",jumpFixStation.jump_good))
+							decrementPlayerGoods(jumpFixStation.jump_good)
+							player.cargo = player.cargo + 1
+							playerRepulse.maxJump = 1
+							playerRepulse.jumpFix = "done"
+							addCommsReply("Thanks, bro", function()
+								setCommsMessage("No problem. Treat your jump drive right and it'll always bring you home")
+								playerRepulse:addReputationPoints(30)
+								addCommsReply("Back",commsStation)
+							end)
+						else
+							setCommsMessage(string.format("That should not be hard to do. I could probably do that in my sleep. But I'll need some %s",jumpFixStation.jump_good))
+						end
+					else
+						setCommsMessage("That should not be hard to do. I could probably do that in my sleep")
+						playerRepulse.maxJump = 1
+						playerRepulse.jumpFix = "done"
+						addCommsReply("Thanks, bro", function()
+							setCommsMessage("No problem. Treat your jump drive right and it'll always bring you home")
+							playerRepulse:addReputationPoints(30)
+							addCommsReply("Back",commsStation)
+						end)
+					end
 					addCommsReply("Back",commsStation)
 				end)
 				addCommsReply("Back",commsStation)
@@ -2833,7 +2826,7 @@ function handleDockedState()
 						playerRepulse.longRangeFix = "done"
 						playerRepulse:setFaction("Human Navy")
 						stationFaction = "Human Navy"
-						print("switched to Human Navy")
+						--print("switched to Human Navy")
 						for j=1,8 do
 							tSize = math.random(2,5)	--tack on to region size (3-6 since first is outside loop)
 							grid[gx][gy] = gp			--set current grid location to grid position list index
@@ -2862,7 +2855,7 @@ function handleDockedState()
 							psy = brigy + (gRegion[sri][2] - (gbHigh/2))*gSize + random(-gSize/2*.95,gSize/2*.95)	--place station y coordinate
 							si = math.random(1,#placeStation)			--station index
 							pStation = placeStation[si]()				--place selected station
-							print(string.format("placed %s in %s: %.1f, %.1f",pStation:getCallSign(),pStation:getSectorName(),psx,psy))
+							--print(string.format("placed %s in %s: %.1f, %.1f",pStation:getCallSign(),pStation:getSectorName(),psx,psy))
 							table.remove(placeStation,si)				--remove station from placement list
 							table.insert(stationList,pStation)			--save station in general station list
 							table.insert(friendlyStationList,pStation)	
@@ -2899,35 +2892,35 @@ function handleDockedState()
 					addCommsReply("Repair front shield", function()
 						setCommsMessage("Your front shields are now fully operational. Your repair crew can finish the rest")
 						playerRepulse.maxFrontShield = 1
-						print("fixed front shield")
+						--print("fixed front shield")
 						playerRepulse.frontShieldFix = "done"
-						print("set front shield fixed indicator")
+						--print("set front shield fixed indicator")
 						addCommsReply("Thanks", function()
-							print("past front thanks")
+							--print("past front thanks")
 							if shieldGoodBase == nil then
-								print("setting shield good base")
+								--print("setting shield good base")
 								repeat
-									print("top of shield good base set loop")
+									--print("top of shield good base set loop")
 									candidate = stationList[math.random(1,#stationList)]
-									print(string.format("candidate: %s",candidate:getCallSign()))
+									--print(string.format("candidate: %s",candidate:getCallSign()))
 									if candidate ~= nil and candidate:isValid() and #goods[candidate] > 0 then
-										print("candidate passed first checks")	--testing got to this point
+										--print("candidate passed first checks")	--testing got to this point
 										gi = 1
 										repeat
 											shieldGood = goods[candidate][gi][1]
 											gi = gi + 1
 										until(gi > #goods[candidate])
-										print(string.format("Checked goods. Ended on shield good: %s",shieldGood))	--testing did not get here
+										--print(string.format("Checked goods. Ended on shield good: %s",shieldGood))	--testing did not get here
 										if shieldGood ~= "food" and shieldGood ~= "medicine" then
 											shieldGoodBase = candidate	
-											print(string.format("Decided on station %s",shieldGoodBase:getCallSign()))
+											--print(string.format("Decided on station %s",shieldGoodBase:getCallSign()))
 										end
 									end
 								until(shieldGoodBase ~= nil)
-								print("out of shield good base loop")
+								--print("out of shield good base loop")
 							end
 							setCommsMessage(string.format("Certainly. Bring back %s to get the rear shield fixed. You might find some at %s",shieldGood,shieldGoodBase:getCallSign()))
-							print("set response message")
+							--print("set response message")
 							playerRepulse:addReputationPoints(30)
 							addCommsReply("Back", commsStation)
 						end)
@@ -3222,7 +3215,6 @@ function isAllowedTo(state)
     end
     return false
 end
-
 function handleWeaponRestock(weapon)
     if not player:isDocked(comms_target) then 
 		setCommsMessage("You need to stay docked for that action.")
@@ -3292,11 +3284,9 @@ function handleWeaponRestock(weapon)
         addCommsReply("Back", commsStation)
     end
 end
-
 function getWeaponCost(weapon)
     return math.ceil(comms_data.weapon_cost[weapon] * comms_data.reputation_cost_multipliers[getFriendStatus()])
 end
-
 function handleUndockedState()
     --Handle communications when we are not docked with the station.
     if player:isFriendly(comms_target) then
@@ -3471,13 +3461,11 @@ function handleUndockedState()
         end)
     end
 end
-
 -- Return the number of reputation points that a specified service costs for
 -- the current player.
 function getServiceCost(service)
     return math.ceil(comms_data.service_cost[service])
 end
-
 function fillStationBrains()
 	comms_target.goodsKnowledge = {}
 	comms_target.goodsKnowledgeSector = {}
@@ -3528,7 +3516,6 @@ function fillStationBrains()
 		end
 	end
 end
-
 function getFriendStatus()
     if player:isFriendly(comms_target) then
         return "friend"
@@ -3548,7 +3535,6 @@ function incrementPlayerGoods(goodsType)
 		gi = gi + 1
 	until(gi > #goods[player])
 end
-
 function decrementPlayerGoods(goodsType)
 	local gi = 1
 	repeat
@@ -3558,7 +3544,6 @@ function decrementPlayerGoods(goodsType)
 		gi = gi + 1
 	until(gi > #goods[player])
 end
-
 function decrementStationGoods(goodsType)
 	local gi = 1
 	repeat
@@ -3568,7 +3553,6 @@ function decrementStationGoods(goodsType)
 		gi = gi + 1
 	until(gi > #goods[comms_target])
 end
-
 function decrementShipGoods(goodsType)
 	local gi = 1
 	repeat
@@ -3582,6 +3566,9 @@ end
 	First Plot starts when repulse hulk is scanned
 --]]-------------------------------------------------------------------
 function scanRepulse(delta)
+	if difficulty >= 1 then
+		plotSuffocate = checkForSuffocationOnFighter
+	end
 	if junkRepulse:isValid() then
 		if junkRepulse:isFullyScannedBy(playerFighter) then
 			hintRepulseTimer = random(30,60)
@@ -3589,8 +3576,91 @@ function scanRepulse(delta)
 		end
 	end
 end
+function checkForSuffocationOnFighter(delta)
+	if air_low_timer == nil then
+		if difficulty > 1 then
+			air_low_timer = delta + 60*3
+		else
+			air_low_timer = delta + 60*5
+		end
+	end
+	air_low_timer = air_low_timer - delta
+	if air_low_timer < 0 then
+		if suffocation_timer == nil then
+			if difficulty > 1 then
+				suffocation_timer = delta + 60*3
+			else
+				suffocation_timer = delta + 60*5
+			end
+		end
+		suffocation_timer = suffocation_timer - delta
+		local suffocation_label = "Suffocation"
+		local suffocation_label_minutes = math.floor(suffocation_timer / 60)
+		local suffocation_label_seconds = math.floor(suffocation_timer % 60)
+		if suffocation_label_minutes <= 0 then
+			suffocation_label = string.format("%s %i",suffocation_label,suffocation_label_seconds)
+		else
+			suffocation_label = string.format("%s %i:%.2i",suffocation_label,suffocation_label_minutes,suffocation_label_seconds)
+		end
+		if playerFighter:hasPlayerAtPosition("Engineering") then
+			if playerFighter.suffocation_message == nil then
+				playerFighter.suffocation_message = "suffocation_message"
+				playerFighter:addCustomMessage("Engineering",playerFighter.suffocation_message,"Environmental systems show limited air remaining")
+			end
+			playerFighter.suffocation_timer = "suffocation_timer"
+			playerFighter:addCustomInfo("Engineering",playerFighter.suffocation_timer,suffocation_label)
+		end
+		if playerFighter:hasPlayerAtPosition("Engineering+") then
+			if playerFighter.suffocation_message_eng_plus == nil then
+				playerFighter.suffocation_message_eng_plus = "suffocation_message_eng_plus"
+				playerFighter:addCustomMessage("Engineering+",playerFighter.suffocation_message_eng_plus,"Environmental systems show limited air remaining")
+			end
+			playerFighter.suffocation_timer_eng_plus = "suffocation_timer_eng_plus"
+			playerFighter:addCustomInfo("Engineering+",playerFighter.suffocation_timer_eng_plus,suffocation_label)
+		end
+		if playerFighter:hasPlayerAtPosition("Science") then
+			if playerFighter.suffocation_message_science == nil then
+				playerFighter.suffocation_message_science = "suffocation_message_science"
+				playerFighter:addCustomMessage("Science",playerFighter.suffocation_message_science,"Environmental systems show limited air remaining")
+			end
+			playerFighter.suffocation_timer_science = "suffocation_timer_science"
+			playerFighter:addCustomInfo("Science",playerFighter.suffocation_timer_science,suffocation_label)
+		end
+		if playerFighter:hasPlayerAtPosition("Operations") then
+			if playerFighter.suffocation_message_ops == nil then
+				playerFighter.suffocation_message_ops = "suffocation_message_ops"
+				playerFighter:addCustomMessage("Operations",playerFighter.suffocation_message_ops,"Environmental systems show limited air remaining")
+			end
+			playerFighter.suffocation_timer_ops = "suffocation_timer_ops"
+			playerFighter:addCustomInfo("Operations",playerFighter.suffocation_timer_ops,suffocation_label)
+		end
+		if suffocation_timer < 0 then
+			globalMessage("You suffocated while aboard the fighter hulk")
+			victory("Kraylor")
+			if playerFighter.suffocation_timer ~= nil then
+				playerFighter:removeCustom(playerFighter.suffocation_timer)
+				playerFighter.suffocation_timer = nil
+			end
+			if playerFighter.suffocation_timer_eng_plus ~= nil then
+				playerFighter:removeCustom(playerFighter.suffocation_timer_eng_plus)
+				playerFighter.suffocation_timer_eng_plus = nil
+			end
+			if playerFighter.suffocation_timer_science ~= nil then
+				playerFighter:removeCustom(playerFighter.suffocation_timer_science)
+				playerFighter.suffocation_timer_science = nil
+			end
+			if playerFighter.suffocation_timer_ops ~= nil then
+				playerFighter:removeCustom(playerFighter.suffocation_timer_ops)
+				playerFighter.suffocation_timer_ops = nil
+			end
+		end
+	end
+end
 --Engineer hints that the Repulse hulk has a jump drive that might function
 function hintRepulse(delta)
+	if difficulty >= 1 then
+		plotSuffocate = checkForSuffocationOnFighter
+	end
 	hintRepulseTimer = hintRepulseTimer - delta
 	if hintRepulseTimer < 0 then
 		if playerFighter:hasPlayerAtPosition("Engineering") then
@@ -3606,6 +3676,9 @@ function hintRepulse(delta)
 end
 --Get close enough and a transfer button will appear
 function hugRepulse(delta)
+	if difficulty >= 1 then
+		plotSuffocate = checkForSuffocationOnFighter
+	end
 	if distance(playerFighter,junkRepulse) < 500 then
 		if playerFighter:hasPlayerAtPosition("Engineering") then
 			repulseTransferButton = "repulseTransferButton"
@@ -3678,7 +3751,8 @@ function repulseTransfer()
 	player = playerRepulse
 	goods[player] = goodsList
 	plotKP = kraylorPatrol				--start sending out Kraylor patrols
-	print("end of transfer")
+	plotSuffocate = nil
+	--print("end of transfer")
 end
 --Former repair crew asks to be rescued to take up their jobs again
 function augmentRepairCrew(delta)
@@ -4060,7 +4134,7 @@ function kraylorPatrol(delta)
 		for kpidx, kpobj in ipairs(kraylorPatrolList) do
 			if kpobj ~= nil and kpobj:isValid() then
 				if kpobj.target ~= nil and kpobj.target:isValid() then
-					if distance(kpobj, kpobj.target) < 500 then
+					if distance(kpobj, kpobj.target) < 1000 then
 						kpobj.target = randomStation(enemyStationList)
 						ktx, kty = kpobj.target:getPosition()
 						kpobj:orderFlyTowards(ktx, kty)
@@ -4085,7 +4159,7 @@ function kraylorPatrol(delta)
 		end
 		if playerRepulse ~= nil and playerRepulse:isValid() and playerRepulse:getFaction() == "Human Navy" then
 			kraylorAlerted = true
-			patrolLimit = #enemyStationList * 2
+			patrolLimit = #enemyStationList * (2 + difficulty)
 		else
 			kraylorAlerted = false
 			patrolLimit = #enemyStationList
@@ -4431,32 +4505,34 @@ function scragHealth(delta)
 end
 --repulse player ship health
 function plunderHealth(delta)
-	if playerRepulse:getSystemHealth("reactor") > playerRepulse.maxReactor then
-		playerRepulse:setSystemHealth("reactor",playerRepulse.maxReactor)
-	end
-	if playerRepulse:getSystemHealth("beamweapons") > playerRepulse.maxBeam then
-		playerRepulse:setSystemHealth("beamweapons",playerRepulse.maxBeam)
-	end
-	if playerRepulse:getSystemHealth("maneuver") > playerRepulse.maxManeuver then
-		playerRepulse:setSystemHealth("maneuver",playerRepulse.maxManeuver)
-	end
-	if playerRepulse:getSystemHealth("missilesystem") > playerRepulse.maxMissile then
-		playerRepulse:setSystemHealth("missilesystem",playerRepulse.maxMissile)
-	end
-	if playerRepulse:getSystemHealth("impulse") > playerRepulse.maxImpulse then
-		playerRepulse:setSystemHealth("impulse",playerRepulse.maxImpulse)
-	end
-	if playerRepulse:getSystemHealth("warp") > playerRepulse.maxWarp then
-		playerRepulse:setSystemHealth("warp",playerRepulse.maxWarp)
-	end
-	if playerRepulse:getSystemHealth("jumpdrive") > playerRepulse.maxJump then
-		playerRepulse:setSystemHealth("jumpdrive",playerRepulse.maxJump)
-	end
-	if playerRepulse:getSystemHealth("frontshield") > playerRepulse.maxFrontShield then
-		playerRepulse:setSystemHealth("frontshield",playerRepulse.maxFrontShield)
-	end
-	if playerRepulse:getSystemHealth("rearshield") > playerRepulse.maxRearShield then
-		playerRepulse:setSystemHealth("rearshield",playerRepulse.maxRearShield)
+	if playerRepulse ~= nil and playerRepulse:isValid() then
+		if playerRepulse:getSystemHealth("reactor") > playerRepulse.maxReactor then
+			playerRepulse:setSystemHealth("reactor",playerRepulse.maxReactor)
+		end
+		if playerRepulse:getSystemHealth("beamweapons") > playerRepulse.maxBeam then
+			playerRepulse:setSystemHealth("beamweapons",playerRepulse.maxBeam)
+		end
+		if playerRepulse:getSystemHealth("maneuver") > playerRepulse.maxManeuver then
+			playerRepulse:setSystemHealth("maneuver",playerRepulse.maxManeuver)
+		end
+		if playerRepulse:getSystemHealth("missilesystem") > playerRepulse.maxMissile then
+			playerRepulse:setSystemHealth("missilesystem",playerRepulse.maxMissile)
+		end
+		if playerRepulse:getSystemHealth("impulse") > playerRepulse.maxImpulse then
+			playerRepulse:setSystemHealth("impulse",playerRepulse.maxImpulse)
+		end
+		if playerRepulse:getSystemHealth("warp") > playerRepulse.maxWarp then
+			playerRepulse:setSystemHealth("warp",playerRepulse.maxWarp)
+		end
+		if playerRepulse:getSystemHealth("jumpdrive") > playerRepulse.maxJump then
+			playerRepulse:setSystemHealth("jumpdrive",playerRepulse.maxJump)
+		end
+		if playerRepulse:getSystemHealth("frontshield") > playerRepulse.maxFrontShield then
+			playerRepulse:setSystemHealth("frontshield",playerRepulse.maxFrontShield)
+		end
+		if playerRepulse:getSystemHealth("rearshield") > playerRepulse.maxRearShield then
+			playerRepulse:setSystemHealth("rearshield",playerRepulse.maxRearShield)
+		end
 	end
 end
 --other ship health
@@ -4493,7 +4569,6 @@ function enemyShipHealth(delta)
 		end
 	end
 end
-
 function update(delta)
 	bobsx, bobsy = vectorFromAngle(stationWig.angle,3000)
 	stationWig:setPosition(bwx+bobsx,bwy+bobsy):setRotation(stationWig.angle)
@@ -4501,6 +4576,9 @@ function update(delta)
 	malx, maly = vectorFromAngle(stationMal.angle,3000)
 	stationMal:setPosition(msx+malx,msy+maly):setRotation(stationMal.angle)
 	stationMal.angle = stationMal.angle + .05
+	if plotSuffocate ~= nil then
+		plotSuffocate(delta)
+	end
 	if plot1 ~= nil then
 		plot1(delta)
 	end

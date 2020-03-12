@@ -4,15 +4,33 @@
 #include "mesh.h"
 #include "main.h"
 
+/// BeamEffect is a beam weapon fire effect that will fade after 1 seond
+/// Example: BeamEffect():setSource(player):setTarget(enemy_ship)
+REGISTER_SCRIPT_SUBCLASS(BeamEffect, SpaceObject)
+{
+    REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setSource);
+    REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setTarget);
+    REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setTexture);
+    REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setBeamFireSound);
+    REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setBeamFireSoundPower);
+    REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setDuration);
+    REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setRing);
+}
+
 REGISTER_MULTIPLAYER_CLASS(BeamEffect, "BeamEffect");
 BeamEffect::BeamEffect()
 : SpaceObject(1000, "BeamEffect")
 {
+    setRadarSignatureInfo(0.0, 0.3, 0.0);
     setCollisionRadius(1.0);
     lifetime = 1.0;
     sourceId = -1;
     target_id = -1;
-
+    beam_texture = "beam_orange.png";
+    beam_fire_sound = "sfx/laser_fire.wav";
+    beam_fire_sound_power = 1;
+    fire_ring = true;
+    registerMemberReplication(&lifetime, 0.1);
     registerMemberReplication(&sourceId);
     registerMemberReplication(&target_id);
     registerMemberReplication(&sourceOffset);
@@ -22,6 +40,11 @@ BeamEffect::BeamEffect()
     registerMemberReplication(&beam_texture);
     registerMemberReplication(&beam_fire_sound);
     registerMemberReplication(&beam_fire_sound_power);
+    registerMemberReplication(&fire_ring);
+}
+
+BeamEffect::~BeamEffect()
+{
 }
 
 #if FEATURE_3D_RENDERING
@@ -52,29 +75,32 @@ void BeamEffect::draw3DTransparent()
         glEnd();
     }
 
-    sf::Vector3f side = sf::cross(hitNormal, sf::Vector3f(0, 0, 1));
-    sf::Vector3f up = sf::cross(side, hitNormal);
+    if (fire_ring)
+    {
+        sf::Vector3f side = sf::cross(hitNormal, sf::Vector3f(0, 0, 1));
+        sf::Vector3f up = sf::cross(side, hitNormal);
 
-    sf::Vector3f v0(targetLocation.x, targetLocation.y, targetOffset.z);
+        sf::Vector3f v0(targetLocation.x, targetLocation.y, targetOffset.z);
 
-    float ring_size = Tween<float>::easeOutCubic(lifetime, 1.0, 0.0, 10.0f, 80.0f);
-    sf::Vector3f v1 = v0 + side * ring_size + up * ring_size;
-    sf::Vector3f v2 = v0 - side * ring_size + up * ring_size;
-    sf::Vector3f v3 = v0 - side * ring_size - up * ring_size;
-    sf::Vector3f v4 = v0 + side * ring_size - up * ring_size;
+        float ring_size = Tween<float>::easeOutCubic(lifetime, 1.0, 0.0, 10.0f, 80.0f);
+        sf::Vector3f v1 = v0 + side * ring_size + up * ring_size;
+        sf::Vector3f v2 = v0 - side * ring_size + up * ring_size;
+        sf::Vector3f v3 = v0 - side * ring_size - up * ring_size;
+        sf::Vector3f v4 = v0 + side * ring_size - up * ring_size;
 
-    ShaderManager::getShader("basicShader")->setUniform("textureMap", *textureManager.getTexture("fire_ring.png"));
-    sf::Shader::bind(ShaderManager::getShader("basicShader"));
-    glBegin(GL_QUADS);
-    glTexCoord2f(0, 0);
-    glVertex3f(v1.x, v1.y, v1.z);
-    glTexCoord2f(1, 0);
-    glVertex3f(v2.x, v2.y, v2.z);
-    glTexCoord2f(1, 1);
-    glVertex3f(v3.x, v3.y, v3.z);
-    glTexCoord2f(0, 1);
-    glVertex3f(v4.x, v4.y, v4.z);
-    glEnd();
+        ShaderManager::getShader("basicShader")->setUniform("textureMap", *textureManager.getTexture("fire_ring.png"));
+        sf::Shader::bind(ShaderManager::getShader("basicShader"));
+        glBegin(GL_QUADS);
+        glTexCoord2f(0, 0);
+        glVertex3f(v1.x, v1.y, v1.z);
+        glTexCoord2f(1, 0);
+        glVertex3f(v2.x, v2.y, v2.z);
+        glTexCoord2f(1, 1);
+        glVertex3f(v3.x, v3.y, v3.z);
+        glTexCoord2f(0, 1);
+        glVertex3f(v4.x, v4.y, v4.z);
+        glEnd();
+    }
 }
 #endif//FEATURE_3D_RENDERING
 

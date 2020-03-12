@@ -1,7 +1,12 @@
 # Python script that generates the documentation for script functions.
-# This parses the codeblocks for to find all the source files, then parses all the source files for script macros.
-# Finally it outputs all the documentation to stdout so it can be stored on disk.
-# This script should run in both python2 and python3
+#
+# This parses the codeblocks to find all the source files, then parses
+# all of the source files for script macros.
+#
+# It then outputs all the documentation (comments starting with `///`)
+# as HTML to stdout so it can be stored on disk.
+#
+# This script should run in both Python 2 and 3.
 import re
 import os
 import sys
@@ -76,7 +81,18 @@ class DocumentationGenerator(object):
         self._definitions = []
         self._function_info = []
         self._files = set()
-    
+
+    def addDirectory(self, directory):
+        if not os.path.isdir(directory):
+            return
+
+        for name in os.listdir(directory):
+            name = directory + os.sep + name
+            if os.path.isdir(name):
+                self.addDirectory(name)
+            elif os.path.isfile(name):
+                self.addFile(name)
+
     def addFile(self, filename):
         if filename in self._files:
             return
@@ -85,12 +101,7 @@ class DocumentationGenerator(object):
         
         self._files.add(filename)
         ext = os.path.splitext(filename)[1].lower()
-        if ext == '.cbp':
-            xml = ElementTree.parse(filename)
-            for project in xml.findall('Project'):
-                for unit in project.findall('Unit'):
-                    self.addFile(unit.attrib['filename'])
-        elif ext == '.c' or ext == '.cpp' or ext == '.h':
+        if ext == '.c' or ext == '.cpp' or ext == '.h':
             for line in open(filename, "r"):
                 m = re.match('^# *include *[<"](.*)[>"]$', line)
                 if m is not None:
@@ -206,7 +217,7 @@ class DocumentationGenerator(object):
         stream.write('<body>')
 
         stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
-        stream.write('<h1>Info</h1>')
+        stream.write('<h1>EmptyEpsilon Scripting Reference</h1>')
         stream.write('This is the EmptyEpsilon script reference for this version of EmptyEpsilon. By no means this is a guide to help you scripting, you should check <a href="http://emptyepsilon.org/">emptyepsilon.org</a> for the guide on scripting.')
         stream.write('As well as check the already existing scenario and ship data files on how to get started.')
         stream.write('</div>')
@@ -240,7 +251,7 @@ class DocumentationGenerator(object):
                 stream.write('<dl>')
                 for func in d.functions:
                     if func.parameters is None:
-                        stream.write('<dt>%s:%s [ERROR]</dt>' % (d.name, func.name))
+                        stream.write('<dt>%s:%s [NOT FOUND; see SeriousProton]</dt>' % (d.name, func.name))
                     else:
                         stream.write('<dt>%s:%s(%s)</dt>' % (d.name, func.name, func.parameters.replace('<', '&lt;')))
                     stream.write('<dd>%s</dd>' % (func.description.replace('<', '&lt;')))
@@ -257,7 +268,7 @@ class DocumentationGenerator(object):
 
 if __name__ == "__main__":
     dg = DocumentationGenerator()
-    dg.addFile("EmptyEpsilon.cbp")
+    dg.addDirectory("src")
     dg.readFunctionInfo()
     dg.readScriptDefinitions()
     dg.linkFunctions()

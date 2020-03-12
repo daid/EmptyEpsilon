@@ -174,7 +174,7 @@ function spawnWave()
 		end
 	end
 	
-	globalMessage("Wave " .. waveNumber);
+	globalMessage(string.format(_("Wave %d"), waveNumber));
 end
 
 function update(delta)

@@ -173,10 +173,20 @@ public:
     sf::Vector2f docking_offset; //Server only
 
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
+    virtual ~SpaceShip();
 
 #if FEATURE_3D_RENDERING
     virtual void draw3DTransparent() override;
 #endif
+    /*!
+     * Get this ship's radar signature dynamically modified by the state of its
+     * systems and current activity.
+     */
+    virtual RawRadarSignatureInfo getDynamicRadarSignatureInfo();
+    float getDynamicRadarSignatureGravity() { return getDynamicRadarSignatureInfo().gravity; }
+    float getDynamicRadarSignatureElectrical() { return getDynamicRadarSignatureInfo().electrical; }
+    float getDynamicRadarSignatureBiological() { return getDynamicRadarSignatureInfo().biological; }
+
     /*!
      * Draw this ship on the radar.
      */
@@ -257,6 +267,8 @@ public:
     virtual int scanningComplexity(P<SpaceObject> other) override;
     virtual int scanningChannelDepth(P<SpaceObject> other) override;
     virtual void scannedBy(P<SpaceObject> other) override;
+    void setScanState(EScannedState scanned);
+    void setScanStateByFaction(string faction_name, EScannedState scanned);
 
     bool isFriendOrFoeIdentified();//[DEPRICATED]
     bool isFullyScanned();//[DEPRICATED]
@@ -361,6 +373,8 @@ public:
     int getShieldsFrequency(void){ return shield_frequency; }
     void setShieldsFrequency(float freq) { if ((freq > SpaceShip::max_frequency) || (freq < 0)) return; shield_frequency = freq;}
 
+    int getBeamFrequency(){ return beam_frequency; }
+
     void setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage)
     {
         if (index < 0 || index >= max_beam_weapons)
@@ -394,16 +408,19 @@ public:
     void setWeaponTubeCount(int amount);
     int getWeaponTubeCount();
     EMissileWeapons getWeaponTubeLoadType(int index);
+    EMissileSizes getWeaponTubeSize(int index);
+    
     void weaponTubeAllowMissle(int index, EMissileWeapons type);
     void weaponTubeDisallowMissle(int index, EMissileWeapons type);
     void setWeaponTubeExclusiveFor(int index, EMissileWeapons type);
     void setWeaponTubeDirection(int index, float direction);
+    void setWeaponTubeSize(int index, EMissileSizes size);
 
     void setRadarTrace(string trace) { radar_trace = trace; }
 
     void addBroadcast(int threshold, string message);
 
-    //Return a string that can be appended to an object create function in the lua scripting.
+    // Return a string that can be appended to an object create function in the lua scripting.
     // This function is used in getScriptExport calls to adjust for tweaks done in the GM screen.
     string getScriptExportModificationsOnTemplate();
 };

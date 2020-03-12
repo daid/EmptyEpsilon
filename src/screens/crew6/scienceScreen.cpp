@@ -93,7 +93,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     info_callsign->setSize(GuiElement::GuiSizeMax, 30);
     info_distance = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_DISTANCE", 0.4, "Distance", "");
     info_distance->setSize(GuiElement::GuiSizeMax, 30);
-    info_heading = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HEADING", 0.4, "Heading", "");
+    info_heading = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HEADING", 0.4, "Bearing", "");
     info_heading->setSize(GuiElement::GuiSizeMax, 30);
     info_relspeed = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_REL_SPEED", 0.4, "Rel. Speed", "");
     info_relspeed->setSize(GuiElement::GuiSizeMax, 30);
@@ -157,7 +157,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     // List each system's status.
     for(int n = 0; n < SYS_COUNT; n++)
     {
-        info_system[n] = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SYSTEM_" + string(n), 0.75, getSystemName(ESystem(n)), "-");
+        info_system[n] = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SYSTEM_" + string(n), 0.75, getLocaleSystemName(ESystem(n)), "-");
         info_system[n]->setSize(GuiElement::GuiSizeMax, 30);
         info_system[n]->hide();
     }
@@ -331,7 +331,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             // hull integrity, and database reference button.
             if (ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
             {
-                info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
+                info_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
                 info_type->setValue(ship->getTypeName());
                 info_type_button->show();
                 info_shields->setValue(ship->getShieldDataString());
@@ -407,7 +407,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         else
         {
             sidebar_pager->hide();
-            info_faction->setValue(factionInfo[obj->getFactionId()]->getName());
+            info_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
 
             // If the target is a station, show basic tactical info.
             if (station)
@@ -438,5 +438,75 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
         info_heading->setValue(string(int(heading)));
         info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
+    }
+}
+
+void ScienceScreen::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "SCIENCE" && my_spaceship)
+    {
+        // Initiate a scan on scannable objects.
+        if (key.hotkey == "SCAN_OBJECT" &&
+            my_spaceship->scanning_delay == 0.0)
+        {
+            P<SpaceObject> obj = targets.get();
+
+            // Allow scanning only if the object is scannable, and if the player
+            // isn't already scanning something.
+            if (obj &&
+                obj->canBeScannedBy(my_spaceship))
+            {
+                my_spaceship->commandScan(obj);
+                return;
+            }
+        }
+
+        // Cycle selection through scannable objects.
+        if (key.hotkey == "NEXT_SCANNABLE_OBJECT" &&
+            my_spaceship->scanning_delay == 0.0)
+        {
+            bool current_found = false;
+            for (P<SpaceObject> obj : space_object_list)
+            {
+                // If this object is the current object, flag and skip it.
+                if (obj == targets.get())
+                {
+                    current_found = true;
+                    continue;
+                }
+
+                // If this object is my ship or not visible due to a Nebula,
+                // skip it.
+                if (obj == my_spaceship ||
+                    Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition()))
+                    continue;
+
+                // If this is a scannable object and the currently selected
+                // object, and it remains in radar range, continue to set it.
+                if (current_found &&
+                    sf::length(obj->getPosition() - my_spaceship->getPosition()) < science_radar->getDistance() &&
+                    obj->canBeScannedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    return;
+                }
+            }
+
+            // Advance to the next object.
+            for (P<SpaceObject> obj : space_object_list)
+            {
+                if (obj == targets.get() ||
+                    obj == my_spaceship ||
+                    Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition()))
+                    continue;
+
+                if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < science_radar->getDistance() &&
+                    obj->canBeScannedBy(my_spaceship))
+                {
+                    targets.set(obj);
+                    return;
+                }
+            }
+        }
     }
 }

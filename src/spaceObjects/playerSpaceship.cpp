@@ -5,6 +5,7 @@
 #include "explosionEffect.h"
 #include "gameGlobalInfo.h"
 #include "main.h"
+#include "preferenceManager.h"
 
 #include "scriptInterface.h"
 
@@ -52,7 +53,11 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setEnergyLevelMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getEnergyLevel);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getEnergyLevelMax);
-    
+
+    /// Set the maximum coolant available to engineering. Default is 10.
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setMaxCoolant);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getMaxCoolant);
+
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setScanProbeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getScanProbeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setMaxScanProbeCount);
@@ -63,6 +68,10 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomMessage);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomMessageWithCallback);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, removeCustom);
+    
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getBeamSystemTarget);
+    /// Gets the name of the target system, instead of the ID
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getBeamSystemTargetName);
 
     // Command functions
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandTargetRotation);
@@ -118,6 +127,10 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setAutoCoolant);
     // Set a password to join the ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setControlCode);
+    // Callback when this ship launches a probe.
+    // Returns the launching PlayerSpaceship and launched ScanProbe.
+    // Example: player:onProbeLaunch(trackProbe)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeLaunch);
 }
 
 float PlayerSpaceship::system_power_user_factor[] = {
@@ -206,6 +219,7 @@ PlayerSpaceship::PlayerSpaceship()
     shield_calibration_delay = 0.0;
     auto_repair_enabled = false;
     auto_coolant_enabled = false;
+    max_coolant = max_coolant_per_system;
     activate_self_destruct = false;
     self_destruct_countdown = 0.0;
     scanning_delay = 0.0;
@@ -237,6 +251,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&shields_active);
     registerMemberReplication(&shield_calibration_delay, 0.5);
     registerMemberReplication(&auto_repair_enabled);
+    registerMemberReplication(&max_coolant);
     registerMemberReplication(&auto_coolant_enabled);
     registerMemberReplication(&beam_system_target);
     registerMemberReplication(&comms_state);
@@ -299,6 +314,10 @@ PlayerSpaceship::PlayerSpaceship()
     addToShipLog("Start of log", colorConfig.log_generic);
 }
 
+PlayerSpaceship::~PlayerSpaceship()
+{
+}
+
 void PlayerSpaceship::update(float delta)
 {
     // If we're flashing the screen for hull damage, tick the fade-out.
@@ -336,10 +355,9 @@ void PlayerSpaceship::update(float delta)
                 energy_level += energy_request;
         }
 
-        // If a shipTemplateBasedObject isn't a ship and is allowed to share
-        // energy with docked ships, also resupply docked ships' scan probes.
-        // A bit hackish for now.
-        if (docked_with_template_based && docked_with_template_based->shares_energy_with_docked && !docked_with_ship)
+        // If a shipTemplateBasedObject and is allowed to restock
+        // scan probes with docked ships.
+        if (docked_with_template_based && docked_with_template_based->restocks_scan_probes)
         {
             if (scan_probe_stock < max_scan_probes)
             {
@@ -472,6 +490,7 @@ void PlayerSpaceship::update(float delta)
             ExplosionEffect* e = new ExplosionEffect();
             e->setSize(1000.0f);
             e->setPosition(getPosition());
+            e->setRadarSignatureInfo(0.0, 0.4, 0.4);
 
             DamageInfo info(this, DT_Kinetic, getPosition());
             SpaceObject::damageArea(getPosition(), 500, 30, 60, info, 0.0);
@@ -528,10 +547,10 @@ void PlayerSpaceship::update(float delta)
                     if (!self_destruct_code_confirmed[n])
                         do_self_destruct = false;
 
-                // Then start and announce the 10-second countdown.
+                // Then start and announce the countdown.
                 if (do_self_destruct)
                 {
-                    self_destruct_countdown = 10.0f;
+                    self_destruct_countdown = PreferencesManager::get("self_destruct_countdown", "10").toFloat();
                     playSoundOnMainScreen("vocal_self_destruction.wav");
                 }
             }else{
@@ -547,6 +566,7 @@ void PlayerSpaceship::update(float delta)
                         ExplosionEffect* e = new ExplosionEffect();
                         e->setSize(1000.0f);
                         e->setPosition(getPosition() + sf::rotateVector(sf::Vector2f(0, random(0, 500)), random(0, 360)));
+                        e->setRadarSignatureInfo(0.0, 0.6, 0.6);
                     }
 
                     DamageInfo info(this, DT_Kinetic, getPosition());
@@ -634,8 +654,41 @@ void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
     SpaceShip::takeHullDamage(damage_amount, info);
 }
 
+void PlayerSpaceship::setMaxCoolant(float coolant)
+{
+    max_coolant = std::max(coolant, 0.0f);
+    float total_coolant = 0;
+
+    for(int n = 0; n < SYS_COUNT; n++)
+    {
+        if (!hasSystem(ESystem(n))) continue;
+
+        total_coolant += systems[n].coolant_request;
+    }
+
+    if (total_coolant > max_coolant)
+    {
+        for(int n = 0; n < SYS_COUNT; n++)
+        {
+            if (!hasSystem(ESystem(n))) continue;
+
+            systems[n].coolant_request *= max_coolant / total_coolant;
+        }
+    } else {
+        if (total_coolant > 0)
+        {
+            for(int n = 0; n < SYS_COUNT; n++)
+            {
+                if (!hasSystem(ESystem(n))) continue;
+                systems[n].coolant_request = std::min(systems[n].coolant_request * max_coolant / total_coolant, (float) max_coolant_per_system);
+            }
+        }
+    }
+}
+
 void PlayerSpaceship::setSystemCoolantRequest(ESystem system, float request)
 {
+    request = std::max(0.0f, std::min(request, std::min((float) max_coolant_per_system, max_coolant)));
     // Set coolant levels on a system.
     float total_coolant = 0;
     int cnt = 0;
@@ -664,7 +717,7 @@ void PlayerSpaceship::setSystemCoolantRequest(ESystem system, float request)
                 if (!hasSystem(ESystem(n))) continue;
                 if (n == system) continue;
 
-                systems[n].coolant_request *= (max_coolant - request) / total_coolant;
+                systems[n].coolant_request = std::min(systems[n].coolant_request * (max_coolant - request) / total_coolant, (float) max_coolant_per_system);
             }
         }
     }
@@ -1439,6 +1492,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             p->setPosition(getPosition());
             p->setTarget(target);
             p->setOwner(this);
+            if (on_probe_launch.isSet())
+            {
+                on_probe_launch.call(P<PlayerSpaceship>(this), P<ScanProbe>(p));
+            }
             scan_probe_stock--;
         }
         break;
@@ -1855,6 +1912,11 @@ void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f posit
 string PlayerSpaceship::getExportLine()
 {
     return "PlayerSpaceship():setTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" + getScriptExportModificationsOnTemplate();;
+}
+
+void PlayerSpaceship::onProbeLaunch(ScriptSimpleCallback callback)
+{
+    this->on_probe_launch = callback;
 }
 
 #ifndef _MSC_VER

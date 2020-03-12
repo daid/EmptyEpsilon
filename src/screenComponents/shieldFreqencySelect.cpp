@@ -7,18 +7,24 @@
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_progressbar.h"
+#include "gui/gui2_autolayout.h"
 
 GuiShieldFrequencySelect::GuiShieldFrequencySelect(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
     (new GuiShieldsEnableButton(this, "SHIELDS_ENABLE"))->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, 50);
-    calibrate_button = new GuiButton(this, "", "Calibrate", [this]() {
+    GuiElement* calibration_row = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutHorizontalRightToLeft);
+    calibration_row->setPosition(0, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, 50);
+
+    new_frequency = new GuiSelector(calibration_row, "", nullptr);
+    new_frequency->setSize(120, 50);
+
+    calibrate_button = new GuiButton(calibration_row, "", "Calibrate", [this]() {
         if (my_spaceship)
             my_spaceship->commandSetShieldFrequency(new_frequency->getSelectionIndex());
     });
-    calibrate_button->setPosition(0, 50, ATopLeft)->setSize(280 * 0.55, 50);
-    new_frequency = new GuiSelector(this, "", nullptr);
-    new_frequency->setPosition(280 * 0.55, 50, ATopLeft)->setSize(280 * 0.45, 50);
+    calibrate_button->setSize(GuiElement::GuiSizeMax, 50);
+
     for(int n=0; n<=SpaceShip::max_frequency; n++)
     {
         new_frequency->addEntry(frequencyToString(n), string(n));

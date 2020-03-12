@@ -63,6 +63,9 @@ void Mesh::render()
         glNormalPointer(GL_FLOAT, sizeof(float) * (3 * 2 + 2), (void*)offsetof(MeshVertex, normal));
         glTexCoordPointer(2, GL_FLOAT, sizeof(float) * (3 * 2 + 2), (void*)offsetof(MeshVertex, uv));
         glDrawArrays(GL_TRIANGLES, 0, vertexCount);
+        glDisableClientState(GL_VERTEX_ARRAY);
+        glDisableClientState(GL_NORMAL_ARRAY);
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }else{
         glEnableClientState(GL_VERTEX_ARRAY);
@@ -73,6 +76,9 @@ void Mesh::render()
         glNormalPointer(GL_FLOAT, sizeof(float) * (3 * 2 + 2), &vertices[0].normal[0]);
         glTexCoordPointer(2, GL_FLOAT, sizeof(float) * (3 * 2 + 2), &vertices[0].uv[0]);
         glDrawArrays(GL_TRIANGLES, 0, vertexCount);
+        glDisableClientState(GL_VERTEX_ARRAY);
+        glDisableClientState(GL_NORMAL_ARRAY);
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
     }
 #endif//FEATURE_3D_RENDERING
 }
@@ -85,7 +91,7 @@ sf::Vector3f Mesh::randomPoint()
     sf::Vector3f v0 = sf::Vector3f(vertices[idx].position[0], vertices[idx].position[1], vertices[idx].position[2]);
     sf::Vector3f v1 = sf::Vector3f(vertices[idx+1].position[0], vertices[idx+1].position[1], vertices[idx+1].position[2]);
     sf::Vector3f v2 = sf::Vector3f(vertices[idx+2].position[0], vertices[idx+2].position[1], vertices[idx+2].position[2]);
-    
+
     float f1 = random(0.0, 1.0);
     float f2 = random(0.0, 1.0);
     if (f1 + f2 > 1.0f)

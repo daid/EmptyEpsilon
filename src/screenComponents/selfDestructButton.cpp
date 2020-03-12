@@ -1,4 +1,5 @@
 #include "selfDestructButton.h"
+#include "gui/colorConfig.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 
@@ -12,7 +13,7 @@ GuiSelfDestructButton::GuiSelfDestructButton(GuiContainer* owner, string id)
         confirm_button->show();
         cancel_button->show();
     });
-    activate_button->setIcon("gui/icons/self-destruct")->setSize(GuiElement::GuiSizeMax, 50);
+    activate_button->setColors(colorConfig.button_red)->setIcon("gui/icons/self-destruct")->setSize(GuiElement::GuiSizeMax, 50);
 
     confirm_button = new GuiButton(this, id + "_CONFIRM", "Confirm!", [this](){
         confirm_button->hide();

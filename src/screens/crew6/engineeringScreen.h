@@ -13,6 +13,7 @@ class GuiImage;
 class GuiArrow;
 class GuiToggleButton;
 class GuiProgressbar;
+class GuiProgressSlider;
 
 class EngineeringScreen : public GuiOverlay
 {
@@ -24,11 +25,12 @@ private:
     GuiKeyValueDisplay* hull_display;
     GuiKeyValueDisplay* front_shield_display;
     GuiKeyValueDisplay* rear_shield_display;
+    GuiKeyValueDisplay* coolant_display;
     GuiLabel* power_label;
     GuiSlider* power_slider;
     GuiLabel* coolant_label;
     GuiSlider* coolant_slider;
-    
+
     class SystemRow
     {
     public:
@@ -39,8 +41,8 @@ private:
         GuiProgressbar* heat_bar;
         GuiArrow* heat_arrow;
         GuiImage* heat_icon;
-        GuiProgressbar* power_bar;
-        GuiProgressbar* coolant_bar;
+        GuiProgressSlider* power_bar;
+        GuiProgressSlider* coolant_bar;
     };
     std::vector<SystemRow> system_rows;
     GuiAutoLayout* system_effects_container;

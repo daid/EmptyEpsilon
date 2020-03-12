@@ -10,6 +10,9 @@
 /// A mine object. Simple, effective, deadly.
 REGISTER_SCRIPT_SUBCLASS(Mine, SpaceObject)
 {
+  // Set a function that will be called if the mine explodes.
+  // First argument is the mine, second argument is the mine's owner/instigator (or nil).
+  REGISTER_SCRIPT_CLASS_FUNCTION(Mine, onDestruction);
 }
 
 REGISTER_MULTIPLAYER_CLASS(Mine, "Mine");
@@ -110,5 +113,21 @@ void Mine::explode()
     e->setSize(blastRange);
     e->setPosition(getPosition());
     e->setOnRadar(true);
+    e->setRadarSignatureInfo(0.0, 0.0, 0.2);
+
+    if (on_destruction.isSet())
+    {
+        if (info.instigator)
+        {
+            on_destruction.call(P<Mine>(this), P<SpaceObject>(info.instigator));
+        }else{
+            on_destruction.call(P<Mine>(this));
+        }
+    }
     destroy();
+}
+
+void Mine::onDestruction(ScriptSimpleCallback callback)
+{
+    this->on_destruction = callback;
 }

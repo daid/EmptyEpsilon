@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
 
@@ -28,15 +29,19 @@ GameGlobalInfo::GameGlobalInfo()
     global_message_timeout = 0.0;
     player_warp_jump_drive_setting = PWJ_ShipDefault;
     scanning_complexity = SC_Normal;
+    hacking_difficulty = 2;
+    hacking_games = HG_All;
     long_range_radar_range = 30000;
     use_beam_shield_frequencies = true;
     use_system_damage = true;
     allow_main_screen_tactical_radar = true;
     allow_main_screen_long_range_radar = true;
-    
+
     intercept_all_comms_to_gm = false;
 
     registerMemberReplication(&scanning_complexity);
+    registerMemberReplication(&hacking_difficulty);
+    registerMemberReplication(&hacking_games);
     registerMemberReplication(&global_message);
     registerMemberReplication(&global_message_timeout, 1.0);
     registerMemberReplication(&banner_string);
@@ -50,6 +55,10 @@ GameGlobalInfo::GameGlobalInfo()
     for(unsigned int n=0; n<factionInfo.size(); n++)
         reputation_points.push_back(0);
     registerMemberReplication(&reputation_points, 1.0);
+}
+
+GameGlobalInfo::~GameGlobalInfo()
+{
 }
 
 P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)
@@ -161,6 +170,9 @@ void GameGlobalInfo::startScenario(string filename)
 {
     reset();
 
+    i18n::reset();
+    i18n::load("locale/" + PreferencesManager::get("language", "en") + ".po");
+    i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
     P<ScriptObject> script = new ScriptObject();
     script->run(filename);
     engine->registerObject("scenario", script);
@@ -318,7 +330,7 @@ public:
     : script_name(script_name), variation(variation)
     {
     }
-    
+
     virtual void update(float delta)
     {
         gameGlobalInfo->variation = variation;
@@ -353,6 +365,24 @@ static int shutdownGame(lua_State* L)
 /// Shutdown the game.
 /// Calling this function will close the game. Mainly usefull for a headless server setup.
 REGISTER_SCRIPT_FUNCTION(shutdownGame);
+
+static int pauseGame(lua_State* L)
+{
+    engine->setGameSpeed(0.0);
+    return 0;
+}
+/// Pause the game
+/// Calling this function will pause the game. Mainly usefull for a headless server setup.
+REGISTER_SCRIPT_FUNCTION(pauseGame);
+
+static int unpauseGame(lua_State* L)
+{
+    engine->setGameSpeed(1.0);
+    return 0;
+}
+/// Pause the game
+/// Calling this function will pause the game. Mainly usefull for a headless server setup. As the scenario functions are not called when paused.
+REGISTER_SCRIPT_FUNCTION(unpauseGame);
 
 static int getLongRangeRadarRange(lua_State* L)
 {

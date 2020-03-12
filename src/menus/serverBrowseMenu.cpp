@@ -1,6 +1,7 @@
 #include "main.h"
 #include "serverBrowseMenu.h"
 #include "joinServerMenu.h"
+#include "preferenceManager.h"
 
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_button.h"
@@ -11,10 +12,11 @@
 ServerBrowserMenu::ServerBrowserMenu(SearchSource source)
 {
     scanner = new ServerScanner(VERSION_NUMBER);
+
     if (source == Local)
         scanner->scanLocalNetwork();
     else
-        scanner->scanMasterServer("http://daid.eu/ee/list.php");
+        scanner->scanMasterServer(PreferencesManager::get("registry_list_url", "http://daid.eu/ee/list.php"));
 
     new GuiOverlay(this, "", colorConfig.background);
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
@@ -28,7 +30,7 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source)
         if (index == 0)
             scanner->scanLocalNetwork();
         else
-            scanner->scanMasterServer("http://daid.eu/ee/list.php");
+            scanner->scanMasterServer(PreferencesManager::get("registry_list_url", "http://daid.eu/ee/list.php"));
     });
     lan_internet_selector->setOptions({"LAN", "Internet"})->setSelectionIndex(source == Local ? 0 : 1)->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
 
@@ -44,10 +46,13 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source)
         new JoinServerScreen(lan_internet_selector->getSelectionIndex() == 0 ? Local : Internet, sf::IpAddress(text));
         destroy();
     });
-    
     server_list = new GuiListbox(this, "SERVERS", [this](int index, string value) {
         manual_ip->setText(value);
     });
+    if (PreferencesManager::get("last_server", "") != "") {
+        server_list->addEntry("Last Session (" + PreferencesManager::get("last_server", "")  + ")",
+            PreferencesManager::get("last_server", ""));
+    }
     scanner->addCallbacks([this](sf::IpAddress address, string name) {
         //New server found
         server_list->addEntry(name + " (" + address.toString() + ")", address.toString());

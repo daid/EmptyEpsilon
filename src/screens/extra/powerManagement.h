@@ -7,10 +7,18 @@
 class GuiPanel;
 class GuiSlider;
 class GuiProgressbar;
+class GuiKeyValueDisplay;
 
 class PowerManagementScreen : public GuiOverlay
 {
 private:
+    GuiKeyValueDisplay* energy_display;
+    GuiKeyValueDisplay* coolant_display;
+
+    float previous_energy_measurement;
+    float previous_energy_level;
+    float average_energy_delta;
+
     class SystemRow
     {
     public:

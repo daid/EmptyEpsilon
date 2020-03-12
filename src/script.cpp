@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "gameGlobalInfo.h"
 #include "script.h"
 
@@ -68,3 +69,17 @@ static int require(lua_State* L)
 /// require(filename)
 /// Run the script with the given filename in the same context as the current running script.
 REGISTER_SCRIPT_FUNCTION(require);
+
+static int _(lua_State* L)
+{
+    auto str_1 = luaL_checkstring(L, 1);
+    auto str_2 = luaL_optstring(L, 2, nullptr);
+    if (str_2)
+        lua_pushstring(L, tr(str_2).c_str());
+    else
+        lua_pushstring(L, tr(str_1).c_str());
+    return 1;
+}
+/// _(string)
+/// Translate the given string with the user configured language.
+REGISTER_SCRIPT_FUNCTION(_);

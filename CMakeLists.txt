@@ -13,7 +13,7 @@ if(NOT IS_ABSOLUTE "${SERIOUS_PROTON_DIR}")
 endif()
 
 if(CMAKE_BUILD_TYPE MATCHES Debug)
-	add_compile_definitions(DEBUG)
+	add_definitions(-DDEBUG)
 endif(CMAKE_BUILD_TYPE MATCHES Debug)
 
 if(ENABLE_CRASH_LOGGER)
@@ -100,6 +100,7 @@ set(SOURCES
 	src/scenarioInfo.cpp
 	src/repairCrew.cpp
 	src/GMScriptCallback.cpp
+	src/GMMessage.cpp
 	src/tutorialGame.cpp
 	src/menus/joinServerMenu.cpp
 	src/menus/serverBrowseMenu.cpp
@@ -126,6 +127,7 @@ set(SOURCES
 	src/screens/extra/damcon.cpp
 	src/screens/extra/powerManagement.cpp
 	src/screens/extra/databaseScreen.cpp
+	src/screens/extra/commsScreen.cpp
 	src/screens/extra/shipLogScreen.cpp
 	src/screens/gm/gameMasterScreen.cpp
 	src/screens/gm/objectCreationView.cpp
@@ -174,6 +176,9 @@ set(SOURCES
 	src/screenComponents/hackingDialog.cpp
 	src/screenComponents/customShipFunctions.cpp
 	src/screenComponents/scrollingBanner.cpp
+	src/screenComponents/lightsOut.cpp
+	src/screenComponents/miniGame.cpp
+	src/screenComponents/mineSweeper.cpp
 	src/gui/colorConfig.cpp
 	src/gui/hotkeyConfig.cpp
 	src/gui/joystickConfig.cpp
@@ -192,6 +197,7 @@ set(SOURCES
 	src/gui/gui2_arrowbutton.cpp
 	src/gui/gui2_entrylist.cpp
 	src/gui/gui2_progressbar.cpp
+	src/gui/gui2_progressslider.cpp
 	src/gui/gui2_scrolltext.cpp
 	src/gui/gui2_advancedscrolltext.cpp
 	src/gui/gui2_button.cpp
@@ -204,6 +210,11 @@ set(SOURCES
 	src/gui/gui2_container.cpp
 	src/gui/gui2_panel.cpp
 	src/gui/gui2_overlay.cpp
+	src/spaceObjects/missiles/missileWeapon.cpp
+	src/spaceObjects/missiles/EMPMissile.cpp
+	src/spaceObjects/missiles/homingMissile.cpp
+	src/spaceObjects/missiles/hvli.cpp
+	src/spaceObjects/missiles/nuke.cpp
 	src/spaceObjects/spaceStation.cpp
 	src/spaceObjects/spaceship.cpp
 	src/spaceObjects/wormHole.cpp
@@ -214,17 +225,12 @@ set(SOURCES
 	src/spaceObjects/asteroid.cpp
 	src/spaceObjects/mine.cpp
 	src/spaceObjects/blackHole.cpp
-	src/spaceObjects/missileWeapon.cpp
-	src/spaceObjects/EMPMissile.cpp
 	src/spaceObjects/playerSpaceship.cpp
 	src/spaceObjects/beamEffect.cpp
-	src/spaceObjects/homingMissile.cpp
-	src/spaceObjects/hvli.cpp
 	src/spaceObjects/electricExplosionEffect.cpp
 	src/spaceObjects/supplyDrop.cpp
 	src/spaceObjects/warpJammer.cpp
 	src/spaceObjects/scanProbe.cpp
-	src/spaceObjects/nuke.cpp
 	src/spaceObjects/artifact.cpp
 	src/spaceObjects/shipTemplateBasedObject.cpp
 	src/spaceObjects/planet.cpp
@@ -265,6 +271,7 @@ foreach(SP_SOURCE
 	src/multiplayer_server_scanner.cpp
 	src/networkRecorder.cpp
 	src/multiplayer_server.cpp
+	src/multiplayer_proxy.cpp
 	src/scriptInterfaceMagic.cpp
 	src/Renderable.cpp
 	src/Updatable.cpp
@@ -275,6 +282,8 @@ foreach(SP_SOURCE
 	src/scriptInterface.cpp
 	src/event.cpp
 	src/multiplayer.cpp
+	src/P.cpp
+	src/i18n.cpp
 	src/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp
 	src/Box2D/Dynamics/Contacts/b2ContactSolver.cpp
 	src/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp
@@ -374,7 +383,11 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework OpenGL -framework Foundation")
 endif()
 
-add_executable(${EXECUTABLE_NAME} MACOSX_BUNDLE ${SOURCES})
+if(ANDROID)
+    add_library(${EXECUTABLE_NAME} SHARED ${SOURCES})
+else()
+    add_executable(${EXECUTABLE_NAME} MACOSX_BUNDLE ${SOURCES})
+endif()
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
 include_directories(${SERIOUS_PROTON_DIR}/src)
@@ -385,11 +398,16 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 find_package(SFML 2.3 REQUIRED system window graphics network audio)
 include_directories(${SFML_INCLUDE_DIR})
 target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
+add_definitions(-DSFML_NO_DEPRECATED_WARNINGS) # SFML 2.5 gives deprication warnings on a few functions we use. But we maintain 2.3 compatibility, so ignore those warnings.
 
 # Setup OpenGl
-find_package(OpenGL REQUIRED)
-include_directories(${OPENGL_INCLUDE_DIR})
-target_link_libraries(${EXECUTABLE_NAME} ${OPENGL_LIBRARIES})
+if(ANDROID)
+  target_link_libraries(${EXECUTABLE_NAME} GLESv1_CM)
+else()
+  find_package(OpenGL REQUIRED)
+  include_directories(${OPENGL_INCLUDE_DIR})
+  target_link_libraries(${EXECUTABLE_NAME} ${OPENGL_LIBRARIES})
+endif()
 
 # Some magical Win 32 stuff
 if(WIN32)
@@ -398,6 +416,9 @@ if(WIN32)
     include_directories(${DRMINGW_ROOT}/include/)
     target_link_libraries(${EXECUTABLE_NAME} exchndl)
   endif()
+elseif(ANDROID)
+  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--whole-archive ${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-main.a -Wl,--no-whole-archive")
+  target_link_libraries(${EXECUTABLE_NAME} log android EGL)
 elseif(APPLE)
   set_target_properties(${EXECUTABLE_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/osx/MacOSXBundleInfo.plist.in)
   set_target_properties(${EXECUTABLE_NAME} PROPERTIES MACOSX_BUNDLE_ICON_FILE "${EXECUTABLE_NAME}.icns")
@@ -413,12 +434,12 @@ if(WIN32)
   install(FILES ${MINGW_STDCPP_DLL} ${MINGW_LIBGCC_DLL} ${MINGW_PTHREAD_DLL} DESTINATION .)
   install(FILES /usr/i686-w64-mingw32/lib/libwinpthread-1.dll DESTINATION .)
   install(FILES ${SFML_ROOT}/bin/OpenAL32.dll DESTINATION .)
-  install(FILES ${SFML_ROOT}/bin/libFLAC-8.dll DESTINATION .)
-  install(FILES ${SFML_ROOT}/bin/libjpeg-62.dll DESTINATION .)
-  install(FILES ${SFML_ROOT}/bin/libogg-0.dll DESTINATION .)
-  install(FILES ${SFML_ROOT}/bin/libvorbis-0.dll DESTINATION .)
-  install(FILES ${SFML_ROOT}/bin/libvorbisenc-2.dll DESTINATION .)
-  install(FILES ${SFML_ROOT}/bin/libvorbisfile-3.dll DESTINATION .)
+  #install(FILES ${SFML_ROOT}/bin/libFLAC-8.dll DESTINATION .)
+  #install(FILES ${SFML_ROOT}/bin/libjpeg-62.dll DESTINATION .)
+  #install(FILES ${SFML_ROOT}/bin/libogg-0.dll DESTINATION .)
+  #install(FILES ${SFML_ROOT}/bin/libvorbis-0.dll DESTINATION .)
+  #install(FILES ${SFML_ROOT}/bin/libvorbisenc-2.dll DESTINATION .)
+  #install(FILES ${SFML_ROOT}/bin/libvorbisfile-3.dll DESTINATION .)
   install(FILES ${SFML_ROOT}/bin/sfml-audio-2.dll DESTINATION .)
   install(FILES ${SFML_ROOT}/bin/sfml-graphics-2.dll DESTINATION .)
   install(FILES ${SFML_ROOT}/bin/sfml-network-2.dll DESTINATION .)
@@ -442,6 +463,8 @@ elseif(APPLE)
   install(DIRECTORY resources DESTINATION "EmptyEpsilon.app/Contents/Resources")
   install(DIRECTORY scripts DESTINATION "EmptyEpsilon.app/Contents/Resources")
   install(DIRECTORY packs DESTINATION "EmptyEpsilon.app/Contents/Resources")
+elseif(ANDROID)
+  android_apk(EmptyEpsilon)
 else()
   include(GNUInstallDirs)
   install(DIRECTORY resources DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/emptyepsilon/")
@@ -452,10 +475,30 @@ endif()
 
 find_package(PythonInterp)
 if(PYTHONINTERP_FOUND)
-  add_custom_target(scriptdoc ALL ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/compile_script_docs.py ${CMAKE_BINARY_DIR}/script_reference.html WORKING_DIRECTORY ${CMAKE_SOURCE_DIR} COMMENT "Building script reference documentation.")
+  add_custom_command(
+        OUTPUT ${CMAKE_BINARY_DIR}/script_reference.html
+        COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/compile_script_docs.py ${CMAKE_BINARY_DIR}/script_reference.html
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        COMMENT "Building script reference documentation.")
+  add_custom_target(script_reference ALL DEPENDS ${CMAKE_BINARY_DIR}/script_reference.html)
   install(FILES ${CMAKE_BINARY_DIR}/script_reference.html DESTINATION .)
 endif()
 
+add_custom_target(update_locale
+	COMMAND xgettext --keyword=tr:1c,2 --keyword=tr:1 --keyword=trMark:1c,2 --keyword=trMark:1 --omit-header -j -d resources/locale/en ${SOURCES}
+	COMMAND xgettext --keyword=_:1c,2 --keyword=_:1 --omit-header -j -d resources/locale/en scripts/shipTemplates_*.lua scripts/comms_ship.lua scripts/comms_station.lua scripts/comms_supply_drop.lua scripts/factionInfo.lua scripts/science_db.lua
+	COMMAND xgettext --keyword=_:1c,2 --keyword=_:1 --omit-header -j -d resources/locale/tutorial.en scripts/tutorial_*.lua
+	WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
 set(CPACK_PACKAGE_EXECUTABLES ${EXECUTABLE_NAME})
-set(CPACK_GENERATOR "ZIP")
+set(CPACK_PACKAGE_FILE_NAME "${CMAKE_PROJECT_NAME}")
+set(CPACK_PACKAGE_CONTACT "https://github.com/daid/")
+if(NOT DEFINED CPACK_GENERATOR)
+  if(WIN32)
+    set(CPACK_GENERATOR "ZIP")
+  elseif(UNIX)
+    set(CPACK_GENERATOR "DEB")
+    set(CPACK_DEBIAN_PACKAGE_DEPENDS "libsfml-dev")
+  endif()
+endif()
 include(CPack)

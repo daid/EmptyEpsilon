@@ -6,10 +6,12 @@
     //Including ioctl or termios conflicts with asm/termios.h which we need for TCGETS2. So locally define the ioctl and tcsendbreak functions. Yes, it's dirty, but it works.
     //#include <sys/ioctl.h>
     //#include <termios.h>
+#ifndef ANDROID
     extern "C" {
     extern int ioctl (int __fd, unsigned long int __request, ...) __THROW;
     extern int tcsendbreak (int __fd, int __duration) __THROW;
     }
+#endif
     #include <asm/termios.h>
     #include <fcntl.h>
     #include <unistd.h>
@@ -423,7 +425,7 @@ void SerialPort::sendBreak()
     Sleep(1);
     ClearCommBreak(handle);
 #endif
-#if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
+#if (defined(__gnu_linux__) && !defined(ANDROID)) || (defined(__APPLE__) && defined(__MACH__))
     tcsendbreak(handle, 0);
 #endif
 }

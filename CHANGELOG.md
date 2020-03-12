@@ -1,15 +1,240 @@
 # Change Log
 
-## [Unreleased]
+## [...]
 
-- Nothing
+### Added
+
+- `ScanProbe:onExpiration`, `ScanProbe:onDestruction`, and
+  `PlayerSpaceship:onProbeLaunch` callback scripting functions.
+- Scan object and cycle selected object hotkeys added to Science.
+- `setColors()` and `getColors()` GUI functions, and R/G/B color profiles, for
+  GuiButtons.
+- `SpaceShip:getDynamicRadarSignatureGravity()`, `...Electrical()`, and
+  `...Biological()` scripting functions.
+
+### Changed
+
+- Moved shield calibration hotkey configs in options.ini from Engineering to
+  Weapons. **This is a breaking change** if these hotkeys are set in
+  options.ini:
+  - `SHIELD_CAL_INC`
+  - `SHIELD_CAL_DEC`
+  - `SHIELD_CAL_START`
+
+## [2020-01-15]
+
+### Added
+
+- Crucible corvette-class popper ship.
+- Maverick corvette-class gunner ship.
+- Terran Stellar Navy (TSN), United Stellar Navy (USN), and Celestial Unified
+  Fleet (CUF) factions.
+- `SpaceShip:setScanState()` and `SpaceShip:setScanStateByFaction()` scripting
+  functions.
+- `Planet:getPlanetRadius()` and `Planet:getCollisionSize()` scripting
+  functions.
+- `Mine:onDestruction()` callback scripting function.
+- Planet radius in the game state log and viewer, and to GM screen script
+  exports.
+- Standalone Ship's Log view, moved from the Single Pilot station to Extras.
+- `registry_registration_url` and `registry_list_url` settings in options.ini,
+  to point at a custom Internet master registry server. Only `http://` URLs are
+  allowed. For an example master server, see the `masterserver` directory in
+  `daid/SeriousProton`.
+
+### Changed
+
+- _Shoreline_ and _Borderline Fever_ scenarios refactored to fix errors and add
+  enhancements.
+- Slowed down Hue lighting updates and added transition channel.
+- Removed an extraneous ZIP from the build.
+- Ship and target passed to the comms script interface.
+
+### Fixed
+
+- Crashes when the server port is already in use.
+- Missing radar trace images for ships.
+- Typos in scenarios.
+- Carrier ships (ships that are docking targets) attempting to dock with
+  themselves, preventing them from being able to dock with stations or other
+  docking targets.
+- Crashes caused by excessive recursion in the AI path planner.
+- Game completion condition for the Minesweeper hacking game.
+
+## [2019-11-01]
+
+### Fixed
+
+- Downgrade drmingw from 0.9.2 to 0.8.2 in order to avoid DLL issues on Windows 7.
+
+## [2019-10-28]
+
+### Added
+
+- Hacking minigame refactored with difficulty selector. #683
+- Engineering can mitigate and repair hacking.
+- `BeamEffect` scripting functions:
+  - `BeamEffect:setSource()` and `setTarget()` for targeting.
+  - `setTexture()` and `setRing()` for visualization.
+  - `setBeamFireSound()` and `setBeamFireSoundPower()` for audio.
+  - `setDuration()`
+- `SpaceShip:getBeamFrequency()`, `PlayerSpaceship:getBeamSystemTarget()`, and `PlayerSpaceship:getBeamSystemTargetName()` scripting functions.
+- `self_destruct_countdown` length in seconds is now configurable in options.ini.
+- `ship_window_flags` setting in options.ini to configure space dust, headings, and callsigns on window views.
+- _Allies and Enemies_ scenario.
+
+### Changed
+
+- Improve missiles:
+  - Missiles can have a size.
+  - Missile size affects speed, turn rate, and radar icon size.
+  - Damage and particle effects can now scale.
+  - Ships can have missile tube sizes.
+- Last server connection is remembered after being disconnected. #624
+- "All" tutorial is listed first. #698
+- _Borderline Fever_ scenario updated to use new scripting features.
+- Circles designating warp jammer areas are now red if controlled by an enemy or orange if not. #704
+
+## [2019-09-10]
+
+### Changed
+
+- Custom ship function caption updates can now refresh.
+
+### Fixed
+
+- Build the Windows package in CI.
+
+## [2019-09-09]
+
+### Added
+
+- Progress sliders as a GUI control.
+- `setRestocksScanProbes()` and getter scripting functions for configuring ships and stations.
+- `setMaxCoolant()` and getter scripting functions to modify the total coolant available to Engineering/Power Management.
+- GM screen allows modifier keys:
+  - `Shift` adds objects to the current selection
+  - `Ctrl` only selects stations and ships
+  - `Alt` only selects objects from the same faction as the faction selector
+- GM screen message overlay.
+- tinyci implementation.
+
+### Changed
+
+- Can press Enter to connect after entering a server's IP address. #627
+- Passwords are no longer case sensitive. #657
+- Password field focus point is now visible. #626
+- F1 help overlay shows modifier keys.
+
+### Fixed
+
+- Prevent compilation failures in Hue lights counter. #648
+- Sun appears correctly on clients in the _Empty Space_ scenario. #651
+- Avoid crashes when a ship is destroyed on the same tick as firing a beam. #622
+- Fix a distance calculation issue.
+- Copied ship templates report correct impulse acceleration and combat maneuver stats.
+- Fix GL blackout issue on main screen and ship windows. #649
+
+### Removed
+
+- Code::Blocks project file removed in favor of CMake.
+
+## [2019-05-21]
+
+### Added
+
+- _Borderline Fever_ scenario.
+- _Capture the Flag_ scenario.
+- _Escape_ scenario.
+- More features for Hue light controls.
+- `warp_post_processor_disable` flag in options.ini to disable warp effects. #636
+
+### Changed
+
+- Remove headings and callsigns from ship window views.
+- Clarify dangers and variation descriptions in the _What the Dickens_ scenario.
+- Convert scenario audio to OGG format.
+- Code::Blocks project file updated.
+- Add Maverick ship type and minor fixes for the _Defender Hunter_ scenario.
+
+### Fixed
+
+- Avoid a crash when calling `isEnemy()` or `isFriendly()` on a destroyed object.
+- Planets can no longer hide in nebulas.
+- Rear shield info no longer shows front shield damage reduction.
+- Typos in scenarios.
+
+## [2019-01-19]
+
+### Added
+
+- _What the Dickens_ scenario and audio resources.
+- `getFiringSolution()` script method for calculating missile trajectories.
+- Additional weapon sounds.
+- `onTakingDamage()` and `onDestruction()` scripting event listeners added to `shipTemplateBasedObject`s and warp jammers.
+- `onTeleportation()` scripting event listener added to wormholes.
+
+### Changed
+
+- GM actions management refactored.
+- Improve _Defender Hunter_ scenario behaviors when played on a headless server without a GM pause.
+- `onPickUpCallback()` script function renamed to `onPickUp()` and extended to SupplyDrop objects.
+
+### Fixed
+
+- Button state issues.
+- Systems actually degrade when energy drops to critical levels.
+- Issues with the _Birth of Atlantis_ scenario, including a potentially broken trigger and larger warp jammer ranges. #584
+- Serial port configuration on Linux.
+
+## [2018-11-16]
+
+### Added
+
+- _Carriers and turrets_ scenario and ship resources.
+- _Defender Hunter_ scenario and audio resources.
+- _Patrol Duty_ scenario and audio resources.
+- _Close the Gaps_ scenario and ship resources.
+- `Wormhole:getTargetPosition()` scripting function.
+
+### Changed
+
+- Upgrade SFML to 2.5.
+- Update CMakeLists.
+- `Artifact` object pickups can emit a callback.
+
+### Fixed
+
+- Improved display of disabled system damage.
+- Typos in tutorials and database.
+- Ships in formation don't unintentionally dock with stations.
+- _Beacon_ scenario now uses `mission_state`. #582
+- GL state lifecycle bug.
+
+## [2018-09-06]
+
+### Added
+
+- `Zone()` scripting function for colored, labeled zones. #529
+- _Shoreline_ scenario.
+- _Fermi 500_ scenario.
+- Callsigns for GM comms.
+- `variation` scenario setting for headless servers.
+
+### Fixed
+
+- Small bugfix on finding MINGW DLLs.
+- DMX: Fix E1.31 DMP layer packet octet 118 value.
+- Typos in scenarios.
+- Custom button placement in station GUIs.
+- Radar overlay on macOS no longer blacked out.
 
 ## [2018-02-15]
 
 ### Added
 
 - _Deliver Ambassador Gremus_ scenario.
-- Scripts can CpuShip orders.
+- Scripts can set CpuShip orders.
 
 ### Changed
 
