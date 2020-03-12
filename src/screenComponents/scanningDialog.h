@@ -13,7 +13,7 @@ class GuiButton;
 class GuiScanningDialog : public GuiElement
 {
 private:
-    static constexpr int max_sliders = EScanningComplexity::SC_MAX;
+    static constexpr int max_sliders = 4;
     static constexpr float lock_delay = 2.0f;
 
     GuiPanel* box;
