@@ -101,10 +101,13 @@ MainMenu::MainMenu()
 
     if (InputHandler::touch_screen)
     {
-        (new GuiButton(this, "TOUCH_CALIB", tr("Calibrate\nTouchscreen"), [this]() {
+        GuiButton* touch_calib = new GuiButton(this, "TOUCH_CALIB", "", [this]() {
             destroy();
             new MouseCalibrator("");
-        }))->setPosition(sf::Vector2f(-50, -50), ABottomRight)->setSize(300, 100);
+        });
+        touch_calib->setPosition(sf::Vector2f(-50, -50), ABottomRight)->setSize(200, 100);
+        (new GuiLabel(touch_calib, "TOUCH_CALIB_LABEL", tr("Calibrate\nTouchscreen"), 30)
+        )->setPosition(0, -15, ACenter);
     }
 
     float y = 100;
