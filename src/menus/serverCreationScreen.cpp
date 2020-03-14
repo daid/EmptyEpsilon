@@ -1,3 +1,4 @@
+
 #include <i18n.h>
 #include "preferenceManager.h"
 #include "serverCreationScreen.h"
@@ -26,7 +27,7 @@ ServerCreationScreen::ServerCreationScreen()
 
     // Set defaults from preferences.
     gameGlobalInfo->player_warp_jump_drive_setting = EPlayerWarpJumpDrive(PreferencesManager::get("server_config_warp_jump_drive_setting", "0").toInt());
-    gameGlobalInfo->long_range_radar_range = PreferencesManager::get("server_config_long_range_radar_range", "30000").toInt();
+    gameGlobalInfo->setLongRangeRadarRange(PreferencesManager::get("server_config_long_range_radar_range", "30000").toInt());
     gameGlobalInfo->scanning_complexity = EScanningComplexity(PreferencesManager::get("server_config_scanning_complexity", "2").toInt());
     gameGlobalInfo->hacking_difficulty = PreferencesManager::get("server_config_hacking_difficulty", "1").toInt();
     gameGlobalInfo->hacking_games = EHackingGames(PreferencesManager::get("server_config_hacking_games", "2").toInt());
@@ -96,7 +97,7 @@ ServerCreationScreen::ServerCreationScreen()
     row->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiLabel(row, "RADAR_LABEL", tr("Radar range: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiSelector(row, "RADAR_SELECT", [](int index, string value) {
-        gameGlobalInfo->long_range_radar_range = index * 5000 + 10000;
+        gameGlobalInfo->setLongRangeRadarRange(index * 5000 + 10000);
     }))->setOptions({"10U", "15U", "20U", "25U", "30U", "35U", "40U", "45U", "50U"})->setSelectionIndex((gameGlobalInfo->long_range_radar_range - 10000.0) / 5000.0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Main screen section.

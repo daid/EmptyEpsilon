@@ -192,6 +192,13 @@ void GameGlobalInfo::destroy()
         state_logger->destroy();
 }
 
+void GameGlobalInfo::setLongRangeRadarRange(float range)
+{
+    // Disallow ranges <= 5000.0f (zoom misbehavior, crashes)
+    // or > 125U (unreadable)
+    long_range_radar_range = std::max(5000.0f, std::min(125000.0f, range));
+}
+
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
 {
     switch(player_warp_jump_drive)
