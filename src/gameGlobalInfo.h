@@ -116,6 +116,7 @@ public:
 
     virtual void update(float delta);
     virtual void destroy();
+    void setLongRangeRadarRange(float range);
 
     string getNextShipCallsign();
 };
