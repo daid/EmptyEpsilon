@@ -216,7 +216,7 @@ public:
      * Spaceship is destroyed by damage.
      * \param info Information about damage type
      */
-    virtual void destroyedByDamage(DamageInfo& info);
+    virtual void destroyedByDamage(DamageInfo& info) override;
 
     /*!
      * Jump in current direction
@@ -228,7 +228,7 @@ public:
      * Check if object can dock with this ship.
      * \param object Object that wants to dock.
      */
-    virtual bool canBeDockedBy(P<SpaceObject> obj);
+    virtual bool canBeDockedBy(P<SpaceObject> obj) override;
 
     virtual void collide(Collisionable* other, float force) override;
 
@@ -288,11 +288,11 @@ public:
      */
     float getSystemEffectiveness(ESystem system);
 
-    virtual void applyTemplateValues();
+    virtual void applyTemplateValues() override;
 
     P<SpaceObject> getTarget();
 
-    virtual std::unordered_map<string, string> getGMInfo();
+    virtual std::unordered_map<string, string> getGMInfo() override;
 
     bool isDocked(P<SpaceObject> target) { return docking_state == DS_Docked && docking_target == target; }
     bool canStartDocking() { return current_warp <= 0.0 && (!has_jump_drive || jump_delay <= 0.0); }

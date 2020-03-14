@@ -14,11 +14,11 @@ private:
 public:
     Artifact();
 
-    virtual void update(float delta);
+    virtual void update(float delta) override;
 
-    virtual void draw3D();
+    virtual void draw3D() override;
 
-    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
+    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
 
     virtual void collide(Collisionable* target, float force) override;
 
@@ -27,7 +27,7 @@ public:
     void explode();
     void allowPickup(bool allow);
     
-    virtual string getExportLine();
+    virtual string getExportLine() override;
     void onPickUp(ScriptSimpleCallback callback);
 };
 
