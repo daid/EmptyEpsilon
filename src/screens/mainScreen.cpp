@@ -55,7 +55,7 @@ ScreenMainScreen::ScreenMainScreen()
         });
     }
 
-    first_person = false;
+    first_person = PreferencesManager::get("first_person") == "1";
 }
 
 void ScreenMainScreen::update(float delta)
