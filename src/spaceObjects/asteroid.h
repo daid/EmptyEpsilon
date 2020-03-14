@@ -13,15 +13,15 @@ public:
 
     Asteroid();
     
-    virtual void draw3D();
+    virtual void draw3D() override;
 
-    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
+    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
 
     virtual void collide(Collisionable* target, float force) override;
     
     void setSize(float size);
     
-    virtual string getExportLine() { return "Asteroid():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
+    virtual string getExportLine() override { return "Asteroid():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 };
 
 class VisualAsteroid : public SpaceObject
@@ -34,11 +34,11 @@ public:
 
     VisualAsteroid();
 
-    virtual void draw3D();
+    virtual void draw3D() override;
     
     void setSize(float size);
 
-    virtual string getExportLine() { return "VisualAsteroid():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
+    virtual string getExportLine() override { return "VisualAsteroid():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 };
 
 #endif//ASTEROID_H

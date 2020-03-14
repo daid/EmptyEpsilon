@@ -172,7 +172,7 @@ private:
 public:
     GuiShipTweakPlayer(GuiContainer* owner);
 
-    virtual void open(P<SpaceObject> target);
+    virtual void open(P<SpaceObject> target) override;
 
     virtual void onDraw(sf::RenderTarget& window) override;
 };
@@ -188,7 +188,7 @@ private:
 public:
     GuiObjectTweakBase(GuiContainer* owner);
 
-    virtual void open(P<SpaceObject> target);
+    virtual void open(P<SpaceObject> target) override;
 
     virtual void onDraw(sf::RenderTarget& window) override;
 };
