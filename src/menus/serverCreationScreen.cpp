@@ -28,6 +28,7 @@ ServerCreationScreen::ServerCreationScreen()
     // Set defaults from preferences.
     gameGlobalInfo->player_warp_jump_drive_setting = EPlayerWarpJumpDrive(PreferencesManager::get("server_config_warp_jump_drive_setting", "0").toInt());
     gameGlobalInfo->setLongRangeRadarRange(PreferencesManager::get("server_config_long_range_radar_range", "30000").toInt());
+    gameGlobalInfo->setShortRangeRadarRange(PreferencesManager::get("server_config_short_range_radar_range", "5000").toInt());
     gameGlobalInfo->scanning_complexity = EScanningComplexity(PreferencesManager::get("server_config_scanning_complexity", "2").toInt());
     gameGlobalInfo->hacking_difficulty = PreferencesManager::get("server_config_hacking_difficulty", "1").toInt();
     gameGlobalInfo->hacking_games = EHackingGames(PreferencesManager::get("server_config_hacking_games", "2").toInt());

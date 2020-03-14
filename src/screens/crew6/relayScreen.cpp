@@ -1,5 +1,6 @@
 #include "relayScreen.h"
 #include "playerInfo.h"
+#include "gameGlobalInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/scanProbe.h"
 #include "scriptInterface.h"
@@ -221,7 +222,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
                     continue;
                 }
             }
-            if (obj->getPosition() - target->getPosition() < 5000.0f)
+            if (obj->getPosition() - target->getPosition() < gameGlobalInfo->short_range_radar_range)
             {
                 near_friendly = true;
                 break;

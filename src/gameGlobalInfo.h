@@ -78,6 +78,10 @@ public:
      * \brief Range of the science radar.
      */
     float long_range_radar_range;
+    /*!
+     * \brief Range of the helm/weapons/tactical radar.
+     */
+    float short_range_radar_range;
     bool use_beam_shield_frequencies;
     bool use_system_damage;
     bool allow_main_screen_tactical_radar;
@@ -117,6 +121,7 @@ public:
     virtual void update(float delta);
     virtual void destroy();
     void setLongRangeRadarRange(float range);
+    void setShortRangeRadarRange(float range);
 
     string getNextShipCallsign();
 };

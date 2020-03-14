@@ -1,4 +1,5 @@
 #include "playerInfo.h"
+#include "gameGlobalInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "helmsScreen.h"
 
@@ -28,13 +29,18 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
 
-    GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", 5000.0, nullptr);
-    
+    GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", gameGlobalInfo->short_range_radar_range, nullptr);
+
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
     combat_maneuver->setPosition(-20, -20, ABottomRight)->setSize(280, 215);
     
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
-    radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
+    float step_size = 1000.0f;
+    if (gameGlobalInfo->long_range_radar_range >= 15000.0f)
+        step_size = 5000.0f;
+    radar->setRangeIndicatorStepSize(step_size)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
+    if (gameGlobalInfo->short_range_radar_range >= 5000.0f)
+        radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
     radar->enableMissileTubeIndicators();
     radar->setCallbacks(
         [this](sf::Vector2f position) {

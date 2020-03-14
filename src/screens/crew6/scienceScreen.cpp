@@ -43,7 +43,10 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     // Draw the science radar.
     science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", gameGlobalInfo->long_range_radar_range, &targets);
     science_radar->setPosition(-270, 0, ACenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    science_radar->setRangeIndicatorStepSize(5000.0)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
+    float step_size = 5000.0f;
+    if (gameGlobalInfo->long_range_radar_range >= 50000.0f)
+        step_size = 10000.0f;
+    science_radar->setRangeIndicatorStepSize(step_size)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
     science_radar->setCallbacks(
         [this](sf::Vector2f position) {
             if (!my_spaceship || my_spaceship->scanning_delay > 0.0)
@@ -52,10 +55,10 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
         }, nullptr, nullptr
     );
-    new RawScannerDataRadarOverlay(science_radar, "", gameGlobalInfo->long_range_radar_range);
+    new RawScannerDataRadarOverlay(science_radar, "SCIENCE_RADAR_OVERLAY", gameGlobalInfo->long_range_radar_range);
 
     // Draw and hide the probe radar.
-    probe_radar = new GuiRadarView(radar_view, "PROBE_RADAR", 5000, &targets);
+    probe_radar = new GuiRadarView(radar_view, "PROBE_RADAR", gameGlobalInfo->short_range_radar_range, &targets);
     probe_radar->setPosition(-270, 0, ACenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
     probe_radar->setAutoCentering(false)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NoFogOfWar);
     probe_radar->setCallbacks(
@@ -66,7 +69,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
         }, nullptr, nullptr
     );
-    new RawScannerDataRadarOverlay(probe_radar, "", 5000);
+    new RawScannerDataRadarOverlay(probe_radar, "PROBE_RADAR_OVERLAY", gameGlobalInfo->short_range_radar_range);
 
     sidebar_selector = new GuiSelector(radar_view, "", [this](int index, string value)
     {
@@ -245,7 +248,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
 
     if (probe_view_button->getValue() && probe)
     {
-        if (targets.get() && (probe->getPosition() - targets.get()->getPosition()) > 5000.0f)
+        if (targets.get() && (probe->getPosition() - targets.get()->getPosition()) > gameGlobalInfo->short_range_radar_range)
             targets.clear();
     }else{
         if (targets.get() && Nebula::blockedByNebula(my_spaceship->getPosition(), targets.get()->getPosition()))

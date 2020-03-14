@@ -31,7 +31,8 @@ GameGlobalInfo::GameGlobalInfo()
     scanning_complexity = SC_Normal;
     hacking_difficulty = 2;
     hacking_games = HG_All;
-    long_range_radar_range = 30000;
+    short_range_radar_range = 5000.0;
+    long_range_radar_range = 30000.0;
     use_beam_shield_frequencies = true;
     use_system_damage = true;
     allow_main_screen_tactical_radar = true;
@@ -46,6 +47,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&global_message_timeout, 1.0);
     registerMemberReplication(&banner_string);
     registerMemberReplication(&victory_faction);
+    registerMemberReplication(&short_range_radar_range);
     registerMemberReplication(&long_range_radar_range);
     registerMemberReplication(&use_beam_shield_frequencies);
     registerMemberReplication(&use_system_damage);
@@ -197,6 +199,12 @@ void GameGlobalInfo::setLongRangeRadarRange(float range)
     // Disallow ranges <= 5000.0f (zoom misbehavior, crashes)
     // or > 125U (unreadable)
     long_range_radar_range = std::max(5000.0f, std::min(125000.0f, range));
+}
+
+void GameGlobalInfo::setShortRangeRadarRange(float range)
+{
+    // Disallow ranges <= 500.0f or > 20U (unusable in weapons)
+    short_range_radar_range = std::max(500.0f, std::min(20000.0f, range));
 }
 
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
@@ -391,12 +399,20 @@ static int unpauseGame(lua_State* L)
 /// Calling this function will pause the game. Mainly usefull for a headless server setup. As the scenario functions are not called when paused.
 REGISTER_SCRIPT_FUNCTION(unpauseGame);
 
+static int getShortRangeRadarRange(lua_State* L)
+{
+    lua_pushnumber(L, gameGlobalInfo->short_range_radar_range);
+    return 1;
+}
+/// Return the short range radar range, normally 5000.0 (5U), but can be configured per game.
+REGISTER_SCRIPT_FUNCTION(getShortRangeRadarRange);
+
 static int getLongRangeRadarRange(lua_State* L)
 {
     lua_pushnumber(L, gameGlobalInfo->long_range_radar_range);
     return 1;
 }
-/// Return the long range radar range, normally 30.000, but can be configured per game.
+/// Return the long range radar range, normally 30000.0 (30U), but can be configured per game.
 REGISTER_SCRIPT_FUNCTION(getLongRangeRadarRange);
 
 static int playSoundFile(lua_State* L)

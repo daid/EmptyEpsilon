@@ -173,7 +173,7 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
         sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
         float scale = std::min(rect.width, rect.height) / 2.0f / distance;
 
-        float r = 5000.0 * scale;
+        float r = gameGlobalInfo->short_range_radar_range * scale;
         sf::CircleShape circle(r, 50);
         circle.setOrigin(r, r);
         circle.setFillColor(sf::Color(255, 255, 255, 255));
@@ -315,7 +315,7 @@ void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
     }
 
     {
-        float r = 5000.0f * scale;
+        float r = gameGlobalInfo->short_range_radar_range * scale;
         sf::CircleShape circle(r, 32);
         circle.setOrigin(r, r);
         circle.setPosition(radar_screen_center + (scan_center - view_position) * scale);
@@ -554,11 +554,11 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             }
 
             sf::Vector2f position = obj->getPosition();
-            PVector<Collisionable> obj_list = CollisionManager::queryArea(position - sf::Vector2f(5000, 5000), position + sf::Vector2f(5000, 5000));
+            PVector<Collisionable> obj_list = CollisionManager::queryArea(position - sf::Vector2f(gameGlobalInfo->short_range_radar_range, gameGlobalInfo->short_range_radar_range), position + sf::Vector2f(gameGlobalInfo->short_range_radar_range, gameGlobalInfo->short_range_radar_range));
             foreach(Collisionable, c_obj, obj_list)
             {
                 P<SpaceObject> obj2 = c_obj;
-                if (obj2 && (obj->getPosition() - obj2->getPosition()) < 5000.0f + obj2->getRadius())
+                if (obj2 && (obj->getPosition() - obj2->getPosition()) < gameGlobalInfo->short_range_radar_range + obj2->getRadius())
                 {
                     visible_objects.insert(*obj2);
                 }

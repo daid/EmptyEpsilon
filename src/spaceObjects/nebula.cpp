@@ -3,6 +3,7 @@
 #include "main.h"
 #include "nebula.h"
 #include "playerInfo.h"
+#include "gameGlobalInfo.h"
 
 #include "scriptInterface.h"
 
@@ -109,7 +110,7 @@ bool Nebula::blockedByNebula(sf::Vector2f start, sf::Vector2f end)
 {
     sf::Vector2f startEndDiff = end - start;
     float startEndLength = sf::length(startEndDiff);
-    if (startEndLength < 5000.0f)
+    if (startEndLength < gameGlobalInfo->short_range_radar_range)
         return false;
     
     foreach(Nebula, n, nebula_list)
