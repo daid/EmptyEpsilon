@@ -1187,7 +1187,8 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     case CMD_SCAN_DONE:
         if (scanning_target && scanning_complexity > 0)
         {
-            scanning_target->scannedBy(this);
+            if (scanning_complexity == scanning_target->scanningComplexity(this) && scanning_depth == scanning_target->scanningChannelDepth(this))
+                scanning_target->scannedBy(this);
             scanning_target = nullptr;
         }
         break;
