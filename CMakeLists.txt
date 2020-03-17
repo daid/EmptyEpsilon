@@ -388,8 +388,8 @@ else()
     add_executable(${EXECUTABLE_NAME} MACOSX_BUNDLE ${SOURCES})
 endif()
 
-include_directories(${CMAKE_SOURCE_DIR}/src)
-include_directories(${SERIOUS_PROTON_DIR}/src)
+target_include_directories(${EXECUTABLE_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src)
+target_include_directories(${EXECUTABLE_NAME} PUBLIC ${SERIOUS_PROTON_DIR}/src)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
@@ -407,6 +407,10 @@ else()
   include_directories(${OPENGL_INCLUDE_DIR})
   target_link_libraries(${EXECUTABLE_NAME} ${OPENGL_LIBRARIES})
 endif()
+
+# Opus for voice chat
+add_subdirectory("${SERIOUS_PROTON_DIR}/src/libopus/" "${CMAKE_CURRENT_BINARY_DIR}/libopus")
+target_link_libraries(${EXECUTABLE_NAME} opus)
 
 # Some magical Win 32 stuff
 if(WIN32)

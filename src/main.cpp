@@ -116,6 +116,7 @@ int main(int argc, char** argv)
     }
 
     new Engine();
+    (new NetworkAudioRecorder())->setKeyActivation(sf::Keyboard::Key::Tab);
 
     if (PreferencesManager::get("proxy") != "")
     {
