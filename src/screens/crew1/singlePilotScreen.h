@@ -14,6 +14,8 @@ class GuiRotationDial;
 class SinglePilotScreen : public GuiOverlay
 {
 private:
+    bool first_person;
+
     GuiOverlay* background_gradient;
     GuiOverlay* background_crosses;
 
