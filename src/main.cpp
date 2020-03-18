@@ -116,7 +116,6 @@ int main(int argc, char** argv)
     }
 
     new Engine();
-    (new NetworkAudioRecorder())->setKeyActivation(sf::Keyboard::Key::Tab);
 
     if (PreferencesManager::get("proxy") != "")
     {
@@ -282,6 +281,8 @@ int main(int argc, char** argv)
             }
         }
     }
+    NetworkAudioRecorder* nar = new NetworkAudioRecorder();
+    nar->addKeyActivation(sf::Keyboard::Key::Tilde, 0);
 
     P<HardwareController> hardware_controller = new HardwareController();
 #ifdef CONFIG_DIR
