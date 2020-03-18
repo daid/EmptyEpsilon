@@ -1,3 +1,4 @@
+#include <i18n.h>
 #ifndef SPACESHIP_H
 #define SPACESHIP_H
 
@@ -423,6 +424,7 @@ public:
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);
 
 string getMissileWeaponName(EMissileWeapons missile);
+string getLocaleMissileWeaponName(EMissileWeapons missile);
 REGISTER_MULTIPLAYER_ENUM(EMissileWeapons);
 REGISTER_MULTIPLAYER_ENUM(EWeaponTubeState);
 REGISTER_MULTIPLAYER_ENUM(EMainScreenSetting);
