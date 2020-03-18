@@ -14,6 +14,7 @@
 #include "screenComponents/radarView.h"
 #include "screenComponents/shipDestroyedPopup.h"
 
+#include "gui/gui2_panel.h"
 #include "gui/gui2_overlay.h"
 
 ScreenMainScreen::ScreenMainScreen()
@@ -42,6 +43,13 @@ ScreenMainScreen::ScreenMainScreen()
     new GuiSelfDestructIndicator(this);
     new GuiGlobalMessage(this);
     new GuiIndicatorOverlays(this);
+
+    keyboard_help = new GuiHelpOverlay(this, "Keyboard Shortcuts");
+
+    for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Main Screen"))
+        keyboard_general += shortcut.second + ":\t" + shortcut.first + "\n";
+
+    keyboard_help->setText(keyboard_general);
 
     if (PreferencesManager::get("music_enabled") != "0")
     {
@@ -230,42 +238,33 @@ void ScreenMainScreen::onClick(sf::Vector2f mouse_position)
     }
 }
 
+void ScreenMainScreen::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "MAIN_SCREEN" && my_spaceship)
+    {
+        if (key.hotkey == "VIEW_FORWARD")
+            my_spaceship->commandMainScreenSetting(MSS_Front);
+        else if (key.hotkey == "VIEW_LEFT")
+            my_spaceship->commandMainScreenSetting(MSS_Left);
+        else if (key.hotkey == "VIEW_RIGHT")
+            my_spaceship->commandMainScreenSetting(MSS_Right);
+        else if (key.hotkey == "VIEW_BACK")
+            my_spaceship->commandMainScreenSetting(MSS_Back);
+        else if (key.hotkey == "VIEW_TARGET")
+            my_spaceship->commandMainScreenSetting(MSS_Target);
+        else if (key.hotkey == "TACTICAL_RADAR")
+            my_spaceship->commandMainScreenSetting(MSS_Tactical);
+        else if (key.hotkey == "LONG_RANGE_RADAR")
+            my_spaceship->commandMainScreenSetting(MSS_LongRange);
+        else if (key.hotkey == "FIRST_PERSON")
+            first_person = !first_person;
+    }
+}
+
 void ScreenMainScreen::onKey(sf::Event::KeyEvent key, int unicode)
 {
-    switch(key.code)
+    switch (key.code)
     {
-    case sf::Keyboard::Up:
-        if (my_spaceship)
-            my_spaceship->commandMainScreenSetting(MSS_Front);
-        break;
-    case sf::Keyboard::Left:
-        if (my_spaceship)
-            my_spaceship->commandMainScreenSetting(MSS_Left);
-        break;
-    case sf::Keyboard::Right:
-        if (my_spaceship)
-            my_spaceship->commandMainScreenSetting(MSS_Right);
-        break;
-    case sf::Keyboard::Down:
-        if (my_spaceship)
-            my_spaceship->commandMainScreenSetting(MSS_Back);
-        break;
-    case sf::Keyboard::T:
-        if (my_spaceship)
-            my_spaceship->commandMainScreenSetting(MSS_Target);
-        break;
-    case sf::Keyboard::Tab:
-        if (my_spaceship && gameGlobalInfo->allow_main_screen_tactical_radar)
-            my_spaceship->commandMainScreenSetting(MSS_Tactical);
-        break;
-    case sf::Keyboard::Q:
-        if (my_spaceship && gameGlobalInfo->allow_main_screen_long_range_radar)
-            my_spaceship->commandMainScreenSetting(MSS_LongRange);
-        break;
-    case sf::Keyboard::F:
-        first_person = !first_person;
-        break;
-    
     //TODO: This is more generic code and is duplicated.
     case sf::Keyboard::Escape:
     case sf::Keyboard::Home:
@@ -273,6 +272,11 @@ void ScreenMainScreen::onKey(sf::Event::KeyEvent key, int unicode)
         soundManager->stopSound(impulse_sound);
         destroy();
         returnToShipSelection();
+        break;
+    case sf::Keyboard::Slash:
+    case sf::Keyboard::F1:
+        // Toggle keyboard help.
+        keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
         break;
     case sf::Keyboard::P:
         if (game_server)

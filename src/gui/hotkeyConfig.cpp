@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "hotkeyConfig.h"
 #include "preferenceManager.h"
 #include "shipTemplate.h"
@@ -14,6 +15,16 @@ HotkeyConfig::HotkeyConfig()
     newKey("STATION_ENGINEERING", std::make_tuple("Switch to engineering station", "F4"));
     newKey("STATION_SCIENCE", std::make_tuple("Switch to science station", "F5"));
     newKey("STATION_RELAY", std::make_tuple("Switch to relay station", "F6"));
+
+    newCategory("MAIN_SCREEN", "Main Screen");
+    newKey("VIEW_FORWARD", std::make_tuple("View forward", "Up"));
+    newKey("VIEW_LEFT", std::make_tuple("View left", "Left"));
+    newKey("VIEW_RIGHT", std::make_tuple("View right", "Right"));
+    newKey("VIEW_BACK", std::make_tuple("View backward", "Down"));
+    newKey("VIEW_TARGET", std::make_tuple("Lock view on weapons target", "T"));
+    newKey("TACTICAL_RADAR", std::make_tuple("View tactical radar", "Tab"));
+    newKey("LONG_RANGE_RADAR", std::make_tuple("View long-range radar", "Q"));
+    newKey("FIRST_PERSON", std::make_tuple("Toggle first-person view", "F"));
     
     newCategory("HELMS", "Helms");
     newKey("INC_IMPULSE", std::make_tuple("Increase impulse", "Up"));
