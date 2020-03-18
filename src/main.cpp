@@ -320,13 +320,17 @@ int main(int argc, char** argv)
         PreferencesManager::set("fullscreen", windowManager->isFullscreen() ? 1 : 0);
     }
 
-    // Set the default music_volume and sound_volume to the current volume.
+    // Set the default music_, sound_, and engine_volume to the current volume.
     PreferencesManager::set("music_volume", soundManager->getMusicVolume());
     PreferencesManager::set("sound_volume", soundManager->getMasterSoundVolume());
+    PreferencesManager::set("engine_volume", "50");
 
-    // Enable music on the main screen only by default.
+    // Enable music and engine sounds on the main screen only by default.
     if (PreferencesManager::get("music_enabled").empty())
         PreferencesManager::set("music_enabled", "2");
+
+    if (PreferencesManager::get("engine_enabled").empty())
+        PreferencesManager::set("engine_enabled", "2");
 
     // Set shaders to default.
     PreferencesManager::set("disable_shaders", PostProcessor::isEnabled() ? 0 : 1);
