@@ -14,6 +14,7 @@ CinematicViewScreen::CinematicViewScreen()
     // Create a full-screen viewport.
     viewport = new GuiViewport3D(this, "VIEWPORT");
     viewport->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    viewport->showCallsigns();
 
     // Initialize the camera's vertical position.
     camera_position.z = 200.0;
