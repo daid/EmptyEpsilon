@@ -33,9 +33,13 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     /// Set the maximum shield level. Note that this does low the current shield level when the max becomes lower, but it does not increase the shield level.
     /// A seperate call to setShield is needed for that.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShieldsMax);
-    /// Set the icon to be used for this station on the radar.
+    /// Set the icon to be used for this object on the radar.
     /// For example, station:setRadarTrace("RadarArrow.png") will show an arrow instead of a dot for this station.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRadarTrace);
+    /// Set the sound file to be used for this object's impulse engines.
+    /// Requires a string for a filename relative to the resources path.
+    /// Example: setImpulseSoundFile("engine.wav")
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setImpulseSoundFile);
     /// Are the shields online or not. Currently always returns true except for player ships, as only players can turn off shields.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldsActive);
 
@@ -94,6 +98,7 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
         registerMemberReplication(&shield_hit_effect[n], 0.5);
     }
     registerMemberReplication(&radar_trace);
+    registerMemberReplication(&impulse_sound_file);
     registerMemberReplication(&hull_strength, 0.5);
     registerMemberReplication(&hull_max);
 
@@ -329,6 +334,7 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
         shield_level[n] = shield_max[n] = ship_template->shield_level[n];
 
     radar_trace = ship_template->radar_trace;
+    impulse_sound_file = ship_template->impulse_sound_file;
 
     shares_energy_with_docked = ship_template->shares_energy_with_docked;
     repair_docked = ship_template->repair_docked;
