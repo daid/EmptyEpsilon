@@ -8,6 +8,7 @@
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/noiseOverlay.h"
 #include "screenComponents/shipDestroyedPopup.h"
+#include "screenComponents/helpOverlay.h"
 
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_panel.h"
@@ -180,9 +181,6 @@ void CrewStationScreen::onKey(sf::Event::KeyEvent key, int unicode)
         returnToShipSelection();
         break;
     case sf::Keyboard::Slash:
-        // Toggle keyboard help.
-        keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
-        break;
     case sf::Keyboard::F1:
         // Toggle keyboard help.
         keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
