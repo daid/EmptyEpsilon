@@ -174,10 +174,10 @@ void ScreenMainScreen::update(float delta)
             {
                 if (impulse_sound > -1)
                 {
-                    soundManager->setSoundVolume(impulse_sound, (std::max(10.0f * impulse_ability, fabsf(my_spaceship->current_impulse) * 10.0f * std::max(0.1f, impulse_ability))) * (engine_volume / 100));
+                    soundManager->setSoundVolume(impulse_sound, (std::max(10.0f * impulse_ability, fabsf(my_spaceship->current_impulse) * 10.0f * std::max(0.1f, impulse_ability))) * (engine_volume / 100.0f));
                     soundManager->setSoundPitch(impulse_sound, std::max(0.7f * impulse_ability, fabsf(my_spaceship->current_impulse) + 0.2f * std::max(0.1f, impulse_ability)));
                 } else {
-                    impulse_sound = soundManager->playSound(impulse_sound_file, std::max(0.7f * impulse_ability, fabsf(my_spaceship->current_impulse) + 0.2f * impulse_ability), (std::max(30.0f, fabsf(my_spaceship->current_impulse) * 10.0f * impulse_ability)) * (engine_volume / 100), true);
+                    impulse_sound = soundManager->playSound(impulse_sound_file, std::max(0.7f * impulse_ability, fabsf(my_spaceship->current_impulse) + 0.2f * impulse_ability), (std::max(30.0f, fabsf(my_spaceship->current_impulse) * 10.0f * impulse_ability)) * (engine_volume / 100.0f), true);
                 }
             } else if (impulse_sound > -1) {
                 // If we don't have impulse available, stop the engine sound.

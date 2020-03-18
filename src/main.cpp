@@ -323,7 +323,7 @@ int main(int argc, char** argv)
     // Set the default music_, sound_, and engine_volume to the current volume.
     PreferencesManager::set("music_volume", soundManager->getMusicVolume());
     PreferencesManager::set("sound_volume", soundManager->getMasterSoundVolume());
-    PreferencesManager::set("engine_volume", "50");
+    PreferencesManager::set("engine_volume", PreferencesManager::get("engine_volume", "50"));
 
     // Enable music and engine sounds on the main screen only by default.
     if (PreferencesManager::get("music_enabled").empty())

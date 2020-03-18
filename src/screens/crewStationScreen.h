@@ -43,6 +43,8 @@ private:
     ECrewPosition current_position;
     std::vector<CrewTabInfo> tabs;
     string keyboard_general = "";
+    int impulse_sound = -1;
+    int engine_volume;
     void showNextTab(int offset=1);
     void showTab(GuiElement* element);
 

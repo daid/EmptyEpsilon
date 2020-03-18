@@ -90,12 +90,12 @@ OptionsMenu::OptionsMenu()
     engine_volume_slider = new GuiSlider(this, "ENGINE_VOLUME_SLIDER", 0.0f, 100.0f, PreferencesManager::get("engine_volume", "50").toInt(), [this](float volume)
     {
         PreferencesManager::set("engine_volume", volume);
-        engine_volume_overlay_label->setText(tr("Engine Volume: ") + PreferencesManager::get("engine_volume", "50") + "%");
+        engine_volume_overlay_label->setText(tr("Engine Volume: ") + string(PreferencesManager::get("engine_volume", volume).toInt()) + "%");
     });
     engine_volume_slider->setPosition(50, top, ATopLeft)->setSize(300, 50);
 
     // Override overlay label.
-    engine_volume_overlay_label = new GuiLabel(engine_volume_slider, "ENGINE_VOLUME_SLIDER_LABEL", tr("Engine Volume: ") + PreferencesManager::get("engine_volume", "50") + "%", 30);
+    engine_volume_overlay_label = new GuiLabel(engine_volume_slider, "ENGINE_VOLUME_SLIDER_LABEL", tr("Engine Volume: ") + string(PreferencesManager::get("engine_volume", "50").toInt()) + "%", 30);
     engine_volume_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Music playback state.
@@ -115,7 +115,7 @@ OptionsMenu::OptionsMenu()
 
     // Engine playback state.
     top += 60;
-    (new GuiLabel(this, "ENGINE_PLAYBACK_LABEL", tr("Engine SFX"), 30))->addBackground()->setPosition(50, top, ATopLeft)->setSize(300, 50);
+    (new GuiLabel(this, "ENGINE_SFX_LABEL", tr("Engine SFX"), 30))->addBackground()->setPosition(50, top, ATopLeft)->setSize(300, 50);
 
     // Determine when engine sound effects are enabled.
     int engine_enabled_index = PreferencesManager::get("engine_enabled", "2").toInt();
@@ -126,7 +126,7 @@ OptionsMenu::OptionsMenu()
         // 1: Always on
         // 2: On if main screen, off otherwise (default)
         PreferencesManager::set("engine_enabled", string(index));
-    }))->setOptions({tr("Disabled"), tr("Enabled"), tr("Main Screen only")})->setSelectionIndex(music_enabled_index)->setPosition(50, top, ATopLeft)->setSize(300, 50);
+    }))->setOptions({tr("Disabled"), tr("Enabled"), tr("Main Screen only")})->setSelectionIndex(engine_enabled_index)->setPosition(50, top, ATopLeft)->setSize(300, 50);
 
     // Right column, manual layout. Draw first element 50px from top.
     top = 50;
