@@ -181,6 +181,10 @@ void ScreenMainScreen::update(float delta)
             impulse_sound = -1;
             // TODO: Play an engine failure sound.
         }
+    } else {
+        // If we don't have impulse available, stop the engine sound.
+        soundManager->stopSound(impulse_sound);
+        impulse_sound = -1;
     }
 }
 
