@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "spaceship.h"
 #include "mesh.h"
 #include "shipTemplate.h"
@@ -1398,6 +1399,28 @@ string getMissileWeaponName(EMissileWeapons missile)
         return "UNK: " + string(int(missile));
     }
 }
+
+string getLocaleMissileWeaponName(EMissileWeapons missile)
+{
+    switch(missile)
+    {
+    case MW_None:
+        return "-";
+    case MW_Homing:
+        return tr("missile","Homing");
+    case MW_Nuke:
+        return tr("missile","Nuke");
+    case MW_Mine:
+        return tr("missile","Mine");
+    case MW_EMP:
+        return tr("missile","EMP");
+    case MW_HVLI:
+        return tr("missile","HVLI");
+    default:
+        return "UNK: " + string(int(missile));
+    }
+}
+
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency)
 {

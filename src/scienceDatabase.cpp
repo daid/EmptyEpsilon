@@ -157,7 +157,7 @@ void fillDefaultDatabaseData()
         {
             if (ship_template->weapon_storage[n] > 0)
             {
-                entry->addKeyValue("Storage " + getMissileWeaponName(EMissileWeapons(n)), string(ship_template->weapon_storage[n]));
+                entry->addKeyValue(tr("Storage {weapon}").format({{"weapon", getLocaleMissileWeaponName(EMissileWeapons(n))}}), string(ship_template->weapon_storage[n]));
             }
         }
         if (ship_template->getDescription().length() > 0)
