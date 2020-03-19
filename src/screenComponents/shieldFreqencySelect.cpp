@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "shieldFreqencySelect.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
@@ -19,7 +20,7 @@ GuiShieldFrequencySelect::GuiShieldFrequencySelect(GuiContainer* owner, string i
     new_frequency = new GuiSelector(calibration_row, "", nullptr);
     new_frequency->setSize(120, 50);
 
-    calibrate_button = new GuiButton(calibration_row, "", "Calibrate", [this]() {
+    calibrate_button = new GuiButton(calibration_row, "", tr("shields","Calibrate"), [this]() {
         if (my_spaceship)
             my_spaceship->commandSetShieldFrequency(new_frequency->getSelectionIndex());
     });
