@@ -69,7 +69,7 @@ OptionsMenu::OptionsMenu()
     sound_volume_slider->setPosition(50, top, ATopLeft)->setSize(300, 50);
 
     // Override overlay label.
-    sound_volume_overlay_label = new GuiLabel(sound_volume_slider, "SOUND_VOLUME_SLIDER_LABEL", tr("Sound Volume: ") + string(int(soundManager->getMasterSoundVolume())) + "%", 30);
+    sound_volume_overlay_label = new GuiLabel(sound_volume_slider, "SOUND_VOLUME_SLIDER_LABEL", tr("Sound Volume: {volume}%").format({{"volume", string(int(soundManager->getMasterSoundVolume()))}}), 30);
     sound_volume_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Music volume slider.
@@ -77,12 +77,12 @@ OptionsMenu::OptionsMenu()
     music_volume_slider = new GuiSlider(this, "MUSIC_VOLUME_SLIDER", 0.0f, 100.0f, soundManager->getMusicVolume(), [this](float volume)
     {
         soundManager->setMusicVolume(volume);
-        music_volume_overlay_label->setText(tr("Music Volume: ") + string(int(soundManager->getMusicVolume())) + "%");
+        music_volume_overlay_label->setText(tr("Music Volume: {volume}%").format({{"volume", string(int(soundManager->getMusicVolume()))}}));
     });
     music_volume_slider->setPosition(50, top, ATopLeft)->setSize(300, 50);
 
     // Override overlay label.
-    music_volume_overlay_label = new GuiLabel(music_volume_slider, "MUSIC_VOLUME_SLIDER_LABEL", tr("Music Volume: ") + string(int(soundManager->getMusicVolume())) + "%", 30);
+    music_volume_overlay_label = new GuiLabel(music_volume_slider, "MUSIC_VOLUME_SLIDER_LABEL", tr("Music Volume: {volume}%").format({{"volume", string(int(soundManager->getMusicVolume()))}}), 30);
     music_volume_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Engine volume slider.
@@ -90,12 +90,12 @@ OptionsMenu::OptionsMenu()
     engine_volume_slider = new GuiSlider(this, "ENGINE_VOLUME_SLIDER", 0.0f, 100.0f, PreferencesManager::get("engine_volume", "50").toInt(), [this](float volume)
     {
         PreferencesManager::set("engine_volume", volume);
-        engine_volume_overlay_label->setText(tr("Engine Volume: ") + string(PreferencesManager::get("engine_volume", volume).toInt()) + "%");
+        engine_volume_overlay_label->setText(tr("Engine Volume: {volume}%").format({{"volume", string(PreferencesManager::get("engine_volume", "50").toInt())}}));
     });
     engine_volume_slider->setPosition(50, top, ATopLeft)->setSize(300, 50);
 
     // Override overlay label.
-    engine_volume_overlay_label = new GuiLabel(engine_volume_slider, "ENGINE_VOLUME_SLIDER_LABEL", tr("Engine Volume: ") + string(PreferencesManager::get("engine_volume", "50").toInt()) + "%", 30);
+    engine_volume_overlay_label = new GuiLabel(engine_volume_slider, "ENGINE_VOLUME_SLIDER_LABEL", tr("Engine Volume: {volume}%").format({{"volume", string(PreferencesManager::get("engine_volume", "50").toInt())}}), 30);
     engine_volume_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Music playback state.
