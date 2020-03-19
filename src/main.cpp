@@ -283,6 +283,7 @@ int main(int argc, char** argv)
     }
     NetworkAudioRecorder* nar = new NetworkAudioRecorder();
     nar->addKeyActivation(sf::Keyboard::Key::Tilde, 0);
+    nar->addKeyActivation(sf::Keyboard::Key::BackSpace, 1);
 
     P<HardwareController> hardware_controller = new HardwareController();
 #ifdef CONFIG_DIR
