@@ -125,7 +125,7 @@ int main(int argc, char** argv)
         auto parts = PreferencesManager::get("proxy").split(":");
         string host = parts[0];
         if (parts.size() > 1) port = parts[1].toInt();
-        if (parts.size() > 2) password = parts[2];
+        if (parts.size() > 2) password = parts[2].upper();
         if (parts.size() > 3) listenPort = parts[3].toInt();
         new GameServerProxy(host, port, password, listenPort);
         engine->runMainLoop();
@@ -183,6 +183,11 @@ int main(int argc, char** argv)
 
     colorConfig.load();
     hotkeys.load();
+
+    if (PreferencesManager::get("username", "") == "")
+        PreferencesManager::set("username", getenv("USERNAME"));
+    if (PreferencesManager::get("username", "") == "")
+        PreferencesManager::set("username", getenv("USER"));
 
     if (PreferencesManager::get("headless") == "")
     {
@@ -346,7 +351,7 @@ void returnToMainMenu()
     {
         new EpsilonServer();
         if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
-        if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password"));
+        if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password").upper());
         if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
         if (PreferencesManager::get("variation") != "") gameGlobalInfo->variation = PreferencesManager::get("variation");
         gameGlobalInfo->startScenario(PreferencesManager::get("headless"));

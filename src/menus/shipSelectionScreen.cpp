@@ -340,9 +340,17 @@ void ShipSelectionScreen::update(float delta)
         string button_text = getCrewPositionName(ECrewPosition(n));
         if (my_spaceship)
         {
-            if (my_spaceship->hasPlayerAtPosition(ECrewPosition(n)))
+            std::vector<string> players;
+            foreach(PlayerInfo, i, player_info_list)
             {
-                crew_position_button[n]->setText(button_text + " (occupied)");
+                if (i->ship_id == my_spaceship->getMultiplayerId() && i->crew_position[n])
+                {
+                    players.push_back(i->name);
+                }
+            }
+            if (players.size() > 0)
+            {
+                crew_position_button[n]->setText(button_text + " (" + string(", ").join(players) + ")");
             } else {
                 crew_position_button[n]->setText(button_text);
             }
@@ -360,6 +368,10 @@ void ShipSelectionScreen::update(float delta)
     // Update the Ready button's state, which might have changed based on the
     // presence or absence of player ships.
     updateReadyButton();
+
+    //Sync our configured user name with the server
+    if (my_player_info->name != PreferencesManager::get("username"))
+        my_player_info->commandSetName(PreferencesManager::get("username"));
 }
 
 void ShipSelectionScreen::updateReadyButton()
