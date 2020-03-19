@@ -47,6 +47,7 @@ PlayerInfo::PlayerInfo()
         registerMemberReplication(&crew_position[n]);
     }
     registerMemberReplication(&ship_id);
+    registerMemberReplication(&name);
     registerMemberReplication(&main_screen_control);
 
     player_info_list.push_back(this);
