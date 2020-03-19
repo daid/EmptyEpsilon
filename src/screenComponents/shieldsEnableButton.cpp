@@ -40,13 +40,11 @@ void GuiShieldsEnableButton::onDraw(sf::RenderTarget& window)
             button->show();
             button->setValue(my_spaceship->shields_active);
             bar->hide();
-            if (gameGlobalInfo->use_beam_shield_frequencies)
-	    {
-		string shield_status=my_spaceship->shields_active ? tr("shields","ON") : tr("shields","OFF");
-		button->setText(tr("{frequency} Shields: {status}").format({{"frequency", frequencyToString(my_spaceship->shield_frequency)}, {"status", shield_status}}));
-            }
-            else
-                button->setText(my_spaceship->shields_active ? " Shields: ON" : " Shields: OFF");
+			string shield_status=my_spaceship->shields_active ? tr("shields","ON") : tr("shields","OFF");
+			if (gameGlobalInfo->use_beam_shield_frequencies)
+				button->setText(tr("{frequency} Shields: {status}").format({{"frequency", frequencyToString(my_spaceship->shield_frequency)}, {"status", shield_status}}));
+			else
+				button->setText(tr("Shields: {status}").format({{"status", shield_status}}));
         }
     }
 }
