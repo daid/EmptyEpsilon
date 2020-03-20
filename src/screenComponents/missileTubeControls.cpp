@@ -104,41 +104,41 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window){
         if(tube.isEmpty())
         {
             rows[n].load_button->setEnable(tube.canLoad(load_type));
-            rows[n].load_button->setText("Load");
+            rows[n].load_button->setText(tr("missile","Load"));
             rows[n].fire_button->disable()->show();
-            rows[n].fire_button->setText(tube.getTubeName() + ": Empty");
+            rows[n].fire_button->setText(tube.getTubeName() + ": " + tr("missile","Empty"));
             rows[n].loading_bar->hide();
         }else if(tube.isLoaded())
         {
             rows[n].load_button->enable();
-            rows[n].load_button->setText("Unload");
+            rows[n].load_button->setText(tr("missile","Unload"));
             rows[n].fire_button->enable()->show();
             rows[n].fire_button->setText(tube.getTubeName() + ": " + getMissileWeaponName(tube.getLoadType()));
             rows[n].loading_bar->hide();
         }else if(tube.isLoading())
         {
             rows[n].load_button->disable();
-            rows[n].load_button->setText("Load");
+            rows[n].load_button->setText(tr("missile","Load"));
             rows[n].fire_button->hide();
             rows[n].fire_button->setText(tube.getTubeName() + ": " + getMissileWeaponName(tube.getLoadType()));
             rows[n].loading_bar->show();
             rows[n].loading_bar->setValue(tube.getLoadProgress());
-            rows[n].loading_label->setText("Loading");
+            rows[n].loading_label->setText(tr("missile","Loading"));
         }else if(tube.isUnloading())
         {
             rows[n].load_button->disable();
-            rows[n].load_button->setText("Unload");
+            rows[n].load_button->setText(tr("missile","Unload"));
             rows[n].fire_button->hide();
             rows[n].fire_button->setText(getMissileWeaponName(tube.getLoadType()));
             rows[n].loading_bar->show();
             rows[n].loading_bar->setValue(tube.getUnloadProgress());
-            rows[n].loading_label->setText("Unloading");
+            rows[n].loading_label->setText(tr("missile","Unloading"));
         }else if(tube.isFiring())
         {
             rows[n].load_button->disable();
-            rows[n].load_button->setText("Load");
+            rows[n].load_button->setText(tr("missile","Load"));
             rows[n].fire_button->disable()->show();
-            rows[n].fire_button->setText("Firing");
+            rows[n].fire_button->setText(tr("missile","Firing"));
             rows[n].loading_bar->hide();
         }
     }
