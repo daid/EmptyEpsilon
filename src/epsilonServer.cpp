@@ -1,6 +1,7 @@
 #include "epsilonServer.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
+#include "preferenceManager.h"
 #include "GMActions.h"
 #include "main.h"
 
@@ -17,6 +18,12 @@ EpsilonServer::EpsilonServer()
         engine->setGameSpeed(0.0);
         for(unsigned int n=0; n<factionInfo.size(); n++)
             factionInfo[n]->reset();
+
+        for(auto proxy : PreferencesManager::get("serverproxy").split(":"))
+        {
+            if (proxy != "")
+                connectToProxy(sf::IpAddress(proxy));
+        }
     }
 }
 

@@ -127,7 +127,10 @@ int main(int argc, char** argv)
         if (parts.size() > 1) port = parts[1].toInt();
         if (parts.size() > 2) password = parts[2].upper();
         if (parts.size() > 3) listenPort = parts[3].toInt();
-        new GameServerProxy(host, port, password, listenPort);
+        if (host == "listen")
+            new GameServerProxy(password, listenPort);
+        else
+            new GameServerProxy(host, port, password, listenPort);
         engine->runMainLoop();
         return 0;
     }
