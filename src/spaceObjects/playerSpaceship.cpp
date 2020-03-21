@@ -131,6 +131,10 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     // Returns the launching PlayerSpaceship and launched ScanProbe.
     // Example: player:onProbeLaunch(trackProbe)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeLaunch);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getLongRangeRadarRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getShortRangeRadarRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setLongRangeRadarRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setShortRangeRadarRange);
 }
 
 float PlayerSpaceship::system_power_user_factor[] = {
@@ -267,6 +271,8 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&alert_level);
     registerMemberReplication(&linked_science_probe_id);
     registerMemberReplication(&control_code);
+    registerMemberReplication(&long_range_radar_range);
+    registerMemberReplication(&short_range_radar_range);
     registerMemberReplication(&custom_functions);
 
     // Determine which stations must provide self-destruct confirmation codes.
@@ -633,6 +639,9 @@ void PlayerSpaceship::applyTemplateValues()
     // Set the ship's number of repair crews in Engineering from the ship's
     // template.
     setRepairCrewCount(ship_template->repair_crew_count);
+
+    long_range_radar_range = ship_template->long_range_radar_range;
+    short_range_radar_range = ship_template->short_range_radar_range;
 }
 
 void PlayerSpaceship::executeJump(float distance)
@@ -1892,8 +1901,8 @@ void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f posit
     SpaceShip::drawOnGMRadar(window, position, scale, long_range);
     if (long_range)
     {
-        sf::CircleShape radar_radius(gameGlobalInfo->long_range_radar_range * scale);
-        radar_radius.setOrigin(gameGlobalInfo->long_range_radar_range * scale, gameGlobalInfo->long_range_radar_range * scale);
+        sf::CircleShape radar_radius(long_range_radar_range * scale);
+        radar_radius.setOrigin(long_range_radar_range * scale, long_range_radar_range * scale);
         radar_radius.setPosition(position);
         radar_radius.setFillColor(sf::Color::Transparent);
         radar_radius.setOutlineColor(sf::Color(255, 255, 255, 64));
@@ -1908,6 +1917,30 @@ void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f posit
         short_radar_radius.setOutlineThickness(3.0);
         window.draw(short_radar_radius);
     }
+}
+
+float PlayerSpaceship::getLongRangeRadarRange()
+{
+    return long_range_radar_range;
+}
+
+float PlayerSpaceship::getShortRangeRadarRange()
+{
+    return short_range_radar_range;
+}
+
+void PlayerSpaceship::setLongRangeRadarRange(float range)
+{
+    range = std::max(range, 100.0f);
+    long_range_radar_range = range;
+    short_range_radar_range = std::min(short_range_radar_range, range);
+}
+
+void PlayerSpaceship::setShortRangeRadarRange(float range)
+{
+    range = std::max(range, 100.0f);
+    short_range_radar_range = range;
+    long_range_radar_range = std::max(long_range_radar_range, range);
 }
 
 string PlayerSpaceship::getExportLine()

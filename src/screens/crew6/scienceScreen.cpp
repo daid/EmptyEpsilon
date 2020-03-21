@@ -41,7 +41,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     radar_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Draw the science radar.
-    science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", gameGlobalInfo->long_range_radar_range, &targets);
+    science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", my_spaceship ? my_spaceship->getLongRangeRadarRange() : 30000.0, &targets);
     science_radar->setPosition(-270, 0, ACenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     science_radar->setRangeIndicatorStepSize(5000.0)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
     science_radar->setCallbacks(
@@ -52,7 +52,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
         }, nullptr, nullptr
     );
-    new RawScannerDataRadarOverlay(science_radar, "", gameGlobalInfo->long_range_radar_range);
+    new RawScannerDataRadarOverlay(science_radar, "", my_spaceship->getLongRangeRadarRange());
 
     // Draw and hide the probe radar.
     probe_radar = new GuiRadarView(radar_view, "PROBE_RADAR", 5000, &targets);
@@ -194,9 +194,10 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     probe_view_button->setPosition(20, -120, ABottomLeft)->setSize(200, 50)->disable();
 
     // Draw the zoom slider.
-    zoom_slider = new GuiSlider(radar_view, "", gameGlobalInfo->long_range_radar_range, 5000.0, gameGlobalInfo->long_range_radar_range, [this](float value)
+    zoom_slider = new GuiSlider(radar_view, "", my_spaceship->getLongRangeRadarRange(), my_spaceship->getShortRangeRadarRange(), my_spaceship->getLongRangeRadarRange(), [this](float value)
     {
-        zoom_label->setText("Zoom: " + string(gameGlobalInfo->long_range_radar_range / value, 1) + "x");
+        if (my_spaceship)
+            zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(my_spaceship->getLongRangeRadarRange() / value, 1)}}));
         science_radar->setDistance(value);
     });
     zoom_slider->setPosition(-20, -20, ABottomRight)->setSize(250, 50);
@@ -222,17 +223,17 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
 
     // Handle mouse wheel
     float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
-    if (mouse_wheel_delta != 0.0)
+    if (mouse_wheel_delta != 0.0 && my_spaceship)
     {
         float view_distance = science_radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
-        if (view_distance > gameGlobalInfo->long_range_radar_range)
-            view_distance = gameGlobalInfo->long_range_radar_range;
-        if (view_distance < 5000.0f)
-            view_distance = 5000.0f;
+        if (view_distance > my_spaceship->getLongRangeRadarRange())
+            view_distance = my_spaceship->getLongRangeRadarRange();
+        if (view_distance < my_spaceship->getShortRangeRadarRange())
+            view_distance = my_spaceship->getShortRangeRadarRange();
         science_radar->setDistance(view_distance);
         // Keep the zoom slider in sync.
         zoom_slider->setValue(view_distance);
-        zoom_label->setText("Zoom: " + string(gameGlobalInfo->long_range_radar_range / view_distance, 1) + "x");
+        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(my_spaceship->getLongRangeRadarRange() / view_distance, 1)}}));
     }
 
     if (!my_spaceship)

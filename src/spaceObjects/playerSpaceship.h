@@ -125,6 +125,8 @@ private:
     // Ship's log container
     std::vector<ShipLogEntry> ships_log;
 
+    float long_range_radar_range = 50000.0f;
+    float short_range_radar_range = 5000.0f;
 public:
     std::vector<CustomShipFunction> custom_functions;
 
@@ -297,6 +299,12 @@ public:
 
     // Radar function
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
+
+    // Radar range
+    float getLongRangeRadarRange();
+    float getShortRangeRadarRange();
+    void setLongRangeRadarRange(float range);
+    void setShortRangeRadarRange(float range);
 
     // Script export function
     virtual string getExportLine() override;

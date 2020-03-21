@@ -25,7 +25,7 @@ JoystickConfig::JoystickConfig()
     newAxis("AIM_MISSILE", std::make_tuple("Turn missile aim", ""));
     
     newCategory("SCIENCE", "Science");
-    for(int n=0; n<EScanningComplexity::SC_MAX; n++)
+    for(int n=0; n<4; n++)
         newAxis(std::string("SCAN_PARAM_") + string(n+1), std::make_tuple(std::string("Scanning parameter ") + string(n+1), ""));
    
     newCategory("ENGINEERING", "Engineering");

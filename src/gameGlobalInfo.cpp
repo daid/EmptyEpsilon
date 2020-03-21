@@ -31,7 +31,6 @@ GameGlobalInfo::GameGlobalInfo()
     scanning_complexity = SC_Normal;
     hacking_difficulty = 2;
     hacking_games = HG_All;
-    long_range_radar_range = 30000;
     use_beam_shield_frequencies = true;
     use_system_damage = true;
     allow_main_screen_tactical_radar = true;
@@ -46,7 +45,6 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&global_message_timeout, 1.0);
     registerMemberReplication(&banner_string);
     registerMemberReplication(&victory_faction);
-    registerMemberReplication(&long_range_radar_range);
     registerMemberReplication(&use_beam_shield_frequencies);
     registerMemberReplication(&use_system_damage);
     registerMemberReplication(&allow_main_screen_tactical_radar);
@@ -190,13 +188,6 @@ void GameGlobalInfo::destroy()
     MultiplayerObject::destroy();
     if (state_logger)
         state_logger->destroy();
-}
-
-void GameGlobalInfo::setLongRangeRadarRange(float range)
-{
-    // Disallow ranges <= 5000.0f (zoom misbehavior, crashes)
-    // or > 125U (unreadable)
-    long_range_radar_range = std::max(5000.0f, std::min(125000.0f, range));
 }
 
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
@@ -390,14 +381,6 @@ static int unpauseGame(lua_State* L)
 /// Pause the game
 /// Calling this function will pause the game. Mainly usefull for a headless server setup. As the scenario functions are not called when paused.
 REGISTER_SCRIPT_FUNCTION(unpauseGame);
-
-static int getLongRangeRadarRange(lua_State* L)
-{
-    lua_pushnumber(L, gameGlobalInfo->long_range_radar_range);
-    return 1;
-}
-/// Return the long range radar range, normally 30.000, but can be configured per game.
-REGISTER_SCRIPT_FUNCTION(getLongRangeRadarRange);
 
 static int playSoundFile(lua_State* L)
 {

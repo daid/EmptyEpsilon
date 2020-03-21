@@ -25,12 +25,12 @@ ScreenMainScreen::ScreenMainScreen()
     viewport->showCallsigns()->showHeadings()->showSpacedust();
     viewport->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     
-    (new GuiRadarView(viewport, "VIEWPORT_RADAR", 5000.0f, nullptr))->setStyle(GuiRadarView::CircularMasked)->setSize(200, 200)->setPosition(-20, 20, ATopRight);
+    (new GuiRadarView(viewport, "VIEWPORT_RADAR", my_spaceship->getShortRangeRadarRange(), nullptr))->setStyle(GuiRadarView::CircularMasked)->setSize(200, 200)->setPosition(-20, 20, ATopRight);
     
-    tactical_radar = new GuiRadarView(this, "TACTICAL", 5000.0f, nullptr);
+    tactical_radar = new GuiRadarView(this, "TACTICAL", my_spaceship ? my_spaceship->getShortRangeRadarRange() : 5000.0f, nullptr);
     tactical_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     tactical_radar->setRangeIndicatorStepSize(1000.0f)->shortRange()->enableCallsigns()->hide();
-    long_range_radar = new GuiRadarView(this, "TACTICAL", gameGlobalInfo->long_range_radar_range, nullptr);
+    long_range_radar = new GuiRadarView(this, "TACTICAL", my_spaceship ? my_spaceship->getLongRangeRadarRange() : 30000.0f, nullptr);
     long_range_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->enableCallsigns()->hide();
     long_range_radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);

@@ -33,7 +33,6 @@ enum EScanningComplexity
     SC_Simple,
     SC_Normal,
     SC_Advanced,
-    SC_MAX
 };
 enum EHackingGames
 {
@@ -75,10 +74,6 @@ public:
     //Hacking difficulty ranges from 0 to 3
     int hacking_difficulty;
     EHackingGames hacking_games;
-    /*!
-     * \brief Range of the science radar.
-     */
-    float long_range_radar_range;
     bool use_beam_shield_frequencies;
     bool use_system_damage;
     bool allow_main_screen_tactical_radar;
@@ -117,7 +112,6 @@ public:
 
     virtual void update(float delta);
     virtual void destroy();
-    void setLongRangeRadarRange(float range);
 
     string getNextShipCallsign();
 };
