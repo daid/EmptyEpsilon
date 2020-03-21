@@ -678,12 +678,26 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
     });
     coolant_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
+    (new GuiLabel(left_col, "", "Short range radar:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    short_range_radar_slider = new GuiSlider(left_col, "", 100.0, 20000.0, 0.0, [this](float value) {
+        target->setShortRangeRadarRange(value);
+    });
+    short_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(left_col, "", "Long range radar:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    long_range_radar_slider = new GuiSlider(left_col, "", 100.0, 100000.0, 0.0, [this](float value) {
+        target->setLongRangeRadarRange(value);
+    });
+    long_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
     // Right column
 }
 
 void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
 {
     coolant_slider->setValue(target->max_coolant);
+    short_range_radar_slider->setValue(target->getShortRangeRadarRange());
+    long_range_radar_slider->setValue(target->getLongRangeRadarRange());
 }
 
 void GuiShipTweakPlayer2::open(P<SpaceObject> target)

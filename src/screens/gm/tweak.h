@@ -183,6 +183,8 @@ private:
     P<PlayerSpaceship> target;
 
     GuiSlider* coolant_slider;
+    GuiSlider* short_range_radar_slider;
+    GuiSlider* long_range_radar_slider;
 public:
     GuiShipTweakPlayer2(GuiContainer* owner);
 

@@ -1945,7 +1945,12 @@ void PlayerSpaceship::setShortRangeRadarRange(float range)
 
 string PlayerSpaceship::getExportLine()
 {
-    return "PlayerSpaceship():setTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" + getScriptExportModificationsOnTemplate();;
+    string result = "PlayerSpaceship():setTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" + getScriptExportModificationsOnTemplate();
+    if (short_range_radar_range != ship_template->short_range_radar_range)
+        result += ":setShortRangeRadarRange(" + string(short_range_radar_range, 0) + ")";
+    if (long_range_radar_range != ship_template->long_range_radar_range)
+        result += ":setLongRangeRadarRange(" + string(long_range_radar_range, 0) + ")";
+    return result;
 }
 
 void PlayerSpaceship::onProbeLaunch(ScriptSimpleCallback callback)
