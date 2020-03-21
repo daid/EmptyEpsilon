@@ -197,9 +197,9 @@ string alertLevelToString(EAlertLevel level)
     // Convert an EAlertLevel to a string.
     switch(level)
     {
-    case AL_RedAlert: return "RED ALERT";
-    case AL_YellowAlert: return "YELLOW ALERT";
-    case AL_Normal: return "Normal";
+    case AL_RedAlert: return tr("alert","RED ALERT");
+    case AL_YellowAlert: return tr("alert","YELLOW ALERT");
+    case AL_Normal: return tr("alert","Normal");
     default:
         return "???";
     }
