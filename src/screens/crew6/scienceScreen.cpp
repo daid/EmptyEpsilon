@@ -101,7 +101,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
     info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4, tr("science","Type"), "");
     info_type->setSize(GuiElement::GuiSizeMax, 30);
-    info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", "DB", [this]() {
+    info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", tr("database", "DB"), [this]() {
         P<SpaceShip> ship = targets.get();
         if (ship)
         {
