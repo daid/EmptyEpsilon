@@ -48,6 +48,8 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
     {
         pages.push_back(new GuiShipTweakPlayer(this));
         list->addEntry("Player", "");
+        pages.push_back(new GuiShipTweakPlayer2(this));
+        list->addEntry("Player 2", "");
     }
 
     if (tweak_type == TW_Object)
@@ -656,6 +658,37 @@ void GuiShipTweakPlayer::open(P<SpaceObject> target)
         combat_maneuver_strafe_speed_slider->setValue(player->combat_maneuver_strafe_speed);
         combat_maneuver_strafe_speed_slider->clearSnapValues()->addSnapValue(player->combat_maneuver_strafe_speed, 20.0f);
     }
+}
+
+GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
+: GuiTweakPage(owner)
+{
+    // Add two columns.
+    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+
+    GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+
+    // Left column
+    (new GuiLabel(left_col, "", "Coolant:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    coolant_slider = new GuiSlider(left_col, "", 0.0, 50.0, 0.0, [this](float value) {
+        target->setMaxCoolant(value);
+    });
+    coolant_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Right column
+}
+
+void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
+{
+    coolant_slider->setValue(target->max_coolant);
+}
+
+void GuiShipTweakPlayer2::open(P<SpaceObject> target)
+{
+    this->target = target;
 }
 
 GuiObjectTweakBase::GuiObjectTweakBase(GuiContainer* owner)
