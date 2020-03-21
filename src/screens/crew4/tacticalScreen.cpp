@@ -60,42 +60,6 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
         }
     );
 
-    // Joystick controls.
-    radar->setJoystickCallbacks(
-        [this](float x_position) {
-            if (my_spaceship)
-            {
-                float angle = my_spaceship->getRotation() + x_position;
-                my_spaceship->commandTargetRotation(angle);
-            }
-        },
-        [this](float y_position) {
-            if (my_spaceship && (fabs(y_position) > 20))
-            {
-                // Add some more hysteresis, since y-axis can be hard to keep at 0
-                float value;
-                if (y_position > 0)
-                    value = (y_position-20) * 1.25 / 100;
-                else
-                    value = (y_position+20) * 1.25 / 100;
-
-                my_spaceship->commandCombatManeuverBoost(-value);
-            }
-            else if (my_spaceship)
-            {
-                my_spaceship->commandCombatManeuverBoost(0.0);
-            }
-        },
-        [this](float z_position) {
-            if (my_spaceship)
-                my_spaceship->commandImpulse(-(z_position / 100));
-        },
-        [this](float r_position) {
-            if (my_spaceship)
-                my_spaceship->commandCombatManeuverStrafe(r_position / 100);
-        }
-    );
-
     // Ship statistics in the top left corner.
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
@@ -158,6 +122,26 @@ void TacticalScreen::onDraw(sf::RenderTarget& window)
         targets.set(my_spaceship->getTarget());
     }
     GuiOverlay::onDraw(window);
+}
+
+bool TacticalScreen::onJoystickAxis(const AxisAction& axisAction){
+    if(my_spaceship){
+        if (axisAction.category == "HELMS"){
+            if (axisAction.action == "IMPULSE"){
+                my_spaceship->commandImpulse(axisAction.value);  
+                return true;
+            } else if (axisAction.action == "ROTATE"){
+                my_spaceship->commandTurnSpeed(axisAction.value);
+                return true;
+            } else if (axisAction.action == "STRAFE"){
+                my_spaceship->commandCombatManeuverStrafe(axisAction.value);
+                return true;
+            } else if (axisAction.action == "BOOST"){
+                my_spaceship->commandCombatManeuverBoost(axisAction.value);
+                return true;
+            }
+        }
+    }
 }
 
 void TacticalScreen::onHotkey(const HotkeyResult& key)

@@ -32,7 +32,8 @@ enum EScanningComplexity
     SC_None = 0,
     SC_Simple,
     SC_Normal,
-    SC_Advanced
+    SC_Advanced,
+    SC_MAX
 };
 enum EHackingGames
 {

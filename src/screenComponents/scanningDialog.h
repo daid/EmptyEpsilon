@@ -3,6 +3,7 @@
 
 #include "gui/gui2_element.h"
 #include "signalQualityIndicator.h"
+#include "gameGlobalInfo.h"
 
 class GuiPanel;
 class GuiLabel;
@@ -30,6 +31,7 @@ public:
     GuiScanningDialog(GuiContainer* owner, string id);
 
     virtual void onDraw(sf::RenderTarget& window);
+    virtual bool onJoystickAxis(const AxisAction& axisAction) override;
     
     void setupParameters();
     void updateSignal();

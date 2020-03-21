@@ -180,3 +180,12 @@ void WeaponsScreen::onHotkey(const HotkeyResult& key)
         }
     }
 }
+bool WeaponsScreen::onJoystickAxis(const AxisAction& axisAction){
+    if (axisAction.category == "WEAPONS" && my_spaceship){
+        if (axisAction.action == "AIM_MISSILE"){
+            missile_aim->setValue(axisAction.value * 180);
+            tube_controls->setMissileTargetAngle(missile_aim->getValue());
+            return true;
+        } 
+    }
+}

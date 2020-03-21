@@ -52,11 +52,9 @@ public:
     virtual void onMouseUp(sf::Vector2f position);
     virtual bool onKey(sf::Event::KeyEvent key, int unicode);
     virtual void onHotkey(const HotkeyResult& key);
+    virtual bool onJoystickAxis(const AxisAction& axisAction);
     virtual void onFocusGained() {}
     virtual void onFocusLost() {}
-    virtual bool onJoystickXYMove(sf::Vector2f position);
-    virtual bool onJoystickZMove(float position);
-    virtual bool onJoystickRMove(float position);
     
     GuiElement* setSize(sf::Vector2f size);
     GuiElement* setSize(float x, float y);
