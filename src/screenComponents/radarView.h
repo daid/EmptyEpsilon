@@ -82,6 +82,8 @@ public:
     GuiRadarView* disableMissileTubeIndicators() { show_missile_tubes = false; return this; }
     GuiRadarView* enableCallsigns() { show_callsigns = true; return this; }
     GuiRadarView* disableCallsigns() { show_callsigns = false; return this; }
+    GuiRadarView* showCallsigns(bool value) { show_callsigns = value; return this; }
+    bool getCallsigns() { return show_callsigns; }
     GuiRadarView* enableHeadingIndicators() { show_heading_indicators = true; return this; }
     GuiRadarView* disableHeadingIndicators() { show_heading_indicators = false; return this; }
     GuiRadarView* gameMaster() { show_game_master_data = true; return this; }
