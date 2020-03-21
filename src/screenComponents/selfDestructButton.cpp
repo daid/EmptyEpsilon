@@ -16,7 +16,7 @@ GuiSelfDestructButton::GuiSelfDestructButton(GuiContainer* owner, string id)
     });
     activate_button->setColors(colorConfig.button_red)->setIcon("gui/icons/self-destruct")->setSize(GuiElement::GuiSizeMax, 50);
 
-    confirm_button = new GuiButton(this, id + "_CONFIRM", ("selfdestruct","Confirm!"), [this](){
+    confirm_button = new GuiButton(this, id + "_CONFIRM", tr("selfdestruct", "Confirm!"), [this](){
         confirm_button->hide();
         if (my_spaceship)
             my_spaceship->commandActivateSelfDestruct();
