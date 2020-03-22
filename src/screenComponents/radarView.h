@@ -87,8 +87,11 @@ public:
     GuiRadarView* setSignalDetails(bool is_enabled) { show_signal_details = is_enabled; return this; }
     GuiRadarView* enableSignalDetails() { show_signal_details = true; return this; }
     GuiRadarView* disableSignalDetails() { show_signal_details = false; return this; }
+    bool isSignalGravityEnabled() { return show_gravity; }
     GuiRadarView* setSignalGravity(bool is_enabled) { show_gravity = is_enabled; return this; }
+    bool isSignalElectricalEnabled() { return show_electrical; }
     GuiRadarView* setSignalElectrical(bool is_enabled) { show_electrical = is_enabled; return this; }
+    bool isSignalBiologicalEnabled() { return show_biological; }
     GuiRadarView* setSignalBiological(bool is_enabled) { show_biological = is_enabled; return this; }
     GuiRadarView* enableWaypoints() { show_waypoints = true; return this; }
     GuiRadarView* disableWaypoints() { show_waypoints = false; return this; }

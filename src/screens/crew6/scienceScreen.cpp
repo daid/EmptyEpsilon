@@ -299,11 +299,11 @@ void ScienceScreen::setVisualDetailsToggle(bool value)
 {
     if (my_spaceship->has_signal_radar && science_radar->getSignalDetails())
     {
-        science_radar->setVisualObjects(value)->setSignalElectrical(false)->setSignalGravity(false)->setSignalBiological(false);
-        probe_radar->setVisualObjects(value)->setSignalElectrical(false)->setSignalGravity(false)->setSignalBiological(false);
-        signal_details_electrical_button->setValue(false);
-        signal_details_gravity_button->setValue(false);
-        signal_details_biological_button->setValue(false);
+        science_radar->setVisualObjects(value)->setSignalElectrical(!value)->setSignalGravity(!value)->setSignalBiological(!value);
+        probe_radar->setVisualObjects(value)->setSignalElectrical(!value)->setSignalGravity(!value)->setSignalBiological(!value);
+        signal_details_electrical_button->setValue(!value);
+        signal_details_gravity_button->setValue(!value);
+        signal_details_biological_button->setValue(!value);
     }
 }
 
@@ -548,11 +548,12 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             info_gravity_signal_band->show();
             info_biological_signal_band->show();
 
-            // Calculate signal noise for unscanned objects more than 5U away.
+            // Calculate signal noise for unscanned objects more than SRRR away.
             float distance_variance = 0.0f;
             float signal = 0.0f;
-            if (distance > 5000.0f && !obj->isScannedBy(my_spaceship))
-                distance_variance = (random(0.01f, (distance - 5000.0f)) / (gameGlobalInfo->long_range_radar_range - 5000.0f)) / 10;
+
+            if (distance > my_spaceship->getShortRangeRadarRange() && !obj->isScannedBy(my_spaceship))
+                distance_variance = (random(0.01f, (distance - my_spaceship->getShortRangeRadarRange())) / (my_spaceship->getLongRangeRadarRange() - my_spaceship->getShortRangeRadarRange())) / 10;
 
             // Calculate their waveforms.
             signal = std::max(0.0f, radar_info.electrical - distance_variance);
@@ -595,6 +596,18 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     } else {
         // Hide the sidebar pager if we don't have a target.
         sidebar_pager->hide();
+    }
+
+    // If this ship has detailed signal radar and all buttons are off,
+    // enable visual only.
+    if (my_spaceship->has_signal_radar &&
+        !signal_details_visual_button->getValue() &&
+        !signal_details_electrical_button->getValue() &&
+        !signal_details_gravity_button->getValue() &&
+        !signal_details_biological_button->getValue())
+    {
+        setVisualDetailsToggle(true);
+        signal_details_visual_button->setValue(true);
     }
 }
 
@@ -682,7 +695,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
 
             if (key.hotkey == "TOGGLE_VISUAL_DETAILS")
             {
-                if (signal_details_toggle->getValue() == true && (science_radar->isVisible() || probe_radar->isVisible()))
+                if (signal_details_toggle->getValue() && (science_radar->isVisible() || probe_radar->isVisible()))
                 {
                     bool new_value = !signal_details_visual_button->getValue();
                     setVisualDetailsToggle(new_value);
@@ -693,7 +706,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
 
             if (key.hotkey == "TOGGLE_ELECTRICAL_DETAILS")
             {
-                if (signal_details_toggle->getValue() == true && (science_radar->isVisible() || probe_radar->isVisible()))
+                if (signal_details_toggle->getValue() && (science_radar->isVisible() || probe_radar->isVisible()))
                 {
                     bool new_value = !signal_details_electrical_button->getValue();
                     setElectricalDetailsToggle(new_value);
@@ -704,7 +717,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
 
             if (key.hotkey == "TOGGLE_GRAVITY_DETAILS")
             {
-                if (signal_details_toggle->getValue() == true && (science_radar->isVisible() || probe_radar->isVisible()))
+                if (signal_details_toggle->getValue() && (science_radar->isVisible() || probe_radar->isVisible()))
                 {
                     bool new_value = !signal_details_gravity_button->getValue();
                     setGravityDetailsToggle(new_value);
@@ -715,7 +728,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
 
             if (key.hotkey == "TOGGLE_BIOLOGICAL_DETAILS")
             {
-                if (signal_details_toggle->getValue() == true && (science_radar->isVisible() || probe_radar->isVisible()))
+                if (signal_details_toggle->getValue() && (science_radar->isVisible() || probe_radar->isVisible()))
                 {
                     bool new_value = !signal_details_biological_button->getValue();
                     setBiologicalDetailsToggle(new_value);
