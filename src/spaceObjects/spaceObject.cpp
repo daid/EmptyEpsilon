@@ -3,97 +3,255 @@
 #include "gameGlobalInfo.h"
 
 #include "scriptInterface.h"
-/// The SpaceObject is the base for every object which can be seen in space.
-/// General properties can read and set for each object. Each object has a position, rotation and collision shape.
+/// SpaceObject is the base for every object which can be seen in space.
+/// General properties can read and set for each object.
+/// Each object has a position, rotation, and collision shape.
 REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
 {
-    /// Set the position of this object in 2D space, in meters
+    /// Sets this object's position on the map, in meters from the origin.
+    /// Requires two numeric values.
+    /// Example: obj:setPosition(x, y)
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setPosition);
-    /// Sets the absolute rotation of this object. In degrees.
-    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setRotation);
-    /// Gets the position of this object, returns x, y
+    /// Gets this object's position on the map.
+    /// Returns x, y as meters from the origin.
     /// Example: local x, y = obj:getPosition()
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getPosition);
-    /// Gets the rotation of this object. In degrees. 0 degrees is pointing to the right of the world. So this does not match the heading of a ship.
-    /// The value returned here can also go below 0 degrees or higher then 360 degrees, there is no limiting on the rotation.
+    /// Sets this object's absolute rotation, in degrees.
+    /// Unlike setHeading, a value of 0 points to the right of the map.
+    /// The value can also be unbounded; it can be negative, or greater than
+    /// 360 degrees.
+    /// Requires a numeric value.
+    /// Example: obj:setRotation(270)
+    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setRotation);
+    /// Gets this object's absolute rotation.
+    /// setHeading and setRotation do not change the target heading of
+    /// PlayerSpaceships; use PlayerSpaceship's commandTargetRotation.
+    /// Returns a value in degrees.
+    /// Example: local rotation = obj:getRotation()
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getRotation);
-    /// Get the heading of this object, in the range of 0 to 360. The heading is 90 degrees off from the rotation.
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getHeading);
+    /// Sets this object's heading, in degrees ranging from 0 to 360.
+    /// Unlike setRotation, a value of 0 points to the top of the map.
+    /// Values that are negative or greater than 360 are are converted to values
+    /// within that range.
+    /// setHeading and setRotation do not change the target heading of
+    /// PlayerSpaceships; use PlayerSpaceship's commandTargetRotation.
+    /// Requires a numeric value.
+    /// Example: obj:setHeading(0)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setHeading);
-    /// Gets the velocity of the object, in 2D space, in meters/second
+    /// Gets this object's heading, in degrees ranging from 0 to 360.
+    /// Returns a value in degrees.
+    /// Example: local heading = obj:getHeading(0)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getHeading);
+    /// Gets this object's directional velocity within 2D space.
+    /// Returns a value in meters/second.
+    /// Example: local velocity = obj:getVelocity()
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getVelocity);
-    /// Gets the rotational velocity of the object, in degree/second
+    /// Gets this object's rotational velocity within 2D space.
+    /// Returns a value in degrees/second.
+    /// Example: local angular_velocity = obj:getAngularVelocity()
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getAngularVelocity);
-
-    /// Sets the faction to which this object belongs. Requires a string as input.
+    /// Sets the faction to which this object belongs, by faction name.
+    /// Factions are defined by the FactionInfo() function, and default
+    /// factions are defined in scripts/factionInfo.lua.
+    /// Requires a faction name string as input.
+    /// Example: obj:setFaction("Human Navy")
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setFaction);
-    /// Gets the faction name to which this object belongs.
+    /// Gets the name of the faction to which this object belongs.
+    /// Example: local faction = obj:getFaction()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getFaction);
-    /// Sets the faction to which this object belongs. Requires a index in the faction list.
+    /// Gets the localized name of the faction to which this object belongs, for displaying to the players.
+    /// Example: local faction = obj:getLocaleFaction()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getLocaleFaction);
+    /// Sets the faction to which this object belongs, by the faction's index
+    /// in the faction list.
+    /// Requires the index of a faction in the faction list.
+    /// Example: local faction_id = obj:getFactionId()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setFactionId);
-    /// Gets the index in the faction list from this object.
-    /// Can be used in combination with setFactionId to make sure two objects have the same faction.
+    /// Gets the faction list index for the faction to which this object
+    /// belongs. Can be used in combination with setFactionId() to ensure that
+    /// two objects have the same faction.
     /// Example: other:setFactionId(obj:getFactionId())
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getFactionId);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setCommsScript);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setCommsFunction);
+    /// Gets the friend-or-foe status of the parameter's faction relative to
+    /// this object's faction.
+    /// Requires a SpaceObject.
+    /// Returns true if the parameter's faction is hostile to this object's.
+    /// Example: local is_enemy = obj:isEnemy()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isEnemy);
+    /// Requires a SpaceObject.
+    /// Returns true if the parameter's faction is friendly to this object's.
+    /// If an object is neither friendly nor enemy, it is neutral.
+    /// Example: local is_friendly = obj:isFriendly()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isFriendly);
-    /// Set a custom callsign for this object. Objects get assigned random callsigns at creation, but you can overrule this from scenario scripts.
+    /// Sets the communications script used when this object is hailed.
+    /// Accepts the filename of a Lua script as a string, or can be set to an
+    /// empty string to disable comms with this object.
+    /// Examples:
+    ///   obj:setCommsScript("")
+    ///   obj:setCommsScript("comms_custom_script.lua")
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setCommsScript);
+    /// Defines a callback function to use when handling hails, in lieu of any
+    /// current or default comms script.
+    /// For a detailed example, see scenario_53_escape.lua.
+    /// Requires the name of a function to call back to when hailed.
+    /// Example: obj:setCommsFunction(commsStation)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setCommsFunction);
+    /// Set this object's callsign. Objects are assigned random callsigns at
+    /// creation; this function overrides that default.
+    /// Requires a string value.
+    /// Example: obj:setCallSign("Epsilon")
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setCallSign);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getCallSign);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, areEnemiesInRange);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getObjectsInRange);
-    /// Sets the reputation to a value.
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setReputationPoints);
-    /// Return the current amount of reputation points.
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getReputationPoints);
-    /// Take a certain amount of reputation points, returns true when there are enough points to take. Returns false when there are not enough points and does not lower the points.
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, takeReputationPoints);
-    /// Add a certain amount of reputation points.
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, addReputationPoints);
-    /// Get the name of the sector this object is in (A4 for example)
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getSectorName);
-    /// Hail a player ship from this object. The ship will get a notification and can accept or deny the hail.
-    /// Warning/ToFix: If the player refuses the hail, no feedback is given to the script in any way.
-    /// Return true when the hail is enabled with succes. Returns false when the target player cannot be hailed right now (because it's already communicating with something else)
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, openCommsTo);
-    /// Hail a player ship from this object. The ship will get a notification and can accept or deny the hail.
-    /// Warning/ToFix: If the player refuses the hail, no feedback is given to the script in any way.
-    /// Return true when the hail is enabled with succes. Returns false when the target player cannot be hailed right now (because it's already communicating with something else)
-    /// This function will display the message given as parameter when the hail is answered.
+    /// Hails a PlayerSpaceship from this object. The players' comms station is
+    /// notified and can accept or deny the hail. If the hail is answered, the
+    /// specified message is displayed to the player.
+    /// WARNING/TOFIX: If the PlayerSpaceship refuses the hail, the script
+    /// DOES NOT receive any feedback.
+    /// Returns true when the hail is accepted.
+    /// Returns false when the target player cannot be hailed right now, for
+    /// example because it's already communicating with something else.
+    /// Requires a target option and message. The message can be an empty
+    /// string.
+    /// Example: obj:sendCommsMessage(player, "Prepare to die")
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, sendCommsMessage);
-    /// Let this object take damage, the DamageInfo parameter can be empty, or a string which indicates if it's energy, kinetic or emp damage
-    /// optionally followed by the location of the damage's origin (to damage the correct shield), followed by the frequency band (0-20 for energy damage) and the ESystem to target.
+    /// As sendCommsMessage, but sends an empty string as the message.
+    /// Example: obj:openCommsTo(player)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, openCommsTo);
+    /// Gets this object's callsign.
+    /// Returns a string.
+    /// Example: local callsign = obj:getCallSign()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getCallSign);
+    /// Gets whether any objects from a hostile faction are within a specific
+    /// radius of this object, in meters.
+    /// Requires a numeric value for the radius.
+    /// Returns true if hostiles are in range.
+    /// Example: obj:areEnemiesInRange(5000)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, areEnemiesInRange);
+    /// Gets any objects within a specific radius of this object, in meters.
+    /// Requires a numeric value for the radius.
+    /// Returns a list of SpaceObjects within range.
+    /// Example: for _, obj_in_range in ipairs(obj:getObjectsInRange(5000)) ...
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getObjectsInRange);
+    /// Sets this object's faction reputation to the specified amount.
+    /// Requires a numeric value.
+    /// Example: obj:setReputationPoints(1000)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setReputationPoints);
+    /// Deduct a specified amount of faction reputation points from this object.
+    /// Requires a numeric value.
+    /// Returns true if there are enough points to deduct the specified amount.
+    /// Returns false if there are not enough points, and does not deduct any.
+    /// Example: local took_reputation = obj:takeReputationPoints(1000)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, takeReputationPoints);
+    /// Adds a specified amount of faction reputation points to this object.
+    /// Requires a numeric value.
+    /// Example: obj:addReputationPoints(1000)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, addReputationPoints);
+    /// Gets the name of the map sector, such as "A4", where this object is
+    /// located.
+    /// Returns a string value.
+    /// Example: obj:getSectorName()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getSectorName);
+    /// Gets this object's current faction reputation points.
+    /// Returns an integer value.
+    /// Example: local reputation = obj:getReputationPoints();
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getReputationPoints);
+    /// Deals a specific amount of a specific type of damage to this object.
+    /// Requires a numeric value for the damage amount, and accepts an optional
+    /// DamageInfo type.
+    /// The DamageInfo parameter can be empty, or a string that indicates
+    /// whether to deal the default "energy" damage, "kinetic" damage, or "emp"
+    /// damage, and can optionally be followed by the location of the damage's
+    /// origin (for instance, to damage the correct shield on ships).
+    /// SpaceObjects by default do not implement damage, instead leaving it to
+    /// be overridden by specialized subclasses.
+    /// Examples:
+    ///              amount,  type,    x, y
+    ///   obj:takeDamage(20, "emp", 1000, 0)
+    ///   obj:takeDamage(20)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, takeDamage);
-    /// Set the description of this object. The description is visible on the Science station.
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setDescription);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setDescriptionForScanState);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getDescription);
-    /// Sets the description of this object in scanned and unscanned states. First parameter is the description in unscanned state, while the 2nd parameter is in scanned state.
+    /// Sets this object's description in unscanned and scanned states. These
+    /// descriptions are displayed when this object is targeted from a ship's
+    /// Science station.
+    /// Requires two string values, one for the descriptions when unscanned
+    /// and another for when it has been scanned.
+    /// Example:
+    ///   obj:setDescriptions([[A refitted Atlantis X23...]], [[It's a trap!]])
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setDescriptions);
-    /// Set the radar signature of this object. Objects' signatures create noise
-    /// on the Science station's raw radar signal ring.
+    /// As setDescriptions, but sets the same description for both unscanned
+    /// and scanned states.
+    /// Requires a string value.
+    /// Example: obj:setDescription([[A refitted Atlantis X23 for more ...]])
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setDescription);
+    /// Sets a description for a specific EScannedState. String equivalents for
+    /// EScannedState are defined in the convert<EScannedState> function of
+    /// src/spaceObjects/spaceObject.cpp.
+    /// Requires a string-equivalent EScannedState and a string description.
+    /// Example:
+    ///   obj:setDescriptionForScanState("friendorfoeidentified", [[This...]])
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setDescriptionForScanState);
+    /// Gets this object's description.
+    /// Accepts an optional string-equivalent EScannedState.
+    /// Returns a string.
+    /// Examples:
+    ///   obj:getDescription()
+    ///   obj:getDescription("friendorfoeidentified")
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getDescription);
+    /// Sets this object's radar signature, which creates noise on the Science
+    /// station's raw radar signal ring.
+    /// Certain SpaceObject types might modify their signatures using this value
+    /// as a baseline. Default values also depend on the SpaceObject type.
+    /// Requires numeric values ranging from 0.0 to 1.0 for the gravitational,
+    /// electrical, and biological radar bands.
+    /// Example: obj:setRadarSignatureInfo(0.0, 0.5, 1.0)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setRadarSignatureInfo);
+    /// Gets this object's component values from its radar signature.
+    /// Returns a numeric value between 0.0 and 1.0; larger and negative values
+    /// are possible, but currently have no visual effect on the bands.
+    /// Examples:
+    ///   local grav_band = obj:getRadarSignatureGravity()
+    ///   local elec_band = obj:getRadarSignatureElectrical()
+    ///   local bio_band = obj:getRadarSignatureBiological()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureGravity);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureElectrical);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRadarSignatureBiological);
-    ///Get the scanning complexity of this object (amount of bars in the minigame)
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, scanningComplexity);
-    ///Get the scanning depth of this object (number of minigames to complete)
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, scanningChannelDepth);
-    ///Set the scanning complexity and depth for this object.
+    /// Sets this object's scanning complexity (number of bars in the scanning
+    /// minigame) and depth (number of scanning minigames to complete).
+    /// Requires two integer values.
+    /// Example: obj:setScanningParameters(2, 3)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setScanningParameters);
-    ///[DEPRICATED] Check if this object is scanned already.
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isScanned);
-    /// Check if this object is scanned by the faction of another object
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isScannedBy);
-    /// Check if this object is scanned by another faction
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isScannedByFaction);
-    /// Set if this object is scanned or not by every faction.
+    /// Gets the scanning complexity for the parameter object.
+    /// Requires a SpaceObject.
+    /// Returns an integer value.
+    /// Example: local scan_complexity = obj:scanningComplexity(obj)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, scanningComplexity);
+    /// Gets the scanning depth for the parameter object.
+    /// Requires a SpaceObject.
+    /// Returns an integer value.
+    /// Example: local scan_depth = obj:scanningChannelDepth(obj)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, scanningChannelDepth);
+    /// Sets whether all factions consider this object as having been scanned.
+    /// Requires a boolean value. If false, all factions treat this object as
+    /// unscanned; if true, all factions treat this object as fully scanned.
+    /// Example: obj:setScanned(true)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setScanned);
-    /// Set if this object is scanned or not by a particular faction.
+    /// [DEPRECATED]
+    /// Gets whether this object has been scanned.
+    /// Use isScannedBy or isScannedByFaction instead.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isScanned);
+    /// Gets whether the parameter object has successfully scanned this object.
+    /// Requires a SpaceObject.
+    /// Returns a boolean value.
+    /// Example: obj:isScannedBy(other)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isScannedBy);
+    /// Sets whether a specific faction considers this object as having been
+    /// scanned.
+    /// Requires a faction name string value and a boolean value.
+    /// Example: obj:setScannedByFaction("Human Navy", false)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setScannedByFaction);
+    /// Gets whether the parameter faction has successfully scanned this object.
+    /// Requires a faction name string value.
+    /// Returns a boolean value.
+    /// Example: obj:isScannedByFaction("Human Navy")
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isScannedByFaction);
 }
 
 PVector<SpaceObject> space_object_list;
@@ -121,6 +279,10 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     registerMemberReplication(&scanning_complexity_value);
     registerMemberReplication(&scanning_depth_value);
     registerCollisionableReplication(multiplayer_significant_range);
+}
+
+SpaceObject::~SpaceObject()
+{
 }
 
 #if FEATURE_3D_RENDERING

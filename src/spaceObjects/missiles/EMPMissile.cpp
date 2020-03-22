@@ -6,6 +6,7 @@ REGISTER_MULTIPLAYER_CLASS(EMPMissile, "EMPMissile");
 EMPMissile::EMPMissile()
 : MissileWeapon("EMPMissile", MissileWeaponData::getDataFor(MW_EMP))
 {
+    setRadarSignatureInfo(0.0, 0.5, 0.1);
 }
 
 void EMPMissile::hitObject(P<SpaceObject> object)
@@ -17,4 +18,5 @@ void EMPMissile::hitObject(P<SpaceObject> object)
     e->setSize(category_modifier * blast_range);
     e->setPosition(getPosition());
     e->setOnRadar(true);
+    e->setRadarSignatureInfo(0.0, 1.0, 0.0);
 }

@@ -69,12 +69,14 @@ public:
 private:
     static std::unordered_map<string, P<ShipTemplate> > templateMap;
     string name;
+    string locale_name;
     string description;
     string class_name;
     string sub_class_name;
     TemplateType type;
 public:
     string getName();
+    string getLocaleName();
     string getDescription();
     string getClass();
     string getSubClass();
@@ -110,6 +112,8 @@ public:
     int weapon_storage[MW_Count];
 
     string radar_trace;
+    float long_range_radar_range = 30000.0f;
+    float short_range_radar_range = 5000.0f;
 
     std::vector<ShipRoomTemplate> rooms;
     std::vector<ShipDoorTemplate> doors;
@@ -117,6 +121,7 @@ public:
     ShipTemplate();
 
     void setName(string name);
+    void setLocaleName(string name);
     void setClass(string class_name, string sub_class_name);
     void setDescription(string description);
     void setModel(string model_name);
@@ -161,6 +166,8 @@ public:
     void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system);
     void addDoor(sf::Vector2i position, bool horizontal);
     void setRadarTrace(string trace);
+    void setLongRangeRadarRange(float range);
+    void setShortRangeRadarRange(float range);
 
     P<ShipTemplate> copy(string new_name);
 
@@ -174,6 +181,7 @@ public:
     static std::vector<string> getTemplateNameList(TemplateType type);
 };
 string getSystemName(ESystem system);
+string getLocaleSystemName(ESystem system);
 REGISTER_MULTIPLAYER_ENUM(ESystem);
 
 /* Define script conversion function for the ShipTemplate::TemplateType enum. */

@@ -33,7 +33,7 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
         systems[n].box = box;
         box->setSize(290, 400);
 
-        (new GuiLabel(box, "", getSystemName(ESystem(n)), 30))->addBackground()->setAlignment(ACenter)->setPosition(0, 0, ATopLeft)->setSize(290, 50);
+        (new GuiLabel(box, "", getLocaleSystemName(ESystem(n)), 30))->addBackground()->setAlignment(ACenter)->setPosition(0, 0, ATopLeft)->setSize(290, 50);
         (new GuiLabel(box, "", "Power", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(20, 50, ATopLeft)->setSize(30, 340);
         (new GuiLabel(box, "", "Coolant", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(100, 50, ATopLeft)->setSize(30, 340);
         (new GuiLabel(box, "", "Heat", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(180, 50, ATopLeft)->setSize(30, 340);
@@ -107,4 +107,25 @@ void PowerManagementScreen::onDraw(sf::RenderTarget& window)
             systems[n].coolant_bar->setValue(coolant)->setColor(sf::Color(0,128,255));
         }
     }
+}
+bool PowerManagementScreen::onJoystickAxis(const AxisAction& axisAction){
+    if(my_spaceship){
+        if (axisAction.category == "ENGINEERING"){
+            for(int n=0; n<SYS_COUNT; n++)
+            {
+                ESystem system = ESystem(n);
+                if (axisAction.action == std::string("POWER_") + getSystemName(system)){
+                    systems[n].power_slider->setValue((axisAction.value + 1) * 3.0 / 2.0);
+                    my_spaceship->commandSetSystemPowerRequest(system, systems[n].power_slider->getValue());
+                    return true;
+                } 
+                if (axisAction.action == std::string("COOLANT_") + getSystemName(system)){
+                    systems[n].coolant_slider->setValue((axisAction.value + 1) * 10.0 / 2.0);
+                    my_spaceship->commandSetSystemCoolantRequest(system, systems[n].coolant_slider->getValue());
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 }

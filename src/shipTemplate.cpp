@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "shipTemplate.h"
 #include "spaceObjects/spaceObject.h"
 #include "mesh.h"
@@ -9,6 +10,7 @@
 REGISTER_SCRIPT_CLASS(ShipTemplate)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setName);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLocaleName);
     /// Set the class name, and subclass name for the ship. Used to divide ships into different classes.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setClass);
     /// Set the description shown for this ship in the science database.
@@ -69,6 +71,8 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoomSystem);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addDoor);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadarTrace);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLongRangeRadarRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShortRangeRadarRange);
     /// Return a new template with the given name, which is an exact copy of this template.
     /// Used to make easy variations of templates.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, copy);
@@ -195,6 +199,13 @@ void ShipTemplate::setName(string name)
     if (name.startswith("Player "))
         name = name.substr(7);
     this->name = name;
+    if (this->locale_name == "")
+        this->locale_name = name;
+}
+
+void ShipTemplate::setLocaleName(string name)
+{
+    this->locale_name = name;
 }
 
 void ShipTemplate::setClass(string class_name, string sub_class_name)
@@ -322,6 +333,24 @@ string getSystemName(ESystem system)
     }
 }
 
+string getLocaleSystemName(ESystem system)
+{
+    switch(system)
+    {
+    case SYS_Reactor: return tr("system", "Reactor");
+    case SYS_BeamWeapons: return tr("system", "Beam Weapons");
+    case SYS_MissileSystem: return tr("system", "Missile System");
+    case SYS_Maneuver: return tr("system", "Maneuvering");
+    case SYS_Impulse: return tr("system", "Impulse Engines");
+    case SYS_Warp: return tr("system", "Warp Drive");
+    case SYS_JumpDrive: return tr("system", "Jump Drive");
+    case SYS_FrontShield: return tr("system", "Front Shield Generator");
+    case SYS_RearShield: return tr("system", "Rear Shield Generator");
+    default:
+        return "UNKNOWN";
+    }
+}
+
 void ShipTemplate::setDescription(string description)
 {
     this->description = description;
@@ -411,6 +440,20 @@ void ShipTemplate::addDoor(sf::Vector2i position, bool horizontal)
 void ShipTemplate::setRadarTrace(string trace)
 {
     radar_trace = trace;
+}
+
+void ShipTemplate::setLongRangeRadarRange(float range)
+{
+    range = std::max(range, 100.0f);
+    long_range_radar_range = range;
+    short_range_radar_range = std::min(short_range_radar_range, range);
+}
+
+void ShipTemplate::setShortRangeRadarRange(float range)
+{
+    range = std::max(range, 100.0f);
+    short_range_radar_range = range;
+    long_range_radar_range = std::max(long_range_radar_range, range);
 }
 
 P<ShipTemplate> ShipTemplate::copy(string new_name)

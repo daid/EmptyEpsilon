@@ -107,6 +107,7 @@ public:
     string callsign;
 
     SpaceObject(float collisionRange, string multiplayerName, float multiplayer_significant_range=-1);
+    virtual ~SpaceObject();
 
     float getRadius() { return object_radius; }
     void setRadius(float radius) { object_radius = radius; setCollisionRadius(radius); }
@@ -203,6 +204,7 @@ public:
     bool isFriendly(P<SpaceObject> obj);
     void setFaction(string faction_name) { this->faction_id = FactionInfo::findFactionId(faction_name); }
     string getFaction() { return factionInfo[this->faction_id]->getName(); }
+    string getLocaleFaction() { return factionInfo[this->faction_id]->getLocaleName(); }
     void setFactionId(unsigned int faction_id) { this->faction_id = faction_id; }
     unsigned int getFactionId() { return faction_id; }
     void setReputationPoints(float amount);

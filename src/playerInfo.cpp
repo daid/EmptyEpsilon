@@ -17,7 +17,7 @@
 #include "screens/extra/damcon.h"
 #include "screens/extra/powerManagement.h"
 #include "screens/extra/databaseScreen.h"
-
+#include "screens/extra/commsScreen.h"
 #include "screens/extra/shipLogScreen.h"
 
 #include "screenComponents/mainScreenControls.h"
@@ -26,6 +26,7 @@
 static const int16_t CMD_UPDATE_CREW_POSITION = 0x0001;
 static const int16_t CMD_UPDATE_SHIP_ID = 0x0002;
 static const int16_t CMD_UPDATE_MAIN_SCREEN_CONTROL = 0x0003;
+static const int16_t CMD_UPDATE_NAME = 0x0004;
 
 P<PlayerInfo> my_player_info;
 P<PlayerSpaceship> my_spaceship;
@@ -46,6 +47,7 @@ PlayerInfo::PlayerInfo()
         registerMemberReplication(&crew_position[n]);
     }
     registerMemberReplication(&ship_id);
+    registerMemberReplication(&name);
     registerMemberReplication(&main_screen_control);
 
     player_info_list.push_back(this);
@@ -76,6 +78,15 @@ void PlayerInfo::commandSetMainScreenControl(bool control)
     main_screen_control = control;
 }
 
+void PlayerInfo::commandSetName(const string& name)
+{
+    sf::Packet packet;
+    packet << CMD_UPDATE_NAME << name;
+    sendClientCommand(packet);
+
+    this->name = name;
+}
+
 void PlayerInfo::onReceiveClientCommand(int32_t client_id, sf::Packet& packet)
 {
     if (client_id != this->client_id) return;
@@ -99,6 +110,9 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sf::Packet& packet)
         break;
     case CMD_UPDATE_MAIN_SCREEN_CONTROL:
         packet >> main_screen_control;
+        break;
+    case CMD_UPDATE_NAME:
+        packet >> name;
         break;
     }
 }
@@ -130,7 +144,7 @@ void PlayerInfo::spawnUI()
         if (crew_position[scienceOfficer])
             screen->addStationTab(new ScienceScreen(screen), scienceOfficer, getCrewPositionName(scienceOfficer), getCrewPositionIcon(scienceOfficer));
         if (crew_position[relayOfficer])
-            screen->addStationTab(new RelayScreen(screen), relayOfficer, getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
+            screen->addStationTab(new RelayScreen(screen, true), relayOfficer, getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
         
         //Crew 4/3
         if (crew_position[tacticalOfficer])
@@ -143,6 +157,7 @@ void PlayerInfo::spawnUI()
         //Crew 1
         if (crew_position[singlePilot])
             screen->addStationTab(new SinglePilotScreen(screen), singlePilot, getCrewPositionName(singlePilot), getCrewPositionIcon(singlePilot));
+
         //Extra
         if (crew_position[damageControl])
             screen->addStationTab(new DamageControlScreen(screen), damageControl, getCrewPositionName(damageControl), getCrewPositionIcon(damageControl));
@@ -150,11 +165,13 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new PowerManagementScreen(screen), powerManagement, getCrewPositionName(powerManagement), getCrewPositionIcon(powerManagement));
         if (crew_position[databaseView])
             screen->addStationTab(new DatabaseScreen(screen), databaseView, getCrewPositionName(databaseView), getCrewPositionIcon(databaseView));
-        
-        //Ship log screen, if you have comms, you have ships log. (note this is mostly replaced by the [at the bottom of the screen openable log]
-        if (crew_position[singlePilot])
-            screen->addStationTab(new ShipLogScreen(screen), max_crew_positions, "Ships log", "");
-        
+        if (crew_position[altRelay])
+            screen->addStationTab(new RelayScreen(screen, false), altRelay, getCrewPositionName(altRelay), getCrewPositionIcon(altRelay));
+        if (crew_position[commsOnly])
+            screen->addStationTab(new CommsScreen(screen), commsOnly, getCrewPositionName(commsOnly), getCrewPositionIcon(commsOnly));
+        if (crew_position[shipLog])
+            screen->addStationTab(new ShipLogScreen(screen), shipLog, getCrewPositionName(shipLog), getCrewPositionIcon(shipLog));
+ 
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(screen, "SELF_DESTRUCT_ENTRY");
         for(int n=0; n<max_crew_positions; n++)
             if (crew_position[n])
@@ -197,6 +214,9 @@ string getCrewPositionName(ECrewPosition position)
     case damageControl: return "Damage Control";
     case powerManagement: return "Power Management";
     case databaseView: return "Database";
+    case altRelay: return "Strategic Map";
+    case commsOnly: return "Comms";
+    case shipLog: return "Ship's Log";
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -217,6 +237,9 @@ string getCrewPositionIcon(ECrewPosition position)
     case damageControl: return "";
     case powerManagement: return "";
     case databaseView: return "";
+    case altRelay: return "";
+    case commsOnly: return "";
+    case shipLog: return "";
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -257,7 +280,12 @@ template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosit
         cp = powerManagement;
     else if (str == "database" || str == "databaseview")
         cp = databaseView;
-    
+    else if (str == "altrelay")
+        cp = altRelay;
+    else if (str == "commsonly")
+        cp = commsOnly;
+    else if (str == "shiplog")
+        cp = shipLog;
     else
         luaL_error(L, "Unknown value for crew position: %s", str.c_str());
 }

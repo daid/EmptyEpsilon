@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "engine.h"
 #include "mainMenus.h"
 #include "main.h"
@@ -17,6 +18,7 @@
 #include "gui/gui2_image.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_button.h"
+#include "gui/gui2_textentry.h"
 
 class DebugAllModelView : public GuiCanvas
 {
@@ -68,9 +70,14 @@ MainMenu::MainMenu()
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
 
     (new GuiImage(this, "LOGO", "logo_full"))->setPosition(0, title_y, ATopCenter)->setSize(logo_size_x, logo_size_y);
-    (new GuiLabel(this, "VERSION", "Version: " + string(VERSION_NUMBER), 20))->setPosition(0, title_y + logo_size, ATopCenter)->setSize(0, 20);
+    (new GuiLabel(this, "VERSION", tr("Version: {version}").format({{"version", string(VERSION_NUMBER)}}), 20))->setPosition(0, title_y + logo_size, ATopCenter)->setSize(0, 20);
 
-    (new GuiButton(this, "START_SERVER", "Start server", [this]() {
+    (new GuiLabel(this, "", tr("Your name:"), 30))->setAlignment(ACenterLeft)->setPosition(sf::Vector2f(50, -400), ABottomLeft)->setSize(300, 50);
+    (new GuiTextEntry(this, "USERNAME", PreferencesManager::get("username")))->callback([](string text) {
+        PreferencesManager::set("username", text);
+    })->setPosition(sf::Vector2f(50, -350), ABottomLeft)->setSize(300, 50);
+
+    (new GuiButton(this, "START_SERVER", tr("Start server"), [this]() {
         new EpsilonServer();
         if (game_server)
         {
@@ -79,31 +86,34 @@ MainMenu::MainMenu()
         }
     }))->setPosition(sf::Vector2f(50, -230), ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "START_CLIENT", "Start client", [this]() {
+    (new GuiButton(this, "START_CLIENT", tr("Start client"), [this]() {
         new ServerBrowserMenu(ServerBrowserMenu::Local);
         destroy();
     }))->setPosition(sf::Vector2f(50, -170), ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "OPEN_OPTIONS", "Options", [this]() {
+    (new GuiButton(this, "OPEN_OPTIONS", tr("Options"), [this]() {
         new OptionsMenu();
         destroy();
     }))->setPosition(sf::Vector2f(50, -110), ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "QUIT", "Quit", [this]() {
+    (new GuiButton(this, "QUIT", tr("Quit"), [this]() {
         engine->shutdown();
     }))->setPosition(sf::Vector2f(50, -50), ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "START_TUTORIAL", "Tutorials", [this]() {
+    (new GuiButton(this, "START_TUTORIAL", tr("Tutorials"), [this]() {
         new TutorialMenu();
         destroy();
     }))->setPosition(sf::Vector2f(370, -50), ABottomLeft)->setSize(300, 50);
 
     if (InputHandler::touch_screen)
     {
-        (new GuiButton(this, "TOUCH_CALIB", "Calibrate\nTouchscreen", [this]() {
+        GuiButton* touch_calib = new GuiButton(this, "TOUCH_CALIB", "", [this]() {
             destroy();
             new MouseCalibrator("");
-        }))->setPosition(sf::Vector2f(-50, -50), ABottomRight)->setSize(300, 100);
+        });
+        touch_calib->setPosition(sf::Vector2f(-50, -50), ABottomRight)->setSize(200, 100);
+        (new GuiLabel(touch_calib, "TOUCH_CALIB_LABEL", tr("Calibrate\nTouchscreen"), 30)
+        )->setPosition(0, -15, ACenter);
     }
 
     float y = 100;

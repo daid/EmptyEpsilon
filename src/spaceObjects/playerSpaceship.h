@@ -124,7 +124,9 @@ private:
     CommsScriptInterface comms_script_interface; // Server only
     // Ship's log container
     std::vector<ShipLogEntry> ships_log;
-    
+
+    float long_range_radar_range = 50000.0f;
+    float short_range_radar_range = 5000.0f;
 public:
     std::vector<CustomShipFunction> custom_functions;
 
@@ -134,6 +136,8 @@ public:
     int max_scan_probes;
     int scan_probe_stock;
     float scan_probe_recharge;
+
+    ScriptSimpleCallback on_probe_launch;
 
     // Main screen content
     EMainScreenSetting main_screen_setting;
@@ -152,6 +156,7 @@ public:
     int32_t linked_science_probe_id;
 
     PlayerSpaceship();
+    virtual ~PlayerSpaceship();
 
     // Comms functions
     bool isCommsInactive() { return comms_state == CS_Inactive; }
@@ -189,6 +194,8 @@ public:
     void setMaxScanProbeCount(int amount) { max_scan_probes = std::max(0, amount); scan_probe_stock = std::min(scan_probe_stock, max_scan_probes); }
     int getMaxScanProbeCount() { return max_scan_probes; }
 
+    void onProbeLaunch(ScriptSimpleCallback callback);
+
     void addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback);
     void addCustomInfo(ECrewPosition position, string name, string caption);
     void addCustomMessage(ECrewPosition position, string name, string caption);
@@ -200,6 +207,7 @@ public:
     // Client command functions
     virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet) override;
     void commandTargetRotation(float target);
+    void commandTurnSpeed(float turnSpeed);
     void commandImpulse(float target);
     void commandWarp(int8_t target);
     void commandJump(float distance);
@@ -293,8 +301,14 @@ public:
     // Radar function
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
 
+    // Radar range
+    float getLongRangeRadarRange();
+    float getShortRangeRadarRange();
+    void setLongRangeRadarRange(float range);
+    void setShortRangeRadarRange(float range);
+
     // Script export function
-    virtual string getExportLine();
+    virtual string getExportLine() override;
 };
 REGISTER_MULTIPLAYER_ENUM(ECommsState);
 template<> int convert<EAlertLevel>::returnType(lua_State* L, EAlertLevel l);

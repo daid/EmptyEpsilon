@@ -128,6 +128,14 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setAutoCoolant);
     // Set a password to join the ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setControlCode);
+    // Callback when this ship launches a probe.
+    // Returns the launching PlayerSpaceship and launched ScanProbe.
+    // Example: player:onProbeLaunch(trackProbe)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeLaunch);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getLongRangeRadarRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getShortRangeRadarRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setLongRangeRadarRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setShortRangeRadarRange);
 }
 
 float PlayerSpaceship::system_power_user_factor[] = {
@@ -184,6 +192,7 @@ static const int16_t CMD_ABORT_DOCK = 0x0027;
 static const int16_t CMD_SET_MAIN_SCREEN_OVERLAY = 0x0028;
 static const int16_t CMD_HACKING_FINISHED = 0x0029;
 static const int16_t CMD_CUSTOM_FUNCTION = 0x002A;
+static const int16_t CMD_TURN_SPEED = 0x002B;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -264,6 +273,8 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&alert_level);
     registerMemberReplication(&linked_science_probe_id);
     registerMemberReplication(&control_code);
+    registerMemberReplication(&long_range_radar_range);
+    registerMemberReplication(&short_range_radar_range);
     registerMemberReplication(&custom_functions);
 
     // Determine which stations must provide self-destruct confirmation codes.
@@ -309,6 +320,10 @@ PlayerSpaceship::PlayerSpaceship()
 
     // Initialize the ship's log.
     addToShipLog("Start of log", colorConfig.log_generic);
+}
+
+PlayerSpaceship::~PlayerSpaceship()
+{
 }
 
 void PlayerSpaceship::update(float delta)
@@ -483,6 +498,7 @@ void PlayerSpaceship::update(float delta)
             ExplosionEffect* e = new ExplosionEffect();
             e->setSize(1000.0f);
             e->setPosition(getPosition());
+            e->setRadarSignatureInfo(0.0, 0.4, 0.4);
 
             DamageInfo info(this, DT_Kinetic, getPosition());
             SpaceObject::damageArea(getPosition(), 500, 30, 60, info, 0.0);
@@ -558,6 +574,7 @@ void PlayerSpaceship::update(float delta)
                         ExplosionEffect* e = new ExplosionEffect();
                         e->setSize(1000.0f);
                         e->setPosition(getPosition() + sf::rotateVector(sf::Vector2f(0, random(0, 500)), random(0, 360)));
+                        e->setRadarSignatureInfo(0.0, 0.6, 0.6);
                     }
 
                     DamageInfo info(this, DT_Kinetic, getPosition());
@@ -624,6 +641,9 @@ void PlayerSpaceship::applyTemplateValues()
     // Set the ship's number of repair crews in Engineering from the ship's
     // template.
     setRepairCrewCount(ship_template->repair_crew_count);
+
+    long_range_radar_range = ship_template->long_range_radar_range;
+    short_range_radar_range = ship_template->short_range_radar_range;
 }
 
 void PlayerSpaceship::executeJump(float distance)
@@ -1085,7 +1105,12 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     switch(command)
     {
     case CMD_TARGET_ROTATION:
+        turnSpeed = 0;
         packet >> target_rotation;
+        break;
+    case CMD_TURN_SPEED:
+        target_rotation = getRotation();
+        packet >> turnSpeed;
         break;
     case CMD_IMPULSE:
         packet >> impulse_request;
@@ -1189,7 +1214,8 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     case CMD_SCAN_DONE:
         if (scanning_target && scanning_complexity > 0)
         {
-            scanning_target->scannedBy(this);
+            if (scanning_complexity == scanning_target->scanningComplexity(this) && scanning_depth == scanning_target->scanningChannelDepth(this))
+                scanning_target->scannedBy(this);
             scanning_target = nullptr;
         }
         break;
@@ -1488,6 +1514,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             p->setPosition(getPosition());
             p->setTarget(target);
             p->setOwner(this);
+            if (on_probe_launch.isSet())
+            {
+                on_probe_launch.call(P<PlayerSpaceship>(this), P<ScanProbe>(p));
+            }
             scan_probe_stock--;
         }
         break;
@@ -1540,6 +1570,13 @@ void PlayerSpaceship::commandTargetRotation(float target)
 {
     sf::Packet packet;
     packet << CMD_TARGET_ROTATION << target;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandTurnSpeed(float turnSpeed)
+{
+    sf::Packet packet;
+    packet << CMD_TURN_SPEED << turnSpeed;
     sendClientCommand(packet);
 }
 
@@ -1883,8 +1920,8 @@ void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f posit
     SpaceShip::drawOnGMRadar(window, position, scale, long_range);
     if (long_range)
     {
-        sf::CircleShape radar_radius(gameGlobalInfo->long_range_radar_range * scale);
-        radar_radius.setOrigin(gameGlobalInfo->long_range_radar_range * scale, gameGlobalInfo->long_range_radar_range * scale);
+        sf::CircleShape radar_radius(long_range_radar_range * scale);
+        radar_radius.setOrigin(long_range_radar_range * scale, long_range_radar_range * scale);
         radar_radius.setPosition(position);
         radar_radius.setFillColor(sf::Color::Transparent);
         radar_radius.setOutlineColor(sf::Color(255, 255, 255, 64));
@@ -1901,9 +1938,43 @@ void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f posit
     }
 }
 
+float PlayerSpaceship::getLongRangeRadarRange()
+{
+    return long_range_radar_range;
+}
+
+float PlayerSpaceship::getShortRangeRadarRange()
+{
+    return short_range_radar_range;
+}
+
+void PlayerSpaceship::setLongRangeRadarRange(float range)
+{
+    range = std::max(range, 100.0f);
+    long_range_radar_range = range;
+    short_range_radar_range = std::min(short_range_radar_range, range);
+}
+
+void PlayerSpaceship::setShortRangeRadarRange(float range)
+{
+    range = std::max(range, 100.0f);
+    short_range_radar_range = range;
+    long_range_radar_range = std::max(long_range_radar_range, range);
+}
+
 string PlayerSpaceship::getExportLine()
 {
-    return "PlayerSpaceship():setTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" + getScriptExportModificationsOnTemplate();;
+    string result = "PlayerSpaceship():setTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" + getScriptExportModificationsOnTemplate();
+    if (short_range_radar_range != ship_template->short_range_radar_range)
+        result += ":setShortRangeRadarRange(" + string(short_range_radar_range, 0) + ")";
+    if (long_range_radar_range != ship_template->long_range_radar_range)
+        result += ":setLongRangeRadarRange(" + string(long_range_radar_range, 0) + ")";
+    return result;
+}
+
+void PlayerSpaceship::onProbeLaunch(ScriptSimpleCallback callback)
+{
+    this->on_probe_launch = callback;
 }
 
 #ifndef _MSC_VER

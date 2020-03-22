@@ -42,7 +42,7 @@ public:
     void plan(sf::Vector2f start, sf::Vector2f end);
     void clear();
 private:
-    void recursivePlan(sf::Vector2f start, sf::Vector2f end);
+    void recursivePlan(sf::Vector2f start, sf::Vector2f end, int& recursion_counter);
     bool checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2f& new_point, sf::Vector2f* alt_point=NULL);
 };
 

@@ -32,7 +32,7 @@ enum EScanningComplexity
     SC_None = 0,
     SC_Simple,
     SC_Normal,
-    SC_Advanced
+    SC_Advanced,
 };
 enum EHackingGames
 {
@@ -74,10 +74,6 @@ public:
     //Hacking difficulty ranges from 0 to 3
     int hacking_difficulty;
     EHackingGames hacking_games;
-    /*!
-     * \brief Range of the science radar.
-     */
-    float long_range_radar_range;
     bool use_beam_shield_frequencies;
     bool use_system_damage;
     bool allow_main_screen_tactical_radar;
@@ -91,6 +87,7 @@ public:
     bool intercept_all_comms_to_gm;
 
     GameGlobalInfo();
+    virtual ~GameGlobalInfo();
 
     P<PlayerSpaceship> getPlayerShip(int index);
     void setPlayerShip(int index, P<PlayerSpaceship> ship);
@@ -123,5 +120,6 @@ string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive);
 string getSectorName(sf::Vector2f position);
 
 REGISTER_MULTIPLAYER_ENUM(EScanningComplexity);
+REGISTER_MULTIPLAYER_ENUM(EHackingGames);
 
 #endif//GAME_GLOBAL_INFO_H

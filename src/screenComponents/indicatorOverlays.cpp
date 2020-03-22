@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "indicatorOverlays.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
@@ -125,7 +126,7 @@ void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
                 victory_label->setText("Victory!");
                 break;
             case FVF_Neutral:
-                victory_label->setText(factionInfo[gameGlobalInfo->getVictoryFactionId()]->getName() + " wins");
+                victory_label->setText(tr("{faction} wins").format({{"faction", factionInfo[gameGlobalInfo->getVictoryFactionId()]->getLocaleName()}}));
                 break;
             }
         }

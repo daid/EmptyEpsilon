@@ -104,48 +104,16 @@ void GuiContainer::forwardKeypressToElements(const HotkeyResult& key)
     }
 }
 
-bool GuiContainer::forwardJoystickXYMoveToElements(sf::Vector2f position)
+bool GuiContainer::forwardJoystickAxisToElements(const AxisAction& axisAction)
 {
     for(GuiElement* element : elements)
     {
         if (element->isVisible())
         {
             if (element->isEnabled())
-                if (element->onJoystickXYMove(position))
+                if (element->onJoystickAxis(axisAction))
                     return true;
-            if (element->forwardJoystickXYMoveToElements(position))
-                return true;
-        }
-    }
-    return false;
-}
-
-bool GuiContainer::forwardJoystickZMoveToElements(float position)
-{
-    for(GuiElement* element : elements)
-    {
-        if (element->isVisible())
-        {
-            if (element->isEnabled())
-                if (element->onJoystickZMove(position))
-                    return true;
-            if (element->forwardJoystickZMoveToElements(position))
-                return true;
-        }
-    }
-    return false;
-}
-
-bool GuiContainer::forwardJoystickRMoveToElements(float position)
-{
-    for(GuiElement* element : elements)
-    {
-        if (element->isVisible())
-        {
-            if (element->isEnabled())
-                if (element->onJoystickRMove(position))
-                    return true;
-            if (element->forwardJoystickRMoveToElements(position))
+            if (element->forwardJoystickAxisToElements(axisAction))
                 return true;
         }
     }

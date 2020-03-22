@@ -80,7 +80,8 @@ void PathPlanner::plan(sf::Vector2f start, sf::Vector2f end)
     if (route.size() == 0 || sf::length(route.back() - end) > 2000)
     {
         route.clear();
-        recursivePlan(start, end);
+        int recursion_counter = 0;
+        recursivePlan(start, end, recursion_counter);
         route.push_back(end);
         
         insert_idx = 0;
@@ -140,13 +141,14 @@ void PathPlanner::clear()
     route.clear();
 }
 
-void PathPlanner::recursivePlan(sf::Vector2f start, sf::Vector2f end)
+void PathPlanner::recursivePlan(sf::Vector2f start, sf::Vector2f end, int& recursion_counter)
 {
     sf::Vector2f new_point;
-    if (checkToAvoid(start, end, new_point))
+    if (recursion_counter < 100 && checkToAvoid(start, end, new_point))
     {
-        recursivePlan(start, new_point);
-        recursivePlan(new_point, end);
+        recursion_counter += 1;
+        recursivePlan(start, new_point, recursion_counter);
+        recursivePlan(new_point, end, recursion_counter);
     }else{
         route.push_back(end);
     }
@@ -263,6 +265,8 @@ bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2
     if (firstAvoidF < startEndLength)
     {
         sf::Vector2f position = avoidObject.source->getPosition();
+        if (firstAvoidQ.x == position.x && firstAvoidQ.y == position.y)
+            firstAvoidQ.x += 0.1f;
         new_point = position + sf::normalize(firstAvoidQ - position) * avoidObject.size * 1.1f;
         if (alt_point)
             *alt_point = position - sf::normalize(firstAvoidQ - position) * avoidObject.size * 1.1f;

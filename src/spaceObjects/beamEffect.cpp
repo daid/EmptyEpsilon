@@ -15,13 +15,13 @@ REGISTER_SCRIPT_SUBCLASS(BeamEffect, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setBeamFireSoundPower);
     REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setDuration);
     REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setRing);
-
 }
 
 REGISTER_MULTIPLAYER_CLASS(BeamEffect, "BeamEffect");
 BeamEffect::BeamEffect()
 : SpaceObject(1000, "BeamEffect")
 {
+    setRadarSignatureInfo(0.0, 0.3, 0.0);
     setCollisionRadius(1.0);
     lifetime = 1.0;
     sourceId = -1;
@@ -41,7 +41,10 @@ BeamEffect::BeamEffect()
     registerMemberReplication(&beam_fire_sound);
     registerMemberReplication(&beam_fire_sound_power);
     registerMemberReplication(&fire_ring);
-    
+}
+
+BeamEffect::~BeamEffect()
+{
 }
 
 #if FEATURE_3D_RENDERING

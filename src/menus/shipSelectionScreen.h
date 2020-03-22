@@ -38,6 +38,7 @@ private:
     GuiToggleButton* crew_position_button[max_crew_positions];
     GuiToggleButton* main_screen_controls_button;
     GuiToggleButton* game_master_button;
+    GuiToggleButton* spectator_button;
     GuiAutoLayout* window_button_row;
     GuiToggleButton* window_button;
     GuiSlider* window_angle;

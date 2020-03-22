@@ -9,7 +9,7 @@ class GuiOpenCommsButton : public GuiButton
 {
     TargetsContainer* targets;
 public:
-    GuiOpenCommsButton(GuiContainer* owner, string id, TargetsContainer* targets);
+    GuiOpenCommsButton(GuiContainer* owner, string id, string name, TargetsContainer* targets);
     
     virtual void onDraw(sf::RenderTarget& window);
 };

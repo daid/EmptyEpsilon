@@ -113,15 +113,16 @@ void Mine::explode()
     e->setSize(blastRange);
     e->setPosition(getPosition());
     e->setOnRadar(true);
+    e->setRadarSignatureInfo(0.0, 0.0, 0.2);
 
     if (on_destruction.isSet())
     {
         if (info.instigator)
-	{
-	    on_destruction.call(P<Mine>(this), P<SpaceObject>(info.instigator));
-	}else{
+        {
+            on_destruction.call(P<Mine>(this), P<SpaceObject>(info.instigator));
+        }else{
             on_destruction.call(P<Mine>(this));
-	}
+        }
     }
     destroy();
 }

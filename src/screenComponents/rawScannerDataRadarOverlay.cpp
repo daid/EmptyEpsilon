@@ -42,7 +42,7 @@ void RawScannerDataRadarOverlay::onDraw(sf::RenderTarget& window)
 
         // The further away the object is, the less its effect on radar data.
         if (dist > distance)
-            scale = (dist - distance) / distance;
+            scale = 1.0f - ((dist - distance) / distance);
 
         // If we're adjacent to the object ...
         if (dist <= obj->getRadius())
@@ -60,7 +60,19 @@ void RawScannerDataRadarOverlay::onDraw(sf::RenderTarget& window)
         }
 
         // Get the object's radar signature.
-        RawRadarSignatureInfo info = obj->getRadarSignatureInfo();
+        // If the object is a SpaceShip, adjust the signature dynamically based
+        // on its current state and activity.
+        RawRadarSignatureInfo info;
+        P<SpaceShip> ship = obj;
+
+        if (ship)
+        {
+            // Use dynamic signatures for ships.
+            info = ship->getDynamicRadarSignatureInfo();
+        } else {
+            // Otherwise, use the baseline only.
+            info = obj->getRadarSignatureInfo();
+        }
 
         // For each interval determined by the level of raw data resolution,
         // initialize the signatures array.

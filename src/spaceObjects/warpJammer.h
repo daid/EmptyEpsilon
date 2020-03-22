@@ -28,7 +28,7 @@ public:
     void onTakingDamage(ScriptSimpleCallback callback);
     void onDestruction(ScriptSimpleCallback callback);
     
-    virtual string getExportLine() { return "WarpJammer():setFaction(\"" + getFaction() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
+    virtual string getExportLine() override { return "WarpJammer():setFaction(\"" + getFaction() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 };
 
 #endif//WARP_JAMMER_H

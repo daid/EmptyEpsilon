@@ -54,7 +54,7 @@ GameMasterScreen::GameMasterScreen()
         }
     });
     for(P<FactionInfo> info : factionInfo)
-        faction_selector->addEntry(info->getName(), info->getName());
+        faction_selector->addEntry(info->getLocaleName(), info->getName());
     faction_selector->setPosition(20, 70, ATopLeft)->setSize(250, 50);
     
     global_message_button = new GuiButton(this, "GLOBAL_MESSAGE_BUTTON", "Global message", [this]() {
@@ -207,6 +207,10 @@ GameMasterScreen::GameMasterScreen()
 
     });
     message_close_button->setTextSize(30)->setPosition(-20, -20, ABottomRight)->setSize(300, 30);
+}
+
+GameMasterScreen::~GameMasterScreen()
+{
 }
 
 void GameMasterScreen::update(float delta)

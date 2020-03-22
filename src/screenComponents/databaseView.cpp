@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "databaseView.h"
 #include "scienceDatabase.h"
 
@@ -74,7 +75,7 @@ void DatabaseViewComponent::fillListBox()
             item_list->addEntry(sd->getName(), sd->getName());
         }
     }else{
-        item_list->addEntry("Back", "");
+        item_list->addEntry(tr("Back"), "");
         foreach(ScienceDatabase, sd, selected_entry->items)
         {
             item_list->addEntry(sd->getName(), sd->getName());
