@@ -8,7 +8,7 @@
 SpectatorScreen::SpectatorScreen()
 {
     main_radar = new GuiRadarView(this, "MAIN_RADAR", 50000.0f, &targets);
-    main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections(nullptr)->setAutoCentering(false);
+    main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections(nullptr)->setAutoCentering(false)->enableCallsigns();
     main_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     main_radar->setCallbacks(
         [this](sf::Vector2f position) { this->onMouseDown(position); },
@@ -72,6 +72,9 @@ void SpectatorScreen::onKey(sf::Event::KeyEvent key, int unicode)
         if (game_server)
             engine->setGameSpeed(0.0);
         break;
+    case sf::Keyboard::C:
+        // Toggle callsigns.
+        main_radar->showCallsigns(!main_radar->getCallsigns());
     default:
         break;
     }
