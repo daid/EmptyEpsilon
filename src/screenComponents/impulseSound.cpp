@@ -22,7 +22,7 @@ ImpulseSound::ImpulseSound()
 
 void ImpulseSound::play(string sound_file)
 {
-#ifndef ANDROID
+#ifndef __ANDROID__
     // Play impulse sounds only on my ship.
     if (!my_spaceship)
         return;
@@ -44,7 +44,7 @@ void ImpulseSound::stop()
 
 void ImpulseSound::update(float delta)
 {
-#ifndef ANDROID
+#ifndef __ANDROID__
     // Update only if an impulse sound is defined.
     if (impulse_sound_id > -1)
     {
