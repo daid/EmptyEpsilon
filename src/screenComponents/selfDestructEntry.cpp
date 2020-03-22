@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "playerInfo.h"
 #include "selfDestructEntry.h"
 
@@ -18,7 +19,7 @@ GuiSelfDestructEntry::GuiSelfDestructEntry(GuiContainer* owner, string id)
     box->setPosition(0, 0, ACenter);
     GuiAutoLayout* layout = new GuiAutoLayout(box, id + "_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     layout->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    (new GuiLabel(layout, id + "_LABEL", "Self destruct activated!", 50))->setSize(GuiElement::GuiSizeMax, 80);
+    (new GuiLabel(layout, id + "_LABEL", tr("Self destruct activated!"), 50))->setSize(GuiElement::GuiSizeMax, 80);
     code_label = new GuiLabel(layout, id + "_CODE_LABEL", "", 30);
     code_label->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
     
@@ -63,7 +64,8 @@ void GuiSelfDestructEntry::onDraw(sf::RenderTarget& window)
                 {
                     if (lines > 0)
                         codes = codes + "\n";
-                    codes = codes + "Code [" + string(char('A' + n)) + "]: " + string(my_spaceship->self_destruct_code[n]);
+                    codes = codes + tr("Code [{letter}]: {self_destruct_code}").format({{"letter", string(char('A' + n))}, {"self_destruct_code", string(my_spaceship->self_destruct_code[n])}});
+
                     lines++;
                 }
                 if (has_position[my_spaceship->self_destruct_code_entry_position[n]] && !my_spaceship->self_destruct_code_confirmed[n] && code_entry_position < 0)
@@ -75,7 +77,8 @@ void GuiSelfDestructEntry::onDraw(sf::RenderTarget& window)
             code_label->setText(codes);
             code_label->setVisible(lines > 0);
             
-            code_entry_code_label->setText("Enter [" + string(char('A' + code_entry_position)) + "]");
+            code_entry_code_label->setText(tr("selfdestruct", "Enter [{letter}]").format({{"letter", string(char('A' + code_entry_position))}}));
+            
             code_entry->setVisible(code_entry_position > -1);
             
             if (code_entry->isVisible())
