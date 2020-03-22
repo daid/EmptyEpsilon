@@ -63,7 +63,6 @@ public:
     GuiFrequencyCurve* info_beam_frequency;
     GuiKeyValueDisplay* info_system[SYS_COUNT];
 
-    GuiToggleButton* signal_details_toggle;
     GuiToggleButton* signal_details_visual_button;
     GuiToggleButton* signal_details_gravity_button;
     GuiToggleButton* signal_details_electrical_button;

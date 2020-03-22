@@ -68,6 +68,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     );
     new RawScannerDataRadarOverlay(probe_radar, "", 5000);
 
+    // Populate the sidebar selector.
     sidebar_selector = new GuiSelector(radar_view, "", [this](int index, string value)
     {
         info_sidebar->setVisible(index == 0);    
@@ -134,9 +135,14 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     // Add sidebar page for a description.
     sidebar_pager->addEntry("Description", "Description");
 
-    // If the ship has detailed signals on radar, add a sidebar page for them.
+    // If the ship has detailed signals on radar, add a page
+    // for the targeting signal details to the sidebar.
     if (my_spaceship->has_signal_radar)
+    {
+        science_radar->setSignalDetails(true);
+        probe_radar->setSignalDetails(true);
         sidebar_pager->addEntry("Signals", "Signals");
+    }
 
     // Default the pager to the first item.
     sidebar_pager->setSelectionIndex(0);
@@ -220,35 +226,31 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 30);
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    // Radar signal details toggle.
-    signal_details_toggle = new GuiToggleButton(this, "SIGNAL_DETAILS_TOGGLE", "Signal Details", [this](bool value){ setSignalDetailsToggle(value); });
-    signal_details_toggle->setPosition(-270, -20, ABottomRight)->setSize(200, 50)->setVisible(my_spaceship->has_signal_radar);
-
     // Visual objects (radar trace) toggle.
     signal_details_visual_button = new GuiToggleButton(this, "SIGNAL_DETAILS_VISUAL", "V", [this](bool value){
         setVisualDetailsToggle(value);
     });
-    signal_details_visual_button->setValue(false)->setPosition(-420, -70, ABottomRight)->setSize(50, 50)->setVisible(false);
+    signal_details_visual_button->setValue(true)->setPosition(-420, -20, ABottomRight)->setSize(50, 50)->setVisible(true);
 
     // Electrical view toggle.
     signal_details_electrical_button = new GuiToggleButton(this, "SIGNAL_DETAILS_ELECTRICAL", "E", [this](bool value){
         setElectricalDetailsToggle(value);
     });
-    signal_details_electrical_button->setValue(true)->setPosition(-370, -70, ABottomRight)->setSize(50, 50)->setVisible(false);
+    signal_details_electrical_button->setValue(false)->setPosition(-370, -20, ABottomRight)->setSize(50, 50)->setVisible(true);
     signal_details_electrical_button->setColors(colorConfig.button_red);
 
     // Gravity view toggle.
     signal_details_gravity_button = new GuiToggleButton(this, "SIGNAL_DETAILS_GRAVITY", "G", [this](bool value){
         setGravityDetailsToggle(value);
     });
-    signal_details_gravity_button->setValue(false)->setPosition(-320, -70, ABottomRight)->setSize(50, 50)->setVisible(false);
+    signal_details_gravity_button->setValue(false)->setPosition(-320, -20, ABottomRight)->setSize(50, 50)->setVisible(true);
     signal_details_gravity_button->setColors(colorConfig.button_green);
 
     // Biological view toggle.
     signal_details_biological_button = new GuiToggleButton(this, "SIGNAL_DETAILS_BIOLOGICAL", "B", [this](bool value){
         setBiologicalDetailsToggle(value);
     });
-    signal_details_biological_button->setValue(false)->setPosition(-270, -70, ABottomRight)->setSize(50, 50)->setVisible(false);
+    signal_details_biological_button->setValue(false)->setPosition(-270, -20, ABottomRight)->setSize(50, 50)->setVisible(true);
     signal_details_biological_button->setColors(colorConfig.button_blue);
 
     // Radar/database view toggle.
@@ -268,12 +270,11 @@ void ScienceScreen::setViewModeSelectionToggle(int index)
     // Switching to database view resets signal details if available.
     if (my_spaceship->has_signal_radar)
     {
-        signal_details_toggle->setValue(false)->setVisible(index == 0);
-        setSignalDetailsToggle(false);
-        signal_details_visual_button->setVisible(false);
-        signal_details_electrical_button->setVisible(false);
-        signal_details_gravity_button->setVisible(false);
-        signal_details_biological_button->setVisible(false);
+        signal_details_visual_button->setVisible(index == 0);
+        signal_details_electrical_button->setVisible(index == 0);
+        signal_details_gravity_button->setVisible(index == 0);
+        signal_details_biological_button->setVisible(index == 0);
+        setSignalDetailsToggle(true);
     }
 }
 
@@ -281,15 +282,13 @@ void ScienceScreen::setSignalDetailsToggle(bool value)
 {
     if (my_spaceship->has_signal_radar)
     {
-        // Toggle visibility of signal lens toggles.
-        signal_details_visual_button->setValue(true)->setVisible(value);
-        signal_details_electrical_button->setValue(false)->setVisible(value);
-        signal_details_gravity_button->setValue(false)->setVisible(value);
-        signal_details_biological_button->setValue(false)->setVisible(value);
+        // Toggle values of signal lens toggles.
+        signal_details_visual_button->setValue(true);
+        signal_details_electrical_button->setValue(false);
+        signal_details_gravity_button->setValue(false);
+        signal_details_biological_button->setValue(false);
 
         // Toggle and reset signal details.
-        science_radar->setSignalDetails(value);
-        probe_radar->setSignalDetails(value);
         science_radar->setVisualObjects(true)->setSignalElectrical(false)->setSignalGravity(false)->setSignalBiological(false);
         probe_radar->setVisualObjects(true)->setSignalElectrical(false)->setSignalGravity(false)->setSignalBiological(false);
     }
@@ -682,59 +681,40 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
         // Signal details toggles.
         if (my_spaceship->has_signal_radar && view_mode_selection->getSelectionIndex() == 0)
         {
-            if (key.hotkey == "TOGGLE_SIGNAL_DETAILS")
+            // These have an effect only if a radar is visible.
+            if (science_radar->isVisible() || probe_radar->isVisible())
             {
-                if (science_radar->isVisible() || probe_radar->isVisible())
-                {
-                    bool new_value = !signal_details_toggle->getValue();
-                    setSignalDetailsToggle(new_value);
-                    signal_details_toggle->setValue(new_value);
-                }
-                return;
-            }
-
-            if (key.hotkey == "TOGGLE_VISUAL_DETAILS")
-            {
-                if (signal_details_toggle->getValue() && (science_radar->isVisible() || probe_radar->isVisible()))
+                if (key.hotkey == "TOGGLE_VISUAL_DETAILS")
                 {
                     bool new_value = !signal_details_visual_button->getValue();
                     setVisualDetailsToggle(new_value);
                     signal_details_visual_button->setValue(new_value);
+                    return;
                 }
-                return;
-            }
 
-            if (key.hotkey == "TOGGLE_ELECTRICAL_DETAILS")
-            {
-                if (signal_details_toggle->getValue() && (science_radar->isVisible() || probe_radar->isVisible()))
+                if (key.hotkey == "TOGGLE_ELECTRICAL_DETAILS")
                 {
                     bool new_value = !signal_details_electrical_button->getValue();
                     setElectricalDetailsToggle(new_value);
                     signal_details_electrical_button->setValue(new_value);
+                    return;
                 }
-                return;
-            }
 
-            if (key.hotkey == "TOGGLE_GRAVITY_DETAILS")
-            {
-                if (signal_details_toggle->getValue() && (science_radar->isVisible() || probe_radar->isVisible()))
+                if (key.hotkey == "TOGGLE_GRAVITY_DETAILS")
                 {
                     bool new_value = !signal_details_gravity_button->getValue();
                     setGravityDetailsToggle(new_value);
                     signal_details_gravity_button->setValue(new_value);
+                    return;
                 }
-                return;
-            }
 
-            if (key.hotkey == "TOGGLE_BIOLOGICAL_DETAILS")
-            {
-                if (signal_details_toggle->getValue() && (science_radar->isVisible() || probe_radar->isVisible()))
+                if (key.hotkey == "TOGGLE_BIOLOGICAL_DETAILS")
                 {
                     bool new_value = !signal_details_biological_button->getValue();
                     setBiologicalDetailsToggle(new_value);
                     signal_details_biological_button->setValue(new_value);
+                    return;
                 }
-                return;
             }
         }
     }

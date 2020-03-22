@@ -76,11 +76,10 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     delete_waypoint_button->setPosition(-270, -120, ABottomRight)->setSize(200, 50);
 
     // Move signal details UI to top left.
-    science->signal_details_toggle->setPosition(20, 20, ATopLeft);
-    science->signal_details_visual_button->setPosition(20, 70, ATopLeft);
-    science->signal_details_electrical_button->setPosition(70, 70, ATopLeft);
-    science->signal_details_gravity_button->setPosition(120, 70, ATopLeft);
-    science->signal_details_biological_button->setPosition(170, 70, ATopLeft);
+    science->signal_details_visual_button->setPosition(20, 20, ATopLeft);
+    science->signal_details_electrical_button->setPosition(70, 20, ATopLeft);
+    science->signal_details_gravity_button->setPosition(120, 20, ATopLeft);
+    science->signal_details_biological_button->setPosition(170, 20, ATopLeft);
     
     mode = TargetSelection;
     
