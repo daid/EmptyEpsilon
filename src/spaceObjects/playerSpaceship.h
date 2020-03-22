@@ -125,6 +125,8 @@ private:
     // Ship's log container
     std::vector<ShipLogEntry> ships_log;
 
+    float long_range_radar_range = 50000.0f;
+    float short_range_radar_range = 5000.0f;
 public:
     std::vector<CustomShipFunction> custom_functions;
 
@@ -205,6 +207,7 @@ public:
     // Client command functions
     virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet) override;
     void commandTargetRotation(float target);
+    void commandTurnSpeed(float turnSpeed);
     void commandImpulse(float target);
     void commandWarp(int8_t target);
     void commandJump(float distance);
@@ -297,8 +300,14 @@ public:
     // Radar function
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
 
+    // Radar range
+    float getLongRangeRadarRange();
+    float getShortRangeRadarRange();
+    void setLongRangeRadarRange(float range);
+    void setShortRangeRadarRange(float range);
+
     // Script export function
-    virtual string getExportLine();
+    virtual string getExportLine() override;
 };
 REGISTER_MULTIPLAYER_ENUM(ECommsState);
 template<> int convert<EAlertLevel>::returnType(lua_State* L, EAlertLevel l);

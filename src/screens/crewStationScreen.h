@@ -49,6 +49,7 @@ private:
     GuiElement* findTab(string name);
     
     string listHotkeysLimited(string station);
+    std::vector<std::pair<string, string>> listControlsByCategory(string category);
 };
 
 #endif//CREW_STATION_SCREEN_H

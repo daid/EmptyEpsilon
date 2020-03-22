@@ -10,6 +10,7 @@
 #include "gui/debugRenderer.h"
 #include "gui/colorConfig.h"
 #include "gui/hotkeyConfig.h"
+#include "gui/joystickConfig.h"
 #include "menus/mainMenus.h"
 #include "menus/autoConnectScreen.h"
 #include "menus/shipSelectionScreen.h"
@@ -125,9 +126,12 @@ int main(int argc, char** argv)
         auto parts = PreferencesManager::get("proxy").split(":");
         string host = parts[0];
         if (parts.size() > 1) port = parts[1].toInt();
-        if (parts.size() > 2) password = parts[2];
+        if (parts.size() > 2) password = parts[2].upper();
         if (parts.size() > 3) listenPort = parts[3].toInt();
-        new GameServerProxy(host, port, password, listenPort);
+        if (host == "listen")
+            new GameServerProxy(password, listenPort);
+        else
+            new GameServerProxy(host, port, password, listenPort);
         engine->runMainLoop();
         return 0;
     }
@@ -183,6 +187,15 @@ int main(int argc, char** argv)
 
     colorConfig.load();
     hotkeys.load();
+    joystick.load();
+
+    if (PreferencesManager::get("username", "") == "")
+    {
+        if (getenv("USERNAME"))
+            PreferencesManager::set("username", getenv("USERNAME"));
+        else if (getenv("USER"))
+            PreferencesManager::set("username", getenv("USER"));
+    }
 
     if (PreferencesManager::get("headless") == "")
     {
@@ -281,6 +294,9 @@ int main(int argc, char** argv)
             }
         }
     }
+    NetworkAudioRecorder* nar = new NetworkAudioRecorder();
+    nar->addKeyActivation(sf::Keyboard::Key::Tilde, 0);
+    nar->addKeyActivation(sf::Keyboard::Key::BackSpace, 1);
 
     P<HardwareController> hardware_controller = new HardwareController();
 #ifdef CONFIG_DIR
@@ -343,7 +359,7 @@ void returnToMainMenu()
     {
         new EpsilonServer();
         if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
-        if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password"));
+        if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password").upper());
         if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
         if (PreferencesManager::get("variation") != "") gameGlobalInfo->variation = PreferencesManager::get("variation");
         gameGlobalInfo->startScenario(PreferencesManager::get("headless"));

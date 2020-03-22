@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "dockingButton.h"
@@ -33,7 +34,7 @@ void GuiDockingButton::onDraw(sf::RenderTarget& window)
         switch(my_spaceship->docking_state)
         {
         case DS_NotDocking:
-            setText("Request Dock");
+            setText(tr("Request Dock"));
             if (my_spaceship->canStartDocking() && findDockingTarget())
             {
                 enable();
@@ -42,11 +43,11 @@ void GuiDockingButton::onDraw(sf::RenderTarget& window)
             }
             break;
         case DS_Docking:
-            setText("Cancel Docking");
+            setText(tr("Cancel Docking"));
             enable();
             break;
         case DS_Docked:
-            setText("Undock");
+            setText(tr("Undock"));
             enable();
             break;
         }

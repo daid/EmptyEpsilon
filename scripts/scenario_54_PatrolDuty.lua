@@ -3753,7 +3753,7 @@ function patrolAsimovUtopiaPlanitiaArmstrong(delta)
 		randomPatrolStation = patrolStationList[math.random(1,#patrolStationList)]
 		p = closestPlayerTo(randomPatrolStation)
 		px, py = p:getPosition()
-		ox, oy = vectorFromAngle(random(0,360),getLongRangeRadarRange()+1000)
+		ox, oy = vectorFromAngle(random(0,360),p:getLongRangeRadarRange()+1000)
 		harassFleet = spawnEnemies(px+ox,py+oy,difficulty)
 		whatToDo = math.random(1,3)
 		if whatToDo == 1 then

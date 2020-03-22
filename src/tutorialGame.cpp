@@ -89,14 +89,14 @@ void TutorialGame::createScreens()
 
     text = new GuiScrollText(frame, "", "");
     text->setTextSize(20)->setPosition(20, 20, ATopLeft)->setSize(900 - 40, 200 - 40);
-    next_button = new GuiButton(frame, "", "Next", [this]() {
+    next_button = new GuiButton(frame, "", tr("Next"), [this]() {
         _onNext.call();
     });
     next_button->setTextSize(30)->setPosition(-20, -20, ABottomRight)->setSize(300, 30);
 
     if (repeated_tutorial)
     {
-        (new GuiButton(this, "", "Reset", [this]()
+        (new GuiButton(this, "", tr("Reset"), [this]()
         {
             finish();
         }))->setPosition(-20, 20, ATopRight)->setSize(120, 50);

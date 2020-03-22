@@ -50,6 +50,8 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
     {
         pages.push_back(new GuiShipTweakPlayer(this));
         list->addEntry("Player", "");
+        pages.push_back(new GuiShipTweakPlayer2(this));
+        list->addEntry("Player 2", "");
     }
 
     if (tweak_type == TW_Object)
@@ -225,7 +227,7 @@ GuiShipTweakMissileWeapons::GuiShipTweakMissileWeapons(GuiContainer* owner)
 
     for(int n=0; n<MW_Count; n++)
     {
-        (new GuiLabel(left_col, "", getMissileWeaponName(EMissileWeapons(n)) + ":", 20))->setSize(GuiElement::GuiSizeMax, 30);
+        (new GuiLabel(left_col, "", getLocaleMissileWeaponName(EMissileWeapons(n)) + ":", 20))->setSize(GuiElement::GuiSizeMax, 30);
         missile_storage_amount_slider[n] = new GuiSlider(left_col, "", 0.0, 50, 0.0, [this, n](float value) {
             target->weapon_storage_max[n] = int(round(value));
             target->weapon_storage[n] = std::min(target->weapon_storage[n], target->weapon_storage_max[n]);
@@ -238,7 +240,7 @@ GuiShipTweakMissileWeapons::GuiShipTweakMissileWeapons(GuiContainer* owner)
 
     for(int n=0; n<MW_Count; n++)
     {
-        (new GuiLabel(right_col, "", getMissileWeaponName(EMissileWeapons(n)) + ":", 20))->setSize(GuiElement::GuiSizeMax, 30);
+        (new GuiLabel(right_col, "", getLocaleMissileWeaponName(EMissileWeapons(n)) + ":", 20))->setSize(GuiElement::GuiSizeMax, 30);
         missile_current_amount_slider[n] = new GuiSlider(right_col, "", 0.0, 50, 0.0, [this, n](float value) {
             target->weapon_storage[n] = std::min(int(round(value)), target->weapon_storage_max[n]);
         });
@@ -316,7 +318,7 @@ GuiShipTweakMissileTubes::GuiShipTweakMissileTubes(GuiContainer* owner)
     (new GuiLabel(right_col, "", "Allowed use:", 30))->setSize(GuiElement::GuiSizeMax, 50);
     for(int n=0; n<MW_Count; n++)
     {
-        allowed_use[n] = new GuiToggleButton(right_col, "", getMissileWeaponName(EMissileWeapons(n)), [this, n](bool value) {
+        allowed_use[n] = new GuiToggleButton(right_col, "", getLocaleMissileWeaponName(EMissileWeapons(n)), [this, n](bool value) {
             if (value)
                 target->weapon_tube[tube_index].allowLoadOf(EMissileWeapons(n));
             else
@@ -659,6 +661,51 @@ void GuiShipTweakPlayer::open(P<SpaceObject> target)
         combat_maneuver_strafe_speed_slider->setValue(player->combat_maneuver_strafe_speed);
         combat_maneuver_strafe_speed_slider->clearSnapValues()->addSnapValue(player->combat_maneuver_strafe_speed, 20.0f);
     }
+}
+
+GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
+: GuiTweakPage(owner)
+{
+    // Add two columns.
+    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+
+    GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+
+    // Left column
+    (new GuiLabel(left_col, "", "Coolant:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    coolant_slider = new GuiSlider(left_col, "", 0.0, 50.0, 0.0, [this](float value) {
+        target->setMaxCoolant(value);
+    });
+    coolant_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(left_col, "", "Short range radar:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    short_range_radar_slider = new GuiSlider(left_col, "", 100.0, 20000.0, 0.0, [this](float value) {
+        target->setShortRangeRadarRange(value);
+    });
+    short_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(left_col, "", "Long range radar:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    long_range_radar_slider = new GuiSlider(left_col, "", 100.0, 100000.0, 0.0, [this](float value) {
+        target->setLongRangeRadarRange(value);
+    });
+    long_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Right column
+}
+
+void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
+{
+    coolant_slider->setValue(target->max_coolant);
+    short_range_radar_slider->setValue(target->getShortRangeRadarRange());
+    long_range_radar_slider->setValue(target->getLongRangeRadarRange());
+}
+
+void GuiShipTweakPlayer2::open(P<SpaceObject> target)
+{
+    this->target = target;
 }
 
 GuiObjectTweakBase::GuiObjectTweakBase(GuiContainer* owner)

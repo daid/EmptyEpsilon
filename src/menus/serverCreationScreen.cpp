@@ -1,3 +1,4 @@
+
 #include <i18n.h>
 #include "preferenceManager.h"
 #include "serverCreationScreen.h"
@@ -26,7 +27,6 @@ ServerCreationScreen::ServerCreationScreen()
 
     // Set defaults from preferences.
     gameGlobalInfo->player_warp_jump_drive_setting = EPlayerWarpJumpDrive(PreferencesManager::get("server_config_warp_jump_drive_setting", "0").toInt());
-    gameGlobalInfo->long_range_radar_range = PreferencesManager::get("server_config_long_range_radar_range", "30000").toInt();
     gameGlobalInfo->scanning_complexity = EScanningComplexity(PreferencesManager::get("server_config_scanning_complexity", "2").toInt());
     gameGlobalInfo->hacking_difficulty = PreferencesManager::get("server_config_hacking_difficulty", "1").toInt();
     gameGlobalInfo->hacking_games = EHackingGames(PreferencesManager::get("server_config_hacking_games", "2").toInt());
@@ -90,14 +90,6 @@ ServerCreationScreen::ServerCreationScreen()
     (new GuiSelector(row, "WARP_JUMP_SELECT", [](int index, string value) {
         gameGlobalInfo->player_warp_jump_drive_setting = EPlayerWarpJumpDrive(index);
     }))->setOptions({tr("warp/jump", "Ship default"), tr("warp/jump", "Warp drive"), tr("warp/jump", "Jump drive"), tr("warp/jump", "Both"), tr("warp/jump", "Neither")})->setSelectionIndex((int)gameGlobalInfo->player_warp_jump_drive_setting)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-
-    // Radar range limit row.
-    row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
-    row->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiLabel(row, "RADAR_LABEL", tr("Radar range: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
-    (new GuiSelector(row, "RADAR_SELECT", [](int index, string value) {
-        gameGlobalInfo->long_range_radar_range = index * 5000 + 10000;
-    }))->setOptions({"10U", "15U", "20U", "25U", "30U", "35U", "40U", "45U", "50U"})->setSelectionIndex((gameGlobalInfo->long_range_radar_range - 10000.0) / 5000.0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Main screen section.
     (new GuiLabel(left_panel, "MAIN_SCREEN_LABEL", tr("Main screen options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
@@ -247,7 +239,6 @@ void ServerCreationScreen::startScenario()
 {
     // Set these settings to use as future defaults.
     PreferencesManager::set("server_config_warp_jump_drive_setting", string(int(gameGlobalInfo->player_warp_jump_drive_setting)));
-    PreferencesManager::set("server_config_long_range_radar_range", string(gameGlobalInfo->long_range_radar_range, 0));
     PreferencesManager::set("server_config_scanning_complexity", string(int(gameGlobalInfo->scanning_complexity)));
     PreferencesManager::set("server_config_use_beam_shield_frequencies", string(int(gameGlobalInfo->use_beam_shield_frequencies)));
     PreferencesManager::set("server_config_use_system_damage", string(int(gameGlobalInfo->use_system_damage)));

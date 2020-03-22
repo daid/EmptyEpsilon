@@ -31,32 +31,27 @@ if(NOT DEFINED CPACK_PACKAGE_VERSION_MAJOR)
 endif(NOT DEFINED CPACK_PACKAGE_VERSION_MAJOR)
 
 # Set our optimization flags.
-set(OPTIMIZER_FLAGS "")
+set(OPTIMIZER_FLAGS)
 if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
     # On gcc, we want some general optimalizations that improve speed a lot.
-    set(OPTIMIZER_FLAGS "${OPTIMIZER_FLAGS} -O3 -flto -funsafe-math-optimizations")
+    set(OPTIMIZER_FLAGS ${OPTIMIZER_FLAGS} -O3 -flto -funsafe-math-optimizations)
 
     # If we are compiling for a rasberry pi, we want to aggressively optimize for the CPU we are running on.
     # Note that this check only works if we are compiling directly on the pi, as it is a dirty way of checkif if we are on the pi.
     if(EXISTS /opt/vc/include/bcm_host.h OR COMPILE_FOR_PI)
-        set(OPTIMIZER_FLAGS "${OPTIMIZER_FLAGS} -mcpu=native -mfpu=neon-vfpv4 -mfloat-abi=hard")
+        set(OPTIMIZER_FLAGS ${OPTIMIZER_FLAGS} -mcpu=native -mfpu=neon-vfpv4 -mfloat-abi=hard)
     endif()
 endif()
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
-
-set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} ${OPTIMIZER_FLAGS}")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ${OPTIMIZER_FLAGS}")
-set(CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO} -g1 ${OPTIMIZER_FLAGS}")
-set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} -g1 ${OPTIMIZER_FLAGS}")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror=return-type")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror=return-type")
 
 # install resources, scripts, and packs to app bundle instead of system dir.
 if(APPLE)
-set(CMAKE_INSTALL_PREFIX "./")
+    set(CMAKE_INSTALL_PREFIX "./")
 elseif(UNIX)
-# Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
-add_definitions(-DRESOURCE_BASE_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/")
+    # Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
+    add_definitions(-DRESOURCE_BASE_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/")
 endif()
 
 if(CONFIG_DIR)
@@ -102,6 +97,7 @@ set(SOURCES
 	src/GMScriptCallback.cpp
 	src/GMMessage.cpp
 	src/tutorialGame.cpp
+    src/scriptDataStorage.cpp
 	src/menus/joinServerMenu.cpp
 	src/menus/serverBrowseMenu.cpp
 	src/menus/mainMenus.cpp
@@ -115,6 +111,7 @@ set(SOURCES
 	src/screens/topDownScreen.cpp
 	src/screens/windowScreen.cpp
 	src/screens/mainScreen.cpp
+	src/screens/spectatorScreen.cpp
 	src/screens/crew4/operationsScreen.cpp
 	src/screens/crew4/engineeringAdvancedScreen.cpp
 	src/screens/crew4/tacticalScreen.cpp
@@ -181,6 +178,7 @@ set(SOURCES
 	src/screenComponents/mineSweeper.cpp
 	src/gui/colorConfig.cpp
 	src/gui/hotkeyConfig.cpp
+	src/gui/joystickConfig.cpp
 	src/gui/mouseRenderer.cpp
 	src/gui/scriptError.cpp
 	src/gui/gui2_slider.cpp
@@ -388,8 +386,10 @@ else()
     add_executable(${EXECUTABLE_NAME} MACOSX_BUNDLE ${SOURCES})
 endif()
 
-include_directories(${CMAKE_SOURCE_DIR}/src)
-include_directories(${SERIOUS_PROTON_DIR}/src)
+target_include_directories(${EXECUTABLE_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src)
+target_include_directories(${EXECUTABLE_NAME} PUBLIC ${SERIOUS_PROTON_DIR}/src)
+target_compile_options(${EXECUTABLE_NAME} PUBLIC $<$<CONFIG:Release>:${OPTIMIZER_FLAGS}>)
+target_compile_options(${EXECUTABLE_NAME} PUBLIC $<$<CONFIG:RelWithDebInfo>:-g1 ${OPTIMIZER_FLAGS}>)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
@@ -407,6 +407,10 @@ else()
   include_directories(${OPENGL_INCLUDE_DIR})
   target_link_libraries(${EXECUTABLE_NAME} ${OPENGL_LIBRARIES})
 endif()
+
+# Opus for voice chat
+add_subdirectory("${SERIOUS_PROTON_DIR}/src/libopus/" "${CMAKE_CURRENT_BINARY_DIR}/libopus")
+target_link_libraries(${EXECUTABLE_NAME} opus)
 
 # Some magical Win 32 stuff
 if(WIN32)

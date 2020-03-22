@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "spaceship.h"
 #include "mesh.h"
 #include "shipTemplate.h"
@@ -141,8 +142,10 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     impulse_acceleration = 20.0;
     energy_level = 1000;
     max_energy_level = 1000;
+    turnSpeed = 0.0f;
 
     registerMemberReplication(&target_rotation, 1.5);
+    registerMemberReplication(&turnSpeed, 0.1);
     registerMemberReplication(&impulse_request, 0.1);
     registerMemberReplication(&current_impulse, 0.5);
     registerMemberReplication(&has_warp_drive);
@@ -594,7 +597,12 @@ void SpaceShip::update(float delta)
             warp_request = 0.0;
     }
 
-    float rotationDiff = sf::angleDifference(getRotation(), target_rotation);
+    float rotationDiff;
+    if (fabs(turnSpeed) < 0.0005f) {
+        rotationDiff = sf::angleDifference(getRotation(), target_rotation);
+    } else {
+        rotationDiff = turnSpeed;
+    }
 
     if (rotationDiff > 1.0)
         setAngularVelocity(turn_speed * getSystemEffectiveness(SYS_Maneuver));
@@ -1441,6 +1449,28 @@ string getMissileWeaponName(EMissileWeapons missile)
         return "UNK: " + string(int(missile));
     }
 }
+
+string getLocaleMissileWeaponName(EMissileWeapons missile)
+{
+    switch(missile)
+    {
+    case MW_None:
+        return "-";
+    case MW_Homing:
+        return tr("missile","Homing");
+    case MW_Nuke:
+        return tr("missile","Nuke");
+    case MW_Mine:
+        return tr("missile","Mine");
+    case MW_EMP:
+        return tr("missile","EMP");
+    case MW_HVLI:
+        return tr("missile","HVLI");
+    default:
+        return "UNK: " + string(int(missile));
+    }
+}
+
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency)
 {

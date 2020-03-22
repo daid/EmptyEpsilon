@@ -14,7 +14,7 @@ public:
 
     SupplyDrop();
 
-    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range);
+    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
 
     virtual void collide(Collisionable* target, float force) override;
 
@@ -23,7 +23,7 @@ public:
 
     void onPickUp(ScriptSimpleCallback callback);
 
-    virtual string getExportLine();
+    virtual string getExportLine() override;
 };
 
 #endif//SUPPLY_DROP_H

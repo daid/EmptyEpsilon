@@ -26,7 +26,7 @@ private:
     
     void disableComms(string title);
     
-    void onClose();
+    void onClose() override;
     
     void drawLine(sf::RenderTarget& window, sf::Vector2f target);
 };

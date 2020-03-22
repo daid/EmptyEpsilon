@@ -1,3 +1,4 @@
+#include <i18n.h>
 #ifndef SPACESHIP_H
 #define SPACESHIP_H
 
@@ -73,6 +74,11 @@ public:
      *[input] Ship will try to aim to this rotation. (degrees)
      */
     float target_rotation;
+    
+    /*!
+     *[input] Ship will rotate in this velocity. ([-1,1], overrides target_rotation)
+     */
+    float turnSpeed;
 
     /*!
      * [input] Amount of impulse requested from the user (-1.0 to 1.0)
@@ -219,7 +225,7 @@ public:
      * Spaceship is destroyed by damage.
      * \param info Information about damage type
      */
-    virtual void destroyedByDamage(DamageInfo& info);
+    virtual void destroyedByDamage(DamageInfo& info) override;
 
     /*!
      * Jump in current direction
@@ -231,7 +237,7 @@ public:
      * Check if object can dock with this ship.
      * \param object Object that wants to dock.
      */
-    virtual bool canBeDockedBy(P<SpaceObject> obj);
+    virtual bool canBeDockedBy(P<SpaceObject> obj) override;
 
     virtual void collide(Collisionable* other, float force) override;
 
@@ -291,11 +297,11 @@ public:
      */
     float getSystemEffectiveness(ESystem system);
 
-    virtual void applyTemplateValues();
+    virtual void applyTemplateValues() override;
 
     P<SpaceObject> getTarget();
 
-    virtual std::unordered_map<string, string> getGMInfo();
+    virtual std::unordered_map<string, string> getGMInfo() override;
 
     bool isDocked(P<SpaceObject> target) { return docking_state == DS_Docked && docking_target == target; }
     bool canStartDocking() { return current_warp <= 0.0 && (!has_jump_drive || jump_delay <= 0.0); }
@@ -429,6 +435,7 @@ public:
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);
 
 string getMissileWeaponName(EMissileWeapons missile);
+string getLocaleMissileWeaponName(EMissileWeapons missile);
 REGISTER_MULTIPLAYER_ENUM(EMissileWeapons);
 REGISTER_MULTIPLAYER_ENUM(EWeaponTubeState);
 REGISTER_MULTIPLAYER_ENUM(EMainScreenSetting);

@@ -14,6 +14,7 @@ CinematicViewScreen::CinematicViewScreen()
     // Create a full-screen viewport.
     viewport = new GuiViewport3D(this, "VIEWPORT");
     viewport->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    viewport->showCallsigns();
 
     // Initialize the camera's vertical position.
     camera_position.z = 200.0;
@@ -145,11 +146,13 @@ void CinematicViewScreen::update(float delta)
         // float target_velocity = sf::length(target->getVelocity());
 
         // We want the camera to always be less than 1U from the selected ship.
-        max_camera_distance = 1000.0f + target->getRadius();
+        max_camera_distance = 1000.0f + target->getRadius() + sf::length(target->getVelocity());
         min_camera_distance = target->getRadius() * 2.0f;
 
         // Check if our selected ship has a weapons target.
         target_of_target = target->getTarget();
+        if (target_of_target && sf::length(target_of_target->getPosition() - target_position_2D) > 10000.0)
+            target_of_target = nullptr;
 
         // If it does, lock the camera onto that target.
         if (camera_lock_tot_toggle->getValue() && target_of_target)

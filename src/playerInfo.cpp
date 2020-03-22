@@ -26,6 +26,7 @@
 static const int16_t CMD_UPDATE_CREW_POSITION = 0x0001;
 static const int16_t CMD_UPDATE_SHIP_ID = 0x0002;
 static const int16_t CMD_UPDATE_MAIN_SCREEN_CONTROL = 0x0003;
+static const int16_t CMD_UPDATE_NAME = 0x0004;
 
 P<PlayerInfo> my_player_info;
 P<PlayerSpaceship> my_spaceship;
@@ -46,6 +47,7 @@ PlayerInfo::PlayerInfo()
         registerMemberReplication(&crew_position[n]);
     }
     registerMemberReplication(&ship_id);
+    registerMemberReplication(&name);
     registerMemberReplication(&main_screen_control);
 
     player_info_list.push_back(this);
@@ -76,6 +78,15 @@ void PlayerInfo::commandSetMainScreenControl(bool control)
     main_screen_control = control;
 }
 
+void PlayerInfo::commandSetName(const string& name)
+{
+    sf::Packet packet;
+    packet << CMD_UPDATE_NAME << name;
+    sendClientCommand(packet);
+
+    this->name = name;
+}
+
 void PlayerInfo::onReceiveClientCommand(int32_t client_id, sf::Packet& packet)
 {
     if (client_id != this->client_id) return;
@@ -99,6 +110,9 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sf::Packet& packet)
         break;
     case CMD_UPDATE_MAIN_SCREEN_CONTROL:
         packet >> main_screen_control;
+        break;
+    case CMD_UPDATE_NAME:
+        packet >> name;
         break;
     }
 }

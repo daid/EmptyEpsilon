@@ -9,7 +9,7 @@ class BlackHole : public SpaceObject, public Updatable
 public:
     BlackHole();
 
-    virtual void update(float delta);
+    virtual void update(float delta) override;
 
 #if FEATURE_3D_RENDERING
     virtual void draw3DTransparent() override;

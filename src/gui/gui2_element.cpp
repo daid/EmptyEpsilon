@@ -38,17 +38,7 @@ void GuiElement::onHotkey(const HotkeyResult& key)
 {
 }
 
-bool GuiElement::onJoystickXYMove(sf::Vector2f position)
-{
-    return false;
-}
-
-bool GuiElement::onJoystickZMove(float position)
-{
-    return false;
-}
-
-bool GuiElement::onJoystickRMove(float position)
+bool GuiElement::onJoystickAxis(const AxisAction& axisAction)
 {
     return false;
 }
