@@ -11,10 +11,10 @@ class OptionsMenu : public GuiCanvas
 private:
     GuiSlider* sound_volume_slider;
     GuiSlider* music_volume_slider;
-    GuiSlider* engine_volume_slider;
+    GuiSlider* impulse_volume_slider;
     GuiLabel* sound_volume_overlay_label;
     GuiLabel* music_volume_overlay_label;
-    GuiLabel* engine_volume_overlay_label;
+    GuiLabel* impulse_volume_overlay_label;
 public:
     OptionsMenu();
 

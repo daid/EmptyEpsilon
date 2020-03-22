@@ -9,6 +9,7 @@
 #include "screenComponents/noiseOverlay.h"
 #include "screenComponents/shipDestroyedPopup.h"
 #include "screenComponents/helpOverlay.h"
+#include "screenComponents/impulseSound.h"
 
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_panel.h"
@@ -64,9 +65,10 @@ CrewStationScreen::CrewStationScreen()
             soundManager->playMusicSet(findResources("music/combat/*.ogg"));
         });
     }
-
-    engine_volume = PreferencesManager::get("engine_volume", "50").toInt();
 #endif
+
+    // Initialize and play the impulse engine sound.
+    impulse_sound = new ImpulseSound();
 }
 
 void CrewStationScreen::addStationTab(GuiElement* element, ECrewPosition position, string name, string icon)
@@ -132,14 +134,17 @@ void CrewStationScreen::update(float delta)
     {
         destroy();
         soundManager->stopMusic();
-        soundManager->stopSound(impulse_sound);
+        impulse_sound->stop();
         disconnectFromServer();
         returnToMainMenu();
         return;
     }
+
     if (my_spaceship)
     {
+        // Show custom ship function messages.
         message_frame->hide();
+
         for(PlayerSpaceship::CustomShipFunction& csf : my_spaceship->custom_functions)
         {
             if (csf.crew_position == current_position && csf.type == PlayerSpaceship::CustomShipFunction::Type::Message)
@@ -150,33 +155,12 @@ void CrewStationScreen::update(float delta)
             }
         }
 
-#ifndef __ANDROID__
-        // If engine sounds are enabled and we have impulse, loop the engine sound.
-        if (PreferencesManager::get("engine_enabled") == "1" && engine_volume > 0)
-        {
-            float impulse_ability = std::max(0.0f, std::min(my_spaceship->getSystemEffectiveness(SYS_Impulse), my_spaceship->getSystemPower(SYS_Impulse)));
-            string impulse_sound_file = my_spaceship->impulse_sound_file;
-            if (impulse_ability > 0 && impulse_sound_file.length() > 0)
-            {
-                if (impulse_sound > -1)
-                {
-                    soundManager->setSoundVolume(impulse_sound, (std::max(10.0f * impulse_ability, fabsf(my_spaceship->current_impulse) * 10.0f * std::max(0.1f, impulse_ability))) * (engine_volume / 100.0f));
-                    soundManager->setSoundPitch(impulse_sound, std::max(0.7f * impulse_ability, fabsf(my_spaceship->current_impulse) + 0.2f * std::max(0.1f, impulse_ability)));
-                } else {
-                    impulse_sound = soundManager->playSound(impulse_sound_file, std::max(0.7f * impulse_ability, fabsf(my_spaceship->current_impulse) + 0.2f * impulse_ability), (std::max(30.0f, fabsf(my_spaceship->current_impulse) * 10.0f * impulse_ability)) * (engine_volume / 100.0f), true);
-                }
-            } else if (impulse_sound > -1) {
-                // If we don't have impulse available, stop the engine sound.
-                soundManager->stopSound(impulse_sound);
-                impulse_sound = -1;
-                // TODO: Play an engine failure sound.
-            }
-        }
+        // Update the impulse engine sound.
+        impulse_sound->update(delta);
     } else {
-        // If we're not the player ship (ie. we exploded), don't play engine sfx.
-        soundManager->stopSound(impulse_sound);
-        impulse_sound = -1;
-#endif
+        // If we're not the player ship (ie. we exploded), stop playing the
+        // impulse engine sound.
+        impulse_sound->stop();
     }
 }
 
@@ -210,7 +194,7 @@ void CrewStationScreen::onKey(sf::Event::KeyEvent key, int unicode)
     case sf::Keyboard::Home:
         destroy();
         soundManager->stopMusic();
-        soundManager->stopSound(impulse_sound);
+        impulse_sound->stop();
         returnToShipSelection();
         break;
     case sf::Keyboard::Slash:

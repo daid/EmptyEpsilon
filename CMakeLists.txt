@@ -176,6 +176,7 @@ set(SOURCES
 	src/screenComponents/lightsOut.cpp
 	src/screenComponents/miniGame.cpp
 	src/screenComponents/mineSweeper.cpp
+	src/screenComponents/impulseSound.cpp
 	src/gui/colorConfig.cpp
 	src/gui/hotkeyConfig.cpp
 	src/gui/joystickConfig.cpp

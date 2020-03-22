@@ -14,6 +14,7 @@ class GuiButton;
 class GuiHelpOverlay;
 class GuiPanel;
 class GuiToggleButton;
+class ImpulseSound;
 
 class CrewStationScreen : public GuiCanvas, public Updatable
 {
@@ -34,17 +35,17 @@ private:
     GuiPanel* message_frame;
     GuiScrollText* message_text;
     GuiButton* message_close_button;
+    ImpulseSound* impulse_sound;
     
     struct CrewTabInfo {
         GuiToggleButton* button;
         GuiElement* element;
         ECrewPosition position;
     };
+
     ECrewPosition current_position;
     std::vector<CrewTabInfo> tabs;
     string keyboard_general = "";
-    int impulse_sound = -1;
-    int engine_volume;
     void showNextTab(int offset=1);
     void showTab(GuiElement* element);
 

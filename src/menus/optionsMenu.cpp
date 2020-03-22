@@ -87,16 +87,16 @@ OptionsMenu::OptionsMenu()
 
     // Engine volume slider.
     top += 50;
-    engine_volume_slider = new GuiSlider(this, "ENGINE_VOLUME_SLIDER", 0.0f, 100.0f, PreferencesManager::get("engine_volume", "50").toInt(), [this](float volume)
+    impulse_volume_slider = new GuiSlider(this, "IMPULSE_VOLUME_SLIDER", 0.0f, 100.0f, PreferencesManager::get("impulse_sound_volume", "50").toInt(), [this](float volume)
     {
-        PreferencesManager::set("engine_volume", volume);
-        engine_volume_overlay_label->setText(tr("Engine Volume: {volume}%").format({{"volume", string(PreferencesManager::get("engine_volume", "50").toInt())}}));
+        PreferencesManager::set("impulse_sound_volume", volume);
+        impulse_volume_overlay_label->setText(tr("Impulse Volume: {volume}%").format({{"volume", string(PreferencesManager::get("impulse_sound_volume", "50").toInt())}}));
     });
-    engine_volume_slider->setPosition(50, top, ATopLeft)->setSize(300, 50);
+    impulse_volume_slider->setPosition(50, top, ATopLeft)->setSize(300, 50);
 
     // Override overlay label.
-    engine_volume_overlay_label = new GuiLabel(engine_volume_slider, "ENGINE_VOLUME_SLIDER_LABEL", tr("Engine Volume: {volume}%").format({{"volume", string(PreferencesManager::get("engine_volume", "50").toInt())}}), 30);
-    engine_volume_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    impulse_volume_overlay_label = new GuiLabel(impulse_volume_slider, "IMPULSE_VOLUME_SLIDER_LABEL", tr("Impulse Volume: {volume}%").format({{"volume", string(PreferencesManager::get("impulse_sound_volume", "50").toInt())}}), 30);
+    impulse_volume_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Music playback state.
     top += 60;
@@ -118,15 +118,15 @@ OptionsMenu::OptionsMenu()
     (new GuiLabel(this, "ENGINE_SFX_LABEL", tr("Engine SFX"), 30))->addBackground()->setPosition(50, top, ATopLeft)->setSize(300, 50);
 
     // Determine when engine sound effects are enabled.
-    int engine_enabled_index = PreferencesManager::get("engine_enabled", "2").toInt();
+    int impulse_enabled_index = PreferencesManager::get("impulse_sound_enabled", "2").toInt();
     top += 50;
     (new GuiSelector(this, "ENGINE_ENABLED", [](int index, string value)
     {
         // 0: Always off
         // 1: Always on
         // 2: On if main screen, off otherwise (default)
-        PreferencesManager::set("engine_enabled", string(index));
-    }))->setOptions({tr("Disabled"), tr("Enabled"), tr("Main Screen only")})->setSelectionIndex(engine_enabled_index)->setPosition(50, top, ATopLeft)->setSize(300, 50);
+        PreferencesManager::set("impulse_sound_enabled", string(index));
+    }))->setOptions({tr("Disabled"), tr("Enabled"), tr("Main Screen only")})->setSelectionIndex(impulse_enabled_index)->setPosition(50, top, ATopLeft)->setSize(300, 50);
 
     // Right column, manual layout. Draw first element 50px from top.
     top = 50;
