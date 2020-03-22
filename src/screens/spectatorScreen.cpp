@@ -1,9 +1,9 @@
+#include "spectatorScreen.h"
 #include "main.h"
 #include "gameGlobalInfo.h"
-#include "spectatorScreen.h"
 
+#include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/radarView.h"
-
 
 SpectatorScreen::SpectatorScreen()
 {
@@ -15,6 +15,8 @@ SpectatorScreen::SpectatorScreen()
         [this](sf::Vector2f position) { this->onMouseDrag(position); },
         [this](sf::Vector2f position) { this->onMouseUp(position); }
     );
+
+    new GuiIndicatorOverlays(this);
 }
 
 SpectatorScreen::~SpectatorScreen()
