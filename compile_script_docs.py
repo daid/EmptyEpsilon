@@ -74,7 +74,7 @@ class ScriptClass(object):
 			stream.write('<ul>')
 			for c in self.children:
 				c.outputClassTree(stream)
-			stream.write('</ul>')
+			stream.write('</ul>\n')
 
 class DocumentationGenerator(object):
     def __init__(self):
@@ -133,6 +133,7 @@ class DocumentationGenerator(object):
         for filename in self._files:
             description = ""
             current_class = None
+            #print("Processing: %s" % (filename))
             for line in open(filename, "r"):
                 if line.startswith('#'):
                     continue
@@ -223,7 +224,7 @@ class DocumentationGenerator(object):
         stream.write('</div>')
 
         stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
-        stream.write('<h2>Objects</h2>')
+        stream.write('<h2>Objects</h2>\n')
         stream.write('<ul>')
         for d in self._definitions:
             if isinstance(d, ScriptClass) and d.parent is None:
@@ -232,7 +233,7 @@ class DocumentationGenerator(object):
         stream.write('</div>')
 
         stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
-        stream.write('<h2>Functions</h2>')
+        stream.write('<h2>Functions</h2>\n')
         stream.write('<ul>')
         for d in self._definitions:
             if isinstance(d, ScriptFunction):
@@ -243,8 +244,8 @@ class DocumentationGenerator(object):
 
         for d in self._definitions:
             if isinstance(d, ScriptClass):
-                stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
-                stream.write('<h2><a name="class_%s">%s</a></h2>' % (d.name, d.name))
+                stream.write('<div class="ui-widget ui-widget-content ui-corner-all">\n')
+                stream.write('<h2><a name="class_%s">%s</a></h2>\n' % (d.name, d.name))
                 stream.write('<div>%s</div>' % (d.description.replace('<', '&lt;')))
                 if d.parent is not None:
                     stream.write('Subclass of: <a href="#class_%s">%s</a>' % (d.parent.name, d.parent.name))
@@ -252,6 +253,7 @@ class DocumentationGenerator(object):
                 for func in d.functions:
                     if func.parameters is None:
                         stream.write('<dt>%s:%s [NOT FOUND; see SeriousProton]</dt>' % (d.name, func.name))
+                        print("Failed to find parameters for %s:%s" % (d.name, func.name))
                     else:
                         stream.write('<dt>%s:%s(%s)</dt>' % (d.name, func.name, func.parameters.replace('<', '&lt;')))
                     stream.write('<dd>%s</dd>' % (func.description.replace('<', '&lt;')))
@@ -269,6 +271,7 @@ class DocumentationGenerator(object):
 if __name__ == "__main__":
     dg = DocumentationGenerator()
     dg.addDirectory("src")
+    dg.addDirectory("../SeriousProton/src")
     dg.readFunctionInfo()
     dg.readScriptDefinitions()
     dg.linkFunctions()
