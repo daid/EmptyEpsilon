@@ -45,6 +45,7 @@ private:
     TargetsContainer* targets;
     GuiMissileTubeControls* missile_tube_controls;
 
+    bool auto_distance = false;
     float distance;
     sf::Vector2f view_position;
     bool long_range;
@@ -63,6 +64,7 @@ private:
     func_t mouse_drag_func;
     func_t mouse_up_func;
 public:
+    GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets);
     GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets);
 
     virtual void onDraw(sf::RenderTarget& window);

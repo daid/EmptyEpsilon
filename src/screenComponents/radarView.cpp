@@ -9,6 +9,15 @@
 #include "missileTubeControls.h"
 #include "targetsContainer.h"
 
+GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets)
+: GuiElement(owner, id), next_ghost_dot_update(0.0), targets(targets), missile_tube_controls(nullptr), distance(5000.0f), long_range(false), show_ghost_dots(false)
+, show_waypoints(false), show_target_projection(false), show_missile_tubes(false), show_callsigns(false), show_heading_indicators(false), show_game_master_data(false)
+, range_indicator_step_size(0.0f), style(Circular), fog_style(NoFogOfWar), mouse_down_func(nullptr), mouse_drag_func(nullptr), mouse_up_func(nullptr)
+{
+    auto_center_on_my_ship = true;
+    auto_distance = true;
+}
+
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets)
 : GuiElement(owner, id), next_ghost_dot_update(0.0), targets(targets), missile_tube_controls(nullptr), distance(distance), long_range(false), show_ghost_dots(false)
 , show_waypoints(false), show_target_projection(false), show_missile_tubes(false), show_callsigns(false), show_heading_indicators(false), show_game_master_data(false)
@@ -41,6 +50,17 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     //Hacky, when not relay and we have a ship, center on it.
     if (my_spaceship && auto_center_on_my_ship)
         view_position = my_spaceship->getPosition();
+    if (auto_distance)
+    {
+        distance = long_range ? 30000.0f : 5000.0f;
+        if (my_spaceship)
+        {
+            if (long_range)
+                distance = my_spaceship->getLongRangeRadarRange();
+            else
+                distance = my_spaceship->getShortRangeRadarRange();
+        }
+    }
 
     //Setup our textures for rendering
     adjustRenderTexture(background_texture);
