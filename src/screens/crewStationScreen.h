@@ -14,6 +14,7 @@ class GuiButton;
 class GuiHelpOverlay;
 class GuiPanel;
 class GuiToggleButton;
+class Music;
 
 class CrewStationScreen : public GuiCanvas, public Updatable
 {
@@ -34,6 +35,7 @@ private:
     GuiPanel* message_frame;
     GuiScrollText* message_text;
     GuiButton* message_close_button;
+    Music* music;
     
     struct CrewTabInfo {
         GuiToggleButton* button;

@@ -4,6 +4,7 @@
 #include "engine.h"
 
 class SpaceShip;
+
 class ThreatLevelEstimate : public Updatable
 {
 private:

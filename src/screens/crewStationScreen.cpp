@@ -9,6 +9,7 @@
 #include "screenComponents/noiseOverlay.h"
 #include "screenComponents/shipDestroyedPopup.h"
 #include "screenComponents/helpOverlay.h"
+#include "screenComponents/music.h"
 
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_panel.h"
@@ -52,18 +53,9 @@ CrewStationScreen::CrewStationScreen()
     for (std::pair<string, string> shortcut : listControlsByCategory("General"))
         keyboard_general += shortcut.second + ":\t" + shortcut.first + "\n";
 
+    // Initialize music and play based on current threat levels.
 #ifndef __ANDROID__
-    if (PreferencesManager::get("music_enabled") == "1")
-    {
-        threat_estimate = new ThreatLevelEstimate();
-        threat_estimate->setCallbacks([](){
-            LOG(INFO) << "Switching to ambient music";
-            soundManager->playMusicSet(findResources("music/ambient/*.ogg"));
-        }, []() {
-            LOG(INFO) << "Switching to combat music";
-            soundManager->playMusicSet(findResources("music/combat/*.ogg"));
-        });
-    }
+    music = new Music();
 #endif
 }
 
@@ -129,7 +121,7 @@ void CrewStationScreen::update(float delta)
     if (game_client && game_client->getStatus() == GameClient::Disconnected)
     {
         destroy();
-        soundManager->stopMusic();
+        music->stop();
         disconnectFromServer();
         returnToMainMenu();
         return;
@@ -178,7 +170,7 @@ void CrewStationScreen::onKey(sf::Event::KeyEvent key, int unicode)
     case sf::Keyboard::Escape:
     case sf::Keyboard::Home:
         destroy();
-        soundManager->stopMusic();
+        music->stop();
         returnToShipSelection();
         break;
     case sf::Keyboard::Slash:
