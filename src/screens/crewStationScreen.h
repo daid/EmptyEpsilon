@@ -25,6 +25,8 @@ public:
     void finishCreation();
     
     virtual void update(float delta) override;
+    virtual void playMusic(string filename);
+    virtual void resetMusic();
     virtual void onHotkey(const HotkeyResult& key) override;
     virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
 

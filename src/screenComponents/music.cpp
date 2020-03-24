@@ -1,40 +1,64 @@
 #include "music.h"
-#include "playerInfo.h"
-#include "spaceObjects/playerSpaceship.h"
-#include "preferenceManager.h"
 
 Music::Music(bool enabled)
 {
-    // Music volume is set in main.cpp
+    music_enabled = enabled;
+    threat_set_enabled = false;
     threat_estimate = new ThreatLevelEstimate();
-
-    // Handle threat level change events.
-    threat_estimate->setCallbacks([this, enabled](){
-        // Low threat function
-        LOG(INFO) << "Switching to ambient music";
-        this->playSet("music/ambient/*.ogg", enabled);
-    }, [this, enabled]() {
-        // High threat function
-        LOG(INFO) << "Switching to combat music";
-        this->playSet("music/combat/*.ogg", enabled);
-    });
 }
 
-void Music::play(string music_file, bool enabled)
+void Music::play(string music_file)
 {
     // Play the new song.
-    if (enabled)
-        soundManager->playMusic(music_file);
+    if (music_enabled)
+    {
+        try {
+            soundManager->playMusic(music_file);
+        } catch (...) {
+            LOG(WARNING) << "Failed to play " << music_file;
+        }
+    }
 }
 
-void Music::playSet(string music_files, bool enabled)
+void Music::playSet(string music_files)
 {
     // Play the new set of songs.
-    if (enabled)
-        soundManager->playMusicSet(findResources(music_files));
+    if (music_enabled)
+    {
+        try {
+            soundManager->playMusicSet(findResources(music_files));
+        } catch (...) {
+            LOG(WARNING) << "Failed to play " << music_files;
+        }
+    }
 }
 
 void Music::stop()
 {
     soundManager->stopMusic();
+}
+
+void Music::enableThreatSet()
+{
+    if (!threat_set_enabled)
+    {
+        // Handle threat level change events.
+        threat_estimate->setCallbacks([this](){
+            // Low threat function
+            LOG(INFO) << "Switching to ambient music";
+            this->playSet("music/ambient/*.ogg");
+        }, [this]() {
+            // High threat function
+            LOG(INFO) << "Switching to combat music";
+            this->playSet("music/combat/*.ogg");
+        });
+        threat_set_enabled = true;
+    }
+}
+
+void Music::disableThreatSet()
+{
+    // Disable threat level change event handling.
+    threat_estimate->setCallbacks([this](){}, [this]() {});
+    threat_set_enabled = false;
 }

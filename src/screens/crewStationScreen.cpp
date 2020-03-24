@@ -56,6 +56,7 @@ CrewStationScreen::CrewStationScreen()
     // Initialize music and play based on current threat levels.
 #ifndef __ANDROID__
     music = new Music(PreferencesManager::get("music_enabled") == "1");
+    music->enableThreatSet();
 #endif
 }
 
@@ -114,6 +115,16 @@ void CrewStationScreen::finishCreation()
         select_station_button->hide();
 
     keyboard_help->moveToFront();
+}
+
+void CrewStationScreen::playMusic(string filename)
+{
+    music->play(filename);
+}
+
+void CrewStationScreen::resetMusic()
+{
+    music->enableThreatSet();
 }
 
 void CrewStationScreen::update(float delta)
