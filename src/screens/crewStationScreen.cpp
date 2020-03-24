@@ -55,7 +55,7 @@ CrewStationScreen::CrewStationScreen()
 
     // Initialize music and play based on current threat levels.
 #ifndef __ANDROID__
-    music = new Music();
+    music = new Music(PreferencesManager::get("music_enabled") == "1");
 #endif
 }
 

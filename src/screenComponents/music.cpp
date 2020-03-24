@@ -3,44 +3,38 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "preferenceManager.h"
 
-Music::Music()
+Music::Music(bool enabled)
 {
-    music_enabled = PreferencesManager::get("music_enabled", "1") == "1";
     // Music volume is set in main.cpp
-    // music_volume = PreferencesManager::get("music_volume", "50").toInt();
     threat_estimate = new ThreatLevelEstimate();
 
     // Handle threat level change events.
-    threat_estimate->setCallbacks([this](){
+    threat_estimate->setCallbacks([this, enabled](){
         // Low threat function
         LOG(INFO) << "Switching to ambient music";
-        this->playSet("music/ambient/*.ogg");
-    }, [this]() {
+        this->playSet("music/ambient/*.ogg", enabled);
+    }, [this, enabled]() {
         // High threat function
         LOG(INFO) << "Switching to combat music";
-        this->playSet("music/combat/*.ogg");
+        this->playSet("music/combat/*.ogg", enabled);
     });
 }
 
-void Music::play(string music_file)
+void Music::play(string music_file, bool enabled)
 {
     // Play the new song.
-    if (music_enabled)
+    if (enabled)
         soundManager->playMusic(music_file);
 }
 
-void Music::playSet(string music_files)
+void Music::playSet(string music_files, bool enabled)
 {
     // Play the new set of songs.
-    if (music_enabled)
+    if (enabled)
         soundManager->playMusicSet(findResources(music_files));
 }
 
 void Music::stop()
 {
     soundManager->stopMusic();
-}
-
-void Music::update(float delta)
-{
 }
