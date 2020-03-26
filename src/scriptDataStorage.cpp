@@ -15,7 +15,7 @@ public:
             while(!feof(f))
             {
                 char buffer[1024];
-                auto size = fread(buffer, sizeof(buffer), 1, f);
+                auto size = fread(buffer, 1, sizeof(buffer), f);
                 s += std::string(buffer, size);
             }
             fclose(f);
