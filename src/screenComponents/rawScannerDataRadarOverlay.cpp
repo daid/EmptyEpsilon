@@ -15,6 +15,7 @@ void RawScannerDataRadarOverlay::onDraw(sf::RenderTarget& window)
         return;
 
     sf::Vector2f view_position = radar->getViewPosition();
+    float view_rotation = radar->getViewRotation();
 
     // Cap the number of signature points, which determines the raw data's
     // resolution.
@@ -151,17 +152,17 @@ void RawScannerDataRadarOverlay::onDraw(sf::RenderTarget& window)
         // ... and add vectors for each point.
         a_r[n].position.x = rect.left + rect.width / 2.0f;
         a_r[n].position.y = rect.top + rect.height / 2.0f;
-        a_r[n].position += sf::vector2FromAngle(float(n) / float(point_count) * 360.0f) * (radius * (0.95f - r / 500));
+        a_r[n].position += sf::vector2FromAngle(float(n) / float(point_count) * 360.0f - view_rotation) * (radius * (0.95f - r / 500));
         a_r[n].color = sf::Color(255, 0, 0);
 
         a_g[n].position.x = rect.left + rect.width / 2.0f;
         a_g[n].position.y = rect.top + rect.height / 2.0f;
-        a_g[n].position += sf::vector2FromAngle(float(n) / float(point_count) * 360.0f) * (radius * (0.92f - g / 500));
+        a_g[n].position += sf::vector2FromAngle(float(n) / float(point_count) * 360.0f - view_rotation) * (radius * (0.92f - g / 500));
         a_g[n].color = sf::Color(0, 255, 0);
 
         a_b[n].position.x = rect.left + rect.width / 2.0f;
         a_b[n].position.y = rect.top + rect.height / 2.0f;
-        a_b[n].position += sf::vector2FromAngle(float(n) / float(point_count) * 360.0f) * (radius * (0.89f - b / 500));
+        a_b[n].position += sf::vector2FromAngle(float(n) / float(point_count) * 360.0f - view_rotation) * (radius * (0.89f - b / 500));
         a_b[n].color = sf::Color(0, 0, 255);
     }
 
