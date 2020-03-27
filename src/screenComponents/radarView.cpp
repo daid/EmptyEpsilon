@@ -316,11 +316,11 @@ void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
                 sf::Vector2f pos_e = scan_center + diff / diff_len * distance * 3.0f;
 
                 sf::VertexArray a(sf::TrianglesStrip, 5);
-                a[0].position = worldToScreen(pos_a - view_position);
-                a[1].position = worldToScreen(pos_b - view_position);
-                a[2].position = worldToScreen(pos_c - view_position);
-                a[3].position = worldToScreen(pos_d - view_position);
-                a[4].position = worldToScreen(pos_e - view_position);
+                a[0].position = worldToScreen(pos_a);
+                a[1].position = worldToScreen(pos_b);
+                a[2].position = worldToScreen(pos_c);
+                a[3].position = worldToScreen(pos_d);
+                a[4].position = worldToScreen(pos_e);
                 for(int n=0; n<5;n++)
                     a[n].color = sf::Color(0, 0, 0, 255);
                 window.draw(a, blend);
