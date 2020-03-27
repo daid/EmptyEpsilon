@@ -158,6 +158,14 @@ OptionsMenu::OptionsMenu()
         soundManager->stopMusic();
         returnToMainMenu();
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
+    // Save options button.
+    (new GuiButton(this, "SAVE_OPTIONS", "Save Options", [this]()
+    {
+        if (getenv("HOME"))
+            PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
+        else
+            PreferencesManager::save("options.ini");
+    }))->setPosition(370, -50, ABottomLeft)->setSize(300, 50);
 }
 
 void OptionsMenu::onKey(sf::Event::KeyEvent key, int unicode)
