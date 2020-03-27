@@ -41,7 +41,7 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(TutorialGame)
     REGISTER_SCRIPT_CLASS_FUNCTION(TutorialGame, finish);
 }
 
-TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
+TutorialGame::TutorialGame(string filename, bool repeated)
 {
     new LocalOnlyGame();
 
@@ -49,7 +49,8 @@ TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
 
     this->viewport = nullptr;
-    this->repeated_tutorial = repeated_tutorial;
+    this->repeated_tutorial = repeated;
+    this->tutorial_name = filename;
 
     i18n::load("locale/" + PreferencesManager::get("language", "en") + ".po");
     i18n::load("locale/tutorial." + PreferencesManager::get("language", "en") + ".po");
@@ -235,7 +236,7 @@ void TutorialGame::finish()
 
         script = new ScriptObject();
         script->registerObject(this, "tutorial");
-        script->run("tutorial.lua");
+        script->run(tutorial_name);
     }else{
         script->destroy();
         destroy();
