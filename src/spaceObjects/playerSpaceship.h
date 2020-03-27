@@ -298,7 +298,7 @@ public:
     void setControlCode(string code) { control_code = code; }
 
     // Radar function
-    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
+    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
 
     // Radar range
     float getLongRangeRadarRange();

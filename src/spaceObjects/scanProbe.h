@@ -21,7 +21,7 @@ public:
     virtual void update(float delta) override;
     virtual bool canBeTargetedBy(P<SpaceObject> other) override;
     virtual void takeDamage(float damage_amount, DamageInfo info) override;
-    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
+    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
 
     void setTarget(sf::Vector2f target) { target_position = target; }
     sf::Vector2f getTarget() { return target_position; }
