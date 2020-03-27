@@ -452,8 +452,10 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
                 a[cnt + 1].position = fire_draw_position + (turn_center + sf::vector2FromAngle(fire_angle - angle_diff / 10.0f * cnt - left_or_right) * turn_radius) * scale;
             a[11].position = fire_draw_position + turn_exit * scale;
             a[12].position = fire_draw_position + (turn_exit + sf::vector2FromAngle(missile_target_angle) * length_after_turn) * scale;
-            for(int cnt=0; cnt<13; cnt++)
+            for(int cnt=0; cnt<13; cnt++) {
+                a[cnt].position = sf::rotateVector(a[cnt].position-radar_screen_center, -view_rotation)+radar_screen_center;
                 a[cnt].color = sf::Color(255, 255, 255, 128);
+            }
             window.draw(a);
 
             float offset = seconds_per_distance_tick * data.speed;
@@ -470,8 +472,8 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
                     n = sf::vector2FromAngle(missile_target_angle + 90.0f);
                 }
                 sf::VertexArray a(sf::Lines, 2);
-                a[0].position = fire_draw_position + p - n * 10.0f;
-                a[1].position = fire_draw_position + p + n * 10.0f;
+                a[0].position = sf::rotateVector((fire_draw_position + p - n * 10.0f)-radar_screen_center, -view_rotation)+radar_screen_center;
+                a[1].position = sf::rotateVector((fire_draw_position + p + n * 10.0f)-radar_screen_center, -view_rotation)+radar_screen_center;
                 window.draw(a);
 
                 offset += seconds_per_distance_tick * data.speed;
@@ -487,14 +489,14 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
                 continue;
 
             sf::VertexArray a(sf::Lines, 12);
-            a[0].position = radar_screen_center + (obj->getPosition() - view_position) * scale;
+            a[0].position = worldToScreen(obj->getPosition());
             a[0].color = sf::Color(255, 255, 255, 128);
-            a[1].position = a[0].position + (obj->getVelocity() * 60.0f) * scale;
+            a[1].position = worldToScreen(obj->getPosition() + obj->getVelocity() * 60.0f);
             a[1].color = sf::Color(255, 255, 255, 0);
             sf::Vector2f n = sf::normalize(sf::Vector2f(-obj->getVelocity().y, obj->getVelocity().x));
             for(int cnt=0; cnt<5; cnt++)
             {
-                sf::Vector2f p = (obj->getVelocity() * (seconds_per_distance_tick + seconds_per_distance_tick * cnt)) * scale;
+                sf::Vector2f p = sf::rotateVector(obj->getVelocity() * (seconds_per_distance_tick * (cnt + 1.0f) * scale), -view_rotation);
                 a[2 + cnt * 2].position = a[0].position + p + n * 10.0f;
                 a[3 + cnt * 2].position = a[0].position + p - n * 10.0f;
                 a[2 + cnt * 2].color = a[3 + cnt * 2].color = sf::Color(255, 255, 255, 128 - cnt * 20);
