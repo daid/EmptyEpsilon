@@ -35,7 +35,7 @@ void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, 
     if (!long_range)
     {
         sprite_scale *= 0.7;
-        drawShieldsOnRadar(window, position, scale, sprite_scale, true);
+        drawShieldsOnRadar(window, position, scale, rotation, sprite_scale, true);
     }
     sprite_scale = std::max(0.15f, sprite_scale);
     objectSprite.setScale(sprite_scale, sprite_scale);
