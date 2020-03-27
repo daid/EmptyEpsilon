@@ -16,7 +16,7 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
 , range_indicator_step_size(0.0f), style(Circular), fog_style(NoFogOfWar), mouse_down_func(nullptr), mouse_drag_func(nullptr), mouse_up_func(nullptr)
 {
     auto_center_on_my_ship = true;
-    auto_rotate_on_my_ship = true;
+    auto_rotate_on_my_ship = false;
 }
 
 void GuiRadarView::onDraw(sf::RenderTarget& window)

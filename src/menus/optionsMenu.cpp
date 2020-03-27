@@ -6,6 +6,7 @@
 
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_button.h"
+#include "gui/gui2_togglebutton.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_slider.h"
@@ -99,6 +100,31 @@ OptionsMenu::OptionsMenu()
         // 2: On if main screen, off otherwise (default)
         PreferencesManager::set("music_enabled", string(index));
     }))->setOptions({"Disabled", "Enabled", "Main Screen only"})->setSelectionIndex(music_enabled_index)->setPosition(50, top, ATopLeft)->setSize(300, 50);
+
+    // Interface options.
+    top += 60;
+    (new GuiLabel(this, "INTERFACE_OPTIONS_LABEL", tr("Interface Options"), 30))->addBackground()->setPosition(50, top, ATopLeft)->setSize(300, 50);
+
+    // Helms rotation lock.
+    top += 50;
+    (new GuiToggleButton(this, "HEMS_RADAR_LOCK", tr("Helms Radar Lock"), [](bool value)
+    {
+        PreferencesManager::set("helms_radar_lock", value?"1":"");
+    }))->setValue(PreferencesManager::get("helms_radar_lock","0")=="1")->setPosition(50, top, ATopLeft)->setSize(300, 50);
+
+    // Helms rotation lock.
+    top += 50;
+    (new GuiToggleButton(this, "WEAPONS_RADAR_LOCK", tr("Weapons Radar Lock"), [](bool value)
+    {
+        PreferencesManager::set("weapons_radar_lock", value?"1":"");
+    }))->setValue(PreferencesManager::get("weapons_radar_lock","0")=="1")->setPosition(50, top, ATopLeft)->setSize(300, 50);
+
+    // Helms rotation lock.
+    top += 50;
+    (new GuiToggleButton(this, "SCIENCE_RADAR_LOCK", tr("Science Radar Lock"), [](bool value)
+    {
+        PreferencesManager::set("science_radar_lock", value?"1":"");
+    }))->setValue(PreferencesManager::get("science_radar_lock","0")=="1")->setPosition(50, top, ATopLeft)->setSize(300, 50);
 
     // Right column, manual layout. Draw first element 50px from top.
     top = 50;

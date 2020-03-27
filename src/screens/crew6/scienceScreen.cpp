@@ -3,6 +3,7 @@
 #include "scienceScreen.h"
 #include "scienceDatabase.h"
 #include "spaceObjects/nebula.h"
+#include "preferenceManager.h"
 
 #include "screenComponents/radarView.h"
 #include "screenComponents/rawScannerDataRadarOverlay.h"
@@ -52,6 +53,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
         }, nullptr, nullptr
     );
+    science_radar->setAutoRotating(PreferencesManager::get("science_radar_lock","0")=="1");
     new RawScannerDataRadarOverlay(science_radar, "", my_spaceship->getLongRangeRadarRange());
 
     // Draw and hide the probe radar.
