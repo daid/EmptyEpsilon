@@ -11,7 +11,8 @@ private:
     float impulse_sound_volume;
     string impulse_sound_file;
 public:
-    ImpulseSound();
+    ImpulseSound(bool enabled);
+    ~ImpulseSound();
 
     int getImpulseSoundID() { return impulse_sound_id; }
 

@@ -3,10 +3,10 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "preferenceManager.h"
 
-ImpulseSound::ImpulseSound()
+ImpulseSound::ImpulseSound(bool enabled)
 {
     impulse_sound_id = -1;
-    impulse_sound_enabled = PreferencesManager::get("impulse_sound_enabled", "1") == "1";
+    impulse_sound_enabled = enabled;
     impulse_sound_volume = PreferencesManager::get("impulse_sound_volume", "50").toInt();
 
     // If defined, use this ship's impulse sound file.
@@ -18,6 +18,11 @@ ImpulseSound::ImpulseSound()
     // If we can play an impulse sound, do so.
     if (my_spaceship && impulse_sound_enabled && impulse_sound_volume > 0)
         play(impulse_sound_file);
+}
+
+ImpulseSound::~ImpulseSound()
+{
+    soundManager->stopSound(impulse_sound_id);
 }
 
 void ImpulseSound::play(string sound_file)

@@ -35,7 +35,7 @@ private:
     GuiPanel* message_frame;
     GuiScrollText* message_text;
     GuiButton* message_close_button;
-    ImpulseSound* impulse_sound;
+    std::unique_ptr<ImpulseSound> impulse_sound;
     
     struct CrewTabInfo {
         GuiToggleButton* button;

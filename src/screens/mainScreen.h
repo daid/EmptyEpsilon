@@ -23,7 +23,7 @@ private:
     GuiRadarView* long_range_radar;
     bool first_person;
     GuiCommsOverlay* onscreen_comms;
-    ImpulseSound* impulse_sound;
+    std::unique_ptr<ImpulseSound> impulse_sound;
 public:
     ScreenMainScreen();
     
