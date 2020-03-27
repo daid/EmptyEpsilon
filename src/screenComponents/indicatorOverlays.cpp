@@ -104,6 +104,9 @@ void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
     
     if (engine->getGameSpeed() == 0.0)
     {
+        warpPostProcessor->enabled = false;
+        glitchPostProcessor->enabled = false;
+
         if (gameGlobalInfo->getVictoryFactionId() < 0)
         {
             pause_overlay->show();

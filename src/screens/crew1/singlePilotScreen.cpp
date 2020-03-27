@@ -52,7 +52,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     (new AlertLevelOverlay(this));
 
     // 5U tactical radar with piloting features.
-    radar = new GuiRadarView(left_panel, "TACTICAL_RADAR", my_spaceship->getShortRangeRadarRange(), &targets);
+    radar = new GuiRadarView(left_panel, "TACTICAL_RADAR", &targets);
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 650);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(

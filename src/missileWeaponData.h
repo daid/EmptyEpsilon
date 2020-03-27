@@ -20,6 +20,7 @@ enum EMissileSizes
     MS_Medium = 1,
     MS_Large = 2,
 };
+REGISTER_MULTIPLAYER_ENUM(EMissileSizes);
 
 /* Define script conversion function for the EMissileWeapons enum. */
 template<> void convert<EMissileWeapons>::param(lua_State* L, int& idx, EMissileWeapons& es);

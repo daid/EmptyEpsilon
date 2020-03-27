@@ -1,25 +1,83 @@
 # Change Log
 
-## [...]
+## [2020-03-22]
 
 ### Added
 
-- `ScanProbe:onExpiration`, `ScanProbe:onDestruction`, and
-  `PlayerSpaceship:onProbeLaunch` callback scripting functions.
-- Scan object and cycle selected object hotkeys added to Science.
+- Localization functions.
+- Mappable joystick controls.
+- Push-to-talk voice chat using opus.
+  - Server chat is mapped to the Backspace key.
+  - Same-ship crew chat is mapped to the Tilde (~) key.
+- `proxy` and `serverproxy` preferences to run an EmptyEpsilon instance as a
+  proxy or reverse proxy server.
+- `getScriptStorage()` scripting function to access persistent data storage,
+  and `:get()` and `:set()` functions to retrieve and add or modify it.
 - `setColors()` and `getColors()` GUI functions, and R/G/B color profiles, for
   GuiButtons.
 - `SpaceShip:getDynamicRadarSignatureGravity()`, `...Electrical()`, and
   `...Biological()` scripting functions.
+- Shield generator frequency selector to Engineering+.
+- Strategic Map (Relay without comms), Comms Only (Relay without map),
+  and Spectator (GM without editing) stations in the alternative/extras
+  category.
+- GMs can tweak coolant and short/long-range radar range on player ships.
 
 ### Changed
 
-- Moved shield calibration hotkey configs in options.ini from Engineering to
-  Weapons. **This is a breaking change** if these hotkeys are set in
-  options.ini:
+- Long-range radar range (and short-range radar range) are now per-ship
+  settings, rather than server-wide. Long-range radar range option no
+  longer appears on the scenario selection menu.
+  - `get...`, `setLongRangeRadarRange()` and `setShortRangeRadarRange()`
+    scripting functions added to ShipTemplate and PlayerSpaceship.
+- Clients set a username on the main menu, which also appears in the ship
+  selection screen.
+- DB button for targeted ship information appears to the left of the info
+  on the Science and Operations stations.
+- Callsigns appear on the cinematic view.
+- Android always uses landscape mode.
+- Fixes to patrol duty scenario.
+- `instance_name` now also appears in the window title.
+
+### Fixed
+
+- OpenGL crash issue with mesh views.
+- Alignment of touchscreen calibration button text.
+
+## [2020-02-18]
+
+### Added
+
+- `ScanProbe:onExpiration()`, `ScanProbe:onDestruction()`, and
+  `PlayerSpaceship:onProbeLaunch()` callback scripting functions.
+- Scan object (`s`) and cycle objects not yet fully scanned (`c`) hotkeys
+  added to Science and Operations.
+- `Artifact:setSpin()` scripting function.
+- Scripting reference docs for SpaceObjects.
+- Beam frequency and system target selectors added to the Tactical station.
+- `pauseGame()` and `unpauseGame()` scripting functions.
+- `startpaused` option for `headless` servers.
+- A simple Discord bot, located in `/discordbot` within the git repository.
+
+### Changed
+
+- Moved shield calibration hotkey configs in the preferences file from
+  Engineering to Weapons. **This is a breaking change** if these hotkeys
+  are already set in the preferences file:
   - `SHIELD_CAL_INC`
   - `SHIELD_CAL_DEC`
   - `SHIELD_CAL_START`
+- Radar signatures for AI and player ships change dynamically based on
+  ship activity, such as impulse power and jump drive activation.
+
+### Fixed
+
+- `Asteroid:setSize()` now works as expected.
+- Pathfinding objects that start a scenario on the same coordinates are no
+  longer flung millions of units away when the game is unpaused.
+- Hacking settings are now replicated to clients.
+- Raw radar signature waveforms when objects are beyond long-range radar range.
+- `headless` servers no longer attempt to use or require graphics.
 
 ## [2020-01-15]
 

@@ -7,7 +7,7 @@
 
 SpectatorScreen::SpectatorScreen()
 {
-    main_radar = new GuiRadarView(this, "MAIN_RADAR", 50000.0f, &targets);
+    main_radar = new GuiRadarView(this, "MAIN_RADAR", 50000.0f, nullptr);
     main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections(nullptr)->setAutoCentering(false)->enableCallsigns();
     main_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     main_radar->setCallbacks(
