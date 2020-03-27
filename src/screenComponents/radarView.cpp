@@ -16,6 +16,7 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
 , range_indicator_step_size(0.0f), style(Circular), fog_style(NoFogOfWar), mouse_down_func(nullptr), mouse_drag_func(nullptr), mouse_up_func(nullptr)
 {
     auto_center_on_my_ship = true;
+    auto_rotate_on_my_ship = true;
 }
 
 void GuiRadarView::onDraw(sf::RenderTarget& window)
@@ -42,7 +43,9 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     //Hacky, when not relay and we have a ship, center on it.
     if (my_spaceship && auto_center_on_my_ship) {
         view_position = my_spaceship->getPosition();
-        view_rotation = my_spaceship->getRotation();
+    }
+    if (my_spaceship && auto_rotate_on_my_ship) {
+        view_rotation = my_spaceship->getRotation() + 90;
     }
 
     //Setup our textures for rendering
@@ -493,7 +496,7 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
             a[0].color = sf::Color(255, 255, 255, 128);
             a[1].position = worldToScreen(obj->getPosition() + obj->getVelocity() * 60.0f);
             a[1].color = sf::Color(255, 255, 255, 0);
-            sf::Vector2f n = sf::normalize(sf::Vector2f(-obj->getVelocity().y, obj->getVelocity().x));
+            sf::Vector2f n = sf::normalize(sf::rotateVector(sf::Vector2f(-obj->getVelocity().y, obj->getVelocity().x), -view_rotation));
             for(int cnt=0; cnt<5; cnt++)
             {
                 sf::Vector2f p = sf::rotateVector(obj->getVelocity() * (seconds_per_distance_tick * (cnt + 1.0f) * scale), -view_rotation);

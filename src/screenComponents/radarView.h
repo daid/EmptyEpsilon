@@ -57,6 +57,7 @@ private:
     bool show_heading_indicators;
     bool show_game_master_data;
     bool auto_center_on_my_ship;
+    bool auto_rotate_on_my_ship;
     float range_indicator_step_size;
     ERadarStyle style;
     EFogOfWarStyle fog_style;
@@ -92,6 +93,8 @@ public:
     GuiRadarView* setFogOfWarStyle(EFogOfWarStyle style) { this->fog_style = style; return this; }
     bool getAutoCentering() { return auto_center_on_my_ship; }
     GuiRadarView* setAutoCentering(bool value) { this->auto_center_on_my_ship = value; return this; }
+    bool getAutoRotating() { return auto_rotate_on_my_ship; }
+    GuiRadarView* setAutoRotating(bool value) { this->auto_rotate_on_my_ship = value; return this; }
     GuiRadarView* setCallbacks(func_t mouse_down_func, func_t mouse_drag_func, func_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
     GuiRadarView* setViewPosition(sf::Vector2f view_position) { this->view_position = view_position; return this; }
     sf::Vector2f getViewPosition() { return view_position; }
