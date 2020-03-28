@@ -72,7 +72,7 @@ void GuiShipInternalView::onDraw(sf::RenderTarget& window)
                 c->destroy();
             crew_list.clear();
 
-            for(P<RepairCrew> rc : crew)
+            foreach(RepairCrew, rc, crew)
             {
                 int id = rc->getMultiplayerId();
                 crew_list.push_back(new GuiShipCrew(room_container, std::to_string(id) + "_CREW", rc, [this](P<RepairCrew> crew_member){
