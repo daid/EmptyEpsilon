@@ -14,6 +14,8 @@
 PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
 : GuiOverlay(owner, "POWER_MANAGEMENT_SCREEN", colorConfig.background)
 {
+    selected_system = SYS_None;
+
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(20, 20, ATopLeft)->setSize(285, 40);
     coolant_display = new GuiKeyValueDisplay(this, "COOLANT_DISPLAY", 0.45, "Coolant", "");
@@ -65,6 +67,8 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
     previous_energy_level = 0.0;
     average_energy_delta = 0.0;
     previous_energy_measurement = 0.0;
+
+    // TODO: Hotkey help overlay
 }
 
 void PowerManagementScreen::onDraw(sf::RenderTarget& window)
@@ -108,6 +112,57 @@ void PowerManagementScreen::onDraw(sf::RenderTarget& window)
         }
     }
 }
+
+void PowerManagementScreen::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "ENGINEERING" && my_spaceship)
+    {
+        if (key.hotkey == "SELECT_REACTOR") selected_system = SYS_Reactor;
+        if (key.hotkey == "SELECT_BEAM_WEAPONS") selected_system = SYS_BeamWeapons;
+        if (key.hotkey == "SELECT_MISSILE_SYSTEM") selected_system = SYS_MissileSystem;
+        if (key.hotkey == "SELECT_MANEUVER") selected_system = SYS_Maneuver;
+        if (key.hotkey == "SELECT_IMPULSE") selected_system = SYS_Impulse;
+        if (key.hotkey == "SELECT_WARP") selected_system = SYS_Warp;
+        if (key.hotkey == "SELECT_JUMP_DRIVE") selected_system = SYS_JumpDrive;
+        if (key.hotkey == "SELECT_FRONT_SHIELDS") selected_system = SYS_FrontShield;
+        if (key.hotkey == "SELECT_REAR_SHIELDS") selected_system = SYS_RearShield;
+
+        // Don't act if the selected system doesn't exist.
+        if (!my_spaceship->hasSystem(selected_system))
+            return;
+
+        // If we selected a system, check for the power/coolant modifier.
+        if (selected_system != SYS_None)
+        {
+            GuiSlider* power_slider = systems[selected_system].power_slider;
+
+            if (key.hotkey == "INCREASE_POWER")
+            {
+                power_slider->setValue(my_spaceship->systems[selected_system].power_request + 0.1f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                return;
+            } else if (key.hotkey == "DECREASE_POWER") {
+                power_slider->setValue(my_spaceship->systems[selected_system].power_request - 0.1f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                return;
+            }
+
+            GuiSlider* coolant_slider = systems[selected_system].coolant_slider;
+
+            if (key.hotkey == "INCREASE_COOLANT")
+            {
+                coolant_slider->setValue(my_spaceship->systems[selected_system].coolant_request + 0.5f);
+                my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
+                return;
+            } else if (key.hotkey == "DECREASE_COOLANT") {
+                coolant_slider->setValue(my_spaceship->systems[selected_system].coolant_request - 0.5f);
+                my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
+                return;
+            }
+        }
+    }
+}
+
 bool PowerManagementScreen::onJoystickAxis(const AxisAction& axisAction){
     if(my_spaceship){
         if (axisAction.category == "ENGINEERING"){
