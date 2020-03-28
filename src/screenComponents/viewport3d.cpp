@@ -26,6 +26,7 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
     show_callsigns = false;
     show_headings = false;
     show_spacedust = false;
+    camera_fov = 60.0f;
 }
 
 void GuiViewport3D::onDraw(sf::RenderTarget& window)
@@ -39,7 +40,6 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 
     ShaderManager::getShader("billboardShader")->setUniform("camera_position", camera_position);
 
-    float camera_fov = 60.0f;
     float sx = window.getSize().x * window.getView().getViewport().width / window.getView().getSize().x;
     float sy = window.getSize().y * window.getView().getViewport().height / window.getView().getSize().y;
     glViewport(rect.left * sx, (float(window.getView().getSize().y) - rect.height - rect.top) * sx, rect.width * sx, rect.height * sy);
@@ -287,7 +287,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     foreach(SpaceObject, obj, space_object_list)
     {
         glPushMatrix();
-        glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
+        glTranslatef(-camera_position.x, -camera_position.y, -camera_position.z);
         glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
         glRotatef(obj->getRotation(), 0, 0, 1);
 
