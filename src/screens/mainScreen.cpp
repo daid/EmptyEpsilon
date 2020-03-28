@@ -52,6 +52,7 @@ ScreenMainScreen::ScreenMainScreen()
 
     // Add general keyboard shortcut help.
     keyboard_help = new GuiHelpOverlay(this, "Keyboard Shortcuts");
+    keyboard_general = "";
 
     for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Main Screen"))
         keyboard_general += shortcut.second + ":\t" + shortcut.first + "\n";
@@ -94,6 +95,9 @@ void ScreenMainScreen::update(float delta)
         // Remember our ship's current weapons target.
         P<SpaceObject> target_ship = my_spaceship->getTarget();
 
+        float camera_ship_distance = 0.0f;
+        float camera_ship_height = 0.0f;
+
         // Set the initial camera yaw (direction) to our ship's current facing.
         float target_camera_yaw = my_spaceship->getRotation();
 
@@ -117,9 +121,10 @@ void ScreenMainScreen::update(float delta)
         default: break;
         }
 
-        // Initialize the camera position.
-        float camera_ship_distance;
-        float camera_ship_height;
+        // Bound mods
+        camera_ship_distance_modifier = std::min(200.0f, std::max(-100.0f, camera_ship_distance_modifier));
+        camera_ship_height_modifier = std::min(200.0f, std::max(-100.0f, camera_ship_height_modifier));
+        camera_pitch_modifier = std::min(20.0f, std::max(-20.0f, camera_pitch_modifier));
 
         if (first_person)
         {
@@ -127,15 +132,15 @@ void ScreenMainScreen::update(float delta)
             // its radius (-getRadius) and proportionally slightly elevated.
             // The proportion is based on a naive assumption that ships tend to
             // be about 1/10 as tall as their 2D (length/width) radius.
-            camera_ship_distance = -my_spaceship->getRadius();
-            camera_ship_height = my_spaceship->getRadius() / 10.f;
-            camera_pitch = 0;
+            camera_ship_distance = camera_ship_distance_modifier - my_spaceship->getRadius();
+            camera_ship_height = camera_ship_height_modifier + (my_spaceship->getRadius() / 10.f);
+            camera_pitch = camera_pitch_modifier + 0;
         } else {
             // By default, place the camera 420m behind and above the ship and
             // point it downward 30 degrees.
-            camera_ship_distance = 420.0f;
-            camera_ship_height = 420.0f;
-            camera_pitch = 30.0f;
+            camera_ship_distance = camera_ship_distance_modifier + 420.0f;
+            camera_ship_height = camera_ship_height_modifier + 420.0f;
+            camera_pitch = camera_pitch_modifier + 30.0f;
         }
 
         // 2D position is used to calculate the camera's target position based
@@ -331,6 +336,18 @@ void ScreenMainScreen::onKey(sf::Event::KeyEvent key, int unicode)
         soundManager->stopSound(impulse_sound);
         destroy();
         returnToShipSelection();
+        break;
+    case sf::Keyboard::E:
+        camera_ship_height_modifier += 10.0f;
+        break;
+    case sf::Keyboard::D:
+        camera_ship_height_modifier -= 10.0f;
+        break;
+    case sf::Keyboard::W:
+        camera_pitch_modifier -= 5.0f;
+        break;
+    case sf::Keyboard::S:
+        camera_pitch_modifier += 5.0f;
         break;
     case sf::Keyboard::Slash:
     case sf::Keyboard::F1:

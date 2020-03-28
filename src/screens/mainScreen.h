@@ -17,11 +17,15 @@ class ScreenMainScreen : public GuiCanvas, public Updatable
 private:
     GuiViewport3D* viewport;
     GuiHelpOverlay* keyboard_help;
-    string keyboard_general = "";
+    string keyboard_general;
     GuiRadarView* tactical_radar;
     GuiRadarView* long_range_radar;
     bool first_person;
     GuiCommsOverlay* onscreen_comms;
+    float camera_ship_distance_modifier;
+    float camera_ship_height_modifier;
+    float camera_pitch_modifier;
+
     int impulse_sound = -1;
 public:
     ScreenMainScreen();
