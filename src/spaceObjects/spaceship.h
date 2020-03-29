@@ -340,6 +340,7 @@ public:
             warp_speed_per_warp_level = 0;
         }
     }
+    void setWarpSpeed(float speed) { warp_speed_per_warp_level = std::max(0.0f, speed); }
 
     float getBeamWeaponArc(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getArc(); }
     float getBeamWeaponDirection(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getDirection(); }
