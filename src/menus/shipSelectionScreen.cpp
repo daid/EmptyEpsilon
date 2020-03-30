@@ -129,6 +129,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         if (gameGlobalInfo->gm_control_code.length() > 0)
         {
             LOG(INFO) << "Player selected Spectate mode, which has a control code.";
+            password_label->setText("Enter the GM control code:");
             left_container->hide();
             right_container->hide();
             password_overlay->show();
@@ -288,6 +289,7 @@ ShipSelectionScreen::ShipSelectionScreen()
             }
         } else if (ship) {
             string control_code = ship->control_code;
+            password_label->setText("Enter this ship's control code:");
 
             if (password != control_code)
             {
