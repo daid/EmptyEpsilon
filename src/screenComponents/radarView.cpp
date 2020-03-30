@@ -239,16 +239,8 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
         for(int sector_y = sector_y_min - 1; sector_y <= sector_y_max; sector_y++)
         {
             float y = sector_y * sector_size;
-            if (view_rotation==0)
-            {
-                sf::Vector2f pos = worldToScreen(sf::Vector2f(x,y));
-                drawText(window, sf::FloatRect(pos.x, pos.y, 30, 30), getSectorName(sf::Vector2f(sector_x * sector_size + sub_sector_size, sector_y * sector_size + sub_sector_size)), ATopLeft, 30, bold_font, color);
-            }
-            else
-            {
-                sf::Vector2f pos = worldToScreen(sf::Vector2f(x+(30/scale),y+(30/scale)));
-                drawText(window, sf::FloatRect(pos.x-10, pos.y-10, 20, 20), getSectorName(sf::Vector2f(sector_x * sector_size + sub_sector_size, sector_y * sector_size + sub_sector_size)), ACenter, 30, bold_font, color);
-             }
+            sf::Vector2f pos = worldToScreen(sf::Vector2f(x+(30/scale),y+(30/scale)));
+            drawText(window, sf::FloatRect(pos.x-10, pos.y-10, 20, 20), getSectorName(sf::Vector2f(sector_x * sector_size + sub_sector_size, sector_y * sector_size + sub_sector_size)), ACenter, 30, bold_font, color);
         }
     }
     sf::VertexArray lines_x(sf::Lines, 2 * (sector_x_max - sector_x_min + 1));
