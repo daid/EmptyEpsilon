@@ -13,11 +13,13 @@ GameGlobalInfo::GameGlobalInfo()
     callsign_counter = 0;
     victory_faction = -1;
     gameGlobalInfo = this;
+
     for(int n=0; n<max_player_ships; n++)
     {
         playerShipId[n] = -1;
         registerMemberReplication(&playerShipId[n]);
     }
+
     for(int n=0; n<max_nebulas; n++)
     {
         nebula_info[n].vector = sf::Vector3f(random(-1, 1), random(-1, 1), random(-1, 1));
@@ -35,6 +37,7 @@ GameGlobalInfo::GameGlobalInfo()
     use_system_damage = true;
     allow_main_screen_tactical_radar = true;
     allow_main_screen_long_range_radar = true;
+    gm_control_code = "";
 
     intercept_all_comms_to_gm = false;
 
@@ -49,6 +52,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&use_system_damage);
     registerMemberReplication(&allow_main_screen_tactical_radar);
     registerMemberReplication(&allow_main_screen_long_range_radar);
+    registerMemberReplication(&gm_control_code);
 
     for(unsigned int n=0; n<factionInfo.size(); n++)
         reputation_points.push_back(0);

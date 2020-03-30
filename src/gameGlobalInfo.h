@@ -78,6 +78,7 @@ public:
     bool use_system_damage;
     bool allow_main_screen_tactical_radar;
     bool allow_main_screen_long_range_radar;
+    string gm_control_code;
     string variation = "None";
 
     //List of script functions that can be called from the GM interface (Server only!)
