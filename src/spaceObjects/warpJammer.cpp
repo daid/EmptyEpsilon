@@ -34,7 +34,7 @@ WarpJammer::WarpJammer()
     model_info.setData("shield_generator");
 }
 
-void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "RadarBlip.png");

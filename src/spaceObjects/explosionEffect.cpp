@@ -97,7 +97,7 @@ void ExplosionEffect::draw3DTransparent()
 }
 #endif//FEATURE_3D_RENDERING
 
-void ExplosionEffect::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void ExplosionEffect::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     if (!on_radar)
         return;

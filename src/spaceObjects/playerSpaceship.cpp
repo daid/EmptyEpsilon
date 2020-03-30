@@ -1896,9 +1896,9 @@ void PlayerSpaceship::onReceiveServerCommand(sf::Packet& packet)
     }
 }
 
-void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
-    SpaceShip::drawOnGMRadar(window, position, scale, long_range);
+    SpaceShip::drawOnGMRadar(window, position, scale, rotation, long_range);
     if (long_range)
     {
         sf::CircleShape radar_radius(long_range_radar_range * scale);

@@ -48,6 +48,7 @@ private:
     bool auto_distance = false;
     float distance;
     sf::Vector2f view_position;
+    float view_rotation;
     bool long_range;
     bool show_ghost_dots;
     bool show_waypoints;
@@ -57,6 +58,7 @@ private:
     bool show_heading_indicators;
     bool show_game_master_data;
     bool auto_center_on_my_ship;
+    bool auto_rotate_on_my_ship;
     float range_indicator_step_size;
     ERadarStyle style;
     EFogOfWarStyle fog_style;
@@ -93,9 +95,13 @@ public:
     GuiRadarView* setFogOfWarStyle(EFogOfWarStyle style) { this->fog_style = style; return this; }
     bool getAutoCentering() { return auto_center_on_my_ship; }
     GuiRadarView* setAutoCentering(bool value) { this->auto_center_on_my_ship = value; return this; }
+    bool getAutoRotating() { return auto_rotate_on_my_ship; }
+    GuiRadarView* setAutoRotating(bool value) { this->auto_rotate_on_my_ship = value; return this; }
     GuiRadarView* setCallbacks(func_t mouse_down_func, func_t mouse_drag_func, func_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
     GuiRadarView* setViewPosition(sf::Vector2f view_position) { this->view_position = view_position; return this; }
     sf::Vector2f getViewPosition() { return view_position; }
+    GuiRadarView* setViewRotation(float view_rotation) { this->view_rotation = view_rotation; return this; }
+    float getViewRotation() { return view_rotation; }
 
     sf::Vector2f worldToScreen(sf::Vector2f world_position);
     sf::Vector2f screenToWorld(sf::Vector2f screen_position);

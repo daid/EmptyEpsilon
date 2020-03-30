@@ -60,7 +60,7 @@ void Artifact::draw3D()
 #endif//FEATURE_3D_RENDERING
 }
 
-void Artifact::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Artifact::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "RadarBlip.png");

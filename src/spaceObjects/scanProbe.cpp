@@ -83,7 +83,7 @@ void ScanProbe::takeDamage(float damage_amount, DamageInfo info)
     destroy();
 }
 
-void ScanProbe::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void ScanProbe::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "ProbeBlip.png");
