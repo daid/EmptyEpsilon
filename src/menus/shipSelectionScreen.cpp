@@ -125,6 +125,15 @@ ShipSelectionScreen::ShipSelectionScreen()
         window_button->setValue(false);
         topdown_button->setValue(false);
         cinematic_view_button->setValue(false);
+
+        if (gameGlobalInfo->gm_control_code.length() > 0)
+        {
+            LOG(INFO) << "Player selected Spectate mode, which has a control code.";
+            password_label->setText("Enter the GM control code:");
+            left_container->hide();
+            right_container->hide();
+            password_overlay->show();
+        }
     });
     spectator_button->setSize(GuiElement::GuiSizeMax, 50);
 
@@ -246,6 +255,8 @@ ShipSelectionScreen::ShipSelectionScreen()
         // Unselect player ship if cancelling.
         player_ship_list->setSelectionIndex(-1);
         my_player_info->commandSetShipId(-1);
+        // Unselect GM station if cancelling.
+        spectator_button->setValue(false);
     });
     password_cancel->setPosition(0, -20, ABottomCenter)->setSize(300, 50);
 
@@ -254,11 +265,31 @@ ShipSelectionScreen::ShipSelectionScreen()
     {
         P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(player_ship_list->getEntryValue(player_ship_list->getSelectionIndex()).toInt());
 
-        if (ship)
-        {
-            // Get the password.
-            string password = password_entry->getText();
+        // Get the password.
+        string password = password_entry->getText().upper();
+
+        if (spectator_button->getValue() == true) {
+            if (password != gameGlobalInfo->gm_control_code)
+            {
+                LOG(INFO) << "Password doesn't match GM control code. Attempt: " << password;
+                password_label->setText("Incorrect control code. Re-enter GM code:");
+                password_entry->setText("");
+            } else {
+                // Password matches.
+                LOG(INFO) << "Password matches GM control code.";
+                // Notify the player.
+                password_label->setText("Control code accepted.\nGranting access.");
+                // Reset and hide the password field.
+                password_entry->setText("");
+                password_entry->hide();
+                password_cancel->hide();
+                password_entry_ok->hide();
+                // Show a confirmation button.
+                password_confirmation->show();
+            }
+        } else if (ship) {
             string control_code = ship->control_code;
+            password_label->setText("Enter this ship's control code:");
 
             if (password != control_code)
             {
@@ -269,9 +300,7 @@ ShipSelectionScreen::ShipSelectionScreen()
                 password_label->setText("Incorrect control code. Re-enter code for " + ship->getCallSign() + ":");
                 // Reset the dialog.
                 password_entry->setText("");
-            }
-            else
-            {
+            } else {
                 // Password matches.
                 LOG(INFO) << "Password matches control code.";
                 // Set the player ship.
