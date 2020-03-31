@@ -86,7 +86,7 @@ public:
     P<ModelData> model_data;
 
     /*!
-     * List of ship classes that can dock with this ship. (only used for ship2ship docking)
+     * List of ship classes that can dock with this ship.
      */
     std::unordered_set<string> can_be_docked_by_class;
     bool shares_energy_with_docked;
@@ -96,6 +96,7 @@ public:
     float energy_storage_amount;
     int repair_crew_count;
     string default_ai_name;
+    bool physics_enabled, static_physics;
     BeamTemplate beams[max_beam_weapons];
     int weapon_tube_count;
     TubeTemplate weapon_tube[max_weapon_tubes];
@@ -126,6 +127,7 @@ public:
     void setDescription(string description);
     void setModel(string model_name);
     void setDefaultAI(string default_ai_name);
+    void setPhysics(bool is_enabled, bool is_static);
     void setDockClasses(std::vector<string> classes);
     void setSharesEnergyWithDocked(bool enabled);
     void setRepairDocked(bool enabled);

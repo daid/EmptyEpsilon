@@ -9,6 +9,7 @@
 #include "particleEffect.h"
 #include "spaceObjects/warpJammer.h"
 #include "gameGlobalInfo.h"
+#include "pathPlanner.h"
 
 #include "scriptInterface.h"
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
@@ -99,7 +100,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
 SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_range)
 : ShipTemplateBasedObject(50, multiplayerClassName, multiplayer_significant_range)
 {
-    setCollisionPhysics(true, false);
+    setCollisionPhysics(physics_enabled, static_physics);
 
     target_rotation = getRotation();
     impulse_request = 0;
@@ -216,6 +217,17 @@ SpaceShip::~SpaceShip()
 
 void SpaceShip::applyTemplateValues()
 {
+    class_name = ship_template->getClass();
+
+    // If this ship is a station, default to the appropriate comms script and
+    // callsign, and increase its avoidance radius.
+    if (class_name == "Station" && game_server)
+    {
+        comms_script_name = "comms_station.lua";
+        setCallSign("DS" + string(getMultiplayerId()));
+        PathPlannerManager::getInstance()->addAvoidObject(this, getRadius() * 1.5f);
+    }
+
     for(int n=0; n<max_beam_weapons; n++)
     {
         beam_weapons[n].setPosition(ship_template->model_data->getBeamPosition(n));
@@ -244,11 +256,13 @@ void SpaceShip::applyTemplateValues()
     has_jump_drive = ship_template->has_jump_drive;
     jump_drive_min_distance = ship_template->jump_drive_min_distance;
     jump_drive_max_distance = ship_template->jump_drive_max_distance;
+
     for(int n=0; n<max_weapon_tubes; n++)
     {
         weapon_tube[n].setLoadTimeConfig(ship_template->weapon_tube[n].load_time);
         weapon_tube[n].setDirection(ship_template->weapon_tube[n].direction);
         weapon_tube[n].setSize(ship_template->weapon_tube[n].size);
+
         for(int m=0; m<MW_Count; m++)
         {
             if (ship_template->weapon_tube[n].type_allowed_mask & (1 << m))
@@ -257,10 +271,14 @@ void SpaceShip::applyTemplateValues()
                 weapon_tube[n].disallowLoadOf(EMissileWeapons(m));
         }
     }
+
     //shipTemplate->has_cloaking;
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = weapon_storage_max[n] = ship_template->weapon_storage[n];
 
+    physics_enabled = ship_template->physics_enabled;
+    static_physics = ship_template->static_physics;
+    setCollisionPhysics(physics_enabled, static_physics);
     ship_template->setCollisionData(this);
     model_info.setData(ship_template->model_data);
 }
@@ -317,8 +335,7 @@ RawRadarSignatureInfo SpaceShip::getDynamicRadarSignatureInfo()
                     getSystemPower(ship_system) * (jump_drive_charge + 0.01f / jump_drive_max_distance)
                 )
             );
-        } else if (getSystemPower(ship_system) != 1.0f)
-        {
+        } else if (getSystemPower(ship_system) != 1.0f) {
             // For non-Jump systems, allow underpowered systems to reduce the
             // total electrical signal output.
             signature_delta.electrical += std::max(
@@ -342,8 +359,7 @@ RawRadarSignatureInfo SpaceShip::getDynamicRadarSignatureInfo()
                 10.0f
             )
         );
-    } else if (current_warp > 0.0f)
-    {
+    } else if (current_warp > 0.0f) {
         signature_delta.gravity += current_warp;
     }
 
@@ -450,47 +466,62 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
             window.draw(turret_line);
         }
     }
-    // If not on long-range radar ...
-    if (!long_range)
-    {
-        // ... and the ship being drawn is either not our ship or has been
-        // scanned ...
-        if (!my_spaceship || getScannedStateFor(my_spaceship) >= SS_SimpleScan)
-        {
-            // ... draw and show shield indicators on our radar.
-            drawShieldsOnRadar(window, position, scale, rotation, 1.0, true);
-        } else {
-            // Otherwise, draw the indicators, but don't show them.
-            drawShieldsOnRadar(window, position, scale, rotation, 1.0, false);
-        }
-    }
 
     // Set up the radar sprite for objects.
     sf::Sprite objectSprite;
+    bool is_station = this->getClass() == "Station";
+    float sprite_scale = 1.0;
 
     // If the object is a ship that hasn't been scanned, draw the default icon.
-    // Otherwise, draw the ship-specific icon.
-    if (my_spaceship && (getScannedStateFor(my_spaceship) == SS_NotScanned || getScannedStateFor(my_spaceship) == SS_FriendOrFoeIdentified))
+    // Otherwise, draw the ship- or station-specific icon.
+    if (my_spaceship && (getScannedStateFor(my_spaceship) == SS_NotScanned || getScannedStateFor(my_spaceship) == SS_FriendOrFoeIdentified) && !is_station)
     {
         textureManager.setTexture(objectSprite, "RadarArrow.png");
-    }
-    else
-    {
+    } else {
         textureManager.setTexture(objectSprite, radar_trace);
     }
 
+    // Scale sprite to station size.
+    if (is_station)
+        sprite_scale = scale * this->getRadius() * 1.5 / objectSprite.getTextureRect().width;
+
+    // Set radar trace position and rotation.
     objectSprite.setRotation(getRotation()-rotation);
     objectSprite.setPosition(position);
-    if (long_range)
+
+    // If not on long-range radar ...
+    if (!long_range)
     {
-        objectSprite.setScale(0.7, 0.7);
+        // ... reduce station scale to fit within shields.
+        if (is_station) sprite_scale *= 0.7f;
+
+        // If we're on a neutral screen, or the ship has been scanned ...
+        if (!my_spaceship || getScannedStateFor(my_spaceship) >= SS_SimpleScan)
+        {
+            // ... draw and show shield indicators on our radar.
+            drawShieldsOnRadar(window, position, scale, rotation, sprite_scale, true);
+        } else {
+            // Otherwise, draw the indicators, but don't show them.
+            drawShieldsOnRadar(window, position, scale, rotation, sprite_scale, false);
+        }
     }
+
+    // Cap station radar trace size.
+    if (is_station) sprite_scale = std::max(0.15f, sprite_scale);
+
+    // Reduce ship radar trace sizes on long-range radar.
+    if (long_range && !is_station) sprite_scale = 0.7f;
+
+    // Scale the radar trace sprite.
+    objectSprite.setScale(sprite_scale, sprite_scale);
+
+    // Draw our ship's radar trace as a light blue.
     if (my_spaceship == this)
     {
         objectSprite.setColor(sf::Color(192, 192, 255));
-    }else if (my_spaceship)
-    {
-        if (getScannedStateFor(my_spaceship) != SS_NotScanned)
+    } else if (my_spaceship) {
+        // Draw other ships based on their friend-or-foe state.
+        if (getScannedStateFor(my_spaceship) != SS_NotScanned || is_station)
         {
             if (isEnemy(my_spaceship))
                 objectSprite.setColor(sf::Color::Red);
@@ -498,10 +529,10 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
                 objectSprite.setColor(sf::Color(128, 255, 128));
             else
                 objectSprite.setColor(sf::Color(128, 128, 255));
-        }else{
+        } else {
             objectSprite.setColor(sf::Color(192, 192, 192));
         }
-    }else{
+    } else {
         objectSprite.setColor(factionInfo[getFactionId()]->gm_color);
     }
     window.draw(objectSprite);

@@ -18,6 +18,12 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     /// Sets the type of template. Defaults to normal ships, so then it does not need to be set.
     /// Example: template:setType("ship"), template:setType("playership"), template:setType("station")
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setType);
+    /// Set whether physics are enabled on this object.
+    /// Requires two Boolean values.
+    /// The first sets whether to enable physics.
+    /// The second sets whether the physics model is static (true) or dynamic (false).
+    /// Example: template:setPhysics(true, true)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setPhysics);
     /// Set the default AI behaviour. EE has 3 types of AI coded into the game right now: "default", "fighter", "missilevolley"
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDefaultAI);
     /// Set the 3D model to be used for this template. The model referers to data set in the model_data.lua file.
@@ -62,6 +68,8 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSharesEnergyWithDocked);
     /// Set if this ship restocks scan probes on docked ships. Example: template:setRestocksScanProbes(false)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRestocksScanProbes);
+    /// Set whether ships docked with this object receive hull repairs.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRepairDocked);
     /// Set if this ship has a jump drive. Example: template:setJumpDrive(true)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDrive);
     /// Set this ship's minimum and maximum jump drive distances.
@@ -95,6 +103,9 @@ ShipTemplate::ShipTemplate()
     energy_storage_amount = 1000;
     repair_crew_count = 3;
     weapon_tube_count = 0;
+    physics_enabled = true;
+    static_physics = false;
+
     for(int n=0; n<max_weapon_tubes; n++)
     {
         weapon_tube[n].load_time = 8.0;
@@ -102,10 +113,13 @@ ShipTemplate::ShipTemplate()
         weapon_tube[n].direction = 0;
         weapon_tube[n].size = MS_Medium;
     }
+
     hull = 70;
     shield_count = 0;
+
     for(int n=0; n<max_shield_count; n++)
         shield_level[n] = 0.0;
+
     impulse_speed = 500.0;
     impulse_acceleration = 20.0;
     turn_speed = 10.0;
@@ -116,13 +130,14 @@ ShipTemplate::ShipTemplate()
     jump_drive_min_distance = 5000.0;
     jump_drive_max_distance = 50000.0;
     has_cloaking = false;
+
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = 0;
+
     radar_trace = "RadarArrow.png";
 }
 
 void ShipTemplate::setBeamTexture(int index, string texture)
-
 {
     if (index >= 0 && index < max_beam_weapons)
     {
@@ -363,6 +378,12 @@ void ShipTemplate::setModel(string model_name)
     this->model_data = ModelData::getModel(model_name);
 }
 
+void ShipTemplate::setPhysics(bool is_enabled, bool is_static)
+{
+    physics_enabled = is_enabled;
+    static_physics = is_static;
+}
+
 void ShipTemplate::setDefaultAI(string default_ai_name)
 {
     this->default_ai_name = default_ai_name;
@@ -473,6 +494,8 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->energy_storage_amount = energy_storage_amount;
     result->repair_crew_count = repair_crew_count;
     result->default_ai_name = default_ai_name;
+    result->physics_enabled = physics_enabled;
+    result->static_physics = static_physics;
     for(int n=0; n<max_beam_weapons; n++)
         result->beams[n] = beams[n];
     result->weapon_tube_count = weapon_tube_count;

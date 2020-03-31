@@ -17,6 +17,8 @@ class ShipTemplateBasedObject : public SpaceObject, public Updatable
 public:
     string template_name;
     string type_name;
+    string class_name;
+    string sub_class_name;
     string radar_trace;
     string impulse_sound_file = "engine.wav";
     P<ShipTemplate> ship_template;
@@ -27,6 +29,8 @@ public:
     float hull_strength, hull_max;
     float shield_hit_effect[max_shield_count];
     bool can_be_destroyed;
+    bool physics_enabled;
+    bool static_physics;
 
     bool shares_energy_with_docked;       //[config]
     bool repair_docked;                   //[config]
@@ -62,6 +66,12 @@ public:
     void setShipTemplate(string template_name) { LOG(WARNING) << "Deprecated \"setShipTemplate\" function called."; setTemplate(template_name); }
     void setTypeName(string type_name) { this->type_name = type_name; }
     string getTypeName() { return type_name; }
+    string getClass() { return class_name; }
+    string getSubClass() { return sub_class_name; }
+    void setPhysics(bool is_enabled, bool is_static);
+    std::vector<bool> getPhysics() { return std::vector<bool>(physics_enabled, static_physics); }
+    bool getPhysicsEnabled() { return physics_enabled; }
+    bool getPhysicsStatic() { return static_physics; }
 
     float getHull() { return hull_strength; }
     float getHullMax() { return hull_max; }

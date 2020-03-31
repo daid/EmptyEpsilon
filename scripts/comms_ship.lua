@@ -69,7 +69,7 @@ function friendlyComms(comms_data)
 		addCommsReply("Back", mainMenu)
 	end)
 	for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if (obj.typeName == "SpaceStation" or ((obj.typeName == "CpuShip" or obj.typeName == "PlayerShip") and obj:getClass() == "Station")) and not comms_target:isEnemy(obj) then
 			addCommsReply("Dock at " .. obj:getCallSign(), function()
 				setCommsMessage("Docking at " .. obj:getCallSign() .. ".");
 				comms_target:orderDock(obj)

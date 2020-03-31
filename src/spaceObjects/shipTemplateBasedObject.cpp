@@ -5,11 +5,19 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
 {
     /// Set the ship template to be used for this station. Stations use ship-templates to define hull/shields/looks
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setTemplate);
-    /// [Depricated]
+    /// [Deprecated]
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShipTemplate);
     /// Set the class name of this object. Normally the class name is copied from the template name (Ex "Cruiser") but you can override it with this function.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setTypeName);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getTypeName);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getClass);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getSubClass);
+    /// Sets the physics on this object.
+    /// Enabled, static
+    /// Example: setPhysics(true, true)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setPhysics);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getPhysicsEnabled);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getPhysicsStatic);
     /// Get the current amount of hull
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getHull);
     /// Get the maximum hull value
@@ -73,8 +81,11 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
 ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string multiplayer_name, float multiplayer_significant_range)
 : SpaceObject(collision_range, multiplayer_name, multiplayer_significant_range)
 {
-    setCollisionPhysics(true, true);
+    physics_enabled = true;
+    static_physics = false;
+    setCollisionPhysics(physics_enabled, static_physics);
 
+    can_be_destroyed = true;
     shield_count = 0;
     for(int n=0; n<max_shield_count; n++)
     {
@@ -86,6 +97,9 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
 
     registerMemberReplication(&template_name);
     registerMemberReplication(&type_name);
+    registerMemberReplication(&class_name);
+    registerMemberReplication(&sub_class_name);
+    registerMemberReplication(&can_be_destroyed);
     registerMemberReplication(&shield_count);
     for(int n=0; n<max_shield_count; n++)
     {
@@ -97,10 +111,7 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
     registerMemberReplication(&hull_strength, 0.5);
     registerMemberReplication(&hull_max);
 
-    callsign = "[" + string(getMultiplayerId()) + "]";
-    
-    can_be_destroyed = true;
-    registerMemberReplication(&can_be_destroyed);
+    setCallSign("[" + string(getMultiplayerId()) + "]");
 }
 
 void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, float sprite_scale, bool show_levels)
@@ -196,22 +207,22 @@ void ShipTemplateBasedObject::update(float delta)
     if (!ship_template || ship_template->getName() != template_name)
     {
         ship_template = ShipTemplate::getTemplate(template_name);
+
         if (!ship_template)
             return;
+
+        setCollisionPhysics(ship_template->physics_enabled, ship_template->static_physics);
         ship_template->setCollisionData(this);
         model_info.setData(ship_template->model_data);
     }
 
-    for(int n=0; n<shield_count; n++)
+    for(int n = 0; n < shield_count; n++)
     {
         if (shield_level[n] < shield_max[n])
-        {
             shield_level[n] = std::min(shield_max[n], shield_level[n] + delta * getShieldRechargeRate(n));
-        }
+
         if (shield_hit_effect[n] > 0)
-        {
             shield_hit_effect[n] -= delta;
-        }
     }
 }
 
@@ -322,22 +333,34 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
     this->template_name = template_name;
     ship_template = new_ship_template;
     type_name = template_name;
+    class_name = ship_template->getClass();
+    sub_class_name = ship_template->getSubClass();
 
     hull_strength = hull_max = ship_template->hull;
     shield_count = ship_template->shield_count;
     for(int n=0; n<shield_count; n++)
         shield_level[n] = shield_max[n] = ship_template->shield_level[n];
 
+
     radar_trace = ship_template->radar_trace;
 
     shares_energy_with_docked = ship_template->shares_energy_with_docked;
     repair_docked = ship_template->repair_docked;
 
+    physics_enabled = ship_template->physics_enabled;
+    static_physics = ship_template->static_physics;
+    setCollisionPhysics(physics_enabled, static_physics);
     ship_template->setCollisionData(this);
     model_info.setData(ship_template->model_data);
 
     //Call the virtual applyTemplateValues function so subclasses can get extra values from the ship templates.
     applyTemplateValues();
+}
+
+void ShipTemplateBasedObject::setPhysics(bool is_enabled, bool is_static)
+{
+    physics_enabled = is_enabled;
+    static_physics = is_static;
 }
 
 void ShipTemplateBasedObject::setShields(std::vector<float> amounts)
