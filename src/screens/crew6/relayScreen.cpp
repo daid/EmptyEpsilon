@@ -1,8 +1,10 @@
 #include "relayScreen.h"
 #include "playerInfo.h"
+#include "scriptInterface.h"
+
+#include "spaceObjects/spaceStation.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/scanProbe.h"
-#include "scriptInterface.h"
 
 #include "screenComponents/radarView.h"
 #include "screenComponents/openCommsButton.h"

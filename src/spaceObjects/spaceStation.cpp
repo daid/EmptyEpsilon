@@ -16,8 +16,9 @@ REGISTER_SCRIPT_SUBCLASS(SpaceStation, ShipTemplateBasedObject)
 
 REGISTER_MULTIPLAYER_CLASS(SpaceStation, "SpaceStation");
 SpaceStation::SpaceStation()
-: ShipTemplateBasedObject(300, "SpaceStation")
+: SpaceShip("SpaceStation", 300)
 {
+    setCollisionPhysics(true, true);
     restocks_scan_probes = true;
     comms_script_name = "comms_station.lua";
     setRadarSignatureInfo(0.2, 0.5, 0.5);

@@ -1,6 +1,8 @@
 #include "spaceObjects/nebula.h"
+#include "spaceObjects/spaceStation.h"
 #include "spaceObjects/cpuShip.h"
 #include "spaceObjects/scanProbe.h"
+
 #include "ai/ai.h"
 #include "ai/aiFactory.h"
 

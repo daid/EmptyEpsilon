@@ -2,8 +2,11 @@
 
 #include "main.h"
 #include "gameGlobalInfo.h"
+
 #include "spaceObjects/nebula.h"
+#include "spaceObjects/spaceStation.h"
 #include "spaceObjects/scanProbe.h"
+
 #include "playerInfo.h"
 #include "radarView.h"
 #include "missileTubeControls.h"

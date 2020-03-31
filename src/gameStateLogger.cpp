@@ -5,12 +5,14 @@
 
 #include "gameStateLogger.h"
 #include "gameGlobalInfo.h"
+
 #include "spaceObjects/spaceObject.h"
 #include "spaceObjects/asteroid.h"
 #include "spaceObjects/mine.h"
 #include "spaceObjects/blackHole.h"
 #include "spaceObjects/nebula.h"
 #include "spaceObjects/spaceship.h"
+#include "spaceObjects/spaceStation.h"
 #include "spaceObjects/planet.h"
 
 class JSONGenerator

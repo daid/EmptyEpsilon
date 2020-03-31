@@ -3,12 +3,13 @@
 #include "mesh.h"
 #include "shipTemplate.h"
 #include "playerInfo.h"
-#include "spaceObjects/beamEffect.h"
 #include "factionInfo.h"
-#include "spaceObjects/explosionEffect.h"
 #include "particleEffect.h"
-#include "spaceObjects/warpJammer.h"
 #include "gameGlobalInfo.h"
+
+#include "spaceObjects/beamEffect.h"
+#include "spaceObjects/explosionEffect.h"
+#include "spaceObjects/warpJammer.h"
 
 #include "scriptInterface.h"
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)

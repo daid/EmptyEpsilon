@@ -1,9 +1,10 @@
 #ifndef SPACE_STATION_H
 #define SPACE_STATION_H
 
+#include "spaceObjects/spaceship.h"
 #include "shipTemplateBasedObject.h"
 
-class SpaceStation : public ShipTemplateBasedObject
+class SpaceStation : public SpaceShip
 {
 public:
     SpaceStation();
