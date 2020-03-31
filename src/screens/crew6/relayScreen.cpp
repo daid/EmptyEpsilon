@@ -161,7 +161,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 
     for(int level=AL_Normal; level < AL_MAX; level++)
     {
-        GuiButton* alert_button = new GuiButton(layout, "", alertLevelToString(EAlertLevel(level)), [this, level]()
+        GuiButton* alert_button = new GuiButton(layout, "", alertLevelToLocaleString(EAlertLevel(level)), [this, level]()
         {
             if (my_spaceship)
                 my_spaceship->commandSetAlertLevel(EAlertLevel(level));

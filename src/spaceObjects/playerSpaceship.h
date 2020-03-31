@@ -318,6 +318,7 @@ static inline sf::Packet& operator << (sf::Packet& packet, const PlayerSpaceship
 static inline sf::Packet& operator >> (sf::Packet& packet, PlayerSpaceship::CustomShipFunction& csf) { int8_t tmp; packet >> tmp; csf.type = PlayerSpaceship::CustomShipFunction::Type(tmp); packet >> tmp; csf.crew_position = ECrewPosition(tmp); packet >> csf.name >> csf.caption; return packet; }
 
 string alertLevelToString(EAlertLevel level);
+string alertLevelToLocaleString(EAlertLevel level);
 
 #ifdef _MSC_VER
 #include "playerSpaceship.hpp"
