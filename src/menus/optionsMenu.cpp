@@ -110,6 +110,7 @@ OptionsMenu::OptionsMenu()
     (new GuiToggleButton(this, "HEMS_RADAR_LOCK", tr("Helms Radar Lock"), [](bool value)
     {
         PreferencesManager::set("helms_radar_lock", value?"1":"");
+        PreferencesManager::set("tactical_radar_lock", value?"1":"");
     }))->setValue(PreferencesManager::get("helms_radar_lock","0")=="1")->setPosition(50, top, ATopLeft)->setSize(300, 50);
 
     // Helms rotation lock.
