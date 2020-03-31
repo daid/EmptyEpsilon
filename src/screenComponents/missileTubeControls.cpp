@@ -113,14 +113,14 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window){
             rows[n].load_button->enable();
             rows[n].load_button->setText(tr("missile","Unload"));
             rows[n].fire_button->enable()->show();
-            rows[n].fire_button->setText(tube.getTubeName() + ": " + getMissileWeaponName(tube.getLoadType()));
+            rows[n].fire_button->setText(tube.getTubeName() + ": " + getLocaleMissileWeaponName(tube.getLoadType()));
             rows[n].loading_bar->hide();
         }else if(tube.isLoading())
         {
             rows[n].load_button->disable();
             rows[n].load_button->setText(tr("missile","Load"));
             rows[n].fire_button->hide();
-            rows[n].fire_button->setText(tube.getTubeName() + ": " + getMissileWeaponName(tube.getLoadType()));
+            rows[n].fire_button->setText(tube.getTubeName() + ": " + getLocaleMissileWeaponName(tube.getLoadType()));
             rows[n].loading_bar->show();
             rows[n].loading_bar->setValue(tube.getLoadProgress());
             rows[n].loading_label->setText(tr("missile","Loading"));
@@ -129,7 +129,7 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window){
             rows[n].load_button->disable();
             rows[n].load_button->setText(tr("missile","Unload"));
             rows[n].fire_button->hide();
-            rows[n].fire_button->setText(getMissileWeaponName(tube.getLoadType()));
+            rows[n].fire_button->setText(getLocaleMissileWeaponName(tube.getLoadType()));
             rows[n].loading_bar->show();
             rows[n].loading_bar->setValue(tube.getUnloadProgress());
             rows[n].loading_label->setText(tr("missile","Unloading"));
