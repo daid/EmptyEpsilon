@@ -205,6 +205,19 @@ string alertLevelToString(EAlertLevel level)
     }
 }
 
+string alertLevelToLocaleString(EAlertLevel level)
+{
+    // Convert an EAlertLevel to a translated string.
+    switch(level)
+    {
+    case AL_RedAlert: return tr("alert","RED ALERT");
+    case AL_YellowAlert: return tr("alert","YELLOW ALERT");
+    case AL_Normal: return tr("alert","Normal");
+    default:
+        return "???";
+    }
+}
+
 // Configure ship's log packets.
 static inline sf::Packet& operator << (sf::Packet& packet, const PlayerSpaceship::ShipLogEntry& e) { return packet << e.prefix << e.text << e.color.r << e.color.g << e.color.b << e.color.a; }
 static inline sf::Packet& operator >> (sf::Packet& packet, PlayerSpaceship::ShipLogEntry& e) { packet >> e.prefix >> e.text >> e.color.r >> e.color.g >> e.color.b >> e.color.a; return packet; }
