@@ -12,11 +12,10 @@ These are:
 Player ships are in general large frigates to small corvette class
 --]]
 require("shipTemplates_Stations.lua")
----[[Until these are ready, they are disabled
 require("shipTemplates_StarFighters.lua")
 require("shipTemplates_Frigates.lua")
 require("shipTemplates_Corvette.lua")
 require("shipTemplates_Dreadnaught.lua")
---]]
 --For now, we add our old ship templates as well. These should be removed at some point.
 require("shipTemplates_OLD.lua")
+require("shipTemplates_Stations_OLD.lua")

@@ -100,7 +100,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
 SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_range)
 : ShipTemplateBasedObject(50, multiplayerClassName, multiplayer_significant_range)
 {
-    setCollisionPhysics(physics_enabled, static_physics);
+    setCollisionPhysics(true, false);
 
     target_rotation = getRotation();
     impulse_request = 0;

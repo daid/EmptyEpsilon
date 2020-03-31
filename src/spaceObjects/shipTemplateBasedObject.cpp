@@ -82,7 +82,7 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
 : SpaceObject(collision_range, multiplayer_name, multiplayer_significant_range)
 {
     physics_enabled = true;
-    static_physics = false;
+    static_physics = true;
     setCollisionPhysics(physics_enabled, static_physics);
 
     can_be_destroyed = true;

@@ -55,6 +55,7 @@ void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, 
 
 void SpaceStation::applyTemplateValues()
 {
+    // Pass near stations, but don't collide with them.
     PathPlannerManager::getInstance()->addAvoidObject(this, getRadius() * 1.5f);
 }
 
