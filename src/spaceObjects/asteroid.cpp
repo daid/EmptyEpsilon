@@ -58,9 +58,7 @@ void Asteroid::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, floa
     object_sprite.setRotation(getRotation());
     object_sprite.setPosition(position);
     object_sprite.setColor(sf::Color(255, 200, 100));
-    float size = getRadius() * scale / object_sprite.getTextureRect().width * 2;
-    if (size < 0.2)
-        size = 0.2;
+    float size = std::max(0.2f, getRadius() * scale / object_sprite.getTextureRect().width * 2);
     object_sprite.setScale(size, size);
     window.draw(object_sprite);
 }

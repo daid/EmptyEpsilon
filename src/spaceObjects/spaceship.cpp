@@ -451,6 +451,25 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
             window.draw(turret_line);
         }
     }
+
+    // Set up the radar sprite for objects.
+    sf::Sprite objectSprite;
+
+    // Otherwise, draw the ship-specific icon.
+    if (my_spaceship && (getScannedStateFor(my_spaceship) == SS_NotScanned || getScannedStateFor(my_spaceship) == SS_FriendOrFoeIdentified))
+        textureManager.setTexture(objectSprite, "RadarArrow.png");
+    else
+        textureManager.setTexture(objectSprite, radar_trace);
+
+    // Initialize radar trace size.
+    float size;
+    if (my_spaceship == this)
+        size = 1.0;
+    else
+        size = std::max(1.0f, scale * (getRadius() * 1.5f / objectSprite.getTextureRect().width));
+    float sprite_scale = size * 0.7f;
+
+    // If the object is a ship that hasn't been scanned, draw the default icon.
     // If not on long-range radar ...
     if (!long_range)
     {
@@ -459,38 +478,21 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
         if (!my_spaceship || getScannedStateFor(my_spaceship) >= SS_SimpleScan)
         {
             // ... draw and show shield indicators on our radar.
-            drawShieldsOnRadar(window, position, scale, rotation, 1.0, true);
+            drawShieldsOnRadar(window, position, scale, rotation, size, true);
         } else {
             // Otherwise, draw the indicators, but don't show them.
-            drawShieldsOnRadar(window, position, scale, rotation, 1.0, false);
+            drawShieldsOnRadar(window, position, scale, rotation, size, false);
         }
-    }
-
-    // Set up the radar sprite for objects.
-    sf::Sprite objectSprite;
-
-    // If the object is a ship that hasn't been scanned, draw the default icon.
-    // Otherwise, draw the ship-specific icon.
-    if (my_spaceship && (getScannedStateFor(my_spaceship) == SS_NotScanned || getScannedStateFor(my_spaceship) == SS_FriendOrFoeIdentified))
-    {
-        textureManager.setTexture(objectSprite, "RadarArrow.png");
-    }
-    else
-    {
-        textureManager.setTexture(objectSprite, radar_trace);
     }
 
     objectSprite.setRotation(getRotation()-rotation);
     objectSprite.setPosition(position);
-    if (long_range)
-    {
-        objectSprite.setScale(0.7, 0.7);
-    }
+    objectSprite.setScale(sprite_scale, sprite_scale);
+
     if (my_spaceship == this)
     {
         objectSprite.setColor(sf::Color(192, 192, 255));
-    }else if (my_spaceship)
-    {
+    } else if (my_spaceship) {
         if (getScannedStateFor(my_spaceship) != SS_NotScanned)
         {
             if (isEnemy(my_spaceship))
@@ -499,10 +501,10 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
                 objectSprite.setColor(sf::Color(128, 255, 128));
             else
                 objectSprite.setColor(sf::Color(128, 128, 255));
-        }else{
+        } else {
             objectSprite.setColor(sf::Color(192, 192, 192));
         }
-    }else{
+    } else {
         objectSprite.setColor(factionInfo[getFactionId()]->gm_color);
     }
     window.draw(objectSprite);
