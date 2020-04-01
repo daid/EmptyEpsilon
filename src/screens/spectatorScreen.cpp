@@ -2,6 +2,9 @@
 #include "main.h"
 #include "gameGlobalInfo.h"
 
+#include "gui/gui2_selector.h"
+#include "gui/gui2_togglebutton.h"
+
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/radarView.h"
 
@@ -15,6 +18,18 @@ SpectatorScreen::SpectatorScreen()
         [this](sf::Vector2f position) { this->onMouseDrag(position); },
         [this](sf::Vector2f position) { this->onMouseUp(position); }
     );
+
+    // Let the screen operator select a player ship to lock the camera onto.
+    camera_lock_selector = new GuiSelector(this, "CAMERA_LOCK_SELECTOR", [this](int index, string value) {
+        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(value.toInt());
+        if (ship)
+            main_radar->setViewPosition(ship->getPosition());
+    });
+    camera_lock_selector->setSelectionIndex(0)->setPosition(20, -80, ABottomLeft)->setSize(300, 50)->show();
+
+    // Toggle whether to lock onto a player ship.
+    camera_lock_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOGGLE", "Lock camera on ship", [this](bool value) {});
+    camera_lock_toggle->setPosition(20, -20, ABottomLeft)->setSize(300, 50)->show();
 
     new GuiIndicatorOverlays(this);
 }
@@ -38,6 +53,29 @@ void SpectatorScreen::update(float delta)
             main_radar->shortRange();
         else
             main_radar->longRange();
+    }
+
+    // Add and remove entries from the player ship list.
+    for(int n = 0; n < GameGlobalInfo::max_player_ships; n++)
+    {
+        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
+
+        if (ship)
+        {
+            if (camera_lock_selector->indexByValue(string(n)) == -1)
+                camera_lock_selector->addEntry(ship->getTypeName() + " " + ship->getCallSign(), string(n));
+        } else {
+            if (camera_lock_selector->indexByValue(string(n)) != -1)
+                camera_lock_selector->removeEntry(camera_lock_selector->indexByValue(string(n)));
+        }
+    }
+
+    // If locked onto a player ship, move the camera along with it.
+    if (camera_lock_toggle->getValue() && camera_lock_selector->getSelectionIndex() > -1)
+    {
+        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(camera_lock_selector->getSelectionIndex());
+        if (ship)
+            main_radar->setViewPosition(ship->getPosition());
     }
 }
 

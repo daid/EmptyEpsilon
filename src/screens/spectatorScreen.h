@@ -5,12 +5,16 @@
 #include "gui/gui2_canvas.h"
 #include "screenComponents/targetsContainer.h"
 
-
 class GuiRadarView;
+class GuiSelector;
+class GuiToggleButton;
+
 class SpectatorScreen : public GuiCanvas, public Updatable
 {
 private:
     GuiRadarView* main_radar;
+    GuiSelector* camera_lock_selector;
+    GuiToggleButton* camera_lock_toggle;
 
     sf::Vector2f drag_start_position;
     sf::Vector2f drag_previous_position;
