@@ -2019,6 +2019,18 @@ string PlayerSpaceship::getExportLine()
         result += ":setShortRangeRadarRange(" + string(short_range_radar_range, 0) + ")";
     if (long_range_radar_range != ship_template->long_range_radar_range)
         result += ":setLongRangeRadarRange(" + string(long_range_radar_range, 0) + ")";
+    if (can_scan != ship_template->can_scan)
+        result += ":setCanScan(" + string(can_scan, true) + ")";
+    if (can_hack != ship_template->can_hack)
+        result += ":setCanHack(" + string(can_hack, true) + ")";
+    if (can_dock != ship_template->can_dock)
+        result += ":setCanDock(" + string(can_dock, true) + ")";
+    if (can_combat_maneuver != ship_template->can_combat_maneuver)
+        result += ":setCanCombatManeuver(" + string(can_combat_maneuver, true) + ")";
+    if (can_self_destruct != ship_template->can_self_destruct)
+        result += ":setCanSelfDestruct(" + string(can_self_destruct, true) + ")";
+    if (can_launch_probe != ship_template->can_launch_probe)
+        result += ":setCanLaunchProbe(" + string(can_launch_probe, true) + ")";
     return result;
 }
 

@@ -136,12 +136,12 @@ public:
     void setSharesEnergyWithDocked(bool enabled);
     void setRepairDocked(bool enabled);
     void setRestocksScanProbes(bool enabled);
-    void canScan(bool enabled) { can_scan = enabled; }
-    void canHack(bool enabled) { can_hack = enabled; }
-    void canDock(bool enabled) { can_dock = enabled; }
-    void canCombatManeuver(bool enabled) { can_combat_maneuver = enabled; }
-    void canSelfDestruct(bool enabled) { can_self_destruct = enabled; }
-    void canLaunchProbe(bool enabled) { can_launch_probe = enabled; }
+    void setCanScan(bool enabled) { can_scan = enabled; }
+    void setCanHack(bool enabled) { can_hack = enabled; }
+    void setCanDock(bool enabled) { can_dock = enabled; }
+    void setCanCombatManeuver(bool enabled) { can_combat_maneuver = enabled; }
+    void setCanSelfDestruct(bool enabled) { can_self_destruct = enabled; }
+    void setCanLaunchProbe(bool enabled) { can_launch_probe = enabled; }
     void setMesh(string model, string color_texture, string specular_texture, string illumination_texture);
     void setEnergyStorage(float energy_amount);
     void setRepairCrewCount(int amount);

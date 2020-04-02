@@ -75,12 +75,12 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadarTrace);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLongRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShortRangeRadarRange);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, canScan);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, canHack);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, canDock);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, canCombatManeuver);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, canSelfDestruct);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, canLaunchProbe);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanScan);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanHack);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanDock);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanCombatManeuver);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanSelfDestruct);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanLaunchProbe);
     /// Return a new template with the given name, which is an exact copy of this template.
     /// Used to make easy variations of templates.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, copy);
