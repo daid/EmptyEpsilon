@@ -74,7 +74,8 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     );
 
     // Ship stats and combat maneuver at bottom right corner of left panel.
-    (new GuiCombatManeuver(left_panel, "COMBAT_MANEUVER"))->setPosition(-20, -180, ABottomRight)->setSize(200, 150);
+    combat_maneuver = new GuiCombatManeuver(left_panel, "COMBAT_MANEUVER");
+    combat_maneuver->setPosition(-20, -180, ABottomRight)->setSize(200, 150)->setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
 
     energy_display = new GuiKeyValueDisplay(left_panel, "ENERGY_DISPLAY", 0.45, "Energy", "");
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(-20, -140, ABottomRight)->setSize(240, 40);
@@ -120,6 +121,9 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
 {
     if (my_spaceship)
     {
+        // Toggle ship capabilities.
+        combat_maneuver->setVisible(my_spaceship->getCanCombatManeuver());
+
         energy_display->setValue(string(int(my_spaceship->energy_level)));
         heading_display->setValue(string(fmodf(my_spaceship->getRotation() + 360.0 + 360.0 - 270.0, 360.0), 1));
         float velocity = sf::length(my_spaceship->getVelocity()) / 1000 * 60;
@@ -182,6 +186,7 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
         }
     }
 }
+
 bool SinglePilotScreen::onJoystickAxis(const AxisAction& axisAction){
     if(my_spaceship){
         if (axisAction.category == "HELMS"){

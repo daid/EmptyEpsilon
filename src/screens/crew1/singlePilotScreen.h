@@ -11,6 +11,7 @@ class GuiRadarView;
 class GuiKeyValueDisplay;
 class GuiToggleButton;
 class GuiRotationDial;
+class GuiCombatManeuver;
 
 class SinglePilotScreen : public GuiOverlay
 {
@@ -29,6 +30,7 @@ private:
     GuiKeyValueDisplay* shields_display;
     GuiElement* warp_controls;
     GuiElement* jump_controls;
+    GuiCombatManeuver* combat_maneuver;
     
     TargetsContainer targets;
     GuiRadarView* radar;
