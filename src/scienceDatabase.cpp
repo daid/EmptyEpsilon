@@ -53,7 +53,7 @@ void ScienceDatabase::setLongDescription(string text)
 void fillDefaultDatabaseData()
 {
     P<ScienceDatabase> factionDatabase = new ScienceDatabase();
-    factionDatabase->setName("Factions");
+    factionDatabase->setName(tr("database", "Factions"));
     for(unsigned int n=0; n<factionInfo.size(); n++)
     {
         P<ScienceDatabase> entry = factionDatabase->addEntry(factionInfo[n]->getLocaleName());
@@ -61,12 +61,12 @@ void fillDefaultDatabaseData()
         {
             if (n == m) continue;
 
-            string stance = "Neutral";
+            string stance = tr("stance", "Neutral");
             switch(factionInfo[n]->states[m])
             {
-                case FVF_Neutral: stance = "Neutral"; break;
-                case FVF_Enemy: stance = "Enemy"; break;
-                case FVF_Friendly: stance = "Friendly"; break;
+                case FVF_Neutral: stance = tr("stance", "Neutral"); break;
+                case FVF_Enemy: stance = tr("stance", "Enemy"); break;
+                case FVF_Friendly: stance = tr("stance", "Friendly"); break;
             }
             entry->addKeyValue(factionInfo[m]->getLocaleName(), stance);
         }
@@ -74,7 +74,7 @@ void fillDefaultDatabaseData()
     }
 
     P<ScienceDatabase> shipDatabase = new ScienceDatabase();
-    shipDatabase->setName("Ships");
+    shipDatabase->setName(tr("database", "Ships"));
 
     std::vector<string> template_names = ShipTemplate::getTemplateNameList(ShipTemplate::Ship);
     std::sort(template_names.begin(), template_names.end());
@@ -108,9 +108,9 @@ void fillDefaultDatabaseData()
         
         entry->model_data = ship_template->model_data;
 
-        entry->addKeyValue("Class", ship_template->getClass());
-        entry->addKeyValue("Sub-class", ship_template->getSubClass());
-        entry->addKeyValue("Size", string(int(ship_template->model_data->getRadius())));
+        entry->addKeyValue(tr("database", "Class"), ship_template->getClass());
+        entry->addKeyValue(tr("database", "Sub-class"), ship_template->getSubClass());
+        entry->addKeyValue(tr("database", "Size"), string(int(ship_template->model_data->getRadius())));
         string shield_info = "";
         for(int n=0; n<ship_template->shield_count; n++)
         {
@@ -118,18 +118,18 @@ void fillDefaultDatabaseData()
                 shield_info += "/";
             shield_info += string(int(ship_template->shield_level[n]));
         }
-        entry->addKeyValue("Shield", shield_info);
-        entry->addKeyValue("Hull", string(int(ship_template->hull)));
-        entry->addKeyValue("Move speed", string(int(ship_template->impulse_speed)));
-        entry->addKeyValue("Turn speed", string(int(ship_template->turn_speed)));
+        entry->addKeyValue(tr("database", "Shield"), shield_info);
+        entry->addKeyValue(tr("Hull"), string(int(ship_template->hull)));
+        entry->addKeyValue(tr("database", "Move speed"), string(int(ship_template->impulse_speed)));
+        entry->addKeyValue(tr("database", "Turn speed"), string(int(ship_template->turn_speed)));
         if (ship_template->warp_speed > 0.0)
         {
-            entry->addKeyValue("Has warp drive", "True");
-            entry->addKeyValue("Warp speed", string(int(ship_template->warp_speed)));
+            entry->addKeyValue(tr("database", "Has warp drive"), tr("hasdrive","True"));
+            entry->addKeyValue(tr("database", "Warp speed"), string(int(ship_template->warp_speed)));
         }
         if (ship_template->has_jump_drive)
         {
-            entry->addKeyValue("Has jump drive", "True");
+            entry->addKeyValue(tr("Has jump drive"), tr("hasdrive","True"));
         }
         for(int n=0; n<max_beam_weapons; n++)
         {
@@ -137,21 +137,21 @@ void fillDefaultDatabaseData()
             {
                 string name = "?";
                 if (std::abs(sf::angleDifference(0.0f, ship_template->beams[n].getDirection())) <= 45)
-                    name = "Front";
+                    name = tr("database", "Front beam weapon");
                 if (std::abs(sf::angleDifference(90.0f, ship_template->beams[n].getDirection())) < 45)
-                    name = "Right";
+                    name = tr("database", "Right beam weapon");
                 if (std::abs(sf::angleDifference(-90.0f, ship_template->beams[n].getDirection())) < 45)
-                    name = "Left";
+                    name = tr("database", "Left beam weapon");
                 if (std::abs(sf::angleDifference(180.0f, ship_template->beams[n].getDirection())) <= 45)
-                    name = "Rear";
+                    name = tr("database", "Rear beam weapon");
 
-                entry->addKeyValue(name + " beam weapon", string(ship_template->beams[n].getDamage() / ship_template->beams[n].getCycleTime(), 2) + " DPS");
+                entry->addKeyValue(name, string(ship_template->beams[n].getDamage() / ship_template->beams[n].getCycleTime(), 2) + " "+ tr("damage","DPS"));
             }
         }
         if (ship_template->weapon_tube_count > 0)
         {
-            entry->addKeyValue("Missile tubes", string(ship_template->weapon_tube_count));
-            entry->addKeyValue("Missile load time", string(int(ship_template->weapon_tube[0].load_time)));
+            entry->addKeyValue(tr("database", "Missile tubes"), string(ship_template->weapon_tube_count));
+            entry->addKeyValue(tr("database", "Missile load time"), string(int(ship_template->weapon_tube[0].load_time)));
         }
         for(int n=0; n < MW_Count; n++)
         {
