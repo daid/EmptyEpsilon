@@ -453,6 +453,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
     {
         // Initiate a scan on scannable objects.
         if (key.hotkey == "SCAN_OBJECT" &&
+            my_spaceship->getCanScan() &&
             my_spaceship->scanning_delay == 0.0)
         {
             P<SpaceObject> obj = targets.get();
