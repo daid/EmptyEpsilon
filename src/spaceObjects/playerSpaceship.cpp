@@ -1922,8 +1922,8 @@ void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f posit
         radar_radius.setOutlineThickness(3.0);
         window.draw(radar_radius);
 
-        sf::CircleShape short_radar_radius(5000 * scale);
-        short_radar_radius.setOrigin(5000 * scale, 5000 * scale);
+        sf::CircleShape short_radar_radius(short_range_radar_range * scale);
+        short_radar_radius.setOrigin(short_range_radar_range * scale, short_range_radar_range * scale);
         short_radar_radius.setPosition(position);
         short_radar_radius.setFillColor(sf::Color::Transparent);
         short_radar_radius.setOutlineColor(sf::Color(255, 255, 255, 64));

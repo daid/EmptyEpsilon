@@ -94,6 +94,21 @@ void ScanProbe::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
     window.draw(object_sprite);
 }
 
+void ScanProbe::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+{
+    SpaceObject::drawOnGMRadar(window, position, scale, rotation, long_range);
+    if (long_range)
+    {
+        sf::CircleShape radar_radius(5000 * scale);
+        radar_radius.setOrigin(5000 * scale, 5000 * scale);
+        radar_radius.setPosition(position);
+        radar_radius.setFillColor(sf::Color::Transparent);
+        radar_radius.setOutlineColor(sf::Color(255, 255, 255, 64));
+        radar_radius.setOutlineThickness(3.0);
+        window.draw(radar_radius);
+    }
+}
+
 void ScanProbe::setOwner(P<SpaceObject> owner)
 {
     if (!owner) return;
