@@ -49,6 +49,7 @@ private:
     float distance;
     sf::Vector2f view_position;
     float view_rotation;
+    float view_transparency;
     bool long_range;
     bool show_ghost_dots;
     bool show_waypoints;
@@ -76,6 +77,7 @@ public:
     GuiRadarView* setRangeIndicatorStepSize(float step) { range_indicator_step_size = step; return this; }
     GuiRadarView* longRange() { long_range = true; return this; }
     GuiRadarView* shortRange() { long_range = false; return this; }
+    GuiRadarView* setBackgroundTransparency(float transparency) { view_transparency = std::max(0.0f, std::min(255.0f, transparency)); return this; }
     GuiRadarView* enableGhostDots() { show_ghost_dots = true; return this; }
     GuiRadarView* disableGhostDots() { show_ghost_dots = false; return this; }
     GuiRadarView* enableWaypoints() { show_waypoints = true; return this; }

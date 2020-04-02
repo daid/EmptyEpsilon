@@ -2,6 +2,7 @@
 #define SINGLE_PILOT_SCREEN_H
 
 #include "gui/gui2_overlay.h"
+#include "screenComponents/radarView.h"
 #include "screenComponents/targetsContainer.h"
 #include "gui/joystickConfig.h"
 
@@ -11,30 +12,33 @@ class GuiRadarView;
 class GuiKeyValueDisplay;
 class GuiToggleButton;
 class GuiRotationDial;
+class GuiViewport3D;
 
 class SinglePilotScreen : public GuiOverlay
 {
 private:
-    bool first_person;
+    const float RADAR_SIZE_LARGE = 650.0f;
+    const float RADAR_SIZE_SMALL = 300.0f;
+    bool first_person = false;
 
     GuiOverlay* background_gradient;
     GuiOverlay* background_crosses;
-
     GuiViewport3D* viewport;
-    GuiElement* left_panel;
 
+    TargetsContainer targets;
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* heading_display;
     GuiKeyValueDisplay* velocity_display;
     GuiKeyValueDisplay* shields_display;
+    GuiRadarView* radar;
+    GuiMissileTubeControls* tube_controls;
+    GuiRotationDial* missile_aim;
+    GuiToggleButton* lock_aim;
     GuiElement* warp_controls;
     GuiElement* jump_controls;
-    
-    TargetsContainer targets;
-    GuiRadarView* radar;
-    GuiRotationDial* missile_aim;
-    GuiMissileTubeControls* tube_controls;
-    GuiToggleButton* lock_aim;
+
+    void toggleRadarSize(float size);
+    void toggleViewport(bool is_visible);
 public:
     SinglePilotScreen(GuiContainer* owner);
     

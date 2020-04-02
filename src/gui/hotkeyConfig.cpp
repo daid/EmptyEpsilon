@@ -107,6 +107,9 @@ HotkeyConfig::HotkeyConfig()
     newKey("SELF_DESTRUCT_CONFIRM", std::make_tuple("Confirm self-destruct", ""));
     newKey("SELF_DESTRUCT_CANCEL", std::make_tuple("Cancel self-destruct", ""));
 
+    newCategory("SINGLE_PILOT", "Single Pilot");
+    newKey("TOGGLE_RADAR_SIZE", std::make_tuple("Toggle radar size", "G"));
+    newKey("TOGGLE_VIEWPORT", std::make_tuple("Toggle viewport", "V"));
 }
 
 static std::vector<std::pair<string, sf::Keyboard::Key> > sfml_key_names = {
