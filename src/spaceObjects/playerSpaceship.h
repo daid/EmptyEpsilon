@@ -126,7 +126,6 @@ public:
     // Ship functionality
     // Capable of scanning a target
     bool can_scan = true;
-    bool can_full_scan = true;
     // Target of a scan. Server-only value
     P<SpaceObject> scanning_target;
     // Time in seconds to scan an object if scanning_complexity is 0 (none)
@@ -205,8 +204,6 @@ public:
 
     void setCanScan(bool enabled) { can_scan = enabled; }
     bool getCanScan() { return can_scan; }
-    void setCanFullScan(bool enabled) { can_scan = true; can_full_scan = enabled; }
-    bool getCanFullScan(bool enabled) { return can_full_scan; }
     void setCanHack(bool enabled) { can_hack = enabled; }
     bool getCanHack() { return can_hack; }
     void setCanDock(bool enabled) { can_dock = enabled; }

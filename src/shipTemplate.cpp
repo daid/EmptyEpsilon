@@ -76,7 +76,6 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLongRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShortRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, canScan);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, canFullScan);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, canHack);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, canDock);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, canCombatManeuver);
@@ -481,7 +480,6 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->repair_crew_count = repair_crew_count;
 
     result->can_scan = can_scan;
-    result->can_full_scan = can_full_scan;
     result->can_hack = can_hack;
     result->can_dock = can_dock;
     result->can_combat_maneuver = can_combat_maneuver;

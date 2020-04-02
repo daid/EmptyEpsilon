@@ -4,6 +4,7 @@
 #include "helmsScreen.h"
 #include "preferenceManager.h"
 
+#include "screenComponents/combatManeuver.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/impulseControls.h"
 #include "screenComponents/warpControls.h"
@@ -33,8 +34,8 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", nullptr);
     
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
-    combat_maneuver->setPosition(-20, -20, ABottomRight)->setSize(280, 215);
-    
+    combat_maneuver->setPosition(-20, -20, ABottomRight)->setSize(280, 215)->setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
+
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->enableMissileTubeIndicators();
@@ -79,7 +80,8 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     warp_controls = (new GuiWarpControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
     jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
     
-    (new GuiDockingButton(this, "DOCKING"))->setPosition(20, -20, ABottomLeft)->setSize(280, 50);
+    docking_button = new GuiDockingButton(this, "DOCKING");
+    docking_button->setPosition(20, -20, ABottomLeft)->setSize(280, 50)->setVisible(my_spaceship && my_spaceship->getCanDock());
 
     (new GuiCustomShipFunctions(this, helmsOfficer, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
@@ -88,6 +90,10 @@ void HelmsScreen::onDraw(sf::RenderTarget& window)
 {
     if (my_spaceship)
     {
+        // Toggle ship capabilities.
+        combat_maneuver->setVisible(my_spaceship->getCanCombatManeuver());
+        docking_button->setVisible(my_spaceship->getCanDock());
+
         energy_display->setValue(string(int(my_spaceship->energy_level)));
         heading_display->setValue(string(my_spaceship->getHeading(), 1));
         float velocity = sf::length(my_spaceship->getVelocity()) / 1000 * 60;

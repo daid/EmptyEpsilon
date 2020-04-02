@@ -88,7 +88,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 
     // Scan button.
     scan_button = new GuiScanTargetButton(info_sidebar, "SCAN_BUTTON", &targets);
-    scan_button->setSize(GuiElement::GuiSizeMax, 50);
+    scan_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship && my_spaceship->getCanScan());
 
     // Simple scan data.
     info_callsign = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_CALLSIGN", 0.4, tr("Callsign"), "");
@@ -240,6 +240,9 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
 
     if (!my_spaceship)
         return;
+
+    // Toggle ship capabilities.
+    scan_button->setVisible(my_spaceship->getCanScan());
 
     if (game_server)
         probe = game_server->getObjectById(my_spaceship->linked_science_probe_id);
