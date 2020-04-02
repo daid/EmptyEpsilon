@@ -14,7 +14,7 @@ public:
 #if FEATURE_3D_RENDERING
     virtual void draw3DTransparent() override;
 #endif
-    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
+    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
 
     virtual bool canHideInNebula()  override { return false; }
 

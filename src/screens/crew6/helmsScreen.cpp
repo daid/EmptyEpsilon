@@ -2,6 +2,7 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "helmsScreen.h"
+#include "preferenceManager.h"
 
 #include "screenComponents/radarView.h"
 #include "screenComponents/impulseControls.h"
@@ -29,7 +30,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
 
-    GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", my_spaceship->getShortRangeRadarRange(), nullptr);
+    GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", nullptr);
     
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
     combat_maneuver->setPosition(-20, -20, ABottomRight)->setSize(280, 215);
@@ -60,6 +61,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
             heading_hint->hide();
         }
     );
+    radar->setAutoRotating(PreferencesManager::get("helms_radar_lock","0")=="1");
     
     heading_hint = new GuiLabel(this, "HEADING_HINT", "", 30);
     heading_hint->setAlignment(ACenter)->setSize(0, 0);

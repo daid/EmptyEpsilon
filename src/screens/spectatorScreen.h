@@ -11,7 +11,6 @@ class SpectatorScreen : public GuiCanvas, public Updatable
 {
 private:
     GuiRadarView* main_radar;
-    TargetsContainer targets;
 
     sf::Vector2f drag_start_position;
     sf::Vector2f drag_previous_position;

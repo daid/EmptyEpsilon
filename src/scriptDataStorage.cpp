@@ -15,7 +15,7 @@ public:
             while(!feof(f))
             {
                 char buffer[1024];
-                auto size = fread(buffer, sizeof(buffer), 1, f);
+                auto size = fread(buffer, 1, sizeof(buffer), f);
                 s += std::string(buffer, size);
             }
             fclose(f);
@@ -59,7 +59,18 @@ private:
 
 REGISTER_SCRIPT_CLASS(ScriptStorage)
 {
+    /// Get a value from persistent script storage.
+    /// Requires the key as a string.
+    /// Returns the value as a JSON string.
+    /// Returns nothing if the key is not found.
+    /// Example: storage = getScriptStorage();
+    ///          storage.get('key');
     REGISTER_SCRIPT_CLASS_FUNCTION(ScriptStorage, get);
+    /// Set a value in persistent script storage.
+    /// Requires the key and value as strings.
+    /// Creates scriptstorage.json if it doesn't exist.
+    /// Example: storage = getScriptStorage();
+    ///          storage.set('key', 'value');
     REGISTER_SCRIPT_CLASS_FUNCTION(ScriptStorage, set);
 }
 
@@ -71,7 +82,9 @@ static int getScriptStorage(lua_State* L)
         storage = new ScriptStorage();
     return convert<P<ScriptStorage> >::returnType(L, storage);
 }
-/// getStorage()
-/// Exposes the ScriptStorage object, which can be used to save/load key value pairs
-/// These key value pairs are permanently stored and survive server restarts.
+
+/// Expose the ScriptStorage object, which can save and load key-value pairs
+/// These key-value pairs are permanently stored and survive server restarts.
+/// Returns a ScriptStorage object; see also ScriptStorage.get() and .set().
+/// Example: storage = getScriptStorage();
 REGISTER_SCRIPT_FUNCTION(getScriptStorage);

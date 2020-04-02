@@ -223,6 +223,8 @@ int main(int argc, char** argv)
                 fsaa = 2;
         }
         P<WindowManager> window_manager = new WindowManager(width, height, fullscreen, warpPostProcessor, fsaa);
+        if (PreferencesManager::get("instance_name") != "")
+            window_manager->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name"));
         window_manager->setAllowVirtualResize(true);
         engine->registerObject("windowManager", window_manager);
     }

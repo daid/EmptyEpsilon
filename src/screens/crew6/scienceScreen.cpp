@@ -3,6 +3,7 @@
 #include "scienceScreen.h"
 #include "scienceDatabase.h"
 #include "spaceObjects/nebula.h"
+#include "preferenceManager.h"
 
 #include "screenComponents/radarView.h"
 #include "screenComponents/rawScannerDataRadarOverlay.h"
@@ -52,7 +53,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
         }, nullptr, nullptr
     );
-    new RawScannerDataRadarOverlay(science_radar, "", my_spaceship->getLongRangeRadarRange());
+    science_radar->setAutoRotating(PreferencesManager::get("science_radar_lock","0")=="1");
+    new RawScannerDataRadarOverlay(science_radar, "", my_spaceship ? my_spaceship->getLongRangeRadarRange() : 30000.0f);
 
     // Draw and hide the probe radar.
     probe_radar = new GuiRadarView(radar_view, "PROBE_RADAR", 5000, &targets);
@@ -90,19 +92,19 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     scan_button->setSize(GuiElement::GuiSizeMax, 50);
 
     // Simple scan data.
-    info_callsign = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_CALLSIGN", 0.4, "Callsign", "");
+    info_callsign = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_CALLSIGN", 0.4, tr("Callsign"), "");
     info_callsign->setSize(GuiElement::GuiSizeMax, 30);
-    info_distance = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_DISTANCE", 0.4, "Distance", "");
+    info_distance = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_DISTANCE", 0.4, tr("science","Distance"), "");
     info_distance->setSize(GuiElement::GuiSizeMax, 30);
-    info_bearing = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_BEARING", 0.4, "Bearing", "");
+    info_bearing = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_BEARING", 0.4, tr("Bearing"), "");
     info_bearing->setSize(GuiElement::GuiSizeMax, 30);
-    info_relspeed = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_REL_SPEED", 0.4, "Rel. Speed", "");
+    info_relspeed = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_REL_SPEED", 0.4, tr("Rel. Speed"), "");
     info_relspeed->setSize(GuiElement::GuiSizeMax, 30);
-    info_faction = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_FACTION", 0.4, "Faction", "");
+    info_faction = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_FACTION", 0.4, tr("Faction"), "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
-    info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4, "Type", "");
+    info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4, tr("science","Type"), "");
     info_type->setSize(GuiElement::GuiSizeMax, 30);
-    info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", "DB", [this]() {
+    info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", tr("database", "DB"), [this]() {
         P<SpaceShip> ship = targets.get();
         if (ship)
         {
@@ -114,9 +116,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
         }
     });
     info_type_button->setTextSize(20)->setPosition(0, 1, ATopLeft)->setSize(50, 28);
-    info_shields = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SHIELDS", 0.4, "Shields", "");
+    info_shields = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SHIELDS", 0.4, tr("science", "Shields"), "");
     info_shields->setSize(GuiElement::GuiSizeMax, 30);
-    info_hull = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HULL", 0.4, "Hull", "");
+    info_hull = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HULL", 0.4, tr("science", "Hull"), "");
     info_hull->setSize(GuiElement::GuiSizeMax, 30);
 
     // Full scan data
@@ -216,7 +218,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     probe_view_button->setPosition(20, -120, ABottomLeft)->setSize(200, 50)->disable();
 
     // Draw the zoom slider.
-    zoom_slider = new GuiSlider(radar_view, "", my_spaceship->getLongRangeRadarRange(), my_spaceship->getShortRangeRadarRange(), my_spaceship->getLongRangeRadarRange(), [this](float value)
+    zoom_slider = new GuiSlider(radar_view, "", my_spaceship ? my_spaceship->getLongRangeRadarRange() : 30000.0f, my_spaceship ? my_spaceship->getShortRangeRadarRange() : 5000.0f, my_spaceship ? my_spaceship->getLongRangeRadarRange() : 30000.0f, [this](float value)
     {
         if (my_spaceship)
             zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(my_spaceship->getLongRangeRadarRange() / value, 1)}}));
@@ -255,7 +257,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 
     // Radar/database view toggle.
     view_mode_selection = new GuiListbox(this, "VIEW_SELECTION", [this](int index, string value) { setViewModeSelectionToggle(index); });
-    view_mode_selection->setOptions({"Radar", "Database"})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(200, 100);
+    view_mode_selection->setOptions({tr("button", "Radar"), tr("button", "Database")})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(200, 100);
 
     // Scanning dialog.
     new GuiScanningDialog(this, "SCANNING_DIALOG");

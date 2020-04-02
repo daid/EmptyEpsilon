@@ -2,6 +2,7 @@
 #include "gameGlobalInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "tacticalScreen.h"
+#include "preferenceManager.h"
 
 #include "screenComponents/combatManeuver.h"
 #include "screenComponents/radarView.h"
@@ -37,7 +38,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     (new AlertLevelOverlay(this));
 
     // Short-range tactical radar with a 5U range.
-    radar = new GuiRadarView(this, "TACTICAL_RADAR", my_spaceship->getShortRangeRadarRange(), &targets);
+    radar = new GuiRadarView(this, "TACTICAL_RADAR", &targets);
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 750);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
 
@@ -59,6 +60,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
                 my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
         }
     );
+    radar->setAutoRotating(PreferencesManager::get("tactical_radar_lock","0")=="1");
 
     // Ship statistics in the top left corner.
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");

@@ -48,7 +48,7 @@ void Asteroid::draw3D()
 #endif//FEATURE_3D_RENDERING
 }
 
-void Asteroid::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Asteroid::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     if (size != getRadius())
         setRadius(size);

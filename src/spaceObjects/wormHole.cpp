@@ -81,7 +81,7 @@ void WormHole::draw3DTransparent()
 #endif//FEATURE_3D_RENDERING
 
 
-void WormHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void WormHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "wormHole" + string(radar_visual) + ".png");
@@ -94,7 +94,7 @@ void WormHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, floa
 }
 
 // Draw a line toward the target position
-void WormHole::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void WormHole::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {    
     sf::VertexArray a(sf::Lines, 2);
     a[0].position = position;

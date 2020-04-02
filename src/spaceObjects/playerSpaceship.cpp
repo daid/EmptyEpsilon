@@ -205,6 +205,19 @@ string alertLevelToString(EAlertLevel level)
     }
 }
 
+string alertLevelToLocaleString(EAlertLevel level)
+{
+    // Convert an EAlertLevel to a translated string.
+    switch(level)
+    {
+    case AL_RedAlert: return tr("alert","RED ALERT");
+    case AL_YellowAlert: return tr("alert","YELLOW ALERT");
+    case AL_Normal: return tr("alert","Normal");
+    default:
+        return "???";
+    }
+}
+
 // Configure ship's log packets.
 static inline sf::Packet& operator << (sf::Packet& packet, const PlayerSpaceship::ShipLogEntry& e) { return packet << e.prefix << e.text << e.color.r << e.color.g << e.color.b << e.color.a; }
 static inline sf::Packet& operator >> (sf::Packet& packet, PlayerSpaceship::ShipLogEntry& e) { packet >> e.prefix >> e.text >> e.color.r >> e.color.g >> e.color.b >> e.color.a; return packet; }
@@ -519,7 +532,7 @@ void PlayerSpaceship::update(float delta)
         {
             // If warping, consume energy at a rate of 120% the warp request.
             // If shields are up, that rate is increased by an additional 50%.
-            if (!useEnergy(energy_warp_per_second * delta * powf(warp_request, 1.2f) * (shields_active ? 1.5 : 1.0)))
+            if (!useEnergy(energy_warp_per_second * delta * getSystemEffectiveness(SYS_Warp) * powf(warp_request, 1.2f) * (shields_active ? 1.5 : 1.0)))
                 // If there's not enough energy, fall out of warp.
                 warp_request = 0;
         }
@@ -719,15 +732,15 @@ void PlayerSpaceship::setSystemCoolantRequest(ESystem system, float request)
             systems[n].coolant_request *= (max_coolant - request) / total_coolant;
         }
     }else{
-        if (total_coolant > 0)
+        for(int n = 0; n < SYS_COUNT; n++)
         {
-            for(int n = 0; n < SYS_COUNT; n++)
-            {
-                if (!hasSystem(ESystem(n))) continue;
-                if (n == system) continue;
+            if (!hasSystem(ESystem(n))) continue;
+            if (n == system) continue;
 
+            if (total_coolant > 0)
                 systems[n].coolant_request = std::min(systems[n].coolant_request * (max_coolant - request) / total_coolant, (float) max_coolant_per_system);
-            }
+            else
+                systems[n].coolant_request = std::min((max_coolant - request) / float(cnt), float(max_coolant_per_system));
         }
     }
 
@@ -1896,9 +1909,9 @@ void PlayerSpaceship::onReceiveServerCommand(sf::Packet& packet)
     }
 }
 
-void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
-    SpaceShip::drawOnGMRadar(window, position, scale, long_range);
+    SpaceShip::drawOnGMRadar(window, position, scale, rotation, long_range);
     if (long_range)
     {
         sf::CircleShape radar_radius(long_range_radar_range * scale);

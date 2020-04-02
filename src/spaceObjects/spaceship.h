@@ -193,8 +193,8 @@ public:
     /*!
      * Draw this ship on the radar.
      */
-    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
-    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
+    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
+    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
 
     virtual void update(float delta) override;
     virtual float getShieldRechargeRate(int shield_index) override;
@@ -343,6 +343,7 @@ public:
             warp_speed_per_warp_level = 0;
         }
     }
+    void setWarpSpeed(float speed) { warp_speed_per_warp_level = std::max(0.0f, speed); }
 
     float getBeamWeaponArc(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getArc(); }
     float getBeamWeaponDirection(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getDirection(); }
