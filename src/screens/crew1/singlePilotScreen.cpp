@@ -307,10 +307,12 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
 
     if (key.category == "SINGLE_PILOT" && my_spaceship)
     {
+#ifdef FEATURE_3D_RENDERING
         if (key.hotkey == "TOGGLE_RADAR_SIZE" && viewport->isVisible())
             toggleRadarSize(radar->getSize().y);
         if (key.hotkey == "TOGGLE_VIEWPORT")
             toggleViewport(viewport->isVisible());
+#endif
     }
 }
 
@@ -345,6 +347,7 @@ void SinglePilotScreen::toggleRadarSize(float size)
 
 void SinglePilotScreen::toggleViewport(bool is_visible)
 {
+#ifdef FEATURE_3D_RENDERING
     if (is_visible)
     {
         // Hide 3D viewport, show background, and resize radar.
@@ -361,4 +364,5 @@ void SinglePilotScreen::toggleViewport(bool is_visible)
         radar->setBackgroundTransparency(192);
         toggleRadarSize(RADAR_SIZE_LARGE);
     }
+#endif
 }
