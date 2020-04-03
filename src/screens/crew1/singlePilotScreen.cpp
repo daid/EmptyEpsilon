@@ -91,7 +91,8 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     );
 
     // Ship stats and combat maneuver at bottom right corner of left panel.
-    (new GuiCombatManeuver(this, "COMBAT_MANEUVER"))->setPosition(-20, -180, ABottomRight)->setSize(200, 150);
+    combat_maneuver = new GuiCombatManeuver(left_panel, "COMBAT_MANEUVER");
+    combat_maneuver->setPosition(-20, -180, ABottomRight)->setSize(200, 150)->setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
 
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(-20, -140, ABottomRight)->setSize(240, 40);
@@ -189,6 +190,7 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
         }
     }
 }
+
 bool SinglePilotScreen::onJoystickAxis(const AxisAction& axisAction){
     if(my_spaceship){
         if (axisAction.category == "HELMS"){

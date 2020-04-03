@@ -13,6 +13,7 @@ class GuiKeyValueDisplay;
 class GuiToggleButton;
 class GuiRotationDial;
 class GuiViewport3D;
+class GuiCombatManeuver;
 
 class SinglePilotScreen : public GuiOverlay
 {
@@ -30,6 +31,8 @@ private:
     GuiKeyValueDisplay* heading_display;
     GuiKeyValueDisplay* velocity_display;
     GuiKeyValueDisplay* shields_display;
+    GuiCombatManeuver* combat_maneuver;
+    
     GuiRadarView* radar;
     GuiMissileTubeControls* tube_controls;
     GuiRotationDial* missile_aim;
