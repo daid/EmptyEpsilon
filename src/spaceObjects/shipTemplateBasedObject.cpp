@@ -108,7 +108,7 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
     registerMemberReplication(&can_be_destroyed);
 }
 
-void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float sprite_scale, bool show_levels)
+void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, float sprite_scale, bool show_levels)
 {
     if (!getShieldsActive())
         return;
@@ -134,7 +134,7 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::V
         
         window.draw(objectSprite);
     }else if (shield_count > 1) {
-        float rotation = getRotation();
+        float direction = getRotation()-rotation;
         float arc = 360.0f / float(shield_count);
         
         for(int n=0; n<shield_count; n++)
@@ -150,9 +150,9 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::V
                 color = Tween<sf::Color>::linear(shield_hit_effect[n], 0.0f, 1.0f, color, sf::Color(255, 0, 0, 128));
             }
             sf::VertexArray a(sf::TrianglesFan, 4);
-            sf::Vector2f delta_a = sf::vector2FromAngle(rotation - arc / 2.0f);
-            sf::Vector2f delta_b = sf::vector2FromAngle(rotation);
-            sf::Vector2f delta_c = sf::vector2FromAngle(rotation + arc / 2.0f);
+            sf::Vector2f delta_a = sf::vector2FromAngle(direction - arc / 2.0f);
+            sf::Vector2f delta_b = sf::vector2FromAngle(direction);
+            sf::Vector2f delta_c = sf::vector2FromAngle(direction + arc / 2.0f);
             a[0].position = position + delta_b * sprite_scale * 32.0f * 0.05f;
             a[1].position = a[0].position + delta_a * sprite_scale * 32.0f * 1.5f;
             a[2].position = a[0].position + delta_b * sprite_scale * 32.0f * 1.5f;
@@ -167,7 +167,7 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::V
             a[3].color = color;
             window.draw(a, textureManager.getTexture("shield_circle.png"));
 
-            rotation += arc;
+            direction += arc;
         }
     }
 }

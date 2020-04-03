@@ -232,9 +232,9 @@ void CpuShip::orderDock(P<SpaceObject> object)
     this->addBroadcast(FVF_Friendly, "Docking to " + object->getCallSign() + ".");
 }
 
-void CpuShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void CpuShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
-    SpaceShip::drawOnGMRadar(window, position, scale, long_range);
+    SpaceShip::drawOnGMRadar(window, position, scale, rotation, long_range);
     if (game_server)
         ai->drawOnGMRadar(window, position, scale);
 }

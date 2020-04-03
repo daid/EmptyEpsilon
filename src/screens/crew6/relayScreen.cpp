@@ -161,7 +161,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 
     for(int level=AL_Normal; level < AL_MAX; level++)
     {
-        GuiButton* alert_button = new GuiButton(layout, "", alertLevelToString(EAlertLevel(level)), [this, level]()
+        GuiButton* alert_button = new GuiButton(layout, "", alertLevelToLocaleString(EAlertLevel(level)), [this, level]()
         {
             if (my_spaceship)
                 my_spaceship->commandSetAlertLevel(EAlertLevel(level));
@@ -275,7 +275,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
     if (my_spaceship)
     {
         info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0));
-        launch_probe_button->setText("Launch probe (" + string(my_spaceship->scan_probe_stock) + ")");
+        launch_probe_button->setText(tr("Launch Probe") + " (" + string(my_spaceship->scan_probe_stock) + ")");
     }
 
     if (targets.getWaypointIndex() >= 0)

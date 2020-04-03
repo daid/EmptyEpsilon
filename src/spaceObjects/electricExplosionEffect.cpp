@@ -79,7 +79,7 @@ void ElectricExplosionEffect::draw3DTransparent()
 }
 #endif//FEATURE_3D_RENDERING
 
-void ElectricExplosionEffect::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void ElectricExplosionEffect::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     if (!on_radar)
         return;

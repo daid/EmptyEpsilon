@@ -17,13 +17,13 @@ MissileWeapon::MissileWeapon(string multiplayer_name, const MissileWeaponData& d
     launch_sound_played = false;
 }
 
-void MissileWeapon::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void MissileWeapon::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     if (long_range) return;
 
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "RadarArrow.png");
-    object_sprite.setRotation(getRotation());
+    object_sprite.setRotation(getRotation()-rotation);
     object_sprite.setPosition(position);
     object_sprite.setColor(data.color);
     object_sprite.setScale(0.25 + 0.25 * category_modifier, 0.25 + 0.25 * category_modifier);

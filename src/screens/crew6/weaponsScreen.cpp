@@ -2,6 +2,7 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "weaponsScreen.h"
+#include "preferenceManager.h"
 
 #include "screenComponents/missileTubeControls.h"
 #include "screenComponents/aimLock.h"
@@ -42,7 +43,9 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
                 my_spaceship->commandSetTarget(NULL);
         }, nullptr, nullptr
     );
-    missile_aim = new GuiRotationDial(this, "MISSILE_AIM", -90, 360 - 90, 0, [this](float value){
+    radar->setAutoRotating(PreferencesManager::get("weapons_radar_lock","0")=="1");
+
+    missile_aim = new AimLock(this, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value){
         tube_controls->setMissileTargetAngle(value);
     });
     missile_aim->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 850);

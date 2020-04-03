@@ -1,4 +1,3 @@
-
 #include <i18n.h>
 #include "preferenceManager.h"
 #include "serverCreationScreen.h"
@@ -34,6 +33,7 @@ ServerCreationScreen::ServerCreationScreen()
     gameGlobalInfo->use_system_damage = PreferencesManager::get("server_config_use_system_damage", "1").toInt();
     gameGlobalInfo->allow_main_screen_tactical_radar = PreferencesManager::get("server_config_allow_main_screen_tactical_radar", "1").toInt();
     gameGlobalInfo->allow_main_screen_long_range_radar = PreferencesManager::get("server_config_allow_main_screen_long_range_radar", "1").toInt();
+    gameGlobalInfo->gm_control_code = PreferencesManager::get("server_config_gm_control_code", "").upper();
 
     // Create a two-column layout.
     GuiElement* container = new GuiAutoLayout(this, "", GuiAutoLayout::ELayoutMode::LayoutVerticalColumns);
@@ -62,6 +62,12 @@ ServerCreationScreen::ServerCreationScreen()
     row->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiLabel(row, "PASSWORD_LABEL", tr("Server password: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiTextEntry(row, "SERVER_PASSWORD", ""))->callback([](string text){game_server->setPassword(text.upper());})->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    // GM control code row.
+    row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
+    row->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(row, "GM_CONTROL_CODE_LABEL", tr("GM control code: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiTextEntry(row, "GM_CONTROL_CODE", ""))->callback([](string text){gameGlobalInfo->gm_control_code = text.upper();})->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Server IP row.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);

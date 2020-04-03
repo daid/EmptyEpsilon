@@ -205,6 +205,19 @@ string alertLevelToString(EAlertLevel level)
     }
 }
 
+string alertLevelToLocaleString(EAlertLevel level)
+{
+    // Convert an EAlertLevel to a translated string.
+    switch(level)
+    {
+    case AL_RedAlert: return tr("alert","RED ALERT");
+    case AL_YellowAlert: return tr("alert","YELLOW ALERT");
+    case AL_Normal: return tr("alert","Normal");
+    default:
+        return "???";
+    }
+}
+
 // Configure ship's log packets.
 static inline sf::Packet& operator << (sf::Packet& packet, const PlayerSpaceship::ShipLogEntry& e) { return packet << e.prefix << e.text << e.color.r << e.color.g << e.color.b << e.color.a; }
 static inline sf::Packet& operator >> (sf::Packet& packet, PlayerSpaceship::ShipLogEntry& e) { packet >> e.prefix >> e.text >> e.color.r >> e.color.g >> e.color.b >> e.color.a; return packet; }
@@ -1896,9 +1909,9 @@ void PlayerSpaceship::onReceiveServerCommand(sf::Packet& packet)
     }
 }
 
-void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
-    SpaceShip::drawOnGMRadar(window, position, scale, long_range);
+    SpaceShip::drawOnGMRadar(window, position, scale, rotation, long_range);
     if (long_range)
     {
         sf::CircleShape radar_radius(long_range_radar_range * scale);
@@ -1909,8 +1922,8 @@ void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f posit
         radar_radius.setOutlineThickness(3.0);
         window.draw(radar_radius);
 
-        sf::CircleShape short_radar_radius(5000 * scale);
-        short_radar_radius.setOrigin(5000 * scale, 5000 * scale);
+        sf::CircleShape short_radar_radius(short_range_radar_range * scale);
+        short_radar_radius.setOrigin(short_range_radar_range * scale, short_range_radar_range * scale);
         short_radar_radius.setPosition(position);
         short_radar_radius.setFillColor(sf::Color::Transparent);
         short_radar_radius.setOutlineColor(sf::Color(255, 255, 255, 64));
