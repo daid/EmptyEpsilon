@@ -91,15 +91,6 @@ public:
     // Visual indicators of hull damage and in-progress jumps
     float hull_damage_indicator;
     float jump_indicator;
-    // Target of a scan. Server-only value
-    P<SpaceObject> scanning_target;
-    // Time in seconds to scan an object if scanning_complexity is 0 (none)
-    float scanning_delay;
-    // Number of sliders during a scan
-    int scanning_complexity;
-    // Number of times an object must be scanned to achieve a fully scanned
-    // state
-    int scanning_depth;
     // Time in seconds it takes to recalibrate shields
     float shield_calibration_delay;
     // Ship automation features, mostly for single-person ships like fighters
@@ -131,25 +122,49 @@ public:
     std::vector<CustomShipFunction> custom_functions;
 
     std::vector<sf::Vector2f> waypoints;
-    
-    // Scan probe capacity
-    int max_scan_probes;
-    int scan_probe_stock;
-    float scan_probe_recharge;
 
+    // Ship functionality
+    // Capable of scanning a target
+    bool can_scan = true;
+    // Target of a scan. Server-only value
+    P<SpaceObject> scanning_target;
+    // Time in seconds to scan an object if scanning_complexity is 0 (none)
+    float scanning_delay = 0.0;
+    // Number of sliders during a scan
+    int scanning_complexity = 0;
+    // Number of times an object must be scanned to achieve a fully scanned
+    // state
+    int scanning_depth = 0;
+
+    // Capable of hacking a target
+    bool can_hack = true;
+    // Capable of docking with a target
+    bool can_dock = true;
+    // Capable of combat maneuvers
+    bool can_combat_maneuver = true;
+
+    // Capable of self-destruction
+    bool can_self_destruct = true;
+    bool activate_self_destruct = false;
+    uint32_t self_destruct_code[max_self_destruct_codes];
+    bool self_destruct_code_confirmed[max_self_destruct_codes];
+    ECrewPosition self_destruct_code_entry_position[max_self_destruct_codes];
+    ECrewPosition self_destruct_code_show_position[max_self_destruct_codes];
+    float self_destruct_countdown = 0.0;
+    float self_destruct_damage = 150.0;
+    float self_destruct_size = 1500.0;
+
+    // Capable of probe launches
+    bool can_launch_probe = true;
+    int max_scan_probes = 8;
+    int scan_probe_stock;
+    float scan_probe_recharge = 0.0;
     ScriptSimpleCallback on_probe_launch;
 
     // Main screen content
     EMainScreenSetting main_screen_setting;
     // Content overlaid on the main screen, such as comms
     EMainScreenOverlay main_screen_overlay;
-
-    bool activate_self_destruct;
-    uint32_t self_destruct_code[max_self_destruct_codes];
-    bool self_destruct_code_confirmed[max_self_destruct_codes];
-    ECrewPosition self_destruct_code_entry_position[max_self_destruct_codes];
-    ECrewPosition self_destruct_code_show_position[max_self_destruct_codes];
-    float self_destruct_countdown;
 
     EAlertLevel alert_level;
 
@@ -188,7 +203,25 @@ public:
     void setEnergyLevelMax(float amount) { max_energy_level = std::max(0.0f, amount); energy_level = std::min(energy_level, max_energy_level); }
     float getEnergyLevel() { return energy_level; }
     float getEnergyLevelMax() { return max_energy_level; }
-    
+
+    void setCanScan(bool enabled) { can_scan = enabled; }
+    bool getCanScan() { return can_scan; }
+    void setCanHack(bool enabled) { can_hack = enabled; }
+    bool getCanHack() { return can_hack; }
+    void setCanDock(bool enabled) { can_dock = enabled; }
+    bool getCanDock() { return can_dock; }
+    void setCanCombatManeuver(bool enabled) { can_combat_maneuver = enabled; }
+    bool getCanCombatManeuver() { return can_combat_maneuver; }
+    void setCanSelfDestruct(bool enabled) { can_self_destruct = enabled; }
+    bool getCanSelfDestruct() { return can_self_destruct && self_destruct_size > 0 && self_destruct_damage > 0; }
+    void setCanLaunchProbe(bool enabled) { can_launch_probe = enabled; }
+    bool getCanLaunchProbe() { return can_launch_probe; }
+
+    void setSelfDestructDamage(float amount) { self_destruct_damage = std::max(0.0f, amount); }
+    float getSelfDestructDamage() { return self_destruct_damage; }
+    void setSelfDestructSize(float size) { self_destruct_size = std::max(0.0f, size); }
+    float getSelfDestructSize() { return self_destruct_size; }
+
     void setScanProbeCount(int amount) { scan_probe_stock = std::max(0, std::min(amount, max_scan_probes)); }
     int getScanProbeCount() { return scan_probe_stock; }
     void setMaxScanProbeCount(int amount) { max_scan_probes = std::max(0, amount); scan_probe_stock = std::min(scan_probe_stock, max_scan_probes); }

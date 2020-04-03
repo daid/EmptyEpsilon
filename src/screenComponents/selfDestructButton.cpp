@@ -32,6 +32,11 @@ GuiSelfDestructButton::GuiSelfDestructButton(GuiContainer* owner, string id)
     cancel_button->setIcon("gui/icons/self-destruct")->hide()->setSize(GuiElement::GuiSizeMax, 50);
 }
 
+void GuiSelfDestructButton::onUpdate()
+{
+    activate_button->setVisible(my_spaceship && my_spaceship->getCanSelfDestruct());
+}
+
 void GuiSelfDestructButton::onDraw(sf::RenderTarget& window)
 {
 }

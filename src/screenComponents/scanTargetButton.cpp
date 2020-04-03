@@ -17,6 +17,11 @@ GuiScanTargetButton::GuiScanTargetButton(GuiContainer* owner, string id, Targets
     progress->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
     
+void GuiScanTargetButton::onUpdate()
+{
+    setVisible(my_spaceship && my_spaceship->getCanScan());
+}
+
 void GuiScanTargetButton::onDraw(sf::RenderTarget& window)
 {
     if (!my_spaceship)

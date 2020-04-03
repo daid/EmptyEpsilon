@@ -88,7 +88,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 
     // Scan button.
     scan_button = new GuiScanTargetButton(info_sidebar, "SCAN_BUTTON", &targets);
-    scan_button->setSize(GuiElement::GuiSizeMax, 50);
+    scan_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship && my_spaceship->getCanScan());
 
     // Simple scan data.
     info_callsign = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_CALLSIGN", 0.4, tr("Callsign"), "");
@@ -450,6 +450,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
     {
         // Initiate a scan on scannable objects.
         if (key.hotkey == "SCAN_OBJECT" &&
+            my_spaceship->getCanScan() &&
             my_spaceship->scanning_delay == 0.0)
         {
             P<SpaceObject> obj = targets.get();

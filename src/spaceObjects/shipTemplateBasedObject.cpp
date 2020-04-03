@@ -18,13 +18,26 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setHull);
     /// Set the maximum amount of hull for this station. Stations never repair hull damage, so this only effects the percentage displays
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setHullMax);
-    /// Set if the object can be destroyed or not. true or false
+    /// Set whether the object can be destroyed.
+    /// Requires a Boolean value.
+    /// Example: ship:setCanBeDestroyed(true)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setCanBeDestroyed);
-    /// Get if the object can be destroyed or not. true or false
+    /// Get whether the object can be destroyed.
+    /// Returns a Boolean value.
+    /// Example: ship:getCanBeDestroyed()
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getCanBeDestroyed);
-    /// Get the current shield level, stations only have a single shield, unlike ships that have a front&back shield
+    /// Get the specified shield's current level.
+    /// Requires an integer index value.
+    /// Returns a float value.
+    /// Example to get shield level on front shields of a ship with two shields:
+    ///     ship:getShieldLevel(0)
+    /// Rear shields: ship:getShieldLevel(1)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldLevel);
-    /// Get the amount of shields fit on this object.
+    /// Get the number of shields on this object.
+    /// For example, a ship with 1 shield count has a single shield covering
+    /// all angles, a ship with 2 covers front and back, etc.
+    /// Returns an integer count.
+    /// Example: ship:getShieldCount()
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldCount);
     /// Get the maxium shield level.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldMax);
