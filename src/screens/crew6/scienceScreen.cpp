@@ -241,9 +241,6 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     if (!my_spaceship)
         return;
 
-    // Toggle ship capabilities.
-    scan_button->setVisible(my_spaceship->getCanScan());
-
     if (game_server)
         probe = game_server->getObjectById(my_spaceship->linked_science_probe_id);
     else

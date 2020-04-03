@@ -171,7 +171,9 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     /// Requires a Boolean value.
     /// Example: ship:setCanSelfDestruct(true)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setCanSelfDestruct);
-    /// Get whether the object self destruct.
+    /// Get whether the object can self destruct.
+    /// This returns false if self destruct size and damage are both 0, even if
+    /// you set setCanSelfDestruct(true).
     /// Returns a Boolean value.
     /// Example: ship:getCanSelfDestruct()
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getCanSelfDestruct);

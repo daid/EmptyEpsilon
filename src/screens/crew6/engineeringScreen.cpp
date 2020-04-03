@@ -151,9 +151,6 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
 {
     if (my_spaceship)
     {
-        // Toggle ship capabilities.
-        self_destruct_button->setVisible(my_spaceship->getCanSelfDestruct());
-
         // Update the energy usage.
         if (previous_energy_measurement == 0.0)
         {

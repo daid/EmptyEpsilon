@@ -90,10 +90,6 @@ void HelmsScreen::onDraw(sf::RenderTarget& window)
 {
     if (my_spaceship)
     {
-        // Toggle ship capabilities.
-        combat_maneuver->setVisible(my_spaceship->getCanCombatManeuver());
-        docking_button->setVisible(my_spaceship->getCanDock());
-
         energy_display->setValue(string(int(my_spaceship->energy_level)));
         heading_display->setValue(string(my_spaceship->getHeading(), 1));
         float velocity = sf::length(my_spaceship->getVelocity()) / 1000 * 60;
