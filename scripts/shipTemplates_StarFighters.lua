@@ -30,6 +30,7 @@ variation:setBeam(0, 30, 0, 900.0, 4.0, 2.5)
 
 variation = variation:copy("MP52 Hornet"):setType("playership")
 variation:setDescription([[The MP52 Hornet is a significantly upgraded version of MU52 Hornet, with nearly twice the hull strength, nearly three times the shielding, better acceleration, impulse boosters, and a second laser cannon.]])
+variation:setImpulseSoundFile("sfx/engine_fighter.wav")
 variation:setHull(70)
 variation:setShields(60)
 variation:setSpeed(125, 32, 40)

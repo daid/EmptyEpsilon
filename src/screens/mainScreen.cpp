@@ -13,6 +13,7 @@
 #include "screenComponents/viewport3d.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/shipDestroyedPopup.h"
+#include "screenComponents/impulseSound.h"
 
 #include "gui/gui2_panel.h"
 #include "gui/gui2_overlay.h"
@@ -63,6 +64,9 @@ ScreenMainScreen::ScreenMainScreen()
         });
     }
 
+    // Initialize and play the impulse engine sound.
+    impulse_sound = std::unique_ptr<ImpulseSound>( new ImpulseSound(PreferencesManager::get("impulse_sound_enabled", "2") != "0") );
+
     first_person = PreferencesManager::get("first_person") == "1";
 }
 
@@ -71,7 +75,7 @@ void ScreenMainScreen::update(float delta)
     if (game_client && game_client->getStatus() == GameClient::Disconnected)
     {
         soundManager->stopMusic();
-        soundManager->stopSound(impulse_sound);
+        impulse_sound->stop();
         destroy();
         disconnectFromServer();
         returnToMainMenu();
@@ -163,29 +167,12 @@ void ScreenMainScreen::update(float delta)
             break;
         }
 
-        // If we have an impulse power, loop the engine sound.
-        float impulse_ability = std::max(0.0f, std::min(my_spaceship->getSystemEffectiveness(SYS_Impulse), my_spaceship->getSystemPower(SYS_Impulse)));
-        string impulse_sound_file = my_spaceship->impulse_sound_file;
-        if (impulse_ability > 0 && impulse_sound_file.length() > 0)
-        {
-            if (impulse_sound > -1)
-            {
-                soundManager->setSoundVolume(impulse_sound, std::max(10.0f * impulse_ability, fabsf(my_spaceship->current_impulse) * 10.0f * std::max(0.1f, impulse_ability)));
-                soundManager->setSoundPitch(impulse_sound, std::max(0.7f * impulse_ability, fabsf(my_spaceship->current_impulse) + 0.2f * std::max(0.1f, impulse_ability)));
-            }
-            else
-            {
-                impulse_sound = soundManager->playSound(impulse_sound_file, std::max(0.7f * impulse_ability, fabsf(my_spaceship->current_impulse) + 0.2f * impulse_ability), std::max(30.0f, fabsf(my_spaceship->current_impulse) * 10.0f * impulse_ability), true);
-            }
-        }
-        // If we don't have impulse available, stop the engine sound.
-        else if (impulse_sound > -1)
-        {
-            soundManager->stopSound(impulse_sound);
-            // TODO: Play an engine failure sound.
-            impulse_sound = -1;
-        }
-
+        // Update impulse sound volume and pitch.
+        impulse_sound->update(delta);
+    } else {
+        // If we're not the player ship (ie. we exploded), don't play impulse
+        // engine sounds.
+        impulse_sound->stop();
     }
 }
 
@@ -269,7 +256,7 @@ void ScreenMainScreen::onKey(sf::Event::KeyEvent key, int unicode)
     case sf::Keyboard::Escape:
     case sf::Keyboard::Home:
         soundManager->stopMusic();
-        soundManager->stopSound(impulse_sound);
+        impulse_sound->stop();
         destroy();
         returnToShipSelection();
         break;

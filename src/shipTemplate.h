@@ -120,6 +120,7 @@ public:
     string radar_trace;
     float long_range_radar_range = 30000.0f;
     float short_range_radar_range = 5000.0f;
+    string impulse_sound_file;
 
     std::vector<ShipRoomTemplate> rooms;
     std::vector<ShipDoorTemplate> doors;
@@ -180,6 +181,7 @@ public:
     void setRadarTrace(string trace);
     void setLongRangeRadarRange(float range);
     void setShortRangeRadarRange(float range);
+    void setImpulseSoundFile(string sound);
 
     P<ShipTemplate> copy(string new_name);
 
