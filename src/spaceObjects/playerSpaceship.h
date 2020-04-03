@@ -151,6 +151,8 @@ public:
     ECrewPosition self_destruct_code_entry_position[max_self_destruct_codes];
     ECrewPosition self_destruct_code_show_position[max_self_destruct_codes];
     float self_destruct_countdown = 0.0;
+    float self_destruct_damage = 150.0;
+    float self_destruct_size = 1500.0;
 
     // Capable of probe launches
     bool can_launch_probe = true;
@@ -211,9 +213,14 @@ public:
     void setCanCombatManeuver(bool enabled) { can_combat_maneuver = enabled; }
     bool getCanCombatManeuver() { return can_combat_maneuver; }
     void setCanSelfDestruct(bool enabled) { can_self_destruct = enabled; }
-    bool getCanSelfDestruct() { return can_self_destruct; }
+    bool getCanSelfDestruct() { return can_self_destruct && self_destruct_size > 0 && self_destruct_damage > 0; }
     void setCanLaunchProbe(bool enabled) { can_launch_probe = enabled; }
     bool getCanLaunchProbe() { return can_launch_probe; }
+
+    void setSelfDestructDamage(float amount) { self_destruct_damage = std::max(0.0f, amount); }
+    float getSelfDestructDamage() { return self_destruct_damage; }
+    void setSelfDestructSize(float size) { self_destruct_size = std::max(0.0f, size); }
+    float getSelfDestructSize() { return self_destruct_size; }
 
     void setScanProbeCount(int amount) { scan_probe_stock = std::max(0, std::min(amount, max_scan_probes)); }
     int getScanProbeCount() { return scan_probe_stock; }

@@ -183,6 +183,22 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     /// Returns a Boolean value.
     /// Example: ship:getCanLaunchProbe()
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getCanLaunchProbe);
+    /// Set the amount of damage done by self destruction.
+    /// Requires a float; the value used is randomized +/- 33%.
+    /// Example: ship:setSelfDestructDamage(150)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setSelfDestructDamage);
+    /// Get the amount of damage done by self destruction.
+    /// Returns a float.
+    /// Example: ship:getSelfDestructDamage()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getSelfDestructDamage);
+    /// Set the size of the explosion created by self destruction.
+    /// Requires a float.
+    /// Example: ship:setSelfDestructSize(1500)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setSelfDestructSize);
+    /// Get the size of the explosion created by self destruction.
+    /// Returns a float.
+    /// Example: ship:getSelfDestructSize()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getSelfDestructSize);
 }
 
 float PlayerSpaceship::system_power_user_factor[] = {
@@ -623,20 +639,20 @@ void PlayerSpaceship::update(float delta)
                 // If the countdown has started, tick the clock.
                 self_destruct_countdown -= delta;
 
-                // When time runs out, blow up the ship and damage a 1.5U
-                // radius.
+                // When time runs out, blow up the ship and damage a
+                // configurable radius.
                 if (self_destruct_countdown <= 0.0)
                 {
                     for(int n = 0; n < 5; n++)
                     {
                         ExplosionEffect* e = new ExplosionEffect();
-                        e->setSize(1000.0f);
-                        e->setPosition(getPosition() + sf::rotateVector(sf::Vector2f(0, random(0, 500)), random(0, 360)));
+                        e->setSize(self_destruct_size * 0.67f);
+                        e->setPosition(getPosition() + sf::rotateVector(sf::Vector2f(0, random(0, self_destruct_size * 0.33f)), random(0, 360)));
                         e->setRadarSignatureInfo(0.0, 0.6, 0.6);
                     }
 
                     DamageInfo info(this, DT_Kinetic, getPosition());
-                    SpaceObject::damageArea(getPosition(), 1500, 100, 200, info, 0.0);
+                    SpaceObject::damageArea(getPosition(), self_destruct_size, self_destruct_damage - (self_destruct_damage / 3.0f), self_destruct_damage + (self_destruct_damage / 3.0f), info, 0.0);
 
                     destroy();
                     return;
