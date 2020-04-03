@@ -43,7 +43,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     float radar_position_y = 0;
     float aim_position_y = 0;
 
-#ifdef FEATURE_3D_RENDERING
+#ifndef __ANDROID__
     // Hide the background and show the 3D viewport by default.
     background_gradient->hide();
     background_crosses->hide();
@@ -307,7 +307,7 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
 
     if (key.category == "SINGLE_PILOT" && my_spaceship)
     {
-#ifdef FEATURE_3D_RENDERING
+#ifndef __ANDROID__
         if (key.hotkey == "TOGGLE_RADAR_SIZE" && viewport->isVisible())
             toggleRadarSize(radar->getSize().y);
         if (key.hotkey == "TOGGLE_VIEWPORT")
@@ -347,7 +347,7 @@ void SinglePilotScreen::toggleRadarSize(float size)
 
 void SinglePilotScreen::toggleViewport(bool is_visible)
 {
-#ifdef FEATURE_3D_RENDERING
+#ifndef __ANDROID__
     if (is_visible)
     {
         // Hide 3D viewport, show background, and resize radar.
