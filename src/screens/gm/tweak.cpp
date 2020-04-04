@@ -756,12 +756,14 @@ GuiShipTweakCpu::GuiShipTweakCpu(GuiContainer* owner)
     GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
 
-    // System autorepair rate (CpuShip)
-    (new GuiLabel(left_col, "", "CpuShip repair rate:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    // System autorepair rate
+    (new GuiLabel(left_col, "", "System repair rate:", 30))->setSize(GuiElement::GuiSizeMax, 50);
     repair_rate_slider = new GuiSlider(left_col, "", 0.0, 0.1, 0.0, [this](float value) {
         target->setAutoRepairRate(value);
     });
-    repair_rate_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+    repair_rate_slider->setSize(GuiElement::GuiSizeMax, 40);
+    repair_rate_overlay_label = new GuiLabel(repair_rate_slider, "REPAIR_RATE_SLIDER_LABEL", "", 30);
+    repair_rate_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
 GuiStationTweakBase::GuiStationTweakBase(GuiContainer* owner)
@@ -863,6 +865,7 @@ void GuiShipTweakCpu::onDraw(sf::RenderTarget& window)
 {
     // Update repair rate.
     repair_rate_slider->setValue(target->getAutoRepairRate());
+    repair_rate_overlay_label->setText(string(target->getAutoRepairRate(), 4));
 }
 
 void GuiStationTweakBase::onDraw(sf::RenderTarget& window)

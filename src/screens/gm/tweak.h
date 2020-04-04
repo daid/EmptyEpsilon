@@ -210,6 +210,7 @@ private:
     P<CpuShip> target;
 
     GuiSlider* repair_rate_slider;
+    GuiLabel* repair_rate_overlay_label;
 public:
     GuiShipTweakCpu(GuiContainer* owner);
 
