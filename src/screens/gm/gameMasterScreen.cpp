@@ -95,18 +95,20 @@ GameMasterScreen::GameMasterScreen()
     tweak_button = new GuiButton(this, "TWEAK_OBJECT", "Tweak", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
         {
-            if (P<PlayerSpaceship>(obj))
+            if (P<SpaceStation>(obj))
             {
+                station_tweak_dialog->open(obj);
+                break;
+            } else if (P<CpuShip>(obj)) {
+                cpu_tweak_dialog->open(obj);
+                break;
+            } else if (P<PlayerSpaceship>(obj)) {
                 player_tweak_dialog->open(obj);
                 break;
-            }
-            else if (P<SpaceShip>(obj))
-            {
+            } else if (P<SpaceShip>(obj)) {
                 ship_tweak_dialog->open(obj);
                 break;
-            }
-            else
-            {
+            } else {
                 object_tweak_dialog->open(obj);
                 break;
             }
@@ -178,6 +180,10 @@ GameMasterScreen::GameMasterScreen()
         chat_dialog_per_ship[n]->hide();
     }
 
+    station_tweak_dialog = new GuiObjectTweak(this, TW_Station);
+    station_tweak_dialog->hide();
+    cpu_tweak_dialog = new GuiObjectTweak(this, TW_CpuShip);
+    cpu_tweak_dialog->hide();
     player_tweak_dialog = new GuiObjectTweak(this, TW_Player);
     player_tweak_dialog->hide();
     ship_tweak_dialog = new GuiObjectTweak(this, TW_Ship);

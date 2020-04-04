@@ -101,6 +101,7 @@ public:
     
     float energy_storage_amount;
     int repair_crew_count;
+    float auto_system_repair_per_second = 0.005f;
     string default_ai_name;
     BeamTemplate beams[max_beam_weapons];
     int weapon_tube_count;
@@ -133,6 +134,7 @@ public:
     void setDescription(string description);
     void setModel(string model_name);
     void setDefaultAI(string default_ai_name);
+    void setAutoRepairRate(float repaired_per_second);
     void setDockClasses(std::vector<string> classes);
     void setSharesEnergyWithDocked(bool enabled);
     void setRepairDocked(bool enabled);

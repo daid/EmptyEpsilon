@@ -371,6 +371,11 @@ void ShipTemplate::setModel(string model_name)
     this->model_data = ModelData::getModel(model_name);
 }
 
+void ShipTemplate::setAutoRepairRate(float repaired_per_second)
+{
+    this->auto_system_repair_per_second = repaired_per_second;
+}
+
 void ShipTemplate::setDefaultAI(string default_ai_name)
 {
     this->default_ai_name = default_ai_name;
@@ -492,6 +497,8 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->can_combat_maneuver = can_combat_maneuver;
     result->can_self_destruct = can_self_destruct;
     result->can_launch_probe = can_launch_probe;
+
+    result->auto_system_repair_per_second = auto_system_repair_per_second;
 
     result->default_ai_name = default_ai_name;
     for(int n=0; n<max_beam_weapons; n++)

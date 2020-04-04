@@ -2,6 +2,7 @@
 #include "tweak.h"
 #include "playerInfo.h"
 #include "spaceObjects/spaceship.h"
+#include "spaceObjects/cpuShip.h"
 
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_autolayout.h"
@@ -28,7 +29,9 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
     list->setSize(300, GuiElement::GuiSizeMax);
     list->setPosition(25, 25, ATopLeft);
 
-    if (tweak_type == TW_Ship || tweak_type == TW_Player)
+    if (tweak_type == TW_Ship ||
+        tweak_type == TW_CpuShip ||
+        tweak_type == TW_Player)
     {
         pages.push_back(new GuiShipTweakBase(this));
         list->addEntry("Base", "");
@@ -50,6 +53,20 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
         list->addEntry("Player", "");
         pages.push_back(new GuiShipTweakPlayer2(this));
         list->addEntry("Player 2", "");
+    }
+
+    if (tweak_type == TW_CpuShip)
+    {
+        pages.push_back(new GuiShipTweakCpu(this));
+        list->addEntry("CpuShip", "");
+    }
+
+    if (tweak_type == TW_Station)
+    {
+        pages.push_back(new GuiObjectTweakBase(this));
+        list->addEntry("Base", "");
+        pages.push_back(new GuiStationTweakBase(this));
+        list->addEntry("Station", "");
     }
 
     if (tweak_type == TW_Object)
@@ -123,7 +140,7 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
         target->impulse_max_speed = value;
     });
     impulse_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
-    
+
     (new GuiLabel(left_col, "", "Turn speed:", 30))->setSize(GuiElement::GuiSizeMax, 50);
     turn_speed_slider = new GuiSlider(left_col, "", 0.0, 35, 0.0, [this](float value) {
         target->turn_speed = value;
@@ -194,7 +211,8 @@ void GuiShipTweakBase::open(P<SpaceObject> target)
 {
     P<SpaceShip> ship = target;
     this->target = ship;
-    
+
+    // Initialize Spaceship values
     type_name->setText(ship->getTypeName());
     callsign->setText(ship->callsign);
     description->setText(ship->getDescription(SS_NotScanned));
@@ -609,57 +627,6 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
     }
 }
 
-void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
-{
-    // Update position list.
-    int position_counter = 0;
-
-    // Update the status of each crew position.
-    for(int n = 0; n < max_crew_positions; n++)
-    {
-        string position_name = getCrewPositionName(ECrewPosition(n));
-        string position_state = "-";
-
-        if (target->hasPlayerAtPosition(ECrewPosition(n)))
-        {
-            position_state = "Occupied";
-            position_counter += 1;
-        }
-
-        position[n]->setValue(position_state);
-    }
-
-    // Update the total occupied position count.
-    position_count->setText("Positions occupied: " + string(position_counter));
-
-    // Update the ship's energy level.
-    energy_level_slider->setValue(target->energy_level);
-    max_energy_level_slider->setValue(target->max_energy_level);
-
-    // Update reputation points.
-    reputation_point_slider->setValue(target->getReputationPoints());
-}
-
-void GuiShipTweakPlayer::open(P<SpaceObject> target)
-{
-    P<PlayerSpaceship> player = target;
-    this->target = player;
-
-    if (player)
-    {
-        // Read ship's control code.
-        control_code->setText(player->control_code);
-
-        // Set and snap boost speed slider to current value
-        combat_maneuver_boost_speed_slider->setValue(player->combat_maneuver_boost_speed);
-        combat_maneuver_boost_speed_slider->clearSnapValues()->addSnapValue(player->combat_maneuver_boost_speed, 20.0f);
-
-        // Set and snap strafe speed slider to current value
-        combat_maneuver_strafe_speed_slider->setValue(player->combat_maneuver_strafe_speed);
-        combat_maneuver_strafe_speed_slider->clearSnapValues()->addSnapValue(player->combat_maneuver_strafe_speed, 20.0f);
-    }
-}
-
 GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
 : GuiTweakPage(owner)
 {
@@ -728,6 +695,87 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
     can_launch_probe->setSize(GuiElement::GuiSizeMax, 40);
 }
 
+GuiShipTweakCpu::GuiShipTweakCpu(GuiContainer* owner)
+: GuiTweakPage(owner)
+{
+    // Add two columns.
+    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+
+    GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+
+    // System autorepair rate (CpuShip)
+    (new GuiLabel(left_col, "", "CpuShip repair rate:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    repair_rate_slider = new GuiSlider(left_col, "", 0.0, 0.1, 0.0, [this](float value) {
+        target->setAutoRepairRate(value);
+    });
+    repair_rate_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+}
+
+GuiStationTweakBase::GuiStationTweakBase(GuiContainer* owner)
+: GuiTweakPage(owner)
+{
+    // Add two columns.
+    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+
+    GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+
+    // Left column
+    // Hull max and state sliders
+    (new GuiLabel(left_col, "", "Hull max:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    hull_max_slider = new GuiSlider(left_col, "", 0.0, 2000, 0.0, [this](float value) {
+        target->hull_max = round(value);
+        target->hull_strength = std::min(target->hull_strength, target->hull_max);
+    });
+    hull_max_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(left_col, "", "Hull current:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    hull_slider = new GuiSlider(left_col, "", 0.0, 2000, 0.0, [this](float value) {
+        target->hull_strength = std::min(roundf(value), target->hull_max);
+    });
+    hull_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+   // Can be destroyed bool
+   can_be_destroyed_toggle = new GuiToggleButton(left_col, "", "Could be destroyed", [this](bool value) {
+       target->setCanBeDestroyed(value);
+   });
+   can_be_destroyed_toggle->setSize(GuiElement::GuiSizeMax, 40);
+}
+
+void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
+{
+    // Update position list.
+    int position_counter = 0;
+
+    // Update the status of each crew position.
+    for(int n = 0; n < max_crew_positions; n++)
+    {
+        string position_name = getCrewPositionName(ECrewPosition(n));
+        string position_state = "-";
+
+        if (target->hasPlayerAtPosition(ECrewPosition(n)))
+        {
+            position_state = "Occupied";
+            position_counter += 1;
+        }
+
+        position[n]->setValue(position_state);
+    }
+
+    // Update the total occupied position count.
+    position_count->setText("Positions occupied: " + string(position_counter));
+
+    // Update the ship's energy level.
+    energy_level_slider->setValue(target->energy_level);
+    max_energy_level_slider->setValue(target->max_energy_level);
+
+    // Update reputation points.
+    reputation_point_slider->setValue(target->getReputationPoints());
+}
+
 void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
 {
     coolant_slider->setValue(target->max_coolant);
@@ -741,9 +789,59 @@ void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
     can_launch_probe->setValue(target->getCanLaunchProbe());
 }
 
+void GuiShipTweakCpu::onDraw(sf::RenderTarget& window)
+{
+    // Update repair rate.
+    repair_rate_slider->setValue(target->getAutoRepairRate());
+}
+
+void GuiStationTweakBase::onDraw(sf::RenderTarget& window)
+{
+    hull_slider->setValue(target->hull_strength);
+    // TODO
+}
+
+void GuiShipTweakPlayer::open(P<SpaceObject> target)
+{
+    P<PlayerSpaceship> player = target;
+    this->target = player;
+
+    if (player)
+    {
+        // Read ship's control code.
+        control_code->setText(player->control_code);
+
+        // Set and snap boost speed slider to current value
+        combat_maneuver_boost_speed_slider->setValue(player->combat_maneuver_boost_speed);
+        combat_maneuver_boost_speed_slider->clearSnapValues()->addSnapValue(player->combat_maneuver_boost_speed, 20.0f);
+
+        // Set and snap strafe speed slider to current value
+        combat_maneuver_strafe_speed_slider->setValue(player->combat_maneuver_strafe_speed);
+        combat_maneuver_strafe_speed_slider->clearSnapValues()->addSnapValue(player->combat_maneuver_strafe_speed, 20.0f);
+    }
+}
+
 void GuiShipTweakPlayer2::open(P<SpaceObject> target)
 {
     this->target = target;
+}
+
+void GuiShipTweakCpu::open(P<SpaceObject> target)
+{
+    this->target = target;
+}
+
+void GuiStationTweakBase::open(P<SpaceObject> target)
+{
+    P<SpaceStation> station = target;
+    this->target = station;
+
+    if (station)
+    {
+        hull_max_slider->setValue(station->hull_max);
+        hull_max_slider->clearSnapValues()->addSnapValue(station->ship_template->hull, 5.0f);
+        can_be_destroyed_toggle->setValue(station->getCanBeDestroyed());
+    }
 }
 
 GuiObjectTweakBase::GuiObjectTweakBase(GuiContainer* owner)

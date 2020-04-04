@@ -5,6 +5,8 @@
 #include "missileWeaponData.h"
 #include "shipTemplate.h"
 #include "playerInfo.h"
+#include "spaceObjects/cpuShip.h"
+#include "spaceObjects/spaceStation.h"
 #include "spaceObjects/playerSpaceship.h"
 
 class SpaceShip;
@@ -19,6 +21,7 @@ enum ETweakType
 {
     TW_Object,  // TODO: Space object
     TW_Ship,    // Ships
+    TW_CpuShip, // Ships
     TW_Station, // TODO: Space stations
     TW_Player   // Player ships
 };
@@ -197,6 +200,36 @@ public:
     virtual void open(P<SpaceObject> target) override;
 
     virtual void onDraw(sf::RenderTarget& window) override;
+};
+
+class GuiShipTweakCpu : public GuiTweakPage
+{
+private:
+    P<CpuShip> target;
+
+    GuiSlider* repair_rate_slider;
+public:
+    GuiShipTweakCpu(GuiContainer* owner);
+
+    virtual void open(P<SpaceObject> target) override;
+
+    virtual void onDraw(sf::RenderTarget& window) override;
+};
+
+class GuiStationTweakBase : public GuiTweakPage
+{
+private:
+    P<SpaceStation> target;
+
+    GuiSlider* hull_max_slider;
+    GuiSlider* hull_slider;
+    GuiToggleButton* can_be_destroyed_toggle;
+public:
+    GuiStationTweakBase(GuiContainer* owner);
+
+    virtual void onDraw(sf::RenderTarget& window) override;
+
+    virtual void open(P<SpaceObject> target) override;
 };
 
 class GuiObjectTweakBase : public GuiTweakPage

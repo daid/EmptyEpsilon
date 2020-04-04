@@ -18,17 +18,17 @@ enum EAIOrder
     AI_Attack,          //Attack [order_target] very specificly.
 };
 
-
 class ShipAI;
+
 class CpuShip : public SpaceShip
 {
-    static constexpr float auto_system_repair_per_second = 0.005f;
     static constexpr float missile_resupply_time = 10.0f;
 
     EAIOrder orders;                    //Server only
     sf::Vector2f order_target_location; //Server only
     P<SpaceObject> order_target;        //Server only
     ShipAI* ai;
+    float auto_system_repair_per_second = 0.005f;
 
     string new_ai_name;
 public:
@@ -54,6 +54,9 @@ public:
     EAIOrder getOrder() { return orders; }
     sf::Vector2f getOrderTargetLocation() { return order_target_location; }
     P<SpaceObject> getOrderTarget() { return order_target; }
+
+    void setAutoRepairRate(float repaired_per_second) { auto_system_repair_per_second = std::max(0.0f, repaired_per_second); }
+    float getAutoRepairRate() { return auto_system_repair_per_second; }
 
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
     virtual std::unordered_map<string, string> getGMInfo() override;

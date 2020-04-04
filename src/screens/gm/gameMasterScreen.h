@@ -36,6 +36,8 @@ private:
     std::vector<GameMasterChatDialog*> chat_dialog_per_ship;
     GuiGlobalMessageEntryView* global_message_entry;
     GuiObjectCreationView* object_creation_view;
+    GuiObjectTweak* station_tweak_dialog;
+    GuiObjectTweak* cpu_tweak_dialog;
     GuiObjectTweak* player_tweak_dialog;
     GuiObjectTweak* ship_tweak_dialog;
     GuiObjectTweak* object_tweak_dialog;

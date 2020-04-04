@@ -42,6 +42,8 @@ REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, getOrder);
     /// Get the target location of the currently executed order
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, getOrderTargetLocation);
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, setAutoRepairRate);
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, getAutoRepairRate);
     /// Get the target SpaceObject of the currently executed order
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, getOrderTarget);
 }
@@ -79,8 +81,10 @@ void CpuShip::update(float delta)
     if (!game_server)
         return;
 
-    for(int n=0; n<SYS_COUNT; n++)
-        systems[n].health = std::min(1.0f, systems[n].health + delta * auto_system_repair_per_second);
+    // Autorepair if capable, or if docked.
+    for(int n = 0; n < SYS_COUNT; n++)
+        if (auto_system_repair_per_second > 0 || docking_state == DS_Docked)
+            systems[n].health = std::min(1.0f, systems[n].health + delta * auto_system_repair_per_second);
 
     if (new_ai_name.length() && ai->canSwitchAI())
     {
@@ -126,6 +130,7 @@ void CpuShip::applyTemplateValues()
 {
     SpaceShip::applyTemplateValues();
 
+    auto_system_repair_per_second = ship_template->auto_system_repair_per_second;
     new_ai_name = ship_template->default_ai_name;
 }
 
@@ -248,7 +253,12 @@ std::unordered_map<string, string> CpuShip::getGMInfo()
 
 string CpuShip::getExportLine()
 {
-    string ret = "CpuShip():setFaction(\"" + getFaction() + "\"):setTemplate(\"" + template_name + "\"):setCallSign(\"" + getCallSign() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
+    string ret = "CpuShip():setFaction(\"" + getFaction() + "\")"
+        + ":setTemplate(\"" + template_name + "\")"
+        + ":setCallSign(\"" + getCallSign() + "\")"
+        + ":setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"
+        + ":setAutoRepairRate(" + string(auto_system_repair_per_second) + ")";
+
     switch(orders)
     {
     case AI_Idle: break;
@@ -262,6 +272,7 @@ string CpuShip::getExportLine()
     case AI_Attack: ret += ":orderAttack(?)"; break;
     case AI_Dock: ret += ":orderDock(?)"; break;
     }
+
     return ret + getScriptExportModificationsOnTemplate();
 }
 
