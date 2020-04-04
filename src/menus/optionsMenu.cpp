@@ -4,6 +4,7 @@
 #include "main.h"
 #include "preferenceManager.h"
 
+#include "gui/gui2_autolayout.h"
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_togglebutton.h"
@@ -20,19 +21,36 @@ OptionsMenu::OptionsMenu()
     new GuiOverlay(this, "", colorConfig.background);
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
 
-    // Left column, manual layout. Draw first element at 50px from top.
-    int top = 50;
+    // Initialize autolayout columns.
+    left_container = new GuiAutoLayout(this, "OPTIONS_LEFT_CONTAINER", GuiAutoLayout::LayoutVerticalTopToBottom);
+    left_container->setPosition(50, 50, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
 
-    // Graphics options.
-    (new GuiLabel(this, "GRAPHICS_OPTIONS_LABEL", tr("Graphics Options"), 30))->addBackground()->setPosition(50, top, ATopLeft)->setSize(300, 50);
+    right_container = new GuiAutoLayout(this, "OPTIONS_RIGHT_CONTAINER", GuiAutoLayout::LayoutVerticalTopToBottom);
+    right_container->setPosition(-50, 50, ATopRight)->setSize(600, GuiElement::GuiSizeMax);
 
+    // Options pager
+    options_pager = new GuiSelector(left_container, "OPTIONS_PAGER", [this](int index, string value)
+    {
+        graphics_page->setVisible(index == 0);
+        audio_page->setVisible(index == 1);
+        interface_page->setVisible(index == 2);
+    });
+    options_pager->setOptions({tr("Graphics options"), tr("Audio options"), tr("Interface options")})->setSelectionIndex(0)->setSize(GuiElement::GuiSizeMax, 50);
+
+    graphics_page = new GuiAutoLayout(left_container, "OPTIONS_GRAPHICS", GuiAutoLayout::LayoutVerticalTopToBottom);
+    graphics_page->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->show();
+    audio_page = new GuiAutoLayout(left_container, "OPTIONS_AUDIO", GuiAutoLayout::LayoutVerticalTopToBottom);
+    audio_page->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
+    interface_page = new GuiAutoLayout(left_container, "OPTIONS_INTERFACE", GuiAutoLayout::LayoutVerticalTopToBottom);
+    interface_page->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
+
+    // Graphics options
     // Fullscreen toggle.
-    top += 50;
-    (new GuiButton(this, "FULLSCREEN_TOGGLE", tr("Fullscreen toggle"), []()
+    (new GuiButton(graphics_page, "FULLSCREEN_TOGGLE", tr("Fullscreen toggle"), []()
     {
         P<WindowManager> windowManager = engine->getObject("windowManager");
         windowManager->setFullscreen(!windowManager->isFullscreen());
-    }))->setPosition(50, top, ATopLeft)->setSize(300, 50);
+    }))->setSize(GuiElement::GuiSizeMax, 50);
 
     // FSAA configuration.
     int fsaa = std::max(1, windowManager->getFSAA());
@@ -48,153 +66,137 @@ OptionsMenu::OptionsMenu()
     }
 
     // FSAA selector.
-    top += 50;
-    (new GuiSelector(this, "FSAA", [](int index, string value)
+    (new GuiSelector(graphics_page, "FSAA", [](int index, string value)
     {
         P<WindowManager> windowManager = engine->getObject("windowManager");
         static const int fsaa[] = { 0, 2, 4, 8 };
         windowManager->setFSAA(fsaa[index]);
-    }))->setOptions({"FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x"})->setSelectionIndex(fsaa_index)->setPosition(50, top, ATopLeft)->setSize(300, 50);
+    }))->setOptions({"FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x"})->setSelectionIndex(fsaa_index)->setSize(GuiElement::GuiSizeMax, 50);
 
-    // Sound options.
-    top += 60;
-    (new GuiLabel(this, "SOUND_OPTIONS_LABEL", tr("Sound Options"), 30))->addBackground()->setPosition(50, top, ATopLeft)->setSize(300, 50);
-
+    // Audio optionss
     // Sound volume slider.
-    top += 50;
-    sound_volume_slider = new GuiSlider(this, "SOUND_VOLUME_SLIDER", 0.0f, 100.0f, soundManager->getMasterSoundVolume(), [this](float volume)
+    sound_volume_slider = new GuiSlider(audio_page, "SOUND_VOLUME_SLIDER", 0.0f, 100.0f, soundManager->getMasterSoundVolume(), [this](float volume)
     {
         soundManager->setMasterSoundVolume(volume);
         sound_volume_overlay_label->setText(tr("Sound Volume: {volume}%").format({{"volume", string(int(soundManager->getMasterSoundVolume()))}}));
     });
-    sound_volume_slider->setPosition(50, top, ATopLeft)->setSize(300, 50);
+    sound_volume_slider->setSize(GuiElement::GuiSizeMax, 50);
 
     // Override overlay label.
     sound_volume_overlay_label = new GuiLabel(sound_volume_slider, "SOUND_VOLUME_SLIDER_LABEL", tr("Sound Volume: {volume}%").format({{"volume", string(int(soundManager->getMasterSoundVolume()))}}), 30);
     sound_volume_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    // Music volume slider.
-    top += 50;
-    music_volume_slider = new GuiSlider(this, "MUSIC_VOLUME_SLIDER", 0.0f, 100.0f, soundManager->getMusicVolume(), [this](float volume)
-    {
-        soundManager->setMusicVolume(volume);
-        music_volume_overlay_label->setText(tr("Music Volume: {volume}%").format({{"volume", string(int(soundManager->getMusicVolume()))}}));
-    });
-    music_volume_slider->setPosition(50, top, ATopLeft)->setSize(300, 50);
-
-    // Override overlay label.
-    music_volume_overlay_label = new GuiLabel(music_volume_slider, "MUSIC_VOLUME_SLIDER_LABEL", tr("Music Volume: {volume}%").format({{"volume", string(int(soundManager->getMusicVolume()))}}), 30);
-    music_volume_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-
-    // Engine volume slider.
-    top += 50;
-    impulse_volume_slider = new GuiSlider(this, "IMPULSE_VOLUME_SLIDER", 0.0f, 100.0f, PreferencesManager::get("impulse_sound_volume", "50").toInt(), [this](float volume)
-    {
-        PreferencesManager::set("impulse_sound_volume", volume);
-        impulse_volume_overlay_label->setText(tr("Impulse Volume: {volume}%").format({{"volume", string(PreferencesManager::get("impulse_sound_volume", "50").toInt())}}));
-    });
-    impulse_volume_slider->setPosition(50, top, ATopLeft)->setSize(300, 50);
-
-    // Override overlay label.
-    impulse_volume_overlay_label = new GuiLabel(impulse_volume_slider, "IMPULSE_VOLUME_SLIDER_LABEL", tr("Impulse Volume: {volume}%").format({{"volume", string(PreferencesManager::get("impulse_sound_volume", "50").toInt())}}), 30);
-    impulse_volume_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-
     // Music playback state.
-    top += 60;
-    (new GuiLabel(this, "MUSIC_PLAYBACK_LABEL", tr("Music Playback"), 30))->addBackground()->setPosition(50, top, ATopLeft)->setSize(300, 50);
+    (new GuiLabel(audio_page, "MUSIC_PLAYBACK_LABEL", tr("Music Playback"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
 
     // Determine when music is enabled.
     int music_enabled_index = PreferencesManager::get("music_enabled", "2").toInt();
-    top += 50;
-    (new GuiSelector(this, "MUSIC_ENABLED", [](int index, string value)
+    (new GuiSelector(audio_page, "MUSIC_ENABLED", [](int index, string value)
     {
         // 0: Always off
         // 1: Always on
         // 2: On if main screen, off otherwise (default)
         PreferencesManager::set("music_enabled", string(index));
-    }))->setOptions({tr("Disabled"), tr("Enabled"), tr("Main Screen only")})->setSelectionIndex(music_enabled_index)->setPosition(50, top, ATopLeft)->setSize(300, 50);
+    }))->setOptions({tr("Disabled"), tr("Enabled"), tr("Main Screen only")})->setSelectionIndex(music_enabled_index)->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Music volume slider.
+    music_volume_slider = new GuiSlider(audio_page, "MUSIC_VOLUME_SLIDER", 0.0f, 100.0f, soundManager->getMusicVolume(), [this](float volume)
+    {
+        soundManager->setMusicVolume(volume);
+        music_volume_overlay_label->setText(tr("Music Volume: {volume}%").format({{"volume", string(int(soundManager->getMusicVolume()))}}));
+    });
+    music_volume_slider->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Override overlay label.
+    music_volume_overlay_label = new GuiLabel(music_volume_slider, "MUSIC_VOLUME_SLIDER_LABEL", tr("Music Volume: {volume}%").format({{"volume", string(int(soundManager->getMusicVolume()))}}), 30);
+    music_volume_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Engine playback state.
-    top += 60;
-    (new GuiLabel(this, "ENGINE_SFX_LABEL", tr("Engine SFX"), 30))->addBackground()->setPosition(50, top, ATopLeft)->setSize(300, 50);
+    (new GuiLabel(audio_page, "IMPULSE_SOUND_LABEL", tr("Impulse Engine sound"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
 
     // Determine when engine sound effects are enabled.
     int impulse_enabled_index = PreferencesManager::get("impulse_sound_enabled", "2").toInt();
-    top += 50;
-    (new GuiSelector(this, "ENGINE_ENABLED", [](int index, string value)
+    (new GuiSelector(audio_page, "ENGINE_ENABLED", [](int index, string value)
     {
         // 0: Always off
         // 1: Always on
         // 2: On if main screen, off otherwise (default)
         PreferencesManager::set("impulse_sound_enabled", string(index));
-    }))->setOptions({tr("Disabled"), tr("Enabled"), tr("Main Screen only")})->setSelectionIndex(impulse_enabled_index)->setPosition(50, top, ATopLeft)->setSize(300, 50);
+    }))->setOptions({tr("Disabled"), tr("Enabled"), tr("Main Screen only")})->setSelectionIndex(impulse_enabled_index)->setSize(GuiElement::GuiSizeMax, 50);
 
-    // Interface options.
-    top += 60;
-    (new GuiLabel(this, "INTERFACE_OPTIONS_LABEL", tr("Interface Options"), 30))->addBackground()->setPosition(50, top, ATopLeft)->setSize(300, 50);
+    // Impulse engine volume slider.
+    impulse_volume_slider = new GuiSlider(audio_page, "IMPULSE_VOLUME_SLIDER", 0.0f, 100.0f, PreferencesManager::get("impulse_sound_volume", "50").toInt(), [this](float volume)
+    {
+        PreferencesManager::set("impulse_sound_volume", volume);
+        impulse_volume_overlay_label->setText(tr("Impulse Volume: {volume}%").format({{"volume", string(PreferencesManager::get("impulse_sound_volume", "50").toInt())}}));
+    });
+    impulse_volume_slider->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Override overlay label.
+    impulse_volume_overlay_label = new GuiLabel(impulse_volume_slider, "IMPULSE_VOLUME_SLIDER_LABEL", tr("Impulse Volume: {volume}%").format({{"volume", string(PreferencesManager::get("impulse_sound_volume", "50").toInt())}}), 30);
+    impulse_volume_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    // Interface options
+    // Helms rotation lock.
+    (new GuiToggleButton(interface_page, "HEMS_RADAR_LOCK", tr("Helms Radar Lock"), [](bool value)
+    {
+        PreferencesManager::set("helms_radar_lock", value ? "1" : "");
+        PreferencesManager::set("tactical_radar_lock", value ? "1" : "");
+    }))->setValue(PreferencesManager::get("helms_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
 
     // Helms rotation lock.
-    top += 50;
-    (new GuiToggleButton(this, "HEMS_RADAR_LOCK", tr("Helms Radar Lock"), [](bool value)
+    (new GuiToggleButton(interface_page, "WEAPONS_RADAR_LOCK", tr("Weapons Radar Lock"), [](bool value)
     {
-        PreferencesManager::set("helms_radar_lock", value?"1":"");
-        PreferencesManager::set("tactical_radar_lock", value?"1":"");
-    }))->setValue(PreferencesManager::get("helms_radar_lock","0")=="1")->setPosition(50, top, ATopLeft)->setSize(300, 50);
+        PreferencesManager::set("weapons_radar_lock", value ? "1" : "");
+    }))->setValue(PreferencesManager::get("weapons_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
 
     // Helms rotation lock.
-    top += 50;
-    (new GuiToggleButton(this, "WEAPONS_RADAR_LOCK", tr("Weapons Radar Lock"), [](bool value)
+    (new GuiToggleButton(interface_page, "SCIENCE_RADAR_LOCK", tr("Science Radar Lock"), [](bool value)
     {
-        PreferencesManager::set("weapons_radar_lock", value?"1":"");
-    }))->setValue(PreferencesManager::get("weapons_radar_lock","0")=="1")->setPosition(50, top, ATopLeft)->setSize(300, 50);
+        PreferencesManager::set("science_radar_lock", value ? "1" : "");
+    }))->setValue(PreferencesManager::get("science_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
 
-    // Helms rotation lock.
-    top += 50;
-    (new GuiToggleButton(this, "SCIENCE_RADAR_LOCK", tr("Science Radar Lock"), [](bool value)
-    {
-        PreferencesManager::set("science_radar_lock", value?"1":"");
-    }))->setValue(PreferencesManager::get("science_radar_lock","0")=="1")->setPosition(50, top, ATopLeft)->setSize(300, 50);
-
-    // Right column, manual layout. Draw first element 50px from top.
-    top = 50;
-
+    // Right column, auto layout. Draw first element 50px from top.
     // Music preview jukebox.
-    (new GuiLabel(this, "MUSIC_PREVIEW_LABEL", "Preview Soundtrack", 30))->addBackground()->setPosition(-50, top, ATopRight)->setSize(600, 50);
 
-    // Draw list of available music. Grabs every ogg file in the music folder
-    // and lists them by filename.
-    // TODO: Associate ambient and combat music within the list.
-    top += 50;
-    GuiListbox* music_list = new GuiListbox(this, "MUSIC_PLAY", [this](int index, string value)
+    // Draw list of available music. Grabs every ogg file in the
+    // resources/music folder and lists them by filename.
+    std::vector<string> ambient_music_filenames = findResources("music/ambient/*.ogg");
+    std::sort(ambient_music_filenames.begin(), ambient_music_filenames.end());
+    std::vector<string> combat_music_filenames = findResources("music/combat/*.ogg");
+    std::sort(combat_music_filenames.begin(), combat_music_filenames.end());
+
+    (new GuiLabel(right_container, "PREVIEW_LABEL", tr("Preview Soundtracks"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+
+    GuiListbox* music_list = new GuiListbox(right_container, "MUSIC_PLAY", [this](int index, string value)
     {
         soundManager->playMusic(value);
     });
-    music_list->setPosition(-50, top, ATopRight)->setSize(600, 800);
 
-    std::vector<string> music_filenames = findResources("music/*.ogg");
-    std::sort(music_filenames.begin(), music_filenames.end());
-    for(string filename : music_filenames)
-    {
+    for(string filename : ambient_music_filenames)
         music_list->addEntry(filename.substr(filename.rfind("/") + 1, filename.rfind(".")), filename);
-    }
+    for(string filename : combat_music_filenames)
+        music_list->addEntry(filename.substr(filename.rfind("/") + 1, filename.rfind(".")), filename);
+
+    music_list->setSize(GuiElement::GuiSizeMax, 750);
 
     // Bottom GUI.
     // Back button.
-    (new GuiButton(this, "BACK", "Back", [this]()
+    (new GuiButton(this, "BACK", tr("options", "Back"), [this]()
     {
         // Close this menu, stop the music, and return to the main menu.
         destroy();
         soundManager->stopMusic();
         returnToMainMenu();
-    }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
+    }))->setPosition(50, -50, ABottomLeft)->setSize(150, 50);
     // Save options button.
-    (new GuiButton(this, "SAVE_OPTIONS", "Save Options", [this]()
+    (new GuiButton(this, "SAVE_OPTIONS", tr("options", "Save"), [this]()
     {
         if (getenv("HOME"))
             PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
         else
             PreferencesManager::save("options.ini");
-    }))->setPosition(370, -50, ABottomLeft)->setSize(300, 50);
+    }))->setPosition(200, -50, ABottomLeft)->setSize(150, 50);
 }
 
 void OptionsMenu::onKey(sf::Event::KeyEvent key, int unicode)
