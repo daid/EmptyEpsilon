@@ -39,7 +39,6 @@ private:
     GuiObjectTweak* station_tweak_dialog;
     GuiObjectTweak* cpu_tweak_dialog;
     GuiObjectTweak* player_tweak_dialog;
-    GuiObjectTweak* ship_tweak_dialog;
     GuiObjectTweak* object_tweak_dialog;
     
     GuiAutoLayout* info_layout;

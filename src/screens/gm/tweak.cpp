@@ -29,8 +29,7 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
     list->setSize(300, GuiElement::GuiSizeMax);
     list->setPosition(25, 25, ATopLeft);
 
-    if (tweak_type == TW_Ship ||
-        tweak_type == TW_CpuShip ||
+    if (tweak_type == TW_CpuShip ||
         tweak_type == TW_Player)
     {
         pages.push_back(new GuiShipTweakBase(this));
@@ -63,10 +62,9 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
 
     if (tweak_type == TW_Station)
     {
-        pages.push_back(new GuiObjectTweakBase(this));
-        list->addEntry("Base", "");
         pages.push_back(new GuiStationTweakBase(this));
-        list->addEntry("Station", "");
+        list->addEntry("Base", "");
+        // TODO: Tweak shields
     }
 
     if (tweak_type == TW_Object)
@@ -627,6 +625,37 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
     }
 }
 
+void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
+{
+    // Update position list.
+    int position_counter = 0;
+
+    // Update the status of each crew position.
+    for(int n = 0; n < max_crew_positions; n++)
+    {
+        string position_name = getCrewPositionName(ECrewPosition(n));
+        string position_state = "-";
+
+        if (target->hasPlayerAtPosition(ECrewPosition(n)))
+        {
+            position_state = "Occupied";
+            position_counter += 1;
+        }
+
+        position[n]->setValue(position_state);
+    }
+
+    // Update the total occupied position count.
+    position_count->setText("Positions occupied: " + string(position_counter));
+
+    // Update the ship's energy level.
+    energy_level_slider->setValue(target->energy_level);
+    max_energy_level_slider->setValue(target->max_energy_level);
+
+    // Update reputation points.
+    reputation_point_slider->setValue(target->getReputationPoints());
+}
+
 GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
 : GuiTweakPage(owner)
 {
@@ -746,6 +775,34 @@ GuiStationTweakBase::GuiStationTweakBase(GuiContainer* owner)
     right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     // Left column
+    // Edit station's callsign.
+    (new GuiLabel(left_col, "", "Callsign:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    callsign = new GuiTextEntry(left_col, "", "");
+    callsign->setSize(GuiElement::GuiSizeMax, 50);
+    callsign->callback([this](string text) {
+        target->callsign = text;
+    });
+
+    // Edit station's description.
+    // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
+    // editing long strings.
+    (new GuiLabel(left_col, "", "Description:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Set station's description.
+    description = new GuiTextEntry(left_col, "", "");
+    description->setSize(GuiElement::GuiSizeMax, 50);
+    description->callback([this](string text) {
+        target->setDescription(text);
+    });
+
+    // Set station's heading.
+    (new GuiLabel(left_col, "", "Heading:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    heading_slider = new GuiSlider(left_col, "", 0.0, 359.9, 0.0, [this](float value) {
+        target->setHeading(value);
+    });
+    heading_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
     // Hull max and state sliders
     (new GuiLabel(left_col, "", "Hull max:", 30))->setSize(GuiElement::GuiSizeMax, 50);
     hull_max_slider = new GuiSlider(left_col, "", 0.0, 2000, 0.0, [this](float value) {
@@ -789,37 +846,6 @@ GuiStationTweakBase::GuiStationTweakBase(GuiContainer* owner)
     restocks_scan_probes_toggle->setSize(GuiElement::GuiSizeMax, 40);
 }
 
-void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
-{
-    // Update position list.
-    int position_counter = 0;
-
-    // Update the status of each crew position.
-    for(int n = 0; n < max_crew_positions; n++)
-    {
-        string position_name = getCrewPositionName(ECrewPosition(n));
-        string position_state = "-";
-
-        if (target->hasPlayerAtPosition(ECrewPosition(n)))
-        {
-            position_state = "Occupied";
-            position_counter += 1;
-        }
-
-        position[n]->setValue(position_state);
-    }
-
-    // Update the total occupied position count.
-    position_count->setText("Positions occupied: " + string(position_counter));
-
-    // Update the ship's energy level.
-    energy_level_slider->setValue(target->energy_level);
-    max_energy_level_slider->setValue(target->max_energy_level);
-
-    // Update reputation points.
-    reputation_point_slider->setValue(target->getReputationPoints());
-}
-
 void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
 {
     coolant_slider->setValue(target->max_coolant);
@@ -842,7 +868,6 @@ void GuiShipTweakCpu::onDraw(sf::RenderTarget& window)
 void GuiStationTweakBase::onDraw(sf::RenderTarget& window)
 {
     hull_slider->setValue(target->hull_strength);
-    // TODO
 }
 
 void GuiShipTweakPlayer::open(P<SpaceObject> target)

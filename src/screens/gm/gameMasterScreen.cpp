@@ -105,9 +105,6 @@ GameMasterScreen::GameMasterScreen()
             } else if (P<PlayerSpaceship>(obj)) {
                 player_tweak_dialog->open(obj);
                 break;
-            } else if (P<SpaceShip>(obj)) {
-                ship_tweak_dialog->open(obj);
-                break;
             } else {
                 object_tweak_dialog->open(obj);
                 break;
@@ -186,8 +183,6 @@ GameMasterScreen::GameMasterScreen()
     cpu_tweak_dialog->hide();
     player_tweak_dialog = new GuiObjectTweak(this, TW_Player);
     player_tweak_dialog->hide();
-    ship_tweak_dialog = new GuiObjectTweak(this, TW_Ship);
-    ship_tweak_dialog->hide();
     object_tweak_dialog = new GuiObjectTweak(this, TW_Object);
     object_tweak_dialog->hide();
 

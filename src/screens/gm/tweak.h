@@ -20,9 +20,8 @@ class GuiToggleButton;
 enum ETweakType
 {
     TW_Object,  // TODO: Space object
-    TW_Ship,    // Ships
     TW_CpuShip, // Ships
-    TW_Station, // TODO: Space stations
+    TW_Station, // Space stations
     TW_Player   // Player ships
 };
 
@@ -224,6 +223,9 @@ class GuiStationTweakBase : public GuiTweakPage
 private:
     P<SpaceStation> target;
 
+    GuiTextEntry* callsign;
+    GuiTextEntry* description;
+    GuiSlider* heading_slider;
     GuiSlider* hull_max_slider;
     GuiSlider* hull_slider;
     GuiToggleButton* can_be_destroyed_toggle;
