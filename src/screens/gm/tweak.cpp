@@ -656,6 +656,26 @@ void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
     reputation_point_slider->setValue(target->getReputationPoints());
 }
 
+void GuiShipTweakPlayer::open(P<SpaceObject> target)
+{
+    P<PlayerSpaceship> player = target;
+    this->target = player;
+
+    if (player)
+    {
+        // Read ship's control code.
+        control_code->setText(player->control_code);
+
+        // Set and snap boost speed slider to current value
+        combat_maneuver_boost_speed_slider->setValue(player->combat_maneuver_boost_speed);
+        combat_maneuver_boost_speed_slider->clearSnapValues()->addSnapValue(player->combat_maneuver_boost_speed, 20.0f);
+
+        // Set and snap strafe speed slider to current value
+        combat_maneuver_strafe_speed_slider->setValue(player->combat_maneuver_strafe_speed);
+        combat_maneuver_strafe_speed_slider->clearSnapValues()->addSnapValue(player->combat_maneuver_strafe_speed, 20.0f);
+    }
+}
+
 GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
 : GuiTweakPage(owner)
 {
@@ -871,26 +891,6 @@ void GuiShipTweakCpu::onDraw(sf::RenderTarget& window)
 void GuiStationTweakBase::onDraw(sf::RenderTarget& window)
 {
     hull_slider->setValue(target->hull_strength);
-}
-
-void GuiShipTweakPlayer::open(P<SpaceObject> target)
-{
-    P<PlayerSpaceship> player = target;
-    this->target = player;
-
-    if (player)
-    {
-        // Read ship's control code.
-        control_code->setText(player->control_code);
-
-        // Set and snap boost speed slider to current value
-        combat_maneuver_boost_speed_slider->setValue(player->combat_maneuver_boost_speed);
-        combat_maneuver_boost_speed_slider->clearSnapValues()->addSnapValue(player->combat_maneuver_boost_speed, 20.0f);
-
-        // Set and snap strafe speed slider to current value
-        combat_maneuver_strafe_speed_slider->setValue(player->combat_maneuver_strafe_speed);
-        combat_maneuver_strafe_speed_slider->clearSnapValues()->addSnapValue(player->combat_maneuver_strafe_speed, 20.0f);
-    }
 }
 
 void GuiShipTweakPlayer2::open(P<SpaceObject> target)
