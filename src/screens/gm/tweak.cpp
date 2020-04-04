@@ -638,13 +638,14 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
     right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     // Left column
-    (new GuiLabel(left_col, "", "Coolant:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-
+    // Maximum coolant amount
+    (new GuiLabel(left_col, "", "Max coolant:", 30))->setSize(GuiElement::GuiSizeMax, 50);
     coolant_slider = new GuiSlider(left_col, "", 0.0, 50.0, 0.0, [this](float value) {
         target->setMaxCoolant(value);
     });
     coolant_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
+    // Radar ranges
     (new GuiLabel(left_col, "", "Short range radar:", 30))->setSize(GuiElement::GuiSizeMax, 50);
     short_range_radar_slider = new GuiSlider(left_col, "", 100.0, 20000.0, 0.0, [this](float value) {
         target->setShortRangeRadarRange(value);
@@ -658,6 +659,9 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
     long_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     // Right column
+    // Ship capabilities
+    (new GuiLabel(right_col, "", "Capabilities:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
     // Can scan bool
     can_scan = new GuiToggleButton(right_col, "", "Can scan", [this](bool value) {
         target->setCanScan(value);
@@ -693,6 +697,24 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
         target->setCanLaunchProbe(value);
     });
     can_launch_probe->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Shares energy with docked bool
+    shares_energy_with_docked_toggle = new GuiToggleButton(right_col, "", "Shares energy w/docked", [this](bool value) {
+        target->shares_energy_with_docked = value;
+    });
+    shares_energy_with_docked_toggle->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Repairs docked ships bool
+    repair_docked_toggle = new GuiToggleButton(right_col, "", "Repairs docked hulls", [this](bool value) {
+        target->repair_docked = value;
+    });
+    repair_docked_toggle->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Restocks probes bool
+    restocks_scan_probes_toggle = new GuiToggleButton(right_col, "", "Restocks probes", [this](bool value) {
+        target->setRestocksScanProbes(value);
+    });
+    restocks_scan_probes_toggle->setSize(GuiElement::GuiSizeMax, 40);
 }
 
 GuiShipTweakCpu::GuiShipTweakCpu(GuiContainer* owner)
@@ -738,11 +760,33 @@ GuiStationTweakBase::GuiStationTweakBase(GuiContainer* owner)
     });
     hull_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
-   // Can be destroyed bool
-   can_be_destroyed_toggle = new GuiToggleButton(left_col, "", "Could be destroyed", [this](bool value) {
+    // Can be destroyed bool
+    can_be_destroyed_toggle = new GuiToggleButton(left_col, "", "Could be destroyed", [this](bool value) {
        target->setCanBeDestroyed(value);
-   });
-   can_be_destroyed_toggle->setSize(GuiElement::GuiSizeMax, 40);
+    });
+    can_be_destroyed_toggle->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Right column
+    // Station capabilities
+    (new GuiLabel(right_col, "", "Capabilities:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Shares energy with docked bool
+    shares_energy_with_docked_toggle = new GuiToggleButton(right_col, "", "Shares energy w/docked", [this](bool value) {
+        target->setSharesEnergyWithDocked(value);
+    });
+    shares_energy_with_docked_toggle->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Repairs docked ships bool
+    repair_docked_toggle = new GuiToggleButton(right_col, "", "Repairs docked hulls", [this](bool value) {
+        target->setRepairDocked(value);
+    });
+    repair_docked_toggle->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Restocks probes bool
+    restocks_scan_probes_toggle = new GuiToggleButton(right_col, "", "Restocks probes", [this](bool value) {
+        target->setRestocksScanProbes(value);
+    });
+    restocks_scan_probes_toggle->setSize(GuiElement::GuiSizeMax, 40);
 }
 
 void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
@@ -823,7 +867,8 @@ void GuiShipTweakPlayer::open(P<SpaceObject> target)
 
 void GuiShipTweakPlayer2::open(P<SpaceObject> target)
 {
-    this->target = target;
+    P<PlayerSpaceship> player = target;
+    this->target = player;
 }
 
 void GuiShipTweakCpu::open(P<SpaceObject> target)
@@ -841,6 +886,9 @@ void GuiStationTweakBase::open(P<SpaceObject> target)
         hull_max_slider->setValue(station->hull_max);
         hull_max_slider->clearSnapValues()->addSnapValue(station->ship_template->hull, 5.0f);
         can_be_destroyed_toggle->setValue(station->getCanBeDestroyed());
+        restocks_scan_probes_toggle->setValue(station->getRestocksScanProbes());
+        shares_energy_with_docked_toggle->setValue(station->getSharesEnergyWithDocked());
+        repair_docked_toggle->setValue(station->getRepairDocked());
     }
 }
 

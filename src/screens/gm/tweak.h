@@ -194,6 +194,9 @@ private:
     GuiToggleButton* can_combat_maneuver;
     GuiToggleButton* can_self_destruct;
     GuiToggleButton* can_launch_probe;
+    GuiToggleButton* shares_energy_with_docked_toggle;
+    GuiToggleButton* repair_docked_toggle;
+    GuiToggleButton* restocks_scan_probes_toggle;
 public:
     GuiShipTweakPlayer2(GuiContainer* owner);
 
@@ -224,6 +227,9 @@ private:
     GuiSlider* hull_max_slider;
     GuiSlider* hull_slider;
     GuiToggleButton* can_be_destroyed_toggle;
+    GuiToggleButton* shares_energy_with_docked_toggle;
+    GuiToggleButton* repair_docked_toggle;
+    GuiToggleButton* restocks_scan_probes_toggle;
 public:
     GuiStationTweakBase(GuiContainer* owner);
 
