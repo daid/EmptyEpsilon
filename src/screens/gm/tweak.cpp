@@ -766,6 +766,25 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
     restocks_scan_probes_toggle->setSize(GuiElement::GuiSizeMax, 40);
 }
 
+void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
+{
+    coolant_slider->setValue(target->max_coolant);
+    short_range_radar_slider->setValue(target->getShortRangeRadarRange());
+    long_range_radar_slider->setValue(target->getLongRangeRadarRange());
+    can_scan->setValue(target->getCanScan());
+    can_hack->setValue(target->getCanHack());
+    can_dock->setValue(target->getCanDock());
+    can_combat_maneuver->setValue(target->getCanCombatManeuver());
+    can_self_destruct->setValue(target->getCanSelfDestruct());
+    can_launch_probe->setValue(target->getCanLaunchProbe());
+}
+
+void GuiShipTweakPlayer2::open(P<SpaceObject> target)
+{
+    P<PlayerSpaceship> player = target;
+    this->target = player;
+}
+
 GuiShipTweakCpu::GuiShipTweakCpu(GuiContainer* owner)
 : GuiTweakPage(owner)
 {
@@ -784,6 +803,18 @@ GuiShipTweakCpu::GuiShipTweakCpu(GuiContainer* owner)
     repair_rate_slider->setSize(GuiElement::GuiSizeMax, 40);
     repair_rate_overlay_label = new GuiLabel(repair_rate_slider, "REPAIR_RATE_SLIDER_LABEL", "", 30);
     repair_rate_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+}
+
+void GuiShipTweakCpu::onDraw(sf::RenderTarget& window)
+{
+    // Update repair rate.
+    repair_rate_slider->setValue(target->getAutoRepairRate());
+    repair_rate_overlay_label->setText(string(target->getAutoRepairRate(), 4));
+}
+
+void GuiShipTweakCpu::open(P<SpaceObject> target)
+{
+    this->target = target;
 }
 
 GuiStationTweakBase::GuiStationTweakBase(GuiContainer* owner)
@@ -868,40 +899,9 @@ GuiStationTweakBase::GuiStationTweakBase(GuiContainer* owner)
     restocks_scan_probes_toggle->setSize(GuiElement::GuiSizeMax, 40);
 }
 
-void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
-{
-    coolant_slider->setValue(target->max_coolant);
-    short_range_radar_slider->setValue(target->getShortRangeRadarRange());
-    long_range_radar_slider->setValue(target->getLongRangeRadarRange());
-    can_scan->setValue(target->getCanScan());
-    can_hack->setValue(target->getCanHack());
-    can_dock->setValue(target->getCanDock());
-    can_combat_maneuver->setValue(target->getCanCombatManeuver());
-    can_self_destruct->setValue(target->getCanSelfDestruct());
-    can_launch_probe->setValue(target->getCanLaunchProbe());
-}
-
-void GuiShipTweakCpu::onDraw(sf::RenderTarget& window)
-{
-    // Update repair rate.
-    repair_rate_slider->setValue(target->getAutoRepairRate());
-    repair_rate_overlay_label->setText(string(target->getAutoRepairRate(), 4));
-}
-
 void GuiStationTweakBase::onDraw(sf::RenderTarget& window)
 {
     hull_slider->setValue(target->hull_strength);
-}
-
-void GuiShipTweakPlayer2::open(P<SpaceObject> target)
-{
-    P<PlayerSpaceship> player = target;
-    this->target = player;
-}
-
-void GuiShipTweakCpu::open(P<SpaceObject> target)
-{
-    this->target = target;
 }
 
 void GuiStationTweakBase::open(P<SpaceObject> target)
@@ -911,6 +911,9 @@ void GuiStationTweakBase::open(P<SpaceObject> target)
 
     if (station)
     {
+        callsign->setText(station->callsign);
+        description->setText(station->getDescription(SS_NotScanned));
+        heading_slider->setValue(station->getHeading());
         hull_max_slider->setValue(station->hull_max);
         hull_max_slider->clearSnapValues()->addSnapValue(station->ship_template->hull, 5.0f);
         can_be_destroyed_toggle->setValue(station->getCanBeDestroyed());
