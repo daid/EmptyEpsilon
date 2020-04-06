@@ -252,6 +252,8 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Returns a boolean value.
     /// Example: obj:isScannedByFaction("Human Navy")
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isScannedByFaction);
+    // Register a callback that is called when this object is destroyed, by any means.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, onDestroyed);
 }
 
 PVector<SpaceObject> space_object_list;
@@ -302,7 +304,7 @@ void SpaceObject::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position,
 
 void SpaceObject::destroy()
 {
-    onDestroyed();
+    on_destroyed.call(P<SpaceObject>(this));
     MultiplayerObject::destroy();
 }
 
