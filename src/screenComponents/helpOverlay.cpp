@@ -6,7 +6,7 @@
 #include "gui/gui2_panel.h"
 #include "gui/gui2_scrolltext.h"
 
-GuiHelpOverlay::GuiHelpOverlay(GuiCanvas* owner, string title, string contents)
+GuiHelpOverlay::GuiHelpOverlay(GuiContainer* owner, string title, string contents)
 : GuiElement(owner, "HELP_OVERLAY"), owner(owner)
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);

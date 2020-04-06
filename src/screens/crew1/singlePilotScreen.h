@@ -16,13 +16,8 @@ class GuiCombatManeuver;
 class SinglePilotScreen : public GuiOverlay
 {
 private:
-    bool first_person;
-
     GuiOverlay* background_gradient;
     GuiOverlay* background_crosses;
-
-    GuiViewport3D* viewport;
-    GuiElement* left_panel;
 
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* heading_display;

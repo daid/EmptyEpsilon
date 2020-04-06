@@ -10,7 +10,7 @@
 #include "screenComponents/globalMessage.h"
 #include "screenComponents/jumpIndicator.h"
 #include "screenComponents/commsOverlay.h"
-#include "screenComponents/viewport3d.h"
+#include "screenComponents/viewportMainScreen.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/shipDestroyedPopup.h"
 #include "screenComponents/impulseSound.h"
@@ -22,8 +22,7 @@ ScreenMainScreen::ScreenMainScreen()
 {
     new GuiOverlay(this, "", sf::Color::Black);
 
-    viewport = new GuiViewport3D(this, "VIEWPORT");
-    viewport->showCallsigns()->showHeadings()->showSpacedust();
+    viewport = new GuiViewportMainScreen(this, "VIEWPORT");
     viewport->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     
     (new GuiRadarView(viewport, "VIEWPORT_RADAR", nullptr))->setStyle(GuiRadarView::CircularMasked)->setSize(200, 200)->setPosition(-20, 20, ATopRight);
@@ -66,8 +65,6 @@ ScreenMainScreen::ScreenMainScreen()
 
     // Initialize and play the impulse engine sound.
     impulse_sound = std::unique_ptr<ImpulseSound>( new ImpulseSound(PreferencesManager::get("impulse_sound_enabled", "2") != "0") );
-
-    first_person = PreferencesManager::get("first_person") == "1";
 }
 
 void ScreenMainScreen::update(float delta)
@@ -84,54 +81,6 @@ void ScreenMainScreen::update(float delta)
 
     if (my_spaceship)
     {
-        P<SpaceObject> target_ship = my_spaceship->getTarget();
-        float target_camera_yaw = my_spaceship->getRotation();
-        switch(my_spaceship->main_screen_setting)
-        {
-        case MSS_Back: target_camera_yaw += 180; break;
-        case MSS_Left: target_camera_yaw -= 90; break;
-        case MSS_Right: target_camera_yaw += 90; break;
-        case MSS_Target:
-            if (target_ship)
-            {
-                sf::Vector2f target_camera_diff = my_spaceship->getPosition() - target_ship->getPosition();
-                target_camera_yaw = sf::vector2ToAngle(target_camera_diff) + 180;
-            }
-            break;
-        default: break;
-        }
-        camera_pitch = 30.0f;
-
-        float camera_ship_distance = 420.0f;
-        float camera_ship_height = 420.0f;
-        if (first_person)
-        {
-            camera_ship_distance = -my_spaceship->getRadius();
-            camera_ship_height = my_spaceship->getRadius() / 10.f;
-            camera_pitch = 0;
-        }
-        sf::Vector2f cameraPosition2D = my_spaceship->getPosition() + sf::vector2FromAngle(target_camera_yaw) * -camera_ship_distance;
-        sf::Vector3f targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
-#ifdef DEBUG
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-        {
-            targetCameraPosition.x = my_spaceship->getPosition().x;
-            targetCameraPosition.y = my_spaceship->getPosition().y;
-            targetCameraPosition.z = 3000.0;
-            camera_pitch = 90.0f;
-        }
-#endif
-        if (first_person)
-        {
-            camera_position = targetCameraPosition;
-            camera_yaw = target_camera_yaw;
-        }
-        else
-        {
-            camera_position = camera_position * 0.9f + targetCameraPosition * 0.1f;
-            camera_yaw += sf::angleDifference(camera_yaw, target_camera_yaw) * 0.1f;
-        }
-
         switch(my_spaceship->main_screen_setting)
         {
         case MSS_Front:
@@ -244,7 +193,7 @@ void ScreenMainScreen::onHotkey(const HotkeyResult& key)
         else if (key.hotkey == "LONG_RANGE_RADAR")
             my_spaceship->commandMainScreenSetting(MSS_LongRange);
         else if (key.hotkey == "FIRST_PERSON")
-            first_person = !first_person;
+            viewport->first_person = !viewport->first_person;
     }
 }
 

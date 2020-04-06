@@ -10,6 +10,7 @@
 #include "screenComponents/shipDestroyedPopup.h"
 #include "screenComponents/helpOverlay.h"
 #include "screenComponents/impulseSound.h"
+#include "screenComponents/viewportMainScreen.h"
 
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_panel.h"
@@ -18,17 +19,26 @@
 
 CrewStationScreen::CrewStationScreen()
 {
-    select_station_button = new GuiButton(this, "", "", [this]()
+    // Create a 3D viewport behind everything, to serve as the right-side panel
+    viewport = new GuiViewportMainScreen(this, "3D_VIEW");
+    viewport->showCallsigns()->showHeadings()->showSpacedust();
+    viewport->setPosition(1200, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    viewport->hide();
+
+    main_panel = new GuiElement(this, "MAIN");
+    main_panel->setSize(1200, GuiElement::GuiSizeMax);
+
+    select_station_button = new GuiButton(main_panel, "", "", [this]()
     {
         button_strip->show();
     });
     select_station_button->setPosition(-20, 20, ATopRight)->setSize(250, 50);
 
-    button_strip = new GuiPanel(this, "");
+    button_strip = new GuiPanel(main_panel, "");
     button_strip->setPosition(-20, 20, ATopRight)->setSize(250, 50);
     button_strip->hide();
 
-    message_frame = new GuiPanel(this, "");
+    message_frame = new GuiPanel(main_panel, "");
     message_frame->setPosition(0, 0, ATopCenter)->setSize(900, 230)->hide();
     
     message_text = new GuiScrollText(message_frame, "", "");
@@ -48,7 +58,7 @@ CrewStationScreen::CrewStationScreen()
     });
     message_close_button->setTextSize(30)->setPosition(-20, -20, ABottomRight)->setSize(300, 30);
 
-    keyboard_help = new GuiHelpOverlay(this, "Keyboard Shortcuts");
+    keyboard_help = new GuiHelpOverlay(main_panel, "Keyboard Shortcuts");
 
     for (std::pair<string, string> shortcut : listControlsByCategory("General"))
         keyboard_general += shortcut.second + ":\t" + shortcut.first + "\n";
@@ -69,6 +79,11 @@ CrewStationScreen::CrewStationScreen()
 
     // Initialize and play the impulse engine sound.
     impulse_sound = std::unique_ptr<ImpulseSound>( new ImpulseSound(PreferencesManager::get("impulse_sound_enabled", "2") == "1") );
+}
+
+GuiContainer* CrewStationScreen::getTabContainer()
+{
+    return main_panel;
 }
 
 void CrewStationScreen::addStationTab(GuiElement* element, ECrewPosition position, string name, string icon)
@@ -138,6 +153,16 @@ void CrewStationScreen::update(float delta)
         disconnectFromServer();
         returnToMainMenu();
         return;
+    }
+
+    // Responsively show/hide the 3D viewport.
+    if (!main_screen_enabled || viewport->getRect().width < viewport->getRect().height / 3.0f)
+    {
+        viewport->hide();
+        main_panel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    } else {
+        viewport->show();
+        main_panel->setSize(1200, GuiElement::GuiSizeMax);
     }
 
     if (my_spaceship)

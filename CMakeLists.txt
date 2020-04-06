@@ -137,6 +137,7 @@ set(SOURCES
 	src/screenComponents/missileTubeControls.cpp
 	src/screenComponents/selfDestructIndicator.cpp
 	src/screenComponents/viewport3d.cpp
+	src/screenComponents/viewportMainScreen.cpp
 	src/screenComponents/selfDestructEntry.cpp
 	src/screenComponents/dockingButton.cpp
 	src/screenComponents/shieldsEnableButton.cpp

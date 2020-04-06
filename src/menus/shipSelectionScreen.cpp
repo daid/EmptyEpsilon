@@ -49,11 +49,7 @@ ShipSelectionScreen::ShipSelectionScreen()
 
     // Main screen button
     main_screen_button = new GuiToggleButton(stations_layout, "MAIN_SCREEN_BUTTON", "Main screen", [this](bool value) {
-        for(int n=0; n<max_crew_positions; n++)
-        {
-            crew_position_button[n]->setValue(false);
-            my_player_info->commandSetCrewPosition(ECrewPosition(n), crew_position_button[n]->getValue());
-        }
+        my_player_info->commandSetMainScreen(value);
     });
     main_screen_button->setSize(GuiElement::GuiSizeMax, 50);
 
@@ -61,7 +57,6 @@ ShipSelectionScreen::ShipSelectionScreen()
     for(int n = 0; n < max_crew_positions; n++)
     {
         crew_position_button[n] = new GuiToggleButton(stations_layout, "CREW_" + getCrewPositionName(ECrewPosition(n)) + "_BUTTON", getCrewPositionName(ECrewPosition(n)), [this, n](bool value){
-            main_screen_button->setValue(false);
             my_player_info->commandSetCrewPosition(ECrewPosition(n), value);
         });
         crew_position_button[n]->setSize(GuiElement::GuiSizeMax, 50);
@@ -391,6 +386,9 @@ void ShipSelectionScreen::update(float delta)
                     players.push_back(i->name);
                 }
             }
+            std::sort(players.begin(), players.end());
+            players.resize(std::distance(players.begin(), std::unique(players.begin(), players.end())));
+
             if (players.size() > 0)
             {
                 crew_position_button[n]->setText(button_text + " (" + string(", ").join(players) + ")");
@@ -421,7 +419,7 @@ void ShipSelectionScreen::updateReadyButton()
 {
     // Update the Ready button based on crew position button states.
     // If the player is capable of displaying the main screen...
-    if (my_player_info->isMainScreen())
+    if (my_player_info->isOnlyMainScreen())
     {
         // If the main screen button is both available and selected and a
         // player ship is also selected, and the player isn't being asked for a
@@ -460,7 +458,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
     cinematic_view_button->hide();
     spectator_button->hide();
     main_screen_button->setVisible(canDoMainScreen());
-    main_screen_button->setValue(false);
+    main_screen_button->setValue(my_player_info->main_screen);
     main_screen_controls_button->setVisible(crew_type_selector->getSelectionIndex() != 3);
     game_master_button->setValue(false);
     window_button->setValue(false);

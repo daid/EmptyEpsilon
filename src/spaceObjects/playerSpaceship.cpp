@@ -1974,7 +1974,7 @@ void PlayerSpaceship::onReceiveServerCommand(sf::Packet& packet)
             ECrewPosition position;
             string sound_name;
             packet >> position >> sound_name;
-            if ((position == max_crew_positions && my_player_info->isMainScreen()) || my_player_info->crew_position[position])
+            if ((position == max_crew_positions && my_player_info->main_screen) || my_player_info->crew_position[position])
             {
                 soundManager->playSound(sound_name);
             }
