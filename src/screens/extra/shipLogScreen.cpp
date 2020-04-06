@@ -9,7 +9,7 @@ ShipLogScreen::ShipLogScreen(GuiContainer* owner)
 : GuiOverlay(owner, "SHIP_LOG_SCREEN", colorConfig.background)
 {
     GuiAutoLayout* shiplog_layout = new GuiAutoLayout(this, "SHIPLOG_LAYOUT", GuiAutoLayout::LayoutHorizontalRightToLeft);
-    shiplog_layout->setPosition(50, 80)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    shiplog_layout->setPosition(50, 120)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     custom_function_sidebar= new GuiCustomShipFunctions(shiplog_layout, shipLog, "");
     custom_function_sidebar->setSize(270, GuiElement::GuiSizeMax);
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
