@@ -33,7 +33,7 @@ public:
             if (count-- < 0)
             {
                 //** Triangulate: ERROR - probable bad polygon!
-                delete indexes;
+                delete[] indexes;
                 return false;
             }
 
@@ -65,7 +65,7 @@ public:
             }
         }
 
-        delete indexes;
+        delete[] indexes;
         return true;
     }
 

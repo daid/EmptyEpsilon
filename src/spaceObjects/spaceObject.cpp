@@ -287,12 +287,12 @@ SpaceObject::~SpaceObject()
 {
 }
 
-#if FEATURE_3D_RENDERING
 void SpaceObject::draw3D()
 {
+#if FEATURE_3D_RENDERING
     model_info.render(getPosition(), getRotation());
-}
 #endif//FEATURE_3D_RENDERING
+}
 
 void SpaceObject::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool longRange)
 {
