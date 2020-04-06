@@ -167,10 +167,8 @@ public:
         on_destroyed = callback;
     }
 
-#if FEATURE_3D_RENDERING
     virtual void draw3D();
     virtual void draw3DTransparent() {}
-#endif//FEATURE_3D_RENDERING
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool longRange);
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool longRange);
     virtual void destroy();

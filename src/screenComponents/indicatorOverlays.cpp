@@ -42,7 +42,7 @@ GuiIndicatorOverlays::~GuiIndicatorOverlays()
 
 static float glow(float min, float max, float time)
 {
-    return min + (max - min) * fabsf(fmodf(engine->getElapsedTime() / time, 2.0) - 1.0);
+    return min + (max - min) * std::abs(fmodf(engine->getElapsedTime() / time, 2.0) - 1.0);
 }
 
 void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)

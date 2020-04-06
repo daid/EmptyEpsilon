@@ -15,8 +15,8 @@ public:
     GuiCanvas();
     virtual ~GuiCanvas();
 
-    virtual void render(sf::RenderTarget& window);
-    virtual void handleKeyPress(sf::Event::KeyEvent key, int unicode);
+    virtual void render(sf::RenderTarget& window) override;
+    virtual void handleKeyPress(sf::Event::KeyEvent key, int unicode) override;
     virtual void handleJoystickAxis(unsigned int joystickId, sf::Joystick::Axis axis, float position) override;
     virtual void handleJoystickButton(unsigned int joystickId, unsigned int button, bool state) override;
 
