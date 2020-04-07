@@ -355,10 +355,12 @@ void ShipSelectionScreen::update(float delta)
         if (ship)
         {
             string ship_name = ship->getFaction() + " " + ship->getTypeName() + " " + ship->getCallSign();
+
+            int index = player_ship_list->indexByValue(string(n));
             // If a player ship isn't in already in the list, add it.
-            if (player_ship_list->indexByValue(string(n)) == -1)
+            if (index == -1)
             {
-                int index = player_ship_list->addEntry(ship_name, string(n));
+                index = player_ship_list->addEntry(ship_name, string(n));
                 if (my_spaceship == ship)
                     player_ship_list->setSelectionIndex(index);
             }
@@ -370,7 +372,7 @@ void ShipSelectionScreen::update(float delta)
                 if (ship->hasPlayerAtPosition(ECrewPosition(n)))
                     ship_position_count += 1;
             }
-            player_ship_list->setEntryName(n, ship_name + " (" + string(ship_position_count) + ")");
+            player_ship_list->setEntryName(index, ship_name + " (" + string(ship_position_count) + ")");
         }else{
             if (player_ship_list->indexByValue(string(n)) != -1)
                 player_ship_list->removeEntry(player_ship_list->indexByValue(string(n)));
