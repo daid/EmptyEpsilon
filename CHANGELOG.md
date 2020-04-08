@@ -13,7 +13,8 @@
 - Power Management station keybindings, sharing Engineering's.
 - `SpaceShip::setWarpSpeed()` scripting function to set a ship's speed per warp level.
 - Optional control code for the Spectate station.
-- Translation markers added to many more game features, including player stations, log screen, weapon names.
+- Translation markers added to many more game features, including player stations and weapon names.
+- Custom functions added to Ship Log screen.
 - `autoconnect_address` option to specify a server to autoconnect to, instead of relying on server autodiscovery.
 - Toggleable player ship capabilities in ship templates, scripting, and the GM tweak menu: scanning (`canScan()`), hacking (`canHack()`), docking (`canDock()`), combat maneuvering (`canCombatManeuver()`), self destruction (`canSelfDestruct()`), and probe launching (`canLaunchProbe()`)
 - `set` and `getSelfDestructDamage` and `SelfDestructSize` scripting functions to modify player ship self-destruction explosion size and damage.
@@ -46,6 +47,8 @@
 - Fixed some situations that could cause crew screens to crash when selecting Main Screen controls on Linux builds.
 - Ship's Log screen no longer overlaps some station selection controls.
 - Destroyed player ships no longer persist and appear multiple times in the ship selection screen.
+- Joystick event handling no longer results in crew stations persisting after a player exits them.
+- When the window is resized, the rendered area no longer shifts out of the window's bounds when warp/jump/glitch effects occur.
 
 ## [2020-03-22]
 
