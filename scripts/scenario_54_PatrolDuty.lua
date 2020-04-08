@@ -146,6 +146,8 @@ function init()
 	difficultySettingList = {"Easy", "Normal", "Hard", "Self-Destructive"}
 	difficultyIndex = 2		--default to normal difficulty
 	difficulty = difficultyList[difficultyIndex]
+	prefix_length = 0
+	suffix_index = 0
 	setVariations()
 	playerCount = 0
 	--Ship Template Name List
@@ -3537,7 +3539,7 @@ function handleDockedState()
 							comms_source.goods[comms_source.artifactUpgradePart] = comms_source.goods[comms_source.artifactUpgradePart] - 1
 							comms_source.cargo = comms_source.cargo + 1
 							artifactUpgrade()
-							setCommsMessage(string.format("We needed that %2, thanks. Your maneuverability has been significantly improved",comms_source.artifactUpgradePart))
+							setCommsMessage(string.format("We needed that %s, thanks. Your maneuverability has been significantly improved",comms_source.artifactUpgradePart))
 						else
 							setCommsMessage(string.format("To upgrade, we need you to bring us some %s",comms_source.artifactUpgradePart))
 						end
@@ -4415,6 +4417,296 @@ function neutralComms(comms_data)
 		end
 	end
 	return true
+end
+------------------------------------
+--	Generate call sign functions  --
+------------------------------------
+function generateCallSign(prefix,faction)
+	if faction == nil then
+		if prefix == nil then
+			prefix = generateCallSignPrefix()
+		end
+	else
+		if prefix == nil then
+			prefix = getFactionPrefix(faction)
+		else
+			prefix = string.format("%s %s",getFactionPrefix(faction),prefix)
+		end
+	end
+	suffix_index = suffix_index + math.random(1,3)
+	if suffix_index > 999 then 
+		suffix_index = 1
+	end
+	return string.format("%s%i",prefix,suffix_index)
+end
+function generateCallSignPrefix(length)
+	if call_sign_prefix_pool == nil then
+		call_sign_prefix_pool = {}
+		prefix_length = prefix_length + 1
+		if prefix_length > 3 then
+			prefix_length = 1
+		end
+		fillPrefixPool()
+	end
+	if length == nil then
+		length = prefix_length
+	end
+	local prefix_index = 0
+	local prefix = ""
+	for i=1,length do
+		if #call_sign_prefix_pool < 1 then
+			fillPrefixPool()
+		end
+		prefix_index = math.random(1,#call_sign_prefix_pool)
+		prefix = prefix .. call_sign_prefix_pool[prefix_index]
+		table.remove(call_sign_prefix_pool,prefix_index)
+	end
+	return prefix
+end
+function fillPrefixPool()
+	for i=1,26 do
+		table.insert(call_sign_prefix_pool,string.char(i+64))
+	end
+end
+function getFactionPrefix(faction)
+	local faction_prefix = nil
+	if faction == "Kraylor" then
+		if kraylor_names == nil then
+			setKraylorNames()
+		else
+			if #kraylor_names < 1 then
+				setKraylorNames()
+			end
+		end
+		local kraylor_name_choice = math.random(1,#kraylor_names)
+		faction_prefix = kraylor_names[kraylor_name_choice]
+		table.remove(kraylor_names,kraylor_name_choice)
+	end
+	if faction == "Exuari" then
+		if exuari_names == nil then
+			setExuariNames()
+		else
+			if #exuari_names < 1 then
+				setExuariNames()
+			end
+		end
+		local exuari_name_choice = math.random(1,#exuari_names)
+		faction_prefix = exuari_names[exuari_name_choice]
+		table.remove(exuari_names,exuari_name_choice)
+	end
+	if faction_prefix == nil then
+		faction_prefix = generateCallSignPrefix()
+	end
+	return faction_prefix
+end
+function setExuariNames()
+	exuari_names = {}
+	table.insert(exuari_names,"Astonester")
+	table.insert(exuari_names,"Ametripox")
+	table.insert(exuari_names,"Bakeltevex")
+	table.insert(exuari_names,"Baropledax")
+	table.insert(exuari_names,"Batongomox")
+	table.insert(exuari_names,"Bekilvimix")
+	table.insert(exuari_names,"Benoglopok")
+	table.insert(exuari_names,"Bilontipur")
+	table.insert(exuari_names,"Bolictimik")
+	table.insert(exuari_names,"Bomagralax")
+	table.insert(exuari_names,"Buteldefex")
+	table.insert(exuari_names,"Catondinab")
+	table.insert(exuari_names,"Chatorlonox")
+	table.insert(exuari_names,"Culagromik")
+	table.insert(exuari_names,"Dakimbinix")
+	table.insert(exuari_names,"Degintalix")
+	table.insert(exuari_names,"Dimabratax")
+	table.insert(exuari_names,"Dokintifix")
+	table.insert(exuari_names,"Dotandirex")
+	table.insert(exuari_names,"Dupalgawax")
+	table.insert(exuari_names,"Ekoftupex")
+	table.insert(exuari_names,"Elidranov")
+	table.insert(exuari_names,"Fakobrovox")
+	table.insert(exuari_names,"Femoplabix")
+	table.insert(exuari_names,"Fibatralax")
+	table.insert(exuari_names,"Fomartoran")
+	table.insert(exuari_names,"Gateldepex")
+	table.insert(exuari_names,"Gamutrewal")
+	table.insert(exuari_names,"Gesanterux")
+	table.insert(exuari_names,"Gimardanax")
+	table.insert(exuari_names,"Hamintinal")
+	table.insert(exuari_names,"Holangavak")
+	table.insert(exuari_names,"Igolpafik")
+	table.insert(exuari_names,"Inoklomat")
+	table.insert(exuari_names,"Jamewtibex")
+	table.insert(exuari_names,"Jepospagox")
+	table.insert(exuari_names,"Kajortonox")
+	table.insert(exuari_names,"Kapogrinix")
+	table.insert(exuari_names,"Kelitravax")
+	table.insert(exuari_names,"Kipaldanax")
+	table.insert(exuari_names,"Kodendevex")
+	table.insert(exuari_names,"Kotelpedex")
+	table.insert(exuari_names,"Kutandolak")
+	table.insert(exuari_names,"Lakirtinix")
+	table.insert(exuari_names,"Lapoldinek")
+	table.insert(exuari_names,"Lavorbonox")
+	table.insert(exuari_names,"Letirvinix")
+	table.insert(exuari_names,"Lowibromax")
+	table.insert(exuari_names,"Makintibix")
+	table.insert(exuari_names,"Makorpohox")
+	table.insert(exuari_names,"Matoprowox")
+	table.insert(exuari_names,"Mefinketix")
+	table.insert(exuari_names,"Motandobak")
+	table.insert(exuari_names,"Nakustunux")
+	table.insert(exuari_names,"Nequivonax")
+	table.insert(exuari_names,"Nitaldavax")
+	table.insert(exuari_names,"Nobaldorex")
+	table.insert(exuari_names,"Obimpitix")
+	table.insert(exuari_names,"Owaklanat")
+	table.insert(exuari_names,"Pakendesik")
+	table.insert(exuari_names,"Pazinderix")
+	table.insert(exuari_names,"Pefoglamuk")
+	table.insert(exuari_names,"Pekirdivix")
+	table.insert(exuari_names,"Potarkadax")
+	table.insert(exuari_names,"Pulendemex")
+	table.insert(exuari_names,"Quatordunix")
+	table.insert(exuari_names,"Rakurdumux")
+	table.insert(exuari_names,"Ralombenik")
+	table.insert(exuari_names,"Regosporak")
+	table.insert(exuari_names,"Retordofox")
+	table.insert(exuari_names,"Rikondogox")
+	table.insert(exuari_names,"Rokengelex")
+	table.insert(exuari_names,"Rutarkadax")
+	table.insert(exuari_names,"Sakeldepex")
+	table.insert(exuari_names,"Setiftimix")
+	table.insert(exuari_names,"Siparkonal")
+	table.insert(exuari_names,"Sopaldanax")
+	table.insert(exuari_names,"Sudastulux")
+	table.insert(exuari_names,"Takeftebex")
+	table.insert(exuari_names,"Taliskawit")
+	table.insert(exuari_names,"Tegundolex")
+	table.insert(exuari_names,"Tekintipix")
+	table.insert(exuari_names,"Tiposhomox")
+	table.insert(exuari_names,"Tokaldapax")
+	table.insert(exuari_names,"Tomuglupux")
+	table.insert(exuari_names,"Tufeldepex")
+	table.insert(exuari_names,"Unegremek")
+	table.insert(exuari_names,"Uvendipax")
+	table.insert(exuari_names,"Vatorgopox")
+	table.insert(exuari_names,"Venitribix")
+	table.insert(exuari_names,"Vobalterix")
+	table.insert(exuari_names,"Wakintivix")
+	table.insert(exuari_names,"Wapaltunix")
+	table.insert(exuari_names,"Wekitrolax")
+	table.insert(exuari_names,"Wofarbanax")
+	table.insert(exuari_names,"Xeniplofek")
+	table.insert(exuari_names,"Yamaglevik")
+	table.insert(exuari_names,"Yakildivix")
+	table.insert(exuari_names,"Yegomparik")
+	table.insert(exuari_names,"Zapondehex")
+	table.insert(exuari_names,"Zikandelat")
+end
+function setKraylorNames()		
+	kraylor_names = {}
+	table.insert(kraylor_names,"Abroten")
+	table.insert(kraylor_names,"Ankwar")
+	table.insert(kraylor_names,"Bakrik")
+	table.insert(kraylor_names,"Belgor")
+	table.insert(kraylor_names,"Benkop")
+	table.insert(kraylor_names,"Blargvet")
+	table.insert(kraylor_names,"Bloktarg")
+	table.insert(kraylor_names,"Bortok")
+	table.insert(kraylor_names,"Bredjat")
+	table.insert(kraylor_names,"Chankret")
+	table.insert(kraylor_names,"Chatork")
+	table.insert(kraylor_names,"Chokarp")
+	table.insert(kraylor_names,"Cloprak")
+	table.insert(kraylor_names,"Coplek")
+	table.insert(kraylor_names,"Cortek")
+	table.insert(kraylor_names,"Daltok")
+	table.insert(kraylor_names,"Darpik")
+	table.insert(kraylor_names,"Dastek")
+	table.insert(kraylor_names,"Dotark")
+	table.insert(kraylor_names,"Drambok")
+	table.insert(kraylor_names,"Duntarg")
+	table.insert(kraylor_names,"Earklat")
+	table.insert(kraylor_names,"Ekmit")
+	table.insert(kraylor_names,"Fakret")
+	table.insert(kraylor_names,"Fapork")
+	table.insert(kraylor_names,"Fawtrik")
+	table.insert(kraylor_names,"Fenturp")
+	table.insert(kraylor_names,"Feplik")
+	table.insert(kraylor_names,"Figront")
+	table.insert(kraylor_names,"Floktrag")
+	table.insert(kraylor_names,"Fonkack")
+	table.insert(kraylor_names,"Fontreg")
+	table.insert(kraylor_names,"Foondrap")
+	table.insert(kraylor_names,"Frotwak")
+	table.insert(kraylor_names,"Gastonk")
+	table.insert(kraylor_names,"Gentouk")
+	table.insert(kraylor_names,"Gonpruk")
+	table.insert(kraylor_names,"Gortak")
+	table.insert(kraylor_names,"Gronkud")
+	table.insert(kraylor_names,"Hewtang")
+	table.insert(kraylor_names,"Hongtag")
+	table.insert(kraylor_names,"Hortook")
+	table.insert(kraylor_names,"Indrut")
+	table.insert(kraylor_names,"Iprant")
+	table.insert(kraylor_names,"Jakblet")
+	table.insert(kraylor_names,"Jonket")
+	table.insert(kraylor_names,"Jontot")
+	table.insert(kraylor_names,"Kandarp")
+	table.insert(kraylor_names,"Kantrok")
+	table.insert(kraylor_names,"Kiptak")
+	table.insert(kraylor_names,"Kortrant")
+	table.insert(kraylor_names,"Krontgat")
+	table.insert(kraylor_names,"Lobreck")
+	table.insert(kraylor_names,"Lokrant")
+	table.insert(kraylor_names,"Lomprok")
+	table.insert(kraylor_names,"Lutrank")
+	table.insert(kraylor_names,"Makrast")
+	table.insert(kraylor_names,"Moklahft")
+	table.insert(kraylor_names,"Morpug")
+	table.insert(kraylor_names,"Nagblat")
+	table.insert(kraylor_names,"Nokrat")
+	table.insert(kraylor_names,"Nomek")
+	table.insert(kraylor_names,"Notark")
+	table.insert(kraylor_names,"Ontrok")
+	table.insert(kraylor_names,"Orkpent")
+	table.insert(kraylor_names,"Peechak")
+	table.insert(kraylor_names,"Plogrent")
+	table.insert(kraylor_names,"Pokrint")
+	table.insert(kraylor_names,"Potarg")
+	table.insert(kraylor_names,"Prangtil")
+	table.insert(kraylor_names,"Quagbrok")
+	table.insert(kraylor_names,"Quimprill")
+	table.insert(kraylor_names,"Reekront")
+	table.insert(kraylor_names,"Ripkort")
+	table.insert(kraylor_names,"Rokust")
+	table.insert(kraylor_names,"Rontrait")
+	table.insert(kraylor_names,"Saknep")
+	table.insert(kraylor_names,"Sengot")
+	table.insert(kraylor_names,"Skitkard")
+	table.insert(kraylor_names,"Skopgrek")
+	table.insert(kraylor_names,"Sletrok")
+	table.insert(kraylor_names,"Slorknat")
+	table.insert(kraylor_names,"Spogrunk")
+	table.insert(kraylor_names,"Staklurt")
+	table.insert(kraylor_names,"Stonkbrant")
+	table.insert(kraylor_names,"Swaktrep")
+	table.insert(kraylor_names,"Tandrok")
+	table.insert(kraylor_names,"Takrost")
+	table.insert(kraylor_names,"Tonkrut")
+	table.insert(kraylor_names,"Torkrot")
+	table.insert(kraylor_names,"Trablok")
+	table.insert(kraylor_names,"Trokdin")
+	table.insert(kraylor_names,"Unkelt")
+	table.insert(kraylor_names,"Urjop")
+	table.insert(kraylor_names,"Vankront")
+	table.insert(kraylor_names,"Vintrep")
+	table.insert(kraylor_names,"Volkerd")
+	table.insert(kraylor_names,"Vortread")
+	table.insert(kraylor_names,"Wickurt")
+	table.insert(kraylor_names,"Xokbrek")
+	table.insert(kraylor_names,"Yeskret")
+	table.insert(kraylor_names,"Zacktrope")
 end
 -------------------------------------------------------------
 --	First plot line - patrol between stations then defend  --
@@ -6073,6 +6365,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
 			ship:setPosition(xOrigin+fleetPosDelta2x[enemyPosition]*sp,yOrigin+fleetPosDelta2y[enemyPosition]*sp)
 		end
 		table.insert(enemyList, ship)
+		ship:setCallSign(generateCallSign(nil,enemyFaction))
 		enemyStrength = enemyStrength - stsl[shipTemplateType]
 	end
 	return enemyList
