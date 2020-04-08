@@ -89,7 +89,7 @@ GuiContainer* CrewStationScreen::getTabContainer()
 void CrewStationScreen::addStationTab(GuiElement* element, ECrewPosition position, string name, string icon)
 {
     CrewTabInfo info;
-
+    tileViewport();
     element->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     info.position = position;
     info.element = element;
@@ -162,7 +162,7 @@ void CrewStationScreen::update(float delta)
         main_panel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     } else {
         viewport->show();
-        main_panel->setSize(1200, GuiElement::GuiSizeMax);
+        tileViewport();
     }
 
     if (my_spaceship)
@@ -334,6 +334,18 @@ string CrewStationScreen::listHotkeysLimited(string station)
 	}
 
     return ret;
+}
+
+void CrewStationScreen::tileViewport()
+{
+    if (current_position == singlePilot)
+    {
+        main_panel->setSize(1000, GuiElement::GuiSizeMax);
+        viewport->setPosition(1000, 0, ATopLeft);
+    } else {
+        main_panel->setSize(1200, GuiElement::GuiSizeMax);
+        viewport->setPosition(1200, 0, ATopLeft);
+    }
 }
 
 std::vector<std::pair<string, string>> CrewStationScreen::listControlsByCategory(string category){
