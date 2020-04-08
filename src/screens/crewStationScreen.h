@@ -59,6 +59,7 @@ private:
     GuiElement* findTab(string name);
     
     string listHotkeysLimited(string station);
+    void tileViewport();
     std::vector<std::pair<string, string>> listControlsByCategory(string category);
 };
 
