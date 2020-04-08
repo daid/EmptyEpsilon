@@ -38,6 +38,7 @@ GameGlobalInfo::GameGlobalInfo()
     allow_main_screen_tactical_radar = true;
     allow_main_screen_long_range_radar = true;
     gm_control_code = "";
+    elapsed_time = 0.0f;
 
     intercept_all_comms_to_gm = false;
 
@@ -53,6 +54,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&allow_main_screen_tactical_radar);
     registerMemberReplication(&allow_main_screen_long_range_radar);
     registerMemberReplication(&gm_control_code);
+    registerMemberReplication(&elapsed_time, 0.1);
 
     for(unsigned int n=0; n<factionInfo.size(); n++)
         reputation_points.push_back(0);
@@ -120,6 +122,7 @@ void GameGlobalInfo::update(float delta)
                 my_spaceship = game_client->getObjectById(my_player_info->ship_id);
         }
     }
+    elapsed_time += delta;
 }
 
 string GameGlobalInfo::getNextShipCallsign()
@@ -164,6 +167,7 @@ void GameGlobalInfo::reset()
     }
     for(unsigned int n=0; n<reputation_points.size(); n++)
         reputation_points[n] = 0;
+    elapsed_time = 0.0f;
     callsign_counter = 0;
     victory_faction = -1;
 }
