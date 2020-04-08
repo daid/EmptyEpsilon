@@ -98,7 +98,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSendComm);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSendCommPlayer);
     // Command repair crews to automatically move to damaged subsystems.
-    // Use this command on ships to require less player interaction, especially
+    // is command on ships to require less player interaction, especially
     // when combined with setAutoCoolant/auto_coolant_enabled.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAutoRepair);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetBeamFrequency);
@@ -939,8 +939,6 @@ void PlayerSpaceship::addToShipLog(string message, sf::Color color)
         ships_log.erase(ships_log.begin());
 
     // Timestamp a log entry, color it, and add it to the end of the log.
-    // Use gameGlobalInfo's elapsed_time if it's available.
-    // Otherwise, fallback to the engine's elapsed time.
     ships_log.emplace_back(string(gameGlobalInfo->elapsed_time, 1) + string(": "), message, color);
 }
 

@@ -1,0 +1,172 @@
+From f2038176d57d7f39651f1764112d2e1b16aed3ca Mon Sep 17 00:00:00 2001
+From: Garrett Guillotte <garrett+ozgh@oznogon.com>
+Date: Tue, 7 Apr 2020 12:33:07 -0700
+Subject: [PATCH] Use server-replicated mission clock, add to GM
+
+Generate mission clock on the server as gameGlobalInfo->elapsed_time,
+distribute to clients, and reset it across scenarios.
+
+Convert addToShipLog to use gameGlobalInfo->elapsed_time instead of
+engine->getElapsedTime().
+
+Add the mission clock to the GM screen.
+---
+ src/gameGlobalInfo.cpp               |  4 ++++
+ src/gameGlobalInfo.h                 |  1 +
+ src/screens/crew6/relayScreen.cpp    |  3 ++-
+ src/screens/gm/gameMasterScreen.cpp  | 12 +++++++++---
+ src/screens/gm/gameMasterScreen.h    |  1 +
+ src/spaceObjects/playerSpaceship.cpp | 10 ++++++----
+ 6 files changed, 23 insertions(+), 8 deletions(-)
+
+diff --git a/src/gameGlobalInfo.cpp b/src/gameGlobalInfo.cpp
+index 2ceb4c70..e582ea67 100644
+--- a/src/gameGlobalInfo.cpp
++++ b/src/gameGlobalInfo.cpp
+@@ -38,6 +38,7 @@ GameGlobalInfo::GameGlobalInfo()
+     allow_main_screen_tactical_radar = true;
+     allow_main_screen_long_range_radar = true;
+     gm_control_code = "";
++    elapsed_time = 0.0f;
+ 
+     intercept_all_comms_to_gm = false;
+ 
+@@ -53,6 +54,7 @@ GameGlobalInfo::GameGlobalInfo()
+     registerMemberReplication(&allow_main_screen_tactical_radar);
+     registerMemberReplication(&allow_main_screen_long_range_radar);
+     registerMemberReplication(&gm_control_code);
++    registerMemberReplication(&elapsed_time, 0.1);
+ 
+     for(unsigned int n=0; n<factionInfo.size(); n++)
+         reputation_points.push_back(0);
+@@ -120,6 +122,7 @@ void GameGlobalInfo::update(float delta)
+                 my_spaceship = game_client->getObjectById(my_player_info->ship_id);
+         }
+     }
++    elapsed_time += delta;
+ }
+ 
+ string GameGlobalInfo::getNextShipCallsign()
+@@ -164,6 +167,7 @@ void GameGlobalInfo::reset()
+     }
+     for(unsigned int n=0; n<reputation_points.size(); n++)
+         reputation_points[n] = 0;
++    elapsed_time = 0.0f;
+     callsign_counter = 0;
+     victory_faction = -1;
+ }
+diff --git a/src/gameGlobalInfo.h b/src/gameGlobalInfo.h
+index 2a0c4a49..5981bd57 100644
+--- a/src/gameGlobalInfo.h
++++ b/src/gameGlobalInfo.h
+@@ -79,6 +79,7 @@ public:
+     bool allow_main_screen_tactical_radar;
+     bool allow_main_screen_long_range_radar;
+     string gm_control_code;
++    float elapsed_time;
+     string variation = "None";
+ 
+     //List of script functions that can be called from the GM interface (Server only!)
+diff --git a/src/screens/crew6/relayScreen.cpp b/src/screens/crew6/relayScreen.cpp
+index 4ac7a9a7..545054ae 100644
+--- a/src/screens/crew6/relayScreen.cpp
++++ b/src/screens/crew6/relayScreen.cpp
+@@ -1,4 +1,5 @@
+ #include "relayScreen.h"
++#include "gameGlobalInfo.h"
+ #include "playerInfo.h"
+ #include "spaceObjects/playerSpaceship.h"
+ #include "spaceObjects/scanProbe.h"
+@@ -284,7 +285,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
+         hack_target_button->setVisible(my_spaceship->getCanHack());
+ 
+         info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0));
+-        info_clock->setValue(string(engine->getElapsedTime(), 0));
++        info_clock->setValue(string(gameGlobalInfo->elapsed_time, 0));
+         launch_probe_button->setText(tr("Launch Probe") + " (" + string(my_spaceship->scan_probe_stock) + ")");
+     }
+ 
+diff --git a/src/screens/gm/gameMasterScreen.cpp b/src/screens/gm/gameMasterScreen.cpp
+index 7b3769fb..e3a26904 100644
+--- a/src/screens/gm/gameMasterScreen.cpp
++++ b/src/screens/gm/gameMasterScreen.cpp
+@@ -128,7 +128,10 @@ GameMasterScreen::GameMasterScreen()
+ 
+     info_layout = new GuiAutoLayout(this, "INFO_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+     info_layout->setPosition(-20, 20, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+-    
++
++    info_clock = new GuiKeyValueDisplay(info_layout, "INFO_CLOCK", 0.5, tr("Mission Clock"), "");
++    info_clock->setSize(GuiElement::GuiSizeMax, 30);
++
+     gm_script_options = new GuiListbox(this, "GM_SCRIPT_OPTIONS", [this](int index, string value)
+     {
+         gm_script_options->setSelectionIndex(-1);
+@@ -274,7 +277,10 @@ void GameMasterScreen::update(float delta)
+ 
+     order_layout->setVisible(has_cpu_ship);
+     player_comms_hail->setVisible(has_player_ship);
+-    
++
++    // Update mission clock
++    info_clock->setValue(string(gameGlobalInfo->elapsed_time, 0));
++
+     std::unordered_map<string, string> selection_info;
+ 
+     // For each selected object, determine and report their type.
+@@ -298,7 +304,7 @@ void GameMasterScreen::update(float delta)
+     {
+         selection_info["Position"] = string(targets.getTargets()[0]->getPosition().x, 0) + "," + string(targets.getTargets()[0]->getPosition().y, 0);
+     }
+-    
++ 
+     unsigned int cnt = 0;
+     for(std::unordered_map<string, string>::iterator i = selection_info.begin(); i != selection_info.end(); i++)
+     {
+diff --git a/src/screens/gm/gameMasterScreen.h b/src/screens/gm/gameMasterScreen.h
+index 2e07213c..a549c267 100644
+--- a/src/screens/gm/gameMasterScreen.h
++++ b/src/screens/gm/gameMasterScreen.h
+@@ -42,6 +42,7 @@ private:
+     
+     GuiAutoLayout* info_layout;
+     std::vector<GuiKeyValueDisplay*> info_items;
++    GuiKeyValueDisplay* info_clock;
+     GuiListbox* gm_script_options;
+     GuiAutoLayout* order_layout;
+     GuiButton* player_comms_hail;
+diff --git a/src/spaceObjects/playerSpaceship.cpp b/src/spaceObjects/playerSpaceship.cpp
+index 68a53aeb..b1c60e87 100644
+--- a/src/spaceObjects/playerSpaceship.cpp
++++ b/src/spaceObjects/playerSpaceship.cpp
+@@ -389,13 +389,13 @@ PlayerSpaceship::PlayerSpaceship()
+         {
+             destroy();
+         }
++
++        // Initialize the ship's log.
++        addToShipLog("Start of log", colorConfig.log_generic);
+     }
+ 
+     // Initialize player ship callsigns with a "PL" designation.
+     setCallSign("PL" + string(getMultiplayerId()));
+-
+-    // Initialize the ship's log.
+-    addToShipLog("Start of log", colorConfig.log_generic);
+ }
+ 
+ PlayerSpaceship::~PlayerSpaceship()
+@@ -939,7 +939,9 @@ void PlayerSpaceship::addToShipLog(string message, sf::Color color)
+         ships_log.erase(ships_log.begin());
+ 
+     // Timestamp a log entry, color it, and add it to the end of the log.
+-    ships_log.emplace_back(string(engine->getElapsedTime(), 1) + string(": "), message, color);
++    // Use gameGlobalInfo's elapsed_time if it's available.
++    // Otherwise, fallback to the engine's elapsed time.
++    ships_log.emplace_back(string(gameGlobalInfo->elapsed_time, 1) + string(": "), message, color);
+ }
+ 
+ void PlayerSpaceship::addToShipLogBy(string message, P<SpaceObject> target)
+-- 
+2.25.1
+
