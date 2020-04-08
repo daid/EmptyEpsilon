@@ -4908,7 +4908,7 @@ function spawnEnemyFleet(xOrigin, yOrigin, power, danger, enemyFaction, fleetNam
 			ship.fleet = fleetName
 		end
 		table.insert(enemyList, ship)
-		ship:setCallSign(generateCallSign(prefix))
+		ship:setCallSign(generateCallSign(nil,enemyFaction))
 		enemyStrength = enemyStrength - stsl[shipTemplateType]
 	end
 	fleetPower = math.max(fleetPower/danger/difficulty, 5)
@@ -8732,7 +8732,7 @@ function spawnEnemies(xOrigin, yOrigin, danger, enemyFaction, enemyStrength)
 		end
 		ship:setCommsScript(""):setCommsFunction(commsShip)
 		table.insert(enemyList, ship)
-		ship:setCallSign(generateCallSign(prefix))
+		ship:setCallSign(generateCallSign(nil,enemyFaction))
 		enemyStrength = enemyStrength - stsl[shipTemplateType]
 	end
 	return enemyList
@@ -9714,9 +9714,17 @@ function getCoolant8()
 	getCoolantGivenPlayer(p)
 end
 --		Generate call sign functions
-function generateCallSign(prefix)
-	if prefix == nil then
-		prefix = generateCallSignPrefix()
+function generateCallSign(prefix,faction)
+	if faction == nil then
+		if prefix == nil then
+			prefix = generateCallSignPrefix()
+		end
+	else
+		if prefix == nil then
+			prefix = getFactionPrefix(faction)
+		else
+			prefix = string.format("%s %s",getFactionPrefix(faction),prefix)
+		end
 	end
 	suffix_index = suffix_index + math.random(1,3)
 	if suffix_index > 999 then 
@@ -9752,6 +9760,130 @@ function fillPrefixPool()
 	for i=1,26 do
 		table.insert(call_sign_prefix_pool,string.char(i+64))
 	end
+end
+function getFactionPrefix(faction)
+	local faction_prefix = nil
+	if faction == "Kraylor" then
+		if kraylor_names == nil then
+			setKraylorNames()
+		else
+			if #kraylor_names < 1 then
+				setKraylorNames()
+			end
+		end
+		local kraylor_name_choice = math.random(1,#kraylor_names)
+		faction_prefix = kraylor_names[kraylor_name_choice]
+		table.remove(kraylor_names,kraylor_name_choice)
+	end
+	if faction_prefix == nil then
+		faction_prefix = generateCallSignPrefix()
+	end
+	return faction_prefix
+end
+function setKraylorNames()		
+	kraylor_names = {}
+	table.insert(kraylor_names,"Abroten")
+	table.insert(kraylor_names,"Ankwar")
+	table.insert(kraylor_names,"Bakrik")
+	table.insert(kraylor_names,"Belgor")
+	table.insert(kraylor_names,"Benkop")
+	table.insert(kraylor_names,"Blargvet")
+	table.insert(kraylor_names,"Bloktarg")
+	table.insert(kraylor_names,"Bortok")
+	table.insert(kraylor_names,"Bredjat")
+	table.insert(kraylor_names,"Chankret")
+	table.insert(kraylor_names,"Chatork")
+	table.insert(kraylor_names,"Chokarp")
+	table.insert(kraylor_names,"Cloprak")
+	table.insert(kraylor_names,"Coplek")
+	table.insert(kraylor_names,"Cortek")
+	table.insert(kraylor_names,"Daltok")
+	table.insert(kraylor_names,"Darpik")
+	table.insert(kraylor_names,"Dastek")
+	table.insert(kraylor_names,"Dotark")
+	table.insert(kraylor_names,"Drambok")
+	table.insert(kraylor_names,"Duntarg")
+	table.insert(kraylor_names,"Earklat")
+	table.insert(kraylor_names,"Ekmit")
+	table.insert(kraylor_names,"Fakret")
+	table.insert(kraylor_names,"Fapork")
+	table.insert(kraylor_names,"Fawtrik")
+	table.insert(kraylor_names,"Fenturp")
+	table.insert(kraylor_names,"Feplik")
+	table.insert(kraylor_names,"Figront")
+	table.insert(kraylor_names,"Floktrag")
+	table.insert(kraylor_names,"Fonkack")
+	table.insert(kraylor_names,"Fontreg")
+	table.insert(kraylor_names,"Foondrap")
+	table.insert(kraylor_names,"Frotwak")
+	table.insert(kraylor_names,"Gastonk")
+	table.insert(kraylor_names,"Gentouk")
+	table.insert(kraylor_names,"Gonpruk")
+	table.insert(kraylor_names,"Gortak")
+	table.insert(kraylor_names,"Gronkud")
+	table.insert(kraylor_names,"Hewtang")
+	table.insert(kraylor_names,"Hongtag")
+	table.insert(kraylor_names,"Hortook")
+	table.insert(kraylor_names,"Indrut")
+	table.insert(kraylor_names,"Iprant")
+	table.insert(kraylor_names,"Jakblet")
+	table.insert(kraylor_names,"Jonket")
+	table.insert(kraylor_names,"Jontot")
+	table.insert(kraylor_names,"Kandarp")
+	table.insert(kraylor_names,"Kantrok")
+	table.insert(kraylor_names,"Kiptak")
+	table.insert(kraylor_names,"Kortrant")
+	table.insert(kraylor_names,"Krontgat")
+	table.insert(kraylor_names,"Lobreck")
+	table.insert(kraylor_names,"Lokrant")
+	table.insert(kraylor_names,"Lomprok")
+	table.insert(kraylor_names,"Lutrank")
+	table.insert(kraylor_names,"Makrast")
+	table.insert(kraylor_names,"Moklahft")
+	table.insert(kraylor_names,"Morpug")
+	table.insert(kraylor_names,"Nagblat")
+	table.insert(kraylor_names,"Nokrat")
+	table.insert(kraylor_names,"Nomek")
+	table.insert(kraylor_names,"Notark")
+	table.insert(kraylor_names,"Ontrok")
+	table.insert(kraylor_names,"Orkpent")
+	table.insert(kraylor_names,"Peechak")
+	table.insert(kraylor_names,"Plogrent")
+	table.insert(kraylor_names,"Pokrint")
+	table.insert(kraylor_names,"Potarg")
+	table.insert(kraylor_names,"Prangtil")
+	table.insert(kraylor_names,"Quagbrok")
+	table.insert(kraylor_names,"Quimprill")
+	table.insert(kraylor_names,"Reekront")
+	table.insert(kraylor_names,"Ripkort")
+	table.insert(kraylor_names,"Rokust")
+	table.insert(kraylor_names,"Rontrait")
+	table.insert(kraylor_names,"Saknep")
+	table.insert(kraylor_names,"Sengot")
+	table.insert(kraylor_names,"Skitkard")
+	table.insert(kraylor_names,"Skopgrek")
+	table.insert(kraylor_names,"Sletrok")
+	table.insert(kraylor_names,"Slorknat")
+	table.insert(kraylor_names,"Spogrunk")
+	table.insert(kraylor_names,"Staklurt")
+	table.insert(kraylor_names,"Stonkbrant")
+	table.insert(kraylor_names,"Swaktrep")
+	table.insert(kraylor_names,"Tandrok")
+	table.insert(kraylor_names,"Takrost")
+	table.insert(kraylor_names,"Tonkrut")
+	table.insert(kraylor_names,"Torkrot")
+	table.insert(kraylor_names,"Trablok")
+	table.insert(kraylor_names,"Trokdin")
+	table.insert(kraylor_names,"Unkelt")
+	table.insert(kraylor_names,"Urjop")
+	table.insert(kraylor_names,"Vankront")
+	table.insert(kraylor_names,"Vintrep")
+	table.insert(kraylor_names,"Volkerd")
+	table.insert(kraylor_names,"Vortread")
+	table.insert(kraylor_names,"Wickurt")
+	table.insert(kraylor_names,"Xokbrek")
+	table.insert(kraylor_names,"Yeskret")
+	table.insert(kraylor_names,"Zacktrope")
 end
 --------------------
 -- Plot functions --
