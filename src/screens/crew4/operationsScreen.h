@@ -20,7 +20,6 @@ private:
     EMode mode;
     int drag_waypoint_index;
 
-    GuiKeyValueDisplay* info_reputation;
     GuiButton* place_waypoint_button;
     GuiButton* delete_waypoint_button;
 

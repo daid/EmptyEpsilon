@@ -13,7 +13,7 @@ public:
 
     Asteroid();
     
-    virtual void draw3D();
+    virtual void draw3D() override;
 
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
 
@@ -34,7 +34,7 @@ public:
 
     VisualAsteroid();
 
-    virtual void draw3D();
+    virtual void draw3D() override;
     
     void setSize(float size);
 

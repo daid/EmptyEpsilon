@@ -10,7 +10,6 @@ class GuiScrollText;
 class GuiHelpOverlay : public GuiElement
 {
 private:
-    GuiContainer* owner;
     GuiScrollText* text;
 
     string help_text = "";
