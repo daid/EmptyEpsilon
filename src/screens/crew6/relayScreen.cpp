@@ -148,7 +148,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     info_reputation->setSize(GuiElement::GuiSizeMax, 40);
 
     // Mission clock display.
-    info_clock = new GuiKeyValueDisplay(option_buttons, "INFO_CLOCK", 0.7, tr("Mission Clock:"), "");
+    info_clock = new GuiKeyValueDisplay(option_buttons, "INFO_CLOCK", 0.7, tr("Mission Clock") + ":", "");
     info_clock->setSize(GuiElement::GuiSizeMax, 40);
 
     // Bottom layout.
