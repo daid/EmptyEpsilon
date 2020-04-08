@@ -1,4 +1,5 @@
 #include "relayScreen.h"
+#include "gameGlobalInfo.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/scanProbe.h"
@@ -284,7 +285,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
         hack_target_button->setVisible(my_spaceship->getCanHack());
 
         info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0));
-        info_clock->setValue(string(engine->getElapsedTime(), 0));
+        info_clock->setValue(string(gameGlobalInfo->elapsed_time, 0));
         launch_probe_button->setText(tr("Launch Probe") + " (" + string(my_spaceship->scan_probe_stock) + ")");
     }
 

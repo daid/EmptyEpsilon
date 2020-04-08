@@ -389,13 +389,13 @@ PlayerSpaceship::PlayerSpaceship()
         {
             destroy();
         }
+
+        // Initialize the ship's log.
+        addToShipLog("Start of log", colorConfig.log_generic);
     }
 
     // Initialize player ship callsigns with a "PL" designation.
     setCallSign("PL" + string(getMultiplayerId()));
-
-    // Initialize the ship's log.
-    addToShipLog("Start of log", colorConfig.log_generic);
 }
 
 PlayerSpaceship::~PlayerSpaceship()
@@ -939,7 +939,9 @@ void PlayerSpaceship::addToShipLog(string message, sf::Color color)
         ships_log.erase(ships_log.begin());
 
     // Timestamp a log entry, color it, and add it to the end of the log.
-    ships_log.emplace_back(string(engine->getElapsedTime(), 1) + string(": "), message, color);
+    // Use gameGlobalInfo's elapsed_time if it's available.
+    // Otherwise, fallback to the engine's elapsed time.
+    ships_log.emplace_back(string(gameGlobalInfo->elapsed_time, 1) + string(": "), message, color);
 }
 
 void PlayerSpaceship::addToShipLogBy(string message, P<SpaceObject> target)
