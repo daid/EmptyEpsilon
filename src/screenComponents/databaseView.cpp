@@ -3,6 +3,7 @@
 #include "scienceDatabase.h"
 
 #include "gui/gui2_listbox.h"
+#include "gui/gui2_image.h"
 #include "gui/gui2_autolayout.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_scrolltext.h"
@@ -101,14 +102,22 @@ void DatabaseViewComponent::display(P<ScienceDatabase> entry)
     {
         (new GuiKeyValueDisplay(layout, "", 0.37, entry->keyValuePairs[n].key, entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
     }
-    if (entry->model_data)
+    if (entry->model_data || entry->image != "")
     {
         float x = 450;
         if (entry->keyValuePairs.size() == 0 && entry->longDescription.length() == 0) {
             x = 0;
         }
-        //TODO: std::min(GuiElement::GuiSizeMatchWidth, 370.0f)
-        (new GuiRotatingModelView(database_entry, "DATABASE_MODEL_VIEW", entry->model_data))->setPosition(x, -50, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMatchWidth);
+        if(entry->image != "")
+        {
+            (new GuiImage(database_entry, "DATABASE_IMAGE", entry->image))->setScaleUp(false)->setPosition(x, 0, ATopLeft)->setMargins(0, 0, 20, 20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMatchWidth);
+        }
+
+        if (entry->model_data)
+        {
+            //TODO: std::min(GuiElement::GuiSizeMatchWidth, 370.0f)
+            (new GuiRotatingModelView(database_entry, "DATABASE_MODEL_VIEW", entry->model_data))->setPosition(x, -50, ATopLeft)->setMargins(0, 0, 20, 20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMatchWidth);
+        }
 
         if (entry->longDescription.length() > 0)
         {
