@@ -51,7 +51,7 @@ void ScienceDatabase::setLongDescription(string text)
     longDescription = text;
 }
 
-string directionLabel(float direction)
+static string directionLabel(float direction)
 {
     string name = "?";
     if (std::abs(sf::angleDifference(0.0f, direction)) <= 45)
@@ -160,8 +160,11 @@ void fillDefaultDatabaseData()
             if (ship_template->beams[n].getRange() > 0)
             {
                 entry->addKeyValue(
-                    tr("{direction} beam weapon").format({{"direction": directionLabel(ship_template->beams[n].getDirection()}}),
-                    tr("database", "{damage} Dmg / {interval} sec").format({{"damage", string(ship_template->beams[n].getDamage(), 1)}, {"interval", string(ship_template->beams[n].getCycleTime(), 1)}})
+                    tr("{direction} beam weapon").format({{"direction", directionLabel(ship_template->beams[n].getDirection())}}),
+                    tr("database", "{damage} Dmg / {interval} sec").format({
+                        {"damage", string(ship_template->beams[n].getDamage(), 1)},
+                        {"interval", string(ship_template->beams[n].getCycleTime(), 1)}
+                    })
                 );
             }
         }
@@ -177,7 +180,7 @@ void fillDefaultDatabaseData()
                 key = tr("database", "{direction} large tube");
             }
             entry->addKeyValue(
-                key.format({{"direction", directionLabel(ship_template->weapon_tube[n].direction)},
+                key.format({{"direction", directionLabel(ship_template->weapon_tube[n].direction)}}),
                 tr("database", "{loadtime} sec").format({{"loadtime", string(int(ship_template->weapon_tube[n].load_time))}})
             );
         }
