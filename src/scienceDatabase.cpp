@@ -121,6 +121,7 @@ void fillDefaultDatabaseData()
         P<ScienceDatabase> entry = class_database_entries[ship_template->getClass()]->addEntry(template_name);
         
         entry->model_data = ship_template->model_data;
+        entry->setImage(ship_template->radar_trace);
 
         entry->addKeyValue("Class", ship_template->getClass());
         entry->addKeyValue("Sub-class", ship_template->getSubClass());
