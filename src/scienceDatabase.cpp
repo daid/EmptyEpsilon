@@ -11,6 +11,7 @@ REGISTER_SCRIPT_CLASS(ScienceDatabase)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, addEntry);
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, addKeyValue);
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setLongDescription);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setImage);
 }
 
 
