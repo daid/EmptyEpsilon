@@ -27,6 +27,7 @@ public:
     std::vector<ScienceDatabaseKeyValue> keyValuePairs;
     string longDescription;
     P<ModelData> model_data;
+    string image;
 
     ScienceDatabase();
     ScienceDatabase(P<ScienceDatabase> parent, string name);
@@ -36,9 +37,13 @@ public:
     void setLongDescription(string text);
 
     void setName(string name) { this->name = name; }
+    void setImage(string path) {
+        image = path;
+    }
     P<ScienceDatabase> addEntry(string name);
     string getName() {return this->name;}
 private:
+    string directionLabel(float direction);
 
 public: /* static members */
     static PVector<ScienceDatabase> science_databases;

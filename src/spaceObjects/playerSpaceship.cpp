@@ -98,7 +98,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSendComm);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSendCommPlayer);
     // Command repair crews to automatically move to damaged subsystems.
-    // Use this command on ships to require less player interaction, especially
+    // is command on ships to require less player interaction, especially
     // when combined with setAutoCoolant/auto_coolant_enabled.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAutoRepair);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetBeamFrequency);
@@ -135,6 +135,72 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getShortRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setLongRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setShortRangeRadarRange);
+    /// Set whether the object can scan other objects.
+    /// Requires a Boolean value.
+    /// Example: ship:setCanScan(true)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setCanScan);
+    /// Get whether the object can scan other objects.
+    /// Returns a Boolean value.
+    /// Example: ship:getCanScan()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getCanScan);
+    /// Set whether the object can hack other objects.
+    /// Requires a Boolean value.
+    /// Example: ship:setCanHack(true)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setCanHack);
+    /// Get whether the object can hack other objects.
+    /// Returns a Boolean value.
+    /// Example: ship:getCanHack()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getCanHack);
+    /// Set whether the object can dock with other objects.
+    /// Requires a Boolean value.
+    /// Example: ship:setCanDock(true)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setCanDock);
+    /// Get whether the object can dock with other objects.
+    /// Returns a Boolean value.
+    /// Example: ship:getCanDock()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getCanDock);
+    /// Set whether the object can perform combat maneuvers.
+    /// Requires a Boolean value.
+    /// Example: ship:setCanCombatManeuver(true)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setCanCombatManeuver);
+    /// Get whether the object can perform combat maneuvers.
+    /// Returns a Boolean value.
+    /// Example: ship:getCanCombatManeuver()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getCanCombatManeuver);
+    /// Set whether the object can self destruct.
+    /// Requires a Boolean value.
+    /// Example: ship:setCanSelfDestruct(true)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setCanSelfDestruct);
+    /// Get whether the object can self destruct.
+    /// This returns false if self destruct size and damage are both 0, even if
+    /// you set setCanSelfDestruct(true).
+    /// Returns a Boolean value.
+    /// Example: ship:getCanSelfDestruct()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getCanSelfDestruct);
+    /// Set whether the object can launch probes.
+    /// Requires a Boolean value.
+    /// Example: ship:setCanLaunchProbe(true)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setCanLaunchProbe);
+    /// Get whether the object can launch probes.
+    /// Returns a Boolean value.
+    /// Example: ship:getCanLaunchProbe()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getCanLaunchProbe);
+    /// Set the amount of damage done by self destruction.
+    /// Requires a float; the value used is randomized +/- 33%.
+    /// Example: ship:setSelfDestructDamage(150)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setSelfDestructDamage);
+    /// Get the amount of damage done by self destruction.
+    /// Returns a float.
+    /// Example: ship:getSelfDestructDamage()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getSelfDestructDamage);
+    /// Set the size of the explosion created by self destruction.
+    /// Requires a float.
+    /// Example: ship:setSelfDestructSize(1500)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setSelfDestructSize);
+    /// Get the size of the explosion created by self destruction.
+    /// Returns a float.
+    /// Example: ship:getSelfDestructSize()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getSelfDestructSize);
 }
 
 float PlayerSpaceship::system_power_user_factor[] = {
@@ -237,14 +303,7 @@ PlayerSpaceship::PlayerSpaceship()
     auto_repair_enabled = false;
     auto_coolant_enabled = false;
     max_coolant = max_coolant_per_system;
-    activate_self_destruct = false;
-    self_destruct_countdown = 0.0;
-    scanning_delay = 0.0;
-    scanning_complexity = 0;
-    scanning_depth = 0;
-    max_scan_probes = 8;
     scan_probe_stock = max_scan_probes;
-    scan_probe_recharge = 0.0;
     alert_level = AL_Normal;
     shields_active = false;
     control_code = "";
@@ -256,6 +315,12 @@ PlayerSpaceship::PlayerSpaceship()
         setScannedStateForFaction(faction_id, SS_FullScan);
 
     updateMemberReplicationUpdateDelay(&target_rotation, 0.1);
+    registerMemberReplication(&can_scan);
+    registerMemberReplication(&can_hack);
+    registerMemberReplication(&can_dock);
+    registerMemberReplication(&can_combat_maneuver);
+    registerMemberReplication(&can_self_destruct);
+    registerMemberReplication(&can_launch_probe);
     registerMemberReplication(&hull_damage_indicator, 0.5);
     registerMemberReplication(&jump_indicator, 0.5);
     registerMemberReplication(&energy_level, 0.1);
@@ -324,13 +389,13 @@ PlayerSpaceship::PlayerSpaceship()
         {
             destroy();
         }
+
+        // Initialize the ship's log.
+        addToShipLog("Start of log", colorConfig.log_generic);
     }
 
     // Initialize player ship callsigns with a "PL" designation.
     setCallSign("PL" + string(getMultiplayerId()));
-
-    // Initialize the ship's log.
-    addToShipLog("Start of log", colorConfig.log_generic);
 }
 
 PlayerSpaceship::~PlayerSpaceship()
@@ -576,20 +641,20 @@ void PlayerSpaceship::update(float delta)
                 // If the countdown has started, tick the clock.
                 self_destruct_countdown -= delta;
 
-                // When time runs out, blow up the ship and damage a 1.5U
-                // radius.
+                // When time runs out, blow up the ship and damage a
+                // configurable radius.
                 if (self_destruct_countdown <= 0.0)
                 {
                     for(int n = 0; n < 5; n++)
                     {
                         ExplosionEffect* e = new ExplosionEffect();
-                        e->setSize(1000.0f);
-                        e->setPosition(getPosition() + sf::rotateVector(sf::Vector2f(0, random(0, 500)), random(0, 360)));
+                        e->setSize(self_destruct_size * 0.67f);
+                        e->setPosition(getPosition() + sf::rotateVector(sf::Vector2f(0, random(0, self_destruct_size * 0.33f)), random(0, 360)));
                         e->setRadarSignatureInfo(0.0, 0.6, 0.6);
                     }
 
                     DamageInfo info(this, DT_Kinetic, getPosition());
-                    SpaceObject::damageArea(getPosition(), 1500, 100, 200, info, 0.0);
+                    SpaceObject::damageArea(getPosition(), self_destruct_size, self_destruct_damage - (self_destruct_damage / 3.0f), self_destruct_damage + (self_destruct_damage / 3.0f), info, 0.0);
 
                     destroy();
                     return;
@@ -653,8 +718,17 @@ void PlayerSpaceship::applyTemplateValues()
     // template.
     setRepairCrewCount(ship_template->repair_crew_count);
 
+    // Set the ship's radar ranges.
     long_range_radar_range = ship_template->long_range_radar_range;
     short_range_radar_range = ship_template->short_range_radar_range;
+
+    // Set the ship's capabilities.
+    can_scan = ship_template->can_scan;
+    can_hack = ship_template->can_hack;
+    can_dock = ship_template->can_dock;
+    can_combat_maneuver = ship_template->can_combat_maneuver;
+    can_self_destruct = ship_template->can_self_destruct;
+    can_launch_probe = ship_template->can_launch_probe;
 }
 
 void PlayerSpaceship::executeJump(float distance)
@@ -865,7 +939,7 @@ void PlayerSpaceship::addToShipLog(string message, sf::Color color)
         ships_log.erase(ships_log.begin());
 
     // Timestamp a log entry, color it, and add it to the end of the log.
-    ships_log.emplace_back(string(engine->getElapsedTime(), 1) + string(": "), message, color);
+    ships_log.emplace_back(string(gameGlobalInfo->elapsed_time, 1) + string(": "), message, color);
 }
 
 void PlayerSpaceship::addToShipLogBy(string message, P<SpaceObject> target)
@@ -1900,7 +1974,7 @@ void PlayerSpaceship::onReceiveServerCommand(sf::Packet& packet)
             ECrewPosition position;
             string sound_name;
             packet >> position >> sound_name;
-            if ((position == max_crew_positions && my_player_info->isMainScreen()) || my_player_info->crew_position[position])
+            if ((position == max_crew_positions && my_player_info->main_screen) || my_player_info->crew_position[position])
             {
                 soundManager->playSound(sound_name);
             }
@@ -1963,6 +2037,18 @@ string PlayerSpaceship::getExportLine()
         result += ":setShortRangeRadarRange(" + string(short_range_radar_range, 0) + ")";
     if (long_range_radar_range != ship_template->long_range_radar_range)
         result += ":setLongRangeRadarRange(" + string(long_range_radar_range, 0) + ")";
+    if (can_scan != ship_template->can_scan)
+        result += ":setCanScan(" + string(can_scan, true) + ")";
+    if (can_hack != ship_template->can_hack)
+        result += ":setCanHack(" + string(can_hack, true) + ")";
+    if (can_dock != ship_template->can_dock)
+        result += ":setCanDock(" + string(can_dock, true) + ")";
+    if (can_combat_maneuver != ship_template->can_combat_maneuver)
+        result += ":setCanCombatManeuver(" + string(can_combat_maneuver, true) + ")";
+    if (can_self_destruct != ship_template->can_self_destruct)
+        result += ":setCanSelfDestruct(" + string(can_self_destruct, true) + ")";
+    if (can_launch_probe != ship_template->can_launch_probe)
+        result += ":setCanLaunchProbe(" + string(can_launch_probe, true) + ")";
     return result;
 }
 

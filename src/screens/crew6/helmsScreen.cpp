@@ -4,6 +4,7 @@
 #include "helmsScreen.h"
 #include "preferenceManager.h"
 
+#include "screenComponents/combatManeuver.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/impulseControls.h"
 #include "screenComponents/warpControls.h"
@@ -33,8 +34,8 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", nullptr);
     
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
-    combat_maneuver->setPosition(-20, -20, ABottomRight)->setSize(280, 215);
-    
+    combat_maneuver->setPosition(-20, -20, ABottomRight)->setSize(280, 215)->setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
+
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->enableMissileTubeIndicators();
@@ -79,7 +80,8 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     warp_controls = (new GuiWarpControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
     jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
     
-    (new GuiDockingButton(this, "DOCKING"))->setPosition(20, -20, ABottomLeft)->setSize(280, 50);
+    docking_button = new GuiDockingButton(this, "DOCKING");
+    docking_button->setPosition(20, -20, ABottomLeft)->setSize(280, 50)->setVisible(my_spaceship && my_spaceship->getCanDock());
 
     (new GuiCustomShipFunctions(this, helmsOfficer, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
@@ -100,23 +102,32 @@ void HelmsScreen::onDraw(sf::RenderTarget& window)
 }
 
 bool HelmsScreen::onJoystickAxis(const AxisAction& axisAction){
-    if(my_spaceship){
-        if (axisAction.category == "HELMS"){
-            if (axisAction.action == "IMPULSE"){
-                my_spaceship->commandImpulse(axisAction.value);  
+    if (my_spaceship)
+    {
+        if (axisAction.category == "HELMS")
+        {
+            if (axisAction.action == "IMPULSE")
+            {
+                my_spaceship->commandImpulse(axisAction.value);
                 return true;
-            } 
-            if (axisAction.action == "ROTATE"){
+            }
+            if (axisAction.action == "ROTATE")
+            {
                 my_spaceship->commandTurnSpeed(axisAction.value);
                 return true;
-            } 
-            if (axisAction.action == "STRAFE"){
-                my_spaceship->commandCombatManeuverStrafe(axisAction.value);
-                return true;
-            } 
-            if (axisAction.action == "BOOST"){
-                my_spaceship->commandCombatManeuverBoost(axisAction.value);
-                return true;
+            }
+            if (my_spaceship->getCanCombatManeuver())
+            {
+                if (axisAction.action == "STRAFE")
+                {
+                    my_spaceship->commandCombatManeuverStrafe(axisAction.value);
+                    return true;
+                }
+                if (axisAction.action == "BOOST")
+                {
+                    my_spaceship->commandCombatManeuverBoost(axisAction.value);
+                    return true;
+                }
             }
         }
     }

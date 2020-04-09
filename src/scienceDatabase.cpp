@@ -11,6 +11,7 @@ REGISTER_SCRIPT_CLASS(ScienceDatabase)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, addEntry);
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, addKeyValue);
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setLongDescription);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setImage);
 }
 
 
@@ -48,6 +49,20 @@ void ScienceDatabase::addKeyValue(string key, string value)
 void ScienceDatabase::setLongDescription(string text)
 {
     longDescription = text;
+}
+
+string directionLabel(float direction)
+{
+    string name = "?";
+    if (std::abs(sf::angleDifference(0.0f, direction)) <= 45)
+        name = tr("database direction", "Front");
+    if (std::abs(sf::angleDifference(90.0f, direction)) < 45)
+        name = tr("database direction", "Right");
+    if (std::abs(sf::angleDifference(-90.0f, direction)) < 45)
+        name = tr("database direction", "Left");
+    if (std::abs(sf::angleDifference(180.0f, direction)) <= 45)
+        name = tr("database direction", "Rear");
+    return name;
 }
 
 void fillDefaultDatabaseData()
@@ -107,51 +122,64 @@ void fillDefaultDatabaseData()
         P<ScienceDatabase> entry = class_database_entries[ship_template->getClass()]->addEntry(template_name);
         
         entry->model_data = ship_template->model_data;
+        entry->setImage(ship_template->radar_trace);
 
         entry->addKeyValue(tr("database", "Class"), ship_template->getClass());
         entry->addKeyValue(tr("database", "Sub-class"), ship_template->getSubClass());
         entry->addKeyValue(tr("database", "Size"), string(int(ship_template->model_data->getRadius())));
-        string shield_info = "";
-        for(int n=0; n<ship_template->shield_count; n++)
+        if (ship_template->shield_count > 0)
         {
-            if (n > 0)
-                shield_info += "/";
-            shield_info += string(int(ship_template->shield_level[n]));
+            string shield_info = "";
+            for(int n=0; n<ship_template->shield_count; n++)
+            {
+                if (n > 0)
+                    shield_info += "/";
+                shield_info += string(int(ship_template->shield_level[n]));
+            }
+            entry->addKeyValue(tr("database", "Shield"), shield_info);
         }
-        entry->addKeyValue(tr("database", "Shield"), shield_info);
         entry->addKeyValue(tr("Hull"), string(int(ship_template->hull)));
-        entry->addKeyValue(tr("database", "Move speed"), string(int(ship_template->impulse_speed)));
-        entry->addKeyValue(tr("database", "Turn speed"), string(int(ship_template->turn_speed)));
+
+        if (ship_template->impulse_speed > 0.0)
+        {
+            entry->addKeyValue(tr("database", "Move speed"), string(ship_template->impulse_speed * 60 / 1000, 1) + " u/min");
+        }
+        if (ship_template->turn_speed > 0.0) {
+            entry->addKeyValue(tr("database", "Turn speed"), string(ship_template->turn_speed, 1) + " deg/sec");
+        }
         if (ship_template->warp_speed > 0.0)
         {
-            entry->addKeyValue(tr("database", "Has warp drive"), tr("hasdrive","True"));
-            entry->addKeyValue(tr("database", "Warp speed"), string(int(ship_template->warp_speed)));
+            entry->addKeyValue(tr("database", "Warp speed"), string(ship_template->warp_speed * 60 / 1000, 1) + " u/min");
         }
         if (ship_template->has_jump_drive)
         {
-            entry->addKeyValue(tr("Has jump drive"), tr("hasdrive","True"));
+            entry->addKeyValue(tr("database", "Jump range"), string(ship_template->jump_drive_min_distance / 1000, 0) + " - " + string(ship_template->jump_drive_max_distance / 1000, 0) + " u");
         }
         for(int n=0; n<max_beam_weapons; n++)
         {
             if (ship_template->beams[n].getRange() > 0)
             {
-                string name = "?";
-                if (std::abs(sf::angleDifference(0.0f, ship_template->beams[n].getDirection())) <= 45)
-                    name = tr("database", "Front beam weapon");
-                if (std::abs(sf::angleDifference(90.0f, ship_template->beams[n].getDirection())) < 45)
-                    name = tr("database", "Right beam weapon");
-                if (std::abs(sf::angleDifference(-90.0f, ship_template->beams[n].getDirection())) < 45)
-                    name = tr("database", "Left beam weapon");
-                if (std::abs(sf::angleDifference(180.0f, ship_template->beams[n].getDirection())) <= 45)
-                    name = tr("database", "Rear beam weapon");
-
-                entry->addKeyValue(name, string(ship_template->beams[n].getDamage() / ship_template->beams[n].getCycleTime(), 2) + " "+ tr("damage","DPS"));
+                entry->addKeyValue(
+                    tr("{direction} beam weapon").format({{"direction": directionLabel(ship_template->beams[n].getDirection()}}),
+                    tr("database", "{damage} Dmg / {interval} sec").format({{"damage", string(ship_template->beams[n].getDamage(), 1)}, {"interval", string(ship_template->beams[n].getCycleTime(), 1)}})
+                );
             }
         }
-        if (ship_template->weapon_tube_count > 0)
+        for(int n=0; n<ship_template->weapon_tube_count; n++)
         {
-            entry->addKeyValue(tr("database", "Missile tubes"), string(ship_template->weapon_tube_count));
-            entry->addKeyValue(tr("database", "Missile load time"), string(int(ship_template->weapon_tube[0].load_time)));
+            string key = tr("database", "{direction} tube");
+            if (ship_template->weapon_tube[n].size == MS_Small)
+            {
+                key = tr("database", "{direction} small tube");
+            }
+            if (ship_template->weapon_tube[n].size == MS_Large)
+            {
+                key = tr("database", "{direction} large tube");
+            }
+            entry->addKeyValue(
+                key.format({{"direction", directionLabel(ship_template->weapon_tube[n].direction)},
+                tr("database", "{loadtime} sec").format({{"loadtime", string(int(ship_template->weapon_tube[n].load_time))}})
+            );
         }
         for(int n=0; n < MW_Count; n++)
         {

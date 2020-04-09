@@ -11,17 +11,13 @@ class GuiRadarView;
 class GuiKeyValueDisplay;
 class GuiToggleButton;
 class GuiRotationDial;
+class GuiCombatManeuver;
 
 class SinglePilotScreen : public GuiOverlay
 {
 private:
-    bool first_person;
-
     GuiOverlay* background_gradient;
     GuiOverlay* background_crosses;
-
-    GuiViewport3D* viewport;
-    GuiElement* left_panel;
 
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* heading_display;
@@ -29,6 +25,7 @@ private:
     GuiKeyValueDisplay* shields_display;
     GuiElement* warp_controls;
     GuiElement* jump_controls;
+    GuiCombatManeuver* combat_maneuver;
     
     TargetsContainer targets;
     GuiRadarView* radar;

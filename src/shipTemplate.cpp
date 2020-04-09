@@ -75,6 +75,13 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadarTrace);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLongRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShortRangeRadarRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setImpulseSoundFile);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanScan);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanHack);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanDock);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanCombatManeuver);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanSelfDestruct);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCanLaunchProbe);
     /// Return a new template with the given name, which is an exact copy of this template.
     /// Used to make easy variations of templates.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, copy);
@@ -119,6 +126,7 @@ ShipTemplate::ShipTemplate()
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = 0;
     radar_trace = "RadarArrow.png";
+    impulse_sound_file = "sfx/engine.wav";
 }
 
 void ShipTemplate::setBeamTexture(int index, string texture)
@@ -458,6 +466,11 @@ void ShipTemplate::setShortRangeRadarRange(float range)
     long_range_radar_range = std::max(long_range_radar_range, range);
 }
 
+void ShipTemplate::setImpulseSoundFile(string sound)
+{
+    impulse_sound_file = sound;
+}
+
 P<ShipTemplate> ShipTemplate::copy(string new_name)
 {
     P<ShipTemplate> result = new ShipTemplate();
@@ -472,6 +485,14 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->can_be_docked_by_class = can_be_docked_by_class;
     result->energy_storage_amount = energy_storage_amount;
     result->repair_crew_count = repair_crew_count;
+
+    result->can_scan = can_scan;
+    result->can_hack = can_hack;
+    result->can_dock = can_dock;
+    result->can_combat_maneuver = can_combat_maneuver;
+    result->can_self_destruct = can_self_destruct;
+    result->can_launch_probe = can_launch_probe;
+
     result->default_ai_name = default_ai_name;
     for(int n=0; n<max_beam_weapons; n++)
         result->beams[n] = beams[n];

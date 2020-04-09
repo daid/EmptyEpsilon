@@ -5,6 +5,7 @@
 #include "shipTemplate.h"
 #include "playerInfo.h"
 
+class GuiSelfDestructButton;
 class GuiKeyValueDisplay;
 class GuiLabel;
 class GuiSlider;
@@ -18,7 +19,6 @@ class GuiProgressSlider;
 class EngineeringScreen : public GuiOverlay
 {
 private:
-    GuiOverlay* background_gradient;
     GuiOverlay* background_crosses;
 
     GuiKeyValueDisplay* energy_display;
@@ -26,6 +26,7 @@ private:
     GuiKeyValueDisplay* front_shield_display;
     GuiKeyValueDisplay* rear_shield_display;
     GuiKeyValueDisplay* coolant_display;
+    GuiSelfDestructButton* self_destruct_button;
     GuiLabel* power_label;
     GuiSlider* power_slider;
     GuiLabel* coolant_label;

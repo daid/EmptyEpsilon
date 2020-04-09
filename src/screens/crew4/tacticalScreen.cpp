@@ -63,13 +63,13 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     radar->setAutoRotating(PreferencesManager::get("tactical_radar_lock","0")=="1");
 
     // Ship statistics in the top left corner.
-    energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
+    energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
-    heading_display = new GuiKeyValueDisplay(this, "HEADING_DISPLAY", 0.45, "Heading", "");
+    heading_display = new GuiKeyValueDisplay(this, "HEADING_DISPLAY", 0.45, tr("Heading"), "");
     heading_display->setIcon("gui/icons/heading")->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
-    velocity_display = new GuiKeyValueDisplay(this, "VELOCITY_DISPLAY", 0.45, "Speed", "");
+    velocity_display = new GuiKeyValueDisplay(this, "VELOCITY_DISPLAY", 0.45, tr("Speed"), "");
     velocity_display->setIcon("gui/icons/speed")->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
-    shields_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, "Shields", "");
+    shields_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, tr("Shields"), "");
     shields_display->setIcon("gui/icons/shields")->setTextSize(20)->setPosition(20, 220, ATopLeft)->setSize(240, 40);
 
     // Weapon tube loading controls in the bottom left corner.
@@ -82,7 +82,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     {
         GuiElement* beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
         beam_info_box->setPosition(0, -20, ABottomCenter)->setSize(500, 50);
-        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", "Beams", 30))->addBackground()->setPosition(0, 0, ABottomLeft)->setSize(80, 50);
+        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beams"), 30))->addBackground()->setPosition(0, 0, ABottomLeft)->setSize(80, 50);
         (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(80, 0, ABottomLeft)->setSize(132, 50);
         (new GuiPowerDamageIndicator(beam_info_box, "", SYS_BeamWeapons, ACenterLeft))->setPosition(0, 0, ABottomLeft)->setSize(212, 50);
         (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, 0, ABottomRight)->setSize(288, 50);
@@ -115,7 +115,7 @@ void TacticalScreen::onDraw(sf::RenderTarget& window)
         energy_display->setValue(string(int(my_spaceship->energy_level)));
         heading_display->setValue(string(fmodf(my_spaceship->getRotation() + 360.0 + 360.0 - 270.0, 360.0), 1));
         float velocity = sf::length(my_spaceship->getVelocity()) / 1000 * 60;
-        velocity_display->setValue(string(velocity, 1) + DISTANCE_UNIT_1K + "/min");
+        velocity_display->setValue(tr("{value} {unit}/min").format({{"value", string(velocity, 1)}, {"unit", DISTANCE_UNIT_1K}}));
 
         warp_controls->setVisible(my_spaceship->has_warp_drive);
         jump_controls->setVisible(my_spaceship->has_jump_drive);

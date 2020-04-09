@@ -137,6 +137,7 @@ set(SOURCES
 	src/screenComponents/missileTubeControls.cpp
 	src/screenComponents/selfDestructIndicator.cpp
 	src/screenComponents/viewport3d.cpp
+	src/screenComponents/viewportMainScreen.cpp
 	src/screenComponents/selfDestructEntry.cpp
 	src/screenComponents/dockingButton.cpp
 	src/screenComponents/shieldsEnableButton.cpp
@@ -176,6 +177,7 @@ set(SOURCES
 	src/screenComponents/lightsOut.cpp
 	src/screenComponents/miniGame.cpp
 	src/screenComponents/mineSweeper.cpp
+	src/screenComponents/impulseSound.cpp
 	src/gui/colorConfig.cpp
 	src/gui/hotkeyConfig.cpp
 	src/gui/joystickConfig.cpp
@@ -250,7 +252,7 @@ set(SOURCES
 	src/hardware/devices/philipsHueDevice.cpp
 )
 if(WIN32)
-    list(APPEND SOURCES EmptyEpsilon.rc)
+    list(APPEND SOURCES EmptyEpsilon.rc src/discord.cpp)
 endif()
 
 foreach(SP_SOURCE
@@ -419,6 +421,12 @@ if(WIN32)
     include_directories(${DRMINGW_ROOT}/include/)
     target_link_libraries(${EXECUTABLE_NAME} exchndl)
   endif()
+  if(NOT EXISTS "${CMAKE_CURRENT_BINARY_DIR}/discord/lib/x86/discord_game_sdk.dll.lib")
+    file(DOWNLOAD "https://dl-game-sdk.discordapp.net/latest/discord_game_sdk.zip" "${CMAKE_CURRENT_BINARY_DIR}/discord/game_sdk.zip" TIMEOUT 60 TLS_VERIFY ON)
+    execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf "${CMAKE_CURRENT_BINARY_DIR}/discord/game_sdk.zip" WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/discord")
+  endif()
+  target_link_libraries(${EXECUTABLE_NAME} "${CMAKE_CURRENT_BINARY_DIR}/discord/lib/x86/discord_game_sdk.dll.lib")
+  target_include_directories(${EXECUTABLE_NAME} PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/discord/c/")
 elseif(ANDROID)
   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--whole-archive ${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-main.a -Wl,--no-whole-archive")
   target_link_libraries(${EXECUTABLE_NAME} log android EGL)
@@ -455,6 +463,7 @@ if(WIN32)
     install(FILES ${DRMINGW_ROOT}/bin/symsrv.dll DESTINATION .)
     install(FILES ${DRMINGW_ROOT}/bin/symsrv.yes DESTINATION .)
   endif()
+  install(FILES "${CMAKE_CURRENT_BINARY_DIR}/discord/lib/x86/discord_game_sdk.dll" DESTINATION .)
 
   install(DIRECTORY resources DESTINATION .)
   install(DIRECTORY scripts DESTINATION .)

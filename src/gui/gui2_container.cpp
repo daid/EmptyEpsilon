@@ -38,6 +38,8 @@ void GuiContainer::drawElements(sf::FloatRect parent_rect, sf::RenderTarget& win
         }else{
             element->updateRect(parent_rect);
             element->hover = element->rect.contains(mouse_position);
+            element->onUpdate();
+
             if (element->visible)
             {
                 element->onDraw(window);

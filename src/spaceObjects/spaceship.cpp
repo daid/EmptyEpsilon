@@ -58,6 +58,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Requires a numeric value.
     /// Example: ship:setWarpSpeed(500);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWarpSpeed);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWarpSpeed);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponArc);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponDirection);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponRange);

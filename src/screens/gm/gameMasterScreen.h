@@ -42,6 +42,7 @@ private:
     
     GuiAutoLayout* info_layout;
     std::vector<GuiKeyValueDisplay*> info_items;
+    GuiKeyValueDisplay* info_clock;
     GuiListbox* gm_script_options;
     GuiAutoLayout* order_layout;
     GuiButton* player_comms_hail;

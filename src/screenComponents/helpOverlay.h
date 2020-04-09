@@ -10,12 +10,11 @@ class GuiScrollText;
 class GuiHelpOverlay : public GuiElement
 {
 private:
-    GuiCanvas* owner;
     GuiScrollText* text;
 
     string help_text = "";
 public:
-    GuiHelpOverlay(GuiCanvas* owner, string title = "", string contents = "");
+    GuiHelpOverlay(GuiContainer* owner, string title = "", string contents = "");
     GuiPanel* frame;
 
     virtual void setText(string new_text);

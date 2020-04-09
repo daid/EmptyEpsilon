@@ -92,6 +92,12 @@ public:
     bool shares_energy_with_docked;
     bool repair_docked;
     bool restocks_scan_probes;
+    bool can_scan = true;
+    bool can_hack = true;
+    bool can_dock = true;
+    bool can_combat_maneuver = true;
+    bool can_self_destruct = true;
+    bool can_launch_probe = true;
     
     float energy_storage_amount;
     int repair_crew_count;
@@ -114,6 +120,7 @@ public:
     string radar_trace;
     float long_range_radar_range = 30000.0f;
     float short_range_radar_range = 5000.0f;
+    string impulse_sound_file;
 
     std::vector<ShipRoomTemplate> rooms;
     std::vector<ShipDoorTemplate> doors;
@@ -130,6 +137,12 @@ public:
     void setSharesEnergyWithDocked(bool enabled);
     void setRepairDocked(bool enabled);
     void setRestocksScanProbes(bool enabled);
+    void setCanScan(bool enabled) { can_scan = enabled; }
+    void setCanHack(bool enabled) { can_hack = enabled; }
+    void setCanDock(bool enabled) { can_dock = enabled; }
+    void setCanCombatManeuver(bool enabled) { can_combat_maneuver = enabled; }
+    void setCanSelfDestruct(bool enabled) { can_self_destruct = enabled; }
+    void setCanLaunchProbe(bool enabled) { can_launch_probe = enabled; }
     void setMesh(string model, string color_texture, string specular_texture, string illumination_texture);
     void setEnergyStorage(float energy_amount);
     void setRepairCrewCount(int amount);
@@ -168,6 +181,7 @@ public:
     void setRadarTrace(string trace);
     void setLongRangeRadarRange(float range);
     void setShortRangeRadarRange(float range);
+    void setImpulseSoundFile(string sound);
 
     P<ShipTemplate> copy(string new_name);
 

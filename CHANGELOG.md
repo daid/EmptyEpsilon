@@ -1,5 +1,55 @@
 # Change Log
 
+## [2020-04-09]
+
+### Added
+
+- Options menu settings to allow radar views on Helms, Weapons, and Science stations (and their derivative crew 3/4 stations) to rotate around the player ship, instead of the ship rotating within the radar view.
+- Adjustable and customizable impulse engine sounds.
+  - Options menu settings for enabling impulse engine sounds across all stations, main screen only, or disabled, as well as setting its volume separate from master sound and music.
+  - `setImpulseSoundFile()` ship template function to set a custom engine sound.
+  - Default impulse sound moved from `resources/engine.wav` to `resources/sfx/engine.wav`.
+  - New engine sound for the MP52 Hornet.
+- Power Management station keybindings, sharing Engineering's.
+- `SpaceShip::setWarpSpeed()` scripting function to set a ship's speed per warp level.
+- Optional control code for the Spectate station.
+- Translation markers added to many more game features, including player stations and weapon names.
+- Custom functions added to Ship Log screen.
+- `autoconnect_address` option to specify a server to autoconnect to, instead of relying on server autodiscovery.
+- Toggleable player ship capabilities in ship templates, scripting, and the GM tweak menu: scanning (`canScan()`), hacking (`canHack()`), docking (`canDock()`), combat maneuvering (`canCombatManeuver()`), self destruction (`canSelfDestruct()`), and probe launching (`canLaunchProbe()`)
+- `set` and `getSelfDestructDamage` and `SelfDestructSize` scripting functions to modify player ship self-destruction explosion size and damage.
+- Probe radar radius is now visible on the GM screen.
+- Mission clock on Relay and GM screens counts up from 0 seconds at the start of each scenario. Ship's Log UI is now also synchronized to this clock for consistency.
+- `SpaceObject::onDestroyed()` callback when an object is destroyed, even if not by damage.
+
+### Changed
+
+- Reducing coolant in a system distributes it automatically to other systems, even if they are all empty.
+- Warp drive energy usage scales to system damage and power level.
+- Options menu is paginated to accommodate additional options.
+- Black holes do even more damage closer to their center; more objects sucked into a black hole should be destroyed by damage and trigger the appropriate callback.
+- Borderline Fever scenario refactoring
+  - Added expedite dock function to Relay, added show player ship details on player console, added enemy behavior change option, reorganized GM buttons, GM buttons to display player ship details, take advantage of resizable asteroids by randomly resizing them, Added cartography office to relay for stations when docked, added possibility to revive repair crew, added possibility to recover lost coolant, handle rare nil case for angle of attack, reduce average size of warp jammer range
+- Delta Quadrant Patrol Duty scenario refactoring
+  - Add status summary to relay screen, Localize variables, Take advantage of resizable asteroids through randomization, fix beam presence recognition code, Add goods randomization arrays, Add list of player ship names for Crucible and Maverick as well as set up code, fix check for warp drive presence on player ship, fix placement of station Research-19, Change station Maverick to Malthus, Switch to placing station data in comms_data structure, fix transport handling, Add cartography office, fix Kojak mission, remove old diagnostic code, simplify freighter cargo interaction, fix reference to global getLongRangeRadarRange (deprecated), add chance for repair crew to be revived
+- Defender Hunter scenario refactoring
+  - Move constant definitions to their own function, Fix player ship beam determination code, Add goods randomization tables, move station placement function list creation to its own function, localize variables, move station data to comms_data structure, take advantage of resizable asteroids through randomization, add possibility of repair crew revival, add possibility of coolant recovery
+- Escape scenario refactoring
+  - Update goods handling, switch to putting more data in comms_data structure for stations, add use case for another set of debris, make asteroids vary in size at random, add freighter communication options, add more junk yard dogs, add more harassing Exuari during repair journey, add Engineering messages when max repairable health reached
+
+### Fixed
+
+- Tutorial no longer crashes when started.
+- Missile tube sizes and HVLI projectiles are properly replicated to clients.
+- Warp/glitch shaders no longer affect paused games.
+- Persistent scripting storage (ie. `ScriptStorage.get()`) is no longer wiped upon load in a new EE instance.
+- Engineering station no longer sometimes crashes while loading.
+- Fixed some situations that could cause crew screens to crash when selecting Main Screen controls on Linux builds.
+- Ship's Log screen no longer overlaps some station selection controls.
+- Destroyed player ships no longer persist and appear multiple times in the ship selection screen.
+- Joystick event handling no longer results in crew stations persisting after a player exits them.
+- When the window is resized, the rendered area no longer shifts out of the window's bounds when warp/jump/glitch effects occur.
+
 ## [2020-03-22]
 
 ### Added

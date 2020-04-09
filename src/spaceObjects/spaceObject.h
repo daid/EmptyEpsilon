@@ -162,10 +162,13 @@ public:
     float getHeading() { float ret = getRotation() - 270; while(ret < 0) ret += 360.0f; while(ret > 360.0f) ret -= 360.0f; return ret; }
     void setHeading(float heading) { setRotation(heading - 90); }
 
-#if FEATURE_3D_RENDERING
+    void onDestroyed(ScriptSimpleCallback callback)
+    {
+        on_destroyed = callback;
+    }
+
     virtual void draw3D();
     virtual void draw3DTransparent() {}
-#endif//FEATURE_3D_RENDERING
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool longRange);
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool longRange);
     virtual void destroy();
@@ -220,7 +223,7 @@ public:
     bool openCommsTo(P<PlayerSpaceship> target);
     bool sendCommsMessage(P<PlayerSpaceship> target, string message);
 
-    ScriptCallback onDestroyed;
+    ScriptSimpleCallback on_destroyed;
 
 protected:
     ModelInfo model_info;

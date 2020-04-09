@@ -691,6 +691,41 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
     long_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     // Right column
+    // Can scan bool
+    can_scan = new GuiToggleButton(right_col, "", "Can scan", [this](bool value) {
+        target->setCanScan(value);
+    });
+    can_scan->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Can hack bool
+    can_hack = new GuiToggleButton(right_col, "", "Can hack", [this](bool value) {
+        target->setCanHack(value);
+    });
+    can_hack->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Can dock bool
+    can_dock = new GuiToggleButton(right_col, "", "Can dock", [this](bool value) {
+        target->setCanDock(value);
+    });
+    can_dock->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Can combat maneuver bool
+    can_combat_maneuver = new GuiToggleButton(right_col, "", "Can combat maneuver", [this](bool value) {
+        target->setCanCombatManeuver(value);
+    });
+    can_combat_maneuver->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Can self destruct bool
+    can_self_destruct = new GuiToggleButton(right_col, "", "Can self destruct", [this](bool value) {
+        target->setCanSelfDestruct(value);
+    });
+    can_self_destruct->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Can launch probe bool
+    can_launch_probe = new GuiToggleButton(right_col, "", "Can launch probes", [this](bool value) {
+        target->setCanLaunchProbe(value);
+    });
+    can_launch_probe->setSize(GuiElement::GuiSizeMax, 40);
 }
 
 void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
@@ -698,6 +733,12 @@ void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
     coolant_slider->setValue(target->max_coolant);
     short_range_radar_slider->setValue(target->getShortRangeRadarRange());
     long_range_radar_slider->setValue(target->getLongRangeRadarRange());
+    can_scan->setValue(target->getCanScan());
+    can_hack->setValue(target->getCanHack());
+    can_dock->setValue(target->getCanDock());
+    can_combat_maneuver->setValue(target->getCanCombatManeuver());
+    can_self_destruct->setValue(target->getCanSelfDestruct());
+    can_launch_probe->setValue(target->getCanLaunchProbe());
 }
 
 void GuiShipTweakPlayer2::open(P<SpaceObject> target)

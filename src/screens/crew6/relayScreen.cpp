@@ -1,4 +1,5 @@
 #include "relayScreen.h"
+#include "gameGlobalInfo.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/scanProbe.h"
@@ -119,7 +120,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         else
             my_spaceship->commandSetScienceLink(-1);
     });
-    link_to_science_button->setSize(GuiElement::GuiSizeMax, 50);
+    link_to_science_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship && my_spaceship->getCanLaunchProbe());
 
     // Manage waypoints.
     (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", tr("Place Waypoint"), [this]() {
@@ -140,11 +141,15 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         mode = LaunchProbe;
         option_buttons->hide();
     });
-    launch_probe_button->setSize(GuiElement::GuiSizeMax, 50);
+    launch_probe_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship && my_spaceship->getCanLaunchProbe());
 
     // Reputation display.
     info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.7, tr("Reputation:"), "");
     info_reputation->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Mission clock display.
+    info_clock = new GuiKeyValueDisplay(option_buttons, "INFO_CLOCK", 0.7, tr("Mission Clock") + ":", "");
+    info_clock->setSize(GuiElement::GuiSizeMax, 40);
 
     // Bottom layout.
     GuiAutoLayout* layout = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutVerticalBottomToTop);
@@ -274,7 +279,13 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
     }
     if (my_spaceship)
     {
+        // Toggle ship capabilities.
+        launch_probe_button->setVisible(my_spaceship->getCanLaunchProbe());
+        link_to_science_button->setVisible(my_spaceship->getCanLaunchProbe());
+        hack_target_button->setVisible(my_spaceship->getCanHack());
+
         info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0));
+        info_clock->setValue(string(gameGlobalInfo->elapsed_time, 0));
         launch_probe_button->setText(tr("Launch Probe") + " (" + string(my_spaceship->scan_probe_stock) + ")");
     }
 
