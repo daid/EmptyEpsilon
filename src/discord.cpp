@@ -77,5 +77,6 @@ void DiscordRichPresence::update(float delta)
     {
         activityManager->update_activity(activityManager, &activity, nullptr, nullptr);
         previousActivity = activity;
+        updateDelay = 4.0;
     }
 }
