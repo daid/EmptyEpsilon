@@ -2686,6 +2686,7 @@ function transportPlot(delta)
 			x, y = obj.target:getPosition()
 			xd, yd = vectorFromAngle(random(0, 360), random(25000, 40000))
 			obj:setPosition(x + xd, y + yd)
+			obj:setCallSign(generateCallSign(nil,"Independent"))
 			table.insert(transportList, obj)
 		end
 	end
@@ -3275,7 +3276,7 @@ function handleDockedState()
 					end
 				end
 			end
-			if ctd.trade.food and comms_source.goods ~= nil and comms_source.goods.food ~= nil and comms_source.goods.food.quantity > 0 then
+			if ctd.trade.food and comms_source.goods ~= nil and comms_source.goods["food"] ~= nil and comms_source.goods["food"] > 0 then
 				for good, goodData in pairs(ctd.goods) do
 					addCommsReply(string.format("Trade food for %s",good), function()
 						local goodTransactionMessage = string.format("Type: %s,  Quantity: %i",good,goodData["quantity"])
@@ -3298,7 +3299,7 @@ function handleDockedState()
 					end)
 				end
 			end
-			if ctd.trade.medicine and comms_source.goods ~= nil and comms_source.goods.medicine ~= nil and comms_source.goods.medicine.quantity > 0 then
+			if ctd.trade.medicine and comms_source.goods ~= nil and comms_source.goods["medicine"] ~= nil and comms_source.goods["medicine"] > 0 then
 				for good, goodData in pairs(ctd.goods) do
 					addCommsReply(string.format("Trade medicine for %s",good), function()
 						local goodTransactionMessage = string.format("Type: %s,  Quantity: %i",good,goodData["quantity"])
@@ -3321,7 +3322,7 @@ function handleDockedState()
 					end)
 				end
 			end
-			if ctd.trade.luxury and comms_source.goods ~= nil and comms_source.goods.luxury ~= nil and comms_source.goods.luxury.quantity > 0 then
+			if ctd.trade.luxury and comms_source.goods ~= nil and comms_source.goods["luxury"] ~= nil and comms_source.goods["luxury"] > 0 then
 				for good, goodData in pairs(ctd.goods) do
 					addCommsReply(string.format("Trade luxury for %s",good), function()
 						local goodTransactionMessage = string.format("Type: %s,  Quantity: %i",good,goodData["quantity"])
@@ -3989,6 +3990,7 @@ function handleUndockedState()
 			else
 				legAverage = (comms_source.patrolLegAsimov + comms_source.patrolLegUtopiaPlanitia + comms_source.patrolLegArmstrong)/3
 				ordMsg = ordMsg .. string.format("\n   patrol is %.2f percent complete",legAverage/patrolGoal*100)
+				--print(string.format("Av legs: %i, UP legs: %i, Ag legs: %i, Avg: %.1f, Goal: %i",comms_source.patrolLegAsimov,comms_source.patrolLegUtopiaPlanitia,comms_source.patrolLegArmstrong,legAverage,patrolGoal))
 				if comms_source.patrolLegArmstrong ~= comms_source.patrolLegAsimov or comms_source.patrolLegUtopiaPlanitia ~= comms_source.patrolLegArmstrong then
 					if comms_source.patrolLegArmstrong == comms_source.patrolLegAsimov then
 						if comms_source.patrolLegArmstrong > comms_source.patrolLegUtopiaPlanitia then
@@ -4085,16 +4087,26 @@ function commsShip()
 	comms_data = comms_target.comms_data
 	if comms_data.goods == nil then
 		comms_data.goods = {}
-		comms_data.goods[commonGoods[math.random(1,#commonGoods)]] = {quantity = 1, cost = random(20,80)}
+		if random(1,100) < 50 then
+			comms_data.goods[mineralGoods[math.random(1,#mineralGoods)]] = {quantity = 1, cost = random(20,80)}
+		else
+			comms_data.goods[componentGoods[math.random(1,#componentGoods)]] = {quantity = 1, cost = random(20,80)}			
+		end
 		local shipType = comms_target:getTypeName()
 		local goodCount = 0
 		if shipType:find("Freighter") ~= nil then
 			if shipType:find("Goods") ~= nil then
 				repeat
-					comms_data.goods[commonGoods[math.random(1,#commonGoods)]] = {quantity = 1, cost = random(20,80)}
 					goodCount = 0
 					for good, goodData in pairs(comms_data.goods) do
 						goodCount = goodCount + 1
+					end
+					if good_count == 1 then
+						comms_data.goods[mineralGoods[math.random(1,#mineralGoods)]] = {quantity = 1, cost = random(20,80)}
+					elseif good_count == 2 then
+						comms_data.goods[componentGoods[math.random(1,#componentGoods)]] = {quantity = 1, cost = random(20,80)}
+					else
+						comms_data.goods[commonGoods[math.random(1,#commonGoods)]] = {quantity = 1, cost = random(20,80)}
 					end
 				until(goodCount >= 3)
 			elseif shipType:find("Equipment") ~= nil then
@@ -4494,10 +4506,143 @@ function getFactionPrefix(faction)
 		faction_prefix = exuari_names[exuari_name_choice]
 		table.remove(exuari_names,exuari_name_choice)
 	end
+	if faction == "Ghosts" then
+		if ghosts_names == nil then
+			setGhostsNames()
+		else
+			if #ghosts_names < 1 then
+				setGhostsNames()
+			end
+		end
+		local ghosts_name_choice = math.random(1,#ghosts_names)
+		faction_prefix = ghosts_names[ghosts_name_choice]
+		table.remove(ghosts_names,ghosts_name_choice)
+	end
+	if faction == "Independent" then
+		if independent_names == nil then
+			setIndependentNames()
+		else
+			if #independent_names < 1 then
+				setIndependentNames()
+			end
+		end
+		local independent_name_choice = math.random(1,#independent_names)
+		faction_prefix = independent_names[independent_name_choice]
+		table.remove(independent_names,independent_name_choice)
+	end
 	if faction_prefix == nil then
 		faction_prefix = generateCallSignPrefix()
 	end
 	return faction_prefix
+end
+function setGhostsNames()
+	ghosts_names = {}
+	table.insert(ghosts_names,"Abstract")
+	table.insert(ghosts_names,"Ada")
+	table.insert(ghosts_names,"Assemble")
+	table.insert(ghosts_names,"Assert")
+	table.insert(ghosts_names,"Backup")
+	table.insert(ghosts_names,"BASIC")
+	table.insert(ghosts_names,"Big Iron")
+	table.insert(ghosts_names,"BigEndian")
+	table.insert(ghosts_names,"Binary")
+	table.insert(ghosts_names,"Bit")
+	table.insert(ghosts_names,"Block")
+	table.insert(ghosts_names,"Boot")
+	table.insert(ghosts_names,"Branch")
+	table.insert(ghosts_names,"BTree")
+	table.insert(ghosts_names,"Bubble")
+	table.insert(ghosts_names,"Byte")
+	table.insert(ghosts_names,"Capacitor")
+	table.insert(ghosts_names,"Case")
+	table.insert(ghosts_names,"Chad")
+	table.insert(ghosts_names,"Charge")
+	table.insert(ghosts_names,"COBOL")
+	table.insert(ghosts_names,"Collate")
+	table.insert(ghosts_names,"Compile")
+	table.insert(ghosts_names,"Control")
+	table.insert(ghosts_names,"Construct")
+	table.insert(ghosts_names,"Cycle")
+	table.insert(ghosts_names,"Data")
+	table.insert(ghosts_names,"Debug")
+	table.insert(ghosts_names,"Decimal")
+	table.insert(ghosts_names,"Decision")
+	table.insert(ghosts_names,"Default")
+	table.insert(ghosts_names,"DIMM")
+	table.insert(ghosts_names,"Displacement")
+	table.insert(ghosts_names,"Edge")
+	table.insert(ghosts_names,"Exit")
+	table.insert(ghosts_names,"Factor")
+	table.insert(ghosts_names,"Flag")
+	table.insert(ghosts_names,"Float")
+	table.insert(ghosts_names,"Flow")
+	table.insert(ghosts_names,"FORTRAN")
+	table.insert(ghosts_names,"Fullword")
+	table.insert(ghosts_names,"GIGO")
+	table.insert(ghosts_names,"Graph")
+	table.insert(ghosts_names,"Hack")
+	table.insert(ghosts_names,"Hash")
+	table.insert(ghosts_names,"Halfword")
+	table.insert(ghosts_names,"Hertz")
+	table.insert(ghosts_names,"Hexadecimal")
+	table.insert(ghosts_names,"Indicator")
+	table.insert(ghosts_names,"Initialize")
+	table.insert(ghosts_names,"Integer")
+	table.insert(ghosts_names,"Integrate")
+	table.insert(ghosts_names,"Interrupt")
+	table.insert(ghosts_names,"Java")
+	table.insert(ghosts_names,"Lisp")
+	table.insert(ghosts_names,"List")
+	table.insert(ghosts_names,"Logic")
+	table.insert(ghosts_names,"Loop")
+	table.insert(ghosts_names,"Lua")
+	table.insert(ghosts_names,"Magnetic")
+	table.insert(ghosts_names,"Mask")
+	table.insert(ghosts_names,"Memory")
+	table.insert(ghosts_names,"Mnemonic")
+	table.insert(ghosts_names,"Micro")
+	table.insert(ghosts_names,"Model")
+	table.insert(ghosts_names,"Nibble")
+	table.insert(ghosts_names,"Octal")
+	table.insert(ghosts_names,"Order")
+	table.insert(ghosts_names,"Operator")
+	table.insert(ghosts_names,"Parameter")
+	table.insert(ghosts_names,"Pascal")
+	table.insert(ghosts_names,"Pattern")
+	table.insert(ghosts_names,"Pixel")
+	table.insert(ghosts_names,"Point")
+	table.insert(ghosts_names,"Polygon")
+	table.insert(ghosts_names,"Port")
+	table.insert(ghosts_names,"Process")
+	table.insert(ghosts_names,"RAM")
+	table.insert(ghosts_names,"Raster")
+	table.insert(ghosts_names,"Rate")
+	table.insert(ghosts_names,"Redundant")
+	table.insert(ghosts_names,"Reference")
+	table.insert(ghosts_names,"Refresh")
+	table.insert(ghosts_names,"Register")
+	table.insert(ghosts_names,"Resistor")
+	table.insert(ghosts_names,"ROM")
+	table.insert(ghosts_names,"Routine")
+	table.insert(ghosts_names,"Ruby")
+	table.insert(ghosts_names,"SAAS")
+	table.insert(ghosts_names,"Sequence")
+	table.insert(ghosts_names,"Share")
+	table.insert(ghosts_names,"Silicon")
+	table.insert(ghosts_names,"SIMM")
+	table.insert(ghosts_names,"Socket")
+	table.insert(ghosts_names,"Sort")
+	table.insert(ghosts_names,"Structure")
+	table.insert(ghosts_names,"Switch")
+	table.insert(ghosts_names,"Symbol")
+	table.insert(ghosts_names,"Trace")
+	table.insert(ghosts_names,"Transistor")
+	table.insert(ghosts_names,"Value")
+	table.insert(ghosts_names,"Vector")
+	table.insert(ghosts_names,"Version")
+	table.insert(ghosts_names,"View")
+	table.insert(ghosts_names,"WYSIWYG")
+	table.insert(ghosts_names,"XOR")
 end
 function setExuariNames()
 	exuari_names = {}
@@ -4708,6 +4853,81 @@ function setKraylorNames()
 	table.insert(kraylor_names,"Yeskret")
 	table.insert(kraylor_names,"Zacktrope")
 end
+function setIndependentNames()
+	independent_names = {}
+	table.insert(independent_names,"Akdroft")	--faux Kraylor
+	table.insert(independent_names,"Bletnik")	--faux Kraylor
+	table.insert(independent_names,"Brogfent")	--faux Kraylor
+	table.insert(independent_names,"Cruflech")	--faux Kraylor
+	table.insert(independent_names,"Dengtoct")	--faux Kraylor
+	table.insert(independent_names,"Fiklerg")	--faux Kraylor
+	table.insert(independent_names,"Groftep")	--faux Kraylor
+	table.insert(independent_names,"Hinkflort")	--faux Kraylor
+	table.insert(independent_names,"Irklesht")	--faux Kraylor
+	table.insert(independent_names,"Jotrak")	--faux Kraylor
+	table.insert(independent_names,"Kargleth")	--faux Kraylor
+	table.insert(independent_names,"Lidroft")	--faux Kraylor
+	table.insert(independent_names,"Movrect")	--faux Kraylor
+	table.insert(independent_names,"Nitrang")	--faux Kraylor
+	table.insert(independent_names,"Poklapt")	--faux Kraylor
+	table.insert(independent_names,"Raknalg")	--faux Kraylor
+	table.insert(independent_names,"Stovtuk")	--faux Kraylor
+	table.insert(independent_names,"Trongluft")	--faux Kraylor
+	table.insert(independent_names,"Vactremp")	--faux Kraylor
+	table.insert(independent_names,"Wunklesp")	--faux Kraylor
+	table.insert(independent_names,"Yentrilg")	--faux Kraylor
+	table.insert(independent_names,"Zeltrag")	--faux Kraylor
+	table.insert(independent_names,"Avoltojop")		--faux Exuari
+	table.insert(independent_names,"Bimartarax")	--faux Exuari
+	table.insert(independent_names,"Cidalkapax")	--faux Exuari
+	table.insert(independent_names,"Darongovax")	--faux Exuari
+	table.insert(independent_names,"Felistiyik")	--faux Exuari
+	table.insert(independent_names,"Gopendewex")	--faux Exuari
+	table.insert(independent_names,"Hakortodox")	--faux Exuari
+	table.insert(independent_names,"Jemistibix")	--faux Exuari
+	table.insert(independent_names,"Kilampafax")	--faux Exuari
+	table.insert(independent_names,"Lokuftumux")	--faux Exuari
+	table.insert(independent_names,"Mabildirix")	--faux Exuari
+	table.insert(independent_names,"Notervelex")	--faux Exuari
+	table.insert(independent_names,"Pekolgonex")	--faux Exuari
+	table.insert(independent_names,"Rifaltabax")	--faux Exuari
+	table.insert(independent_names,"Sobendeyex")	--faux Exuari
+	table.insert(independent_names,"Tinaftadax")	--faux Exuari
+	table.insert(independent_names,"Vadorgomax")	--faux Exuari
+	table.insert(independent_names,"Wilerpejex")	--faux Exuari
+	table.insert(independent_names,"Yukawvalak")	--faux Exuari
+	table.insert(independent_names,"Zajiltibix")	--faux Exuari
+	table.insert(independent_names,"Alter")		--faux Ghosts
+	table.insert(independent_names,"Assign")	--faux Ghosts
+	table.insert(independent_names,"Brain")		--faux Ghosts
+	table.insert(independent_names,"Break")		--faux Ghosts
+	table.insert(independent_names,"Boundary")	--faux Ghosts
+	table.insert(independent_names,"Code")		--faux Ghosts
+	table.insert(independent_names,"Compare")	--faux Ghosts
+	table.insert(independent_names,"Continue")	--faux Ghosts
+	table.insert(independent_names,"Core")		--faux Ghosts
+	table.insert(independent_names,"CRUD")		--faux Ghosts
+	table.insert(independent_names,"Decode")	--faux Ghosts
+	table.insert(independent_names,"Decrypt")	--faux Ghosts
+	table.insert(independent_names,"Device")	--faux Ghosts
+	table.insert(independent_names,"Encode")	--faux Ghosts
+	table.insert(independent_names,"Encrypt")	--faux Ghosts
+	table.insert(independent_names,"Event")		--faux Ghosts
+	table.insert(independent_names,"Fetch")		--faux Ghosts
+	table.insert(independent_names,"Frame")		--faux Ghosts
+	table.insert(independent_names,"Go")		--faux Ghosts
+	table.insert(independent_names,"IO")		--faux Ghosts
+	table.insert(independent_names,"Interface")	--faux Ghosts
+	table.insert(independent_names,"Kilo")		--faux Ghosts
+	table.insert(independent_names,"Modify")	--faux Ghosts
+	table.insert(independent_names,"Pin")		--faux Ghosts
+	table.insert(independent_names,"Program")	--faux Ghosts
+	table.insert(independent_names,"Purge")		--faux Ghosts
+	table.insert(independent_names,"Retrieve")	--faux Ghosts
+	table.insert(independent_names,"Store")		--faux Ghosts
+	table.insert(independent_names,"Unit")		--faux Ghosts
+	table.insert(independent_names,"Wire")		--faux Ghosts
+end
 -------------------------------------------------------------
 --	First plot line - patrol between stations then defend  --
 -------------------------------------------------------------
@@ -4745,7 +4965,6 @@ function patrolAsimovUtopiaPlanitiaArmstrong(delta)
 			plot1 = defeated
 		end
 	end
-	patrolComplete = false
 	playerCount = 0
 	for p5idx=1,8 do
 		p5obj = getPlayerShip(p5idx)
@@ -6464,7 +6683,28 @@ function healthCheck(delta)
 		healthCheckTimer = delta + healthCheckTimerInterval
 	end
 end
-
+function resetPreviousSystemHealth(p)
+	if p:getShieldCount() > 1 then
+		p.prevShield = (p:getSystemHealth("frontshield") + p:getSystemHealth("rearshield"))/2
+	else
+		p.prevShield = p:getSystemHealth("frontshield")
+	end
+	p.prevReactor = p:getSystemHealth("reactor")
+	p.prevManeuver = p:getSystemHealth("maneuver")
+	p.prevImpulse = p:getSystemHealth("impulse")
+	if p:getBeamWeaponRange(0) > 0 then
+		p.prevBeam = p:getSystemHealth("beamweapons")
+	end
+	if p:getWeaponTubeCount() > 0 then
+		p.prevMissile = p:getSystemHealth("missilesystem")
+	end
+	if p:hasWarpDrive() then
+		p.prevWarp = p:getSystemHealth("warp")
+	end
+	if p:hasJumpDrive() then
+		p.prevJump = p:getSystemHealth("jumpdrive")
+	end
+end
 function crewFate(p, fatalityChance)
 	if math.random() < (fatalityChance) then
 		p:setRepairCrewCount(p:getRepairCrewCount() - 1)
