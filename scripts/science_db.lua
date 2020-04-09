@@ -20,6 +20,12 @@ item:setLongDescription([[A wormhole, also known as an Einstein-Rosen bridge, is
 Wormholes are rare, and most can move objects in only one direction. Traversable wormholes, which are stable and allow for movement in both directions, are even rarer. All wormholes generate tremendous sensor activity, which an astute science officer can detect even through disruptions such as nebulae.]])
 
 weapons = ScienceDatabase():setName('Weapons')
+weapons:setLongDescription([[This database only covers the basic versions of the missiles used throughout the galaxy.
+
+It has been reported that some battleships started using larger variations of those missiles. Small fighters and even frigates should not have too much trouble dodging them, but space captains of bigger ships should be wary of their doubled damage potential.
+
+Smaller variations of these missiles have become common in the galaxy, too. Fighter pilots praise their speed and maneuverability, because it gives them an edge against small and fast-moving targets. They only deal half the damage of their basic counterparts, but what good is a missile if it does not hit its target.]])
+
 item = weapons:addEntry('Homing missile')
 item:addKeyValue('Range', '5.4u')
 item:addKeyValue('Damage', '35')
@@ -53,8 +59,8 @@ item:setLongDescription([[The electromagnetic pulse missile (EMP) reproduces the
 
 item = weapons:addEntry('HVLI')
 item:addKeyValue('Range', '5.4u')
-item:addKeyValue('Damage', '7 each, 35 total')
+item:addKeyValue('Damage', '6 each, 30 total')
 item:addKeyValue('Burst', '5')
 item:setLongDescription([[A high-velocity lead impactor (HVLI) fires a simple slug of lead at a high velocity. This weapon is usually found in simpler ships since it does not require guidance computers. This also means its projectiles fly in a straight line from its tube and can't pursue a target.
 
-Each shot from an HVLI fires a burst of 5 projectiles, which increases the chance to hit but requires precision aiming to be effective.]])
+Each shot from an HVLI fires a burst of 5 projectiles, which increases the chance to hit but requires precision aiming to be effective. It reaches its full damage potential at a range of 2u.]])
