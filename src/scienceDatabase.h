@@ -39,6 +39,7 @@ public:
     P<ScienceDatabase> addEntry(string name);
     string getName() {return this->name;}
 private:
+    string directionLabel(float direction);
 
 public: /* static members */
     static PVector<ScienceDatabase> science_databases;
