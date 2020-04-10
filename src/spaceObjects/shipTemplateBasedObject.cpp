@@ -231,6 +231,9 @@ void ShipTemplateBasedObject::update(float delta)
             shield_hit_effect[n] -= delta;
         }
     }
+
+    if (orbit_target_id > -1)
+        applyOrbit(delta);
 }
 
 std::unordered_map<string, string> ShipTemplateBasedObject::getGMInfo()
