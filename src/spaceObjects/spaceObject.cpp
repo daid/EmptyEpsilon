@@ -252,6 +252,8 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Returns a boolean value.
     /// Example: obj:isScannedByFaction("Human Navy")
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, isScannedByFaction);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setOrbit);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, unsetOrbit);
     // Register a callback that is called when this object is destroyed, by any means.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, onDestroyed);
 }
@@ -268,6 +270,10 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     scanning_complexity_value = 0;
     scanning_depth_value = 0;
 
+    orbit_target_id = -1;
+    orbit_time = 0.0f;
+    orbit_distance = 0.0f;
+
     registerMemberReplication(&callsign);
     registerMemberReplication(&faction_id);
     registerMemberReplication(&scanned_by_faction);
@@ -279,7 +285,9 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     registerMemberReplication(&radar_signature.electrical);
     registerMemberReplication(&radar_signature.biological);
     registerMemberReplication(&scanning_complexity_value);
-    registerMemberReplication(&scanning_depth_value);
+    registerMemberReplication(&orbit_target_id);
+    registerMemberReplication(&orbit_time);
+    registerMemberReplication(&orbit_distance);
     registerCollisionableReplication(multiplayer_significant_range);
 }
 
@@ -563,6 +571,38 @@ bool SpaceObject::sendCommsMessage(P<PlayerSpaceship> target, string message)
         target->addToShipLogBy(message, this);
     }
     return result;
+}
+
+void SpaceObject::unsetOrbit()
+{
+    this->orbit_target_id = -1;
+}
+
+void SpaceObject::setOrbit(P<SpaceObject> target, float orbit_time)
+{
+    if (!target)
+        return;
+    this->orbit_target_id = target->getMultiplayerId();
+    this->orbit_distance = sf::length(getPosition() - target->getPosition());
+    this->orbit_time = orbit_time;
+}
+
+void SpaceObject::applyOrbit(float delta)
+{
+    if (orbit_target_id > -1 && orbit_distance > 0.0f && orbit_time > 0.0f)
+    {
+        if (game_server)
+            orbit_target = game_server->getObjectById(orbit_target_id);
+        else
+            orbit_target = game_client->getObjectById(orbit_target_id);
+
+        if (orbit_target)
+        {
+            float angle = sf::vector2ToAngle(getPosition() - orbit_target->getPosition());
+            angle += delta / orbit_time * 360.0f;
+            setPosition(orbit_target->getPosition() + sf::vector2FromAngle(angle) * orbit_distance);
+        }
+    }
 }
 
 // Define a script conversion function for the DamageInfo structure.

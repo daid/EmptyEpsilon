@@ -106,6 +106,11 @@ public:
     int scanning_depth_value;
     string callsign;
 
+    P<SpaceObject> orbit_target;
+    int32_t orbit_target_id;
+    float orbit_time;
+    float orbit_distance;
+
     SpaceObject(float collisionRange, string multiplayerName, float multiplayer_significant_range=-1);
     virtual ~SpaceObject();
 
@@ -222,6 +227,10 @@ public:
     string getSectorName();
     bool openCommsTo(P<PlayerSpaceship> target);
     bool sendCommsMessage(P<PlayerSpaceship> target, string message);
+
+    virtual void unsetOrbit();
+    virtual void setOrbit(P<SpaceObject> target, float orbit_time);
+    virtual void applyOrbit(float delta);
 
     ScriptSimpleCallback on_destroyed;
 
