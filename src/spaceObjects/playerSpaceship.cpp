@@ -1149,6 +1149,13 @@ bool PlayerSpaceship::hailByObject(P<SpaceObject> object, string opening_message
     return true;
 }
 
+void PlayerSpaceship::switchCommsToGM()
+{
+    comms_state = CS_ChannelOpenGM;
+    if (comms_incomming_message == "?")
+        comms_incomming_message = "";
+}
+
 void PlayerSpaceship::closeComms()
 {
     // If comms are closed, state it and log it to the ship's log.

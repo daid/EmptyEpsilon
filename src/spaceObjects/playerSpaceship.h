@@ -195,6 +195,7 @@ public:
     void addCommsIncommingMessage(string message);
     void addCommsOutgoingMessage(string message);
     void addCommsReply(int32_t id, string message);
+    void switchCommsToGM();
     void closeComms();
 
     void setEnergyLevel(float amount) { energy_level = std::max(0.0f, std::min(max_energy_level, amount)); }
