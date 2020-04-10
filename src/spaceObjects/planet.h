@@ -31,7 +31,6 @@ public:
     void setPlanetCloudRadius(float size);
     void setDistanceFromMovementPlane(float distance_from_movement_plane);
     void setAxialRotationTime(float time);
-    void setOrbit(P<SpaceObject> target, float orbit_time);
     
     virtual string getExportLine() override { return "Planet():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ", setPlanetRadius(" + string(getPlanetRadius(), 0) + ")"; }
 
@@ -47,9 +46,6 @@ private:
     float distance_from_movement_plane;
     
     float axial_rotation_time;
-    int32_t orbit_target_id;
-    float orbit_time;
-    float orbit_distance;
     
     float collision_size;
 
