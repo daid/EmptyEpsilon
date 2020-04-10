@@ -420,33 +420,34 @@ void ShipSelectionScreen::update(float delta)
 void ShipSelectionScreen::updateReadyButton()
 {
     // Update the Ready button based on crew position button states.
-    // If the player is capable of displaying the main screen...
-    if (my_player_info->isOnlyMainScreen())
+    // If the GM, Top-Down, Cinematic, or Spectate views are selected ...
+    if (game_master_button->getValue()
+        || topdown_button->getValue()
+        || cinematic_view_button->getValue()
+        || spectator_button->getValue())
     {
-        // If the main screen button is both available and selected and a
-        // player ship is also selected, and the player isn't being asked for a
-        // command code, enable the Ready button.
-        if (my_spaceship && main_screen_button->isVisible() && main_screen_button->getValue())
-            ready_button->enable();
-        // If the GM or spectator buttons are enabled, enable the Ready button.
-        // TODO: Allow GM or spectator screens to require a control code.
-        else if (game_master_button->getValue() || topdown_button->getValue() || cinematic_view_button->getValue() || spectator_button->getValue())
-            ready_button->enable();
-        // If a player ship and the window view are selected, enable the Ready
-        // button.
-        else if (my_spaceship && window_button->getValue())
-            ready_button->enable();
-        // Otherwise, disable the Ready button.
-        else
-            ready_button->disable();
-    // If the player can't display the main screen...
-    }else{
-        // If a player ship is selected and the player isn't being asked for a
-        // control code, enable the Ready button. Otherwise, disable it.
-        if (my_spaceship)
-            ready_button->enable();
-        else
-            ready_button->disable();
+        // ... enable the Ready button.
+        ready_button->enable();
+    // Else if a player ship is selected ...
+    } else if (my_spaceship) {
+        // ... and main screen, ship's window, or any crew station is selected ...
+        bool ready_enabled = false;
+
+        for(int n = 0; n < max_crew_positions; n++)
+            if (crew_position_button[n]->getValue())
+                ready_enabled = true;
+
+        if (main_screen_button->isVisible() && main_screen_button->getValue())
+            ready_enabled = true;
+
+        if (window_button->getValue())
+            ready_enabled = true;
+
+        // ... enable the Ready button.
+        ready_button->setEnable(ready_enabled);
+    } else {
+        // ... disable the Ready button.
+        ready_button->disable();
     }
 }
 
