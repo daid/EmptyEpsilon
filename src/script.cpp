@@ -75,7 +75,7 @@ static int _(lua_State* L)
     auto str_1 = luaL_checkstring(L, 1);
     auto str_2 = luaL_optstring(L, 2, nullptr);
     if (str_2)
-        lua_pushstring(L, tr(str_2).c_str());
+        lua_pushstring(L, tr(str_1, str_2).c_str());
     else
         lua_pushstring(L, tr(str_1).c_str());
     return 1;
