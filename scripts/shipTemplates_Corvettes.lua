@@ -1,11 +1,10 @@
---[[----------------------CORVETTES----------------------
-Corvettes are common large ships, larger than frigates
-and smaller than dreadnoughts. They generally have at
-least 4 shield sections and operate with a crew of 20 to
-250.
+--[[----------------------CORVETTES-------------------------
+Corvettes are common large ships, larger than frigates and
+smaller than dreadnoughts. They generally have at least 4
+shield sections and operate with a crew of 20 to 250.
 
-This class generally has jump or warp drives, but lack
-the maneuverability of frigates.
+Ships of this class generally have jump or warp drives, but
+lack the maneuverability of frigates.
 
 There are 3 corvette subclasses:
 
@@ -34,23 +33,23 @@ template = ShipTemplate():setName("Atlantis X23")
     template:setShields(200, 200, 200, 200)
 
     -- Maneuverability
-    --           Forward, Turn, Acceleration
+    --   Impulse Forward, Turn, Acceleration
     template:setSpeed(30,  3.5, 5)
     template:setJumpDrive(true)
 
     -- Weapons
-    -- Beams              ID, Arc, Bear,  Range, Cycle, Damage
+    --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
     template:setBeamWeapon(0, 100,  -20, 1500.0,   6.0, 8)
     template:setBeamWeapon(1, 100,   20, 1500.0,   6.0, 8)
     template:setBeamWeapon(2, 100,  180, 1500.0,   6.0, 8)
-    -- Tubes      Count, Load Time
+    --   Tubes    Count, Load Time
     template:setTubes(4, 10.0)
-    --   Tube direction      ID, Bearing
+    --     Tube direction    ID, Bearing
     template:setTubeDirection(0, -90)
     template:setTubeDirection(1, -90)
     template:setTubeDirection(2,  90)
     template:setTubeDirection(3,  90)
-    --   Tube weapon storage      Type, Count
+    --     Tube weapon storage    Type, Count
     template:setWeaponStorage(  "HVLI", 20)
     template:setWeaponStorage("Homing",  4)
 
@@ -59,7 +58,7 @@ variation = template:copy("Atlantis")
     variation:setLocaleName(_("Atlantis"))
     variation:setDescription(_([[A refitted Atlantis X23 for more general tasks. The large shield system has been replaced with an advanced combat maneuvering system and improved impulse engines. Its missile loadout is also more diverse. Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake.]]))
     variation:setType("playership")
- 
+
     -- Defenses
     variation:setHull(250)
     variation:setShields(200, 200)
@@ -138,7 +137,7 @@ template = ShipTemplate():setName("Starhammer II")
     -- Maneuverability
     --   Impulse Forward, Turn, Acceleration
     template:setSpeed(35, 6, 10)
-    --   Long-range Propulsion
+    --   Long-range propulsion
     template:setJumpDrive(true)
     -- Weapons
     --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
@@ -173,7 +172,7 @@ template = ShipTemplate():setName("Crucible")
     template:setSpeed(80, 15, 40)
     --   Combat Maneuver     Boost, Strafe
     template:setCombatManeuver(400, 250)
-    --   Long-range Propulsion
+    --   Long-range propulsion
     template:setJumpDrive(false)
     --     Warp speed per factor
     template:setWarpSpeed(   750)
@@ -252,7 +251,7 @@ template = ShipTemplate():setName("Maverick")
     template:setSpeed(80, 15, 40)
     --   Combat Maneuver     Boost, Strafe
     template:setCombatManeuver(400, 250)
-    --   Long-range Propulsion
+    --   Long-range propulsion
     template:setJumpDrive(false)
     --     Warp speed per factor
     template:setWarpSpeed(   800)
@@ -341,10 +340,96 @@ template = ShipTemplate():setName("Defense platform")
     template:setBeamWeapon(4,  30,  240, 4000.0,   1.5, 20)
     template:setBeamWeapon(5,  30,  300, 4000.0,   1.5, 20)
 
+----------------------Jump carriers----------------------
+template = ShipTemplate():setName("Jump Carrier")
+    template:setLocaleName(_("Jump Carrier"))
+    template:setClass(_("Corvette"), _("Support"))
+    template:setModel("transport_4_2")
+    template:setDescription(_([[Jump carriers can ferry other ships deep into space via its specialized jump drive capable of jumps up to 100 times farther than typical jump drives, and its vast energy storage. It also has special docking parameters that allow other ships to attach themselves to its hull.]]))
+    template:setRadarTrace("radar_transport.png")
+
+    -- Capabilities
+    template:setDockClasses("Starfighter", "Frigate", "Corvette")
+
+    -- Defenses
+    template:setHull(100)
+    template:setShields(50, 50)
+
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+    template:setSpeed(50,    6, 10)
+    --   Long-range propulsion
+    template:setJumpDrive(true)
+    --     Jump range       Minimum, Maximum
+    template:setJumpDriveRange(5000, 5000000)
+
+--------------------------Benedict--------------------------
+variation = template:copy("Benedict")
+    variation:setLocaleName(_("Benedict"))
+    variation:setClass(_("Corvette"), _("Support"))
+    variation:setDescription(_([[The Benedict is a combat jump carrier with stronger defenses and limited weaponry, but these capabilities cost it the standard jump carrier's tremendous jump range.]]))
+    variation:setType("playership")
+
+    -- Defenses
+    variation:setHull(200)
+    variation:setShields(70, 70)
+
+    -- Maneuverability
+    --   Impulse  Forward, Turn, Acceleration
+    variation:setSpeed(60,    6, 8)
+    --   Combat Maneuver      Boost, Strafe
+    variation:setCombatManeuver(400, 250)
+    variation:setJumpDriveRange(5000, 90000)
+
+    -- Weapons
+    --   Beams             ID, Arc, Bear,  Range, Cycle, Damage
+    variation:setBeamWeapon(0,  10,    0, 1500.0,   6.0, 4)
+    variation:setBeamWeapon(1,  10,  180, 1500.0,   6.0, 4)
+    --   Beam turrets            ID, Arc, Dir, Rotation Speed
+    variation:setBeamWeaponTurret( 0, 90,   0, 6)
+    variation:setBeamWeaponTurret( 1, 90, 180, 6)
+
+    -- Internal layout
+    --   Repair crew count
+    variation:setRepairCrewCount(6)
+    --   Rooms          Position  Size
+    --                      X  Y  W  H  System
+    variation:addRoomSystem(3, 0, 2, 3, "Reactor")
+    variation:addRoomSystem(3, 3, 2, 3, "Warp")
+    variation:addRoomSystem(6, 0, 2, 3, "JumpDrive")
+    variation:addRoomSystem(6, 3, 2, 3, "MissileSystem")
+    variation:addRoomSystem(5, 2, 1, 2, "Maneuver")
+    variation:addRoomSystem(2, 2, 1, 2, "RearShield")
+    variation:addRoomSystem(0, 1, 2, 4, "Beamweapons")
+    variation:addRoomSystem(8, 2, 1, 2, "FrontShield")
+    variation:addRoomSystem(9, 1, 2, 4, "Impulse")
+
+    --   Doors    Position
+    --                X  Y  Horizontal?
+    variation:addDoor(3, 3, true)
+    variation:addDoor(6, 3, true)
+    variation:addDoor(5, 2, false)
+    variation:addDoor(6, 3, false)
+    variation:addDoor(3, 2, false)
+    variation:addDoor(2, 3, false)
+    variation:addDoor(8, 2, false)
+    variation:addDoor(9, 3, false)
+
+---------------------------Kiriya---------------------------
+variation2 = variation:copy("Kiriya")
+    variation2:setLocaleName(_("Kiriya"))
+    variation2:setDescription(_([[The Kiriya is a Benedict combat jump carrier refitted with a warp drive.]]))
+
+    -- Maneuverability
+    --   Long-range Propulsion
+    variation2:setJumpDrive(false)
+    --     Warp speed per factor
+    variation2:setWarpSpeed(750)
+
 -------------------------FREIGHTERS-------------------------
 
 for cnt=1,5 do
-    ------------------Personnel Freighters------------------
+    ------------------Personnel freighters------------------
     template = ShipTemplate():setName("Personnel Freighter " .. cnt)
         template:setLocaleName(string.format(_("Personnel Freighter %d"), cnt))
         template:setClass(_("Corvette"), _("Freighter"))
@@ -359,22 +444,22 @@ for cnt=1,5 do
         -- Maneuverability
         --   Impulse           Forward, Turn, Acceleration
         template:setSpeed(60 - 5 * cnt,    6, 10)
-    
+
     if cnt > 2 then
         variation = template:copy("Personnel Jump Freighter " .. cnt)
             variation:setLocaleName(string.format(_("Personnel Jump Freighter %d"), cnt))
-            --   Long-range Propulsion
+            --   Long-range propulsion
             variation:setJumpDrive(true)
     end
 
-    --------------------Goods Freighters--------------------
+    --------------------Goods freighters--------------------
     template = ShipTemplate():setName("Goods Freighter " .. cnt)
         template:setLocaleName(string.format(_("Goods Freighter %d"), cnt))
         template:setClass(_("Corvette"), _("Freighter"))
         template:setModel("transport_2_" .. cnt)
         template:setDescription(_([[Cargo freighters haul large loads of cargo across long distances. Their cargo bays include climate control and stabilization systems that keep the cargo in good condition.]]))
         template:setRadarTrace("radar_transport.png")
-    
+
         -- Defenses
         template:setHull(100)
         template:setShields(50, 50)
@@ -386,11 +471,11 @@ for cnt=1,5 do
     if cnt > 2 then
         variation = template:copy("Goods Jump Freighter " .. cnt)
             variation:setLocaleName(string.format(_("Goods Jump Freighter %d"), cnt))
-            --   Long-range Propulsion
+            --   Long-range propulsion
             variation:setJumpDrive(true)
     end
-    
-    -------------------Garbage Freighters-------------------
+
+    -------------------Garbage freighters-------------------
     template = ShipTemplate():setName("Garbage Freighter " .. cnt)
         template:setLocaleName(string.format(_("Garbage Freighter %d"), cnt))
         template:setClass(_("Corvette"), _("Freighter"))
@@ -405,15 +490,15 @@ for cnt=1,5 do
         -- Maneuverability
         --   Impulse Forward, Turn, Acceleration
         template:setSpeed(60 - 5 * cnt, 6, 10)
-    
+
     if cnt > 2 then
         variation = template:copy("Garbage Jump Freighter " .. cnt)
             variation:setLocaleName(string.format(_("Garbage Jump Freighter %d"), cnt))
-            --   Long-range Propulsion
+            --   Long-range propulsion
             variation:setJumpDrive(true)
     end
 
-    ------------------Equipment Freighters------------------
+    ------------------Equipment freighters------------------
     template = ShipTemplate():setName("Equipment Freighter " .. cnt)
         template:setLocaleName(string.format(_("Equipment Freighter %d"), cnt))
         template:setClass(_("Corvette"), _("Freighter"))
@@ -428,15 +513,15 @@ for cnt=1,5 do
         -- Maneuverability
         --   Impulse Forward, Turn, Acceleration
         template:setSpeed(60 - 5 * cnt, 6, 10)
-    
+
     if cnt > 2 then
         variation = template:copy("Equipment Jump Freighter " .. cnt)
             variation:setLocaleName(string.format(_("Equipment Jump Freighter %d"), cnt))
-            --   Long-range Propulsion
+            --   Long-range propulsion
             variation:setJumpDrive(true)
     end
 
-    --------------------Fuel Freighters---------------------
+    --------------------Fuel freighters---------------------
     template = ShipTemplate():setName("Fuel Freighter " .. cnt)
         template:setLocaleName(string.format(_("Fuel Freighter %d"), cnt))
         template:setClass(_("Corvette"), _("Freighter"))
@@ -451,68 +536,11 @@ for cnt=1,5 do
         -- Maneuverability
         --   Impulse Forward, Turn, Acceleration
         template:setSpeed(60 - 5 * cnt, 6, 10)
-    
+
     if cnt > 2 then
         variation = template:copy("Fuel Jump Freighter " .. cnt)
             variation:setLocaleName(string.format(_("Fuel Jump Freighter %d"), cnt))
-            --   Long-range Propulsion
+            --   Long-range propulsion
             variation:setJumpDrive(true)
     end
 end
-
-template = ShipTemplate():setName("Jump Carrier"):setLocaleName(_("Jump Carrier")):setClass(_("Corvette"), _("Freighter")):setModel("transport_4_2")
-template:setDescription(_([[The Jump Carrier is a specialized Freighter. It does not carry any cargo, as it's cargo bay is taken up by a specialized jump drive and the energy storage required to run this jump drive.
-It is designed to carry other ships deep into space. So it has special docking parameters, allowing other ships to attach themselves to this ship.]]))
-template:setHull(100)
-template:setShields(50, 50)
-template:setSpeed(50, 6, 10)
-template:setRadarTrace("radar_transport.png")
-template:setJumpDrive(true)
-template:setJumpDriveRange(5000, 100 * 50000) -- The jump carrier can jump a 100x longer distance then normal jump drives.
-template:setDockClasses("Starfighter", "Frigate", "Corvette")
-
-
-variation = template:copy("Benedict"):setLocaleName(_("Benedict")):setType("playership"):setClass(_("Corvette"), _("Freighter/Carrier"))
-variation:setDescription(_("Benedict is an improved version of the Jump Carrier"))
-variation:setShields(70, 70)
-variation:setHull(200)
-variation:setSpeed(60, 6, 8)
---                  Arc, Dir, Range, CycleTime, Dmg
-variation:setBeam(0, 10,   0, 1500.0, 6.0, 4)
-variation:setBeam(1, 10, 180, 1500.0, 6.0, 4)
---                       Arc, Dir, Rotate speed
-variation:setBeamWeaponTurret( 0, 90,   0, 6)
-variation:setBeamWeaponTurret( 1, 90, 180, 6)
-variation:setCombatManeuver(400, 250)
-variation:setJumpDriveRange(5000, 90000) 
-
-variation:setRepairCrewCount(6)
-variation:addRoomSystem(3,0,2,3, "Reactor")
-variation:addRoomSystem(3,3,2,3, "Warp")
-variation:addRoomSystem(6,0,2,3, "JumpDrive")
-variation:addRoomSystem(6,3,2,3, "MissileSystem")
-variation:addRoomSystem(5,2,1,2, "Maneuver")
-variation:addRoomSystem(2,2,1,2, "RearShield")
-variation:addRoomSystem(0,1,2,4, "Beamweapons")
-variation:addRoomSystem(8,2,1,2, "FrontShield")
-variation:addRoomSystem(9,1,2,4, "Impulse")
-
-variation:addDoor(3, 3, true)
-variation:addDoor(6, 3, true)
-variation:addDoor(5, 2, false)
-variation:addDoor(6, 3, false)
-variation:addDoor(3, 2, false)
-variation:addDoor(2, 3, false)
-variation:addDoor(8, 2, false)
-variation:addDoor(9, 3, false)
-
-var2 = variation:copy("Kiriya"):setLocaleName(_("Kiriya"))
-var2:setDescription(_("Kiriya is an improved warp drive version of the Jump Carrier"))
---          Arc, Dir, Range, CycleTime, Dmg
-var2:setBeam(0, 10,   0, 1500.0, 6.0, 4)
-var2:setBeam(1, 10, 180, 1500.0, 6.0, 4)
---                      Arc, Dir, Rotate speed
-var2:setBeamWeaponTurret( 0, 90,   0, 6)
-var2:setBeamWeaponTurret( 1, 90, 180, 6)
-var2:setJumpDrive(false)
-var2:setWarpSpeed(750)
