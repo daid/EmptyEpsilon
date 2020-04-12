@@ -16,7 +16,7 @@ There are 3 starfighter subclasses:
     at a cost of maneuverbility.
 * Bomber: The slowest starfighters can pack a large punch.
     Most eschew lasers for missiles, and the largest bombers
-    have been known to deliver capital ship-killing nukes.
+    have been known to deliver ship-killing nukes.
 ----------------------------------------------------------]]
 
 ------------------------INTERCEPTORS------------------------
@@ -28,7 +28,7 @@ template = ShipTemplate():setName("MT52 Hornet")
     template:setModel("WespeScoutYellow")
     template:setDescription(_([[The MT52 Hornet is a basic interceptor found in many corners of the galaxy. It's easy to find spare parts for MT52s, not only because they are produced in large numbers, but also because they suffer high losses in combat.]]))
     template:setRadarTrace("radar_fighter.png")
-    template:setDefaultAI('fighter')
+    template:setDefaultAI("fighter")
 
     -- Defenses
     template:setHull(30)
@@ -176,59 +176,92 @@ variation = template:copy("Adder MK6")
     --     Tube weapon storage     Type, Count
     variation:setWeaponStorage(  "HVLI", 8)
 
-template = ShipTemplate():setName("WX-Lindworm"):setLocaleName(_("WX-Lindworm")):setClass(_("Starfighter"), _("Bomber")):setModel("LindwurmFighterYellow")
-template:setRadarTrace("radar_fighter.png")
-template:setDescription(_([[The WX-Lindworm, or "Worm" as it's often called, is a bomber-class starfighter. While one of the least-shielded starfighters in active duty, the Worm's two launchers can pack quite a punch. Its goal is to fly in, destroy its target, and fly out or be destroyed.]]))
-template:setHull(50)
-template:setShields(20)
-template:setSpeed(50, 15, 25)
-template:setTubes(3, 15.0)
-template:setWeaponStorage("HVLI", 6)
-template:setWeaponStorage("Homing", 1)
-template:setTubeSize(0, "small")
-template:setTubeSize(1, "small")
-template:setTubeSize(2, "small")
-template:setTubeDirection(1, 1):setWeaponTubeExclusiveFor(1, "HVLI")
-template:setTubeDirection(2,-1):setWeaponTubeExclusiveFor(2, "HVLI")
+--------------------------BOMBERS---------------------------
 
-variation = template:copy("ZX-Lindworm"):setLocaleName(_("ZX-Lindworm")):setModel("LindwurmFighterBlue"):setType("playership")
-variation:setHull(75)
-variation:setShields(40)
-variation:setSpeed(70, 15, 25)
-variation:setTubes(3, 10.0)
-variation:setTubeSize(0, "small")
-variation:setTubeSize(1, "small")
-variation:setTubeSize(2, "small")
+------------------------WX-Lindworm-------------------------
+template = ShipTemplate():setName("WX-Lindworm")
+    template:setLocaleName(_("WX-Lindworm"))
+    template:setClass(_("Starfighter"), _("Bomber"))
+    template:setModel("LindwurmFighterYellow")
+    template:setDescription(_([[The WX-Lindworm, or "Worm" as it's often called, is a bomber-class starfighter. While one of the least-shielded starfighters in active duty, the Worm's two launchers can pack quite a punch. Its goal is to fly in, destroy its target, and fly out or be destroyed.]]))
+    template:setRadarTrace("radar_fighter.png")
 
-variation:setWeaponStorage("HVLI", 12)
-variation:setWeaponStorage("Homing", 3)
---                  Arc, Dir, Range, CycleTime, Dmg
-variation:setBeam(0, 10, 180, 700, 6.0, 2)
---								  Arc, Dir, Rotate speed
-variation:setBeamWeaponTurret( 0, 270, 180, 4)
-variation:setCombatManeuver(250, 150)
-variation:setEnergyStorage(400)
+    -- Defenses
+    template:setHull(50)
+    template:setShields(20)
 
-variation:setRepairCrewCount(1)
-variation:addRoomSystem(0,0,1,3,"RearShield")
-variation:addRoomSystem(1,1,3,1,"MissileSystem")
-variation:addRoomSystem(4,1,2,1,"Beamweapons")
-variation:addRoomSystem(3,2,2,1,"Reactor")
-variation:addRoomSystem(2,3,2,1,"Warp")
-variation:addRoomSystem(4,3,5,1,"JumpDrive")
-variation:addRoomSystem(0,4,1,3,"Impulse")
-variation:addRoomSystem(3,4,2,1,"Maneuver")
-variation:addRoomSystem(1,5,3,1,"FrontShield")
-variation:addRoom(4,5,2,1)
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+    template:setSpeed(50,   15, 25)
 
-variation:addDoor(1,1,false)
-variation:addDoor(1,5,false)
-variation:addDoor(3,2,true)
-variation:addDoor(4,2,true)
-variation:addDoor(3,3,true)
-variation:addDoor(4,3,true)
-variation:addDoor(3,4,true)
-variation:addDoor(4,4,true)
-variation:addDoor(3,5,true)
-variation:addDoor(4,5,true)
+    -- Weapons
+    --   Tubes    Count, Load Time
+    template:setTubes(3, 15.0)
+    --     Tube direction    ID, Bearing
+    template:setTubeDirection(1, 1):setWeaponTubeExclusiveFor(1, "HVLI")
+    template:setTubeDirection(2,-1):setWeaponTubeExclusiveFor(2, "HVLI")
+    --     Tube size    ID, Size (small, medium, large)
+    template:setTubeSize(0, "small")
+    template:setTubeSize(1, "small")
+    template:setTubeSize(2, "small")
+    --     Tube weapon storage    Type, Count
+    template:setWeaponStorage(  "HVLI", 6)
+    template:setWeaponStorage("Homing", 1)
 
+------------------------ZX-Lindworm-------------------------
+variation = template:copy("ZX-Lindworm")
+    variation:setLocaleName(_("ZX-Lindworm"))
+    variation:setModel("LindwurmFighterBlue")
+    variation:setType("playership")
+
+    -- Capabilities
+    variation:setEnergyStorage(400)
+
+    -- Defenses
+    variation:setHull(75)
+    variation:setShields(40)
+
+    -- Maneuverability
+    --   Impulse  Forward, Turn, Acceleration
+    variation:setSpeed(70,   15, 25)
+    --   Combat Maneuver      Boost, Strafe
+    variation:setCombatManeuver(250, 150)
+
+    -- Weapons
+    --   Beams             ID, Arc, Bear,  Range, Cycle, Damage
+    variation:setBeamWeapon(0,  10,  180,  700.0,   6.0, 2)
+    --   Beam turrets            ID, Arc, Dir, Rotation Speed
+    variation:setBeamWeaponTurret(0, 270, 180, 4)
+    --   Tubes     Count, Load Time
+    variation:setTubes(3, 10.0)
+    --     Tube weapon storage     Type, Count
+    variation:setWeaponStorage(  "HVLI", 12)
+    variation:setWeaponStorage("Homing",  3)
+
+    -- Internal layout
+    --   Repair crew count
+    variation:setRepairCrewCount(1)
+    --   Rooms          Position  Size
+    --                      X  Y  W  H  System
+    variation:addRoomSystem(0, 0, 1, 3, "RearShield")
+    variation:addRoomSystem(1, 1, 3, 1, "MissileSystem")
+    variation:addRoomSystem(4, 1, 2, 1, "Beamweapons")
+    variation:addRoomSystem(3, 2, 2, 1, "Reactor")
+    variation:addRoomSystem(2, 3, 2, 1, "Warp")
+    variation:addRoomSystem(4, 3, 5, 1, "JumpDrive")
+    variation:addRoomSystem(0, 4, 1, 3, "Impulse")
+    variation:addRoomSystem(3, 4, 2, 1, "Maneuver")
+    variation:addRoomSystem(1, 5, 3, 1, "FrontShield")
+    variation:addRoom(      4, 5, 2, 1)
+    --   Doors    Position
+    --                X  Y  Horizontal?
+    variation:addDoor(1, 1, false)
+    variation:addDoor(1, 5, false)
+    variation:addDoor(3, 2, true)
+    variation:addDoor(4, 2, true)
+    variation:addDoor(3, 3, true)
+    variation:addDoor(4, 3, true)
+    variation:addDoor(3, 4, true)
+    variation:addDoor(4, 4, true)
+    variation:addDoor(3, 5, true)
+    variation:addDoor(4, 5, true)
