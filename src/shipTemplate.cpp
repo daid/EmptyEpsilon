@@ -94,8 +94,8 @@ ShipTemplate::ShipTemplate()
     if (game_server) { LOG(ERROR) << "ShipTemplate objects can not be created during a scenario."; destroy(); return; }
     
     type = Ship;
-    class_name = "No class";
-    class_name = "No sub-class";
+    class_name = tr("No class");
+    sub_class_name = tr("No sub-class");
     shares_energy_with_docked = true;
     repair_docked = false;
     restocks_scan_probes = false;
