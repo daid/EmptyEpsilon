@@ -1,22 +1,42 @@
---[[               Starfighters
-Starfighters are single to 3 person small ships. These are most commonly used as light firepower roles.
-They are common in larger groups. And need a close by station or support ship, as they lack long time life support.
-It's rare to see starfighters with more then 1 shield section.
+--[[--------------------STARFIGHTERS------------------------
+Starfighters are small ships typically crewed by 1 to 3
+people and feature high speed and maneuverability, light
+firepower, thin defenses, and a lack of long-range
+capabilities. Few have more than 1 shield section.
 
-One of the most well known starfighters at earth is the X-Wing.
+They are commonly deployed in large groups, and their lack
+of extended life support forces them to rely on nearby space
+stations or support ships.
 
-Starfighters come in 3 subclasses:
-* Interceptors: Fast, low on firepower, high on manouverability
-* Gunship: Equiped with more weapons, but hands in maneuverbility because of it.
-* Bomber: Slowest of all starfighters, but pack a large punch in a small package. Usually come without any lasers, but the largers bombers have been known to deliver nukes.
+There are 3 starfighter subclasses:
+
+* Interceptors: Extremely fast and maneuverable, but with
+    little offensive firepower and negligible defenses.
+* Gunship: Equipped with more weapons and stouter defenses,
+    at a cost of maneuverbility.
+* Bomber: The slowest starfighters can pack a large punch.
+    Most eschew lasers for missiles, and the largest bombers
+    have been known to deliver capital ship-killing nukes.
 ----------------------------------------------------------]]
-template = ShipTemplate():setName("MT52 Hornet"):setLocaleName(_("MT52 Hornet")):setClass(_("Starfighter"), _("Interceptor")):setModel("WespeScoutYellow")
-template:setRadarTrace("radar_fighter.png")
-template:setDescription(_([[The MT52 Hornet is a basic interceptor found in many corners of the galaxy. It's easy to find spare parts for MT52s, not only because they are produced in large numbers, but also because they suffer high losses in combat.]]))
-template:setHull(30)
-template:setShields(20)
-template:setSpeed(120, 30, 25)
-template:setDefaultAI('fighter')
+
+------------------------INTERCEPTORS------------------------
+
+------------------------MT52 Hornet-------------------------
+template = ShipTemplate():setName("MT52 Hornet")
+    template:setLocaleName(_("MT52 Hornet"))
+    template:setClass(_("Starfighter"), _("Interceptor"))
+    template:setModel("WespeScoutYellow")
+    template:setDescription(_([[The MT52 Hornet is a basic interceptor found in many corners of the galaxy. It's easy to find spare parts for MT52s, not only because they are produced in large numbers, but also because they suffer high losses in combat.]]))
+    template:setRadarTrace("radar_fighter.png")
+    template:setDefaultAI('fighter')
+
+    -- Defenses
+    template:setHull(30)
+    template:setShields(20)
+
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+    template:setSpeed(120, 30, 25)
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 30, 0, 700.0, 4.0, 2)
 
