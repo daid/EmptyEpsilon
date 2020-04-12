@@ -57,8 +57,8 @@ template = ShipTemplate():setName("Atlantis X23")
 -------------------Atlantis (player ship)-------------------
 variation = template:copy("Atlantis")
     variation:setLocaleName(_("Atlantis"))
-    variation:setType("playership")
     variation:setDescription(_([[A refitted Atlantis X23 for more general tasks. The large shield system has been replaced with an advanced combat maneuvering system and improved impulse engines. Its missile loadout is also more diverse. Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake.]]))
+    variation:setType("playership")
  
     -- Defenses
     variation:setHull(250)
@@ -107,7 +107,6 @@ variation = template:copy("Atlantis")
     variation:addRoom(      2, 5, 2, 1);
     variation:addRoomSystem(1, 6, 2, 1, "MissileSystem");
     variation:addRoomSystem(1, 7, 2, 1, "Impulse");
-
     --   Doors    Position
     --                X  Y  Horizontal?
     variation:addDoor(1, 1, true);
@@ -124,80 +123,118 @@ variation = template:copy("Atlantis")
     variation:addDoor(8, 3, false);
     variation:addDoor(8, 4, false);
 
-template = ShipTemplate():setName("Starhammer II"):setLocaleName(_("Starhammer II")):setClass(_("Corvette"), _("Destroyer")):setModel("battleship_destroyer_4_upgraded")
-template:setDescription(_([[Contrary to its predecessor, the Starhammer II lives up to its name. By resolving the original Starhammer's power and heat management issues, the updated model makes for a phenomenal frontal assault ship. Its low speed makes it difficult to position, but when in the right place at the right time, even the strongest shields can't withstand a Starhammer's assault for long.]]))
-template:setRadarTrace("radar_dread.png")
-template:setHull(200)
-template:setShields(450, 350, 150, 150, 350)
-template:setSpeed(35, 6, 10)
-template:setJumpDrive(true)
---                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 60, -10, 2000.0, 8.0, 11)
-template:setBeam(1, 60,  10, 2000.0, 8.0, 11)
-template:setBeam(2, 60, -20, 1500.0, 8.0, 11)
-template:setBeam(3, 60,  20, 1500.0, 8.0, 11)
-template:setTubes(2, 10.0)
-template:setWeaponStorage("HVLI", 20)
-template:setWeaponStorage("Homing", 4)
-template:setWeaponStorage("EMP", 2)
-template:weaponTubeDisallowMissle(1, "EMP")
+-----------------------Starhammer II------------------------
+template = ShipTemplate():setName("Starhammer II")
+    template:setLocaleName(_("Starhammer II"))
+    template:setClass(_("Corvette"), _("Destroyer"))
+    template:setModel("battleship_destroyer_4_upgraded")
+    template:setDescription(_([[Contrary to its predecessor, the Starhammer II lives up to its name. By resolving the original Starhammer's power and heat management issues, the updated model makes for a phenomenal frontal assault ship. Its low speed makes it difficult to position, but when in the right place at the right time, even the strongest shields can't withstand a Starhammer's assault for long.]]))
+    template:setRadarTrace("radar_dread.png")
 
-template = ShipTemplate():setName("Crucible"):setLocaleName(_("Crucible")):setClass(_("Corvette"),_("Popper")):setModel("LaserCorvetteRed"):setType("playership")
-template:setDescription(_("A number of missile tubes range around this ship. Beams were deemed lower priority, though they are still present. Stronger defenses than a frigate, but not as strong as the Atlantis"))
-template:setRadarTrace("radar_laser.png")
-template:setHull(160)
-template:setShields(160,160)
-template:setSpeed(80,15,40)
-template:setCombatManeuver(400, 250)
-template:setJumpDrive(false)
-template:setWarpSpeed(750)
---                  Arc, Dir,  Range, CycleTime, Dmg
-template:setBeam(0, 70, -30, 1000.0, 6.0, 5)
-template:setBeam(1, 70,  30, 1000.0, 6.0, 5)
-template:setTubes(6, 8.0)
-template:setWeaponStorage("HVLI", 24)
-template:setWeaponStorage("Homing", 8)
-template:setWeaponStorage("EMP", 6)
-template:setWeaponStorage("Nuke", 4)
-template:setWeaponStorage("Mine", 6)
-template:setTubeDirection(0, 0)
-template:setTubeSize(0, "small")
-template:setTubeDirection(1, 0)
-template:setTubeDirection(2, 0)
-template:setTubeSize(2, "large")
-template:setTubeDirection(3, -90)
-template:setTubeDirection(4,  90)
-template:setTubeDirection(5, 180)
-template:setWeaponTubeExclusiveFor(0, "HVLI")
-template:setWeaponTubeExclusiveFor(1, "HVLI")
-template:setWeaponTubeExclusiveFor(2, "HVLI")
-template:weaponTubeDisallowMissle(3, "Mine")
-template:weaponTubeDisallowMissle(4, "Mine")
-template:setWeaponTubeExclusiveFor(5, "Mine")
+    -- Defenses
+    template:setHull(200)
+    template:setShields(450, 350, 150, 150, 350)
 
-template:setRepairCrewCount(4)
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+    template:setSpeed(35, 6, 10)
+    --   Long-range Propulsion
+    template:setJumpDrive(true)
+    -- Weapons
+    --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
+    template:setBeamWeapon(0,  60,  -10, 2000.0,   8.0, 11)
+    template:setBeamWeapon(1,  60,   10, 2000.0,   8.0, 11)
+    template:setBeamWeapon(2,  60,  -20, 1500.0,   8.0, 11)
+    template:setBeamWeapon(3,  60,   20, 1500.0,   8.0, 11)
+    --   Tubes    Count, Load Time
+    template:setTubes(2, 10.0)
+    --     Tube specialization        ID, Type
+    template:weaponTubeDisallowMissle( 1, "EMP")
+    --     Tube weapon storage    Type, Count
+    template:setWeaponStorage(  "HVLI", 20)
+    template:setWeaponStorage("Homing",  4)
+    template:setWeaponStorage(   "EMP",  2)
 
-template:addRoomSystem(2, 0, 2, 1, "Maneuver");
-template:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
-template:addRoomSystem(0, 2, 3, 2, "RearShield");
-template:addRoomSystem(1, 4, 2, 1, "Reactor");
-template:addRoomSystem(2, 5, 2, 1, "Warp");
-template:addRoomSystem(3, 1, 3, 2, "JumpDrive");
-template:addRoomSystem(3, 3, 3, 2, "FrontShield");
-template:addRoom(6, 2, 6, 2);
-template:addRoomSystem(9, 1, 2, 1, "MissileSystem");
-template:addRoomSystem(9, 4, 2, 1, "Impulse");
+--------------------------Crucible--------------------------
+template = ShipTemplate():setName("Crucible")
+    template:setLocaleName(_("Crucible"))
+    template:setClass(_("Corvette"),_("Destroyer"))
+    template:setModel("LaserCorvetteRed")
+    template:setDescription(_([[The Crucible is a "popper" (vernacular for popping enemies in the face with HVLIs) that features several missile tubes positioned around its hull. Beams were deemed a lower priority, though they are still present. Its defenses are stronger than most frigates, but not as strong as the Atlantis.]]))
+    template:setRadarTrace("radar_laser.png")
+    template:setType("playership")
 
-template:addDoor(2, 1, true)
-template:addDoor(1, 2, true)
-template:addDoor(1, 4, true)
-template:addDoor(2, 5, true)
-template:addDoor(3, 2, false)
-template:addDoor(4, 3, true)
-template:addDoor(6, 3, false)
-template:addDoor(9, 2, true)
-template:addDoor(10,4, true)
+    -- Defenses
+    template:setHull(160)
+    template:setShields(160, 160)
 
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+    template:setSpeed(80, 15, 40)
+    --   Combat Maneuver     Boost, Strafe
+    template:setCombatManeuver(400, 250)
+    --   Long-range Propulsion
+    template:setJumpDrive(false)
+    --     Warp speed per factor
+    template:setWarpSpeed(   750)
+    -- Weapons
+    --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
+    template:setBeamWeapon(0,  70,  -30, 1000.0,   6.0, 5)
+    template:setBeamWeapon(1,  70,   30, 1000.0,   6.0, 5)
+    --   Tubes    Count, Load Time
+    template:setTubes(6, 8.0)
+    --     Tube direction    ID, Bearing
+    template:setTubeDirection(0, 0)
+    template:setTubeDirection(1, 0)
+    template:setTubeDirection(2, 0)
+    template:setTubeDirection(3, -90)
+    template:setTubeDirection(4,  90)
+    template:setTubeDirection(5, 180)
+    --     Tube size    ID, Size (small, medium, large)
+    template:setTubeSize(0, "small")
+    template:setTubeSize(2, "large")
+    --     Tube specialization        ID, Type
+    template:setWeaponTubeExclusiveFor(0, "HVLI")
+    template:setWeaponTubeExclusiveFor(1, "HVLI")
+    template:setWeaponTubeExclusiveFor(2, "HVLI")
+    template:weaponTubeDisallowMissle( 3, "Mine")
+    template:weaponTubeDisallowMissle( 4, "Mine")
+    template:setWeaponTubeExclusiveFor(5, "Mine")
+    --     Tube weapon storage    Type, Count
+    template:setWeaponStorage("Homing",  8)
+    template:setWeaponStorage(  "Nuke",  4)
+    template:setWeaponStorage(   "EMP",  6)
+    template:setWeaponStorage(  "HVLI", 24)
+    template:setWeaponStorage(  "Mine",  6)
+
+    -- Internal layout
+    --   Repair crew count
+    template:setRepairCrewCount(4)
+    --   Rooms         Position  Size
+    --                     X  Y  W  H  System
+    template:addRoomSystem(2, 0, 2, 1, "Maneuver");
+    template:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
+    template:addRoomSystem(0, 2, 3, 2, "RearShield");
+    template:addRoomSystem(1, 4, 2, 1, "Reactor");
+    template:addRoomSystem(2, 5, 2, 1, "Warp");
+    template:addRoomSystem(3, 1, 3, 2, "JumpDrive");
+    template:addRoomSystem(3, 3, 3, 2, "FrontShield");
+    template:addRoom(      6, 2, 6, 2);
+    template:addRoomSystem(9, 1, 2, 1, "MissileSystem");
+    template:addRoomSystem(9, 4, 2, 1, "Impulse");
+    --   Doors    Position
+    --               X  Y  Horizontal?
+    template:addDoor(2, 1, true)
+    template:addDoor(1, 2, true)
+    template:addDoor(1, 4, true)
+    template:addDoor(2, 5, true)
+    template:addDoor(3, 2, false)
+    template:addDoor(4, 3, true)
+    template:addDoor(6, 3, false)
+    template:addDoor(9, 2, true)
+    template:addDoor(10,4, true)
+
+--------------------------Maverick--------------------------
 template = ShipTemplate():setName("Maverick"):setLocaleName(_("Maverick")):setClass(_("Corvette"),_("Gunner")):setModel("LaserCorvetteGreen"):setType("playership")
 template:setDescription(_("A number of beams bristle from various points on this gunner. Missiles were deemed lower priority, though they are still present. Stronger defenses than a frigate, but not as strong as the Atlantis"))
 template:setRadarTrace("radar_laser.png")
