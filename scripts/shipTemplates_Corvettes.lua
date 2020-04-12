@@ -1,84 +1,128 @@
---[[                  Corvette
-Corvettes are the common large ships. Larger then a frigate, smaller then a dreadnaught.
-They generally have 4 or more shield sections. Run with a crew of 20 to 250.
-This class generally has jumpdrives or warpdrives. But lack the maneuverability that is seen in frigates.
+--[[----------------------CORVETTES----------------------
+Corvettes are common large ships, larger than frigates
+and smaller than dreadnoughts. They generally have at
+least 4 shield sections and operate with a crew of 20 to
+250.
 
-They come in 3 different subclasses:
-* Destroyer: Combat oriented ships. No science, no transport. Just death in a large package.
-* Support: Large scale support roles. Drone carriers fall in this category. As well as mobile repair centers.
-* Freighter: Large scale transport ships. Most common here are the jump freighters, using specialized jumpdrives to cross large distances with large amounts of cargo.
+This class generally has jump or warp drives, but lack
+the maneuverability of frigates.
+
+There are 3 corvette subclasses:
+
+* Destroyers: Combat-oriented corvettes. No science, no
+    transport, just death in a large package.
+* Support: Large-scale support roles. Drone carriers and
+    mobile repair centers fall in this category.
+* Freighters: Large-scale transport ships. The most common
+    freighters are jump freighters, which use specialized
+    jump drives to cross large distances with large amounts
+    of cargo.
 ----------------------------------------------------------]]
 
---[[----------------------Destroyers----------------------]]
+-------------------------DESTROYERS-------------------------
 
-template = ShipTemplate():setName("Atlantis X23"):setLocaleName(_("Atlantis X23")):setClass(_("Corvette"), _("Destroyer")):setModel("battleship_destroyer_1_upgraded")
-template:setDescription(_([[The Atlantis X23 is the smallest model of destroyer, and its combination of frigate-like size and corvette-like power makes it an excellent escort ship when defending larger ships against multiple smaller enemies. Because the Atlantis X23 is fitted with a jump drive, it can also serve as an intersystem patrol craft.]]))
-template:setRadarTrace("radar_dread.png")
-template:setHull(100)
-template:setShields(200, 200, 200, 200)
-template:setSpeed(30, 3.5, 5)
-template:setJumpDrive(true)
---                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0,100, -20, 1500.0, 6.0, 8)
-template:setBeam(1,100,  20, 1500.0, 6.0, 8)
-template:setBeam(2,100, 180, 1500.0, 6.0, 8)
-template:setTubes(4, 10.0)
-template:setWeaponStorage("HVLI", 20)
-template:setWeaponStorage("Homing", 4)
-template:setTubeDirection(0, -90)
-template:setTubeDirection(1, -90)
-template:setTubeDirection(2,  90)
-template:setTubeDirection(3,  90)
+------------------------Atlantis X23------------------------
+template = ShipTemplate():setName("Atlantis X23")
+    template:setLocaleName(_("Atlantis X23"))
+    template:setClass(_("Corvette"), _("Destroyer"))
+    template:setModel("battleship_destroyer_1_upgraded")
+    template:setDescription(_([[The Atlantis X23 is the smallest model of destroyer, and its combination of frigate-like size and corvette-like power makes it an excellent escort ship when defending larger ships against multiple smaller enemies. Because the Atlantis X23 is fitted with a jump drive, it can also serve as an intersystem patrol craft.]]))
+    template:setRadarTrace("radar_dread.png")
 
-variation = template:copy("Atlantis"):setLocaleName(_("Atlantis")):setType("playership")
-variation:setDescription(_([[A refitted Atlantis X23 for more general tasks. The large shield system has been replaced with an advanced combat maneuvering systems and improved impulse engines. Its missile loadout is also more diverse. Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake.]]))
-variation:setShields(200, 200)
-variation:setHull(250)
-variation:setSpeed(90, 10, 20)
-variation:setCombatManeuver(400, 250)
-variation:setBeam(2, 0, 0, 0, 0, 0)
-variation:setWeaponStorage("Homing", 12)
-variation:setWeaponStorage("Nuke", 4)
-variation:setWeaponStorage("Mine", 8)
-variation:setWeaponStorage("EMP", 6)
-variation:setTubes(5, 8.0) -- Amount of torpedo tubes, and loading time of the tubes.
-variation:weaponTubeDisallowMissle(0, "Mine"):weaponTubeDisallowMissle(1, "Mine")
-variation:weaponTubeDisallowMissle(2, "Mine"):weaponTubeDisallowMissle(3, "Mine")
-variation:setTubeDirection(4, 180):setWeaponTubeExclusiveFor(4, "Mine")
+    -- Defenses
+    template:setHull(100)
+    template:setShields(200, 200, 200, 200)
 
-variation:addRoomSystem(1, 0, 2, 1, "Maneuver");
-variation:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
-variation:addRoom(2, 2, 2, 1);
+    -- Maneuverability
+    --           Forward, Turn, Acceleration
+    template:setSpeed(30,  3.5, 5)
+    template:setJumpDrive(true)
 
-variation:addRoomSystem(0, 3, 1, 2, "RearShield");
-variation:addRoomSystem(1, 3, 2, 2, "Reactor");
-variation:addRoomSystem(3, 3, 2, 2, "Warp");
-variation:addRoomSystem(5, 3, 1, 2, "JumpDrive");
-variation:addRoom(6, 3, 2, 1);
-variation:addRoom(6, 4, 2, 1);
-variation:addRoomSystem(8, 3, 1, 2, "FrontShield");
+    -- Weapons
+    -- Beams              ID, Arc, Bear,  Range, Cycle, Damage
+    template:setBeamWeapon(0, 100,  -20, 1500.0,   6.0, 8)
+    template:setBeamWeapon(1, 100,   20, 1500.0,   6.0, 8)
+    template:setBeamWeapon(2, 100,  180, 1500.0,   6.0, 8)
+    -- Tubes      Count, Load Time
+    template:setTubes(4, 10.0)
+    --   Tube direction      ID, Bearing
+    template:setTubeDirection(0, -90)
+    template:setTubeDirection(1, -90)
+    template:setTubeDirection(2,  90)
+    template:setTubeDirection(3,  90)
+    --   Tube weapon storage      Type, Count
+    template:setWeaponStorage(  "HVLI", 20)
+    template:setWeaponStorage("Homing",  4)
 
-variation:addRoom(2, 5, 2, 1);
-variation:addRoomSystem(1, 6, 2, 1, "MissileSystem");
-variation:addRoomSystem(1, 7, 2, 1, "Impulse");
-
-variation:addDoor(1, 1, true);
-variation:addDoor(2, 2, true);
-variation:addDoor(3, 3, true);
-variation:addDoor(1, 3, false);
-variation:addDoor(3, 4, false);
-variation:addDoor(3, 5, true);
-variation:addDoor(2, 6, true);
-variation:addDoor(1, 7, true);
-variation:addDoor(5, 3, false);
-variation:addDoor(6, 3, false);
-variation:addDoor(6, 4, false);
-variation:addDoor(8, 3, false);
-variation:addDoor(8, 4, false);
+-------------------Atlantis (player ship)-------------------
+variation = template:copy("Atlantis")
+    variation:setLocaleName(_("Atlantis"))
+    variation:setType("playership")
+    variation:setDescription(_([[A refitted Atlantis X23 for more general tasks. The large shield system has been replaced with an advanced combat maneuvering system and improved impulse engines. Its missile loadout is also more diverse. Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake.]]))
  
---Airlock doors
---variation:addDoor(2, 2, false);
---variation:addDoor(2, 5, false);
+    -- Defenses
+    variation:setHull(250)
+    variation:setShields(200, 200)
+
+    -- Maneuverability
+    --   Impulse  Forward, Turn, Acceleration
+    variation:setSpeed(90,   10, 20)
+    --   Combat Maneuver      Boost, Strafe
+    variation:setCombatManeuver(400, 250)
+
+    -- Weapons
+    --   Beams             ID, Arc, Bear,  Range, Cycle, Damage
+    variation:setBeamWeapon(2,   0,    0,      0,     0, 0)
+    --   Tubes     Count, Load Time
+    variation:setTubes(5, 8.0)
+    --     Tube direction     ID, Bearing
+    variation:setTubeDirection(4, 180)
+    --     Tube specialization         ID, Type
+    variation:weaponTubeDisallowMissle( 0, "Mine")
+    variation:weaponTubeDisallowMissle( 1, "Mine")
+    variation:weaponTubeDisallowMissle( 2, "Mine")
+    variation:weaponTubeDisallowMissle( 3, "Mine")
+    variation:setWeaponTubeExclusiveFor(4, "Mine")
+    --     Tube weapon storage     Type, Count
+    variation:setWeaponStorage("Homing", 12)
+    variation:setWeaponStorage(  "Nuke",  4)
+    variation:setWeaponStorage(   "EMP",  6)
+    variation:setWeaponStorage(  "Mine",  8)
+
+    -- Internal layout
+    --   Rooms          Position  Size
+    --                      X  Y  W  H  System
+    variation:addRoomSystem(1, 0, 2, 1, "Maneuver");
+    variation:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
+    variation:addRoom(      2, 2, 2, 1);
+
+    variation:addRoomSystem(0, 3, 1, 2, "RearShield");
+    variation:addRoomSystem(1, 3, 2, 2, "Reactor");
+    variation:addRoomSystem(3, 3, 2, 2, "Warp");
+    variation:addRoomSystem(5, 3, 1, 2, "JumpDrive");
+    variation:addRoom(      6, 3, 2, 1);
+    variation:addRoom(      6, 4, 2, 1);
+    variation:addRoomSystem(8, 3, 1, 2, "FrontShield");
+
+    variation:addRoom(      2, 5, 2, 1);
+    variation:addRoomSystem(1, 6, 2, 1, "MissileSystem");
+    variation:addRoomSystem(1, 7, 2, 1, "Impulse");
+
+    --   Doors    Position
+    --                X  Y  Horizontal?
+    variation:addDoor(1, 1, true);
+    variation:addDoor(2, 2, true);
+    variation:addDoor(3, 3, true);
+    variation:addDoor(1, 3, false);
+    variation:addDoor(3, 4, false);
+    variation:addDoor(3, 5, true);
+    variation:addDoor(2, 6, true);
+    variation:addDoor(1, 7, true);
+    variation:addDoor(5, 3, false);
+    variation:addDoor(6, 3, false);
+    variation:addDoor(6, 4, false);
+    variation:addDoor(8, 3, false);
+    variation:addDoor(8, 4, false);
 
 template = ShipTemplate():setName("Starhammer II"):setLocaleName(_("Starhammer II")):setClass(_("Corvette"), _("Destroyer")):setModel("battleship_destroyer_4_upgraded")
 template:setDescription(_([[Contrary to its predecessor, the Starhammer II lives up to its name. By resolving the original Starhammer's power and heat management issues, the updated model makes for a phenomenal frontal assault ship. Its low speed makes it difficult to position, but when in the right place at the right time, even the strongest shields can't withstand a Starhammer's assault for long.]]))
