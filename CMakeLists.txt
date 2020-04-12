@@ -54,6 +54,11 @@ elseif(UNIX)
     add_definitions(-DRESOURCE_BASE_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/")
 endif()
 
+# Set minimum target macOS version
+if(APPLE)
+	set(MACOSX_DEPLOYMENT_TARGET "10.10")
+endif()
+
 if(CONFIG_DIR)
     add_definitions(-DCONFIG_DIR="${CONFIG_DIR}")
 elseif(UNIX)
