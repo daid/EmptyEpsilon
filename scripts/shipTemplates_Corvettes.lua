@@ -158,7 +158,7 @@ template = ShipTemplate():setName("Starhammer II")
 --------------------------Crucible--------------------------
 template = ShipTemplate():setName("Crucible")
     template:setLocaleName(_("Crucible"))
-    template:setClass(_("Corvette"),_("Destroyer"))
+    template:setClass(_("Corvette"), _("Destroyer"))
     template:setModel("LaserCorvetteRed")
     template:setDescription(_([[The Crucible is a "popper" (vernacular for popping enemies in the face with HVLIs) that features several missile tubes positioned around its hull. Beams were deemed a lower priority, though they are still present. Its defenses are stronger than most frigates, but not as strong as the Atlantis.]]))
     template:setRadarTrace("radar_laser.png")
@@ -235,142 +235,228 @@ template = ShipTemplate():setName("Crucible")
     template:addDoor(10,4, true)
 
 --------------------------Maverick--------------------------
-template = ShipTemplate():setName("Maverick"):setLocaleName(_("Maverick")):setClass(_("Corvette"),_("Gunner")):setModel("LaserCorvetteGreen"):setType("playership")
-template:setDescription(_("A number of beams bristle from various points on this gunner. Missiles were deemed lower priority, though they are still present. Stronger defenses than a frigate, but not as strong as the Atlantis"))
-template:setRadarTrace("radar_laser.png")
-template:setHull(160)
-template:setShields(160,160)
-template:setSpeed(80,15,40)
-template:setCombatManeuver(400, 250)
-template:setJumpDrive(false)
-template:setWarpSpeed(800)
---                 Arc, Dir,  Range, CycleTime, Dmg
-template:setBeam(0, 10,   0, 2000.0, 6.0, 6)
-template:setBeam(1, 90, -20, 1500.0, 6.0, 8)
-template:setBeam(2, 90,  20, 1500.0, 6.0, 8)
-template:setBeam(3, 40, -70, 1000.0, 4.0, 6)
-template:setBeam(4, 40,  70, 1000.0, 4.0, 6)
-template:setBeam(5, 10, 180,  800.0, 6.0, 4)
---								Arc, Dir, Rotate speed
-template:setBeamWeaponTurret(5, 180, 180, .5)
-template:setTubes(3, 8.0)
-template:setWeaponStorage("HVLI", 10)
-template:setWeaponStorage("Homing", 6)
-template:setWeaponStorage("EMP", 4)
-template:setWeaponStorage("Nuke", 2)
-template:setWeaponStorage("Mine", 2)
-template:setTubeDirection(0, -90)
-template:setTubeDirection(1,  90)
-template:setTubeDirection(2, 180)
-template:weaponTubeDisallowMissle(0, "Mine")
-template:weaponTubeDisallowMissle(1, "Mine")
-template:setWeaponTubeExclusiveFor(2, "Mine")
+template = ShipTemplate():setName("Maverick")
+    template:setLocaleName(_("Maverick"))
+    template:setClass(_("Corvette"), _("Destroyer"))
+    template:setModel("LaserCorvetteGreen")
+    template:setDescription(_([[Mavericks are often called "gunners" for the large number of beams that bristle from its hull. Missiles were deemed a lower priority, though they are still present. Its defenses are stronger than most frigates, but not as strong as the Atlantis.]]))
+    template:setRadarTrace("radar_laser.png")
+    template:setType("playership")
 
-template:setRepairCrewCount(4)
+    -- Defenses
+    template:setHull(160)
+    template:setShields(160, 160)
 
-template:addRoomSystem(2, 0, 2, 1, "Maneuver");
-template:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
-template:addRoomSystem(0, 2, 3, 2, "RearShield");
-template:addRoomSystem(1, 4, 2, 1, "Reactor");
-template:addRoomSystem(2, 5, 2, 1, "Warp");
-template:addRoomSystem(3, 1, 3, 2, "JumpDrive");
-template:addRoomSystem(3, 3, 3, 2, "FrontShield");
-template:addRoom(6, 2, 6, 2);
-template:addRoomSystem(9, 1, 2, 1, "MissileSystem");
-template:addRoomSystem(9, 4, 2, 1, "Impulse");
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+    template:setSpeed(80, 15, 40)
+    --   Combat Maneuver     Boost, Strafe
+    template:setCombatManeuver(400, 250)
+    --   Long-range Propulsion
+    template:setJumpDrive(false)
+    --     Warp speed per factor
+    template:setWarpSpeed(   800)
 
-template:addDoor(2, 1, true)
-template:addDoor(1, 2, true)
-template:addDoor(1, 4, true)
-template:addDoor(2, 5, true)
-template:addDoor(3, 2, false)
-template:addDoor(4, 3, true)
-template:addDoor(6, 3, false)
-template:addDoor(9, 2, true)
-template:addDoor(10,4, true)
+    -- Weapons
+    --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
+    template:setBeamWeapon(0,  10,    0, 2000.0,   6.0, 6)
+    template:setBeamWeapon(1,  90,  -20, 1500.0,   6.0, 8)
+    template:setBeamWeapon(2,  90,   20, 1500.0,   6.0, 8)
+    template:setBeamWeapon(3,  40,  -70, 1000.0,   4.0, 6)
+    template:setBeamWeapon(4,  40,   70, 1000.0,   4.0, 6)
+    template:setBeamWeapon(5,  10,  180,  800.0,   6.0, 4)
+    --   Beam turrets           ID, Arc, Dir, Rotation Speed
+    template:setBeamWeaponTurret(5, 180, 180, 0.5)
+    --   Tubes    Count, Load Time
+    template:setTubes(3, 8.0)
+    --     Tube direction    ID, Bearing
+    template:setTubeDirection(0, -90)
+    template:setTubeDirection(1,  90)
+    template:setTubeDirection(2, 180)
+    --     Tube specialization        ID, Type
+    template:weaponTubeDisallowMissle( 0, "Mine")
+    template:weaponTubeDisallowMissle( 1, "Mine")
+    template:setWeaponTubeExclusiveFor(2, "Mine")
+    --     Tube weapon storage    Type, Count
+    template:setWeaponStorage("Homing",  6)
+    template:setWeaponStorage(  "Nuke",  2)
+    template:setWeaponStorage(   "EMP",  4)
+    template:setWeaponStorage(  "HVLI", 10)
+    template:setWeaponStorage(  "Mine",  2)
 
+    -- Internal layout
+    --   Repair crew count
+    template:setRepairCrewCount(4)
+    --   Rooms         Position  Size
+    --                     X  Y  W  H  System
+    template:addRoomSystem(2, 0, 2, 1, "Maneuver");
+    template:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
+    template:addRoomSystem(0, 2, 3, 2, "RearShield");
+    template:addRoomSystem(1, 4, 2, 1, "Reactor");
+    template:addRoomSystem(2, 5, 2, 1, "Warp");
+    template:addRoomSystem(3, 1, 3, 2, "JumpDrive");
+    template:addRoomSystem(3, 3, 3, 2, "FrontShield");
+    template:addRoom(      6, 2, 6, 2);
+    template:addRoomSystem(9, 1, 2, 1, "MissileSystem");
+    template:addRoomSystem(9, 4, 2, 1, "Impulse");
+    --   Doors     Position
+    --                X  Y  Horizontal?
+    template:addDoor( 2, 1, true)
+    template:addDoor( 1, 2, true)
+    template:addDoor( 1, 4, true)
+    template:addDoor( 2, 5, true)
+    template:addDoor( 3, 2, false)
+    template:addDoor( 4, 3, true)
+    template:addDoor( 6, 3, false)
+    template:addDoor( 9, 2, true)
+    template:addDoor(10, 4, true)
 
+---------------------------SUPPORT--------------------------
 
---[[-----------------------Support-----------------------]]
+----------------------Defense platform----------------------
+template = ShipTemplate():setName("Defense platform")
+    template:setLocaleName(_("Defense platform"))
+    template:setClass(_("Corvette"), _("subclass", "Support"))
+    template:setModel("space_station_4")
+    template:setDescription(_([[Stationary defense platforms operate like space stations, with docking and resupply functions, but are armed with powerful beam weapons and can slowly rotate. Larger systems often use these platforms to resupply patrol ships.]]))
+    template:setRadarTrace("radartrace_smallstation.png")
 
--- The weapons-platform is a stationary platform with beam-weapons. It's extremely slow to turn, but it's beam weapons do a huge amount of damage.
--- Smaller ships can dock to this platform to re-supply.
-template = ShipTemplate():setName("Defense platform"):setLocaleName(_("Defense platform")):setClass(_("Corvette"), _("subclass", "Support")):setModel("space_station_4")
-template:setDescription(_([[This stationary defense platform operates like a station, with docking and resupply functions, but is armed with powerful beam weapons and can slowly rotate. Larger systems often use these platforms to resupply patrol ships.]]))
-template:setRadarTrace("radartrace_smallstation.png")
-template:setHull(150)
-template:setShields(120, 120, 120, 120, 120, 120)
-template:setSpeed(0, 0.5, 0)
-template:setDockClasses("Starfighter", "Frigate")
---               Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 30,   0, 4000.0, 1.5, 20)
-template:setBeam(1, 30,  60, 4000.0, 1.5, 20)
-template:setBeam(2, 30, 120, 4000.0, 1.5, 20)
-template:setBeam(3, 30, 180, 4000.0, 1.5, 20)
-template:setBeam(4, 30, 240, 4000.0, 1.5, 20)
-template:setBeam(5, 30, 300, 4000.0, 1.5, 20)
+    -- Capabilities
+    template:setDockClasses("Starfighter", "Frigate")
 
---[[----------------------Freighters----------------------]]
+    -- Defenses
+    template:setHull(150)
+    template:setShields(120, 120, 120, 120, 120, 120)
+
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+    template:setSpeed( 0,  0.5, 0)
+
+    -- Weapons
+    --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
+    template:setBeamWeapon(0,  30,    0, 4000.0,   1.5, 20)
+    template:setBeamWeapon(1,  30,   60, 4000.0,   1.5, 20)
+    template:setBeamWeapon(2,  30,  120, 4000.0,   1.5, 20)
+    template:setBeamWeapon(3,  30,  180, 4000.0,   1.5, 20)
+    template:setBeamWeapon(4,  30,  240, 4000.0,   1.5, 20)
+    template:setBeamWeapon(5,  30,  300, 4000.0,   1.5, 20)
+
+-------------------------FREIGHTERS-------------------------
 
 for cnt=1,5 do
-    template = ShipTemplate():setName("Personnel Freighter " .. cnt):setLocaleName(string.format(_("Personnel Freighter %d"), cnt)):setClass(_("Corvette"), _("Freighter")):setModel("transport_1_" .. cnt)
-    template:setDescription(_([[These freighters are designed to transport armed troops, military support personnel, and combat gear.]]))
-    template:setHull(100)
-    template:setShields(50, 50)
-    template:setSpeed(60 - 5 * cnt, 6, 10)
-    template:setRadarTrace("radar_transport.png")
+    ------------------Personnel Freighters------------------
+    template = ShipTemplate():setName("Personnel Freighter " .. cnt)
+        template:setLocaleName(string.format(_("Personnel Freighter %d"), cnt))
+        template:setClass(_("Corvette"), _("Freighter"))
+        template:setModel("transport_1_" .. cnt)
+        template:setDescription(_([[Personnel freighters are designed to transport armed troops, military support personnel, and combat gear.]]))
+        template:setRadarTrace("radar_transport.png")
+
+        -- Defenses
+        template:setHull(100)
+        template:setShields(50, 50)
+
+        -- Maneuverability
+        --   Impulse           Forward, Turn, Acceleration
+        template:setSpeed(60 - 5 * cnt,    6, 10)
     
     if cnt > 2 then
-        variation = template:copy("Personnel Jump Freighter " .. cnt):setLocaleName(string.format(_("Personnel Jump Freighter %d"), cnt))
-        variation:setJumpDrive(true)
+        variation = template:copy("Personnel Jump Freighter " .. cnt)
+            variation:setLocaleName(string.format(_("Personnel Jump Freighter %d"), cnt))
+            --   Long-range Propulsion
+            variation:setJumpDrive(true)
     end
 
-    template = ShipTemplate():setName("Goods Freighter " .. cnt):setLocaleName(string.format(_("Goods Freighter %d"), cnt)):setClass(_("Corvette"), _("Freighter")):setModel("transport_2_" .. cnt)
-    template:setDescription(_([[Cargo freighters haul large loads of cargo across long distances on impulse power. Their cargo bays include climate control and stabilization systems that keep the cargo in good condition.]]))
-    template:setHull(100)
-    template:setShields(50, 50)
-    template:setSpeed(60 - 5 * cnt, 6, 10)
-    template:setRadarTrace("radar_transport.png")
+    --------------------Goods Freighters--------------------
+    template = ShipTemplate():setName("Goods Freighter " .. cnt)
+        template:setLocaleName(string.format(_("Goods Freighter %d"), cnt))
+        template:setClass(_("Corvette"), _("Freighter"))
+        template:setModel("transport_2_" .. cnt)
+        template:setDescription(_([[Cargo freighters haul large loads of cargo across long distances. Their cargo bays include climate control and stabilization systems that keep the cargo in good condition.]]))
+        template:setRadarTrace("radar_transport.png")
     
+        -- Defenses
+        template:setHull(100)
+        template:setShields(50, 50)
+
+        -- Maneuverability
+        --   Impulse           Forward, Turn, Acceleration
+        template:setSpeed(60 - 5 * cnt,    6, 10)
+
     if cnt > 2 then
-        variation = template:copy("Goods Jump Freighter " .. cnt):setLocaleName(string.format(_("Goods Jump Freighter %d"), cnt))
-        variation:setJumpDrive(true)
+        variation = template:copy("Goods Jump Freighter " .. cnt)
+            variation:setLocaleName(string.format(_("Goods Jump Freighter %d"), cnt))
+            --   Long-range Propulsion
+            variation:setJumpDrive(true)
     end
     
-    template = ShipTemplate():setName("Garbage Freighter " .. cnt):setLocaleName(string.format(_("Garbage Freighter %d"), cnt)):setClass(_("Corvette"), _("Freighter")):setModel("transport_3_" .. cnt)
-    template:setDescription(_([[These freighters are specially designed to haul garbage and waste. They are fitted with a trash compactor and fewer stabilzation systems than cargo freighters.]]))
-    template:setHull(100)
-    template:setShields(50, 50)
-    template:setSpeed(60 - 5 * cnt, 6, 10)
-    template:setRadarTrace("radar_transport.png")
+    -------------------Garbage Freighters-------------------
+    template = ShipTemplate():setName("Garbage Freighter " .. cnt)
+        template:setLocaleName(string.format(_("Garbage Freighter %d"), cnt))
+        template:setClass(_("Corvette"), _("Freighter"))
+        template:setModel("transport_3_" .. cnt)
+        template:setDescription(_([[Garbage freighters are specially designed to haul waste. They are fitted with a trash compactor and fewer stabilzation systems than cargo freighters.]]))
+        template:setRadarTrace("radar_transport.png")
+
+        -- Defenses
+        template:setHull(100)
+        template:setShields(50, 50)
+
+        -- Maneuverability
+        --   Impulse Forward, Turn, Acceleration
+        template:setSpeed(60 - 5 * cnt, 6, 10)
     
     if cnt > 2 then
-        variation = template:copy("Garbage Jump Freighter " .. cnt):setLocaleName(string.format(_("Garbage Jump Freighter %d"), cnt))
-        variation:setJumpDrive(true)
+        variation = template:copy("Garbage Jump Freighter " .. cnt)
+            variation:setLocaleName(string.format(_("Garbage Jump Freighter %d"), cnt))
+            --   Long-range Propulsion
+            variation:setJumpDrive(true)
     end
 
-    template = ShipTemplate():setName("Equipment Freighter " .. cnt):setLocaleName(string.format(_("Equipment Freighter %d"), cnt)):setClass(_("Corvette"), _("Freighter")):setModel("transport_4_" .. cnt)
-    template:setDescription(_([[Equipment freighters have specialized environmental and stabilization systems to safely carry delicate machinery and complex instruments.]]))
-    template:setHull(100)
-    template:setShields(50, 50)
-    template:setSpeed(60 - 5 * cnt, 6, 10)
-    template:setRadarTrace("radar_transport.png")
+    ------------------Equipment Freighters------------------
+    template = ShipTemplate():setName("Equipment Freighter " .. cnt)
+        template:setLocaleName(string.format(_("Equipment Freighter %d"), cnt))
+        template:setClass(_("Corvette"), _("Freighter"))
+        template:setModel("transport_4_" .. cnt)
+        template:setDescription(_([[Equipment freighters have specialized environmental and stabilization systems to safely carry delicate machinery and complex instruments.]]))
+        template:setRadarTrace("radar_transport.png")
+
+        -- Defenses
+        template:setHull(100)
+        template:setShields(50, 50)
+
+        -- Maneuverability
+        --   Impulse Forward, Turn, Acceleration
+        template:setSpeed(60 - 5 * cnt, 6, 10)
     
     if cnt > 2 then
-        variation = template:copy("Equipment Jump Freighter " .. cnt):setLocaleName(string.format(_("Equipment Jump Freighter %d"), cnt))
-        variation:setJumpDrive(true)
+        variation = template:copy("Equipment Jump Freighter " .. cnt)
+            variation:setLocaleName(string.format(_("Equipment Jump Freighter %d"), cnt))
+            --   Long-range Propulsion
+            variation:setJumpDrive(true)
     end
 
-    template = ShipTemplate():setName("Fuel Freighter " .. cnt):setLocaleName(string.format(_("Fuel Freighter %d"), cnt)):setClass(_("Corvette"), _("Freighter")):setModel("transport_5_" .. cnt)
-    template:setDescription(_([[Fuel freighters have massive tanks for hauling fuel, and delicate internal sensors that watch for any changes to their cargo's potentially volatile state.]]))
-    template:setHull(100)
-    template:setShields(50, 50)
-    template:setSpeed(60 - 5 * cnt, 6, 10)
-    template:setRadarTrace("radar_transport.png")
+    --------------------Fuel Freighters---------------------
+    template = ShipTemplate():setName("Fuel Freighter " .. cnt)
+        template:setLocaleName(string.format(_("Fuel Freighter %d"), cnt))
+        template:setClass(_("Corvette"), _("Freighter"))
+        template:setModel("transport_5_" .. cnt)
+        template:setDescription(_([[Fuel freighters have massive tanks for hauling fuel, and delicate internal sensors that watch for any changes to their cargo's potentially volatile state.]]))
+        template:setRadarTrace("radar_transport.png")
+
+        -- Defenses
+        template:setHull(100)
+        template:setShields(50, 50)
+
+        -- Maneuverability
+        --   Impulse Forward, Turn, Acceleration
+        template:setSpeed(60 - 5 * cnt, 6, 10)
     
     if cnt > 2 then
-        variation = template:copy("Fuel Jump Freighter " .. cnt):setLocaleName(string.format(_("Fuel Jump Freighter %d"), cnt))
-        variation:setJumpDrive(true)
+        variation = template:copy("Fuel Jump Freighter " .. cnt)
+            variation:setLocaleName(string.format(_("Fuel Jump Freighter %d"), cnt))
+            --   Long-range Propulsion
+            variation:setJumpDrive(true)
     end
 end
 
