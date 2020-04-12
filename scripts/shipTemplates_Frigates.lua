@@ -23,74 +23,116 @@ There are 3 frigate subclasses:
 
 --------------------------CRUISERS--------------------------
 
-template = ShipTemplate():setName("Phobos T3"):setLocaleName(_("Phobos T3")):setClass(_("Frigate"), _("Cruiser")):setModel("AtlasHeavyFighterYellow")
-template:setRadarTrace("radar_cruiser.png")
-template:setDescription(_([[The Phobos T3, just like the Atlantis, is the workhorse of almost any navy. It's extremely easy to modify, which makes retro-fitting this ship a breeze. Its basic stats aren't impressive, but due to its modular nature, it's fairly easy to produce in large quantities.]]))
-template:setHull(70)
-template:setShields(50, 40)
-template:setSpeed(60, 10, 10)
-template:setBeamWeapon(0, 90, -15, 1200, 8, 6)
-template:setBeamWeapon(1, 90,  15, 1200, 8, 6)
-template:setTubes(2, 60.0)
-template:setWeaponStorage("HVLI", 20)
-template:setWeaponStorage("Homing", 6)
-template:setTubeDirection(0, -1)
-template:setTubeDirection(1,  1)
+-------------------------Phobos T3--------------------------
+template = ShipTemplate():setName("Phobos T3")
+    template:setLocaleName(_("Phobos T3"))
+    template:setClass(_("Frigate"), _("Cruiser"))
+    template:setModel("AtlasHeavyFighterYellow")
+    template:setDescription(_([[The Phobos T3, much like the Atlantis, is the workhorse of almost any navy. It's extremely easy to modify, which makes retro-fitting this ship a breeze. Its basic stats aren't impressive, but due to its modular nature, it's fairly easy to produce in large quantities.]]))
+    template:setRadarTrace("radar_cruiser.png")
 
-variation = template:copy("Phobos M3"):setLocaleName(_("Phobos M3")):setModel("AtlasHeavyFighterRed")
-variation:setDescription(_([[The Phobos M3 is one of the most common variants of the Phobos T3. It adds a mine-laying tube, but the extra storage required for the mines slows this ship down slightly.]]))
-variation:setTubes(3, 60.0)
-variation:setWeaponStorage("Mine", 6)
-variation:setSpeed(55, 10, 10)
-variation:weaponTubeDisallowMissle(0, "Mine"):weaponTubeDisallowMissle(1, "Mine")
-variation:setTubeDirection(2,  180):setWeaponTubeExclusiveFor(2, "Mine")
+    -- Defenses
+    template:setHull(70)
+    template:setShields(50, 40)
 
-variation = variation:copy("Phobos M3P"):setLocaleName(_("Phobos M3P")):setType("playership")
-variation:setDescription(_([[Player variant of the Phobos M3, not as strong as the atlantis, but has front firing tubes, making it an easier to use ship in some scenarios.]]))
-variation:setShields(100, 100)
-variation:setHull(200)
-variation:setSpeed(80, 10, 20)
-variation:setCombatManeuver(400, 250)
-variation:setTubes(3, 10.0)
-variation:setWeaponStorage("Homing", 10)
-variation:setWeaponStorage("Nuke", 2)
-variation:setWeaponStorage("Mine", 4)
-variation:setWeaponStorage("EMP", 3)
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+    template:setSpeed(60,   10, 10)
+    -- Weapons
+    --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
+    template:setBeamWeapon(0,  90,  -15, 1200.0,     8, 6)
+    template:setBeamWeapon(1,  90,   15, 1200.0,     8, 6)
+    --   Tubes    Count, Load Time
+    template:setTubes(2, 60.0)
+    --     Tube direction    ID, Bearing
+    template:setTubeDirection(0, -1)
+    template:setTubeDirection(1,  1)
+    --     Tube weapon storage    Type, Count
+    template:setWeaponStorage(  "HVLI", 20)
+    template:setWeaponStorage("Homing",  6)
 
-variation:addRoomSystem(1, 0, 2, 1, "Maneuver");
-variation:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
-variation:addRoom(2, 2, 2, 1);
+-------------------------Phobos M3--------------------------
+variation = template:copy("Phobos M3")
+    variation:setLocaleName(_("Phobos M3"))
+    variation:setModel("AtlasHeavyFighterRed")
+    variation:setDescription(_([[The Phobos M3 is one of the most common variants of the Phobos T3. It adds a mine-laying tube, but the extra storage required for the mines slows this ship down slightly.]]))
 
-variation:addRoomSystem(0, 3, 1, 2, "RearShield");
-variation:addRoomSystem(1, 3, 2, 2, "Reactor");
-variation:addRoomSystem(3, 3, 2, 2, "Warp");
-variation:addRoomSystem(5, 3, 1, 2, "JumpDrive");
-variation:addRoom(6, 3, 2, 1);
-variation:addRoom(6, 4, 2, 1);
-variation:addRoomSystem(8, 3, 1, 2, "FrontShield");
+    -- Maneuverability
+    --   Impulse  Forward, Turn, Acceleration
+    variation:setSpeed(55,   10, 10)
 
-variation:addRoom(2, 5, 2, 1);
-variation:addRoomSystem(1, 6, 2, 1, "MissileSystem");
-variation:addRoomSystem(1, 7, 2, 1, "Impulse");
+    -- Weapons
+    --   Tubes     Count, Load Time
+    variation:setTubes(3, 60.0)
+    --     Tube direction     ID, Bearing
+    variation:setTubeDirection(2,  180)
+    --     Tube specialization         ID, Type
+    variation:weaponTubeDisallowMissle( 0, "Mine")
+    variation:weaponTubeDisallowMissle( 1, "Mine")
+    variation:setWeaponTubeExclusiveFor(2, "Mine")
+    --     Tube weapon storage     Type, Count
+    variation:setWeaponStorage(  "Mine", 6)
 
-variation:addDoor(1, 1, true);
-variation:addDoor(2, 2, true);
-variation:addDoor(3, 3, true);
-variation:addDoor(1, 3, false);
-variation:addDoor(3, 4, false);
-variation:addDoor(3, 5, true);
-variation:addDoor(2, 6, true);
-variation:addDoor(1, 7, true);
-variation:addDoor(5, 3, false);
-variation:addDoor(6, 3, false);
-variation:addDoor(6, 4, false);
-variation:addDoor(8, 3, false);
-variation:addDoor(8, 4, false);
- 
---Airlock doors
---variation:addDoor(2, 2, false);
---variation:addDoor(2, 5, false);
+------------------Phobos M3P (player ship)------------------
+variation = variation:copy("Phobos M3P")
+    variation:setLocaleName(_("Phobos M3P"))
+    variation:setType("playership")
+    variation:setDescription(_([[A subvariant of the Phobos M3 with front-firing weapon tubes, more powerful impulse engines, and bolstered defenses.]]))
 
+    -- Defenses
+    variation:setHull(200)
+    variation:setShields(100, 100)
+
+    -- Maneuverability
+    --   Impulse  Forward, Turn, Acceleration
+    variation:setSpeed(80,   10, 20)
+    --   Combat Maneuver      Boost, Strafe
+    variation:setCombatManeuver(400, 250)
+
+    -- Weapons
+    --   Tubes     Count, Load Time
+    variation:setTubes(3, 10.0)
+    --     Tube weapon storage     Type, Count
+    variation:setWeaponStorage("Homing", 10)
+    variation:setWeaponStorage(  "Nuke",  2)
+    variation:setWeaponStorage(  "Mine",  4)
+    variation:setWeaponStorage(   "EMP",  3)
+
+    -- Internal layout
+    --   Rooms          Position  Size
+    --                      X  Y  W  H  System
+    variation:addRoomSystem(1, 0, 2, 1, "Maneuver");
+    variation:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
+    variation:addRoom(      2, 2, 2, 1);
+
+    variation:addRoomSystem(0, 3, 1, 2, "RearShield");
+    variation:addRoomSystem(1, 3, 2, 2, "Reactor");
+    variation:addRoomSystem(3, 3, 2, 2, "Warp");
+    variation:addRoomSystem(5, 3, 1, 2, "JumpDrive");
+    variation:addRoom(      6, 3, 2, 1);
+    variation:addRoom(      6, 4, 2, 1);
+    variation:addRoomSystem(8, 3, 1, 2, "FrontShield");
+
+    variation:addRoom(      2, 5, 2, 1);
+    variation:addRoomSystem(1, 6, 2, 1, "MissileSystem");
+    variation:addRoomSystem(1, 7, 2, 1, "Impulse");
+    --   Doors    Position
+    --                X  Y  Horizontal?
+    variation:addDoor(1, 1, true);
+    variation:addDoor(2, 2, true);
+    variation:addDoor(3, 3, true);
+    variation:addDoor(1, 3, false);
+    variation:addDoor(3, 4, false);
+    variation:addDoor(3, 5, true);
+    variation:addDoor(2, 6, true);
+    variation:addDoor(1, 7, true);
+    variation:addDoor(5, 3, false);
+    variation:addDoor(6, 3, false);
+    variation:addDoor(6, 4, false);
+    variation:addDoor(8, 3, false);
+    variation:addDoor(8, 4, false);
+
+-------------------------Nirvana R5-------------------------
 template = ShipTemplate():setName("Nirvana R5"):setLocaleName(_("Nirvana R5")):setClass(_("Frigate"), _("Cruiser: Anti-fighter")):setModel("small_frigate_5") -- TODO: Better 3D model selection
 template:setRadarTrace("radar_cruiser.png")
 template:setDescription(_([[The Nirvana R5 is an anti-fighter cruiser. It has several rapid-firing, low-damage point-defense weapons to quickly take out starfighters.]]))
