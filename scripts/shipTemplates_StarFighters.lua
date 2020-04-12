@@ -10,7 +10,7 @@ Starfighters come in 3 subclasses:
 * Gunship: Equiped with more weapons, but hands in maneuverbility because of it.
 * Bomber: Slowest of all starfighters, but pack a large punch in a small package. Usually come without any lasers, but the largers bombers have been known to deliver nukes.
 ----------------------------------------------------------]]
-template = ShipTemplate():setName(_("MT52 Hornet")):setClass(_("Starfighter"), _("Interceptor")):setModel("WespeScoutYellow")
+template = ShipTemplate():setName("MT52 Hornet"):setLocaleName(_("MT52 Hornet")):setClass(_("Starfighter"), _("Interceptor")):setModel("WespeScoutYellow")
 template:setRadarTrace("radar_fighter.png")
 template:setDescription(_([[The MT52 Hornet is a basic interceptor found in many corners of the galaxy. It's easy to find spare parts for MT52s, not only because they are produced in large numbers, but also because they suffer high losses in combat.]]))
 template:setHull(30)
@@ -20,7 +20,7 @@ template:setDefaultAI('fighter')
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 30, 0, 700.0, 4.0, 2)
 
-variation = template:copy(_("MU52 Hornet"))
+variation = template:copy("MU52 Hornet"):setLocaleName(_("MU52 Hornet"))
 variation:setModel("WespeScoutRed")
 variation:setDescription(_([[The MU52 Hornet is a new, upgraded version of the MT52. All of its systems are slightly improved over the MT52 model.]]))
 variation:setHull(35)
@@ -28,7 +28,7 @@ variation:setShields(22)
 variation:setSpeed(125, 32, 25)
 variation:setBeam(0, 30, 0, 900.0, 4.0, 2.5)
 
-variation = variation:copy("MP52 Hornet"):setType("playership")
+variation = variation:copy("MP52 Hornet"):setLocaleName(_("MP52 Hornet")):setType("playership")
 variation:setDescription(_([[The MP52 Hornet is a significantly upgraded version of MU52 Hornet, with nearly twice the hull strength, nearly three times the shielding, better acceleration, impulse boosters, and a second laser cannon.]]))
 variation:setImpulseSoundFile("sfx/engine_fighter.wav")
 variation:setHull(70)
@@ -62,7 +62,7 @@ variation:addDoor(2, 3, true);
 variation:addDoor(5, 1, false);
 variation:addDoor(5, 2, false);
 
-template = ShipTemplate():setName(_("Adder MK5")):setClass(_("Starfighter"), _("Gunship")):setModel("AdlerLongRangeScoutYellow")
+template = ShipTemplate():setName("Adder MK5"):setLocaleName(_("Adder MK5")):setClass(_("Starfighter"), _("Gunship")):setModel("AdlerLongRangeScoutYellow")
 template:setRadarTrace("radar_fighter.png")
 template:setDescription(_([[The Adder line's fifth iteration proved to be a great success among pirates and law officers alike. It is cheap, fast, and easy to maintain, and it packs a decent punch.]]))
 template:setHull(50)
@@ -75,7 +75,7 @@ template:setTubes(1, 15.0)
 template:setTubeSize(0, "small")
 template:setWeaponStorage("HVLI", 4)
 
-variation = template:copy(_("Adder MK4"))
+variation = template:copy("Adder MK4"):setLocaleName(_("Adder MK4"))
 variation:setModel("AdlerLongRangeScoutBlue")
 variation:setDescription(_([[The mark 4 Adder is a rare sight these days due to the success its successor, the mark 5 Adder, which often replaces this model. Its similar hull, however, means careless buyers are sometimes conned into buying mark 4 models disguised as the mark 5.]]))
 variation:setHull(40)
@@ -85,13 +85,13 @@ variation:setTubes(1, 20.0)
 variation:setTubeSize(0, "small")
 variation:setWeaponStorage("HVLI", 2)
 
-variation = template:copy(_("Adder MK6"))
+variation = template:copy("Adder MK6"):setLocaleName(_("Adder MK6"))
 variation:setModel("AdlerLongRangeScoutRed")
 variation:setDescription(_([[The mark 6 Adder is a small upgrade compared to the highly successful mark 5 model. Since people still prefer the more familiar and reliable mark 5, the mark 6 has not seen the same level of success.]]))
 variation:setBeam(3, 35,180, 600, 6.0, 2.0)
 variation:setWeaponStorage("HVLI", 8)
 
-template = ShipTemplate():setName(_("WX-Lindworm")):setClass(_("Starfighter"), _("Bomber")):setModel("LindwurmFighterYellow")
+template = ShipTemplate():setName("WX-Lindworm"):setLocaleName(_("WX-Lindworm")):setClass(_("Starfighter"), _("Bomber")):setModel("LindwurmFighterYellow")
 template:setRadarTrace("radar_fighter.png")
 template:setDescription(_([[The WX-Lindworm, or "Worm" as it's often called, is a bomber-class starfighter. While one of the least-shielded starfighters in active duty, the Worm's two launchers can pack quite a punch. Its goal is to fly in, destroy its target, and fly out or be destroyed.]]))
 template:setHull(50)
@@ -106,7 +106,7 @@ template:setTubeSize(2, "small")
 template:setTubeDirection(1, 1):setWeaponTubeExclusiveFor(1, "HVLI")
 template:setTubeDirection(2,-1):setWeaponTubeExclusiveFor(2, "HVLI")
 
-variation = template:copy(_("ZX-Lindworm")):setModel("LindwurmFighterBlue"):setType("playership")
+variation = template:copy("ZX-Lindworm"):setLocaleName(_("ZX-Lindworm")):setModel("LindwurmFighterBlue"):setType("playership")
 variation:setHull(75)
 variation:setShields(40)
 variation:setSpeed(70, 15, 25)
