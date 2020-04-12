@@ -1,16 +1,28 @@
---[[                  Frigates
-Frigates are 1 size up from starfighters. They require a crew from 3 to 20 people.
-Think, Firefly, millennium falcon, slave I (Boba fett's ship).
+--[[----------------------FRIGATES--------------------------
+Frigates are ships sized between starfighters and corvettes.
+They require a crew from 3 to 20 people and encompass a wide
+variety of roles, from personal transports and light
+freighters to blockade runners and patrol ships.
 
-They generally have 2 or more shield sections, but hardly ever more than 4.
+Most have at least 2 shield sections; few have more than 4.
+In rare cases, some frigates are designed (or modified) to
+include jump or warp drives.
 
-This class of ships is normally not fitted with jump or warp drives. But in some cases ships are modified to include these, or for certain roles it is build in.
+There are 3 frigate subclasses:
 
-They are divided in 3 different sub-classes:
-* Cruiser: Weaponized frigates, focused on combat. These come in various roles.
-* Light transport: Small transports, like transporting up to 50 soldiers in spartan conditions or a few diplomats in luxury. Depending on the role can have some weaponry.
-* Support: Support types come in many variaties. They are simply a frigate hull fitted with whatever was needed. Anything from mine-layers to science vessels.
+* Cruisers: Weaponized frigates can be fitted for a variety
+    of combat roles.
+* Light transport: Small transports, typically carrying
+    fewer than 50 passengers in spartan conditions or a few
+    diplomats in luxury. Depending on the role, some can be
+    lightly armed.
+* Support: Support frigates are simply frigate hulls fitted
+    with whatever capability is needed, and can encompass
+    anything from tugs to mine-layers and research vessels.
 ----------------------------------------------------------]]
+
+--------------------------CRUISERS--------------------------
+
 template = ShipTemplate():setName("Phobos T3"):setLocaleName(_("Phobos T3")):setClass(_("Frigate"), _("Cruiser")):setModel("AtlasHeavyFighterYellow")
 template:setRadarTrace("radar_cruiser.png")
 template:setDescription(_([[The Phobos T3, just like the Atlantis, is the workhorse of almost any navy. It's extremely easy to modify, which makes retro-fitting this ship a breeze. Its basic stats aren't impressive, but due to its modular nature, it's fairly easy to produce in large quantities.]]))
