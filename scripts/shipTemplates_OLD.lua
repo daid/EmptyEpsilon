@@ -247,7 +247,7 @@ template:setSpeed(60, 6, 10)
 	-- Fabricated by: Repulse shipyards
 	-- The sucessor to the widly sucesfull mark I Karnack cruiser. This ship has several notable improvements over the original ship, including better armor, slightly improved weaponry and customization by the shipyards. The latter improvement was the most requested feature by several factions once they realized that their old surplus mark I ships were used for less savoury purposes.
 
-variation = template:copy(_("Karnack MK2"))
+variation = template:copy(_("ship", "Cruiser"))
 variation:setDescription(_("Fabricated by: Repulse shipyards. The sucessor to the widly sucesfull mark I Karnack cruiser. This ship has several notable improvements over the original ship, including better armor, slightly improved weaponry and customization by the shipyards. The latter improvement was the most requested feature by several factions once they realized that their old surplus mark I ships were used for less savoury purposes."))
 --                  Arc, Dir, Range, CycleTime, Dmg
 variation:setBeam(0, 90, -15, 1000.0, 6.0, 6)
