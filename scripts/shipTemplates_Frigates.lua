@@ -852,7 +852,7 @@ template:setBeamWeapon(3,  25,  190, 1000.0,   6.0, 8)
 ----------------------------Tug-----------------------------
 template = ShipTemplate():setName("Tug")
 	template:setLocaleName(_("Tug"))
-	variation:setClass(_("Frigate"), _("Support"))
+	template:setClass(_("Frigate"), _("Support"))
 	template:setModel("space_tug")
 	template:setDescription(_([[The tugboat is a reliable, but small and unarmed transport ship. Due to its low cost, it is a favourite ship to teach the ropes to fledgling captains without risking friendly fire.]]))
 	template:setRadarTrace("radar_tug.png")
