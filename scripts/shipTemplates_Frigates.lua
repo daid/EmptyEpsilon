@@ -52,11 +52,11 @@ template = ShipTemplate():setName("Phobos T3")
     template:setWeaponStorage("Homing",  6)
     template:setWeaponStorage(  "HVLI", 20)
 
------------------------Phobos X3P (player ship)-----------------------
+-----------------Phobos X3P (Player Cruiser)----------------
 variation1 = template:copy("Player Cruiser")
 	variation1:setLocaleName(_("Phobos X3P"))
 	variation1:setModel("AtlasHeavyFighterWhite")
-    variation1:setDescription(_([[A highly experimental reconfiguration of the Phobos T3 with an all-new titanium-duranium alloy hull, jump drive, reconfigured beams, mine-laying tube, nuclear weapon storage, boost-capable impulse engines, and bolstered defenses.]]))
+    variation1:setDescription(_([[This humble Phobos hull belies a state-of-the art, highly experimental refit that includes titanium-duranium alloy hull reinforcements, a jump drive, reconfigured beams, a mine-laying tube, nuclear weapon storage, boost-capable impulse engines, and bolstered defenses. While more complex to operate efficiently than its simpler cousins, it packs the punch of a larger corvette.]]))
 	variation1:setRadarTrace("radar_cruiser.png")
 	variation1:setType("playership")
 
@@ -518,6 +518,7 @@ template = ShipTemplate():setName("Stalker Q7")
 variation = template:copy("Stalker R7")
     variation:setLocaleName(_("Stalker R7"))
     variation:setDescription(_([[The Stalker is a strike cruiser designed to swoop into battle, deal damage quickly, and get out fast. The R7 model is fitted with a jump drive.]]))
+
     --   Long-range Propulsion
     variation:setJumpDrive(true)
     --     Warp speed per factor
@@ -528,12 +529,13 @@ template = ShipTemplate():setName("Ranus U")
     template:setLocaleName(_("Ranus U"))
     template:setClass(_("Frigate"), _("Cruiser"))
     template:setModel("MissileCorvetteGreen")
-    template:setDescription(_([[The Ranus U sniper is built to deal large amounts of damage quickly and from a distance before escaping. It's the only basic frigate that carries nuclear weapons, even though it's also the smallest of all frigate-class ships.]]))
+    template:setDescription(_([[The Ranus U sniper is built to deal large amounts of damage quickly and from a distance before escaping. It's the only mainstream frigate that carries nuclear weapons, even though it's also the smallest of all frigate-class ships.]]))
     template:setRadarTrace("radar_cruiser.png")
 
     -- Defenses
     template:setHull(30)
     template:setShields(30, 5, 5)
+
     -- Maneuverability
     --   Impulse Forward, Turn, Acceleration
     template:setSpeed(50,    6, 20)
@@ -544,8 +546,8 @@ template = ShipTemplate():setName("Ranus U")
     --     Tube specialization        ID, Type
     template:weaponTubeDisallowMissle( 1, "Nuke")
     template:weaponTubeDisallowMissle( 2, "Nuke")
-    template:setWeaponStorage("Homing", 6)
     --     Tube weapon storage    Type, Count
+    template:setWeaponStorage("Homing", 6)
     template:setWeaponStorage(  "Nuke", 2)
 
 ---------------------LIGHT TRANSPORTS----------------------
@@ -729,7 +731,7 @@ template = ShipTemplate():setName("Tug")
 -------------------Nautilus (player ship)-------------------
 variation = template:copy("Nautilus")
 	variation:setLocaleName(_("Nautilus"))
-	variation:setDescription(_([[The Nautilus is a small, jump-capable minelayer with minimal armaments, shields, and hull plating.]]))
+	variation:setDescription(_([[The Nautilus is a swift, small, jump-capable minelayer with minimal armaments and shields.]]))
 	variation:setType("playership")
 
 	-- Defenses
@@ -757,9 +759,6 @@ variation = template:copy("Nautilus")
 	variation:setTubeDirection(2, 180)
 	--     Tube weapon storage     Type, Count
 	variation:setWeaponStorage(  "Mine", 12)
-	variation:setWeaponStorage("Homing", 0)
-	variation:setWeaponStorage(  "Nuke", 0)
-	variation:setWeaponStorage(   "EMP", 0)
 
     -- Internal layout
     --   Repair crew count
