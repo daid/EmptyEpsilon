@@ -133,24 +133,43 @@ variation = variation:copy("Phobos M3P")
     variation:addDoor(8, 4, false);
 
 -------------------------Nirvana R5-------------------------
-template = ShipTemplate():setName("Nirvana R5"):setLocaleName(_("Nirvana R5")):setClass(_("Frigate"), _("Cruiser: Anti-fighter")):setModel("small_frigate_5") -- TODO: Better 3D model selection
-template:setRadarTrace("radar_cruiser.png")
-template:setDescription(_([[The Nirvana R5 is an anti-fighter cruiser. It has several rapid-firing, low-damage point-defense weapons to quickly take out starfighters.]]))
-template:setBeamWeapon(0, 90, -15, 1200, 3, 1)
-template:setBeamWeapon(1, 90,  15, 1200, 3, 1)
-template:setBeamWeapon(2, 90,  50, 1200, 3, 1)
-template:setBeamWeapon(3, 90, -50, 1200, 3, 1)
-template:setHull(70)
-template:setShields(50, 40)
-template:setSpeed(70, 12, 10)
+template = ShipTemplate():setName("Nirvana R5")
+    template:setLocaleName(_("Nirvana R5"))
+    template:setClass(_("Frigate"), _("Cruiser"))
+    template:setModel("small_frigate_5") -- TODO: Better 3D model selection
+    template:setDescription(_([[The Nirvana R5 is a relatively nimble frigate with several rapid-firing, low-damage point defense weapons to quickly take out starfighters.]]))
+    template:setRadarTrace("radar_cruiser.png")
 
-variation = template:copy("Nirvana R5A"):setLocaleName(_("Nirvana R5A"))
-variation:setDescription(_([[An improved version of the Nirvana R5 with faster turning speed and firing rates.]]))
-variation:setBeamWeapon(0, 90, -15, 1200, 2.9, 1)
-variation:setBeamWeapon(1, 90,  15, 1200, 2.9, 1)
-variation:setBeamWeapon(2, 90,  50, 1200, 2.9, 1)
-variation:setBeamWeapon(3, 90, -50, 1200, 2.9, 1)
-variation:setSpeed(70, 15, 10)
+    -- Defenses
+    template:setHull(70)
+    template:setShields(50, 40)
+
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+    template:setSpeed(70, 12, 10)
+
+    -- Weapons
+    --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
+    template:setBeamWeapon(0,  90,  -15, 1200.0,     3, 1)
+    template:setBeamWeapon(1,  90,   15, 1200.0,     3, 1)
+    template:setBeamWeapon(2,  90,   50, 1200.0,     3, 1)
+    template:setBeamWeapon(3,  90,  -50, 1200.0,     3, 1)
+
+------------------------Nirvana R5A-------------------------
+variation = template:copy("Nirvana R5A")
+    variation:setLocaleName(_("Nirvana R5A"))
+    variation:setDescription(_([[An improved version of the Nirvana R5 with faster turning speed and firing rates.]]))
+
+    -- Maneuverability
+    --   Impulse  Forward, Turn, Acceleration
+    variation:setSpeed(70, 15, 10)
+
+    -- Weapons
+    --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
+    variation:setBeamWeapon(0, 90,  -15, 1200.0,   2.9, 1)
+    variation:setBeamWeapon(1, 90,   15, 1200.0,   2.9, 1)
+    variation:setBeamWeapon(2, 90,   50, 1200.0,   2.9, 1)
+    variation:setBeamWeapon(3, 90,  -50, 1200.0,   2.9, 1)
 
 template = ShipTemplate():setName("Storm"):setLocaleName(_("Storm")):setClass(_("Frigate"), _("Cruiser: Heavy Artillery")):setModel("HeavyCorvetteYellow")	--Yellow, Green, Blue, White, Red
 template:setRadarTrace("radar_piranha.png")
