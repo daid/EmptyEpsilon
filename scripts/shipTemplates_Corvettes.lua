@@ -50,8 +50,8 @@ template = ShipTemplate():setName("Atlantis X23")
     template:setTubeDirection(2,  90)
     template:setTubeDirection(3,  90)
     --     Tube weapon storage    Type, Count
-    template:setWeaponStorage(  "HVLI", 20)
     template:setWeaponStorage("Homing",  4)
+    template:setWeaponStorage(  "HVLI", 20)
 
 -------------------Atlantis (player ship)-------------------
 variation = template:copy("Atlantis")
@@ -309,6 +309,87 @@ template = ShipTemplate():setName("Maverick")
     template:addDoor( 6, 3, false)
     template:addDoor( 9, 2, true)
     template:addDoor(10, 4, true)
+
+--------------Molotok (Player Missile Cruiser)--------------
+template = ShipTemplate():setName("Player Missile Cr.")
+	template:setLocaleName(_("Molotok"))
+    template:setClass(_("Corvette"), _("Destroyer"))
+	template:setModel("space_cruiser_4")
+    template:setDescription(_([[The Molotok is a bludgeoning nuclear-capable destroyer with a warp drive and anti-fighter broadside missile tubes covering every approach. With no beams to speak of and vulnerable shielding, it's built to put an end to fights from a distance - not to start them from up close.]]))
+	template:setRadarTrace("radar_missile_cruiser.png")
+	template:setType("playership")
+
+    -- Defenses
+	template:setHull(200)
+	template:setShields(110, 70)
+
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+	template:setSpeed(60,    8, 15)
+    --   Combat Maneuver     Boost, Strafe
+	template:setCombatManeuver(450, 150)
+    --   Long-range Propulsion
+    --     Warp speed per factor
+	template:setWarpSpeed(   800)
+
+	-- Weapons
+    --   Tubes    Count, Load Time
+	template:setTubes(7, 8.0)
+    --     Tube direction    ID, Bearing
+	template:setTubeDirection(0,   0)
+	template:setTubeDirection(1,   0)
+	template:setTubeDirection(2,  90)
+	template:setTubeDirection(3,  90)
+	template:setTubeDirection(4, -90)
+	template:setTubeDirection(5, -90)
+	template:setTubeDirection(6, 180)
+    --     Tube specialization        ID, Type
+	template:weaponTubeDisallowMissle( 0, "Mine")
+	template:weaponTubeDisallowMissle( 1, "Mine")
+	template:setWeaponTubeExclusiveFor(2, "Homing")
+	template:setWeaponTubeExclusiveFor(3, "Homing")
+	template:setWeaponTubeExclusiveFor(4, "Homing")
+	template:setWeaponTubeExclusiveFor(5, "Homing")
+	template:setWeaponTubeExclusiveFor(6, "Mine")
+    --     Tube weapon storage    Type, Count
+	template:setWeaponStorage("Homing", 30)
+	template:setWeaponStorage("Nuke", 8)
+	template:setWeaponStorage("EMP", 10)
+	template:setWeaponStorage("Mine", 12)
+
+    -- Internal layout
+    --   Rooms         Position  Size
+    --                     X  Y  W  H  System
+	template:addRoomSystem(1, 0, 2, 1, "Maneuver");
+	template:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
+	template:addRoom(      2, 2, 2, 1);
+
+	template:addRoomSystem(0, 3, 1, 2, "RearShield");
+	template:addRoomSystem(1, 3, 2, 2, "Reactor");
+	template:addRoomSystem(3, 3, 2, 2, "Warp");
+	template:addRoomSystem(5, 3, 1, 2, "JumpDrive");
+	template:addRoom(      6, 3, 2, 1);
+	template:addRoom(      6, 4, 2, 1);
+	template:addRoomSystem(8, 3, 1, 2, "FrontShield");
+
+	template:addRoom(      2, 5, 2, 1);
+	template:addRoomSystem(1, 6, 2, 1, "MissileSystem");
+	template:addRoomSystem(1, 7, 2, 1, "Impulse");
+    --   Doors   Position
+    --               X  Y  Horizontal?
+	template:addDoor(1, 1, true);
+	template:addDoor(2, 2, true);
+	template:addDoor(3, 3, true);
+	template:addDoor(1, 3, false);
+	template:addDoor(3, 4, false);
+	template:addDoor(3, 5, true);
+	template:addDoor(2, 6, true);
+	template:addDoor(1, 7, true);
+	template:addDoor(5, 3, false);
+	template:addDoor(6, 3, false);
+	template:addDoor(6, 4, false);
+	template:addDoor(8, 3, false);
+	template:addDoor(8, 4, false);
 
 ---------------------------SUPPORT--------------------------
 
