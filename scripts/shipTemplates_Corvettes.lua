@@ -312,19 +312,16 @@ template = ShipTemplate():setName("Maverick")
 
 ---------------------------SUPPORT--------------------------
 
-----------------------Defense platform----------------------
-template = ShipTemplate():setName("Defense platform")
-    template:setLocaleName(_("Defense platform"))
+----------------------Weapons platform----------------------
+template = ShipTemplate():setName("Weapons platform")
+    template:setLocaleName(_("Weapons platform"))
     template:setClass(_("Corvette"), _("subclass", "Support"))
-    template:setModel("space_station_4")
-    template:setDescription(_([[Stationary defense platforms operate like space stations, with docking and resupply functions, but are armed with powerful beam weapons and can slowly rotate. Larger systems often use these platforms to resupply patrol ships.]]))
-    template:setRadarTrace("radartrace_smallstation.png")
-
-    -- Capabilities
-    template:setDockClasses("Starfighter", "Frigate")
+    template:setModel("space_cruiser_4")
+    template:setDescription(_([[Stationary weapons platforms are armed with powerful beam weapons and can slowly rotate.]]))
+    template:setRadarTrace("radar_missile_cruiser.png")
 
     -- Defenses
-    template:setHull(150)
+    template:setHull(70)
     template:setShields(120, 120, 120, 120, 120, 120)
 
     -- Maneuverability
@@ -339,6 +336,19 @@ template = ShipTemplate():setName("Defense platform")
     template:setBeamWeapon(3,  30,  180, 4000.0,   1.5, 20)
     template:setBeamWeapon(4,  30,  240, 4000.0,   1.5, 20)
     template:setBeamWeapon(5,  30,  300, 4000.0,   1.5, 20)
+
+----------------------Defense platform----------------------
+variation = template:copy("Defense platform")
+    variation:setLocaleName(_("Defense platform"))
+    variation:setModel("space_station_4")
+    variation:setDescription(_([[Stationary defense platforms operate like space stations, with docking and resupply functions, but are armed with powerful beam weapons and can slowly rotate. Larger systems often use these platforms to resupply patrol ships.]]))
+    variation:setRadarTrace("radartrace_smallstation.png")
+
+    -- Capabilities
+    variation:setDockClasses("Starfighter", "Frigate")
+
+    -- Defenses
+    variation:setHull(150)
 
 ----------------------Jump carriers----------------------
 template = ShipTemplate():setName("Jump Carrier")
