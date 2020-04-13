@@ -100,7 +100,6 @@ variation = variation:copy("MP52 Hornet")
 
     variation:addRoomSystem(1, 3, 2, 1, "MissileSystem");
     variation:addRoomSystem(3, 3, 1, 1, "Impulse");
-
     --   Doors    Position
     --                X  Y  Horizontal?
     variation:addDoor(2, 1, true);
@@ -112,6 +111,53 @@ variation = variation:copy("MP52 Hornet")
     variation:addDoor(2, 3, true);
     variation:addDoor(5, 1, false);
     variation:addDoor(5, 2, false);
+
+----------------MM52 Hornet (Player Fighter)----------------
+variation = variation:copy("Player Fighter")
+    variation:setLocaleName(_("MM52 Hornet"))
+    variation:setModel("WespeScoutWhite")
+    variation:setDescription(_([[The MM52 Hornet is a significantly upgraded version of MU52 Hornet, with nearly twice the hull strength and shielding, better acceleration, impulse boosters, 2 powerful laser cannons, and an HVLI tube. However, the extra arms significantly reduce its agility and put additional strain on its small reactor.]]))
+    variation:setImpulseSoundFile("sfx/engine_fighter.wav")
+
+    -- Defenses
+    variation:setHull(60)
+    variation:setShields(40)
+
+    -- Maneuverability
+    --   Impulse   Forward, Turn, Acceleration
+    variation:setSpeed(110,   20, 40)
+    --   Combat Maneuver      Boost, Strafe
+    variation:setCombatManeuver(600, 0)
+
+    -- Weapons
+    --   Beams             ID, Arc, Bear,  Range, Cycle, Damage
+    variation:setBeamWeapon(0,  40,  -10, 1000.0,   6.0, 8)
+    variation:setBeamWeapon(1,  40,   10, 1000.0,   6.0, 8)
+    --   Tubes     Count, Load Time
+    variation:setTubes(1, 10.0)
+    --     Tube weapon storage     Type, Count
+    variation:setWeaponStorage(  "HVLI", 4)
+
+------------------AF-7 Mosquito (Fighter)-------------------
+template = ShipTemplate():setName("Fighter")
+    template:setLocaleName(_("AF-7 Mosquito"))
+    template:setClass(_("Starfighter"), _("Interceptor"))
+    template:setModel("small_fighter_1")
+    template:setDescription(_([[Mosquitos are cheap, agile harriers popular with raiders and backwater defense forces. While individually incapable of dealing significant damage and easily destroyed, they are fast and often deployed in large, swarming groups that should not be underestimated.]]))
+    template:setRadarTrace("radar_fighter.png")
+    template:setDefaultAI("fighter")
+
+    -- Defenses
+    template:setHull(30)
+    template:setShields(30)
+
+    -- Maneuverability
+    --   Impulse  Forward, Turn, Acceleration
+    template:setSpeed(120,   30, 25)
+
+    -- Weapons
+    --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
+    template:setBeamWeapon(0,  60,    0, 1000.0,   4.0, 4)
 
 --------------------------GUNSHIPS--------------------------
 
