@@ -69,7 +69,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner, func_t enterCr
     listbox->setTextSize(20)->setButtonHeight(30)->setPosition(-20, 20, ATopRight)->setSize(300, 460);
     for(string template_name : template_names)
     {
-        listbox->addEntry(template_name, template_name);
+        listbox->addEntry(ShipTemplate::getTemplate(template_name)->getLocaleName(), template_name);
     }
     
     (new GuiButton(box, "CLOSE_BUTTON", "Cancel", [this]() {

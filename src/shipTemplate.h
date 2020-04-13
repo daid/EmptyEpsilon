@@ -76,7 +76,7 @@ private:
     TemplateType type;
 public:
     string getName();
-    string getLocaleName();
+    string getLocaleName() { return this->locale_name; }
     string getDescription();
     string getClass();
     string getSubClass();

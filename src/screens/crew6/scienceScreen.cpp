@@ -334,8 +334,9 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             // hull integrity, and database reference button.
             if (ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
             {
+                P<ShipTemplate> ship_template = ShipTemplate::getTemplate(ship->getTypeName());
                 info_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
-                info_type->setValue(ship->getTypeName());
+                info_type->setValue(ship->ship_template->getLocaleName());
                 info_type_button->show();
                 info_shields->setValue(ship->getShieldDataString());
                 info_hull->setValue(int(ship->getHull()));
