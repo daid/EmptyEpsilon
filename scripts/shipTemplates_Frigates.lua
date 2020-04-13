@@ -38,6 +38,7 @@ template = ShipTemplate():setName("Phobos T3")
     -- Maneuverability
     --   Impulse Forward, Turn, Acceleration
     template:setSpeed(60,   10, 10)
+
     -- Weapons
     --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
     template:setBeamWeapon(0,  90,  -15, 1200.0,     8, 6)
@@ -48,89 +49,163 @@ template = ShipTemplate():setName("Phobos T3")
     template:setTubeDirection(0, -1)
     template:setTubeDirection(1,  1)
     --     Tube weapon storage    Type, Count
-    template:setWeaponStorage(  "HVLI", 20)
     template:setWeaponStorage("Homing",  6)
+    template:setWeaponStorage(  "HVLI", 20)
 
--------------------------Phobos M3--------------------------
-variation = template:copy("Phobos M3")
-    variation:setLocaleName(_("Phobos M3"))
-    variation:setModel("AtlasHeavyFighterRed")
-    variation:setDescription(_([[The Phobos M3 is one of the most common variants of the Phobos T3. It adds a mine-laying tube, but the extra storage required for the mines slows this ship down slightly.]]))
-
-    -- Maneuverability
-    --   Impulse  Forward, Turn, Acceleration
-    variation:setSpeed(55,   10, 10)
-
-    -- Weapons
-    --   Tubes     Count, Load Time
-    variation:setTubes(3, 60.0)
-    --     Tube direction     ID, Bearing
-    variation:setTubeDirection(2,  180)
-    --     Tube specialization         ID, Type
-    variation:weaponTubeDisallowMissle( 0, "Mine")
-    variation:weaponTubeDisallowMissle( 1, "Mine")
-    variation:setWeaponTubeExclusiveFor(2, "Mine")
-    --     Tube weapon storage     Type, Count
-    variation:setWeaponStorage(  "Mine", 6)
-
-------------------Phobos M3P (player ship)------------------
-variation = variation:copy("Phobos M3P")
-    variation:setLocaleName(_("Phobos M3P"))
-    variation:setType("playership")
-    variation:setDescription(_([[A subvariant of the Phobos M3 with front-firing weapon tubes, more powerful impulse engines, and bolstered defenses.]]))
+-----------------------Phobos X3P (player ship)-----------------------
+variation1 = template:copy("Player Cruiser")
+	variation1:setLocaleName(_("Phobos X3P"))
+	variation1:setModel("AtlasHeavyFighterWhite")
+    variation1:setDescription(_([[A highly experimental reconfiguration of the Phobos T3 with an all-new titanium-duranium alloy hull, jump drive, reconfigured beams, mine-laying tube, nuclear weapon storage, boost-capable impulse engines, and bolstered defenses.]]))
+	variation1:setRadarTrace("radar_cruiser.png")
+	variation1:setType("playership")
 
     -- Defenses
-    variation:setHull(200)
-    variation:setShields(100, 100)
+	variation1:setHull(200)
+	variation1:setShields(80, 80)
 
     -- Maneuverability
-    --   Impulse  Forward, Turn, Acceleration
-    variation:setSpeed(80,   10, 20)
-    --   Combat Maneuver      Boost, Strafe
-    variation:setCombatManeuver(400, 250)
+    --   Impulse   Forward, Turn, Acceleration
+	variation1:setSpeed(90,   10, 20)
+    --   Combat Maneuver       Boost, Strafe
+	variation1:setCombatManeuver(400, 250)
+    --   Long-range propulsion
+	variation1:setJumpDrive(true)
 
     -- Weapons
-    --   Tubes     Count, Load Time
-    variation:setTubes(3, 10.0)
-    --     Tube weapon storage     Type, Count
-    variation:setWeaponStorage("Homing", 10)
-    variation:setWeaponStorage(  "Nuke",  2)
-    variation:setWeaponStorage(  "Mine",  4)
-    variation:setWeaponStorage(   "EMP",  3)
+    --   Beams              ID, Arc, Bear,  Range, Cycle, Damage
+    variation1:setBeamWeapon(0,  90,  -15, 1000.0,   6.0, 10)
+	variation1:setBeamWeapon(1,  90,   15, 1000.0,   6.0, 10)
+    --   Tubes      Count, Load Time
+	variation1:setTubes(3, 8.0)
+    --     Tube direction      ID, Bearing
+	variation1:setTubeDirection(0,  -1)
+	variation1:setTubeDirection(1,   1)
+	variation1:setTubeDirection(2, 180)
+    --     Tube specialization          ID, Type
+	variation1:weaponTubeDisallowMissle( 0, "Mine")
+	variation1:weaponTubeDisallowMissle( 1, "Mine")
+	variation1:setWeaponTubeExclusiveFor(2, "Mine")
+    --     Tube weapon storage      Type, Count
+	variation1:setWeaponStorage("Homing", 12)
+	variation1:setWeaponStorage(  "Nuke",  4)
+	variation1:setWeaponStorage(   "EMP",  6)
+	variation1:setWeaponStorage(  "Mine",  8)
 
     -- Internal layout
-    --   Rooms          Position  Size
-    --                      X  Y  W  H  System
-    variation:addRoomSystem(1, 0, 2, 1, "Maneuver");
-    variation:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
-    variation:addRoom(      2, 2, 2, 1);
+    --   Rooms           Position  Size
+    --                       X  Y  W  H  System
+	variation1:addRoomSystem(1, 0, 2, 1, "Maneuver");
+	variation1:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
+	variation1:addRoom(      2, 2, 2, 1);
 
-    variation:addRoomSystem(0, 3, 1, 2, "RearShield");
-    variation:addRoomSystem(1, 3, 2, 2, "Reactor");
-    variation:addRoomSystem(3, 3, 2, 2, "Warp");
-    variation:addRoomSystem(5, 3, 1, 2, "JumpDrive");
-    variation:addRoom(      6, 3, 2, 1);
-    variation:addRoom(      6, 4, 2, 1);
-    variation:addRoomSystem(8, 3, 1, 2, "FrontShield");
+	variation1:addRoomSystem(0, 3, 1, 2, "RearShield");
+	variation1:addRoomSystem(1, 3, 2, 2, "Reactor");
+	variation1:addRoomSystem(3, 3, 2, 2, "Warp");
+	variation1:addRoomSystem(5, 3, 1, 2, "JumpDrive");
+	variation1:addRoom(	     6, 3, 2, 1);
+	variation1:addRoom(	     6, 4, 2, 1);
+	variation1:addRoomSystem(8, 3, 1, 2, "FrontShield");
 
-    variation:addRoom(      2, 5, 2, 1);
-    variation:addRoomSystem(1, 6, 2, 1, "MissileSystem");
-    variation:addRoomSystem(1, 7, 2, 1, "Impulse");
-    --   Doors    Position
-    --                X  Y  Horizontal?
-    variation:addDoor(1, 1, true);
-    variation:addDoor(2, 2, true);
-    variation:addDoor(3, 3, true);
-    variation:addDoor(1, 3, false);
-    variation:addDoor(3, 4, false);
-    variation:addDoor(3, 5, true);
-    variation:addDoor(2, 6, true);
-    variation:addDoor(1, 7, true);
-    variation:addDoor(5, 3, false);
-    variation:addDoor(6, 3, false);
-    variation:addDoor(6, 4, false);
-    variation:addDoor(8, 3, false);
-    variation:addDoor(8, 4, false);
+	variation1:addRoom(	     2, 5, 2, 1);
+	variation1:addRoomSystem(1, 6, 2, 1, "MissileSystem");
+	variation1:addRoomSystem(1, 7, 2, 1, "Impulse");
+    --   Doors     Position
+    --                 X  Y  Horizontal?
+	variation1:addDoor(1, 1, true);
+	variation1:addDoor(2, 2, true);
+	variation1:addDoor(3, 3, true);
+	variation1:addDoor(1, 3, false);
+	variation1:addDoor(3, 4, false);
+	variation1:addDoor(3, 5, true);
+	variation1:addDoor(2, 6, true);
+	variation1:addDoor(1, 7, true);
+	variation1:addDoor(5, 3, false);
+	variation1:addDoor(6, 3, false);
+	variation1:addDoor(6, 4, false);
+	variation1:addDoor(8, 3, false);
+	variation1:addDoor(8, 4, false);
+
+-------------------------Phobos M3--------------------------
+variation2 = template:copy("Phobos M3")
+    variation2:setLocaleName(_("Phobos M3"))
+    variation2:setModel("AtlasHeavyFighterRed")
+    variation2:setDescription(_([[The Phobos M3 is one of the most common variants of the Phobos T3. It adds a mine-laying tube, but the extra storage required for the mines slows this ship down slightly.]]))
+
+    -- Maneuverability
+    --   Impulse   Forward, Turn, Acceleration
+    variation2:setSpeed(55,   10, 10)
+
+    -- Weapons
+    --   Tubes      Count, Load Time
+    variation2:setTubes(3, 60.0)
+    --     Tube direction      ID, Bearing
+    variation2:setTubeDirection(2,  180)
+    --     Tube specialization          ID, Type
+    variation2:weaponTubeDisallowMissle( 0, "Mine")
+    variation2:weaponTubeDisallowMissle( 1, "Mine")
+    variation2:setWeaponTubeExclusiveFor(2, "Mine")
+    --     Tube weapon storage      Type, Count
+    variation2:setWeaponStorage(  "Mine", 6)
+
+------------------Phobos M3P (player ship)------------------
+variation3 = variation2:copy("Phobos M3P")
+    variation3:setLocaleName(_("Phobos M3P"))
+    variation3:setDescription(_([[A subvariant of the Phobos M3 with front-firing weapon tubes, more powerful impulse engines, and bolstered defenses.]]))
+    variation3:setType("playership")
+
+    -- Defenses
+    variation3:setHull(200)
+    variation3:setShields(100, 100)
+
+    -- Maneuverability
+    --   Impulse   Forward, Turn, Acceleration
+    variation3:setSpeed(80,   10, 20)
+    --   Combat Maneuver       Boost, Strafe
+    variation3:setCombatManeuver(400, 250)
+
+    -- Weapons
+    --   Tubes      Count, Load Time
+    variation3:setTubes(3, 10.0)
+    --     Tube weapon storage      Type, Count
+    variation3:setWeaponStorage("Homing", 10)
+    variation3:setWeaponStorage(  "Nuke",  2)
+    variation3:setWeaponStorage(   "EMP",  3)
+    variation3:setWeaponStorage(  "Mine",  4)
+
+    -- Internal layout
+    --   Rooms           Position  Size
+    --                       X  Y  W  H  System
+    variation3:addRoomSystem(1, 0, 2, 1, "Maneuver");
+    variation3:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
+    variation3:addRoom(      2, 2, 2, 1);
+
+    variation3:addRoomSystem(0, 3, 1, 2, "RearShield");
+    variation3:addRoomSystem(1, 3, 2, 2, "Reactor");
+    variation3:addRoomSystem(3, 3, 2, 2, "Warp");
+    variation3:addRoomSystem(5, 3, 1, 2, "JumpDrive");
+    variation3:addRoom(      6, 3, 2, 1);
+    variation3:addRoom(      6, 4, 2, 1);
+    variation3:addRoomSystem(8, 3, 1, 2, "FrontShield");
+
+    variation3:addRoom(      2, 5, 2, 1);
+    variation3:addRoomSystem(1, 6, 2, 1, "MissileSystem");
+    variation3:addRoomSystem(1, 7, 2, 1, "Impulse");
+    --   Doors     Position
+    --                 X  Y  Horizontal?
+    variation3:addDoor(1, 1, true);
+    variation3:addDoor(2, 2, true);
+    variation3:addDoor(3, 3, true);
+    variation3:addDoor(1, 3, false);
+    variation3:addDoor(3, 4, false);
+    variation3:addDoor(3, 5, true);
+    variation3:addDoor(2, 6, true);
+    variation3:addDoor(1, 7, true);
+    variation3:addDoor(5, 3, false);
+    variation3:addDoor(6, 3, false);
+    variation3:addDoor(6, 4, false);
+    variation3:addDoor(8, 3, false);
+    variation3:addDoor(8, 4, false);
 
 -------------------------Nirvana R5-------------------------
 template = ShipTemplate():setName("Nirvana R5")
@@ -632,7 +707,85 @@ variation = template:copy("Repulse")
     variation:addDoor( 8, 3, true)
     variation:addDoor(10, 2, false)
 
---Support: mine layer
+----------------------------Tug-----------------------------
+template = ShipTemplate():setName("Tug")
+	template:setLocaleName(_("Tug"))
+	variation:setClass("Frigate", "Support")
+	template:setModel("space_tug")
+	template:setDescription(_([[The tugboat is a reliable, but small and unarmed transport ship. Due to its low cost, it is a favourite ship to teach the ropes to fledgling captains without risking friendly fire.]]))
+	template:setRadarTrace("radar_tug.png")
+
+	-- Capabilities
+	template:setEnergyStorage(800)
+
+	-- Defenses
+	template:setHull(50)
+	template:setShields(20)
+
+    -- Maneuverability
+    --   Impulse  Forward, Turn, Acceleration
+	template:setSpeed(100,   10, 15)
+
+-------------------Nautilus (player ship)-------------------
+variation = template:copy("Nautilus")
+	variation:setLocaleName(_("Nautilus"))
+	variation:setDescription(_([[The Nautilus is a small, jump-capable minelayer with minimal armaments, shields, and hull plating.]]))
+	variation:setType("playership")
+
+	-- Defenses
+	variation:setHull(100)
+	variation:setShields(60, 60)
+
+    -- Maneuverability
+    --   Combat Maneuver      Boost, Strafe
+	variation:setCombatManeuver(250, 150)
+	--   Long-range Propulsion
+	variation:setJumpDrive(true)
+
+    -- Weapons
+    --   Beams             ID, Arc, Bear,  Range, Cycle, Damage
+	variation:setBeamWeapon(0,  10,   35, 1000.0,   6.0, 6)
+	variation:setBeamWeapon(1,  10,  -35, 1000.0,   6.0, 6)
+    --     Beam turrets          ID, Arc, Dir, Rotation Speed
+	variation:setBeamWeaponTurret(0,  90,  35, 6)
+	variation:setBeamWeaponTurret(1,  90, -35, 6)
+    --   Tubes    Count, Load Time
+	variation:setTubes(3, 10.0)
+    --     Tube direction     ID, Bearing
+	variation:setTubeDirection(0, 180)
+	variation:setTubeDirection(1, 180)
+	variation:setTubeDirection(2, 180)
+	--     Tube weapon storage     Type, Count
+	variation:setWeaponStorage(  "Mine", 12)
+	variation:setWeaponStorage("Homing", 0)
+	variation:setWeaponStorage(  "Nuke", 0)
+	variation:setWeaponStorage(   "EMP", 0)
+
+    -- Internal layout
+    --   Repair crew count
+	variation:setRepairCrewCount(4)
+    --   Rooms          Position  Size
+    --                      X  Y  W  H  System
+	variation:addRoomSystem(0, 1, 1, 2, "Impulse")
+	variation:addRoomSystem(1, 0, 2, 1, "RearShield")
+	variation:addRoomSystem(1, 1, 2, 2, "JumpDrive")
+	variation:addRoomSystem(1, 3, 2, 1, "FrontShield")
+	variation:addRoomSystem(3, 0, 2, 1, "BeamWeapons")
+	variation:addRoomSystem(3, 1, 3, 1, "Warp")
+	variation:addRoomSystem(3, 2, 3, 1, "Reactor")
+	variation:addRoomSystem(3, 3, 2, 1, "MissileSystem")
+	variation:addRoomSystem(6, 1, 1, 2, "Maneuver")
+    --   Doors    Position
+    --                X  Y  Horizontal?
+	variation:addDoor(1, 1, false)
+	variation:addDoor(2, 1, true)
+	variation:addDoor(1, 3, true)
+	variation:addDoor(3, 2, false)
+	variation:addDoor(4, 3, true)
+	variation:addDoor(6, 1, false)
+	variation:addDoor(4, 2, true)
+	variation:addDoor(4, 1, true)
+
 --Support: mine sweeper
 --Support: science vessel
 --Support: deep space recon
