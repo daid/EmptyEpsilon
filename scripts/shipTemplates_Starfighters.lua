@@ -112,11 +112,10 @@ variation = variation:copy("MP52 Hornet")
     variation:addDoor(5, 1, false);
     variation:addDoor(5, 2, false);
 
-----------------MM52 Hornet (Player Fighter)----------------
+-----------------------Player Fighter-----------------------
 variation = variation:copy("Player Fighter")
     variation:setLocaleName(_("MM52 Hornet"))
     variation:setModel("WespeScoutWhite")
-    variation:setDescription(_([[The MM52 Hornet is a significantly upgraded version of MU52 Hornet, with nearly twice the hull strength and shielding, better acceleration, impulse boosters, 2 powerful laser cannons, and an HVLI tube. However, the extra arms significantly reduce its agility and put additional strain on its small reactor.]]))
     variation:setImpulseSoundFile("sfx/engine_fighter.wav")
 
     -- Defenses

@@ -310,12 +310,11 @@ template = ShipTemplate():setName("Maverick")
     template:addDoor( 9, 2, true)
     template:addDoor(10, 4, true)
 
---------------Molotok (Player Missile Cruiser)--------------
+-------------------Player Missile Cruiser-------------------
 template = ShipTemplate():setName("Player Missile Cr.")
-	template:setLocaleName(_("Molotok"))
+	template:setLocaleName(_("Player Missile Cr."))
     template:setClass(_("Corvette"), _("Destroyer"))
 	template:setModel("space_cruiser_4")
-    template:setDescription(_([[The Molotok is a bludgeoning nuclear-capable destroyer with a warp drive and anti-fighter broadside missile tubes covering every approach. With no beams to speak of and vulnerable shielding, it's built to put an end to fights from a distance - not to start them from up close.]]))
 	template:setRadarTrace("radar_missile_cruiser.png")
 	template:setType("playership")
 

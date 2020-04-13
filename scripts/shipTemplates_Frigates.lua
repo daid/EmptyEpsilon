@@ -52,11 +52,10 @@ template = ShipTemplate():setName("Phobos T3")
     template:setWeaponStorage("Homing",  6)
     template:setWeaponStorage(  "HVLI", 20)
 
------------------Phobos X3P (Player Cruiser)----------------
+-----------------------Player Cruiser-----------------------
 variation1 = template:copy("Player Cruiser")
-	variation1:setLocaleName(_("Phobos X3P"))
+	variation1:setLocaleName(_("Player Cruiser"))
 	variation1:setModel("AtlasHeavyFighterWhite")
-    variation1:setDescription(_([[This humble Phobos hull belies a state-of-the art, highly experimental refit that includes titanium-duranium alloy hull reinforcements, a jump drive, reconfigured beams, a mine-laying tube, nuclear weapon storage, boost-capable impulse engines, and bolstered defenses. While more complex to operate efficiently than its simpler cousins, it packs the punch of a larger corvette.]]))
 	variation1:setRadarTrace("radar_cruiser.png")
 	variation1:setType("playership")
 
@@ -607,12 +606,12 @@ template = ShipTemplate():setName("Ranus U")
     template:setWeaponStorage("Homing", 6)
     template:setWeaponStorage(  "Nuke", 2)
 
---------------------Valkyrie-A (Gunship)--------------------
+--------------------------Gunship---------------------------
 template = ShipTemplate():setName("Gunship")
-	template:setLocaleName(_("Valkyrie-A"))
+	template:setLocaleName(_("Gunship"))
 	template:setClass(_("Frigate"), _("subclass", "Cruiser"))
-	template:setModel("battleship_destroyer_4_upgraded")
-	template:setDescription(_([[The Valkyrie-A is equipped with a homing missile tube to do initial damage to a target, and 2 front-firing beams to finish it off. With a 3-segment shield, it's designed to quickly take out enemies weaker than itself, then stick around to support larger ships in wearing down more powerful targets.]]))
+    template:setDescription(_([[The gunship is equipped with a homing missile tube to do initial damage to a target, and 2 front-firing beams to finish it off. It's designed to quickly take out the enemies weaker then itself.]]))
+)	template:setModel("battleship_destroyer_4_upgraded")
 	template:setRadarTrace("radar_adv_gunship.png")
 
     -- Defenses
@@ -632,10 +631,10 @@ template = ShipTemplate():setName("Gunship")
     --     Tube weapon storage    Type, Count
 	template:setWeaponStorage("Homing", 4)
 
------------------Valkyrie-B (Adv. Gunship)------------------
+------------------------Adv. Gunship------------------------
 variation = template:copy("Adv. Gunship")
-	variation:setLocaleName(_("Valkyrie-B"))
-	template:setDescription(_([[The Valkyrie-B adds a second forward homing missile tube to the Valkyrie-A configuration.]]))
+    variation:setDescription(_([[The advanced gunship is equipped with 2 homing missile tubes to do initial damage to a target, and 2 front-firing beams to finish it off. It's designed to quickly take out the enemies weaker then itself.]]))
+	variation:setLocaleName(_("Adv. Gunship"))
 
 	-- Weapons
     --   Tubes     Count, Load Time
@@ -824,12 +823,12 @@ variation = template:copy("Repulse")
     variation:addDoor( 8, 3, true)
     variation:addDoor(10, 2, false)
 
-------------------Kessel (Blockade Runner)------------------
+----------------------Blockade Runner-----------------------
 template = ShipTemplate():setName("Blockade Runner")
-template:setLocaleName(_("Kessel"))
+template:setLocaleName(_("Blockade Runner"))
 template:setClass(_("Frigate"), _("Light transport"))
 template:setModel("battleship_destroyer_3_upgraded")
-template:setDescription(_([[Kessels are reasonably fast, highly shielded transport ships designed to break through blockades and defensive lines in order to deliver goods and harry defensive installations.]]))
+template:setDescription(_([[Blockade runners are reasonably fast, highly shielded transport ships designed to break through blockades and defensive lines in order to deliver goods and harry defensive installations.]]))
 template:setRadarTrace("radar_blockade.png")
 
 -- Defenses
