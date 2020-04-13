@@ -171,68 +171,102 @@ variation = template:copy("Nirvana R5A")
     variation:setBeamWeapon(2, 90,   50, 1200.0,   2.9, 1)
     variation:setBeamWeapon(3, 90,  -50, 1200.0,   2.9, 1)
 
-template = ShipTemplate():setName("Storm"):setLocaleName(_("Storm")):setClass(_("Frigate"), _("Cruiser: Heavy Artillery")):setModel("HeavyCorvetteYellow")	--Yellow, Green, Blue, White, Red
-template:setRadarTrace("radar_piranha.png")
-template:setDescription(_([[A heavy artillery cruiser, the Storm fires bunches of missiles from forward facing tubes.]]))
-template:setBeamWeapon(0, 60, 0, 1200, 3, 2)
-template:setHull(50)
-template:setShields(30, 30)
-template:setSpeed(40, 6, 8)
-template:setTubes(5, 15.0)
-template:setWeaponStorage("HVLI", 15)
-template:setWeaponStorage("Homing", 15)
-template:setTubeDirection(0,  0)
-template:setTubeDirection(1, -1)
-template:setTubeDirection(2,  1)
-template:setTubeDirection(3, -2)
-template:setTubeDirection(4,  2)
-template:setDefaultAI('missilevolley')
+---------------------------Storm----------------------------
+template = ShipTemplate():setName("Storm")
+    template:setLocaleName(_("Storm"))
+    template:setClass(_("Frigate"), _("Cruiser"))
+    template:setModel("HeavyCorvetteYellow")
+    template:setRadarTrace("radar_piranha.png")
+    template:setDescription(_([[A heavy artillery cruiser, the Storm fires barrages of missiles from its forward-facing tubes. Its crews are trained in long-range stand-off tactics to make up for its lack of close-range firepower.]]))
+    template:setDefaultAI("missilevolley")
 
-template = ShipTemplate():setName("Hathcock"):setLocaleName(_("Hathcock")):setClass(_("Frigate"), _("Cruiser: Sniper")):setModel("HeavyCorvetteGreen"):setType("playership")
-template:setRadarTrace("radar_piranha.png")
-template:setDescription(_("Long range narrow beam and some point defense beams, broadside missiles. Agile for a frigate"))
---						Arc, Dir, Range, CycleTime, Dmg
-template:setBeamWeapon(0, 4,   0, 1400.0, 6.0, 4)
-template:setBeamWeapon(1,20,   0, 1200.0, 6.0, 4)
-template:setBeamWeapon(2,60,   0, 1000.0, 6.0, 4)
-template:setBeamWeapon(3,90,   0,  800.0, 6.0, 4)
-template:setHull(120)
-template:setShields(70, 70)
-template:setSpeed(50, 15, 8)
-template:setTubes(2, 15.0)
-template:setCombatManeuver(200, 150)
-template:setJumpDrive(true)
-template:setWeaponStorage("HVLI", 8)
-template:setWeaponStorage("Homing", 4)
-template:setWeaponStorage("EMP", 2)
-template:setWeaponStorage("Nuke", 1)
-template:setTubeDirection(0, -90)
-template:setTubeDirection(1,  90)
+    -- Defenses
+    template:setHull(50)
+    template:setShields(30, 30)
 
-template:setRepairCrewCount(2)
---	(H)oriz, (V)ert	   HC,VC,HS,VS, system    (C)oordinate (S)ize
-template:addRoomSystem( 0, 0, 1, 4, "Reactor")
-template:addRoomSystem( 1, 0, 1, 1, "JumpDrive")
-template:addRoomSystem( 1, 3, 1, 1, "Warp")
-template:addRoomSystem( 2, 0, 1, 1, "FrontShield")
-template:addRoomSystem( 2, 3, 1, 1, "RearShield")
-template:addRoomSystem( 3, 0, 1, 1, "MissileSystem")
-template:addRoomSystem( 3, 3, 1, 1, "Impulse")
-template:addRoomSystem( 3, 1, 2, 1, "Maneuver")
-template:addRoom( 3, 2, 2, 1)
-template:addRoomSystem( 5, 1, 2, 2, "Beamweapons")
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+    template:setSpeed(40,    6, 8)
 
---(H)oriz, (V)ert H, V, true = horizontal
-template:addDoor( 1, 0, false)
-template:addDoor( 1, 3, false)
-template:addDoor( 2, 0, false)
-template:addDoor( 2, 3, false)
-template:addDoor( 3, 0, false)
-template:addDoor( 3, 3, false)
-template:addDoor( 3, 3, true)
-template:addDoor( 3, 2, true)
-template:addDoor( 5, 1, false)
+    -- Weapons
+    --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
+    template:setBeamWeapon(0,  60,    0, 1200.0,     3, 2)
+    --   Tubes    Count, Load Time
+    template:setTubes(5, 15.0)
+    --     Tube direction    ID, Bearing
+    template:setTubeDirection(0,  0)
+    template:setTubeDirection(1, -1)
+    template:setTubeDirection(2,  1)
+    template:setTubeDirection(3, -2)
+    template:setTubeDirection(4,  2)
+    --     Tube weapon storage    Type, Count
+    template:setWeaponStorage(  "HVLI", 15)
+    template:setWeaponStorage("Homing", 15)
 
+--------------------------Hathcock--------------------------
+template = ShipTemplate():setName("Hathcock")
+    template:setLocaleName(_("Hathcock"))
+    template:setClass(_("Frigate"), _("Cruiser"))
+    template:setModel("HeavyCorvetteGreen")
+    template:setDescription(_([[The agile and versatile Hathcock has a long-range narrow beam weapon and some point-defense beams, as well as broadside missiles. Crews often dub it a "sniper" for its 1.4U-range, narrow-arc primary beam and nimble turn rate.]]))
+    template:setRadarTrace("radar_piranha.png")
+    template:setType("playership")
+
+    -- Defenses
+    template:setHull(120)
+    template:setShields(70, 70)
+
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+    template:setSpeed(50,   15, 8)
+    --   Combat Maneuver     Boost, Strafe
+    template:setCombatManeuver(200, 150)
+    --   Long-range Propulsion
+    template:setJumpDrive(true)
+
+    -- Weapons
+    --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
+    template:setBeamWeapon(0,   4,    0, 1400.0,   6.0, 4)
+    template:setBeamWeapon(1,  20,    0, 1200.0,   6.0, 4)
+    template:setBeamWeapon(2,  60,    0, 1000.0,   6.0, 4)
+    template:setBeamWeapon(3,  90,    0,  800.0,   6.0, 4)
+    --   Tubes    Count, Load Time
+    template:setTubes(2, 15.0)
+    --     Tube direction    ID, Bearing
+    template:setTubeDirection(0, -90)
+    template:setTubeDirection(1,  90)
+    --     Tube weapon storage    Type, Count
+    template:setWeaponStorage("Homing", 4)
+    template:setWeaponStorage(  "Nuke", 1)
+    template:setWeaponStorage(   "EMP", 2)
+    template:setWeaponStorage(  "HVLI", 8)
+
+    -- Internal layout
+    --   Repair crew count
+    template:setRepairCrewCount(2)
+    --   Rooms         Position  Size
+    --                     X  Y  W  H  System
+    template:addRoomSystem(0, 0, 1, 4, "Reactor")
+    template:addRoomSystem(1, 0, 1, 1, "JumpDrive")
+    template:addRoomSystem(1, 3, 1, 1, "Warp")
+    template:addRoomSystem(2, 0, 1, 1, "FrontShield")
+    template:addRoomSystem(2, 3, 1, 1, "RearShield")
+    template:addRoomSystem(3, 0, 1, 1, "MissileSystem")
+    template:addRoomSystem(3, 3, 1, 1, "Impulse")
+    template:addRoomSystem(3, 1, 2, 1, "Maneuver")
+    template:addRoom(      3, 2, 2, 1)
+    template:addRoomSystem(5, 1, 2, 2, "BeamWeapons")
+    --   Doors   Position
+    --               X  Y  Horizontal?
+    template:addDoor(1, 0, false)
+    template:addDoor(1, 3, false)
+    template:addDoor(2, 0, false)
+    template:addDoor(2, 3, false)
+    template:addDoor(3, 0, false)
+    template:addDoor(3, 3, false)
+    template:addDoor(3, 3, true)
+    template:addDoor(3, 2, true)
+    template:addDoor(5, 1, false)
 
 template = ShipTemplate():setName("Piranha F12"):setLocaleName(_("Piranha F12")):setClass(_("Frigate"), _("Cruiser: Light Artillery")):setModel("HeavyCorvetteRed")
 template:setRadarTrace("radar_piranha.png")
