@@ -498,7 +498,7 @@ variation = template:copy("Flavia Falcon")
 
     -- Maneuverability
     --   Impulse  Forward, Turn, Acceleration
-    variation:setSpeed(50, 8, 10)
+    variation:setSpeed(50,    8, 10)
 
     -- Weapons
     --   Beams             ID, Arc, Bear,  Range, Cycle, Damage
@@ -568,50 +568,69 @@ variation = variation:copy("Flavia P.Falcon")
     variation:addDoor(5, 5, true)
     variation:addDoor(6, 5, true)
 
-template = ShipTemplate():setName("Repulse"):setLocaleName(_("Repulse")):setClass(_("Frigate"), _("Armored Transport")):setModel("LightCorvetteRed"):setType("playership")
-template:setRadarTrace("radar_tug.png")
-template:setDescription("Jump/Turret version of Flavia Falcon")
-template:setHull(120)
-template:setShields(80, 80)
-template:setSpeed(55, 9, 10)
---                 Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 10, 90, 1200.0, 6.0, 5)
-template:setBeam(1, 10,-90, 1200.0, 6.0, 5)
---								Arc, Dir, Rotate speed
-template:setBeamWeaponTurret(0, 200,  90, 5)
-template:setBeamWeaponTurret(1, 200, -90, 5)
-template:setJumpDrive(true)
-template:setCombatManeuver(250,150)
-template:setTubes(2, 20.0)
-template:setTubeDirection(0, 0)
-template:setTubeDirection(1, 180)
-template:setWeaponStorage("HVLI", 6)
-template:setWeaponStorage("Homing", 4)
+---------------Repulse (player ship)----------------
+variation = template:copy("Repulse")
+    variation:setLocaleName(_("Repulse"))
+    variation:setModel("LightCorvetteRed")
+    variation:setDescription(_([[The Repulse is an armored transport version of the Flavia Falcon that employs a jump drive and turreted beam weapons.]]))
+    variation:setType("playership")
 
-template:setRepairCrewCount(8)
---	(H)oriz, (V)ert	   HC,VC,HS,VS, system    (C)oordinate (S)ize
-template:addRoomSystem( 0, 1, 2, 4, "Impulse")
-template:addRoomSystem( 2, 0, 2, 2, "RearShield")
-template:addRoomSystem( 2, 2, 2, 2, "Warp")
-template:addRoom( 2, 4, 2, 2)
-template:addRoomSystem( 4, 1, 1, 4, "Maneuver")
-template:addRoom( 5, 0, 2, 2)
-template:addRoomSystem( 5, 2, 2, 2, "JumpDrive")
-template:addRoomSystem( 5, 4, 2, 2, "BeamWeapons")
-template:addRoomSystem( 7, 1, 3, 2, "Reactor")
-template:addRoomSystem( 7, 3, 3, 2, "MissileSystem")
-template:addRoomSystem(10, 2, 2, 2, "FrontShield")
+    -- Defenses
+    variation:setHull(120)
+    variation:setShields(80, 80)
 
-template:addDoor( 2, 2, false)
-template:addDoor( 2, 4, false)
-template:addDoor( 3, 2, true)
-template:addDoor( 4, 3, false)
-template:addDoor( 5, 2, false)
-template:addDoor( 5, 4, true)
-template:addDoor( 7, 3, false)
-template:addDoor( 7, 1, false)
-template:addDoor( 8, 3, true)
-template:addDoor(10, 2, false)
+    -- Maneuverability
+    --   Impulse  Forward, Turn, Acceleration
+    variation:setSpeed(55,    9, 10)
+    --   Combat Maneuver      Boost, Strafe
+    variation:setCombatManeuver(250, 150)
+    --   Long-range Propulsion
+    variation:setJumpDrive(true)
+
+    -- Weapons
+    --   Beams             ID, Arc, Bear,  Range, Cycle, Damage
+    variation:setBeamWeapon(0,  10,   90, 1200.0,   6.0, 5)
+    variation:setBeamWeapon(1,  10,  -90, 1200.0,   6.0, 5)
+    --     Beam turrets          ID, Arc, Dir, Rotation Speed
+    variation:setBeamWeaponTurret(0, 200,  90, 5)
+    variation:setBeamWeaponTurret(1, 200, -90, 5)
+    --   Tubes     Count, Load Time
+    variation:setTubes(2, 20.0)
+    --     Tube direction     ID, Bearing
+    variation:setTubeDirection(0, 0)
+    variation:setTubeDirection(1, 180)
+    --     Tube weapon storage     Type, Count
+    variation:setWeaponStorage(  "HVLI", 6)
+    variation:setWeaponStorage("Homing", 4)
+
+    -- Internal layout
+    --   Repair crew count
+    variation:setRepairCrewCount(8)
+    --   Rooms           Position  Size
+    --                       X  Y  W  H  System
+    variation:addRoomSystem( 0, 1, 2, 4, "Impulse")
+    variation:addRoomSystem( 2, 0, 2, 2, "RearShield")
+    variation:addRoomSystem( 2, 2, 2, 2, "Warp")
+    variation:addRoom(       2, 4, 2, 2)
+    variation:addRoomSystem( 4, 1, 1, 4, "Maneuver")
+    variation:addRoom(       5, 0, 2, 2)
+    variation:addRoomSystem( 5, 2, 2, 2, "JumpDrive")
+    variation:addRoomSystem( 5, 4, 2, 2, "BeamWeapons")
+    variation:addRoomSystem( 7, 1, 3, 2, "Reactor")
+    variation:addRoomSystem( 7, 3, 3, 2, "MissileSystem")
+    variation:addRoomSystem(10, 2, 2, 2, "FrontShield")
+    --   Doors     Position
+    --                 X  Y  Horizontal?
+    variation:addDoor( 2, 2, false)
+    variation:addDoor( 2, 4, false)
+    variation:addDoor( 3, 2, true)
+    variation:addDoor( 4, 3, false)
+    variation:addDoor( 5, 2, false)
+    variation:addDoor( 5, 4, true)
+    variation:addDoor( 7, 3, false)
+    variation:addDoor( 7, 1, false)
+    variation:addDoor( 8, 3, true)
+    variation:addDoor(10, 2, false)
 
 --Support: mine layer
 --Support: mine sweeper
