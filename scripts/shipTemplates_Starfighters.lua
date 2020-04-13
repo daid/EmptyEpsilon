@@ -159,7 +159,84 @@ template = ShipTemplate():setName("Fighter")
     --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
     template:setBeamWeapon(0,  60,    0, 1000.0,   4.0, 4)
 
+-------------AS-2 Lightning (Advanced Striker)--------------
+template = ShipTemplate():setName("Adv. Striker")
+	template:setLocaleName(_("AS-2 Lightning"))
+	template:setClass(_("Starfighter"), _("subclass", "Interceptor"))
+	template:setModel("dark_fighter_6")
+	template:setDescription(_([[The AS-2 Lightning is a jump drive-equipped successor to the AS-1 Striker. Its impulse engines are slow for its subclass, but its jump drive allows it to quickly join distant action and its agile thrusters can keep targets focused within its beam arcs. However, it lacks in raw firepower, and its light shielding makes it vulnerable to direct assault.]]))
+	template:setRadarTrace("radar_adv_striker.png")
+
+    -- Defenses
+	template:setHull(70)
+	template:setShields(50, 30)
+
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+	template:setSpeed(45, 12, 15)
+	template:setJumpDrive(true)
+
+    -- Weapons
+    --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
+    template:setBeamWeapon(0,  50,  -15, 1000.0,   6.0, 6)
+	template:setBeamWeapon(1,  50,   15, 1000.0,   6.0, 6)
+
 --------------------------GUNSHIPS--------------------------
+
+------------AS-1 Striker (Striker; player ship)-------------
+template = ShipTemplate():setName("Striker")
+	template:setLocaleName(_("AS-1 Striker"))
+	template:setClass(_("Starfighter"), _("subclass", "Gunship"))
+	template:setModel("dark_fighter_6")
+	template:setDescription(_([[The AS-1 Striker is the predecessor to the AS-2 Lightning, and its lack of long-range capability and turreted beams make it more of a gunship despite its relatively weak firepower. It's slow but agile, and boasts evasive thrusters that its newer version lacks.]]))
+	template:setRadarTrace("radar_adv_striker.png")
+	template:setType("playership")
+
+    -- Capabilities
+	template:setEnergyStorage(500)
+
+    -- Defenses
+	template:setHull(120)
+	template:setShields(50, 30)
+
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+	template:setSpeed(45,   15, 30)
+	--   Combat Maneuver     Boost, Strafe
+	template:setCombatManeuver(250, 150)
+
+	-- Weapons
+    --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
+	template:setBeamWeapon(0,  10,  -15, 1000.0,   6.0, 6)
+	template:setBeamWeapon(1,  10,   15, 1000.0,   6.0, 6)
+    --     Beam turrets         ID, Arc, Dir, Rotation Speed
+	template:setBeamWeaponTurret(0, 100, -15, 6)
+	template:setBeamWeaponTurret(1, 100,  15, 6)
+
+    -- Internal layout
+    --   Repair crew count
+	template:setRepairCrewCount(2)
+    --   Rooms         Position  Size
+    --                     X  Y  W  H  System
+	template:addRoomSystem(4, 0, 3, 1, "RearShield")
+	template:addRoomSystem(3, 1, 3, 1, "MissileSystem")
+	template:addRoomSystem(0, 1, 1, 1, "BeamWeapons")
+	template:addRoomSystem(1, 1, 1, 3, "Reactor")
+	template:addRoomSystem(2, 2, 3, 1, "Warp")
+	template:addRoomSystem(5, 2, 4, 1, "JumpDrive")
+	template:addRoomSystem(0, 3, 1, 1, "Impulse")
+	template:addRoomSystem(3, 3, 3, 1, "Maneuver")
+	template:addRoomSystem(4, 4, 3, 1, "FrontShield")
+    --   Doors   Position
+    --               X  Y  Horizontal?
+	template:addDoor(1, 1, false)
+	template:addDoor(1, 3, false)
+	template:addDoor(2, 2, false)
+	template:addDoor(5, 2, false)
+	template:addDoor(4, 3, true)
+	template:addDoor(5, 2, true)
+	template:addDoor(4, 1, true)
+	template:addDoor(5, 4, true)
 
 -------------------------Adder MK5--------------------------
 template = ShipTemplate():setName("Adder MK5")
