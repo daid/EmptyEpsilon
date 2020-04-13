@@ -621,7 +621,7 @@ void SpaceShip::update(float delta)
                 current_impulse -= delta * (impulse_acceleration / impulse_max_speed);
             if (current_impulse < 0.0)
                 current_impulse = 0.0;
-        }else if (current_impulse > 0.0)
+        }else if (current_impulse < 0.0)
         {
             if (impulse_max_speed > 0)
                 current_impulse += delta * (impulse_acceleration / impulse_max_speed);
