@@ -268,126 +268,210 @@ template = ShipTemplate():setName("Hathcock")
     template:addDoor(3, 2, true)
     template:addDoor(5, 1, false)
 
-template = ShipTemplate():setName("Piranha F12"):setLocaleName(_("Piranha F12")):setClass(_("Frigate"), _("Cruiser: Light Artillery")):setModel("HeavyCorvetteRed")
-template:setRadarTrace("radar_piranha.png")
-template:setDescription(_([[A light artillery cruiser, the Piranha F12 is the smallest ship to exclusively fire from broadside weapon tubes.]]))
-template:setHull(70)
-template:setShields(30, 30)
-template:setSpeed(40, 6, 8)
-template:setTubes(6, 15.0)
-template:setWeaponStorage("HVLI", 20)
-template:setWeaponStorage("Homing", 6)
-template:setTubeDirection(0, -90):setWeaponTubeExclusiveFor(0, "HVLI")
-template:setTubeDirection(1, -90)
-template:setTubeDirection(2, -90):setWeaponTubeExclusiveFor(2, "HVLI")
-template:setTubeDirection(3,  90):setWeaponTubeExclusiveFor(3, "HVLI")
-template:setTubeDirection(4,  90)
-template:setTubeDirection(5,  90):setWeaponTubeExclusiveFor(5, "HVLI")
+------------------------Piranha F12-------------------------
+template = ShipTemplate():setName("Piranha F12")
+    template:setLocaleName(_("Piranha F12"))
+    template:setClass(_("Frigate"), _("Cruiser"))
+    template:setModel("HeavyCorvetteRed")
+    template:setRadarTrace("radar_piranha.png")
+    template:setDescription(_([[A light artillery cruiser, the Piranha F12 is the smallest ship to exclusively fire from broadside weapon tubes.]]))
 
-template:setTubeSize(0, "large")
-template:setTubeSize(2, "large")
-template:setTubeSize(3, "large")
-template:setTubeSize(5, "large")
+    -- Defenses
+    template:setHull(70)
+    template:setShields(30, 30)
 
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+    template:setSpeed(40,    6, 8)
 
-variation = template:copy("Piranha F12.M"):setLocaleName(_("Piranha F12.M"))
-variation:setDescription(_([[This modified Piranha F12 is in all respects the same vessel except for special weapon tube modifications that allow it to fire nukes in addition to its normal loadout. However, these changes reduce its overall missile storage capacity.]]))
-variation:setWeaponStorage("HVLI", 10)
-variation:setWeaponStorage("Homing", 4)
-variation:setWeaponStorage("Nuke", 2)
+    -- Weapons
+    --   Tubes    Count, Load Time
+    template:setTubes(6, 15.0)
+    --     Tube direction    ID, Bearing
+    template:setTubeDirection(0, -90)
+    template:setTubeDirection(1, -90)
+    template:setTubeDirection(2, -90)
+    template:setTubeDirection(3,  90)
+    template:setTubeDirection(4,  90)
+    template:setTubeDirection(5,  90)
+    --     Tube size    ID, Size (small, medium, large)
+    template:setTubeSize(0, "large")
+    template:setTubeSize(2, "large")
+    template:setTubeSize(3, "large")
+    template:setTubeSize(5, "large")
+    --     Tube specialization        ID, Type
+    template:setWeaponTubeExclusiveFor(0, "HVLI")
+    template:setWeaponTubeExclusiveFor(2, "HVLI")
+    template:setWeaponTubeExclusiveFor(3, "HVLI")
+    template:setWeaponTubeExclusiveFor(5, "HVLI")
+    --     Tube weapon storage    Type, Count
+    template:setWeaponStorage(  "HVLI", 20)
+    template:setWeaponStorage("Homing", 6)
 
-variation = template:copy("Piranha F8"):setLocaleName(_("Piranha F8"))
-variation:setDescription(_([[The first version of the Piranha was not popular due to its meager firepower and odd tube configuration. The result was a huge financial failure.]]))
-variation:setTubes(3, 12.0)
-variation:setWeaponStorage("HVLI", 10)
-variation:setWeaponStorage("Homing", 5)
-variation:setTubeDirection(0,   0):setWeaponTubeExclusiveFor(0, "HVLI")
-variation:setTubeDirection(1, -90)
-variation:setTubeDirection(2,  90)
+-----------------------Piranha F12.M------------------------
+variation = template:copy("Piranha F12.M")
+    variation:setLocaleName(_("Piranha F12.M"))
+    variation:setDescription(_([[This modified Piranha F12 is in all respects the same vessel except for special weapon tube modifications that allow it to fire nukes in addition to its normal loadout. However, these changes reduce its overall missile storage capacity.]]))
 
-variation = template:copy("Piranha"):setLocaleName(_("Piranha")):setType("playership")
-variation:setDescription(_([[This combat-specialized Piranha F12 adds mine-laying tubes, combat maneuvering systems, and a jump drive.]]))
-variation:setHull(120)
-variation:setShields(70, 70)
-variation:setSpeed(60, 10, 8)
-variation:setTubes(8, 8.0)
-variation:setCombatManeuver(200, 150)
-variation:setJumpDrive(true)
-variation:setWeaponStorage("HVLI", 20)
-variation:setWeaponStorage("Homing", 12)
-variation:setWeaponStorage("Nuke", 6)
-variation:setWeaponStorage("Mine", 8)
-variation:weaponTubeAllowMissle(0, "Homing"):weaponTubeAllowMissle(2, "Homing")
-variation:weaponTubeAllowMissle(3, "Homing"):weaponTubeAllowMissle(5, "Homing")
-variation:setTubeDirection(6, 170):setWeaponTubeExclusiveFor(6, "Mine")
-variation:setTubeDirection(7, 190):setWeaponTubeExclusiveFor(7, "Mine")
+    -- Weapons
+    --     Tube weapon storage     Type, Count
+    variation:setWeaponStorage(  "HVLI", 10)
+    variation:setWeaponStorage("Homing",  4)
+    variation:setWeaponStorage(  "Nuke",  2)
 
-variation:setRepairCrewCount(2)
-variation:addRoomSystem(0, 0, 1, 4, "RearShield")
-variation:addRoom(1, 0, 1, 1)
-variation:addRoomSystem(1, 1, 3, 2, "MissileSystem")
-variation:addRoom(1, 3, 1, 1)
+-------------------------Piranha F8-------------------------
+variation = template:copy("Piranha F8")
+    variation:setLocaleName(_("Piranha F8"))
+    variation:setDescription(_([[The first version of the Piranha was not popular due to its meager firepower and odd tube configuration. The result was a huge financial failure.]]))
+    -- Weapons
+    --   Tubes     Count, Load Time
+    variation:setTubes(3, 12.0)
+    --     Tube direction     ID, Bearing
+    variation:setTubeDirection(0,   0)
+    variation:setTubeDirection(1, -90)
+    variation:setTubeDirection(2,  90)
+    --     Tube specialization         ID, Type
+    variation:setWeaponTubeExclusiveFor(0, "HVLI")
+    --     Tube weapon storage     Type, Count
+    variation:setWeaponStorage(  "HVLI", 10)
+    variation:setWeaponStorage("Homing",  5)
 
-variation:addRoomSystem(2, 0, 2, 1, "Beamweapons")
-variation:addRoomSystem(2, 3, 2, 1, "Maneuver")
+--------------------------Piranha---------------------------
+variation = template:copy("Piranha")
+    variation:setLocaleName(_("Piranha"))
+    variation:setDescription(_([[This combat-specialized Piranha F12 adds mine-laying tubes, combat maneuvering systems, and a jump drive.]]))
+    variation:setType("playership")
 
-variation:addRoomSystem(4, 0, 2, 1, "Warp")
-variation:addRoomSystem(4, 3, 2, 1, "JumpDrive")
-variation:addRoomSystem(5, 1, 1, 2, "Reactor")
+    -- Defenses
+    variation:setHull(120)
+    variation:setShields(70, 70)
 
-variation:addRoom(6, 0, 1, 1)
-variation:addRoomSystem(6, 1, 1, 2, "Impulse")
-variation:addRoom(6, 3, 1, 1)
+    -- Maneuverability
+    --   Impulse  Forward, Turn, Acceleration
+    variation:setSpeed(60, 10, 8)
+    --   Combat Maneuver      Boost, Strafe
+    variation:setCombatManeuver(200, 150)
+    --   Long-range Propulsion
+    variation:setJumpDrive(true)
 
-variation:addRoomSystem(7, 0, 1, 4, "FrontShield")
+    -- Weapons
+    --   Tubes     Count, Load Time
+    variation:setTubes(8, 8.0)
+    --     Tube direction     ID, Bearing
+    variation:setTubeDirection(6, 170)
+    variation:setTubeDirection(7, 190)
+    --     Tube specialization         ID, Type
+    variation:weaponTubeAllowMissle(    0, "Homing")
+    variation:weaponTubeAllowMissle(    2, "Homing")
+    variation:weaponTubeAllowMissle(    3, "Homing")
+    variation:weaponTubeAllowMissle(    5, "Homing")
+    variation:setWeaponTubeExclusiveFor(6, "Mine")
+    variation:setWeaponTubeExclusiveFor(7, "Mine")
+    --     Tube weapon storage     Type, Count
+    variation:setWeaponStorage(  "HVLI", 20)
+    variation:setWeaponStorage("Homing", 12)
+    variation:setWeaponStorage(  "Nuke", 6)
+    variation:setWeaponStorage(  "Mine", 8)
 
-variation:addDoor(1, 0, false)
-variation:addDoor(2, 0, false)
-variation:addDoor(4, 0, false)
-variation:addDoor(6, 0, false)
-variation:addDoor(7, 0, false)
+    -- Internal layout
+    --   Repair crew count
+    variation:setRepairCrewCount(2)
+    --   Rooms          Position  Size
+    --                      X  Y  W  H  System
+    variation:addRoomSystem(0, 0, 1, 4, "RearShield")
+    variation:addRoom(      1, 0, 1, 1)
+    variation:addRoomSystem(1, 1, 3, 2, "MissileSystem")
+    variation:addRoom(      1, 3, 1, 1)
 
-variation:addDoor(1, 1, true)
-variation:addDoor(1, 3, true)
+    variation:addRoomSystem(2, 0, 2, 1, "BeamWeapons")
+    variation:addRoomSystem(2, 3, 2, 1, "Maneuver")
 
-variation:addDoor(6, 1, true)
-variation:addDoor(6, 2, false)
-variation:addDoor(6, 3, true)
+    variation:addRoomSystem(4, 0, 2, 1, "Warp")
+    variation:addRoomSystem(4, 3, 2, 1, "JumpDrive")
+    variation:addRoomSystem(5, 1, 1, 2, "Reactor")
 
-variation:addDoor(1, 3, false)
-variation:addDoor(2, 3, false)
-variation:addDoor(4, 3, false)
-variation:addDoor(6, 3, false)
-variation:addDoor(7, 3, false)
+    variation:addRoom(      6, 0, 1, 1)
+    variation:addRoomSystem(6, 1, 1, 2, "Impulse")
+    variation:addRoom(      6, 3, 1, 1)
 
---Cruiser: strike craft (fast in/out)
-template = ShipTemplate():setName("Stalker Q7"):setLocaleName(_("Stalker Q7")):setClass(_("Frigate"), _("Cruiser: Strike ship")):setModel("small_frigate_3")
-template:setRadarTrace("radar_cruiser.png")
-template:setDescription(_([[The Stalker is a strike ship designed to swoop into battle, deal damage quickly, and get out fast. The Q7 model is fitted with a warp drive.]]))
-template:setHull(50)
-template:setShields(80, 30, 30, 30)
-template:setSpeed(70, 12, 12)
-template:setWarpSpeed(700)
-template:setBeam(0, 40,-5, 1000.0, 6.0, 6)
-template:setBeam(1, 40, 5, 1000.0, 6.0, 6)
+    variation:addRoomSystem(7, 0, 1, 4, "FrontShield")
+    --   Doors    Position
+    --                X  Y  Horizontal?
+    variation:addDoor(1, 0, false)
+    variation:addDoor(2, 0, false)
+    variation:addDoor(4, 0, false)
+    variation:addDoor(6, 0, false)
+    variation:addDoor(7, 0, false)
 
-variation = template:copy("Stalker R7"):setLocaleName(_("Stalker R7"))
-variation:setDescription(_([[The Stalker is a strike ship designed to swoop into battle, deal damage quickly, and get out fast. The R7 model is fitted with a jump drive.]]))
-variation:setWarpSpeed(0)
-variation:setJumpDrive(true)
+    variation:addDoor(1, 1, true)
+    variation:addDoor(1, 3, true)
 
-template = ShipTemplate():setName("Ranus U"):setLocaleName(_("Ranus U")):setClass(_("Frigate"), _("Cruiser: Sniper")):setModel("MissileCorvetteGreen")
-template:setRadarTrace("radar_cruiser.png")
-template:setDescription(_([[The Ranus U sniper is built to deal a large amounts of damage quickly and from a distance before escaping. It's the only basic frigate that carries nuclear weapons, even though it's also the smallest of all frigate-class ships.]]))
-template:setHull(30)
-template:setShields(30, 5, 5)
-template:setSpeed(50, 6, 20)
-template:setTubes(3, 25.0)
-template:weaponTubeDisallowMissle(1, "Nuke"):weaponTubeDisallowMissle(2, "Nuke")
-template:setWeaponStorage("Homing", 6)
-template:setWeaponStorage("Nuke", 2)
+    variation:addDoor(6, 1, true)
+    variation:addDoor(6, 2, false)
+    variation:addDoor(6, 3, true)
 
---Cruiser: tackler
+    variation:addDoor(1, 3, false)
+    variation:addDoor(2, 3, false)
+    variation:addDoor(4, 3, false)
+    variation:addDoor(6, 3, false)
+    variation:addDoor(7, 3, false)
+
+-------------------------Stalker Q7-------------------------
+template = ShipTemplate():setName("Stalker Q7")
+    template:setLocaleName(_("Stalker Q7"))
+    template:setClass(_("Frigate"), _("Cruiser"))
+    template:setModel("small_frigate_3")
+    template:setDescription(_([[The Stalker is a strike cruiser designed to swoop into battle, deal damage quickly, and get out fast. The Q7 model is fitted with a warp drive.]]))
+    template:setRadarTrace("radar_cruiser.png")
+
+    -- Defenses
+    template:setHull(50)
+    template:setShields(80, 30, 30, 30)
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+    template:setSpeed(70, 12, 12)
+    --   Long-range Propulsion
+    --     Warp speed per factor
+    template:setWarpSpeed(   700)
+
+    -- Weapons
+    --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
+    template:setBeamWeapon(0,  40,   -5, 1000.0,   6.0, 6)
+    template:setBeamWeapon(1,  40,    5, 1000.0,   6.0, 6)
+
+-------------------------Stalker R7-------------------------
+variation = template:copy("Stalker R7")
+    variation:setLocaleName(_("Stalker R7"))
+    variation:setDescription(_([[The Stalker is a strike cruiser designed to swoop into battle, deal damage quickly, and get out fast. The R7 model is fitted with a jump drive.]]))
+    --   Long-range Propulsion
+    variation:setJumpDrive(true)
+    --     Warp speed per factor
+    variation:setWarpSpeed(    0)
+
+--------------------------Ranus U---------------------------
+template = ShipTemplate():setName("Ranus U")
+    template:setLocaleName(_("Ranus U"))
+    template:setClass(_("Frigate"), _("Cruiser"))
+    template:setModel("MissileCorvetteGreen")
+    template:setDescription(_([[The Ranus U sniper is built to deal large amounts of damage quickly and from a distance before escaping. It's the only basic frigate that carries nuclear weapons, even though it's also the smallest of all frigate-class ships.]]))
+    template:setRadarTrace("radar_cruiser.png")
+
+    -- Defenses
+    template:setHull(30)
+    template:setShields(30, 5, 5)
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+    template:setSpeed(50,    6, 20)
+
+    -- Weapons
+    --   Tubes    Count, Load Time
+    template:setTubes(3, 25.0)
+    --     Tube specialization        ID, Type
+    template:weaponTubeDisallowMissle( 1, "Nuke")
+    template:weaponTubeDisallowMissle( 2, "Nuke")
+    template:setWeaponStorage("Homing", 6)
+    --     Tube weapon storage    Type, Count
+    template:setWeaponStorage(  "Nuke", 2)
 
 template = ShipTemplate():setName("Flavia"):setLocaleName(_("Flavia")):setClass(_("Frigate"), _("Light transport")):setModel("LightCorvetteGrey")
 template:setRadarTrace("radar_tug.png")
@@ -422,7 +506,7 @@ variation:addRoom(1, 0, 6, 1)
 variation:addRoom(1, 5, 6, 1)
 variation:addRoomSystem(0, 1, 2, 2, "RearShield")
 variation:addRoomSystem(0, 3, 2, 2, "MissileSystem")
-variation:addRoomSystem(2, 1, 2, 2, "Beamweapons")
+variation:addRoomSystem(2, 1, 2, 2, "BeamWeapons")
 variation:addRoomSystem(2, 3, 2, 2, "Reactor")
 variation:addRoomSystem(4, 1, 2, 2, "Warp")
 variation:addRoomSystem(4, 3, 2, 2, "JumpDrive")
@@ -475,7 +559,7 @@ template:addRoom( 2, 4, 2, 2)
 template:addRoomSystem( 4, 1, 1, 4, "Maneuver")
 template:addRoom( 5, 0, 2, 2)
 template:addRoomSystem( 5, 2, 2, 2, "JumpDrive")
-template:addRoomSystem( 5, 4, 2, 2, "Beamweapons")
+template:addRoomSystem( 5, 4, 2, 2, "BeamWeapons")
 template:addRoomSystem( 7, 1, 3, 2, "Reactor")
 template:addRoomSystem( 7, 3, 3, 2, "MissileSystem")
 template:addRoomSystem(10, 2, 2, 2, "FrontShield")
