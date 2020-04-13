@@ -10,7 +10,7 @@ These are:
 * Starfighters: Smallest ships in the game.
 * Frigates: Medium-sized ships that operate with a small
     crew.
-* Covettes: Large, slower, less maneuverable ships.
+* Corvettes: Large, slower, less maneuverable ships.
 * Dreadnoughts: Huge things. Everything in here is really
     really big, and generally really really deadly.
 
