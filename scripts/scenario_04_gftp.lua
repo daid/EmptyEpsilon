@@ -591,7 +591,7 @@ We are both ready to continue our purpose, it seems."]])) then
 end
 
 function spawnHacker()
-    ship = CpuShip():setTemplate("Transport1x1")
+    ship = CpuShip():setTemplate("Personnel Freighter 1")
     ship:setHullMax(100):setHull(100)
     ship:setShieldsMax(50, 50):setShields(50, 50)
     ship:setImpulseMaxSpeed(120):setRotationMaxSpeed(10)
