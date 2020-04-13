@@ -207,6 +207,63 @@ variation3 = variation2:copy("Phobos M3P")
     variation3:addDoor(8, 3, false);
     variation3:addDoor(8, 4, false);
 
+-------------------Karnack MK1 (Karnack)--------------------
+template = ShipTemplate():setName("Karnack")
+	template:setLocaleName(_("Karnack MK1"))
+	template:setClass(_("Frigate"), _("Cruiser"))
+	template:setModel("small_frigate_4")
+	template:setDescription(_([[Fabricated by Repulse shipyards, the mark I Karnack cruiser is a versatile ship adopted widely across most factions. Most have extensively retrofitted these ships to suit their combat doctrines. Because the Karnack is an older hull style, most factions also sell stripped versions that are popular with smugglers and other civillian parties, who have used its adaptable nature to re-fit them with (often illegal) weaponry.]]))
+	template:setRadarTrace("radar_cruiser.png")
+
+	-- Defenses
+	template:setHull(60)
+	template:setShields(40, 40)
+
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+	template:setSpeed(60,    6, 10)
+
+    -- Weapons
+    --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
+	template:setBeamWeapon(0,  60,  -15, 1000.0,   6.0, 6)
+	template:setBeamWeapon(1,  60,   15, 1000.0,   6.0, 6)
+
+------------------------Karnack MK2-------------------------
+variation = template:copy("Cruiser")
+	variation:setLocaleName(_("ship", "Karnack MK2"))
+	variation:setDescription(_([[Fabricated by Repulse shipyards, the mark II Karnack cruiser made several notable improvements over its wildly popular predecessor, including better armor, slightly improved weaponry, and further customization by the shipyards. The latter improvement was the most requested feature by several factions once they realized that their old surplus mark I ships were used for less savoury purposes.]]))
+
+    -- Defenses
+	variation:setHull(70)
+
+    -- Weapons
+    --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
+    variation:setBeamWeapon(0, 90,  -15, 1000.0,   6.0, 6)
+	variation:setBeamWeapon(1, 90,   15, 1000.0,   6.0, 6)
+
+------------------------Polaris MK1-------------------------
+template = ShipTemplate():setName("Missile Cruiser")
+	template:setLocaleName(_("Polaris MK1"))
+	template:setClass(_("Frigate"), _("Cruiser"))
+	template:setModel("space_cruiser_4")
+	template:setDescription(_([[The mark I Polaris missle cruiser, fabricated by Repulse shipyards, is a long-range missile platform. While it can't absorb much damage, it can deal a lot if not dealt with properly.]]))
+	template:setRadarTrace("radar_missile_cruiser.png")
+    template:setDefaultAI("missilevolley")
+
+	-- Defenses
+	template:setHull(40)
+	template:setShields(50, 50)
+
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+	template:setSpeed(45, 3, 10)
+
+	-- Weapons
+    --   Tubes    Count, Load Time
+	template:setTubes(1, 25.0)
+    --     Tube weapon storage    Type, Count
+	template:setWeaponStorage("Homing", 10)
+
 -------------------------Nirvana R5-------------------------
 template = ShipTemplate():setName("Nirvana R5")
     template:setLocaleName(_("Nirvana R5"))
@@ -278,7 +335,7 @@ template = ShipTemplate():setName("Storm")
     template:setWeaponStorage(  "HVLI", 15)
     template:setWeaponStorage("Homing", 15)
 
---------------------------Hathcock--------------------------
+-------------------Hathcock (player ship)-------------------
 template = ShipTemplate():setName("Hathcock")
     template:setLocaleName(_("Hathcock"))
     template:setClass(_("Frigate"), _("Cruiser"))
@@ -411,7 +468,7 @@ variation = template:copy("Piranha F8")
     variation:setWeaponStorage(  "HVLI", 10)
     variation:setWeaponStorage("Homing",  5)
 
---------------------------Piranha---------------------------
+-------------------Piranha (player ship)--------------------
 variation = template:copy("Piranha")
     variation:setLocaleName(_("Piranha"))
     variation:setDescription(_([[This combat-specialized Piranha F12 adds mine-laying tubes, combat maneuvering systems, and a jump drive.]]))
@@ -443,9 +500,9 @@ variation = template:copy("Piranha")
     variation:setWeaponTubeExclusiveFor(6, "Mine")
     variation:setWeaponTubeExclusiveFor(7, "Mine")
     --     Tube weapon storage     Type, Count
-    variation:setWeaponStorage(  "HVLI", 20)
     variation:setWeaponStorage("Homing", 12)
     variation:setWeaponStorage(  "Nuke", 6)
+    variation:setWeaponStorage(  "HVLI", 20)
     variation:setWeaponStorage(  "Mine", 8)
 
     -- Internal layout
@@ -549,6 +606,64 @@ template = ShipTemplate():setName("Ranus U")
     --     Tube weapon storage    Type, Count
     template:setWeaponStorage("Homing", 6)
     template:setWeaponStorage(  "Nuke", 2)
+
+--------------------Valkyrie-A (Gunship)--------------------
+template = ShipTemplate():setName("Gunship")
+	template:setLocaleName(_("Valkyrie-A"))
+	template:setClass(_("Frigate"), _("subclass", "Cruiser"))
+	template:setModel("battleship_destroyer_4_upgraded")
+	template:setDescription(_([[The Valkyrie-A is equipped with a homing missile tube to do initial damage to a target, and 2 front-firing beams to finish it off. With a 3-segment shield, it's designed to quickly take out enemies weaker than itself, then stick around to support larger ships in wearing down more powerful targets.]]))
+	template:setRadarTrace("radar_adv_gunship.png")
+
+    -- Defenses
+	template:setHull(100)
+	template:setShields(100, 80, 80)
+
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+	template:setSpeed(60,    5, 10)
+
+    -- Weapons
+    --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
+	template:setBeamWeapon(0,  50,  -15, 1000.0,   6.0, 8)
+	template:setBeamWeapon(1,  50,   15, 1000.0,   6.0, 8)
+    --   Tubes    Count, Load Time
+	template:setTubes(1, 8.0) -- Amount of torpedo tubes
+    --     Tube weapon storage    Type, Count
+	template:setWeaponStorage("Homing", 4)
+
+-----------------Valkyrie-B (Adv. Gunship)------------------
+variation = template:copy("Adv. Gunship")
+	variation:setLocaleName(_("Valkyrie-B"))
+	template:setDescription(_([[The Valkyrie-B adds a second forward homing missile tube to the Valkyrie-A configuration.]]))
+
+	-- Weapons
+    --   Tubes     Count, Load Time
+	variation:setTubes(2, 8.0)
+
+-------------------------Strikeship-------------------------
+template = ShipTemplate():setName("Strikeship")
+	template:setLocaleName(_("Strikeship"))
+	template:setClass(_("Frigate"), _("subclass", "Cruiser"))
+	template:setModel("small_frigate_3")
+	template:setDescription(_([[The strikeship is a warp drive-equipped frigate built for quick long-range strikes. It's fast and agile, but doesn't do an extreme amount of damage and is vulnerable to attacks from its sides and rear.]]))
+	template:setRadarTrace("radar_striker.png")
+
+    -- Defenses
+	template:setHull(100)
+	template:setShields(80, 30, 30, 30)
+
+    -- Maneuverability
+    --   Impulse Forward, Turn, Acceleration
+	template:setSpeed(70, 12, 12)
+    --   Long-range Propulsion
+    --     Warp speed per factor
+	template:setWarpSpeed(  1000)
+
+    -- Weapons
+    --   Beams            ID, Arc, Bear,  Range, Cycle, Damage
+    template:setBeamWeapon(0,  40,   -5, 1000.0,   6.0, 6)
+	template:setBeamWeapon(1,  40,    5, 1000.0,   6.0, 6)
 
 ---------------------LIGHT TRANSPORTS----------------------
 
@@ -709,10 +824,35 @@ variation = template:copy("Repulse")
     variation:addDoor( 8, 3, true)
     variation:addDoor(10, 2, false)
 
+------------------Kessel (Blockade Runner)------------------
+template = ShipTemplate():setName("Blockade Runner")
+template:setLocaleName(_("Kessel"))
+template:setClass(_("Frigate"), _("Light transport"))
+template:setModel("battleship_destroyer_3_upgraded")
+template:setDescription(_([[Kessels are reasonably fast, highly shielded transport ships designed to break through blockades and defensive lines in order to deliver goods and harry defensive installations.]]))
+template:setRadarTrace("radar_blockade.png")
+
+-- Defenses
+template:setHull(70)
+template:setShields(100, 150)
+
+-- Maneuverability
+--   Impulse Forward, Turn, Acceleration
+template:setSpeed(60,   15, 25)
+
+-- Weapons
+--   Beams            ID, Arc, Bear,  Range, Cycle, Damage
+template:setBeamWeapon(0,  60,  -15, 1000.0,   6.0, 8)
+template:setBeamWeapon(1,  60,   15, 1000.0,   6.0, 8)
+template:setBeamWeapon(2,  25,  170, 1000.0,   6.0, 8)
+template:setBeamWeapon(3,  25,  190, 1000.0,   6.0, 8)
+
+--------------------------SUPPORT---------------------------
+
 ----------------------------Tug-----------------------------
 template = ShipTemplate():setName("Tug")
 	template:setLocaleName(_("Tug"))
-	variation:setClass("Frigate", "Support")
+	variation:setClass(_("Frigate"), _("Support"))
 	template:setModel("space_tug")
 	template:setDescription(_([[The tugboat is a reliable, but small and unarmed transport ship. Due to its low cost, it is a favourite ship to teach the ropes to fledgling captains without risking friendly fire.]]))
 	template:setRadarTrace("radar_tug.png")
