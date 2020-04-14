@@ -145,8 +145,6 @@ function init()
 	psb["Phobos M3P"] = 2
 	psb["Flavia P.Falcon"] = 2
 	psb["Atlantis"] = 2
-	psb["Player Cruiser"] = 2
-	psb["Player Fighter"] = 2
 	transportList = {}
 	transportSpawnDelay = 30
 	-- 27 types of goods so far
@@ -273,9 +271,9 @@ function setConstants()
 	fleetPosDelta2x = {0,2,-2,1,-1, 1,-1,4,-4,0, 0,2,-2,-2, 2,3,-3, 3,-3,6,-6,1,-1, 1,-1,3,-3, 3,-3,4,-4, 4,-4,5,-5, 5,-5,8,-8,4,-4, 4,-4,5,5 ,-5,-5,2, 2,-2,-2,0, 0,6, 6,-6,-6,7, 7,-7,-7,10,-10,5, 5,-5,-5,6, 6,-6,-6,7, 7,-7,-7,8, 8,-8,-8,9, 9,-9,-9,3, 3,-3,-3,1, 1,-1,-1,12,-12,6,-6, 6,-6,7,-7, 7,-7,8,-8, 8,-8,9,-9, 9,-9,10,-10,10,-10,11,-11,11,-11,4,-4, 4,-4,2,-2, 2,-2,0, 0}
 	fleetPosDelta2y = {0,0, 0,1, 1,-1,-1,0, 0,2,-2,2,-2, 2,-2,1,-1,-1, 1,0, 0,3, 3,-3,-3,3,-3,-3, 3,2,-2,-2, 2,1,-1,-1, 1,0, 0,4,-4,-4, 4,3,-3, 3,-3,4,-4, 4,-4,4,-4,2,-2, 2,-2,1,-1, 1,-1, 0,  0,5,-5, 5,-5,4,-4, 4,-4,3,-3, 3,-7,2,-2, 2,-2,1,-1, 1,-1,5,-5, 5,-5,5,-5, 5,-5, 0,  0,6, 6,-6,-6,5, 5,-5,-5,4, 4,-4,-4,3, 3,-3,-3, 2,  2,-2, -2, 1,  1,-1, -1,6, 6,-6,-6,6, 6,-6,-6,6,-6}
 	--stnl: Ship Template Name List, stsl: Ship Template Score List, stbl: Ship Template Boolean List, nsfl: Non Standard Function List
-	stnl = {"Phobos R2","Adder MK8","Adder MK7","Adder MK3","MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Ranus U","Nirvana R5A","Stalker Q7","Stalker R7","Atlantis X23","Starhammer II","Odin","Fighter","Cruiser","Missile Cruiser","Strikeship","Adv. Striker","Dreadnought","Battlestation","Blockade Runner","Ktlitan Fighter","Ktlitan Breaker","Ktlitan Worker","Ktlitan Drone","Ktlitan Feeder","Ktlitan Scout","Ktlitan Destroyer","Storm"}
-	stsl = {13         ,10         ,9          ,5          ,5            ,5            ,7          ,6          ,7            ,8          ,15         ,16         ,15          ,15           ,25       ,20           ,25          ,25          ,50            ,70             ,250   ,6        ,18       ,14               ,30          ,27            ,80           ,100            ,65               ,6                ,45               ,40              ,4              ,48              ,8              ,50                 ,22}
-	stbl = {false      ,false      ,false      ,false      ,true         ,true         ,true       ,true       ,true         ,true       ,true       ,true       ,true        ,true         ,true     ,true         ,true        ,true        ,true          ,true           ,true  ,true     ,true     ,true             ,true        ,true          ,true         ,true           ,true             ,true             ,true             ,true            ,true           ,true            ,true           ,true               ,true}
+	stnl = {"Phobos R2","Adder MK8","Adder MK7","Adder MK3","MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Ranus U","Nirvana R5A","Stalker Q7","Stalker R7","Atlantis X23","Starhammer II","Odin","Battlestation","Ktlitan Fighter","Ktlitan Breaker","Ktlitan Worker","Ktlitan Drone","Ktlitan Feeder","Ktlitan Scout","Ktlitan Destroyer","Storm"}
+	stsl = {13         ,10         ,9          ,5          ,5            ,5            ,7          ,6          ,7            ,8          ,15         ,16         ,15          ,15           ,25       ,20           ,25          ,25          ,50            ,70             ,250   ,100            ,6                ,45               ,40              ,4              ,48              ,8              ,50                 ,22}
+	stbl = {false      ,false      ,false      ,false      ,true         ,true         ,true       ,true       ,true         ,true       ,true       ,true       ,true        ,true         ,true     ,true         ,true        ,true        ,true          ,true           ,true  ,true           ,true             ,true             ,true            ,true           ,true            ,true           ,true               ,true}
 	nsfl = {}
 	table.insert(nsfl,phobosR2)
 	table.insert(nsfl,adderMk8)
@@ -382,32 +380,6 @@ function setPlayers()
 					end
 					pobj.shipScore = 52
 					pobj.maxCargo = 6
-				elseif tempPlayerType == "Player Cruiser" then
-					if #playerShipNamesForCruiser > 0 then
-						ni = math.random(1,#playerShipNamesForCruiser)
-						pobj:setCallSign(playerShipNamesForCruiser[ni])
-						table.remove(playerShipNamesForCruiser,ni)
-					end
-					pobj.shipScore = 40
-					pobj.maxCargo = 6
-				elseif tempPlayerType == "Player Missile Cr." then
-					if #playerShipNamesForMissileCruiser > 0 then
-						ni = math.random(1,#playerShipNamesForMissileCruiser)
-						pobj:setCallSign(playerShipNamesForMissileCruiser[ni])
-						table.remove(playerShipNamesForMissileCruiser,ni)
-					end
-					pobj.shipScore = 45
-					pobj.maxCargo = 8
-				elseif tempPlayerType == "Player Fighter" then
-					if #playerShipNamesForFighter > 0 then
-						ni = math.random(1,#playerShipNamesForFighter)
-						pobj:setCallSign(playerShipNamesForFighter[ni])
-						table.remove(playerShipNamesForFighter,ni)
-					end
-					pobj.shipScore = 7
-					pobj.maxCargo = 3
-					pobj:setJumpDrive(true)
-					pobj:setJumpDriveRange(3000,40000)
 				elseif tempPlayerType == "Benedict" then
 					if #playerShipNamesForBenedict > 0 then
 						ni = math.random(1,#playerShipNamesForBenedict)
@@ -424,30 +396,6 @@ function setPlayers()
 					end
 					pobj.shipScore = 10
 					pobj.maxCargo = 9
-				elseif tempPlayerType == "Striker" then
-					if #playerShipNamesForStriker > 0 then
-						ni = math.random(1,#playerShipNamesForStriker)
-						pobj:setCallSign(playerShipNamesForStriker[ni])
-						table.remove(playerShipNamesForStriker,ni)
-					end
-					if pobj:getImpulseMaxSpeed() == 45 then
-						pobj:setImpulseMaxSpeed(90)
-					end
-					if pobj:getBeamWeaponCycleTime(0) == 6 then
-						local bi = 0
-						repeat
-							local tempArc = pobj:getBeamWeaponArc(bi)
-							local tempDir = pobj:getBeamWeaponDirection(bi)
-							local tempRng = pobj:getBeamWeaponRange(bi)
-							local tempDmg = pobj:getBeamWeaponDamage(bi)
-							pobj:setBeamWeapon(bi,tempArc,tempDir,tempRng,5,tempDmg)
-							bi = bi + 1
-						until(pobj:getBeamWeaponRange(bi) < 1)
-					end
-					pobj.shipScore = 8
-					pobj.maxCargo = 4
-					pobj:setJumpDrive(true)
-					pobj:setJumpDriveRange(3000,40000)
 				elseif tempPlayerType == "ZX-Lindworm" then
 					if #playerShipNamesForLindworm > 0 then
 						ni = math.random(1,#playerShipNamesForLindworm)

@@ -71,7 +71,7 @@ function init()
 	plot2diagnostic = false
 	endStatDiagnostic = false
 	printDetailedStats = true
-	change_enemy_order_diagnostic = false
+	change_enemy_order_diagnostic = true
 	setConstants()	--missle type names, template names and scores, deployment directions, player ship names, etc.
 	repeat
 		setGossipSnippets()
@@ -195,9 +195,9 @@ end
 function setConstants()
 	missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 	--Ship Template Name List
-	stnl = {"MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Ranus U","Nirvana R5A","Stalker Q7","Stalker R7","Atlantis X23","Starhammer II","Odin","Fighter","Cruiser","Missile Cruiser","Strikeship","Adv. Striker","Dreadnought","Battlestation","Blockade Runner","Ktlitan Fighter","Ktlitan Breaker","Ktlitan Worker","Ktlitan Drone","Ktlitan Feeder","Ktlitan Scout","Ktlitan Destroyer","Storm"}
+	stnl = {"MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Ranus U","Nirvana R5A","Stalker Q7","Stalker R7","Atlantis X23","Starhammer II","Odin","Ktlitan Fighter","Ktlitan Breaker","Ktlitan Worker","Ktlitan Drone","Ktlitan Feeder","Ktlitan Scout","Ktlitan Destroyer","Storm"}
 	--Ship Template Score List
-	stsl = {5            ,5            ,7          ,6          ,7            ,8          ,15         ,16         ,15          ,15           ,25       ,20           ,25          ,25          ,50            ,70             ,250   ,6        ,18       ,14               ,30          ,27            ,80           ,100            ,65               ,6                ,45               ,40              ,4              ,48              ,8              ,50                 ,22}
+	stsl = {5            ,5            ,7          ,6          ,7            ,8          ,15         ,16         ,15          ,15           ,25       ,20           ,25          ,25          ,50            ,70             ,250   ,6                ,45               ,40              ,4              ,48              ,8              ,50                 ,22}
 	-- square grid deployment
 	fleetPosDelta1x = {0,1,0,-1, 0,1,-1, 1,-1,2,0,-2, 0,2,-2, 2,-2,2, 2,-2,-2,1,-1, 1,-1,0, 0,3,-3,1, 1,3,-3,-1,-1, 3,-3,2, 2,3,-3,-2,-2, 3,-3,3, 3,-3,-3,4,0,-4, 0,4,-4, 4,-4,-4,-4,-4,-4,-4,-4,4, 4,4, 4,4, 4, 1,-1, 2,-2, 3,-3,1,-1,2,-2,3,-3,5,-5,0, 0,5, 5,-5,-5,-5,-5,-5,-5,-5,-5,-5,-5,5, 5,5, 5,5, 5,5, 5, 1,-1, 2,-2, 3,-3, 4,-4,1,-1,2,-2,3,-3,4,-4}
 	fleetPosDelta1y = {0,0,1, 0,-1,1,-1,-1, 1,0,2, 0,-2,2,-2,-2, 2,1,-1, 1,-1,2, 2,-2,-2,3,-3,0, 0,3,-3,1, 1, 3,-3,-1,-1,3,-3,2, 2, 3,-3,-2,-2,3,-3, 3,-3,0,4, 0,-4,4,-4,-4, 4, 1,-1, 2,-2, 3,-3,1,-1,2,-2,3,-3,-4,-4,-4,-4,-4,-4,4, 4,4, 4,4, 4,0, 0,5,-5,5,-5, 5,-5, 1,-1, 2,-2, 3,-3, 4,-4,1,-1,2,-2,3,-3,4,-4,-5,-5,-5,-5,-5,-5,-5,-5,5, 5,5, 5,5, 5,5, 5}
@@ -210,12 +210,12 @@ function setConstants()
 							["Flavia P.Falcon"] =		13,
 							["Phobos M3P"] =			19,
 							["Atlantis"] =				52,
-							["Player Cruiser"] =		40,
-							["Player Missile Cr."] =	45,
-							["Player Fighter"] =		7,
+--							["Player Cruiser"] =		40,
+--							["Player Missile Cr."] =	45,
+--							["Player Fighter"] =		7,
 							["Benedict"] =				10,
 							["Kiriya"] =				10,
-							["Striker"] =				8,
+--							["Striker"] =				8,
 							["ZX-Lindworm"] =			8,
 							["Repulse"] =				14,
 							["Ender"] =					100,
@@ -235,12 +235,12 @@ function setConstants()
 							["Flavia P.Falcon"] =		15,
 							["Phobos M3P"] =			10,
 							["Atlantis"] =				6,
-							["Player Cruiser"] =		6,
-							["Player Missile Cr."] =	8,
-							["Player Fighter"] =		3,
+--							["Player Cruiser"] =		6,
+--							["Player Missile Cr."] =	8,
+--							["Player Fighter"] =		3,
 							["Benedict"] =				9,
 							["Kiriya"] =				9,
-							["Striker"] =				4,
+--							["Striker"] =				4,
 							["ZX-Lindworm"] =			3,
 							["Repulse"] =				12,
 							["Ender"] =					20,
@@ -260,12 +260,12 @@ function setConstants()
 	playerShipNamesForFlaviaPFalcon = {"Ladyhawke","Hunter","Seeker","Gyrefalcon","Kestrel","Magpie","Bandit","Buccaneer"}
 	playerShipNamesForPhobosM3P = {"Blinder","Shadow","Distortion","Diemos","Ganymede","Castillo","Thebe","Retrograde"}
 	playerShipNamesForAtlantis = {"Excaliber","Thrasher","Punisher","Vorpal","Protang","Drummond","Parchim","Coronado"}
-	playerShipNamesForCruiser = {"Excelsior","Velociraptor","Thunder","Kona","Encounter","Perth","Aspern","Panther"}
-	playerShipNamesForMissileCruiser = {"Projectus","Hurlmeister","Flinger","Ovod","Amatola","Nakhimov","Antigone"}
-	playerShipNamesForFighter = {"Buzzer","Flitter","Zippiticus","Hopper","Molt","Stinger","Stripe"}
+--	playerShipNamesForCruiser = {"Excelsior","Velociraptor","Thunder","Kona","Encounter","Perth","Aspern","Panther"}
+--	playerShipNamesForMissileCruiser = {"Projectus","Hurlmeister","Flinger","Ovod","Amatola","Nakhimov","Antigone"}
+--	playerShipNamesForFighter = {"Buzzer","Flitter","Zippiticus","Hopper","Molt","Stinger","Stripe"}
 	playerShipNamesForBenedict = {"Elizabeth","Ford","Vikramaditya","Liaoning","Avenger","Naruebet","Washington","Lincoln","Garibaldi","Eisenhower"}
 	playerShipNamesForKiriya = {"Cavour","Reagan","Gaulle","Paulo","Truman","Stennis","Kuznetsov","Roosevelt","Vinson","Old Salt"}
-	playerShipNamesForStriker = {"Sparrow","Sizzle","Squawk","Crow","Phoenix","Snowbird","Hawk"}
+--	playerShipNamesForStriker = {"Sparrow","Sizzle","Squawk","Crow","Phoenix","Snowbird","Hawk"}
 	playerShipNamesForLindworm = {"Seagull","Catapult","Blowhard","Flapper","Nixie","Pixie","Tinkerbell"}
 	playerShipNamesForRepulse = {"Fiddler","Brinks","Loomis","Mowag","Patria","Pandur","Terrex","Komatsu","Eitan"}
 	playerShipNamesForEnder = {"Mongo","Godzilla","Leviathan","Kraken","Jupiter","Saturn"}
@@ -1923,21 +1923,21 @@ function describeStockPlayerShips()
 	addGMFunction("Piranha",function()
 		addGMMessage("Piranha: Frigate, Cruiser: Light Artillery   Hull:120   Shield:70,70   Size:200   Repair Crew:2   Cargo:8   R.Strength:16\nDefault advanced engine:None   Speeds: Impulse:60   Spin:10   Accelerate:8   C.Maneuver: Boost:200 Strafe:150\nTubes:8   Load Speed:8   Side:6   Back:2\n   Direction:-90   Type:HVLI and Homing Only\n   Direction:-90   Type:Any\n   Direction:-90   Type:HVLI and Homing Only\n   Direction: 90   Type:HVLI and Homing Only\n   Direction: 90   Type:Any\n   Direction: 90   Type:HVLI and Homing Only\n   Direction:170   Type:Mine Only\n   Direction:190   Type:Mine Only\n   Ordnance stock and type:\n      12 Homing\n      06 Nuke\n      08 Mine\n      20 HVLI\nThis combat-specialized Piranha F12 adds mine-laying tubes, combat maneuvering systems, and a jump drive.")
 	end)	
-	addGMFunction("Player Cruiser",function()
-		addGMMessage("Player Cruiser:   Hull:200   Shield:80,80   Size:400   Repair Crew:3   Cargo:6   R.Strength:40\nDefault advanced engine:Jump   Speeds: Impulse:90   Spin:10   Accelerate:20   C.Maneuver: Boost:400 Strafe:250\nBeams:2\n   Arc:90   Direction:-15   Range:1   Cycle:6   Damage:10\n   Arc:90   Direction: 15   Range:1   Cycle:6   Damage:10\nTubes:3   Load Speed:8   Front:2   Back:1\n   Direction: -5   Type:Exclude Mine\n   Direction:  5   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      12 Homing\n      04 Nuke\n      08 Mine\n      06 EMP")
-	end)
-	addGMFunction("Player Fighter",function()
-		addGMMessage("Player Fighter:   Hull:60   Shield:40   Size:100   Repair Crew:3   Cargo:3   R.Strength:7\nDefault advanced engine:None   Speeds: Impulse:110   Spin:20   Accelerate:40   C.Maneuver: Boost:600   Energy:400\nBeams:2\n   Arc:40   Direction:-10   Range:1   Cycle:6   Damage:8\n   Arc:40   Direction: 10   Range:1   Cycle:6   Damage:8\nTube:1   Load Speed:10   Front:1\n   Direction:0   Type:HVLI Only\n   Ordnance stock and type:\n      4 HVLI")
-	end)
-	addGMFunction("Player Missile Cr.",function()
-		addGMMessage("Player Missile Cr.:   Hull:200   Shield:110,70   Size:200   Repair Crew:3   Cargo:8   R.Strength:45\nDefault advanced engine:Warp (800)   Speeds: Impulse:60   Spin:8   Accelerate:15   C.Maneuver: Boost:450 Strafe:150\nTubes:7   Load Speed:8   Front:2   Side:4   Back:1\n   Direction:  0   Type:Exclude Mine\n   Direction:  0   Type:Exclude Mine\n   Direction: 90   Type:Homing Only\n   Direction: 90   Type:Homing Only\n   Direction:-90   Type:Homing Only\n   Direction:-90   Type:Homing Only\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      30 Homing\n      08 Nuke\n      12 Mine\n      10 EMP")
-	end)	
+--	addGMFunction("Player Cruiser",function()
+--		addGMMessage("Player Cruiser:   Hull:200   Shield:80,80   Size:400   Repair Crew:3   Cargo:6   R.Strength:40\nDefault advanced engine:Jump   Speeds: Impulse:90   Spin:10   Accelerate:20   C.Maneuver: Boost:400 Strafe:250\nBeams:2\n   Arc:90   Direction:-15   Range:1   Cycle:6   Damage:10\n   Arc:90   Direction: 15   Range:1   Cycle:6   Damage:10\nTubes:3   Load Speed:8   Front:2   Back:1\n   Direction: -5   Type:Exclude Mine\n   Direction:  5   Type:Exclude Mine\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      12 Homing\n      04 Nuke\n      08 Mine\n      06 EMP")
+--	end)
+--	addGMFunction("Player Fighter",function()
+--		addGMMessage("Player Fighter:   Hull:60   Shield:40   Size:100   Repair Crew:3   Cargo:3   R.Strength:7\nDefault advanced engine:None   Speeds: Impulse:110   Spin:20   Accelerate:40   C.Maneuver: Boost:600   Energy:400\nBeams:2\n   Arc:40   Direction:-10   Range:1   Cycle:6   Damage:8\n   Arc:40   Direction: 10   Range:1   Cycle:6   Damage:8\nTube:1   Load Speed:10   Front:1\n   Direction:0   Type:HVLI Only\n   Ordnance stock and type:\n      4 HVLI")
+--	end)
+--	addGMFunction("Player Missile Cr.",function()
+--		addGMMessage("Player Missile Cr.:   Hull:200   Shield:110,70   Size:200   Repair Crew:3   Cargo:8   R.Strength:45\nDefault advanced engine:Warp (800)   Speeds: Impulse:60   Spin:8   Accelerate:15   C.Maneuver: Boost:450 Strafe:150\nTubes:7   Load Speed:8   Front:2   Side:4   Back:1\n   Direction:  0   Type:Exclude Mine\n   Direction:  0   Type:Exclude Mine\n   Direction: 90   Type:Homing Only\n   Direction: 90   Type:Homing Only\n   Direction:-90   Type:Homing Only\n   Direction:-90   Type:Homing Only\n   Direction:180   Type:Mine Only\n   Ordnance stock and type:\n      30 Homing\n      08 Nuke\n      12 Mine\n      10 EMP")
+--	end)	
 	addGMFunction("Repulse",function()
 		addGMMessage("Repulse: Frigate, Armored Transport   Hull:120   Shield:80,80   Size:200   Repair Crew:8   Cargo:12   R.Strength:14\nDefault advanced engine:Jump   Speeds: Impulse:55   Spin:9   Accelerate:10   C.Maneuver: Boost:250 Strafe:150\nBeams:2 Turreted Speed:5\n   Arc:200   Direction: 90   Range:1.2   Cycle:6   Damage:5\n   Arc:200   Direction:-90   Range:1.2   Cycle:6   Damage:5\nTubes:2   Load Speed:20   Front:1   Back:1\n   Direction:  0   Type:Any\n   Direction:180   Type:Any\n   Ordnance stock and type:\n      4 Homing\n      6 HVLI\nJump/Turret version of Flavia Falcon")
 	end)
-	addGMFunction("Striker",function()
-		addGMMessage("Striker: Starfighter, Patrol   Hull:120   Shield:50,30   Size:200   Repair Crew:2   Cargo:4   R.Strength:8\nDefault advanced engine:None   Speeds: Impulse:45   Spin:15   Accelerate:30   C.Maneuver: Boost:250 Strafe:150   Energy:500\nBeams:2 Turreted Speed:6\n   Arc:100   Direction:-15   Range:1   Cycle:6   Damage:6\n   Arc:100   Direction: 15   Range:1   Cycle:6   Damage:6\nThe Striker is the predecessor to the advanced striker, slow but agile, but does not do an extreme amount of damage, and lacks in shields")
-	end)
+--	addGMFunction("Striker",function()
+--		addGMMessage("Striker: Starfighter, Patrol   Hull:120   Shield:50,30   Size:200   Repair Crew:2   Cargo:4   R.Strength:8\nDefault advanced engine:None   Speeds: Impulse:45   Spin:15   Accelerate:30   C.Maneuver: Boost:250 Strafe:150   Energy:500\nBeams:2 Turreted Speed:6\n   Arc:100   Direction:-15   Range:1   Cycle:6   Damage:6\n   Arc:100   Direction: 15   Range:1   Cycle:6   Damage:6\nThe Striker is the predecessor to the advanced striker, slow but agile, but does not do an extreme amount of damage, and lacks in shields")
+--	end)
 	addGMFunction("ZX-Lindworm",function()
 		addGMMessage("ZX-Lindworm: Starfighter, Bomber   Hull:75   Shield:40   Size:100   Repair Crew:1   Cargo:3   R.Strength:8\nDefault advanced engine:None   Speeds: Impulse:70   Spin:15   Accelerate:25   C.Maneuver: Boost:250 Strafe:150   Energy:400\nBeam:1 Turreted Speed:4\n   Arc:270   Direction:180   Range:0.7   Cycle:6   Damage:2\nTubes:3   Load Speed:10   Front:3 (small)\n   Direction: 0   Type:Any - small\n   Direction: 1   Type:HVLI Only - small\n   Direction:-1   Type:HVLI Only - small\n   Ordnance stock and type:\n      03 Homing\n      12 HVLI")
 	end)
@@ -2112,37 +2112,8 @@ function createPlayerShipHeadhunter()
 	playerHeadhunter:addReputationPoints(50)
 	removeGMFunction("Headhunter")
 end
-function createPlayerShipBlazon()
-	playerBlazon = PlayerSpaceship():setTemplate("Striker"):setFaction("Human Navy"):setCallSign("Blazon")
-	playerBlazon:setTypeName("Stricken")
-	playerBlazon:setRepairCrewCount(2)				
-	playerBlazon:setImpulseMaxSpeed(105)			--vs 45		
-	playerBlazon:setRotationMaxSpeed(35)			--vs 15
-	playerBlazon:setShieldsMax(80,50)				--vs 50,30
-	playerBlazon:setShields(80,50)
-	playerBlazon:setBeamWeaponTurret(0,60,-15,2)	--vs arc width of 100 & turret speed of 6
-	playerBlazon:setBeamWeaponTurret(1,60, 15,2)
-	playerBlazon:setBeamWeapon(2,20,0,1200,6,5)		--vs only 2 turret beams (this is a 3rd beam)
-	playerBlazon:setWeaponTubeCount(3)				--vs no tubes
-	playerBlazon:setWeaponTubeDirection(0,-60)
-	playerBlazon:setWeaponTubeDirection(1,60)
-	playerBlazon:setWeaponTubeDirection(2,180)
-	playerBlazon:weaponTubeDisallowMissle(0,"Mine")
-	playerBlazon:weaponTubeDisallowMissle(1,"Mine")
-	playerBlazon:setWeaponTubeExclusiveFor(2,"Mine")
-	playerBlazon:setWeaponStorageMax("Homing",6)
-	playerBlazon:setWeaponStorage("Homing",6)
-	playerBlazon:setWeaponStorageMax("EMP",2)
-	playerBlazon:setWeaponStorage("EMP",2)
-	playerBlazon:setWeaponStorageMax("Nuke",2)
-	playerBlazon:setWeaponStorage("Nuke",2)
-	playerBlazon:setWeaponStorageMax("Mine",4)
-	playerBlazon:setWeaponStorage("Mine",4)
-	playerBlazon:addReputationPoints(50)
-	removeGMFunction("Blazon")
-end
 function createPlayerShipSimian()
-	playerSimian = PlayerSpaceship():setTemplate("Player Missile Cr."):setFaction("Human Navy"):setCallSign("Simian")
+	playerSimian = PlayerSpaceship():setTemplate("Piranha"):setFaction("Human Navy"):setCallSign("Simian")
 	playerSimian:setTypeName("Destroyer III")
 	playerSimian:setWarpDrive(false)
 	playerSimian:setJumpDrive(true)
@@ -8812,33 +8783,33 @@ function setPlayers()
 					end
 					pobj.shipScore = 52
 					pobj.maxCargo = 6
-				elseif tempPlayerType == "Player Cruiser" then
-					if #playerShipNamesForCruiser > 0 then
-						ni = math.random(1,#playerShipNamesForCruiser)
-						pobj:setCallSign(playerShipNamesForCruiser[ni])
-						table.remove(playerShipNamesForCruiser,ni)
-					end
-					pobj.shipScore = 40
-					pobj.maxCargo = 6
-				elseif tempPlayerType == "Player Missile Cr." then
-					if #playerShipNamesForMissileCruiser > 0 then
-						ni = math.random(1,#playerShipNamesForMissileCruiser)
-						pobj:setCallSign(playerShipNamesForMissileCruiser[ni])
-						table.remove(playerShipNamesForMissileCruiser,ni)
-					end
-					pobj.shipScore = 45
-					pobj.maxCargo = 8
-				elseif tempPlayerType == "Player Fighter" then
-					if #playerShipNamesForFighter > 0 then
-						ni = math.random(1,#playerShipNamesForFighter)
-						pobj:setCallSign(playerShipNamesForFighter[ni])
-						table.remove(playerShipNamesForFighter,ni)
-					end
-					pobj.shipScore = 7
-					pobj.maxCargo = 3
-					pobj.autoCoolant = false
-					pobj:setJumpDrive(true)
-					pobj:setJumpDriveRange(3000,40000)
+--				elseif tempPlayerType == "Player Cruiser" then
+--					if #playerShipNamesForCruiser > 0 then
+--						ni = math.random(1,#playerShipNamesForCruiser)
+--						pobj:setCallSign(playerShipNamesForCruiser[ni])
+--						table.remove(playerShipNamesForCruiser,ni)
+--					end
+--					pobj.shipScore = 40
+--					pobj.maxCargo = 6
+--				elseif tempPlayerType == "Player Missile Cr." then
+--					if #playerShipNamesForMissileCruiser > 0 then
+--						ni = math.random(1,#playerShipNamesForMissileCruiser)
+--						pobj:setCallSign(playerShipNamesForMissileCruiser[ni])
+--						table.remove(playerShipNamesForMissileCruiser,ni)
+--					end
+--					pobj.shipScore = 45
+--					pobj.maxCargo = 8
+--				elseif tempPlayerType == "Player Fighter" then
+--					if #playerShipNamesForFighter > 0 then
+--						ni = math.random(1,#playerShipNamesForFighter)
+--						pobj:setCallSign(playerShipNamesForFighter[ni])
+--						table.remove(playerShipNamesForFighter,ni)
+--					end
+--					pobj.shipScore = 7
+--					pobj.maxCargo = 3
+--					pobj.autoCoolant = false
+--					pobj:setJumpDrive(true)
+--					pobj:setJumpDriveRange(3000,40000)
 				elseif tempPlayerType == "Benedict" then
 					if #playerShipNamesForBenedict > 0 then
 						ni = math.random(1,#playerShipNamesForBenedict)
@@ -8855,30 +8826,30 @@ function setPlayers()
 					end
 					pobj.shipScore = 10
 					pobj.maxCargo = 9
-				elseif tempPlayerType == "Striker" then
-					if #playerShipNamesForStriker > 0 then
-						ni = math.random(1,#playerShipNamesForStriker)
-						pobj:setCallSign(playerShipNamesForStriker[ni])
-						table.remove(playerShipNamesForStriker,ni)
-					end
-					if pobj:getImpulseMaxSpeed() == 45 then
-						pobj:setImpulseMaxSpeed(90)
-					end
-					if pobj:getBeamWeaponCycleTime(0) == 6 then
-						local bi = 0
-						repeat
-							local tempArc = pobj:getBeamWeaponArc(bi)
-							local tempDir = pobj:getBeamWeaponDirection(bi)
-							local tempRng = pobj:getBeamWeaponRange(bi)
-							local tempDmg = pobj:getBeamWeaponDamage(bi)
-							pobj:setBeamWeapon(bi,tempArc,tempDir,tempRng,5,tempDmg)
-							bi = bi + 1
-						until(pobj:getBeamWeaponRange(bi) < 1)
-					end
-					pobj.shipScore = 8
-					pobj.maxCargo = 4
-					pobj:setJumpDrive(true)
-					pobj:setJumpDriveRange(3000,40000)
+--				elseif tempPlayerType == "Striker" then
+--					if #playerShipNamesForStriker > 0 then
+--						ni = math.random(1,#playerShipNamesForStriker)
+--						pobj:setCallSign(playerShipNamesForStriker[ni])
+--						table.remove(playerShipNamesForStriker,ni)
+--					end
+--					if pobj:getImpulseMaxSpeed() == 45 then
+--						pobj:setImpulseMaxSpeed(90)
+--					end
+--					if pobj:getBeamWeaponCycleTime(0) == 6 then
+--						local bi = 0
+--						repeat
+--							local tempArc = pobj:getBeamWeaponArc(bi)
+--							local tempDir = pobj:getBeamWeaponDirection(bi)
+--							local tempRng = pobj:getBeamWeaponRange(bi)
+--							local tempDmg = pobj:getBeamWeaponDamage(bi)
+--							pobj:setBeamWeapon(bi,tempArc,tempDir,tempRng,5,tempDmg)
+--							bi = bi + 1
+--						until(pobj:getBeamWeaponRange(bi) < 1)
+--					end
+--					pobj.shipScore = 8
+--					pobj.maxCargo = 4
+--					pobj:setJumpDrive(true)
+--					pobj:setJumpDriveRange(3000,40000)
 				elseif tempPlayerType == "ZX-Lindworm" then
 					if #playerShipNamesForLindworm > 0 then
 						ni = math.random(1,#playerShipNamesForLindworm)
@@ -10935,9 +10906,9 @@ function spawnFighterFleet(originX, originY, fighterCount, faction)
 		faction = "Kraylor"
 	end
 	--Ship Template Name List
-	local fighterNames  = {"MT52 Hornet","MU52 Hornet","WX-Lindworm","Fighter","Ktlitan Fighter"}
+	local fighterNames  = {"MT52 Hornet","MU52 Hornet","WX-Lindworm","Ktlitan Fighter"}
 	--Ship Template Score List
-	local fighterScores = {5            ,5            ,7            ,6        ,6}
+	local fighterScores = {5            ,5            ,7            ,6}
 	local fleetList = {}
 	local fleetPower = 0
 	local deploySpacing = random(300,800)
@@ -10971,9 +10942,9 @@ function spawnJammerFleet(originX, originY)
 		shipSpawnCount = 4
 	end
 	--Ship Template Name List
-	local jammerNames  = {"MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Fighter","Ktlitan Fighter","Ktlitan Drone","Ktlitan Scout"}
+	local jammerNames  = {"MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Ktlitan Fighter","Ktlitan Drone","Ktlitan Scout"}
 	--Ship Template Score List
-	local jammerScores = {5            ,5            ,7          ,6          ,7            ,8          ,15         ,16         ,15          ,15           ,6        ,6                ,4              ,8              }
+	local jammerScores = {5            ,5            ,7          ,6          ,7            ,8          ,15         ,16         ,15          ,15           ,6                ,4              ,8              }
 	local fleetList = {}
 	local fleetPower = 0
 	local deploySpacing = random(300,800)

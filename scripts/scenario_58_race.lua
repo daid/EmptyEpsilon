@@ -56,8 +56,6 @@ function init()
 	psb["Phobos M3P"] = 2
 	psb["Flavia P.Falcon"] = 2
 	psb["Atlantis"] = 2
-	psb["Player Cruiser"] = 2
-	psb["Player Fighter"] = 2
 	-- 27 types of goods so far
 	goodsList = {	{"food",0},
 					{"medicine",0},
@@ -1177,11 +1175,7 @@ function handleDockedState()
 						decrementPlayerGoods("nanites")
 						player.cargo = player.cargo + 1
 						player.jumpUpgrade = true
-						if player:getTypeName() == "Player Fighter" then
-							player:setJumpDriveRange(3000,45000)
-						else
-							player:setJumpDriveRange(5000,55000)
-						end
+						player:setJumpDriveRange(5000,55000)
 						setCommsMessage("Your jump drive has been upgraded")
 					end
 				end)
@@ -1196,11 +1190,7 @@ function handleDockedState()
 						decrementPlayerGoods("robotic")
 						player.cargo = player.cargo + 1
 						player.jumpUpgrade = true
-						if player:getTypeName() == "Player Fighter" then
-							player:setJumpDriveRange(3000,45000)
-						else
-							player:setJumpDriveRange(5000,55000)
-						end
+						player:setJumpDriveRange(5000,55000)
 						setCommsMessage("Your jump drive has been upgraded")
 					end
 				end)
@@ -2006,7 +1996,7 @@ function spawnTargetDrone(originx,originy,targetDroneID,area,sequenceNumber)
 	if shootBack then
 		enemyTemplate = "Atlantis X23"
 	else
-		enemyTemplate = "Fighter"
+		enemyTemplate = "MT52 Hornet"
 	end
 	tdx, tdy = vectorFromAngle(random(0,360),random(2500,4800))
 	td = CpuShip():setTemplate(enemyTemplate):setPosition(originx+tdx,originy+tdy):setFaction("Kraylor")
@@ -2130,44 +2120,6 @@ function update(delta)
 						player.shipScore = 52
 						player.maxCargo = 6
 						player.cargo = 5
-						goods[player] = goodsList
-						player:addReputationPoints(5)
-						incrementPlayerGoods("food")
-					elseif tempPlayerType == "Player Cruiser" then
-						if #playerShipNamesForCruiser > 0 then
-							ni = math.random(1,#playerShipNamesForCruiser)
-							player:setCallSign(playerShipNamesForCruiser[ni])
-							table.remove(playerShipNamesForCruiser,ni)
-						end
-						player.shipScore = 40
-						player.maxCargo = 6
-						player.cargo = 5
-						goods[player] = goodsList
-						player:addReputationPoints(5)
-						incrementPlayerGoods("food")
-					elseif tempPlayerType == "Player Missile Cr." then
-						if #playerShipNamesForMissileCruiser > 0 then
-							ni = math.random(1,#playerShipNamesForMissileCruiser)
-							player:setCallSign(playerShipNamesForMissileCruiser[ni])
-							table.remove(playerShipNamesForMissileCruiser,ni)
-						end
-						player.shipScore = 45
-						player.maxCargo = 8
-						player.cargo = 7
-						goods[player] = goodsList
-						player:addReputationPoints(5)
-						incrementPlayerGoods("food")
-					elseif tempPlayerType == "Player Fighter" then
-						if #playerShipNamesForFighter > 0 then
-							ni = math.random(1,#playerShipNamesForFighter)
-							player:setCallSign(playerShipNamesForFighter[ni])
-							table.remove(playerShipNamesForFighter,ni)
-						end
-						player.shipScore = 7
-						player.maxCargo = 3
-						player.cargo = 2
-						player:setJumpDrive(true)
-						player:setJumpDriveRange(3000,40000)
 						goods[player] = goodsList
 						player:addReputationPoints(5)
 						incrementPlayerGoods("food")

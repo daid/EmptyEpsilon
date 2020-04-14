@@ -18,9 +18,9 @@ function init()
 	setVariations()
 	missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 	--Ship Template Name List
-	stnl = {"MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Ranus U","Nirvana R5A","Stalker Q7","Stalker R7","Atlantis X23","Starhammer II","Odin","Fighter","Cruiser","Missile Cruiser","Strikeship","Adv. Striker","Dreadnought","Battlestation","Blockade Runner","Ktlitan Fighter","Ktlitan Breaker","Ktlitan Worker","Ktlitan Drone","Ktlitan Feeder","Ktlitan Scout","Ktlitan Destroyer","Storm"}
 	--Ship Template Score List
-	stsl = {5            ,5            ,7          ,6          ,7            ,8          ,15         ,16         ,15          ,15           ,25       ,20           ,25          ,25          ,50            ,70             ,250   ,6        ,18       ,14               ,30          ,27            ,80           ,100            ,65               ,6                ,45               ,40              ,4              ,48              ,8              ,50                 ,22}
+	stnl = {"MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Ranus U","Nirvana R5A","Stalker Q7","Stalker R7","Atlantis X23","Starhammer II","Odin","Battlestation","Ktlitan Fighter","Ktlitan Breaker","Ktlitan Worker","Ktlitan Drone","Ktlitan Feeder","Ktlitan Scout","Ktlitan Destroyer","Storm"}
+	stsl = {5            ,5            ,7          ,6          ,7            ,8          ,15         ,16         ,15          ,15           ,25       ,20           ,25          ,25          ,50            ,70             ,250   ,100            ,6                ,45               ,40              ,4              ,48              ,8              ,50                 ,22}
 	-- square grid deployment
 	fleetPosDelta1x = {0,1,0,-1, 0,1,-1, 1,-1,2,0,-2, 0,2,-2, 2,-2,2, 2,-2,-2,1,-1, 1,-1}
 	fleetPosDelta1y = {0,0,1, 0,-1,1,-1,-1, 1,0,2, 0,-2,2,-2,-2, 2,1,-1, 1,-1,2, 2,-2,-2}
@@ -178,7 +178,7 @@ function init()
     junkPhobos = CpuShip():setFaction("Kraylor"):setTemplate("Phobos M3"):setPosition(shipx, shipy):orderIdle():setHull(4):setShields(2.00, 1.00):setWeaponStorage("Homing", 1)
 	table.insert(junkShips,junkPhobos)
 	shipx, shipy = pickCoordinate(junkYardShipX, junkYardShipY)
-    junkStrikeship = CpuShip():setFaction("Kraylor"):setTemplate("Strikeship"):setPosition(shipx, shipy):orderIdle():setHull(0):setShields(4.00, 0.00, 30.00, 30.00)
+    junkStrikeship = CpuShip():setFaction("Kraylor"):setTemplate("Stalker Q7"):setPosition(shipx, shipy):orderIdle():setHull(0):setShields(4.00, 0.00, 30.00, 30.00)
 	table.insert(junkShips,junkStrikeship)
 	shipx, shipy = pickCoordinate(junkYardShipX, junkYardShipY)
     junkScout = CpuShip():setFaction("Ktlitans"):setTemplate("Ktlitan Scout"):setPosition(shipx, shipy):orderIdle():setHull(4)
@@ -5260,7 +5260,7 @@ function junkYardDog(delta)
 				if difficulty < 1 then
 					junk_yard_dog = CpuShip():setFaction("Exuari"):setTemplate("Ktlitan Drone"):setPosition(brigx-50,brigy-50):orderAttack(playerRepulse):setRotation(180)
 				elseif difficulty > 1 then
-					junk_yard_dog = CpuShip():setFaction("Exuari"):setTemplate("Fighter"):setPosition(brigx-50,brigy-50):orderAttack(playerRepulse):setRotation(180)
+					junk_yard_dog = CpuShip():setFaction("Exuari"):setTemplate("MT52 Hornet"):setPosition(brigx-50,brigy-50):orderAttack(playerRepulse):setRotation(180)
 				else
 					junk_yard_dog = CpuShip():setFaction("Exuari"):setTemplate("Ktlitan Fighter"):setPosition(brigx-50,brigy-50):orderAttack(playerRepulse):setRotation(180)
 				end
@@ -5294,7 +5294,7 @@ function borisChase(delta)
 				if difficulty < 1 then
 					junkChaser = CpuShip():setFaction("Exuari"):setTemplate("Ktlitan Drone"):setPosition(brigx-100,brigy-100):orderAttack(playerRepulse):setRotation(180)
 				elseif difficulty > 1 then
-					junkChaser = CpuShip():setFaction("Exuari"):setTemplate("Fighter"):setPosition(brigx-100,brigy-100):orderAttack(playerRepulse):setRotation(180)
+					junkChaser = CpuShip():setFaction("Exuari"):setTemplate("MT52 Hornet"):setPosition(brigx-100,brigy-100):orderAttack(playerRepulse):setRotation(180)
 				else
 					junkChaser = CpuShip():setFaction("Exuari"):setTemplate("Ktlitan Fighter"):setPosition(brigx-100,brigy-100):orderAttack(playerRepulse):setRotation(180)
 				end

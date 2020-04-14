@@ -38,18 +38,15 @@ function init()
 	GMDisableScriptedEnemies = "Disable Auto-Enemies"
 	addGMFunction(GMDisableScriptedEnemies,disableAutoEnemies)
 	--Ship Template Name List
-	stnl = {"MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Ranus U","Nirvana R5A","Stalker Q7","Stalker R7","Atlantis X23","Starhammer II","Odin","Fighter","Cruiser","Missile Cruiser","Strikeship","Adv. Striker","Dreadnought","Battlestation","Blockade Runner","Ktlitan Fighter","Ktlitan Breaker","Ktlitan Worker","Ktlitan Drone","Ktlitan Feeder","Ktlitan Scout","Ktlitan Destroyer","Storm"}
 	--Ship Template Score List
-	stsl = {5            ,5            ,7          ,6          ,7            ,8          ,15         ,16         ,15          ,15           ,25       ,20           ,25          ,25          ,50            ,70             ,250   ,6        ,18       ,14               ,30          ,27            ,80           ,100            ,65               ,6                ,45               ,40              ,4              ,48              ,8              ,50                 ,22}
+	stnl = {"MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Ranus U","Nirvana R5A","Stalker Q7","Stalker R7","Atlantis X23","Starhammer II","Odin","Battlestation","Ktlitan Fighter","Ktlitan Breaker","Ktlitan Worker","Ktlitan Drone","Ktlitan Feeder","Ktlitan Scout","Ktlitan Destroyer","Storm"}
+	stsl = {5            ,5            ,7          ,6          ,7            ,8          ,15         ,16         ,15          ,15           ,25       ,20           ,25          ,25          ,50            ,70             ,250   ,100            ,6                ,45               ,40              ,4              ,48              ,8              ,50                 ,22}
 	--Player Ship Beams
 	psb = {}
 	psb["MP52 Hornet"] = 2
 	psb["Phobos M3P"] = 2
 	psb["Flavia P.Falcon"] = 2
 	psb["Atlantis"] = 2
-	psb["Player Cruiser"] = 2
-	psb["Player Fighter"] = 2
-	psb["Striker"] = 2
 	psb["ZX-Lindworm"] = 1
 	psb["Ender"] = 12
 	psb["Repulse"] = 2
@@ -3234,33 +3231,6 @@ function setPlayer(pobj)
 		end
 		pobj.shipScore = 52
 		pobj.maxCargo = 6
-	elseif tempPlayerType == "Player Cruiser" then
-		if #playerShipNamesForCruiser > 0 then
-			ni = math.random(1,#playerShipNamesForCruiser)
-			pobj:setCallSign(playerShipNamesForCruiser[ni])
-			table.remove(playerShipNamesForCruiser,ni)
-		end
-		pobj.shipScore = 40
-		pobj.maxCargo = 6
-	elseif tempPlayerType == "Player Missile Cr." then
-		if #playerShipNamesForMissileCruiser > 0 then
-			ni = math.random(1,#playerShipNamesForMissileCruiser)
-			pobj:setCallSign(playerShipNamesForMissileCruiser[ni])
-			table.remove(playerShipNamesForMissileCruiser,ni)
-		end
-		pobj.shipScore = 45
-		pobj.maxCargo = 8
-	elseif tempPlayerType == "Player Fighter" then
-		if #playerShipNamesForFighter > 0 then
-			ni = math.random(1,#playerShipNamesForFighter)
-			pobj:setCallSign(playerShipNamesForFighter[ni])
-			table.remove(playerShipNamesForFighter,ni)
-		end
-		pobj.shipScore = 7
-		pobj.maxCargo = 3
-		pobj.autoCoolant = false
-		pobj:setJumpDrive(true)
-		pobj:setJumpDriveRange(3000,40000)
 	elseif tempPlayerType == "Benedict" then
 		if #playerShipNamesForBenedict > 0 then
 			ni = math.random(1,#playerShipNamesForBenedict)
@@ -3277,16 +3247,6 @@ function setPlayer(pobj)
 		end
 		pobj.shipScore = 10
 		pobj.maxCargo = 9
-	elseif tempPlayerType == "Striker" then
-		if #playerShipNamesForStriker > 0 then
-			ni = math.random(1,#playerShipNamesForStriker)
-			pobj:setCallSign(playerShipNamesForStriker[ni])
-			table.remove(playerShipNamesForStriker,ni)
-		end
-		pobj.shipScore = 8
-		pobj.maxCargo = 4
-		pobj:setJumpDrive(true)
-		pobj:setJumpDriveRange(3000,40000)
 	elseif tempPlayerType == "ZX-Lindworm" then
 		if #playerShipNamesForLindworm > 0 then
 			ni = math.random(1,#playerShipNamesForLindworm)

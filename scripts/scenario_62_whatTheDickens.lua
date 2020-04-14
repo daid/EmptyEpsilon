@@ -1032,7 +1032,7 @@ function turkeyNemesis(delta)
 		plot2name = "presentHunters"
 		presentHuntersTimer = 30
 		vx, vy = vectorFromAngle(tgAngle,random(5000,6000))
-		enemyConsumption = CpuShip():setFaction("Ghosts"):setCallSign("Consumption"):setTemplate("Karnack"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
+		enemyConsumption = CpuShip():setFaction("Ghosts"):setCallSign("Consumption"):setTemplate("Flavia Falcon"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
 		table.insert(turkeyList, enemyConsumption)
 		if difficulty >= 1 then
 			tgAngle = random(0,360)
@@ -1040,7 +1040,7 @@ function turkeyNemesis(delta)
 			enemyMalnutrition = CpuShip():setFaction("Ghosts"):setCallSign("Malnutrition"):setTemplate("Piranha F12"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
 			table.insert(turkeyList, enemyMalnutrition)
 			vx, vy = vectorFromAngle(tgAngle,random(5000,6000))
-			enemyRags = CpuShip():setFaction("Ghosts"):setCallSign("Rags"):setTemplate("Karnack"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
+			enemyRags = CpuShip():setFaction("Ghosts"):setCallSign("Rags"):setTemplate("Flavia Falcon"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
 			table.insert(turkeyList, enemyRags)
 		end
 		if difficulty > 1 then
@@ -1049,7 +1049,7 @@ function turkeyNemesis(delta)
 			enemyPlague = CpuShip():setFaction("Ghosts"):setCallSign("Plague"):setTemplate("Piranha F12.M"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
 			table.insert(turkeyList, enemyPlague)
 			vx, vy = vectorFromAngle(tgAngle,random(5000,6000))
-			enemyLimp = CpuShip():setFaction("Ghosts"):setCallSign("Limp"):setTemplate("Karnack"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
+			enemyLimp = CpuShip():setFaction("Ghosts"):setCallSign("Limp"):setTemplate("Flavia Falcon"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
 			table.insert(turkeyList, enemyLimp)
 		end
 	end
@@ -1060,21 +1060,21 @@ function presentHunters(delta)
 	if presentHuntersTimer < 0 then
 		tx, ty = friendTurkeySurprise:getPosition()
 		sx, sy = stationSomerset:getPosition()
-		enemyGoose = CpuShip():setFaction("Ghosts"):setCallSign("Goose"):setTemplate("Gunship"):orderAttack(stationSomerset):setPosition((tx+sx)/2,(ty+sy)/2)
+		enemyGoose = CpuShip():setFaction("Ghosts"):setCallSign("Goose"):setTemplate("Repulse"):setJumpDrive(false):orderAttack(stationSomerset):setPosition((tx+sx)/2,(ty+sy)/2)
 		table.insert(turkeyList, enemyGoose)
 		plot2 = presentOutrage
 		plot2name = "presentOutrage"
 		presentOutrageTimer = 30
 		if difficulty >= 1 then
-			enemySuckingPig = CpuShip():setFaction("Ghosts"):setCallSign("Sucking Pig"):setTemplate("Gunship"):orderAttack(stationSomerset):setPosition((tx+sx)/2 + 1000,(ty+sy)/2)
+			enemySuckingPig = CpuShip():setFaction("Ghosts"):setCallSign("Sucking Pig"):setTemplate("Repulse"):setJumpDrive(false):orderAttack(stationSomerset):setPosition((tx+sx)/2 + 1000,(ty+sy)/2)
 			table.insert(turkeyList, enemySuckingPig)
-			enemyMincePie = CpuShip():setFaction("Ghosts"):setCallSign("Mince Pie"):setTemplate("Gunship"):orderAttack(stationSomerset):setPosition((tx+sx)/2 - 1000,(ty+sy)/2)
+			enemyMincePie = CpuShip():setFaction("Ghosts"):setCallSign("Mince Pie"):setTemplate("Repulse"):setJumpDrive(false):orderAttack(stationSomerset):setPosition((tx+sx)/2 - 1000,(ty+sy)/2)
 			table.insert(turkeyList, enemyMincePie)
 		end
 		if difficulty > 1 then
-			enemyPlumPudding = CpuShip():setFaction("Ghosts"):setCallSign("Plum Pudding"):setTemplate("Gunship"):orderAttack(stationSomerset):setPosition((tx+sx)/2,(ty+sy)/2 + 1000)
+			enemyPlumPudding = CpuShip():setFaction("Ghosts"):setCallSign("Plum Pudding"):setTemplate("Repulse"):setJumpDrive(false):orderAttack(stationSomerset):setPosition((tx+sx)/2,(ty+sy)/2 + 1000)
 			table.insert(turkeyList, enemyPlumPudding)
-			enemyChestnut = CpuShip():setFaction("Ghosts"):setCallSign("Chestnut"):setTemplate("Gunship"):orderAttack(stationSomerset):setPosition((tx+sx)/2,(ty+sy)/2 - 1000)
+			enemyChestnut = CpuShip():setFaction("Ghosts"):setCallSign("Chestnut"):setTemplate("Repulse"):setJumpDrive(false):orderAttack(stationSomerset):setPosition((tx+sx)/2,(ty+sy)/2 - 1000)
 			table.insert(turkeyList, enemyChestnut)
 		end
 	end

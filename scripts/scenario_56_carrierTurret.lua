@@ -36,9 +36,9 @@ require("utils.lua")
 function init()
 	missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 	--Ship Template Name List
-	stnl = {"MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Ranus U","Nirvana R5A","Stalker Q7","Stalker R7","Atlantis X23","Starhammer II","Odin","Fighter","Cruiser","Missile Cruiser","Strikeship","Adv. Striker","Dreadnought","Battlestation","Blockade Runner","Ktlitan Fighter","Ktlitan Breaker","Ktlitan Worker","Ktlitan Drone","Ktlitan Feeder","Ktlitan Scout","Ktlitan Destroyer","Storm"}
+	stnl = {"MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Ranus U","Nirvana R5A","Stalker Q7","Stalker R7","Atlantis X23","Starhammer II","Odin","Battlestation","Ktlitan Fighter","Ktlitan Breaker","Ktlitan Worker","Ktlitan Drone","Ktlitan Feeder","Ktlitan Scout","Ktlitan Destroyer","Storm"}
 	--Ship Template Score List
-	stsl = {5            ,5            ,7          ,6          ,7            ,8          ,15         ,16         ,15          ,15           ,25       ,20           ,25          ,25          ,50            ,70             ,250   ,6        ,18       ,14               ,30          ,27            ,80           ,100            ,65               ,6                ,45               ,40              ,4              ,48              ,8              ,50                 ,22}
+	stsl = {5            ,5            ,7          ,6          ,7            ,8          ,15         ,16         ,15          ,15           ,25       ,20           ,25          ,25          ,50            ,70             ,250   ,100            ,6                ,45               ,40              ,4              ,48              ,8              ,50                 ,22}
 	difficulty = 1
 	--Player Ship Beams
 	psb = {}
@@ -46,9 +46,6 @@ function init()
 	psb["Phobos M3P"] = 2
 	psb["Flavia P.Falcon"] = 2
 	psb["Atlantis"] = 2
-	psb["Player Cruiser"] = 2
-	psb["Player Fighter"] = 2
-	psb["Striker"] = 2
 	psb["ZX-Lindworm"] = 1
 	psb["Ender"] = 12
 	psb["Benedict"] = 2
@@ -252,7 +249,7 @@ function init()
 		playerCarrier:setBeamWeaponTurret(0,270,0,6):setBeamWeaponTurret(1,270,180,6):setBeamWeaponEnergyPerFire(0,1):setBeamWeaponEnergyPerFire(1,1)
 	end
 	if math.random() < .5 then
-		playerBlade = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Striker"):setJumpDrive(false):setWarpDrive(false)
+		playerBlade = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Flavia P.Falcon"):setJumpDrive(false):setWarpDrive(false)
 		playerBlade:setPosition(startx-240,starty):commandDock(playerCarrier):setRotation(-180):commandTargetRotation(-180)
 	else
 		playerBlade = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Repulse"):setJumpDrive(false):setWarpDrive(false)
@@ -5234,7 +5231,7 @@ function tractorDisabledShip(delta)
 			ppx, ppy = p:getPosition()
 			tpx, tpy = vectorFromAngle(random(0,360),random(40000,45000))
 			strikeShipNames = {"Cropper","Dunner","Forthwith","Stellar","Trammel","Greeble"}
-			tractorShip = CpuShip():setTemplate("Strikeship"):setFaction("Human Navy"):setPosition(ppx+tpx,ppy+tpy):setScanned(true)
+			tractorShip = CpuShip():setTemplate("Stalker Q7"):setFaction("Human Navy"):setPosition(ppx+tpx,ppy+tpy):setScanned(true)
 			tractorShip:setSystemHealth("warp",-.5):setSystemHealth("jumpdrive",-.5):orderStandGround():setCallSign(strikeShipNames[math.random(1,#strikeShipNames)])
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
@@ -5532,30 +5529,6 @@ function setPlayers()
 					end
 					pobj.shipScore = 52
 					pobj.maxCargo = 6
-				elseif tempPlayerType == "Player Cruiser" then
-					if #playerShipNamesForCruiser > 0 then
-						ni = math.random(1,#playerShipNamesForCruiser)
-						pobj:setCallSign(playerShipNamesForCruiser[ni])
-						table.remove(playerShipNamesForCruiser,ni)
-					end
-					pobj.shipScore = 40
-					pobj.maxCargo = 6
-				elseif tempPlayerType == "Player Missile Cr." then
-					if #playerShipNamesForMissileCruiser > 0 then
-						ni = math.random(1,#playerShipNamesForMissileCruiser)
-						pobj:setCallSign(playerShipNamesForMissileCruiser[ni])
-						table.remove(playerShipNamesForMissileCruiser,ni)
-					end
-					pobj.shipScore = 45
-					pobj.maxCargo = 8
-				elseif tempPlayerType == "Player Fighter" then
-					if #playerShipNamesForFighter > 0 then
-						ni = math.random(1,#playerShipNamesForFighter)
-						pobj:setCallSign(playerShipNamesForFighter[ni])
-						table.remove(playerShipNamesForFighter,ni)
-					end
-					pobj.shipScore = 7
-					pobj.maxCargo = 3
 				elseif tempPlayerType == "Benedict" then
 					if #playerShipNamesForBenedict > 0 then
 						ni = math.random(1,#playerShipNamesForBenedict)
@@ -5580,14 +5553,6 @@ function setPlayers()
 						pobj.shipScore = 10
 					end
 					pobj.maxCargo = 9
-				elseif tempPlayerType == "Striker" then
-					if #playerShipNamesForStriker > 0 then
-						ni = math.random(1,#playerShipNamesForStriker)
-						pobj:setCallSign(playerShipNamesForStriker[ni])
-						table.remove(playerShipNamesForStriker,ni)
-					end
-					pobj.shipScore = 7
-					pobj.maxCargo = 4
 				elseif tempPlayerType == "ZX-Lindworm" then
 					if #playerShipNamesForLindworm > 0 then
 						ni = math.random(1,#playerShipNamesForLindworm)
