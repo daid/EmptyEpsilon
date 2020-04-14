@@ -384,7 +384,49 @@ template:addDoor( 7, 1, false)
 template:addDoor( 8, 3, true)
 template:addDoor(10, 2, false)
 
---Support: mine layer
+-- Mine ship --
+template = ShipTemplate():setName("Nautilus"):setLocaleName(_("Nautilus")):setType("playership"):setClass("Frigate","Support"):setModel("space_tug")
+template:setDescription(_([[Small mine-laying vessel with minimal armament, shields, and hull.]]))
+template:setShields(60,60)
+template:setHull(100)
+template:setSpeed(100, 10, 15)
+--                  Arc, Dir, Range, CycleTime, Dmg
+template:setBeam(0, 10,  35, 1000.0, 6.0, 6)
+template:setBeam(1, 10, -35, 1000.0, 6.0, 6)
+--								Arc, Dir, Rotate speed
+template:setBeamWeaponTurret(0, 90,  35, 6)
+template:setBeamWeaponTurret(1, 90, -35, 6)
+template:setJumpDrive(true)
+template:setEnergyStorage(800)
+template:setCombatManeuver(250,150)
+template:setTubes(3, 10.0)
+template:setTubeDirection(0, 180)
+template:setTubeDirection(1, 180)
+template:setTubeDirection(2, 180)
+template:setWeaponStorage("Mine", 12)
+
+template:setRepairCrewCount(4)
+--	(H)oriz, (V)ert	   HC,VC,HS,VS, system    (C)oordinate (S)ize
+template:addRoomSystem( 0, 1, 1, 2, "Impulse")
+template:addRoomSystem( 1, 0, 2, 1, "RearShield")
+template:addRoomSystem( 1, 1, 2, 2, "JumpDrive")
+template:addRoomSystem( 1, 3, 2, 1, "FrontShield")
+template:addRoomSystem( 3, 0, 2, 1, "Beamweapons")
+template:addRoomSystem( 3, 1, 3, 1, "Warp")
+template:addRoomSystem( 3, 2, 3, 1, "Reactor")
+template:addRoomSystem( 3, 3, 2, 1, "MissileSystem")
+template:addRoomSystem( 6, 1, 1, 2, "Maneuver")
+
+-- (H)oriz, (V)ert H, V, true = horizontal
+template:addDoor( 1, 1, false)
+template:addDoor( 2, 1, true)
+template:addDoor( 1, 3, true)
+template:addDoor( 3, 2, false)
+template:addDoor( 4, 3, true)
+template:addDoor( 6, 1, false)
+template:addDoor( 4, 2, true)
+template:addDoor( 4, 1, true)
+
 --Support: mine sweeper
 --Support: science vessel
 --Support: deep space recon
