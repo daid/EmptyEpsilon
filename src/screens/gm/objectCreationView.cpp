@@ -20,10 +20,11 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner, func_t enterCr
     faction_selector->setPosition(20, 20, ATopLeft)->setSize(300, 50);
     
     float y = 20;
-    std::vector<string> template_names = ShipTemplate::getTemplateNameList(ShipTemplate::Station);
+    std::vector<std::pair<string, string> > template_names = ShipTemplate::getTemplateNameList(ShipTemplate::Station);
     std::sort(template_names.begin(), template_names.end());
-    for(string template_name : template_names)
+    for(std::pair<string, string> template_pair : template_names)
     {
+        string& template_name = template_pair.second;
         (new GuiButton(box, "CREATE_STATION_" + template_name, template_name, [this, template_name]() {
             setCreateScript("SpaceStation():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + template_name + "\")");
         }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
@@ -67,8 +68,9 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner, func_t enterCr
         setCreateScript("CpuShip():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + value + "\"):orderRoaming()");
     });
     listbox->setTextSize(20)->setButtonHeight(30)->setPosition(-20, 20, ATopRight)->setSize(300, 460);
-    for(string template_name : template_names)
+    for(std::pair<string, string> template_pair : template_names)
     {
+        string& template_name = template_pair.second;
         listbox->addEntry(ShipTemplate::getTemplate(template_name)->getLocaleName(), template_name);
     }
     

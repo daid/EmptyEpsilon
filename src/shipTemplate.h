@@ -192,7 +192,7 @@ public:
 public:
     static P<ShipTemplate> getTemplate(string name);
     static std::vector<string> getAllTemplateNames();
-    static std::vector<string> getTemplateNameList(TemplateType type);
+    static std::vector<std::pair<string, string> > getTemplateNameList(TemplateType type);
 };
 string getSystemName(ESystem system);
 string getLocaleSystemName(ESystem system);
