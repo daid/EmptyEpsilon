@@ -115,7 +115,7 @@ function init()
 		addWave(enemyList,2,setWaveAngle(math.random(20), math.random(20)),setWaveDistance(math.random(5)))
 	end)
 
-	addGMFunction("Dreadnought", function()
+	addGMFunction("Odin", function()
 		addWave(enemyList,4,setWaveAngle(math.random(20), math.random(20)),setWaveDistance(math.random(5)))
 	end)
 
