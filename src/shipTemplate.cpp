@@ -539,6 +539,11 @@ string ShipTemplate::getName()
     return this->name;
 }
 
+string ShipTemplate::getLocaleName()
+{
+    return this->locale_name;
+}
+
 string ShipTemplate::getDescription()
 {
     return this->description;
