@@ -62,5 +62,14 @@ void GuiScrollText::onDraw(sf::RenderTarget& window)
             scrollbar->setValue(scrollbar->getValue() + diff);
     }
 
+    if (max_lines >= wrap.line_count)
+    {
+        scrollbar->hide();
+    }
+    else
+    {
+        scrollbar->show();
+    }
+
     drawText(window, sf::FloatRect(rect.left, rect.top, rect.width - scrollbar->getSize().x, rect.height), wrap.text, ATopLeft, text_size, main_font, selectColor(colorConfig.textbox.forground));
 }
