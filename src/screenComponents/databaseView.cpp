@@ -33,7 +33,7 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
         }
         display(entry);
     });
-    item_list->setPosition(0, 0, ATopLeft)->setMargins(20, 20, 20, 130)->setSize(400, GuiElement::GuiSizeMax);
+    item_list->setPosition(0, 0, ATopLeft)->setMargins(20, 20, 20, 20)->setSize(navigation_width, GuiElement::GuiSizeMax);
     fillListBox();
 }
 
@@ -90,43 +90,63 @@ void DatabaseViewComponent::display(P<ScienceDatabase> entry)
         database_entry->destroy();
     
     database_entry = new GuiElement(this, "DATABASE_ENTRY");
-    database_entry->setPosition(400, 20, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
-    GuiAutoLayout* layout = new GuiAutoLayout(database_entry, "DATABASE_ENTRY_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    layout->setPosition(0, 0, ATopLeft)->setMargins(0, 0)->setSize(400, GuiElement::GuiSizeMax);
+    database_entry->setPosition(navigation_width, 0, ATopLeft)->setMargins(20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     if (!entry)
         return;
 
-    for(unsigned int n=0; n<entry->keyValuePairs.size(); n++)
+    bool has_key_values = entry->keyValuePairs.size() > 0;
+    bool has_image_or_model = entry->model_data || entry->image != "";
+    bool has_text = entry->longDescription.length() > 0;
+
+    int left_column_width = 0;
+    if (has_key_values)
     {
-        (new GuiKeyValueDisplay(layout, "", 0.37, entry->keyValuePairs[n].key, entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
+        left_column_width = 400;
     }
-    if (entry->model_data || entry->image != "")
+    GuiAutoLayout* right = new GuiAutoLayout(database_entry, "DATABASE_ENTRY_RIGHT", GuiAutoLayout::LayoutHorizontalRows);
+    right->setPosition(left_column_width, 0, ATopLeft)->setMargins(0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    if (has_image_or_model)
     {
-        float x = 450;
-        if (entry->keyValuePairs.size() == 0 && entry->longDescription.length() == 0) {
-            x = 0;
-        }
-        if(entry->image != "")
-        {
-            (new GuiImage(database_entry, "DATABASE_IMAGE", entry->image))->setScaleUp(false)->setPosition(x, 0, ATopLeft)->setMargins(0, 0, 20, 20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMatchWidth);
-        }
+        GuiElement* visual = (new GuiElement(right, "DATABASE_VISUAL_ELEMENT"))->setMargins(0, 0, 0, 40)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
         if (entry->model_data)
         {
-            //TODO: std::min(GuiElement::GuiSizeMatchWidth, 370.0f)
-            (new GuiRotatingModelView(database_entry, "DATABASE_MODEL_VIEW", entry->model_data))->setPosition(x, -50, ATopLeft)->setMargins(0, 0, 20, 20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMatchWidth);
+            (new GuiRotatingModelView(visual, "DATABASE_MODEL_VIEW", entry->model_data))->setMargins(-100, -50)->setSize(GuiElement::GuiSizeMax, has_text ? GuiElement::GuiSizeMax : 450);
         }
 
-        if (entry->longDescription.length() > 0)
+        if(entry->image != "")
         {
-            (new GuiScrollText(database_entry, "DATABASE_LONG_DESCRIPTION", entry->longDescription))->setTextSize(24)->setPosition(450,0,ABottomLeft)->setMargins(0, 0, 50, 50)->setSize(GuiElement::GuiSizeMax, 240);
+            (new GuiImage(visual, "DATABASE_IMAGE", entry->image))->setScaleUp(false)->setMargins(0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         }
-    } else if (entry->longDescription.length() > 0)
-    {
-        (new GuiScrollText(database_entry, "DATABASE_LONG_DESCRIPTION", entry->longDescription))->setTextSize(24)->setPosition(450,0,ATopLeft)->setMargins(0, 120, 50, 50)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     }
+    if (has_text)
+    {
+        if (!has_image_or_model)
+        {
+            // make sure station and main screen buttons don't overlay the text
+            if (!has_key_values)
+            {
+                right->setMargins(0, 10, 270, 0);
+            } else {
+                right->setMargins(0, 120, 0, 0);
+            }
+        }
+        (new GuiScrollText(right, "DATABASE_LONG_DESCRIPTION", entry->longDescription))->setTextSize(24)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    }
+
+    // we render the left column second so it overlays the rotating 3D model
+    if (has_key_values)
+    {
+        GuiAutoLayout* left = new GuiAutoLayout(database_entry, "DATABASE_ENTRY_LEFT", GuiAutoLayout::LayoutVerticalTopToBottom);
+        left->setPosition(0, 0, ATopLeft)->setMargins(0, 0, 20, 0)->setSize(left_column_width, GuiElement::GuiSizeMax);
+
+        for(unsigned int n=0; n<entry->keyValuePairs.size(); n++)
+        {
+            (new GuiKeyValueDisplay(left, "", 0.37, entry->keyValuePairs[n].key, entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
+        }
+    }
+
     if (entry->items.size() > 0)
     {
         selected_entry = entry;
