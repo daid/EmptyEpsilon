@@ -12,7 +12,7 @@
 
 /// CpuShips are AI controlled ships.
 /// They can get different orders.
-/// Example: CpuShip():setTemplate("Fighter"):setPosition(random(-10000, 10000), random(0, 3000)):setFaction("Human Navy"):orderRoaming():setScanned(true)
+/// Example: CpuShip():setTemplate("MT52 Hornet"):setPosition(random(-10000, 10000), random(0, 3000)):setFaction("Human Navy"):orderRoaming():setScanned(true)
 REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceShip)
 {
     /// Switch the AI to a different type. AI can be set per ship, or left per default which will be taken from the shipTemplate then.
