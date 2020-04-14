@@ -123,6 +123,7 @@ void fillDefaultDatabaseData()
         
         entry->model_data = ship_template->model_data;
         entry->setImage(ship_template->radar_trace);
+        entry->locale_name = ship_template->getLocaleName();
 
         entry->addKeyValue(tr("database", "Class"), ship_template->getClass());
         entry->addKeyValue(tr("database", "Sub-class"), ship_template->getSubClass());
