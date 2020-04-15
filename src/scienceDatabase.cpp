@@ -119,7 +119,7 @@ void fillDefaultDatabaseData()
     for(string& template_name : template_names)
     {
         P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
-        P<ScienceDatabase> entry = class_database_entries[ship_template->getClass()]->addEntry(ship_template->getLocaleName());
+        P<ScienceDatabase> entry = class_database_entries[ship_template->getClass()]->addEntry(template_name);
         
         entry->model_data = ship_template->model_data;
         entry->setImage(ship_template->radar_trace);
