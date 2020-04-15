@@ -33,7 +33,7 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
         }
         display(entry);
     });
-    item_list->setPosition(0, 0, ATopLeft)->setMargins(20, 20, 20, 20)->setSize(navigation_width, GuiElement::GuiSizeMax);
+    item_list->setPosition(0, 0, ATopLeft)->setMargins(20, 20, 20, 130)->setSize(navigation_width, GuiElement::GuiSizeMax);
     fillListBox();
 }
 
