@@ -23,7 +23,7 @@ private:
     GuiListbox* item_list;
     GuiElement* database_entry;
 
-    int navigation_width = 400;
+    static constexpr int navigation_width = 400;
 };
 
 #endif//DATABASE_VIEW_H
