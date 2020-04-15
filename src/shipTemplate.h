@@ -69,7 +69,7 @@ public:
 private:
     static std::unordered_map<string, P<ShipTemplate> > templateMap;
     string name;
-    string locale_name ="";
+    string locale_name = "";
     string description;
     string class_name;
     string sub_class_name;
