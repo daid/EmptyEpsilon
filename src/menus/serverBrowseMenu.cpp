@@ -43,7 +43,7 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source)
     manual_ip = new GuiTextEntry(this, "IP", "");
     manual_ip->setPosition(-50, -120, ABottomRight)->setSize(300, 50);
     manual_ip->enterCallback([this](string text) {
-        new JoinServerScreen(lan_internet_selector->getSelectionIndex() == 0 ? Local : Internet, sf::IpAddress(text));
+        new JoinServerScreen(lan_internet_selector->getSelectionIndex() == 0 ? Local : Internet, sf::IpAddress(text.strip()));
         destroy();
     });
     server_list = new GuiListbox(this, "SERVERS", [this](int index, string value) {
