@@ -1,6 +1,7 @@
 #include <i18n.h>
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
+#include "scienceDatabase.h"
 
 P<GameGlobalInfo> gameGlobalInfo;
 
@@ -179,6 +180,14 @@ void GameGlobalInfo::startScenario(string filename)
     i18n::reset();
     i18n::load("locale/" + PreferencesManager::get("language", "en") + ".po");
     i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
+
+    flushDatabaseData();
+    fillDefaultDatabaseData();
+
+    P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
+    if (scienceInfoScript->getError() != "") exit(1);
+    scienceInfoScript->destroy();
+
     P<ScriptObject> script = new ScriptObject();
     script->run(filename);
     engine->registerObject("scenario", script);

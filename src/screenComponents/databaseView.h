@@ -14,10 +14,11 @@ public:
     bool findAndDisplayEntry(string name);
 
 private:
+    P<ScienceDatabase> findEntryById(unsigned int id);
     bool findAndDisplayEntry(string name, P<ScienceDatabase> parent);
     //Fill the selection listbox with options from the selected_entry, or the main database list if selected_entry is nullptr
     void fillListBox();
-    void display(P<ScienceDatabase> entry);
+    void display();
 
     P<ScienceDatabase> selected_entry;
     GuiListbox* item_list;

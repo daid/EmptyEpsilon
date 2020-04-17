@@ -14,20 +14,25 @@ REGISTER_SCRIPT_CLASS(ScienceDatabase)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setImage);
 }
 
-
+unsigned int ScienceDatabase::next_id = 1;
 PVector<ScienceDatabase> ScienceDatabase::science_databases;
 
+REGISTER_MULTIPLAYER_CLASS(ScienceDatabase, "ScienceDatabase");
 ScienceDatabase::ScienceDatabase()
+: MultiplayerObject("ScienceDatabase")
 {
-    if (game_server) { LOG(ERROR) << "ScienceDatabase objects can not be created during a scenario right now."; destroy(); return; }
+    id = ScienceDatabase::next_id++;
+
+    registerMemberReplication(&id);
+    registerMemberReplication(&parent_id);
+    registerMemberReplication(&name);
+    registerMemberReplication(&model_data_name);
+    registerMemberReplication(&longDescription);
+    registerMemberReplication(&image);
+    registerMemberReplication(&keyValuePairs);
+
     science_databases.push_back(this);
     name = "???";
-}
-
-ScienceDatabase::ScienceDatabase(P<ScienceDatabase> parent, string name)
-{
-    this->parent = parent;
-    this->name = name;
 }
 
 ScienceDatabase::~ScienceDatabase()
@@ -36,8 +41,9 @@ ScienceDatabase::~ScienceDatabase()
 
 P<ScienceDatabase> ScienceDatabase::addEntry(string name)
 {
-    P<ScienceDatabase> e = new ScienceDatabase(this, name);
-    items.push_back(e);
+    P<ScienceDatabase> e = new ScienceDatabase();
+    e->parent_id = this->id;
+    e->setName(name);
     return e;
 }
 
@@ -49,6 +55,34 @@ void ScienceDatabase::addKeyValue(string key, string value)
 void ScienceDatabase::setLongDescription(string text)
 {
     longDescription = text;
+}
+
+
+void ScienceDatabase::setModelData(P<ModelData> model_data)
+{
+    this->model_data_name = model_data->getName();
+}
+
+void ScienceDatabase::setModelDataName(string model_data_name)
+{
+    this->model_data_name = model_data_name;
+}
+
+bool ScienceDatabase::hasModelData()
+{
+    return model_data_name != "";
+}
+
+P<ModelData> ScienceDatabase::getModelData()
+{
+    if (hasModelData())
+    {
+        return ModelData::getModel(model_data_name);
+    }
+    else
+    {
+        return nullptr;
+    }
 }
 
 static string directionLabel(float direction)
@@ -63,6 +97,14 @@ static string directionLabel(float direction)
     if (std::abs(sf::angleDifference(180.0f, direction)) <= 45)
         name = tr("database direction", "Rear");
     return name;
+}
+
+void flushDatabaseData() {
+    for (unsigned i=0; i<ScienceDatabase::science_databases.size(); i++)
+    {
+        ScienceDatabase::science_databases[i]->destroy();
+    }
+    ScienceDatabase::science_databases.resize(0);
 }
 
 void fillDefaultDatabaseData()
@@ -121,7 +163,7 @@ void fillDefaultDatabaseData()
         P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
         P<ScienceDatabase> entry = class_database_entries[ship_template->getClass()]->addEntry(ship_template->getLocaleName());
         
-        entry->model_data = ship_template->model_data;
+        entry->setModelData(ship_template->model_data);
         entry->setImage(ship_template->radar_trace);
 
         entry->addKeyValue(tr("database", "Class"), ship_template->getClass());
@@ -200,7 +242,7 @@ void fillDefaultDatabaseData()
     for(string name : ModelData::getModelDataNames())
     {
         P<ScienceDatabase> entry = models_database->addEntry(name);
-        entry->model_data = ModelData::getModel(name);
+        entry->setModelDataName(name);
     }
 #endif
 }

@@ -19,7 +19,6 @@
 #include "gameGlobalInfo.h"
 #include "spaceObjects/spaceObject.h"
 #include "packResourceProvider.h"
-#include "scienceDatabase.h"
 #include "main.h"
 #include "epsilonServer.h"
 #include "httpScriptAccess.h"
@@ -280,12 +279,6 @@ int main(int argc, char** argv)
         P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");
         if (factionInfoScript->getError() != "") exit(1);
         factionInfoScript->destroy();
-
-        fillDefaultDatabaseData();
-
-        P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
-        if (scienceInfoScript->getError() != "") exit(1);
-        scienceInfoScript->destroy();
 
         //Find out which model data isn't used by ship templates and output that to log.
         std::set<string> used_model_data;

@@ -10,23 +10,30 @@ class ScienceDatabaseKeyValue
 {
 public:
     string key, value;
+    ScienceDatabaseKeyValue() {}
     ScienceDatabaseKeyValue(string key, string value) : key(key), value(value) {}
+
+    bool operator!=(const ScienceDatabaseKeyValue& kv) { return key != kv.key || value != kv.value; }
 };
+
+static inline sf::Packet& operator << (sf::Packet& packet, const ScienceDatabaseKeyValue& kv) { return packet << kv.key << kv.value; }
+static inline sf::Packet& operator >> (sf::Packet& packet, ScienceDatabaseKeyValue& kv) { return packet >> kv.key >> kv.value; }
+
 /*!
  * \brief An entry for the science database that is formed by a number of key value pairs.
  *  The database is build up in a tree structure, where every node can have key/value pairs and a long description.
  *  As well as a 3D model assigned to it.
  */
-class ScienceDatabase : public virtual PObject
+class ScienceDatabase : public MultiplayerObject
 {
 public:
-    PVector<ScienceDatabase> items;
-    P<ScienceDatabase> parent;
+    unsigned int id;
+    unsigned int parent_id = 0;
 
     string name;
     std::vector<ScienceDatabaseKeyValue> keyValuePairs;
     string longDescription;
-    P<ModelData> model_data;
+    string model_data_name = "";
     string image;
 
     ScienceDatabase();
@@ -41,9 +48,16 @@ public:
         image = path;
     }
     P<ScienceDatabase> addEntry(string name);
+    unsigned int getId() { return this->id; }
+    unsigned int getParentId() { return this->parent_id; }
+    void setModelData(P<ModelData> model_data);
+    void setModelDataName(string model_data_name);
+    bool hasModelData();
+    P<ModelData> getModelData();
     string getName() {return this->name;}
 private:
     string directionLabel(float direction);
+    static unsigned int next_id;
 
 public: /* static members */
     static PVector<ScienceDatabase> science_databases;
@@ -51,5 +65,6 @@ public: /* static members */
 
 //Called during startup to fill the database with faction and ship data.
 void fillDefaultDatabaseData();
+void flushDatabaseData();
 
 #endif//SCIENCE_DATABASE_H
