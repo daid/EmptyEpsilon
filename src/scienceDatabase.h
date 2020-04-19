@@ -42,6 +42,15 @@ public:
     void setLongDescription(string text);
 
     void setName(string name) { this->name = name; }
+    string getNormalizedName() {
+        if(normalized_name == "")
+        {
+            normalized_name = name;
+            transform(normalized_name.begin(), normalized_name.end(), normalized_name.begin(), ::tolower);
+        }
+
+        return normalized_name;
+    }
     void setImage(string path) {
         image = path;
     }
@@ -54,6 +63,7 @@ public:
     P<ModelData> getModelData();
     string getName() {return this->name;}
 private:
+    string normalized_name; // used for sorting and querying
     string directionLabel(float direction);
 
 public: /* static members */
@@ -63,5 +73,9 @@ public: /* static members */
 //Called during startup to fill the database with faction and ship data.
 void fillDefaultDatabaseData();
 void flushDatabaseData();
+
+static inline bool operator < (P<ScienceDatabase> a, P<ScienceDatabase> b) {
+    return a->getNormalizedName() < b->getNormalizedName();
+}
 
 #endif//SCIENCE_DATABASE_H

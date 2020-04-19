@@ -113,7 +113,9 @@ void DatabaseViewComponent::fillListBox()
     // the indices we actually want to display
     std::vector<unsigned> display_idx = children_idx.size() > 0 ? children_idx : siblings_idx;
 
-    // @TODO: sort entries
+    sort(display_idx.begin(), display_idx.end(), [](unsigned idxA, unsigned idxB) -> bool {
+        return ScienceDatabase::science_databases[idxA] < ScienceDatabase::science_databases[idxB];
+    });
 
     for (auto idx : display_idx)
     {
