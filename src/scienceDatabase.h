@@ -27,8 +27,7 @@ static inline sf::Packet& operator >> (sf::Packet& packet, ScienceDatabaseKeyVal
 class ScienceDatabase : public MultiplayerObject
 {
 public:
-    unsigned int id;
-    unsigned int parent_id = 0;
+    int32_t parent_id = 0;
 
     string name;
     std::vector<ScienceDatabaseKeyValue> keyValuePairs;
@@ -37,7 +36,6 @@ public:
     string image;
 
     ScienceDatabase();
-    ScienceDatabase(P<ScienceDatabase> parent, string name);
     virtual ~ScienceDatabase();
 
     void addKeyValue(string key, string value);
@@ -48,8 +46,8 @@ public:
         image = path;
     }
     P<ScienceDatabase> addEntry(string name);
-    unsigned int getId() { return this->id; }
-    unsigned int getParentId() { return this->parent_id; }
+    int32_t getId() { return this->getMultiplayerId(); }
+    int32_t getParentId() { return this->parent_id; }
     void setModelData(P<ModelData> model_data);
     void setModelDataName(string model_data_name);
     bool hasModelData();
@@ -57,7 +55,6 @@ public:
     string getName() {return this->name;}
 private:
     string directionLabel(float direction);
-    static unsigned int next_id;
 
 public: /* static members */
     static PVector<ScienceDatabase> science_databases;

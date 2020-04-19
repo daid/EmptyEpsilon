@@ -19,7 +19,7 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
     item_list = new GuiListbox(this, "DATABASE_ITEM_LIST", [this](int index, string value) {
         P<ScienceDatabase> entry;
 
-        unsigned int id = std::stoul(value, nullptr, 10);
+        int32_t id = std::stoul(value, nullptr, 10);
         selected_entry = findEntryById(id);
         display();
     });
@@ -27,14 +27,15 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
     display();
 }
 
-P<ScienceDatabase> DatabaseViewComponent::findEntryById(unsigned int id)
+P<ScienceDatabase> DatabaseViewComponent::findEntryById(int32_t id)
 {
     if (id == 0)
     {
         return nullptr;
     }
-    foreach(ScienceDatabase, sd, ScienceDatabase::science_databases)
+    for(auto sd: ScienceDatabase::science_databases)
     {
+        if (!sd) continue;
         if (sd->getId() == id)
         {
             return sd;
@@ -45,8 +46,9 @@ P<ScienceDatabase> DatabaseViewComponent::findEntryById(unsigned int id)
 
 bool DatabaseViewComponent::findAndDisplayEntry(string name)
 {
-    foreach(ScienceDatabase, sd, ScienceDatabase::science_databases)
+    for(auto sd : ScienceDatabase::science_databases)
     {
+        if (!sd) continue;
         if (sd->getName() == name)
         {
             selected_entry = sd;
@@ -107,24 +109,19 @@ void DatabaseViewComponent::fillListBox()
             item_list->addEntry(tr("Back"), std::to_string(parent_entry->getParentId()));
         }
     }
-    if(children_idx.size() > 0)
+
+    // the indices we actually want to display
+    std::vector<unsigned> display_idx = children_idx.size() > 0 ? children_idx : siblings_idx;
+
+    // @TODO: sort entries
+
+    for (auto idx : display_idx)
     {
-        for (unsigned i=0; i<children_idx.size(); i++)
+        P<ScienceDatabase> sd = ScienceDatabase::science_databases[idx];
+        int item_list_idx = item_list->addEntry(sd->getName(), std::to_string(sd->getId()));
+        if (selected_entry && selected_entry->getId() == sd->getId())
         {
-            P<ScienceDatabase> sd = ScienceDatabase::science_databases[children_idx[i]];
-            item_list->addEntry(sd->getName(), std::to_string(sd->getId()));
-        }
-    }
-    else if(siblings_idx.size() > 0)
-    {
-        for (unsigned i=0; i<siblings_idx.size(); i++)
-        {
-            P<ScienceDatabase> sd = ScienceDatabase::science_databases[siblings_idx[i]];
-            int item_list_idx = item_list->addEntry(sd->getName(), std::to_string(sd->getId()));
-            if (selected_entry && selected_entry->getId() == sd->getId())
-            {
-                item_list->setSelectionIndex(item_list_idx);
-            }
+            item_list->setSelectionIndex(item_list_idx);
         }
     }
 }

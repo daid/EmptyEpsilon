@@ -14,16 +14,12 @@ REGISTER_SCRIPT_CLASS(ScienceDatabase)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setImage);
 }
 
-unsigned int ScienceDatabase::next_id = 1;
 PVector<ScienceDatabase> ScienceDatabase::science_databases;
 
 REGISTER_MULTIPLAYER_CLASS(ScienceDatabase, "ScienceDatabase");
 ScienceDatabase::ScienceDatabase()
 : MultiplayerObject("ScienceDatabase")
 {
-    id = ScienceDatabase::next_id++;
-
-    registerMemberReplication(&id);
     registerMemberReplication(&parent_id);
     registerMemberReplication(&name);
     registerMemberReplication(&model_data_name);
@@ -42,7 +38,7 @@ ScienceDatabase::~ScienceDatabase()
 P<ScienceDatabase> ScienceDatabase::addEntry(string name)
 {
     P<ScienceDatabase> e = new ScienceDatabase();
-    e->parent_id = this->id;
+    e->parent_id = this->getId();
     e->setName(name);
     return e;
 }
@@ -99,7 +95,8 @@ static string directionLabel(float direction)
     return name;
 }
 
-void flushDatabaseData() {
+void flushDatabaseData()
+{
     for (unsigned i=0; i<ScienceDatabase::science_databases.size(); i++)
     {
         ScienceDatabase::science_databases[i]->destroy();
