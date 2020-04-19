@@ -35,6 +35,29 @@ ScienceDatabase::~ScienceDatabase()
 {
 }
 
+void ScienceDatabase::destroy()
+{
+    // if this code is used in the client, the server could try to destroy an object that has already been destroyed
+    if(this->isDestroyed()) return;
+
+    auto my_id = this->getId();
+    ScienceDatabase::science_databases.remove(this);
+    MultiplayerObject::destroy();
+
+    PVector<ScienceDatabase>::iterator it = ScienceDatabase::science_databases.begin();
+
+    while(it != ScienceDatabase::science_databases.end()) {
+        if (!(*it)->isDestroyed() && (*it)->getParentId() == my_id)
+        {
+            (*it)->destroy();
+        }
+        else
+        {
+            ++it;
+        }
+    }
+}
+
 P<ScienceDatabase> ScienceDatabase::addEntry(string name)
 {
     P<ScienceDatabase> e = new ScienceDatabase();
@@ -97,9 +120,17 @@ static string directionLabel(float direction)
 
 void flushDatabaseData()
 {
-    for (unsigned i=0; i<ScienceDatabase::science_databases.size(); i++)
-    {
-        ScienceDatabase::science_databases[i]->destroy();
+    PVector<ScienceDatabase>::iterator it = ScienceDatabase::science_databases.begin();
+
+    while(it != ScienceDatabase::science_databases.end()) {
+        if (!(*it)->isDestroyed())
+        {
+            (*it)->destroy();
+        }
+        else
+        {
+            ++it;
+        }
     }
     ScienceDatabase::science_databases.resize(0);
 }

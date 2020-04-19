@@ -62,6 +62,7 @@ public:
     bool hasModelData();
     P<ModelData> getModelData();
     string getName() {return this->name;}
+    virtual void destroy();
 private:
     string normalized_name; // used for sorting and querying
     string directionLabel(float direction);
