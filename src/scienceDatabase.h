@@ -104,10 +104,7 @@ private:
     string normalized_name; // used for sorting and querying
     string directionLabel(float direction);
 
-    static string normalizeName(string name) {
-        transform(name.begin(), name.end(), name.begin(), ::tolower);
-        return name;
-    }
+    static string normalizeName(string name) { return name.lower(); }
 
 public: /* static members */
     static PVector<ScienceDatabase> science_databases;
