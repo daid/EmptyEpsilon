@@ -142,8 +142,8 @@ void DatabaseViewComponent::display()
         return;
 
     bool has_key_values = selected_entry->keyValuePairs.size() > 0;
-    bool has_image_or_model = selected_entry->hasModelData() || selected_entry->image != "";
-    bool has_text = selected_entry->longDescription.length() > 0;
+    bool has_image_or_model = selected_entry->hasModelData() || selected_entry->getImage() != "";
+    bool has_text = selected_entry->getLongDescription().length() > 0;
 
     int left_column_width = 0;
     if (has_key_values)
@@ -161,7 +161,7 @@ void DatabaseViewComponent::display()
             (new GuiRotatingModelView(visual, "DATABASE_MODEL_VIEW", selected_entry->getModelData()))->setMargins(-100, -50)->setSize(GuiElement::GuiSizeMax, has_text ? GuiElement::GuiSizeMax : 450);
         }
 
-        if(selected_entry->image != "")
+        if(selected_entry->getImage() != "")
         {
             (new GuiImage(visual, "DATABASE_IMAGE", selected_entry->image))->setScaleUp(false)->setMargins(0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         }
@@ -178,7 +178,7 @@ void DatabaseViewComponent::display()
                 right->setMargins(0, 120, 0, 0);
             }
         }
-        (new GuiScrollText(right, "DATABASE_LONG_DESCRIPTION", selected_entry->longDescription))->setTextSize(24)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        (new GuiScrollText(right, "DATABASE_LONG_DESCRIPTION", selected_entry->getLongDescription()))->setTextSize(24)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     }
 
     // we render the left column second so it overlays the rotating 3D model
