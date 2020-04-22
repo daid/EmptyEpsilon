@@ -191,9 +191,66 @@ function update(delta)
 	end
 	enemy_count = 0
 	friendly_count = 0
+	local order = nil
+	local order_target = nil
+	local ship_type = nil
 	for _, enemy in ipairs(enemyList) do
 		if enemy:isValid() then
 			enemy_count = enemy_count + 1
+			order = enemy:getOrder()
+			if order == "Defend Target" or order == "Attack" then
+				order_target = enemy:getOrderTarget()
+				if order_target ~= nil then
+					if not order_target:isValid() then
+						if random(1,100) < 50 then
+							enemy:orderRoaming()
+						else
+							enemy:orderAttack(getPlayerShip(-1))
+						end
+					end
+				else
+					if random(1,100) < 50 then
+						enemy:orderRoaming()
+					else
+						endmy:orderAttack(getPlayerShip(-1))
+					end
+				end
+			elseif order == "Idle" then
+				if random(1,100) < 50 then
+					enemy:orderRoaming()
+				else
+					enemy:orderAttack(getPlayerShip(-1))
+				end
+			end
+			ship_type = enemy:getTypeName()
+			if ship_type == "WX-Lindworm" or ship_type == "Piranha F12" then
+				if enemy.regenerate_timer == nil then
+					if enemy:getWeaponStorage("HVLI") < 1 and enemy:getWeaponStorage("Homing") < 1 then
+						enemy.regenerate_timer = delta + 60
+					end
+				else
+					enemy.regenerate_timer = enemy.regenerate_timer - delta
+					if enemy.regenerate_timer < 0 then
+						enemy.regenerate_timer = nil
+						enemy:setWeaponStorage("Homing",enemy:getWeaponStorageMax("Homing"))
+						enemy:setWeaponStorage("HVLI",enemy:getWeaponStorageMax("HVLI"))
+					end
+				end
+			end
+			if ship_type == "Ranus U" then
+				if enemy.regenerate_timer == nil then
+					if enemy:getWeaponStorage("Nuke") < 1 and enemy:getWeaponStorage("Homing") < 1 then
+						enemy.regenerate_timer = delta + 60
+					end
+				else
+					enemy.regenerate_timer = enemy.regenerate_timer - delta
+					if enemy.regenerate_timer < 0 then
+						enemy.regenerate_timer = nil
+						enemy:setWeaponStorage("Homing",enemy:getWeaponStorageMax("Homing"))
+						enemy:setWeaponStorage("Nuke",enemy:getWeaponStorageMax("Nuke"))
+					end
+				end
+			end
 		end
 	end
 	for _, friendly in ipairs(friendlyList) do
