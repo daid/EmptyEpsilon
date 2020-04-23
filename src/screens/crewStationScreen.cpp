@@ -133,8 +133,8 @@ void CrewStationScreen::finishCreation()
 
     message_frame->moveToFront();
 
-    new GuiIndicatorOverlays(this);
-    new GuiNoiseOverlay(this);
+    new GuiIndicatorOverlays(main_panel);
+    new GuiNoiseOverlay(main_panel);
     new GuiShipDestroyedPopup(this);
 
     if (tabs.size() < 2)
