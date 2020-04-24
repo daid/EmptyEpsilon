@@ -212,10 +212,6 @@ GameMasterScreen::GameMasterScreen()
     message_close_button->setTextSize(30)->setPosition(-20, -20, ABottomRight)->setSize(300, 30);
 }
 
-GameMasterScreen::~GameMasterScreen()
-{
-}
-
 void GameMasterScreen::update(float delta)
 {
     float mouse_wheel_delta = InputHandler::getMouseWheelDelta();

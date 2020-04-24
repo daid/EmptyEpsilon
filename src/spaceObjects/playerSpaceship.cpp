@@ -398,10 +398,6 @@ PlayerSpaceship::PlayerSpaceship()
     setCallSign("PL" + string(getMultiplayerId()));
 }
 
-PlayerSpaceship::~PlayerSpaceship()
-{
-}
-
 void PlayerSpaceship::update(float delta)
 {
     // If we're flashing the screen for hull damage, tick the fade-out.

@@ -25,10 +25,6 @@ ElectricExplosionEffect::ElectricExplosionEffect()
     registerMemberReplication(&on_radar);
 }
 
-ElectricExplosionEffect::~ElectricExplosionEffect()
-{
-}
-
 #if FEATURE_3D_RENDERING
 void ElectricExplosionEffect::draw3DTransparent()
 {

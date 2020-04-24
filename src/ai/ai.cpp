@@ -19,10 +19,6 @@ ShipAI::ShipAI(CpuShip* owner)
     update_target_delay = 0.0;
 }
 
-ShipAI::~ShipAI()
-{
-}
-
 bool ShipAI::canSwitchAI()
 {
     return true;

@@ -15,10 +15,6 @@
 
 #include "hardwareMappingEffects.h"
 
-HardwareController::HardwareController()
-{
-}
-
 HardwareController::~HardwareController()
 {
     for(HardwareOutputDevice* device : devices)

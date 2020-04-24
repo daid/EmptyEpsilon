@@ -30,10 +30,6 @@ ScienceDatabase::ScienceDatabase(P<ScienceDatabase> parent, string name)
     this->name = name;
 }
 
-ScienceDatabase::~ScienceDatabase()
-{
-}
-
 P<ScienceDatabase> ScienceDatabase::addEntry(string name)
 {
     P<ScienceDatabase> e = new ScienceDatabase(this, name);

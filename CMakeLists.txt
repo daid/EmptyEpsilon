@@ -247,7 +247,6 @@ set(SOURCES
 	src/ai/missileVolleyAI.cpp
 	src/hardware/hardwareController.cpp
 	src/hardware/hardwareMappingEffects.cpp
-	src/hardware/hardwareOutputDevice.cpp
 	src/hardware/serialDriver.cpp
 	src/hardware/devices/dmx512SerialDevice.cpp
 	src/hardware/devices/enttecDMXProDevice.cpp

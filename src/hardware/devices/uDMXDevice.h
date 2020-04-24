@@ -9,8 +9,8 @@ class UDMXDevice : public HardwareOutputDevice
 {
 private:
 public:
-    UDMXDevice();
-    virtual ~UDMXDevice();
+    UDMXDevice() = default;
+    virtual ~UDMXDevice() = default;
     
     //Configure the device.
     virtual bool configure(std::unordered_map<string, string> settings);

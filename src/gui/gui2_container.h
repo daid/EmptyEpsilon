@@ -15,7 +15,7 @@ protected:
     std::list<GuiElement*> elements;
 
 public:
-    GuiContainer();
+    GuiContainer() = default;
     virtual ~GuiContainer();
 
 protected:
