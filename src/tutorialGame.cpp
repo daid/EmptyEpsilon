@@ -260,10 +260,6 @@ void TutorialGame::hideAllScreens()
     }
 }
 
-LocalOnlyGame::LocalOnlyGame()
-{
-}
-
 void LocalOnlyGame::update(float delta)
 {
 }

@@ -13,7 +13,7 @@ private:
     bool enable_debug_rendering;
 public:
     GuiCanvas();
-    virtual ~GuiCanvas();
+    virtual ~GuiCanvas() = default;
 
     virtual void render(sf::RenderTarget& window) override;
     virtual void handleKeyPress(sf::Event::KeyEvent key, int unicode) override;

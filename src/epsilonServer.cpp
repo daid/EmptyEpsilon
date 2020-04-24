@@ -27,10 +27,6 @@ EpsilonServer::EpsilonServer()
     }
 }
 
-EpsilonServer::~EpsilonServer()
-{
-}
-
 void EpsilonServer::onNewClient(int32_t client_id)
 {
     LOG(INFO) << "New client: " << client_id;

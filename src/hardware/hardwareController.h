@@ -55,7 +55,7 @@ private:
     std::vector<HardwareMappingEvent> events;
     std::vector<float> channels;
 public:
-    HardwareController();
+    HardwareController() = default;
     ~HardwareController();
     
     void loadConfiguration(string filename);

@@ -7,7 +7,7 @@ class EpsilonServer : public GameServer
 {
 public:
     EpsilonServer();
-    virtual ~EpsilonServer();
+    virtual ~EpsilonServer() = default;
 
     virtual void onNewClient(int32_t client_id) override;
     virtual void onDisconnectClient(int32_t client_id) override;

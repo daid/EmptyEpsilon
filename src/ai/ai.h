@@ -39,7 +39,7 @@ public:
     CpuShip* owner;
 
     ShipAI(CpuShip* owner);
-    virtual ~ShipAI();
+    virtual ~ShipAI() = default;
 
     /**!
      * Run is called every frame to update the AI state and let the AI take actions.
