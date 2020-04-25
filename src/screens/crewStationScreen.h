@@ -50,7 +50,7 @@ private:
         ECrewPosition position;
     };
 
-    ECrewPosition current_position;
+    ECrewPosition current_position = helmsOfficer;
     std::vector<CrewTabInfo> tabs;
     string keyboard_general = "";
     void showNextTab(int offset=1);
