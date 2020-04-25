@@ -22,7 +22,9 @@ ImpulseSound::ImpulseSound(bool enabled)
 
 ImpulseSound::~ImpulseSound()
 {
-    soundManager->stopSound(impulse_sound_id);
+    if (soundManager) {
+        soundManager->stopSound(impulse_sound_id);
+    }
 }
 
 void ImpulseSound::play(string sound_file)
