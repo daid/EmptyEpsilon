@@ -194,6 +194,7 @@ function update(delta)
 	local order = nil
 	local order_target = nil
 	local ship_type = nil
+	local victim_station = nil
 	for _, enemy in ipairs(enemyList) do
 		if enemy:isValid() then
 			enemy_count = enemy_count + 1
@@ -205,21 +206,36 @@ function update(delta)
 						if random(1,100) < 50 then
 							enemy:orderRoaming()
 						else
-							enemy:orderAttack(getPlayerShip(-1))
+							victim_station = nil
+							repeat
+								victim_station = friendlyList[math.random(1,#friendlyList)]
+							until(victim_station ~= nil and victim_station:isValid())
+							local vx, vy = victim_station:getPosition()
+							enemy:orderFlyTowards(vx,vy)
 						end
 					end
 				else
 					if random(1,100) < 50 then
 						enemy:orderRoaming()
 					else
-						endmy:orderAttack(getPlayerShip(-1))
+						victim_station = nil
+						repeat
+							victim_station = friendlyList[math.random(1,#friendlyList)]
+						until(victim_station ~= nil and victim_station:isValid())
+						local vx, vy = victim_station:getPosition()
+						enemy:orderFlyTowards(vx,vy)
 					end
 				end
 			elseif order == "Idle" then
 				if random(1,100) < 50 then
 					enemy:orderRoaming()
 				else
-					enemy:orderAttack(getPlayerShip(-1))
+					victim_station = nil
+					repeat
+						victim_station = friendlyList[math.random(1,#friendlyList)]
+					until(victim_station ~= nil and victim_station:isValid())
+					local vx, vy = victim_station:getPosition()
+					enemy:orderFlyTowards(vx,vy)
 				end
 			end
 			ship_type = enemy:getTypeName()
