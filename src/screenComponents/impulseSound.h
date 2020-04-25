@@ -16,9 +16,9 @@ public:
 
     int getImpulseSoundID() { return impulse_sound_id; }
 
-    virtual void play(string sound_file);
-    virtual void stop();
-    virtual void update(float delta);
+    void play(string sound_file);
+    void stop();
+    void update(float delta);
 };
 
 #endif//IMPULSE_SOUND_H

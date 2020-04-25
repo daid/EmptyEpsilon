@@ -211,10 +211,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         setCallSign(gameGlobalInfo->getNextShipCallsign());
 }
 
-SpaceShip::~SpaceShip()
-{
-}
-
 void SpaceShip::applyTemplateValues()
 {
     for(int n=0; n<max_beam_weapons; n++)

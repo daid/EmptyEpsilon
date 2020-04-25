@@ -62,10 +62,6 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&reputation_points, 1.0);
 }
 
-GameGlobalInfo::~GameGlobalInfo()
-{
-}
-
 P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)
 {
     assert(index >= 0 && index < max_player_ships);
@@ -272,6 +268,15 @@ static int setBanner(lua_State* L)
 /// setBanner(string)
 /// Show a scrolling banner containing this text on the cinematic and top down views.
 REGISTER_SCRIPT_FUNCTION(setBanner);
+
+static int getMissionTime(lua_State* L)
+{
+    lua_pushnumber(L, gameGlobalInfo->elapsed_time);
+    return 1;
+}
+/// getMissionTime()
+/// Return the elapsed time of the mission.
+REGISTER_SCRIPT_FUNCTION(getMissionTime);
 
 static int getPlayerShip(lua_State* L)
 {

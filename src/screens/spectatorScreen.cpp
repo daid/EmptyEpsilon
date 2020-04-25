@@ -19,10 +19,6 @@ SpectatorScreen::SpectatorScreen()
     new GuiIndicatorOverlays(this);
 }
 
-SpectatorScreen::~SpectatorScreen()
-{
-}
-
 void SpectatorScreen::update(float delta)
 {
     float mouse_wheel_delta = InputHandler::getMouseWheelDelta();

@@ -49,7 +49,7 @@ public:
     string image;
 
     ScienceDatabase();
-    virtual ~ScienceDatabase();
+    virtual ~ScienceDatabase() = default;
 
     int32_t getId() { return this->getMultiplayerId(); }
     int32_t getParentId() { return this->parent_id; }

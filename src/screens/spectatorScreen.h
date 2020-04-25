@@ -16,7 +16,7 @@ private:
     sf::Vector2f drag_previous_position;
 public:
     SpectatorScreen();
-    virtual ~SpectatorScreen();
+    virtual ~SpectatorScreen() = default;
     
     virtual void update(float delta);
     

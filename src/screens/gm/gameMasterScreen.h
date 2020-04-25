@@ -73,7 +73,7 @@ public:
     GuiButton* cancel_create_button;
 
     GameMasterScreen();
-    virtual ~GameMasterScreen();
+    virtual ~GameMasterScreen() = default;
     
     virtual void update(float delta);
     

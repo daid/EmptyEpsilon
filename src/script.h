@@ -10,7 +10,7 @@ class Script : public ScriptObject
 {
 public:
     Script();
-    virtual ~Script();
+    virtual ~Script() = default;
 };
 
 #endif//SCRIPT_H

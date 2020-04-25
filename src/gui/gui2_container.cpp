@@ -3,10 +3,6 @@
 #include "gui2_canvas.h"
 #include "input.h"
 
-GuiContainer::GuiContainer()
-{
-}
-
 GuiContainer::~GuiContainer()
 {
     for(GuiElement* element : elements)

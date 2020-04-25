@@ -11,10 +11,6 @@ ThreatLevelEstimate::ThreatLevelEstimate()
     threat_low_func = nullptr;
 }
 
-ThreatLevelEstimate::~ThreatLevelEstimate()
-{
-}
-
 void ThreatLevelEstimate::update(float delta)
 {
     if (!gameGlobalInfo)
