@@ -392,7 +392,7 @@ void GuiRadarView::drawGhostDots(sf::RenderTarget& window)
     for(unsigned int n=0; n<ghost_dots.size(); n++)
     {
         ghost_points[n].position = worldToScreen(ghost_dots[n].position);
-        ghost_points[n].color = sf::Color(255, 255, 255, 255 * ((ghost_dots[n].end_of_life - engine->getElapsedTime()) / GhostDot::total_lifetime));
+        ghost_points[n].color = sf::Color(255, 255, 255, 255 * std::max(((ghost_dots[n].end_of_life - engine->getElapsedTime()) / GhostDot::total_lifetime), 0.f));
     }
     window.draw(ghost_points);
 }
