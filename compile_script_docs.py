@@ -6,6 +6,9 @@
 # It then outputs all the documentation (comments starting with `///`)
 # as HTML to stdout so it can be stored on disk.
 #
+# The optional command-line argument is used as target file,
+# e.g. `python compile_script_docs.py script_reference.html`.
+#
 # This script should run in both Python 2 and 3.
 import re
 import os
