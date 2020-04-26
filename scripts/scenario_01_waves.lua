@@ -279,6 +279,20 @@ function update(delta)
 		globalMessage("Wave cleared!");
 	end
 	if friendly_count == 0 then
+		globalMessage(string.format("Stopped on Wave %d", waveNumber));
 		victory("Ghosts");	--Victory for the Ghosts (== defeat for the players)
+	end
+	for pidx=1,32 do
+		local p = getPlayerShip(pidx)
+		if p ~= nil and p:isValid() then
+			if p:hasPlayerAtPosition("Relay") then
+				p.wave_info = "wave_info"
+				p:addCustomInfo("Relay",p.wave_info,string.format(_("Wave %d"), waveNumber))
+			end
+			if p:hasPlayerAtPosition("Operations") then
+				p.wave_info_ops = "wave_info_ops"
+				p:addCustomInfo("Operations",p.wave_info_ops,string.format(_("Wave %d"), waveNumber))
+			end
+		end
 	end
 end
