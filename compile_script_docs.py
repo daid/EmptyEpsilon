@@ -229,6 +229,16 @@ class DocumentationGenerator(object):
         stream.write('As well as check the already existing scenario and ship data files on how to get started.</p>')
         stream.write('</div>\n')
 
+        # TODO modify the script and read the constants from the cpp files
+        stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
+        stream.write('<p>Some of the types in the parameters:</p>')
+        stream.write('<ul>\n')
+        stream.write('<li>EAlertLevel: "Normal", "YELLOW ALERT", "RED ALERT" (<code>playerSpaceship.cpp</code>)</li>')
+        stream.write('<li>ECrewPosition: "Helms", "Weapons", "Engineering", "Science", "Relay" (<code>playerInfo.cpp</code>)</li>')
+        stream.write('<li>ESystem: "reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield"</li>')
+        stream.write('</ul>\n')
+        stream.write('</div>\n')
+
         stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
         stream.write('<h2>Objects</h2>\n')
         stream.write('<ul>')
