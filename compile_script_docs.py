@@ -224,9 +224,10 @@ class DocumentationGenerator(object):
 
         stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
         stream.write('<h1>EmptyEpsilon Scripting Reference</h1>')
-        stream.write('This is the EmptyEpsilon script reference for this version of EmptyEpsilon. By no means this is a guide to help you scripting, you should check <a href="http://emptyepsilon.org/">emptyepsilon.org</a> for the guide on scripting.')
-        stream.write('As well as check the already existing scenario and ship data files on how to get started.')
-        stream.write('</div>')
+        stream.write('<p>This is the EmptyEpsilon script reference for this version of EmptyEpsilon.</p>')
+        stream.write('<p>By no means this is a guide to help you scripting, you should check <a href="http://emptyepsilon.org/">emptyepsilon.org</a> for the guide on scripting. ')
+        stream.write('As well as check the already existing scenario and ship data files on how to get started.</p>')
+        stream.write('</div>\n')
 
         stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
         stream.write('<h2>Objects</h2>\n')
