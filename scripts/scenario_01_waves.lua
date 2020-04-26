@@ -199,34 +199,7 @@ function update(delta)
 		if enemy:isValid() then
 			enemy_count = enemy_count + 1
 			order = enemy:getOrder()
-			if order == "Defend Target" or order == "Attack" then
-				order_target = enemy:getOrderTarget()
-				if order_target ~= nil then
-					if not order_target:isValid() then
-						if random(1,100) < 50 then
-							enemy:orderRoaming()
-						else
-							victim_station = nil
-							repeat
-								victim_station = friendlyList[math.random(1,#friendlyList)]
-							until(victim_station ~= nil and victim_station:isValid())
-							local vx, vy = victim_station:getPosition()
-							enemy:orderFlyTowards(vx,vy)
-						end
-					end
-				else
-					if random(1,100) < 50 then
-						enemy:orderRoaming()
-					else
-						victim_station = nil
-						repeat
-							victim_station = friendlyList[math.random(1,#friendlyList)]
-						until(victim_station ~= nil and victim_station:isValid())
-						local vx, vy = victim_station:getPosition()
-						enemy:orderFlyTowards(vx,vy)
-					end
-				end
-			elseif order == "Idle" then
+			if order == "Idle" then
 				if random(1,100) < 50 then
 					enemy:orderRoaming()
 				else
