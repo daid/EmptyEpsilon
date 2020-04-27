@@ -5,6 +5,8 @@
 #include "main.h"
 
 #include "scriptInterface.h"
+
+/// A warp jammer.
 REGISTER_SCRIPT_SUBCLASS(WarpJammer, SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, setRange);
