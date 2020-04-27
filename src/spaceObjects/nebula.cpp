@@ -6,7 +6,7 @@
 
 #include "scriptInterface.h"
 
-// Nebulae block long-range radar in a 5U range.
+/// Nebulae block long-range radar in a 5U range.
 REGISTER_SCRIPT_SUBCLASS(Nebula, SpaceObject)
 {
 }
