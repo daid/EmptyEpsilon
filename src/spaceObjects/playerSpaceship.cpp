@@ -87,6 +87,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMainScreenSetting);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMainScreenOverlay);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandScan);
+    /// Set power of the system to e.g. 1.5 ("150 percent")
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetSystemPowerRequest);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetSystemCoolantRequest);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandDock);
