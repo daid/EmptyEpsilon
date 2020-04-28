@@ -29,7 +29,7 @@ function init()
 	spawnWaveDelay = nil
 	enemyList = {}
 	friendlyList = {}
-	
+
 	PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
 
 	for n=1, 2 do
@@ -59,7 +59,7 @@ function init()
 			VisualAsteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2)
 		end
 	end
-	
+
 	spawnWave()
 
 	for n=1, 6 do
@@ -94,7 +94,7 @@ end
 function spawnWave()
 	waveNumber = waveNumber + 1
 	friendlyList[1]:addReputationPoints(150 + waveNumber * 15)
-	
+
 	enemyList = {}
 	if getScenarioVariation() == "Hard" then
 		totalScoreRequirement = math.pow(waveNumber * 1.5 + 4, 1.3) * 10;
@@ -103,7 +103,7 @@ function spawnWave()
 	else
 		totalScoreRequirement = math.pow(waveNumber, 1.3) * 10;
 	end
-	
+
 	scoreInSpawnPoint = 0
 	spawnDistance = 20000
 	spawnPointLeader = nil
@@ -158,7 +158,7 @@ function spawnWave()
 			ship:setTemplate("Odin");
 			score = 250
 		end
-		
+
 		if score > totalScoreRequirement * 1.1 + 5 then
 			ship:destroy()
 		else
@@ -173,7 +173,7 @@ function spawnWave()
 			spawnPointLeader = nil
 		end
 	end
-	
+
 	globalMessage(string.format(_("Wave %d"), waveNumber));
 end
 
