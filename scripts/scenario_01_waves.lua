@@ -114,6 +114,7 @@ end
 
 function spawnWave()
 	waveNumber = waveNumber + 1
+	getPlayerShip(-1):addToShipLog("Wave " .. waveNumber, "red")
 	friendlyList[1]:addReputationPoints(150 + waveNumber * 15)
 
 	enemyList = {}
@@ -237,6 +238,7 @@ function update(delta)
 	if enemy_count == 0 then
 		spawnWaveDelay = 15.0;
 		globalMessage("Wave cleared!");
+		getPlayerShip(-1):addToShipLog("Wave " .. waveNumber .. " cleared.", "green")
 	end
 	-- ... or lose
 	if friendly_count == 0 then
