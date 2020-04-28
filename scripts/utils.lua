@@ -158,8 +158,8 @@ function placeRandomAroundPoint(object_type, amount, dist_min, dist_max, x0, y0)
     for n=1,amount do
         local r = random(0, 360)
         local distance = random(dist_min, dist_max)
-        x = x0 + math.cos(r / 180 * math.pi) * distance
-        y = y0 + math.sin(r / 180 * math.pi) * distance
+        local x = x0 + math.cos(r / 180 * math.pi) * distance
+        local y = y0 + math.sin(r / 180 * math.pi) * distance
         object_type():setPosition(x, y)
     end
 end
