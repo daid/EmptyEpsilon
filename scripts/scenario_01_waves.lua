@@ -33,17 +33,20 @@ function init()
 
 	PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
 
+	-- Random friendly stations
 	for n=1, 2 do
 		table.insert(friendlyList, SpaceStation():setTemplate(randomStationTemplate()):setFaction("Human Navy"):setPosition(random(-5000, 5000), random(-5000, 5000)))
 	end
 	friendlyList[1]:addReputationPoints(150.0)
 
+	-- Random nebulae
 	local x, y = vectorFromAngle(random(0, 360), 15000)
 	for n=1, 5 do
 		local xx, yy = vectorFromAngle(random(0, 360), random(2500, 10000))
 		Nebula():setPosition(x + xx, y + yy)
 	end
 
+	-- Random asteroids
 	local a, a2, d
 	local dx1, dy1
 	local dx2, dy2
@@ -64,11 +67,15 @@ function init()
 		end
 	end
 
+	-- First enemy wave
 	spawnWave()
 
+	-- Random neutral stations
 	for n=1, 6 do
 		setCirclePos(SpaceStation():setTemplate(randomStationTemplate()):setFaction("Independent"), 0, 0, random(0, 360), random(15000, 30000))
 	end
+
+	-- Random transports
 	Script():run("util_random_transports.lua")
 end
 
@@ -102,6 +109,8 @@ function spawnWave()
 	friendlyList[1]:addReputationPoints(150 + waveNumber * 15)
 
 	enemyList = {}
+
+	-- Calculate score of wave
 	if getScenarioVariation() == "Hard" then
 		totalScoreRequirement = math.pow(waveNumber * 1.5 + 4, 1.3) * 10;
 	elseif getScenarioVariation() == "Easy" then
@@ -117,6 +126,8 @@ function spawnWave()
 	while totalScoreRequirement > 0 do
 		local ship = CpuShip():setFaction("Ghosts");
 		ship:setPosition(random(-spawn_range_x, spawn_range_x) + spawn_x, random(-spawn_range_y, spawn_range_y) + spawn_y);
+
+		-- Make the first ship the leader at this spawn point
 		if spawnPointLeader == nil then
 			ship:orderRoaming()
 			spawnPointLeader = ship
@@ -124,6 +135,7 @@ function spawnWave()
 			ship:orderDefendTarget(spawnPointLeader)
 		end
 
+		-- Set ship type
 		type = random(0, 10)
 		score = 9999
 		if type < 2 then
@@ -165,6 +177,7 @@ function spawnWave()
 			score = 250
 		end
 
+		-- Destroy ship if it was too strong else take it
 		if score > totalScoreRequirement * 1.1 + 5 then
 			ship:destroy()
 		else
@@ -172,6 +185,8 @@ function spawnWave()
 			totalScoreRequirement = totalScoreRequirement - score
 			scoreInSpawnPoint = scoreInSpawnPoint + score
 		end
+
+		-- Start new spawn point farther away
 		if scoreInSpawnPoint > totalScoreRequirement * 2.0 then
 			spawnDistance = spawnDistance + 5000
 			spawn_x, spawn_y, spawn_range_x, spawn_range_y = randomSpawnPointInfo(spawnDistance)
@@ -184,6 +199,7 @@ function spawnWave()
 end
 
 function update(delta)
+	-- Show countdown, spawn wave
 	if spawnWaveDelay ~= nil then
 		spawnWaveDelay = spawnWaveDelay - delta
 		if spawnWaveDelay < 5 then
@@ -195,6 +211,8 @@ function update(delta)
 		end
 		return
 	end
+
+	-- Count enemies and friends
 	local enemy_count = 0
 	local friendly_count = 0
 	for _, enemy in ipairs(enemyList) do
@@ -207,10 +225,12 @@ function update(delta)
 			friendly_count = friendly_count + 1
 		end
 	end
+	-- Continue ...
 	if enemy_count == 0 then
 		spawnWaveDelay = 15.0;
 		globalMessage("Wave cleared!");
 	end
+	-- ... or lose
 	if friendly_count == 0 then
 		victory("Ghosts");  --Victory for the Ghosts (== defeat for the players)
 	end
