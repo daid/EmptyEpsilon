@@ -34,6 +34,13 @@ function init()
 
 	PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
 
+	-- Give the mission to the (first) player ship
+	local text = [[At least one friendly base must survive.
+Destroy all enemy ships. After a short delay, the next wave will appear.
+And so on ...
+How many waves can you destroy?]]
+	getPlayerShip(-1):addToShipLog(text, "white")
+
 	-- Random friendly stations
 	for n=1, 2 do
 		table.insert(friendlyList, SpaceStation():setTemplate(randomStationTemplate()):setFaction("Human Navy"):setPosition(random(-5000, 5000), random(-5000, 5000)))
