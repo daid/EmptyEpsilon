@@ -249,6 +249,7 @@ static int globalMessage(lua_State* L)
 }
 /// globalMessage(string)
 /// Show a global message on the main screens of all active player ships.
+/// The message is shown for 5 sec; new messages replace the old immediately.
 REGISTER_SCRIPT_FUNCTION(globalMessage);
 
 static int setBanner(lua_State* L)
