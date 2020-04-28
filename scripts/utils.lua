@@ -187,8 +187,8 @@ function placeRandomObjects(object_type, density, perlin_z, x, y, x_grids, y_gri
     local perlin_magic_z = perlin_z
 
     -- Perlin noise is not random, so we'll pick a random spot in its distribution
-    perlin_section_i = random(0, 1000)
-    perlin_section_j = random(0, 1000)
+    local perlin_section_i = random(0, 1000)
+    local perlin_section_j = random(0, 1000)
 
     -- Create a XY intensity map
     for i=1,x_grids do
