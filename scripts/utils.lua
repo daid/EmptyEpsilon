@@ -94,7 +94,7 @@ end
 -- at a heading of 45 degrees, run
 --   setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 100, -100, 45, 10000)
 function setCirclePos(obj, x, y, angle, distance)
-    dx, dy = vectorFromAngle(angle, distance)
+    local dx, dy = vectorFromAngle(angle, distance)
     return obj:setPosition(x + dx, y + dy)
 end
 
