@@ -120,6 +120,7 @@ function spawnWave()
 	enemyList = {}
 
 	-- Calculate score of wave
+	local totalScoreRequirement  -- actually: remainingScoreRequirement
 	if getScenarioVariation() == "Hard" then
 		totalScoreRequirement = math.pow(waveNumber * 1.5 + 4, 1.3) * 10;
 	elseif getScenarioVariation() == "Easy" then
@@ -145,8 +146,8 @@ function spawnWave()
 		end
 
 		-- Set ship type
-		type = random(0, 10)
-		score = 9999
+		local type = random(0, 10)  -- TODO rename variable
+		local score = 9999
 		if type < 2 then
 			if irandom(1, 100) < 80 then
 				ship:setTemplate("MT52 Hornet");
