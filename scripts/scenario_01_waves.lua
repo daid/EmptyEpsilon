@@ -25,6 +25,7 @@ function randomStationTemplate()
 end
 
 function init()
+	-- global variables:
 	waveNumber = 0
 	spawnWaveDelay = nil
 	enemyList = {}
@@ -43,6 +44,9 @@ function init()
 		Nebula():setPosition(x + xx, y + yy)
 	end
 
+	local a, a2, d
+	local dx1, dy1
+	local dx2, dy2
 	for cnt=1,random(2, 7) do
 		a = random(0, 360)
 		a2 = random(0, 360)
@@ -69,6 +73,8 @@ function init()
 end
 
 function randomSpawnPointInfo(distance)
+	local x, y
+	local rx, ry
 	if random(0, 100) < 50 then
 		if random(0, 100) < 50 then
 			x = -distance
@@ -104,12 +110,12 @@ function spawnWave()
 		totalScoreRequirement = math.pow(waveNumber, 1.3) * 10;
 	end
 
-	scoreInSpawnPoint = 0
-	spawnDistance = 20000
-	spawnPointLeader = nil
-	spawn_x, spawn_y, spawn_range_x, spawn_range_y = randomSpawnPointInfo(spawnDistance)
+	local scoreInSpawnPoint = 0
+	local spawnDistance = 20000
+	local spawnPointLeader = nil
+	local spawn_x, spawn_y, spawn_range_x, spawn_range_y = randomSpawnPointInfo(spawnDistance)
 	while totalScoreRequirement > 0 do
-		ship = CpuShip():setFaction("Ghosts");
+		local ship = CpuShip():setFaction("Ghosts");
 		ship:setPosition(random(-spawn_range_x, spawn_range_x) + spawn_x, random(-spawn_range_y, spawn_range_y) + spawn_y);
 		if spawnPointLeader == nil then
 			ship:orderRoaming()
@@ -189,8 +195,8 @@ function update(delta)
 		end
 		return
 	end
-	enemy_count = 0
-	friendly_count = 0
+	local enemy_count = 0
+	local friendly_count = 0
 	for _, enemy in ipairs(enemyList) do
 		if enemy:isValid() then
 			enemy_count = enemy_count + 1
