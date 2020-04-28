@@ -153,7 +153,6 @@ function mergeTables(table_a, table_b)
     end
 end
 
-
 -- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0)
 function placeRandomAroundPoint(object_type, amount, dist_min, dist_max, x0, y0)
     for n=1,amount do
@@ -165,12 +164,11 @@ function placeRandomAroundPoint(object_type, amount, dist_min, dist_max, x0, y0)
     end
 end
 
-
 -- Place semi-random object_types around point (x,y) in a (x_grids by y_grids) area
 -- Perlin Noise is used to create a sort of natural look to the created objects.
 -- Use the perlin_z-parameter together with density to control amound of placed objects
 -- Sensible values for perlin_z are in a range of {0.1 .. 0.5}
--- 
+--
 -- Example:
 --
 --   -- Creates a 10x10 grid space filled with some asteroids and nebulas
@@ -182,11 +180,10 @@ function placeRandomObjects(object_type, density, perlin_z, x, y, x_grids, y_gri
     require("perlin_noise.lua")
     perlin:load()
 
-
     -- Size of EE grid
     local grid_size = 20000
 
-    -- Z-axis of Perlin distribution. 
+    -- Z-axis of Perlin distribution.
     local perlin_magic_z = perlin_z
 
     -- Perlin noise is not random, so we'll pick a random spot in its distribution
