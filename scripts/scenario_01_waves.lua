@@ -121,35 +121,35 @@ function spawnWave()
 		type = random(0, 10)
 		score = 9999
 		if type < 2 then
-            if irandom(1, 100) < 80 then
-                ship:setTemplate("MT52 Hornet");
-            else
-                ship:setTemplate("MU52 Hornet");
-            end
+			if irandom(1, 100) < 80 then
+				ship:setTemplate("MT52 Hornet");
+			else
+				ship:setTemplate("MU52 Hornet");
+			end
 			score = 5
-        elseif type < 3 then
-            if irandom(1, 100) < 80 then
-                ship:setTemplate("Adder MK5")
-            else
-                ship:setTemplate("WX-Lindworm")
-            end
-            score = 7
+		elseif type < 3 then
+			if irandom(1, 100) < 80 then
+				ship:setTemplate("Adder MK5")
+			else
+				ship:setTemplate("WX-Lindworm")
+			end
+			score = 7
 		elseif type < 6 then
-            if irandom(1, 100) < 80 then
-                ship:setTemplate("Phobos T3");
-            else
-                ship:setTemplate("Piranha F12");
-            end
+			if irandom(1, 100) < 80 then
+				ship:setTemplate("Phobos T3");
+			else
+				ship:setTemplate("Piranha F12");
+			end
 			score = 15
 		elseif type < 7 then
 			ship:setTemplate("Ranus U");
 			score = 25
 		elseif type < 8 then
-            if irandom(1, 100) < 50 then
-                ship:setTemplate("Stalker Q7");
-            else
-                ship:setTemplate("Stalker R7");
-            end
+			if irandom(1, 100) < 50 then
+				ship:setTemplate("Stalker Q7");
+			else
+				ship:setTemplate("Stalker R7");
+			end
 			score = 25
 		elseif type < 9 then
 			ship:setTemplate("Atlantis X23");
@@ -206,6 +206,6 @@ function update(delta)
 		globalMessage("Wave cleared!");
 	end
 	if friendly_count == 0 then
-		victory("Ghosts");	--Victory for the Ghosts (== defeat for the players)
+		victory("Ghosts");  --Victory for the Ghosts (== defeat for the players)
 	end
 end
