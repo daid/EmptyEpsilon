@@ -178,11 +178,12 @@ ShipSelectionScreen::ShipSelectionScreen()
     {
         GuiSelector* ship_template_selector = new GuiSelector(left_container, "CREATE_SHIP_SELECTOR", nullptr);
         // List only ships with templates designated for player use.
-        std::vector<string> template_names = ShipTemplate::getTemplateNameList(ShipTemplate::PlayerShip);
+        std::vector<std::pair<string, string> > template_names = ShipTemplate::getTemplateNameList(ShipTemplate::PlayerShip);
         std::sort(template_names.begin(), template_names.end());
 
-        for(string& template_name : template_names)
+        for(std::pair<string, string> template_pair : template_names)
         {
+            string& template_name = template_pair.second;
             P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
             ship_template_selector->addEntry(template_name + " (" + ship_template->getClass() + ":" + ship_template->getSubClass() + ")", template_name);
         }

@@ -316,12 +316,12 @@ std::vector<string> ShipTemplate::getAllTemplateNames()
     return ret;
 }
 
-std::vector<string> ShipTemplate::getTemplateNameList(TemplateType type)
+std::vector<std::pair<string, string> > ShipTemplate::getTemplateNameList(TemplateType type)
 {
-    std::vector<string> ret;
+    std::vector<std::pair<string, string> > ret;
     for(std::unordered_map<string, P<ShipTemplate> >::iterator i = templateMap.begin(); i != templateMap.end(); i++)
         if (i->second->getType() == type)
-            ret.push_back(i->first);
+            ret.push_back( make_pair(i->second->getLocaleName(),i->first) );
     return ret;
 }
 

@@ -79,7 +79,11 @@ void DatabaseViewComponent::fillListBox()
         item_list->addEntry(tr("Back"), "");
         foreach(ScienceDatabase, sd, selected_entry->items)
         {
-            item_list->addEntry(sd->getName(), sd->getName());
+            if (sd->locale_name == "") {
+                item_list->addEntry(sd->getName(), sd->getName());
+            } else {
+                item_list->addEntry(sd->locale_name, sd->locale_name);
+            }
         }
     }
 }

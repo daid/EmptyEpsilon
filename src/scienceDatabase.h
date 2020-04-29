@@ -24,6 +24,7 @@ public:
     P<ScienceDatabase> parent;
 
     string name;
+    string locale_name;
     std::vector<ScienceDatabaseKeyValue> keyValuePairs;
     string longDescription;
     P<ModelData> model_data;
@@ -44,6 +45,7 @@ public:
     string getName() {return this->name;}
 private:
     string directionLabel(float direction);
+
 
 public: /* static members */
     static PVector<ScienceDatabase> science_databases;

@@ -1274,6 +1274,7 @@ std::unordered_map<string, string> SpaceShip::getGMInfo()
 {
     std::unordered_map<string, string> ret;
     ret = ShipTemplateBasedObject::getGMInfo();
+    ret["Type"] = ship_template->getLocaleName();
     return ret;
 }
 
