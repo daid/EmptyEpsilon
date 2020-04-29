@@ -49,10 +49,6 @@ ScienceDatabase::ScienceDatabase()
     name = "???";
 }
 
-ScienceDatabase::~ScienceDatabase()
-{
-}
-
 void ScienceDatabase::destroy()
 {
     // if this code is used in the client, the server could try to destroy an object that has already been destroyed
