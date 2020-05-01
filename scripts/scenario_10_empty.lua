@@ -5,6 +5,7 @@
 --- Scenario
 -- @script scenario_10_empty
 
+--- Initialize the scenario.
 function init()
     --SpaceStation():setPosition(1000, 1000):setTemplate('Small Station'):setFaction("Human Navy"):setRotation(random(0, 360))
     --SpaceStation():setPosition(-1000, 1000):setTemplate('Medium Station'):setFaction("Human Navy"):setRotation(random(0, 360))
@@ -64,9 +65,9 @@ function init()
     )
 end
 
+--- Clean up the current play field. Find all objects and destroy everything that is not a player.
+-- If it is a player, position him in the center of the scenario.
 function cleanup()
-    -- Clean up the current play field. Find all objects and destroy everything that is not a player.
-    -- If it is a player, position him in the center of the scenario.
     for _, obj in ipairs(getAllObjects()) do
         if obj.typeName == "PlayerSpaceship" then
             obj:setPosition(random(-100, 100), random(-100, 100))
@@ -76,6 +77,7 @@ function cleanup()
     end
 end
 
+--- Update the scenario.
 function update(delta)
     -- No victory condition
 end

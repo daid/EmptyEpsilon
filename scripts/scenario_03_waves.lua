@@ -17,6 +17,9 @@ require("utils.lua")
 --   setCirclePos(obj, x, y, angle, distance)
 --      Returns the object with its position set to the resulting coordinates.
 
+--- Return template name for station of random size.
+--
+-- @treturn string
 function randomStationTemplate()
     if random(0, 100) < 10 then
         return "Huge Station"
@@ -30,6 +33,7 @@ function randomStationTemplate()
     return "Small Station"
 end
 
+--- Initialize the scenario.
 function init()
     -- global variables:
     waveNumber = 0
@@ -213,6 +217,7 @@ function spawnWave()
     globalMessage(string.format(_("Wave %d"), waveNumber))
 end
 
+--- Update the scenario.
 function update(delta)
     -- Show countdown, spawn wave
     if spawnWaveDelay ~= nil then
