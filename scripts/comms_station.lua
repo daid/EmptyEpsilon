@@ -37,6 +37,8 @@ function mainMenu()
             neutral = 0.5
         }
     })
+
+    -- comms_data is used globally
     comms_data = comms_target.comms_data
 
     if player:isEnemy(comms_target) then
@@ -164,7 +166,7 @@ function handleUndockedState()
                 for n=1,player:getWaypointCount() do
                     addCommsReply("WP" .. n, function()
                         if player:takeReputationPoints(getServiceCost("reinforcements")) then
-                            ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
+                            local ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
                             setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n);
                         else
                             setCommsMessage("Not enough reputation!");
