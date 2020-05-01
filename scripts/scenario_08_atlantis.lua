@@ -5,6 +5,9 @@
 --- This scenario is played with exactly one player ship: the Atlantis Atlantis-1.
 -- Type: Mission
 
+--- Scenario
+-- @script scenario_08_atlantis
+
 --[[Problems
 no rep at start....
 Unclear who to contact for first mission

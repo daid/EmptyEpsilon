@@ -1,3 +1,7 @@
+--- Script for supply drop.
+--
+-- @script supply_drop
+
 function init()
 	my_ship = CpuShip():setCommsScript("comms_supply_drop.lua"):setFactionId(faction_id):setPosition(position_x, position_y):setTemplate("Flavia"):setScanned(true):orderFlyTowardsBlind(target_x, target_y)
 	state = 0

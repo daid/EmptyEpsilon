@@ -9,6 +9,9 @@
 -- Variation[Hard]: Places more enemies. Recommended if you have multiple player-controlled ships.
 -- Variation[Extreme]: Places many enemies. You're pretty surely overwhelmed.
 
+--- Scenario
+-- @script scenario_00_basic
+
 require("utils.lua")
 -- For this scenario, utils.lua provides:
 --   vectorFromAngle(angle, length)

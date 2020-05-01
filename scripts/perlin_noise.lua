@@ -1,6 +1,12 @@
--- Lua Perlin Noise generator
--- Credits go to GHandel and Doug Currie (https://stackoverflow.com/questions/33425333/lua-perlin-noise-generation-getting-bars-rather-than-squares)
--- original code by Ken Perlin: http://mrl.nyu.edu/~perlin/noise/
+--- Lua Perlin Noise generator
+--
+-- Usage: See `utils.placeRandomObjects` in `utils.lua`.
+--
+-- Credits go to GHandel and Doug Currie: <https://stackoverflow.com/questions/33425333/lua-perlin-noise-generation-getting-bars-rather-than-squares>
+--
+-- Original code by Ken Perlin: <http://mrl.nyu.edu/~perlin/noise/>
+--
+-- @module perlin_noise
 
 perlin = {}
 perlin.p = {}

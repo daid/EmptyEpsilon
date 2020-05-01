@@ -5,7 +5,10 @@
 --- This scenario is played with exactly one player ship: the Atlantis Epsilon.
 -- Type: Mission
 
--- Init is run when the scenario is started. Create your initial world
+--- Scenario
+-- @script scenario_02_beacon
+
+--- Init is run when the scenario is started. Create your initial world.
 function init()
     -- Create the main ship for the players.
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
@@ -359,7 +362,8 @@ function distance(obj1, obj2)
     return math.sqrt(xd * xd + yd * yd)
 end
 
--- Place random objects in a line, from point x1,y1 to x2,y2 with a random distance of random_amount
+--- Place random objects in a line, from point `x1`, `y1` to `x2`, `y2`
+-- with a random distance of `random_amount`.
 function placeRandom(object_type, amount, x1, y1, x2, y2, random_amount)
     for n = 1, amount do
         local f = random(0, 1)

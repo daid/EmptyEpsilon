@@ -5,6 +5,9 @@
 --- (The scenario can be won with a single Atlantis.)
 -- Type: Basic
 
+--- Scenario
+-- @script scenario_05_surrounded
+
 function setCirclePos(obj, angle, distance)
     obj:setPosition(math.sin(angle / 180 * math.pi) * distance, -math.cos(angle / 180 * math.pi) * distance)
 end

@@ -4,6 +4,9 @@
 -- Variation[Large]: Larger battle, normally it's about 30 vs 30 ships. This increases this to 100 vs 100 ships.
 -- Variation[Huge]: Huge battle, normally it's about 30 vs 30 ships. This increases this to 500 vs 500 ships.
 
+--- Scenario
+-- @script scenario_06_battlefield
+
 function setCirclePos(obj, x, y, angle, distance)
     obj:setPosition(x + math.sin(angle / 180 * math.pi) * distance, y + -math.cos(angle / 180 * math.pi) * distance)
 end
