@@ -4,6 +4,10 @@
 --
 -- **Changelog**
 --
+-- *Version 0.6* (2020.05)
+--
+-- - Add the constant `MAX_PLAYER_SHIPS`.
+--
 -- *Version 0.5* (2020.05)
 --
 -- - Add `SYS_REACTOR` etc. and the array `SYSTEMS`.
@@ -14,6 +18,21 @@
 --
 -- @module ee
 -- @author Tom
+
+--- Playerships.
+-- @section playerships
+
+--- Maximum number of player spaceships.
+--
+-- @usage
+-- for index = 1, MAX_PLAYER_SHIPS do
+--   local pship = getPlayerShip(index)
+--   if pship then
+--     -- do something
+--     print(index, pship:getCallSign())
+--   end
+-- end
+MAX_PLAYER_SHIPS = 32
 
 --- Systems.
 --
