@@ -8,6 +8,7 @@
 --
 -- - Add the constant `MAX_PLAYER_SHIPS`.
 -- - Add missiles and the array `MISSILE_TYPES`.
+-- - Add alert levels and the array `ALERT_LEVELS`.
 --
 -- *Version 0.5* (2020.05)
 --
@@ -108,4 +109,24 @@ SYSTEMS = {
   SYS_JUMPDRIVE,
   SYS_FRONTSHIELD,
   SYS_REARSHIELD
+}
+
+--- Alert Levels.
+--
+-- See `playerSpaceship.cpp`.
+--
+-- @section alert_levels
+
+--- `"Normal"` alert
+ALERT_NORMAL = "Normal"
+--- `"YELLOW ALERT"`
+ALERT_YELLOW = "YELLOW ALERT"
+--- `"RED ALERT"`
+ALERT_RED = "RED ALERT"
+
+--- Alert levels as array.
+ALERT_LEVELS = {
+  ALERT_NORMAL,
+  ALERT_YELLOW,
+  ALERT_RED
 }
