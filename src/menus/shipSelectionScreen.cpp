@@ -201,6 +201,7 @@ ShipSelectionScreen::ShipSelectionScreen()
                 ship->target_rotation = ship->getRotation();
                 ship->setPosition(sf::Vector2f(random(-100, 100), random(-100, 100)));
                 my_player_info->commandSetShipId(ship->getMultiplayerId());
+                gameGlobalInfo->on_new_player_ship.call(ship);
             }
         }))->setPosition(0, 680, ATopCenter)->setSize(490, 50);
 

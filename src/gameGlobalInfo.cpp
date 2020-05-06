@@ -413,3 +413,12 @@ static int playSoundFile(lua_State* L)
 /// Play a sound file on the server. Will work with any file supported by SFML (.wav, .ogg, .flac)
 /// Note that the sound is only played on the server. Not on any of the clients.
 REGISTER_SCRIPT_FUNCTION(playSoundFile);
+
+static int onNewPlayerShip(lua_State* L)
+{
+    int idx = 1;
+    convert<ScriptSimpleCallback>::param(L, idx, gameGlobalInfo->on_new_player_ship);
+    return 0;
+}
+/// Register a callback function that is called when a new ship is created on the ship selection screen.
+REGISTER_SCRIPT_FUNCTION(onNewPlayerShip);
