@@ -7,6 +7,7 @@
 -- *Version 0.6* (2020.05)
 --
 -- - Add the constant `MAX_PLAYER_SHIPS`.
+-- - Add missiles and the array `MISSILE_TYPES`.
 --
 -- *Version 0.5* (2020.05)
 --
@@ -33,6 +34,29 @@
 --   end
 -- end
 MAX_PLAYER_SHIPS = 32
+
+--- Missiles.
+-- @section missile_types
+
+--- `"Homing"`
+MISSILE_HOMING = "Homing"
+--- `"Nuke"`
+MISSILE_NUKE = "Nuke"
+--- `"Mine"`
+MISSILE_MINE = "Mine"
+--- `"EMP"`
+MISSILE_EMP = "EMP"
+--- `"HVLI"`
+MISSILE_HVLI = "HVLI"
+
+--- Missile types as array
+MISSILE_TYPES = {
+  MISSILE_HOMING,
+  MISSILE_NUKE,
+  MISSILE_MINE,
+  MISSILE_EMP,
+  MISSILE_HVLI
+}
 
 --- Systems.
 --
