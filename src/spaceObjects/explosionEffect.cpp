@@ -25,6 +25,10 @@ ExplosionEffect::ExplosionEffect()
     registerMemberReplication(&on_radar);
 }
 
+ExplosionEffect::~ExplosionEffect()
+{
+}
+
 #if FEATURE_3D_RENDERING
 void ExplosionEffect::draw3DTransparent()
 {

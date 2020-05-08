@@ -62,6 +62,10 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&reputation_points, 1.0);
 }
 
+GameGlobalInfo::~GameGlobalInfo()
+{
+}
+
 P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)
 {
     assert(index >= 0 && index < max_player_ships);

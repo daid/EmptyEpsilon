@@ -43,6 +43,10 @@ BeamEffect::BeamEffect()
     registerMemberReplication(&fire_ring);
 }
 
+BeamEffect::~BeamEffect()
+{
+}
+
 #if FEATURE_3D_RENDERING
 void BeamEffect::draw3DTransparent()
 {
