@@ -25,6 +25,11 @@ ExplosionEffect::ExplosionEffect()
     registerMemberReplication(&on_radar);
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
+ExplosionEffect::~ExplosionEffect()
+{
+}
+
 #if FEATURE_3D_RENDERING
 void ExplosionEffect::draw3DTransparent()
 {

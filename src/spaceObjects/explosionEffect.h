@@ -15,7 +15,7 @@ class ExplosionEffect : public SpaceObject, public Updatable
     bool on_radar;
 public:
     ExplosionEffect();
-    virtual ~ExplosionEffect() = default;
+    virtual ~ExplosionEffect();
 
 #if FEATURE_3D_RENDERING
     virtual void draw3DTransparent();
