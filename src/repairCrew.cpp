@@ -22,6 +22,11 @@ RepairCrew::RepairCrew()
     repairCrewList.push_back(this);
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
+RepairCrew::~RepairCrew()
+{
+}
+
 /* struct PathNode
 {
     ERepairCrewDirection arrive_direction;

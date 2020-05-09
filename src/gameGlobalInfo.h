@@ -92,7 +92,7 @@ public:
     ScriptSimpleCallback on_new_player_ship;
 
     GameGlobalInfo();
-    virtual ~GameGlobalInfo() = default;
+    virtual ~GameGlobalInfo();
 
     P<PlayerSpaceship> getPlayerShip(int index);
     void setPlayerShip(int index, P<PlayerSpaceship> ship);

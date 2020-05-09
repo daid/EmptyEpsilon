@@ -7,6 +7,11 @@ GuiCanvas::GuiCanvas()
     enable_debug_rendering = false;
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
+GuiCanvas::~GuiCanvas()
+{
+}
+
 void GuiCanvas::render(sf::RenderTarget& window)
 {
     sf::Vector2f window_size = window.getView().getSize();

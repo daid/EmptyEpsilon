@@ -62,6 +62,11 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&reputation_points, 1.0);
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
+GameGlobalInfo::~GameGlobalInfo()
+{
+}
+
 P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)
 {
     assert(index >= 0 && index < max_player_ships);

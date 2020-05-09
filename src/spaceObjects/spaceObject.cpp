@@ -283,6 +283,11 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     registerCollisionableReplication(multiplayer_significant_range);
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
+SpaceObject::~SpaceObject()
+{
+}
+
 void SpaceObject::draw3D()
 {
 #if FEATURE_3D_RENDERING

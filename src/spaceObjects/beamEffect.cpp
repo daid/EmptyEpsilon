@@ -43,6 +43,11 @@ BeamEffect::BeamEffect()
     registerMemberReplication(&fire_ring);
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
+BeamEffect::~BeamEffect()
+{
+}
+
 #if FEATURE_3D_RENDERING
 void BeamEffect::draw3DTransparent()
 {

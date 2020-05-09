@@ -45,6 +45,11 @@ ScanProbe::ScanProbe()
     setCallSign(string(getMultiplayerId()) + "P");
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
+ScanProbe::~ScanProbe()
+{
+}
+
 void ScanProbe::update(float delta)
 {
     lifetime -= delta;

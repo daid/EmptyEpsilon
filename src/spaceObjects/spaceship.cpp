@@ -211,6 +211,11 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         setCallSign(gameGlobalInfo->getNextShipCallsign());
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
+SpaceShip::~SpaceShip()
+{
+}
+
 void SpaceShip::applyTemplateValues()
 {
     for(int n=0; n<max_beam_weapons; n++)
