@@ -424,6 +424,8 @@ public:
     void setWeaponTubeExclusiveFor(int index, EMissileWeapons type);
     void setWeaponTubeDirection(int index, float direction);
     void setWeaponTubeSize(int index, EMissileSizes size);
+    void setTubeSize(int index, EMissileSizes size);
+    EMissileSizes getTubeSize(int index);
 
     void setRadarTrace(string trace) { radar_trace = trace; }
 
