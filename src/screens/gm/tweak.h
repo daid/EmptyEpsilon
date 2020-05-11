@@ -93,6 +93,7 @@ private:
     GuiSelector* missile_tube_amount_selector;
     GuiSlider* direction_slider;
     GuiSlider* load_time_slider;
+    GuiSelector* size_selector;
     GuiToggleButton* allowed_use[MW_Count];
 public:
     GuiShipTweakMissileTubes(GuiContainer* owner);
