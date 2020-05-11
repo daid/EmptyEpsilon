@@ -311,6 +311,17 @@ GuiShipTweakMissileTubes::GuiShipTweakMissileTubes(GuiContainer* owner)
     });
     load_time_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
+    (new GuiLabel(right_col, "", "Size:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    size_selector=new GuiSelector(right_col, "", [this](int index, string value)
+    {
+        target->weapon_tube[tube_index].setSize(EMissileSizes(index));
+    });
+    size_selector->addEntry("Small",MS_Small);
+    size_selector->addEntry("Medium",MS_Medium);
+    size_selector->addEntry("large",MS_Large);
+    size_selector->setSelectionIndex(MS_Medium);
+    size_selector->setSize(GuiElement::GuiSizeMax, 40);
+
     (new GuiLabel(right_col, "", "Allowed use:", 30))->setSize(GuiElement::GuiSizeMax, 50);
     for(int n=0; n<MW_Count; n++)
     {
@@ -332,6 +343,7 @@ void GuiShipTweakMissileTubes::onDraw(sf::RenderTarget& window)
     {
         allowed_use[n]->setValue(target->weapon_tube[tube_index].canLoad(EMissileWeapons(n)));
     }
+    size_selector->setSelectionIndex(target->weapon_tube[tube_index].getSize());
 }
 
 void GuiShipTweakMissileTubes::open(P<SpaceObject> target)
