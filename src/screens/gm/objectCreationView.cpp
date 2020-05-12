@@ -4,7 +4,6 @@
 #include "shipTemplate.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_selector.h"
-#include "gui/gui2_listbox.h"
 
 
 GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner, func_t enterCreateMode)
@@ -18,7 +17,25 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner, func_t enterCr
         faction_selector->addEntry(info->getLocaleName(), info->getName());
     faction_selector->setSelectionIndex(0);
     faction_selector->setPosition(20, 20, ATopLeft)->setSize(300, 50);
-    
+
+    player_cpu_selector = new GuiSelector(box, "NPC_PC_SELECTOR", [this](int index, string)
+    {
+        if (index==1)
+        {
+            cpu_ship_listbox->hide();
+            player_ship_listbox->show();
+        }
+        else
+        {
+            cpu_ship_listbox->show();
+            player_ship_listbox->hide();
+        }
+    });
+    player_cpu_selector->addEntry("cpu ship","cpu ship");
+    player_cpu_selector->addEntry("player ship","player ship");
+    player_cpu_selector->setSelectionIndex(0);
+    player_cpu_selector->setPosition(20, 70, ATopLeft)->setSize(300, 50);
+
     float y = 20;
     std::vector<string> template_names = ShipTemplate::getTemplateNameList(ShipTemplate::Station);
     std::sort(template_names.begin(), template_names.end());
@@ -72,17 +89,31 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner, func_t enterCr
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
     y = 20;
+
     template_names = ShipTemplate::getTemplateNameList(ShipTemplate::Ship);
     std::sort(template_names.begin(), template_names.end());
-    GuiListbox* listbox = new GuiListbox(box, "CREATE_SHIPS", [this](int index, string value)
+    cpu_ship_listbox = new GuiListbox(box, "CREATE_SHIPS", [this](int index, string value)
     {
         setCreateScript("CpuShip():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + value + "\"):orderRoaming()");
     });
-    listbox->setTextSize(20)->setButtonHeight(30)->setPosition(-20, 20, ATopRight)->setSize(300, 460);
+    cpu_ship_listbox->setTextSize(20)->setButtonHeight(30)->setPosition(-20, 20, ATopRight)->setSize(300, 460);
     for(string template_name : template_names)
     {
-        listbox->addEntry(template_name, template_name);
+        cpu_ship_listbox->addEntry(template_name, template_name);
     }
+
+    auto player_template_names = ShipTemplate::getTemplateNameList(ShipTemplate::PlayerShip);
+    std::sort(template_names.begin(), template_names.end());
+    player_ship_listbox = new GuiListbox(box, "CREATE_PLAYER_SHIPS", [this](int index, string value)
+    {
+        setCreateScript("PlayerSpaceship():setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + value + "\")");
+    });
+    player_ship_listbox->setTextSize(20)->setButtonHeight(30)->setPosition(-20, 20, ATopRight)->setSize(300, 460);
+    for (const auto template_name : player_template_names)
+    {
+        player_ship_listbox->addEntry(template_name, template_name);
+    }
+    player_ship_listbox->hide();
     
     (new GuiButton(box, "CLOSE_BUTTON", "Cancel", [this]() {
         create_script = "";
