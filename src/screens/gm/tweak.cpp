@@ -743,6 +743,11 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
         target->setAutoCoolant(value);
     });
     auto_coolant_enabled->setSize(GuiElement::GuiSizeMax, 40);
+
+    auto_repair_enabled = new GuiToggleButton(right_col, "", "Auto repair", [this](bool value) {
+        target->commandSetAutoRepair(value);
+    });
+    auto_repair_enabled->setSize(GuiElement::GuiSizeMax, 40);
 }
 
 void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
@@ -757,6 +762,7 @@ void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
     can_self_destruct->setValue(target->getCanSelfDestruct());
     can_launch_probe->setValue(target->getCanLaunchProbe());
     auto_coolant_enabled->setValue(target->auto_coolant_enabled);
+    auto_repair_enabled->setValue(target->auto_repair_enabled);
 }
 
 void GuiShipTweakPlayer2::open(P<SpaceObject> target)
