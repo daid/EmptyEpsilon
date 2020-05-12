@@ -66,6 +66,7 @@ function init()
 	
 	--Spawn the Player
 	player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setPosition(-22000, 44000):setCallSign("Epsilon")
+    allowNewPlayerShips(false)
 	
 	--start the mission
 	main_mission = 1

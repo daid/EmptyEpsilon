@@ -427,3 +427,12 @@ static int onNewPlayerShip(lua_State* L)
 }
 /// Register a callback function that is called when a new ship is created on the ship selection screen.
 REGISTER_SCRIPT_FUNCTION(onNewPlayerShip);
+
+static int allowNewPlayerShips(lua_State* L)
+{
+    gameGlobalInfo->allow_new_player_ships = lua_toboolean(L, 1);
+    return 0;
+}
+/// Set if the server is allowed to create new player ships from the ship creation screen.
+/// allowNewPlayerShip(false) -- disallow new player ships to be created
+REGISTER_SCRIPT_FUNCTION(allowNewPlayerShips);
