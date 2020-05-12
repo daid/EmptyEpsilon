@@ -51,6 +51,10 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner, func_t enterCr
         setCreateScript("VisualAsteroid()");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
+    (new GuiButton(box, "CREATE_PLANET", "Planet", [this]() {
+        setCreateScript("Planet()");
+    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
+    y += 30;
     (new GuiButton(box, "CREATE_BLACKHOLE", "BlackHole", [this]() {
         setCreateScript("BlackHole()");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
