@@ -192,6 +192,7 @@ private:
     GuiToggleButton* can_combat_maneuver;
     GuiToggleButton* can_self_destruct;
     GuiToggleButton* can_launch_probe;
+    GuiToggleButton* auto_coolant_enabled;
 public:
     GuiShipTweakPlayer2(GuiContainer* owner);
 
