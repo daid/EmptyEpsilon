@@ -103,7 +103,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner, func_t enterCr
     }
 
     auto player_template_names = ShipTemplate::getTemplateNameList(ShipTemplate::PlayerShip);
-    std::sort(template_names.begin(), template_names.end());
+    std::sort(player_template_names.begin(), player_template_names.end());
     player_ship_listbox = new GuiListbox(box, "CREATE_PLAYER_SHIPS", [this](int index, string value)
     {
         setCreateScript("PlayerSpaceship():setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + value + "\")");
