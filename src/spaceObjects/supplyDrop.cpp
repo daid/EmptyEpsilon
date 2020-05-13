@@ -5,6 +5,8 @@
 #include "main.h"
 
 #include "scriptInterface.h"
+
+/// A supply drop.
 REGISTER_SCRIPT_SUBCLASS(SupplyDrop, SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(SupplyDrop, setEnergy);

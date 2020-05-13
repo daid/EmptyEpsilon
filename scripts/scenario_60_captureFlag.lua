@@ -3357,7 +3357,7 @@ function setPlayer(pobj)
 		pobj.healthyMissile = 1.0
 		pobj.prevMissile = 1.0
 	end
-	if pobj:hasWarp() then
+	if pobj:hasWarpDrive() then
 		pobj.healthyWarp = 1.0
 		pobj.prevWarp = 1.0
 	end

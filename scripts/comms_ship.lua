@@ -5,6 +5,7 @@ function mainMenu()
 	if comms_target.comms_data == nil then
 		comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
 	end
+	-- comms_data is used globally
 	comms_data = comms_target.comms_data
 	
 	if player:isFriendly(comms_target) then
@@ -45,8 +46,8 @@ function friendlyComms(comms_data)
 		end)
 	end
 	addCommsReply("Report status", function()
-		msg = "Hull: " .. math.floor(comms_target:getHull() / comms_target:getHullMax() * 100) .. "%\n"
-		shields = comms_target:getShieldCount()
+		local msg = "Hull: " .. math.floor(comms_target:getHull() / comms_target:getHullMax() * 100) .. "%\n"
+		local shields = comms_target:getShieldCount()
 		if shields == 1 then
 			msg = msg .. "Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
 		elseif shields == 2 then
@@ -58,7 +59,8 @@ function friendlyComms(comms_data)
 			end
 		end
 
-		missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+		-- TODO this should use a global
+		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 		for i, missile_type in ipairs(missile_types) do
 			if comms_target:getWeaponStorageMax(missile_type) > 0 then
 					msg = msg .. missile_type .. " Missiles: " .. math.floor(comms_target:getWeaponStorage(missile_type)) .. "/" .. math.floor(comms_target:getWeaponStorageMax(missile_type)) .. "\n"
@@ -82,10 +84,10 @@ end
 
 function enemyComms(comms_data)
 	if comms_data.friendlyness > 50 then
-		faction = comms_target:getFaction()
-		taunt_option = "We will see to your destruction!"
-		taunt_success_reply = "Your bloodline will end here!"
-		taunt_failed_reply = "Your feeble threats are meaningless."
+		local faction = comms_target:getFaction()
+		local taunt_option = "We will see to your destruction!"
+		local taunt_success_reply = "Your bloodline will end here!"
+		local taunt_failed_reply = "Your feeble threats are meaningless."
 		if faction == "Kraylor" then
 			setCommsMessage("Ktzzzsss.\nYou will DIEEee weaklingsss!");
 		elseif faction == "Arlenians" then

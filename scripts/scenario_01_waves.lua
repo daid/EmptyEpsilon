@@ -1,5 +1,6 @@
 -- Name: Waves
 -- Description: Waves of increasingly difficult enemies.
+--- There is no victory. How many waves can you destroy?
 -- Type: Basic
 -- Variation[Hard]: Difficulty starts at wave 5 and increases by 1.5 after the players defeat each wave. (Players are more quickly overwhelmed, leading to shorter games.)
 -- Variation[Easy]: Makes each wave easier by decreasing the number of ships in each wave. (Takes longer for the players to be overwhelmed; good for new players.)
@@ -25,24 +26,38 @@ function randomStationTemplate()
 end
 
 function init()
+	-- global variables:
 	waveNumber = 0
 	spawnWaveDelay = nil
 	enemyList = {}
 	friendlyList = {}
-	
+
 	PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
 
+	-- Give the mission to the (first) player ship
+	local text = [[At least one friendly base must survive.
+Destroy all enemy ships. After a short delay, the next wave will appear.
+And so on ...
+How many waves can you destroy?]]
+	getPlayerShip(-1):addToShipLog(text, "white")
+
+	-- Random friendly stations
 	for n=1, 2 do
 		table.insert(friendlyList, SpaceStation():setTemplate(randomStationTemplate()):setFaction("Human Navy"):setPosition(random(-5000, 5000), random(-5000, 5000)))
 	end
 	friendlyList[1]:addReputationPoints(150.0)
 
+	-- Random nebulae
 	local x, y = vectorFromAngle(random(0, 360), 15000)
 	for n=1, 5 do
 		local xx, yy = vectorFromAngle(random(0, 360), random(2500, 10000))
 		Nebula():setPosition(x + xx, y + yy)
 	end
 
+	-- Random asteroids
+	local a, a2, d
+	local dx1, dy1
+	local dx2, dy2
 	for cnt=1,random(2, 7) do
 		a = random(0, 360)
 		a2 = random(0, 360)
@@ -59,16 +74,22 @@ function init()
 			VisualAsteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2)
 		end
 	end
-	
+
+	-- First enemy wave
 	spawnWave()
 
+	-- Random neutral stations
 	for n=1, 6 do
 		setCirclePos(SpaceStation():setTemplate(randomStationTemplate()):setFaction("Independent"), 0, 0, random(0, 360), random(15000, 30000))
 	end
+
+	-- Random transports
 	Script():run("util_random_transports.lua")
 end
 
 function randomSpawnPointInfo(distance)
+	local x, y
+	local rx, ry
 	if random(0, 100) < 50 then
 		if random(0, 100) < 50 then
 			x = -distance
@@ -93,9 +114,13 @@ end
 
 function spawnWave()
 	waveNumber = waveNumber + 1
+	getPlayerShip(-1):addToShipLog("Wave " .. waveNumber, "red")
 	friendlyList[1]:addReputationPoints(150 + waveNumber * 15)
-	
+
 	enemyList = {}
+
+	-- Calculate score of wave
+	local totalScoreRequirement  -- actually: remainingScoreRequirement
 	if getScenarioVariation() == "Hard" then
 		totalScoreRequirement = math.pow(waveNumber * 1.5 + 4, 1.3) * 10;
 	elseif getScenarioVariation() == "Easy" then
@@ -103,14 +128,16 @@ function spawnWave()
 	else
 		totalScoreRequirement = math.pow(waveNumber, 1.3) * 10;
 	end
-	
-	scoreInSpawnPoint = 0
-	spawnDistance = 20000
-	spawnPointLeader = nil
-	spawn_x, spawn_y, spawn_range_x, spawn_range_y = randomSpawnPointInfo(spawnDistance)
+
+	local scoreInSpawnPoint = 0
+	local spawnDistance = 20000
+	local spawnPointLeader = nil
+	local spawn_x, spawn_y, spawn_range_x, spawn_range_y = randomSpawnPointInfo(spawnDistance)
 	while totalScoreRequirement > 0 do
-		ship = CpuShip():setFaction("Ghosts");
+		local ship = CpuShip():setFaction("Ghosts");
 		ship:setPosition(random(-spawn_range_x, spawn_range_x) + spawn_x, random(-spawn_range_y, spawn_range_y) + spawn_y);
+
+		-- Make the first ship the leader at this spawn point
 		if spawnPointLeader == nil then
 			ship:orderRoaming()
 			spawnPointLeader = ship
@@ -118,38 +145,39 @@ function spawnWave()
 			ship:orderDefendTarget(spawnPointLeader)
 		end
 
-		type = random(0, 10)
-		score = 9999
+		-- Set ship type
+		local type = random(0, 10)  -- TODO rename variable
+		local score = 9999
 		if type < 2 then
-            if irandom(1, 100) < 80 then
-                ship:setTemplate("MT52 Hornet");
-            else
-                ship:setTemplate("MU52 Hornet");
-            end
+			if irandom(1, 100) < 80 then
+				ship:setTemplate("MT52 Hornet");
+			else
+				ship:setTemplate("MU52 Hornet");
+			end
 			score = 5
-        elseif type < 3 then
-            if irandom(1, 100) < 80 then
-                ship:setTemplate("Adder MK5")
-            else
-                ship:setTemplate("WX-Lindworm")
-            end
-            score = 7
+		elseif type < 3 then
+			if irandom(1, 100) < 80 then
+				ship:setTemplate("Adder MK5")
+			else
+				ship:setTemplate("WX-Lindworm")
+			end
+			score = 7
 		elseif type < 6 then
-            if irandom(1, 100) < 80 then
-                ship:setTemplate("Phobos T3");
-            else
-                ship:setTemplate("Piranha F12");
-            end
+			if irandom(1, 100) < 80 then
+				ship:setTemplate("Phobos T3");
+			else
+				ship:setTemplate("Piranha F12");
+			end
 			score = 15
 		elseif type < 7 then
 			ship:setTemplate("Ranus U");
 			score = 25
 		elseif type < 8 then
-            if irandom(1, 100) < 50 then
-                ship:setTemplate("Stalker Q7");
-            else
-                ship:setTemplate("Stalker R7");
-            end
+			if irandom(1, 100) < 50 then
+				ship:setTemplate("Stalker Q7");
+			else
+				ship:setTemplate("Stalker R7");
+			end
 			score = 25
 		elseif type < 9 then
 			ship:setTemplate("Atlantis X23");
@@ -158,7 +186,8 @@ function spawnWave()
 			ship:setTemplate("Odin");
 			score = 250
 		end
-		
+
+		-- Destroy ship if it was too strong else take it
 		if score > totalScoreRequirement * 1.1 + 5 then
 			ship:destroy()
 		else
@@ -166,6 +195,8 @@ function spawnWave()
 			totalScoreRequirement = totalScoreRequirement - score
 			scoreInSpawnPoint = scoreInSpawnPoint + score
 		end
+
+		-- Start new spawn point farther away
 		if scoreInSpawnPoint > totalScoreRequirement * 2.0 then
 			spawnDistance = spawnDistance + 5000
 			spawn_x, spawn_y, spawn_range_x, spawn_range_y = randomSpawnPointInfo(spawnDistance)
@@ -173,11 +204,12 @@ function spawnWave()
 			spawnPointLeader = nil
 		end
 	end
-	
+
 	globalMessage(string.format(_("Wave %d"), waveNumber));
 end
 
 function update(delta)
+	-- Show countdown, spawn wave
 	if spawnWaveDelay ~= nil then
 		spawnWaveDelay = spawnWaveDelay - delta
 		if spawnWaveDelay < 5 then
@@ -189,8 +221,10 @@ function update(delta)
 		end
 		return
 	end
-	enemy_count = 0
-	friendly_count = 0
+
+	-- Count enemies and friends
+	local enemy_count = 0
+	local friendly_count = 0
 	for _, enemy in ipairs(enemyList) do
 		if enemy:isValid() then
 			enemy_count = enemy_count + 1
@@ -201,11 +235,14 @@ function update(delta)
 			friendly_count = friendly_count + 1
 		end
 	end
+	-- Continue ...
 	if enemy_count == 0 then
 		spawnWaveDelay = 15.0;
 		globalMessage("Wave cleared!");
+		getPlayerShip(-1):addToShipLog("Wave " .. waveNumber .. " cleared.", "green")
 	end
+	-- ... or lose
 	if friendly_count == 0 then
-		victory("Ghosts");	--Victory for the Ghosts (== defeat for the players)
+		victory("Ghosts");  --Victory for the Ghosts (== defeat for the players)
 	end
 end

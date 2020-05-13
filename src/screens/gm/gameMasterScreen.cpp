@@ -212,6 +212,7 @@ GameMasterScreen::GameMasterScreen()
     message_close_button->setTextSize(30)->setPosition(-20, -20, ABottomRight)->setSize(300, 30);
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
 GameMasterScreen::~GameMasterScreen()
 {
 }

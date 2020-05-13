@@ -24,10 +24,6 @@ Script::Script()
     gameGlobalInfo->addScript(this);
 }
 
-Script::~Script()
-{
-}
-
 static int require(lua_State* L)
 {
     string filename = luaL_checkstring(L, 1);

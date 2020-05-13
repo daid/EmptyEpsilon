@@ -10,7 +10,7 @@ static uint32_t hashSector(uint32_t x, uint32_t y)
 
 static uint32_t positionToSector(float f)
 {
-    return uint32_t(f / small_object_grid_size);
+    return std::lrint(f / small_object_grid_size);
 }
 
 static uint32_t hashPosition(sf::Vector2f position)

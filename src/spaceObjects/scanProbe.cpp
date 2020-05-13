@@ -4,6 +4,8 @@
 #include "main.h"
 
 #include "scriptInterface.h"
+
+/// A scan probe.
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ScanProbe, SpaceObject)
 {
     // Callback when the probe's lifetime expires.
@@ -43,6 +45,7 @@ ScanProbe::ScanProbe()
     setCallSign(string(getMultiplayerId()) + "P");
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
 ScanProbe::~ScanProbe()
 {
 }

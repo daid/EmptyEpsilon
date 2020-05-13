@@ -43,6 +43,7 @@ BeamEffect::BeamEffect()
     registerMemberReplication(&fire_ring);
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
 BeamEffect::~BeamEffect()
 {
 }

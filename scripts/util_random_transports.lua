@@ -56,9 +56,9 @@ function update(delta)
                     name = "Personnel"
                 elseif rnd == 2 then
                     name = "Goods"
-                elseif rnd == 2 then
+                elseif rnd == 3 then
                     name = "Garbage"
-                elseif rnd == 2 then
+                elseif rnd == 4 then
                     name = "Equipment"
                 else
                     name = "Fuel"

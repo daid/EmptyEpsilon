@@ -357,3 +357,23 @@ void Planet::updateCollisionSize()
         setCollisionPhysics(true, true);
     }
 }
+
+string Planet::getExportLine()
+{
+    string ret="Planet():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + "):setPlanetRadius(" + string(getPlanetRadius(), 0) + ")";
+    if (atmosphere_color.r != 0 || atmosphere_color.g != 0 || atmosphere_color.b != 0)
+    {
+        ret += ":setPlanetAtmosphereColor(" + string(atmosphere_color.r/255.0f) + "," + string(atmosphere_color.g/255.0f) + "," + string(atmosphere_color.b/255.0f) + ")";
+    }
+    if (distance_from_movement_plane!=0)
+    {
+        ret += ":setDistanceFromMovementPlane("  + string(distance_from_movement_plane) + ")";
+    }
+    //TODO setPlanetAtmosphereTexture
+    //TODO setPlanetSurfaceTexture
+    //TODO setPlanetCloudTexture
+    //TODO setPlanetCloudRadius
+    //TODO setAxialRotationTime
+    //TODO setOrbit
+    return ret;
+}

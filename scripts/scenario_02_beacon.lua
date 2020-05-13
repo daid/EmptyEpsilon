@@ -8,6 +8,7 @@ function init()
     -- Create the main ship for the players.
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
 	player:setPosition(22400, 18200):setCallSign("Epsilon")
+    allowNewPlayerShips(false)
 
     research_station = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy")
     research_station:setPosition(23500, 16100):setCallSign("Research-1")

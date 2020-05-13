@@ -14,14 +14,6 @@
     }
 #endif
 
-UDMXDevice::UDMXDevice()
-{
-}
-
-UDMXDevice::~UDMXDevice()
-{
-}
-
 //Configure the device.
 bool UDMXDevice::configure(std::unordered_map<string, string> settings)
 {

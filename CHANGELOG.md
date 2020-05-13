@@ -1,5 +1,24 @@
 # Change Log
 
+## [...]
+
+### Added
+
+- Science database can be filled and edited from within scenarios. Additional methods have been added to the Lua API
+  - `destroy()` can be used to remove selective entries or the whole pre-filled database from within scenarios
+  - `getScienceDatabases()` returns a table of all databases at the root level.
+  - sub entries can be traversed with `getEntries()` and `getEntryByName()`
+  - key value pairs can be inquired and manipulated through `setKeyValue()`, `getKeyValue()`, `getKeyValues()` and `removeKey`.
+  - `queryScienceDatabase()` allows to easily query for deeply nested entries
+- Science database entries allow to display an image `ScienceDatabase:setImage()`
+  - The image files have to be available on all clients in order to be displayed.
+
+### Changed
+
+- Science database entries are sorted alphabetically.
+
+### Fixed
+
 ## [2020-04-09]
 
 ### Added

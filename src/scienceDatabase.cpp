@@ -8,48 +8,250 @@
 REGISTER_SCRIPT_CLASS(ScienceDatabase)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setName);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getName);
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, addEntry);
+    /// returns a child entry by its case-insensitive name
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getEntryByName);
+    /// returns a table of all child entries in arbitrary order
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getEntries);
+    /// returns true if this entry has child entries
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, hasEntries);
+    /// add a new key-value pair in the center column of the database
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, addKeyValue);
+    /// if an entry with this key exists already, its value will be changed. If not, the pair is created.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setKeyValue);
+    /// get the value of the key value-pair with the given key. returns empty string when key does not exist.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getKeyValue);
+    /// get all the key value pairs as a table. Warning: if there are duplicate keys only appear once with the last value.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getKeyValues);
+    /// remove all key value pairs with the case-insensitive key value name
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, removeKey);
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setLongDescription);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getLongDescription);
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setImage);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getImage);
 }
-
 
 PVector<ScienceDatabase> ScienceDatabase::science_databases;
 
+REGISTER_MULTIPLAYER_CLASS(ScienceDatabase, "ScienceDatabase");
 ScienceDatabase::ScienceDatabase()
+: MultiplayerObject("ScienceDatabase")
 {
-    if (game_server) { LOG(ERROR) << "ScienceDatabase objects can not be created during a scenario right now."; destroy(); return; }
+    registerMemberReplication(&parent_id);
+    registerMemberReplication(&name);
+    registerMemberReplication(&model_data_name);
+    registerMemberReplication(&long_description);
+    registerMemberReplication(&image);
+    registerMemberReplication(&keyValuePairs);
+
     science_databases.push_back(this);
     name = "???";
 }
 
-ScienceDatabase::ScienceDatabase(P<ScienceDatabase> parent, string name)
+void ScienceDatabase::destroy()
 {
-    this->parent = parent;
-    this->name = name;
-}
+    // if this code is used in the client, the server could try to destroy an object that has already been destroyed
+    if(this->isDestroyed()) return;
 
-ScienceDatabase::~ScienceDatabase()
-{
+    auto my_id = this->getId();
+    ScienceDatabase::science_databases.remove(this);
+    MultiplayerObject::destroy();
+
+    PVector<ScienceDatabase>::iterator it = ScienceDatabase::science_databases.begin();
+
+    while(it != ScienceDatabase::science_databases.end()) {
+        if (!(*it)->isDestroyed() && (*it)->getParentId() == my_id)
+        {
+            (*it)->destroy();
+        }
+        else
+        {
+            ++it;
+        }
+    }
 }
 
 P<ScienceDatabase> ScienceDatabase::addEntry(string name)
 {
-    P<ScienceDatabase> e = new ScienceDatabase(this, name);
-    items.push_back(e);
+    P<ScienceDatabase> e = new ScienceDatabase();
+    e->parent_id = this->getId();
+    e->setName(name);
     return e;
 }
 
 void ScienceDatabase::addKeyValue(string key, string value)
 {
-    keyValuePairs.push_back(ScienceDatabaseKeyValue(key, value));
+    keyValuePairs.push_back(KeyValue(key, value));
+}
+
+string ScienceDatabase::getKeyValue(string key)
+{
+    auto normalized_key = normalizeName(key);
+
+    for (auto kv : keyValuePairs)
+    {
+        if (kv.getNormalizedKey() == normalized_key)
+        {
+            return kv.getValue();
+        }
+    }
+    return "";
+}
+
+void ScienceDatabase::setKeyValue(string key, string value)
+{
+    bool is_set = false;
+    auto normalized_key = normalizeName(key);
+
+    for (auto& kv : keyValuePairs)
+    {
+        if (kv.getNormalizedKey() == normalized_key)
+        {
+            kv.setValue(value);
+            is_set = true;
+        }
+    }
+    if (!is_set) { addKeyValue(key, value); }
+}
+
+void ScienceDatabase::removeKey(string key)
+{
+    auto normalized_key = normalizeName(key);
+    keyValuePairs.erase(std::remove_if(keyValuePairs.begin(), keyValuePairs.end(), [normalized_key](KeyValue& kv) { return kv.getNormalizedKey() == normalized_key; }), keyValuePairs.end());
+}
+
+std::map<string, string> ScienceDatabase::getKeyValues()
+{
+    std::map<string, string> map;
+    for (auto kv : keyValuePairs)
+    {
+        map.insert(std::make_pair(kv.getKey(), kv.getValue()));
+    }
+
+    return map;
 }
 
 void ScienceDatabase::setLongDescription(string text)
 {
-    longDescription = text;
+    long_description = text;
 }
+
+
+void ScienceDatabase::setModelData(P<ModelData> model_data)
+{
+    this->model_data_name = model_data->getName();
+}
+
+void ScienceDatabase::setModelDataName(string model_data_name)
+{
+    this->model_data_name = model_data_name;
+}
+
+bool ScienceDatabase::hasModelData()
+{
+    return model_data_name != "";
+}
+
+P<ModelData> ScienceDatabase::getModelData()
+{
+    if (hasModelData())
+    {
+        return ModelData::getModel(model_data_name);
+    }
+    else
+    {
+        return nullptr;
+    }
+}
+
+P<ScienceDatabase> ScienceDatabase::getEntryByName(string name)
+{
+    return queryScienceDatabase(name, this->getId());
+}
+
+bool ScienceDatabase::hasEntries()
+{
+    for(auto sd : ScienceDatabase::science_databases)
+    {
+        if (sd->getParentId() == this->getId())
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+PVector<ScienceDatabase> ScienceDatabase::getEntries()
+{
+    PVector<ScienceDatabase> entries;
+    for(auto sd : ScienceDatabase::science_databases)
+    {
+        if (sd->getParentId() == this->getId())
+        {
+            entries.push_back(sd);
+        }
+    }
+
+    return entries;
+}
+
+P<ScienceDatabase> ScienceDatabase::queryScienceDatabase(string name, int32_t parent_id = 0)
+{
+    name = normalizeName(name);
+
+    for(auto sd : ScienceDatabase::science_databases)
+    {
+        if (sd->getParentId() == parent_id && sd->getNormalizedName() == name)
+        {
+            return sd;
+        }
+    }
+
+    return nullptr;
+}
+
+static int queryScienceDatabase(lua_State* L)
+{
+    P<ScienceDatabase> entry = nullptr;
+
+    for(int i=1; i<=lua_gettop(L); i++)
+    {
+        string segment = string(luaL_checkstring(L, i));
+        entry = ScienceDatabase::queryScienceDatabase(segment, entry ? entry->getId() : 0);
+
+        if (!entry)
+        {
+            // no entry at that path
+            return 0;
+        }
+    }
+
+    return convert<P<ScienceDatabase> >::returnType(L, entry);
+}
+
+/// finds a ScienceDatabase entry by its case-insensitive name. You have to give the full path to the entry by using multiple arguments.
+/// Returns nil if no entry is found.
+/// e.g. local mine_db = queryScienceDatabase("Natural", "Mine")
+REGISTER_SCRIPT_FUNCTION(queryScienceDatabase);
+
+static int getScienceDatabases(lua_State* L)
+{
+    PVector<ScienceDatabase> entries;
+    for(auto sd : ScienceDatabase::science_databases)
+    {
+        if (sd->getParentId() == 0)
+        {
+            entries.push_back(sd);
+        }
+    }
+
+    return convert<PVector<ScienceDatabase>>::returnType(L, entries);;
+}
+
+/// get all ScienceDatabases that do not have a parent. Use getEntries() or getEntryByName() to navigate.
+REGISTER_SCRIPT_FUNCTION(getScienceDatabases);
 
 static string directionLabel(float direction)
 {
@@ -63,6 +265,23 @@ static string directionLabel(float direction)
     if (std::abs(sf::angleDifference(180.0f, direction)) <= 45)
         name = tr("database direction", "Rear");
     return name;
+}
+
+void flushDatabaseData()
+{
+    PVector<ScienceDatabase>::iterator it = ScienceDatabase::science_databases.begin();
+
+    while(it != ScienceDatabase::science_databases.end()) {
+        if (!(*it)->isDestroyed())
+        {
+            (*it)->destroy();
+        }
+        else
+        {
+            ++it;
+        }
+    }
+    ScienceDatabase::science_databases.resize(0);
 }
 
 void fillDefaultDatabaseData()
@@ -121,7 +340,7 @@ void fillDefaultDatabaseData()
         P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
         P<ScienceDatabase> entry = class_database_entries[ship_template->getClass()]->addEntry(ship_template->getLocaleName());
         
-        entry->model_data = ship_template->model_data;
+        entry->setModelData(ship_template->model_data);
         entry->setImage(ship_template->radar_trace);
 
         entry->addKeyValue(tr("database", "Class"), ship_template->getClass());
@@ -200,7 +419,7 @@ void fillDefaultDatabaseData()
     for(string name : ModelData::getModelDataNames())
     {
         P<ScienceDatabase> entry = models_database->addEntry(name);
-        entry->model_data = ModelData::getModel(name);
+        entry->setModelDataName(name);
     }
 #endif
 }

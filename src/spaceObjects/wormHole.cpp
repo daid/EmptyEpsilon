@@ -12,8 +12,8 @@
 #define AVOIDANCE_MULTIPLIER      1.2
 #define TARGET_SPREAD             500
 
-// A wormhole object that drags objects toward it like a black hole, and then
-// teleports them to another point when they reach its center.
+/// A wormhole object that drags objects toward it like a black hole, and then
+/// teleports them to another point when they reach its center.
 REGISTER_SCRIPT_SUBCLASS(WormHole, SpaceObject)
 {
     /// Set the target of this wormhole

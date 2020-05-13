@@ -33,7 +33,7 @@ public:
     void setAxialRotationTime(float time);
     void setOrbit(P<SpaceObject> target, float orbit_time);
     
-    virtual string getExportLine() override { return "Planet():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ", setPlanetRadius(" + string(getPlanetRadius(), 0) + ")"; }
+    virtual string getExportLine() override;
 
 private:
     //Config:

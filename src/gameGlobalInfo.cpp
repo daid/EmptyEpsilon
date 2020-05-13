@@ -1,6 +1,7 @@
 #include <i18n.h>
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
+#include "scienceDatabase.h"
 
 P<GameGlobalInfo> gameGlobalInfo;
 
@@ -61,6 +62,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&reputation_points, 1.0);
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
 GameGlobalInfo::~GameGlobalInfo()
 {
 }
@@ -179,6 +181,14 @@ void GameGlobalInfo::startScenario(string filename)
     i18n::reset();
     i18n::load("locale/" + PreferencesManager::get("language", "en") + ".po");
     i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
+
+    flushDatabaseData();
+    fillDefaultDatabaseData();
+
+    P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
+    if (scienceInfoScript->getError() != "") exit(1);
+    scienceInfoScript->destroy();
+
     P<ScriptObject> script = new ScriptObject();
     script->run(filename);
     engine->registerObject("scenario", script);
@@ -253,6 +263,7 @@ static int globalMessage(lua_State* L)
 }
 /// globalMessage(string)
 /// Show a global message on the main screens of all active player ships.
+/// The message is shown for 5 sec; new messages replace the old immediately.
 REGISTER_SCRIPT_FUNCTION(globalMessage);
 
 static int setBanner(lua_State* L)
@@ -407,3 +418,21 @@ static int playSoundFile(lua_State* L)
 /// Play a sound file on the server. Will work with any file supported by SFML (.wav, .ogg, .flac)
 /// Note that the sound is only played on the server. Not on any of the clients.
 REGISTER_SCRIPT_FUNCTION(playSoundFile);
+
+static int onNewPlayerShip(lua_State* L)
+{
+    int idx = 1;
+    convert<ScriptSimpleCallback>::param(L, idx, gameGlobalInfo->on_new_player_ship);
+    return 0;
+}
+/// Register a callback function that is called when a new ship is created on the ship selection screen.
+REGISTER_SCRIPT_FUNCTION(onNewPlayerShip);
+
+static int allowNewPlayerShips(lua_State* L)
+{
+    gameGlobalInfo->allow_new_player_ships = lua_toboolean(L, 1);
+    return 0;
+}
+/// Set if the server is allowed to create new player ships from the ship creation screen.
+/// allowNewPlayerShip(false) -- disallow new player ships to be created
+REGISTER_SCRIPT_FUNCTION(allowNewPlayerShips);

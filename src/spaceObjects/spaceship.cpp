@@ -13,9 +13,9 @@
 #include "scriptInterface.h"
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
 {
-    //[DEPRECATED]
+    /// [DEPRECATED]
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentified);
-    //[DEPRECATED]
+    /// [DEPRECATED]
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScanned);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentifiedBy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScannedBy);
@@ -80,6 +80,13 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, weaponTubeDisallowMissle);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeExclusiveFor);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeDirection);
+    /// Set the tube size
+    /// Example: ship:setTubeSize(0,"small")
+    /// Valid Sizes: "small" "medium" "large"
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setTubeSize);
+    /// Returns the size of the tube
+    /// Example: local size = ship:getTubeSize(0)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getTubeSize);
     /// Set the icon to be used for this ship on the radar.
     /// For example, ship:setRadarTrace("RadarBlip.png") will show a dot instead of an arrow for this ship.
     /// Note: Icon is only shown after scanning, before the ship is scanned it is always shown as an arrow.
@@ -211,6 +218,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         setCallSign(gameGlobalInfo->getNextShipCallsign());
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
 SpaceShip::~SpaceShip()
 {
 }
@@ -1230,6 +1238,20 @@ void SpaceShip::setWeaponTubeDirection(int index, float direction)
     if (index < 0 || index >= weapon_tube_count)
         return;
     weapon_tube[index].setDirection(direction);
+}
+
+void SpaceShip::setTubeSize(int index, EMissileSizes size)
+{
+    if (index < 0 || index >= max_weapon_tubes)
+        return;
+    weapon_tube[index].setSize(size);
+}
+
+EMissileSizes SpaceShip::getTubeSize(int index)
+{
+    if (index < 0 || index >= max_weapon_tubes)
+        return MS_Medium;
+    return weapon_tube[index].getSize();
 }
 
 void SpaceShip::addBroadcast(int threshold, string message)

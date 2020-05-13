@@ -25,6 +25,7 @@ ElectricExplosionEffect::ElectricExplosionEffect()
     registerMemberReplication(&on_radar);
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
 ElectricExplosionEffect::~ElectricExplosionEffect()
 {
 }

@@ -7,6 +7,7 @@ GuiCanvas::GuiCanvas()
     enable_debug_rendering = false;
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
 GuiCanvas::~GuiCanvas()
 {
 }

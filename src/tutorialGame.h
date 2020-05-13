@@ -51,8 +51,6 @@ private:
 class LocalOnlyGame : public EpsilonServer
 {
 public:
-    LocalOnlyGame();
-
     //Overide the update function from the game server, so no actuall socket communication is done.
     virtual void update(float delta) override;
 };

@@ -7,8 +7,8 @@
 class HardwareOutputDevice
 {
 public:
-    HardwareOutputDevice();
-    virtual ~HardwareOutputDevice();
+    HardwareOutputDevice() = default;
+    virtual ~HardwareOutputDevice() = default;
     
     virtual bool configure(std::unordered_map<string, string> settings) = 0;
 
