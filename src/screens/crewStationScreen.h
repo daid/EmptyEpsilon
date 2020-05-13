@@ -1,6 +1,7 @@
 #ifndef CREW_STATION_SCREEN_H
 #define CREW_STATION_SCREEN_H
 
+#include <memory>
 #include "engine.h"
 #include "threatLevelEstimate.h"
 #include "playerInfo.h"

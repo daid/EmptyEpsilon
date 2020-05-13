@@ -1,3 +1,4 @@
+#include <memory>
 #include <time.h>
 
 //We need a really fast float to string conversion. dtoa from milo does this very well.

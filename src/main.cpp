@@ -1,3 +1,4 @@
+#include <memory>
 #include <string.h>
 #include <i18n.h>
 #include <multiplayer_proxy.h>
