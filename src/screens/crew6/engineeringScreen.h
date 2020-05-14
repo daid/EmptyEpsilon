@@ -38,6 +38,7 @@ private:
         GuiAutoLayout* layout;
         GuiToggleButton* button;
         GuiProgressbar* damage_bar;
+        GuiImage* damage_icon;
         GuiProgressbar* health_max_bar;
         GuiLabel* damage_label;
         GuiProgressbar* heat_bar;
