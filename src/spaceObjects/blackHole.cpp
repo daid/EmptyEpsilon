@@ -28,10 +28,8 @@ void BlackHole::update(float delta)
 #if FEATURE_3D_RENDERING
 void BlackHole::draw3DTransparent()
 {
-    float distance = sf::length(camera_position - sf::Vector3f(getPosition().x, getPosition().y, 0));
-
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    ShaderManager::getShader("billboardShader")->setParameter("textureMap", *textureManager.getTexture("blackHole3d.png"));
+    ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture("blackHole3d.png"));
     sf::Shader::bind(ShaderManager::getShader("billboardShader"));
     glColor4f(1, 1, 1, 5000.0);
     glBegin(GL_QUADS);
@@ -48,7 +46,7 @@ void BlackHole::draw3DTransparent()
 }
 #endif
 
-void BlackHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void BlackHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "blackHole.png");
@@ -70,13 +68,19 @@ void BlackHole::collide(Collisionable* target, float collision_force)
     sf::Vector2f diff = getPosition() - target->getPosition();
     float distance = sf::length(diff);
     float force = (getRadius() * getRadius() * 50.0f) / (distance * distance);
+    DamageInfo info(NULL, DT_Kinetic, getPosition());
     if (force > 10000.0)
     {
         force = 10000.0;
         if (isServer())
-            target->destroy();
+        {
+            P<SpaceObject> obj = P<Collisionable>(target);
+            if (obj)
+                obj->takeDamage(100000.0, info); //try to destroy the object by inflicting a huge amount of damage
+            if (target)
+                target->destroy();
+        }
     }
-    DamageInfo info(NULL, DT_Kinetic, getPosition());
     if (force > 100.0 && isServer())
     {
         P<SpaceObject> obj = P<Collisionable>(target);

@@ -1,7 +1,12 @@
 # Python script that generates the documentation for script functions.
-# This parses the codeblocks for to find all the source files, then parses all the source files for script macros.
-# Finally it outputs all the documentation to stdout so it can be stored on disk.
-# This script should run in both python2 and python3
+#
+# This parses the codeblocks to find all the source files, then parses
+# all of the source files for script macros.
+#
+# It then outputs all the documentation (comments starting with `///`)
+# as HTML to stdout so it can be stored on disk.
+#
+# This script should run in both Python 2 and 3.
 import re
 import os
 import sys
@@ -21,6 +26,16 @@ class ScriptFunction(object):
 		ret = self.name
 		return '%s' % (ret)
 
+class ScriptMember(object):
+	def __init__(self, name):
+		self.name = name
+		self.description = ""
+		self.origin_class = None
+
+	def __repr__(self):
+		ret = self.name
+		return '%s' % (ret)
+
 class ScriptClass(object):
 	def __init__(self, name):
 		self.name = name
@@ -30,11 +45,16 @@ class ScriptClass(object):
 		self.children = []
 		self.create = True
 		self.functions = []
+		self.members = []
 		self.callbacks = []
 	
 	def addFunction(self, function_name):
 		self.functions.append(ScriptFunction(function_name))
 		return self.functions[-1]
+
+	def addMember(self, member_name):
+		self.members.append(ScriptMember(member_name))
+		return self.members[-1]
 
 	def addCallback(self, callback_name):
 		self.callbacks.append(callback_name)
@@ -54,14 +74,25 @@ class ScriptClass(object):
 			stream.write('<ul>')
 			for c in self.children:
 				c.outputClassTree(stream)
-			stream.write('</ul>')
+			stream.write('</ul>\n')
 
 class DocumentationGenerator(object):
     def __init__(self):
         self._definitions = []
         self._function_info = []
         self._files = set()
-    
+
+    def addDirectory(self, directory):
+        if not os.path.isdir(directory):
+            return
+
+        for name in os.listdir(directory):
+            name = directory + os.sep + name
+            if os.path.isdir(name):
+                self.addDirectory(name)
+            elif os.path.isfile(name):
+                self.addFile(name)
+
     def addFile(self, filename):
         if filename in self._files:
             return
@@ -70,12 +101,7 @@ class DocumentationGenerator(object):
         
         self._files.add(filename)
         ext = os.path.splitext(filename)[1].lower()
-        if ext == '.cbp':
-            xml = ElementTree.parse(filename)
-            for project in xml.findall('Project'):
-                for unit in project.findall('Unit'):
-                    self.addFile(unit.attrib['filename'])
-        elif ext == '.c' or ext == '.cpp' or ext == '.h':
+        if ext == '.c' or ext == '.cpp' or ext == '.h':
             for line in open(filename, "r"):
                 m = re.match('^# *include *[<"](.*)[>"]$', line)
                 if m is not None:
@@ -107,6 +133,7 @@ class DocumentationGenerator(object):
         for filename in self._files:
             description = ""
             current_class = None
+            #print("Processing: %s" % (filename))
             for line in open(filename, "r"):
                 if line.startswith('#'):
                     continue
@@ -177,12 +204,11 @@ class DocumentationGenerator(object):
                     f = definition.addFunction('isValid')
                     f.parameters = ''
                     f.description = 'Check if this is still looking at a valid object. Returns false when the objects that this variable references is destroyed.'
-                    f = definition.addFunction('typeName')
-                    f.parameters = ''
-                    f.description = 'Returns the class name of this object.'
                     f = definition.addFunction('destroy')
                     f.parameters = ''
                     f.description = 'Removes this object from the game.'
+                    f = definition.addMember('typeName')
+                    f.description = 'Returns the class name of this object, this is not a function, but a direct member: if object.typeName == "Mine" then print("MINE!") end'
 
     def generateDocs(self, stream):
         stream.write('<!doctype html><html lang="us"><head><meta charset="utf-8"><title>EmptyEpsilon - Scripting documentation</title>')
@@ -192,13 +218,13 @@ class DocumentationGenerator(object):
         stream.write('<body>')
 
         stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
-        stream.write('<h1>Info</h1>')
+        stream.write('<h1>EmptyEpsilon Scripting Reference</h1>')
         stream.write('This is the EmptyEpsilon script reference for this version of EmptyEpsilon. By no means this is a guide to help you scripting, you should check <a href="http://emptyepsilon.org/">emptyepsilon.org</a> for the guide on scripting.')
         stream.write('As well as check the already existing scenario and ship data files on how to get started.')
         stream.write('</div>')
 
         stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
-        stream.write('<h2>Objects</h2>')
+        stream.write('<h2>Objects</h2>\n')
         stream.write('<ul>')
         for d in self._definitions:
             if isinstance(d, ScriptClass) and d.parent is None:
@@ -207,7 +233,7 @@ class DocumentationGenerator(object):
         stream.write('</div>')
 
         stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
-        stream.write('<h2>Functions</h2>')
+        stream.write('<h2>Functions</h2>\n')
         stream.write('<ul>')
         for d in self._definitions:
             if isinstance(d, ScriptFunction):
@@ -218,18 +244,22 @@ class DocumentationGenerator(object):
 
         for d in self._definitions:
             if isinstance(d, ScriptClass):
-                stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
-                stream.write('<h2><a name="class_%s">%s</a></h2>' % (d.name, d.name))
+                stream.write('<div class="ui-widget ui-widget-content ui-corner-all">\n')
+                stream.write('<h2><a name="class_%s">%s</a></h2>\n' % (d.name, d.name))
                 stream.write('<div>%s</div>' % (d.description.replace('<', '&lt;')))
                 if d.parent is not None:
                     stream.write('Subclass of: <a href="#class_%s">%s</a>' % (d.parent.name, d.parent.name))
                 stream.write('<dl>')
                 for func in d.functions:
                     if func.parameters is None:
-                        stream.write('<dt>%s:%s [ERROR]</dt>' % (d.name, func.name))
+                        stream.write('<dt>%s:%s [NOT FOUND; see SeriousProton]</dt>' % (d.name, func.name))
+                        print("Failed to find parameters for %s:%s" % (d.name, func.name))
                     else:
                         stream.write('<dt>%s:%s(%s)</dt>' % (d.name, func.name, func.parameters.replace('<', '&lt;')))
                     stream.write('<dd>%s</dd>' % (func.description.replace('<', '&lt;')))
+                for member in d.members:
+                    stream.write('<dt>%s:%s</dt>' % (d.name, member.name))
+                    stream.write('<dd>%s</dd>' % (member.description.replace('<', '&lt;')))
                 stream.write('</dl>')
                 stream.write('</div>')
 
@@ -240,7 +270,8 @@ class DocumentationGenerator(object):
 
 if __name__ == "__main__":
     dg = DocumentationGenerator()
-    dg.addFile("EmptyEpsilon.cbp")
+    dg.addDirectory("src")
+    dg.addDirectory("../SeriousProton/src")
     dg.readFunctionInfo()
     dg.readScriptDefinitions()
     dg.linkFunctions()

@@ -12,12 +12,16 @@
 #define AVOIDANCE_MULTIPLIER      1.2
 #define TARGET_SPREAD             500
 
-// A wormhole object that drags objects toward it like a black hole, and then
-// teleports them to another point when they reach its center.
+/// A wormhole object that drags objects toward it like a black hole, and then
+/// teleports them to another point when they reach its center.
 REGISTER_SCRIPT_SUBCLASS(WormHole, SpaceObject)
 {
     /// Set the target of this wormhole
     REGISTER_SCRIPT_CLASS_FUNCTION(WormHole, setTargetPosition);
+    REGISTER_SCRIPT_CLASS_FUNCTION(WormHole, getTargetPosition);
+    /// Set a function that will be called if a SpaceObject is teleported.
+    /// First argument given to the function will be the WormHole, the second the SpaceObject that has been teleported.
+    REGISTER_SCRIPT_CLASS_FUNCTION(WormHole, onTeleportation);
 }
 
 REGISTER_MULTIPLAYER_CLASS(WormHole, "WormHole");
@@ -59,7 +63,7 @@ void WormHole::draw3DTransparent()
         if (alpha < 0.0)
             continue;
 
-        ShaderManager::getShader("billboardShader")->setParameter("textureMap", *textureManager.getTexture("wormHole" + string(cloud.texture) + ".png"));
+        ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture("wormHole" + string(cloud.texture) + ".png"));
         sf::Shader::bind(ShaderManager::getShader("billboardShader"));
         glBegin(GL_QUADS);
         glColor4f(alpha * 0.8, alpha * 0.8, alpha * 0.8, size);
@@ -77,7 +81,7 @@ void WormHole::draw3DTransparent()
 #endif//FEATURE_3D_RENDERING
 
 
-void WormHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void WormHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "wormHole" + string(radar_visual) + ".png");
@@ -90,7 +94,7 @@ void WormHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, floa
 }
 
 // Draw a line toward the target position
-void WormHole::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void WormHole::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {    
     sf::VertexArray a(sf::Lines, 2);
     a[0].position = position;
@@ -131,8 +135,14 @@ void WormHole::collide(Collisionable* target, float collision_force)
             target->setPosition( (target_position + 
                                   sf::Vector2f(random(-TARGET_SPREAD, TARGET_SPREAD), 
                                                random(-TARGET_SPREAD, TARGET_SPREAD))));
-            if (obj)
-                obj->wormhole_alpha = 0.0;
+        if (obj)
+        {
+            obj->wormhole_alpha = 0.0;
+            if (on_teleportation.isSet())
+            {
+                on_teleportation.call(P<WormHole>(this), obj);
+            }
+        }
     }
     
     // Warp postprocessor-alpha is calculated using alpha = (1 - (delay/10))
@@ -146,4 +156,14 @@ void WormHole::collide(Collisionable* target, float collision_force)
 void WormHole::setTargetPosition(sf::Vector2f v)
 {
     target_position = v;
+}
+
+sf::Vector2f WormHole::getTargetPosition()
+{
+    return target_position;
+}
+
+void WormHole::onTeleportation(ScriptSimpleCallback callback)
+{
+    this->on_teleportation = callback;
 }

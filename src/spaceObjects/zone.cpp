@@ -31,7 +31,7 @@ Zone::Zone()
     registerMemberReplication(&label);
 }
 
-void Zone::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Zone::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     if (!long_range || color.a == 0)
         return;
@@ -67,12 +67,12 @@ void Zone::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float sc
     }
 }
 
-void Zone::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Zone::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     if (long_range && color.a == 0)
     {
         color.a = 255;
-        drawOnRadar(window, position, scale, long_range);
+        drawOnRadar(window, position, scale, rotation, long_range);
         color.a = 0;
     }
 }

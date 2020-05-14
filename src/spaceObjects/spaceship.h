@@ -1,3 +1,4 @@
+#include <i18n.h>
 #ifndef SPACESHIP_H
 #define SPACESHIP_H
 
@@ -73,6 +74,11 @@ public:
      *[input] Ship will try to aim to this rotation. (degrees)
      */
     float target_rotation;
+    
+    /*!
+     *[input] Ship will rotate in this velocity. ([-1,1], overrides target_rotation)
+     */
+    float turnSpeed;
 
     /*!
      * [input] Amount of impulse requested from the user (-1.0 to 1.0)
@@ -168,15 +174,25 @@ public:
     sf::Vector2f docking_offset; //Server only
 
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
+    virtual ~SpaceShip();
 
 #if FEATURE_3D_RENDERING
     virtual void draw3DTransparent() override;
 #endif
     /*!
+     * Get this ship's radar signature dynamically modified by the state of its
+     * systems and current activity.
+     */
+    virtual RawRadarSignatureInfo getDynamicRadarSignatureInfo();
+    float getDynamicRadarSignatureGravity() { return getDynamicRadarSignatureInfo().gravity; }
+    float getDynamicRadarSignatureElectrical() { return getDynamicRadarSignatureInfo().electrical; }
+    float getDynamicRadarSignatureBiological() { return getDynamicRadarSignatureInfo().biological; }
+
+    /*!
      * Draw this ship on the radar.
      */
-    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
-    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
+    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
+    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
 
     virtual void update(float delta) override;
     virtual float getShieldRechargeRate(int shield_index) override;
@@ -206,7 +222,7 @@ public:
      * Spaceship is destroyed by damage.
      * \param info Information about damage type
      */
-    virtual void destroyedByDamage(DamageInfo& info);
+    virtual void destroyedByDamage(DamageInfo& info) override;
 
     /*!
      * Jump in current direction
@@ -218,7 +234,7 @@ public:
      * Check if object can dock with this ship.
      * \param object Object that wants to dock.
      */
-    virtual bool canBeDockedBy(P<SpaceObject> obj);
+    virtual bool canBeDockedBy(P<SpaceObject> obj) override;
 
     virtual void collide(Collisionable* other, float force) override;
 
@@ -252,6 +268,8 @@ public:
     virtual int scanningComplexity(P<SpaceObject> other) override;
     virtual int scanningChannelDepth(P<SpaceObject> other) override;
     virtual void scannedBy(P<SpaceObject> other) override;
+    void setScanState(EScannedState scanned);
+    void setScanStateByFaction(string faction_name, EScannedState scanned);
 
     bool isFriendOrFoeIdentified();//[DEPRICATED]
     bool isFullyScanned();//[DEPRICATED]
@@ -276,11 +294,11 @@ public:
      */
     float getSystemEffectiveness(ESystem system);
 
-    virtual void applyTemplateValues();
+    virtual void applyTemplateValues() override;
 
     P<SpaceObject> getTarget();
 
-    virtual std::unordered_map<string, string> getGMInfo();
+    virtual std::unordered_map<string, string> getGMInfo() override;
 
     bool isDocked(P<SpaceObject> target) { return docking_state == DS_Docked && docking_target == target; }
     bool canStartDocking() { return current_warp <= 0.0 && (!has_jump_drive || jump_delay <= 0.0); }
@@ -322,6 +340,14 @@ public:
             warp_speed_per_warp_level = 0;
         }
     }
+    void setWarpSpeed(float speed) { warp_speed_per_warp_level = std::max(0.0f, speed); }
+    float getWarpSpeed() {
+        if (has_warp_drive) {
+            return warp_speed_per_warp_level;
+        } else {
+            return 0.0f;
+        }
+     }
 
     float getBeamWeaponArc(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getArc(); }
     float getBeamWeaponDirection(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getDirection(); }
@@ -356,6 +382,8 @@ public:
     int getShieldsFrequency(void){ return shield_frequency; }
     void setShieldsFrequency(float freq) { if ((freq > SpaceShip::max_frequency) || (freq < 0)) return; shield_frequency = freq;}
 
+    int getBeamFrequency(){ return beam_frequency; }
+
     void setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage)
     {
         if (index < 0 || index >= max_beam_weapons)
@@ -389,16 +417,21 @@ public:
     void setWeaponTubeCount(int amount);
     int getWeaponTubeCount();
     EMissileWeapons getWeaponTubeLoadType(int index);
+    EMissileSizes getWeaponTubeSize(int index);
+    
     void weaponTubeAllowMissle(int index, EMissileWeapons type);
     void weaponTubeDisallowMissle(int index, EMissileWeapons type);
     void setWeaponTubeExclusiveFor(int index, EMissileWeapons type);
     void setWeaponTubeDirection(int index, float direction);
+    void setWeaponTubeSize(int index, EMissileSizes size);
+    void setTubeSize(int index, EMissileSizes size);
+    EMissileSizes getTubeSize(int index);
 
     void setRadarTrace(string trace) { radar_trace = trace; }
 
     void addBroadcast(int threshold, string message);
 
-    //Return a string that can be appended to an object create function in the lua scripting.
+    // Return a string that can be appended to an object create function in the lua scripting.
     // This function is used in getScriptExport calls to adjust for tweaks done in the GM screen.
     string getScriptExportModificationsOnTemplate();
 };
@@ -406,6 +439,7 @@ public:
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);
 
 string getMissileWeaponName(EMissileWeapons missile);
+string getLocaleMissileWeaponName(EMissileWeapons missile);
 REGISTER_MULTIPLAYER_ENUM(EMissileWeapons);
 REGISTER_MULTIPLAYER_ENUM(EWeaponTubeState);
 REGISTER_MULTIPLAYER_ENUM(EMainScreenSetting);

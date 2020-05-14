@@ -1,0 +1,170 @@
+# Android APK build toolchain file.
+# This toolchain file differs from most others and should not be seen as an example.
+# This is because the android NDK has a perfectly usable toolchain file already,
+# and thus we use that.
+# This file just facilitates in setting up the SDK/NDK if we do not have it yet.
+
+
+# We need the following things:
+# - Android SDK, with:
+#   - build-tools (aapt, dx, zipalign)
+#   - platform/android-{target_api} (for android.jar)
+# - java JDK with:
+#   - javac compiler for java 8 
+#   - jarsigner
+# - SDL2 build with the toolchain
+# - a signing key
+# This toolchain file is designed to setup everything if it's not supplied by the user, with the exception of the java JDK
+
+set(ANDROID_SDK_PATH "" CACHE PATH "Location of the android SDK installation.")
+set(ANDROID_API_MIN "16" CACHE STRING "Minimal API version for android build, any device below this version is not supported.")
+set(ANDROID_API_TARGET "26" CACHE STRING "Targeting API version for android, any features above this version cannot be used.")
+# Signing key to use to sign the APK. You can generate one with:
+#       keytool -genkey -alias ${ANDROID_SIGN_KEY_NAME} -keyalg RSA -keysize 2048 -validity 10000
+set(ANDROID_SIGN_KEY_NAME "Android" CACHE STRING "Which key to use to sign the final APK for android")
+set(ANDROID_SIGN_KEY_PASSWORD "password" CACHE STRING "Password that is used to protect the key. NOTE: This is stored in the cache, so readable for anyone with access to the drive where you run this.")
+
+
+#################################################################################
+
+# Configuration options for the NDK CMake toolchain file.
+set(ANDROID_ABI "armeabi-v7a")
+set(ANDROID_PLATFORM "android-${ANDROID_API_MIN}")
+
+find_program(UNZIP unzip)
+find_program(PATCH patch)
+
+find_package(Java 1.8 COMPONENTS Development JarSigner REQUIRED)
+
+if(CMAKE_HOST_WIN32)
+    set(HOST_EXE ".exe")
+    set(HOST_BAT ".bat")
+endif()
+
+function(execute_process_ex)
+    execute_process(${ARGV} RESULT_VARIABLE RES)
+    if(RES)
+        message(FATAL_ERROR "Failed to execute: ${ARGV}")
+    endif()
+endfunction()
+
+if(ANDROID_SDK_PATH STREQUAL "")
+    set(ANDROID_SDK_PATH "${CMAKE_CURRENT_LIST_DIR}/android/sdk/")
+    set(ANDROID_BUILD_TOOLS_VERSION "29.0.0")
+    if(NOT EXISTS "${ANDROID_SDK_PATH}/tools/bin/sdkmanager${HOST_BAT}")
+        file(WRITE "${ANDROID_SDK_PATH}/licenses/android-sdk-license" "24333f8a63b6825ea9c5514f83c2829b004d1fee")
+        if(CMAKE_HOST_WIN32)
+            file(DOWNLOAD https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip "${ANDROID_SDK_PATH}/sdk-tools.zip" SHOW_PROGRESS)
+        else()
+            file(DOWNLOAD https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip "${ANDROID_SDK_PATH}/sdk-tools.zip" SHOW_PROGRESS EXPECTED_HASH SHA256=92ffee5a1d98d856634e8b71132e8a95d96c83a63fde1099be3d86df3106def9)
+        endif()
+        execute_process_ex(COMMAND ${UNZIP} sdk-tools.zip WORKING_DIRECTORY "${ANDROID_SDK_PATH}")
+    endif()
+    if(NOT EXISTS "${ANDROID_SDK_PATH}/platforms/android-${ANDROID_API_TARGET}")
+        execute_process_ex(COMMAND "${ANDROID_SDK_PATH}/tools/bin/sdkmanager${HOST_BAT}" "platforms\;android-${ANDROID_API_TARGET}")
+    endif()
+    if(NOT EXISTS "${ANDROID_SDK_PATH}/build-tools/${ANDROID_BUILD_TOOLS_VERSION}")
+        execute_process_ex(COMMAND "${ANDROID_SDK_PATH}/tools/bin/sdkmanager${HOST_BAT}" "build-tools\;${ANDROID_BUILD_TOOLS_VERSION}")
+    endif()
+    if(NOT EXISTS "${ANDROID_SDK_PATH}/ndk-bundle")
+        execute_process_ex(COMMAND "${ANDROID_SDK_PATH}/tools/bin/sdkmanager${HOST_BAT}" "ndk-bundle")
+    endif()
+    if(NOT EXISTS "${ANDROID_SDK_PATH}/platform-tools")
+        execute_process_ex(COMMAND "${ANDROID_SDK_PATH}/tools/bin/sdkmanager${HOST_BAT}" "platform-tools")
+    endif()
+else()
+    file(GLOB ANDROID_BUILD_TOOLS_VERSION LIST_DIRECTORIES true "${ANDROID_SDK_PATH}/build-tools/*.*.*")
+    get_filename_component(ANDROID_BUILD_TOOLS_VERSION "${ANDROID_BUILD_TOOLS_VERSION}" NAME)
+    if(NOT EXISTS "${ANDROID_SDK_PATH}/platforms/android-${ANDROID_API_TARGET}")
+        message(FATAL_ERROR "Missing android platform in supplied android SDK: android-${ANDROID_API_TARGET}")
+    endif()
+endif()
+set(AAPT "${ANDROID_SDK_PATH}/build-tools/${ANDROID_BUILD_TOOLS_VERSION}/aapt")
+set(DX "${ANDROID_SDK_PATH}/build-tools/${ANDROID_BUILD_TOOLS_VERSION}/dx${HOST_BAT}")
+set(ZIPALIGN "${ANDROID_SDK_PATH}/build-tools/${ANDROID_BUILD_TOOLS_VERSION}/zipalign")
+set(ANDROID_PLATFORM_JAR "${ANDROID_SDK_PATH}/platforms/android-${ANDROID_API_TARGET}/android.jar")
+set(ADB "${ANDROID_SDK_PATH}/platform-tools/adb")
+
+set(SFML_SRC_PATH "${CMAKE_CURRENT_LIST_DIR}/android/SFML/source")
+set(SFML_INSTALL_PATH "${CMAKE_CURRENT_LIST_DIR}/android/sdk/ndk-bundle/sources/third_party/sfml")
+if(NOT EXISTS "${SFML_SRC_PATH}")
+    file(DOWNLOAD https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip "${CMAKE_CURRENT_LIST_DIR}/android/SFML/SFML_src.zip" SHOW_PROGRESS)
+    execute_process_ex(COMMAND ${UNZIP} SFML_src.zip WORKING_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/android/SFML")
+    file(RENAME "${CMAKE_CURRENT_LIST_DIR}/android/SFML/SFML-2.5.1" "${SFML_SRC_PATH}")
+    #execute_process_ex(COMMAND ${PATCH} -p1 -i "${CMAKE_CURRENT_LIST_DIR}/../../android/sfml.patch" WORKING_DIRECTORY "${SFML_SRC_PATH}")
+endif()
+if(NOT EXISTS "${SFML_INSTALL_PATH}")
+    file(MAKE_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/android/SFML/build")
+    execute_process_ex(
+        COMMAND "${CMAKE_COMMAND}" "${SFML_SRC_PATH}" "-G" "${CMAKE_GENERATOR}"
+            "-DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM}" "-DCMAKE_TOOLCHAIN_FILE=${ANDROID_SDK_PATH}/ndk-bundle/build/cmake/android.toolchain.cmake"
+            "-DANDROID_ABI=${ANDROID_ABI}" "-DANDROID_PLATFORM=${ANDROID_PLATFORM}" "-DCMAKE_INSTALL_PREFIX=${SFML_INSTALL_PATH}" "-DCMAKE_BUILD_TYPE=Release"
+            "-DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=BOTH" "-DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=BOTH"
+            "-DCMAKE_SHARED_LINKER_FLAGS_RELEASE=-s"
+        WORKING_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/android/SFML/build")
+    execute_process_ex(
+        COMMAND "${CMAKE_MAKE_PROGRAM}" "install"
+        WORKING_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/android/SFML/build")
+endif()
+set(SFML_ROOT "${SFML_INSTALL_PATH}")
+
+include("${ANDROID_SDK_PATH}/ndk-bundle/build/cmake/android.toolchain.cmake")
+
+# We need to add a small thing here, or else the compiler checks fail, as those run with less configuration options enabled.
+list(APPEND CMAKE_TRY_COMPILE_PLATFORM_VARIABLES ANDROID_SDK_PATH)
+set(CMAKE_SHARED_LINKER_FLAGS_RELEASE_INIT "${CMAKE_SHARED_LINKER_FLAGS_RELEASE_INIT} -s")
+set(CMAKE_LIBRARY_ARCHITECTURE ${ANDROID_ABI})
+
+# Macro to build the android apk
+macro(android_apk NAME)
+    file(COPY "${SFML_INSTALL_PATH}/extlibs/lib/${ANDROID_ABI}/libopenal.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
+    file(COPY "${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-window.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
+    file(COPY "${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-network.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
+    file(COPY "${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-audio.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
+    file(COPY "${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-system.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
+    file(COPY "${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-graphics.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
+    file(COPY "${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-activity.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
+    file(COPY "${ANDROID_SDK_PATH}/ndk-bundle/sources/cxx-stl/llvm-libc++/libs/${ANDROID_ABI}/libc++_shared.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
+    add_custom_command(
+        OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/libemptyepsilon.so"
+        COMMAND "${CMAKE_COMMAND}" ARGS -E copy "$<TARGET_FILE:EmptyEpsilon>" "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/libemptyepsilon.so"
+        DEPENDS "$<TARGET_FILE:EmptyEpsilon>"
+    )
+
+    set(APK_ALIGNED "${CMAKE_CURRENT_BINARY_DIR}/${NAME}.apk")
+    set(APK "${APK_ALIGNED}.unaligned")
+    file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/resources" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/")
+    file(REMOVE_RECURSE "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/resources/music/")
+    file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/scripts" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/")
+    file(GLOB_RECURSE ASSETS LIST_DIRECTORIES false RELATIVE "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/" "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/*")
+    add_custom_command(
+        OUTPUT "${APK}"
+        COMMAND "${AAPT}" ARGS package -f -M "${CMAKE_CURRENT_SOURCE_DIR}/android/AndroidManifest.xml" -S "${CMAKE_CURRENT_SOURCE_DIR}/android/res" -I "${ANDROID_PLATFORM_JAR}" -F "${APK}"
+        COMMAND "${AAPT}" ARGS add "${APK}"
+            lib/${ANDROID_ABI}/libemptyepsilon.so
+            lib/${ANDROID_ABI}/libopenal.so
+            lib/${ANDROID_ABI}/libsfml-window.so
+            lib/${ANDROID_ABI}/libsfml-network.so
+            lib/${ANDROID_ABI}/libsfml-audio.so
+            lib/${ANDROID_ABI}/libsfml-system.so
+            lib/${ANDROID_ABI}/libsfml-graphics.so
+            lib/${ANDROID_ABI}/libsfml-activity.so
+            lib/${ANDROID_ABI}/libc++_shared.so
+        COMMAND "${AAPT}" ARGS add "${APK}" ${ASSETS}
+        COMMAND "${Java_JARSIGNER_EXECUTABLE}" ARGS -verbose -sigalg SHA1withRSA -digestalg SHA1 -storepass "${ANDROID_SIGN_KEY_PASSWORD}" "${APK}" "${ANDROID_SIGN_KEY_NAME}"
+        WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/"
+        DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/libemptyepsilon.so"
+    )
+    add_custom_command(
+        OUTPUT "${APK_ALIGNED}"
+        COMMAND "${CMAKE_COMMAND}" -E remove -f "${APK_ALIGNED}"
+        COMMAND "${ZIPALIGN}" ARGS 4 "${APK}" "${APK_ALIGNED}"
+        DEPENDS "${APK}"
+    )
+    add_custom_target(apk ALL DEPENDS "${APK_ALIGNED}")
+    add_custom_target(upload
+        COMMAND ${ADB} install -r "${APK_ALIGNED}"
+        COMMAND ${ADB} shell am start -n "eu.daid.emptyepsilon/android.app.NativeActivity"
+        DEPENDS "${APK_ALIGNED}" WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+    )
+endmacro()

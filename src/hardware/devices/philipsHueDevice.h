@@ -9,12 +9,13 @@
 //The PhilipsHueDevice talks to a philips hue bridge.
 //Documentation of the philips hue API is at:
 //  https://www.developers.meethue.com/documentation/getting-started
-//The PhilipsHueDevice device creates 3 channels for each connected light.
-//So the amount of available channels is amount of lights x3.
+//The PhilipsHueDevice device creates 4 channels for each connected light.
+//So the amount of available channels is amount of lights x4.
 //The channels are:
 // Brightness
 // Saturation
 // Hue
+// Transition Time
 class PhilipsHueDevice : public HardwareOutputDevice
 {
 public:
@@ -37,12 +38,14 @@ private:
     class LightInfo
     {
     public:
-        LightInfo() : dirty(true), brightness(0), saturation(0), hue(0) {}
+        LightInfo() : dirty(true), brightness(0), saturation(0), hue(0), transitiontime(0), laststate(0) {}
     
         bool dirty;
         int brightness;
         int saturation;
         int hue;
+        int transitiontime;
+        string laststate;
     };
 
     sf::Thread update_thread;
@@ -54,6 +57,7 @@ private:
     void updateLoop();
     
     string ip_address;
+    int port = 80;
     string username;
     string userfile;
     int light_count;

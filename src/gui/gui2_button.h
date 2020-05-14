@@ -16,6 +16,7 @@ protected:
     string icon_name;
     EGuiAlign icon_alignment;
     float icon_rotation;
+    WidgetColorSet color_set;
 public:
     GuiButton(GuiContainer* owner, string id, string text, func_t func);
 
@@ -25,9 +26,11 @@ public:
     
     GuiButton* setText(string text);
     GuiButton* setTextSize(float size);
-    GuiButton* setIcon(string icon_name, EGuiAlign icon_alignment = ACenterLeft, float rotation=0);
+    GuiButton* setIcon(string icon_name, EGuiAlign icon_alignment = ACenterLeft, float rotation = 0);
+    GuiButton* setColors(WidgetColorSet color_set);
     string getText() const;
     string getIcon() const;
+    WidgetColorSet getColors() const;
 };
 
 #endif//GUI2_BUTTON_H

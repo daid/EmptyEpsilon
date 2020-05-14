@@ -67,7 +67,7 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
         load_type_rows[n].layout = new GuiAutoLayout(this, id + "_ROW_" + string(n), LayoutHorizontalLeftToRight);
         load_type_rows[n].layout->setSize(GuiElement::GuiSizeMax, 40);
         
-        load_type_rows[n].button = new GuiToggleButton(load_type_rows[n].layout, id + "_MW_" + string(n), getMissileWeaponName(EMissileWeapons(n)), [this, n](bool value) {
+        load_type_rows[n].button = new GuiToggleButton(load_type_rows[n].layout, id + "_MW_" + string(n), getLocaleMissileWeaponName(EMissileWeapons(n)), [this, n](bool value) {
             if (value)
                 load_type = EMissileWeapons(n);
             else
@@ -89,7 +89,7 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window){
         return;
     for (int n = 0; n < MW_Count; n++)
     {
-        load_type_rows[n].button->setText(getMissileWeaponName(EMissileWeapons(n)) + " [" + string(my_spaceship->weapon_storage[n]) + "/" + string(my_spaceship->weapon_storage_max[n]) + "]");
+        load_type_rows[n].button->setText(getLocaleMissileWeaponName(EMissileWeapons(n)) + " [" + string(my_spaceship->weapon_storage[n]) + "/" + string(my_spaceship->weapon_storage_max[n]) + "]");
         load_type_rows[n].layout->setVisible(my_spaceship->weapon_storage_max[n] > 0);
     }
     
@@ -104,41 +104,41 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window){
         if(tube.isEmpty())
         {
             rows[n].load_button->setEnable(tube.canLoad(load_type));
-            rows[n].load_button->setText("Load");
+            rows[n].load_button->setText(tr("missile","Load"));
             rows[n].fire_button->disable()->show();
-            rows[n].fire_button->setText(tube.getTubeName() + ": Empty");
+            rows[n].fire_button->setText(tube.getTubeName() + ": " + tr("missile","Empty"));
             rows[n].loading_bar->hide();
         }else if(tube.isLoaded())
         {
             rows[n].load_button->enable();
-            rows[n].load_button->setText("Unload");
+            rows[n].load_button->setText(tr("missile","Unload"));
             rows[n].fire_button->enable()->show();
-            rows[n].fire_button->setText(tube.getTubeName() + ": " + getMissileWeaponName(tube.getLoadType()));
+            rows[n].fire_button->setText(tube.getTubeName() + ": " + getLocaleMissileWeaponName(tube.getLoadType()));
             rows[n].loading_bar->hide();
         }else if(tube.isLoading())
         {
             rows[n].load_button->disable();
-            rows[n].load_button->setText("Load");
+            rows[n].load_button->setText(tr("missile","Load"));
             rows[n].fire_button->hide();
-            rows[n].fire_button->setText(tube.getTubeName() + ": " + getMissileWeaponName(tube.getLoadType()));
+            rows[n].fire_button->setText(tube.getTubeName() + ": " + getLocaleMissileWeaponName(tube.getLoadType()));
             rows[n].loading_bar->show();
             rows[n].loading_bar->setValue(tube.getLoadProgress());
-            rows[n].loading_label->setText("Loading");
+            rows[n].loading_label->setText(tr("missile","Loading"));
         }else if(tube.isUnloading())
         {
             rows[n].load_button->disable();
-            rows[n].load_button->setText("Unload");
+            rows[n].load_button->setText(tr("missile","Unload"));
             rows[n].fire_button->hide();
-            rows[n].fire_button->setText(getMissileWeaponName(tube.getLoadType()));
+            rows[n].fire_button->setText(getLocaleMissileWeaponName(tube.getLoadType()));
             rows[n].loading_bar->show();
             rows[n].loading_bar->setValue(tube.getUnloadProgress());
-            rows[n].loading_label->setText("Unloading");
+            rows[n].loading_label->setText(tr("missile","Unloading"));
         }else if(tube.isFiring())
         {
             rows[n].load_button->disable();
-            rows[n].load_button->setText("Load");
+            rows[n].load_button->setText(tr("missile","Load"));
             rows[n].fire_button->disable()->show();
-            rows[n].fire_button->setText("Firing");
+            rows[n].fire_button->setText(tr("missile","Firing"));
             rows[n].loading_bar->hide();
         }
     }

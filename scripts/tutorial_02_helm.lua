@@ -1,7 +1,7 @@
 -- Name: Helm
 -- Description: [Station Tutorial]
 --- -------------------
---- -Goes over controling movement of the ship.
+--- -Goes over controlling movement of the ship.
 ---
 --- [Station Info]
 --- -------------------
@@ -33,10 +33,10 @@ function init()
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Phobos M3P")
     tutorial:setPlayerShip(player)
 
-    tutorial:showMessage([[Welcome to the EmptyEpsilon tutorial.
+    tutorial:showMessage(_([[Welcome to the EmptyEpsilon tutorial.
 Note that this tutorial is designed to give you a quick overview of the basic options for the game, but does not cover every single aspect.
 
-Press next to continue...]], true)
+Press next to continue...]]), true)
     tutorial_list = {
         helmsTutorial
     }
@@ -140,47 +140,47 @@ addToSequence(helmsTutorial, function()
     player:setImpulseMaxSpeed(0);
     player:setRotationMaxSpeed(0);
 end)
-addToSequence(helmsTutorial, [[This is the helms screen.
-As the helms officer, you command your ship's movement in space.]])
+addToSequence(helmsTutorial, _([[This is the helms screen.
+As the helms officer, you command your ship's movement in space.]]))
 addToSequence(helmsTutorial, function() player:setImpulseMaxSpeed(90) end)
-addToSequence(helmsTutorial, [[Your primary controls are your impulse engines and maneuvering thrusters.
+addToSequence(helmsTutorial, _([[Your primary controls are your impulse engines and maneuvering thrusters.
 Your impulse controls are on the left side of the screen.
 
-Raise your impulse level to 100% to fly forward right now.]], function() return distance(player, 0, 0) > 1000 end)
+Raise your impulse level to 100% to fly forward right now.]]), function() return distance(player, 0, 0) > 1000 end)
 addToSequence(helmsTutorial, function() player:setImpulseMaxSpeed(0):commandImpulse(0):setRotationMaxSpeed(10) end)
-addToSequence(helmsTutorial, [[Good. You now know how to move forward.
+addToSequence(helmsTutorial, _([[Good. You now know how to move forward.
 
 I've disabled your impulse engine for now. Next, let's rotate your ship.
 Rotating the ship is easy. Simply press a heading on the radar screen to rotate your ship in that direction.
-Try rotating to heading 200 right now.]], function() return math.abs(player:getHeading() - 200) < 1.0 end)
+Try rotating to heading 200 right now.]]), function() return math.abs(player:getHeading() - 200) < 1.0 end)
 addToSequence(helmsTutorial, function() player:setImpulseMaxSpeed(90) end)
 addToSequence(helmsTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(0, -1500) end)
-addToSequence(helmsTutorial, [[Excellent!
+addToSequence(helmsTutorial, _([[Excellent!
 
 Next up: docking. Docking with a station recharges your energy, repairs your hull, and allows the relay officer to request weapon refills. It can also be important for other mission-related events.
 To dock, maneuver within 1u of a station and press the "Request Dock" button, from which point docking is fully automated.
-Maneuver to the nearby station and request permission to dock.]], function() return player:isDocked(prev_object) end)
-addToSequence(helmsTutorial, [[Now that you are docked, your movement is locked. As helms officer, there is nothing else you can do but undock, so do that now.]], function() return not player:isDocked(prev_object) end)
+Maneuver to the nearby station and request permission to dock.]]), function() return player:isDocked(prev_object) end)
+addToSequence(helmsTutorial, _([[Now that you are docked, your movement is locked. As helms officer, there is nothing else you can do but undock, so do that now.]]), function() return not player:isDocked(prev_object) end)
 addToSequence(helmsTutorial, function() prev_object:destroy() end)
 addToSequence(helmsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Flavia"):setPosition(-1500, 1500):orderIdle():setScanned(true):setHull(15):setShieldsMax(15) end)
 addToSequence(helmsTutorial, function() player:commandSetTarget(prev_object) end)
-addToSequence(helmsTutorial, [[Ok, there are just a few more things that you need to know.
+addToSequence(helmsTutorial, _([[Ok, there are just a few more things that you need to know.
 Remember the beam weapons from the basics tutorial? As helms officer, it is your task to keep those beams on your target.
-I've set up an stationary enemy ship as a target. Destroy it with your beam weapons. Note that at every shot, the corresponding firing arc will change color.]], function() return not prev_object:isValid() end)
-addToSequence(helmsTutorial, [[Aggression is not always the solution, but boy, it is fun!
+I've set up an stationary enemy ship as a target. Destroy it with your beam weapons. Note that at every shot, the corresponding firing arc will change color.]]), function() return not prev_object:isValid() end)
+addToSequence(helmsTutorial, _([[Aggression is not always the solution, but boy, it is fun!
 
 On to the next task: moving long distances.
 There are two methods of moving long distances quickly. Depending on your ship, you either have a warp drive or a jump drive.
-The warp drive moves your ship at high speed, while the jump drive instantly teleports your ship a great distance.]])
+The warp drive moves your ship at high speed, while the jump drive instantly teleports your ship a great distance.]]))
 addToSequence(helmsTutorial, function() player:setWarpDrive(true) end)
-addToSequence(helmsTutorial, [[First, let us try the warp drive.
+addToSequence(helmsTutorial, _([[First, let us try the warp drive.
 
 It functions like the impulse drive but only propels your ship forward, and consumes energy at a much faster rate.
-Use the warp drive to move more than 30u away from this starting point.]], function() return distance(player, 0, 0) > 30000 end)
+Use the warp drive to move more than 30u away from this starting point.]]), function() return distance(player, 0, 0) > 30000 end)
 addToSequence(helmsTutorial, function() player:setWarpDrive(false):setJumpDrive(true):setPosition(0, 0) end)
-addToSequence(helmsTutorial, [[Next, let us demonstrate the jump drive.
+addToSequence(helmsTutorial, _([[Next, let us demonstrate the jump drive.
 
-To use the jump drive, point your ship in the direction where you want to jump, configure a distance to jump, and then initiate it. The jump occurs 10 seconds after you initiate. Use the jump drive to jump more than 30u from this starting point, in any direction.]], function() return distance(player, 0, 0) > 30000 end)
-addToSequence(helmsTutorial, [[Notice how your jump drive needs to recharge after use.
+To use the jump drive, point your ship in the direction where you want to jump, configure a distance to jump, and then initiate it. The jump occurs 10 seconds after you initiate. Use the jump drive to jump more than 30u from this starting point, in any direction.]]), function() return distance(player, 0, 0) > 30000 end)
+addToSequence(helmsTutorial, _([[Notice how your jump drive needs to recharge after use.
 
-This covers the basics of the helms officer.]])
+This covers the basics of the helms officer.]]))

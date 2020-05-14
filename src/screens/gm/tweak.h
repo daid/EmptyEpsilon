@@ -93,6 +93,7 @@ private:
     GuiSelector* missile_tube_amount_selector;
     GuiSlider* direction_slider;
     GuiSlider* load_time_slider;
+    GuiSelector* size_selector;
     GuiToggleButton* allowed_use[MW_Count];
 public:
     GuiShipTweakMissileTubes(GuiContainer* owner);
@@ -172,7 +173,29 @@ private:
 public:
     GuiShipTweakPlayer(GuiContainer* owner);
 
-    virtual void open(P<SpaceObject> target);
+    virtual void open(P<SpaceObject> target) override;
+
+    virtual void onDraw(sf::RenderTarget& window) override;
+};
+
+class GuiShipTweakPlayer2 : public GuiTweakPage
+{
+private:
+    P<PlayerSpaceship> target;
+
+    GuiSlider* coolant_slider;
+    GuiSlider* short_range_radar_slider;
+    GuiSlider* long_range_radar_slider;
+    GuiToggleButton* can_scan;
+    GuiToggleButton* can_hack;
+    GuiToggleButton* can_dock;
+    GuiToggleButton* can_combat_maneuver;
+    GuiToggleButton* can_self_destruct;
+    GuiToggleButton* can_launch_probe;
+public:
+    GuiShipTweakPlayer2(GuiContainer* owner);
+
+    virtual void open(P<SpaceObject> target) override;
 
     virtual void onDraw(sf::RenderTarget& window) override;
 };
@@ -188,7 +211,7 @@ private:
 public:
     GuiObjectTweakBase(GuiContainer* owner);
 
-    virtual void open(P<SpaceObject> target);
+    virtual void open(P<SpaceObject> target) override;
 
     virtual void onDraw(sf::RenderTarget& window) override;
 };

@@ -74,6 +74,16 @@ bool GuiTextEntry::onKey(sf::Event::KeyEvent key, int unicode)
     return true;
 }
 
+void GuiTextEntry::onFocusGained()
+{
+    sf::Keyboard::setVirtualKeyboardVisible(true);
+}
+
+void GuiTextEntry::onFocusLost()
+{
+    sf::Keyboard::setVirtualKeyboardVisible(false);
+}
+
 string GuiTextEntry::getText() const
 {
     return text;

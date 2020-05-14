@@ -22,6 +22,11 @@ RepairCrew::RepairCrew()
     repairCrewList.push_back(this);
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
+RepairCrew::~RepairCrew()
+{
+}
+
 /* struct PathNode
 {
     ERepairCrewDirection arrive_direction;
@@ -179,6 +184,9 @@ void RepairCrew::update(float delta)
                 ship->systems[system].health += repair_per_second * delta;
                 if (ship->systems[system].health > 1.0)
                     ship->systems[system].health = 1.0;
+                ship->systems[system].hacked_level -= repair_per_second * delta;
+                if (ship->systems[system].hacked_level < 0.0)
+                    ship->systems[system].hacked_level = 0.0;
             }
             if (ship->auto_repair_enabled && pos == target_position && (system == SYS_None || !ship->hasSystem(system) || ship->systems[system].health == 1.0))
             {

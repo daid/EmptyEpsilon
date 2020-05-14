@@ -22,12 +22,25 @@ static int addCommsReply(lua_State* L)
     comms_script_interface->addCommsReply(luaL_checkstring(L, 1), callback);
     return 0;
 }
+
+static int commsSwitchToGM(lua_State* L)
+{
+    if (!comms_script_interface)
+        return 0;
+
+    comms_script_interface->switchToGM();
+    return 0;
+}
+
 /// setCommsMessage(message)
 /// Sets the message/reply shown to the comms officer.
 REGISTER_SCRIPT_FUNCTION(setCommsMessage);
 /// addCommsReply(message, function)
 /// Add an reply option for communications.
 REGISTER_SCRIPT_FUNCTION(addCommsReply);
+/// Use this function from a communication callback function to switch the current
+/// communication from scripted to a GM based chat.
+REGISTER_SCRIPT_FUNCTION(commsSwitchToGM);
 
 bool CommsScriptInterface::openCommChannel(P<PlayerSpaceship> ship, P<SpaceObject> target)
 {
@@ -64,7 +77,7 @@ void CommsScriptInterface::commChannelMessage(int32_t message_id)
 {
     comms_script_interface = this;
     
-    if (message_id >= 0 && message_id < int(reply_callbacks.size()))
+    if (message_id >= 0 && message_id < int(reply_callbacks.size()) && ship && target)
     {
         ScriptSimpleCallback callback = reply_callbacks[message_id];
         if (!scriptObject)
@@ -89,4 +102,9 @@ void CommsScriptInterface::addCommsReply(string message, ScriptSimpleCallback ca
 {
     comms_script_interface->ship->addCommsReply(reply_callbacks.size(), message);
     reply_callbacks.push_back(callback);
+}
+
+void CommsScriptInterface::switchToGM()
+{
+    ship->switchCommsToGM();
 }

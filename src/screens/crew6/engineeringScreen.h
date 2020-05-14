@@ -5,6 +5,7 @@
 #include "shipTemplate.h"
 #include "playerInfo.h"
 
+class GuiSelfDestructButton;
 class GuiKeyValueDisplay;
 class GuiLabel;
 class GuiSlider;
@@ -13,22 +14,24 @@ class GuiImage;
 class GuiArrow;
 class GuiToggleButton;
 class GuiProgressbar;
+class GuiProgressSlider;
 
 class EngineeringScreen : public GuiOverlay
 {
 private:
-    GuiOverlay* background_gradient;
     GuiOverlay* background_crosses;
 
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* hull_display;
     GuiKeyValueDisplay* front_shield_display;
     GuiKeyValueDisplay* rear_shield_display;
+    GuiKeyValueDisplay* coolant_display;
+    GuiSelfDestructButton* self_destruct_button;
     GuiLabel* power_label;
     GuiSlider* power_slider;
     GuiLabel* coolant_label;
     GuiSlider* coolant_slider;
-    
+
     class SystemRow
     {
     public:
@@ -39,8 +42,8 @@ private:
         GuiProgressbar* heat_bar;
         GuiArrow* heat_arrow;
         GuiImage* heat_icon;
-        GuiProgressbar* power_bar;
-        GuiProgressbar* coolant_bar;
+        GuiProgressSlider* power_bar;
+        GuiProgressSlider* coolant_bar;
     };
     std::vector<SystemRow> system_rows;
     GuiAutoLayout* system_effects_container;
@@ -59,6 +62,7 @@ public:
     
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;
+    virtual bool onJoystickAxis(const AxisAction& axisAction) override;
 };
 
 #endif//ENGINEERING_SCREEN_H

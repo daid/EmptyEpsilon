@@ -1,7 +1,9 @@
+#include <i18n.h>
 #include "indicatorOverlays.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "main.h"
+#include "preferenceManager.h"
 
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_label.h"
@@ -40,7 +42,7 @@ GuiIndicatorOverlays::~GuiIndicatorOverlays()
 
 static float glow(float min, float max, float time)
 {
-    return min + (max - min) * fabsf(fmodf(engine->getElapsedTime() / time, 2.0) - 1.0);
+    return min + (max - min) * std::abs(fmodf(engine->getElapsedTime() / time, 2.0) - 1.0);
 }
 
 void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
@@ -84,11 +86,11 @@ void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
         }else{
             glitchPostProcessor->enabled = false;
         }
-        if (my_spaceship->current_warp > 0.0)
+        if (my_spaceship->current_warp > 0.0 && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
         {
             warpPostProcessor->enabled = true;
             warpPostProcessor->setUniform("amount", my_spaceship->current_warp * 0.01);
-        }else if (my_spaceship->jump_delay > 0.0 && my_spaceship->jump_delay < 2.0)
+        }else if (my_spaceship->jump_delay > 0.0 && my_spaceship->jump_delay < 2.0 && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
         {
             warpPostProcessor->enabled = true;
             warpPostProcessor->setUniform("amount", (2.0 - my_spaceship->jump_delay) * 0.1);
@@ -102,6 +104,9 @@ void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
     
     if (engine->getGameSpeed() == 0.0)
     {
+        warpPostProcessor->enabled = false;
+        glitchPostProcessor->enabled = false;
+
         if (gameGlobalInfo->getVictoryFactionId() < 0)
         {
             pause_overlay->show();
@@ -124,7 +129,7 @@ void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
                 victory_label->setText("Victory!");
                 break;
             case FVF_Neutral:
-                victory_label->setText(factionInfo[gameGlobalInfo->getVictoryFactionId()]->getName() + " wins");
+                victory_label->setText(tr("{faction} wins").format({{"faction", factionInfo[gameGlobalInfo->getVictoryFactionId()]->getLocaleName()}}));
                 break;
             }
         }

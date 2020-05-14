@@ -6,7 +6,7 @@
 
 #include "scriptInterface.h"
 
-// Nebulae block long-range radar in a 5U range.
+/// Nebulae block long-range radar in a 5U range.
 REGISTER_SCRIPT_SUBCLASS(Nebula, SpaceObject)
 {
 }
@@ -55,7 +55,7 @@ void Nebula::draw3DTransparent()
         if (alpha < 0.0)
             continue;
 
-        ShaderManager::getShader("billboardShader")->setParameter("textureMap", *textureManager.getTexture("Nebula" + string(cloud.texture) + ".png"));
+        ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture("Nebula" + string(cloud.texture) + ".png"));
         sf::Shader::bind(ShaderManager::getShader("billboardShader"));
         glBegin(GL_QUADS);
         glColor4f(alpha * 0.8, alpha * 0.8, alpha * 0.8, size);
@@ -72,11 +72,11 @@ void Nebula::draw3DTransparent()
 }
 #endif//FEATURE_3D_RENDERING
 
-void Nebula::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Nebula::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "Nebula" + string(radar_visual) + ".png");
-    object_sprite.setRotation(getRotation());
+    object_sprite.setRotation(getRotation()-rotation);
     object_sprite.setPosition(position);
     float size = getRadius() * scale / object_sprite.getTextureRect().width * 3.0;
     object_sprite.setScale(size, size);
@@ -84,7 +84,7 @@ void Nebula::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float 
     window.draw(object_sprite, sf::BlendAdd);
 }
 
-void Nebula::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Nebula::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::CircleShape range_circle(getRadius() * scale);
     range_circle.setOrigin(getRadius() * scale, getRadius() * scale);

@@ -10,18 +10,21 @@ class ExplosionEffect : public SpaceObject, public Updatable
     
     float lifetime;
     float size;
+    string explosion_sound;
     sf::Vector3f particleDirections[particleCount];
     bool on_radar;
 public:
     ExplosionEffect();
+    virtual ~ExplosionEffect();
 
 #if FEATURE_3D_RENDERING
     virtual void draw3DTransparent();
 #endif
-    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
+    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool longRange);
     virtual void update(float delta);
     
     void setSize(float size) { this->size = size; }
+    void setExplosionSound(string sound) { this->explosion_sound = sound; }
     void setOnRadar(bool on_radar) { this->on_radar = on_radar; }
 };
 

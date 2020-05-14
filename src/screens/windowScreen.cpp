@@ -8,11 +8,16 @@
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/shipDestroyedPopup.h"
 
-WindowScreen::WindowScreen(float angle)
+WindowScreen::WindowScreen(float angle, uint8_t flags)
 : angle(angle)
 {
     viewport = new GuiViewport3D(this, "VIEWPORT");
-    viewport->showCallsigns()->showHeadings()->showSpacedust();
+    if (flags & flag_callsigns)
+      viewport->showCallsigns();
+    if (flags & flag_headings)
+      viewport->showHeadings();
+    if (flags & flag_spacedust)
+      viewport->showSpacedust();
     viewport->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     new GuiShipDestroyedPopup(this);

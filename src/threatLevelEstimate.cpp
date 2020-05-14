@@ -1,7 +1,7 @@
 #include "gameGlobalInfo.h"
 #include "threatLevelEstimate.h"
 #include "spaceObjects/beamEffect.h"
-#include "spaceObjects/missileWeapon.h"
+#include "spaceObjects/missiles/missileWeapon.h"
 
 ThreatLevelEstimate::ThreatLevelEstimate()
 {
@@ -9,10 +9,6 @@ ThreatLevelEstimate::ThreatLevelEstimate()
     threat_high = false;
     threat_high_func = nullptr;
     threat_low_func = nullptr;
-}
-
-ThreatLevelEstimate::~ThreatLevelEstimate()
-{
 }
 
 void ThreatLevelEstimate::update(float delta)

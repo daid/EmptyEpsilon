@@ -56,14 +56,19 @@ void AutoConnectScreen::update(float delta)
     if (scanner)
     {
         std::vector<ServerScanner::ServerInfo> serverList = scanner->getServerList();
+        string autoconnect_address = PreferencesManager::get("autoconnect_address", "");
 
-        if (serverList.size() > 0)
-        {
+        if (autoconnect_address != "") {
+            status_label->setText("Using autoconnect server " + autoconnect_address);
+            connect_to_address = autoconnect_address;
+            new GameClient(VERSION_NUMBER, autoconnect_address);
+            scanner->destroy();
+        } else if (serverList.size() > 0) {
             status_label->setText("Found server " + serverList[0].name);
             connect_to_address = serverList[0].address;
             new GameClient(VERSION_NUMBER, serverList[0].address);
             scanner->destroy();
-        }else{
+        } else {
             status_label->setText("Searching for server...");
         }
     }else{
@@ -88,7 +93,7 @@ void AutoConnectScreen::update(float delta)
                         my_player_info = i;
                 if (my_player_info && gameGlobalInfo)
                 {
-                    status_label->setText("Waiting for ship...");
+                    status_label->setText("Waiting for ship on " + connect_to_address.toString() + "...");
                     if (!my_spaceship)
                     {
                         for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
@@ -99,7 +104,7 @@ void AutoConnectScreen::update(float delta)
                                 break;
                             }
                         }
-                    }else{
+                    } else {
                         if (my_spaceship->getMultiplayerId() == my_player_info->ship_id && (crew_position == max_crew_positions || my_player_info->crew_position[crew_position]))
                         {
                             destroy();

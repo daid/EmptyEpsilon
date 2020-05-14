@@ -5,6 +5,8 @@
 #include <SFML/Window/Event.hpp>
 #include "stringImproved.h"
 
+class JoystickConfig;
+
 class HotkeyConfigItem
 {
 public:
@@ -49,6 +51,7 @@ private:
     
     void newCategory(string key, string name);
     void newKey(string key, std::tuple<string, string>);
+friend class JoystickConfig;
 };
 
 extern HotkeyConfig hotkeys;

@@ -18,13 +18,14 @@ REGISTER_MULTIPLAYER_CLASS(SpaceStation, "SpaceStation");
 SpaceStation::SpaceStation()
 : ShipTemplateBasedObject(300, "SpaceStation")
 {
+    restocks_scan_probes = true;
     comms_script_name = "comms_station.lua";
     setRadarSignatureInfo(0.2, 0.5, 0.5);
 
     callsign = "DS" + string(getMultiplayerId());
 }
 
-void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite objectSprite;
     textureManager.setTexture(objectSprite, radar_trace);
@@ -34,7 +35,7 @@ void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, 
     if (!long_range)
     {
         sprite_scale *= 0.7;
-        drawShieldsOnRadar(window, position, scale, sprite_scale, true);
+        drawShieldsOnRadar(window, position, scale, rotation, sprite_scale, true);
     }
     sprite_scale = std::max(0.15f, sprite_scale);
     objectSprite.setScale(sprite_scale, sprite_scale);
@@ -62,6 +63,7 @@ void SpaceStation::destroyedByDamage(DamageInfo& info)
     ExplosionEffect* e = new ExplosionEffect();
     e->setSize(getRadius());
     e->setPosition(getPosition());
+    e->setRadarSignatureInfo(0.0, 0.4, 0.4);
     
     if (info.instigator)
     {

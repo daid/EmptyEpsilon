@@ -16,7 +16,6 @@ enum EFactionVsFactionState
 class FactionInfo : public PObject
 {
 private:
-    int callsign_counter;
 public:
     FactionInfo();
 
@@ -28,13 +27,15 @@ public:
      * \brief Set name of faction.
      * \param Name Name of the faction
      */
-    void setName(string name) { this->name = name; }
+    void setName(string name) { this->name = name; if (locale_name == "") locale_name = name; }
+    void setLocaleName(string name) { this->locale_name = name; }
 
     /*!
      * \brief Get name of faction.
      * \return String Name of the faction
      */
-    string getName() {return this->name;}
+    string getName() { return this->name; }
+    string getLocaleName() { return this->locale_name; }
 
     /*!
      * \brief Get description of faction.
@@ -72,6 +73,7 @@ public:
     static unsigned int findFactionId(string name);
 protected:
     string name;
+    string locale_name;
     string description;
 };
 
