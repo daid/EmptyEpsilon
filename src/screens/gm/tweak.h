@@ -147,6 +147,7 @@ private:
     P<SpaceShip> target;
 
     GuiSlider* system_damage[SYS_COUNT];
+    GuiSlider* system_health_max[SYS_COUNT];
     GuiSlider* system_heat[SYS_COUNT];
 
 public:
