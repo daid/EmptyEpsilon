@@ -16,6 +16,8 @@ void GuiProgressbar::onDraw(sf::RenderTarget& window)
     if (rect.width >= rect.height)
     {
         fill_rect.width *= f;
+        if (max_value < min_value)
+            fill_rect.left = rect.left + rect.width - fill_rect.width;
         drawStretchedH(window, fill_rect, "gui/ProgressbarFill", color);
     }
     else

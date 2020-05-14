@@ -36,6 +36,8 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setEnergy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHealth);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHealth);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHealthMax);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHealthMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHeat);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHeat);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemPower);
@@ -177,6 +179,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     for(int n=0; n<SYS_COUNT; n++)
     {
         systems[n].health = 1.0;
+        systems[n].health_max = 1.0;
         systems[n].power_level = 1.0;
         systems[n].power_request = 1.0;
         systems[n].coolant_level = 0.0;
@@ -185,6 +188,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         systems[n].hacked_level = 0.0;
 
         registerMemberReplication(&systems[n].health, 0.1);
+        registerMemberReplication(&systems[n].health_max, 0.1);
         registerMemberReplication(&systems[n].hacked_level, 0.1);
     }
 
