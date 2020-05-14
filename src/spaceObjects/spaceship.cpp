@@ -769,6 +769,7 @@ void SpaceShip::update(float delta)
     for(int n=0; n<SYS_COUNT; n++)
     {
         systems[n].hacked_level = std::max(0.0f, systems[n].hacked_level - delta / unhack_time);
+        systems[n].health = std::min(systems[n].health,systems[n].health_max);
     }
 
     model_info.engine_scale = std::min(1.0f, (float) std::max(fabs(getAngularVelocity() / turn_speed), fabs(current_impulse)));
