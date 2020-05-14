@@ -24,7 +24,7 @@
 #include "httpScriptAccess.h"
 #include "preferenceManager.h"
 #include "networkRecorder.h"
-#include "menus/tutorialMenu.h"
+#include "tutorialGame.h"
 
 #include "hardware/hardwareController.h"
 #ifdef __WIN32__
@@ -386,7 +386,7 @@ void returnToMainMenu()
     }
     else if (PreferencesManager::get("tutorial").toInt())
     {
-        new TutorialMenu();
+        new TutorialGame(true);
     }else{
         new MainMenu();
     }
