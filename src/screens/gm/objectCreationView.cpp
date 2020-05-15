@@ -4,6 +4,7 @@
 #include "shipTemplate.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_selector.h"
+#include "gameGlobalInfo.h"
 
 
 GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner, func_t enterCreateMode)
@@ -119,6 +120,18 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner, func_t enterCr
         create_script = "";
         this->hide();
     }))->setPosition(20, -20, ABottomLeft)->setSize(300, 50);
+}
+
+void GuiObjectCreationView::onDraw(sf::RenderTarget& target)
+{
+    if (gameGlobalInfo->allow_new_player_ships)
+    {
+        player_cpu_selector->show();
+    } else {
+        player_cpu_selector->hide();
+        cpu_ship_listbox->show();
+        player_ship_listbox->hide();
+    }
 }
 
 bool GuiObjectCreationView::onMouseDown(sf::Vector2f position)
