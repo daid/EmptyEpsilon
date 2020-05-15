@@ -19,7 +19,9 @@ public:
     GuiListbox* cpu_ship_listbox;
     GuiListbox* player_ship_listbox;
     GuiObjectCreationView(GuiContainer* owner, func_t enterCreateMode);
-    
+
+    virtual void onDraw(sf::RenderTarget& window) override;
+
     virtual bool onMouseDown(sf::Vector2f position);
     
     void setCreateScript(string script);
