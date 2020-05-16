@@ -397,6 +397,7 @@ PlayerSpaceship::PlayerSpaceship()
 
     // Initialize player ship callsigns with a "PL" designation.
     setCallSign("PL" + string(getMultiplayerId()));
+     gameGlobalInfo->on_new_player_ship.call(P<PlayerSpaceship>(this));
 }
 
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined

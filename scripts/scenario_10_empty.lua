@@ -70,6 +70,6 @@ end
 
 onNewPlayerShip(function(ship)
     print(ship)
-    ship:destroy()
+--    ship:destroy() --uncomment this to destroy all player ships created
 end)
 
