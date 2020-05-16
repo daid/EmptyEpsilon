@@ -68,8 +68,8 @@ function update(delta)
 	--No victory condition
 end
 
-onNewPlayerShip(function(ship, index)
-    print(ship, index)
+onNewPlayerShip(function(ship)
+    print(ship)
     ship:destroy()
 end)
 
