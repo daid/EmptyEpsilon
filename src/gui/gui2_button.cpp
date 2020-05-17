@@ -8,13 +8,20 @@ GuiButton::GuiButton(GuiContainer* owner, string id, string text, func_t func)
 {
     text_size = 30;
     color_set = colorConfig.button;
+    bool_color_overide = false;
 }
 
 void GuiButton::onDraw(sf::RenderTarget& window)
 {
     sf::Color color = selectColor(color_set.background);
     sf::Color text_color = selectColor(color_set.forground);
-    
+
+    if (bool_color_overide)
+    {
+        color = color_overide;
+        text_color = text_color_overide;
+    }
+
     if (!enabled)
         drawStretched(window, rect, "gui/ButtonBackground.disabled", color);
     else if (active)
@@ -100,6 +107,14 @@ GuiButton* GuiButton::setIcon(string icon_name, EGuiAlign icon_alignment, float 
 GuiButton* GuiButton::setColors(WidgetColorSet color_set)
 {
     this->color_set = color_set;
+    this->bool_color_overide = false;
+    return this;
+}
+
+GuiButton* GuiButton::setColorsOver(sf::Color color_overide, sf::Color text_color_overide){
+    this->color_overide = color_overide;
+    this->text_color_overide = text_color_overide;
+    this->bool_color_overide = true;
     return this;
 }
 

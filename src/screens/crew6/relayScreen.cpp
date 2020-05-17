@@ -25,7 +25,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 {
     targets.setAllowWaypointSelection();
     radar = new GuiRadarView(this, "RELAY_RADAR", 50000.0f, &targets);
-    radar->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
+    radar->longRange()->enableWaypoints()->enableRoutes()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
     radar->setAutoCentering(false);
     radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     radar->setCallbacks(
@@ -84,12 +84,12 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     info_faction = new GuiKeyValueDisplay(sidebar, "SCIENCE_FACTION", 0.4, tr("Faction"), "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
 
-    zoom_slider = new GuiSlider(this, "ZOOM_SLIDER", 50000.0f, 6250.0f, 50000.0f, [this](float value) {
-        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(50000.0f / value, 1.0f)}}));
+    zoom_slider = new GuiSlider(this, "ZOOM_SLIDER", max_distance, min_distance, radar->getDistance(), [this](float value) {
+        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(max_distance / value, 1.0f)}}));
         radar->setDistance(value);
     });
     zoom_slider->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
-    zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 30);
+    zoom_label = new GuiLabel(zoom_slider, "", "Zoom: " + string(max_distance / radar->getDistance(), 1.0f) + "x", 30);
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Option buttons for comms, waypoints, and probes.
@@ -197,14 +197,10 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
     if (mouse_wheel_delta != 0.0)
     {
         float view_distance = radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
-        if (view_distance > 50000.0f)
-            view_distance = 50000.0f;
-        if (view_distance < 6250.0f)
-            view_distance = 6250.0f;
-        radar->setDistance(view_distance);
-        // Keep the zoom slider in sync.
         zoom_slider->setValue(view_distance);
-        zoom_label->setText("Zoom: " + string(50000.0f / view_distance, 1.0f) + "x");
+        view_distance = zoom_slider->getValue();
+        radar->setDistance(view_distance);
+        zoom_label->setText("Zoom: " + string(max_distance / view_distance, 1.0f) + "x");
     }
     ///!
 

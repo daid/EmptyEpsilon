@@ -17,6 +17,9 @@ protected:
     EGuiAlign icon_alignment;
     float icon_rotation;
     WidgetColorSet color_set;
+    sf::Color color_overide;
+    sf::Color text_color_overide;
+    bool bool_color_overide;
 public:
     GuiButton(GuiContainer* owner, string id, string text, func_t func);
 
@@ -28,6 +31,7 @@ public:
     GuiButton* setTextSize(float size);
     GuiButton* setIcon(string icon_name, EGuiAlign icon_alignment = ACenterLeft, float rotation = 0);
     GuiButton* setColors(WidgetColorSet color_set);
+    GuiButton* setColorsOver(sf::Color color, sf::Color text_color);
     string getText() const;
     string getIcon() const;
     WidgetColorSet getColors() const;

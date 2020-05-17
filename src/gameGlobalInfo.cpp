@@ -1,6 +1,8 @@
 #include <i18n.h>
+#include <regex>
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
+#include "resources.h"
 #include "scienceDatabase.h"
 
 P<GameGlobalInfo> gameGlobalInfo;
@@ -225,22 +227,91 @@ string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
     }
 }
 
+std::regex sector_rgx("(\\d)(\\d+)\\.(\\d+)");
+std::regex location_rgx("(\\d+\\.\\d+)\\.(\\d+)\\.(\\d+)");
+
+bool isValidSectorName(string sectorName)
+{
+    return std::regex_match(sectorName, sector_rgx);
+}
+
+bool isValidPositionString(string positionStr)
+{
+    if (isValidSectorName(positionStr)) 
+        return true;
+    std::smatch matches;
+    if(std::regex_match(positionStr, matches, location_rgx))
+    {
+        return std::stoi(matches.str(2)) < GameGlobalInfo::sector_size 
+            && std::stoi(matches.str(3)) < GameGlobalInfo::sector_size;
+    } else {
+        return false;
+    }
+}
+
+sf::Vector2f getSectorPosition(string sectorName)
+{
+    std::smatch matches;
+    if(std::regex_match(sectorName, matches, sector_rgx)) 
+    {
+        int quadrant = std::stoi(matches.str(1));
+        int sector_y = std::stoi(matches.str(3));
+        int sector_x = std::stoi(matches.str(2));
+        sector_y = sector_y - 1;
+        if (quadrant % 2)
+            sector_x = -1 - sector_x;
+        if ((quadrant /2) % 2)
+            sector_y = -1 - sector_y;
+        return sf::Vector2f(sector_x * GameGlobalInfo::sector_size, sector_y * GameGlobalInfo::sector_size);
+    } 
+    else 
+    {
+        return sf::Vector2f(0,0);
+    }
+}
+
+sf::Vector2f getPositionFromSring(string positionStr)
+{
+     if (isValidSectorName(positionStr)) 
+        return getSectorPosition(positionStr);
+    std::smatch matches;
+    if(std::regex_match(positionStr, matches, location_rgx)) 
+    {
+        sf::Vector2f sectorPosition = getSectorPosition(matches.str(1));
+        return sectorPosition + sf::Vector2f(std::stoi(matches.str(2)), std::stoi(matches.str(3)));
+    } else {
+        return sf::Vector2f(0,0);
+    }
+}
+
+string getStringFromPosition(sf::Vector2f position)
+{
+    int offset_x = fmod(fmod(position.x, GameGlobalInfo::sector_size) + GameGlobalInfo::sector_size, GameGlobalInfo::sector_size);
+    int offset_y = fmod(fmod(position.y, GameGlobalInfo::sector_size) + GameGlobalInfo::sector_size, GameGlobalInfo::sector_size);
+    if (offset_x < 1 && offset_y < 1) {
+        return getSectorName(position);
+    } else {
+        return getSectorName(position) + "." + string(offset_x,0) + '.' + string(offset_y,0);
+    }
+}
+
 string getSectorName(sf::Vector2f position)
 {
-    constexpr float sector_size = 20000;
-    int sector_x = floorf(position.x / sector_size) + 5;
-    int sector_y = floorf(position.y / sector_size) + 5;
-    string y;
-    string x;
-    if (sector_y >= 0)
-        y = string(char('A' + (sector_y)));
-    else
-        y = string(char('z' + sector_y / 26)) + string(char('z' + 1 + (sector_y % 26)));
-    if (sector_x >= 0)
-        x = string(sector_x);
-    else
-        x = string(100 + sector_x);
-    return y + x;
+    int sector_x = floorf(position.x / GameGlobalInfo::sector_size);
+    int sector_y = floorf(position.y / GameGlobalInfo::sector_size);
+    return string(sector_x) + "." + string(sector_y);
+    int quadrant = 0;
+    if (sector_y < 0)
+    {
+        quadrant += 2;
+        sector_y = -1 - sector_y;
+    }
+    if (sector_x < 0)
+    {
+        quadrant += 1;
+        sector_x = -1 - sector_x;
+    }
+    //return string(char('0' +quadrant)) + string(sector_x) + "." + string(sector_y);
 }
 
 static int victory(lua_State* L)

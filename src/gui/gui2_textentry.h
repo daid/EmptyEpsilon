@@ -7,6 +7,7 @@ class GuiTextEntry : public GuiElement
 {
 public:
     typedef std::function<void(string text)> func_t;
+    typedef std::function<bool(string text)> Validator;
     
 protected:
     string text;
@@ -14,6 +15,8 @@ protected:
     func_t func;
     func_t enter_func;
     sf::Clock blink_clock;
+    Validator validator_func;
+    bool valid;
 public:
     GuiTextEntry(GuiContainer* owner, string id, string text);
 
@@ -23,11 +26,13 @@ public:
     virtual void onFocusGained() override;
     virtual void onFocusLost() override;
 
+    bool isValid() const;
     string getText() const;
     GuiTextEntry* setText(string text);
     GuiTextEntry* setTextSize(float size);
     GuiTextEntry* callback(func_t func);
     GuiTextEntry* enterCallback(func_t func);
+    GuiTextEntry* validator(Validator func);
 };
 
 #endif//GUI2_TEXTENTRY_H

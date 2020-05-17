@@ -40,6 +40,8 @@ public:
     WidgetColorSet slider;
     WidgetColorSet textbox;
 
+    sf::Color text_entry_invalid;
+    sf::Color overlay_ok;
     sf::Color overlay_damaged;
     sf::Color overlay_jammed;
     sf::Color overlay_hacked;
