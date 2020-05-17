@@ -1387,10 +1387,17 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
     for(int n=0; n<weapon_tube_count; n++)
     {
         WeaponTube& tube = weapon_tube[n];
-        if (tube.getDirection() != ship_template->weapon_tube[n].direction)
+        auto& template_tube = ship_template->weapon_tube[n];
+        if (tube.getDirection() != template_tube.direction)
+        {
             ret += ":setWeaponTubeDirection(" + string(n) + ", " + string(tube.getDirection(), 0) + ")";
+        }
         //TODO: Weapon tube "type_allowed_mask"
         //TODO: Weapon tube "load_time"
+        if (tube.getSize() != template_tube.size)
+        {
+            ret += ":setTubeSize(" + string(n) + ",\"" + getMissileSizeString(tube.getSize()) + "\")";
+        }
     }
     for(int n=0; n<MW_Count; n++)
     {

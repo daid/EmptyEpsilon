@@ -2127,6 +2127,10 @@ string PlayerSpaceship::getExportLine()
         result += ":setCanSelfDestruct(" + string(can_self_destruct, true) + ")";
     if (can_launch_probe != ship_template->can_launch_probe)
         result += ":setCanLaunchProbe(" + string(can_launch_probe, true) + ")";
+    if (auto_coolant_enabled)
+        result += ":setAutoCoolant(true)";
+    if (auto_repair_enabled)
+        result += ":commandSetAutoRepair(true)";
     return result;
 }
 
