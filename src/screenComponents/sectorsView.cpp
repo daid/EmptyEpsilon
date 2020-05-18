@@ -30,16 +30,6 @@ sf::Vector2f SectorsView::getCenterPosition(){
     return sf::Vector2f(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
 }
 
-//sf::Vector2f SectorsView::worldToScreen(sf::Vector2f world_position)
-//{
-//    return getCenterPosition() + (world_position - view_position) * getScale();
-//}
-
-//sf::Vector2f SectorsView::screenToWorld(sf::Vector2f screen_position)
-//{
-//    return view_position + (screen_position - getCenterPosition()) / getScale();
-//}
-
 sf::Vector2f SectorsView::worldToScreen(sf::Vector2f world_position)
 {
     sf::Vector2f radar_position = (world_position - view_position) * getScale();
@@ -83,7 +73,7 @@ void SectorsView::drawSectorGrid(sf::RenderTarget &window)
         for (int sector_y = sector_y_min - 1; sector_y <= sector_y_max; sector_y++)
         {
             float y = radar_screen_center.y + ((sector_y * sector_size_scaled) - view_position.y) * scale;
-            string name = getSectorName(sf::Vector2f(sector_x * sector_size_scaled + 1, sector_y * sector_size_scaled + 1));
+            string name = getSectorName(sf::Vector2f(sector_x * sector_size_scaled + 1, sector_y * sector_size_scaled + 1),scale_magnitude);
             sf::Color color = grid_colors[std::min(calcGridScaleMagnitude(scale_magnitude, sector_x), calcGridScaleMagnitude(scale_magnitude, sector_y))];
             drawText(window, sf::FloatRect(x, y, 30, 30), name, ATopLeft, 30, bold_font, color);
         }

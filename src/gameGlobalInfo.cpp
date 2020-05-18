@@ -295,23 +295,34 @@ string getStringFromPosition(sf::Vector2f position)
     }
 }
 
-string getSectorName(sf::Vector2f position)
+string getSectorName(sf::Vector2f position, int scale_magnitude)
 {
-    int sector_x = floorf(position.x / GameGlobalInfo::sector_size);
-    int sector_y = floorf(position.y / GameGlobalInfo::sector_size);
-    return string(sector_x) + "." + string(sector_y);
-    int quadrant = 0;
-    if (sector_y < 0)
-    {
-        quadrant += 2;
-        sector_y = -1 - sector_y;
-    }
-    if (sector_x < 0)
-    {
-        quadrant += 1;
-        sector_x = -1 - sector_x;
-    }
-    //return string(char('0' +quadrant)) + string(sector_x) + "." + string(sector_y);
+    // Section
+    int section_x = floorf(position.x / GameGlobalInfo::sector_size);
+    int section_y = floorf(position.y / GameGlobalInfo::sector_size);
+    
+    // Sector
+    int factor = std::pow(8,2) * GameGlobalInfo::sector_size;
+    int sector_x = floorf((position.x) / factor);
+    int sector_y = floorf((position.y) / factor);
+    
+    section_x = section_x - floorf((sector_x * factor)/ GameGlobalInfo::sector_size);
+    section_y = section_y - floorf((sector_y * factor)/ GameGlobalInfo::sector_size);
+    
+    string x;
+    x = string(section_x);
+    string y;
+    if (section_y >= 26)
+        y = string(char('A' + floorf(section_y / 26) - 1 )) + string(char('A' + (section_y % 26)));
+    else
+        y = string(char('A' + (section_y)));
+   
+    if (scale_magnitude < 1)
+        return y + x;
+    else if (scale_magnitude == 1)
+        return string(sector_x) + "." + string(sector_y) + " / " + y + x;
+    else
+        return string(sector_x) + "." + string(sector_y);
 }
 
 static int victory(lua_State* L)

@@ -127,7 +127,7 @@ public:
 };
 
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive);
-string getSectorName(sf::Vector2f position);
+string getSectorName(sf::Vector2f position, int scale_magnitude = 0);
 sf::Vector2f getSectorPosition(string sectorName);
 bool isValidSectorName(string sectorName);
 sf::Vector2f getPositionFromSring(string sectorName);
