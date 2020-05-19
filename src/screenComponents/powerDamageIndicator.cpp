@@ -35,6 +35,10 @@ void GuiPowerDamageIndicator::onDraw(sf::RenderTarget& window)
     {
         color = colorConfig.overlay_jammed;
         display_text = "JAMMED";
+    }else if ((system == SYS_BeamWeapons || system == SYS_MissileSystem) && my_spaceship->current_warp > 0.0)
+    {
+        color = colorConfig.overlay_blocked_by_warp;
+        display_text = "BLOCKED BY WARP";
     }else if (power == 0.0)
     {
         color = colorConfig.overlay_no_power;
@@ -114,6 +118,7 @@ void GuiPowerDamageIndicator::onDraw(sf::RenderTarget& window)
     {
         drawIcon(window, "gui/icons/status_jammed", colorConfig.overlay_jammed);
     }
+    // TODO consider icon for blocked by warp
     if (power == 0.0)
     {
         drawIcon(window, "gui/icons/status_no_power", colorConfig.overlay_no_power);

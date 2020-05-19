@@ -42,6 +42,7 @@ public:
 
     sf::Color overlay_damaged;
     sf::Color overlay_jammed;
+    sf::Color overlay_blocked_by_warp;
     sf::Color overlay_hacked;
     sf::Color overlay_no_power;
     sf::Color overlay_low_energy;
