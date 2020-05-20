@@ -363,6 +363,11 @@ void EngineeringScreen::onHotkey(const HotkeyResult& key)
         
         if (selected_system != SYS_None)
         {
+            if (key.hotkey == "RESET_POWER")
+            {
+                power_slider->setValue(1.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
             if (key.hotkey == "INCREASE_POWER")
             {
                 power_slider->setValue(my_spaceship->systems[selected_system].power_request + 0.1f);
