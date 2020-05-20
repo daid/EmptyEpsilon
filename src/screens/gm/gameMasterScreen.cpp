@@ -86,11 +86,11 @@ GameMasterScreen::GameMasterScreen()
     });
     copy_selected_button->setTextSize(20)->setPosition(-20, -45, ABottomRight)->setSize(125, 25);
 
-    cancel_create_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
-        create_button->show();
-        cancel_create_button->hide();
+    cancel_action_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
+        showCreateButton();
+        gameGlobalInfo->on_gm_click.clear();
     });
-    cancel_create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
+    cancel_action_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
 
     tweak_button = new GuiButton(this, "TWEAK_OBJECT", "Tweak", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
@@ -191,9 +191,7 @@ GameMasterScreen::GameMasterScreen()
     global_message_entry = new GuiGlobalMessageEntryView(this);
     global_message_entry->hide();
     object_creation_view = new GuiObjectCreationView(this, [this](){
-        create_button->hide();
-        cancel_create_button->show();
-        object_creation_view->hide();
+        showCancelButton();
     });
     object_creation_view->hide();
 
@@ -210,6 +208,10 @@ GameMasterScreen::GameMasterScreen()
 
     });
     message_close_button->setTextSize(30)->setPosition(-20, -20, ABottomRight)->setSize(300, 30);
+    if (gameGlobalInfo->on_gm_click.isSet())
+    {
+        showCancelButton();
+    }
 }
 
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined
@@ -362,7 +364,11 @@ void GameMasterScreen::onMouseDown(sf::Vector2f position)
     }
     else
     {
-        if (cancel_create_button->isVisible())
+        if (gameGlobalInfo->on_gm_click.isSet())
+        {
+            gameGlobalInfo->on_gm_click.call(position.x,position.y);
+        }
+        else if (cancel_action_button->isVisible())
         {
             object_creation_view->createObject(position);
         }else{
@@ -570,4 +576,17 @@ string GameMasterScreen::getScriptExport(bool selected_only)
         output += "    " + line + "\n";
     }
     return output;
+}
+
+void GameMasterScreen::showCreateButton()
+{
+    create_button->show();
+    cancel_action_button->hide();
+}
+
+void GameMasterScreen::showCancelButton()
+{
+    create_button->hide();
+    object_creation_view->hide();
+    cancel_action_button->show();
 }

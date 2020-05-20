@@ -70,7 +70,7 @@ private:
     sf::Vector2f drag_previous_position;
 public:
     GuiButton* create_button;
-    GuiButton* cancel_create_button;
+    GuiButton* cancel_action_button;
 
     GameMasterScreen();
     virtual ~GameMasterScreen();
@@ -86,6 +86,9 @@ public:
     PVector<SpaceObject> getSelection();
     
     string getScriptExport(bool selected_only);
+
+    void showCreateButton();
+    void showCancelButton();
 };
 
 

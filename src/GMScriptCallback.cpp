@@ -64,3 +64,36 @@ static int getGMSelection(lua_State* L)
 /// getGMSelection()
 /// Returns an list of objects that the GM currently has selected.
 REGISTER_SCRIPT_FUNCTION(getGMSelection);
+
+static int onGMClick(lua_State* L)
+{
+    ScriptSimpleCallback callback;
+
+    int idx = 1;
+    convert<ScriptSimpleCallback>::param(L,idx,callback);
+
+    gameGlobalInfo->on_gm_click=callback;
+
+    foreach (Updatable, u, updatableList)
+    {
+        P<GameMasterScreen> game_master_screen = u;
+        if (game_master_screen)
+        {
+            if (callback.isSet())
+            {
+                game_master_screen->showCancelButton();
+            }
+            else
+            {
+                game_master_screen->showCreateButton();
+            }
+        }
+    }
+
+    return 0;
+}
+/// onGMClick(function)
+/// Register a callback function that is called when the gm clicks on the background of their screen.
+/// Example 1: onGMClick(function(x,y) print(x,y) end) -- print the x and y when clicked.
+/// Example 2: onGMClick(nil) -- resets to no function being called on clicks
+REGISTER_SCRIPT_FUNCTION(onGMClick);
