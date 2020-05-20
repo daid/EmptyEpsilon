@@ -136,6 +136,11 @@ void PowerManagementScreen::onHotkey(const HotkeyResult& key)
         {
             GuiSlider* power_slider = systems[selected_system].power_slider;
 
+            if (key.hotkey == "RESET_POWER")
+            {
+                power_slider->setValue(1.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
             if (key.hotkey == "INCREASE_POWER")
             {
                 power_slider->setValue(my_spaceship->systems[selected_system].power_request + 0.1f);
