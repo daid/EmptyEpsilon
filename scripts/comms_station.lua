@@ -60,9 +60,9 @@ end
 function handleDockedState()
     -- Handle communications while docked with this station.
     if player:isFriendly(comms_target) then
-        setCommsMessage("Good day, officer!\nWhat can we do for you today?")
+        setCommsMessage("Good day, officer! Welcome to " .. comms_target:getCallSign() .. ".\nWhat can we do for you today?")
     else
-        setCommsMessage("Welcome to our lovely station.")
+        setCommsMessage("Welcome to our lovely station " .. comms_target:getCallSign() .. ".")
     end
 
     if player:getWeaponStorageMax("Homing") > 0 then
@@ -127,9 +127,9 @@ end
 function handleUndockedState()
     --Handle communications when we are not docked with the station.
     if player:isFriendly(comms_target) then
-        setCommsMessage("Good day, officer.\nIf you need supplies, please dock with us first.")
+        setCommsMessage("This is " .. comms_target:getCallSign() .. ". Good day, officer.\nIf you need supplies, please dock with us first.")
     else
-        setCommsMessage("Greetings.\nIf you want to do business, please dock with us first.")
+        setCommsMessage("This is " .. comms_target:getCallSign() .. ". Greetings.\nIf you want to do business, please dock with us first.")
     end
     if isAllowedTo(comms_target.comms_data.services.supplydrop) then
         addCommsReply("Can you send a supply drop? ("..getServiceCost("supplydrop").."rep)", function()
