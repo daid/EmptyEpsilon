@@ -37,6 +37,8 @@ static int commsSwitchToGM(lua_State* L)
 REGISTER_SCRIPT_FUNCTION(setCommsMessage);
 /// addCommsReply(message, function)
 /// Add an reply option for communications.
+/// Within the callback function, `comms_target` and
+/// either `player` (in CommsScript) or `comms_source` (in CommsFunction) are available.
 REGISTER_SCRIPT_FUNCTION(addCommsReply);
 /// Use this function from a communication callback function to switch the current
 /// communication from scripted to a GM based chat.
