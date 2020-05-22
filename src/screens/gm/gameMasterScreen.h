@@ -86,9 +86,6 @@ public:
     PVector<SpaceObject> getSelection();
     
     string getScriptExport(bool selected_only);
-
-    void showCreateButton();
-    void showCancelButton();
 };
 
 

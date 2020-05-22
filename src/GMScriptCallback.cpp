@@ -72,23 +72,10 @@ static int onGMClick(lua_State* L)
     int idx = 1;
     convert<ScriptSimpleCallback>::param(L,idx,callback);
 
-    gameGlobalInfo->on_gm_click=callback;
-
-    foreach (Updatable, u, updatableList)
+    gameGlobalInfo->on_gm_click=[callback](sf::Vector2f position) mutable
     {
-        P<GameMasterScreen> game_master_screen = u;
-        if (game_master_screen)
-        {
-            if (callback.isSet())
-            {
-                game_master_screen->showCancelButton();
-            }
-            else
-            {
-                game_master_screen->showCreateButton();
-            }
-        }
-    }
+        callback.call(position.x,position.y);
+    };
 
     return 0;
 }

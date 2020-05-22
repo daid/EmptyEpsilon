@@ -87,8 +87,7 @@ GameMasterScreen::GameMasterScreen()
     copy_selected_button->setTextSize(20)->setPosition(-20, -45, ABottomRight)->setSize(125, 25);
 
     cancel_action_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
-        showCreateButton();
-        gameGlobalInfo->on_gm_click.clear();
+        gameGlobalInfo->on_gm_click = nullptr;
     });
     cancel_action_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
 
@@ -190,9 +189,7 @@ GameMasterScreen::GameMasterScreen()
 
     global_message_entry = new GuiGlobalMessageEntryView(this);
     global_message_entry->hide();
-    object_creation_view = new GuiObjectCreationView(this, [this](){
-        showCancelButton();
-    });
+    object_creation_view = new GuiObjectCreationView(this);
     object_creation_view->hide();
 
     message_frame = new GuiPanel(this, "");
@@ -208,10 +205,6 @@ GameMasterScreen::GameMasterScreen()
 
     });
     message_close_button->setTextSize(30)->setPosition(-20, -20, ABottomRight)->setSize(300, 30);
-    if (gameGlobalInfo->on_gm_click.isSet())
-    {
-        showCancelButton();
-    }
 }
 
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined
@@ -352,6 +345,18 @@ void GameMasterScreen::update(float delta)
     } else {
         message_frame->hide();
     }
+
+    if (gameGlobalInfo->on_gm_click)
+    {
+        create_button->hide();
+        object_creation_view->hide();
+        cancel_action_button->show();
+    }
+    else
+    {
+        create_button->show();
+        cancel_action_button->hide();
+    }
 }
 
 void GameMasterScreen::onMouseDown(sf::Vector2f position)
@@ -364,13 +369,9 @@ void GameMasterScreen::onMouseDown(sf::Vector2f position)
     }
     else
     {
-        if (gameGlobalInfo->on_gm_click.isSet())
+        if (gameGlobalInfo->on_gm_click)
         {
-            gameGlobalInfo->on_gm_click.call(position.x,position.y);
-        }
-        else if (cancel_action_button->isVisible())
-        {
-            object_creation_view->createObject(position);
+            gameGlobalInfo->on_gm_click(position);
         }else{
             click_and_drag_state = CD_BoxSelect;
             
@@ -576,17 +577,4 @@ string GameMasterScreen::getScriptExport(bool selected_only)
         output += "    " + line + "\n";
     }
     return output;
-}
-
-void GameMasterScreen::showCreateButton()
-{
-    create_button->show();
-    cancel_action_button->hide();
-}
-
-void GameMasterScreen::showCancelButton()
-{
-    create_button->hide();
-    object_creation_view->hide();
-    cancel_action_button->show();
 }
