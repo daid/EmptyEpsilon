@@ -28,12 +28,26 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
     list->setSize(300, GuiElement::GuiSizeMax);
     list->setPosition(25, 25, ATopLeft);
 
+    if (tweak_type == TW_Object || tweak_type == TW_Station)
+    {
+        pages.push_back(new GuiObjectTweakBase(this));
+        list->addEntry("Base", "");
+    }
+
     if (tweak_type == TW_Ship || tweak_type == TW_Player)
     {
         pages.push_back(new GuiShipTweakBase(this));
         list->addEntry("Base", "");
+    }
+
+    if (tweak_type == TW_Ship || tweak_type == TW_Player || tweak_type == TW_Station)
+    {
         pages.push_back(new GuiShipTweakShields(this));
         list->addEntry("Shields", "");
+    }
+
+    if (tweak_type == TW_Ship || tweak_type == TW_Player)
+    {
         pages.push_back(new GuiShipTweakMissileTubes(this));
         list->addEntry("Tubes", "");
         pages.push_back(new GuiShipTweakMissileWeapons(this));
@@ -50,12 +64,6 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
         list->addEntry("Player", "");
         pages.push_back(new GuiShipTweakPlayer2(this));
         list->addEntry("Player 2", "");
-    }
-
-    if (tweak_type == TW_Object)
-    {
-        pages.push_back(new GuiObjectTweakBase(this));
-        list->addEntry("Base", "");
     }
 
     for(GuiTweakPage* page : pages)
@@ -393,7 +401,7 @@ void GuiShipTweakShields::onDraw(sf::RenderTarget& window)
 
 void GuiShipTweakShields::open(P<SpaceObject> target)
 {
-    P<SpaceShip> ship = target;
+    P<ShipTemplateBasedObject> ship = target;
     this->target = ship;
 
     for(int n = 0; n < max_shield_count; n++)
