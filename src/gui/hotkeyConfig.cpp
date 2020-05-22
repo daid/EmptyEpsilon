@@ -94,7 +94,13 @@ HotkeyConfig::HotkeyConfig()
     newKey("SELECT_JUMP_DRIVE", std::make_tuple("Select jump drive system", "Num7"));
     newKey("SELECT_FRONT_SHIELDS", std::make_tuple("Select front shields system", "Num8"));
     newKey("SELECT_REAR_SHIELDS", std::make_tuple("Select rear shields system", "Num9"));
+    newKey("SET_POWER_000", std::make_tuple("Set system power to 0%", ""));
+    newKey("SET_POWER_030", std::make_tuple("Set system power to 30%", ""));
     newKey("SET_POWER_100", std::make_tuple("Set system power to 100%", "Space"));
+    newKey("SET_POWER_150", std::make_tuple("Set system power to 150%", ""));
+    newKey("SET_POWER_200", std::make_tuple("Set system power to 200%", ""));
+    newKey("SET_POWER_250", std::make_tuple("Set system power to 250%", ""));
+    newKey("SET_POWER_300", std::make_tuple("Set system power to 300%", ""));
     newKey("INCREASE_POWER", std::make_tuple("Increase system power", "Up"));
     newKey("DECREASE_POWER", std::make_tuple("Decrease system power", "Down"));
     newKey("INCREASE_COOLANT", std::make_tuple("Increase system coolant", "Right"));

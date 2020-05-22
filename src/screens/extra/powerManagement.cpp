@@ -136,9 +136,39 @@ void PowerManagementScreen::onHotkey(const HotkeyResult& key)
         {
             GuiSlider* power_slider = systems[selected_system].power_slider;
 
+            if (key.hotkey == "SET_POWER_000")
+            {
+                power_slider->setValue(0.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_030")
+            {
+                power_slider->setValue(0.3f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
             if (key.hotkey == "SET_POWER_100")
             {
                 power_slider->setValue(1.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_150")
+            {
+                power_slider->setValue(1.5f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_200")
+            {
+                power_slider->setValue(2.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_250")
+            {
+                power_slider->setValue(2.5f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_300")
+            {
+                power_slider->setValue(3.0f);
                 my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (key.hotkey == "INCREASE_POWER")
