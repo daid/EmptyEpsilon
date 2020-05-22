@@ -5204,8 +5204,8 @@ end
 
 function threadedPursuit(delta)
 	plot1name = "threadedPursuit"
+	local p = closestPlayerTo(targetEnemyStation)
 	if ef2 == nil then
-		local p = closestPlayerTo(targetEnemyStation)
 		if p == nil then
 			return
 		end
@@ -5233,6 +5233,9 @@ function threadedPursuit(delta)
 		plot3 = destroyef3
 	end
 	if ef4 == nil then
+		if p == nil then
+			return
+		end
 		scx, scy = p:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(40000,50000))
 		ef4 = spawnEnemies(scx+cpx,scy+cpy,1)
