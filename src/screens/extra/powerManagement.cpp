@@ -136,6 +136,7 @@ void PowerManagementScreen::onHotkey(const HotkeyResult& key)
         {
             GuiSlider* power_slider = systems[selected_system].power_slider;
 
+            // Note the code duplication with crew6/engineeringScreen
             if (key.hotkey == "SET_POWER_000")
             {
                 power_slider->setValue(0.0f);
@@ -144,6 +145,11 @@ void PowerManagementScreen::onHotkey(const HotkeyResult& key)
             if (key.hotkey == "SET_POWER_030")
             {
                 power_slider->setValue(0.3f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_050")
+            {
+                power_slider->setValue(0.5f);
                 my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (key.hotkey == "SET_POWER_100")
