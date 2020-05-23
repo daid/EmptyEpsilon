@@ -40,6 +40,7 @@ private:
     GuiObjectTweak* ship_tweak_dialog;
     GuiObjectTweak* object_tweak_dialog;
     GuiObjectTweak* station_tweak_dialog;
+    GuiObjectTweak* jammer_tweak_dialog;
     
     GuiAutoLayout* info_layout;
     std::vector<GuiKeyValueDisplay*> info_items;
