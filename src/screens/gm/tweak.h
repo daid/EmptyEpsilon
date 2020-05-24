@@ -58,6 +58,7 @@ private:
     GuiSlider* turn_speed_slider;
     GuiSlider* hull_max_slider;
     GuiSlider* hull_slider;
+    GuiSlider* jump_charge_slider;
     GuiToggleButton* can_be_destroyed_toggle;
 public:
     GuiTweakShip(GuiContainer* owner);
