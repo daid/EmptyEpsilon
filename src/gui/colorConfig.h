@@ -39,8 +39,7 @@ public:
     WidgetColorSet text_entry;
     WidgetColorSet slider;
     WidgetColorSet textbox;
-
-    sf::Color overlay_ok;
+    
     sf::Color overlay_damaged;
     sf::Color overlay_jammed;
     sf::Color overlay_hacked;
