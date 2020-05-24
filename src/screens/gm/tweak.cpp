@@ -843,11 +843,28 @@ GuiObjectTweakBase::GuiObjectTweakBase(GuiContainer* owner)
         target->setHeading(value);
     });
     heading_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(right_col, "", "Scanning Complexity:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    scanning_complexity_slider = new GuiSlider(right_col, "", 0, 4, 0, [this](float value) {
+        target->setScanningParameters(value,target->scanningChannelDepth(target));
+    });
+    scanning_complexity_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(right_col, "", "Scanning Depth:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    scanning_depth_slider = new GuiSlider(right_col, "", 1, 5, 0, [this](float value) {
+        target->setScanningParameters(target->scanningComplexity(target),value);
+    });
+    scanning_depth_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 }
 
 void GuiObjectTweakBase::onDraw(sf::RenderTarget& window)
 {
     heading_slider->setValue(target->getHeading());
+
+    // we probably dont need to set these each onDraw
+    // but doing it forces the slider to round to a integer
+    scanning_complexity_slider->setValue(target->scanningComplexity(target));
+    scanning_depth_slider->setValue(target->scanningChannelDepth(target));
 }
 
 void GuiObjectTweakBase::open(P<SpaceObject> target)
