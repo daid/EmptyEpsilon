@@ -225,6 +225,8 @@ private:
     GuiTextEntry* simple_scan_description;
     GuiTextEntry* full_scan_description;
     GuiSlider* heading_slider;
+    GuiSlider* scanning_complexity_slider;
+    GuiSlider* scanning_depth_slider;
 public:
     GuiObjectTweakBase(GuiContainer* owner);
 
