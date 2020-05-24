@@ -95,7 +95,6 @@ public:
     //Callback called when a new player ship is created on the ship selection screen.
     ScriptSimpleCallback on_new_player_ship;
     bool allow_new_player_ships = true;
-
     
     GameGlobalInfo();
     virtual ~GameGlobalInfo();

@@ -3,7 +3,6 @@
 
 #include "screenComponents/targetsContainer.h"
 #include "gui/gui2_overlay.h"
-#include "preferenceManager.h"
 
 class GuiRadarView;
 class GuiKeyValueDisplay;

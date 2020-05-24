@@ -1,5 +1,4 @@
 #include <i18n.h>
-#include <regex>
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
 #include "resources.h"
@@ -42,7 +41,6 @@ GameGlobalInfo::GameGlobalInfo()
     allow_main_screen_long_range_radar = true;
     gm_control_code = "";
     elapsed_time = 0.0f;
-    
     intercept_all_comms_to_gm = false;
 
     registerMemberReplication(&scanning_complexity);

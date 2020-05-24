@@ -120,7 +120,7 @@ private:
 public:
     std::vector<CustomShipFunction> custom_functions;
 
-     std::vector<sf::Vector2f> waypoints;
+    std::vector<sf::Vector2f> waypoints;
 
     // Ship functionality
     // Capable of scanning a target
@@ -269,8 +269,8 @@ public:
     void commandSetBeamSystemTarget(ESystem system);
     void commandSetShieldFrequency(int32_t frequency);
     void commandAddWaypoint(sf::Vector2f position);
-    void commandRemoveWaypoint(int index);
-    void commandMoveWaypoint(int index, sf::Vector2f position);
+    void commandRemoveWaypoint(int32_t index);
+    void commandMoveWaypoint(int32_t index, sf::Vector2f position);
     void commandActivateSelfDestruct();
     void commandCancelSelfDestruct();
     void commandConfirmDestructCode(int8_t index, uint32_t code);

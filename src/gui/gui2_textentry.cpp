@@ -2,7 +2,7 @@
 #include "input.h"
 
 GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
-: GuiElement(owner, id), text(text), text_size(30), func(nullptr), enter_func(nullptr), validator_func(nullptr), valid(true)
+: GuiElement(owner, id), text(text), text_size(30), func(nullptr)
 {
 }
 
@@ -31,11 +31,6 @@ bool GuiTextEntry::onKey(sf::Event::KeyEvent key, int unicode)
     if (key.code == sf::Keyboard::BackSpace && text.length() > 0)
     {
         text = text.substr(0, -1);
-        if (validator_func)
-        {
-            Validator v = validator_func;
-            valid = v(text);
-        }
         if (func)
         {
             func_t f = func;
@@ -59,11 +54,6 @@ bool GuiTextEntry::onKey(sf::Event::KeyEvent key, int unicode)
             if (unicode > 31 && unicode < 128)
                 text += string(char(unicode));
         }
-        if (validator_func)
-        {
-            Validator v = validator_func;
-            valid = v(text);
-        }
         if (func)
         {
             func_t f = func;
@@ -74,11 +64,6 @@ bool GuiTextEntry::onKey(sf::Event::KeyEvent key, int unicode)
     if (unicode > 31 && unicode < 128)
     {
         text += string(char(unicode));
-        if (validator_func)
-        {
-            Validator v = validator_func;
-            valid = v(text);
-        }
         if (func)
         {
             func_t f = func;
@@ -99,11 +84,6 @@ void GuiTextEntry::onFocusLost()
     sf::Keyboard::setVirtualKeyboardVisible(false);
 }
 
-bool GuiTextEntry::isValid() const
-{
-    return valid;
-}
-
 string GuiTextEntry::getText() const
 {
     return text;
@@ -112,11 +92,6 @@ string GuiTextEntry::getText() const
 GuiTextEntry* GuiTextEntry::setText(string text)
 {
     this->text = text;
-    if (validator_func)
-    {
-        Validator v = validator_func;
-        valid = v(text);
-    }
     return this;
 }
 
@@ -135,12 +110,5 @@ GuiTextEntry* GuiTextEntry::callback(func_t func)
 GuiTextEntry* GuiTextEntry::enterCallback(func_t func)
 {
     this->enter_func = func;
-    return this;
-}
-
-GuiTextEntry* GuiTextEntry::validator(Validator v)
-{
-    this->validator_func = v;
-    valid = v(text);
     return this;
 }

@@ -32,7 +32,6 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         [this](sf::Vector2f position) { //down
             if (mode == TargetSelection && targets.getWaypointIndex() > -1 && my_spaceship)
             {
-                //if (sf::length(my_spaceship->waypoints[targets.getWaypointIndex()] - position) < 10 / radar->SectorsView::getScale())
                 if (sf::length(my_spaceship->waypoints[targets.getWaypointIndex()] - position) < 10 / radar->getScale())
                 {
                     mode = MoveWaypoint;
@@ -51,7 +50,6 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
             switch(mode)
             {
             case TargetSelection:
-                //targets.setToClosestTo(position, 10 / radar->SectorsView::getScale(), TargetsContainer::Targetable);
                 targets.setToClosestTo(position, 10 / radar->getScale(), TargetsContainer::Targetable);
                 break;
             case WaypointPlacement:
@@ -197,7 +195,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 
 void RelayScreen::onDraw(sf::RenderTarget& window)
 {
-    // Handle mouse wheel
+    ///Handle mouse wheel
     float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
     if (mouse_wheel_delta != 0.0 && my_spaceship)
     {

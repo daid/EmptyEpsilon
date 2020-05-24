@@ -1,5 +1,4 @@
 #include "preferenceManager.h"
-#include "script.h"
 
 std::unordered_map<string, string> PreferencesManager::preference;
 

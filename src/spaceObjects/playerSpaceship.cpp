@@ -310,7 +310,6 @@ PlayerSpaceship::PlayerSpaceship()
     alert_level = AL_Normal;
     shields_active = false;
     control_code = "";
-    
     setFactionId(1);
 
     // For now, set player ships to always be fully scanned to all other ships
@@ -1872,14 +1871,14 @@ void PlayerSpaceship::commandAddWaypoint(sf::Vector2f position)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandRemoveWaypoint(int index)
+void PlayerSpaceship::commandRemoveWaypoint(int32_t index)
 {
     sf::Packet packet;
     packet << CMD_REMOVE_WAYPOINT << index;
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandMoveWaypoint(int index, sf::Vector2f position)
+void PlayerSpaceship::commandMoveWaypoint(int32_t index, sf::Vector2f position)
 {
     sf::Packet packet;
     packet << CMD_MOVE_WAYPOINT << index << position;

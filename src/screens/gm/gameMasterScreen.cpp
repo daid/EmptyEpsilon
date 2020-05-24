@@ -219,7 +219,6 @@ GameMasterScreen::~GameMasterScreen()
 
 void GameMasterScreen::update(float delta)
 {
-    ///Handle mouse wheel
     float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
     if (mouse_wheel_delta != 0.0)
     {
@@ -233,9 +232,7 @@ void GameMasterScreen::update(float delta)
             main_radar->shortRange();
         else
             main_radar->longRange();
-    }    
-    ///!
-    
+    }
     
     bool has_object = false;
     bool has_cpu_ship = false;

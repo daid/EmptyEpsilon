@@ -1492,18 +1492,6 @@ string frequencyToString(int frequency)
     return string(400 + (frequency * 20)) + "THz";
 }
 
-int getFrequencyDisplayName(lua_State *L){
-    int idx = 1;
-    int frequency = luaL_checkinteger(L, idx++);
-    string res = frequencyToString(frequency);
-    lua_pushstring(L, res.c_str());
-    return 1;
-}
-
-/// getFrequencyDisplayName(frequency)
-/// Return the display name of the frequency integer;
-REGISTER_SCRIPT_FUNCTION(getFrequencyDisplayName);
-
 #ifndef _MSC_VER
 #include "spaceship.hpp"
 #endif

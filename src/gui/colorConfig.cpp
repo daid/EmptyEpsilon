@@ -49,7 +49,6 @@ void ColorConfig::load()
     DEF_WIDGETCOLORSET(text_entry);
     DEF_WIDGETCOLORSET(slider);
     DEF_WIDGETCOLORSET(textbox);
-    DEF_COLOR(text_entry_invalid);
     DEF_COLOR(overlay_ok);
     DEF_COLOR(overlay_damaged);
     DEF_COLOR(overlay_jammed);

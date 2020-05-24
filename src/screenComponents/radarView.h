@@ -8,7 +8,6 @@
 class GuiMissileTubeControls;
 class TargetsContainer;
 
-//class GuiRadarView : public SectorsView
 class GuiRadarView : public GuiElement
 {
 public:
@@ -16,8 +15,7 @@ public:
     {
         Rectangular,
         Circular,
-        CircularMasked,
-        CircularSector
+        CircularMasked
     };
     enum EFogOfWarStyle
     {
@@ -82,7 +80,6 @@ public:
 
     virtual void onDraw(sf::RenderTarget& window);
 
-    //virtual GuiRadarView* setDistance(float distance) { SectorsView::setDistance(distance); return this; }
     GuiRadarView* setDistance(float distance) { this->distance = distance; return this; }
     float getDistance() { return distance; }
     GuiRadarView* setRangeIndicatorStepSize(float step) { range_indicator_step_size = step; return this; }
@@ -111,11 +108,9 @@ public:
     GuiRadarView* setAutoRotating(bool value) { this->auto_rotate_on_my_ship = value; return this; }
     bool getShowSectors() { return show_sectors; }
     GuiRadarView* setShowSectors(bool value) { this->show_sectors = value; return this; }
-    //virtual GuiRadarView* setCallbacks(func_t mouse_down_func, func_t mouse_drag_func, func_t mouse_up_func) { SectorsView::setCallbacks(mouse_down_func, mouse_drag_func, mouse_up_func); return this; }
     GuiRadarView* setCallbacks(func_t mouse_down_func, func_t mouse_drag_func, func_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
     GuiRadarView* setViewPosition(sf::Vector2f view_position) { this->view_position = view_position; return this; }
     sf::Vector2f getViewPosition() { return view_position; }
-    //virtual GuiRadarView* setViewPosition(sf::Vector2f view_position) { SectorsView::setViewPosition(view_position); return this; }
     GuiRadarView* setViewRotation(float view_rotation) { this->view_rotation = view_rotation; return this; }
     float getViewRotation() { return view_rotation; }
     int calcGridScaleMagnitude(int scale_magnitude, int position);
@@ -128,14 +123,12 @@ public:
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
 protected:
-    //virtual float getScale() override;
-    //virtual sf::Vector2f getCenterPosition() override;
     virtual sf::Vector2f getCenterPosition();
 private:
     void updateGhostDots();
 
     void drawBackground(sf::RenderTarget& window);
-    void drawSectorGrid(sf::RenderTarget &window);
+    void drawSectorGrid(sf::RenderTarget& window);
     void drawNebulaBlockedAreas(sf::RenderTarget& window);
     void drawNoneFriendlyBlockedAreas(sf::RenderTarget& window);
     void drawFriendlyNotVisibleAreas(sf::RenderTarget& window);
