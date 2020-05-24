@@ -122,6 +122,12 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
     });
     turn_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
+    (new GuiLabel(left_col, "", "Jump charge:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    jump_charge_slider = new GuiSlider(left_col, "", 0.0, 100000, 0.0, [this](float value) {
+        target->setJumpDriveCharge(value);
+    });
+    jump_charge_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
     // Right column
     // Set type name. Does not change ship type.
     (new GuiLabel(right_col, "", "Type name:", 30))->setSize(GuiElement::GuiSizeMax, 50);
@@ -168,6 +174,7 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
 void GuiTweakShip::onDraw(sf::RenderTarget& window)
 {
     hull_slider->setValue(target->hull_strength);
+    jump_charge_slider->setValue(target->getJumpDriveCharge());
 }
 
 void GuiTweakShip::open(P<SpaceObject> target)
