@@ -1317,7 +1317,7 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
     // If traits don't differ from the ship template, don't bother exporting
     // them.
     if (getTypeName() != ship_template->getName())
-        ret += ":setTypeName(" + getTypeName() + ")";
+        ret += ":setTypeName(\"" + getTypeName() + "\")";
     if (hull_max != ship_template->hull)
         ret += ":setHullMax(" + string(hull_max, 0) + ")";
     if (hull_strength != ship_template->hull)
