@@ -807,23 +807,42 @@ GuiObjectTweakBase::GuiObjectTweakBase(GuiContainer* owner)
     // Edit object's description.
     // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
     // editing long strings.
-    (new GuiLabel(left_col, "", "Description:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-
-    // Set object's description.
-    description = new GuiTextEntry(left_col, "", "");
-    description->setSize(GuiElement::GuiSizeMax, 50);
-    description->callback([this](string text) {
-        target->setDescription(text);
+    (new GuiLabel(left_col, "", "Unscanned description:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    unscanned_description = new GuiTextEntry(left_col, "", "");
+    unscanned_description->setSize(GuiElement::GuiSizeMax, 50);
+    unscanned_description->callback([this](string text) {
+        target->setDescriptionForScanState(SS_NotScanned,text);
     });
 
+    (new GuiLabel(left_col, "", "Friend or Description:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    friend_or_foe_description = new GuiTextEntry(left_col, "", "");
+    friend_or_foe_description->setSize(GuiElement::GuiSizeMax, 50);
+    friend_or_foe_description->callback([this](string text) {
+        target->setDescriptionForScanState(SS_FriendOrFoeIdentified,text);
+    });
+
+    (new GuiLabel(left_col, "", "Simple Scan Description:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    simple_scan_description = new GuiTextEntry(left_col, "", "");
+    simple_scan_description->setSize(GuiElement::GuiSizeMax, 50);
+    simple_scan_description->callback([this](string text) {
+        target->setDescriptionForScanState(SS_SimpleScan,text);
+    });
+
+    (new GuiLabel(left_col, "", "Full Scan Description:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    full_scan_description = new GuiTextEntry(left_col, "", "");
+    full_scan_description->setSize(GuiElement::GuiSizeMax, 50);
+    full_scan_description->callback([this](string text) {
+        target->setDescriptionForScanState(SS_FullScan,text);
+    });
+
+    // Right column
+
     // Set object's heading.
-    (new GuiLabel(left_col, "", "Heading:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-    heading_slider = new GuiSlider(left_col, "", 0.0, 359.9, 0.0, [this](float value) {
+    (new GuiLabel(right_col, "", "Heading:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    heading_slider = new GuiSlider(right_col, "", 0.0, 359.9, 0.0, [this](float value) {
         target->setHeading(value);
     });
     heading_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
-
-    // Right column
 }
 
 void GuiObjectTweakBase::onDraw(sf::RenderTarget& window)
@@ -838,5 +857,8 @@ void GuiObjectTweakBase::open(P<SpaceObject> target)
     callsign->setText(target->callsign);
     // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
     // editing long strings.
-    description->setText(target->getDescription(SS_NotScanned));
+    unscanned_description->setText(target->getDescription(SS_NotScanned));
+    friend_or_foe_description->setText(target->getDescription(SS_FriendOrFoeIdentified));
+    simple_scan_description->setText(target->getDescription(SS_SimpleScan));
+    full_scan_description->setText(target->getDescription(SS_FullScan));
 }

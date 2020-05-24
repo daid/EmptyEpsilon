@@ -220,7 +220,10 @@ private:
     P<SpaceObject> target;
 
     GuiTextEntry* callsign;
-    GuiTextEntry* description;
+    GuiTextEntry* unscanned_description;
+    GuiTextEntry* friend_or_foe_description;
+    GuiTextEntry* simple_scan_description;
+    GuiTextEntry* full_scan_description;
     GuiSlider* heading_slider;
 public:
     GuiObjectTweakBase(GuiContainer* owner);
