@@ -18,7 +18,6 @@ void GuiTextEntry::onDraw(sf::RenderTarget& window)
         typing_indicator = false;
     if (blink_clock.getElapsedTime().asSeconds() > blink_rate * 2.0f)
         blink_clock.restart();
-    sf::Color textColor = (valid || !validator_func) ? selectColor(colorConfig.text_entry.forground) : colorConfig.text_entry_invalid;
     drawText(window, sf::FloatRect(rect.left + 16, rect.top, rect.width, rect.height), text + (typing_indicator ? "_" : ""), ACenterLeft, text_size, main_font, selectColor(colorConfig.text_entry.forground));
 }
 

@@ -21,7 +21,6 @@ enum ECrewPosition
     damageControl,
     powerManagement,
     databaseView,
-    navigation,
     altRelay,
     commsOnly,
     shipLog,

@@ -2,13 +2,14 @@
 #define RADAR_VIEW_H
 
 #include "gui/gui2_element.h"
-#include "sectorsView.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "preferenceManager.h"
 
 class GuiMissileTubeControls;
 class TargetsContainer;
 
-class GuiRadarView : public SectorsView
+//class GuiRadarView : public SectorsView
+class GuiRadarView : public GuiElement
 {
 public:
     enum ERadarStyle
@@ -47,18 +48,23 @@ private:
 
     TargetsContainer* targets;
     GuiMissileTubeControls* missile_tube_controls;
+    
+public:
+    static const int grid_scale_size = 5;
 
-    //sf::Vector2f view_position;
+private:
+    static const int sub_sectors_count = 8;
+    sf::Color grid_colors[grid_scale_size];
+    sf::Vector2f view_position;
     float view_rotation;
     bool auto_center_on_my_ship;
     bool auto_rotate_on_my_ship;
     bool auto_distance = false;
-    //float distance;
+    float distance;
     bool long_range;
     bool show_ghost_dots;
     bool show_sectors;
     bool show_waypoints;
-    bool show_routes;
     bool show_target_projection;
     bool show_missile_tubes;
     bool show_callsigns;
@@ -76,8 +82,9 @@ public:
 
     virtual void onDraw(sf::RenderTarget& window);
 
-    virtual GuiRadarView* setDistance(float distance) { SectorsView::setDistance(distance); return this; }
-    //float getDistance() { return distance; }
+    //virtual GuiRadarView* setDistance(float distance) { SectorsView::setDistance(distance); return this; }
+    GuiRadarView* setDistance(float distance) { this->distance = distance; return this; }
+    float getDistance() { return distance; }
     GuiRadarView* setRangeIndicatorStepSize(float step) { range_indicator_step_size = step; return this; }
     GuiRadarView* longRange() { long_range = true; return this; }
     GuiRadarView* shortRange() { long_range = false; return this; }
@@ -85,8 +92,6 @@ public:
     GuiRadarView* disableGhostDots() { show_ghost_dots = false; return this; }
     GuiRadarView* enableWaypoints() { show_waypoints = true; return this; }
     GuiRadarView* disableWaypoints() { show_waypoints = false; return this; }
-    GuiRadarView* enableRoutes() { show_routes = true; return this; }
-    GuiRadarView* disableRoutes() { show_routes = false; return this; }
     GuiRadarView* enableTargetProjections(GuiMissileTubeControls* missile_tube_controls) { show_target_projection = true; this->missile_tube_controls = missile_tube_controls; return this; }
     GuiRadarView* disableTargetProjections() { show_target_projection = false; return this; }
     GuiRadarView* enableMissileTubeIndicators() { show_missile_tubes = true; return this; }
@@ -106,21 +111,31 @@ public:
     GuiRadarView* setAutoRotating(bool value) { this->auto_rotate_on_my_ship = value; return this; }
     bool getShowSectors() { return show_sectors; }
     GuiRadarView* setShowSectors(bool value) { this->show_sectors = value; return this; }
-    virtual GuiRadarView* setCallbacks(func_t mouse_down_func, func_t mouse_drag_func, func_t mouse_up_func) { SectorsView::setCallbacks(mouse_down_func, mouse_drag_func, mouse_up_func); return this; }
-    //GuiRadarView* setViewPosition(sf::Vector2f view_position) { this->view_position = view_position; return this; }
-    //sf::Vector2f getViewPosition() { return view_position; }
-    virtual GuiRadarView* setViewPosition(sf::Vector2f view_position) { SectorsView::setViewPosition(view_position); return this; }
+    //virtual GuiRadarView* setCallbacks(func_t mouse_down_func, func_t mouse_drag_func, func_t mouse_up_func) { SectorsView::setCallbacks(mouse_down_func, mouse_drag_func, mouse_up_func); return this; }
+    GuiRadarView* setCallbacks(func_t mouse_down_func, func_t mouse_drag_func, func_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
+    GuiRadarView* setViewPosition(sf::Vector2f view_position) { this->view_position = view_position; return this; }
+    sf::Vector2f getViewPosition() { return view_position; }
+    //virtual GuiRadarView* setViewPosition(sf::Vector2f view_position) { SectorsView::setViewPosition(view_position); return this; }
     GuiRadarView* setViewRotation(float view_rotation) { this->view_rotation = view_rotation; return this; }
     float getViewRotation() { return view_rotation; }
+    int calcGridScaleMagnitude(int scale_magnitude, int position);
+    virtual float getScale();
+
+    sf::Vector2f worldToScreen(sf::Vector2f world_position);
+    sf::Vector2f screenToWorld(sf::Vector2f screen_position);
 
     virtual bool onMouseDown(sf::Vector2f position);
+    virtual void onMouseDrag(sf::Vector2f position);
+    virtual void onMouseUp(sf::Vector2f position);
 protected:
-    virtual float getScale() override;
-    virtual sf::Vector2f getCenterPosition() override;
+    //virtual float getScale() override;
+    //virtual sf::Vector2f getCenterPosition() override;
+    virtual sf::Vector2f getCenterPosition();
 private:
     void updateGhostDots();
 
     void drawBackground(sf::RenderTarget& window);
+    void drawSectorGrid(sf::RenderTarget &window);
     void drawNebulaBlockedAreas(sf::RenderTarget& window);
     void drawNoneFriendlyBlockedAreas(sf::RenderTarget& window);
     void drawFriendlyNotVisibleAreas(sf::RenderTarget& window);
@@ -131,6 +146,7 @@ private:
     void drawMissileTubes(sf::RenderTarget& window);
     void drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget& window_alpha);
     void drawObjectsGM(sf::RenderTarget& window);
+    void drawTargets(sf::RenderTarget& window);
     void drawHeadingIndicators(sf::RenderTarget& window);
     void drawRadarCutoff(sf::RenderTarget& window);
     float getRadius();

@@ -14,9 +14,9 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
 {
     /// Returns the sf::Vector2f of a specific waypoint set by this ship.
     /// Takes the index of the waypoint as its parameter.
-    // REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getWaypoint);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getWaypoint);
     /// Returns the total number of this ship's active waypoints.
-    // REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getWaypointCount);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getWaypointCount);
     /// Returns the ship's EAlertLevel.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getAlertLevel);
     /// Sets whether this ship's shields are raised or lowered.
@@ -132,8 +132,10 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     /// Returns the launching PlayerSpaceship and launched ScanProbe.
     /// Example: player:onProbeLaunch(trackProbe)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeLaunch);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getFarRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getLongRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getShortRangeRadarRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setFarRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setLongRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setShortRangeRadarRange);
     /// Set whether the object can scan other objects.
@@ -258,9 +260,6 @@ static const int16_t CMD_SET_MAIN_SCREEN_OVERLAY = 0x0027;
 static const int16_t CMD_HACKING_FINISHED = 0x0028;
 static const int16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const int16_t CMD_TURN_SPEED = 0x002A;
-static const int16_t CMD_ADD_ROUTE_WAYPOINT = 0x002B;
-static const int16_t CMD_REMOVE_ROUTE_WAYPOINT = 0x002C;
-static const int16_t CMD_MOVE_ROUTE_WAYPOINT = 0x002D;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -311,7 +310,7 @@ PlayerSpaceship::PlayerSpaceship()
     alert_level = AL_Normal;
     shields_active = false;
     control_code = "";
-
+    
     setFactionId(1);
 
     // For now, set player ships to always be fully scanned to all other ships
@@ -346,22 +345,14 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&comms_target_name);
     registerMemberReplication(&comms_incomming_message);
     registerMemberReplication(&ships_log);
-    for(int wp = 0; wp < max_waypoints; wp++) {
-        waypoints[wp] = empty_waypoint;
-        registerMemberReplication(&waypoints[wp]);
-    }
-    for(int r = 0; r < max_routes; r++) {
-        for(int wp = 0; wp < max_waypoints_in_route; wp++) {
-            routes[r][wp] = empty_waypoint;
-            registerMemberReplication(&routes[r][wp]);
-        }
-    }
+    registerMemberReplication(&waypoints);
     registerMemberReplication(&scan_probe_stock);
     registerMemberReplication(&activate_self_destruct);
     registerMemberReplication(&self_destruct_countdown, 0.2);
     registerMemberReplication(&alert_level);
     registerMemberReplication(&linked_science_probe_id);
     registerMemberReplication(&control_code);
+    registerMemberReplication(&far_range_radar_range);
     registerMemberReplication(&long_range_radar_range);
     registerMemberReplication(&short_range_radar_range);
     registerMemberReplication(&custom_functions);
@@ -733,6 +724,7 @@ void PlayerSpaceship::applyTemplateValues()
     setRepairCrewCount(ship_template->repair_crew_count);
 
     // Set the ship's radar ranges.
+    far_range_radar_range = ship_template->far_range_radar_range;
     long_range_radar_range = ship_template->long_range_radar_range;
     short_range_radar_range = ship_template->short_range_radar_range;
 
@@ -1523,20 +1515,16 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         {
             sf::Vector2f position;
             packet >> position;
-            for (int i = 0; i < max_waypoints; i++){
-                if (waypoints[i] >= empty_waypoint){
-                    waypoints[i] = position;
-                    break;
-                }
-            }
+            if (waypoints.size() < 9)
+                waypoints.push_back(position);
         }
         break;
     case CMD_REMOVE_WAYPOINT:
         {
             int32_t index;
             packet >> index;
-            if (index >= 0 && index < max_waypoints)
-                waypoints[index] = empty_waypoint;
+            if (index >= 0 && index < int(waypoints.size()))
+                waypoints.erase(waypoints.begin() + index);
         }
         break;
     case CMD_MOVE_WAYPOINT:
@@ -1544,40 +1532,8 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             int32_t index;
             sf::Vector2f position;
             packet >> index >> position;
-            if (index >= 0 && index < max_waypoints)
+            if (index >= 0 && index < int(waypoints.size()))
                 waypoints[index] = position;
-        }
-        break;
-    case CMD_ADD_ROUTE_WAYPOINT:
-        {
-            int route;
-            sf::Vector2f position;
-            packet >> route >> position;
-            for (int i = 0; i < max_waypoints_in_route; i++){
-                if (routes[route][i] >= empty_waypoint){
-                    routes[route][i] = position;
-                    break;
-                }
-            }
-        }
-        break;
-    case CMD_REMOVE_ROUTE_WAYPOINT:
-        {
-            int route;
-            int index;
-            packet >> route >> index;
-            if (index >= 0 && index < max_waypoints_in_route)
-                routes[route][index] = empty_waypoint;
-        }
-        break;
-    case CMD_MOVE_ROUTE_WAYPOINT:
-        {
-            int route;
-            int index;
-            sf::Vector2f position;
-            packet >> route >> index >> position;
-            if (index >= 0 && index < max_waypoints_in_route)
-                routes[route][index] = position;
         }
         break;
     case CMD_ACTIVATE_SELF_DESTRUCT:
@@ -1916,38 +1872,17 @@ void PlayerSpaceship::commandAddWaypoint(sf::Vector2f position)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandRemoveWaypoint(int32_t index)
+void PlayerSpaceship::commandRemoveWaypoint(int index)
 {
     sf::Packet packet;
     packet << CMD_REMOVE_WAYPOINT << index;
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandMoveWaypoint(int32_t index, sf::Vector2f position)
+void PlayerSpaceship::commandMoveWaypoint(int index, sf::Vector2f position)
 {
     sf::Packet packet;
     packet << CMD_MOVE_WAYPOINT << index << position;
-    sendClientCommand(packet);
-}
-
-void PlayerSpaceship::commandAddRouteWaypoint(int route, sf::Vector2f position)
-{
-    sf::Packet packet;
-    packet << CMD_ADD_ROUTE_WAYPOINT << route << position;
-    sendClientCommand(packet);
-}
-
-void PlayerSpaceship::commandRemoveRouteWaypoint(int route, int index)
-{
-    sf::Packet packet;
-    packet << CMD_REMOVE_ROUTE_WAYPOINT << route << index;
-    sendClientCommand(packet);
-}
-
-void PlayerSpaceship::commandMoveRouteWaypoint(int route, int index, sf::Vector2f position)
-{
-    sf::Packet packet;
-    packet << CMD_MOVE_ROUTE_WAYPOINT << route << index << position;
     sendClientCommand(packet);
 }
 
@@ -2084,6 +2019,11 @@ void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f posit
     }
 }
 
+float PlayerSpaceship::getFarRangeRadarRange()
+{
+    return far_range_radar_range;
+}
+
 float PlayerSpaceship::getLongRangeRadarRange()
 {
     return long_range_radar_range;
@@ -2092,6 +2032,14 @@ float PlayerSpaceship::getLongRangeRadarRange()
 float PlayerSpaceship::getShortRangeRadarRange()
 {
     return short_range_radar_range;
+}
+
+void PlayerSpaceship::setFarRangeRadarRange(float range)
+{
+    range = std::max(range, 100.0f);
+    far_range_radar_range = range;
+    long_range_radar_range = std::min(long_range_radar_range, range);
+    short_range_radar_range = std::min(short_range_radar_range, range);
 }
 
 void PlayerSpaceship::setLongRangeRadarRange(float range)
@@ -2115,6 +2063,8 @@ string PlayerSpaceship::getExportLine()
         result += ":setShortRangeRadarRange(" + string(short_range_radar_range, 0) + ")";
     if (long_range_radar_range != ship_template->long_range_radar_range)
         result += ":setLongRangeRadarRange(" + string(long_range_radar_range, 0) + ")";
+    if (far_range_radar_range != ship_template->far_range_radar_range)
+        result += ":setFarRangeRadarRange(" + string(far_range_radar_range, 0) + ")";
     if (can_scan != ship_template->can_scan)
         result += ":setCanScan(" + string(can_scan, true) + ")";
     if (can_hack != ship_template->can_hack)

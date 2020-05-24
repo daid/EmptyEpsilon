@@ -73,6 +73,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoomSystem);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addDoor);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadarTrace);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setFarRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLongRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShortRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setImpulseSoundFile);
@@ -450,6 +451,14 @@ void ShipTemplate::addDoor(sf::Vector2i position, bool horizontal)
 void ShipTemplate::setRadarTrace(string trace)
 {
     radar_trace = trace;
+}
+
+void ShipTemplate::setFarRangeRadarRange(float range)
+{
+    range = std::max(range, 100.0f);
+    far_range_radar_range = range;
+    long_range_radar_range = std::min(long_range_radar_range, range);
+    short_range_radar_range = std::min(short_range_radar_range, range);
 }
 
 void ShipTemplate::setLongRangeRadarRange(float range)

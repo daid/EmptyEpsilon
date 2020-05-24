@@ -3,6 +3,7 @@
 
 #include "screenComponents/targetsContainer.h"
 #include "gui/gui2_overlay.h"
+#include "preferenceManager.h"
 
 class GuiRadarView;
 class GuiKeyValueDisplay;
@@ -29,6 +30,7 @@ private:
     int drag_waypoint_index;
     GuiRadarView* radar;
 
+    GuiKeyValueDisplay* info_distance;
     GuiKeyValueDisplay* info_callsign;
     GuiKeyValueDisplay* info_faction;
 
@@ -49,8 +51,6 @@ private:
     GuiHackingDialog* hacking_dialog;
 
     sf::Vector2f mouse_down_position;
-    const float max_distance = 10000000.0f;
-    const float min_distance = 6250.0f;
 public:
     RelayScreen(GuiContainer* owner, bool allow_comms);
 

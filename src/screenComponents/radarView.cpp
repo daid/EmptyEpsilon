@@ -8,23 +8,24 @@
 #include "radarView.h"
 #include "missileTubeControls.h"
 #include "targetsContainer.h"
+#include "preferenceManager.h"
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets)
-: SectorsView(owner, id, 5000.0f, targets),
+//: SectorsView(owner, id, 5000.0f, targets),
+: GuiElement(owner, id),
     next_ghost_dot_update(0.0),
     targets(targets),
     missile_tube_controls(nullptr),
-    //view_position(sf::Vector2f(0.0f,0.0f)),
+    view_position(sf::Vector2f(0.0f,0.0f)),
     view_rotation(0),
     auto_center_on_my_ship(true),
     auto_rotate_on_my_ship(false),
     auto_distance(true),
-    //distance(5000.0f),
+    distance(5000.0f),
     long_range(false),
     show_ghost_dots(false),
     show_sectors(true),
     show_waypoints(false),
-    show_routes(false),
     show_target_projection(false),
     show_missile_tubes(false),
     show_callsigns(false),
@@ -37,23 +38,33 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     mouse_drag_func(nullptr),
     mouse_up_func(nullptr)
 {
+    // initialize grid colors for different zoom magnitudes
+    for (int scale_magnitude = 0; scale_magnitude < grid_scale_size - 1; scale_magnitude++)
+    {
+        // warning : the computation is balanced using implicit castings, bit overflows and black magic.
+        // seriously it's worse than those job interview questions
+        // if you change this code even the slightest, verify that it still produces a veriaty of different colors
+        sf::Uint8 colorStep = (-128 / grid_scale_size);
+        grid_colors[scale_magnitude] = sf::Color(65 + colorStep * scale_magnitude * 0.5, 65 + colorStep * scale_magnitude * 0.3, 129 + colorStep * scale_magnitude, 128);
+    }
+    // last color is white
+    grid_colors[grid_scale_size - 1] = sf::Color(255, 255, 255, 128);
 }
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets)
-: SectorsView(owner, id, distance, targets),
+: GuiElement(owner, id),
     next_ghost_dot_update(0.0),
     targets(targets),
     missile_tube_controls(nullptr),
-    //view_position(sf::Vector2f(0.0f,0.0f)),
+    view_position(sf::Vector2f(0.0f,0.0f)),
     view_rotation(0),
     auto_center_on_my_ship(true),
     auto_rotate_on_my_ship(false),
-    //distance(distance),
+    distance(distance),
     long_range(false),
     show_ghost_dots(false),
     show_sectors(true),
     show_waypoints(false),
-    show_routes(false),
     show_target_projection(false),
     show_missile_tubes(false),
     show_callsigns(false),
@@ -66,6 +77,17 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
     mouse_drag_func(nullptr),
     mouse_up_func(nullptr)
 {
+    // initialize grid colors for different zoom magnitudes
+    for (int scale_magnitude = 0; scale_magnitude < grid_scale_size - 1; scale_magnitude++)
+    {
+        // warning : the computation is balanced using implicit castings, bit overflows and black magic.
+        // seriously it's worse than those job interview questions
+        // if you change this code even the slightest, verify that it still produces a veriaty of different colors
+        sf::Uint8 colorStep = (-128 / grid_scale_size);
+        grid_colors[scale_magnitude] = sf::Color(65 + colorStep * scale_magnitude * 0.5, 65 + colorStep * scale_magnitude * 0.3, 129 + colorStep * scale_magnitude, 128);
+    }
+    // last color is white
+    grid_colors[grid_scale_size - 1] = sf::Color(255, 255, 255, 128);
 }
 
 void GuiRadarView::onDraw(sf::RenderTarget& window)
@@ -91,7 +113,6 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
 
     //Hacky, when not relay and we have a ship, center on it.
     if (my_spaceship && auto_center_on_my_ship) {
-        //view_position = my_spaceship->getPosition();
         setViewPosition(my_spaceship->getPosition());
     }
     if (my_spaceship && auto_rotate_on_my_ship) {
@@ -126,7 +147,13 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     if (fog_style == NebulaFogOfWar || fog_style == FriendlysShortRangeFogOfWar)    //Mask the background color with the nebula blocked areas, but show the rest.
         drawRenderTexture(mask_texture, background_texture, sf::Color::White, sf::BlendMultiply);
     if (show_sectors)
-        drawSectorGrid(background_texture);
+    {
+        if (PreferencesManager::get("advanced_sector_system","0") == "1")
+            drawSectorGrid(background_texture);
+            //SectorsView::drawSectorGrid(background_texture);
+        else
+            drawSectorGrid(background_texture);
+    }
     drawRangeIndicators(background_texture);
     if (show_target_projection)
         drawTargetProjections(background_texture);
@@ -155,8 +182,6 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     //Post masking
     if (show_waypoints)
         drawWaypoints(forground_texture);
-    if (show_routes)
-        drawRoutes(forground_texture);
     if (show_heading_indicators)
         drawHeadingIndicators(forground_texture);
     drawTargets(forground_texture);
@@ -264,6 +289,183 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
     }
 }
 
+void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
+{
+    if (PreferencesManager::get("advanced_sector_system","0") == "0")
+    {
+        sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
+        float scale = std::min(rect.width, rect.height) / 2.0 / distance;
+
+        constexpr float sector_size = 20000;
+        const float sub_sector_size = sector_size / 8;
+
+        int sector_x_min = floor((view_position.x - (radar_screen_center.x - rect.left) / scale) / sector_size) + 1;
+        int sector_x_max = floor((view_position.x + (rect.left + rect.width - radar_screen_center.x) / scale) / sector_size);
+        int sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.top) / scale) / sector_size) + 1;
+        int sector_y_max = floor((view_position.y + (rect.top + rect.height - radar_screen_center.y) / scale) / sector_size);
+        sf::Color color(64, 64, 128, 128);
+        for(int sector_x = sector_x_min - 1; sector_x <= sector_x_max; sector_x++)
+        {
+            float x = sector_x * sector_size;
+            for(int sector_y = sector_y_min - 1; sector_y <= sector_y_max; sector_y++)
+            {
+                float y = sector_y * sector_size;
+                sf::Vector2f pos = worldToScreen(sf::Vector2f(x+(30/scale),y+(30/scale)));
+                drawText(window, sf::FloatRect(pos.x-10, pos.y-10, 20, 20), getSectorName(sf::Vector2f(sector_x * sector_size + sub_sector_size, sector_y * sector_size + sub_sector_size)), ACenter, 30, bold_font, color);
+            }
+        }
+        sf::VertexArray lines_x(sf::Lines, 2 * (sector_x_max - sector_x_min + 1));
+        sf::VertexArray lines_y(sf::Lines, 2 * (sector_y_max - sector_y_min + 1));
+        for(int sector_x = sector_x_min; sector_x <= sector_x_max; sector_x++)
+        {
+            float x = sector_x * sector_size;
+            lines_x[(sector_x - sector_x_min)*2].position = worldToScreen(sf::Vector2f(x, (sector_y_min-1)*sector_size));
+            lines_x[(sector_x - sector_x_min)*2].color = color;
+            lines_x[(sector_x - sector_x_min)*2+1].position = worldToScreen(sf::Vector2f(x, (sector_y_max+1)*sector_size));
+            lines_x[(sector_x - sector_x_min)*2+1].color = color;
+        }
+        for(int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
+        {
+            float y = sector_y * sector_size;
+            lines_y[(sector_y - sector_y_min)*2].position = worldToScreen(sf::Vector2f((sector_x_min-1)*sector_size, y));
+            lines_y[(sector_y - sector_y_min)*2].color = color;
+            lines_y[(sector_y - sector_y_min)*2+1].position = worldToScreen(sf::Vector2f((sector_x_max+1)*sector_size, y));
+            lines_y[(sector_y - sector_y_min)*2+1].color = color;
+        }
+        window.draw(lines_x);
+        window.draw(lines_y);
+
+        color = sf::Color(64, 64, 128, 255);
+        int sub_sector_x_min = floor((view_position.x - (radar_screen_center.x - rect.left) / scale) / sub_sector_size) + 1;
+        int sub_sector_x_max = floor((view_position.x + (rect.left + rect.width - radar_screen_center.x) / scale) / sub_sector_size);
+        int sub_sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.top) / scale) / sub_sector_size) + 1;
+        int sub_sector_y_max = floor((view_position.y + (rect.top + rect.height - radar_screen_center.y) / scale) / sub_sector_size);
+        sf::VertexArray points(sf::Points, (sub_sector_x_max - sub_sector_x_min + 1) * (sub_sector_y_max - sub_sector_y_min + 1));
+        for(int sector_x = sub_sector_x_min; sector_x <= sub_sector_x_max; sector_x++)
+        {
+            float x = sector_x * sub_sector_size;
+            for(int sector_y = sub_sector_y_min; sector_y <= sub_sector_y_max; sector_y++)
+            {
+                float y = sector_y * sub_sector_size;
+                points[(sector_x - sub_sector_x_min) + (sector_y - sub_sector_y_min) * (sub_sector_x_max - sub_sector_x_min + 1)].position = worldToScreen(sf::Vector2f(x,y));
+                points[(sector_x - sub_sector_x_min) + (sector_y - sub_sector_y_min) * (sub_sector_x_max - sub_sector_x_min + 1)].color = color;
+            }
+        }
+        window.draw(points);
+
+    }
+    else
+    {
+        sf::Vector2f radar_screen_center = getCenterPosition();
+        const float scale = getScale();
+        const float factor = std::floor(std::log10(GameGlobalInfo::sector_size * scale));
+        const int scale_magnitude = 2 - std::min(2.f, factor);
+        const float sector_size_scaled = GameGlobalInfo::sector_size * std::pow(sub_sectors_count, scale_magnitude);
+        const float sub_sector_size = sector_size_scaled / sub_sectors_count;
+
+        int sector_x_min = floor((view_position.x - (radar_screen_center.x - rect.left) / scale) / sector_size_scaled) + 1;
+        int sector_x_max = floor((view_position.x + (rect.left + rect.width - radar_screen_center.x) / scale) / sector_size_scaled);
+        int sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.top) / scale) / sector_size_scaled) + 1;
+        int sector_y_max = floor((view_position.y + (rect.top + rect.height - radar_screen_center.y) / scale) / sector_size_scaled);
+        for(int sector_x = sector_x_min - 1; sector_x <= sector_x_max; sector_x++)
+        {
+            float x = sector_x * sector_size_scaled;
+            for(int sector_y = sector_y_min - 1; sector_y <= sector_y_max; sector_y++)
+            {
+                float y = sector_y * sector_size_scaled;
+                sf::Vector2f pos = worldToScreen(sf::Vector2f(x+(30/scale),y+(30/scale)));
+                
+                // scale_magnitude = 0 -> Sector 
+                // scale_magnitude = 2 -> Area
+                // scale_magnitude = 5 -> Region 
+                // Sector name
+                string sector_name = getSectorName(sf::Vector2f(x + 1, y + 1),0);
+                sf::Color sector_color = grid_colors[scale_magnitude];
+                float sector_scale = 30;
+                
+                // Area name
+                string area_name = getSectorName(sf::Vector2f(x + 1, y + 1),2);
+                sf::Color area_color = grid_colors[scale_magnitude];
+                if (scale_magnitude < 2)
+                    area_color = grid_colors[2];
+                
+                float area_scale = std::min(200.0, std::max(200.0 * scale*1800.0, 30.0));
+                float area_shift = std::min(50.0, std::max(50.0 * scale*1800.0, 10.0));
+                area_color.a = std::max(0.0, std::min(25.0 / (scale*900.0), 128.0));
+                float area_x = radar_screen_center.x + (x - view_position.x) * scale + area_shift;
+                float area_y = radar_screen_center.y + (y - view_position.y) * scale + area_shift;
+                
+                // Region name
+                string region_name = getSectorName(sf::Vector2f(x + 1, y + 1),4);
+                sf::Color region_color = grid_colors[scale_magnitude];
+                if (scale_magnitude < 4)
+                    region_color = grid_colors[4];
+                
+                float region_scale = std::min(200.0, std::max(200.0 * scale*1800.0*64.0, 30.0));
+                float region_shift = std::min(50.0, std::max(50.0 * scale*1800.0*64.0, 10.0));
+                region_color.a = std::max(0.0, std::min(25.0 / (scale*900.0*64.0), 128.0));
+                float region_x = radar_screen_center.x + (x - view_position.x) * scale + region_shift;
+                float region_y = radar_screen_center.y + (y - view_position.y) * scale + region_shift;
+
+                // Draw Sector name
+                if (scale_magnitude < 2) 
+                    drawText(window, sf::FloatRect(pos.x-10, pos.y-10, 20, 20), sector_name, ATopLeft, sector_scale, bold_font, sector_color);
+                
+                // Draw zone name
+                if (style == Rectangular)
+                {
+                    if (scale_magnitude < 4) 
+                        drawText(window, sf::FloatRect(area_x, area_y, 20, 20), area_name, ATopLeft, area_scale, bold_font, area_color);
+                    drawText(window, sf::FloatRect(region_x, region_y, 20, 20), region_name, ATopLeft, region_scale, bold_font, region_color);
+                }
+            }
+        }
+        
+        sf::VertexArray lines_x(sf::Lines, 2 * (sector_x_max - sector_x_min + 1));
+        sf::VertexArray lines_y(sf::Lines, 2 * (sector_y_max - sector_y_min + 1));
+        for (int sector_x = sector_x_min; sector_x <= sector_x_max; sector_x++)
+        {
+            float x = sector_x * sector_size_scaled;
+            sf::Color color = grid_colors[calcGridScaleMagnitude(scale_magnitude, sector_x)];
+            lines_x[(sector_x - sector_x_min) * 2].position = worldToScreen(sf::Vector2f(x, (sector_y_min-1)*sector_size_scaled));
+            lines_x[(sector_x - sector_x_min) * 2].color = color;
+            lines_x[(sector_x - sector_x_min)*2+1].position = worldToScreen(sf::Vector2f(x, (sector_y_max+1)*sector_size_scaled));
+            lines_x[(sector_x - sector_x_min) * 2 + 1].color = color;
+        }
+        for (int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
+        {
+            float y = sector_y * sector_size_scaled;
+            lines_y[(sector_y - sector_y_min)*2].position = worldToScreen(sf::Vector2f((sector_x_min-1)*sector_size_scaled, y));
+            sf::Color color = grid_colors[calcGridScaleMagnitude(scale_magnitude, sector_y)];
+            lines_y[(sector_y - sector_y_min) * 2].color = color;
+            lines_y[(sector_y - sector_y_min)*2+1].position = worldToScreen(sf::Vector2f((sector_x_max+1)*sector_size_scaled, y));
+            lines_y[(sector_y - sector_y_min) * 2 + 1].color = color;
+        }
+        window.draw(lines_x);
+        window.draw(lines_y);
+
+        sf::Color color = sf::Color(64, 64, 128, 255);
+        if (scale_magnitude > 0)
+            color = grid_colors[scale_magnitude - 1];
+        int sub_sector_x_min = floor((view_position.x - (radar_screen_center.x - rect.left) / scale) / sub_sector_size) + 1;
+        int sub_sector_x_max = floor((view_position.x + (rect.left + rect.width - radar_screen_center.x) / scale) / sub_sector_size);
+        int sub_sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.top) / scale) / sub_sector_size) + 1;
+        int sub_sector_y_max = floor((view_position.y + (rect.top + rect.height - radar_screen_center.y) / scale) / sub_sector_size);
+        sf::VertexArray points(sf::Points, (sub_sector_x_max - sub_sector_x_min + 1) * (sub_sector_y_max - sub_sector_y_min + 1));
+        for (int sector_x = sub_sector_x_min; sector_x <= sub_sector_x_max; sector_x++)
+        {
+            float x = sector_x * sub_sector_size;
+            for (int sector_y = sub_sector_y_min; sector_y <= sub_sector_y_max; sector_y++)
+            {
+                float y = sector_y * sub_sector_size;
+                points[(sector_x - sub_sector_x_min) + (sector_y - sub_sector_y_min) * (sub_sector_x_max - sub_sector_x_min + 1)].position = worldToScreen(sf::Vector2f(x,y));
+            points[(sector_x - sub_sector_x_min) + (sector_y - sub_sector_y_min) * (sub_sector_x_max - sub_sector_x_min + 1)].color = color;
+            }
+        }
+        window.draw(points);
+    }
+}
+
 void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
 {
     sf::BlendMode blend(
@@ -349,31 +551,27 @@ void GuiRadarView::drawWaypoints(sf::RenderTarget& window)
 
     sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
 
-    for(unsigned int n=0; n<PlayerSpaceship::max_waypoints; n++)
+    for(unsigned int n=0; n<my_spaceship->waypoints.size(); n++)
     {
-        sf::Vector2f wp = my_spaceship->waypoints[n];
-        if (wp < empty_waypoint)
+        sf::Vector2f screen_position = worldToScreen(my_spaceship->waypoints[n]);
+
+        sf::Sprite object_sprite;
+        textureManager.setTexture(object_sprite, "waypoint");
+        object_sprite.setColor(colorConfig.ship_waypoint_background);
+        object_sprite.setPosition(screen_position - sf::Vector2f(0, 10));
+        object_sprite.setScale(0.8, 0.8);
+        window.draw(object_sprite);
+        drawText(window, sf::FloatRect(screen_position.x, screen_position.y - 10, 0, 0), string(n + 1), ACenter, 18, bold_font, colorConfig.ship_waypoint_text);
+
+        if (style != Rectangular && sf::length(screen_position - radar_screen_center) > std::min(rect.width, rect.height) * 0.5f)
         {
-            sf::Vector2f screen_position = worldToScreen(wp);
+            screen_position = radar_screen_center + ((screen_position - radar_screen_center) / sf::length(screen_position - radar_screen_center) * std::min(rect.width, rect.height) * 0.4f);
 
-            sf::Sprite object_sprite;
-            textureManager.setTexture(object_sprite, "waypoint");
-            object_sprite.setColor(colorConfig.ship_waypoint_background);
-            object_sprite.setPosition(screen_position - sf::Vector2f(0, 10));
-            object_sprite.setScale(0.8, 0.8);
+            object_sprite.setPosition(screen_position);
+            object_sprite.setRotation(sf::vector2ToAngle(screen_position - radar_screen_center) - 90);
             window.draw(object_sprite);
-            drawText(window, sf::FloatRect(screen_position.x, screen_position.y - 10, 0, 0), string(n + 1), ACenter, 18, bold_font, colorConfig.ship_waypoint_text);
 
-            if (style != Rectangular && sf::length(screen_position - radar_screen_center) > std::min(rect.width, rect.height) * 0.5f)
-            {
-                screen_position = radar_screen_center + ((screen_position - radar_screen_center) / sf::length(screen_position - radar_screen_center) * std::min(rect.width, rect.height) * 0.4f);
-
-                object_sprite.setPosition(screen_position);
-                object_sprite.setRotation(sf::vector2ToAngle(screen_position - radar_screen_center) - 90);
-                window.draw(object_sprite);
-
-                drawText(window, sf::FloatRect(screen_position.x, screen_position.y, 0, 0), string(n + 1), ACenter, 18, bold_font, colorConfig.ship_waypoint_text);
-            }
+            drawText(window, sf::FloatRect(screen_position.x, screen_position.y, 0, 0), string(n + 1), ACenter, 18, bold_font, colorConfig.ship_waypoint_text);
         }
     }
 }
@@ -619,6 +817,36 @@ void GuiRadarView::drawObjectsGM(sf::RenderTarget& window)
     }
 }
 
+void GuiRadarView::drawTargets(sf::RenderTarget& window)
+{
+    float scale = std::min(rect.width, rect.height) / 2.0f / distance;
+
+    if (!targets)
+        return;
+    sf::Sprite target_sprite;
+    textureManager.setTexture(target_sprite, "redicule.png");
+
+    for(P<SpaceObject> obj : targets->getTargets())
+    {
+        sf::Vector2f object_position_on_screen = worldToScreen(obj->getPosition());
+        float r = obj->getRadius() * scale;
+        sf::FloatRect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
+        if (obj != my_spaceship && rect.intersects(object_rect))
+        {
+            target_sprite.setPosition(object_position_on_screen);
+            window.draw(target_sprite);
+        }
+    }
+
+    if (my_spaceship && targets->getWaypointIndex() > -1 && targets->getWaypointIndex() < my_spaceship->getWaypointCount())
+    {
+        sf::Vector2f object_position_on_screen = worldToScreen(my_spaceship->waypoints[targets->getWaypointIndex()]);
+
+        target_sprite.setPosition(object_position_on_screen - sf::Vector2f(0, 10));
+        window.draw(target_sprite);
+    }
+}
+
 void GuiRadarView::drawHeadingIndicators(sf::RenderTarget& window)
 {
     sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
@@ -678,32 +906,93 @@ void GuiRadarView::drawRadarCutoff(sf::RenderTarget& window)
     window.draw(rectRight);
 }
 
+sf::Vector2f GuiRadarView::getCenterPosition(){
+    return sf::Vector2f(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
+}
+
+sf::Vector2f GuiRadarView::worldToScreen(sf::Vector2f world_position)
+{
+    sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
+    float scale = std::min(rect.width, rect.height) / 2.0f / distance;
+
+    sf::Vector2f radar_position = sf::rotateVector((world_position - view_position) * scale, -view_rotation);
+    return radar_position + radar_screen_center;
+}
+
+sf::Vector2f GuiRadarView::screenToWorld(sf::Vector2f screen_position)
+{
+    sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
+    float scale = std::min(rect.width, rect.height) / 2.0f / distance;
+    
+    sf::Vector2f radar_position = sf::rotateVector((screen_position - radar_screen_center) / scale, view_rotation);
+    return view_position + radar_position;
+}
+
 float GuiRadarView::getRadius(){
-    if(style == CircularSector)
-        return std::min(rect.width, rect.height) * 0.85f;  // the last 15% has artifacts from the mask rotation
-    else 
+    //if(style == CircularSector)
+    //    return std::min(rect.width, rect.height) * 0.85f;  // the last 15% has artifacts from the mask rotation
+    //else 
         return std::min(rect.width, rect.height) / 2.0f;
 }
 
-sf::Vector2f GuiRadarView::getCenterPosition(){
-    if(style == CircularSector){
-        sf::Vector2f deOrientedCenter(0, std::min(rect.width, rect.height) / 2.0f);
-        return SectorsView::getCenterPosition() + sf::rotateVector(deOrientedCenter, background_texture.getView().getRotation());
-    } else 
-        return SectorsView::getCenterPosition();
-}
+//sf::Vector2f GuiRadarView::getCenterPosition(){
+//    if(style == CircularSector){
+//        sf::Vector2f deOrientedCenter(0, std::min(rect.width, rect.height) / 2.0f);
+//        return SectorsView::getCenterPosition() + sf::rotateVector(deOrientedCenter, background_texture.getView().getRotation());
+//    } else 
+//        return SectorsView::getCenterPosition();
+//}
 
 float GuiRadarView::getScale(){
     return getRadius() / getDistance();
 }
 
+int GuiRadarView::calcGridScaleMagnitude(int scale_magnitude, int position)
+{
+    for (int i = grid_scale_size - 1; i >= 0; i--)
+    {
+        if (position % (int)std::pow(sub_sectors_count, i) == 0)
+        {
+            return std::min(scale_magnitude + i, grid_scale_size - 1);
+        }
+    }
+    return scale_magnitude;
+}
+
+//bool GuiRadarView::onMouseDown(sf::Vector2f position)
+//{
+//    if (style == Circular || style == CircularMasked|| style == CircularSector)
+//    {
+//        if (position - getCenterPoint() > getRadius())
+//            return false;
+//    }
+//    return SectorsView::onMouseDown(position);
+//}
+
 bool GuiRadarView::onMouseDown(sf::Vector2f position)
 {
-    if (style == Circular || style == CircularMasked|| style == CircularSector)
+    if (style == Circular || style == CircularMasked)
     {
-        if (position - getCenterPoint() > getRadius())
+        float radius = std::min(rect.width, rect.height) / 2.0f;
+        if (position - getCenterPoint() > radius)
             return false;
     }
-    return SectorsView::onMouseDown(position);
+    if (!mouse_down_func && !mouse_drag_func && !mouse_up_func)
+        return false;
+    if (mouse_down_func)
+        mouse_down_func(screenToWorld(position));
+    return true;
+}
+
+void GuiRadarView::onMouseDrag(sf::Vector2f position)
+{
+    if (mouse_drag_func)
+        mouse_drag_func(screenToWorld(position));
+}
+
+void GuiRadarView::onMouseUp(sf::Vector2f position)
+{
+    if (mouse_up_func)
+        mouse_up_func(screenToWorld(position));
 }
 

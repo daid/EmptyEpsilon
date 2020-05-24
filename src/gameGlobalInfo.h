@@ -96,6 +96,7 @@ public:
     ScriptSimpleCallback on_new_player_ship;
     bool allow_new_player_ships = true;
 
+    
     GameGlobalInfo();
     virtual ~GameGlobalInfo();
 
@@ -122,17 +123,18 @@ public:
 
     virtual void update(float delta);
     virtual void destroy();
+    
+    // Sector and zone shift.
+    int shift_area_x = 0;
+    int shift_area_y = 0;
+    sf::Vector2i getAreaShift() { return sf::Vector2i(shift_area_x, shift_area_y); }
+    std::vector<std::pair<string, string> > locals_name;
 
     string getNextShipCallsign();
 };
 
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive);
 string getSectorName(sf::Vector2f position, int scale_magnitude = 0);
-sf::Vector2f getSectorPosition(string sectorName);
-bool isValidSectorName(string sectorName);
-sf::Vector2f getPositionFromSring(string sectorName);
-string getStringFromPosition(sf::Vector2f position);
-bool isValidPositionString(string sectorName);
 
 REGISTER_MULTIPLAYER_ENUM(EScanningComplexity);
 REGISTER_MULTIPLAYER_ENUM(EHackingGames);

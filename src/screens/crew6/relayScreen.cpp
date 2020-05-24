@@ -25,14 +25,15 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 {
     targets.setAllowWaypointSelection();
     radar = new GuiRadarView(this, "RELAY_RADAR", 50000.0f, &targets);
-    radar->longRange()->enableWaypoints()->enableRoutes()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
+    radar->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
     radar->setAutoCentering(false);
     radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     radar->setCallbacks(
         [this](sf::Vector2f position) { //down
             if (mode == TargetSelection && targets.getWaypointIndex() > -1 && my_spaceship)
             {
-                if (sf::length(my_spaceship->waypoints[targets.getWaypointIndex()] - position) < 1000.0)
+                //if (sf::length(my_spaceship->waypoints[targets.getWaypointIndex()] - position) < 10 / radar->SectorsView::getScale())
+                if (sf::length(my_spaceship->waypoints[targets.getWaypointIndex()] - position) < 10 / radar->getScale())
                 {
                     mode = MoveWaypoint;
                     drag_waypoint_index = targets.getWaypointIndex();
@@ -50,7 +51,8 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
             switch(mode)
             {
             case TargetSelection:
-                targets.setToClosestTo(position, 1000, TargetsContainer::Targetable);
+                //targets.setToClosestTo(position, 10 / radar->SectorsView::getScale(), TargetsContainer::Targetable);
+                targets.setToClosestTo(position, 10 / radar->getScale(), TargetsContainer::Targetable);
                 break;
             case WaypointPlacement:
                 if (my_spaceship)
@@ -77,6 +79,9 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 
     GuiAutoLayout* sidebar = new GuiAutoLayout(this, "SIDE_BAR", GuiAutoLayout::LayoutVerticalTopToBottom);
     sidebar->setPosition(-20, 150, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    
+    info_distance = new GuiKeyValueDisplay(sidebar, "DISTANCE", 0.4, "Distance", "");
+    info_distance->setSize(GuiElement::GuiSizeMax, 30);
 
     info_callsign = new GuiKeyValueDisplay(sidebar, "SCIENCE_CALLSIGN", 0.4, tr("Callsign"), "");
     info_callsign->setSize(GuiElement::GuiSizeMax, 30);
@@ -84,12 +89,12 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     info_faction = new GuiKeyValueDisplay(sidebar, "SCIENCE_FACTION", 0.4, tr("Faction"), "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
 
-    zoom_slider = new GuiSlider(this, "ZOOM_SLIDER", max_distance, min_distance, radar->getDistance(), [this](float value) {
-        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(max_distance / value, 1.0f)}}));
+    zoom_slider = new GuiSlider(this, "ZOOM_SLIDER", 50000.0f, 6250.0f, 50000.0f, [this](float value) {
+        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(50000.0f / value, 1.0f)}}));
         radar->setDistance(value);
     });
     zoom_slider->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
-    zoom_label = new GuiLabel(zoom_slider, "", "Zoom: " + string(max_distance / radar->getDistance(), 1.0f) + "x", 30);
+    zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 30);
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Option buttons for comms, waypoints, and probes.
@@ -192,19 +197,35 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 
 void RelayScreen::onDraw(sf::RenderTarget& window)
 {
-    ///Handle mouse wheel
+    // Handle mouse wheel
     float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
-    if (mouse_wheel_delta != 0.0)
+    if (mouse_wheel_delta != 0.0 && my_spaceship)
     {
         float view_distance = radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
-        zoom_slider->setValue(view_distance);
-        view_distance = zoom_slider->getValue();
+        if (view_distance > my_spaceship->getFarRangeRadarRange())
+            view_distance = my_spaceship->getFarRangeRadarRange();
+        if (view_distance < my_spaceship->getShortRangeRadarRange())
+            view_distance = my_spaceship->getShortRangeRadarRange();
         radar->setDistance(view_distance);
-        zoom_label->setText("Zoom: " + string(max_distance / view_distance, 1.0f) + "x");
+        // Keep the zoom slider in sync.
+        zoom_slider->setValue(view_distance);
+        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(my_spaceship->getFarRangeRadarRange() / view_distance, 1)}}));
     }
     ///!
 
     GuiOverlay::onDraw(window);
+    
+    // Info Distance
+    if (my_spaceship)
+    {
+        float ratio_screen = radar->getRect().width / radar->getRect().height;
+        float distance_width = radar->getDistance() * 2.0 * ratio_screen / 1000.0f;
+        float distance_height = radar->getDistance() * 2.0 / 1000.0f;
+        if (distance_width < 100)
+            info_distance -> setValue(string(distance_width, 1.0f) + " U / " + string(distance_height, 1.0f) + " U");
+        else
+            info_distance -> setValue(string(distance_width, 0.0f) + " U / " + string(distance_height, 0.0f) + " U");
+    }
 
     info_faction->setValue("-");
 

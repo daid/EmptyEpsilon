@@ -258,11 +258,6 @@ set(SOURCES
 	src/hardware/devices/virtualOutputDevice.cpp
 	src/hardware/devices/philipsHueDevice.cpp
 )
-list(APPEND SOURCES EmptyEpsilon.rc 
-	src/screenComponents/sectorsView.cpp
-	src/screenComponents/navigationView.cpp
-	src/screens/extra/navigationScreen.cpp
-)
 if(WIN32)
     list(APPEND SOURCES EmptyEpsilon.rc src/discord.cpp)
 endif()

@@ -7,6 +7,7 @@
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_overlay.h"
 #include "screenComponents/targetsContainer.h"
+#include "preferenceManager.h"
 
 class GuiGlobalMessageEntry;
 class GuiObjectCreationScreen;
@@ -80,6 +81,8 @@ public:
     void onMouseDown(sf::Vector2f position);
     void onMouseDrag(sf::Vector2f position);
     void onMouseUp(sf::Vector2f position);
+    const float max_distance = PreferencesManager::get("gm_radar_max_distance", "50000").toFloat();
+    const float min_distance = 5000.0f;
 
     virtual void onKey(sf::Event::KeyEvent key, int unicode);
     

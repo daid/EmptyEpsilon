@@ -42,7 +42,7 @@ GameGlobalInfo::GameGlobalInfo()
     allow_main_screen_long_range_radar = true;
     gm_control_code = "";
     elapsed_time = 0.0f;
-
+    
     intercept_all_comms_to_gm = false;
 
     registerMemberReplication(&scanning_complexity);
@@ -58,6 +58,9 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&allow_main_screen_long_range_radar);
     registerMemberReplication(&gm_control_code);
     registerMemberReplication(&elapsed_time, 0.1);
+    registerMemberReplication(&shift_area_x, 1.0);
+    registerMemberReplication(&shift_area_y, 1.0);
+    registerMemberReplication(&locals_name, 1.0);
 
     for(unsigned int n=0; n<factionInfo.size(); n++)
         reputation_points.push_back(0);
@@ -227,103 +230,114 @@ string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
     }
 }
 
-std::regex sector_rgx("(\\d)(\\d+)\\.(\\d+)");
-std::regex location_rgx("(\\d+\\.\\d+)\\.(\\d+)\\.(\\d+)");
-
-bool isValidSectorName(string sectorName)
-{
-    return std::regex_match(sectorName, sector_rgx);
-}
-
-bool isValidPositionString(string positionStr)
-{
-    if (isValidSectorName(positionStr)) 
-        return true;
-    std::smatch matches;
-    if(std::regex_match(positionStr, matches, location_rgx))
-    {
-        return std::stoi(matches.str(2)) < GameGlobalInfo::sector_size 
-            && std::stoi(matches.str(3)) < GameGlobalInfo::sector_size;
-    } else {
-        return false;
-    }
-}
-
-sf::Vector2f getSectorPosition(string sectorName)
-{
-    std::smatch matches;
-    if(std::regex_match(sectorName, matches, sector_rgx)) 
-    {
-        int quadrant = std::stoi(matches.str(1));
-        int sector_y = std::stoi(matches.str(3));
-        int sector_x = std::stoi(matches.str(2));
-        sector_y = sector_y - 1;
-        if (quadrant % 2)
-            sector_x = -1 - sector_x;
-        if ((quadrant /2) % 2)
-            sector_y = -1 - sector_y;
-        return sf::Vector2f(sector_x * GameGlobalInfo::sector_size, sector_y * GameGlobalInfo::sector_size);
-    } 
-    else 
-    {
-        return sf::Vector2f(0,0);
-    }
-}
-
-sf::Vector2f getPositionFromSring(string positionStr)
-{
-     if (isValidSectorName(positionStr)) 
-        return getSectorPosition(positionStr);
-    std::smatch matches;
-    if(std::regex_match(positionStr, matches, location_rgx)) 
-    {
-        sf::Vector2f sectorPosition = getSectorPosition(matches.str(1));
-        return sectorPosition + sf::Vector2f(std::stoi(matches.str(2)), std::stoi(matches.str(3)));
-    } else {
-        return sf::Vector2f(0,0);
-    }
-}
-
-string getStringFromPosition(sf::Vector2f position)
-{
-    int offset_x = fmod(fmod(position.x, GameGlobalInfo::sector_size) + GameGlobalInfo::sector_size, GameGlobalInfo::sector_size);
-    int offset_y = fmod(fmod(position.y, GameGlobalInfo::sector_size) + GameGlobalInfo::sector_size, GameGlobalInfo::sector_size);
-    if (offset_x < 1 && offset_y < 1) {
-        return getSectorName(position);
-    } else {
-        return getSectorName(position) + "." + string(offset_x,0) + '.' + string(offset_y,0);
-    }
-}
-
 string getSectorName(sf::Vector2f position, int scale_magnitude)
 {
-    // Section
-    int section_x = floorf(position.x / GameGlobalInfo::sector_size);
-    int section_y = floorf(position.y / GameGlobalInfo::sector_size);
-    
-    // Sector
-    int factor = std::pow(8,2) * GameGlobalInfo::sector_size;
-    int sector_x = floorf((position.x) / factor);
-    int sector_y = floorf((position.y) / factor);
-    
-    section_x = section_x - floorf((sector_x * factor)/ GameGlobalInfo::sector_size);
-    section_y = section_y - floorf((sector_y * factor)/ GameGlobalInfo::sector_size);
-    
     string x;
-    x = string(section_x);
     string y;
-    if (section_y >= 26)
-        y = string(char('A' + floorf(section_y / 26) - 1 )) + string(char('A' + (section_y % 26)));
+    string name = "";
+
+    if (PreferencesManager::get("advanced_sector_system","0") == "1")
+    {
+        if (scale_magnitude != 0 && scale_magnitude != 2 && scale_magnitude != 4)
+            return "";
+        
+        // Section (scale_magnitude == 0)
+        int sector_x = floorf(position.x / GameGlobalInfo::sector_size);
+        int sector_y = floorf(position.y / GameGlobalInfo::sector_size);
+        
+        // Draw area only if first sector of the area
+        if (scale_magnitude == 2 && (sector_x % (8*8) != 0 || sector_y % (8*8) != 0))
+            return "";
+
+        // Draw region only if first area of the region
+        if (scale_magnitude == 4 && (sector_x % (8*8*8*8) != 0 || sector_y % (8*8*8*8) != 0))
+            return "";
+        
+        // Area (scale_magnitude == 2)
+        int area_factor = std::pow(8,2) * GameGlobalInfo::sector_size;
+        int area_x = floorf((position.x) / area_factor);
+        int area_y = floorf((position.y) / area_factor);
+
+        // Region (scale_magnitude == 5)
+        int region_factor = std::pow(8,4) * GameGlobalInfo::sector_size;
+        int region_x = floorf((position.x) / region_factor);
+        int region_y = floorf((position.y) / region_factor);
+
+        // Refactor sector based on area
+        sector_x = sector_x - floorf((area_x * area_factor)/ GameGlobalInfo::sector_size);
+        sector_y = sector_y - floorf((area_y * area_factor)/ GameGlobalInfo::sector_size);
+        
+        // Refactor area based on region
+        area_x = area_x - floorf((region_x * region_factor)/ (GameGlobalInfo::sector_size * 64));
+        area_y = area_y - floorf((region_y * region_factor)/ (GameGlobalInfo::sector_size * 64));
+        
+        x = string(sector_x + 1);
+        if (sector_y >= 26)
+            y = string(char('A' + floorf(sector_y / 26) - 1 )) + string(char('A' + (sector_y % 26)));
+        else
+            y = string(char('A' + (sector_y)));
+        
+        string sector_name = y + x;
+        string area_name = string(area_x) + "." + string(area_y);
+        string region_name = string(region_x) + "/" + string(region_y);
+        
+        string local_sector_name = sector_name;
+        string local_area_name = area_name;
+        string local_region_name = region_name;
+        
+        for(std::pair<string, string>& local_name : gameGlobalInfo->locals_name)
+        {
+            if (region_name == local_name.first)
+                local_region_name = local_name.second;
+            if (region_name + " " + area_name == local_name.first)
+                local_area_name = local_name.second;
+            if (region_name + " " + area_name + " " + sector_name == local_name.first)
+                local_sector_name = local_name.second;
+        }
+        
+        if (scale_magnitude == 0)
+            return local_sector_name;
+        if (scale_magnitude == 2)
+            return local_area_name;
+        if (scale_magnitude == 4)
+            return local_region_name;
+        return "";
+    }
     else
-        y = string(char('A' + (section_y)));
-   
-    if (scale_magnitude < 1)
+    {
+        int sector_x = floorf(position.x / GameGlobalInfo::sector_size) + 5;
+        int sector_y = floorf(position.y / GameGlobalInfo::sector_size) + 5;
+
+        if (sector_y >= 0)
+            y = string(char('A' + (sector_y)));
+        else
+            y = string(char('z' + sector_y / 26)) + string(char('z' + 1 + (sector_y % 26)));
+        if (sector_x >= 0)
+            x = string(sector_x);
+        else
+            x = string(100 + sector_x);
         return y + x;
-    else if (scale_magnitude == 1)
-        return string(sector_x) + "." + string(sector_y) + " / " + y + x;
-    else
-        return string(sector_x) + "." + string(sector_y);
+    }
 }
+
+static int addLocalName(lua_State* L)
+{
+    gameGlobalInfo->locals_name.emplace_back(luaL_checkstring(L, 1), luaL_checkstring(L, 2));    
+    return 0;
+}
+/// addLocalName(string,string)
+/// Personalize the name of a sector/area/region.
+REGISTER_SCRIPT_FUNCTION(addLocalName);
+
+static int setAreaShift(lua_State* L)
+{
+    gameGlobalInfo->shift_area_x = luaL_checkinteger(L, 1);
+    gameGlobalInfo->shift_area_y = luaL_checkinteger(L, 2);
+    return 0;
+}
+/// setAreaShift(int,int)
+/// Transform the coordinate of the area name.
+REGISTER_SCRIPT_FUNCTION(setAreaShift);
 
 static int victory(lua_State* L)
 {
