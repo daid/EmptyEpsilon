@@ -28,16 +28,13 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
     list->setSize(300, GuiElement::GuiSizeMax);
     list->setPosition(25, 25, ATopLeft);
 
-    if (tweak_type == TW_Object || tweak_type == TW_Station || tweak_type==TW_Jammer)
-    {
-        pages.push_back(new GuiObjectTweakBase(this));
-        list->addEntry("Base", "");
-    }
+    pages.push_back(new GuiObjectTweakBase(this));
+    list->addEntry("Base", "");
 
     if (tweak_type == TW_Ship || tweak_type == TW_Player)
     {
-        pages.push_back(new GuiShipTweakBase(this));
-        list->addEntry("Base", "");
+        pages.push_back(new GuiTweakShip(this));
+        list->addEntry("Ship", "");
     }
 
     if (tweak_type == TW_Jammer)
@@ -103,7 +100,7 @@ void GuiObjectTweak::onDraw(sf::RenderTarget& window)
         hide();
 }
 
-GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
+GuiTweakShip::GuiTweakShip(GuiContainer* owner)
 : GuiTweakPage(owner)
 {
     GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
@@ -113,25 +110,6 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
     right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     // Left column
-    (new GuiLabel(left_col, "", "Callsign:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-
-    callsign = new GuiTextEntry(left_col, "", "");
-    callsign->setSize(GuiElement::GuiSizeMax, 50);
-    callsign->callback([this](string text) {
-        target->callsign = text;
-    });
-
-    // Edit object's description.
-    // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
-    // editing long strings.
-    (new GuiLabel(left_col, "", "Description:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-
-    description = new GuiTextEntry(left_col, "", "");
-    description->setSize(GuiElement::GuiSizeMax, 50);
-    description->callback([this](string text) {
-        target->setDescription(text);
-    });
-
     (new GuiLabel(left_col, "", "Impulse speed:", 30))->setSize(GuiElement::GuiSizeMax, 50);
     impulse_speed_slider = new GuiSlider(left_col, "", 0.0, 250, 0.0, [this](float value) {
         target->impulse_max_speed = value;
@@ -143,17 +121,6 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
         target->turn_speed = value;
     });
     turn_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
-
-    (new GuiLabel(left_col, "", "Heading:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-    heading_slider = new GuiSlider(left_col, "", 0.0, 359.9, 0.0, [this](float value) {
-        target->setHeading(value);
-
-        // If the target is a player, also set its target rotation.
-        P<PlayerSpaceship> player = target;
-        if (player)
-            player->commandTargetRotation(value - 90.0f);
-    });
-    heading_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     // Right column
     // Set type name. Does not change ship type.
@@ -198,20 +165,17 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
     jump_toggle->setSize(GuiElement::GuiSizeMax, 40);
 }
 
-void GuiShipTweakBase::onDraw(sf::RenderTarget& window)
+void GuiTweakShip::onDraw(sf::RenderTarget& window)
 {
-    heading_slider->setValue(target->getHeading());
     hull_slider->setValue(target->hull_strength);
 }
 
-void GuiShipTweakBase::open(P<SpaceObject> target)
+void GuiTweakShip::open(P<SpaceObject> target)
 {
     P<SpaceShip> ship = target;
     this->target = ship;
     
     type_name->setText(ship->getTypeName());
-    callsign->setText(ship->callsign);
-    description->setText(ship->getDescription(SS_NotScanned));
     warp_toggle->setValue(ship->has_warp_drive);
     jump_toggle->setValue(ship->hasJumpDrive());
     impulse_speed_slider->setValue(ship->impulse_max_speed);

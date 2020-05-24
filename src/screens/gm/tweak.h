@@ -46,24 +46,21 @@ private:
     std::vector<GuiTweakPage*> pages;
 };
 
-class GuiShipTweakBase : public GuiTweakPage
+class GuiTweakShip : public GuiTweakPage
 {
 private:
     P<SpaceShip> target;
 
     GuiTextEntry* type_name;
-    GuiTextEntry* callsign;
-    GuiTextEntry* description;
     GuiToggleButton* warp_toggle;
     GuiToggleButton* jump_toggle;
     GuiSlider* impulse_speed_slider;
     GuiSlider* turn_speed_slider;
-    GuiSlider* heading_slider;
     GuiSlider* hull_max_slider;
     GuiSlider* hull_slider;
     GuiToggleButton* can_be_destroyed_toggle;
 public:
-    GuiShipTweakBase(GuiContainer* owner);
+    GuiTweakShip(GuiContainer* owner);
 
     virtual void onDraw(sf::RenderTarget& window) override;
     
