@@ -7,7 +7,7 @@
 ---
 --- Buttons on the Game Master screen can change the speed of objects in various orbits by 10 percent per click
 ---
---- If you are playing on a LAN and would like to hear voices from the server running a main screen, change file scenario_48_visitors.lua in the scripts folder such that 'server_voices = true' rather than 'server_voices = false' on line 37. Note: case is important, so match the case in the lua file, not what you see here (which is always upper case). After editing, you will need to restart the server.
+--- If you are playing on a LAN and no longer want to hear voices from the server running a main screen, change file scenario_48_visitors.lua in the scripts folder such that 'server_voices = false' rather than 'server_voices = true' on line 37. Note: case is important, so match the case in the lua file, not what you see here (which is always upper case). After editing, you will need to restart the server.
 ---
 --- Voice Actors:
 --- Admiral U. E.
@@ -34,7 +34,7 @@
 require("utils.lua")
 
 function init()
-	server_voices = false
+	server_voices = true
 	if server_voices then
 		voice_queue = {}
 		voice_delay = 0
