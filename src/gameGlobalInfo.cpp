@@ -56,8 +56,6 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&allow_main_screen_long_range_radar);
     registerMemberReplication(&gm_control_code);
     registerMemberReplication(&elapsed_time, 0.1);
-    registerMemberReplication(&shift_area_x, 1.0);
-    registerMemberReplication(&shift_area_y, 1.0);
     registerMemberReplication(&locals_name, 1.0);
 
     for(unsigned int n=0; n<factionInfo.size(); n++)
@@ -326,16 +324,6 @@ static int addLocalName(lua_State* L)
 /// addLocalName(string,string)
 /// Personalize the name of a sector/area/region.
 REGISTER_SCRIPT_FUNCTION(addLocalName);
-
-static int setAreaShift(lua_State* L)
-{
-    gameGlobalInfo->shift_area_x = luaL_checkinteger(L, 1);
-    gameGlobalInfo->shift_area_y = luaL_checkinteger(L, 2);
-    return 0;
-}
-/// setAreaShift(int,int)
-/// Transform the coordinate of the area name.
-REGISTER_SCRIPT_FUNCTION(setAreaShift);
 
 static int victory(lua_State* L)
 {

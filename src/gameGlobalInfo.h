@@ -123,10 +123,7 @@ public:
     virtual void update(float delta);
     virtual void destroy();
     
-    // Sector and zone shift.
-    int shift_area_x = 0;
-    int shift_area_y = 0;
-    sf::Vector2i getAreaShift() { return sf::Vector2i(shift_area_x, shift_area_y); }
+    // Local sector name
     std::vector<std::pair<string, string> > locals_name;
 
     string getNextShipCallsign();
