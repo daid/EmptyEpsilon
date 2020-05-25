@@ -290,29 +290,36 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
 
 void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
 {
+    sf::Vector2f radar_screen_center = getCenterPosition();
+    const float scale = getScale();
+    
+    const float factor = std::floor(std::log10(GameGlobalInfo::sector_size * scale));
+    const int scale_magnitude = 2 - std::min(2.f, factor);
+    
+    float sector_size = 20000;
+    float sub_sector_size = sector_size / 8;
+    
     if (PreferencesManager::get("advanced_sector_system","0") == "1")
-        sf::Vector2f radar_screen_center = getCenterPosition();
-        const float scale = getScale();
-        const float factor = std::floor(std::log10(GameGlobalInfo::sector_size * scale));
-        const int scale_magnitude = 2 - std::min(2.f, factor);
-        const float sector_size_scaled = GameGlobalInfo::sector_size * std::pow(sub_sectors_count, scale_magnitude);
-        const float sub_sector_size = sector_size_scaled / sub_sectors_count;
-
-        int sector_x_min = floor((view_position.x - (radar_screen_center.x - rect.left) / scale) / sector_size_scaled) + 1;
-        int sector_x_max = floor((view_position.x + (rect.left + rect.width - radar_screen_center.x) / scale) / sector_size_scaled);
-        int sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.top) / scale) / sector_size_scaled) + 1;
-        int sector_y_max = floor((view_position.y + (rect.top + rect.height - radar_screen_center.y) / scale) / sector_size_scaled);
-        for(int sector_x = sector_x_min - 1; sector_x <= sector_x_max; sector_x++)
+    {
+        sector_size = GameGlobalInfo::sector_size * std::pow(sub_sectors_count, scale_magnitude);
+        sub_sector_size = sector_size / sub_sectors_count;
+    }
+    
+    int sector_x_min = floor((view_position.x - (radar_screen_center.x - rect.left) / scale) / sector_size) + 1;
+    int sector_x_max = floor((view_position.x + (rect.left + rect.width - radar_screen_center.x) / scale) / sector_size);
+    int sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.top) / scale) / sector_size) + 1;
+    int sector_y_max = floor((view_position.y + (rect.top + rect.height - radar_screen_center.y) / scale) / sector_size);
+    sf::Color color(64, 64, 128, 128);
+    for(int sector_x = sector_x_min - 1; sector_x <= sector_x_max; sector_x++)
+    {
+        float x = sector_x * sector_size;
+        for(int sector_y = sector_y_min - 1; sector_y <= sector_y_max; sector_y++)
         {
-            float x = sector_x * sector_size_scaled;
-            for(int sector_y = sector_y_min - 1; sector_y <= sector_y_max; sector_y++)
+            float y = sector_y * sector_size;
+            sf::Vector2f pos = worldToScreen(sf::Vector2f(x+(30/scale),y+(30/scale)));
+            
+            if (PreferencesManager::get("advanced_sector_system","0") == "1")
             {
-                float y = sector_y * sector_size_scaled;
-                sf::Vector2f pos = worldToScreen(sf::Vector2f(x+(30/scale),y+(30/scale)));
-                
-                // scale_magnitude = 0 -> Sector 
-                // scale_magnitude = 2 -> Area
-                // scale_magnitude = 5 -> Region 
                 // Sector name
                 string sector_name = getSectorName(sf::Vector2f(x + 1, y + 1),0);
                 sf::Color sector_color = grid_colors[scale_magnitude];
@@ -346,7 +353,7 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
                 if (scale_magnitude < 2) 
                     drawText(window, sf::FloatRect(pos.x-10, pos.y-10, 20, 20), sector_name, ATopLeft, sector_scale, bold_font, sector_color);
                 
-                // Draw zone name
+                // Draw Area/region name
                 if (style == Rectangular)
                 {
                     if (scale_magnitude < 4) 
@@ -354,113 +361,55 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
                     drawText(window, sf::FloatRect(region_x, region_y, 20, 20), region_name, ATopLeft, region_scale, bold_font, region_color);
                 }
             }
+            else
+                drawText(window, sf::FloatRect(pos.x-10, pos.y-10, 20, 20), getSectorName(sf::Vector2f(x + sub_sector_size, y + sub_sector_size)), ACenter, 30, bold_font, color);
         }
-        
-        sf::VertexArray lines_x(sf::Lines, 2 * (sector_x_max - sector_x_min + 1));
-        sf::VertexArray lines_y(sf::Lines, 2 * (sector_y_max - sector_y_min + 1));
-        for (int sector_x = sector_x_min; sector_x <= sector_x_max; sector_x++)
-        {
-            float x = sector_x * sector_size_scaled;
-            sf::Color color = grid_colors[calcGridScaleMagnitude(scale_magnitude, sector_x)];
-            lines_x[(sector_x - sector_x_min) * 2].position = worldToScreen(sf::Vector2f(x, (sector_y_min-1)*sector_size_scaled));
-            lines_x[(sector_x - sector_x_min) * 2].color = color;
-            lines_x[(sector_x - sector_x_min)*2+1].position = worldToScreen(sf::Vector2f(x, (sector_y_max+1)*sector_size_scaled));
-            lines_x[(sector_x - sector_x_min) * 2 + 1].color = color;
-        }
-        for (int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
-        {
-            float y = sector_y * sector_size_scaled;
-            lines_y[(sector_y - sector_y_min)*2].position = worldToScreen(sf::Vector2f((sector_x_min-1)*sector_size_scaled, y));
-            sf::Color color = grid_colors[calcGridScaleMagnitude(scale_magnitude, sector_y)];
-            lines_y[(sector_y - sector_y_min) * 2].color = color;
-            lines_y[(sector_y - sector_y_min)*2+1].position = worldToScreen(sf::Vector2f((sector_x_max+1)*sector_size_scaled, y));
-            lines_y[(sector_y - sector_y_min) * 2 + 1].color = color;
-        }
-        window.draw(lines_x);
-        window.draw(lines_y);
+    }
+    
+    sf::VertexArray lines_x(sf::Lines, 2 * (sector_x_max - sector_x_min + 1));
+    sf::VertexArray lines_y(sf::Lines, 2 * (sector_y_max - sector_y_min + 1));
+    for(int sector_x = sector_x_min; sector_x <= sector_x_max; sector_x++)
+    {
+        float x = sector_x * sector_size;
+        lines_x[(sector_x - sector_x_min)*2].position = worldToScreen(sf::Vector2f(x, (sector_y_min-1)*sector_size));
+        if (PreferencesManager::get("advanced_sector_system","0") == "1")
+            color = grid_colors[calcGridScaleMagnitude(scale_magnitude, sector_x)];
+        lines_x[(sector_x - sector_x_min)*2].color = color;
+        lines_x[(sector_x - sector_x_min)*2+1].position = worldToScreen(sf::Vector2f(x, (sector_y_max+1)*sector_size));
+        lines_x[(sector_x - sector_x_min)*2+1].color = color;
+    }
+    for(int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
+    {
+        float y = sector_y * sector_size;
+        lines_y[(sector_y - sector_y_min)*2].position = worldToScreen(sf::Vector2f((sector_x_min-1)*sector_size, y));
+        if (PreferencesManager::get("advanced_sector_system","0") == "1")
+            color = grid_colors[calcGridScaleMagnitude(scale_magnitude, sector_y)];
+        lines_y[(sector_y - sector_y_min)*2].color = color;
+        lines_y[(sector_y - sector_y_min)*2+1].position = worldToScreen(sf::Vector2f((sector_x_max+1)*sector_size, y));
+        lines_y[(sector_y - sector_y_min)*2+1].color = color;
+    }
+    window.draw(lines_x);
+    window.draw(lines_y);
 
-        sf::Color color = sf::Color(64, 64, 128, 255);
-        if (scale_magnitude > 0)
-            color = grid_colors[scale_magnitude - 1];
-        int sub_sector_x_min = floor((view_position.x - (radar_screen_center.x - rect.left) / scale) / sub_sector_size) + 1;
-        int sub_sector_x_max = floor((view_position.x + (rect.left + rect.width - radar_screen_center.x) / scale) / sub_sector_size);
-        int sub_sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.top) / scale) / sub_sector_size) + 1;
-        int sub_sector_y_max = floor((view_position.y + (rect.top + rect.height - radar_screen_center.y) / scale) / sub_sector_size);
-        sf::VertexArray points(sf::Points, (sub_sector_x_max - sub_sector_x_min + 1) * (sub_sector_y_max - sub_sector_y_min + 1));
-        for (int sector_x = sub_sector_x_min; sector_x <= sub_sector_x_max; sector_x++)
+    color = sf::Color(64, 64, 128, 255);
+    if (scale_magnitude > 0)
+        color = grid_colors[scale_magnitude - 1];
+    int sub_sector_x_min = floor((view_position.x - (radar_screen_center.x - rect.left) / scale) / sub_sector_size) + 1;
+    int sub_sector_x_max = floor((view_position.x + (rect.left + rect.width - radar_screen_center.x) / scale) / sub_sector_size);
+    int sub_sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.top) / scale) / sub_sector_size) + 1;
+    int sub_sector_y_max = floor((view_position.y + (rect.top + rect.height - radar_screen_center.y) / scale) / sub_sector_size);
+    sf::VertexArray points(sf::Points, (sub_sector_x_max - sub_sector_x_min + 1) * (sub_sector_y_max - sub_sector_y_min + 1));
+    for(int sector_x = sub_sector_x_min; sector_x <= sub_sector_x_max; sector_x++)
+    {
+        float x = sector_x * sub_sector_size;
+        for(int sector_y = sub_sector_y_min; sector_y <= sub_sector_y_max; sector_y++)
         {
-            float x = sector_x * sub_sector_size;
-            for (int sector_y = sub_sector_y_min; sector_y <= sub_sector_y_max; sector_y++)
-            {
-                float y = sector_y * sub_sector_size;
-                points[(sector_x - sub_sector_x_min) + (sector_y - sub_sector_y_min) * (sub_sector_x_max - sub_sector_x_min + 1)].position = worldToScreen(sf::Vector2f(x,y));
+            float y = sector_y * sub_sector_size;
+            points[(sector_x - sub_sector_x_min) + (sector_y - sub_sector_y_min) * (sub_sector_x_max - sub_sector_x_min + 1)].position = worldToScreen(sf::Vector2f(x,y));
             points[(sector_x - sub_sector_x_min) + (sector_y - sub_sector_y_min) * (sub_sector_x_max - sub_sector_x_min + 1)].color = color;
-            }
         }
-        window.draw(points);
     }
-	else
-	{
-        sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
-        float scale = std::min(rect.width, rect.height) / 2.0 / distance;
-
-        constexpr float sector_size = 20000;
-        const float sub_sector_size = sector_size / 8;
-
-        int sector_x_min = floor((view_position.x - (radar_screen_center.x - rect.left) / scale) / sector_size) + 1;
-        int sector_x_max = floor((view_position.x + (rect.left + rect.width - radar_screen_center.x) / scale) / sector_size);
-        int sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.top) / scale) / sector_size) + 1;
-        int sector_y_max = floor((view_position.y + (rect.top + rect.height - radar_screen_center.y) / scale) / sector_size);
-        sf::Color color(64, 64, 128, 128);
-        for(int sector_x = sector_x_min - 1; sector_x <= sector_x_max; sector_x++)
-        {
-            float x = sector_x * sector_size;
-            for(int sector_y = sector_y_min - 1; sector_y <= sector_y_max; sector_y++)
-            {
-                float y = sector_y * sector_size;
-                sf::Vector2f pos = worldToScreen(sf::Vector2f(x+(30/scale),y+(30/scale)));
-                drawText(window, sf::FloatRect(pos.x-10, pos.y-10, 20, 20), getSectorName(sf::Vector2f(sector_x * sector_size + sub_sector_size, sector_y * sector_size + sub_sector_size)), ACenter, 30, bold_font, color);
-            }
-        }
-        sf::VertexArray lines_x(sf::Lines, 2 * (sector_x_max - sector_x_min + 1));
-        sf::VertexArray lines_y(sf::Lines, 2 * (sector_y_max - sector_y_min + 1));
-        for(int sector_x = sector_x_min; sector_x <= sector_x_max; sector_x++)
-        {
-            float x = sector_x * sector_size;
-            lines_x[(sector_x - sector_x_min)*2].position = worldToScreen(sf::Vector2f(x, (sector_y_min-1)*sector_size));
-            lines_x[(sector_x - sector_x_min)*2].color = color;
-            lines_x[(sector_x - sector_x_min)*2+1].position = worldToScreen(sf::Vector2f(x, (sector_y_max+1)*sector_size));
-            lines_x[(sector_x - sector_x_min)*2+1].color = color;
-        }
-        for(int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
-        {
-            float y = sector_y * sector_size;
-            lines_y[(sector_y - sector_y_min)*2].position = worldToScreen(sf::Vector2f((sector_x_min-1)*sector_size, y));
-            lines_y[(sector_y - sector_y_min)*2].color = color;
-            lines_y[(sector_y - sector_y_min)*2+1].position = worldToScreen(sf::Vector2f((sector_x_max+1)*sector_size, y));
-            lines_y[(sector_y - sector_y_min)*2+1].color = color;
-        }
-        window.draw(lines_x);
-        window.draw(lines_y);
-
-        color = sf::Color(64, 64, 128, 255);
-        int sub_sector_x_min = floor((view_position.x - (radar_screen_center.x - rect.left) / scale) / sub_sector_size) + 1;
-        int sub_sector_x_max = floor((view_position.x + (rect.left + rect.width - radar_screen_center.x) / scale) / sub_sector_size);
-        int sub_sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.top) / scale) / sub_sector_size) + 1;
-        int sub_sector_y_max = floor((view_position.y + (rect.top + rect.height - radar_screen_center.y) / scale) / sub_sector_size);
-        sf::VertexArray points(sf::Points, (sub_sector_x_max - sub_sector_x_min + 1) * (sub_sector_y_max - sub_sector_y_min + 1));
-        for(int sector_x = sub_sector_x_min; sector_x <= sub_sector_x_max; sector_x++)
-        {
-            float x = sector_x * sub_sector_size;
-            for(int sector_y = sub_sector_y_min; sector_y <= sub_sector_y_max; sector_y++)
-            {
-                float y = sector_y * sub_sector_size;
-                points[(sector_x - sub_sector_x_min) + (sector_y - sub_sector_y_min) * (sub_sector_x_max - sub_sector_x_min + 1)].position = worldToScreen(sf::Vector2f(x,y));
-                points[(sector_x - sub_sector_x_min) + (sector_y - sub_sector_y_min) * (sub_sector_x_max - sub_sector_x_min + 1)].color = color;
-            }
-        }
-        window.draw(points);
-    }
+    window.draw(points);
 }
 
 void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
