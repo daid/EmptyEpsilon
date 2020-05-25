@@ -155,6 +155,7 @@ void GameGlobalInfo::addScript(P<Script> script)
 void GameGlobalInfo::reset()
 {
     gm_callback_functions.clear();
+    gm_messages.clear();
 
     foreach(GameEntity, e, entityList)
         e->destroy();
