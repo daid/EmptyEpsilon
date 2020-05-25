@@ -146,13 +146,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     if (fog_style == NebulaFogOfWar || fog_style == FriendlysShortRangeFogOfWar)    //Mask the background color with the nebula blocked areas, but show the rest.
         drawRenderTexture(mask_texture, background_texture, sf::Color::White, sf::BlendMultiply);
     if (show_sectors)
-    {
-        if (PreferencesManager::get("advanced_sector_system","0") == "1")
-            drawSectorGrid(background_texture);
-            //SectorsView::drawSectorGrid(background_texture);
-        else
-            drawSectorGrid(background_texture);
-    }
+        drawSectorGrid(background_texture);
     drawRangeIndicators(background_texture);
     if (show_target_projection)
         drawTargetProjections(background_texture);
@@ -321,16 +315,13 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
             if (PreferencesManager::get("advanced_sector_system","0") == "1")
             {
                 // Sector name
-                string sector_name = getSectorName(sf::Vector2f(x + 1, y + 1),0);
+                string sector_name = getSectorName(sf::Vector2f(x + 1, y + 1), 0);
                 sf::Color sector_color = grid_colors[scale_magnitude];
                 float sector_scale = 30;
                 
                 // Area name
-                string area_name = getSectorName(sf::Vector2f(x + 1, y + 1),2);
-                sf::Color area_color = grid_colors[scale_magnitude];
-                if (scale_magnitude < 2)
-                    area_color = grid_colors[2];
-                
+                string area_name = getSectorName(sf::Vector2f(x + 1, y + 1), 2);
+                sf::Color area_color = grid_colors[std::max(scale_magnitude, 2)];               
                 float area_scale = std::min(200.0, std::max(200.0 * scale*1800.0, 30.0));
                 float area_shift = std::min(50.0, std::max(50.0 * scale*1800.0, 10.0));
                 area_color.a = std::max(0.0, std::min(25.0 / (scale*900.0), 128.0));
@@ -338,11 +329,8 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
                 float area_y = radar_screen_center.y + (y - view_position.y) * scale + area_shift;
                 
                 // Region name
-                string region_name = getSectorName(sf::Vector2f(x + 1, y + 1),4);
-                sf::Color region_color = grid_colors[scale_magnitude];
-                if (scale_magnitude < 4)
-                    region_color = grid_colors[4];
-                
+                string region_name = getSectorName(sf::Vector2f(x + 1, y + 1), 4);
+                sf::Color region_color = grid_colors[std::max(scale_magnitude, 4)];
                 float region_scale = std::min(200.0, std::max(200.0 * scale*1800.0*64.0, 30.0));
                 float region_shift = std::min(50.0, std::max(50.0 * scale*1800.0*64.0, 10.0));
                 region_color.a = std::max(0.0, std::min(25.0 / (scale*900.0*64.0), 128.0));
