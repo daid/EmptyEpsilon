@@ -7935,7 +7935,7 @@ function handleVoiceQueue(delta)
 	if #voice_queue > 0 then
 		voice_delay = voice_delay - delta
 		if voice_delay < 0 then
-			playSoundFile(string.format("sa_48_%s.ogg",voice_queue[1]))
+			playSoundFile(string.format("scenario48audio/sa_48_%s.ogg",voice_queue[1]))
 			voice_delay = voice_delay + delta + 1 + voice_clips[voice_queue[1]]
 			table.remove(voice_queue,1)
 		end
