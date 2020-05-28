@@ -41,7 +41,9 @@ PlayerInfo::PlayerInfo()
     ship_id = -1;
     client_id = -1;
     main_screen_control = false;
+    gm_access = false;
     registerMemberReplication(&client_id);
+    //registerMemberReplication(&gm_access);
 
     for(int n=0; n<max_crew_positions; n++)
     {

@@ -3,7 +3,7 @@
 
 #include "spaceObjects/playerSpaceship.h"
 #include "script.h"
-#include "GMScriptCallback.h"
+//#include "GMScriptCallback.h"
 #include "GMMessage.h"
 #include "gameStateLogger.h"
 
@@ -83,8 +83,7 @@ public:
     string scenario;
     string variation = "None";
 
-    //List of script functions that can be called from the GM interface (Server only!)
-    //std::list<GMScriptCallback> gm_callback_functions;
+    //List of script functions that can be called from the GM interface
     std::list<GMMessage> gm_messages;
     std::vector<ScriptSimpleCallback> gm_callback_functions;
     //List of names of gm_callback_functions scripts (replicated to clients)

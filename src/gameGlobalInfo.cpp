@@ -246,6 +246,15 @@ string getSectorName(sf::Vector2f position)
     return y + x;
 }
 
+static int setGMControlCode(lua_State* L)
+{
+    gameGlobalInfo->gm_control_code = luaL_checkstring(L, 1);
+    return 0;
+}
+/// setGMControlCode(string)
+/// Show a password to allow access to spectator or GM screens.
+REGISTER_SCRIPT_FUNCTION(setGMControlCode);
+
 static int victory(lua_State* L)
 {
     gameGlobalInfo->setVictory(luaL_checkstring(L, 1));
