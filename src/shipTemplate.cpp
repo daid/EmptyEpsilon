@@ -53,6 +53,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     /// Example: setShieldData(400) setShieldData(100, 80) setShieldData(100, 50, 50)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShields);
     /// Set the impulse speed, rotation speed and impulse acceleration for this ship.
+    /// Compare SpaceShip:setImpulseMaxSpeed, :setRotationMaxSpeed, :setAcceleration.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSpeed);
     /// Sets the combat maneuver power of this ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCombatManeuver);
