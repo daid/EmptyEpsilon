@@ -86,10 +86,10 @@ GameMasterScreen::GameMasterScreen()
     });
     copy_selected_button->setTextSize(20)->setPosition(-20, -45, ABottomRight)->setSize(125, 25);
 
-    cancel_create_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
+    cancel_action_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
         gameGlobalInfo->on_gm_click = nullptr;
     });
-    cancel_create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
+    cancel_action_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
 
     tweak_button = new GuiButton(this, "TWEAK_OBJECT", "Tweak", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
@@ -362,12 +362,12 @@ void GameMasterScreen::update(float delta)
     {
         create_button->hide();
         object_creation_view->hide();
-        cancel_create_button->show();
+        cancel_action_button->show();
     }
     else
     {
         create_button->show();
-        cancel_create_button->hide();
+        cancel_action_button->hide();
     }
 }
 

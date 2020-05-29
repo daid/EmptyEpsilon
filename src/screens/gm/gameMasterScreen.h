@@ -72,7 +72,7 @@ private:
     sf::Vector2f drag_previous_position;
 
     GuiButton* create_button;
-    GuiButton* cancel_create_button;
+    GuiButton* cancel_action_button;
 public:
 
     GameMasterScreen();
