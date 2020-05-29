@@ -118,6 +118,7 @@ public:
     int weapon_storage[MW_Count];
 
     string radar_trace;
+    float far_range_radar_range = 50000.0f;
     float long_range_radar_range = 30000.0f;
     float short_range_radar_range = 5000.0f;
     string impulse_sound_file;
@@ -179,6 +180,7 @@ public:
     void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system);
     void addDoor(sf::Vector2i position, bool horizontal);
     void setRadarTrace(string trace);
+    void setFarRangeRadarRange(float range);
     void setLongRangeRadarRange(float range);
     void setShortRangeRadarRange(float range);
     void setImpulseSoundFile(string sound);

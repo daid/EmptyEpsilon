@@ -132,8 +132,10 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     /// Returns the launching PlayerSpaceship and launched ScanProbe.
     /// Example: player:onProbeLaunch(trackProbe)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeLaunch);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getFarRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getLongRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getShortRangeRadarRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setFarRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setLongRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setShortRangeRadarRange);
     /// Set whether the object can scan other objects.
@@ -308,7 +310,6 @@ PlayerSpaceship::PlayerSpaceship()
     alert_level = AL_Normal;
     shields_active = false;
     control_code = "";
-
     setFactionId(1);
 
     // For now, set player ships to always be fully scanned to all other ships
@@ -350,6 +351,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&alert_level);
     registerMemberReplication(&linked_science_probe_id);
     registerMemberReplication(&control_code);
+    registerMemberReplication(&far_range_radar_range);
     registerMemberReplication(&long_range_radar_range);
     registerMemberReplication(&short_range_radar_range);
     registerMemberReplication(&custom_functions);
@@ -721,6 +723,7 @@ void PlayerSpaceship::applyTemplateValues()
     setRepairCrewCount(ship_template->repair_crew_count);
 
     // Set the ship's radar ranges.
+    far_range_radar_range = ship_template->far_range_radar_range;
     long_range_radar_range = ship_template->long_range_radar_range;
     short_range_radar_range = ship_template->short_range_radar_range;
 
@@ -2015,6 +2018,11 @@ void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f posit
     }
 }
 
+float PlayerSpaceship::getFarRangeRadarRange()
+{
+    return far_range_radar_range;
+}
+
 float PlayerSpaceship::getLongRangeRadarRange()
 {
     return long_range_radar_range;
@@ -2023,6 +2031,14 @@ float PlayerSpaceship::getLongRangeRadarRange()
 float PlayerSpaceship::getShortRangeRadarRange()
 {
     return short_range_radar_range;
+}
+
+void PlayerSpaceship::setFarRangeRadarRange(float range)
+{
+    range = std::max(range, 100.0f);
+    far_range_radar_range = range;
+    long_range_radar_range = std::min(long_range_radar_range, range);
+    short_range_radar_range = std::min(short_range_radar_range, range);
 }
 
 void PlayerSpaceship::setLongRangeRadarRange(float range)
@@ -2046,6 +2062,8 @@ string PlayerSpaceship::getExportLine()
         result += ":setShortRangeRadarRange(" + string(short_range_radar_range, 0) + ")";
     if (long_range_radar_range != ship_template->long_range_radar_range)
         result += ":setLongRangeRadarRange(" + string(long_range_radar_range, 0) + ")";
+    if (far_range_radar_range != ship_template->far_range_radar_range)
+        result += ":setFarRangeRadarRange(" + string(far_range_radar_range, 0) + ")";
     if (can_scan != ship_template->can_scan)
         result += ":setCanScan(" + string(can_scan, true) + ")";
     if (can_hack != ship_template->can_hack)

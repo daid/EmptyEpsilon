@@ -114,7 +114,8 @@ private:
     // Ship's log container
     std::vector<ShipLogEntry> ships_log;
 
-    float long_range_radar_range = 50000.0f;
+    float far_range_radar_range = 50000.0f;
+    float long_range_radar_range = 30000.0f;
     float short_range_radar_range = 5000.0f;
 public:
     std::vector<CustomShipFunction> custom_functions;
@@ -333,8 +334,10 @@ public:
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
 
     // Radar range
+    float getFarRangeRadarRange();
     float getLongRangeRadarRange();
     float getShortRangeRadarRange();
+    void setFarRangeRadarRange(float range);
     void setLongRangeRadarRange(float range);
     void setShortRangeRadarRange(float range);
 
