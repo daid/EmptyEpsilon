@@ -128,6 +128,10 @@ void WormHole::collide(Collisionable* target, float collision_force)
     
     P<SpaceObject> obj = P<Collisionable>(target);
     P<SpaceShip> spaceship = P<Collisionable>(target);
+
+    // Warp postprocessor-alpha is calculated using alpha = (1 - (delay/10))
+    if (spaceship)
+        spaceship->wormhole_alpha = ((distance / getRadius()) * ALPHA_MULTIPLIER);
     
     if (force > FORCE_MAX)
     {
@@ -145,10 +149,6 @@ void WormHole::collide(Collisionable* target, float collision_force)
             spaceship->wormhole_alpha = 0.0;
         }
     }
-    
-    // Warp postprocessor-alpha is calculated using alpha = (1 - (delay/10))
-    if (spaceship)
-        spaceship->wormhole_alpha = ((distance / getRadius()) * ALPHA_MULTIPLIER);
     
     // TODO: Escaping is impossible. Change setPosition to something Newtonianish.
     target->setPosition(target->getPosition() + diff / distance * update_delta * force);
