@@ -7,8 +7,8 @@
 #include "gameGlobalInfo.h"
 
 
-GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner, func_t enterCreateMode)
-: GuiOverlay(owner, "OBJECT_CREATE_SCREEN", sf::Color(0, 0, 0, 128)), enterCreateMode(enterCreateMode)
+GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
+: GuiOverlay(owner, "OBJECT_CREATE_SCREEN", sf::Color(0, 0, 0, 128))
 {
     GuiPanel* box = new GuiPanel(this, "FRAME");
     box->setPosition(0, 0, ACenter)->setSize(1000, 500);
@@ -142,7 +142,10 @@ bool GuiObjectCreationView::onMouseDown(sf::Vector2f position)
 void GuiObjectCreationView::setCreateScript(string script)
 {
     create_script = script;
-    enterCreateMode();
+    gameGlobalInfo->on_gm_click = [this] (sf::Vector2f position)
+    {
+        createObject(position);
+    };
 }
 
 void GuiObjectCreationView::createObject(sf::Vector2f position)
