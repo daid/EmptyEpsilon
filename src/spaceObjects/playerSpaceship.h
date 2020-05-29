@@ -4,6 +4,7 @@
 #include "spaceship.h"
 #include "commsScriptInterface.h"
 #include "playerInfo.h"
+#include "spaceshipParts/dock.h"
 #include <iostream>
 
 enum ECommsState
@@ -36,6 +37,10 @@ public:
     constexpr static float energy_warp_per_second = 1.0f;
     constexpr static float system_heatup_per_second = 0.05f;
     constexpr static float system_power_level_change_per_second = 0.3;
+    constexpr static float energy_transfer_per_second = 5;
+    constexpr static float heat_transfer_per_second = 0.1;
+    constexpr static float cargo_repair_per_second = 0.1;
+
     // Coolant change rate
     constexpr static float system_coolant_level_change_per_second = 1.2;
     // Total coolant
@@ -167,7 +172,6 @@ public:
     EAlertLevel alert_level;
 
     int32_t linked_science_probe_id;
-
     PlayerSpaceship();
     virtual ~PlayerSpaceship();
 
@@ -276,11 +280,20 @@ public:
     void commandCombatManeuverBoost(float amount);
     void commandCombatManeuverStrafe(float strafe);
     void commandLaunchProbe(sf::Vector2f target_position);
+    void commandLaunchCargo(int index);
+    void commandMoveCargo(int index);
+    void commandCancelMoveCargo(int index);
+    void commandSetDockMoveTarget(int srcIdx, int destIdx);
+    void commandSetDockEnergyRequest(int index, float value);
     void commandScanDone();
     void commandScanCancel();
     void commandSetAlertLevel(EAlertLevel level);
     void commandHackingFinished(P<SpaceObject> target, string target_system);
     void commandCustomFunction(string name);
+    void commandSetTractorBeamDirection(float direction);
+    void commandSetTractorBeamArc(float arc);
+    void commandSetTractorBeamRange(float range);
+    void commandSetTractorBeamMode(ETractorBeamMode range);
 
     virtual void onReceiveServerCommand(sf::Packet& packet) override;
 

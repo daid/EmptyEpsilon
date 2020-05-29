@@ -12,6 +12,7 @@
 #include "screenComponents/dockingButton.h"
 #include "screenComponents/alertOverlay.h"
 #include "screenComponents/customShipFunctions.h"
+#include "screenComponents/tractorBeamControl.h"
 
 #include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"
@@ -31,10 +32,13 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
 
-    GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", nullptr);
+    GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", nullptr, my_spaceship);
     
-    combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
+    combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER", my_spaceship);
     combat_maneuver->setPosition(-20, -20, ABottomRight)->setSize(280, 215)->setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
+    
+    tractor_beam_control = new GuiTractorBeamControl(this, "BEAM_CONFIG");
+    tractor_beam_control->setPosition(-20, -235, ABottomRight)->setSize(290, 290);
 
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
@@ -76,14 +80,14 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     
     GuiAutoLayout* engine_layout = new GuiAutoLayout(this, "ENGINE_LAYOUT", GuiAutoLayout::LayoutHorizontalLeftToRight);
     engine_layout->setPosition(20, -100, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 300);
-    (new GuiImpulseControls(engine_layout, "IMPULSE"))->setSize(100, GuiElement::GuiSizeMax);
-    warp_controls = (new GuiWarpControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
-    jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
+    (new GuiImpulseControls(engine_layout, "IMPULSE", my_spaceship))->setSize(100, GuiElement::GuiSizeMax);
+    warp_controls = (new GuiWarpControls(engine_layout, "WARP", my_spaceship))->setSize(100, GuiElement::GuiSizeMax);
+    jump_controls = (new GuiJumpControls(engine_layout, "JUMP", my_spaceship))->setSize(100, GuiElement::GuiSizeMax);
     
-    docking_button = new GuiDockingButton(this, "DOCKING");
+    docking_button = new GuiDockingButton(this, "DOCKING", my_spaceship);
     docking_button->setPosition(20, -20, ABottomLeft)->setSize(280, 50)->setVisible(my_spaceship && my_spaceship->getCanDock());
 
-    (new GuiCustomShipFunctions(this, helmsOfficer, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, helmsOfficer, "", my_spaceship))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 
 void HelmsScreen::onDraw(sf::RenderTarget& window)

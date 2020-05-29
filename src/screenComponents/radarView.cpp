@@ -9,7 +9,7 @@
 #include "missileTubeControls.h"
 #include "targetsContainer.h"
 
-GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets)
+GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets, P<PlayerSpaceship> targetSpaceship)
 : GuiElement(owner, id),
     next_ghost_dot_update(0.0),
     targets(targets),
@@ -20,6 +20,7 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     auto_rotate_on_my_ship(false),
     auto_distance(true),
     distance(5000.0f),
+    target_spaceship(targetSpaceship),
     long_range(false),
     show_ghost_dots(false),
     show_waypoints(false),
@@ -37,7 +38,7 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
 {
 }
 
-GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets)
+GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets, P<PlayerSpaceship> targetSpaceship)
 : GuiElement(owner, id),
     next_ghost_dot_update(0.0),
     targets(targets),
@@ -47,6 +48,7 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
     auto_center_on_my_ship(true),
     auto_rotate_on_my_ship(false),
     distance(distance),
+    target_spaceship(targetSpaceship),
     long_range(false),
     show_ghost_dots(false),
     show_waypoints(false),
@@ -86,21 +88,21 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     // Render texture to screen
 
     //Hacky, when not relay and we have a ship, center on it.
-    if (my_spaceship && auto_center_on_my_ship) {
-        view_position = my_spaceship->getPosition();
+    if (target_spaceship && auto_center_on_my_ship) {
+        view_position = target_spaceship->getPosition();
     }
-    if (my_spaceship && auto_rotate_on_my_ship) {
-        view_rotation = my_spaceship->getRotation() + 90;
+    if (target_spaceship && auto_rotate_on_my_ship) {
+        view_rotation = target_spaceship->getRotation() + 90;
     }
     if (auto_distance)
     {
         distance = long_range ? 30000.0f : 5000.0f;
-        if (my_spaceship)
+        if (target_spaceship)
         {
             if (long_range)
-                distance = my_spaceship->getLongRangeRadarRange();
+                distance = target_spaceship->getLongRangeRadarRange();
             else
-                distance = my_spaceship->getShortRangeRadarRange();
+                distance = target_spaceship->getShortRangeRadarRange();
         }
     }
 
@@ -457,17 +459,17 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
     sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
     float scale = std::min(rect.width, rect.height) / 2.0f / distance;
 
-    if (my_spaceship && missile_tube_controls)
+    if (target_spaceship && missile_tube_controls)
     {
-        for(int n=0; n<my_spaceship->weapon_tube_count; n++)
+        for(int n=0; n<target_spaceship->weapon_tube_count; n++)
         {
-            if (!my_spaceship->weapon_tube[n].isLoaded())
+            if (!target_spaceship->weapon_tube[n].isLoaded())
                 continue;
-            sf::Vector2f fire_position = my_spaceship->getPosition() + sf::rotateVector(my_spaceship->ship_template->model_data->getTubePosition2D(n), my_spaceship->getRotation());
+            sf::Vector2f fire_position = target_spaceship->getPosition() + sf::rotateVector(target_spaceship->ship_template->model_data->getTubePosition2D(n), target_spaceship->getRotation());
             sf::Vector2f fire_draw_position = worldToScreen(fire_position);
 
-            const MissileWeaponData& data = MissileWeaponData::getDataFor(my_spaceship->weapon_tube[n].getLoadType());
-            float fire_angle = my_spaceship->weapon_tube[n].getDirection() + (my_spaceship->getRotation());
+            const MissileWeaponData& data = MissileWeaponData::getDataFor(target_spaceship->weapon_tube[n].getLoadType());
+            float fire_angle = target_spaceship->weapon_tube[n].getDirection() + (target_spaceship->getRotation());
             float missile_target_angle = fire_angle;
             if (data.turnrate > 0.0f)
             {
@@ -475,7 +477,7 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
                 {
                     missile_target_angle = missile_tube_controls->getMissileTargetAngle();
                 }else{
-                    float firing_solution = my_spaceship->weapon_tube[n].calculateFiringSolution(my_spaceship->getTarget());
+                    float firing_solution = target_spaceship->weapon_tube[n].calculateFiringSolution(target_spaceship->getTarget());
                     if (firing_solution != std::numeric_limits<float>::infinity())
                         missile_target_angle = firing_solution;
                 }
@@ -561,15 +563,15 @@ void GuiRadarView::drawMissileTubes(sf::RenderTarget& window)
 {
     float scale = std::min(rect.width, rect.height) / 2.0f / distance;
 
-    if (my_spaceship)
+    if (target_spaceship)
     {
-        sf::VertexArray a(sf::Lines, my_spaceship->weapon_tube_count * 2);
-        for(int n=0; n<my_spaceship->weapon_tube_count; n++)
+        sf::VertexArray a(sf::Lines, target_spaceship->weapon_tube_count * 2);
+        for(int n=0; n<target_spaceship->weapon_tube_count; n++)
         {
-            sf::Vector2f fire_position = my_spaceship->getPosition() + sf::rotateVector(my_spaceship->ship_template->model_data->getTubePosition2D(n), my_spaceship->getRotation());
+            sf::Vector2f fire_position = target_spaceship->getPosition() + sf::rotateVector(target_spaceship->ship_template->model_data->getTubePosition2D(n), target_spaceship->getRotation());
             sf::Vector2f fire_draw_position = worldToScreen(fire_position);
 
-            float fire_angle = my_spaceship->getRotation() + my_spaceship->weapon_tube[n].getDirection() - view_rotation;
+            float fire_angle = target_spaceship->getRotation() + target_spaceship->weapon_tube[n].getDirection() - view_rotation;
             
             a[n * 2].position = fire_draw_position;
             a[n * 2 + 1].position = fire_draw_position + (sf::vector2FromAngle(fire_angle) * 1000.0f) * scale;

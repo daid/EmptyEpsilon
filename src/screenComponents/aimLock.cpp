@@ -7,11 +7,8 @@
 
 #include "gui/gui2_rotationdial.h"
 
-AimLockButton::AimLockButton(GuiContainer* owner, string id, GuiMissileTubeControls* tube_controls, GuiRotationDial* missile_aim)
-: GuiToggleButton(owner, id, tr("missile","Lock"), [this](bool value)
-    {
-        setAimLock(value);
-    })
+AimLockButton::AimLockButton(GuiContainer* owner, string id, GuiMissileTubeControls* tube_controls, GuiRotationDial* missile_aim, P<PlayerSpaceship> targetSpaceship)
+: GuiToggleButton(owner, id, tr("missile","Lock"), [this](bool value){setAimLock(value);}), target_spaceship(targetSpaceship)
 {
     this->tube_controls = tube_controls;
     this->missile_aim = missile_aim;
@@ -22,7 +19,7 @@ AimLockButton::AimLockButton(GuiContainer* owner, string id, GuiMissileTubeContr
 
 void AimLockButton::onHotkey(const HotkeyResult& key)
 {
-    if (key.category == "WEAPONS" && my_spaceship)
+    if (key.category == "WEAPONS" && target_spaceship)
     {
         if (key.hotkey == "TOGGLE_AIM_LOCK")
         {
@@ -46,10 +43,10 @@ void AimLockButton::setAimLock(bool value)
 {
     this->tube_controls->setManualAim(!value);
     this->missile_aim->setVisible(!value);
-    if (!value && my_spaceship)
+    if (!value && target_spaceship)
     {
-        this->missile_aim->setValue(my_spaceship->getRotation());
-        this->tube_controls->setMissileTargetAngle(my_spaceship->getRotation());
+        this->missile_aim->setValue(target_spaceship->getRotation());
+        this->tube_controls->setMissileTargetAngle(target_spaceship->getRotation());
     }
 }
 

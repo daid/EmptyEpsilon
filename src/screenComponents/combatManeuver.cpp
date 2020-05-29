@@ -7,25 +7,33 @@
 
 #include "gui/gui2_progressbar.h"
 
-GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
-: GuiElement(owner, id)
+GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id, P<PlayerSpaceship> targetSpaceship)
+: GuiElement(owner, id), target_spaceship(targetSpaceship)
 {
     charge_bar = new GuiProgressbar(this, id + "_CHARGE", 0.0, 1.0, 0.0);
     charge_bar->setColor(sf::Color(192, 192, 192, 64));
     charge_bar->setPosition(0, 0, ABottomCenter)->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiLabel(charge_bar, "CHARGE_LABEL", tr("Combat maneuver"), 20))->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    slider = new GuiSnapSlider2D(this, id + "_STRAFE", sf::Vector2f(-1.0, 1.0), sf::Vector2f(1.0, 0.0), sf::Vector2f(0.0, 0.0), [](sf::Vector2f value) {
-        if (my_spaceship)
+    slider = new GuiSnapSlider2D(this, id + "_STRAFE", sf::Vector2f(-1.0, 1.0), sf::Vector2f(1.0, 0.0), sf::Vector2f(0.0, 0.0), [this](sf::Vector2f value) {
+        if (target_spaceship)
         {
-            my_spaceship->commandCombatManeuverBoost(value.y);
-            my_spaceship->commandCombatManeuverStrafe(value.x);
+            target_spaceship->commandCombatManeuverBoost(value.y);
+            target_spaceship->commandCombatManeuverStrafe(value.x);
         }
     });
     slider->setPosition(0, -50, ABottomCenter)->setSize(GuiElement::GuiSizeMax, 165);
     
-    (new GuiPowerDamageIndicator(slider, id + "_STRAFE_INDICATOR", SYS_Maneuver, ACenterLeft))->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiPowerDamageIndicator(slider, id + "_BOOST_INDICATOR", SYS_Impulse, ABottomLeft))->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
+    strafe_pdi = new GuiPowerDamageIndicator(slider, id + "_STRAFE_INDICATOR", SYS_Maneuver, ACenterLeft, target_spaceship);
+    strafe_pdi->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
+    boost_pdi = new GuiPowerDamageIndicator(slider, id + "_BOOST_INDICATOR", SYS_Impulse, ABottomLeft, target_spaceship);
+    boost_pdi->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
+}
+
+void GuiCombatManeuver::setTargetSpaceship(P<PlayerSpaceship> targetSpaceship){
+    target_spaceship = targetSpaceship;
+    strafe_pdi->setTargetSpaceship(target_spaceship);
+    boost_pdi->setTargetSpaceship(target_spaceship);
 }
 
 void GuiCombatManeuver::onUpdate()
@@ -35,14 +43,14 @@ void GuiCombatManeuver::onUpdate()
 
 void GuiCombatManeuver::onDraw(sf::RenderTarget& window)
 {
-    if (my_spaceship)
+    if (target_spaceship)
     {
-        if (my_spaceship->combat_maneuver_boost_speed <= 0.0 && my_spaceship->combat_maneuver_strafe_speed <= 0.0)
+        if (target_spaceship->combat_maneuver_boost_speed <= 0.0 && target_spaceship->combat_maneuver_strafe_speed <= 0.0)
         {
             charge_bar->hide();
             slider->hide();
         }else{
-            charge_bar->setValue(my_spaceship->combat_maneuver_charge)->show();
+            charge_bar->setValue(target_spaceship->combat_maneuver_charge)->show();
             slider->show();
         }
     }
@@ -50,7 +58,7 @@ void GuiCombatManeuver::onDraw(sf::RenderTarget& window)
 
 void GuiCombatManeuver::onHotkey(const HotkeyResult& key)
 {
-    if (key.category == "HELMS" && my_spaceship && isVisible())
+    if (key.category == "HELMS" && target_spaceship && isVisible())
     {
         if (key.hotkey == "COMBAT_LEFT")
         {}//TODO

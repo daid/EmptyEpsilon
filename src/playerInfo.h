@@ -24,6 +24,8 @@ enum ECrewPosition
     altRelay,
     commsOnly,
     shipLog,
+    dronePilot,
+    dockMaster,
     max_crew_positions
 };
 

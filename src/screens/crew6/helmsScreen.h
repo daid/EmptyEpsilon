@@ -8,6 +8,7 @@ class GuiKeyValueDisplay;
 class GuiLabel;
 class GuiDockingButton;
 class GuiCombatManeuver;
+class GuiTractorBeamControl;
 
 class HelmsScreen : public GuiOverlay
 {
@@ -22,6 +23,7 @@ private:
     GuiElement* jump_controls;
     GuiLabel* heading_hint;
     GuiCombatManeuver* combat_maneuver;
+    GuiTractorBeamControl* tractor_beam_control;
     GuiDockingButton* docking_button;
 public:
     HelmsScreen(GuiContainer* owner);

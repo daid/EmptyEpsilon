@@ -31,6 +31,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeam);
     /// Setup a beam weapon.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeapon);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTractorBeam);
     /// Setup a beam's turret.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponTurret);
     /// Setup a beam weapon texture
@@ -40,13 +41,15 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     
     /// Set the amount of missile tubes, limited to a maximum of 16.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubes);
+    /// set the amount of docks (launcher, energy)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDocks);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubeLoadTime);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, weaponTubeAllowMissle);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, weaponTubeDisallowMissle);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWeaponTubeExclusiveFor);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubeDirection);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubeSize);
-    
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setHasReactor);
     /// Set the amount of starting hull
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setHull);
     /// Set the shield levels, amount of parameters defines the amount of shields. (Up to a maximum of 8 shields)
@@ -72,6 +75,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoom);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoomSystem);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addDoor);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addDrones);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadarTrace);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLongRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShortRangeRadarRange);
@@ -127,6 +131,10 @@ ShipTemplate::ShipTemplate()
         weapon_storage[n] = 0;
     radar_trace = "RadarArrow.png";
     impulse_sound_file = "sfx/engine.wav";
+    has_reactor = true;
+    launcher_dock_count = 0;
+    energy_dock_count = 0;
+    thermic_dock_count = 0;
 }
 
 void ShipTemplate::setBeamTexture(int index, string texture)
@@ -240,6 +248,12 @@ void ShipTemplate::setBeamWeapon(int index, float arc, float direction, float ra
     beams[index].setDamage(damage);
 }
 
+void ShipTemplate::setTractorBeam(float max_area, float drag_per_second)
+{
+    tractor_beam.setMaxArea(max_area);
+    tractor_beam.setDragPerSecond(drag_per_second);
+}
+
 void ShipTemplate::setBeamWeaponTurret(int index, float arc, float direction, float rotation_rate)
 {
     if (index < 0 || index > max_beam_weapons)
@@ -338,6 +352,8 @@ string getSystemName(ESystem system)
     case SYS_JumpDrive: return "Jump Drive";
     case SYS_FrontShield: return "Front Shield Generator";
     case SYS_RearShield: return "Rear Shield Generator";
+    case SYS_Docks: return "Cargo Docks";
+    case SYS_Drones: return "Drones Control";
     default:
         return "UNKNOWN";
     }
@@ -414,6 +430,11 @@ void ShipTemplate::setRestocksScanProbes(bool enabled)
     restocks_scan_probes = enabled;
 }
 
+void ShipTemplate::setHasReactor(bool hasReactor)
+{
+    has_reactor = hasReactor;
+}
+
 void ShipTemplate::setJumpDrive(bool enabled)
 {
     has_jump_drive = enabled;
@@ -445,6 +466,18 @@ void ShipTemplate::addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESyst
 void ShipTemplate::addDoor(sf::Vector2i position, bool horizontal)
 {
     doors.push_back(ShipDoorTemplate(position, horizontal));
+}
+
+void ShipTemplate::addDrones(string template_name, int count)
+{
+    drones.push_back(DroneTemplate(template_name, count));
+}
+
+void ShipTemplate::setDocks(int launchers, int energy, int thermic, int repair){
+    launcher_dock_count = launchers;
+    energy_dock_count = energy;
+    thermic_dock_count = thermic;
+    repair_dock_count = repair;
 }
 
 void ShipTemplate::setRadarTrace(string trace)
@@ -520,7 +553,12 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
 
     result->rooms = rooms;
     result->doors = doors;
-    
+    result->drones = drones;
+    result->launcher_dock_count = launcher_dock_count;
+    result->energy_dock_count = energy_dock_count;
+    result->thermic_dock_count = thermic_dock_count;
+    result->repair_dock_count = repair_dock_count;
+    result->tractor_beam = tractor_beam;
     return result;
 }
 
