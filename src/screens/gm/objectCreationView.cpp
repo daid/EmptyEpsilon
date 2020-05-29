@@ -117,7 +117,6 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
     player_ship_listbox->hide();
     
     (new GuiButton(box, "CLOSE_BUTTON", "Cancel", [this]() {
-        create_script = "";
         this->hide();
     }))->setPosition(20, -20, ABottomLeft)->setSize(300, 50);
 }
@@ -141,14 +140,13 @@ bool GuiObjectCreationView::onMouseDown(sf::Vector2f position)
 
 void GuiObjectCreationView::setCreateScript(string script)
 {
-    create_script = script;
-    gameGlobalInfo->on_gm_click = [this] (sf::Vector2f position)
+    gameGlobalInfo->on_gm_click = [script] (sf::Vector2f position)
     {
-        createObject(position);
+        createObject(script,position);
     };
 }
 
-void GuiObjectCreationView::createObject(sf::Vector2f position)
+void GuiObjectCreationView::createObject(const string create_script, sf::Vector2f position)
 {
     if (create_script == "")
         return;

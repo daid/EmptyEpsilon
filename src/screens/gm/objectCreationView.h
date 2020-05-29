@@ -10,7 +10,6 @@ class GuiContainer;
 class GuiObjectCreationView : public GuiOverlay
 {
 private:
-    string create_script;
     GuiSelector* faction_selector;
     GuiSelector* player_cpu_selector;
 public:
@@ -24,7 +23,7 @@ public:
     
     void setCreateScript(string script);
     
-    void createObject(sf::Vector2f position);
+    static void createObject(const string script, sf::Vector2f position);
 };
 
 #endif//OBJECT_CREATION_VIEW_H
