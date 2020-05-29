@@ -130,6 +130,7 @@ public:
     int weapon_storage[MW_Count];
     int launcher_dock_count;
     int energy_dock_count;
+    int weapons_dock_count;
     int thermic_dock_count;
     int repair_dock_count;
     string radar_trace;

@@ -11,6 +11,7 @@ ShipCargo::ShipCargo() : Cargo("ShipCargo")
     registerMemberReplication(&callsign);
     registerMemberReplication(&template_name);
     registerMemberReplication(&hull_strength);
+    registerMemberReplication(&has_reactor);
     for(int n=0; n<SYS_COUNT; n++) {
         registerMemberReplication(&systems_health[n]);
     }
@@ -22,8 +23,14 @@ ShipCargo::ShipCargo(P<ShipTemplate> ship_template) : ShipCargo()
     callsign = "DRN-" + gameGlobalInfo->getNextShipCallsign();
     setEnergy(ship_template->energy_storage_amount);
     hull_strength = ship_template->hull;
+    has_reactor = ship_template->has_reactor;
     for(int n=0; n<SYS_COUNT; n++) {
         systems_health[n] = 1;
+    }
+    for(int n=0; n < MW_Count; n++)
+    {
+        setWeaponStorage(EMissileWeapons(n), 0);
+        setWeaponStorageMax(EMissileWeapons(n), ship_template->weapon_storage[n]);
     }
 }
 
@@ -33,8 +40,18 @@ ShipCargo::ShipCargo(P<SpaceShip> ship) : ShipCargo()
     callsign = ship->getCallSign();
     setEnergy(ship->getEnergy());
     hull_strength = ship->getHull();
+    has_reactor = ship->has_reactor;
+    float totalHeat = 0;
+    for(unsigned int n=0; n<SYS_COUNT; n++)
+        totalHeat += ship->getSystemHeat(ESystem(n));
+    setHeat(totalHeat);
     for(int n=0; n<SYS_COUNT; n++) {
         systems_health[n] = ship->systems[n].health;
+    }
+    for(int n=0; n < MW_Count; n++)
+    {
+        setWeaponStorage(EMissileWeapons(n), ship->weapon_storage[n]);
+        setWeaponStorageMax(EMissileWeapons(n), ship->weapon_storage_max[n]);
     }
 }
 
@@ -81,6 +98,7 @@ bool ShipCargo::onLaunch(Dock &source)
             ship->setPosition(source.getLaunchPosition(ship->getRadius()));
             ship->setRotation(source.getLaunchRotation());
             ship->setHull(hull_strength);
+            ship->has_reactor = has_reactor;
             ship->impulse_request = -0.5;
             int systemsCount = 0;
             for (unsigned int n = 0; n < SYS_COUNT; n++){
@@ -91,15 +109,20 @@ bool ShipCargo::onLaunch(Dock &source)
             for (unsigned int n = 0; n < SYS_COUNT; n++)
                 if (ship->hasSystem(ESystem(n)))
                     ship->addHeat(ESystem(n), getHeat() / systemsCount);
+            for(int n = 0; n < MW_Count; n++)
+            {
+                ship->weapon_storage[n] = getWeaponStorage(EMissileWeapons(n));
+                ship->weapon_storage_max[n] = getWeaponStorageMax(EMissileWeapons(n));
+            }
             return true;
         }
     }
     return false;
 }
 
-Cargo::Entries ShipCargo::getEntries()
+ShipCargo::Entries ShipCargo::getEntries()
 {
-    Cargo::Entries result = Cargo::getEntries();
+    ShipCargo::Entries result;
     P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
     if (ship_template)
     {
@@ -107,5 +130,24 @@ Cargo::Entries ShipCargo::getEntries()
     }
     result.push_back(std::make_tuple("", "callsign", callsign));
     result.push_back(std::make_tuple("", "type", template_name));
+
+    if (has_reactor)
+        result.push_back(std::make_tuple("", "Reactor ?", "Oui"));
+    else
+        result.push_back(std::make_tuple("", "Reactor ?", "Non"));
+
+    float velocity = ship_template->impulse_speed / 1000 * 60;
+    result.push_back(std::make_tuple("", "speed", string(velocity, 1) + DISTANCE_UNIT_1K + "/min"));
+
+    if (ship_template->weapon_tube_count > 0)
+        result.push_back(std::make_tuple("", "Missiles Tubes", ship_template->weapon_tube_count));
+
+    int beam_weapons_count = 0;
+    for(int n=0; n<max_beam_weapons; n++)
+        if (ship_template->beams[n].getRange() > 0)
+            beam_weapons_count += 1;
+    if (beam_weapons_count > 0)
+        result.push_back(std::make_tuple("", "Beams Lasers", beam_weapons_count));
+
     return result;
 }

@@ -264,14 +264,14 @@ static const int16_t CMD_HACKING_FINISHED = 0x0028;
 static const int16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const int16_t CMD_TURN_SPEED = 0x002A;
 static const int16_t CMD_LAUNCH_CARGO = 0x0030;
-static const int16_t CMD_MOVE_CARGO = 0x003A;
-static const int16_t CMD_CANCEL_MOVE_CARGO = 0x003B;
-static const int16_t CMD_SET_DOCK_MOVE_TARGET = 0x003C;
-static const int16_t CMD_SET_DOCK_ENERGY_REQUEST = 0x003D;
-static const int16_t CMD_SET_TRACTOR_BEAM_DIRECTION = 0x003E;
-static const int16_t CMD_SET_TRACTOR_BEAM_ARC = 0x003F;
-static const int16_t CMD_SET_TRACTOR_BEAM_RANGE = 0x0040;
-static const int16_t CMD_SET_TRACTOR_BEAM_MODE = 0x0041;
+static const int16_t CMD_MOVE_CARGO = 0x0031;
+static const int16_t CMD_CANCEL_MOVE_CARGO = 0x0032;
+static const int16_t CMD_SET_DOCK_MOVE_TARGET = 0x0033;
+static const int16_t CMD_SET_DOCK_ENERGY_REQUEST = 0x0034;
+static const int16_t CMD_SET_TRACTOR_BEAM_DIRECTION = 0x0035;
+static const int16_t CMD_SET_TRACTOR_BEAM_ARC = 0x0036;
+static const int16_t CMD_SET_TRACTOR_BEAM_RANGE = 0x0037;
+static const int16_t CMD_SET_TRACTOR_BEAM_MODE = 0x0038;
 
 string alertLevelToString(EAlertLevel level)
 {

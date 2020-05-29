@@ -124,6 +124,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     target_rotation = getRotation();
     impulse_request = 0;
     current_impulse = 0;
+    has_reactor = true;
     has_warp_drive = true;
     warp_request = 0.0;
     current_warp = 0.0;
@@ -159,6 +160,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&turnSpeed, 0.1);
     registerMemberReplication(&impulse_request, 0.1);
     registerMemberReplication(&current_impulse, 0.5);
+    registerMemberReplication(&has_reactor);
     registerMemberReplication(&has_warp_drive);
     registerMemberReplication(&warp_request, 0.1);
     registerMemberReplication(&current_warp, 0.1);
@@ -299,18 +301,17 @@ void SpaceShip::applyTemplateValues()
     model_info.setData(ship_template->model_data);
 
     int droneIdx = 0;
-    for (int i = 0; droneIdx < max_docks_count && i < ship_template->launcher_dock_count; i++, droneIdx++){
+    for (int i = 0; droneIdx < max_docks_count && i < ship_template->launcher_dock_count; i++, droneIdx++)
         docks[droneIdx].setDockType(Dock_Launcher);
-    }
-    for (int i = 0; droneIdx < max_docks_count && i < ship_template->energy_dock_count; i++, droneIdx++){
+    for (int i = 0; droneIdx < max_docks_count && i < ship_template->energy_dock_count; i++, droneIdx++)
         docks[droneIdx].setDockType(Dock_Energy);
-    }
-    for (int i = 0; droneIdx < max_docks_count && i < ship_template->thermic_dock_count; i++, droneIdx++){
+    for (int i = 0; droneIdx < max_docks_count && i < ship_template->weapons_dock_count; i++, droneIdx++)
+        docks[droneIdx].setDockType(Dock_Weapons);
+    for (int i = 0; droneIdx < max_docks_count && i < ship_template->thermic_dock_count; i++, droneIdx++)
         docks[droneIdx].setDockType(Dock_Thermic);
-    }
-    for (int i = 0; droneIdx < max_docks_count && i < ship_template->repair_dock_count; i++, droneIdx++){
+    for (int i = 0; droneIdx < max_docks_count && i < ship_template->repair_dock_count; i++, droneIdx++)
         docks[droneIdx].setDockType(Dock_Repair);
-    }
+    
     int maxActiveDockIndex = droneIdx;
     for (; droneIdx < max_docks_count; droneIdx++){
         docks[droneIdx].setDockType(Dock_Disabled);

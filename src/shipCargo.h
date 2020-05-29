@@ -15,13 +15,14 @@ public:
   string template_name;
 private:
   float hull_strength;
+  bool has_reactor;
   float systems_health[SYS_COUNT];
 public:
   ShipCargo();
   ShipCargo(P<ShipTemplate> ship_template);
   ShipCargo(P<SpaceShip> cargo);
 
-  Cargo::Entries getEntries();
+  ShipCargo::Entries getEntries();
   string getCallSign() { return callsign; }
   P<ShipTemplate> getTemplate() { return ShipTemplate::getTemplate(template_name); }
   float getMaxEnergy() { return getTemplate()->energy_storage_amount; }

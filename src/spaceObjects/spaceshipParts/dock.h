@@ -3,16 +3,20 @@
 
 #include "P.h"
 #include "shipTemplate.h"
-class Dock;
 #include "cargo.h"
 #include "SFML/System/NonCopyable.hpp"
+
+class Dock;
+class Cargo;
 
 enum EDockType
 {
     Dock_Launcher,
     Dock_Energy,
+    Dock_Weapons,
     Dock_Thermic,
     Dock_Repair,
+    Dock_Stock,
     Dock_Disabled
 };
 string getDockTypeName(EDockType dockType);

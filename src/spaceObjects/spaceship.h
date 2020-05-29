@@ -113,6 +113,11 @@ public:
     float impulse_acceleration;
 
     /*!
+     * [config] True if we have a reactor (for energy).
+     */
+    bool has_reactor;
+
+    /*!
      * [config] True if we have a warpdrive.
      */
     bool has_warp_drive;

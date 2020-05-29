@@ -134,6 +134,7 @@ ShipTemplate::ShipTemplate()
     has_reactor = true;
     launcher_dock_count = 0;
     energy_dock_count = 0;
+    weapons_dock_count = 0;
     thermic_dock_count = 0;
 }
 

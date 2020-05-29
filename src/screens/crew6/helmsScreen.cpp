@@ -12,7 +12,6 @@
 #include "screenComponents/dockingButton.h"
 #include "screenComponents/alertOverlay.h"
 #include "screenComponents/customShipFunctions.h"
-#include "screenComponents/tractorBeamControl.h"
 
 #include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"
@@ -37,9 +36,6 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER", my_spaceship);
     combat_maneuver->setPosition(-20, -20, ABottomRight)->setSize(280, 215)->setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
     
-    tractor_beam_control = new GuiTractorBeamControl(this, "BEAM_CONFIG");
-    tractor_beam_control->setPosition(-20, -235, ABottomRight)->setSize(290, 290);
-
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->enableMissileTubeIndicators();
