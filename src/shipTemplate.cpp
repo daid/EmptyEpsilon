@@ -76,6 +76,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoomSystem);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addDoor);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addDrones);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setIsShipCargo);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadarTrace);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLongRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShortRangeRadarRange);
@@ -136,6 +137,7 @@ ShipTemplate::ShipTemplate()
     energy_dock_count = 0;
     weapons_dock_count = 0;
     thermic_dock_count = 0;
+    isShipCargo = false;
 }
 
 void ShipTemplate::setBeamTexture(int index, string texture)
@@ -474,9 +476,10 @@ void ShipTemplate::addDrones(string template_name, int count)
     drones.push_back(DroneTemplate(template_name, count));
 }
 
-void ShipTemplate::setDocks(int launchers, int energy, int thermic, int repair){
+void ShipTemplate::setDocks(int launchers, int energy, int weapons, int thermic, int repair){
     launcher_dock_count = launchers;
     energy_dock_count = energy;
+    weapons_dock_count = weapons;
     thermic_dock_count = thermic;
     repair_dock_count = repair;
 }
@@ -557,9 +560,11 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->drones = drones;
     result->launcher_dock_count = launcher_dock_count;
     result->energy_dock_count = energy_dock_count;
+    result->weapons_dock_count = weapons_dock_count;
     result->thermic_dock_count = thermic_dock_count;
     result->repair_dock_count = repair_dock_count;
     result->tractor_beam = tractor_beam;
+    result->isShipCargo = isShipCargo;
     return result;
 }
 

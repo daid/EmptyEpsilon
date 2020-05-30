@@ -19,6 +19,8 @@ class GuiSlider;
 class GuiLabel;
 class GuiTextEntry;
 class GuiListbox;
+class GuiRadarView;
+class GuiTractorBeamControl;
 
 class DroneOperatorScreen : public GuiOverlay
 {
@@ -39,6 +41,7 @@ private:
     GuiButton* disconnect_button;
     GuiLabel* no_drones_label;
     GuiListbox* drone_list;
+    GuiTractorBeamControl* tractor_beam_control; 
 public:
     DroneOperatorScreen(GuiContainer* owner);
 

@@ -21,7 +21,6 @@ private:
         GuiProgressbar* loading_bar;
         GuiLabel* loading_label;
     };
-    P<PlayerSpaceship> target_spaceship;
     std::vector<TubeRow> rows;
     class TypeRow {
     public:
@@ -32,6 +31,7 @@ private:
     EMissileWeapons load_type;
     bool manual_aim;
     float missile_target_angle;
+    P<PlayerSpaceship> target_spaceship;
     GuiPowerDamageIndicator* pdi;
 public:
     GuiMissileTubeControls(GuiContainer* owner, string id, P<PlayerSpaceship> targetSpaceship);

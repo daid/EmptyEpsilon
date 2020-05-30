@@ -20,7 +20,8 @@ ShipCargo::ShipCargo() : Cargo("ShipCargo")
 ShipCargo::ShipCargo(P<ShipTemplate> ship_template) : ShipCargo()
 {
     template_name = ship_template->getName();
-    callsign = "DRN-" + gameGlobalInfo->getNextShipCallsign();
+    string pre_callsign = ship_template->getType() == ShipTemplate::TemplateType::Drone ? "DRN-" : "";
+    callsign = pre_callsign + gameGlobalInfo->getNextShipCallsign();
     setEnergy(ship_template->energy_storage_amount);
     hull_strength = ship_template->hull;
     has_reactor = ship_template->has_reactor;
@@ -126,28 +127,30 @@ ShipCargo::Entries ShipCargo::getEntries()
     P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
     if (ship_template)
     {
+        string type = ship_template->getType() != ShipTemplate::TemplateType::Drone ? "Ship" : "Drone";
+        result.push_back(std::make_tuple("", "Type", type));
         result.push_back(std::make_tuple("gui/icons/hull", "Hull", string(int(100 * hull_strength / ship_template->hull)) + "%"));
     }
-    result.push_back(std::make_tuple("", "callsign", callsign));
+    //result.push_back(std::make_tuple("", "callsign", callsign));
     result.push_back(std::make_tuple("", "type", template_name));
 
     if (has_reactor)
-        result.push_back(std::make_tuple("", "Reactor ?", "Oui"));
+        result.push_back(std::make_tuple("", "reactor ?", "Yes"));
     else
-        result.push_back(std::make_tuple("", "Reactor ?", "Non"));
+        result.push_back(std::make_tuple("", "reactor ?", "No"));
 
     float velocity = ship_template->impulse_speed / 1000 * 60;
     result.push_back(std::make_tuple("", "speed", string(velocity, 1) + DISTANCE_UNIT_1K + "/min"));
 
     if (ship_template->weapon_tube_count > 0)
-        result.push_back(std::make_tuple("", "Missiles Tubes", ship_template->weapon_tube_count));
+        result.push_back(std::make_tuple("", "missiles Tubes", ship_template->weapon_tube_count));
 
     int beam_weapons_count = 0;
     for(int n=0; n<max_beam_weapons; n++)
         if (ship_template->beams[n].getRange() > 0)
             beam_weapons_count += 1;
     if (beam_weapons_count > 0)
-        result.push_back(std::make_tuple("", "Beams Lasers", beam_weapons_count));
+        result.push_back(std::make_tuple("", "beams Lasers", beam_weapons_count));
 
     return result;
 }

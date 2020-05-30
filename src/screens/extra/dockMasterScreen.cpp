@@ -1,9 +1,9 @@
 #include "dockMasterScreen.h"
 
 #include "playerInfo.h"
+#include "shipTemplate.h"
 #include "spaceObjects/shipTemplateBasedObject.h"
 #include "spaceObjects/playerSpaceship.h"
-//#include "screenComponents/shipsLogControl.h"
 #include "screenComponents/customShipFunctions.h"
 #include "screenComponents/tractorBeamControl.h"
 #include "screenComponents/radarView.h"
@@ -35,11 +35,23 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
 
     GuiAutoLayout *rootLayout = new GuiAutoLayout(this, "ROOT_LAYOUT", GuiAutoLayout::LayoutHorizontalLeftToRight);
     rootLayout->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopLeft);
+    
+    lateralPanel = new GuiAutoLayout(rootLayout, "TOP_PANEL", GuiAutoLayout::LayoutVerticalTopToBottom);
+    lateralPanel->setSize(COLUMN_WIDTH, GuiElement::GuiSizeMax);
+    lateralPanel->setPosition(0, 0, ATopLeft);
+    lateralPanel->setMargins(20, 20, 20, 20);
+    
+    (new GuiLabel(lateralPanel, "TITLE", "docks list", 30))
+        ->addBackground()
+        ->setAlignment(ACenter)
+        ->setPosition(0, 0, ABottomCenter)
+        ->setSize(GuiElement::GuiSizeMax, 50);
 
-    docks = new GuiListbox(rootLayout, "DOCKS_LIST", [this](int index, string value) {
+    docks = new GuiListbox(lateralPanel, "DOCKS_LIST", [this](int index, string value) {
         selectDock(index);
     });
-    docks->setMargins(20, 20, 20, 20)->setSize(COLUMN_WIDTH, GuiElement::GuiSizeMax);
+    //docks->setMargins(20, 20, 20, 20)
+    docks->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     docks->setPosition(0, 0, ATopLeft);
 
     // the index in the button list is assumed to equal the index of the dock
@@ -51,16 +63,6 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
             docks->addEntry("dock-" + std::to_string(n + 1) + state, "dock-" + std::to_string(n + 1) + " " + getDockTypeName(my_spaceship->docks[n].dock_type));
         }
     }
-    
-    GuiAutoLayout *tacticalPanel = new GuiAutoLayout(rootLayout, "TACTICAL_PANEL", GuiAutoLayout::LayoutHorizontalRightToLeft);
-    tacticalPanel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
-    // 5U tactical radar with piloting features.
-    GuiRadarView *radar = new GuiRadarView(tacticalPanel, "TACTICAL_RADAR", 2000.0, nullptr, my_spaceship);
-    radar->setSize(290, 290);
-    radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
-    GuiTractorBeamControl *beam_control = new GuiTractorBeamControl(tacticalPanel, "BEAM_CONFIG");
-    beam_control->setSize(290, 290);
 
     (new GuiCustomShipFunctions(this, dockMaster, "CUSTOM_FUNCTIONS", my_spaceship))->setPosition(20, 550, ATopLeft)->setSize(360, GuiElement::GuiSizeMax);
 
@@ -72,14 +74,13 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
     topPanel = new GuiAutoLayout(mainPanel, "TOP_PANEL", GuiAutoLayout::LayoutVerticalTopToBottom);
     topPanel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax / 2.0);
     topPanel->setPosition(0, 0, ATopRight);
-//    mainPanel->setMargins(20, 20, 20, 20);
 
     bottomPanel = new GuiAutoLayout(mainPanel, "BOTTOM_PANEL", GuiAutoLayout::LayoutVerticalTopToBottom);
     bottomPanel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax / 2.0);
     bottomPanel->setPosition(0, 500, ATopRight);
 
     // Dock actions
-    (new GuiLabel(topPanel, "TITLE", "Transfert des drones", 30))
+    (new GuiLabel(topPanel, "TITLE", "Dock management", 30))
         ->addBackground()
         ->setAlignment(ACenter)
         ->setPosition(0, 0, ABottomCenter)
@@ -87,20 +88,18 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
 
     action_move = new GuiAutoLayout(topPanel, "ACTION_MOVE", GuiAutoLayout::LayoutVerticalColumns);
     action_move->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 50, ATopCenter);
-    (new GuiLabel(action_move, "MOVE_DEST_LABEL", "Transfert vers :", 30))->setAlignment(ACenterRight);
+    (new GuiLabel(action_move, "MOVE_DEST_LABEL", "Deliver to :", 30))->setAlignment(ACenterRight);
     action_move_selector = new GuiSelector(action_move, "MOVE_DEST_SELECTOR", [this](int _idx, string value) {
         if (my_spaceship)
             my_spaceship->commandSetDockMoveTarget(index, value.toInt());
     });
 
-    action_move_button = new GuiButton(action_move, "MOVE_BUTTON", "Transferer", [this]() {
+    action_move_button = new GuiButton(action_move, "MOVE_BUTTON", "Deliver", [this]() {
         if (my_spaceship)
             if (my_spaceship->getSystemEffectiveness(SYS_Docks) > 0)
             {
                 Dock &dockData = my_spaceship->docks[index];
                 P<Cargo> cargo = dockData.getCargo();
-
-                my_spaceship->addToShipLog("Transfert du drone " + cargo->getCallSign(),colorConfig.log_generic);
                 my_spaceship->commandMoveCargo(index);
             }
     });
@@ -119,8 +118,8 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
     action_launch->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 50, ATopCenter);
 
     (new GuiLabel(action_launch, "SPACE", " ", 30));
-    (new GuiLabel(action_launch, "ACTION_LAUNCH_LABEL", "Lancement du drone :", 30))->setAlignment(ACenterRight)->setMargins(20,20,20,20);
-    action_launch_button = new GuiButton(action_launch, "LAUNCH_DRONE_BUTTON", "Lancer drone", [this]() {
+    (new GuiLabel(action_launch, "ACTION_LAUNCH_LABEL", "Launcher :", 30))->setAlignment(ACenterRight)->setMargins(20,20,20,20);
+    action_launch_button = new GuiButton(action_launch, "LAUNCH_DRONE_BUTTON", "Launch", [this]() {
         if (my_spaceship)
             if (my_spaceship->getSystemEffectiveness(SYS_Docks) > 0)
             {
@@ -138,7 +137,7 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
     action_energy->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 50, ATopCenter);
 
     (new GuiLabel(action_energy, "SPACE", " ", 30));
-    (new GuiLabel(action_energy, "ACTION_LAUNCH_LABEL", "Controle de l'energie :", 30))->setAlignment(ATopRight)->setMargins(10, 10, 10, 10);
+    (new GuiLabel(action_energy, "ACTION_ENERGY_LABEL", "Energy control :", 30))->setAlignment(ATopRight)->setMargins(10, 10, 10, 10);
 
     GuiElement *energyControl = new GuiElement(action_energy, "ENERGY_CONTROL");
     energyControl->setSize(COLUMN_WIDTH, 50);
@@ -159,7 +158,7 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
     action_weapons = new GuiAutoLayout(topPanel, "ACTION_WEAPONS", GuiAutoLayout::LayoutVerticalColumns);
 //    action_weapons = new GuiAutoLayout(topPanel, "ACTION_WEAPONS", GuiAutoLayout::LayoutVerticalTopToBottom);
     action_weapons->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 50, ATopCenter);
-    (new GuiLabel(action_weapons, "ACTION_WEAPONS_LABEL", "Transfert missiles :", 30))->setAlignment(ACenterRight)->setMargins(10, 10, 10, 10);
+    (new GuiLabel(action_weapons, "ACTION_WEAPONS_LABEL", "Manage missiles :", 30))->setAlignment(ACenterRight)->setMargins(10, 10, 10, 10);
 
     table_weapons = new GuiAutoLayout(action_weapons, "TABLE_WEAPONS", GuiAutoLayout::LayoutVerticalTopToBottom);
     table_weapons->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -167,8 +166,8 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
     weapons_layout_label = new GuiAutoLayout(table_weapons, "WEAPONS_LAYOUT_LABEL", GuiAutoLayout::LayoutVerticalColumns);
     weapons_layout_label -> setSize(GuiElement::GuiSizeMax, 40);
     (new GuiLabel(weapons_layout_label, "", "Missile", 20));
-    (new GuiLabel(weapons_layout_label, "", "Station", 20));
-    (new GuiLabel(weapons_layout_label, "", "Drone", 20));
+    (new GuiLabel(weapons_layout_label, "", "Main", 20));
+    (new GuiLabel(weapons_layout_label, "", "Cargo", 20));
     (new GuiLabel(weapons_layout_label, "", " ", 20));
     (new GuiLabel(weapons_layout_label, "", " ", 20));
 
@@ -195,18 +194,10 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
                     return;
 
                 if (my_spaceship->weapon_storage[n] <= 0)
-                {
-                    my_spaceship->addToShipLog("Transfert de missile impossible. Aucun stock dans la station",colorConfig.log_generic);
                     return;
-                }
 
                 if (cargo->getWeaponStorageMax(EMissileWeapons(n)) == cargo->getWeaponStorage(EMissileWeapons(n)))
-                {
-                    my_spaceship->addToShipLog("Transfert de missile impossible. Stock maximum dans le drone",colorConfig.log_generic);
                     return;
-                }
-
-                my_spaceship->addToShipLog("Transfert de 1 " + getMissileWeaponName(EMissileWeapons(n)) + " Vers le drone",colorConfig.log_generic);
 
                 my_spaceship->weapon_storage[n] -= 1;
                 cargo->setWeaponStorage(EMissileWeapons(n), cargo->getWeaponStorage(EMissileWeapons(n)) + 1);
@@ -224,18 +215,10 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
                     return;
 
                 if (cargo->getWeaponStorage(EMissileWeapons(n)) <= 0)
-                {
-                    my_spaceship->addToShipLog("Transfert de missile impossible. Aucun stock dans le drone",colorConfig.log_generic);
                     return;
-                }
 
                 if (my_spaceship->weapon_storage[n] == my_spaceship->weapon_storage_max[n])
-                {
-                    my_spaceship->addToShipLog("Transfert de missile impossible. Stock maximum dans la station",colorConfig.log_generic);
                     return;
-                }
-
-                my_spaceship->addToShipLog("Transfert de 1 " + getMissileWeaponName(EMissileWeapons(n)) + " vers la station",colorConfig.log_generic);
 
                 my_spaceship->weapon_storage[n] += 1;
                 cargo->setWeaponStorage(EMissileWeapons(n), cargo->getWeaponStorage(EMissileWeapons(n)) - 1);
@@ -278,7 +261,7 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
     model = new GuiRotatingModelView(dronePanel_col3, "MODEL_VIEW", nullptr);
     model->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(0, -100, 0, 0);
 
-    overlay = new GuiOverlay(this, "OVERLAY", sf::Color(0, 0, 0, 128));
+    overlay = new GuiOverlay(this, "OVERLAY", sf::Color(0, 0, 0, 0));
     overlay->setBlocking(true)->setPosition(COLUMN_WIDTH, 100, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     overlay_label = new GuiLabel(overlay, "OVERLAY_LABEL", "Transporting cargo out", 30);
     overlay_label->setPosition(0, 0, ACenter)->setSize(COLUMN_WIDTH, 50);
@@ -286,7 +269,7 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
     distance_bar->setPosition(0, 50, ACenter)->setSize(COLUMN_WIDTH, 50);
     (new GuiPowerDamageIndicator(distance_bar, "DOCKS_DPI", SYS_Docks, ATopCenter, my_spaceship))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    cancel_move_button = new GuiButton(overlay, "CANCEL_MOVE_BUTTON", "Annuler transfert", [this]() {
+    cancel_move_button = new GuiButton(overlay, "CANCEL_MOVE_BUTTON", "Cancel deliver", [this]() {
         my_spaceship->commandCancelMoveCargo(index);
     });
     cancel_move_button->setPosition(0, 100, ACenter)->setSize(COLUMN_WIDTH, 50);
@@ -340,7 +323,7 @@ void DockMasterScreen::onDraw(sf::RenderTarget &window)
         case Empty:
             model->setModel(nullptr);
             overlay->setVisible(true);
-            overlay_label->setText("Vide");
+            overlay_label->setText("Empty");
             distance_bar->setVisible(false);
             cancel_move_button->setVisible(false);
             mainPanel->setVisible(false);
@@ -348,7 +331,7 @@ void DockMasterScreen::onDraw(sf::RenderTarget &window)
         case MovingIn:
             displayDroneDetails(dockData);
             overlay->setVisible(true);
-            overlay_label->setText("Transfert en cours");
+            overlay_label->setText("Incoming cargo");
             distance_bar->setVisible(true);
             distance_bar->setValue(dockData.current_distance);
             cancel_move_button->setVisible(true);
@@ -363,7 +346,7 @@ void DockMasterScreen::onDraw(sf::RenderTarget &window)
         case MovingOut:
             displayDroneDetails(dockData);
             overlay->setVisible(true);
-            overlay_label->setText("Transfert en cours");
+            overlay_label->setText("Outcoming cargo");
             distance_bar->setVisible(true);
             distance_bar->setValue(dockData.current_distance);
             cancel_move_button->setVisible(true);
@@ -378,7 +361,7 @@ void DockMasterScreen::displayDroneDetails(Dock &dockData)
     P<Cargo> cargo = dockData.getCargo();
 
     droneTitle->setVisible(true);
-    droneTitle->setText("Drone " + cargo->getCallSign());
+    droneTitle->setText("Cargo: " + cargo->getCallSign());
 
     unsigned int cnt = 0;
     for(std::tuple<string, string, string> e : cargo->Cargo::getEntries())
@@ -390,7 +373,6 @@ void DockMasterScreen::displayDroneDetails(Dock &dockData)
         }else{
             cargoInfoItems[cnt]->show();
         }
-//        cargoInfoItems[cnt]->setIcon(std::get<0>(e))->setKey(std::get<1>(e))->setValue(std::get<2>(e));
         cargoInfoItems[cnt]->setIcon("")->setKey(std::get<1>(e))->setValue(std::get<2>(e));
         cnt++;
     }
@@ -410,7 +392,6 @@ void DockMasterScreen::displayDroneDetails(Dock &dockData)
         }else{
             shipCargoInfoItems[cnt]->show();
         }
-//        shipCargoInfoItems[cnt]->setIcon(std::get<0>(e))->setKey(std::get<1>(e))->setValue(std::get<2>(e));
         shipCargoInfoItems[cnt]->setIcon("")->setKey(std::get<1>(e))->setValue(std::get<2>(e));
         cnt++;
     }

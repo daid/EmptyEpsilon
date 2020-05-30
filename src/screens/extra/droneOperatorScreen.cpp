@@ -11,6 +11,8 @@
 #include "gui/gui2_label.h"
 #include "gui/gui2_listbox.h"
 #include "screenComponents/powerDamageIndicator.h"
+#include "screenComponents/tractorBeamControl.h"
+#include "screenComponents/radarView.h"
 
 const ECrewPosition crewPosition = ECrewPosition::singlePilot;
 DroneOperatorScreen::DroneOperatorScreen(GuiContainer *owner)
@@ -42,7 +44,10 @@ DroneOperatorScreen::DroneOperatorScreen(GuiContainer *owner)
             single_pilot_view->setTargetSpaceship(selected_drone);
         }
     });
-    drone_list->setPosition(0, -100, ABottomCenter)->setSize(500, 1000);
+    drone_list->setPosition(0, -100, ATopCenter)->setSize(500, 1000);
+    
+    tractor_beam_control = new GuiTractorBeamControl(this, "BEAM_CONFIG");
+    tractor_beam_control->setPosition(-20, -20, ABottomRight)->setSize(580, 290);
 
     // single pilot UI
     single_pilot_view = new SinglePilotView(this, selected_drone);
@@ -112,6 +117,7 @@ void DroneOperatorScreen::onDraw(sf::RenderTarget &window)
             single_pilot_view->hide();
             disconnect_button->hide();
             connection_label->hide();
+            tractor_beam_control->show();
             break;
         case Piloting:
             no_drones_label->hide();
@@ -121,6 +127,7 @@ void DroneOperatorScreen::onDraw(sf::RenderTarget &window)
             disconnect_button->show();
             connection_label->setText(string(int(getConnectionQuality(selected_drone) * 100)) + "%");
             connection_label->show();
+            tractor_beam_control->hide();
             break;
         case NoDrones:
             no_drones_label->show();
@@ -128,6 +135,7 @@ void DroneOperatorScreen::onDraw(sf::RenderTarget &window)
             single_pilot_view->hide();
             disconnect_button->hide();
             connection_label->hide();
+            tractor_beam_control->show();
             break;
         }
     }

@@ -15,10 +15,9 @@ class GuiProgressbar;
 class GuiKeyValueDisplay;
 class GuiListbox;
 class GuiRotatingModelView;
-class GuiTractorBeamControl;
 class GuiOverlay;
 class GuiElement;
-class GuiRadarView;
+
 class Dock;
 class DockMasterScreen : public GuiOverlay
 {
@@ -29,6 +28,7 @@ class DockMasterScreen : public GuiOverlay
     GuiLabel *droneTitle;
 
     GuiAutoLayout *mainPanel;
+    GuiAutoLayout *lateralPanel;
     GuiAutoLayout *topPanel;
     GuiAutoLayout *bottomPanel;
     GuiAutoLayout *dronePanel;

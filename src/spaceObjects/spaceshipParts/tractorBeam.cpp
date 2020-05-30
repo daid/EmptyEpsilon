@@ -127,6 +127,9 @@ void TractorBeam::update(float delta)
                         case TBM_Hold :
                             destination = parent->getPosition() + normalize(target->getPosition() - parent->getPosition()) * (range / 2);
                             break;
+                        case TBM_Off :
+                        default:
+                            break;
                     }
                     diff = target->getPosition() - destination;
                     float target_distance = std::max(0.0f, sf::length(diff) - parent->getRadius() - target->getRadius());

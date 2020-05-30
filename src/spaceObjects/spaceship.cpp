@@ -867,6 +867,8 @@ void SpaceShip::executeJump(float distance)
 
 bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)
 {
+    // Hacking technique
+    return true;
     if (isEnemy(obj) || !ship_template)
         return false;
     P<SpaceShip> ship = obj;
@@ -1499,7 +1501,8 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
 }
 
 bool SpaceShip::tryDockDrone(SpaceShip* other){
-    if(other->ship_template->getType() == ShipTemplate::TemplateType::Drone){
+    //if(other->ship_template->getType() == ShipTemplate::TemplateType::Drone){
+    if(other->ship_template->isShipCargo){
         Dock* dock = Dock::findOpenForDocking(docks, max_docks_count);
         if (dock){
             P<ShipCargo> cargo = new ShipCargo(other);

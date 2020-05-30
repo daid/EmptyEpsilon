@@ -133,6 +133,7 @@ public:
     int weapons_dock_count;
     int thermic_dock_count;
     int repair_dock_count;
+    bool isShipCargo;
     string radar_trace;
     float long_range_radar_range = 30000.0f;
     float short_range_radar_range = 5000.0f;
@@ -161,6 +162,7 @@ public:
     void setCanSelfDestruct(bool enabled) { can_self_destruct = enabled; }
     void setCanLaunchProbe(bool enabled) { can_launch_probe = enabled; }
     void setHasReactor(bool hasReactor);
+    void setIsShipCargo(bool enabled) { isShipCargo = enabled; }
     void setMesh(string model, string color_texture, string specular_texture, string illumination_texture);
     void setEnergyStorage(float energy_amount);
     void setRepairCrewCount(int amount);
@@ -198,7 +200,7 @@ public:
     void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system);
     void addDoor(sf::Vector2i position, bool horizontal);
     void addDrones(string template_name, int count);
-    void setDocks(int launchers, int energy, int thermic, int repair);
+    void setDocks(int launchers, int energy, int weapons, int thermic, int repair);
     void setRadarTrace(string trace);
     void setLongRangeRadarRange(float range);
     void setShortRangeRadarRange(float range);

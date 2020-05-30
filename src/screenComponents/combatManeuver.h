@@ -11,7 +11,6 @@ class GuiPowerDamageIndicator;
 class GuiCombatManeuver : public GuiElement
 {
 private:
-
     P<PlayerSpaceship> target_spaceship;
     GuiSnapSlider2D* slider;
     GuiProgressbar* charge_bar;

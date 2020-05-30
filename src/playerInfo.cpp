@@ -191,9 +191,9 @@ void PlayerInfo::spawnUI()
         if (crew_position[shipLog])
             screen->addStationTab(new ShipLogScreen(container), shipLog, getCrewPositionName(shipLog), getCrewPositionIcon(shipLog));
         if (crew_position[dronePilot])
-            screen->addStationTab(new DroneOperatorScreen(screen), dronePilot, getCrewPositionName(dronePilot), getCrewPositionIcon(dronePilot));
+            screen->addStationTab(new DroneOperatorScreen(container), dronePilot, getCrewPositionName(dronePilot), getCrewPositionIcon(dronePilot));
         if (crew_position[dockMaster])
-            screen->addStationTab(new DockMasterScreen(screen), dockMaster, getCrewPositionName(dockMaster), getCrewPositionIcon(dockMaster));
+            screen->addStationTab(new DockMasterScreen(container), dockMaster, getCrewPositionName(dockMaster), getCrewPositionIcon(dockMaster));
  
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(container, "SELF_DESTRUCT_ENTRY");
         for(int n=0; n<max_crew_positions; n++)

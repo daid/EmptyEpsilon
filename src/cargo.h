@@ -5,26 +5,23 @@
 #include "engine.h"
 #include "spaceObjects/spaceshipParts/dock.h"
 
-class Cargo;
 class Dock;
 class ModelData;
 
 
 class Cargo : public MultiplayerObject
 {
-public:
-  typedef std::vector<std::tuple<string, string, string>> Entries;
-
 private:
-  string callsign;
-  float heat;
   float energy_level;
+  float heat;
+  string callsign;
   int weapon_storage[MW_Count];
   int weapon_storage_max[MW_Count];
 
 public:
   Cargo(string multiplayerClassIdentifier);
   
+  typedef std::vector<std::tuple<string, string, string>> Entries;
   virtual Entries getEntries();
   virtual string getCallSign() { return callsign; }
   virtual float getEnergy() { return energy_level; }

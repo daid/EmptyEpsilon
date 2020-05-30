@@ -7,6 +7,8 @@
 
 class GuiSelector;
 class GuiSlider;
+class GuiRadarView;
+class GuiAutoLayout;
 
 class GuiTractorBeamControl : public GuiAutoLayout
 {
@@ -15,6 +17,8 @@ private:
     GuiSlider* arc_slider;
     GuiSlider* direction_slider;
     GuiSlider* range_slider;
+    GuiRadarView* radar;
+    GuiAutoLayout* lateralPanel;
 public:
     GuiTractorBeamControl(GuiContainer* owner, string id);
     virtual void onDraw(sf::RenderTarget& window) override;
