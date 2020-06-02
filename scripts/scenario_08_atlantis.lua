@@ -53,7 +53,7 @@ function init()
     -- Create the main ship for the players.
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
     allowNewPlayerShips(false)
-	player:setPosition(25276, 133850):setCallSign("Atlantis-1"):setRotation(-90):commandTargetRotation(-90)
+    player:setPosition(25276, 133850):setCallSign("Atlantis-1"):setRotation(-90):commandTargetRotation(-90)
     for _, system in ipairs({"reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield"}) do
         player:setSystemPower(system, 0.0)
         player:commandSetSystemPowerRequest(system, 0.0)
@@ -68,7 +68,7 @@ function init()
     shipyard_gamma = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("Shipyard-Gamma"):setPosition(25276, 134550)
     shipyard_gamma:setCommsFunction(shipyardGammaComms)
     player:commandDock(shipyard_gamma)
-	player:addReputationPoints(5)	--initial reputation
+    player:addReputationPoints(5)    --initial reputation
     supply_station_6 = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCallSign("Supply-6"):setPosition(14491, 126412)
     supply_station_6.comms_data = { --Do not allow supply drops or reinforcements from the supply station.
         services = {
@@ -290,7 +290,7 @@ Good, we read all systems are go. You can safely undock now.
 Head to sector K6, there is a supply drop there dropped by F-1. Pick this up to stock up on missile weapons.]])
     supply_drop = SupplyDrop():setFaction("Human Navy"):setPosition(29021, 114945):setEnergy(500):setWeaponStorage("Homing", 12):setWeaponStorage("Nuke", 4):setWeaponStorage("Mine", 8):setWeaponStorage("EMP", 6):setWeaponStorage("HVLI", 20)
     transport_f1:orderDock(supply_station_6)
-	player:addReputationPoints(5)
+    player:addReputationPoints(5)
     mission_state = phase1WaitForSupplyPickup
 end
 
@@ -305,7 +305,7 @@ Ok, good. I see you are stocked up on missiles now.
 There are two dummy ships in your near vicinity. Now, before we test your weapon systems, first we better ID the ships to make sure we do not destroy the wrong ships.
 Have your science officer scan the Dummy-1 and Dummy-2 ships to properly identify them.]])
         mission_state = phase1ScanDummyShips
-		player:addReputationPoints(5)
+        player:addReputationPoints(5)
     end
 end
 
@@ -321,7 +321,7 @@ as the shields of Dummy-2 are configured so that your beam weapons will not pene
         mission_state = phase1DestroyDummyShips
         target_dummy_1:setShieldsMax(30)
         target_dummy_2:setShieldsMax(30)
-		player:addReputationPoints(5)
+        player:addReputationPoints(5)
     end
 end
 
@@ -338,7 +338,7 @@ Your ship seems to be in perfect operating condition.
 Now, when you are ready to take on your first mission. Contact us.
 (Feel free to dock with Supply-6 to resupply)]])
         mission_state = phase1WaitForContact
-		player:addReputationPoints(5)
+        player:addReputationPoints(5)
     end
 end
 
@@ -363,7 +363,7 @@ end
 function phase2SeekArtifact(delta)
     if b20_artifact:isScannedBy(player) then
         mission_state = phase2ReportArtifactReadings
-		player:addReputationPoints(5)
+        player:addReputationPoints(5)
     end
 end
 
@@ -417,18 +417,18 @@ Do NOT engage the Kraylor. I repeat, DO NOT ENGAGE.]]))
 end
 
 function phase3FindHoleInTheKraylorDefenseLine(delta)
-	px, py = player:getPosition()
+    px, py = player:getPosition()
     if distance(player, -5000, -260000) < 10000 or py > -248000 or px > 75000 then
-		if py > -248000 or px > 75000 then
-			shipyard_gamma:sendCommsMessage(player, "Atlantis-1,\nFinally. We thought we lost you. You are not out of the woods yet.\nTry to get to sector ZU5. We are sending JC88 to get you.")
-		else
-			shipyard_gamma:sendCommsMessage(player, [[Atlantis-1,
+        if py > -248000 or px > 75000 then
+            shipyard_gamma:sendCommsMessage(player, "Atlantis-1,\nFinally. We thought we lost you. You are not out of the woods yet.\nTry to get to sector ZU5. We are sending JC88 to get you.")
+        else
+            shipyard_gamma:sendCommsMessage(player, [[Atlantis-1,
 Finally. We thought we lost you. You are not out of the woods yet. Search for a hole in the kraylor defenses.
 Try to get to sector ZU5. We are sending JC88 to get you out of there.]])
-		end
+        end
         jc88:orderFlyTowardsBlind(10000, -210000)
         mission_state = phase3EscapeTheKraylorDefenseLine
-		player:addReputationPoints(5)
+        player:addReputationPoints(5)
     end
 end
 
@@ -439,7 +439,7 @@ function phase3EscapeTheKraylorDefenseLine(delta)
 Best dock with Supply-6 to recharge and restock.
 Report back to Shipyard-Gamma for your mission report.]])
         mission_state = phase3ReportBackToShipyard
-		player:addReputationPoints(5)
+        player:addReputationPoints(5)
     end
 end
 
@@ -501,7 +501,7 @@ function phase4DestroyTheTransport(delta)
     elseif not kraylor_transport.drop:isValid() then
         jc88:sendCommsMessage(player, [[Get back here NOW. The whole Kraylor fleet is after you. Whatever you have, it is valuable.]])
         mission_state = phase4JumpBackToShipyard
-		player:addReputationPoints(5)
+        player:addReputationPoints(5)
     end
 end
 
@@ -516,7 +516,7 @@ Dock with us, and we'll take a shot at cracking them.]])
             if ship:isValid() then ship:destroy() end
         end
         mission_state = phase5DockWithShipyard
-		player:addReputationPoints(5)
+        player:addReputationPoints(5)
     end
 end
 
@@ -610,7 +610,7 @@ end
 
 function phase5OdinAttack(delta)
     if not odin:isValid() then  --WTF man, you get bonus points for this.
-		globalMessage("Bonus points for actually destroying the battlestation")
+        globalMessage("Bonus points for actually destroying the battlestation")
         victory("Human Navy")
         return
     end
@@ -621,16 +621,16 @@ function phase5OdinAttack(delta)
     if not odin.target:isValid() then
         if shipyard_gamma:isValid() then
             odin.target = shipyard_gamma
-			player:addReputationPoints(5)
+            player:addReputationPoints(5)
         elseif supply_station_6:isValid() then
             odin.target = supply_station_6
-			player:addReputationPoints(5)
+            player:addReputationPoints(5)
         elseif jc88:isValid() then
             odin.target = jc88
-			player:addReputationPoints(5)
+            player:addReputationPoints(5)
         elseif player:isValid() then
             odin.target = player
-			player:addReputationPoints(5)
+            player:addReputationPoints(5)
         end
         if odin.target:isValid() then
             odin:orderAttack(odin.target)
