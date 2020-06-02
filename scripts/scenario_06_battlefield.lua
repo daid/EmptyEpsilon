@@ -31,7 +31,7 @@ function init()
 		battle_scale = 1;
 		location_scale = 1;
 	end
-	
+
 	for n=1,20*battle_scale do
 		CpuShip():setTemplate("MT52 Hornet"):setPosition(random(-10000 * location_scale, 10000 * location_scale), random(0, 3000)):setRotation(90):setFaction("Human Navy"):orderRoaming():setScanned(true)
 	end
