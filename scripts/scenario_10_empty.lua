@@ -22,7 +22,7 @@ function init()
     sun1 = Planet():setPosition(5000, 15000):setPlanetRadius(1000):setDistanceFromMovementPlane(-2000):setPlanetAtmosphereTexture("planets/star-1.png"):setPlanetAtmosphereColor(1.0,1.0,1.0)
     planet1:setOrbit(sun1, 40)
     moon1:setOrbit(planet1, 20.0)
-    
+
     addGMFunction("Random asteroid field", function()
         cleanup()
         for n=1,1000 do

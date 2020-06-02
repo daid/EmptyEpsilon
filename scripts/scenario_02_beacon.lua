@@ -18,7 +18,7 @@ function init()
     enemy_station:setPosition(-45600, -15800):setCallSign("Omega")
     neutral_station = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
     neutral_station:setPosition(9100,-35400):setCallSign("Refugee-X")
-    
+
     --Nebula that hide the enemy station.
     Nebula():setPosition(-43300,  2200)
     Nebula():setPosition(-34000,  -700)
@@ -37,7 +37,7 @@ function init()
     --Create 50 Asteroids
     placeRandom(Asteroid, 50, -7500, -10000, -12500, 30000, 2000)
     placeRandom(VisualAsteroid, 50, -7500, -10000, -12500, 30000, 2000)
-	
+
     -- Create the defense for the station
     CpuShip():setTemplate("Starhammer II"):setFaction("Exuari"):setPosition(-44000, -14000):orderDefendTarget(enemy_station)
     CpuShip():setTemplate("Phobos T3"):setFaction("Exuari"):setPosition(-47000, -14000):orderDefendTarget(enemy_station)
@@ -56,7 +56,7 @@ function init()
     exuari_RT4_guard2 = CpuShip():setTemplate("Adder MK5"):setFaction("Exuari"):setPosition(3950, 31250):setRotation(180)
     exuari_RT4_guard1:orderIdle()
     exuari_RT4_guard2:orderIdle()
-    
+
     --Start off the mission by sending a transmission to the player
     research_station:sendCommsMessage(player, _([[Epsilon, please come in?
 
@@ -133,7 +133,7 @@ The officers at Orion-5 will gladly make this trade. And they ask you to retriev
 To make sure Refugee-X is aware of your peaceful intentions, we have stripped you of Nukes and EMPs. You will get them back once you deliver the criminals.]]))
         else
             main_station:sendCommsMessage(player, _([[J.J.Johnson message towards Orion-5 is clear:
-]]) .. 
+]]) ..
             _([[He just came back from a mission from the Refugee-X station. Which is a neutral station in the area, known to house anyone no matter their history.
 Lately Refugee-X has been under attack by Exuari ships, and some criminals living there have offered to give themselves up in exchange for better protection of the station.
 
@@ -146,14 +146,14 @@ To make sure Refugee-X is aware of your peaceful intentions, we have stripped yo
         player:setWeaponStorage("EMP", 0)
         player:setWeaponStorageMax("Nuke", 0)
         player:setWeaponStorageMax("EMP", 0)
-        
+
         mission_state = missionRetrieveCriminals
     end
 end
 function missionRT4Died(delta)
     if player:isDocked(research_station) then
         -- Docked and delivered the diplomat's body.
-        
+
         research_station:sendCommsMessage(player, _([[Apperently, J.J.Johnson managed to send out a transmission with his mission details to Orion-5 before he passed away.
 
 Head to Orion-5 to receive the details on his mission.]]))
@@ -181,7 +181,7 @@ function missionWaitForAmbush(delta)
         ambush_side1 = CpuShip():setFaction("Exuari"):setTemplate("Nirvana R5"):setScanned(true):setPosition(x - 736, y + 2875):setRotation(-80):orderAttack(player)
         ambush_side2 = CpuShip():setFaction("Exuari"):setTemplate("Nirvana R5"):setScanned(true):setPosition(x - 2542, y + 2208):setRotation(-80):orderAttack(player)
         mission_state = missionAmbushed
-        
+
         ambush_main:sendCommsMessage(player, _([[Sllaaami graa kully fartsy!
 
 Your translator has difficulty translating the message. But it seems to come down to the fact that they want you dead and that your death will bring them great fun.]]))
@@ -208,17 +208,17 @@ We managed to extract some vital infro from the Exuari. In the next transport co
                 refilled = false
             end
             main_station:sendCommsMessage(player, message)
-            
+
             x, y = neutral_station:getPosition()
             CpuShip():setTemplate("Phobos T3"):setFaction("Human Navy"):setPosition(x - 1000, y - 1000):orderDefendTarget(neutral_station):setCommsScript("")
             CpuShip():setTemplate("Nirvana R5"):setFaction("Human Navy"):setPosition(x + 1000, y + 1000):orderDefendTarget(neutral_station):setCommsScript("")
-            
+
             transports = {}
             for n=1,5 do
                 table.insert(transports, CpuShip():setTemplate("Personnel Freighter 2"):setFaction("Independent"):setPosition(50000 + random(-10000, 10000), -30000 + random(-10000, 10000)))
             end
             transport_target = CpuShip():setTemplate("Personnel Freighter 2"):setFaction("Exuari"):setPosition(50000 + random(-10000, 10000), -30000 + random(-10000, 10000))
-            
+
             mission_state = missionGotoTransport
         end
         if refilled then
@@ -257,7 +257,7 @@ function missionStopTransport(delta)
         transport_target:setImpulseMaxSpeed(70):setJumpDrive(true)
         mission_state = missionTransportWaitForRecovery
         mission_timer = 40
-		
+
         local x, y = transport_target:getPosition()
         transport_recovery_team = CpuShip():setTemplate("Flavia"):setFaction("Human Navy"):setPosition(x - random(8000, 10000), y + random(8000, 10000))
         transport_recovery_team:setCallSign("RTRV"):setScanned(true)
@@ -272,7 +272,7 @@ function missionTransportWaitForRecovery(delta)
     mission_timer = mission_timer - delta
     if mission_timer < 0 then
         mission_timer = random(90, 120)
-        
+
         local x, y = transport_target:getPosition()
         local distance = random(8000, 12000)
         local r = random(0, 360)
@@ -283,7 +283,7 @@ function missionTransportWaitForRecovery(delta)
     if distance(transport_recovery_team, transport_target) < 1000 then
         transport_target:orderDock(main_station)
         transport_recovery_team:orderDock(main_station)
-        
+
         transport_recovery_team:sendCommsMessage(player, _([[Transporter recovery team coming in.
 
 We succesfully captured the Exuari transport. Taking it back to Orion-5. Please head to Orion-5 for a debriefing.]]))
@@ -316,7 +316,7 @@ function update(delta)
         victory("Human Navy")
         return
     end
-    
+
     if mission_state ~= nil then
         mission_state(delta)
     end
@@ -335,7 +335,7 @@ function placeRandom(object_type, amount, x1, y1, x2, y2, random_amount)
         local f = random(0, 1)
         local x = x1 + (x2 - x1) * f
         local y = y1 + (y2 - y1) * f
-        
+
         local r = random(0, 360)
         local distance = random(0, random_amount)
         x = x + math.cos(r / 180 * math.pi) * distance

@@ -184,7 +184,7 @@ function init()
 	addGMFunction("Extra wave", function()
 		addWave(enemyList, random(0, 10), random(0, 360), random(25000, 30000))
 	end)
-    
+
 	-- Spawn 1-3 random asteroid belts.
 	for cnt=1,random(1, 3) do
 		a = random(0, 360)
@@ -253,7 +253,7 @@ function startScenario()
 	else
 		enemy_group_count = 3
 	end
-    
+
     if target_practice_drone ~= nil and target_practice_drone:isValid() then
         target_practice_drone:destroy()
     end
@@ -269,11 +269,11 @@ function startScenario()
 			addWave(enemyList, type, a, d)
 		end
 	end
-    
+
     friendlyList[1]:sendCommsMessage(player, string.format([[%s, please inform your Captain and crew that you have a total of %d minutes for this mission.
 The mission started at the arrival of this message.
 Your objective is to fend off the incomming Kraylor attack.
-Good Luck.]], player:getCallSign(), gametimeleft / 60))  
+Good Luck.]], player:getCallSign(), gametimeleft / 60))
     scenario_started = true
 end
 
@@ -288,13 +288,13 @@ function update(delta)
         end
         if gametimeleft < timewarning then
             if timewarning <= 1 * 60 then --Less then 1 minutes left.
-                friendlyList[1]:sendCommsMessage(player, string.format([[%s, you have 1 minute remaining.]], player:getCallSign(), timewarning / 60))  
+                friendlyList[1]:sendCommsMessage(player, string.format([[%s, you have 1 minute remaining.]], player:getCallSign(), timewarning / 60))
                 timewarning = timewarning - 2 * 60
             elseif timewarning <= 5 * 60 then --Less then 5 minutes left. Warn ever 2 minutes instead of every 5.
-                friendlyList[1]:sendCommsMessage(player, string.format([[%s, you have %d minutes remaining.]], player:getCallSign(), timewarning / 60))  
+                friendlyList[1]:sendCommsMessage(player, string.format([[%s, you have %d minutes remaining.]], player:getCallSign(), timewarning / 60))
                 timewarning = timewarning - 2 * 60
             else
-                friendlyList[1]:sendCommsMessage(player, string.format([[%s, you have %d minutes remaining of mission time.]], player:getCallSign(), timewarning / 60))  
+                friendlyList[1]:sendCommsMessage(player, string.format([[%s, you have %d minutes remaining of mission time.]], player:getCallSign(), timewarning / 60))
                 timewarning = timewarning - 5 * 60
             end
         end
@@ -335,7 +335,7 @@ function update(delta)
                     friendly:addReputationPoints(delta * friendly_count * 0.1)
                 end
             end
-            
+
             local condition = "green"
             if player:getShieldLevel(0) < player:getShieldMax(0) * 0.8 or player:getShieldLevel(1) < player:getShieldMax(1) * 0.8 then
                 condition = "yellow"
