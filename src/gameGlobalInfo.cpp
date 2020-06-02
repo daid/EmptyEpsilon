@@ -157,6 +157,7 @@ void GameGlobalInfo::reset()
 {
     gm_callback_functions.clear();
     gm_messages.clear();
+    on_gm_click = nullptr;
 
     foreach(GameEntity, e, entityList)
         e->destroy();
@@ -358,14 +359,14 @@ static int setBanner(lua_State* L)
 /// Show a scrolling banner containing this text on the cinematic and top down views.
 REGISTER_SCRIPT_FUNCTION(setBanner);
 
-static int getMissionTime(lua_State* L)
+static int getScenarioTime(lua_State* L)
 {
     lua_pushnumber(L, gameGlobalInfo->elapsed_time);
     return 1;
 }
-/// getMissionTime()
-/// Return the elapsed time of the mission.
-REGISTER_SCRIPT_FUNCTION(getMissionTime);
+/// getScenarioTime()
+/// Return the elapsed time of the scenario.
+REGISTER_SCRIPT_FUNCTION(getScenarioTime);
 
 static int getPlayerShip(lua_State* L)
 {
