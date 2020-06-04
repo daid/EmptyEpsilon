@@ -1,6 +1,7 @@
 #include <i18n.h>
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
+#include "resources.h"
 #include "scienceDatabase.h"
 
 P<GameGlobalInfo> gameGlobalInfo;
@@ -40,7 +41,6 @@ GameGlobalInfo::GameGlobalInfo()
     allow_main_screen_long_range_radar = true;
     gm_control_code = "";
     elapsed_time = 0.0f;
-
     intercept_all_comms_to_gm = false;
 
     registerMemberReplication(&scanning_complexity);
@@ -56,6 +56,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&allow_main_screen_long_range_radar);
     registerMemberReplication(&gm_control_code);
     registerMemberReplication(&elapsed_time, 0.1);
+    registerMemberReplication(&locals_name, 1.0);
 
     for(unsigned int n=0; n<factionInfo.size(); n++)
         reputation_points.push_back(0);
@@ -226,23 +227,104 @@ string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
     }
 }
 
-string getSectorName(sf::Vector2f position)
+string getSectorName(sf::Vector2f position, int scale_magnitude)
 {
-    constexpr float sector_size = 20000;
-    int sector_x = floorf(position.x / sector_size) + 5;
-    int sector_y = floorf(position.y / sector_size) + 5;
-    string y;
     string x;
-    if (sector_y >= 0)
-        y = string(char('A' + (sector_y)));
+    string y;
+    string name = "";
+
+    if (PreferencesManager::get("advanced_sector_system","0") == "1")
+    {
+        if (scale_magnitude != 0 && scale_magnitude != 2 && scale_magnitude != 4)
+            return "";
+        
+        // Section (scale_magnitude == 0)
+        int sector_x = floorf(position.x / GameGlobalInfo::sector_size);
+        int sector_y = floorf(position.y / GameGlobalInfo::sector_size);
+        
+        // Draw area only if first sector of the area
+        if (scale_magnitude == 2 && (sector_x % (8*8) != 0 || sector_y % (8*8) != 0))
+            return "";
+
+        // Draw region only if first area of the region
+        if (scale_magnitude == 4 && (sector_x % (8*8*8*8) != 0 || sector_y % (8*8*8*8) != 0))
+            return "";
+        
+        // Area (scale_magnitude == 2)
+        int area_factor = std::pow(8,2) * GameGlobalInfo::sector_size;
+        int area_x = floorf((position.x) / area_factor);
+        int area_y = floorf((position.y) / area_factor);
+
+        // Region (scale_magnitude == 5)
+        int region_factor = std::pow(8,4) * GameGlobalInfo::sector_size;
+        int region_x = floorf((position.x) / region_factor);
+        int region_y = floorf((position.y) / region_factor);
+
+        // Refactor sector based on area
+        sector_x = sector_x - floorf((area_x * area_factor)/ GameGlobalInfo::sector_size);
+        sector_y = sector_y - floorf((area_y * area_factor)/ GameGlobalInfo::sector_size);
+        
+        // Refactor area based on region
+        area_x = area_x - floorf((region_x * region_factor)/ (GameGlobalInfo::sector_size * 64));
+        area_y = area_y - floorf((region_y * region_factor)/ (GameGlobalInfo::sector_size * 64));
+        
+        x = string(sector_x + 1);
+        if (sector_y >= 26)
+            y = string(char('A' + floorf(sector_y / 26) - 1 )) + string(char('A' + (sector_y % 26)));
+        else
+            y = string(char('A' + (sector_y)));
+        
+        string sector_name = y + x;
+        string area_name = string(area_x) + "." + string(area_y);
+        string region_name = string(region_x) + "/" + string(region_y);
+        
+        string local_sector_name = sector_name;
+        string local_area_name = area_name;
+        string local_region_name = region_name;
+        
+        for(std::pair<string, string>& local_name : gameGlobalInfo->locals_name)
+        {
+            if (region_name == local_name.first)
+                local_region_name = local_name.second;
+            if (region_name + " " + area_name == local_name.first)
+                local_area_name = local_name.second;
+            if (region_name + " " + area_name + " " + sector_name == local_name.first)
+                local_sector_name = local_name.second;
+        }
+        
+        if (scale_magnitude == 0)
+            return local_sector_name;
+        if (scale_magnitude == 2)
+            return local_area_name;
+        if (scale_magnitude == 4)
+            return local_region_name;
+        return "";
+    }
     else
-        y = string(char('z' + sector_y / 26)) + string(char('z' + 1 + (sector_y % 26)));
-    if (sector_x >= 0)
-        x = string(sector_x);
-    else
-        x = string(100 + sector_x);
-    return y + x;
+    {
+        int sector_x = floorf(position.x / GameGlobalInfo::sector_size) + 5;
+        int sector_y = floorf(position.y / GameGlobalInfo::sector_size) + 5;
+
+        if (sector_y >= 0)
+            y = string(char('A' + (sector_y)));
+        else
+            y = string(char('z' + sector_y / 26)) + string(char('z' + 1 + (sector_y % 26)));
+        if (sector_x >= 0)
+            x = string(sector_x);
+        else
+            x = string(100 + sector_x);
+        return y + x;
+    }
 }
+
+static int addLocalName(lua_State* L)
+{
+    gameGlobalInfo->locals_name.emplace_back(luaL_checkstring(L, 1), luaL_checkstring(L, 2));    
+    return 0;
+}
+/// addLocalName(string,string)
+/// Personalize the name of a sector/area/region.
+REGISTER_SCRIPT_FUNCTION(addLocalName);
 
 static int victory(lua_State* L)
 {

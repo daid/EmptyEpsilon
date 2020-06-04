@@ -736,6 +736,12 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
     });
     long_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
+    (new GuiLabel(left_col, "", "Far range radar:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    far_range_radar_slider = new GuiSlider(left_col, "", 50000.0, 10000000.0, 0.0, [this](float value) {
+        target->setFarRangeRadarRange(value);
+    });
+    far_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
     // Right column
     // Can scan bool
     can_scan = new GuiToggleButton(right_col, "", "Can scan", [this](bool value) {
@@ -789,6 +795,7 @@ void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
     coolant_slider->setValue(target->max_coolant);
     short_range_radar_slider->setValue(target->getShortRangeRadarRange());
     long_range_radar_slider->setValue(target->getLongRangeRadarRange());
+    far_range_radar_slider->setValue(target->getFarRangeRadarRange());
     can_scan->setValue(target->getCanScan());
     can_hack->setValue(target->getCanHack());
     can_dock->setValue(target->getCanDock());

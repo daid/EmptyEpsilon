@@ -3,6 +3,7 @@
 
 #include "gui/gui2_element.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "preferenceManager.h"
 
 class GuiMissileTubeControls;
 class TargetsContainer;
@@ -44,7 +45,13 @@ private:
 
     TargetsContainer* targets;
     GuiMissileTubeControls* missile_tube_controls;
+    
+public:
+    static const int grid_scale_size = 5;
 
+private:
+    static const int sub_sectors_count = 8;
+    sf::Color grid_colors[grid_scale_size];
     sf::Vector2f view_position;
     float view_rotation;
     bool auto_center_on_my_ship;
@@ -54,6 +61,7 @@ private:
     P<PlayerSpaceship> target_spaceship;
     bool long_range;
     bool show_ghost_dots;
+    bool show_sectors;
     bool show_waypoints;
     bool show_target_projection;
     bool show_missile_tubes;
@@ -98,11 +106,15 @@ public:
     GuiRadarView* setAutoCentering(bool value) { this->auto_center_on_my_ship = value; return this; }
     bool getAutoRotating() { return auto_rotate_on_my_ship; }
     GuiRadarView* setAutoRotating(bool value) { this->auto_rotate_on_my_ship = value; return this; }
+    bool getShowSectors() { return show_sectors; }
+    GuiRadarView* setShowSectors(bool value) { this->show_sectors = value; return this; }
     GuiRadarView* setCallbacks(func_t mouse_down_func, func_t mouse_drag_func, func_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
     GuiRadarView* setViewPosition(sf::Vector2f view_position) { this->view_position = view_position; return this; }
     sf::Vector2f getViewPosition() { return view_position; }
     GuiRadarView* setViewRotation(float view_rotation) { this->view_rotation = view_rotation; return this; }
     float getViewRotation() { return view_rotation; }
+    int calcGridScaleMagnitude(int scale_magnitude, int position);
+    virtual float getScale();
 
     sf::Vector2f worldToScreen(sf::Vector2f world_position);
     sf::Vector2f screenToWorld(sf::Vector2f screen_position);
@@ -110,10 +122,10 @@ public:
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
-    //virtual bool onJoystickXYMove(sf::Vector2f position);
-    //virtual bool onJoystickZMove(float position);
-    //virtual bool onJoystickRMove(float position);
     void setTargetSpaceship(P<PlayerSpaceship> targetSpaceship){target_spaceship = targetSpaceship;}
+
+protected:
+    virtual sf::Vector2f getCenterPosition();
 
 private:
     void updateGhostDots();
@@ -133,6 +145,7 @@ private:
     void drawTargets(sf::RenderTarget& window);
     void drawHeadingIndicators(sf::RenderTarget& window);
     void drawRadarCutoff(sf::RenderTarget& window);
+    float getRadius();
 };
 
 #endif//RADAR_VIEW_H

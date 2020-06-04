@@ -136,6 +136,7 @@ public:
     int stock_dock_count;
     bool isShipCargo;
     string radar_trace;
+    float far_range_radar_range = 50000.0f;
     float long_range_radar_range = 30000.0f;
     float short_range_radar_range = 5000.0f;
     string impulse_sound_file;
@@ -203,6 +204,7 @@ public:
     void addDrones(string template_name, int count);
     void setDocks(int launchers, int energy, int weapons, int thermic, int repair, int stock);
     void setRadarTrace(string trace);
+    void setFarRangeRadarRange(float range);
     void setLongRangeRadarRange(float range);
     void setShortRangeRadarRange(float range);
     void setImpulseSoundFile(string sound);

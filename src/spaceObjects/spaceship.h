@@ -337,6 +337,8 @@ public:
     void setImpulseMaxSpeed(float speed) { impulse_max_speed = speed; }
     float getRotationMaxSpeed() { return turn_speed; }
     void setRotationMaxSpeed(float speed) { turn_speed = speed; }
+    float getAcceleration() { return impulse_acceleration; }
+    void setAcceleration(float acceleration) { impulse_acceleration = acceleration; }
     void setCombatManeuver(float boost, float strafe) { combat_maneuver_boost_speed = boost; combat_maneuver_strafe_speed = strafe; }
 
     void setReactor(bool has_reactor_drive){ has_reactor = has_reactor_drive;}
