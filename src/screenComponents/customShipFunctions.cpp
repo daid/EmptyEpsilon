@@ -4,21 +4,27 @@
 #include "gui/gui2_button.h"
 #include "gui/gui2_label.h"
 
-GuiCustomShipFunctions::GuiCustomShipFunctions(GuiContainer* owner, ECrewPosition position, string id)
-: GuiAutoLayout(owner, id, GuiAutoLayout::LayoutVerticalTopToBottom), position(position)
+GuiCustomShipFunctions::GuiCustomShipFunctions(GuiContainer* owner, ECrewPosition position, string id, P<PlayerSpaceship> targetSpaceship)
+: GuiAutoLayout(owner, id, GuiAutoLayout::LayoutVerticalTopToBottom), position(position), target_spaceship(targetSpaceship)
 {
+}
+
+void GuiCustomShipFunctions::setTargetSpaceship(P<PlayerSpaceship> targetSpaceship){
+    target_spaceship = targetSpaceship;
+    if (target_spaceship)
+        createEntries();
 }
 
 void GuiCustomShipFunctions::onDraw(sf::RenderTarget& window)
 {
-    if (!my_spaceship)
+    if (!target_spaceship)
         return;
     checkEntries();
 }
 
 void GuiCustomShipFunctions::checkEntries()
 {
-    if (my_spaceship->custom_functions.size() != entries.size())
+    if (target_spaceship->custom_functions.size() != entries.size())
     {
         createEntries();
         return;
@@ -26,7 +32,7 @@ void GuiCustomShipFunctions::checkEntries()
     for(unsigned int n=0; n<entries.size(); n++)
     {
         string caption = my_spaceship->custom_functions[n].caption;
-        if (entries[n].name != my_spaceship->custom_functions[n].name)
+        if (entries[n].name != target_spaceship->custom_functions[n].name)
         {
             createEntries();
             return;
@@ -69,7 +75,7 @@ void GuiCustomShipFunctions::createEntries()
             e.element->destroy();
     }
     entries.clear();
-    for(PlayerSpaceship::CustomShipFunction& csf : my_spaceship->custom_functions)
+    for(PlayerSpaceship::CustomShipFunction& csf : target_spaceship->custom_functions)
     {
         entries.emplace_back();
         Entry& e = entries.back();
@@ -80,10 +86,10 @@ void GuiCustomShipFunctions::createEntries()
             if (csf.type == PlayerSpaceship::CustomShipFunction::Type::Button)
             {
                 string name = e.name;
-                e.element = new GuiButton(this, "", csf.caption, [name]()
+                e.element = new GuiButton(this, "", csf.caption, [this, name]()
                 {
-                    if (my_spaceship)
-                        my_spaceship->commandCustomFunction(name);
+                    if (target_spaceship)
+                        target_spaceship->commandCustomFunction(name);
                 });
                 e.element->setSize(GuiElement::GuiSizeMax, 50);
             }

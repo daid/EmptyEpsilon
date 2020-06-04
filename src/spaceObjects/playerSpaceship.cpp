@@ -114,6 +114,9 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCombatManeuverBoost);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetScienceLink);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAlertLevel);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetTractorBeamDirection);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetTractorBeamArc);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetTractorBeamRange);
 
     /// Return the number of Engineering repair crews on the ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getRepairCrewCount);
@@ -216,6 +219,8 @@ float PlayerSpaceship::system_power_user_factor[] = {
     /*SYS_JumpDrive*/     5.0 * 0.08,
     /*SYS_FrontShield*/   5.0 * 0.08,
     /*SYS_RearShield*/    5.0 * 0.08,
+    /*SYS_Docks*/         1.0 * 0.08,
+    /*SYS_Drones*/        3.0 * 0.08,
 };
 
 static const int16_t CMD_TARGET_ROTATION = 0x0001;
@@ -260,6 +265,15 @@ static const int16_t CMD_SET_MAIN_SCREEN_OVERLAY = 0x0027;
 static const int16_t CMD_HACKING_FINISHED = 0x0028;
 static const int16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const int16_t CMD_TURN_SPEED = 0x002A;
+static const int16_t CMD_LAUNCH_CARGO = 0x0030;
+static const int16_t CMD_MOVE_CARGO = 0x0031;
+static const int16_t CMD_CANCEL_MOVE_CARGO = 0x0032;
+static const int16_t CMD_SET_DOCK_MOVE_TARGET = 0x0033;
+static const int16_t CMD_SET_DOCK_ENERGY_REQUEST = 0x0034;
+static const int16_t CMD_SET_TRACTOR_BEAM_DIRECTION = 0x0035;
+static const int16_t CMD_SET_TRACTOR_BEAM_ARC = 0x0036;
+static const int16_t CMD_SET_TRACTOR_BEAM_RANGE = 0x0037;
+static const int16_t CMD_SET_TRACTOR_BEAM_MODE = 0x0038;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -428,33 +442,40 @@ void PlayerSpaceship::update(float delta)
     {
         P<ShipTemplateBasedObject> docked_with_template_based = docking_target;
         P<SpaceShip> docked_with_ship = docking_target;
-
-        // Derive a base energy request rate from the player ship's maximum
-        // energy capacity.
-        float energy_request = std::min(delta * 10.0f, max_energy_level - energy_level);
-
-        // If we're docked with a shipTemplateBasedObject, and that object is
-        // set to share its energy with docked ships, transfer energy from the
-        // mothership to docked ships until the mothership runs out of energy
-        // or the docked ship doesn't require any.
-        if (docked_with_template_based && docked_with_template_based->shares_energy_with_docked)
+        
+        if (docked_with_ship && docked_with_ship->tryDockDrone(this))
         {
-            if (!docked_with_ship || docked_with_ship->useEnergy(energy_request))
-                energy_level += energy_request;
-        }
+            // this drone has docked with a carrier
+            destroy();
+        }else{
 
-        // If a shipTemplateBasedObject and is allowed to restock
-        // scan probes with docked ships.
-        if (docked_with_template_based && docked_with_template_based->restocks_scan_probes)
-        {
-            if (scan_probe_stock < max_scan_probes)
+            // Derive a base energy request rate from the player ship's maximum
+            // energy capacity.
+            float energy_request = std::min(delta * 10.0f, max_energy_level - energy_level);
+
+            // If we're docked with a shipTemplateBasedObject, and that object is
+            // set to share its energy with docked ships, transfer energy from the
+            // mothership to docked ships until the mothership runs out of energy
+            // or the docked ship doesn't require any.
+            if (docked_with_template_based && docked_with_template_based->shares_energy_with_docked)
             {
-                scan_probe_recharge += delta;
+                if (!docked_with_ship || docked_with_ship->useEnergy(energy_request))
+                    energy_level += energy_request;
+            }
 
-                if (scan_probe_recharge > scan_probe_charge_time)
+            // If a shipTemplateBasedObject and is allowed to restock
+            // scan probes with docked ships.
+            if (docked_with_template_based && docked_with_template_based->restocks_scan_probes)
+            {
+                if (scan_probe_stock < max_scan_probes)
                 {
-                    scan_probe_stock += 1;
-                    scan_probe_recharge = 0.0;
+                    scan_probe_recharge += delta;
+
+                    if (scan_probe_recharge > scan_probe_charge_time)
+                    {
+                        scan_probe_stock += 1;
+                        scan_probe_recharge = 0.0;
+                    }
                 }
             }
         }
@@ -665,6 +686,7 @@ void PlayerSpaceship::update(float delta)
                 }
             }
         }
+        
     }else{
         // Actions performed on the client-side only.
 
@@ -1608,6 +1630,50 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             scan_probe_stock--;
         }
         break;
+    case CMD_LAUNCH_CARGO:
+        int dockIndex;
+        packet >> dockIndex;
+        if (docks[dockIndex].state == EDockState::Docked 
+            && docks[dockIndex].getCargo()->onLaunch(docks[dockIndex]))
+        {
+            docks[dockIndex].getCargo()->destroy();
+            docks[dockIndex].empty();
+        }
+        break;
+    case CMD_SET_DOCK_MOVE_TARGET:
+        {
+            int srcIdx, destIdx;
+            packet >> srcIdx >> destIdx;
+            Dock& src = docks[srcIdx];
+            src.setMoveTarget(destIdx);
+        }
+        break;
+        break;
+    case CMD_MOVE_CARGO:
+        {
+            int index;
+            packet >> index;
+            Dock& src = docks[index];
+            src.startMoveCargo();
+        }
+        break;
+    case CMD_CANCEL_MOVE_CARGO:
+        {
+            int index;
+            packet >> index;
+            Dock& src = docks[index];
+            src.cancelMoveCargo();
+        }
+        break;
+    case CMD_SET_DOCK_ENERGY_REQUEST:
+        packet >> dockIndex;
+        if (docks[dockIndex].state == EDockState::Docked && docks[dockIndex].dock_type == Dock_Energy)
+        {
+            float value;
+            packet >> value;
+            docks[dockIndex].energy_request = value;
+        }
+        break;
     case CMD_SET_ALERT_LEVEL:
         {
             packet >> alert_level;
@@ -1649,6 +1715,40 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             }
         }
         break;
+    case CMD_SET_TRACTOR_BEAM_DIRECTION:
+    {
+        float direction;
+        packet >> direction;
+        tractor_beam.setDirection(direction);
+    }
+    break;
+    case CMD_SET_TRACTOR_BEAM_ARC:
+    {
+        float arc;
+        packet >> arc;
+        if (tractor_beam.getMaxArea() > 0){
+            tractor_beam.setArc(arc);
+            tractor_beam.setRange(std::min(tractor_beam.getRange(), tractor_beam.getMaxRange(arc)));
+        }
+    }
+    break;
+    case CMD_SET_TRACTOR_BEAM_RANGE:
+    {
+        float range;
+        packet >> range;
+        if (tractor_beam.getMaxArea() > 0){
+            tractor_beam.setRange(range);
+            tractor_beam.setArc(std::min(tractor_beam.getArc(), tractor_beam.getMaxArc(range)));
+        }
+    }
+    break;
+    case CMD_SET_TRACTOR_BEAM_MODE:
+    {
+        int mode;
+        packet >> mode;
+        tractor_beam.setMode(ETractorBeamMode(mode));
+    }
+    break;
     }
 }
 
@@ -1929,6 +2029,40 @@ void PlayerSpaceship::commandLaunchProbe(sf::Vector2f target_position)
     sendClientCommand(packet);
 }
 
+void PlayerSpaceship::commandLaunchCargo(int index)
+{
+    sf::Packet packet;
+    packet << CMD_LAUNCH_CARGO << index;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandMoveCargo(int index)
+{
+    sf::Packet packet;
+    packet << CMD_MOVE_CARGO << index;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandCancelMoveCargo(int index)
+{
+    sf::Packet packet;
+    packet << CMD_CANCEL_MOVE_CARGO << index;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetDockMoveTarget(int srcIdx, int destIdx)
+{
+    sf::Packet packet;
+    packet << CMD_SET_DOCK_MOVE_TARGET << srcIdx << destIdx;
+    sendClientCommand(packet);
+}
+void PlayerSpaceship::commandSetDockEnergyRequest(int index, float value)
+{
+    sf::Packet packet;
+    packet << CMD_SET_DOCK_ENERGY_REQUEST << index << value;
+    sendClientCommand(packet);
+}
+
 void PlayerSpaceship::commandScanDone()
 {
     sf::Packet packet;
@@ -1973,6 +2107,29 @@ void PlayerSpaceship::commandSetScienceLink(int32_t id){
     packet << CMD_SET_SCIENCE_LINK << id;
     sendClientCommand(packet);
 }
+
+void PlayerSpaceship::commandSetTractorBeamDirection(float direction){
+    sf::Packet packet;
+    packet << CMD_SET_TRACTOR_BEAM_DIRECTION << direction;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetTractorBeamArc(float arc){
+    sf::Packet packet;
+    packet << CMD_SET_TRACTOR_BEAM_ARC << arc;
+    sendClientCommand(packet);
+}
+void PlayerSpaceship::commandSetTractorBeamRange(float range){
+    sf::Packet packet;
+    packet << CMD_SET_TRACTOR_BEAM_RANGE << range;
+    sendClientCommand(packet);
+}
+void PlayerSpaceship::commandSetTractorBeamMode(ETractorBeamMode mode){
+    sf::Packet packet;
+    packet << CMD_SET_TRACTOR_BEAM_MODE << int(mode);
+    sendClientCommand(packet);
+}
+
 
 void PlayerSpaceship::onReceiveServerCommand(sf::Packet& packet)
 {

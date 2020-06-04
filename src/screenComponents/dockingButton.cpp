@@ -3,44 +3,44 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "dockingButton.h"
 
-GuiDockingButton::GuiDockingButton(GuiContainer* owner, string id)
-: GuiButton(owner, id, "", [this]() { click(); })
+GuiDockingButton::GuiDockingButton(GuiContainer* owner, string id, P<PlayerSpaceship> targetSpaceship)
+: GuiButton(owner, id, "", [this]() { click(); }), target_spaceship(targetSpaceship)
 {
     setIcon("gui/icons/docking");
 }
 
 void GuiDockingButton::click()
 {
-    if (!my_spaceship)
+    if (!target_spaceship)
         return;
-    switch(my_spaceship->docking_state)
+    switch(target_spaceship->docking_state)
     {
     case DS_NotDocking:
-        my_spaceship->commandDock(findDockingTarget());
+        target_spaceship->commandDock(findDockingTarget());
         break;
     case DS_Docking:
-        my_spaceship->commandAbortDock();
+        target_spaceship->commandAbortDock();
         break;
     case DS_Docked:
-        my_spaceship->commandUndock();
+        target_spaceship->commandUndock();
         break;
     }
 }
 
 void GuiDockingButton::onUpdate()
 {
-    setVisible(my_spaceship && my_spaceship->getCanDock());
+    setVisible(target_spaceship && target_spaceship->getCanDock());
 }
 
 void GuiDockingButton::onDraw(sf::RenderTarget& window)
 {
-    if (my_spaceship)
+    if (target_spaceship)
     {
-        switch(my_spaceship->docking_state)
+        switch(target_spaceship->docking_state)
         {
         case DS_NotDocking:
             setText(tr("Request Dock"));
-            if (my_spaceship->canStartDocking() && findDockingTarget())
+            if (target_spaceship->canStartDocking() && findDockingTarget())
             {
                 enable();
             }else{
@@ -62,40 +62,40 @@ void GuiDockingButton::onDraw(sf::RenderTarget& window)
 
 void GuiDockingButton::onHotkey(const HotkeyResult& key)
 {
-    if (key.category == "HELMS" && my_spaceship)
+    if (key.category == "HELMS" && target_spaceship)
     {
         if (key.hotkey == "DOCK_ACTION")
         {
-            switch(my_spaceship->docking_state)
+            switch(target_spaceship->docking_state)
             {
             case DS_NotDocking:
-                my_spaceship->commandDock(findDockingTarget());
+                target_spaceship->commandDock(findDockingTarget());
                 break;
             case DS_Docking:
-                my_spaceship->commandAbortDock();
+                target_spaceship->commandAbortDock();
                 break;
             case DS_Docked:
-                my_spaceship->commandUndock();
+                target_spaceship->commandUndock();
                 break;
             }
         }
         else if (key.hotkey == "DOCK_REQUEST")
-            my_spaceship->commandDock(findDockingTarget());
+            target_spaceship->commandDock(findDockingTarget());
         else if (key.hotkey == "DOCK_ABORT")
-            my_spaceship->commandAbortDock();
+            target_spaceship->commandAbortDock();
         else if (key.hotkey == "UNDOCK")
-            my_spaceship->commandUndock();
+            target_spaceship->commandUndock();
     }
 }
 
 P<SpaceObject> GuiDockingButton::findDockingTarget()
 {
-    PVector<Collisionable> obj_list = CollisionManager::queryArea(my_spaceship->getPosition() - sf::Vector2f(1000, 1000), my_spaceship->getPosition() + sf::Vector2f(1000, 1000));
+    PVector<Collisionable> obj_list = CollisionManager::queryArea(target_spaceship->getPosition() - sf::Vector2f(1000, 1000), target_spaceship->getPosition() + sf::Vector2f(1000, 1000));
     P<SpaceObject> dock_object;
     foreach(Collisionable, obj, obj_list)
     {
         dock_object = obj;
-        if (dock_object && dock_object != my_spaceship && dock_object->canBeDockedBy(my_spaceship) && (dock_object->getPosition() - my_spaceship->getPosition()) < 1000.0f + dock_object->getRadius())
+        if (dock_object && dock_object != target_spaceship && dock_object->canBeDockedBy(target_spaceship) && (dock_object->getPosition() - target_spaceship->getPosition()) < 1000.0f + dock_object->getRadius())
             break;
         dock_object = NULL;
     }

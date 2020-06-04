@@ -7,7 +7,6 @@
 
 class GuiMissileTubeControls;
 class TargetsContainer;
-
 class GuiRadarView : public GuiElement
 {
 public:
@@ -59,6 +58,7 @@ private:
     bool auto_rotate_on_my_ship;
     bool auto_distance = false;
     float distance;
+    P<PlayerSpaceship> target_spaceship;
     bool long_range;
     bool show_ghost_dots;
     bool show_sectors;
@@ -75,8 +75,8 @@ private:
     func_t mouse_drag_func;
     func_t mouse_up_func;
 public:
-    GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets);
-    GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets);
+    GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets, P<PlayerSpaceship> targetSpaceship);
+    GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets, P<PlayerSpaceship> targetSpaceship);
 
     virtual void onDraw(sf::RenderTarget& window);
 
@@ -122,8 +122,11 @@ public:
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
+    void setTargetSpaceship(P<PlayerSpaceship> targetSpaceship){target_spaceship = targetSpaceship;}
+
 protected:
     virtual sf::Vector2f getCenterPosition();
+
 private:
     void updateGhostDots();
 
