@@ -18,6 +18,7 @@
 #include "gui/gui2_progressbar.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_selector.h"
+#include "gui/gui2_image.h"
 #include "screenComponents/powerDamageIndicator.h"
 
 #include "screenComponents/rotatingModelView.h"
@@ -36,7 +37,7 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
     GuiAutoLayout *rootLayout = new GuiAutoLayout(this, "ROOT_LAYOUT", GuiAutoLayout::LayoutHorizontalLeftToRight);
     rootLayout->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopLeft);
     
-    lateralPanel = new GuiAutoLayout(rootLayout, "TOP_PANEL", GuiAutoLayout::LayoutVerticalTopToBottom);
+    lateralPanel = new GuiAutoLayout(rootLayout, "LATERAL_PANEL", GuiAutoLayout::LayoutVerticalTopToBottom);
     lateralPanel->setSize(COLUMN_WIDTH, GuiElement::GuiSizeMax);
     lateralPanel->setPosition(0, 0, ATopLeft);
     lateralPanel->setMargins(20, 20, 20, 20);
@@ -50,7 +51,6 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
     docks = new GuiListbox(lateralPanel, "DOCKS_LIST", [this](int index, string value) {
         selectDock(index);
     });
-    //docks->setMargins(20, 20, 20, 20)
     docks->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     docks->setPosition(0, 0, ATopLeft);
 
@@ -113,20 +113,22 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
         ->setAlignment(ACenter)
         ->setPosition(0, 0, ABottomCenter)
         ->setSize(GuiElement::GuiSizeMax, 50);
+        
+    dockImage = new GuiImage(this, "ACTION_LAUNCH_ICON", "");
+    dockImage->setSize(400, 400)->setPosition(-50, -90, ACenter);
+    dockImage->setColor(sf::Color(128, 128, 128, 100));
 
     action_launch = new GuiAutoLayout(topPanel, "ACTION_MOVE", GuiAutoLayout::LayoutVerticalColumns);
     action_launch->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 50, ATopCenter);
 
     (new GuiLabel(action_launch, "SPACE", " ", 30));
-    (new GuiLabel(action_launch, "ACTION_LAUNCH_LABEL", "Launcher :", 30))->setAlignment(ACenterRight)->setMargins(20,20,20,20);
+    (new GuiLabel(action_launch, "ACTION_LAUNCH_LABEL", "Launch :", 30))->setAlignment(ACenterRight)->setMargins(20,20,20,20);
     action_launch_button = new GuiButton(action_launch, "LAUNCH_DRONE_BUTTON", "Launch", [this]() {
         if (my_spaceship)
             if (my_spaceship->getSystemEffectiveness(SYS_Docks) > 0)
             {
                 Dock &dockData = my_spaceship->docks[index];
                 P<Cargo> cargo = dockData.getCargo();
-
-                my_spaceship->addToShipLog("Lancement du drone " + cargo->getCallSign(),colorConfig.log_generic);
                 my_spaceship->commandLaunchCargo(index);
             }
     });
@@ -144,28 +146,28 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
 
     energy_slider = new GuiSlider(energyControl, "ENERGY_SLIDER", 0.0, 10.0, 0.0, [this](float value) {
         if (my_spaceship)
-        {
             my_spaceship->commandSetDockEnergyRequest(index, value);
-            my_spaceship->addToShipLog("Transfert d'energie requis",colorConfig.log_generic);
-        }
     });
     energy_slider->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiPowerDamageIndicator(energy_slider, "DOCKS_DPI", SYS_Docks, ABottomCenter, my_spaceship))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     energy_bar = new GuiProgressbar(energy_slider, "ENERGY_BAR", 0.0, 10.0, 0.0);
-    energy_bar->setColor(sf::Color(192, 192, 32, 128))->setText("Energie")->setDrawBackground(false)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(10, 0, 10, 0);
+    energy_bar->setColor(sf::Color(192, 192, 32, 128))->setText("Energy")->setDrawBackground(false)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(10, 0, 10, 0);
+
+    energy_main = new GuiKeyValueDisplay(energyControl, "ENERGY_MAIN", 0.45, "Energy Main", "");
+    energy_main->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 50, ATopRight);
+    energy_cargo = new GuiKeyValueDisplay(energyControl, "ENERGY_CARGO", 0.45, "Energy Cargo", "");
+    energy_cargo->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 100, ATopRight);
 
     action_weapons = new GuiAutoLayout(topPanel, "ACTION_WEAPONS", GuiAutoLayout::LayoutVerticalColumns);
-//    action_weapons = new GuiAutoLayout(topPanel, "ACTION_WEAPONS", GuiAutoLayout::LayoutVerticalTopToBottom);
     action_weapons->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 50, ATopCenter);
-    (new GuiLabel(action_weapons, "ACTION_WEAPONS_LABEL", "Manage missiles :", 30))->setAlignment(ACenterRight)->setMargins(10, 10, 10, 10);
 
     table_weapons = new GuiAutoLayout(action_weapons, "TABLE_WEAPONS", GuiAutoLayout::LayoutVerticalTopToBottom);
     table_weapons->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     weapons_layout_label = new GuiAutoLayout(table_weapons, "WEAPONS_LAYOUT_LABEL", GuiAutoLayout::LayoutVerticalColumns);
     weapons_layout_label -> setSize(GuiElement::GuiSizeMax, 40);
-    (new GuiLabel(weapons_layout_label, "", "Missile", 20));
+    (new GuiLabel(weapons_layout_label, "", "Missiles", 20));
     (new GuiLabel(weapons_layout_label, "", "Main", 20));
     (new GuiLabel(weapons_layout_label, "", "Cargo", 20));
     (new GuiLabel(weapons_layout_label, "", " ", 20));
@@ -173,7 +175,6 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
 
     for(int n=0; n<MW_Count; n++)
     {
-//        weapons_layout[n] = new GuiElement(table_weapons, "WEAPONS_LAYOUT");
         weapons_layout[n] = new GuiAutoLayout(table_weapons, "WEAPONS_LAYOUT", GuiAutoLayout::LayoutVerticalColumns);
         weapons_layout[n]->setSize(GuiElement::GuiSizeMax, 40);
 
@@ -229,6 +230,15 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
         (new GuiPowerDamageIndicator(weapons_stock_p1[n], "DOCKS_DPI", SYS_Docks, ACenter, my_spaceship))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         (new GuiPowerDamageIndicator(weapons_stock_m1[n], "DOCKS_DPI", SYS_Docks, ACenter, my_spaceship))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     }
+    
+    action_repair = new GuiAutoLayout(topPanel, "ACTION_REPAIR", GuiAutoLayout::LayoutVerticalColumns);
+    action_repair->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 50, ATopCenter);
+    GuiElement *repairControl = new GuiElement(action_repair, "REPAIR_CONTROL");
+    repairControl->setSize(COLUMN_WIDTH, 50);
+    repair_bar = new GuiProgressbar(repairControl, "REPAIR_BAR", 0.0, 1.0, 0.0);
+    repair_bar->setPosition(0, 50, ACenter)->setSize(COLUMN_WIDTH, 50);
+    repair_label = new GuiLabel(repair_bar, "REPAIR_LABEL", "", 30);
+    repair_label->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     (new GuiLabel(bottomPanel, "SPACE", " ", 30))->setSize(GuiElement::GuiSizeMax, 50);
 
@@ -242,15 +252,13 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
     dronePanel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 50, ATopRight);
 
     dronePanel_col1 = new GuiAutoLayout(dronePanel, "DRONE_COL1", GuiAutoLayout::LayoutVerticalTopToBottom);
-//    dronePanel_col1->setSize(COLUMN_WIDTH / 1.75, 1000)->setPosition(0, 100, ATopLeft);
-    dronePanel_col1->setSize(COLUMN_WIDTH / 2, 1000)->setPosition(0, 100, ATopLeft)->setMargins(10, 10, 10, 10);
+    dronePanel_col1->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 100, ATopLeft)->setMargins(10, 10, 10, 10);
 
     dronePanel_col2 = new GuiAutoLayout(dronePanel, "DRONE_COL2", GuiAutoLayout::LayoutVerticalTopToBottom);
-//    dronePanel_col2->setSize(COLUMN_WIDTH / 1.75, 1000)->setPosition(0, 100, ATopCenter);
-    dronePanel_col2->setSize(COLUMN_WIDTH / 2, 1000)->setPosition(0, 100, ATopCenter)->setMargins(10, 10, 10, 10);
+    dronePanel_col2->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 100, ATopCenter)->setMargins(10, 10, 10, 10);
 
-    dronePanel_col3 = new GuiElement(dronePanel, "DRONE_COL3");
-    dronePanel_col3->setSize(GuiElement::GuiSizeMax, 1000)->setPosition(0, 100, ATopRight)->setMargins(10, 10, 10, 10);
+    dronePanel_col3 = new GuiAutoLayout(dronePanel, "DRONE_COL3", GuiAutoLayout::LayoutVerticalTopToBottom);
+    dronePanel_col3->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopRight)->setMargins(10, 10, 10, 10);
 
     shipCargoInfo = new GuiAutoLayout(dronePanel_col1, "CARGO_INFO", GuiAutoLayout::LayoutVerticalTopToBottom);
     shipCargoInfo->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -259,7 +267,7 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
     cargoInfo->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     model = new GuiRotatingModelView(dronePanel_col3, "MODEL_VIEW", nullptr);
-    model->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(0, -100, 0, 0);
+    model->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     overlay = new GuiOverlay(this, "OVERLAY", sf::Color(0, 0, 0, 0));
     overlay->setBlocking(true)->setPosition(COLUMN_WIDTH, 100, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -275,10 +283,8 @@ DockMasterScreen::DockMasterScreen(GuiContainer *owner)
     cancel_move_button->setPosition(0, 100, ACenter)->setSize(COLUMN_WIDTH, 50);
 
     selectDock(0);
-    model->moveToBack();
-    background_crosses->moveToBack();
-
-    //new ShipsLog(this,"docks");
+    //model->moveToBack();
+    //background_crosses->moveToBack();
 }
 
 void DockMasterScreen::selectDock(int index)
@@ -289,9 +295,11 @@ void DockMasterScreen::selectDock(int index)
     docks->setSelectionIndex(index);
     auto &dockData = my_spaceship->docks[index];
     action_move->setVisible(true);
+    dockImage->setTextureName(getDockTypeIcon(dockData.dock_type));
     action_launch->setVisible(dockData.dock_type == Dock_Launcher);
     action_energy->setVisible(dockData.dock_type == Dock_Energy);
     action_weapons->setVisible(dockData.dock_type == Dock_Weapons);
+    action_repair->setVisible(dockData.dock_type == Dock_Repair);
 }
 
 void DockMasterScreen::onDraw(sf::RenderTarget &window)
@@ -305,28 +313,43 @@ void DockMasterScreen::onDraw(sf::RenderTarget &window)
             Dock &dockData = my_spaceship->docks[n];
             if (dockData.dock_type != Dock_Disabled)
             {
-                string state = " (" + getDockStateName(dockData.state) + ")";
-                //string dockName = "d" + std::to_string(n + 1) + "-" + getDockTypeName(dockData.dock_type)[0];
-                string dockName = getDockTypeName(dockData.dock_type) + " - " + std::to_string(n + 1);
-                docks->setEntryName(n, dockName + state);
+                string dockType = getDockTypeName(dockData.dock_type);
+                string dockNumber = std::to_string(n + 1);
+                string state = getDockStateName(dockData.state);
+                docks->setEntryName(n, dockType + " - " + dockNumber + " (" + state + ")");
                 if (n != index)
-                    action_move_selector->addEntry(dockName, string(n));
+                    action_move_selector->addEntry(dockType + " - " + dockNumber, string(n));
             }
         }
 
         Dock &dockData = my_spaceship->docks[index];
         P<Cargo> cargo = dockData.getCargo();
         action_move_selector->setSelectionIndex(action_move_selector->indexByValue(string(dockData.move_target_index)));
+        
+        action_move_button->setEnable(dockData.state == Docked);
+        action_move_selector->setEnable(dockData.state == Docked);
+        action_launch_button->setEnable(dockData.state == Docked);
+        energy_slider->setEnable(dockData.state == Docked);
+        repair_bar->setVisible(dockData.state == Docked);
+        
+        for(int n = 0; n < MW_Count; n++)
+        {
+            weapons_stock_m1[n]->setEnable(dockData.state == Docked);
+            weapons_stock_p1[n]->setEnable(dockData.state == Docked);
+        }
 
         switch (dockData.state)
         {
         case Empty:
             model->setModel(nullptr);
             overlay->setVisible(true);
-            overlay_label->setText("Empty");
+            overlay_label->setText("");
             distance_bar->setVisible(false);
             cancel_move_button->setVisible(false);
-            mainPanel->setVisible(false);
+            mainPanel->setVisible(true);
+            topPanel->setVisible(true);
+            bottomPanel->setVisible(false);
+            dockImage->setVisible(true);
             break;
         case MovingIn:
             displayDroneDetails(dockData);
@@ -336,12 +359,18 @@ void DockMasterScreen::onDraw(sf::RenderTarget &window)
             distance_bar->setValue(dockData.current_distance);
             cancel_move_button->setVisible(true);
             mainPanel->setVisible(false);
+            topPanel->setVisible(true);
+            bottomPanel->setVisible(false);
+            dockImage->setVisible(false);
             break;
         case Docked:
             displayDroneDetails(dockData);
             cancel_move_button->setVisible(false);
             overlay->setVisible(false);
             mainPanel->setVisible(true);
+            topPanel->setVisible(true);
+            bottomPanel->setVisible(true);
+            dockImage->setVisible(true);
             break;
         case MovingOut:
             displayDroneDetails(dockData);
@@ -351,6 +380,9 @@ void DockMasterScreen::onDraw(sf::RenderTarget &window)
             distance_bar->setValue(dockData.current_distance);
             cancel_move_button->setVisible(true);
             mainPanel->setVisible(false);
+            topPanel->setVisible(true);
+            bottomPanel->setVisible(false);
+            dockImage->setVisible(false);
             break;
         }
     }
@@ -393,6 +425,9 @@ void DockMasterScreen::displayDroneDetails(Dock &dockData)
             shipCargoInfoItems[cnt]->show();
         }
         shipCargoInfoItems[cnt]->setIcon("")->setKey(std::get<1>(e))->setValue(std::get<2>(e));
+        // Check if it is a Drone or a Ship
+        if (std::get<1>(e) == "type")
+            droneTitle->setText(std::get<2>(e) + " : " + cargo->getCallSign());
         cnt++;
     }
     while(cnt < shipCargoInfoItems.size())
@@ -400,11 +435,22 @@ void DockMasterScreen::displayDroneDetails(Dock &dockData)
         shipCargoInfoItems[cnt]->hide();
         cnt++;
     }
-
+    
     energy_bar->setValue(cargo->getEnergy());
     energy_bar->setRange(cargo->getMinEnergy(), cargo->getMaxEnergy());
     energy_slider->setRange(cargo->getMinEnergy(), cargo->getMaxEnergy());
     energy_slider->setValue(dockData.energy_request);
+    energy_cargo->setValue(string(int(cargo->getEnergy())) + " / " + string(int(cargo->getMaxEnergy())));
+    if (my_spaceship)
+        energy_main->setValue(string(int(my_spaceship->energy_level)) + " / " + string(int(my_spaceship->max_energy_level))); 
+    
+    float health = cargo->getHealth() / cargo->getMaxHealth();
+    repair_bar->setValue(health);
+    if (health == 1.0)
+        repair_label->setText("Repair finished");
+    else
+        repair_label->setText("Repairing...");
+        
     for(int n = 0; n < MW_Count; n++)
     {
         weapons_stock_cargo[n]->setText(string(cargo->getWeaponStorage(EMissileWeapons(n))) + " / " + string(cargo->getWeaponStorageMax(EMissileWeapons(n))));

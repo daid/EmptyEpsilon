@@ -17,6 +17,7 @@ class GuiListbox;
 class GuiRotatingModelView;
 class GuiOverlay;
 class GuiElement;
+class GuiImage;
 
 class Dock;
 class DockMasterScreen : public GuiOverlay
@@ -33,10 +34,12 @@ class DockMasterScreen : public GuiOverlay
     GuiAutoLayout *bottomPanel;
     GuiAutoLayout *dronePanel;
 
+    GuiImage* dockImage;
     GuiAutoLayout* action_move;
     GuiAutoLayout* action_launch;
     GuiAutoLayout* action_energy;
     GuiAutoLayout* action_weapons;
+    GuiAutoLayout* action_repair;
 
     GuiAutoLayout* cargoInfo;
     GuiAutoLayout* shipCargoInfo;
@@ -47,6 +50,8 @@ class DockMasterScreen : public GuiOverlay
     GuiElement* energyControl;
     GuiProgressbar *energy_bar;
     GuiSlider *energy_slider;
+    GuiKeyValueDisplay *energy_main;
+    GuiKeyValueDisplay *energy_cargo;
 
     GuiAutoLayout *table_weapons;
     GuiAutoLayout *weapons_layout_label;
@@ -57,6 +62,9 @@ class DockMasterScreen : public GuiOverlay
     GuiLabel* weapons_stock_cargo[MW_Count];
     GuiButton* weapons_stock_p1[MW_Count];
     GuiButton* weapons_stock_m1[MW_Count];
+
+    GuiProgressbar *repair_bar;
+    GuiLabel *repair_label;
 
     GuiAutoLayout* dronePanel_col1;
     GuiAutoLayout* dronePanel_col2;

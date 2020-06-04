@@ -3,6 +3,7 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/beamEffect.h"
 #include "spaceObjects/spaceObject.h"
+#include <math.h>
 
 TractorBeam::TractorBeam() : max_area(0), drag_per_second(0), parent(nullptr), mode(TBM_Off), arc(0), direction(0), range(0) {}
 
@@ -16,6 +17,7 @@ void TractorBeam::setParent(SpaceShip* parent)
     parent->registerMemberReplication(&arc);
     parent->registerMemberReplication(&direction);
     parent->registerMemberReplication(&range);
+    parent->registerMemberReplication(&mode);
 }
 
 void TractorBeam::setMode(ETractorBeamMode mode)
@@ -31,6 +33,11 @@ ETractorBeamMode TractorBeam::getMode()
 void TractorBeam::setMaxArea(float max_area)
 {
     this->max_area = max_area;
+}
+
+void TractorBeam::setMaxRange(float max_range)
+{
+    this->max_area = (max_range * max_range * M_PI * 6.0) / 360;
 }
 
 float TractorBeam::getMaxArea()

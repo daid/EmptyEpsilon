@@ -18,6 +18,7 @@ private:
     GuiSlider* direction_slider;
     GuiSlider* range_slider;
     GuiRadarView* radar;
+    GuiAutoLayout* globalPanel;
     GuiAutoLayout* lateralPanel;
 public:
     GuiTractorBeamControl(GuiContainer* owner, string id);

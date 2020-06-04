@@ -197,16 +197,11 @@ string getDockStateName(EDockState state)
 {
     switch (state)
     {
-    case Empty:
-        return "Empty";
-    case Docked:
-        return "Docked";
-    case MovingIn:
-        return "Moving in";
-    case MovingOut:
-        return "Moving out";
-    default:
-        return "Unknown";
+    case Empty: return "Empty";
+    case Docked: return "Docked";
+    case MovingIn: return "Moving in";
+    case MovingOut: return "Moving out";
+    default: return "Unknown";
     }
 }
 
@@ -214,19 +209,26 @@ string getDockTypeName(EDockType dockType)
 {
     switch (dockType)
     {
-    case Dock_Launcher:
-        return "Launcher";
-    case Dock_Energy:
-        return "Energy";
-    case Dock_Weapons:
-        return "Missiles";
-    case Dock_Thermic:
-        return "Thermic";
-    case Dock_Repair:
-        return "Repair";
-    case Dock_Stock:
-        return "Stock";
-    default:
-        return "Unknown";
+    case Dock_Launcher: return "Launcher";
+    case Dock_Energy: return "Energy";
+    case Dock_Weapons: return "Missiles";
+    case Dock_Thermic: return "Thermic";
+    case Dock_Repair: return "Repair";
+    case Dock_Stock: return "Stock";
+    default: return "Unknown";
+    }
+}
+
+string getDockTypeIcon(EDockType dockType)
+{
+    switch (dockType)
+    {
+    case Dock_Launcher: return "gui/icons/docking";
+    case Dock_Energy: return "gui/icons/energy";
+    case Dock_Weapons: return "gui/icons/system_missile";
+    case Dock_Thermic: return "gui/icons/coolant";
+    case Dock_Repair: return "gui/icons/status_damaged";
+    case Dock_Stock: return "gui/icons/hull";
+    default: return "Unknown";
     }
 }

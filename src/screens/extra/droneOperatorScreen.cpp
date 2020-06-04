@@ -98,7 +98,7 @@ void DroneOperatorScreen::onDraw(sf::RenderTarget &window)
         {
             P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
             if (isConnectable(ship)) {
-                options.push_back(ship->getTypeName() + " " + ship->getCallSign() + "(" + string(int(getConnectionQuality(ship) * 100)) + "%)");
+                options.push_back(ship->getTypeName() + " " + ship->getCallSign() + " (" + string(int(getConnectionQuality(ship) * 100)) + "%)");
                 values.push_back(ship->getMultiplayerId());
             }
         }
@@ -125,7 +125,7 @@ void DroneOperatorScreen::onDraw(sf::RenderTarget &window)
             single_pilot_view->show();
             disconnect_button->setText("Disconnect " + selected_drone->callsign);
             disconnect_button->show();
-            connection_label->setText(string(int(getConnectionQuality(selected_drone) * 100)) + "%");
+            connection_label->setText("Connection: " + string(int(getConnectionQuality(selected_drone) * 100)) + "%");
             connection_label->show();
             tractor_beam_control->hide();
             break;

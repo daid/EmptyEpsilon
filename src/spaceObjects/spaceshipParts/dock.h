@@ -20,6 +20,7 @@ enum EDockType
     Dock_Disabled
 };
 string getDockTypeName(EDockType dockType);
+string getDockTypeIcon(EDockType dockType);
 
 class SpaceShip;
 

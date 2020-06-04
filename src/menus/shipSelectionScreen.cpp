@@ -38,14 +38,14 @@ ShipSelectionScreen::ShipSelectionScreen()
 
     // List the station types and stations in the right column.
     GuiAutoLayout* stations_layout = new GuiAutoLayout(right_container, "CREW_POSITION_BUTTON_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    stations_layout->setPosition(0, 50, ATopCenter)->setSize(400, 600);
+    stations_layout->setPosition(0, 50, ATopCenter)->setSize(400, 800);
     (new GuiLabel(stations_layout, "CREW_POSITION_SELECT_LABEL", "Select your station", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
 
     // Crew type selector
     crew_type_selector = new GuiSelector(stations_layout, "CREW_TYPE_SELECTION", [this](int index, string value) {
         updateCrewTypeOptions();
     });
-    crew_type_selector->setOptions({"6/5 player crew", "4/3 player crew", "1 player crew/extras", "Alternative options"})->setSize(GuiElement::GuiSizeMax, 50);
+    crew_type_selector->setOptions({"6/5 player crew", "4/3 player crew", "extra controls", "extra screens", "Alternative options"})->setSize(GuiElement::GuiSizeMax, 50);
 
     // Main screen button
     main_screen_button = new GuiToggleButton(stations_layout, "MAIN_SCREEN_BUTTON", "Main screen", [this](bool value) {
@@ -468,7 +468,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
     spectator_button->hide();
     main_screen_button->setVisible(canDoMainScreen());
     main_screen_button->setValue(my_player_info->main_screen);
-    main_screen_controls_button->setVisible(crew_type_selector->getSelectionIndex() != 3);
+    main_screen_controls_button->setVisible(crew_type_selector->getSelectionIndex() < 2);
     game_master_button->setValue(false);
     window_button->setValue(false);
     topdown_button->setValue(false);
@@ -501,15 +501,18 @@ void ShipSelectionScreen::updateCrewTypeOptions()
         crew_position_button[databaseView]->show();
         crew_position_button[altRelay]->show();
         crew_position_button[commsOnly]->show();
-        crew_position_button[shipLog]->show();
+        crew_position_button[tractorView]->show();
         crew_position_button[dronePilot]->show();
         crew_position_button[dockMaster]->show();
         break;
     case 3:
+        crew_position_button[shipLog]->show();
+        break;
+    case 4:
         main_screen_button->hide();
-        game_master_button->setVisible(bool(game_server));
+        game_master_button->setVisible(bool(game_server));  
         window_button->setVisible(canDoMainScreen());
-        window_angle->setVisible(canDoMainScreen());
+        window_angle->setVisible(canDoMainScreen());      
         topdown_button->setVisible(canDoMainScreen());
         cinematic_view_button->setVisible(canDoMainScreen());
         spectator_button->setVisible(true);

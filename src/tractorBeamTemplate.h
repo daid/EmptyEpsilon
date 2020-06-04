@@ -12,6 +12,7 @@ public:
 
     float getMaxArea();
     void setMaxArea(float max_area);
+    void setMaxRange(float max_range);
 
     void setDragPerSecond(float drag_per_second);
     float getDragPerSecond();

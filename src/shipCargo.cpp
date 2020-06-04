@@ -30,7 +30,7 @@ ShipCargo::ShipCargo(P<ShipTemplate> ship_template) : ShipCargo()
     }
     for(int n=0; n < MW_Count; n++)
     {
-        setWeaponStorage(EMissileWeapons(n), 0);
+        setWeaponStorage(EMissileWeapons(n), ship_template->weapon_storage[n]);
         setWeaponStorageMax(EMissileWeapons(n), ship_template->weapon_storage[n]);
     }
 }
@@ -128,11 +128,10 @@ ShipCargo::Entries ShipCargo::getEntries()
     if (ship_template)
     {
         string type = ship_template->getType() != ShipTemplate::TemplateType::Drone ? "Ship" : "Drone";
-        result.push_back(std::make_tuple("", "Type", type));
-        result.push_back(std::make_tuple("gui/icons/hull", "Hull", string(int(100 * hull_strength / ship_template->hull)) + "%"));
+        result.push_back(std::make_tuple("", "type", type));
+        result.push_back(std::make_tuple("gui/icons/hull", "hull", string(int(100 * hull_strength / ship_template->hull)) + "%"));
     }
-    //result.push_back(std::make_tuple("", "callsign", callsign));
-    result.push_back(std::make_tuple("", "type", template_name));
+    result.push_back(std::make_tuple("", "model", template_name));
 
     if (has_reactor)
         result.push_back(std::make_tuple("", "reactor ?", "Yes"));

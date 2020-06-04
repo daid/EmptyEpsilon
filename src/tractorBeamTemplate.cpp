@@ -1,4 +1,5 @@
 #include "tractorBeamTemplate.h"
+#include <math.h>
 
 TractorBeamTemplate::TractorBeamTemplate(): max_area(0), drag_per_second(0) {}
 
@@ -10,6 +11,11 @@ float TractorBeamTemplate::getMaxArea()
 void TractorBeamTemplate::setMaxArea(float max_area)
 {
     this->max_area = max_area;
+}
+
+void TractorBeamTemplate::setMaxRange(float max_range)
+{
+    this->max_area = (max_range * max_range * M_PI * 6.0) / 360;
 }
 
 float TractorBeamTemplate::getDragPerSecond()

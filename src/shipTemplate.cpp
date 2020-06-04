@@ -137,6 +137,8 @@ ShipTemplate::ShipTemplate()
     energy_dock_count = 0;
     weapons_dock_count = 0;
     thermic_dock_count = 0;
+    repair_dock_count = 0;
+    stock_dock_count = 0;
     isShipCargo = false;
 }
 
@@ -206,6 +208,8 @@ void ShipTemplate::setType(TemplateType type)
     }
     if (type == Station)
         repair_docked = true;
+    if (type == Drone)
+        isShipCargo = true;
     this->type = type;
 }
 
@@ -251,9 +255,9 @@ void ShipTemplate::setBeamWeapon(int index, float arc, float direction, float ra
     beams[index].setDamage(damage);
 }
 
-void ShipTemplate::setTractorBeam(float max_area, float drag_per_second)
+void ShipTemplate::setTractorBeam(float max_range, float drag_per_second)
 {
-    tractor_beam.setMaxArea(max_area);
+    tractor_beam.setMaxRange(max_range);
     tractor_beam.setDragPerSecond(drag_per_second);
 }
 
@@ -476,12 +480,13 @@ void ShipTemplate::addDrones(string template_name, int count)
     drones.push_back(DroneTemplate(template_name, count));
 }
 
-void ShipTemplate::setDocks(int launchers, int energy, int weapons, int thermic, int repair){
+void ShipTemplate::setDocks(int launchers, int energy, int weapons, int thermic, int repair, int stock){
     launcher_dock_count = launchers;
     energy_dock_count = energy;
     weapons_dock_count = weapons;
     thermic_dock_count = thermic;
     repair_dock_count = repair;
+    stock_dock_count = stock;
 }
 
 void ShipTemplate::setRadarTrace(string trace)
@@ -563,6 +568,7 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->weapons_dock_count = weapons_dock_count;
     result->thermic_dock_count = thermic_dock_count;
     result->repair_dock_count = repair_dock_count;
+    result->stock_dock_count = stock_dock_count;
     result->tractor_beam = tractor_beam;
     result->isShipCargo = isShipCargo;
     return result;

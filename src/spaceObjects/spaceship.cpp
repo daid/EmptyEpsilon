@@ -51,6 +51,8 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getRotationMaxSpeed);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRotationMaxSpeed);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setCombatManeuver);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasReactor);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setReactor);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDriveRange);
@@ -275,6 +277,7 @@ void SpaceShip::applyTemplateValues()
     turn_speed = ship_template->turn_speed;
     combat_maneuver_boost_speed = ship_template->combat_maneuver_boost_speed;
     combat_maneuver_strafe_speed = ship_template->combat_maneuver_strafe_speed;
+    has_reactor = ship_template->has_reactor;
     has_warp_drive = ship_template->warp_speed > 0.0;
     warp_speed_per_warp_level = ship_template->warp_speed;
     has_jump_drive = ship_template->has_jump_drive;
@@ -311,7 +314,9 @@ void SpaceShip::applyTemplateValues()
         docks[droneIdx].setDockType(Dock_Thermic);
     for (int i = 0; droneIdx < max_docks_count && i < ship_template->repair_dock_count; i++, droneIdx++)
         docks[droneIdx].setDockType(Dock_Repair);
-    
+    for (int i = 0; droneIdx < max_docks_count && i < ship_template->stock_dock_count; i++, droneIdx++)
+        docks[droneIdx].setDockType(Dock_Stock);
+
     int maxActiveDockIndex = droneIdx;
     for (; droneIdx < max_docks_count; droneIdx++){
         docks[droneIdx].setDockType(Dock_Disabled);
@@ -867,7 +872,7 @@ void SpaceShip::executeJump(float distance)
 
 bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)
 {
-    // Hacking technique
+    // Hacking Thomas
     return true;
     if (isEnemy(obj) || !ship_template)
         return false;
@@ -1199,7 +1204,7 @@ bool SpaceShip::hasSystem(ESystem system)
     case SYS_RearShield:
         return shield_count > 1;
     case SYS_Reactor:
-        return ship_template->has_reactor;
+        return has_reactor;
     case SYS_BeamWeapons:
         return true;
     case SYS_Maneuver:
@@ -1501,7 +1506,6 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
 }
 
 bool SpaceShip::tryDockDrone(SpaceShip* other){
-    //if(other->ship_template->getType() == ShipTemplate::TemplateType::Drone){
     if(other->ship_template->isShipCargo){
         Dock* dock = Dock::findOpenForDocking(docks, max_docks_count);
         if (dock){

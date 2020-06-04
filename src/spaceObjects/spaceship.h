@@ -339,6 +339,8 @@ public:
     void setRotationMaxSpeed(float speed) { turn_speed = speed; }
     void setCombatManeuver(float boost, float strafe) { combat_maneuver_boost_speed = boost; combat_maneuver_strafe_speed = strafe; }
 
+    void setReactor(bool has_reactor_drive){ has_reactor = has_reactor_drive;}
+    bool hasReactor() { return has_reactor; }
     bool hasJumpDrive() { return has_jump_drive; }
     void setJumpDrive(bool has_jump) { has_jump_drive = has_jump; }
     void setJumpDriveRange(float min, float max) { jump_drive_min_distance = min; jump_drive_max_distance = max; }

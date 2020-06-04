@@ -133,6 +133,7 @@ public:
     int weapons_dock_count;
     int thermic_dock_count;
     int repair_dock_count;
+    int stock_dock_count;
     bool isShipCargo;
     string radar_trace;
     float long_range_radar_range = 30000.0f;
@@ -170,7 +171,7 @@ public:
     void setBeam(int index, float arc, float direction, float range, float cycle_time, float damage);
     void setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage);
     void setBeamWeaponTurret(int index, float arc, float direction, float rotation_rate);
-    void setTractorBeam(float max_area, float drag_per_second);
+    void setTractorBeam(float max_range, float drag_per_second);
     
     /**
      * Convenience function to set the texture of a beam by index.
@@ -200,7 +201,7 @@ public:
     void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system);
     void addDoor(sf::Vector2i position, bool horizontal);
     void addDrones(string template_name, int count);
-    void setDocks(int launchers, int energy, int weapons, int thermic, int repair);
+    void setDocks(int launchers, int energy, int weapons, int thermic, int repair, int stock);
     void setRadarTrace(string trace);
     void setLongRangeRadarRange(float range);
     void setShortRangeRadarRange(float range);

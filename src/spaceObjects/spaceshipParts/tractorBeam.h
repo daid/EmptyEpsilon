@@ -58,6 +58,8 @@ public:
     float getDragSpeed();
     float getMaxArc(float range);
     float getMaxRange(float arc);
+    void setMaxRange(float max_range);
+    
     void update(float delta);
 };
 string getTractorBeamModeName(ETractorBeamMode mode);

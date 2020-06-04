@@ -52,6 +52,7 @@ private:
     P<SpaceShip> target;
 
     GuiTextEntry* type_name;
+    GuiToggleButton* reactor_toggle;
     GuiToggleButton* warp_toggle;
     GuiToggleButton* jump_toggle;
     GuiSlider* impulse_speed_slider;
@@ -136,6 +137,7 @@ private:
     P<SpaceShip> target;
 
     int beam_index;
+    GuiSlider* tractor_range_slider;
     GuiSlider* arc_slider;
     GuiSlider* direction_slider;
     GuiSlider* range_slider;
