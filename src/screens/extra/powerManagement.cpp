@@ -24,7 +24,7 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
     layout->setPosition(20, 60, ATopLeft)->setSize(GuiElement::GuiSizeMax, 400);
     for(int n=0; n<SYS_COUNT; n++)
     {
-        if (n == 4)
+        if (n == 5)
         {
             //Start the 2nd row after 4 elements.
             layout = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
@@ -62,7 +62,7 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
         systems[n].heat_bar->setPosition(210, 60, ATopLeft)->setSize(50, 320);
     }
 
-    (new GuiCustomShipFunctions(this, powerManagement, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, powerManagement, "", my_spaceship))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 
     previous_energy_level = 0.0;
     average_energy_delta = 0.0;

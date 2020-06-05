@@ -58,7 +58,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
             }
         }
     );
-    (new GuiOpenCommsButton(science->radar_view, "OPEN_COMMS_BUTTON", tr("Open Comms"), &science->targets))->setPosition(-270, -20, ABottomRight)->setSize(200, 50);
+    (new GuiOpenCommsButton(science->radar_view, "OPEN_COMMS_BUTTON", tr("Open Comms"), &science->targets, my_spaceship))->setPosition(-270, -20, ABottomRight)->setSize(200, 50);
 
     // Manage waypoints.
     place_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_PLACE_BUTTON", tr("Place Waypoint"), [this, science]() {

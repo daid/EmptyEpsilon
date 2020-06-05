@@ -1,4 +1,6 @@
 #include "shipTemplateBasedObject.h"
+#include "spaceship.h"
+#include "gameGlobalInfo.h"
 
 #include "scriptInterface.h"
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
@@ -119,6 +121,7 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
     
     can_be_destroyed = true;
     registerMemberReplication(&can_be_destroyed);
+
 }
 
 void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, float sprite_scale, bool show_levels)
@@ -408,3 +411,4 @@ string ShipTemplateBasedObject::getShieldDataString()
     }
     return data;
 }
+

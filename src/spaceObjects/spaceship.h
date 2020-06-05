@@ -5,7 +5,9 @@
 #include "shipTemplateBasedObject.h"
 #include "spaceStation.h"
 #include "spaceshipParts/beamWeapon.h"
+#include "spaceshipParts/tractorBeam.h"
 #include "spaceshipParts/weaponTube.h"
+#include "spaceshipParts/dock.h"
 
 enum EMainScreenSetting
 {
@@ -61,6 +63,7 @@ public:
     constexpr static float warp_charge_time = 4.0f;
     constexpr static float warp_decharge_time = 2.0f;
     constexpr static float jump_drive_charge_time = 90.0;   /*<Total charge time for the jump drive after a max range jump */
+    constexpr static float dock_move_time = 15.0f; // It takes this amount of time to move cargo between two docks
     constexpr static float jump_drive_energy_per_km_charge = 4.0f;
     constexpr static float jump_drive_heat_per_jump = 0.35;
     constexpr static float heat_per_combat_maneuver_boost = 0.2;
@@ -68,8 +71,11 @@ public:
     constexpr static float heat_per_warp = 0.02;
     constexpr static float unhack_time = 180.0f; //It takes this amount of time to go from 100% hacked to 0% hacked for systems.
 
+
     float energy_level;
     float max_energy_level;
+    Dock docks[max_docks_count];
+
     ShipSystem systems[SYS_COUNT];
     /*!
      *[input] Ship will try to aim to this rotation. (degrees)
@@ -105,6 +111,11 @@ public:
      * [config] Impulse engine acceleration, in (m/s)/s
      */
     float impulse_acceleration;
+
+    /*!
+     * [config] True if we have a reactor (for energy).
+     */
+    bool has_reactor;
 
     /*!
      * [config] True if we have a warpdrive.
@@ -161,7 +172,7 @@ public:
     int beam_frequency;
     ESystem beam_system_target;
     BeamWeapon beam_weapons[max_beam_weapons];
-
+    TractorBeam tractor_beam;
     /**
      * Frequency setting of the shields.
      */
@@ -194,6 +205,7 @@ public:
      */
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
+    void drawBeamOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, sf::Color color, sf::Vector2f beam_position, float beam_direction, float beam_arc, float beam_range);
 
     virtual void update(float delta) override;
     virtual float getShieldRechargeRate(int shield_index) override;
@@ -302,6 +314,7 @@ public:
     virtual std::unordered_map<string, string> getGMInfo() override;
 
     bool isDocked(P<SpaceObject> target) { return docking_state == DS_Docked && docking_target == target; }
+    P<SpaceObject> getDockedWith() { if (docking_state == DS_Docked) return docking_target; return NULL; }
     bool canStartDocking() { return current_warp <= 0.0 && (!has_jump_drive || jump_delay <= 0.0); }
     int getWeaponStorage(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage[weapon]; }
     int getWeaponStorageMax(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage_max[weapon]; }
@@ -329,6 +342,8 @@ public:
     void setAcceleration(float acceleration) { impulse_acceleration = acceleration; }
     void setCombatManeuver(float boost, float strafe) { combat_maneuver_boost_speed = boost; combat_maneuver_strafe_speed = strafe; }
 
+    void setReactor(bool has_reactor_drive){ has_reactor = has_reactor_drive;}
+    bool hasReactor() { return has_reactor; }
     bool hasJumpDrive() { return has_jump_drive; }
     void setJumpDrive(bool has_jump) { has_jump_drive = has_jump; }
     void setJumpDriveRange(float min, float max) { jump_drive_min_distance = min; jump_drive_max_distance = max; }
@@ -420,7 +435,15 @@ public:
 
     void setBeamWeaponEnergyPerFire(int index, float energy) { if (index < 0 || index >= max_beam_weapons) return; return beam_weapons[index].setEnergyPerFire(energy); }
     void setBeamWeaponHeatPerFire(int index, float heat) { if (index < 0 || index >= max_beam_weapons) return; return beam_weapons[index].setHeatPerFire(heat); }
-
+    void setTractorBeam(ETractorBeamMode mode, float arc, float direction, float range, float max_area, float drag_per_second)
+    {
+        tractor_beam.setMode(mode);
+        tractor_beam.setArc(arc);
+        tractor_beam.setDirection(direction);
+        tractor_beam.setRange(range);
+        tractor_beam.setMaxArea(max_area);
+        tractor_beam.setDragPerSecond(drag_per_second);
+    }
     void setWeaponTubeCount(int amount);
     int getWeaponTubeCount();
     EMissileWeapons getWeaponTubeLoadType(int index);
@@ -441,6 +464,8 @@ public:
     // Return a string that can be appended to an object create function in the lua scripting.
     // This function is used in getScriptExport calls to adjust for tweaks done in the GM screen.
     string getScriptExportModificationsOnTemplate();
+    bool tryDockDrone(SpaceShip* other);
+    float getDronesControlRange();
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);
@@ -453,6 +478,10 @@ REGISTER_MULTIPLAYER_ENUM(EMainScreenSetting);
 REGISTER_MULTIPLAYER_ENUM(EMainScreenOverlay);
 REGISTER_MULTIPLAYER_ENUM(EDockingState);
 REGISTER_MULTIPLAYER_ENUM(EScannedState);
+REGISTER_MULTIPLAYER_ENUM(EDockType);
+REGISTER_MULTIPLAYER_ENUM(EDockState);
+REGISTER_MULTIPLAYER_ENUM(ETractorBeamMode);
+
 
 string frequencyToString(int frequency);
 

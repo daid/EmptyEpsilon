@@ -21,6 +21,7 @@ public:
     }
     GuiImage* setColor(sf::Color color) { this->color = color; return this; }
     GuiImage* setAngle(float angle) { this->angle = angle; return this; }
+    GuiImage* setTextureName(string texture_name) { this->texture_name = texture_name; return this; }
 };
 
 #endif//GUI2_IMAGE_H
