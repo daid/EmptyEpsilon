@@ -139,6 +139,8 @@ class DocumentationGenerator(object):
                     continue
                 res = re.search('///(.*)', line)
                 if res != None:
+                    if description != "":	
+                        description += "\n"
                     description += res.group(1)
                     continue
                 res = re.search('REGISTER_SCRIPT_CLASS\(([^\)]*)\)', line)
@@ -238,7 +240,7 @@ class DocumentationGenerator(object):
         for d in self._definitions:
             if isinstance(d, ScriptFunction):
                 stream.write('<li>%s' % (d.name))
-                stream.write('<dd>%s</dd>' % (d.description.replace('<', '&lt;')))
+                stream.write('<dd>%s</dd>' % (d.description.replace('<', '&lt;').replace('\n','<br>')))
         stream.write('</ul>')
         stream.write('</div>')
 
@@ -246,7 +248,7 @@ class DocumentationGenerator(object):
             if isinstance(d, ScriptClass):
                 stream.write('<div class="ui-widget ui-widget-content ui-corner-all">\n')
                 stream.write('<h2><a name="class_%s">%s</a></h2>\n' % (d.name, d.name))
-                stream.write('<div>%s</div>' % (d.description.replace('<', '&lt;')))
+                stream.write('<div>%s</div>' % (d.description.replace('<', '&lt;').replace('\n','<br>')))
                 if d.parent is not None:
                     stream.write('Subclass of: <a href="#class_%s">%s</a>' % (d.parent.name, d.parent.name))
                 stream.write('<dl>')
@@ -256,10 +258,10 @@ class DocumentationGenerator(object):
                         print("Failed to find parameters for %s:%s" % (d.name, func.name))
                     else:
                         stream.write('<dt>%s:%s(%s)</dt>' % (d.name, func.name, func.parameters.replace('<', '&lt;')))
-                    stream.write('<dd>%s</dd>' % (func.description.replace('<', '&lt;')))
+                    stream.write('<dd>%s</dd>' % (func.description.replace('<', '&lt;').replace('\n','<br>').replace('\n','<br>')))
                 for member in d.members:
                     stream.write('<dt>%s:%s</dt>' % (d.name, member.name))
-                    stream.write('<dd>%s</dd>' % (member.description.replace('<', '&lt;')))
+                    stream.write('<dd>%s</dd>' % (member.description.replace('<', '&lt;').replace('\n','<br>')))
                 stream.write('</dl>')
                 stream.write('</div>')
 
