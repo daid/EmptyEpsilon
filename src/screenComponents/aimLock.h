@@ -4,24 +4,19 @@
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_rotationdial.h"
 #include "screenComponents/radarView.h"
-//#include "P.h"
-#include "spaceObjects/playerSpaceship.h"
 
 class GuiMissileTubeControls;
-class GuiRotationDial;
+
 class AimLockButton : public GuiToggleButton
 {
-private:
-    P<PlayerSpaceship> target_spaceship;
-    GuiMissileTubeControls* tube_controls;
-    GuiRotationDial* missile_aim;
-
 public:
-    AimLockButton(GuiContainer* owner, string id, GuiMissileTubeControls* tube_controls, GuiRotationDial* missile_aim, P<PlayerSpaceship> targetSpaceship);
+    AimLockButton(GuiContainer* owner, string id, GuiMissileTubeControls* tube_controls, GuiRotationDial* missile_aim);
     
     virtual void onHotkey(const HotkeyResult& key) override;
-    void setTargetSpaceship(P<PlayerSpaceship> targetSpaceship){target_spaceship = targetSpaceship;}
 private:
+    GuiMissileTubeControls* tube_controls;
+    GuiRotationDial* missile_aim;
+    
     void setAimLock(bool value);
 };
 

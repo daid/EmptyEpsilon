@@ -1,6 +1,5 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
-#include "spaceObjects/playerSpaceship.h"
 #include "beamFrequencySelector.h"
 
 GuiBeamFrequencySelector::GuiBeamFrequencySelector(GuiContainer* owner, string id)

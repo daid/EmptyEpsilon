@@ -19,10 +19,7 @@
 #include "screens/extra/powerManagement.h"
 #include "screens/extra/databaseScreen.h"
 #include "screens/extra/commsScreen.h"
-#include "screens/extra/droneOperatorScreen.h"
-#include "screens/extra/dockMasterScreen.h"
 #include "screens/extra/shipLogScreen.h"
-#include "screens/extra/tractorBeamScreen.h"
 
 #include "screenComponents/mainScreenControls.h"
 #include "screenComponents/selfDestructEntry.h"
@@ -193,12 +190,6 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new CommsScreen(container), commsOnly, getCrewPositionName(commsOnly), getCrewPositionIcon(commsOnly));
         if (crew_position[shipLog])
             screen->addStationTab(new ShipLogScreen(container), shipLog, getCrewPositionName(shipLog), getCrewPositionIcon(shipLog));
-        if (crew_position[tractorView])
-            screen->addStationTab(new TractorBeamScreen(container), shipLog, getCrewPositionName(tractorView), getCrewPositionIcon(tractorView));
-        if (crew_position[dronePilot])
-            screen->addStationTab(new DroneOperatorScreen(container), dronePilot, getCrewPositionName(dronePilot), getCrewPositionIcon(dronePilot));
-        if (crew_position[dockMaster])
-            screen->addStationTab(new DockMasterScreen(container), dockMaster, getCrewPositionName(dockMaster), getCrewPositionIcon(dockMaster));
  
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(container, "SELF_DESTRUCT_ENTRY");
         for(int n=0; n<max_crew_positions; n++)
@@ -245,9 +236,6 @@ string getCrewPositionName(ECrewPosition position)
     case altRelay: return tr("station","Strategic Map");
     case commsOnly: return tr("station","Comms");
     case shipLog: return tr("station","Ship's Log");
-    case tractorView: return tr("station","Tractor Beam");
-    case dronePilot: return tr("station","Drone Pilot");
-    case dockMaster: return tr("station","Dock Master");
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -271,9 +259,6 @@ string getCrewPositionIcon(ECrewPosition position)
     case altRelay: return "";
     case commsOnly: return "";
     case shipLog: return "";
-    case tractorView: return "";
-    case dronePilot: return "";
-    case dockMaster: return "";
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -320,12 +305,6 @@ template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosit
         cp = commsOnly;
     else if (str == "shiplog")
         cp = shipLog;
-    else if (str == "tractor" || str == "tractorview")
-        cp = tractorView;
-    else if (str == "dronepilot" || str == "dronepilotview")
-        cp = dronePilot;
-    else if (str == "dockmaster" || str == "dockmasterview")
-        cp = dockMaster;
     else
         luaL_error(L, "Unknown value for crew position: %s", str.c_str());
 }

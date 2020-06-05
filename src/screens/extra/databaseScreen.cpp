@@ -9,5 +9,5 @@ DatabaseScreen::DatabaseScreen(GuiContainer* owner)
 {
     (new DatabaseViewComponent(this))->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    (new GuiCustomShipFunctions(this, databaseView, "", my_spaceship))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, databaseView, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }

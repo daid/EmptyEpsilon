@@ -23,7 +23,7 @@
 GameMasterScreen::GameMasterScreen()
 : click_and_drag_state(CD_None)
 {
-    main_radar = new GuiRadarView(this, "MAIN_RADAR", 50000.0f, &targets, my_spaceship); // my_spaceship === nullptr
+    main_radar = new GuiRadarView(this, "MAIN_RADAR", 50000.0f, &targets);
     main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections(nullptr)->setAutoCentering(false);
     main_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     main_radar->setCallbacks(
@@ -83,10 +83,11 @@ GameMasterScreen::GameMasterScreen()
     });
     copy_selected_button->setTextSize(20)->setPosition(-20, -45, ABottomRight)->setSize(125, 25);
 
-    cancel_action_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
-        gameGlobalInfo->on_gm_click = nullptr;
+    cancel_create_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
+        create_button->show();
+        cancel_create_button->hide();
     });
-    cancel_action_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
+    cancel_create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
 
     tweak_button = new GuiButton(this, "TWEAK_OBJECT", "Tweak", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
@@ -183,7 +184,11 @@ GameMasterScreen::GameMasterScreen()
 
     global_message_entry = new GuiGlobalMessageEntryView(this);
     global_message_entry->hide();
-    object_creation_view = new GuiObjectCreationView(this);
+    object_creation_view = new GuiObjectCreationView(this, [this](){
+        create_button->hide();
+        cancel_create_button->show();
+        object_creation_view->hide();
+    });
     object_creation_view->hide();
 
     message_frame = new GuiPanel(this, "");
@@ -212,10 +217,10 @@ void GameMasterScreen::update(float delta)
     if (mouse_wheel_delta != 0.0)
     {
         float view_distance = main_radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
-        if (view_distance > max_distance)
-            view_distance = max_distance;
-        if (view_distance < min_distance)
-            view_distance = min_distance;
+        if (view_distance > 100000)
+            view_distance = 100000;
+        if (view_distance < 5000)
+            view_distance = 5000;
         main_radar->setDistance(view_distance);
         if (view_distance < 10000)
             main_radar->shortRange();
@@ -342,18 +347,6 @@ void GameMasterScreen::update(float delta)
 	
     pause_button->setValue(engine->getGameSpeed() == 0.0f);
     intercept_comms_button->setValue(gameGlobalInfo->intercept_all_comms_to_gm);
-
-    if (gameGlobalInfo->on_gm_click)
-    {
-        create_button->hide();
-        object_creation_view->hide();
-        cancel_action_button->show();
-    }
-    else
-    {
-        create_button->show();
-        cancel_action_button->hide();
-    }
 }
 
 void GameMasterScreen::onMouseDown(sf::Vector2f position)
@@ -366,9 +359,9 @@ void GameMasterScreen::onMouseDown(sf::Vector2f position)
     }
     else
     {
-        if (gameGlobalInfo->on_gm_click)
+        if (cancel_create_button->isVisible())
         {
-            gameGlobalInfo->on_gm_click(position);
+            object_creation_view->createObject(position);
         }else{
             click_and_drag_state = CD_BoxSelect;
             

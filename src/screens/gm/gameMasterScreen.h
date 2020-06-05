@@ -7,7 +7,6 @@
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_overlay.h"
 #include "screenComponents/targetsContainer.h"
-#include "preferenceManager.h"
 
 class GuiGlobalMessageEntry;
 class GuiObjectCreationScreen;
@@ -71,10 +70,9 @@ private:
     } click_and_drag_state;
     sf::Vector2f drag_start_position;
     sf::Vector2f drag_previous_position;
-
-    GuiButton* create_button;
-    GuiButton* cancel_action_button;
 public:
+    GuiButton* create_button;
+    GuiButton* cancel_create_button;
 
     GameMasterScreen();
     virtual ~GameMasterScreen();
@@ -84,8 +82,6 @@ public:
     void onMouseDown(sf::Vector2f position);
     void onMouseDrag(sf::Vector2f position);
     void onMouseUp(sf::Vector2f position);
-    const float max_distance = PreferencesManager::get("gm_radar_max_distance", "50000").toFloat();
-    const float min_distance = 5000.0f;
 
     virtual void onKey(sf::Event::KeyEvent key, int unicode);
     

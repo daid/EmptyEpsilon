@@ -203,13 +203,6 @@ void GuiShipRoom::onDraw(sf::RenderTarget& window)
         case SYS_RearShield:
             textureManager.setTexture(sprite, "gui/icons/shields-aft");
             break;
-            break;
-        case SYS_Docks:
-            textureManager.setTexture(sprite, "gui/icons/docking");
-            break;
-        case SYS_Drones:
-            textureManager.setTexture(sprite, "gui/icons/heading");
-            break;
         default:
             textureManager.setTexture(sprite, "particle.png");
             break;

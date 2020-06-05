@@ -160,10 +160,6 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
    
     // Warp and jump drive toggles
     (new GuiLabel(right_col, "", "Special drives:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-    reactor_toggle = new GuiToggleButton(right_col, "", "Reactor Drive", [this](bool value) {
-        target->setReactor(value);
-    });
-    reactor_toggle->setSize(GuiElement::GuiSizeMax, 40);
     warp_toggle = new GuiToggleButton(right_col, "", "Warp Drive", [this](bool value) {
         target->setWarpDrive(value);
     });
@@ -187,7 +183,6 @@ void GuiTweakShip::open(P<SpaceObject> target)
     this->target = ship;
     
     type_name->setText(ship->getTypeName());
-    reactor_toggle->setValue(ship->has_reactor);
     warp_toggle->setValue(ship->has_warp_drive);
     jump_toggle->setValue(ship->hasJumpDrive());
     impulse_speed_slider->setValue(ship->impulse_max_speed);
@@ -436,12 +431,6 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
         index_selector->addEntry("Beam: " + string(n + 1), "");
     index_selector->setSelectionIndex(0);
 
-    (new GuiLabel(left_col, "", "Tractor Beam Range:", 20))->setSize(GuiElement::GuiSizeMax, 30);
-    tractor_range_slider = new GuiSlider(left_col, "", 0.0, 5000.0, 0.0, [this](float value) {
-        target->tractor_beam.setMaxRange(roundf(value / 100) * 100);
-    });
-    tractor_range_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
-
     (new GuiLabel(right_col, "", "Arc:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     arc_slider = new GuiSlider(right_col, "", 0.0, 360.0, 0.0, [this](float value) {
         target->beam_weapons[beam_index].setArc(roundf(value));
@@ -503,8 +492,7 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
 void GuiShipTweakBeamweapons::onDraw(sf::RenderTarget& window)
 {
     target->drawOnRadar(window, sf::Vector2f(rect.left - 150.0f + rect.width / 2.0f, rect.top + rect.height * 0.66), 300.0f / 5000.0f, 0, false);
-    
-    tractor_range_slider->setValue(target->tractor_beam.getMaxRange(6.0));
+
     arc_slider->setValue(target->beam_weapons[beam_index].getArc());
     direction_slider->setValue(sf::angleDifference(0.0f, target->beam_weapons[beam_index].getDirection()));
     range_slider->setValue(target->beam_weapons[beam_index].getRange());
@@ -736,12 +724,6 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
     });
     long_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
-    (new GuiLabel(left_col, "", "Far range radar:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-    far_range_radar_slider = new GuiSlider(left_col, "", 50000.0, 10000000.0, 0.0, [this](float value) {
-        target->setFarRangeRadarRange(value);
-    });
-    far_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
-
     // Right column
     // Can scan bool
     can_scan = new GuiToggleButton(right_col, "", "Can scan", [this](bool value) {
@@ -795,7 +777,6 @@ void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
     coolant_slider->setValue(target->max_coolant);
     short_range_radar_slider->setValue(target->getShortRangeRadarRange());
     long_range_radar_slider->setValue(target->getLongRangeRadarRange());
-    far_range_radar_slider->setValue(target->getFarRangeRadarRange());
     can_scan->setValue(target->getCanScan());
     can_hack->setValue(target->getCanHack());
     can_dock->setValue(target->getCanDock());

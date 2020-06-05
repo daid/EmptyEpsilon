@@ -24,9 +24,6 @@ enum ECrewPosition
     altRelay,
     commsOnly,
     shipLog,
-    tractorView,
-    dronePilot,
-    dockMaster,
     max_crew_positions
 };
 

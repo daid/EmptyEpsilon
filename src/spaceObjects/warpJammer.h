@@ -14,7 +14,6 @@ class WarpJammer : public SpaceObject
     ScriptSimpleCallback on_taking_damage;
 public:
     WarpJammer();
-    ~WarpJammer();
     
     void setRange(float range) { this->range = range; }
     float getRange() { return range; }

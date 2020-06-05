@@ -38,7 +38,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     (new AlertLevelOverlay(this));
 
     // Short-range tactical radar with a 5U range.
-    radar = new GuiRadarView(this, "TACTICAL_RADAR", &targets, my_spaceship);
+    radar = new GuiRadarView(this, "TACTICAL_RADAR", &targets);
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 750);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
 
@@ -73,7 +73,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     shields_display->setIcon("gui/icons/shields")->setTextSize(20)->setPosition(20, 220, ATopLeft)->setSize(240, 40);
 
     // Weapon tube loading controls in the bottom left corner.
-    tube_controls = new GuiMissileTubeControls(this, "MISSILE_TUBES", my_spaceship);
+    tube_controls = new GuiMissileTubeControls(this, "MISSILE_TUBES");
     tube_controls->setPosition(20, -20, ABottomLeft);
     radar->enableTargetProjections(tube_controls);
 
@@ -84,7 +84,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
         beam_info_box->setPosition(0, -20, ABottomCenter)->setSize(500, 50);
         (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beams"), 30))->addBackground()->setPosition(0, 0, ABottomLeft)->setSize(80, 50);
         (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(80, 0, ABottomLeft)->setSize(132, 50);
-        (new GuiPowerDamageIndicator(beam_info_box, "", SYS_BeamWeapons, ACenterLeft, my_spaceship))->setPosition(0, 0, ABottomLeft)->setSize(212, 50);
+        (new GuiPowerDamageIndicator(beam_info_box, "", SYS_BeamWeapons, ACenterLeft))->setPosition(0, 0, ABottomLeft)->setSize(212, 50);
         (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, 0, ABottomRight)->setSize(288, 50);
     }
 
@@ -93,19 +93,19 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
         tube_controls->setMissileTargetAngle(value);
     });
     missile_aim->hide()->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
-    lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim, my_spaceship);
+    lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim->setPosition(250, 20, ATopCenter)->setSize(110, 50);
 
     // Combat maneuver and propulsion controls in the bottom right corner.
-    (new GuiCombatManeuver(this, "COMBAT_MANEUVER", my_spaceship))->setPosition(-20, -390, ABottomRight)->setSize(200, 150);
+    (new GuiCombatManeuver(this, "COMBAT_MANEUVER"))->setPosition(-20, -390, ABottomRight)->setSize(200, 150);
     GuiAutoLayout* engine_layout = new GuiAutoLayout(this, "ENGINE_LAYOUT", GuiAutoLayout::LayoutHorizontalRightToLeft);
     engine_layout->setPosition(-20, -80, ABottomRight)->setSize(GuiElement::GuiSizeMax, 300);
-    (new GuiImpulseControls(engine_layout, "IMPULSE", my_spaceship))->setSize(100, GuiElement::GuiSizeMax);
-    warp_controls = (new GuiWarpControls(engine_layout, "WARP", my_spaceship))->setSize(100, GuiElement::GuiSizeMax);
-    jump_controls = (new GuiJumpControls(engine_layout, "JUMP", my_spaceship))->setSize(100, GuiElement::GuiSizeMax);
-    (new GuiDockingButton(this, "DOCKING", my_spaceship))->setPosition(-20, -20, ABottomRight)->setSize(280, 50);
+    (new GuiImpulseControls(engine_layout, "IMPULSE"))->setSize(100, GuiElement::GuiSizeMax);
+    warp_controls = (new GuiWarpControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
+    jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
+    (new GuiDockingButton(this, "DOCKING"))->setPosition(-20, -20, ABottomRight)->setSize(280, 50);
 
-    (new GuiCustomShipFunctions(this, tacticalOfficer, "", my_spaceship))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, tacticalOfficer, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 
 void TacticalScreen::onDraw(sf::RenderTarget& window)

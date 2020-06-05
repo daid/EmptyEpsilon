@@ -10,7 +10,7 @@ ShipLogScreen::ShipLogScreen(GuiContainer* owner)
 {
     GuiAutoLayout* shiplog_layout = new GuiAutoLayout(this, "SHIPLOG_LAYOUT", GuiAutoLayout::LayoutHorizontalRightToLeft);
     shiplog_layout->setPosition(50, 120)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    custom_function_sidebar= new GuiCustomShipFunctions(shiplog_layout, shipLog, "", my_spaceship);
+    custom_function_sidebar= new GuiCustomShipFunctions(shiplog_layout, shipLog, "");
     custom_function_sidebar->setSize(270, GuiElement::GuiSizeMax);
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
     log_text = new GuiAdvancedScrollText(shiplog_layout, "SHIP_LOG");

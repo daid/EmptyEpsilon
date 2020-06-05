@@ -18,7 +18,6 @@ GuiEntryList* GuiEntryList::setOptions(std::vector<string> options)
 
 GuiEntryList* GuiEntryList::setOptions(std::vector<string> options, std::vector<string> values)
 {
-    entries.clear();
     for(unsigned int n=0; n<options.size(); n++)
     {
         if (n < values.size())

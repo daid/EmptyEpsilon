@@ -114,8 +114,6 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
     system_rows[SYS_JumpDrive].button->setIcon("gui/icons/system_jumpdrive");
     system_rows[SYS_FrontShield].button->setIcon("gui/icons/shields-fore");
     system_rows[SYS_RearShield].button->setIcon("gui/icons/shields-aft");
-    system_rows[SYS_Docks].button->setIcon("gui/icons/docking");
-    system_rows[SYS_Drones].button->setIcon("gui/icons/heading");
 
     system_effects_container = new GuiAutoLayout(system_config_container, "", GuiAutoLayout::LayoutVerticalBottomToTop);
     system_effects_container->setPosition(0, -400, ABottomRight)->setSize(270, 400);
@@ -145,7 +143,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
 
     (new GuiShipInternalView(system_row_layouts, "SHIP_INTERNAL_VIEW", 48.0f))->setShip(my_spaceship)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    (new GuiCustomShipFunctions(this, crew_position, "", my_spaceship))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, crew_position, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 
     previous_energy_level = 0.0;
     average_energy_delta = 0.0;
@@ -305,14 +303,6 @@ my_spaceship->getShieldDamageFactor(di, my_spaceship->shield_count - 1);
                     else
                         addSystemEffect(tr("Damage negate"), string(int(damage_negate * 100)) + "%");
                 }
-                break;
-            case SYS_Docks:
-                addSystemEffect("Cargo move speed", string(int(effectiveness * 100)) + "%");
-                addSystemEffect("Energy transfer speed", string(effectiveness * PlayerSpaceship::energy_transfer_per_second) + "/s");
-                addSystemEffect("Tractor beam drag speed", string(int(effectiveness * 100)) + "%");
-                break;
-            case SYS_Drones:
-                addSystemEffect("Drones control range", string(my_spaceship->getDronesControlRange(),1) + "U");
                 break;
             default:
                 break;

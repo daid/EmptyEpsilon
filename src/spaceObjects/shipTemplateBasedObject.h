@@ -5,8 +5,6 @@
 #include "spaceObject.h"
 #include "shipTemplate.h"
 
-class SpaceShip;
-
 /**
     An object which is based on a ship template. Contains generic behaviour for:
     * Hull damage
@@ -29,7 +27,7 @@ public:
     float hull_strength, hull_max;
     float shield_hit_effect[max_shield_count];
     bool can_be_destroyed;
-    
+
     bool shares_energy_with_docked;       //[config]
     bool repair_docked;                   //[config]
     bool restocks_scan_probes;
@@ -100,9 +98,10 @@ public:
     void setRepairDocked(bool enabled) { repair_docked = enabled; }
     bool getRestocksScanProbes() { return restocks_scan_probes; }
     void setRestocksScanProbes(bool enabled) { restocks_scan_probes = enabled; }
-    
+
     void onTakingDamage(ScriptSimpleCallback callback);
     void onDestruction(ScriptSimpleCallback callback);
+
     string getShieldDataString();
 };
 

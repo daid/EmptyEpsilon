@@ -477,12 +477,6 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
         {
             config.endArray();
         }
-        JSONGenerator beam = json.createDict("tractor_beam");
-        beam.write("arc", ship->tractor_beam.getArc());
-        beam.write("direction", ship->tractor_beam.getDirection());
-        beam.write("range", ship->tractor_beam.getRange());
-        beam.write("dragPerSecond", ship->tractor_beam.getDragPerSecond());
-        beam.write("max_area", ship->tractor_beam.getMaxArea());
     }
     if (has_beam_weapons)
     {

@@ -23,10 +23,6 @@ template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es)
         es = SYS_FrontShield;
     else if (str == "rearshield")
         es = SYS_RearShield;
-    else if (str == "docks")
-        es = SYS_Docks;
-    else if (str == "drones")
-        es = SYS_Drones;
     else
         es = SYS_None;
 }
@@ -35,9 +31,7 @@ template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es)
 template<> void convert<ShipTemplate::TemplateType>::param(lua_State* L, int& idx, ShipTemplate::TemplateType& tt)
 {
     string str = string(luaL_checkstring(L, idx++)).lower();
-    if (str == "drone")
-        tt = ShipTemplate::Drone;
-    else if (str == "ship")
+    if (str == "ship")
         tt = ShipTemplate::Ship;
     else if (str == "playership")
         tt = ShipTemplate::PlayerShip;
