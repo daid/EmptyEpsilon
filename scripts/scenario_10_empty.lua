@@ -3,13 +3,13 @@
 -- Type: Basic
 
 function init()
-	--SpaceStation():setPosition(1000, 1000):setTemplate('Small Station'):setFaction("Human Navy"):setRotation(random(0, 360))
-	--SpaceStation():setPosition(-1000, 1000):setTemplate('Medium Station'):setFaction("Human Navy"):setRotation(random(0, 360))
-	--SpaceStation():setPosition(1000, -1000):setTemplate('Large Station'):setFaction("Human Navy"):setRotation(random(0, 360))
-	--SpaceStation():setPosition(-1000, -1000):setTemplate('Huge Station'):setFaction("Human Navy"):setRotation(random(0, 360))
-	--player1 = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setRotation(200)
+    --SpaceStation():setPosition(1000, 1000):setTemplate('Small Station'):setFaction("Human Navy"):setRotation(random(0, 360))
+    --SpaceStation():setPosition(-1000, 1000):setTemplate('Medium Station'):setFaction("Human Navy"):setRotation(random(0, 360))
+    --SpaceStation():setPosition(1000, -1000):setTemplate('Large Station'):setFaction("Human Navy"):setRotation(random(0, 360))
+    --SpaceStation():setPosition(-1000, -1000):setTemplate('Huge Station'):setFaction("Human Navy"):setRotation(random(0, 360))
+    --player1 = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setRotation(200)
     --player2 = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setRotation(0)
-	--Nebula():setPosition(-5000, 0)
+    --Nebula():setPosition(-5000, 0)
     --Artifact():setPosition(1000, 9000):setModel("small_frigate_1"):setDescription("An old space derelict.")
     --Artifact():setPosition(9000, 2000):setModel("small_frigate_1"):setDescription("A wrecked ship.")
     --Artifact():setPosition(3000, 4000):setModel("small_frigate_1"):setDescription("Tons of rotting plasteel.")
@@ -22,18 +22,18 @@ function init()
     sun1 = Planet():setPosition(5000, 15000):setPlanetRadius(1000):setDistanceFromMovementPlane(-2000):setPlanetAtmosphereTexture("planets/star-1.png"):setPlanetAtmosphereColor(1.0,1.0,1.0)
     planet1:setOrbit(sun1, 40)
     moon1:setOrbit(planet1, 20.0)
-    
+
     addGMFunction("Random asteroid field", function()
         cleanup()
         for n=1,1000 do
-			Asteroid():setPosition(random(-50000, 50000), random(-50000, 50000)):setSize(random(100, 500))
-			VisualAsteroid():setPosition(random(-50000, 50000), random(-50000, 50000)):setSize(random(100, 500))
+            Asteroid():setPosition(random(-50000, 50000), random(-50000, 50000)):setSize(random(100, 500))
+            VisualAsteroid():setPosition(random(-50000, 50000), random(-50000, 50000)):setSize(random(100, 500))
         end
     end)
     addGMFunction("Random nebula field", function()
         cleanup()
         for n=1,50 do
-			Nebula():setPosition(random(-50000, 50000), random(-50000, 50000))
+            Nebula():setPosition(random(-50000, 50000), random(-50000, 50000))
         end
     end)
     addGMFunction("Delete unselected", function()
@@ -65,7 +65,7 @@ function cleanup()
 end
 
 function update(delta)
-	--No victory condition
+    --No victory condition
 end
 
 onNewPlayerShip(function(ship, index)
