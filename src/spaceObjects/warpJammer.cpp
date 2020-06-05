@@ -36,9 +36,9 @@ WarpJammer::WarpJammer()
     model_info.setData("shield_generator");
 }
 
-// Due to a suspected compiler bug this desconstructor needs to be explicity defined	
-WarpJammer::~WarpJammer() 
-{ 
+// Due to a suspected compiler bug this desconstructor needs to be explicity defined
+WarpJammer::~WarpJammer()
+{
 }
 
 void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)

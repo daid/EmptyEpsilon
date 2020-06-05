@@ -139,7 +139,7 @@ class DocumentationGenerator(object):
                     continue
                 res = re.search('///(.*)', line)
                 if res != None:
-                    if description != "":	
+                    if description != "":
                         description += "\n"
                     description += res.group(1)
                     continue
@@ -258,7 +258,7 @@ class DocumentationGenerator(object):
                         print("Failed to find parameters for %s:%s" % (d.name, func.name))
                     else:
                         stream.write('<dt>%s:%s(%s)</dt>' % (d.name, func.name, func.parameters.replace('<', '&lt;')))
-                    stream.write('<dd>%s</dd>' % (func.description.replace('<', '&lt;').replace('\n','<br>').replace('\n','<br>')))
+                    stream.write('<dd>%s</dd>' % (func.description.replace('<', '&lt;').replace('\n','<br>')))
                 for member in d.members:
                     stream.write('<dt>%s:%s</dt>' % (d.name, member.name))
                     stream.write('<dd>%s</dd>' % (member.description.replace('<', '&lt;').replace('\n','<br>')))
