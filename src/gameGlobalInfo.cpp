@@ -158,6 +158,7 @@ void GameGlobalInfo::reset()
 {
     gm_callback_functions.clear();
     gm_messages.clear();
+    on_gm_click = nullptr;
 
     foreach(GameEntity, e, entityList)
         e->destroy();
