@@ -57,7 +57,13 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
         row.loading_bar->setColor(sf::Color(128, 128, 128))->setSize(200, 50);
         row.loading_label = new GuiLabel(row.loading_bar, id + "_" + string(n) + "_PROGRESS_LABEL", "Loading", 35);
         row.loading_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-        
+        row.auto_button = new GuiToggleButton(row.layout, id + "_" + string(n) + "_AUTO_BUTTON", "Auto", [this, n](bool value) {
+            if (!my_spaceship)
+                return;
+            my_spaceship->commandSetTubeAutoLoading(n, value);
+        });
+        row.auto_button->setValue(my_spaceship->weapon_tube[n].isAutoLoading())->setSize(100, 50);
+
         rows[n] = row;
     }
     
@@ -101,6 +107,7 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window){
             rows[n].fire_button->setIcon("gui/icons/weapon-mine", ACenterLeft);
         else
             rows[n].fire_button->setIcon("gui/icons/missile", ACenterLeft, tube.getDirection());
+        rows[n].auto_button->setValue(tube.isAutoLoading());
         if(tube.isEmpty())
         {
             rows[n].load_button->setEnable(tube.canLoad(load_type));
@@ -179,6 +186,10 @@ void GuiMissileTubeControls::onHotkey(const HotkeyResult& key)
                         target_angle = my_spaceship->getRotation() + my_spaceship->weapon_tube[n].getDirection();
                 }
                 my_spaceship->commandFireTube(n, target_angle);
+            }
+            if (key.hotkey == "AUTO_TUBE_" + string(n+1))
+            {
+            	my_spaceship->commandSetTubeAutoLoading(n, !my_spaceship->weapon_tube[n].isAutoLoading());
             }
         }
     }

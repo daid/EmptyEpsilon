@@ -249,6 +249,7 @@ public:
     void commandUnloadTube(int8_t tubeNumber);
     void commandFireTube(int8_t tubeNumber, float missile_target_angle);    
     void commandFireTubeAtTarget(int8_t tubeNumber, P<SpaceObject> target);
+    void commandSetTubeAutoLoading(int8_t tubeNumber, bool auto_load);
     void commandSetShields(bool enabled);
     void commandMainScreenSetting(EMainScreenSetting mainScreen);
     void commandMainScreenOverlay(EMainScreenOverlay mainScreen);
