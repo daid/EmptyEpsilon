@@ -60,10 +60,7 @@ CpuShip::CpuShip()
 
     missile_resupply = 0.0;
 
-    if (game_server)
-        ai = ShipAIFactory::getAIFactory("default")(this);
-    else
-        ai = NULL;
+    ai = ShipAIFactory::getAIFactory("default")(this);
 }
 
 CpuShip::~CpuShip()

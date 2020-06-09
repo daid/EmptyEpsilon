@@ -2,15 +2,8 @@
 #define GM_ACTIONS
 
 #include "engine.h"
+#include "spaceObjects/cpuShip.h"
 
-
-enum EShipOrder
-{
-    SO_Idle,
-    SO_Roaming,
-    SO_StandGround,
-    SO_DefendLocation
-};
 class GameMasterActions;
 class SpaceObject;
 class PlayerSpaceship;
@@ -32,7 +25,7 @@ public:
     void commandSetGameSpeed(float speed);
     void commandSetFactionId(uint32_t faction_id, PVector<SpaceObject> selection);
     void commandContextualGoTo(sf::Vector2f position, bool force, PVector<SpaceObject> selection);
-    void commandOrderShip(EShipOrder order, PVector<SpaceObject> selection);
+    void commandOrderShip(EAIOrder order, PVector<SpaceObject> selection);
     void commandDestroy(PVector<SpaceObject> selection);
     void commandSendCommToPlayerShip(P<PlayerSpaceship> target, string line);
     virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet);

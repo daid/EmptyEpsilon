@@ -156,20 +156,22 @@ void GameMasterActions::onReceiveClientCommand(int32_t client_id, sf::Packet& pa
             packet >> i_order >> selection;
             for(P<SpaceObject> obj : selection)
                 if (P<CpuShip>(obj))
-                    switch(EShipOrder(i_order))
+                    switch(EAIOrder(i_order))
                     {
-                        case SO_Idle:
+                        case AI_Idle:
                             P<CpuShip>(obj)->orderIdle();
                         break;
-                        case SO_Roaming:
+                        case AI_Roaming:
                             P<CpuShip>(obj)->orderRoaming();
                         break;
-                        case SO_StandGround:
+                        case AI_StandGround:
                             P<CpuShip>(obj)->orderStandGround();
                         break;
-                        case SO_DefendLocation:
+                        case AI_DefendLocation:
                             P<CpuShip>(obj)->orderDefendLocation(obj->getPosition());
                         break;
+                        default:
+                            break;
                     }
         }
         break;
@@ -203,80 +205,60 @@ void GameMasterActions::onReceiveClientCommand(int32_t client_id, sf::Packet& pa
 
 void GameMasterActions::commandRunScript(string code)
 {
-    if (!game_server && !my_player_info->isGMAccess())
-        return;
     sf::Packet packet;
     packet << CMD_RUN_SCRIPT << code;
     sendClientCommand(packet);
 }
 void GameMasterActions::commandSendGlobalMessage(string message)
 {
-    if (!game_server && !my_player_info->isGMAccess())
-        return;
     sf::Packet packet;
     packet << CMD_SEND_GLOBAL_MESSAGE << message;
     sendClientCommand(packet);
 }
 void GameMasterActions::commandInterceptAllCommsToGm(bool value)
 {
-    if (!game_server && !my_player_info->isGMAccess())
-        return;
     sf::Packet packet;
     packet << CMD_INTERCEPT_ALL_COMMS_TO_GM << value;
     sendClientCommand(packet);
 }
 void GameMasterActions::commandCallGmScript(uint32_t index, PVector<SpaceObject> selection)
 {
-    if (!game_server && !my_player_info->isGMAccess())
-        return;
     sf::Packet packet;
     packet << CMD_CALL_GM_SCRIPT << index << selection;
     sendClientCommand(packet);
 }
 void GameMasterActions::commandMoveObjects(sf::Vector2f delta, PVector<SpaceObject> selection)
 {
-    if (!game_server && !my_player_info->isGMAccess())
-        return;
     sf::Packet packet;
     packet << CMD_MOVE_OBJECTS << delta << selection;
     sendClientCommand(packet);
 }
 void GameMasterActions::commandSetGameSpeed(float speed)
 {
-    if (!game_server && !my_player_info->isGMAccess())
-        return;
     sf::Packet packet;
     packet << CMD_SET_GAME_SPEED << speed;
     sendClientCommand(packet);
 }
 void GameMasterActions::commandSetFactionId(uint32_t faction_id, PVector<SpaceObject> selection)
 {
-    if (!game_server && !my_player_info->isGMAccess())
-        return;
     sf::Packet packet;
     packet << CMD_SET_FACTION_ID << faction_id << selection;
     sendClientCommand(packet);
 }
 void GameMasterActions::commandContextualGoTo(sf::Vector2f position, bool force, PVector<SpaceObject> selection)
 {
-    if (!game_server && !my_player_info->isGMAccess())
-        return;
     sf::Packet packet;
     packet << CMD_CONTEXTUAL_GO_TO << position << force << selection;
     sendClientCommand(packet);
 }
-void GameMasterActions::commandOrderShip(EShipOrder order, PVector<SpaceObject> selection)
+void GameMasterActions::commandOrderShip(EAIOrder order, PVector<SpaceObject> selection)
 {
-    if (!game_server && !my_player_info->isGMAccess())
-        return;
     sf::Packet packet;
     packet << CMD_ORDER_SHIP << int(order) << selection;
     sendClientCommand(packet);
 }
 void GameMasterActions::commandDestroy(PVector<SpaceObject> selection)
 {
-    if (!game_server && !my_player_info->isGMAccess())
-        return;
     sf::Packet packet;
     packet << CMD_DESTROY << selection;
     sendClientCommand(packet);
@@ -289,8 +271,6 @@ void GameMasterActions::commandSendCommToPlayerShip(P<PlayerSpaceship> target, s
 }
 void GameMasterActions::executeContextualGoTo(sf::Vector2f position, bool force, PVector<SpaceObject> selection)
 {
-    if (!game_server && !my_player_info->isGMAccess())
-        return;
     P<SpaceObject> target;
     PVector<Collisionable> list = CollisionManager::queryArea(position, position);
     foreach (Collisionable, collisionable, list)
@@ -355,9 +335,6 @@ void GameMasterActions::executeContextualGoTo(sf::Vector2f position, bool force,
 
 static int addGMFunction(lua_State* L)
 {
-    if (!game_server && !my_player_info->isGMAccess())
-        return 0;
-    
     const char* name = luaL_checkstring(L, 1);
 
     ScriptSimpleCallback callback;
@@ -377,9 +354,6 @@ REGISTER_SCRIPT_FUNCTION(addGMFunction);
 
 static int removeGMFunction(lua_State* L)
 {
-    if (!game_server && !my_player_info->isGMAccess())
-        return 0;
-    
     string name = luaL_checkstring(L, 1);
     std::vector<uint32_t> indexesToDelete;
     for (uint32_t i = 0; i < gameGlobalInfo->gm_callback_names.size(); ++i)
@@ -401,8 +375,6 @@ REGISTER_SCRIPT_FUNCTION(removeGMFunction);
 
 static int clearGMFunctions(lua_State* L)
 {
-    if (!game_server && !my_player_info->isGMAccess())
-        return 0;
     gameGlobalInfo->gm_callback_names.clear();
     gameGlobalInfo->gm_callback_functions.clear();
     return 0;
@@ -413,9 +385,6 @@ REGISTER_SCRIPT_FUNCTION(clearGMFunctions);
 
 static int getGMSelection(lua_State* L)
 {
-    if (!game_server && !my_player_info->isGMAccess())
-        return 0;
-    
     PVector<SpaceObject> objects;
     if (gameMasterActions->gmSelectionForRunningScript){
         objects = *gameMasterActions->gmSelectionForRunningScript;

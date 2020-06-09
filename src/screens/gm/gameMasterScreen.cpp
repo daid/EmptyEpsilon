@@ -149,16 +149,16 @@ GameMasterScreen::GameMasterScreen()
     
     (new GuiLabel(order_layout, "ORDERS_LABEL", "Orders:", 20))->addBackground()->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_IDLE", "Idle", [this]() {
-        gameMasterActions->commandOrderShip(SO_Idle, getSelection());
+        gameMasterActions->commandOrderShip(AI_Idle, getSelection());
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_ROAMING", "Roaming", [this]() {
-        gameMasterActions->commandOrderShip(SO_Roaming, getSelection());
+        gameMasterActions->commandOrderShip(AI_Roaming, getSelection());
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_STAND_GROUND", "Stand ground", [this]() {
-        gameMasterActions->commandOrderShip(SO_StandGround, getSelection());
+        gameMasterActions->commandOrderShip(AI_StandGround, getSelection());
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", "Defend location", [this]() {
-        gameMasterActions->commandOrderShip(SO_DefendLocation, getSelection());
+        gameMasterActions->commandOrderShip(AI_DefendLocation, getSelection());
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiLabel(order_layout, "ORDERS_LABEL", "Orders:", 20))->addBackground()->setSize(GuiElement::GuiSizeMax, 30);
 
