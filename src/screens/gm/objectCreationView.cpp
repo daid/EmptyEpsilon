@@ -105,9 +105,20 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
 
     auto player_template_names = ShipTemplate::getTemplateNameList(ShipTemplate::PlayerShip);
     std::sort(player_template_names.begin(), player_template_names.end());
-    player_ship_listbox = new GuiListbox(box, "CREATE_PLAYER_SHIPS", [this](int index, string value)
+    player_ship_listbox = new GuiListbox(box, "CREATE_PLAYER_SHIPS", [this](int index, string template_name)
     {
-        setCreateScript("PlayerSpaceship():setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + value + "\")");
+        const auto faction_id = faction_selector->getSelectionIndex();
+        gameGlobalInfo->on_gm_click = [template_name, faction_id] (sf::Vector2f position)
+        {
+            P<PlayerSpaceship> ship = new PlayerSpaceship();
+            if (ship)
+            {
+                ship->setTemplate(template_name);
+                ship->setPosition(position);
+                ship->setFactionId(faction_id);
+                gameGlobalInfo->on_new_player_ship.call(ship);
+            }
+        };
     });
     player_ship_listbox->setTextSize(20)->setButtonHeight(30)->setPosition(-20, 20, ATopRight)->setSize(300, 460);
     for (const auto template_name : player_template_names)
