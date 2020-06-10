@@ -102,6 +102,7 @@ public:
     string control_code;
 
 private:
+    bool on_new_player_ship_called=false;
     // Comms variables
     ECommsState comms_state;
     float comms_open_delay;
