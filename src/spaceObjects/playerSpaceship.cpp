@@ -731,6 +731,11 @@ void PlayerSpaceship::applyTemplateValues()
     can_combat_maneuver = ship_template->can_combat_maneuver;
     can_self_destruct = ship_template->can_self_destruct;
     can_launch_probe = ship_template->can_launch_probe;
+    if (!on_new_player_ship_called)
+    {
+        on_new_player_ship_called=true;
+	gameGlobalInfo->on_new_player_ship.call(P<PlayerSpaceship>(this));
+    }
 }
 
 void PlayerSpaceship::executeJump(float distance)
