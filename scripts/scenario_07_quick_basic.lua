@@ -1,6 +1,8 @@
 -- Name: Quick Basic
 -- Description: Different version of the basic scenario. Which intended to play out quicker. There is only a single small station to defend.
 --- This scenario is designed to be ran on conventions. As you can run a 4 player crew in 20 minutes trough a game with minimal experience.
+---
+--- This scenario is designed for the provided player ship of type Phobos (or Atlantis on Advanced).
 -- Type: Convention
 -- Variation[Advanced]: Give the players a stronger Atlantis instead of the Phobos. Which is more difficult to control, but has more firepower and defense. Increases enemy strengh as well.
 -- Variation[GM Start]: The scenario is not started until the GM gives the start sign. This gives some time for a new crew to get a feeling for the controls before the actual scenario starts.
@@ -155,6 +157,7 @@ function init()
     player:setPosition(random(-2000, 2000), random(-2000, 2000)):setCallSign(ship_names[math.random(1,#ship_names)])
     player:setJumpDrive(true)
     player:setWarpDrive(false)
+
     allowNewPlayerShips(false)
 
     -- Put a single small station here, which needs to be defended.

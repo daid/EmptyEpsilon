@@ -1,5 +1,8 @@
 -- Name: Surrounded
 -- Description: You are surrounded by astroids, enemies and mines.
+---
+--- Spawn the player ship(s) you want. The strength of the enemy is independent of their number and type.
+--- (The scenario can be won with a single Atlantis.)
 -- Type: Basic
 
 function setCirclePos(obj, angle, distance)
