@@ -1,6 +1,8 @@
 -- Name: Beacon of light series
 -- Description: The beacon of light scenario, build from the series at EmptyEpsilon.org.
---- Near the far outpost of Orion-5, Kraylor attacks are increasing. A diplomat went missing, and your mission will start with recovering him. (Must use Epsilon as ship)
+--- Near the far outpost of Orion-5, Kraylor attacks are increasing. A diplomat went missing, and your mission will start with recovering him.
+---
+--- This scenario is played with exactly one player ship: the Atlantis Epsilon.
 -- Type: Mission
 
 -- Init is run when the scenario is started. Create your initial world

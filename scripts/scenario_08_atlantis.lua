@@ -1,6 +1,8 @@
 -- Name: Birth of the Atlantis
 -- Description: You are the first crew of a new and improved version of the Atlantis space explorer.
 --- You must check out ship systems and complete an initial mission.
+---
+--- This scenario is played with exactly one player ship: the Atlantis Atlantis-1.
 -- Type: Mission
 
 --[[Problems

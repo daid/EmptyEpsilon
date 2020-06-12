@@ -1,6 +1,8 @@
 -- Name: Waves
 -- Description: Waves of increasingly difficult enemies.
 --- There is no victory. How many waves can you destroy?
+---
+--- Spawn the player ship(s) you want. The strength of the enemy is independent of their number and type.
 -- Type: Basic
 -- Variation[Hard]: Difficulty starts at wave 5 and increases by 1.5 after the players defeat each wave. (Players are more quickly overwhelmed, leading to shorter games.)
 -- Variation[Easy]: Makes each wave easier by decreasing the number of ships in each wave. (Takes longer for the players to be overwhelmed; good for new players.)

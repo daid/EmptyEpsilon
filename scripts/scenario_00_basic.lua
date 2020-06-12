@@ -1,5 +1,8 @@
 -- Name: Basic
 -- Description: Basic scenario. A few random stations, with random stuff around them, are under attack by enemies. Kill all enemies to win.
+---
+--- The scenario provides a single Atlantis (which is sufficient to win even on "Extreme").
+--- Other player ships can be spawned, but the strength of the enemy is independent of their number and type.
 -- Type: Basic
 -- Variation[Empty]: Places no enemies. Recommended for GM-controlled scenarios and rookie crew orientation. The scenario continues until the GM declares victory or all Human Navy craft are destroyed.
 -- Variation[Easy]: Places fewer enemies. Recommended for inexperienced crews.

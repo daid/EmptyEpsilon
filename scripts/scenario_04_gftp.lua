@@ -2,6 +2,8 @@
 -- Description: Far from any frontline or civilization, patrolling the Stakhanov Mining Complex can be dull,
 --- consisting mainly of seizing contraband and stopping drunken brawls. It is indeed a lonely ward brightened only by R&R at the Marco Polo station.
 --- However, when an inbound FTL-capable Ktlitan Swarm is announced, you must scramble to save the Sector ! [Requires beam/shield frequenies] [Hard]
+---
+--- This scenario is played with exactly one player ship: the Atlantis Epsilon.
 -- Type: Mission
 -- Author: Fouindor
 
