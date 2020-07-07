@@ -106,8 +106,12 @@ int main(int argc, char** argv)
 #ifdef CONFIG_DIR
     PreferencesManager::load(CONFIG_DIR "options.ini");
 #endif
-    if (getenv("HOME"))
-        PreferencesManager::load(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
+
+    // TODO Windows: USERPROFILE
+    string VAR_HOME = "HOME";
+
+    if (getenv(VAR_HOME))
+        PreferencesManager::load(getenv(VAR_HOME) + "/.emptyepsilon/options.ini");
     else
         PreferencesManager::load("options.ini");
 
@@ -145,10 +149,10 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("mod") != "")
     {
         string mod = PreferencesManager::get("mod");
-        if (getenv("HOME"))
+        if (getenv(VAR_HOME))
         {
-            new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod);
-            PackResourceProvider::addPackResourcesForDirectory(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod);
+            new DirectoryResourceProvider(string(getenv(VAR_HOME)) + "/.emptyepsilon/resources/mods/" + mod);
+            PackResourceProvider::addPackResourcesForDirectory(string(getenv(VAR_HOME)) + "/.emptyepsilon/resources/mods/" + mod);
         }
         new DirectoryResourceProvider("resources/mods/" + mod);
         PackResourceProvider::addPackResourcesForDirectory("resources/mods/" + mod);
@@ -158,11 +162,11 @@ int main(int argc, char** argv)
     new DirectoryResourceProvider("scripts/");
     new DirectoryResourceProvider("packs/SolCommand/");
     PackResourceProvider::addPackResourcesForDirectory("packs");
-    if (getenv("HOME"))
+    if (getenv(VAR_HOME))
     {
-        new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/");
-        new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/scripts/");
-        new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/packs/SolCommand/");
+        new DirectoryResourceProvider(string(getenv(VAR_HOME)) + "/.emptyepsilon/resources/");
+        new DirectoryResourceProvider(string(getenv(VAR_HOME)) + "/.emptyepsilon/scripts/");
+        new DirectoryResourceProvider(string(getenv(VAR_HOME)) + "/.emptyepsilon/packs/SolCommand/");
     }
 #ifdef RESOURCE_BASE_DIR
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/");
@@ -301,8 +305,8 @@ int main(int argc, char** argv)
 #ifdef CONFIG_DIR
     hardware_controller->loadConfiguration(CONFIG_DIR "hardware.ini");
 #endif
-    if (getenv("HOME"))
-        hardware_controller->loadConfiguration(string(getenv("HOME")) + "/.emptyepsilon/hardware.ini");
+    if (getenv(VAR_HOME))
+        hardware_controller->loadConfiguration(string(getenv(VAR_HOME)) + "/.emptyepsilon/hardware.ini");
     else
         hardware_controller->loadConfiguration("hardware.ini");
 
@@ -340,14 +344,14 @@ int main(int argc, char** argv)
     {
 #ifndef _MSC_VER
         // MFC TODO: Fix me -- save prefs to user prefs dir on Windows.
-        if (getenv("HOME"))
+        if (getenv(VAR_HOME))
         {
 #ifdef __WIN32__
-            mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str());
+            mkdir((string(getenv(VAR_HOME)) + "/.emptyepsilon").c_str());
 #else
-            mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+            mkdir((string(getenv(VAR_HOME)) + "/.emptyepsilon").c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 #endif
-            PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
+            PreferencesManager::save(string(getenv(VAR_HOME)) + "/.emptyepsilon/options.ini");
         }else
 #endif
         {
