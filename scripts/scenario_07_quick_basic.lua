@@ -358,8 +358,17 @@ function update(delta)
             return
         end
 
+        -- If last player ship is destroyed, the Humans (players) lose.
+        if not player:isValid() then
+            victory("Kraylor")
+            local text = "Mission: FAILED (all your ships destroyed)"
+            globalMessage(text)
+            setBanner(text)
+            return
+        end
+
         -- If all allies are destroyed, the Humans (players) lose.
-        if friendly_count == 0 or not player:isValid() then
+        if friendly_count == 0 then
             victory("Kraylor")
             local text = "Mission: FAILED (no friendlies left)"
             globalMessage(text)
