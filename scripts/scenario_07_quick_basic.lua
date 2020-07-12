@@ -299,7 +299,7 @@ function startScenario()
     local station = friendlyList[1]
     station:sendCommsMessage(
         player,
-        string.format([[%s, your objective is to fend off the incomming Kraylor attack.
+        string.format([[%s, your objective is to fend off the incoming Kraylor attack.
 Please inform your Captain and crew that you have a total of %d minutes for this mission.
 The mission started at the arrival of this message.
 Good Luck.]], player:getCallSign(), gametimeleft / 60)
