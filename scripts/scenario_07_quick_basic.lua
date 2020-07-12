@@ -148,6 +148,15 @@ function getWaveDistance(cnt, enemy_group_count)
     return random(25000 + cnt * 1000, 30000 + cnt * 3000)
 end
 
+--- Create space area around `cx, cy` with nebulae, asteroids, mine field.
+function initSpace(cx, cy)
+    -- Randomly scatter nebulae, one closer to the center.
+    setCirclePos(Nebula(), cx, cy, random(0, 360), 15000)
+    for _ = 1, 5 do
+        setCirclePos(Nebula(), cx, cy, random(0, 360), random(23000, 45000))
+    end
+end
+
 --- Add GM functions.
 function initGM()
     -- Let the GM declare the Humans (players) victorious.
@@ -228,11 +237,7 @@ function init()
     -- Put a single small station here, which needs to be defended.
     table.insert(friendlyList, SpaceStation():setTemplate("Small Station"):setCallSign("DS-1"):setRotation(random(0, 360)):setFaction("Human Navy"):setPosition(random(-2000, 2000), random(-2000, 2000)))
 
-    -- Randomly scatter nebulae, one closer to the center.
-    setCirclePos(Nebula(), cx, cy, random(0, 360), 15000)
-    for _ = 1, 5 do
-        setCirclePos(Nebula(), cx, cy, random(0, 360), random(23000, 45000))
-    end
+    initSpace(cx, cy)
 
     initGM()
 
