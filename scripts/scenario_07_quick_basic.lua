@@ -241,8 +241,8 @@ function init()
     end
 
     -- Create a bunch of neutral stations
-        setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 0, 0, random(0, 360), random(15000, 30000))
     for _ = 1, 6 do
+        setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 0, 0, random(0, 360), random(15000, 30000))
     end
     -- Spawn random neutral transports.
     Script():run("util_random_transports.lua")
