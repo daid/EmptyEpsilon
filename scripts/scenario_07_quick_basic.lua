@@ -207,13 +207,16 @@ function init()
     enemyList = {}
     friendlyList = {}
 
+    -- center of game area
+    local cx, cy = 0, 0
+
     -- Create player ship.
     local template_name = "Phobos M3P"
     if getScenarioVariation() == "Advanced" then
         template_name = "Atlantis"
     end
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate(template_name)
-    player:setPosition(random(-2000, 2000), random(-2000, 2000)):setCallSign(ship_names[irandom(1, #ship_names)])
+    player:setPosition(cx + random(-2000, 2000), cy + random(-2000, 2000)):setCallSign(ship_names[irandom(1, #ship_names)])
     player:setJumpDrive(true)
     player:setWarpDrive(false)
 
@@ -225,11 +228,8 @@ function init()
     -- Put a single small station here, which needs to be defended.
     table.insert(friendlyList, SpaceStation():setTemplate("Small Station"):setCallSign("DS-1"):setRotation(random(0, 360)):setFaction("Human Navy"):setPosition(random(-2000, 2000), random(-2000, 2000)))
 
-    -- Randomly scatter nebulae near the players' spawn point.
-    local x, y = player:getPosition()
-    setCirclePos(Nebula(), x, y, random(0, 360), 15000)
-
-    local cx, cy = 0, 0
+    -- Randomly scatter nebulae, one closer to the center.
+    setCirclePos(Nebula(), cx, cy, random(0, 360), 15000)
     for _ = 1, 5 do
         setCirclePos(Nebula(), cx, cy, random(0, 360), random(23000, 45000))
     end
@@ -247,13 +247,13 @@ function init()
         for _ = 1, 50 do
             local dx1, dy1 = vectorFromAngle(a2, random(-1000, 1000))
             local dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
-            Asteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2):setSize(random(100, 500))
+            Asteroid():setPosition(cx + x + dx1 + dx2, cy + y + dy1 + dy2):setSize(random(100, 500))
         end
 
         for _ = 1, 100 do
             local dx1, dy1 = vectorFromAngle(a2, random(-1500, 1500))
             local dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
-            VisualAsteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2)
+            VisualAsteroid():setPosition(cx + x + dx1 + dx2, cy + y + dy1 + dy2)
         end
     end
 
@@ -272,14 +272,13 @@ function init()
                 if irandom(0, 100) < 90 then
                     local dx1, dy1 = vectorFromAngle(a2, (nx * spacing) + random(-v, v))
                     local dx2, dy2 = vectorFromAngle(a2 + 90, (ny * spacing) + random(-v, v))
-                    Mine():setPosition(x + dx1 + dx2, y + dy1 + dy2)
+                    Mine():setPosition(cx + x + dx1 + dx2, cy + y + dy1 + dy2)
                 end
             end
         end
     end
 
     -- Create a bunch of neutral stations.
-    local cx, cy = 0, 0
     for _ = 1, 6 do
         setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), cx, cy, random(0, 360), random(15000, 30000))
     end
