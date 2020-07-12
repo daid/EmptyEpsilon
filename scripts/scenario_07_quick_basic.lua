@@ -263,11 +263,13 @@ function init()
 
         local a2 = random(0, 360) -- angle (orientation)
 
+        local v = 100 -- variation of mine position
+        local spacing = 1000 -- gap between mines
         for nx = -1, 1 do
             for ny = -5, 5 do
                 if irandom(0, 100) < 90 then
-                    local dx1, dy1 = vectorFromAngle(a2, (nx * 1000) + random(-100, 100))
-                    local dx2, dy2 = vectorFromAngle(a2 + 90, (ny * 1000) + random(-100, 100))
+                    local dx1, dy1 = vectorFromAngle(a2, (nx * spacing) + random(-v, v))
+                    local dx2, dy2 = vectorFromAngle(a2 + 90, (ny * spacing) + random(-v, v))
                     Mine():setPosition(x + dx1 + dx2, y + dy1 + dy2)
                 end
             end
