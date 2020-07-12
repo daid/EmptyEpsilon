@@ -155,6 +155,55 @@ function initSpace(cx, cy)
     for _ = 1, 5 do
         setCirclePos(Nebula(), cx, cy, random(0, 360), random(23000, 45000))
     end
+
+    -- Spawn 1-3 random asteroid belts.
+    for cnt = 1, irandom(1, 3) do
+        local a = random(0, 360) -- angle (direction)
+        local d = random(3000, 40000) -- distance
+        local x, y = vectorFromAngle(a, d)
+
+        local a2 = random(0, 360) -- angle (orientation)
+
+        for _ = 1, 50 do
+            local dx1, dy1 = vectorFromAngle(a2, random(-1000, 1000))
+            local dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
+            Asteroid():setPosition(cx + x + dx1 + dx2, cy + y + dy1 + dy2):setSize(random(100, 500))
+        end
+
+        for _ = 1, 100 do
+            local dx1, dy1 = vectorFromAngle(a2, random(-1500, 1500))
+            local dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
+            VisualAsteroid():setPosition(cx + x + dx1 + dx2, cy + y + dy1 + dy2)
+        end
+    end
+
+    -- Spawn 0-1 random mine fields.
+    for cnt = 1, irandom(0, 1) do
+        local a = random(0, 360) -- angle (direction)
+        local d = random(20000, 40000) -- distance
+        local x, y = vectorFromAngle(a, d)
+
+        local a2 = random(0, 360) -- angle (orientation)
+
+        local v = 100 -- variation of mine position
+        local spacing = 1000 -- gap between mines
+        for nx = -1, 1 do
+            for ny = -5, 5 do
+                if irandom(0, 100) < 90 then
+                    local dx1, dy1 = vectorFromAngle(a2, (nx * spacing) + random(-v, v))
+                    local dx2, dy2 = vectorFromAngle(a2 + 90, (ny * spacing) + random(-v, v))
+                    Mine():setPosition(cx + x + dx1 + dx2, cy + y + dy1 + dy2)
+                end
+            end
+        end
+    end
+
+    -- Create a bunch of neutral stations.
+    for _ = 1, 6 do
+        setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), cx, cy, random(0, 360), random(15000, 30000))
+    end
+    -- Spawn random neutral transports.
+    Script():run("util_random_transports.lua")
 end
 
 --- Add GM functions.
@@ -240,55 +289,6 @@ function init()
     initSpace(cx, cy)
 
     initGM()
-
-    -- Spawn 1-3 random asteroid belts.
-    for cnt = 1, irandom(1, 3) do
-        local a = random(0, 360) -- angle (direction)
-        local d = random(3000, 40000) -- distance
-        local x, y = vectorFromAngle(a, d)
-
-        local a2 = random(0, 360) -- angle (orientation)
-
-        for _ = 1, 50 do
-            local dx1, dy1 = vectorFromAngle(a2, random(-1000, 1000))
-            local dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
-            Asteroid():setPosition(cx + x + dx1 + dx2, cy + y + dy1 + dy2):setSize(random(100, 500))
-        end
-
-        for _ = 1, 100 do
-            local dx1, dy1 = vectorFromAngle(a2, random(-1500, 1500))
-            local dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
-            VisualAsteroid():setPosition(cx + x + dx1 + dx2, cy + y + dy1 + dy2)
-        end
-    end
-
-    -- Spawn 0-1 random mine fields.
-    for cnt = 1, irandom(0, 1) do
-        local a = random(0, 360) -- angle (direction)
-        local d = random(20000, 40000) -- distance
-        local x, y = vectorFromAngle(a, d)
-
-        local a2 = random(0, 360) -- angle (orientation)
-
-        local v = 100 -- variation of mine position
-        local spacing = 1000 -- gap between mines
-        for nx = -1, 1 do
-            for ny = -5, 5 do
-                if irandom(0, 100) < 90 then
-                    local dx1, dy1 = vectorFromAngle(a2, (nx * spacing) + random(-v, v))
-                    local dx2, dy2 = vectorFromAngle(a2 + 90, (ny * spacing) + random(-v, v))
-                    Mine():setPosition(cx + x + dx1 + dx2, cy + y + dy1 + dy2)
-                end
-            end
-        end
-    end
-
-    -- Create a bunch of neutral stations.
-    for _ = 1, 6 do
-        setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), cx, cy, random(0, 360), random(15000, 30000))
-    end
-    -- Spawn random neutral transports.
-    Script():run("util_random_transports.lua")
 
     -- Set the number of enemy waves based on the scenario variation.
     if getScenarioVariation() == "Advanced" then
