@@ -342,7 +342,20 @@ end
 --
 -- @param delta time delta
 function update(delta)
-    if scenario_started then
+    if not scenario_started then
+        if not player:isValid() then
+            victory("Kraylor")
+            local text = "Mission: FAILED (ship lost before mission started)"
+            globalMessage(text)
+            setBanner(text)
+            return
+        end
+        setBanner("Mission: PREPARING")
+        if delta > 0 and getScenarioVariation() ~= "GM Start" then
+            -- Start the scenario when the game is not paused and we are not waiting for the GM to start the game.
+            startScenario()
+        end
+    else -- scenario_started
         -- Calculate the game time left, and act on it.
         gametimeleft = gametimeleft - delta
         if gametimeleft < 0 then
@@ -417,19 +430,6 @@ function update(delta)
             -- Set banner for cinematic and top down views.
             local condition = getCondition()
             setBanner(string.format("Mission in progress - Time left: %d:%02d - Enemies: %d - Condition: %s", math.floor(gametimeleft / 60), math.floor(gametimeleft % 60), enemy_count, condition))
-        end
-    else
-        if not player:isValid() then
-            victory("Kraylor")
-            local text = "Mission: FAILED (ship lost before mission started)"
-            globalMessage(text)
-            setBanner(text)
-            return
-        end
-        setBanner("Mission: PREPARING")
-        if delta > 0 and getScenarioVariation() ~= "GM Start" then
-            -- Start the scenario when the game is not paused and we are not waiting for the GM to start the game.
-            startScenario()
         end
     end
 end
