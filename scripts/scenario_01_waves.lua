@@ -124,11 +124,11 @@ function spawnWave()
     -- Calculate score of wave
     local totalScoreRequirement  -- actually: remainingScoreRequirement
     if getScenarioVariation() == "Hard" then
-        totalScoreRequirement = math.pow(waveNumber * 1.5 + 4, 1.3) * 10;
+        totalScoreRequirement = math.pow(waveNumber * 1.5 + 4, 1.3) * 10
     elseif getScenarioVariation() == "Easy" then
-        totalScoreRequirement = math.pow(waveNumber * 0.8, 1.3) * 9;
+        totalScoreRequirement = math.pow(waveNumber * 0.8, 1.3) * 9
     else
-        totalScoreRequirement = math.pow(waveNumber, 1.3) * 10;
+        totalScoreRequirement = math.pow(waveNumber, 1.3) * 10
     end
 
     local scoreInSpawnPoint = 0
@@ -136,8 +136,8 @@ function spawnWave()
     local spawnPointLeader = nil
     local spawn_x, spawn_y, spawn_range_x, spawn_range_y = randomSpawnPointInfo(spawnDistance)
     while totalScoreRequirement > 0 do
-        local ship = CpuShip():setFaction("Ghosts");
-        ship:setPosition(random(-spawn_range_x, spawn_range_x) + spawn_x, random(-spawn_range_y, spawn_range_y) + spawn_y);
+        local ship = CpuShip():setFaction("Ghosts")
+        ship:setPosition(random(-spawn_range_x, spawn_range_x) + spawn_x, random(-spawn_range_y, spawn_range_y) + spawn_y)
 
         -- Make the first ship the leader at this spawn point
         if spawnPointLeader == nil then
@@ -152,9 +152,9 @@ function spawnWave()
         local score = 9999
         if type < 2 then
             if irandom(1, 100) < 80 then
-                ship:setTemplate("MT52 Hornet");
+                ship:setTemplate("MT52 Hornet")
             else
-                ship:setTemplate("MU52 Hornet");
+                ship:setTemplate("MU52 Hornet")
             end
             score = 5
         elseif type < 3 then
@@ -166,26 +166,26 @@ function spawnWave()
             score = 7
         elseif type < 6 then
             if irandom(1, 100) < 80 then
-                ship:setTemplate("Phobos T3");
+                ship:setTemplate("Phobos T3")
             else
-                ship:setTemplate("Piranha F12");
+                ship:setTemplate("Piranha F12")
             end
             score = 15
         elseif type < 7 then
-            ship:setTemplate("Ranus U");
+            ship:setTemplate("Ranus U")
             score = 25
         elseif type < 8 then
             if irandom(1, 100) < 50 then
-                ship:setTemplate("Stalker Q7");
+                ship:setTemplate("Stalker Q7")
             else
-                ship:setTemplate("Stalker R7");
+                ship:setTemplate("Stalker R7")
             end
             score = 25
         elseif type < 9 then
-            ship:setTemplate("Atlantis X23");
+            ship:setTemplate("Atlantis X23")
             score = 50
         else
-            ship:setTemplate("Odin");
+            ship:setTemplate("Odin")
             score = 250
         end
 
@@ -193,7 +193,7 @@ function spawnWave()
         if score > totalScoreRequirement * 1.1 + 5 then
             ship:destroy()
         else
-            table.insert(enemyList, ship);
+            table.insert(enemyList, ship)
             totalScoreRequirement = totalScoreRequirement - score
             scoreInSpawnPoint = scoreInSpawnPoint + score
         end
@@ -207,7 +207,7 @@ function spawnWave()
         end
     end
 
-    globalMessage(string.format(_("Wave %d"), waveNumber));
+    globalMessage(string.format(_("Wave %d"), waveNumber))
 end
 
 function update(delta)
@@ -215,11 +215,11 @@ function update(delta)
     if spawnWaveDelay ~= nil then
         spawnWaveDelay = spawnWaveDelay - delta
         if spawnWaveDelay < 5 then
-            globalMessage(math.ceil(spawnWaveDelay));
+            globalMessage(math.ceil(spawnWaveDelay))
         end
         if spawnWaveDelay < 0 then
-            spawnWave();
-            spawnWaveDelay = nil;
+            spawnWave()
+            spawnWaveDelay = nil
         end
         return
     end
@@ -239,12 +239,12 @@ function update(delta)
     end
     -- Continue ...
     if enemy_count == 0 then
-        spawnWaveDelay = 15.0;
-        globalMessage("Wave cleared!");
+        spawnWaveDelay = 15.0
+        globalMessage("Wave cleared!")
         getPlayerShip(-1):addToShipLog("Wave " .. waveNumber .. " cleared.", "green")
     end
     -- ... or lose
     if friendly_count == 0 then
-        victory("Ghosts");  --Victory for the Ghosts (== defeat for the players)
+        victory("Ghosts")  -- Victory for the Ghosts (= defeat for the players)
     end
 end
