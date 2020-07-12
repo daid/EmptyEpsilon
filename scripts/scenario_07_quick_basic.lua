@@ -147,6 +147,33 @@ function getWaveDistance(cnt, enemy_group_count)
     return random(25000 + cnt * 1000, 30000 + cnt * 3000)
 end
 
+--- Add GM functions.
+function initGM()
+    -- Let the GM declare the Humans (players) victorious.
+    addGMFunction(
+        "Win",
+        function()
+            victory("Human Navy")
+        end
+    )
+
+    -- Let the GM declare the Humans (players) defeated.
+    addGMFunction(
+        "Defeat",
+        function()
+            victory("Kraylor")
+        end
+    )
+
+    -- Let the GM create more enemies if the players are having a too easy time.
+    addGMFunction(
+        "Extra wave",
+        function()
+            addWave(enemyList, random(0, 10), random(0, 360), random(25000, 30000))
+        end
+    )
+end
+
 --- Init.
 function init()
     enemyList = {}
@@ -178,29 +205,7 @@ function init()
         setCirclePos(Nebula(), 0, 0, random(0, 360), random(23000, 45000))
     end
 
-    -- Let the GM declare the Humans (players) victorious.
-    addGMFunction(
-        "Win",
-        function()
-            victory("Human Navy")
-        end
-    )
-
-    -- Let the GM declare the Humans (players) defeated.
-    addGMFunction(
-        "Defeat",
-        function()
-            victory("Kraylor")
-        end
-    )
-
-    -- Let the GM create more enemies if the players are having a too easy time.
-    addGMFunction(
-        "Extra wave",
-        function()
-            addWave(enemyList, random(0, 10), random(0, 360), random(25000, 30000))
-        end
-    )
+    initGM()
 
     -- Spawn 1-3 random asteroid belts.
     for cnt = 1, irandom(1, 3) do
