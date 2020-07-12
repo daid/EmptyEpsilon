@@ -284,7 +284,7 @@ function init()
     allowNewPlayerShips(false)
 
     -- Put a single small station here, which needs to be defended.
-    table.insert(friendlyList, SpaceStation():setTemplate("Small Station"):setCallSign("DS-1"):setRotation(random(0, 360)):setFaction("Human Navy"):setPosition(random(-2000, 2000), random(-2000, 2000)))
+    table.insert(friendlyList, SpaceStation():setTemplate("Small Station"):setCallSign("DS-1"):setRotation(random(0, 360)):setFaction("Human Navy"):setPosition(cx + random(-2000, 2000), cy + random(-2000, 2000)))
 
     initSpace(cx, cy)
 
