@@ -174,6 +174,33 @@ function initGM()
     )
 end
 
+--- Add target practice for GM Start.
+function initGMStart()
+    -- global target_practice_drone
+    target_practice_drone = CpuShip():setFaction("Ghosts"):setTemplate("MT52 Hornet"):setTypeName("Target practice")
+    target_practice_drone:setScannedByFaction("Human Navy", true)
+    target_practice_drone:setImpulseMaxSpeed(60)
+    target_practice_drone:setBeamWeapon(0, 0, 0, 0.0, 0, 0)
+    local x, y = 2500, 3500
+    target_practice_drone:setPosition(x, y):orderDefendLocation(x, y)
+
+    addGMFunction(
+        "Start",
+        function()
+            startScenario()
+            removeGMFunction("Start")
+        end
+    )
+end
+
+--- Clear GM Start.
+function clearGMStart()
+    -- global target_practice_drone
+    if target_practice_drone ~= nil and target_practice_drone:isValid() then
+        target_practice_drone:destroy()
+    end
+end
+
 --- Init.
 function init()
     enemyList = {}
@@ -257,20 +284,7 @@ function init()
     -- If we have a GM started scenario.
     scenario_started = false
     if getScenarioVariation() == "GM Start" then
-        target_practice_drone = CpuShip():setFaction("Ghosts"):setTemplate("MT52 Hornet"):setTypeName("Target practice")
-        target_practice_drone:setScannedByFaction("Human Navy", true)
-        target_practice_drone:setImpulseMaxSpeed(60)
-        target_practice_drone:setBeamWeapon(0, 0, 0, 0.0, 0, 0)
-        local x, y = 2500, 3500
-        target_practice_drone:setPosition(x, y):orderDefendLocation(x, y)
-
-        addGMFunction(
-            "Start",
-            function()
-                startScenario()
-                removeGMFunction("Start")
-            end
-        )
+        initGMStart()
     end
 end
 
@@ -278,15 +292,13 @@ end
 --
 -- Called once in `update` as soon as the game is unpaused or by the GM.
 function startScenario()
+    clearGMStart()
+
     -- Set the number of enemy waves based on the scenario variation.
     if getScenarioVariation() == "Advanced" then
         enemy_group_count = 6
     else
         enemy_group_count = 3
-    end
-
-    if target_practice_drone ~= nil and target_practice_drone:isValid() then
-        target_practice_drone:destroy()
     end
 
     -- If not in the Empty variation, spawn the corresponding number of random
