@@ -95,39 +95,40 @@ ship_names = {
 -- @param a The spawned wave's heading relative to the players' spawn point.
 -- @param d The spawned wave's distance from the players' spawn point.
 function addWave(enemyList, kind, a, d)
+    local cx, cy = 0, 0 -- center
     if kind < 1.0 then
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Ranus U"):setRotation(a + 180):orderRoaming(), 0, 0, a, d))
+        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Ranus U"):setRotation(a + 180):orderRoaming(), cx, cy, a, d))
     elseif kind < 2.0 then
-        local leader = setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-1, 1), d + random(-100, 100))
+        local leader = setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-1, 1), d + random(-100, 100))
         table.insert(enemyList, leader)
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -400, 0), 0, 0, a + random(-1, 1), d + random(-100, 100)))
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 400, 0), 0, 0, a + random(-1, 1), d + random(-100, 100)))
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -400, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 400, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
+        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -400, 0), cx, cy, a + random(-1, 1), d + random(-100, 100)))
+        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 400, 0), cx, cy, a + random(-1, 1), d + random(-100, 100)))
+        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -400, 400), cx, cy, a + random(-1, 1), d + random(-100, 100)))
+        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 400, 400), cx, cy, a + random(-1, 1), d + random(-100, 100)))
     elseif kind < 3.0 then
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Adder MK5"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Adder MK5"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Adder MK5"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Adder MK5"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
     elseif kind < 4.0 then
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
     elseif kind < 5.0 then
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Atlantis X23"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Atlantis X23"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
     elseif kind < 6.0 then
-        local leader = setCirclePos(CpuShip():setTemplate("Piranha F12"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100))
+        local leader = setCirclePos(CpuShip():setTemplate("Piranha F12"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100))
         table.insert(enemyList, leader)
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -1500, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 1500, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
+        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -1500, 400), cx, cy, a + random(-1, 1), d + random(-100, 100)))
+        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 1500, 400), cx, cy, a + random(-1, 1), d + random(-100, 100)))
     elseif kind < 7.0 then
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
     elseif kind < 8.0 then
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Nirvana R5"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Nirvana R5"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
     elseif kind < 9.0 then
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MU52 Hornet"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MU52 Hornet"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
     else
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("WX-Lindworm"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("WX-Lindworm"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("WX-Lindworm"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("WX-Lindworm"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
     end
 end
 
@@ -228,8 +229,9 @@ function init()
     local x, y = player:getPosition()
     setCirclePos(Nebula(), x, y, random(0, 360), 15000)
 
+    local cx, cy = 0, 0
     for _ = 1, 5 do
-        setCirclePos(Nebula(), 0, 0, random(0, 360), random(23000, 45000))
+        setCirclePos(Nebula(), cx, cy, random(0, 360), random(23000, 45000))
     end
 
     initGM()
@@ -277,8 +279,9 @@ function init()
     end
 
     -- Create a bunch of neutral stations.
+    local cx, cy = 0, 0
     for _ = 1, 6 do
-        setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 0, 0, random(0, 360), random(15000, 30000))
+        setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), cx, cy, random(0, 360), random(15000, 30000))
     end
     -- Spawn random neutral transports.
     Script():run("util_random_transports.lua")
