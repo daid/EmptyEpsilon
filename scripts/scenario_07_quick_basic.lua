@@ -152,6 +152,7 @@ function init()
     enemyList = {}
     friendlyList = {}
 
+    -- Create player ship.
     local template_name = "Phobos M3P"
     if getScenarioVariation() == "Advanced" then
         template_name = "Atlantis"
@@ -203,10 +204,11 @@ function init()
 
     -- Spawn 1-3 random asteroid belts.
     for cnt = 1, irandom(1, 3) do
-        local a = random(0, 360)
-        local a2 = random(0, 360)
-        local d = random(3000, 40000)
+        local a = random(0, 360) -- angle (direction)
+        local d = random(3000, 40000) -- distance
         local x, y = vectorFromAngle(a, d)
+
+        local a2 = random(0, 360) -- angle (orientation)
 
         for _ = 1, 50 do
             local dx1, dy1 = vectorFromAngle(a2, random(-1000, 1000))
@@ -240,7 +242,7 @@ function init()
         end
     end
 
-    -- Create a bunch of neutral stations
+    -- Create a bunch of neutral stations.
     for _ = 1, 6 do
         setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 0, 0, random(0, 360), random(15000, 30000))
     end
@@ -308,8 +310,8 @@ end
 --
 -- @param delta time delta
 function update(delta)
-    -- Calculate the game time left, and act on it.
     if scenario_started then
+        -- Calculate the game time left, and act on it.
         gametimeleft = gametimeleft - delta
         if gametimeleft < 0 then
             victory("Kraylor")
@@ -365,6 +367,7 @@ function update(delta)
                 end
             end
 
+            -- Set banner for cinematic and top down views.
             local condition = "green"
             if player:getShieldLevel(0) < player:getShieldMax(0) * 0.8 or player:getShieldLevel(1) < player:getShieldMax(1) * 0.8 then
                 condition = "yellow"
