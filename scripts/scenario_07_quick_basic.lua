@@ -307,6 +307,20 @@ Good Luck.]], player:getCallSign(), gametimeleft / 60)
     scenario_started = true
 end
 
+--- Return condition as string.
+function getCondition()
+    local condition = "green"
+    for i = 1, player:getShieldCount() do
+        if player:getShieldLevel(i) < player:getShieldMax(i) * 0.8 then
+            condition = "yellow"
+        end
+    end
+    if player:getHull() < player:getHullMax() * 0.8 then
+        condition = "red"
+    end
+    return condition
+end
+
 --- Update.
 --
 -- @param delta time delta
@@ -384,13 +398,7 @@ function update(delta)
             end
 
             -- Set banner for cinematic and top down views.
-            local condition = "green"
-            if player:getShieldLevel(0) < player:getShieldMax(0) * 0.8 or player:getShieldLevel(1) < player:getShieldMax(1) * 0.8 then
-                condition = "yellow"
-            end
-            if player:getHull() < player:getHullMax() * 0.8 then
-                condition = "red"
-            end
+            local condition = getCondition()
             setBanner(string.format("Mission in progress - Time left: %d:%02d - Enemies: %d - Condition: %s", math.floor(gametimeleft / 60), math.floor(gametimeleft % 60), enemy_count, condition))
         end
     else
