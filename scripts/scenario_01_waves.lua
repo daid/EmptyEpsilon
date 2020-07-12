@@ -16,15 +16,15 @@ require("utils.lua")
 
 function randomStationTemplate()
     if random(0, 100) < 10 then
-        return 'Huge Station'
+        return "Huge Station"
     end
     if random(0, 100) < 20 then
-        return 'Large Station'
+        return "Large Station"
     end
     if random(0, 100) < 50 then
-        return 'Medium Station'
+        return "Medium Station"
     end
-    return 'Small Station'
+    return "Small Station"
 end
 
 function init()
@@ -44,14 +44,14 @@ How many waves can you destroy?]]
     getPlayerShip(-1):addToShipLog(text, "white")
 
     -- Random friendly stations
-    for n=1, 2 do
+    for n = 1, 2 do
         table.insert(friendlyList, SpaceStation():setTemplate(randomStationTemplate()):setFaction("Human Navy"):setPosition(random(-5000, 5000), random(-5000, 5000)))
     end
     friendlyList[1]:addReputationPoints(150.0)
 
     -- Random nebulae
     local x, y = vectorFromAngle(random(0, 360), 15000)
-    for n=1, 5 do
+    for n = 1, 5 do
         local xx, yy = vectorFromAngle(random(0, 360), random(2500, 10000))
         Nebula():setPosition(x + xx, y + yy)
     end
@@ -60,17 +60,17 @@ How many waves can you destroy?]]
     local a, a2, d
     local dx1, dy1
     local dx2, dy2
-    for cnt=1,random(2, 7) do
+    for cnt = 1, random(2, 7) do
         a = random(0, 360)
         a2 = random(0, 360)
         d = random(3000, 15000 + cnt * 5000)
         x, y = vectorFromAngle(a, d)
-        for acnt=1,25 do
+        for acnt = 1, 25 do
             dx1, dy1 = vectorFromAngle(a2, random(-1000, 1000))
             dx2, dy2 = vectorFromAngle(a2 + 90, random(-10000, 10000))
             Asteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2)
         end
-        for acnt=1,50 do
+        for acnt = 1, 50 do
             dx1, dy1 = vectorFromAngle(a2, random(-1500, 1500))
             dx2, dy2 = vectorFromAngle(a2 + 90, random(-10000, 10000))
             VisualAsteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2)
@@ -81,7 +81,7 @@ How many waves can you destroy?]]
     spawnWave()
 
     -- Random neutral stations
-    for n=1, 6 do
+    for n = 1, 6 do
         setCirclePos(SpaceStation():setTemplate(randomStationTemplate()):setFaction("Independent"), 0, 0, random(0, 360), random(15000, 30000))
     end
 
@@ -148,7 +148,7 @@ function spawnWave()
         end
 
         -- Set ship type
-        local type = random(0, 10)  -- TODO rename variable
+        local type = random(0, 10) -- TODO rename variable
         local score = 9999
         if type < 2 then
             if irandom(1, 100) < 80 then
@@ -245,6 +245,6 @@ function update(delta)
     end
     -- ... or lose
     if friendly_count == 0 then
-        victory("Ghosts")  -- Victory for the Ghosts (= defeat for the players)
+        victory("Ghosts") -- Victory for the Ghosts (= defeat for the players)
     end
 end

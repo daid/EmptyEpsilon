@@ -16,7 +16,7 @@ function init()
     -- Modify the default cruiser into a technical cruiser, which has less weapon power then the normal player cruiser.
     Player:setTypeName("Technician Cruiser")
     --                      # Arc, Dir, Range, CycleTime, Dmg
-    Player:setBeamWeapon(0, 90,-25, 1000.0, 6.0, 10)
+    Player:setBeamWeapon(0, 90, -25, 1000.0, 6.0, 10)
     Player:setBeamWeapon(1, 90, 25, 1000.0, 6.0, 10)
     Player:setWeaponTubeCount(1)
     Player:setWeaponTubeDirection(0, 0)
@@ -24,10 +24,10 @@ function init()
     Player:setWeaponStorageMax("Mine", 0)
 
     --Create a "Technical Officer" entity hidden in sector Z81 to talk to Relay and prompt the Captain to give the order to return to Central Command. The position of this ship in relation to the Station Nirvana was intended to serve as a sort of timer for the inspection job.
-    Technical_Officer = CpuShip():setFaction("Human Navy"):setTemplate("Flavia"):setCallSign("Technical Officer"):setPosition(1530000,411000):orderIdle()
+    Technical_Officer = CpuShip():setFaction("Human Navy"):setTemplate("Flavia"):setCallSign("Technical Officer"):setPosition(1530000, 411000):orderIdle()
     Technical_Officer:setCommsScript("") -- Disable the comms script for the Technical Officer station (though really, they should never find it all the way out in sector Z81).
     --Create a station called "Nirvana" for "Technical Officer" to approach. Surplus to requirements now but a good example of the crazy stuff a newbie might try.
-    Nirvana = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(1530000,412000):setCallSign("Nirvana")
+    Nirvana = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(1530000, 412000):setCallSign("Nirvana")
 
     EOS_Station = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(60500, 42100):setCallSign("E.O.S Scope")
     EOS_Station:setCommsScript("") -- Disable the comms script for the EOS Scope station.
@@ -53,9 +53,9 @@ function init()
     Human_m3 = CpuShip():setFaction("Human Navy"):setTemplate("MT52 Hornet"):setCallSign("HM3"):setScanned(true):setPosition(35519, 42854):orderDefendLocation(35519, 42854)
 
     --Nebula that hide the enemy station.
-    Nebula():setPosition( 52300, 42200)
-    Nebula():setPosition( 51300, 34200)
-    Nebula():setPosition( 48700, 30050)
+    Nebula():setPosition(52300, 42200)
+    Nebula():setPosition(51300, 34200)
+    Nebula():setPosition(48700, 30050)
 
     --Random-ass nebulae
     Nebula():setPosition(49362, -18062)
@@ -72,15 +72,15 @@ function init()
     Nebula():setPosition(-33654, -41667)
 
     --Create 50 Asteroids
-    for asteroid_counter=1,20 do
-        Asteroid():setPosition( random(-10000, 20000), random(-22000,-15000))
-        VisualAsteroid():setPosition( random(-10000, 20000), random(-22000,-15000))
+    for asteroid_counter = 1, 20 do
+        Asteroid():setPosition(random(-10000, 20000), random(-22000, -15000))
+        VisualAsteroid():setPosition(random(-10000, 20000), random(-22000, -15000))
 
-        Asteroid():setPosition( random( 12000, 40000), random(-25000,-18000))
-        VisualAsteroid():setPosition( random(12000, 40000), random(-25000,-18000))
+        Asteroid():setPosition(random(12000, 40000), random(-25000, -18000))
+        VisualAsteroid():setPosition(random(12000, 40000), random(-25000, -18000))
 
-        Asteroid():setPosition( random( 35000, 55000), random(-27000,-20000))
-        VisualAsteroid():setPosition( random( 35000, 55000), random(-27000,-20000))
+        Asteroid():setPosition(random(35000, 55000), random(-27000, -20000))
+        VisualAsteroid():setPosition(random(35000, 55000), random(-27000, -20000))
     end
 
     --Kraylor Endline ships protecting Eline until something happens
@@ -185,17 +185,20 @@ function init()
     ---------------------------------------------------------------------------
     ---------------------------------------------------------------------------
 
-
-
     --Central Command sends us to investigate the issues with E.O.S. Scope --Expanded text to attempt to explain why Apollo is shuttling this data around physically
-    Central_Command:sendCommsMessage(Player, _([[Apollo, Come in.
+    Central_Command:sendCommsMessage(
+        Player,
+        _(
+            [[Apollo, Come in.
 Our Edge-of-space telescope has been experiencing malfunctions over the course of the past few days. We expect the cause to be a mechanical failure, but we want you to take a look.
 
 The E.O.S Scope is right on the border of Kraylor space, so make sure to maintain contact and keep up long-range scans.
 
 Dock with the E.O.S Scope and investigate the damage, then return to Central Command to report your findings. Transmission of this report via standard communications channels is considered too dangerous given the already delicate nature of our treaty with the Kraylor.
 
-Reopen communications if you have any questions.]]))
+Reopen communications if you have any questions.]]
+        )
+    )
 
     Central_Command.mission_state = 1
     kraylor_threat = 0
@@ -206,10 +209,7 @@ Reopen communications if you have any questions.]]))
     inspection_complete = 0
     tech_databanks = 0
     tech_stranded = 0
-
 end
-
-
 
 function update(delta)
     --if you dead, you lose
@@ -229,10 +229,7 @@ function update(delta)
         victory("Kraylor")
     end
 
-
-
     if Central_Command.mission_state == 1 then
-
         --If K-Endline is destroyed at this stage Kraylor win
         if not Kraylor_Eline:isValid() then
             Central_Command:sendCommsMessage(Player, _([[Apollo, you've incited a war! What a disaster...]]))
@@ -261,27 +258,32 @@ Do not confront them; we're not trying to start a war.]]))
         if distance(Player, EOS_Station) < 5000 then
             if command_warning == 1 then
                 if kraylor_threat == 0 then
-            Kraylor_Eline:sendCommsMessage(Player, _([[Attention Human Naval Vessel:
+                    Kraylor_Eline:sendCommsMessage(
+                        Player,
+                        _(
+                            [[Attention Human Naval Vessel:
 
 We have noted your expansion toward Kraylor Endline Territory. Know that even the slightest act of aggression will be met with a forceful purging of all Human ships and stations from our sector of space.
 
-Do what maintanence you must while you are here, but know also that we consider your telescopic station to be a potential threat.]]))
+Do what maintanence you must while you are here, but know also that we consider your telescopic station to be a potential threat.]]
+                        )
+                    )
 
-            Central_Command.mission_state = 2
-            kraylor_threat = 1
+                    Central_Command.mission_state = 2
+                    kraylor_threat = 1
                 end
             end
         end
     end
 
-inspection_progress = inspection_progress + delta
---print(inspection_progress)  -- for Debugging
+    inspection_progress = inspection_progress + delta
+    --print(inspection_progress)  -- for Debugging
 
     --When the Apollo is docked with EOS_Station a message is received from the Technical Officer advising that his team is beginning their inspection
     if Central_Command.mission_state == 2 then
         if Player:isDocked(EOS_Station) and inspection_init == 0 then
-    globalMessage("Away Team in transit.")
-    Technical_Officer:sendCommsMessage(Player, _([[We're beginning an inspection of the EOS Scope facility now.
+            globalMessage("Away Team in transit.")
+            Technical_Officer:sendCommsMessage(Player, _([[We're beginning an inspection of the EOS Scope facility now.
 
 This shouldn't take long.]]))
             inspection_init = 1 --inspection has begun (Timer event is pretty fool-proof but better to have a flag preventing "Job Done" somehow triggering before inspection starts)
@@ -289,12 +291,11 @@ This shouldn't take long.]]))
         end
     end
 
-
     if Central_Command.mission_state == 2 then
         if Player:isDocked(EOS_Station) and inspection_init == 1 then
             if inspection_progress > 30 then
                 if tech_databanks == 0 then
-                    Technical_Officer:sendCommsMessage(Player,_([[It looks like the databanks are still in good working order.
+                    Technical_Officer:sendCommsMessage(Player, _([[It looks like the databanks are still in good working order.
 
 We'll retrieve what we can.]]))
                     tech_databanks = 1
@@ -305,7 +306,7 @@ We'll retrieve what we can.]]))
 
     --Tech Officer complains about being left behind if the Apollo is not Docked since inspection began.
     if Central_Command.mission_state == 2 then
-        if inspection_init ==1 then
+        if inspection_init == 1 then
             if inspection_complete == 0 then
                 if inspection_progress > 50 then
                     if not Player:isDocked(EOS_Station) then
@@ -328,18 +329,19 @@ Please dock so we can come aboard.]]))
         if Player:isDocked(EOS_Station) then --If the ship is not docked, the Tech Officer will complain.
             if inspection_init == 1 and inspection_complete == 0 then
                 if inspection_progress > 50 then
-    globalMessage("Away Team have returned.")
-    Technical_Officer:sendCommsMessage(Player, _([[Our inspection of the scope facility is complete. We were able to retrieve much of the data recorded over the past few days, though proper analysis will require an expert.
+                    globalMessage("Away Team have returned.")
+                    Technical_Officer:sendCommsMessage(
+                        Player,
+                        _([[Our inspection of the scope facility is complete. We were able to retrieve much of the data recorded over the past few days, though proper analysis will require an expert.
 
-We should hurry back to Central Command with    this so they can begin work.]]))
+We should hurry back to Central Command with    this so they can begin work.]])
+                    )
 
-            inspection_complete = 1 -- flag preventing continuous triggering of "Job Done" comms
+                    inspection_complete = 1 -- flag preventing continuous triggering of "Job Done" comms
                 end
             end
         end
     end
-
-
 
     --Report back to Central Command
     if Central_Command.mission_state == 2 then
@@ -350,9 +352,14 @@ We should hurry back to Central Command with    this so they can begin work.]]))
         end
 
         if Player:isDocked(Central_Command) then
-            Central_Command:sendCommsMessage(Player, _([[It appears the damage was mechanical, but Kraylor ships in the area have been spotted in surveillance data you recovered from E.O.S Scope. It's possible this was sabotage.
+            Central_Command:sendCommsMessage(
+                Player,
+                _(
+                    [[It appears the damage was mechanical, but Kraylor ships in the area have been spotted in surveillance data you recovered from E.O.S Scope. It's possible this was sabotage.
 
-Whatever the case, we need you to rendezvous with science station Galileo in sector C5. We've contracted with this Arlenian station to interperet and analyze the data retrieved from our various Scope stations.]]))
+Whatever the case, we need you to rendezvous with science station Galileo in sector C5. We've contracted with this Arlenian station to interperet and analyze the data retrieved from our various Scope stations.]]
+                )
+            )
 
             Central_Command.mission_state = 3
         end
@@ -388,9 +395,14 @@ Kraylor ships are in our vicinity, we have reason to believe they intend to atta
         end
 
         if not kraylor_g1:isValid() and not kraylor_g2:isValid() and not kraylor_g3:isValid() then
-            Science_Galileo:sendCommsMessage(Player, _([[We don't know why Kraylor ships were attacking us. We had just recieved word that your ship was on its way with data from the Edge-of-space telescopic station when they began interrupting transmissions.
+            Science_Galileo:sendCommsMessage(
+                Player,
+                _(
+                    [[We don't know why Kraylor ships were attacking us. We had just recieved word that your ship was on its way with data from the Edge-of-space telescopic station when they began interrupting transmissions.
 
-Thank you for defending our station. Please    dock with us and we'll be able to analyze the data from E.O.S Scope.]]))
+Thank you for defending our station. Please    dock with us and we'll be able to analyze the data from E.O.S Scope.]]
+                )
+            )
 
             Central_Command.mission_state = 5
         end
@@ -399,11 +411,14 @@ Thank you for defending our station. Please    dock with us and we'll be able to
     --Dock with Galileo station
     if Central_Command.mission_state == 5 then
         if Player:isDocked(Science_Galileo) then
-            Central_Command:sendCommsMessage(Player, _([[Apollo, come in!
+            Central_Command:sendCommsMessage(
+                Player,
+                _([[Apollo, come in!
 
 Leave the E.O.S data with Galileo for now, we've confirmed reports that Kraylor are brazen enough to attack our E.O.S Scope directly! All available ships should converge on E.O.S territory in sector H8!
 
-That means you, Apollo!]]))
+That means you, Apollo!]])
+            )
 
             kraylor_e1:orderRoaming()
             kraylor_e2:orderRoaming()
@@ -462,11 +477,16 @@ We have no choice but to declare war. Move into Kraylor territory and retaliate 
             --Time for some sweet upgrades!
             if not Kraylor_Eline:isValid() then
                 if not kraylor_m1:isValid() and not kraylor_m2:isValid() and not kraylor_m3:isValid() and not kraylor_m4:isValid() then
-                    Central_Command:sendCommsMessage(Player, _([[Apollo, come in.
+                    Central_Command:sendCommsMessage(
+                        Player,
+                        _(
+                            [[Apollo, come in.
 
 Our cease-fire with the Kraylor is at a bitter end, and aggression will only rise from here. It is imperative that our ships be equipped with all counter-measures necessary to keep them safe.
 
-Dock with the E.O.S Scope. We are re-fitting your ship in preparation for times of war.]]))
+Dock with the E.O.S Scope. We are re-fitting your ship in preparation for times of war.]]
+                        )
+                    )
 
                     Human_m1:orderDefendLocation(31875, 38653)
                     Human_m2:orderDefendLocation(37493, 37185)
@@ -520,11 +540,16 @@ Our cease-fire with the Kraylor is at a bitter end. Destroy the remaining Kraylo
     if Central_Command.mission_state == 7 then
         if not Kraylor_Eline:isValid() then
             if not kraylor_m1:isValid() and not kraylor_m2:isValid() and not kraylor_m3:isValid() and not kraylor_m4:isValid() then
-                Central_Command:sendCommsMessage(Player, _([[Apollo, come in.
+                Central_Command:sendCommsMessage(
+                    Player,
+                    _(
+                        [[Apollo, come in.
 
 Our cease-fire with the Kraylor is at a bitter end, and aggression will only rise from here. It is imperative that our ships be equipped with all counter-measures necessary to keep them safe.
 
-Dock with the E.O.S Scope. We are re-fitting your ship in preparation for times of war.]]))
+Dock with the E.O.S Scope. We are re-fitting your ship in preparation for times of war.]]
+                    )
+                )
 
                 Human_m1:orderDefendLocation(31875, 38653)
                 Human_m2:orderDefendLocation(37493, 37185)
@@ -579,11 +604,14 @@ Our cease-fire with the Kraylor is at a bitter end. Destroy the remaining Kraylo
 
         --Time for some sweet upgrades!
         if not kraylor_m1:isValid() and not kraylor_m2:isValid() and not kraylor_m3:isValid() and not kraylor_m4:isValid() then
-            Central_Command:sendCommsMessage(Player, _([[Apollo, come in.
+            Central_Command:sendCommsMessage(
+                Player,
+                _([[Apollo, come in.
 
 Kraylor aggression will only rise from here. It is imperative that our ships be equipped with all counter-measures necessary to keep them safe.
 
-Dock with the E.O.S Scope. We are re-fitting your ship in preparation for times of war.]]))
+Dock with the E.O.S Scope. We are re-fitting your ship in preparation for times of war.]])
+            )
 
             Human_m1:orderDefendLocation(31875, 38653)
             Human_m2:orderDefendLocation(37493, 37185)
@@ -600,8 +628,8 @@ Dock with the E.O.S Scope. We are re-fitting your ship in preparation for times 
             Player:setTypeName("Wartime Technician")
             --                    # Arc, Dir, Range, CycleTime, Dmg
             Player:setBeamWeapon(0, 100, -20, 1000.0, 6.0, 10)
-            Player:setBeamWeapon(1, 100,  20, 1000.0, 6.0, 10)
-            Player:setBeamWeapon(2,  90, 180, 1000.0, 6.0, 10)
+            Player:setBeamWeapon(1, 100, 20, 1000.0, 6.0, 10)
+            Player:setBeamWeapon(2, 90, 180, 1000.0, 6.0, 10)
             Player:setWeaponTubeCount(3)
             Player:setWeaponTubeDirection(0, 0):weaponTubeDisallowMissle(0, "Mine")
             Player:setWeaponTubeDirection(1, 0):weaponTubeDisallowMissle(1, "Mine")
@@ -616,11 +644,16 @@ Dock with the E.O.S Scope. We are re-fitting your ship in preparation for times 
             Player:setWeaponStorage("Mine", 8)
             Player:setWeaponStorage("EMP", 6)
 
-            Central_Command:sendCommsMessage(Player, _([[Science station Galileo has returned with their analysis of the E.O.S Scope data.
+            Central_Command:sendCommsMessage(
+                Player,
+                _(
+                    [[Science station Galileo has returned with their analysis of the E.O.S Scope data.
 
 Edge-of-space sensors picked up on sparse signals from the super-nebula in Kraylor space that indicate they have some kind of wormhole. Intelligence suggests they intend to use it to infiltrate Human space and attack us where we are defenseless!
 
-When your ship is finished being outfitted for war move up to the nebula, but be cautious. There may be traps.]]))
+When your ship is finished being outfitted for war move up to the nebula, but be cautious. There may be traps.]]
+                )
+            )
 
             Central_Command.mission_state = 10
         end
@@ -629,9 +662,12 @@ When your ship is finished being outfitted for war move up to the nebula, but be
     --Get to the wormhole!
     if Central_Command.mission_state == 10 then
         if distance(Player, Kraylor_hole) < 10000 then
-            Central_Command:sendCommsMessage(Player, _([[Apollo come in!
+            Central_Command:sendCommsMessage(
+                Player,
+                _([[Apollo come in!
 
-Reports are coming in from core Human space that a massive Kraylor strike force is attacking! Get through that wormhole and attack from within their ranks to hold them off. We'll send all our available ships to converge there.]]))
+Reports are coming in from core Human space that a massive Kraylor strike force is attacking! Get through that wormhole and attack from within their ranks to hold them off. We'll send all our available ships to converge there.]])
+            )
 
             --------------------------------------------------------------------------------------
             --Let's get crazy up in here
@@ -670,7 +706,10 @@ Reports are coming in from core Human space that a massive Kraylor strike force 
     end
 
     if Central_Command.mission_state == 11 then
-        if not k01:isValid() and not k02:isValid() and not k03:isValid() and not k04:isValid() and not k05:isValid() and not k06:isValid() and not k07:isValid() and not k08:isValid() and not k09:isValid() and not k10:isValid() and not k11:isValid() and not k12:isValid() and not k13:isValid() and not k14:isValid() then
+        if
+            not k01:isValid() and not k02:isValid() and not k03:isValid() and not k04:isValid() and not k05:isValid() and not k06:isValid() and not k07:isValid() and not k08:isValid() and not k09:isValid() and not k10:isValid() and not k11:isValid() and not k12:isValid() and not k13:isValid() and
+                not k14:isValid()
+         then
             victory("Human Navy")
         end
     end
