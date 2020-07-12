@@ -423,18 +423,18 @@ function update(delta)
             globalMessage(text)
             setBanner(text)
             return
-        else
-            -- As the battle continues, award reputation based on
-            -- the players' progress and number of surviving allies.
-            for _, friendly in ipairs(friendlyList) do
-                if friendly:isValid() then
-                    friendly:addReputationPoints(delta * friendly_count * 0.1)
-                end
-            end
-
-            -- Set banner for cinematic and top down views.
-            local condition = getCondition()
-            setBanner(string.format("Mission in progress - Time left: %d:%02d - Enemies: %d - Condition: %s", math.floor(gametimeleft / 60), math.floor(gametimeleft % 60), enemy_count, condition))
         end
+
+        -- As the battle continues, award reputation based on
+        -- the players' progress and number of surviving allies.
+        for _, friendly in ipairs(friendlyList) do
+            if friendly:isValid() then
+                friendly:addReputationPoints(delta * friendly_count * 0.1)
+            end
+        end
+
+        -- Set banner for cinematic and top down views.
+        local condition = getCondition()
+        setBanner(string.format("Mission in progress - Time left: %d:%02d - Enemies: %d - Condition: %s", math.floor(gametimeleft / 60), math.floor(gametimeleft % 60), enemy_count, condition))
     end
 end
