@@ -296,11 +296,12 @@ function startScenario()
         end
     end
 
-    friendlyList[1]:sendCommsMessage(
+    local station = friendlyList[1]
+    station:sendCommsMessage(
         player,
-        string.format([[%s, please inform your Captain and crew that you have a total of %d minutes for this mission.
+        string.format([[%s, your objective is to fend off the incomming Kraylor attack.
+Please inform your Captain and crew that you have a total of %d minutes for this mission.
 The mission started at the arrival of this message.
-Your objective is to fend off the incomming Kraylor attack.
 Good Luck.]], player:getCallSign(), gametimeleft / 60)
     )
     scenario_started = true
