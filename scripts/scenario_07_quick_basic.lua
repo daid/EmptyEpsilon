@@ -281,6 +281,13 @@ function init()
     -- Spawn random neutral transports.
     Script():run("util_random_transports.lua")
 
+    -- Set the number of enemy waves based on the scenario variation.
+    if getScenarioVariation() == "Advanced" then
+        enemy_group_count = 6
+    else
+        enemy_group_count = 3
+    end
+
     -- If we have a GM started scenario.
     scenario_started = false
     if getScenarioVariation() == "GM Start" then
@@ -293,13 +300,6 @@ end
 -- Called once in `update` as soon as the game is unpaused or by the GM.
 function startScenario()
     clearGMStart()
-
-    -- Set the number of enemy waves based on the scenario variation.
-    if getScenarioVariation() == "Advanced" then
-        enemy_group_count = 6
-    else
-        enemy_group_count = 3
-    end
 
     -- If not in the Empty variation, spawn the corresponding number of random
     -- enemy waves at distributed random headings and semi-random distances
