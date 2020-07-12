@@ -316,7 +316,9 @@ function update(delta)
         gametimeleft = gametimeleft - delta
         if gametimeleft < 0 then
             victory("Kraylor")
-            setBanner("Mission: FAILED")
+            local text = "Mission: FAILED (time has run out)"
+            globalMessage(text)
+            setBanner(text)
             return
         end
         if gametimeleft < timewarning then
@@ -350,14 +352,18 @@ function update(delta)
         -- Note that players can win even if they destroy the enemies by blowing themselves up.
         if enemy_count == 0 then
             victory("Human Navy")
-            setBanner("Mission: SUCCESS")
+            local text = string.format("Mission: SUCCESS (%d seconds left)", math.floor(gametimeleft))
+            globalMessage(text)
+            setBanner(text)
             return
         end
 
         -- If all allies are destroyed, the Humans (players) lose.
         if friendly_count == 0 or not player:isValid() then
             victory("Kraylor")
-            setBanner("Mission: FAILED")
+            local text = "Mission: FAILED (no friendlies left)"
+            globalMessage(text)
+            setBanner(text)
             return
         else
             -- As the battle continues, award reputation based on
@@ -381,7 +387,9 @@ function update(delta)
     else
         if not player:isValid() then
             victory("Kraylor")
-            setBanner("Mission: FAILED")
+            local text = "Mission: FAILED (ship lost before mission started)"
+            globalMessage(text)
+            setBanner(text)
             return
         end
         setBanner("Mission: PREPARING")
