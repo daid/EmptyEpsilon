@@ -162,13 +162,13 @@ function init()
     player:setJumpDrive(true)
     player:setWarpDrive(false)
 
+    -- Start the players with 300 reputation.
+    player:addReputationPoints(300.0)
+
     allowNewPlayerShips(false)
 
     -- Put a single small station here, which needs to be defended.
     table.insert(friendlyList, SpaceStation():setTemplate("Small Station"):setCallSign("DS-1"):setRotation(random(0, 360)):setFaction("Human Navy"):setPosition(random(-2000, 2000), random(-2000, 2000)))
-
-    -- Start the players with 300 reputation.
-    player:addReputationPoints(300.0)
 
     -- Randomly scatter nebulae near the players' spawn point.
     local x, y = player:getPosition()
