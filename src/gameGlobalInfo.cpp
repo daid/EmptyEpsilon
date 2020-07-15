@@ -174,6 +174,7 @@ void GameGlobalInfo::reset()
     elapsed_time = 0.0f;
     callsign_counter = 0;
     victory_faction = -1;
+    allow_new_player_ships = true;
 }
 
 void GameGlobalInfo::startScenario(string filename)
