@@ -1,6 +1,14 @@
--- Name: Basic ship comms
--- Description: Simple ship comms that allows setting orders if friendly. Default script for any cpuShip.
+--- Basic ship comms.
+--
+-- Simple ship comms that allows setting orders if friendly.
+-- Default script for any `CpuShip`.
 
+-- NOTE this could be imported
+local MISSILE_TYPES = {"Homing", "Nuke", "Mine", "EMP", "HVLI"}
+
+--- Main menu of communcition.
+--
+-- Uses one of `friendlyComms`, `neutralComms`, `enemyComms`.
 function mainMenu()
     if comms_target.comms_data == nil then
         comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
@@ -17,11 +25,12 @@ function mainMenu()
     return neutralComms(comms_data)
 end
 
+--- Handle friendly communication.
 function friendlyComms(comms_data)
     if comms_data.friendlyness < 20 then
-        setCommsMessage("What do you want?");
+        setCommsMessage("What do you want?")
     else
-        setCommsMessage("Sir, how can we assist?");
+        setCommsMessage("Sir, how can we assist?")
     end
     addCommsReply("Defend a waypoint", function()
         if player:getWaypointCount() == 0 then
@@ -82,6 +91,7 @@ function friendlyComms(comms_data)
     return true
 end
 
+--- Handle enemy communication.
 function enemyComms(comms_data)
     if comms_data.friendlyness > 50 then
         local faction = comms_target:getFaction()
@@ -89,23 +99,23 @@ function enemyComms(comms_data)
         local taunt_success_reply = "Your bloodline will end here!"
         local taunt_failed_reply = "Your feeble threats are meaningless."
         if faction == "Kraylor" then
-            setCommsMessage("Ktzzzsss.\nYou will DIEEee weaklingsss!");
+            setCommsMessage("Ktzzzsss.\nYou will DIEEee weaklingsss!")
         elseif faction == "Arlenians" then
-            setCommsMessage("We wish you no harm, but will harm you if we must.\nEnd of transmission.");
+            setCommsMessage("We wish you no harm, but will harm you if we must.\nEnd of transmission.")
         elseif faction == "Exuari" then
-            setCommsMessage("Stay out of our way, or your death will amuse us extremely!");
+            setCommsMessage("Stay out of our way, or your death will amuse us extremely!")
         elseif faction == "Ghosts" then
-            setCommsMessage("One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted.");
+            setCommsMessage("One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted.")
             taunt_option = "EXECUTE: SELFDESTRUCT"
             taunt_success_reply = "Rogue command received. Targeting source."
             taunt_failed_reply = "External command ignored."
         elseif faction == "Ktlitans" then
-            setCommsMessage("The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition.");
+            setCommsMessage("The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition.")
             taunt_option = "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
             taunt_success_reply = "We do not need permission to pluck apart such an insignificant threat."
             taunt_failed_reply = "The hive has greater priorities than exterminating pests."
         else
-            setCommsMessage("Mind your own business!");
+            setCommsMessage("Mind your own business!")
         end
         comms_data.friendlyness = comms_data.friendlyness - random(0, 10)
         addCommsReply(taunt_option, function()
@@ -121,11 +131,12 @@ function enemyComms(comms_data)
     return false
 end
 
+--- Handle neutral communiction.
 function neutralComms(comms_data)
     if comms_data.friendlyness > 50 then
-        setCommsMessage("Sorry, we have no time to chat with you.\nWe are on an important mission.");
+        setCommsMessage("Sorry, we have no time to chat with you.\nWe are on an important mission.")
     else
-        setCommsMessage("We have nothing for you.\nGood day.");
+        setCommsMessage("We have nothing for you.\nGood day.")
     end
     return true
 end
