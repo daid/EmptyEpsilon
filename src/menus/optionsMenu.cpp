@@ -142,6 +142,7 @@ OptionsMenu::OptionsMenu()
     {
         PreferencesManager::set("helms_radar_lock", value ? "1" : "");
         PreferencesManager::set("tactical_radar_lock", value ? "1" : "");
+        PreferencesManager::set("single_pilot_radar_lock", value ? "1" : "");
     }))->setValue(PreferencesManager::get("helms_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
 
     // Helms rotation lock.
@@ -154,6 +155,7 @@ OptionsMenu::OptionsMenu()
     (new GuiToggleButton(interface_page, "SCIENCE_RADAR_LOCK", tr("Science Radar Lock"), [](bool value)
     {
         PreferencesManager::set("science_radar_lock", value ? "1" : "");
+        PreferencesManager::set("operations_radar_lock", value ? "1" : "");
     }))->setValue(PreferencesManager::get("science_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
 
     // Right column, auto layout. Draw first element 50px from top.

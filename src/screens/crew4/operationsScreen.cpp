@@ -1,5 +1,6 @@
 #include "playerInfo.h"
 #include "operationsScreen.h"
+#include "preferenceManager.h"
 
 #include "screens/crew6/scienceScreen.h"
 
@@ -58,6 +59,8 @@ OperationScreen::OperationScreen(GuiContainer* owner)
             }
         }
     );
+    science->science_radar->setAutoRotating(PreferencesManager::get("operations_radar_lock","0")=="1");
+
     (new GuiOpenCommsButton(science->radar_view, "OPEN_COMMS_BUTTON", tr("Open Comms"), &science->targets))->setPosition(-270, -20, ABottomRight)->setSize(200, 50);
 
     // Manage waypoints.
