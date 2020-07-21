@@ -442,7 +442,12 @@ void ShipAI::runOrders()
         }
         break;
     case AI_Attack:          //Attack [order_target] very specificly.
-        pathPlanner.clear();
+        if (owner->getOrderTarget())
+        {
+            pathPlanner.clear();
+        }else{
+            owner->orderRoaming();    //We pretty much lost our target, so just start roaming.
+        }
         break;
     case AI_Retreat:
         if ((owner->docking_state == DS_Docked) && (owner->getOrderTarget()) && P<ShipTemplateBasedObject>(owner->getOrderTarget()))
