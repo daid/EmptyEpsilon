@@ -62,6 +62,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
                 my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
         }
     );
+    radar->setAutoRotating(PreferencesManager::get("single_pilot_radar_lock","0")=="1");
 
     // Ship stats and combat maneuver at bottom right corner of left panel.
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
