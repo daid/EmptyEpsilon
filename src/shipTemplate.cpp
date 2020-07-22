@@ -61,6 +61,8 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWarpSpeed);
     /// Set if this ship shares energy with docked ships. Example: template:setSharesEnergyWithDocked(false)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSharesEnergyWithDocked);
+    /// Set if this ship repairs docked ships. Example: template:setRepairDocked(false)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRepairDocked);
     /// Set if this ship restocks scan probes on docked ships. Example: template:setRestocksScanProbes(false)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRestocksScanProbes);
     /// Set if this ship restores missiles on docked cpuships. Example template:setRestocksMissilesDocked(false)
