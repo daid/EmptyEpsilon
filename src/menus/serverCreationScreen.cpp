@@ -228,8 +228,6 @@ void ServerCreationScreen::selectScenario(string filename)
     scenario_description->setText(info.description);
 
     // Initialize variables.
-    scenario_description->setText("");
-
     variation_selection->setSelectionIndex(0);
     variation_names_list = {tr("variation", "None")};
 
