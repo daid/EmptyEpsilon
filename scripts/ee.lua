@@ -8,6 +8,10 @@
 --
 -- **Changelog**
 --
+-- *Version 0.7* (2020.08)
+--
+-- - Add constants for the scanned states and the array `SCANNED_STATES`.
+--
 -- *Version 0.6* (2020.05)
 --
 -- - Add the constant `MAX_PLAYER_SHIPS`.
@@ -116,6 +120,31 @@ SYSTEMS = {
   SYS_JUMPDRIVE,
   SYS_FRONTSHIELD,
   SYS_REARSHIELD
+}
+
+--- Scanned states.
+--
+-- String constants for the scanned states (type `EScannedState` in `script_reference.html`).
+--
+-- See `EScannedState` in `spaceObject.h`.
+--
+-- @section scanned_states
+
+--- `"notscanned"`
+SS_NOT_SCANNED = "notscanned"
+--- `"friendorfoeidentified"`
+SS_FRIEND_OR_FOE_IDENTIFIED = "friendorfoeidentified"
+--- `"simplescan"`
+SS_SIMPLE_SCAN = "simplescan"
+--- `"fullscan"`
+SS_FULL_SCAN = "fullscan"
+
+--- Array of the scanned states.
+SCANNED_STATES = {
+  SS_NOT_SCANNED,
+  SS_FRIEND_OR_FOE_IDENTIFIED,
+  SS_SIMPLE_SCAN,
+  SS_FULL_SCAN
 }
 
 --- Alert Levels.
