@@ -23,9 +23,9 @@ Nebula::Nebula()
     setRotation(random(0, 360));
     radar_visual = irandom(1, 3);
     setRadarSignatureInfo(0.0, 0.8, -1.0);
-    
+
     registerMemberReplication(&radar_visual);
-    
+
     for(int n=0; n<cloud_count; n++)
     {
         clouds[n].size = random(512, 1024 * 2);
@@ -34,7 +34,7 @@ Nebula::Nebula()
         float dist_max = getRadius() - clouds[n].size;
         clouds[n].offset = sf::vector2FromAngle(float(n * 360 / cloud_count)) * random(dist_min, dist_max);
     }
-    
+
     nebula_list.push_back(this);
 }
 
@@ -49,7 +49,7 @@ void Nebula::draw3DTransparent()
 
         sf::Vector3f position = sf::Vector3f(getPosition().x, getPosition().y, 0) + sf::Vector3f(cloud.offset.x, cloud.offset.y, 0);
         float size = cloud.size;
-        
+
         float distance = sf::length(camera_position - position);
         float alpha = 1.0 - (distance / 10000.0f);
         if (alpha < 0.0)
@@ -111,7 +111,7 @@ bool Nebula::blockedByNebula(sf::Vector2f start, sf::Vector2f end)
     float startEndLength = sf::length(startEndDiff);
     if (startEndLength < 5000.0f)
         return false;
-    
+
     foreach(Nebula, n, nebula_list)
     {
         //Calculate point q, which is a point on the line start-end that is closest to n->getPosition
@@ -154,7 +154,7 @@ sf::Vector2f Nebula::getFirstBlockedPosition(sf::Vector2f start, sf::Vector2f en
     }
     if (!first_nebula)
         return end;
-    
+
     float d = sf::length(first_nebula_q - first_nebula->getPosition());
     return first_nebula_q + sf::normalize(start - end) * sqrtf(first_nebula->getRadius() * first_nebula->getRadius() - d * d);
 }

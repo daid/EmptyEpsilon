@@ -33,11 +33,11 @@ Artifact::Artifact()
     registerMemberReplication(&artifact_spin);
 
     setRotation(random(0, 360));
-    
+
     current_model_data_name = "artifact" + string(irandom(1, 8));
     model_data_name = current_model_data_name;
     model_info.setData(current_model_data_name);
-    
+
     allow_pickup = false;
 }
 
@@ -53,9 +53,9 @@ void Artifact::update(float delta)
 void Artifact::draw3D()
 {
 #if FEATURE_3D_RENDERING
-	if (artifact_spin != 0.0) {
-		glRotatef(engine->getElapsedTime() * artifact_spin, 0, 0, 1);
-	}
+    if (artifact_spin != 0.0) {
+        glRotatef(engine->getElapsedTime() * artifact_spin, 0, 0, 1);
+    }
     SpaceObject::draw3D();
 #endif//FEATURE_3D_RENDERING
 }

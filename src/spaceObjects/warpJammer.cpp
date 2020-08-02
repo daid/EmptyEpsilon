@@ -32,7 +32,7 @@ WarpJammer::WarpJammer()
     setRadarSignatureInfo(0.05, 0.5, 0.0);
 
     registerMemberReplication(&range);
-    
+
     model_info.setData("shield_generator");
 }
 

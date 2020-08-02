@@ -15,7 +15,7 @@ class WarpJammer : public SpaceObject
 public:
     WarpJammer();
     ~WarpJammer();
-    
+
     void setRange(float range) { this->range = range; }
     float getRange() { return range; }
 
@@ -29,7 +29,7 @@ public:
 
     void onTakingDamage(ScriptSimpleCallback callback);
     void onDestruction(ScriptSimpleCallback callback);
-    
+
     virtual string getExportLine() override { return "WarpJammer():setFaction(\"" + getFaction() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 };
 

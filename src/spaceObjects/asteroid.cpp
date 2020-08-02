@@ -26,7 +26,7 @@ Asteroid::Asteroid()
 
     registerMemberReplication(&z);
     registerMemberReplication(&size);
-    
+
     PathPlannerManager::getInstance()->addAvoidObject(this, 300);
 }
 

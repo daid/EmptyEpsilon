@@ -68,7 +68,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomMessage);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomMessageWithCallback);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, removeCustom);
-    
+
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getBeamSystemTarget);
     /// Gets the name of the target system, instead of the ID
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getBeamSystemTargetName);
@@ -1724,15 +1724,15 @@ void PlayerSpaceship::commandFireTube(int8_t tubeNumber, float missile_target_an
 void PlayerSpaceship::commandFireTubeAtTarget(int8_t tubeNumber, P<SpaceObject> target)
 {
   float targetAngle = 0.0;
-  
+
   if (!target || tubeNumber < 0 || tubeNumber >= getWeaponTubeCount())
     return;
-  
+
   targetAngle = weapon_tube[tubeNumber].calculateFiringSolution(target);
-  
+
   if (targetAngle == std::numeric_limits<float>::infinity())
       targetAngle = getRotation() + weapon_tube[tubeNumber].getDirection();
-    
+
   commandFireTube(tubeNumber, targetAngle);
 }
 
