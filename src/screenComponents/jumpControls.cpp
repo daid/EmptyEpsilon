@@ -14,19 +14,19 @@ GuiJumpControls::GuiJumpControls(GuiContainer* owner, string id)
 {
     slider = new GuiSlider(this, id + "_SLIDER", 5000.0, 50000.0, 10000.0, nullptr);
     slider->setPosition(0, -50, ABottomLeft)->setSize(50, GuiElement::GuiSizeMax);
-    
+
     charge_bar = new GuiProgressbar(this, id + "_CHARGE", 0.0, 50000.0, 0.0);
     charge_bar->setPosition(0, -50, ABottomLeft)->setSize(50, GuiElement::GuiSizeMax);
     charge_bar->hide();
-    
+
     label = new GuiKeyValueDisplay(this, id + "_LABEL", 0.5, tr("jumpcontrol", "Distance"), "10.0");
     label->setTextSize(30)->setPosition(50, -50, ABottomLeft)->setSize(40, GuiElement::GuiSizeMax);
-    
+
     button = new GuiButton(this, id + "_BUTTON", tr("jumpcontrol", "Jump"), [this]() {
         my_spaceship->commandJump(slider->getValue());
     });
     button->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
-    
+
     (new GuiPowerDamageIndicator(this, id + "_DPI", SYS_JumpDrive, ATopCenter))->setPosition(0, -50, ABottomLeft)->setSize(50, GuiElement::GuiSizeMax);
 }
 

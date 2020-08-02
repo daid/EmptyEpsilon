@@ -17,7 +17,7 @@ private:
     GuiProgressbar* charge_bar;
 public:
     GuiJumpControls(GuiContainer* owner, string id);
-    
+
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;
 };

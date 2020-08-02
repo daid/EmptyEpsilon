@@ -11,7 +11,7 @@ class AlertLevelOverlay : public GuiElement
 private:
 public:
     AlertLevelOverlay(GuiContainer* owner);
-    
+
     virtual void onDraw(sf::RenderTarget& window);
 };
 
