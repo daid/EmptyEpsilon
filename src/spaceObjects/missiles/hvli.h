@@ -10,7 +10,7 @@ class HVLI : public MissileWeapon
 {
 public:
     HVLI();
-    
+
     virtual void hitObject(P<SpaceObject> object);
 };
 
