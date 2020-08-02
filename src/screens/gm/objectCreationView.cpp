@@ -47,7 +47,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
         }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
         y += 30;
     }
-    
+
     (new GuiButton(box, "CREATE_ARTIFACT", "Artifact", [this]() {
         setCreateScript("Artifact()");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
@@ -115,7 +115,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
         player_ship_listbox->addEntry(template_name, template_name);
     }
     player_ship_listbox->hide();
-    
+
     (new GuiButton(box, "CLOSE_BUTTON", "Cancel", [this]() {
         this->hide();
     }))->setPosition(20, -20, ABottomLeft)->setSize(300, 50);

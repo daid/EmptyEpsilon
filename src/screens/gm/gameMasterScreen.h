@@ -31,7 +31,7 @@ private:
     GuiRadarView* main_radar;
     GuiOverlay* box_selection_overlay;
     GuiSelector* faction_selector;
-    
+
     GuiElement* chat_layer;
     std::vector<GameMasterChatDialog*> chat_dialog_per_ship;
     GuiGlobalMessageEntryView* global_message_entry;
@@ -41,7 +41,7 @@ private:
     GuiObjectTweak* object_tweak_dialog;
     GuiObjectTweak* station_tweak_dialog;
     GuiObjectTweak* jammer_tweak_dialog;
-    
+
     GuiAutoLayout* info_layout;
     std::vector<GuiKeyValueDisplay*> info_items;
     GuiKeyValueDisplay* info_clock;
@@ -59,7 +59,7 @@ private:
     GuiPanel* message_frame;
     GuiScrollText* message_text;
     GuiButton* message_close_button;
-    
+
     enum EClickAndDragState
     {
         CD_None,
@@ -77,17 +77,17 @@ public:
 
     GameMasterScreen();
     virtual ~GameMasterScreen();
-    
+
     virtual void update(float delta);
-    
+
     void onMouseDown(sf::Vector2f position);
     void onMouseDrag(sf::Vector2f position);
     void onMouseUp(sf::Vector2f position);
 
     virtual void onKey(sf::Event::KeyEvent key, int unicode);
-    
+
     PVector<SpaceObject> getSelection();
-    
+
     string getScriptExport(bool selected_only);
 };
 
