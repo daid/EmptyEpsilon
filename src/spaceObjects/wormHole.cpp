@@ -26,23 +26,23 @@ REGISTER_SCRIPT_SUBCLASS(WormHole, SpaceObject)
 
 REGISTER_MULTIPLAYER_CLASS(WormHole, "WormHole");
 WormHole::WormHole()
-: SpaceObject(DEFAULT_COLLISION_RADIUS, "WormHole") 
+: SpaceObject(DEFAULT_COLLISION_RADIUS, "WormHole")
 {
     pathPlanner = PathPlannerManager::getInstance();
     pathPlanner->addAvoidObject(this, (DEFAULT_COLLISION_RADIUS * AVOIDANCE_MULTIPLIER) );
-    
+
     setRadarSignatureInfo(0.9, 0.0, 0.0);
 
     // Choose a texture to show on radar
     radar_visual = irandom(1, 3);
     registerMemberReplication(&radar_visual);
-    
+
     // Create some overlaying clouds
     for(int n=0; n<cloud_count; n++)
     {
         clouds[n].size = random(1024, 1024 * 4);
         clouds[n].texture = irandom(1, 3);
-        clouds[n].offset = sf::Vector2f(0, 0); 
+        clouds[n].offset = sf::Vector2f(0, 0);
     }
 }
 
@@ -57,7 +57,7 @@ void WormHole::draw3DTransparent()
 
         sf::Vector3f position = sf::Vector3f(getPosition().x, getPosition().y, 0) + sf::Vector3f(cloud.offset.x, cloud.offset.y, 0);
         float size = cloud.size;
-        
+
         float distance = sf::length(camera_position - position);
         float alpha = 1.0 - (distance / 10000.0f);
         if (alpha < 0.0)
@@ -95,13 +95,13 @@ void WormHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, floa
 
 // Draw a line toward the target position
 void WormHole::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
-{    
+{
     sf::VertexArray a(sf::Lines, 2);
     a[0].position = position;
     a[1].position = position + (target_position - getPosition()) * scale;
     a[0].color = sf::Color(255, 255, 255, 32);
     window.draw(a);
-    
+
     sf::CircleShape range_circle(getRadius() * scale);
     range_circle.setOrigin(getRadius() * scale, getRadius() * scale);
     range_circle.setPosition(position);
@@ -125,20 +125,20 @@ void WormHole::collide(Collisionable* target, float collision_force)
     sf::Vector2f diff = getPosition() - target->getPosition();
     float distance = sf::length(diff);
     float force = (getRadius() * getRadius() * FORCE_MULTIPLIER) / (distance * distance);
-    
+
     P<SpaceObject> obj = P<Collisionable>(target);
     P<SpaceShip> spaceship = P<Collisionable>(target);
 
     // Warp postprocessor-alpha is calculated using alpha = (1 - (delay/10))
     if (spaceship)
         spaceship->wormhole_alpha = ((distance / getRadius()) * ALPHA_MULTIPLIER);
-    
+
     if (force > FORCE_MAX)
     {
         force = FORCE_MAX;
         if (isServer())
-            target->setPosition( (target_position + 
-                                  sf::Vector2f(random(-TARGET_SPREAD, TARGET_SPREAD), 
+            target->setPosition( (target_position +
+                                  sf::Vector2f(random(-TARGET_SPREAD, TARGET_SPREAD),
                                                random(-TARGET_SPREAD, TARGET_SPREAD))));
         if (on_teleportation.isSet())
         {
@@ -149,7 +149,7 @@ void WormHole::collide(Collisionable* target, float collision_force)
             spaceship->wormhole_alpha = 0.0;
         }
     }
-    
+
     // TODO: Escaping is impossible. Change setPosition to something Newtonianish.
     target->setPosition(target->getPosition() + diff / distance * update_delta * force);
 }

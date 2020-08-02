@@ -26,7 +26,7 @@ public:
     void setSpin(float spin=0.0);
     void explode();
     void allowPickup(bool allow);
-    
+
     virtual string getExportLine() override;
     void onPickUp(ScriptSimpleCallback callback);
 };
