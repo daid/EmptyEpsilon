@@ -33,7 +33,7 @@ private:
     SystemRow systems[SYS_COUNT];
 public:
     PowerManagementScreen(GuiContainer* owner);
-    
+
     void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;
     virtual bool onJoystickAxis(const AxisAction& axisAction) override;

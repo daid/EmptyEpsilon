@@ -13,7 +13,7 @@ private:
     GuiCustomShipFunctions* custom_function_sidebar;
 public:
     ShipLogScreen(GuiContainer* owner);
-    
+
     void onDraw(sf::RenderTarget& window) override;
 };
 

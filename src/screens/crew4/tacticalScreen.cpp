@@ -130,7 +130,7 @@ bool TacticalScreen::onJoystickAxis(const AxisAction& axisAction){
     if(my_spaceship){
         if (axisAction.category == "HELMS"){
             if (axisAction.action == "IMPULSE"){
-                my_spaceship->commandImpulse(axisAction.value);  
+                my_spaceship->commandImpulse(axisAction.value);
                 return true;
             } else if (axisAction.action == "ROTATE"){
                 my_spaceship->commandTurnSpeed(axisAction.value);

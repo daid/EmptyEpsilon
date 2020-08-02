@@ -26,9 +26,9 @@ private:
     std::unique_ptr<ImpulseSound> impulse_sound;
 public:
     ScreenMainScreen();
-    
+
     virtual void update(float delta) override;
-    
+
     virtual void onClick(sf::Vector2f mouse_position) override;
     virtual void onHotkey(const HotkeyResult& key) override;
     virtual void onKey(sf::Event::KeyEvent key, int unicode) override;

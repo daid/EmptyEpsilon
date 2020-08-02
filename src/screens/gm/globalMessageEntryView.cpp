@@ -10,10 +10,10 @@ GuiGlobalMessageEntryView::GuiGlobalMessageEntryView(GuiContainer* owner)
 {
     GuiPanel* box = new GuiPanel(this, "FRAME");
     box->setPosition(0, 0, ACenter)->setSize(800, 150);
-    
+
     message_entry = new GuiTextEntry(box, "MESSAGE_ENTRY", "");
     message_entry->setPosition(0, 20, ATopCenter)->setSize(700, 50);
-    
+
     (new GuiButton(box, "CLOSE_BUTTON", "Cancel", [this]() {
         this->hide();
     }))->setPosition(20, -20, ABottomLeft)->setSize(300, 50);

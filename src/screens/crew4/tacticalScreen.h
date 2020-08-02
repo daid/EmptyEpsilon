@@ -23,7 +23,7 @@ private:
     GuiKeyValueDisplay* shields_display;
     GuiElement* warp_controls;
     GuiElement* jump_controls;
-    
+
     TargetsContainer targets;
     GuiRadarView* radar;
     GuiRotationDial* missile_aim;
@@ -31,7 +31,7 @@ private:
     GuiToggleButton* lock_aim;
 public:
     TacticalScreen(GuiContainer* owner);
-    
+
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;
     virtual bool onJoystickAxis(const AxisAction& axisAction) override;

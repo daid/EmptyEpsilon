@@ -13,7 +13,7 @@ DamageControlScreen::DamageControlScreen(GuiContainer* owner)
 : GuiOverlay(owner, "DAMCON_SCREEN", colorConfig.background)
 {
     (new GuiShipInternalView(this, "SHIP_INTERNAL_VIEW", 48.0f * 1.5f))->setShip(my_spaceship)->setPosition(300, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
+
     GuiAutoLayout* system_health_layout = new GuiAutoLayout(this, "DAMCON_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     system_health_layout->setPosition(0, 0, ACenterLeft)->setSize(300, 600);
 
@@ -32,7 +32,7 @@ DamageControlScreen::DamageControlScreen(GuiContainer* owner)
 void DamageControlScreen::onDraw(sf::RenderTarget& window)
 {
     GuiOverlay::onDraw(window);
-    
+
     if (my_spaceship)
     {
         hull_display->setValue(string(int(100 * my_spaceship->hull_strength / my_spaceship->hull_max)) + "%");

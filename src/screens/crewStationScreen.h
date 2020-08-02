@@ -44,7 +44,7 @@ private:
     GuiButton* message_close_button;
     std::unique_ptr<ImpulseSound> impulse_sound;
     bool main_screen_enabled = false;
-    
+
     struct CrewTabInfo {
         GuiToggleButton* button;
         GuiElement* element;
@@ -58,7 +58,7 @@ private:
     void showTab(GuiElement* element);
 
     GuiElement* findTab(string name);
-    
+
     string listHotkeysLimited(string station);
     void tileViewport();
     std::vector<std::pair<string, string>> listControlsByCategory(string category);
