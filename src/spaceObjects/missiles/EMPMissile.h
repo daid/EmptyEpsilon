@@ -10,7 +10,7 @@ class EMPMissile : public MissileWeapon
     constexpr static float damage_at_edge = 30.0f;
 public:
     EMPMissile();
-    
+
     virtual void hitObject(P<SpaceObject> object);
 };
 

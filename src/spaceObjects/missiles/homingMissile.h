@@ -7,7 +7,7 @@ class HomingMissile : public MissileWeapon
 {
 public:
     HomingMissile();
-    
+
     virtual void hitObject(P<SpaceObject> object);
 };
 
