@@ -132,7 +132,7 @@ void DatabaseViewComponent::display()
 {
     if (database_entry)
         database_entry->destroy();
-    
+
     database_entry = new GuiElement(this, "DATABASE_ENTRY");
     database_entry->setPosition(navigation_width, 0, ATopLeft)->setMargins(20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 

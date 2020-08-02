@@ -64,7 +64,7 @@ void AimLock::onDraw(sf::RenderTarget& window)
     sf::Vector2f center = getCenterPoint();
     float view_rotation = radar->getViewRotation();
     float radius = std::min(rect.width, rect.height) / 2.0f;
-    
+
     sf::Sprite sprite;
     textureManager.setTexture(sprite, "dial_background.png");
     sprite.setPosition(center);
@@ -88,7 +88,7 @@ void AimLock::onMouseDrag(sf::Vector2f position)
     float view_rotation = radar->getViewRotation();
 
     sf::Vector2f center = getCenterPoint();
-    
+
     sf::Vector2f diff = position - center;
 
     float new_value = ((sf::vector2ToAngle(diff) + 90.0f) + view_rotation) / 360.0f;
@@ -118,4 +118,3 @@ void AimLock::onMouseDrag(sf::Vector2f position)
 void AimLock::onMouseUp(sf::Vector2f position)
 {
 }
-

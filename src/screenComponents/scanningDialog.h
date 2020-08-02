@@ -22,7 +22,7 @@ private:
     GuiSignalQualityIndicator* signal_quality;
     GuiSlider* sliders[max_sliders];
     GuiButton* cancel_button;
-    
+
     float target[max_sliders];
     bool locked;
     float lock_start_time;
@@ -32,7 +32,7 @@ public:
 
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual bool onJoystickAxis(const AxisAction& axisAction) override;
-    
+
     void setupParameters();
     void updateSignal();
 };

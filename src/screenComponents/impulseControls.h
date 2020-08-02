@@ -13,7 +13,7 @@ private:
     GuiSlider* slider;
 public:
     GuiImpulseControls(GuiContainer* owner, string id);
-    
+
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;
 };

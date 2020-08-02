@@ -17,7 +17,7 @@ private:
     GuiPanel* opening_box;
     GuiProgressbar* opening_progress;
     GuiButton* opening_cancel;
-    
+
     GuiPanel* hailed_box;
     GuiLabel* hailed_label;
     GuiButton* hailed_answer;
@@ -26,7 +26,7 @@ private:
     GuiPanel* no_response_box;
     GuiPanel* broken_box;
     GuiPanel* closed_box;
-    
+
     GuiPanel* chat_comms_box;
     GuiTextEntry* chat_comms_message_entry;
     GuiScrollText* chat_comms_text;
@@ -39,7 +39,7 @@ private:
     GuiButton* script_comms_close;
 public:
     GuiCommsOverlay(GuiContainer* owner);
-    
+
     virtual void onDraw(sf::RenderTarget& window);
     void clearElements();
 };

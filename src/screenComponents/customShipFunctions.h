@@ -8,7 +8,7 @@ class GuiCustomShipFunctions : public GuiAutoLayout
 {
 public:
     GuiCustomShipFunctions(GuiContainer* owner, ECrewPosition position, string id);
-    
+
     virtual void onDraw(sf::RenderTarget& window) override;
 
     bool hasEntries();
@@ -19,10 +19,10 @@ private:
         string name;
         GuiElement* element;
     };
-    
+
     ECrewPosition position;
     std::vector<Entry> entries;
-    
+
     void checkEntries();
     void createEntries();
 };

@@ -12,7 +12,7 @@ void GuiNoiseOverlay::onDraw(sf::RenderTarget& window)
 {
     if (my_spaceship)
         return;
-    
+
     sf::Sprite staticDisplay;
     textureManager.getTexture("noise.png")->setRepeated(true);
     textureManager.setTexture(staticDisplay, "noise.png");
