@@ -40,13 +40,13 @@ void Zone::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float sc
     sf::VertexArray triangle_array(sf::Triangles, triangles.size());
     for(unsigned int n=0; n<outline.size() + 1; n++)
     {
-        outline_array[n].position = position + outline[n % outline.size()] * scale;
+        outline_array[n].position = position + sf::rotateVector(outline[n % outline.size()] * scale, -rotation);
         outline_array[n].color = color;
         outline_array[n].color.a = 128;
     }
     for(unsigned int n=0; n<triangles.size(); n++)
     {
-        triangle_array[n].position = position + triangles[n] * scale;
+        triangle_array[n].position = position + sf::rotateVector(triangles[n] * scale, -rotation);
         triangle_array[n].color = color;
         triangle_array[n].color.a = 64;
     }
