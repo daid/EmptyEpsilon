@@ -56,6 +56,8 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&allow_main_screen_long_range_radar);
     registerMemberReplication(&gm_control_code);
     registerMemberReplication(&elapsed_time, 0.1);
+    registerMemberReplication(&gm_callback_names);
+    registerMemberReplication(&intercept_all_comms_to_gm);
 
     for(unsigned int n=0; n<factionInfo.size(); n++)
         reputation_points.push_back(0);
@@ -245,6 +247,15 @@ string getSectorName(sf::Vector2f position)
         x = string(100 + sector_x);
     return y + x;
 }
+
+static int setGMControlCode(lua_State* L)
+{
+    gameGlobalInfo->gm_control_code = luaL_checkstring(L, 1);
+    return 0;
+}
+/// setGMControlCode(string)
+/// Show a password to allow access to spectator or GM screens.
+REGISTER_SCRIPT_FUNCTION(setGMControlCode);
 
 static int victory(lua_State* L)
 {

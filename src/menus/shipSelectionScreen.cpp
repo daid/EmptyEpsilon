@@ -75,6 +75,16 @@ ShipSelectionScreen::ShipSelectionScreen()
         topdown_button->setValue(false);
         cinematic_view_button->setValue(false);
         spectator_button->setValue(false);
+
+        if (gameGlobalInfo->gm_control_code.length() > 0 && !game_server)
+        {
+            LOG(INFO) << "Player selected GM mode, which has a control code.";
+            password_label->setText("Enter the GM control code:");
+            left_container->hide();
+            right_container->hide();
+            password_overlay->show();
+        } else
+            my_player_info->gm_access = true;
     });
     game_master_button->setSize(GuiElement::GuiSizeMax, 50);
 
@@ -121,7 +131,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         topdown_button->setValue(false);
         cinematic_view_button->setValue(false);
 
-        if (gameGlobalInfo->gm_control_code.length() > 0)
+        if (gameGlobalInfo->gm_control_code.length() > 0 && !game_server)
         {
             LOG(INFO) << "Player selected Spectate mode, which has a control code.";
             password_label->setText("Enter the GM control code:");
@@ -258,6 +268,8 @@ ShipSelectionScreen::ShipSelectionScreen()
         my_player_info->commandSetShipId(-1);
         // Unselect GM station if cancelling.
         spectator_button->setValue(false);
+        game_master_button->setValue(false);
+        my_player_info->gm_access = false;
     });
     password_cancel->setPosition(0, -20, ABottomCenter)->setSize(300, 50);
 
@@ -269,7 +281,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         // Get the password.
         string password = password_entry->getText().upper();
 
-        if (spectator_button->getValue() == true) {
+        if (spectator_button->getValue() == true || game_master_button->getValue() == true) {
             if (password != gameGlobalInfo->gm_control_code)
             {
                 LOG(INFO) << "Password doesn't match GM control code. Attempt: " << password;
@@ -279,6 +291,7 @@ ShipSelectionScreen::ShipSelectionScreen()
                 // Password matches.
                 LOG(INFO) << "Password matches GM control code.";
                 // Notify the player.
+                my_player_info->gm_access = true;
                 password_label->setText("Control code accepted.\nGranting access.");
                 // Reset and hide the password field.
                 password_entry->setText("");
@@ -505,7 +518,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
         break;
     case 3:
         main_screen_button->hide();
-        game_master_button->setVisible(bool(game_server));
+        game_master_button->show();
         window_button->setVisible(canDoMainScreen());
         window_angle->setVisible(canDoMainScreen());
         topdown_button->setVisible(canDoMainScreen());

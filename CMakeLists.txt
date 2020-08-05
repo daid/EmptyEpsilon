@@ -102,10 +102,9 @@ set(SOURCES
 	src/mesh.cpp
 	src/scenarioInfo.cpp
 	src/repairCrew.cpp
-	src/GMScriptCallback.cpp
 	src/GMMessage.cpp
 	src/tutorialGame.cpp
-    src/scriptDataStorage.cpp
+	src/scriptDataStorage.cpp
 	src/menus/joinServerMenu.cpp
 	src/menus/serverBrowseMenu.cpp
 	src/menus/mainMenus.cpp

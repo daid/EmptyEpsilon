@@ -7,6 +7,8 @@
 #include "gameGlobalInfo.h"
 
 
+//GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner, func_t enterCreateMode)
+//: GuiOverlay(owner, "OBJECT_CREATE_SCREEN", sf::Color(0, 0, 0, 128)), enterCreateMode(enterCreateMode)
 GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
 : GuiOverlay(owner, "OBJECT_CREATE_SCREEN", sf::Color(0, 0, 0, 128))
 {
@@ -117,6 +119,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
     player_ship_listbox->hide();
     
     (new GuiButton(box, "CLOSE_BUTTON", "Cancel", [this]() {
+        create_script = "";
         this->hide();
     }))->setPosition(20, -20, ABottomLeft)->setSize(300, 50);
 }

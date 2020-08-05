@@ -43,6 +43,7 @@ public:
     bool main_screen_control = false;
     int32_t ship_id;
     string name;
+    bool gm_access;
 
     PlayerInfo();
 
@@ -54,6 +55,7 @@ public:
     void commandSetMainScreenControl(bool control);
     void commandSetName(const string& name);
     virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet);
+    bool isGMAccess() {return gm_access;}
 
     void spawnUI();
 };

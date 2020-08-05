@@ -61,10 +61,7 @@ CpuShip::CpuShip()
 
     missile_resupply = 0.0;
 
-    if (game_server)
-        ai = ShipAIFactory::getAIFactory("default")(this);
-    else
-        ai = NULL;
+    ai = ShipAIFactory::getAIFactory("default")(this);
 }
 
 CpuShip::~CpuShip()
@@ -250,7 +247,7 @@ void CpuShip::orderDock(P<SpaceObject> object)
 void CpuShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     SpaceShip::drawOnGMRadar(window, position, scale, rotation, long_range);
-    if (game_server)
+    if (ai)
         ai->drawOnGMRadar(window, position, scale);
 }
 
