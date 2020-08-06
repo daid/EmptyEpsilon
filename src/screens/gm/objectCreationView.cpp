@@ -107,7 +107,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
     std::sort(player_template_names.begin(), player_template_names.end());
     player_ship_listbox = new GuiListbox(box, "CREATE_PLAYER_SHIPS", [this](int index, string value)
     {
-        setCreateScript("PlayerSpaceship():setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + value + "\")");
+        setCreateScript("PlayerSpaceship():setFactionId(" + string(faction_selector->getSelectionIndex()) + ")",":setTemplate(\"" + value + "\")");
     });
     player_ship_listbox->setTextSize(20)->setButtonHeight(30)->setPosition(-20, 20, ATopRight)->setSize(300, 460);
     for (const auto template_name : player_template_names)
@@ -138,17 +138,10 @@ bool GuiObjectCreationView::onMouseDown(sf::Vector2f position)
     return true;
 }
 
-void GuiObjectCreationView::setCreateScript(string script)
+void GuiObjectCreationView::setCreateScript(const string create, const string configure)
 {
-    gameGlobalInfo->on_gm_click = [script] (sf::Vector2f position)
+    gameGlobalInfo->on_gm_click = [create, configure] (sf::Vector2f position)
     {
-        createObject(script,position);
+        gameMasterActions->commandRunScript(create + ":setPosition("+string(position.x)+","+string(position.y)+")" + configure);
     };
-}
-
-void GuiObjectCreationView::createObject(const string create_script, sf::Vector2f position)
-{
-    if (create_script == "")
-        return;
-    gameMasterActions->commandRunScript(create_script + ":setPosition("+string(position.x)+","+string(position.y)+")");
 }

@@ -21,9 +21,7 @@ public:
 
     virtual bool onMouseDown(sf::Vector2f position);
     
-    void setCreateScript(string script);
-    
-    static void createObject(const string script, sf::Vector2f position);
+    void setCreateScript(const string create, const string configure = "");
 };
 
 #endif//OBJECT_CREATION_VIEW_H
