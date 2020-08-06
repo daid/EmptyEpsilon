@@ -312,8 +312,8 @@ public:
     void setMaxEnergy(float amount) { if (amount > 0.0) { max_energy_level = amount;} }
     float getEnergy() { return energy_level; }
     void setEnergy(float amount) { if ( (amount > 0.0) && (amount <= max_energy_level)) { energy_level = amount; } }
-    float getSystemHacked(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].hacked_level; }
-    void setSystemHacked(ESystem system, float hacked_level) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].hacked_level = std::min(1.0f, std::max(0.0f, hacked_level)); }
+    float getSystemHackedLevel(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].hacked_level; }
+    void setSystemHackedLevel(ESystem system, float hacked_level) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].hacked_level = std::min(1.0f, std::max(0.0f, hacked_level)); }
     float getSystemHealth(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].health; }
     void setSystemHealth(ESystem system, float health) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].health = std::min(1.0f, std::max(-1.0f, health)); }
     float getSystemHealthMax(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].health_max; }
