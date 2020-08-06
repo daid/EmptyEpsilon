@@ -24,7 +24,6 @@ perlin.gy = {}
 perlin.randMax = 256
 perlin.loaded = false
 
-
 function perlin:load(  )
     if (self.loaded == false) then
         for i=1,self.size do
