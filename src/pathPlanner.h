@@ -6,25 +6,25 @@
 class PathPlannerManager : public Updatable
 {
     static P<PathPlannerManager> instance;
-    
+
     class PathPlannerAvoidObject
     {
     public:
         P<SpaceObject> source;
         float size;
-        
+
         PathPlannerAvoidObject(P<SpaceObject> source, float size) : source(source), size(size) {}
     };
     std::list<PathPlannerAvoidObject> big_objects;
     std::unordered_map<uint32_t, std::list<PathPlannerAvoidObject> > small_objects;
-    
+
 public:
     virtual void update(float delta);
 
     void addAvoidObject(P<SpaceObject> source, float size);
-    
+
     static P<PathPlannerManager> getInstance() { if (!instance) instance = new PathPlannerManager(); return *instance; }
-    
+
     friend class PathPlanner;
 };
 
@@ -36,9 +36,9 @@ private:
     P<PathPlannerManager> manager;
 public:
     PathPlanner();
-    
+
     std::vector<sf::Vector2f> route;
-    
+
     void plan(sf::Vector2f start, sf::Vector2f end);
     void clear();
 private:

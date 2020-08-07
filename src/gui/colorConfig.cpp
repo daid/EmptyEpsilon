@@ -33,7 +33,7 @@ ColorConfig colorConfig;
 void ColorConfig::load()
 {
     std::unordered_map<string, std::vector<sf::Color*>> color_mapping;
-    
+
     DEF_COLOR(background);
     DEF_COLOR(radar_outline);
     DEF_COLOR(log_generic);

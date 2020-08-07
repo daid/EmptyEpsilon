@@ -37,7 +37,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamTexture);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponEnergyPerFire);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponHeatPerFire);
-    
+
     /// Set the amount of missile tubes, limited to a maximum of 16.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubes);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubeLoadTime);
@@ -46,7 +46,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWeaponTubeExclusiveFor);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubeDirection);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubeSize);
-    
+
     /// Set the amount of starting hull
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setHull);
     /// Set the shield levels, amount of parameters defines the amount of shields. (Up to a maximum of 8 shields)
@@ -97,7 +97,7 @@ std::unordered_map<string, P<ShipTemplate> > ShipTemplate::templateMap;
 ShipTemplate::ShipTemplate()
 {
     if (game_server) { LOG(ERROR) << "ShipTemplate objects can not be created during a scenario."; destroy(); return; }
-    
+
     type = Ship;
     class_name = tr("No class");
     sub_class_name = tr("No sub-class");
@@ -532,7 +532,7 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
 
     result->rooms = rooms;
     result->doors = doors;
-    
+
     return result;
 }
 

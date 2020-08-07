@@ -20,7 +20,7 @@ Script::Script()
         destroy();
         return;
     }
-    
+
     gameGlobalInfo->addScript(this);
 }
 
@@ -35,7 +35,7 @@ static int require(lua_State* L)
         lua_pushstring(L, ("Require: Script not found: " + filename).c_str());
         return lua_error(L);
     }
-    
+
     string filecontents;
     do
     {
@@ -59,7 +59,7 @@ static int require(lua_State* L)
         lua_pushstring(L, ("require:" + error_string).c_str());
         return lua_error(L);
     }
-    
+
     return 0;
 }
 /// require(filename)

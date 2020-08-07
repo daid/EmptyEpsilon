@@ -11,7 +11,7 @@ private:
     float last_warp_particle_time;
 public:
     ModelInfo();
-    
+
     float engine_scale;
     float warp_scale;
 
@@ -19,7 +19,7 @@ public:
     void renderOverlay(sf::Texture* texture, float alpha);
     void renderShield(float alpha);
     void renderShield(float alpha, float angle);
-    
+
     void setData(P<ModelData> data) { this->data = data; }
     void setData(string name);
 };

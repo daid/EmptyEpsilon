@@ -35,14 +35,14 @@ class MissileWeaponData
 {
 public:
     MissileWeaponData(float speed, float turnrate, float lifetime, sf::Color color, float homing_range, string fire_sound);
-    
+
     float speed; //meter/sec
     float turnrate; //deg/sec
 
     float lifetime; //sec
     sf::Color color;
     float homing_range;
-    
+
     string fire_sound;
 
     static const MissileWeaponData& getDataFor(EMissileWeapons type);

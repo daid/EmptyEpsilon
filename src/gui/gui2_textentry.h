@@ -7,7 +7,7 @@ class GuiTextEntry : public GuiElement
 {
 public:
     typedef std::function<void(string text)> func_t;
-    
+
 protected:
     string text;
     float text_size;

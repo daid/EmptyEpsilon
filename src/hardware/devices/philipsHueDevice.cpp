@@ -114,7 +114,7 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
         }
         sf::sleep(sf::milliseconds(5000));
     }
-    
+
     if (username != "")
     {
         sf::Http http(ip_address,port);
@@ -150,7 +150,7 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
             }
 
             lights.resize(light_count);
-            
+
             FILE* f = fopen(userfile.c_str(), "wt");
             if (f)
             {

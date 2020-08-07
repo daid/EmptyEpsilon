@@ -128,17 +128,17 @@ GuiSlider::GuiSlider(GuiContainer* owner, string id, float min_value, float max_
 void GuiSlider::onDraw(sf::RenderTarget& window)
 {
     drawStretched(window, rect, "gui/SliderBackground", selectColor(colorConfig.slider.background));
-    
+
     sf::Color color = selectColor(colorConfig.slider.forground);
-    
+
     if (rect.width > rect.height)
     {
         float x;
-        
+
         for(TSnapPoint& point : snap_points)
         {
             x = rect.left + (rect.width - rect.height) * (point.value - min_value) / (max_value - min_value);
-            
+
             sf::Sprite snap_sprite;
             textureManager.setTexture(snap_sprite, "gui/SliderTick");
             snap_sprite.setRotation(90);
@@ -148,7 +148,7 @@ void GuiSlider::onDraw(sf::RenderTarget& window)
             window.draw(snap_sprite);
         }
         x = rect.left + (rect.width - rect.height) * (value - min_value) / (max_value - min_value);
-        
+
         sf::Sprite sprite;
         textureManager.setTexture(sprite, "gui/SliderKnob");
         sprite.setOrigin(0, 0);
@@ -161,7 +161,7 @@ void GuiSlider::onDraw(sf::RenderTarget& window)
         for(TSnapPoint& point : snap_points)
         {
             y = rect.top + (rect.height - rect.width) * (point.value - min_value) / (max_value - min_value);
-            
+
             sf::Sprite snap_sprite;
             textureManager.setTexture(snap_sprite, "gui/SliderTick");
             snap_sprite.setOrigin(0, 0);
@@ -171,7 +171,7 @@ void GuiSlider::onDraw(sf::RenderTarget& window)
             window.draw(snap_sprite);
         }
         y = rect.top + (rect.height - rect.width) * (value - min_value) / (max_value - min_value);
-        
+
         sf::Sprite sprite;
         textureManager.setTexture(sprite, "gui/SliderKnob");
         sprite.setOrigin(0, 0);
@@ -180,7 +180,7 @@ void GuiSlider::onDraw(sf::RenderTarget& window)
         sprite.setColor(color);
         window.draw(sprite);
     }
-    
+
     if (overlay_label)
     {
         overlay_label->setText(string(value, 0));

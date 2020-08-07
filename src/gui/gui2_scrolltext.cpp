@@ -29,7 +29,7 @@ GuiScrollText* GuiScrollText::setScrollbarWidth(float width)
 void GuiScrollText::onDraw(sf::RenderTarget& window)
 {
     LineWrapResult wrap = doLineWrap(this->text, text_size, rect.width - scrollbar->getSize().x);
-    
+
     int start_pos = 0;
     for(int n=0; n<scrollbar->getValue(); n++)
     {
@@ -52,7 +52,7 @@ void GuiScrollText::onDraw(sf::RenderTarget& window)
         if (end_pos > 0)
             wrap.text = wrap.text.substr(0, end_pos);
     }
-    
+
     if (scrollbar->getMax() != wrap.line_count)
     {
         int diff = wrap.line_count - scrollbar->getMax();
