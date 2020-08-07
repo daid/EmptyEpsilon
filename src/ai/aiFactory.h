@@ -15,11 +15,11 @@ class ShipAIFactory
 public:
     string name;
     shipAIFactoryFunc_t func;
-    
+
     ShipAIFactory* next;
-    
+
     ShipAIFactory(string name, shipAIFactoryFunc_t func);
-    
+
     static shipAIFactoryFunc_t getAIFactory(string name);
 };
 #define REGISTER_SHIP_AI(c, n) \

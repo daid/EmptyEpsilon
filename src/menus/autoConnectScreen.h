@@ -13,12 +13,12 @@ class AutoConnectScreen : public GuiCanvas, public Updatable
     ECrewPosition crew_position;
     bool control_main_screen;
     std::map<string, string> ship_filters;
-    
+
     GuiLabel* status_label;
 public:
     AutoConnectScreen(ECrewPosition crew_position, bool control_main_screen, string ship_filter);
     virtual ~AutoConnectScreen();
-    
+
     virtual void update(float delta);
 
 private:

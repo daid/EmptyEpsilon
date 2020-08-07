@@ -326,9 +326,9 @@ void fillDefaultDatabaseData()
             class_set.insert(class_name);
         }
     }
-    
+
     std::sort(class_list.begin(), class_list.end());
-    
+
     std::map<string, P<ScienceDatabase> > class_database_entries;
     for(string& class_name : class_list)
     {
@@ -339,7 +339,7 @@ void fillDefaultDatabaseData()
     {
         P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
         P<ScienceDatabase> entry = class_database_entries[ship_template->getClass()]->addEntry(ship_template->getLocaleName());
-        
+
         entry->setModelData(ship_template->model_data);
         entry->setImage(ship_template->radar_trace);
 

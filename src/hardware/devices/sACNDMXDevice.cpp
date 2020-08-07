@@ -14,7 +14,7 @@ StreamingAcnDMXDevice::StreamingAcnDMXDevice()
 
     multicast = false;
     resend_delay = 50;
-    
+
     universe = 1;
     for(int n=0; n<16; n++)
         uuid[n] = uint8_t(irandom(0, 255));
@@ -50,7 +50,7 @@ bool StreamingAcnDMXDevice::configure(std::unordered_map<string, string> setting
     {
         multicast = settings["multicast"].toInt() != 0;
     }
-    
+
     run_thread = true;
     update_thread.launch();
     return true;
@@ -105,12 +105,12 @@ void StreamingAcnDMXDevice::updateLoop()
             packet << uint8_t(channel_data[n]);
 
         sequence_number++;
-        
+
         if (multicast)
             socket.send(packet.getData(), packet.getDataSize(), sf::IpAddress(239, 255, (universe >> 8), universe & 0xFF), acn_port);
         else
             UDPbroadcastPacket(socket, packet.getData(), packet.getDataSize(), acn_port);
-        
+
         sf::sleep(sf::milliseconds(resend_delay));
     }
 }

@@ -12,7 +12,7 @@ static int addGMFunction(lua_State* L)
     const char* name = luaL_checkstring(L, 1);
 
     ScriptSimpleCallback callback;
-    
+
     int idx = 2;
     convert<ScriptSimpleCallback>::param(L, idx, callback);
 

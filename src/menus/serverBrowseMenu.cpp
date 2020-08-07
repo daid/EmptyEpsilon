@@ -39,7 +39,7 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source)
         destroy();
     });
     connect_button->setPosition(-50, -50, ABottomRight)->setSize(300, 50);
-    
+
     manual_ip = new GuiTextEntry(this, "IP", "");
     manual_ip->setPosition(-50, -120, ABottomRight)->setSize(300, 50);
     manual_ip->enterCallback([this](string text) {

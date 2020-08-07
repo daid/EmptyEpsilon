@@ -339,7 +339,7 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("headless") == "")
     {
 #ifndef _MSC_VER
-		// MFC TODO: Fix me -- save prefs to user prefs dir on Windows.
+        // MFC TODO: Fix me -- save prefs to user prefs dir on Windows.
         if (getenv("HOME"))
         {
 #ifdef __WIN32__
@@ -350,7 +350,7 @@ int main(int argc, char** argv)
             PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
         }else
 #endif
-		{
+        {
             PreferencesManager::save("options.ini");
         }
     }

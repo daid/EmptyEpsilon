@@ -99,7 +99,7 @@ public:
     bool can_combat_maneuver = true;
     bool can_self_destruct = true;
     bool can_launch_probe = true;
-    
+
     float energy_storage_amount;
     int repair_crew_count;
     string default_ai_name;
@@ -166,7 +166,7 @@ public:
     void weaponTubeDisallowMissle(int index, EMissileWeapons type);
     void setWeaponTubeExclusiveFor(int index, EMissileWeapons type);
     void setTubeSize(int index, EMissileSizes size);
-    
+
     void setTubeDirection(int index, float direction);
     void setHull(float amount) { hull = amount; }
     void setShields(std::vector<float> values);

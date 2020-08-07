@@ -73,7 +73,7 @@ void DMX512SerialDevice::updateLoop()
 
     //Configure the port for straight DMX-512 protocol.
     port->configure(250000, 8, SerialPort::NoParity, SerialPort::TwoStopbits);
-    
+
     while(run_thread)
     {
         //Send a break to initiate transfer, break needs to be at least 88uSec (note, not all USB serial convertors implement BREAK sending)
@@ -81,7 +81,7 @@ void DMX512SerialDevice::updateLoop()
 
         //Send the channel data.
         port->send(data_stream, 1 + channel_count);
-        
+
         //Delay a bit before sending again.
         sf::sleep(sf::milliseconds(resend_delay));
     }

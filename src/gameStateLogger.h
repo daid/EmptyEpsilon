@@ -22,10 +22,10 @@ class GameStateLogger : public Updatable
 public:
     GameStateLogger();
     virtual ~GameStateLogger();
-    
+
     void start();
     void stop();
-    
+
     virtual void update(float delta);
 
 private:

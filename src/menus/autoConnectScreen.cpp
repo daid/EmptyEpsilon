@@ -15,7 +15,7 @@ AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_m
         scanner = new ServerScanner(VERSION_NUMBER);
         scanner->scanLocalNetwork();
     }
-    
+
     status_label = new GuiLabel(this, "STATUS", "Searching for server...", 50);
     status_label->setPosition(0, 300, ATopCenter)->setSize(0, 50);
 
@@ -24,7 +24,7 @@ AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_m
         position_name = getCrewPositionName(crew_position);
 
     (new GuiLabel(this, "POSITION", position_name, 50))->setPosition(0, 400, ATopCenter)->setSize(0, 30);
-    
+
     for(string filter : ship_filter.split(";"))
     {
         std::vector<string> key_value = filter.split("=", 1);

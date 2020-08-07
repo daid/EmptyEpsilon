@@ -20,7 +20,7 @@ public:
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual bool onMouseDown(sf::Vector2f position) override;
     virtual void onMouseUp(sf::Vector2f position) override;
-    
+
     GuiSelector* setTextSize(float size);
 };
 

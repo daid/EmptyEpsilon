@@ -7,7 +7,7 @@ class ExplosionEffect : public SpaceObject, public Updatable
 {
     constexpr static float maxLifetime = 2.0;
     constexpr static int particleCount = 1000;
-    
+
     float lifetime;
     float size;
     string explosion_sound;
@@ -22,7 +22,7 @@ public:
 #endif
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool longRange);
     virtual void update(float delta);
-    
+
     void setSize(float size) { this->size = size; }
     void setExplosionSound(string sound) { this->explosion_sound = sound; }
     void setOnRadar(bool on_radar) { this->on_radar = on_radar; }

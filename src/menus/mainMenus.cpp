@@ -168,7 +168,7 @@ MainMenu::MainMenu()
             new GameMasterScreen();
         }
     }))->setPosition(sf::Vector2f(370, -150), ABottomLeft)->setSize(300, 50);
-    
+
     (new GuiButton(this, "", "MODELS!", [this]() {
         destroy();
         new DebugAllModelView();

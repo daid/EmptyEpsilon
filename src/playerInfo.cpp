@@ -71,7 +71,7 @@ void PlayerInfo::commandSetCrewPosition(ECrewPosition position, bool active)
     sf::Packet packet;
     packet << CMD_UPDATE_CREW_POSITION << int32_t(position) << active;
     sendClientCommand(packet);
-    
+
     crew_position[position] = active;
 }
 
@@ -96,7 +96,7 @@ void PlayerInfo::commandSetMainScreenControl(bool control)
     sf::Packet packet;
     packet << CMD_UPDATE_MAIN_SCREEN_CONTROL << control;
     sendClientCommand(packet);
-    
+
     main_screen_control = control;
 }
 
@@ -162,7 +162,7 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new ScienceScreen(container), scienceOfficer, getCrewPositionName(scienceOfficer), getCrewPositionIcon(scienceOfficer));
         if (crew_position[relayOfficer])
             screen->addStationTab(new RelayScreen(container, true), relayOfficer, getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
-        
+
         //Crew 4/3
         if (crew_position[tacticalOfficer])
             screen->addStationTab(new TacticalScreen(container), tacticalOfficer, getCrewPositionName(tacticalOfficer), getCrewPositionIcon(tacticalOfficer));
@@ -188,7 +188,7 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new CommsScreen(container), commsOnly, getCrewPositionName(commsOnly), getCrewPositionIcon(commsOnly));
         if (crew_position[shipLog])
             screen->addStationTab(new ShipLogScreen(container), shipLog, getCrewPositionName(shipLog), getCrewPositionIcon(shipLog));
- 
+
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(container, "SELF_DESTRUCT_ENTRY");
         for(int n=0; n<max_crew_positions; n++)
             if (crew_position[n])

@@ -8,7 +8,7 @@ class GMScriptCallback
 public:
     string name;
     ScriptSimpleCallback callback;
-    
+
     GMScriptCallback(string name);
 };
 

@@ -734,7 +734,7 @@ void PlayerSpaceship::applyTemplateValues()
     if (!on_new_player_ship_called)
     {
         on_new_player_ship_called=true;
-	gameGlobalInfo->on_new_player_ship.call(P<PlayerSpaceship>(this));
+    gameGlobalInfo->on_new_player_ship.call(P<PlayerSpaceship>(this));
     }
 }
 

@@ -12,9 +12,9 @@ class HardwareMappingEffect
 public:
     HardwareMappingEffect() {}
     virtual ~HardwareMappingEffect() {}
-    
+
     virtual bool configure(std::unordered_map<string, string> settings) = 0;
-    
+
     virtual float onActive() = 0;
     virtual void onInactive() {}
 
