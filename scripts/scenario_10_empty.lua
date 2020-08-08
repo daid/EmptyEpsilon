@@ -77,9 +77,11 @@ function update(delta)
     -- No victory condition
 end
 
+-- Set callback function
 onNewPlayerShip(
-    function(ship, index)
-        print(ship, index)
-        ship:destroy()
+    function(ship)
+        -- Decide what you do with new ships:
+        print(ship, ship.typeName, ship:getTypeName(), ship:getCallSign())
+        -- ship:destroy()
     end
 )
