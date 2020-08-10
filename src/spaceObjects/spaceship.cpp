@@ -35,6 +35,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setMaxEnergy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getEnergy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setEnergy);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasSystem);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHackedLevel);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHackedLevel);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHealth);
