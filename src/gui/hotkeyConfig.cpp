@@ -25,7 +25,7 @@ HotkeyConfig::HotkeyConfig()
     newKey("TACTICAL_RADAR", std::make_tuple("View tactical radar", "Tab"));
     newKey("LONG_RANGE_RADAR", std::make_tuple("View long-range radar", "Q"));
     newKey("FIRST_PERSON", std::make_tuple("Toggle first-person view", "F"));
-    
+
     newCategory("HELMS", "Helms");
     newKey("INC_IMPULSE", std::make_tuple("Increase impulse", "Up"));
     newKey("DEC_IMPULSE", std::make_tuple("Decrease impulse", "Down"));
@@ -79,7 +79,7 @@ HotkeyConfig::HotkeyConfig()
     newKey("DISABLE_AIM_LOCK", std::make_tuple("Disable missile aim lock", ""));
     newKey("AIM_MISSILE_LEFT", std::make_tuple("Turn missile aim to the left", ""));
     newKey("AIM_MISSILE_RIGHT", std::make_tuple("Turn missile aim to the right", ""));
-    
+
     newCategory("SCIENCE", "Science");
     newKey("SCAN_OBJECT", std::make_tuple("Scan object", "S"));
     newKey("NEXT_SCANNABLE_OBJECT", std::make_tuple("Select next scannable object", "C"));
@@ -287,18 +287,19 @@ std::vector<std::pair<string, string>> HotkeyConfig::listHotkeysByCategory(strin
             {
                 for(auto key_name : sfml_key_names)
                 {
-                    if (key_name.second == item.hotkey.code){
-			string keyModifier = "";
-			if (item.hotkey.shift) {
-				keyModifier = "Shift+";
-			} else if (item.hotkey.control) {
-				keyModifier = "Ctrl+";
-			} else if (item.hotkey.alt){
-				keyModifier = "Alt+";
-			}
+                    if (key_name.second == item.hotkey.code)
+                    {
+						string keyModifier = "";
+						if (item.hotkey.shift) {
+							keyModifier = "Shift+";
+						} else if (item.hotkey.control) {
+							keyModifier = "Ctrl+";
+						} else if (item.hotkey.alt){
+							keyModifier = "Alt+";
+						}
                         ret.push_back({std::get<0>(item.value), keyModifier + key_name.first});
                     }
-		}
+				}
             }
         }
     }
