@@ -55,20 +55,18 @@ void ScienceDatabase::destroy()
     if(this->isDestroyed()) return;
 
     auto my_id = this->getId();
-    ScienceDatabase::science_databases.remove(this);
     MultiplayerObject::destroy();
+    ScienceDatabase::science_databases.remove(this);
 
-    PVector<ScienceDatabase>::iterator it = ScienceDatabase::science_databases.begin();
-
-    while(it != ScienceDatabase::science_databases.end()) {
-        if (!(*it)->isDestroyed() && (*it)->getParentId() == my_id)
+    while (true)
+    {
+        // we don't save a iterator between each loop as when we call ScienceDatabase::destroy our iterator may be invalidated
+        auto it=find_if(ScienceDatabase::science_databases.begin(),ScienceDatabase::science_databases.end(),[my_id](P<ScienceDatabase> db){return !db->isDestroyed() && db->getParentId() == my_id;});
+        if (it == ScienceDatabase::science_databases.end())
         {
-            (*it)->destroy();
+            break;
         }
-        else
-        {
-            ++it;
-        }
+        (*it)->destroy();
     }
 }
 
@@ -269,19 +267,16 @@ static string directionLabel(float direction)
 
 void flushDatabaseData()
 {
-    PVector<ScienceDatabase>::iterator it = ScienceDatabase::science_databases.begin();
-
-    while(it != ScienceDatabase::science_databases.end()) {
-        if (!(*it)->isDestroyed())
+    while(!ScienceDatabase::science_databases.empty()) {
+        if (!ScienceDatabase::science_databases.back()->isDestroyed())
         {
-            (*it)->destroy();
+            ScienceDatabase::science_databases.back()->destroy();
         }
         else
         {
-            ++it;
+            ScienceDatabase::science_databases.pop_back();
         }
     }
-    ScienceDatabase::science_databases.resize(0);
 }
 
 void fillDefaultDatabaseData()
