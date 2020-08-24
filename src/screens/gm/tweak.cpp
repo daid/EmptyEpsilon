@@ -824,7 +824,7 @@ GuiObjectTweakBase::GuiObjectTweakBase(GuiContainer* owner)
         target->setDescriptionForScanState(SS_NotScanned,text);
     });
 
-    (new GuiLabel(left_col, "", "Friend or Description:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(left_col, "", "Friend or Foe Description:", 30))->setSize(GuiElement::GuiSizeMax, 50);
     friend_or_foe_description = new GuiTextEntry(left_col, "", "");
     friend_or_foe_description->setSize(GuiElement::GuiSizeMax, 50);
     friend_or_foe_description->callback([this](string text) {
