@@ -436,6 +436,8 @@ public:
     void setWeaponTubeSize(int index, EMissileSizes size);
     void setTubeSize(int index, EMissileSizes size);
     EMissileSizes getTubeSize(int index);
+    void setTubeLoadTime(int index, float time);
+    float getTubeLoadTime(int index);
 
     void setRadarTrace(string trace) { radar_trace = trace; }
 
