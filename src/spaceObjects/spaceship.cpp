@@ -102,6 +102,12 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Returns the size of the tube
     /// Example: local size = ship:getTubeSize(0)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getTubeSize);
+    // Returns the time for a tube load
+    // Example: load_time = ship:getTubeLoadTime(0)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getTubeLoadTime);
+    // Sets the load time for a tube
+    // Example ship:setTubeLoadTime(0, 15)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setTubeLoadTime);
     /// Set the icon to be used for this ship on the radar.
     /// For example, ship:setRadarTrace("RadarBlip.png") will show a dot instead of an arrow for this ship.
     /// Note: Icon is only shown after scanning, before the ship is scanned it is always shown as an arrow.
@@ -1270,6 +1276,22 @@ EMissileSizes SpaceShip::getTubeSize(int index)
     if (index < 0 || index >= max_weapon_tubes)
         return MS_Medium;
     return weapon_tube[index].getSize();
+}
+
+float SpaceShip::getTubeLoadTime(int index)
+{
+    if (index < 0 || index >= max_weapon_tubes) {
+        return 0;
+    }
+    return weapon_tube[index].getLoadTimeConfig();
+}
+
+void SpaceShip::setTubeLoadTime(int index, float time)
+{
+    if (index < 0 || index >= max_weapon_tubes) {
+        return;
+    }
+    weapon_tube[index].setLoadTimeConfig(time);
 }
 
 void SpaceShip::addBroadcast(int threshold, string message)
