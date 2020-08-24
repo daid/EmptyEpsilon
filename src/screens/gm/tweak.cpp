@@ -175,6 +175,13 @@ void GuiTweakShip::onDraw(sf::RenderTarget& window)
 {
     hull_slider->setValue(target->hull_strength);
     jump_charge_slider->setValue(target->getJumpDriveCharge());
+    type_name->setText(target->getTypeName());
+    warp_toggle->setValue(target->has_warp_drive);
+    jump_toggle->setValue(target->hasJumpDrive());
+    impulse_speed_slider->setValue(target->impulse_max_speed);
+    turn_speed_slider->setValue(target->turn_speed);
+    hull_max_slider->setValue(target->hull_max);
+    can_be_destroyed_toggle->setValue(target->getCanBeDestroyed());
 }
 
 void GuiTweakShip::open(P<SpaceObject> target)
@@ -182,16 +189,9 @@ void GuiTweakShip::open(P<SpaceObject> target)
     P<SpaceShip> ship = target;
     this->target = ship;
 
-    type_name->setText(ship->getTypeName());
-    warp_toggle->setValue(ship->has_warp_drive);
-    jump_toggle->setValue(ship->hasJumpDrive());
-    impulse_speed_slider->setValue(ship->impulse_max_speed);
     impulse_speed_slider->clearSnapValues()->addSnapValue(ship->ship_template->impulse_speed, 5.0f);
-    turn_speed_slider->setValue(ship->turn_speed);
     turn_speed_slider->clearSnapValues()->addSnapValue(ship->ship_template->turn_speed, 1.0f);
-    hull_max_slider->setValue(ship->hull_max);
     hull_max_slider->clearSnapValues()->addSnapValue(ship->ship_template->hull, 5.0f);
-    can_be_destroyed_toggle->setValue(ship->getCanBeDestroyed());
 }
 
 GuiShipTweakMissileWeapons::GuiShipTweakMissileWeapons(GuiContainer* owner)
@@ -249,8 +249,11 @@ void GuiJammerTweak::open(P<SpaceObject> target)
 {
     P<WarpJammer> jammer = target;
     this->target = jammer;
+}
 
-    jammer_range_slider->setValue(this->target->getRange());
+void GuiJammerTweak::onDraw(sf::RenderTarget& window)
+{
+    jammer_range_slider->setValue(target->getRange());
 }
 
 void GuiShipTweakMissileWeapons::onDraw(sf::RenderTarget& window)
@@ -397,6 +400,7 @@ void GuiShipTweakShields::onDraw(sf::RenderTarget& window)
     for(int n=0; n<max_shield_count; n++)
     {
         shield_slider[n]->setValue(target->shield_level[n]);
+        shield_max_slider[n]->setValue(target->shield_max[n]);
     }
 }
 
@@ -407,7 +411,6 @@ void GuiShipTweakShields::open(P<SpaceObject> target)
 
     for(int n = 0; n < max_shield_count; n++)
     {
-        shield_max_slider[n]->setValue(ship->shield_max[n]);
         shield_max_slider[n]->clearSnapValues()->addSnapValue(ship->ship_template->shield_level[n], 5.0f);
     }
 }
@@ -868,6 +871,14 @@ void GuiObjectTweakBase::onDraw(sf::RenderTarget& window)
 {
     heading_slider->setValue(target->getHeading());
 
+    callsign->setText(target->callsign);
+    // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
+    // editing long strings.
+    unscanned_description->setText(target->getDescription(SS_NotScanned));
+    friend_or_foe_description->setText(target->getDescription(SS_FriendOrFoeIdentified));
+    simple_scan_description->setText(target->getDescription(SS_SimpleScan));
+    full_scan_description->setText(target->getDescription(SS_FullScan));
+
     // we probably dont need to set these each onDraw
     // but doing it forces the slider to round to a integer
     scanning_complexity_slider->setValue(target->scanningComplexity(target));
@@ -877,12 +888,4 @@ void GuiObjectTweakBase::onDraw(sf::RenderTarget& window)
 void GuiObjectTweakBase::open(P<SpaceObject> target)
 {
     this->target = target;
-
-    callsign->setText(target->callsign);
-    // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
-    // editing long strings.
-    unscanned_description->setText(target->getDescription(SS_NotScanned));
-    friend_or_foe_description->setText(target->getDescription(SS_FriendOrFoeIdentified));
-    simple_scan_description->setText(target->getDescription(SS_SimpleScan));
-    full_scan_description->setText(target->getDescription(SS_FullScan));
 }
