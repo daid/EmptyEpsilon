@@ -592,7 +592,7 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
     control_code = new GuiTextEntry(left_col, "", "");
     control_code->setSize(GuiElement::GuiSizeMax, 50);
     control_code->callback([this](string text) {
-        target->control_code = text;
+        target->control_code = text.upper();
     });
 
     // Edit reputation.
