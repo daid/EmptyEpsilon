@@ -328,7 +328,7 @@ public:
     sf::Vector2f getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1]; return sf::Vector2f(0, 0); }
 
     // Ship control code/password setter
-    void setControlCode(string code) { control_code = code; }
+    void setControlCode(string code) { control_code = code.upper(); }
 
     // Radar function
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
