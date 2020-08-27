@@ -14,7 +14,7 @@ public:
 
     virtual void hitObject(P<SpaceObject> object);
     void explode();
-    void lifeEnded();
+    void lifeEnded() override;
     void update(float delta);
 };
 
